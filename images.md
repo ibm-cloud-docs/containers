@@ -2,9 +2,9 @@
 
 copyright:
 
-  years: 2014, 2016
+  years: 2014, 2017
 
-lastupdated: "2016-09-22"
+lastupdated: "2016-06-3"
 
 ---
 
@@ -14,7 +14,7 @@ lastupdated: "2016-09-22"
 # Container images
 {: #container_images}
 
-You can create containers from IBM images. Images can be deployed as a single container or as scalable container groups.
+You can create containers from IBM images. Images can be deployed as single containers, as scalable container groups, or into Kubernetes clusters.
 {:shortdesc}
 
 <ul class="runtimeIconList">
