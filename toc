@@ -3,7 +3,7 @@
 
 {: .toc subcollection="containers" audience="compute" href="/docs/containers/index.html"}
 IBM Bluemix Container Service
-    
+
     {: .navgroup id="learn"}
     container_index.md
     cs_ov.md
@@ -17,7 +17,7 @@ IBM Bluemix Container Service
     cs_rellinks.md
     {: .navgroup-end}
 
-    {: .navgroup id="howto"}    
+    {: .navgroup id="howto"}
     cs_cli_install.md
     cs_cluster.md
     cs_apps.md
@@ -35,8 +35,7 @@ IBM Bluemix Container Service
         [CLI reference for single and scalable containers](container_cli_reference_cfic.html)
         [Troubleshooting single and scalable containers](container_troubleshoot.html)
     {: .navgroup-end}
-    
+
     {: .navgroup id="help"}
     cs_troubleshoot.md
     {: .navgroup-end}
-
