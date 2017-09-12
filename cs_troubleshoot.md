@@ -30,7 +30,7 @@ As you use {{site.data.keyword.containershort_notm}}, consider these techniques 
 ## Debugging clusters
 {: #debug_clusters}
 
-Review the options that you have to debug your clusters and find the root causes for failures.
+Review the options to debug your clusters and find the root causes for failures.
 
 1.  List your cluster and find the `State` of the cluster.
 
