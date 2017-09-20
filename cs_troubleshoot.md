@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-09-06"
+lastupdated: "2017-09-20"
 
 ---
 
@@ -22,9 +22,11 @@ lastupdated: "2017-09-06"
 # Troubleshooting clusters
 {: #cs_troubleshoot}
 
-As you use {{site.data.keyword.containershort_notm}}, consider these techniques for troubleshooting and getting help. You can also check the [status of the {{site.data.keyword.Bluemix_notm}} system ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/bluemix/support/#status). 
+As you use {{site.data.keyword.containershort_notm}}, consider these techniques for troubleshooting and getting help. You can also check the [status of the {{site.data.keyword.Bluemix_notm}} system ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/bluemix/support/#status).
 
 {: shortdesc}
+
+<br />
 
 
 ## Debugging clusters
@@ -70,7 +72,7 @@ Review the options to debug your clusters and find the root causes for failures.
     </tbody>
   </table>
 
-3.  If your cluster is in a **Warning** or **Critical** state, or is stuck in the **Pending** state for a long time, review the state of your worker nodes. If your cluster is in a **Deploying** state, wait until your cluster is fully deployed to review the health of your cluster. Clusters in a **Normal** state are considered healthy and do not require an action at the moment. 
+3.  If your cluster is in a **Warning** or **Critical** state, or is stuck in the **Pending** state for a long time, review the state of your worker nodes. If your cluster is in a **Deploying** state, wait until your cluster is fully deployed to review the health of your cluster. Clusters in a **Normal** state are considered healthy and do not require an action at the moment.
 
   ```
   bx cs workers <cluster_name_or_id>
@@ -151,18 +153,58 @@ Review the options to debug your clusters and find the root causes for failures.
        </tr>
        <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: The user does not have the necessary {{site.data.keyword.Bluemix_notm}} Infrastructure permissions to add servers
-        
+
         </br></br>
         {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: 'Item' must be ordered with permission.</td>
-        <td>You might not have the required permissions to provision a worker node from the {{site.data.keyword.BluSoftlayer_notm}} portfolio. To find the required permissions, see [Configure access to the {{site.data.keyword.BluSoftlayer_notm}} portfolio to create standard Kubernetes clusters](cs_planning.html#cs_planning_unify_accounts).</td>
+        <td>You might not have the required permissions to provision a worker node from the {{site.data.keyword.BluSoftlayer_notm}} portfolio. See [Configure access to the {{site.data.keyword.BluSoftlayer_notm}} portfolio to create standard Kubernetes clusters](cs_planning.html#cs_planning_unify_accounts).</td>
       </tr>
     </tbody>
   </table>
 
+<br />
 
 
+## Debugging app deployments
+{: #debug_apps}
 
-  
+Review the options that you have to debug your app deployments and find the root causes for failures.
+
+1. Look for abnormalities in the service or deployment resources by running the `describe` command.
+
+ Example:
+ <pre class="pre"><code>kubectl describe service &#60;service_name&#62;</code></pre>
+
+2. [Check if the containers are stuck in the ContainerCreating state](#stuck_creating_state).
+
+3. Check if the cluster is in the `Critical` state. If the cluster is in a `Critical` state, check the firewall rules and verify that the master can communicate with the worker nodes.
+
+4. Verify that the service is listening on the correct port.
+   1. Get the name of a pod.
+     <pre class="pre"><code>kubectl get pods</code></pre>
+   2. Log in to a container.
+     <pre class="pre"><code>kubectl exec -it &#60;pod_name&#62; -- /bin/bash</code></pre>
+   3. Curl the app from within the container. If the port is not accessible, the service might not be listening on the correct port or the app might have issues. Update the configuration file for the service with the correct port and redeploy or investigate potential issues with the app.
+     <pre class="pre"><code>curl localhost:&#60;port&#62;</code></pre>
+
+5. Verify that the service is linked correctly to the pods.
+   1. Get the name of a pod.
+     <pre class="pre"><code>kubectl get pods</code></pre>
+   2. Log in to a container.
+     <pre class="pre"><code>kubectl exec -it &#60;pod_name&#62; -- /bin/bash</code></pre>
+   3. Curl the cluster IP address and port of the service. If the IP address and port are not accessible, look at the endpoints for the service. If there are no endpoints, then the selector for the service does not match the pods. If there are endpoints, then look at the target port field on the service and make sure that the target port is the same as what is being used for the pods.
+     <pre class="pre"><code>curl &#60;cluster_IP&#62;:&#60;port&#62;</code></pre>
+
+6. For Ingress services, verify that the service is accessible from within the cluster.
+   1. Get the name of a pod.
+     <pre class="pre"><code>kubectl get pods</code></pre>
+   2. Log in to a container.
+     <pre class="pre"><code>kubectl exec -it &#60;pod_name&#62; -- /bin/bash</code></pre>
+   2. Curl the URL specified for the Ingress service. If the URL is not accessible, check for a firewall issue between the cluster and the external endpoint. 
+     <pre class="pre"><code>curl &#60;host_name&#62;.&#60;domain&#62;</code></pre>
+
+<br />
+
+
 ## Identifying local client and server versions of kubectl
 
 To check which version of the Kubernetes CLI that you are running locally or that your cluster is running, run the following command and check the version.
@@ -180,6 +222,7 @@ Server Version: v1.5.6
 ```
 {: screen}
 
+<br />
 
 
 ## Unable to connect to your IBM {{site.data.keyword.BluSoftlayer_notm}} account while creating a cluster
@@ -218,6 +261,8 @@ To add credentials your {{site.data.keyword.Bluemix_notm}} account:
   ```
   {: pre}
 
+<br />
+
 
 ## Accessing your worker node with SSH fails
 {: #cs_ssh_worker}
@@ -230,6 +275,8 @@ SSH via password is disabled on the worker nodes.
 
 {: tsResolve}
 Use [DaemonSets ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) for anything you must run on every node or jobs for any one-time actions you must execute.
+
+<br />
 
 
 ## Pods remain in pending state
@@ -278,9 +325,25 @@ If this cluster is an existing one, check your cluster capacity.
 
 5.  If your pods still stay in a **pending** state after the worker node is fully deployed, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) to further troubleshoot the pending state of your pod.
 
+<br />
 
 
+## Pods are stuck in the creating state
+{: #stuck_creating_state}
 
+{: tsSymptoms}
+When you run `kubectl get pods -o wide`, you see that multiple pods that are running on the same worker node are stuck in the `ContainerCreating` state.
+
+{: tsCauses}
+The file system on the worker node is read-only.
+
+{: tsResolve}
+1. Back up any data that might be stored on the worker node or in your containers.
+2. Rebuild the worker node by running the following command.
+
+<pre class="pre"><code>bx cs worker-reload &#60;cluster_name&#62; &#60;worker_id&#62;</code></pre>
+
+<br />
 
 
 ## Containers do not start
@@ -294,7 +357,8 @@ Containers might not start when the registry quota is reached.
 
 {: tsResolve}
 [Free up storage in {{site.data.keyword.registryshort_notm}}.](../services/Registry/registry_quota.html#registry_quota_freeup)
-  
+
+<br />
 
 
 ## Accessing a pod on a new worker node fails with a timeout
@@ -355,6 +419,9 @@ Manually update the reference of the private IP address to point to the correct 
 
 The deleted node is no longer listed in Calico.
 
+<br />
+
+
 ## Worker nodes fail to connect
 {: #cs_firewall}
 
@@ -399,11 +466,6 @@ You might have an additional firewall set up or customized your existing firewal
 This task requires an [Administrator access policy](cs_cluster.html#access_ov). Verify your current [access policy](cs_cluster.html#view_access).
 
 Open the following ports and IP addresses in your customized firewall.
-```
-TCP port 443 FROM '<each_worker_node_publicIP>' TO registry.ng.bluemix.net, apt.dockerproject.org
-```
-{: pre}
-
 
 <!--Inbound left for existing clusters. Once existing worker nodes are reloaded, users only need the Outbound information, which is found in the regular docs.-->
 
@@ -416,12 +478,7 @@ TCP port 443 FROM '<each_worker_node_publicIP>' TO registry.ng.bluemix.net, apt.
 
 2.  In your firewall, allow the following connections to and from your worker nodes:
 
-  ```
-  TCP port 443 FROM '<each_worker_node_publicIP>' TO registry.ng.bluemix.net, apt.dockerproject.org
-  ```
-  {: pre}
-
-    <ul><li>For INBOUND connectivity to your worker nodes, allow incoming network traffic from the following source network groups and IP addresses to the destination TCP/UDP port 10250 and `<public_IP_of _each_worker_node>`:</br>
+    <ul><li>For INBOUND connectivity to your worker nodes, allow incoming network traffic from the following source network groups and IP addresses to the destination TCP/UDP port 10250 and `<each_worker_node_publicIP>`:</br>
     
   <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
       <thead>
@@ -505,8 +562,40 @@ TCP port 443 FROM '<each_worker_node_publicIP>' TO registry.ng.bluemix.net, apt.
       </tr>
     </table>
 </ul>
-    
-    
+
+3.  Get all [the public IP addresses for each registry region](/docs/services/Registry/troubleshoot/ts_index.html#ts_firewall) to which you want to allow outgoing network traffic.
+      <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
+        <thead>
+        <th colspan=2><img src="images/idea.png"/> Registry IP addresses</th>
+        </thead>
+      <tbody>
+        <tr>
+          <td>registry.au-syd.bluemix.net</td>
+          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
+        </tr>
+        <tr>
+          <td>registry.eu-de.bluemix.net</td>
+          <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></td>
+         </tr>
+         <tr>
+          <td>registry.eu-gb.bluemix.net</td>
+          <td><<code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></td>
+         </tr>
+         <tr>
+          <td>registry.ng.bluemix.net</td>
+          <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></td>
+         </tr>
+        </tbody>
+      </table>
+
+4.  Allow the connections to and from your worker nodes. Replace `<each_worker_node_publicIP>` and `<registry_publicIP>` with the IP addresses you retrieved previously.
+      ```
+      TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>, apt.dockerproject.org
+      ```
+      {: pre}
+
+<br />
+
 
 ## Connecting to an app via Ingress fails
 {: #cs_ingress_fails}
@@ -618,6 +707,9 @@ To troubleshoot your Ingress:
 
     3.  Look for error messages in the Ingress controller logs.
 
+<br />
+
+
 ## Connecting to an app via a load balancer service fails
 {: #cs_loadbalancer_fails}
 
@@ -660,7 +752,7 @@ To troubleshoot your load balancer service:
   ```
   {: pre}
 
-    1.  Check that you defined **LoadBlanacer** as the type for your service.
+    1.  Check that you defined **LoadBalancer** as the type for your service.
     2.  Make sure that you used the same **<selectorkey>** and **<selectorvalue>** that you used in the **label/metadata** section when you deployed your app.
     3.  Check that you used the **port** that your app listens on.
 
@@ -689,6 +781,42 @@ To troubleshoot your load balancer service:
       {: pre}
 
     2.  Check that your custom domain is mapped to the portable public IP address of your load balancer service in the Pointer record (PTR).
+
+<br />
+
+
+## Retrieving the ETCD url for Calico CLI configuration fails
+{: #cs_calico_fails}
+
+{: tsSymptoms}
+When you retrieve the `<ETCD_URL>` to (add network policies)[cs_security.html#adding_network_policies], you get a `calico-config not found` error message.
+
+{: tsCauses}
+Your cluster is not at (Kubernetes version 1.7)[cs_versions.html] or later.
+
+{: tsResolve}
+(Update your cluster)[cs_cluster.html#cs_cluster_update] or retrieve the `<ETCD_URL>` with commands that are compatible with earlier versions of Kubernetes.
+
+To retrieve the `<ETCD_URL>`, run one of the following commands:
+
+- Linux and OS X:
+
+    ```
+    kubectl describe pod -n kube-system `kubectl get pod -n kube-system | grep calico-policy-controller | awk '{print $1}'` | grep ETCD_ENDPOINTS | awk '{print $2}'
+    ```
+    {: pre}
+
+- Windows:
+    <ol>
+    <li> Get a list of the pods in the kube-system namespace and locate the Calico controller pod. </br><pre class="codeblock"><code>kubectl get pod -n kube-system</code></pre></br>Example:</br><pre class="screen"><code>calico-policy-controller-1674857634-k2ckm</code></pre>
+    <li> View the details of the Calico controller pod.</br> <pre class="codeblock"><code>kubectl describe pod -n kube-system calico-policy-controller-&lt;ID&gt;</code></pre>
+    <li> Locate the ETCD endpoints value. Example: <code>https://169.1.1.1:30001</code>
+    </ol>
+
+When you retrieve the `<ETCD_URL>`, continue with the steps as listed in (Adding network policies)[cs_security.html#adding_network_policies].
+
+<br />
+
 
 ## Known issues
 {: #cs_known_issues}
