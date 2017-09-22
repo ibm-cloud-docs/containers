@@ -150,8 +150,8 @@ In this lesson, you deploy a single instance of the Hello World app into a clust
         Example output:
 
         ```
-        Client Version: v1.5.6
-        Server Version: v1.5.6
+        Client Version: v1.7.4
+        Server Version: v1.7.4
         ```
         {: screen}
 
