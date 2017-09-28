@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<concept id="container_ml_monitor" xml:lang="ja-jp">
+<title>モニタリング概説</title>
+<titlealts>
+<navtitle>モニタリング概説</navtitle>
+<searchtitle>
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のモニタリング概要</searchtitle></titlealts>
+<shortdesc><ph id="monitoring">コンテナーのメトリックはコンテナー外部から収集されるので、コンテナー内部にエージェントをインストールして保守する必要はありません。コンテナー内エージェントでは、コンテナーが急速に作成されて破棄されるような、短期間だけ存在する軽量クラウド・インスタンスおよび自動スケーリング・グループに対して、
+オーバーヘッドおよびセットアップ時間がかなり大きくなる可能性があります。外部からのこのデータ収集方法によって、こういった問題点がなくなり、モニタリングの負担がユーザーにかからなくなります。</ph></shortdesc>
+<conbody>
+<section><!--KKB: Agentless intentionally does not have a hyphen in it to be consistent with the open sourced crawler and papers on this.--><p></p></section>
+<section><dl>
+<dlentry>
+<dt>デフォルトで収集されるメトリック</dt>
+<dd id="default_metrics"><p>ホスト内で実行中のプロセスが、メトリックに関するエージェントレス・モニタリングを実行します。このプロセスは<term>クローラー</term>とも呼ばれ、すべてのコンテナーから以下の情報を常に収集します。</p>
+<p><ul>
+<li>CPU</li>
+<li>メモリー </li>
+<li>ネットワーク情報</li></ul></p>
+<p>このメトリック・データは Graphite で収集され、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> ユーザー・インターフェースと拡張モニタリング・ビューの両方で表示されます。Docker 規則およびグループ・アカウンティング情報が、モニタリング・データ収集の基本的メカニズムとして使用されます。</p>
+<p>データを収集するためにインストールされているプラグインのリストは、<filepath>/etc/collectd/collectd.conf</filepath> で参照できます。それらのプラグインの機能について詳しくは、<xref href="https://collectd.org/documentation/manpages/collectd.conf.5.shtml" format="html" scope="external">collectd の資料</xref>を参照してください。</p></dd></dlentry>
+<dlentry>
+<dt>メトリックの保存</dt><!--Currently leaving this general due to ongoing work on how metrics are stored and capped bhp-->
+<dd><p>1 分当たり最大 1 つのデータ・ポイントが収集されます。7 日以内に書き込まれなかったコンテナー・メトリックは削除されます。</p></dd></dlentry>
+<dlentry>
+<dt>メトリックのソート</dt>
+<dd><p>データはコンテナー ID 順に並べて表示されます。コマンド・ラインから <codeph><ph conref="container_conref.dita#links/command_prefix"></ph> ps</codeph> コマンドを実行することで、プライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> イメージ・レジストリー内にあるコンテナーのコンテナー ID のリストを表示できます。</p></dd></dlentry></dl></section></conbody>
+<concept id="rellinks">
+<title>関連リンク</title>
+<related-links>
+<linklist id="general">
+<title>関連リンク</title>
+<link href="http://docs.grafana.org/" format="html" scope="external">
+<linktext>Grafana 資料</linktext></link></linklist></related-links></concept><?tm 1435623328 5?></concept>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE tutorialLesson PUBLIC "-//IBM//DTD DITA Tutorial Lesson//EN"
+ "tutorialLesson.dtd">
+<tutorialLesson id="container_cfapp_tutorial_lesson3" xml:lang="ja-jp" class="- topic/topic task/task tutorialLesson/tutorialLesson ">
+<title>レッスン 3: イメージからコンテナーをデプロイする</title>
+<titlealts>
+<navtitle>レッスン 3: コンテナーをデプロイする</navtitle>
+<searchtitle>レッスン 3: <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> にコンテナーをデプロイする</searchtitle></titlealts>
+<shortdesc>アプリを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のコンテナー・グループとしてデプロイします。</shortdesc>
+<taskbody>
+<steps>
+<stepsection>アプリをコンテナー・グループにデプロイするには、次の手順を実行します。</stepsection>
+<step>
+<cmd> 前のレッスンで作成したイメージから、次のコマンドを実行してコンテナー・グループを作成します。</cmd>
+<info></info>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-create --name <varname>cf-pi-myinitials</varname> -m 64 -n <varname>pi-app-myinitials</varname> -d <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword> -p 3000 -e CCS_BIND_SRV=<varname>cf-pi-myinitials-personal_insights</varname> --desired 3 --auto --anti registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>namespace</varname>/<varname>cf-pi-myinitials</varname>:latest</codeblock>
+
+<p><table frame="all" colsep="1" rowsep="1" id="table_group_create">
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="1.0*"></colspec><colspec colnum="2" colname="c2" colwidth="1.0*"></colspec>
+<thead>
+<row>
+<entry namest="c1" nameend="c2"><ph conref="container_conref.dita#images/more_info"></ph> このコマンドの構成要素について</entry></row></thead>
+<tbody>
+<row>
+<entry><codeph>
+group-create</codeph></entry>
+<entry><codeph>group-create</codeph> コマンド。</entry></row>
+<row>
+<entry><codeph>--name <varname>cf-pi-myinitials</varname></codeph></entry>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI に表示する、コンテナーの名前。</entry></row>
+<row>
+<entry><codeph>-m 64</codeph></entry>
+<entry>グループ内の各インスタンスに 64 MB のメモリーを割り当てます。</entry></row>
+<row>
+<entry><codeph>-n <varname>pi-app-myinitials</varname></codeph></entry>
+<entry>経路 URL に含めるホスト名。
+<note type="tip">スターター・コードを使用している場合は、前のレッスンで Cloud Foundry アプリをデプロイするために使用したのとは異なる名前をホスト名に使用してください。同じホストを使用し、CF アプリがまだ実行中の場合は、コンテナー・グループとアプリ間でロード・バランシングが発生します。</note></entry></row>
+<row>
+<entry><codeph>-d <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword></codeph></entry>
+<entry>経路 URL に含めるドメイン・ネーム。カスタム・ドメインがある場合を除いて、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword> を使用します。</entry></row>
+<row>
+<entry><codeph>-p 3000</codeph></entry>
+<entry>公開するポート番号。経路 URL に対する接続は、コンテナーのポート 3000 に転送されます。</entry></row>
+<row>
+<entry><codeph>-e
+CCS_BIND_SRV=<varname>cf-pi-myinitials-personal_insights</varname></codeph></entry>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/personalityinsightsfull"></keyword> サービス・インスタンスをコンテナーにバインドし、Personal Insights アプリに入力するテキストからコグニティブ特性とソーシャル特性を分析できるようにします。このサービス・インスタンスは、レッスン 1 の CF アプリのデプロイメントの一部として作成したものです。
+<p>サービス・インスタンスの名前がわからない場合は、次のコマンドを実行します。
+<codeblock>bx service list</codeblock></p></entry></row>
+<row>
+<entry><codeph>--desired 3</codeph></entry>
+<entry>コンテナー・グループ内に作成する単一コンテナー・インスタンスの数。すべてのインスタンスは同じです。</entry></row>
+<row>
+<entry><codeph>--auto</codeph></entry>
+<entry>コンテナー・グループの自動リカバリーを有効にします。グループ内のインスタンスの 1 つが使用不可になると、自動的に別のインスタンスが作成され、反応しなくなったインスタンスと置き換えられます。</entry></row>
+<row>
+<entry><codeph>--anti</codeph></entry>
+<entry>コンテナー・グループのアンチアフィニティーを有効にします。グループの各インスタンスが別々の物理計算ノードに配置されます。これにより、1 つのハードウェア障害によってグループ内のすべてのコンテナーが異常終了してしまう可能性が低くなります。</entry></row>
+<row>
+<entry><codeph>registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>namespace</varname>/<varname>cf-pi-myinitials</varname>:latest</codeph></entry>
+<entry>宛先リポジトリー・パス。固有の名前空間と宛先イメージの名前が含まれます。
+この例では、イメージの名前に CF ノード・アプリと同じ名前 (<varname>cf-pi-myinitials</varname>) を使用しています。</entry></row></tbody></tgroup></table></p></info></step>
+<step>
+<cmd>コンテナーのデプロイとネットワーキングのセットアップが完了するまで数分待ちます。コンテナーのデプロイが完了すると、ブラウザーに <filepath>http://<varname>pi-app-myinitials</varname>.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword>/</filepath> という URL を入力したときに Personal Insights アプリが表示されます。</cmd></step>
+<step>
+<cmd>CF アプリを削除します。</cmd>
+<info>これで、CF アプリのコードがコンテナーにデプロイされました。CF アプリを削除すれば、割り当て量の使用を最大化できます。
+<codeblock>cf delete <varname>cf-pi-myinitials</varname></codeblock><uicontrol>y</uicontrol> を入力して、削除を確認します。</info></step></steps>
+<result>アプリがコンテナーにデプロイされました。</result></taskbody></tutorialLesson>

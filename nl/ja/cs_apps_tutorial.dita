@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tutorial PUBLIC "-//IBM//DTD DITA Tutorial//EN"
+ "tutorial.dtd">
+<tutorial id="cs_apps_tutorial" xml:lang="ja-jp" class="- topic/topic tutorial/tutorial ">
+<title>チュートリアル: <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で Kubernetes クラスターにアプリをデプロイする方法 <ph conref="cs_conref.dita#links/release"></ph></title>
+<titlealts>
+<navtitle>チュートリアル: クラスターにアプリをデプロイする方法</navtitle>
+<searchtitle>チュートリアル: <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で Kubernetes クラスターにアプリをデプロイする方法</searchtitle></titlealts>
+<shortdesc></shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>チュートリアル</indexterm><indexterm>クラスター</indexterm></keywords></metadata></prolog>
+<tutorialBody class="- topic/body tutorial/tutorialBody ">
+<tutorialDesc class="- topic/section tutorial/tutorialDesc "><p><draft-comment audience="unknown" translate="no">Deploy to Bluemix button possible? Would you like to skip the
+completing the tutorial steps yourself and just deploy the end result to your <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short">c</keyword> space? Click this button to
+take this shortcut.<!--The link for the following image is inside the SVG. Open the SVG and click the Link layer. The link is applied to a transparent box around the whole image. -->
+<image href="images/getting_started_tutorial_deploy_button.svg" scope="local" width="300" placement="break">
+<alt>Deploy to Bluemix</alt></image></draft-comment>この 2 番目のチュートリアルでも、Kubernetes を使用して、Watson Tone Analyzer <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short">c</keyword> サービスを利用するコンテナー化アプリをデプロイする方法を取り上げます。
+架空の PR 会社が Watson を使用して自社のプレス・リリースを分析し、自社のメッセージのトーンに関するフィードバックを受け取る、というシナリオです。
+</p>
+<p>このシナリオでは、PR 会社のアプリ開発者が Hello World バージョンのアプリを Kubernetes クラスター (<xref href="cs_cluster_tutorial.dita" format="dita" scope="local">最初のチュートリアル</xref>でネットワーク管理者が作成したクラスター) にデプロイします。
+</p>
+<p>それぞれのレッスンで同じアプリをデプロイしますが、アプリの各バージョンの複雑度を段階的に高めていきます。
+このチュートリアルで取り上げるアプリのデプロイメントの構成要素を以下の図にまとめます (第 4 部だけは除きます)。
+<xref href="../api/content/containers/images/cs_app_tutorial_roadmap.png" format="png" scope="external"><image href="images/cs_app_tutorial_roadmap.png" alt="各レッスンの構成要素" placement="break"></image></xref></p>
+<p>Kubernetes では、クラスター内でアプリを稼働状態にするためにいくつかの異なるタイプのリソースを使用します。
+Kubernetes の場合は、デプロイメントとサービスが相互に連係します。
+デプロイメントには、アプリの定義 (コンテナーで使用するイメージやアプリのために公開するポートなど) を組み込みます。
+デプロイメントを作成すると、デプロイメントで定義したコンテナーごとに Kubernetes のポッドが作成されます。
+アプリの回復力を高めるために、デプロイメントの中で同じアプリのインスタンスを複数定義することもできます。そうすれば、Kubernetes によってレプリカ・セットが自動的に作成されます。
+そのレプリカ・セットによってポッドがモニターされ、いつでも望ましい数のポッドが稼働状態になります。
+1 つのポッドが応答しなくなったら、そのポッドが自動的に再作成されます。
+</p>
+<p>サービスによってポッドのセットをグループ化し、クラスター内の他のサービスからそれらのポッドにアクセスするためのネットワーク接続を提供します。そうすれば、各ポッドの実際のプライベート IP アドレスを公開する必要はありません。
+Kubernetes サービスを使用すれば、クラスター内の他のポッドにアプリを公開することも、インターネットにアプリを公開することも可能です。
+このチュートリアルでは、Kubernetes サービスを使用して、稼働中のアプリにインターネットからアクセスします。そのアクセスのために、ワーカー・ノードに自動的に割り当てられるパブリック IP アドレスとパブリック・ポートを使用します。
+</p>
+<p>標準クラスターでは、アプリの可用性をさらに高めるために、複数のワーカー・ノードを作成して、実行するアプリのレプリカをさらに増やすこともできます。このチュートリアルではそのような作業を取り上げませんが、いつかアプリの可用性を改善する必要が生じたときのために、そのような概念を頭に入れておいてください。
+</p>
+<p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスをアプリに統合する作業は 1 つのレッスンでしか取り上げていませんが、そのサービスは、アプリがどれほど単純でもどれほど複雑でも利用できます。
+</p></tutorialDesc>
+<learningObjectives class="- topic/section tutorial/learningObjectives "><title>達成目標</title>
+<p><ul>
+<li>Kubernetes の基本的な用語を理解します</li>
+<li><ph conref="cs_conref.dita#links/registry_name"></ph> のレジストリー名前空間にイメージをプッシュします</li>
+<li>アプリへのパブリック・アクセスを構成します</li>
+<li>1 つの Kubernetes コマンドと 1 つのスクリプトを使用して、アプリの 1 つのインスタンスをクラスターにデプロイします</li>
+<li>ヘルス・チェック時に再作成されるコンテナーにアプリの複数インスタンスをデプロイします</li>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short">c</keyword> サービスの機能を使用するアプリをデプロイします
+</li></ul></p></learningObjectives>
+<timeRequired class="- topic/section tutorial/timeRequired "><title>所要時間</title>40 分</timeRequired>
+<section><title>対象者</title>
+<p>Kubernetes クラスターにアプリをデプロイしたことがないソフトウェア開発者やネットワーク管理者。
+</p></section>
+<section><title>前提条件</title>
+<p><xref href="cs_cluster_tutorial.dita" format="dita" scope="local"></xref>. </p></section></tutorialBody></tutorial>

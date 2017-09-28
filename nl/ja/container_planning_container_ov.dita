@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="container_planning_container_ov" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> での <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を使用したコンテナーの作成</title>
+<titlealts>
+<navtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> でのコンテナーの作成</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> で <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を使用してコンテナーを作成するための計画</searchtitle></titlealts>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でアプリを実行するコンテナーを作成するには、組織スペースに対する開発者権限が付与されている必要があります。アプリの開発者にとって、コンテナーのコンポーネントどうしの関係や、アプリの機能要件や非機能要件を満たすためにコンテナーの構成を変更する方法を知っておくことは重要です。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>計画</indexterm><indexterm>IBM Containers</indexterm><indexterm>コンテナー</indexterm><indexterm>開発者</indexterm></keywords></metadata></prolog>
+<taskbody>
+<prereq>始める前に、スペースに対する<term>開発者</term>または<term>監査員</term>のロールを割り当てられていることを確認してください。組織の管理者や所有者が、スペースへのアクセス権限を付与できます。</prereq></taskbody></task>

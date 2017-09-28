@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="container_vpn">
+<title>仮想プライベート・ネットワークをセットアップして社内データ・センターにコンテナーを接続する</title>
+<titlealts>
+<navtitle>社内データ・センターに接続する</navtitle>
+<searchtitle>仮想プライベート・ネットワークをセットアップして社内データ・センターに <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を接続する</searchtitle></titlealts>
+<shortdesc><ph id="vpn_def" conref="container_conref.dita#terms/vpn_definition">Securely connect the
+single containers and container groups in a private container network in <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> to a corporate data center by using the
+IBM® Virtual Private Network (VPN) service. <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/vpn_short"></keyword> provides a secure end-to-end communication
+channel over the internet that is based on the industry-standard Internet Protocol Security (IPsec)
+protocol suite. The IPsec protocol offers network-level peer authentication, data integrity, and
+data confidentiality by encrypting the packages that are exchanged between the VPN endpoints. To set
+up a secure connection between the containers in <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> and a corporate data center, you must
+have an IPsec VPN gateway or SoftLayer server installed in your on-premise data center. With the
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/vpn_short"></keyword> service, you can configure one VPN
+gateway per space, and define up to 16 connections to different destinations. </ph></shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>仮想プライベート・ネットワーク</indexterm><indexterm>VPN</indexterm><indexterm>データ・センター</indexterm><indexterm>on-prem</indexterm><indexterm>サービス</indexterm><indexterm>IBM Containers</indexterm><indexterm>コンテナー</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context><p>社内データ・センターにコンテナーを接続するには、以下のステップを実行します。
+</p></context>
+<steps id="vpn_steps">
+<step>
+<cmd>社内データ・センターに接続するスペース内に、少なくとも 1 つの<xref href="container_single_ui.dita" scope="local">単一コンテナー</xref>、または<xref href="container_group_ui.dita" scope="local">コンテナー・グループ</xref>を作成します。</cmd></step>
+<step>
+<cmd><xref href="container_integrations_binding.dita">サービスのバインド</xref>のトピックのステップ 1 から 5 までを実行することにより、スペース内に <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/vpn_short"></keyword> サービスのインスタンスを作成します。
+</cmd>
+<info>
+<note><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/vpn_short"></keyword> サービス・インスタンスは、社内データ・センターに接続するコンテナーを作成したのと同じスペース内に作成する必要があります。
+</note></info></step>
+<step>
+<cmd><xref href="../services/vpn/index.html" format="html" scope="external"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/vpn_short"></keyword> の概説</xref>のトピックに示されている手順を実行して VPN ゲートウェイを構成し、社内データ・センターとの接続をセットアップします。
+</cmd></step></steps></taskbody></task>

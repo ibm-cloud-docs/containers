@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--vArbortext, Inc., 1988-2011, v.4002--><!DOCTYPE map PUBLIC "-//IBM//DTD DITA IBM Map//EN" "ibm-map.dtd">
+
+<map xml:lang="ja-jp">
+<title><tm trademark="IBM" tmtype="reg">IBM</tm> Containers - Kraken</title>
+<topicmeta>
+<copyright>
+<copyryear year="2014"></copyryear>
+<copyryear year="2017"></copyryear>
+<copyrholder>IBM</copyrholder></copyright></topicmeta><!--This is displaying in the CLI DEV TOOLS section--><!--HACKED SECTION: -->
+<topicref navtitle="CF plug-in" href="container_cli_cfic.dita" type="concept" scope="local" format="dita" toc="no" chunk="to-content"><!--CF IC install  (HACKED)-->
+<topicref navtitle="Install CF plug-in" href="container_cli_cfic_install.dita" type="task" scope="local" format="dita" toc="no"></topicref><!--CF IC login  (HACKED)-->
+<topicref navtitle="Logging into the CLI" href="container_cli_login.dita" type="task" scope="local" format="dita" toc="no"></topicref><!--CF IC upgrade  (HACKED)-->
+<topicref navtitle="Upgrade CF plug-in" href="container_cli_cfic_upgrade.dita" type="task" scope="local" format="dita" toc="no"></topicref><!--CF IC reference  (HACKED)-->
+<topicref navtitle="IBM Containers CF plug-in command reference" href="container_cli_cfic_ref-conref.dita" type="reference" scope="local" format="dita" toc="no"></topicref><!--CF IC uninstall  (HACKED)-->
+<topicref navtitle="Uninstalling CF plug-in" href="container_cli_cfic_uninstall.dita" type="task" scope="local" format="dita" toc="no"></topicref><!--Where are the other topics?  (HACKED)-->
+<topicref navtitle="Where are the other topics?" href="container_nav_help.dita" type="concept" scope="local" format="dita" toc="no"></topicref></topicref><!--End of hacked section--><!--Getting started  (This entry creates the TOC entry)--><!--&lt;topicref format="dita" href="container_index.dita" navtitle="Getting started" scope="local" type="task" locktitle="yes"/&gt;--><!--About-->
+<topicref navtitle="About" href="container_ov.dita" outputclass="subsection" type="concept"><!--Docker and IBM Containers-->
+<topicref navtitle="Docker and IBM Containers" href="container_docker_ov.dita" type="concept" scope="local" format="dita"></topicref><!--Dedicated and Local-->
+<topicref navtitle="Dedicated and Local" href="container_dl.dita" type="concept" scope="local" format="dita"></topicref><!--Tutorials and other resources-->
+<topicref navtitle="Tutorials" href="container_tutorials.dita" type="reference" scope="local" format="dita">
+<topicref navtitle="主要チュートリアル" href="container_tutorials.html#container_tutorials__featured" scope="peer" format="html"></topicref>
+<topicref navtitle="Docker 未経験者" href="container_tutorials.html#container_tutorials__new2docker" scope="peer" format="html"></topicref>
+<topicref navtitle="初めから終わりまでのシナリオ" href="container_tutorials.html#container_tutorials__e2e" scope="peer" format="html"></topicref>
+<topicref navtitle="継続的なデリバリー" href="container_tutorials.html#container_tutorials__continuous" scope="peer" format="html"></topicref></topicref></topicref><!--Planning-->
+<topicref navtitle="Planning" href="container_planning.dita" scope="local" format="dita"><!--Planning your org-->
+<topicref navtitle="Planning your org" href="container_planning_org_ov.dita" scope="local" format="dita" chunk="to-content"><!--Namespaces planning-->
+<topicref navtitle="Namespace" href="container_planning_namespace.dita" scope="local" format="dita"></topicref><!--Container Quota and Bluemix accounts -->
+<topicref navtitle="Quota and Bluemix accounts" href="container_planning_quota.dita" scope="local" format="dita"></topicref><!--File share planning-->
+<topicref navtitle="File shares" href="container_planning_fileshare.dita" scope="local" format="dita"></topicref></topicref><!--Planning to create containers-->
+<topicref navtitle="Planning containers" href="container_planning_container_ov.dita" type="task" scope="local" format="dita" chunk="to-content"><!--CLI vs. UI planning-->
+<topicref navtitle="CLI v. UI" href="container_planning_cli-ui.dita" scope="local" format="dita"></topicref><!--Images planning-->
+<topicref navtitle="Images" href="container_planning_images.dita" scope="local" format="dita"></topicref><!--Private networking settings planning-->
+<topicref navtitle="Private network settings" href="container_planning_private_network.dita" scope="local" format="dita"></topicref><!--Public network settings-->
+<topicref navtitle="Public network settings" href="container_planning_public_network.dita" scope="local" format="dita"></topicref><!--Bluemix services planning-->
+<topicref navtitle="Bluemix services" href="container_planning_bmx_service.dita" scope="local" format="dita"></topicref><!--Volumes planning-->
+<topicref navtitle="Volumes" href="container_planning_volumes.dita" scope="local" format="dita"></topicref><!--Container type planning-->
+<topicref navtitle="Container types" href="container_planning_types.dita" scope="local" format="dita">
+<topicref navtitle="Transcript autorecovery" href="transcript_autorecovery.dita" type="concept" scope="local" format="dita" linking="none" toc="no" chunk="to-content"></topicref>
+<topicref navtitle="Transcript loadbalancing" href="transcript_loadbalancing.dita" type="concept" scope="local" format="dita" linking="none" toc="no" chunk="to-content"></topicref></topicref>
+<topicref navtitle="Monitoring and Logging" href="container_planning_monlog.dita" type="concept" scope="local" format="dita"></topicref></topicref></topicref><!--Security-->
+<topicref navtitle="Security" href="container_security.dita" type="concept" scope="local" format="dita"><!--Image security (removed from build; redirect only)-->
+<topicref navtitle="イメージのセキュリティー" href="container_security_image.html" format="html" toc="no"></topicref><!--Host security-->
+<topicref navtitle="Security settings in the IBM Containers compute host" href="container_security_host.dita" type="concept" linking="none"></topicref><!--Network security-->
+<topicref navtitle="Security settings in the IBM Containers private container network" href="container_security_network.dita" type="concept" linking="none" chunk="to-content"><!--Exec in to a container-->
+<topicref navtitle="Exec into a container" href="troubleshoot/ts_cf_ic_exec.dita" type="concept" scope="local"></topicref><!--Bring your own IP-->
+<topicref navtitle="Using your own IP address" href="container_cli_ips_byoip.dita" type="task"></topicref><!--Set up VPN between container and data center-->
+<topicref navtitle="VPN access to the data center" href="container_vpn.dita" type="task"></topicref><!--Set up VPN between spaces-->
+<topicref navtitle="VPN access between spaces" href="container_vpn_spaces.dita" type="task"></topicref><!--Set up PNP between spaces-->
+<topicref navtitle="PNP access" href="container_pnp.dita" type="task"></topicref></topicref><!--VA security-->
+<topicref navtitle="Managing security with Vulnerability Advisor" href="va/va_index.dita" type="task" scope="local">
+<navref mapref="va/va_index.ditamap"></navref></topicref></topicref><!--CF IC CF plug-in--><!--CF IC install-->
+<topicref navtitle="Install CF plug-in" href="container_cli_cfic_install.dita" type="task" scope="local" format="dita"><!--Choosing a CLI  changed this to audience unknown to test removing 3rd level--><!--Repurpose this topic for the unified Bluemix CLI?--><!--&lt;topicref format="dita" href="container_cli_choosing.dita" navtitle="Choosing a CLI" scope="local" type="task" /&gt;--><!--Logging in to the CLI-->
+<topicref navtitle="Logging into the CLI" href="container_cli_login.dita" type="task" scope="local" format="dita"></topicref><!--CF IC upgrade-->
+<topicref navtitle="Upgrade CF plug-in" href="container_cli_cfic_upgrade.dita" type="task" scope="local" format="dita"></topicref><!--CF IC uninstall-->
+<topicref navtitle="Uninstalling CF plug-in" href="container_cli_cfic_uninstall.dita" type="task" scope="local" format="dita"></topicref><!--Docker Compose CLI-->
+<topicref navtitle="Docker Compose" href="container_cli_compose_install.dita" type="task" scope="local" format="dita" linking="none" chunk="to-content"><!--Docker Compose upgrade-->
+<topicref navtitle="Upgrading Docker Compose" href="container_cli_compose_upgrade.dita" type="task" scope="local" format="dita"></topicref><!--Docker Compose uninstall-->
+<topicref navtitle="Uninstalling Docker Compose" href="container_cli_compose_uninstall.dita" type="task" scope="local" format="dita"></topicref></topicref></topicref><!--Managing images-->
+<topicref navtitle="Managing images" href="container_images_adding_ov.dita" type="task" scope="local" format="dita" linking="none"><!--IBM images-->
+<topicref navtitle="IBM Container Images" href="container_images.dita" type="concept" scope="local" format="dita" linking="none"><!--Back up and resore image-->
+<topicref navtitle="バックアップとリストア" href="../images/docker_image_ibmbackup_restore/ibmbackup_restore_starter.html" scope="external" format="html"></topicref><!--IIB Integration Bus image-->
+<topicref navtitle="Integration Bus" href="../images/docker_image_iib/ibmiib_starter.html" scope="external" format="html"></topicref><!--Liberty image-->
+<topicref navtitle="Liberty" href="../images/docker_image_ibmliberty/ibmliberty_starter.html" scope="external" format="html"></topicref><!--Node image-->
+<topicref navtitle="Node" href="../images/docker_image_ibmnode/ibmnode_starter.html" scope="external" format="html"></topicref><!--Strong loop node image-->
+<topicref navtitle="Node with StrongLoop Process Manager" href="../images/ibmnode_strong_pm/ibmnode-strong-pm_starter.html" scope="external" format="html"></topicref></topicref><!--Copying an image-->
+<topicref navtitle="Copying an image" href="container_images_copying.dita" type="task" scope="local" format="dita"></topicref><!--Pushing an image-->
+<topicref navtitle="Pushing an image" href="container_images_pulling.dita" type="task" scope="local" format="dita"></topicref><!--Creating an image-->
+<topicref navtitle="Building an image" href="container_images_building.dita" type="task" scope="local" format="dita"></topicref><!--Removing an image-->
+<topicref navtitle="Removing an image" href="container_images_remove.dita" type="task" scope="local" format="dita"></topicref></topicref><!--Single containers-->
+<topicref navtitle="Creating a single container from the Bluemix dashboard" href="container_single_ui.dita" type="task"><!--Creating a single container by using the CLI-->
+<topicref navtitle="Creating a single container" href="container_single_cli.dita" type="task" scope="local" format="dita"></topicref><!--Updating a single container-->
+<topicref navtitle="Updating a single container" href="container_single_updating.dita" type="task" scope="local" format="dita"></topicref><!--Linking a container-->
+<topicref navtitle="Linking a container" href="container_linking.dita" type="task" scope="local" format="dita"></topicref><!--Manging IP addresses-->
+<topicref navtitle="Requesting and binding an IP address" href="container_cli_ips.dita" type="task" scope="local" format="dita" chunk="to-content"><!--Finding your IP addresses-->
+<topicref navtitle="Finding existing IPs" href="container_cli_ips_list.dita" type="task" scope="local" format="dita"></topicref><!--Unbinding an IP address-->
+<topicref navtitle="Unbinding an IP address" href="container_cli_ips_unbind.dita" type="task" scope="local" format="dita"></topicref><!--Removing an IP address-->
+<topicref navtitle="Removing an IP address" href="container_cli_ips_remove.dita" type="task" scope="local" format="dita"></topicref></topicref><!--Removing a container-->
+<topicref navtitle="Removing a container" href="container_single_remove.dita" type="task" scope="local" format="dita"></topicref><!--Getting started tutorial for single containers-->
+<topicref navtitle="Getting started tutorial" href="container_gettingstarted_tutorial.dita" type="tutorial" linking="none" chunk="to-content"><!--Single container tutorial: Setting up the CLI-->
+<topicref navtitle="Getting started tutorial lesson 1" href="container_gettingstarted_tutorial_lesson1.dita" type="tutorialLesson"></topicref><!--Single container tutorial: Creating an image-->
+<topicref navtitle="Getting started tutorial lesson 2" href="container_gettingstarted_tutorial_lesson2.dita" type="tutorialLesson"></topicref><!--Single container tutorial: Creating a container-->
+<topicref navtitle="Getting started tutorial lesson 3" href="container_gettingstarted_tutorial_lesson3.dita" type="tutorialLesson"></topicref></topicref><!--Single container tutorial: Quiz-->
+<topicref navtitle="小テスト" href="quiz.html" processing-role="resource-only" scope="local" format="html" toc="no" audience="blue"></topicref>
+<topicref navtitle="小テスト" href="quiz.php" processing-role="resource-only" scope="local" format="php" toc="no" audience="blue">
+<topicref navtitle="小テストの結果" href="quiz_answers.php" processing-role="resource-only" scope="local" format="php" audience="blue"></topicref></topicref><!--Configuring multi-container app by using Docker Compose-->
+<topicref navtitle="Creating multi-container applications" href="container_compose_intro.dita#container_compose_ov" type="tutorialIntro" linking="none" chunk="to-content"><!--Configuring multi-container app-->
+<topicref navtitle="Lesson 1: Configure your multi-container app" href="container_compose_lesson_config.dita#container_compose_config" type="tutorialLesson" scope="local" format="dita"></topicref><!--Run multi-container app-->
+<topicref navtitle="Lesson 2: Run your multi-container app" href="container_compose_lesson_run.dita#container_compose_run" type="tutorialLesson" scope="local" format="dita"></topicref><!--Scaling multi-container app-->
+<topicref navtitle="Lesson 3: Scale your multi-container app" href="container_compose_lesson_scale.dita#container_compose_scale" type="tutorialLesson" scope="local" format="dita"></topicref><!--Loadbalance multi-container app-->
+<topicref navtitle="Lesson 4: Add a load balancer to your multi-container app" href="container_compose_lesson_loadbalance.dita#container_compose_loadbalance" type="tutorialLesson" scope="local" format="dita"></topicref><!--Removing multi-container app-->
+<topicref navtitle="Lesson 5: Remove a multi-container app" href="container_compose_lesson_remove.dita#container_compose_remove" type="tutorialLesson" scope="local" format="dita"></topicref><!--Supported option in docker-compose.yml file -->
+<topicref navtitle="Supported options in docker-compose.yml file" href="container_compose_yml.dita" type="concept" scope="local" format="dita"></topicref><!--Docker Compose FAQ-->
+<topicref navtitle="Docker Compose FAQs" href="container_compose_faq.dita" type="concept" scope="local" format="dita"></topicref></topicref></topicref><!--Container groups-->
+<topicref navtitle="Creating highly available container groups" href="container_ha.dita" type="task">
+<topicref navtitle="Creating a container group from the Bluemix dashboard " href="container_group_ui.dita" type="task"></topicref><!--Creating a container group from the CLI-->
+<topicref navtitle="Creating a container group from the command line" href="container_group_cli.dita" type="task" scope="local" format="dita"></topicref><!--Scaling a container group-->
+<topicref navtitle="Scaling a container group from the Bluemix dashboard" href="container_group_ui_as.dita" type="task"></topicref><!--Moving container groups to other spaces-->
+<topicref navtitle="Moving container groups to other spaces" href="container_group_migrate.dita" type="task"></topicref><!--Updating a container group from the Bluemix UI-->
+<topicref navtitle="Updating a container group by using the Bluemix Dashboard" href="container_group_update_ui.dita" type="task"></topicref><!--Updating a container group from the CLI-->
+<topicref navtitle="Updating a container group by using the command line" href="container_group_update_cli.dita" type="task"></topicref><!--High availability (HA) container groups-->
+<topicref navtitle="Creating highly available container groups in the same space" href="container_ha_space.dita" type="task"></topicref>
+<topicref navtitle="Creating highly available container groups in different spaces" href="container_ha_org.dita" type="task"></topicref>
+<topicref navtitle="Creating highly available container groups in different regions" href="container_ha_regions.dita" type="task"></topicref>
+<topicref navtitle="Connecting an app to a private group" href="container_group_private_ip.dita" type="task"></topicref><!--Removing a container group-->
+<topicref navtitle="Removing a container group" href="container_group_remove.dita" type="task" scope="local" format="dita"></topicref></topicref><!--Data storage--><!--Volumes Yellow--><!--Volumes Blue-->
+<topicref navtitle="Store data in volumes" href="container_volumes_ov.dita"><!--Creating a volume by using the CLI-->
+<topicref navtitle="Storing persistent data" href="container_volumes_ui.dita"></topicref>
+<topicref navtitle="Creating a volume by using the CLI" href="container_volumes_cli.dita" type="task" scope="local" format="dita"></topicref><!--Adding files to a volume-->
+<topicref navtitle="Adding files to a volume" href="container_volumes_mount.dita" type="task" scope="local" format="dita"></topicref><!--Backing up a volume-->
+<topicref navtitle="Backing up a volume" href="container_volumes_backup.dita" type="task" scope="local" format="dita"></topicref>
+<topicref navtitle="Backing up automatically" href="container_volumes_backup_auto.dita" type="task" scope="local" format="dita" audience="blue"></topicref><!--Writing to a volume-->
+<topicref navtitle="Adding a nonroot user" href="container_volumes_write.dita" type="task" scope="local" format="dita"></topicref><!--Sharing a volume between spaces-->
+<topicref navtitle="Sharing a volume between spaces" href="container_volumes_cross_space.dita" type="task" scope="local" format="dita" audience="blue"></topicref><!--Reprovision storage to a new datacenter-->
+<topicref navtitle="Migrating data to a new data center" href="container_volume_different_dc.dita"></topicref><!--Removing a volume-->
+<topicref navtitle="Removing a volume" href="container_volumes_remove.dita" type="task" scope="local" format="dita"></topicref><!--Object Storage-->
+<topicref navtitle="Storing data with Object Storage" href="container_objectstorage.dita" type="task" scope="local" format="dita" audience="blue"></topicref><!--File shares-->
+<topicref navtitle="Adding file shares by using the Bluemix Dashboard" href="container_fileshares_adding_ui.dita" type="task" scope="local" format="dita" chunk="to-content"><!--Adding file shares by using the command line-->
+<topicref navtitle="Adding file shares by using the command line" href="container_fileshares_adding_cli.dita" type="task" scope="local" format="dita"></topicref><!--Removing file shares-->
+<topicref navtitle="Removing file shares" href="container_fileshares_managing.dita" type="task" scope="local" format="dita"></topicref></topicref></topicref><!--Integrations Setting up Bluemix services-->
+<topicref navtitle="Integrations" href="container_integrations.dita" type="concept" scope="local" format="dita" linking="none"><!--Binding a service from the UI-->
+<topicref navtitle="Binding a service to a container from the Bluemix Dashboard" href="container_integrations_binding.dita" type="task" scope="local" format="dita"></topicref><!--Binding a service from the CLI-->
+<topicref navtitle="Binding a service to a container from the CLI" href="container_integrations_binding_cli.dita" type="task" scope="local" format="dita"></topicref><!--Alert Notification-->
+<topicref navtitle="Creating a container with the Alert Notification service" href="container_alertnotification.dita" type="task" scope="local" format="dita"></topicref><!--Microservices Amalgam8-->
+<topicref navtitle="Creating a microservices architecture by using Amalgam8" href="container_integrations_amalgam8.dita" type="task" scope="local" format="dita" audience="unknown"></topicref>
+<navref mapref="amalgam8/a8_index.ditamap"></navref><!--Delivery Pipeline overview-->
+<topicref navtitle="Delivery Pipeline" href="container_pipeline_ov.dita" type="concept" scope="local" format="dita" chunk="to-content">
+<topicref navtitle="Creating a single container from the Delivery Pipeline" href="container_single_pipeline_ov.dita" type="task" scope="local" format="dita" chunk="to-content">
+<topicref navtitle="Creating a container from the Delivery Pipeline" href="container_single_pipeline_build.dita" type="task" scope="local" format="dita"></topicref><!--Vulnerability advisor pipeline for single containers-->
+<topicref navtitle="Vulnerability advisor" href="container_pipeline_vulnerability.dita" type="task" scope="local" format="dita" toc="yes"></topicref><!--Cleaning up images for single containers from the pipeline-->
+<topicref navtitle="Cleaning up images" href="container_pipeline_cleanup.dita" type="task" scope="local" format="dita"></topicref><!--Binding a service for single containers from the pipeline-->
+<topicref navtitle="Binding a service " href="container_pipeline_binding.dita" type="task" scope="local" format="dita"></topicref><!--Deploying an app in a single container from the pipeline-->
+<topicref navtitle="Deploying an app in a container" href="container_single_pipeline_deploy.dita" type="task" scope="local" format="dita"></topicref><!--Sharing your pipeline for single containers-->
+<topicref navtitle="Share your pipeline" href="container_pipeline_share.dita" type="task" scope="local" format="dita"></topicref></topicref>
+<topicref navtitle="Creating a container group from the Delivery Pipeline" href="container_group_pipeline_ov.dita" type="task" scope="local" format="dita" chunk="to-content">
+<topicref navtitle="Creating a container group from the Delivery Pipeline" href="container_group_pipeline_build.dita" type="task" scope="local" format="dita"></topicref><!--Vulnerability advisor for container groups from the Delivery Pipeline-->
+<topicref navtitle="Vulnerability Advisor" href="container_pipeline_vulnerability.dita" type="task" scope="local" format="dita" toc="yes"></topicref><!--Cleaning up images for container groups from the Delivery Pipeline-->
+<topicref navtitle="Cleaning up images" href="container_pipeline_cleanup.dita" type="task" scope="local" format="dita"></topicref><!--Binding a service for container groups from the Delivery Pipeline-->
+<topicref navtitle="Binding a service" href="container_pipeline_binding.dita" type="task" scope="local" format="dita"></topicref><!--Deploying an app in a container group from the Delivery Pipeline-->
+<topicref navtitle="Deploying an app in a container group" href="container_group_pipeline_deploy.dita" type="task" scope="local" format="dita"></topicref><!--Sharing your pipeline for container groups from the Delivery Pipeline-->
+<topicref navtitle="Share your pipeline" href="container_pipeline_share.dita" type="task" scope="local" format="dita"></topicref></topicref></topicref><!--CF app tutorial-->
+<topicref navtitle="Deploying a CF app in a container" href="container_cfapp_tutorial_intro.dita" type="tutorialIntro" scope="local" format="dita" chunk="to-content">
+<topicref navtitle="Lesson 1" href="container_cfapp_tutorial_lesson1.dita" type="tutorialLesson" scope="local" format="dita"></topicref>
+<topicref navtitle="Lesson 2" href="container_cfapp_tutorial_lesson2.dita" type="tutorialLesson" scope="local" format="dita"></topicref>
+<topicref navtitle="Lesson 3" href="container_cfapp_tutorial_lesson3.dita" type="tutorialLesson" scope="local" format="dita"></topicref></topicref></topicref><!--CLI reference-->
+<topicref navtitle="IBM Containers CF plug-in command reference" href="container_cli_reference_cfic.dita" type="reference" scope="local" format="dita"><!--Quick CLI reference-->
+<topicref navtitle="IBM Containers plug-in quick reference" href="container_cli_reference_cfic_quick.dita" type="concept" scope="local" format="dita"></topicref><!--CF IC version history-->
+<topicref navtitle="IBM Containers CF plug-in version history" href="container_cli_reference_cfic_versions.dita" type="reference" scope="local" format="dita"></topicref><!--CF IC container states-->
+<topicref navtitle="Container states" href="container_cli_reference_cfic_states.dita" type="reference" scope="local" format="dita"></topicref><!--Native docker commands for CF IC-->
+<topicref navtitle="Native Docker commands for IBM Containers CF plug-in" href="container_cli_reference_native-docker.dita" type="reference" scope="local" format="dita"></topicref><!--Docker compose reference-->
+<topicref navtitle="Docker Compose commands for IBM Containers CF plug-in" href="container_cli_reference_docker-compose.dita" type="reference" scope="local" format="dita"></topicref><!--Tool version reference-->
+<topicref navtitle="CLIs versions" href="container_cli_reference_versions.dita" type="reference" scope="local" format="dita"></topicref></topicref><!--Troubleshooting-->
+<topicref navtitle="Troubleshooting" href="container_troubleshoot.dita" type="task" scope="local" format="dita" chunk="to-content">
+<topicref href="troubleshoot/ts_index.ditamap" format="ditamap"></topicref></topicref><!--Graphics Images--><!--Button or linked icons in the single-sourced pages-->
+<topicref navtitle="アラート通知 Web アプリのテスト" href="images/alertapp.png" processing-role="resource-only" scope="local" format="png" toc="no" print="no"></topicref>
+<topicref navtitle="閉じる" href="images/close.png" processing-role="resource-only" scope="local" format="png" toc="no" print="no"></topicref>
+<topicref navtitle="高可用性のロードマップ" href="images/container_ha_roadmap.png" processing-role="resource-only" scope="local" format="png" toc="no" print="no"></topicref><!--&lt;topicref format="svg" href="images/container_ha_roadmap.svg" navtitle="High availability roadmap" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;-->
+<topicref navtitle="正常" href="images/healthy.png" processing-role="resource-only" scope="local" format="png" toc="no" print="no"></topicref>
+<topicref navtitle="Containers 計画のコンテナーの概要" href="images/container_planning_container_ov_bluemixify.png" processing-role="resource-only" scope="local" format="png" toc="no" print="no"></topicref>
+<topicref navtitle="コンテナーのセキュリティー" href="images/container_security.png" processing-role="resource-only" scope="local" format="png" toc="no" print="no"></topicref>
+<topicref navtitle="マルチコンテナー Lets-Chat アプリのターゲット・シナリオ" href="images/container_compose_tutorial.png" processing-role="resource-only" scope="local" format="png" toc="no" print="no"></topicref><!--&lt;topicref format="png" href="images/container_planning_container_org_ov_bluemixify.png" navtitle="Containers Planning Org Overview" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;--><!--&lt;topicref format="svg" href="images/container_security.svg" navtitle="Container Security" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;--><!--&lt;topicref format="jpg" href="images/architecture.jpg" navtitle="IBM Containers architecture" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;--><!--&lt;topicref format="svg" href="images/architecture.svg" navtitle="IBM Containers architecture" print="no" scope="local" toc="no"/&gt;--><!--&lt;topicref href="images/cfic_images_test.gif" format="gif" navtitle="cf ic images test animated gif" print="no" scope="local" toc="no" processing-role="resource-only" audience="blue"/&gt;-->
+<topicref navtitle="IBM イメージ" href="images/container-image_ibm.png" processing-role="resource-only" scope="local" format="png" toc="no" print="no"></topicref>
+<topicref navtitle="自動リカバリーのアニメーション gif" href="images/container_group_autorecovery_infinite.gif" processing-role="resource-only" scope="local" format="gif" toc="no" print="no"></topicref>
+<topicref navtitle="ロード・バランシングのアニメーション gif" href="images/container_group_loadbalancing_infinite.gif" processing-role="resource-only" scope="local" format="gif" toc="no" print="no"></topicref>
+<topicref navtitle="HA 複数スペース" href="images/container_ha_org.jpg" processing-role="resource-only" scope="local" format="jpg" toc="no" print="no"></topicref>
+<topicref navtitle="HA 複数スペース" href="images/container_ha_org.svg" processing-role="resource-only" scope="local" format="svg" toc="no" print="no"></topicref>
+<topicref navtitle="HA 複数地域" href="images/container_ha_region.jpg" processing-role="resource-only" scope="local" format="jpg" toc="no" print="no"></topicref>
+<topicref navtitle="HA 複数地域" href="images/container_ha_region.svg" processing-role="resource-only" scope="local" format="svg" toc="no" print="no"></topicref>
+<topicref navtitle="HA シングル・スペース" href="images/container_ha_space.jpg" processing-role="resource-only" scope="local" format="jpg" toc="no" print="no"></topicref>
+<topicref navtitle="HA シングル・スペース" href="images/container_ha_space.svg" processing-role="resource-only" scope="local" format="svg" toc="no" print="no"></topicref>
+<topicref navtitle="Liberty image" href="images/container_image_liberty.png" processing-role="resource-only" scope="local" format="png" toc="no" print="no"></topicref>
+<topicref navtitle="トピックが見つからないイメージ" href="images/containers-wrecked.svg" scope="local" format="svg" toc="no" print="no"></topicref>
+<topicref navtitle="データ・オプション" href="images/data_options.jpg" scope="local" format="jpg" toc="no" print="no"></topicref>
+<topicref navtitle="デプロイ・オプション" href="images/deploy_button.jpg" scope="local" format="jpg" toc="no" print="no"></topicref><!--&lt;topicref href="images/getting_started_containers.jpg" format="jpg" navtitle="Getting started with containers" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;--><!--&lt;topicref href="images/getting_started_containers.svg" format="svg" navtitle="Getting started with containers" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;--><!--&lt;topicref href="images/getting_started_images.jpg" format="jpg" navtitle="Getting started with images" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;--><!--&lt;topicref href="images/getting_started_images.svg" format="svg" navtitle="Getting started with images" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;-->
+<topicref navtitle="概説のチュートリアル" href="images/getting_started_tutorial.jpg" scope="local" format="jpg" toc="no" print="no"></topicref>
+<topicref navtitle="概説のチュートリアルの図" href="images/getting_started_tutorial.png" processing-role="resource-only" scope="local" format="png" toc="no" print="no"></topicref>
+<topicref navtitle="概説のチュートリアルのデプロイ・ボタン" href="images/getting_started_tutorial_deploy_button.jpg" scope="local" format="jpg" toc="no" print="no"></topicref>
+<topicref navtitle="組織の管理者アイコン" href="images/org-manager_sm.png" processing-role="resource-only" scope="local" format="png" toc="no" print="no" audience="blue"></topicref><!--&lt;topicref href="images/next_button.png" format="png" navtitle="Next button" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;--><!--&lt;topicref href="images/previous_button.png" format="png" navtitle="Previous button" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;-->
+<topicref navtitle="最新表示アイコン" href="images/refresh.png" processing-role="resource-only" scope="local" format="png" toc="no" print="no"></topicref><!--&lt;topicref format="png" href="monitoringandlogging/images/option1.png" navtitle="Option 1" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;--><!--&lt;topicref format="png" href="monitoringandlogging/images/option2.png" navtitle="Option 2" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;--><!--&lt;topicref format="jpg" href="monitoringandlogging/images/architecture_logmet.jpg" navtitle="Logmet architecture" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;--><!--&lt;topicref format="png" href="troubleshoot/images/option1.png" navtitle="Option 1" print="no" scope="local" toc="no"/&gt;--><!--&lt;topicref format="png" href="troubleshoot/images/option2.png" navtitle="Option 2" print="no" scope="local" toc="no"/&gt;--><!--&lt;topicref format="jpg" href="images/user_traffic.jpg" navtitle="IBM Containers user traffic" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;--><!--&lt;topicref format="svg" href="images/user_traffic.svg" navtitle="IBM Containers user traffic" print="no" scope="local" toc="no"/&gt;-->
+<topicref navtitle="コンテナーのアーキテクチャー" href="images/utd_architecture.jpg" scope="local" format="jpg" toc="no" print="no"></topicref><!--&lt;topicref format="svg" href="images/utd_container_org_structure.svg" navtitle="Container org structure" print="no" scope="local" toc="no"/&gt;-->
+<topicref navtitle="ボリューム" href="images/utd_volumes.svg" format="svg" toc="no" print="no"></topicref><!--&lt;topicref format="jpg" href="images/container_planning_container_ov.jpg" navtitle="Decision to make on a container level" print="no" scope="local" toc="no"/&gt;--><!--&lt;topicref format="jpg" href="images/container_planning_org_ov.jpg" navtitle="Decision to make on an organization level" print="no" scope="local" toc="no"/&gt;--><!--&lt;topicref href="images/zoom-in.png" format="png" navtitle="Zoom in icon" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;-->
+<topicref navtitle="ビデオ・アイコン" href="images/video.png" processing-role="resource-only" scope="local" format="png" toc="no" print="no"></topicref>
+<topicref navtitle="チェック・マーク" href="images/close.svg" processing-role="resource-only" scope="local" format="svg" toc="no" print="no"></topicref>
+<topicref navtitle="x アイコン" href="images/healthy.svg" processing-role="resource-only" scope="local" format="svg" toc="no" print="no"></topicref>
+<topicref navtitle="sout" href="sout.gif" processing-role="resource-only" scope="local" format="gif" toc="no" print="no"></topicref><!--HTML files acting as redirects from old links to new links -->
+<topicref navtitle="管理" href="container_administering_ov.html" scope="local" format="html" toc="no"></topicref>
+<topicref navtitle="概説のチュートリアル・レッスン 1" href="container_gettingstarted_tutorial_lesson1.html" scope="local" format="html" toc="no"></topicref>
+<topicref navtitle="Docker Compose のロード・バランシング" href="container_compose_lesson_loadbalance.html" scope="local" format="html" toc="no"></topicref>
+<topicref navtitle="割り当て量の計画" href="container_planning_quota.html" scope="local" format="html" toc="no"></topicref>
+<topicref navtitle="名前空間の計画" href="container_planning_namespace.html" scope="local" format="html" toc="no"></topicref>
+<topicref navtitle="コンテナー・グループ" href="container_group_ov.html" scope="local" format="html" toc="no"></topicref>
+<topicref navtitle="概説" href="container_gettingstarted.html" scope="local" format="html" toc="no"></topicref>
+<topicref navtitle="dockerfile からのイメージ" href="container_images_creating_ov.html" scope="local" format="html" toc="no"></topicref>
+<topicref navtitle="コンテナーの作成" href="container_creating_ov.html" scope="local" format="html" toc="no"></topicref>
+<topicref navtitle="モニタリングとロギング" href="container_ml_ov.html" scope="local" format="html" toc="no"></topicref>
+<topicref navtitle="オプションの構成" href="container_optional.html" scope="local" format="html" toc="no"></topicref>
+<topicref navtitle="単一コンテナー" href="container_single_ov.html" scope="local" format="html" toc="no"></topicref><!--Cloud OE conref file in troubleshooting needs to get pulled in to resolve the keyword for the exec topic-->
+<topicref navtitle="Cloud OE conref file" href="troubleshoot/cloudoeconrefs.dita" type="concept" processing-role="resource-only" scope="local" format="dita" toc="no" print="no"></topicref></map><?tm 1458177503090 1 IBM ?>

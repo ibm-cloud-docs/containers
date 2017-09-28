@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="container_planning_volumes">
+<title>永続データ・ストレージのオプション</title>
+<titlealts>
+<navtitle>ボリューム</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のアプリ・ファイルの保管場所の決定</searchtitle></titlealts>
+<shortdesc>アプリが作成するデータまたはアプリが実行する必要のあるファイルを保管する場所を決定します。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>計画</indexterm><indexterm>IBM Containers</indexterm><indexterm>コンテナー</indexterm><indexterm>データ・ストレージ</indexterm><indexterm>ボリューム</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context>単一コンテナーは、設計上、存続時間が短期です。ただし、コンテナーを再始動してもデータが永続するようにしたり、スペース内のコンテナー間でデータを共有したり、
+グループ内の複数のコンテナー・インスタンス間でデータを共有したりするために選択できる、いくつかのオプションがあります。
+<p><xref href="../api/content/containers/images/data_options.png" format="png" scope="external"><image href="images/data_options.png" width="400">
+<alt>データやファイルの保管場所のオプション。</alt></image></xref></p><table frame="all" colsep="1" rowsep="1" id="table_pvn_fks_bw">
+<title>アプリ・ファイルの保管のオプション</title>
+<desc>
+<p outputclass="summary">アプリ・ファイルの保管のオプション</p></desc>
+<tgroup cols="3"><colspec colnum="1" colname="newCol1" colwidth="1*"></colspec><colspec colnum="2" colname="newCol3" colwidth="1*"></colspec><colspec colnum="3" colname="newCol4" colwidth="1*"></colspec>
+<thead>
+<row>
+<entry>データ・ストレージのオプション</entry>
+<entry>説明</entry>
+<entry>保管可能なデータ量の制限</entry></row></thead>
+<tbody>
+<row>
+<entry>オプション 1: 実行時にコンテナー内にデータを保管</entry>
+<entry>このオプションではアプリ・データは保存されません。
+データは、実行時にのみコンテナーから利用可能です。
+コンテナーを再作成すると、すべてのデータが失われます。</entry>
+<entry>コンテナーのサイズ</entry></row>
+<row>
+<entry>オプション 2: コンテナー・ボリューム内にデータを保管</entry>
+<entry>Docker 内にボリュームをマウントすると、そのボリュームはローカル・ファイル・システムにマウントされます。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> では、計算ホストへのアクセスが制限されるので、ホスト・ディレクトリーをコンテナーにマウントすることができません。
+代わりに、組織規模のボリュームを使用して、コンテナーを再始動してもデータを保持します。ボリュームは、分離されたファイル共有上でホストされます。そこでは、安全にアプリ・データが保管され、ファイルに対するアクセスや権限が管理されます。
+この分離のために、コンテナー内の非 root ユーザーに<xref href="container_planning_volumes.dita#nonroot_image">マウントされたボリュームに対する書き込み権限を付与する</xref>必要があります。<p>このオプションの場合は、データは保存され、コンテナーを再始動してもアクセスできます。スペース内の複数のコンテナー間でデータを共有できます。
+コンテナーが削除されても、関連するボリュームは削除されません。
+</p><note>ボリュームをコンテナーにマウントするには、まず、ボリュームを作成する必要があります。<xref href="container_volumes_ui.dita"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI によるボリュームの作成</xref>を参照してください。</note></entry>
+<entry>ボリュームをホストするファイル共有のサイズ</entry></row>
+<row>
+<entry>オプション 3: オンプレミス・データベースにコンテナーを接続</entry>
+<entry>このオプションの場合、クラウド内のコンテナーとローカル環境の間の<xref href="container_vpn.dita" format="dita">セキュア VPN 接続</xref>を使用して、オンプレミスの既存のデータベース内にデータを保存してアクセスできます。</entry>
+<entry>オンプレミス・データベースから使用可能なディスク・スペース</entry></row>
+<row>
+<entry>オプション 4: <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> データベース・サービスをコンテナーにバインド</entry>
+<entry>このオプションの場合、クラウド内のコンテナーにリンクされたデータベース・サービスを使用して、データを保存し、アクセスすることができます。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のデータベース・サービスのほとんどは、少量のデータ用のディスク・スペースを無料で提供しているため、機能をテストすることができます。
+</entry>
+<entry>選択するデータベース・サービスおよびプラン</entry></row></tbody></tgroup></table></context></taskbody>
+<task id="nonroot_image">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のコンテナー・ボリュームへの非 root ユーザーのアクセス権限</title>
+<taskbody>
+<context>組織規模のコンテナー・ボリュームを使用してアプリ・データを保持する場合は、コンテナー内のユーザーに、ボリューム・マウント・パス上のファイルとフォルダーの書き込み権限があることを確認してください。<p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> では、Docker Engine 用に ユーザー名前空間機能が使用可能に設定されています。ユーザー名前空間には、コンテナーの root ユーザーが他のコンテナーや計算ホストにアクセスできないように分離する効果があります。
+ただし、ボリュームは、コンテナーの計算ホストの外部の NFS ファイル共有上にあります。
+ボリュームはコンテナー内の root ユーザーを認識するようにセットアップされますが、ボリュームはコンテナーの外部にあるため、ユーザー名前空間を認識しません。
+</p><p>一部のアプリケーションでは、コンテナー内のユーザーだけが root ユーザーになります。しかし、多くのアプリケーションでは、コンテナー・マウント・パスに書き込む非 root ユーザーを指定します。ボリュームに対する書き込み権限を必要とする非 root ユーザーを指定するアプリケーションを設計する場合は、Dockerfile とエントリー・ポイント・スクリプトに、次の処理を追加する必要があります。
+</p><ul>
+<li>非 root ユーザーを作成する。</li>
+<li>そのユーザーを一時的に root グループに追加する。</li>
+<li>ボリューム・マウント・パスにディレクトリーを作成して、適切なユーザー権限を設定する。
+</li></ul><ph id="nonroot_image" audience="blue">IBM は、ボリューム上に保管されているファイルとフォルダーの非 root ユーザーの書き込み権限を許可するように変更した<xref href="https://github.com/IBM-Bluemix/containers-nonroot-images" format="html" scope="external">サンプル Dockerfile</xref> を用意しています。これらの Dockerfile を使用して、ご使用のプライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリーでイメージを作成し、マウントされたボリュームに永続データを保管できるようにします。</ph><p><ph audience="blue">使用するイメージが IBM 修正イメージに含まれていない場合は、<xref href="container_volumes_write.dita" format="dita">適切な非 root 権限で Dockerfile を作成</xref>します。</ph></p><p>詳しくは、<xref href="container_volumes_write.dita" format="dita">適切な非 root 権限での Dockerfile の作成</xref>を参照してください。</p></context></taskbody></task></task>

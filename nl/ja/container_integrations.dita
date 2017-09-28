@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<concept id="container_integrations" xml:lang="ja-jp">
+<title><ph id="title"><ph conref="cs_conref.dita#links/classic"></ph>とサービスの統合</ph></title>
+<titlealts>
+<navtitle><ph conref="cs_conref.dita#links/classic"></ph>とサービスの統合</navtitle>
+<searchtitle><ph conref="cs_conref.dita#links/classic"></ph> で使用するためのサービスの統合</searchtitle></titlealts><abstract>
+<shortdesc><ph id="shortdesc"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> <wintitle>カタログ</wintitle>にあるさまざまなサービスを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で使用できます。
+これらの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスの多くは、コンテナーにデプロイするアプリに追加機能を提供します。さらに、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスの中には、コンテナーの管理に役立つものもあります。</ph></shortdesc>
+
+<p><note type="attention" conref="container_conref.dita#links/migrate_note"></note></p>
+
+<p>このページでは、次について説明します。
+<lines>     • <xref href="#container_integrations/data" format="dita"></xref>
+     • <xref href="#container_integrations/devops" format="dita"></xref>
+     • <xref href="#container_integrations/integrate" format="dita"></xref>
+     • <xref href="#container_integrations/network" format="dita"></xref>
+     • <xref href="#container_integrations/security" format="dita"></xref>
+     • <xref href="container_integrations_binding.dita"></xref>
+     • <xref href="container_integrations_binding_cli.dita"></xref>
+     • <xref href="container_alertnotification.dita"></xref>
+     • <xref href="container_pipeline_ov.dita"></xref>
+     • <xref href="container_cfapp_tutorial_intro.dita"></xref></lines></p></abstract>
+<prolog>
+<metadata>
+<keywords><indexterm>IBM Containers</indexterm><indexterm>コンテナー</indexterm><indexterm>サービス</indexterm><indexterm>Bluemix</indexterm><indexterm>インテグレーション</indexterm></keywords></metadata></prolog>
+<conbody>
+<section audience="unknown"><title>アプリケーション・サービス</title>
+<p><dl>
+<dlentry audience="unknown">
+<dt>イベントの生成<!--Needs researching--></dt>
+<dd><p></p></dd>
+<dd><p><ul>
+<li>Event Generation サービスの一般情報については、<xref href="../services/EventGeneration/index.html" format="html" scope="peer">イベント生成サービス概説</xref>を参照してください。</li></ul></p></dd></dlentry></dl></p></section>
+<section id="data"><title>データ分析とストレージ・サービス</title>
+<p><dl>
+<dlentry>
+<dt><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort">MongoDB</keyword><!--Needs researching--></dt>
+<dd><p>複数のストレージ・ノードにまたがって複製されている永続データをバックアップ用に保管します。</p>
+<p><ul>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort">MongoDB</keyword> サービスに関する一般情報については、<xref href="../services/ObjectStorage/index.html" format="html" scope="peer"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort">MongoDB</keyword> サービス概説</xref>を参照してください。</li></ul></p></dd></dlentry></dl></p></section>
+<section id="devops"><title>DevOps サービス</title>
+<p><dl>
+<dlentry>
+<dt><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/activedeployshort"></keyword></dt>
+<dd><p>実行中のコンテナー・グループをダウン時間なしで更新し、必要に応じて元のバージョンに即時に戻します。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/activedeployfull"></keyword> はデプロイメントに段階的なアプローチを使用して、更新されたアプリを実稼働環境でテストおよび検証する時間を提供します。</p></dd>
+<dd><p>実行中のコンテナー・グループの更新について詳しくは、以下を参照してください。<ul>
+<li><xref href="../services/ActiveDeploy/updatingapps.html#updatingappscli" format="html" scope="external">Active Deploy サービス (CLI) によるアプリやコンテナー・グループの更新</xref></li>
+<li><xref href="../services/ActiveDeploy/updatingapps.html#updatingappsgui" format="html" scope="external">Active Deploy サービス (GUI) によるアプリやコンテナー・グループの更新</xref></li></ul></p></dd></dlentry>
+<dlentry>
+<dt><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/alertnotificationshort"></keyword><!--Nadine researched--></dt>
+<dd><p>アプリケーションから取得する、関心のあるアラートのみをフィルターに掛けるように通知ポリシーを設定します。必要に応じてポリシー・フィルターを詳細化して、個人またはグループをアラートの受信者として指定したり、優先通知方式と頻度を指定したりすることができます。</p>
+<p><ul>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/alertnotificationshort"></keyword> とのコンテナーの使用について詳しくは、<xref href="container_alertnotification.dita" format="dita" scope="local"></xref>を参照してください。</li>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/alertnotificationshort"></keyword> サービスに関する一般情報については、<xref href="../services/AlertNotification/index.html" format="html" scope="peer"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/alertnotificationshort"></keyword> 概説</xref>を参照してください。</li></ul></p></dd></dlentry>
+<dlentry>
+<dt><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/deliverypipeline"></keyword><!--DONE--></dt>
+<dd><p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/contdelivery_full"></keyword> の一部である <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/deliverypipeline">, which is pa</keyword> を使用して、アプリのビルドと <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> へのコンテナーのデプロイメントを自動化します。</p>
+<p><ul>
+<li>パイプラインでのコンテナーの使用について詳しくは、<xref href="container_pipeline_ov.dita" format="dita" scope="local"></xref>を参照してください。</li>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/deliverypipeline"></keyword> サービスの一般情報については、<xref href="../services/ContinuousDelivery/pipeline_about.html" format="html" scope="peer">Delivery Pipeline の概説</xref>を参照してください。</li></ul></p></dd></dlentry>
+<dlentry>
+<dt>UrbanCode Deploy<!--Kristin researched April 7 2016: The blog seemed to have everything you need, so no need to duplicate information in the docs at the moment.--></dt>
+<dd><p>IBM UrbanCode Deploy を使用して、リリースの管理とコンテナー・デプロイメントの自動化を行います。このサービスには、すべての環境にわたってデプロイメントに対する可視性を持たせることが可能になるツールが用意されています。このサービスを、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/deliverypipeline"></keyword> サービスの代わりに使用できます。</p>
+<ul>
+<li>購入情報については、<xref href="http://www.ibm.com/software/products/en/ucdep" format="md" scope="external">IBM UrbanCode Deploy</xref> の製品ページを参照してください。
+</li>
+<li>UrbanCode Deploy に関する一般情報については、<xref href="http://www.ibm.com/support/knowledgecenter/SS4GSP/ucd_welcome.html" format="html" scope="external">IBM Knowledge Center</xref> を参照してください。
+</li></ul></dd>
+<dd audience="unknown"><p><fig id="urbancode_video">
+<title><ph><xref href="https://www.youtube.com/watch?v=HVJiR_MS1G4" format="html" scope="external">
+<desc>このページに埋め込まれたビデオにアクセスできない場合は、YouTube の Web サイトからビデオにアクセスできます。</desc>
+<image href="images/video.png" scope="local" alt="「ビデオ」アイコン"></image></xref> <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> と UrbanCode Deploy の概要のビデオ</ph></title>
+<object data="https://www.youtube.com/v/HVJiR_MS1G4?version=3&amp;hl=en_US" height="315" width="560">
+<desc>このビデオは、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> および UrbanCode Deploy の使用方法の概要を示します。</desc>
+<param name="movie" value="https://www.youtube.com/v/HVJiR_MS1G4?version=3&amp;hl=en_US"></param>
+<param name="allowFullScreen" value="true"></param>
+<param name="allowscriptaccess" value="always"></param>
+<param name="scale" value="noScale"></param></object></fig><ph> </ph></p></dd></dlentry></dl></p></section>
+<section id="integrate"><title>サービスの統合</title>
+<p><dl>
+<dlentry>
+<dt>Istio</dt>
+<dd><p>アプリケーションまたはサービス用に <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でマイクロサービスを管理します。<ph>Istio オープン・ソース・プロジェクトの情報を取得する、または、このプロジェクトに参加するには、<xref href="https://istio.io/" format="html" scope="external"></xref> を参照してください。</ph></p></dd></dlentry>
+<dlentry>
+<dt><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/SecureGateway">Secure </keyword></dt>
+<dd><p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アプリケーションをオンプレミスまたはクラウドのリモート・ロケーションとセキュアに接続します。</p>
+<p><ul>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/SecureGateway">Secure </keyword> とともに使用することについて詳しくは、『<xref href="../services/SecureGateway/sg_003.html#sg_003" format="html" scope="peer">クライアントとしての Docker の使用</xref>』を参照してください。</li>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/SecureGateway">Secure </keyword> サービスに関する一般情報については、<xref href="../services/SecureGateway/secure_gateway.html" format="html" scope="peer"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/SecureGateway">Secure </keyword> サービス概説</xref>を参照してください。
+</li></ul></p>
+<p audience="unknown">10-26-16: Slack の投稿では、これは機能しないとされています (https://ibm-cloudplatform.slack.com/files/rsikka/F2U8B12JC/pasted_image_at_2016_10_25_07_35_pm.png)<xref href="https://cloudplatform.slack.com/team/chemi" format="html" scope="external">JOSE MIGUEL ORDAX CASSA</xref>
+<xref href="https://cloudplatform.slack.com/archives/containers/p1468481461000109" format="html" scope="external"><i>[</i>3:31 AM<i>]</i></xref> SecureGateway を使用して、CF アプリをプライベート IP に接続できます。
+その上に SecureGateway を使用して「ゲートウェイ」コンテナーをデプロイし、反対側で CF アプリをサービスにバインドします。
+これで動作するはずです。
+</p></dd></dlentry></dl></p></section>
+<section id="network"><title>ネットワーク・サービス</title>
+<p><dl>
+<dlentry>
+<dt>VPN<!--Nadine researched April 2016: https://jazzop27.rtp.raleigh.ibm.com:9443/ccm/web/projects/Alchemy#action=com.ibm.team.workitem.viewWorkItem&amp;id=129072--></dt>
+<dd><p><ph audience="blue"><draft-comment author="bpratt">Tagged blue until network added back into CLI</draft-comment><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペース間または</ph> <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースとイントラネット・サーバーの間で、コンテナーが相互に通信できるようにします。</p>
+<p><ul>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/vpn_short"></keyword> サービスに関する一般情報については、<xref href="../services/vpn/index.html" format="html" scope="peer"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/vpn_short"></keyword> サービス概説</xref>を参照してください。
+</li></ul></p></dd>
+<dd audience="unknown"><p><fig id="vpn_video">
+<title><ph><xref href="https://www.youtube.com/watch?v=PEsaCcrLTq4" format="html" scope="external">
+<desc>このページに埋め込まれたビデオにアクセスできない場合は、YouTube の Web サイトからビデオにアクセスできます。</desc>
+<image href="images/video.png" scope="local" alt="「ビデオ」アイコン"></image></xref>
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> と <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/vpn_short"></keyword> の概要のビデオ</ph></title>
+<object data="https://www.youtube.com/v/PEsaCcrLTq4?version=3&amp;hl=en_US" height="315" width="560">
+<desc>このビデオは、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> および <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/vpn_short"></keyword> サービスの使用方法の概要を示します。</desc>
+<param name="movie" value="https://www.youtube.com/v/PEsaCcrLTq4?version=3&amp;hl=en_US"></param>
+<param name="allowFullScreen" value="true"></param>
+<param name="allowscriptaccess" value="always"></param>
+<param name="scale" value="noScale"></param></object></fig></p></dd></dlentry></dl></p></section>
+<section id="security"><title>セキュリティー・サービス</title>
+<p><dl>
+<dlentry>
+<dt><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/cloudaccesstrailshort"></keyword><!--Needs researching--></dt>
+<dd><p>あらゆる種類の異常活動がないかを確認し、規制監査要件に準拠するように API 呼び出しを監査します。</p></dd>
+<dd><p><ul>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/cloudaccesstrailshort"></keyword> サービスに関する一般情報については、<xref href="../services/AccessTrail/index.html" format="html" scope="peer"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/cloudaccesstrailshort"></keyword> サービス概説</xref>を参照してください。
+</li></ul></p></dd></dlentry>
+<dlentry audience="blue">
+<dt><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/keymanagementserviceshort"></keyword><!--Needs researching--></dt>
+<dd><p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> にあるアプリの暗号鍵を作成します。</p></dd>
+<dd><p><ul>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/keymanagementservicelong"></keyword> サービスに関する一般情報については、<xref href="../services/keymgmt/index.html" format="html" scope="peer"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/keymanagementserviceshort"></keyword> サービス概説</xref>を参照してください。
+</li></ul></p></dd></dlentry></dl></p></section></conbody>
+<concept id="rellinks">
+<title>関連リンク</title>
+<related-links>
+<linklist id="general">
+<title>関連リンク</title>
+<link href="https://wiki.eclipse.org/Linux_Tools_Project/Docker_Tooling" format="html" scope="external">
+<linktext>Eclipse 用 Docker ツール</linktext></link></linklist></related-links></concept></concept>

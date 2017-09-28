@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="cs_cluster_remove" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> からの Kubernetes クラスターの削除 <ph conref="cs_conref.dita#links/release"></ph></title>
+<titlealts>
+<navtitle>クラスターの削除</navtitle></titlealts>
+<shortdesc>CLI または UI を使用して Kubernetes クラスターを削除します。
+</shortdesc>
+<taskbody>
+<context>クラスターの使用を終了したとき、クラスターがリソースを消費しないように削除することができます。
+クラスターを削除すると、コンテナー、ポッド、バインド済みサービス、シークレットなど、クラスター上のリソースも削除されます。
+<note type="warning" audience="blue">クラスターを削除すると、コンテナー、ポッド、シークレットなど、クラスター内のすべての Kubernetes リソースも削除されます。クラスターを削除するときに永続ストレージを削除することを選択できるため、データがバックアップされていることを確認してください。
+</note><ul>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI から<ol>
+<li>クラスターを選択して、<uicontrol>「その他のアクション...」</uicontrol>メニューから<uicontrol>「削除」</uicontrol>をクリックします。
+</li></ol></li>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> CLI から<ol>
+<li>使用可能なクラスターをリストします。
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> clusters</codeblock></li>
+<li>クラスターを削除します。<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> cluster-rm <varname>my_cluster</varname></codeblock></li></ol></li></ul></context>
+<postreq id="postreq_xxl_zbm_3z">クラスターを削除しても、ポータブル・パブリック・サブネットとプライベート・サブネットは自動的には削除されません。サブネットは、ポータブル・パブリック IP アドレスをロード・バランサー・サービスまたは Ingress コントローラーに割り当てるときに使用されます。サブネットは、手動で削除するか、新しいクラスターで再利用することができます。</postreq></taskbody></task>

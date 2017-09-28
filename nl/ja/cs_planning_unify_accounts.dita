@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN" "ibm-concept.dtd">
+<concept id="cs_planning_unify_accounts" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> ポートフォリオへのアクセス権限を構成して標準の Kubernetes クラスターを作成する</title>
+<titlealts>
+<navtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> ポートフォリオへのアクセス</navtitle></titlealts>
+<shortdesc>標準の Kubernetes クラスターを作成するには、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> ポートフォリオにアクセスする必要があります。
+クラスターのワーカー・ノード、ポータブル・パブリック IP アドレス、永続ストレージなど、有料のインフラストラクチャー・リソースを要求するには、このアクセスが必要です。
+</shortdesc>
+<conbody>
+<p>自動アカウント・リンクが使用できるようになった後に作成した <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> 従量制課金アカウントには、
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> ポートフォリオへのアクセスが既にセットアップされているので、
+追加の構成なしでクラスター用のインフラストラクチャー・リソースを購入できます。</p>
+<p>他の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> アカウント・タイプを持つユーザー、または <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> アカウントにリンクされていない既存の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントを持つユーザーは、
+標準クラスターを作成できるようにアカウントを構成する必要があります。
+</p>
+<p>以下の表を確認して、各アカウント・タイプの選択肢を見つけてください。</p>
+<p><table frame="all" colsep="1" rowsep="1" id="table_jmm_4ss_nz">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントにリンクされていないアカウントを使用して標準クラスターを作成するための選択肢</title>
+<tgroup cols="3"><colspec colnum="1" colname="c1"></colspec><colspec colnum="2" colname="newCol2"></colspec><colspec colnum="3" colname="c2"></colspec>
+<thead>
+<row>
+<entry>アカウント・タイプ</entry>
+<entry>説明</entry>
+<entry>標準クラスターを作成するための選択肢</entry></row></thead>
+<tbody>
+<row>
+<entry>無料試用版のアカウント</entry>
+<entry>無料試用版のアカウントは、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> ポートフォリオにアクセスできません。
+<p>既存の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントがある場合は、それを無料試用版のアカウントにリンクできます。</p></entry>
+<entry><ul id="ul_sfy_brt_nz">
+<li>選択肢 1: <xref href="../pricing/billable.html#upgradetopayg" format="html" scope="external">無料試用版のアカウントを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> 従量制課金アカウントにアップグレードします</xref>。従量制課金アカウントには、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> ポートフォリオへのアクセスがセットアップされています。</li>
+<li>選択肢 2: <xref href="../pricing/linking_accounts.html#unifyingaccounts" format="html" scope="external">無料試用版のアカウントを既存の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントにリンクします</xref>。<p>両方のアカウントをリンクすると、無料試用版のアカウントが従量制課金アカウントに自動的にアップグレードされます。
+アカウントをリンクすると、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> と <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> の両方のリソースについて <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> から請求されるようになります。
+</p><note type="note">リンクする <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントには、スーパーユーザー権限がセットアップされている必要があります。</note></li></ul></entry></row>
+<row>
+<entry>以前の従量制課金アカウント</entry>
+<entry>自動アカウント・リンクが使用できるようになる前に作成された従量制課金アカウントには、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> ポートフォリオにアクセスする機能がありません。
+<p>既存の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントがあっても、そのアカウントを以前の従量制課金アカウントにリンクすることはできません。</p></entry>
+<entry><ul id="ul_c3c_krt_nz">
+<li id="pay">選択肢 1: <xref href="../pricing/billable.html#billable" format="html" scope="external">新しい従量制課金アカウントを作成します</xref>。このアカウントには、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> ポートフォリオへのアクセスがセットアップされます。
+この選択肢を取る場合は、2 つの異なる <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウントを所有し、2 つの異なる課金が行われることになります。
+<p>以前の従量制課金アカウントを使用して標準クラスターを作成するために、新しい従量制課金アカウントを使用して、
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> ポートフォリオにアクセスするための API キーを生成します。
+そして、その API キーを以前の従量制課金アカウントに設定する必要があります。
+詳しくは、<xref href="#old_account">以前の従量制課金アカウントとサブスクリプション・アカウント用の API キーの生成</xref>を参照してください。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> リソースは新しい従量制課金アカウントを介して課金されることに注意してください。</p></li>
+<li id="cred">選択肢 2: 既存の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントを使用したい場合は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウントに<xref href="cs_cli_reference.dita#cs_commands/cs_credentials_set">資格情報を設定</xref>します。
+<note type="note"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウントで使用する <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントには、スーパーユーザー権限がセットアップされている必要があります。</note></li></ul></entry></row>
+<row>
+<entry>サブスクリプション・アカウント</entry>
+<entry>サブスクリプション・アカウントには、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> ポートフォリオへのアクセスがセットアップされていません。</entry>
+<entry><ul id="ul_irz_4rt_nz">
+<li>選択肢 1: <xref href="../pricing/billable.html#billable" format="html" scope="external">新しい従量制課金アカウントを作成します</xref>。このアカウントには、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> ポートフォリオへのアクセスがセットアップされます。
+この選択肢を取る場合は、2 つの異なる <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウントを所有し、2 つの異なる課金が行われることになります。
+<p>サブスクリプション・アカウントを使用して標準クラスターを作成するために、新しい従量制課金アカウントを使用して、
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> ポートフォリオにアクセスするための API キーを生成します。
+そして、その API キーをサブスクリプション・アカウントに設定する必要があります。
+詳しくは、<xref href="#old_account">以前の従量制課金アカウントとサブスクリプション・アカウント用の API キーの生成</xref>を参照してください。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> リソースは新しい従量制課金アカウントを介して課金されることに注意してください。</p></li>
+<li conref="#cs_planning_unify_accounts/cred"></li></ul></entry></row>
+<row>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントがあり、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> アカウントはない</entry>
+<entry>標準クラスターを作成するには、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> アカウントが必要です。</entry>
+<entry><ul id="ul_wyc_3st_nz">
+<li>選択肢 1: <xref href="../pricing/billable.html#billable" format="html" scope="external">新しい従量制課金アカウントを作成します</xref>。このアカウントには、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> ポートフォリオへのアクセスがセットアップされます。
+この選択肢を取る場は、自動で新しい <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> が作成されます。
+2 つの異なる <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントを所有し、2 つの異なる課金が行われることになります。
+</li>
+<li>選択肢 2: <xref href="../pricing/free.html#pricing" format="html" scope="external">無料試用版のアカウントを作成して</xref>、<xref href="../pricing/linking_accounts.html#unifyingaccounts" format="html" scope="external">それを既存の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントにリンクします</xref>。
+両方のアカウントをリンクすると、無料試用版のアカウントが従量制課金アカウントに自動的にアップグレードされます。
+アカウントをリンクすると、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> と <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> の両方のリソースについて <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> から請求されるようになります。
+<note type="note">リンクする <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントには、スーパーユーザー権限がセットアップされている必要があります。</note></li></ul></entry></row></tbody></tgroup></table></p></conbody>
+<concept id="old_account">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウントで使用するための <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> API キーの生成</title>
+<shortdesc>以前の従量制課金アカウントまたはサブスクリプション・アカウントを使用して標準クラスターを作成する場合は、
+新しい従量制課金アカウントを使用して API キーを生成し、その API キーを以前のアカウントに設定する必要があります。
+</shortdesc>
+<conbody>
+<p>開始する前に、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> ポートフォリオへのアクセスが自動的にセットアップされる <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 従量制課金アカウントを作成します。</p>
+<ol id="ol_pxm_3dn_l1b">
+<li>新しい従量制課金アカウント用に作成した IBM ID とパスワードを使用して、<xref href="https://control.softlayer.com/" format="html" scope="external"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> ポータル</xref>にログインします。</li>
+<li><uicontrol>「アカウント」</uicontrol>を選択し、次に<uicontrol>「ユーザー」</uicontrol>を選択します。</li>
+<li><uicontrol>「生成 (Generate)」</uicontrol>をクリックして、新しい従量制課金アカウント用の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> API キーを生成します。</li>
+<li>その API キーをコピーします。</li>
+<li>CLI から、以前の従量制課金アカウントまたはサブスクリプション・アカウントの IBM ID とパスワードを使用して <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> にログインします。
+<codeblock>bx login</codeblock></li>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containershort"></keyword> にログインします。<codeblock>bx cs init</codeblock></li>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> ポートフォリオにアクセスするために、先ほど生成した API キーを設定します。
+<varname>&lt;API_KEY&gt;</varname> を API キーに置き換え、<varname>&lt;USERNAME&gt;</varname> を新しい従量制課金アカウントの IBM ID に置き換えます。
+<codeblock>bx cs credentials-set --infrastructure-api-key <varname>&lt;API_KEY&gt;</varname> --infrastructure-username <varname>&lt;USERNAME&gt;</varname></codeblock></li>
+<li><xref href="cs_cluster_cli.dita">標準クラスターの作成</xref>を開始します。</li></ol>
+<note>生成した後に API キーを確認するには、手順 1 と 2 の後に、<uicontrol>「API キー」</uicontrol>セクションで<uicontrol>「表示 (View)」</uicontrol>をクリックして、ユーザー ID の API キーを参照します。</note></conbody></concept></concept>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="index" xml:lang="ja-jp">
+<title><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> を使用した <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> でのマイクロサービス・アーキテクチャーの作成</title>
+<titlealts>
+<navtitle><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> によるマイクロサービス・アーキテクチャーの作成</navtitle>
+<searchtitle><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> を使用した <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> でのマイクロサービス・アーキテクチャーの作成</searchtitle></titlealts>
+<shortdesc><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> はマイクロサービスを管理するためのオープン・ソース・プロジェクトです。
+</shortdesc>
+<taskbody>
+<context><p><note type="attention" conref="../container_conref.dita#links/migrate_note"></note></p><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> を <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> で実行する理由<p><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> マイクロサービス・プラットフォームを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> で実行すると、マイクロサービスとアプリケーションの構築と管理が簡単になり、加速させることができます。
+クラウド・ベースのアプリケーションのホスティングと管理に付随するロギング、自動スケーリング、モニタリングといった IT の複雑なものを、標準装備の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 機能を活用して取り除くことができます。
+</p><p>マイクロサービスの概念がわからない場合は、<xref href="https://www.ibm.com/devops/method/content/code/practice_microservices/" format="html" scope="external"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword>Garage Method: Microservices</xref>を参照してください。</p><p><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> オープン・ソース・プロジェクト (<xref href="http://www.amalgam8.io" format="html" scope="external">www.amalgam8.io</xref>) をダウンロードします。</p><p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> での <keyword conref="a8_entities.dita#a8_entities/a8"></keyword> のインストールと実行に関する資料は、<xref href="https://www.amalgam8.io/docs/" format="html" scope="external">https://www.amalgam8.io/docs/</xref> で入手可能です。また、デモ・アプリケーションを実行して、必要なセットアップの一部を自動化する bash シェル・スクリプトなど、<keyword conref="a8_entities.dita#a8_entities/a8"></keyword> 機能を試用することもできます。</p></context></taskbody></task><?tm 1475833007553 1 Bluemix ?>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN" "ibm-concept.dtd">
+<concept id="cs_planning_apps">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword> クラスター <ph conref="cs_conref.dita#links/release"></ph> へのアプリのデプロイメント</title>
+<titlealts>
+<navtitle>アプリのデプロイメント</navtitle></titlealts>
+<shortdesc>クラスターが作成され、使用可能な状態になったら、コンテナーに入れたアプリをそのクラスターにデプロイできます。
+</shortdesc>
+<conbody>
+<p>アプリのデプロイには一般に次の手順が含まれます。<ol id="ol_egd_krf_sz">
+<li><xref href="cs_cli_install.dita" format="dita" scope="local">CLI をインストールします</xref>。</li>
+<li> アプリの構成スクリプトを作成します。<image href="sout.gif" alt="外部リンク" id="image_w1w_hsf_sz"></image>
+<xref href="https://kubernetes.io/docs/concepts/configuration/overview/" format="html" scope="external">Kubernetes のベスト・プラクティスを確認してください。</xref></li>
+<li>次のいずれかの方法でスクリプトを構成します。<ul id="ul_eym_lrf_sz">
+<li><xref href="cs_apps_cli.dita" format="dita" scope="local">Kubernetes CLI</xref></li>
+<li>Kubernetes ダッシュボード<ol id="ol_zcm_srf_sz">
+<li><xref href="cs_apps_dashboard.dita" format="dita" scope="local">Kubernetes
+ダッシュボードを起動します。</xref></li>
+<li><xref href="cs_apps_ui.dita" format="dita" scope="local">構成スクリプトを実行します。</xref></li></ol></li></ul></li></ol></p></conbody>
+<concept id="concept_r31_y22_sz">
+<title>最小限のアプリのデプロイメント</title>
+<conbody>
+<section id="section_ltt_bf2_sz"><p> <ph conref="cs_conref.dita#links/free_cluster"></ph> または標準のクラスターでの最も基本的なアプリのデプロイメントには、次のコンポーネントが含まれます。<xref href="../api/content/containers/images/cs_app_tutorial_components1.png" format="png" scope="external">
+<desc>基本的なデプロイメントのセットアップ</desc>
+<image href="images/cs_app_tutorial_components1.png" alt="デプロイメントのセットアップ" align="left" placement="break" id="image_wcm_cg2_sz"></image></xref>最小限のアプリの構成スクリプトの例。
+<codeblock>apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: ibmliberty
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ibmliberty
+    spec:
+      containers:
+      - name: ibmliberty
+        image: registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/ibmliberty:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ibmliberty-service
+  labels:
+    run: ibmliberty
+spec:
+  selector:
+    run: ibmliberty
+  type: NodePort
+  ports:
+   - protocol: TCP
+     port: 9080</codeblock></p></section></conbody></concept>
+<concept id="concept_brn_w22_sz">
+<title>可用性の高いアプリ</title>
+<shortdesc>セットアップ時に複数のワーカー・ノードとクラスターを分散させる範囲を広くすればするほど、各ユーザーがアプリのダウン時間を経験する可能性は低くなります。
+</shortdesc>
+<conbody>
+<p>アプリのセットアップ方法を以下にまとめます。下に行くほど可用性が高くなります。
+</p>
+<p><xref href="../api/content/containers/images/cs_app_ha_roadmap.png" format="png" scope="external"><image href="images/cs_app_ha_roadmap.png" alt="アプリの高可用性を段階的にまとめた図" id="image_czx_1c2_sz"></image></xref></p>
+<p><ol id="ol_ezx_1c2_sz">
+<li>n+2 個のポッドをレプリカ・セットで管理するデプロイメント。</li>
+<li>n+2 個のポッドをレプリカ・セットで管理し、同じ場所の複数のノードに分散させる
+(アンチアフィニティー) デプロイメント。</li>
+<li>n+2 個のポッドをレプリカ・セットで管理し、別々の場所に存在する複数のノードに分散させる (アンチアフィニティー) デプロイメント。
+</li>
+<li>n+2 個のポッドをレプリカ・セットで管理し、別々の地域に存在する複数のノードに分散させる (アンチアフィニティー) デプロイメント。
+</li></ol></p>
+<p>これらの技法を利用してアプリの可用性を高める方法について、このあと説明します。</p>
+<dl>
+<dlentry>
+<dt>デプロイメントとレプリカ・セットを使用してアプリとその依存項目をデプロイする</dt>
+<dd>デプロイメントとは、アプリのすべてのコンポーネントや依存項目を宣言するために使用できる Kubernetes リソースです。
+必要なすべての手順やコンポーネントの作成順序ではなくそれぞれの単一コンポーネントを記述することにより、
+稼働中のアプリの動作に集中できます。
+<p>複数のポッドをデプロイすると、デプロイメントのレプリカ・セットが自動的に作成されます。そのレプリカ・セットによってポッドがモニターされ、いつでも望ましい数のポッドが稼働状態になります。
+ポッドがダウンすると、応答しなくなったポッドがレプリカ・セットによって新しいポッドに置き換えられます。
+</p><p>デプロイメントを使用して、ローリング更新中に追加するポッドの数や、1 度に使用不可にできるポッドの数など、アプリの更新戦略を定義できます。
+ローリング更新の実行時には、デプロイメントによって、リビジョンが動作しているかどうかが確認され、障害が検出されるとロールアウトが停止されます。
+デプロイメントを使用すれば、異なるフラグを設定した複数のリビジョンを同時にデプロイすることもできるので、まずデプロイメントをテストしてから実稼働環境にプッシュするかどうかを決める、といったことが可能になります。
+</p><p>すべてのデプロイメントで、デプロイされたリビジョンが追跡されます。
+こうしたリビジョンの履歴を使用して、更新が予期したとおりに機能しない場合に、以前のバージョンにロールバックできます。
+</p></dd></dlentry>
+<dlentry>
+<dt>アプリのワークロードに十分なレプリカ数、プラス 2 を組み込む</dt>
+<dd>アプリの可用性と耐障害性を高めるために、予想されるワークロードを処理する最低限の数のレプリカに加えて予備のレプリカを組み込むことを検討してください。
+ポッドがクラッシュし、そのポッドがレプリカ・セットによってまだリカバリーされていない状況でも、予備のレプリカでワークロードを処理できます。
+
+2 つが同時に障害を発生した場合に対応できるようにするには、2 つ余分にレプリカを組み込みます。このセットアップは N+2 パターンです。N は着信ワークロードを処理するレプリカの数、+2 は追加の 2 つのインスタンスです。</dd></dlentry>
+<dlentry>
+<dt>複数のノードにポッドを分散させる (アンチアフィニティー)</dt>
+<dd>デプロイメントを作成する時に、各ポッドを同じワーカー・ノードにデプロイすることもできます。
+複数のポッドが同じワーカー・ノード上に存在するセットアップは、アフィニティーまたはコロケーションといいます。
+ワーカー・ノードの障害からアプリを保護するために、デプロイメントによって複数のワーカー・ノードにポッドを分散させることもできます。そのためには、<uicontrol>podAntiAffinity</uicontrol> オプションを使用します。
+このオプションを使用できるのは標準クラスターの場合に限られます。
+<note>以下の YAML ファイルでは、それぞれのポッドを異なるワーカー・ノードにデプロイします。
+定義したレプリカの数がクラスター内の使用できるワーカー・ノードの数より多い場合は、アンチアフィニティーの要件を満たせる数のレプリカだけがデプロイされます。
+それ以外のレプリカは、ワーカー・ノードがさらにクラスターに追加されるまで保留状態になります。
+</note><codeblock>apiVersion: v1
+kind: Service
+metadata:
+  name: wasliberty
+  labels:
+    app: wasliberty
+spec:
+  ports:
+    # the port that this service should serve on
+  - port: 9080
+  selector:
+    app: wasliberty
+  type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: wasliberty
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: wasliberty
+      annotations:
+        scheduler.alpha.kubernetes.io/affinity: &gt;
+            {
+              "podAntiAffinity": {
+                "requiredDuringSchedulingIgnoredDuringExecution": [
+                  {
+                    "labelSelector": {
+                      "matchExpressions": [
+                        {
+                          "key": "app",
+                          "operator": "In",
+                          "values": ["wasliberty"]
+                        }
+                      ]
+                    },
+                    "topologyKey": "kubernetes.io/hostname"
+                 }
+                ]
+               }
+             }
+    spec:
+      containers:
+      - name: wasliberty
+        image: registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/ibmliberty
+        ports:
+          - containerPort: 9080</codeblock></dd></dlentry>
+<dlentry>
+<dt>複数の場所にポッドを分散させる</dt>
+<dd>ある場所や領域の障害からアプリを保護するために、別の場所の 2 つ目のクラスターを作成し、デプロイメントの YAML を使用してアプリの重複レプリカ・セットをデプロイできます。
+クラスターの前に共有ルートとロード・バランサーを追加して、複数の場所や領域にワークロードを分散させることもできます。
+クラスター間でルートを共有する方法について詳しくは、<xref href="cs_cluster.dita" format="dita">クラスターの高可用性</xref>を参照してください。
+</dd></dlentry></dl></conbody></concept></concept>

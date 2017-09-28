@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN" "ibm-concept.dtd">
+<concept id="cs_planning_private_network" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でのプライベート・ネットワーキング</title>
+<titlealts>
+<navtitle>プライベート・ネットワーキング</navtitle></titlealts>
+<shortdesc>ワーカー・ノードとポッド間のセキュア・プライベート・ネットワーク通信は、プライベート仮想ローカル・エリア・ネットワーク (プライベート VLAN とも呼ばれる) で実現されます。
+VLAN では、ワーカー・ノードとポッドをまとめたグループが同じ物理ワイヤーに接続されているかのように構成されます。
+</shortdesc>
+<conbody>
+<p><ph audience="yellow">クラスターを作成すると、どのクラスターも、IBM 所有のプライベート VLAN (<ph conref="cs_conref.dita#links/free_cluster"></ph>・クラスター)、またはお客様の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントにセットアップされたプライベート VLAN (標準クラスター) に自動的に接続されます。
+</ph><ph audience="blue">クラスターを作成すると、どのクラスターも、IBM 所有のプライベート VLAN (<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short" audience="blue"> </keyword> Public の <ph conref="cs_conref.dita#links/free_cluster"></ph>・クラスター)、お客様の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントにセットアップされたプライベート VLAN (<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short" audience="blue"> </keyword> Public の標準クラスター)、
+またはお客様の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントに IBM が事前構成したユーザー管理のプライベート VLAN (<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short" audience="blue"> </keyword> Dedicated の標準クラスター) に自動的に接続されます。</ph> ワーカー・ノードに割り当てられるプライベート IP アドレスは、クラスター作成時にプライベート VLAN によって決定されます。
+クラスターがアカウント内のすべての VLAN にアクセスできるようにするには、
+<xref href="https://knowledgelayer.softlayer.com/procedure/enable-or-disable-vlan-spanning" format="html" scope="external">VLAN スパンニング</xref>をオンにします。
+</p>
+<p>ワーカー・ノードにデプロイされるすべてのポッドにも、プライベート IP アドレスが割り当てられます。ポッドには 172.30.0.0/16 のプライベート・アドレス範囲で IP が割り当てられ、ワーカー・ノード間でのみルーティングされます。
+競合を避けるために、ご使用のワーカー・ノードと通信するノードにはこの IP 範囲を使用しないでください。
+ワーカー・ノードとポッドは、プライベート IP アドレスを使用してプライベート・ネットワーク上で安全に通信できます。
+しかし、ポッドが異常終了した場合やワーカー・ノードを再作成する必要がある場合は、新しいプライベート IP アドレスが割り当てられます。
+</p>
+<p>高可用性が必要とされるアプリの変化するプライベート IP アドレスを追跡することは難しいため、組み込みの Kubernetes サービス・ディスカバリー機能を使用してクラスター内のプライベート・ネットワーク上の clusterIP サービスとしてアプリを公開することができます。Kubernetes サービスによってポッドのセットをグループ化し、クラスター内の他のサービスからそれらのポッドにアクセスするためのネットワーク接続を提供します。そうすれば、各ポッドの実際のプライベート IP アドレスを公開する必要はありません。
+clusterIP サービスを作成すると、10.10.10.0/24 のプライベート・アドレス範囲からそのサービスにプライベート IP アドレスが割り当てられます。ポッドのプライベート・アドレス範囲と同様に、この IP 範囲はワーカー・ノードと通信するノードには使用しないでください。
+この IP アドレスはクラスター内でのみアクセス可能です。
+インターネットからこの IP アドレスにアクセスすることはできません。
+同時に、サービスの DNS 参照エントリーが作成され、クラスターの kube-dns コンポーネントに保管されます。
+DNS エントリーには、サービスの名前、サービスが作成された名前空間、割り当てられたプライベート・クラスター IP アドレスへのリンクが設定されます。
+</p>
+<p>clusterIP サービスの背後に属するポッドにクラスター内のアプリがアクセスする必要がある場合は、サービスに割り当てられたプライベート・クラスター IP アドレスを使用するか、サービスの名前を使用して要求を送信します。
+サービスの名前を使用した場合、名前は kube-dns コンポーネント内で検索され、サービスのプライベート・クラスター IP アドレスにルーティングされます。
+要求がサービスに到達すると、ポッドのプライベート IP アドレスやデプロイ先のワーカー・ノードに関係なく、すべての要求がサービスによってポッドに等しく転送されます。
+</p>
+<p><codeph>clusterIP</codeph> タイプのサービスを作成する方法について詳しくは、<xref href="https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services---service-types" format="html" scope="external">Kubernetes services</xref> を参照してください。
+</p></conbody></concept>

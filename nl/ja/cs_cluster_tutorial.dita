@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tutorial PUBLIC "-//IBM//DTD DITA Tutorial//EN"
+ "tutorial.dtd">
+<tutorial id="cs_cluster_tutorial" xml:lang="ja-jp" class="- topic/topic tutorial/tutorial ">
+<title>チュートリアル: <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> での Kubernetes クラスターの作成 <ph conref="cs_conref.dita#links/release"></ph></title>
+<titlealts>
+<navtitle>チュートリアル: クラスターの作成</navtitle>
+<searchtitle>チュートリアル: <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> での Kubernetes クラスターの作成</searchtitle></titlealts>
+<shortdesc>独自の Kubernetes クラスターをクラウドにデプロイして管理することができます。
+ワーカー・ノードという独立したコンピュート・ホストで構成されるクラスター上で、コンテナー化したアプリのデプロイメント、操作、スケーリング、モニタリングを自動化することができます。
+<ph audience="unknown">コンテナーにデプロイされたアプリの能力に合わせてスケーリングされる仮想マシンのワーカー・ノードを作成して管理することができます。
+カスタムの Kubernetes クラスターは、アプリをデプロイするために、実動ワークロードに合わせてスケーリングすることができます。
+</ph></shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>チュートリアル</indexterm><indexterm>概説</indexterm></keywords></metadata></prolog>
+<tutorialBody class="- topic/body tutorial/tutorialBody ">
+<tutorialDesc class="- topic/section tutorial/tutorialDesc "><p> このチュートリアル・シリーズでは、架空の PR 会社が Kubernetes を使用して、Watson Tone Analyzer を活用するコンテナー化アプリを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short">c</keyword> にデプロイする方法を実例で示します。
+この PR 会社が Watson Tone Analyzer を使用して自社のプレス・リリースを分析し、自社のメッセージのトーンに関するフィードバックを受け取る、というシナリオです。
+この最初のチュートリアルでは、PR 会社のネットワーキング管理者が、会社の Watson Tone Analyzer アプリのコンピュート・インフラストラクチャーであるカスタム Kubernetes クラスターをセットアップします。
+このクラスターは、PR 会社のアプリの Hello World バージョンをデプロイしてテストするために使用されます。
+</p></tutorialDesc>
+<learningObjectives class="- topic/section tutorial/learningObjectives "><title>達成目標</title>
+<p><ul>
+<li>1 つのワーカー・ノードがある Kubernetes クラスターを作成する</li>
+<li audience="unknown">クラスターの正常性を検査する</li>
+<li>Kubernetes API を使用し Docker イメージを管理するための CLI をインストールする</li>
+<li>イメージを格納するためのプライベート・イメージ・リポジトリーを <ph conref="cs_conref.dita#links/registry_name">container
+registry</ph> で作成する</li>
+<li>Watson Tone Analyzer <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short">c</keyword> サービスをクラスターに追加して、そのサービスをクラスター内のアプリで使用できるようにする</li>
+<li audience="unknown">Ingress とロード・バランサーをセットアップする</li>
+<li audience="unknown">開発者が使用するためのパブリック IP アドレスを追加する</li>
+<li audience="unknown">ユーザー・ロールを作成して、開発者にクラスターへのアクセス権限を付与する</li>
+<li audience="unknown">ワーカー・ノードをスケールアップして能力を高める</li>
+<li audience="unknown">クラスター・アドオンとしてモニタリングとロギングを追加する</li></ul></p></learningObjectives>
+<timeRequired class="- topic/section tutorial/timeRequired "><title>所要時間</title>25 分</timeRequired>
+<section><title>対象読者</title>
+<p>このチュートリアルは、Kubernetes クラスターを作成したことがないソフトウェア開発者やネットワーク管理者を対象にしています。
+<ph audience="unknown"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short">c</keyword> で無料の Kubernetes クラスターを作成したことがあり、実動ワークロード用に可用性を高めたクラスターを作成する計画がある人も対象です。
+</ph></p></section></tutorialBody></tutorial>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<concept id="images" xml:lang="ja-jp">
+<title>IBM イメージ</title>
+<titlealts>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で使用できる IBM イメージ
+</searchtitle></titlealts>
+<shortdesc>コンテナーは IBM イメージから作成することができます。イメージは、単一コンテナーとしてもスケーラブル・コンテナー・グループとしてもデプロイできます。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>イメージ</indexterm><indexterm>コンテナー</indexterm><indexterm>IBM Containers</indexterm></keywords></metadata></prolog>
+<conbody>
+<p>IBM は、だれでも使用できるように以下のパブリック・イメージを提供しています。
+</p>
+<ul outputclass="runtimeIconList">
+<li audience="None"><p outputclass="runtimeIcon">  <xref href="../images/docker_image_ibmbackup_restore/ibmbackup_restore_starter.html" format="html" scope="peer">
+<desc>ibm-backup-restore イメージについて詳しくは、資料を確認してください。</desc>
+    <image href="images/container-image_ibm.png">
+<alt>IBM イメージ</alt></image></xref></p>
+<p outputclass="runtimeTitle">ibm-backup-restore</p>
+<p outputclass="runtimeLink">  <xref href="../images/docker_image_ibmbackup_restore/ibmbackup_restore_starter.html" format="html" scope="peer">
+<desc>ibm-backup-restore イメージについて詳しくは、資料を確認してください。</desc>資料の表示</xref></p></li>
+<li audience="None"><p outputclass="runtimeIcon">  <xref href="../images/docker_image_iib/ibmiib_starter.html" format="html" scope="peer">
+<desc>Integration ソリューションを作成後に、ibm-integration-bus イメージを使用して Bluemix に単一コンテナーをプロビジョンできます。その後、Web UI を使用するかまたは端末から操作して、Integration ソリューションをこのコンテナーにデプロイできます。</desc>
+    <image href="images/container-image_ibm.png">
+<alt>IBM イメージ</alt></image></xref></p>
+<p outputclass="runtimeTitle">ibm-integration-bus</p>
+<p outputclass="runtimeLink">  <xref href="../images/docker_image_iib/ibmiib_starter.html" format="html" scope="peer">
+<desc>Integration ソリューションを作成後に、ibm-integration-bus イメージを使用して Bluemix に単一コンテナーをプロビジョンできます。その後、Web UI を使用するかまたは端末から操作して、Integration ソリューションをこのコンテナーにデプロイできます。</desc>資料の表示</xref></p></li>
+<li audience="None"><p outputclass="runtimeIcon">  <xref href="../images/docker_image_ibmliberty/ibmliberty_starter.html" format="html" scope="peer">
+<desc>ibmliberty イメージを親として使用して独自のイメージを作成し、Java ベースの独自の WAR、EAR、または OSGi アプリを、IBM WebSphere Application Server Liberty コンテナー内にデプロイできます。</desc>
+    <image href="images/container-image_ibm.png">
+<alt>IBM イメージ</alt></image></xref></p>
+<p outputclass="runtimeTitle">ibmliberty</p>
+<p outputclass="runtimeLink">  <xref href="../images/docker_image_ibmliberty/ibmliberty_starter.html" format="html" scope="peer">
+<desc>ibmliberty イメージを親として使用して独自のイメージを作成し、Java ベースの独自の WAR、EAR、または OSGi アプリを、IBM WebSphere Application Server Liberty コンテナー内にデプロイできます。</desc>資料の表示</xref></p></li>
+<li audience="unknown"><p outputclass="runtimeIcon">  <xref href="../images/mobilefirst/ibm_mobilefirst_starter.html" format="html" scope="peer">
+<desc>ibm-mobilefirst-starter イメージについて詳しくは、資料を確認してください。</desc>
+    <image href="images/container-image_ibm.png">
+<alt>IBM イメージ</alt></image></xref></p>
+<p outputclass="runtimeTitle">ibm-mobilefirst-starter</p>
+<p outputclass="runtimeLink"><xref href="../images/mobilefirst/ibm_mobilefirst_starter.html" format="html" scope="peer">
+<desc>ibm-mobilefirst-starter イメージについて詳しくは、資料を確認してください。</desc>資料の表示</xref></p></li>
+<li><p outputclass="runtimeIcon"><xref href="../services/va/images/ibmmq/ibm_mq.html" format="html" scope="peer">
+<desc>ibm-mq イメージについて詳しくは、資料を確認してください。</desc>
+<image href="images/container-image_ibm.png">
+<alt>IBM イメージ</alt></image></xref></p>
+<p outputclass="runtimeTitle">ibm-mq</p>
+<p outputclass="runtimeLink"><xref href="../services/va/images/ibmmq/ibm_mq.html" format="html" scope="peer">
+<desc>ibm-mq イメージについて詳しくは、資料を確認してください。</desc>資料の表示</xref></p></li>
+<li audience="None"><p outputclass="runtimeIcon">  <xref href="../images/docker_image_ibmnode/ibmnode_starter.html" format="html" scope="peer">
+<desc>IBM Node (ibmnode) イメージは、独自の Node.js アプリ・コードで独自のイメージをビルドするための親として使用します。</desc>
+    <image href="images/container-image_ibm.png">
+<alt>IBM イメージ</alt></image></xref></p>
+<p outputclass="runtimeTitle">ibmnode</p>
+<p outputclass="runtimeLink">  <xref href="../images/docker_image_ibmnode/ibmnode_starter.html" format="html" scope="peer">
+<desc>IBM Node (ibmnode) イメージは、独自の Node.js アプリ・コードで独自のイメージをビルドするための親として使用します。</desc>資料の表示</xref></p></li>
+<li audience="None"><p outputclass="runtimeIcon">  <xref href="../images/ibmnode_strong_pm/ibmnode-strong-pm_starter.html" format="html" scope="peer">
+<desc>Strongloop Process Manager を使用すると、リモート・マシン上に実装された IBM Cloud 中の Node.js アプリをデプロイ、管理、およびモニターすることができます。</desc>
+    <image href="images/container-image_ibm.png">
+<alt>IBM イメージ</alt></image></xref></p>
+<p outputclass="runtimeTitle">ibm-node-strong-pm</p>
+<p outputclass="runtimeLink">  <xref href="../images/ibmnode_strong_pm/ibmnode-strong-pm_starter.html" format="html" scope="peer">
+<desc>Strongloop Process Manager を使用すると、リモート・マシン上に実装された IBM Cloud 中の Node.js アプリをデプロイ、管理、およびモニターすることができます。</desc>資料の表示</xref></p></li>
+<li><p outputclass="runtimeIcon"><xref href="../images/docker_image_extreme_scale/ibm-websphere-extreme-scale_starter.html" format="html" scope="peer">
+<desc>ibm-websphere-extreme-scale イメージを使用して eXtremeScale 分散キャッシュ・サーバーを立ち上げ、Liberty Bluemix クライアント・アプリケーションからそのキャッシュ・サーバーに接続することによって、simple、session、dynacache などの分散キャッシュのユース・ケースを実行できます。</desc>
+<image href="images/container-image_ibm.png">
+<alt>IBM イメージ</alt></image></xref></p>
+<p outputclass="runtimeTitle">ibm-websphere-extreme-scale</p>
+<p outputclass="runtimeLink"><xref href="../images/docker_image_extreme_scale/ibm-websphere-extreme-scale_starter.html" format="html" scope="peer">
+<desc>ibm-websphere-extreme-scale イメージを使用して eXtremeScale 分散キャッシュ・サーバーを立ち上げ、Liberty Bluemix クライアント・アプリケーションからそのキャッシュ・サーバーに接続することによって、simple、session、dynacache などの分散キャッシュのユース・ケースを実行できます。</desc>資料の表示</xref>
+</p></li></ul></conbody></concept>

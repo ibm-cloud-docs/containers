@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE map PUBLIC "-//IBM//DTD DITA IBM Map//EN"
+ "ibm-map.dtd">
+<map xml:lang="ja-jp">
+<title>Vulnerability Advisor</title><!--audience=blue set until approved by VA team under GHE issue https://github.ibm.com/alchemy-va/team/issues/984-->
+<topicmeta>
+<copyright>
+<copyryear year="2015"></copyryear>
+<copyryear year="2017"></copyryear>
+<copyrholder>IBM</copyrholder></copyright></topicmeta><!--Manage VA policies-->
+<topicref href="va_index.dita" type="task" scope="local" audience="unknown"></topicref><!--Review org policies-->
+<topicref navtitle="Reviewing organizational policies" href="va_managing_policy.dita" type="task" scope="local" audience="unknown"></topicref><!--Review image vulnerabilities-->
+<topicref href="va_reviewing.dita" type="task" scope="local" audience="unknown"></topicref><!--Review container vulnerabilities-->
+<topicref href="va_reviewing_container.dita" type="task" scope="local" audience="unknown"></topicref><!--Resolve problems-->
+<topicref navtitle="Resolving problems" href="va_report.dita" scope="local" audience="unknown"></topicref>
+<topicref href="va_index.dita" type="task" scope="local" chunk="to-content"><!--Review org policies-->
+<topicref navtitle="Reviewing organizational policies" href="va_managing_policy.dita" type="task" scope="local"></topicref><!--Review image vulnerabilities-->
+<topicref href="va_reviewing.dita" type="task" scope="local"></topicref><!--Review container vulnerabilities-->
+<topicref href="va_reviewing_container.dita" type="task" scope="local"></topicref><!--Resolve problems-->
+<topicref navtitle="Resolving problems" href="va_report.dita" scope="local"></topicref></topicref></map>

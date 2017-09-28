@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="container_cli_ips" xml:lang="ja-jp">
+<title>パブリック IP アドレスの要求とコンテナーへのバインド</title>
+<titlealts>
+<navtitle>IP アドレスの要求とバインド</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でのパブリック IP アドレスの要求とコンテナーへのバインド</searchtitle></titlealts>
+<shortdesc>パブリック IP アドレスを要求して、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 内のコンテナーにバインドします。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>IP アドレス</indexterm><indexterm>パブリック</indexterm><indexterm>IBM Containers</indexterm><indexterm conref="container_conref.dita#links/cli_abbrev"></indexterm><indexterm>ip-bind</indexterm><indexterm>ip-request</indexterm></keywords></metadata></prolog>
+<taskbody>
+<prereq><note conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/ssl"></note>
+<p>始める前に、<xref href="container_cli_ips_list.dita" format="dita" scope="local"></xref>を参照して、新しく作成する代わりに既存のパブリック IP アドレスで使用できるものがスペースにないか確認してください。</p></prereq>
+<steps>
+<step>
+<cmd>パブリック IP アドレスを要求します。
+</cmd>
+<info> パブリック IP アドレスを要求すると、パブリック IP アドレス・プールからランダムに IP アドレスがスペースに割り振られます。
+スペースに割り振られた IP アドレスは変更されません。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ip-request</codeblock></info></step>
+<step>
+<cmd>IP アドレスを記録してください。</cmd></step>
+<step>
+<cmd>そのアドレスを新規コンテナーまたは既存の実行中コンテナーにバインドします。</cmd><choices>
+<choice>既存の実行中コンテナーにバインドするには、以下のようにします。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ip-bind <varname>&lt;public_IP_address&gt;</varname> <varname>&lt;container_name_or_id&gt;</varname></codeblock>例<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ip-bind 192.0.2.23 my_container</codeblock></choice>
+<choice>新規コンテナーにバインドするには、以下のようにします。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> run -p <varname>&lt;ip-address&gt;</varname>:<varname>&lt;container-port&gt;</varname>:<varname>&lt;container-port&gt;</varname> --name <varname>&lt;container_name&gt;</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>&lt;my_namespace&gt;</varname>/<varname>&lt;image_name&gt;</varname></codeblock></choice></choices></step></steps>
+<result>バインド要求は即時に行われますが、その IP アドレスを使用したコンテナーへの接続には数分かかることがあります。</result></taskbody><?tm 1435623319 0?></task>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN" "ibm-concept.dtd">
+<concept id="container_security_network" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プライベート・コンテナー・ネットワークのセキュリティー設定</title>
+<titlealts>
+<navtitle>プライベート・コンテナー・ネットワークのセキュリティー</navtitle></titlealts>
+<shortdesc>同一のプライベート・ネットワーク上のコンテナー間で、また異なる <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースにおけるコンテナー間で、さらには、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースとリモート・ネットワーク間における安全な通信を確保する <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> に組み込まれているフィーチャーのリストを確認します。</shortdesc>
+<conbody>
+<dl>
+<dlentry>
+<dt>スペースごとのプライベート L2 分離コンテナー・ネットワーク</dt>
+<dd><ph conref="container_conref.dita#terms/private_network_definition"></ph><p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> では、すべてのスペースに、デフォルトの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> ネットワーク設定を適用したコンテナー・プライベート・ネットワークが備わっています。コンテナーを作成すると、自動的にスペースのデフォルトのプライベート・ネットワークに接続され、プライベート IP アドレスが割り当てられます。
+</p><draft-comment author="bpratt">Below paragraph in staging only
+until network commands are restored</draft-comment><p audience="blue">社内ネットワークの特定のプライベート IP アドレスが必要なアプリの場合には、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プライベート・ネットワークをカスタマイズして、カスタムの IP アドレス範囲を使用することができます。
+詳細については、<xref href="container_cli_ips_byoip.dita"></xref>を参照してください。</p></dd></dlentry>
+<dlentry>
+<dt>コンテナーのプライベート保持、またはネットワーク・セキュリティー・グループを介した一般向けサービスの選択的公開</dt>
+<dd>コンテナーはその一つ一つが IBM 独自のネットワーク・セキュリティー・グループによって保護されており、このネットワーク・セキュリティー・グループは、インバウンド・ネットワーク・トラフィックを制御し、プライベート・ネットワーク・ゲートウェイ・レベルでのソフトウェア・ファイアウォールとして動作します。プライベート・ネットワーク・ゲートウェイ経由で送信されるデータは、ネットワーク・セキュリティー・グループのルールに対する準拠性が検査された後に、宛先コンテナーに渡されるかまたはブロックされます。
+<p>コンテナーを作成してもパブリックに公開しない場合は、デフォルトのプライベート・ネットワーク・セキュリティー・グループを使用してセットアップします。このセキュリティー・グループでは、コンテナー間でプライベート IP アドレスを使用してプライベートなネットワーク通信を行うことができます。
+デフォルトでは、すべてのコンテナー・ポートが自動的にプライベート・ネットワークに公開されます。コンテナー・ポートをホスト・ポートにマップする必要はありません。
+</p><p>アプリをパブリックで使用できるようにするには、パブリック・ポートを公開し、パブリック IP アドレスを単一コンテナーにバインドするか、またはパブリック経路をコンテナー・グループにバインドする必要があります。
+<ph id="public_nsg"><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> run</codeph> コマンドで <codeph>-p</codeph> オプションを使用してパブリック・ポートを公開する場合は、公開したポートでのみパブリック・データの送受信を許可するパブリック・ネットワーク・セキュリティー・グループをコンテナー用に作成します。
+その他のすべてのパブリック・ポートは閉じられるため、それらのポートを使用してインターネットからアプリにアクセスすることはできません。</ph></p></dd></dlentry>
+<dlentry>
+<dt>継続的なエンタープライズ・ネットワーク・モニタリング</dt>
+<dd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のすべてのネットワーク・トラフィックを IBM はモニターし、悪意のあるアクティビティーを検出して対処します。</dd></dlentry>
+<dlentry>
+<dt>Docker <codeph>exec</codeph>、<codeph>attach</codeph>、<codeph>logs</codeph> の各コマンドのフル・サポート</dt>
+<dd><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> exec</codeph>、<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> attach</codeph>、<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> logs</codeph> の各コマンドを使用して、コンテナーにログインしたり、実行時に詳細出力を表示したりできます。
+これらのコマンドを使用すると、実行時にコンテナーにアクセスしてモニターするために非セキュアな SSH デーモンを実行しなくて済みます。
+<p><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> exec</codeph> を使用してコンテナーに安全にログインする方法について詳しくは、<xref href="troubleshoot/ts_cf_ic_exec.dita" format="dita"></xref>を参照してください。</p></dd></dlentry>
+<dlentry>
+<dt>他のスペースおよびリモート・ネットワーク内にあるサービスに、セキュアなプライベート・ネットワーク・アクセスを行うための VPN</dt>
+<dd>IBM® Virtual Private Network サービスを使用して、プライベートなコンテナー・ネットワーク内のコンテナーを<ph audience="blue"> <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースをまたいで</ph>安全に接続したり、社内データ・センターに安全に接続したりできます。<p audience="yellow">詳しくは、<xref href="container_vpn.dita" format="dita">コンテナーと社内データ・センターの間の VPN 接続のセットアップ</xref>を参照してください。</p><draft-comment author="bpratt">Added blue tags
+to spaces</draft-comment><p audience="blue">詳しくは、以下のトピックを参照してください。
+<ul>
+<li><xref href="container_vpn.dita" format="dita">コンテナーと社内データ・センターの間の VPN 接続のセットアップ</xref></li>
+<li><xref href="container_vpn_spaces.dita" format="dita"></xref></li></ul></p></dd></dlentry></dl></conbody></concept>

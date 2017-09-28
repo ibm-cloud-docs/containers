@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dita PUBLIC "-//IBM//DTD DITA IBM Composite//EN"
+ "ibm-ditabase.dtd">
+<dita xml:lang="ja-jp">
+<concept id="a8_entities" xml:lang="ja-jp">
+<title>エンティティー</title>
+<conbody>
+<draft-comment author="Marisa" audience="unknown">A8 terms</draft-comment>
+<p><keyword id="sidecar">サイドカー</keyword></p>
+<p><keyword id="Sidecar">サイドカー</keyword></p>
+<draft-comment author="GB032031" audience="unknown">Open source products</draft-comment>
+<p><keyword id="a8">Amalgam8</keyword></p>
+<p><keyword id="github">GitHub</keyword></p>
+<p><keyword id="dockerhub">Docker ハブ</keyword></p>
+<draft-comment author="Marisa" audience="unknown">API links</draft-comment>
+<p><xref href="https://new-console.ng.bluemix.net/apidocs/129" format="html" scope="external" id="sd_api"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/servicediscoverylong"></keyword> API</xref></p>
+<draft-comment author="Marisa" audience="unknown">RELATED SERVICES TERMS</draft-comment>
+<p><keyword id="cloudfoundry">Cloud Foundry</keyword></p></conbody></concept><?tm 1430977685 182?></dita>

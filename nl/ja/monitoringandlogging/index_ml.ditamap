@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE map PUBLIC "-//IBM//DTD DITA IBM Map//EN" "ibm-map.dtd">
+<map xml:lang="ja-jp">
+<title>コンテナーのモニタリングとロギング</title>
+<topicmeta>
+<copyright>
+<copyryear year="2014"></copyryear>
+<copyryear year="2017"></copyryear>
+<copyrholder>IBM</copyrholder></copyright></topicmeta><!--This part of the navigation must be edited in index_ml.ditamap-->
+<topicref href="container_ml_monitor.dita" scope="local" format="dita" chunk="to-content">
+<topicref navtitle="Monitoring containers from the Bluemix Dashboard" href="container_ml_dash_monitor.dita" type="concept" scope="local" format="dita"><!--Changed the following topic to unknown because metrics are going to be handled by Kibana and not Grafana in the future.--></topicref>
+<topicref navtitle="Customizing metrics display in Grafana" href="container_ml_dash_metrics_custom.dita" type="task" scope="local" format="dita"></topicref>
+<topicref navtitle="Configuring a Grafana dashboard to show all containers in a space" href="container_ml_dash_metrics_all.dita"></topicref></topicref>
+<topicref href="container_ml_logs.dita" scope="local" format="dita" chunk="to-content">
+<topicref navtitle="Viewing logs from the CLI" href="container_ml_logs_cli.dita" scope="local" format="dita"></topicref>
+<topicref navtitle="Logging containers from the Bluemix Dashboard" href="container_ml_dash_logs.dita" type="concept" scope="local" format="dita"></topicref>
+<topicref navtitle="Creating a custom dashboard for logs" href="container_ml_dash_logs_custom.dita" type="task" scope="local" format="dita"></topicref>
+<topicref navtitle="Creating a chart from a table" href="container_ml_dash_logs_table.dita" type="task" scope="local" format="dita"></topicref>
+<topicref navtitle="Creating a chart from a query" href="container_ml_dash_logs_query.dita" type="task" scope="local" format="dita"></topicref><!--Changed the following topic to unknown because we are not publicizing the logstash agent externally yet.-->
+<topicref navtitle="Bypassing the crawler" href="container_ml_logs_bypass_crawler.dita" type="task" scope="local" format="dita" audience="unknown"></topicref></topicref>
+<topicref navtitle="Getting started tutorial" href="container_ml_gettingstarted_tutorial.dita" type="tutorial" scope="local" format="dita" linking="none" chunk="to-content">
+<topicref navtitle="Lesson 1" href="container_ml_gettingstarted_tutorial_lesson1.dita" type="tutorialLesson" scope="local" format="dita"></topicref>
+<topicref navtitle="Lesson 2" href="container_ml_gettingstarted_tutorial_lesson2.dita" type="tutorialLesson" scope="local" format="dita"></topicref>
+<topicref navtitle="Lesson 3" href="container_ml_gettingstarted_tutorial_lesson3.dita" type="tutorialLesson" scope="local" format="dita"></topicref></topicref>
+<topicref navtitle="Troubleshooting Monitoring and Logging" href="ts_index.dita" scope="local" format="dita" chunk="to-content">
+<topicref navtitle="Not able to access the Kibana 4 dashboard" href="ts_kibana.dita" scope="local" format="dita"></topicref>
+<topicref navtitle="Getting help and support" href="ts_getting_help.dita" scope="local" format="dita"></topicref></topicref><!--Images--><!--Button or linked icons in the single-sourced pages--><!--&lt;topicref format="png" href="images/grafana_add_row.png" navtitle="Grafana add row icon" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;--><!--&lt;topicref format="png" href="images/grafana_bg_color.png" navtitle="Grafana background color picker" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;--><!--&lt;topicref format="png" href="images/grafana_cpu_idle.png" navtitle="Grafana CPU idle example" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;--><!--&lt;topicref format="png" href="images/grafana_memory_used.png" navtitle="Grafana memory used example" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;--><!--&lt;topicref format="png" href="images/grafana_row_menu.png" navtitle="Grafana row menu" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;--><!--&lt;topicref format="png" href="images/grafana_row_slide.png" navtitle="Grafana row slide" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;--><!--&lt;topicref format="png" href="images/grafana_save.png" navtitle="Grafana save icon" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;--><!--&lt;topicref format="png" href="images/option1.png" navtitle="Option 1" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;--><!--&lt;topicref format="png" href="images/option2.png" navtitle="Option 2" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;--><!--&lt;topicref format="png" href="images/next_button.png" navtitle="Next lesson" print="no" scope="local" toc="no"/&gt;--><!--&lt;topicref format="png" href="images/previous_button.png" navtitle="Previous lesson" print="no" scope="local" toc="no"/&gt;--></map>

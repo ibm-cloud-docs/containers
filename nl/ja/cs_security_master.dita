@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN" "ibm-concept.dtd">
+<concept id="cs_security_master" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword> <ph conref="cs_conref.dita#links/release"></ph> における Kubernetes マスターのセキュリティー
+</title>
+<titlealts>
+<navtitle>Kubernetes マスター</navtitle></titlealts>
+<shortdesc>Kubernetes マスターを保護し、クラスター・ネットワーク通信をセキュリティーで保護するための Kubernetes マスターの組み込みセキュリティー機能について説明します。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>Kubernetes</indexterm><indexterm>クラスター</indexterm><indexterm>暗号化</indexterm></keywords></metadata></prolog>
+<conbody>
+<p><dl>
+<dlentry>
+<dt>完全に管理される専用 Kubernetes マスター</dt>
+<dd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword>
+に含まれる Kubernetes クラスターはすべて、IBM が所有する <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントで、IBM が管理する専用 Kubernetes マスターにより制御されます。Kubernetes マスターは、他の IBM のお客様とは共用されない、以下の専用コンポーネントを使用してセットアップされます。
+<ul>
+<li>etcd データ・ストア: サービス、デプロイメント、ポッドなどのクラスターのすべての Kubernetes リソースを保管します。
+Kubernetes ConfigMaps および Secrets は、ポッドで実行されるアプリで使用できるように、キー値ペアとして保管されるアプリ・データです。
+etcd のデータは IBM によって管理される暗号化ディスクに保管され、ポッドに送信されるときには TLS で暗号化されるので、データの保護と完全性が確保されます。
+</li>
+<li>kube-apiserver: ワーカー・ノードから Kubernetes マスターへのすべての要求のメインエントリー・ポイントとなります。
+kube-apiserver は要求を検証して処理し、etcd データ・ストアに対する読み取り/書き込みを行うことができます。
+</li>
+<li>kube-scheduler: ポッドをどこにデプロイするかを決定します。このとき、キャパシティーとパフォーマンスのニーズ、ハードウェアとソフトウェアのポリシー制約、アンチアフィニティー仕様、およびワークロード要件が考慮されます。
+要件に合致するワーカー・ノードが見つからなければ、ポッドはクラスターにデプロイされません。
+</li>
+<li>kube-controller-manager: レプリカ・セットをモニターし、対応するポッドを作成して目的の状態を実現するためのコンポーネントです。
+</li>
+<li>OpenVPN: <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 固有のコンポーネントであり、Kubernetes マスターからワーカー・ノードへのすべての通信のためのセキュア・ネットワーク接続を提供します。
+</li></ul></dd></dlentry>
+<dlentry>
+<dt>ワーカー・ノードから Kubernetes マスターへのすべての通信のための TLS セキュア・ネットワーク接続</dt>
+<dd>Kubernetes マスターへのネットワーク通信を保護するために、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> によって TLS 証明書がクラスターごとに生成されます。これを使って kube-apiserver コンポーネントおよび etcd データ・ストア・コンポーネントとの間でやり取りされる通信が暗号化されます。
+これらの証明書は、クラスター間で共有されたり、Kubernetes マスター・コンポーネント間で共有されたりすることはありません。
+</dd></dlentry>
+<dlentry>
+<dt>Kubernetes マスターからワーカー・ノードへのすべての通信のための OpenVPN セキュア・ネットワーク接続</dt>
+<dd>Kubernetes は、<codeph>https</codeph> プロトコルを使用して Kubernetes マスターとワーカー・ノードの間の通信を保護しますが、デフォルトでは、ワーカー・ノードで認証は行われません。
+この通信を保護するために、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> は、クラスターの作成時に、Kubernetes マスターとワーカー・ノードの間の OpenVPN 接続を自動的にセットアップします。
+</dd></dlentry>
+<dlentry>
+<dt>継続的な Kubernetes マスター・ネットワーク・モニタリング</dt>
+<dd>どの Kubernetes マスターも IBM によって継続的にモニターされ、処理レベルのサービス妨害 (DOS) 攻撃を制御して対処します。
+</dd></dlentry>
+<dlentry>
+<dt>Kubernetes マスター・ノードのセキュリティー・コンプライアンス</dt>
+<dd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> は、Kubernetes マスターがデプロイされたすべてのノードにおいて、マスター・ノードを確実に保護するために適用する必要がある Kubernetes と OS 固有のセキュリティー修正の対象となる脆弱性を自動的にスキャンします。
+脆弱性が検出されると、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> はユーザーに代わって自動的に修正を適用し、脆弱性を解決します。
+</dd></dlentry></dl></p></conbody></concept>

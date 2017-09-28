@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="container_single_updating" xml:lang="ja-jp">
+<title>コマンド・ライン・インターフェース (CLI) による単一コンテナーでの短期実行タスクの更新</title>
+<titlealts>
+<navtitle>CLI を使用した更新</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のコマンド・ライン・インターフェース (CLI) を使用した単一コンテナー内の短期実行タスクの更新</searchtitle></titlealts>
+<shortdesc>アプリを更新するには、新規コンテナーをデプロイする必要があります。新規イメージをプッシュした場合は、コンテナーは自動的に再始動されません。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>単一コンテナー</indexterm><indexterm>CLI</indexterm><indexterm>docker run</indexterm><indexterm conref="container_conref.dita#links/cli_abbrev"></indexterm><indexterm>run</indexterm><indexterm>IBM Containers</indexterm><indexterm>コンテナー</indexterm><indexterm>更新</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context><table id="updating_group_cli_table">
+<title>アプリの更新のためのオプション・ツール</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry>更新ツール</entry>
+<entry>説明</entry></row></thead>
+<tbody>
+<row>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/deliverypipeline"></keyword></entry>
+<entry>管理者が使用できる <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスである <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/deliverypipeline"></keyword> を使用して、アプリのビルドと <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> へのコンテナーのデプロイメントを自動化します。
+詳細については、<xref href="container_single_pipeline_ov.dita" format="dita" scope="local"></xref>を参照してください。</entry></row>
+<row>
+<entry>UrbanCode Deploy</entry>
+<entry>UrbanCode Deploy を使用することによって、アプリのビルドおよび <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> へのコンテナーの配置を自動化します。UrbanCode Deploy の購入について詳しくは、<xref href="http://www.ibm.com/software/products/en/ucdep" format="html" scope="external">IBM UrbanCode Deploy</xref> 製品ページを参照してください。
+</entry></row>
+<row>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI の使用による管理者自身でのアプリの更新</entry>
+<entry>管理者自身がアプリを更新するには、このタスクにある手順を実行します。</entry></row></tbody></tgroup></table></context>
+<steps>
+<stepsection><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI を使用して管理者自身がコンテナーを更新するには、以下のようにします。
+</stepsection>
+<step>
+<cmd>アプリをローカルで更新します。</cmd></step>
+<step conref="container_images_building.dita#container_images_building/build_push">
+<cmd></cmd></step>
+<step conref="container_cli_ips_unbind.dita#container_cli_ips_unbind/unbind">
+<cmd>Remove the address from the existing container by running one of the following commands to
+unbind the IP address.</cmd>
+<info>
+<ul>
+<li></li></ul> The IP address might take a few minutes to be unbound from the container.</info></step>
+<step>
+<cmd>以下のコマンドを実行して、IP アドレスがアンバインドされたことを確認します。*</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"> inspect <varname>&lt;container_name_or_id&gt;</varname></ph> inspect <varname>&lt;container_name_or_id&gt;</varname></codeblock>
+
+<p><systemoutput>PublicIpAddress</systemoutput> の値が空でない場合は、次のステップに進む前に、あと数分間待ってから再度コマンドを実行してください。</p></info></step>
+<step>
+<cmd>IP アドレスが既存のコンテナーから削除されたら、更新されたイメージを使用して別のコンテナーを作成します。*</cmd>
+<info>
+<codeblock><ph conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/run_cmdname"></ph></codeblock></info></step>
+<step>
+<cmd>IP アドレスを新しいコンテナーにバインドします。</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ip-bind <varname>&lt;public_IP_address&gt;</varname> <varname>&lt;container_name_or_id&gt;</varname></codeblock></info></step>
+<step importance="optional">
+<cmd>古いコンテナーを削除します。*</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> rm <varname>&lt;container_name_or_id&gt;</varname></codeblock></info></step></steps></taskbody></task>

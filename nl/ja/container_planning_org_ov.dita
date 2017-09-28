@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="container_planning_org_ov" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 組織の管理</title>
+<titlealts>
+<navtitle>組織の管理</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 組織を管理するための計画</searchtitle></titlealts>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> では、組織を使用して、チーム・メンバー間のコラボレーションを可能にしたり、プロジェクトのクラウド・リソースを簡単に論理グループ化したりできます。
+どの組織にも、開発環境 (スペース) をセットアップしたり、アプリのためのコンテナーを正常に作成するために必要となるクラウド・リソースへのアクセス権をチーム・メンバーに付与したりする作業を担当する組織管理者が割り当てられます。このセットアップには、パブリック IP アドレス、データ・ストレージ、コンテナー・メモリーの割り当てが含まれます。また、組織管理者は、現在の割り当て量やクラウド・リソースの使用状況を表示したり、必要に応じてそれらを調整したりすることができます。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>計画</indexterm><indexterm>IBM Containers</indexterm><indexterm>コンテナー</indexterm><indexterm>組織管理者</indexterm><indexterm>管理</indexterm></keywords></metadata></prolog>
+<taskbody>
+<prereq>始めに、組織内の<xref href="../iam/users_roles.html#userroles" format="html" scope="peer" audience="yellow">ユーザーのロールを確認</xref><xref href="../iam/users_roles.html#userroles" format="html" scope="peer" audience="blue">ユーザーのロールを確認</xref>してください。
+<ul>
+<li>ユーザーに組織における<term>管理者</term>ロールを付与することにより、組織管理者を割り当てます。</li>
+<li>ユーザーにスペースにおける<term>開発者</term>または<term>監査員</term>のロールを付与することにより、コンテナー作成者を割り当てます。</li></ul></prereq></taskbody></task>

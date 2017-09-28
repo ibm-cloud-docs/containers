@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="cs_beta_migrate_cluster" xml:lang="ja-jp">
+<title>実動へのベータ版クラスターのマイグレーション</title>
+<shortdesc><ph id="cs_beta_migrate_cluster_top"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で Kubernetes ベータ版を使用した場合は、Kubernetes リソースとクラスター・リソースを実稼働環境内のクラスターにマイグレーションする必要があります。
+ベータ版クラスターは実動で長期間はサポートされません。</ph></shortdesc>
+<taskbody>
+<prereq id="prereq_cv4_ld5_zz"><note>学習やサンドボックスのためにのみベータ版 Kubernetes クラスターを使用したが、これ以上必要ない場合は、マイグレーションをスキップして、<xref href="cs_cluster_cli.dita"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 実稼働環境に新しいクラスターをセットアップ</xref>してください。</note>始めに、マイグレーション・ステップを実行するために使用する <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウントで <xref href="cs_cluster_user.dita"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の管理者権限が割り当てられている</xref>ことを確認してください。
+</prereq>
+<context id="context_fvh_yr4_zz"><p audience="blue">実動レベルの Kubernetes では、ベータ版で作成された無料クラスターはいずれ削除されます。
+標準クラスターは 30 日間使用可能ですが、アクセスできるのは CLI からのみです。その 30 日の間に、実稼働環境に別の標準クラスターを作成し、新しいクラスターに Kubernetes リソースとアプリをマイグレーションしてください。</p>
+<p>Kubernetes リソースとクラスター・リソースがベータ版から実稼働環境に自動的にマイグレーションされるわけではありません。
+ベータ版クラスターで使用していたデータとリソースを新しいクラスターで使用するには、クラスターとそのすべてのリソースを再作成する必要があります。
+</p></context>
+<steps id="steps_gvh_yr4_zz">
+<stepsection>クラスターと Kubernetes リソースを再作成するには、以下のようにします。</stepsection>
+<step conref="cs_cli_configure.dita#cs_cli_configure/bx_login">
+<cmd></cmd></step>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 実稼働環境にログインします。
+</cmd>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> init</codeblock></info>
+<info>特定の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 地域を指定するには、次のいずれかのコマンドを使用します。
+<ul id="ul_dw1_mcn_zz">
+<li>米国南部:<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> init --host https://us-south.containers.bluemix.net</codeblock></li>
+<li>中欧:
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> init --host https://eu-central.containers.bluemix.net</codeblock></li></ul></info></step>
+<step importance="optional">
+<cmd>保持しておいた方がよいと思われるベータ版クラスターの構成ファイルまたはデータのバックアップを作成します。
+</cmd></step>
+<step>
+<cmd>標準クラスターを作成し、別のポータブル・パブリック・サブネットを作成するかどうかを選択します。</cmd>
+<info> 標準クラスターを作成すると、デフォルトでポータブル・パブリック・サブネットが作成されて、ロード・バランサーと Ingress のサポートが使用可能になります。サブネットごとに、ポータブル・パブリック IP アドレスのセットが含まれます。
+CLI から、別のサブネットを作成してクラスターを作成するか、別のサブネットを作成せずにクラスターを作成するかを選択できます。
+<p>元のポータブル・パブリック IP アドレスを保持して新しいクラスターで再使用する場合は、別のサブネットを作成せずに、標準クラスターを作成してください。
+元のポータブル・パブリック IP アドレスを新しいクラスターで再使用することを選択した場合は、ダウン時間が発生する可能性があります。
+このダウン時間は、ポータブル・パブリック・サブネットを再使用する前にそのクラスターを削除する必要があるために発生します。
+パブリック・アプリのダウン時間を回避する方法については、<xref href="#no_downtime"></xref>を参照してください。</p>標準クラスターとともにサブネットを作成する例:
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> cluster-create --location <varname>&lt;location&gt;</varname> --public-vlan <varname>&lt;public_vlan_id&gt;</varname> --private-vlan <varname>&lt;private_vlan_id&gt;</varname> --machine-type <varname>&lt;machine-type&gt;</varname> --workers <varname>&lt;number&gt;</varname> --name <varname>&lt;cluster_name&gt;</varname></codeblock>
+<p>サブネットなしで標準クラスターを作成する例:</p>
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> cluster-create --location <varname>&lt;location&gt;</varname> --public-vlan <varname>&lt;public_vlan_id&gt;</varname> --private-vlan <varname>&lt;private_vlan_id&gt;</varname> --machine-type <varname>&lt;machine-type&gt;</varname> --workers <varname>&lt;number&gt;</varname> --name <varname>&lt;cluster_name&gt;</varname> --no-subnet</codeblock>
+<table frame="all" colsep="1" rowsep="1" id="table_krs_pk4_zz">
+<title>コマンド・オプションに関する詳細
+</title>
+<desc>
+<p outputclass="summary">コマンド・オプションに関する詳細
+</p></desc>
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="100pt"></colspec><colspec colnum="2" colname="c2"></colspec>
+<thead>
+<row>
+<entry namest="c1" nameend="c2"><ph conref="container_conref.dita#images/more_info"></ph> このコマンドについて</entry></row></thead>
+<tbody>
+<row>
+<entry><codeph>--location <varname>&lt;location&gt;</varname></codeph></entry>
+<entry><varname>&lt;location&gt;</varname> を、新しいクラスターを作成する場所に置き換えます。
+使用可能な場所を確認するには、<codeph>bx cs locations</codeph> を実行します。元のクラスターと同じ場所にクラスターを作成することを選択すると、キャパシティー上の理由でクラスターの作成に失敗する可能性があります。
+</entry></row>
+<row>
+<entry><codeph>--public-vlan <varname>&lt;public_vlan_id&gt;</varname></codeph></entry>
+<entry>既存のパブリック VLAN がある場合は、その VLAN を指定します。対象のアカウントで使用可能なパブリック VLAN とプライベート VLAN をリストするには、<codeph>bx cs vlans <varname>&lt;location&gt;</varname></codeph> を実行します。
+パブリック VLAN ルーターとプライベート VLAN ルーターをクラスターで使用するためには、それらのルーターが同じ場所になければなりません。
+CLI 出力では、プライベート VLAN ルーターは常に <systemoutput>bcr</systemoutput> (バックエンド・ルーター) で始まり、パブリック VLAN ルーターは常に <systemoutput>fcr</systemoutput> (フロントエンド・ルーター) で始まります。クラスターを作成するときにこれらの VLAN を使用するには、それらの接頭部の後に続く数値と文字の組み合わせが一致していなければなりません。
+<p>この場所にパブリック VLAN がまだない場合は、このオプションを指定しないでください。
+この場所用のパブリック VLAN を <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> がユーザーに代わって自動的に作成します。
+</p></entry></row>
+<row>
+<entry><codeph>--private-vlan <varname>&lt;private_vlan_id&gt;</varname></codeph></entry>
+<entry>既存のプライベート VLAN がある場合は、その VLAN を指定します。対象のアカウントで使用可能なプライベート VLAN をリストするには、<codeph>bx cs vlans <varname>&lt;location&gt;</varname></codeph> を実行します。
+パブリック VLAN ルーターとプライベート VLAN ルーターをクラスターで使用するためには、それらのルーターが同じ場所になければなりません。
+CLI 出力では、プライベート VLAN ルーターは常に <systemoutput>bcr</systemoutput> (バックエンド・ルーター) で始まり、パブリック VLAN ルーターは常に <systemoutput>fcr</systemoutput> (フロントエンド・ルーター) で始まります。クラスターを作成するときにこれらの VLAN を使用するには、それらの接頭部の後に続く数値と文字の組み合わせが一致していなければなりません。
+<p>この場所にプライベート VLAN がまだない場合は、このオプションを指定しないでください。
+この場所用のプライベート VLAN を <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> がユーザーに代わって自動的に作成します。
+</p></entry></row>
+<row>
+<entry><codeph>--machine-type <varname>&lt;machine_type&gt;</varname></codeph></entry>
+<entry><varname>&lt;machine_type&gt;</varname> を、ワーカーに使用するマシン・タイプに置き換えます。
+使用可能なマシン・タイプをすべてリストするには、<codeph>bx cs machine-types <varname>&lt;location&gt;</varname></codeph> を実行します。ベータ版クラスターで使用されたマシン・タイプを確認するには、<codeph>bx cs workers <varname>&lt;cluster&gt;</varname></codeph> を実行します。</entry></row>
+<row>
+<entry><codeph>--workers <varname>&lt;number&gt;</varname></codeph></entry>
+<entry><varname>&lt;number&gt;</varname> を、クラスターに追加するワーカー・ノードの数に置き換えます。
+</entry></row>
+<row>
+<entry><codeph>--name <varname>&lt;name&gt;</varname></codeph></entry>
+<entry><varname>&lt;name&gt;</varname> をクラスターの名前に置き換えます。</entry></row></tbody></tgroup></table></info></step>
+<step>
+<cmd>新しいクラスターが完全にデプロイされたことを確認します。</cmd>
+<info>
+<codeblock>bx cs workers &lt;cluster&gt;</codeblock>ワーカー・ノードの準備が完了すると、状態が <uicontrol>normal</uicontrol> に変わり、状況が <uicontrol>Ready</uicontrol> になります。</info></step>
+<step>
+<cmd>クラスターが完全にデプロイされたら、CLI でそのクラスターをターゲットとして設定します。</cmd><substeps id="substeps_hvh_yr4_zz">
+<substep>
+<cmd>環境変数を設定して Kubernetes 構成ファイルをダウンロードするためのコマンドを取得します。
+</cmd>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> cluster-config <varname>&lt;cluster_name_or_id&gt;</varname></codeblock></info>
+<info> </info></substep>
+<substep>
+<cmd><codeph>KUBECONFIG</codeph> 環境変数を設定するためのコマンドとしてターミナルに表示されたものを、コピーして貼り付けます。
+</cmd></substep></substeps></step>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウントに含まれるユーザーに、<xref href="cs_cluster_user.dita">クラスターに対するアクセス権限を付与</xref>します。
+</cmd></step>
+<step>
+<cmd>ユーザー独自の Kubernetes 名前空間を以前に作成した場合は、クラスター内にその名前空間を再作成します。</cmd>
+<info>デフォルトの名前空間の ibm-system と kube-system は、再作成する必要はありません。</info>
+<info><varname>&lt;my_namespace&gt;</varname> を、名前空間の名前に置き換えます。再作成するすべての名前空間についてこのステップを繰り返します。
+<codeblock>kubectl create namespace <varname>&lt;my_namespace&gt;</varname></codeblock></info></step>
+<step>
+<cmd>プライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリーをセットアップします。
+</cmd>
+<info><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 実稼働環境でクラスターを作成すると、クラスターのデフォルトの名前空間に対して新しい imagePullSecret が自動的に作成されます。
+この imagePullSecret を使用して、プライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリーに保管されているイメージから、クラスターのデフォルトの名前空間にコンテナーをデプロイできます。
+追加のセットアップは不要です。
+<p>元のクラスター内の他の名前空間にコンテナーをデプロイした場合は、コンテナーをデプロイする新しいクラスター内のすべての Kubernetes 名前空間ごとに、imagePullSecret を再作成する必要があります。
+imagePullSecret を再作成するには、<xref href="cs_apps_images.dita#bx_registry_other"></xref>のステップを確認してください。</p>
+<p>クラスターで他のプライベート・レジストリーを使用するには、<xref href="cs_apps_images.dita#private_registry"></xref>を参照してください。</p></info></step>
+<step>
+<cmd><xref href="https://kubernetes.io/docs/concepts/configuration/secret" format="html" scope="external">ベータ版で Kubernetes シークレットを作成した場合は、それらを再作成します。</xref></cmd></step>
+<step>
+<cmd>クラスターに <xref href="cs_cluster_service.dita"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスを再追加</xref>します。</cmd>
+<info>元のクラスターで使用していた <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスを新しいクラスターに再追加する必要があります。こうすることで、サービスにアクセスするための資格情報が Kubernetes シークレットとしてクラスターに保管されます。
+元のクラスター用のバインド済みサービスを確認するには、ベータ版クラスターにログインし、<codeph>bx cs cluster-services <varname>&lt;cluster_name_or_id&gt;</varname> --all-namespaces</codeph> を実行します。</info></step>
+<step>
+<cmd>ベータ版で永続ストレージを作成した場合は、それを再作成します。</cmd>
+<info>既存の NFS ファイル共有内のデータを再使用するには、新しいクラスター内に別の NFS ファイル共有を作成し、それにデータを手動でマイグレーションする必要があります。
+</info><substeps id="substeps_ivh_yr4_zz">
+<substep>
+<cmd><xref href="cs_apps_volume_claim.dita">永続ボリューム請求を作成</xref>して新しいクラスター用の永続 NFS ファイル共有をプロビジョンし、永続ボリューム請求を使用するポッドをデプロイします。
+</cmd></substep>
+<substep>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> ベータ版環境にログインして元の永続ストレージにアクセスします。
+</cmd>
+<info>
+<codeblock>bx cs init --host http://us-south-beta.containers.bluemix.net</codeblock></info></substep>
+<substep>
+<cmd>環境変数を設定して Kubernetes 構成ファイルをダウンロードするためのコマンドを取得します。
+</cmd>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> cluster-config <varname>&lt;cluster_name_or_id&gt;</varname></codeblock></info></substep>
+<substep>
+<cmd><codeph>KUBECONFIG</codeph> 環境変数を設定するためのコマンドとしてターミナルに表示されたものを、コピーして貼り付けます。
+</cmd></substep>
+<substep>
+<cmd>ポッドのボリューム・マウント・ポイントをリストします。<varname>&lt;pod_name&gt;</varname> を、マウント・ポイントをリストするポッドの名前に置き換えます。
+</cmd>
+<info>
+<note>元のクラスターで実行されているポッドごとにこのステップを繰り返して、永続ストレージを使用しているポッドを見つけます。
+</note>
+<codeblock>kubectl describe pod <varname>&lt;pod_name&gt;</varname></codeblock>CLI 出力の <uicontrol>VolumeMounts</uicontrol> セクションに、ボリューム・マウント・ポイントがリストされます。</info></substep>
+<substep>
+<cmd>ボリューム・マウント・ポイントの内容をローカル・ディレクトリーにコピーします。</cmd>
+<info><varname>&lt;pod_name&gt;</varname> を、ボリュームをマウントするポッドに置き換え、<varname>&lt;volume_mount_point&gt;</varname> を、前のステップで取得したボリューム・マウント・ポイントに置き換えます。
+ボリュームのデータを保管するローカル・マシン上のディレクトリーを選択し、<varname>&lt;local_directory&gt;</varname> を、そのローカル・ディレクトリーへのパスに置き換えます。
+<codeblock>kubectl cp <varname>&lt;pod_name&gt;</varname>:<varname>&lt;volume_mount_point&gt;</varname> <varname>&lt;local_directory&gt;</varname></codeblock></info></substep>
+<substep>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 実稼働環境にログインし、対象のクラスターに対して <codeph>kubectl</codeph> コマンドを実行するよう CLI を構成します。</cmd>
+<info>
+<codeblock>bx cs init --host https://us-south.containers.bluemix.net</codeblock>
+
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> cluster-config <varname>&lt;cluster_name_or_id&gt;</varname></codeblock></info></substep>
+<substep>
+<cmd>ローカル・コンピューター上のデータを、先ほど作成したポッドにマウントされているボリュームにコピーします。
+</cmd>
+<info>
+<codeblock>kubectl cp <varname>&lt;local_directory&gt;</varname> <varname>&lt;pod_name&gt;</varname>:/<varname>&lt;volume_mount_point&gt;</varname>/</codeblock></info></substep>
+<substep>
+<cmd>ポッドにログインします。</cmd>
+<info>
+<codeblock>kubectl exec -it <varname>&lt;pod_name&gt;</varname> bash</codeblock></info></substep>
+<substep>
+<cmd>ボリューム・マウント・ポイントに移動します。</cmd>
+<info>
+<codeblock>cd <varname>&lt;volume_mount_point&gt;</varname></codeblock></info></substep>
+<substep>
+<cmd>データが正常にコピーされていることを確認します。</cmd>
+<info>
+<codeblock>ls</codeblock></info></substep></substeps></step>
+<step>
+<cmd>ベータ版でクラスターにアプリをデプロイした場合は、ポッド、レプリカ・セット、デーモン・セットを含めて、それらのリソースを再作成します。
+</cmd>
+<info>以前にそれらのリソースをデプロイするために使用した構成スクリプト、Helm チャート、またはパイプラインを使用できます。
+リソースの作成について詳しくは、<xref href="cs_apps_ui.dita" format="dita" scope="local"></xref>を参照してください。ポッドに <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスを組み込むには、<xref href="cs_apps_service.dita">サービス資格情報が保持されているシークレットをボリュームとしてポッドにマウントします</xref>。
+<note>元のポータブル・パブリック・サブネットを再使用することを選択した場合は、ロード・バランサー・サービスまたは Ingress を使用してアプリを公開することはまだ行わないでください。
+ポータブル・パブリック・サブネットを再使用するためには、まずクラスターを削除する必要があります。
+Nodeport サービスのパブリック IP アドレスは、ワーカー・ノードのパブリック IP アドレスに基づきます。
+この IP アドレスは静的ではなく、新しいクラスターの作成に伴って変わります。
+新しいクラスター用の Nodeport サービスを再作成できます。クラスターを新しいポータブル・パブリック・サブネットとともに作成することを選択した場合は、<xref href="cs_apps_public.dita">ロード・バランサー・サービスと Ingress リソースを再作成する</xref>こともできます。</note></info></step>
+<step>
+<cmd><xref href="cs_planning_integrations.dita">ベータ版でクラスターに統合を追加した場合は、それらを再追加します</xref>。</cmd></step>
+<step>
+<cmd>準備ができたら、ベータ版環境からクラスターを、永続ストレージもろとも、削除します。
+</cmd><substeps id="substeps_jvh_yr4_zz">
+<substep>
+<cmd>ベータ版環境にログインし、対象のクラスターに対して <codeph>kubectl</codeph> コマンドを実行するよう CLI を構成します。
+</cmd>
+<info>
+<codeblock>bx cs init --host https://us-south-beta.containers.bluemix.net</codeblock>
+
+<codeblock>bx cs cluster-config <varname>&lt;cluster_name&gt;</varname></codeblock></info></substep>
+<substep>
+<cmd>クラスター内の永続ボリューム請求をリストします。</cmd>
+<info>
+<codeblock>kubectl get pvc</codeblock></info></substep>
+<substep>
+<cmd>クラスターから永続ボリューム請求を削除します。</cmd>
+<info><varname>&lt;pvc_name&gt;</varname> を、先ほど取得した永続ボリューム請求の名前に置き換えます。
+永続ボリューム請求を削除すると、永続ボリュームと接続された NFS ファイル共有が自動的に削除されます。
+<codeblock>kubectl delete pvc <varname>&lt;pvc_name&gt;</varname></codeblock></info></substep>
+<substep>
+<cmd>クラスターを削除します。</cmd>
+<info>
+<note type="warning">クラスターを削除すると、コンテナー、ポッド、シークレットなど、クラスター内のすべてのリソースも削除されます。
+クラスターを削除すると、使用されていたポータブル・パブリック IP アドレスが解放され、新しいクラスターで再使用できるようになります。
+</note>
+
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> cluster-rm <varname>&lt;my_cluster&gt;</varname></codeblock></info></substep></substeps></step>
+<step>
+<cmd>元のクラスターのポータブル・パブリック IP アドレスを再使用するためにサブネットなしでクラスターを作成した場合は、そのサブネットを新しいクラスターで使用できるようにします。
+</cmd><substeps id="substeps_kvh_yr4_zz">
+<substep>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 実稼働環境にログインし、対象のクラスターに対して <codeph>kubectl</codeph> コマンドを実行するよう CLI を構成します。</cmd>
+<info>
+<codeblock>bx cs init --host https://us-south.containers.bluemix.net</codeblock>
+
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> cluster-config <varname>&lt;cluster_name_or_id&gt;</varname></codeblock></info></substep>
+<substep>
+<cmd>使用可能なサブネットをリストし、新しいクラスターで再使用するサブネット ID をメモします。</cmd>
+<info>
+<codeblock>bx cs subnets</codeblock></info></substep>
+<substep>
+<cmd>サブネットを新しいクラスターで使用できるようにします。</cmd>
+<info><varname>&lt;subnet_id&gt;</varname> を、前のステップで取得したサブネットの ID に置き換えます。
+<codeblock>bx cs cluster-subnet-add <varname>&lt;subnet_id&gt;</varname></codeblock>サブネットを新しいクラスターで使用できるようにすると、Ingress コントローラーが自動的に作成され、元のクラスターで使用していたのと同じポータブル・パブリック IP アドレスが割り当てられます。
+同時に、4 つのポータブル・パブリック IP アドレスがクラスターに追加されます。これらの IP アドレスを使用して、元のクラスターで使用していたのと同じ IP アドレスでロード・バランサー・サービスを再作成できます。
+<note>新しい Ingress コントローラーに同じパブリック IP アドレスを割り当てることができます。ただし、Ingress コントローラーに割り当てられるパブリック経路は、クラスターによって異なるため、再使用できません。</note></info></substep>
+<substep>
+<cmd><xref href="cs_apps_public.dita#cs_apps_public_load_balancer" format="dita" scope="local">ロード・バランサー・サービスを作成することによってアプリを公開し、ロード・バランサー IP アドレスを割り当てます</xref>。</cmd></substep>
+<substep>
+<cmd><xref href="cs_apps_public.dita#cs_apps_public_ingress" format="dita" scope="local">Ingress コントローラーを使用して、アプリを公開します</xref>。</cmd>
+<info>IBM 提供ドメインを使用している場合は、Ingress コントローラーの新しいドメインを指すように構成スクリプトを更新します。</info></substep>
+<substep>
+<cmd>カスタム・ドメインを使用していた場合は、ドメイン・ネーム・サービス (DNS) プロバイダーに連絡して、IBM 提供の新しいドメインを指すように Canonical Name レコード (CNAME) エントリーを更新します。</cmd>
+<info>IBM 提供の Ingress ドメインを確認するには、<systemoutput>bx cs cluster-get &lt;mycluster&gt;</systemoutput> を実行して、「Ingress サブドメイン (Ingress subdomain)」フィールドを探します。</info></substep></substeps></step></steps></taskbody>
+<task id="no_downtime">
+<title>ダウン時間なしでパブリック・アプリを新しいクラスターにマイグレーションする</title>
+<shortdesc>
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> ベータ版から実稼働環境にパブリック・アプリをマイグレーションする際のパブリック・アプリのダウン時間を回避できます。
+そうするには、アプリをパブリックに公開し、それらをカスタム・ドメインのロード・バランシングに組み込みます。
+</shortdesc>
+<taskbody>
+<context id="context_dqc_p4l_yz">Ingress コントローラーとロード・バランサー・サービス用のカスタム・ドメインをセットアップした場合は、そのドメインを使用できます。
+<note>アプリのダウン時間を回避するには、ポータブル・パブリック・サブネットを新しいクラスターとともに作成する必要があります。
+ポータブル・パブリック・サブネットは、Ingress コントローラーとロード・バランサー・サービスで使用できる新しいポータブル・パブリック IP アドレスを備えています。
+<p>元のパブリック IP アドレスを再使用する場合は、パブリック・アプリをマイグレーションする際に必ずダウン時間が発生します。ポータブル・パブリック・サブネットと IP アドレスを再使用するためには、まずクラスターを削除する必要があるからです。
+</p></note><p>ダウン時間なしでパブリック・アプリをマイグレーションするには、以下のようにします。</p></context>
+<steps id="steps_l2p_4ql_yz">
+<step>
+<cmd><xref href="cs_beta_migrate_cluster.dita#cs_beta_migrate_cluster_top" format="dita" scope="local">ベータ版から実動への Kubernetes クラスターのマイグレーション</xref>の手順に従って、新しいクラスターをサブネットとともにセットアップし、Kubernetes リソースとクラスター・リソースを再作成して、ロード・バランサーまたは Ingress サポートを使用してアプリを公開します。</cmd>
+<info>元のクラスターはまだ削除しないでください。</info></step>
+<step>
+<cmd>新しいクラスターの Ingress コントローラーに着信ネットワーク・トラフィックがルーティングされるようにカスタム・ドメインを構成します。
+以下のオプションの中から選択できます。</cmd>
+<info>
+<ul id="ul_tjk_wrl_yz">
+<li>IBM 提供の Ingress ドメインを Canonical Name レコード (CNAME) としてカスタム・ドメインの別名のリストに追加する。
+IBM 提供の Ingress ドメインを確認するには、<systemoutput>bx cs cluster-get &lt;mycluster&gt;</systemoutput> を実行して、「Ingress サブドメイン (Ingress subdomain)」フィールドを探します。</li>
+<li>IBM 提供の Ingress ドメインの IP アドレスをポインター・レコード (PTR) としてカスタム・ドメインに追加する。
+Ingress コントローラーの IP アドレスを確認するには、次のようにします。<ol id="ol_xh5_4sl_yz">
+<li><systemoutput>bx cs cluster-get &lt;mycluster&gt;</systemoutput> を実行して、<uicontrol>「Ingress サブドメイン (Ingress subdomain)」</uicontrol>フィールドを探します。</li>
+<li><systemoutput>nslookup <varname>&lt;Ingress host&gt;</varname></systemoutput> を実行します。</li></ol></li></ul>Ingress コントローラー・ドメインまたは IP アドレスをカスタム・ドメインに追加することにより、新しいクラスターのパブリック・アプリがカスタム・ドメインのロード・バランシングに組み込まれます。
+</info></step>
+<step>
+<cmd>新しいクラスター内のロード・バランサー・サービスに着信ネットワーク・トラフィックがルーティングされるようにカスタム・ドメインを構成します。
+</cmd><substeps id="substeps_rrr_zsl_yz">
+<substep>
+<cmd>ロード・バランサー・サービスのパブリック IP アドレスを取得します。</cmd>
+<info>
+<codeblock>kubectl get services</codeblock>ロード・バランサー・サービスのパブリック IP アドレスは、CLI 出力の <uicontrol>External-IP</uicontrol> としてリストされます。</info></substep>
+<substep>
+<cmd>ロード・バランサー・サービスのパブリック IP アドレスをポインター・レコード (PTR) としてカスタム・ドメインに追加します。
+</cmd></substep></substeps></step>
+<step>
+<cmd>新しいクラスターの公開アプリへの着信ネットワーク要求のルーティングをテストします。</cmd></step>
+<step>
+<cmd>準備が完了したら、DNS プロバイダーに連絡して、元のクラスターにデプロイされているアプリを、カスタム・ドメインのロード・バランシングから削除します。
+</cmd><substeps id="substeps_n3w_htl_yz">
+<substep>
+<cmd>元のクラスターの Ingress コントローラー・ドメインを別名のリストから削除します。</cmd></substep>
+<substep>
+<cmd>PTR レコードとなっている Ingress コントローラーとロード・バランサー・サービスの IP アドレスを、カスタム・ドメインから削除します。
+</cmd></substep></substeps></step>
+<step>
+<cmd><xref href="cs_beta_migrate_cluster.dita#cs_beta_migrate_cluster_top" format="dita" scope="local">ベータ版から実動への Kubernetes クラスターのマイグレーション</xref>の手順に従って、元のクラスターを削除します。</cmd></step></steps></taskbody></task></task>

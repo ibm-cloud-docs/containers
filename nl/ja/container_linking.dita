@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="container_linking" xml:lang="ja-jp">
+<title>コマンド・ライン・インターフェース (CLI) による単一コンテナーのリンク</title>
+<titlealts>
+<navtitle>CLI によるコンテナーのリンク</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の CLI を使用した単一コンテナーのリンク</searchtitle></titlealts>
+<shortdesc>あるコンテナーが同じスペース内の別のコンテナーにリンクされると、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> は、宛先コンテナー上にソース・コンテナー用のホスト・エントリーを作成します。ソース・コンテナーを参照するために、頻繁に変わる可能性のある特定の IP アドレスではなく、別名を使用することができます。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コマンド・ライン</indexterm><indexterm>コンテナー</indexterm><indexterm>リンク</indexterm><indexterm>リンク</indexterm><indexterm>--link</indexterm><indexterm>IBM Containers</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context><p>単一コンテナーが、イメージ (<codeph>dbimage</codeph> など) を実行している別のコンテナーと通信するようにしたい場合、ホスト名の別名 (<codeph>dbserver</codeph> など) を使用してそのコンテナーのアドレスを指定できます。この機能を利用して、IP アドレスまたは実際の名前が何かに関わらず <codeph>dbserver</codeph> ホスト名を使用してデータベース・サーバー・イメージを参照する、
+<codeph>webserver</codeph> イメージを作成できます。構成または IP 情報を引き渡す必要なく、
+同じイメージ内でこのペアの多くのインスタンスを実行できます。常にデータベース・サーバーを <codeph>dbserver</codeph> として参照することができます。</p>
+<draft-comment>Is this confusing image and container here?</draft-comment></context>
+<steps>
+<step>
+<cmd>以下のコマンドを実行して、ソース・コンテナーを作成します。*</cmd>
+<info>
+<note type="tip">ポートを公開するために <codeph>-p</codeph> オプションを含めるようにしてください。
+これによって、そのポート番号が宛先コンテナーに公開されます。Dockerfile 内で、EXPOSE ステートメントでイメージ内に公開されるポートは、現在はリンク・ランタイムによって使用されていません。</note>
+<note type="tip"><ph conref="container_conref.dita#terms/namespace_get"></ph></note>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> run -p <varname>&lt;port&gt;</varname> --name <varname>&lt;source_container_name&gt;</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>&lt;my_namespace&gt;</varname>/<varname>&lt;source_container_image_name&gt;</varname> </codeblock>例<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> run -p <varname>17546</varname> --name <varname>source</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>&lt;my_namespace&gt;</varname>/<varname>dbimage</varname> </codeblock>
+<note conref="container_conref.dita#links/docker_note"></note></info></step>
+<step>
+<cmd>以下のコマンドを実行して、宛先コンテナーを作成し、ソース・コンテナーにリンクします。*</cmd>
+<info>alias には、ソース・コンテナーで使用される、イメージのカスタム名を選択します。<option>-p</option> オプションを複数回含めることによって、宛先コンテナー用の複数のポートをホスト・コンテナーに公開することができます。</info>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> run -p <varname>&lt;port&gt;</varname> -p <varname>&lt;port&gt;</varname> --name <varname>&lt;recipient_container_name&gt;</varname> --link <varname>&lt;source_container_name&gt;</varname>:<varname>&lt;alias&gt;</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>&lt;my_namespace&gt;</varname>/<varname>&lt;recipient_container_image_name&gt;</varname> </codeblock>例<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> run -p 12534 -p 15256 --name <varname>recipient</varname> --link <varname>source</varname>:<varname>dbserver</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>&lt;my_namespace&gt;</varname>/<varname>webserver</varname> </codeblock>
+<p>宛先コンテナーの ID が表示される場合、そのコンテナーはリンクされています。</p></info></step>
+<step importance="optional">
+<cmd><codeph>exec</codeph> を使用してコンテナーにログインし、リンクによって注入された環境変数を確認します。*
+</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> exec -it <varname>&lt;recipient_container_name&gt;</varname> bash </codeblock></info>
+<stepresult>
+<p>bash ウィンドウで <codeph>env</codeph> コマンドを実行して、別名の詳細情報を確認します。
+<codeblock>"Env": [
+    "<varname>&lt;alias&gt;</varname>_PORT_&lt;source_container_port&gt;/tcp_TCP_PORT=&lt;source_container_port&gt;/tcp",
+    "<varname>&lt;alias&gt;</varname>_PORT_&lt;source_container_port&gt;/tcp_TCP=tcp://<varname>&lt;recipient_container_private_IP&gt;</varname>:&lt;source_container_port&gt;/tcp",
+    "<varname>&lt;alias&gt;</varname>_ENV_space_id=<varname>&lt;space_ID&gt;</varname>",
+    "logging_password=",
+    "space_id=<varname>&lt;space_ID&gt;</varname>",
+    "logstash_target=logs.opvis.bluemix.net:9091",
+    "<varname>&lt;alias&gt;</varname>_PORT_<varname>&lt;source_container_port&gt;</varname>/tcp_TCP_ADDR=<varname>&lt;recipient_container_private_ip&gt;</varname>",
+    "<varname>&lt;alias&gt;</varname>_ENV_metrics_target=metrics.opvis.bluemix.net:9095",
+    "<varname>&lt;alias&gt;</varname>_NAME=/<varname>&lt;recipient_container&gt;</varname>/<varname>&lt;alias&gt;</varname>",
+    "<varname>&lt;alias&gt;</varname>_ENV_logstash_target=logs.opvis.bluemix.net:9091",
+    "<varname>&lt;alias&gt;</varname>_ENV_logging_password=",
+    "<varname>&lt;alias&gt;</varname>_PORT_<varname>&lt;source_container_port&gt;</varname>/tcp_TCP_PROTO=tcp",
+    "metrics_target=metrics.opvis.bluemix.net:9095"
+],</codeblock></p></stepresult></step></steps></taskbody><?tm 1435623319 1?></task>

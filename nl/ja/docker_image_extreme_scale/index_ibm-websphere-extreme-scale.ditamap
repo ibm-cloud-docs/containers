@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Template for new onboarded images. Replace all instances of imagename with the name of the image, all lower case with no spaces. If it's an IBM image, preface it with ibm so it stands out against 3rd party images. For example, ibmliberty.-->
+<!DOCTYPE map PUBLIC "-//IBM//DTD DITA IBM Map//EN"
+ "ibm-map.dtd">
+<map xml:lang="ja-jp">
+<title>WebSphere eXtreme Scale イメージ<!--Use this format as this will pull your docs automated into the build.--></title>
+<topicmeta>
+<copyright>
+<copyryear year="2014"></copyryear>
+<copyryear year="2017"></copyryear>
+<copyrholder>IBM</copyrholder></copyright></topicmeta><!--Don't forget to remove the audience=unknown tag in the map tag! For the docs to appear in staging only, use audience=blue. Delete this tag entirely for the docs to be allowed into production builds. (You will still need to request a build.)-->
+<topicref navtitle="ibm-websphere-extreme-scale" href="ibm-websphere-extreme-scale_starter.dita" scope="local" format="dita" chunk="to-content"></topicref></map>

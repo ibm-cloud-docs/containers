@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="container_ml_dash_logs_custom" xml:lang="ja-jp">
+<title>ログ表示をカスタマイズするための Kibana ダッシュボードの作成</title>
+<titlealts>
+<navtitle>ログ表示をカスタマイズするための Kibana ダッシュボードの作成</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アプリ用のログ表示をカスタマイズするための Kibana ダッシュボードの作成</searchtitle></titlealts><abstract>
+<shortdesc>カスタム・ダッシュボードを作成して、シンプルな、あるいはクリエイティブな方法で、スペースで実行するコンテナーのログを表示します。Kibana を使用して、クローラーによって収集されたすべてのログを確認します。
+7 GB までのデータを最大 7 日間検索可能です。
+</shortdesc></abstract>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>ログ</indexterm><indexterm>ロギング</indexterm><indexterm>kibana</indexterm><indexterm>logmet</indexterm></keywords></metadata></prolog>
+<taskbody>
+<prereq><p>まず、Kibana ユーザー・インターフェースにログインします。<ol>
+<li><filepath>https://logmet.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/</filepath> を開きます。</li>
+<li>Bluemix ID、パスワード、スペース、組織を入力します。</li>
+<li><uicontrol>「Kibana」</uicontrol>を選択します。</li>
+<li><uicontrol>「ログイン」</uicontrol>をクリックします。開いたダッシュボードがデフォルトのダッシュボードであり、その URL は
+<filepath>https://logmet.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/kibana/#/dashboard/file/default.json</filepath> です。</li></ol></p>
+<p>(オプション) カスタマイズするデフォルトまたはサンプルのダッシュボードを保存するには、以下のステップを実行します。<ol>
+<li>デフォルトのダッシュボードまたは次のサンプル・ダッシュボードのいずれかを開きます。<ul>
+<li audience="blue">https://logmet.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/kibana/#/dashboard/file/blank.json</li>
+<li audience="blue">https://logmet.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/kibana/#/dashboard/file/guided.json</li>
+<li>https://logmet.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/kibana/#/dashboard/script/logstash.js</li>
+<li>https://logmet.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/kibana/#/dashboard/file/logstash.json</li>
+<li audience="blue">https://logmet.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/kibana/#/dashboard/file/noted.json</li></ul></li>
+<li>このダッシュボードを新しいダッシュボードとして保存します。<ol>
+<li>ツールバーで、<uicontrol>「保存」</uicontrol>アイコンをクリックします。</li>
+<li>ダッシュボードの名前を入力します。</li>
+<li>名前フィールドの隣にある<uicontrol>「保存」</uicontrol>アイコンをクリックします。</li></ol></li>
+<li>ログが何も表示されない場合は、ヘッダーにあるタイム・ピッカーを調整してください。</li></ol></p></prereq>
+<postreq>Kibana ダッシュボードのカスタマイズについて詳しくは、<xref href="https://developer.ibm.com/bluemix/2015/09/29/creating-custom-kibana-dashboard-in-bluemix/" format="html" scope="external">このブログ投稿</xref>または <xref href="http://www.elastic.co/guide/en/kibana/current/index.html" type="" format="html" scope="external">Kibana の資料</xref>を参照してください。</postreq></taskbody></task>

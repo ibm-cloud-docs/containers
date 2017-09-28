@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="container_cli_ips_byoip" xml:lang="ja-jp">
+<title>独自のプライベート IP アドレスを使う</title>
+<titlealts>
+<navtitle>独自のプライベート・アドレスを使う</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で独自のプライベート IP アドレスを使う</searchtitle></titlealts>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の中にコンテナーを作成すると、それにはデフォルトの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> ネットワーク設定値に基づくプライベート IP アドレスが割り当てられます
+アプリでカスタム・サブネットと IP アドレス範囲が必要な場合、スペース内に独自のプライベート・オーバーレイ・ネットワークを作成し、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のデフォルト設定と置き換えることができます。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>IP アドレス</indexterm><indexterm>プライベート</indexterm><indexterm>IBM Containers</indexterm><indexterm>ネットワーク</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context><note>コンテナー・ネットワークは、1 つのスペースに対して 1 つのみ作成できます。
+複数のコンテナー・ネットワークはサポートされていません。
+<draft-comment author="bpratt">Internal quota for networks is 5. Currently we are only
+exposing 1 network container per space to external users.</draft-comment></note></context>
+<steps>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> にログインします。</cmd>
+<info>
+<codeblock>cf login [-a api.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>] [-sso]</codeblock>
+
+<p><ph id="sso">フェデレーテッド ID を使用してログインする場合は、シングル・サインオン・パラメーター <option>-sso</option> が必要です。
+このオプションを使用する場合は、<xref href="https://login.ng.bluemix.net/UAALoginServerWAR/passcode" format="html" scope="external">https://login.ng.bluemix.net/UAALoginServerWAR/passcode</xref> を開いて、ワンタイム・パスコードを取得します。
+<option>-sso</option> オプションを含めない場合は、以下のサブステップを実行します。</ph></p></info><substeps id="no_sso">
+<substep>
+<cmd><uicontrol>「E メール」</uicontrol>に、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> の <tm trademark="IBM" tmtype="reg">IBM</tm> ID を入力します。</cmd></substep>
+<substep>
+<cmd><uicontrol>「パスワード」</uicontrol>に、<tm trademark="IBM" tmtype="reg">IBM</tm> ID のパスワードを入力します。</cmd>
+<info><tm trademark="Bluemix" tmtype="tm">Bluemix</tm> の組織とスペースが取得されました。</info></substep>
+<substep>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 組織の 1 つを表す数値を入力します。</cmd></substep>
+<substep>
+<cmd>既存の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースの 1 つを表す数値を入力します。</cmd></substep></substeps></step>
+<step>
+<cmd>組織内にスペースを作成します。
+</cmd>
+<info>デフォルトのネットワーク設定を置き換えるには、スペースは新しいもの (すなわち、それまでに <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で使用されたことがないもの) でなければなりません。
+以下の例では、<varname>dev2</varname> という名前のスペースを作成しています。
+<codeblock>cf create-space dev2</codeblock></info></step>
+<step>
+<cmd>新しいスペースをターゲットとします。</cmd>
+<info>
+<codeblock>cf target -s dev2</codeblock></info></step>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI を初期化します。</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> init</codeblock></info></step>
+<step importance="optional">
+<cmd>組織の名前空間を設定します。</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> namespace-set <varname>&lt;my_namespace&gt;</varname></codeblock></info></step>
+<step>
+<cmd>デフォルトのネットワーク設定の代わりに使用するカスタム・プライベート・オーバーレイ・ネットワークを作成します。</cmd>
+<info>
+<note>すべての <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースに、<uicontrol>default</uicontrol> という名前のコンテナー・ネットワークが 1 つずつ存在しています。<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> ネットワーク設定を置き換えるには、カスタム・プライベート・ネットワークを作成し、それにも <uicontrol>default</uicontrol> という名前を付ける必要があります。
+</note>
+
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> network-create --subnet=<varname>SUBNET</varname> [--ip-range=<varname>IP-RANGE</varname>] [--gateway=<varname>GATEWAY</varname>] default</codeblock>
+
+<dl>
+<dlentry>
+<dt>コマンドの中で置換する必要のあるパラメーター</dt>
+<dd conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/subnet"></dd>
+<dd conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/iprange"></dd>
+<dd conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/gateway"></dd></dlentry></dl></info></step>
+<step>
+<cmd>カスタム・ネットワークが作成されており、そのネットワークの設定が新しいコンテナーに適用されていることを確認します。
+</cmd><substeps>
+<substep>
+<cmd>ネットワークを調べます。
+</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> network-inspect default</codeblock>例<codeblock>$ <ph conref="container_conref.dita#links/command_prefix"></ph> network-inspect default
+[
+    {
+        "Name": "default",
+        "Id": "f7fada65-db5c-47bb-bc2c-14a8e99d709b",
+        "Scope": "space",
+        "Driver": "ibm-containers",
+        "IPAM": {
+            "Driver": "user-network",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "192.0.2.0/24",
+                    "IPRange": "192.0.2.100/30",
+                    "Gateway": "192.0.2.1"
+                }
+            ]
+        },
+        "Containers": {},
+        "Options": {}
+    }
+]</codeblock></info></substep>
+<substep>
+<cmd>カスタム・ネットワークの設定を使用してコンテナーを作成します。
+</cmd>
+<info>作成するコンテナーはすべて自動的にデフォルト・ネットワークに接続され、ネットワークの設定に合致するプライベート IP アドレスが割り当てられます。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> run --name testcontainer registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/ibmliberty</codeblock></info></substep>
+<substep>
+<cmd>カスタム・ネットワークの設定がコンテナーに適用されていることを確認します。
+</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> inspect testcontainer</codeblock>コンテナーに割り当てられているプライベート IP アドレスは、CLI 応答の <uicontrol>NetworkSettings</uicontrol> セクションで確認できます。
+<codeblock> $ <ph conref="container_conref.dita#links/command_prefix"></ph> inspect testcontainer
+...
+"NetworkSettings": {
+        "Bridge": "",
+        "Gateway": "",
+        "IPAddress": "192.0.2.100",
+        "IPPrefixLen": 0,
+        "MacAddress": "ab:21:2e:cb:25:ty",
+        "Networks": {
+            "default": {
+                "Aliases": null,
+                "EndpointID": "d7c5eeaf-b53f-4abf-bf67-b466504b82b3",
+                "Gateway": "192.0.2.1",
+                "GlobalIPv6Address": "",
+                "GlobalIPv6PrefixLen": 0,
+                "IPAMConfig": null,
+                "IPAddress": "192.0.2.100",
+                "IPPrefixLen": 16,
+                "IPv6Gateway": "",
+                "Links": null,
+                "MacAddress": "ab:21:2e:cb:25:ty",
+                "NetworkID": "f7fada65-db5c-47bb-bc2c-14a8e99d709b"
+            }
+        }
+...</codeblock></info></substep></substeps></step></steps></taskbody></task>

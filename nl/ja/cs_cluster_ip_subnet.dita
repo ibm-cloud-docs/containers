@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="cs_cluster_ip_subnet" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でのポータブル・パブリック IP アドレスとサブネットの管理</title>
+<titlealts>
+<navtitle>IP アドレスとサブネットの管理</navtitle></titlealts>
+<shortdesc>ポータブル・パブリック・サブネットと IP アドレスを使用して、クラスター内のアプリを公開し、インターネットからアクセスできるようにすることができます。</shortdesc>
+<taskbody>
+<context id="subnet_intro"><p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> では、クラスターにネットワーク・サブネットを追加して、Kubernetes サービス用の安定したポータブル IP を追加できます。
+標準クラスターを作成すると、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> は、ポータブル・パブリック・サブネット 1 つと IP アドレス 5 つを自動的にプロビジョンします。
+ポータブル・パブリック IP アドレスは静的で、ワーカー・ノードまたはクラスターが削除されても変更されません。</p>
+<p>1 つのポータブル・パブリック IP アドレスは、<xref href="cs_apps_public.dita#cs_apps_public_ingress" format="dita">Ingress コントローラー</xref>用に使用されます。このコントローラーは、パブリック経路を使用してクラスター内の複数のアプリを公開するために使用できます。残りの 4 つのポータブル・パブリック IP アドレスは、<xref href="cs_apps_public.dita#cs_apps_public_load_balancer" format="dita">ロード・バランサー・サービスを作成して</xref>単一アプリをパブリックに公開するために使用できます。</p></context></taskbody>
+<task id="review_ip" audience="blue">
+<title>使用可能なポータブル・パブリック IP アドレスの表示</title>
+<shortdesc>クラスターで使用可能なパブリック IP アドレスをリスト表示できます。</shortdesc>
+<taskbody>
+<prereq id="prereq_fsv_hhr_5z"><xref href="cs_cli_configure.dita" format="dita" scope="local">始めに、使用するクラスターのコンテキストを設定してください。
+</xref></prereq>
+<context id="context_klz_bdm_5z"><draft-comment>This is staging content only. Currently we do not offer a good way to list available
+public IP addresses and whether they are already in use or not. </draft-comment></context>
+<steps id="steps_apt_3dm_5z">
+<step>
+<cmd><filepath>myservice.yaml</filepath> という Kubernetes サービス構成スクリプトを作成します。このスクリプトでは、ダミーのロード・バランサー IP アドレスを使用して <codeph>LoadBalancer</codeph> タイプのサービスを定義します。</cmd>
+<info>以下の例では、ロード・バランサー IP アドレスとして IP アドレス 1.1.1.1 を使用します。
+
+<codeblock>apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: myservice
+  name: myservice
+  namespace: default
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: myservice
+  sessionAffinity: None
+  type: LoadBalancer
+  loadBalancerIP: 1.1.1.1</codeblock></info></step>
+<step>
+<cmd>クラスター内にサービスを作成します。</cmd>
+<info>
+<codeblock>kubectl apply -f myservice.yaml</codeblock></info></step>
+<step>
+<cmd>サービスを検査します。</cmd>
+<info>
+<codeblock>kubectl describe service <varname>myservice</varname></codeblock>
+
+<note>Kubernetes マスターが、指定のロード・バランサー IP アドレスを Kubernetes config マップで見つけることができないため、このサービスの作成は失敗します。このコマンドを実行すると、エラー・メッセージと、クラスターで使用可能なパブリック IP アドレスのリストが表示されます。
+<screen>Error on cloud load balancer a8bfa26552e8511e7bee4324285f6a4a for service default/myservice with UID 8bfa2655-2e85-11e7-bee4-324285f6a4af: Requested cloud provider IP 1.1.1.1 is not available. The following cloud provider IPs are available: <varname>&lt;list_of_IP_addresses&gt;</varname></screen></note></info></step></steps></taskbody></task>
+<task id="freeup_ip">
+<title>使用されているパブリック IP アドレスの解放</title>
+<shortdesc>ポータブル・パブリック IP アドレスを使用しているロード・バランサー・サービスを削除することによって、使用されているポータブル・パブリック IP アドレスを解放できます。</shortdesc>
+<taskbody>
+<prereq id="prereq_anp_1hr_5z"><xref href="cs_cli_configure.dita" format="dita" scope="local">始めに、使用するクラスターのコンテキストを設定してください。
+</xref></prereq>
+<steps id="steps_zty_cgr_5z">
+<step>
+<cmd>クラスターで使用可能なサービスをリスト表示します。</cmd>
+<info>
+<codeblock>kubectl get services</codeblock></info></step>
+<step>
+<cmd>パブリック IP アドレスを使用しているロード・バランサー・サービスを削除します。</cmd>
+<info>
+<codeblock>kubectl delete service <varname>&lt;myservice&gt;</varname></codeblock></info></step></steps></taskbody></task></task>

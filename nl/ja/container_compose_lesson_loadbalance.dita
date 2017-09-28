@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE tutorialLesson PUBLIC "-//IBM//DTD DITA Tutorial Lesson//EN"
+ "tutorialLesson.dtd">
+<tutorialLesson id="container_compose_loadbalance" xml:lang="ja-jp" class="- topic/topic task/task tutorialLesson/tutorialLesson ">
+<title>レッスン 4: マルチコンテナー・デプロイメントへのロード・バランサーの追加</title>
+<titlealts>
+<navtitle>ロード・バランサーの追加</navtitle>
+<searchtitle>チュートリアル・レッスン 4: Docker Compose と <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を使用してマルチコンテナー・デプロイメントにロード・バランサーを追加する</searchtitle></titlealts>
+<shortdesc>高いワークロードに対応するため、複数の Lets-Chat コンテナー・インスタンスの間で着信ユーザー・トラフィックのバランスを調整する nginx ロード・バランサーを、マルチコンテナー・デプロイメントに追加します。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>cli</indexterm><indexterm>Docker Compose</indexterm><indexterm>マルチコンテナー・アプリ</indexterm><indexterm>マルチコンテナー・デプロイメント</indexterm><indexterm>IBM Containers</indexterm><indexterm>ロード・バランサー</indexterm><indexterm>nginx</indexterm><indexterm>ワークロード</indexterm></keywords></metadata></prolog>
+<taskbody>
+<steps>
+<step>
+<cmd><uicontrol>nginx</uicontrol> ロード・バランサーを構成します。
+</cmd><substeps>
+<substep>
+<cmd><filepath>nginx.conf</filepath> 構成ファイルを作成します。
+</cmd>
+<info>
+<codeblock>nano <filepath>nginx.conf</filepath></codeblock></info></substep>
+<substep>
+<cmd>次の情報を構成ファイルにコピーします。</cmd>
+<info>複数の Lets-Chat コンテナー・インスタンスの間で作業負荷分散を実行するには、それらのすべてのコンテナー・インスタンスをアップストリーム・サーバーとして構成ファイルに追加する必要があります。
+それにより、すべての着信要求がいずれかの Lets-Chat コンテナーに転送されます。
+<codeblock>worker_processes 3;
+
+events { worker_connections 1024; }
+
+http {
+
+        upstream lets-chat-app {
+              ip_hash;
+              server composetutorial_lets-chat_1:8080 weight=10 max_fails=3 fail_timeout=30s;
+              server composetutorial_lets-chat_2:8080 weight=10 max_fails=3 fail_timeout=30s;
+        }
+         
+        server {
+              listen 80;
+         
+              location / {
+                proxy_pass http://lets-chat-app;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host $host;
+                proxy_cache_bypass $http_upgrade;
+              }
+        }
+}</codeblock></info></substep>
+<substep>
+<cmd><uicontrol>Ctrl + o</uicontrol> を押して、変更を保存します。<uicontrol>ENTER</uicontrol> を押して、変更を確認します。</cmd></substep>
+<substep>
+<cmd><uicontrol>ctrl + x</uicontrol> を押して、nano エディターを終了します。
+</cmd></substep></substeps></step>
+<step>
+<cmd>プライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> イメージ・レジストリーに <uicontrol>nginx</uicontrol> イメージを作成します。</cmd>
+<info></info><substeps>
+<substep>
+<cmd>Dockerfile を作成します。
+</cmd>
+<info>
+<codeblock>nano Dockerfile</codeblock></info></substep>
+<substep>
+<cmd>次の情報を Dockerfile にコピーします。</cmd>
+<info>作成するイメージは、Dockerhub で提供されているパブリックの <uicontrol>nginx</uicontrol> イメージをベースとするものです。
+前のステップで指定したカスタム設定を適用するために、<codeph>COPY</codeph> コマンドを使用して、<filepath>nginx.conf</filepath> ファイルを <uicontrol>nginx</uicontrol> 構成ファイルの場所にコピーします。
+<codeblock>#Uses the public nginx image available on Dockerhub.
+FROM nginx
+#Copies your custom <filepath>nginx.conf</filepath> file into the nginx configuration file location.
+COPY nginx.conf /etc/nginx/nginx.conf</codeblock></info></substep>
+<substep>
+<cmd><uicontrol>Ctrl + o</uicontrol> を押して、変更を保存します。<uicontrol>ENTER</uicontrol> を押して、変更を確認します。</cmd></substep>
+<substep>
+<cmd><uicontrol>ctrl + x</uicontrol> を押して、nano エディターを終了します。
+</cmd></substep>
+<substep>
+<cmd><uicontrol>nginx</uicontrol> イメージをビルドし、それをプライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> イメージ・レジストリーにプッシュします。</cmd>
+<info>
+<codeblock>docker build -t registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>$your_namespace</varname>/nginx .</codeblock>
+CLI 出力は、以下のようになります。
+<codeblock>Sending build context to Docker daemon 9.728 kB
+Step 1 : FROM nginx
+ ---&gt; 6f62f48c4e55
+Step 2 : COPY nginx.conf /etc/nginx/nginx.conf
+ ---&gt; bc40817f0593
+Removing intermediate container 64c5e180943f
+Successfully built bc40817f0593
+The push refers to a repository [registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>$your_namespace</varname>/nginx] (len: 1)
+bc40817f0593: Pushed 
+6f62f48c4e55: Pushed 
+50ed65ac2e2d: Pushed 
+fed44c33bce9: Pushed 
+73e8d4f6bf84: Pushed 
+latest: digest: sha256:99587168cbf699b32804c4ff0de610460dfa150120b12385b194c2f9236903f5 size: 15270</codeblock></info></substep></substeps></step>
+<step>
+<cmd><uicontrol>nginx</uicontrol> サービス定義を <filepath>docker-compose.yml</filepath> ファイルに追加します。</cmd><substeps>
+<substep>
+<cmd><filepath>docker-compose.yml</filepath> ファイルを開きます。</cmd>
+<info>
+<codeblock>nano <filepath>docker-compose.yml</filepath></codeblock></info></substep>
+<substep>
+<cmd>以下の情報を <filepath>docker-compose.yml</filepath> にコピーします。
+<varname>IP_ADDRESS</varname> は、<uicontrol>nginx</uicontrol> ロード・バランサーへのアクセスに使用するパブリック IP アドレスに置き換えてください。
+</cmd>
+<info>
+<codeblock>nginx:
+  image: registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>$your_namespace</varname>/nginx  
+  ports:
+   - "<varname>IP_ADDRESS</varname>:80:80"
+  links: 
+    - lets-chat</codeblock><filepath>docker-compose.yml</filepath> ファイルは、以下のようになります。
+<codeblock>nginx:
+  image: registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>$your_namespace</varname>/nginx
+  ports:
+   - "<varname>IP_ADDRESS</varname>:80:80"
+  links:
+    - lets-chat
+lets-chat:
+  image: registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>$your_namespace</varname>/lets-chat
+  expose:
+   - "8080"
+  links:
+    - mongo
+mongo:
+  image: registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>$your_namespace</varname>/mongo
+  expose:
+    - "27017"</codeblock></info></substep>
+<substep>
+<cmd><uicontrol>Ctrl + o</uicontrol> を押して、変更を保存します。<uicontrol>ENTER</uicontrol> を押して、変更を確認します。</cmd></substep>
+<substep>
+<cmd><uicontrol>ctrl + x</uicontrol> を押して、nano エディターを終了します。
+</cmd></substep></substeps></step>
+<step>
+<cmd>Lets-Chat アプリを実行するマルチコンテナー・デプロイメントを <uicontrol>nginx</uicontrol> ロード・バランサーでデプロイします。</cmd><substeps>
+<substep>
+<cmd>マルチコンテナー・デプロイメントを再作成します。</cmd>
+<info>マルチコンテナー・デプロイメント内のすべてのコンテナー・インスタンスを再作成するために、<codeph>--force-recreate</codeph> オプションを使用します。これにより、リンクが正しくアタッチされます。<codeblock>docker-compose up -d --force-recreate</codeblock></info></substep>
+<substep>
+<cmd>コンテナーが正しくリンクされていることを確認します。
+</cmd>
+<info>
+<codeblock>docker inspect composetutorial_nginx_1</codeblock>リンクされた Lets-Chat コンテナー・インスタンスは、応答の <varname>HostConfig &gt; Links</varname> セクションで確認できます。<codeblock>...
+"HostConfig": {
+        "Binds": [],
+        "CapAdd": [],
+        "CapDrop": [],
+        "ContainerIDFile": "",
+        "Links": [
+            "composetutorial_lets-chat_2:composetutorial_lets-chat_2",
+            "composetutorial_lets-chat_1:composetutorial_lets-chat_1",
+            "composetutorial_lets-chat_1:composetutorial_lets-chat_1",
+            "composetutorial_lets-chat_2:lets-chat",
+            "composetutorial_lets-chat_2:composetutorial_lets-chat_2"
+        ],
+        "LogConfig": {
+            "Config": {},
+            "Type": "json-file"
+        },
+        "LxcConf": [],
+        "PortBindings": {
+            "80/tcp": [
+                {
+                    "HostPort": "80"
+                }
+            ]
+        },
+        "Privileged": false,
+        "PublishAllPorts": false
+    },
+...</codeblock></info></substep></substeps></step>
+<step>
+<cmd>カスタム <filepath>nginx.config</filepath> 設定が <uicontrol>nginx</uicontrol> コンテナー・インスタンスに適用されていることを確認します。</cmd><substeps>
+<substep>
+<cmd><uicontrol>nginx</uicontrol> コンテナーにログインします。
+</cmd>
+<info>
+<codeblock>docker exec -it composetutorial_nginx_1 bash</codeblock></info></substep>
+<substep>
+<cmd>ホスト構成を確認します。
+</cmd>
+<info>
+<codeblock>cat <filepath>/etc/hosts</filepath></codeblock>カスタム設定が適用されていれば、リンクされた Lets-Chat コンテナー・インスタンスとそのプライベート IP アドレスが CLI 出力にリストされます。
+<codeblock>127.0.0.1	localhost
+::1	localhost ip6-localhost ip6-loopback
+fe00::0	ip6-localnet
+ff00::0	ip6-mcastprefix
+ff02::1	ip6-allnodes
+ff02::2	ip6-allrouters
+198.51.100.19	composetutorial_lets-chat_1
+198.51.100.18	composetutorial_lets-chat_2
+198.51.100.20	instance-000f2b2b
+198.51.100.18	lets-chat
+198.51.100.20	composetutorial-nginx-1
+198.51.100.19	composetutoral_lets-chat_1
+198.51.100.18	composetutorial_lets-chat_2
+198.51.100.20	instance-000f2b2b</codeblock></info></substep>
+<substep>
+<cmd>CLI に <codeph>exit</codeph> を入力することにより、コンテナーからログアウトします。
+</cmd></substep></substeps></step></steps>
+<result>
+これで、複数の Lets-Chat コンテナーの間で作業負荷分散がなされるようになり、大量のユーザー・トラフィックに対応できるようになります。
+最後のステップとして、<xref href="container_compose_lesson_remove.dita#container_compose_remove" format="dita">マルチコンテナー・デプロイメントを削除</xref>して、使用されたリソースを解放し、割り当て量の使用を最大化します。<ul audience="blue">
+<li>これはテストです。ステージングでのみ表示されます。</li>
+<li><codeblock>#Uses the public nginx image available on Dockerhub.
+FROM nginx
+#Copies your custom <filepath>nginx.conf</filepath> file into the nginx configuration file location.
+COPY nginx.conf /etc/nginx/nginx.conf</codeblock></li></ul></result></taskbody></tutorialLesson>

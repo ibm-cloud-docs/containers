@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="container_group_migrate" xml:lang="ja-jp">
+<title>他の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースへのコンテナー・グループの移動</title>
+<titlealts>
+<navtitle>他のスペースへのグループの移動</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を使用した他の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースへのコンテナー・グループの移動</searchtitle></titlealts>
+<shortdesc>コンテナー・グループを同じ組織内の別のスペースに移動する必要がある場合、同じ経路を使用して 2 番目のコンテナー・グループを作成します。
+その後、アプリでダウンタイムを発生させることなく、最初のグループを削除することができます。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>コンテナー・グループ</indexterm><indexterm>cli</indexterm><indexterm>経路</indexterm><indexterm>共有</indexterm><indexterm>IBM Containers</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context> 既存の経路を新しいコンテナー・グループにマップすると、コンテナー・インスタンスの参照がスペースのロード・バランサーに追加されます。
+その結果、ロード・バランサーは、入力トラフィックをルーティングするときに、新しいコンテナー・グループを考慮するようになります。
+コンテナー・グループを削除すると、関連したコンテナー・インスタンス参照がロード・バランサーによって自動的に削除されます。
+</context>
+<steps>
+<step>
+<cmd>Cloud Foundry CLI にログインします。プロンプトが出されたら、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のユーザー名とパスワードを入力します。
+</cmd>
+<info>
+<codeblock>bx login [-a api.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>] [-sso]</codeblock>
+
+<p><ph conref="container_conref.dita#sso/sso"></ph></p></info><substeps conref="container_conref.dita#sso/no_sso">
+<substep>
+<cmd></cmd></substep></substeps></step>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を初期設定します。
+</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> init</codeblock></info></step>
+<step>
+<cmd>コンテナー・グループを作成し、それに経路をマップします。</cmd>
+<info>次のコマンドは、<uicontrol>ibmliberty</uicontrol> イメージから <varname>my_group_1</varname> という名前のコンテナー・グループを作成します。
+このコンテナー・グループには、パブリック経路 <filepath>myhost.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword></filepath> を使用してアクセスできます。
+<note>この例のホスト名 <varname>myhost</varname> は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> に含まれるすべての組織の間で固有でなければなりません。したがって、次に進むためには、<varname>myhost</varname> の新しい名前を選択する必要があります。</note>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-create -p 9080 -n <varname>myhost</varname> -d <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword> --name <varname>my_group_1</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/ibmliberty</codeblock></info></step>
+<step>
+<cmd>コンテナー・グループが作成されたことを確認します。</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> groups</codeblock></info></step>
+<step>
+<cmd>組織スペースを変更します。<varname>SPACE</varname> を、コンテナー・グループの移動先のスペースの名前に置き換えてください。
+</cmd>
+<info>
+<codeblock>cf target -s <varname>SPACE</varname></codeblock></info></step>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を再初期化して、新しいスペースを指すようにします。</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> init</codeblock></info></step>
+<step>
+<cmd>新しいスペースに別のコンテナー・グループを作成し、既存の経路をそれにマップします。</cmd>
+<info>次のコマンドは、<uicontrol>ibmliberty</uicontrol> イメージから <varname>my_group_2</varname> という名前のコンテナー・グループを作成します。
+このコンテナー・グループは、最初に作成したコンテナー・グループと同じパブリック経路にマップされます。
+<note>コンテナー・グループの名前は、組織のスペース内で固有でなければなりません。
+組織の別のスペースで新しいコンテナー・グループを作成するときには、この名前を再使用できます。
+</note>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-create -p 9080 -n <varname>myhost</varname> -d <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword> --name <varname>my_group_2</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/ibmliberty</codeblock></info></step>
+<step>
+<cmd>コンテナー・グループが作成されたことを確認します。</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> groups</codeblock>新しいスペースに新しいコンテナー・グループを作成し、既存の経路をマップしたので、最初のコンテナー・グループの削除を実行できます。
+</info></step>
+<step>
+<cmd>最初のコンテナー・グループを作成した組織スペースに移動します。
+<varname>SPACE</varname> を、該当するスペースの名前に置き換えてください。</cmd>
+<info>
+<codeblock>cf target -s <varname>SPACE</varname></codeblock></info></step>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を再初期化して、選択したスペースを指すようにします。</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> init</codeblock></info></step>
+<step>
+<cmd>コンテナー・グループから経路をマップ解除します。<varname>myhost</varname> を、選択したホストの名前に置き換えてください。
+</cmd>
+<info>コンテナー・グループから経路をマップ解除すると、すべてのコンテナー参照がロード・バランサーから削除され、入力トラフィックがルーティングされるときに考慮されなくなります。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> route-unmap -n <varname>myhost</varname> -d <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword> <varname>my_group_1</varname>  </codeblock></info></step>
+<step importance="optional">
+<cmd>コンテナー・グループを削除します。</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-remove <varname>my_group_1</varname></codeblock></info></step>
+<step importance="optional">
+<cmd>コンテナー・グループが削除されたことを確認します。</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> groups</codeblock></info></step></steps></taskbody></task>

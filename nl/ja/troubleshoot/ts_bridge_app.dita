@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tsTroubleshooting PUBLIC "-//IBM//DTD DITA Troubleshooting//EN"
+ "troubleshooting.dtd">
+<!--http://w3.opensource.ibm.com/projects/ditatroublespec/ -->
+<!--This DITA specialized document type is currently not supported by the Authoring Tools development team. Press the F1 key for online help on the tags, or see the Authoring Tools Information Center for the complete set of help topics at http://submit.boulder.ibm.com/infocenter/idwb/v3r8m4/index.jsp.-->
+<tsTroubleshooting id="ts_bridge_app" xml:lang="ja-jp" class="- topic/topic tsTroubleshooting/tsTroubleshooting ">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスがコンテナーに直接バインドされない</title>
+<titlealts>
+<navtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービス・バインディング</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスが <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 内のコンテナーに直接バインドされない</searchtitle></titlealts>
+<tsBody class="- topic/body tsTroubleshooting/tsBody ">
+<tsSymptoms class="- topic/section tsTroubleshooting/tsSymptoms ">サービス・バインディングの使用時、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスがコンテナーに直接バインドされません。</tsSymptoms>
+<tsCauses class="- topic/section tsTroubleshooting/tsCauses ">一部の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスはコンテナーへの直接サービス・バインディングをサポートしていないので、コンテナーの作成中にエラーになります。こうしたサービスの場合、サービス・バインディングは環境変数 <codeph>VCAP_SERVICES</codeph> をコンテナーに渡しません。この問題に対処するには、CLI を使用して、サービスからコンテナーに <codeph>VCAP_SERVICES</codeph> を送信するブリッジとして機能する Cloud Foundry アプリを作成します。</tsCauses>
+<tsResolve class="- topic/section tsTroubleshooting/tsResolve "><ol>
+<li>コンテナーをデプロイするスペースを選択します (例えば <codeph>dev</codeph>)。</li>
+<li id="create_cfapp"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスをバインドするアプリとして、既存のアプリを見つけるか、または Cloud Foundry アプリを作成します。このアプリは、<codeph>VCAP_SERVICES</codeph> 情報を渡すために使用され、ブリッジ・アプリと呼ばれます。
+<p>以下のようにして Cloud Foundry アプリを作成します。<note type="tip">これらの手順を実行して作成するアプリは、<codeph>VCAP_SERVICES</codeph> サービスを保管するためのプレースホルダーです。
+実行されるアプリよりも少ないコストで済むように、このアプリは開始も実行もしません。
+このアプリは実行しなくても、<codeph>VCAP_SERVICES</codeph> をコンテナーに渡すことができます。</note></p><ol>
+<li>作業アプリ・ディレクトリーにディレクトリーとテキスト・ファイルを作成します。例: <filepath><varname>&lt;directory&gt;</varname>/<varname>&lt;empty_file.txt&gt;</varname></filepath>。このファイルは、アプリのソース・ファイルとして機能します。ただし、内容が含まれている必要はありません。<ul>
+<li>Windows の例: <filepath>C:&#xa5;Users&#xa5;<varname>User</varname>&#xa5;<varname>containerbridge</varname>&#xa5;<varname>empty_file.txt</varname></filepath></li>
+<li><tm trademark="Linux" tmtype="tm">Linux</tm> の例: <filepath>/<varname>user_home_directory</varname>/<varname>containerbridge</varname>/<varname>empty_file.txt</varname></filepath></li>
+<li>OS X の例: <filepath>/Users/<varname>user_home_directory</varname>/<varname>containerbridge</varname>/<varname>empty_file.txt</varname></filepath></li></ul></li>
+<li>以下のコマンドを実行して、ゼロ・ランタイム・アプリを無料で作成します。
+このアプリはコンテナーからサービスへのブリッジとして機能するため、<varname>containerbridge</varname> という名前が一般的ですが、任意の名前にすることができます。<p><!--Yes, -p really is for directory for the cf push command.--></p><codeblock id="containerbridgecode">cf push <varname>&lt;appname&gt;</varname> -p <varname>&lt;directory&gt;</varname> -i 1 -d <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword> -k 1M -m 64M --no-hostname --no-manifest --no-route --no-start</codeblock>例:
+<codeblock>cf push <varname>containerbridge</varname> -p <varname>containerbridge</varname> -i 1 -d <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword> -k 1M -m 64M --no-hostname --no-manifest --no-route --no-start</codeblock></li></ol></li>
+<li>バインドする <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスがまだ追加されていない場合は、サービスを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースに追加します。<ol>
+<li>使用可能な <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスのリストを取得するには、<codeph>cf marketplace</codeph> コマンドを実行します。結果のリストには、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスの名前、そのプラン・タイプ、およびサービスの内容の説明が含まれます。</li>
+<li><codeph>create-service</codeph> コマンドを実行します。その際、<codeph>cf marketplace</codeph> のリストからのサービス名とプランを含めます。また、サービスの独自のインスタンス名を含めます。<codeblock>cf create-service <varname>&lt;service&gt;</varname> <varname>&lt;plan&gt;</varname> <varname>&lt;service_instance&gt;</varname></codeblock>例<codeblock>cf create-service <varname>cleardb</varname> <varname>spark</varname> <varname>my-clear-db</varname></codeblock></li></ol></li>
+<li>bind-service コマンドを実行して、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスをアプリにバインドします。他の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスをブリッジ・アプリにバインドするには、これを繰り返します。<codeblock>cf bind-service <varname>&lt;appname&gt;</varname> <varname>&lt;service_instance&gt;</varname></codeblock>例<codeblock>cf bind-service <varname>containerbridge</varname> <varname>my-clear-db</varname></codeblock></li>
+<li>アプリを再ステージするよう求めるプロンプトが出された場合、以下のコマンドを実行します。
+<codeblock>cf restage <varname>containerbridge</varname></codeblock></li>
+<li importance="optional">以下のコマンドを実行して、<varname>containerbridge</varname> アプリで渡された <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスの情報を確認します。<codeblock>cf env <varname>&lt;appname&gt;</varname> </codeblock>例<codeblock>cf env <varname>containerbridge</varname> </codeblock><p>結果では、<codeph>VCAP_SERVICES</codeph> 環境変数を使用することによって、注入された <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービス・パラメーターが含まれます。</p><p>以下に例を示します。<codeblock>{
+ "VCAP_SERVICES": {
+  "&lt;service_name&gt;": [
+   {
+    "credentials": {
+     "hostname": "&lt;hostname_id&gt;",
+     "jdbcUrl": "&lt;jdbc_URL&gt;",
+     "name": "&lt;encoded_name&gt;",
+     "password": "&lt;encoded_password&gt;",
+     "port": "&lt;port_number&gt;",
+     "uri": "&lt;service_URI&gt;",
+     "username": "&lt;encoded_username&gt;"
+    },
+    "label": "&lt;service_name&gt;",
+    "name": "&lt;service_instance&gt;",
+    "plan": "&lt;plan_name&gt;",
+    "tags": [
+     "&lt;tag1&gt;",
+     "&lt;tag2&gt;",
+     "&lt;tag3&gt;"
+    ]
+   } </codeblock></p></li></ol>
+<p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスと <varname>containerbridge</varname> アプリの間にバインディングを作成した後に、コンテナーを作成し、<varname>containerbridge</varname> アプリをそのコンテナーにバインドします。詳しくは、<xref href="../container_single_cli.dita" format="dita" scope="local">単一のコンテナーの作成</xref>または<xref href="../container_group_cli.dita" format="dita" scope="local">コンテナー・グループの作成</xref>における環境変数の <codeph>CCS_BIND_APP</codeph> フラグを参照してください。<note type="tip" id="delete_bound_app">ブリッジ・アプリがコンテナーにバインドされた後には、ブリッジ・アプリを削除しないでください。バインド済みのブリッジ・アプリを削除すると、コンテナーがハングします。ブリッジ・アプリが不要になった場合は、
+ブリッジ・アプリを削除する前に、コンテナーおよびブリッジ・アプリを使用している他のコンテナーを削除してください。</note></p></tsResolve></tsBody></tsTroubleshooting>

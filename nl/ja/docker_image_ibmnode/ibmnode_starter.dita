@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dita PUBLIC "-//IBM//DTD DITA IBM Composite//EN" "ibm-ditabase.dtd">
+<dita xml:lang="ja-jp">
+<concept id="getting_started_node" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 用 <uicontrol>ibmnode</uicontrol> イメージ概説</title>
+<titlealts>
+<navtitle>ibmnode</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> における <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 用 <uicontrol>ibmnode</uicontrol> イメージ概説</searchtitle></titlealts>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerfull"></keyword> 用にパブリック <tm trademark="IBM" tmtype="reg">IBM</tm> ノード (<uicontrol>ibmnode</uicontrol>) イメージが提供されています。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>IBM Containers</indexterm><indexterm>コンテナー</indexterm><indexterm>イメージ</indexterm><indexterm>ノード</indexterm><indexterm>ibmnode</indexterm><indexterm>node.js</indexterm></keywords>
+<othermeta name="linkHover" content="IBM Node (ibmnode) イメージは、独自の Node.js アプリ・コードで独自のイメージをビルドするための親として使用します。"></othermeta></metadata></prolog>
+<conbody>
+<note><tm trademark="IBM" tmtype="reg">IBM</tm> Node (ibmnode) イメージには、サンプルの Node.js アプリが含まれていません。
+このイメージからコンテナーをデプロイすると、長時間実行プロセスが存在しないため、コンテナーは、ビルド直後にシャットダウンします。
+それを回避するには、<tm trademark="IBM" tmtype="reg">IBM</tm> Node (ibmnode) イメージを親として使用し、独自のイメージを作成してそこに独自の Node.js アプリ・コードを追加することができます。
+詳細については、<xref href="#creating_and"></xref>を参照してください。</note></conbody></concept>
+<concept id="how_it_works">
+<title>機能</title>
+<conbody>
+<p><!--&lt;i&gt;This is an optional section if the short description covers the full description of the image and why a user would use it. Include architecture information, including a diagram if this section is used.&lt;/i&gt;--><tm trademark="IBM" tmtype="reg">IBM</tm> Node (<uicontrol>ibmnode</uicontrol>) イメージは、独自の Node.js アプリ・コードで独自のイメージをビルドするための親として使用します。</p>
+<p><note type="notice" id="terms">始める前に、<xref href="https://github.com/docker-library/docs/tree/master/websphere-liberty" format="html" scope="external">websphere-liberty Docker ライブラリーの Usage セクションで <tm trademark="IBM" tmtype="reg">IBM</tm> 認定イメージのご利用条件を確認してください</xref>。</note></p></conbody></concept>
+<concept id="included">
+<title>含まれている内容</title>
+<conbody>
+<p><!--&lt;i&gt;Required section. Include a list of everything that is included in the image (and at what version, level, etc).&lt;/i&gt;--><ul>
+<li>Ubuntu 14.04 </li>
+<li>Python、Git、および build-essentials apt-get パッケージ</li>
+<li><tm trademark="IBM" tmtype="reg">IBM</tm> Node SDK<note>ibmnode イメージはさまざまなタグで使用可能であるため、<tm trademark="IBM" tmtype="reg">IBM</tm> Node SDK のさまざまなバージョンを実行できます。
+<table id="node_versions">
+<title>SDK のさまざまなバージョンのタグ</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry>タグ</entry>
+<entry>説明</entry></row></thead>
+<tbody>
+<row>
+<entry><userinput>ibmnode:latest</userinput></entry>
+<entry><tm trademark="IBM" tmtype="reg">IBM</tm> Node の最新バージョン、<userinput conref="#included/latest"></userinput> の使用と同等</entry></row>
+<row>
+<entry><userinput id="latest">ibmnode:v4</userinput></entry>
+<entry><tm trademark="IBM" tmtype="reg">IBM</tm> Node 4.4.0</entry></row>
+<row>
+<entry><userinput>ibmnode:v1.2</userinput></entry>
+<entry><tm trademark="IBM" tmtype="reg">IBM</tm> Node 1.2.0.8 (0.12.10)</entry></row>
+<row>
+<entry><userinput>ibmnode:v1.1</userinput></entry>
+<entry><tm trademark="IBM" tmtype="reg">IBM</tm> Node 1.1.0.18 (0.10.43)</entry></row></tbody></tgroup></table></note></li></ul></p></conbody></concept>
+<task id="creating_and">
+<title>この提供されたイメージからのイメージの作成</title>
+<shortdesc><uicontrol>ibmnode</uicontrol> イメージを、独自のアプリ・コードを含んだ子イメージを作成するための親として使用できます。サンプルの <codeph>Hello World</codeph> アプリ・コンテナーを
+<uicontrol>ibmnode</uicontrol> および <tm trademark="Express" tmtype="reg">Express</tm> Node モジュールと共に使用して、イメージをコンピューターにビルドします。そのイメージを組織のプライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> イメージ・レジストリーに追加し、それを使用してコンテナーを作成します。その後、Dockerfile を Hello World サンプルから使用して、独自のアプリで別のイメージを作成できます。</shortdesc>
+<taskbody>
+<prereq><p>始める前に、以下の手順を検討してください。<ul>
+<li>以下のツールをローカルにインストールする必要があります。<ul>
+<li><xref href="../../containers/container_cli_cfic_install.html" format="html" scope="peer">Cloud Foundry および Docker CLI 用の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン
+</xref></li>
+<li><xref href="https://nodejs.org/en/download/" format="html" scope="external">Node.js ソース・コード</xref></li>
+<li><xref href="https://github.com/npm/npm" format="html" scope="external">npm</xref></li></ul></li>
+<li><xref href="../../containers/container_cli_reference_cfic.html#container_cli_reference_cfic__namespace" format="html" scope="peer">組織のプライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリーからの名前空間を知っている必要があります。</xref>
+<p>例</p><filepath>registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/&lt;namespace&gt;</filepath></li>
+<li><xref href="../../containers/container_cli_reference_cfic.html#container_cli_reference_cfic__ip_request" format="html" scope="peer">IP アドレスを持っている必要があります。</xref></li></ul></p></prereq>
+<steps>
+<stepsection><uicontrol>ibmnode</uicontrol> イメージをベースにして、<varname>Hello World</varname> アプリを含むイメージを作成します。</stepsection>
+<step>
+<cmd><xref href="ftp://public.dhe.ibm.com/cloud/bluemix/containers/hellonode.zip" format="html" scope="external">hellonode.zip</xref> をダウンロードして解凍します。</cmd></step>
+<step importance="optional">
+<cmd>Dockerfile をテキスト・エディターで開いて、FROM 命令内で、使用する地域のレジストリー URL を更新します。</cmd>
+<info>
+<p><ul>
+<li>米国南部<codeblock>registry.ng.bluemix.net/ibmnode</codeblock></li>
+<li>英国<codeblock>registry.eu-gb.bluemix.net/ibmnode</codeblock></li><!--&lt;li audience="unknown"&gt;Sydney:&lt;codeblock&gt;registry.au-syd.bluemix.net&lt;/codeblock&gt;&lt;/li&gt;--></ul></p></info></step>
+<step>
+<cmd>CLI から、<uicontrol>app</uicontrol> ディレクトリーに移動します。</cmd></step>
+<step>
+<cmd><uicontrol>app</uicontrol> ディレクトリーで、以下のコマンドを実行します。</cmd><substeps>
+<substep>
+<cmd><filepath>package.json</filepath> ファイルを作成します。</cmd>
+<info>
+<codeblock>npm init</codeblock>
+
+<note type="tip">リターンキーを押して、それぞれのプロンプトに対してデフォルト値を受け入れます。</note></info></substep>
+<substep>
+<cmd><tm trademark="Express" tmtype="reg">Express</tm> (Node.js のフレームワーク) をインストールします。</cmd>
+<info><filepath>dependencies</filepath> セクション内の <tm trademark="Express" tmtype="reg">Express</tm> のバージョン情報で <filepath>package.json</filepath> が更新されます。<codeblock>npm install express -save</codeblock></info></substep></substeps></step>
+<step>
+<cmd><uicontrol>hellonode</uicontrol> ディレクトリーに戻ります。</cmd></step>
+<step>
+<cmd>イメージをビルドし、それをプライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリーにプッシュします。*</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"> </ph> build -t registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>&lt;namespace&gt;</varname>/hellonode .</codeblock>
+
+<note type="tip"><codeph><ph conref="container_conref.dita#links/command_prefix"> </ph> namespace get</codeph> を実行して名前空間についての情報を取得します。</note>
+
+<note conref="../container_conref.dita#links/docker_note_images"></note></info></step>
+<step>
+<cmd>イメージからコンテナーを作成します。*</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> run -p 3000 --name helloworld registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>&lt;namespace&gt;</varname>/hellonode</codeblock></info></step>
+<step>
+<cmd>パブリック IP アドレスを、コンテナーにバインドします。</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ip bind <varname>&lt;IP_address&gt;</varname> helloworld</codeblock>
+
+<note type="tip"><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> ip list</codeph> を実行して、パブリック IP アドレスを参照できます。新しいアドレスを要求するには、<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> ip request</codeph> を実行します。</note></info></step>
+<step>
+<cmd>ブラウザーで、<filepath><varname>&lt;ip_address&gt;</varname>:3000</filepath> を開くことによって、アプリをテストします。</cmd>
+<stepresult><userinput>Hello World!</userinput> というメッセージが表示されます。</stepresult></step></steps>
+<postreq>これで hellonode イメージを作成したので、Dockerfile を変更して独自のアプリを代わりに含めて、そのアプリ用に別のイメージを作成することができます。<ol>
+<li>ADD 命令では、独自のアプリケーション・コードを追加します。</li>
+<li>EXPOSE 命令では、ポート情報を更新します。</li>
+<li>CMD 命令では、アプリを開始するコマンドを作成します。</li></ol></postreq></taskbody></task>
+<reference id="reference_dockerfile">
+<title><uicontrol>ibmnode</uicontrol> Dockerfile リファレンス</title>
+<shortdesc>この Dockerfile は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> カタログにある <uicontrol>ibmnode</uicontrol> イメージの作成に使用されたものです。この情報は、あくまでも参考用です。
+このイメージのビルド済みバージョンに含まれている他のファイルは提供されません。</shortdesc>
+<refbody>
+<section><codeblock>FROM ubuntu:14.04
+
+# Update base OS
+RUN apt-get update &amp;&amp;&#xa5;
+DEBIAN_FRONTEND=noninteractive apt-get -y install &#xa5;
+git &#xa5;
+build-essential &#xa5;
+python &amp;&amp; &#xa5;
+DEBIAN_FRONTEND=noninteractive apt-get upgrade -y &amp;&amp;&#xa5;
+apt-get clean &amp;&amp;&#xa5;
+rm -Rf /var/cache/*
+
+# Enhance default password rules
+RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS 90/' /etc/login.defs
+RUN sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
+
+# Install Node SDK
+ONBUILD COPY ./prereq/node.tar.gz /tmp/prereq/
+ONBUILD RUN cd /usr/local &amp;&amp;&#xa5;
+tar --strip-components 1 -xzf /tmp/prereq/node.tar.gz &amp;&amp;&#xa5;
+rm -rf /tmp/prereq
+
+#Documentation path for URL
+LABEL doc.url="/docs/images/docker_image_ibmnode/ibmnode_starter.html"</codeblock></section></refbody></reference>
+<reference id="rellinks">
+<title>関連リンク</title>
+<related-links>
+<linklist id="general">
+<title>関連リンク</title>
+<link href="http://docs.docker.com/engine/reference/builder/" format="html" scope="external">
+<linktext><filepath>Dockerfile</filepath> リファレンス</linktext></link>
+<link href="https://docs.docker.com/engine/admin/using_supervisord/" format="html" scope="external">
+<linktext>Use Supervisor with Docker</linktext></link></linklist></related-links></reference></dita><?tm 1466448354603 14 IBM||Express ?>

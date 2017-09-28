@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="container_group_ui" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI から長期サービスをコンテナー・グループとして実行する</title>
+<titlealts>
+<navtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> <wintitle>GUI</wintitle> を使用して実行する</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI を使用して長期サービスをコンテナー・グループとして実行する</searchtitle></titlealts>
+<shortdesc>スケーラブル・コンテナー・グループを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI から作成およびデプロイします。<ph conref="container_conref.dita#terms/group_definition"></ph></shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>ダッシュボード</indexterm><indexterm>GUI</indexterm><indexterm>コンテナー・グループ</indexterm><indexterm>コンテナー</indexterm><indexterm>IBM Containers</indexterm><indexterm>高可用性</indexterm></keywords></metadata></prolog>
+<taskbody>
+<prereq><p>始める前に、以下の前提条件を考慮してください。<ul>
+<li conref="container_single_ui.dita#gui/role"></li>
+<li conref="container_single_ui.dita#gui/add_image"></li>
+<li conref="container_single_ui.dita#gui/bind_service"></li>
+<li>(オプション) コンテナー・グループ内からファイルにアクセスできるようにする共有ディスクが必要なことが分かっている場合は、コンテナー・グループを作成する前に、ボリュームを作成します。詳細については、<xref href="container_volumes_cli.dita" type="task" format="dita" scope="local"></xref>を参照してください。</li></ul></p></prereq>
+<context><imagemap id="imagemap_ygh_4zn_tx" audience="blue"><image href="images/gist_group_ui.png">
+<alt>このトピック内のタスクへのリンク。</alt></image>
+<area><shape>rect</shape><coords>29, 73, 159, 187</coords><xref href="#container_group_ui/image"></xref></area>
+<area><shape>rect</shape><coords>183, 73, 314, 187</coords><xref href="#container_group_ui/basics"></xref></area>
+<area><shape>rect</shape><coords>336, 73, 467, 187</coords><xref href="#container_group_ui/workload"></xref></area>
+<area><shape>rect</shape><coords>489, 73, 620, 187</coords><xref href="#container_group_ui/who"></xref></area>
+<area><shape>rect</shape><coords>29, 238, 159, 352</coords><xref href="#container_group_ui/auto-recovery"></xref></area>
+<area><shape>rect</shape><coords>182, 238, 309, 352</coords><xref href="#container_group_ui/volume"></xref></area>
+<area><shape>rect</shape><coords>332, 238, 462, 352</coords><xref href="#container_group_ui/env_var"></xref></area>
+<area><shape>rect</shape><coords>486, 238, 617, 352</coords><xref href="#container_group_ui/service"></xref></area>
+<area><shape>rect</shape><coords>182, 398, 311, 511</coords><xref href="#container_group_ui/create"></xref></area></imagemap></context>
+<steps>
+<stepsection>コンテナー・グループを作成およびデプロイするには、以下のことを行います。</stepsection>
+<step conref="container_single_ui.dita#gui/start" audience="yellow">
+<cmd></cmd></step>
+<step id="image" audience="blue">
+<cmd>イメージを選択します。<ph conref="container_conref.dita#bluemix_nav/choose_image"></ph></cmd>
+<info>IBM によって提供されたイメージと、プライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリーに保管されているイメージの両方が表示されます。</info></step>
+<step conref="container_single_ui.dita#gui/namespace" audience="yellow">
+<cmd></cmd></step>
+<step id="basics" audience="blue">
+<cmd>コンテナー名などの基本情報を定義します。</cmd><substeps>
+<substep>
+<cmd>組織内の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースの 1 つを選択します。</cmd></substep>
+<substep>
+<cmd><uicontrol>「スケーラブル (Scalable)」</uicontrol>タブを選択して、コンテナー・グループを作成します。</cmd></substep>
+<substep importance="optional">
+<cmd>イメージ名の下で、使用するイメージのタグまたはバージョンを選択します。</cmd></substep>
+<substep>
+<cmd><uicontrol>「コンテナー・グループ名」</uicontrol>フィールドに、コンテナーの名前を入力します。</cmd>
+<info>
+<note type="tip" conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/container_name"></note></info></substep></substeps></step>
+<step conref="container_single_ui.dita#gui/space" audience="yellow">
+<cmd></cmd></step>
+<step id="group_not_single" audience="yellow">
+<cmd>次に、コンテナー・グループの定義を始めます。</cmd>
+<info>ウィンドウが開いたときに、デフォルトでは<uicontrol>「単一」</uicontrol>タブが表示されるので、<uicontrol>「スケーラブル」</uicontrol>タブを選択してコンテナー・グループを作成します。</info></step>
+<step importance="optional" conref="container_single_ui.dita#gui/tag" audience="yellow">
+<cmd></cmd></step>
+<step id="enter_name" audience="yellow">
+<cmd><uicontrol>「コンテナー・グループ名」</uicontrol>フィールドに、コンテナーの名前を入力します。</cmd>
+<info>
+<note type="tip" conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/container_name"></note></info></step>
+<step id="workload" audience="blue">
+<cmd>アプリのワークロードを定義します。</cmd><substeps>
+<substep>
+<cmd><uicontrol>「インスタンス」</uicontrol>フィールドに、グループ内のインスタンスの数を指定します。</cmd>
+<info>デフォルトは<uicontrol>「2」</uicontrol>です。各インスタンスは同じサイズであり、同じイメージを使用しなければなりません。
+<ph conref="container_conref.dita#terms/instances_intro"></ph>
+
+<p><ph conref="container_conref.dita#terms/instances_determine"></ph></p>
+<p><ph conref="container_conref.dita#terms/instances_ha"></ph> グループをデプロイした後に、より多くのインスタンスが必要だとわかった場合はインスタンスを追加できます。グループを再作成する必要はありません。</p>
+<note conref="container_conref.dita#links/group_instances"></note></info></substep>
+<substep>
+<cmd><uicontrol>「サイズ」</uicontrol>フィールドで、コンテナー・サイズを選択します。</cmd>
+<info>デフォルトのサイズは、<uicontrol audience="yellow">「マイクロ (256 MB メモリー、16 GB ストレージ)」</uicontrol><uicontrol audience="blue">「マイクロ (256 MB メモリー、16 GB ストレージ、1/4
+vCPU)」</uicontrol>です。選択したサイズによって、コンテナーが実行時に計算ホスト上で取得するメモリーおよびディスク・スペースの量が決まります。
+コンテナー作成後にサイズを変更することはできません。
+選択可能なその他のサイズを次に示します。
+<ul audience="yellow">
+<li>ピコ (64 MB メモリー、4 GB ディスク・スペース)</li>
+<li>ナノ (128 MB メモリー、8 GB ディスク・スペース)</li>
+<li>タイニー (512 MB メモリー、32 GB ディスク・スペース)</li>
+<li>スモール (1 GB メモリー、64 GB ディスク・スペース)</li>
+<li>ミディアム (2 GB メモリー、128 GB ディスク・スペース)</li>
+<li>ラージ (4 GB メモリー、256 GB ディスク・スペース)</li>
+<li>X ラージ (8 GB メモリー、512 GB ディスク・スペース)</li>
+<li>2X ラージ (16 GB メモリー、1 TB ディスク・スペース)</li></ul>
+<ul audience="blue">
+<li>ピコ (64 MB メモリー、4 GB ディスク・スペース、¼ vCPU)</li>
+<li>ナノ (128 MB メモリー、8 GB ディスク・スペース、¼ vCPU)</li>
+<li>マイクロ (256 MB メモリー、16 GB ディスク・スペース、¼ vCPU)</li>
+<li>タイニー (512 MB メモリー、32 GB ディスク・スペース、¼ vCPU)</li>
+<li>スモール (1 GB メモリー、64 GB ディスク・スペース、¼ vCPU)</li>
+<li>ミディアム (2 GB メモリー、128 GB ディスク・スペース、½ vCPU)</li>
+<li>ラージ (4 GB メモリー、256 GB ディスク・スペース、1 vCPU)</li>
+<li>X ラージ (8 GB メモリー、512 GB ディスク・スペース、2 vCPU)</li>
+<li>2X ラージ (16 GB メモリー、1 TB ディスク・スペース、4 vCPU)</li></ul></info></substep></substeps></step>
+<step id="enter_instances" audience="yellow">
+<cmd><uicontrol>「インスタンス」</uicontrol>フィールドに、グループ内のインスタンスの数を指定します。</cmd>
+<info>デフォルトは<uicontrol>「2」</uicontrol>です。各インスタンスは同じサイズであり、同じイメージを使用しなければなりません。
+<ph conref="container_conref.dita#terms/instances_intro"></ph>
+
+<p><ph conref="container_conref.dita#terms/instances_determine"></ph></p>
+<p><ph conref="container_conref.dita#terms/instances_ha"></ph> グループをデプロイした後に、より多くのインスタンスが必要だとわかった場合はインスタンスを追加できます。グループを再作成する必要はありません。</p>
+<note conref="container_conref.dita#links/group_instances"></note></info></step>
+<step conref="container_single_ui.dita#gui/size" audience="yellow">
+<cmd></cmd></step>
+<step id="who" audience="blue">
+<cmd>このアプリを世界中に公開するか、それとも他のコンテナーにのみ公開するかを決定します。</cmd><substeps>
+<substep>
+<cmd>アプリをプライベートのままにする場合、またはスペース内の他のコンテナーでのみ使用できるようにする場合は、次の手順にスキップしてください。
+アプリを世界中に公開する場合は、完全なパブリック URL を選択します。</cmd>
+<info>この URL は経路とも呼ばれます。単一のコンテナー・インスタンスの IP アドレスを使用するのではなく、コンテナー・グループのホストおよびドメインを使用することによって、アプリのためにロード・バランシングを提供することができます。コンテナー・グループは、ビルド時にパブリック URL で直ちに使用可能にならないことがあります。ネットワーク接続が解決するために最大 5 分かかる可能性があるためです。</info>
+<info>
+<ol>
+<li><uicontrol>「ホスト」</uicontrol>フィールドに、例えば <filepath><varname>mycontainerhost</varname></filepath> のようにホスト名を指定します。ホスト名に下線 (_) を含めないでください。</li>
+<li>システム・<uicontrol>ドメイン</uicontrol>については、<codeph><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword></codeph>を選択してください。
+システム・ドメインにより SSL 証明書が既に提供されているため、付加的な構成なしで HTTPS によりコンテナー・グループにアクセスすることができます。組織用に作成したカスタム・ドメインを選択することもできます。
+カスタム・ドメインを作成するには、パブリック DNS サーバー上でカスタム・ドメインを登録し、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> でカスタム・ドメインを構成してから、カスタム・ドメインをパブリック DNS サーバー上の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> システム・ドメインにマップする必要があります。
+カスタム・ドメインが <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> システム・ドメインにマップされた後、カスタム・ドメインを求める要求は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 内のアプリケーションにルーティングされます。
+カスタム・ドメインを作成する際、ドメイン名に下線 (_) を含めないでください。
+カスタム・ドメインについて詳しくは、<xref href="../manageapps/updapps.html#domain" format="html" scope="peer">カスタム・ドメインの作成と使用</xref>を参照してください。
+カスタム・ドメインのセキュリティーを確保するには、<xref href="../manageapps/secapps.html#ssl_certificate" format="html" scope="peer">SSL 証明書をアップロード</xref>して、HTTPS でコンテナー・グループにアクセスできるようにします。
+<p>経路ドメインとホストの組み合わせが、完全なパブリック経路 URL (<codeph>http://<varname>mycontainerhost</varname>.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword></codeph> など) を形成します。これは <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 内で固有でなければなりません。
+</p></li></ol></info></substep>
+<substep>
+<cmd><uicontrol>「HTTP ポート」</uicontrol>フィールドに、公開するパブリック・ポートを指定します。</cmd>
+<info>ポートは、入力するかドロップダウン・リストから選択することができます。ポートを入力する際、使用する IP プロトコルとして UDP か TCP のいずれかを選択できます。
+プロトコルを指定しない場合、自動的にポートは TCP トラフィックに対して公開されます。
+ドロップダウン・リストには、イメージの作成時に Dockerfile でイメージに指定されたポートが事前に入力されています。
+コンテナー・グループの場合、複数のポートを含めることはできません。<ph conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/https"></ph></info>
+<info conref="container_single_ui.dita#gui/ports"></info></substep></substeps></step>
+<step id="route" audience="yellow">
+<cmd>完全なパブリック URL を選択します。</cmd>
+<info>この URL は経路とも呼ばれます。単一のコンテナー・インスタンスの IP アドレスを使用するのではなく、コンテナー・グループのホストおよびドメインを使用することによって、アプリのためにロード・バランシングを提供することができます。コンテナー・グループは、ビルド時にパブリック URL で直ちに使用可能にならないことがあります。ネットワーク接続が解決するために最大 5 分かかる可能性があるためです。</info><substeps>
+<substep>
+<cmd><uicontrol>「ホスト」</uicontrol>フィールドに、例えば <filepath><varname>mycontainerhost</varname></filepath> のようにホスト名を指定します。</cmd>
+<info>ホスト名に下線 (_) を含めないでください。</info></substep>
+<substep>
+<cmd>システム・<uicontrol>ドメイン</uicontrol>については、<codeph><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword></codeph>を選択してください。
+</cmd>
+<info>システム・ドメインにより SSL 証明書が既に提供されているため、付加的な構成なしで HTTPS によりコンテナー・グループにアクセスすることができます。組織用に作成したカスタム・ドメインを選択することもできます。
+カスタム・ドメインを作成するには、パブリック DNS サーバー上でカスタム・ドメインを登録し、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> でカスタム・ドメインを構成してから、カスタム・ドメインをパブリック DNS サーバー上の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> システム・ドメインにマップする必要があります。
+カスタム・ドメインが <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> システム・ドメインにマップされた後、カスタム・ドメインを求める要求は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 内のアプリケーションにルーティングされます。
+カスタム・ドメインを作成する際、ドメイン名に下線 (_) を含めないでください。
+カスタム・ドメインについて詳しくは、<xref href="../manageapps/updapps.html#domain" format="html" scope="peer">カスタム・ドメインの作成と使用</xref>を参照してください。
+カスタム・ドメインのセキュリティーを確保するには、<xref href="../manageapps/secapps.html#ssl_certificate" format="html" scope="peer">SSL 証明書をアップロード</xref>して、HTTPS でコンテナー・グループにアクセスできるようにします。
+</info>
+<info>
+<p>経路ドメインとホストの組み合わせが、完全なパブリック経路 URL (<codeph>http://<varname>mycontainerhost</varname>.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword></codeph> など) を形成します。これは <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 内で固有でなければなりません。
+</p></info></substep></substeps></step>
+<step audience="yellow">
+<cmd><uicontrol>「HTTP ポート」</uicontrol>フィールドに、公開するパブリック・ポートを指定します。</cmd>
+<info>ポートは、入力するかドロップダウン・リストから選択することができます。ポートを入力する際、使用する IP プロトコルとして UDP か TCP のいずれかを選択できます。
+プロトコルを指定しない場合、自動的にポートは TCP トラフィックに対して公開されます。
+ドロップダウン・リストには、イメージの作成時に Dockerfile でイメージに指定されたポートが事前に入力されています。
+コンテナー・グループの場合、複数のポートを含めることはできません。<ph conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/https"></ph></info>
+<info conref="container_single_ui.dita#gui/ports"></info></step>
+<step importance="optional" id="auto-recovery">
+<cmd>自動リカバリーを使用可能にします。<uicontrol>「自動リカバリーを使用可能にする」</uicontrol>を選択します。</cmd>
+<info>自動リカバリーにより、使用できないコンテナー・インスタンスが削除され、新しいコンテナー・インスタンスに置き換えられます。
+</info>
+<stepxmp>
+<p><ph conref="container_planning_types.dita#group_autorecovery/auto-recovery"></ph></p></stepxmp></step>
+<step importance="optional" id="volume" conref="container_single_ui.dita#gui/volume">
+<cmd></cmd></step>
+<step importance="optional" id="env_var" conref="container_single_ui.dita#gui/env_var">
+<cmd></cmd></step>
+<step importance="optional" id="service" conref="container_single_ui.dita#gui/bind_service_step">
+<cmd></cmd></step>
+<step id="create" conref="container_single_ui.dita#gui/deploy">
+<cmd></cmd></step></steps>
+<result><p id="wait"><ph id="buildroute">コンテナーから外部アプリケーションに接続する場合、指定された経路に接続できるのは、コンテナー・プロセスの実行後に最大 5 分経過してからです。その後、ブラウザーで <filepath>https://<varname>&lt;host&gt;</varname>.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword></filepath> を開くことによって、アプリがコンテナー・グループ内で実行していることを検証できます。</ph></p></result>
+<postreq><p id="ha_setup">コンテナーのセットアップを分散させる範囲を広くするほど、ユーザーがアプリのダウンタイムを経験する可能性は低くなります。
+コンテナー・グループを作成した後、同じイメージを使用して、同じスペースに、または、同じ組織内の別のスペースにコンテナー・グループをもう 1 つ作成します。あるいは、別の地域内に作成して、アプリを分散させる範囲を広げてください。
+詳しくは、以下のトピックを参照してください。
+<ul>
+<li><xref href="container_ha.dita" format="dita" scope="local"></xref></li>
+<li><xref href="container_ha_org.dita" format="dita" scope="local"></xref></li>
+<li><xref href="container_ha_regions.dita" format="dita" scope="local"></xref></li></ul></p>
+<p>コンテナー・グループ内で実行するコンテナー・インスタンスの数を増減させるには、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI でコンテナー・グループを開きます。
+インスタンスの数を増やすには<uicontrol>「+」</uicontrol>ボタンをクリックし、数を減らすには<uicontrol>「-」</uicontrol>ボタンをクリックします。
+次に、<uicontrol>「保存」</uicontrol>をクリックします。</p></postreq></taskbody><?tm 1432135855 0?></task>

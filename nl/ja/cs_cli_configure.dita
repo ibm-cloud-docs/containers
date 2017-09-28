@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="cs_cli_configure" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でクラスターに対して <codeph>kubectl</codeph> コマンドを実行するように CLI を構成する <ph conref="cs_conref.dita#links/release"></ph></title>
+<titlealts>
+<navtitle><codeph>kubectl</codeph> を実行するように CLI を構成する</navtitle></titlealts>
+<shortdesc>Kubernetes CLI に用意されているコマンドを使用して、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のクラスターを管理することができます。
+クラスターを作成したら、環境変数を使用してローカル CLI のコンテキストをそのクラスターに設定します。
+その後、Kubernetes のさまざまな <codeph>kubectl</codeph> コマンドを実行して、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のクラスターを操作することができます。
+</shortdesc>
+<taskbody>
+<prereq><codeph>kubectl</codeph> コマンドを実行する前に、<xref href="cs_cli_install.dita#cs_cli_install">必要な CLI をインストール</xref>して、<xref href="cs_cluster_cli.dita" format="dita" scope="local">クラスターを作成</xref>します。</prereq>
+<steps>
+<step id="bx_login">
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> CLI にログインします。プロンプトが出されたら、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 資格情報を入力します。
+</cmd>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx">)</ph> login</codeblock>特定の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 地域を指定するには、API エンドポイントを含めます。特定の
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 地域のコンテナー・レジストリーに保管されているプライベート Dockerイメージがある場合、またはすでに作成した <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービス・インスタンスがある場合、この地域にログインして、イメージと <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスにログインします。
+<ul>
+<li>米国南部<codeblock><ph conref="cs_conref.dita#links/bx">)</ph> login -a api.ng.bluemix.net</codeblock></li>
+<li>ドイツ
+<codeblock><ph conref="cs_conref.dita#links/bx">)</ph> login -a api.eu-de.bluemix.net</codeblock></li>
+<li>オーストラリア<codeblock><ph conref="cs_conref.dita#links/bx">)</ph> login -a api.au-syd.bluemix.net</codeblock></li>
+<li audience="blue">英国<codeblock><ph conref="cs_conref.dita#links/bx">)</ph> login -a api.eu-gb.bluemix.net</codeblock></li>
+<li audience="unknown"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Dedicated<codeblock><ph conref="cs_conref.dita#links/bx">)</ph> login -a api.<varname>&lt;dedicated_domain&gt;</varname></codeblock></li></ul>
+<note>フェデレーテッド ID がある場合は、<codeph><ph conref="cs_conref.dita#links/bx"></ph> login
+--sso</codeph> を使用して、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> CLI にログインします。ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。
+<codeph>--sso</codeph> なしではログインに失敗し、<codeph>--sso</codeph> オプションを指定すると成功する場合、フェデレーテッド ID があることがわかります。</note></info></step>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウントを選択します。
+</cmd>
+<info>複数の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> の組織が割り当てられている場合は、対象クラスターが作成されている組織を選択してください。
+クラスターは組織に固有のものですが、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースからは独立しています。
+そのため、スペースを選択する必要はありません。</info></step>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> Kubernetes プラグインにログインします (<ph conref="cs_conref.dita#links/bx_cs">)</ph>)。
+</cmd>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> init <ph audience="blue">--host https://stage.cont.bluemix.net</ph></codeblock></info>
+<info>特定の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 地域を指定するには、次のいずれかのコマンドを使用します。
+選択する地域によって、クラスターを作成した場所が決まります。<ul id="ul_dw1_mcn_zz">
+<li>米国南部:<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> init --host https://us-south.containers.bluemix.net</codeblock></li>
+<li>中欧:
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> init --host https://eu-central.containers.bluemix.net</codeblock></li>
+<li>南アジア太平洋地域:<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> init --host https://ap-south.containers.bluemix.net</codeblock></li></ul></info></step>
+<step importance="optional">
+<cmd>クラスターの名前を取得するために、アカウントに含まれているすべてのクラスターのリストを出力します。
+</cmd>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> clusters</codeblock></info></step>
+<step id="config">
+<cmd>作成したクラスターを、このセッションのコンテキストとして設定します。</cmd>
+<info>次の構成手順は、クラスターの操作時に毎回行ってください。
+</info><substeps>
+<substep>
+<cmd>環境変数を設定して Kubernetes 構成ファイルをダウンロードするためのコマンドを取得します。
+</cmd>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> cluster-config <varname>&lt;cluster_name_or_id&gt;</varname></codeblock>構成ファイルのダウンロードが完了すると、そのローカルの Kubernetes 構成ファイルのパスを環境変数として設定するために使用できるコマンドが表示されます。
+</info>
+<info>
+<p>OS X の場合の例:
+</p>
+
+<screen>export KUBECONFIG=/Users/<varname>&lt;user_name&gt;</varname>/.bluemix/plugins/container-service/clusters/<varname>&lt;cluster_name&gt;</varname>/kube-config-prod-dal10-<varname>&lt;cluster_name&gt;</varname>.yml</screen></info></substep>
+<substep>
+<cmd><codeph>KUBECONFIG</codeph> 環境変数を設定するためのコマンドとしてターミナルに表示されたものを、コピーして貼り付けます。
+</cmd></substep>
+<substep>
+<cmd><codeph>KUBECONFIG</codeph> 環境変数が適切に設定されたことを確認します。
+</cmd>
+<info>
+<p>OS X の場合の例:
+<codeblock>echo $KUBECONFIG</codeblock>出力:
+<screen>/Users/<varname>&lt;user_name&gt;</varname>/.bluemix/plugins/container-service/clusters/<varname>&lt;cluster_name&gt;</varname>/kube-config-prod-dal10-<varname>&lt;cluster_name&gt;</varname>.yml</screen></p></info></substep></substeps></step>
+<step>
+<cmd>Kubernetes CLI サーバーのバージョンを調べて、ご使用のクラスターで <codeph>kubectl</codeph> コマンドが正常に実行することを確認します。</cmd>
+<info>
+<codeblock>kubectl version  --short</codeblock>出力例:
+<codeblock>Client Version: v<ph conref="cs_conref.dita#links/kubernetes_version_number"></ph>
+Server Version: v<ph conref="cs_conref.dita#links/kubernetes_version_number"></ph></codeblock></info></step></steps>
+<postreq>これで、<codeph>kubectl</codeph> のコマンドを実行して、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のクラスターを管理できるようになりました。
+<note type="tip">Windows を使用している場合、Kubernetes CLI が <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> CLI と同じディレクトリーにインストールされていなければ、<codeph>kubectl</codeph> コマンドを正常に実行するために、Kubernetes CLI のインストール先パスにディレクトリーを変更する必要があります。
+</note></postreq></taskbody></task>

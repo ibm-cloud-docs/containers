@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE map PUBLIC "-//IBM//DTD DITA IBM Map//EN" "ibm-map.dtd">
+<map xml:lang="ja-jp" search="no">
+<title>コンテナーのモニタリングおよびロギング (他のプラグインで使用する navref の作成用)</title>
+<topicmeta>
+<copyright>
+<copyryear year="2014"></copyryear>
+<copyryear year="2017"></copyryear>
+<copyrholder>IBM</copyrholder></copyright></topicmeta>
+<topicref href="container_ml_ov.dita" scope="local" format="dita" linking="none">
+<topicref href="index_ml.ditamap" scope="local" format="ditamap"></topicref></topicref><!--Images--><!--&lt;topicref format="jpg" href="images/architecture_logmet.jpg" navtitle="Logmet architecture" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;--><!--&lt;topicref format="png" href="images/option1.png" navtitle="Option 1" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;--><!--&lt;topicref format="png" href="images/option2.png" navtitle="Option 2" print="no" scope="local" toc="no" processing-role="resource-only"/&gt;--></map>

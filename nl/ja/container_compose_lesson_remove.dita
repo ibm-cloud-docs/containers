@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE tutorialLesson PUBLIC "-//IBM//DTD DITA Tutorial Lesson//EN"
+ "tutorialLesson.dtd">
+<tutorialLesson id="container_compose_remove" xml:lang="ja-jp" class="- topic/topic task/task tutorialLesson/tutorialLesson ">
+<title>レッスン 5: マルチコンテナー・デプロイメントを削除する</title>
+<titlealts>
+<navtitle>マルチコンテナー・デプロイメントの削除</navtitle>
+<searchtitle>チュートリアル・レッスン 5: Docker Compose と <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を使用してマルチコンテナー・デプロイメントを削除する</searchtitle></titlealts>
+<shortdesc>最後のステップとして、マルチコンテナー・デプロイメントを削除して、使用済みのリソースを解放し、割り当て量の使用を最大化します。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>cli</indexterm><indexterm>Docker Compose</indexterm><indexterm>マルチコンテナー・アプリ</indexterm><indexterm>マルチコンテナー・デプロイメント</indexterm><indexterm>IBM Containers</indexterm><indexterm>削除</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context><note type="attention">マルチコンテナー・デプロイメントを削除した後は、元に戻すことができません。マルチコンテナー・デプロイメントの構成を保持する場合は、<filepath>docker-compose.yml</filepath> ファイルを削除しないようにしてください。</note></context>
+<steps>
+<step>
+<cmd>マルチコンテナー・デプロイメントで実行中のコンテナー・インスタンスをすべて停止します。</cmd>
+<info>
+<codeblock>docker-compose stop</codeblock></info></step>
+<step>
+<cmd>マルチコンテナー・デプロイメントのコンテナー・インスタンスをすべて削除します。</cmd>
+<info>
+<codeblock>docker-compose rm</codeblock> 削除プロセス中に、すべてのコンテナー・インスタンスを削除するかどうか確認を求められます。<uicontrol>y</uicontrol> を入力して確認します。</info></step>
+<step importance="optional">
+<cmd>コンテナー・システムからすべてのコンテナー・インスタンスが削除されたことを確認します。</cmd>
+<info>
+<codeblock>docker-compose ps</codeblock></info></step>
+<step importance="optional">
+<cmd><filepath>docker-compose.yml</filepath> ファイルを削除します。</cmd>
+<info>
+<note type="tip">ファイルを再利用する場合は、削除しないで、ソース管理システムに保管してください。
+</note>
+
+<codeblock>rm <filepath>docker-compose.yml</filepath></codeblock></info></step>
+<step importance="optional">
+<cmd>Docker Compose プロジェクト・ディレクトリーを削除します。</cmd>
+<info>
+<codeblock>cd &amp;&amp; rmdir composetutorial</codeblock></info></step></steps>
+<result>マルチコンテナー・デプロイメントが正常に削除され、割り当て量の利用が最大化されました。</result></taskbody></tutorialLesson>

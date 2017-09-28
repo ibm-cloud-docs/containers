@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002--><!DOCTYPE dita PUBLIC "-//IBM//DTD DITA IBM Composite//EN" "ibm-ditabase.dtd">
+<dita xml:lang="ja-jp">
+<concept id="ibmbackup_restore_starter" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 用 ibm-backup-restore イメージ概説</title>
+<titlealts>
+<navtitle>ibm-backup-restore</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> における <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 用 <uicontrol>ibm-backup-restore</uicontrol> イメージ概説</searchtitle></titlealts>
+<shortdesc><uicontrol>ibm-backup-restore</uicontrol> イメージには、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerfull"></keyword> のコンテナー・ボリュームのバックアップとリストアに必要なプリインストール・パッケージが含まれています。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>IBM Containers</indexterm><indexterm>コンテナー</indexterm><indexterm>イメージ</indexterm><indexterm>ボリューム</indexterm><indexterm>バックアップ</indexterm></keywords>
+<othermeta name="linkHover" content=""></othermeta></metadata></prolog></concept>
+<concept id="how_it_works">
+<title>機能</title>
+<conbody>
+<p><uicontrol>ibm-backup-restore</uicontrol> イメージを使用すると、任意のコンテナー・ボリュームの一回限りのバックアップを作成したり、スケジュールによるバックアップを作成したりできます。
+バックアップは <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstoragefull"></keyword> インスタンス内に保管されます。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> 資格情報は、環境変数として <uicontrol>ibm-backup-restore</uicontrol> コンテナーに渡すことも、実行中のコンテナーの <filepath>config.conf</filepath> ファイルを編集して渡すこともできます。
+また、保存したデータを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> インスタンスからボリュームにリストアすることもできます。
+イメージにはバックアップ用とリストア用の両方のスクリプトが含まれているので、ユーザーは実行中のコンテナーで適切なスクリプトを開始するようにコマンドを実行する必要があります。</p></conbody></concept>
+<concept id="whats_included">
+<title>含まれている内容</title>
+<conbody><!--&lt;i&gt;Required section. Include a list of everything that is included in the image (and at what version, level, etc).&lt;/i&gt;-->
+<p>各 <uicontrol>ibm-backup-restore</uicontrol> イメージには、以下のソフトウェア・パッケージが含まれています。<ul>
+<li>Ubuntu 14.04 </li>
+<li>Duplicity 0.7.10</li>
+<li>python、gnupg、wget の各パッケージ</li></ul></p></conbody></concept>
+<task id="how_to_get_started">
+<title>概説</title>
+<shortdesc></shortdesc>
+<taskbody>
+<steps>
+<stepsection>以下の手順に従って、バックアップおよびリストアの操作を実行します。</stepsection>
+<step>
+<cmd><xref href="#object_storage" format="dita"></xref></cmd></step>
+<step>
+<cmd><xref href="#scheduled_backup" format="dita"></xref></cmd></step>
+<step>
+<cmd><xref href="#restore_script_cli" format="dita"></xref></cmd></step>
+<step>
+<cmd><xref href="#encrypting_backups" format="dita"></xref></cmd></step>
+<step>
+<cmd><xref href="#reference_backup_restore" format="dita"></xref></cmd></step></steps></taskbody></task>
+<task id="object_storage">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> サービス・インスタンスを作成する</title>
+<shortdesc>ボリューム・バックアップのリポジトリーとなる <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> インスタンスを作成します。</shortdesc>
+<taskbody>
+<steps>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> カタログの<uicontrol>「サービス」</uicontrol>セクションから、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> インスタンスをプロビジョンします。</cmd></step>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> インスタンスを選択します。</cmd></step>
+<step>
+<cmd><uicontrol>「サービス資格情報」</uicontrol>タブをクリックします。</cmd></step>
+<step>
+<cmd><uicontrol>「新規資格情報」</uicontrol>をクリックします。</cmd></step>
+<step>
+<cmd>名前フィールドには入力しますが、その他のフィールドはブランクのままにします。<uicontrol>「追加」</uicontrol>をクリックします。
+</cmd></step>
+<step>
+<cmd>新しい資格情報が<uicontrol>「サービス資格情報」</uicontrol>の表にリストされます。
+<uicontrol>「資格情報の表示 (View Credentials)」</uicontrol>をクリックします。</cmd></step>
+<step>
+<cmd><uicontrol>プロジェクト ID</uicontrol>、<uicontrol>地域</uicontrol>、<uicontrol>ユーザー ID</uicontrol>、<uicontrol>パスワード</uicontrol>をメモします。</cmd>
+<info>これらの資格情報を使用して、<uicontrol>ibm-backup-restore</uicontrol> コンテナーはこの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> インスタンスにアクセスできます。</info></step></steps>
+<postreq>このインスタンスの構成について詳しくは、<xref href="../../services/ObjectStorage/index.html" format="html" scope="external"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword></xref> の資料を参照してください。また、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> の価格設定については、<xref href="../../services/ObjectStorage/objectstorage_faq.html#account-payment" format="html" scope="external">プランの種類</xref>を参照してください。</postreq></taskbody></task>
+<task id="creating_container" audience="unknown">
+<title>スケジュール・バックアップを実行するために ibm-backup-restore イメージを使用してコンテナーを作成する</title>
+<shortdesc><uicontrol>ibm-backup-restore</uicontrol> イメージからコンテナーを作成します。コンテナーが実行中になったら、バックアップ・スクリプトを開始してバックアップ処理を開始できます。</shortdesc>
+<taskbody>
+<steps>
+<step>
+<cmd>カタログから、<uicontrol>「コンテナー」</uicontrol>を選択し、コンテナーをビルドする元になる <uicontrol>ibm-backup-restore</uicontrol> イメージを選択します。</cmd></step>
+<step>
+<cmd><uicontrol>「単一」</uicontrol>を選択して、単一インスタンス・コンテナーを作成します。</cmd></step>
+<step>
+<cmd>コンテナーの名前 (例: <codeph>my_backup_container</codeph>) を入力します。</cmd></step>
+<step>
+<cmd><uicontrol>「詳細」</uicontrol>オプションを展開し、<uicontrol>「既存ボリュームの割り当て」</uicontrol>をクリックし、バックアップするボリュームを選択します。</cmd></step>
+<step>
+<cmd>そのボリュームを、バックアップ・コンテナー上のディレクトリーにマウントします (例: <varname>/tmp</varname>)。</cmd>
+<info>このディレクトリーを、バックアップを構成するときに <parmname>BACKUP_DIRECTORY</parmname> として使用します。</info></step>
+<step>
+<cmd><uicontrol>「新規環境変数の追加」</uicontrol>をクリックします。</cmd></step>
+<step>
+<cmd>以下の環境変数を追加します。</cmd>
+<info>
+<table frame="all" colsep="1" rowsep="1" id="table_nmh_vyz_sx">
+<title>バックアップ環境変数</title>
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="1.0*"></colspec><colspec colnum="2" colname="c2" colwidth="1.0*"></colspec>
+<thead>
+<row>
+<entry>キー</entry>
+<entry>値</entry></row></thead>
+<tbody>
+<row>
+<entry><parmname>BACKUP_DIRECTORY</parmname></entry>
+<entry>バックアップするボリュームのディレクトリー・パス。この例では <varname>/tmp</varname> です。
+このオプションを省いた場合、デフォルトのディレクトリーは <varname>/backup</varname> です。
+<filepath>backup_restore</filepath> は選択しないでください。このディレクトリーには、バックアップとリストアの処理のためのファイルが入っています。</entry></row>
+<row>
+<entry><parmname>BACKUP_NAME</parmname></entry>
+<entry>バックアップ名を選択します。このオプションを省いた場合、デフォルトの名前は <varname>volume_backup</varname> です。</entry></row>
+<row>
+<entry><parmname>PROJECTID</parmname></entry>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> サービス資格情報のプロジェクト ID。</entry></row>
+<row>
+<entry><parmname>REGION</parmname></entry>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> サービス資格情報の地域。</entry></row>
+<row>
+<entry><parmname>USERID</parmname></entry>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> サービス資格情報のユーザー ID。</entry></row>
+<row>
+<entry><parmname>PASSWORD</parmname></entry>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> サービス資格情報のパスワード。</entry></row>
+<row>
+<entry><parmname>BACKUP_TYPE</parmname></entry>
+<entry>incremental</entry></row>
+<row>
+<entry><parmname>SCHEDULE_TYPE</parmname></entry>
+<entry>periodic</entry></row>
+<row>
+<entry><parmname>SCHEDULE_INFO</parmname></entry>
+<entry>daily</entry></row></tbody></tgroup></table>この設定では、<varname>volume_backup</varname> というデフォルトの名前の日次増分バックアップが作成されます。
+別の設定のバックアップを作成するには、すべての<xref href="#reference_backup_restore" format="dita">環境変数オプション</xref>のリストを参照してください。</info></step>
+<step>
+<cmd><uicontrol>「作成」</uicontrol>をクリックして、コンテナーが実行を開始するまで待ちます。</cmd>
+<info>コンテナーが実行中になったら、コンテナーにログインしてバックアップ・スクリプトを実行する必要があります。</info></step></steps></taskbody></task>
+<task id="backup_script" audience="unknown">
+<title>バックアップ・スクリプトを開始する</title>
+<shortdesc>バックアップ・コンテナーが実行中になったら、バックアップ・スクリプトを開始します。</shortdesc>
+<taskbody>
+<prereq><note type="tip" conref="container_conref.dita#links/cli_required"></note></prereq>
+<steps>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI にログインします。</cmd>
+<info>
+<codeblock>bx login</codeblock>
+
+<codeblock><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> init</codeblock></info></step>
+<step>
+<cmd><codeph><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> exec</codeph> を使用して、バックアップ・スクリプトを実行します。*</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> exec <varname>my_backup_container</varname> /bin/bash -c <filepath>/backup_restore/vbackup</filepath></codeblock></info>
+<info> スクリプトが表示する出力の最後に、バックアップに関する統計が示されます。
+<screen>--------------[ Backup Statistics ]--------------
+StartTime 1477503536.23 (Wed Oct 26 17:38:56 2016)
+EndTime 1477503536.25 (Wed Oct 26 17:38:56 2016)
+ElapsedTime 0.02 (0.02 seconds)
+SourceFiles 5
+SourceFileSize 8192 (8.00 KB)
+NewFiles 5
+NewFileSize 8192 (8.00 KB)
+DeletedFiles 0
+ChangedFiles 0
+ChangedFileSize 0 (0 bytes)
+ChangedDeltaSize 0 (0 bytes)
+DeltaEntries 5
+RawDeltaSize 0 (0 bytes)
+TotalDestinationSizeChange 228 (228 bytes)
+Errors 0
+-------------------------------------------------</screen>
+バックアップが失敗した場合は、<codeph><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> logs <varname>my_backup_container</varname></codeph> を実行してログでエラー・メッセージを調べます。</info></step>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI で <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> 内のバックアップを確認します。</cmd><substeps>
+<substep>
+<cmd>バックアップ用に作成した <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> インスタンスをクリックします。</cmd></substep>
+<substep>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> コンテナーをクリックします。
+この例では、コンテナー名は <varname>volume_backup</varname> です。</cmd></substep>
+<substep>
+<cmd>圧縮ファイルを確認します。</cmd>
+<info><image href="images/volume_backup_screenshot.png">
+<alt><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI で <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> コンテナーに、バックアップされたファイルが示されている。</alt></image><varname>vol1.difftar.gz</varname> ファイルをダウンロードし、そのファイルを解凍し、バックアップ・データを確認することができます。<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> でファイルを削除または変更したら、そのファイルはリカバリーできません。</info></substep></substeps></step></steps>
+<postreq>バックアップが有効になりました。一回限りのフルバックアップを作成するように <varname>my_backup_container</varname> を構成した場合は、新規バックアップの作成が必要になるたびにバックアップ・スクリプトを実行する必要があります。
+定期的に増分バックアップを実行するようにコンテナーを構成した場合は、スケジュールに従ってバックアップが実行されます。</postreq></taskbody></task>
+<task id="scheduled_backup">
+<title>スケジュール・バックアップの実行</title>
+<shortdesc><uicontrol>ibm-backup-restore</uicontrol> イメージからコンテナーを作成し、定期的にスケジュールされたバックアップを開始します。</shortdesc>
+<taskbody>
+<steps>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI にログインします。</cmd>
+<info>
+<codeblock>bx login</codeblock>
+
+<codeblock><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> init</codeblock></info></step>
+<step>
+<cmd>ローカル・ディレクトリーに環境変数ファイルを作成します。</cmd>
+<info>
+<codeblock>touch <varname>backup_env-file</varname></codeblock></info></step>
+<step>
+<cmd>環境変数ファイルを編集して、以下のフィールドを追加します。</cmd>
+<info>ブランクの環境変数には、以前にメモした <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> 資格情報からの値を入力します。資格情報で引用符が使用されていても含めないでください。
+<codeblock>BACKUP_NAME=volume_backup
+BACKUP_DIRECTORY=/backup
+PROJECTID=
+REGION=
+USERID=
+PASSWORD=
+SCHEDULE_TYPE=periodic
+SCHEDULE_INFO=daily
+BACKUP_TYPE=incremental</codeblock>この設定では、<varname>volume_backup</varname> というデフォルトの名前の日次増分バックアップが作成されます。
+別の設定のバックアップを作成するには、すべての<xref href="#reference_backup_restore" format="dita">環境変数オプション</xref>のリストを参照してください。</info></step>
+<step>
+<cmd>バックアップ対象のマウントされたボリュームを指定して、<uicontrol>ibm-backup-restore</uicontrol> イメージからコンテナーを実行します。バックアップ・スクリプトを開始するコマンドを含めます。*</cmd>
+<info>
+<ul>
+<li><varname>backup_env-file</varname> と同じローカル・ディレクトリー内にいることを確認します。</li>
+<li>ボリュームのマウント先のディレクトリーが、環境変数ファイル内の BACKUP_DIRECTORY と一致していなければなりません。</li>
+<li>ボリューム名を、バックアップしようとしているボリュームの名前に置き換えます。</li></ul>
+
+<codeblock><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> run --name <varname>my_backup_container</varname> --volume <varname>my_volume</varname>:<filepath>/backup</filepath> --env-file ./<varname>backup_env-file</varname> registry.<varname props="keyref(DomainName)">domain_name</varname>/ibm-backup-restore /bin/bash -c <q>/backup_restore/vbackup</q></codeblock>コンテナーの実行が開始しない場合は、<codeph><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> logs <varname>my_backup_container</varname></codeph> を実行してログでエラー・メッセージを調べます。<note conref="../container_conref.dita#links/docker_note_images"></note></info></step>
+<step audience="unknown">
+<cmd>コンテナーが実行中であることを確認します。*</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> ps</codeblock>
+
+<screen>$ <ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> ps
+CONTAINER ID        IMAGE                                               COMMAND             CREATED             STATUS              PORTS               NAMES
+3c7a4b69-77c        registry.ng.bluemix.net/ibm-backup-restore:latest   ""                  46 seconds ago      Running now                             my_backup_container</screen></info></step>
+<step audience="unknown">
+<cmd>コンテナーが実行中になったら、<codeph><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> exec</codeph> を使用して、バックアップ・スクリプトを実行します。*</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> exec <varname>my_backup_container</varname> /bin/bash -c <filepath>/backup_restore/vbackup</filepath></codeblock></info>
+<info> スクリプトが表示する出力の最後に、バックアップに関する統計が示されます。
+<screen>--------------[ Backup Statistics ]--------------
+StartTime 1477503536.23 (Wed Oct 26 17:38:56 2016)
+EndTime 1477503536.25 (Wed Oct 26 17:38:56 2016)
+ElapsedTime 0.02 (0.02 seconds)
+SourceFiles 5
+SourceFileSize 8192 (8.00 KB)
+NewFiles 5
+NewFileSize 8192 (8.00 KB)
+DeletedFiles 0
+ChangedFiles 0
+ChangedFileSize 0 (0 bytes)
+ChangedDeltaSize 0 (0 bytes)
+DeltaEntries 5
+RawDeltaSize 0 (0 bytes)
+TotalDestinationSizeChange 228 (228 bytes)
+Errors 0
+-------------------------------------------------</screen>
+バックアップが失敗した場合は、<codeph><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> logs <varname>my_backup_container</varname></codeph> を実行してログでエラー・メッセージを調べます。</info></step>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI で <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> 内のバックアップを確認します。</cmd><substeps>
+<substep>
+<cmd>バックアップ用に作成した <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> インスタンスをクリックします。</cmd></substep>
+<substep>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> コンテナーをクリックします。
+この例では、コンテナー名は <varname>volume_backup</varname> です。</cmd></substep>
+<substep>
+<cmd>圧縮ファイルを確認します。</cmd>
+<info><image href="images/volume_backup_screenshot.png">
+<alt><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI で <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> コンテナーに、バックアップされたファイルが示されている。</alt></image><varname>vol1.difftar.gz</varname> ファイルをダウンロードし、そのファイルを解凍し、バックアップ・データを確認することができます。<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> でファイルを削除または変更したら、そのファイルはリカバリーできないことに注意してください。</info></substep></substeps></step></steps>
+<postreq>バックアップが有効になりました。一回限りのフルバックアップを作成するように <varname>my_backup_container</varname> を構成した場合は、新規バックアップの作成が必要になるたびにバックアップ・スクリプトを実行する必要があります。
+定期的に増分バックアップを実行するようにコンテナーを構成した場合は、スケジュールに従ってバックアップが実行されます。</postreq></taskbody></task>
+<task id="restore_script" audience="unknown">
+<title>リストア・スクリプトを実行する</title>
+<shortdesc>Object Storage にあるバックアップを、既存または新規のコンテナー・ボリュームにリストアします。</shortdesc>
+<taskbody>
+<steps>
+<step>
+<cmd>カタログから、<uicontrol>「コンテナー」</uicontrol>を選択し、<uicontrol>ibm-backup-restore</uicontrol> イメージを選択します。</cmd></step>
+<step>
+<cmd><uicontrol>「単一」</uicontrol>を選択して、単一インスタンス・コンテナーを作成します。</cmd></step>
+<step>
+<cmd>コンテナーの名前 (例: <codeph>my_restore_container</codeph>) を入力します。</cmd></step>
+<step>
+<cmd><uicontrol>「詳細」</uicontrol>オプションを展開し、<uicontrol>「ボリュームの作成」</uicontrol>をクリックし、新規ボリュームの名前 (例: <varname>my_restore_volume</varname>) を選択します。</cmd></step>
+<step>
+<cmd>このボリュームを、コンテナー上のディレクトリーに割り当てます (例: <varname>>/restore</varname>)。</cmd></step>
+<step>
+<cmd><uicontrol>「新規環境変数の追加」</uicontrol>をクリックします。</cmd></step>
+<step>
+<cmd>必要な以下の環境変数を追加します。</cmd>
+<info>
+<table frame="all" colsep="1" rowsep="1" id="table_g5l_3y1_tx">
+<title>リストア環境変数</title>
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="1.0*"></colspec><colspec colnum="2" colname="c2" colwidth="1.0*"></colspec>
+<thead>
+<row>
+<entry>キー</entry>
+<entry>値</entry></row></thead>
+<tbody>
+<row>
+<entry><parmname>BACKUP_NAME</parmname></entry>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> からリストアするバックアップのバックアップ名を指定します。バックアップ名を省略した場合、スクリプトは <varname>volume_backup</varname> というデフォルトの名前のバックアップをリストアします。</entry></row>
+<row>
+<entry><parmname>RESTORE_DIRECTORY</parmname></entry>
+<entry>ボリュームのマウント先のディレクトリー名。この例では <varname>/restore</varname> です。
+ディレクトリー <filepath>backup_restore</filepath> は選択しないでください。このディレクトリーには、バックアップとリストアの処理のためのファイルが入っています。</entry></row>
+<row>
+<entry><parmname>PROJECTID</parmname></entry>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> サービス資格情報のプロジェクト ID。</entry></row>
+<row>
+<entry><parmname>REGION</parmname></entry>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> サービス資格情報の地域。</entry></row>
+<row>
+<entry><parmname>USERID</parmname></entry>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> サービス資格情報のユーザー ID。</entry></row>
+<row>
+<entry><parmname>PASSWORD</parmname></entry>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> サービス資格情報のパスワード。</entry></row></tbody></tgroup></table></info></step>
+<step>
+<cmd><uicontrol>「作成」</uicontrol>をクリックして、コンテナーが実行を開始するまで待ちます。</cmd></step>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI にログインします。</cmd>
+<info>
+<codeblock>bx login</codeblock>
+
+<codeblock><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> init</codeblock></info></step>
+<step>
+<cmd><codeph><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> exec</codeph> を使用して、リストア・スクリプトを実行します。*</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> exec <varname>my_backup_container</varname> /bin/bash -c <filepath>/backup_restore/vrestore</filepath></codeblock>
+
+<screen>[2016-10-26 18:01:51,031] [utilities : 152] [INFO] *****************Start logging to ./Restore.log with rollover at 102400 bytes**************
+[2016-10-26 18:01:51,031] [restore : 28] [INFO] Starting the restore process.
+[2016-10-26 18:01:51,032] [configureOS : 22] [INFO] Configuring duplicity with IBM Bluemix ObjectStorage.
+[2016-10-26 18:01:51,032] [configureOS : 13] [INFO] Configuring swift client.
+[2016-10-26 18:01:51,032] [restore : 40] [INFO] Configuration is completed.
+[2016-10-26 18:01:54,022] [restore : 70] [INFO] Restoring the backup that is named 'volume_backup' is completed. Synchronizing remote metadata to local cache...
+Copying duplicity-full-signatures.20161026T173856Z.sigtar.gz to local cache.
+Copying duplicity-full.20161026T173856Z.manifest to local cache.
+Last full backup date: Wed Oct 26 17:38:56 2016</screen></info></step>
+<step importance="optional">
+<cmd>対象ファイルがボリューム内にあることを確認するために、コンテナーにログインし、マウント・パスにナビゲートしてファイルをリストします。*</cmd>
+<info>
+<screen>$ <ph conref="container_conref.dita#links/command_prefix"></ph> exec -it my_backup_container bash
+root@instance:/backup_restore# cd ..
+root@instance/# cd restore
+root@instance:/restore# ls
+duplicity-I3_pJv-tempdir  new_file
+root@instance:/restore# </screen></info>
+<info><varname>tempdir</varname> は、duplicity バックアップ処理の生成物であり、手動で削除できます。</info></step></steps>
+<postreq>ボリューム <varname>my_restore_volume</varname> にバックアップを正常にリストアできました。
+このボリュームに新規コンテナーをマウントすれば、リストアされたファイルをそのコンテナーで利用することができます。
+バックアップされていたコンテナー・データに非 root ユーザーが含まれていた場合は、新規コンテナーに非 root の権限を追加する必要があります。
+<xref href="../../containers/container_volumes_write.html" format="html" scope="external">非 root ユーザーのボリューム・アクセス権限の追加</xref>を参照してください。</postreq></taskbody></task>
+<task id="restore_script_cli">
+<title>リストア・スクリプトを実行する</title>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> にあるバックアップを、既存か新規のコンテナー・ボリュームにリストアします。</shortdesc>
+<taskbody>
+<steps>
+<step>
+<cmd>ローカル・ディレクトリー内にリストア・コンテナーの環境変数ファイルを作成します。</cmd>
+<info>
+<codeblock>touch <varname>restore_env-file</varname></codeblock></info></step>
+<step>
+<cmd>環境変数ファイルを編集して、以下のフィールドを追加します。</cmd>
+<info>ブランクの環境変数には、以前にメモした <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> 資格情報からの値を入力します。BACKUP_NAME は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> 内のリストアしようとしているバックアップの名前と一致していなければなりません。
+<codeblock>BACKUP_NAME=volume_backup
+RESTORE_DIRECTORY=/restore
+USERID=
+REGION=
+PROJECTID=
+PASSWORD=</codeblock></info></step>
+<step>
+<cmd>バックアップ・ファイルのリストア先のボリュームを作成します。</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> volume create <varname>restore_volume</varname></codeblock></info></step>
+<step>
+<cmd><uicontrol>ibm-backup-restore</uicontrol> イメージからコンテナーを実行します。リストア・スクリプトを開始するコマンドを含めます。*</cmd>
+<info>
+<ul>
+<li><varname>restore_env-file</varname> と同じローカル・ディレクトリー内にいることを確認します。</li>
+<li> ボリュームのマウント先のディレクトリーが、環境変数ファイル内の BACKUP_DIRECTORY と一致していなければなりません。</li></ul>
+
+<codeblock><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> run --name <varname>my_restore_container</varname> --volume <varname>restore_volume</varname>:/restore --env-file ./<varname>restore_env-file</varname> registry.<varname props="keyref(DomainName)">domain_name</varname>/ibm-backup-restore /bin/bash -c <q>/backup_restore/vrestore</q></codeblock></info></step>
+<step audience="unknown">
+<cmd>コンテナーが実行中であることを確認します。*</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> ps</codeblock>
+
+<screen>$ <ph conref="container_conref.dita#links/command_prefix"></ph> ps
+CONTAINER ID        IMAGE                                               COMMAND             CREATED             STATUS                  PORTS               NAMES
+92da7a3d-eb6        registry.ng.bluemix.net/ibm-backup-restore:latest   ""                  41 seconds ago      Running 7 seconds ago                       my_restore_container</screen></info></step>
+<step>
+<cmd>コンテナー・ログを検査して、リストア・プロセスが完了したことを確認します。*</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> logs <varname>my_backup_container</varname></codeblock>
+
+<screen>[2016-10-26 18:01:51,031] [utilities : 152] [INFO] *****************Start logging to ./Restore.log with rollover at 102400 bytes**************
+[2016-10-26 18:01:51,031] [restore : 28] [INFO] Starting the restore process.
+[2016-10-26 18:01:51,032] [configureOS : 22] [INFO] Configuring duplicity with IBM Bluemix ObjectStorage.
+[2016-10-26 18:01:51,032] [configureOS : 13] [INFO] Configuring swift client.
+[2016-10-26 18:01:51,032] [restore : 40] [INFO] Configuration is completed.
+[2016-10-26 18:01:54,022] [restore : 70] [INFO] Restoring the backup that is named 'volume_backup' is completed. Synchronizing remote metadata to local cache...
+Copying duplicity-full-signatures.20161026T173856Z.sigtar.gz to local cache.
+Copying duplicity-full.20161026T173856Z.manifest to local cache.
+Last full backup date: Wed Oct 26 17:38:56 2016</screen></info>
+<info>リストア・プロセスが完了すると、コンテナーはシャットダウンします。</info></step>
+<step importance="optional">
+<cmd>コンテナーを削除して、リソースが消費されないようにします。*</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> rm -f <varname>my_backup_container</varname></codeblock></info></step>
+<step audience="unknown">
+<cmd>コンテナーが実行中になったら、<codeph><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> exec</codeph> を使用して、リストア・スクリプトを実行します。*</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> exec <varname>my_backup_container</varname> /bin/bash -c <filepath>/backup_restore/vrestore</filepath></codeblock>
+
+<screen>[2016-10-26 18:01:51,031] [utilities : 152] [INFO] *****************Start logging to ./Restore.log with rollover at 102400 bytes**************
+[2016-10-26 18:01:51,031] [restore : 28] [INFO] Starting the restore process.
+[2016-10-26 18:01:51,032] [configureOS : 22] [INFO] Configuring duplicity with IBM Bluemix ObjectStorage.
+[2016-10-26 18:01:51,032] [configureOS : 13] [INFO] Configuring swift client.
+[2016-10-26 18:01:51,032] [restore : 40] [INFO] Configuration is completed.
+[2016-10-26 18:01:54,022] [restore : 70] [INFO] Restoring the backup that is named 'volume_backup' is completed. Synchronizing remote metadata to local cache...
+Copying duplicity-full-signatures.20161026T173856Z.sigtar.gz to local cache.
+Copying duplicity-full.20161026T173856Z.manifest to local cache.
+Last full backup date: Wed Oct 26 17:38:56 2016</screen></info></step>
+<step importance="optional">
+<cmd>バックアップ・ファイルがボリューム内にあることを確認するために、コンテナーにログインし、マウント・パスにナビゲートして、ファイルをリストします。*</cmd>
+<info>
+<screen>$ <ph conref="container_conref.dita#links/command_prefix"></ph> exec -it my_restore_container bash
+root@instance:/backup_restore# cd ..
+root@instance/# cd restore
+root@instance:/restore# ls
+duplicity-I3_pJv-tempdir  new_file
+root@instance:/restore# </screen></info>
+<info><varname>tempdir</varname> は、バックアップ処理の生成物であり、手動で削除できます。</info></step></steps>
+<postreq>ボリューム <varname>my_restore_volume</varname> にバックアップを正常にリストアできました。
+このボリュームに新規コンテナーをマウントすれば、リストアされたファイルをそのコンテナーで利用することができます。
+バックアップされていたコンテナー・データに非 root ユーザーが含まれていた場合は、新規コンテナーに非 root の権限を追加する必要があります。
+詳しくは、<xref href="../../containers/container_volumes_ov.html#container_volumes_write" format="html" scope="external">非 root ユーザーのボリューム・アクセス権限の追加</xref>を参照してください。</postreq></taskbody></task>
+<task id="encrypting_backups">
+<title>バックアップを暗号化する</title>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> インスタンス内のデータを暗号化します。</shortdesc>
+<taskbody>
+<steps>
+<step>
+<cmd><xref href="https://www.gnupg.org/download/index.html" format="html" scope="external">GnuPG</xref> をダウンロードして暗号鍵を作成します。</cmd></step>
+<step>
+<cmd>ローカル・ドライブで暗号鍵を作成します。</cmd>
+<info>ENTER を押して、デフォルト値を受け入れることができます。</info>
+<info>
+<note type="warning">作成したパスフレーズをメモします。パスフレーズを紛失すると、鍵を使用して暗号化した情報を暗号化解除できなくなります。</note>
+
+<codeblock>gpg --gen-key</codeblock> <xref href="https://www.gnupg.org/download/index.html" format="html" scope="external">GnuPG</xref> のバージョンによっては、コマンドで <codeph>gpg</codeph> の代わりに <codeph>gpg2</codeph> を使用する必要が生じる場合があります。</info></step>
+<step>
+<cmd>鍵を確認します。</cmd>
+<info>
+<codeblock>gpg --list-keys</codeblock>
+
+<screen>$ gpg --list-keys
+/Users/Username/.gnupg/pubring.gpg
+------------------------------------
+pub   2048R/XXXXXXXX 2016-10-27
+uid       [ultimate] Example Name (This is an example key) &lt;example_email_address&gt;
+sub   2048R/YYYYYYYY 2016-10-27</screen></info></step>
+<step>
+<cmd><codeph>sub</codeph> 鍵の値を使用して暗号鍵をエクスポートします。ファイル <varname>encryption.asc</varname> を指定します。</cmd>
+<info>
+<codeblock>gpg --export-secret-keys -a <varname>SUB_KEY</varname> &gt; <varname>encryption.asc</varname></codeblock>この例では、sub 鍵の値は <varname>YYYYYYYY</varname> です。
+<codeblock>gpg --export-secret-keys -a <varname>YYYYYYYY</varname> &gt; <varname>encryption.asc</varname></codeblock></info></step>
+<step>
+<cmd>ローカル・ディレクトリー内に暗号化バックアップ・コンテナーの環境変数ファイルを作成します。</cmd>
+<info>
+<codeblock>touch <varname>encryption_env-file</varname></codeblock></info></step>
+<step>
+<cmd>環境変数ファイルを編集して、以下のフィールドを追加します。</cmd>
+<info>ブランクの環境変数には、以前にメモした <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> 資格情報からの値を入力します。資格情報で引用符が使用されていても含めないでください。
+<varname>ENCRYPTION_PASSPHRASE</varname> には、バックアップをパスワードで保護するためのパスフレーズを含めます。このパスフレーズは、暗号鍵を作成したときに生成したフレーズとは別のパスフレーズです。
+このパスフレーズは、データのバックアップ時とリストア時に指定する必要があります。<codeblock>BACKUP_NAME=encrypted_volume_backup
+BACKUP_DIRECTORY=/backup
+# PROJECTID, REGION, USERID, PASSWORD come from the <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> credentials.
+PROJECTID=
+REGION=
+USERID=
+PASSWORD=
+SCHEDULE_TYPE=periodic
+SCHEDULE_INFO=daily
+BACKUP_TYPE=incremental
+ENCRYPTION_REQUIRED=yes
+# Include this passphrase when backing up and restoring encrypted data.
+ENCRYPTION_PASSPHRASE=</codeblock>この設定では、<varname>encrypted_volume_backup</varname> という名前の暗号化された日次増分バックアップが作成されます。別の設定のバックアップを作成するには、すべての<xref href="#reference_backup_restore" format="dita">環境変数オプション</xref>のリストを参照してください。</info></step>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI にログインします。</cmd>
+<info>
+<codeblock>bx login</codeblock>
+
+<codeblock><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> init</codeblock></info></step>
+<step>
+<cmd>バックアップ対象のマウントされたボリュームを指定して、<uicontrol>ibm-backup-restore</uicontrol> イメージからコンテナーを実行します。バックアップ・スクリプトを開始するコマンドを含めます。*</cmd>
+<info>
+<ul>
+<li><varname>encryption_env-file</varname> と同じローカル・ディレクトリー内にいることを確認します。</li>
+<li>ボリュームのマウント先のディレクトリーが、環境変数ファイル内の BACKUP_DIRECTORY と一致していなければなりません。</li>
+<li>ボリューム名を、バックアップしようとしているボリュームの名前に置き換えます。</li></ul>
+
+<codeblock><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> run --name <varname>my_encrypted_backup_container</varname> --volume <varname>my_volume</varname>:<filepath>/backup</filepath> --env-file ./<varname>encrypted_env-file</varname> registry.<varname props="keyref(DomainName)">domain_name</varname>/ibm-backup-restore</codeblock>コンテナーの実行が開始しない場合は、<codeph><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> logs <varname>my_backup_container</varname></codeph> を実行してログでエラー・メッセージを調べます。</info></step>
+<step>
+<cmd><uicontrol>ibm-backup-restore</uicontrol> イメージから作成したコンテナーの <filepath>/backup_restore</filepath> ディレクトリー内に、暗号鍵をコピーします。*</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> cp <filepath>./encryption.asc</filepath> <varname>my_encrypted_backup_container</varname>:<filepath>/backup_restore</filepath></codeblock>
+データを暗号化解除するために、暗号鍵のコピーをローカルに保管します。</info></step>
+<step>
+<cmd>コンテナーにログインします。*</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> exec -it <varname>my_encrypted_backup_container</varname> bash</codeblock></info></step>
+<step>
+<cmd><varname>encryption.asc</varname> が <filepath>backup_restore</filepath> フォルダーにコピーされたことを確認します。</cmd>
+<info>
+<screen>root@instance:/backup_restore# ls                                                                                                                                                         
+__init__.py  backup.py  config.conf  configureOS.py  <varname>encryption.asc</varname>  restore.py  run.py  utilities.py  vbackup  vrestore</screen></info></step>
+<step>
+<cmd><filepath>backup_restore</filepath> フォルダーからバックアップ・スクリプトを実行します。</cmd>
+<info>
+<codeblock>./vbackup &amp;</codeblock></info></step>
+<step>
+<cmd>バックアップが暗号化されたことを確認するために、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> インスタンス内のファイルを確認します。
+ファイル名の最後に、<codeph>.gpg</codeph> が付加されています。</cmd>
+<info><image href="images/volume_backup_encrypt_screenshot.png">
+<alt>Object Storage GUI で、バックアップされたすべてのファイルに、それが暗号化されたファイルであることを示す .gpg が付加されている。</alt></image></info></step></steps>
+<postreq>バックアップが暗号化されました。ファイルをリストアするには、<xref href="#restore_script_cli" format="dita"></xref>の手順に従い、リストア処理を実行するコンテナーの <filepath>backup_restore</filepath> ディレクトリーに <varname>encryption.asc</varname> ファイルを含めます。
+バックアップが暗号化されている場合は、リストア・コンテナーを作成するときに <parmname>ENCRYPTION_REQUIRED</parmname> と <parmname>ENCRYPTION_PASSPHRASE</parmname> を環境変数として指定する必要があります。</postreq></taskbody>
+<reference id="reference_backup_restore">
+<title>環境変数リファレンス</title>
+<shortdesc>環境変数として渡すことも、実行中のコンテナーの <filepath>config.conf</filepath> ファイルで編集することもできるすべてのフィールドのリストを確認してください。
+環境変数として渡された値は、<filepath>config.conf</filepath> ファイル内の値より優先されます。
+コンテナーの環境変数を確認するには、<codeph>exec</codeph> を使用してコンテナーにログインし、<codeph>env</codeph> を実行します。</shortdesc>
+<refbody>
+<table frame="all" colsep="1" rowsep="1" id="table_fkk_gh3_tx">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> 変数</title>
+<desc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> 資格情報から以下の変数を取得します。
+これらの環境変数は、バックアップまたはリストアの操作を実行するすべてのコンテナーに含めてください。
+<p outputclass="summary">バックアップまたはリストアの処理を <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> リポジトリーにリンクさせるために必要な変数。</p></desc>
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="1.0*"></colspec><colspec colnum="2" colname="c2" colwidth="1.0*"></colspec>
+<thead>
+<row>
+<entry>キー</entry>
+<entry>値のオプション</entry></row></thead>
+<tbody>
+<row>
+<entry><parmname>PROJECTID</parmname></entry>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> のプロジェクト ID</entry></row>
+<row>
+<entry><parmname>REGION</parmname></entry>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> の地域</entry></row>
+<row>
+<entry><parmname>USERID</parmname></entry>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> のユーザー ID</entry></row>
+<row>
+<entry><parmname>PASSWORD</parmname></entry>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> のパスワード</entry></row></tbody></tgroup></table>
+<table frame="all" colsep="1" rowsep="1" id="table_np2_3h3_tx">
+<title>バックアップ変数</title>
+<desc>
+<p outputclass="summary">バックアップの作成に使用できるすべての変数のリスト</p></desc>
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="1.0*"></colspec><colspec colnum="2" colname="c2" colwidth="1.0*"></colspec>
+<thead>
+<row>
+<entry>キー</entry>
+<entry>値のオプション</entry></row></thead>
+<tbody>
+<row>
+<entry><parmname>BACKUP_DIRECTORY</parmname></entry>
+<entry><varname>/backup</varname>: デフォルト。<?linebreak?>ボリュームのマウント先のディレクトリーの絶対ファイル・パス。データはこのディレクトリーからバックアップされます。
+ディレクトリー <filepath>backup_restore</filepath> は選択しないでください。このディレクトリーには、バックアップとリストアの処理のためのファイルが入っています。</entry></row>
+<row>
+<entry><parmname>BACKUP_NAME</parmname></entry>
+<entry><varname>volume_backup</varname>: デフォルト。<?linebreak?>バックアップ名を選択します。</entry></row>
+<row>
+<entry><parmname>BACKUP_TYPE</parmname></entry>
+<entry><varname>full</varname>: デフォルト。毎回すべてのファイルがバックアップされます。<?linebreak?>
+<varname>incremental</varname>: 新しいファイルと変更されたファイルのみバックアップされます。<varname>incremental</varname> を選択した場合、<parmname>SCHEDULING_INFO</parmname> と <parmname>SCHEDULING_TYPE</parmname> の値を選択する必要があります。</entry></row>
+<row>
+<entry><parmname>SCHEDULE_TYPE</parmname></entry>
+<entry><varname>none</varname>: デフォルト。1 回限りのバックアップを作成します。<?linebreak?>
+<varname>periodic</varname>: スケジュール・バックアップを作成するには、値を <varname>periodic</varname> に変更します。</entry></row>
+<row>
+<entry><parmname>SCHEDULE_INFO</parmname></entry>
+<entry><varname>hourly</varname>: 毎時バックアップを作成します。
+<?linebreak?><varname>daily</varname>: デフォルト。日次バックアップを作成します。
+<?linebreak?><varname>weekly</varname>: 週次バックアップを作成します。
+<?linebreak?> この変数は、<varname>periodic</varname> 更新をスケジューリングする場合に指定する必要があります。
+</entry></row>
+<row>
+<entry><parmname>EXCLUDE_DIRECTORIES</parmname></entry>
+<entry><varname>none</varname>: デフォルト。バックアップから除外するディレクトリーの絶対ファイル・パスを含めます。ディレクトリーが複数ある場合はコンマで区切ります。</entry></row></tbody></tgroup></table>
+<table frame="all" colsep="1" rowsep="1" id="table_ehp_3h3_tx">
+<title>リストア変数</title>
+<desc>
+<p outputclass="summary">バックアップのリストアに使用できるすべての変数のリスト</p></desc>
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="1.0*"></colspec><colspec colnum="2" colname="c2" colwidth="1.0*"></colspec>
+<thead>
+<row>
+<entry>キー</entry>
+<entry>値のオプション</entry></row></thead>
+<tbody>
+<row>
+<entry><parmname>BACKUP_NAME</parmname></entry>
+<entry><varname>volume_backup</varname>: デフォルト。<?linebreak?><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstorageshort"></keyword> からリストアするバックアップの名前を含めます。</entry></row>
+<row>
+<entry><parmname>RESTORE_DIRECTORY</parmname></entry>
+<entry><varname>/backup</varname>: デフォルト。<?linebreak?>ボリュームのマウント先の絶対ディレクトリー。データはこのディレクトリーにリストアされます。ディレクトリー <filepath>backup_restore</filepath> は選択しないでください。このディレクトリーには、バックアップとリストアの処理のためのファイルが入っています。</entry></row></tbody></tgroup></table>
+<table frame="all" colsep="1" rowsep="1" id="table_kl2_jh3_tx">
+<title>暗号化変数</title>
+<desc>
+<p outputclass="summary">バックアップを暗号化したり、リストア処理中にバックアップを暗号化解除したりするために使用できるすべての変数のリスト</p></desc>
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="1.0*"></colspec><colspec colnum="2" colname="c2" colwidth="1.0*"></colspec>
+<thead>
+<row>
+<entry>キー</entry>
+<entry>値のオプション</entry></row></thead>
+<tbody>
+<row>
+<entry>ENCRYPTION_KEY_FILE</entry>
+<entry><varname>./encryption.asc</varname>: デフォルト。<?linebreak?>暗号鍵のファイル名を変更するか、または <filepath>backup_restore</filepath> 以外のディレクトリーに鍵が配置されている場合に、この環境変数を含めます。</entry></row>
+<row>
+<entry>ENCRYPTION_REQUIRED</entry>
+<entry><varname>no</varname>: デフォルト。<?linebreak?><varname>yes</varname>: バックアップを暗号化しない場合は、暗号化の環境変数を含めないでください。バックアップを暗号化する場合は、値 <varname>yes</varname> を指定してこのキーを含めてください。</entry></row>
+<row>
+<entry>ENCRYPTION_PASSPHRASE</entry>
+<entry>バックアップを保護するためのパスフレーズを含めます。このパスフレーズは、暗号鍵を作成したときに生成したフレーズとは別のパスフレーズです。
+このパスフレーズは、データのバックアップ時とリストア時に指定する必要があります。</entry></row>
+<row>
+<entry>IS_KEY_GENERATED_ON_SYSTEM</entry>
+<entry><varname>no</varname>: デフォルト。<?linebreak?>
+<varname>yes</varname>: 暗号鍵をコンテナーに直接生成した場合は、<varname>yes</varname> を指定してこの環境変数を含めます。ほとんどのユーザーはローカル・コンピューターで鍵を生成してコンテナーにコピーするので、デフォルトの <varname>no</varname> のままでかまいません。</entry></row></tbody></tgroup></table></refbody></reference></task></dita><?tm 1474636083491 45 Windows||UNIX||Linux||IBM||Bluemix ?>

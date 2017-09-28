@@ -1,0 +1,1590 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE reference PUBLIC "-//IBM//DTD DITA IBM Reference//EN"
+ "ibm-reference.dtd">
+<reference id="container_cli_reference" xml:lang="ja-jp"><!--This ID purposely does not match the topic name. The topic name ID is used for the CLI topic below.-->
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> での<ph conref="cs_conref.dita#links/classic"></ph>の管理用 CLI リファレンス</title>
+<titlealts id="titlealts">
+<navtitle><ph conref="cs_conref.dita#links/classic"></ph>の CLI リファレンス</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> での<ph conref="cs_conref.dita#links/classic"></ph>の管理用 CLI リファレンス</searchtitle></titlealts><abstract>
+<shortdesc><ph conref="cs_conref.dita#links/classic"></ph>を作成したり管理したりする際には、以下のコマンドを参照してください。
+</shortdesc>
+
+<p><note type="attention" conref="container_conref.dita#links/migrate_note"></note></p>
+
+<p>このページでは、次について説明します。
+<lines>    • <xref href="#container_cli_reference_cfic" format="dita" scope="local"><ph conref="container_conref.dita#links/command_prefix"></ph> コマンド</xref>
+    • <xref href="container_cli_reference_cfic.html#container_cli_reference_cfic_quick" format="html" scope="peer">クイック・リファレンス</xref>
+    • <xref href="container_cli_reference_cfic_versions.dita" format="dita" scope="local">バージョン履歴</xref>
+    • <xref href="container_cli_reference_cfic_states.dita">コンテナーの状態</xref>
+    • <xref href="container_cli_reference_native-docker.dita">サポートされるネイティブ Docker コマンド</xref>
+    • <xref href="container_cli_reference_docker-compose.dita">Docker Compose のコマンド</xref>
+    • <xref href="container_cli_reference_versions.dita"></xref>
+    • <xref href="container_cli_reference_cfic_deprecated.dita">(非推奨) cf ic コマンド</xref>
+    • <xref href="container_cli_reference_cfic_migrate.dita">cf ic から bx ic コマンドへのマイグレーション</xref></lines></p></abstract>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>cli</indexterm><indexterm conref="container_conref.dita#links/cli_abbrev"></indexterm><indexterm>コマンド</indexterm><indexterm>リファレンス</indexterm><indexterm>オプション</indexterm><indexterm>IBM Containers</indexterm></keywords></metadata></prolog><?tm 1435623321 0?>
+<reference id="container_cli_reference_cfic">
+<title><ph id="title"><ph conref="cs_conref.dita#links/classic"></ph>の管理のための <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン (<ph conref="container_conref.dita#links/command_prefix"></ph>) コマンド</ph></title>
+<shortdesc><ph id="shortdesc"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグインを使用してコンテナーを作成したり管理したりする場合は、以下のコマンドを参照してください。
+</ph></shortdesc>
+<refbody id="refbody">
+<section id="section_rrd_4h1_4z"><note type="other" othertype="cf ic CLI は推奨されていません
+" conref="container_conref.dita#links/cfic_deprecation" props="status(deprecated)"></note>これらのどのコマンドも、オプションなしで実行するとヘルプ情報を取得できます。<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> --help</codeph> を実行して、これらのコマンドのリストを表示することもできます。</section>
+<section id="section_o1n_hh1_4z"><p><table id="cli_service_mgmt">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> で CLI およびサービスを管理するためのコマンド</title>
+<tgroup cols="4"><colspec colnum="1" colname="c1"></colspec><colspec colnum="2" colname="c2"></colspec><colspec colnum="3" colname="c3"></colspec><colspec colnum="4" colname="c4"></colspec>
+<thead>
+<row>
+<entry namest="c1" nameend="c4"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> で CLI およびサービスを管理するためのコマンド</entry></row></thead>
+<tbody>
+<row>
+<entry><xref href="#container_cli_reference_cfic/info"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> info</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/init"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> init </xref></entry>
+<entry><xref href="#container_cli_reference_cfic/namespace"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> 名前空間</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/reprovision"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> reprovision</xref></entry></row>
+<row>
+<entry><xref href="#container_cli_reference_cfic/unprovision"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> unprovision</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/upgrade"></xref></entry>
+<entry><xref href="#container_cli_reference_cfic/version"></xref></entry>
+<entry></entry></row></tbody></tgroup></table></p></section>
+<section id="section_p1n_hh1_4z"><p><table id="container__commands">
+<title>コンテナーを作成および管理するためのコマンド</title>
+<tgroup cols="5"><colspec colnum="1" colname="c1"></colspec><colspec colnum="2" colname="c2"></colspec><colspec colnum="3" colname="c3"></colspec><colspec colnum="4" colname="c4"></colspec><colspec colnum="5" colname="c5"></colspec>
+<thead>
+<row>
+<entry namest="c1" nameend="c5"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> でコンテナーを作成および管理するためのコマンド</entry></row></thead>
+<tbody>
+<row>
+<entry><xref href="#container_cli_reference_cfic/attach"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>attach</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/cp"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>cp</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/exec"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>exec</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/group_create"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>
+group-create</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/group_inspect"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>
+group-inspect</xref></entry></row>
+<row>
+<entry><xref href="#container_cli_reference_cfic/group_instances"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>
+group-instances</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/group_rm"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>
+group-remove</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/group_update"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>
+group-update</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/groups"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> groups</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/inspect"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> inspect</xref></entry></row>
+<row>
+<entry><xref href="#container_cli_reference_cfic/ip_bind"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> ip-bind</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/ip_release"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> ip-release</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/ip_request"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> ip-request</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/ip_unbind"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> ip-unbind</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/ips"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> ips</xref></entry></row>
+<row>
+<entry><xref href="#container_cli_reference_cfic/kill"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>kill</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/logs"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>logs</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/pause"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>pause</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/port"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> port</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/ps"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> ps</xref></entry></row>
+<row>
+<entry><xref href="#container_cli_reference_cfic/rename"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> rename</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/restart"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>restart</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/rm"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>rm</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/route_map"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> route-map</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/route_unmap"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>
+route-unmap</xref></entry></row>
+<row>
+<entry><xref href="#container_cli_reference_cfic/run"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> run</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/service-bind"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>
+service-bind</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/service-unbind"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>
+service-unbind</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/start"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>start</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/stats"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> stats</xref></entry></row>
+<row>
+<entry><xref href="#container_cli_reference_cfic/stop"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>stop</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/top"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> top</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/unpause"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>unpause</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/wait"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>wait</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/wait-status"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> wait-status</xref></entry></row></tbody></tgroup></table></p></section>
+<section id="section_q1n_hh1_4z"><p><table id="image_commands">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> でイメージを管理するためのコマンド</title>
+<tgroup cols="5"><colspec colnum="1" colname="c1"></colspec><colspec colnum="2" colname="c2"></colspec><colspec colnum="3" colname="c3"></colspec><colspec colnum="4" colname="c4"></colspec><colspec colnum="5" colname="c5"></colspec>
+<thead>
+<row>
+<entry namest="c1" nameend="c5"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> でイメージを管理するためのコマンド</entry></row></thead>
+<tbody>
+<row>
+<entry><xref href="#container_cli_reference_cfic/build"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>build</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/cpi"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>cpi</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/images"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>images</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/inspect"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> inspect</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/namespace"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> namespace-get</xref></entry></row>
+<row>
+<entry><xref href="#container_cli_reference_cfic/namespace"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>
+namespace-set</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/rmi"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>rmi</xref></entry>
+<entry></entry>
+<entry></entry>
+<entry></entry></row></tbody></tgroup></table></p></section>
+<section id="section_r1n_hh1_4z"><p><table id="volume_commands">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> でコンテナーでの保管に使用するコマンド</title>
+<tgroup cols="5"><colspec colnum="1" colname="c1"></colspec><colspec colnum="2" colname="c2"></colspec><colspec colnum="3" colname="c3"></colspec><colspec colnum="4" colname="c4"></colspec><colspec colnum="5" colname="c5"></colspec>
+<thead>
+<row>
+<entry namest="c1" nameend="c5"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> でコンテナーでの保管に使用するコマンド</entry></row></thead>
+<tbody>
+<row>
+<entry><xref href="#container_cli_reference_cfic/volume_create"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>
+volume-create</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/volume_fscreate"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>
+volume-fs-create</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/volume_fsflavorlist"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>
+volume-fs-flavors</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/volume_fsinspect"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>
+volume-fs-inspect</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/volume_fslist"></xref></entry></row>
+<row>
+<entry><xref href="#container_cli_reference_cfic/volume_fsrm"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>
+volume-fs-remove</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/volume_inspect"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>
+volume-inspect</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/volume_rm"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>
+volume-remove</xref></entry>
+<entry><xref href="#container_cli_reference_cfic/volume_list"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> ボリューム</xref></entry>
+<entry></entry></row></tbody></tgroup></table></p></section><!--WARNING to writers: Every command title conref must include a space at the end and the variables cannot use the varname tag. These things cause the conrefs to include unwanted line breaks.-->
+<section id="attach"><title><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> attach [--no-stdin] [--sig-proxy]</codeph> CONTAINER </title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>実行中のコンテナーを制御するか、その出力を表示します。コンテナーを終了して停止するには、CTRL+C を使用します。詳しくは、Docker ヘルプ内の <xref conref="container_cli_reference_native-docker.dita#container_cli_reference_native-docker/docker_attach"></xref> コマンドを参照してください。<draft-comment>CTRL+p CTRL+q to exit and keep the container running is
+supported in Docker 1.9, which we don't support yet.</draft-comment></dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt>--no-stdin</pt>
+<pd>(オプション) 標準入力を含めません。</pd></plentry>
+<plentry>
+<pt>--sig-proxy</pt>
+<pd>(オプション) デフォルトは <option>true</option> です。<draft-comment>You can also use this to exit and
+keep the container running?</draft-comment></pd></plentry>
+<plentry>
+<pt><varname>CONTAINER</varname></pt>
+<pd>(必須) コンテナーの名前または ID。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、コンテナー <varname>my_container</varname> に接続する要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> attach <varname>my_container</varname></codeblock></dd></dlentry></dl></section>
+<section id="build"><title><ph conref="container_conref.dita#links/command_prefix"></ph> build -t
+TAG [--no-cache] [--pull] [-q] DOCKERFILE_LOCATION </title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd><ph id="build_purpose">Docker イメージを、ローカルに、またはプライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> イメージ・レジストリーにビルドする。</ph> 詳しくは、Docker ヘルプ内の <xref conref="container_cli_reference_native-docker.dita#container_cli_reference_native-docker/docker_build"></xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry id="build_dockerfile">
+<pt><varname>DOCKERFILE_LOCATION</varname></pt>
+<pd>(必須) ローカル・ホスト上の <filepath>Dockerfile</filepath> およびコンテキストへのパス。</pd></plentry>
+<plentry id="build_nocache">
+<pt>--no-cache</pt>
+<pd>(オプション) イメージが初めてビルドされる際には、組織全体のイメージのレイヤーがキャッシュに入れられます。
+イメージのそれ以降のバージョンを作成するときには、ビルド・プロセスの速度向上のため、キャッシュ中にあるそのイメージのバージョンが使用されます。
+イメージの新しいバージョンをビルドする際に <codeph>--no-cache</codeph> オプションを含めることにより、イメージの各レイヤーも確実に再ビルドされるようにすることができます。
+</pd></plentry>
+<plentry id="build_pull">
+<pt>--pull</pt>
+<pd>(オプション) デフォルトでは、ベース・イメージは、まだ組織のイメージ・キャッシュ中にない場合にのみ、レジストリーからプルされます。このオプションを含めると、ベース・イメージの最新バージョンが新しいイメージのビルドに使用されるようにすることができます。
+</pd></plentry>
+<plentry id="build_quiet">
+<pt>-q, --quiet</pt>
+<pd>(オプション) コンテナーによって生成される詳細出力を抑止します。デフォルトは <option>false</option> です。</pd></plentry>
+<plentry id="build_tag">
+<pt>-t <varname>TAG</varname>, --tag <varname>TAG</varname></pt>
+<pd>(必須) 作成されるイメージに適用するプライベート・イメージ・レジストリーへのパス。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd><ph id="build_example">以下の例は、<codeph>myimage</codeph> という名前のイメージをビルドする要求です。このビルドで使用する <filepath>Dockerfile</filepath> および他の成果物は、コマンドが実行される同じディレクトリーにあります。
+レジストリーと名前空間がイメージ名と共に組み込まれているので、イメージは組織のプライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> イメージ・レジストリー内でビルドされます。</ph>
+<note type="tip"><ph conref="container_conref.dita#terms/namespace_get"></ph></note><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> build -t registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>&lt;my_namespace&gt;</varname>/<varname>myimage</varname> .</codeblock></dd></dlentry></dl></section>
+<section id="cp"><title><ph conref="container_conref.dita#links/command_prefix"></ph> cp SRC_PATH CONTAINER:DEST_PATH | <ph conref="container_conref.dita#links/command_prefix"></ph> cp CONTAINER:SRC_PATH DEST_PATH </title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd><ph>ファイルまたはフォルダーを、実行中または停止中の単一コンテナーからローカル・マシンにコピーしたり、その逆を行ったりします。詳しくは、Docker ヘルプ内の <xref conref="container_cli_reference_native-docker.dita#container_cli_reference_native-docker/docker_cp"></xref> コマンドを参照してください。</ph><note>このコマンドは、単一コンテナーにしか使用できません。
+コンテナー・グループとの間でファイルをコピーする場合は、グループに含まれている各インスタンスとの間でファイルをコピーする必要があります。</note></dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt>DEST_PATH</pt>
+<pd>(必須) ソース・パスから情報をコピーする宛先である、ローカル・マシンまたはコンテナー上のファイルまたはフォルダーへのパス。
+ファイルまたはフォルダーのコピーを開始する前に、それらがローカル・マシンまたはコンテナーに存在する必要があります。
+ローカル・マシンにコピーする場合、絶対パスまたは相対パスのどちらでも使用できます。
+単一コンテナーにコピーする場合、<ph id="cp_container_path">コンテナーの名前、区切り文字「:」、そしてコピー先のファイルまたはフォルダーへのパスを含める必要があります。パスは、コンテナーのルート・ディレクトリーからの相対パスにする必要があります。</ph></pd></plentry></parml>
+<parml>
+<plentry>
+<pt>SRC_PATH</pt>
+<pd>(必須) コピーするファイルまたはフォルダーへのパス。
+ファイルまたはフォルダーがローカル・マシン上にある場合、絶対パスまたは相対パスのどちらでも使用できます。
+ファイルまたはフォルダーが単一コンテナーにある場合、コンテナーの名前、区切り文字「:」、そしてコピーするファイルまたはフォルダーへのパスを含める必要があります。パスは、コンテナーのルート・ディレクトリーからの相対パスにする必要があります。
+<note>コンテナー内の <filepath>/dev</filepath>、<filepath>/etc</filepath>、<filepath>/proc</filepath> および <filepath>/sys</filepath> フォルダーの下に格納されている一部のシステム・ファイルはコピーできません。</note></pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>このサンプル・コマンドは、<filepath>config.txt</filepath> という名前のファイルをローカル・マシンの現行ディレクトリーから <varname>my_container</varname> という名前の単一コンテナーの <filepath>config</filepath> ディレクトリーにコピーします。</dd>
+<dd><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> cp <filepath>./config.txt</filepath> <filepath>my_container:/config</filepath></codeblock></dd></dlentry></dl></section>
+<section id="cpi"><title><ph conref="container_conref.dita#links/command_prefix"></ph> cpi SRC DST </title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd><ph id="cpi_purpose">Docker Hub イメージ、またはローカル・レジストリーからのイメージにアクセスし、それをプライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> イメージ・レジストリーにコピーします。</ph><note> このコマンドは、<codeph>docker pull</codeph> と <codeph>docker push</codeph> を一緒に使用することでイメージを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> イメージ・レジストリーに追加する代わりに使用します。<codeph>docker pull</codeph> と <codeph>docker push</codeph> を使用する方法を選択する場合は、<xref href="container_images_pulling.dita" format="dita" scope="local"></xref>を参照してください。</note></dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd id="cpi_parameters"><parml>
+<plentry>
+<pt>DST</pt>
+<pd>(必須) プライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> イメージ・レジストリー URL (名前空間を含む) およびデスティネーション・イメージ名。イメージのタグはオプションです。</pd></plentry></parml>
+<parml>
+<plentry>
+<pt>SRC</pt>
+<pd>(必須) ソース・リポジトリーおよびイメージ名。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> cpi <varname>source_repository</varname>/<varname>source_image_name</varname> <varname>private_registry_URL</varname>/<varname>destination_image_name</varname>:<varname>tag</varname></codeblock>
+<note type="tip"><ph conref="container_conref.dita#terms/namespace_get"></ph></note>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> cpi <varname>training/sinatra</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>&lt;my_namespace&gt;</varname>/<varname>mysinatra</varname>:<varname>v1</varname></codeblock></dd></dlentry></dl></section>
+<section id="exec"><title><ph id="exec_cmd"><ph conref="container_conref.dita#links/command_prefix"></ph> exec [-d] [-it ] [-u USER] CONTAINER CMD </ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>コンテナー内でコマンドを実行します。詳しくは、Docker ヘルプ内の <xref conref="container_cli_reference_native-docker.dita#container_cli_reference_native-docker/docker_exec"></xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt><varname>CMD</varname></pt>
+<pd>(必須) 指定された 1 つ以上のコンテナー内で実行するコマンド。</pd></plentry></parml>
+<parml>
+<plentry>
+<pt><varname>CONTAINER</varname></pt>
+<pd>(必須) コンテナーの名前または ID。</pd></plentry></parml>
+<parml>
+<plentry>
+<pt>-d , --detach </pt>
+<pd>(オプション) 指定されたコマンドをバックグラウンドで実行します。</pd></plentry></parml>
+<parml>
+<plentry>
+<pt>-it</pt>
+<pd>(オプション) 対話モード。標準入力が表示されている状態を維持します。終了するには <userinput>exit</userinput> と入力します。</pd></plentry></parml>
+<parml>
+<plentry>
+<pt>-u <varname>USER</varname>, --user <varname>USER</varname></pt>
+<pd>(オプション) ユーザー名。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd><ph id="exec_example_1">このサンプル・コマンドは、コンテナー <varname>my_container</varname> 内でインタラクティブ bash ターミナルを実行します。</ph></dd>
+<dd><codeblock id="exec_example_1_code"><ph conref="container_conref.dita#links/command_prefix"></ph> exec -it <varname>my_container</varname> bash</codeblock></dd>
+<dd><ph id="exec_example_2">このサンプル・コマンドは、コンテナー <varname>my_container</varname> 内で date コマンドを実行します。</ph></dd>
+<dd><codeblock id="exec_example_2_code"><ph conref="container_conref.dita#links/command_prefix"></ph> exec <varname>my_container</varname> date</codeblock></dd></dlentry></dl></section>
+<section id="group_create"><title><ph id="group_create_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph> group-create [--anti] [--auto] [-d DOMAIN] [--desired DESIRED] [-e ENV] [--env-file
+ENVFILE]<ph> [--http_monitor_enabled] [--http_monitor_path] [--http_monitor_rc_list] [--ip
+IP_ADDRESS]</ph> [-m MEMORY] [--max MAX] [--min MIN] [-n HOST] --name NAME [-p PORT] [--session-affinity] [--volume VOLUME:/DIRECTORY_PATH] IMAGE [CMD] </ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd><ph id="group_create_purpose">スケーリング・グループを作成します。</ph> デフォルトでは、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のコンテナーはデタッチ・モードで実行されます。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd id="group_create_param"><parml>
+<plentry id="group_create_anti">
+<pt>--anti</pt>
+<pd>(オプション) アンチアフィニティーを使用して、コンテナー・グループの可用性を高めることができます。
+<codeph>--anti</codeph> オプションは、グループ内のすべてのコンテナー・インスタンスを別々の物理計算ノード上に強制的に配置します。これにより、1 つのハードウェア障害によってグループ内のすべてのコンテナーが異常終了してしまう可能性を減らします。
+<ph id="group_create_anti_failure">大きいグループ・サイズの場合は、このオプションを使用できない可能性があります。 <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のどの地域およびどの組織にも、デプロイできる計算ノードのセットには限りがあるからです。デプロイメントに失敗した場合は、グループ内のコンテナー・インスタンスの数を減らすか、<codeph>--anti</codeph> オプションを外してください。</ph></pd></plentry>
+<plentry id="group_create_auto">
+<pt>--auto</pt>
+<pd>(オプション) <ph conref="container_planning_types.dita#group_autorecovery/auto-recovery"></ph>ヘルス・チェックについて詳しくは、<codeph>--http_monitor_enabled</codeph> オプションを参照してください。</pd></plentry>
+<plentry>
+<pt><varname>CMD</varname></pt>
+<pd><ph id="group_create_cmd">(オプション) コマンドと引数が実行のためにコンテナー・グループに渡されます。このコマンドは長期実行コマンドでなければなりません。実行時間が短いコマンド (例えば <cmdname>/bin/date</cmdname>) は、コンテナーが異常終了する原因になることがあるため、使用しないでください。</ph><p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> によって提供される <option>ibmnode</option> イメージを使用した長期実行コマンドの例:<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-create --name <varname>my_container_group</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>ibmnode</varname> ping localhost</codeblock><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-create --name <varname>my_container_group</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>ibmnode</varname> -- tail -f /dev/null</codeblock><note>CMD とその引数は <codeph><ph conref="container_conref.dita#links/command_prefix"></ph> group-create</codeph> コマンド・ラインの最後に指定する必要があります。
+</note></p></pd></plentry>
+<plentry>
+<pt>-d <varname>DOMAIN</varname>, --domain <varname>DOMAIN</varname></pt>
+<pd>(オプション) デフォルトのシステム・ドメインは <codeph><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword></codeph> であり、それにより SSL 証明書が既に提供されているため、付加的な構成なしで HTTPS によりコンテナー・グループにアクセスすることができます。
+カスタム・ドメインを使用するには、パブリック DNS サーバー上でカスタム・ドメインを登録し、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> でカスタム・ドメインを構成してから、カスタム・ドメインをパブリック DNS サーバー上の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> システム・ドメインにマップする必要があります。
+カスタム・ドメインが <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> システム・ドメインにマップされた後、カスタム・ドメインを求める要求は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 内のアプリケーションにルーティングされます。
+カスタム・ドメインを作成する際、ドメイン名に下線 (_) を含めないでください。
+カスタム・ドメインについて詳しくは、<xref href="../manageapps/updapps.html#domain" format="html" scope="peer">カスタム・ドメインの作成と使用</xref>を参照してください。
+カスタム・ドメインのセキュリティーを確保するには、<xref href="../manageapps/secapps.html#ssl_certificate" format="html" scope="peer">SSL 証明書をアップロード</xref>して、HTTPS でコンテナー・グループにアクセスできるようにします。
+<p>ホストとドメインの組み合わせが、完全なパブリック経路 URL (例えば <codeph>http://mycontainerhost.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword></codeph>) を形成します。
+これは、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 内で固有でなければなりません。
+<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> group-inspect</codeph> コマンドを使用してコンテナー・グループの詳細を検討すると、ホストとドメインが経路として一緒にリストされます。</p></pd></plentry>
+<plentry id="group_create_desired">
+<pt>--desired <varname>DESIRED</varname></pt>
+<pd>(オプション) グループ内のインスタンスの数。
+デフォルトは <option>2</option>です。<ph conref="container_conref.dita#terms/instances_intro"></ph>
+<ph conref="container_conref.dita#terms/instances_determine"></ph>
+<ph conref="container_conref.dita#terms/instances_ha"></ph><note conref="container_conref.dita#links/group_instances"></note></pd></plentry>
+<plentry>
+<pt>-e <varname>ENV</varname>, --env <varname>ENV</varname></pt>
+<pd><ph id="group_create_env">(オプション) <ph id="group_create_env_desc">環境変数を設定します。ここで、<option>ENV</option> は <codeph>key=value</codeph> ペアです。複数のキーを別々にリストします。
+引用符を含める場合は、環境変数名と値の両方を囲みます。
+例: <codeph>-e
+<q><varname>key1</varname>=<varname>value1</varname></q> -e
+<q><varname>key2</varname>=<varname>value2a</varname>,<varname>value2b</varname></q> -e
+<q><varname>key3</varname>=<varname>value3</varname></q></codeph></ph></ph><p><table id="env_keys">
+<title>推奨される環境変数</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry>環境変数</entry>
+<entry>説明</entry></row></thead>
+<tbody>
+<row audience="blue">
+<entry><lines><codeph>CCS_API_KEY=</codeph>
+<codeph><varname>&lt;api_key&gt; </varname></codeph></lines>
+<draft-comment>This row currently only displays in staging.</draft-comment></entry>
+<entry>API キーを組み込むには、<codeph>CCS_API_KEY</codeph> を使用します。</entry></row>
+<row>
+<entry><lines><codeph>CCS_BIND_APP=</codeph>
+<codeph><varname>&lt;appname&gt;</varname></codeph></lines></entry>
+<entry>一部の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスは、コンテナーへの直接バインディングをサポートしていません。その場合は、Cloud Foundry アプリを作成し、そのアプリに <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスをバインドする必要があります。次に、<codeph>CCS_BIND_APP</codeph> を使用して、アプリをコンテナーにバインドします。Cloud Foundry アプリはブリッジとして機能し、実行中のコンテナー・インスタンスに <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> がブリッジ・アプリの VCAP_SERVICES 情報を注入することを可能にします。</entry></row>
+<row>
+<entry><lines><codeph>CCS_BIND_SRV=</codeph>
+<codeph><varname>&lt;service_instance_name1&gt;,</varname></codeph>
+<codeph><varname>&lt;service_instance_name2&gt;</varname></codeph></lines>
+<note> サービスが <codeph>CCS_BIND_SRV=</codeph> 環境変数の使用をサポートしていない場合は、代わりに <codeph>CCS_BIND_APP=</codeph> を使用してください。</note></entry>
+<entry>ブリッジ・アプリを使用せずに <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスをコンテナーに直接バインドするには、<codeph>CCS_BIND_SRV</codeph> を使用します。このようにバインドすることで、 <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> は、実行中のコンテナー・インスタンスに VCAP_SERVICES 情報を注入できるようになります。複数の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスをリストするには、それらを同じ環境変数の一部として含めてください。</entry></row>
+<row>
+<entry><lines>(非推奨) <codeph>CCS_SSH_KEY=</codeph>
+<codeph><varname>&lt;public_ssh_key&gt; </varname></codeph></lines></entry>
+<entry><note type="other" othertype="この環境変数は推奨されていません" props="status(deprecated)">コンテナーに対する外部アクセスには、代わりに <ph conref="container_conref.dita#links/command_prefix"></ph> <codeph>exec</codeph> または <ph conref="container_conref.dita#links/command_prefix"></ph> <codeph>attach</codeph> を使用してください。詳細については、<xref href="troubleshoot/ts_cf_ic_exec.dita" format="dita" scope="local"></xref>を参照してください。</note><ph>コンテナーの作成時に SSH 鍵をコンテナーに追加するには、<codeph>CCS_API_KEY</codeph> を使用します。</ph></entry></row>
+<row>
+<entry><lines><codeph>LOG_LOCATIONS=</codeph>
+<codeph><varname>&lt;path_to_file&gt; </varname></codeph></lines></entry>
+<entry><ph id="log_locations_desc">コンテナー内でモニターされるログ・ファイルを追加するには、
+<codeph>LOG_LOCATIONS</codeph> 環境変数を、ログ・ファイルへのパスと共に設定します。</ph></entry></row></tbody></tgroup></table>例:<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-create -e CCS_BIND_SRV=<varname>&lt;service_instance_name&gt;</varname> --name <varname>&lt;container_name&gt;</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>&lt;my_namespace&gt;</varname>/<varname>&lt;image_name&gt;</varname></codeblock></p></pd></plentry>
+<plentry>
+<pt>--env-file <varname>ENVFILE</varname></pt>
+<pd>(オプション) ファイルから環境変数をインポートします。<varname>ENVFILE</varname> は、ローカル・ディレクトリー上のファイルのパスです。
+ファイル内の各行が 1 つの <codeph>key=value</codeph> ペアを表します。<p>例</p><codeblock>KEY1=VALUE1
+KEY2=VALUE2</codeblock></pd></plentry>
+<plentry>
+<pt>--http_monitor_enabled</pt>
+<pd>(オプション) デフォルト値は <codeph>true</codeph> です。<ph conref="container_planning_types.dita#group_autorecovery/auto-recovery"></ph> HTTP ではなく TCP を通信に使用するアプリなどのように、HTTP ヘルス・チェックが不要なアプリもあります。HTTP モニターを無効にするには、このオプションを <codeph>false</codeph> に設定します。
+例: <codeph>--http_monitor_enabled=false</codeph></pd></plentry>
+<plentry>
+<pt>--http_monitor_path</pt>
+<pd>(オプション) デフォルト値は <codeph>/</codeph> です。<codeph>--http_monitor_enabled</codeph> を有効にした場合は、このオプションを使用して、ヘルス・チェックのカスタム・パスを設定できます (例: <codeph>--http_monitor_path=<q>/health/path</q></codeph>)。</pd></plentry>
+<plentry>
+<pt>--http_monitor_rc_list</pt>
+<pd>(オプション) <codeph>--http_monitor_enabled</codeph> を有効にした場合は、ヘルス・チェックの応答コードのリストを指定できます。デフォルト値に含まれているコードは、<codeph>200、201、202、204、300、301、302、401、403、</codeph><codeph>404</codeph> です。有効な応答のリストに含まれていない応答が返ると、ロード・バランサーがコンテナー・インスタンスの状態を <codeph>INACTIVE</codeph> に変更します。
+非アクティブなコンテナーはロードを受け取らないので、コンテナー・グループの状態が HAS_INACTIVE_INSTANCES に変わります。いずれのコンテナーも <codeph>ACTIVE</codeph> ではない場合、コンテナー・グループの状態は <codeph>NO_ACTIVE_INSTANCES</codeph> に変わります。状態について詳しくは、<xref href="container_cli_reference_cfic_states.dita" format="dita" scope="local"></xref>を参照してください。</pd></plentry>
+<plentry>
+<pt><varname>IMAGE</varname></pt>
+<pd><ph id="group_create_image">(必須) コンテナー・グループ中の各コンテナー・インスタンスに含めるイメージ。イメージの後にコマンドをリストできますが、イメージの後にはオプションを置かないでください。イメージ指定の前にすべてのオプションを含めるようにしてください。</ph><p>組織のプライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> イメージ・レジストリー内のイメージを使用する場合、形式 <codeph>registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>NAMESPACE</varname>/<varname>IMAGE</varname></codeph> でイメージを指定します。</p><p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> によって提供されるイメージを使用している場合は、組織の名前空間を含めないでください。イメージを、<codeph>registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>IMAGE</varname></codeph>という形式で指定します。</p></pd></plentry>
+<plentry>
+<pt> --ip <varname>IP_ADDRESS</varname></pt>
+<pd>(オプション) 使用可能な IP アドレスがある場合は、パブリック IP アドレスをコンテナー・グループにバインドします。
+<codeph>-p</codeph> フラグを指定して、ポートを公開する必要もあります。コンテナー・グループは、パブリック経路またはパブリック IP アドレスのどちらかを取ることができますが、両方を取ることはできません。IP アドレスをアンバインドしてその IP をスペースのクォータに戻すには、コンテナー・グループを一度削除して、IP アドレスを指定しないでそのグループを再作成します。コンテナー・グループを作成する前に IP アドレスを要求するには、<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> ip-request</codeph> を実行します。<note>パブリック IP アドレスをバインドしても、コンテナー・グループとの間で送受信するデータを暗号化する SSL 証明書は組み込まれません。ご使用のアプリに SSL 暗号化が必要である場合は、独自の SSL ソリューションを実装するか、またはパブリック IP アドレスをバインドする代わりにパブリック経路をコンテナー・グループにマップすることができます。パブリック経路には SSL 証明書が既に組み込まれているので、追加の構成を行わずに HTTPS でコンテナー・グループにアクセスできます。</note></pd></plentry>
+<plentry id="group_create_memory">
+<pt>-m <varname>MEMORY</varname>, --memory <varname>MEMORY</varname></pt>
+<pd>(オプション) <ph id="memory_desc">コンテナーのメモリー限度を MB 単位で入力します。
+メモリー限度は、コンテナーが実行時に計算ホスト上で取得するメモリーとディスク・スペースの最大量を定義するコンテナー・サイズの一部です。
+コンテナー・サイズが割り当てられた後、その値を変更することはできません。</ph><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で設定可能なサイズは、以下のとおりです。
+<ul id="ul_s1n_hh1_4z" audience="yellow">
+<li>ピコ (64 MB メモリー、4 GB ディスク・スペース)</li>
+<li>ナノ (128 MB メモリー、8 GB ディスク・スペース)</li>
+<li>マイクロ (256 MB メモリー、16 GB ディスク・スペース)</li>
+<li>タイニー (512 MB メモリー、32 GB ディスク・スペース)</li>
+<li>スモール (1024 MB メモリー、64 GB ディスク・スペース)</li>
+<li>ミディアム (2048 MB メモリー、128 GB ディスク・スペース)</li>
+<li>ラージ (4096 MB メモリー、256 GB ディスク・スペース)</li>
+<li>X ラージ (8192 MB メモリー、512 GB ディスク・スペース)</li>
+<li>2X ラージ (16384 MB メモリー、1 TB ディスク・スペース)</li></ul><ul id="ul_t1n_hh1_4z" audience="blue">
+<li>ピコ (64 MB メモリー、4 GB ディスク・スペース、¼ vCPU)</li>
+<li>ナノ (128 MB メモリー、8 GB ディスク・スペース、¼ vCPU)</li>
+<li>マイクロ (256 MB メモリー、16 GB ディスク・スペース、¼ vCPU)</li>
+<li>タイニー (512 MB メモリー、32 GB ディスク・スペース、¼ vCPU)</li>
+<li>スモール (1024 MB メモリー、64 GB ディスク・スペース、¼ vCPU)</li>
+<li>ミディアム (2048 MB メモリー、128 GB ディスク・スペース、½ vCPU)</li>
+<li>ラージ (4096 MB メモリー、256 GB ディスク・スペース、1 vCPU)</li>
+<li>X ラージ (8192 MB メモリー、512 GB ディスク・スペース、2 vCPU)</li>
+<li>2X ラージ (16384 MB メモリー、1 TB ディスク・スペース、4 vCPU)</li></ul>コンテナーのサイズを設定しない場合、各コンテナー・インスタンスは <option>256</option> MB で作成されます。
+<note type="important">コンテナー・メモリーは、単位ラベルを付けずに MB で入力してください。
+例えば、ピコ・コンテナーを作成する場合は、<codeph>-m 64</codeph> と入力します。
+</note></pd></plentry>
+<plentry id="group_create_max">
+<pt>--max <varname>MAX</varname></pt>
+<pd>(オプション) インスタンスの最大数。デフォルトは <option>2</option> です。</pd></plentry>
+<plentry id="group_create_min">
+<pt>--min <varname>MIN</varname></pt>
+<pd>(オプション) インスタンスの最小数。デフォルトは <option>1</option> です。
+</pd></plentry>
+<plentry>
+<pt> -n <varname>HOST</varname>, --hostname <varname>HOST</varname></pt>
+<pd>(オプション) ホスト名 (例えば <varname>mycontainerhost</varname>)。ホスト名に下線 (_) を含めないでください。ホストとドメインの組み合わせが、完全なパブリック経路 URL (例えば <codeph>http://mycontainerhost.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword></codeph>) を形成します。
+<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> group-inspect</codeph> コマンドを使用してコンテナー・グループの詳細を検討すると、ホストとドメインが経路として一緒にリストされます。</pd></plentry>
+<plentry id="group_create_name">
+<pt>--name <varname>NAME</varname></pt>
+<pd>(必須) グループに名前を付けます。<codeph>-n</codeph> は推奨されません。<note type="tip" id="container_name">コンテナー名は文字で始める必要があり、その後には、大文字、小文字、数字、ピリオド (.)、下線 (_)、およびハイフン (-) を使用できます。</note></pd></plentry>
+<plentry id="group_create_port">
+<pt>-p <varname>PORT</varname>, --publish <varname>PORT</varname></pt>
+<pd><p>(必須) HTTP トラフィックとプライベート・ネットワーク・トラフィック用のポートを公開します。ポートを公開しない場合は、コンテナー・グループは実行されますが、パブリック・ネットワークかプライベート・ネットワーク上のグループのロード・バランサーを使用してコンテナー・グループにアクセスできません。
+</p><p>コンテナー・グループの場合、複数のポートを含めることはできません。複数のポートがリストされる場合、最後にリストされているポートのみが公開されます。他のポートは、コマンドに無視されます。
+</p><ph id="https">経路をバインドするとき、グループ内のコンテナーはグループの公開ポートで HTTP トラフィックを listen する必要があります。
+HTTP 以外のポートはパブリックに公開できません。HTTPS トラフィックが公開されたポートに届くと、(Go)Router は HTTPS 終端を実行します。その後、(Go)Router とコンテナーの間のプライベート仮想ネットワークでは HTTP プロトコルが使用されます。</ph>
+<ph>IP アドレスをバインドするとき、
+グループ内のコンテナーは HTTP トラフィックまたは HTTPS トラフィックを listen できますが、公開可能なポートは 1 つだけです。
+</ph><p conref="container_single_ui.dita#gui/ports_p"></p></pd></plentry>
+<plentry id="session_affinity">
+<pt>--session_affinity</pt>
+<pd><p>(オプション) デフォルト値は <codeph>false</codeph> です。<codeph>--http_monitor_enabled</codeph> を <userinput>true</userinput> に設定した場合は、<codeph>--session_affinity</codeph> オプションを <userinput>true</userinput> に設定して、セッション Cookie の作成と管理をアプリの代わりに <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で行うことができます。
+<codeph>--http_monitor_enabled</codeph> を <userinput>false</userinput> に設定した場合や、HTTP ではなく TCP を通信に使用する場合、このオプションは無効です。</p></pd></plentry>
+<plentry id="group_create_volume">
+<pt>--volume <varname>VOLUME</varname>:<varname>/DIRECTORY_PATH</varname>[:ro]</pt>
+<pd>(オプション) <codeph>VOLUME:/DIRECTORY_PATH[:ro]</codeph> 形式で詳細を指定して、コンテナーにボリュームを接続します。<ul id="ul_u1n_hh1_4z">
+<li><varname>VOLUME</varname>: ボリューム ID または名前。</li>
+<li><varname>DIRECTORY_PATH</varname>: コンテナー内でのディレクトリーの絶対パス。</li>
+<li><codeph>ro</codeph>: オプション。デフォルトは読み取り/書き込みですが、<codeph>ro</codeph> を指定するとボリュームは読み取り専用になります。</li></ul></pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、パブリック経路を使用するスケーリング・グループを作成する要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-create --auto -d <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword> -n <varname>mycontainerhost</varname>  --name <varname>my_container_group</varname> -p <varname>9080</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>ibmliberty</varname></codeblock></dd>
+<dd>以下の例は、パブリック IP アドレスを使用するスケーリング・グループを作成する要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-create --auto --ip <varname>198.51.100.27</varname>  --name <varname>my_container_group</varname> -p <varname>9080</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>ibmliberty</varname></codeblock></dd></dlentry></dl></section>
+<section id="group_inspect"><title><ph id="group_inspect_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph> group-inspect GROUP </ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd id="group_inspect_purpose">コンテナー・グループが作成されたときにコンテナー・グループに指定された詳細情報 (環境変数、ポート、メモリーなど) を参照してください。
+また、このコマンドを実行して、このグループに割り当てられたパブリック経路を確認します。
+</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry id="group_inspect_group">
+<pt><varname>GROUP</varname></pt>
+<pd>(必須) グループ ID または名前。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、グループ <varname>my_container_group</varname> を検査する要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-inspect <varname>my_container_group</varname></codeblock></dd></dlentry></dl></section>
+<section id="group_instances"><title><ph id="group_instances_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph> group-instances GROUP </ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd id="group_instances_purpose">コンテナー・グループに含まれるすべてのコンテナーを、その ID、名前、IP アドレス、およびパブリック・ポートと共にリストします。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt><varname>GROUP</varname></pt>
+<pd>(必須) グループ ID または名前。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、グループ <varname>my_container_group</varname> のすべてのコンテナーを取得する要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-instances <varname>my_container_group</varname></codeblock></dd></dlentry></dl></section>
+<section id="group_rm"><title><ph id="group_remove_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph> group-remove [-f] GROUP [GROUP]</ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd id="group_rm_purpose">スペースから 1 つ以上のコンテナー・グループを削除します。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry id="group_rm_force">
+<pt>-f, --force</pt>
+<pd>(オプション) 実行中のコンテナーまたは障害が起こったコンテナーの削除を強制的に実行します。</pd></plentry></parml>
+<parml>
+<plentry id="group_rm_group">
+<pt>GROUP</pt>
+<pd>(必須) 少なくとも 1 つのコンテナー・グループのグループ ID または名前。
+</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、コンテナー・グループを削除する要求です。ここで、<varname>my_container_group</varname> はグループの名前です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-remove <varname>my_container_group</varname></codeblock></dd></dlentry></dl></section>
+<section id="group_update"><title><ph id="group_update_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph> group-update [--desired DESIRED] [-e
+<q><varname>KEY</varname>=<varname>VALUE</varname></q>]<ph> [--max MAX] [--min
+MIN]</ph> GROUP </ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd id="group_update_purpose"><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> group-update</codeph> コマンドを使用して、以下の更新をグループに実行できます。
+<ul id="ul_v1n_hh1_4z">
+<li>コンテナー・グループ内で実行するインスタンス数を更新します。</li>
+<li>新しい環境変数をグループに追加します。</li>
+<li>既存の環境変数の値を更新します。
+</li></ul><note>一度に 1 つの更新だけを実行できます。</note></dd>
+<dd><note type="tip">コンテナー・グループのホスト名またはドメインを更新するには、
+<xref href="#container_cli_reference_cfic/route_map"></xref> を使用します。</note></dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml id="group_update_parameters">
+<plentry>
+<pt>--desired <varname>DESIRED</varname></pt>
+<pd>(オプション) 必要なインスタンスの数。デフォルトは <option>2</option> です。</pd></plentry>
+<plentry>
+<pt>-e <q><varname>KEY</varname>=<varname>VALUE</varname></q></pt>
+<pd>(オプション) 新しい環境変数をコンテナー・グループに追加するか、または既存の環境変数の値を変更します。</pd></plentry>
+<plentry>
+<pt>--max <varname>MAX</varname></pt>
+<pd>(オプション) インスタンスの最大数。デフォルトは <option>2</option> です。</pd></plentry>
+<plentry>
+<pt>--min <varname>MIN</varname></pt>
+<pd>(オプション) インスタンスの最小数。デフォルトは <option>1</option> です。
+</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、<varname>my_container_group</varname> という名前のコンテナー・グループに必要なコンテナー・インスタンス数を更新する要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-update --desired <varname>5</varname> <varname>my_container_group</varname></codeblock></dd>
+<dd>以下の例は、<varname>my_container_group</varname> という名前のコンテナー・グループに、値 <varname>Linux</varname> を指定して新しい環境変数 <varname>environment</varname> を追加する要求です。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-update -e <q><varname>environment</varname>=<varname>Linux</varname></q> <varname>my_container_group</varname></codeblock></dd></dlentry></dl></section>
+<section id="groups"><title><ph id="group_list_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph> groups [-q] </ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd id="group_list_purpose">スペース内のコンテナー・グループをリストします。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt>-q</pt>
+<pd>(オプション) 各コンテナー・グループのコンテナー・グループ ID だけをリストします。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd><codeblock><ph conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/group_list_cmdname"></ph></codeblock></dd></dlentry></dl></section>
+<section id="images"><title><ph conref="container_conref.dita#links/command_prefix"></ph> images [-a]<ph audience="blue"> [--digests]</ph> [-f CONDITION] [--no-trunc] [q]</title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>組織のプライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> イメージ・レジストリー内の使用可能なすべてのイメージのリストを表示します。詳しくは、Docker ヘルプ内の <xref conref="container_cli_reference_native-docker.dita#container_cli_reference_native-docker/docker_images"></xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt>-a, --all</pt>
+<pd>(オプション) 組織のレジストリー内の各イメージの、最新のイメージ層だけでなくすべてのイメージ層を含めます。</pd></plentry></parml>
+<parml audience="blue">
+<plentry>
+<pt>--digests</pt>
+<pd>(Optional) Shows <xref href="https://docs.docker.com/engine/reference/commandline/images/#listing-image-digests" format="html" scope="external">digests</xref>.<draft-comment>Not supported currently? Digests are a v2 registry
+thing. V2 registry hasn't been implemented yet. Only shows in staging
+currently.</draft-comment></pd></plentry></parml>
+<parml>
+<plentry>
+<pt>-f, --filter <varname>CONDITION</varname></pt>
+<pd>(オプション) 指定した条件でイメージのリストをフィルターに掛けます。</pd></plentry></parml>
+<parml>
+<plentry>
+<pt>--no-trunc</pt>
+<pd>(オプション) 出力を切り捨てません。</pd></plentry></parml>
+<parml>
+<plentry>
+<pt>-q, --quiet</pt>
+<pd>(オプション) 数値 ID のみを表示します。</pd></plentry></parml></dd></dlentry>
+<dlentry id="images_responses">
+<dt>応答</dt>
+<dd>イメージ ID、作成日、およびイメージ名を含むイメージのリストを受け取ります。
+</dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、組織用の使用可能なイメージのリストを受け取る要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> images</codeblock></dd></dlentry></dl></section>
+<section id="info"><title><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> info [--json]</codeph></title>
+<dl>
+<dlentry id="info_purpose">
+<dt>目的</dt>
+<dd>コンテナー・クラウド・サービス・インスタンスの状態を説明する情報を受け取ります。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt><varname>--json</varname></pt>
+<pd>(オプション) コマンドの出力を JSON 形式に構造化します。</pd></plentry></parml></dd></dlentry>
+<dlentry id="info_responses">
+<dt>応答</dt>
+<dd>コンテナー限度、コンテナー使用状況、実行中のコンテナー、メモリー限度、メモリー使用量、浮動 IP 限度、浮動 IP 使用状況、CCS ホスト URL、レジストリー・ホスト URL、およびデバッグ・モード状況を含む、読み出し情報を受け取ります。
+</dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、コンテナー・クラウド・サービス・インスタンスに関する情報を受け取る要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> info</codeblock></dd></dlentry></dl></section>
+<section id="init"><title><ph><ph conref="container_conref.dita#links/command_prefix"></ph> init </ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI を初期化します。<note id="login_prereq">ログインする前に、Cloud Foundry コマンド・ツール (cf) および Docker CLI (docker) がインストールされていること、およびその両方が環境パス内に構成されていることを確認する必要があります。</note><note type="tip" id="region">別の地域に切り替えるには、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI ではなく Cloud Foundry CLI にログインするときに、その地域の API エンドポイントを指定します。 <ul id="ul_zc3_dxl_nz">
+<li>米国南部:<codeblock>bx login -a api.ng.bluemix.net</codeblock></li>
+<li>英国:<codeblock>bx login -a api.eu-gb.bluemix.net</codeblock></li>
+<li audience="unknown">シドニー:<codeblock>bx login -a api.au-syd.bluemix.net</codeblock></li></ul></note></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> init</codeblock></dd></dlentry></dl></section>
+<section id="inspect"><title><ph id="inspect_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph> inspect [IMAGE | images | CONTAINER] </ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd><ph id="inspect_purpose">1 つ以上のコンテナーまたはコンテナー・イメージについての情報を取り出します。</ph>
+IMAGE、images、CONTAINER オプションは一度に 1 つしか指定できません。詳しくは、Docker ヘルプ内の <xref conref="container_cli_reference_native-docker.dita#container_cli_reference_native-docker/docker_inspect"></xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry id="inspect_container">
+<pt><varname>CONTAINER</varname></pt>
+<pd>(必須) コンテナーの名前または ID を指定することによって、特定のコンテナーについての詳細情報を取得します。コマンドの中で、コンテナーの名前または ID をスペースで区切ってリストして指定することにより、複数のコンテナーについての情報を取り出すことができます。
+</pd></plentry></parml>
+<parml>
+<plentry>
+<pt><varname>IMAGE</varname></pt>
+<pd>(必須) イメージへのフル・プライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリー・パスを指定することによって、特定のイメージについての詳細情報を取得します。コマンドの中で、各レジストリー・パスをスペースで区切ってリストして指定することにより、複数イメージの情報を取り出すことができます。
+</pd></plentry></parml>
+<parml>
+<plentry>
+<pt>images</pt>
+<pd>(必須) レジストリー内のすべてのイメージについての詳細情報を取得します。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、<userinput>my_container</userinput> という名前のコンテナーを検査する要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> inspect <varname>my_container</varname></codeblock></dd></dlentry></dl></section>
+<section id="ip_bind"><title><ph conref="container_conref.dita#links/command_prefix"></ph> ip-bind ADDRESS CONTAINER </title>
+<dl>
+<dlentry id="bind_purpose">
+<dt>目的</dt>
+<dd>使用可能な浮動 IP アドレスを単一コンテナーにバインドします。<note>浮動 IP アドレスをコンテナー・グループにバインドするには、<xref href="#container_cli_reference_cfic/group_create" format="dita"><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> group-create</codeph></xref> コマンドで <codeph>--ip</codeph> フラグを使用します。</note></dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry id="bind_address">
+<pt><varname>ADDRESS</varname></pt>
+<pd>(必須) 単一コンテナーにバインドする IP アドレス。</pd></plentry>
+<plentry id="bind_container">
+<pt><varname>CONTAINER</varname></pt>
+<pd>(必須) IP アドレスにバインドするコンテナー ID またはコンテナー名。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、名前 <varname>my_container</varname> のコンテナーに IP アドレス 192.0.2.23 をバインドする要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ip-bind <varname>192.0.2.23</varname> <varname>my_container</varname></codeblock></dd></dlentry></dl></section>
+<section id="ip_release"><title><ph conref="container_conref.dita#links/command_prefix"></ph> ip-release ADDRESS </title>
+<dl>
+<dlentry id="ip_release_purpose">
+<dt>目的</dt>
+<dd>浮動 IP アドレスを解放します。
+浮動 IP アドレスが解放された後には、それをスペース内の単一コンテナーやコンテナー・グループにバインドできません。
+</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry id="ip_release_address">
+<pt><varname>ADDRESS</varname></pt>
+<pd>(必須) 解放する IP アドレス。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、IP アドレス 192.0.2.23 を解放する要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ip-release <varname>192.0.2.23</varname></codeblock></dd></dlentry></dl></section>
+<section id="ip_request"><title><ph conref="container_conref.dita#links/command_prefix"></ph> ip-request [-q]</title>
+<dl>
+<dlentry id="ip_request_purpose">
+<dt>目的</dt>
+<dd>新しい浮動 IP を要求します。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt>-q</pt>
+<pd>(オプション) コマンド出力に IP アドレスだけを表示します。
+メッセージ・テキストは含まれません。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、新しい浮動 IP アドレスの要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ip-request</codeblock></dd></dlentry></dl></section>
+<section id="ip_unbind"><title><ph conref="container_conref.dita#links/command_prefix"></ph> ip-unbind ADDRESS CONTAINER </title>
+<dl>
+<dlentry id="ip_unbind_purpose">
+<dt>目的</dt>
+<dd>浮動 IP アドレスを単一コンテナーからアンバインドします。<note>コンテナー・グループから IP アドレスをアンバインドするには、コンテナー・グループを一度削除して、IP アドレスを指定しないでそのグループを再作成します。</note></dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry id="ip_unbind_address">
+<pt><varname>ADDRESS</varname></pt>
+<pd>(必須) アンバインドされる IP アドレス。</pd></plentry>
+<plentry id="ip_unbind_container">
+<pt><varname>CONTAINER</varname></pt>
+<pd>(必須) アンバインドされるコンテナーの ID または名前。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、名前 <varname>my_container</varname> のコンテナーから IP アドレス 192.0.2.23 をアンバインドする要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ip-unbind <varname>192.0.2.23</varname> <varname>my_container</varname></codeblock></dd></dlentry></dl></section>
+<section id="ips"><title><ph conref="container_conref.dita#links/command_prefix"></ph> ips [-q] </title>
+<dl>
+<dlentry id="ip_list_purpose">
+<dt>目的</dt>
+<dd>組織で使用できる浮動 IP アドレスと、それらの IP アドレスにバインドされた単一コンテナーまたはグループの ID をリストします。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt>-q</pt>
+<pd>(オプション) IP アドレスだけをリストして、それらの IP アドレスにバインドされた単一コンテナーの ID はリストしません。</pd></plentry></parml></dd></dlentry>
+<dlentry id="ip_list_responses">
+<dt>応答</dt>
+<dd>IP アドレスとそれらのリンク先の単一コンテナーの ID のリストを受け取ります。IP アドレスが未使用の場合、コンテナー ID は表示されません。</dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd><ph id="ip_list_example">以下の例は、使用可能かどうかに関わらず組織用のすべての IP アドレスのリストを受け取る要求です。</ph><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ip-list -q</codeblock></dd></dlentry></dl></section>
+<section id="kill"><title><ph conref="container_conref.dita#links/command_prefix"></ph> kill [-s
+CMD] CONTAINER [CONTAINER] </title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>1 つ以上のコンテナーで実行中プロセスを、そのコンテナーを停止せずに停止します。詳しくは、Docker ヘルプ内の <xref conref="container_cli_reference_native-docker.dita#container_cli_reference_native-docker/docker_kill"></xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt><varname>CONTAINER</varname></pt>
+<pd>(必須) 少なくとも 1 つのコンテナーのコンテナー ID または名前。
+コマンドの中で、コンテナーの名前または ID をスペースで区切ってリストして指定することにより、複数のコンテナーを対象としてこのコマンドを実行することができます。
+</pd></plentry>
+<plentry>
+<pt>-s, --signal <varname>CMD</varname></pt>
+<pd>(オプション) コンテナー内で実行されているプロセスに、任意のコマンドを送信します。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、<varname>my_container</varname> という名前のコンテナー内のプロセスを強制終了する要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> kill <varname>my_container</varname></codeblock></dd></dlentry></dl></section>
+<section id="logs"><title><ph conref="container_conref.dita#links/command_prefix"></ph> logs [-f | --since TIMESTAMP  | --tail
+STRING | -t] CONTAINER </title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd><ph id="logs_purpose">実行中のコンテナーの出力ログまたはエラー・ログを表示します。</ph>詳しくは、Docker ヘルプ内の <xref conref="container_cli_reference_native-docker.dita#container_cli_reference_native-docker/docker_logs"></xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry id="logs_container">
+<pt><varname>CONTAINER</varname></pt>
+<pd>(必須) コンテナーの名前または ID。</pd></plentry>
+<plentry audience="blue">
+<pt>--details</pt>
+<pd><p>(オプション)  <draft-comment author="bpratt">Do we support log-opt on cf ic run? For now, leaving
+this one out.</draft-comment></p></pd></plentry>
+<plentry>
+<pt>-f, --follow</pt>
+<pd><p>(オプション) コンテナーの <codeph>STDOUT</codeph> ログ・ファイルおよび <codeph>STDERR</codeph> ログ・ファイルからの新しい出力を含めます。</p></pd></plentry>
+<plentry>
+<pt>--since TIMESTAMP</pt>
+<pd>(オプション) タイム・スタンプ以降のすべてのログを表示します。</pd></plentry>
+<plentry>
+<pt>--tail STRING</pt>
+<pd>(オプション) 表示するログの最新行の数を指定します。
+デフォルトでは、すべてのログが表示されます。</pd></plentry>
+<plentry>
+<pt>-t, --timestamps</pt>
+<pd>(オプション) ログのタイム・スタンプを表示します。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、<varname>my_container</varname> という名前のコンテナーの出力ログを取得する要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> logs -o <varname>my_container</varname></codeblock></dd></dlentry></dl></section>
+<section id="namespace"><title><ph conref="container_conref.dita#links/command_prefix"></ph> namespace-[get | set] NAME</title>
+<dl>
+<dlentry id="namespace_purpose">
+<dt>目的</dt>
+<dd>ユーザーがログイン時に使用した組織のプライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> イメージ・レジストリーの名前を設定または取得します。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry id="namespace_get">
+<pt>get</pt>
+<pd>(オプション) 組織のプライベート・イメージ・レジストリーの名前空間を要求します。</pd></plentry>
+<plentry id="namespace_set">
+<pt>set <varname>NAME</varname></pt>
+<pd>(オプション) まだ設定されていない場合に組織のプライベート・イメージ・レジストリーの名前空間を設定する、一度だけ使用する関数。名前空間の設定後に、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI からログアウトして再度ログインしてから続行します。<note type="restriction">レジストリー名前空間の名前にハイフン (-) を使用することはできません。</note></pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、ユーザーがログインした組織の名前空間を照会する要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> namespace-get</codeblock></dd></dlentry></dl></section>
+<section id="network_create" audience="blue"><title><ph conref="container_conref.dita#links/command_prefix"></ph> network-create [--gateway=GATEWAY] [--ip-range=IP-RANGE] --subnet=SUBNET default</title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd><varname>ibm-containers</varname> ドライバーに基づいて、組織スペース内にカスタムの IP アドレス範囲を持つ独自のプライベート・オーバーレイ・ネットワークを作成します。
+<note>このコマンドは、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 内のデフォルト・オーバーレイ・ネットワークを置き換える目的のためにのみサポートされています。
+1 つの組織スペースの中で複数のネットワークはサポートされません。
+</note>詳細については、<xref href="container_cli_ips_byoip.dita" format="dita" scope="local"></xref>を参照してください。</dd></dlentry>
+<dlentry id="network_create_param">
+<dt>パラメーター</dt>
+<dd id="gateway"><parml>
+<plentry>
+<pt><varname>--gateway=</varname>GATEWAY</pt>
+<pd>(オプション) ネットワーク・ゲートウェイの IP アドレスを指定することができます。
+ネットワーク・ゲートウェイはプライベート・ネットワークの内部ルーターとして機能し、コンテナーからのメッセージをパブリック・ネットワーク (インターネット) にルーティングするために必要です。
+コンテナーをパブリックとして公開し、パブリック IP アドレスを割り当てると、発信トラフィックは、パブリック・ネットワークにルーティングされる前に、まずゲートウェイに送信されます。
+着信トラフィックも、公開コンテナーにルーティングされる前に、まずゲートウェイに送信されます。
+ゲートウェイ用に特定の IP アドレスを構成する場合は、<xref href="https://tools.ietf.org/html/rfc791" format="html" scope="external">IPv4 形式</xref>を使用し、<codeph>--subnet</codeph> オプションを使用することにより、対応するネットワークやホスト・アドレスを指定するサブネットを定義する必要があります。
+ゲートウェイに IP アドレスを指定しない場合、<codeph>--subnet</codeph> オプションを使用してサブネットを指定したのであれば、サブネットの使用可能な最初の IP アドレスが <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> により自動的にネットワーク・ゲートウェイに割り当てられます。
+</pd></plentry></parml></dd>
+<dd id="iprange"><parml>
+<plentry>
+<pt><varname>--ip-range=</varname>IP-RANGE</pt>
+<pd>(オプション) サブネットの特定の IP アドレス範囲をコンテナーに割り当て可能なものとして使用するには、<codeph>--ip-range</codeph> オプションを使用します。
+選択する範囲内のすべての IP アドレスは、サブネットにより決められた使用可能なホスト・アドレスの一部でなければなりません。
+IP アドレス範囲を指定するには、<xref href="https://tools.ietf.org/html/rfc791" format="html" scope="external">IPv4 形式</xref>を使用し、コンテナーに割り当てる最初のプライベート IP アドレスを決めてください。
+IP アドレス範囲にはすべて、その範囲内でコンテナーに使用可能なプライベート IP アドレスの数を示す接尾部が付加されます。
+したがって、その範囲内で使用可能な最後のプライベート IP アドレスも、この接尾部によって決まることになります。
+カスタム・サブネットと IP アドレス範囲の設定を指定してネットワークを作成した後に、それに変更を加えることはできません。
+必要なプライベート IP アドレスの数を事前に計画しておくことが必要なのは、そのためです。
+<p>サンプル・ネットワーク構成を確認し、コンテナーに割り当てることのできるプライベート IP アドレスの数を確認してください。
+</p><ul id="ul_w1n_hh1_4z">
+<li>使用可能なプライベート・コンテナー IP アドレスが 256 個のサンプル・ネットワーク構成。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> network-create --subnet=192.0.0.0/16 --ip-range=192.0.2.0/24 default</codeblock>IPv4 IP アドレスはすべて 32 ビットから成るため、<codeph>--ip-range</codeph> オプションの接尾部 <codeph>/24</codeph> は、コンテナーのアドレス指定のために残りの 8 ビットを使うということ示しています。
+この構成では、IP アドレス 192.0.2.0 から始まる 256 (2^8) 個のプライベート IP アドレスを割り当てることができます。使用可能な最後の IP アドレスは 192.0.2.255 になります。ネットワーク・ゲートウェイにプライベート IP アドレスを指定しない場合、サブネットの使用可能な最初のプライベート IP アドレスである 192.0.0.1 が自動的にネットワーク・ゲートウェイに割り当てられます。</li>
+<li>使用可能なプライベート・コンテナー IP アドレスが 4 個のサンプル・ネットワーク構成。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> network-create --subnet=192.0.0.0/16 --ip-range=192.0.2.100/30 default</codeblock>IPv4 IP アドレスはすべて 32 ビットから成るため、<codeph>--ip-range</codeph> オプションの接尾部 <codeph>/30</codeph> は、コンテナーのアドレス指定のために残りの 2 ビットを使うということ示しています。
+この構成では、IP アドレス 192.0.2.100 から始まる 4 (2^2) 個のプライベート IP アドレスを割り当てることができます。使用可能な最後の IP アドレスは 192.0.2.103 になります。ネットワーク・ゲートウェイにプライベート IP アドレスを指定しない場合、サブネットの使用可能な最初のプライベート IP アドレスである 192.0.0.1 が自動的にネットワーク・ゲートウェイに割り当てられます。</li></ul></pd></plentry></parml></dd>
+<dd id="subnet"><parml>
+<plentry>
+<pt><varname>--subnet=</varname>SUBNET</pt>
+<pd>(必須) プライベート・ネットワークをカスタマイズするには、サブネットを指定する必要があります。
+サブネットは、組織ネットワークの一部分を表しており、多くの場合は、同じ領域内、同じビル内、同じローカル・エリア・ネットワーク内にあるホスト・マシンのまとまりです。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> では、サブネットにより、ホスト・アドレスとしてコンテナーに割り当てることのできるプライベート IP アドレスの範囲が決まります。
+<p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の中でサブネットを指定するには、IP アドレスを 32 ビット整数値として表記する <xref href="https://tools.ietf.org/html/rfc791" format="html" scope="external">IPv4 形式</xref>を使用する必要があります。
+すべてのサブネットに、サブネット IP アドレスのうち何ビットがネットワークのアドレス指定のために使用されるのか (すなわち、サブネット内のすべての IP アドレスで固定となるビット数) を示す接尾部が付加されます。
+その接尾部により、コンテナーに割り当て可能なプライベート IP アドレスの数が決まります。
+カスタム・ネットワークを作成したら、それに変更を加えることはできません。
+必要なプライベート IP アドレスの数を事前に計画しておくことが必要なのは、そのためです。
+</p><p>例</p><p>この例では、カスタム・サブネットの設定値が指定されたプライベート・オーバーレイ・ネットワークが <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 内に作成されます。
+このネットワーク構成にはカスタム・プライベート IP アドレス範囲 (<codeph>--ip-range</codeph> オプション) は含まれておらず、ネットワーク・ゲートウェイの特定のプライベート IP アドレス (<codeph>--gateway</codeph> オプション) も含まれていません。
+したがって、使用可能なプライベート・コンテナー IP アドレスの数、そしてネットワーク・ゲートウェイに割り当てられる IP アドレスは、サブネットの設定値から取られます。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> network-create --subnet=192.0.0.0/16 default</codeblock></p><p><ul id="ul_x1n_hh1_4z">
+<li>サブネットの接尾部 <codeph>/16</codeph> は、サブネット IP アドレスの最初の 16 ビットがコンテナーに割り当てられるすべての IP アドレスで固定であることを示します。
+IPv4 IP アドレスはすべて 32 ビットから成るため、コンテナーの個々の IP アドレスを作成するために使用できるのは最後の 16 ビットということになります。
+<p><image href="images/container_cli_ips_byoip.png" alt="IPv4 サブネットの内訳の例" width="400" id="image_y1n_hh1_4z" audience="blue"></image></p></li>
+<li>ネットワーク・ゲートウェイ IP アドレス: 192.0.0.1<p>ネットワーク・ゲートウェイのプライベート IP アドレスが指定されていないため、サブネット内の最初のプライベート IP アドレスが自動的にネットワーク・ゲートウェイに割り当てられます。
+<note type="tip">ゲートウェイのカスタム・プライベート IP アドレスを指定するには、<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> network-create</codeph> コマンドの <codeph>--gateway</codeph> オプションを使います。</note></p></li>
+<li>使用可能なプライベート・コンテナー IP アドレス: 192.0.0.2 - 192.0.255.254<p>可能なプライベート IP アドレスの数は、サブネット定義で使用されている接尾部に応じて異なります。
+したがって、接尾部 <codeph>/16</codeph> は、このネットワーク内で 65536 (2^16) 個のホストをアドレス指定できることを意味します。
+最初の IP アドレス 192.0.0.1 は既にネットワーク・ゲートウェイに割り当てられており、最後の IP アドレス 192.0.255.255 はブロードキャスト・アドレスとして予約済みであるため、このネットワークで作成される最初のコンテナーには IP アドレス 192.0.0.2 が割り当てられます。使用可能な最後の IP アドレスは 192.0.255.254 です。この構成では 65534 個のコンテナーをアドレス指定できます。
+<note type="tip"><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> network-create</codeph> コマンドの <codeph>--ip-range</codeph> オプションを使用すると、サブネット内で、コンテナーに割り当てられるプライベート IP アドレスの範囲をさらに狭めることができます。</note></p></li></ul></p></pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、デフォルト <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> ネットワークをカスタム・プライベート・ネットワークで置き換えることを求める要求です。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> network-create --subnet=192.0.0.0/16 --gateway 192.0.2.254 --ip-range=192.0.2.100/30 default</codeblock></dd></dlentry></dl></section>
+<section id="network_inspect" audience="blue"><title><ph conref="container_conref.dita#links/command_prefix"></ph> network-inspect default</title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 内の<uicontrol>デフォルト</uicontrol>・ネットワークについての詳細情報を取り出します。
+</dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 内の<uicontrol>デフォルト</uicontrol>・ネットワークについての詳細情報を取り出す要求です。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> network-inspect default</codeblock></dd></dlentry></dl></section>
+<section id="network_ls" audience="blue"><title><ph conref="container_conref.dita#links/command_prefix"></ph> network-ls</title>
+<draft-comment author="Nadine">This content is staging only. We do not want to expose this feature
+to customers because we want to prevent them from creating multiple private networks. </draft-comment>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>組織スペースで使用できるすべてのネットワークをリストします。詳しくは、Docker ヘルプ内の <xref href="https://docs.docker.com/engine/reference/commandline/network_ls/" format="html" scope="external">network-ls</xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、組織スペースで使用できるすべてのネットワークをリストする要求です。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> network-ls</codeblock></dd></dlentry></dl></section>
+<section id="network_rm" audience="blue"><title><ph conref="container_conref.dita#links/command_prefix"></ph> network-remove NAME</title>
+<draft-comment author="Nadine">This content is staging only. We do not want to expose this feature
+to customers because we want to prevent them from creating multiple private networks. </draft-comment>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>組織スペースからネットワークを削除します。詳しくは、Docker ヘルプ内の <xref href="https://docs.docker.com/engine/reference/commandline/network_rm/" format="html" scope="external">network-remove</xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt><varname>NAME</varname></pt>
+<pd>(必須) 削除するネットワークの名前。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、<varname>my_network</varname> という名前のネットワークを組織スペースから削除する要求です。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> network-remove <varname>my_network</varname></codeblock></dd></dlentry></dl></section>
+<section id="pause"><title><ph conref="container_conref.dita#links/command_prefix"></ph> pause CONTAINER [CONTAINER] </title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd><ph id="pause_purpose">1 つ以上の実行中コンテナー内のすべてのプロセスを停止します。
+</ph>詳しくは、Docker ヘルプ内の <xref conref="container_cli_reference_native-docker.dita#container_cli_reference_native-docker/docker_pause"></xref> コマンドを参照してください。再びコンテナーを開始するには、<xref href="#container_cli_reference_cfic/unpause" format="dita" scope="local">unpause</xref> コマンドを実行します。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry id="pause_container">
+<pt><varname>CONTAINER</varname></pt>
+<pd>(必須) 少なくとも 1 つのコンテナーのコンテナー名または ID。
+コマンドの中で、コンテナーの名前または ID をスペースで区切ってリストして指定することにより、複数のコンテナーを対象としてこのコマンドを実行することができます。
+</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、<varname>my_container</varname> という名前のコンテナーを一時停止する要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> pause <varname>my_container</varname></codeblock></dd></dlentry></dl></section>
+<section id="port"><title><ph id="port_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph> port
+CONTAINER</ph> [PRIVATE_PORT[/PROTOCOL]]</title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd><ph id="port_purpose">コンテナーのすべてのポート・マッピングをリストするか、ご使用のプライベート・ポートにマップされたパブリック・ポートと IP アドレスを取得します。</ph>詳しくは、Docker ヘルプ内の <xref conref="container_cli_reference_native-docker.dita#container_cli_reference_native-docker/docker_port"></xref> コマンドを参照してください。</dd></dlentry></dl>
+<dl>
+<dlentry>
+<dt>パラメーター</dt>
+<dd id="port_param"><parml>
+<plentry>
+<pt><varname>CONTAINER</varname></pt>
+<pd>(必須) コンテナーの ID または名前。</pd></plentry>
+<plentry>
+<pt><varname>PRIVATE PORT</varname></pt>
+<pd>(オプション) 割り当てられたパブリック・ポートおよび IP アドレスの検索の対象となるプライベート・ポート。</pd></plentry>
+<plentry>
+<pt><varname>PROTOCOL</varname></pt>
+<pd>(オプション) プライベート・ポートに割り当てられたプロトコル。<varname>tcp</varname> と <varname>udp</varname> のいずれかになります。</pd></plentry></parml></dd></dlentry></dl>
+<dl>
+<dlentry>
+<dt>例</dt>
+<dd id="port_example">以下の例は、<varname>my_container</varname> という名前のコンテナーのすべてのポート・マッピングおよび IP マッピングをリストする要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> port <varname>my_container</varname></codeblock></dd></dlentry>
+<dlentry>
+<dt>システム出力</dt>
+<dd><codeblock><systemoutput>9080/tcp -&gt; 192.0.2.25:9080</systemoutput></codeblock></dd>
+<dd>この例では、<systemoutput>9080/tcp</systemoutput> が、TCP/IP プロトコルを使用するプライベート・ポートです。これはパブリック IP アドレス <systemoutput>192.0.2.25</systemoutput> およびパブリック・ポート <systemoutput>9080</systemoutput> にマップされます。</dd></dlentry></dl></section>
+<section id="ps"><title><ph id="ps_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph> <ph id="ps_docker">ps [-a] [--filter
+env=<varname>SEARCH_CRITERIA</varname>] [-l <varname>NUM</varname>] [-q] [-s]</ph></ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd><ph id="ps_purpose">スペース内で実行されているコンテナーのリストを取得します。デフォルトでは、実行中のコンテナーのみが表示されます。</ph>詳しくは、Docker ヘルプ内の <xref conref="container_cli_reference_native-docker.dita#container_cli_reference_native-docker/docker_ps"></xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd id="ps_param"><parml>
+<plentry id="ps_all">
+<pt>-a, --all</pt>
+<pd>(オプション) スペース内のすべてのコンテナー (実行中のコンテナーと停止しているコンテナーの両方) を表示します。</pd></plentry>
+<plentry>
+<pt>--filter env=<varname>SEARCH_CRITERIA</varname></pt>
+<pd>(オプション) 環境変数が特定の値であるコンテナーを検索します。コンテナーの検査をする際は、CLI 応答の <varname>Env</varname> セクションにリストされている環境変数のキーまたは値で、コンテナーをフィルタリングすることができます。
+<varname>SEARCH_CRITERIA</varname> を、検索するキーまたは値に置き換えます。
+検索基準は完全一致である必要はありません。
+</pd></plentry>
+<plentry id="ps_limit">
+<pt>-l <varname>NUM</varname>, --limit <varname>NUM</varname></pt>
+<pd>(オプション) 最近作成されたコンテナーをリストします。
+ここで、<varname>NUM</varname> は、最近作成されたコンテナーのうちのいくつのコンテナーを返したいかを指定する数です。<p>例えば、node1 から node5 までのコンテナーを順に作成した場合、オプション <codeph>--limit 2</codeph> は、作成されたコンテナーのうちの最新の 2 つである node4 と node5 を返します。</p></pd></plentry>
+<plentry id="ps_quiet">
+<pt>-q, --quiet</pt>
+<pd>(オプション) コンテナー ID のみを表示します。</pd></plentry>
+<plentry id="ps_size">
+<pt>-s, --size</pt>
+<pd>(オプション) コンテナーのサイズをリストします。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd><p>以下の例は、実行中のコンテナーと停止したコンテナーをすべて表示する要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ps -a</codeblock></p></dd></dlentry></dl></section>
+<section id="rename"><title><ph conref="container_conref.dita#links/command_prefix"></ph> rename OLD_NAME NEW_NAME </title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>コンテナーの名前変更を行います。詳しくは、Docker ヘルプ内の <xref conref="container_cli_reference_native-docker.dita#container_cli_reference_native-docker/docker_rename"></xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt><varname>NEW_NAME</varname></pt>
+<pd>(必須) コンテナーの新規名。</pd></plentry>
+<plentry>
+<pt><varname>OLD_NAME</varname></pt>
+<pd>(必須) コンテナーの古い名前。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、現在 <varname>my_container</varname> という名前のコンテナーを <varname>container_renamed</varname> に名前変更する要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> rename <varname>my_container</varname> <varname>container_renamed</varname></codeblock></dd></dlentry></dl></section>
+<section id="reprovision"><title><ph conref="container_conref.dita#links/command_prefix"></ph> reprovision [-f]
+[AVAILABILITY_ZONE]</title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>スペースの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アベイラビリティー・ゾーンを変更します。スペースの元の割り当て量は維持されます。
+異なるアベイラビリティー・ゾーンの複数のコンテナー・グループにアプリをデプロイすることにより、ハードウェアの問題が発生した場合のアプリの可用性が高まります。<note type="attention">このコマンドを実行した場合、
+このスペース内のすべての単一コンテナーとグループ、パブリック IP アドレスとボリュームは、
+新しいアベイラビリティー・ゾーンにマイグレーションされず、マイグレーション・プロセスで削除されます。
+イメージは影響を受けません。<xref href="container_volume_different_dc.dita">ボリュームをバックアップ</xref>して、
+新しいアベイラビリティー・ゾーンにマイグレーションした後にデータを復元できるようにします。
+</note></dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt>AVAILABILITY_ZONE</pt>
+<pd>(オプション) コンテナーがデプロイされる <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アベイラビリティー・ゾーンの名前。<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アベイラビリティー・ゾーンを指定しない場合は、地域に対して設定されたデフォルトの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アベイラビリティー・ゾーンが使用されます。<note type="important"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アベイラビリティー・ゾーンを含める場合は、<codeph>-f</codeph> オプションも含める必要があります。</note><table id="table_rqx_h52_nx" conref="container_conref.dita#terms/table_azs">
+<tgroup cols="2">
+<tbody>
+<row>
+<entry></entry>
+<entry></entry></row></tbody></tgroup></table></pd></plentry></parml>
+<parml>
+<plentry>
+<pt>-f, --force</pt>
+<pd>(オプション) <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースに <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を強制的に再作成します。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、現在のスペースの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アベイラビリティー・ゾーンを <userinput>dal09-02</userinput> に変更する要求です。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> reprovision -f dal09-02</codeblock></dd></dlentry></dl></section>
+<section id="restart"><title><ph conref="container_conref.dita#links/command_prefix"></ph> restart CONTAINER [CONTAINER] [-t SECS] </title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd><ph id="restart_purpose">1 つ以上のコンテナーを再始動します。
+</ph>詳しくは、Docker ヘルプ内の <xref conref="container_cli_reference_native-docker.dita#container_cli_reference_native-docker/docker_restart"></xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry id="restart_container">
+<pt><varname>CONTAINER</varname></pt>
+<pd>(必須) 少なくとも 1 つのコンテナーのコンテナー名または ID。
+コマンドの中で、コンテナーの名前または ID をスペースで区切ってリストして指定することにより、複数のコンテナーを対象としてこのコマンドを実行することができます。
+</pd></plentry>
+<plentry id="restart_secs">
+<pt>-t <varname>SECS</varname>, --time <varname>SECS</varname></pt>
+<pd>コンテナーが再始動されるまでに待機する秒数。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、<varname>my_container</varname> という名前のコンテナーを再始動する要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> restart <varname>my_container</varname></codeblock></dd></dlentry></dl></section>
+<section id="rm"><title><ph id="container_rm_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph> rm [-f] CONTAINER [CONTAINER] </ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd><ph id="rm_purpose">1 つ以上のコンテナーを削除します。
+</ph>詳しくは、Docker ヘルプ内の <xref conref="container_cli_reference_native-docker.dita#container_cli_reference_native-docker/docker_rm"></xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd id="container_rm_param"><parml>
+<plentry id="rm_container">
+<pt><varname>CONTAINER</varname></pt>
+<pd>(必須) 少なくとも 1 つのコンテナーのコンテナー名または ID。
+コマンドの中で、コンテナーの名前または ID をスペースで区切ってリストして指定することにより、複数のコンテナーを対象としてこのコマンドを実行することができます。
+</pd></plentry></parml>
+<parml>
+<plentry id="rm_force">
+<pt>-f, --force</pt>
+<pd>(オプション) 実行中のコンテナーまたは障害が起こったコンテナーの削除を強制的に実行します。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、<varname>my_container</varname> という名前のコンテナーを削除する要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> rm <varname>my_container</varname></codeblock></dd></dlentry></dl></section>
+<section id="rmi"><title><ph conref="container_conref.dita#links/command_prefix"></ph> rmi [-R REGISTRY] IMAGE [IMAGE] </title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd><ph id="rmi_purpose">ログインした組織のプライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> イメージ・レジストリーから、1 つ以上のイメージを削除します。</ph>詳しくは、Docker ヘルプ内の <xref conref="container_cli_reference_native-docker.dita#container_cli_reference_native-docker/docker_rmi"></xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry id="rmi_image">
+<pt><varname>IMAGE</varname></pt>
+<pd>(必須) 削除するイメージへのフル・プライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリー・パス。イメージのパスにタグが指定されていない場合、デフォルトで、<codeph>latest</codeph> というタグが付いたイメージが削除されます。
+このコマンドの中に、各プライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリー・パスをスペースで区切ってリストして指定することにより、複数のイメージに対してコマンドを実行することができます。</pd></plentry>
+<plentry id="rmi_registry">
+<pt>-R <varname>REGISTRY</varname>, --registry <varname>REGISTRY</varname></pt>
+<pd>(オプション) レジストリー・ホストを変更します。デフォルトでは、<cmdname>init</cmdname> コマンドで使用したレジストリーが使用されます。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、イメージ <codeph>mynamespace/myimage:latest</codeph> を削除する要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> rmi registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>mynamespace</varname>/<varname>myimage</varname>:<varname>latest</varname></codeblock></dd></dlentry></dl></section>
+<section id="route_map"><title><ph id="route_map_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph> route-map [-d DOMAIN] [-n HOST] GROUP </ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd><ph id="route_map_purpose">コンテナー・グループにアクセスするために使用する、インターネット・トラフィックの経路を確立します。このコマンドを使用して、新規ルートを確立するか、既存のルートを更新できます。</ph></dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd id="route_map_param"><parml>
+<plentry id="route_map_domain">
+<pt>-d <varname>DOMAIN</varname>, --domain <varname>DOMAIN</varname></pt>
+<pd>(オプション) 完全なパブリック経路 URL の 2 番目の部分である、経路のドメイン名。
+ほとんどの場合、ドメインは <codeph><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword></codeph> です。このパラメーターを使用してカスタム・ドメインを指定することもできます。カスタム・ドメインを使用する場合は、ドメイン名に下線 (_) を含めないでください。</pd></plentry>
+<plentry id="route_map_group">
+<pt><varname>GROUP</varname></pt>
+<pd>(必須) グループ ID または名前。</pd></plentry>
+<plentry id="route_map_host">
+<pt>-n <varname>HOST</varname>, --hostname <varname>HOST</varname></pt>
+<pd>(オプション) 経路のホスト名。ホスト名に下線 (_) を含めないでください。ホスト名は、完全なパブリック経路 URL の最初の部分です。例えば、URL <codeph><varname>mycontainerhost</varname>.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword></codeph> 中の <varname>mycontainerhost</varname> です。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、<codeph>my_container_group</codeph> という名前のコンテナー・グループの経路をマップする要求です。ホスト名は <codeph>my_host</codeph> であり、<codeph><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword></codeph> はドメインです。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> route-map -d <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword> -n <varname>my_host</varname> <varname>my_container_group</varname></codeblock></dd></dlentry></dl></section>
+<section id="route_unmap"><title><ph id="route_unmap_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph> route-unmap [-d DOMAIN] [-n HOST] GROUP </ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd><ph id="route_unmap_purpose">コンテナー・グループから経路をマップ解除します。経路を持たないグループには、インターネットからアクセスできません。</ph></dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry id="route_unmap_domain">
+<pt>-d <varname>DOMAIN</varname>, --domain <varname>DOMAIN</varname></pt>
+<pd>(オプション) 経路のドメイン名。</pd></plentry>
+<plentry id="route_unmap_group">
+<pt><varname>GROUP</varname></pt>
+<pd>(必須) グループ ID または名前。</pd></plentry>
+<plentry id="route_unmap_host">
+<pt>-n <varname>HOST</varname>, --hostname <varname>HOST</varname></pt>
+<pd>(オプション) 経路のホスト名。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、<codeph>my_container_group</codeph> という名前のグループの経路をマップ解除する要求です。ここで、<codeph>my_host</codeph> はホスト名、<codeph><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword></codeph> はドメインです。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> route-unmap -d <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword> -n <varname>my_host</varname> <varname>my_container_group</varname></codeblock></dd></dlentry></dl></section>
+<section id="run"><title><ph id="run_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph><ph id="run_docker"> run [-p PORT] [-P] [-d] [-e ENV] [--env-file
+ENVFILE] [-it] [--link NAME:ALIAS] [-m MEMORY] --name NAME<ph audience="blue"> <draft-comment author="Nadine">The --net option is staging only. We do not
+want the customers to create multiple container networks because this is an expensive resource and
+IBM wants to charge money for that in the future.</draft-comment> [--net=NETWORK]</ph> [--volume VOLUME:/DIRECTORY_PATH] IMAGE [CMD [CMD ...]] </ph></ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd><ph id="run_purpose">コンテナー・クラウド・サービスで新規コンテナーをイメージ名から開始します。</ph> デフォルトでは、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のコンテナーはデタッチ・モードで実行されます。
+詳しくは、Docker ヘルプ内の <xref conref="container_cli_reference_native-docker.dita#container_cli_reference_native-docker/docker_run"></xref> コマンドを参照してください。<note>Cloud Foundry コマンド・ツールがインストールされていて、Cloud Foundry トークンがあることを確認する必要があります。<codeph>bx login</codeph> および <codeph><ph conref="container_conref.dita#links/command_prefix"></ph> init</codeph> を使用したログインが成功すると、必要なトークンが生成されます。</note></dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd id="run_param"><parml>
+<plentry>
+<pt><varname>CMD</varname></pt>
+<pd>(オプション) コマンドと引数が実行のためにコンテナーに渡されます。このコマンドは長期実行コマンドでなければなりません。実行時間が短いコマンド (例えば <cmdname>/bin/date</cmdname>) は、
+コンテナーが異常終了する原因になることがあるため、使用しないでください。<p>長期実行コマンドの例を以下に示します。
+これらの例では、
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> レジストリー内に用意されている
+<option>ibmnode</option> イメージを使用することを想定しています。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> run --name <varname>my_container</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>ibmnode</varname> ping localhost</codeblock><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> run --name <varname>my_container</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>ibmnode</varname> -- tail -f /dev/null</codeblock><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> run --name <varname>my_container</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>ibmnode</varname> -- sh -c <q>while true; do date; sleep 20; done</q></codeblock><note>CMD とその引数は <codeph><ph conref="container_conref.dita#links/command_prefix"></ph> group-create</codeph> コマンド・ラインの最後に指定する必要があります。
+</note></p></pd></plentry>
+<plentry>
+<pt>-d</pt>
+<pd>(オプション) コンテナーをデタッチ・モードで実行します。<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> run</codeph> を使用する場合は、コンテナーはデフォルトでデタッチ・モードで実行されます。
+デタッチ・モードでは、コンテナーのルート・プロセスが終了すると、コンテナーも終了します。
+例えば、ibmnode イメージからコンテナーをデプロイした場合、長時間実行されるプロセスが存在しないため、コンテナーはビルド直後にシャットダウンします。
+<note type="tip"><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> run</codeph> ではなく <codeph>docker run</codeph> を使用する場合、<codeph>-d</codeph> オプションは必須です。
+</note></pd></plentry>
+<plentry>
+<pt>-e <varname>ENV</varname>, --env <varname>ENV</varname></pt>
+<pd>(オプション) 任意の数の環境変数を設定します。<option>ENV</option> は <codeph>key=value</codeph> ペアです。複数のキーを別々にリストします。
+引用符を含める場合は、環境変数名と値の両方を囲みます。
+<p>例</p><codeph>-e
+<q><varname>key1</varname>=<varname>value1</varname></q> -e
+<q><varname>key2</varname>=<varname>value2</varname></q> -e
+<q><varname>key3</varname>=<varname>value3</varname></q></codeph><p><table id="env_keys_group" conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/env_keys">
+<tgroup cols="2">
+<tbody>
+<row>
+<entry></entry></row></tbody></tgroup></table></p></pd></plentry>
+<plentry>
+<pt>--env-file <varname>ENVFILE</varname></pt>
+<pd>(オプション) ファイルから環境変数をインポートします。<varname>ENVFILE</varname> は、ローカル・ディレクトリー上のファイルのパスです。
+ファイル内の各行が 1 つの <codeph>key=value</codeph> ペアを表します。<p>例</p><codeblock>KEY1=VALUE1
+KEY2=VALUE2</codeblock></pd></plentry>
+<plentry>
+<pt><varname>IMAGE</varname></pt>
+<pd>(必須) コンテナーに含めるイメージ。イメージの後にコマンドをリストできますが、イメージの後にはオプションを置かないでください。イメージ指定の前にすべてのオプションを含めるようにしてください。<p>組織のプライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリー内のイメージを使用する場合、形式 <codeph>registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>NAMESPACE</varname>/<varname>IMAGE</varname></codeph> でイメージを指定します。</p><p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> によって提供されるイメージを使用する場合、形式 <codeph>registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>IMAGE</varname></codeph> でイメージを指定します。</p></pd></plentry>
+<plentry id="it">
+<pt>-it</pt>
+<pd>(オプション) コンテナーを対話モードで実行します。コンテナーの作成後に、標準入力の表示を維持します。終了するには <userinput>exit</userinput> と入力します。<draft-comment>Need to find out how
+to save the state of the container after you make changes in it.</draft-comment></pd></plentry>
+<plentry>
+<pt>--link <varname>NAME</varname>:<varname>ALIAS</varname></pt>
+<pd>(オプション) あるコンテナーが実行中の別のコンテナーと通信するようにしたい場合は、ホスト名の別名を使用してそのコンテナーを指定できます。詳細については、<xref href="container_linking.dita" format="dita" scope="local"></xref>を参照してください。</pd></plentry>
+<plentry conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/group_create_memory">
+<pt></pt>
+<pd></pd></plentry>
+<plentry>
+<pt>--name <varname>NAME</varname></pt>
+<pd>(必須) コンテナーに名前を付けます。<note type="tip" conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/container_name"></note></pd></plentry>
+<plentry audience="blue">
+<pt>--net=<varname>NETWORK</varname></pt>
+<pd>(オプション) 既存のネットワークをコンテナーに割り当てます。ネットワークを作成するには、<xref href="container_cli_reference_cfic.dita#container_cli_reference_cfic/network_create"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> network-create</xref> コマンドを参照してください。
+</pd></plentry>
+<plentry>
+<pt>-p <varname>PORT</varname>, --publish <varname>PORT</varname></pt>
+<pd><p>(オプション) <ph id="port_desc">アプリをインターネットからアクセス可能にするには、パブリック・ポートを公開する必要があります。
+パブリック・ポートを公開するときには、公開したポートでのみパブリック・データを送受信できるパブリック・ネットワーク・セキュリティー・グループをコンテナー用に作成します。その他のすべてのパブリック・ポートは閉じられるため、それらのポートを使用してインターネットからアプリにアクセスすることはできません。複数の <option>-p</option> オプションを使用して、複数のポートを含めることができます。ポートはマップすることも転送することもできません。ポートを公開しない場合は、プライベート・コンテナー・ネットワークのみからアクセス可能になります。
+割り当てられたプライベート IP アドレスを使用して、プライベート・ネットワーク上のコンテナーと通信できます。</ph></p>
+<p conref="container_single_ui.dita#gui/ports_p"></p>
+<p>使用する IP プロトコルとして UDP か TCP のいずれかを選択できます。
+プロトコルを指定しない場合、自動的にポートは TCP トラフィックに対して公開されます。
+</p>
+<p>例<ul id="ul_z1n_hh1_4z">
+<li><codeph>-p 9080</codeph></li>
+<li><codeph>-p 9080/udp</codeph></li>
+<li><codeph>-p 9080/udp -o 8000/tcp</codeph></li></ul></p>
+<p>コンテナーにバインドしたい IP アドレスがスペース内に既に存在する場合、その IP アドレスをポート情報と共に指定できます。IP アドレス、ポート、または IP アドレスおよびコンテナー・ポート番号 (例えば <varname>&lt;ip-address&gt;</varname>:<varname>&lt;port_on_IP&gt;</varname>:<varname>&lt;container-port&gt;</varname>) を含めてください。
+IP アドレスのポートは、Dockerfile で公開されたコンテナー・ポートと一致する必要があります。</p>
+<p>例<codeblock>-p 192.0.2.23:9080:9080</codeblock><ph audience="blue">別のコンテナーで既に使用されている IP アドレスを指定した場合、
+別のコンテナーで既に使用されている IP アドレスを指定した場合、 新しいコンテナーは作成されますが、IP アドレスは元のコンテナーとバインドされたままで、新しいコンテナーにバインドされることはありません。</ph></p>
+<note id="ssl">パブリック IP アドレスをバインドしても、単一のコンテナーとの間で送受信するデータを暗号化する SSL 証明書は組み込まれません。ご使用のアプリに SSL 暗号化が必要である場合は、独自の SSL ソリューションを実装するか、または単一のコンテナーの代わりにコンテナー・グループを使用することができます。
+既に SSL 証明書が組み込まれているパブリック経路にコンテナー・グループがバインドされているなら、追加の構成を行わずに HTTPS でコンテナー・グループにアクセスできます。詳しくは、『<xref href="container_group_ui.dita#container_group_ui">Bluemix GUI によるコンテナー・グループの作成</xref>』を参照してください。</note></pd></plentry>
+<plentry>
+<pt>-P</pt>
+<pd>(オプション) イメージの Dockerfile 内に指定されたポートを HTTP トラフィック用に自動的に公開します。</pd></plentry>
+<plentry id="volume_attach">
+<pt>--volume <varname>VOLUME</varname>:<varname>/DIRECTORY_PATH</varname>[:ro]</pt>
+<pd>(オプション) <codeph>VOLUME:/DIRECTORY_PATH[:ro]</codeph> 形式で詳細を指定して、コンテナーにボリュームを接続します。<ul id="ul_abn_hh1_4z">
+<li><varname>VOLUME</varname> ボリューム ID または名前。</li>
+<li><varname>DIRECTORY_PATH</varname>: コンテナー内でのディレクトリーの絶対パス。</li>
+<li><codeph>ro</codeph> オプション。デフォルトは読み取り/書き込みですが、<codeph>ro</codeph> を指定するとボリュームは読み取り専用になります。</li></ul></pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、<filepath><varname>my_namespace</varname>/nginx</filepath> イメージを使用して、名前が <varname>my_namespace</varname> でメモリー限度が 1024 MB の新規コンテナーを作成および開始する有効な要求です。ここで、<varname>my_namespace</varname> はログインしたユーザーに関連付けられた名前空間です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> run -m <varname>1024</varname> --name <varname>my_container</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>my_namespace</varname>/<varname>nginx</varname></codeblock><p>以下の例は、
+<filepath>my_namespace/blog</filepath> イメージを使用し、環境変数としていくつかの資格情報を渡すことによって、新規コンテナーを作成および開始する有効な要求です。
+ここで、<varname>my_namespace</varname> はログインしたユーザーに関連付けられた名前空間です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> run -e <varname>USER</varname>=<varname>johnsmith</varname> -e <varname>PASS</varname>=<varname>password</varname> --name <varname>my_container</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>my_namespace</varname>/<varname>blog</varname></codeblock></p><p>以下の例は、
+<filepath>my_namespace/blog</filepath> イメージを使用してコンテナーにボリュームを追加する有効な要求です。
+ここで、<varname>my_namespace</varname> はログインしたユーザーに関連付けられた名前空間です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> run --name <varname>my_container</varname> --volume <varname>VolId1</varname>:<varname>/first/path</varname> --volume <varname>VolId2</varname>:<varname>/second/path</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>my_namespace</varname>/<varname>blog</varname></codeblock></p></dd></dlentry></dl></section>
+<section id="service-bind"><title><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> service-bind</codeph> GROUP SERVICE_INSTANCE </title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>実行中のコンテナー・グループにサービスを追加します。このコマンドは、コンテナー・グループに対してのみ使用可能です。
+単一コンテナーは、サービスを <ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> 実行コマンドの一部としてバインドする必要があります。サービスをアンバインドする場合は、<xref href="#container_cli_reference_cfic/service-unbind" format="dita">service-unbind</xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt><varname>GROUP</varname></pt>
+<pd>(必須) グループ ID または名前。</pd></plentry>
+<plentry>
+<pt><varname>SERVICE_INSTANCE</varname></pt>
+<pd>(必須) コンテナー・グループに追加するサービス・インスタンスの名前。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、MyDataCache という名前の Data Cache サービスのインスタンスをコンテナー <varname>my_container_group</varname> にバインドする要求です。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> service-bind <varname>my_container_group</varname> <varname>MyDataCache</varname></codeblock></dd></dlentry></dl></section>
+<section id="service-unbind"><title><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> service-unbind</codeph> GROUP SERVICE_INSTANCE </title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>実行中のコンテナー・グループからサービスを削除します。このコマンドは、コンテナー・グループに対してのみ使用可能です。
+単一コンテナーは、コンテナーを削除し、サービスが含まれない新しいコンテナーを作成する必要があります。
+サービスをバインドする場合は、<xref href="#container_cli_reference_cfic/service-bind" format="dita">service-bind</xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt><varname>GROUP</varname></pt>
+<pd>(必須) グループ ID または名前。</pd></plentry>
+<plentry>
+<pt><varname>SERVICE_INSTANCE</varname></pt>
+<pd>(必須) コンテナー・グループから削除するサービス・インスタンスの名前。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、MyDataCache という名前の Data Cache サービスのインスタンスをコンテナー <varname>my_container_group</varname> からアンバインドする要求です。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> service-unbind <varname>my_container_group</varname> <varname>MyDataCache</varname></codeblock></dd></dlentry></dl></section>
+<section id="start"><title><ph conref="container_conref.dita#links/command_prefix"></ph> start CONTAINER [CONTAINER] </title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>停止している 1 つ以上のコンテナーを開始します。
+詳しくは、Docker ヘルプ内の <xref scope="local" conref="container_cli_reference_native-docker.dita#container_cli_reference_native-docker/docker_start"></xref> コマンドを参照してください。コンテナーを停止するには、<xref href="#container_cli_reference_cfic/stop" format="dita" scope="local">stop</xref> コマンドを参照してください。 </dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt><varname>CONTAINER</varname></pt>
+<pd>(必須) 少なくとも 1 つのコンテナーのコンテナー名または ID。
+コマンドの中で、コンテナーの名前または ID をスペースで区切ってリストして指定することにより、複数のコンテナーを対象としてこのコマンドを実行することができます。
+</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、<varname>my_container</varname> という名前のコンテナーを開始する要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> start <varname>my_container</varname></codeblock></dd></dlentry></dl></section>
+<section id="stats"><title><ph conref="container_conref.dita#links/command_prefix"></ph> stats --no-stream CONTAINER [CONTAINER] </title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>1 つ以上のコンテナーについて、コンテナー・リソースのリアルタイムの使用量統計を表示します。
+データは生成されるときにリアルタイムで表示されます。
+終了するには <userinput>CTRL+C</userinput> を使用します。詳しくは、Docker ヘルプ内の <xref scope="local" conref="container_cli_reference_native-docker.dita#container_cli_reference_native-docker/docker_stats"></xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt><varname>CONTAINER</varname></pt>
+<pd>(必須) コンテナーの名前または ID。</pd></plentry>
+<plentry>
+<pt>--no-stream</pt>
+<pd>(必須) 最新の結果を表示します。コマンドの実行後に生成される新規情報は表示されません。
+</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、コンテナーに関する最新の統計を求める要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> stats --no-stream <varname>my_container</varname></codeblock></dd></dlentry></dl></section>
+<section id="stop"><title><ph conref="container_conref.dita#links/command_prefix"></ph> stop CONTAINER [CONTAINER] [-t SECS] </title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>実行中の 1 つ以上のコンテナーを停止します。
+詳しくは、Docker ヘルプ内の <xref scope="local" conref="container_cli_reference_native-docker.dita#container_cli_reference_native-docker/docker_stop"></xref> コマンドを参照してください。コンテナーを開始するには、<xref href="#container_cli_reference_cfic/start" format="dita" scope="local">start</xref> コマンドを参照してください。 </dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt><varname>CONTAINER</varname></pt>
+<pd>(必須) 少なくとも 1 つのコンテナーのコンテナー名または ID。
+コマンドの中で、コンテナーの名前や ID をスペースで区切ってリストして指定することにより、複数のコンテナーを対象としてこのコマンドを実行することができます。
+</pd></plentry>
+<plentry>
+<pt>-t <varname>SECS</varname>, --time <varname>SECS</varname></pt>
+<pd>コンテナーが強制終了されるまでに待機する秒数。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、<varname>my_container</varname> という名前のコンテナーを停止する要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> stop <varname>my_container</varname></codeblock></dd></dlentry></dl></section>
+<section id="top"><title><ph conref="container_conref.dita#links/command_prefix"></ph> top CONTAINER [CONTAINER] [<codeph>ps</codeph> options]</title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>コンテナーで実行されているプロセスをリストします。<p>Linux のネイティブ <codeph>top</codeph> コマンド以外の <codeph><ph conref="container_conref.dita#links/command_prefix"></ph> top</codeph> コマンドは、コンテナー内で実行されているメインプロセスに関する Linux <codeph>ps</codeph> コマンドの出力を表示します。
+結果として、メモリーと CPU の使用状況は、あるプロセスのために変化しても、CLI 出力では更新されません。
+</p><note>ネイティブ Linux <codeph>top</codeph> コマンドの出力を調べる必要がある場合は、コンテナー内で <xref href="#container_cli_reference_cfic/exec">exec</xref> を実行してから、<codeph>top</codeph> コマンドを実行してください。
+</note> 詳しくは、Docker ヘルプ内の <xref conref="container_cli_reference_native-docker.dita#container_cli_reference_native-docker/docker_top"></xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt><varname>CONTAINER</varname></pt>
+<pd>(必須) コンテナーの名前または ID。</pd></plentry></parml></dd>
+<dd><parml>
+<plentry>
+<pt><codeph><varname>ps</varname></codeph> のオプション</pt>
+<pd>(オプション) <codeph><ph conref="container_conref.dita#links/command_prefix"></ph> top</codeph> コマンドの出力をさらに詳しく調べたりフィルタリングしたりするには、ネイティブ Linux <codeph>ps</codeph> コマンドでのオプションを使用します。
+</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、<varname>my_container</varname> というコンテナー内で実行されているすべての現行プロセスの詳細情報を表示する要求です。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> top <varname>my_container</varname> -aux</codeblock></dd></dlentry></dl></section>
+<section id="unpause"><title><ph conref="container_conref.dita#links/command_prefix"></ph> unpause CONTAINER [CONTAINER] </title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>実行中の 1 つ以上コンテナー内のすべてのプロセスの一時停止を解除します。
+詳しくは、Docker ヘルプ内の <xref scope="local" conref="container_cli_reference_native-docker.dita#container_cli_reference_native-docker/docker_unpause"></xref> コマンドを参照してください。コンテナーを一時停止するには、<xref href="#container_cli_reference_cfic/pause" format="dita" scope="local">pause</xref> コマンドを参照してください。 </dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt><varname>CONTAINER</varname></pt>
+<pd>(必須) 少なくとも 1 つのコンテナーのコンテナー名または ID。
+コマンドの中で、コンテナーの名前または ID をスペースで区切ってリストして指定することにより、複数のコンテナーを対象としてこのコマンドを実行することができます。
+</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、<varname>my_container</varname> という名前のコンテナーの一時停止を解除する要求です。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> unpause <varname>my_container</varname></codeblock></dd></dlentry></dl></section>
+<section id="unprovision"><title><ph conref="container_conref.dita#links/command_prefix"></ph> unprovision [-f]</title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>ログインしている <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースから <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を削除します。<note type="attention">このコマンドを実行すると、単一コンテナーとコンテナー・グループがすべて失われます。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> では、まだスペースを使用可能です。<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を再度使い始めるには、<xref href="#container_cli_reference_cfic/init"></xref> を実行して <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を再度初期設定する必要があります。
+</note></dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt>-f, --force</pt>
+<pd>(オプション) <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースから <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を強制的に削除します。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、スペースから <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を削除する要求です。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> unprovision</codeblock></dd></dlentry></dl></section>
+<section id="upgrade"><title><ph id="update_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph> update </ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>インストール済みのバージョンより新しいバージョンの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグインがあるかどうかを検査します。</dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd><codeblock><ph conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/update_cmdname"></ph></codeblock></dd></dlentry></dl></section>
+<section id="version"><title><ph id="version_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph>version</ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>Docker および <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> API のバージョンを表示します。<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグインのインストールされているバージョンを表示するには、<codeph>cf plugins</codeph> または <codeph><ph conref="container_conref.dita#links/command_prefix"></ph> info</codeph> を実行します。
+詳しくは、Docker ヘルプで <xref conref="container_cli_reference_native-docker.dita#container_cli_reference_native-docker/docker_version"></xref> コマンドを参照してください。
+</dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd><codeblock><ph conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/version_cmdname"></ph></codeblock></dd></dlentry></dl></section>
+<section id="volume_create"><title><ph id="volume_create_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph> volume-create VOLNAME [FSNAME] </ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>ボリュームを作成します。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd id="volume_create_param"><parml>
+<plentry>
+<pt><varname>FSNAME</varname></pt>
+<pd>(オプション) ファイル共有名。使用可能なファイル共有または指定されたファイル共有がない場合、ボリュームはそのスペースのデフォルトのファイル共有に作成されます。</pd></plentry></parml>
+<parml>
+<plentry>
+<pt><varname>VOLNAME</varname></pt>
+<pd>(必須) ボリューム名。<ph id="naming">名前に使用できるのは、大文字、小文字、数字、下線 (_)、およびハイフン (-) です。</ph></pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、ボリュームを作成する要求です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> volume-create <varname>my_volume</varname> <varname>my_fileshare</varname></codeblock></dd></dlentry></dl></section>
+<section id="volume_fscreate"><title><ph id="volume_fscreate_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph> volume-fs-create FSNAME FSSIZE FSIOPS </ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>ファイル共有を作成します。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd id="volume_fscreate_param"><parml>
+<plentry>
+<pt><varname>FSIOPS</varname></pt>
+<pd>(必須) ファイル共有 IOPS。有効な値は、GB 当たり 0.25、2、または 4 IOPS です。</pd></plentry>
+<plentry>
+<pt><varname>FSNAME</varname></pt>
+<pd>(必須) ファイル共有名。<ph conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/naming"></ph></pd></plentry>
+<plentry>
+<pt><varname>FSSIZE</varname></pt>
+<pd>(必須) GB 単位のファイル共有システム・サイズ。<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> volume-fs-flavors</codeph> を使用すると、すべての有効なサイズをリストできます。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> volume-fs-create <varname>my_fileshare</varname> <varname>20</varname> <varname>0.25</varname></codeblock></dd></dlentry></dl></section>
+<section id="volume_fsflavorlist"><title><ph id="volume_fsflavorlist_cmd"><ph conref="container_conref.dita#links/command_prefix"></ph>
+volume-fs-flavors</ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>使用できるファイル共有サイズをリストします。</dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd><codeblock><ph conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/volume_fsflavorlist_cmd"></ph></codeblock></dd></dlentry></dl></section>
+<section id="volume_fsinspect"><title><ph id="volume_fsinspect_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph> volume-fs-inspect FSNAME </ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>ファイル共有を検査します。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt><varname>FSNAME</varname></pt>
+<pd>(必須) ファイル共有名。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> volume-fs-inspect <varname>my_fileshare</varname></codeblock></dd></dlentry></dl></section>
+<section id="volume_fslist"><title><ph id="volume_fslist_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph> volume-fs</ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>組織内のファイル共有をリストします。</dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd><codeblock><ph conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/volume_fslist_cmdname"></ph></codeblock></dd></dlentry></dl></section>
+<section id="volume_fsrm"><title><ph id="volume_fsrm_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph> volume-fs-remove FSNAME </ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>ファイル共有を削除します。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt><varname>FSNAME</varname></pt>
+<pd>(必須) ファイル共有名。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> volume-fs-remove <varname>my_fileshare</varname></codeblock></dd></dlentry></dl></section>
+<section id="volume_inspect"><title><ph id="vol_inspect_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph> volume-inspect VOLNAME </ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>ボリュームを検査します。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt><varname>VOLNAME</varname></pt>
+<pd>(必須) ボリューム名。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、ボリュームを検査する要求です。ここで、<varname>my_volume</varname> はボリュームの名前です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> volume-inspect <varname>my_volume</varname></codeblock></dd></dlentry></dl></section>
+<section id="volume_space-add" audience="blue"><title><ph id="volume_space-add_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph> volume-space-add VOLNAME SPACE [SPACE]</ph></title>
+<draft-comment author="Nadine">This content is staging only. We do not want to expose this feature
+to customers because it was built to the specific needs of one IBM Containers customer. </draft-comment>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>組織内の追加スペースでボリュームを利用できるようにします。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt><varname>SPACE</varname></pt>
+<pd>(必須) スペース名。</pd></plentry></parml></dd>
+<dd><parml>
+<plentry>
+<pt><varname>VOLNAME</varname></pt>
+<pd>(必須) ボリューム名。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、ボリュームにスペースを追加する要求です。<varname>my_volume</varname> はボリュームの名前、<varname>my_space</varname> はスペースの名前です。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> volume-space-add <varname>my_volume</varname> <varname>my_space</varname></codeblock></dd></dlentry></dl></section>
+<section id="volume_space-rm" audience="blue"><title><ph id="volume_space-rm_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph> volume-space-remove VOLNAME SPACE [SPACE]</ph></title>
+<draft-comment author="Nadine">This content is staging only. We do not want to expose this feature
+to customers because it was built to the specific needs of one IBM Containers customer. </draft-comment>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>2 次スペースでボリュームを利用不可にします。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt><varname>SPACE</varname></pt>
+<pd>(必須) スペース名。</pd></plentry></parml></dd>
+<dd><parml>
+<plentry>
+<pt><varname>VOLNAME</varname></pt>
+<pd>(必須) ボリューム名。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、ボリュームからスペースを削除する要求です。<varname>my_volume</varname> はボリュームの名前、<varname>my_space</varname> はスペースの名前です。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> volume-space-remove <varname>my_volume</varname> <varname>my_space</varname></codeblock></dd></dlentry></dl></section>
+<section id="volume_rm"><title><ph id="volume_rm_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph> volume-remove VOLNAME </ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>ボリュームを削除します。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd id="volume_rm_param"><parml>
+<plentry>
+<pt><varname>VOLNAME</varname></pt>
+<pd>(必須) ボリューム名。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、ボリュームを削除する要求です。ここで、<varname>my_volume</varname> はボリュームの名前です。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> volume-remove <varname>my_volume</varname></codeblock></dd></dlentry></dl></section>
+<section id="volume_list"><title><ph id="volume_list_cmdname"><ph conref="container_conref.dita#links/command_prefix"></ph> volumes [--table]</ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>ボリュームをリストします。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt>--table</pt>
+<pd>(オプション) リスト出力を表形式にします。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、すべてのボリュームをリストする要求です。<codeblock><ph conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/volume_list_cmdname"></ph></codeblock></dd></dlentry></dl></section>
+<section id="wait"><title><ph conref="container_conref.dita#links/command_prefix"></ph> wait CONTAINER [CONTAINER] </title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>コンテナーが終了するまで待機します。この待機時間中は、コマンド・ラインが戻らないため、コマンドを入力できません。 コンテナーが終了または停止すると、すぐに終了コードが CLI 出力に表示されます。
+詳しくは、Docker ヘルプ内の <xref conref="container_cli_reference_native-docker.dita#container_cli_reference_native-docker/docker_wait"></xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt><varname>CONTAINER</varname></pt>
+<pd>(必須) コンテナーの名前または ID。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、<varname>my_container</varname> というコンテナーが終了するまで待機する要求です。コンテナーが終了すると、すぐに終了コードが CLI に表示されます。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> wait <varname>my_container</varname></codeblock></dd></dlentry></dl></section>
+<section id="wait-status"><title><ph conref="container_conref.dita#links/command_prefix"></ph> wait-status CONTAINER</title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>単一コンテナーまたはコンテナー・グループが非過渡的な状態になるまで待機します。この待機時間中は、コマンド・ラインが戻らないため、コマンドを入力できません。 コンテナーが非過渡的な状態になると、すぐに <uicontrol>OK</uicontrol> メッセージが表示されます。単一コンテナーの場合、非過渡的な状態には <codeph>Running</codeph>、<codeph>Shutdown</codeph>、<codeph>Crashed</codeph>、<codeph>Paused</codeph>、<codeph>Suspended</codeph> があります。コンテナー・グループの場合、非過渡的な状態には <codeph>CREATE_COMPLETE</codeph>、<codeph>UPDATE_COMPLETE</codeph>、<codeph>FAILED</codeph> があります。
+<draft-comment>Confirm that this list of complete and failed statuses is
+exhaustive.</draft-comment></dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt><varname>CONTAINER</varname></pt>
+<pd>(必須) コンテナーまたはグループの名前または ID。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、<varname>my_container</varname> というコンテナーが非過渡的な状態になるまで待機する要求です。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> wait-status <varname>my_container</varname></codeblock></dd></dlentry></dl></section></refbody></reference></reference>

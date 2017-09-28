@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE map PUBLIC "-//IBM//DTD DITA IBM Map//EN"
+ "ibm-map.dtd">
+<map xml:lang="ja-jp">
+<title>Amalgam8</title>
+<topicmeta>
+<copyright>
+<copyryear year="2016"></copyryear>
+<copyrholder>IBM</copyrholder></copyright></topicmeta><!--Getting started-->
+<topicref href="index.dita" scope="local" locktitle="yes" linking="none" audience="unknown">
+<topicref navtitle="About" href="a8_component_ov.dita" scope="local" chunk="to-content"></topicref>
+<topicref navtitle="Deploying Amalgam8 in Bluemix" href="a8_solution_bluemix.dita" chunk="to-content">
+<topicref navtitle="Installing the Bluemix CLI" href="a8_configure_bluemix_cli.dita"></topicref>
+<topicref navtitle="Configuring the local environment for Amalgam8" href="a8_configure.dita"></topicref>
+<topicref navtitle="Install the Amalgam8 CLI" href="a8_install_cli.dita"></topicref>
+<topicref navtitle="Deploying the Control Plane in Bluemix" href="a8_control_plane.dita"></topicref></topicref>
+<topicref navtitle="Managing microservices" href="a8_manage.dita" chunk="to-content" audience="unknown"></topicref>
+<topicref navtitle="Registering a service automatically by configuring the Dockerfile" href="a8_register_svc.dita"></topicref>
+<topicref navtitle="Deploy a microservice to register automatically in Amalgam8" href="a8_deploy_svc.dita"></topicref>
+<topicref navtitle="Calling registered microservices" href="a8_calling.dita"></topicref>
+<topicref href="troubleshoot/ts_problem.dita"></topicref>
+<topicref navtitle="Troubleshooting Amalgam8" href="troubleshoot/ts_index.dita" type="task" scope="local" format="dita" chunk="to-content" audience="unknown">
+<topicref href="troubleshoot/ts_index.ditamap" format="ditamap"></topicref></topicref></topicref><!--Experiment by Kristin-->
+<topicref href="index.dita" scope="local" locktitle="yes" linking="none" chunk="to-content">
+<topicref navtitle="About" href="a8_component_ov.dita" scope="local"></topicref>
+<topicref navtitle="Deploying Amalgam8 in Bluemix" href="a8_solution_bluemix.dita">
+<topicref navtitle="Installing the Bluemix CLI" href="a8_configure_bluemix_cli.dita"></topicref>
+<topicref navtitle="Configuring the local environment for Amalgam8" href="a8_configure.dita"></topicref>
+<topicref navtitle="Install the Amalgam8 CLI" href="a8_install_cli.dita"></topicref>
+<topicref navtitle="Deploying the Control Plane in Bluemix" href="a8_control_plane.dita"></topicref></topicref>
+<topicref navtitle="Managing microservices" href="a8_manage.dita" audience="unknown"></topicref>
+<topicref navtitle="Registering a service automatically by configuring the Dockerfile" href="a8_register_svc.dita"></topicref>
+<topicref navtitle="Deploy a microservice to register automatically in Amalgam8" href="a8_deploy_svc.dita"></topicref>
+<topicref navtitle="Calling registered microservices" href="a8_calling.dita"></topicref>
+<topicref href="troubleshoot/ts_problem.dita"></topicref>
+<topicref navtitle="Troubleshooting Amalgam8" href="troubleshoot/ts_index.dita" type="task" scope="local" format="dita" audience="unknown">
+<topicref href="troubleshoot/ts_index.ditamap" format="ditamap"></topicref></topicref><!--Redirect files  Need links to be updated-->
+<topicref navtitle="Amalgam8" href="a8_calling.html" processing-role="resource-only" scope="local" format="html" toc="no"></topicref>
+<topicref navtitle="Amalgam8" href="a8_component_ov.html" processing-role="resource-only" scope="local" format="html" toc="no"></topicref>
+<topicref navtitle="Amalgam8" href="a8_create_routes.html" processing-role="resource-only" scope="local" format="html" toc="no"></topicref>
+<topicref navtitle="Amalgam8" href="a8_deploy_svc.html" processing-role="resource-only" scope="local" format="html" toc="no"></topicref>
+<topicref navtitle="Amalgam8" href="a8_microservices.html" processing-role="resource-only" scope="local" format="html" toc="no"></topicref>
+<topicref navtitle="Amalgam8" href="a8_provision.html" processing-role="resource-only" scope="local" format="html" toc="no"></topicref>
+<topicref navtitle="Amalgam8" href="a8_register_svc.html" processing-role="resource-only" scope="local" format="html" toc="no"></topicref>
+<topicref navtitle="Amalgam8" href="a8_registry.html" processing-role="resource-only" scope="local" format="html" toc="no"></topicref>
+<topicref navtitle="Amalgam8" href="a8_solution_bluemix.html" processing-role="resource-only" scope="local" format="html" toc="no"></topicref></topicref></map>

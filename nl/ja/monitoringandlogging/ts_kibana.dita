@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tsTroubleshooting PUBLIC "-//IBM//DTD DITA Troubleshooting//EN"
+ "troubleshooting.dtd">
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<tsTroubleshooting id="ts_kibana" xml:lang="ja-jp" class="- topic/topic tsTroubleshooting/tsTroubleshooting ">
+<title>Kibana 4 にアクセスできない</title>
+<titlealts>
+<navtitle>Kibana 4 にアクセスできない</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerfull"></keyword> で Kibana 4 にアクセスできない</searchtitle></titlealts>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>ログ</indexterm><indexterm>ロギング</indexterm><indexterm>kibana</indexterm></keywords></metadata></prolog>
+<tsBody class="- topic/body tsTroubleshooting/tsBody ">
+<tsSymptoms class="- topic/section tsTroubleshooting/tsSymptoms "><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI でコンテナー・ログにアクセスするときに使用できるのは Kibana 3 ダッシュボードだけで、Kibana 4 ダッシュボードは使用できません。
+</tsSymptoms>
+<tsCauses class="- topic/section tsTroubleshooting/tsCauses "><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI に組み込まれたダッシュボードは Kibana 3 だけで、デフォルトでそのダッシュボードは選択されたコンテナーだけを表示します。
+</tsCauses>
+<tsResolve class="- topic/section tsTroubleshooting/tsResolve ">Kibana ダッシュボードを使用するには、モニタリングとロギングの URL を介してコンテナー・ログにアクセスする必要があります。
+<ol>
+<li><filepath>https://logmet.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/</filepath> を開きます。</li>
+<li>Bluemix ID およびパスワードを入力します。</li>
+<li><uicontrol>「Kibana 4」</uicontrol>を選択します。開いているダッシュボードがデフォルトのダッシュボードです。
+</li></ol><p>Kibana 4 でダッシュボードを作成する方法について詳しくは、<xref href="https://www.elastic.co/guide/en/kibana/4.1/index.html" format="html" scope="external">Kibana 4 の資料</xref>を参照してください。
+</p></tsResolve></tsBody></tsTroubleshooting>

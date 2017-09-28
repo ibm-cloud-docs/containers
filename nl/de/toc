@@ -1,0 +1,42 @@
+{:navgroup: .navgroup}
+{:topicgroup: .topicgroup}
+
+{: .toc subcollection="containers" audience="compute" href="/docs/containers/index.html"}
+IBM Bluemix Container Service
+    
+    {: .navgroup id="learn"}
+    container_index.md
+    cs_ov.md
+    cs_planning.md
+    cs_tutorials.md
+    cs_security.md
+    {: .navgroup-end}
+
+    {: .navgroup id="reference"}
+    cs_cli_reference.md
+    cs_rellinks.md
+    {: .navgroup-end}
+
+    {: .navgroup id="howto"}    
+    cs_cli_install.md
+    cs_cluster.md
+    cs_apps.md
+    [Einzelne und skalierbare Container ausführen](cs_classic.html)
+        [Einzelne und skalierbare Container in Kubernetes-Cluster migrieren](cs_classic.html#cs_classic_migrating)
+        [Informationen zu einzelnen und skalierbaren Containern](container_ov.html)
+        [Einzelne und skalierbare Container planen](container_planning.html)
+        [Sicherheit für einzelne und skalierbare Container](container_security.html)
+        [CLI für einzelne und skalierbare Container einrichten](container_cli_cfic_install.html)
+        [IBM Images](container_images.html)
+        [Kurzfristige Tasks als Container ausführen](container_single_ui.html)
+        [Hoch verfügbare Gruppen ausführen](container_ha.html)
+        [Persistente Daten für einzelne und skalierbare Container speichern](container_volumes_ov.html)
+        [Services mit einzelnen und skalierbaren Containern integrieren](container_integrations.html)
+        [CLI-Referenz für einzelne und skalierbare Container](container_cli_reference_cfic.html)
+        [Fehlerbehebung für einzelne und skalierbare Container](container_troubleshoot.html)
+    {: .navgroup-end}
+    
+    {: .navgroup id="help"}
+    cs_troubleshoot.md
+    {: .navgroup-end}
+

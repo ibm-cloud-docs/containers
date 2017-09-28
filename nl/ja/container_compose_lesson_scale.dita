@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE tutorialLesson PUBLIC "-//IBM//DTD DITA Tutorial Lesson//EN"
+ "tutorialLesson.dtd">
+<tutorialLesson id="container_compose_scale" xml:lang="ja-jp" class="- topic/topic task/task tutorialLesson/tutorialLesson ">
+<title>レッスン 3: マルチコンテナー・デプロイメントを拡大縮小する</title>
+<titlealts>
+<navtitle>マルチコンテナー・デプロイメントの拡大縮小</navtitle>
+<searchtitle>チュートリアル・レッスン 3: Docker Compose と <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を使用してマルチコンテナー・デプロイメントを拡大縮小する</searchtitle></titlealts>
+<shortdesc>マルチコンテナー・デプロイメントが実行されている状態で、Lets-Chat コンテナー・インスタンスの数を増やすことにより、アプリの信頼性を高めます。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>cli</indexterm><indexterm>Docker Compose</indexterm><indexterm>マルチコンテナー・アプリ</indexterm><indexterm>マルチコンテナー・デプロイメント</indexterm><indexterm>IBM Containers</indexterm><indexterm>スケーリング</indexterm><indexterm>docker-compose.yml</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context></context>
+<steps>
+<step>
+<cmd><filepath>docker-compose.yml</filepath> ファイルを更新します。</cmd>
+<info>このサービスで開始されるすべてのコンテナー・インスタンスが同じポートを使用しようとするため、拡大縮小できるサービスは、パブリック・ポートを公開しないサービスに限られます。
+前のレッスンでは Lets-Chat サービス用にポート 8080 を公開するものとして定義したため、<filepath>docker-compose.yml</filepath> ファイルでこの設定を変更する必要があります。
+</info><substeps>
+<substep>
+<cmd><filepath>docker-compose.yml</filepath> を開きます。
+</cmd>
+<info>
+<codeblock>nano <filepath>docker-compose.yml</filepath></codeblock></info></substep>
+<substep>
+<cmd>Lets-Chat サービス定義の中で <uicontrol>ports</uicontrol> パラメーターを <uicontrol>expose</uicontrol> に置き換え、パブリック IP アドレスを削除します。
+</cmd>
+<info>expose パラメーターは、プライベート・コンテナー・ネットワーク内でのみポートを公開します。
+Lets-Chat サービス定義は次のようになります。
+<codeblock>lets-chat: 
+  image: registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>$your_namespace</varname>/lets-chat 
+  expose:
+   - "8080" 
+  links: 
+    - mongo</codeblock></info></substep>
+<substep>
+<cmd><uicontrol>Ctrl + o</uicontrol> を押して、変更を保存します。<uicontrol>ENTER</uicontrol> を押して、変更を確認します。</cmd></substep>
+<substep>
+<cmd><uicontrol>ctrl + x</uicontrol> を押して、nano エディターを終了します。
+</cmd></substep></substeps></step>
+<step>
+<cmd>マルチコンテナー・デプロイメントを再作成します。<codeph>--force-recreate</codeph> オプションを使用して、デプロイメント内のすべてのインスタンスを再作成してください。</cmd>
+<info>
+<codeblock>docker-compose up -d --force-recreate</codeblock></info></step>
+<step>
+<cmd>コンテナー・インスタンスの数を 2 個に増やして、Lets-Chat サービスを拡大します。
+</cmd>
+<info>以下のコマンドを実行すると、<filepath>docker-compose.yml</filepath> ファイルの中のサービス定義に基づいて、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> により自動的に新しい Lets-Chat コンテナー・インスタンスが作成されます。
+<note>コンテナー・インスタンスの数を減らすと、余分のコンテナー・インスタンスが <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> により自動的に停止され、マルチコンテナー・デプロイメントから削除されます。</note>
+<codeblock>docker-compose scale lets-chat=2</codeblock>CLI 出力は、以下のようになります。
+<codeblock>$ docker-compose scale lets-chat=2
+
+Creating and starting composetutorial_lets-chat_2 ... done</codeblock></info></step>
+<step>
+<cmd>マルチコンテナー・デプロイメントを再作成して、新しいコンテナー・インスタンスをリンクします。</cmd>
+<info>現在のところ Docker Compose では自動リンク・アタッチ / デタッチがサポートされていません。そのために、<codeph>--force-recreate</codeph> オプションを使用して、マルチコンテナー・デプロイメント内のすべてのコンテナー・インスタンスを再作成する必要があります。<codeblock>docker-compose up -d --force-recreate</codeblock></info></step>
+<step>
+<cmd>Mongo コンテナー・インスタンスが Lets-Chat コンテナー・インスタンスにリンクされていることを確認してください。
+</cmd>
+<info>
+<codeblock>docker inspect composetutorial_lets-chat_1</codeblock>
+<codeblock>docker inspect composetutorial_lets-chat_2</codeblock>リンクされている Mongo コンテナー・インスタンスは、各応答の <varname>HostConfig &gt; Links</varname> セクションの中で確認できます。
+<codeblock>...
+"HostConfig": {
+        "Binds": [],
+        "CapAdd": [],
+        "CapDrop": [],
+        "ContainerIDFile": "",
+        "Links": [
+            "composetutorial_mongo_1:mongo",
+            "composetutorial_mongo_1:composetutorial_mongo_1",
+            "composetutorial_mongo_1:composetutorial_mongo_1"
+        ],
+        "LogConfig": {
+            "Config": {},
+            "Type": "json-file"
+        },
+        "LxcConf": [],
+        "PortBindings": {
+            "8080/tcp": [
+                {
+                    "HostPort": "8080"
+                }
+            ]
+        },
+        "Privileged": false,
+        "PublishAllPorts": false
+    },
+...</codeblock></info></step></steps>
+<result>
+正常に Lets-Chat サービスを拡大して、アプリの信頼性を向上させることができました。大量のユーザー・トラフィックに対応できるようにするため、マルチコンテナー・デプロイメントに <xref href="container_compose_lesson_loadbalance.dita#container_compose_loadbalance" format="dita">nginx ロード・バランサーを追加</xref>して、複数の Lets-Chat コンテナー・インスタンスの間でワークロード・バランシングが行われるようにしてください。</result></taskbody></tutorialLesson>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="cs_apps_service" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でのアプリ用 <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> サービスの追加 <ph conref="cs_conref.dita#links/release"></ph></title>
+<titlealts>
+<navtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> サービスの追加</navtitle></titlealts>
+<shortdesc>暗号化した Kubernetes シークレットを使用して、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> サービスの詳細情報や資格情報を保管し、サービスとクラスターの間のセキュアな通信を確保します。
+クラスター・ユーザーがそのシークレットにアクセスするには、そのシークレットをボリュームとしてポッドにマウントする必要があります。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>Kubernetes</indexterm><indexterm>クラスター</indexterm><indexterm>シークレット</indexterm><indexterm>暗号化</indexterm></keywords></metadata></prolog>
+<taskbody>
+<prereq><ph conref="cs_conref.dita#links/kubeconfig"></ph>
+アプリで使用する <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> サービスが、クラスター管理者によって<xref href="cs_cluster_service.dita" format="dita">クラスターに追加</xref>されていることを確認してください。
+</prereq>
+<context><p>Kubernetes シークレットは、機密情報 (ユーザー名、パスワード、鍵など) を安全に保管するための手段です。
+機密情報を環境変数として公開したり、Dockerfile に直接書き込んだりする代わりに、シークレットをシークレット・ボリュームとしてポッドにマウントする必要があります。
+そうすれば、ポッドで稼働中のコンテナーからシークレットにアクセスできるようになります。
+</p>
+<p>シークレット・ボリュームをポッドにマウントすると、<filepath>binding</filepath> という名前のファイルがボリューム・マウント・ディレクトリーに保管されます。そのファイルに、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> サービスにアクセスするのに必要なすべての情報や資格情報が格納されます。
+</p></context>
+<steps>
+<step>
+<cmd>クラスターの名前空間で使用できるシークレットのリストを表示します。
+</cmd>
+<info>
+<codeblock>kubectl get secrets --namespace=<varname>&lt;my_namespace&gt;</varname></codeblock>出力は、以下のようになります。
+<screen>NAME                                                    TYPE                                  DATA      AGE
+binding-<varname>&lt;service_instance_name&gt;</varname>         Opaque                                1         3m</screen></info></step>
+<step>
+<cmd><uicontrol>Opaque</uicontrol> タイプのシークレットを探して、そのシークレットの <uicontrol>NAME</uicontrol> を書き留めます。
+</cmd>
+<info>複数のシークレットが存在する場合は、クラスター管理者に連絡して、サービスに対応する正しいシークレットを確認してください。
+</info></step>
+<step>
+<cmd>任意のエディターを開きます。</cmd></step>
+<step>
+<cmd>YAML ファイルを作成し、シークレット・ボリュームによってサービスの詳細情報にアクセスできるポッドを構成します。
+</cmd>
+<info>
+<codeblock>apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: secret-test
+  name: secret-test
+  namespace: <varname>&lt;my_namespace&gt;</varname> 
+spec:
+  selector:
+    matchLabels:
+      app: secret-test
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: secret-test
+    spec:
+      containers:
+      - image: nginx
+        name: secret-test
+        volumeMounts:
+        - mountPath: /opt/service-bind
+          name: service-bind-volume
+      volumes:
+      - name: service-bind-volume
+        secret:
+          defaultMode: 420
+          secretName: binding-<varname>&lt;service_instance_name&gt;</varname> </codeblock>
+
+<table frame="all" colsep="1" rowsep="1" id="table_sdf_nkm_2v">
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="100pt"></colspec><colspec colnum="2" colname="c2"></colspec>
+<thead>
+<row>
+<entry namest="c1" nameend="c2"><ph conref="container_conref.dita#images/more_info"></ph> YAML ファイルの構成要素について</entry></row></thead>
+<tbody>
+<row>
+<entry><codeph>volumeMounts/mountPath</codeph></entry>
+<entry>シークレット・ボリュームをマウントするコンテナー内のディレクトリーの絶対パスを入力します。
+</entry></row>
+<row>
+<entry><codeph>volumeMounts/name</codeph></entry>
+<entry>コンテナーにマウントするシークレット・ボリュームの名前。
+</entry></row>
+<row>
+<entry><codeph>volumes/name</codeph></entry>
+<entry>コンテナーにマウントするシークレット・ボリュームの名前を入力します。
+</entry></row>
+<row>
+<entry><codeph>secret/defaultMode</codeph></entry>
+<entry>サービスのシークレットに対する読み取り専用アクセス権を設定します。
+</entry></row>
+<row>
+<entry><codeph>secret/secretName</codeph></entry>
+<entry>先ほど書き留めたシークレットの名前を入力します。
+</entry></row></tbody></tgroup></table></info></step>
+<step>
+<cmd>ポッドを作成して、シークレット・ボリュームをマウントします。
+</cmd>
+<info>
+<codeblock>kubectl create -f <filepath>&lt;yaml_path&gt;</filepath></codeblock></info></step>
+<step>
+<cmd>ポッドが作成されたことを確認します。
+</cmd>
+<info>
+<codeblock>kubectl get pods --namespace=<varname>&lt;my_namespace&gt;</varname></codeblock>CLI 出力は、以下のようになります。<screen>NAME                           READY     STATUS    RESTARTS   AGE
+secret-test-1111454598-gfx32   1/1       Running   0          1m</screen></info></step>
+<step>
+<cmd>ポッドの <uicontrol>NAME</uicontrol> を書き留めます。
+</cmd></step>
+<step>
+<cmd>ポッドの詳細情報を取得して、シークレットの名前を探します。
+</cmd>
+<info>
+<codeblock>kubectl describe pod <varname>&lt;pod_name&gt;</varname></codeblock>出力:
+<screen>Volumes:
+  service-bind-volume:
+    Type:       Secret (a volume populated by a Secret)
+    SecretName: binding-<varname>&lt;service_instance_name&gt;</varname></screen></info></step>
+<step>
+<cmd>マウント・ディレクトリーで <uicontrol>binding</uicontrol> という名前のシークレット・ファイルを見つけ、その JSON コンテンツを解析して、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> サービスにアクセスするために必要な URL とサービス資格情報を判別するようにアプリを構成します。
+</cmd></step></steps>
+<postreq><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> サービスの詳細情報や資格情報にアクセスできるようになりました。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> サービスを利用するために、マウント・ディレクトリーでサービスのシークレット・ファイルを見つけ、JSON コンテンツを解析してサービスの詳細情報を判別できるようにアプリを構成してください。
+</postreq></taskbody></task>

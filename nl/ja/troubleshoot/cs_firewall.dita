@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tsTroubleshooting PUBLIC "-//IBM//DTD DITA Troubleshooting//EN"
+ "troubleshooting.dtd">
+<tsTroubleshooting id="cs_firewall" xml:lang="ja-jp" class="- topic/topic tsTroubleshooting/tsTroubleshooting ">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でクラスター内のサービスへのアクセスに失敗する
+</title>
+<shortdesc><ph conref="../cs_conref.dita#links/access_policy_admin"></ph></shortdesc>
+<tsBody class="- topic/body tsTroubleshooting/tsBody ">
+<tsSymptoms class="- topic/section tsTroubleshooting/tsSymptoms ">kubectl プロキシーに障害が起きると、またはクラスター内のサービスにアクセスしようとすると、接続が失敗して次のいずれかのエラー・メッセージが表示されます。
+<screen>Connection refused</screen><screen>Connection timed out</screen><p>あるいは、kubectl exec、attach、または logs を使用すると、次のエラー・メッセージを受け取ります。
+</p><screen>Error from server: error dialing backend: dial tcp XXX.XXX.XXX:10250: getsockopt: connection timed out</screen><p>あるいは、kubectl プロキシーが正常に実行されても、ダッシュボードが使用できず、次のエラー・メッセージを受け取ります。
+</p><screen>timeout on 172.xxx.xxx.xxx</screen></tsSymptoms>
+<tsCauses class="- topic/section tsTroubleshooting/tsCauses ">追加のファイアウォールを設定したか、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントの既存のファイアウォール設定をカスタマイズした可能性があります。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword> では、ワーカー・ノードと Kubernetes マスター間で通信を行うには、特定の IP アドレスとポートが開いている必要があります。
+</tsCauses>
+<tsResolve class="- topic/section tsTroubleshooting/tsResolve ">カスタマイズ済みのファイアウォールで、以下のポートと IP アドレスを開きます。
+<ol>
+<li>以下を実行して、クラスター内のすべてのワーカー・ノードのパブリック IP アドレスをメモします。
+<codeblock>bx cs workers <varname>&lt;cluster_name_or_id&gt;</varname></codeblock></li>
+<li>以下のように、ファイアウォールの設定で、ワーカー・ノードとの間の以下の接続を許可します。<ul>
+<li>ワーカー・ノードへの INBOUND 接続のために、以下のソース・ネットワーク・グループから宛先 TCP/UDP ポート 10250 および <varname>&lt;public_IP_of _each_worker_node&gt;</varname> への着信ネットワーク・トラフィックを許可します。
+<p>ams03:
+<codeblock>169.50.144.128/28
+169.50.185.32/27
+169.50.169.104/29</codeblock></p><p>dal10:<codeblock>169.48.138.64/26
+169.46.7.232/29 </codeblock></p><p>dal12:<codeblock>169.47.79.192/26
+169.47.126.192/27
+169.47.70.8/29</codeblock></p><p>fra02:<codeblock>169.50.48.160/28
+169.50.58.160/27
+169.50.56.168/29</codeblock></p></li>
+<li>ワーカー・ノードからの OUTBOUND 接続のために、ソース・ワーカー・ノードから宛先 TCP/UDP ポート範囲 (20000 から 32767 まで)、
+<varname>&lt;public_IP_of _each_worker_node&gt;</varname> のポート 443、そして以下の IP アドレスへの発信ネットワーク・トラフィックを許可します。
+<p>ams03: <codeph>169.50.169.110</codeph></p><p>dal10: <codeph> 169.46.7.238</codeph></p><p>dal12: <codeph>169.47.70.10</codeph></p><p>fra02: <codeph>169.50.56.174</codeph></p><codeblock>TCP port 443 FROM <varname>&lt;PUBLIC_IP_OF_EACH_WORKER_NODE&gt;</varname> TO gcr.io, quay.io, registry.hub.docker.com</codeblock></li></ul></li></ol></tsResolve></tsBody></tsTroubleshooting>

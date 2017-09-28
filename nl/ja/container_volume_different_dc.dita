@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="container_volume_different_dc" xml:lang="ja-jp">
+<title>ボリューム・データの他のデータ・センターへのマイグレーション</title>
+<titlealts>
+<navtitle>データの他のデータ・センターへのマイグレーション</navtitle></titlealts>
+<shortdesc>現行の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースを新しいデータ・センターへ移動する場合は、新しいデータ・センターでデータをリストアして使用できるように、現行のボリュームをバックアップしてください。</shortdesc>
+<taskbody>
+<context><p><note type="attention"><codeph><ph conref="container_conref.dita#links/command_prefix_nocodeph">cc</ph> reprovision</codeph> コマンドを使用してスペースを新しいデータ・センターへ移動すると、このスペースにあるすべてのコンテナー、パブリック IP アドレス、ボリュームは完全に削除され、新しいデータ・センターにマイグレーションされません。新しいデータ・センターへの移動後にデータが失われないようにするには、すべてのボリュームをバックアップし、新しいデータ・センターでスペースが再プロビジョンされたあとにデータをリストアする必要があります。</note></p></context>
+<steps>
+<step>
+<cmd>再プロビジョンする <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースにあるすべてのボリュームをリストします。</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix_nocodeph">cc</ph> volumes</codeblock></info></step>
+<step>
+<cmd>新しいデータ・センターで使用する各ボリュームをバックアップします。次のいずれかのオプションを選択します。</cmd><choices>
+<choice>ローカル・マシンにボリュームをバックアップするには、<xref href="container_volumes_backup.dita" format="dita"><ph conref="container_conref.dita#links/command_prefix_nocodeph">cc</ph> cp コマンド</xref>を使用します。</choice>
+<choice><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstoragefull"></keyword> インスタンスにデータを保存するには、<xref href="../images/docker_image_ibmbackup_restore/ibmbackup_restore_starter.html" format="html" scope="peer">IBM バックアップとリストア・イメージ</xref>からバックアップ・コンテナーを作成します。</choice></choices>
+<info>
+<note type="attention">ボリュームをバックアップせずに新しいデータ・センターにスペースを再プロビジョンすると、データが失われてリカバリーできません。</note></info></step>
+<step>
+<cmd><xref href="container_volumes_remove.dita" format="dita">スペース内のすべてのボリュームを削除</xref>します。</cmd></step>
+<step>
+<cmd><xref href="container_fileshares_managing.dita" format="dita">スペース内のすべてのファイル共有を削除</xref>します。</cmd></step>
+<step>
+<cmd>新しいデータ・センターにスペースを再プロビジョンします。<varname>&lt;data_center&gt;</varname> を、新しいスペースを作成する <xref href="container_cli_reference_cfic.dita#container_cli_reference_cfic/reprovision" format="dita">データ・センター</xref>に置き換えます。</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix_nocodeph">cc</ph> reprovision <varname>&lt;data_center&gt;</varname></codeblock></info></step>
+<step>
+<cmd><xref href="container_fileshares_adding_cli.dita" format="dita">新しいスペースにファイル共有を作成</xref>します。</cmd></step>
+<step>
+<cmd>バックアップしたデータのリストアに使用できる<xref href="container_volumes_cli.dita" format="dita">ボリュームを作成</xref>します。</cmd></step>
+<step>
+<cmd>新しいボリュームにデータをリストアします。ボリュームのバックアップに使用した方法によって、以下のオプションのいずれかを選択します。</cmd><choices>
+<choice>ローカル・マシンのデータをリストアする場合は、<xref href="container_volumes_backup.dita" format="dita"><ph conref="container_conref.dita#links/command_prefix_nocodeph">cc</ph> cp コマンド</xref>を使用します。</choice>
+<choice><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/objectstoragefull"></keyword> インスタンスのデータをリストアする場合は、<xref href="../images/docker_image_ibmbackup_restore/ibmbackup_restore_starter.html" format="html" scope="peer">IBM バックアップとリストア・イメージ</xref>からリストア・コンテナーを作成します。</choice></choices></step></steps></taskbody></task>

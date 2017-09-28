@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tsTroubleshooting PUBLIC "-//IBM//DTD DITA Troubleshooting//EN"
+ "troubleshooting.dtd">
+<tsTroubleshooting id="ts_vol_owner" xml:lang="ja-jp" class="- topic/topic tsTroubleshooting/tsTroubleshooting ">
+<title>コンテナー内のマウントされたボリューム・ディレクトリーの所有者を変更する際の許可エラー</title>
+<titlealts>
+<navtitle>マウントされたボリューム・ディレクトリーの所有者を変更する</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でコンテナー内のマウントされたボリューム・ディレクトリーの所有者を変更する際の許可エラー</searchtitle></titlealts>
+<shortdesc></shortdesc>
+<tsBody class="- topic/body tsTroubleshooting/tsBody ">
+<tsSymptoms class="- topic/section tsTroubleshooting/tsSymptoms ">コンテナー内にマウントされたボリュームのファイルまたはディレクトリーの所有権を変更しようとする際に、許可エラーが発生します。</tsSymptoms>
+<tsCauses class="- topic/section tsTroubleshooting/tsCauses "><ph id="containers_namespace"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> では、Docker Engine 用に <xref href="https://docs.docker.com/engine/security/security/#kernel-namespaces" format="html" scope="external">ユーザー名前空間機能</xref>が使用可能に設定されています。</ph>コンテナー内の有効な root は、計算ホスト上の非 root ユーザーにマップされます。マウントされたボリュームのソースは、ネットワーク・ファイル・システム (NFS) です。NFS はユーザーの名前空間を認識しないため、コンテナー内にマウントされたファイルやディレクトリーに対する操作において、すべての非ユーザー・チェックが実行されます。</tsCauses>
+<tsResolve class="- topic/section tsTroubleshooting/tsResolve "><ph conref="../container_volumes_write.dita#container_volumes_write/nonroot_image" audience="blue"></ph><p><ph audience="blue">使用するイメージが、IBM 修正イメージに含まれていない場合は、以下の手順に従って適切な非 root 権限を追加してください。</ph></p><ol>
+<li>イメージの Dockerfile で、以下の行を追加して、使用可能なユーザー ID (UID) を使用してユーザーを作成します。例えば、ユーザー名を <varname>volumeeditor</varname> とします。<draft-comment translate="no">Where do
+you get the
+UID?</draft-comment><codeblock>RUN groupadd --gid <varname>1010</varname> <varname>volumeeditor</varname>
+RUN useradd --uid <varname>1010</varname> --gid <varname>1010</varname> -m --shell /bin/bash <varname>volumeeditor</varname></codeblock></li>
+<li>このイメージをビルドしてプライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> イメージ・レジストリーにプッシュします。</li>
+<li>ボリューム・パスがマウントされたイメージを使用したコンテナーを作成します。<note type="tip"><ph conref="container_conref.dita#terms/namespace_get"></ph></note><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> run --volume <varname>volume_name</varname>:<varname>/path/to/files</varname> --name <varname>fixVolumePermissions</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>&lt;my_namespace&gt;</varname>/<varname>image</varname></codeblock></li>
+<li>コンテナーにログインします。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> exec -it <varname>container_name</varname> bash</codeblock></li>
+<li>マウント・パスに対し、<userinput>MOUNTPATH</userinput> という名前の環境変数を定義します。<codeblock>MOUNTPATH="<varname>/path/to/files</varname>"</codeblock></li>
+<li>ユーザーをグループ <codeph>root</codeph> に追加します。<codeblock>adduser <varname>volumeeditor</varname> root</codeblock></li>
+<li>すべてのグループ・メンバーがボリューム・マウントに対して読み取り権限および書き込み権限を持つように、アクセス権を設定します。
+<codeblock>chmod 775 $MOUNTPATH</codeblock></li>
+<li>マウント・パスにフォルダーを作成し、読み取り権限および書き込み権限を設定します。
+この例では、フォルダー名は <varname>data</varname> です。
+<codeblock>su -c "mkdir -p $MOUNTPATH/<varname>data</varname>" <varname>volumeeditor</varname></codeblock><codeblock>su -c "chmod 700 $MOUNTPATH/<varname>data</varname>" <varname>volumeeditor</varname></codeblock></li>
+<li>ユーザー <varname>volumeeditor</varname> がマウント・パス内のファイルおよびディレクトリーにアクセスできることを確認します。<codeblock>sudo -u <varname>volumeeditor</varname> ls -al $MOUNTPATH</codeblock></li>
+<li>オプション: コンテナー内のフォルダーをボリューム内の <varname>data</varname> フォルダーにリンクさせます。
+このリンクは、$MOUNTPATH/<varname>data</varname> の書き込み権限を、コンテナー内のあらゆるフォルダーと関連付けます。
+<codeblock>ln -sf $MOUNTPATH/<varname>data</varname> <varname>/folder/in/container/</varname></codeblock></li>
+<li> 許可エラーを発生させずに編集を行うことができる場合は、<varname>volumeeditor</varname> グループ root ユーザーを削除します。<codeblock>deluser <varname>volumeeditor</varname> root</codeblock></li></ol></tsResolve></tsBody></tsTroubleshooting>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<concept id="cs_known_issues" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の既知の問題</title>
+<titlealts>
+<searchtitle><keyword conref="../cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> に関する既知の問題</searchtitle></titlealts>
+<shortdesc>既知の問題について説明します。
+</shortdesc>
+<concept id="ki_clusters">
+<title>クラスター</title>
+<conbody>
+<dl>
+<dlentry>
+<dt>同じ <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペース内の Cloud Foundry アプリがクラスターにアクセスできない</dt>
+<dd>Kubernetes クラスターを作成すると、クラスターはアカウント・レベルで作成され、スペースを使用しません (<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスをバインドする場合を除く)。クラスターからアクセスする Cloud Foundry アプリがある場合は、その Cloud Foundry アプリをパブリックに利用可能にするか、クラスター内のアプリを<xref href="../cs_planning_public_network.dita#cs_planning_public_network" format="dita" scope="local">パブリックに利用可能にする</xref>必要があります。</dd></dlentry>
+<dlentry>
+<dt>Kubernetes ダッシュボード NodePort サービスが無効になっている</dt>
+<dd>セキュリティー上の理由により、Kubernetes ダッシュボード NodePort サービスは無効になっています。
+Kubernetes ダッシュボードにアクセスするには、以下のコマンドを実行します。
+<codeblock>kubectl proxy</codeblock> これにより、以下の URL から Kubernetes ダッシュボードにアクセスできるようになります。
+<codeblock>http://localhost:8001/ui</codeblock></dd></dlentry>
+<dlentry id="lb">
+<dt>ロード・バランサーのサービス・タイプに制約がある</dt>
+<dd><ul>
+<li>プライベート VLAN では、ロード・バランシングは使用できません。
+</li>
+<li>service.beta.kubernetes.io/external-traffic サービスと service.beta.kubernetes.io/healthcheck-nodeport サービスのアノテーションを使用することはできません。
+これらのアノテーションについて詳しくは、<xref href="https://kubernetes.io/docs/tutorials/services/source-ip/" format="html" scope="external">Kubernetes の資料</xref>を参照してください。
+</li></ul></dd></dlentry>
+<dlentry id="autoscaling">
+<dt>水平自動スケーリングが機能しない</dt>
+<dd>セキュリティー上の理由で、Heapster によって使用される標準のポート (10255) はすべてのワーカー・ノードで閉じられています。
+このポートが閉じられているので、Heapster はワーカー・ノードのメトリックを報告できず、水平自動スケーリングは Kubernetes 資料の <xref href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/" format="html" scope="external">Horizontal Pod Autoscaling</xref> で説明されているようには機能しません。</dd></dlentry></dl></conbody></concept>
+<concept id="persistent_storage">
+<title>永続ストレージ </title>
+<conbody>
+<dl>
+<dlentry>
+<dt><codeph>kubectl describe &lt;pvc_name&gt;</codeph> コマンドを実行すると、永続ボリューム請求に対して <uicontrol>ProvisioningFailed</uicontrol> が表示されます。
+</dt>
+<dd><ul>
+<li>永続ボリューム請求を行う時に、利用できる永続ボリュームがないため、Kubernetes はメッセージ <uicontrol>ProvisioningFailed</uicontrol> を返します。
+</li>
+<li>永続ボリュームが作成され、それが請求にバインドされると、Kubernetes はメッセージ <uicontrol>ProvisioningSucceeded</uicontrol> を返します。
+この処理には数分かかる場合があります。
+</li></ul></dd></dlentry></dl></conbody></concept></concept>

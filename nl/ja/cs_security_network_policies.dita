@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dita PUBLIC "-//IBM//DTD DITA IBM Composite//EN" "ibm-ditabase.dtd">
+<dita xml:lang="ja-jp">
+<concept id="cs_security_network_policies" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword>でのワーカー・ノードのネットワーク・ポリシー</title>
+<titlealts>
+<navtitle>ネットワーク・ポリシー</navtitle></titlealts>
+<shortdesc>Kubernetes クラスターはそれぞれ、Calico と呼ばれるネットワーク・プラグインを使用してセットアップされます。各ワーカー・ノードのパブリック・ネットワーク・インターフェースを保護するために、デフォルトのネットワーク・ポリシーがセットアップされます。
+
+固有のセキュリティー要件があるときには、Calico および Kubernetes のネイティブ機能を使用してクラスター用のネットワーク・ポリシーをさらに構成できます。
+これらのネットワーク・ポリシーは、クラスター内のポッドを出入りするネットワーク・トラフィックのどれを許可し、どれをブロックするかを指定します。
+</shortdesc><!--&lt;prolog&gt;&lt;metadata&gt;&lt;keywords&gt;&lt;indexterm&gt;&lt;/indexterm&gt;&lt;/keywords&gt;&lt;/metadata&gt;&lt;/prolog&gt;-->
+<conbody>
+<p>Calico と Kubernetes のネイティブ機能のいずれかを選んで、ご使用のクラスター用のネットワーク・ポリシーを作成することができます。
+手始めには Kubernetes のネットワーク・ポリシーを使用することができますが、より堅牢な機能が必要であれば Calico のネットワーク・ポリシーを使用してください。<ol id="ol_nhs_mqn_4z">
+<li><xref href="https://kubernetes.io/docs/concepts/services-networking/network-policies/" format="html" scope="external">Kubernetes ネットワーク・ポリシー</xref>: どのポッドが相互に通信できるかを指定するなど、いくつかの基本的なオプションが提供されます。
+ポッドの着信ネットワーク・トラフィックは、ラベル、および接続しようとしているポッドの Kubernetes 名前空間に基づき、プロトコルおよびポートについて許可またはブロックできます。
+<p>これらのポリシーは
+<codeph>kubectl</codeph> コマンドまたは Kubernetes API を使用して適用できます。これらのポリシーが適用されると、Calico ネットワーク・ポリシーに変換され、Calico がこれらのポリシーを実施します。</p></li>
+<li><xref href="http://docs.projectcalico.org/v2.0/getting-started/kubernetes/tutorials/advanced-policy" format="html" scope="external">Calico ネットワーク・ポリシー</xref>: これらのポリシーは Kubernetes ネットワーク・ポリシーのスーパーセットであり、 Kubernetes ネイティブ機能を拡張したもので、以下の特徴があります。
+<ul id="ul_xbs_pqn_4z">
+<li>Kubernetes ポッドのトラフィックだけではなく、特定のネットワーク・インターフェース上のネットワーク・トラフィックを許可またはブロックします。
+</li>
+<li>着信 (ingress) および発信 (egress) ネットワーク・トラフィックを許可またはブロックします。</li>
+<li>送信元または宛先 IP アドレスまたは CIDR に基づき、トラフィックを許可またはブロックします。</li></ul><p>これらのポリシーは <codeph>calicoctl</codeph> コマンドを使用して適用されます。Calico は Kubernetes ワーカー・ノード上に Linux iptables 規則をセットアップすることによって、これらのポリシーを実施しますが、これには Calico ポリシーに変換された Kubernetes ネットワーク・ポリシーも含まれます。
+iptables 規則はワーカー・ノードのファイアウォールとして機能し、ネットワーク・トラフィックがターゲット・リソースに転送されるために満たさなければならない特性を定義します。
+</p></li></ol></p></conbody>
+<concept id="concept_nq1_2rn_4z">
+<title>デフォルト・ポリシーの構成</title>
+<shortdesc>クラスターの作成時には、各ワーカー・ノードのパブリック・ネットワーク・インターフェース用のデフォルトのネットワーク・ポリシーが自動的にセットアップされ、パブリック・インターネットからのワーカー・ノードの着信トラフィックを制限します。
+これらのポリシーはポッド間のトラフィックには影響せず、Kubernetes ノードポート、ロード・バランサー、入口サービスへのアクセスを許可するためにセットアップされます。</shortdesc>
+<conbody>
+<p>デフォルト・ポリシーはポッドに直接、適用されるわけではありません。Calico <xref href="http://docs.projectcalico.org/v2.0/getting-started/bare-metal/bare-metal" format="html" scope="external">host エンドポイント</xref> を使用して、ワーカー・ノードのパブリック・ネットワーク・インターフェースに適用されます。ホストのエンドポイントが Calico に作成されると、そのワーカー・ノードのネットワーク・インターフェースを出入りするトラフィックは、ポリシーによってそのトラフィックが許可されていない限り、すべてブロックされます。
+</p>
+<p>SSH を許可するポリシーは存在せず、そのため、パブリック・ネットワーク・インターフェースによる SSH アクセスはブロックされることに気を付けてください。これはポートを開くためのポリシーを持たない、他のすべてのポートも同様です。
+SSH アクセスと他のアクセスは、各ワーカー・ノードのプライベート・ネットワーク・インターフェースで使用可能です。
+<note type="important">ポリシーを十分に理解していない限り、かつ、ポリシーにより許可されるトラフィックが必要ないと判断できるのでない限り、ホストのエンドポイントに適用されるポリシーを削除しないでください。
+</note></p>
+<p><table id="table_dbt_4vn_4z">
+<title>各クラスターに設定されるデフォルト・ポリシー</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry>ポリシー名</entry>
+<entry>ポリシーの説明</entry></row></thead>
+<tbody>
+<row>
+<entry><codeph>allow-all-outbound</codeph></entry>
+<entry>すべてのアウトバウンド・トラフィックを許可します。</entry></row>
+<row>
+<entry><codeph>allow-icmp</codeph></entry>
+<entry>すべての着信 icmp パケット (ping) を許可します。</entry></row>
+<row>
+<entry><codeph>allow-kubelet-port</codeph></entry>
+<entry>ポート 10250 (kubelet により使用されるポート) へのすべての着信トラフィックを許可します。.
+このポリシーは Kubernetes クラスターで <codeph>kubectl logs</codeph> と <codeph>kubectl exec</codeph> が正しく機能するようにします。
+</entry></row>
+<row>
+<entry><codeph>allow-node-port-dnat</codeph></entry>
+<entry>着信ノードポート、ロード・バランサー、およびサービスが公開されるポッドへの入口サービス・トラフィックを許可します。
+Kubernetes ではサービス要求を正しいポッドに転送するために宛先ネットワーク・アドレス変換 (DNAT) を使用するため、それらのサービスがパブリック・インターフェースで公開されるポートは指定する必要がないことに気を付けてください。
+ホストのエンドポイント・ポリシーが iptables で適用される前に、その転送が実行されます。</entry></row>
+<row>
+<entry><codeph>allow-sys-mgmt</codeph></entry>
+<entry>ワーカー・ノードを管理するために使用される特定の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> システムの着信接続を許可します。
+</entry></row>
+<row>
+<entry><codeph>allow-vrrp</codeph></entry>
+<entry>ワーカー・ノード間の仮想 IP アドレスのモニターと移動に使用される vrrp パケットを許可します。
+</entry></row></tbody></tgroup></table></p></conbody></concept>
+<task id="task_kpt_s21_qz">
+<title>ネットワーク・ポリシーの追加</title>
+<shortdesc>ほとんどの場合、デフォルト・ポリシーは変更する必要がありません。拡張シナリオのみ、変更が必要な場合があります。
+変更が必要であるとわかった場合は、Calico CLI をインストールし、独自のネットワーク・ポリシーを作成します。
+</shortdesc>
+<taskbody>
+<prereq id="prereq_jvv_vwn_4z">開始する前に、以下のステップを完了してください。 <ol id="ol_hyd_1xn_4z">
+<li><xref href="cs_cli_install.dita" format="dita" scope="local"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> および Kubernetes CLI をインストールします。</xref></li>
+<li><xref href="cs_cluster_ui.dita" format="dita"><ph conref="cs_conref.dita#links/free_cluster"></ph> または標準クラスターを作成します。</xref></li>
+<li><xref href="cs_cli_configure.dita" format="dita" scope="local">クラスターを Kubernetes CLI のターゲットとして設定</xref>します。<codeph>bx cs cluster-config</codeph> コマンドで <codeph>--admin</codeph> オプションを指定します。これは、証明書および許可ファイルのダウンロードに使用されます。
+このダウンロードには、Calico コマンドの実行に必要な管理者 rbac 役割の鍵も含まれています。<codeblock>bx cs cluster-config <varname>&lt;cluster_name&gt;</varname> <codeph>--admin</codeph></codeblock></li></ol></prereq>
+<steps id="steps_ojb_521_qz">
+<stepsection>ネットワーク・ポリシーを追加するには、以下のようにします。</stepsection>
+<step>
+<cmd>Calico CLI をインストールします。</cmd><substeps id="kube_substeps">
+<substep>
+<cmd>Calico CLI をダウンロードします。</cmd>
+<info>
+<dl>
+<dlentry>
+<dt>OS X</dt>
+<dd><xref href="https://github.com/projectcalico/calicoctl/releases/download/v1.1.3/calicoctl-darwin-amd64" format="html" scope="external"></xref></dd></dlentry>
+<dlentry>
+<dt>Linux</dt>
+<dd><xref href="https://github.com/projectcalico/calicoctl/releases/download/v1.1.3/calicoctl" format="html" scope="external"></xref></dd></dlentry>
+<dlentry>
+<dt>Windows</dt>
+<dd><xref href="https://github.com/projectcalico/calicoctl/releases/download/v1.1.3/calicoctl-windows-amd64.exe" format="html" scope="external"></xref><note type="tip">Windows を使用している場合、Calico CLI を <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> CLI と同じディレクトリーにインストールします。このようにセットアップすると、後でコマンドを実行するとき、ファイル・パスの変更を行う手間がいくらか少なくなります。
+</note></dd></dlentry></dl></info></substep>
+<substep>
+<cmd>OSX と Linux のユーザーは、以下の手順を実行してください。
+</cmd>
+<info>
+<ol id="ol_lv5_rn4_zz">
+<li>実行可能ファイルを <filepath>/usr/local/bin</filepath> ディレクトリーに移動します。
+<ul id="ul_ngm_244_zz">
+<li>Linux:
+<codeblock>mv /<varname>&lt;path_to_file&gt;</varname>/calicoctl /usr/local/bin/calicoctl</codeblock></li>
+<li>OS X:<codeblock>mv /<varname>&lt;path_to_file&gt;</varname>/calico-darwin-amd64 /usr/local/bin/calicoctl</codeblock></li></ul></li>
+<li>バイナリー・ファイルを実行可能ファイルに変換します。
+<codeblock>chmod +x /usr/local/bin/calicoctl</codeblock></li></ol></info></substep>
+<substep>
+<cmd>Calico CLI クライアントのバージョンを調べて、<codeph>calico</codeph> コマンドが正常に実行することを確認します。
+</cmd>
+<info>
+<codeblock>calicoctl version</codeblock></info></substep></substeps></step>
+<step>
+<cmd>Calico CLI を構成します。</cmd>
+<info> </info><substeps id="substeps_zzp_x21_qz">
+<substep>
+<cmd>Linux および OS X の場合、<filepath>/etc/calico</filepath> ディレクトリーを作成します。</cmd>
+<info>Windows の場合は、どのディレクトリーを使用しても構いません。</info>
+<info>
+<codeblock>mkdir -p /etc/calico/</codeblock></info></substep>
+<substep>
+<cmd><filepath>calicoctl.cfg</filepath> ファイルを作成します。</cmd>
+<info>
+<ul id="ul_xx1_2p4_zz">
+<li>Linux および OS X:<codeblock>sudo vi /etc/calico/calicoctl.cfg</codeblock></li>
+<li>Windows の場合: テキスト・エディターでファイルを作成します。</li></ul></info></substep>
+<substep>
+<cmd><filepath>calicoctl.cfg</filepath> ファイルに次の情報を入力します。</cmd>
+<info>
+<codeblock>apiVersion: v1
+kind: calicoApiConfig
+metadata:
+spec:
+    etcdEndpoints: <varname>&lt;ETCD_URL&gt;</varname>
+    etcdKeyFile: <varname>&lt;CERTS_DIR&gt;/admin-key.pem</varname>
+    etcdCertFile: <varname>&lt;CERTS_DIR&gt;/admin.pem</varname>
+    etcdCACertFile: <varname>&lt;CERTS_DIR&gt;/&lt;ca-*pem_file&gt;</varname></codeblock>
+
+<ol id="ol_g3m_bg1_qz">
+<li>
+<varname>&lt;ETCD_URL&gt;</varname> を取得します。<p>Linux および Os
+X:<codeblock>kubectl describe pod -n kube-system `kubectl get pod -n kube-system | grep calico-policy-controller | awk '{print $1}'` | grep ETCD_ENDPOINTS | awk '{print $2}'</codeblock></p>
+出力例:<screen>https://169.1.1.1:30001</screen><p>Windows:<ol id="ol_tky_fgy_d1b">
+<li>kube-system 名前空間内のポッドのリストを取得し、Calico コントローラー・ポッドを見つけます。<codeblock>kubectl get pod -n kube-system</codeblock>例:<codeblock>calico-policy-controller-1674857634-k2ckm</codeblock></li>
+<li>Calico コントローラー・ポッドの詳細を表示します。<codeblock>kubectl describe pod -n kube-system calico-policy-controller-<varname>&lt;ID&gt;</varname></codeblock></li>
+<li>ETCD エンドポイント値を見つけます。例: <codeph>https://169.1.1.1:30001</codeph>。</li></ol></p></li>
+<li><varname>&lt;CERTS_DIR&gt;</varname> (Kubernetes 証明書をダウンロードしたディレクトリー) を取得します。<p>Linux および OS X:<codeblock>dirname $KUBECONFIG</codeblock>出力例:<screen>/home/sysadmin/.bluemix/plugins/container-service/clusters/<varname>cluster_name</varname>/</screen></p><p>Windows:<codeblock>ECHO %KUBECONFIG%</codeblock>出力例:<screen>C:\Users\&lt;user&gt;\.bluemix\plugins\container-service\<varname>cluster_name</varname>\kube-config-prod-<varname>&lt;location&gt;</varname>-<varname>&lt;cluster_name&gt;</varname>.yml</screen>出力の末尾からファイル名 kube-config-prod-<varname>&lt;location&gt;</varname>-<varname>&lt;cluster_name&gt;</varname>.yml を削除して、ディレクトリー・パスを取得します。</p></li>
+<li>
+<varname>&lt;ca-*pem_file&gt;</varname> を取得します。<p>Linux および OS X:<codeblock>ls `dirname $KUBECONFIG` | grep ca-.*pem</codeblock></p><p>Windows:<ol id="ol_tmh_1zx_d1b">
+<li>最後のステップで取得したディレクトリーを開きます。<codeblock>C:\Users\&lt;user&gt;\.bluemix\plugins\container-service\<varname>cluster_name</varname>\</codeblock></li>
+<li><varname>&lt;ca-*pem_file&gt;</varname> ファイルを見つけます。</li></ol></p><p>例:<codeblock>ca-<varname>&lt;location&gt;</varname>-<varname>&lt;cluster_name&gt;</varname>.pem</codeblock></p></li>
+<li><filepath>calicoctl.cfg</filepath> が次の例のようになっていることを確認します。
+<codeblock>apiVersion: v1
+kind: calicoApiConfig
+metadata:
+spec:
+    etcdEndpoints: https://169.1.1.1:30001
+    etcdKeyFile: /home/sysadmin/.bluemix/plugins/container-service/clusters/<varname>mycluster</varname>/admin-key.pem
+    etcdCertFile: /home/sysadmin/.bluemix/plugins/container-service/clusters/<varname>mycluster</varname>/admin.pem
+    etcdCACertFile: /home/sysadmin/.bluemix/plugins/container-service/clusters/<varname>mycluster</varname>/ca-<varname>dal10</varname>-<varname>mycluster</varname>.pem</codeblock></li>
+<li>Calico 構成が正常に動作していることを確認します。
+<p>Linux および OS X:<codeblock>calicoctl get nodes</codeblock></p><p>Windows:<codeblock>calicoctl get nodes --config=<varname>&lt;path_to_&gt;</varname>\calicoctl.cfg</codeblock></p><p>出力:
+<screen>NAME
+kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w1.cloud.ibm
+kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w2.cloud.ibm
+kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w3.cloud.ibm</screen></p></li></ol></info></substep></substeps></step>
+<step importance="optional">
+<cmd>既存のネットワーク・ポリシーを調査します。</cmd><choices id="choices_gdz_pg1_qz">
+<choice>Calico ホスト・エンドポイントを表示します。
+<codeblock>calicoctl get hostendpoint -o yaml</codeblock></choice>
+<choice>そのクラスター用に作成されたすべての Calico および Kubernetes ネットワーク・ポリシーを表示します。
+このリストにはどのポッドやホストにもまだ適用されていない可能性のあるポリシーも含まれています。ネットワーク・ポリシーを実施するには、
+Calico ネットワーク・ポリシーで定義されたセレクターに一致する Kubernetes リソースを見つける必要があります。<codeblock>calicoctl get policy -o wide</codeblock></choice>
+<choice>ネットワーク・ポリシーの詳細を表示します。
+<codeblock>calicoctl get policy -o yaml <varname>&lt;policy_name&gt;</varname></codeblock></choice>
+<choice>そのクラスター用のすべてのネットワーク・ポリシーの詳細を表示します。
+<codeblock>calicoctl get policy -o yaml</codeblock></choice></choices></step>
+<step>
+<cmd>トラフィックを許可またはブロックする Calico ネットワーク・ポリシーを作成します。</cmd><substeps id="substeps_gfj_jg1_qz">
+<substep>
+<cmd>構成スクリプト (<filepath>.yaml</filepath>) を作成して、独自の <xref href="http://docs.projectcalico.org/v2.1/reference/calicoctl/resources/policy" format="html" scope="external">Calico ネットワーク・ポリシー</xref> を定義します。
+</cmd>
+<info>これらの構成ファイルにはどのポッド、名前空間、またはホストにこれらのポリシーを適用するかを説明するセレクターが含まれます。
+独自のポリシーを作成するには、こちらの<xref href="http://docs.projectcalico.org/v2.0/getting-started/kubernetes/tutorials/advanced-policy" format="html" scope="external">サンプル Calico ポリシー</xref>を参照してください。</info></substep>
+<substep>
+<cmd>ポリシーをクラスターに適用します。</cmd>
+<info> Linux および OS X:<codeblock>calicoctl apply -f <varname>&lt;policy_file_name.yaml&gt;</varname></codeblock>
+<p>Windows:<codeblock>calicoctl apply -f <varname>&lt;path_to_&gt;</varname>\<varname>&lt;policy_file_name.yaml&gt;</varname> --config=<varname>&lt;path_to_&gt;</varname>\calicoctl.cfg</codeblock></p></info></substep></substeps></step></steps></taskbody></task></concept></dita>

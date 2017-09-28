@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE tutorialLesson PUBLIC "-//IBM//DTD DITA Tutorial Lesson//EN"
+ "tutorialLesson.dtd">
+<tutorialLesson id="container_ml_gettingstarted_tutorial_lesson_3" xml:lang="ja-jp" class="- topic/topic task/task tutorialLesson/tutorialLesson ">
+<title>レッスン 3: Kibana でログ・エントリーを確認する</title>
+<titlealts>
+<navtitle>レッスン 3: Kibana を確認する</navtitle>
+<searchtitle>レッスン 3: <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のログ・エントリーを Kibana で確認する</searchtitle></titlealts>
+<shortdesc></shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>ログ</indexterm><indexterm>コンテナー</indexterm><indexterm>クローラー</indexterm><indexterm>ロギング</indexterm><indexterm>kibana</indexterm><indexterm>チュートリアル</indexterm></keywords></metadata></prolog>
+<taskbody>
+<steps>
+<step>
+<cmd>Kibana を開きます。</cmd><substeps>
+<substep>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> <wintitle>ダッシュボード</wintitle>で、作成した <uicontrol>liberty_logging_tutorial</uicontrol> コンテナーをクリックします。</cmd></substep>
+<substep>
+<cmd><uicontrol>「モニタリングおよびログ」</uicontrol>タブをクリックします。このページには、このコンテナーにのみ関係するデータの簡単なビューが表示されます。</cmd></substep>
+<substep>
+<cmd><uicontrol>「ロギング」</uicontrol>タブをクリックします。このビューには、コンテナーの開始からのログのフラット・リストが含まれています。</cmd></substep>
+<substep>
+<cmd><uicontrol>「拡張ビュー (ADVANCED VIEW)」</uicontrol>をクリックして、カスタマイズ可能な Kibana ダッシュボードでログ・エントリーを開きます。</cmd>
+<info>
+<note type="tip">同じダッシュボードに、URL <filepath>https://logmet.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/</filepath> からアクセスすることもできます。</note></info></substep></substeps></step>
+<step importance="optional">
+<cmd><uicontrol>「モジュール」</uicontrol>列は、データが含まれていないので非表示にします。</cmd>
+<info>不要な列を除去すると、情報を表示できるスペースが大きくなります。</info><substeps>
+<substep>
+<cmd><uicontrol>「構成」</uicontrol>アイコンをクリックします。</cmd></substep>
+<substep>
+<cmd><uicontrol>「パネル (Panel)」</uicontrol>タブをクリックします。</cmd></substep>
+<substep>
+<cmd>Columns セクションで、<uicontrol>「モジュール」</uicontrol>の横の <uicontrol>X</uicontrol> をクリックします。</cmd></substep>
+<substep>
+<cmd><uicontrol>「保存」</uicontrol>をクリックします。</cmd></substep></substeps></step>
+<step>
+<cmd>ログ情報のソースを表示するために、<uicontrol>「パス (path)」</uicontrol>フィールドを「すべてのイベント (All Events)」表に追加します。</cmd><substeps>
+<substep>
+<cmd><uicontrol>「すべてのイベント (All Events)」</uicontrol>表で、<image href="images/field_list_icon.png" alt="フィールド・リスト・アイコン"></image><uicontrol>「フィールド・リストの表示 (Show Field list)」</uicontrol>アイコンをクリックします。</cmd></substep>
+<substep>
+<cmd><uicontrol>「パス (path)」</uicontrol>を選択します。</cmd></substep></substeps></step>
+<step>
+<cmd>標準の Docker ログを確認します。</cmd>
+<info>Docker ログは、パス <filepath>/docker.log</filepath> に書き込まれます。
+これらのログはデフォルトで表示され、セットアップは不要です。
+ログ・エントリーには、<uicontrol>ibmliberty</uicontrol> アプリケーションの開始に関する情報が含まれています。<image href="images/tutorial_docker_log.png" scope="local" alt="docker.log メッセージ" placement="break"></image></info></step>
+<step>
+<cmd><filepath>liberty_logging_tutorial</filepath> ログを確認します。</cmd>
+<info><filepath>liberty_logging_tutorial</filepath> ログは、ファイル <filepath>/liberty_logging_tutorial/liberty_logging_tutorial.log</filepath> に書き込まれます。
+このログ・ファイルは、デフォルトでは表示されません。
+このログ・ファイルのログ・エントリーは、デフォルトでは Kibana ダッシュボードに表示されません。
+コンテナーの作成時に <codeph>LOG_LOCATIONS</codeph> 環境変数を使用してこのログ・ファイルのパスを追加し、このファイルに手動でメッセージを送信することで、ログ・エントリーが Kibana ダッシュボードに表示されます。<image href="images/tutorial_liberty_log.png" scope="local" alt="liberty_logging_tutorial ログ・メッセージ" placement="break"></image></info></step>
+<step>
+<cmd>Ubuntu ログ <filepath>dpkg</filepath> を確認します。</cmd>
+<info><filepath>dpkg</filepath> ログは、パス <filepath>/var/log/dpkg.log</filepath> に書き込まれます。
+このログ・ファイルのログ・エントリーは、デフォルトでは Kibana ダッシュボードに表示されません。
+コンテナーの作成時に <codeph>LOG_LOCATIONS</codeph> 環境変数を使用してこのログ・ファイルのパスを追加したので、ログ・エントリーが Kibana ダッシュボードに表示されます。
+コンテナー内でパッケージが更新されるたびに、<filepath>dpkg.log</filepath> で生成されたログ・エントリーが Kibana に表示されます。<image href="images/tutorial_dpkg_log.png" scope="local" alt="dpkg.log メッセージ" placement="break"></image></info></step>
+<step importance="optional">
+<cmd>例えば、<filepath>dpkg.log</filepath> のログだけを表示して、その他のログ・エントリーを非表示にします。</cmd>
+<info>任意のログの場所を使用してフィルタリングすることができますが、この例では <filepath>dpkg.log</filepath> を使用します。</info><substeps>
+<substep>
+<cmd><uicontrol>「すべてのイベント (All Events)」</uicontrol>表で、<filepath>dpkg.log</filepath> ログ・エントリーのいずれかをクリックします。</cmd>
+<info>その特定のログ・エントリーに関する詳細が表示されます。</info></substep>
+<substep>
+<cmd>ログ・エントリーの<uicontrol>「パス (path)」</uicontrol>行の<uicontrol>「アクション」</uicontrol>列で、
+<image href="images/magnifying_glass.png" scope="local" alt="フィルターを追加するための虫メガネ・アイコン"></image><uicontrol>「この値と突き合わせるフィルターの追加 (Add filter to match this value)」</uicontrol>アイコンをクリックします。</cmd>
+<info><filepath>dpkg.log</filepath> エントリーだけが表に表示されるようになり、
+ページのヘッダー下のグレー表示されたボックス内にフィルターが表示されます。<image href="images/dpkg_filter.png" scope="local" alt="dpkg.log filter" placement="break"></image></info></substep>
+<substep>
+<cmd importance="optional">フィルターを解除するには、ヘッダー下の <uicontrol>FILTERING</uicontrol> セクションで、
+<image href="images/filter_remove_icon.png" scope="local" alt="フィルター解除のアイコン"></image><uicontrol>「解除 (Remove)」</uicontrol>アイコンをクリックします。</cmd></substep></substeps></step></steps>
+<result><p>
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で使用可能なロギング機能のテストが正常に完了しました。</p></result>
+<postreq>Kibana ダッシュボードのカスタマイズ方法について詳しくは、<xref href="https://www.elastic.co/guide/en/kibana/3.0/index.html" format="html" scope="external">Kibana の資料</xref>を参照してください。</postreq></taskbody></tutorialLesson>

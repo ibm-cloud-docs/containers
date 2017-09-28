@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE reference PUBLIC "-//IBM//DTD DITA IBM Reference//EN"
+ "ibm-reference.dtd">
+<reference id="container_cli_reference_docker-compose" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン (<ph conref="container_conref.dita#links/command_prefix"></ph>) を使用したマルチコンテナー・デプロイメントの管理のための Docker Compose コマンド</title>
+<titlealts>
+<navtitle>Docker Compose コマンド</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン (<ph conref="container_conref.dita#links/command_prefix"></ph>) を使用したマルチコンテナー・デプロイメントの管理のための Docker Compose コマンド・リファレンス</searchtitle></titlealts><abstract>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン (<ph conref="container_conref.dita#links/command_prefix"></ph>) を使用したマルチコンテナー・デプロイメントを実行および管理するには、次のコマンドを参照してください。</shortdesc><xref href="container_cli_login.dita#container_cli_login/option2_li" format="dita" scope="local">プラグインへのログイン</xref>時に、Docker CLI コマンドを使用するよう<uicontrol>オプション 2</uicontrol> の環境変数を構成します。これで、Docker Compose コマンドを実行してマルチコンテナー・デプロイメントを管理できるようになります。Docker Compose コマンドを実行する前に、<filepath>docker-compose.yml</filepath> ファイルが配置されたディレクトリーに移動するようにしてください。そうしないと、エラー・メッセージが表示されます。</abstract>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>cli</indexterm><indexterm>Docker Compose</indexterm><indexterm>コマンド</indexterm><indexterm>リファレンス</indexterm><indexterm>オプション</indexterm><indexterm>IBM Containers</indexterm></keywords></metadata></prolog>
+<refbody>
+<section><p><table id="compose_mgmt">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> で Docker Compose を使用するためのコマンド</title>
+<tgroup cols="5"><colspec colnum="1" colname="c1"></colspec><colspec colnum="2" colname="c2"></colspec><colspec colnum="3" colname="c3"></colspec><colspec colnum="4" colname="c4"></colspec><colspec colnum="5" colname="c5"></colspec>
+<thead>
+<row>
+<entry namest="c1" nameend="c5"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> で Docker Compose を使用するためのコマンド</entry></row></thead>
+<tbody>
+<row>
+<entry><xref href="#container_cli_reference_docker-compose/logs"></xref></entry>
+<entry><xref href="#container_cli_reference_docker-compose/ps"></xref></entry>
+<entry><xref href="#container_cli_reference_docker-compose/rm"></xref></entry>
+<entry><xref href="#container_cli_reference_docker-compose/scale"></xref></entry>
+<entry><xref href="#container_cli_reference_docker-compose/start"></xref></entry></row>
+<row>
+<entry><xref href="#container_cli_reference_docker-compose/stop"></xref></entry>
+<entry><xref href="#container_cli_reference_docker-compose/up"></xref></entry>
+<entry></entry>
+<entry></entry>
+<entry></entry></row></tbody></tgroup></table></p></section>
+<section id="logs"><title><ph>docker-compose ログ</ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>このコマンドは、ご使用のマルチコンテナー・デプロイメントの各サービスのログ情報を表示します。<note>このコマンドは、現時点では <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でサポートされていません。</note></dd></dlentry></dl></section>
+<section id="ps"><title><ph id="ps_cmdname">docker-compose ps [-q]</ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>このコマンドは、ご使用のコンテナー・システムの一部である実行中および停止中のすべてのコンテナーをリストします。
+詳しくは、Docker ヘルプ内の <xref href="https://docs.docker.com/compose/reference/ps/" format="html" scope="external">docker-compose ps</xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>サポートされるコマンド・オプション</dt>
+<dd><parml>
+<plentry>
+<pt>-q</pt>
+<pd>(オプション) コンテナー ID のみを表示したい場合は、<codeph>-q</codeph> オプションを使用してください。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、コンテナー・システム内のすべてのコンテナー・インスタンスをリストする要求です。<codeblock>docker-compose ps</codeblock></dd></dlentry></dl></section>
+<section id="rm"><title>docker-compose rm [SERVICE] </title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>サービスを指定すると、そのサービスを実行するコンテナー・インスタンスがこのコマンドにより削除されます。サービスを指定しない場合、コンテナー・システム全体が削除されます。いずれの場合も、コンテナーを削除する前にサービスを停止しておくことが重要です。停止しない場合、エラーが表示されます。詳しくは、Docker ヘルプ内の <xref href="https://docs.docker.com/compose/reference/rm/" format="html" scope="external">docker-compose rm</xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt>SERVICE</pt>
+<pd>(オプション) 削除するコンテナー・サービスの名前。<note>サービスの名前は <filepath>docker-compose.yml</filepath> ファイル内で確認できます。<codeph>docker-compose
+up</codeph> コマンドの実行時に作成された、サービスを実行するコンテナーの名前は使用しないでください。</note></pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、<varname>my_service</varname> という名前のサービスを実行するコンテナーを削除する要求です。<codeblock>docker-compose rm <varname>my_service</varname></codeblock></dd></dlentry></dl></section>
+<section id="scale"><title><ph id="scale_cmdname">docker-compose scale SERVICE=NUM </ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>このコマンドを使用すると、サービスを実行するコンテナー・インスタンスの数を増減できます。
+ご使用のサービスが拡張容易性と信頼性を必要とする場合は、複数のコンテナー・インスタンスを用意することをお勧めします。詳しくは、Docker ヘルプ内の <xref href="https://docs.docker.com/compose/reference/scale/" format="html" scope="external">docker-compose rm</xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt>SERVICE</pt>
+<pd>(必須) コンテナーの数を増減する対象サービスの名前。<note>サービスの名前は <filepath>docker-compose.yml</filepath> ファイル内で確認できます。<codeph>docker-compose
+up</codeph> コマンドの実行時に作成された、サービスを実行するコンテナーの名前は使用しないでください。</note></pd></plentry></parml></dd>
+<dd><parml>
+<plentry>
+<pt>NUM</pt>
+<pd>(必須) ご使用のサービス用に作成するコンテナーの数。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、<varname>my_service</varname> という名前のサービス用に 3 個のコンテナー・インスタンスを作成する要求です。<codeblock>docker-compose scale <varname>my_service=3</varname></codeblock></dd></dlentry></dl></section>
+<section id="start"><title>docker-compose start [SERVICE] </title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>サービスを指定すると、そのサービスにリンクされたすべてのコンテナー・インスタンスがこのコマンドにより開始されます。サービスを指定しない場合、コンテナー・システム内のすべてのコンテナー・インスタンスが開始されます。<note>このコマンドが使用できるのは、<codeph>docker-compose up</codeph> コマンドを使用してコンテナー・インスタンスが作成済みである場合のみです。</note>詳しくは、Docker ヘルプ内の <xref href="https://docs.docker.com/compose/reference/start/" format="html" scope="external">docker-compose start</xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt>SERVICE</pt>
+<pd>(オプション) 開始するサービスの名前。<note>サービスの名前は <filepath>docker-compose.yml</filepath> ファイル内で確認できます。<codeph>docker-compose
+up</codeph> コマンドの実行時に作成された、サービスを実行するコンテナーの名前は使用しないでください。</note></pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、<varname>my_service</varname> という名前のサービスを開始する要求です。<codeblock>docker-compose start <varname>my_service</varname></codeblock></dd></dlentry></dl></section>
+<section id="stop"><title><ph id="stop_cmdname">docker-compose stop [-t] [SERVICE] </ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>サービスを指定すると、そのサービスを実行するすべてのコンテナー・インスタンスがこのコマンドにより停止します。サービスを指定しない場合、コンテナー・システム内のすべてのコンテナー・インスタンスが停止します。停止したコンテナー・サービスは削除されないため、再度開始することも可能です。詳しくは、Docker ヘルプ内の <xref href="https://docs.docker.com/compose/reference/stop/" format="html" scope="external">docker-compose stop</xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>パラメーター</dt>
+<dd><parml>
+<plentry>
+<pt>SERVICE</pt>
+<pd>(オプション) 停止する実行中のサービスの名前。<note>サービスの名前は <filepath>docker-compose.yml</filepath> ファイル内で確認できます。<codeph>docker-compose
+up</codeph> コマンドの実行時に作成された、サービスを実行するコンテナーの名前は使用しないでください。</note></pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>サポートされるコマンド・オプション</dt>
+<dd><parml>
+<plentry>
+<pt>-t, --timeout</pt>
+<pd>(オプション) <codeph>-t</codeph> または <codeph>--timeout</codeph> オプションを使用すると、デフォルトのシャットダウン・タイムアウトを変更できます。シャットダウン・タイムアウトとは、Docker Daemon が停止予定のコンテナー・インスタンスの応答を待機する時間です。デフォルトのシャットダウン・タイムアウトは 10 秒です。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、<varname>my_service</varname> という名前のサービスを停止する要求です。<codeblock>docker-compose stop <varname>my_service</varname></codeblock></dd></dlentry></dl></section>
+<section id="up"><title><ph id="up_cmdname">docker-compose up [-d] </ph></title>
+<dl>
+<dlentry>
+<dt>目的</dt>
+<dd>このコマンドは、<filepath>docker-compose.yml</filepath> ファイルで定義されたサービスのコンテナー・インスタンスのビルド、(再) 作成、開始、およびリンクを行います。マルチコンテナー・デプロイメントが既に実行中である場合、このコマンドは <filepath>docker-compose.yml</filepath> ファイルに定義された更新をチェックし、構成が変更されたコンテナーのみを停止して再作成します。詳しくは、Docker ヘルプ内の <xref href="https://docs.docker.com/compose/reference/up" format="html" scope="external">docker-compose up</xref> コマンドを参照してください。</dd></dlentry>
+<dlentry>
+<dt>サポートされるコマンド・オプション</dt>
+<dd><parml>
+<plentry>
+<pt>-d</pt>
+<pd>(オプション) コンテナー作成中のすべてのステップを確認できるように <codeph>docker-compose up</codeph> コマンドを対話式に実行することも、<codeph>-d</codeph> オプションを使用してバックグラウンドでコンテナーを開始して実行することも可能です。<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> では、ほとんどのサービスおよびアプリが長時間実行タスクです。このため、コンテナーのコンソール出力にとらわれてそのタスクから離れられないという状況を避けるために、<codeph>-d</codeph> オプションを活用します。<codeph>-d</codeph> オプションを使用すると、コンテナーの作成後、コンテナー名は CLI に表示されたままとなります。</pd></plentry></parml></dd></dlentry>
+<dlentry>
+<dt>例</dt>
+<dd>以下の例は、マルチコンテナー・デプロイメントとその従属物を作成する要求です。<codeblock>docker-compose up</codeblock></dd></dlentry></dl></section></refbody></reference>

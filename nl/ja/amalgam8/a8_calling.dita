@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="a8_calling" xml:lang="ja-jp">
+<title><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> に登録されたマイクロサービスの呼び出し</title>
+<titlealts>
+<navtitle>登録されたマイクロサービスの呼び出し</navtitle>
+<searchtitle><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> に登録されたマイクロサービスの呼び出し</searchtitle></titlealts>
+<shortdesc><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> に登録されたマイクロサービス間で API 呼び出しを行います。</shortdesc>
+<taskbody>
+<context><p>アプリケーションとマイクロサービスは、統合された<keyword conref="a8_entities.dita#a8_entities/sidecar"></keyword>を使用して、<keyword conref="a8_entities.dita#a8_entities/a8"></keyword> に登録されている他のマイクロサービスに対する API 呼び出しを行います。
+<keyword conref="a8_entities.dita#a8_entities/sidecar"></keyword>は、<codeph>localhost:6379</codeph> で呼び出されます。
+<keyword conref="a8_entities.dita#a8_entities/sidecar"></keyword>・コンポーネントについて詳しくは、<xref href="a8_component_ov.dita"></xref>を参照してください。</p>
+<p>マイクロサービスの API 呼び出しを行うには、以下の手順を実行します。</p></context>
+<steps>
+<step>
+<cmd>呼び出す登録済みマイクロサービスの名前を調べます。</cmd>
+<info>この名前は、マイクロサービスを <keyword conref="a8_entities.dita#a8_entities/a8"></keyword> に登録したときに環境変数 A8_SERVICE で使用した名前です。
+<p><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> に登録されているマイクロサービスのリストを取得するには、<keyword conref="a8_entities.dita#a8_entities/a8"></keyword> CLI を使用して以下のコマンドを実行します。</p>
+<codeblock>a8ctl service-list</codeblock>
+<p>以下の形式の出力が表示されます。
+<screen>+-------------+---------------------+
+| Service | Instances               |
++-------------+---------------------+
+| serviceA | v1(1), v2(1), v3(1)    |
+| serviceB | v1(1)                  |
+| serviceC | v1(1)                  |
++-------------+---------------------+</screen></p></info></step>
+<step>
+<cmd>呼び出しを以下の形式で作成します。</cmd>
+<info>
+<p><codeblock>http://localhost:6379/<varname>service_name</varname>/<varname>api_endpoint</varname></codeblock></p>
+
+<p>以下のプレースホルダーを置き換えます。
+<ul>
+<li><p><varname>service_name</varname> を、<keyword conref="a8_entities.dita#a8_entities/a8"></keyword> に登録されているマイクロサービスの名前に。</p></li>
+<li><p><varname>api_endpoint</varname> を、そのマイクロサービスがアプリケーション/マイクロサービスに提供している API エンドポイントに。</p></li></ul></p>
+
+<p>例えば、<varname>serviceA</varname> という名前のマイクロサービスから <varname>reginfo</varname> API を呼び出すには、以下のようにします。
+<codeblock>http://localhost:6379/<varname>serviceA</varname>/<varname>reginfo</varname></codeblock></p></info></step></steps></taskbody></task>

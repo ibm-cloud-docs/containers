@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002--><!DOCTYPE dita PUBLIC "-//IBM//DTD DITA IBM Composite//EN" "ibm-ditabase.dtd">
+<dita xml:lang="ja-jp">
+<concept id="cloudoeconrefs" xml:lang="ja-jp">
+<title><tm trademark="Bluemix" tmtype="reg">Bluemix</tm></title>
+<conbody><!--//Do not translate - Begin-->
+<p><keyword id="Appdomainname" props="keyref(APPDomain)" translate="no">AppDomainName</keyword></p>
+<p><keyword id="bluemix_short" translate="no"><tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="bluemix" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p><!--From Softlayer &lt;infrastructure&gt;-->
+<p><keyword id="BluSoftlayer_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Infrastructure (<tm trademark="SoftLayer" tmtype="reg">SoftLayer</tm>)</keyword></p>
+<p><keyword id="BluSoftlayer" translate="no"><tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Infrastructure (<tm trademark="SoftLayer" tmtype="reg">SoftLayer</tm>)</keyword></p>
+<p><keyword id="BluSoftlayer_notm" translate="no"><tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Infrastructure (<tm trademark="SoftLayer" tmtype="reg">SoftLayer</tm>)</keyword></p><!--From Softlayer, previously SoftLayer Bare Metal Servers-->
+<p><keyword id="BluBareMetServers_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Bare Metal Servers</keyword></p>
+<p><keyword id="BluBareMetServers" translate="no"><tm trademark="Bluemix" tmtype="reg">Bluemix</tm>
+Bare Metal Servers</keyword></p><!--From Softlayer, previously Blue Box Dedicated-->
+<p><keyword id="BluOpenStackDed_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm> OpenStack Dedicated</keyword></p>
+<p><keyword id="BluOpenStackDed" translate="no"><tm trademark="Bluemix" tmtype="reg">Bluemix</tm>
+OpenStack Dedicated</keyword></p><!--From Softlayer, previously Box Local-->
+<p><keyword id="BluOpenStackLoc_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm> OpenStack Local</keyword></p>
+<p><keyword id="BluOpenStackLoc" translate="no"><tm trademark="Bluemix" tmtype="reg">Bluemix</tm>
+OpenStack Local</keyword></p><!--From Softlayer, previously SoftLayer Data Center-->
+<p><keyword id="CloudDataCent_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud
+Data Center</keyword></p>
+<p><keyword id="CloudDataCent" audience="blue" translate="no">Cloud Data Center</keyword></p>
+<p><keyword id="CloudDataCent_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud Data Center</keyword></p><!--From Softlayer, previously SoftLayer Data Centers-->
+<p><keyword id="CloudDataCents_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud
+Data Centers</keyword></p>
+<p><keyword id="CloudDataCents" audience="blue" translate="no">Cloud Data Centers</keyword></p>
+<p><keyword id="CloudDataCents_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud Data Centers</keyword></p><!--From Softlayer, previously SoftLayer Direct Link -->
+<p><keyword id="bluDirectLink" translate="no"><tm trademark="Bluemix" tmtype="reg">Bluemix</tm>
+Direct Link</keyword></p><!--From Softlayer, previously SoftLayer Firewall-->
+<p><keyword id="bluFirewall" translate="no"><tm trademark="Bluemix" tmtype="reg">Bluemix</tm>
+Firewall</keyword></p><!--From Softlayer, previously Pure Application System -->
+<p><keyword id="BluLocSys_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Local System</keyword></p>
+<p><keyword id="BluLocSys" translate="no"><tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Local
+System</keyword></p><!--From Softlayer, previously  SoftLayer Virtual Servers-->
+<p><keyword id="BluVirtServers_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Virtual Servers</keyword></p>
+<p><keyword id="BluVirtServers" translate="no"><tm trademark="Bluemix" tmtype="reg">Bluemix</tm>
+Virtual Servers</keyword></p>
+<p><keyword id="BluVirtServers_short" translate="no">Virtual Servers</keyword></p><!--From Softlayer, previously  SoftLayer VPN -->
+<p><keyword id="bluVPN" translate="no"><tm trademark="Bluemix" tmtype="reg">Bluemix</tm>
+VPN</keyword></p><!--End of Softlayer, alphabetize in after WOW-->
+<p><keyword id="cloudoe" translate="no">Cloud Operating Environment</keyword></p>
+<p><keyword id="domainname" props="keyref(DomainName)" translate="no">DomainName</keyword></p><!--Service names--><!--AAA-->
+<p><keyword id="cloudaccesstrailshort" translate="no">Activity Tracker</keyword></p>
+<p><keyword id="cloudaccesstraillong" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud
+Activity Tracker</keyword></p>
+<p><keyword id="cloudaccesstraillong_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud Activity Tracker</keyword></p>
+<p><keyword id="cloudaccesstrailfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud
+Activity Tracker</keyword></p>
+<p><keyword id="cloudaccesstrailfull_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud Activity Tracker</keyword></p>
+<p><keyword id="activedeployshort" translate="no">Active Deploy</keyword></p>
+<p><keyword id="activedeploylong" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Active
+Deploy</keyword></p>
+<p><keyword id="activedeploylong_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Active Deploy</keyword></p>
+<p><keyword id="activedeployfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Active
+Deploy for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="activedeployfull_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Active Deploy for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="amashort_old" translate="no">Advanced Mobile Access</keyword></p>
+<p><keyword id="amafull_old" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Advanced
+Mobile Access for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="alchemyapishort" translate="no"><tm trademark="AlchemyAPI" tmtype="reg">AlchemyAPI</tm></keyword></p>
+<p><keyword id="alchemydatanewsshort" translate="no">AlchemyData News</keyword></p>
+<p><keyword id="alchemyapifull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="AlchemyAPI" tmtype="reg">AlchemyAPI</tm> for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="alchemydatanewsfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+AlchemyData News</keyword></p>
+<p><keyword id="alchemylanguageshort" translate="no">AlchemyLanguage</keyword></p>
+<p><keyword id="alchemylanguagefull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+AlchemyLanguage</keyword></p>
+<p><keyword id="alchemyvisionshort" translate="no"><tm trademark="AlchemyVision" tmtype="tm">AlchemyVision</tm></keyword></p>
+<p><keyword id="alchemyvisionfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="AlchemyVision" tmtype="tm">AlchemyVision</tm></keyword></p>
+<p><keyword id="alertnotificationshort" translate="no">Alert Notification</keyword></p>
+<p><keyword id="alertnotificationlong" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Alert Notification</keyword></p>
+<p><keyword id="alertnotificationfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Alert Notification for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="altadbshort" translate="no">AltaDB</keyword></p>
+<p><keyword id="altadbfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> AltaDB for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="hadoopst" translate="no">Analytics for Apache Hadoop</keyword></p>
+<p><keyword id="hadoop" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Analytics for
+Apache Hadoop for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="sparks" translate="no">Analytics for Apache Spark</keyword></p>
+<p><keyword id="sparkl" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Analytics for
+Apache Spark for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="apiconnect_short" translate="no">API Connect</keyword></p>
+<p><keyword id="apiconnect_long" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> API
+Connect</keyword></p>
+<p><keyword id="apiconnect_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> API
+Connect for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="APIHarmony" translate="no">API Harmony</keyword></p>
+<p><keyword id="APIHarmonyfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> API Harmony
+for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="APIM" translate="no">API Management</keyword></p>
+<p><keyword id="APIMfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> API Management
+for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="appconserviceshort" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> App
+Connect</keyword></p>
+<p><keyword id="appconservicefull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> App
+Connect in <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="appid_short" translate="no">App ID</keyword></p>
+<p><keyword id="appid_short_notm" translate="no">App ID</keyword></p>
+<p><keyword id="appid_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm> App ID</keyword></p>
+<p><keyword id="appid_full_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> <tm trademark="Bluemix" tmtype="reg">Bluemix</tm> App ID</keyword></p>
+<p><keyword id="appid_long" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm> App ID</keyword></p>
+<p><keyword id="appid_long_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> <tm trademark="Bluemix" tmtype="reg">Bluemix</tm> App ID</keyword></p>
+<p><keyword id="appsecshort" translate="no">Application Security Manager</keyword></p>
+<p><keyword id="appsecfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Application
+Security Manager for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="appseccloudshort" translate="no">Application Security on Cloud</keyword></p>
+<p><keyword id="appseccloudfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Application Security on Cloud for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="appserveroncloud_short" translate="no">Application Server on Cloud</keyword></p>
+<p><keyword id="appserveroncloud_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Application Server on Cloud for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="userreg" translate="no">App User Registry</keyword></p>
+<p><keyword id="userregfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> App User
+Registry for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="APS_DA" translate="no"><tm trademark="AppScan" tmtype="reg">AppScan</tm> Dynamic Analyzer</keyword></p>
+<p><keyword id="APS_DA_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="AppScan" tmtype="reg">AppScan</tm> Dynamic Analyzer for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="APS_MA" translate="no"><tm trademark="AppScan" tmtype="reg">AppScan</tm> Mobile Analyzer</keyword></p>
+<p><keyword id="APS_MA_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="AppScan" tmtype="reg">AppScan</tm> Mobile Analyzer for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="dotnet_short" translate="no">ASP.NET Core</keyword></p>
+<p><keyword id="dotnet_full" translate="no">ASP.NET Core Buildpack</keyword></p>
+<p><keyword id="autoscaling" translate="no">Auto-Scaling</keyword></p>
+<p><keyword id="autoscalingfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Auto-Scaling for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="autoscalingfull_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Auto-Scaling for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="prfhub_short" translate="no">Availability Monitoring</keyword></p>
+<p><keyword id="prfhub_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Availability Monitoring</keyword></p><!--BBB-->
+<p><keyword id="baremetal_short" translate="no">Bare Metal Servers</keyword></p>
+<p><keyword id="baremetal_long" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Bare Metal
+Servers</keyword></p>
+<p><keyword id="bigicloudst" translate="no"><tm trademark="BigInsights" tmtype="reg">BigInsights</tm></keyword></p>
+<p><keyword id="ibist" translate="no"><tm trademark="BigInsights" tmtype="reg">BigInsights</tm></keyword></p>
+<p><keyword id="bigicloud" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="BigInsights" tmtype="reg">BigInsights</tm> for Apache Hadoop for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="blockchain" translate="no">Blockchain</keyword></p>
+<p><keyword id="blockchainfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Blockchain</keyword></p>
+<p><keyword id="blockstorageshort" translate="no">Block Storage</keyword></p>
+<p><keyword id="blockstoragefull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Block
+Storage for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="bpshort" audience="blue" translate="no">Schematics</keyword></p>
+<p><keyword id="bpfull" audience="blue" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Cloud Schematics</keyword></p>
+<p><keyword id="bpfull_notm" audience="blue" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud Schematics</keyword></p>
+<p><keyword id="bplong" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud
+Schematics</keyword></p>
+<p><keyword id="bplong_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud Schematics</keyword></p>
+<p><keyword id="bluemix_dedicated" translate="no"><tm trademark="Bluemix" tmtype="reg">Bluemix</tm>
+Dedicated</keyword></p>
+<p><keyword id="bluemix_local" translate="no"><tm trademark="Bluemix" tmtype="reg">Bluemix</tm>
+Local</keyword></p>
+<p><keyword id="bluemix_live" translate="no"><tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Live
+Sync</keyword></p>
+<p><keyword id="rules_short" translate="no">Business Rules</keyword></p>
+<p><keyword id="rules" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Business Rules for
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p><!--CCC-->
+<p><keyword id="cilive" translate="no"><tm trademark="Cast Iron" tmtype="reg">Cast Iron</tm> Live</keyword></p>
+<p><keyword id="castironlivefull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Cast Iron" tmtype="reg">Cast Iron</tm> Live for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="cdn_short" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+CDN</keyword></p>
+<p><keyword id="cdn_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Content Delivery
+Network</keyword></p>
+<p><keyword id="clm_short" translate="no">CLM Services</keyword></p>
+<p><keyword id="clmtp_short" translate="no">CLM Track and Plan</keyword></p>
+<p><keyword id="clmtp_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> CLM Track and
+Plan for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="CAMshort" translate="no">Cloud Automation Manager</keyword></p>
+<p><keyword id="CAMlong" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud Automation
+Manager in <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="cloudint" translate="no">Cloud Integration</keyword></p>
+<p><keyword id="iamshort" translate="no">Cloud Identity and Access Management</keyword></p>
+<p><keyword id="iamlong" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud Identity and
+Access Management</keyword></p>
+<p><keyword id="loganalysisshort" translate="no">Log Analysis</keyword></p>
+<p><keyword id="loganalysisshort_notm" translate="no">Log Analysis</keyword></p>
+<p><keyword id="loganalysislong" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud Log
+Analysis</keyword></p>
+<p><keyword id="loganalysislong_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud Log Analysis</keyword></p>
+<p><keyword id="loganalysisfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud Log
+Analysis</keyword></p>
+<p><keyword id="loganalysisfull_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud Log Analysis</keyword></p>
+<p><keyword id="monitoringshort" translate="no">Monitoring</keyword></p>
+<p><keyword id="monitoringshort_notm" translate="no">Monitoring</keyword></p>
+<p><keyword id="monitoringlong" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud
+Monitoring</keyword></p>
+<p><keyword id="monitoringlong_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud Monitoring</keyword></p>
+<p><keyword id="monitoringfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud
+Monitoring</keyword></p>
+<p><keyword id="monitoringfull_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud Monitoring</keyword></p>
+<p><keyword id="cosdimshort" translate="no">Cloud Object Storage Dedicated <tm trademark="IBM" tmtype="reg">IBM</tm> Managed</keyword></p>
+<p><keyword id="cosdimlong" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud Object Storage Dedicated <tm trademark="IBM" tmtype="reg">IBM</tm> Managed</keyword></p>
+<p><keyword id="cosdimfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud Object Storage Dedicated <tm trademark="IBM" tmtype="reg">IBM</tm> Managed</keyword></p>
+<p><keyword id="cosdimshort_notm" translate="no">Cloud Object Storage Dedicated <tm trademark="IBM" tmtype="reg">IBM</tm> Managed</keyword></p>
+<p><keyword id="cloudant" translate="no"><tm trademark="Cloudant" tmtype="reg">Cloudant</tm> NoSQL DB</keyword></p>
+<p><keyword id="cloudantfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Cloudant" tmtype="reg">Cloudant</tm> NoSQL Database for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="cloudintegrationfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud
+Integration for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="clm_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Collaborative
+Lifecycle Management Services for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="composeEnterprise" translate="no">Compose Enterprise</keyword></p>
+<p><keyword id="composeEnterprise_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Compose Enterprise</keyword></p>
+<p><keyword id="composeEnterprise_full_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Compose Enterprise</keyword></p>
+<p><keyword id="composeForElasticsearch" translate="no">Compose for Elasticsearch</keyword></p>
+<p><keyword id="composeForElasticsearch_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Compose for Elasticsearch for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="composeForEtcd" translate="no">Compose for etcd</keyword></p>
+<p><keyword id="composeForEtcd_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Compose for etcd for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="composeForMongoDB" translate="no">Compose for MongoDB</keyword></p>
+<p><keyword id="composeForMongoDB_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Compose for MongoDB for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="composeForMySQL" audience="blue" translate="no">Compose for MySQL</keyword></p>
+<p><keyword id="composeForMySQL_full" audience="blue" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Compose for MySQL for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="composeForPostgreSQL" translate="no">Compose for PostgreSQL</keyword></p>
+<p><keyword id="composeForPostgreSQL_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Compose for PostgreSQL for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="composeForRabbitMQ" translate="no">Compose for RabbitMQ</keyword></p>
+<p><keyword id="composeForRabbitMQ_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Compose for RabbitMQ for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="composeForScyllaDB" audience="blue" translate="no">Compose for
+ScyllaDB</keyword></p>
+<p><keyword id="composeForScyllaDB_full" audience="blue" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Compose for ScyllaDB for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="composeForRedis" translate="no">Compose for Redis</keyword></p>
+<p><keyword id="composeForRedis_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Compose for Redis for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="composeForRethinkDB" translate="no">Compose for RethinkDB</keyword></p>
+<p><keyword id="composeForRethinkDB_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Compose for RethinkDB for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="conceptexpansionshort" translate="no">Concept Expansion</keyword></p>
+<p><keyword id="conceptinsightsshort" translate="no">Concept Insights</keyword></p>
+<p><keyword id="ConnectCompose" translate="no">Connect &amp; Compose</keyword></p>
+<p><keyword id="ConnectComposefull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Connect
+&amp; Compose for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="registryshort" translate="no"><tm trademark="Bluemix" tmtype="reg">Bluemix</tm>
+Container Registry</keyword></p>
+<p><keyword id="registryshort_notm" translate="no"><tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Container Registry</keyword></p>
+<p><keyword id="registrylong" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Container Registry</keyword></p>
+<p><keyword id="registrylong_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> <tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Container Registry</keyword></p>
+<p><keyword id="registryfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Container Registry</keyword></p>
+<p><keyword id="registryfull_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> <tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Container Registry</keyword></p>
+<p><keyword id="containershort" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Container Service</keyword></p>
+<p><keyword id="containershort_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> <tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Container Service</keyword></p>
+<p><keyword id="containerlong" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Container Service</keyword></p>
+<p><keyword id="containerlong_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> <tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Container Service</keyword></p>
+<p><keyword id="containerfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Container Service</keyword></p>
+<p><keyword id="containerfull_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> <tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Container Service</keyword></p>
+<p><keyword id="uccr_short" translate="no">Continuous Release</keyword></p>
+<p><keyword id="uccr_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud Continuous
+Release</keyword></p>
+<p><keyword id="iotmapinsights_short" translate="no">Context Mapping</keyword></p>
+<p><keyword id="contdelivery_short" translate="no">Continuous Delivery</keyword></p>
+<p><keyword id="contdelivery_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Continuous Delivery</keyword></p>
+<p><keyword id="deliverypipelinelong" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Continuous Delivery Pipeline for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p audience="blue"><keyword id="cftshort" translate="no">Controlled Failure Testing</keyword></p>
+<p audience="blue"><keyword id="cftlong" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Controlled Failure Testing</keyword></p>
+<p><keyword id="conversationshort" translate="no">Conversation</keyword></p><!--DDD-->
+<p><keyword id="dashdbshort" translate="no">dash<tm trademark="dashDB" tmtype="tm">DB</tm></keyword></p>
+<p><keyword id="dashdblong" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="dashDB" tmtype="tm">dashDB</tm> for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="datacshort" translate="no">Data Cache</keyword></p>
+<p><keyword id="datacfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Data Cache for
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="datastageshort" translate="no"><tm trademark="DataStage" tmtype="reg">DataStage</tm>
+on Cloud</keyword></p>
+<p><keyword id="datastagefull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="DataStage" tmtype="reg">DataStage</tm> on Cloud</keyword></p>
+<p><keyword id="dataworks_short" translate="no">Data Connect</keyword></p>
+<p><keyword id="dataworks_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Data Connect</keyword></p>
+<p><keyword id="Db2_on_Cloud_short" translate="no">Db2 on Cloud</keyword></p>
+<p><keyword id="Db2_on_Cloud_long" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Db2 on Cloud for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="Db2_on_Cloud_long_notm" translate="no">IBM Db2 on Cloud for Bluemix</keyword></p>
+<p><keyword id="DB2OnCloud_short" translate="no"><tm trademark="DB2" tmtype="reg">DB2</tm> on
+Cloud</keyword></p>
+<p><keyword id="DB2OnCloud_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="DB2" tmtype="reg">DB2</tm> on Cloud for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="decision_short" translate="no">Decision Optimization</keyword></p>
+<p><keyword id="decision_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Decision
+Optimization for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="ghe_dedicated_short" translate="no">Dedicated GitHub Enterprise</keyword></p>
+<p><keyword id="ghe_long" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Dedicated for GitHub Enterprise</keyword></p>
+<p><keyword id="deliverypipeline" translate="no">Delivery Pipeline</keyword></p>
+<p><keyword id="DRA_short" translate="no">Deployment Risk Analytics</keyword></p>
+<p><keyword id="DRA_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Deployment Risk
+Analytics</keyword></p>
+<p><keyword id="dev_console" translate="no">Developer console</keyword></p>
+<p><keyword id="dev_cli_long" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm> CLI Developer Plug-in</keyword></p>
+<p><keyword id="dev_cli_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> <tm trademark="Bluemix" tmtype="reg">Bluemix</tm> CLI Developer Plug-in</keyword></p>
+<p><keyword id="dev_cli_short" translate="no">Developer Plug-in</keyword></p>
+<p><keyword id="jazzhub_short" translate="no">DevOps Services</keyword></p>
+<p><keyword id="jazzhub" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm> DevOps Services</keyword></p>
+<p><keyword id="jazzhub_title" translate="no"><tm trademark="Bluemix" tmtype="reg">Bluemix</tm>
+DevOps Services</keyword></p>
+<p><keyword id="dialogshort" translate="no">Dialog</keyword></p>
+<p><keyword id="documentconversionshort" translate="no">Document Conversion</keyword></p>
+<p><keyword id="docgen_short" translate="no">Document Generation</keyword></p>
+<p><keyword id="docgen_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Document
+Generation for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="iotdriverinsights_short" translate="no">Driver Behavior</keyword></p><!--EEE-->
+<p><keyword id="eclipsetoolsfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Eclipse
+Tools for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="imqs" translate="no">Elastic MQ</keyword></p>
+<p><keyword id="creshort" translate="no">Embeddable Reporting</keyword></p>
+<p><keyword id="crefull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Embeddable
+Reporting for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="emotionanalysisshort" translate="no">Emotion Analysis</keyword></p>
+<p><keyword id="evtmgt_short" translate="no">Event Management</keyword></p>
+<p><keyword id="evtmgt_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud Event
+Management for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p><!--FFF-->
+<p><keyword id="featuretogglesshort" translate="no">Feature Toggles</keyword></p>
+<p><keyword id="featuretoggleslong" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Feature
+Toggles</keyword></p>
+<p><keyword id="featuretogglesfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Feature
+Toggles for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="filesync" translate="no">File Sync plugin service</keyword></p><!--GGG-->
+<p><keyword id="game" translate="no">Gamification</keyword></p>
+<p><keyword id="gamefull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Gamification for
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="geospatialshort" translate="no">Geospatial Analytics</keyword></p>
+<p><keyword id="geospatialfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Geospatial
+Analytics for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="githosting" translate="no">Git hosting</keyword></p>
+<p><keyword id="gitrepos" translate="no">Git Repos and Issue Tracking</keyword></p>
+<p><keyword id="ghe_short" translate="no">GitHub Enterprise</keyword></p>
+<p><keyword id="globalizationshort" translate="no">Globalization</keyword></p>
+<p><keyword id="globalizationfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Globalization</keyword></p>
+<p><keyword id="GlobalizationPipeline_short" translate="no">Globalization Pipeline</keyword></p>
+<p><keyword id="GlobalizationPipeline_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Globalization Pipeline</keyword></p>
+<p><keyword id="graphshort" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Graph</keyword></p>
+<p><keyword id="graphfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Graph</keyword></p><!--HHH-->
+<p><keyword id="CHSTSshort" translate="no">Cloud High-Speed Transfer Service</keyword></p>
+<p><keyword id="CHSTSfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud High-Speed
+Transfer Service</keyword></p>
+<p><keyword id="CHSTSfull_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud High-Speed Transfer Service</keyword></p><!--I I I-->
+<p><keyword id="mf-starter-image" translate="no">ibm-mobilefirst-starter</keyword></p>
+<p><keyword id="identitymixershort" translate="no">Identity Mixer</keyword></p>
+<p><keyword id="identitymixerfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Identity
+Mixer for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="IOCloud_short" translate="no"><tm trademark="Informix" tmtype="reg">Informix</tm> on
+Cloud</keyword></p>
+<p><keyword id="IOCloud_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Informix" tmtype="reg">Informix</tm> on Cloud for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="IntegrationTestingshort" translate="no">Integration Testing</keyword></p>
+<p><keyword id="IntegrationTestingfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Integration Testing for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="interactivemaps_short" translate="no">Interactive Maps</keyword></p>
+<p><keyword id="interactivemaps_long" translate="no">Interactive Maps for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="twitterfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Insights" tmtype="tm" tmclass="IGNORE">Insights</tm> for Twitter</keyword></p>
+<p><keyword id="twittershort" translate="no"><tm trademark="Insights" tmtype="tm" tmclass="IGNORE">Insights</tm> for Twitter</keyword></p>
+<p><keyword id="iot4auto_short" translate="no">IoT for Automotive</keyword></p>
+<p><keyword id="iot4auto_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> IoT for
+Automotive</keyword></p>
+<p><keyword id="iotelectronics" translate="no">IoT for Electronics</keyword></p>
+<p><keyword id="iotelectronics_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> IoT
+for Electronics</keyword></p>
+<p><keyword id="iotinsurance_short" translate="no">IoT for Insurance</keyword></p>
+<p><keyword id="iotinsurance_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> IoT for
+Insurance</keyword></p>
+<p><keyword id="iotrtinsights_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> IoT
+Real-Time <tm trademark="Insights" tmtype="tm" tmclass="IGNORE">Insights</tm></keyword></p>
+<p><keyword id="iotrtinsights_short" translate="no">IoT Real-Time <tm trademark="Insights" tmtype="tm" tmclass="IGNORE">Insights</tm></keyword></p><!--JJJ-->
+<p><keyword id="jsondb" translate="no">JSONDB</keyword></p><!--KKK-->
+<p><keyword id="keymanagementserviceshort" translate="no">Key Protect</keyword></p>
+<p><keyword id="keymanagementservicelong" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Key Protect</keyword></p>
+<p><keyword id="keymanagementservicelong_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Key Protect</keyword></p>
+<p><keyword id="keymanagementservicefull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Key Protect for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="keymanagementservicefull_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Key Protect for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p><!--LLL-->
+<p><keyword id="languageidentificationshort" translate="no">Language Identification</keyword></p>
+<p><keyword id="wts" translate="no">Language Translation</keyword></p>
+<p><keyword id="languagetranslationshort" translate="no">Language Translation</keyword></p>
+<p><keyword id="wtsfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Language
+Translation for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="languagetranslatorshort" translate="no">Language Translator</keyword></p>
+<p><keyword id="dwl_short" translate="no">Lift</keyword></p>
+<p><keyword id="dwl_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Lift</keyword></p>
+<p><keyword id="loadbalancer_short" translate="no">Load Balancer</keyword></p>
+<p><keyword id="loadbalancer_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Load
+Balancer for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="mobilelocation" translate="no">Location</keyword></p><!--MMM-->
+<p><keyword id="machinetranslationshort" translate="no">Machine Translation</keyword></p>
+<p><keyword id="mapreduce" translate="no">MapReduce</keyword></p>
+<p><keyword id="mobilemam_short" translate="no">MAS</keyword></p>
+<p><keyword id="mdmcloudfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Master Data
+Management on Cloud</keyword></p>
+<p><keyword id="mdmcloudshort" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> MDM on
+Cloud</keyword></p>
+<p><keyword id="eventhubshort" translate="no">Message Connect</keyword></p>
+<p><keyword id="eventhubfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Message
+Connect for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="messagehub" translate="no">Message Hub</keyword></p>
+<p><keyword id="messagehub_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Message
+Hub for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="incubator" translate="no">Message Hub Incubator</keyword></p>
+<p><keyword id="incubator_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Message Hub
+Incubator for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="messageresonanceshort" translate="no">Message Resonance</keyword></p>
+<p><keyword id="mobileanalytics_short" translate="no">Mobile Analytics</keyword></p>
+<p><keyword id="mobileanalytics_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Mobile Analytics for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="APS_MAiOS_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Mobile
+Analyzer for iOS for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="APS_MAiOS" translate="no">Mobile Analyzer for iOS</keyword></p>
+<p><keyword id="mobileappbuilder_short" translate="no">Mobile App Builder</keyword></p>
+<p><keyword id="mobileappbuilder_full"><tm trademark="IBM" tmtype="reg">IBM</tm> Mobile
+App Builder for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="macm_short" translate="no">Mobile Application Content Manager</keyword></p>
+<p><keyword id="macm_long" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Mobile
+Application Content Manager for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="mobilemam" translate="no">Mobile Application Security</keyword></p>
+<p><keyword id="masfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Mobile Application
+Security for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="amashort" translate="no">Mobile Client Access</keyword></p>
+<p><keyword id="amafull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Mobile Client
+Access for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="mobilestarter" translate="no">Mobile Cloud</keyword></p>
+<p><keyword id="mobilecloud" translate="no">Mobile Cloud</keyword></p>
+<p><keyword id="mobilecloudfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Mobile
+Cloud for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="mobilesdk" translate="no">Mobile Cloud Services SDK</keyword></p>
+<p><keyword id="mobiledata" translate="no">Mobile Data</keyword></p>
+<p><keyword id="mobiledatafull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Mobile Data
+for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="mobilefirst" translate="no">MobileFirst</keyword></p>
+<p><keyword id="mfp_oc_short" translate="no">MobileFirst Operations Console</keyword></p>
+<p><keyword id="mfp_full" translate="no"><tm trademark="IBM MobileFirst" tmtype="tm">IBM
+MobileFirst</tm> Platform Foundation</keyword></p>
+<p><keyword id="mf-starter-image_full" translate="no"><tm trademark="IBM MobileFirst" tmtype="tm">IBM MobileFirst</tm> Platform Foundation Getting Started Image V7.1</keyword></p>
+<p><keyword id="mfp_cli_long" translate="no"><tm trademark="IBM MobileFirst" tmtype="tm">IBM
+MobileFirst</tm> Platform Command Line Interface</keyword></p>
+<p><keyword id="mfp_dr_long" translate="no"><tm trademark="IBM MobileFirst" tmtype="tm">IBM
+MobileFirst</tm> Platform Device Runtime</keyword></p>
+<p><keyword id="mfp_oc_long" translate="no"><tm trademark="IBM MobileFirst" tmtype="tm">IBM
+MobileFirst</tm> Platform Operations Console</keyword></p>
+<p><keyword id="mfserver_long" translate="no"><tm trademark="IBM MobileFirst" tmtype="tm">IBM
+MobileFirst</tm> Platform Server</keyword></p>
+<p><keyword id="mobilefirstbp" translate="no"><tm trademark="IBM MobileFirst" tmtype="tm">IBM
+MobileFirst</tm> Services</keyword></p>
+<p><keyword id="mfserver_short" translate="no">MobileFirst Server</keyword></p>
+<p><keyword id="mobilefoundation_short" translate="no">Mobile Foundation</keyword></p>
+<p><keyword id="mobilefoundation_long" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Mobile Foundation for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="mqafull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Mobile Quality
+Assurance for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="mqa" translate="no">Mobile Quality Assurance</keyword></p>
+<p><keyword id="mongodb" translate="no">MongoDB</keyword></p>
+<p><keyword id="manda" translate="no">Monitoring and Analytics</keyword></p>
+<p><keyword id="mql" translate="no">MQ Light</keyword></p>
+<p><keyword id="mqlfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> MQ Light for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="mysql" translate="no">MySQL</keyword></p><!--NNN-->
+<p><keyword id="nlclassifiershort" translate="no">Natural Language Classifier</keyword></p>
+<p><keyword id="nlushort" translate="no">Natural Language Understanding</keyword></p>
+<p><keyword id="networksecuritygroups_short" translate="no">Network Security Groups</keyword></p>
+<p><keyword id="networksecuritygroups_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Network Security Groups</keyword></p><!--OOO  -->
+<p><keyword id="objectstorageshort" translate="no">Object Storage</keyword></p>
+<p><keyword id="objectstoragefull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Object
+Storage for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="ioa_short" translate="no">Operations Analytics</keyword></p>
+<p><keyword id="ioa_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Operations
+Analytics</keyword></p><!--PPP-->
+<p><keyword id="PEshort" translate="no">Pattern Engine</keyword></p>
+<p><keyword id="PElong" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Pattern Engine</keyword></p>
+<p><keyword id="personalityinsightsshort" translate="no">Personality <tm trademark="Insights" tmtype="tm" tmclass="IGNORE">Insights</tm></keyword></p>
+<p><keyword id="postgresql" translate="no">PostgreSQL</keyword></p>
+<p><keyword id="predmarketscenario_full" translate="no">Predictive Market Scenarios</keyword></p>
+<p><keyword id="predmarketscenario_short" translate="no">Predictive Market Scenarios</keyword></p>
+<p><keyword id="presenceinsightsshort" translate="no">Presence <tm trademark="Insights" tmtype="tm" tmclass="IGNORE">Insights</tm></keyword></p>
+<p><keyword id="presenceinsightsfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Presence <tm trademark="Insights" tmtype="tm" tmclass="IGNORE">Insights</tm></keyword></p>
+<p><keyword id="private_network_peering_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm> Private Network Peering</keyword></p>
+<p><keyword id="probmatchshort" translate="no">Probabilistic Match</keyword></p>
+<p><keyword id="probmatchfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Probabilistic Match for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="HybridConnect_short" audience="blue" translate="no">Product Insights</keyword></p>
+<p><keyword id="HybridConnect_full" audience="blue" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud Product Insights</keyword></p>
+<p><keyword id="product-insights_short" audience="blue" translate="no">Product
+Insights</keyword></p>
+<p><keyword id="product-insights_full" audience="blue" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud Product Insights</keyword></p>
+<p><keyword id="mobilepush" translate="no">Push Notifications</keyword></p>
+<p><keyword id="pushfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Push
+Notifications for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="mobilepushshort" translate="no">Push Notifications</keyword></p>
+<p><keyword id="mobilepushfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Push
+Notifications for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p><!--QQQ-->
+<p><keyword id="questionandanswershort" translate="no">Question and Answer</keyword></p><!--RRR-->
+<p><keyword id="rapidApps" translate="no">Rapid Apps</keyword></p>
+<p><keyword id="rapidAppsFull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Rapid Apps
+for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="rabbitmq" translate="no">RabbitMQ</keyword></p>
+<p><keyword id="redis" translate="no">Redis</keyword></p>
+<p><keyword id="relationshipextractionshort" translate="no">Relationship Extraction</keyword></p>
+<p><keyword id="runbook_short" translate="no">Runbook Automation</keyword></p>
+<p><keyword id="runbook_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Runbook
+Automation for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p><!--SSS-->
+<p><keyword id="sdk4nodefull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> SDK for
+Node.js for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="searchshort" translate="no">Search</keyword></p>
+<p><keyword id="SecureGateway" translate="no">Secure Gateway</keyword></p>
+<p><keyword id="SecureGatewayfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Secure
+Gateway for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="SendGrid" translate="no">SendGrid</keyword></p>
+<p><keyword id="SendGridfull" translate="no">SendGrid</keyword></p>
+<p><keyword id="ServiceVirtualizationshort" translate="no">Service Virtualization</keyword></p>
+<p><keyword id="ServiceVirtualiztionfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Service Virtualization for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="sescashort" translate="no">Session Cache</keyword></p>
+<p><keyword id="servicediscoveryshort" translate="no">Service Discovery</keyword></p>
+<p><keyword id="servicediscoverylong" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Service Discovery</keyword></p>
+<p><keyword id="servicediscoveryfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Service Discovery for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="serviceproxyshort" translate="no">Service Proxy</keyword></p>
+<p><keyword id="serviceproxylong" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Service
+Proxy</keyword></p>
+<p><keyword id="serviceproxyfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Service
+Proxy for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="sescafull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Session Cache
+for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="ssoshort" translate="no">Single Sign On</keyword></p>
+<p><keyword id="ssofull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Single Sign
+On</keyword></p>
+<p><keyword id="slportal" translate="no"><tm trademark="SoftLayer" tmtype="reg">SoftLayer</tm>
+Customer Portal</keyword></p>
+<p><keyword id="sqldb" translate="no">SQL Database</keyword></p>
+<p><keyword id="sqldbfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> SQL Database for
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="staticanalyzerfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Static
+Analyzer for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="staticanalyzershort" translate="no">Static Analyzer</keyword></p>
+<p><keyword id="streaminganalyticsshort" translate="no">Streaming Analytics</keyword></p>
+<p><keyword id="streaminganalyticsfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Streaming Analytics for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="streamsshort" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Streams</keyword></p>
+<p><keyword id="streamsfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Streams</keyword></p><!--TTT-->
+<p><keyword id="times" translate="no">Time Series Database</keyword></p>
+<p><keyword id="timesfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Time Series
+Database for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="trackplan" translate="no">Track &amp; Plan</keyword></p>
+<p><keyword id="trackplanlong" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Track &amp;
+Plan for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="tp_short" translate="no">Track and Plan</keyword></p>
+<p><keyword id="tp_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Track and Plan for
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="tradeoffanalyticsshort" translate="no">Tradeoff Analytics</keyword></p>
+<p><keyword id="toneanalyzershort" translate="no">Tone Analyzer</keyword></p><!--VVV-->
+<p><keyword id="vpn_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Virtual Private
+Network</keyword></p>
+<p><keyword id="virtualmachinesshort" translate="no">Virtual Servers</keyword></p>
+<p><keyword id="virtualmachineslong" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Virtual Servers</keyword></p>
+<p><keyword id="virtualmachinesfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Virtual Servers for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="visualinsightsshort" translate="no">Visual <tm trademark="Insights" tmtype="tm" tmclass="IGNORE">Insights</tm></keyword></p>
+<p><keyword id="visualrecognitionshort" translate="no">Visual Recognition</keyword></p>
+<p><keyword id="visualizationrenderingshort" translate="no">Visualization Rendering</keyword></p>
+<p><keyword id="vpn_short" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+VPN</keyword></p>
+<p><keyword id="vmwaresolutions_short" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud for VMware Solutions</keyword></p>
+<p><keyword id="vmwaresolutions_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud
+for VMware Solutions</keyword></p>
+<p><keyword id="vmwaresolutions_full_notm" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Cloud for VMware Solutions</keyword></p><!--HERE  W W W--><!--Watson service names-->
+<p><keyword id="ibmwatson" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM
+Watson</tm></keyword></p>
+<p><keyword id="ibmwatson_notm" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM Watson</tm></keyword></p>
+<p><keyword id="watson" translate="no"><tm trademark="Watson" tmtype="tm">Watson</tm></keyword></p>
+<p><keyword id="conceptexpansionfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM
+Watson</tm> Concept Expansion</keyword></p>
+<p><keyword id="conceptinsightsfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM
+Watson</tm> Concept <tm trademark="Insights" tmtype="tm" tmclass="IGNORE">Insights</tm> for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="conversationfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM
+Watson</tm> Conversation</keyword></p>
+<p><keyword id="dialogfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM Watson</tm>
+Dialog for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="discoveryshort" audience="blue" translate="no">Discovery</keyword></p>
+<p><keyword id="discoveryfull" audience="blue" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM Watson</tm> Discovery</keyword></p>
+<p><keyword id="documentconversionfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM
+Watson</tm> Document Conversion</keyword></p>
+<p><keyword id="emotionanalysisfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM
+Watson</tm> Emotion Analysis for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="iotmapinsights_full" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM
+Watson</tm> IoT Context Mapping</keyword></p>
+<p><keyword id="hisinstranalshort" translate="no">Historical Instrument Analytics</keyword></p>
+<p><keyword id="instranalshort" translate="no">Instrument Analytics</keyword></p>
+<p><keyword id="investportshort" translate="no">Investment Portfolio</keyword></p>
+<p><keyword id="iotdriverinsights_full" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM
+Watson</tm> IoT Driver Behavior</keyword></p>
+<p><keyword id="iot_short" translate="no"><tm trademark="Watson" tmtype="tm">Watson</tm> IoT
+Platform</keyword></p>
+<p><keyword id="iot_full" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM Watson</tm> IoT
+Platform</keyword></p>
+<p><keyword id="languageidentificationfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM Watson</tm> Language Identification</keyword></p>
+<p><keyword id="languagetranslationfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM
+Watson</tm> Language Translation for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="languagetranslatorfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM
+Watson</tm> Language Translator</keyword></p>
+<p><keyword id="pm_short" translate="no">Machine Learning</keyword></p>
+<p><keyword id="pm_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Watson" tmtype="tm">Watson</tm> Machine Learning</keyword></p>
+<p><keyword id="machinetranslationfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM
+Watson</tm> Machine Translation</keyword></p>
+<p><keyword id="messageresonancefull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM
+Watson</tm> Message Resonance</keyword></p>
+<p><keyword id="nlclassifierfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM
+Watson</tm> Natural Language Classifier</keyword></p>
+<p><keyword id="nlufull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM Watson</tm>
+Natural Language Understanding</keyword></p>
+<p><keyword id="personalityinsightsfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM
+Watson</tm> Personality <tm trademark="Insights" tmtype="tm" tmclass="IGNORE">Insights</tm></keyword></p>
+<p><keyword id="questionandanswerfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM
+Watson</tm> Question and Answer</keyword></p>
+<p><keyword id="relationshipextractionfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM Watson</tm> Relationship Extraction</keyword></p>
+<p><keyword id="retrieveandrankshort" translate="no">Retrieve and Rank</keyword></p>
+<p><keyword id="retrieveandrankfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM
+Watson</tm> Retrieve and Rank</keyword></p>
+<p><keyword id="searchfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM Watson</tm>
+Search</keyword></p>
+<p><keyword id="simhistinstruanalshort" translate="no">Simulated Historical Instrument
+Analytics</keyword></p>
+<p><keyword id="siminstruanalshort" translate="no">Simulated Instrument Analytics</keyword></p>
+<p><keyword id="speechtotextshort" translate="no">Speech to Text</keyword></p>
+<p><keyword id="speechtotextfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM
+Watson</tm> Speech to Text</keyword></p>
+<p><keyword id="texttospeechshort" translate="no">Text to Speech</keyword></p>
+<p><keyword id="texttospeechfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM
+Watson</tm> Text to Speech</keyword></p>
+<p><keyword id="toneanalyzerfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM
+Watson</tm> Tone Analyzer</keyword></p>
+<p><keyword id="tradeoffanalyticsfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM Watson</tm> Tradeoff Analytics</keyword></p>
+<p><keyword id="visualinsightsfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM
+Watson</tm> Visual <tm trademark="Insights" tmtype="tm" tmclass="IGNORE">Insights</tm> for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="visualrecognitionfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM
+Watson</tm> Visual Recognition</keyword></p>
+<p><keyword id="visualizationrenderingfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM Watson</tm> Visualization Rendering</keyword></p>
+<p><keyword id="usermodelshort" translate="no">User Modeling</keyword></p>
+<p><keyword id="usermodelfull" translate="no"><tm trademark="IBM Watson" tmtype="tm">IBM Watson</tm>
+User Modeling</keyword></p>
+<p><keyword id="webide" translate="no">Web IDE</keyword></p>
+<p><keyword id="web_ide_short" translate="no">web IDE</keyword></p>
+<p><keyword id="web_ide" translate="no">web IDE in &lt;jazzhub&gt;</keyword></p>
+<p><keyword id="appserver_full" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="WebSphere" tmtype="reg">WebSphere</tm> Application Server for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="wearablefitness" translate="no">Wearable Fitness</keyword></p>
+<p><keyword id="weather_short" translate="no">Weather Company Data</keyword></p>
+<p><keyword id="weather_full" translate="no">Weather Company Data for <tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="appserver_short" translate="no"><tm trademark="WebSphere" tmtype="reg">WebSphere</tm> Application Server</keyword></p>
+<p><keyword id="eventdriven_short" translate="no">Whisk</keyword></p>
+<p><keyword id="eventdriven" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Whisk</keyword></p>
+<p><keyword id="workflowfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> Workflow for
+<tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="workflow" translate="no">Workflow</keyword></p>
+<p><keyword id="workloadscheduler" translate="no">Workload Scheduler</keyword></p>
+<p><keyword id="workloadschedulerfull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+Workload Scheduler</keyword></p><!--X X X-->
+<p><keyword id="xpagesruntime_short" translate="no">XPages</keyword></p>
+<p><keyword id="xpagesruntime_long" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> XPages
+for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="xpagesservice_short" translate="no">XPages NoSQL Database</keyword></p>
+<p><keyword id="xpagesservice_long" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm> XPages
+NoSQL Database for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p>
+<p><keyword id="xpagesboilerplate_short" translate="no">XPages Web Starter</keyword></p>
+<p><keyword id="xpagesboilerplate_long" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+XPages Web Starter</keyword></p><!--ZZZ-->
+<p><keyword id="zosserviceshort" translate="no"><tm trademark="z/OS" tmtype="reg">z/OS</tm> as a
+Service</keyword></p>
+<p><keyword id="zosservicefull" translate="no"><tm trademark="IBM" tmtype="reg">IBM</tm>
+<tm trademark="z/OS" tmtype="reg">z/OS</tm> as a Service for <tm trademark="Bluemix" tmtype="reg">Bluemix</tm></keyword></p><!--Runtime names-->
+<p><keyword id="sinatra" translate="no">Ruby Sinatra</keyword></p>
+<p><keyword id="sdk4node" translate="no">SDK for Node.js</keyword></p>
+<p><keyword id="scikit" translate="no">scikit-learn</keyword></p>
+<p id="pricing_sheet1" translate="no">https://www.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/pricing</p><!--//Do not translate - End--></conbody></concept>
+<concept id="cloudoeconrefs_translatable_terms">
+<title></title>
+<conbody><!--//Translatable terms - Start  (ICON UI hover text keywords) --><!--LKCP 2016/09/25:  Per Beth's 9/22 note, removing &lt;p&gt;&lt;keyword id="FAB_add"&gt;Add from catalog&lt;/keyword&gt;&lt;/p&gt; for hexagonal + sign (aka "floating action button")-->
+<p><keyword id="FAB_add">カタログから追加</keyword></p>
+<p><keyword id="ibmid">IBMid</keyword><!--Refers to user ID for IBM.com --></p>
+<p><keyword id="avatar">アバター</keyword><!--Refers to "user" or "profile" icon that initially looks like a person but can be customized with a profile picture--></p>
+<p><keyword id="category">カテゴリー域</keyword><!--Refers to display associated with tabs on Bluemix dashboard such as Cloud Foundry Applications, Open Whisk, Containers, and Virtual Servers--></p><!--//Translatable terms - End--></conbody></concept>
+<concept id="concept_fdy_glv_tw" xml:lang="ja-jp">
+<title></title>
+<related-links>
+<linklist>
+<title>共通の <tm trademark="Bluemix" tmtype="reg">Bluemix</tm> 関連リンク
+</title>
+<link href="https://www.ibm.com/cloud-computing/bluemix/pricing/" format="html" scope="external" id="pricing_sheet">
+<linktext><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 価格設定シート</linktext></link>
+<link href="https://console.ng.bluemix.net/docs/overview/whatisbluemix.html#bluemixoverview" format="html" scope="external" id="prereqs">
+<linktext><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix"></keyword> 前提条件</linktext></link></linklist></related-links></concept></dita><?tm 1498073955836 451 z/OS||dashDB||WebSphere||Watson||SoftLayer||Insights||Informix||IBM Watson||IBM MobileFirst||IBM||DataStage||DB2||Cloudant||Cast Iron||Bluemix||BigInsights||AppScan||AlchemyVision||AlchemyAPI ?>

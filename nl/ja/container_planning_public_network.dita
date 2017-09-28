@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="container_planning_public_network">
+<title>パブリック・ネットワーク設定の決定</title>
+<titlealts>
+<navtitle>パブリック・ネットワーク設定</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のパブリック・ネットワーク設定の決定</searchtitle></titlealts>
+<shortdesc><ph conref="container_conref.dita#terms/public_network_definition">By default, every
+single container and container group in <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> is available to the private network.
+However, your app might require accessibility from the internet, or you want to access containers in
+other spaces of your organization. In these cases, you must expose your container to the public.
+Depending on the type of container that you choose, different ways exist to make a container
+available to the public. </ph> 選択するコンテナーのタイプに応じて、コンテナーを公開するためのさまざまな方法があります。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>計画</indexterm><indexterm>IBM Containers</indexterm><indexterm>コンテナー</indexterm><indexterm>パブリック・ネットワーク</indexterm><indexterm>IP アドレス</indexterm><indexterm>経路</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context></context></taskbody>
+<task id="public_single_compose">
+<title>単一コンテナーと Docker Compose のパブリック・ネットワーク設定</title>
+<titlealts>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の単一コンテナーと Docker Compose のパブリック・ネットワーク設定</searchtitle></titlealts>
+<shortdesc>スペース内に作成するすべての単一コンテナーには、プライベート IP アドレスが割り当てられます。この IP アドレスは、プライベート・ネットワークからコンテナーにアクセスするときにしか使用できません。プライベート・ネットワーク通信は、パブリック・ネットワークとの間のネットワーク・トラフィックを一切許可しないデフォルトのプライベート・ネットワーク・セキュリティー・グループによって保護されています。
+アプリをパブリック・ネットワークから利用可能にするには、パブリック・ポートを公開し、パブリック IP アドレスをコンテナーにバインドする必要があります。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>パブリック・ネットワーク</indexterm><indexterm>IBM Containers</indexterm><indexterm>インターネット</indexterm><indexterm>単一コンテナー</indexterm><indexterm>Docker Compose</indexterm><indexterm>アクセス可能</indexterm><indexterm>IP アドレス</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context><p>スペースをコンテナーにバインドするには、パブリック IP アドレスを要求する必要があります。パブリック IP アドレスを要求すると、パブリック IP アドレス・プールからランダムに IP アドレスがスペースに割り振られます。
+スペースに割り振られた IP アドレスは変更されません。
+パブリック IP アドレスをコンテナーにバインドするには、<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> run</codeph> コマンドで <codeph>-p</codeph> オプションを使用して、HTTP ポートを公開する必要もあります。
+ポートを公開すると、公開したポートでのみパブリック・データを送受信できるパブリック・ネットワーク・セキュリティー・グループがコンテナー用に作成されます。
+その他のすべてのパブリック・ポートは閉じられるため、それらのポートを使用してインターネットからアプリにアクセスすることはできません。</p>
+<note>パブリック IP アドレスをバインドしても、単一のコンテナーとの間で送受信するデータを暗号化する SSL 証明書は組み込まれません。ご使用のアプリに SSL 暗号化が必要である場合は、独自の SSL ソリューションを実装するか、または単一のコンテナーの代わりにコンテナー・グループを使用することができます。
+既に SSL 証明書が組み込まれているパブリック経路にコンテナー・グループがバインドされているなら、追加の構成を行わずに HTTPS でコンテナー・グループにアクセスできます。</note>
+<p>スペースで使用可能なパブリック IP アドレスの数は、組織の<xref href="container_planning_quota.dita" format="dita">割り当て量</xref>に応じて異なります。
+</p>
+<p>スペースで使用可能なパブリック IP アドレスのリストを調べるには、以下のコマンドを実行します。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ips</codeblock>返されたリストには、使用可能なパブリック IP アドレスが示されていないか、コンテナーにバインドされているパブリック IP アドレス、または、バインドされていないパブリック IP アドレスが示されます。
+</p>
+<p><dl>
+<dlentry>
+<dt>スペースで使用可能なパブリック IP アドレスがない場合</dt>
+<dd><ul>
+<li>CLI 出力: <codeblock>IP Address      Container ID</codeblock></li>
+<li>対応方法: <p>新しいパブリック IP アドレスを要求し、コンテナーにバインドします。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ip-request</codeblock><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ip-bind <varname>&lt;IP_ADDRESS&gt;</varname> <varname>&lt;CONTAINER&gt;</varname></codeblock></p></li></ul></dd></dlentry>
+<dlentry>
+<dt>スペース内でパブリック IP アドレスが使用可能で、コンテナーにバインドされていない場合</dt>
+<dd><ul>
+<li>CLI 出力: <codeblock>IP Address      Container ID   
+192.0.2.56</codeblock></li>
+<li>対応方法: <p>パブリック IP アドレスをコンテナーにバインドします。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ip-bind <varname>&lt;IP_ADDRESS&gt;</varname> <varname>&lt;CONTAINER&gt;</varname></codeblock></p></li></ul></dd></dlentry>
+<dlentry>
+<dt>スペース内でパブリック IP アドレスが使用可能だが、コンテナーに既にバインドされている場合</dt>
+<dd><ul>
+<li>CLI 出力: <codeblock>IP Address      Container ID   
+192.0.2.56   d7b4a167-8e51-4b16-b591-1a17cb7ee41f </codeblock></li>
+<li>対応方法: <ul>
+<li>既にバインドされている IP アドレスをコンテナーからアンバインドし、新しいコンテナーにバインドします。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ip-unbind <varname>&lt;IP_ADDRESS&gt;</varname> <varname>&lt;CONTAINER&gt;</varname></codeblock><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ip-bind <varname>&lt;IP_ADDRESS&gt;</varname> <varname>&lt;CONTAINER&gt;</varname></codeblock></li>
+<li><p>新しいパブリック IP アドレスを要求し、コンテナーにバインドします。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ip-request</codeblock><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ip-bind <varname>&lt;IP_ADDRESS&gt;</varname> <varname>&lt;CONTAINER&gt;</varname></codeblock></p></li></ul></li></ul></dd></dlentry></dl></p></context></taskbody></task>
+<task id="public_container_groups">
+<title>コンテナー・グループのパブリック・ネットワーク設定</title>
+<titlealts>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のコンテナー・グループのパブリック・ネットワーク設定</searchtitle></titlealts>
+<shortdesc>インターネットからコンテナー・グループにアクセスできるようにするには、ポートを公開し、パブリック経路またはパブリック IP アドレスをそのコンテナー・グループにバインドする必要があります。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>パブリック・ネットワーク</indexterm><indexterm>IBM Containers</indexterm><indexterm>インターネット</indexterm><indexterm>コンテナー・グループ</indexterm><indexterm>経路</indexterm><indexterm>IP アドレス</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context><p><dl>
+<dlentry>
+<dt>デフォルトのドメインを使用したパブリック経路</dt>
+<dd>パブリック経路は、ホストとドメイン名から構成され、コンテナー・グループにアクセスするために Web ブラウザーに入力する完全なパブリック URL を構成します。
+どの経路も、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 内で固有でなければなりません。
+<p>コンテナー作成時に、<varname>mycontainerhost</varname> など、経路のためのホスト名を選択できます。
+デフォルトのシステム・ドメインは <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword> であり、SSL 証明書が既に用意されているため、追加の構成を行わなくてもコンテナー・グループに HTTPS を使用してアクセスできます。
+</p><p>例:  <filepath>https://<varname>mycontainerhost</varname>.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword></filepath></p><note>パブリック経路を使用するには、コンテナー・グループの作成時にグループの HTTP ポートを公開する必要があります。HTTP 以外のポートはパブリックに公開できません。1 つのコンテナー・グループで公開できるパブリック・ポートは 1 つのみです。
+1 つのコンテナー・グループで複数のパブリック・ポートはサポートされません。
+</note></dd></dlentry>
+<dlentry>
+<dt>カスタムのドメインを使用したパブリック経路</dt>
+<dd>デフォルト・ドメイン <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword> の代わりに独自のカスタム・ドメインを使用する場合は、パブリック DNS サーバーにそのカスタム・ドメインを登録し、Bluemix にカスタム・ドメインを構成してから、パブリック DNS サーバーでそのカスタム・ドメインを Bluemix システム・ドメインにマップする必要があります。
+カスタム・ドメインが Bluemix システム・ドメインにマップされた後、カスタム・ドメインを求める要求は、Bluemix 内のアプリケーションにルーティングされます。カスタム・ドメインを作成する際、ドメイン名に下線 (_) を含めないでください。
+<p>カスタム・ドメインを作成する場合は、<xref href="../manageapps/updapps.html#domain" format="html" scope="peer">カスタム・ドメインの作成と使用</xref>を参照してください。
+</p><p>カスタム・ドメインのセキュリティーを確保するには、<xref href="../manageapps/secapps.html#ssl_certificate" format="html" scope="peer">SSL 証明書をアップロード</xref>して、HTTPS でコンテナー・グループにアクセスできるようにします。
+</p></dd></dlentry>
+<dlentry>
+<dt>パブリック IP アドレス</dt>
+<dd>コマンド・ラインでコンテナー・グループを作成する際に、IP アドレスをバインドすることもできます。コンテナーにはパブリック経路または浮動 IP アドレスのいずれかのみをバインドでき、両方はバインドできません。コンテナー・グループから IP アドレスを削除するには、コンテナー・グループを削除して作成し直す必要があります。
+<p>パブリック IP アドレスを使用するコンテナー・グループの作成の例:
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-create -p <varname>9080</varname> --ip <varname>192.0.2.56</varname>  --name <varname>my_container_group</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>ibmliberty</varname></codeblock></p></dd></dlentry></dl></p></context></taskbody></task></task>

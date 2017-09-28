@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="a8_control_plane" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> へのコントロール・プレーンのデプロイ</title>
+<titlealts>
+<navtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> へのコントロール・プレーンのデプロイ</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> へのコントロール・プレーンのデプロイ</searchtitle></titlealts>
+<shortdesc><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> の<term>レジストリー</term> と<term>コントローラー</term> のイメージを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> プライベート・レジストリーにコピーして、
+コントロール・プレーンのコンポーネントを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> にデプロイします。
+その後、各イメージのコンテナー・グループをプロビジョンします。</shortdesc>
+<taskbody>
+<prereq>始める前に、以下の要件を確認してください。<ul>
+<li><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> のデプロイ先のスペースに、コンテナーをデプロイするためのリソースがあることを、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 管理者に確認します。</li>
+<li>cURL がローカル環境で使用可能でなければなりません。</li>
+<li>『<xref href="../../containers/amalgam8/a8_deploy_svc.html" format="html" scope="peer">Amalgam8 に自動登録されるマイクロサービスをデプロイする</xref>』で説明しているように、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 管理者が <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 名前空間をセットアップしたことを確認します。</li></ul></prereq>
+<context><p>コントロール・プレーンをデプロイする前に、認証要件を決定してください。
+デフォルトでは、Amalgam8 の<term>コントロール・プレーン</term> は、認証要件のない単一テナントの構成で動作します。
+マルチテナントの構成で Amalgam8 を使用する場合は、以下の 2 つの認証オプションから選択します。<ul>
+<li>トラステッド認証モード: ローカル開発やテスト・デプロイメントに使用されます。</li>
+<li>JWT 認証モード: 実動デプロイメントに使用されます。</li></ul></p>
+<p>詳しくは、<xref href="http://www.amalgam8.io/docs/control-plane-authentication.html" format="html" scope="external"></xref>で Amalgam8 の認証に関する情報を参照してください。</p>
+<p>以下の手順を実行して、コントロール・プレーンを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> にデプロイします。</p></context>
+<steps>
+<step>
+<cmd>レジストリーのコンテナー・グループ用の経路を作成します。</cmd>
+<info>
+<p>以下のコマンドを実行します。<codeblock>bluemix cf create-route $BLUEMIX_SPACE $ROUTES_DOMAIN --hostname $REGISTRY_HOSTNAME</codeblock></p></info></step>
+<step>
+<cmd>コントローラーのコンテナー・グループ用の経路を作成します。</cmd>
+<info>
+<p>以下のコマンドを実行します。<codeblock>bluemix cf create-route $BLUEMIX_SPACE $ROUTES_DOMAIN --hostname $CONTROLLER_HOSTNAME</codeblock></p>
+
+<p>どちらかのコマンドを実行したときにエラーが返された場合は、<xref href="troubleshoot/ts_problem.dita"></xref>の手順に従ってその問題を解決できます。</p></info></step>
+<step>
+<cmd>経路が正常に作成されたことを確認します。
+以下のコマンドを実行します。</cmd>
+<info>
+<p><codeblock>bluemix cf routes</codeblock></p></info>
+<stepresult>
+<p>このコマンドは、次の例のような結果を戻します。
+<screen>space   host                domain          port   path   type    apps   service 
+dev     dev-a8-registry     <varname>my_bluemix.net</varname> 
+dev     dev-a8-controller   <varname>my_bluemix.net</varname></screen></p></stepresult></step>
+<step>
+<cmd><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> コントロール・プレーンのイメージを Docker Hub から <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プライベート・レジストリーにコピーします。</cmd><substeps>
+<substep>
+<cmd>レジストリーのイメージをコピーします。
+以下のコマンドを実行します。</cmd>
+<info>
+<p><codeblock>bluemix ic cpi $DOCKERHUB_NAMESPACE/$REGISTRY_IMAGE $BLUEMIX_REGISTRY_HOST/$BLUEMIX_REGISTRY_NAMESPACE/$REGISTRY_IMAGE</codeblock></p></info></substep>
+<substep>
+<cmd>コントローラーのイメージをコピーします。
+以下のコマンドを実行します。</cmd>
+<info>
+<p><codeblock>bluemix ic cpi $DOCKERHUB_NAMESPACE/$CONTROLLER_IMAGE $BLUEMIX_REGISTRY_HOST/$BLUEMIX_REGISTRY_NAMESPACE/$CONTROLLER_IMAGE</codeblock></p></info></substep></substeps></step>
+<step>
+<cmd><codeph>a8-registry</codeph> と <codeph>a8-controller</codeph> のイメージがリストされることを確認します。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリーのイメージをリストするには、以下のコマンドを実行します。</cmd>
+<stepxmp>
+<p><codeblock>bluemix ic images</codeblock></p>
+
+<p>出力は以下の例のようになります。
+<screen>$ bluemix ic images
+REPOSITORY                                                                       TAG                 IMAGE ID            CREATED             SIZE
+registry.ng.bluemix.net/namespace/a8-controller                              latest              60d4bc6e26cd        2 weeks ago         3.43 MB
+registry.ng.bluemix.net/namespace/a8-registry                                latest              09d1ba7a2658        2 weeks ago         3.599 MB</screen></p></stepxmp></step>
+<step>
+<cmd>コントロール・プレーンのコンポーネントを、コンテナー・グループとして <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 組織のスペースにプロビジョンします。</cmd><substeps>
+<substep>
+<cmd>レジストリーのコンテナー・グループを作成します。
+以下のコマンドを実行します。</cmd>
+<info>
+<p><codeblock>bluemix ic group-create --name amalgam8_registry --publish 8080 --memory 128 --auto --min 1 --max 2 --desired 1 --hostname $REGISTRY_HOSTNAME --domain $ROUTES_DOMAIN $BLUEMIX_REGISTRY_HOST/$BLUEMIX_REGISTRY_NAMESPACE/$REGISTRY_IMAGE</codeblock></p></info></substep>
+<substep>
+<cmd>コントローラーのコンテナー・グループを作成します。
+以下のコマンドを実行します。</cmd>
+<info>
+<p><codeblock>bluemix ic group-create --name amalgam8_controller --publish 8080 --memory 128 --auto --min 1 --max 2 --desired 1 --hostname $CONTROLLER_HOSTNAME --domain $ROUTES_DOMAIN $BLUEMIX_REGISTRY_HOST/$BLUEMIX_REGISTRY_NAMESPACE/$CONTROLLER_IMAGE</codeblock></p></info></substep></substeps>
+<stepresult>
+<p>コンテナー・グループが正常に作成されたことを確認するために、以下のコマンドを実行します。</p>
+
+<p><codeblock>bluemix ic groups</codeblock></p>
+
+<p><codeph>amalgam8_controller</codeph> と <codeph>amalgam8_registry</codeph> のコンテナー・グループがリストされることを確認します。
+出力は以下の例のようになります。
+<screen>$ bluemix ic groups
+Group Id                               Name                   Status            Created                         Updated   Port   Routes   
+04f7201a-1789-47c8-9f81-b8712401371b   amalgam8_registry      CREATE_COMPLETE   2016-10-05 16:17:05 +0000 UTC             8080   dev-a8-registry.mybluemix.net   
+b157ba74-7b1c-4bcb-8b30-7799a7448ded   amalgam8_controller    CREATE_COMPLETE   2016-10-05 16:12:02 +0000 UTC             8080   dev-a8-controller.mybluemix.net   </screen></p></stepresult></step>
+<step>
+<cmd>グループが実行されていて、要求を正常に受け取っていることを確認します。</cmd><substeps>
+<substep>
+<cmd>以下のコマンドを実行して、レジストリーの状況を確認します。</cmd>
+<info>
+<p><codeblock>curl -s -o /dev/null -w "%{http_code}\n\n" $REGISTRY_URL/uptime</codeblock></p>
+
+<p>グループが実行中であれば、<msgnum>200</msgnum> の状況コードを受け取ります。</p></info></substep>
+<substep>
+<cmd>以下のコマンドを実行して、コントローラーの状況を確認します。</cmd>
+<info>
+<p><codeblock>curl -s -o /dev/null -w "%{http_code}\n\n" $CONTROLLER_URL/health</codeblock></p>
+
+<p>グループが実行中であれば、<msgnum>200</msgnum> の状況コードを受け取ります。</p></info></substep></substeps></step></steps>
+<result><p><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> コントロール・プレーンのデプロイが正常に完了しました。</p></result></taskbody></task>

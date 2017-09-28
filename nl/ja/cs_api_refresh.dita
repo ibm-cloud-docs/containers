@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="cs_api_refresh" xml:lang="ja-jp">
+<title>API による IAM アクセス・トークンのリフレッシュ</title>
+<titlealts>
+<navtitle>IAM アクセス・トークンのリフレッシュ</navtitle></titlealts>
+<shortdesc>API から発行されるすべての IAM (ID およびアクセス管理) アクセス・トークンの有効期間は 1 時間です。<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> API へのアクセスを確保するには、アクセス・トークンを定期的にリフレッシュする必要があります。</shortdesc>
+<taskbody>
+<prereq id="prereq_rff_14x_tz">始める前に、新しいアクセス・トークンを要求するために使用できる IAM リフレッシュ・トークンを用意してください。リフレッシュ・トークンがない場合は、<xref href="cs_api.dita" format="dita" scope="local"></xref>を参照してアクセス・トークンを取得してください。</prereq>
+<context>IAM トークンをリフレッシュするには、以下の手順を実行します。</context>
+<steps>
+<step>
+<cmd>新しい IAM トークンを取得します。<varname>&lt;iam_refresh_token&gt;</varname> を、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> での最初の認証時に受け取った IAM リフレッシュ・トークンに置き換えます。</cmd>
+<info>
+<codeblock>POST <filepath>https://iam.ng.bluemix.net/oidc/token</filepath></codeblock>
+<table frame="all" colsep="1" rowsep="1" id="table_sr1_kkx_tz">
+<title></title>
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="1.0*"></colspec><colspec colnum="2" colname="c2" colwidth="1.0*"></colspec>
+<thead>
+<row>
+<entry>入力パラメーター</entry>
+<entry>値</entry></row></thead>
+<tbody>
+<row>
+<entry>ヘッダー</entry>
+<entry><ul id="ul_tr1_kkx_tz">
+<li>Content-Type: application/x-www-form-urlencoded
+</li>
+<li>Authorization: Basic Yng6Yng=</li></ul></entry></row>
+<row>
+<entry>本文</entry>
+<entry><ul id="ul_ur1_kkx_tz">
+<li>grant_type: refresh_token</li>
+<li>response_type: cloud_iam、uaa</li>
+<li>refresh_token: <varname>&lt;iam_refresh_token&gt;</varname></li>
+<li>uaa_client_id: cf</li>
+<li>uaa_client_secret:
+<note>uaa_client_secret キーは値を指定せずに追加します。</note></li></ul></entry></row></tbody></tgroup></table>API 出力は、以下のようになります。<screen>{
+  "access_token": "<varname>&lt;iam_token&gt;</varname>",
+  "refresh_token": "<varname>&lt;iam_refresh_token&gt;</varname>",
+  "uaa_token": "<varname>&lt;uaa_token&gt;</varname>",
+  "uaa_refresh_token": "<varname>&lt;uaa_refresh_token&gt;</varname>",
+  "token_type": "Bearer",
+  "expires_in": 3600,
+  "expiration": 1493747503
+}</screen>API 出力の <uicontrol>access_token</uicontrol> フィールドに新しい IAM トークンがあり、<uicontrol>refresh_token</uicontrol> フィールドに IAM リフレッシュ・トークンがあります。</info></step>
+<step>
+<cmd>前の手順のトークンを使用して、<xref href="https://us-south.containers.bluemix.net/swagger-api" format="html" scope="external"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> API の資料</xref>の作業を進めます。</cmd></step></steps></taskbody></task>

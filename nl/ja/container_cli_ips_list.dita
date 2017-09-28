@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="container_cli_ips_list" xml:lang="ja-jp">
+<title>コマンド・ライン・インターフェース (CLI) による組織の既存のパブリック IP アドレスの検索</title>
+<titlealts>
+<navtitle>CLI による既存のパブリック・アドレスの検索</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で使用するための既存のパブリック IP アドレスの検索</searchtitle></titlealts>
+<shortdesc>単一コンテナーにインターネットからアクセスできるようにするには、その単一コンテナーにパブリック IP アドレスをバインドする必要があります。
+IP アドレスを要求する前に、既に組織に割り当てられているパブリック IP アドレスのリストを参照して、それらの既存の IP アドレスのいずれかを使用できないか確認してください。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>IP アドレス</indexterm><indexterm>パブリック</indexterm><indexterm>IBM Containers</indexterm><indexterm conref="container_conref.dita#links/cli_abbrev"></indexterm><indexterm>ips</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context><note conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/ssl"></note></context>
+<steps>
+<step>
+<cmd>スペースで使用可能なパブリック IP アドレスをリストします。</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ips</codeblock></info></step></steps>
+<postreq>IP アドレスがない場合や新しく要求する場合は、次のオプションの中から選択できます。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI を使用して単一コンテナーを作成するとき、またはコマンド・ラインから <codeph><ph conref="container_conref.dita#links/command_prefix"></ph> ip-request</codeph> を実行するときに、IP アドレスを要求することができます。コマンド・ラインを使用して IP アドレスを要求する方法については、
+<xref href="container_cli_ips.dita" format="dita" scope="local"></xref>を参照してください。</postreq></taskbody><?tm 1435623319 0?></task>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<concept id="container_ml_logs" xml:lang="ja-jp">
+<title>ロギングの概要</title>
+<titlealts>
+<navtitle>ロギングの概要</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword>のロギングの概要</searchtitle></titlealts><abstract>
+<p><ph id="logging">コンテナーのログは、メトリックと同様に、クローラーを使用してコンテナー外部からモニターおよび転送されます。そのデータは、クローラーによって <tm trademark="Bluemix" tmtype="tm">Bluemix</tm> のマルチテナント <xref href="https://www.elastic.co/products/elasticsearch" format="html" scope="external">Elasticsearch</xref> に送信されます。
+この処理方法は他のコンテナー内エージェントによって収集されるログと似ていますが、わざわざコンテナー内部にエージェントをインストールする必要はありません。</ph>
+</p></abstract>
+<conbody>
+<section><dl>
+<dlentry>
+<dt>デフォルトで収集されるログ</dt>
+<dd><p>デフォルトでは、クローラーは以下の場所から情報を取得します。</p>
+<ul id="default_logs">
+<li><filepath>/var/log/messages</filepath>: システム・メッセージ。</li>
+<li><filepath>/docker.log</filepath>: Docker ログ。<p>Docker ログ・ファイルはコンテナー内にファイルとして保管されることはありませんが、収集されます。
+このログ・ファイルがデフォルトで収集されるのは、コンテナーの <codeph>stdout</codeph> (標準出力) 情報と <codeph>stderr</codeph> (標準エラー) 情報の公開に関する標準 Docker 規約であるためです。コンテナー・プロセスが <codeph>stdout</codeph> または <codeph>stderr</codeph> を出力すると、その情報が収集されます。</p></li></ul>
+<p><ph>追加のログを収集するには、<xref href="../container_single_ui.html#container_single_ui__env_keys_group" format="html" scope="peer">GUI</xref> または <xref href="../container_single_cli.html#container_single_cli" format="html" scope="peer">CLI</xref> でコンテナーを作成する際に、<codeph>LOG_LOCATIONS</codeph> 環境変数をログ・ファイルへのパスと共に追加します。</ph></p>
+<p>アプリによっては、予想どおりにログ・データを生成しないものがあります。例えば、
+ibmliberty イメージを使用してコンテナーを作成する場合、ログが生成されるのは、そのコンテナーが初めて開始されるときのみです。</p></dd></dlentry>
+<dlentry>
+<dt>ログの保存と上限</dt>
+<dd>スペースごとに 1 日に最大で 1 GB のデータが保管されます。1 GB の上限を超えるログは破棄されます。上限の割り当ては毎日 12:30 AM UTC にリセットされます。<ph audience="blue">上限を引き上げるには、<xref href="https://support.ibmcloud.com/Support/5377/5383/en-us/Portal/Index" format="html" scope="external">サポートに連絡してください</xref>。サポート・チケットに、上限要求のスペース ID、新しい上限サイズ、そして要求の理由を記載してください。</ph><p><ph audience="blue">さらに、最大で 7 GB のデータが最大で 7 日間、検索可能となります。</ph>
+ログ・データは、<ph audience="blue">データが 7 GB に達するか </ph>7 日が過ぎると、ロールオーバーします (先入れ先出し)。
+</p></dd></dlentry>
+<dlentry>
+<dt>ログのソート</dt>
+<dd><p>JSON ログが <codeph>stdout</codeph> として Docker ログに送信されると、それらは JSON としては解析されないため、<codeph>@timestamp</codeph> フィールドによってソートして順序を変更することはできません。
+表示される <codeph>@timestamp</codeph> 値は、ElasticSearch によりログが受信された時刻のタイム・スタンプです。
+コンテナー中でのログ生成時刻を示すタイム・スタンプは、メッセージ・フィールドの一部として表示されます。
+</p>
+<p><codeph>message</codeph> フィールドを分離して複数のフィールドにするには、JSON を <codeph>stdout</codeph> ではなくファイルにログ記録します。
+そのようにすることにより、Kibana 中のログをソートにすることができます。
+</p></dd></dlentry></dl></section><!--&lt;section audience="blue"&gt;&lt;title&gt;Optional: In-container monitoring agents&lt;/title&gt;&lt;draft-comment author="Kristin"&gt;This information will only display in staging.&lt;/draft-comment&gt;&lt;p&gt;If you want to collect something other than CPU, memory, or network interface, such as something that is specific to your applications, you must install an in-container agent. You might install &lt;codeph&gt;collectd&lt;/codeph&gt;, to collect log files, and &lt;codeph&gt;logstash&lt;/codeph&gt;, to collect metrics, and run them inside of the container.&lt;/p&gt;&lt;p&gt;If you decide to install &lt;codeph&gt;collectd&lt;/codeph&gt; and &lt;codeph&gt;logstash&lt;/codeph&gt;, you can do so by running a Dockerfile.&lt;/p&gt;&lt;/section&gt;-->
+<section audience="unknown"><!--You can build a framework by building 'logstash agent' into your container and using a specific logstash filter/plugin (file -&gt; mt-lumberjack) https://slack-files.com/T03T7PX58-F06UVA4US-57d06d8bda--><title>前提条件</title>
+ログ・ファイルを処理するクローラーでは、ログは以下の要件を満たしている必要があります。<ol>
+<li>ログの形式は <filepath>.json</filepath>の必要があります。</li>
+<li>メッセージには以下のイベントを含める必要があります。<ol>
+<li><codeph>メッセージ</codeph></li>
+<li><codeph>モジュール</codeph></li>
+<li><codeph>loglevel</codeph></li></ol></li>
+<li>ログ・イベントには
+<codeph>path</codeph> キーを含めることはできません。</li></ol>ご使用のログが上記の要件を満たしていない場合は、
+以下のいずれかのステップを選択することができます。
+<ul>
+<li>ログ・ファイルを再構成して、
+Logstash フィルターを使用することでクローラーの前提条件を満たします。
+</li>
+<li>クローラーをバイパスし、Logstash フォワーダーを構成することでログ情報を
+Logmet に送信します。
+</li></ul></section></conbody><?tm 1435623328 5?>
+<concept id="rellinks">
+<title>関連リンク</title>
+<related-links>
+<linklist id="general">
+<title>関連リンク</title>
+<link href="http://www.elastic.co/guide/en/kibana/current/index.html" format="html" scope="external">
+<linktext>Kibana 資料</linktext></link>
+<link href="ftp://public.dhe.ibm.com/cloud/bluemix/containers/" format="html" scope="external">
+<linktext>Bluemix ロギング・ダッシュボードの虎の巻</linktext>
+<desc><uicontrol>bluemix_logging_dashboard_cheat_sheet.pdf</uicontrol> を参照してください</desc></link></linklist></related-links></concept></concept>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN" "ibm-concept.dtd">
+<concept id="cs_planning_public_network" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword>
+<ph conref="cs_conref.dita#links/release"></ph> でのパブリック・ネットワーキング</title>
+<titlealts>
+<navtitle>パブリック・ネットワーキング</navtitle></titlealts>
+<shortdesc><ph audience="yellow">クラスターを作成したら、どのクラスターも、IBM 所有のパブリック VLAN (<ph conref="cs_conref.dita#links/free_cluster"></ph>・クラスター)、またはお客様の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントにセットアップしたパブリック VLAN (標準クラスター) に接続する必要があります。 </ph><ph audience="blue">クラスターを作成したら、どのクラスターも、IBM 所有のパブリック VLAN (<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short" audience="blue"> </keyword> Public の <ph conref="cs_conref.dita#links/free_cluster"></ph>・クラスター)、お客様の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントにセットアップしたパブリック VLAN (<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short" audience="blue"> </keyword> Public の標準クラスター)、
+またはお客様の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントに IBM が事前構成したユーザー管理のパブリック VLAN (<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short" audience="blue"> </keyword> Dedicated の標準クラスター) に接続する必要があります。</ph>
+ワーカー・ノードに割り当てられるパブリック IP アドレスは、クラスター作成時にパブリック VLAN によって決定されます。
+</shortdesc>
+<conbody>
+<p>パブリック VLAN は <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> ファイアウォールによって保護されます。このファイアウォールは、デフォルトでは、インターネットとの間のインバウンド接続もアウトバウンド接続も許可しません。
+Kubernetes マスターとワーカー・ノードは、それぞれに割り当てられたパブリック IP アドレスを使用してパブリック VLAN で通信しますが、インターネットからはアクセスできません。
+</p>
+<p><ph conref="cs_conref.dita#links/free_cluster"></ph> を作成したか、または標準クラスターを作成したかに応じて、アプリを公開するためのオプションを次の中から選択できます。
+<ul>
+<li><xref href="cs_planning_public_network.dita#cs_nodeport"><codeph>NodePort</codeph> タイプのサービス</xref> (<ph conref="cs_conref.dita#links/free_cluster"></ph>クラスターと標準クラスター)</li>
+<li><xref href="cs_planning_public_network.dita#cs_loadbalancer"><codeph>LoadBalancer</codeph> タイプのサービス</xref> (標準クラスターのみ)</li>
+<li><xref href="cs_planning_public_network.dita#cs_ingress">Ingress</xref> (標準クラスターのみ)</li></ul></p></conbody>
+<concept id="cs_nodeport">
+<title><codeph>NodePort</codeph> タイプのサービスを使用してアプリをインターネットに公開する</title>
+<shortdesc>ワーカー・ノードのパブリック・ポートを公開し、ワーカー・ノードのパブリック IP アドレスを使用して、クラスター内のサービスにパブリック・アクセスを行います。
+</shortdesc>
+<conbody>
+<p><xref href="../api/content/containers/images/cs_nodeport.png" format="png" scope="external"><image href="images/cs_nodeport.png" alt="NodePort タイプの Kubernetes サービスを使用してサービスを公開する"></image></xref></p>
+<p><codeph>NodePort</codeph> タイプの Kubernetes サービスを作成してアプリを公開する場合は、30000 から 32767 の範囲の NodePort と内部クラスター IP アドレスがサービスに割り当てられます。
+NodePort サービスは、アプリに対する着信要求のための外部エントリー・ポイントとして機能します。
+割り当てられた NodePort は、クラスター内の各ワーカー・ノードの kubeproxy 設定でパブリックに公開されます。
+どのワーカー・ノードも、割り当てられた NodePort で、サービスに対する着信要求の listen を開始します。
+インターネットからサービスにアクセスするには、クラスター作成時に割り当てられたワーカー・ノードのパブリック IP アドレスと NodePort を使用します。その形式は、<filepath><varname>&lt;ip_address&gt;</varname>:<varname>&lt;nodeport&gt;</varname></filepath> です。
+</p>
+<p>パブリック要求は、<codeph>NodePort</codeph> サービスに到達すると、サービスの内部クラスター IP に自動的に転送され、さらに kubeproxy コンポーネントから、アプリがデプロイされたポッドのプライベート IP アドレスに転送されます。
+クラスター IP はクラスター内でのみアクセス可能です。
+複数の異なるポッドでアプリの複数のレプリカが実行されている場合、kubeproxy コンポーネントはすべてのレプリカ間で着信要求のロード・バランシングを行います。
+</p>
+<p><note>ワーカー・ノードのパブリック IP アドレスは永続的なアドレスでないということに留意してください。
+ワーカー・ノードが削除されたり再作成されたりすると、新しいパブリック IP アドレスがワーカー・ノードに割り当てられます。
+<codeph>NodePort</codeph> タイプのサービスは、アプリのパブリック・アクセスをテストする場合や、パブリック・アクセスが短期間だけ必要な場合に使用できます。
+安定的なパブリック IP アドレスとサービスのさらなる可用性が必要な場合は、<xref href="#cs_loadbalancer"><codeph>LoadBalancer</codeph> タイプのサービス</xref>か <xref href="#cs_ingress">Ingress タイプのサービス</xref>を使用してアプリを公開してください。
+</note></p>
+<p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で <codeph>NodePort</codeph> タイプのサービスを作成する方法について詳しくは、<xref href="cs_apps_public.dita#cs_apps_public_nodeport" scope="local"></xref>を参照してください。
+</p></conbody></concept>
+<concept id="cs_loadbalancer">
+<title>
+<codeph>LoadBalancer</codeph> タイプのサービスを使用してアプリをインターネットに公開する</title>
+<shortdesc>ポートを公開し、ロード・バランサーのパブリック IP アドレスを使用してアプリにアクセスします。
+</shortdesc>
+<conbody>
+<p><xref href="../api/content/containers/images/cs_loadbalancer.png" format="png" scope="external"><image href="images/cs_loadbalancer.png" alt="LoadBalancer タイプの Kubernetes サービスを使用してサービスを公開する"></image></xref></p>
+<p>標準クラスターを作成する時、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> は自動的に 5 つのポータブル・パブリック IP アドレスを要求し、クラスター作成時にそれらをお客様の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントにプロビジョンします。ポータブル IP アドレスの 1 つは <xref href="#cs_ingress">Ingress コントローラー</xref>用として使用されます。
+4 つのポータブル・パブリック IP アドレスを使用して <codeph>LoadBalancer</codeph> タイプのサービスを作成することにより、アプリをパブリックに公開できます。
+</p>
+<p><codeph>LoadBalancer</codeph> タイプの Kubernetes サービスを作成する時、外部ロード・バランサーが 1 つ作成され、使用可能な 4 つのパブリック IP アドレスのうちの 1 つがそれに割り当てられます。
+使用可能なポータブル・パブリック IP アドレスがなければ、LoadBalancer サービスの作成は失敗します。<codeph>LoadBalancer</codeph> サービスは、アプリに対する着信要求のための外部エントリー・ポイントとして機能します。
+<codeph>NodePort</codeph> タイプのサービスとは異なり、任意のポートをロード・バランサーに割り当て可能で、特定のポート範囲に縛られません。
+<codeph>LoadBalancer</codeph> サービスに割り当てられるポータブル・パブリック IP アドレスは永続的なアドレスであり、ワーカー・ノードが削除されたり再作成されたりしても変更されないので、<codeph>LoadBalancer</codeph> サービスの可用性は <codeph>NodePort</codeph> サービスより高くなります。インターネットから <codeph>LoadBalancer</codeph> サービスにアクセスするには、ロード・バランサーのパブリック IP アドレスと割り当てられたポートを使用します。その形式は、<filepath><varname>&lt;ip_address&gt;</varname>:<varname>&lt;port&gt;</varname></filepath> です。
+</p>
+<p>パブリック要求は、<codeph>LoadBalancer</codeph> サービスに到達すると、サービス作成時に LoadBalancer サービスに割り当てられた内部クラスター IP アドレスに自動的に転送されます。
+クラスター IP アドレスはクラスター内でのみアクセス可能です。
+着信要求はクラスター IP アドレスからさらにワーカー・ノードの kubeproxy コンポーネントに転送された後、アプリがデプロイされたポッドのプライベート IP アドレスに転送されます。
+複数の異なるポッドでアプリの複数のレプリカが実行されている場合、kubeproxy コンポーネントはすべてのレプリカ間で着信要求のロード・バランシングを行います。
+</p>
+<p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で <codeph>LoadBalancer</codeph> タイプのサービスを作成する方法について詳しくは、<xref href="cs_apps_public.dita#cs_apps_public_load_balancer" scope="local"></xref>を参照してください。
+</p>
+<p> </p></conbody></concept>
+<concept id="cs_ingress">
+<title>Ingress を使用してインターネットにアプリを公開する</title>
+<shortdesc>Ingress ではクラスターの複数のサービスを公開し、単一のパブリック・エントリー・ポイントを使用してそれらのサービスを使用可能にできます。
+</shortdesc>
+<conbody>
+<p><xref href="../api/content/containers/images/cs_ingress.png" format="png" scope="external"><image href="images/cs_ingress.png" alt="IBM Bluemix Container Service の Ingress サポートを使用してサービスを公開する"></image></xref></p>
+<p>公開するアプリごとにロード・バランサー・サービスを作成する方法とは異なり、Ingress では固有のパブリック経路が提供されるので、クラスター内外のアプリに対するパブリック要求を、それらのアプリの固有のパスに基づいて転送できます。
+Ingress には主なコンポーネントが 2 つあります。
+Ingress リソースは、アプリの着信要求のルーティング方法に関するルールを定義します。Ingress リソースはすべて Ingress コントローラーに登録する必要があります。Ingress コントローラーは、着信する HTTP または HTTPS<ph audience="blue">、TCP、UDP</ph> のいずれかのサービス要求を listen し、Ingress リソースごとに定義されたルールに基づいて要求を転送します。
+</p>
+<p>標準クラスターを作成するときは、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> が自動的にクラスター用に可用性の高い Ingress コントローラーを作成し、それに固有のパブリック経路を
+<filepath><varname>&lt;cluster_name&gt;</varname>.<varname>&lt;region&gt;</varname>.containers.mybluemix.net</filepath> という形式で割り当てます。
+パブリック経路は、クラスター作成時にお客様の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントにプロビジョンされたポータブル・パブリック IP アドレスにリンクされます。</p>
+<p>Ingress 経由でアプリを公開するには、アプリ用に Kubernetes サービスを作成し、Ingress リソースを定義することによってこのサービスを Ingress リソースに登録する必要があります。Ingress リソースは、公開されるアプリの固有の URL を形成するためにパブリック経路に付加するパスを指定します。例えば、<filepath>mycluster.us-south.containers.mybluemix.net/myapp</filepath>のようになります。 この経路を Web ブラウザーに入力すると、要求が Ingress コントローラーのリンク先ポータブル・パブリック IP アドレスに送信されます。Ingress コントローラーは、<varname>mycluster</varname> クラスター内の <varname>myapp</varname> パスのルーティング・ルールが存在するかどうかを検査します。
+一致するルールが見つかれば、アプリがデプロイされているポッドに、個々のパスを含んだ要求が転送されます。このとき、元の Ingress リソース・オブジェクトで定義されたルールが考慮されます。
+アプリが着信要求を処理するためには、Ingress リソースで定義した個々のパスでアプリが listen するようにしておく必要があります。
+</p>
+<p>次のようなシナリオで、アプリの着信ネットワーク・トラフィックを管理するよう Ingress コントローラーを構成できます。
+<ul id="ul_fnf_mvg_tz">
+<li>IBM 提供ドメインを使用 (TLS 終端なし)</li>
+<li>IBM 提供ドメインと TLS 証明書を使用 (TLS 終端あり)</li>
+<li>カスタム・ドメインと TLS 証明書を使用して TLS 終端を実行</li>
+<li>IBM 提供ドメインまたはカスタム・ドメインと TLS 証明書を使用して、クラスター外のアプリにアクセス
+</li>
+<li>アノテーションを使用して Ingress コントローラーに機能を追加する</li></ul></p>
+<p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> での Ingress の使用方法について詳しくは、<xref href="cs_apps_public.dita#cs_apps_public_ingress" format="dita" scope="local"></xref>を参照してください。
+</p></conbody></concept></concept>

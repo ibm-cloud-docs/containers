@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference PUBLIC "-//IBM//DTD DITA IBM Reference//EN" "ibm-reference.dtd">
+<reference id="cs_cli_ref_registry" xml:lang="ja-jp">
+<title>名前空間と Docker イメージを管理するためのサポートされている<ph conref="cs_conref.dita#links/registry_name_short"></ph> (<ph conref="cs_conref.dita#links/bx_cr"></ph>) コマンド</title>
+<titlealts>
+<navtitle>サポートされる <ph conref="cs_conref.dita#links/registry_name_short"></ph> コマンド</navtitle></titlealts>
+<shortdesc></shortdesc>
+<refbody>
+<section><title></title><ph conref="cs_conref.dita#links/registry_name_short"></ph> CLI を使用して、IBM がホストするマルチテナントで可用性が高い拡張可能なプライベート・イメージ・レジストリー内に独自のプライベート・イメージ・リポジトリーをセットアップし、そこで Docker イメージを安全に保管して、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウント内のすべてのユーザーと共有できます。<p>サポートされているコマンドについては、<xref href="../cli/plugins/registry/index.html#containerregcli" format="html" scope="external"><ph conref="cs_conref.dita#links/registry_name_short"></ph>CLI の解説書</xref>を参照してください。</p></section></refbody></reference>

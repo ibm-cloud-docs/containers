@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="cs_cluster_volume_create" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword>
+<ph conref="cs_conref.dita#links/release"></ph> における Kubernetes での既存の NFS ファイル共有の使用</title>
+<titlealts>
+<navtitle>クラスターでの既存の NFS ファイル共有の使用</navtitle></titlealts><abstract>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントにある既存の NFS ファイル共有を Kubernetes で使用するには、その既存のファイル共有上に永続ボリュームを作成します。永続ボリュームとは、Kubernetes クラスター・リソースとして機能する実際のハードウェアの一片であり、クラスター・ユーザーによって使用されます。
+</shortdesc></abstract>
+<taskbody>
+<prereq><p>始める前に、永続ボリュームの作成に使用できる既存の NFS ファイル共有があることを確認します。
+</p></prereq>
+<context><p><xref href="../api/content/containers/images/cs_cluster_pv_pvc.png" format="png" scope="external"><image href="images/cs_cluster_pv_pvc.png" alt="永続ボリュームと永続ボリューム請求の作成"></image></xref></p>
+<p>Kubernetes は永続ボリューム (実際のハードウェアを表す) と、永続ボリューム請求 (ストレージの要求。通常はクラスター・ユーザーにより開始される) とを区別します。
+既存の NFS ファイル共有を Kubernetes で使用できるようにする場合、特定のサイズとアクセス・モードを持つ永続ボリュームを作成し、その永続ボリュームの仕様と一致する永続ボリューム請求を作成する必要があります。
+永続ボリュームと永続ボリューム請求が一致すると、それらは相互にバインドされます。
+クラスター・ユーザーがポッドへのボリュームのマウントに使用できるのは、バインドされた永続ボリューム請求だけです。
+この処理は永続ストレージの静的プロビジョニングと呼ばれます。</p>
+<note>永続ストレージの静的プロビジョニングは既存の NFS ファイル共有にのみ適用されます。既存の NFS ファイル共有がない場合、クラスター・ユーザーは<xref href="cs_apps_volume_claim.dita#cs_apps_volume_claim" format="DITA" scope="local">動的プロビジョニング</xref>処理を使用して永続ボリュームを追加できます。</note>
+<p>永続ボリューム、およびそれと一致する永続ボリューム請求を作成するには、次の手順を実行します。</p></context>
+<steps>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントで、永続ボリューム・オブジェクトを作成する NFS ファイル共有の ID とパスを検索します。</cmd><substeps>
+<substep>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントにログインします。</cmd></substep>
+<substep>
+<cmd><uicontrol>「ストレージ」</uicontrol>をクリックします。</cmd></substep>
+<substep>
+<cmd><uicontrol>「ファイル・ストレージ」</uicontrol>をクリックし、使用する NFS ファイル共有の ID とパスをメモします。
+</cmd></substep></substeps></step>
+<step>
+<cmd>任意のエディターを開きます。</cmd></step>
+<step>
+<cmd>永続ボリュームのストレージ構成スクリプトを作成します。</cmd>
+<info>
+<codeblock>apiVersion: v1
+kind: PersistentVolume
+metadata:
+ name: <varname>mypv</varname>
+spec:
+ capacity:
+   storage: "20Gi"
+ accessModes:
+   - ReadWriteMany
+ nfs:
+   server: "nfslon0410b-fz.service.softlayer.com"
+   path: "/IBM01SEV8491247_0908"</codeblock>
+
+<table frame="all" colsep="1" rowsep="1" id="table_sdf_nkm_2v">
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="100pt"></colspec><colspec colnum="2" colname="c2"></colspec>
+<thead>
+<row>
+<entry namest="c1" nameend="c2"><ph conref="container_conref.dita#images/more_info"></ph> ストレージ構成スクリプトのコンポーネントについて
+</entry></row></thead>
+<tbody>
+<row>
+<entry><codeph>name</codeph></entry>
+<entry>作成する永続ボリューム・オブジェクトの名前を入力します。</entry></row>
+<row>
+<entry><codeph>storage</codeph></entry>
+<entry>既存の NFS ファイル共有のストレージ・サイズを入力します。このストレージ・サイズはギガバイト単位 (例えば、20Gi (20 GB) や 1000Gi (1 TB) など) で入力する必要があり、そのサイズは既存のファイル共有のサイズと一致している必要があります。
+</entry></row>
+<row>
+<entry><codeph>accessMode</codeph></entry>
+<entry conref="cs_conref.dita#links/accessmode"></entry></row>
+<row>
+<entry><codeph>server</codeph></entry>
+<entry>NFS ファイル共有サーバーの ID を入力します。</entry></row>
+<row>
+<entry><codeph>path</codeph></entry>
+<entry>永続ボリューム・オブジェクトを作成する NFS ファイル共有のパスを入力します。</entry></row></tbody></tgroup></table></info></step>
+<step>
+<cmd>クラスターに永続ボリューム・オブジェクトを作成します。</cmd>
+<info>
+<codeblock>kubectl apply -f <filepath>&lt;yaml_path&gt;</filepath></codeblock>例<codeblock>kubectl apply -f <filepath>deploy/kube-config/pv.yaml</filepath></codeblock></info></step>
+<step>
+<cmd>永続ボリュームが作成されたことを確認します。</cmd>
+<info>
+<codeblock>kubectl get pv</codeblock></info></step>
+<step>
+<cmd>永続ボリューム請求を作成するために、別の構成スクリプトを作成します。</cmd>
+<info>永続ボリューム請求が、前の手順で作成した永続ボリューム・オブジェクトと一致するようにするには、<codeph>storage</codeph> および
+<codeph>accessMode</codeph> に同じ値を選択する必要があります。<codeph>storage-class</codeph> フィールドは空である必要があります。これらのいずれかのフィールドが永続ボリュームと一致しない場合、代わりに新しい永続ボリュームが自動的に作成されます。
+<codeblock>kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+ name: <varname>mypvc</varname>
+ annotations:
+   volume.beta.kubernetes.io/storage-class: ""
+spec:
+ accessModes:
+   - ReadWriteMany
+ resources:
+   requests:
+     storage: "20Gi"</codeblock></info></step>
+<step>
+<cmd>永続ボリューム請求を作成します。</cmd>
+<info>
+<codeblock>kubectl apply -f <filepath>deploy/kube-config/mypvc.yaml</filepath></codeblock></info></step>
+<step>
+<cmd>永続ボリューム請求が作成され、永続ボリューム・オブジェクトにバインドされたことを確認します。</cmd>
+<info>この処理には数分かかる場合があります。
+</info>
+<info>
+<codeblock>kubectl describe pvc <varname>mypvc</varname></codeblock>出力は、以下のようになります。
+<screen>Name:		<varname>mypvc</varname>
+Namespace:	default
+StorageClass:	""
+Status:		Bound
+Volume:		pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2
+Labels:		&lt;none&gt;
+Capacity:	20Gi
+Access Modes:	RWX
+Events:
+  FirstSeen	LastSeen	Count	From								SubObjectPath	Type		Reason			Message
+  ---------	--------	-----	----								-------------	--------	------			-------
+  3m		3m		1	{ibm.io/ibmc-file 31898035-3011-11e7-a6a4-7a08779efd33 }			Normal		Provisioning		External provisioner is provisioning volume for claim "default/my-persistent-volume-claim"
+  3m		1m		10	{persistentvolume-controller }							Normal		ExternalProvisioning	cannot find provisioner "ibm.io/ibmc-file", expecting that a volume for the claim is provisioned either manually or via external software
+  1m		1m		1	{ibm.io/ibmc-file 31898035-3011-11e7-a6a4-7a08779efd33 }			Normal		ProvisioningSucceeded	Successfully provisioned volume pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2</screen></info></step></steps>
+<postreq>永続ボリューム・オブジェクトが正常に作成され、永続ボリューム請求にバインドされました。
+これで、クラスター・ユーザーがポッドに<xref href="cs_apps_volume_claim.dita#cs_apps_volume_claim/mount" format="dita" scope="local">永続ボリューム請求をマウント</xref>して、永続ボリューム・オブジェクトへの読み書きを開始できるようになりました。
+</postreq></taskbody></task>

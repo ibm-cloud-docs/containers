@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tsTroubleshooting PUBLIC "-//IBM//DTD DITA Troubleshooting//EN"
+ "troubleshooting.dtd">
+<!--http://w3.opensource.ibm.com/projects/ditatroublespec/ -->
+<!--This DITA specialized document type is currently not supported by the Authoring Tools development team. Press the F1 key for online help on the tags, or see the Authoring Tools Information Center for the complete set of help topics at http://submit.boulder.ibm.com/infocenter/idwb/v3r8m4/index.jsp.-->
+<tsTroubleshooting id="cs_troubleshoot" xml:lang="ja-jp" class="- topic/topic tsTroubleshooting/tsTroubleshooting ">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> での Kubernetes クラスターおよびアプリのトラブルシューティング <ph conref="cs_conref.dita#links/release"></ph></title>
+<titlealts>
+<navtitle>クラスターのトラブルシューティング</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> での Kubernetes クラスターおよびアプリのトラブルシューティング</searchtitle></titlealts><abstract>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を使用していて問題や疑問が生じた場合は、情報を検索するか、フォーラムを通じて質問することにより、支援を受けることができます。
+</shortdesc></abstract>
+<prolog>
+<metadata>
+<keywords><indexterm>クラスター</indexterm><indexterm>トラブルシューティング</indexterm><indexterm>IBM Bluemix Container Service</indexterm><indexterm>Kubernetes</indexterm></keywords></metadata></prolog></tsTroubleshooting>

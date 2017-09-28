@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN" "ibm-concept.dtd">
+<concept id="a8_component_ov" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> の <keyword conref="a8_entities.dita#a8_entities/a8"></keyword> について</title>
+<titlealts>
+<navtitle>製品情報</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> の <keyword conref="a8_entities.dita#a8_entities/a8"></keyword> コンポーネントの概要</searchtitle></titlealts>
+<shortdesc><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> でマイクロサービスを管理するための複数のコンポーネントで構成されています。</shortdesc>
+<conbody>
+<section><title>機能の概要</title>
+<p><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> には、以下のコンポーネントがあります。
+<dl>
+<dlentry>
+<dt>コントロール・プレーン</dt>
+<dd>コントロール・プレーンは、サービスの登録とルーティング・ルールを管理します。
+<keyword conref="a8_entities.dita#a8_entities/a8"></keyword> コントロール・プレーンは、以下の 2 つのコンポーネントで構成されています。<dl>
+<dlentry>
+<dt>レジストリー</dt>
+<dd>マルチテナント・サービス・レジストリー。
+このレジストリーは、登録済みマイクロサービスを実行場所にかかわらず一元管理する可用性の高いレジストリーです。</dd></dlentry>
+<dlentry>
+<dt>コントローラー</dt>
+<dd>ルールの構成、要求の経路、障害の注入などのための API を備えたマルチテナント・コントローラー。
+これらのフィーチャーにより、カナリア・テスト、Red/Black デプロイメント、A/B テスト、回復力テストなどのテスト機能を使用できるようになります。</dd></dlentry></dl></dd></dlentry>
+<dlentry>
+<dt><keyword conref="a8_entities.dita#a8_entities/Sidecar"></keyword></dt>
+<dd><keyword conref="a8_entities.dita#a8_entities/sidecar"></keyword>・コンポーネントは、マイクロサービスの登録、統合、管理を簡単に行えるようにするバイナリー・ファイルのセットです。
+</dd>
+<dd><keyword conref="a8_entities.dita#a8_entities/sidecar"></keyword>のバイナリー・ファイルは、マイクロサービスと同じコンテナー・イメージに含めることも、
+マイクロサービスのコンテナー・イメージと一緒に実行する別のコンテナー・イメージに含めることもできます。
+これらのバイナリー・ファイルによって、サービスの登録や検出、他のマイクロサービスへの要求のルーティングを自動で実行できるようになります。</dd>
+<dd><p>また、<keyword conref="a8_entities.dita#a8_entities/sidecar"></keyword>は <keyword conref="a8_entities.dita#a8_entities/a8"></keyword> コントロール・プレーンと通信して、すべての使用可能なマイクロサービスを認識し、それらのマイクロサービスにルーティングする方法を理解します。このルーティング情報は、ロード・バランシングと要求の転送を行う<keyword conref="a8_entities.dita#a8_entities/sidecar"></keyword>内の OpenResty ベースの Nginx プロキシー・サーバーにも渡されます。</p>
+<p><keyword conref="a8_entities.dita#a8_entities/sidecar"></keyword>は、以下の機能を提供します。<ul>
+<li>マイクロサービスの登録と登録更新の自動化</li>
+<li><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> に登録された宛先マイクロサービスへの API 要求の転送</li>
+<li><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> に複数のインスタンスが登録されているマイクロサービスに対する呼び出しのロード・バランシング</li><!--&lt;li&gt;Dynamically select a microservice version by using routing rules for when multiple versions of a microservice are registered in &lt;keyword conref="a8_entities.dita#a8_entities/a8"/&gt;.&lt;/li&gt;--></ul></p></dd>
+<dd><keyword conref="a8_entities.dita#a8_entities/sidecar"></keyword>について詳しくは、<xref href="http://www.amalgam8.io/docs/sidecar.html" format="html" scope="external"><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> サイドカーの使用方法の資料</xref>を参照してください。</dd>
+<dd><keyword conref="a8_entities.dita#a8_entities/sidecar"></keyword>に構成できる環境変数について詳しくは、<xref href="http://www.amalgam8.io/docs/sidecar-configuration.html" format="html" scope="external"></xref>を参照してください。</dd></dlentry>
+<dlentry>
+<dt>CLI</dt>
+<dd><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> CLI を使用してコントローラーの照会と管理を行い、マイクロサービスのルーティング・ルールの定義や管理、実行中のマイクロサービスへの障害や遅延の注入を行うことができます。</dd></dlentry>
+<dlentry>
+<dt>REST API</dt>
+<dd><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> REST API を使用して、コントロール・プレーンをプログラムで管理することができます。
+以下のタスクを実行できます。<ul>
+<li>レジストリーにマイクロサービスを登録する、登録を検出する、保守する。</li>
+<li>登録したマイクロサービスに要求をルーティングする方法についてのルールとアクションを、コントローラーで定義して管理する。</li></ul></dd>
+<dd>アプリケーションやマイクロサービスで直接 API を使用して、<keyword conref="a8_entities.dita#a8_entities/a8"></keyword> による統合や管理を行うことができます。</dd></dlentry></dl></p></section>
+<section><title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> の <keyword conref="a8_entities.dita#a8_entities/a8"></keyword></title>
+<p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> では、<keyword conref="a8_entities.dita#a8_entities/a8"></keyword> マイクロサービス・プラットフォームを組織のスペースにデプロイします。
+<keyword conref="a8_entities.dita#a8_entities/a8"></keyword> を <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> にデプロイする方法については、<xref href="a8_solution_bluemix.dita"></xref>を参照してください。</p>
+<p>コントロール・プレーンのコンポーネントは、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerfull"></keyword> 内のコンテナー・グループとしてデプロイします。
+<keyword conref="a8_entities.dita#a8_entities/a8"></keyword> を <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> で実行すると、コンポーネントのロギング、モニタリング、自動サイズ調整などを行う DevOps のフィーチャーが自動的に取得されます。</p>
+<p><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> をデプロイしたら、<keyword conref="a8_entities.dita#a8_entities/a8"></keyword> コントロール・プレーンのレジストリーにマイクロサービス・インスタンスを登録したり、
+登録を検索、削除したり、バージョンやコンテンツに基づくルーティング・ルールを定義したりできます。</p>
+<p><note>登録できるマイクロサービスは、<keyword conref="a8_entities.dita#a8_entities/a8"></keyword> マイクロサービス・プラットフォームをデプロイして構成した <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 組織のスペースと同じスペースで実行するものだけです。
+</note></p>
+<p>以下の図は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> に <keyword conref="a8_entities.dita#a8_entities/a8"></keyword> マイクロサービス・プラットフォームを統合する機能コンポーネントを示しています。</p>
+<p><image href="images/a8_components.png" alt="Amalgam8" width="700" placement="inline"><alt><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> の機能ビュー</alt></image></p>
+<p>アプリケーションや他のマイクロサービスで使用できるように <keyword conref="a8_entities.dita#a8_entities/a8"></keyword> 内にマイクロサービスを配置するには、
+<keyword conref="a8_entities.dita#a8_entities/a8"></keyword> にマイクロサービスを登録し、定期的に登録を更新する必要があります。
+<keyword conref="a8_entities.dita#a8_entities/sidecar"></keyword>・コンポーネントを使用して、この登録と更新を自動化することができます。</p>
+<p><keyword conref="a8_entities.dita#a8_entities/sidecar"></keyword>・コンポーネントは、<keyword conref="a8_entities.dita#a8_entities/a8"></keyword> コントロール・プレーンと通信して、
+すべてのマイクロサービスを認識し、それらのマイクロサービスに要求をルーティングする方法を理解します。
+そして、ルーティング情報が、<keyword conref="a8_entities.dita#a8_entities/sidecar"></keyword>・コンポーネント内にある <codeph>OpenResty ベースの Nginx プロキシー・サーバー</codeph>に渡され、このプロキシー・サーバーがロード・バランシングと要求の転送を行います。</p>
+<p><keyword conref="a8_entities.dita#a8_entities/sidecar"></keyword>・コンポーネントは、マイクロサービスのコンテナー・イメージまたは別のコンテナー・イメージにデプロイするバイナリー・ファイルのセットです。
+マイクロサービスをコンテナーとして <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> にデプロイすると、<keyword conref="a8_entities.dita#a8_entities/sidecar"></keyword>・プロセスがアプリとは別個に実行され、
+サービスの登録、検出、他のマイクロサービスへのルーティング要求を管理します。</p>
+<p><image href="images/a8_components2.png" alt="Amalgam8" width="700" placement="inline"><alt><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> を使用する場合の役割とタスク</alt></image></p>
+<p>サービスの登録、検出、統合は、<keyword conref="a8_entities.dita#a8_entities/sidecar"></keyword>・プロセスを使用して行います。
+登録したマイクロサービスに適用するルーティング・ルールの構成と管理は、<keyword conref="a8_entities.dita#a8_entities/a8"></keyword> CLI を使用して行います。</p></section>
+<section><title><keyword conref="a8_entities.dita#a8_entities/a8"></keyword> を <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> で実行する理由</title>
+<p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> は、アプリケーションやサービスを作成、実行、管理するためのオープン・スタンダードのクラウド・プラットフォームです。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> を使用すると、クラウド環境でのアプリケーション開発を加速できます。</p>
+<ul>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> には、統合、セキュリティー、トランザクションなどの重要な機能を提供するサービスが用意されています。</li>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> と一緒に Platform as a Service (PaaS) 環境をランタイムの 1 つとして提供しています。</li>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> は、新しいアプリケーション開発と DevOps 手法を促進するために <keyword conref="a8_entities.dita#a8_entities/cloudfoundry"></keyword> オープン・ソース・テクノロジーを利用しています。</li>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> は、ワークロードが柔軟で最適化されているうえに、
+継続的可用性を実現しています。また、標準装備のサービスとホスティング機能を使用してアプリケーションの配布と管理を簡単に実行できます。
+</li></ul></section></conbody></concept>

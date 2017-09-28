@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<!--This topic is a shell to allow container_binding_ov to live under container services.-->
+<task id="container_integrations_binding" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI からのサービスのバインド</title>
+<titlealts>
+<navtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI によるサービスのバインド</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI により <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> <wintitle>カタログ</wintitle>にあるサービスをコンテナーにバインドする</searchtitle></titlealts>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix"></keyword> はサービスのリストを持ち、アプリ開発者に代わってそれらのサービスを管理します。コンテナーで使用する <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスを追加するためには、このサービスのインスタンスを要求し、サービスをコンテナーにバインドする必要があります。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>IBM Containers</indexterm><indexterm>コンテナー</indexterm><indexterm>サービス</indexterm><indexterm>Bluemix</indexterm><indexterm>インテグレーション</indexterm><indexterm>バインド</indexterm></keywords></metadata></prolog>
+<taskbody>
+<prereq>始めに、サービスを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースに追加します。
+詳しくは、<xref href="../services/reqnsi.html#req_instance" format="html" scope="peer">新しいサービス・インスタンスの要求</xref>を参照してください。
+</prereq>
+<context><note type="restriction" id="restriction">一部の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスは、コンテナーへの直接バインディングをサポートしていないため、コンテナー作成時にエラーになります。
+その場合は、まず、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスを Cloud Foundry アプリにバインドしてから、そのアプリをコンテナーにバインドします。
+このアプリが、サービスとコンテナーの間のブリッジとして動作します。詳細については、<xref href="troubleshoot/ts_bridge_app.dita" format="dita" scope="local"></xref>を参照してください。</note></context>
+<steps>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> <wintitle>カタログ</wintitle>で、<uicontrol>「コンテナー」</uicontrol>をクリックします。</cmd></step>
+<step>
+<cmd>コンテナー・イメージをクリックします。</cmd></step>
+<step>
+<cmd><uicontrol>「詳細オプション」</uicontrol>を展開し、<uicontrol>「サービスの選択」</uicontrol>で使用可能な <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスを選択します。</cmd></step>
+<step>
+<cmd><uicontrol>「追加」</uicontrol>をクリックします。
+</cmd>
+<info><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスが<uicontrol>「コンテナーに既にバインド済み」</uicontrol>フィールドに表示されます。</info></step>
+<step>
+<cmd>他のフィールドに入力して、<uicontrol>「作成」</uicontrol>をクリックします。</cmd></step>
+<step>
+<cmd>コンテナーが作成されたら、VCAP_SERVICES 情報が表示されることを確認します。
+</cmd>
+<info>コンテナーの「概要」タブで、バインドしたサービスを見つけ、<uicontrol>「資格情報の表示」</uicontrol>をクリックします。
+表示される情報は VCAP_SERVICES です。
+</info></step></steps></taskbody><?tm 1435623319 0?></task>

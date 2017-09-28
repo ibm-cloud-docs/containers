@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="cs_beta_migrate_access" xml:lang="ja-jp">
+<title>Kubernetes ベータ版クラスターへのアクセス</title>
+<shortdesc>ベータ版ホストを使用することにより、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で Kubernetes ベータ版クラスターにアクセスできます。</shortdesc>
+<taskbody>
+<context id="context_mz3_jp4_zz"></context>
+<steps id="steps_nz3_jp4_zz">
+<step conref="cs_cli_configure.dita#cs_cli_configure/bx_login">
+<cmd></cmd></step>
+<step>
+<cmd>ベータ版環境にログインします。</cmd>
+<info>
+<codeblock>bx cs init --host https://us-south-beta.containers.bluemix.net</codeblock></info></step>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> ベータ版のクラスターをリストします。</cmd>
+<info>
+<codeblock>bx cs clusters</codeblock></info></step></steps></taskbody></task>

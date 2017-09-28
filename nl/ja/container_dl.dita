@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN" "ibm-concept.dtd">
+<concept id="container_dl" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Dedicated および <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Local における <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword></title>
+<titlealts>
+<navtitle>Dedicated と Local</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Dedicated および <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Local における <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword></searchtitle></titlealts>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Dedicated および <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Local で使用可能です。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>IBM Containers</indexterm><indexterm>コンテナー</indexterm><indexterm>Dedicated</indexterm><indexterm>Local</indexterm></keywords></metadata></prolog>
+<conbody></conbody>
+<concept id="service_hardware_req">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Local での <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のハードウェア要件</title>
+<shortdesc></shortdesc>
+<conbody>
+<p><dl>
+<dlentry>
+<dt>ハードウェアの基本要件</dt>
+<dd>デフォルトでは、基本セットアップはコンテナー計算の容量として 64GB のメモリーを使用して構成されます。<ol>
+<li>ご使用の環境が <xref href="../local/index.html#local" format="html" scope="peer"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Local のハードウェア要件</xref>を満たしている必要があります。</li>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を使用するには、セットアップごとに以下の要件<ph audience="blue">のうち 1 つ</ph>を満たすコントロール・プレーンが必要です。モニタリング、ロギングを行うには、同じハードウェア要件を満たす、2 つのインスタンスも必要です。<ul>
+<li>VMware: 3 つの ESX サーバーと、各サーバーに 256GB のメモリーと 32 個の物理コア (ハイパースレッドが使用可能な 64 vCore)。3 つのサーバーにかかる、4TB のクラスター共有ストレージが必要です。</li>
+<li audience="blue">Bluebox: 3 つの Bluebox Enterprise サーバーと、各サーバーに 256GB のメモリー、32 個の物理コア (ハイパースレッドが使用可能な 64 vCore)、2.4TB のローカル・ストレージ。</li></ul></li></ol></dd></dlentry>
+<dlentry>
+<dt>追加ハードウェアの要件</dt>
+<dd>最大 12 まで拡張 VM を追加すると、ハードウェアを追加しなくても、コンテナー計算の容量を 16GB ずつ最大 256GB まで増やすことができます。各 VM には 20GB のメモリー、4 つの vCPU、200GB のディスク・スペースがなければなりません。しかし、クラスター上に 10 個の拡張 VM をデプロイするたびに、ネットワーキングの処理のために追加の VM が 1 つ必要になります。このネットワーキング VM には 4 つの vCPU、16GB のメモリー、250GB のディスク・スペースが必要です。</dd></dlentry></dl></p></conbody>
+<concept id="dl_quota" audience="blue">
+<title>目標額管理</title>
+<shortdesc>パブリック <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> の場合は API とユーザー・インターフェースを使用して割り当て量を管理できますが、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Local と <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Dedicated の場合は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 管理 CLI またはユーザー・インターフェースを使用できます。</shortdesc>
+<conbody></conbody></concept></concept>
+<concept id="rellinks">
+<title>関連リンク</title>
+<related-links>
+<linklist id="general">
+<title>関連リンク</title>
+<link href="../dedicated/index.html#dedicated" format="html" scope="peer">
+<linktext><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Dedicated</linktext></link>
+<link href="../local/index.html#local" format="html" scope="peer">
+<linktext><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> ローカル</linktext></link></linklist></related-links></concept></concept>

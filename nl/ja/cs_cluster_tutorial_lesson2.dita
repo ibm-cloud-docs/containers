@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE tutorialLesson PUBLIC "-//IBM//DTD DITA Tutorial Lesson//EN"
+ "tutorialLesson.dtd">
+<tutorialLesson id="cs_cluster_tutorial_lesson2" xml:lang="ja-jp" class="- topic/topic task/task tutorialLesson/tutorialLesson ">
+<title>レッスン 2: クラスター環境をセットアップする</title>
+<titlealts>
+<searchtitle>チュートリアル・レッスン 2: Kubernetes クラスターを作成し、レジストリーをセットアップし、シークレット <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を追加する
+</searchtitle></titlealts>
+<shortdesc>Kubernetes クラスターを作成し、<ph conref="cs_conref.dita#links/registry_name"></ph> でプライベート・イメージ・リポジトリーをセットアップし、シークレットをクラスターに追加して、アプリが Watson Tone Analyzer サービスにアクセスできるようにします。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>チュートリアル</indexterm><indexterm>Kubernetes</indexterm><indexterm>クラスター</indexterm></keywords></metadata></prolog>
+<taskbody>
+<prereq></prereq>
+<steps>
+<step>
+<cmd><ph conref="cs_conref.dita#links/free_cluster"></ph>の Kubernetes クラスターを作成します。</cmd>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> cluster-create --name <varname>pr_firm_cluster</varname></codeblock></info>
+<info><ph conref="cs_conref.dita#links/free_cluster"></ph>クラスターでは、コンテナー・ポッドをデプロイするための 1 つのワーカー・ノードが提供されます。ワーカー・ノードは、アプリを実行するコンピュート・ホストで、通常は仮想マシンです。
+アプリを実稼働環境実動で実行するときには、複数のワーカー・ノードにアプリのレプリカを複数配置して、アプリの可用性を高めます。
+<note>ワーカー・ノード・マシンが配列され、クラスターがセットアップされて自分のプロビジョンされるまでに、最大 15 分かかります。</note></info></step>
+<step>
+<cmd>独自のプライベート・イメージ・リポジトリーを <ph conref="cs_conref.dita#links/registry_name"></ph> にセットアップすることによって、Docker イメージを安全に保管し、すべてのクラスター・ユーザーと共有します。</cmd>
+<info><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 内のプライベート・イメージ・リポジトリーは、このステップで設定する名前空間によって識別されます。イメージ・リポジトリーの固有の URL を作成するために名前空間が使用されます。開発者はこれを使用してプライベート Dockerイメージにアクセスできます。各アカウントは複数の名前空間を作成して、イメージをグループ化したり編成したりできます。例えば、部門ごと、環境ごと、またはアプリごとに名前空間を作成できます。
+<p>この例で PR 会社はイメージ・リポジトリーを <ph conref="cs_conref.dita#links/registry_name"></ph> に 1 つだけを作成するので、アカウント内のすべてのイメージをグループする名前空間として <varname>pr_firm</varname> を選択します。<varname>&lt;your_namespace&gt;</varname> を任意の名前空間に置き換えてください。チュートリアルに関係する名前空間にする必要はありません。
+</p></info>
+<info>
+<codeblock>bx cr namespace-add <varname>&lt;your_namespace&gt;</varname></codeblock></info></step>
+<step>
+<cmd>次のステップに進む前に、ワーカー・ノードのデプロイメントが完了したことを確認します。
+</cmd>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> workers <varname>pr_firm_cluster</varname></codeblock><ph audience="unknown">ワーカー・ノードのデプロイメントは以下の状況を経て進行します。
+</ph>
+<lines conref="cs_cli_reference.dita#cs_commands/node_statuses" audience="unknown"></lines>
+<p>ワーカー・ノードのプロビジョニングが完了すると、状況が <uicontrol>Ready</uicontrol> に変わり、今後のチュートリアルで使用する <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスのバインドを開始できます。</p>
+<screen>ID                                                 Public IP       Private IP       Machine Type   State    Status   
+kube-dal10-pafe24f557f070463caf9e31ecf2d96625-w1   169.48.131.37   10.177.161.132   free           <ph conref="cs_conref.dita#links/state"></ph>    <ph conref="cs_conref.dita#links/status"></ph>   </screen></info></step>
+<step>
+<cmd>CLI でクラスターのコンテキストを設定します。</cmd>
+<info>クラスターの作業を行うためにコンテナー CLI にログインするたびに、これらのコマンドを実行して、クラスターの構成ファイルのパスをセッション変数として設定する必要があります。
+Kubernetes CLI はこの変数を使用して、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 内のクラスターと接続するために必要なローカル構成ファイルと証明書を検索します。
+</info><substeps id="kubeconfig">
+<substep>
+<cmd>環境変数を設定して Kubernetes 構成ファイルをダウンロードするためのコマンドを取得します。
+</cmd>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> cluster-config <varname>pr_firm_cluster</varname></codeblock>構成ファイルのダウンロードが完了すると、そのローカルの Kubernetes 構成ファイルのパスを環境変数として設定するために使用できるコマンドが表示されます。
+</info>
+<info>
+<p>OS X の場合の例:
+</p>
+
+<screen>export KUBECONFIG=/Users/<varname>&lt;user_name&gt;</varname>/.bluemix/plugins/container-service/clusters/<varname>pr_firm_cluster</varname>/kube-config-prod-dal10-<varname>pr_firm_cluster</varname>.yml</screen></info></substep>
+<substep>
+<cmd><codeph>KUBECONFIG</codeph> 環境変数を設定するためのコマンドとしてターミナルに表示されたものを、コピーして貼り付けます。
+</cmd></substep>
+<substep>
+<cmd><codeph>KUBECONFIG</codeph> 環境変数が適切に設定されたことを確認します。
+</cmd>
+<info>
+<p>OS X の場合の例:
+<codeblock>echo $KUBECONFIG</codeblock>出力:
+<screen>/Users/<varname>&lt;user_name&gt;</varname>/.bluemix/plugins/container-service/clusters/<varname>pr_firm_cluster</varname>/kube-config-prod-dal10-<varname>pr_firm_cluster</varname>.yml</screen></p></info></substep>
+<substep>
+<cmd>Kubernetes CLI サーバーのバージョンを調べて、ご使用のクラスターで <codeph>kubectl</codeph> コマンドが正常に実行することを確認します。</cmd>
+<info>
+<codeblock>kubectl version  --short</codeblock>出力例:
+<codeblock>Client Version: v<ph conref="cs_conref.dita#links/kubernetes_version_number"></ph>
+Server Version: v<ph conref="cs_conref.dita#links/kubernetes_version_number"></ph></codeblock></info></substep></substeps></step>
+<step>
+<cmd>Watson Tone Analyzer <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスをクラスターに追加します。
+</cmd>
+<info>Watson Tone Analyzer などの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスを使用すると、既に開発された機能をアプリで活用できます。
+クラスターにバインドされているすべての <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスは、そのクラスターにデプロイされたアプリで使用できます。
+アプリで使用する <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスごとに、以下の手順を繰り返してください。
+</info><substeps>
+<substep>
+<cmd>Watson Tone Analyzer サービスを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウントに追加します。
+</cmd>
+<info>
+<note>Watson Tone Analyzer サービスをアカウントに追加すると、そのサービスが無料ではないことを示すメッセージが表示されます。
+API 呼び出しを制限している場合には、このチュートリアルによって Watson サービスからの課金は発生しません。
+<xref href="https://www.ibm.com/watson/developercloud/tone-analyzer.html#pricing-block" format="html" scope="external">Watson Tone Analyzer の料金情報を確認</xref>することができます。
+</note></info>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx">)</ph> service create tone_analyzer standard <varname>mytoneanalyzer</varname></codeblock></info></substep>
+<substep>
+<cmd>Watson Tone Analyzer インスタンスを <codeph>default</codeph> という名前の Kubernetes クラスター名前空間にバインドします。
+</cmd>
+<info>名前空間を使用して、Kubernetes リソースへのユーザー・アクセスをグループ化して管理することができます。
+Kubernetes 名前空間は、以前に作成したレジストリー名前空間とは異なります。</info>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> cluster-service-bind <varname>pr_firm_cluster</varname> default <varname>mytoneanalyzer</varname></codeblock></info>
+<info>出力:
+<screen>$ bx cs cluster-service-bind pr_firm_cluster default mytoneanalyzer
+Binding service instance to namespace...
+OK
+Namespace:	default
+Secret name:	binding-mytoneanalyzer</screen></info></substep></substeps></step>
+<step>
+<cmd>クラスターの名前空間内に Kubernetes シークレットが作成されたことを確認します。
+</cmd>
+<info>すべての <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスは、ユーザー名、パスワード、コンテナーがサービスにアクセスするために使用する URL など、サービスに関する機密情報を含んだ JSON ファイルによって定義されます。
+この情報を安全に保管するために、Kubernetes シークレットが使用されます。
+この例では、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウントにプロビジョンされる、Watson Tone Analyzer インスタンスにアクセスするための資格情報がシークレットに格納されます。
+</info>
+<info>
+<codeblock>kubectl get secrets --namespace=default</codeblock></info>
+<info>出力:
+<screen>NAME                       TYPE                                  DATA      AGE
+binding-<varname>mytoneanalyzer</varname>     Opaque                                1         1m
+bluemix-default-secret     kubernetes.io/dockercfg               1         1h
+default-token-kf97z        kubernetes.io/service-account-token   3         1h</screen></info></step></steps>
+<result>おつかれさまでした。クラスターを作成して構成したので、ローカル環境でアプリをクラスターにデプロイする作業を開始する用意が整いました。
+</result>
+<postreq><p><dl>
+<dlentry>
+<dt>次の作業</dt>
+<dd><ul>
+<li><xref href="https://bluemix-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php" format="html" scope="external">クイズに答えて知識を試してみましょう!</xref></li>
+<li><xref href="cs_apps_tutorial.dita" format="dita" scope="local"></xref>を試して、作成したクラスターに PR 会社のアプリをデプロイします。
+</li>
+<li audience="unknown"><varname>mytoneanalyzer</varname> の作業を続け、<xref href="cs_security_cluster_tutorial.dita" format="dita" scope="local"></xref>を引き続き行います。
+</li></ul></dd></dlentry></dl></p></postreq></taskbody></tutorialLesson>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="va_reviewing_container" xml:lang="ja-jp">
+<title>コンテナー・レポートの検討</title>
+<titlealts>
+<navtitle>コンテナー・レポートの検討</navtitle>
+<searchtitle>Vulnerability Advisor コンテナー・レポートの検討</searchtitle></titlealts>
+<shortdesc>ダッシュボードでコンテナーの状況を調べて、そのセキュリティーが組織のポリシーに準拠しているかどうかを判別できます。
+コンテナーの Vulnerability Advisor レポートを検討することもできます。
+それには、脆弱なパッケージとセキュアでないコンテナーやアプリケーションの設定の詳細、そしてコンテナーが組織ポリシーに準拠しているかどうかが示されます。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>Vulnerability Advisor</indexterm><indexterm>脆弱性</indexterm><indexterm>コンテナーのセキュリティー</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context><p><uicontrol>「ポリシーの状況 (POLICY STATUS)」</uicontrol>フィールドを調べて、スペースで実行中のコンテナーが組織ポリシーに準拠し続けていることを確認します。状況は、以下のいずれかの条件で示されます。
+<ul>
+<li><wintitle>ポリシーに準拠している (Compliant with Policy)</wintitle> - セキュリティーの点でも構成の点でも問題は検出されませんでした。
+</li>
+<li><wintitle>ポリシーに準拠していない (Not Compliant with Policy)</wintitle> - Vulnerability Advisor によってセキュリティーまたは構成の潜在的な問題が検出されたため、このコンテナーはポリシーに準拠していません。
+脆弱イメージのデプロイメントが組織ポリシーで許可されている場合、脆弱な状態 (<wintitle>「デプロイに注意が必要」</wintitle>) のままイメージがデプロイされている可能性があり、それをデプロイしたユーザーに警告が送信されます。
+</li>
+<li><wintitle>評価不完全 (Incomplete Assessment)</wintitle> - スキャンが未完了です。
+スキャンはまだ実行中である可能性があります。または、そのコンテナー・インスタンスのオペレーティング・システムが非互換である可能性があります。
+</li></ul></p>
+<p><uicontrol>「ポリシーの状況」</uicontrol>が<wintitle>「ポリシーに準拠している (Compliant with Policy)」</wintitle>でない場合は、コンテナーの Vulnerability Advisor レポートを参照し、報告されているセキュリティーまたは構成の問題に対処して (ある場合)、コンテナーが可能な限りセキュアであることを確認します。そのためには、以下の手順を実行します。
+</p></context>
+<steps>
+<step>
+<cmd>Bluemix ダッシュボードで、調べるコンテナーを選択します。</cmd></step>
+<step>
+<cmd><wintitle>「Vulnerability Advisor」</wintitle>ペインで、<uicontrol conref="va_conref.dita#va_conref/v_report"></uicontrol>をクリックします。</cmd></step>
+<step>
+<cmd>各セクションを確認して、イメージ内の各パッケージにセキュリティーと構成の問題がないかどうかを調べます。</cmd>
+<info>
+<p><ul id="report">
+<li><uicontrol conref="va_conref.dita#va_conref/policy"></uicontrol><p>組織管理者が設定したポリシーにコンテナーが従っているかどうかがリストされます。
+</p></li>
+<li><uicontrol conref="va_conref.dita#va_conref/ra"></uicontrol><p>コンテナーに 1 つ以上の脆弱性がある場合、検出された脆弱性のリスク評価として Vulnerability Advisor が計算した値がこのセクションに表示されます。
+リスクは <xref href="https://www.first.org/cvss" format="html" scope="external">CVSS</xref> 計算器、および <xref href="https://exchange.xforce.ibmcloud.com/" format="html" scope="external"><keyword conref="va_conref.dita#va_conref/xforce"></keyword></xref> テクノロジーを使用して計算されます。
+</p></li>
+<li><uicontrol conref="va_conref.dita#va_conref/vulns"></uicontrol><p>脆弱性に関する既知の問題が含まれるパッケージがリストされます。既知の問題は、<xref href="va_index.dita"></xref> にリストされている Docker イメージ・タイプの公開セキュリティー通知に基づいて、毎日更新されます。
+脆弱パッケージがスキャンに合格するようにするには通常、脆弱性の修正が反映された新しいバージョンのパッケージが必要です。同じパッケージに複数の脆弱性がリストされることがあり、その場合は、1 回のパッケージのアップグレードで複数の問題が修正されることがあります。セキュリティー通知コードをクリックして、パッケージに関する詳細情報と、パッケージを更新するための手順を確認してください。
+</p></li>
+<li><uicontrol conref="va_conref.dita#va_conref/bps"></uicontrol><p>コンテナーのセキュリティーを高めるための実施可能な提案事項がリストされます。<wintitle>「修正アクション (Corrective Action)」</wintitle>列に、セキュリティーを向上させる方法についての説明があります。</p></li>
+<li><uicontrol conref="va_conref.dita#va_conref/secconfig"></uicontrol><p>非セキュアなコンテナーのアプリケーションの設定がリストされます。
+<wintitle>「修正アクション (Corrective Action)」</wintitle>列に、セキュリティーを向上させる方法についての説明があります。</p></li>
+<li><uicontrol conref="va_conref.dita#va_conref/instances"></uicontrol><p>このコンテナーを作成するために使用されたイメージが表示されます。
+</p></li></ul></p>
+
+<p>リストされた項目ごとに、修正アクションまたは提案事項が示されます。</p></info></step>
+<step>
+<cmd>問題を解決するためのコンテナーの更新方法を決定します。</cmd>
+<info>
+<note type="important">コンテナー・イメージの問題を修正するには、古いインスタンスを削除して再デプロイする必要があります。
+これにより、既存のコンテナー内にあるデータは失われます。
+コンテナーを再デプロイするための適切な方法を選択するには、コンテナーのアーキテクチャーを十分理解しておく必要があります。
+</note></info>
+<stepxmp>
+<p>以下に例を示します。<ul>
+<li>コンテナーとそれが計算するデータが分離されている場合は、コンテナーを停止して削除し、必要な変更をイメージに加えた後に再デプロイすることで、データ損失を最小にすることができます。
+</li>
+<li><xref href="https://console.bluemix.net/docs/services/ActiveDeploy/index.html" format="html" scope="external"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/activedeployshort"></keyword></xref> や <xref href="https://console.bluemix.net/docs/services/DeliveryPipeline/index.html" format="html" scope="external"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/deliverypipeline"></keyword></xref> など、
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスを使用して、脆弱なコンテナー・インスタンスの更新に役立てることができます。
+</li>
+<li>マイクロサービス・アーキテクチャーでは、別のコンテナー・インスタンスにトラフィックをルーティングしておいて、その間にセキュリティーまたは構成の問題点を修正してから、新しいイメージを red/black デプロイメントにプッシュすることもできます。
+<xref href="https://console.bluemix.net/docs/services/a8/index.html" format="html" scope="external">Amalgam8</xref> を参照してください
+</li></ul></p></stepxmp></step>
+<step>
+<cmd><uicontrol conref="va_conref.dita#va_conref/v_assess"></uicontrol>レポートに示された問題を修正し、選択した方法に応じて、イメージを再ビルドするかコンテナーを再デプロイします。
+</cmd>
+<info>Dockerfile の一部の問題は、<xref href="va_report.dita" format="dita"></xref>に記載されているコードを使用して解決することができます。</info></step></steps></taskbody><?tm 1435623320 3?></task>

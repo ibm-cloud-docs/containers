@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE tutorialLesson PUBLIC "-//IBM//DTD DITA Tutorial Lesson//EN"
+ "tutorialLesson.dtd">
+<tutorialLesson id="container_ml_gettingstarted_tutorial_lesson_1" xml:lang="ja-jp" class="- topic/topic task/task tutorialLesson/tutorialLesson ">
+<title>レッスン 1: デフォルトでないログの場所を指定する</title>
+<titlealts>
+<searchtitle>レッスン 1: <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でデフォルトでないログの場所を指定する</searchtitle></titlealts>
+<shortdesc>このレッスンでは、<uicontrol>ibmliberty</uicontrol> イメージからコンテナーを作成し、モニターするログの場所を 2 つ含めます。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>ログ</indexterm><indexterm>コンテナー</indexterm><indexterm>クローラー</indexterm><indexterm>ロギング</indexterm><indexterm>kibana</indexterm><indexterm>チュートリアル</indexterm><indexterm>非デフォルト</indexterm></keywords></metadata></prolog>
+<taskbody>
+<prereq>開始する前に、<xref href="../../containers/container_cli_cfic_install.html" format="html" scope="external"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI とその要件をインストールします</xref>。
+それらはコンピューター上または VM 上にインストールできます。</prereq>
+<context>以下のログは、デフォルトで収集されます。<ul conref="container_ml_logs.dita#container_ml_logs/default_logs">
+<li></li></ul>このレッスンでコンテナーを作成するときには、デフォルトでないログの場所を指定して、
+以下のログの情報が <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のロギングおよびモニタリングのためのサービスに送られるようにします。</context>
+<steps>
+<stepsection>コンテナーを作成し、デフォルトでないログの場所を含めるには、以下のようにします。</stepsection>
+<step>
+<cmd>Cloud Foundry CLI にログインします。デフォルトでは、米国南部地域または最後にログインした地域にログインします。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> の特定の地域にログインするには、<codeph>–a</codeph> オプションを含めてください。</cmd>
+<info> 例:
+<codeblock>cf login</codeblock>
+<ul>
+<li>米国南部<pre>cf login -a api.ng.bluemix.net</pre></li>
+<li>英国<pre>cf login -a api.eu-gb.bluemix.net</pre></li>
+<li audience="unknown">シドニー<pre>cf login -a api.au-syd.bluemix.net</pre></li></ul></info></step>
+<step>
+<cmd>プロンプトに応じて、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> ID、パスワード、組織、およびスペースを入力します。</cmd></step>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI にログインします。</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> login</codeblock></info></step>
+<step>
+<cmd>オプション 2 から、環境変数をコピーして貼り付け、Docker ホストに <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> Docker デーモンを指定します。
+この設定によって、Bluemix で Docker を使用しているのにローカルで Docker を使用しているかのように、ネイティブの Docker コマンドを実行できます。
+この設定は、Docker コマンドに慣れているユーザーが、必要なときにのみ <ph conref="container_conref.dita#links/command_prefix"></ph> コマンドを使用したいという場合に役に立ちます。</cmd></step>
+<step>
+<cmd>イメージから単一コンテナーを作成し、デフォルトでないログの場所を含めるために <codeph>LOG_LOCATIONS</codeph> 環境変数を含めます。</cmd>
+<info> 単一コンテナーは、アプリやサービスの開発時に単純なテストを実行するためによく使用されます。</info>
+<info>
+<p>デフォルトでは、Docker のログとメッセージは、コンテナーの <filepath>/var/log/messages</filepath> フォルダーに保管され、
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のロギング・サービスに自動的にプッシュされます。
+このログ情報を Kibana で表示できるように、ロギング・サービスにカスタムの場所を追加するには、
+指定した場所からデータをプルしてロギング・サービスにプッシュするようにクローラーに命令する必要があります。
+そのため、コンテナーを作成するときに、ログ・ファイルの場所を定義する <codeph>LOG_LOCATIONS</codeph> 環境変数を追加する必要があります。
+</p>
+
+<p>以下のログの場所を <codeph>LOG_LOCATIONS</codeph> 環境変数に含めます。<ul>
+<li><filepath>/var/log/dpkg.log</filepath>: この <filepath>dpkg.log</filepath> ファイルを追加するのは、コンテナーの作成時に一般的に生成される標準の Ubuntu ログ・ファイルであり、クローラーが自動的に Kibana にプッシュするものではないからです。</li>
+<li><filepath>/liberty_logging_tutorial/liberty_logmet_tutorial.log</filepath>: このディレクトリーとログ・ファイルはまだ存在しません。アプリがコンテナー内に生成するログ・ファイルの例として、後で手動で作成します。</li></ul></p></info>
+<info>
+<p><codeblock>docker run -p 9080 -e "LOG_LOCATIONS=/var/log/dpkg.log,/liberty_logging_tutorial/liberty_logging_tutorial.log" --name <varname>liberty_logging_tutorial</varname> registry.<varname props="keyref(DomainName)">domain_name</varname>/ibmliberty:latest</codeblock></p></info>
+<info>
+<table frame="all" colsep="1" rowsep="1" id="table_lqp_hkm_2v">
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="1.0*"></colspec><colspec colnum="2" colname="c2" colwidth="1.0*"></colspec>
+<thead>
+<row>
+<entry namest="c1" nameend="c2"><ph conref="container_conref.dita#images/more_info"></ph> このコマンドの構成要素について</entry></row></thead>
+<tbody>
+<row>
+<entry>run</entry>
+<entry><p> 指定されたイメージからコンテナーを作成する run コマンド。
+</p></entry></row>
+<row>
+<entry>-p</entry>
+<entry><ph conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/port_desc"></ph> ここでは、Dockerfile の中でポート 27017 が指定されているため、ポート 9080 を公開します。</entry></row>
+<row>
+<entry>-e</entry>
+<entry><ph conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/group_create_env_desc"></ph>
+<p><ph conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/log_locations_desc"></ph></p></entry></row>
+<row>
+<entry>--name</entry>
+<entry>コンテナーの名前を定義します。
+ここでは、コンテナーの名前を <varname>liberty_logging_tutorial</varname> としました。</entry></row>
+<row>
+<entry><lines>registry.<varname props="keyref(DomainName)">domain_name</varname>/
+ibmliberty:latest</lines></entry>
+<entry>コンテナーの作成に使用するイメージ。
+このケースでは、ibmliberty イメージを指定しました。</entry></row></tbody></tgroup></table></info></step>
+<step>
+<cmd>コンテナーが実行を開始するまで待ちます。</cmd>
+<info><codeph>docker ps</codeph> を実行して、コンテナーの状況を確認できます。
+コンテナーが作成されると (しばらく時間がかかる場合があります)、そのコンテナーが Bluemix で開始されます。作成が完了すると、状況が <uicontrol>「実行中」</uicontrol> になります。</info></step></steps>
+<result><p>
+コンテナーの作成と、デフォルトでないログの場所の追加が、正常に完了しました。</p>
+<p>テスト・メッセージをログ・ファイルに送信するには、次のレッスンに進んでください。</p></result></taskbody></tutorialLesson>

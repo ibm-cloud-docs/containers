@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN" "ibm-concept.dtd">
+<concept id="cs_planning_images" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword>
+<ph conref="cs_conref.dita#links/release"></ph> で使用するイメージ・レジストリー</title>
+<titlealts>
+<navtitle>イメージ・レジストリー</navtitle></titlealts>
+<shortdesc>Docker イメージは、作成するすべてのコンテナーの基礎となるものです。イメージは、Dockerfile (イメージをビルドするための指示が入ったファイル) から作成されます。Dockerfile の別個に保管されている指示の中で、ビルド成果物 (アプリ、アプリの構成、その従属関係) が参照されることもあります。</shortdesc>
+<conbody>
+<p>イメージは通常、レジストリーに保管されます。だれでもアクセスできるレジストリー (パブリック・レジストリー) を使用することも、小さなグループのユーザーだけにアクセスを限定したレジストリー (プライベート・レジストリー) をセットアップすることもできます。
+Docker Hub などのパブリック・レジストリーは、Docker および Kubernetes の入門として最初のコンテナー化アプリをクラスター内に作成する時に使用できます。
+しかしエンタープライズ・アプリケーションを作成する場合は、許可されていないユーザーが勝手にイメージを使用したり変更したりすることがないように、 <ph conref="cs_conref.dita#links/registry_name"></ph> で提供されているようなプライベート・レジストリーを使用してください。
+プライベート・レジストリーはクラスター管理者がセットアップする必要があります。プライベート・レジストリーにアクセスするための資格情報をクラスター・ユーザーに提供する必要があるためです。
+</p>
+<p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> では、複数のレジストリーを使用してアプリをクラスターにデプロイできます。
+<table frame="all" colsep="1" rowsep="1" id="table_ats_q4b_ty">
+<title>パブリック・イメージ・レジストリーおよびプライベート・イメージ・レジストリーのオプション</title>
+<tgroup cols="3"><colspec colnum="1" colname="c1" colwidth="1.0*"></colspec><colspec colnum="2" colname="c2" colwidth="1.0*"></colspec><colspec colnum="3" colname="c3" colwidth="1.0*"></colspec>
+<thead>
+<row>
+<entry>レジストリー</entry>
+<entry>説明</entry>
+<entry>利点</entry></row></thead>
+<tbody>
+<row>
+<entry><xref href="../services/Registry/index.html" format="html" scope="peer"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/registrylong"></keyword></xref></entry>
+<entry>このオプションを使用すると、保護された独自の Docker イメージ・リポジトリーを <ph conref="cs_conref.dita#links/registry_name"></ph> 内にセットアップできます。そこでイメージを安全に保管してクラスター・ユーザー間で共有することができます。
+</entry>
+<entry><ul>
+<li>アカウント内でイメージへのアクセス権限を管理できる。</li>
+<li>IBM 提供のイメージとサンプル・アプリ (IBM Liberty など) を親イメージとして使用し、それに独自のアプリ・コードを追加できる。
+</li>
+<li>Vulnerability Advisor によるイメージの潜在的脆弱性の自動スキャン (それらの脆弱性を修正するための OS 固有の推奨事項を含む)。
+</li>
+<li audience="unknown">適用されるセキュリティー・レベルに基づいてコンテナーのデプロイメントを許可またはブロックするためのカスタム組織ポリシーを定義できる。
+</li>
+<li audience="unknown">Bluemix レジストリー内のイメージからデプロイされた実行中のコンテナーのセキュリティー状況を調べることで、セキュリティーとコンプライアンスを継続的に維持できる。
+</li></ul></entry></row>
+<row>
+<entry>他のプライベート・レジストリー</entry>
+<entry><xref href="https://kubernetes.io/docs/concepts/containers/images/" format="html" scope="external">imagePullSecret</xref> を作成することにより、既存のプライベート・レジストリーをクラスターに接続します。
+このシークレットは、レジストリーの URL と資格情報を Kubernetes シークレットに安全に保存するために使用されます。
+</entry>
+<entry><ul>
+<li>ソース (Docker Hub、組織が所有するレジストリー、または他のプライベート・クラウド・レジストリー) と無関係に既存のプライベート・レジストリーを使用できる。
+</li></ul></entry></row>
+<row>
+<entry>パブリック Docker Hub</entry>
+<entry> このオプションは、Dockerfile に変更を加える必要がなく、Docker Hub にある既存のパブリック・イメージを直接使用する場合に使用します。
+<note>このオプションは組織のセキュリティー要件 (アクセス管理、脆弱性スキャン、アプリ・プライバシーなど) を満たさない可能性があるということに留意してください。
+</note></entry>
+<entry><ul>
+<li>クラスターの追加セットアップが不要。</li>
+<li>さまざまなオープン・ソース・アプリケーションを含めることができる。
+</li></ul></entry></row></tbody></tgroup></table></p>
+<p>イメージ・レジストリーをセットアップすると、クラスター・ユーザーがイメージを使用してクラスターにアプリをデプロイできるようになります。
+</p>
+<p>パブリック・レジストリーまたはプライベート・レジストリーにアクセスする方法、およびイメージを使用してコンテナーを作成する方法について詳しくは、<xref href="cs_apps_images.dita"></xref>を参照してください。
+</p></conbody></concept>

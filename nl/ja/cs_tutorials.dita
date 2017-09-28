@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE reference PUBLIC "-//IBM//DTD DITA IBM Reference//EN"
+ "ibm-reference.dtd">
+<reference id="cs_tutorials" xml:lang="ja-jp">
+<title> <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> での Kubernetes クラスターのためのチュートリアル <ph conref="cs_conref.dita#links/release"></ph></title>
+<titlealts>
+<navtitle>クラスターのためのチュートリアル</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> での Kubernetes クラスターのためのチュートリアル</searchtitle></titlealts>
+<shortdesc>これらのチュートリアルや他のリソースをサービスの入門編として試してみてください。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>チュートリアル</indexterm><indexterm>リソース</indexterm><indexterm>IBM Containers</indexterm><indexterm>コンテナー</indexterm></keywords></metadata></prolog>
+<refbody>
+<example><p></p></example></refbody></reference>

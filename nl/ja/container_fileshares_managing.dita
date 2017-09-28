@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="container_filestorage_managing" xml:lang="ja-jp">
+<title> ファイル共有の削除</title>
+<titlealts>
+<navtitle>ファイル共有の削除</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でのファイル共有の削除</searchtitle></titlealts>
+<shortdesc>組織の管理者は、既存のファイル共有を削除したり、どのボリュームがファイル共有にマウントされているかを確認したりすることができます。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>ファイル共有</indexterm><indexterm>ストレージ</indexterm><indexterm>cli</indexterm><indexterm>fs</indexterm><indexterm>削除</indexterm><indexterm>IBM Containers</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context>組織の管理者は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI と CLI の両方を使用して、ファイル共有を確認し、どのボリュームがそこにマウントされているかを把握したり、ファイル共有を削除したりすることができます。組織の管理者は、開発でも実動でも現在使用されていないファイル共有を削除することを選択できます。<note>請求書処理サイクルのために、月末にはファイル共有を削除できません。
+月末にファイル共有を削除しようとしてエラー・メッセージを受け取った場合は、次の月の初日まで待ってからファイル共有を削除してください。
+</note></context></taskbody>
+<task id="task_ets_khp_y5">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI の使用</title>
+<taskbody>
+<steps>
+<step>
+<cmd><ph conref="container_conref.dita#bluemix_nav/view_quota_1"></ph></cmd></step>
+<step>
+<cmd><ph conref="container_conref.dita#bluemix_nav/view_quota_2"></ph></cmd></step></steps>
+<result>「ファイル・ストレージ」表に、<uicontrol>「アクション」</uicontrol>欄と<uicontrol>「名前」</uicontrol>欄が表示されます。<ul>
+<li>ファイル共有の名前をクリックし、それに接続されたボリュームを表示します。</li>
+<li><uicontrol>「削除」</uicontrol>をクリックして、ファイル共有を削除します。ファイル共有を削除するには、まずそれに接続されたボリュームを削除する必要があります。ファイル共有が削除されると、それはアカウントから完全に削除されます。ボリュームを削除するには、<xref href="container_volumes_remove.dita#container_volumes_remove" type="task" scope="local"></xref>を参照してください。
+</li></ul></result></taskbody></task>
+<task id="task_uvm_chp_y5">
+<title>コマンド・ラインの使用</title>
+<taskbody>
+<result>CLI を使用してファイル共有を削除するには、以下のコマンドを実行します。<p><ol>
+<li>ファイル共有名を識別します。<codeblock><ph conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/volume_fslist_cmdname"></ph></codeblock></li>
+<li importance="optional">ファイル共有を検査して、そのファイル共有にボリュームが存在するかどうかを判別します。<codeblock><ph conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/volume_fsinspect_cmdname"></ph></codeblock></li>
+<li importance="optional">必要に応じて、既存のボリュームを削除します。<codeblock><ph conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/volume_rm_cmdname"></ph></codeblock></li>
+<li>既存のファイル共有を削除します。<codeblock><ph conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/volume_fsrm_cmdname"></ph></codeblock></li>
+<li importance="optional">既存のファイル共有をリストし、当該ファイル共有が削除されたことを確認します。<codeblock><ph conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/volume_fslist_cmdname"></ph></codeblock></li></ol></p></result></taskbody></task></task>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="cs_planning" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword>
+<ph conref="cs_conref.dita#links/release"></ph> での Kubernetes クラスターおよびアプリの計画</title>
+<titlealts>
+<navtitle>クラスターとアプリの計画</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> での Kubernetes クラスターおよびアプリの計画</searchtitle></titlealts>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> には、組織の機能要件と非機能要件を満たす Kubernetes クラスターを構成してカスタマイズするために、いくつかのオプションが用意されています。
+それらの構成の中には、クラスター作成後には変更できないものもあります。それらの構成を事前に理解しておくと、メモリー、ディスク・スペース、IP アドレスなどのすべてのリソースを開発チームのために確保する上で役立ちます。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>計画</indexterm><indexterm>IBM Bluemix Container Service</indexterm><indexterm>コンテナー</indexterm><indexterm>クラスター</indexterm><indexterm>Kubernetes</indexterm><indexterm>Docker</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context><p></p></context></taskbody></task>

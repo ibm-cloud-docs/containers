@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="cs_cluster_user" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword>
+<ph conref="cs_conref.dita#links/release"></ph> でのユーザーとクラスターへのアクセス権限の管理</title>
+<titlealts>
+<navtitle>クラスター・アクセス権限の管理</navtitle></titlealts><abstract>
+<shortdesc>クラスターへのアクセス権限を他のユーザーに付与することができます。そのようにすると、それらのユーザーがクラスターにアクセスして、クラスターを管理し、アプリをクラスターにデプロイすることができます。</shortdesc></abstract>
+<taskbody>
+<context id="context_e1y_j32_wz"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword> で操作をするすべてのユーザーに、「ID およびアクセス管理」でサービス固有のユーザー役割を割り当てる必要があります。割り当てられるユーザー役割によって、そのユーザーが実行できるアクションが決まります。「ID およびアクセス管理」では、次のアクセス許可を区別します。
+<ul id="ul_dlm_553_wz">
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword> アクセス・ポリシー<p>アクセス・ポリシーは、クラスターで実行できるクラスター管理アクション (クラスターの作成または削除、ワーカー・ノードの追加または削除など) を判別します。<draft-comment audience="blue">If you want to prevent a user from deploying apps to a cluster or
+creating other Kubernetes resources, you must create RBAC policies for the cluster.</draft-comment></p></li>
+<li>Cloud Foundry の役割<p>すべてのユーザーに、Cloud Foundry ユーザー役割を割り当てる必要があります。この役割は、ユーザーが <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウントで実行できるアクション (他のユーザーの招待や割り当て分の使用率の表示など) を決定します。それぞれの役割の許可を確認するには、<xref href="../iam/users_roles.html#cfroles" format="html" scope="external">Cloud Foundry の役割</xref>を参照してください。</p></li>
+<li>RBAC 役割<p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword> アクセス・ポリシーが割り当てられているすべてのユーザーには、RBAC 役割が自動的に割り当てられます。RBAC 役割によって、クラスター内の Kubernetes リソースに対して実行できるアクションが決まります。RBAC 役割は、デフォルトの名前空間に関してのみセットアップされます。クラスター管理者は、クラスター内の他の名前空間の RBAC 役割を追加できます。詳しくは、Kubernetes 資料の <xref href="https://kubernetes.io/docs/admin/authorization/rbac/#api-overview" format="html" scope="external">Using RBAC Authorization</xref> を参照してください。
+</p></li></ul>実行するアクションを次の中から選択してください。<ul id="ul_j2d_ly3_wz">
+<li><xref href="#access_ov">クラスターで操作をするために必要なアクセス・ポリシーと許可を確認する</xref>。</li>
+<li><xref href="#view_access">現在のアクセス・ポリシーを表示する</xref>。</li>
+<li><xref href="#change_access">既存のユーザーのアクセス・ポリシーを変更する</xref>。</li>
+<li><xref href="#add_users"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウントにユーザーを追加する</xref>。</li></ul></context></taskbody>
+<task id="access_ov">
+<title>必要な <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword> アクセス・ポリシーと許可の概要</title>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウント内のユーザーに付与できるアクセス・ポリシーと許可について説明します。</shortdesc>
+<taskbody>
+<context id="context_p5x_dw3_wz"><table frame="all" colsep="1" rowsep="1" id="table_s34_kp3_wz">
+<title>必要な <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword> アクセス・ポリシーと許可の概要</title>
+<tgroup cols="3"><colspec colnum="1" colname="newCol1" colwidth="1*"></colspec><colspec colnum="2" colname="c1" colwidth="1.0*"></colspec><colspec colnum="3" colname="newCol3" colwidth="1*"></colspec>
+<thead>
+<row>
+<entry>アクセス・ポリシー</entry>
+<entry>クラスター管理許可</entry>
+<entry>Kubernetes リソース許可</entry></row></thead>
+<tbody>
+<row>
+<entry><ul id="ul_syk_fq3_wz">
+<li>役割: 管理者</li>
+<li>サービス・インスタンス: すべての現行サービス・インスタンス</li></ul></entry>
+<entry><ul id="ul_alc_np3_wz">
+<li><ph conref="cs_conref.dita#links/free_cluster"></ph> または標準クラスターを作成する</li>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"> </keyword> ポートフォリオにアクセスするための <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> アカウントの資格情報を設定する</li>
+<li>クラスターを削除する</li>
+<li>対象アカウント内の他の既存ユーザーの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword> アクセス・ポリシーの割り当てと変更。</li></ul>
+<p>この役割は、対象アカウントのすべてのクラスターのエディター、オペレーター、およびビューアーの役割から許可を継承します。</p></entry>
+<entry><ul>
+<li>RBAC 役割: クラスター管理</li>
+<li>すべての名前空間内にあるリソースに対する読み取り/書き込みアクセス</li>
+<li>名前空間内で役割を作成する</li>
+<li>Kubernetes ダッシュボードにアクセスする</li></ul></entry></row>
+<row>
+<entry><ul id="ul_qyc_kq3_wz">
+<li>役割: 管理者</li>
+<li>サービス・インスタンス: 特定のクラスター ID</li></ul></entry>
+<entry><ul id="ul_bdj_jq3_wz">
+<li>特定のクラスターを削除する</li></ul>
+<p>この役割は、選択したクラスターのエディター、オペレーター、およびビューアーの役割から許可を継承します。</p></entry>
+<entry><ul>
+<li>RBAC 役割: クラスター管理</li>
+<li>すべての名前空間内にあるリソースに対する読み取り/書き込みアクセス</li>
+<li>名前空間内で役割を作成する</li>
+<li audience="blue">Kubernetes ダッシュボードにアクセスする</li></ul></entry></row>
+<row>
+<entry><ul>
+<li>役割: オペレーター
+</li>
+<li>サービス・インスタンス: すべての現行サービス・インスタンス/特定のクラスター ID</li></ul></entry>
+<entry><ul>
+<li>クラスターにワーカー・ノードを追加する</li>
+<li>クラスターからワーカー・ノードを削除する</li>
+<li>ワーカー・ノードをリブートする</li>
+<li>ワーカー・ノードを再ロードする</li>
+<li>クラスターにサブネットを追加する</li></ul></entry>
+<entry><ul>
+<li>RBAC 役割: 管理者</li>
+<li>名前空間自体ではなく、デフォルトの名前空間内にあるリソースに対する読み取り/書き込みアクセス</li>
+<li>名前空間内で役割を作成する</li></ul></entry></row>
+<row>
+<entry><ul id="ul_ym1_zq3_wz">
+<li>役割: エディター</li>
+<li>サービス・インスタンス: すべての現行サービス・インスタンス/特定のクラスター ID</li></ul></entry>
+<entry><ul>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> サービスをクラスターにバインドします。</li>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> サービスをクラスターにアンバインドします。</li>
+<li>Web フックを作成します。</li></ul>アプリ開発者には、この役割を使用してください。</entry>
+<entry><ul>
+<li>RBAC 役割: 編集</li>
+<li>デフォルトの名前空間内にあるリソースに対する読み取り/書き込みアクセス</li></ul></entry></row>
+<row>
+<entry><ul id="ul_vqd_sr3_wz">
+<li>役割: ビューアー</li>
+<li>サービス・インスタンス: すべての現行サービス・インスタンス/特定のクラスター ID</li></ul></entry>
+<entry><ul id="ul_x3r_sr3_wz">
+<li>クラスターをリスト表示する</li>
+<li>クラスターの詳細を表示する</li></ul></entry>
+<entry><ul>
+<li>RBAC 役割: 表示</li>
+<li>デフォルトの名前空間内にあるリソースに対する読み取りアクセス</li>
+<li>Kubernetes シークレットに対する読み取りアクセス権限はなし</li></ul></entry></row>
+<row>
+<entry>Cloud Foundry の組織の役割: 管理者</entry>
+<entry><ul id="ul_hvs_5s3_wz">
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> アカウントにユーザーを追加する</li></ul></entry>
+<entry></entry></row>
+<row>
+<entry>Cloud Foundry のスペースの役割: 開発者</entry>
+<entry><ul>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> サービス・インスタンスを作成する</li>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> サービス・インスタンスをクラスターにバインドする</li></ul></entry>
+<entry></entry></row></tbody></tgroup></table></context></taskbody></task>
+<task id="view_access">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword> アクセス・ポリシーの検証</title>
+<shortdesc>割り当てた <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword> のアクセス・ポリシーを確認および検証できます。アクセス・ポリシーによって、実行できるクラスター管理アクションが決まります。</shortdesc>
+<taskbody>
+<context id="context_nnl_1pd_wz"></context>
+<steps id="steps_nb4_v4d_wz">
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword> アクセス・ポリシーを検証する <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウントを選択します。</cmd></step>
+<step>
+<cmd>メニュー・バーから、<uicontrol>「管理」</uicontrol> &gt; <uicontrol>「セキュリティー」</uicontrol>
+&gt; <uicontrol>「ID およびアクセス」</uicontrol>の順にクリックします。<uicontrol>「ユーザー」</uicontrol>ウィンドウに、選択したアカウントのユーザーのリストが E メール・アドレスおよび現在の状況とともに表示されます。</cmd></step>
+<step>
+<cmd>アクセス・ポリシーを検査するユーザーを選択します。</cmd></step>
+<step>
+<cmd>「<uicontrol>サービス・ポリシー</uicontrol>」セクションで、対象ユーザーのアクセス・ポリシーを確認します。</cmd>
+<info>この役割で実行できるアクションの詳細については、<xref href="#access_ov"></xref>を参照してください。</info></step>
+<step importance="optional">
+<cmd><xref href="#change_access">現在のアクセス・ポリシーを変更します</xref>。</cmd>
+<info>
+<note>既存のユーザーのアクセス・ポリシーを変更できるのは、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword> 内のすべてのリソースに対する管理者サービス・ポリシーを割り当てられているユーザーのみです。<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウントにユーザーを追加するには、対象アカウントに対する Cloud Foundry の管理者役割が必要です。<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウント所有者の ID を確認するには、<codeph>bx iam
+accounts</codeph> を実行し、<uicontrol>「所有者ユーザー ID (Owner User ID)」</uicontrol>を探します。</note></info></step></steps></taskbody></task>
+<task id="change_access">
+<title>既存のユーザーの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword> アクセス・ポリシーの変更</title>
+<shortdesc>既存のユーザーのアクセス・ポリシーを変更し、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウント内のクラスターに対するクラスター管理許可を付与できます。</shortdesc>
+<taskbody>
+<prereq id="prereq_bh4_c5d_wz">始める前に、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword> 内のすべてのリソースに対する<xref href="#view_access">管理者アクセス・ポリシーが自分に割り当てられていることを確認してください</xref>。</prereq>
+<steps id="steps_d1y_ttd_wz">
+<step>
+<cmd>既存のユーザーの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword> アクセス・ポリシーを変更する <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウントを選択します。</cmd></step>
+<step>
+<cmd>メニュー・バーから、<uicontrol>「管理」</uicontrol> &gt; <uicontrol>「セキュリティー」</uicontrol>
+&gt; <uicontrol>「ID およびアクセス」</uicontrol>の順にクリックします。<uicontrol>「ユーザー」</uicontrol>ウィンドウに、選択したアカウントのユーザーのリストが E メール・アドレスおよび現在の状況とともに表示されます。</cmd></step>
+<step>
+<cmd>アクセス・ポリシーを変更するユーザーを見つけます。</cmd>
+<info>探しているユーザーが見つからなければ、<xref href="#add_users">このユーザーを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウントに招待</xref>します。</info></step>
+<step>
+<cmd><uicontrol>「アクション」</uicontrol>タブで、<uicontrol>「ポリシーの割り当て」</uicontrol>をクリックします。</cmd></step>
+<step>
+<cmd><uicontrol>「サービス」</uicontrol>ドロップダウン・リストで、<uicontrol>「<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword>」</uicontrol>を選択します。</cmd></step>
+<step>
+<cmd><uicontrol>「役割」</uicontrol>ドロップダウン・リストで、割り当てるアクセス・ポリシーを選択します。</cmd>
+<info>特定の地域またはクラスターに限定しないで役割を選択すると、対象アカウント内で作成されたすべてのクラスターにそのアクセス・ポリシーが自動的に適用されます。特定のクラスターまたは地域にアクセス権限を限定する場合は、<uicontrol>「サービス・インスタンス」</uicontrol>ドロップダウン・リストと<uicontrol>「地域」</uicontrol>ドロップダウン・リストから選択します。アクセス・ポリシー別のサポートされているアクションの一覧を見る場合は、<xref href="#access_ov"></xref>を参照してください。特定のクラスターの ID を確認するには、
+<codeph><ph conref="cs_conref.dita#links/bx_cs"></ph> clusters</codeph> を実行します。</info></step>
+<step>
+<cmd><uicontrol>「ポリシーの割り当て」</uicontrol>をクリックして変更を保存します。</cmd></step></steps></taskbody></task>
+<task id="add_users">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウントへのユーザーの追加</title>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウントにユーザーを追加して、クラスターへのアクセス権限を付与できます。</shortdesc>
+<taskbody>
+<prereq id="prereq_j52_2wd_wz">始める前に、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウントに対する Cloud Foundry の管理者役割が自分に割り当てられていることを確認してください。</prereq>
+<steps id="steps_esk_swd_wz">
+<step>
+<cmd>ユーザーを追加する <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウントを選択します。</cmd></step>
+<step>
+<cmd>メニュー・バーから、<uicontrol>「管理」</uicontrol> &gt; <uicontrol>「セキュリティー」</uicontrol>
+&gt; <uicontrol>「ID およびアクセス」</uicontrol>の順にクリックします。「ユーザー」ウィンドウに、選択したアカウントのユーザーのリストが E メール・アドレスおよび現在の状況とともに表示されます。</cmd></step>
+<step>
+<cmd><uicontrol>「ユーザーの招待」</uicontrol>をクリックします。</cmd></step>
+<step>
+<cmd><uicontrol>「E メール・アドレスまたは既存の IBMid」</uicontrol>に、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウントに追加するユーザーの E メール・アドレスを入力します。</cmd></step>
+<step>
+<cmd><uicontrol>「アクセス」</uicontrol>セクションで、<uicontrol>「ID およびアクセス対応サービス」</uicontrol>を展開します。</cmd></step>
+<step>
+<cmd><uicontrol>「サービス」</uicontrol>ドロップダウン・リストから<uicontrol>「<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword>」</uicontrol>を選択します。</cmd></step>
+<step>
+<cmd><uicontrol>「役割」</uicontrol>ドロップダウン・リストで、割り当てるアクセス・ポリシーを選択します。</cmd>
+<info>特定の地域またはクラスターに限定しないで役割を選択すると、対象アカウント内で作成されたすべてのクラスターにそのアクセス・ポリシーが自動的に適用されます。特定のクラスターまたは地域にアクセス権限を限定する場合は、<uicontrol>「サービス・インスタンス」</uicontrol>ドロップダウン・リストと<uicontrol>「地域」</uicontrol>ドロップダウン・リストから選択します。アクセス・ポリシー別のサポートされているアクションの一覧を見る場合は、<xref href="#access_ov"></xref>を参照してください。特定のクラスターの ID を確認するには、
+<codeph><ph conref="cs_conref.dita#links/bx_cs"></ph> clusters</codeph> を実行します。</info></step>
+<step>
+<cmd>「<uicontrol>Cloud Foundry アクセス権限</uicontrol>」セクションを展開し、ユーザーを追加する <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 組織を「<uicontrol>組織</uicontrol>」ドロップダウン・リストから選択します。</cmd></step>
+<step>
+<cmd><uicontrol>「スペースの役割」</uicontrol>ドロップダウン・リストから、任意の役割を選択します。</cmd>
+<info>Kubernetes クラスターは、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のスペースからは独立しています。このユーザーが他のユーザーを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウントに追加できるようにするには、そのユーザーに Cloud Foundry の<uicontrol>組織の役割</uicontrol>を割り当てる必要があります。ただし、Cloud Foundry の組織の役割は、この後の手順でのみ割り当てられます。</info></step>
+<step>
+<cmd><uicontrol>「ユーザーの招待」</uicontrol>をクリックします。</cmd></step>
+<step importance="optional">
+<cmd><uicontrol>「ユーザー」</uicontrol>の概要の<uicontrol>「アクション」</uicontrol>タブで、<uicontrol>「ユーザーの管理」</uicontrol>を選択します。</cmd></step>
+<step importance="optional">
+<cmd><uicontrol>「Cloud Foundry の役割」</uicontrol>セクションで、前の手順で追加したユーザーに付与した
+Cloud Foundry の組織の役割を見つけます。</cmd></step>
+<step importance="optional">
+<cmd><uicontrol>「アクション」</uicontrol>タブから、<uicontrol>「組織の役割の編集」</uicontrol>を選択します。</cmd></step>
+<step importance="optional">
+<cmd><uicontrol>「組織の役割」</uicontrol>ドロップダウン・リストから、<uicontrol>「管理者」</uicontrol>を選択します。</cmd></step>
+<step importance="optional">
+<cmd><uicontrol>「役割の保存」</uicontrol>をクリックします。</cmd></step></steps></taskbody></task></task>

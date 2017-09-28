@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="container_planning_namespace">
+<title>プライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリーのための組織の名前空間の設定
+</title>
+<titlealts>
+<navtitle>名前空間</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の組織の名前空間の設定</searchtitle></titlealts>
+<shortdesc><ph id="namespace_def" conref="container_conref.dita#terms/namespace_definition_long"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword>, all container images are
+stored in a central repository that is named the <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> registry. When logging into the <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> for the first time, every
+organization is required to set up its own private repository in the <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> registry. This name of the private
+repository is called a namespace and must be unique within <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword>. The namespace is used to generate a
+unique URL to your private repository. Therefore, the namespace is appended to the <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> registry URL as follows:
+<filepath>registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>namespace</varname></filepath>. You must enter the full URL to your private repository
+whenever you want to work with one of your images in your repository from the CLI. </ph></shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>計画</indexterm><indexterm>IBM Containers</indexterm><indexterm>コンテナー</indexterm><indexterm>組織管理者</indexterm><indexterm>名前空間</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context><ph conref="container_conref.dita#terms/namespace_purpose"></ph> プライベート・レジストリー内に格納されたすべてのコンテナー・イメージは、組織のすべてのユーザーによって共有されます。<note>どの組織についても、一度に設定できる名前空間は <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 領域ごとに 1 つのみです。
+組織に名前空間を設定した後に、変更することはできません。削除のみ可能です。
+</note><p>組織の名前空間を選択する際には、以下の規則を考慮してください。</p><ul conref="container_conref.dita#terms/namespace_rules">
+<li>Your namespace must be unique in <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword>. </li>
+<li>Your namespace can be 4-30 characters long.</li>
+<li>Your namespace must start with at least one letter or number.</li>
+<li>Your namespace can only contain lowercase letters, numbers or underscores (_). </li></ul></context>
+<steps>
+<stepsection><p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI から、以下のステップを実行します。</p></stepsection>
+<step>
+<cmd><ph conref="container_conref.dita#bluemix_nav/choose_image"></ph></cmd></step>
+<step>
+<cmd>組織の名前空間が既に設定されている場合は、名前空間の作成を要求するプロンプトは出されず、次のステップに進むことができます。</cmd>
+<info>組織の名前空間をまだ指定していない場合は、イメージ・レジストリーで名前空間を設定するように求められます。</info></step>
+<stepsection><p>CLI から、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> にログインした後、以下のコマンドを実行します。</p></stepsection>
+<step>
+<cmd>組織の名前空間を設定します。
+<varname>&lt;my_namespace&gt;</varname> を、組織に設定する名前空間に置き換えてください。</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> namespace-set <varname>&lt;my_namespace&gt;</varname></codeblock>
+
+<note>組織の名前空間が既に設定されているかどうかがわからない場合は、<xref href="container_planning_namespace.dita#namespace_get"></xref>のトピックの手順に従ってください。
+</note></info></step></steps></taskbody>
+<task id="namespace_get">
+<title>組織の名前空間の取得</title>
+<shortdesc>組織の名前空間が既に設定されている場合は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI または CLI から取得できます。</shortdesc>
+<taskbody>
+<context><note><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI で名前空間を確認できるのは、プライベート・イメージが既にプライベート・イメージ・レジストリーに追加されている場合のみです。IBM 提供のイメージからこの情報を取得することはできません。
+レジストリー内にまだプライベート・イメージがない場合に、組織の名前空間を調べるには、CLI の方法を選択してください。</note></context>
+<steps>
+<stepsection><p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI から、以下のステップを実行します。</p></stepsection>
+<step>
+<cmd><ph conref="container_conref.dita#bluemix_nav/choose_image"></ph></cmd></step>
+<step>
+<cmd>イメージ名の下で<uicontrol>「URL のコピー (Copy URL)」</uicontrol>をクリックします。</cmd></step>
+<step>
+<cmd>registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>&lt;my_namespace&gt;</varname>/<varname>&lt;image_name&gt;</varname>:<varname>&lt;tag&gt;</varname> という形式のコピーした URL から、名前空間を取得できます。</cmd></step>
+<stepsection><p>CLI から、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> サービスにログインして、以下のコマンドを実行します。</p></stepsection>
+<step>
+<cmd>名前空間情報を取得します。
+</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> namespace-get</codeblock></info></step></steps></taskbody></task></task>

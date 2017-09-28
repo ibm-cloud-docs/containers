@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tsTroubleshooting PUBLIC "-//IBM//DTD DITA Troubleshooting//EN"
+ "troubleshooting.dtd">
+<tsTroubleshooting id="ts_vol_group_overwrite" xml:lang="ja-jp" class="- topic/topic tsTroubleshooting/tsTroubleshooting ">
+<title>ボリューム内でコンテナー・グループのインスタンスからのログが上書きされる</title>
+<titlealts>
+<navtitle>グループからのログが上書きされる</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のボリューム内でコンテナー・グループのインスタンスからのログが上書きされる</searchtitle></titlealts>
+<shortdesc></shortdesc>
+<tsBody class="- topic/body tsTroubleshooting/tsBody ">
+<tsSymptoms class="- topic/section tsTroubleshooting/tsSymptoms ">コンテナー・グループを作成するときに、ボリュームをマウントして、コンテナー・グループの各インスタンスがそのボリュームにログを出力するようにしました。
+コンテナー・グループの各インスタンスが同じファイルに書き込むので、各インスタンスによってファイルが上書きされます。
+<p>例:<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-create –p 9080 –m <varname>64</varname> -v log_vol:/opt/ibm/logs -e LOG_LOCATIONS=/opt/ibm/logs/messages.log,/opt/ibm/logs/debug.log,/opt/ibm/logs/trace.log -–name <varname>my_container_group</varname> registry.<varname props="keyref(DomainName)">domain_name</varname>/ibmliberty:latest</codeblock></p></tsSymptoms>
+<tsCauses class="- topic/section tsTroubleshooting/tsCauses ">各コンテナー・インスタンスが、単一書き込みプログラムのようにファイルをボリュームに書き込みます。
+インスタンスごとにメモリーにローカル・キャッシュを持ちます。
+ボリューム内のファイルは、繰り返し、各コンテナー・インスタンスのキャッシュ・データに置き換えられます。
+</tsCauses>
+<tsResolve class="- topic/section tsTroubleshooting/tsResolve ">インスタンスごとにログ・ファイルを別にするために、ログ・ファイル名に識別子を含めて調整します。
+例えば、コンテナー・グループの作成時に指定する、アプリで生成するログ・ファイルの名前に、<codeph>$HOSTNAME</codeph> 変数を含めます。
+<p>例:<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-create –p 9080 –m <varname>64</varname> -v log_vol:/opt/ibm/logs -e LOG_LOCATIONS=/opt/ibm/logs/messages.$HOSTNAME.log,/opt/ibm/logs/debug.$HOSTNAME.log,/opt/ibm/logs/trace.$HOSTNAME.log -–name <varname>my_container_group</varname> registry.<varname props="keyref(DomainName)">domain_name</varname>/ibmliberty:latest</codeblock></p></tsResolve></tsBody></tsTroubleshooting>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="cs_apps_remove" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でクラスターから Kubernetes リソースを削除する方法 <ph conref="cs_conref.dita#links/release"></ph></title>
+<titlealts>
+<navtitle>リソースの削除</navtitle></titlealts>
+<shortdesc>アプリが不要になったら、クラスターからその Kubernetes リソースを削除することにより、アプリを削除することができます。
+</shortdesc><!--&lt;prolog&gt;&lt;metadata&gt;&lt;keywords&gt;&lt;indexterm&gt;&lt;/indexterm&gt;&lt;/keywords&gt;&lt;/metadata&gt;&lt;/prolog&gt;-->
+<taskbody>
+<prereq><p><ph conref="cs_conref.dita#links/kubeconfig"></ph>
+<ph conref="cs_conref.dita#links/paidonly"></ph></p></prereq>
+<context><p>不要になったリソースは、クラスターから手動で削除できます。さらに、クラスターを削除すると、そのクラスターに関連付けられているリソースのほとんどが自動的に削除されます。
+クラスターを削除するときにストレージを削除しない場合は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI 内の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> ダッシュボードを使用してストレージを削除できます。毎月の課金サイクルの規定で、永続ボリューム請求を月の最終日に削除することはできません。
+永続ボリューム請求を月の末日に削除した場合、削除は翌月初めまで保留状態になります。</p></context>
+<steps-unordered>
+<step>
+<cmd>delete コマンドを実行して、リソースを 1 つずつ削除するか、いくつかまとめて削除します。
+</cmd>
+<info>
+<p>例</p>
+
+<codeblock>kubectl delete pod <varname>mypod</varname></codeblock>
+
+<codeblock>kubectl delete pvc <varname>mypvc</varname></codeblock>
+
+<codeblock>kubectl delete pod,service,pvc <varname>my_pod</varname> <varname>my_service</varname> <varname>mypvc</varname></codeblock></info></step>
+<step>
+<cmd>同じ構成スクリプトで作成したリソースをすべて削除する場合は、その構成スクリプトを指定して <codeph>delete</codeph> コマンドを実行します。
+</cmd>
+<info>
+<p>例</p>
+
+<codeblock>kubectl delete -f <varname>&lt;directory_path&gt;</varname>/<varname>deployment_script</varname>.yml</codeblock></info></step></steps-unordered></taskbody></task>

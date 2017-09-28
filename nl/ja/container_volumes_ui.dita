@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="container_volumes_ui" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI でのボリュームの作成</title>
+<titlealts>
+<navtitle> GUI でのボリュームの作成</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI でのボリュームの作成</searchtitle></titlealts>
+<shortdesc><ph conref="container_conref.dita#terms/volume_definition"></ph> <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI から、コンテナーのボリュームを作成できます。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>IBM Containers</indexterm><indexterm>コンテナー</indexterm><indexterm>永続ストレージ</indexterm><indexterm>ボリューム</indexterm><indexterm>作成</indexterm></keywords></metadata></prolog>
+<taskbody>
+<prereq></prereq>
+<context><fig id="file_share">
+<title>組織におけるファイル共有およびボリュームの構造</title><image href="images/utd_volumes.svg" alt="ファイル共有にはボリュームが含まれ、ボリュームにはファイルが含まれています。" width="500" align="left" id="volume_organization"></image></fig>
+<p><ph id="volume_intro">単一コンテナーは、設計上、存続時間が短期です。
+しかし、ボリュームを使用することにより、コンテナーを再始動してもデータが永続するようにしたり、スペース内のコンテナー間でデータを共有したり、グループ内の複数のコンテナー・インスタンス間でデータを共有したりできます。
+Docker 内にボリュームをマウントすると、そのボリュームはローカル・ファイル・システムにマウントされます。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> では、計算ホストへのアクセスが制限されるので、ホスト・ディレクトリーをコンテナーにマウントすることができません。
+代わりに、組織規模のボリュームを使用して、コンテナーを再始動してもデータを保持します。ボリュームは、分離された<xref href="container_fileshares_adding_ui.dita#container_fileshares_adding_ui">ファイル共有</xref>上でホストされます。そこでは、安全にアプリ・データが保管され、ファイルに対するアクセスや権限が管理されます。ボリュームは、コンテナーまたはイメージに対する更新の影響を受けません。コンテナーを削除しても、ストレージ・ボリュームは削除されません。</ph></p></context>
+<steps>
+<step>
+<cmd><ph conref="container_conref.dita#bluemix_nav/choose_image"></ph></cmd></step>
+<step>
+<cmd><uicontrol>「詳細オプション」</uicontrol>を選択し、ボリューム作成フィールドを展開します。</cmd></step>
+<step>
+<cmd><uicontrol>「ボリュームの作成」</uicontrol>をクリックします。</cmd></step>
+<step>
+<cmd><uicontrol>「ボリューム名」</uicontrol>フィールドに、名前を入力します。</cmd>
+<info>ボリュームはスペースごとに固有であるため、スペース内でボリューム名を再利用することはできません。
+ボリューム名に使用できるのは、大文字、小文字、数字、下線 (_)、およびハイフン (-) です。</info></step>
+<step>
+<cmd>ファイル共有が存在する場合、<uicontrol>「ファイル共有」</uicontrol>ドロップダウン・メニューから既存のファイル共有を選択します。</cmd>
+<info id="volumeprereq">ファイル共有が存在しない場合、20 GB のデフォルトのファイル共有が自動的に作成されます。組織の管理者は、特定のストレージ・サイズおよび IOPS を指定してファイル共有を割り振ることができます。詳しくは、<xref href="container_fileshares_adding_ui.dita#container_fileshares_adding_ui">ボリュームのファイル共有の追加</xref>を参照してください。</info>
+<info>ボリュームのサイズに制限はありません。
+ボリュームは、ホストのファイル共有のサイズに応じて拡大縮小できます。
+</info></step>
+<step>
+<cmd><uicontrol>「作成」</uicontrol>をクリックします。 </cmd>
+<info>ボリュームを作成するには数分かかる場合があります。 </info></step></steps>
+<result>スペースの中でボリュームを使用できるようになり、<xref href="container_single_ui.dita#gui/volume" format="dita" scope="local">単一コンテナー</xref>または<xref href="container_group_ui.dita#container_group_ui/volume" format="dita" scope="local">コンテナー・グループ</xref>にマウントできます。これは、<uicontrol>「詳細オプション」</uicontrol>の<uicontrol>「既存ボリュームの割り当て」</uicontrol>のドロップダウン・メニューから選択することによって行います。
+ボリュームを選択した後は、ボリュームをコンテナー内部にマウントしたときのファイル・パス (<filepath>/var/lib/my_volume</filepath> など) を割り当てます。コンテナーのバックアップが必要な場合は、<xref href="container_volumes_backup.dita#container_volumes_remove">データのバックアップおよびリストア</xref>を参照してください。
+</result></taskbody><?tm 1435623320 0?></task>

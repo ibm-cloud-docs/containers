@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><val>
+<prop action="include" att="product" val="bluemix"/>
+<prop action="exclude" att="audience" val="blue"/>
+<prop action="flag" att="audience" backcolor="yellow" val="yellow"/>
+<prop action="exclude" att="audience" val="unknown"/>
+
+
+<prop action="include" att="operatingsystem" val="ios"/>
+<prop action="include" att="operatingsystem" val="android"/>
+<prop action="include" att="props" val="programlang(ruby)"/>
+<prop action="include" att="props" val="programlang(python)"/>
+<prop action="include" att="props" val="programlang(java)"/>
+<prop action="include" att="props" val="programlang(javascript)"/>
+<prop action="include" att="props" val="programlang(c#)"/>
+<prop action="include" att="props" val="programlang(objectc)"/>
+<prop action="include" att="props" val="programlang(php)"/>
+<prop action="include" att="props" val="programlang(swift)"/>
+<prop action="include" att="props" val="programlang(generic)"/>
+<prop action="include" att="props" val="keyref(APPDomain)"/>
+<prop action="include" att="props" val="keyref(DomainName)"/>
+<prop action="include" att="props" val="keyref(app_name)"/>
+<prop action="include" att="props" val="keyref(app_key)"/>
+<prop action="include" att="props" val="keyref(app_secret)"/>
+<prop action="include" att="props" val="keyref(app_url)"/>
+<prop action="include" att="props" val="keyref(org_name)"/>
+<prop action="include" att="props" val="keyref(route)"/>
+<prop action="include" att="props" val="keyref(space_name)"/>
+<prop action="include" att="props" val="keyref(service_name)"/>
+<prop action="include" att="props" val="keyref(service_instance_name)"/>
+<prop action="include" att="props" val="keyref(user_ID)"/>
+<prop action="include" att="architecture" val="service"/>
+<prop action="include" att="architecture" val="runtime"/>
+
+
+
+<prop action="include" att="product" val="non_china"/>
+<prop action="exclude" att="product" val="china_only"/></val>

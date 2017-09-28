@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="cs_cli_dashboard" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword>
+<ph conref="cs_conref.dita#links/release"></ph> での Kubernetes ダッシュボードの起動</title>
+<titlealts>
+<navtitle>Kubernetes ダッシュボードの起動</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> での Kubernetes ダッシュボードの起動</searchtitle></titlealts>
+<shortdesc>ローカル・システムで Kubernetes ダッシュボードを開くと、クラスターとそのすべてのワーカー・ノードに関する情報が表示されます。
+</shortdesc><!--&lt;prolog&gt;&lt;metadata&gt;&lt;keywords&gt;&lt;indexterm&gt;&lt;/indexterm&gt;&lt;/keywords&gt;&lt;/metadata&gt;&lt;/prolog&gt;-->
+<taskbody>
+<prereq><ph conref="cs_conref.dita#links/kubeconfig"></ph>
+<ph conref="cs_conref.dita#links/access_policy_admin"></ph></prereq>
+<steps-unordered>
+<stepsection>クラスターの Kubernetes ダッシュボードを起動するために、デフォルトのポートを使用するか、独自のポートを設定できます。</stepsection>
+<step id="kube_dashboard">
+<cmd>デフォルトのポート 8001 で Kubernetes ダッシュボードを起動します。</cmd><substeps>
+<substep>
+<cmd>デフォルトのポート番号でプロキシーを設定します。</cmd>
+<info>
+<codeblock>kubectl proxy</codeblock>
+
+<screen>$ kubectl proxy
+Starting to serve on 127.0.0.1:8001</screen></info></substep>
+<substep>
+<cmd>Web ブラウザーで以下の URL を開いて、Kubernetes ダッシュボードを表示します。
+</cmd>
+<info>
+<codeblock>http://localhost:8001/ui</codeblock></info></substep></substeps></step>
+<step>
+<cmd>独自のポートで Kubernetes ダッシュボードを起動します。</cmd><substeps>
+<substep>
+<cmd>独自のポート番号でプロキシーを設定します。</cmd>
+<info>
+<codeblock>kubectl proxy -p <varname>&lt;port&gt;</varname></codeblock></info></substep>
+<substep>
+<cmd>ブラウザーで以下の URL を開きます。</cmd>
+<info>
+<codeblock>http://localhost:<varname>&lt;port&gt;</varname>/ui</codeblock></info></substep></substeps></step></steps-unordered>
+<postreq>Kubernetes ダッシュボードでの作業が完了したら、<userinput>CTRL+C</userinput> を使用して <codeph>proxy</codeph> コマンドを終了します。
+</postreq></taskbody></task>

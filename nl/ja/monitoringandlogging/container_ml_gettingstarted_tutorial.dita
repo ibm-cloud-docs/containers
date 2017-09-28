@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tutorial PUBLIC "-//IBM//DTD DITA Tutorial//EN"
+ "tutorial.dtd">
+<tutorial id="container_ml_gettingstarted_tutorial" xml:lang="ja-jp" class="- topic/topic tutorial/tutorial ">
+<title>チュートリアル: ロギング機能のテスト</title>
+<titlealts>
+<navtitle>チュートリアル: ロギングのテスト</navtitle>
+<searchtitle>チュートリアル: <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でのロギング機能のテスト</searchtitle></titlealts>
+<shortdesc>このシナリオでは、ibmliberty イメージを使用して <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペース内にコンテナーを作成します。
+コンテナーにマニュアル・ログ・エントリーを作成し、それらが Kibana (ログおよびタイム・スタンプ付きのデータを使用してカスタムの視覚化を作成できる視覚化ツール) でどのように表示されるかを確認します。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>ログ</indexterm><indexterm>コンテナー</indexterm><indexterm>クローラー</indexterm><indexterm>logmet</indexterm><indexterm>ロギング</indexterm><indexterm>kibana</indexterm><indexterm>チュートリアル</indexterm></keywords></metadata></prolog>
+<tutorialBody class="- topic/body tutorial/tutorialBody ">
+<tutorialDesc class="- topic/section tutorial/tutorialDesc "></tutorialDesc>
+<learningObjectives class="- topic/section tutorial/learningObjectives "><title>達成目標</title>
+<p>このチュートリアルでは、ユーザーは、ロギングおよびモニタリングのための最新のマイクロサービスが提供する機能をいくつか試すことができます。
+具体的な内容は、以下のとおりです。</p>
+<p><ul>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI を使用して構成し、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> でホストする Docker コンテナーのモニタリングとロギング </li>
+<li>コンテナーへのログイン</li>
+<li>Kibana でのログ・ファイル・エントリーの表示</li></ul></p>
+<p>このシナリオは、Docker に関する基礎的な知識があり、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix"></keyword> のコンテナーに対するロギングの動作をテストしたいユーザーを対象にしています。
+レッスンは、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のコンテナーからログ・メッセージを送信するために必要な説明とコマンドを示すための構成になっています。
+ただし、手順の詳細が必要な場合は、詳細な情報と <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> および Docker の資料へのリンクを含む「詳細はこちら」アイコン <ph conref="container_conref.dita#images/more_info"></ph> を確認してください。
+</p></learningObjectives>
+<timeRequired class="- topic/section tutorial/timeRequired "><title>所要時間</title>20 分</timeRequired>
+<section></section></tutorialBody></tutorial>

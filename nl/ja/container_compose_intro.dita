@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE tutorialIntro PUBLIC "-//IBM//DTD DITA Tutorial Introduction//EN"
+ "tutorialIntro.dtd">
+<tutorialIntro id="container_compose_intro" xml:lang="ja-jp" class="- topic/topic tutorial/tutorial tutorialIntro/tutorialIntro ">
+<title>チュートリアル: Docker Compose と <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を使用してマルチコンテナー・デプロイメントを作成する</title>
+<titlealts>
+<navtitle>チュートリアル: マルチコンテナー・デプロイメントの作成</navtitle>
+<searchtitle>チュートリアル: Docker Compose と <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を使用してマルチコンテナー・デプロイメントを作成する</searchtitle></titlealts>
+<shortdesc>データベース、サービス、キャッシュなど、複数のコンポーネントを伴うアプリの場合、始動やシャットダウンが一緒に実行されるようにすべてのコンテナーを調整するのは、難しい場合があります。
+このチュートリアルでは、単一の Docker Compose コマンドを使用することにより、マイクロサービス・アーキテクチャーでマルチコンテナー・デプロイメントとしてアプリをデプロイして実行する方法について学習します。このシステムに含まれる各コンテナーは、Docker Compose サービス定義に基づいており、独自の分離された環境で実行されます。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>cli</indexterm><indexterm>Docker Compose</indexterm><indexterm>マルチコンテナー・デプロイメント</indexterm><indexterm>マルチコンテナー・アプリ</indexterm><indexterm>IBM Containers</indexterm></keywords></metadata></prolog>
+<tutorialIntroBody>
+<learningObjectives class="- topic/section tutorial/learningObjectives "><title>シナリオ</title>このチュートリアルでは、ソフトウェア開発者が Docker Compose と <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を使用することによって、Mongo データベースや、着信ユーザー・トラフィックのバランス調整をする nginx ロード・バランサーにリンクした Lets-Chat Web アプリを実行するマルチコンテナー・デプロイメントをデプロイする方法を示します。<p><fig id="fig_compose">
+<title>マルチコンテナー Lets-Chat アプリのターゲット・シナリオ</title><xref href="../api/content/containers/images/container_compose_tutorial.png" format="png" scope="external"><image href="images/container_compose_tutorial.png" scope="local" width="700" placement="break">
+<alt>マルチコンテナー Lets-Chat アプリのターゲット・シナリオ</alt></image></xref></fig></p><p>以下のレッスンが含まれます。
+<dl>
+<dlentry>
+<dt><xref href="container_compose_lesson_config.dita#container_compose_config" format="dita">レッスン 1: マルチコンテナー・デプロイメントを構成する</xref></dt>
+<dd><filepath>docker-compose.yml</filepath> という名前の構成ファイルの中で、Lets-Chat Web アプリのサービスと Mongo データベースを定義します。
+</dd></dlentry>
+<dlentry>
+<dt><xref href="container_compose_lesson_run.dita#container_compose_run" format="dita">レッスン 2: マルチコンテナー・デプロイメントを実行する</xref></dt>
+<dd>単一の Docker Compose コマンドを使用することにより、Lets-Chat アプリをマルチコンテナー・デプロイメントで実行し、インターネットからそれにアクセスします。</dd></dlentry>
+<dlentry>
+<dt><xref href="container_compose_lesson_scale.dita#container_compose_scale" format="dita">レッスン 3: マルチコンテナー・デプロイメントを拡大縮小する</xref></dt>
+<dd>コンテナーのインスタンス数を増やすことにより、Lets-Chat Web アプリの信頼性を高めます。
+</dd></dlentry>
+<dlentry>
+<dt><xref href="container_compose_lesson_loadbalance.dita#container_compose_loadbalance" format="dita">レッスン 4: マルチコンテナー・デプロイメントにロード・バランサーを追加する</xref></dt>
+<dd>マルチコンテナー・デプロイメントに、複数の Lets-Chat コンテナー・インスタンスの間で着信ネットワーク・トラフィックのバランスを調整する nginx ロード・バランサーを追加することにより、営業時間中の高ワークロードに対応します。</dd></dlentry>
+<dlentry>
+<dt><xref href="container_compose_lesson_remove.dita#container_compose_remove" format="dita">レッスン 5: マルチコンテナー・デプロイメントを削除する</xref></dt>
+<dd>マルチコンテナー・デプロイメントを削除して使用済みリソースを解放し、割り当て量を最大限使用できるようにします。</dd></dlentry></dl><note type="tip"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の詳細については、<xref href="container_gettingstarted_tutorial.dita" format="dita">概説のチュートリアル</xref>、また、<xref href="container_docker_ov.dita" format="dita">Docker と IBM Containers</xref> の違いについての説明を参照してください。
+</note></p><p>Docker Compose の詳細については、<xref href="container_compose_faq.dita" format="dita">Docker Compose FAQ</xref> と <xref href="container_cli_reference_docker-compose.dita" format="dita" scope="local">Docker Compose コマンド・リファレンス</xref>を参照してください。
+</p></learningObjectives>
+<timeRequired class="- topic/section tutorial/timeRequired "><title>所要時間</title>45 分</timeRequired>
+<prerequisites class="- topic/section tutorial/section tutorialIntro/prerequisites "><title>前提条件</title>
+Docker Compose ソフトウェア・パッケージの最新バージョンがコンピューター上に<xref href="container_cli_compose_install.dita" format="dita">インストール</xref>されていること、または最新バージョンに<xref href="container_cli_compose_upgrade.dita" format="dita">アップグレード</xref>されていること。
+</prerequisites></tutorialIntroBody></tutorialIntro>

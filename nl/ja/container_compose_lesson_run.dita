@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE tutorialLesson PUBLIC "-//IBM//DTD DITA Tutorial Lesson//EN"
+ "tutorialLesson.dtd">
+<tutorialLesson id="container_compose_run" xml:lang="ja-jp" class="- topic/topic task/task tutorialLesson/tutorialLesson ">
+<title>レッスン 2: マルチコンテナー・デプロイメントを実行する</title>
+<titlealts>
+<navtitle>マルチコンテナー・デプロイメントの実行</navtitle>
+<searchtitle>チュートリアル・レッスン 2: Docker Compose と <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を使用してマルチコンテナー・デプロイメントを実行する</searchtitle></titlealts>
+<shortdesc>次に、マルチコンテナー・デプロイメントをデプロイして実行します。Lets-Chat と Mongo データベースのコンテナーを別々に作成して開始してから手動でリンクするのではなく、単一の Docker Compose コマンドを使用して <filepath>docker-compose.yml</filepath> ファイルの中にあるサービス定義に基づいてコンテナーを作成します。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>cli</indexterm><indexterm>Docker Compose</indexterm><indexterm>マルチコンテナー・アプリ</indexterm><indexterm>マルチコンテナー・デプロイメント</indexterm><indexterm>IBM Containers</indexterm><indexterm>docker-compose.yml</indexterm></keywords></metadata></prolog>
+<taskbody>
+<steps>
+<step>
+<cmd>まだ実行していない場合は、<xref href="container_cli_login.dita#container_cli_login/option2_li" format="dita" scope="local">IBM Containers プラグインにログイン</xref>し、ネイティブ Docker コマンドを実行するように CLI を構成します。
+</cmd></step>
+<step>
+<cmd><filepath>docker-compose.yml</filepath> ファイルがあるディレクトリーに移動します。
+</cmd>
+<info>Docker Compose のコマンドを実行するには、<filepath>docker-compose.yml</filepath> ファイルが格納されているディレクトリーに移動する必要があります。
+</info></step>
+<step>
+<cmd><filepath>docker-compose.yml</filepath> ファイルの中にあるサービス定義に基づいて、マルチコンテナー・デプロイメントをデプロイし、実行します。</cmd>
+<info><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のサービスやアプリのほとんどは、長時間実行タスクです。
+このため、コンテナーのコンソール出力につきっきりでそこから離れられないという状況を避けるために、<codeph>-d</codeph> オプションを使用します。
+<codeblock>docker-compose up -d</codeblock> <codeph>-d</codeph> オプションを使用すると、コンテナーの作成後も、コンテナー・インスタンスの名前が CLI に表示されるので、それらを追跡することができます。
+<codeblock>$ docker-compose up -d
+
+Creating composetutorial_mongo_1
+Creating composetutorial_lets-chat_1</codeblock></info></step>
+<step>
+<cmd>マルチコンテナー・デプロイメントのコンテナーが実行中であることを確認します。</cmd>
+<info>
+<codeblock>docker-compose ps  </codeblock>コンテナー・インスタンスが実行中になると、すぐに <uicontrol>Up</uicontrol> 状況が表示されます。
+この処理には数分かかる場合があります。
+出力は、以下のようになります。
+<codeblock>$ docker-compose ps
+
+        Name                   Command      State             Ports             
+-----------------------------------------------------------------------
+composetutorial_lets-chat_1                  Up      192.0.2.100:8080-&gt;8080/tcp    
+composetutorial_mongo_1                    Up      203.0.113.23:27017-&gt;27017/tcp</codeblock></info></step>
+<step importance="optional">
+<cmd><filepath>docker-compose.yml</filepath> ファイルの中で IP アドレスが構成されていない場合、使用可能なパブリック IP アドレスを Lets-Chat コンテナーにバインドします。
+</cmd>
+<info><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> ips</codeph> を実行することにより、スペース内の利用可能なパブリック IP アドレスのリストを表示するか、または、<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> ip-request</codeph> を実行することにより、新しいパブリック IP アドレスを要求します。<varname>&lt;IP_address&gt;</varname> は、実際のパブリック IP アドレスに置き換えてください。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ip-bind <varname>&lt;IP_address&gt;</varname> composetutorial_lets-chat_1</codeblock></info></step>
+<step importance="optional">
+<cmd>IP アドレスをコンテナーにバインドする処理が完了するのを待ちます。
+</cmd>
+<info>この処理には数分かかる場合があります。
+このプロセスが完了すると、すぐに CLI に<uicontrol>「OK」</uicontrol>メッセージが表示されます。
+</info></step>
+<step>
+<cmd>インターネットから Lets-Chat アプリにアクセスします。
+</cmd><substeps>
+<substep>
+<cmd>Web ブラウザーを開きます。
+</cmd></substep>
+<substep>
+<cmd>この例で示されているように、パブリック IP アドレスとパブリック Lets-Chat ポート 8080 を Web ブラウザーに入力します: <codeph>192.0.2.100:8080</codeph></cmd>
+<info>Lets-Chat のログイン・ページが Web ブラウザーに表示されます。<p><image href="images/lets-chat_screenshot.jpg" alt="Lets-Chat Web アプリにサインインします。"></image></p></info></substep></substeps></step></steps>
+<result>
+これで Lets-Chat アプリを使用する準備ができました。
+Lets-Chat アカウントを作成し、このアプリの機能を試してみてください。
+Lets-Chat アプリの信頼性を高めるには、<xref href="container_compose_lesson_scale.dita#container_compose_scale" format="dita">Lets-Chat コンテナー・インスタンス数の拡大</xref>を実行します。
+</result></taskbody></tutorialLesson>

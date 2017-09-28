@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="cs_cluster_cli" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> における CLI からの Kubernetes クラスターの作成 <ph conref="cs_conref.dita#links/release"></ph></title>
+<titlealts>
+<navtitle>CLI でのクラスターの作成</navtitle></titlealts>
+<shortdesc><ph conref="cs_conref.dita#terms/cluster_definition"></ph> アプリをデプロイするには、その前にクラスターを作成して、そのクラスター内にワーカー・ノードの定義を設定する必要があります。
+</shortdesc><!--&lt;prolog&gt;&lt;metadata&gt;&lt;keywords&gt;&lt;indexterm&gt;&lt;/indexterm&gt;&lt;/keywords&gt;&lt;/metadata&gt;&lt;/prolog&gt;-->
+<taskbody id="gs_taskbody">
+<context id="context_py5_jp4_j1b"><ph audience="blue"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Dedicated ユーザーは、代わりに<xref href="#creating_cli_dedicated" format="dita" scope="local"></xref>を参照してください。</ph></context>
+<steps>
+<stepsection>クラスターを作成するには、以下のようにします。</stepsection>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> CLI と <xref href="cs_cli_install.dita"><ph conref="cs_conref.dita#links/bx_cs_plugin_name"></ph></xref> をインストールします。</cmd></step>
+<step conref="cs_cli_configure.dita#cs_cli_configure/bx_login">
+<cmd></cmd></step>
+<step>
+<cmd>複数の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のアカウント、組織、およびスペースが割り当てられているユーザーは、Kubernetes クラスターを作成するアカウントを選択します。
+クラスターはアカウントと組織に固有のものですが、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースからは独立しています。
+そのため、組織内の複数のスペースに対するアクセス権限がある場合、リストからスペースを選択できます。
+</cmd></step>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> Kubernetes プラグインにログインします (<ph conref="cs_conref.dita#links/bx_cs">)</ph>)。
+</cmd>
+<info>
+<p audience="blue"><ph>実動</ph></p>
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> init</codeblock>
+<p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 地域を指定するには、次のいずれかのコマンドを使用します。選択する地域によって、クラスターを作成できる場所が決まります。<ul id="ul_dw1_mcn_zz">
+<li>米国南部:<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> init --host https://us-south.containers.bluemix.net</codeblock></li>
+<li>中欧:
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> init --host https://eu-central.containers.bluemix.net</codeblock></li>
+<li>南アジア太平洋地域:<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> init --host https://ap-south.containers.bluemix.net</codeblock></li></ul></p><ph audience="blue">ステージング:</ph>
+<codeblock audience="blue"><ph conref="cs_conref.dita#links/bx_cs">)</ph> init <ph>--host https://stage.cont.bluemix.net</ph></codeblock></info></step>
+<step audience="blue">
+<cmd>既存の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントがある場合、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> 資格情報を入力して標準クラスターを作成します。<ph audience="blue">この手順は、ステージングのすべての標準クラスターで必要です。</ph></cmd>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> credentials-set --infrastructure-username &lt;username&gt; --infrastructure-api-key &lt;api-key&gt;</codeblock></info></step>
+<step>
+<cmd>クラスターを作成します。</cmd><substeps>
+<substep>
+<cmd>使用可能なロケーションを確認します。</cmd>
+<info> 表示される場所は、以前に選択した <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 地域によって異なります。
+
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> locations</codeblock> CLI 出力は、以下のようになります。<ul id="ul_qrm_5cn_zz">
+<li>米国南部:<screen>dal10
+dal12</screen></li>
+<li>中欧:<screen>ams03
+fra02</screen></li>
+<li>南アジア太平洋地域<screen>syd01
+syd02</screen></li></ul><draft-comment>Lon02 is not part of GA. </draft-comment></info></substep>
+<substep id="location">
+<cmd>ロケーションを選択して、そのロケーションで使用できるマシン・タイプを確認します。</cmd>
+<info>マシン・タイプの指定によって、各ワーカー・ノードで使用可能な仮想コンピュート・リソースが決まります。
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> machine-types &lt;location&gt;</codeblock></info>
+<info>
+<screen>Getting machine types list...
+OK
+Machine Types
+Name         Cores   Memory   Network Speed   OS             Storage   Server Type   
+u1c.2x4      2       4GB      1000Mbps        UBUNTU_16_64   100GB     virtual   
+b1c.4x16     4       16GB     1000Mbps        UBUNTU_16_64   100GB     virtual   
+b1c.16x64    16      64GB     1000Mbps        UBUNTU_16_64   100GB     virtual   
+b1c.32x128   32      128GB    1000Mbps        UBUNTU_16_64   100GB     virtual   
+b1c.56x242   56      242GB    1000Mbps        UBUNTU_16_64   100GB     virtual </screen></info></substep>
+<substep id="vlan">
+<cmd>このアカウントの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> にパブリック VLAN およびプライベート VLAN が既に存在しているかどうかを確認します。</cmd>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> vlans <varname>&lt;location&gt;</varname></codeblock>出力:
+<codeblock>ID        Name                Number   Type      Router  
+1519999   vlan   1355     private   bcr02a.dal10  
+1519898   vlan   1357     private   bcr02a.dal10 
+1518787   vlan   1252     public   fcr02a.dal10 
+1518888   vlan   1254     public    fcr02a.dal10 </codeblock>
+パブリック VLAN およびプライベート VLAN が既に存在する場合、対応するルーターをメモに取ります。プライベート VLAN ルーターは常に先頭が <codeph>bcr</codeph> (バックエンド・ルーター) となり、パブリック VLAN ルーターは常に先頭が <codeph>fcr</codeph> (フロントエンド・ルーター) となります。クラスターを作成するときにこれらの VLAN を使用するには、それらの接頭部の後に続く数値と文字の組み合わせが一致していなければなりません。
+このサンプル出力では、すべてのルーターに
+<codeph>02a.dal10</codeph> が含まれているため、これらのプライベート VLAN とパブリック VLAN はどの組み合わせでも使用できます。</info></substep>
+<substep>
+<cmd><codeph>cluster-create</codeph> コマンドを実行します。</cmd>
+<info><ph conref="cs_conref.dita#links/free_cluster"></ph>クラスター (<ph audience="blue">コンテナー・トライブ <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントで </ph>vCPU 2 つとメモリー 4 GB でセットアップされたワーカー・ノード 1 つ) または標準クラスター (<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントでワーカー・ノード数は無制限) のいずれかを選択できます。標準クラスターを作成する場合、デフォルトでは、ワーカー・ノードのハードウェアは IBM の複数のお客様によって共有され、使用時間に応じて課金されます。</info>
+<info>標準クラスターの例<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> cluster-create --location <varname>dal10</varname> --public-vlan <varname>my_public_vlan_id</varname> --private-vlan <varname>my_private_vlan_id</varname> --machine-type <varname>u1c.2x4</varname> --workers <varname>3</varname> --name <varname>my_cluster</varname></codeblock><ph conref="cs_conref.dita#links/free_cluster"></ph>クラスターの例<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> cluster-create --name <varname>my_cluster</varname></codeblock>
+<table frame="all" colsep="1" rowsep="1" id="table_sdf_nkm_2v">
+<desc>
+<p outputclass="summary">コマンドの構成要素のリスト</p></desc>
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="100pt"></colspec><colspec colnum="2" colname="c2"></colspec>
+<thead>
+<row>
+<entry namest="c1" nameend="c2"><ph conref="container_conref.dita#images/more_info"></ph> このコマンドの構成要素について</entry></row></thead>
+<tbody>
+<row>
+<entry><codeph><codeph>cluster-create</codeph></codeph></entry>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 組織内にクラスターを作成するためのコマンド。
+</entry></row>
+<row>
+<entry><codeph>--location <varname>&lt;location&gt;</varname></codeph></entry>
+<entry><varname>&lt;location&gt;</varname> を、クラスターを作成する <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 場所の ID に置き換えます。使用可能な場所は、ログインしている <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 地域によって異なります。
+<p>使用可能な場所は、次のとおりです。</p><ul conref="cs_conref.dita#terms/datacenter_list">
+<li></li></ul></entry></row>
+<row>
+<entry><codeph>--machine-type <varname>&lt;machine_type&gt;</varname></codeph></entry>
+<entry>標準クラスターを作成する場合、マシン・タイプを選択します。マシン・タイプの指定によって、各ワーカー・ノードで使用可能な仮想コンピュート・リソースが決まります。
+詳しくは、<xref href="cs_planning_cluster_type.dita" format="dita"></xref> を参照してください。
+<ph conref="cs_conref.dita#links/free_cluster"></ph>クラスターの場合、マシン・タイプを定義する必要はありません。</entry></row>
+<row>
+<entry><codeph>--public-vlan <varname>&lt;public_vlan_id&gt;</varname></codeph></entry>
+<entry><ul id="ul_bmw_brp_yz">
+<li><ph conref="cs_conref.dita#links/free_cluster"></ph>クラスターの場合、パブリック VLAN を定義する必要がありません。<ph conref="cs_conref.dita#links/free_cluster"></ph>クラスターは IBM 所有のパブリック VLAN に自動的に接続されます。</li>
+<li>標準クラスターの場合、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントでその場所用にパブリック VLAN を既にセットアップしている場合には、そのパブリック VLAN の ID を入力します。そうでない場合は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> によってパブリック VLAN が自動的に作成されるので、このオプションを指定する必要はありません。
+<note conref="cs_cli_reference.dita#cs_commands/match_vlans"></note></li></ul></entry></row>
+<row>
+<entry><codeph>--private-vlan <varname>&lt;private_vlan_id&gt;</varname></codeph></entry>
+<entry><ul id="ul_rmq_2rp_yz">
+<li><ph conref="cs_conref.dita#links/free_cluster"></ph> クラスターの場合、プライベート VLAN を定義する必要はありません。<ph conref="cs_conref.dita#links/free_cluster"></ph>クラスターは IBM 所有のプライベート VLAN に自動的に接続されます。</li>
+<li>標準クラスターに対して、対象ロケーションの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントでプライベート VLAN を既にセットアップしている場合には、プライベート VLAN の ID を入力します。そうでない場合は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> によってプライベート VLAN が自動的に作成されるので、このオプションを指定する必要はありません。
+<note conref="cs_cli_reference.dita#cs_commands/match_vlans"></note></li></ul></entry></row>
+<row>
+<entry><codeph>--name <varname>&lt;name&gt;</varname></codeph></entry>
+<entry><varname>&lt;name&gt;</varname> をクラスターの名前に置き換えます。</entry></row>
+<row>
+<entry><codeph>--workers <varname>&lt;number&gt;</varname></codeph></entry>
+<entry>クラスターに含めるワーカー・ノードの数。<codeph>--workers</codeph> オプションが指定されていない場合は、ワーカー・ノードが 1 つ作成されます。</entry></row></tbody></tgroup></table></info></substep></substeps></step>
+<step>
+<cmd>クラスターの作成が要求されたことを確認します。</cmd>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> clusters</codeblock>
+
+<note>ワーカー・ノード・マシンが配列され、クラスターがセットアップされて自分のアカウントにプロビジョンされるまでに、最大 15 分かかります。
+</note> クラスターのプロビジョニングが完了すると、クラスターの状況が <uicontrol>deployed</uicontrol> に変わります。
+<screen>Name         ID                                   State      Created          Workers   
+my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1   </screen></info></step>
+<step>
+<cmd>ワーカー・ノードの状況を確認します。</cmd>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> workers <varname>&lt;cluster&gt;</varname></codeblock></info>
+<info>ワーカー・ノードの準備が完了すると、状態が <uicontrol>normal</uicontrol> に変わり、状況が <ph conref="cs_conref.dita#links/status"></ph> になります。
+ノードの状況が <ph conref="cs_conref.dita#links/status"></ph> になったら、クラスターにアクセスできます。
+<note>ワーカー・ノードごとに、固有のワーカー・ノード ID とドメイン名が割り当てられます。クラスターが作成された後にこれらを手動で変更してはいけません。
+ID またはドメイン名を変更すると、Kubernetes マスターがクラスターを管理できなくなります。</note>
+<screen>ID                                                  Public IP        Private IP     Machine Type   State      Status  
+prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1   169.47.223.113   10.171.42.93   free           <ph conref="cs_conref.dita#links/state"></ph>    <ph conref="cs_conref.dita#links/status"></ph></screen></info></step>
+<step audience="unknown">
+<cmd>クラスター・ダッシュボードを開きます。</cmd><substeps>
+<substep>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> でコンテナー・ダッシュボードを開きます。</cmd></substep>
+<substep>
+<cmd><uicontrol>「クラスター (Clusters)」</uicontrol>リストで、作成したクラスターを選択します。
+</cmd>
+<info>クラスターの詳細ページが開きます。</info></substep></substeps></step>
+<step conref="cs_cli_configure.dita#cs_cli_configure/config">
+<cmd>Set the cluster you created as the context for this session.</cmd>
+<info>Complete this configuration step every time you want to work with your cluster with the
+CLI.</info><substeps>
+<substep>
+<cmd>Download the Kubernetes configuration file.</cmd>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> cluster-config <varname>&lt;cluster_name_or_id&gt;</varname></codeblock>When
+the download is finished, an <codeph>export</codeph> command is shown that you can use to set the
+path to your Kubernetes configuration file as an environment variable. </info></substep>
+<substep>
+<cmd>Copy and paste the command from the previous step to set the environment variable and configure
+your CLI to run <codeph>kubectl</codeph> commands within your cluster.</cmd>
+<info>
+<codeblock>export KUBECONFIG=<varname>&lt;path_to_kubeconfig&gt;</varname></codeblock>
+
+<p>Example</p>
+
+<screen>export KUBECONFIG=/Users/ibm/.bluemix/plugins/cs-cli/clusters/my_cluster/kube-config-dal10-my_cluster.yml</screen></info></substep></substeps></step>
+<step conref="cs_apps_dashboard.dita#cs_cli_dashboard/kube_dashboard">
+<cmd>Open your Kubernetes dashboard to see more information about the cluster and worker nodes. </cmd><substeps>
+<substep>
+<cmd>Run a proxy with the default port.</cmd>
+<info>
+<codeblock>kubectl proxy</codeblock></info></substep>
+<substep>
+<cmd>Open the following URL in a browser.</cmd>
+<info>
+<codeblock>http://localhost:8001/ui</codeblock></info></substep></substeps></step></steps>
+<postreq><dl>
+<dlentry>
+<dt>次の作業</dt>
+<dd><ul>
+<li><xref href="cs_apps_cli.dita" format="dita" scope="local">クラスターにアプリをデプロイします。</xref></li>
+<li><xref href="https://kubernetes.io/docs/user-guide/kubectl/" format="html" scope="external"><codeph>kubectl</codeph> コマンド・ラインを使用してクラスターを管理します。</xref></li>
+<li><ph conref="cs_conref.dita#links/registry_link"></ph></li></ul></dd></dlentry></dl></postreq></taskbody>
+<task id="creating_cli_dedicated" audience="blue">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Dedicated<ph conref="cs_conref.dita#links/release_dedicated"></ph> における CLI からの Kubernetes クラスターの作成 </title>
+<taskbody>
+<steps id="steps_rsn_j3k_31b">
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> CLI と <xref href="cs_cli_install.dita"><ph conref="cs_conref.dita#links/bx_cs_plugin_name"></ph></xref> をインストールします。</cmd></step>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のパブリック・エンドポイントにログインします。<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 資格情報を入力し、プロンプトが出されたら、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Dedicated アカウントを選択します。</cmd>
+<info>
+<codeblock>bx login -a api.ng.bluemix.net</codeblock>
+
+<note>フェデレーテッド ID がある場合は、<codeph><ph conref="cs_conref.dita#links/bx"></ph> login
+--sso</codeph> を使用して、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> CLI にログインします。ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。
+<codeph>--sso</codeph> なしではログインに失敗し、<codeph>--sso</codeph> オプションを指定すると成功する場合、フェデレーテッド ID があることがわかります。</note></info></step>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> Kubernetes プラグインにログインします (<ph conref="cs_conref.dita#links/bx_cs">)</ph>)。
+</cmd>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> init</codeblock></info></step>
+<step>
+<cmd><codeph>cluster-create</codeph> コマンドを使用してクラスターを作成します。</cmd>
+<info>標準クラスターを作成する場合、ワーカー・ノードのハードウェアは、使用時間に応じて課金されます。<p>例<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> cluster-create --machine-type <varname>&lt;machine-type&gt;</varname> --workers <varname>&lt;number&gt;</varname> --name <varname>&lt;cluster_name&gt;</varname></codeblock></p></info>
+<info>
+<table frame="all" colsep="1" rowsep="1" id="table_vsn_j3k_31b">
+<desc>
+<p outputclass="summary">コマンドの構成要素のリスト</p></desc>
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="100pt"></colspec><colspec colnum="2" colname="c2"></colspec>
+<thead>
+<row>
+<entry namest="c1" nameend="c2"><ph conref="container_conref.dita#images/more_info"></ph> このコマンドの構成要素について</entry></row></thead>
+<tbody>
+<row>
+<entry><codeph><codeph>cluster-create</codeph></codeph></entry>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 組織内にクラスターを作成するためのコマンド。
+</entry></row>
+<row>
+<entry><codeph>--machine-type <varname>&lt;machine_type&gt;</varname></codeph></entry>
+<entry>マシン・タイプの指定によって、各ワーカー・ノードで使用可能な仮想コンピュート・リソースが決まります。
+詳しくは、<xref href="cs_planning_cluster_type.dita" format="dita"></xref> を参照してください。
+</entry></row>
+<row>
+<entry><codeph>--name <varname>&lt;name&gt;</varname></codeph></entry>
+<entry><varname>&lt;name&gt;</varname> をクラスターの名前に置き換えます。</entry></row>
+<row>
+<entry><codeph>--workers <varname>&lt;number&gt;</varname></codeph></entry>
+<entry>クラスターに含めるワーカー・ノードの数。<codeph>--workers</codeph> オプションが指定されていない場合は、ワーカー・ノードが 1 つ作成されます。</entry></row></tbody></tgroup></table></info></step>
+<step>
+<cmd>クラスターの作成が要求されたことを確認します。</cmd>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> clusters</codeblock>
+
+<note>ワーカー・ノード・マシンが配列され、クラスターがセットアップされて自分のアカウントにプロビジョンされるまでに、最大 15 分かかります。
+</note> クラスターのプロビジョニングが完了すると、クラスターの状況が <uicontrol>deployed</uicontrol> に変わります。
+<screen>Name         ID                                   State      Created          Workers   
+my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1   </screen></info></step>
+<step>
+<cmd>ワーカー・ノードの状況を確認します。</cmd>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> workers <varname>&lt;cluster&gt;</varname></codeblock></info>
+<info>ワーカー・ノードの準備が完了すると、状態が <uicontrol>normal</uicontrol> に変わり、状況が <uicontrol>Ready</uicontrol> になります。
+ノードの状況が<uicontrol>「Ready」</uicontrol>になったら、クラスターにアクセスできます。
+<screen>ID                                                  Public IP        Private IP     Machine Type   State      Status  
+prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1   169.47.223.113   10.171.42.93   free           <ph conref="cs_conref.dita#links/state"></ph>    <ph conref="cs_conref.dita#links/status"></ph></screen></info></step>
+<step audience="unknown">
+<cmd>クラスター・ダッシュボードを開きます。</cmd><substeps id="substeps_zsn_j3k_31b">
+<substep>
+<cmd>コンテナー・ダッシュボードを開きます。</cmd></substep>
+<substep>
+<cmd><uicontrol>「クラスター (Clusters)」</uicontrol>リストで、作成したクラスターを選択します。
+</cmd>
+<info>クラスターの詳細ページが開きます。</info></substep></substeps></step>
+<step conref="cs_cli_configure.dita#cs_cli_configure/config">
+<cmd>Set the cluster you created as the context for this session.</cmd>
+<info>Complete this configuration step every time you want to work with your cluster with the
+CLI.</info><substeps id="substeps_atn_j3k_31b">
+<substep>
+<cmd>Download the Kubernetes configuration file.</cmd>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> cluster-config <varname>&lt;cluster_name_or_id&gt;</varname></codeblock>When
+the download is finished, an <codeph>export</codeph> command is shown that you can use to set the
+path to your Kubernetes configuration file as an environment variable. </info></substep>
+<substep>
+<cmd>Copy and paste the command from the previous step to set the environment variable and configure
+your CLI to run <codeph>kubectl</codeph> commands within your cluster.</cmd>
+<info>
+<codeblock>export KUBECONFIG=<varname>&lt;path_to_kubeconfig&gt;</varname></codeblock>
+
+<p>Example</p>
+
+<screen>export KUBECONFIG=/Users/ibm/.bluemix/plugins/cs-cli/clusters/my_cluster/kube-config-dal10-my_cluster.yml</screen></info></substep></substeps></step>
+<step conref="cs_cli_dashboard.dita#cs_cli_dashboard/kube_dashboard">
+<cmd>Open your Kubernetes dashboard to see more information about the cluster and worker nodes. </cmd><substeps id="substeps_btn_j3k_31b">
+<substep>
+<cmd>Run a proxy with the default port.</cmd>
+<info>
+<codeblock>kubectl proxy</codeblock></info></substep>
+<substep>
+<cmd>Open the following URL in a browser.</cmd>
+<info>
+<codeblock>http://localhost:8001/ui</codeblock></info></substep></substeps></step></steps>
+<postreq id="postreq_f4p_h3k_31b"><dl>
+<dlentry>
+<dt>次の作業</dt>
+<dd><ul id="ul_g4p_h3k_31b">
+<li><xref href="cs_apps_cli.dita" format="dita" scope="local">クラスターにアプリをデプロイします。</xref></li>
+<li><xref href="https://kubernetes.io/docs/user-guide/kubectl/" format="html" scope="external"><codeph>kubectl</codeph> コマンド・ラインを使用してクラスターを管理します。</xref></li>
+<li><ph conref="cs_conref.dita#links/registry_link"></ph></li></ul></dd></dlentry></dl></postreq></taskbody></task></task>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN" "ibm-concept.dtd">
+<concept id="container_docker_ov" xml:lang="ja-jp">
+<title>Docker および <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword></title>
+<titlealts>
+<searchtitle>Docker および <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の概要</searchtitle></titlealts>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> は、
+Docker テクノロジーを利用する <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> ランタイムです。既存の Docker ユーザー、および Docker の新しいユーザーは、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> での以下の機能を期待できます。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>docker</indexterm><indexterm>IBM Containers</indexterm></keywords></metadata></prolog>
+<conbody>
+<section><p><ul>
+<li>IBM がホストするプライベート・レジストリーに既存の Docker Hub イメージを追加する。</li>
+<li>潜在的な脆弱性がないかイメージを検証する。</li>
+<li>既に快適に使用している Docker CLI コマンドを使用するために <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 用のコマンド・ライン・インターフェース (CLI) を構成する。</li>
+<li>追加の構成なしで、コンテナーのロギングとモニタリングのデータを表示する。</li></ul></p></section>
+<section><p>過去に Docker を使用した経験があれば、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の使用を開始する際に、これらの一般的な質問に対する回答が役に立つかもしれません。</p>
+<p><dl>
+<dlentry>
+<dt>Docker Hub のイメージを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で使用する方法を教えてください。</dt>
+<dd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI を使用して、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> プライベート・レジストリーに <xref href="container_images_copying.dita" format="dita" scope="local">Docker Hub のイメージをコピー</xref>できます。
+イメージがコピーされたら、それを使用してコンテナーを作成できます。</dd></dlentry>
+<dlentry>
+<dt>高可用性のコンテナーはどのようにして作成するのですか?</dt>
+<dd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> は、Docker コンテナーのような単一コンテナーを提供します。また、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> が提供する拡張が容易なコンテナー・グループを使用すると、アプリケーションの可用性を高めることができます。コンテナー・グループが提供する組み込みのロード・バランサーは、コンテナー・インスタンス間でワークロードを経路指定し、バランスを保ちます。グループの可用性を高めるには、アンチアフィニティーを有効にして複数の物理計算ホスト間にコンテナー・グループ・インスタンスを分散させ、正常でないインスタンスの自動リカバリーを有効にします。
+また、CPU とメモリーの使用量に基づいて、コンテナー・グループ・インスタンスを自動スケーリングするポリシーを設定することもできます。
+詳細については、<xref href="container_ha.dita" format="dita" scope="local"></xref>を参照してください。</dd></dlentry>
+<dlentry>
+<dt>コンテナー・ポートをホスト・ポートにマップするにはどのようにすればいいですか?</dt>
+<dd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> では、プライベート・コンテナー・ネットワークとパブリック・ネットワークが区別されます。
+プライベート・コンテナー・ネットワークでは、すべてのコンテナー・ポートが追加構成なしのデフォルトで公開されます。同じプライベート・コンテナー・ネットワークに接続されている単一のコンテナーとコンテナー・グループは、それぞれに割り当てられているプライベート IP アドレスを使用して相互に通信できます。
+ポート・マッピングは不要です。<p>アプリをパブリック・ネットワークで使用できるようにするには、パブリック・ポートを公開し、パブリック IP アドレスを単一コンテナーにバインドするか、またはパブリック経路をコンテナー・グループにバインドする必要があります。
+パブリック・ポートを公開すると、公開したポートでのみパブリック・データを送受信できるようになります。
+その他のパブリック・ポートは、すべて閉じられます。</p></dd></dlentry>
+<dlentry>
+<dt>コンテナーをインターネットでパブリックに使用可能にするにはどのようにすればいいですか? </dt>
+<dd><ul>
+<li><xref href="container_single_ui.dita" format="dita" scope="local">単一コンテナー</xref>の場合、1 つ以上のポートを公開し、浮動 IP アドレスをそのコンテナーに割り当てます。</li>
+<li><xref href="container_group_ui.dita" format="dita" scope="local">コンテナー・グループ</xref>の場合、単一の HTTP ポートを公開し、経路を割り当てます。</li></ul></dd></dlentry>
+<dlentry>
+<dt>ローカルの Docker と <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> とでコンテナーの作成に要する時間が違うのはなぜですか?</dt>
+<dd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> でよりもローカル Docker インストール済み環境の方が、より速くコンテナーを作成できることにお気付きかもしれません。最初のデプロイメントの際に、コンテナー・イメージをホスト上のレジストリーにダウンロードする必要があります。それ以降のイメージのデプロイメントは速くなります。コンテナー構成が異なるとデプロイメント速度にどのような影響があるかについて詳しくは、<xref href="container_planning_types.dita" format="dita" scope="local"></xref>を参照してください。</dd></dlentry>
+<dlentry>
+<dt>プライベート・ネットワークでコンテナーを作成してパブリックに公開はしないようにするにはどうすればいいですか?</dt>
+<dd>コンテナーを作成すると、そのコンテナーは <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のデフォルトのコンテナー・プライベート・ネットワークに接続され、プライベート IP アドレスが割り当てられます。
+このプライベート・ネットワークでは、デフォルトですべてのコンテナー・ポートが公開されます。
+ホストのポートをコンテナーのポートにマッピングする必要はありません。コンテナーをインターネットからアクセスできないようにするには、コンテナーの作成時に IP アドレスをバインドしないか、ポートを公開しないようにしてください。</dd></dlentry>
+<dlentry audience="blue">
+<dt>独自のプライベート IP アドレスをコンテナーに割り当てるにはどうすればいいのでしょうか?
+</dt>
+<dd>コンテナーを作成すると、デフォルトの IBM Containers ネットワーク設定に基づいてプライベート IP アドレスがそれに割り当てられます。
+<draft-comment author="bpratt">Audience blue until network commands
+returned</draft-comment><ph>カスタム・サブネットと IP アドレス範囲が必要な場合、独自のプライベート・オーバーレイ・ネットワークを作成して、<xref href="container_cli_ips_byoip.dita" format="dita" scope="local"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のデフォルト設定を置き換える</xref>ことができます。</ph></dd></dlentry>
+<dlentry>
+<dt>ボリュームをコンテナーにマウントするにはどのようにすればいいですか?</dt>
+<dd>単一コンテナーは、設計上、存続時間が短期です。しかし、ボリュームを使用することにより、コンテナーを再始動してもデータが永続するようにできます。Docker 内にボリュームをマウントすると、そのボリュームはローカル・ファイル・システムにマウントされます。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> では、計算ホストへのアクセスが制限されるので、ホスト・ディレクトリーをコンテナーにマウントすることができません。
+代わりに、組織規模のボリュームを使用して、コンテナーを再始動してもデータを保持します。ボリュームは、分離されたファイル共有上でホストされます。そこでは、安全にアプリ・データが保管され、ファイルに対するアクセスや権限が管理されます。
+ボリュームをコンテナーにマウントするには、まず、<xref href="container_volumes_ui.dita" format="dita">ボリュームを作成する</xref>必要があります。CLI からコンテナーを作成する場合は、<codeph>--volume</codeph> オプションを使用して、既存のボリュームをマウントします。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI から、<uicontrol>「詳細オプション」</uicontrol>を選択して、既存のボリュームを割り当てます。
+詳細については、<xref href="container_volumes_mount.dita" format="dita" scope="local"></xref>を参照してください。</dd></dlentry>
+<dlentry>
+<dt><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> では Docker Compose をどのように使用するのですか? </dt>
+<dd>Docker Compose コマンドを実行することで、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でマルチコンテナー・デプロイメントを作成および管理できます。詳細については、<xref href="container_compose_intro.dita" format="dita" scope="local"></xref>を参照してください。</dd></dlentry>
+<dlentry>
+<dt>IBM Containers サービスを指定するように Docker Compose クライアントをセットアップするにはどうすればいいですか?</dt>
+<dd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI にログインするときに、Docker のネイティブ・コマンドを実行するように CLI を構成します。
+詳しくは、『<xref href="container_cli_login.dita" format="dita" scope="local"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> プラグインへのログイン</xref>』を参照してください。</dd></dlentry>
+<dlentry>
+<dt>実行中のコンテナーにログインするにはどのようにすればいいですか? SSH を使用するのですか?</dt>
+<dd><codeph><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> exec</codeph> を使用して<xref href="troubleshoot/ts_cf_ic_exec.dita" format="dita" scope="local">コンテナーにログイン</xref>できます。</dd></dlentry>
+<dlentry>
+<dt>なぜ私のコンテナーはデタッチ・モードで実行されているのですか?</dt>
+<dd>実行中のプロセスを持つコンテナーが、終了せずにバックグラウンドで実行されるように、デフォルトでは、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のコンテナーはデタッチ・モードで実行されます。
+デタッチ・モードで実行されるコンテナーは、クラウド環境の標準モデルです。
+<xref href="container_cli_reference_cfic.dita#container_cli_reference_cfic/attach"></xref> を実行してコンテナーに接続することもできます。
+<draft-comment>Next item shows in
+staging only.</draft-comment></dd></dlentry>
+<dlentry audience="blue">
+<dt>Dockerfile から、またはコンテナーの始動時にプライベート IP アドレスにアクセスするにはどのようにするのですか? </dt>
+<dd>ローカル Docker では、コンテナーが IP アドレスをホストと共有するため、<codeph>localhost</codeph> を使用して基礎となるホストを参照することができます。ただし、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> では、すべてのコンテナーが固有のプライベート IP アドレスを割り当てられます。Dockerfile 内で、またはコンテナーの始動中にプライベート IP アドレスにアクセスするには、以下のコマンドを実行します。<codeblock>getent hosts $HOSTNAME | awk 'NR==1{ print $1 }'</codeblock></dd></dlentry></dl></p></section></conbody></concept>

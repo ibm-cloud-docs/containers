@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN" "ibm-concept.dtd">
+<concept id="cs_planning_health" xml:lang="ja-jp">
+<title>  <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword> でのクラスターとアプリの正常性のモニター</title>
+<titlealts>
+<navtitle>ヘルス・モニター</navtitle></titlealts>
+<shortdesc>Kubernetes と Docker の標準機能を使用して、クラスターとそのクラスターにデプロイされたアプリの正常性をモニターできます。
+</shortdesc>
+<conbody>
+<p><dl>
+<dlentry>
+<dt><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のクラスター詳細ページ</dt>
+<dd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> には、クラスターの正常性と能力、そしてクラスター・リソースの使用方法に関する情報が表示されます。
+この GUI を使用して、クラスターのスケールアウト、永続ストレージの作業、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービス・バインディングによるクラスターへの付加機能の追加を行うことができます。
+クラスターの詳細ページを表示するには、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> の<uicontrol>「ダッシュボード」</uicontrol>に移動して、クラスターを選択します。
+</dd></dlentry>
+<dlentry>
+<dt>Kubernetes ダッシュボード</dt>
+<dd>Kubernetes ダッシュボードは、ワーカー・ノードの正常性の検討、Kubernetes リソースの検索、コンテナー化アプリのデプロイ、ロギングとモニタリング情報に基づくアプリのトラブルシューティングを行うために使用できる、管理 Web インターフェースです。Kubernetes ダッシュボードにアクセスする方法について詳しくは、<xref href="cs_apps_dashboard.dita" format="dita" scope="local"></xref>を参照してください。</dd></dlentry>
+<dlentry>
+<dt>Docker ログ</dt>
+<dd>組み込みの Docker ロギング機能を活用して、標準の STDOUT と STDERR 出力ストリームのアクティビティーを検討することができます。
+詳しくは、<xref href="../monitor_log/logging/containers/logging_containers_ov.html#logging_containers_ov_methods_view_kube" format="html" scope="peer">Kubernetes クラスターで実行されるコンテナーのコンテナー・ログの表示</xref>を参照してください。</dd></dlentry>
+<dlentry>
+<dt>ロギングとモニタリング</dt>
+<dd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> は、標準クラスター用の付加的なモニター機能とロギング機能をサポートします。ログとメトリックは、Kubernetes クラスターを作成したときにログインした <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースにあります。<ul>
+<li>コンテナーのメトリックはクラスターにデプロイされたすべてのコンテナーについて自動的に収集されます。
+これらのメトリックが送信され、 Grafana で使用できるようになります。メトリックについて詳しくは、<xref href="../services/cloud-monitoring/containers/analyzing_metrics_bmx_ui.html#analyzing_metrics_bmx_ui" format="html" scope="peer"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword>のモニター</xref>を参照してください。
+<p>Grafana ダッシュボードにアクセスするには、<filepath>https://metrics.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword></filepath>に移動します。クラスターを作成した<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 組織とスペースを選択します。
+</p></li>
+<li>コンテナーのログは、コンテナー外部からモニターされて転送されます。コンテナーのログには Kibana ダッシュボードを使用してアクセスできます。ロギングについて詳しくは、
+<xref href="../monitor_log/logging/containers/logging_containers_other_logs.html#logging_containers_collect_data" format="html" scope="peer"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のロギング</xref>を参照してください。
+<p>Kibana ダッシュボードにアクセスするには、<filepath>https://logging.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword></filepath>に移動します。クラスターを作成した<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 組織とスペースを選択します。
+</p></li></ul></dd></dlentry></dl></p></conbody>
+<concept id="concept_xrh_dhj_wz">
+<title>その他のヘルス・モニター・ツール</title>
+<shortdesc>他のツールを構成してロギング機能とモニター機能を追加することができます。
+</shortdesc>
+<conbody>
+<p><dl>
+<dlentry>
+<dt>Prometheus</dt>
+<dd>Prometheus は、特に Kubernetes のために設計されたモニタリング、ロギング、およびアラートのためのオープン・ソースのツールで、Kubernetes のロギング情報に基づいてクラスター、ワーカー・ノード、およびデプロイメントの正常性に関する詳細情報を取得するために使用されます。
+セットアップについては、 <xref href="cs_planning_integrations.dita" format="dita" scope="local"></xref>を参照してください。</dd></dlentry></dl></p></conbody></concept></concept>

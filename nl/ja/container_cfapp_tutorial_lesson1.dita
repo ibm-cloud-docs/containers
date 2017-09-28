@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tutorialLesson PUBLIC "-//IBM//DTD DITA Tutorial Lesson//EN" "tutorialLesson.dtd">
+<tutorialLesson id="container_cfapp_tutorial_lesson1" xml:lang="ja-jp" class="- topic/topic task/task tutorialLesson/tutorialLesson ">
+<title>レッスン 1: Cloud Foundry Node.js アプリのコードをダウンロードする</title>
+<titlealts>
+<navtitle>レッスン 1: CF Node.js アプリのコードをダウンロードする</navtitle>
+<searchtitle>レッスン 1: <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で使用する CF Node.js アプリのコードをダウンロードする</searchtitle></titlealts>
+<shortdesc>Node.js コードを準備します。コードを持っていない場合は、このチュートリアルで使用するスターター・コードを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> からダウンロードできます。</shortdesc>
+<taskbody>
+<prereq>開始する前に、<xref href="container_cli_cfic_install.dita" format="dita" scope="local"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI をインストール</xref>して、<xref href="container_cli_login.dita" format="dita" scope="local">ログイン</xref>します。</prereq>
+<steps>
+<stepsection>アプリのコードを取得して整理するには、次の手順を実行します。</stepsection>
+<step>
+<cmd><userinput><varname>cf-pi-myinitials</varname></userinput> という名前のディレクトリーを作成し、その中にナビゲートします。</cmd>
+<info>このディレクトリーには、Docker イメージをビルドし、Node.js アプリを実行するために必要なすべてのファイルを保存します。ディレクトリーには任意の名前を使用できます。例にある名前を使用する場合は、<varname>myinitials</varname> を自分のイニシャルで置き換えます (例: <varname>cf-pi-ms</varname>)。
+<codeblock>mkdir <varname>cf-pi-myinitials</varname> &amp;&amp; cd <varname>cf-pi-myinitials</varname></codeblock></info></step>
+<step>
+<cmd>このディレクトリーに、Node.js アプリのコード・ファイルと、すべての関連ファイルをコピーします。</cmd>
+<info>独自の Node.js アプリのコードを使用することも、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> から Personal Insights アプリをダウンロードすることもできます。
+<p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> から Personal Insights アプリのコードをダウンロードするには、次の手順を実行します。</p></info><substeps>
+<substep>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> の<wintitle>カタログ</wintitle>で、<uicontrol>「ボイラープレート」</uicontrol>の<uicontrol>「Personality Insights Node.js Web スターター」</uicontrol>をクリックします。</cmd>
+<info>このボイラープレートには、ブログ、ツイート、フォーラム投稿を通して人が生成するテキストから、コグニティブ特性やソーシャル特性のスペクトルを、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/personalityinsightsfull"></keyword> サービスを使用して抽出する Node.js アプリが含まれています。</info></substep>
+<substep>
+<cmd>アプリ名 <userinput><varname>cf-pi-myinitials</varname></userinput> を入力して<uicontrol>「作成」</uicontrol>をクリックします。</cmd>
+<info>ボイラープレートのアプリ・コードにアクセスするには、まず CF アプリを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> にデプロイする必要があります。アプリには任意の名前を使用できます。例にある名前を使用する場合は、<varname>myinitials</varname> を自分の名前で置き換えて (例: <varname>cf-pi-ms</varname>)、その名前が固有であることを確認します。
+<p>このデプロイメントでは、<varname>cf-pi-myinitials</varname> という名前のアプリのほかに、<varname>cf-pi-myinitials-personality_insights</varname> という名前の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/personalityinsightsfull"></keyword> サービスのインスタンスを作成します。</p>
+<p>アプリがデプロイされると、<b>「コマンド・ライン・インターフェースでアプリをデプロイする」</b>ための指示が表示されます。</p></info></substep>
+<substep>
+<cmd>ステップ 1 で、<uicontrol>「スターター・コードをダウンロード」</uicontrol>をクリックします。</cmd></substep>
+<substep>
+<cmd>.zip ファイルを解凍し、自分のディレクトリーにアプリ・ファイルを保存します。</cmd></substep></substeps></step></steps>
+<result>これで、Cloud Foundry アプリのコードをコンテナー化する用意ができました。</result></taskbody></tutorialLesson><?tm 1471975263822 1 Windows ?>

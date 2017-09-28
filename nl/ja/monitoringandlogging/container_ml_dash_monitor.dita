@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<concept id="container_ml_dash_monitor" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI からのメトリックの表示</title>
+<titlealts>
+<navtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI からのメトリックの表示</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI からのメトリックの表示</searchtitle></titlealts>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> で実行中のコンテナーのパフォーマンスをモニターできます。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>モニタリング</indexterm><indexterm>メトリック</indexterm><indexterm>logmet</indexterm></keywords></metadata></prolog>
+<conbody>
+<p>個別のコンテナーのメトリックを表示するには、以下のステップを実行します。
+<ol>
+<li id="select_container">表示する実行中のコンテナーを選択します。</li>
+<li><ph id="monitoring_overview"><uicontrol>「モニタリングおよびログ (Monitoring and Logs)」</uicontrol>をクリックします。<uicontrol>「モニタリング (Monitoring)」</uicontrol>タブが表示されます。</ph><note type="tip">モニター・データは、新規コンテナー・インスタンスに表示されるまでにしばらく時間がかかる場合があります。データが何も表示されない場合、
+しばらく待つか、<uicontrol>「最新表示」</uicontrol>をクリックしてください。</note></li></ol></p>
+<p>デフォルトでは、時間尺度は過去 1 時間です。ドロップダウン・メニューから別の値を選択することによって、すべてのグラフの時間尺度を変更できます。</p>
+<p>より多くのビューでデータを見るには、<uicontrol>「拡張ビュー (Advanced View)」</uicontrol>をクリックします。
+そうすると、オープン・ソースのメトリック・ダッシュボードであり、グラフ・エディターでもある、Grafana が開きます。Grafana を使用すると、スペース内のすべてのコンテナーについて、モニタリング・データを表示する方法をカスタマイズできます。
+</p></conbody></concept>

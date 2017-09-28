@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="container_planning_types">
+<title>コンテナー・タイプ</title>
+<titlealts>
+<navtitle>コンテナー・タイプ</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のコンテナー・タイプの選択</searchtitle></titlealts>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でコンテナーを作成する前に、必要なコンテナーのタイプを決定します。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> では、さまざまなアプローチでクラウド内にコンテナーを作成できます。
+どのアプローチを選択するかは、コンテナー内で実行するアプリの要件や依存関係に応じて異なります。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>計画</indexterm><indexterm>IBM Containers</indexterm><indexterm>コンテナー</indexterm><indexterm>単一コンテナー</indexterm><indexterm>コンテナー・グループ</indexterm><indexterm>Docker Compose</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context></context></taskbody>
+<task id="single_container_type">
+<title>単一コンテナー</title>
+<titlealts>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の単一コンテナー</searchtitle></titlealts>
+<shortdesc><ph conref="container_conref.dita#terms/single_definition_long"></ph></shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>単一コンテナー</indexterm><indexterm>IBM Containers</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context><p>単一コンテナーの場合のデプロイメント速度の考慮事項:
+<ul>
+<li>大きく影響するのはイメージのサイズです。イメージが小さいほど、デプロイメントも高速になります。</li>
+<li>最初に数回イメージをデプロイした後に、デプロイメントの速度は速くなります。最初は、イメージをホスト上のレジストリーにダウンロードする必要があります。それ以降のデプロイメントは速くなります。</li>
+<li>ネットワーキングのセットアップに数分かかる場合があります。</li>
+<li>単一のコンテナーをデプロイする方が、グループのルーティング設定をする必要のあるコンテナー・グループをデプロイするよりも高速です。</li>
+<li>リンクされているコンテナーのデプロイメントは、接続を作成する必要があるため、他のデプロイメントほど高速でない場合があります。</li></ul></p>
+<p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI で単一コンテナーを作成するには、<xref href="container_single_ui.dita" format="dita"></xref> を参照してください。</p>
+<p>CLI で単一コンテナーを作成するには、<xref href="container_single_cli.dita" format="dita"></xref>を参照してください。</p></context></taskbody></task>
+<task id="container_groups_type">
+<title>コンテナー・グループ</title>
+<titlealts>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のコンテナー・グループ</searchtitle></titlealts>
+<shortdesc>コンテナー・グループは、複数の単一コンテナーで構成されます。それらはすべて同じコンテナー・イメージから作成されたものであり、同じ方法で構成されています。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>グループ</indexterm><indexterm>IBM Containers</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context><ph conref="container_conref.dita#terms/instances_intro"></ph>
+<ph conref="container_conref.dita#terms/instances_determine"></ph>
+<ph conref="container_conref.dita#terms/instances_ha"></ph><p>コンテナー・グループにはさらに、アプリを高可用性にするための無料オプションが用意されています。
+</p><ul>
+<li><xref href="#group_loadbalancing" format="dita">組み込みのロード・バランシング</xref></li>
+<li>コンテナー・グループ・インスタンスを複数の物理計算ノードに分散させる<xref href="#group_anti-affinity" format="dita">アンチアフィニティー</xref></li>
+<li>正常でないコンテナー・グループ・インスタンスの<xref href="#group_autorecovery" format="dita">自動リカバリー</xref></li>
+<li>CPU とメモリーの使用状況に基づいたコンテナー・グループ・インスタンスの<xref href="#group_autoscaling" format="dita">自動スケーリング</xref></li></ul>コンテナー・グループの可用性をさらに高めるには、同じイメージをベースとする、同じ経路にマップされる別のコンテナー・グループを作成します。
+1 つ目のコンテナー・グループが異常終了した場合に、2 つ目のコンテナー・グループがワークロード全体を引き継ぐことができます。
+2 つ目のコンテナー・グループを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アーキテクチャーに分散させるには、以下のオプションから選択します。
+<ul>
+<li><xref href="container_ha_space.dita" format="dita">同じスペース内に 2 つ目のコンテナー・グループを作成する</xref>。
+</li>
+<li><xref href="container_ha_org.dita" format="dita"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アベイラビリティー・ゾーンを使用して、複数のスペースにコンテナー・グループを分散させる</xref>。</li>
+<li><xref href="container_ha_regions.dita" format="dita"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 複数の地域にコンテナー・グループを分散させる</xref>。</li></ul><p>コンテナー・グループの場合のデプロイメント速度の考慮事項:
+<ul>
+<li>大きく影響するのはイメージのサイズです。イメージが小さいほど、デプロイメントも高速になります。</li>
+<li>最初に数回イメージをデプロイした後に、デプロイメントの速度は速くなります。最初は、イメージをホスト上のレジストリーにダウンロードする必要があります。それ以降のデプロイメントは速くなります。</li>
+<li>ネットワーキングのセットアップに数分かかる場合があります。</li>
+<li>単一のコンテナーをデプロイする方が、ルーティング設定をする必要のあるコンテナー・グループをデプロイするよりも高速です。</li>
+<li>経路にバインドされていないコンテナー・グループは、経路なしのコンテナー・グループより速くデプロイされます。</li>
+<li>アンチアフィニティーが有効になっていないコンテナー・グループは、アンチアフィニティーが有効になっているコンテナー・グループより高速です。アンチアフィニティーを有効にすると、指定されている数のホストがそれぞれイメージ・レイヤーをダウンロードする必要があります。<!--Even if a container group without anti-affinity was deployed and the image was deployed again with anti-affinity, the deployment time might be affected. For example, if a group is deployed on three hosts, but was deployed only on one host before, the additional hosts must download the image.--></li></ul></p><p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI からコンテナー・グループを作成する場合は、<xref href="container_group_ui.dita" format="dita"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI からのコンテナー・グループの実行</xref>のトピックを参照してください。</p><p>CLI からコンテナー・グループを作成するには、<xref href="container_group_cli.dita" format="dita">CLI からのコンテナー・グループの実行</xref>を参照してください。</p></context></taskbody>
+<task id="group_loadbalancing">
+<title>コンテナー・グループのロード・バランシング</title>
+<titlealts>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のコンテナー・グループのロード・バランシング</searchtitle></titlealts>
+<shortdesc>コンテナー・グループには、着信トラフィックをグループ内の各コンテナー・インスタンスに均等に送付 (ラウンドロビン) するための組み込みのロード・バランシング機能があります。
+コンテナー・グループの作成時、または既存グループにインスタンスが追加された時点では、自分で追加したインスタンスか自動リカバリー時に再作成されたインスタンスかに関係なく、ロード・バランシングが有効になっています。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>ロード・バランシング</indexterm><indexterm>IBM Containers</indexterm><indexterm>グループ</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context><p><image href="images/container_group_loadbalancing.gif" alt="ワークロードを均等に分散させるために、ユーザーはグループ・インスタンスに転送されます。" longdescref="transcript_loadbalancing.dita" id="loadbalancing_gif"></image>
+<xref href="../api/content/containers/images/container_group_loadbalancing_infinite.gif" format="gif" scope="external">
+<desc>もう 1 度見たい場合は、このアニメーションを新規タブで再ロードしてください。</desc><image href="images/refresh.png" scope="local">
+<alt>再ロード・アイコン</alt></image></xref><ul>
+<li><calloutlabel>A</calloutlabel>: 3 つのインスタンスが含まれるコンテナー・グループ</li>
+<li><calloutlabel>B</calloutlabel>: コンテナー・グループのロード・バランサー</li>
+<li><calloutlabel>1、2、3</calloutlabel>: コンテナー・グループ内のインスタンス</li></ul></p>
+<p>新しいインスタンスがコンテナー・グループに追加されると、ロード・バランサーは、新しいコンテナー・インスタンスへのトラフィックの送信をいつ開始するかを、TCP ソケット接続を確立して判別します。
+コンテナー・インスタンスが定義済みポートのリスニングを開始すると、ロード・バランサーにより、そのインスタンスへのトラフィックの送信が開始されます。
+ロード・バランサーは、グループにプライベート IP アドレスを割り当てて、同じスペース内の他のコンテナーやサービスからそのグループにアクセスできるようにします。
+</p>
+<p>このプライベート IP アドレスは個々のインスタンスではなくグループに割り当てられるため、グループにインスタンスを追加したり、自動リカバリー時にインスタンスが再作成されたりしても、プライベート IP アドレスは変更されません。
+このプライベート IP アドレスを確認するには、<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> group-inspect</codeph> を実行します。
+</p></context></taskbody></task>
+<task id="group_anti-affinity">
+<title>コンテナー・グループのアンチアフィニティー</title>
+<titlealts>
+<searchtitle>アンチアフィニティーと <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を使用した複数の計算ノードへのコンテナー・グループの分散</searchtitle></titlealts>
+<shortdesc>コンテナー・グループを作成する際に、<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> group-create</codeph> コマンドで <codeph>--anti</codeph> オプションを使用して、アンチアフィニティー・フィーチャーを有効にするかどうかを選択できます。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>アンチアフィニティー</indexterm><indexterm>IBM Containers</indexterm><indexterm>計算ノード</indexterm><indexterm>高可用性</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context><p><ph conref="container_conref.dita#terms/antiaffinity_definition"></ph></p>
+<p>CLI から <codeph>--anti</codeph> オプションを使用するには、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン (<codeph><ph conref="container_conref.dita#links/command_prefix"></ph></codeph>) バージョン 0.8.934 以降をインストールしておく必要があります。大きいグループ・サイズの場合は、このオプションを使用できない可能性があります。 <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のどの地域およびどの組織にも、デプロイできる計算ノードのセットには限りがあるからです。デプロイメントに失敗した場合は、グループ内のコンテナー・インスタンスの数を減らすか、<codeph>--anti</codeph> オプションを外してください。</p></context></taskbody></task>
+<task id="group_autorecovery">
+<title>コンテナー・グループの自動リカバリー</title>
+<titlealts>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を使用した正常でないコンテナー・グループ・インスタンスの自動リカバリー</searchtitle></titlealts>
+<shortdesc>コンテナー・グループを作成する際に、<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> group-create</codeph> コマンドで <codeph>--auto</codeph> オプションを使用して、自動リカバリーを有効にするかどうかを選択できます。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>自動リカバリー</indexterm><indexterm>IBM Containers</indexterm><indexterm>リカバリー</indexterm><indexterm>自動</indexterm><indexterm>正常でないグループ・インスタンス</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context><p><image href="images/container_group_autorecovery.gif" scope="local" alt="グループ内のインスタンスに障害が発生すると、そのインスタンスは削除され、新しいインスタンスが開始されます。テキスト記述が記されているリンクをたどります。" longdescref="transcript_autorecovery.dita" id="autorecovery_gif"></image>
+<xref href="../api/content/containers/images/container_group_autorecovery_infinite.gif" format="gif" scope="external">
+<desc>もう 1 度見たい場合は、このアニメーションを新規タブで再ロードしてください。</desc><image href="images/refresh.png" scope="local">
+<alt>再ロード・アイコン</alt></image></xref></p>
+<p><ph id="auto-recovery">コンテナー・グループで自動リカバリーが有効になり、そのグループが 10 分間実行すると、そのグループのロード・バランサーは HTTP 要求を介して、グループ内の各コンテナー・インスタンスの正常性に関する定期的な検査を開始します。
+コンテナー・インスタンスが 100 秒以内に応答しない場合、それは非アクティブとしてマークされます。
+非アクティブなコンテナー・インスタンスはグループから削除されて、自動リカバリーにより再作成されます。
+自動リカバリーでは、グループ内にコンテナー・インスタンスをリカバリーする試行を 3 回行います。
+3 回目の試行の後、そのグループでは、自動リカバリーによるコンテナー・インスタンスのリカバリーが 60 分間行われなくなります。
+60 分後に、自動リカバリーのプロセスが再開します。</ph></p></context></taskbody></task>
+<task id="group_autoscaling">
+<title>コンテナー・グループの自動スケーリング</title>
+<titlealts>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を使用したコンテナー・グループの自動スケーリング</searchtitle></titlealts>
+<shortdesc>コンテナー・グループには、アプリで使用されている CPU およびメモリーに基づいて、コンテナー・グループのインスタンスを自動スケーリングする機能があります。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>自動スケーリング</indexterm><indexterm>IBM Containers</indexterm><indexterm>拡大</indexterm><indexterm>縮小</indexterm><indexterm>スケール</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context>グループのコンテナー・インスタンスを追加または削除する条件を決定する自動スケーリング・ポリシーを定義できます。
+そのようにして、アプリのワークロードに基づいてコンテナー・グループのスケールを自動調整できます。
+現在のところ、この自動スケーリングのベータ版は、ロンドン地域で新しい Bluemix コンソールで提供されています。
+コンテナー・グループを作成するときに、自動スケーリングのさまざまなオプションが表示されます。
+<p>コンテナー・グループ・インスタンスの自動スケーリングについての詳細は、<xref href="container_group_ui_as.dita"></xref>を参照してください。</p></context></taskbody></task></task>
+<task id="docker_compose_type">
+<title>Docker Compose</title>
+<titlealts>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> での Docker Compose の使用</searchtitle></titlealts>
+<shortdesc><ph conref="container_conref.dita#terms/compose_definition"></ph> マルチコンテナー・デプロイメントを一度構成し、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> にデプロイします。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>Docker Compose</indexterm><indexterm>IBM Containers</indexterm><indexterm>コンテナー</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context><note>Docker Compose では、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のグループの概念はサポートされません。そのため、アプリのロード・バランシング、自動リカバリー、自動スケーリングを行う場合は、独自のツールを使用する必要があります。</note>
+<p>Docker Compose の場合のデプロイメント速度の考慮事項:
+<ul>
+<li>Docker Compose デプロイメントは、調整されたデプロイメントをセットアップする必要があるため、他のデプロイメントほど高速ではない可能性があります。</li>
+<li>大きく影響するのはイメージのサイズです。イメージが小さいほど、デプロイメントも高速になります。</li>
+<li>最初に数回イメージをデプロイした後に、デプロイメントの速度は速くなります。最初は、イメージをホスト上のレジストリーにダウンロードする必要があります。それ以降のデプロイメントは速くなります。</li>
+<li>ネットワーキングのセットアップに数分かかる場合があります。</li></ul></p>
+<p>Docker Compose でマルチコンテナー・デプロイメントを構成する場合は、<xref href="container_compose_intro.dita" scope="local"></xref>を参照してください。</p></context></taskbody></task></task>

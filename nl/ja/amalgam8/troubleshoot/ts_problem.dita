@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tsTroubleshooting PUBLIC "-//IBM//DTD DITA Troubleshooting//EN"
+ "troubleshooting.dtd">
+<tsTroubleshooting id="ts_problem" xml:lang="ja-jp" class="- topic/topic tsTroubleshooting/tsTroubleshooting ">
+<title>コントローラーまたはレジストリーのコンテナー・グループの経路を作成するコマンドを実行したら、エラーを受け取りました</title>
+<titlealts>
+<navtitle>トラブルシューティング: コントローラーまたはレジストリーの経路の作成</navtitle></titlealts>
+<shortdesc><codeph>bluemix cf create-route</codeph> コマンドを実行したら、エラーになりました。</shortdesc>
+<tsBody class="- topic/body tsTroubleshooting/tsBody ">
+<tsSymptoms class="- topic/section tsTroubleshooting/tsSymptoms ">次のテキストのようなエラー・メッセージが戻されます。
+この例は、レジストリーの場合のものです。
+<screen>$ bluemix cf create-route $BLUEMIX_SPACE $ROUTES_DOMAIN --hostname $REGISTRY_HOSTNAME 
+Invoking 'cf create-route dev mybluemix.net --hostname <varname>dev-a8-registry</varname>'... 
+Creating route <varname>dev-a8-registry</varname>.mybluemix.net for org <varname>my_org@us.ibm.com</varname> / space dev as <varname>user@us.ibm.com</varname>... 
+FAILED
+Server error, status code: 400, error code: 210003, message: The host is taken: dev-a8-registry</screen></tsSymptoms>
+<tsCauses class="- topic/section tsTroubleshooting/tsCauses ">このエラーは、経路名に含まれているホスト名の部分が Bluemix 環境で既に使用されていることを示しています。</tsCauses>
+<tsResolve class="- topic/section tsTroubleshooting/tsResolve ">Bluemix でまだ使用されていない固有のホスト名を指定してください。
+新しいホスト名を使用するように、ホスト名と環境変数を更新する必要があります。
+以下のステップを実行します。<p>コントローラーのコンテナー・グループの場合は、以下の手順を実行します。</p><ol>
+<li>新しいホスト名を選択し、以下のコマンドを実行して、ホスト名の環境変数を再作成します。
+<varname>hostname</varname> を新しい固有のホスト名に置き換えます。
+<codeblock>export CONTROLLER_HOSTNAME=$BLUEMIX_SPACE-<varname>hostname</varname>-a8-registry</codeblock></li>
+<li>経路を作成するコマンドを実行します。
+<codeblock>bluemix cf create-route $BLUEMIX_SPACE $ROUTES_DOMAIN --hostname  $CONTROLLER_HOSTNAME</codeblock><ol>
+<li>コマンドが再び失敗した場合は、最初の手順から再試行してください。</li></ol><p><codeph>CONTROLLER_HOSTNAME</codeph> が新しいホスト名の値に変更されます。</p></li>
+<li>以下のコマンドを実行して、<codeph>CONTROLLER_HOSTNAME</codeph> に基づく環境変数をリセットします。
+<codeblock>export CONTROLLER_URL=http://$CONTROLLER_HOSTNAME.$ROUTES_DOMAIN
+  export A8_CONTROLLER_URL=$CONTROLLER_URL</codeblock></li></ol><p>レジストリーのコンテナー・グループの場合は、以下の手順を実行します。</p><ol>
+<li>新しいホスト名を選択し、以下のコマンドを実行して、ホスト名の環境変数を再作成します。
+<varname>hostname</varname> を新しい固有のホスト名に置き換えます。
+<codeblock>export REGISTRY_HOSTNAME=$BLUEMIX_SPACE-<varname>hostname</varname>-a8-registry</codeblock></li>
+<li>経路を作成するコマンドを実行します。
+<codeblock>bluemix cf create-route $BLUEMIX_SPACE $ROUTES_DOMAIN --hostname $REGISTRY_HOSTNAME</codeblock><ol>
+<li>コマンドが再び失敗した場合は、最初の手順から再試行してください。</li></ol><p><codeph>REGISTRY_HOSTNAME</codeph> が新しいホスト名の値に変更されます。</p></li>
+<li>以下のコマンドを実行して、<codeph>REGISTRY_HOSTNAME</codeph> に基づく環境変数をリセットします。
+<codeblock>export REGISTRY_URL=http://$REGISTRY_HOSTNAME.$ROUTES_DOMAIN
+ export A8_REGISTRY_URL=$REGISTRY_URL</codeblock></li></ol></tsResolve></tsBody><?tm 1426769907 1?></tsTroubleshooting>

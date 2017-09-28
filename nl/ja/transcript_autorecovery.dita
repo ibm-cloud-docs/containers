@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN" "ibm-concept.dtd">
+<concept id="transcript_autorecovery" xml:lang="ja-jp">
+<title>container_group_autorecovery.gif のトランスクリプト</title>
+<shortdesc></shortdesc>
+<conbody>
+<p>コンテナー・グループ内の 3 つのインスタンスを表す 3 つの青いボックスが表示されています。</p>
+<p>1 つ目のボックスが黒になり、1 つ目のインスタンスが使用不可になったことを示します。</p>
+<p>1 つ目の黒いボックスが表示からフェードアウトします。</p>
+<p>1 つ目のボックスのあった場所に別の青いボックスが現れて、これまでのコンテナー・インスタンスが新しいインスタンスに置き換わったことを示します。
+</p>
+<p>[アニメーションは繰り返されます。]</p>
+<p><xref href="container_planning.html#group_autorecovery__autorecovery_gif" format="html" scope="peer"><image href="images/previous_button.png" alt="概要に移動">
+<alt>「戻る」アイコン</alt></image>資料に戻る</xref></p></conbody></concept>

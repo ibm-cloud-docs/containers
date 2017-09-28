@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN" "ibm-concept.dtd">
+<concept id="cs_planning_bluemix_services" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> サービスを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword>
+<ph conref="cs_conref.dita#links/release"></ph> のアプリに追加</title>
+<titlealts>
+<navtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> サービス</navtitle></titlealts>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> は、クラスターに追加できるさまざまなサービスを提供します。これは、クラスター・ユーザーが、アプリの実装とコンテナー管理プロセスを簡単にしたりアプリに追加機能を付与したりするときに役立ちます。</shortdesc>
+<conbody>
+<p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> サービスのインスタンスをプロビジョンすると、
+ユーザー名、パスワード、コンテナーがサービスにアクセスするために使用する URL など、サービスに関する機密情報を含んだ JSON ファイルが作成されます。
+</p>
+<p>この機密情報を安全に保管して、クラスター内のポッドが使用できるようにするために、Kubernetes シークレットが使用されます。
+機密情報を環境変数として公開したり、Dockerfile に直接書き込んだりする代わりに、稼働中のコンテナーにアクセスできるシークレット・ボリュームとしてシークレットをポッドにマウントする必要があります。
+</p>
+<p>クラスター管理者は、<xref href="cs_cluster_service.dita" format="dita"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> サービスをクラスターに追加して</xref>、サービスのための Kubernetes シークレットを作成する必要があります。Kubernetes シークレットが作成された後に、クラスター・ユーザーは、ポッドに対して <xref href="cs_apps_service.dita" format="dita"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> サービスをシークレット・ボリュームとしてマウントすることができます</xref>。
+</p></conbody></concept>

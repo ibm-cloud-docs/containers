@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE tutorialLesson PUBLIC "-//IBM//DTD DITA Tutorial Lesson//EN"
+ "tutorialLesson.dtd">
+<tutorialLesson id="cs_apps_tutorial_lesson2" xml:lang="ja-jp" class="- topic/topic task/task tutorialLesson/tutorialLesson ">
+<title>レッスン 2: 可用性を高めたアプリをデプロイして更新する</title>
+<titlealts>
+<navtitle>レッスン 2: 可用性を高めたアプリをクラスターにデプロイする</navtitle>
+<searchtitle>チュートリアルのレッスン 2: 可用性を高めたアプリを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でクラスターにデプロイする</searchtitle></titlealts>
+<shortdesc>このレッスンでは、Hello World アプリの 3 つのインスタンスをクラスターにデプロイして、最初のバージョンのアプリよりも可用性を高めます。
+可用性が高くなるのは、ユーザー・アクセスが 3 つのインスタンスに分割されるからです。
+同じアプリ・インスタンスにアクセスするユーザーが多すぎると、応答時間が長くなる可能性があります。
+複数のインスタンスをデプロイすれば、ユーザーにとって応答時間が短くなります。
+このレッスンでは、Kubernetes でのヘルス・チェックとデプロイメント更新の処理についても取り上げます。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>チュートリアル</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context><p><xref href="../api/content/containers/images/cs_app_tutorial_components2.png" format="png" scope="external">
+<desc>レッスン 2: デプロイメントのセットアップ</desc><image href="images/cs_app_tutorial_components2.png" alt="デプロイメントのセットアップ" align="left" placement="break"></image></xref></p>
+<p>Kubernetes では、構成スクリプトで定義する可用性検査を使用して、ポッド内のコンテナーが稼働しているかどうかを確認できます。
+例えば、その検査によってデッドロックをキャッチする場合もあります。デッドロックとは、アプリは稼働しているのに処理を進めていけない状況のことです。
+そのような状態になったコンテナーを再始動すれば、バグはあってもアプリの可用性を高めることができます。
+その後、Kubernetes で準備状況検査を使用して、コンテナーでトラフィックの受け入れを再開する準備が整っているかどうかを確認します。
+コンテナーの準備が整っていれば、そのポッドの準備も整ったことになります。
+ポッドの準備が整えば、ポッドが再び開始されます。
+Stage2 のアプリでは、15 秒ごとにアプリがタイムアウトになります。
+構成スクリプトでヘルス・チェックを構成しておけば、ヘルス・チェックでアプリの問題が検出された時点でコンテナーが再作成されます。
+</p></context>
+<steps>
+<step>
+<cmd>CLI で 2 つ目のアプリ・ディレクトリー <filepath>Stage2</filepath> に移動します。
+</cmd>
+<info id="quickstart">Windows や OS X で Docker Toolbox を使用している場合は、Docker Quickstart Terminal を使用してください。
+</info>
+<info>
+<codeblock>cd <varname>&lt;username_home_directory&gt;</varname>/container-service-getting-started-wt/Stage2</codeblock></info></step>
+<step>
+<cmd>ローカル環境で 2 つ目のバージョンのアプリをイメージとしてビルドしてタグを付けます。
+</cmd>
+<info>この場合も、コマンドの末尾にピリオド (<codeph>.</codeph>) を付けることを忘れないようにしてください。
+</info>
+<info>
+<codeblock>docker build -t registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>&lt;namespace&gt;</varname>/hello-world:2 .</codeblock>
+正常終了のメッセージを確認します。
+<screen>Successfully built <varname>&lt;image_id&gt;</varname></screen></info></step>
+<step>
+<cmd>2 つ目のバージョンのイメージをレジストリー名前空間にプッシュします。</cmd>
+<info>イメージがプッシュされるのを待ってから、次の手順に進みます。
+</info>
+<info>
+<codeblock>docker push registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>&lt;namespace&gt;</varname>/hello-world:2</codeblock>出力:
+<screen>The push refers to a repository [registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>&lt;namespace&gt;</varname>/hello-world]
+ea2ded433ac8: Pushed
+894eb973f4d3: Pushed
+788906ca2c7e: Pushed
+381c97ba7dc3: Pushed
+604c78617f34: Pushed
+fa18e5ffd316: Pushed
+0a5e2b2ddeaa: Pushed
+53c779688d06: Pushed
+60a0858edcd5: Pushed
+b6ca02dfe5e6: Pushed
+1: digest: sha256:0d90cb73288113bde441ae9b8901204c212c8980d6283fbc2ae5d7cf652405
+43 size: 2398</screen></info></step>
+<step>
+<cmd conref="cs_apps_tutorial_lesson1.dita#cs_apps_tutorial_lesson1/quickstart_switch">If you are
+using the Docker Quickstart Terminal, switch back to the command-line utility that you used to set
+the <codeph>KUBECONFIG</codeph> session variable.</cmd></step>
+<step>
+<cmd>イメージがレジストリー名前空間に正常に追加されたことを確認します。</cmd>
+<info>
+<codeblock>bx cr images</codeblock>出力:
+<screen>Listing images...
+
+REPOSITORY                                 NAMESPACE  TAG  DIGEST        CREATED        SIZE     VULNERABILITY STATUS
+registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>namespace</varname>/hello-world  <varname>namespace</varname>  1    0d90cb732881  30 minutes ago 264 MB   OK
+registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>namespace</varname>/hello-world  <varname>namespace</varname>  2    c3b506bdf33e  1 minute ago   264 MB   OK</screen></info></step>
+<step>
+<cmd>テキスト・エディターで <codeph><filepath><varname>&lt;username_home_directory&gt;</varname>/container-service-getting-started-wt/Stage2/healthcheck.yml</filepath></codeph> ファイルを開きます。
+</cmd>
+<info>この構成スクリプトでは、前のレッスンの手順をいくつか結合して、デプロイメントとサービスを同時に作成します。
+この PR 会社のアプリ開発者は、更新の適用時や、ポッドを再作成して問題をトラブルシューティングする時に、そのスクリプトを使用できます。
+</info><substeps>
+<substep>
+<cmd><uicontrol>Deployment</uicontrol> セクションにある <codeph>replicas</codeph> の値に注目します。
+replicas の値は、アプリのインスタンスの数です。
+3 つのインスタンスを実行すれば、インスタンスが 1 つだけの場合よりもアプリの可用性がさらに高くなります。
+</cmd>
+<info>
+<codeblock>replicas: 3</codeblock></info></substep>
+<substep>
+<cmd>プライベート・レジストリー名前空間内のイメージの詳細情報を更新します。</cmd>
+<info>
+<codeblock>image: "registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>&lt;namespace&gt;</varname>/hello-world:2"</codeblock></info></substep>
+<substep>
+<cmd>HTTP の Liveness Probe の値に注目します。5 秒ごとにコンテナーの正常性を検査することになっています。
+</cmd>
+<info>
+<codeblock>livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5</codeblock></info></substep>
+<substep>
+<cmd><uicontrol>Service</uicontrol> セクションにある <codeph>NodePort</codeph> の値に注目します。
+</cmd>
+<info>前のレッスンのようにランダムな NodePort を生成する代わりに、30000 から 32767 の範囲でポートを指定できます。
+この例では 30072 を使用しています。
+</info></substep></substeps></step>
+<step>
+<cmd>クラスターで構成スクリプトを実行します。
+</cmd>
+<info>デプロイメントとサービスを作成すると、PR 会社のユーザーがアプリを表示できるようになります。
+</info>
+<info>
+<codeblock>kubectl create -f <varname>&lt;username_home_directory&gt;</varname>/container-service-getting-started-wt/Stage2/healthcheck.yml</codeblock>出力:
+<screen>deployment "hw-demo-deployment" created
+service "hw-demo-service" created</screen>デプロイメントの作業がすべて完了したので、動作を確認してください。
+実行するインスタンスの数を増やしたので、実行速度が少し落ちる場合もあります。
+</info></step>
+<step>
+<cmd>ブラウザーを開いて、アプリを確認します。
+前のレッスンで使用したのと同じワーカー・ノードのパブリック IP アドレスに、構成スクリプトで指定した NodePort を組み合わせて、URL を作成します。
+</cmd>
+<info>ワーカー・ノードのパブリック IP アドレスを取得するには、以下のようにします。
+</info>
+<info>
+<codeblock>bx cs workers <varname>pr_firm_cluster</varname></codeblock></info>
+<info>この例の値を使用した場合、URL は <filepath>http://<varname>169.47.227.138</varname>:<varname>30072</varname></filepath> になります。
+ブラウザーに以下のテキストが表示される可能性があります。
+そのテキストが表示されなくても、心配は無用です。
+このアプリは、稼働状態になったりダウン状態になったりする設計になっているからです。
+<screen>Hello world! Great job getting the second stage up and running!</screen>
+<p><filepath>http://<varname>169.47.227.138</varname>:<varname>30072</varname>/healthz</filepath> で状況を確認することもできます。
+</p>
+<p>最初の 10 秒から 15 秒で 200 というメッセージが返されます。アプリが正常に稼働しているという意味のメッセージです。
+その 15 秒が経過すると、タイムアウト・メッセージが表示されます。アプリの設計のとおりです。
+<screen>{
+  "error": "Timeout, Health check error!"
+}</screen></p></info></step>
+<step conref="cs_apps_dashboard.dita#cs_cli_dashboard/kube_dashboard">
+<cmd></cmd></step>
+<step>
+<cmd><uicontrol>「ワークロード」</uicontrol>タブで、作成したリソースを表示します。
+</cmd>
+<info>このタブから、ヘルス・チェックの作動状況を継続的にリフレッシュして確認できます。
+<uicontrol>「ポッド (Pods)」</uicontrol>セクションには、ポッド内のコンテナーの再作成時にポッドが再始動した回数が表示されます。
+ダッシュボードで以下のエラー・メッセージがキャッチされた場合は、ヘルス・チェックで問題が検出されています。
+数分待ってから再度リフレッシュしてみてください。
+各ポッドの再始動回数が変わっているはずです。
+<screen>Liveness probe failed: HTTP probe failed with statuscode: 500
+Back-off restarting failed docker container
+Error syncing pod, skipping: failed to "StartContainer" for "hw-container" with CrashLoopBackOff: "Back-off 1m20s restarting failed container=hw-container pod=hw-demo-deployment-3090568676-3s8v1_default(458320e7-059b-11e7-8941-56171be20503)" </screen>Kubernetes ダッシュボードでの検討作業が完了したら、CLI で <userinput>CTRL+C</userinput> と入力して <codeph>proxy</codeph> コマンドを終了します。
+</info></step></steps>
+<result><p>
+2 つ目のバージョンのアプリをデプロイできました。
+使用するコマンドの数を減らし、ヘルス・チェックの動作を学び、デプロイメントを編集できました。
+Hello World アプリは、PR 会社のテストに合格したといえます。
+次の段階として、PR 会社がプレス・リリースの分析作業を開始するのに役立つアプリをデプロイしましょう。
+</p>
+<p>作業を進める前に、これまで作成したリソースを削除してもかまいません。
+同じ構成スクリプトを使用して、作成した両方のリソースを削除できます。
+<codeblock>kubectl delete -f <varname>&lt;username_home_directory&gt;</varname>/container-service-getting-started-wt/Stage2/healthcheck.yml</codeblock>出力:
+<screen>deployment "hw-demo-deployment" deleted
+service "hw-demo-service" deleted</screen></p></result></taskbody></tutorialLesson>

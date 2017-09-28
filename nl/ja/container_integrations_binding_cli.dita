@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<!--This topic is a shell to allow container_binding_ov to live under container services.-->
+<task id="container_integrations_binding_cli" xml:lang="ja-jp">
+<title>CLI からのサービスとコンテナーのバインド</title>
+<titlealts>
+<navtitle>CLI によるサービスのバインド</navtitle>
+<searchtitle>CLI により、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> <wintitle>カタログ</wintitle>にあるサービスをコンテナーにバインドする</searchtitle></titlealts>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix"></keyword> はサービスのリストを持ち、アプリ開発者に代わってそれらのサービスを管理します。コンテナーで使用する <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスを追加するためには、このサービスのインスタンスを要求し、サービスをコンテナーにバインドする必要があります。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>IBM Containers</indexterm><indexterm>コンテナー</indexterm><indexterm>サービス</indexterm><indexterm>Bluemix</indexterm><indexterm>インテグレーション</indexterm><indexterm>バインド</indexterm></keywords></metadata></prolog>
+<taskbody>
+<prereq>始めに、サービスを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースに追加します。
+詳しくは、<xref href="../services/reqnsi.html#req_instance" format="html" scope="peer">新しいサービス・インスタンスの要求</xref>を参照してください。
+</prereq>
+<context><note type="restriction" id="restriction" conref="container_integrations_binding.dita#container_integrations_binding/restriction">Some
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> services do not support the
+binding directly to a container and will fail during container creation. In this case, bind the
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> service to a Cloud Foundry app
+first, and then bind the app to the container. The app acts as a bridge between the service and the
+container. For more information, see <xref href="troubleshoot/ts_bridge_app.dita" format="dita" scope="local"></xref>.</note></context>
+<steps>
+<step>
+<cmd>次のコマンドの 1 つを使用して、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービス・インスタンスを新しいコンテナーにバインドします。</cmd>
+<info>
+<note type="tip"><ph conref="container_conref.dita#terms/namespace_get"></ph></note></info><choices>
+<choice>単一のコンテナーを作成する場合は、次のコマンドを使用します。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> run --name <varname>container_name</varname> -e "<varname>CCS_BIND_SRV</varname>=<varname>service_instance1</varname>,<varname>service_instance2</varname>" registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>&lt;my_namespace&gt;</varname>/<varname>image_name</varname></codeblock></choice>
+<choice>コンテナー・グループを作成する場合は、次のコマンドを使用します。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-create --name <varname>container_group_name</varname> -e "<varname>CCS_BIND_SRV</varname>=<varname>service_instance1</varname>,<varname>service_instance2</varname>" registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>&lt;my_namespace&gt;</varname>/<varname>image_name</varname></codeblock></choice>
+<choice>既に実行中のコンテナー・グループにサービスをバインドする場合、次のコマンドを使用します。
+このコマンドは、コンテナー・グループのみに使用可能です。
+一度にバインドできるサービスは 1 つのみです。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> service-bind <varname>container_group_name</varname> <varname>service_instance</varname></codeblock></choice></choices></step>
+<step>
+<cmd>以下のコマンドのいずれかを使用して、サービス・インスタンスがコンテナーにバインドされていることを確認します。
+</cmd><choices>
+<choice>単一コンテナーの場合は、以下のコマンドを使用します。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> inspect CONTAINER</codeblock></choice>
+<choice>コンテナー・グループの場合は、以下のコマンドを使用します。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-inspect GROUP</codeblock></choice></choices>
+<info>サービスの VCAP_SERVICES 情報が表示されることを確認します。
+<codeblock>{
+ "VCAP_SERVICES": {
+  "&lt;service_name&gt;": [
+   {
+    "credentials": {
+     "hostname": "&lt;hostname_id&gt;",
+     "jdbcUrl": "&lt;jdbc_URL&gt;",
+     "name": "&lt;encoded_name&gt;",
+     "password": "&lt;encoded_password&gt;",
+     "port": "&lt;port_number&gt;",
+     "uri": "&lt;service_URI&gt;",
+     "username": "&lt;encoded_username&gt;"
+    },
+    "label": "&lt;service_name&gt;",
+    "name": "&lt;service_instance&gt;",
+    "plan": "&lt;plan_name&gt;",
+    "tags": [
+     "&lt;tag1&gt;",
+     "&lt;tag2&gt;",
+     "&lt;tag3&gt;"
+    ]
+   } </codeblock></info></step></steps></taskbody><?tm 1435623319 0?></task>

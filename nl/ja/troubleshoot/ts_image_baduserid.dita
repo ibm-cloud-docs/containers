@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tsTroubleshooting PUBLIC "-//IBM//DTD DITA Troubleshooting//EN"
+ "troubleshooting.dtd">
+<tsTroubleshooting id="ts_image_baduserid" xml:lang="ja-jp" class="- topic/topic tsTroubleshooting/tsTroubleshooting ">
+<title>イメージをプライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> イメージ・レジストリーからプルできない</title>
+<titlealts>
+<navtitle>イメージをプルできない</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でイメージをプライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> イメージ・レジストリーからプルできない</searchtitle></titlealts>
+<tsBody class="- topic/body tsTroubleshooting/tsBody ">
+<tsSymptoms class="- topic/section tsTroubleshooting/tsSymptoms ">プライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリー内のコンテナー・イメージからコンテナーを作成しましたが、コンテナーが <uicontrol>BUILDING</uicontrol> 状態のままです。<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> inspect</codeph> コマンドを実行すると、以下のエラー・メッセージが CLI 応答の <uicontrol>Env</uicontrol> セクションに表示されます。
+<codeblock>"Env": [
+            "metadata_exit_code=-1",
+            "logging_password=",
+            "space_id=0e65c436-9413-46e2-8b42-ff06aa74ac21",
+            "logstash_target=logmet.opvis.bluemix.net:9091",
+            "metadata_err_msg=Cannot pull image from registry: Pull failed with error message failed 
+             to register layer: ApplyLayer exit status 1 stdout:  stderr: Container ID 1234567890 
+             cannot be mapped to a host ID",
+            "metrics_target=logmet.opvis.bluemix.net:9095",
+            "metadata_running=1"</codeblock></tsSymptoms>
+<tsCauses class="- topic/section tsTroubleshooting/tsCauses "><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> では、<xref href="https://docs.docker.com/engine/security/security/" format="html" scope="external">Docker 名前空間フィーチャー</xref>が Docker Engine 内で有効になっています。Docker バージョン 1.10 で初めて導入された、このユーザー名前空間フィーチャーは、コンテナー内の root ユーザーをコンテナー外の非 root ユーザーにマップできるようにするものです。
+これにより、コンテナーの内部で root 操作を実行できるユーザーの権限をコンテナーの外部では制限して、
+ホストおよび他のコンテナー内のファイルのアクセス、変更、および削除を禁止することができます。
+<note>Docker ユーザー名前空間は、<xref href="../container_planning_namespace.dita" format="dita">プライベート・イメージ・レジストリー</xref>を識別するために <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> でセットアップする名前空間とは違います。</note><p><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> run</codeph> コマンドを使用してコンテナー・イメージからコンテナーを作成すると、イメージがプライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> イメージ・レジストリーから IBM Cloud の Docker Engine にロードされます。その後、Docker Engine が各コンテナー・レイヤーの作成を開始します。
+コンテナー・イメージに指定されている内容に応じて、ローカル・マシンのアプリ・ファイルがコンテナーに追加されます。
+それらのファイルはすべて、ローカル・マシン上のユーザー ID (UID) およびグループ ID (GID) を使用して作成されたものです。
+その UID と GID は、ローカル・マシンにおけるユーザーの権限を示しています。
+これらのファイルをコンテナーに追加する必要がある場合は、対応する UID と GID がコンテナー内部の UID と GID にマップされます。
+マップ先の UID と GID が、コンテナー内部でローカル・マシン上とは異なる権限を持つ可能性があります。
+例えば、ローカル・マシンの非 root の UID と GID を、コンテナー内部の root ユーザーにマップするとします。
+その場合、ユーザーはコンテナー内部で root ユーザーのように振る舞い、コンテナー・ファイルにアクセスし、変更および削除を実行できます。
+コンテナーは分離された環境で実行されていて、この UID と GID はコンテナーの外部では非 root の権限が割り当てられているため、ホスト上のファイルにはアクセスできません。
+</p><p>ローカル・マシンの UID と GID をコンテナー内部のものにマップするために、ユーザー名前空間フィーチャーを利用する場合は、
+すべてのファイルを 0 から 65536 までの UID と GID で作成する必要があります。
+</p><p>ここに示しているエラーは、この範囲外の UID または GID で作成されたファイルがコンテナー・イメージ・レイヤーの 1 つに含まれている場合に発生します。
+イメージからコンテナーを作成するときには、Docker Engine がイメージの各レイヤーを作成します。範囲外の UID または GID のファイルが見つかった場合は、その UID または GID をコンテナー内部の有効な UID または GID にマップできないので、Docker Engine は失敗します。あるイメージ・レイヤーで使用されているファイルが、次のイメージ・レイヤーで削除された場合も、Docker Engine は失敗します。</p></tsCauses>
+<tsResolve class="- topic/section tsTroubleshooting/tsResolve "><dl>
+<dlentry>
+<dt>ローカル Docker Engine 上のユーザー名前空間を有効にする</dt>
+<dd>コンテナー・イメージをローカルでビルドするときに、必ず、ローカルの Docker Engine のユーザー名前空間フィーチャーを有効にしてください。
+これにより、ローカル・マシン上で有効なユーザー名前空間の範囲外にあるすべての UID と GID が、範囲内の有効な ID に自動的にマップされます。
+コンテナー・イメージをローカルでテストした後に、プライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> イメージ・レジストリーにプッシュして <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で使用してください。ユーザー名前空間フィーチャーを有効にする方法について詳しくは、「<xref href="https://docs.docker.com/engine/reference/commandline/daemon/#starting-the-daemon-with-user-namespaces-enabled" format="html" scope="external">Starting the daemon with user namespaces enabled</xref>」を参照してください。</dd></dlentry>
+<dlentry>
+<dt>影響を受けるイメージ・レイヤーをコメント化し、影響を受けるファイルの所有権を変更する</dt>
+<dd>問題の原因のファイルが見つからない場合は、Dockerfile 内のすべてのイメージ・レイヤーをコメント化した後に、1 つずつコメントを外してみてください。イメージを作成してコンテナーを作成し、影響を受けるイメージ・レイヤーを見つけます。<p><codeph>chown [-R] root:root
+<varname>&lt;file_or_folder&gt;</varname></codeph> を実行して、ローカル・マシンに保管されている、影響を受けるファイルの所有権を変更するか、影響を受ける Dockerfile 内のイメージ・レイヤーにこのコマンドを追加します。</p><p>Dockerfile の例</p><codeblock>RUN curl -fsSL "https://www.kernel.org/pub/software/scm/git/git-${GIT_VERSION}.tar.gz" \
+        | tar -xzC /tmp \
+  &amp;&amp; cd /tmp/git-${GIT_VERSION} \
+  &amp;&amp; ./configure \
+  &amp;&amp; make all \
+  &amp;&amp; make install \
+  &amp;&amp; chown -R root:root /tmp</codeblock></dd></dlentry></dl></tsResolve></tsBody></tsTroubleshooting>

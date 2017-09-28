@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN" "ibm-concept.dtd">
+<concept id="cs_planning_cluster_user" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"> </keyword> <ph conref="cs_conref.dita#links/release"></ph> でのユーザー許可とアクセス管理
+</title>
+<titlealts>
+<navtitle>ユーザー・アクセス管理</navtitle></titlealts>
+<shortdesc>クラスターへのアクセス権限を組織内の他のユーザーに付与することができます。そのようにすると、許可ユーザーだけがクラスターの作業を行い、アプリをクラスターにデプロイすることができます。
+</shortdesc>
+<conbody>
+<p>詳細については、<xref href="cs_cluster_user.dita"></xref>を参照してください。</p></conbody></concept>

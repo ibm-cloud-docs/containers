@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE map PUBLIC "-//IBM//DTD DITA IBM Map//EN"
+ "ibm-map.dtd">
+<map xml:lang="ja-jp" chunk="to-content">
+<title>ibmbackup_restore_starter イメージ</title>
+<topicmeta>
+<copyright>
+<copyryear year="2016"></copyryear>
+<copyryear year="2017"></copyryear>
+<copyrholder>IBM</copyrholder></copyright></topicmeta>
+<topicref href="ibmbackup_restore_starter.dita" type="concept" chunk="to-content"></topicref></map>

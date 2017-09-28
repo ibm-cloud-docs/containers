@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="container_single_remove" xml:lang="ja-jp">
+<title>単一コンテナーの削除</title>
+<titlealts>
+<navtitle>単一コンテナーの削除</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 内の単一コンテナーの削除</searchtitle></titlealts>
+<shortdesc>割り当て量を最大限使用できるよう、未使用のコンテナーを時々削除してください。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>単一コンテナー</indexterm><indexterm>CLI</indexterm><indexterm>docker rm</indexterm><indexterm conref="container_conref.dita#links/cli_abbrev"></indexterm><indexterm>rm</indexterm><indexterm>IBM Containers</indexterm><indexterm>コンテナー</indexterm><indexterm>削除</indexterm></keywords></metadata></prolog>
+<taskbody>
+<steps>
+<step>
+<cmd>以下のいずれかの方法を使用して、コンテナーを削除します。</cmd><choices>
+<choice><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI から<ol>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> ダッシュボードで、削除するコンテナーを選択します。</li>
+<li><uicontrol>「その他のアクション... (More actions...)」</uicontrol>メニューを展開し、<uicontrol>「削除」</uicontrol>をクリックします。</li></ol><ul>
+<li>コンテナーのタイルで、歯車アイコンをクリックして、<uicontrol>「コンテナーの削除」</uicontrol>をクリックします。</li></ul></choice>
+<choice>CLI から
+*<codeblock><ph conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/container_rm_cmdname"></ph></codeblock><note conref="container_conref.dita#links/docker_note"></note></choice></choices></step>
+<step importance="optional">
+<cmd>以下のコマンドを実行し、リストにコンテナーが含まれないことを確認して、コンテナーが削除されたことを検証します。*</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ps -a</codeblock></info></step></steps></taskbody></task>

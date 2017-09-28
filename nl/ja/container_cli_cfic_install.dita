@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="container_cli_cfic_install" xml:lang="ja-jp">
+<title><ph conref="cs_conref.dita#links/classic"></ph>でネイティブ Docker CLI を使用するための <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン (<ph conref="container_conref.dita#links/command_prefix"></ph>) のセットアップ</title>
+<titlealts>
+<navtitle> <ph conref="cs_conref.dita#links/classic"></ph>の CLI のセットアップ</navtitle>
+<searchtitle><ph conref="cs_conref.dita#links/classic"></ph>でネイティブ Docker CLI を使用するための <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン (<ph conref="container_conref.dita#links/command_prefix"></ph>) のセットアップ</searchtitle></titlealts><abstract>
+<shortdesc>ネイティブの Docker CLI コマンドを実行してご使用のコンテナーを管理するには、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン (<ph conref="container_conref.dita#links/command_prefix"></ph>) をインストールします。</shortdesc>
+
+<p><note type="attention" conref="container_conref.dita#links/migrate_note"></note></p>
+
+<p>このページでは、次について説明します。
+<lines>     • <xref href="container_cli_cfic_install.dita#install_plugin"></xref>
+     • <xref href="container_cli_login.dita">IBM Bluemix Container Service CLI プラグイン (bx ic) へのログイン</xref>
+     • <xref href="container_cli_cfic_upgrade.dita"></xref>
+     • <xref href="container_cli_cfic_uninstall.dita"></xref>
+     • <xref href="container_cli_compose_install.dita">Docker Compose およびその従属物のインストール</xref>
+     • <xref href="container_cli_compose_upgrade.dita"></xref>
+     • <xref href="container_cli_compose_uninstall.dita"></xref></lines></p></abstract>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>cli</indexterm><indexterm>プラグイン</indexterm><indexterm>Cloud Foundry</indexterm><indexterm>cf</indexterm><indexterm conref="container_conref.dita#links/cli_abbrev"></indexterm><indexterm>インストール</indexterm><indexterm>IBM Containers</indexterm></keywords></metadata></prolog><?tm 1435623318 5?>
+<task id="install_plugin">
+<title>IBM Bluemix Container Service プラグイン (<ph conref="container_conref.dita#links/command_prefix"></ph>) のインストール</title>
+<taskbody>
+<context id="context_e5s_szz_nz"><p>コマンドを実行するには、ご使用のオペレーティング・システムで以下の要件が満たされている必要があります。このタスクには、これらの要件をインストールするための情報が含まれています。以下に示すバージョンのツールよりも古いものと <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン (<ph conref="container_conref.dita#links/command_prefix"></ph>) との併用はサポートされていません。</p>
+<p><ul id="ul_f5s_szz_nz">
+<li><ph conref="container_conref.dita#links/cfic_docker_version"></ph><!--Also need to update the Docker version in the download URLs in the conref file--></li>
+<li><ph conref="container_conref.dita#links/cfic_cf_version"></ph><note>MacOS Sierra ユーザーは、Cloud Foundry CLI バージョン 6.22.0 以降をインストールする必要があります。</note></li>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> CLI</li>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン</li></ul></p></context>
+<steps id="steps_g5s_szz_nz">
+<stepsection>CLI をインストールするには、以下のことを行います。</stepsection>
+<step id="docker_install">
+<cmd>Docker <ph conref="container_conref.dita#links/cfic_docker_version_number"></ph> をインストールします。</cmd>
+<info>Windows および OS X オペレーティング・システムの場合は、Docker Machine、Docker Engine、および Kitematic を含む Docker Toolbox と共に Docker がインストールされます。Linux オペレーティング・システムの場合、インストールの仕組みはご使用の Linux ディストリビューションのタイプによって異なります。Docker をインストールするには、あるいは Docker が既にインストール済みである場合 Docker <ph conref="container_conref.dita#links/cfic_docker_version_number"></ph> にアップグレードするには、以下のリンクを参照してください。
+<note>ご使用のコンピューターに Docker をインストール済みであり、現行バージョンをアップグレードしたくない場合は、このステップをスキップし、Cloud Foundry CLI のインストールを続行することができます。</note>
+<ul id="ul_h5s_szz_nz" conref="container_conref.dita#links/cfic_docker_downloads">
+<li></li></ul></info></step>
+<step>
+<cmd>Docker を開始します。
+</cmd><choices id="choices_i5s_szz_nz">
+<choice id="start_qst">OS X および Windows の場合、<uicontrol>「Docker Quickstart Terminal」</uicontrol>アイコンをダブルクリックします。
+Docker デーモンが開始され、環境変数が自動的に設定されます。
+</choice>
+<choice>Linux の場合、コマンド・ライン・ユーティリティーで、Docker デーモンが実行中であることを確認します。
+また、自動的に再始動するよう Docker デーモンをセットアップします。
+詳しくは、<xref href="https://docs.docker.com/installation/" format="html" scope="external">ご使用のオペレーティング・システム用の Docker 資料</xref>を参照してください。</choice></choices></step>
+<step>
+<cmd>端末で <codeph>docker run hello-word</codeph> を実行して、Docker インストール環境が正しくセットアップされていることを確認してください。
+</cmd>
+<info>
+<codeblock>docker run hello-world</codeblock></info>
+<info>Docker は、コンテナー実行元の <codeph>hello-world</codeph> イメージをローカルで検索するため、このコマンドを初めて実行する場合は、以下のメッセージを受け取ります。
+<codeblock>Unable to find image 'hello-world:latest' locally</codeblock>イメージのパブリック・リポジトリーである Docker Hub からイメージがプルされ、コマンド完了後、出力は以下のようになります。
+<codeblock>$ docker run hello-world
+
+Hello from Docker.
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker Hub account:
+ https://hub.docker.com
+
+For more examples and ideas, visit:
+ https://docs.docker.com/userguide/</codeblock></info>
+<info>コマンドが正常に完了しない場合は、<codeph>docker version</codeph> を実行して、Docker が正しくインストールされているかどうか確認してください。
+</info></step>
+<step id="install_cf">
+<cmd><xref href="https://github.com/cloudfoundry/cli/releases" format="html" scope="external">GitHub リポジトリー</xref>から Cloud Foundry CLI バージョン <ph conref="container_conref.dita#links/cfic_cf_version"></ph> をインストールします。
+</cmd>
+<info>Cloud Foundry CLI は、オペレーティング・システムのデフォルト・ロケーションにインストールする必要があります。そうしないと、PATH 環境変数がインストール・ディレクトリーと一致しません。</info>
+<info>
+<note>MacOS Sierra ユーザーは、Cloud Foundry CLI バージョン 6.22.0 以降をインストールする必要があります。</note>
+
+<p>Cloud Foundry CLI が正しくインストールされていることを確認するため、または既に Cloud Foundry がインストールされている場合にインストールしたバージョンを確認するためには、以下のコマンドを実行します。<codeblock>cf -v</codeblock></p></info></step>
+<step id="install_bx">
+<cmd><xref href="https://clis.ng.bluemix.net/ui/home.html" format="html" scope="external"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> CLI</xref> をインストールします。</cmd></step>
+<step id="bx_login">
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> CLI にログインします。</cmd>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx"></ph> login -a https://api.<ph audience="blue">stage1.</ph>ng.bluemix.net</codeblock></info></step>
+<step id="bx_repo" audience="blue">
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> プラグイン・ステージング・リポジトリーをインストール済み環境に追加します。
+</cmd>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx"></ph> plugin repo-add <varname>stage</varname> https://plugins.stage1.ng.bluemix.net</codeblock></info></step>
+<step id="install">
+<cmd id="install_bx_ic"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグインをインストールします。
+</cmd>
+<info>
+<codeblock id="bx_cs_install"><ph conref="cs_conref.dita#links/bx"></ph> plugin install IBM-Containers -r <ph audience="yellow"><varname>Bluemix</varname></ph><ph audience="blue"><varname>stage</varname></ph></codeblock></info>
+<info>
+<p>プラグインが正常にインストールされていることを検証するには、以下のコマンドを実行します。
+<codeblock><ph conref="cs_conref.dita#links/bx"></ph> plugin list</codeblock></p>
+
+<p>プラグインが IBM-Containers として結果に表示されます。
+</p></info></step></steps>
+<result id="result_j5s_szz_nz"><p>これで、ログインしてコンテナーの管理を開始する準備ができました。
+</p></result></taskbody></task></task>

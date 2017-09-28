@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN" "ibm-concept.dtd">
+<concept id="container_compose_faq" xml:lang="ja-jp">
+<title>Docker Compose の FAQ</title>
+<titlealts>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の Docker Compose の FAQ</searchtitle></titlealts>
+<shortdesc>ここには、Docker Compose に関するよくある質問を記載しています。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>cli</indexterm><indexterm>Docker Compose</indexterm><indexterm>FAQ</indexterm><indexterm>IBM Containers</indexterm></keywords></metadata></prolog>
+<conbody>
+<p><dl>
+<dlentry>
+<dt>IBM Containers サービスを指定するように Docker Compose クライアントをセットアップするにはどうすればいいですか?</dt>
+<dd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI にログインする際、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> (<ph conref="container_conref.dita#links/command_prefix"></ph>) コマンドを実行するか、ネイティブ Docker コマンド (<codeph>docker</codeph>) を使用できるように環境変数を設定するかを選択できます。<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> に対して Docker Compose コマンドを実行するには、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> に対してネイティブ Docker コマンドを実行するように環境変数を設定する必要があります。詳細については、<xref href="container_cli_login.dita" format="dita" scope="local"></xref>を参照してください。</dd></dlentry>
+<dlentry>
+<dt>Docker Compose ではスケーラブル・コンテナー・グループをどのように使用するのですか?</dt>
+<dd>Docker Compose は、複数のコンテナー・インスタンス間で負荷分散を行う機能が既に組み込まれている、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> グループの概念をサポートしていません。コンテナー・インスタンス間でワークロードのバランスを取る場合、ロード・バランサーを実行する別のコンテナーを追加して、それをコンテナー・インスタンスにリンクする必要があります。</dd></dlentry>
+<dlentry>
+<dt><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> では、どのバージョンの <filepath>docker-compose.yml</filepath> ファイル形式がサポートされていますか?</dt>
+<dd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> は、<filepath>docker-compose.yml</filepath> ファイル形式のバージョン 1 のみサポートしています。バージョン 2 は現在サポートされていません。</dd></dlentry>
+<dlentry>
+<dt>Docker Compose コマンドをアタッチ・モードで実行する方法を教えてください。</dt>
+<dd><codeph>docker-compose up</codeph> コマンドをアタッチ・モードで実行すると、エラーが発生する可能性があります。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> では、現在、Docker Compose はデタッチ・モードによる実行のみがサポートされています。デタッチできずにコンテナーのコンソール出力から抜け出せなくなる状況を防ぐために、<codeph>-d</codeph> オプションを使用してください。</dd></dlentry>
+<dlentry>
+<dt>マルチコンテナー・デプロイメントで実行する各コンテナー・インスタンスのログの利用方法を教えてください。</dt>
+<dd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> では、現在、<codeph>docker-compose logs</codeph> コマンドはサポートされていません。</dd></dlentry>
+<dlentry>
+<dt><filepath>docker-compose.yml</filepath> ファイルではどのようなパラメーター・オプションがサポートされていますか?</dt>
+<dd>サポートされるパラメーター・オプションのリストを確認するには、<xref href="container_compose_yml.dita" format="dita"></xref>を参照してください。
+</dd></dlentry></dl></p></conbody></concept>

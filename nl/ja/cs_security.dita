@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN" "ibm-concept.dtd">
+<concept id="cs_security" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword>
+<ph conref="cs_conref.dita#links/release"></ph> での Kubernetes クラスターとデプロイメントのセキュリティー設定</title>
+<titlealts>
+<navtitle>クラスターとデプロイメントのセキュリティー</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> での Kubernetes クラスターとデプロイメントのセキュリティー設定</searchtitle></titlealts>
+<shortdesc>標準装備のセキュリティー・フィーチャーをリスク分析とセキュリティー保護に使用できます。
+これらのフィーチャーは、クラスター・インフラストラクチャーとネットワーク通信を保護し、コンピュート・リソースを分離し、インフラストラクチャー・コンポーネントとコンテナー・デプロイメントにおけるセキュリティー・コンプライアンスを確保するためのものです。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>Kubernetes</indexterm><indexterm>クラスター</indexterm><indexterm>API</indexterm><indexterm>シークレット</indexterm><indexterm>コンテナー</indexterm><indexterm>Docker</indexterm><indexterm>セキュリティー</indexterm><indexterm>ネットワーク</indexterm></keywords></metadata></prolog>
+<conbody>
+<p><xref href="../api/content/containers/images/cs_security.png" format="png" scope="external"><image href="images/cs_security.png" alt="IBM Bluemix Container Service クラスター・セキュリティー" width="400"></image></xref><table frame="all" colsep="1" rowsep="1" id="table_z2n_3xr_bz">
+<title>組み込みの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> クラスター・セキュリティーの設定</title>
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="1.0*"></colspec><colspec colnum="2" colname="c2" colwidth="1.0*"></colspec>
+<thead>
+<row>
+<entry>レベル</entry>
+<entry>説明</entry></row></thead>
+<tbody>
+<row>
+<entry>Kubernetes マスター</entry>
+<entry>各クラスターの Kubernetes マスターは IBM によって管理され、高い可用性を備えています。また、ワーカー・ノードとの間のセキュリティー・コンプライアンスとセキュア通信を確保するための <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> セキュリティー設定が用意されています。
+更新は IBM が必要に応じて行います。<p>専用 Kubernetes マスターは、クラスター内のすべての Kubernetes リソースを一元的に制御してモニターします。デプロイメント要件とクラスターの容量に基づき、Kubernetes マスターは、コンテナー化されたアプリが使用可能なワーカー・ノードにデプロイされるように自動的にスケジュール設定します。</p><p>詳しくは、<xref href="cs_security_master.dita" format="dita">Kubernetes マスターのセキュリティー</xref>を参照してください。
+</p></entry></row>
+<row>
+<entry>ワーカー・ノード</entry>
+<entry>コンテナーはワーカー・ノードにデプロイされます。ワーカー・ノードは特定の 1 つのクラスターのために専用で使用されるので、IBM のお客様に提供されるコンピュート、ネットワーク、およびストレージがそれぞれ分離されます。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> が備える組み込みセキュリティー機能により、プライベート・ネットワークとパブリック・ネットワークのワーカー・ノードのセキュリティーを維持し、ワーカー・ノードのセキュリティー・コンプライアンスを遵守できます。
+<p>詳しくは、<xref href="cs_security_worker.dita" format="dita">ワーカー・ノードのセキュリティー</xref>を参照してください。
+</p></entry></row>
+<row>
+<entry>イメージ</entry>
+<entry>クラスター管理者は、保護された独自の Docker イメージ・リポジトリーを <ph conref="cs_conref.dita#links/registry_name"></ph> にセットアップできます。このレジストリーに Docker イメージを保管してクラスター・ユーザー間で共有することができます。<p>安全にコンテナー・デプロイメントを行うために、プライベート・レジストリー内のすべてのイメージが Vulnerability Advisor によってスキャンされます。
+Vulnerability Advisor は <ph conref="cs_conref.dita#links/registry_name"></ph>のコンポーネントであり、潜在的な脆弱性がないかスキャンし、セキュリティーに関する推奨を行い、脆弱性を解決するための方法を提示します。</p><p>詳細については、<xref href="cs_security_deployment.dita" format="dita"></xref>を参照してください。</p></entry></row></tbody></tgroup></table></p></conbody></concept>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dita PUBLIC "-//IBM//DTD DITA IBM Composite//EN" "ibm-ditabase.dtd">
+<dita xml:lang="ja-jp">
+<concept id="getting_started_node_strong" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 用 ibm-node-strong-pm イメージ概説</title>
+<titlealts>
+<navtitle>ibm-node-strong-pm</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> における <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 用 ibm-node-strong-pm イメージ概説</searchtitle></titlealts>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerfull"></keyword> 用に StrongLoop を伴う <tm trademark="IBM" tmtype="reg">IBM</tm> Node (<uicontrol>ibm-node-strong-pm</uicontrol>) イメージが提供されています。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>IBM Containers</indexterm><indexterm>コンテナー</indexterm><indexterm>イメージ</indexterm><indexterm>Node with StrongLoop Process Manager</indexterm><indexterm>ibm-node-strong-pm</indexterm><indexterm>StrongLoop Arc</indexterm></keywords>
+<othermeta name="linkHover" content="Strongloop Process Manager を使用すると、リモート・マシン上に実装された IBM Cloud 中の Node.js アプリをデプロイ、管理、およびモニターすることができます。
+"></othermeta></metadata></prolog>
+<conbody></conbody></concept>
+<concept id="how_it_works">
+<title>機能</title>
+<conbody>
+<p><uicontrol>ibm-node-strong-pm</uicontrol> イメージを使用することにより、StrongLoop Process Manager の実行インスタンスをデプロイする単一コンテナーを作成します。
+Strongloop Process Manager を使用すると、リモート・マシン上に実装された IBM Cloud 中の Node.js アプリをデプロイ、管理、およびモニターすることができます。
+</p>
+<p>リモート・マシンには、StrongLoop Arc のインスタンスがインストールされていなければなりません。
+StrongLoop Arc は、StrongLoop プラットフォームのためのグラフィカル・ユーザー・インターフェースであり、Node.js アプリのビルド、プロファイル作成、およびモニタリングのためのさまざまなツールが含まれています。StrongLoop Arc でアプリをビルドした後、StrongLoop Process Manager を実行する <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 内のコンテナーにそれをプッシュし、デプロイします。
+リモート・マシンとコンテナーの間の接続を確立するため、コンテナーにパブリック IP アドレスをバインドし、その IP アドレスを StrongLoop Arc での StrongLoop Process Manager サーバーとしてセットアップする必要があります。
+StrongLoop Process Manager によりアプリがデプロイされると、StrongLoop Process Manager の中でアプリのさまざまなメトリックやパフォーマンスをモニターすることができます。
+アプリを更新したりスケール調整したりするには、StrongLoop Arc を使用することによってそれを変更した後、変更内容をコンテナーにプッシュする必要があります。
+</p>
+<note><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> において、<uicontrol>ibm-node-strong-pm</uicontrol> のコンテナー・グループとの併用はサポートされていません。
+</note></conbody></concept>
+<concept id="whats_included">
+<title>含まれている内容</title>
+<conbody>
+<p><!--&lt;i&gt;Required section. Include a list of everything that is included in the image (and at what version, level, etc).&lt;/i&gt;--><ul>
+<li><uicontrol>ibmnode:latest</uicontrol> イメージに含まれているすべてのソフトウェア・パッケージ。
+『<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 用 <uicontrol>ibmnode</uicontrol> イメージ概説』のトピックの『<xref href="../docker_image_ibmnode/ibmnode_starter.html#included" format="html" scope="external">含まれている内容</xref>』を参照してください。</li>
+<li>StrongLoop Process Manager</li></ul></p></conbody></concept>
+<task id="how_to_get_started">
+<title>概説</title>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> <wintitle>カタログ</wintitle>にある <uicontrol>ibm-node-strong-pm</uicontrol> イメージを使用して、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の単一コンテナーを試すことができます。
+このイメージは、
+コンテナーが使用可能になったらすぐにアクセスできる、StrongLoop Process Manager の実行中インスタンスと共に開始されます。その Process Manager に接続された StrongLoop Arc のインスタンスを使用して、Node.js アプリケーションをプッシュし、それにアクセスすることができます。</shortdesc>
+<taskbody>
+<context><!--&lt;i&gt;Required section. Include steps on how to get the image &lt;/i&gt;--><note type="notice" id="terms">始める前に、<xref href="https://github.com/docker-library/docs/tree/master/websphere-liberty" format="html" scope="external">websphere-liberty Docker ライブラリーの Usage セクションで <tm trademark="IBM" tmtype="reg">IBM</tm> 認定イメージのご利用条件を確認してください</xref>。</note></context>
+<steps>
+<step>
+<cmd>カタログから、<uicontrol>「コンテナー」</uicontrol>を選択し、コンテナーをビルドする元になる <uicontrol>ibm-node-strong-pm</uicontrol> イメージを選択します。</cmd></step>
+<step>
+<cmd>単一コンテナーを作成します。</cmd><choices>
+<choice><uicontrol>「サイズ」</uicontrol>フィールドで、1 GB メモリー (<uicontrol>「スモール」</uicontrol>) 以上のコンテナー・サイズを選択します。
+</choice>
+<choice><uicontrol>「公開ポート (Public ports)」</uicontrol>フィールドに、ポート 8701 および 3001 を入力します。それらのポートは、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> およびその前提条件にコンテナーがデプロイされ、パブリック IP アドレスがコンテナーにバインドされた時点で、自動的に公開されます。
+コンテナー内の StrongLoop Process Manager にアクセスするには、ポート 8701 が使用されます。
+ポート 3001 は、アプリが StrongLoop Process Manager にデプロイされた後にアプリで listen するポートです。<note>追加のアプリを StrongLoop Process Manager にデプロイするには、さらに多くのポートを公開します。
+それらのポートは、3002 から始まる連続した番号でなければなりません。
+例えば、3002、3003、3004 などです。
+</note></choice>
+<choice>詳しくは、<xref href="../../containers/container_single_ui.html#gui" format="html" scope="peer">Bluemix ダッシュボード使用による単一コンテナーの作成</xref>.</choice></choices></step>
+<step>
+<cmd>パブリック IP アドレスを、コンテナーにバインドします。</cmd>
+<info>詳しくは、<xref href="../../containers/container_single_ui.html#container_cli_ips" format="html" scope="peer">IP アドレスの要求とバインド</xref>を参照してください。
+</info></step></steps></taskbody></task>
+<task id="UsingSLA">
+<title>リモート・マシン上での StrongLoop Arc のセットアップ</title>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> において <uicontrol>ibm-node-strong-pm</uicontrol> イメージから単一コンテナーを作成した後、リモート・マシン上に StrongLoop Arc をセットアップします。</shortdesc>
+<taskbody>
+<prereq>始めに、リモート・マシン上に Node.js およびノード・パッケージ・マネージャー (npm) をインストールします。</prereq>
+<steps>
+<step>
+<cmd>StrongLoop をダウンロードし、以下のコマンドを入力してインストールします。</cmd>
+<info>StrongLoop には、Arc 実行に必要なすべてのパッケージが含まれています。
+</info>
+<stepxmp>
+<codeblock>npm install -g strongloop</codeblock></stepxmp></step>
+<step>
+<cmd>StrongLoop がインストールされたら、StrongLoop Arc を実行します。</cmd>
+<stepxmp>
+<codeblock>slc arc</codeblock></stepxmp></step>
+<step>
+<cmd>プロンプトが出されたら、StrongLoop に登録またはログインします。</cmd></step>
+<step>
+<cmd>コンテナー内で実行される StrongLoop Process Manager を、StrongLoop Arc 内のプロセス・マネージャーのリストに追加します。
+</cmd><substeps>
+<substep>
+<cmd>Arc モジュール・セレクターから、<uicontrol>「Process Manager」</uicontrol>に移動します。</cmd></substep>
+<substep>
+<cmd>コンテナーにバインドしたパブリック IP アドレス、およびパブリック・ポート 8701 を、Arc Process Manager に追加します。</cmd></substep>
+<substep>
+<cmd><uicontrol>「有効にする (Activate)」</uicontrol>をクリックします。</cmd></substep></substeps></step></steps></taskbody></task>
+<task id="task_rpp_zwf_qw">
+<title>StrongLoop Arc の使用によるコンテナーへの Node.js アプリのプッシュ</title>
+<shortdesc>リモート・マシン上に StrongLoop Arc クライアントがある状態でコンテナー内で実行される StrongLoop Process Manager に接続した後、Node.js アプリをビルドし、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> にプッシュします。</shortdesc>
+<taskbody>
+<steps>
+<step>
+<cmd>Arc モジュール・セレクターから、<uicontrol>「ビルドおよびデプロイ (Build and Deploy)」</uicontrol>に移動します。</cmd></step>
+<step>
+<cmd>Arc ユーザー・インターフェースの手順に従ってアプリをビルドします。
+</cmd>
+<info>
+<note type="important">StrongLoop Arc で作成した Node.js アプリが、環境変数の <parmname>PORT</parmname> とコンテナー作成時に公開したポートの両方を listen していることを確認します。
+<p>例</p>
+<codeblock>app.listen(process.env.PORT || 3001);</codeblock></note></info></step>
+<step>
+<cmd>Arc ユーザー・インターフェースの手順に従ってアプリをデプロイします。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> にアプリをデプロイするように構成したプロセス・マネージャーを選択します。
+</cmd></step>
+<step>
+<cmd>デプロイメント・プロセスが終了するまで待ちます。
+</cmd></step>
+<step>
+<cmd>アプリにアクセスします。
+</cmd><substeps>
+<substep>
+<cmd>Web ブラウザーを開きます。</cmd></substep>
+<substep>
+<cmd>コンテナーの IP アドレスとポートを、<codeph><varname>IP_ADDRESS:PORT</varname></codeph> という形式で入力します。
+</cmd>
+<info>
+<p>例</p>
+
+<codeblock>192.0.2.26:3001</codeblock></info></substep>
+<substep importance="optional">
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> にデプロイしたアプリごとに、これらのステップを繰り返します。
+</cmd></substep></substeps></step>
+<step>
+<cmd>Arc のトレース、メトリック、およびプロファイラーを使用して、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> で実行中のアプリについてのパフォーマンス情報を取得します。</cmd>
+<info>詳細については、StrongLoop 資料の <xref href="https://docs.strongloop.com/display/SLC/Operating+Node+applications" format="html" scope="external">Operating Node applications</xref> を参照してください。</info></step></steps></taskbody></task>
+<reference id="reference_dockerfile">
+<title><uicontrol>ibm-node-strong-pm</uicontrol> Dockerfile リファレンス</title>
+<shortdesc>この Dockerfile は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> <wintitle>カタログ</wintitle>にある <uicontrol>ibm-node-strong-pm</uicontrol> イメージの作成に使用されたものです。この情報は、あくまでも参考用です。
+このイメージのビルド済みバージョンに含まれている他のファイルは提供されません。</shortdesc>
+<refbody>
+<section><codeblock>FROM registry.ng.bluemix.net/ibmnode:latest
+RUN useradd -ms /bin/bash strong-pm \    
+    &amp;&amp; chown -R strong-pm:strong-pm /usr/local \    
+    &amp;&amp; su strong-pm -c "npm install -g strong-pm &amp;&amp; npm cache clear"
+
+# Set up some semblance of an environment
+WORKDIR /home/strong-pm
+ENV HOME=/home/strong-pm PORT=3000
+
+# Run as non-privileged user inside container
+USER strong-pm
+
+# Expose strong-pm and application ports
+EXPOSE 8701
+EXPOSE 3001-3010
+
+ENTRYPOINT ["/usr/local/bin/sl-pm", "--base", ".", "--listen", "8701"]</codeblock></section></refbody></reference>
+<reference id="rellinks">
+<title>関連リンク</title>
+<related-links>
+<linklist id="general">
+<title>関連リンク</title>
+<link href="../../containers/container_single_ui.html#gui" format="html" scope="peer">
+<linktext>Bluemix ダッシュボードを使用した単一コンテナーの作成</linktext></link>
+<link href="../../containers/container_ha.html#container_group_ui" format="html" scope="peer">
+<linktext>Bluemix ダッシュボードを使用したコンテナー・グループの作成</linktext></link>
+<link href="../docker_image_ibmnode/ibmnode_starter.html" format="html" scope="peer">
+<linktext>Bluemix 用 ibmnode イメージ概説</linktext></link>
+<link href="http://strongloop.com" format="html" scope="external">
+<linktext>StrongLoop</linktext></link>
+<link href="https://docs.strongloop.com/display/SL/Installing+StrongLoop" format="html">
+<linktext>StrongLoop 資料 - Installing StrongLoop</linktext></link></linklist></related-links></reference></dita>

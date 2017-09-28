@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="container_planning_quota">
+<title>割り当て量と <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウント</title>
+<titlealts>
+<navtitle>割り当て量と <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウント</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> での割り当て量と <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウント管理</searchtitle></titlealts>
+<shortdesc><ph conref="container_conref.dita#terms/quota_definition"></ph></shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>計画</indexterm><indexterm>IBM Containers</indexterm><indexterm>コンテナー</indexterm><indexterm>割り当て量</indexterm><indexterm>組織管理者</indexterm><indexterm>支払い</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context><ph id="account_def"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> には、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で使用できるさまざまなアカウントが用意されています。
+アカウントのタイプに応じて、組織で利用可能な割り当て量や、コンテナー・リソースの利用料金の課金方法が異なります。</ph>
+組織のスペースに含まれているアプリケーションまたはサービスはすべて、実行中かどうかにかかわらず、割り当て量の使用量としてカウントされます。
+そのため、<xref href="#maximize_quota" format="dita">既存の割り当て量を最大限に使用する</xref>ためにできることを知っておくことが重要です。
+<xref href="#bluemix_account" format="dita">従量課金 (PAYG) プランまたはサブスクリプション・プラン</xref>は、組織のニーズに合わせて <xref href="#change_quota" format="dita"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースに割り振る</xref>ことができる<xref href="#default_quota_paid" format="dita">デフォルトの割り当て量の制限</xref>を使用してセットアップされます。</context></taskbody>
+<task id="bluemix_account">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウント・タイプ</title>
+<shortdesc></shortdesc>
+<taskbody>
+<context>以下の表に、提供されているアカウント・タイプの概要を示します。
+各アカウント・タイプと課金タイプの詳細については、<xref href="../pricing/index.html" format="html" scope="external">価格設定</xref>のトピックを参照してください。<table frame="all" colsep="1" rowsep="1" id="table_psk_cl5_jw">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のアカウント・タイプの概要</title>
+<desc>
+<p outputclass="summary"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のアカウント・タイプの概要</p></desc>
+<tgroup cols="2"><colspec colnum="1" colname="newCol2"></colspec><colspec colnum="2" colname="newCol1"></colspec>
+<thead>
+<row>
+<entry>アカウント・タイプ</entry>
+<entry>説明</entry></row></thead>
+<tbody>
+<row>
+<entry>無料試用</entry>
+<entry><ph conref="cs_conref.dita#links/classic">の無料試用版</ph>はありません。<xref href="cs_ov.dita" format="dita" scope="local">クラスター管理について学び、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Public の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の Kubernetes にマイグレーションします。</xref></entry></row>
+<row>
+<entry>従量制課金</entry>
+<entry>従量制課金アカウントの契約では、使用した <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> リソースの分のみ支払います。
+</entry></row>
+<row>
+<entry>サブスクリプション</entry>
+<entry>サブスクリプション・アカウントの契約では、毎月最小限の使用量を守ることを誓約し、その最低料金に適用されるサブスクリプション割引を受けます。
+また、最小限の使用量を超過した場合は、その超過分の料金を支払います。
+</entry></row>
+<row>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Dedicated</entry>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Dedicated では、最低 1 年間の契約が必要になります。
+その期間中の月々の支払額は、希望する専用サービスと、すべての公開サービスへのアクセス権限を付与するサブスクリプション・アカウントに基づきます。
+</entry></row>
+<row>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> ローカル</entry>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Local を使用するには、最低 1 年間の契約が必要になります。
+その期間中の月々の支払額は、希望するローカル・サービスと、すべての公開サービスへのアクセス権限を付与するサブスクリプション・アカウントに基づきます。
+</entry></row></tbody></tgroup></table></context></taskbody></task>
+<task id="default_quota_paid">
+<title>有料アカウントのデフォルト割り当て量</title>
+<taskbody>
+<context>有料アカウントすべては、次の表にまとめられているデフォルトの割り当て量の制限付きでセットアップされます。さらに多くのリソースが必要な場合、<xref href="../support/index.html#contacting-support" format="html"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サポート・チケット</xref>を開いて割り当て量の追加を要求できます。
+<table frame="all" colsep="1" rowsep="1" id="table_eq1_ccd_bx">
+<title>有料アカウントの割り当て量の概要</title>
+<desc>
+<p outputclass="summary">有料アカウントの割り当て量の概要</p></desc>
+<tgroup cols="2"><colspec colnum="1" colname="newCol1"></colspec><colspec colnum="2" colname="c1"></colspec>
+<thead>
+<row>
+<entry>リソース</entry>
+<entry>有料アカウントの割り当て量の制限</entry></row></thead>
+<tbody>
+<row>
+<entry>パブリック IP アドレス</entry>
+<entry>64</entry></row>
+<row>
+<entry>コンテナー・メモリー</entry>
+<entry>64 GB <note>スペース内のすべてのコンテナーは、そのコンテナーが実行中かどうかにかかわらず、割り当て量の使用量としてカウントされます。
+メモリーの空き容量を増やすためには、未使用のコンテナーを削除する必要があります。
+</note></entry></row>
+<row>
+<entry>ファイル共有</entry>
+<entry>10 個のファイル共有</entry></row>
+<row>
+<entry>コンテナーおよびコンテナー・グループ</entry>
+<entry>数は無制限<note>コンテナーおよびコンテナー・グループのサイズでは、コンテナー・メモリーの制限が考慮されますが、特定のコンテナー数に制限されることはありません。
+</note></entry></row>
+<row>
+<entry>イメージ</entry>
+<entry>25<note>IBM イメージは、プライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリーのイメージ制限のカウントには含まれません。</note></entry></row>
+<row>
+<entry>スペース</entry>
+<entry>数は無制限<note>どのスペースも、少なくとも 2 つのパブリック IP アドレスと、2 GB のコンテナー・メモリー<ph audience="blue">、さらに 2 つの共有ファイル</ph> (新しいスペースにログインし、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で使用しようとするときに自動的に割り振られる) が必要です。これらのリソースは割り当て量に組み込まれますが、特定のスペース数に制限されることはありません。</note></entry></row></tbody></tgroup></table></context></taskbody></task>
+<task id="change_quota">
+<title>スペースに割り振られる割り当て量</title>
+<taskbody>
+<context>従量課金 (PAYG) プランまたはサブスクリプション・プランでは、各スペースに対して、メモリー、ファイル共有の数、およびパブリック IP アドレスの数の割り当て量を、該当する割り当て量の制限に達するまで調整できます。コンテナーのスペース割り当て量を増減するには、以下の手順を実行します。</context>
+<steps>
+<step>
+<cmd><ph id="view_quota_1">「組織の管理」のアカウントの詳細から、組織を選択します。</ph></cmd></step>
+<step>
+<cmd><ph id="view_quota_2">割り当て量セクションに、コンテナーの詳細が表示されます。</ph></cmd></step>
+<step>
+<cmd><uicontrol>「割り当て量」</uicontrol>テーブルで、<uicontrol>「編集」</uicontrol>ボタンをクリックして、スペースごとに割り振られた割り当て量を変更します。
+</cmd></step>
+<step>
+<cmd><uicontrol>「保存」</uicontrol>ボタンをクリックして、変更を保存します。</cmd></step></steps>
+<postreq><note type="tip">最大の割り当て量に達する場合には、<xref href="../support/index.html#contacting-support" format="html"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サポート・チケット</xref>を開いて割り当て量の追加を要求できます。</note></postreq></taskbody></task>
+<task id="maximize_quota">
+<title>割り当て量を最大限使用するためのヒント</title>
+<taskbody>
+<context>不要なコンテナー・リソースを解放し、割り当て量を最大限使用するために、以下のヒントを考慮してください。
+<ul>
+<li>使用していないコンテナーを削除して、それらのコンテナーの構成が割り当て量に計上されないようにしてください。詳しくは、<xref href="container_single_remove.dita" format="dita" scope="local"></xref>、<xref href="container_group_remove.dita"></xref>、および<xref href="container_compose_lesson_remove.dita#container_compose_remove" format="dita">マルチコンテナー・アプリの削除</xref>を参照してください。
+</li>
+<li>コンテナーをインターネットからアクセス可能にしてはならない場合は、パブリック IP アドレスをコンテナーにバインドしないでください。
+</li>
+<li>パブリック IP アドレスの使用数を減らすには、単一コンテナーの代わりにコンテナー・グループを使用することを検討してください。
+コンテナー・グループは、IP アドレスの割り当て量に左右されないパブリック・アクセス用の経路を使用します。詳細については、<xref href="container_group_ui.dita" format="dita" scope="local"></xref>を参照してください。</li>
+<li audience="blue"><draft-comment author="Nadine">This content is staging only. The CPU capping is
+not yet enforced in the IBM Containers service. </draft-comment>コンテナーのサイズは慎重に選択してください。
+コンテナーが実行時に使用できる計算ホスト上の仮想 CPU の数、メモリー、およびディスク・スペースは、選択したサイズによって決まります。
+そのため、サイズによってコンテナーの速度が左右されます。
+</li></ul></context></taskbody></task></task>

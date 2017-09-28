@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="va_reviewing" xml:lang="ja-jp">
+<title>イメージ VA レポートの検討</title>
+<titlealts>
+<navtitle>イメージ・レポートの検討</navtitle>
+<searchtitle>Vulnerability Advisor イメージ・レポートの検討</searchtitle></titlealts>
+<shortdesc>イメージをデプロイする前に、その Vulnerability Advisor レポートを検討することができます。
+このレポートには、脆弱なパッケージ、セキュアでないコンテナーやアプリケーションの設定、イメージが組織のポリシーに準拠しているかどうかの詳細が示されます。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>Vulnerability Advisor</indexterm><indexterm>脆弱性</indexterm><indexterm>コンテナーのセキュリティー</indexterm><indexterm>イメージのセキュリティー</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context><p>コンテナー・イメージは、IBM <ph audience="unknown">またはサード・パーティー</ph>によって提供されます。あるいは、組織が追加することもできます。場合によっては、
+イメージをデプロイする前に、組織のポリシーによって設定された要件を満たすようにイメージを構成する必要があります。
+組織管理者だけが脆弱性のあるイメージがデプロイされるようにポリシーを変更できます。組織ポリシーを表示および変更する手順については、<xref href="va_managing_policy.dita"></xref>を参照してください。</p>
+<p>以下の手順を実行して、イメージにセキュリティーと構成の問題がないかどうかを確認します。</p></context>
+<steps>
+<step conref="va_managing_policy.dita#va_managing_policy/va">
+<cmd></cmd></step>
+<step>
+<cmd><uicontrol conref="va_conref.dita#va_conref/v_assess"></uicontrol> セクションで、脆弱性評価の状況を確認します。</cmd>
+<info>状況は、以下のいずれかの条件で示されます。
+<ul>
+<li><wintitle>安全にデプロイ可能</wintitle> - セキュリティー問題は検出されませんでした。</li>
+<li><wintitle>デプロイに注意が必要</wintitle> - 対処が必要なセキュリティーまたは構成の問題が検出されました。
+組織のポリシーは脆弱なイメージのデプロイを許可しています。
+このイメージをデプロイすると、警告が出されます。
+<draft-comment author="GB103749" audience="blue">^ Checking
+here how the warning is handled. Is it sent to the user (who deployed), or to the organizational
+manager, or both?</draft-comment></li>
+<li><wintitle>デプロイメントはブロックされました</wintitle> - セキュリティーまたは構成の問題が検出されました。組織のポリシーは脆弱なイメージのデプロイを許可していないので、イメージをデプロイする前に対処が必要です。
+</li>
+<li><wintitle>不完全</wintitle> - スキャンは完了していません。
+スキャンはまだ実行中であるか、イメージのオペレーティング・システムに互換性がない可能性があります。
+待機してからスキャンを再試行してください。
+それでもスキャンが完了しない場合は、再度イメージをプッシュして、新規スキャンを開始します。
+スキャンが不完全なイメージは、デプロイメントについてブロックされません。
+</li></ul>
+<p>Vulnerability Advisor セキュリティー評価を形成する詳細レポートを確認します。</p></info></step>
+<step>
+<cmd>イメージを選択し、「<uicontrol conref="va_conref.dita#va_conref/v_assess"></uicontrol>」セクションで、「<uicontrol conref="va_conref.dita#va_conref/v_report"></uicontrol>」をクリックします。</cmd></step>
+<step>
+<cmd>各セクションを確認して、イメージ内の各パッケージにセキュリティーと構成の問題がないかどうかを調べます。</cmd>
+<info>
+<p><ul id="report">
+<li><uicontrol conref="va_conref.dita#va_conref/policy"></uicontrol><p>組織管理者が設定したポリシーにイメージが従っているかどうかがリストされます。</p></li>
+<li><uicontrol conref="va_conref.dita#va_conref/ra"></uicontrol><p>イメージに 1 つ以上の脆弱性がある場合、検出された脆弱性のリスク評価として Vulnerability Advisor が計算した値がこのセクションに表示されます。
+リスクは <xref href="https://www.first.org/cvss" format="html" scope="external">CVSS</xref> 計算器、および <xref href="https://exchange.xforce.ibmcloud.com/" format="html" scope="external"><keyword conref="va_conref.dita#va_conref/xforce"></keyword></xref> テクノロジーを使用して計算されます。
+</p></li>
+<li><uicontrol conref="va_conref.dita#va_conref/vulns"></uicontrol><p>脆弱性に関する既知の問題が含まれるパッケージがリストされます。既知の問題は、<xref href="va_index.dita"></xref> にリストされている Docker イメージ・タイプの公開セキュリティー通知に基づいて、毎日更新されます。
+脆弱パッケージがスキャンに合格するようにするには通常、脆弱性の修正が反映された新しいバージョンのパッケージが必要です。同じパッケージに複数の脆弱性がリストされることがあり、その場合は、1 回のパッケージのアップグレードで複数の問題が修正されることがあります。セキュリティー通知コードをクリックして、パッケージに関する詳細情報と、パッケージを更新するための手順を確認してください。
+</p></li>
+<li><uicontrol conref="va_conref.dita#va_conref/bps"></uicontrol><p>イメージのセキュリティーを向上させるために取り得る対処方法がリストされます。<wintitle>「修正アクション (Corrective Action)」</wintitle>列に、セキュリティーを向上させる方法についての説明があります。</p></li>
+<li><uicontrol conref="va_conref.dita#va_conref/secconfig"></uicontrol><p>非セキュアなイメージのアプリケーションの設定がリストされます。<wintitle>「修正アクション (Corrective Action)」</wintitle>列に、セキュリティーを向上させる方法についての説明があります。</p></li>
+<li><uicontrol conref="va_conref.dita#va_conref/containers"></uicontrol><p>組織で既に実行されている、このイメージを使用するコンテナーをリストします。
+</p></li></ul></p>
+
+<p>リストされた項目ごとに、修正アクションまたは提案事項が示されます。</p></info></step>
+<step>
+<cmd><uicontrol conref="va_conref.dita#va_conref/v_assess"></uicontrol>レポートに記載されている問題を修正し、イメージを再作成します。</cmd>
+<info>Dockerfile の一部の問題は、<xref href="va_report.dita" format="dita"></xref>に記載されているコードを使用して解決することができます。</info></step></steps>
+<result><ph audience="unknown">脆弱性が存在するのに修正しない場合、それらの問題はコンテナー用にそのイメージを使用することに影響する可能性があります。
+セキュリティーと構成の問題があるイメージをコンテナー内で使用し続けることはできますが、特定のタイプの問題が組織によってブロックされている場合は使用できません。
+組織のデプロイメント設定を調べて、ブロックの対象になる問題を確認してください (<xref href="va_managing_policy.dita"></xref>を参照)。</ph></result>
+<postreq>イメージをデプロイした後に、Vulnerability Advisor はコンテナー内にあるセキュリティーと構成の問題を見つけるスキャンを続行します。
+見つかった問題は、<xref href="va_reviewing_container.dita"></xref>に記載されている手順に従うことによって解決できます。
+</postreq></taskbody><?tm 1435623320 3?></task>

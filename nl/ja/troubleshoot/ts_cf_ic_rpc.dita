@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE tsTroubleshooting PUBLIC "-//IBM//DTD DITA Troubleshooting//EN"
+ "troubleshooting.dtd">
+<!--http://w3.opensource.ibm.com/projects/ditatroublespec/ -->
+<!--This DITA specialized document type is currently not supported by the Authoring Tools development team. Press the F1 key for online help on the tags, or see the Authoring Tools Information Center for the complete set of help topics at http://submit.boulder.ibm.com/infocenter/idwb/v3r8m4/index.jsp.-->
+<tsTroubleshooting id="ts_cf_ic_rpc" xml:lang="ja-jp" class="- topic/topic tsTroubleshooting/tsTroubleshooting ">
+<title>init でのメソッド・エラー <codeph>(rpc)</codeph></title>
+<titlealts>
+<navtitle>init でのメソッド・エラー (<codeph>rpc</codeph>)</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の init でのメソッド・エラー <codeph>(rpc)</codeph></searchtitle></titlealts>
+<shortdesc></shortdesc>
+<tsBody class="- topic/body tsTroubleshooting/tsBody ">
+<tsSymptoms class="- topic/section tsTroubleshooting/tsSymptoms "><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> init</codeph> の実行を試みると、以下のいずれかのメッセージが表示されます。<ul>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> rpc: can't find method
+CliRpcCmd.IsLoggedIn</codeph></li>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> rpc: can't find method
+CliRpcCmd.IsMinCliVersion</codeph></li></ul></tsSymptoms>
+<tsCauses class="- topic/section tsTroubleshooting/tsCauses ">インストールされた Cloud Foundry のバージョンが <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> にサポートされているより前のバージョンです。</tsCauses>
+<tsResolve class="- topic/section tsTroubleshooting/tsResolve "><ol>
+<li><codeph>cf -v</codeph> を実行して、インストールされている Cloud Foundry CLI のバージョンを調べます。</li>
+<li>インストールされているバージョンが <ph conref="container_conref.dita#links/cfic_cf_version_number"></ph> より前の場合、<xref href="https://github.com/cloudfoundry/cli/releases" type="" format="html" scope="external">Cloud Foundry CLI を更新します</xref>。</li></ol></tsResolve></tsBody></tsTroubleshooting>

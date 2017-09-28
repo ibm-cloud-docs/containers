@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE map PUBLIC "-//IBM//DTD DITA IBM Map//EN"
+ "ibm-map.dtd">
+<map xml:lang="ja-jp">
+<title>Containers のトラブルシューティング</title>
+<topicmeta>
+<copyright>
+<copyryear year="2014"></copyryear>
+<copyryear year="2017"></copyryear>
+<copyrholder>IBM</copyrholder></copyright></topicmeta><data><ph><draft-comment author="bpratt">Debug topic in blue until bx ic is updated</draft-comment></ph></data>
+<topicref navtitle="Running cf ic in debug mode" href="ts_debug_mode.dita" type="task" scope="local" format="dita" audience="blue"></topicref>
+<topicref navtitle="Debugging and reviewing logs for containers" href="ts_debug_containers.dita" type="task" scope="local" format="dita"></topicref>
+<topicref navtitle="CLI setup" href="ts_ov_cli.dita" outputclass="subsection" type="concept" scope="local" format="dita">
+<topicref navtitle="CF IC old CF version" href="ts_cf_ic_rpc.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref>
+<topicref navtitle="Registry error" href="ts_cf_ic_registry_error.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref>
+<topicref navtitle="cf ic command require sudo to run" href="ts_sudo.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref></topicref>
+<topicref navtitle="Organizations and spaces" href="ts_ov_org_space.dita" outputclass="subsection" type="concept" scope="local" format="dita">
+<topicref navtitle="Insufficient org quota" href="ts_quota_space.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref>
+<topicref navtitle="Cannot change container quota" href="ts_trial_upgrade.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref></topicref>
+<topicref navtitle="Images" href="ts_ov_images.dita" outputclass="subsection" type="concept" scope="local" format="dita">
+<topicref navtitle="Proxy settings blocking images" href="ts_firewall_images.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref>
+<topicref navtitle="Problems with Liberty Profile image" href="ts_liberty_image.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref>
+<topicref navtitle="Image cannot be pulled from the private Bluemix registry" href="ts_image_baduserid.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref>
+<topicref navtitle="Image cannot be exported" href="ts_image_export.dita" type="tsTroubleshooting" scope="local"></topicref>
+<topicref navtitle="Namespace cannot be changed" href="ts_namespace_change.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref>
+<topicref navtitle="Prompted for login during docker push" href="ts_image_push_login.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref></topicref>
+<topicref navtitle="Containers" href="ts_ov_containers.dita" outputclass="subsection" type="concept" scope="local" format="dita">
+<topicref navtitle="502 bad gateway error" href="ts_group_502.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref>
+<topicref navtitle="Proxy settings blocking requests" href="ts_firewall.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref>
+<topicref navtitle="Auto-recovery repeatedly recreates instances during startup" href="ts_group_auto_recreate_instance.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref>
+<topicref navtitle="Service does not bind to container" href="ts_bridge_app.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref>
+<topicref navtitle="su command error" href="ts_su_error.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref>
+<topicref navtitle="Cloud Foundry app cannot connect to container" href="ts_app_container_communication.dita" type="tsTroubleshooting" scope="local" format="dita" audience="blue"></topicref>
+<topicref navtitle="Container stops and shuts down" href="ts_container_shutdown.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref>
+<topicref navtitle="Deleted container continues to show" href="ts_incomplete_deletion.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref>
+<topicref navtitle="Inactive instances" href="ts_group_network_failure.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref></topicref>
+<topicref navtitle="Docker Compose" href="ts_ov_compose.dita" outputclass="subsection" type="concept" scope="local" format="dita">
+<topicref navtitle="Insecure HTTPS connection warning with Docker Compose " href="ts_compose_insecure_connection.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref>
+<topicref navtitle="No module named queue error with Docker Compose" href="ts_compose_commands_failed.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref></topicref>
+<topicref navtitle="Volumes" href="ts_ov_volumes.dita" outputclass="subsection" type="concept" scope="local" format="dita">
+<topicref navtitle="Permission error changing the owner of a mounted volume directory" href="ts_vol_owner.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref>
+<topicref navtitle="Container groups overwrite logs in volumes" href="ts_vol_group_overwrite.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref>
+<topicref navtitle="Poor volume read/write performance" href="ts_vol_performance.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref>
+<topicref navtitle="-v fails container creation" href="ts_vol_mount_option.dita" type="tsTroubleshooting" scope="local" format="dita"></topicref></topicref>
+<topicref navtitle="Known issues" href="ts_known_issues.dita" outputclass="subsection" type="concept" scope="local" format="dita"></topicref>
+<topicref navtitle="Getting help" href="ts_getting_help.dita" outputclass="subsection" type="concept" scope="local" format="dita"></topicref></map>

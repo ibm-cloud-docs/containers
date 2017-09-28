@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002--><!DOCTYPE dita PUBLIC "-//IBM//DTD DITA IBM Composite//EN" "ibm-ditabase.dtd">
+<dita xml:lang="ja-jp">
+<concept id="getting_started_iib" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 用 ibm-integration-bus イメージ概説</title>
+<titlealts>
+<navtitle>ibm-integration-bus</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> における <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 用 <uicontrol>ibm-integration-bus</uicontrol> イメージ概説</searchtitle></titlealts>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerfull"></keyword> には、 <uicontrol>ibm-integration-bus</uicontrol> イメージが提供されています。また、<tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus for Developers エディションが含まれています。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>IBM Containers</indexterm><indexterm>コンテナー</indexterm><indexterm>イメージ</indexterm><indexterm>Integration Bus</indexterm><indexterm>ibm-integration-bus</indexterm></keywords>
+<othermeta name="linkHover" content="Integration ソリューションを作成後に、ibm-integration-bus イメージを使用して Bluemix に単一コンテナーをプロビジョンできます。その後、Web UI を使用するかまたは端末から操作して、Integration ソリューションをこのコンテナーにデプロイできます。"></othermeta></metadata></prolog>
+<conbody></conbody></concept>
+<concept id="how_it_works">
+<title>機能</title>
+<conbody>
+<p><tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus for Developers には、独自の Integration ソリューションの開発を開始するために必要なものすべてが含まれています。</p>
+<p> Integration ソリューションを作成後に、<uicontrol>ibm-integration-bus</uicontrol> イメージを使用して <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> に単一コンテナーをプロビジョンできます。その後、Web UI を使用するかまたは端末から操作して、Integration ソリューションをこのコンテナーにデプロイできます。</p>
+<p><note><uicontrol>ibm-integration-bus</uicontrol> イメージは開発および単体テストのみに使用できます。製品の検討、チュートリアルでの学習、そして <tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus を使った場合の組織にとってのメリットの評価にも、このイメージを使用できます。</note></p></conbody></concept>
+<concept id="whats_included">
+<title>含まれている内容</title>
+<conbody>
+<p><!--&lt;i&gt;Required section. Include a list of everything that is included in the image (and at what version, level, etc).&lt;/i&gt;-->この<tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus イメージには、<tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus for Developers Version 10 (Developer Edition ともいう) のソフトウェア・パッケージが含まれており、これは開発と単体テストに使用可能な製品完全機能バージョンです。このバージョンは無料でダウンロードでき、ライセンス条件の範囲内で自由に使用できます。</p>
+<p><tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus for Developers Version 10.0 は、<tm trademark="Windows" tmtype="tm">Windows</tm> 64 ビット版オペレーティング・システムと <tm trademark="Linux" tmtype="tm">Linux</tm> (x86-64) オペレーティング・システムで利用できます。製品の前提条件となる要素はすべて、ダウンロード・パッケージに組み込まれています。</p>
+<p><tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus for Developers に含まれている機能について詳しくは、<xref href="http://www.ibm.com/support/knowledgecenter/SSMKHH_10.0.0/com.ibm.etools.msgbroker.helphome.doc/help_home_msgbroker.htm" format="html" scope="external"><tm trademark="IBM" tmtype="reg">IBM</tm> Knowledge Center 内の <tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus</xref> を参照してください。</p>
+<p><xref href="https://www.ibm.com/marketing/iwm/iwm/web/pick.do?source=swg-wmbfd" format="html" scope="external"><tm trademark="IBM" tmtype="reg">IBM</tm>Integration Bus for Developers ダウンロード・ページ</xref>から Developer Edition にアクセスできます。</p></conbody></concept>
+<concept id="concept_usage">
+<title>使用上の制約事項</title>
+<conbody>
+<p>次の表は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> での <uicontrol>ibm-integration-bus</uicontrol> イメージの無料使用に適用される制約事項を示しています。<note><uicontrol>ibm-integration-bus</uicontrol> イメージの価格設定は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> で使用するコンテナーの価格設定とは無関係です。</note><table id="table_sg3_nm2_sw">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> での <uicontrol>ibm-integration-bus</uicontrol> イメージの無料使用上の制約事項</title>
+<tgroup cols="2"><colspec colnum="1" colname="c1"></colspec><colspec colnum="2" colname="c2"></colspec>
+<thead>
+<row>
+<entry>環境</entry>
+<entry>無料使用上の制約事項</entry></row></thead>
+<tbody>
+<row>
+<entry>開発</entry>
+<entry><uicontrol>ibm-integration-bus</uicontrol> イメージを<uicontrol>無制限に</uicontrol>無料使用して、開発および単体テスト用に単一コンテナーを作成できます。</entry></row>
+<row>
+<entry>実動</entry>
+<entry>Developer Edition は 1 秒に 1 つのトランザクションを処理するように制限されており、実稼働環境での使用はサポートされていません。</entry></row></tbody></tgroup></table></p>
+<conbodydiv>
+<section><title>ライセンス</title>
+<p>ライセンスに関する情報:<ul>
+<li>Dockerfiles および関連するスクリプトは、<xref href="http://www.apache.org/licenses/LICENSE-2.0.html" format="html" scope="external">Apache License 2.0</xref> に基づいてライセンスされています。</li>
+<li><xref href="http://www.ibm.com/software/sla/sladb.nsf/displaylis/1BD32B141C9FDAE38525802C0055A956?OpenDocument" format="html" scope="external"><tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus for Developers Version 10.0 のライセンス情報</xref>。<p>注: ライセンスでは、他者への配布は許可されていません。イメージ内の <tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus のご利用条件では、開発と単体テストのための使用が制限されています。
+</p></li></ul></p></section></conbodydiv></conbody></concept>
+<task id="how_to_get_started">
+<title>概説</title>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> カタログにある <uicontrol>ibm-integration-bus</uicontrol> イメージを使用するか、実動ライセンス交付を受けた独自のイメージを選択して、単一コンテナーを作成します。</shortdesc>
+<taskbody>
+<context> <!--&lt;i&gt;Required section. Include steps on how to get the image &lt;/i&gt;--> <note type="important" id="terms">開始する前に、<uicontrol>ibm-integration-bus</uicontrol> イメージの<xref href="ibmiib_starter.dita#concept_usage" format="dita" scope="local">使用上の制約事項</xref>を確認してください。</note> </context>
+<steps>
+<stepsection>以下の手順を行って、コンテナー内で <tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus を実行します。</stepsection>
+<step>
+<cmd><xref href="ibmiib_starter.dita#provision" format="dita" scope="local"></xref></cmd></step>
+<step>
+<cmd><xref href="ibmiib_starter.dita#verify" format="dita" scope="local"></xref></cmd></step>
+<step>
+<cmd><xref href="ibmiib_starter.dita#createdeployflow" format="dita" scope="local"></xref></cmd></step>
+<step>
+<cmd><xref href="ibmiib_starter.dita#monitor" format="dita" scope="local"></xref></cmd></step>
+<step>
+<cmd><xref href="ibmiib_starter.dita#manage" format="dita" scope="local"></xref></cmd></step></steps></taskbody></task>
+<task id="provision">
+<title><uicontrol>ibm-integration-bus</uicontrol> イメージに基づくコンテナーを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> UI からプロビジョンする</title>
+<shortdesc><tm trademark="IBM" tmtype="reg">IBM</tm> から提供されている <uicontrol>ibm-integration-bus</uicontrol> イメージに基づいて、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> に Docker コンテナーをプロビジョンします。</shortdesc>
+<taskbody>
+<steps>
+<stepsection>以下のステップを実行します。</stepsection>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> にログインします。</cmd></step>
+<step>
+<cmd>カタログから、<uicontrol>「コンテナー」</uicontrol>を選択し、コンテナーをビルドする元になる <uicontrol>ibm-integration-bus</uicontrol> イメージを選択します。</cmd></step>
+<step>
+<cmd><uicontrol>「単一 (Single)」</uicontrol>を選択して単一インスタンス・コンテナーを作成します。このコンテナーは開発およびテスト用に使用できます。</cmd></step>
+<step>
+<cmd>コンテナーの名前を入力します。例: <codeph>iib</codeph>。</cmd></step>
+<step>
+<cmd>コンテナーのサイズを選択します。</cmd></step>
+<step>
+<cmd><uicontrol>「パブリック IP アドレス」</uicontrol>フィールドで、<option>「パブリック IP のバインド (Bind Public IP)」</option>を選択します。</cmd></step>
+<step>
+<cmd><uicontrol>「パブリック・ポート」</uicontrol>フィールドに、<option>4414, 7800</option> を指定します。</cmd></step>
+<step>
+<cmd><uicontrol>「詳細」</uicontrol>オプションを展開して、<option>「新規環境変数の追加 (Add new environment variables)」</option>をクリックします。</cmd></step>
+<step>
+<cmd>以下の環境変数を追加します。</cmd>
+<info>
+<ul compact="yes">
+<li><parmname>LICENSE</parmname> に <varname>accept</varname> の値を指定します。</li>
+<li><parmname>NODENAME</parmname> に <varname>MYNODE</varname> の値を指定します (<varname>MYNODE</varname> は選択したノード名)。</li>
+<li><parmname>LOG_LOCATIONS</parmname> に <varname>/var/log/syslog</varname> の値を指定します。</li></ul>
+<note><parmname>LICENSE</parmname> と <parmname>NODENAME</parmname> プロパティーに値を指定しない場合、コンテナーは作成されますが、開始しません。</note> <parmname>LOG_LOCATIONS</parmname> プロパティーは、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> UI 経由で公開するコンテナー内部のログを指定します。</info></step>
+<step>
+<cmd><uicontrol>「作成」</uicontrol>をクリックして、コンテナーが実行を開始するまで待ちます。</cmd></step></steps></taskbody></task>
+<task id="verify">
+<title>コンテナーおよび <tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus インストール済み環境の有効化</title>
+<shortdesc><tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus を実行するコンテナーが <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> にデプロイされた後、コンテナーの状況を確認し、<tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus インストールを検証します。</shortdesc>
+<taskbody>
+<steps>
+<stepsection>以下の手順を行って、コンテナー内で <tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus のセットアップと構成を検証します。</stepsection>
+<step>
+<cmd>『<xref href="../../containers/container_cli_cfic_install.html" format="html" scope="peer">ネイティブ Docker CLI を使用するために <tm trademark="IBM" tmtype="reg">IBM</tm> Containers プラグイン (<ph conref="container_conref.dita#links/command_prefix"></ph>) をセットアップする</xref>』に説明されている手順で、<tm trademark="IBM" tmtype="reg">IBM</tm> Containers CLI をセットアップします。</cmd></step>
+<step>
+<cmd>端末から、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> にログインします。以下のコマンドを実行します。</cmd><substeps>
+<substep>
+<cmd><codeph>bx login</codeph></cmd></substep>
+<substep>
+<cmd><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> init </codeph></cmd></substep></substeps></step>
+<step>
+<cmd>コンテナーの状況を確認します。*</cmd>
+<info>
+<p><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ps</codeblock></p>
+
+<note conref="../container_conref.dita#links/docker_note_images"></note></info>
+<stepxmp>
+<screen>$ <ph conref="container_conref.dita#links/command_prefix"></ph> ps
+CONTAINER ID        IMAGE                                                       COMMAND             CREATED             STATUS                 PORTS                                                        NAMES
+46d9ec1e-952        registry.ng.bluemix.net/ibm-integration-bus:latest   ""                  2 minutes ago       Running a minute ago   xxx.xxx.xxx.xxx:4414-&gt;4414/tcp, xxx.xxx.xxx.xxx:7800-&gt;7800/tcp   iib</screen></stepxmp></step>
+<step>
+<cmd>Bash セッションをコンテナーにアタッチします。*</cmd>
+<info>
+<p><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> exec -it <varname>container_name</varname> /bin/bash</codeblock>
+ここで、<varname>container_name</varname> はコンテナーの名前です。</p></info>
+<stepxmp>
+<p>以下に例を示します。<screen>$ <ph conref="container_conref.dita#links/command_prefix"></ph> exec -it iib /bin/bash
+(IIB_10:)iibuser@instance-0098858e:/$ </screen></p></stepxmp></step>
+<step>
+<cmd>『<xref href="http://www.ibm.com/support/knowledgecenter/SSMKHH_9.0.0/com.ibm.etools.mft.doc/an26230_.htm" format="html" scope="external">Command environment: <tm trademark="Linux" tmtype="tm">Linux</tm> and <tm trademark="UNIX" tmtype="tm">UNIX</tm> systems</xref>』に説明されている方法で、<uicontrol>mqsiprofile</uicontrol> コマンドを実行して環境を初期化します。</cmd>
+<info>
+<p>環境を初期化するコマンドは、<filepath>/opt/ibm/iib-10.0.0.6/server/bin/</filepath> ディレクトリーにあります。</p></info>
+<stepxmp>以下に例を示します。<screen>(IIB_10:)iibuser@instance-0098858e:/$ . ./opt/ibm/iib-10.0.0.6/server/bin/mqsiprofile
+
+MQSI 10.0.0.6
+/opt/ibm/iib-10.0.0.6/server
+
+# Check the environment variable MQSI_WORKPATH is set
+(IIB_10:)iibuser@instance-0098858e:/$ echo $MQSI_WORKPATH                            
+/var/mqsi
+(IIB_10:)iibuser@instance-0098858e:/$ </screen></stepxmp></step>
+<step>
+<cmd><uicontrol>mqsilist</uicontrol> コマンドを実行してノードの状況を表示します。<codeph>running</codeph> という状況がリストされるはずです。</cmd>
+<stepxmp>以下に例を示します。<screen>(IIB_10:)iibuser@instance-0098858e:/$ mqsilist
+BIP1325I: Integration node 'MYNODE' with administration URI 'http://instance-0098858e:4414' is running. 
+BIP8071I: Successful command completion.
+(IIB_10:)iibuser@instance-0098858e:/$ </screen></stepxmp></step></steps>
+<result>コンテナーは実行中です。サポートされている任意の方法を使用して、Integration ソリューションをデプロイできます。</result></taskbody></task>
+<task id="monitor">
+<title>コンテナー内部の <tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus ログのモニター</title>
+<shortdesc> <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> UI またはコマンド・ラインからログをモニターします。</shortdesc>
+<taskbody>
+<prereq><p>開始する前に、コマンド・ラインからログをモニターするように <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containershort"></keyword> CLI を構成します。詳しくは、<xref href="../../containers/container_cli_cfic_install.dita" scope="peer">IBM Containers プラグイン (<ph conref="container_conref.dita#links/command_prefix"></ph>) のセットアップ</xref>を参照してください。</p></prereq>
+<context><p><uicontrol>ibm-integration-bus</uicontrol> イメージが、<tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus メッセージをコンテナー内部の <filepath>/var/log/syslog</filepath> に出力するよう構成されます。</p></context>
+<steps>
+<stepsection><tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus ログをモニターする次の方法から任意に選択します。</stepsection>
+<step>
+<cmd>コンテナーをプロビジョンしたときに環境変数 <parmname>LOG_LOCATIONS</parmname> を構成した場合は、ログを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> UI からモニターできます。以下のステップを実行して、ログにアクセスしてください。</cmd>
+<info>
+<p><ol>
+<li>コンテナー・ダッシュボードから、モニターするコンテナーを選択します。
+</li>
+<li><uicontrol>「モニタリングおよびロギング (Monitoring and Logging)」</uicontrol>を選択します。</li>
+<li><uicontrol>「ロギング (Logging)」</uicontrol>を選択します。ダッシュボードにログ・エントリーがリストされます。</li>
+<li importance="optional">ログ・ビューをカスタマイズするには、<wintitle>「ロギング (Logging)」</wintitle>ページで<uicontrol>「詳細ビュー」</uicontrol>を選択して Kibana を開きます。
+詳しくは、<xref href="../../monitor_log/logging/containers/logging_containers_ov.html" format="html" scope="peer">ロギングの概要</xref>を参照してください。</li></ol></p></info></step>
+<step>
+<cmd>端末から、Docker または <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containershort"></keyword> CLI を使用してメッセージをモニターします。以下のステップを実行します。</cmd><substeps>
+<substep>
+<cmd>端末を構成します。</cmd>
+<info>
+<p><ul>
+<li>Docker CLI を使用して直接ローカル Docker ホストを管理しながら、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containershort"></keyword> CLI を使用して <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のコンテナーを管理するには、以下のステップを実行して環境をセットアップします。
+<ol>
+<li><codeph>bx login</codeph></li>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> init </codeph></li></ol></li>
+<li>Docker CLI を使用して <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のコンテナーを管理するには、以下のステップを実行します。<ol>
+<li><codeph>bx login</codeph></li>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> init </codeph><p>環境変数 <codeph>DOCKER_HOST</codeph>、<codeph>DOCKER_CERT_PATH</codeph>、および <codeph>DOCKER_TLS_VERIFY</codeph> に指定されている値をコピーします。</p></li>
+<li>以下の変数を <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> に接続するように設定して、ローカル Docker 環境を指定変更します。<ul>
+<li><codeph>export DOCKER_HOST=&lt;your_host_value&gt;</codeph></li>
+<li><codeph>export DOCKER_CERT_PATH=&lt;your_cert_path_value&gt;</codeph></li>
+<li><codeph>export DOCKER_TLS_VERIFY=1</codeph>
+</li></ul></li></ol><note>このオプションでは一部の Docker コマンドのみサポートされています。</note></li></ul></p></info></substep>
+<substep>
+<cmd>ログにアクセスします。次のオプションのいずれかを選択してください。</cmd>
+<info>
+<p><ul>
+<li>端末が <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containershort"></keyword> CLI コマンドを実行するように構成されている場合は、次のコマンドを実行します。
+<p><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> exec <varname>&lt;container_id&gt;</varname> tail -f /var/log/syslog</codeblock>ここで、<varname>&lt;container_id&gt;</varname> はコンテナーの名前です。
+</p><p>以下に例を示します。<screen><ph conref="container_conref.dita#links/command_prefix"></ph> exec iib tail -f /var/log/syslog</screen></p></li>
+<li>端末が Docker CLI コマンドを実行するように構成されている場合は、次のコマンドを実行します。
+<p><codeblock>docker exec <varname>&lt;container_id&gt;</varname> tail -f /var/log/syslog</codeblock>ここで、<varname>&lt;container_id&gt;</varname> はコンテナーの名前です。
+</p><p>以下に例を示します。<screen>docker exec iib tail -f /var/log/syslog</screen></p></li></ul></p></info></substep></substeps></step></steps></taskbody>
+<task id="manage">
+<title>コンテナー内で実行中の <tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus リソースの管理</title>
+<shortdesc><tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus Web UI を起動するか、または端末からコマンドを実行して、コンテナー内で実行中の <tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus リソースを管理します。</shortdesc>
+<taskbody>
+<steps>
+<stepsection>以下のいずれかのオプションを選択して、コンテナー内の <tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus リソースを管理します。</stepsection>
+<step>
+<cmd><xref href="ibmiib_starter.dita#launchwebUI" format="dita" scope="local"></xref>を行い、<tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus をグラフィカルに管理します。</cmd></step>
+<step>
+<cmd>端末から、Docker または <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containershort"></keyword> CLI を使用して <tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus を管理します。</cmd><choices>
+<choice><xref href="ibmiib_starter.dita#admin_commands_containers_cli" format="dita" scope="local"></xref></choice>
+<choice><xref href="ibmiib_starter.dita#admin_commands_docker_cli" format="dita" scope="local"></xref></choice></choices></step></steps></taskbody></task>
+<task id="launchwebUI">
+<title><tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus Web UI の起動</title>
+<shortdesc>この Web UI を起動して、ブラウザーからコンテナー内で実行中の <tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus リソースを管理します。</shortdesc>
+<taskbody>
+<context>以下の手順を実行してブラウザーからホストに接続します。これは <xref href="ibmiib_starter.dita#getting_started_iib"></xref> で公開したものです。<tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus の Web ユーザー・インターフェースが表示されます。</context>
+<steps>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI からコンテナーを選択し、コンテナーの状況が <codeph>Running</codeph> (稼働中) であるかどうかを確認します。</cmd></step>
+<step>
+<cmd>コンテナーの詳細を確認して、 パブリック IP を見つけます。</cmd></step>
+<step>
+<cmd>Web ブラウザーを開いて、以下の URL にアクセスします。</cmd>
+<info>
+<codeblock>http://<varname>DockerContainerPublicIP</varname>:4414</codeblock>ここで、
+<varname>DockerContainerPublicIP</varname> は前のステップで確認したコンテナーのパブリック IP です。</info></step>
+<step>
+<cmd>ブラウザーに Web ユーザー・インターフェースが開き、<tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus を管理する用意ができました。</cmd></step></steps></taskbody></task>
+<task id="admin_commands_containers_cli">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containershort"></keyword> CLI を使用したコンテナー内での管理コマンドの実行</title>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containershort"></keyword> CLI を使用して、コンテナー内で <tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus 管理コマンドを直接実行します。</shortdesc>
+<taskbody>
+<prereq><p>開始する前に、コマンド・ラインから管理コマンドを実行するように <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containershort"></keyword> CLI を構成します。詳しくは、<xref href="../../containers/container_cli_cfic_install.dita" scope="peer">IBM Containers プラグイン (<ph conref="container_conref.dita#links/command_prefix"></ph>) のセットアップ</xref>を参照してください。</p></prereq>
+<steps>
+<stepsection>以下のステップを実行して、<ph conref="container_conref.dita#links/command_prefix"></ph> コマンドを実行し <tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus を管理するように端末をセットアップします。</stepsection>
+<step>
+<cmd>端末から、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> にログインします。以下のコマンドを実行します。</cmd><substeps>
+<substep>
+<cmd><codeph>bx login</codeph></cmd></substep>
+<substep>
+<cmd><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> init </codeph></cmd></substep></substeps></step>
+<step>
+<cmd>Bash セッションをコンテナーにアタッチして対話式セッションをセットアップします。*</cmd>
+<info>
+<p><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> exec -it <varname>&lt;container_name&gt;</varname> /bin/bash</codeblock>
+ここで、
+<varname>&lt;container_name&gt;</varname> はコンテナーの名前です。</p></info>
+<stepxmp>
+<p>以下に例を示します。<screen><ph conref="container_conref.dita#links/command_prefix"></ph> exec -it iib /bin/bash</screen></p></stepxmp>
+<info><filepath>mqsiprofile</filepath> をソーシングし、このポイント (コンテナー内部のシェル) からコマンドを実行します。</info></step>
+<step>
+<cmd>または、<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> exec</codeph> を使用して、どの <tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus コマンドでも実行可能な非対話式 Bash セッションを実行します。*</cmd>
+<stepxmp>以下に例を示します。<screen><ph conref="container_conref.dita#links/command_prefix"></ph> exec iib container_name /bin/bash -c mqsilist</screen></stepxmp></step></steps></taskbody></task>
+<task id="admin_commands_docker_cli">
+<title>Docker CLI を使用して、コンテナー内で管理コマンドを実行する</title>
+<shortdesc>Docker CLI を使用して、コンテナー内で <tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus 管理コマンドを直接実行します。</shortdesc>
+<taskbody>
+<prereq><p>開始する前に、コマンド・ラインから管理コマンドを実行するように <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containershort"></keyword> CLI を構成します。詳しくは、<xref href="../../containers/container_cli_cfic_install.dita" scope="peer">IBM Containers プラグイン (<ph conref="container_conref.dita#links/command_prefix"></ph>) のセットアップ</xref>を参照してください。</p></prereq>
+<steps>
+<stepsection>以下のステップを実行して、Docker コマンドを実行し <tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus を管理するように端末をセットアップします。</stepsection>
+<step>
+<cmd>端末から、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> にログインします。以下のコマンドを実行します。</cmd><substeps>
+<substep>
+<cmd><codeph>bx login</codeph></cmd></substep>
+<substep>
+<cmd><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> init </codeph></cmd>
+<info>
+<p>環境変数 <codeph>DOCKER_HOST</codeph>、<codeph>DOCKER_CERT_PATH</codeph>、および <codeph>DOCKER_TLS_VERIFY</codeph> に指定されている値をコピーします。</p></info></substep>
+<substep>
+<cmd>以下の変数を <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> に接続するように設定して、ローカル Docker 環境を指定変更します。</cmd>
+<info>
+<p><ul>
+<li><codeph>export DOCKER_HOST=&lt;your_host_value&gt;</codeph></li>
+<li><codeph>export DOCKER_CERT_PATH=&lt;your_cert_path_value&gt;</codeph></li>
+<li><codeph>export DOCKER_TLS_VERIFY=1</codeph>
+</li></ul></p></info></substep></substeps></step>
+<step>
+<cmd>Bash セッションをコンテナーにアタッチして対話式セッションをセットアップします。
+以下のコマンドを実行します。</cmd>
+<info>
+<p><codeblock>docker exec -it <varname>&lt;container_name&gt;</varname> /bin/bash</codeblock> ここで、
+<varname>&lt;container_name&gt;</varname> はコンテナーの名前です。</p></info>
+<stepxmp>
+<p>以下に例を示します。<screen>docker exec -it iib /bin/bash</screen></p></stepxmp>
+<info><filepath>mqsiprofile</filepath> をソーシングし、このポイント (コンテナー内部のシェル) からコマンドを実行します。</info></step>
+<step>
+<cmd>または、<filepath>docker exec</filepath> を使用して、どの <tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus コマンドでも実行可能な非対話式 Bash セッションを実行します。</cmd>
+<stepxmp>以下に例を示します。<screen>docker exec iib container_name /bin/bash -c mqsilist</screen></stepxmp></step></steps></taskbody></task>
+<task id="createdeployflow" xml:lang="ja-jp">
+<title>フローの作成およびデプロイ</title>
+<shortdesc><tm trademark="IBM" tmtype="reg">IBM</tm> Integration Bus Knowledge Center の指示に従って、メッセージ・フローを作成およびデプロイします。</shortdesc>
+<taskbody>
+<context>メッセージ・フローを作成する方法について詳しくは、『<xref href="http://www.ibm.com/support/knowledgecenter/SSMKHH_10.0.0/com.ibm.etools.mft.doc/aa40150_.htm" format="html" scope="external">メッセージ・フローを作成して管理する方法</xref>』を参照してください。
+<p>メッセージ・フローをデプロイする方法について詳しくは、『<xref href="http://www.ibm.com/support/knowledgecenter/SSMKHH_10.0.0/com.ibm.etools.mft.doc/aa40180_.htm" format="html" scope="external">メッセージ・フローをデプロイして構成する方法</xref>』を参照してください。
+</p></context></taskbody></task></task></dita><?tm 1474636083491 45 Windows||UNIX||Linux||IBM||Bluemix ?>

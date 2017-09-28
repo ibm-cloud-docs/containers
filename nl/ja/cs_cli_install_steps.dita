@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="cs_cli_install_steps" xml:lang="ja-jp">
+<title>
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で Kubernetes クラスターとコンテナー・デプロイメントを作成して管理するための CLI のインストール</title>
+<titlealts>
+<navtitle>CLI のインストール</navtitle>
+<searchtitle>
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で Kubernetes クラスターとコンテナー・デプロイメントを作成して管理するための CLI のインストール</searchtitle></titlealts>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> での Kubernetes クラスターの作成と管理、およびクラスターへのコンテナー化アプリのデプロイに必要な CLI をインストールします。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>Kubernetes</indexterm><indexterm>クラスター</indexterm><indexterm>bx cs</indexterm><indexterm>kubectl</indexterm><indexterm>CLI</indexterm><indexterm>インストール</indexterm><indexterm>セットアップ</indexterm><indexterm>IBM Bluemix Container Service</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context id="context_txj_ynd_5z"><p>このタスクには、次の CLI とプラグインをインストールするための情報が含まれています。<ul id="ul_bll_ynd_5z">
+<li><ph conref="cs_conref.dita#links/bx_version"></ph></li>
+<li><ph conref="cs_conref.dita#links/bx_cs_plugin_name"></ph></li>
+<li><ph conref="cs_conref.dita#links/kubernetes_version"></ph></li>
+<li>オプション: <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/registryfull"></keyword> プラグイン</li>
+<li>オプション: <ph conref="cs_conref.dita#links/docker_version"></ph></li></ul></p></context>
+<steps id="install_steps">
+<stepsection>CLI をインストールするには、以下のことを行います。</stepsection>
+<step id="install_bx">
+<cmd><ph conref="cs_conref.dita#links/bx_cs_plugin_name"></ph> の前提条件として、<xref href="https://clis.ng.bluemix.net/ui/home.html" format="html" scope="external" audience="yellow"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> CLI</xref><xref href="https://clis.stage1.ng.bluemix.net/ui/home.html" format="html" scope="external" audience="blue"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> CLI</xref> をインストールします。
+</cmd>
+<info><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> CLI を使用してコマンドを実行するための接頭語は、<ph conref="cs_conref.dita#links/bx"></ph> です。
+</info></step>
+<step id="bx_repo" audience="blue">
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> プラグイン・ステージング・リポジトリーをインストール済み環境に追加します。
+</cmd>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx"></ph> plugin repo-add <varname>stage</varname> https://plugins.stage1.ng.bluemix.net</codeblock></info></step>
+<step id="install_bx_cs_step">
+<cmd id="install_bx_cs">Kubernetes クラスターを作成し、ワーカー・ノードを管理するには、<ph conref="cs_conref.dita#links/bx_cs_plugin_name"></ph> をインストールします。
+</cmd>
+<info><ph conref="cs_conref.dita#links/bx_cs_plugin_name"></ph> を使用してコマンドを実行するための接頭部は、<codeph><ph conref="cs_conref.dita#links/bx_cs"></ph></codeph> です。
+</info>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx"></ph> plugin install <ph id="bx_cs_install" conref="cs_conref.dita#links/bx_cs_plugin_shortname"></ph> -r <ph audience="yellow">Bluemix</ph><ph audience="blue"><varname>stage</varname></ph></codeblock></info>
+<info>
+<p>プラグインが正常にインストールされていることを検証するには、以下のコマンドを実行します。
+<codeblock><ph conref="cs_conref.dita#links/bx"></ph> plugin list</codeblock></p>
+
+<p><ph conref="cs_conref.dita#links/bx_cs_plugin_name"></ph> は <ph conref="cs_conref.dita#links/bx_cs_plugin_shortname"></ph> として結果に表示されます。
+</p></info></step>
+<step importance="optional" audience="blue">
+<cmd><ph conref="cs_conref.dita#links/bx_cs_plugin_name"></ph> の CLI オートコンプリートを有効にします。
+</cmd>
+<info>
+<note>CLI オートコンプリートを使用するには、<xref href="http://www.zsh.org/" format="html" scope="external">zsh</xref> がローカル・マシンにインストールされている必要があります。
+</note></info>
+<info>
+<codeblock>source /usr/local/Bluemix/bx/zsh_autocomplete</codeblock> <codeph><ph conref="cs_conref.dita#links/bx_cs"></ph></codeph> コマンドのオートコンプリートを使用するには、<uicontrol>tab</uicontrol> を入力します。
+<draft-comment>This step  on auto-completion displays in staging only.</draft-comment></info></step>
+<step id="install_kubectl">
+<cmd>Kubernetes ダッシュボードのローカル・バージョンを表示して、アプリをクラスター内にデプロイするには、<xref href="https://kubernetes.io/docs/tasks/tools/install-kubectl/" format="html" scope="external">Kubernetes CLI をインストールします</xref>。
+</cmd>
+<info>Kubernetes CLI を使用してコマンドを実行するための接頭部は、<codeph>kubectl</codeph> です。
+</info><substeps id="kube_substeps">
+<substep>
+<cmd>Kubernetes CLI をダウンロードします。</cmd>
+<info>
+<dl>
+<dlentry>
+<dt>OS X</dt>
+<dd><xref href="https://storage.googleapis.com/kubernetes-release/release/v1.5.6/bin/darwin/amd64/kubectl" format="html" scope="external"></xref></dd></dlentry>
+<dlentry>
+<dt>Linux</dt>
+<dd><xref href="http://storage.googleapis.com/kubernetes-release/release/v1.5.6/bin/linux/amd64/kubectl" format="html" scope="external"></xref></dd></dlentry>
+<dlentry>
+<dt>Windows</dt>
+<dd><xref href="http://storage.googleapis.com/kubernetes-release/release/v1.5.6/bin/windows/amd64/kubectl.exe" format="html" scope="external"></xref><note type="tip">Windows を使用している場合、Kubernetes CLI を <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> CLI と同じディレクトリーにインストールします。
+このようにセットアップすると、後でコマンドを実行するとき、ファイル・パスの変更を行う手間がいくらか少なくなります。
+</note></dd></dlentry></dl></info></substep>
+<substep>
+<cmd>OSX と Linux のユーザーは、以下の手順を実行してください。
+</cmd>
+<info>
+<ol>
+<li>実行可能ファイルを <filepath>/usr/local/bin</filepath> ディレクトリーに移動します。
+<codeblock>mv /<varname>&lt;path_to_file&gt;</varname>/kubectl /usr/local/bin/kubectl</codeblock></li>
+<li><filepath>/usr/local/bin</filepath> が <codeph>PATH</codeph> システム変数にリストされていることを確認します。
+<codeph>PATH</codeph> 変数には、オペレーティング・システムが実行可能ファイルを見つけることのできるすべてのディレクトリーが含まれています。
+<codeph>PATH</codeph> 変数にリストされた複数のディレクトリーには、それぞれ異なる目的があります。
+<filepath>/usr/local/bin</filepath> は実行可能ファイルを保管するために使用されますが、保管対象となるのは、オペレーティング・システムの一部ではなく、システム管理者によって手動でインストールされたソフトウェアです。
+<codeblock>echo $PATH</codeblock>CLI 出力は、以下のようになります。<screen>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</screen></li>
+<li>バイナリー・ファイルを実行可能ファイルに変換します。
+<codeblock>chmod +x /usr/local/bin/kubectl</codeblock></li>
+<li audience="unknown">Kubernetes CLI クライアントのバージョンを調べて、<codeph>kubectl</codeph> コマンドが正常に実行することを確認します。
+<codeblock>kubectl version --short</codeblock>出力:
+<codeblock>Client Version: v<ph conref="cs_conref.dita#links/kubernetes_version_number"></ph>
+Server Version:</codeblock></li></ol></info></substep></substeps></step>
+<step importance="optional">
+<cmd>プライベート・イメージ・リポジトリーを管理するには、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/registryfull"></keyword> プラグインをインストールします。</cmd>
+<info>このプラグインを使用して、IBM がホストするマルチテナントで可用性が高く拡張可能なプライベート・イメージ・レジストリー内に独自の名前空間をセットアップし、Docker イメージを保管して他のユーザーと共有します。
+クラスターにコンテナーをデプロイするためには、Docker イメージが必要です。レジストリー・コマンドを実行するための接頭部は、<ph conref="cs_conref.dita#links/bx_cr"></ph>です。</info>
+<info>
+<codeblock>bx plugin install container-registry -r <ph audience="yellow">Bluemix</ph><ph audience="blue"><varname>stage</varname></ph></codeblock>
+
+<p>プラグインが正常にインストールされていることを検証するには、以下のコマンドを実行します。
+<codeblock><ph conref="cs_conref.dita#links/bx"></ph> plugin list</codeblock></p>
+
+<p>プラグインは container-registry として結果に表示されます。
+</p></info></step>
+<step importance="optional">
+<cmd>ローカルにイメージを作成して、それらをレジストリー名前空間にプッシュするには、<xref href="https://www.docker.com/community-edition#/download" format="html" scope="external">Docker をインストールします</xref>。
+Windows 8 以前を使用している場合、代わりに <xref href="https://www.docker.com/products/docker-toolbox" format="html" scope="external">Docker Toolbox</xref> をインストールしてください。
+</cmd>
+<info>Docker CLI は、イメージ内にアプリを構築するために使用されます。Docker CLI を使用してコマンドを実行するための接頭部は、<codeph>docker</codeph> です。
+</info></step></steps>
+<result><p>次に、<xref href="cs_cluster_cli.dita#cs_cluster_cli" format="dita" scope="local"></xref> を開始します。
+</p>
+<p>以下の CLI に関する参照情報については、それらのツールの資料を参照してください。
+<ul id="ul_fhv_4fp_kz">
+<li><xref href="../cli/reference/bluemix_cli/index.html" format="html" scope="peer">bx コマンド</xref></li>
+<li><xref href="cs_cli_reference.dita" format="dita" scope="local"><ph conref="cs_conref.dita#links/bx_cs"></ph> コマンド</xref></li>
+<li><xref href="cs_cli_ref_kubectl.dita" format="dita" scope="local">kubectl コマンド</xref></li>
+<li><xref href="cs_cli_ref_registry.dita" format="dita" scope="local"><ph conref="cs_conref.dita#links/bx_cr"></ph> コマンド</xref></li></ul></p></result></taskbody></task>

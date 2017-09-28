@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tsTroubleshooting PUBLIC "-//IBM//DTD DITA Troubleshooting//EN"
+ "troubleshooting.dtd">
+<!--http://w3.opensource.ibm.com/projects/ditatroublespec/ -->
+<!--This DITA specialized document type is currently not supported by the Authoring Tools development team. Press the F1 key for online help on the tags, or see the Authoring Tools Information Center for the complete set of help topics at http://submit.boulder.ibm.com/infocenter/idwb/v3r8m4/index.jsp.-->
+<tsTroubleshooting id="ts_firewall_images" xml:lang="ja-jp" class="- topic/topic tsTroubleshooting/tsTroubleshooting ">
+<title>イメージのプッシュに対する内部プロキシー・ブロック要求</title>
+<shortdesc></shortdesc>
+<tsBody class="- topic/body tsTroubleshooting/tsBody ">
+<tsSymptoms class="- topic/section tsTroubleshooting/tsSymptoms ">特定の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 地域内にコンテナーを作成するには、イメージをプッシュして、その地域内のレジストリーにコンテナーを作成しなければなりません。そのレジストリーにイメージをプッシュしようとすると、接続に失敗して、次のいずれかのエラー・メッセージが表示されます。
+<screen>Connection refused</screen><screen>Connection timed out</screen></tsSymptoms>
+<tsCauses class="- topic/section tsTroubleshooting/tsCauses ">ファイアウォール設定により、ご使用のコンピューターから <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリーへの通信が妨げられている可能性があります。多くの場合、内部プロキシー設定は、セキュリティーの理由で許容できる通信のみ許可するように構成されています。</tsCauses>
+<tsResolve class="- topic/section tsTroubleshooting/tsResolve ">ファイアウォール内で、ご使用のコンピューターから以下のような地域固有の IP アドレスのレジストリーへの通信を開きます。<ul id="ul_on4_rfj_wz">
+<li>米国南部:<codeblock>169.55.39.122
+169.55.39.124
+169.55.39.126
+169.55.211.14
+169.46.9.2
+169.46.9.3
+169.46.9.20
+169.46.9.21</codeblock></li>
+<li>英国:<codeblock>159.8.188.168
+159.8.188.169
+159.8.188.174
+159.8.188.179
+169.50.153.69
+169.50.153.76
+169.50.153.81
+169.50.153.85</codeblock></li></ul></tsResolve></tsBody></tsTroubleshooting>

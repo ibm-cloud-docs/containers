@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="container_group_update_ui" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI を使用した、コンテナー・グループで実行されるアプリの更新</title>
+<titlealts>
+<navtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI を使用したアプリの更新</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI を使用した、コンテナー・グループ内で実行されるアプリの更新</searchtitle></titlealts>
+<shortdesc>コンテナー・グループで実行するアプリを更新するには、イメージを更新し、そこから新しいコンテナー・グループをデプロイする必要があります。
+更新プロセスの間、実行中の古いコンテナー・グループを停止する必要はありません。
+新しいコンテナー・グループを作成して既存の経路情報をマップした後に、古いコンテナー・グループから経路をマップ解除できます。
+ダウンタイムなしで新しいアプリがデプロイされます。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>ダッシュボード</indexterm><indexterm>GUI</indexterm><indexterm>コンテナー・グループ</indexterm><indexterm>コンテナー</indexterm><indexterm>IBM Containers</indexterm><indexterm>更新</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context><table id="update_options_ui">
+<title>アプリの更新のためのオプション・ツール</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry>更新ツール</entry>
+<entry>説明</entry></row></thead>
+<tbody>
+<row>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/deliverypipeline"></keyword></entry>
+<entry>管理者が使用できる <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスである <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/deliverypipeline"></keyword> を使用して、アプリのビルドと <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> へのコンテナーのデプロイメントを自動化します。
+詳細については、<xref href="container_group_pipeline_ov.dita" format="dita" scope="local"></xref>を参照してください。</entry></row>
+<row>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI からの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/activedeployshort"></keyword></entry>
+<entry>新しいコンテナーのデプロイメントを調整して、古くなったコンテナーを置き換えます。
+Active Deploy を使用すると、問題が見つかった場合にロールバックできるように、古くなったコンテナー・グループが保持されます。
+詳しくは、<xref href="../services/ActiveDeploy/updatingapps.html#updatingappsgui" format="html" scope="external">Active Deploy サービス (GUI) を使用したアプリやコンテナー・グループの更新</xref>を参照してください。</entry></row>
+<row>
+<entry>UrbanCode Deploy</entry>
+<entry>UrbanCode Deploy を使用することによって、アプリのビルドおよび <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> へのコンテナーの配置を自動化します。UrbanCode Deploy の購入について詳しくは、<xref href="http://www.ibm.com/software/products/en/ucdep" format="html" scope="external">IBM UrbanCode Deploy</xref> 製品ページを参照してください。
+</entry></row>
+<row>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI と <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI を組み合わせて使用することによる管理者自身でのアプリの更新</entry>
+<entry>管理者自身がアプリを更新するには、このタスクにある手順を実行します。</entry></row></tbody></tgroup></table></context>
+<steps>
+<stepsection><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI と <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI を使用して管理者自身がアプリを更新するには、以下のようにします。</stepsection>
+<step>
+<cmd>Docker ファイルとアプリが保存されているディレクトリーに移動します。</cmd></step>
+<step>
+<cmd>アプリをローカルで更新します。</cmd></step>
+<step conref="container_images_building.dita#container_images_building/build_push">
+<cmd></cmd></step>
+<step conref="container_images_building.dita#container_images_building/verify_image">
+<cmd></cmd></step>
+<step conref="container_images_building.dita#container_images_building/va">
+<cmd></cmd></step>
+<step>
+<cmd>実行中のコンテナー・グループにマップされている経路情報をメモします。</cmd>
+<info>
+<ol>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI から、コンテナー・グループを選択します。</li>
+<li>経路をメモします。ホストとドメインが結合して、完全なパブリック経路 URL (例えば <codeph>http://mycontainerhost.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword></codeph>) を形成します。</li></ol></info></step>
+<step>
+<cmd>別のスケーラブル・コンテナー・グループを作成し、経路を組み込みます。</cmd>
+<info>
+<ol>
+<li><ph conref="container_conref.dita#bluemix_nav/choose_image"></ph></li>
+<li>次に、コンテナー・グループの定義を始めます。ウィンドウが開いて<uicontrol>「単一」</uicontrol>タブがデフォルトで表示されます。<uicontrol>「スケーラブル (Scalable)」</uicontrol>タブを選択して、コンテナー・グループを作成します。コンテナー・グループを定義する際に、前の手順で取得したホスト名とドメインを、<userinput>「ホスト」</userinput>フィールドと<userinput>「ドメイン」</userinput>フィールドに入力します。<p>コンテナー・グループの作成方法について詳しくは、<xref href="container_group_ui.dita#container_group_ui" format="dita" scope="local"></xref> のトピックを参照してください。</p></li>
+<li><uicontrol>「作成」</uicontrol>をクリックして、更新したイメージからコンテナー・グループをデプロイします。
+デプロイメント・プロセス中、コンテナー・グループも開始されます。<p conref="container_group_ui.dita#container_group_ui/wait"></p></li></ol></info></step>
+<step>
+<cmd>古いコンテナー・グループから経路をマップ解除します。</cmd>
+<info>
+<ol>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI から、古いコンテナー・グループを選択します。</li>
+<li><uicontrol>「グループの詳細 (Group details)」</uicontrol>セクションで、経路を編集します。</li>
+<li>ホスト名を変更します。複数のドメイン名がある場合は、コンテナー・グループに新規のドメイン名を選択することもできます。</li>
+<li><uicontrol>「保存」</uicontrol>をクリックして変更を保存します。<note>経路のマップ解除には最大 5 分かかる可能性があります。</note></li></ol></info></step>
+<step importance="optional">
+<cmd>古いコンテナー・グループを削除します。</cmd>
+<info>
+<ol>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI から、古いコンテナー・グループを選択します。</li>
+<li><uicontrol>「その他のアクション... (More actions...)」</uicontrol>メニューから、<uicontrol>「削除」</uicontrol>をクリックして、コンテナー・グループを削除します。</li></ol></info></step></steps></taskbody></task>

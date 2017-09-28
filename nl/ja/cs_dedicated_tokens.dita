@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="cs_dedicated_tokens" audience="blue" xml:lang="ja-jp">
+<title>
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Dedicated イメージ・レジストリー用の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/registrylong"></keyword> トークンの作成</title>
+<titlealts>
+<navtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Dedicated 用のトークンの作成</navtitle></titlealts>
+<shortdesc>単一グループとスケーラブル・グループに使用したクラスターでイメージ・レジストリーを使用するための無期限トークンを作成します。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/registrylong"></keyword></indexterm><indexterm>レジストリー</indexterm><indexterm>許可</indexterm><indexterm>トークン</indexterm><indexterm>自動化</indexterm></keywords></metadata></prolog>
+<taskbody>
+<steps id="steps_m2m_vcf_l1b">
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> Dedicated 環境にログインします。</cmd>
+<info>
+<codeblock>bx login -a api.<varname>&lt;dedicated_domain&gt;</varname></codeblock></info></step>
+<step>
+<cmd>現行セッションの <codeph>oauth-token</codeph> を要求し、変数として保存します。
+</cmd>
+<info>
+<codeblock>OAUTH_TOKEN=`bx iam oauth-tokens | awk 'FNR == 2 {print $3 " " $4}'`</codeblock></info></step>
+<step>
+<cmd>現行セッションの組織の ID を要求し、変数として保存します。</cmd>
+<info>
+<codeblock>ORG_GUID=`bx iam org <varname>&lt;org_name&gt;</varname> --guid`</codeblock></info></step>
+<step>
+<cmd>現行セッションの永続レジストリー・トークンを要求します。
+<varname>&lt;dedicated_domain&gt;</varname> を、ご使用の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> Dedicated 環境のドメインに置き換えてください。</cmd>
+<info>このトークンは、現在の名前空間内のイメージへのアクセス権限を付与します。</info>
+<info>
+<codeblock>curl -XPOST -H "Authorization: ${OAUTH_TOKEN}" -H "Organization: ${ORG_GUID}" https://registry.<varname>&lt;dedicated_domain&gt;</varname>/api/v1/tokens?permanent=true</codeblock>
+出力:
+<screen>{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2MzdiM2Q4Yy1hMDg3LTVhZjktYTYzNi0xNmU3ZWZjNzA5NjciLCJpc3MiOiJyZWdpc3RyeS5jZnNkZWRpY2F0ZWQxLnVzLXNvdXRoLmJsdWVtaXgubmV0"
+}</screen></info></step>
+<step>
+<cmd>Kubernetes シークレットを確認します。</cmd>
+<info>
+<codeblock>kubectl describe secrets</codeblock> このシークレットにより、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を使用することができます。</info></step>
+<step>
+<cmd>トークン情報を保管する Kubernetes シークレットを作成します。</cmd>
+<info>
+<codeblock>kubectl --namespace <varname>&lt;kubernetes_namespace&gt;</varname> create secret docker-registry <varname>&lt;secret_name&gt;</varname>  --docker-server=<varname>&lt;registry_url&gt;</varname> --docker-username=token --docker-password=<varname>&lt;token_value&gt;</varname> --docker-email=<varname>&lt;docker_email&gt;</varname></codeblock>
+
+<table frame="all" colsep="1" rowsep="1" id="table_sdf_nkm_2v">
+<desc>
+<p outputclass="summary">このコマンドの構成要素について</p></desc>
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="100pt"></colspec><colspec colnum="2" colname="c2"></colspec>
+<thead>
+<row>
+<entry namest="c1" nameend="c2"><ph conref="container_conref.dita#images/more_info"></ph> このコマンドの構成要素について</entry></row></thead>
+<tbody>
+<row>
+<entry><codeph>--namespace <varname>&lt;kubernetes_namespace&gt;</varname></codeph></entry>
+<entry>必須。シークレットを使用してコンテナーをデプロイする、クラスターの Kubernetes 名前空間。クラスター内の名前空間をすべてリストするには、<codeph>kubectl get namespaces</codeph> を実行します。</entry></row>
+<row>
+<entry><codeph><varname>&lt;secret_name&gt;</varname></codeph></entry>
+<entry>必須。<term>imagePullSecret</term> に使用する名前。</entry></row>
+<row>
+<entry><codeph>--docker-server <varname>&lt;registry_url&gt;</varname></codeph></entry>
+<entry>必須。名前空間がセットアップされているイメージ・レジストリーの URL: registry.<varname>&lt;dedicated_domain&gt;</varname></entry></row>
+<row>
+<entry><codeph>--docker-password <varname>&lt;token_value&gt;</varname></codeph></entry>
+<entry>必須。以前に取得したレジストリー・トークンの値。</entry></row>
+<row>
+<entry><codeph>--docker-email <varname>&lt;docker-email&gt;</varname></codeph></entry>
+<entry>必須。Docker E メール・アドレスがある場合は、その値を入力します。ない場合は、例えば a@b.c のような架空の E メール・アドレスを入力します。この E メールは、Kubernetes シークレットを作成する際には必須ですが、作成後は使用されません。</entry></row></tbody></tgroup></table></info></step>
+<step>
+<cmd>imagePullSecret を参照するポッドを作成します。</cmd><substeps id="substeps_wbd_3qt_xz">
+<substep>
+<cmd>任意のエディターを開き、<filepath>mypod.yaml</filepath> という名前のポッド構成スクリプトを作成します。</cmd></substep>
+<substep>
+<cmd>レジストリーへのアクセスに使用するポッドと imagePullSecret を定義します。</cmd>
+<info>名前空間からプライベート・イメージを使用するには、次のようにします。
+<codeblock>apiVersion: v1
+kind: Pod
+metadata:
+  name: <varname>&lt;pod_name&gt;</varname>
+spec:
+  containers:
+    - name: <varname>&lt;container_name&gt;</varname>
+      image: registry.<varname>&lt;dedicated_domain&gt;</varname>/<varname>&lt;my_namespace&gt;</varname>/<varname>&lt;my_image&gt;</varname>:<varname>&lt;tag&gt;</varname>  
+  imagePullSecrets:
+    - name: <varname>&lt;secret_name&gt;</varname></codeblock>
+<table frame="all" colsep="1" rowsep="1" id="table_xlz_rqt_xz">
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="100pt"></colspec><colspec colnum="2" colname="c2"></colspec>
+<thead>
+<row>
+<entry namest="c1" nameend="c2"><ph conref="container_conref.dita#images/more_info"></ph> この YAML の構成要素について</entry></row></thead>
+<tbody>
+<row>
+<entry><codeph><varname>&lt;pod_name&gt;</varname></codeph></entry>
+<entry>作成するポッドの名前。</entry></row>
+<row>
+<entry><codeph><varname>&lt;container_name&gt;</varname></codeph></entry>
+<entry>クラスターにデプロイするコンテナーの名前。</entry></row>
+<row>
+<entry><codeph><varname>&lt;my_namespace&gt;</varname></codeph></entry>
+<entry>イメージが保管されている名前空間。使用可能な名前空間をリストするには、<codeph>bx cr namespace-list</codeph> を実行します。</entry></row>
+<row>
+<entry><codeph><varname>&lt;my_image&gt;</varname></codeph></entry>
+<entry>使用するイメージの名前。<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウント内の使用可能なイメージをリストするには、<codeph>bx cr image-list</codeph> を実行します。</entry></row>
+<row>
+<entry><codeph><varname>&lt;tag&gt;</varname></codeph></entry>
+<entry>使用するイメージのバージョン。タグを指定しないと、デフォルトでは <uicontrol>latest</uicontrol> のタグが付いたイメージが使用されます。</entry></row>
+<row>
+<entry><codeph><varname>&lt;secret_name&gt;</varname></codeph></entry>
+<entry>以前に作成した imagePullSecret の名前。</entry></row></tbody></tgroup></table></info></substep>
+<substep>
+<cmd>変更を保存します。</cmd></substep>
+<substep>
+<cmd>クラスター内にデプロイメントを作成します。</cmd>
+<info>
+<codeblock>kubectl apply -f mypod.yaml</codeblock></info></substep></substeps></step></steps></taskbody></task>

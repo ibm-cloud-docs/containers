@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<concept id="ts_known_issues" xml:lang="ja-jp">
+<title>既知の問題</title>
+<titlealts>
+<searchtitle><keyword conref="../cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> に関する既知の問題</searchtitle></titlealts>
+<shortdesc><tm trademark="IBM" tmtype="reg">IBM</tm> Containers で発生する既知の問題について説明します。</shortdesc>
+<conbody></conbody>
+<concept id="ki_docker">
+<title>Docker および <keyword conref="../cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword></title>
+<conbody>
+<dl>
+<dlentry>
+<dt>一部の Docker コマンドは、<keyword conref="../cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン (<ph conref="container_conref.dita#links/command_prefix"></ph>) ではサポートされていません。</dt>
+<dd><p>特定の Docker コマンドのみが <codeph>(<ph conref="container_conref.dita#links/command_prefix"></ph>)</codeph> でサポートされます。サポートされるコマンドの完全なリストは、<xref href="../../containers/container_cli_reference_cfic.html#container_cli_reference_native-docker" format="html" scope="peer">Docker コマンド・リファレンス</xref>で参照できます。例えば、<codeph>tag</codeph> は <codeph><ph conref="container_conref.dita#links/command_prefix"></ph></codeph> では使用不可ですが、<codeph>docker tag</codeph> はローカルで使用でき、その後、更新されたイメージを <keyword conref="../cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリーにプッシュすることができます。</p></dd></dlentry>
+<dlentry>
+<dt>Docker と Windows の間の一般的問題</dt>
+<dd><p>Windows コンピューターでの Docker のインストールおよび構成に関する一般的問題があります。こうした一般的問題について詳しくは、<xref href="https://developer.ibm.com/bluemix/2015/04/16/installing-docker-windows-fixes-common-problems/" format="html" scope="external">ブログ: Installing Docker for Windows: Fixes for common problems</xref> および <xref href="http://stackoverflow.com/questions/tagged/boot2docker" format="html" scope="external">boot2docker でタグ付けされた Stack Overflow の投稿</xref>を参照してください。</p></dd></dlentry></dl></conbody></concept>
+<concept id="ki_images">
+<title>イメージ</title>
+<conbody>
+<dl>
+<dlentry>
+<dt>大規模イメージのプッシュとプルが失敗する</dt>
+<dd><p>組織のプライベート
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリーから大規模イメージのプッシュまたはプルを行う Docker コマンドを実行すると、要求が失敗します。イメージに関連する問題があるかどうか判別するには、まず、イメージが
+DockerHub にプッシュできることを検証します。イメージに問題がない場合は、可能であれば、
+イメージのサイズを減らします。</p></dd></dlentry>
+<dlentry id="image_size">
+<dt><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> におけるイメージのサイズは、ローカルでのそのイメージのサイズと一致します。</dt>
+<dd><p><ph id="image_size_ph">プライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリーにイメージをプッシュすると、イメージについて報告されるサイズは、ローカル Docker エンジンにおける同じイメージのサイズより小さくなります。これらのサイズに差があるからと言って、イメージがプッシュされた際に問題が発生したということではありません。<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> では、イメージの圧縮サイズが報告されます。</ph></p></dd></dlentry></dl></conbody></concept>
+<concept id="ki_logmet">
+<title>モニタリングとロギング</title>
+<conbody>
+<dl>
+<dlentry>
+<dt><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> logs</codeph> の出力に余分の文字が含まれる</dt>
+<dd><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> logs</codeph> を実行すると、<codeph>&amp;</codeph> などの余分の文字が各行の先頭に表示されます。
+この問題は、着信する Docker ログが NGINX によって解析される場合に発生します。
+</dd></dlentry>
+<dlentry>
+<dt>ログ・ファイル追加を式で指定できない</dt>
+<dd><p>収集されるログ・ファイルを指定するためにフィルターまたはワイルドカード式を使用できません。例えば、<codeph>/var/log/*.log</codeph> と指定することはできません。
+かわりに、各ログ・ファイルを個々にリストしてください。</p></dd></dlentry></dl></conbody></concept>
+<concept id="ki_containers">
+<title>単一コンテナーとコンテナー・グループ</title>
+<conbody>
+<dl>
+<dlentry>
+<dt>コンテナー作成後の接続障害</dt>
+<dd><p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の Docker ネットワーキング・アーキテクチャーでの制限により、コンテナーの初回の始動時にアウトバウンド・ネットワーク・アクセスが機能しないことがあります。コンテナーが、アウトバウンド・ネットワーク接続を試行して、ネットワークが使用可能でない場合にエラー・コードを戻すか例外をスローしようとすると、コンテナーは終了し、「異常終了」状況が表示されます。</p>
+<p>ネットワーキングの初期化を許可し、コンテナー・デプロイメントの続行を可能にするためには、アウトバウンド接続を必要とするプロセスを開始する前に sleep ステートメントが必要です。基本 Dockerfile 内の既存のサーバー始動コマンドをラップするカスタム Dockerfile を作成してください。例については、<xref href="https://github.com/IBM-Bluemix/lets-chat-bluemix/tree/master/lets-chat" format="html" scope="external">Let's Chat Bluemix サンプル・アプリケーション</xref>を参照してください。</p></dd></dlentry>
+<dlentry>
+<dt>インバウンド接続が即時でない</dt>
+<dd><p>インバウンド接続は、コンテナー・グループと単一コンテナーのいずれにおいても、経路と外部アプリを含めて、即時に接続されるものではありません。接続が使用可能になるのを待ってください。これには最大 5 分かかります。</p></dd></dlentry>
+<dlentry audience="blue">
+<dt>ステージングのコンテナーが他のコンテナー内のサービスにアクセスできない</dt>
+<dd><p>接続の問題のため、ステージングのコンテナーが、ステージングの他のコンテナー内のサービスにアクセスできません。コンテナーは、ステージングの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> API
+と対話できません。</p>
+<draft-comment>This known issue is displayed in staging only.</draft-comment></dd></dlentry>
+<dlentry audience="blue">
+<dt>コンテナーのメモリー使用量がコンテナー・サイズによって制限されない</dt>
+<dd><p>メモリー使用量が指定されている場合、その値が守られていません。</p>
+<draft-comment>This known issue is displayed in staging only.</draft-comment></dd></dlentry>
+<dlentry>
+<dt><codeph>docker run -m</codeph> と <codeph><ph conref="container_conref.dita#links/command_prefix"></ph> run -m</codeph> で、異なるデフォルトの単位が使用される</dt>
+<dd><codeph>docker run -m</codeph> で単位が指定されていない場合、デフォルトの単位としてバイトが使用されます。
+<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> run -m</codeph> で単位が指定されていない場合、デフォルトの単位として MB が使用されます。
+</dd></dlentry>
+<dlentry>
+<dt>ユーザー・データ制限によりコンテナーを作成できない</dt>
+<dd>コンテナーにバインドされているサービスが多すぎると、コンテナーを作成できません。各サービスがコンテナーにデータを注入しますが、その合計の上限は 64 KB です。この上限を超えるコンテナーを作成すると、「<systemoutput>Resource CREATE failed... User data too
+large</systemoutput>」というメッセージを受け取ります。このメッセージが表示されたら、コンテナーからサービスを削除してください。</dd></dlentry>
+<dlentry id="port25">
+<dt>ポート 25 はコンテナーでの公開用に使用できない</dt>
+<dd>ポート 25 の使用は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アーキテクチャーの一部である SoftLayer によってブロックされています。この問題は、コンテナー内にある一部の SMTP サービスの使用方法に影響を与えます。
+このポートがブロックされた理由について詳しくは、SoftLayer 文書の記事 <xref href="http://knowledgelayer.softlayer.com/content/outbound-email-port-25" format="html" scope="external">Outbound Email on Port 25 </xref> を参照してください。
+</dd></dlentry>
+<dlentry id="containerbuildingprocess">
+<dt>コンテナーのビルド・プロセスまたはネットワーキング・プロセスが完了しない</dt>
+<dd><p>コンテナーが長時間ビルドまたはネットワーキング状態のままである場合、コンテナーを削除して同じイメージから新規コンテナーを作成することが必要となる可能性があります。以下の CLI <ph conref="container_conref.dita#links/command_prefix"></ph> コマンドを使用できます。<ol>
+<li><ph conref="../container_cli_reference_cfic.dita#container_cli_reference_cfic/ps_purpose"></ph>詳しくは、<xref href="../../containers/container_cli_reference_cfic.html#container_cli_reference_cfic__ps" format="html" scope="peer">CLI <ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> ps リファレンス</xref>を確認してください。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> ps -a</codeblock></li>
+<li><ph conref="../container_cli_reference_cfic.dita#container_cli_reference_cfic/rm_purpose"></ph>詳しくは、<xref href="../../containers/container_cli_reference_cfic.html#container_cli_reference_cfic__rm" format="html" scope="peer">CLI <ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> rm リファレンス</xref>を確認してください。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> rm -f <varname>container_ID</varname></codeblock></li>
+<li><ph conref="../container_cli_reference_cfic.dita#container_cli_reference_cfic/run_purpose"></ph>詳しくは、<xref href="../../containers/container_cli_reference_cfic.html#container_cli_reference_cfic__run" format="html" scope="peer">CLI <ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> run リファレンス</xref>を確認してください。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> run</codeblock></li></ol></p></dd></dlentry>
+<dlentry>
+<dt>コンテナー・グループの自動リカバリーが即時でない</dt>
+<dd><p>新しいシステムがオンラインになるまでに、コンテナー・グループの自動リカバリーが 15 分より長くかかることがあります。自動リカバリーが使用可能になるのを待ってください。これには 15 分より長くかかることがあります。</p></dd></dlentry>
+<dlentry>
+<dt><codeph>cf delete-orphaned-routes</codeph> コマンドを実行すると、コンテナー・グループから経路が削除されます。
+</dt>
+<dd><p>Cloud Foundry は、
+ルートをアプリケーションにバインドされたものとして識別する場合と同じ方法では、
+コンテナー・グループにマップされたルートを認識できません。コンテナー・グループを使用する場合は、<codeph>cf
+delete-orphaned-routes</codeph> コマンドを実行しないでください。</p></dd></dlentry></dl></conbody></concept></concept>

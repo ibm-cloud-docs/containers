@@ -1,0 +1,41 @@
+{:navgroup: .navgroup}
+{:topicgroup: .topicgroup}
+
+{: .toc subcollection="containers" audience="compute" href="/docs/containers/index.html"}
+IBM Bluemix Container Service
+    
+    {: .navgroup id="learn"}
+    container_index.md
+    cs_ov.md
+    cs_planning.md
+    cs_tutorials.md
+    cs_security.md
+    {: .navgroup-end}
+
+    {: .navgroup id="reference"}
+    cs_cli_reference.md
+    cs_rellinks.md
+    {: .navgroup-end}
+
+    {: .navgroup id="howto"}    
+    cs_cli_install.md
+    cs_cluster.md
+    cs_apps.md
+    [単一コンテナーとスケーラブル・コンテナーの実行](cs_classic.html)
+        [単一コンテナーとスケーラブル・コンテナーの Kubernetes クラスターへのマイグレーション](cs_classic.html#cs_classic_migrating) [単一コンテナーとスケーラブル・コンテナーについて](container_ov.html)
+        [単一コンテナーとスケーラブル・コンテナーの計画](container_planning.html)
+        [単一コンテナーとスケーラブル・コンテナーのセキュリティー](container_security.html)
+        [単一コンテナーとスケーラブル・コンテナー用 CLI のセットアップ](container_cli_cfic_install.html)
+        [IBM イメージ](container_images.html)
+        [短期実行タスクを単一コンテナーとして実行する](container_single_ui.html)
+        [可用性の高いグループの実行](container_ha.html)
+        [単一コンテナーとスケーラブル・コンテナーの永続データの保管](container_volumes_ov.html)
+        [単一コンテナーとスケーラブル・コンテナーとのサービスの統合](container_integrations.html)
+        [単一コンテナーとスケーラブル・コンテナーの CLI リファレンス](container_cli_reference_cfic.html)
+        [単一コンテナーとスケーラブル・コンテナーのトラブルシューティング](container_troubleshoot.html)
+    {: .navgroup-end}
+    
+    {: .navgroup id="help"}
+    cs_troubleshoot.md
+    {: .navgroup-end}
+

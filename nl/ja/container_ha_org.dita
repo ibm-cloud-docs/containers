@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="container_ha_org" audience="blue">
+<title>同じ組織の異なるスペースで高可用性コンテナー・グループを実行する</title>
+<titlealts>
+<navtitle>異なるスペースでの HA グループの実行</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を使用して、異なる <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースで高可用性コンテナー・グループを実行する
+</searchtitle></titlealts>
+<shortdesc>同じイメージを使用して 2 つの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースに 2 つのコンテナー・グループを作成し、両方のグループに同じ経路をマップすることができます。
+このセットアップを行うと、一方のスペースのコンテナー・グループまたはロード・バランサーがダウンした場合、トラフィックはもう一方のコンテナー・グループにルーティングされるようになります。各スペースはそれぞれ異なる <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アベイラビリティー・ゾーンでホストされるからです。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー・グループ</indexterm><indexterm>コンテナー</indexterm><indexterm>IBM Containers</indexterm><indexterm>高可用性</indexterm></keywords></metadata></prolog>
+<taskbody>
+<prereq><p><image href="images/container_ha_org.svg" scope="local" alt="複数スペースでの高可用性コンテナー・グループの作成"></image></p>
+<p><ul>
+<li><ph conref="container_ha_space.dita#container_ha_space/create_intro"></ph></li>
+<li>アプリをデプロイする 2 つの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースを選択します。
+2 つのスペースは、同じ組織に含まれている必要があります。
+2 つのスペースがない場合は、2 つ目のスペースを作成してください。
+スペースの作成について詳しくは、<xref href="../admin/orgs_spaces.html#createorg" format="html" scope="peer">組織およびスペースの作成</xref>を参照してください。
+</li>
+<li>2 つのスペースがそれぞれ異なる <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アベイラビリティー・ゾーンにあることを確認します。<ph conref="container_conref.dita#terms/az_definition"></ph><ol>
+<li>次のコマンドを実行して、1 つ目のスペースの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アベイラビリティー・ゾーンを識別します。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> info</codeblock> <uicontrol>「アベイラビリティー・ゾーン」</uicontrol>を探します。例:
+<systemoutput>dal09-01</systemoutput><screen><ph conref="container_conref.dita#links/command_prefix"></ph> info
+日/時                    : <varname>year-month-day</varname> <varname>time</varname>
+デバッグ・モード         : false
+ホスト/URL               : https://containers-api.ng.bluemix.net
+レジストリー・ホスト     : registry.ng.bluemix.net
+Bluemix API ホスト/URL   : https://api.ng.bluemix.net
+Bluemix 組織             : <varname>my_org</varname>(<varname>org_id</varname>)
+Bluemix スペース         : <varname>my_space</varname>(<varname>space_id</varname>)
+CLI バージョン           : <varname>cli_version</varname>
+API バージョン           : <varname>api_version</varname> <varname>year-month-day</varname>
+名前空間                 : my_namespace
+Availability Zone         : <varname>dal09-01</varname></screen></li>
+<li>Cloud Foundry CLI を 2 つ目の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースにリダイレクトします。
+<codeblock>cf target -s <varname>second_space_name</varname></codeblock></li>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI を再び初期化します。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> init</codeblock></li>
+<li>次のコマンドを実行して、2 つ目のスペースの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アベイラビリティー・ゾーンを識別します。<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> info</codeblock><p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword><uicontrol>「アベイラビリティー・ゾーン」</uicontrol>を探し、1 つ目のスペースの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アベイラビリティー・ゾーンと名前が同じでないことを確認します。<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アベイラビリティー・ゾーンが同じなら、次のステップに進んでください。<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アベイラビリティー・ゾーンが同じではない場合は、次のステップをスキップできます。</p></li>
+<li>スペースのアベイラビリティー・ゾーンを変更します。
+<note type="important">このスペース内のすべての単一コンテナーとグループは、新しいアベイラビリティー・ゾーンにマイグレーションされず、マイグレーション・プロセスで削除されます。イメージとボリュームは影響を受けません。</note><ol>
+<li>アベイラビリティー・ゾーンを変更するスペースにログインします。</li>
+<li>次のコマンドを実行して、対象のスペースにログインしていることを確認します。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> info</codeblock></li>
+<li>スペース内のいずれかのコンテナーに失いたくないファイルが保管されている場合は、次のコマンドを実行してファイルを取得して、後でボリュームに追加できるようにします。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> cp <varname>container_name</varname>:<varname>src_path</varname> <varname>destination_path</varname></codeblock></li>
+<li>一方のスペースに対して次のコマンドを実行して、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を別の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アベイラビリティー・ゾーンに移動します。例えば、両方のスペースが <systemoutput>dal09-01</systemoutput>
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アベイラビリティー・ゾーン内にある場合は、<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> reprovision</codeph> コマンドを実行して一方のスペースのアベイラビリティー・ゾーンを <systemoutput>dal09-02</systemoutput> に変更します。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> reprovision -f <varname>dal09-02</varname></codeblock><note type="remember">アベイラビリティー・ゾーンは、さまざまな国に置かれているデータ・センターです。制約によって特定の国でデータのホスティングができない場合、その国のアベイラビリティー・ゾーンは選択しないでください。</note><table id="table_rqx_h52_nx" conref="container_conref.dita#terms/table_azs">
+<tgroup cols="2">
+<tbody>
+<row>
+<entry></entry>
+<entry></entry></row></tbody></tgroup></table></li></ol></li></ol></li>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のスペース同士を接続します。詳しくは、以下のトピックのいずれかの構成ステップを参照してください。
+<ul>
+<li><xref href="../cli/plugins/pnp/index.html" format="html" scope="peer"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 用のプライベート・ネットワーク・ピアリング CLI プラグイン</xref></li>
+<li><xref href="container_vpn_spaces.dita">VPN サービス</xref></li></ul></li></ul></p></prereq>
+<steps>
+<stepsection>異なるスペースに高可用性コンテナー・グループを作成するには、以下のようにします。
+</stepsection>
+<step>
+<cmd>コンテナー・グループを作成します。</cmd>
+<info>
+<ul>
+<li conref="container_ha_space.dita#container_ha_space/at_least_2"></li>
+<li conref="container_ha_space.dita#container_ha_space/ha_autorecovery"></li>
+<li conref="container_ha_space.dita#container_ha_space/ha_antiaffinity"></li>
+<li>コンテナーに永続ファイルを含めないでください。
+<tm trademark="Cloudant" tmtype="reg">Cloudant</tm> データベースにファイルを保管することができます。
+</li>
+<li conref="container_ha_space.dita#container_ha_space/single"></li></ul></info></step>
+<step>
+<cmd>2 つ目のスペースに 2 つ目のグループを作成します。</cmd>
+<info>
+<ul>
+<li conref="container_ha_space.dita#container_ha_space/at_least_2_abbrev"></li>
+<li conref="container_ha_space.dita#container_ha_space/ha_autorecovery"></li>
+<li conref="container_ha_space.dita#container_ha_space/ha_antiaffinity_abbrev"></li>
+<li>このコンテナー・グループには、前のステップで作成した 1 つ目のコンテナー・グループと同じ経路をマップする必要があります。
+</li>
+<li>コンテナーに永続ファイルを含めないでください。
+前のコンテナーと同じ <tm trademark="Cloudant" tmtype="reg">Cloudant</tm> データベースにファイルを保管することができます。</li></ul></info></step></steps>
+<postreq>アプリをより広く分散させるには、<xref href="container_ha_regions.dita" format="dita" scope="local"></xref>を参照してください。
+</postreq></taskbody></task>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE tutorialLesson PUBLIC "-//IBM//DTD DITA Tutorial Lesson//EN"
+ "tutorialLesson.dtd">
+<tutorialLesson id="cs_cluster_tutorial_lesson1" xml:lang="ja-jp" class="- topic/topic task/task tutorialLesson/tutorialLesson ">
+<title>レッスン 1: CLI をセットアップする</title>
+<titlealts>
+<searchtitle>チュートリアル・レッスン 1: CLI をセットアップする</searchtitle></titlealts>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/registryfull"></keyword> CLI、そしてそれらの前提条件をインストールします。
+これらの CLI は後のレッスンで使用され、ローカル・マシンから Kubernetes クラスターを管理するため、コンテナーとしてデプロイするイメージを作成するため、そして後のチュートリアルでアプリをクラスターにデプロイするために必要となります。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>チュートリアル</indexterm><indexterm>cli</indexterm><indexterm>インストール</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context>このレッスンには、以下の CLI をインストールするための情報が含まれています。
+<ul>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> CLI</li>
+<li><ph conref="cs_conref.dita#links/bx_cs_plugin_name"></ph></li>
+<li>Kubernetes CLI</li>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/registryfull"></keyword> プラグイン</li>
+<li>Docker CLI</li></ul></context>
+<steps>
+<stepsection>CLI をインストールするには、以下のことを行います。</stepsection>
+<step>
+<cmd><xref href="https://console.ng.bluemix.net/registration/" format="html" scope="external"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword>アカウント</xref>をまだお持ちでなければ、作成します。
+</cmd>
+<info>ユーザー名とパスワードをメモしておいてください。
+後でその情報が必要になります。
+</info></step>
+<stepsection audience="unknown">CLI をセットアップするには、以下のことを行います。</stepsection>
+<step conref="cs_cli_install_steps.dita#cs_cli_install_steps/install_bx">
+<cmd></cmd></step>
+<step>
+<cmd>プロンプトに従ってアカウントと <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 組織を選択します。
+クラスターはアカウントに固有のものですが、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 組織またはスペースからは独立しています。</cmd></step>
+<step conref="cs_cli_install_steps.dita#cs_cli_install_steps/bx_repo" audience="blue">
+<cmd></cmd></step>
+<step>
+<cmd id="install_bx_cs" conref="cs_cli_install_steps.dita#cs_cli_install_steps/install_bx_cs">onnect
+to <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword>, create clusters, and manage
+worker nodes, install the <ph conref="cs_conref.dita#links/bx_cs_plugin_name"></ph>. </cmd>
+<info><ph conref="cs_conref.dita#links/bx_cs_plugin_name"></ph> を使用してコマンドを実行するための接頭部は、<codeph><ph conref="cs_conref.dita#links/bx_cs"></ph></codeph> です。
+</info>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx"></ph> plugin install <ph id="bx_cs_install" conref="cs_conref.dita#links/bx_cs_plugin_shortname"></ph> -r <ph audience="yellow">Bluemix</ph><ph audience="blue"><varname>stage</varname></ph></codeblock></info></step>
+<step conref="cs_cli_configure.dita#cs_cli_configure/bx_login">
+<cmd></cmd></step>
+<step>
+<cmd><ph conref="cs_conref.dita#links/bx_cs_plugin_name"></ph> を初期化します。</cmd>
+<info>
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> init</codeblock></info>
+<info>特定の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 地域を指定するには、次のいずれかのコマンドを使用します。
+<ul id="ul_dw1_mcn_zz">
+<li>米国南部:<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> init --host https://us-south.containers.bluemix.net</codeblock></li>
+<li>中欧:
+<codeblock><ph conref="cs_conref.dita#links/bx_cs">)</ph> init --host https://eu-central.containers.bluemix.net</codeblock></li></ul></info></step>
+<step conref="cs_cli_install_steps.dita#cs_cli_install_steps/install_kubectl">
+<cmd></cmd></step>
+<step>
+<cmd><ph conref="cs_conref.dita#links/registry_name"></ph> でプライベート・イメージ・リポジトリーをセットアップして管理するには、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/registryfull"></keyword> プラグインをインストールします。</cmd>
+<info>レジストリー・コマンドを実行するための接頭部は、<codeph><ph conref="cs_conref.dita#links/bx_cr"></ph></codeph>です。</info>
+<info>
+<codeblock>bx plugin install container-registry -r <ph audience="yellow">Bluemix</ph><ph audience="blue"><varname>stage</varname></ph></codeblock>
+
+<p><ph conref="cs_conref.dita#links/bx_cs_plugin_shortname"></ph> プラグインと container-registry プラグインが正常にインストールされたことを検証するには、以下のコマンドを実行します。
+<codeblock><ph conref="cs_conref.dita#links/bx"></ph> plugin list</codeblock></p></info></step>
+<step>
+<cmd>ローカルにイメージを作成して、それらをプライベート・イメージ・リポジトリーにプッシュするには、<xref href="https://www.docker.com/community-edition#/download" format="html" scope="external">Docker CE CLI をインストールします</xref>。Windows 8 以前を使用している場合、代わりに <xref href="https://www.docker.com/products/docker-toolbox" format="html" scope="external">Docker Toolbox</xref> をインストールしてください。
+</cmd></step></steps>
+<result><p>
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウントの作成と CLI のインストールを正常に行うことができたので、次のレッスンとチュートリアルに進むことができます。
+次に、CLI を使用してクラスターにアクセスし、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスの追加を開始します。
+</p></result></taskbody></tutorialLesson>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tsTroubleshooting PUBLIC "-//IBM//DTD DITA Troubleshooting//EN"
+ "troubleshooting.dtd">
+<tsTroubleshooting id="ts_vol_mount_option" xml:lang="ja-jp" class="- topic/topic tsTroubleshooting/tsTroubleshooting ">
+<title>CLI からボリュームを指定してコンテナーを作成した場合に発生する構文解析エラー</title>
+<titlealts>
+<navtitle>ボリュームを指定してコンテナーを作成した場合の構文解析エラー</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で CLI からボリュームを指定してコンテナーを作成した場合に発生する構文解析エラー</searchtitle></titlealts>
+<shortdesc></shortdesc>
+<tsBody class="- topic/body tsTroubleshooting/tsBody ">
+<tsSymptoms class="- topic/section tsTroubleshooting/tsSymptoms ">CLI から単一コンテナーまたはコンテナー・グループを作成すると、失敗のメッセージを受け取ります。
+<p>例<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-create --name my_container -n my_host -d <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword> -m 2048 --min 1 --max 2 --desired 1 -p 9080 --auto -v my_volume:/my/path registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/ibmliberty</codeblock></p><p>結果
+<codeblock>docker: Error parsing reference: “my_volume:/my/path” is not a valid repository/tag.</codeblock></p></tsSymptoms>
+<tsCauses class="- topic/section tsTroubleshooting/tsCauses ">CLI for Cloud Foundry バージョン 6.17 以降では、<option>-v</option> パラメーターが別の目的で使用されます。
+</tsCauses>
+<tsResolve class="- topic/section tsTroubleshooting/tsResolve ">コマンドの <option>-v</option> オプションを <option>--volume</option> オプションに変更してください。
+<p>例<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-create --name my_container -n my_host -d <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword> -m 2048 --min 1 --max 2 --desired 1 -p 9080 --auto --volume my_volume:/my/path registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/ibmliberty</codeblock></p></tsResolve></tsBody></tsTroubleshooting>

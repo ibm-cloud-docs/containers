@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN" "ibm-concept.dtd">
+<concept id="cs_ov_benefits" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で Kubernetes クラスターを使用する利点 <ph conref="cs_conref.dita#links/release"></ph></title>
+<titlealts>
+<navtitle>クラスターを使用する利点</navtitle></titlealts>
+<shortdesc>各クラスターは、ネイティブの Kubernetes と IBM が追加した機能を提供するための、共有または専用の仮想マシンにデプロイされます。
+</shortdesc>
+<conbody>
+<p><table frame="all" colsep="1" rowsep="1" id="table_f4j_qyn_qy">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でクラスターを使用する利点</title>
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="1.0*"></colspec><colspec colnum="2" colname="c2" colwidth="1.0*"></colspec>
+<thead>
+<row>
+<entry>利点</entry>
+<entry>説明</entry></row></thead>
+<tbody>
+<row>
+<entry><p>コンピュート、ネットワーク、およびストレージそれぞれのインフラストラクチャーを分離する、単一テナントの Kubernetes クラスター</p></entry>
+<entry><ul>
+<li>ビジネスと開発環境の要件に適合する、カスタマイズされた独自のインフラストラクチャーを作成できる。
+</li>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> によって提供されるリソースを活用する、機密保護機能のある専用の Kubernetes マスター、ワーカー・ノード、仮想ネットワーク、そしてストレージをプロビジョンできる。
+</li>
+<li>統合されたセキュアなボリューム・サービスによって、永続データを保管し、Kubernetes ポッド間でデータを共有し、必要に応じてデータを復元することができる。
+</li>
+<li>IBM によって継続的にモニターされている、可用性が高く完全に管理された Kubernetes マスター。
+</li>
+<li>すべてのネイティブ Kubernetes API をフルサポートすることによる利点。
+</li></ul></entry></row>
+<row>
+<entry><p>Vulnerability Advisor によるイメージ・セキュリティー・コンプライアンス</p></entry>
+<entry><ul>
+<li>保護された独自の Docker プライベート・イメージ・レジストリーをセットアップできる。このレジストリーにイメージが格納され、組織内のすべてのユーザーによって共有される。
+</li>
+<li>プライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリー内のイメージを自動スキャンすることによる利点。
+</li>
+<li audience="unknown">適用されるセキュリティー・レベルに基づいてコンテナーのデプロイメントを許可またはブロックするためのカスタム組織ポリシーを定義できる。
+</li>
+<li>イメージ内で使用されるオペレーティング・システムに固有の推奨を確認して、潜在的な脆弱性を修正できる。
+</li>
+<li audience="unknown">使用する環境にデプロイされた実行中のコンテナーのセキュリティー状況を調べることで、セキュリティーとコンプライアンスを継続的に維持できる。
+</li></ul></entry></row>
+<row>
+<entry><p>アプリの自動スケーリング</p></entry>
+<entry><ul>
+<li>CPU とメモリーの使用量に基づいてアプリのスケールアップとスケールダウンを行うためのカスタム・ポリシーを定義できる。
+</li></ul></entry></row>
+<row>
+<entry><p>クラスターの正常性に関する継続的なモニター</p></entry>
+<entry><ul>
+<li>クラスター・ダッシュボードを使用して、クラスター、ワーカー・ノード、およびコンテナー・デプロイメントの正常性を素早く参照して管理できる。</li>
+<li>IBM モニタリング・サービスを使用して詳細な使用量メトリックを確認し、ワークロードに合わせてクラスターを素早く拡張することができる。
+</li>
+<li>IBM ロギング・サービスを使用してロギング情報を参照して、クラスター・アクティビティーの詳細を確認できる。
+</li></ul></entry></row>
+<row>
+<entry><p>正常でないコンテナーの自動リカバリー</p></entry>
+<entry><ul>
+<li>ワーカー・ノードにデプロイされたコンテナーの継続的なヘルス・チェック。
+</li>
+<li>コンテナーに障害が発生した場合の自動再作成。
+</li></ul></entry></row>
+<row>
+<entry><p>サービス・ディスカバリーとサービス・マネジメント</p></entry>
+<entry><ul>
+<li>アプリ・サービスを一元的に登録してクラスター内の他のアプリがそれらを使用できるようにしつつ、パブリックには公開しない。
+</li>
+<li>変化する IP アドレスやコンテナー ID を追跡しなくても登録されたサービスを検出して、使用可能なインスタンスに自動ルーティングできる利点がある。
+</li></ul></entry></row>
+<row>
+<entry><p>サービスにパブリック・アクセスできるよう安全に公開する</p></entry>
+<entry><ul>
+<li>完全なロード・バランサーと Ingress サポートを備えたプライベート・オーバーレイ・ネットワークを使用することによって、だれでもアクセスできるようにアプリを公開することが可能になり、クラスター内の変化する IP アドレスを追跡しなくても複数のワーカー・ノードの間でワークロードのバランスを保つことができる。
+</li>
+<li>インターネットからクラスター内のサービスにアクセスする方法を、パブリック IP アドレス、IBM 提供の経路、独自のカスタム・ドメインの中から選択できる。
+</li></ul></entry></row>
+<row>
+<entry><p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスの統合</p></entry>
+<entry><ul>
+<li>Watson API、ブロックチェーン、データ・サービス、モノのインターネットなどの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスを統合してアプリに付加的な機能を追加し、クラスター・ユーザーがアプリ開発とコンテナー管理のプロセスを単純化できるようにする。
+</li></ul></entry></row></tbody></tgroup></table></p></conbody></concept>

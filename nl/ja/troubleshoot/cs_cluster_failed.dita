@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tsTroubleshooting PUBLIC "-//IBM//DTD DITA Troubleshooting//EN"
+ "troubleshooting.dtd">
+<!--http://w3.opensource.ibm.com/projects/ditatroublespec/ -->
+<!--This DITA specialized document type is currently not supported by the Authoring Tools development team. Press the F1 key for online help on the tags, or see the Authoring Tools Information Center for the complete set of help topics at http://submit.boulder.ibm.com/infocenter/idwb/v3r8m4/index.jsp.-->
+<tsTroubleshooting id="cs_cluster_failed" xml:lang="ja-jp" class="- topic/topic tsTroubleshooting/tsTroubleshooting ">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でクラスターまたはワーカー・ノードのデプロイに失敗した
+</title>
+<shortdesc></shortdesc>
+<tsBody class="- topic/body tsTroubleshooting/tsBody ">
+<tsSymptoms class="- topic/section tsTroubleshooting/tsSymptoms ">クラスターまたはワーカー・ノードが deployed 状態になりませんでした。
+</tsSymptoms>
+<tsCauses class="- topic/section tsTroubleshooting/tsCauses ">クラスターまたはワーカー・ノードを削除する必要があるかもしれません。
+</tsCauses>
+<tsResolve class="- topic/section tsTroubleshooting/tsResolve "><p><dl>
+<dlentry>
+<dt>クラスター</dt>
+<dd>クラスターのデプロイに失敗した場合、クラスターを削除してから再作成してみてください。
+<ol>
+<li>クラスターを削除します。<codeblock><ph conref="cs_conref.dita#links/bx_cs"></ph> cluster-rm <varname>&lt;cluster_name&gt;</varname></codeblock></li>
+<li>クラスターの削除確認に応答します。</li>
+<li>クラスターを再作成します。</li></ol></dd></dlentry>
+<dlentry>
+<dt>ワーカー・ノード</dt>
+<dd>いずれかのワーカー・ノードのデプロイに失敗した場合は、そのワーカー・ノードを再ロードしてください。
+<ol>
+<li>クラスター内のすべてのワーカー・ノードをリストして、デプロイに失敗したワーカー・ノードの ID をメモします。
+<codeblock><ph conref="cs_conref.dita#links/bx_cs"></ph> workers <varname>&lt;cluster_name&gt;</varname></codeblock></li>
+<li>失敗したワーカー・ノードを再ロードします。
+<codeblock><ph conref="cs_conref.dita#links/bx_cs"></ph> worker-reload <varname>&lt;cluster_name&gt;</varname> <varname>&lt;worker_node_id&gt;</varname></codeblock>すべてのワーカー・ノードがデプロイに失敗している場合は、コマンドを <codeph><ph conref="cs_conref.dita#links/bx_cs"></ph> worker-reload <varname>&lt;cluster_name&gt;</varname></codeph> として実行し、クラスター内のすべてのワーカー・ノードを再ロードします。
+</li>
+<li>再ロードしたワーカー・ノードの状態を確認します。
+<codeblock><ph conref="cs_conref.dita#links/bx_cs"></ph> workers <varname>&lt;cluster_name&gt;</varname></codeblock></li></ol></dd></dlentry></dl></p></tsResolve></tsBody></tsTroubleshooting>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="cs_apps_volume_claim" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> <ph conref="cs_conref.dita#links/release"></ph> での永続ストレージの作成</title>
+<titlealts>
+<navtitle>永続ストレージの作成</navtitle></titlealts><abstract>
+<shortdesc>NFS ファイル・ストレージのプロビジョンのために永続ボリューム請求を作成できます。
+この請求をポッド内のコンテナーにマウントすれば、ポッドのクラッシュ時やシャットダウン時にもデータを利用できます。
+</shortdesc></abstract>
+<taskbody>
+<prereq><p><ph conref="cs_conref.dita#links/kubeconfig"></ph>
+<ph conref="cs_conref.dita#links/paidonly"></ph></p></prereq>
+<context><p><ph conref="cs_conref.dita#terms/dynamic_pvc_definition"></ph>永続ボリュームの裏づけになる NFS ファイル・ストレージをクラスター化して、データの高可用性を維持します。
+</p></context>
+<steps>
+<step>
+<cmd>使用可能なストレージ・クラスを確認します。</cmd>
+<info><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containershort"></keyword> には事前定義のストレージ・クラスが 3 つ用意されているので、クラスター管理者がストレージ・クラスを作成する必要はありません。
+<codeblock>kubectl get storageclasses</codeblock>
+<screen>$ kubectl get storageclasses
+NAME                         TYPE
+ibmc-file-bronze (default)   ibm.io/ibmc-file   
+ibmc-file-gold               ibm.io/ibmc-file   
+ibmc-file-silver             ibm.io/ibmc-file</screen></info></step>
+<step>
+<cmd>ストレージ・クラスの IOPS または使用可能なサイズを確認します。
+</cmd>
+<info>
+<codeblock>kubectl describe storageclasses ibmc-file-silver</codeblock>
+
+<p><uicontrol>「Parameters」</uicontrol>フィールドで、ストレージ・クラスに関連した 1 GB あたりの IOPS と使用可能なサイズ (ギガバイト単位) を確認できます。
+</p>
+
+<screen>Parameters:	iopsPerGB=4,sizeRange=20Gi,40Gi,80Gi,100Gi,250Gi,500Gi,1000Gi,2000Gi,4000Gi,8000Gi,12000Gi</screen></info></step>
+<step>
+<cmd>任意のテキスト・エディターを開いて、永続ボリューム請求を定義した構成スクリプトを作成し、<codeph>.yaml</codeph> ファイルとして構成を保存します。
+</cmd>
+<info>
+<codeblock>apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: <varname>mypvc</varname>
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "ibmc-file-silver"
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi</codeblock>
+
+<table frame="all" colsep="1" rowsep="1" id="table_sdf_nkm_2v">
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="100pt"></colspec><colspec colnum="2" colname="c2"></colspec>
+<thead>
+<row>
+<entry namest="c1" nameend="c2"><ph conref="container_conref.dita#images/more_info"></ph> 構成スクリプトの構成要素について</entry></row></thead>
+<tbody>
+<row>
+<entry><codeph>metadata/name</codeph></entry>
+<entry>永続ボリューム請求の名前を入力します。</entry></row>
+<row>
+<entry><codeph>metadata/annotations</codeph></entry>
+<entry>永続ボリューム請求が要求する永続ボリュームのホスト・ファイル共有の 1 GB あたりの IOPS は、次のようにストレージ・クラスによって定義されます。
+<ul>
+<li>ibmc-file-bronze: 1 GB あたり 2 IOPS。</li>
+<li>ibmc-file-silver: 1 GB あたり 4 IOPS。</li>
+<li>ibmc-file-gold: 1 GB あたり 10 IOPS。</li></ul>ストレージ・クラスが指定されない場合は、bronze ストレージ・クラスを使用して永続ボリュームが作成されます。</entry></row>
+<row>
+<entry><codeph>spec/accessModes</codeph></entry>
+<entry conref="cs_conref.dita#links/accessmode"></entry></row>
+<row>
+<entry><codeph>resources/requests/storage</codeph></entry>
+<entry><ph conref="cs_conref.dita#terms/storage"></ph> リストされているもの以外のサイズを選択した場合、サイズは切り上げられます。
+最大サイズより大きいサイズを選択した場合、サイズは切り下げられます。
+</entry></row></tbody></tgroup></table></info></step>
+<step>
+<cmd>永続ボリューム請求を作成します。</cmd>
+<info>
+<codeblock>kubectl apply -f <varname>&lt;local_file_path&gt;</varname></codeblock>例<codeblock>kubectl apply -f <filepath>deploy/kube-config/mypvc.yaml</filepath></codeblock></info></step>
+<step>
+<cmd>永続ボリューム請求が作成され、永続ボリューム・オブジェクトにバインドされたことを確認します。</cmd>
+<info>この処理には数分かかる場合があります。
+</info>
+<info>
+<codeblock>kubectl describe pvc <varname>mypvc</varname></codeblock>出力は、以下のようになります。
+<screen>Name:		<varname>mypvc</varname>
+Namespace:	default
+StorageClass:	""
+Status:		Bound
+Volume:		pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2
+Labels:		&lt;none&gt;
+Capacity:	20Gi
+Access Modes:	RWX
+Events:
+  FirstSeen	LastSeen	Count	From								SubObjectPath	Type		Reason			Message
+  ---------	--------	-----	----								-------------	--------	------			-------
+  3m		3m		1	{ibm.io/ibmc-file 31898035-3011-11e7-a6a4-7a08779efd33 }			Normal		Provisioning		External provisioner is provisioning volume for claim "default/my-persistent-volume-claim"
+  3m		1m		10	{persistentvolume-controller }							Normal		ExternalProvisioning	cannot find provisioner "ibm.io/ibmc-file", expecting that a volume for the claim is provisioned either manually or via external software
+  1m		1m		1	{ibm.io/ibmc-file 31898035-3011-11e7-a6a4-7a08779efd33 }			Normal		ProvisioningSucceeded	Successfully provisioned volume pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2</screen></info></step>
+<step id="mount">
+<cmd>永続ボリューム請求をポッドにマウントするには、構成スクリプトを作成します。</cmd>
+<info>構成を <codeph>.yaml</codeph> ファイルとして保存します。
+<codeblock>apiVersion: v1
+kind: Pod
+metadata:
+ name: mypod
+spec:
+ containers:
+ - image: nginx
+   name: mycontainer
+   volumeMounts:
+   - mountPath: /volumemount
+     name: myvol
+ volumes:
+ - name: myvol
+   persistentVolumeClaim:
+     claimName: mypvc</codeblock>
+
+<table frame="all" colsep="1" rowsep="1" id="volume_mount">
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="100pt"></colspec><colspec colnum="2" colname="c2"></colspec>
+<thead>
+<row>
+<entry namest="c1" nameend="c2"><ph conref="container_conref.dita#images/more_info"></ph> 構成スクリプトの構成要素について</entry></row></thead>
+<tbody>
+<row>
+<entry><codeph>metadata/name</codeph></entry>
+<entry>ポッドの名前。</entry></row>
+<row>
+<entry><codeph>volumeMounts/mountPath</codeph></entry>
+<entry>コンテナー内でボリュームがマウントされるディレクトリーの絶対パス。
+</entry></row>
+<row>
+<entry><codeph>volumeMounts/name</codeph></entry>
+<entry>コンテナーにマウントするボリュームの名前。</entry></row>
+<row>
+<entry><codeph>volumes/name</codeph></entry>
+<entry> コンテナーにマウントするボリュームの名前。通常、この名前は <codeph>volumeMounts/name</codeph> と同じです。
+</entry></row>
+<row>
+<entry><codeph>volumes/name/persistentVolumeClaim</codeph></entry>
+<entry>ご使用のボリュームに適した永続ボリューム請求の名前を入力します。
+ボリュームをポッドにマウントすると、Kubernetes は永続ボリューム請求にバインドされた永続ボリュームを識別して、その永続ボリュームでユーザーが読み取り/書き込みを行えるようにします。
+</entry></row></tbody></tgroup></table></info></step>
+<step>
+<cmd>ポッドを作成して、永続ボリューム請求をポッドにマウントします。
+</cmd>
+<info>
+<codeblock>kubectl apply -f <varname>&lt;local_yaml_path&gt;</varname></codeblock>例<codeblock>kubectl apply -f <filepath>deploy/kube-config/pod.yaml</filepath></codeblock></info></step>
+<step>
+<cmd>ボリュームがポッドに正常にマウントされたことを確認します。
+</cmd>
+<info>
+<codeblock>kubectl describe pod <varname>mypod</varname></codeblock>マウント・ポイントは <uicontrol>Volume Mounts</uicontrol> フィールドにリストされ、ボリュームは <uicontrol>Volumes</uicontrol> フィールドにリストされます。
+<screen> Volume Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-tqp61 (ro)
+      /volumemount from myvol (rw)
+...
+Volumes:
+  myvol:
+    Type:	PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:	mypvc
+    ReadOnly:	false</screen></info></step></steps></taskbody></task>

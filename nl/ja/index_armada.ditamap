@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--vArbortext, Inc., 1988-2011, v.4002--><!DOCTYPE map PUBLIC "-//IBM//DTD DITA IBM Map//EN" "ibm-map.dtd">
+
+<map xml:lang="ja-jp">
+<title><tm trademark="IBM" tmtype="reg">IBM</tm> Containers - Armada</title>
+<topicmeta>
+<copyright>
+<copyryear year="2014"></copyryear>
+<copyryear year="2017"></copyryear>
+<copyrholder>IBM</copyrholder></copyright></topicmeta><!--This is displaying in the CLI DEV TOOLS section--><!--HACKED SECTION: -->
+<topicref navtitle="bx cs plug-in" href="cs_cli_devtools.dita" type="concept" scope="local" format="dita" toc="no" chunk="to-content"><!--CLI reference  (HACKED)-->
+<topicref navtitle="Reference" href="cs_cli_reference.dita" type="task" toc="no"></topicref></topicref><!--End of hacked section--><!--Getting started  (This entry creates the TOC entry)--><!--&lt;topicref format="dita" href="container_index.dita" navtitle="Getting started" scope="local" type="task" locktitle="yes"/&gt;--><!--About-->
+<topicref navtitle="Kubernetes and" href="cs_ov.dita" type="concept" chunk="to-content"><!--Benefits of using Kubernetes-->
+<topicref navtitle="Benefits of using" href="cs_ov_benefits.dita" type="concept"></topicref><!--Kubernetes Architecture-->
+<topicref navtitle="How it works" href="cs_ov_architecture.dita" type="concept"></topicref><!--Migrating single and scalable containers to clusters-->
+<topicref navtitle="Migrating to clusters" href="cs_classic_migrating.dita" type="concept" audience="blue"></topicref><!--Dedicated and Local  (temp set to unknown since the content hasn't been updated)-->
+<topicref navtitle="Dedicated and Local" href="container_dl.dita" type="concept" scope="local" format="dita" audience="unknown"></topicref></topicref><!--Tutorials-->
+<topicref navtitle="Tutorials" href="cs_tutorials.dita" type="reference" chunk="to-content"><!--Tutorial: Creating a cluster-->
+<topicref navtitle="Tutorial: Creating a cluster" href="cs_cluster_tutorial.dita" type="tutorial"><!--Lesson 1: Creating a Kubernetes cluster-->
+<topicref navtitle="Lesson 1: Creating a custom Kubernetes Cluster" href="cs_cluster_tutorial_lesson1.dita" type="tutorialLesson"></topicref><!--Lesson 2: Setting up the CLIs-->
+<topicref navtitle="Lesson 2: Setting up the CLIs" href="cs_cluster_tutorial_lesson2.dita" type="tutorialLesson"></topicref><!--Old lesson: Configuring your environment-->
+<topicref navtitle="Lesson 1: Creating a Kubernetes Cluster" href="cs_cluster_tutorial_lesson_ui_backup.dita" audience="unknown"></topicref></topicref><!--Security tutorial Josh-->
+<topicref navtitle="Tutorial: Securing your cluster" href="cs_security_cluster_tutorial.dita" audience="unknown"><!--Lesson 1: Setting up private image registry-->
+<topicref navtitle="Lesson 1: Setting up a private registry in" href="cs_security_cluster_tutorial_lesson1.dita"></topicref><!--Lesson 2: Defining custom deployment policies and review vulnerabilities-->
+<topicref navtitle="Lesson 2: Defining custom deployment policies for vulnerable images and reviewing image security compliance" href="cs_security_cluster_tutorial_lesson2.dita"></topicref><!--Lesson 3: Segment a cluster with namespaces-->
+<topicref navtitle="Segmenting a cluster with namespaces" href="cs_security_cluster_tutorial_lesson3.dita"></topicref></topicref><!--Deploying an app tutorial-->
+<topicref navtitle="Tutorial: Deploying an app into a cluster" href="cs_apps_tutorial.dita" type="tutorial">
+<topicref navtitle="Lesson 1" href="cs_apps_tutorial_lesson1.dita" type="tutorialLesson"></topicref>
+<topicref navtitle="Lesson 2" href="cs_apps_tutorial_lesson2.dita" type="tutorialLesson"></topicref>
+<topicref navtitle="Lesson 3" href="cs_apps_tutorial_lesson3.dita" type="tutorialLesson"></topicref></topicref></topicref><!--Planning-->
+<topicref navtitle="Planning to use" href="cs_planning.dita" type="task" chunk="to-content"><!--Cluster types (free vs. paid) -->
+<topicref href="cs_planning_cluster_type.dita" type="concept"></topicref><!--Node spec-->
+<topicref navtitle="Worker node configuration" href="cs_planning_worker_nodes.dita" type="concept"></topicref><!--Private network settings-->
+<topicref navtitle="Keep services private" href="cs_planning_private_network.dita" type="concept"></topicref><!--Public network settings-->
+<topicref navtitle="Expose services to the Internet" href="cs_planning_public_network.dita" type="concept"></topicref><!--User access-->
+<topicref navtitle="User authorization and access managements" href="cs_planning_cluster_user.dita" type="concept"></topicref><!--Image registry-->
+<topicref navtitle="Decide where to store Docker images and find images for your container deployments" href="cs_planning_images.dita" type="concept"></topicref><!--persistent data storage-->
+<topicref navtitle="Persistent data storage" href="cs_planning_apps_storage.dita" type="concept"></topicref><!--Bluemix service-->
+<topicref navtitle="services" href="cs_planning_bluemix_services.dita" type="concept"></topicref><!--Health-->
+<topicref navtitle="Cluster and app health" href="cs_planning_health.dita" type="concept"></topicref></topicref><!--Security-->
+<topicref navtitle="Security" href="cs_security.dita" type="concept" chunk="to-content"><!--Master Node Security-->
+<topicref navtitle="Master Node security" href="cs_security_master.dita" type="concept"></topicref><!--Worker Node Security-->
+<topicref navtitle="Worker node" href="cs_security_worker.dita" type="concept"></topicref><!--Image/container Security-->
+<topicref navtitle="Images and container deployments" href="cs_security_deployment.dita" type="concept"></topicref></topicref><!--Setting up the kube CLI-->
+<topicref navtitle="Setting up the plug-in (bx kube)" href="cs_cli_install.dita" type="task" chunk="to-content"><!--Configuring the CLI to run kubectl-->
+<topicref navtitle="Configuring kubectl for your cluster" href="cs_cli_configure.dita" type="task"></topicref><!--Upgrading the CLI-->
+<topicref navtitle="Upgrading the bx kube plug-in" href="cs_cli_upgrade.dita" type="task"></topicref><!--Uninstalling the CLI-->
+<topicref navtitle="Uninstalling the bx kube plug-in" href="cs_cli_uninstall.dita" type="task"></topicref></topicref><!--Running Kubernetes clusters-->
+<topicref navtitle="Running Kubernetes clusters" href="cs_cluster.dita" type="concept" chunk="to-content"><!--Running Kubernetes clusters UI-->
+<topicref navtitle="Creating Kubernetes cluster with the GUI" href="cs_cluster_ui.dita" type="task"></topicref><!--Running Kubernetes clusters CLI-->
+<topicref navtitle="Create Kubernetes cluster with the CLI" href="cs_cluster_cli.dita" type="task"></topicref><!--Running HA Kubernetes clusters-->
+<topicref navtitle="Create HA Kubernetes clusters" href="cs_cluster_ha.dita" type="task" audience="blue"></topicref><!--Using an image-->
+<topicref navtitle="Finding an image for your container" href="cs_apps_images.dita" type="task"></topicref><!--Bind a Bluemix service-->
+<topicref navtitle="Binding services to a cluster" href="cs_cluster_service.dita" type="task"></topicref><!--Monitor cluster health-->
+<topicref navtitle="Monitoring the health of a cluster" href="cs_cluster_monitor.dita" type="task" audience="unknown"></topicref><!--Adding users to a cluster-->
+<topicref navtitle="Adding users to a cluster" href="cs_cluster_user.dita" type="task"></topicref><!--Cluster storage-->
+<topicref navtitle="Statically provisioning of persistent volumes" href="cs_cluster_volume_create.dita" type="task" audience="blue"></topicref><!--Visualizing clusters with Weave Scope-->
+<topicref navtitle="Weave Scope" href="cs_weavescope.dita" type="task" scope="local" format="dita"></topicref><!--Remove cluster-->
+<topicref navtitle="Removing a Kubernetes cluster" href="cs_cluster_remove.dita" type="task"></topicref></topicref>
+<topicref navtitle="Running apps in a cluster" href="cs_apps.dita" type="task" chunk="to-content"><!--Accessing the Kubernetes dashboard-->
+<topicref navtitle="Accessing the Kubernetes dashboard" href="cs_apps_dashboard.dita" type="task"></topicref><!--Making an app public-->
+<topicref navtitle="Allowing public access to an app" href="cs_apps_public.dita" type="task"></topicref><!--Running app in clusters UI-->
+<topicref navtitle="Deploying an app to a cluster with the GUI" href="cs_apps_ui.dita" type="task"></topicref><!--Running app in clusters CLI-->
+<topicref navtitle="Deploying an app to a cluster with the CLI" href="cs_apps_cli.dita" type="task"></topicref><!--Auto scaling-->
+<topicref navtitle="Automatically scaling your apps" href="cs_apps_scaling.dita" type="task"></topicref><!--Binding a Bluemix service to a pod-->
+<topicref navtitle="Binding a service to a pod" href="cs_apps_service.dita" type="task"></topicref><!--Automating with the Delivery Pipeline-->
+<topicref navtitle="Automating the deployment of apps" href="cs_apps_pipeline_ov.dita" type="task" audience="blue">
+<topicref navtitle="Automating the building of images" href="cs_apps_pipeline_build.dita" type="task"></topicref>
+<topicref navtitle="Automating the deployment of images" href="cs_apps_pipeline_deploy.dita" type="task"></topicref></topicref><!--Creating a persistent volume claim-->
+<topicref navtitle="Creating a persistent volume claim" href="cs_apps_volume_claim.dita"></topicref><!--Mounting a persistent volume claim to a pod-->
+<topicref navtitle="Mounting persistent volume claims to a pod" href="cs_apps_volume_mount.dita"></topicref><!--Removing resources from cluster-->
+<topicref navtitle="Removing an app from a cluster" href="cs_apps_remove.dita" type="task"></topicref></topicref><!--CLI reference-->
+<topicref navtitle="CLI reference" href="cs_cli_reference.dita" type="reference" chunk="to-content"><!--CLI plugin versions-->
+<topicref navtitle="Plug-in version history" href="cs_cli_versions.dita" type="reference"></topicref>
+<topicref navtitle="kubectl commands" href="cs_cli_ref_kubectl.dita" type="reference"></topicref></topicref><!--Troubleshooting ditamap-->
+<topicref navtitle="Troubleshooting" href="cs_troubleshoot.dita" type="tsTroubleshooting" scope="local" format="dita" chunk="to-content">
+<topicref navtitle="トラブルシューティング" href="troubleshoot/cs_ts_index.ditamap" format="ditamap"></topicref></topicref>
+<topicref href="index_armada_kraken-blue.ditamap" scope="local" format="ditamap"><!--Armada images-->
+<topicref href="images/container-service_docker.png" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/container-service_kubernetes.png" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/cs_app_ha_roadmap.png" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/cs_apps_pvc_mount.png" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/cs_cluster_ha_roadmap.png" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/cs_cluster_pv_pvc.png" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/CLItree.png" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/cs_org_ov.png" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/cs_planning_apps_storage.png" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/cs_security.png" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/table-single.gif" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/table-single_infinite.gif" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/table-multiple.gif" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/table-multiple_infinite.gif" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/table-multiple-service.gif" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/table-multiple-service_infinite.gif" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/cs_ingress.png" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/cs_loadbalancer.png" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/cs_nodeport.png" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/cs_app_tutorial_components1.png" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/cs_app_tutorial_components2.png" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/cs_app_ha_roadmap_dc.png" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/cs_cluster_ha_roadmap_dc.png" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/cs_app_tutorial_components3.png" processing-role="resource-only" format="png" toc="no" print="no"></topicref>
+<topicref href="images/cs_app_tutorial_roadmap.png" processing-role="resource-only" format="png" toc="no" print="no"></topicref></topicref></map><?tm 1458177503090 1 IBM ?>

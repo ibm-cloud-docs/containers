@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="container_group_ui_as" xml:lang="ja-jp">
+<title>コンテナー・グループの自動スケーリング (非推奨)</title>
+<titlealts>
+<navtitle>グループの自動スケーリング (非推奨)</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でのコンテナー・グループの自動スケーリング (非推奨)</searchtitle></titlealts>
+<shortdesc>コンテナーの自動スケーリング機能は推奨されていません。
+この機能は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を使用して置き換えることができます。
+<ph>詳しくは、<xref href="https://www.ibm.com/blogs/bluemix/2017/03/retirement-ibm-container-autoscaling-beta-capability" format="html" scope="external">Auto-Scaling Retirement</xref> を参照してください。
+</ph></shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>自動スケーリング</indexterm><indexterm>自動スケーリング
+</indexterm><indexterm>自動スケーリング</indexterm><indexterm>コンテナー・グループ</indexterm><indexterm>IBM Containers</indexterm><indexterm>コンテナー</indexterm><indexterm>スケーリング</indexterm><indexterm>ロード・バランシング</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context>自動スケーリング Cloud Foundry アプリケーションに関する情報をお探しですか?
+<xref href="https://www.ng.bluemix.net/docs/services/Auto-Scaling/index.html" format="html" scope="external"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/autoscalingfull"></keyword></xref>を確認してください。</context></taskbody><?tm 1432135855 0?>
+<task id="migrating_autoscaling">
+<title>Kubernetes 自動スケーリングへのマイグレーション</title>
+<taskbody>
+<steps>
+<stepsection><p><xref href="cs_ov.dita" format="dita" scope="local">Kubernetes</xref> では、<xref href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/" format="html" scope="external">水平ポッド自動スケーリング</xref>の機能を有効にして、CPU の使用率に基づいて自分のアプリをスケーリングできます。
+</p></stepsection>
+<step>
+<cmd>必要な <xref href="cs_cli_install.dita" format="dita" scope="local">CLI</xref> をインストールします。
+</cmd></step>
+<step>
+<cmd>クラスターを作成します。この作業は、<xref href="container_index.dita#clusters" format="dita" scope="local">Bluemix での Kubernetes クラスターの概説</xref>にある手順に従って行います。
+現在のコンテナー・グループを複製するようにクラスターをセットアップしてください。その際に、ロギング、モニタリング、脆弱性アドバイザー、その他のすべてのカスタマイズを複製するのも忘れないでください。
+</cmd></step>
+<step>
+<cmd>クラスターの<xref href="cs_cli_configure.dita" format="dita" scope="local">コンテキストを設定</xref>します。
+</cmd></step>
+<step>
+<cmd><xref href="cs_apps_cli.dita" format="dita" scope="local">CLI を使用して、</xref>既存のアプリをクラスターにデプロイします。
+</cmd>
+<info>アプリをデプロイする時に、CPU を要求する必要があります。
+<codeblock>kubectl run &lt;name&gt; --image=&lt;image&gt; --requests=cpu=&lt;cpu&gt; --expose --port=&lt;port_number&gt;</codeblock>
+<table frame="all" colsep="1" rowsep="1" id="table_px1_qsx_yy">
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="1.0*"></colspec><colspec colnum="2" colname="c2" colwidth="1.0*"></colspec>
+<thead>
+<row>
+<entry namest="c1" nameend="c2"><ph conref="container_conref.dita#images/more_info"></ph> このコマンドの構成要素について</entry></row></thead>
+<tbody>
+<row>
+<entry><codeph>--image</codeph></entry>
+<entry>デプロイするアプリケーション。</entry></row>
+<row>
+<entry><codeph>--requests=cpu</codeph></entry>
+<entry>コンテナーで必要な CPU。ミリコア単位で指定します。
+例えば、<codeph>--requests=200m</codeph> のように指定します。
+</entry></row>
+<row>
+<entry><codeph>--expose</codeph></entry>
+<entry>外部サービスを作成する場合は、true にします。
+</entry></row>
+<row>
+<entry><codeph>--port</codeph></entry>
+<entry>外部からアプリを使用するためのポート。
+</entry></row></tbody></tgroup></table>
+<note>デプロイメントがかなり複雑になる場合は、<xref href="cs_apps_cli.dita" format="dita" scope="local">デプロイメント・スクリプト</xref>を作成する必要があります。
+</note></info></step>
+<step>
+<cmd>水平ポッド自動スケーリング機能を作成し、ポリシーを定義します。
+</cmd>
+<info> <codeph>kubetcl autoscale</codeph> コマンドの使い方について詳しくは、<xref href="https://kubernetes.io/docs/user-guide/kubectl/v1.5/#autoscale" format="html" scope="external">Kubernetes の資料</xref>を参照してください。
+<codeblock>kubectl autoscale deployment &lt;deployment_name&gt; --cpu-percent=&lt;percentage&gt; --min=&lt;min_value&gt; --max=&lt;max_value&gt;</codeblock>
+
+<table frame="all" colsep="1" rowsep="1" id="table_pgd_btx_yy">
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="1.0*"></colspec><colspec colnum="2" colname="c2" colwidth="1.0*"></colspec>
+<thead>
+<row>
+<entry namest="c1" nameend="c2"><ph conref="container_conref.dita#images/more_info"></ph> このコマンドの構成要素について</entry></row></thead>
+<tbody>
+<row>
+<entry><codeph>--cpu-percent</codeph></entry>
+<entry>水平ポッド自動スケーリング機能で維持する CPU 使用率の平均値。パーセントで指定します。
+</entry></row>
+<row>
+<entry><codeph>--min</codeph></entry>
+<entry>指定した CPU 使用率を維持するために使用するデプロイ済みのポッドの最小数。
+</entry></row>
+<row>
+<entry><codeph>--max</codeph></entry>
+<entry>指定した CPU 使用率を維持するために使用するデプロイ済みのポッドの最大数。
+</entry></row></tbody></tgroup></table></info></step>
+<step>
+<cmd>アプリケーションが正常に動作するか確認します。
+</cmd>
+<info>
+<ul>
+<li>サービス・ダッシュボードを調べて、アプリが実行されていることを確認します。
+</li>
+<li>アプリに対する重要な変更内容が実装されているか確認します。
+</li></ul></info></step>
+<step>
+<cmd>コンテナーの元のインスタンスを<xref href="container_group_remove.dita" format="dita" scope="local">プロビジョン解除して削除します</xref>。
+</cmd></step></steps></taskbody></task></task>

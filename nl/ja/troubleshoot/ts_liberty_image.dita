@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE tsTroubleshooting PUBLIC "-//IBM//DTD DITA Troubleshooting//EN"
+ "troubleshooting.dtd">
+<tsTroubleshooting id="ts_liberty_image" xml:lang="ja-jp" class="- topic/topic tsTroubleshooting/tsTroubleshooting ">
+<title><tm trademark="IBM" tmtype="reg">IBM</tm> <tm trademark="WebSphere" tmtype="reg">WebSphere</tm> Application Server Liberty イメージに関する問題</title>
+<titlealts>
+<navtitle><codeph>ibmliberty</codeph></navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の
+IBM WebSphere Application Server Liberty イメージに関する問題</searchtitle></titlealts>
+<shortdesc></shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>デリバリー・パイプライン<indexterm>コンテナー</indexterm><indexterm>liberty</indexterm><indexterm>イメージ</indexterm></indexterm></keywords></metadata></prolog>
+<tsBody class="- topic/body tsTroubleshooting/tsBody ">
+<tsSymptoms class="- topic/section tsTroubleshooting/tsSymptoms "><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で <tm trademark="IBM" tmtype="reg">IBM</tm> <tm trademark="WebSphere" tmtype="reg">WebSphere</tm> Application Server Liberty イメージを使用していると問題が発生します。</tsSymptoms>
+<tsCauses class="- topic/section tsTroubleshooting/tsCauses "><p>イメージが正しくセットアップされていない可能性があります。</p></tsCauses>
+<tsResolve class="- topic/section tsTroubleshooting/tsResolve "><p>起きている問題が、特に <filepath>Dockerfile</filepath> イメージに関わっている場合は、<xref href="https://github.com/WASdev/ci.docker/issues" format="html" scope="external">GitHub issue tracker</xref> を使用してください。 <tm trademark="IBM" tmtype="reg">IBM</tm> <tm trademark="WebSphere" tmtype="reg">WebSphere</tm> Application Server Liberty に関わるより一般的な問題の場合は、<xref href="https://developer.ibm.com/wasdev/help/" format="html" scope="external">WASdev コミュニティー</xref>で支援が得られます。</p>
+<p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の <tm trademark="IBM" tmtype="reg">IBM</tm> <tm trademark="WebSphere" tmtype="reg">WebSphere</tm> Application Server Liberty イメージについて詳しくは、『<xref href="../../images/docker_image_ibmliberty/ibmliberty_starter.html" format="html" scope="peer"><tm trademark="IBM" tmtype="reg">IBM</tm> <tm trademark="WebSphere" tmtype="reg">WebSphere</tm> Application Server Liberty イメージ</xref>』を参照してください。
+</p></tsResolve></tsBody><?tm 1435623329 13?></tsTroubleshooting>

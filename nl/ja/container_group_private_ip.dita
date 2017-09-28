@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="container_group_private_ip" xml:lang="ja-jp">
+<title>プライベート・コンテナー・グループに接続する</title>
+<titlealts>
+<navtitle>プライベート・グループに接続する</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 内のロード・バランサー IP アドレス経由でアプリをプライベート・コンテナー・グループに接続する
+</searchtitle></titlealts>
+<shortdesc>コンテナー・グループのロード・バランサー IP アドレスを確認して、このグループをパブリックに公開せずにアクセスできるようにします。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>コンテナー・グループ</indexterm><indexterm>IP アドレス</indexterm><indexterm>プライベート</indexterm><indexterm>IBM Containers</indexterm><indexterm>ロード・バランサー</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context>すべてのコンテナー・グループは組み込み<xref href="container_planning_container_ov.dita#group_loadbalancing" format="dita" scope="local">ロード・バランサー</xref>を使用してデプロイされます。ロード・バランサーはグループ内の個々のコンテナーに対して出される要求のバランスを取ります。コンテナー・グループがグループにマップされる URL によってパブリックに公開されることもあります。グループがパブリックではない場合は、自動的にロード・バランサーに割り当てられるプライベート IP アドレスからそのコンテナー・グループにアクセスできます。TCP に加えて HTTPS で通信するアプリも、このプライベート IP アドレスからコンテナー・グループにアクセスできます。ロード・バランサーのプライベート IP アドレスを決定するには、以下の手順を行います。</context>
+<steps>
+<step audience="unknown">
+<cmd>Cloud Foundry CLI にログインします。プロンプトが出されたら、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のユーザー名とパスワードを入力します。
+</cmd>
+<info>
+<codeblock>bx login [-a api.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>] [-sso]</codeblock>
+
+<p><ph conref="container_cli_ips_byoip.dita#container_cli_ips_byoip/sso"></ph></p></info><substeps conref="container_cli_ips_byoip.dita#container_cli_ips_byoip/no_sso">
+<substep>
+<cmd>For <uicontrol>Email</uicontrol>, enter the <tm trademark="IBM" tmtype="reg">IBM</tm>Id that
+you use to log in to <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword>.</cmd></substep>
+<substep>
+<cmd>For <uicontrol>Password</uicontrol>, enter the password for the <tm trademark="IBM" tmtype="reg">IBM</tm>Id that you use to log in to <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword>.</cmd>
+<info>By entering your user name and password, your <tm trademark="Bluemix" tmtype="tm">Bluemix</tm>
+organization and space are retrieved. </info></substep>
+<substep>
+<cmd>Enter the number for the wanted <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> organization. </cmd>
+<info> </info></substep>
+<substep>
+<cmd>Enter the number for the wanted <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> space. </cmd></substep></substeps></step>
+<step audience="unknown">
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI を初期化します。</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> init</codeblock></info></step>
+<step>
+<cmd>スペースで実行されているコンテナー・グループをリストします。</cmd>
+<info>コンテナー・グループ用に公開されるポートを書き留めます。ここでは <varname>9080</varname> です。コンテナー・グループに公開ポートがない場合、新しいコンテナー・グループを作成してポートを公開しなければなりません。コンテナー・グループのロード・バランサーには、公開されているポートでのみアクセスできます。</info>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> groups</codeblock>
+
+<screen>Group ID                               Name                      Status            Created                         Updated   Port   
+cb628ddd-a1e7-4944-9a42-02abc80ea6ee   container_group_example   CREATE_COMPLETE   2016-09-26 15:43:00 -0400 EDT             9080   </screen></info></step>
+<step>
+<cmd>コンテナー・グループを検査します。</cmd>
+<info> <varname>container_group_example</varname> をコンテナー・グループの名前と置き換えます。<uicontrol>Loadbalancer</uicontrol> セクションの <uicontrol>private_ip_address</uicontrol> フィールドを確認します。</info>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-inspect <varname>container_group_example</varname></codeblock>
+
+<screen>    "Loadbalancer": {
+        "intermediate_ip_address": "192.0.2.1", 
+        "private_ip_address": "198.51.100.27"
+    }, </screen>
+
+<note type="important">コンテナー・グループをパブリックに公開した場合、GoRouter は、パブリック・ネットワークからコンテナー・グループにトラフィックを安全にルーティングするために <uicontrol>intermediate_ip_address</uicontrol> を使用します。
+プライベート・ネットワーク上のコンテナー・グループにアクセスする場合は、ロード・バランサーのこの <uicontrol>intermediate_ip_address</uicontrol> を使用しないでください。ルーティング・テーブルの検索が追加で必要になり、ネットワークの待ち時間が生じる可能性があるからです。</note></info></step>
+<step>
+<cmd>ロード・バランサーのプライベート IP アドレスを確認します。</cmd>
+<info>同じスペース内のアプリは、このプライベート IP アドレスを使用してコンテナー・グループとのプライベート通信を行います。ロード・バランサーにアクセスするには、次の形式で公開されているポートを含める必要があります: <codeph>198.51.100.27:9080</codeph>。</info></step></steps></taskbody><?tm 1435623319 0?></task>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference PUBLIC "-//IBM//DTD DITA IBM Reference//EN" "ibm-reference.dtd">
+<reference id="container_cli_reference_versions" xml:lang="ja-jp">
+<title>サポートされている CLI</title>
+<titlealts>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のサポートされる CLI バージョン</searchtitle></titlealts>
+<shortdesc></shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>cli</indexterm><indexterm>コマンド</indexterm><indexterm>サポート対象</indexterm><indexterm>リファレンス</indexterm><indexterm>IBM Containers</indexterm></keywords></metadata></prolog>
+<refbody>
+<section><dl>
+<dlentry>
+<dt><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン</dt>
+<dd><p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグインの現行バージョンでは、以下の前提条件のバージョンがサポートされます。
+</p>
+<p><ul>
+<li><ph conref="container_conref.dita#links/cfic_docker_version"></ph></li>
+<li><ph conref="container_conref.dita#links/cfic_cf_version"></ph><note>MacOS Sierra ユーザーは、Cloud Foundry CLI バージョン 6.22.0 以降をインストールする必要があります。</note></li></ul></p></dd></dlentry>
+<dlentry>
+<dt>Docker Compose</dt>
+<dd><p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で Docker Compose のさまざまなコマンドを実行する場合は、以下の前提条件のバージョンがサポートされます。
+</p>
+<p><ul>
+<li>Docker バージョン <ph conref="container_conref.dita#links/docker_version_current"></ph></li>
+<li><ph conref="container_conref.dita#links/cfic_cf_version"></ph></li>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン、バージョン 0.8.826 以降</li>
+<li>Docker Compose バージョン <ph conref="container_conref.dita#links/compose_version_start">1.6.0</ph> 以降</li></ul></p></dd></dlentry></dl></section></refbody></reference>

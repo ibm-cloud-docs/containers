@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE reference PUBLIC "-//IBM//DTD DITA IBM Reference//EN"
+ "ibm-reference.dtd">
+<reference id="container_cli_reference_cfic_versions" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン (<ph conref="container_conref.dita#links/command_prefix"></ph>) のバージョン・ヒストリー</title>
+<titlealts>
+<navtitle> プラグインのバージョン・ヒストリー</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン (<ph conref="container_conref.dita#links/command_prefix"></ph>) のバージョン・ヒストリーの参照</searchtitle></titlealts><abstract> 
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン (<ph conref="container_conref.dita#links/command_prefix"></ph>) の各バージョンに関連する変更内容を検討します。新規フィーチャーを使用できるように定期的なプラグインの更新を要求されることがあります。</shortdesc> </abstract>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>cli</indexterm><indexterm>Cloud Foundry</indexterm><indexterm>cf</indexterm><indexterm conref="container_conref.dita#links/cli_abbrev"></indexterm><indexterm>バージョン</indexterm><indexterm>リファレンス</indexterm><indexterm>IBM Containers</indexterm></keywords></metadata></prolog>
+<refbody>
+<section><note type="tip">インストールしたバージョンを確認するには、<codeph><ph conref="cs_conref.dita#links/bx"></ph> plugin list</codeph> コマンドを実行します。</note></section>
+<section><table id="version_history">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグインのバージョン・ヒストリー</title>
+<desc>
+<p outputclass="summary"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグインのバージョン・ヒストリー<draft-comment>The most recent row in the table has the id "current" and is
+pulled into the upgrade topic.</draft-comment></p></desc>
+<tgroup cols="3"><colspec colname="col1"></colspec><colspec colname="col2"></colspec><colspec colname="col3"></colspec>
+<thead>
+<row valign="bottom">
+<entry colname="col1">リリース日付</entry>
+<entry colname="col2">バージョン</entry>
+<entry colname="col3">更新</entry></row></thead>
+<tbody>
+<row audience="blue">
+<entry>2017 年 3 月 27 日</entry>
+<entry></entry>
+<entry><ul>
+<li><codeph>cf ic</codeph> コマンドから <ph conref="container_conref.dita#links/command_prefix"></ph> コマンドへのサポートの変更</li></ul></entry></row>
+<row id="current">
+<entry>2016 年 11 月 16 日</entry>
+<entry>0.8.964</entry>
+<entry><ul>
+<li><codeph>--http_monitor_enabled</codeph>、<codeph>--http_monitor_path</codeph>、<codeph>--http_monitor_rs_list</codeph> オプションを使用した、<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> group-create</codeph> コマンドによるコンテナー・グループのヘルス・チェックの管理のサポートが追加されました。</li>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> group-create --session_affinity</codeph> オプションのサポートが追加されました。</li>
+<li>問題点を修正しました。</li></ul></entry></row>
+<row>
+<entry>2016 年 9 月 23 日</entry>
+<entry>0.8.951</entry>
+<entry><ul>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> group-create</codeph> コマンドに <codeph>-- ip</codeph> オプションのサポートを追加しました。このオプションはパブリック浮動 IP アドレスをコンテナー・グループにバインドします。</li>
+<li>問題点を修正しました。</li></ul></entry></row>
+<row>
+<entry>2016 年 8 月 24 日</entry>
+<entry>0.8.934</entry>
+<entry><ul>
+<li>コマンド・オプションが欠落しているか間違っている場合のエラー・メッセージが改善されました。</li>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> info</codeph> に <codeph>--json</codeph> オプションのサポートが追加されました。</li>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> group-create</codeph> コマンドに、アンチアフィニティー (<codeph>--anti</codeph> オプション) のサポートが追加されました。このオプションでは、コンテナー・グループ内のすべてのコンテナー・インスタンスが強制的に別々の物理計算ノードに配置されます。</li></ul></entry></row>
+<row>
+<entry>2016 年 6 月 28 日</entry>
+<entry>0.8.897</entry>
+<entry><ul>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> ips</codeph> および <codeph><ph conref="container_conref.dita#links/command_prefix"></ph> groups</codeph> での <codeph>-q</codeph> オプションのサポートが追加されました。</li>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> groups</codeph> を使用して表示される時刻が、UTC 時間から現地時間に変更されました。</li>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> ip-remove</codeph> を使用して一度に複数の IP アドレスを削除するためのサポートが追加されました。</li>
+<li>問題点を修正しました。</li></ul></entry></row>
+<row>
+<entry>2016 年 5 月 17 日</entry>
+<entry>0.8.889</entry>
+<entry><ul>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph>cp</codeph> のサポートが追加されました。</li>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> login</codeph> および <codeph><ph conref="container_conref.dita#links/command_prefix"></ph> init</codeph> の動作が更新されました。
+証明書が既にシステムに存在する場合、<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> login</codeph> は、既存の証明書を使用します。
+<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> init</codeph> は常に新しい証明書を要求します。
+</li>
+<li>問題点を修正しました。</li></ul></entry></row>
+<row>
+<entry>2016 年 5 月 3 日</entry>
+<entry>0.8.878</entry>
+<entry><ul>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> group-create --env-file</codeph> のサポートの追加</li>
+<li>問題点を修正しました。</li></ul></entry></row>
+<row>
+<entry>2016 年 4 月 15 日</entry>
+<entry>0.8.876</entry>
+<entry><ul>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph>
+reprovision</codeph> と <codeph><ph conref="container_conref.dita#links/command_prefix"></ph>
+unprovision</codeph> のサポートの追加
+</li>
+<li>Docker Compose のボリュームのサポートが追加されました。</li></ul></entry></row>
+<row>
+<entry>2016 年 4 月 8 日</entry>
+<entry>0.8.873</entry>
+<entry><ul>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> volume-fs-create</codeph> の問題点の修正</li></ul></entry></row>
+<row>
+<entry>2016 年 3 月 31 日</entry>
+<entry>0.8.868</entry>
+<entry><ul>
+<li audience="blue">複数のスペースにまたがるボリュームのサポートが追加されました。</li>
+<li>長期実行コマンド用のスピナーが追加されました。</li>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> volumes --table</codeph> のサポートが追加されました。</li>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> wait-status &lt;<varname>container_id</varname>&gt;</codeph> のサポートが追加されました。</li>
+<li>問題点を修正しました。</li></ul></entry></row>
+<row>
+<entry>2016 年 2 月 18 日</entry>
+<entry>0.8.826</entry>
+<entry><ul>
+<li><codeph>rename</codeph> ネイティブ Docker コマンドのサポートが追加されました。</li>
+<li><codeph>docker compose</codeph> のサポートが追加されました。</li></ul></entry></row>
+<row>
+<entry>2016 年 2 月 12 日</entry>
+<entry>0.8.823</entry>
+<entry><ul>
+<li>ボリューム用のファイル・システム・コマンドが追加されました。</li>
+<li>ログイン中に、Docker コマンド使用のための環境変数を設定するオプション 2 の一部として、Docker QuickStart Terminal が追加されました。</li>
+<li>メッセージングが改善されました。</li></ul></entry></row>
+<row>
+<entry>2015 年 11 月 13 日</entry>
+<entry>0.8.788</entry>
+<entry><ul>
+<li><ph conref="container_conref.dita#links/command_prefix"></ph> に再度ログインしなくても <codeph>cf login -a</codeph> を実行して地域を切り替えることが可能です。</li>
+<li><codeph>cf</codeph> トークンを自動的にリフレッシュします。</li>
+<li>メッセージングが改善されました。</li>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> info</codeph> での情報が追加されました。</li>
+<li>問題点を修正しました。</li></ul></entry></row>
+<row>
+<entry>2015 年 10 月 26 日</entry>
+<entry>0.8.763</entry>
+<entry><ul>
+<li>CLI でのビジュアル設計が改善されました。</li>
+<li>ネイティブ Docker コマンド <codeph>exec</codeph>、<codeph>attach</codeph>、<codeph>logs -f</codeph>、
+<codeph>kill</codeph>、<codeph>stats</codeph>、および <codeph>run -it</codeph> のサポートが追加されました。</li>
+<li><codeph>cf login</codeph> を使用して、<ph conref="container_conref.dita#links/command_prefix"></ph> にログインせずに地域を切り替えます。</li></ul></entry></row>
+<row>
+<entry>2015 年 10 月 2 日</entry>
+<entry>0.8.723</entry>
+<entry><ul>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> group-create</codeph> で <codeph>-n</codeph> を使用して名前を指定することは推奨されません。
+</li>
+<li><codeph>rmi</codeph> ネイティブ
+Docker コマンドを使用した tls_key 認証のサポートが追加されました。
+</li></ul></entry></row>
+<row>
+<entry>2015 年 9 月 16 日</entry>
+<entry>0.8.716</entry>
+<entry><ul>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> route-map</codeph> と <codeph><ph conref="container_conref.dita#links/command_prefix"></ph> route-unmap</codeph> のメッセージが更新されました
+</li>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> group-create</codeph> の問題点が修正されました
+</li>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> version</codeph> の表示問題が修正されました。</li></ul></entry></row>
+<row>
+<entry colname="col1">2015 年 9 月 3 日</entry>
+<entry colname="col2">0.8.704</entry>
+<entry colname="col3"><ul>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> inspect images</codeph> の情報が拡張されました。</li>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> cpi</codeph> の問題が修正されました。</li>
+<li>個々のポートを指定する <codeph>-p &lt;port&gt;</codeph> の代わりに使用できる、Dockerfile に指定されたポートをコンテナーで自動的に公開する <codeph><ph conref="container_conref.dita#links/command_prefix"></ph> run -P</codeph> のサポートが追加されました。</li>
+<li>実行中のコンテナーまたは障害が発生したコンテナーを強制的に削除するための <codeph><ph conref="container_conref.dita#links/command_prefix"></ph> group-remove -f</codeph> のサポートが追加されました。
+</li>
+<li>コンテナー・グループ経路のホストとドメインを指定するための <codeph><ph conref="container_conref.dita#links/command_prefix"></ph> group-create [-n|--hostname] [-d|--domain]</codeph> のサポートが追加されました。
+</li>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> group-create</codeph> で指定した複数の環境変数 (<codeph>-e</codeph>、<codeph>--env</codeph>) のうち最初の変数だけが使用されるという問題が修正されました。
+</li>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> version</codeph> と <codeph>docker version</codeph> の実行に、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> API のバージョン情報が含まれるようになりました
+</li></ul></entry></row>
+<row>
+<entry colname="col1">2015 年 7 月 20 日</entry>
+<entry colname="col2">0.8.646</entry>
+<entry colname="col3"><ul>
+<li>使用可能な最新のプラグインのバージョンを、インストール済みのプラグインのバージョンと対比してチェックできるように、<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> update</codeph> コマンドが追加されました。</li>
+<li><codeph>cf</codeph> バージョン検査の Windows 障害が修正されました</li></ul></entry></row>
+<row>
+<entry>2015 年 7 月 17 日</entry>
+<entry>0.8.640</entry>
+<entry><ul>
+<li>コンテナー ID およびイメージ ID のワイルドカード・マッチング<draft-comment author="Kristin">Need to add an
+example of using the first 3 numbers of an ID to run something</draft-comment></li>
+<li><codeph>images</codeph> コマンドで、Open Stack ID の代わりに Docker イメージ ID が表示されます。</li>
+<li> デバッグ・モードが使用可能になりました。</li>
+<li> CF バージョン検査が使用可能になりました。</li>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> info</codeph> のパフォーマンスが改善されました。</li>
+<li><codeph>build</codeph> ネイティブ Docker コマンドのサポートが追加されました。</li>
+<li><codeph>inspect images</codeph> ネイティブ Docker コマンドのサポートが追加されました。</li>
+<li><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> group-create --desired NUMBER</codeph> を使用して、作成するインスタンスの数を設定できます。そうしない場合、<codeph>group-create --max NUMBER</codeph> で指定された数が、作成されるインスタンスの数になります。</li></ul></entry></row></tbody></tgroup></table></section></refbody><?tm 1435623321 0?>
+<reference id="rellinks" audience="unknown">
+<title>関連リンク</title>
+<related-links>
+<linklist id="samples" audience="unknown">
+<title>チュートリアルおよびサンプル</title>
+<link href="container_tutorials.dita" format="dita" scope="local">
+<linktext>チュートリアルとその他のリソース</linktext></link></linklist>
+<linklist id="general">
+<title>関連リンク</title>
+<link href="container_cli_cfic_upgrade.dita" format="dita" scope="local">
+<linktext><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> プラグインの更新</linktext></link>
+<link href="container_cli_reference_cfic.dita" format="dita" scope="local">
+<linktext><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> コマンド</linktext></link>
+<link href="container_cli_reference_native-docker.dita" format="dita" scope="local">
+<linktext>Docker コマンド</linktext></link></linklist></related-links></reference></reference>

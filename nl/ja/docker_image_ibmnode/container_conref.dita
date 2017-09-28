@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dita PUBLIC "-//IBM//DTD DITA IBM Composite//EN" "ibm-ditabase.dtd">
+<dita xml:lang="ja-jp">
+<concept id="container_conref" xml:lang="ja-jp">
+<title>コンテナー用の conref</title>
+<shortdesc></shortdesc>
+<conbody></conbody>
+<concept id="links">
+<title>リンク</title>
+<prolog>
+<metadata>
+<keywords><indexterm id="cli_abbrev">bx ic</indexterm><indexterm conref="container_conref.dita#links/cli_abbrev"></indexterm></keywords></metadata></prolog>
+<conbody>
+<table id="links_table">
+<tgroup cols="2">
+<thead>
+<row>
+<entry>ソース・テキスト</entry>
+<entry>他のトピックにコピーする conref</entry></row></thead>
+<tbody>
+<row>
+<entry><ph id="command_prefix"><codeph>bx ic</codeph></ph></entry>
+<entry><ph conref="container_conref.dita#links/command_prefix"></ph></entry></row>
+<row>
+<entry><ph id="command_prefix_nocodeph">bx ic</ph></entry>
+<entry><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph></entry></row>
+<row>
+<entry>CF IC の非推奨:<note type="other" othertype="CF IC CLI は推奨されていません
+" id="cfic_deprecation" props="status(deprecated)">Cloud Foundry 用の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン (<codeph>cf ic</codeph>) を使用する代わりに、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 用の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグインを使用してください。
+<codeph>cf ic</codeph> CLI は 2018 年 1 月 1 日まで使用を継続できます。
+<p>代わりに <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 用 <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグインの使用を開始するには、以下のトピックを参照してください。
+<ul>
+<li><xref href="https://clis.ng.bluemix.net/ui/home.html" format="html" scope="external">Bluemix CLI のインストール</xref></li>
+<li><xref href="container_cli_cfic_install.html" format="html" scope="peer"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> プラグインのインストール</xref></li>
+<li><xref href="container_cli_reference_cfic.html" format="html" scope="peer"><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> プラグイン・リファレンス</xref></li></ul></p></note></entry>
+<entry><note type="other" othertype="この CLI は推奨されません" conref="container_conref.dita#links/cfic_deprecation" props="status(deprecated)"></note></entry></row>
+<row>
+<entry><note type="restriction" id="available_uk">このフィーチャーは、英国の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 地域でのみ提供されます。</note></entry>
+<entry><note conref="container_conref.dita#links/available_uk"></note></entry></row>
+<row>
+<entry><note type="important" id="group_instances">1 つのコンテナー・グループには、少なくとも 2 つのコンテナー・インスタンスを含める必要があります。
+グループにインスタンスを 1 つしか含めていないと、そのインスタンスが使用不可になった場合に、ユーザーがアプリのダウンタイムを経験する可能性があります。 </note></entry>
+<entry><note conref="container_conref.dita#links/group_instances"></note></entry></row>
+<row>
+<entry><lines id="extra_space"><!--Extra space starts-->    <!--Extra space ends--></lines></entry>
+<entry><lines conref="container_conref.dita#links/extra_space"></lines></entry></row>
+<row>
+<entry><ph id="fs_prereq">新規ファイル共有を作成するには、組織管理者のロールが必要です。
+詳細については、<ph conref="container_conref.dita#links/users_and_roles"></ph>を参照してください。</ph></entry>
+<entry><ph conref="container_conref.dita#links/fs_prereq"></ph></entry></row>
+<row>
+<entry><p id="billing"><ol>
+<li>ユーザー・アバターをクリックします。</li>
+<li><uicontrol>「アカウント」</uicontrol> をクリックします。</li>
+<li><uicontrol>「+」</uicontrol>ボタンをクリックして、組織を展開します。</li>
+<li><uicontrol>「使用状況ダッシュボード」</uicontrol>を選択し、使用状況と請求の詳細を確認します。
+</li></ol><ph>詳細については、<ph conref="container_conref.dita#links/manage_account"></ph>を参照してください。</ph></p></entry>
+<entry><p conref="container_conref.dita#links/billing"></p></entry></row>
+<row>
+<entry>アカウントの管理リンク: <ph id="manage_account"><xref href="../admin/account.html" format="html" scope="peer">アカウントの管理</xref></ph></entry>
+<entry><ph conref="container_conref.dita#links/manage_account"></ph></entry></row>
+<row>
+<entry><ph id="orgs_and_spaces"><xref href="../admin/orgs_spaces.html" format="html" scope="peer">組織とスペース</xref></ph></entry>
+<entry><ph conref="container_conref.dita#links/orgs_and_spaces"></ph></entry></row>
+<row>
+<entry>ユーザーとロールのリンク: <ph id="users_and_roles"><xref href="../iam/users_roles.html" format="html" scope="peer">ユーザーとロール</xref></ph></entry>
+<entry><ph conref="container_conref.dita#links/users_and_roles"></ph></entry></row>
+<row>
+<entry><ph id="managing_your_organization"><xref href="../admin/orgs_spaces.html" format="html" scope="peer">組織の管理</xref></ph></entry>
+<entry><ph conref="container_conref.dita#links/managing_your_organization"></ph></entry></row>
+<row>
+<entry>CLI が必要 (サブディレクトリーでのみ使用):<note type="tip" id="cli_required">このタスクは <xref href="container_cli_cfic_install.dita" format="dita" scope="peer"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI</xref> を必要とします。</note></entry>
+<entry><note conref="container_conref.dita#links/cli_required"></note></entry></row>
+<row>
+<entry><note id="docker_note"><ph id="docker_cmd">* このコマンドでは、<xref href="container_cli_login.dita" format="dita" scope="local"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> にログインして</xref>ネイティブの Docker コマンドを使用するように環境変数を設定すると、<codeph><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph></codeph> を <codeph>docker</codeph> に置き換えることができます。</ph><ph id="further_docker_cmd">このトピックでは、アスタリスク (*) のマークがあるすべてのステップでネイティブの Docker コマンドを使用できます。</ph></note></entry>
+<entry><note conref="container_conref.dita#links/docker_note"></note></entry></row>
+<row>
+<entry>イメージ・トピックに関する注記
+<note id="docker_note_images"><ph>* このコマンドでは、<xref href="../container_cli_login.dita" format="dita" scope="peer"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> にログインして</xref>ネイティブの Docker コマンドを使用するように環境変数を設定すると、<codeph><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph></codeph> を <codeph>docker</codeph> に置き換えることができます。
+</ph><ph>このトピックでは、アスタリスク (*) のマークがあるすべてのステップでネイティブの Docker コマンドを使用できます。
+</ph></note></entry>
+<entry><note conref="container_conref.dita#links/docker_note_images"></note></entry></row>
+<row>
+<entry><note type="attention" id="migrate_note"><ph><ph conref="cs_conref.dita#links/classic">の無料試用版</ph>はありません。<xref href="cs_ov.dita" format="dita" scope="local">クラスター管理について学び、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Public の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の Kubernetes にマイグレーションします。</xref></ph></note></entry>
+<entry><note type="attention" conref="container_conref.dita#links/migrate_note"></note></entry></row></tbody></tgroup></table>
+<table id="version_requirements">
+<title>IBM Containers プラグイン (<ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph>) および Docker Compose のバージョン要件</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry>ソース・テキスト</entry>
+<entry>他のトピックにコピーする conref</entry></row></thead>
+<tbody>
+<row>
+<entry><b>IBM Containers プラグイン</b></entry>
+<entry></entry></row>
+<row>
+<entry><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> がサポートする Docker のバージョン (最後のものが最新バージョン):<p><ph id="cfic_docker_version">Docker バージョン 1.8 から <ph id="cfic_docker_version_number">1.12</ph></ph></p><!--Don't forget to also update the links! This has to be done manually since you can't stick a conref in a href.--><ul id="cfic_docker_downloads">
+<li>OS X<p><xref href="https://github.com/docker/toolbox/releases/download/v1.12.0/DockerToolbox-1.12.0.pkg" format="pkg" scope="external">https://github.com/docker/toolbox/releases/download/v<ph conref="container_conref.dita#links/cfic_docker_version_number"></ph>/DockerToolbox-<ph conref="container_conref.dita#links/cfic_docker_version_number"></ph>.pkg</xref></p></li>
+<li>Windows<p><xref href="https://github.com/docker/toolbox/releases/download/v1.12.0/DockerToolbox-1.12.0.exe" format="exe" scope="external">https://github.com/docker/toolbox/releases/download/v<ph conref="container_conref.dita#links/cfic_docker_version_number"></ph>/DockerToolbox-<ph conref="container_conref.dita#links/cfic_docker_version_number"></ph>.exe</xref></p></li>
+<li>Linux<p>ご使用の Linux ディストリビューションに Docker バージョン <ph conref="container_conref.dita#links/cfic_docker_version_number"></ph> をインストールする方法については、<xref href="https://docs.docker.com/engine/installation/" format="html" scope="external">Docker インストール資料</xref>を参照してください。</p></li></ul></entry>
+<entry><ph conref="container_conref.dita#links/cfic_docker_version"></ph><p><ph conref="container_conref.dita#links/cfic_docker_version_number"></ph></p><p><ul conref="container_conref.dita#links/cfic_docker_downloads">
+<li></li></ul></p></entry></row>
+<row>
+<entry><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> に最低限必要な CF のバージョン<p><ph id="cfic_cf_version">Cloud Foundry CLI バージョン <ph id="cfic_cf_version_number">6.14.0</ph> - 6.22.0</ph></p></entry>
+<entry><ph conref="container_conref.dita#links/cfic_cf_version"></ph><p><ph conref="container_conref.dita#links/cfic_cf_version_number"></ph></p></entry></row>
+<row>
+<entry><b>Docker Compose</b></entry>
+<entry></entry></row>
+<row>
+<entry>提供されている Docker Compose の最新バージョン: <ph id="compose_version_current">1.6.2</ph></entry>
+<entry><ph conref="container_conref.dita#links/compose_version_current"></ph></entry></row>
+<row>
+<entry>最低限必要な Docker Compose バージョン: <ph id="compose_version_start">1.6.0</ph></entry>
+<entry><ph conref="container_conref.dita#links/compose_version_start"></ph></entry></row>
+<row>
+<entry>Compose に必要な Docker のバージョン: <ph id="docker_version_current">1.10.0</ph><!--This version might not match the version that is required for cf ic and that is ok--></entry>
+<entry><ph conref="container_conref.dita#links/docker_version_current"></ph></entry></row>
+<row>
+<entry>Docker Compose に必要な CF のバージョン: <ph id="cf_cli_version_start">6.14.0 - 6.22.0</ph><!--This version might not match the version that is required for cf ic and that is ok--></entry>
+<entry><ph conref="container_conref.dita#links/cf_cli_version_start"></ph></entry></row>
+<row>
+<entry></entry>
+<entry></entry></row></tbody></tgroup></table></conbody></concept>
+<concept id="images">
+<title>イメージ</title>
+<conbody>
+<table id="images_table">
+<tgroup cols="2">
+<thead>
+<row>
+<entry>ソース・イメージ</entry>
+<entry>他のトピックにコピーする conref</entry></row></thead>
+<tbody>
+<row>
+<entry><b>オプション 1: メイン・コンテンツ (トラブルシューティング、モニタリング、ロギング、イメージのトピックではこれを使用しないでください)</b>
+<p><ph id="cli_option1"><xref href="container_cli_cfic_install.html#container_cli_login__option1_li" format="html" scope="external" id="option1">
+<desc id="option1_desc"><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> ログイン</codeph> の実行時に、オプション 1 を選択し、<ph conref="container_conref.dita#links/command_prefix"></ph> コマンドを使用してコンテナーを管理するようにしました。Docker コマンドはローカル・コンテナー開発にのみ使用されます。</desc><image href="images/option1.png" scope="local" alt="BX IC プラグイン構成オプション 1"></image></xref>
+<ph conref="container_conref.dita#links/command_prefix"> </ph> コマンドが含まれている <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン</ph></p><p><b>オプション 2: メイン・コンテンツ (トラブルシューティング、モニタリング、ロギング、イメージのトピックではこれを使用しないでください)</b><ph id="cli_option2"><xref href="container_cli_cfic_install.html#container_cli_login__option2_li" format="html" scope="external" id="option2">
+<desc id="option2_desc"><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> ログイン</codeph> の実行時に、環境変数を構成することによりオプション 2 を選択して、可能な場合は常に docker コマンドを使用してコンテナーを管理するようにしました。<ph conref="container_conref.dita#links/command_prefix"></ph> コマンドは、サポートされる Docker の代替コマンドが存在していない場合にのみ使用されます。</desc><image href="images/option2.png" scope="local" alt="BX IC プラグイン構成オプション 2"></image></xref><codeph>docker</codeph> コマンドが含まれている <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン</ph></p></entry>
+<entry><b>オプション 1: メイン・コンテンツ (トラブルシューティング、モニタリング、ロギング、イメージのトピックではこれを使用しないでください)</b>
+<p><ph conref="container_conref.dita#images/cli_option1"></ph></p><p><b>オプション 2: メイン・コンテンツ (トラブルシューティング、モニタリング、ロギング、イメージのトピックではこれを使用しないでください)</b><ph conref="container_conref.dita#images/cli_option2"></ph>
+</p></entry></row>
+<row>
+<entry><p><b>オプション 1: モニタリング、ロギング、トラブルシューティング、イメージのトピック</b>
+</p><ph id="option1_up"><xref href="container_cli_cfic_install.html#container_cli_login__option1_li" format="html" scope="external">
+<desc conref="container_conref.dita#images/option1_desc"></desc><image href="images/option1.png" scope="external" alt="BX IC プラグイン構成オプション 1"></image></xref>
+<ph conref="container_conref.dita#links/command_prefix"> </ph> コマンドが含まれている <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン</ph><p><b>オプション 2: モニタリング、ロギング、トラブルシューティング、イメージのトピック</b><ph id="option2_up"><xref href="container_cli_cfic_install.html#container_cli_login__option2_li" format="html" scope="external">
+<desc conref="container_conref.dita#images/option2_desc"></desc><image href="images/option2.png" scope="external" alt="BX IC プラグイン構成オプション 2"></image></xref>
+<codeph>docker</codeph> コマンドが含まれている <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン</ph></p></entry>
+<entry><p><b>オプション 1: モニタリング、ロギング、トラブルシューティング、イメージのトピック</b><ph conref="container_conref.dita#images/option1_up"></ph>
+</p>
+<p><b>オプション 2: モニタリング、ロギング、トラブルシューティング、イメージのトピック</b><ph conref="container_conref.dita#images/option2_up"></ph>
+</p></entry></row>
+<row>
+<entry><b>オプション 1 と 2 の組み合わせ: メイン・コンテンツ (トラブルシューティング、モニタリング、ロギング、イメージのトピックではこれを使用しないでください)</b><ph id="cli_option1_option2"><xref href="container_cli_cfic_install.html#container_cli_login__option1_li" format="html" scope="external">
+<desc><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> ログイン</codeph>の実行時に、オプション 1 を選択し、<ph conref="container_conref.dita#links/command_prefix"></ph> コマンドを使用してコンテナーを管理するようにしました。Docker コマンドはローカル・コンテナー開発にのみ使用されます。</desc><image href="images/option1.png" scope="local" alt="BX IC プラグイン構成オプション 1"></image></xref>
+<xref href="container_cli_login.dita#container_cli_login/option2_li" format="dita" scope="peer">
+<desc><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> ログイン</codeph> の実行時に、環境変数を構成することによりオプション 2 を選択して、可能な場合は常に docker コマンドを使用してコンテナーを管理するようにしました。<ph conref="container_conref.dita#links/command_prefix"></ph> コマンドは、サポートされる Docker の代替コマンドが存在していない場合にのみ使用されます。</desc><image href="images/option2.png" scope="local" alt="BX IC プラグイン構成オプション 2"></image></xref>
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン</ph></entry>
+<entry><b>オプション 1 と 2 の組み合わせ: メイン・コンテンツ (トラブルシューティング、モニタリング、ロギング、イメージのトピックではこれを使用しないでください)</b><ph conref="container_conref.dita#images/cli_option1_option2"></ph>
+</entry></row>
+<row>
+<entry><b>オプション 1 と 2 の組み合わせ: モニタリング、ロギング、トラブルシューティング、イメージのトピック</b><p><ph id="cli_option1_option2_up"><xref href="container_cli_cfic_install.html#container_cli_login__option1_li" format="html" scope="external">
+<desc><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> ログイン</codeph> の実行時に、オプション 1 を選択し、<ph conref="container_conref.dita#links/command_prefix"></ph> コマンドを使用してコンテナーを管理するようにしました。Docker コマンドはローカル・コンテナー開発にのみ使用されます。</desc><image href="images/option1.png" scope="external" alt="BX IC プラグイン構成オプション 1"></image></xref>
+<xref href="container_cli_cfic_install.html#container_cli_login__option2_li" format="html" scope="external">
+<desc><codeph><ph conref="container_conref.dita#links/command_prefix"></ph> ログイン</codeph> の実行時に、環境変数を構成することによりオプション 2 を選択して、可能な場合は常に docker コマンドを使用してコンテナーを管理するようにしました。<ph conref="container_conref.dita#links/command_prefix"></ph> コマンドは、サポートされる Docker の代替コマンドが存在していない場合にのみ使用されます。</desc><image href="images/option2.png" scope="external" alt="BX IC プラグイン構成オプション 2"></image></xref>
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン</ph></p></entry>
+<entry><b>オプション 1 と 2 の組み合わせ: モニタリング、ロギング、トラブルシューティング、イメージのトピック</b><ph conref="container_conref.dita#images/cli_option1_option2_up"></ph></entry></row>
+<row>
+<entry><ph id="more_info"><image href="images/idea.png" alt="このアイコンは、このタスクのステップの詳細情報があることを示しています。"></image></ph></entry>
+<entry><ph conref="container_conref.dita#images/more_info"></ph></entry></row>
+<row>
+<entry><b>フルサイズで表示される画像への外部リンク</b><ph id="image_full_size"><xref href="/../../api/content/containers/images/container_compose_ov.png" format="png" scope="external"><image href="images/container_compose_ov.png" scope="local" width="700" placement="break"></image></xref></ph></entry>
+<entry><b>フルサイズで表示される画像への外部リンク</b><ph conref="container_conref.dita#images/image_full_size"></ph></entry></row></tbody></tgroup></table></conbody></concept>
+<concept id="terms">
+<title>用語の定義</title>
+<conbody>
+<dl>
+<dlentry>
+<dt>アンチアフィニティー</dt>
+<dd><ph id="antiaffinity_definition">アンチアフィニティーを有効にすると、コンテナー・インスタンスが別々の物理計算ノードに分散されるので、ハードウェア障害のためにコンテナーが異常終了する可能性が小さくなります。
+</ph></dd></dlentry>
+<dlentry>
+<dt>自動リカバリー</dt>
+<dd><ph id="autorecovery_definition">コンテナー・グループで自動リカバリーが有効になり、そのグループが 10 分間実行すると、そのグループのロード・バランサーは HTTP 要求を介して、グループ内の各コンテナー・インスタンスの正常性に関する定期的な検査を開始します。
+コンテナー・インスタンスが 100 秒以内に応答しない場合、それは非アクティブとしてマークされます。
+非アクティブなコンテナー・インスタンスはグループから削除されて、自動リカバリーにより再作成されます。
+自動リカバリーでは、グループ内にコンテナー・インスタンスをリカバリーする試行を 3 回行います。
+3 回目の試行の後、そのグループでは、自動リカバリーによるコンテナー・インスタンスのリカバリーが 60 分間行われなくなります。
+60 分後に、自動リカバリーのプロセスが再開します。</ph></dd></dlentry>
+<dlentry>
+<dt><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アベイラビリティー・ゾーン</dt>
+<dd><ph id="az_definition"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アベイラビリティー・ゾーンとは、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> が稼働する地域内の場所のことです。<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペース内で <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> が初めて使用されるとき、その地域のデフォルトの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アベイラビリティー・ゾーンにコンテナーが作成されます。
+</ph></dd>
+<dd><table id="table_azs">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アベイラビリティー・ゾーン</title>
+<desc>
+<p outputclass="summary"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アベイラビリティー・ゾーン</p></desc>
+<tgroup cols="3">
+<thead>
+<row>
+<entry>地域</entry>
+<entry>データ・センターの場所</entry>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> アベイラビリティー・ゾーンの名前</entry></row></thead>
+<tbody>
+<row>
+<entry>米国南部</entry>
+<entry>Dallas 1 (ダラス 1)</entry>
+<entry>dal09-01<!--prod-dal09-kraken1--></entry></row>
+<row>
+<entry>米国南部</entry>
+<entry>Dallas 2 (ダラス 2)</entry>
+<entry>dal09-02<!--prod-dal09p03-kraken2--></entry></row>
+<row>
+<entry>米国南部</entry>
+<entry>Dallas 3 (ダラス 3)</entry>
+<entry>dal10-03</entry></row>
+<row>
+<entry>英国</entry>
+<entry>London (ロンドン)</entry>
+<entry>lon02-01<!--prod-lon02-kraken1--></entry></row>
+<row>
+<entry>英国</entry>
+<entry>Amsterdam (アムステルダム)</entry>
+<entry>ams03-01<!--prod-ams03p1-kraken2--></entry></row>
+<row audience="blue">
+<entry>シドニー</entry>
+<entry></entry>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword><draft-comment>This row displays in staging only</draft-comment>ではサポートされない</entry></row></tbody></tgroup></table></dd></dlentry>
+<dlentry>
+<dt>Bluemix サービス</dt>
+<dd><ph id="bmx_service_definition"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> には、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でアプリに追加機能を組み込んだりアプリの実装やコンテナーの管理を簡単にしたりするために使用できる、さまざまなサービスが用意されています。</ph></dd></dlentry>
+<dlentry>
+<dt>コンテナー</dt>
+<dd><ph id="container_definition">コンテナーは、アプリが実行のために必要とするすべてのエレメントを含む仮想ソフトウェア・オブジェクトです。</ph><draft-comment>Glossary definition: 
+<p>A system construct
+that allows users to simultaneously run separate logical operating system instances. Containers use
+layers of file systems to minimize image sizes and promote reuse. See also <xref href="https://console.stage1.ng.bluemix.net/docs/overview/glossary/index.html#x2024928" format="html" scope="external">image</xref>, <xref href="https://console.stage1.ng.bluemix.net/docs/overview/glossary/index.html#x2028320" format="html" scope="external">layer</xref>, <xref href="https://console.stage1.ng.bluemix.net/docs/overview/glossary/index.html#x2064940" format="html" scope="external">registry</xref>.</p></draft-comment></dd></dlentry>
+<dlentry>
+<dt>コンテナー・グループ</dt>
+<dd><ph id="group_definition">1 つのコンテナー・グループには、同じイメージを実行する複数のコンテナーが含まれます。
+コンテナー・グループは、拡張容易性や信頼性が必要なワークロードを長時間実行するサービスを提供する場合や、必要なスケールでテストを行う場合に使用します。</ph>
+</dd></dlentry>
+<dlentry>
+<dt>コンテナー・グループのインスタンス</dt>
+<dd><ph id="instances_intro">アプリに必要なコンテナー・グループのインスタンス数は、予想されるワークロードや、アプリが要求を処理できる時間によって異なります。
+例えば、マルチタスキングやネットワーク接続によって、アプリに必要なインスタンス数は左右されます。</ph><p><ph id="instances_determine">必要なインスタンス数を決定するには、アプリを実行するコンテナーを 1 つ Bluemix にデプロイし、そのコンテナーで負荷テストを実行します。
+例えば、アプリで処理できる要求が 1 秒あたり 100 個であるのに対し、予想される平均ワークロードが 1 秒あたり 300 個だとすると、コンテナー・グループに必要なインスタンス数は 3 になります。</ph></p><p><ph id="instances_ha">コンテナー・グループの可用性と耐障害性を高めるために、予想されるワークロードを処理する最低限の数のインスタンスではなく余分にインスタンスを組み込むことを検討してください。
+インスタンスを余分に組み込んでおくことで、さらに別のインスタンスが異常終了した場合でもワークロードを処理できます。
+障害が起きたインスタンスをワークロードに影響を与えずに自動復旧するには、1 つ余分にインスタンスを組み込みます。
+2 つが同時に障害を発生した場合に対応できるようにするには、2 つ余分にインスタンスを組み込みます。このセットアップは <varname>N+2</varname> パターンです。
+<varname>N</varname> は要求を処理するインスタンスの数、<varname>+2</varname> は追加の 2 つのインスタンスです。</ph></p></dd></dlentry>
+<dlentry>
+<dt>Docker</dt>
+<dd><ph id="docker_definition">Docker は、コンテナー形式でのアプリのデプロイを可能にするオープン・ソース・プロジェクトです。</ph></dd></dlentry>
+<dlentry>
+<dt>Docker Compose</dt>
+<dd><ph id="compose_definition">アプリによっては、データベースとサービスとキャッシュ、というように、それぞれ固有のコンテナーで実行する必要がある複数のコンポーネントから構成されるものがあります。
+すべてのコンテナーを同時に始動、リンク、シャットダウンさせるための調整作業は非常に難しいことがありますが、Docker Compose を使用してマルチコンテナー・デプロイメントを構成すれば、コマンド 1 つでそのアプリを実行できます。Docker Compose は、それぞれに固有のイメージおよび構成をベースとする単一コンテナー・インスタンスの集まりと見なすことができます。</ph></dd></dlentry>
+<dlentry>
+<dt>Dockerfile</dt>
+<dd><ph id="dockerfile_definition">Dockerfile は、コンテナーの基礎である Docker イメージをビルドするための指定を含むファイルです。</ph></dd></dlentry>
+<dlentry>
+<dt>ファイル共有</dt>
+<dd><ph id="fileshare_definition">ファイル共有とは、NFS (ネットワーク・ファイル・システム) ベースの永続的なストレージ・システムであり、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースに Docker ボリュームをホストし、ユーザーがコンテナーおよびアプリ関連ファイルを保管して利用できるようにします。
+ファイル共有の中にファイルを保管するには、コンテナー・ボリュームを作成し、そのボリュームにデータを保存する必要があります。</ph>
+<p><ph id="fileshare_default">スペースに最初のボリュームを作成するとすぐに、4 IOPS (IOPS: 1 秒あたりの入出力操作) の 20 GB のデフォルトのファイル共有が無料で作成されます。
+ボリュームのサイズとファイル共有のサイズは比例します。
+ボリュームを追加すると、各ボリュームに等量のファイル共有ストレージが割り当てられます。</ph></p><p><ph id="fileshare_sizes">組織管理者は、スペースのストレージのニーズに合わせて、特定のストレージ・サイズおよび IOPS を指定してファイル共有を作成することができます。
+ファイル共有をプロビジョンするときには、サイズは 20 GB から 12 TB まで、1 GB あたりの IOPS は、0.25、2 または 4 を指定できます。ファイル共有サイズと IOPS 数値の比が、コンテナー・ボリュームとの間のデータの読み取り/書き込み速度に影響を与えます。</ph></p></dd></dlentry>
+<dlentry>
+<dt>イメージ</dt>
+<dd><ph id="image_definition" otherprops="registry_check">コンテナー・イメージとは、作成するすべてのコンテナーの基本です。
+イメージは、Dockerfile (イメージをビルドするための指示が入ったファイル) と、ビルド成果物 (アプリ、アプリの構成、およびその従属関係) から作成されます。
+コンテナー・イメージは、実行可能ファイル (<filepath>.exe</filepath> または <filepath>.bin</filepath>) と見なすことができます。実行可能アプリ・ファイルを実行すると、すぐにアプリのインスタンスが作成されます。
+コンテナーを実行するときには、イメージからコンテナー・インスタンスを作成します。
+</ph><p><ph id="image_storage" otherprops="registry_check">コンテナー・イメージは、プライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリーに保管され、CLI からのみ追加できます。コンテナー・イメージからコンテナーを作成するためには、その前に、使用したいコンテナー・イメージをすべてレジストリーに置いておく必要があります。</ph></p><p><!--&lt;ph otherprops="registry_check" id="image_storage" audience="unknown"&gt;Container images are stored and managed in &lt;keyword conref="cloudoeconrefs.dita#cloudoeconrefs/registrylong"/&gt;. Every container image that you want to use must be in &lt;keyword conref="cloudoeconrefs.dita#cloudoeconrefs/registrylong"/&gt; before you can create a container from it. &lt;/ph&gt;--></p><p><ph id="image_limit">プライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリーには 25 個までのイメージを入れることができます。<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> はデフォルトでいくつかのイメージを提供し、それらは 25 個のうちには計上されません。</ph></p><draft-comment>
+<p>A complete runtime that can be used to run applications. Images are used to create containers and
+can contain multiple parent images (layers). See also <xref href="https://console.stage1.ng.bluemix.net/docs/overview/glossary/index.html#x5366487" format="html" scope="external">base image</xref>, <xref href="https://console.stage1.ng.bluemix.net/docs/overview/glossary/index.html#x2010901" format="html" scope="external">container</xref>, <xref href="https://console.stage1.ng.bluemix.net/docs/overview/glossary/index.html#x2028320" format="html" scope="external">layer</xref>, <xref href="https://console.stage1.ng.bluemix.net/docs/overview/glossary/index.html#x2031005" format="html" scope="external">namespace</xref>, <xref href="https://console.stage1.ng.bluemix.net/docs/overview/glossary/index.html#x8439210" format="html" scope="external">parent image</xref>, <xref href="https://console.stage1.ng.bluemix.net/docs/overview/glossary/index.html#x8439215" format="html" scope="external">private image registry</xref>, <xref href="https://console.stage1.ng.bluemix.net/docs/overview/glossary/index.html#x2064940" format="html" scope="external">registry</xref>.</p></draft-comment></dd></dlentry>
+<dlentry>
+<dt>ロード・バランサー</dt>
+<dd><ph id="loadbalancer_definition">コンテナー・グループには、着信トラフィックをグループ内のコンテナー・インスタンスに均等に転送するための組み込みのロード・バランシング機能があります。</ph></dd></dlentry>
+<dlentry>
+<dt>マルチコンテナー・デプロイメント</dt>
+<dd><ph id="multicontainerapp_definition">アプリによっては、データベースとサービスとキャッシュ、というように、それぞれ固有のコンテナーで実行する必要がある複数のコンポーネントから構成されるものがあります。
+すべてのコンテナーを同時に始動、リンク、シャットダウンさせるための調整作業は非常に難しいことがありますが、Docker Compose を使用してマルチコンテナー・デプロイメントを構成すれば、コマンド 1 つでそのアプリを実行できます。</ph></dd></dlentry>
+<dlentry>
+<dt>名前空間</dt>
+<dd><ph id="namespace_definition">名前空間とは、お客様の組織のプライベート Docker イメージ・レジストリーを識別するための固有の名前です。このレジストリーには、Docker イメージを保管し、イメージのバージョンを維持できます。</ph><p><ph id="namespace_definition_long" otherprops="registry_check"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のプライベート・イメージを保管および管理するには、すべての組織が、その組織用のプライベート Dockerイメージ・レジストリーを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 内にセットアップする必要があります。このプライベート・レジストリーの名前を<term>名前空間</term> と呼びます。これは、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 内で固有でなければなりません。</ph></p><p><!--&lt;ph audience="blue" id="namespace_definition_long"&gt;When logging in to &lt;keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"/&gt; for the first time, every organization is required to set up its own private Docker images registry in &lt;keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"/&gt;. This name of the private registry is called a namespace and must be unique within &lt;keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"/&gt;.&lt;/ph&gt;--></p><p><ph id="namespace_purpose">名前空間を使用して、プライベート・イメージ・レジストリーの固有の URL が生成されます。したがって、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリー URL に名前空間が付加されて、<filepath>registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>namespace</varname></filepath> のようになります。
+CLI からイメージを操作するときには、常に、プライベート・レジストリーの完全な URL を入力する必要があります。<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を複数の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 領域で使用する場合、
+すべての領域で名前空間をセットアップする必要があります。
+</ph></p><p><ul id="namespace_rules" otherprops="registry_check">
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> では、名前空間は固有でなければなりません。</li>
+<li>名前空間の長さは 4 文字以上 30 文字以下です。
+</li>
+<li>名前空間の先頭は文字または数字 (1 つ以上) でなければなりません。</li>
+<li>名前空間で使用できるのは英小文字、数字、下線文字 (_) のみです。</li></ul></p><p><ph id="namespace_get"><codeph><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> namespace-get</codeph> を実行して名前空間を取得し、<varname>&lt;my_namespace&gt;</varname> をその名前空間情報に置き換えます。</ph></p></dd></dlentry>
+<dlentry>
+<dt>ポート</dt>
+<dd><ph id="port_definition">コンテナーにポートを組み込むと、コンテナーが HTTP トラフィックに公開されます。
+ポートを指定すると、同じ <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペース内にあってホストにアクセスしようとする、
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Load Balancer またはコンテナーに対してアプリが使用可能になります。<draft-comment>Is this still true? Shouldn't the private IP address do
+that?</draft-comment></ph></dd></dlentry>
+<dlentry>
+<dt>プライベート・イメージ・レジストリー</dt>
+<dd><ph id="private_registry_definition">組織の Bluemix レジストリーにその名前空間をつなげたもの。
+コマンドでイメージを指定するときには、プライベート・イメージ・レジストリーを使用します。</ph><p><!--&lt;ph audience="unknown" id="private_registry_definition"&gt;Your personal namespace used to store your private images in &lt;keyword conref="cloudoeconrefs.dita#cloudoeconrefs/registrylong"/&gt;.&lt;/ph&gt;--></p></dd></dlentry>
+<dlentry>
+<dt>プライベート・ネットワーク</dt>
+<dd><ph id="private_network_definition">コンテナーのプライベート・ネットワークによって、1 つのスペースの中で実行される複数の単一コンテナーやコンテナー・グループに対して個々に安全な環境が作成されます。
+同じプライベート・ネットワークに接続された各コンテナーは、プライベート IP アドレスを使用して、そのプライベート・ネットワーク内の他のコンテナーとの間でデータを送受信できます。パブリック・ポートと、単一コンテナー用のパブリック IP アドレスまたはコンテナー・グループ用のパブリック経路のいずれかがバインドされるまで、コンテナーをパブリックに使用することはできません。</ph>
+<p><ph id="private_network_default"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> では、すべてのスペースに、
+デフォルトの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> ネットワーク設定を適用したコンテナー・プライベート・ネットワークが既に用意されています。
+この設定には、プライベート IP アドレスを使用してコンテナーおよびコンテナー・グループ間でのプライベート・ネットワーク通信を可能にするデフォルトのプライベート・ネットワーク・セキュリティー・グループの自動設定も含まれます。コンテナーまたはコンテナー・グループをスペースに作成すると、デフォルトの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プライベート・ネットワークに自動的に接続され、サブネット 172.31.0.0/16 からプライベート IP アドレスが割り当てられます。プライベート IP アドレスが割り当てられると、同じネットワーク内のすべてのコンテナーが単一のコンテナーのプライベート IP アドレスを使用して、またはコンテナー・グループを使用している場合はグループのロード・バランサーのプライベート IP アドレスを使用して、すべてのコンテナー・ポートでセキュアに通信できるようになります。コンテナー・ポートをホスト・ポートにマッピングする必要はありません。</ph></p></dd></dlentry>
+<dlentry>
+<dt>パブリック・ネットワーク</dt>
+<dd><ph id="public_network_definition">デフォルトでは、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 内のあらゆる単一コンテナーおよびコンテナー・グループがプライベート・ネットワークから使用可能です。
+しかし、アプリをインターネットからアクセスできるようにしたり、組織の他のスペースのコンテナーにアクセスしたりしたい場合があります。
+そのような場合、コンテナーを公開する必要があります。</ph></dd></dlentry>
+<dlentry>
+<dt>割り当て量</dt>
+<dd><ph id="quota_definition"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のどの組織も、コンテナー・メモリー、パブリック IP アドレス、ファイル共有、組織内のすべてのスペースで共有するサービスの数として、値が事前設定されています。これらの事前設定値を、割り当て量と呼びます。</ph></dd></dlentry>
+<dlentry>
+<dt>レジストリー</dt>
+<dd><draft-comment>Haven't seen this used in the docs... can we delete it?</draft-comment><ph id="registry_definition" otherprops="registry_check">イメージの集合。</ph></dd></dlentry>
+<dlentry>
+<dt>単一コンテナー</dt>
+<dd><ph id="single_definition">単一コンテナーは、アプリやサービスの開発時に単純なテストを実行するために、または高可用性を必要としない短期間のプロセスのために使用します。独自のネットワーキング・フロントエンドを使用するために、パブリック IP アドレスをコンテナーに割り当てることができます。</ph><p><ph id="single_definition_long"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の単一コンテナーは、ローカル Docker 環境で作成するコンテナーと似ています。
+単一コンテナーは、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を手始めに使用して、IBM Cloud でのコンテナーの動作や <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> が提供する機能を学習するための良い手段になります。簡単なアプリ・テストの実行やアプリの開発プロセスにおいて、単一コンテナーを使用することもできます。単一のコンテナーは再始動されることがあり、長期実行プログラムをホストすることは想定されていないので、高可用性が必要なアプリケーションにはコンテナー・グループを使用する必要があります。</ph></p></dd></dlentry>
+<dlentry>
+<dt>仮想プライベート・ネットワーク</dt>
+<dd>IBM® Virtual Private Network (VPN) サービスを使用して、<ph id="vpn_definition"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> のプライベート・コンテナー・ネットワーク内の単一コンテナーとコンテナー・グループを、
+企業のデータ・センターにセキュアに接続できます。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/vpn_short"></keyword> は、業界標準の Internet Protocol Security (IPsec) プロトコル・スイートに基づき、インターネット上にセキュアなエンドツーエンドの通信チャネルを確立します。
+IPsec プロトコルは、VPN エンドポイント間で交換されるパッケージを暗号化して、ネットワーク・レベルのピア認証、データ保全性、およびデータ機密性を提供します。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 内のコンテナーと企業のデータ・センターの間にセキュアな接続をセットアップするためには、お客様のオンプレミスのデータ・センターに IPsec VPN ゲートウェイまたは SoftLayer サーバーを設置する必要があります。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/vpn_short"></keyword> サービスを使用して、VPN ゲートウェイを 1 スペースにつき 1 つ構成し、異なる宛先への接続を最大で 16 個定義することができます。</ph>
+</dd></dlentry>
+<dlentry>
+<dt>ボリューム</dt>
+<dd><ph id="volume_definition">ボリュームとは、アプリが作成するデータ、またはアプリを実行するために必要なファイルを永続的に保管する場所です。
+</ph></dd></dlentry></dl></conbody></concept>
+<concept id="variables">
+<title>変数</title>
+<conbody><!--This is not a conref table. It's a shortcut for the dynamic variables we can use for Domain, AppDomain name, etc. For more context and a full list, see: https://releaseblueprints.ibm.com/display/CLOUDOE/Coding+content+for+dynamic+code+snippets-->
+<table id="bluemix_variables">
+<tgroup cols="1">
+<tbody>
+<row>
+<entry><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword></entry></row>
+<row>
+<entry><keyword id="domainname" props="keyref(DomainName)">&lt;DomainName&gt;</keyword></entry></row>
+<row>
+<entry><keyword id="Appdomainname" props="keyref(APPDomain)">&lt;AppDomainName&gt;</keyword></entry></row>
+<row>
+<entry><varname props="keyref(DomainName)">&lt;DomainName&gt;</varname></entry></row>
+<row>
+<entry><varname props="keyref(org_name)">&lt;your organization name&gt;</varname></entry></row>
+<row>
+<entry><varname props="keyref(user_ID)">&lt;your user ID&gt;</varname></entry></row>
+<row>
+<entry><varname props="keyref(space_name)">&lt;your space name&gt;</varname></entry></row></tbody></tgroup></table></conbody></concept>
+<concept id="bluemix_nav">
+<title>Bluemix ナビゲーション・ストリング</title>
+<conbody>
+<table id="table_bluemix_nav">
+<tgroup cols="2">
+<thead>
+<row>
+<entry>ソース・テキスト</entry>
+<entry>他のトピックにコピーする conref</entry></row></thead>
+<tbody>
+<row><!---->
+<entry><!--Choosing an image--><p><ph id="choose_image" otherprops="registry_check">カタログから、<uicontrol>「コンテナー」</uicontrol>を選択し、イメージを選択します。</ph></p><!--Choosing an image: Registry Service-->
+<p><!--&lt;ph otherprops="registry_check" audience="unknown" id="choose_image"&gt;Choose an image from &lt;keyword conref="cloudoeconrefs.dita#cloudoeconrefs/registrylong"/&gt;.&lt;/ph&gt;--></p></entry>
+<entry><ph conref="container_conref.dita#bluemix_nav/choose_image"></ph></entry></row>
+<row>
+<entry><!--Navigating to quota (2 phrases)--><ph id="view_quota_1">「組織の管理」でアカウントの詳細から組織を選択します。</ph><ph id="view_quota_2">割り当て量セクションに、コンテナーの詳細が表示されます。</ph></entry>
+<entry><ph conref="container_conref.dita#bluemix_nav/view_quota_1"></ph>
+<ph conref="container_conref.dita#bluemix_nav/view_quota_2"></ph></entry></row>
+<row>
+<entry><!--Creating a file share (3rd phrase, used after the above row --><ph id="create_fileshare">ファイル共有を作成します。行がテーブルの末尾に作成されます。</ph></entry>
+<entry><ph conref="container_conref.dita#bluemix_nav/create_fileshare"></ph></entry></row></tbody></tgroup></table></conbody></concept>
+<task id="sso">
+<title>シングル・サインオン・パラメーター</title>
+<taskbody>
+<steps>
+<step>
+<cmd>Phrase conref for SSO</cmd>
+<info><ph id="sso">フェデレーテッド ID を使用してログインする場合は、シングル・サインオン・パラメーター <option>--sso</option> が必要です。このオプションを使用する場合は、<xref href="https://login.ng.bluemix.net/UAALoginServerWAR/passcode" format="html" scope="external">https://login.ng.bluemix.net/UAALoginServerWAR/passcode</xref> を開いて、ワンタイム・パスコードを取得します。
+<option>--sso</option> オプションを含めない場合は、以下のサブステップを実行します。</ph></info></step>
+<step>
+<cmd>Substeps for no SSO</cmd><substeps id="no_sso">
+<substep>
+<cmd><uicontrol>「E メール」</uicontrol>に、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> の <tm trademark="IBM" tmtype="reg">IBM</tm> ID を入力します。</cmd></substep>
+<substep>
+<cmd><uicontrol>「パスワード」</uicontrol>に、<tm trademark="IBM" tmtype="reg">IBM</tm> ID のパスワードを入力します。</cmd>
+<info><tm trademark="Bluemix" tmtype="tm">Bluemix</tm> の組織とスペースが取得されました。</info></substep>
+<substep>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 組織の 1 つを表す数値を入力します。</cmd></substep>
+<substep>
+<cmd>既存の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースの 1 つを表す数値を入力します。</cmd></substep></substeps></step></steps></taskbody></task>
+<concept id="rellinks">
+<title>関連リンク</title>
+<related-links>
+<linklist id="api">
+<title>API リファレンス</title>
+<link href="http://ccsapi-doc.mybluemix.net/" format="html" scope="external">
+<linktext><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> REST API</linktext></link>
+<link href="https://apidocs.cloudfoundry.org/222/" format="html" scope="external">
+<linktext>Cloud Foundry REST API</linktext></link>
+<link href="https://autoscaling-gb.edge.bluemix.net/v1/policies/docs" format="html" scope="external">
+<linktext>自動スケーリング・ポリシー REST API</linktext></link>
+<link href="https://autoscaling-gb.edge.bluemix.net/v1/events/docs" format="html" scope="external">
+<linktext>自動スケーリング履歴 REST API</linktext></link></linklist>
+<linklist id="commands">
+<title>関連リンク</title>
+<link href="https://docs.cloudfoundry.org/devguide/cf-cli/getting-started.html" format="html" scope="external">
+<linktext>cf コマンド</linktext></link>
+<link href="container_cli_reference_cfic.dita" format="dita" scope="local">
+<linktext><ph conref="container_conref.dita#links/command_prefix"></ph> コマンド</linktext></link>
+<link href="container_cli_reference_native-docker.dita" format="dita" scope="local">
+<linktext>Docker コマンド</linktext></link>
+<link href="https://www.docker.com/support" format="html" scope="external">
+<linktext>Docker サポート</linktext></link><!--&lt;link audience="unknown" otherprops="registry_check" href="http://console.bluemix.net/doc/registry"/&gt;--></linklist></related-links></concept></concept></dita>

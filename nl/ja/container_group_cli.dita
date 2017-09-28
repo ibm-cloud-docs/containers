@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="container_group_cli" xml:lang="ja-jp">
+<title>コマンド・ライン・インターフェース (CLI) を使用して長期サービスをコンテナー・グループとして実行する</title>
+<titlealts>
+<navtitle>CLI を使用した実行</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のコマンド・ライン・インターフェース (CLI) を使用して長期サービスをコンテナー・グループとして実行する
+</searchtitle></titlealts>
+<shortdesc>スケーラブル・コンテナー・グループを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI から作成およびデプロイします。<ph conref="container_conref.dita#terms/group_definition"></ph></shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー</indexterm><indexterm>コンテナー・グループ</indexterm><indexterm>cli</indexterm><indexterm conref="container_conref.dita#links/cli_abbrev"></indexterm><indexterm>group-create</indexterm><indexterm>IBM Containers</indexterm></keywords></metadata></prolog>
+<taskbody>
+<prereq><p id="prereq">始める前に、以下の手順を検討してください。<ul>
+<li conref="container_single_ui.dita#gui/role"></li>
+<li conref="container_single_cli.dita#container_single_cli/identify_images"></li>
+<li conref="container_single_ui.dita#gui/bind_service"></li>
+<li conref="container_single_cli.dita#container_single_cli/create_shared_volume" importance="optional"></li></ul></p></prereq>
+<context></context>
+<steps>
+<stepsection>スケーラブル・コンテナー・グループを作成します。</stepsection>
+<step>
+<cmd>以下のいずれかの <codeph>group-create</codeph> コマンドを実行して、組織のプライベート・イメージ・レジストリー内にある既存イメージを基にコンテナー・グループを作成します。
+</cmd>
+<info>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-create --anti --auto --desired <varname>&lt;instances&gt;</varname> -e "LOG_LOCATIONS=<varname>&lt;file_path&gt;</varname>" -m <varname>&lt;size&gt;</varname> --name <varname>&lt;name&gt;</varname> -p <varname>&lt;public_port&gt;</varname> -n <varname>&lt;hostname&gt;</varname> -d <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword> --volume <varname>&lt;volume_name&gt;:&lt;mount_path&gt;</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>&lt;namespace&gt;</varname>/<varname>&lt;image_name_or_id&gt;</varname></codeblock>例<p>次の例では、<uicontrol>ibmliberty</uicontrol> イメージから、<varname>my_group</varname> という名前の 3 つのインスタンスを含むコンテナー・グループを作成します。
+アプリの可用性が向上するようにグループのアンチアフィニティーと自動リカバリーの機能を有効にします。
+インターネットからグループにアクセスするために、パブリック・ポート 9080 を公開し、経路 <filepath>myhost.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword></filepath> をグループにマップします。
+コンテナー・データを永続化するためにボリューム <varname>myvol</varname> をグループにマウントし、標準 Ubuntu ログ・ファイルをカスタム・ログ・ファイルのロケーションとして追加します。
+カスタム・ログ・ファイルのロケーションにあるログは、グループの作成後に Kibana で表示できます。
+</p>
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-create --anti --auto --desired 3 -e <q>LOG_LOCATIONS=/var/log/dpkg.log</q> -m 64 --name my_group -p 9080 -n <varname>myhost</varname> -d <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/Appdomainname"></keyword> --volume myvol:/var/tmp registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/ibmliberty</codeblock>
+コンテナー・グループは、作成されると開始します。コンテナー・グループの ID が表示される場合、コンテナー・グループはデプロイされています。</info></step>
+<step importance="optional">
+<cmd>実行中のコンテナー・グループをリストします。</cmd>
+<info>
+<codeblock><ph conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/group_list_cmdname"></ph> </codeblock>
+
+<p conref="container_group_ui.dita#container_group_ui/wait"></p></info></step></steps>
+<postreq><p conref="container_group_ui.dita#container_group_ui/ha_setup"></p>
+<p>コンテナー・グループが作成された後、コンテナー・グループ内で実行されるインスタンスの数を増減させたり、環境変数をさらに追加したりすることができます。
+詳しくは、<xref href="container_cli_reference_cfic.dita#container_cli_reference_cfic/group_update"><codeph><ph conref="container_conref.dita#links/command_prefix_nocodeph"></ph> group-update</codeph></xref> コマンドを参照してください。
+</p></postreq></taskbody><?tm 1435623319 0?></task>

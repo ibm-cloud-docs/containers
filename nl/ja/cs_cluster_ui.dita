@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="cs_cluster_ui" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> における GUI からの Kubernetes クラスターの作成</title>
+<titlealts>
+<navtitle>GUI でのクラスターの作成</navtitle></titlealts><abstract>
+<shortdesc><ph conref="cs_conref.dita#terms/cluster_definition"></ph> アプリをデプロイするには、その前にクラスターを作成して、そのクラスター内にワーカー・ノードの定義を設定する必要があります。
+</shortdesc></abstract><!--&lt;prolog&gt;&lt;metadata&gt;&lt;keywords&gt;&lt;indexterm&gt;&lt;/indexterm&gt;&lt;/keywords&gt;&lt;/metadata&gt;&lt;/prolog&gt;-->
+<taskbody id="taskbody">
+<context id="context_py5_jp4_j1b"><ph audience="blue"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Dedicated ユーザーは、代わりに<xref href="#creating_ui_dedicated" format="dita" scope="local"></xref>を参照してください。</ph></context>
+<steps>
+<stepsection>クラスターを作成するには、以下のようにします。</stepsection>
+<step>
+<cmd>カタログから<uicontrol>「コンテナー」</uicontrol>を選択して、<uicontrol>「Kubernetes クラスター」</uicontrol>をクリックします。
+</cmd></step>
+<step>
+<cmd><uicontrol>「クラスター・タイプ (Cluster type)」</uicontrol>で<uicontrol>「標準」</uicontrol>を選択します。</cmd>
+<info>標準クラスターには複数のワーカー・ノードなどのフィーチャーがあり、可用性の高い環境を実現できます。</info></step>
+<step>
+<cmd><uicontrol>クラスター名</uicontrol>を入力します。</cmd></step>
+<step>
+<cmd>ワーカー・ノードで使用する <uicontrol>Kubernetes バージョン</uicontrol>を選択します。
+</cmd>
+<info audience="blue">このバージョンは、後でアップグレードすることができます。
+</info></step>
+<step>
+<cmd>クラスターをデプロイする <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> の<uicontrol>場所</uicontrol>を選択します。
+</cmd>
+<info>選択可能な場所は、ログインしている <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 地域によって異なります。最高のパフォーマンスを得るために、物理的に最も近い地域を選択してください。
+国外の場所を選択する場合は、その国にデータを物理的に保管する前に法的な許可を得なければならないことがあります。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 地域によって、使用できるコンテナー・レジストリー、および使用できる <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスが決まります。
+<note><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> は <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> UK 地域では使用できません。UK 地域でセットアップしたプライベート Docker イメージまたは <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスをクラスターで使用する場合は、<xref href="cs_cluster_cli.dita">CLI を使用してクラスターを作成します</xref>。CLI から <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> UK 地域にログインし、コンテナー・レジストリーをターゲットにして、利用可能な <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 地域にログインします。</note></info></step>
+<step>
+<cmd><uicontrol>マシン・タイプ</uicontrol>を選択します。
+</cmd>
+<info>各ワーカー・ノードにセットアップされる (ノードにデプロイされるすべてのコンテナーで使用できる) 仮想 CPU とメモリーの量は、マシン・タイプによって決まります。
+<ul>
+<li>「マイクロ (micro)」のマシン・タイプは、最小のオプションを表しています。</li>
+<li>「分散型 (Balanced)」のマシン・タイプは、同じ容量のメモリーが各 CPU に割り当てられるので、パフォーマンスが最適化されます。
+</li></ul></info></step>
+<step>
+<cmd>必要な<uicontrol>ワーカー・ノードの数</uicontrol>を選択します。
+</cmd>
+<info><userinput>3</userinput> を選択して、クラスターの高可用性を確保します。
+</info></step>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントから<uicontrol>プライベート VLAN</uicontrol> を選択します。
+</cmd>
+<info>プライベート VLAN は、ワーカー・ノード間で通信するために使用されます。
+複数のクラスターで同じプライベート VLAN を使用できます。
+</info></step>
+<step>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/BluSoftlayer"></keyword> アカウントから<uicontrol>パブリック VLAN</uicontrol> を選択します。
+</cmd>
+<info>パブリック VLAN は、ワーカー・ノードと <tm trademark="IBM" tmtype="reg">IBM</tm> 管理の Kubernetes マスターの間の通信に使用されます。
+複数のクラスターで同じパブリック VLAN を使用できます。
+パブリック VLAN を選択しないことにした場合、代替ソリューションを構成する必要があります。
+</info></step>
+<step>
+<cmd><uicontrol>「ハードウェア (Hardware)」</uicontrol>には、<uicontrol>「専用」</uicontrol>または<uicontrol>「共有」</uicontrol>を選択します。
+</cmd>
+<info>ほとんどの状況では<uicontrol>「共有」</uicontrol>で十分間に合うはずです。
+</info><choices>
+<choice><uicontrol>専用</uicontrol>: お客様の物理リソースを <tm trademark="IBM" tmtype="reg">IBM</tm> の他のお客様とは完全に分離します。
+</choice>
+<choice><uicontrol>共有</uicontrol>: <tm trademark="IBM" tmtype="reg">IBM</tm> がお客様の物理リソースを <tm trademark="IBM" tmtype="reg">IBM</tm> の他のお客様と同じハードウェア上に保管することを許可します。
+</choice></choices></step>
+<step>
+<cmd><uicontrol>「クラスターの作成」</uicontrol>をクリックします。</cmd>
+<info>クラスターの詳細情報が表示されますが、クラスター内のワーカー・ノードのプロビジョンには数分の時間がかかります。
+<uicontrol>「ワーカー・ノード (Worker nodes)」</uicontrol>タブで、ワーカー・ノードのデプロイメントの進行状況を確認できます。ワーカー・ノードの準備が完了すると、状態が <uicontrol>Ready</uicontrol> に変わります。<note>ワーカー・ノードごとに、固有のワーカー・ノード ID とドメイン名が割り当てられます。クラスターが作成された後にこれらを手動で変更してはいけません。
+ID またはドメイン名を変更すると、Kubernetes マスターがクラスターを管理できなくなります。</note></info></step></steps>
+<postreq><dl>
+<dlentry>
+<dt>次の作業</dt>
+<dd>クラスターが稼働状態になったら、以下の作業について検討できます。<ul>
+<li><xref href="cs_cli_install.dita" format="dita" scope="local">CLI をインストールして、クラスターでの作業を開始します。</xref></li>
+<li><xref href="cs_apps_cli.dita" format="dita" scope="local">クラスターにアプリをデプロイします。</xref></li>
+<li><ph conref="cs_conref.dita#links/registry_link"></ph></li></ul></dd></dlentry></dl></postreq></taskbody>
+<task id="creating_ui_dedicated" audience="blue">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Dedicated<ph conref="cs_conref.dita#links/release_dedicated"></ph> における GUI からの Kubernetes クラスターの作成 </title>
+<taskbody>
+<steps id="steps_zqd_jhq_h1b">
+<step>
+<cmd>IBMID で <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> Public コンソール (<xref href="https://console.bluemix.net" format="html" scope="external"></xref>) にログインします。
+</cmd></step>
+<step>
+<cmd>アカウント・メニューから、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"> </keyword> Dedicated アカウントを選択します。コンソールが更新されて、ご使用の <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> Dedicated インスタンスに関するサービスと情報が表示されます。</cmd></step>
+<step>
+<cmd>カタログから<uicontrol>「コンテナー」</uicontrol>を選択して、<uicontrol>「Kubernetes クラスター」</uicontrol>をクリックします。
+</cmd></step>
+<step>
+<cmd><uicontrol>クラスター名</uicontrol>を入力します。</cmd></step>
+<step>
+<cmd>ワーカー・ノードで使用する <uicontrol>Kubernetes バージョン</uicontrol>を選択します。
+</cmd>
+<info audience="blue">このバージョンは、後でアップグレードすることができます。
+</info></step>
+<step>
+<cmd><uicontrol>マシン・タイプ</uicontrol>を選択します。
+</cmd>
+<info>各ワーカー・ノードにセットアップされる (ノードにデプロイされるすべてのコンテナーで使用できる) 仮想 CPU とメモリーの量は、マシン・タイプによって決まります。
+<ul>
+<li>「マイクロ (micro)」のマシン・タイプは、最小のオプションを表しています。</li>
+<li>「分散型 (Balanced)」のマシン・タイプは、同じ容量のメモリーが各 CPU に割り当てられるので、パフォーマンスが最適化されます。
+</li></ul></info></step>
+<step>
+<cmd>必要な<uicontrol>ワーカー・ノードの数</uicontrol>を選択します。
+</cmd>
+<info><userinput>3</userinput> を選択して、クラスターの高可用性を確保します。
+</info></step>
+<step>
+<cmd><uicontrol>「クラスターの作成」</uicontrol>をクリックします。</cmd>
+<info>クラスターの詳細情報が表示されますが、クラスター内のワーカー・ノードのプロビジョンには数分の時間がかかります。
+<uicontrol>「ワーカー・ノード (Worker nodes)」</uicontrol>タブで、ワーカー・ノードのデプロイメントの進行状況を確認できます。ワーカー・ノードの準備が完了すると、状態が <uicontrol>Ready</uicontrol> に変わります。</info></step></steps>
+<postreq id="postreq_brd_jhq_h1b"><dl>
+<dlentry>
+<dt>次の作業</dt>
+<dd>クラスターが稼働状態になったら、以下の作業について検討できます。<ul id="ul_crd_jhq_h1b">
+<li><xref href="cs_cli_install.dita" format="dita" scope="local">CLI をインストールして、クラスターでの作業を開始します。</xref></li>
+<li><xref href="cs_apps_cli.dita" format="dita" scope="local">クラスターにアプリをデプロイします。</xref></li>
+<li><ph conref="cs_conref.dita#links/registry_link"></ph></li></ul></dd></dlentry></dl></postreq></taskbody></task></task><?tm 1488389433588 4 IBM ?>

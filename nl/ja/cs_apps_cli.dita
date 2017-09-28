@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="cs_apps_cli" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で CLI からアプリを Kubernetes クラスターにデプロイする方法 <ph conref="cs_conref.dita#links/release"></ph></title>
+<titlealts>
+<navtitle>CLI でアプリをデプロイする方法</navtitle></titlealts>
+<shortdesc>クラスターを作成したら、Kubernetes CLI を使用してそのクラスターにアプリをデプロイできます。</shortdesc><!--&lt;prolog&gt;&lt;metadata&gt;&lt;keywords&gt;&lt;indexterm&gt;&lt;/indexterm&gt;&lt;/keywords&gt;&lt;/metadata&gt;&lt;/prolog&gt;-->
+<taskbody>
+<prereq>開始前に、以下のことを行います。<ul conref="cs_conref.dita#links/prereq">
+<li></li></ul></prereq>
+<steps>
+<stepsection>Kubernetes CLI で構成スクリプトを使用してアプリをデプロイするには、以下のようにします。</stepsection>
+<step>
+<cmd>構成スクリプトを作成します。<xref href="https://kubernetes.io/docs/concepts/configuration/overview/" format="html" scope="external">Kubernetes のベスト・プラクティスを確認してください。</xref></cmd>
+<info>基本的に、構成スクリプトには、Kubernetes で作成する各リソースの構成の詳細情報が格納されます。
+スクリプトに以下のセクションを 1 つ以上追加できます。
+<ul>
+<li><xref href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/" format="html" scope="external">Deployment</xref>: ポッドとレプリカ・セットの作成を定義します。
+1 つのポッドにコンテナー化アプリを 1 つ組み込み、レプリカ・セットによってポッドの複数インスタンスを制御します。
+</li>
+<li><xref href="https://kubernetes.io/docs/concepts/services-networking/service/" format="html" scope="external">Service</xref>: ユーザーや他のリソースがポッドにアクセスするためのフロントエンド・アクセスを提供します。
+サービスを使用して、ノードやロード・バランサーのパブリック IP アドレスによるパブリック・アクセスを構成できます。
+</li>
+<li><xref href="https://kubernetes.io/docs/concepts/services-networking/ingress/" format="html" scope="external">Ingress</xref>: アプリへのパブリック・アクセスのルートを構成するために使用できる一種のロード・バランサーです。
+</li></ul></info></step>
+<step>
+<cmd>クラスターのコンテキストで構成スクリプトを実行します。
+</cmd>
+<info>
+<codeblock>kubectl create -f <varname>deployment_script_location</varname></codeblock></info></step>
+<step id="app_url">
+<cmd>外部からアプリを利用できるようにした場合は、アプリにアクセスできることを確認します。
+アプリを利用できるように公開するために使用した方法に応じた形式の URL をブラウザーで開いてください。
+</cmd>
+<info>
+<ul>
+<li>NodePort: <ol conref="cs_apps_public.dita#cs_apps_public_nodeport/access_nodeport">
+<li></li></ol></li>
+<li>LoadBalancer: <ol>
+<li>任意の Web ブラウザーを開きます。</li>
+<li>ロード・バランサーのポータブル・パブリック IP アドレスとポートを入力します。上記の例では、ポータブル・パブリック IP アドレス 192.168.10.38 が、ロード・バランサー・サービスに割り当てられていました。 <codeblock>http://192.168.10.38:8080</codeblock></li></ol></li>
+<li>Ingress: <p>構成スクリプトで指定したアプリのパスとルートを組み合わせます。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> に用意されているルートを使用する場合は、<filepath>http://<varname>&lt;cluster_name&gt;</varname>.containers.mybluemix.net./<varname>myapp</varname></filepath> という形式のルートになります。
+</p></li></ul></info></step></steps>
+<postreq id="postreq_ngp_dhp_kz">リソースの管理について詳しくは、<xref href="https://kubernetes.io/docs/concepts/cluster-administration/manage-deployment/" format="html" scope="external">Kubernetes の資料</xref>を参照してください。
+</postreq></taskbody></task>

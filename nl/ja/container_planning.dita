@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="container_planning" xml:lang="ja-jp">
+<title><ph conref="cs_conref.dita#links/classic"></ph>の使用の計画</title>
+<titlealts>
+<navtitle><ph conref="cs_conref.dita#links/classic"></ph>の計画</navtitle>
+<searchtitle><ph conref="cs_conref.dita#links/classic"></ph>の使用の計画</searchtitle></titlealts><abstract>
+<shortdesc><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> には、アプリと組織の機能要件と非機能要件を満たすコンテナー開発環境を構成するために、多くのオプションが用意されています。
+まずは、それらのオプションについて説明します。
+</shortdesc>
+
+<p><note type="attention" conref="container_conref.dita#links/migrate_note"></note></p>
+
+<p>このページでは、次について説明します。
+<lines>     • <xref href="container_planning.dita#roles"></xref> 
+     • <xref href="container_planning_org_ov.dita">単一コンテナーとスケーラブルなコンテナー・グループのための <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 組織の管理</xref>
+          • <xref href="container_planning_namespace.dita">プライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリーのための名前空間のセットアップ</xref>
+          • <xref href="container_planning_quota.dita">割り当て量と使用可能な <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> アカウント・タイプ</xref>
+          • <xref href="container_planning_fileshare.dita">永続ストレージのセットアップ</xref>
+     • <xref href="container_planning_container_ov.dita">IBM Bluemix Container Service での単一コンテナーとスケーラブルなコンテナー・グループの作成</xref>
+          • <xref href="container_planning_cli-ui.dita">Bluemix GUI、CLI、または REST API</xref>
+          • <xref href="container_planning_images.dita">IBM パブリック・イメージ、Docker Hub のイメージ、プライベート・イメージ</xref>
+          • <xref href="container_planning_private_network.dita">プライベート・コンテナー・ネットワークの設定</xref>
+          • <xref href="container_planning_public_network.dita">パブリック・ネットワーク設定</xref>
+          • <xref href="container_planning_bmx_service.dita"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> サービスの統合</xref>
+          • <xref href="container_planning_volumes.dita">永続データ・ストレージのオプション</xref>
+          • <xref href="container_planning_types.dita">コンテナーのタイプ</xref>
+          • <xref href="container_planning_monlog.dita">モニタリング・オプションとロギング・オプション</xref></lines></p></abstract>
+<prolog>
+<metadata>
+<keywords><indexterm>計画</indexterm><indexterm>IBM Containers</indexterm><indexterm>コンテナー</indexterm><indexterm>決定</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context></context></taskbody>
+<task id="roles">
+<title>ユーザー・ロールについて</title>
+<taskbody>
+<context id="context_tc2_pxz_nz"><p otherprops="registry_check">コンテナーは、組織の管理者とコンテナー開発者によって管理されます。
+次の図は、組織のコンテナー構成例を示しています。組織管理者またはコンテナー開発者が設定できるコンポーネントが強調表示されています。
+<xref href="../api/content/containers/images/container_planning_container_ov_bluemixify.png" format="png" scope="external"><image href="images/container_planning_container_ov_bluemixify.png" alt="開発者が構成するコンテナー・コンポーネント" width="700" id="image_qlf_pxz_nz">
+<alt>コンテナー開発者または組織管理者が構成できる <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のコンポーネントを表す図。</alt></image></xref>
+</p>各コンポーネント、決定項目、構成できる内容については、このトピックのサブセクションを参照してください。それらの構成の中には、コンテナー作成後には変更できないものもあります。
+それらの構成を事前に理解しておくと、メモリー、ディスク・スペース、IP アドレスなどのあらゆるリソースを開発チームのために確保できるうえに、組織の割り当て分を最大限に活用することができます。</context></taskbody></task></task>

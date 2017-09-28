@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN" "ibm-concept.dtd">
+<concept id="va_conref" xml:lang="ja-jp">
+<title>Vulnerability Advisor の conref</title>
+<shortdesc>脆弱性アドバイザーで使用される conref。</shortdesc>
+<conbody>
+<p><ph id="va">Vulnerability Advisor</ph></p>
+<p><keyword id="xforce"><tm trademark="IBM" tmtype="reg">IBM</tm> <tm trademark="X-Force" tmtype="reg">X-Force</tm> Exchange</keyword></p>
+<p><table frame="all" colsep="1" rowsep="1" id="table_ajt_ngx_3x">
+<title>脆弱性アドバイザーの conref - GUI</title>
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="1*"></colspec><colspec colnum="2" colname="c2" colwidth="2.45*"></colspec>
+<thead>
+<row>
+<entry>Conref</entry>
+<entry>説明</entry></row></thead>
+<tbody>
+<row>
+<entry><uicontrol id="policy">組織ポリシー</uicontrol></entry>
+<entry>GUI</entry></row>
+<row>
+<entry><uicontrol id="vulns">脆弱パッケージ</uicontrol>
+</entry>
+<entry>GUI の名称変更中</entry></row>
+<row>
+<entry><uicontrol id="bps">コンテナー設定</uicontrol></entry>
+<entry>GUI の名称変更中</entry></row>
+<row>
+<entry><uicontrol id="secconfig">アプリケーション構成</uicontrol></entry>
+<entry>GUI</entry></row>
+<row>
+<entry><uicontrol id="instances">Docker イメージ・ソース</uicontrol></entry>
+<entry>GUI</entry></row>
+<row>
+<entry><uicontrol id="v_assess">脆弱性評価</uicontrol></entry>
+<entry>製品名変更の場合</entry></row>
+<row>
+<entry><uicontrol id="m_policy">管理ポリシー</uicontrol></entry>
+<entry>Atlas UI</entry></row>
+<row>
+<entry><uicontrol id="v_report">レポートの表示</uicontrol></entry>
+<entry>Atlas UI</entry></row>
+<row>
+<entry><uicontrol id="containers">コンテナー・インスタンス</uicontrol></entry>
+<entry>GUI</entry></row>
+<row>
+<entry><uicontrol id="ra">リスク分析</uicontrol></entry>
+<entry>「リスク分析」タブ</entry></row>
+<row>
+<entry></entry>
+<entry></entry></row></tbody></tgroup></table></p></conbody></concept><?tm 1490094646448 2 X-Force||IBM ?>

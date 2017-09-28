@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tsTroubleshooting PUBLIC "-//IBM//DTD DITA Troubleshooting//EN"
+ "troubleshooting.dtd">
+<!--http://w3.opensource.ibm.com/projects/ditatroublespec/ -->
+<!--This DITA specialized document type is currently not supported by the Authoring Tools development team. Press the F1 key for online help on the tags, or see the Authoring Tools Information Center for the complete set of help topics at http://submit.boulder.ibm.com/infocenter/idwb/v3r8m4/index.jsp.-->
+<tsTroubleshooting id="ts_quota_space" xml:lang="ja-jp" class="- topic/topic tsTroubleshooting/tsTroubleshooting ">
+<title>組織の割り当て量が不十分なためコンテナーを作成できない</title>
+<titlealts>
+<navtitle>不十分な組織の割り当て量</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の組織の割り当て量が不十分なためにコンテナーを作成できない</searchtitle></titlealts>
+<tsBody class="- topic/body tsTroubleshooting/tsBody ">
+<tsSymptoms class="- topic/section tsTroubleshooting/tsSymptoms ">コンテナーの作成時に、スペースに十分な割り当て量がないというメッセージを受け取ります。<msgblock>BXNUI0110E: IBM Containers リソースを割り振りできません。新規スペースを割り振るには組織割り当て量が不十分です。組織「<varname>organization­</varname>」の浮動 IP 数を超えることはできません。IBM <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> の「組織の管理」を使用して、割り当て量の割り振りを調整してください。</msgblock></tsSymptoms>
+<tsCauses class="- topic/section tsTroubleshooting/tsCauses ">このメッセージは、十分な割り当て量のないスペースにコンテナーを作成しようとすると表示されることがあります。
+デフォルトでは、コンテナー・サービスが機能するためには、すべてのスペースに IP アドレス 2 つとメモリー 2 GB を割り当てる必要があります。
+</tsCauses>
+<tsResolve class="- topic/section tsTroubleshooting/tsResolve "><p>メモリーおよび IP の割り当て量を複数のスペースに配分するには、以下のようにします。<ol>
+<li><ph conref="container_conref.dita#bluemix_nav/view_quota_1"></ph></li>
+<li><ph conref="container_conref.dita#bluemix_nav/view_quota_2"></ph></li>
+<li><uicontrol>「編集」</uicontrol>をクリックし、メモリーおよび IP アドレスを組織のスペースに割り振ります。</li>
+<li>組織の任意のスペースにコンテナーを作成します。</li></ol></p>
+<draft-comment translate="no">Reference:
+https://developer.ibm.com/answers/questions/204090/bxnui0110e-could-not-allocate-ibm-containers-resou/</draft-comment></tsResolve></tsBody></tsTroubleshooting>

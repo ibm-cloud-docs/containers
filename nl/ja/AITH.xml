@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with AI Text Handler 1.0.0 -->
+<ExtractedAITHs>
+<ExtractedAITH file="monitoringandlogging/images/architecture_logmet.ai">
+<text>コンテナー</text>
+<text>Lumberjack/</text>
+<text>Logstash</text>
+<text>Kafka Bus</text>
+<text>LogStash</text>
+<text>ElasticSearch</text>
+<text>Grafana</text>
+<text>Kibana</text>
+<text>ユーザー・インターフェース</text>
+<text>マルチテナント</text>
+<text>プロキシー</text>
+<text>IBM Bluemix</text>
+<text>ロギング</text>
+<text>プライベート・ネットワーク</text>
+<text>IBM Bluemix Container Service</text>
+<text>     ロギング</text>
+<text>SSL による暗号化</text>
+<text>コンテナー</text>
+<text>プライベート・ネットワーク</text>
+<text>クローラー</text>
+</ExtractedAITH>
+<ExtractedAITH file="images/architecture_logmet.ai">
+<text>コンテナー</text>
+<text>Lumberjack/</text>
+<text>Logstash</text>
+<text>Kafka Bus</text>
+<text>LogStash</text>
+<text>ElasticSearch</text>
+<text>Grafana</text>
+<text>Kibana</text>
+<text>ユーザー・インターフェース</text>
+<text>マルチテナント</text>
+<text>プロキシー</text>
+<text>IBM Bluemix</text>
+<text>ロギング</text>
+<text>プライベート・ネットワーク</text>
+<text>IBM Bluemix Container Service</text>
+<text>     ロギング</text>
+<text>SSL による暗号化</text>
+<text>コンテナー</text>
+<text>プライベート・ネットワーク</text>
+<text>クローラー</text>
+</ExtractedAITH>
+<ExtractedAITH file="images/container_compose_tutorial.ai">
+<text>サービス 1: nginx</text>
+<text>サービス 2: lets-chat</text>
+<text>コンテナー
+(名前: composetutorial_mongo_1)</text>
+<text>コンテナー
+(名前: composetutorial_lets-chat_1)</text>
+<text>サービス 3: mongo</text>
+<text>コンテナー
+(名前: composetutorial_nginx_1)</text>
+<text>コンテナー
+(名前: composetutorial_lets-chat_2)</text>
+<text>マルチコンテナー lets-chat アプリ</text>
+<text>ロード・バランサー</text>
+<text>アプリ</text>
+<text>アプリ</text>
+<text>データベース</text>
+<text>Docker リンク</text>
+<text> </text>
+<text>Docker リンク</text>
+<text>Docker リンク</text>
+<text>Docker リンク</text>
+</ExtractedAITH>
+<ExtractedAITH file="images/container_ha_roadmap.ai">
+<text>地域 1</text>
+<text>アベイラビリティー・ゾーン 1 </text>
+<text>地域 1</text>
+<text>+ 自動リカバリー
+</text>
+<text>3</text>
+<text>+ 自動リカバリー
++ n + インスタンス
++ アンチアフィニティー
+</text>
+<text></text>
+<text>アベイラビリティー・ゾーン 2 </text>
+<text>スペース 2</text>
+<text>グループ</text>
+<text>グループ</text>
+<text>アベイラビリティー・ゾーン 1 </text>
+<text>+ 自動リカバリー
++ n + インスタンス
++ アンチアフィニティー
+</text>
+<text>+ 自動リカバリー
++ n + インスタンス
++ アンチアフィニティー
+</text>
+<text>グループ</text>
+<text>グループ</text>
+<text>グループ</text>
+<text>スペース 2</text>
+<text>地域 2</text>
+<text>2</text>
+<text>スペース 1</text>
+<text>アベイラビリティー・ゾーン 1 </text>
+<text>1</text>
+<text>アベイラビリティー・ゾーン 1 </text>
+<text>スペース 1</text>
+<text>+ 自動リカバリー
++ n + インスタンス
++ アンチアフィニティー
+</text>
+<text>+ 自動リカバリー
++ n + インスタンス
++ アンチアフィニティー
+</text>
+<text>グループ</text>
+<text>地域 1</text>
+<text>グループ</text>
+<text>グループ</text>
+<text>6</text>
+<text>グループ</text>
+<text>スペース 1</text>
+<text>地域 1</text>
+<text>+ 自動リカバリー
++ n + インスタンス
++ アンチアフィニティー
+</text>
+<text>グループ</text>
+<text>スペース 1</text>
+<text>+ 自動リカバリー
++ n + インスタンス
++ アンチアフィニティー
+</text>
+<text>+ 自動リカバリー
++ n + インスタンス
++ アンチアフィニティー
+</text>
+<text>地域 1</text>
+<text>地域 1</text>
+<text>アベイラビリティー・ゾーン 1 </text>
+<text>アベイラビリティー・ゾーン 1 </text>
+<text>アベイラビリティー・ゾーン 1 </text>
+<text>スペース 1</text>
+<text>スペース 1</text>
+<text>+ 自動リカバリー
++ n + インスタンス
++ アンチアフィニティー
+</text>
+<text>スペース 2</text>
+<text></text>
+<text>5</text>
+<text>4</text>
+<text>高可用性</text>
+</ExtractedAITH>
+<ExtractedAITH file="images/container_planning_container_ov_bluemixify.ai">
+<text> </text>
+<text>サービス</text>
+<text>!</text>
+<text>!</text>
+<text>IBM 提供</text>
+<text> </text>
+<text>ファイアウォール付きルーター</text>
+<text> </text>
+<text> </text>
+<text>!</text>
+<text>アクセス可能: パブリック・ネットワークより、ポート: 80</text>
+<text>コンテナー・プライベート・ネットワーク</text>
+<text>     ロード・バランサー</text>
+<text>Data Power</text>
+<text>カスタマー・データ・センター</text>
+<text> </text>
+<text>プライベート IP: 172.31.0.8:9080</text>
+<text>リバース・プロキシー</text>
+<text>バインドされたパブリック IP/ ポート経由の単一コンテナーへのパブリック・アクセス</text>
+<text>https://mydomain.mybluemix.net
+</text>
+<text>パブリック・ネットワーク</text>
+<text>アクセス可能: プライベート・ネットワーク、ポート: すべて</text>
+<text>組織管理者によって構成されるコンポーネント</text>
+<text>Docker イメージ</text>
+<text>プライベート Bluemix レジストリー
+</text>
+<text>プライベート IP: 172.31.0.9</text>
+<text>プライベート・ネットワーク・セキュリティー・グループ</text>
+<text>プライベート IP: 172.31.0.10</text>
+<text>ファイル共有</text>
+<text>  </text>
+<text>インスタンス 2</text>
+<text>コンテナー・グループ</text>
+<text>Bluemix</text>
+<text>ボリューム</text>
+<text>プライベート IP アドレス経由のコンテナー間のプライベート・ネットワーク通信</text>
+<text>Go-Router と </text>
+<text>Docker イメージ</text>
+<text>!</text>
+<text>https://162.23.19.246:80</text>
+<text>インスタンス 1</text>
+<text>Bluemix スペース</text>
+<text>Bluemix ネットワーク・ゲートウェイ</text>
+<text>プライベート IP: 172.31.0.80
+パブリック IP: 162.23.19.246:80</text>
+<text>単一コンテナー</text>
+<text> </text>
+<text>パブリック・ネットワーク・セキュリティー・グループ</text>
+<text>開発者によって構成されるコンポーネント</text>
+<text>キー</text>
+<text>Bluemix コンテナーおよび顧客データ・センター間の VPN 通信</text>
+<text>VPN を使用したプライベート顧客ネットワーク・ゲートウェイ</text>
+<text>VPN を使用したゲートウェイ</text>
+<text>プライベート・ネットワーク</text>
+<text>マップされたパブリック経路/ ポートまたはバインドされたパブリック IP アドレス/ ポート経由のコンテナー・グループポートへのパブリック・アクセス</text>
+<text>VPN</text>
+<text>VPN</text>
+<text></text>
+<text></text>
+<text>https://162.23.19.253:9080</text>
+<text></text>
+</ExtractedAITH>
+<ExtractedAITH file="images/container_security.ai">
+<text>ネットワーク</text>
+<text>計算ホスト</text>
+<text>プライベート・イメージ・レジストリー</text>
+<text>脆弱性スキャン</text>
+<text>イメージ </text>
+<text>IBM Bluemix Container Service セキュリティー</text>
+<text>ネットワーク・セキュリティー・グループ</text>
+<text>無効にされたローカル・ボリューム・マウント</text>
+<text>パブリック・サービスの選択的な公開</text>
+<text>分離プロセス</text>
+<text>プライベート IP アドレス</text>
+<text>上限のあるリソース</text>
+<text>継続的モニタリング</text>
+<text>継続的モニタリング</text>
+<text>VPN とネットワーク・ピアリング</text>
+<text>IBM による管理</text>
+</ExtractedAITH>
+<ExtractedAITH file="images/getting_started_tutorial.ai">
+<text>lets-chat イメージ</text>
+<text>パブリック IP アドレス</text>
+<text>インターネット</text>
+<text>プライベート Bluemix イメージ・リポジトリー</text>
+<text>lc-mongo コンテナー</text>
+<text>mongo イメージ</text>
+<text>lets-chat コンテナー</text>
+<text>リンク</text>
+<text>スペース</text>
+<text>Bluemix 組織</text>
+</ExtractedAITH>
+<ExtractedAITH file="images/utd_architecture.ai">
+<text>コンテナー</text>
+<text>Web UI</text>
+<text>...</text>
+<text>ビルド・サーバー</text>
+<text>...</text>
+<text>コントローラー・ノード</text>
+<text>計算ノード</text>
+<text>...</text>
+<text>Docker レジストリー </text>
+<text>ボリューム・サーバー</text>
+<text>一貫したパフォーマンス (SoftLayer)</text>
+<text>セキュア・ゲートウェイ &amp; ファイアウォール (DataPower &amp; FortiGate)</text>
+<text></text>
+<text>API サーバー</text>
+<text></text>
+<text></text>
+<text></text>
+<text></text>
+<text></text>
+</ExtractedAITH>
+<ExtractedAITH file="images/utd_volumes.ai">
+<text>組織</text>
+<text>ファイル共有</text>
+<text>ファイル共有</text>
+<text>ファイル共有</text>
+<text>ボリューム</text>
+<text>ボリューム</text>
+<text>ファイル</text>
+<text></text>
+</ExtractedAITH>
+</ExtractedAITHs>

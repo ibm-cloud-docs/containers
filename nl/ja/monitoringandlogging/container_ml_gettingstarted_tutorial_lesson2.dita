@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE tutorialLesson PUBLIC "-//IBM//DTD DITA Tutorial Lesson//EN"
+ "tutorialLesson.dtd">
+<tutorialLesson id="container_ml_gettingstarted_tutorial_lesson_2" xml:lang="ja-jp" class="- topic/topic task/task tutorialLesson/tutorialLesson ">
+<title>レッスン 2: テスト・メッセージをロギング・サービスに送信する</title>
+<titlealts>
+<navtitle>レッスン 2: テスト・メッセージを送信する</navtitle>
+<searchtitle>レッスン 2: <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でテスト・メッセージをロギング・サービスに送信する</searchtitle></titlealts>
+<shortdesc>作成したコンテナーにログインし、テスト・メッセージをコンテナー内のログ・ファイルに送信します。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>ログ</indexterm><indexterm>コンテナー</indexterm><indexterm>クローラー</indexterm><indexterm>ロギング</indexterm><indexterm>kibana</indexterm><indexterm>チュートリアル</indexterm></keywords></metadata></prolog>
+<taskbody>
+<steps>
+<step>
+<cmd>以下のコマンドを実行して、bash シェルでコンテナーにログインします。
+<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> exec</codeph> ではなく <codeph>docker exec</codeph> を実行できます。CLI をそのように構成したからです。</cmd>
+<info>
+<codeblock>docker exec -it <varname>liberty_logging_tutorial</varname> bash</codeblock></info>
+<info>
+<table frame="all" colsep="1" rowsep="1" id="table_lqp_hkm_2v">
+<tgroup cols="2"><colspec colnum="1" colname="c1" colwidth="1.0*"></colspec><colspec colnum="2" colname="c2" colwidth="1.0*"></colspec>
+<thead>
+<row>
+<entry namest="c1" nameend="c2"><ph conref="container_conref.dita#images/more_info"></ph> このコマンドの構成要素について</entry></row></thead>
+<tbody>
+<row>
+<entry>exec</entry>
+<entry><p> 実行中のコンテナーにログインしてコマンドを実行し、コンテナーの中にあるファイルを操作します。</p></entry></row>
+<row>
+<entry>-it</entry>
+<entry>コマンドを対話モードで実行します。</entry></row>
+<row>
+<entry>bash</entry>
+<entry>bash セッションとして実行します。</entry></row></tbody></tgroup></table></info></step>
+<step>
+<cmd><filepath>/liberty_logging_tutorial/liberty_logging_tutorial.log</filepath> ファイルを作成します。</cmd>
+<info>コンテナーを作成するときに、このログ・ファイルの場所を組み込みました。
+ここで、実際のアプリがコンテナー内に生成するログ・ファイルの例として、指定した場所にログ・ファイルを作成します。
+</info><substeps>
+<substep>
+<cmd><filepath>liberty_logging_tutorial</filepath> ディレクトリーを作成します。</cmd>
+<info>
+<codeblock>mkdir liberty_logging_tutorial</codeblock></info></substep>
+<substep>
+<cmd>作成したディレクトリーに移動します。</cmd>
+<info>
+<codeblock>cd liberty_logging_tutorial</codeblock></info></substep>
+<substep>
+<cmd><filepath>liberty_logging_tutorial.log</filepath> ファイルを作成します。</cmd>
+<info>
+<codeblock>cat &gt; liberty_logging_tutorial.log</codeblock></info></substep>
+<substep>
+<cmd>テスト・メッセージを入力して、<filepath>liberty_logging_tutorial.log</filepath> ファイル内にログ・エントリーを作成します。</cmd>
+<info>JSON ストリングをメッセージとして送信できます。これにより、Kibana でデータをさらに分類することが可能です。
+構文は以下のとおりです。
+<codeblock>{"key":"value"}</codeblock></info>
+<info> 例:
+<codeblock>{"console_msg":"This is a manual error message test in json."}</codeblock></info></substep>
+<substep>
+<cmd><uicontrol>Enter</uicontrol> キーを押します。</cmd></substep>
+<substep>
+<cmd><uicontrol>CTRL</uicontrol>+<uicontrol>D</uicontrol> を押して、エディターを終了します。</cmd></substep></substeps></step>
+<step>
+<cmd>以下のコマンドを入力して、コンテナーの bash セッションを終了します。</cmd>
+<info>
+<codeblock>exit</codeblock></info></step></steps>
+<result><p>
+コンテナーへのログイン、コンテナー内のログ・ファイルへのテスト・メッセージの送信が正常に行われました。</p>
+<p>Kibana でメッセージを確認するには、次のレッスンに進んでください。</p></result></taskbody></tutorialLesson>

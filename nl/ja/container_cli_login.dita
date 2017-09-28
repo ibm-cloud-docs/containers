@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="container_cli_login" xml:lang="ja-jp">
+<title><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI プラグイン (<ph conref="container_conref.dita#links/command_prefix"></ph>) へのログイン</title>
+<titlealts>
+<navtitle><ph conref="container_conref.dita#links/command_prefix"></ph> プラグインへのログイン</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> CLI プラグイン (<ph conref="container_conref.dita#links/command_prefix"></ph>) へのログイン</searchtitle></titlealts>
+<shortdesc>CLI をインストールすると、ログインして CLI を使用できます。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>ログイン</indexterm><indexterm>コンテナー</indexterm><indexterm>IBM Containers</indexterm><indexterm conref="container_conref.dita#links/cli_abbrev"></indexterm><indexterm>プラグイン</indexterm><indexterm>cli</indexterm></keywords></metadata></prolog>
+<taskbody>
+<prereq><p>始める前に、以下のタスクを実行してください。
+<ul>
+<li><xref href="container_cli_cfic_install.dita#install_plugin" format="dita" scope="local"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> (<ph conref="container_conref.dita#links/command_prefix"></ph>) プラグインをインストールします。
+</xref></li>
+<li>Cloud Foundry にログインするときに使用する <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 組織とスペースを決めます。
+組織とスペースについて詳しくは、<ph conref="container_conref.dita#links/orgs_and_spaces"></ph>を参照してください。</li>
+<li>Cloud Foundry の
+<codeph>login</codeph> コマンドを使用して指定できるオプションについて詳しくは、Cloud Foundry 資料の <xref href="https://docs.cloudfoundry.org/devguide/installcf/whats-new-v6.html#login" format="html" scope="external">login コマンド</xref>を参照してください。</li></ul></p></prereq>
+<steps>
+<step>
+<cmd>コマンド・ライン・ユーティリティーを開きます。
+</cmd><choices>
+<choice conref="container_cli_cfic_install.dita#install_plugin/start_qst"></choice>
+<choice>Linux の場合、任意のコマンド・ライン・ユーティリティーを開きます。
+</choice></choices></step>
+<step>
+<cmd>Cloud Foundry CLI を通して <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> にログインします。</cmd>
+<info>特定の地域を指定するには、<codeph>-a</codeph> オプションを、その地域の API エンドポイントと共に含めます。初めて CLI を使用するときに、このオプションを含めない場合は、API エンドポイントの入力を求めるプロンプトが出されます。API エンドポイントが指定された後、それ以降のログイン時に API エンドポイントを入力する必要はありません。
+</info>
+<info>
+<p><codeblock>bx login [-a api.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>] [-sso]</codeblock></p></info>
+<info>
+<p>特定の地域にログインするには、Cloud Foundry CLI にログインするときに、その地域の API エンドポイントを含めます。 <ul>
+<li>米国南部<codeblock>bx login -a api.ng.bluemix.net</codeblock></li>
+<li>英国<codeblock>bx login -a api.eu-gb.bluemix.net</codeblock></li>
+<li audience="unknown">シドニー<codeblock>bx login -a api.au-syd.bluemix.net</codeblock></li></ul></p>
+<ph conref="container_conref.dita#sso/sso"></ph></info><substeps conref="container_conref.dita#sso/no_sso">
+<substep>
+<cmd></cmd></substep></substeps></step>
+<step id="namespace">
+<cmd><ph>組織の<term>名前空間</term> を設定します。</ph></cmd>
+<info>名前空間とは、プライベートの <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> イメージ・レジストリーを識別するための固有の名前です。
+コンテナーの作成時には、名前空間をイメージ名とともに含めることによってイメージの場所を指定する必要があります。
+<p><note id="namespace_warning">名前空間を作成する場合、作成した後で変更することはできません。削除のみ可能です。
+<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> 組織内のユーザーが既にコンテナーをデプロイし、<term>namespace</term> を設定している場合は、その組織の名前空間を示すメッセージが表示されます。
+その場合は、次のステップから開始できます。
+</note></p>
+
+<p><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> namespace-set <varname>&lt;my_namespace&gt;</varname></codeblock>
+<note conref="container_single_ui.dita#gui/namespace_naming"></note></p></info></step>
+<step id="login">
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を初期設定します。
+</cmd>
+<info>
+<p><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> init</codeblock></p></info></step>
+<step>
+<cmd><ph conref="container_conref.dita#links/command_prefix"></ph> またはネイティブ Docker コマンドのどちらを実行するかを決めます。</cmd>
+<info>プラグインにログインするたびに以下のオプションのいずれかを選択するか、または、<codeph>shellinit</codeph> コマンドを使用して常にオプション 2 が選択されるようにできます。<draft-comment author="Kristin" audience="blue">Add steps for using the shellinit command?</draft-comment></info>
+<info>
+<p><ul>
+<li id="option1_li"><uicontrol>オプション 1</uicontrol> (デフォルト)<p><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> ラッパー Docker の単純なシェル。
+ローカルの Docker デーモンは、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の影響を受けません。
+<ph conref="container_conref.dita#links/command_prefix"></ph> コマンドは <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペース内のコンテナーを管理する場合に使用し、<codeph>docker</codeph> コマンドはローカルでコンテナーを管理する場合に使用します。
+いずれにしても <codeph>docker</codeph> コマンドは、ローカルのイメージ開発には常に必要です。
+</p><p>例えば、オプション 1 を使用する場合、<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> run</codeph> コマンドは <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペース内にコンテナーを作成し、<codeph>docker run</codeph> はローカルにコンテナーを作成します。
+このオプションは、Docker と <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> のどちらの使用にも慣れていない場合や、コンテナーのテストをローカルで行う場合に便利です。
+</p></li>
+<li id="option2_li"><uicontrol>オプション 2</uicontrol><p>現在の CLI セッションのローカルの Docker デーモンを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> にリダイレクトして、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペース内でのコンテナーの管理に <codeph>docker</codeph> コマンドが使用可能なときは、常に <ph conref="container_conref.dita#links/command_prefix"></ph> コマンドの代わりに使用できるようにします。
+</p><p>例えば、オプション 2 では、<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> run</codeph> コマンドと <codeph>docker run</codeph> コマンドのどちらを使用してもスペース内にコンテナーを作成できます。
+このオプションは、Docker の使用経験があり、<codeph>docker</codeph> コマンドの方が慣れている場合や、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> の処理に自動化スクリプトを適用している場合に便利です。
+</p><p>例外として、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> に固有なタスクを行うのに、引き続き <ph conref="container_conref.dita#links/command_prefix"></ph> コマンドを使用する必要があります。
+例えば、名前空間を設定するには、コマンド <codeph><ph conref="container_conref.dita#links/command_prefix">nam</ph> namespace-set</codeph> を使用する必要があります。
+<codeph>docker namespace-set</codeph> は、有効なコマンドではありません。
+この構成でサポートされる <codeph>docker</codeph> コマンドのリストについては、<xref href="container_cli_reference_native-docker.dita" format="dita" scope="local"></xref>を参照してください。
+</p><p>このオプションを構成するには、ログイン時に端末に表示される環境変数をコピーして貼り付けます。
+<ul>
+<li><codeph>DOCKER_HOST</codeph> は、Docker ホストを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> に設定します。</li>
+<li><codeph>DOCKER_CERT_PATH</codeph> は、Cloud Foundry 用 <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグインの認証鍵の場所を設定します。</li>
+<li><codeph>DOCKER_TLS_VERIFY</codeph> は、TLS を使用し、リモート・サーバーを検証します。</li></ul></p><p><note type="tip"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 資料に記載されている作業を実行している場合、
+アスタリスク (*) のマークがあるすべてのステップで <codeph>docker</codeph> コマンドを実行できます。
+</note></p></li></ul></p></info></step></steps></taskbody><?tm 1435623319 5?></task>

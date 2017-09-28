@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<task id="container_images_building" xml:lang="ja-jp">
+<title>コマンド・ライン・インターフェース (CLI) を使用した独自のイメージの作成</title>
+<titlealts>
+<navtitle>CLI を使用したイメージの作成</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> でのイメージのビルド
+</searchtitle></titlealts>
+<shortdesc>イメージをビルドする Dockerfile を作成します。
+Dockerfile は、コンテナーの基礎である Docker イメージをビルドするための指定を含むファイルです。Dockerfile を作成した後は、コマンド・ライン・インターフェースを使用して、イメージをローカルにビルドするか、専用 <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリーに直接ビルドすることができます。そうすると、そのイメージは、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> の<wintitle>「カタログ」</wintitle>ビューを介して使用可能になります。</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>イメージ</indexterm><indexterm>コンテナー</indexterm><indexterm>IBM Containers</indexterm><indexterm>作成</indexterm></keywords></metadata></prolog>
+<taskbody>
+<context><ul>
+<li>Dockerfile について詳しくは、<xref href="https://docs.docker.com/engine/reference/builder/" format="html" scope="external">Dockerfile Reference</xref> を参照してください。</li>
+<li>始めるために、<tm trademark="IBM" tmtype="reg">IBM</tm> 認定イメージ Dockerfile のいずれかをコピーできます。Dockerfile のサンプルは、<xref href="../images/docker_image_ibmliberty/ibmliberty_starter.html" format="html" scope="peer"><tm trademark="IBM" tmtype="reg">IBM</tm> Liberty Profile</xref>、<xref href="../images/ibmnode_strong_pm/ibmnode-strong-pm_starter.html" format="html" scope="peer"><tm trademark="IBM" tmtype="reg">IBM</tm> Node with Strongloop</xref>、および <xref href="../images/docker_image_ibmnode/ibmnode_starter.html" format="html" scope="peer"><tm trademark="IBM" tmtype="reg">IBM</tm> Node</xref>を参照してください。</li></ul></context>
+<steps>
+<step>
+<cmd>Dockerfile および関連するアプリ・コードを格納するためのローカル・ディレクトリーを作成します。ディレクトリーに移動します。</cmd></step>
+<step>
+<cmd>Dockerfile を作成します。
+</cmd><substeps>
+<substep>
+<cmd>ローカル・ディレクトリーに Dockerfile を作成します。</cmd>
+<info>
+<codeblock>touch Dockerfile</codeblock></info></substep>
+<substep>
+<cmd>テキスト・エディターを使用して Dockerfile を開きます。Dockerfile に、次の指示を追加します。</cmd>
+<info>
+<note type="tip"><codeph>FROM</codeph> は必須ですが、他の説明はオプションです。</note></info>
+<info>
+<codeblock>FROM <varname>Image_Name</varname>
+LABEL <varname>Key</varname>="<varname>Value</varname>"
+EXPOSE <varname>Port</varname>
+ CMD ["......"]</codeblock></info>
+<info>
+<p>例</p>
+
+<codeblock>FROM registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/ibmliberty
+LABEL <varname>description</varname>="This is my test Dockerfile"
+EXPOSE <varname>9080</varname></codeblock>
+
+<p>この例では <tm trademark="IBM" tmtype="reg">IBM</tm> Liberty をベース・イメージとして使用し、イメージのメタデータにラベルを追加して、ポート 9080 を公開します。追加の Dockerfile コマンドについては、<xref href="https://docs.docker.com/engine/reference/builder/" format="html" scope="external">Dockerfile
+Reference</xref> を参照してください。</p>
+
+<note type="important">独自の Dockerfile を作成する場合は、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> で実行されるイメージの最大サイズが 10 GB であることを確認してください。</note>
+
+<note>コンテナーが開始されると、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> はプライベート・コンテナー・ネットワークをセットアップし、コンテナーにプライベート IP アドレスを割り当てます。
+アプリがその開始時にアクティブなネットワーク接続を必要とする場合は、<xref href="container_planning_private_network.dita#network_delay">Dockerfile に sleep コマンドを追加するか、アプリ・コードを調整して IP アドレスが使用可能になるまでそこに ping します</xref>。このようにして、アプリ開始前に <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> ネットワーキングが完了するようにします。
+</note></info></substep></substeps></step>
+<step id="build_push">
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> でイメージを直接ビルドするか、またはイメージをローカルにビルドしてテストし、その後でそのイメージを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> にプッシュするかを選択します。</cmd>
+<info>
+<ul>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> でイメージを直接ビルドするには、以下のコマンドを実行します。*<note type="tip"><ph conref="container_conref.dita#terms/namespace_get"></ph></note><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> build -t registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>&lt;my_namespace&gt;</varname>/<varname>&lt;image_name&gt;</varname>:<varname>&lt;tag&gt;</varname> <varname>&lt;dockerfile_location&gt;</varname></codeblock>例<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> build -t registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>my_namespace</varname>/<varname>my_image</varname>:<varname>v1</varname> .</codeblock><note conref="container_conref.dita#links/docker_note"></note></li>
+<li>イメージをローカルにビルドし、その後でイメージを <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> にプッシュするには、以下のステップを実行します。<p><ol>
+<li><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> 用プラグインを使用している場合、再ログインします。<codeph>docker</codeph> コマンドがローカル・マシンの Docker エンジンに送られるように、
+オプション 2 の環境変数を設定しないでください。
+<p><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> init</codeblock></p></li>
+<li>Dockerfile からイメージをローカルにビルドします。
+<p><codeblock>docker build -t <varname>&lt;image_name&gt;</varname>:<varname>&lt;tag&gt;</varname> <varname>&lt;dockerfile_location&gt;</varname></codeblock></p><p>例<codeblock>docker build -t <varname>my_ibmliberty_image</varname>:<varname>v1</varname> .</codeblock></p></li>
+<li>以下のコマンドを使用して、イメージからコンテナーを実行して、新規アプリがローカルで実行されることをテストします。ここで、<varname>Port</varname> は HTTP トラフィック用のポートです。
+<p><codeblock>docker run -d --name <varname>&lt;container_name&gt;</varname> <varname>&lt;image_name&gt;</varname></codeblock></p><p>例<codeblock>docker run -d --name <varname>my_container</varname> <varname>my_ibmliberty_image</varname></codeblock></p><p>アプリが正しく実行されていれば、CLI 出力にコンテナー ID が表示されます。コンテナーのログを確認するには、<codeph>docker logs <varname>&lt;container_name_or_id&gt;</varname></codeph> を実行します。</p></li>
+<li id="tag">プライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリーおよび新規名でローカル・イメージにタグを付けます。<ph conref="container_images_pulling.dita#container_images_pulling/image_name_info"></ph><p><codeblock>docker tag <varname>&lt;current_image_name_or_ID&gt;</varname>:<varname>&lt;optional_tag&gt;</varname>  registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>&lt;my_namespace&gt;</varname>/<varname>&lt;new_image_name&gt;</varname>:<varname>&lt;optional_tag&gt;</varname> </codeblock></p><p>例</p><p><codeblock>docker tag <varname>my_ibmliberty_image</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>&lt;my_namespace&gt;</varname>/<varname>my_ibmliberty_image</varname></codeblock></p></li>
+<li>以下のコマンドを使用して、イメージをプライベート <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリーへプッシュします。<p><codeblock>docker push registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>&lt;my_namespace&gt;</varname>/<varname>&lt;image_name&gt;</varname></codeblock></p><p>例<codeblock>docker push registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>my_namespace</varname>/<varname>my_ibmliberty_image</varname></codeblock></p></li></ol></p><note type="important"><ph conref="troubleshoot/ts_known_issues.dita#ki_images/image_size_ph"></ph></note></li></ul></info></step>
+<step id="verify_image">
+<cmd>イメージが <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> レジストリーに追加されたことを確認します。*</cmd>
+<info>
+<p><codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> images</codeblock></p></info></step>
+<step importance="optional" id="va">
+<cmd>イメージの脆弱性を確認します。</cmd><substeps>
+<substep>
+<cmd><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI から、カタログに進んで<uicontrol>「コンテナー」</uicontrol>を選択します。</cmd></substep>
+<substep>
+<cmd>追加したイメージをクリックします。</cmd></substep>
+<substep>
+<cmd><uicontrol conref="va/va_conref.dita#va_conref/v_assess"></uicontrol> セクションで、脆弱性評価の状況を確認します。</cmd>
+<info>状況は、以下のいずれかの条件で示されます。
+<ul>
+<li><wintitle>安全にデプロイ可能</wintitle> - 重大な脆弱性は検出されませんでした。</li>
+<li><wintitle>デプロイに注意が必要</wintitle> - 重大な脆弱性が検出されました。対処が必要です。</li>
+<li><wintitle>デプロイメントはブロックされました</wintitle> - 重大な脆弱性が検出されました。イメージをデプロイする前に確認が必要です。</li>
+<li><wintitle>不完全</wintitle> - スキャンは完了していません。
+スキャンはまだ実行中であるか、イメージのオペレーティング・システムに互換性がない可能性があります。
+待機してからスキャンを再試行してください。
+それでもスキャンが完了しない場合は、再度イメージをプッシュして、新規スキャンを開始します。
+スキャンが不完全なイメージは、デプロイメントについてブロックされません。
+</li></ul></info></substep></substeps></step></steps></taskbody><?tm 1435623320 0?></task>

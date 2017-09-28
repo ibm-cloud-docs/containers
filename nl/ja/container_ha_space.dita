@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN" "ibm-task.dtd">
+<task id="container_ha_space" xml:lang="ja-jp">
+<title>同じスペースでの高可用性コンテナー・グループの実行</title>
+<titlealts>
+<navtitle>同じスペースでの HA グループの実行</navtitle>
+<searchtitle><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> を使用した同じ <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースでの高可用性コンテナー・グループの実行
+</searchtitle></titlealts>
+<shortdesc>同じイメージを使用して、同じ <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースに 2 つのコンテナー・グループを作成し、両方のグループに同じ経路をマップすることができます。このセットアップでは、コンテナー・グループまたはグループのロード・バランサーがダウンした場合に、トラフィックはもう一方のコンテナー・グループにルーティングされます。
+</shortdesc>
+<prolog>
+<metadata>
+<keywords><indexterm>コンテナー・グループ</indexterm><indexterm>コンテナー</indexterm><indexterm>IBM Containers</indexterm><indexterm>高可用性</indexterm></keywords></metadata></prolog>
+<taskbody>
+<prereq><ul audience="unknown">
+<li>このタスクは、有料アカウントも無料評価版ユーザーも実行できます。
+</li>
+<li>カスタム・ドメインまたは <filepath>mybluemix.net</filepath> を使用できます。
+</li></ul>
+<p><image href="images/container_ha_space.svg" scope="local" alt="同じスペースでの高可用性コンテナー・グループの作成"></image></p>
+<p><ph id="create_intro">開始する前に、コンテナー・グループの作成に関する詳細情報が必要な場合は、<xref href="container_group_cli.dita" format="dita" scope="local">CLI</xref> または <xref href="container_group_ui.dita" format="dita" scope="local"><keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> GUI</xref> を使用して、それらの作成に関する情報を参照してください。</ph></p></prereq>
+<steps>
+<stepsection>同じ <keyword conref="cloudoeconrefs.dita#cloudoeconrefs/bluemix_short"></keyword> スペースに高可用性コンテナー・グループを作成するには、以下のようにします。
+</stepsection>
+<step>
+<cmd>以下の要件を満たすコンテナー・グループを作成します。</cmd>
+<info>
+<ul>
+<li id="at_least_2">コンテナー・グループのインスタンス数は、想定されるアプリのワークロードに対応できる数でなければなりません。
+<ph conref="container_conref.dita#terms/instances_determine"></ph>
+<ph conref="container_conref.dita#terms/instances_ha"></ph></li>
+<li id="ha_autorecovery">コンテナー・グループの自動リカバリーを有効にして、異常終了したコンテナーが自動的にリカバリーされるようにします。
+</li>
+<li id="ha_antiaffinity">アンチアフィニティーを有効にします。
+<ph conref="container_conref.dita#terms/antiaffinity_definition"></ph> アンチアフィニティーを使用するには、<xref href="container_group_cli.dita" format="dita" scope="local">CLI</xref> を使用して、<codeph><ph conref="container_conref.dita#links/command_prefix"></ph> group-create</codeph> コマンドに <codeph>--anti</codeph> オプションを含める必要があります。
+CLI から <codeph>--anti</codeph> オプションを使用するには、<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/containerlong"></keyword> プラグイン (<ph conref="container_conref.dita#links/command_prefix"></ph>) バージョン 0.8.934 以降をインストールしておく必要があります。<ph conref="container_cli_reference_cfic.dita#container_cli_reference_cfic/group_create_anti_failure"></ph></li>
+<li>ファイルをボリュームに保管してボリュームをコンテナーにマウントすることができますが、可能であれば、<tm trademark="Cloudant" tmtype="reg">Cloudant</tm> データベースなどの外部データ・ストアにデータを保管してください。
+ローカル・コンテナー・ファイル・システムに永続ファイルを含めないでください。
+コンテナー・グループを作成する前に、ボリュームを作成する必要があります。
+</li>
+<li id="single">コンテナー・グループの代わりに単一コンテナーを作成しないでください。
+単一コンテナーは、一般に短期間のプロセスのために使用するものであり、コンテナー・グループのように標準装備の高可用性機能を持っていません。
+</li></ul>これらの推奨事項を組み込んだ CLI コマンドの例。
+<codeblock><ph conref="container_conref.dita#links/command_prefix"></ph> group-create --min 3 --max 5 --desired 3 --auto --anti --volume <varname>my_volume</varname>:/<varname>directory</varname>/<varname>path</varname> registry.<keyword conref="cloudoeconrefs.dita#cloudoeconrefs/domainname"></keyword>/<varname>my_namespace</varname>/<varname>my_image</varname></codeblock></info></step>
+<step>
+<cmd>以下の要件を満たす 2 つ目のグループを、1 つ目のコンテナー・グループと同じスペースに作成します。
+</cmd>
+<info id="container2">
+<ul>
+<li>コンテナー・グループの名前は別の名前にする必要がありますが、ホスト名は前に作成したコンテナー・グループと同じものを使用します。</li>
+<li id="at_least_2_abbrev">予想されるアプリ・ワークロードをサポートするには、説明に従って <varname>N+2</varname> パターンを使用して、コンテナー・グループのインスタンスの数を決定します。
+</li>
+<li conref="container_ha_space.dita#container_ha_space/ha_autorecovery"></li>
+<li id="ha_antiaffinity_abbrev">アンチアフィニティーを有効にして、コンテナー・インスタンスを別々の物理計算ノードに分散させます。
+</li>
+<li>このコンテナー・グループには、前のステップで作成した 1 つ目のコンテナー・グループと同じ経路をマップする必要があります。
+</li>
+<li>コンテナーに永続ファイルを含めないでください。
+最初のコンテナーにマウントしたものと同じボリュームをこのコンテナーにマウントするか、同じ <tm trademark="Cloudant" tmtype="reg">Cloudant</tm> データベースを使用することができます。
+</li></ul></info></step></steps>
+<postreq>アプリをより広く分散させるには、<xref href="container_ha_org.dita" format="dita" scope="local"></xref>を参照してください。
+</postreq></taskbody></task><?tm 1465479183748 10 jStart||IBM||Cloudant ?>
