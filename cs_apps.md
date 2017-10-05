@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-09-29"
+lastupdated: "2017-10-05"
 
 ---
 
@@ -2220,7 +2220,7 @@ The NFS file storage that backs the persistent volume is clustered by IBM in ord
     ```
     {: screen}
     
-    - The custom storage classes use [Performance storage ![External link icon](../icons/launch-glyph.svg "External link icon")]](https://knowledgelayer.softlayer.com/topic/performance-storage) and have discrete options for total IOPS and size.
+    - The custom storage classes use [Performance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/performance-storage) and have discrete options for total IOPS and size.
 
     ```
     kubectl describe storageclasses ibmc-file-retain-custom 
