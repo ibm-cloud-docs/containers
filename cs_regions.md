@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-05"
+lastupdated: "2017-10-06"
 
 ---
 
@@ -139,7 +139,7 @@ Locations are data centers that are available within a region.
   | US East      | wdc06, wdc07        | Washington, DC |
   | UK South      | lon02, lon04         | London |
   | EU Central     | ams03, fra02        | Amsterdam, Frankfurt |
-  | AP South     | mel01, syd01, syd02        | Melbourne, Sydney |
+  | AP South     | mel01, syd01, syd04        | Melbourne, Sydney |
 
 ### Using container service API commands
 {: #container_api}
