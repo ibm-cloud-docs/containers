@@ -39,22 +39,19 @@ A Kubernetes cluster is a set of worker nodes that are organized into a network.
 For {{site.data.keyword.Bluemix_notm}} Dedicated users, see [Creating Kubernetes clusters from the GUI in {{site.data.keyword.Bluemix_notm}} Dedicated (Closed Beta)](#creating_ui_dedicated) instead.
 
 To create a cluster:
-1.  From the catalog, select **Containers** and click **Kubernetes cluster**.
-
-2.  For the **Cluster type**, select **Standard**. With a standard cluster, you get features like multiple worker nodes for a highly available environment.
-3.  Enter a **Cluster Name**.
-4.  Select a {{site.data.keyword.Bluemix_notm}} **Location** in which to deploy your cluster. The locations that are available to you depend on the {{site.data.keyword.Bluemix_notm}} region that you are logged in to. Select the region that is physically closest to you for best performance. When you select a location that is located outside your country, keep in mind that you might require legal authorization before data can be physically stored in a foreign country. The {{site.data.keyword.Bluemix_notm}} region determines the container registry that you can use and the {{site.data.keyword.Bluemix_notm}} services that are available to you.
-5.  Select a **Machine type**. The machine type defines the amount of virtual CPU and memory that is set up in each worker node and that is available for all the containers that you deploy in your nodes.
-    -   The micro machine type indicates the smallest option.
-    -   A balanced machine type has an equal amount of memory that is assigned to each CPU, which optimizes performance.
-6.  Choose the **Number of worker nodes** that you need. Select `3` for higher availability of your cluster.
-7.  Select a **Private VLAN** from your IBM Bluemix Infrastructure (SoftLayer) account. A private VLAN is used to communicate between worker nodes. You can use the same private VLAN for multiple clusters.
-8. Select a **Public VLAN** from your IBM Bluemix Infrastructure (SoftLayer) account. A public VLAN is used to communicate between worker nodes and the IBM-managed Kubernetes master. You can use the same public VLAN for multiple clusters. If you choose not to select a Public VLAN, you must configure an alternative solution.
-9. For **Hardware**, choose **Dedicated** or **Shared**. **Shared** is a sufficient option for most situations.
-    -   **Dedicated**: Ensure complete isolation of your physical resources from other IBM customers.
-    -   **Shared**: Allow IBM to store your physical resources on the same hardware as other IBM customers.
-10. Click **Create Cluster**. The details for the cluster open, but the worker nodes in the cluster take a few minutes to provision. In the **Worker nodes** tab, you can see the progress of the worker node deployment. When the worker nodes are ready, the state changes to **Ready**.
-
+1. In the catalog, select **Kubernetes Cluster**.
+2. Select a type of cluster plan. You can choose either **Lite** or **Pay-As-You-Go**. With the Pay-As-You-Go plan, you can provision a standard cluster with features like multiple worker nodes for a highly available environment.
+3. Configure your cluster details.
+    1. Give your cluster a name, choose a version of Kubernetes, and select a location in which to deploy. Select the location that is physically closest to you for the best performance. Keep in mind that you might require legal authorization before data can be physically stored in a foreign country if you select a location outside your country.
+    2. Select a type of machine and specify the number of worker nodes that you need. The machine type defines the amount of virtual CPU and memory that is set up in each worker node and made available to the containers.
+        - The micro machine type indicates the smallest option.
+        - A balanced machine has an equal amount of memory that is assigned to each CPU, which optimizes performance.
+    3. Select a Public and Private VLAN from your IBM Bluemix Infrastructure (SoftLayer) account. Both VLANs communicate between worker nodes but the public VLAN also communicates with the IBM-managed Kubernetes master. You can use the same VLAN for multiple clusters.
+        **Note**: If you choose not to select a public VLAN, you must configure an alternative solution.
+    4. Select a type of hardware. Shared is a sufficient option for most situations.
+        - **Dedicated**: Ensure complete isolation of your physical resources.
+        - **Shared**: Allow storage of your physical resources on the same hardware as other IBM customers.
+4. Click **Create cluster**. You can see the progress of the worker node deployment in the **Worker nodes** tab. When the deploy is done, you can see that your cluster is ready in the **Overview** tab.
     **Note:** Every worker node is assigned a unique worker node ID and domain name that must not be manually changed after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
 
 
@@ -65,6 +62,7 @@ When the cluster is up and running, you can check out the following tasks:
 -   [Install the CLIs to start working with your cluster.](cs_cli_install.html#cs_cli_install)
 -   [Deploy an app in your cluster.](cs_apps.html#cs_apps_cli)
 -   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry/index.html)
+
 
 ### Creating clusters with the GUI in {{site.data.keyword.Bluemix_notm}} Dedicated (Closed Beta)
 {: #creating_ui_dedicated}
@@ -1708,8 +1706,8 @@ To configure your cluster to forward logs to a syslog server:
     Example output:
 
     ```
-    Namespace         Host             Port   Protocol   
-    mykubenamespace   myhostname.com   514    syslog   
+    Namespace         Host             Port   Protocol
+    mykubenamespace   myhostname.com   514    syslog
     ```
     {: screen}
 
