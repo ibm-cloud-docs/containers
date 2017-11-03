@@ -1188,6 +1188,7 @@ Updating production-level clusters:
 - Use a test cluster to validate that your workloads and the delivery process are not impacted by the update. You cannot roll back worker nodes to a previous version.
 - Production-level clusters should have capacity to survive a worker node failure. If your cluster does not, add a worker node before updating the cluster.
 
+
 1. Install the version of the [`kubectl cli` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/tools/install-kubectl/) that matches the Kubernetes version of the Kubernetes master.
 
 2. Make any changes that are marked _Update after master_ in [Kubernetes changes](cs_versions.html).
