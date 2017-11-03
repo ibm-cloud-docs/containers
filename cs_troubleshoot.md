@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-24"
+lastupdated: "2017-11-03"
 
 ---
 
@@ -615,6 +615,26 @@ There are no service disruptions due to these duplicates, but you should remove 
 
   ```
   kubectl delete node <node_name1> <node_name2>
+  ```
+  {: pre}
+
+<br />
+
+
+## Kubernetes dashboard does not display utilization graphs
+{: #cs_dashboard_graphs}
+
+{: tsSymptoms}
+When you access the Kubernetes dashboard, utilization graphs do not display.
+
+{: tsCauses}
+Sometimes after a cluster update or worker node reboot the `kube-dashboard` pod does not update.
+
+{: tsResolve}
+Delete the `kube-dashboard` pod to force a restart. The pod is re-created with RBAC policies to access heapster for utilization information.
+
+  ```
+  kubectl delete pod -n kube-system $(kubectl get pod -n kube-system --selector=k8s-app=kubernetes-dashboard -o jsonpath='{.items..metadata.name}')
   ```
   {: pre}
 
