@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-03"
+lastupdated: "2017-11-07"
 
 ---
 
@@ -99,6 +99,7 @@ bx plugin list
 ## bx cs commands
 {: #cs_commands}
 
+
 ### bx cs albs --cluster CLUSTER
 {: #cs_albs}
 
@@ -186,7 +187,7 @@ View the details of an application load balancer (alb).
   bx cs alb-get --albID ALB_ID
   ```
   {: pre}
-  
+
 ### bx cs alb-types
 {: #cs_alb_types}
 
@@ -202,7 +203,7 @@ View the application load balancer types that are supported in the region.
   bx cs alb-types
   ```
   {: pre}
-  
+
 ### bx cs cluster-config CLUSTER [--admin] [--export]
 {: #cs_cluster_config}
 
@@ -230,7 +231,7 @@ bx cs cluster-config my_cluster
 
 
 
-### bx cs cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--workers WORKER]
+### bx cs cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--workers WORKER]
 {: #cs_cluster_create}
 
 To create a cluster in your organization.
@@ -247,11 +248,14 @@ To create a cluster in your organization.
 <pre class="codeblock">
 <code>name: <em>&lt;cluster_name&gt;</em>
 location: <em>&lt;location&gt;</em>
+no-subnet: <em>&lt;no-subnet&gt;</em>
 machine-type: <em>&lt;machine_type&gt;</em>
 private-vlan: <em>&lt;private_vlan&gt;</em>
 public-vlan: <em>&lt;public_vlan&gt;</em>
 hardware: <em>&lt;shared_or_dedicated&gt;</em>
-workerNum: <em>&lt;number_workers&gt;</em></code></pre>
+workerNum: <em>&lt;number_workers&gt;</em>
+kube-version: <em>&lt;kube-version&gt;</em>
+</code></pre>
 
 
 <table>
@@ -268,6 +272,10 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
     <td><code><em>location</em></code></td>
     <td>Replace <code><em>&lt;location&gt;</em></code> with the location where you want to create your cluster. The available locations are dependent on the region that you are logged in. To list available locations, run <code>bx cs locations</code>. </td>
      </tr>
+     <tr>
+     <td><code><em>no-subnet</em></code></td>
+     <td>By default, both a public and a private portable subnets are created on the VLAN associated with the cluster. Replace <code><em>&lt;no-subnet&gt;</em></code> with <code><em>true</em></code> to avoid creating subnets with the cluster. You can [create](#cs_cluster_subnet_create) or [add](#cs_cluster_subnet_add) subnets to a cluster later.</td>
+      </tr>
      <tr>
      <td><code><em>machine-type</em></code></td>
      <td>Replace <code><em>&lt;machine_type&gt;</em></code> with the machine type that you want for your worker nodes. To list available machine types for your location, run <code>bx cs machine-types <em>&lt;location&gt;</em></code>.</td>
@@ -288,6 +296,9 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
      <td><code><em>workerNum</em></code></td>
      <td>Replace <code><em>&lt;number_workers&gt;</em></code> with the number of worker nodes that you want to deploy.</td>
      </tr>
+     <tr>
+      <td><code><em>kube-version</em></code></td>
+      <td>The Kubernetes version for the cluster master node. This value is optional. Unless specified, the cluster is created with the default of supported Kubernetes versions. To see available versions, run <code>bx cs kube-versions</code>.</td>
      </tbody></table>
     </p></dd>
 
@@ -309,8 +320,11 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
 <dt><code>--name <em>NAME</em></code></dt>
 <dd>The name for the cluster.  This value is required.</dd>
 
+<dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
+<dd>The Kubernetes version for the cluster master node. This value is optional. Unless specified, the cluster is created with the default of supported Kubernetes versions. To see available versions, run <code>bx cs kube-versions</code>.</dd>
+
 <dt><code>--no-subnet</code></dt>
-<dd>Include the flag to create a cluster without a portable subnet. The default is to not use the flag and to create a subnet in your IBM Bluemix Infrastructure (SoftLayer) portfolio. This value is optional.</dd>
+<dd>By default, both a public and a private portable subnets are created on the VLAN associated with the cluster. Include the <code>--no-subnet</code> flag to avoid creating subnets with the cluster. You can [create](#cs_cluster_subnet_create) or [add](#cs_cluster_subnet_add) subnets to a cluster later.</dd>
 
 <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
 <dd>
@@ -807,7 +821,7 @@ View a list of available locations for you to create a cluster in.
   ```
   {: pre}
 
-### bx cs logging-config-create CLUSTER [--namespace KUBERNETES_NAMESPACE] [--logsource LOG_SOURCE] [--hostname LOG_SERVER_HOSTNAME] [--port LOG_SERVER_PORT] --type LOG_TYPE
+### bx cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE] [--hostname LOG_SERVER_HOSTNAME] [--port LOG_SERVER_PORT] --type LOG_TYPE
 {: #cs_logging_create}
 
 Create a logging configuration. By default, namespace logs are forwarded to {{site.data.keyword.loganalysislong_notm}}. You can use this command to forward namespace logs to an external syslog server. You can also use this command to forward logs for applications, worker nodes, Kubernetes clusters, and Ingress controllers to {{site.data.keyword.loganalysisshort_notm}} or to an external syslog server.
@@ -818,7 +832,7 @@ Create a logging configuration. By default, namespace logs are forwarded to {{si
 <dt><code><em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster.</dd>
 <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-<dd>The log source for which you want to enable log forwarding. Accepted values are <code>application</code>, <code>worker</code>, <code>kubernetes</code>, and <code>ingress</code>. This value is required for log sources other than Docker container namespaces.</dd>
+<dd>The log source for which you want to enable log forwarding. Accepted values are <code>application</code>, <code>worker</code>, <code>kubernetes</code>, and <code>ingress</code>. This value is required.</dd>
 <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
 <dd>The Docker container namespace from which you want to forward logs to syslog. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is required for namespaces. If you do not specify a namespace, then all namespaces in the container use this configuration.</dd>
 <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
@@ -834,14 +848,14 @@ Create a logging configuration. By default, namespace logs are forwarded to {{si
 Example for log source `namespace`:
 
   ```
-  bx cs logging-config-create my_cluster --namespace my_namespace --hostname localhost --port 5514 --type syslog
+  bx cs logging-config-create my_cluster --logsource namespaces --namespace my_namespace --hostname localhost --port 5514 --type syslog
   ```
   {: pre}
 
 Example for log source `ingress`:
 
   ```
-  bx cs logging-config-create my_cluster f4bc77c0-ee7d-422d-aabf-a4e6b977264e --type ibm
+  bx cs logging-config-create my_cluster --logsource ingress --type ibm
   ```
   {: pre}
 
@@ -867,7 +881,7 @@ View all log forwarding configurations for a cluster, or filter logging configur
   {: pre}
 
 
-### bx cs logging-config-rm CLUSTER [--namespace KUBERNETES_NAMESPACE] [--id LOG_SOURCE_LOGGING_ID]
+### bx cs logging-config-rm CLUSTER --id LOG_CONFIG_ID
 {: #cs_logging_rm}
 
 Deletes a log forwarding configuration. For a Docker container namespace, you can stop forwarding logs to a syslog server. The namespace continues to forward logs to {{site.data.keyword.loganalysislong_notm}}. For a log source other than a Docker container namespace, you can stop forwarding logs to a syslog server or to {{site.data.keyword.loganalysisshort_notm}}.
@@ -877,21 +891,19 @@ Deletes a log forwarding configuration. For a Docker container namespace, you ca
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
-   <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
-   <dd>The Docker container namespace from which you want to stop forwarding logs to syslog. This value is required for Docker container namespaces.</dd>
-   <dt><code>--id <em>LOG_SOURCE_LOGGING_ID</em></code></dt>
-   <dd>The logging configuration ID that you want to remove from the log source. This value is required for log sources other than Docker container namespaces.</dd>
+   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
+   <dd>The logging configuration ID that you want to remove from the log source. This value is required.</dd>
    </dl>
 
 **Example**:
 
   ```
-  bx cs logging-config-rm my_cluster --namespace my_namespace
+  bx cs logging-config-rm my_cluster --id my_log_config_id
   ```
   {: pre}
 
 
-### bx cs logging-config-update CLUSTER [--namespace NAMESPACE] [--id LOG_SOURCE_LOGGING_ID] [--logsource LOG_SOURCE] [--hostname LOG_SERVER_HOSTNAME] [--port LOG_SERVER_PORT] --type LOG_TYPE
+### bx cs logging-config-update CLUSTER [--namespace NAMESPACE] [--id LOG_CONFIG_ID] [--hostname LOG_SERVER_HOSTNAME] [--port LOG_SERVER_PORT] --type LOG_TYPE
 {: #cs_logging_update}
 
 Update log forwarding to the logging server you want use. For a Docker container namespace, you can use this command to update details for the current syslog server or change to a different syslog server. For a logging source other than a Docker container namespace, you can use this command to change the log collector server type. Currently, 'syslog' and 'ibm' are supported as log types.
@@ -903,9 +915,7 @@ Update log forwarding to the logging server you want use. For a Docker container
    <dd>The name or ID of the cluster. This value is required.</dd>
    <dt><code>--namespace <em>NAMESPACE</em></code></dt>
    <dd>The Docker container namespace from which you want to forward logs to syslog. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is required for namespaces.</dd>
-   <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-   <dd>The log source for which you want to update log forwarding. Accepted values are <code>application</code>, <code>worker</code>, <code>kubernetes</code>, and <code>ingress</code>. This value is required for log sources other than Docker container namespaces.</dd>
-   <dt><code>--id <em>LOG_SOURCE_LOGGING_ID</em></code></dt>
+   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
    <dd>The logging configuration ID that you want to update. This value is required for log sources other than Docker container namespaces.</dd>
    <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
    <dd>The hostname or IP address of the log collector server. This value is required when the logging type is <code>syslog</code>.</dd>
