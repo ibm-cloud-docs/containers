@@ -56,7 +56,7 @@ To install the CLIs:
 3.  To create Kubernetes clusters and manage worker nodes, install the {{site.data.keyword.containershort_notm}} plug-in. The prefix for running commands by using the {{site.data.keyword.containershort_notm}} plug-in is `bx cs`.
 
     ```
-    bx plugin install container-service -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-service -r Bluemix
     ```
     {: pre}
 
@@ -113,7 +113,7 @@ To install the CLIs:
 5.  To manage a private image repository, install the {{site.data.keyword.registryshort_notm}} plug-in. Use this plug-in to set up your own namespace in a multi-tenant, highly available, and scalable private image registry that is hosted by IBM, and to store and share Docker images with other users. Docker images are required to deploy containers into a cluster. The prefix for running registry commands is `bx cr`.
 
     ```
-    bx plugin install container-registry -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-registry -r Bluemix
     ```
     {: pre}
 
@@ -258,7 +258,7 @@ To update the CLIs:
     1.  Install the update from the {{site.data.keyword.Bluemix_notm}} plug-in repository.
 
         ```
-        bx plugin update container-service -r {{site.data.keyword.Bluemix_notm}}
+        bx plugin update container-service -r Bluemix
         ```
         {: pre}
 
@@ -322,7 +322,7 @@ To update the CLIs:
     1.  Install the update from the {{site.data.keyword.Bluemix_notm}} plug-in repository.
 
         ```
-        bx plugin update container-registry -r {{site.data.keyword.Bluemix_notm}}
+        bx plugin update container-registry -r Bluemix
         ```
         {: pre}
 
@@ -423,8 +423,8 @@ The {{site.data.keyword.containershort_notm}} API requires header information th
 </table>
 
 1.  Create your IAM (Identity and Access Management) access token. The body information that is included in your request varies based on the {{site.data.keyword.Bluemix_notm}} authentication method that you use. Replace the following values:
-  - _&lt;my_bluemix_username&gt;_: Your {{site.data.keyword.Bluemix_notm}} user name.
-  - _&lt;my_bluemix_password&gt;_: Your {{site.data.keyword.Bluemix_notm}} password.
+  - _&lt;my_username&gt;_: Your {{site.data.keyword.Bluemix_notm}} user name.
+  - _&lt;my_password&gt;_: Your {{site.data.keyword.Bluemix_notm}} password.
   - _&lt;my_api_key&gt;_: Your {{site.data.keyword.Bluemix_notm}} API key.
   - _&lt;my_passcode&gt;_: Your {{site.data.keyword.Bluemix_notm}} one-time passcode. Run `bx login --sso` and follow the instructions in your CLI output to retrieve your one-time passcode by using your web browser.
 
@@ -448,8 +448,8 @@ The {{site.data.keyword.containershort_notm}} API requires header information th
     <td>Body for {{site.data.keyword.Bluemix_notm}} user name and password</td>
     <td><ul><li>grant_type: password</li>
     <li>response_type: cloud_iam, uaa</li>
-    <li>username: <em>&lt;my_bluemix_username&gt;</em></li>
-    <li>password: <em>&lt;my_bluemix_password&gt;</em></li>
+    <li>username: <em>&lt;my_username&gt;</em></li>
+    <li>password: <em>&lt;my_password&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li></ul>
     <p><b>Note</b>: Add the uaa_client_secret key with no value specified.</p></td>
@@ -526,8 +526,8 @@ The {{site.data.keyword.containershort_notm}} API requires header information th
       "resources":
         {
           "metadata": {
-            "guid": "<my_bluemix_account_id>",
-            "url": "/v1/accounts/<my_bluemix_account_id>",
+            "guid": "<my_account_id>",
+            "url": "/v1/accounts/<my_account_id>",
             "created_at": "2016-01-07T18:55:09.726Z",
             "updated_at": "2017-04-28T23:46:03.739Z",
             "origin": "BSS"
@@ -537,7 +537,7 @@ The {{site.data.keyword.containershort_notm}} API requires header information th
 
     You can find the ID of your {{site.data.keyword.Bluemix_notm}} account in the **resources/metadata/guid** field of your API output.
 
-3.  Generate a new IAM token that includes your {{site.data.keyword.Bluemix_notm}} credentials and the account ID where the cluster was created. Replace _&lt;my_bluemix_account_id&gt;_ with the ID of the {{site.data.keyword.Bluemix_notm}} account that you retrieved in the previous step.
+3.  Generate a new IAM token that includes your {{site.data.keyword.Bluemix_notm}} credentials and the account ID where the cluster was created. Replace _&lt;my_account_id&gt;_ with the ID of the {{site.data.keyword.Bluemix_notm}} account that you retrieved in the previous step.
 
     **Note:** If you are using an {{site.data.keyword.Bluemix_notm}} API key, you must use the {{site.data.keyword.Bluemix_notm}} account ID the API key was created for. To access clusters in other accounts, log into this account and create an {{site.data.keyword.Bluemix_notm}} API key that is based on this account.
 
@@ -561,11 +561,11 @@ The {{site.data.keyword.containershort_notm}} API requires header information th
     <td>Body for {{site.data.keyword.Bluemix_notm}} user name and password</td>
     <td><ul><li>grant_type: password</li>
     <li>response_type: cloud_iam, uaa</li>
-    <li>username: <em>&lt;my_bluemix_username&gt;</em></li>
-    <li>password: <em>&lt;my_bluemix_password&gt;</em></li>
+    <li>username: <em>&lt;my_username&gt;</em></li>
+    <li>password: <em>&lt;my_password&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;my_bluemix_account_id&gt;</em></li></ul>
+    <li>bss_account: <em>&lt;my_account_id&gt;</em></li></ul>
     <p><b>Note</b>: Add the uaa_client_secret key with no value specified.</p></td>
     </tr>
     <tr>
@@ -575,7 +575,7 @@ The {{site.data.keyword.containershort_notm}} API requires header information th
     <li>apikey: <em>&lt;my_api_key&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;my_bluemix_account_id&gt;</em></li></ul>
+    <li>bss_account: <em>&lt;my_account_id&gt;</em></li></ul>
     <p><b>Note</b>: Add the uaa_client_secret key with no value specified.</p></td>
     </tr>
     <tr>
@@ -585,7 +585,7 @@ The {{site.data.keyword.containershort_notm}} API requires header information th
     <li>passcode: <em>&lt;my_passcode&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;my_bluemix_account_id&gt;</em></li></ul>
+    <li>bss_account: <em>&lt;my_account_id&gt;</em></li></ul>
     <p><b>Note<b>: Add the uaa_client_secret key with no value specified.</p></td>
     </tr>
     </tbody>
@@ -637,18 +637,18 @@ The {{site.data.keyword.containershort_notm}} API requires header information th
       ```
       {
             "metadata": {
-              "guid": "<bluemix_org_id>",
-              "url": "/v2/organizations/<my_bluemix_org_id>",
+              "guid": "<org_id>",
+              "url": "/v2/organizations/<my_org_id>",
               "created_at": "2016-01-07T18:55:19Z",
               "updated_at": "2016-02-09T15:56:22Z"
             },
             "entity": {
-              "name": "<bluemix_org_name>",
+              "name": "<org_name>",
               "billing_enabled": false,
-              "quota_definition_guid": "<bluemix_org_id>",
+              "quota_definition_guid": "<my_org_id>",
               "status": "active",
-              "quota_definition_url": "/v2/quota_definitions/<bluemix_org_id>",
-              "spaces_url": "/v2/organizations/<bluemix_org_id>/spaces",
+              "quota_definition_url": "/v2/quota_definitions/<my_org_id>",
+              "spaces_url": "/v2/organizations/<my_org_id>/spaces",
       ...
 
       ```
@@ -658,7 +658,7 @@ The {{site.data.keyword.containershort_notm}} API requires header information th
 6.  Retrieve the ID of the {{site.data.keyword.Bluemix_notm}} space by using the **spaces_url** endpoint.
 
       ```
-      GET https://api.<region>.bluemix.net/v2/organizations/<bluemix_org_id>/spaces
+      GET https://api.<region>.bluemix.net/v2/organizations/<my_org_id>/spaces
       ```
       {: codeblock}
 
@@ -667,14 +667,14 @@ The {{site.data.keyword.containershort_notm}} API requires header information th
       ```
       {
             "metadata": {
-              "guid": "<bluemix_space_id>",
-              "url": "/v2/spaces/<my_bluemix_space_id>",
+              "guid": "<my_space_id>",
+              "url": "/v2/spaces/<my_space_id>",
               "created_at": "2016-01-07T18:55:22Z",
               "updated_at": null
             },
             "entity": {
-              "name": "<bluemix_space_name>",
-              "organization_guid": "<bluemix_org_id>",
+              "name": "<space_name>",
+              "organization_guid": "<my_org_id>",
               "space_quota_definition_guid": null,
               "allow_ssh": true,
       ...
@@ -774,7 +774,7 @@ Use the following steps if you want to refresh your IAM token.
     <li>refresh_token: <em>&lt;iam_refresh_token&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;bluemix_account_id&gt;</em></li></ul><p><b>Note</b>: Add the uaa_client_secret key with no value specified.</p></td>
+    <li>bss_account: <em>&lt;account_id&gt;</em></li></ul><p><b>Note</b>: Add the uaa_client_secret key with no value specified.</p></td>
     </tr>
     </tbody>
     </table>
