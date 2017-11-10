@@ -22,17 +22,16 @@ lastupdated: "2017-11-07"
 You can use Kubernetes techniques to deploy apps and to ensure your apps are up and running at all times. For example, you can perform rolling updates and rollbacks without downtime for your users.
 {:shortdesc}
 
-Deploying an app generally includes the following steps.
+Learn the general steps for deploying apps by clicking an area of the image.
 
-1.  [Install the CLIs](cs_cli_install.html#cs_cli_install).
+<img usemap="#d62e18" border="0" class="image" id="basic_deployment_process" src="images/basic_deployment_process.png" width="780" style="width:780px;"/>
+<map name="d62e18" id="d62e18">
+<area href="cs_cli_install.html" target="_blank" alt="Install the CLIs." title="Install the CLIs." shape="rect" coords="30, 69, 179, 209" />
+<area href="https://kubernetes.io/docs/concepts/configuration/overview/" target="_blank" alt="Create a configuration file for your app. Review the best practices from Kubernetes." title="Create a configuration file for your app. Review the best practices from Kubernetes." shape="rect" coords="254, 64, 486, 231" />
+<area href="#cs_apps_cli" target="_blank" alt="Option 1: Run configuration files from the Kubernetes CLI." title="Option 1: Run configuration files from the Kubernetes CLI." shape="rect" coords="544, 67, 730, 124" />
+<area href="#cs_cli_dashboard" target="_blank" alt="Option 2: Start the Kubernetes dashboard locally and run configuration files." title="Option 2: Start the Kubernetes dashboard locally and run configuration files." shape="rect" coords="544, 141, 728, 204" />
+</map>
 
-2.  Create a configuration file for your app. [Review the best practices from Kubernetes. ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/overview/)
-
-3.  Run the configuration file by using one of the following methods.
-    -   [The Kubernetes CLI](#cs_apps_cli)
-    -   The Kubernetes dashboard
-        1.  [Start the Kubernetes dashboard.](#cs_cli_dashboard)
-        2.  [Run the configuration file.](#cs_apps_ui)
 
 <br />
 
@@ -124,7 +123,11 @@ You can use the default port or set your own port to launch the Kubernetes dashb
 
         3.  Then, paste the **id-token** value into the **Token** field and click **SIGN IN**.
 
+[Next, you can run a configuration file from the dashboard.](#cs_apps_ui)
+
 When you are done with the Kubernetes dashboard, use `CTRL+C` to exit the `proxy` command. After you exit, the Kubernetes dashboard is no longer available. Run the `proxy` command to restart the Kubernetes dashboard.
+
+
 
 <br />
 
