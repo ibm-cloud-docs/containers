@@ -21,6 +21,8 @@ lastupdated: "2017-11-07"
 
 [{{site.data.keyword.Bluemix_notm}} regions](#bluemix_regions) differ from [{{site.data.keyword.containershort_notm}} regions](#container_regions).
 
+
+
 Supported {{site.data.keyword.containershort_notm}} regions:
   * AP South
   * EU Central
