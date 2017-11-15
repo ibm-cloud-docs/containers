@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-08-14"
+lastupdated: "2017-10-24"
 
 ---
 
@@ -12,7 +12,7 @@ lastupdated: "2017-08-14"
 {:pre: .pre}
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
-{:tip: .tip} 
+{:tip: .tip}
 {:download: .download}
 
 
@@ -22,6 +22,9 @@ lastupdated: "2017-08-14"
 {{site.data.keyword.containershort_notm}} には、組織の機能要件と非機能要件を満たす Kubernetes クラスターを構成してカスタマイズするために、いくつかのオプションが用意されています。
 それらの構成の中には、クラスター作成後には変更できないものもあります。それらの構成を事前に理解しておくと、メモリー、ディスク・スペース、IP アドレスなどのすべてのリソースを開発チームのために確保する上で役立ちます。
 {:shortdesc}
+
+<br />
+
 
 ## ライト・クラスターと標準クラスターの比較
 {: #cs_planning_cluster_type}
@@ -37,12 +40,15 @@ lastupdated: "2017-08-14"
 |[ユーザー・アクセス管理](cs_cluster.html#cs_cluster_user)|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
 |[クラスターとアプリからの {{site.data.keyword.Bluemix_notm}} サービス・アクセス](cs_cluster.html#cs_cluster_service)|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
 |[ストレージ用のワーカー・ノードのディスク・スペース](#cs_planning_apps_storage)|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
-|[NFS ファイル・ベースの永続ストレージのボリューム](#cs_planning_apps_storage)||<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
-|[ロード・バランサー・サービスによるパブリック・アプリ・アクセス](#cs_loadbalancer)||<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
-|[Ingress サービスによるパブリック・アプリ・アクセス](#cs_ingress)||<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
-|[ポータブル・パブリック IP アドレス](cs_apps.html#cs_cluster_ip_subnet)||<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
-|[{{site.data.keyword.Bluemix_notm}} Dedicated (最終ベータ版) で使用可能](cs_ov.html#dedicated_environment)||<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
+|[NFS ファイル・ベースの永続ストレージのボリューム](#cs_planning_apps_storage)| |<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
+|[ロード・バランサー・サービスによるパブリック・アプリ・アクセスまたはプライベート・アプリ・アクセス](#cs_loadbalancer)| |<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
+|[Ingress サービスによるパブリック・アプリ・アクセス](#cs_ingress)| |<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
+|[ポータブル・パブリック IP アドレス](cs_apps.html#cs_cluster_ip_subnet)| |<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
+|[{{site.data.keyword.Bluemix_notm}} Dedicated (最終ベータ版) で使用可能](cs_ov.html#dedicated_environment)| |<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
 {: caption="表 1. ライト・クラスターと標準クラスターとの違い" caption-side="top"}
+
+<br />
+
 
 ## クラスター構成
 {: #cs_planning_cluster_config}
@@ -101,6 +107,8 @@ Kubernetes では、1 つのクラスター内に作成できるワーカー・�
 </dd>
 </dl>
 
+<br />
+
 
 ## ワーカー・ノードの構成
 {: #cs_planning_worker_nodes}
@@ -110,7 +118,7 @@ Kubernetes クラスターは、仮想マシンのワーカー・ノードで構
 クラスター内のアプリをデプロイして実行するためのすべてのリソースをクラスター・ユーザーのために用意する必要があります。
 {:shortdesc}
 
-標準クラスターを作成する時、ワーカー・ノードは {{site.data.keyword.BluSoftlayer_full}} 内で自動的に順番に配置されて {{site.data.keyword.Bluemix_notm}} にセットアップされます。すべてのワーカー・ノードには、
+標準クラスターを作成する時、ワーカー・ノードは IBM Bluemix Infrastructure (SoftLayer) 内で自動的に順番に配置されて {{site.data.keyword.Bluemix_notm}} にセットアップされます。すべてのワーカー・ノードには、
 固有のワーカー・ノード ID とドメイン名が割り当てられます。
 それらをクラスターの作成後に変更してはいけません。
 選択するハードウェア分離のレベルに応じて、ワーカー・ノードを共有ノードまたは専用ノードとしてセットアップできます。それぞれのワーカー・ノードは特定のマシン・タイプでプロビジョンされ、ワーカー・ノードにデプロイされるコンテナーが使用できる vCPU の数、メモリー、ディスク・スペースがそのタイプによって決まります。
@@ -137,10 +145,45 @@ Kubernetes では、1 つのクラスター内に作成できるワーカー・�
 ただし、共有ノードにするか専用ノードにするかを決定する際は、社内の法務部門に相談して、アプリ環境で必要になるインフラストラクチャーの分離とコンプライアンスのレベルを検討することをお勧めします。
 
 
-ライト・クラスターを作成する場合、ワーカー・ノードは {{site.data.keyword.IBM_notm}} {{site.data.keyword.BluSoftlayer_notm}} アカウントに共有ノードとして自動的にプロビジョンされます。
+ライト・クラスターを作成する場合、ワーカー・ノードは IBM Bluemix Infrastructure (SoftLayer) アカウントに共有ノードとして自動的にプロビジョンされます。
 
 {{site.data.keyword.Bluemix_notm}} Dedicated でクラスターを作成する場合は、単一テナント・セットアップのみが使用されるので、すべての物理リソースはお客様専用になります。
 同じ物理ホスト上に複数のワーカー・ノードを仮想マシンとしてデプロイします。
+
+
+<br />
+
+
+## クラスター管理の責任
+{: #responsibilities}
+
+お客様が IBM と分担する、クラスター管理の責任について確認してください。{{site.data.keyword.Bluemix_notm}} Dedicated 環境で管理されるクラスターの場合の責任について確認するには、代わりに[クラウド環境間のクラスター管理の違い](cs_ov.html#env_differences)を参照してください。
+{:shortdesc}
+
+**IBM は以下について責任を持ちます。**
+
+- クラスター作成時に、マスター、ワーカー・ノード、管理コンポーネント (Ingress コントローラーなど) をクラスター内にデプロイする
+- クラスターにおける Kubernetes マスターの更新、モニタリング、リカバリーを管理する
+- ワーカー・ノードの正常性をモニタリングし、それらのワーカー・ノードの更新とリカバリーの自動化を提供する
+- ワーカー・ノードの追加、ワーカー・ノードの削除、デフォルト・サブネットの作成などの、インフラストラクチャー・アカウントに対する自動化タスクを実行する
+- クラスター内の運用コンポーネント (Ingress コントローラーやストレージ・プラグインなど) を管理、更新、リカバリーする
+- ストレージ・ボリュームを、永続ボリューム請求で要求されたときにプロビジョンする
+- すべてのワーカー・ノードにセキュリティー設定を提供する
+
+<br />
+**お客様は以下について責任を持ちます。**
+
+- [Kubernetes リソース (ポッド、サービス、デプロイメントなど) をクラスター内にデプロイして管理する](cs_apps.html#cs_apps_cli)
+- [アプリの高可用性が確保されるように、サービスと Kubernetes の機能を活用する](cs_planning.html#highly_available_apps)
+- [CLI を使用してワーカー・ノードを追加または解除することで、キャパシティーを追加または縮小する](cs_cli_reference.html#cs_worker_add)
+- [クラスターのネットワーク分離のために IBM Bluemix Infrastructure (SoftLayer) でパブリック VLAN とプライベート VLAN を作成する ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://knowledgelayer.softlayer.com/topic/vlans)
+- [すべてのワーカー・ノードに、Kubernetes マスター URL へのネットワーク接続を設定する](cs_security.html#opening_ports)<p>**注**: ワーカー・ノードにパブリック VLAN とプライベート VLAN の両方が設定されている場合は、ネットワーク接続が構成されています。ワーカー・ノードにプライベート VLAN のみがセットアップされている場合は、ネットワーク接続を確立するために vyatta が必要です。</p>
+- [Kubernetes のメジャー・バージョン更新またはマイナー・バージョン更新が利用可能になるときに、kube-apiserver とワーカー・ノードを更新するタイミングを判断する](cs_cluster.html#cs_cluster_update)
+- [トラブルが発生したワーカー・ノードをリカバリーするために対処する。これは、`kubectl` コマンド (`cordon` や `drain` など) を実行したり、`bx cs` コマンド (`reboot`、`reload`、`delete` など) を実行したりして行う](cs_cli_reference.html#cs_worker_reboot)
+- [IBM Bluemix Infrastructure (SoftLayer) 内の追加サブネットを必要に応じて追加または解除する](cs_cluster.html#cs_cluster_subnet)
+- [IBM Bluemix Infrastructure (SoftLayer) で永続ストレージのデータのバックアップとリストアを実行する ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](../services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter)
+
+<br />
 
 
 ## デプロイメント
@@ -169,13 +212,13 @@ Kubernetes では、1 つのクラスター内に作成できるワーカー・�
 <dd>デプロイメントとは、アプリのすべてのコンポーネントや依存項目を宣言するために使用できる Kubernetes リソースです。
 必要なすべての手順やコンポーネントの作成順序ではなくそれぞれの単一コンポーネントを記述することにより、
 稼働中のアプリの動作に集中できます。
-</br>
+</br></br>
 複数のポッドをデプロイすると、デプロイメントのレプリカ・セットが自動的に作成されます。そのレプリカ・セットによってポッドがモニターされ、いつでも望ましい数のポッドが稼働状態になります。
 ポッドがダウンすると、応答しなくなったポッドがレプリカ・セットによって新しいポッドに置き換えられます。
 </br></br>
 デプロイメントを使用して、ローリング更新中に追加するポッドの数や、1 度に使用不可にできるポッドの数など、アプリの更新戦略を定義できます。
 ローリング更新の実行時には、デプロイメントによって、リビジョンが動作しているかどうかが確認され、障害が検出されるとロールアウトが停止されます。
-</br>
+</br></br>
 デプロイメントを使用すれば、異なるフラグを設定した複数のリビジョンを同時にデプロイすることもできるので、まずデプロイメントをテストしてから実稼働環境にプッシュするかどうかを決める、といったことが可能になります。
 </br></br>
 すべてのデプロイメントで、デプロイされたリビジョンが追跡されます。
@@ -185,7 +228,7 @@ Kubernetes では、1 つのクラスター内に作成できるワーカー・�
 <dd>アプリの可用性と耐障害性を高めるために、予想されるワークロードを処理する最低限の数のレプリカに加えて予備のレプリカを組み込むことを検討してください。
 ポッドがクラッシュし、そのポッドがレプリカ・セットによってまだリカバリーされていない状況でも、予備のレプリカでワークロードを処理できます。
 
-2 つが同時に障害を発生した場合に対応できるようにするには、2 つ余分にレプリカを組み込みます。このセットアップは N+2 パターンです。N は着信ワークロードを処理するレプリカの数、+2 は追加の 2 つのインスタンスです。</dd>
+2 つが同時に障害を発生した場合に対応できるようにするには、2 つ余分にレプリカを組み込みます。このセットアップは N+2 パターンです。N は着信ワークロードを処理するレプリカの数、+2 は追加の 2 つのインスタンスです。クラスターに十分なスペースがある限り、ポッドをいくつでもクラスターに含めることができます。</dd>
 <dt>複数のノードにポッドを分散させる (アンチアフィニティー)</dt>
 <dd>デプロイメントを作成する時に、各ポッドを同じワーカー・ノードにデプロイすることもできます。
 複数のポッドが同じワーカー・ノード上に存在するセットアップは、アフィニティーまたはコロケーションといいます。
@@ -195,56 +238,48 @@ Kubernetes では、1 つのクラスター内に作成できるワーカー・�
 <strong>注:</strong> 以下の YAML ファイルでは、それぞれのポッドを異なるワーカー・ノードにデプロイします。定義したレプリカの数がクラスター内の使用できるワーカー・ノードの数より多い場合は、アンチアフィニティーの要件を満たせる数のレプリカだけがデプロイされます。
 それ以外のレプリカは、ワーカー・ノードがさらにクラスターに追加されるまで保留状態になります。
 <pre class="codeblock">
-<code>apiVersion: v1
-kind: Service
+<code>apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
 name: wasliberty
+spec:
+replicas: 3
+template:
+metadata:
 labels:
 app: wasliberty
 spec:
-ports:
-    # the port that this service should serve on
-  - port: 9080
-  selector:
-    app: wasliberty
-  type: NodePort 
----
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  name: wasliberty
-spec:
-  replicas: 3
-  template:
-    metadata:
-      labels:
-        app: wasliberty
-      annotations:
-        scheduler.alpha.kubernetes.io/affinity: >
-            {
-              "podAntiAffinity": {
-"requiredDuringSchedulingIgnoredDuringExecution": [
-                  {
-                    "labelSelector": {
-"matchExpressions": [
-                        {
-                          "key": "app",
-                          "operator": "In",
-                          "values": ["wasliberty"]
-                        }
-                      ]
-                    },
-                    "topologyKey": "kubernetes.io/hostname"
-                 }
-                ]
-               }
-             }
-    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - wasliberty
+              topologyKey: kubernetes.io/hostname
       containers:
       - name: wasliberty
         image: registry.&lt;region&gt;.bluemix.net/ibmliberty
         ports:
-          - containerPort: 9080</code></pre>
+        - containerPort: 9080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wasliberty
+  labels:
+    app: wasliberty
+spec:
+  ports:
+    # the port that this service should serve on
+  - port: 9080
+  selector:
+    app: wasliberty
+  type: NodePort</code></pre>
 
 </dd>
 <dt>複数の場所にポッドを分散させる</dt>
@@ -252,6 +287,7 @@ spec:
 クラスター間でルートを共有する方法について詳しくは、<a href="https://console.bluemix.net/docs/containers/cs_cluster.html#cs_cluster" target="_blank">クラスターの高可用性</a>を参照してください。
 詳しくは、<a href="https://console.bluemix.net/docs/containers/cs_planning.html#cs_planning_cluster_config" target="_blank">可用性の高いデプロイメント</a>のオプションを参照してください。</dd>
 </dl>
+
 
 ### 最小限のアプリのデプロイメント
 {: #minimal_app_deployment}
@@ -261,7 +297,7 @@ spec:
 
 <a href="../api/content/containers/images/cs_app_tutorial_components1.png">![デプロイメントのセットアップ](images/cs_app_tutorial_components1.png)</a>
 
-最小アプリのための構成スクリプトの例
+最小限のアプリの構成ファイルの例。
 ```
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -294,6 +330,9 @@ spec:
 ```
 {: codeblock}
 
+<br />
+
+
 ## プライベート・ネットワーキング
 {: #cs_planning_private_network}
 
@@ -307,7 +346,7 @@ VLAN では、ワーカー・ノードとポッドをまとめたグループが
 |クラスター・タイプ|クラスターのプライベート VLAN の管理者|
 |------------|-------------------------------------------|
 |{{site.data.keyword.Bluemix_notm}} Public 内のライト・クラスター|{{site.data.keyword.IBM_notm}}|
-|{{site.data.keyword.Bluemix_notm}} Public 内の標準クラスター|{{site.data.keyword.BluSoftlayer_notm}} アカウント内のユーザー<p>**ヒント:** アカウント内のすべての VLAN にアクセスできるようにするには、[VLAN スパンニング ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://knowledgelayer.softlayer.com/procedure/enable-or-disable-vlan-spanning) をオンにします。</p>|
+|{{site.data.keyword.Bluemix_notm}} Public 内の標準クラスター|IBM Bluemix Infrastructure (SoftLayer) アカウントを使用するお客様<p>**ヒント:** アカウント内のすべての VLAN にアクセスできるようにするには、[VLAN スパンニング ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://knowledgelayer.softlayer.com/procedure/enable-or-disable-vlan-spanning) をオンにします。</p>|
 |{{site.data.keyword.Bluemix_notm}} Dedicated 内の標準クラスター|{{site.data.keyword.IBM_notm}}|
 {: caption="表 2. プライベート VLAN 管理の責任" caption-side="top"}
 
@@ -331,6 +370,8 @@ DNS エントリーには、サービスの名前、サービスが作成され�
 
 クラスター IP タイプのサービスを作成する方法について詳しくは、[Kubernetes サービス ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services---service-types) を参照してください。
 
+<br />
+
 
 ## パブリック・ネットワーキング
 {: #cs_planning_public_network}
@@ -338,75 +379,72 @@ DNS エントリーには、サービスの名前、サービスが作成され�
 クラスターを作成するときには、すべてのクラスターをパブリック VLAN に接続する必要があります。ワーカー・ノードに割り当てられるパブリック IP アドレスは、クラスター作成時にパブリック VLAN によって決定されます。
 {:shortdesc}
 
-パブリック VLAN は {{site.data.keyword.BluSoftlayer_notm}} ファイアウォールによって保護されます。このファイアウォールは、デフォルトでは、インターネットとの間のインバウンド接続もアウトバウンド接続も許可しません。
-Kubernetes マスターとワーカー・ノードは、それぞれに割り当てられたパブリック IP アドレスを使用してパブリック VLAN で通信しますが、インターネットからはアクセスできません。
-
+ライト・クラスターと標準クラスターの両方とも、ワーカー・ノードのパブリック・ネットワーク・インターフェースは Calico ネットワーク・ポリシーによって保護されます。デフォルトでは、これらのポリシーは大部分のインバウンド・トラフィック (SSH を含む) をブロックします。ただし、Kubernetes が機能するために必要なインバウンド・トラフィックは、NodePort、Loadbalancer、Ingress の各サービスへの接続と同様に、許可されます。これらのポリシーの詳細情報 (ポリシーの変更方法など) については、[ネットワーク・ポリシー](cs_security.html#cs_security_network_policies)を参照してください。
 
 |クラスター・タイプ|クラスターのパブリック VLAN の管理者|
 |------------|------------------------------------------|
 |{{site.data.keyword.Bluemix_notm}} Public 内のライト・クラスター|{{site.data.keyword.IBM_notm}}|
-|{{site.data.keyword.Bluemix_notm}} Public 内の標準クラスター|{{site.data.keyword.BluSoftlayer_notm}} アカウント内のユーザー|
+|{{site.data.keyword.Bluemix_notm}} Public 内の標準クラスター|IBM Bluemix Infrastructure (SoftLayer) アカウントを使用するお客様|
 |{{site.data.keyword.Bluemix_notm}} Dedicated 内の標準クラスター|{{site.data.keyword.IBM_notm}}|
 {: caption="表 3. VLAN 管理の責任" caption-side="top"}
 
 ライト・クラスターを作成したか、または標準クラスターを作成したかに応じて、アプリを公開するためのオプションを次の中から選択できます。
 
--   [NodePort タイプのサービス](#cs_nodeport) (ライト・クラスターと標準クラスター)
--   [LoadBalancer タイプのサービス](#cs_loadbalancer) (標準クラスターのみ)
+-   [NodePort サービス](#cs_nodeport) (ライト・クラスターと標準クラスター)
+-   [LoadBalancer サービス](#cs_loadbalancer) (標準クラスターのみ)
 -   [Ingress](#cs_ingress) (標準クラスターのみ)
 
 
-### NodePort タイプのサービスを使用してアプリをインターネットに公開する
+### NodePort サービスを使用してアプリをインターネットに公開する
 {: #cs_nodeport}
 
 ワーカー・ノードのパブリック・ポートを公開し、ワーカー・ノードのパブリック IP アドレスを使用して、クラスター内のサービスにパブリック・アクセスを行います。
 {:shortdesc}
 
-[![NodePort タイプの Kubernetes サービスを使用してサービスを公開する](images/cs_nodeport.png)](https://console.bluemix.net/docs/api/content/containers/images/cs_nodeport.png)
+[![Kubernetes NodePort サービスを使用してサービスを公開する](images/cs_nodeport.png)](https://console.bluemix.net/docs/api/content/containers/images/cs_nodeport.png)
 
-NodePort タイプの Kubernetes サービスを作成してアプリを公開する場合は、30000 から 32767 の範囲の NodePort と内部クラスター IP アドレスがサービスに割り当てられます。NodePort サービスは、アプリに対する着信要求のための外部エントリー・ポイントとして機能します。
-割り当てられた NodePort は、クラスター内の各ワーカー・ノードの kubeproxy 設定でパブリックに公開されます。
+NodePort タイプの Kubernetes サービスを作成してアプリを公開する場合は、30000 から 32767 の範囲の NodePort と内部クラスター IP アドレスがサービスに割り当てられます。NodePort サービスは、アプリに対する着信要求のための外部エントリー・ポイントとして機能します。割り当てられた NodePort は、クラスター内の各ワーカー・ノードの kubeproxy 設定でパブリックに公開されます。
 どのワーカー・ノードも、割り当てられた NodePort で、サービスに対する着信要求の listen を開始します。
-インターネットからサービスにアクセスするには、クラスター作成時に割り当てられたワーカー・ノードのパブリック IP アドレスと NodePort を使用します。その形式は、`<ip_address>:<nodeport>` です。
+インターネットからサービスにアクセスするには、クラスター作成時に割り当てられたワーカー・ノードのパブリック IP アドレスと NodePort を使用します。その形式は、`<ip_address>:<nodeport>` です。NodePort サービスは、パブリック IP アドレスに加えて、ワーカー・ノードのプライベート IP アドレスを介して利用可能です。
 
-パブリック要求は、NodePort サービスに到達すると、サービスの内部クラスター IP に自動的に転送され、さらに kubeproxy コンポーネントから、アプリがデプロイされたポッドのプライベート IP アドレスに転送されます。クラスター IP はクラスター内でのみアクセス可能です。
+要求は、NodePort サービスに到達すると、サービスの内部クラスター IP に自動的に転送され、さらに kubeproxy コンポーネントから、アプリがデプロイされたポッドのプライベート IP アドレスに転送されます。クラスター IP はクラスター内でのみアクセス可能です。
 複数の異なるポッドでアプリの複数のレプリカが実行されている場合、kubeproxy コンポーネントはすべてのレプリカ間で着信要求のロード・バランシングを行います。
 
 
-**注:** ワーカー・ノードのパブリック IP アドレスは永続的なアドレスでないということに留意してください。ワーカー・ノードが削除されたり再作成されたりすると、新しいパブリック IP アドレスがワーカー・ノードに割り当てられます。
-NodePort タイプのサービスは、アプリのパブリック・アクセスをテストする場合や、パブリック・アクセスが短期間だけ必要な場合に使用できます。
-安定的なパブリック IP アドレスとサービスのさらなる可用性が必要な場合は、[LoadBalancer タイプのサービス](#cs_loadbalancer)か [Ingress タイプのサービス](#cs_ingress)を使用してアプリを公開してください。
+**注:** ワーカー・ノードのパブリック IP アドレスは永続的なアドレスではありません。ワーカー・ノードが削除されたり再作成されたりすると、新しいパブリック IP アドレスがワーカー・ノードに割り当てられます。
+NodePort サービスは、アプリのパブリック・アクセスをテストする場合や、パブリック・アクセスが短期間だけ必要な場合に使用できます。安定的なパブリック IP アドレスによってサービスの可用性を高める必要がある場合は、[LoadBalancer サービス](#cs_loadbalancer)または [Ingress](#cs_ingress) を使用してアプリを公開してください。
 
 {{site.data.keyword.containershort_notm}} NodePort タイプのサービスを作成する方法について詳しくは、[NodePort タイプのサービスを使用してアプリへのパブリック・アクセスを構成する方法](cs_apps.html#cs_apps_public_nodeport)を参照してください。
 
 
-### LoadBalancer タイプのサービスを使用してアプリをインターネットに公開する
+### LoadBalancer サービスを使用してアプリをインターネットに公開する
 {: #cs_loadbalancer}
 
-ポートを公開し、ロード・バランサーのパブリック IP アドレスを使用してアプリにアクセスします。
+ポートを公開し、ロード・バランサーのパブリック IP アドレスまたはプライベート IP アドレスを使用してアプリにアクセスします。
 
+[![Kubernetes LoadBalancer サービス・タイプを使用してサービスを公開する](images/cs_loadbalancer.png)](https://console.bluemix.net/docs/api/content/containers/images/cs_loadbalancer.png)
 
-[![LoadBalancer タイプの Kubernetes サービスを使用してサービスを公開する](images/cs_loadbalancer.png)](https://console.bluemix.net/docs/api/content/containers/images/cs_loadbalancer.png)
+標準クラスターを作成する時、{{site.data.keyword.containershort_notm}} は自動的に 5 つのポータブル・パブリック IP アドレスと 5 つのポータブル・プライベート IP アドレスを要求し、クラスター作成時にそれらをお客様の IBM Bluemix Infrastructure (SoftLayer) アカウントにプロビジョンします。ポータブル IP アドレスのうちの 2 つ (パブリック 1 つとプライベート 1 つ) は、[Ingress コントローラー](#cs_ingress)用として使用されます。4 つのポータブル・パブリック IP アドレスと 4 つのポータブル・プライベート IP アドレスは、LoadBalancer サービスを作成してアプリを公開するために使用できます。
 
-標準クラスターを作成する時、{{site.data.keyword.containershort_notm}} は自動的に 5 つのポータブル・パブリック IP アドレスを要求し、クラスター作成時にそれらをお客様の {{site.data.keyword.BluSoftlayer_notm}} アカウントにプロビジョンします。ポータブル IP アドレスの 1 つは [Ingress コントローラー](#cs_ingress)用として使用されます。
-4 つのポータブル・パブリック IP アドレスを使用して LoadBalancer タイプのサービスを作成することにより、アプリをパブリックに公開できます。
+パブリック VLAN のクラスター内に Kubernetes LoadBalancer サービスを作成する時、外部ロード・バランサーが 1 つ作成されます。使用可能な 4 つのパブリック IP アドレスのうちの 1 つが、ロード・バランサーに割り当てられます。使用可能なポータブル・パブリック IP アドレスがなければ、LoadBalancer サービスの作成は失敗します。LoadBalancer サービスは、アプリに対する着信要求のための外部エントリー・ポイントとして機能します。NodePort サービスの場合と異なり、任意のポートをロード・バランサーに割り当て可能で、特定のポート範囲に縛られません。LoadBalancer サービスに割り当てられるポータブル・パブリック IP アドレスは永続的なものであり、ワーカー・ノードが削除されたり再作成されたりしても変更されません。したがって、LoadBalancer サービスの可用性は NodePort サービスより高くなります。インターネットから LoadBalancer サービスにアクセスするには、ロード・バランサーのパブリック IP アドレスと割り当てられたポートを、`<ip_address>:<port>` という形式で使用します。
 
-LoadBalancer タイプの Kubernetes サービスを作成する時、外部ロード・バランサーが 1 つ作成され、使用可能な 4 つのパブリック IP アドレスのうちの 1 つがそれに割り当てられます。使用可能なポータブル・パブリック IP アドレスがなければ、LoadBalancer サービスの作成は失敗します。LoadBalancer サービスは、アプリに対する着信要求のための外部エントリー・ポイントとして機能します。NodePort タイプのサービスとは異なり、任意のポートをロード・バランサーに割り当て可能で、特定のポート範囲に縛られません。LoadBalancer サービスに割り当てられるポータブル・パブリック IP アドレスは永続的なアドレスであり、ワーカー・ノードが削除されたり再作成されたりしても変更されないので、LoadBalancer サービスの可用性は NodePort サービスより高くなります。インターネットから LoadBalancer サービスにアクセスするには、ロード・バランサーのパブリック IP アドレスと割り当てられたポートを、`<ip_address>:<port>` という形式で使用します。
+要求が LoadBalancer サービスに到達すると、その要求は、サービス作成時に LoadBalancer サービスに割り当てられた内部クラスター IP アドレスに自動的に転送されます。クラスター IP アドレスはクラスター内でのみアクセス可能です。
+着信要求はクラスター IP アドレスからさらにワーカー・ノードの `kube-proxy` コンポーネントに転送されます。続いて要求は、アプリがデプロイされたポッドのプライベート IP アドレスに転送されます。複数の異なるポッドでアプリの複数のレプリカが実行されている場合、`kube-proxy` コンポーネントはすべてのレプリカ間で着信要求のロード・バランシングを行います。
 
-パブリック要求は、LoadBalancer サービスに到達すると、サービス作成時に LoadBalancer サービスに割り当てられた内部クラスター IP アドレスに自動的に転送されます。クラスター IP アドレスはクラスター内でのみアクセス可能です。
-着信要求はクラスター IP アドレスからさらにワーカー・ノードの kubeproxy コンポーネントに転送された後、アプリがデプロイされたポッドのプライベート IP アドレスに転送されます。
-複数の異なるポッドでアプリの複数のレプリカが実行されている場合、kubeproxy コンポーネントはすべてのレプリカ間で着信要求のロード・バランシングを行います。
+LoadBalancer サービスを使用する場合、あらゆるワーカー・ノードの各 IP アドレスでノード・ポートを使用することもできます。LoadBalancer サービスを使用しているときにノード・ポートへのアクセスをブロックするには、[着信トラフィックのブロック](cs_security.html#cs_block_ingress)を参照してください。
 
+LoadBalancer サービスを作成するときには、IP アドレスに関して以下のオプションがあります。
 
-{{site.data.keyword.containershort_notm}} で LoadBalancer タイプのサービスを作成する方法について詳しくは、[ロード・バランサー・タイプのサービスを使用してアプリへのパブリック・アクセスを構成する方法](cs_apps.html#cs_apps_public_load_balancer)を参照してください。
+- クラスターがパブリック VLAN 上にある場合、ポータブル・パブリック IP アドレスが使用されます。
+- クラスターがプライベート VLAN 上でのみ使用可能な場合は、ポータブル・プライベート IP アドレスが使用されます。
+- 構成ファイルに次のアノテーションを追加することにより、LoadBalancer サービス用にポータブル・パブリック IP アドレスまたはポータブル・プライベート IP アドレスを要求できます: `service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>`.
 
-
+{{site.data.keyword.containershort_notm}} で LoadBalancer サービスを作成する方法について詳しくは、[ロード・バランサー・タイプのサービスを使用してアプリへのパブリック・アクセスを構成する方法](cs_apps.html#cs_apps_public_load_balancer)を参照してください。
 
 ### Ingress を使用してインターネットにアプリを公開する
 {: #cs_ingress}
 
 Ingress ではクラスターの複数のサービスを公開し、単一のパブリック・エントリー・ポイントを使用してそれらのサービスを使用可能にできます。
-
 
 [![{{site.data.keyword.containershort_notm}} Ingress サポートを使用してサービスを公開する](images/cs_ingress.png)](https://console.bluemix.net/docs/api/content/containers/images/cs_ingress.png)
 
@@ -414,7 +452,7 @@ Ingress ではクラスターの複数のサービスを公開し、単一のパ
 Ingress リソースは、アプリの着信要求のルーティング方法に関するルールを定義します。Ingress リソースはすべて Ingress コントローラーに登録する必要があります。Ingress コントローラーは、着信する HTTP または HTTPS のいずれかのサービス要求を listen し、Ingress リソースごとに定義されたルールに基づいて要求を転送します。
 
 標準クラスターを作成すると、{{site.data.keyword.containershort_notm}} がそのクラスター用に可用性の高い Ingress コントローラーを自動で作成し、固有のパブリック経路を `<cluster_name>.<region>.containers.mybluemix.net` という形式で割り当てます。
-パブリック経路は、クラスター作成時にお客様の {{site.data.keyword.BluSoftlayer_notm}} アカウントにプロビジョンされたポータブル・パブリック IP アドレスにリンクされます。
+パブリック経路は、クラスター作成時にお客様の IBM Bluemix Infrastructure (SoftLayer) アカウントにプロビジョンされたポータブル・パブリック IP アドレスにリンクされます。
 
 Ingress 経由でアプリを公開するには、アプリ用に Kubernetes サービスを作成し、Ingress リソースを定義することによってこのサービスを Ingress リソースに登録する必要があります。Ingress リソースは、公開されるアプリの固有の URL を形成するためにパブリック経路に付加するパスを指定します。例えば、`mycluster.us-south.containers.mybluemix.net/myapp`のようになります。 この経路を Web ブラウザーに入力すると、要求が Ingress コントローラーのリンク先ポータブル・パブリック IP アドレスに送信されます。Ingress コントローラーは、`mycluster` クラスター内の `myapp` パスのルーティング・ルールが存在するかどうかを検査します。
 一致するルールが見つかれば、アプリがデプロイされているポッドに、個々のパスを含んだ要求が転送されます。このとき、元の Ingress リソース・オブジェクトで定義されたルールが考慮されます。
@@ -433,6 +471,8 @@ Ingress 経由でアプリを公開するには、アプリ用に Kubernetes サ
 
 {{site.data.keyword.containershort_notm}} での Ingress の使用方法について詳しくは、[Ingress コントローラーを使用してアプリへのパブリック・アクセスを構成する方法](cs_apps.html#cs_apps_public_ingress)を参照してください。
 
+<br />
+
 
 ## ユーザー・アクセス管理
 {: #cs_planning_cluster_user}
@@ -441,6 +481,8 @@ Ingress 経由でアプリを公開するには、アプリ用に Kubernetes サ
 {:shortdesc}
 
 詳しくは、[{{site.data.keyword.containershort_notm}} でのユーザーとクラスターへのアクセス権限の管理](cs_cluster.html#cs_cluster_user)を参照してください。
+
+<br />
 
 
 ## イメージ・レジストリー
@@ -475,6 +517,8 @@ Docker Hub などのパブリック・レジストリーは、Docker および K
 
 パブリック・レジストリーまたはプライベート・レジストリーにアクセスする方法、イメージを使用してコンテナーを作成する方法について詳しくは、[{{site.data.keyword.containershort_notm}} でのプライベートとパブリックのイメージ・レジストリーの使用](cs_cluster.html#cs_apps_images)を参照してください。
 
+
+<br />
 
 
 ## 永続データ・ストレージ
@@ -511,12 +555,15 @@ Kubernetes シークレットは、サービスへの URL、ユーザー名、�
 </p><p>{{site.data.keyword.Bluemix_notm}} サービスをポッドにバインドする方法について詳しくは、[{{site.data.keyword.containershort_notm}} でのアプリ用 {{site.data.keyword.Bluemix_notm}} サービスの追加](cs_apps.html#cs_apps_service)を参照してください。</p>|
 {: caption="表 5. Kubernetes クラスターでのデプロイメントのための永続データ・ストレージのオプション" caption-side="top"}
 
+<br />
 
-## ヘルス・モニター
+
+## モニタリング・ツール
 {: #cs_planning_health}
 
-Kubernetes と Docker の標準機能を使用して、クラスターとそのクラスターにデプロイされたアプリの正常性をモニターできます。
+Kubernetes と Docker の標準機能を使用して、クラスターとアプリの正常性をモニターできます。クラスターとアプリの問題をトラブルシューティングするためにログの場所を見つけるには、[クラスター・ロギングの構成](cs_cluster.html#cs_logging)を参照してください。
 {:shortdesc}
+
 <dl>
 <dt>{{site.data.keyword.Bluemix_notm}} のクラスター詳細ページ</dt>
 <dd>{{site.data.keyword.containershort_notm}} には、クラスターの正常性と能力、そしてクラスター・リソースの使用方法に関する情報が表示されます。
@@ -524,18 +571,12 @@ Kubernetes と Docker の標準機能を使用して、クラスターとその�
 クラスターの詳細ページを表示するには、**{{site.data.keyword.Bluemix_notm}} の「ダッシュボード」**に移動して、クラスターを選択します。</dd>
 <dt>Kubernetes ダッシュボード</dt>
 <dd>Kubernetes ダッシュボードは、ワーカー・ノードの正常性の検討、Kubernetes リソースの検索、コンテナー化アプリのデプロイ、ロギングとモニタリング情報に基づくアプリのトラブルシューティングを行うために使用できる、管理 Web インターフェースです。Kubernetes ダッシュボードにアクセスする方法について詳しくは、[{{site.data.keyword.containershort_notm}} での Kubernetes ダッシュボードの起動](cs_apps.html#cs_cli_dashboard)を参照してください。</dd>
-<dt>Docker ログ</dt>
-<dd>組み込みの Docker ロギング機能を活用して、標準の STDOUT と STDERR 出力ストリームのアクティビティーを検討することができます。
-詳しくは、[Kubernetes クラスターで実行されるコンテナーのコンテナー・ログの表示](/docs/services/CloudLogAnalysis/containers/logging_containers_other_logs.html#logging_containers_collect_data)を参照してください。</dd>
-<dt>ロギングとモニタリング</dt>
-<dd>{{site.data.keyword.containershort_notm}} は、標準クラスター用の付加的なモニター機能とロギング機能をサポートします。ログとメトリックは、Kubernetes クラスターを作成したときにログインした {{site.data.keyword.Bluemix_notm}} スペースにあります。<ul><li>コンテナーのメトリックはクラスターにデプロイされたすべてのコンテナーについて自動的に収集されます。
-これらのメトリックが送信され、 Grafana で使用できるようになります。メトリックについて詳しくは、[{{site.data.keyword.containershort_notm}} のモニター](/docs/services/cloud-monitoring/containers/analyzing_metrics_bmx_ui.html#analyzing_metrics_bmx_ui)を参照してください。<p>Grafana ダッシュボードにアクセスするには、`https://metrics.<region>.bluemix.net` に移動します。クラスターを作成した{{site.data.keyword.Bluemix_notm}} 組織とスペースを選択します。
-</p></li><li>コンテナーのログは、コンテナー外部からモニターされて転送されます。コンテナーのログには Kibana ダッシュボードを使用してアクセスできます。ロギングについて詳しくは、[{{site.data.keyword.containershort_notm}} のロギング](/docs/services/CloudLogAnalysis/index.html#getting-started-with-cla)を参照してください。<p>Kibana ダッシュボードにアクセスするには、`https://logging.<region>.bluemix.net` に移動します。クラスターを作成した{{site.data.keyword.Bluemix_notm}} 組織とスペースを選択します。
-</p></li></ul></dd>
-</dl>
+<dt>{{site.data.keyword.monitoringlong_notm}}</dt>
+<dd>標準クラスターの場合、メトリックは、Kubernetes クラスターを作成したときにログインした {{site.data.keyword.Bluemix_notm}} スペースにあります。コンテナーのメトリックはクラスターにデプロイされたすべてのコンテナーについて自動的に収集されます。
+これらのメトリックが送信され、 Grafana で使用できるようになります。メトリックについて詳しくは、[{{site.data.keyword.containershort_notm}} のモニター](/docs/services/cloud-monitoring/containers/analyzing_metrics_bmx_ui.html#analyzing_metrics_bmx_ui)を参照してください。<p>Grafana ダッシュボードにアクセスするには、以下のいずれかの URL にアクセスし、クラスターを作成した {{site.data.keyword.Bluemix_notm}} 組織とスペースを選択します。<ul><li>米国南部と米国東部: https://metrics.ng.bluemix.net</li><li>英国南部: https://metrics.eu-gb.bluemix.net</li><li>EU 中央: https://metrics.eu-de.bluemix.net</li></ul></p></dd></dl>
 
 ### その他のヘルス・モニター・ツール
-{: #concept_xrh_dhj_wz}
+{: #cs_planning_health_tools}
 
 他のツールを構成してロギング機能とモニター機能を追加することができます。
 
@@ -544,6 +585,8 @@ Kubernetes と Docker の標準機能を使用して、クラスターとその�
 <dd>Prometheus は、特に Kubernetes のために設計されたモニタリング、ロギング、およびアラートのためのオープン・ソースのツールで、Kubernetes のロギング情報に基づいてクラスター、ワーカー・ノード、およびデプロイメントの正常性に関する詳細情報を取得するために使用されます。
 セットアップ方法について詳しくは、[{{site.data.keyword.containershort_notm}} とのサービスの統合](#cs_planning_integrations)を参照してください。</dd>
 </dl>
+
+<br />
 
 
 ## 統合
@@ -561,9 +604,17 @@ Kubernetes と Docker の標準機能を使用して、クラスターとその�
 </thead>
 <tbody>
 <tr>
-<td>IBM Blockchain</td>
+<td>Blockchain</td>
 <td>{{site.data.keyword.containerlong_notm}} の Kubernetes クラスターに、だれでも利用できる IBM Blockchain 開発環境をデプロイします。この環境を使用して、独自のブロックチェーン・ネットワークを開発してカスタマイズし、トランザクションの履歴を記録するために変更不可能な台帳を共有するアプリをデプロイできます。詳しくは、<a href="https://ibm-blockchain.github.io" target="_blank">Develop in a cloud sandbox
 IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
+</tr>
+<tr>
+<td>Continuous Delivery</td>
+<td>アプリのビルドと Kubernetes クラスターへのコンテナーのデプロイメントを、ツールチェーンを使用して自動化します。セットアップ情報については、<a href="https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines/" target="_blank">Deploy Kubernetes pods to the {{site.data.keyword.containerlong_notm}} using DevOps Pipelines <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> というブログを参照してください。</td>
+</tr>
+<tr>
+<td>Helm</td>
+<td> <a href="https://helm.sh/" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> は Kubernetes パッケージ・マネージャーです。Helm Charts を作成することによって、{{site.data.keyword.containerlong_notm}} クラスターで実行される複雑な Kubernetes アプリケーションの定義、インストール、アップグレードを行います。詳しくは、<a href="https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/" target="_blank">Increase deployment velocity with Kubernetes Helm Charts <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
 </tr>
 <tr>
 <td>Istio</td>
@@ -595,69 +646,50 @@ Istio はネットワーク・トラフィックの管理、マイクロサー�
 </tbody>
 </table>
 
+<br />
 
-## {{site.data.keyword.BluSoftlayer_notm}} ポートフォリオへのアクセス
+
+## IBM Bluemix Infrastructure (SoftLayer) ポートフォリオへのアクセス
 {: #cs_planning_unify_accounts}
 
-標準の Kubernetes クラスターを作成するには、{{site.data.keyword.BluSoftlayer_notm}} ポートフォリオにアクセスする必要があります。
-クラスターのワーカー・ノード、ポータブル・パブリック IP アドレス、永続ストレージなど、有料のインフラストラクチャー・リソースを要求するには、このアクセスが必要です。
+標準の Kubernetes クラスターを作成するには、IBM Bluemix Infrastructure (SoftLayer) ポートフォリオにアクセスする必要があります。クラスターのワーカー・ノード、ポータブル・パブリック IP アドレス、永続ストレージなど、有料のインフラストラクチャー・リソースを要求するには、このアクセスが必要です。
 {:shortdesc}
 
-自動アカウント・リンクが使用できるようになった後に作成した {{site.data.keyword.Bluemix_notm}} 従量制課金アカウントには、
-{{site.data.keyword.BluSoftlayer_notm}} ポートフォリオへのアクセスが既にセットアップされているので、
-追加の構成なしでクラスター用のインフラストラクチャー・リソースを購入できます。
+自動アカウント・リンクが使用できるようになった後に作成した {{site.data.keyword.Bluemix_notm}} 従量制課金アカウントには、IBM Bluemix Infrastructure (SoftLayer) ポートフォリオへのアクセスが既にセットアップされているので、追加の構成なしでクラスター用のインフラストラクチャー・リソースを購入できます。
 
-他の {{site.data.keyword.Bluemix_notm}} アカウント・タイプを持つユーザー、または {{site.data.keyword.Bluemix_notm}} アカウントにリンクされていない既存の {{site.data.keyword.BluSoftlayer_notm}} アカウントを持つユーザーは、
-標準クラスターを作成できるようにアカウントを構成する必要があります。
-
+他の {{site.data.keyword.Bluemix_notm}} アカウント・タイプを持つユーザー、または {{site.data.keyword.Bluemix_notm}} アカウントにリンクされていない既存の IBM Bluemix Infrastructure (SoftLayer) アカウントを持つユーザーは、標準クラスターを作成できるようにアカウントを構成する必要があります。
 
 以下の表を確認して、各アカウント・タイプの選択肢を見つけてください。
 
 |アカウント・タイプ|説明|標準クラスターを作成するための選択肢|
 |------------|-----------|----------------------------------------------|
-|無料試用版のアカウント|無料試用版のアカウントは、{{site.data.keyword.BluSoftlayer_notm}} ポートフォリオにアクセスできません。
-<p>既存の {{site.data.keyword.BluSoftlayer_notm}} アカウントがある場合は、それを無料試用版のアカウントにリンクできます。</p>|<ul><li>選択肢 1: [無料試用版のアカウントを {{site.data.keyword.Bluemix_notm}} 従量制課金アカウントにアップグレードします](/docs/pricing/billable.html#upgradetopayg)。従量制課金アカウントには、{{site.data.keyword.BluSoftlayer_notm}} ポートフォリオへのアクセスがセットアップされています。</li><li>選択肢 2: [無料試用版のアカウントを既存の {{site.data.keyword.BluSoftlayer_notm}} アカウントにリンクします](/docs/pricing/linking_accounts.html#unifyingaccounts)。<p>両方のアカウントをリンクすると、無料試用版のアカウントが従量制課金アカウントに自動的にアップグレードされます。
-アカウントをリンクすると、{{site.data.keyword.Bluemix_notm}} と {{site.data.keyword.BluSoftlayer_notm}} の両方のリソースについて {{site.data.keyword.Bluemix_notm}} から請求されるようになります。
-</p><p>**注:** リンクする {{site.data.keyword.BluSoftlayer_notm}} アカウントには、スーパーユーザー権限がセットアップされている必要があります。</p></li></ul>|
-|以前の従量制課金アカウント|自動アカウント・リンクが使用できるようになる前に作成された従量制課金アカウントには、{{site.data.keyword.BluSoftlayer_notm}} ポートフォリオにアクセスする機能がありません。
-<p>既存の {{site.data.keyword.BluSoftlayer_notm}} アカウントがあっても、そのアカウントを以前の従量制課金アカウントにリンクすることはできません。</p>|<ul><li>選択肢 1: [新しい従量制課金アカウントを作成します](/docs/pricing/billable.html#billable)。このアカウントには、{{site.data.keyword.BluSoftlayer_notm}} ポートフォリオへのアクセスがセットアップされます。
-この選択肢を取る場合は、2 つの異なる {{site.data.keyword.Bluemix_notm}} アカウントを所有し、2 つの異なる課金が行われることになります。
-<p>以前の従量制課金アカウントを使用して標準クラスターを作成するために、新しい従量制課金アカウントを使用して、
-{{site.data.keyword.BluSoftlayer_notm}} ポートフォリオにアクセスするための API キーを生成します。
-そして、その API キーを以前の従量制課金アカウントに設定する必要があります。
+|無料試用版のアカウント|無料試用版のアカウントは、IBM Bluemix Infrastructure (SoftLayer) ポートフォリオにアクセスできません。<p>既存の IBM Bluemix Infrastructure (SoftLayer) アカウントがある場合は、それを無料試用版のアカウントにリンクできます。</p>|<ul><li>選択肢 1: [無料試用版のアカウントを {{site.data.keyword.Bluemix_notm}} 従量制課金アカウントにアップグレードします](/docs/pricing/billable.html#upgradetopayg)。従量制課金アカウントには、IBM Bluemix Infrastructure (SoftLayer) ポートフォリオへのアクセスがセットアップされています。</li><li>選択肢 2: [無料試用版のアカウントを既存の IBM Bluemix Infrastructure (SoftLayer) アカウントにリンクします](/docs/pricing/linking_accounts.html#unifyingaccounts)。<p>両方のアカウントをリンクすると、無料試用版のアカウントが従量制課金アカウントに自動的にアップグレードされます。
+アカウントをリンクすると、{{site.data.keyword.Bluemix_notm}} と IBM Bluemix Infrastructure (SoftLayer) の両方のリソースについて {{site.data.keyword.Bluemix_notm}} から請求されるようになります。</p><p>**注:** リンクする IBM Bluemix Infrastructure (SoftLayer) アカウントには、スーパーユーザー権限がセットアップされている必要があります。</p></li></ul>|
+|以前の従量制課金アカウント|自動アカウント・リンクが使用できるようになる前に作成された従量制課金アカウントには、IBM Bluemix Infrastructure (SoftLayer) ポートフォリオにアクセスする機能がありません。<p>既存の IBM Bluemix Infrastructure (SoftLayer) アカウントがあっても、そのアカウントを以前の従量制課金アカウントにリンクすることはできません。</p>|<ul><li>選択肢 1: [新しい従量制課金アカウントを作成します](/docs/pricing/billable.html#billable)。このアカウントには、IBM Bluemix Infrastructure (SoftLayer) ポートフォリオへのアクセスがセットアップされます。この選択肢を取る場合は、2 つの異なる {{site.data.keyword.Bluemix_notm}} アカウントを所有し、2 つの異なる課金が行われることになります。
+<p>以前の従量制課金アカウントを引き続き使用して標準クラスターを作成する場合は、新しい従量制課金アカウントを使用して、IBM Bluemix Infrastructure (SoftLayer) ポートフォリオにアクセスするための API キーを生成します。そして、その API キーを以前の従量制課金アカウントに設定する必要があります。
 詳しくは、[以前の従量制課金アカウントとサブスクリプション・アカウント用の API キーの生成](#old_account)を参照してください。
-{{site.data.keyword.BluSoftlayer_notm}} リソースは新しい従量制課金アカウントを介して課金されることに注意してください。</p></li><li>選択肢 2: 既存の {{site.data.keyword.BluSoftlayer_notm}} アカウントを使用したい場合は、{{site.data.keyword.Bluemix_notm}} アカウントに[資格情報を設定](cs_cli_reference.html#cs_credentials_set)します。
-<p>**注:** {{site.data.keyword.Bluemix_notm}} アカウントで使用する {{site.data.keyword.BluSoftlayer_notm}} アカウントには、スーパーユーザー権限がセットアップされている必要があります。</p></li></ul>|
-|サブスクリプション・アカウント|サブスクリプション・アカウントには、{{site.data.keyword.BluSoftlayer_notm}} ポートフォリオへのアクセスがセットアップされていません。|<ul><li>選択肢 1: [新しい従量制課金アカウントを作成します](/docs/pricing/billable.html#billable)。このアカウントには、{{site.data.keyword.BluSoftlayer_notm}} ポートフォリオへのアクセスがセットアップされます。
-この選択肢を取る場合は、2 つの異なる {{site.data.keyword.Bluemix_notm}} アカウントを所有し、2 つの異なる課金が行われることになります。
-<p>サブスクリプション・アカウントを使用して標準クラスターを作成するために、新しい従量制課金アカウントを使用して、
-{{site.data.keyword.BluSoftlayer_notm}} ポートフォリオにアクセスするための API キーを生成します。
-そして、その API キーをサブスクリプション・アカウントに設定する必要があります。
+IBM Bluemix Infrastructure (SoftLayer) リソースは新しい従量制課金アカウントを介して課金されることに注意してください。</p></li><li>選択肢 2: 既存の IBM Bluemix Infrastructure (SoftLayer) アカウントを使用したい場合は、{{site.data.keyword.Bluemix_notm}} アカウントに[資格情報を設定](cs_cli_reference.html#cs_credentials_set)します。<p>**注:** {{site.data.keyword.Bluemix_notm}} アカウントで使用する IBM Bluemix Infrastructure (SoftLayer) アカウントには、スーパーユーザー権限がセットアップされている必要があります。</p></li></ul>|
+|サブスクリプション・アカウント|サブスクリプション・アカウントには、IBM Bluemix Infrastructure (SoftLayer) ポートフォリオへのアクセスがセットアップされていません。|<ul><li>選択肢 1: [新しい従量制課金アカウントを作成します](/docs/pricing/billable.html#billable)。このアカウントには、IBM Bluemix Infrastructure (SoftLayer) ポートフォリオへのアクセスがセットアップされます。この選択肢を取る場合は、2 つの異なる {{site.data.keyword.Bluemix_notm}} アカウントを所有し、2 つの異なる課金が行われることになります。
+<p>サブスクリプション・アカウントを引き続き使用して標準クラスターを作成する場合は、新しい従量制課金アカウントを使用して、IBM Bluemix Infrastructure (SoftLayer) ポートフォリオにアクセスするための API キーを生成します。そして、その API キーをサブスクリプション・アカウントに設定する必要があります。
 詳しくは、[以前の従量制課金アカウントとサブスクリプション・アカウント用の API キーの生成](#old_account)を参照してください。
-{{site.data.keyword.BluSoftlayer_notm}} リソースは新しい従量制課金アカウントを介して課金されることに注意してください。</p></li><li>選択肢 2: 既存の {{site.data.keyword.BluSoftlayer_notm}} アカウントを使用したい場合は、{{site.data.keyword.Bluemix_notm}} アカウントに[資格情報を設定](cs_cli_reference.html#cs_credentials_set)します。
-<p>**注:** {{site.data.keyword.Bluemix_notm}} アカウントで使用する {{site.data.keyword.BluSoftlayer_notm}} アカウントには、スーパーユーザー権限がセットアップされている必要があります。</p></li></ul>|
-|{{site.data.keyword.BluSoftlayer_notm}} アカウントがあり、{{site.data.keyword.Bluemix_notm}} アカウントはない|標準クラスターを作成するには、{{site.data.keyword.Bluemix_notm}} アカウントが必要です。|<ul><li>選択肢 1: [新しい従量制課金アカウントを作成します](/docs/pricing/billable.html#billable)。このアカウントには、{{site.data.keyword.BluSoftlayer_notm}} ポートフォリオへのアクセスがセットアップされます。
-この選択肢を取る場は、自動で新しい {{site.data.keyword.BluSoftlayer_notm}} が作成されます。
-2 つの異なる {{site.data.keyword.BluSoftlayer_notm}} アカウントを所有し、2 つの異なる課金が行われることになります。
-</li><li>選択肢 2: [無料試用版のアカウントを作成して](/docs/pricing/free.html#pricing)、[それを既存の {{site.data.keyword.BluSoftlayer_notm}} アカウントにリンクします](/docs/pricing/linking_accounts.html#unifyingaccounts)。
-両方のアカウントをリンクすると、無料試用版のアカウントが従量制課金アカウントに自動的にアップグレードされます。
-アカウントをリンクすると、{{site.data.keyword.Bluemix_notm}} と {{site.data.keyword.BluSoftlayer_notm}} の両方のリソースについて {{site.data.keyword.Bluemix_notm}} から請求されるようになります。
-<p>**注:** リンクする {{site.data.keyword.BluSoftlayer_notm}} アカウントには、スーパーユーザー権限がセットアップされている必要があります。</p></li></ul>|
-{: caption="表 7. {{site.data.keyword.BluSoftlayer_notm}} アカウントにリンクされていないアカウントを使用して標準クラスターを作成するための選択肢" caption-side="top"}
+IBM Bluemix Infrastructure (SoftLayer) リソースは新しい従量制課金アカウントを介して課金されることに注意してください。</p></li><li>選択肢 2: 既存の IBM Bluemix Infrastructure (SoftLayer) アカウントを使用したい場合は、{{site.data.keyword.Bluemix_notm}} アカウントに[資格情報を設定](cs_cli_reference.html#cs_credentials_set)します。<p>**注:** {{site.data.keyword.Bluemix_notm}} アカウントで使用する IBM Bluemix Infrastructure (SoftLayer) アカウントには、スーパーユーザー権限がセットアップされている必要があります。</p></li></ul>|
+|IBM Bluemix Infrastructure (SoftLayer) アカウントがあり、{{site.data.keyword.Bluemix_notm}} アカウントはない|標準クラスターを作成するには、{{site.data.keyword.Bluemix_notm}} アカウントが必要です。|<ul><li>選択肢 1: [新しい従量制課金アカウントを作成します](/docs/pricing/billable.html#billable)。このアカウントには、IBM Bluemix Infrastructure (SoftLayer) ポートフォリオへのアクセスがセットアップされます。この選択肢を取る場合は、自動で新しい IBM Bluemix Infrastructure (SoftLayer) が作成されます。2 つの別個の IBM Bluemix Infrastructure (SoftLayer) アカウントを所有し、課金されることになります。</li><li>選択肢 2: [無料試用版のアカウントを作成して](/docs/pricing/free.html#pricing)、[それを既存の IBM Bluemix Infrastructure (SoftLayer) アカウントにリンクします](/docs/pricing/linking_accounts.html#unifyingaccounts)。両方のアカウントをリンクすると、無料試用版のアカウントが従量制課金アカウントに自動的にアップグレードされます。
+アカウントをリンクすると、{{site.data.keyword.Bluemix_notm}} と IBM Bluemix Infrastructure (SoftLayer) の両方のリソースについて {{site.data.keyword.Bluemix_notm}} から請求されるようになります。<p>**注:** リンクする IBM Bluemix Infrastructure (SoftLayer) アカウントには、スーパーユーザー権限がセットアップされている必要があります。</p></li></ul>|
+{: caption="表 7. IBM Bluemix Infrastructure (SoftLayer) アカウントにリンクされていないアカウントを使用して標準クラスターを作成するための選択肢" caption-side="top"}
 
 
-### {{site.data.keyword.Bluemix_notm}} アカウントで使用するための {{site.data.keyword.BluSoftlayer_notm}} API キーの生成
+### {{site.data.keyword.Bluemix_notm}} アカウントで使用する IBM Bluemix Infrastructure (SoftLayer) API キーの生成
 {: #old_account}
 
 以前の従量制課金アカウントまたはサブスクリプション・アカウントを使用して標準クラスターを作成する場合は、
 新しい従量制課金アカウントを使用して API キーを生成し、その API キーを以前のアカウントに設定する必要があります。
 {:shortdesc}
 
-開始する前に、{{site.data.keyword.BluSoftlayer_notm}} ポートフォリオへのアクセスが自動的にセットアップされる {{site.data.keyword.Bluemix_notm}} 従量制課金アカウントを作成します。
+開始する前に、IBM Bluemix Infrastructure (SoftLayer) ポートフォリオへのアクセスが自動的にセットアップされる {{site.data.keyword.Bluemix_notm}} 従量制課金アカウントを作成します。
 
-1.  新しい従量制課金アカウント用に作成した {{site.data.keyword.ibmid}} とパスワードを使用して、[{{site.data.keyword.BluSoftlayer_notm}} ポータル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://control.softlayer.com/) にログインします。
+1.  新しい従量制課金アカウント用に作成した {{site.data.keyword.ibmid}} とパスワードを使用して、[IBM Bluemix Infrastructure (SoftLayer) ポータル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://control.softlayer.com/) にログインします。
 2.  **「アカウント」**を選択し、次に**「ユーザー」**を選択します。
-3.  **「生成 (Generate)」**をクリックして、新しい従量制課金アカウント用の {{site.data.keyword.BluSoftlayer_notm}} API キーを生成します。
+3.  **「生成」**をクリックして、新しい従量制課金アカウント用の IBM Bluemix Infrastructure (SoftLayer) の API キーを生成します。
 4.  その API キーをコピーします。
 5.  CLI から、以前の従量制課金アカウントまたはサブスクリプション・アカウントの {{site.data.keyword.ibmid}} とパスワードを使用して {{site.data.keyword.Bluemix_notm}} にログインします。
 
@@ -665,8 +697,7 @@ Istio はネットワーク・トラフィックの管理、マイクロサー�
 bx login```
   {: pre}
 
-6.  {{site.data.keyword.BluSoftlayer_notm}} ポートフォリオにアクセスするために、先ほど生成した API キーを設定します。
-`<API_KEY>` を API キーに置き換え、`<USERNAME>` を新しい従量制課金アカウントの {{site.data.keyword.ibmid}} に置き換えます。
+6.  IBM Bluemix Infrastructure (SoftLayer) ポートフォリオにアクセスするために、先ほど生成した API キーを設定します。`<API_KEY>` を API キーに置き換え、`<USERNAME>` を新しい従量制課金アカウントの {{site.data.keyword.ibmid}} に置き換えます。
 
   ```
   bx cs credentials-set --infrastructure-api-key <API_KEY> --infrastructure-username <USERNAME>

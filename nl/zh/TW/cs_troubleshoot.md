@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-08-15"
+lastupdated: "2017-10-24"
 
 ---
 
@@ -22,15 +22,21 @@ lastupdated: "2017-08-15"
 # 叢集的疑難排解
 {: #cs_troubleshoot}
 
-在您使用 {{site.data.keyword.containershort_notm}} 時，請考慮使用這些技術來進行疑難排解以及取得協助。
+在您使用 {{site.data.keyword.containershort_notm}} 時，請考慮使用這些技術來進行疑難排解以及取得協助。您也可以檢查 [{{site.data.keyword.Bluemix_notm}} 系統的狀態 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/bluemix/support/#status)。
+
+您可以採取一些一般步驟來確保叢集保持最新：
+- 定期[重新啟動工作者節點](cs_cli_reference.html#cs_worker_reboot)，以確保安裝 IBM 自動部署至作業系統的更新項目及安全修補程式
+- 將叢集更新為 {{site.data.keyword.containershort_notm}} 的[最新預設 Kubernetes 版本](cs_versions.html)
 
 {: shortdesc}
+
+<br />
 
 
 ## 叢集除錯
 {: #debug_clusters}
 
-請檢閱您既有的選項以進行叢集除錯，並找出失敗的主要原因。
+請檢閱選項以進行叢集除錯，並找出失敗的主要原因。
 
 1.  列出叢集，並尋找叢集的 `State`。
 
@@ -48,29 +54,29 @@ lastupdated: "2017-08-15"
     </thead>
     <tbody>
       <tr>
-        <td>部署中</td>
+        <td>Deploying</td>
         <td>Kubernetes 主節點尚未完整部署。您無法存取叢集。</td>
        </tr>
        <tr>
-        <td>擱置中</td>
+        <td>Pending</td>
         <td>已部署 Kubernetes 主節點。正在佈建工作者節點，因此還無法在叢集中使用。您可以存取叢集，但無法將應用程式部署至叢集。</td>
       </tr>
       <tr>
-        <td>正常</td>
+        <td>Normal</td>
         <td>叢集中的所有工作者節點都已開始執行。您可以存取叢集，並將應用程式部署至叢集。</td>
      </tr>
      <tr>
-        <td>警告</td>
+        <td>Warning</td>
         <td>叢集中至少有一個工作者節點無法使用，但有其他工作者節點可用，並且可以接管工作負載。</td>
      </tr>
      <tr>
-      <td>嚴重</td>
+      <td>Critical</td>
       <td>無法聯繫 Kubernetes 主節點，或叢集中的所有工作者節點都已關閉。</td>
      </tr>
     </tbody>
   </table>
 
-3.  如果叢集處於**警告**或**嚴重**狀態，或卡在**擱置中**狀態很長一段時間，請檢閱工作者節點的狀態。如果叢集處於**部署中**狀態，請等待叢集完整部署，以檢閱叢集的性能。處於**正常**狀態的叢集都會被視為性能良好，因此目前不需要採取動作。 
+3.  如果叢集處於 **Warning** 或 **Critical** 狀態，或停留在 **Pending** 狀態很長一段時間，請檢閱工作者節點的狀態。如果叢集處於 **Deploying** 狀態，請等待叢集完整部署，以檢閱叢集的性能。處於 **Normal** 狀態的叢集都會被視為性能良好，因此目前不需要採取動作。
 
   ```
   bx cs workers <cluster_name_or_id>
@@ -84,35 +90,35 @@ lastupdated: "2017-08-15"
     </thead>
     <tbody>
       <tr>
-       <td>不明</td>
-       <td>因下列其中一個原因而無法聯繫 Kubernetes 主節點：<ul><li>您已要求更新 Kubernetes 主節點。在更新期間，無法擷取工作者節點的狀態。</li><li>您可能有額外的防火牆保護工作者節點，或最近變更過防火牆設定。{{site.data.keyword.containershort_notm}} 需要開啟特定 IP 位址及埠，以容許從工作者節點到 Kubernetes 主節點的通訊，反之亦然。如需相關資訊，請參閱[工作者節點卡在重新載入迴圈](#cs_firewall)。</li><li>Kubernetes 主節點已關閉。請開立 [{{site.data.keyword.Bluemix_notm}} 支援問題單](/docs/support/index.html#contacting-support)，以與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡。</li></ul></td>
+       <td>Unknown</td>
+       <td>因下列其中一個原因而無法聯繫 Kubernetes 主節點：<ul><li>您已要求更新 Kubernetes 主節點。在更新期間，無法擷取工作者節點的狀態。</li><li>您可能有額外的防火牆保護工作者節點，或最近變更過防火牆設定。{{site.data.keyword.containershort_notm}} 需要開啟特定 IP 位址及埠，以容許從工作者節點到 Kubernetes 主節點的通訊，反之亦然。如需相關資訊，請參閱[工作者節點停留在重新載入迴圈](#cs_firewall)。</li><li>Kubernetes 主節點已關閉。請開立 [{{site.data.keyword.Bluemix_notm}} 支援問題單](/docs/support/index.html#contacting-support)，以與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡。</li></ul></td>
       </tr>
       <tr>
-        <td>佈建中</td>
-        <td>正在佈建工作者節點，因此還無法在叢集中使用。您可以在 CLI 輸出的**狀態**直欄中監視佈建處理程序。如果您的工作者節點卡在這個狀態很長一段時間，因此在**狀態**直欄中看不到任何進度，請繼續進行下一步，以查看佈建期間是否發生問題。</td>
+        <td>Provisioning</td>
+        <td>正在佈建工作者節點，因此還無法在叢集中使用。您可以在 CLI 輸出的 **Status** 直欄中監視佈建處理程序。如果您的工作者節點停留在這個狀態很長一段時間，因此在 **Status** 直欄中看不到任何進度，請繼續進行下一步，以查看佈建期間是否發生問題。</td>
       </tr>
       <tr>
-        <td>佈建失敗</td>
+        <td>Provision_failed</td>
         <td>無法佈建工作者節點。請繼續進行下一步，以尋找失敗的詳細資料。</td>
       </tr>
       <tr>
-        <td>重新載入中</td>
-        <td>正在重新載入工作者節點，因此無法在叢集中使用。您可以在 CLI 輸出的**狀態**直欄中監視重新載入處理程序。如果您的工作者節點卡在這個狀態很長一段時間，因此在**狀態**直欄中看不到任何進度，請繼續進行下一步，以查看重新載入期間是否發生問題。</td>
+        <td>Reloading</td>
+        <td>正在重新載入工作者節點，因此無法在叢集中使用。您可以在 CLI 輸出的 **Status** 直欄中監視重新載入處理程序。如果您的工作者節點停留在這個狀態很長一段時間，因此在 **Status** 直欄中看不到任何進度，請繼續進行下一步，以查看重新載入期間是否發生問題。</td>
        </tr>
        <tr>
-        <td>重新載入失敗</td>
+        <td>Reloading_failed</td>
         <td>無法重新載入工作者節點。請繼續進行下一步，以尋找失敗的詳細資料。</td>
       </tr>
       <tr>
-        <td>正常</td>
+        <td>Normal</td>
         <td>工作者節點已完整佈建，並已備妥可用於叢集。</td>
      </tr>
      <tr>
-        <td>警告</td>
+        <td>Warning</td>
         <td>工作者節點將達到記憶體或磁碟空間的限制。</td>
      </tr>
      <tr>
-      <td>嚴重</td>
+      <td>Critical</td>
       <td>工作者節點已耗盡磁碟空間。</td>
      </tr>
     </tbody>
@@ -135,7 +141,7 @@ lastupdated: "2017-08-15"
     <tbody>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} 基礎架構異常狀況：您的帳戶目前被禁止訂購「運算實例」。</td>
-        <td>您的 {{site.data.keyword.BluSoftlayer_notm}} 帳戶可能無法訂購運算資源。請開立 [{{site.data.keyword.Bluemix_notm}} 支援問題單](/docs/support/index.html#contacting-support)，以與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡。</td>
+        <td>您的 IBM Bluemix 基礎架構 (SoftLayer) 帳戶可能無法訂購運算資源。請開立 [{{site.data.keyword.Bluemix_notm}} 支援問題單](/docs/support/index.html#contacting-support)，以與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡。</td>
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} 基礎架構異常狀況：無法下單。路由器 'router_name' 的資源不足，無法滿足下列來賓的要求：'worker_id'。</td>
@@ -143,43 +149,107 @@ lastupdated: "2017-08-15"
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} 基礎架構異常狀況：無法取得 ID 為 &lt;vlan id&gt; 的網路 VLAN。</td>
-        <td>無法佈建工作者節點，因為因下列其中一個原因而找不到選取的 VLAN ID：<ul><li>您可能已指定 VLAN 號碼，而非 VLAN ID。VLAN 號碼的長度是 3 或 4 位數，而 VLAN ID 的長度是 7 位數。執行 <code>bx cs vlans &lt;location&gt;</code>，以擷取 VLAN ID。<li>VLAN ID 可能未與您使用的 Bluemix 基礎架構 (SoftLayer) 帳戶相關聯。執行 <code>bx cs vlans &lt;location&gt;</code>，以列出帳戶的可用 VLAN ID。若要變更 {{site.data.keyword.BluSoftlayer_notm}} 帳戶，請參閱 [bx cs credentials-set](cs_cli_reference.html#cs_credentials_set)。</ul></td>
+        <td>無法佈建工作者節點，因為因下列其中一個原因而找不到選取的 VLAN ID：<ul><li>您可能已指定 VLAN 號碼，而非 VLAN ID。VLAN 號碼的長度是 3 或 4 位數，而 VLAN ID 的長度是 7 位數。執行 <code>bx cs vlans &lt;location&gt;</code>，以擷取 VLAN ID。<li>VLAN ID 可能未與您使用的 IBM Bluemix 基礎架構 (SoftLayer) 帳戶相關聯。執行 <code>bx cs vlans &lt;location&gt;</code>，以列出帳戶的可用 VLAN ID。若要變更 IBM Bluemix 基礎架構 (SoftLayer) 帳戶，請參閱 [bx cs credentials-set](cs_cli_reference.html#cs_credentials_set)。</ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation：針對此訂單提供的位置無效。(HTTP 500)</td>
-        <td>您的 {{site.data.keyword.BluSoftlayer_notm}} 未設定成訂購所選取資料中心內的運算資源。請與 [{{site.data.keyword.Bluemix_notm}} 支援中心](/docs/support/index.html#contacting-support)聯絡，驗證已正確設定帳戶。</td>
+        <td>您的 IBM Bluemix 基礎架構 (SoftLayer) 未設定成訂購所選取資料中心內的運算資源。請與 [{{site.data.keyword.Bluemix_notm}} 支援中心](/docs/support/index.html#contacting-support)聯絡，驗證已正確設定帳戶。</td>
        </tr>
        <tr>
         <td>{{site.data.keyword.Bluemix_notm}} 基礎架構異常狀況：使用者沒有新增伺服器的必要 {{site.data.keyword.Bluemix_notm}} 基礎架構許可權
-        
-        </br></br>
+</br></br>
         {{site.data.keyword.Bluemix_notm}} 基礎架構異常狀況：必須要有許可權才能訂購「項目」。</td>
-        <td>您可能沒有從 {{site.data.keyword.BluSoftlayer_notm}} 組合佈建工作者節點的必要許可權。若要尋找必要許可權，請參閱[配置對 {{site.data.keyword.BluSoftlayer_notm}} 組合的存取權以建立標準 Kubernetes 叢集](cs_planning.html#cs_planning_unify_accounts)。</td>
+        <td>您可能沒有從 IBM Bluemix 基礎架構 (SoftLayer) 組合佈建工作者節點的必要許可權。請參閱[配置對 IBM Bluemix 基礎架構 (SoftLayer) 組合的存取權以建立標準 Kubernetes 叢集](cs_planning.html#cs_planning_unify_accounts)。</td>
       </tr>
     </tbody>
   </table>
 
-## 建立叢集時無法連接至 IBM {{site.data.keyword.BluSoftlayer_notm}} 帳戶
+<br />
+
+
+## 應用程式部署除錯
+{: #debug_apps}
+
+請檢閱您既有的選項以進行應用程式部署除錯，並找出失敗的主要原因。
+
+1. 執行 `describe` 指令，以尋找服務或部署資源中的異常狀況。
+
+ 範例：
+ <pre class="pre"><code>kubectl describe service &lt;service_name&gt; </code></pre>
+
+2. [檢查容器是否停留在 ContainerCreating 狀態](#stuck_creating_state)。
+
+3. 檢查叢集是否處於 `Critical` 狀態。如果叢集處於 `Critical` 狀態中，請檢查防火牆規則，確認主節點可以與工作者節點通訊。
+
+4. 驗證服務正在接聽正確的埠。
+   1. 取得 Pod 的名稱。
+     <pre class="pre"><code>kubectl get pods</code></pre>
+   2. 登入容器。
+     <pre class="pre"><code>kubectl exec -it &lt;pod_name&gt; -- /bin/bash</code></pre>
+   3. 從容器內 Curl 應用程式。如果無法存取埠，服務可能未接聽正確的埠，或是應用程式可能有問題。請使用正確的埠來更新服務的配置檔，並重新部署或調查應用程式的潛在問題。
+     <pre class="pre"><code>curl localhost: &lt;port&gt;</code></pre>
+
+5. 驗證服務已正確鏈結至 Pod。
+   1. 取得 Pod 的名稱。
+     <pre class="pre"><code>kubectl get pods</code></pre>
+   2. 登入容器。
+     <pre class="pre"><code>kubectl exec -it &lt;pod_name&gt; -- /bin/bash</code></pre>
+   3. Curl 服務的叢集 IP 位址及埠。如果無法存取 IP 位址及埠，請查看服務的端點。如果沒有端點，則服務的選取器與 Pod 不符。如果有端點，請查看服務上的目標埠欄位，並確定目標埠與用於 Pod 的埠相同。
+     <pre class="pre"><code>curl &lt;cluster_IP&gt;:&lt;port&gt;</code></pre>
+
+6. 對於 Ingress 服務，驗證可以從叢集內存取服務。
+   1. 取得 Pod 的名稱。
+     <pre class="pre"><code>kubectl get pods</code></pre>
+   2. 登入容器。
+     <pre class="pre"><code>kubectl exec -it &lt;pod_name&gt; -- /bin/bash</code></pre>
+   2. Curl 為 Ingress 服務指定的 URL。如果無法存取 URL，請檢查叢集與外部端點之間是否有防火牆問題。
+     <pre class="pre"><code>curl &lt;host_name&gt;.&lt;domain&gt;</code></pre>
+
+<br />
+
+
+## 識別本端用戶端及伺服器版本的 kubectl
+
+若要檢查本端執行的 Kubernetes CLI 版本或您的叢集所執行的 Kubernetes CLI 版本，請執行下列指令並檢查版本。
+
+
+```
+        kubectl version  --short
+        ```
+{: pre}
+
+輸出範例：
+
+```
+        Client Version: v1.5.6
+        Server Version: v1.5.6
+        ```
+{: screen}
+
+<br />
+
+
+## 建立叢集時無法連接至您的 IBM Bluemix 基礎架構 (SoftLayer) 帳戶
 {: #cs_credentials}
 
 {: tsSymptoms}
 當您建立新的 Kubernetes 叢集時，會收到下列訊息。
 
 ```
-We were unable to connect to your {{site.data.keyword.BluSoftlayer_notm}} account. Creating a standard cluster requires that you have either a Pay-As-You-Go account that is linked to an {{site.data.keyword.BluSoftlayer_notm}} account term or that you have used the IBM
+We were unable to connect to your IBM Bluemix Infrastructure (SoftLayer) account. Creating a standard cluster requires that you have either a Pay-As-You-Go account that is linked to an IBM Bluemix Infrastructure (SoftLayer) account term or that you have used the IBM
 {{site.data.keyword.Bluemix_notm}} Container Service CLI to set your {{site.data.keyword.Bluemix_notm}} Infrastructure API keys.
 ```
 {: screen}
 
 {: tsCauses}
-具有未鏈結 {{site.data.keyword.Bluemix_notm}} 帳戶的使用者必須建立新的「隨收隨付制」帳戶，或使用 {{site.data.keyword.Bluemix_notm}} CLI 手動新增 {{site.data.keyword.BluSoftlayer_notm}} API 金鑰。
+具有未鏈結 {{site.data.keyword.Bluemix_notm}} 帳戶的使用者必須建立新的「隨收隨付制」帳戶，或使用 {{site.data.keyword.Bluemix_notm}} CLI 手動新增 IBM Bluemix 基礎架構 (SoftLayer) API 金鑰。
 
 {: tsResolve}
 若要新增 {{site.data.keyword.Bluemix_notm}} 帳戶的認證，請執行下列動作：
 
-1.  與 {{site.data.keyword.BluSoftlayer_notm}} 管理者聯絡，以取得 {{site.data.keyword.BluSoftlayer_notm}} 使用者名稱及 API 金鑰。
+1.  與您的 IBM Bluemix 基礎架構 (SoftLayer) 管理者聯絡，取得 IBM Bluemix 基礎架構 (SoftLayer) 使用者名稱及 API 金鑰。
 
-    **附註：**您使用的 {{site.data.keyword.BluSoftlayer_notm}} 帳戶必須已設定 SuperUser 許可權，才能順利建立標準叢集。
+    **附註：**您使用的 IBM Bluemix 基礎架構 (SoftLayer) 帳戶必須已設定 SuperUser 許可權，才能順利建立標準叢集。
 
 2.  新增認證。
 
@@ -196,6 +266,8 @@ We were unable to connect to your {{site.data.keyword.BluSoftlayer_notm}} accoun
   ```
   {: pre}
 
+<br />
+
 
 ## 使用 SSH 存取工作者節點失敗
 {: #cs_ssh_worker}
@@ -209,16 +281,17 @@ We were unable to connect to your {{site.data.keyword.BluSoftlayer_notm}} accoun
 {: tsResolve}
 對於您必須在任何必須執行一次性動作的每個節點或工作上執行的所有動作，使用[常駐程式集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)。
 
+<br />
 
-## Pod 保持擱置中狀態
+
+## Pod 保持擱置狀態
 {: #cs_pods_pending}
 
 {: tsSymptoms}
-當您執行 `kubectl get pods` 時，可以看到保持**擱置**狀態的 Pod。
+當您執行 `kubectl get pods` 時，可以看到保持 **Pending** 狀態的 Pod。
 
 {: tsCauses}
-如果您才剛剛建立 Kubernetes 叢集，則可能仍在配置工作者節點。
-如果此叢集是現有叢集，則您的叢集中可能沒有足夠的容量可部署 Pod。
+如果您才剛剛建立 Kubernetes 叢集，則可能仍在配置工作者節點。如果此叢集是現有叢集，則您的叢集中可能沒有足夠的容量可部署 Pod。
 
 {: tsResolve}
 此作業需要[管理者存取原則](cs_cluster.html#access_ov)。請驗證您的現行[存取原則](cs_cluster.html#view_access)。
@@ -250,39 +323,48 @@ kubectl get nodes
 
 4.  如果您的叢集中沒有足夠的容量，請將另一個工作者節點新增至叢集。
 
-
   ```
   bx cs worker-add <cluster name or id> 1
   ```
   {: pre}
 
-5.  如果您的 Pod 在工作者節點完整部署之後仍然保持**擱置中**狀態，請檢閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending)，以進一步對 Pod 的擱置中狀態進行疑難排解。
+5.  如果您的 Pod 在工作者節點完整部署之後仍然保持 **pending** 狀態，請檢閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending)，以進一步對 Pod 的擱置中狀態進行疑難排解。
 
-## 工作者節點建立失敗，訊息為「佈建失敗」
-{: #cs_pod_space}
+<br />
+
+
+## Pod 停留在建立中狀態
+{: #stuck_creating_state}
 
 {: tsSymptoms}
-當您建立 Kubernetes 叢集或新增工作者節點時，會看到「佈建失敗」狀態。請執行下列指令。
-
-```
-bx cs worker-get <WORKER_NODE_ID>
-```
-{: pre}
-
-即會顯示下列訊息。
-
-```
-SoftLayer_Exception_Virtual_Host_Pool_InsufficientResources: Could not place order. There are insufficient resources behind router bcr<router_ID> to fulfill the request for the following guests: kube-<location>-<worker_node_ID>-w1 (HTTP 500)
-```
-{: screen}
+當您執行 `kubectl get pods -o wide` 時，您會看到在同一個工作者節點上執行的多個位置停留在 `ContainerCreating` 狀態中。
 
 {: tsCauses}
-{{site.data.keyword.BluSoftlayer_notm}} 目前可能沒有足夠的容量，無法佈建工作者節點。
+工作者節點上的檔案系統是唯讀的。
 
 {: tsResolve}
-選項 1：在另一個位置建立叢集。
+1. 備份可能儲存在工作者節點或容器上的任何資料。
+2. 執行下列指令，以重建工作者節點。
 
-選項 2：開啟 {{site.data.keyword.BluSoftlayer_notm}} 的支援問題，並詢問位置中的可用容量。
+<pre class="pre"><code>bx cs worker-reload &lt;cluster_name&gt; &lt;worker_id&gt;</code></pre>
+
+<br />
+
+
+## 容器未啟動
+{: #containers_do_not_start}
+
+{: tsSymptoms}
+Pod 順利部署至叢集，但容器未啟動。
+
+{: tsCauses}
+在達到登錄配額時，容器可能無法啟動。
+
+{: tsResolve}
+[請釋放 {{site.data.keyword.registryshort_notm}} 中的儲存空間。](../services/Registry/registry_quota.html#registry_quota_freeup)
+
+<br />
+
 
 ## 在新工作者節點上存取 Pod 因逾時而失敗
 {: #cs_nodes_duplicate_ip}
@@ -311,7 +393,7 @@ SoftLayer_Exception_Virtual_Host_Pool_InsufficientResources: Could not place ord
   {: screen}
 
 2.  安裝 [Calico CLI](cs_security.html#adding_network_policies)。
-3.  列出 Calico 中的可用工作者節點。請將 <path_to_file> 取代為 Calico 配置檔的本端路徑。
+3.  列出 Calico 中的可用工作者節點。請將 &lt;path_to_file> 取代為 Calico 配置檔的本端路徑。
 
   ```
   calicoctl get nodes --config=<path_to_file>/calicoctl.cfg
@@ -342,11 +424,14 @@ SoftLayer_Exception_Virtual_Host_Pool_InsufficientResources: Could not place ord
 
 已刪除的節點不再列於 Calico 中。
 
+<br />
+
+
 ## 工作者節點無法連接
 {: #cs_firewall}
 
 {: tsSymptoms}
-kubectl proxy 失敗或您嘗試存取叢集中的服務時，連線會失敗，並顯示下列其中一則錯誤訊息：
+當工作者節點無法連接時，您可能會看到各種不同的症狀。kubectl Proxy 失敗，或您嘗試存取叢集中的服務，但連線失敗時，您可能會看到下列其中一則訊息。
 
   ```
   Connection refused
@@ -363,36 +448,29 @@ kubectl proxy 失敗或您嘗試存取叢集中的服務時，連線會失敗，
   ```
   {: screen}
 
-或者，當您使用 kubectl exec、attach 或 logs，並且收到此錯誤：
+如果您執行 kubectl exec、attach 或 logs，可能會看到下列訊息。
 
   ```
   Error from server: error dialing backend: dial tcp XXX.XXX.XXX:10250: getsockopt: connection timed out
   ```
   {: screen}
 
-或者，當 kubectl Proxy 成功，但儀表板無法使用，並且收到此錯誤：
+如果 kubectl Proxy 成功，但儀表板無法使用，您可能會看到下列訊息。
 
   ```
   timeout on 172.xxx.xxx.xxx
   ```
   {: screen}
 
-或者，工作者節點卡在重新載入迴圈時。
+
 
 {: tsCauses}
-您可能已在 {{site.data.keyword.BluSoftlayer_notm}} 帳戶中設定其他防火牆，或自訂其中的現有防火牆設定。{{site.data.keyword.containershort_notm}} 需要開啟特定 IP 位址及埠，以容許從工作者節點到 Kubernetes 主節點的通訊，反之亦然。
+您可能已在 IBM Bluemix 基礎架構 (SoftLayer) 帳戶中設定其他防火牆，或自訂其中的現有防火牆設定。{{site.data.keyword.containershort_notm}} 需要開啟特定 IP 位址及埠，以容許從工作者節點到 Kubernetes 主節點的通訊，反之亦然。另一個原因可能是工作者節點停留在重新載入的迴圈中。
 
 {: tsResolve}
 此作業需要[管理者存取原則](cs_cluster.html#access_ov)。請驗證您的現行[存取原則](cs_cluster.html#view_access)。
 
 在自訂防火牆中，開啟下列埠及 IP 位址。
-```
-TCP port 443 FROM '<each_worker_node_publicIP>' TO registry.ng.bluemix.net, apt.dockerproject.org
-```
-{: pre}
-
-
-<!--Inbound left for existing clusters. Once existing worker nodes are reloaded, users only need the Outbound information, which is found in the regular docs.-->
 
 1.  記下叢集中所有工作者節點的公用 IP 位址：
 
@@ -401,99 +479,148 @@ TCP port 443 FROM '<each_worker_node_publicIP>' TO registry.ng.bluemix.net, apt.
   ```
   {: pre}
 
-2.  在您的防火牆中，容許下列進出工作者節點的連線：
+2.  在防火牆中，針對來自工作者節點的 OUTBOUND 連線，容許從來源工作者節點到 `<each_worker_node_publicIP>` 之目的地 TCP/UDP 埠範圍 20000-32767 及埠 443，以及下列 IP 位址和網路群組的送出網路資料流量。
+    - **重要事項**：您必須容許對埠 443 的送出資料流量，以及地區內所有位置彼此之間的資料流量，以便平衡引導程序期間的負載。例如，如果您的叢集是在美國南部，您必須容許從埠 443 到 dal10 和 dal12 的資料流量，以及從 dal10 和 dal12 到彼此之間的資料流量。
+      <p>
+  <table summary="表格中的第一列跨這兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器位置，第二欄則為要符合的 IP 位址。">
+      <thead>
+      <th>地區</th>
+      <th>位置</th>
+      <th>IP 位址</th>
+      </thead>
+    <tbody>
+      <tr>
+         <td>亞太地區南部</td>
+         <td>mel01<br>syd01</td>
+         <td><code>168.1.97.67</code><br><code>168.1.8.195</code></td>
+      </tr>
+      <tr>
+         <td>歐盟中部</td>
+         <td>ams03<br>fra02</td>
+         <td><code>169.50.169.110</code><br><code>169.50.56.174</code></td>
+        </tr>
+      <tr>
+        <td>英國南部</td>
+        <td>lon02<br>lon04</td>
+        <td><code>159.122.242.78</code><br><code>158.175.65.170</code></td>
+      </tr>
+      <tr>
+        <td>美國東部</td>
+         <td>wdc06<br>wdc07</td>
+         <td><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+      </tr>
+      <tr>
+        <td>美國南部</td>
+        <td>dal10<br>dal12<br>dal13</td>
+        <td><code>169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
+      </tr>
+      </tbody>
+    </table>
+</p>
+
+3.  容許從工作者節點到 {{site.data.keyword.registrylong_notm}} 的送出網路資料流量：
+    - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
+    - 將 <em>&lt;registry_publicIP&gt;</em> 取代為您要容許資料流量的登錄地區的所有位址：
+        <p>      
+<table summary="表格中的第一列跨這兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器位置，第二欄則為要符合的 IP 位址。">
+      <thead>
+        <th colspan=2><img src="images/idea.png"/> 登錄 IP 位址</th>
+        </thead>
+      <tbody>
+        <tr>
+          <td>registry.au-syd.bluemix.net</td>
+          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
+        </tr>
+        <tr>
+          <td>registry.eu-de.bluemix.net</td>
+          <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></td>
+         </tr>
+         <tr>
+          <td>registry.eu-gb.bluemix.net</td>
+          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></td>
+         </tr>
+         <tr>
+          <td>registry.ng.bluemix.net</td>
+          <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></td>
+         </tr>
+        </tbody>
+      </table>
+</p>
+
+4.  選用項目：容許從工作者節點到 {{site.data.keyword.monitoringlong_notm}} 及 {{site.data.keyword.loganalysislong_notm}} 服務的送出網路資料流量：
+    - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
+    - 將 <em>&lt;monitoring_publicIP&gt;</em> 取代為您要容許資料流量的監視地區的所有位址：
+        <p><table summary="表格中的第一列跨這兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器位置，第二欄則為要符合的 IP 位址。">
+      <thead>
+        <th colspan=2><img src="images/idea.png"/> 監視公用 IP 位址</th>
+        </thead>
+      <tbody>
+        <tr>
+         <td>metrics.eu-de.bluemix.net</td>
+         <td><code>159.122.78.136/29</code></td>
+        </tr>
+        <tr>
+         <td>metrics.eu-gb.bluemix.net</td>
+         <td><code>169.50.196.136/29</code></td>
+        </tr>
+        <tr>
+          <td>metrics.ng.bluemix.net</td>
+          <td><code>169.47.204.128/29</code></td>
+         </tr>
+         
+        </tbody>
+      </table>
+</p>
+    - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
+    - 將 <em>&lt;logging_publicIP&gt;</em> 取代為您要容許資料流量的記載地區的所有位址：
+        <p><table summary="表格中的第一列跨這兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器位置，第二欄則為要符合的 IP 位址。">
+      <thead>
+        <th colspan=2><img src="images/idea.png"/> 記載公用 IP 位址</th>
+        </thead>
+      <tbody>
+        <tr>
+         <td>ingest.logging.eu-de.bluemix.net</td>
+         <td><code>169.50.25.125</code></td>
+        </tr>
+        <tr>
+         <td>ingest.logging.eu-gb.bluemix.net</td>
+         <td><code>169.50.115.113</code></td>
+        </tr>
+        <tr>
+          <td>ingest.logging.ng.bluemix.net</td>
+          <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
+         </tr>
+        </tbody>
+      </table>
+</p>
+
+5. 如果您有專用防火牆，請容許適當的 IBM Bluemix 基礎架構 (SoftLayer) 專用 IP 範圍。請參閱[此鏈結](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)，從 **Backend (private) Network** 小節開始。
+    - 新增您正在使用之[地區內的所有位置](cs_regions.html#locations)
+    - 請注意，您必須新增 dal01 位置（資料中心）
+    - 開啟埠 80 和 443 以容許叢集引導處理程序
+
+<br />
+
+
+## 更新或重新載入工作者節點之後，出現重複的節點和 Pod
+{: #cs_duplicate_nodes}
+
+{: tsSymptoms}
+當您執行 `kubectl get nodes` 時，您會看到重複的工作者節點，並顯示狀態 **NotReady**。具有 **NotReady** 的工作者節點具有公用 IP 位址，而具有 **Ready** 的工作者節點則具有專用 IP 位址。
+
+{: tsCauses}
+較舊的叢集會讓工作者節點依叢集的公用 IP 位址列出。現在，工作者節點會依叢集的專用 IP 位址列出。當您重新載入或更新節點時，IP 位址會變更，但對公用 IP 位址的參照則照舊。
+
+{: tsResolve}
+不會因為這些重複項目而中斷服務，但您應該從 API 伺服器移除舊的工作者節點參照。
 
   ```
-  TCP port 443 FROM '<each_worker_node_publicIP>' TO registry.ng.bluemix.net, apt.dockerproject.org
+  kubectl delete node <node_name1> <node_name2>
   ```
   {: pre}
 
-    <ul><li>若為連接至工作者節點的 INBOUND 連線，容許從下列來源網路群組及 IP 位址到目的地 TCP/UDP 埠 10250 及 `<public_IP_of _each_worker_node>` 的送入網路資料流量：</br>
-    
-    <table summary="表格中的第一列跨這兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器位置，第二欄則為要符合的 IP 位址。">
-  <thead>
-      <th colspan=2><img src="images/idea.png"/> 入埠 IP 位址</th>
-      </thead>
-    <tbody>
-      <tr>
-        <td>ams03</td>
-        <td><code>169.50.144.128/28</code></br><code>169.50.169.104/29</code></br><code>169.50.185.32/27</code></td>
-      </tr>
-      <tr>
-        <td>dal10</td>
-        <td><code>169.46.7.232/29 </code></br><code>169.48.138.64/26</code></br><code>169.48.180.128/25</code></td>
-       </tr>
-       <tr>
-        <td>dal12</td>
-        <td><code>169.47.70.8/29</code></br><code>169.47.79.192/26</code></br><code>169.47.126.192/27</code></td>
-       </tr>
-       <tr>
-        <td>fra02</td>
-        <td><code>169.50.48.160/28</code></br><code>169.50.56.168/29</code></br><code>169.50.58.160/27</code></td>
-       </tr>
-      </tbody>
-      <tr>
-       <td>lon02</td>
-       <td><code>159.122.242.78</code></td>
-      </tr>
-      <tr>
-       <td>lon04</td>
-       <td><code>158.175.68.192/26</code></td>
-      </tr>
-      <tr>
-       <td>syd01</td>
-       <td><code>168.1.209.192/26</code></td>
-      </tr>
-      <tr>
-       <td>syd04</td>
-       <td><code>130.198.67.0/26</code></td>
-      </tr>
-    </table>
+<br />
 
-    <li>若為來自工作者節點的 OUTBOUND 連線，容許從來源工作者節點到 `<each_worker_node_publicIP>` 之目的地 TCP/UDP 埠範圍 20000-32767 及下列 IP 位址和網路群組的送出網路資料流量：</br>
-    
-    <table summary="表格中的第一列跨這兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器位置，第二欄則為要符合的 IP 位址。">
-      <thead>
-      <th colspan=2><img src="images/idea.png"/> 出埠 IP 位址</th>
-      </thead>
-    <tbody>
-      <tr>
-        <td>ams03</td>
-        <td><code>169.50.169.110</code></td>
-      </tr>
-      <tr>
-        <td>dal10</td>
-        <td><code>169.46.7.238</code></td>
-       </tr>
-       <tr>
-        <td>dal12</td>
-        <td><code>169.47.70.10</code></td>
-       </tr>
-       <tr>
-        <td>fra02</td>
-        <td><code>169.50.56.174</code></td>
-       </tr>
-      </tbody>
-      <tr>
-       <td>lon02</td>
-       <td><code>159.122.242.78</code></td>
-      </tr>
-      <tr>
-       <td>lon04</td>
-       <td><code>158.175.65.170</code></td>
-      </tr>
-      <tr>
-       <td>syd01</td>
-       <td><code>168.1.8.195</code></td>
-      </tr>
-      <tr>
-       <td>syd04</td>
-       <td><code>130.198.64.19</code></td>
-      </tr>
-    </table>
-</ul>
-    
-    
 
 ## 透過 Ingress 連接至應用程式失敗
 {: #cs_ingress_fails}
@@ -519,7 +646,7 @@ Ingress 可能未正常運作，原因如下：
   ```
   {: pre}
 
-    在 CLI 輸出中，確定工作者節點的**狀態**顯示**備妥**，而且**機型**顯示**可用**以外的機型。
+    在 CLI 輸出中，確定工作者節點的 **Status** 顯示 **Ready**，而且 **Machine Type** 顯示 **free** 以外的機型。
 
 2.  擷取 Ingress 控制器子網域及公用 IP 位址，然後對其進行連線測試。
 
@@ -605,6 +732,9 @@ Ingress 可能未正常運作，原因如下：
 
     3.  尋找 Ingress 控制器日誌中的錯誤訊息。
 
+<br />
+
+
 ## 透過負載平衡器服務連接至應用程式失敗
 {: #cs_loadbalancer_fails}
 
@@ -628,7 +758,7 @@ Ingress 可能未正常運作，原因如下：
   ```
   {: pre}
 
-    在 CLI 輸出中，確定工作者節點的**狀態**顯示**備妥**，而且**機型**顯示**可用**以外的機型。
+    在 CLI 輸出中，確定工作者節點的 **Status** 顯示 **Ready**，而且 **Machine Type** 顯示 **free** 以外的機型。
 
 2.  檢查負載平衡器服務配置檔的正確性。
 
@@ -647,7 +777,7 @@ Ingress 可能未正常運作，原因如下：
   ```
   {: pre}
 
-    1.  確認您已將 **LoadBlanacer** 定義為服務的類型。
+    1.  確認您已將 **LoadBalancer** 定義為服務的類型。
     2.  確定您使用了與部署應用程式時在 **label/metadata** 區段中所使用的相同 **<selectorkey>** 及 **<selectorvalue>**。
     3.  確認您已使用應用程式所接聽的**埠**。
 
@@ -677,6 +807,41 @@ Ingress 可能未正常運作，原因如下：
 
     2.  確認在「指標記錄 (PTR)」中已將自訂網域對映至負載平衡器服務的可攜式公用 IP 位址。
 
+<br />
+
+
+## 擷取 Calico CLI 配置的 ETCD URL 失敗
+{: #cs_calico_fails}
+
+{: tsSymptoms}
+當您擷取 `<ETCD_URL>` 以[新增網路原則](cs_security.html#adding_network_policies)時，得到 `calico-config not found` 錯誤訊息。
+
+{: tsCauses}
+您的叢集不是 (Kubernetes 1.7 版)[cs_versions.html]或更新版本。
+
+{: tsResolve}
+請[更新叢集](cs_cluster.html#cs_cluster_update)或使用與舊版 Kubernetes 相容的指令擷取 `<ETCD_URL>`。
+
+若要擷取 `<ETCD_URL>`，請執行下列其中一個指令：
+
+- Linux 及 OS X：
+
+    ```
+    kubectl describe pod -n kube-system `kubectl get pod -n kube-system | grep calico-policy-controller | awk '{print $1}'` | grep ETCD_ENDPOINTS | awk '{print $2}'
+    ```
+    {: pre}
+
+- Windows：<ol>
+    <li> 取得 kube-system 名稱空間中的 Pod 清單，並找出 Calico 控制器 Pod。</br><pre class="codeblock"><code>kubectl get pod -n kube-system</code></pre></br>範例：</br><pre class="screen"><code>calico-policy-controller-1674857634-k2ckm</code></pre>
+    <li> 檢視 Calico 控制器 Pod 的詳細資料。</br> <pre class="codeblock"><code>kubectl describe pod -n kube-system calico-policy-controller-&lt;ID&gt;</code></pre>
+    <li> 找出 ETCD 端點值。範例：<code>https://169.1.1.1:30001</code>
+            </ol>
+
+當您擷取 `<ETCD_URL>` 時，請繼續執行[新增網路原則](cs_security.html#adding_network_policies)中所列的步驟。
+
+<br />
+
+
 ## 已知的問題
 {: #cs_known_issues}
 
@@ -693,8 +858,8 @@ Ingress 可能未正常運作，原因如下：
     <dd>基於安全考量，已停用 Kubernetes 儀表板 NodePort 服務。若要存取 Kubernetes 儀表板，請執行下列指令。</br><pre class="codeblock"><code>kubectl proxy</code></pre></br>然後，您可以在 `http://localhost:8001/ui` 存取 Kubernetes 儀表板。</dd>
   <dt>負載平衡器的服務類型限制</dt>
     <dd><ul><li>您不可以在專用 VLAN 上使用負載平衡。<li>您無法使用 service.beta.kubernetes.io/external-traffic 及 service.beta.kubernetes.io/healthcheck-nodeport 服務註釋。如需這些註釋的相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tutorials/services/source-ip/)。</ul></dd>
-  <dt>水平自動擴充未運作</dt>
-    <dd>基於安全理由，會關閉所有工作者節點中 Heapster (10255) 所使用的標準埠。因為已關閉此埠，所以 Heapster 無法報告工作者節點的度量值，而且水平自動擴充無法運作（如 Kubernetes 文件的 [Horizontal Pod Autoscaling ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) 中所記載）。</dd>
+  <dt>水平自動擴充在部分叢集中無法運作</dt>
+    <dd>基於安全理由，會關閉舊叢集的所有工作者節點中 Heapster (10255) 所使用的標準埠。因為已關閉此埠，所以 Heapster 無法報告工作者節點的度量值，而且水平自動擴充無法運作（如 Kubernetes 文件的 [Horizontal Pod Autoscaling ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) 中所記載）。請建立另一個叢集來避免這個問題。</dd>
 </dl>
 
 ### 持續性儲存空間

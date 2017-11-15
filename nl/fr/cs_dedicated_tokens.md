@@ -20,8 +20,7 @@ lastupdated: "2017-08-14"
 {{site.data.keyword.Bluemix_notm}} Dedicated
 {: #cs_dedicated_tokens}
 
-Créez un jeton sans expiration pour utiliser un registre d'images avec des clusters utilisés pour des groupes
-de conteneurs uniques et évolutifs.
+Créez un jeton sans date d'expiration pour utiliser un registre d'images que vous utilisez pour des groupes de conteneurs uniques et évolutifs avec des clusters.
 {:shortdesc}
 
 1.  Connectez-vous à l'environnement {{site.data.keyword.Bluemix_short}} Dedicated.
@@ -81,8 +80,7 @@ de conteneurs uniques et évolutifs.
     <table>
     <caption>Tableau 1. Description des composantes de cette commande</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png"/> Description des composantes de cette
-commande</th>
+    <th colspan=2><img src="images/idea.png"/> Description des composantes de cette commande</th>
     </thead>
     <tbody>
     <tr>
@@ -95,8 +93,7 @@ commande</th>
     </tr>
     <tr>
     <td><code>--docker-server &lt;registry_url&gt;</code></td>
-    <td>Obligatoire. URL du registre d'images où votre espace de nom est configuré :
-registry.&lt;dedicated_domain&gt;</li></ul></td> 
+    <td>Obligatoire. URL du registre d'images où votre espace de nom est configuré : registry.&lt;dedicated_domain&gt;</li></ul></td> 
     </tr>
     <tr>
     <td><code>--docker-username &lt;docker_username&gt;</code></td>
@@ -108,15 +105,14 @@ registry.&lt;dedicated_domain&gt;</li></ul></td>
     </tr>
     <tr>
     <td><code>--docker-email &lt;docker-email&gt;</code></td>
-    <td>Obligatoire. Si vous en avez une, entrez votre adresse e-mail Docker. Si vous n'en avez pas, indiquez une adresse
-e-mail fictive (par exemple, a@b.c). Cet e-mail est obligatoire pour créer une valeur confidentielle Kubernetes, mais n'est pas utilisé après la création.</td> 
+    <td>Obligatoire. Si vous en avez une, entrez votre adresse e-mail Docker. Si vous n'en avez pas, indiquez une adresse e-mail fictive (par exemple, a@b.c). Cet e-mail est obligatoire pour créer une valeur confidentielle Kubernetes, mais n'est pas utilisé après la création.</td> 
     </tr>
     </tbody></table>
 
-7.  Créez une nacelle référençant l'élément imagePullSecret.
+7.  Créez un pod référençant l'élément imagePullSecret.
 
-    1.  Ouvrez l'éditeur de votre choix et créez un script de configuration de nacelle nommé, par exemple, mypod.yaml. 
-    2.  Définissez la nacelle et la valeur imagePullSecret que vous désirez utiliser pour accéder au registre. Pour utiliser une image privée d'un espace de nom :
+    1.  Ouvrez l'éditeur de votre choix et créez un script de configuration de pod nommé, par exemple, mypod.yaml.
+    2.  Définissez le pod et la valeur imagePullSecret que vous désirez utiliser pour accéder au registre. Pour utiliser une image privée d'un espace de nom :
 
         ```
         apiVersion: v1
@@ -140,7 +136,7 @@ e-mail fictive (par exemple, a@b.c). Cet e-mail est obligatoire pour créer une 
         <tbody>
         <tr>
         <td><code>&lt;pod_name&gt;</code></td>
-        <td>Nom de la nacelle que vous désirez créer.</td> 
+        <td>Nom du pod que vous désirez créer.</td> 
         </tr>
         <tr>
         <td><code>&lt;container_name&gt;</code></td>
@@ -148,17 +144,14 @@ e-mail fictive (par exemple, a@b.c). Cet e-mail est obligatoire pour créer une 
         </tr>
         <tr>
         <td><code>&lt;my_namespace&gt;</code></td>
-        <td>Espace de nom sous lequel votre image est stockée. Pour répertorier les espaces de nom disponibles, exécutez la commande `bx cr
-namespace-list`.</td> 
+        <td>Espace de nom sous lequel votre image est stockée. Pour répertorier les espaces de nom disponibles, exécutez la commande `bx cr namespace-list`.</td> 
         </tr>
         <td><code>&lt;my_image&gt;</code></td>
-        <td>Nom de l'image que vous désirez utiliser. Pour répertorier les images disponibles dans un compte {{site.data.keyword.Bluemix_notm}}, exécutez la commande <code>bx cr
-image-list</code>.</td> 
+        <td>Nom de l'image que vous désirez utiliser. Pour répertorier les images disponibles dans un compte {{site.data.keyword.Bluemix_notm}}, exécutez la commande <code>bx cr image-list</code>.</td> 
         </tr>
         <tr>
         <td><code>&lt;tag&gt;</code></td>
-        <td>Version de l'image que vous désirez utiliser. Si aucune étiquette n'est spécifiée, celle correspondant à
-<strong>latest</strong> (la plus récente) est utilisée par défaut.</td> 
+        <td>Version de l'image que vous désirez utiliser. Si aucune étiquette n'est spécifiée, celle correspondant à <strong>latest</strong> (la plus récente) est utilisée par défaut.</td> 
         </tr>
         <tr>
         <td><code>&lt;secret_name&gt;</code></td>

@@ -19,7 +19,7 @@ lastupdated: "2017-08-14"
 # 建立 {{site.data.keyword.Bluemix_notm}} 專用映像檔登錄的 {{site.data.keyword.registryshort_notm}} 記號
 {: #cs_dedicated_tokens}
 
-建立未過期記號，以搭配使用映像檔登錄與用於單一及可擴充群組的叢集。
+建立不會過期的記號，以使用您用於單一及可擴充群組並與叢集搭配使用的映像檔登錄。
 {:shortdesc}
 
 1.  登入「{{site.data.keyword.Bluemix_short}} 專用」環境。
@@ -43,7 +43,7 @@ lastupdated: "2017-08-14"
     ```
     {: pre}
 
-4.  要求現行階段作業的永久性登錄記號。將 <dedicated_domain> 取代為「{{site.data.keyword.Bluemix_notm}} 專用」環境的網域。此記號會授與現行名稱空間中映像檔的存取權。
+4.  要求現行階段作業的永久性登錄記號。將 &lt;dedicated_domain> 取代為「{{site.data.keyword.Bluemix_notm}} 專用」環境的網域。此記號會授與現行名稱空間中映像檔的存取權。
 
     ```
     curl -XPOST -H "Authorization: ${OAUTH_TOKEN}" -H "Organization: ${ORG_GUID}" https://registry.<dedicated_domain>/api/v1/tokens?permanent=true

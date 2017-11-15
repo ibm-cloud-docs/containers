@@ -20,7 +20,7 @@ lastupdated: "2017-08-14"
 {{site.data.keyword.Bluemix_notm}} Dedicated イメージ・レジストリー用の {{site.data.keyword.registryshort_notm}} トークンの作成
 {: #cs_dedicated_tokens}
 
-単一グループとスケーラブル・グループに使用したクラスターでイメージ・レジストリーを使用するための無期限トークンを作成します。
+クラスターで単一グループとスケーラブル・グループに使用したイメージ・レジストリーを使用するための無期限トークンを作成します。
 {:shortdesc}
 
 1.  {{site.data.keyword.Bluemix_short}} Dedicated 環境にログインします。

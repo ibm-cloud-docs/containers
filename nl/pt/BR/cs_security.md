@@ -1,8 +1,6 @@
 ---
 
-copyright:
-  years: 2014, 2017
-lastupdated: "2017-08-15"
+copyright: years: 2014, 2017 lastupdated: "2017-10-24"
 
 ---
 
@@ -22,9 +20,10 @@ lastupdated: "2017-08-15"
 É possível usar recursos de segurança integrados para análise de risco e proteção de segurança. Esses recursos ajudam você a proteger a sua infraestrutura de cluster e a comunicação de rede, a isolar os seus recursos de cálculo e a assegurar a conformidade de segurança em seus componentes de infraestrutura e implementações de contêiner.
 {: shortdesc}
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_security.png">Segurança do cluster do <img src="images/cs_security.png" width="400" alt="{{site.data.keyword.containershort_notm}} " style="width:400px;" /></a>
+<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_security.png" ><img src="images/cs_security.png" width="400" alt="{{site.data.keyword.containershort_notm}} cluster security" style="width:400px; border-style: none"/></a>
 
-<table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
+
+  <table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
   <thead>
   <th colspan=2><img src="images/idea.png"/> Configurações de segurança integradas do cluster no {{site.data.keyword.containershort_notm}}</th>
   </thead>
@@ -44,6 +43,9 @@ lastupdated: "2017-08-15"
   </tbody>
 </table>
 
+<br />
+
+
 ## Mestre do Kubernetes
 {: #cs_security_master}
 
@@ -52,12 +54,19 @@ Revise os recursos de segurança integrados do mestre do Kubernetes para protege
 
 <dl>
   <dt>Mestre do Kubernetes totalmente gerenciado e dedicado</dt>
-    <dd>Cada cluster do Kubernetes no {{site.data.keyword.containershort_notm}} é controlado por um mestre do Kubernetes dedicado que é gerenciado pela IBM em uma conta do {{site.data.keyword.BluSoftlayer_full}} de propriedade da IBM. O mestre do Kubernetes é configurado com os componentes dedicados a seguir que não são compartilhados com outros clientes IBM.
-    <ul><ul><li>Armazenamento de dados etcd: armazena todos os recursos do Kubernetes de um cluster, como Serviços, Implementações e Pods. Os ConfigMaps e Segredos do Kubernetes são dados do app armazenados como pares de valores de chave para que eles possam ser usados por um app que é executado em um pod. Os dados no etcd são armazenados em um disco criptografado gerenciado pela IBM e são criptografados por TLS quando enviados a um pod para assegurar a proteção e integridade de dados.
-    <li>kube-apiserver: serve como o ponto de entrada principal para todas as solicitações do nó do trabalhador para o mestre do Kubernetes. O kube-apiserver valida e processa solicitações e pode ler e gravar no armazenamento de dados etcd.
-    <li><kube-scheduler: decide onde implementar pods, levando em consideração a capacidade e as necessidades de desempenho, as restrições de política de hardware e software, as especificações de antiafinidade e os requisitos de carga de trabalho. Se não puder ser localizado nenhum nó do trabalhador que corresponda aos requisitos, o pod não será implementado no cluster.
-    <li>kube-controller-manager: responsável por monitorar os conjuntos de réplicas e criar pods correspondentes para atingir o estado desejado.
-    <li>OpenVPN: componente específico do {{site.data.keyword.containershort_notm}} para fornecer conectividade de rede assegurada para toda comunicação do mestre do Kubernetes com o nó do trabalhador.</ul></ul></dd>
+    <dd>Cada cluster do Kubernetes no {{site.data.keyword.containershort_notm}} é controlado por um mestre do Kubernetes dedicado que é gerenciado pela IBM em uma conta do IBM Bluemix Infrastructure (SoftLayer) pertencente à IBM. O mestre do Kubernetes é configurado com os componentes dedicados a seguir que não são compartilhados com outros clientes IBM.
+    <ul><li>Armazenamento de dados etcd: armazena todos os recursos do Kubernetes de um cluster, como Serviços, Implementações e Pods. Os ConfigMaps e Segredos do Kubernetes são dados do app armazenados como pares de valores de chave para que eles possam ser usados por um app que é executado em um pod. Os dados no etcd são armazenados em um disco criptografado
+gerenciado pela IBM e são criptografados por TLS quando enviados a um pod para assegurar a proteção e integridade
+de dados.</li>
+    <li>kube-apiserver: serve como o ponto de entrada principal para todas as solicitações do nó do trabalhador para o mestre do Kubernetes. O kube-apiserver valida e processa solicitações e pode ler e gravar
+no armazenamento de dados etcd.</li>
+    <li>kube-scheduler: decida onde implementar pods, levando em consideração a capacidade da conta e as necessidades
+de desempenho, as restrições de política de hardware e software, as especificações de antiafinidade e os requisitos
+de carga de trabalho. Se não puder ser localizado nenhum nó do trabalhador que corresponda aos requisitos, o pod não será implementado
+no cluster.</li>
+    <li>kube-controller-manager: responsável por monitorar os conjuntos de réplicas e criar pods correspondentes
+para atingir o estado desejado.</li>
+    <li>OpenVPN: o componente específico do {{site.data.keyword.containershort_notm}} para fornecer conectividade de rede segura para toda comunicação do mestre do Kubernetes com o nó do trabalhador.</li></ul></dd>
   <dt>Conectividade de rede assegurada TLS para toda comunicação do nó do trabalhador com o mestre do Kubernetes</dt>
     <dd>Para assegurar a comunicação de rede com o mestre do Kubernetes, o {{site.data.keyword.containershort_notm}} gera certificados TLS que criptografam a comunicação para e a partir dos componentes kube-apiserver e armazenamento de dados etcd para cada cluster. Esses certificados nunca são compartilhados entre clusters ou entre os componentes do mestre do Kubernetes.</dd>
   <dt>Conectividade de rede segura OpenVPN para toda comunicação do mestre do Kubernetes com o nó do trabalhador</dt>
@@ -66,7 +75,10 @@ Revise os recursos de segurança integrados do mestre do Kubernetes para protege
     <dd>Cada mestre do Kubernetes é monitorado continuamente pela IBM para controlar e corrigir os ataques de Negação de Serviço (DOS) de nível de processo.</dd>
   <dt>Conformidade de segurança do nó do mestre do Kubernetes</dt>
     <dd>O {{site.data.keyword.containershort_notm}} varre automaticamente cada nó em que o mestre do Kubernetes é implementado em busca de vulnerabilidades localizadas em correções de segurança do Kubernetes e específicas do S.O. que precisam ser aplicadas para assegurar proteção do nó principal. Se vulnerabilidades forem localizadas, o {{site.data.keyword.containershort_notm}} aplicará automaticamente as correções e resolverá as vulnerabilidades em nome do usuário.</dd>
-</dl>  
+</dl>
+
+<br />
+
 
 ## Nós do trabalhador
 {: #cs_security_worker}
@@ -76,13 +88,13 @@ Revise os recursos integrados de segurança do nó do trabalhador para proteger 
 
 <dl>
   <dt>Isolamento de infraestrutura de cálculo, rede e armazenamento</dt>
-    <dd>Ao criar um cluster, as máquinas virtuais são provisionadas como nós do trabalhador na conta do {{site.data.keyword.BluSoftlayer_notm}} do cliente ou na conta dedicada do {{site.data.keyword.BluSoftlayer_notm}} pela IBM. Os nós do trabalhador são dedicados a um cluster e não hospedam cargas de outros clusters.</br> Cada conta do {{site.data.keyword.Bluemix_notm}} é configurada com VLANs do {{site.data.keyword.BluSoftlayer_notm}} para assegurar desempenho de rede de qualidade e isolamento nos nós do trabalhador. </br>Para persistir dados no cluster, é possível provisionar armazenamento de arquivo baseado em NFS dedicado do {{site.data.keyword.BluSoftlayer_notm}} e alavancar os recursos de segurança de dados integrados dessa plataforma.</dd>
+    <dd>Ao criar um cluster, as máquinas virtuais são provisionadas como nós do trabalhador na conta IBM Bluemix Infrastructure (SoftLayer) do cliente ou na conta do IBM Bluemix Infrastructure (SoftLayer) dedicada pela IBM. Os nós do trabalhador são dedicados a um cluster e não hospedam cargas de outros clusters.</br> Cada conta é configurada do {{site.data.keyword.Bluemix_notm}} é configurada com VLANs do IBM Bluemix Infrastructure (SoftLayer) para assegurar o desempenho e o isolamento da rede com qualidade nos nós do trabalhador. </br>Para persistir dados no cluster, é possível provisionar armazenamento de arquivo baseado em NFS dedicado do IBM Bluemix Infrastructure (SoftLayer) e aproveitar os recursos de segurança de dados integrados dessa plataforma.</dd>
   <dt>Configuração de nó do trabalhador seguro</dt>
     <dd>Cada nó do trabalhador é configurado com um sistema operacional Ubuntu que não pode ser mudado pelo usuário. Para proteger o sistema operacional dos nós do trabalhador de potenciais ataques, cada nó do trabalhador é definido com configurações de firewall de especialista que são impingidas por regras iptable do Linux.</br> Todos os contêineres que são executados no Kubernetes são protegidos pelas configurações de política de rede Calico que são configuradas em cada nó do trabalhador durante a criação de cluster. Essa configuração assegura a comunicação de rede segura entre os nós do trabalhador e os pods. Para restringir ainda mais as ações que um contêiner pode executar no nó do trabalhador, os usuários podem escolher configurar [políticas de AppArmor ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tutorials/clusters/apparmor/) nos nós do trabalhador.</br> Por padrão, o acesso SSH para o usuário raiz é desativado no nó do trabalhador. Se desejar instalar recursos adicionais no nó do trabalhador, será possível usar [conjuntos de daemons do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset) para tudo o que você desejar executar em cada nó do trabalhador ou [tarefas do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) para qualquer ação única que precisar ser executada.</dd>
   <dt>Conformidade de segurança do nó do trabalhador do Kubernetes</dt>
-    <dd>A IBM trabalha com as equipes de recomendação de segurança interna e externamente para identificar potenciais problemas de conformidade de segurança para nós do trabalhador e libera continuamente atualizações de conformidade e correções de segurança para tratar das vulnerabilidades localizadas. As atualizações e correções de segurança são implementadas automaticamente no sistema operacional do nó do trabalhador pela IBM. Para fazer isso, a IBM mantém o acesso SSH para os nós do trabalhador.</br> <b>Nota</b>: algumas atualizações requerem uma reinicialização do nó do trabalhador. No entanto, a IBM não reinicializa nós do trabalhador durante a instalação de atualizações ou correções de segurança. Os usuários são aconselhados a reinicializar os nós do trabalhador regularmente para assegurar que a instalação de atualizações e correções de segurança possam ser concluídas.</dd>
-  <dt>Suporte para firewalls de rede do SoftLayer</dt>
-    <dd>O {{site.data.keyword.containershort_notm}} é compatível com todas as [ofertas de firewall do {{site.data.keyword.BluSoftlayer_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/cloud-computing/bluemix/network-security). No {{site.data.keyword.Bluemix_notm}} Public, é possível configurar um firewall com políticas de rede customizadas para fornecer segurança de rede dedicada para seu cluster e para detectar e corrigir intrusão de rede. Por exemplo, é possível optar por configurar um [Vyatta ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://knowledgelayer.softlayer.com/topic/vyatta-1) para agir como seu firewall e bloquear tráfego indesejado. Ao configurar um firewall, [deve-se também abrir as portas e os endereços IP necessários](#opening_ports) para cada região para que o mestre e os nós do trabalhador possam se comunicar. No {{site.data.keyword.Bluemix_notm}} Dedicated, firewalls, DataPower, Fortigate e DNS já estão configurados como parte da implementação do ambiente dedicado padrão.</dd>
+    <dd>A IBM trabalha com as equipes consultivas de segurança interna e externa para resolver vulnerabilidades de conformidade de segurança em potencial. A IBM mantém o acesso SSH aos nós do trabalhador para implementar atualizações e correções de segurança no sistema operacional.</br> <b>Importante</b>: reinicialize os nós do trabalhador regularmente para assegurar a instalação das atualizações e correções de segurança que são implementadas automaticamente no sistema operacional. A IBM não reinicializa seus nós do trabalhador.</dd>
+  <dt>Suporte para firewalls de rede IBM Bluemix Infrastructure (SoftLayer)</dt>
+    <dd>O {{site.data.keyword.containershort_notm}} é compatível com todas as ofertas de firewall do [IBM Bluemix Infrastructure (SoftLayer)![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/cloud-computing/bluemix/network-security). No {{site.data.keyword.Bluemix_notm}} Public, é possível configurar um firewall com políticas de rede customizadas para fornecer segurança de rede dedicada para seu cluster e para detectar e corrigir intrusão de rede. Por exemplo, é possível optar por configurar um [Vyatta ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://knowledgelayer.softlayer.com/topic/vyatta-1) para agir como seu firewall e bloquear tráfego indesejado. Ao configurar um firewall, [deve-se também abrir as portas e os endereços IP necessários](#opening_ports) para cada região para que o mestre e os nós do trabalhador possam se comunicar. No {{site.data.keyword.Bluemix_notm}} Dedicated, firewalls, DataPower, Fortigate e DNS já estão configurados como parte da implementação do ambiente dedicado padrão.</dd>
   <dt>Manter os serviços privados ou expor os serviços e apps seletivamente para a Internet pública</dt>
     <dd>É possível escolher manter seus serviços e apps privados e alavancar os recursos de segurança integrados descritos neste tópico para assegurar uma comunicação segura entre os nós do trabalhador e os pods. Para expor os serviços e apps para a Internet pública, é possível alavancar o suporte do Ingresso e do balanceador de carga para tornar os seus serviços publicamente disponíveis com segurança.</dd>
   <dt>Conecte com segurança seus nós do trabalhador e apps a um data center local</dt>
@@ -94,65 +106,143 @@ Revise os recursos integrados de segurança do nó do trabalhador para proteger 
 ### Abrindo portas e endereços IP necessários em seu firewall
 {: #opening_ports}
 
-Ao configurar um firewall para seus nós do trabalhador ou customizar as configurações de firewall em sua conta do {{site.data.keyword.BluSoftlayer_notm}}, deve-se abrir determinadas portas e endereços IP para que o nó do trabalhador e o mestre do Kubernetes possam se comunicar.
+Revise essas situações nas quais pode ser necessário abrir portas e endereços IP específicos em seus firewalls:
+* Para permitir a comunicação entre o mestre do Kubernetes e os nós do trabalhador quando um firewall for configurado para os nós do trabalhador ou as configurações de firewall forem customizadas em sua conta do IBM Bluemix Infrastructure (SoftLayer)
+* Para acessar o balanceador de carga ou controlador de Ingresso de fora do cluster
+* Para executar comandos `kubectl` por meio de seu sistema local quando as políticas de rede corporativa impedirem o acesso aos terminais de Internet pública por proxies ou firewalls
 
-1.  Observe o endereço IP público para todos os nós do trabalhador no cluster.
+  1.  Observe o endereço IP público para todos os nós do trabalhador no cluster.
 
-    ```
-    bx cs workers <cluster_name_or_id>
-    ```
-    {: pre}
+      ```
+      bx cs workers <cluster_name_or_id>
+      ```
+      {: pre}
 
-2.  Em seu firewall, permita as conexões a seguir para e a partir de seus nós do trabalhador.
-
-  ```
-  TCP port 443 FROM <each_worker_node_publicIP> TO registry.<region>.bluemix.net, apt.dockerproject.org
-  ```
-  {: codeblock}
-
-    <ul><li>Para conectividade de SAÍDA dos nós do trabalhador, permita tráfego de rede de saída do nó do trabalhador de origem para o intervalo de portas TCP/UDP de destino 20.000 a 32.767, para `<each_worker_node_publicIP>` e os endereços IP e grupos de rede a seguir:</br>
-    
-
-    <table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
+  2.  Em seu firewall para conectividade OUTBOUND de seus nós do trabalhador, permita o tráfego de rede de saída do nó do trabalhador de origem para o intervalo de portas TCP/UDP de destino de 20000 a 32767 e porta 443 para `<each_worker_node_publicIP>` e os endereços IP e grupos de rede a seguir.
+      - **Importante**: deve-se permitir o tráfego de saída para a porta 443 e todos os locais dentro da região entre si, para equilibrar a carga durante o processo de autoinicialização. Por exemplo, se o seu cluster estiver no Sul dos EUA, deve-se permitir o tráfego da porta 443 para dal10 e dal12, bem como de dal10 e dal12 uma para a outra.
+      <p>
+  <table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
       <thead>
-      <th colspan=2><img src="images/idea.png"/> Endereços IP de saída</th>
+      <th>Região</th>
+      <th>Localização</th>
+      <th>Endereço IP</th>
       </thead>
     <tbody>
       <tr>
-        <td>ams03</td>
-        <td><code>169.50.169.110</code></td>
+         <td>AP Sul</td>
+         <td>mel01<br>syd01</td>
+         <td><code>168.1.97.67</code><br><code>168.1.8.195</code></td>
       </tr>
       <tr>
-        <td>dal10</td>
-        <td><code>169.46.7.238</code></td>
-       </tr>
-       <tr>
-        <td>dal12</td>
-        <td><code>169.47.70.10</code></td>
-       </tr>
-       <tr>
-        <td>fra02</td>
-        <td><code>169.50.56.174</code></td>
-       </tr>
+         <td>União Europeia Central</td>
+         <td>ams03<br>fra02</td>
+         <td><code>169.50.169.110</code><br><code>169.50.56.174</code></td>
+        </tr>
+      <tr>
+        <td>Sul do Reino Unido</td>
+        <td>lon02<br>lon04</td>
+        <td><code>159.122.242.78</code><br><code>158.175.65.170</code></td>
+      </tr>
+      <tr>
+        <td>Leste dos EUA</td>
+         <td>wdc06<br>wdc07</td>
+         <td><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+      </tr>
+      <tr>
+        <td>SUL dos EUA</td>
+        <td>dal10<br>dal12<br>dal13</td>
+        <td><code>169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
+      </tr>
       </tbody>
-      <tr>
-       <td>lon02</td>
-       <td><code>159.122.242.78</code></td>
-      </tr>
-      <tr>
-       <td>lon04</td>
-       <td><code>158.175.65.170</code></td>
-      </tr>
-      <tr>
-       <td>syd01</td>
-       <td><code>168.1.8.195</code></td>
-      </tr>
-      <tr>
-       <td>syd04</td>
-       <td><code>130.198.64.19</code></td>
-      </tr>
     </table>
-</ul>
+</p>
+
+  3.  Permita o tráfego de rede de saída dos nós do trabalhador para o {{site.data.keyword.registrylong_notm}}:
+      - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
+      - Substitua <em>&lt;registry_publicIP&gt;</em> por todos os endereços para as regiões de registro para as quais você deseja permitir o tráfego:
+        <p>      
+<table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
+        <thead>
+        <th colspan=2><img src="images/idea.png"/> Registro de endereços IP</th>
+        </thead>
+      <tbody>
+        <tr>
+          <td>registry.au-syd.bluemix.net</td>
+          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
+        </tr>
+        <tr>
+          <td>registry.eu-de.bluemix.net</td>
+          <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></td>
+         </tr>
+         <tr>
+          <td>registry.eu-gb.bluemix.net</td>
+          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></td>
+         </tr>
+         <tr>
+          <td>registry.ng.bluemix.net</td>
+          <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></td>
+         </tr>
+        </tbody>
+      </table>
+</p>
+
+  4.  Opcional: permita o tráfego de rede de saída dos nós do trabalhador para os serviços do {{site.data.keyword.monitoringlong_notm}} e do {{site.data.keyword.loganalysislong_notm}}:
+      - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
+      - Substitua <em>&lt;monitoring_publicIP&gt;</em> por todos os endereços para as regiões de monitoramento para as quais você deseja permitir o tráfego:
+        <p><table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
+        <thead>
+        <th colspan=2><img src="images/idea.png"/> Monitoramento de endereços IP públicos</th>
+        </thead>
+      <tbody>
+        <tr>
+         <td>Metrics.eu-de.bluemix.net</td>
+         <td><code>159.122.78.136/29</code></td>
+        </tr>
+        <tr>
+         <td>Metrics.eu-gb.bluemix.net</td>
+         <td><code>169.50.196.136/29</code></td>
+        </tr>
+        <tr>
+          <td>Metrics.ng.bluemix.net</td>
+          <td><code>169.47.204.128/29</code></td>
+         </tr>
+         
+        </tbody>
+      </table>
+</p>
+      - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
+      - Substitua <em>&lt;logging_publicIP&gt;</em> por todos os endereços para as regiões de criação de log para as quais você deseja permitir tráfego:
+        <p><table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
+        <thead>
+        <th colspan=2><img src="images/idea.png"/> Criação de log de endereços IP públicos</th>
+        </thead>
+      <tbody>
+        <tr>
+         <td>ingest.logging.eu-de.bluemix.net</td>
+         <td><code>169.50.25.125</code></td>
+        </tr>
+        <tr>
+         <td>ingest.logging.eu-gb.bluemix.net</td>
+         <td><code>169.50.115.113</code></td>
+        </tr>
+        <tr>
+          <td>ingest.logging.ng.bluemix.net</td>
+          <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
+         </tr>
+        </tbody>
+      </table>
+</p>
+
+  5. Para firewalls privados, permita os intervalos de IP privado do IBM Bluemix Infrastructure (SoftLayer) apropriados. Consulte [este link](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) iniciando com a seção **Rede de backend (privada)**.
+      - Inclua todos os [locais dentro das regiões](cs_regions.html#locations) que você estiver usando
+      - Observe que deve-se incluir o local de dal01 (data center)
+      - Abra as portas 80 e 443 para permitir o processo de autoinicialização do cluster
+
+  6. Opcional: para acessar o balanceador de carga de fora da VLAN, abra a porta para o tráfego de rede recebido no endereço IP específico desse balanceador de carga.
+
+  7. Opcional: para acessar o controlador do Ingresso de fora da VLAN, abra a porta 80 ou 443 para o tráfego de rede recebido no endereço IP específico desse controlador do Ingresso, dependendo da porta que foi configurada.
+
+<br />
 
 
 ## Políticas de rede
@@ -163,9 +253,15 @@ Cada cluster do Kubernetes é configurado com um plug-in de rede que é chamado 
 
 É possível escolher entre o Calico e os recursos nativos do Kubernetes para criar políticas de rede para seu cluster. Você pode usar políticas de rede do Kubernetes para começar, mas para recursos mais robustos, use as políticas de rede do Calico.
 
-<ul><li>[Políticas de rede do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/services-networking/network-policies/): algumas opções básicas são fornecidas, como a especificação de quais pods podem se comunicar entre si. O tráfego de rede recebido para os pods pode ser permitido ou bloqueado para um protocolo e porta com base nas etiquetas e namespaces do Kubernetes do pod que está tentando se conectar a eles.</br>Essas políticas podem ser aplicadas usando comandos `kubectl` ou as APIs do Kubernetes. Quando essas políticas são aplicadas, elas são convertidas em políticas de rede do Calico e o Calico impinge essas políticas.
-<li>[Políticas de rede do Calico ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://docs.projectcalico.org/v2.0/getting-started/kubernetes/tutorials/advanced-policy): essas políticas são um superconjunto das políticas de rede do Kubernetes e aprimoram as capacidades nativas do Kubernetes com os recursos a seguir.
-<ul><ul><li>Permitir ou bloquear tráfego de rede em interfaces de rede específicas, não somente o tráfego de pod do Kubernetes.<li>Permitir ou bloquear tráfego de rede recebido (ingresso) e de saída (egresso).<li>Permitir ou bloquear o tráfego que é baseado em um endereço IP de origem ou destino ou CIDR.</ul></ul></br>
+<ul>
+  <li>[Políticas de rede do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/services-networking/network-policies/): algumas opções básicas são fornecidas, como a especificação de quais pods podem se comunicar entre si. O tráfego de rede recebido pode ser permitido ou bloqueado para um protocolo e uma porta. Esse tráfego pode ser filtrado com base nos rótulos e namespaces do Kubernetes do pod que está tentando se conectar a outros pods.</br>Essas políticas podem ser aplicadas usando comandos `kubectl` ou as APIs do Kubernetes. Quando essas políticas são aplicadas, elas são
+convertidas em políticas de rede do Calico e o Calico impinge essas políticas.</li>
+  <li>[Políticas de rede do Calico ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://docs.projectcalico.org/v2.4/getting-started/kubernetes/tutorials/advanced-policy): essas políticas são um superconjunto das políticas de rede do Kubernetes e aprimoram as capacidades nativas do Kubernetes com os recursos a seguir.</li>
+    <ul><ul><li>Permitir ou bloquear tráfego de rede em interfaces de rede específicas, não somente o tráfego de pod do Kubernetes.</li>
+    <li>Permitir ou bloquear tráfego de rede recebido (ingresso) e de saída (egresso).</li>
+    <li>[Bloquear tráfego recebido (ingresso) para os serviços LoadBalancer ou NodePort Kubernetes](#cs_block_ingress).</li>
+    <li>Permitir ou bloquear o tráfego que é baseado em um endereço IP de origem ou destino ou CIDR.</li></ul></ul></br>
+
 Essas políticas são aplicadas usando comandos `calicoctl`. O Calico impinge essas políticas, que incluem quaisquer políticas de rede do Kubernetes que são convertidas em políticas do Calico, configurando regras iptables do Linux nos nós do trabalhador do Kubernetes. As regras de Iptables servem como um firewall para o nó do trabalhador para definir as características que o tráfego de rede deve atender para ser encaminhado para o recurso de destino.</ul>
 
 
@@ -181,8 +277,7 @@ Observe que uma política para permitir SSH não existe, então o acesso SSH por
 **Importante:** não remova as políticas aplicadas a um terminal de host, a menos que você entenda completamente a política e saiba que não precisará do tráfego que está sendo permitido pela política.
 
 
-
-  <table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
+ <table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
   <thead>
   <th colspan=2><img src="images/idea.png"/> Políticas padrão para cada cluster</th>
   </thead>
@@ -205,7 +300,7 @@ Observe que uma política para permitir SSH não existe, então o acesso SSH por
    </tr>
    <tr>
       <td><code>allow-sys-mgmt</code></td>
-      <td>Permite conexões recebidas para sistemas {{site.data.keyword.BluSoftlayer_notm}} específicos que são usados para gerenciar os nós do trabalhador.</td>
+      <td>Permite conexões recebidas para sistemas do IBM Bluemix Infrastructure (SoftLayer) específicos que são usados para gerenciar os nós do trabalhador.</td>
    </tr>
    <tr>
     <td><code>allow-vrrp</code></td>
@@ -220,21 +315,22 @@ Observe que uma política para permitir SSH não existe, então o acesso SSH por
 
 Na maioria dos casos, as políticas padrão não precisam ser mudadas. Somente cenários avançados podem requerer mudanças. Se você achar que deve-se fazer mudanças, instale a CLI do Calico e crie suas próprias políticas de rede
 
-Antes de iniciar, conclua as etapas a seguir.
+Antes de iniciar:
 
 1.  [Instale as CLIs do {{site.data.keyword.containershort_notm}} e do Kubernetes.](cs_cli_install.html#cs_cli_install)
 2.  [Crie um cluster lite ou padrão.](cs_cluster.html#cs_cluster_ui)
-3.  [Destine a CLI do Kubernetes para o cluster](cs_cli_install.html#cs_cli_configure). Inclua a opção `--admin` com o comando `bx cs cluster-config`, que é usado para fazer download dos certificados e arquivos de permissão. Este download também inclui as chaves para a função rbac de Administrador, que é necessária para executar comandos do Calico.
+3.  [Destine a CLI do Kubernetes para o cluster](cs_cli_install.html#cs_cli_configure). Inclua a opção `--admin` com o comando `bx cs cluster-config`, que é usado para fazer download dos certificados e arquivos de permissão. Este download também inclui as chaves para a função de Super Usuário, que você precisa para executar comandos do Calico.
 
   ```
-  bx cs cluster-config <cluster_name> 
+  bx cs cluster-config <cluster_name> --admin
   ```
   {: pre}
 
+  **Nota**: a CLI do Calico versão 1.4.0 é suportada.
 
 Para incluir políticas de rede:
 1.  Instale a CLI do Calico.
-    1.  [Faça download da CLI do Calico ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/projectcalico/calicoctl/releases/).
+    1.  [Faça download da CLI do Calico ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/projectcalico/calicoctl/releases/tag/v1.4.0).
 
         **Dica:** se estiver usando o Windows, instale a CLI do Calico no mesmo diretório que a CLI do {{site.data.keyword.Bluemix_notm}}. Essa configuração economiza algumas mudanças de caminho de arquivo ao executar comandos posteriormente.
 
@@ -250,11 +346,11 @@ Para incluir políticas de rede:
             -   S.O. X:
 
               ```
-              mv /<path_to_file>/calico-darwin-amd64 /usr/local/bin/calicoctl
+              mv /<path_to_file>/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
               ```
               {: pre}
 
-        2.  Converta o arquivo binário para um executável.
+        2.  Torne o arquivo executável.
 
             ```
             chmod +x /usr/local/bin/calicoctl
@@ -270,14 +366,14 @@ Para incluir políticas de rede:
 
 2.  Configure a CLI do Calico.
 
-    1.  Para Linux e OS X, crie o diretório '/etc/calico'. Para Windows, qualquer diretório pode ser usado.
+    1.  Para S.O. Linux e X, crie o diretório `/etc/calico`. Para Windows, qualquer diretório pode ser usado.
 
       ```
-      mkdir -p /etc/calico/
+      sudo mkdir -p /etc/calico/
       ```
       {: pre}
 
-    2.  Crie um arquivo 'calicoctl.cfg'.
+    2.  Crie um arquivo `calicoctl.cfg`.
         -   Linux e OS X:
 
           ```
@@ -289,8 +385,8 @@ Para incluir políticas de rede:
 
     3.  Digite as informações a seguir no arquivo <code>calicoctl.cfg</code>.
 
-      ```
-      apiVersion: v1
+        ```
+        apiVersion: v1
       kind: calicoApiConfig
       metadata:
       spec:
@@ -298,15 +394,15 @@ Para incluir políticas de rede:
           etcdKeyFile: <CERTS_DIR>/admin-key.pem
           etcdCertFile: <CERTS_DIR>/admin.pem
           etcdCACertFile: <CERTS_DIR>/<ca-*pem_file>
-      ```
-      {: pre}
+        ```
+        {: codeblock}
 
-        1.  Recupere o `<ETCD_URL>`.
+        1.  Recupere o `<ETCD_URL>`. Se este comando falhar com um erro `calico-config not found`, consulte este [tópico de resolução de problemas](cs_troubleshoot.html#cs_calico_fails).
 
           -   Linux e OS X:
 
               ```
-              kubectl describe pod -n kube-system `kubectl get pod -n kube-system | grep calico-policy-controller | awk '{print $1}'` | grep ETCD_ENDPOINTS | awk '{print $2}'
+              kubectl get cm -n kube-system calico-config -o yaml | grep "etcd_endpoints:" | awk '{ print $2 }'
               ```
               {: pre}
 
@@ -319,9 +415,8 @@ Para incluir políticas de rede:
 
           -   Windows:
             <ol>
-            <li>Obtenha uma lista dos pods no namespace kube-system e localize o pod controlador do Calico. </br><pre class="codeblock"><code>kubectl get pod -n kube-system</code></pre></br>Exemplo:</br><pre class="screen"><code>calico-policy-controller-1674857634-k2ckm</code></pre>
-            <li>Visualize os detalhes do pod controlador do Calico.</br> <pre class="codeblock"><code>kubectl describe pod -n kube-system calico-policy-controller-&lt;ID&gt;</code></pre>
-            <li>Localize o valor de terminais do ETCD. Exemplo: <code>https://169.1.1.1:30001</code>
+            <li>Obtenha os valores de configuração calico do mapa de configuração. </br><pre class="codeblock"><code>kubectl get cm -n kube-system calico-config -o yaml</code></pre></br>
+            <li>Na seção de `dados`, localize o valor etcd_endpoints. Exemplo: <code>https://169.1.1.1:30001</code>
             </ol>
 
         2.  Recupere o `<CERTS_DIR>`, o diretório no qual os certificados do Kubernetes são transferidos por download.
@@ -361,15 +456,16 @@ Para incluir políticas de rede:
             -   Linux e OS X:
 
               ```
-              ls `dirname $KUBECONFIG` | grep ca-.*pem
+              ls `dirname $KUBECONFIG` | grep "ca-"
               ```
               {: pre}
 
             -   Windows:
-              <ol><li>Abra o diretório que você recuperou na última etapa.</br><pre class="codeblock"><code>C:\Users\<user>\.bluemix\plugins\container-service\&#60;cluster_name&#62;-admin\</code></pre>
+              <ol><li>Abra o diretório que você recuperou na última etapa.</br><pre class="codeblock"><code>C:\Users\<user>\.bluemix\plugins\container-service\&lt;cluster_name&gt;-admin\</code></pre>
               <li> Localize o arquivo <code>ca-*pem_file</code>.</ol>
 
-        4.  Verifique se a configuração do Calico está funcionando corretamente.
+        4.  Verifique se a configuração do Calico está funcionando
+corretamente.
 
             -   Linux e OS X:
 
@@ -444,6 +540,55 @@ Para incluir políticas de rede:
           ```
           {: pre}
 
+### Bloquear tráfego recebido (ingresso) para serviços LoadBalancer ou NodePort.
+{: #cs_block_ingress}
+
+Por padrão, os serviços Kubernetes `NodePort` e `LoadBalancer` são projetados para tornar seu app disponível em todas as interfaces do cluster públicas e privadas. No entanto, é possível bloquear o tráfego recebido para seus serviços com base na origem ou no destino do tráfego. Para bloquear o tráfego, crie políticas de rede do Calico `preDNAT`.
+
+Um serviço Kubernetes LoadBalancer também é um serviço NodePort. Um serviço LoadBalancer torna seu app disponível pelo endereço IP do balanceador de carga e a porta e torna seu app disponível na(s) porta(s) do nó do serviço. As portas de nó são acessíveis em cada endereço IP (público e privado) para cada nó no cluster.
+
+O administrador de cluster pode usar o bloco de políticas de rede Calico `preDNAT`:
+
+  - Tráfego para serviços NodePort. O tráfego para serviços LoadBalancer é permitido.
+  - O tráfego que é baseado em um endereço de origem ou CIDR.
+
+Um benefício desses recursos é que o administrador de cluster pode bloquear o tráfego para as portas do nó públicas de um serviço LoadBalancer privado. O administrador também pode ativar o acesso da lista de aplicativos confiáveis para serviços NodePort ou LoadBalancer. As políticas de rede `preDNAT` são úteis porque as políticas padrão Kubernetes e Calico são difíceis de aplicar à proteção dos serviços Kubernetes NodePort e LoadBalancer devido às regras iptables DNAT geradas para esses serviços.
+
+As políticas de rede Calico `preDNAT` geram regras iptables com base em um [recurso de política de rede Calico ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v2.4/reference/calicoctl/resources/policy).
+
+1. Defina uma política de rede Calico `preDNAT` para acesso de ingresso aos serviços do Kubernetes. Este exemplo bloqueia todas as portas do nó.
+
+  ```
+  apiVersion: v1
+  kind: policy
+  metadata:
+    name: deny-kube-node-port-services
+  spec:
+    preDNAT: true
+    selector: ibm.role in { 'worker_public', 'master_public' }
+    ingress:
+    - action: deny
+      protocol: tcp
+      destination:
+        ports:
+        - 30000:32767
+    - action: deny
+      protocol: udp
+      destination:
+        ports:
+        - 30000:32767
+  ```
+  {: codeblock}
+
+2. Aplique a política de rede Calico preDNAT. Leva aproximadamente 1 minuto para as mudanças de política serem aplicadas em todo o cluster.
+
+  ```
+  /opt/bin/calicoctl apply -f deny-kube-node-port-services.yaml
+  ```
+  {: pre}
+
+<br />
+
 
 ## Imagens
 {: #cs_security_deployment}
@@ -461,6 +606,6 @@ Quando você usar o {{site.data.keyword.registryshort_notm}}, será possível al
 
 Para visualizar a avaliação de vulnerabilidade para sua imagem:
 
-1.  No **catálogo**, selecione **Contêineres**.
-2.  Selecione a imagem na qual você deseja ver avaliação de vulnerabilidade.
-3.  Na seção **Avaliação de vulnerabilidade**, clique em **Visualizar relatório**.
+1.  No **catálogo**, na seção Contêineres, selecione **Registro de contêiner**.
+2.  Na página **Repositórios privados**, na tabela **Repositórios**, identifique a imagem.
+3.  Na coluna **Relatório de segurança**, clique no status da imagem para recuperar a sua avaliação de vulnerabilidade.

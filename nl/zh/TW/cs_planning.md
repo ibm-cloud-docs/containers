@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-08-14"
+lastupdated: "2017-10-24"
 
 ---
 
@@ -12,7 +12,7 @@ lastupdated: "2017-08-14"
 {:pre: .pre}
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
-{:tip: .tip} 
+{:tip: .tip}
 {:download: .download}
 
 
@@ -21,6 +21,9 @@ lastupdated: "2017-08-14"
 
 {{site.data.keyword.containershort_notm}} 提供數個選項來配置及自訂 Kubernetes 叢集，以符合組織的功能及非功能性需求。建立叢集之後，將無法變更其中部分配置。事先知道這些配置，有助於確保所有資源（例如記憶體、磁碟空間及 IP 位址）都可供開發團隊使用。
 {:shortdesc}
+
+<br />
+
 
 ## 比較精簡與標準叢集
 {: #cs_planning_cluster_type}
@@ -32,16 +35,19 @@ lastupdated: "2017-08-14"
 |---------------|-------------|-----------------|
 |[在「{{site.data.keyword.Bluemix_notm}} 公用」中提供](cs_ov.html#public_environment)|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
 |[叢集內的專用網路](#cs_planning_private_network)|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
-|[Nodeport 服務的公用應用程式存取](#cs_nodeport)|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
+|[NodePort 服務的公用應用程式存取](#cs_nodeport)|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
 |[使用者存取管理](cs_cluster.html#cs_cluster_user)|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
 |[叢集及應用程式中的 {{site.data.keyword.Bluemix_notm}} 服務存取](cs_cluster.html#cs_cluster_service)|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
 |[工作者節點上用於儲存的磁碟空間](#cs_planning_apps_storage)|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
-|[含磁區的持續性 NFS 檔案型儲存空間](#cs_planning_apps_storage)||<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
-|[負載平衡器服務的公用應用程式存取](#cs_loadbalancer)||<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
-|[Ingress 服務的公用應用程式存取](#cs_ingress)||<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
-|[可攜式公用 IP 位址](cs_apps.html#cs_cluster_ip_subnet)||<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
-|[在「{{site.data.keyword.Bluemix_notm}} 專用」中提供（封閉測試版）](cs_ov.html#dedicated_environment)||<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
+|[含磁區的持續性 NFS 檔案型儲存空間](#cs_planning_apps_storage)| |<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
+|[負載平衡器服務的公用或專用應用程式存取](#cs_loadbalancer)| |<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
+|[Ingress 服務的公用應用程式存取](#cs_ingress)| |<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
+|[可攜式公用 IP 位址](cs_apps.html#cs_cluster_ip_subnet)| |<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
+|[在「{{site.data.keyword.Bluemix_notm}} 專用」中提供（封閉測試版）](cs_ov.html#dedicated_environment)| |<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
 {: caption="表 1. 精簡與標準叢集的差異" caption-side="top"}
+
+<br />
+
 
 ## 叢集配置
 {: #cs_planning_cluster_config}
@@ -89,6 +95,8 @@ lastupdated: "2017-08-14"
 </dd>
 </dl>
 
+<br />
+
 
 ## 工作者節點配置
 {: #cs_planning_worker_nodes}
@@ -96,7 +104,7 @@ lastupdated: "2017-08-14"
 Kubernetes 叢集包含虛擬機器工作者節點，並且由 Kubernetes 主節點集中進行監視及管理。叢集管理者必須決定如何設定工作者節點的叢集，以確保叢集使用者具有部署及執行叢集中應用程式的所有資源。
 {:shortdesc}
 
-當您建立標準叢集時，會代表您在 {{site.data.keyword.BluSoftlayer_full}} 中訂購以及在 {{site.data.keyword.Bluemix_notm}} 中設定工作者節點。每個工作者節點都會獲指派建立叢集之後即不得變更的唯一工作者節點 ID 及網域名稱。視您選擇的硬體隔離層次而定，工作者節點可以設定為共用或專用節點。每個工作者節點都會佈建特定機型，而此機型可決定部署至工作者節點的容器可用的 vCPU 數目、記憶體及磁碟空間。Kubernetes 會限制您在叢集中可以有的工作者節點數目上限。如需相關資訊，請檢閱[工作者節點及 Pod 配額 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/admin/cluster-large/)。
+當您建立標準叢集時，會代表您在 IBM Bluemix 基礎架構 (SoftLayer) 中訂購以及在 {{site.data.keyword.Bluemix_notm}} 中設定工作者節點。每個工作者節點都會獲指派建立叢集之後即不得變更的唯一工作者節點 ID 及網域名稱。視您選擇的硬體隔離層次而定，工作者節點可以設定為共用或專用節點。每個工作者節點都會佈建特定機型，而此機型可決定部署至工作者節點的容器可用的 vCPU 數目、記憶體及磁碟空間。Kubernetes 會限制您在叢集中可以有的工作者節點數目上限。如需相關資訊，請檢閱[工作者節點及 Pod 配額 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/admin/cluster-large/)。
 
 
 ### 工作者節點的硬體
@@ -111,9 +119,44 @@ Kubernetes 叢集包含虛擬機器工作者節點，並且由 Kubernetes 主節
 
 因為基礎硬體的成本是由多個客戶分攤，所以共用節點通常會比專用節點便宜。不過，當您決定共用或專用節點時，可能會想要與法務部門討論應用程式環境所需的基礎架構隔離層次及相符性。
 
-當您建立精簡叢集時，工作者節點會自動佈建為 {{site.data.keyword.IBM_notm}} {{site.data.keyword.BluSoftlayer_notm}} 帳戶中的共用節點。
+當您建立精簡叢集時，工作者節點會自動佈建為 {{site.data.keyword.IBM_notm}} Bluemix 基礎架構 (SoftLayer) 帳戶中的共用節點。
 
 當您在「{{site.data.keyword.Bluemix_notm}} 專用」中建立叢集時，會使用唯一設定的單一承租戶，而且所有實體資源都只供您專用。您可以將多個工作者節點部署為相同實體主機上的虛擬機器。
+
+<br />
+
+
+## 叢集管理責任
+{: #responsibilities}
+
+檢閱您與 IBM 共同分擔的叢集管理責任。如果要檢閱在「{{site.data.keyword.Bluemix_notm}} 專用」環境中管理之叢集的責任，請改為參閱[雲端環境之間的叢集管理差異](cs_ov.html#env_differences)。
+{:shortdesc}
+
+**IBM 負責：**
+
+- 在叢集建立時間，在叢集內部署主節點、工作者節點及管理元件，例如 Ingress 控制器
+- 管理叢集的 Kubernetes 主節點更新、監視及回復
+- 監視工作者節點的性能，並為那些工作者節點提供自動化更新及回復
+- 對基礎架構帳戶執行自動化作業，包括新增工作者節點、移除工作者節點及建立預設子網路
+- 管理、更新及回復叢集內的作業元件，例如 Ingress 控制器及儲存空間外掛程式
+- 在持續性磁區要求要求時，佈建儲存磁區
+- 在所有工作者節點上提供安全設定
+
+<br />
+**您負責：**
+
+- [在叢集內部署及管理 Kubernetes 資源，例如 Pod、服務及部署](cs_apps.html#cs_apps_cli)
+- [利用服務及 Kubernetes 的功能以確保應用程式的高可用性](cs_planning.html#highly_available_apps)
+- [使用 CLI 新增或移除工作者節點，以新增或移除產能](cs_cli_reference.html#cs_worker_add)
+- [在 IBM Bluemix 基礎架構 (SoftLayer) 建立公用及專用 VLAN，以進行叢集的網路隔離 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/topic/vlans)
+- [確保所有工作者節點都具有 Kubernetes 主節點 URL 的網路連線功能](cs_security.html#opening_ports) <p>**附註**：如果工作者節點同時具有公用和專用 VLAN，則已配置網路連線功能。如果工作者節點僅設定專用 VLAN，則需要 vyatta 以提供網路連線功能。</p>
+- [決定當有 Kubernetes 主要或次要版本更新時，要在何時更新 kube-apiserver 和工作者節點](cs_cluster.html#cs_cluster_update)
+- [採取動作來回復問題工作者節點，方法為執行 `kudectl` 指令，例如 `coron` 或 `drain`，以及執行 `bx cs` 指令，例如 `reboot`、`reload` 或 `delete`](cs_cli_reference.html#cs_worker_reboot)
+- [視需要新增或移除 IBM Bluemix 基礎架構 (SoftLayer) 中的其他子網路](cs_cluster.html#cs_cluster_subnet)
+- [在 IBM Bluemix 基礎架構 (SoftLayer) 備份及還原持續性儲存空間裡的資料 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](../services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter)
+
+<br />
+
 
 ## 部署
 {: #highly_available_apps}
@@ -134,72 +177,64 @@ Kubernetes 叢集包含虛擬機器工作者節點，並且由 Kubernetes 主節
 
 <dl>
 <dt>使用部署和抄本集來部署您的應用程式及其相依關係</dt>
-<dd>部署是一種 Kubernetes 資源，您可以用來宣告應用程式的所有元件及其相依關係。透過說明單一元件，而不是寫下所有必要步驟和建立的順序，讓您可以專注於應用程式執行時應該呈現的樣子。</br>
+<dd>部署是一種 Kubernetes 資源，您可以用來宣告應用程式的所有元件及其相依關係。透過說明單一元件，而不是寫下所有必要步驟和建立的順序，讓您可以專注於應用程式執行時應該呈現的樣子。</br></br>
 當您部署多個 Pod 時，會自動為您的部署建立抄本集來監視 Pod，並確保隨時都有所需數目的 Pod 在執行。當一個 Pod 關閉時，抄本集會以新的 Pod 來取代無回應的 Pod。</br></br>
-您可以使用部署來定義應用程式的更新策略，包括您要在漸進式更新期間新增的 Pod 數目，以及每次更新時可能無法使用的 Pod 數目。當您執行漸進式更新時，部署會檢查修訂版是否正常運作，並且在偵測到失敗時停止推出。</br>
+您可以使用部署來定義應用程式的更新策略，包括您要在漸進式更新期間新增的 Pod 數目，以及每次更新時可能無法使用的 Pod 數目。當您執行漸進式更新時，部署會檢查修訂版是否正常運作，並且在偵測到失敗時停止推出。</br></br>
 部署也有可能讓您同時部署多個具有不同旗標的修訂版，所以舉例來說，您可以先測試部署，然後再決定將其推送至正式作業環境。</br></br>
 每個部署都會追蹤已部署的修訂版。當您發現更新項目無法如預期般運作時，可以使用此修訂歷程來回復至舊版。</dd>
 <dt>為應用程式的工作負載包含足夠的抄本，然後加兩個</dt>
-<dd>為了讓應用程式具備高可用性以及更大的失敗復原力，請考慮包含多於最小值的額外抄本來處理預期工作負載。額外的抄本可以在 Pod 當機，而抄本集尚未回復當機的 Pod 時，處理工作負載。為了預防兩者同時失敗，請包含兩個額外的抄本。此設定是 N+2 型樣，其中 N 是處理送入工作負載的抄本數，而 +2 是額外的兩個抄本。</dd>
+<dd>為了讓應用程式具備高可用性以及更大的失敗復原力，請考慮包含多於最小值的額外抄本來處理預期工作負載。額外的抄本可以在 Pod 當機，而抄本集尚未回復當機的 Pod 時，處理工作負載。為了預防兩者同時失敗，請包含兩個額外的抄本。此設定是 N+2 型樣，其中 N 是處理送入工作負載的抄本數，而 +2 是額外的兩個抄本。您可以在叢集中有任意數量的 Pod，只要叢集有足夠的空間容納它們即可。</dd>
 <dt>將 Pod 分散於多個節點（反親緣性）</dt>
 <dd>當您建立部署時，可以將每一個 Pod 部署至相同的工作者節點。這種 Pod 存在於相同工作者節點的設定，稱為親緣性或共置。為了保護應用程式不受工作者節點故障影響，您可以使用 <strong>podAntiAffinity</strong> 選項，強制部署將 Pod 分散至多個工作者節點。此選項僅適用於標準叢集。</br></br>
 <strong>附註：</strong>下列 YAML 檔案會強制將每個 Pod 部署至不同的工作者節點。當您定義的抄本多於叢集中可用的工作者節點時，只有已部署的抄本數可以滿足反親緣性需求。任何其他抄本都會維持在擱置狀態，直到有其他工作者節點新增至叢集為止。<pre class="codeblock">
-<code>apiVersion: v1
-kind: Service
-metadata:
-name: wasliberty
-labels:
-app: wasliberty
-spec:
-ports:
-    # 服務應該提供服務的埠
-  - port: 9080
-  selector:
-    app: wasliberty
-  type: NodePort
-
----
-apiVersion: extensions/v1beta1
+<code>apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: wasliberty
+name: wasliberty
 spec:
   replicas: 3
   template:
     metadata:
       labels:
         app: wasliberty
-      annotations:
-        scheduler.alpha.kubernetes.io/affinity: >
-            {
-              "podAntiAffinity": {
-"requiredDuringSchedulingIgnoredDuringExecution": [
-                  {
-                    "labelSelector": {
-"matchExpressions": [
-                        {
-                          "key": "app",
-                          "operator": "In",
-                          "values": ["wasliberty"]
-                        }
-                      ]
-                    },
-                    "topologyKey": "kubernetes.io/hostname"
-                 }
-                ]
-               }
-             }
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - wasliberty
+              topologyKey: kubernetes.io/hostname
       containers:
       - name: wasliberty
         image: registry.&lt;region&gt;.bluemix.net/ibmliberty
         ports:
-          - containerPort: 9080</code></pre>
+        - containerPort: 9080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wasliberty
+  labels:
+    app: wasliberty
+spec:
+  ports:
+    # 服務應該提供服務的埠
+  - port: 9080
+  selector:
+    app: wasliberty
+  type: NodePort</code></pre>
 
 </dd>
 <dt>將 Pod 分散在多個位置或地區</dt>
 <dd>為了保護應用程式不受位置或地區故障的影響，您可以在另一個位置或地區建立第二個叢集，並使用部署 YAML 來為應用程式部署複製的抄本集。透過在叢集前面新增共用路徑及負載平衡器，您可以將工作負載分散至各位置及地區。如需在叢集之間共用路徑的相關資訊，請參閱<a href="https://console.bluemix.net/docs/containers/cs_cluster.html#cs_cluster" target="_blank">叢集的高可用性</a>。如需詳細資料，請檢閱<a href="https://console.bluemix.net/docs/containers/cs_planning.html#cs_planning_cluster_config" target="_blank">高可用性部署</a>的選項。</dd>
 </dl>
+
 
 ### 最小應用程式部署
 {: #minimal_app_deployment}
@@ -209,7 +244,7 @@ spec:
 
 <a href="../api/content/containers/images/cs_app_tutorial_components1.png">![部署設定](images/cs_app_tutorial_components1.png)</a>
 
-最小應用程式的配置 Script 範例。
+最小應用程式的配置檔範例。
 ```
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -242,6 +277,9 @@ spec:
 ```
 {: codeblock}
 
+<br />
+
+
 ## 專用網路
 {: #cs_planning_private_network}
 
@@ -253,7 +291,7 @@ spec:
 |叢集類型|叢集之專用 VLAN 的管理員|
 |------------|-------------------------------------------|
 |{{site.data.keyword.Bluemix_notm}} 公用中的精簡叢集|{{site.data.keyword.IBM_notm}}|
-|{{site.data.keyword.Bluemix_notm}} 公用中的標準叢集|在您的 {{site.data.keyword.BluSoftlayer_notm}} 帳戶中，就是您<p>**提示：**若要存取您帳戶中的所有 VLAN，請開啟 [VLAN 跨距 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/procedure/enable-or-disable-vlan-spanning)。</p>|
+|{{site.data.keyword.Bluemix_notm}} 公用中的標準叢集|您在您的 IBM Bluemix 基礎架構 (SoftLayer) 帳戶中時<p>**提示：**若要存取您帳戶中的所有 VLAN，請開啟 [VLAN 跨距 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/procedure/enable-or-disable-vlan-spanning)。</p>|
 |{{site.data.keyword.Bluemix_notm}} 專用中的標準叢集|{{site.data.keyword.IBM_notm}}|
 {: caption="表 2. 專用 VLAN 管理責任" caption-side="top"}
 
@@ -267,6 +305,8 @@ spec:
 
 如需如何建立叢集 IP 類型服務的相關資訊，請參閱 [Kubernetes 服務 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services---service-types)。
 
+<br />
+
 
 ## 公用網路
 {: #cs_planning_public_network}
@@ -274,56 +314,61 @@ spec:
 當您建立叢集時，每個叢集都必須連接至公用 VLAN。公用 VLAN 會判定在建立叢集期間指派給工作者節點的公用 IP 位址。
 {:shortdesc}
 
-公用 VLAN 是透過 {{site.data.keyword.BluSoftlayer_notm}} 防火牆所保護，而防火牆預設不容許網際網路的入埠或出埠連線功能。雖然 Kubernetes 主節點及工作者節點都會使用其獲指派的公用 IP 位址來透過公用 VLAN 進行通訊，但是無法從網際網路聯繫。
+精簡和標準叢集中的工作者節點公用網路介面都受到 Calico 網路原則的保護。依預設，這些原則會封鎖大部分入埠資料流量，包括 SSH。不過，會容許讓 Kubernetes 運作所需的入埠資料流量，對 NodePort、Loadbalancer 及 Ingress 服務的連線也是相同。如需這些原則的相關資訊，包括如何修改它們，請參閱[網路原則](cs_security.html#cs_security_network_policies)。
 
 |叢集類型|叢集之公用 VLAN 的管理員|
 |------------|------------------------------------------|
 |{{site.data.keyword.Bluemix_notm}} 公用中的精簡叢集|{{site.data.keyword.IBM_notm}}|
-|{{site.data.keyword.Bluemix_notm}} 公用中的標準叢集|在您的 {{site.data.keyword.BluSoftlayer_notm}} 帳戶中，就是您|
+|{{site.data.keyword.Bluemix_notm}} 公用中的標準叢集|您在您的 IBM Bluemix 基礎架構 (SoftLayer) 帳戶中時|
 |{{site.data.keyword.Bluemix_notm}} 專用中的標準叢集|{{site.data.keyword.IBM_notm}}|
 {: caption="表 3. VLAN 管理責任" caption-side="top"}
 
 視您所建立的是精簡還是標準叢集而定，您可以選擇下列將應用程式公開給大眾使用的選項。
 
--   [NodePort 類型服務](#cs_nodeport)（精簡及標準叢集）
--   [LoadBalancer 類型服務](#cs_loadbalancer)（僅限標準叢集）
+-   [NodePort 服務](#cs_nodeport)（精簡及標準叢集）
+-   [LoadBalancer 服務](#cs_loadbalancer)（僅限標準叢集）
 -   [Ingress](#cs_ingress)（僅限標準叢集）
 
 
-### 使用 NodePort 類型服務將應用程式公開至網際網路
+### 使用 NodePort 服務將應用程式公開至網際網路
 {: #cs_nodeport}
 
 公開工作者節點上的公用埠，並使用工作者節點的公用 IP 位址來公開存取您在叢集中的服務。
 {:shortdesc}
 
-[![使用 Kubernetes NodePort 類型服務來公開服務](images/cs_nodeport.png)](https://console.bluemix.net/docs/api/content/containers/images/cs_nodeport.png)
+[![使用 Kubernetes NodePort 服務來公開服務](images/cs_nodeport.png)](https://console.bluemix.net/docs/api/content/containers/images/cs_nodeport.png)
 
-當您建立 Kubernetes NodePort 類型服務來公開應用程式時，會將 30000 到 32767 範圍內的 NodePort 及內部叢集 IP 位址指派給服務。NodePort 服務是作為應用程式送入要求的外部進入點。所指派的 NodePort 會公開於叢集中每一個工作者節點的 kubeproxy 設定。每個工作者節點都會開始接聽所指派的 NodePort，來取得服務的送入要求。若要從網際網路存取服務，您可以使用在建立叢集期間所指派的任何工作者節點的公用 IP 位址，以及 `<ip_address>:<nodeport>` 格式的 NodePort。
+當您建立 Kubernetes NodePort 類型服務來公開應用程式時，會將 30000 到 32767 範圍內的 NodePort 及內部叢集 IP 位址指派給服務。NodePort 服務是作為應用程式送入要求的外部進入點。所指派的 NodePort 會公開於叢集中每一個工作者節點的 kubeproxy 設定。每個工作者節點都會開始接聽所指派的 NodePort，來取得服務的送入要求。若要從網際網路存取服務，您可以使用在建立叢集期間所指派的任何工作者節點的公用 IP 位址，以及 `<ip_address>:<nodeport>` 格式的 NodePort。除了公用 IP 位址之外，在工作者節點的專用 IP 位址上，也可以使用 NodePort 服務。
 
-公用要求在到達 NodePort 服務時，會自動轉遞給服務的內部叢集 IP，並從 kubeproxy 元件進一步轉遞給應用程式部署所在 Pod 的專用 IP 位址。叢集 IP 只能在叢集內存取。如果您在不同的 Pod 中執行應用程式的多個抄本，則 kubeproxy 元件會負載平衡所有抄本之間的送入要求。
+要求在到達 NodePort 服務時，會自動轉遞給服務的內部叢集 IP，並從 kubeproxy 元件進一步轉遞給應用程式部署所在 Pod 的專用 IP 位址。叢集 IP 只能在叢集內存取。如果您在不同的 Pod 中執行應用程式的多個抄本，則 kubeproxy 元件會負載平衡所有抄本之間的送入要求。
 
-**附註：**請記住，工作者節點的公用 IP 位址不是永久性的。移除或重建工作者節點時，會將新的公用 IP 位址指派給工作者節點。NodePort 類型服務可以用於測試應用程式的公用存取，也可以用於僅短時間需要公用存取時。當您需要服務的穩定公用 IP 位址及更高可用性時，請使用 [LoadBalancer 類型服務](#cs_loadbalancer)或 [Ingress](#cs_ingress) 來公開應用程式。
+**附註：**工作者節點的公用 IP 位址不是永久性的。移除或重建工作者節點時，會將新的公用 IP 位址指派給工作者節點。NodePort 服務可以用於測試應用程式的公用存取，也可以用於僅短時間需要公用存取時。當您需要服務有穩定的公用 IP 位址及更高可用性時，請使用 [LoadBalancer 服務](#cs_loadbalancer)或 [Ingress](#cs_ingress) 來公開應用程式。
 
 如需如何使用 {{site.data.keyword.containershort_notm}} 來建立 NodePort 類型服務的相關資訊，請參閱[使用 NodePort 服務類型來配置應用程式的公用存取](cs_apps.html#cs_apps_public_nodeport)。
 
 
-### 使用 LoadBalancer 類型服務將應用程式公開至網際網路
+### 使用 LoadBalancer 服務將應用程式公開至網際網路
 {: #cs_loadbalancer}
 
-公開埠並使用公用 IP 位址，讓負載平衡器可以存取應用程式。
+公開埠並使用公用或專用 IP 位址，讓負載平衡器可以存取應用程式。
 
+[![使用 Kubernetes LoadBalancer 服務類型來公開服務](images/cs_loadbalancer.png)](https://console.bluemix.net/docs/api/content/containers/images/cs_loadbalancer.png)
 
-[![使用 Kubernetes NodePort 類型服務來公開服務](images/cs_loadbalancer.png)](https://console.bluemix.net/docs/api/content/containers/images/cs_loadbalancer.png)
+當您建立標準叢集時，{{site.data.keyword.containershort_notm}} 會自動要求五個可攜式公用 IP 位址及五個專用 IP 位址，並在建立叢集期間將它們佈建至 IBM Bluemix 基礎架構 (SoftLayer) 帳戶。兩個可攜式 IP 位址（一個公用、一個專用）會用於 [Ingress 控制器](#cs_ingress)。建立 LoadBalancer 服務，即可使用四個可攜式公用 IP 位址和四個可攜式專用 IP 位址來公開應用程式。
 
-當您建立標準叢集時，{{site.data.keyword.containershort_notm}} 會自動要求 5 個可攜式公用 IP 位址，並在建立叢集期間將它們佈建至 {{site.data.keyword.BluSoftlayer_notm}} 帳戶。其中一個可攜式 IP 位址用於 [Ingress 控制器](#cs_ingress)。建立 LoadBalancer 類型服務，即可使用 4 個可攜式公用 IP 位址將應用程式公開給大眾使用。
+當您在公用 VLAN 上的叢集建立 Kubernetes LoadBalancer 服務時，會建立外部負載平衡器。四個可用公用 IP 位址的其中一個會指派給它。如果沒有可用的可攜式公用 IP 位址，則建立 LoadBalancer 服務會失敗。LoadBalancer 服務是作為應用程式送入要求的外部進入點。與 NodePort 服務不同，您可以將任何埠指派給負載平衡器，而且未連結至特定埠範圍。指派給 LoadBalancer 服務的可攜式公用 IP 位址是永久性的，在叢集中移除或重建工作者節點時並不會變更。因此，LoadBalancer 服務的可用性比 NodePort 服務高。若要從網際網路存取 LoadBalancer 服務，請使用負載平衡器的公用 IP 位址以及 `<ip_address>:<port>` 格式的已指派埠。
 
-當您建立 Kubernetes LoadBalancer 類型服務時，會建立外部負載平衡器，並將 4 個可用公用 IP 位址的其中一個指派給它。如果沒有可用的可攜式公用 IP 位址，則建立 LoadBalancer 服務會失敗。LoadBalancer 服務是作為應用程式送入要求的外部進入點。與 NodePort 類型服務不同，您可以將任何埠指派給負載平衡器，而且未連結至特定埠範圍。指派給 LoadBalancer 服務的可攜式公用 IP 位址是永久性的，因此移除或重建工作者節點時並不會變更，這讓 LoadBalancer 服務的可用性高於 NodePort 服務。若要從網際網路存取 LoadBalancer 服務，請使用負載平衡器的公用 IP 位址以及 `<ip_address>:<port>` 格式的已指派埠。
+要求在到達 LoadBalancer 服務時，該要求會自動轉遞至在建立服務期間指派給 LoadBalancer 服務的內部叢集 IP 位址。叢集 IP 位址只能在叢集內存取。從叢集 IP 位址，將送入的要求進一步轉遞至工作者節點的 `kube-proxy` 元件。接著會將要求轉遞至應用程式部署所在 Pod 的專用 IP 位址。如果您有在不同 Pod 中執行之應用程式的多個抄本，則 `kube-proxy` 元件會在所有抄本之間為送入的要求進行負載平衡。
 
-公用要求在到達 LoadBalancer 服務時，會自動轉遞給在建立服務期間指派給 LoadBalancer 服務的內部叢集 IP 位址。叢集 IP 位址只能在叢集內存取。從叢集 IP 位址，將送入要求進一步轉遞給工作者節點的 kubeproxy 元件，接著轉遞給部署應用程式的 Pod 的專用 IP 位址。如果您在不同的 Pod 中執行應用程式的多個抄本，則 kubeproxy 元件會負載平衡所有抄本之間的送入要求。
+如果您使用 LoadBalancer 服務，則任何工作者節點的每一個 IP 位址也都有一個節點埠可用。若要在使用 LoadBalancer 服務時封鎖對節點埠的存取，請參閱[封鎖送入的資料流量](cs_security.html#cs_block_ingress)。
 
-如需如何使用 {{site.data.keyword.containershort_notm}} 來建立 LoadBalancer 類型服務的相關資訊，請參閱[使用負載平衡器服務類型來配置應用程式的公用存取](cs_apps.html#cs_apps_public_load_balancer)。
+當您建立 LoadBalancer 服務時，您的 IP 位址選項如下：
 
+- 如果叢集是在公用 VLAN 上，則會使用可攜式公用 IP 位址。
+- 如果您的叢集只能在專用 VLAN 上使用，則會使用可攜式專用 IP 位址。
+- 您可以透過將註釋新增至配置檔，要求 LoadBalancer 服務的可攜式公用或專用 IP 位址：`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>`。
 
+如需如何使用 {{site.data.keyword.containershort_notm}} 來建立 LoadBalancer 服務的相關資訊，請參閱[使用負載平衡器服務類型來配置應用程式的公用存取](cs_apps.html#cs_apps_public_load_balancer)。
 
 ### 使用 Ingress 將應用程式公開至網際網路
 {: #cs_ingress}
@@ -334,7 +379,7 @@ Ingress 可讓您公開叢集中的多個服務，並使用單一公用進入點
 
 Ingress 提供唯一公用路徑，讓您可以根據個別路徑，將公用要求轉遞給叢集內外部的應用程式，而不是為您要公開給大眾使用的每一個應用程式建立負載平衡器服務。Ingress 包含兩個主要元件。Ingress 資源會定義如何遞送應用程式送入要求的規則。所有 Ingress 資源都必須向 Ingress 控制器登錄，而 Ingress 控制器會接聽送入 HTTP 或 HTTPS 服務要求，並根據針對每一個 Ingress 資源所定義的規則來轉遞要求。
 
-當您建立標準叢集時，{{site.data.keyword.containershort_notm}} 會自動建立叢集的高可用性 Ingress 控制器，並將格式為 `<cluster_name>.<region>.containers.mybluemix.net` 的唯一公用路徑指派給它。公用路徑會鏈結至在建立叢集期間佈建至 {{site.data.keyword.BluSoftlayer_notm}} 帳戶的可攜式公用 IP 位址。
+當您建立標準叢集時，{{site.data.keyword.containershort_notm}} 會自動建立叢集的高可用性 Ingress 控制器，並將格式為 `<cluster_name>.<region>.containers.mybluemix.net` 的唯一公用路徑指派給它。公用路徑會鏈結至在建立叢集期間佈建至 IBM Bluemix 基礎架構 (SoftLayer) 帳戶的可攜式公用 IP 位址。
 
 若要透過 Ingress 公開應用程式，您必須建立應用程式的 Kubernetes 服務，並藉由定義 Ingress 資源向 Ingress 控制器登錄此服務。Ingress 資源指定您要附加至公用路徑的路徑，以形成所公開應用程式的唯一 URL，例如：`mycluster.us-south.containers.mybluemix.net/myapp`。當您將此路徑輸入 Web 瀏覽器時，會將要求傳送給 Ingress 控制器的鏈結可攜式公用 IP 位址。Ingress 控制器會檢查 `mycluster` 叢集中是否有 `myapp` 路徑的遞送規則。如果找到相符規則，則會將包括個別路徑的要求轉遞給已部署應用程式的 Pod，請考慮已在原始 Ingress 資源物件中定義的規則。若要讓應用程式處理送入要求，請確定應用程式接聽 Ingress 資源中已定義的個別路徑。
 
@@ -348,6 +393,8 @@ Ingress 提供唯一公用路徑，讓您可以根據個別路徑，將公用要
 
 如需如何搭配使用 Ingress 與 {{site.data.keyword.containershort_notm}} 的相關資訊，請參閱[使用 Ingress 控制器來配置應用程式的公用存取](cs_apps.html#cs_apps_public_ingress)。
 
+<br />
+
 
 ## 使用者存取管理
 {: #cs_planning_cluster_user}
@@ -356,6 +403,8 @@ Ingress 提供唯一公用路徑，讓您可以根據個別路徑，將公用要
 {:shortdesc}
 
 如需相關資訊，請參閱[管理 {{site.data.keyword.containershort_notm}} 中的使用者及叢集存取權](cs_cluster.html#cs_cluster_user)。
+
+<br />
 
 
 ## 映像檔登錄
@@ -379,6 +428,8 @@ Docker 映像檔是您建立的每個容器的基礎。映像檔是從 Dockerfil
 
 如需如何存取公用或專用登錄以及使用映像檔建立容器的相關資訊，請參閱[搭配使用專用及公用映像檔登錄與 {{site.data.keyword.containershort_notm}}](cs_cluster.html#cs_apps_images)。
 
+<br />
+
 
 ## 持續資料儲存空間
 {: #cs_planning_apps_storage}
@@ -397,31 +448,33 @@ Docker 映像檔是您建立的每個容器的基礎。映像檔是從 Dockerfil
 透過將 Secret 磁區裝載至其他 Pod，您也可以在 Pod 之間共用資料。<p>容器損毀或從工作者節點移除 Pod 時，資料不會被移除，而且仍然可以透過裝載 Secret 磁區的其他 Pod 進行存取。</p><p>大部分 {{site.data.keyword.Bluemix_notm}} 資料庫服務會免費提供少量資料的磁碟空間，讓您可以測試其特性。</p><p>如需如何將 {{site.data.keyword.Bluemix_notm}} 服務連結至 Pod 的相關資訊，請參閱[在 {{site.data.keyword.containershort_notm}} 中新增應用程式的 {{site.data.keyword.Bluemix_notm}} 服務](cs_apps.html#cs_apps_service)。</p>|
 {: caption="表 5. Kubernetes 叢集中部署的持續性資料儲存空間選項" caption-side="top"}
 
+<br />
 
-## 性能監視
+
+## 監視工具
 {: #cs_planning_health}
 
-您可以使用標準 Kubernetes 及 Docker 特性，來監視叢集及部署於其中之應用程式的性能。
+您可以使用標準 Kubernetes 及 Docker 特性，來監視叢集及應用程式的性能。若要尋找日誌以便進行叢集及應用程式的問題疑難排解，請參閱[配置叢集記載](cs_cluster.html#cs_logging)。
 {:shortdesc}
+
 <dl>
 <dt>{{site.data.keyword.Bluemix_notm}} 中的叢集詳細資料頁面</dt>
 <dd>{{site.data.keyword.containershort_notm}} 提供叢集性能及容量以及叢集資源使用情形的相關資訊。您可以使用此 GUI 來橫向擴充叢集、使用持續性儲存空間，以及透過 {{site.data.keyword.Bluemix_notm}} 服務連結將其他功能新增至叢集。若要檢視叢集詳細資料頁面，請移至 **{{site.data.keyword.Bluemix_notm}} 儀表板**，然後選取一個叢集。</dd>
 <dt>Kubernetes 儀表板</dt>
 <dd>Kubernetes 儀表板是一個管理 Web 介面，可用來檢閱工作者節點的性能、尋找 Kubernetes 資源、部署容器化應用程式，以及根據記載及監視資訊來進行應用程式疑難排解。如需如何存取 Kubernetes 儀表板的相關資訊，請參閱[啟動 {{site.data.keyword.containershort_notm}} 的 Kubernetes 儀表板](cs_apps.html#cs_cli_dashboard)。</dd>
-<dt>Docker 日誌</dt>
-<dd>您可以運用內建 Docker 記載功能來檢閱標準 STDOUT 及 STDERR 輸出串流的活動。如需相關資訊，請參閱[檢視在 Kubernetes 叢集中執行的容器的容器日誌](/docs/services/CloudLogAnalysis/containers/logging_containers_other_logs.html#logging_containers_collect_data)。</dd>
-<dt>記載及監視</dt>
-<dd>{{site.data.keyword.containershort_notm}} 支援標準叢集的其他監視及記載功能。日誌及度量值位於 Kubernetes 叢集建立時所登入的 {{site.data.keyword.Bluemix_notm}} 空間。<ul><li>會自動收集叢集中所部署的所有容器的容器度量值。這些度量值會透過 Grafana 傳送並設為可供使用。如需度量值的相關資訊，請參閱 [ 的監視功能 {{site.data.keyword.containershort_notm}}](/docs/services/cloud-monitoring/containers/analyzing_metrics_bmx_ui.html#analyzing_metrics_bmx_ui)。<p>若要存取 Grafana 儀表板，請移至 `https://metrics.<region>.bluemix.net`。選取您已建立叢集的 {{site.data.keyword.Bluemix_notm}} 組織及空間。</p></li><li>容器日誌是在容器外進行監視及轉遞。您可以使用 Kibana 儀表板來存取容器的日誌。如需記載的相關資訊，請參閱 [{{site.data.keyword.containershort_notm}} 的記載功能](/docs/services/CloudLogAnalysis/index.html#getting-started-with-cla)。<p>若要存取 Kibana 儀表板，請移至 `https://logging.<region>.bluemix.net`。選取您已建立叢集的 {{site.data.keyword.Bluemix_notm}} 組織及空間。</p></li></ul></dd>
-</dl>
+<dt>{{site.data.keyword.monitoringlong_notm}}</dt>
+<dd>若為標準叢集，日誌及度量值位於 Kubernetes 叢集建立時所登入的 {{site.data.keyword.Bluemix_notm}} 空間。會自動收集叢集中所部署的所有容器的容器度量值。這些度量值會透過 Grafana 傳送並設為可供使用。如需度量值的相關資訊，請參閱 [ 的監視功能 {{site.data.keyword.containershort_notm}}](/docs/services/cloud-monitoring/containers/analyzing_metrics_bmx_ui.html#analyzing_metrics_bmx_ui)。<p>若要存取 Grafana 儀表板，請移至下列其中一個 URL ，然後選取您建立叢集所在的 {{site.data.keyword.Bluemix_notm}} 組織及空間。<ul><li>美國南部及美國東部：https://metrics.ng.bluemix.net</li><li>英國南部：https://metrics.eu-gb.bluemix.net</li><li>歐盟中部：https://metrics.eu-de.bluemix.net</li></ul></p></dd></dl>
 
 ### 其他性能監視工具
-{: #concept_xrh_dhj_wz}
+{: #cs_planning_health_tools}
 
 您可以配置其他工具來取得其他記載及監視功能。
 <dl>
 <dt>Prometheus</dt>
 <dd>Prometheus 是一個專為 Kubernetes 所設計的開放程式碼監視、記載及警示工具，可根據 Kubernetes 記載資訊來擷取叢集、工作者節點及部署性能的詳細資訊。如需設定資訊，請參閱[整合服務與 {{site.data.keyword.containershort_notm}}](#cs_planning_integrations)。</dd>
 </dl>
+
+<br />
 
 
 ## 整合
@@ -440,8 +493,16 @@ Docker 映像檔是您建立的每個容器的基礎。映像檔是從 Dockerfil
 </thead>
 <tbody>
 <tr>
-<td>IBM Blockchain</td>
+<td>Blockchain</td>
 <td>將 IBM Blockchain 的可公開使用開發環境部署至 {{site.data.keyword.containerlong_notm}} 中的 Kubernetes 叢集。使用此環境開發及自訂您自己的區塊鏈網路，以部署應用程式來共用可記錄交易歷程的不可變分類帳。如需相關資訊，請參閱<a href="https://ibm-blockchain.github.io" target="_blank">在雲端沙盤推演 IBM Blockchain 平台中開發 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+</tr>
+<tr>
+<td>Continuous Delivery</td>
+<td>使用工具鏈自動建置應用程式，並將容器部署至 Kubernetes 叢集。如需設定資訊，請參閱部落格 <a href="https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines/" target="_blank">Deploy Kubernetes pods to the {{site.data.keyword.containerlong_notm}} using DevOps Pipelines <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+</tr>
+<tr>
+<td>Helm</td>
+<td> <a href="https://helm.sh/" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 是 Kubernetes 套件管理程式。建立「Helm 圖表」，以定義、安裝及升級在 {{site.data.keyword.containerlong_notm}} 叢集中執行的複式 Kubernetes 應用程式。進一步瞭解您如何<a href="https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/" target="_blank">使用 Kubernetes Helm 圖表來加快部署 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
 <tr>
 <td>Istio</td>
@@ -463,45 +524,48 @@ Docker 映像檔是您建立的每個容器的基礎。映像檔是從 Dockerfil
 </tr>
 <tr>
 <td>Weave Scope</td>
-<td>Weave Scope 提供 Kubernetes 叢集內資源（包括服務、Pod、容器、處理程序、節點等項目）的視覺圖。Weave Scope 提供 CPU 及記憶體的互動式度量值，也提供工具來調整並執行至容器。<p>如需相關資訊，請參閱[使用 Weave Scope 及 {{site.data.keyword.containershort_notm}} 視覺化 Kubernetes 叢集資源](cs_cluster.html#cs_weavescope)。</p></li></ol>
+<td>Weave Scope 提供 Kubernetes 叢集內資源（包括服務、Pod、容器、處理程序、節點等項目）的視覺圖。Weave Scope 提供 CPU 及記憶體的互動式度量值，也提供工具來調整並執行至容器。
+<p>如需相關資訊，請參閱[使用 Weave Scope 及 {{site.data.keyword.containershort_notm}} 視覺化 Kubernetes 叢集資源](cs_cluster.html#cs_weavescope)。</p></li></ol>
 </td>
 </tr>
 </tbody>
 </table>
 
+<br />
 
-## 存取 {{site.data.keyword.BluSoftlayer_notm}} 組合
+
+## 存取 IBM Bluemix 基礎架構 (SoftLayer) 組合
 {: #cs_planning_unify_accounts}
 
-若要建立標準 Kubernetes 叢集，您必須具有 {{site.data.keyword.BluSoftlayer_notm}} 組合的存取權。需要有這個存取權，才能要求付費基礎架構資源（例如，叢集的工作者節點、可攜式公用 IP 位址或持續性儲存空間）。
+若要建立標準 Kubernetes 叢集，您必須具有 IBM Bluemix 基礎架構 (SoftLayer) 組合的存取權。需要有這個存取權，才能要求付費基礎架構資源（例如，叢集的工作者節點、可攜式公用 IP 位址或持續性儲存空間）。
 {:shortdesc}
 
-啟用自動帳戶鏈結之後所建立的「{{site.data.keyword.Bluemix_notm}} 隨收隨付制」帳戶，已設定 {{site.data.keyword.BluSoftlayer_notm}} 組合的存取權，因此，您可以購買叢集的基礎架構資源，而不需要進行額外配置。
+啟用自動帳戶鏈結之後所建立的「{{site.data.keyword.Bluemix_notm}} 隨收隨付制」帳戶，已設定 IBM Bluemix 基礎架構 (SoftLayer) 組合的存取權，因此，您可以購買叢集的基礎架構資源，而不需要進行額外配置。
 
-具有其他 {{site.data.keyword.Bluemix_notm}} 帳戶類型的使用者，或具有未鏈結至其 {{site.data.keyword.Bluemix_notm}} 帳戶之現有 {{site.data.keyword.BluSoftlayer_notm}} 帳戶的使用者，必須配置其帳戶以建立標準叢集。
+具有其他 {{site.data.keyword.Bluemix_notm}} 帳戶類型的使用者，或具有未鏈結至其 {{site.data.keyword.Bluemix_notm}} 帳戶之現有 IBM Bluemix 基礎架構 (SoftLayer) 帳戶的使用者，必須配置其帳戶以建立標準叢集。
 
 請檢閱下表，以找出每一種帳戶類型的可用選項。
 
 |帳戶類型|說明|建立標準叢集的可用選項|
 |------------|-----------|----------------------------------------------|
-|免費試用帳戶|免費試用帳戶無法存取 {{site.data.keyword.BluSoftlayer_notm}} 組合。<p>如果您有現有的 {{site.data.keyword.BluSoftlayer_notm}} 帳戶，則可以將它鏈結至免費試用帳戶。</p>|<ul><li>選項 1：[將免費試用帳戶升級至 {{site.data.keyword.Bluemix_notm}} 隨收隨付制帳戶](/docs/pricing/billable.html#upgradetopayg)，其已設定 {{site.data.keyword.BluSoftlayer_notm}} 組合存取權。</li><li>選項 2：[將免費試用帳戶鏈結至現有 {{site.data.keyword.BluSoftlayer_notm}} 帳戶](/docs/pricing/linking_accounts.html#unifyingaccounts)。<p>鏈結兩個帳戶之後，即會將免費試用帳戶自動升級至「隨收隨付制」帳戶。鏈結您的帳戶時，會透過 {{site.data.keyword.Bluemix_notm}} 針對 {{site.data.keyword.Bluemix_notm}} 及 {{site.data.keyword.BluSoftlayer_notm}} 資源進行收費。</p><p>**附註：**您鏈結的 {{site.data.keyword.BluSoftlayer_notm}} 帳戶必須已設定「超級使用者」許可權。</p></li></ul>|
-|舊隨收隨付制帳戶|在自動帳戶鏈結可用之前所建立的「隨收隨付制」帳戶，沒有 {{site.data.keyword.BluSoftlayer_notm}} 組合的存取權。<p>如果您有現有 {{site.data.keyword.BluSoftlayer_notm}} 帳戶，則無法將此帳戶鏈結至舊「隨收隨付制」帳戶。</p>|<ul><li>選項 1：[建立新隨收隨付制帳戶](/docs/pricing/billable.html#billable)，其已設定 {{site.data.keyword.BluSoftlayer_notm}} 組合存取權。當您選擇此選項時，會有兩個不同的 {{site.data.keyword.Bluemix_notm}} 帳戶及計費。<p>如果您要繼續使用舊「隨收隨付制」帳戶來建立標準叢集，則可以使用新「隨收隨付制」帳戶來產生可存取 {{site.data.keyword.BluSoftlayer_notm}} 組合的 API 金鑰。然後，您必須設定舊「隨收隨付制」帳戶的 API 金鑰。如需相關資訊，請參閱[產生舊隨收隨付制及訂閱帳戶的 API 金鑰](#old_account)。請記住，{{site.data.keyword.BluSoftlayer_notm}} 資源是透過新「隨收隨付制」帳戶計費。</p></li><li>選項 2：如果您已有想要使用的現有 {{site.data.keyword.BluSoftlayer_notm}} 帳戶，則可以針對 {{site.data.keyword.Bluemix_notm}} 帳戶[設定認證](cs_cli_reference.html#cs_credentials_set)。<p>**附註：**與 {{site.data.keyword.Bluemix_notm}} 帳戶搭配使用的 {{site.data.keyword.BluSoftlayer_notm}} 帳戶必須已設定「超級使用者」許可權。</p></li></ul>|
-|訂閱帳戶|訂閱帳戶未設定 {{site.data.keyword.BluSoftlayer_notm}} 組合存取權。|<ul><li>選項 1：[建立新隨收隨付制帳戶](/docs/pricing/billable.html#billable)，其已設定 {{site.data.keyword.BluSoftlayer_notm}} 組合存取權。當您選擇此選項時，會有兩個不同的 {{site.data.keyword.Bluemix_notm}} 帳戶及計費。<p>如果您要繼續使用「訂閱」帳戶來建立標準叢集，則可以使用新「隨收隨付制」帳戶來產生可存取 {{site.data.keyword.BluSoftlayer_notm}} 組合的 API 金鑰。然後，您必須設定「訂閱」帳戶的 API 金鑰。如需相關資訊，請參閱[產生舊隨收隨付制及訂閱帳戶的 API 金鑰](#old_account)。請記住，{{site.data.keyword.BluSoftlayer_notm}} 資源是透過新「隨收隨付制」帳戶計費。</p></li><li>選項 2：如果您已有想要使用的現有 {{site.data.keyword.BluSoftlayer_notm}} 帳戶，則可以針對 {{site.data.keyword.Bluemix_notm}} 帳戶[設定認證](cs_cli_reference.html#cs_credentials_set)。<p>**附註：**與 {{site.data.keyword.Bluemix_notm}} 帳戶搭配使用的 {{site.data.keyword.BluSoftlayer_notm}} 帳戶必須已設定「超級使用者」許可權。</p></li></ul>|
-|{{site.data.keyword.BluSoftlayer_notm}} 帳戶，無 {{site.data.keyword.Bluemix_notm}} 帳戶|若要建立標準叢集，您必須有 {{site.data.keyword.Bluemix_notm}} 帳戶。|<ul><li>選項 1：[建立新隨收隨付制帳戶](/docs/pricing/billable.html#billable)，其已設定 {{site.data.keyword.BluSoftlayer_notm}} 組合存取權。當您選擇此選項時，會為您建立新的 {{site.data.keyword.BluSoftlayer_notm}}。您會有兩個不同的 {{site.data.keyword.BluSoftlayer_notm}} 帳戶及計費。</li><li>選項 2：[建立免費試用帳戶](/docs/pricing/free.html#pricing)，並[將它鏈結至現有 {{site.data.keyword.BluSoftlayer_notm}} 帳戶](/docs/pricing/linking_accounts.html#unifyingaccounts)。鏈結兩個帳戶之後，即會將免費試用帳戶自動升級至「隨收隨付制」帳戶。鏈結您的帳戶時，會透過 {{site.data.keyword.Bluemix_notm}} 針對 {{site.data.keyword.Bluemix_notm}} 及 {{site.data.keyword.BluSoftlayer_notm}} 資源進行收費。<p>**附註：**您鏈結的 {{site.data.keyword.BluSoftlayer_notm}} 帳戶必須已設定「超級使用者」許可權。</p></li></ul>|
-{: caption="表 7. 使用未鏈結至 {{site.data.keyword.BluSoftlayer_notm}} 帳戶的帳戶建立標準叢集的可用選項" caption-side="top"}
+|免費試用帳戶|免費試用帳戶無法存取 IBM Bluemix 基礎架構 (SoftLayer) 組合。<p>如果您有現有的 IBM Bluemix 基礎架構 (SoftLayer) 帳戶，則可以將它鏈結至免費試用帳戶。</p>|<ul><li>選項 1：[將免費試用帳戶升級至 {{site.data.keyword.Bluemix_notm}} 隨收隨付制帳戶](/docs/pricing/billable.html#upgradetopayg)，其已設定 IBM Bluemix 基礎架構 (SoftLayer) 組合存取權。</li><li>選項 2：[將免費試用帳戶鏈結至現有 IBM Bluemix 基礎架構 (SoftLayer) 帳戶](/docs/pricing/linking_accounts.html#unifyingaccounts)。<p>鏈結兩個帳戶之後，即會將免費試用帳戶自動升級至「隨收隨付制」帳戶。鏈結您的帳戶時，會透過 {{site.data.keyword.Bluemix_notm}} 針對 {{site.data.keyword.Bluemix_notm}} 及 IBM Bluemix 基礎架構 (SoftLayer) 資源進行收費。</p><p>**附註：**您鏈結的 IBM Bluemix 基礎架構 (SoftLayer) 帳戶必須已設定「超級使用者」許可權。</p></li></ul>|
+|舊隨收隨付制帳戶|在自動帳戶鏈結可用之前所建立的「隨收隨付制」帳戶，沒有 IBM Bluemix 基礎架構 (SoftLayer) 組合的存取權。<p>如果您有現有 IBM Bluemix 基礎架構 (SoftLayer) 帳戶，則無法將此帳戶鏈結至舊「隨收隨付制」帳戶。</p>|<ul><li>選項 1：[建立新隨收隨付制帳戶](/docs/pricing/billable.html#billable)，其已設定 IBM Bluemix 基礎架構 (SoftLayer) 組合存取權。當您選擇此選項時，會有兩個不同的 {{site.data.keyword.Bluemix_notm}} 帳戶及計費。<p>如果您要繼續使用舊「隨收隨付制」帳戶來建立標準叢集，則可以使用新「隨收隨付制」帳戶來產生可存取 IBM Bluemix 基礎架構 (SoftLayer) 組合的 API 金鑰。然後，您必須設定舊「隨收隨付制」帳戶的 API 金鑰。如需相關資訊，請參閱[產生舊隨收隨付制及訂閱帳戶的 API 金鑰](#old_account)。請記住，IBM Bluemix 基礎架構 (SoftLayer) 資源是透過新「隨收隨付制」帳戶計費。</p></li><li>選項 2：如果您已有想要使用的現有 IBM Bluemix 基礎架構 (SoftLayer) 帳戶，則可以針對 {{site.data.keyword.Bluemix_notm}} 帳戶[設定認證](cs_cli_reference.html#cs_credentials_set)。<p>**附註：**與 {{site.data.keyword.Bluemix_notm}} 帳戶搭配使用的 IBM Bluemix 基礎架構 (SoftLayer) 帳戶必須已設定「超級使用者」許可權。</p></li></ul>|
+|訂閱帳戶|訂閱帳戶未設定 IBM Bluemix 基礎架構 (SoftLayer) 組合存取權。|<ul><li>選項 1：[建立新隨收隨付制帳戶](/docs/pricing/billable.html#billable)，其已設定 IBM Bluemix 基礎架構 (SoftLayer) 組合存取權。當您選擇此選項時，會有兩個不同的 {{site.data.keyword.Bluemix_notm}} 帳戶及計費。<p>如果您要繼續使用「訂閱」帳戶來建立標準叢集，則可以使用新「隨收隨付制」帳戶來產生可存取 IBM Bluemix 基礎架構 (SoftLayer) 組合的 API 金鑰。然後，您必須設定「訂閱」帳戶的 API 金鑰。如需相關資訊，請參閱[產生舊隨收隨付制及訂閱帳戶的 API 金鑰](#old_account)。請記住，IBM Bluemix 基礎架構 (SoftLayer) 資源是透過新「隨收隨付制」帳戶計費。</p></li><li>選項 2：如果您已有想要使用的現有 IBM Bluemix 基礎架構 (SoftLayer) 帳戶，則可以針對 {{site.data.keyword.Bluemix_notm}} 帳戶[設定認證](cs_cli_reference.html#cs_credentials_set)。<p>**附註：**與 {{site.data.keyword.Bluemix_notm}} 帳戶搭配使用的 IBM Bluemix 基礎架構 (SoftLayer) 帳戶必須已設定「超級使用者」許可權。</p></li></ul>|
+|IBM Bluemix 基礎架構 (SoftLayer)，無 {{site.data.keyword.Bluemix_notm}} 帳戶|若要建立標準叢集，您必須有 {{site.data.keyword.Bluemix_notm}} 帳戶。|<ul><li>選項 1：[建立新隨收隨付制帳戶](/docs/pricing/billable.html#billable)，其已設定 IBM Bluemix 基礎架構 (SoftLayer) 組合存取權。當您選擇此選項時，會為您建立新的 IBM Bluemix 基礎架構 (SoftLayer)。您有兩個不同的 IBM Bluemix 基礎架構 (SoftLayer) 帳戶和帳單。</li><li>選項 2：[建立免費試用帳戶](/docs/pricing/free.html#pricing)，並[將它鏈結至現有 IBM Bluemix 基礎架構 (SoftLayer) 帳戶](/docs/pricing/linking_accounts.html#unifyingaccounts)。鏈結兩個帳戶之後，即會將免費試用帳戶自動升級至「隨收隨付制」帳戶。鏈結您的帳戶時，會透過 {{site.data.keyword.Bluemix_notm}} 針對 {{site.data.keyword.Bluemix_notm}} 及 IBM Bluemix 基礎架構 (SoftLayer) 資源進行收費。<p>**附註：**您鏈結的 IBM Bluemix 基礎架構 (SoftLayer) 帳戶必須已設定「超級使用者」許可權。</p></li></ul>|
+{: caption="表 7. 使用未鏈結至 IBM Bluemix 基礎架構 (SoftLayer) 帳戶的帳戶建立標準叢集的可用選項" caption-side="top"}
 
 
-### 產生 {{site.data.keyword.BluSoftlayer_notm}} API 金鑰，以與 {{site.data.keyword.Bluemix_notm}} 帳戶搭配使用
+### 產生 IBM Bluemix 基礎架構 (SoftLayer) API 金鑰，以搭配 {{site.data.keyword.Bluemix_notm}} 帳戶使用
 {: #old_account}
 
 如果您要繼續使用舊「隨收隨付制」或「訂閱」帳戶來建立標準叢集，則必須使用新「隨收隨付制」帳戶來產生 API 金鑰，並設定舊帳戶的 API 金鑰。
 {:shortdesc}
 
-開始之前，請建立已自動設定 {{site.data.keyword.BluSoftlayer_notm}} 組合存取權的 {{site.data.keyword.Bluemix_notm}}「隨收隨付制」帳戶。
+開始之前，請建立已自動設定 IBM Bluemix 基礎架構 (SoftLayer) 組合存取權的 {{site.data.keyword.Bluemix_notm}}「隨收隨付制」帳戶。
 
-1.  使用針對新「隨收隨付制」帳戶所建立的 {{site.data.keyword.ibmid}} 及密碼，登入 [{{site.data.keyword.BluSoftlayer_notm}} 入口網站 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://control.softlayer.com/)。
+1.  使用針對新「隨收隨付制」帳戶所建立的 {{site.data.keyword.ibmid}} 及密碼，登入 [IBM Bluemix 基礎架構 (SoftLayer) 入口網站 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://control.softlayer.com/)。
 2.  選取**帳戶**，然後選取**使用者**。
-3.  按一下**產生**，以產生新「隨收隨付制」帳戶的 {{site.data.keyword.BluSoftlayer_notm}} API 金鑰。
+3.  按一下**產生**，以產生新「隨收隨付制」帳戶的 IBM Bluemix 基礎架構 (SoftLayer) API 金鑰。
 4.  複製 API 金鑰。
 5.  從 CLI 中，使用舊「隨收隨付制」或「訂閱」帳戶的 {{site.data.keyword.ibmid}} 及密碼來登入 {{site.data.keyword.Bluemix_notm}}。
 
@@ -510,7 +574,7 @@ Docker 映像檔是您建立的每個容器的基礎。映像檔是從 Dockerfil
   ```
   {: pre}
 
-6.  設定先前產生以存取 {{site.data.keyword.BluSoftlayer_notm}} 組合的 API 金鑰。請將 `<API_KEY>` 取代為 API 金鑰，並將 `<USERNAME>` 取代為新「隨收隨付制」帳戶的 {{site.data.keyword.ibmid}}。
+6.  設定先前產生以存取 IBM Bluemix 基礎架構 (SoftLayer) 組合的 API 金鑰。請將 `<API_KEY>` 取代為 API 金鑰，並將 `<USERNAME>` 取代為新「隨收隨付制」帳戶的 {{site.data.keyword.ibmid}}。
 
   ```
   bx cs credentials-set --infrastructure-api-key <API_KEY> --infrastructure-username <USERNAME>

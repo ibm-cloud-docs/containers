@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-08-15"
+lastupdated: "2017-10-24"
 
 ---
 
@@ -22,10 +22,15 @@ lastupdated: "2017-08-15"
 # クラスターのトラブルシューティング
 {: #cs_troubleshoot}
 
-{{site.data.keyword.containershort_notm}} を使用している場合は、ここに示すトラブルシューティング手法やヘルプの利用手法を検討してください。
+{{site.data.keyword.containershort_notm}} を使用する際は、ここに示すトラブルシューティング手法やヘルプの利用手法を検討してください。[{{site.data.keyword.Bluemix_notm}} システムの状況 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/bluemix/support/#status) を確認することもできます。
 
+いくつかの一般的な手順を実行することにより、クラスターが最新のものであることを確認できます。
+- 定期的に[ワーカー・ノードをリブートして](cs_cli_reference.html#cs_worker_reboot)、IBM によってオペレーティング・システムに自動的にデプロイされる更新プログラムとセキュリティー・パッチがインストールされるようにします
+- クラスターを {{site.data.keyword.containershort_notm}} 用の [Kubernetes の最新のデフォルト・バージョン](cs_versions.html)に更新します
 
 {: shortdesc}
+
+<br />
 
 
 ## クラスターのデバッグ
@@ -70,7 +75,7 @@ bx cs clusters```
     </tbody>
   </table>
 
-3.  クラスターが **Warning** 状態または **Critical** 状態の場合、あるいは **Pending** 状態が長時間続いている場合は、ワーカー・ノードの状態を確認してください。クラスターが **Deploying** 状態の場合は、クラスターが完全にデプロイされるまで待ってからクラスターの正常性を確認してください。**Normal** 状態のクラスターは、正常と見なされるので、この時点ではアクションは不要です。 
+3.  クラスターが **Warning** 状態または **Critical** 状態の場合、あるいは **Pending** 状態が長時間続いている場合は、ワーカー・ノードの状態を確認してください。クラスターが **Deploying** 状態の場合は、クラスターが完全にデプロイされるまで待ってからクラスターの正常性を確認してください。**Normal** 状態のクラスターは、正常と見なされるので、この時点ではアクションは不要です。
 
   ```
     bx cs workers <cluster_name_or_id>
@@ -137,7 +142,7 @@ bx cs clusters```
     <tbody>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Your account is currently prohibited from ordering 'Computing Instances'.</td>
-        <td>ご使用の {{site.data.keyword.BluSoftlayer_notm}} アカウントは、コンピュート・リソースの注文を制限されている可能性があります。[{{site.data.keyword.Bluemix_notm}} サポート・チケット](/docs/support/index.html#contacting-support)を開いて、{{site.data.keyword.Bluemix_notm}} サポートに連絡してください。</td>
+        <td>ご使用の IBM Bluemix Infrastructure (SoftLayer) アカウントは、コンピュート・リソースの注文を制限されている可能性があります。[{{site.data.keyword.Bluemix_notm}} サポート・チケット](/docs/support/index.html#contacting-support)を開いて、{{site.data.keyword.Bluemix_notm}} サポートに連絡してください。</td>
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not place order. There are insufficient resources behind router 'router_name' to fulfill the request for the following guests: 'worker_id'.</td>
@@ -149,23 +154,87 @@ bx cs clusters```
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not obtain network VLAN with id: &lt;vlan id&gt;.</td>
         <td>次のいずれかの理由で、選択した VLAN ID が見つからなかったため、ワーカー・ノードをプロビジョンできませんでした。
 <ul><li>VLAN ID ではなく VLAN 番号を指定した可能性があります。VLAN 番号の長さは 3 桁または 4 桁ですが、VLAN ID の長さは 7 桁です。VLAN ID を取得するには、<code>bx cs vlans &lt;location&gt;</code> を実行してください。
-<li>ご使用の Bluemix Infrastructure (SoftLayer) アカウントに VLAN ID が関連付けられていない可能性があります。アカウントの使用可能な VLAN ID をリストするには、<code>bx cs vlans &lt;location&gt;</code> を実行します。{{site.data.keyword.BluSoftlayer_notm}} アカウントを変更するには、[bx cs credentials-set](cs_cli_reference.html#cs_credentials_set) を参照してください。</ul></td>
+<li>ご使用の IBM Bluemix Infrastructure (SoftLayer) アカウントに VLAN ID が関連付けられていない可能性があります。アカウントの使用可能な VLAN ID をリストするには、<code>bx cs vlans &lt;location&gt;</code> を実行します。IBM Bluemix Infrastructure (SoftLayer) アカウントを変更するには、[bx cs credentials-set](cs_cli_reference.html#cs_credentials_set) を参照してください。</ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation: The location provided for this order is invalid. (HTTP 500)</td>
-        <td>ご使用の {{site.data.keyword.BluSoftlayer_notm}} は、選択したデータ・センター内のコンピュート・リソースを注文するようにセットアップされていません。[{{site.data.keyword.Bluemix_notm}} サポート](/docs/support/index.html#contacting-support)に問い合わせて、アカウントが正しくセットアップされているか確認してください。</td>
+        <td>ご使用の IBM Bluemix Infrastructure (SoftLayer) は、選択したデータ・センター内のコンピュート・リソースを注文するようにセットアップされていません。[{{site.data.keyword.Bluemix_notm}} サポート](/docs/support/index.html#contacting-support)に問い合わせて、アカウントが正しくセットアップされているか確認してください。</td>
        </tr>
        <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: The user does not have the necessary {{site.data.keyword.Bluemix_notm}} Infrastructure permissions to add servers
-        
-        </br></br>
+</br></br>
         {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: 'Item' must be ordered with permission.</td>
-        <td>{{site.data.keyword.BluSoftlayer_notm}} ポートフォリオからワーカー・ノードをプロビジョンするために必要なアクセス権限がない可能性があります。必要なアクセス権限については、[{{site.data.keyword.BluSoftlayer_notm}} ポートフォリオへのアクセス権限を構成して標準の Kubernetes クラスターを作成する](cs_planning.html#cs_planning_unify_accounts)を参照してください。</td>
+        <td>IBM Bluemix Infrastructure (SoftLayer) ポートフォリオからワーカー・ノードをプロビジョンするために必要なアクセス権限がない可能性があります。[IBM Bluemix Infrastructure (SoftLayer) ポートフォリオへのアクセス権限を構成して標準の Kubernetes クラスターを作成する](cs_planning.html#cs_planning_unify_accounts)を参照してください。</td>
       </tr>
     </tbody>
   </table>
 
-## クラスターの作成中に IBM {{site.data.keyword.BluSoftlayer_notm}} アカウントに接続できない
+<br />
+
+
+## アプリ・デプロイメントのデバッグ
+{: #debug_apps}
+
+アプリ・デプロイメントをデバッグするためのオプションを確認し、障害の根本原因を探します。
+
+1. `describe` コマンドを実行して、サービス・リソースまたはデプロイメント・リソース内の異常を見つけます。
+
+ 例:
+ <pre class="pre"><code>kubectl describe service &lt;service_name&gt; </code></pre>
+
+2. [コンテナーが ContainerCreating 状態で停滞しているかどうかを確認します](#stuck_creating_state)。
+
+3. クラスターが `Critical` 状態かどうかを確認します。クラスターが `Critical` 状態の場合、ファイアウォール・ルールを調べて、マスターがワーカー・ノードと通信できることを検査します。
+
+4. サービスが正しいポートで listen していることを確認します。
+   1. ポッドの名前を取得します。
+     <pre class="pre"><code>kubectl get pods</code></pre>
+   2. コンテナーにログインします。
+     <pre class="pre"><code>kubectl exec -it &lt;pod_name&gt; -- /bin/bash</code></pre>
+   3. コンテナー内からアプリに対して curl を実行します。ポートにアクセスできない場合、サービスは正しいポートで listen していないか、またはアプリに問題が生じている可能性があります。正しいポートを指定してサービスの構成ファイルを更新して再デプロイするか、またはアプリに存在する可能性がある問題を調査します。
+     <pre class="pre"><code>curl localhost: &lt;port&gt;</code></pre>
+
+5. サービスがポッドに正しくリンクされていることを確認します。
+   1. ポッドの名前を取得します。
+     <pre class="pre"><code>kubectl get pods</code></pre>
+   2. コンテナーにログインします。
+     <pre class="pre"><code>kubectl exec -it &lt;pod_name&gt; -- /bin/bash</code></pre>
+   3. サービスのクラスター IP アドレスとポートに対して curl を実行します。IP アドレスとポートにアクセスできない場合、サービスのエンドポイントを調べます。エンドポイントがない場合は、サービスのセレクターがポッドと一致していません。エンドポイントがある場合は、サービスの宛先ポート・フィールドを調べて、ポッドに使用されているポートが宛先ポートと同じであることを確認します。
+     <pre class="pre"><code>curl &lt;cluster_IP&gt;:&lt;port&gt;</code></pre>
+
+6. Ingress サービスの場合、クラスター内からサービスにアクセスできることを検証します。
+   1. ポッドの名前を取得します。
+     <pre class="pre"><code>kubectl get pods</code></pre>
+   2. コンテナーにログインします。
+     <pre class="pre"><code>kubectl exec -it &lt;pod_name&gt; -- /bin/bash</code></pre>
+   2. Ingress サービス用に指定された URL に対して curl を実行します。URL にアクセスできない場合、クラスターと外部エンドポイントの間にファイアウォールの問題が生じていないかを調べます。
+     <pre class="pre"><code>curl &lt;host_name&gt;.&lt;domain&gt;</code></pre>
+
+<br />
+
+
+## kubectl のローカル・クライアントとサーバーのバージョンの特定
+
+ローカルまたはクラスターで実行されている Kubernetes CLI のバージョンを調べるには、以下のコマンドを実行して、バージョンを確認します。
+
+
+```
+kubectl version  --short```
+{: pre}
+
+出力例:
+
+
+```
+        Client Version: v1.5.6
+        Server Version: v1.5.6
+        ```
+{: screen}
+
+<br />
+
+
+## クラスターの作成中に IBM Bluemix Infrastructure (SoftLayer) アカウントに接続できない
 {: #cs_credentials}
 
 {: tsSymptoms}
@@ -173,21 +242,20 @@ bx cs clusters```
 
 
 ```
-We were unable to connect to your {{site.data.keyword.BluSoftlayer_notm}} account. Creating a standard cluster requires that you have either a Pay-As-You-Go account that is linked to an {{site.data.keyword.BluSoftlayer_notm}} account term or that you have used the IBM
+We were unable to connect to your IBM Bluemix Infrastructure (SoftLayer) account. Creating a standard cluster requires that you have either a Pay-As-You-Go account that is linked to an IBM Bluemix Infrastructure (SoftLayer) account term or that you have used the IBM
 {{site.data.keyword.Bluemix_notm}} Container Service CLI to set your {{site.data.keyword.Bluemix_notm}} Infrastructure API keys.
 ```
 {: screen}
 
 {: tsCauses}
-リンクされていない {{site.data.keyword.Bluemix_notm}} アカウントのユーザーは、新しい従量課金アカウントを作成するか、{{site.data.keyword.Bluemix_notm}} CLI を使用して {{site.data.keyword.BluSoftlayer_notm}} API キーを手動で追加しなければなりません。
+リンクされていない {{site.data.keyword.Bluemix_notm}} アカウントのユーザーは、新しい従量課金アカウントを作成するか、{{site.data.keyword.Bluemix_notm}} CLI を使用して IBM Bluemix Infrastructure (SoftLayer) API キーを手動で追加する必要があります。
 
 {: tsResolve}
 {{site.data.keyword.Bluemix_notm}} アカウントの資格情報を追加するには、以下のようにします。
 
-1.  {{site.data.keyword.BluSoftlayer_notm}} 管理者に問い合わせて、{{site.data.keyword.BluSoftlayer_notm}} ユーザー名と API キーを入手します。
+1.  IBM Bluemix Infrastructure (SoftLayer) 管理者に連絡して、IBM Bluemix Infrastructure (SoftLayer) のユーザー名と API キーを入手します。
 
-
-    **注:** 標準クラスターを正常に作成するには、使用する {{site.data.keyword.BluSoftlayer_notm}} アカウントを SuperUser 権限を付けてセットアップしなければなりません。
+    **注:** 標準クラスターを正常に作成するには、使用する IBM Bluemix Infrastructure (SoftLayer) アカウントに SuperUser 権限がセットアップされている必要があります。
 
 2.  資格情報を追加します。
 
@@ -203,6 +271,8 @@ We were unable to connect to your {{site.data.keyword.BluSoftlayer_notm}} accoun
   ```
   {: pre}
 
+<br />
+
 
 ## SSH によるワーカー・ノードへのアクセスが失敗する
 {: #cs_ssh_worker}
@@ -217,6 +287,8 @@ SSH 接続を使用してワーカー・ノードにアクセスすることは�
 
 {: tsResolve}
 すべてのノードで実行する必要がある場合は [DaemonSets ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) を使用し、一回限りのアクションを実行する必要がある場合はジョブを使用してください。
+
+<br />
 
 
 ## ポッドが保留状態のままである
@@ -265,30 +337,41 @@ bx cs worker-add <cluster name or id> 1```
 
 5.  ワーカー・ノードが完全にデプロイされたのにまだポッドが **pending** 状態のままである場合は、[Kubernetes の資料![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) を参照して、ポッドの pending 状態のトラブルシューティングを行ってください。
 
-## provision_failed というメッセージとともにワーカー・ノードの作成が失敗する
-{: #cs_pod_space}
+<br />
+
+
+## ポッドが作成状態で停滞している
+{: #stuck_creating_state}
 
 {: tsSymptoms}
-Kubernetes クラスターを作成したり、ワーカー・ノードを追加したりするときに、provision_failed 状態になります。以下のコマンドを実行します。
-
-```
-bx cs worker-get <WORKER_NODE_ID>
-```
-{: pre}
-
-以下のメッセージが表示されます。
-
-```
-SoftLayer_Exception_Virtual_Host_Pool_InsufficientResources: Could not place order. There are insufficient resources behind router bcr<router_ID> to fulfill the request for the following guests: kube-<location>-<worker_node_ID>-w1 (HTTP 500)```
-{: screen}
+`kubectl get pods -o wide` を実行すると、同じワーカー・ノードで稼働している複数のポッドが `ContainerCreating` 状態で停滞していることが判明します。
 
 {: tsCauses}
-、{{site.data.keyword.BluSoftlayer_notm}} に現時点でワーカー･ノードをプロビジョンするための十分な容量がない可能性があります。
+ワーカー・ノード上のファイル・システムは読み取り専用です。
 
 {: tsResolve}
-オプション 1: 別の場所にクラスターを作成します。
+1. ワーカー・ノード上またはコンテナー内に保管されている可能性のあるデータをバックアップします。
+2. 以下のコマンドを実行してワーカー・ノードを再作成します。
 
-オプション 2: {{site.data.keyword.BluSoftlayer_notm}} のサポートの問い合わせを開き、その場所の使用可能な容量を尋ねます。
+<pre class="pre"><code>bx cs worker-reload &lt;cluster_name&gt; &lt;worker_id&gt;</code></pre>
+
+<br />
+
+
+## コンテナーが開始しない
+{: #containers_do_not_start}
+
+{: tsSymptoms}
+ポッドはクラスターに正常にデプロイされましたが、コンテナーが開始しません。
+
+{: tsCauses}
+レジストリーの割り当て量に到達すると、コンテナーが開始しないことがあります。
+
+{: tsResolve}
+[{{site.data.keyword.registryshort_notm}} 内のストレージを解放してください。](../services/Registry/registry_quota.html#registry_quota_freeup)
+
+<br />
+
 
 ## 新しいワーカー・ノード上のポッドへのアクセスがタイムアウトで失敗する
 {: #cs_nodes_duplicate_ip}
@@ -348,12 +431,14 @@ SoftLayer_Exception_Virtual_Host_Pool_InsufficientResources: Could not place ord
 
 削除されたノードが Calico にリストされなくなります。
 
+<br />
+
+
 ## ワーカー・ノードが接続できない
 {: #cs_firewall}
 
 {: tsSymptoms}
-kubectl プロキシーに障害が起きると、またはクラスター内のサービスにアクセスしようとすると、接続が失敗して次のいずれかのエラー・メッセージが表示されます。
-
+ワーカー・ノードを接続できない場合、さまざまな症状が出現することがあります。kubectl プロキシーに障害が起きると、またはクラスター内のサービスにアクセスしようとして接続が失敗すると、次のいずれかのメッセージが表示されることがあります。
 
   ```
 Connection refused```
@@ -368,39 +453,29 @@ Connection timed out```
   ```
   {: screen}
 
-あるいは、kubectl exec、attach、または logs を使用すると、次のエラー・メッセージを受け取ります。
-
+kubectl exec、attach、または logs を実行する場合、以下のメッセージが表示されることがあります。
 
   ```
 Error from server: error dialing backend: dial tcp XXX.XXX.XXX:10250: getsockopt: connection timed out```
   {: screen}
 
-あるいは、kubectl プロキシーが正常に実行されても、ダッシュボードが使用できず、次のエラー・メッセージを受け取ります。
-
+kubectl プロキシーが正常に実行されても、ダッシュボードを使用できない場合は、次のエラー・メッセージが表示されることがあります。
 
   ```
 timeout on 172.xxx.xxx.xxx```
   {: screen}
 
-あるいは、ワーカー・ノードが再ロード・ループにはまっています。
+
 
 {: tsCauses}
-追加のファイアウォールを設定したか、{{site.data.keyword.BluSoftlayer_notm}} アカウントの既存のファイアウォール設定をカスタマイズした可能性があります。
-{{site.data.keyword.containershort_notm}} では、ワーカー・ノードと Kubernetes マスター間で通信を行うには、特定の IP アドレスとポートが開いている必要があります。
-
+追加のファイアウォールを設定したか、IBM Bluemix Infrastructure (SoftLayer) アカウントの既存のファイアウォール設定をカスタマイズした可能性があります。{{site.data.keyword.containershort_notm}} では、ワーカー・ノードと Kubernetes マスター間で通信を行うには、特定の IP アドレスとポートが開いている必要があります。
+別の原因として、ワーカー・ノードが再ロード・ループにはまっている可能性があります。
 
 {: tsResolve}
 このタスクには、[管理者アクセス・ポリシー](cs_cluster.html#access_ov)が必要です。現在の[アクセス・ポリシー](cs_cluster.html#view_access)を確認してください。
 
 カスタマイズ済みのファイアウォールで、以下のポートと IP アドレスを開きます。
 
-```
-TCP port 443 FROM '<each_worker_node_publicIP>' TO registry.ng.bluemix.net, apt.dockerproject.org
-```
-{: pre}
-
-
-<!--Inbound left for existing clusters. Once existing worker nodes are reloaded, users only need the Outbound information, which is found in the regular docs.-->
 
 1.  以下を実行して、クラスター内のすべてのワーカー・ノードのパブリック IP アドレスをメモします。
 
@@ -410,108 +485,148 @@ TCP port 443 FROM '<each_worker_node_publicIP>' TO registry.ng.bluemix.net, apt.
   ```
   {: pre}
 
-2.  以下のように、ファイアウォールの設定で、ワーカー・ノードとの間の以下の接続を許可します。
+2.  ファイアウォールで、ワーカー・ノードからのアウトバウンド接続として、ソース・ワーカー・ノードから、`<each_worker_node_publicIP>` の宛先 TCP/UDP ポート範囲 (20000 から 32767 まで) およびポート 443 への発信ネットワーク・トラフィック、および以下の IP アドレスとネットワーク・グループへの発信ネットワーク・トラフィックを許可します。
+    - **重要**: ブートストラッピング・プロセスの際にロードのバランスを取るため、ポート 443 と地域内のすべてのロケーションで相互に対する発信トラフィックを許可する必要があります。例えば、クラスターが米国南部にある場合、ポート 443 から dal10 と dal12 への、そして dal10 と dal12 から互いへのトラフィックを許可する必要があります。<p>
+  <table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
+    <thead>
+      <th>地域</th>
+      <th>ロケーション</th>
+      <th>IP アドレス</th>
+      </thead>
+    <tbody>
+      <tr>
+         <td>南アジア太平洋地域</td>
+         <td>mel01<br>syd01
+</td>
+         <td><code>168.1.97.67</code><br><code>168.1.8.195</code></td>
+      </tr>
+      <tr>
+         <td>中欧</td>
+         <td>ams03<br>fra02</td>
+         <td><code>169.50.169.110</code><br><code>169.50.56.174</code></td>
+        </tr>
+      <tr>
+        <td>英国南部</td>
+        <td>lon02<br>lon04</td>
+        <td><code>159.122.242.78</code><br><code>158.175.65.170</code></td>
+      </tr>
+      <tr>
+        <td>米国東部</td>
+         <td>wdc06<br>wdc07</td>
+         <td><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+      </tr>
+      <tr>
+        <td>米国南部</td>
+        <td>dal10<br>dal12<br>dal13</td>
+        <td><code>169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
+      </tr>
+      </tbody>
+    </table>
+</p>
+
+3.  ワーカー・ノードから {{site.data.keyword.registrylong_notm}} への発信ネットワーク・トラフィックを許可します。
+    - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
+    - <em>&lt;registry_publicIP&gt;</em> は、トラフィックを許可するレジストリー地域のすべてのアドレスに置き換えます。
+        <p>      
+<table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
+    <thead>
+        <th colspan=2><img src="images/idea.png"/> レジストリー IP アドレス</th>
+        </thead>
+      <tbody>
+        <tr>
+          <td>registry.au-syd.bluemix.net</td>
+          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
+        </tr>
+        <tr>
+          <td>registry.eu-de.bluemix.net</td>
+          <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></td>
+         </tr>
+         <tr>
+          <td>registry.eu-gb.bluemix.net</td>
+          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></td>
+         </tr>
+         <tr>
+          <td>registry.ng.bluemix.net</td>
+          <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></td>
+         </tr>
+        </tbody>
+      </table>
+</p>
+
+4.  オプション: ワーカー・ノードから {{site.data.keyword.monitoringlong_notm}} サービスと {{site.data.keyword.loganalysislong_notm}} サービスへの発信ネットワーク・トラフィックを許可します。
+    - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
+    - <em>&lt;monitoring_publicIP&gt;</em> は、トラフィックを許可するモニタリング地域のすべてのアドレスに置き換えます。
+        <p><table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
+    <thead>
+        <th colspan=2><img src="images/idea.png"/> モニタリング・パブリック IP アドレス</th>
+        </thead>
+      <tbody>
+        <tr>
+         <td>metrics.eu-de.bluemix.net</td>
+         <td><code>159.122.78.136/29</code></td>
+        </tr>
+        <tr>
+         <td>metrics.eu-gb.bluemix.net</td>
+         <td><code>169.50.196.136/29</code></td>
+        </tr>
+        <tr>
+          <td>metrics.ng.bluemix.net</td>
+          <td><code>169.47.204.128/29</code></td>
+         </tr>
+         
+        </tbody>
+      </table>
+</p>
+    - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
+    - <em>&lt;logging_publicIP&gt;</em> は、トラフィックを許可するロギング地域のすべてのアドレスに置き換えます。
+        <p><table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
+    <thead>
+        <th colspan=2><img src="images/idea.png"/> ロギング・パブリック IP アドレス</th>
+        </thead>
+      <tbody>
+        <tr>
+         <td>ingest.logging.eu-de.bluemix.net</td>
+         <td><code>169.50.25.125</code></td>
+        </tr>
+        <tr>
+         <td>ingest.logging.eu-gb.bluemix.net</td>
+         <td><code>169.50.115.113</code></td>
+        </tr>
+        <tr>
+          <td>ingest.logging.ng.bluemix.net</td>
+          <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
+         </tr>
+        </tbody>
+      </table>
+</p>
+
+5. プライベート・ファイアウォールがある場合、IBM Bluemix Infrastructure (SoftLayer) のプライベート IP のために適切な範囲を許可します。[このリンク](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)の **Backend (private) Network** で始まるセクションを参照してください。
+    - 使用している[地域内のロケーション](cs_regions.html#locations)をすべて追加します
+    - dal01 のロケーション (データ・センター) を追加する必要があることに注意してください
+    - ポート 80 および 443 を開いて、クラスターのブートストラッピング処理を可能にします
+
+<br />
+
+
+## ワーカー・ノードを更新または再ロードした後に、重複するノードとポッドが表示される
+{: #cs_duplicate_nodes}
+
+{: tsSymptoms}
+`kubectl get nodes` を実行すると、状況が **NotReady** の重複したワーカー・ノードが表示されます。**NotReady** のワーカー・ノードにはパブリック IP アドレスがありますが、**Ready** のワーカー・ノードにはプライベート IP アドレスがあります。
+
+{: tsCauses}
+以前のクラスターでは、クラスターのパブリック IP アドレスごとにワーカー・ノードがリストされていました。現在は、ワーカー・ノードはクラスターのプライベート IP アドレスごとにリストされています。ノードを再ロードまたは更新すると、IP アドレスは変更されますがパブリック IP アドレスへの参照は残ります。
+
+{: tsResolve}
+これらの重複によってサービスが中断されることはありませんが、以前のワーカー・ノード参照を API サーバーから除去する必要があります。
 
   ```
-  TCP port 443 FROM '<each_worker_node_publicIP>' TO registry.ng.bluemix.net, apt.dockerproject.org
+  kubectl delete node <node_name1> <node_name2>
   ```
   {: pre}
 
-    <ul><li>ワーカー・ノードへのインバウンド接続として、以下のソース・ネットワーク・グループと IP アドレスから宛先 TCP/UDP ポート 10250 と `<public_IP_of _each_worker_node>` への着信ネットワーク・トラフィックを許可します。</br>
-    
-    <table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
-    <thead>
-      <th colspan=2><img src="images/idea.png"/>インバウンド IP アドレス</th>
-      </thead>
-    <tbody>
-      <tr>
-        <td>ams03</td>
-        <td><code>169.50.144.128/28
-</code></br><code>169.50.169.104/29</code></br><code>169.50.185.32/27
-</code></td>
-      </tr>
-      <tr>
-        <td>dal10</td>
-        <td><code>169.46.7.232/29 </code></br><code>169.48.138.64/26
-</code></br><code>169.48.180.128/25</code></td>
-       </tr>
-       <tr>
-        <td>dal12</td>
-        <td><code>169.47.70.8/29</code></br><code>169.47.79.192/26
-</code></br><code>169.47.126.192/27
-</code></td>
-       </tr>
-       <tr>
-        <td>fra02</td>
-        <td><code>169.50.48.160/28
-</code></br><code>169.50.56.168/29</code></br><code>169.50.58.160/27
-</code></td>
-       </tr>
-      </tbody>
-      <tr>
-       <td>lon02</td>
-       <td><code>159.122.242.78</code></td>
-      </tr>
-      <tr>
-       <td>lon04</td>
-       <td><code>158.175.68.192/26</code></td>
-      </tr>
-      <tr>
-       <td>syd01
-</td>
-       <td><code>168.1.209.192/26</code></td>
-      </tr>
-      <tr>
-       <td>syd04</td>
-       <td><code>130.198.67.0/26</code></td>
-      </tr>
-    </table>
+<br />
 
-    <li>ワーカー・ノードからのアウトバウンド接続として、ソース・ワーカー・ノードから、`<each_worker_node_publicIP>` の宛先 TCP/UDP ポート範囲 (20000 から 32767 まで) への発信ネットワーク・トラフィック、および以下の IP アドレスとネットワーク・グループへの発信ネットワーク・トラフィックを許可します。</br>
-    
-    <table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
-    <thead>
-      <th colspan=2><img src="images/idea.png"/> アウトバウンド IP アドレス</th>
-      </thead>
-    <tbody>
-      <tr>
-        <td>ams03</td>
-        <td><code>169.50.169.110</code></td>
-      </tr>
-      <tr>
-        <td>dal10</td>
-        <td><code>169.46.7.238</code></td>
-       </tr>
-       <tr>
-        <td>dal12</td>
-        <td><code>169.47.70.10</code></td>
-       </tr>
-       <tr>
-        <td>fra02</td>
-        <td><code>169.50.56.174</code></td>
-       </tr>
-      </tbody>
-      <tr>
-       <td>lon02</td>
-       <td><code>159.122.242.78</code></td>
-      </tr>
-      <tr>
-       <td>lon04</td>
-       <td><code>158.175.65.170</code></td>
-      </tr>
-      <tr>
-       <td>syd01
-</td>
-       <td><code>168.1.8.195</code></td>
-      </tr>
-      <tr>
-       <td>syd04</td>
-       <td><code>130.198.64.19</code></td>
-      </tr>
-    </table>
-</ul>
-    
-    
 
 ## Ingress 経由でアプリに接続できない
 {: #cs_ingress_fails}
@@ -621,6 +736,9 @@ Ingress のトラブルシューティングを行うには、以下のように
 
     3.  Ingress コントローラーのログでエラー・メッセージを探します。
 
+<br />
+
+
 ## ロード・バランサー・サービス経由でアプリに接続できない
 {: #cs_loadbalancer_fails}
 
@@ -663,7 +781,7 @@ Ingress のトラブルシューティングを行うには、以下のように
   ```
   {: pre}
 
-    1.  サービスのタイプとして **LoadBlanacer** を定義したことを確認します。
+    1.  サービスのタイプとして **LoadBalancer** を定義したことを確認します。
     2.  アプリをデプロイするときに **label/metadata** セクションで使用したものと同じ **<selectorkey>** と **<selectorvalue>** を使用していることを確認します。
     3.  アプリで listen している **port** を使用していることを確認します。
 
@@ -697,6 +815,40 @@ Ingress のトラブルシューティングを行うには、以下のように
 
     2.  カスタム・ドメインが、ポインター・レコード (PTR) でロード・バランサー・サービスのポータブル・パブリック IP アドレスにマップされていることを確認します。
 
+<br />
+
+
+## Calico CLI 構成の ETCD url の取得に失敗する
+{: #cs_calico_fails}
+
+{: tsSymptoms}
+[ネットワーク・ポリシーを追加するための](cs_security.html#adding_network_policies) `<ETCD_URL>` を取得するときに、`calico-config not found` エラー・メッセージが出されます。
+
+{: tsCauses}
+クラスターが (Kubernetes バージョン 1.7)[cs_versions.html] 以降ではありません。
+
+{: tsResolve}
+(クラスターを更新する)[cs_cluster.html#cs_cluster_update] か、または以前のバージョンの Kubernetes と互換性のあるコマンドによって `<ETCD_URL>` を取得します。
+
+`<ETCD_URL>` を取得するには、以下のいずれかのコマンドを実行します。
+
+- Linux および OS X:
+
+    ```
+kubectl describe pod -n kube-system `kubectl get pod -n kube-system | grep calico-policy-controller | awk '{print $1}'` | grep ETCD_ENDPOINTS | awk '{print $2}'```
+    {: pre}
+
+- Windows:<ol>
+    <li> kube-system 名前空間内のポッドのリストを取得し、Calico コントローラー・ポッドを見つけます。</br><pre class="codeblock"><code>kubectl get pod -n kube-system</code></pre></br>例:</br><pre class="screen"><code>calico-policy-controller-1674857634-k2ckm</code></pre>
+    <li> Calico コントローラー・ポッドの詳細を表示します。</br> <pre class="codeblock"><code>kubectl describe pod -n kube-system calico-policy-controller-&lt;ID&gt;</code></pre>
+    <li> ETCD エンドポイント値を見つけます。例: <code>https://169.1.1.1:30001</code>
+            </ol>
+
+`<ETCD_URL>` を取得するときには、(ネットワーク・ポリシーの追加)[cs_security.html#adding_network_policies] にリストされている手順を続行します。
+
+<br />
+
+
 ## 既知の問題
 {: #cs_known_issues}
 
@@ -717,9 +869,8 @@ Kubernetes ダッシュボードにアクセスするには、以下のコマン
     <dd><ul><li>プライベート VLAN では、ロード・バランシングは使用できません。
 <li>service.beta.kubernetes.io/external-traffic サービスと service.beta.kubernetes.io/healthcheck-nodeport サービスのアノテーションを使用することはできません。
 これらのアノテーションについて詳しくは、[Kubernetes の資料![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tutorials/services/source-ip/) を参照してください。</ul></dd>
-  <dt>水平自動スケーリングが機能しない</dt>
-    <dd>セキュリティー上の理由で、Heapster によって使用される標準のポート (10255) はすべてのワーカー・ノードで閉じられています。
-このポートが閉じられていて Heapster がワーカー・ノードのメトリックを報告できないので、水平自動スケーリングは Kubernetes 資料の [Horizontal Pod Autoscaling ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) の説明のようには機能しません。</dd>
+  <dt>いくつかのクラスターで水平自動スケーリングが機能しない</dt>
+    <dd>セキュリティー上の理由で、以前のクラスターでは、Heapster によって使用される標準のポート (10255) はすべてのワーカー・ノードで閉じられています。このポートが閉じられていて Heapster がワーカー・ノードのメトリックを報告できないので、水平自動スケーリングは Kubernetes 資料の [Horizontal Pod Autoscaling ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) の説明のようには機能しません。この問題を回避するには、別のクラスターを作成します。</dd>
 </dl>
 
 ### 永続ストレージ 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-08-15"
+lastupdated: "2017-10-24"
 
 ---
 
@@ -22,15 +22,21 @@ lastupdated: "2017-08-15"
 # 클러스터 문제점 해결
 {: #cs_troubleshoot}
 
-{{site.data.keyword.containershort_notm}}를 사용할 때 문제점을 해결하고 도움을 얻으려면 이 기술을 고려하십시오.
+{{site.data.keyword.containershort_notm}}를 사용할 때 문제점을 해결하고 도움을 얻으려면 이러한 기술을 고려하십시오. [{{site.data.keyword.Bluemix_notm}} 시스템의 상태 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/bluemix/support/#status)를 확인할 수도 있습니다.
+
+몇 가지 일반 단계를 수행하여 클러스터가 최신 상태인지 확인할 수 있습니다.
+- IBM에서 자동으로 운영 체제에 배치하는 업데이트 및 보안 패치가 설치될 수 있도록 정기적으로 [작업자 노드를 다시 부팅](cs_cli_reference.html#cs_worker_reboot)하십시오.
+- 클러스터를 {{site.data.keyword.containershort_notm}}용 [Kubernetes의 최신 기본 버전](cs_versions.html)으로 업데이트하십시오.
 
 {: shortdesc}
+
+<br />
 
 
 ## 클러스터 디버깅
 {: #debug_clusters}
 
-클러스터를 디버그해야 하는 옵션을 검토하고 실패의 근본 원인을 찾습니다.
+클러스터를 디버그하기 위한 옵션을 검토하고 실패의 근본 원인을 찾습니다.
 
 1.  클러스터를 나열하고 클러스터의 `상태`를 찾으십시오.
 
@@ -70,7 +76,7 @@ lastupdated: "2017-08-15"
     </tbody>
   </table>
 
-3.  클러스터가 **경고** 또는 **중요** 상태이거나 오랜 기간 **보류** 상태이면 작업자 노드의 상태를 검토하십시오. 클러스터가 **배치 중** 상태이면 클러스터가 완전히 배치될 때까지 기다렸다가 클러스터의 상태를 검토하십시오. 클러스터는 **정상** 상태로, 상태가 양호하며 현재 조치가 필요하지 않은 것으로 간주됩니다. 
+3.  클러스터가 **경고** 또는 **중요** 상태이거나 오랜 기간 **보류** 상태이면 작업자 노드의 상태를 검토하십시오. 클러스터가 **배치 중** 상태이면 클러스터가 완전히 배치될 때까지 기다렸다가 클러스터의 상태를 검토하십시오. **정상** 상태의 클러스터는 정상으로 간주되며 현재 조치가 필요하지 않습니다.
 
   ```
   bx cs workers <cluster_name_or_id>
@@ -135,7 +141,7 @@ lastupdated: "2017-08-15"
     <tbody>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} 인프라 예외: 현재 사용자의 계정을 통해 '컴퓨팅 인스턴스'를 주문하지 못하게 금지되어 있습니다.</td>
-        <td>{{site.data.keyword.BluSoftlayer_notm}} 계정이 컴퓨팅 리소스를 주문하지 못하게 제한되었을 수 있습니다. [{{site.data.keyword.Bluemix_notm}} 지원 티켓](/docs/support/index.html#contacting-support)을 열어 {{site.data.keyword.Bluemix_notm}} 지원에 문의하십시오.</td>
+        <td>IBM Bluemix Infrastructure(SoftLayer) 계정이 컴퓨팅 리소스를 주문하지 못하게 제한되었을 수 있습니다. [{{site.data.keyword.Bluemix_notm}} 지원 티켓](/docs/support/index.html#contacting-support)을 열어 {{site.data.keyword.Bluemix_notm}} 지원에 문의하십시오.</td>
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} 인프라 예외: 주문할 수 없습니다. 'router_name' 라우터의 리소스가 충분하지 않아 'worker_id' 게스트의 요청을 이행할 수 없습니다.</td>
@@ -143,43 +149,106 @@ lastupdated: "2017-08-15"
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} 인프라 예외: ID가 &lt;vlan id&gt;인 네트워크를 얻을 수 없습니다.</td>
-        <td>다음 이유 중 하나로 인해 선택된 VLAN ID를 찾을 수 없으므로 작업자 노드를 프로비저닝할 수 없습니다.<ul><li>VLAN ID가 아니라 VLAN 번호를 지정했을 수 있습니다. VLAN 번호는 3 또는 4자리 숫자이지만 VLAN ID는 7자리 숫자입니다. <code>bx cs vlans &lt;location&gt;</code>을 실행하여 VLAN ID를 검색하십시오.<li>사용하는 Bluemix Infrastructure(SoftLayer) 계정과 VLAN ID가 연관되지 않았을 수 있습니다. <code>bx cs vlans &lt;location&gt;</code>을 실행하여 계정의 사용 가능한 VLAN ID를 나열하십시오. {{site.data.keyword.BluSoftlayer_notm}} 계정을 변경하려면 [bx cs credentials-set](cs_cli_reference.html#cs_credentials_set)을 참조하십시오. </ul></td>
+        <td>다음 이유 중 하나로 인해 선택된 VLAN ID를 찾을 수 없으므로 작업자 노드를 프로비저닝할 수 없습니다.<ul><li>VLAN ID가 아니라 VLAN 번호를 지정했을 수 있습니다. VLAN 번호는 3 또는 4자리 숫자이지만 VLAN ID는 7자리 숫자입니다. <code>bx cs vlans &lt;location&gt;</code>을 실행하여 VLAN ID를 검색하십시오.<li>사용하는 IBM Bluemix Infrastructure(SoftLayer) 계정과 VLAN ID가 연관되지 않았을 수 있습니다. <code>bx cs vlans &lt;location&gt;</code>을 실행하여 계정의 사용 가능한 VLAN ID를 나열하십시오. IBM Bluemix Infrastructure(SoftLayer) 계정을 변경하려면 [bx cs credentials-set](cs_cli_reference.html#cs_credentials_set)를 참조하십시오. </ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation: 이 주문을 위해 제공된 위치가 올바르지 않습니다(HTTP 500).</td>
-        <td>선택한 데이터 센터에서 컴퓨팅 리소스를 주문하도록 {{site.data.keyword.BluSoftlayer_notm}}가 설정되지 않았습니다. 계정이 올바르게 설정되었는지 확인하려면 [{{site.data.keyword.Bluemix_notm}} 지원](/docs/support/index.html#contacting-support)에 문의하십시오.</td>
+        <td>선택한 데이터 센터에서 컴퓨팅 리소스를 주문하도록 IBM Bluemix Infrastructure(SoftLayer)가 설정되지 않았습니다. 계정이 올바르게 설정되었는지 확인하려면 [{{site.data.keyword.Bluemix_notm}} 지원](/docs/support/index.html#contacting-support)에 문의하십시오.</td>
        </tr>
        <tr>
         <td>{{site.data.keyword.Bluemix_notm}} 인프라 예외: 사용자에게 서버를 추가하는 데 필요한 {{site.data.keyword.Bluemix_notm}} 인프라 권한이 없습니다.
-        
-        </br></br>
+</br></br>
         {{site.data.keyword.Bluemix_notm}} 인프라 예외: 'Item'은 권한을 갖고 주문해야 합니다.</td>
-        <td>{{site.data.keyword.BluSoftlayer_notm}} 포트폴리오에서 작업자 노드를 프로비저닝하는 데 필요한 권한이 없을 수 있습니다. 필수 권한을 찾으려면 [표준 Kubernetes 클러스터를 작성하기 위해 {{site.data.keyword.BluSoftlayer_notm}} 포트폴리오에 대한 액세스 구성](cs_planning.html#cs_planning_unify_accounts)을 참조하십시오.</td>
+        <td>IBM Bluemix Infrastructure(SoftLayer) 포트폴리오에서 작업자 노드를 프로비저닝하는 데 필요한 권한이 없을 수 있습니다. [표준 Kubernetes 클러스터를 작성하기 위해 IBM Bluemix Infrastructure(SoftLayer) 포트폴리오에 대한 액세스 구성](cs_planning.html#cs_planning_unify_accounts)을 참조하십시오.</td>
       </tr>
     </tbody>
   </table>
 
-## 클러스터를 작성하는 동안 IBM {{site.data.keyword.BluSoftlayer_notm}} 계정에 연결할 수 없음
+<br />
+
+
+## 앱 배치 디버깅
+{: #debug_apps}
+
+앱 배치를 디버그해야 하는 옵션을 검토하고 실패의 근본 원인을 찾습니다.
+
+1. `describe` 명령을 실행하여 서비스 또는 배치 리소스의 비정상 항목을 찾으십시오.
+
+ 예:
+ <pre class="pre"><code>kubectl describe service &lt;service_name&gt; </code></pre>
+
+2. [컨테이너가 ContainerCreating 상태인지 확인하십시오](#stuck_creating_state).
+
+3. 클러스터가 `Critical` 상태인지 확인하십시오. 클러스터가 `Critical` 상태이면 방화벽 규칙을 검사하고 마스터가 작업자 노드와 통신할 수 있는지 확인하십시오.
+
+4. 서비스가 올바른 포트에서 청취하는지 확인하십시오.
+   1. 포드의 이름을 가져오십시오.
+     <pre class="pre"><code>kubectl get pods</code></pre>
+   2. 컨테이너에 로그인하십시오.
+     <pre class="pre"><code>kubectl exec -it &lt;pod_name&gt; -- /bin/bash</code></pre>
+   3. 컨테이너 내에서 앱을 curl하십시오. 포트에 액세스할 수 없는 경우 서비스가 올바른 포트에서 청취 중이지 않거나 앱에 문제가 있을 수 있습니다. 서비스의 구성 파일을 올바른 포트로 업데이트하고 앱에 대한 잠재적인 문제를 재배치하거나 조사하십시오. <pre class="pre"><code>curl localhost: &lt;port&gt;</code></pre>
+
+5. 서비스가 포드에 올바르게 링크되었는지 확인하십시오.
+   1. 포드의 이름을 가져오십시오.
+     <pre class="pre"><code>kubectl get pods</code></pre>
+   2. 컨테이너에 로그인하십시오.
+     <pre class="pre"><code>kubectl exec -it &lt;pod_name&gt; -- /bin/bash</code></pre>
+   3. 서비스의 클러스터 IP 주소 및 포트를 curl하십시오. IP 주소 및 포트에 액세스할 수 없는 경우 서비스의 엔드포인트를 살펴보십시오. 엔드포인트가 없으면 서비스의 선택기가 포드를 일치시키지 않습니다. 엔드포인트가 있으면 서비스의 대상 포트 필드를 살펴보고 대상 포트가 포드에 사용된 것과 동일한지 확인하십시오.
+<pre class="pre"><code>curl &lt;cluster_IP&gt;:&lt;port&gt;</code></pre>
+
+6. Ingress 서비스의 경우 클러스터 내에서 서비스에 액세스할 수 있는지 확인하십시오.
+   1. 포드의 이름을 가져오십시오.
+     <pre class="pre"><code>kubectl get pods</code></pre>
+   2. 컨테이너에 로그인하십시오.
+     <pre class="pre"><code>kubectl exec -it &lt;pod_name&gt; -- /bin/bash</code></pre>
+   2. Ingress 서비스에 대해 지정된 URL을 curl하십시오. URL에 액세스할 수 없는 경우 클러스터와 외부 엔드포인트 간의 방화벽 문제를 확인하십시오.
+     <pre class="pre"><code>curl &lt;host_name&gt;.&lt;domain&gt;</code></pre>
+
+<br />
+
+
+## kubectl의 로컬 클라이언트 및 클라이언트 버전 식별
+
+사용자가 로컬로 실행 중인 또는 사용자의 클러스터가 실행 중인 Kubernetes CLI의 버전을 확인하려면
+다음 명령을 실행하고 버전을 확인하십시오. 
+
+```
+        kubectl version  --short
+        ```
+{: pre}
+
+출력 예: 
+
+```
+        Client Version: v1.5.6
+        Server Version: v1.5.6
+        ```
+{: screen}
+
+<br />
+
+
+## 클러스터를 작성하는 동안 IBM Bluemix Infrastructure(SoftLayer) 계정에 연결할 수 없음
 {: #cs_credentials}
 
 {: tsSymptoms}
 새 Kubernetes 클러스터를 작성할 때 다음과 같은 메시지를 수신합니다. 
 
 ```
-We were unable to connect to your {{site.data.keyword.BluSoftlayer_notm}} account. Creating a standard cluster requires that you have either a Pay-As-You-Go account that is linked to an {{site.data.keyword.BluSoftlayer_notm}} account term or that you have used the IBM
+We were unable to connect to your IBM Bluemix Infrastructure (SoftLayer) account. Creating a standard cluster requires that you have either a Pay-As-You-Go account that is linked to an IBM Bluemix Infrastructure (SoftLayer) account term or that you have used the IBM
 {{site.data.keyword.Bluemix_notm}} Container Service CLI to set your {{site.data.keyword.Bluemix_notm}} Infrastructure API keys.
 ```
 {: screen}
 
 {: tsCauses}
-연결되지 않은 {{site.data.keyword.Bluemix_notm}} 계정이 있는 사용자는 새 종량과금제 계정을 작성하거나 {{site.data.keyword.Bluemix_notm}} CLI를 사용하여 {{site.data.keyword.BluSoftlayer_notm}} API 키를 수동으로 추가해야 합니다. 
+연결되지 않은 {{site.data.keyword.Bluemix_notm}} 계정이 있는 사용자는 새 종량과금제 계정을 작성하거나 {{site.data.keyword.Bluemix_notm}} CLI를 사용하여 IBM Bluemix Infrastructure(SoftLayer) API 키를 수동으로 추가해야 합니다.
 
 {: tsResolve}
 {{site.data.keyword.Bluemix_notm}} 계정의 신임 정보를 추가하려면 다음을 수행하십시오.
 
-1.  {{site.data.keyword.BluSoftlayer_notm}} 관리자에게 문의하여 {{site.data.keyword.BluSoftlayer_notm}} 사용자 이름 및 API 키를 확보하십시오. 
+1.  IBM Bluemix Infrastructure(SoftLayer) 관리자에게 문의하여 IBM Bluemix Infrastructure(SoftLayer) 사용자 이름과 API 키를 얻으십시오.
 
-    **참고:** 표준 클러스터를 작성하려면 사용하는 {{site.data.keyword.BluSoftlayer_notm}} 계정을 수퍼유저 권한으로 설정해야 합니다. 
+    **참고:** 표준 클러스터를 작성하려면 사용하는 IBM Bluemix Infrastructure(SoftLayer) 계정을 수퍼유저 권한으로 설정해야 합니다.
 
 2.  신임 정보를 추가하십시오. 
 
@@ -195,6 +264,8 @@ We were unable to connect to your {{site.data.keyword.BluSoftlayer_notm}} accoun
   ```
   {: pre}
 
+<br />
+
 
 ## SSH로 작업자 노드에 액세스하는 데 실패
 {: #cs_ssh_worker}
@@ -207,6 +278,8 @@ SSH 연결을 사용하여 작업자 노드에 액세스할 수 없습니다.
 
 {: tsResolve}
 실행해야 하는 일회성 조치에 대한 모든 노드 또는 작업에 대해 실행해야 하는 전체 항목에 대해 [DaemonSets![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)를 사용하십시오.
+
+<br />
 
 
 ## 포드가 보류 상태를 유지함
@@ -255,31 +328,41 @@ kubectl get nodes
 
 5.  작업자 노드를 완전히 배치한 후에도 포드가 계속 **보류** 상태를 유지하면 [Kubernetes 문서![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending)를 검토하여 보류 상태인 포드의 추가 문제점을 해결할 수 있습니다.
 
-## provision_failed 메시지가 표시되면서 작업자 노드 작성 실패
-{: #cs_pod_space}
+<br />
+
+
+## 포드가 계속 작성 중 상태에 있음
+{: #stuck_creating_state}
 
 {: tsSymptoms}
-Kubernetes 클러스터를 작성하거나 작업자 노드를 추가할 때 provision_failed 상태가 표시됩니다. 다음 명령을 실행하십시오.
-
-```
-bx cs worker-get <WORKER_NODE_ID>
-```
-{: pre}
-
-다음과 같은 메시지가 표시됩니다. 
-
-```
-SoftLayer_Exception_Virtual_Host_Pool_InsufficientResources: Could not place order. There are insufficient resources behind router bcr<router_ID> to fulfill the request for the following guests: kube-<location>-<worker_node_ID>-w1 (HTTP 500)
-```
-{: screen}
+`kubectl get pods -o wide`를 실행할 때 동일한 작업자 노드에서 실행 중인 여러 포드가 계속 `ContainerCreating` 상태에 있음을 알게 됩니다.
 
 {: tsCauses}
-{{site.data.keyword.BluSoftlayer_notm}}에 지금 작업자 노드를 프로비저닝하기에 충분한 용량이 없을 수 있습니다. 
+작업자 노드의 파일 시스템은 읽기 전용입니다.
 
 {: tsResolve}
-옵션 1: 다른 위치에서 클러스터를 작성하십시오. 
+1. 작업자 노드 또는 컨테이너에 저장될 수 있는 데이터를 백업하십시오.
+2. 다음 명령을 실행하여 작업 노드를 다시 빌드하십시오.
 
-옵션 2: {{site.data.keyword.BluSoftlayer_notm}}에 대해 지원 문제를 열고 해당 위치의 용량 가용성에 대해 질문하십시오. 
+<pre class="pre"><code>bx cs worker-reload &lt;cluster_name&gt; &lt;worker_id&gt;</code></pre>
+
+<br />
+
+
+## 컨테이너가 시작되지 않음
+{: #containers_do_not_start}
+
+{: tsSymptoms}
+포드가 클러스터에 배치되지만 컨테이너가 시작되지 않습니다.
+
+{: tsCauses}
+레지스트리 할당량에 도달하면 컨테이너가 시작되지 않을 수 있습니다.
+
+{: tsResolve}
+[{{site.data.keyword.registryshort_notm}}의 스토리지를 비우십시오.](../services/Registry/registry_quota.html#registry_quota_freeup)
+
+<br />
+
 
 ## 제한시간 초과로 인해 새 작업자 노드에서 포드에 액세스하는 데 실패
 {: #cs_nodes_duplicate_ip}
@@ -339,11 +422,14 @@ SoftLayer_Exception_Virtual_Host_Pool_InsufficientResources: Could not place ord
 
 삭제된 노드는 더 이상 Calico에 나열되지 않습니다.
 
+<br />
+
+
 ## 작업자 노드를 연결하는 데 실패
 {: #cs_firewall}
 
 {: tsSymptoms}
-kubectl proxy가 실패하거나 클러스터의 서비스에 액세스하려고 할 때 다음 오류 메시지 중 하나가 표시되면서 연결에 실패합니다. 
+작업자 노드를 연결할 수 없는 경우 다양한 증상이 나타날 수 있습니다. kubectl proxy가 실패하거나 클러스터의 서비스에 액세스하려고 할 때 다음 메시지 중 하나가 표시되면서 연결에 실패합니다. 
 
   ```
   Connection refused
@@ -360,36 +446,29 @@ kubectl proxy가 실패하거나 클러스터의 서비스에 액세스하려고
   ```
   {: screen}
 
-또는 kubectl exec, attach 또는 logs를 사용할 때 다음 오류를 수신합니다. 
+kubectl exec, attach 또는 logs를 실행하는 경우 다음 메시지가 표시될 수 있습니다.
 
   ```
   Error from server: error dialing backend: dial tcp XXX.XXX.XXX:10250: getsockopt: connection timed out
   ```
   {: screen}
 
-또는 kubectl proxy가 성공하지만 대시보드를 사용할 수 없을 때는 다음 오류를 수신합니다. 
+kubectl proxy가 성공하지만 대시보드를 사용할 수 없는 경우 다음 메시지가 표시될 수 있습니다.
 
   ```
   timeout on 172.xxx.xxx.xxx
   ```
   {: screen}
 
-또는 작업자 노드가 다시 로드 루프에서 고착 상태에 빠진 경우.
+
 
 {: tsCauses}
-{{site.data.keyword.BluSoftlayer_notm}} 계정에서 기존 방화벽 설정을 사용자 정의했거나 추가 방화벽을 설정했을 수 있습니다. {{site.data.keyword.containershort_notm}}에서는 작업자 노드와 Kubernetes 마스터 간의 양방향 통신을 허용하기 위해 특정 IP 주소와 포트를 열도록 요구합니다. 
+IBM Bluemix Infrastructure(SoftLayer) 계정에서 기존 방화벽 설정을 사용자 정의했거나 추가 방화벽을 설정했을 수 있습니다. {{site.data.keyword.containershort_notm}}에서는 작업자 노드와 Kubernetes 마스터 간의 양방향 통신을 허용하기 위해 특정 IP 주소와 포트를 열도록 요구합니다. 다른 이유는 작업자 노드가 다시 로드 루프에서 고착 상태에 빠졌기 때문일 수 있습니다.
 
 {: tsResolve}
 이 태스크에는 [관리자 액세스 정책](cs_cluster.html#access_ov)이 필요합니다. 현재 [액세스 정책](cs_cluster.html#view_access)을 확인하십시오. 
 
 사용자 정의된 방화벽에서 다음 포트와 IP 주소를 여십시오. 
-```
-TCP port 443 FROM '<each_worker_node_publicIP>' TO registry.ng.bluemix.net, apt.dockerproject.org
-```
-{: pre}
-
-
-<!--Inbound left for existing clusters. Once existing worker nodes are reloaded, users only need the Outbound information, which is found in the regular docs.-->
 
 1.  클러스터에서 모든 작업자 노드에 대한 공인 IP 주소를 기록해 놓으십시오. 
 
@@ -398,99 +477,148 @@ TCP port 443 FROM '<each_worker_node_publicIP>' TO registry.ng.bluemix.net, apt.
   ```
   {: pre}
 
-2.  방화벽에서 작업자 노드와 양방향으로 다음 연결을 허용하십시오. 
+2.  작업자 노드로부터의 아웃바운드 연결을 위한 방화벽에서 소스 작업자 노드에서 대상 TCP/UDP 포트 범위 20000-32767 및 `<each_worker_node_publicIP>`의 포트 443과 다음 IP 주소 및 네트워크 그룹으로의 발신 네트워크 트래픽을 허용하십시오.
+    - **중요**: 부트스트랩 프로세스 중에 로드를 밸런싱하려면 포트 443으로의 발신 트래픽과 지역 내의 모든 위치 간 발신 트래픽을 허용해야 합니다. 예를 들어,
+클러스터가 미국 남부에 있는 경우 포트 443에서 dal10 및 dal12로의 트래픽과 dal10 및 dal12 간 트래픽을 허용해야 합니다.
+    <p>
+  <table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
+      <thead>
+      <th>지역</th>
+      <th>위치</th>
+      <th>IP 주소</th>
+      </thead>
+    <tbody>
+      <tr>
+         <td>AP 남부</td>
+         <td>mel01<br>syd01</td>
+         <td><code>168.1.97.67</code><br><code>168.1.8.195</code></td>
+      </tr>
+      <tr>
+         <td>중앙 유럽</td>
+         <td>ams03<br>fra02</td>
+         <td><code>169.50.169.110</code><br><code>169.50.56.174</code></td>
+        </tr>
+      <tr>
+        <td>영국 남부</td>
+        <td>lon02<br>lon04</td>
+        <td><code>159.122.242.78</code><br><code>158.175.65.170</code></td>
+      </tr>
+      <tr>
+        <td>미국 동부</td>
+         <td>wdc06<br>wdc07</td>
+         <td><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+      </tr>
+      <tr>
+        <td>미국 남부</td>
+        <td>dal10<br>dal12<br>dal13</td>
+        <td><code>169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
+      </tr>
+      </tbody>
+    </table>
+</p>
+
+3.  작업자 노드에서 {{site.data.keyword.registrylong_notm}}로의 발신 네트워크 트래픽을 허용하십시오.
+    - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
+    - 트래픽을 허용하려는 레지스트리 지역에 대한 모든 주소로 <em>&lt;registry_publicIP&gt;</em>를 대체하십시오. <p>      
+<table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
+      <thead>
+        <th colspan=2><img src="images/idea.png"/> 레지스트리 IP 주소</th>
+        </thead>
+      <tbody>
+        <tr>
+          <td>registry.au-syd.bluemix.net</td>
+          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
+        </tr>
+        <tr>
+          <td>registry.eu-de.bluemix.net</td>
+          <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></td>
+         </tr>
+         <tr>
+          <td>registry.eu-gb.bluemix.net</td>
+          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></td>
+         </tr>
+         <tr>
+          <td>registry.ng.bluemix.net</td>
+          <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></td>
+         </tr>
+        </tbody>
+      </table>
+</p>
+
+4.  선택사항: 작업자 노드에서 {{site.data.keyword.monitoringlong_notm}} 및 {{site.data.keyword.loganalysislong_notm}} 서비스로의 발신 네트워크 트래픽을 허용하십시오.
+    - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
+    - 트래픽을 허용하려는 모니터링 지역에 대한 모든 주소로 <em>&lt;monitoring_publicIP&gt;</em>를 대체하십시오.
+      <p><table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
+      <thead>
+        <th colspan=2><img src="images/idea.png"/> 모니터링 공인 IP 주소</th>
+        </thead>
+      <tbody>
+        <tr>
+         <td>metrics.eu-de.bluemix.net</td>
+         <td><code>159.122.78.136/29</code></td>
+        </tr>
+        <tr>
+         <td>metrics.eu-gb.bluemix.net</td>
+         <td><code>169.50.196.136/29</code></td>
+        </tr>
+        <tr>
+          <td>metrics.ng.bluemix.net</td>
+          <td><code>169.47.204.128/29</code></td>
+         </tr>
+         
+        </tbody>
+      </table>
+</p>
+    - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
+    - 트래픽을 허용하려는 로깅 지역에 대한 모든 주소로 <em>&lt;logging_publicIP&gt;</em>를 대체하십시오.
+      <p><table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
+      <thead>
+        <th colspan=2><img src="images/idea.png"/> 로깅 공인 IP 주소</th>
+        </thead>
+      <tbody>
+        <tr>
+         <td>ingest.logging.eu-de.bluemix.net</td>
+         <td><code>169.50.25.125</code></td>
+        </tr>
+        <tr>
+         <td>ingest.logging.eu-gb.bluemix.net</td>
+         <td><code>169.50.115.113</code></td>
+        </tr>
+        <tr>
+          <td>ingest.logging.ng.bluemix.net</td>
+          <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
+         </tr>
+        </tbody>
+      </table>
+</p>
+
+5. 사설 방화벽이 있는 경우 적절한 IBM Bluemix Infrastructure(SoftLayer) 사설 IP 범위를 허용하십시오. [이 링크](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)의 **백엔드(사설) 네트워크** 섹션부터 참조하십시오.
+    - 사용 중인 [지역 내의 위치](cs_regions.html#locations)를 모두 추가하십시오.
+    - dal01 위치(데이터 센터)를 추가해야 합니다.
+    - 클러스터 부트스트랩 프로세스를 허용하려면 포트 80 및 443을 여십시오.
+
+<br />
+
+
+## 작업자 노드를 업데이트하거나 다시 로드한 후 중복 노드 및 포드가 표시됨
+{: #cs_duplicate_nodes}
+
+{: tsSymptoms}
+`kubectl get nodes`를 실행할 때 **NotReady** 상태의 중복된 작업자 노드가 표시됩니다. **NotReady** 상태의 작업자 노드에는 공인 IP 주소가 있지만 **Ready** 상태의 작업자 노드에는 사설 IP 주소가 있습니다.
+
+{: tsCauses}
+이전 클러스터에서는 작업 노드가 클러스터의 공인 IP 주소별로 나열되었습니다. 이제 작업자 노드가 클러스터의 사설 IP 주소별로 나열됩니다. 노드를 다시 로드하거나 업데이트할 때 IP 주소가 변경되지만 공인 IP 주소에 대한 참조는 그대로 유지됩니다.
+
+{: tsResolve}
+이러한 중복 항목으로 인해 서비스 중단이 발생하지는 않지만 API 서버에서 이전 작업자 노드 참조를 제거해야 합니다.
 
   ```
-  TCP port 443 FROM '<each_worker_node_publicIP>' TO registry.ng.bluemix.net, apt.dockerproject.org
+  kubectl delete node <node_name1> <node_name2>
   ```
   {: pre}
 
-    <ul><li>작업자 노드에 대한 INBOUND 연결의 경우 다음 소스 네트워크 그룹과 IP 주소에서 대상 TCP/UDP 포트 10250 및 `<public_IP_of _each_worker_node>`로의 수신 네트워크 트래픽을 허용하십시오.</br>
-    
-    <table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
-      <thead>
-      <th colspan=2><img src="images/idea.png"/> 인바운드 IP 주소</th>
-      </thead>
-    <tbody>
-      <tr>
-        <td>ams03</td>
-        <td><code>169.50.144.128/28</code></br><code>169.50.169.104/29</code></br><code>169.50.185.32/27</code></td>
-      </tr>
-      <tr>
-        <td>dal10</td>
-        <td><code>169.46.7.232/29 </code></br><code>169.48.138.64/26</code></br><code>169.48.180.128/25</code></td>
-       </tr>
-       <tr>
-        <td>dal12</td>
-        <td><code>169.47.70.8/29</code></br><code>169.47.79.192/26</code></br><code>169.47.126.192/27</code></td>
-       </tr>
-       <tr>
-        <td>fra02</td>
-        <td><code>169.50.48.160/28</code></br><code>169.50.56.168/29</code></br><code>169.50.58.160/27</code></td>
-       </tr>
-      </tbody>
-      <tr>
-       <td>lon02</td>
-       <td><code>159.122.242.78</code></td>
-      </tr>
-      <tr>
-       <td>lon04</td>
-       <td><code>158.175.68.192/26</code></td>
-      </tr>
-      <tr>
-       <td>syd01</td>
-       <td><code>168.1.209.192/26</code></td>
-      </tr>
-      <tr>
-       <td>syd04</td>
-       <td><code>130.198.67.0/26</code></td>
-      </tr>
-    </table>
+<br />
 
-    <li>작업자 노드에서의 OUTBOUND 연결의 경우 `<each_worker_node_publicIP>`의 소스 작업자 노드에서 대상 TCP/UDP 포트 범위 20000-32767 및 다음 IP 주소와 네트워크 그룹으로의 발신 네트워크 트래픽을 허용하십시오.</br>
-    
-    <table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
-      <thead>
-      <th colspan=2><img src="images/idea.png"/> 아웃바운드 IP 주소</th>
-      </thead>
-    <tbody>
-      <tr>
-        <td>ams03</td>
-        <td><code>169.50.169.110</code></td>
-      </tr>
-      <tr>
-        <td>dal10</td>
-        <td><code>169.46.7.238</code></td>
-       </tr>
-       <tr>
-        <td>dal12</td>
-        <td><code>169.47.70.10</code></td>
-       </tr>
-       <tr>
-        <td>fra02</td>
-        <td><code>169.50.56.174</code></td>
-       </tr>
-      </tbody>
-      <tr>
-       <td>lon02</td>
-       <td><code>159.122.242.78</code></td>
-      </tr>
-      <tr>
-       <td>lon04</td>
-       <td><code>158.175.65.170</code></td>
-      </tr>
-      <tr>
-       <td>syd01</td>
-       <td><code>168.1.8.195</code></td>
-      </tr>
-      <tr>
-       <td>syd04</td>
-       <td><code>130.198.64.19</code></td>
-      </tr>
-    </table>
-</ul>
-    
-    
 
 ## Ingress를 통해 앱에 연결하는 데 실패
 {: #cs_ingress_fails}
@@ -602,6 +730,9 @@ Ingress 문제점을 해결하려면 다음을 수행하십시오.
 
     3.  Ingress 제어기 로그에서 오류 메시지를 검색하십시오.
 
+<br />
+
+
 ## 로드 밸런서 서비스를 통해 앱에 연결하는 데 실패
 {: #cs_loadbalancer_fails}
 
@@ -644,7 +775,7 @@ Ingress 문제점을 해결하려면 다음을 수행하십시오.
   ```
   {: pre}
 
-    1.  서비스 유형으로 **LoadBlanacer**를 정의했는지 확인하십시오.
+    1.  **LoadBalancer**를 서비스 유형으로 정의했는지 확인하십시오.
     2.  앱을 배치할 때 **label/metadata** 섹션에서 사용한 내용과 동일한 **<selectorkey>** 및 **<selectorvalue>**를 사용했는지 확인하십시오.
     3.  앱에서 청취하는 **port**를 사용했는지 확인하십시오.
 
@@ -674,6 +805,41 @@ Ingress 문제점을 해결하려면 다음을 수행하십시오.
 
     2.  사용자 정의 도메인이 포인터 레코드(PTR)에 있는 로드 밸런서 서비스의 포터블 공인 IP 주소에 맵핑되었는지 확인하십시오.
 
+<br />
+
+
+## Calico CLI 구성에 대한 ETCD URL 검색 실패
+{: #cs_calico_fails}
+
+{: tsSymptoms}
+`<ETCD_URL>`을 검색하여 [네트워크 정책을 추가](cs_security.html#adding_network_policies)할 때 `calico-config not found` 오류 메시지가 수신됩니다.
+
+{: tsCauses}
+클러스터가 (Kubernetes 버전 1.7)[cs_versions.html] 이상이 아닙니다.
+
+{: tsResolve}
+(클러스터를 업데이트하거나)[cs_cluster.html#cs_cluster_update] 이전 버전의 Kubernetes와 호환 가능한 명령을 사용하여 `<ETCD_URL>`을 검색하십시오.
+
+`<ETCD_URL>`을 검색하려면 다음 명령 중 하나를 실행하십시오.
+
+- Linux 및 OS X:
+
+    ```
+              kubectl describe pod -n kube-system `kubectl get pod -n kube-system | grep calico-policy-controller | awk '{print $1}'` | grep ETCD_ENDPOINTS | awk '{print $2}'
+              ```
+    {: pre}
+
+- Windows:<ol>
+    <li> kube-system 네임스페이스에서 포드의 목록을 가져오고 Calico 제어기 포드를 찾으십시오. </br><pre class="codeblock"><code>kubectl get pod -n kube-system</code></pre></br>예:</br><pre class="screen"><code>calico-policy-controller-1674857634-k2ckm</code></pre>
+    <li> Calico 제어기 포드의 세부사항을 보십시오. </br> <pre class="codeblock"><code>kubectl describe pod -n kube-system calico-policy-controller-&lt;ID&gt;</code></pre>
+    <li> ETCD 엔드포인트 값을 찾으십시오. 예: <code>https://169.1.1.1:30001</code>
+            </ol>
+
+`<ETCD_URL>`을 검색할 때 (네트워크 정책 추가)[cs_security.html#adding_network_policies]에 나열된 단계를 계속하십시오.
+
+<br />
+
+
 ## 알려진 문제점
 {: #cs_known_issues}
 
@@ -690,8 +856,8 @@ Ingress 문제점을 해결하려면 다음을 수행하십시오.
     <dd>보안상의 이유 때문에 Kubernetes 대시보드 NodePort 서비스가 사용되지 않습니다. Kubernetes 대시보드에 액세스하려면 다음 명령을 실행하십시오. </br><pre class="codeblock"><code>kubectl proxy</code></pre></br>그러면 `http://localhost:8001/ui`에서 Kubernetes 대시보드에 액세스할 수 있습니다.</dd>
   <dt>로드 밸런서의 서비스에서 제한사항</dt>
     <dd><ul><li>프라이빗 VLAN에서는 로드 밸런싱을 사용할 수 없습니다. <li>service.beta.kubernetes.io/external-traffic 및 service.beta.kubernetes.io/healthcheck-nodeport 서비스 어노테이션을 사용할 수 없습니다. 이러한 어노테이션에 대한 자세한 정보는 [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tutorials/services/source-ip/)을 참조하십시오.</ul></dd>
-  <dt>수평 Auto-Scaling이 작동하지 않음</dt>
-    <dd>보안상의 이유 때문에 Heapster(10255)에서 사용하는 표준 포트는 모든 작업 노드에서 닫혀 있습니다. 이 포트가 닫혀 있으므로 Heapster에서 작업자 노드에 대한 메트릭을 보고할 수 없으며 Kubernetes 문서의 [수평 포드 Autoscaling![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)에 설명되어 있는 대로 수평 autoscaling이 작동할 수 없습니다.</dd>
+  <dt>일부 클러스터에서 수평 Auto-Scaling이 작동하지 않음</dt>
+    <dd>보안상의 이유 때문에 Heapster(10255)에서 사용하는 표준 포트는 이전 클러스터의 모든 작업 노드에서 닫혀 있습니다. 이 포트가 닫혀 있으므로 Heapster에서 작업자 노드에 대한 메트릭을 보고할 수 없으며 Kubernetes 문서의 [수평 포드 Autoscaling![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)에 설명되어 있는 대로 수평 autoscaling이 작동할 수 없습니다. 이 문제를 방지하려면 다른 클러스터를 작성하십시오.</dd>
 </dl>
 
 ### 지속적 스토리지

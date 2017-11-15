@@ -3,21 +3,28 @@
 
 {: .toc subcollection="containers" audience="compute" href="/docs/containers/index.html"}
 IBM Bluemix Container Service
-    
+
     {: .navgroup id="learn"}
     container_index.md
     cs_ov.md
     cs_planning.md
-    cs_tutorials.md
+
+    {: .topicgroup}
+    Tutoriais
+        cs_tutorials.md
+        cs_tutorials_apps.md
+
     cs_security.md
     {: .navgroup-end}
 
     {: .navgroup id="reference"}
     cs_cli_reference.md
+    cs_versions.md
+    cs_regions.md
     cs_rellinks.md
     {: .navgroup-end}
 
-    {: .navgroup id="howto"}    
+    {: .navgroup id="howto"}
     cs_cli_install.md
     cs_cluster.md
     cs_apps.md
@@ -26,17 +33,16 @@ IBM Bluemix Container Service
         [Sobre contêineres únicos e escaláveis](container_ov.html)
         [Planejando contêineres únicos e escaláveis](container_planning.html)
         [Segurança para contêineres únicos e escaláveis](container_security.html)
-        [Configurando a CLI para contêineres únicos e escaláveis](container_cli_cfic_install.html)
-        [Imagens IBM](container_images.html)
-        [Executando tarefas de curto prazo como contêineres](container_single_ui.html)
-        [Executando grupos altamente disponíveis](container_ha.html)
+        [Configurando a CLI para contêineres únicos e escaláveis](container_cli_cfic_install.html) [Imagens IBM](../services/RegistryImages/index.html)
+        [Executando tarefas de curto prazo como contêineres](container_single_ui.html) [Executando grupos altamente disponíveis](container_ha.html)
         [Armazenando dados persistentes para contêineres únicos e escaláveis](container_volumes_ov.html)
         [Integrando serviços a contêineres únicos e escaláveis](container_integrations.html)
-        [Referência da CLI para contêineres únicos e escaláveis](container_cli_reference_cfic.html)
-        [Resolução de problemas de contêineres únicos e escaláveis](container_troubleshoot.html)
+        [Referência de CLI para contêineres únicos e escaláveis](container_cli_reference_cfic.html)
+        [Resolvendo problemas de contêineres únicos e escaláveis](container_troubleshoot.html)
     {: .navgroup-end}
-    
+
     {: .navgroup id="help"}
     cs_troubleshoot.md
+    cs_popular_topics.md
     {: .navgroup-end}
 

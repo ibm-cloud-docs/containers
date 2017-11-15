@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-08-14"
+lastupdated: "2017-10-12"
 
 ---
 
@@ -22,6 +22,9 @@ lastupdated: "2017-08-14"
 您可以使用 {{site.data.keyword.containershort_notm}} CLI 或 API 來建立及管理 Kubernetes 叢集。
 {:shortdesc}
 
+<br />
+
+
 ## 安裝 CLI
 {: #cs_cli_install_steps}
 
@@ -32,7 +35,7 @@ lastupdated: "2017-08-14"
 
 -   {{site.data.keyword.Bluemix_notm}} CLI 0.5.0 版或更新版本
 -   {{site.data.keyword.containershort_notm}} 外掛程式
--   Kubernetes CLI 1.5.6 版或更新版本
+-   Kubernetes CLI 1.7.4 版或更新版本
 -   選用項目：{{site.data.keyword.registryshort_notm}} 外掛程式
 -   選用項目：Docker 1.9 版或更新版本
 
@@ -50,9 +53,7 @@ lastupdated: "2017-08-14"
 
     **附註：**如果您具有聯合 ID，請使用 `bx login --sso` 來登入 {{site.data.keyword.Bluemix_notm}} CLI。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。若沒有 `--sso` 時登入失敗，而有 `--sso` 選項時登入成功，即表示您有聯合 ID。
 
-
-
-4.  若要建立 Kubernetes 叢集，以及管理工作者節點，請安裝 {{site.data.keyword.containershort_notm}} 外掛程式。使用 {{site.data.keyword.containershort_notm}} 外掛程式來執行指令的字首是 `bx cs`。
+3.  若要建立 Kubernetes 叢集，以及管理工作者節點，請安裝 {{site.data.keyword.containershort_notm}} 外掛程式。使用 {{site.data.keyword.containershort_notm}} 外掛程式來執行指令的字首是 `bx cs`。
 
     ```
     bx plugin install container-service -r {{site.data.keyword.Bluemix_notm}}
@@ -68,15 +69,15 @@ lastupdated: "2017-08-14"
 
     在結果中，{{site.data.keyword.containershort_notm}} 外掛程式會顯示為 container-service。
 
-5.  若要檢視本端版本的 Kubernetes 儀表板，以及將應用程式部署至叢集，請[安裝 Kubernetes CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。使用 Kubernetes CLI 來執行指令的字首是 `kubectl`。
+4.  若要檢視本端版本的 Kubernetes 儀表板，以及將應用程式部署至叢集，請[安裝 Kubernetes CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。使用 Kubernetes CLI 來執行指令的字首是 `kubectl`。
 
-    1.  下載 Kubernetes CLI。
+    1.  如需完整的功能相容性，請下載與您計劃使用之 Kubernetes 叢集版本相符的 Kubernetes CLI 版本。現行 {{site.data.keyword.containershort_notm}} 預設 Kubernetes 版本為 1.7.4。
 
-        OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.5.6/bin/darwin/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.5.6/bin/darwin/amd64/kubectl)
+        OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
 
-        Linux：[https://storage.googleapis.com/kubernetes-release/release/v1.5.6/bin/linux/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.5.6/bin/linux/amd64/kubectl)
+        Linux：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
 
-        Windows：[https://storage.googleapis.com/kubernetes-release/release/v1.5.6/bin/windows/amd64/kubectl.exe ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.5.6/bin/windows/amd64/kubectl.exe)
+        Windows：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
 
         **提示：**如果您使用的是 Windows，請在與 {{site.data.keyword.Bluemix_notm}} CLI 相同的目錄中安裝 Kubernetes CLI。當您稍後執行指令時，此設定可為您省去一些檔案路徑變更。
 
@@ -84,7 +85,7 @@ lastupdated: "2017-08-14"
         1.  將執行檔移至 `/usr/local/bin` 目錄。
 
             ```
-            mv /<path_to_file>/kubectl/usr/local/bin/kubectl
+            mv /<path_to_file>/kubectl /usr/local/bin/kubectl
             ```
             {: pre}
 
@@ -102,14 +103,14 @@ lastupdated: "2017-08-14"
             ```
             {: screen}
 
-        3.  將二進位檔轉換成執行檔。
+        3.  使檔案成為可執行檔。
 
             ```
             chmod +x /usr/local/bin/kubectl
             ```
             {: pre}
 
-6.  若要管理專用映像檔儲存庫，請安裝 {{site.data.keyword.registryshort_notm}} 外掛程式。您可以使用此外掛程式，在多方承租戶、高可用性並且由 IBM 所管理的可擴充專用映像檔登錄中設定您自己的名稱空間，以及儲存 Docker 映像檔，並將其與其他使用者共用。需要有 Docker 映像檔，才能將容器部署至叢集。執行登錄指令的字首是 `bx cr`。
+5.  若要管理專用映像檔儲存庫，請安裝 {{site.data.keyword.registryshort_notm}} 外掛程式。您可以使用此外掛程式，在多方承租戶、高可用性並且由 IBM 所管理的可擴充專用映像檔登錄中設定您自己的名稱空間，以及儲存 Docker 映像檔，並將其與其他使用者共用。需要有 Docker 映像檔，才能將容器部署至叢集。執行登錄指令的字首是 `bx cr`。
 
     ```
     bx plugin install container-registry -r {{site.data.keyword.Bluemix_notm}}
@@ -125,7 +126,7 @@ lastupdated: "2017-08-14"
 
     在結果中，外掛程式會顯示為 container-registry。
 
-7.  若要在本端建置映像檔，並將它們推送至您的登錄名稱空間，請[安裝 Docker ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.docker.com/community-edition#/download)。如果您使用的是 Windows 8 或更早版本，則可以改為安裝 [Docker Toolbox ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.docker.com/products/docker-toolbox)。Docker CLI 是用來將應用程式建置成映像檔。使用 Docker CLI 來執行指令的字首是 `docker`。
+6.  若要在本端建置映像檔，並將它們推送至您的登錄名稱空間，請[安裝 Docker ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.docker.com/community-edition#/download)。如果您使用的是 Windows 8 或更早版本，則可以改為安裝 [Docker Toolbox ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.docker.com/products/docker-toolbox)。Docker CLI 是用來將應用程式建置成映像檔。使用 Docker CLI 來執行指令的字首是 `docker`。
 
 接下來，開始[使用 {{site.data.keyword.containershort_notm}} 從 CLI 建立 Kubernetes 叢集](cs_cluster.html#cs_cluster_cli)。
 
@@ -133,146 +134,97 @@ lastupdated: "2017-08-14"
 
 -   [`bx` 指令](/docs/cli/reference/bluemix_cli/bx_cli.html)
 -   [`bx cs` 指令](cs_cli_reference.html#cs_cli_reference)
--   [`kubectl` 指令![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/user-guide/kubectl/v1.5/)
--   [`bx cr` 指令](/docs/cli/plugins/registry/index.html#containerregcli)
+-   [`kubectl` 指令![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/user-guide/kubectl/v1.7/)
+-   [`bx cr` 指令](/docs/cli/plugins/registry/index.html)
+
+<br />
+
 
 ## 配置 CLI 以執行 `kubectl`
 {: #cs_cli_configure}
 
-您可以使用 Kubernetes CLI 隨附的指令來管理 {{site.data.keyword.Bluemix_notm}} 中的叢集。Kubernetes 1.5.6 中可用的所有 `kubectl` 指令都支援與 {{site.data.keyword.Bluemix_notm}} 中的叢集搭配使用。建立叢集之後，使用環境變數將本端 CLI 的環境定義設定為該叢集。然後，您可以執行 Kubernetes `kubectl` 指令，在 {{site.data.keyword.Bluemix_notm}} 中使用您的叢集。
+您可以使用 Kubernetes CLI 隨附的指令來管理 {{site.data.keyword.Bluemix_notm}} 中的叢集。Kubernetes 1.7.4 中可用的所有 `kubectl` 指令都支援與 {{site.data.keyword.Bluemix_notm}} 中的叢集搭配使用。建立叢集之後，使用環境變數將本端 CLI 的環境定義設定為該叢集。然後，您可以執行 Kubernetes `kubectl` 指令，在 {{site.data.keyword.Bluemix_notm}} 中使用您的叢集。
 {:shortdesc}
 
 您必須先[安裝必要的 CLI](#cs_cli_install) 及[建立叢集](cs_cluster.html#cs_cluster_cli)，才能執行 `kubectl` 指令。
 
-1.  登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。
+1.  登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。若要指定 {{site.data.keyword.Bluemix_notm}} 地區，請[包括 API 端點](cs_regions.html#bluemix_regions)。
 
-    ```
-    bx login
-    ```
-    {: pre}
+      ```
+      bx login
+      ```
+      {: pre}
 
-    若要指定特定 {{site.data.keyword.Bluemix_notm}} 地區，請包括 API 端點。如果您的專用 Docker 映像檔已儲存在特定 {{site.data.keyword.Bluemix_notm}} 地區的容器登錄中，或已建立的 {{site.data.keyword.Bluemix_notm}} 服務實例，請登入此地區以存取映像檔及 {{site.data.keyword.Bluemix_notm}} 服務。
+      **附註：**如果您具有聯合 ID，請使用 `bx login --sso` 來登入 {{site.data.keyword.Bluemix_notm}} CLI。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。若沒有 `--sso` 時登入失敗，而有 `--sso` 選項時登入成功，即表示您有聯合 ID。
 
-    您登入的 {{site.data.keyword.Bluemix_notm}} 地區也會決定可以建立 Kubernetes 叢集的地區（包括可用的資料中心）。如果您未指定地區，則會將您自動登入最接近的地區。
-      -   美國南部
+  2.  選取 {{site.data.keyword.Bluemix_notm}} 帳戶。如果您被指派到多個 {{site.data.keyword.Bluemix_notm}} 組織，請選取在其中建立叢集的組織。叢集是組織特有的，但與 {{site.data.keyword.Bluemix_notm}} 空間無關。因此，您不需要選取空間。
 
-          ```
-          bx login -a api.ng.bluemix.net
-          ```
-          {: pre}
+  3.  如果您要在先前所選取 {{site.data.keyword.Bluemix_notm}} 地區以外的地區中建立或存取 Kubernetes 叢集，請[指定 {{site.data.keyword.containershort_notm}} 地區 API 端點](cs_regions.html#container_login_endpoints)。
 
-      -   雪梨
+      **附註**：如果您要在美國東部建立叢集，您必須使用 `bx cs init --host https://us-east.containers.bluemix.net` 指令來指定美國東部容器地區 API 端點。
 
-          ```
-          bx login -a api.au-syd.bluemix.net
-          ```
-          {: pre}
+  4.  列出帳戶中的所有叢集，以取得叢集的名稱。
 
-      -   德國
+      ```
+      bx cs clusters
+      ```
+      {: pre}
 
-          ```
-          bx login -a api.eu-de.bluemix.net
-          ```
-          {: pre}
-
-      -   英國
+  5.  將您建立的叢集設為此階段作業的環境定義。請在您每次使用叢集時，完成下列配置步驟。
+      1.  取得指令來設定環境變數，並下載 Kubernetes 配置檔。
 
           ```
-          bx login -a api.eu-gb.bluemix.net
+          bx cs cluster-config <cluster_name_or_id>
           ```
           {: pre}
 
-    **附註：**如果您具有聯合 ID，請使用 `bx login --sso` 來登入 {{site.data.keyword.Bluemix_notm}} CLI。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。若沒有 `--sso` 時登入失敗，而有 `--sso` 選項時登入成功，即表示您有聯合 ID。
+          下載配置檔之後，會顯示一個指令，可讓您用來將本端 Kubernetes 配置檔的路徑設定為環境變數。
 
-2.  選取 {{site.data.keyword.Bluemix_notm}} 帳戶。如果您被指派到多個 {{site.data.keyword.Bluemix_notm}} 組織，請選取在其中建立叢集的組織。叢集是組織特有的，但與 {{site.data.keyword.Bluemix_notm}} 空間無關。因此，您不需要選取空間。
+          範例：
 
-3.  如果您要在先前所選取 {{site.data.keyword.Bluemix_notm}} 地區以外的地區中建立或存取 Kubernetes 叢集，請指定此地區。例如，您可能因為下列原因而想要登入另一個 {{site.data.keyword.containershort_notm}} 地區：
-   -   您已在其中一個地區中建立 {{site.data.keyword.Bluemix_notm}} 服務或專用 Docker 映像檔，並且想要在另一個地區中將它們與 {{site.data.keyword.containershort_notm}} 搭配使用。
-   -   您要在與您登入的預設 {{site.data.keyword.Bluemix_notm}} 地區不同的地區中存取叢集。<br>
-   選擇下列 API 端點：
-        - 美國南部：
           ```
-          bx cs init --host https://us-south.containers.bluemix.net
+          export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
           ```
-          {: pre}
+          {: screen}
 
-        - 英國南部：
-          ```
-          bx cs init --host https://uk-south.containers.bluemix.net
-          ```
-          {: pre}
+      2.  複製並貼上終端機中顯示的指令，以設定 `KUBECONFIG` 環境變數。
+      3.  驗證 `KUBECONFIG` 環境變數已適當設定。
 
-        - 歐盟中部：
+          範例：
+
           ```
-          bx cs init --host https://eu-central.containers.bluemix.net
+          echo $KUBECONFIG
           ```
           {: pre}
 
-        - 亞太地區南部：
+          輸出：
           ```
-          bx cs init --host https://ap-south.containers.bluemix.net
+          /Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
           ```
-          {: pre}
+          {: screen}
 
-4.  列出帳戶中的所有叢集，以取得叢集的名稱。
+  6.  檢查 Kubernetes CLI 伺服器版本，驗證叢集已適當地執行 `kubectl` 指令。
 
-    ```
-    bx cs clusters
-    ```
-    {: pre}
+      ```
+      kubectl version  --short
+      ```
+      {: pre}
 
-5.  將您建立的叢集設為此階段作業的環境定義。請在您每次使用叢集時，完成下列配置步驟。
-    1.  取得指令來設定環境變數，並下載 Kubernetes 配置檔。
+      輸出範例：
 
-        ```
-        bx cs cluster-config <cluster_name_or_id>
-        ```
-        {: pre}
+      ```
+      Client Version: v1.7.4
+      Server Version: v1.7.4
+      ```
+      {: screen}
 
-        下載配置檔之後，會顯示一個指令，可讓您用來將本端 Kubernetes 配置檔的路徑設定為環境變數。
-
-        範例：
-
-        ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
-        ```
-        {: screen}
-
-    2.  複製並貼上終端機中顯示的指令，以設定 `KUBECONFIG` 環境變數。
-    3.  驗證 `KUBECONFIG` 環境變數已適當設定。
-
-        範例：
-
-        ```
-        echo $KUBECONFIG
-        ```
-        {: pre}
-
-        輸出：
-        ```
-        /Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
-        ```
-        {: screen}
-
-6.  檢查 Kubernetes CLI 伺服器版本，驗證叢集已適當地執行 `kubectl` 指令。
-
-    ```
-    kubectl version  --short
-    ```
-    {: pre}
-
-    輸出範例：
-
-    ```
-    Client Version: v1.5.6
-    Server Version: v1.5.6
-    ```
-    {: screen}
-
-
-您現在可以執行 `kubectl` 指令，以在 {{site.data.keyword.Bluemix_notm}} 中管理叢集。如需完整指令清單，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/user-guide/kubectl/v1.5/)。
+您現在可以執行 `kubectl` 指令，以在 {{site.data.keyword.Bluemix_notm}} 中管理叢集。如需完整指令清單，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/user-guide/kubectl/v1.7/)。
 
 **提示：**如果您使用的是 Windows，但未在與 {{site.data.keyword.Bluemix_notm}} CLI 相同的目錄中安裝 Kubernetes CLI，則必須將目錄切換至 Kubernetes CLI 安裝所在的路徑，才能順利執行 `kubectl` 指令。
+
+
+<br />
+
 
 ## 更新 CLI
 {: #cs_cli_upgrade}
@@ -284,54 +236,23 @@ lastupdated: "2017-08-14"
 
 -   {{site.data.keyword.Bluemix_notm}} CLI 0.5.0 版或更新版本
 -   {{site.data.keyword.containershort_notm}} 外掛程式
--   Kubernetes CLI 1.5.6 版或更新版本
+-   Kubernetes CLI 1.7.4 版或更新版本
 -   {{site.data.keyword.registryshort_notm}} 外掛程式
 -   Docker 1.9 版或更新版本
 
 <br>
 若要更新 CLI，請執行下列動作：
+
 1.  更新 {{site.data.keyword.Bluemix_notm}} CLI。下載[最新版本 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://clis.ng.bluemix.net/ui/home.html)，並執行安裝程式。
 
-2.  登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。
+2. 登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。若要指定 {{site.data.keyword.Bluemix_notm}} 地區，請[包括 API 端點](cs_regions.html#bluemix_regions)。
 
     ```
     bx login
     ```
-     {: pre}
+    {: pre}
 
-    若要指定特定 {{site.data.keyword.Bluemix_notm}} 地區，請包括 API 端點。如果您的專用 Docker 映像檔已儲存在特定 {{site.data.keyword.Bluemix_notm}} 地區的容器登錄中，或已建立的 {{site.data.keyword.Bluemix_notm}} 服務實例，請登入此地區以存取映像檔及 {{site.data.keyword.Bluemix_notm}} 服務。
-
-    您登入的 {{site.data.keyword.Bluemix_notm}} 地區也會決定可以建立 Kubernetes 叢集的地區（包括可用的資料中心）。如果您未指定地區，則會將您自動登入最接近的地區。
-
-    -   美國南部
-
-        ```
-        bx login -a api.ng.bluemix.net
-        ```
-        {: pre}
-
-    -   雪梨
-
-        ```
-        bx login -a api.au-syd.bluemix.net
-        ```
-        {: pre}
-
-    -   德國
-
-        ```
-        bx login -a api.eu-de.bluemix.net
-        ```
-        {: pre}
-
-    -   英國
-
-        ```
-        bx login -a api.eu-gb.bluemix.net
-        ```
-        {: pre}
-
-        **附註：**如果您具有聯合 ID，請使用 `bx login --sso` 來登入 {{site.data.keyword.Bluemix_notm}} CLI。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。若沒有 `--sso` 時登入失敗，而有 `--sso` 選項時登入成功，即表示您有聯合 ID。
+     **附註：**如果您具有聯合 ID，請使用 `bx login --sso` 來登入 {{site.data.keyword.Bluemix_notm}} CLI。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。若沒有 `--sso` 時登入失敗，而有 `--sso` 選項時登入成功，即表示您有聯合 ID。
 
 3.  更新 {{site.data.keyword.containershort_notm}} 外掛程式。
     1.  從 {{site.data.keyword.Bluemix_notm}} 外掛程式儲存庫中安裝更新。
@@ -358,21 +279,21 @@ lastupdated: "2017-08-14"
         {: pre}
 
 4.  更新 Kubernetes CLI。
-    1.  下載 Kubernetes CLI。
+    1.  更新至與您計劃使用之 Kubernetes 叢集版本相符的 Kubernetes CLI 版本。現行 {{site.data.keyword.containershort_notm}} 預設 Kubernetes 版本為 1.7.4。
 
-        OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.5.6/bin/darwin/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.5.6/bin/darwin/amd64/kubectl)
+        OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
 
-        Linux：[https://storage.googleapis.com/kubernetes-release/release/v1.5.6/bin/linux/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.5.6/bin/linux/amd64/kubectl)
+        Linux：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
 
-        Windows：[https://storage.googleapis.com/kubernetes-release/release/v1.5.6/bin/windows/amd64/kubectl.exe ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.5.6/bin/windows/amd64/kubectl.exe)
+        Windows：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
 
         **提示：**如果您使用的是 Windows，請在與 {{site.data.keyword.Bluemix_notm}} CLI 相同的目錄中安裝 Kubernetes CLI。當您稍後執行指令時，此設定可為您省去一些檔案路徑變更。
 
     2.  若為 OSX 及 Linux 使用者，請完成下列步驟。
-        1.  將執行檔移至 /usr/local/bin 目錄。
+        1.  將執行檔移至 `/usr/local/bin` 目錄。
 
             ```
-            mv /<path_to_file>/kubectl/usr/local/bin/kubectl
+            mv /<path_to_file>/kubectl /usr/local/bin/kubectl
             ```
             {: pre}
 
@@ -390,7 +311,7 @@ lastupdated: "2017-08-14"
             ```
             {: screen}
 
-        3.  將二進位檔轉換成執行檔。
+        3.  使檔案成為可執行檔。
 
             ```
             chmod +x /usr/local/bin/kubectl
@@ -418,6 +339,9 @@ lastupdated: "2017-08-14"
     -   如果您使用 Docker Community Edition，請啟動 Docker、按一下 **Docker** 圖示，然後按一下 **Check for updates**。
     -   如果您使用 Docker Toolbox，請下載[最新版本 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.docker.com/products/docker-toolbox)，並執行安裝程式。
 
+<br />
+
+
 ## 解除安裝 CLI
 {: #cs_cli_uninstall}
 
@@ -428,7 +352,7 @@ lastupdated: "2017-08-14"
 
 
 -   {{site.data.keyword.containershort_notm}} 外掛程式
--   Kubernetes CLI 1.5.6 版或更新版本
+-   Kubernetes CLI 1.7.4 版或更新版本
 -   {{site.data.keyword.registryshort_notm}} 外掛程式
 -   Docker 1.9 版或更新版本
 
@@ -464,24 +388,12 @@ lastupdated: "2017-08-14"
 
 6.  解除安裝 Docker。根據您使用的作業系統，解除安裝 Docker 的指示會不同。
 
-    <table summary="解除安裝 Docker 的 OS 特定指示">
-     <tr>
-      <th>作業系統</th>
-      <th>鏈結</th>
-     </tr>
-     <tr>
-      <td>OSX</td>
-      <td>選擇從 [GUI 或指令行 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.docker.com/docker-for-mac/#uninstall-or-reset) 解除安裝 Docker</td>
-     </tr>
-     <tr>
-      <td>Linux</td>
-      <td>根據您使用的 Linux 發行套件，解除安裝 Docker 的指示會不同。若要解除安裝 Docker for Ubuntu，請參閱[解除安裝 Docker ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#uninstall-docker-ce)。使用此鏈結來尋找如何解除安裝適用於其他 Linux 發行套件之 Docker 的指示，方法是從導覽中選取發行套件。</td>
-     </tr>
-      <tr>
-        <td>Windows</td>
-        <td>解除安裝 [Docker Toolbox ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.docker.com/toolbox/toolbox_install_mac/#how-to-uninstall-toolbox)。</td>
-      </tr>
-    </table>
+    - [OSX ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.docker.com/docker-for-mac/#uninstall-or-reset)
+    - [Linux ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#uninstall-docker-ce)
+    - [Windows ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.docker.com/toolbox/toolbox_install_mac/#how-to-uninstall-toolbox)
+
+<br />
+
 
 ## 使用 API 自動化進行叢集部署
 {: #cs_api}
@@ -491,36 +403,76 @@ lastupdated: "2017-08-14"
 
 {{site.data.keyword.containershort_notm}} API 需要標頭資訊，您必須在 API 要求中提供它，且它會視您要使用的 API 而變。若要判斷 API 所需的標頭資訊，請參閱 [{{site.data.keyword.containershort_notm}} API 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://us-south.containers.bluemix.net/swagger-api)。
 
-下列步驟提供如何擷取此標頭資訊，以將它包括在 API 要求中的指示。
+**附註：**若要向 {{site.data.keyword.containershort_notm}} 進行鑑別，您必須提供以 {{site.data.keyword.Bluemix_notm}} 認證產生且包含建立叢集所在 {{site.data.keyword.Bluemix_notm}} 帳戶 ID 的「身分及存取管理 (IAM)」記號。根據您向 {{site.data.keyword.Bluemix_notm}} 進行鑑別的方式，您可以在下列選項之間進行選擇，以自動建立 IAM 記號。
 
-1.  擷取 IAM（身分及存取管理）存取記號。需要有 IAM 存取記號，才能登入 {{site.data.keyword.containershort_notm}}。請將 _&lt;my_bluemix_username&gt;_ 及 _&lt;my_bluemix_password&gt;_ 取代為 {{site.data.keyword.Bluemix_notm}} 認證。
+<table>
+<thead>
+<th>{{site.data.keyword.Bluemix_notm}} ID</th>
+<th>我的選項</th>
+</thead>
+<tbody>
+<tr>
+<td>未聯合 ID</td>
+<td><ul><li><strong>{{site.data.keyword.Bluemix_notm}} 使用者名稱及密碼：</strong>您可以遵循本主題的步驟，以便完全自動建立 IAM 存取記號。</li>
+<li><strong>產生 {{site.data.keyword.Bluemix_notm}} API 金鑰：</strong>作為使用 {{site.data.keyword.Bluemix_notm}} 使用者名稱和密碼的替代方案，您可以<a href="../iam/apikeys.html#manapikey" target="_blank">使用 {{site.data.keyword.Bluemix_notm}} API 金鑰</a> {{site.data.keyword.Bluemix_notm}} API 金鑰相依於為其產生金鑰的 {{site.data.keyword.Bluemix_notm}} 帳戶。您無法將 {{site.data.keyword.Bluemix_notm}} API 金鑰與不同帳戶 ID 結合在相同 IAM 記號中。若要存取使用您 {{site.data.keyword.Bluemix_notm}} API 金鑰根據帳戶以外之帳戶建立的叢集，您必須登入帳戶才能產生新的 API 金鑰。</li></ul></tr>
+<tr>
+<td>聯合 ID</td>
+<td><ul><li><strong>產生 {{site.data.keyword.Bluemix_notm}} API 金鑰：</strong><a href="../iam/apikeys.html#manapikey" target="_blank">{{site.data.keyword.Bluemix_notm}} API 金鑰</a>金鑰相依於為其產生金鑰的 {{site.data.keyword.Bluemix_notm}} 帳戶。您無法將 {{site.data.keyword.Bluemix_notm}} API 金鑰與不同帳戶 ID 結合在相同 IAM 記號中。若要存取使用您 {{site.data.keyword.Bluemix_notm}} API 金鑰根據帳戶以外之帳戶建立的叢集，您必須登入帳戶才能產生新的 API 金鑰。</li><li><strong>使用一次性密碼：</strong>如果使用一次性密碼來向 {{site.data.keyword.Bluemix_notm}} 進行鑑別，則無法完全自動建立 IAM 記號，因為擷取一次性密碼需要與 Web 瀏覽器進行手動互動。若要完全自動建立 IAM 記號，您必須改為建立一個 {{site.data.keyword.Bluemix_notm}} API 金鑰。</ul></td>
+</tr>
+</tbody>
+</table>
+
+1.  建立 IAM（身分及存取管理）存取記號。要求中包含的內文資訊會根據您使用的 {{site.data.keyword.Bluemix_notm}} 鑑別方法而有所不同。請取代下列值：
+  - _&lt;my_bluemix_username&gt;_：您的 {{site.data.keyword.Bluemix_notm}} 使用者名稱。
+  - _&lt;my_bluemix_password&gt;_：您的 {{site.data.keyword.Bluemix_notm}} 密碼。
+  - _&lt;my_api_key&gt;_：您的 {{site.data.keyword.Bluemix_notm}} API 金鑰。
+  - _&lt;my_passcode&gt;_：您的 {{site.data.keyword.Bluemix_notm}} 一次性密碼。執行 `bx login --sso`，並遵循 CLI 輸出中的指示，利用 Web 瀏覽器來擷取一次性密碼。
 
     ```
     POST https://iam.<region>.bluemix.net/oidc/token
     ```
-     {: pre}
+    {: codeblock}
 
     <table summary-"Input parameters to get tokens">
-      <tr>
+    <thead>
         <th>輸入參數</th>
         <th>值</th>
-      </tr>
-      <tr>
-        <td>Header</td>
-        <td>
-          <ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=</li></ul>
-        </td>
-      </tr>
-      <tr>
-        <td>Body</td>
-        <td><ul><li>grant_type: password</li>
-        <li>response_type: cloud_iam, uaa</li>
-        <li>username: <em>&lt;my_bluemix_username&gt;</em></li>
-        <li>password: <em>&lt;my_bluemix_password&gt;</em></li>
-        <li>uaa_client_id: cf</li>
-        <li>uaa_client_secret: </li></ul>
-        <p>**附註：**新增未指定任何值的 uaa_client_secret 金鑰。</p></td>
-      </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Header</td>
+    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=</li></ul>
+    </td>
+    </tr>
+    <tr>
+    <td>{{site.data.keyword.Bluemix_notm}} 使用者名稱和密碼的內文</td>
+    <td><ul><li>grant_type: password</li>
+    <li>response_type: cloud_iam, uaa</li>
+    <li>username: <em>&lt;my_bluemix_username&gt;</em></li>
+    <li>password: <em>&lt;my_bluemix_password&gt;</em></li>
+    <li>uaa_client_id: cf</li>
+    <li>uaa_client_secret: </li></ul>
+    <p>**附註：**新增未指定任何值的 uaa_client_secret 金鑰。</p></td>
+    </tr>
+    <tr>
+    <td>{{site.data.keyword.Bluemix_notm}} API 金鑰的內文</td>
+    <td><ul><li>grant_type: urn:ibm:params:oauth:grant-type:apikey</li>
+    <li>response_type: cloud_iam, uaa</li>
+    <li>apikey: <em>&lt;my_api_key&gt;</em></li>
+    <li>uaa_client_id: cf</li>
+    <li>uaa_client_secret: </li></ul>
+    <p>**附註：**新增未指定任何值的 uaa_client_secret 金鑰。</p></td>
+    </tr>
+    <tr>
+    <td>{{site.data.keyword.Bluemix_notm}} 一次性密碼的內文</td>
+    <td><ul><li>grant_type: urn:ibm:params:oauth:grant-type:passcode</li>
+    <li>response_type: cloud_iam, uaa</li>
+    <li>passcode: <em>&lt;my_passcode&gt;</em></li>
+    <li>uaa_client_id: cf</li>
+    <li>uaa_client_secret: </li></ul>
+    <p>**附註：**新增未指定任何值的 uaa_client_secret 金鑰。</p></td>
+    </tr>
+    </tbody>
     </table>
 
     API 輸出範例：
@@ -539,26 +491,28 @@ lastupdated: "2017-08-14"
     ```
     {: screen}
 
-    您可以在 API 輸出的 **access_token** 欄位中尋找 IAM 記號，並在 **uaa_token** 欄位中尋找 UAA 記號。請記下 IAM 及 UAA 記號，以在接下來的步驟中擷取其他標頭資訊。
+    您可以在 API 輸出的 **access_token** 欄位中找到 IAM 記號。請記下 IAM 記號，以在接下來的步驟中擷取其他標頭資訊。
 
-2.  擷取您要建立及管理叢集的 {{site.data.keyword.Bluemix_notm}} 帳戶的 ID。將 _&lt;iam_token&gt;_ 取代為您在前一個步驟中所擷取的 IAM 記號。
+2.  擷取建立叢集所在的 {{site.data.keyword.Bluemix_notm}} 帳戶 ID。將 _&lt;iam_token&gt;_ 取代為您在前一個步驟中所擷取的 IAM 記號。
 
     ```
     GET https://accountmanagement.<region>.bluemix.net/v1/accounts
     ```
-    {: pre}
+    {: codeblock}
 
-    <table summary="取得 Bluemix 帳戶 ID 的輸入參數">
-   <tr>
-    <th>輸入參數</th>
-    <th>值</th>
-   </tr>
-   <tr>
-    <td>Headers</td>
-    <td><ul><li>Content-Type: application/json</li>
+    <table summary="取得 {{site.data.keyword.Bluemix_notm}} 帳戶 ID 的輸入參數">
+    <thead>
+  	<th>輸入參數</th>
+  	<th>值</th>
+    </thead>
+    <tbody>
+  	<tr>
+  		<td>Headers</td>
+  		<td><ul><li>Content-Type: application/json</li>
       <li>Authorization: bearer &lt;iam_token&gt;</li>
       <li>Accept: application/json</li></ul></td>
-   </tr>
+  	</tr>
+    </tbody>
     </table>
 
     API 輸出範例：
@@ -583,34 +537,58 @@ lastupdated: "2017-08-14"
 
     您可以在 API 輸出的 **resources/metadata/guid** 欄位中找到 {{site.data.keyword.Bluemix_notm}} 帳戶的 ID。
 
-3.  擷取包括 {{site.data.keyword.Bluemix_notm}} 帳戶資訊的新 IAM 記號。將 _&lt;my_bluemix_account_id&gt;_ 取代為您在前一個步驟中所擷取的 {{site.data.keyword.Bluemix_notm}} 帳戶 ID。
+3.  產生包含 {{site.data.keyword.Bluemix_notm}} 認證及建立叢集所在帳戶 ID 的新 IAM 記號。將 _&lt;my_bluemix_account_id&gt;_ 取代為您在前一個步驟中所擷取的 {{site.data.keyword.Bluemix_notm}} 帳戶 ID。
 
-    **附註：**IAM 存取記號會在 1 個小時後到期。請檢閱[使用 API 重新整理 IAM 存取記號](#cs_api_refresh)，以尋找如何重新整理存取記號的指示。
+    **附註：**如果您使用 {{site.data.keyword.Bluemix_notm}} API 金鑰，您必須使用為其建立 API 金鑰的 {{site.data.keyword.Bluemix_notm}} 帳戶 ID。若要存取其他帳戶中的叢集，請登入此帳戶，並建立以此帳戶為基礎的 {{site.data.keyword.Bluemix_notm}} API 金鑰。
 
     ```
     POST https://iam.<region>.bluemix.net/oidc/token
     ```
-    {: pre}
+    {: codeblock}
 
-    <table summary="取得存取記號的輸入參數">
-     <tr>
-      <th>輸入參數</th>
-      <th>值</th>
-     </tr>
-     <tr>
-      <td>Headers</td>
-      <td><ul><li>Content-Type: application/x-www-form-urlencoded</li>
-        <li>Authorization: Basic Yng6Yng=</li></ul></td>
-     </tr>
-     <tr>
-      <td>Body</td>
-      <td><ul><li>grant_type: password</li><li>response_type: cloud_iam, uaa</li>
-        <li>username: <em>&lt;my_bluemix_username&gt;</em></li>
-        <li>password: <em>&lt;my_bluemix_password&gt;</em></li>
-        <li>uaa_client_id: cf</li>
-        <li>uaa_client_secret: <p>**附註：**新增未指定任何值的 uaa_client_secret 金鑰。</p>
-        <li>bss_account: <em>&lt;my_bluemix_account_id&gt;</em></li></ul></td>
-     </tr>
+    <table summary-"Input parameters to get tokens">
+    <thead>
+        <th>輸入參數</th>
+        <th>值</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Header</td>
+    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=</li></ul>
+    </td>
+    </tr>
+    <tr>
+    <td>{{site.data.keyword.Bluemix_notm}} 使用者名稱和密碼的內文</td>
+    <td><ul><li>grant_type: password</li>
+    <li>response_type: cloud_iam, uaa</li>
+    <li>username: <em>&lt;my_bluemix_username&gt;</em></li>
+    <li>password: <em>&lt;my_bluemix_password&gt;</em></li>
+    <li>uaa_client_id: cf</li>
+    <li>uaa_client_secret: </li>
+    <li>bss_account: <em>&lt;my_bluemix_account_id&gt;</em></li></ul>
+    <p>**附註：**新增未指定任何值的 uaa_client_secret 金鑰。</p></td>
+    </tr>
+    <tr>
+    <td>{{site.data.keyword.Bluemix_notm}} API 金鑰的內文</td>
+    <td><ul><li>grant_type: urn:ibm:params:oauth:grant-type:apikey</li>
+    <li>response_type: cloud_iam, uaa</li>
+    <li>apikey: <em>&lt;my_api_key&gt;</em></li>
+    <li>uaa_client_id: cf</li>
+    <li>uaa_client_secret: </li>
+    <li>bss_account: <em>&lt;my_bluemix_account_id&gt;</em></li></ul>
+    <p>**附註：**新增未指定任何值的 uaa_client_secret 金鑰。</p></td>
+    </tr>
+    <tr>
+    <td>{{site.data.keyword.Bluemix_notm}} 一次性密碼的內文</td>
+    <td><ul><li>grant_type: urn:ibm:params:oauth:grant-type:passcode</li>
+    <li>response_type: cloud_iam, uaa</li>
+    <li>passcode: <em>&lt;my_passcode&gt;</em></li>
+    <li>uaa_client_id: cf</li>
+    <li>uaa_client_secret: </li>
+    <li>bss_account: <em>&lt;my_bluemix_account_id&gt;</em></li></ul>
+    <p>**附註：**新增未指定任何值的 uaa_client_secret 金鑰。</p></td>
+    </tr>
+    </tbody>
     </table>
 
     API 輸出範例：
@@ -629,27 +607,29 @@ lastupdated: "2017-08-14"
     ```
     {: screen}
 
-    您可以在 CLI 輸出的 **access_token** 欄位中尋找 IAM 記號，並在 **refresh_token** 欄位中尋找 IAM 重新整理記號。
+    您可以在 **access_token** 中尋找 IAM 記號、在 **refresh_token** 中尋找 IAM 重新整理記號，以及在 CLI 輸出的 **uaa_token** 欄位中尋找 UAA 記號。
 
-4.  擷取您要建立或管理叢集的 {{site.data.keyword.Bluemix_notm}} 空間的 ID。
-    1.  擷取 API 端點以存取空間 ID。將 _&lt;uaa_token&gt;_ 取代為您在第一個步驟中所擷取的 UAA 記號。
+4.  擷取建立叢集所在的 {{site.data.keyword.Bluemix_notm}} 空間 ID。
+    1.  擷取 API 端點以存取空間 ID。將 _&lt;uaa_token&gt;_ 取代為您在前一個步驟中所擷取的 UAA 記號。
 
         ```
         GET https://api.<region>.bluemix.net/v2/organizations
         ```
-        {: pre}
+        {: codeblock}
 
         <table summary="擷取空間 ID 的輸入參數">
-         <tr>
-          <th>輸入參數</th>
-          <th>值</th>
-         </tr>
-         <tr>
-          <td>Header</td>
-          <td><ul><li>Content-Type: application/x-www-form-urlencoded;charset=utf</li>
-            <li>Authorization: bearer &lt;uaa_token&gt;</li>
-            <li>Accept: application/json;charset=utf-8</li></ul></td>
-         </tr>
+         <thead>
+        <th>輸入參數</th>
+        <th>值</th>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Header</td>
+        <td><ul><li>Content-Type: application/x-www-form-urlencoded;charset=utf</li>
+        <li>Authorization: bearer &lt;uaa_token&gt;</li>
+        <li>Accept: application/json;charset=utf-8</li></ul></td>
+        </tr>
+        </tbody>
         </table>
 
       API 輸出範例：
@@ -657,18 +637,18 @@ lastupdated: "2017-08-14"
       ```
       {
             "metadata": {
-              "guid": "<my_bluemix_org_id>",
+              "guid": "<bluemix_org_id>",
               "url": "/v2/organizations/<my_bluemix_org_id>",
               "created_at": "2016-01-07T18:55:19Z",
               "updated_at": "2016-02-09T15:56:22Z"
             },
             "entity": {
-              "name": "<my_bluemix_org_name>",
+              "name": "<bluemix_org_name>",
               "billing_enabled": false,
-              "quota_definition_guid": "<my_bluemix_org_id>",
+              "quota_definition_guid": "<bluemix_org_id>",
               "status": "active",
-              "quota_definition_url": "/v2/quota_definitions/<my_bluemix_org_id>",
-              "spaces_url": "/v2/organizations/<my_bluemix_org_id>/spaces",
+              "quota_definition_url": "/v2/quota_definitions/<bluemix_org_id>",
+              "spaces_url": "/v2/organizations/<bluemix_org_id>/spaces",
       ...
 
       ```
@@ -678,23 +658,23 @@ lastupdated: "2017-08-14"
 6.  使用 **spaces_url** 端點，擷取 {{site.data.keyword.Bluemix_notm}} 空間的 ID。
 
       ```
-      GET https://api.<region>.bluemix.net/v2/organizations/<my_bluemix_org_id>/spaces
+      GET https://api.<region>.bluemix.net/v2/organizations/<bluemix_org_id>/spaces
       ```
-      {: pre}
+      {: codeblock}
 
       API 輸出範例：
 
       ```
       {
             "metadata": {
-              "guid": "<my_bluemix_space_id>",
+              "guid": "<bluemix_space_id>",
               "url": "/v2/spaces/<my_bluemix_space_id>",
               "created_at": "2016-01-07T18:55:22Z",
               "updated_at": null
             },
             "entity": {
-              "name": "<my_bluemix_space_name>",
-              "organization_guid": "<my_bluemix_org_id>",
+              "name": "<bluemix_space_name>",
+              "organization_guid": "<bluemix_org_id>",
               "space_quota_definition_guid": null,
               "allow_ssh": true,
       ...
@@ -710,43 +690,54 @@ lastupdated: "2017-08-14"
         ```
         GET https://us-south.containers.bluemix.net/v1/clusters
         ```
-        {: pre}
+        {: codeblock}
+
+    -   美國東部
+
+        ```
+        GET https://us-east.containers.bluemix.net/v1/clusters
+        ```
+        {: codeblock}
 
     -   英國南部
 
         ```
         GET https://uk-south.containers.bluemix.net/v1/clusters
         ```
-        {: pre}
+        {: codeblock}
 
     -   歐盟中部
 
         ```
         GET https://eu-central.containers.bluemix.net/v1/clusters
         ```
-        {: pre}
+        {: codeblock}
 
     -   亞太地區南部
 
         ```
         GET https://ap-south.containers.bluemix.net/v1/clusters
         ```
-        {: pre}
+        {: codeblock}
 
         <table summary="使用 API 的輸入參數">
          <thead>
-          <th>輸入參數</th>
-          <th>值</th>
-         </thead>
-          <tbody>
-         <tr>
-          <td>Header</td>
-            <td><ul><li>Authorization: bearer <em>&lt;iam_token&gt;</em></li></ul>
-         </tr>
-          </tbody>
+        <th>輸入參數</th>
+        <th>值</th>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Header</td>
+        <td><ul><li>Authorization: bearer <em>&lt;iam_token&gt;</em></li>
+        <li>X-Auth-Refresh-Token: <em>&lt;refresh_token&gt;</em></li></ul></td>
+        </tr>
+        </tbody>
         </table>
 
 8.  請檢閱 [{{site.data.keyword.containershort_notm}} API 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://us-south.containers.bluemix.net/swagger-api)，以尋找所支援 API 的清單。
+
+<br />
+
 
 ## 重新整理 IAM 存取記號
 {: #cs_api_refresh}
@@ -758,31 +749,34 @@ lastupdated: "2017-08-14"
 
 如果您要重新整理 IAM 記號，請使用下列步驟。
 
-1.  擷取新的 IAM 存取記號。將 _&lt;iam_refresh_token&gt;_ 取代為您在第一次向 {{site.data.keyword.Bluemix_notm}} 進行鑑別時收到的 IAM 重新整理記號。
+1.  產生新的 IAM 存取記號。將 _&lt;iam_refresh_token&gt;_ 取代為您在向 {{site.data.keyword.Bluemix_notm}} 進行鑑別時收到的 IAM 重新整理記號。
 
     ```
     POST https://iam.ng.bluemix.net/oidc/token
     ```
-    {: pre}
+    {: codeblock}
 
     <table summary="新 IAM 記號的輸入參數">
-     <tr>
-      <th>輸入參數</th>
-      <th>值</th>
-     </tr>
-     <tr>
-      <td>Header</td>
-      <td><ul><li>Content-Type: application/x-www-form-urlencoded</li>
-        <li>Authorization: Basic Yng6Yng=</li><ul></td>
-     </tr>
-     <tr>
-      <td>Body</td>
-      <td><ul><li>grant_type: refresh_token</li>
-        <li>response_type: cloud_iam, uaa</li>
-        <li>refresh_token: <em>&lt;iam_refresh_token&gt;</em></li>
-        <li>uaa_client_id: cf</li>
-        <li>uaa_client_secret: <p>**附註：**新增未指定任何值的 uaa_client_secret 金鑰。</p></li><ul></td>
-     </tr>
+     <thead>
+    <th>輸入參數</th>
+    <th>值</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Header</td>
+    <td><ul><li>Content-Type: application/x-www-form-urlencoded</li>
+    <li>Authorization: Basic Yng6Yng=</li></ul></td>
+    </tr>
+    <tr>
+    <td>Body</td>
+    <td><ul><li>grant_type: refresh_token</li>
+    <li>response_type: cloud_iam, uaa</li>
+    <li>refresh_token: <em>&lt;iam_refresh_token&gt;</em></li>
+    <li>uaa_client_id: cf</li>
+    <li>uaa_client_secret: </li>
+    <li>bss_account: <em>&lt;bluemix_account_id&gt;</em></li></ul><p>**附註：**新增未指定任何值的 uaa_client_secret 金鑰。</p></td>
+    </tr>
+    </tbody>
     </table>
 
     API 輸出範例：

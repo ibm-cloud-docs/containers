@@ -19,9 +19,7 @@ lastupdated: "2017-08-14"
 # Ein {{site.data.keyword.registryshort_notm}}-Token für das Image-Registry für {{site.data.keyword.Bluemix_notm}} Dedicated erstellen
 {: #cs_dedicated_tokens}
 
-Erstellen Sie ein nicht ablaufbares Token, um ein Image-Registry mit Clustern zu verwenden, die Sie für einzelne und skalierbare Gruppen
-verwendet haben.
-{:shortdesc}
+Erstellen Sie ein nicht ablaufbares Token, um eine Image-Registry zu verwenden, die Sie für einzelne und skalierbare Gruppen mit Clustern verwendet haben.{:shortdesc}
 
 1.  Melden Sie sich bei der {{site.data.keyword.Bluemix_short}} Dedicated-Umgebung an.
 
@@ -67,7 +65,7 @@ verwendet haben.
     ```
     {: pre}
 
-    Sie können diesen geheimen Schlüssel verwenden, um mit IBM {{site.data.keyword.Bluemix_notm}} Container Service zu arbeiten. 
+    Sie können diesen geheimen Schlüssel verwenden, um mit IBM {{site.data.keyword.Bluemix_notm}} Container Service zu arbeiten.
 
 6.  Erstellen Sie den geheimen Kubernetes-Schlüssel, um Ihre Tokeninformationen zu speichern.
 

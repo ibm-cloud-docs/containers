@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-08-15"
+lastupdated: "2017-10-24"
 
 ---
 
@@ -23,9 +23,10 @@ lastupdated: "2017-08-15"
 これらのフィーチャーは、クラスター・インフラストラクチャーとネットワーク通信を保護し、コンピュート・リソースを分離し、インフラストラクチャー・コンポーネントとコンテナー・デプロイメントにおけるセキュリティー・コンプライアンスを確保するためのものです。
 {: shortdesc}
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_security.png"><img src="images/cs_security.png" width="400" alt="{{site.data.keyword.containershort_notm}} クラスター・セキュリティー" style="width:400px;" /></a>
+<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_security.png" ><img src="images/cs_security.png" width="400" alt="{{site.data.keyword.containershort_notm}} クラスター・セキュリティー" style="width:400px; border-style: none"/></a>
 
-<table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
+
+  <table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
     <thead>
   <th colspan=2><img src="images/idea.png"/> {{site.data.keyword.containershort_notm}} での組み込みのクラスター・セキュリティー設定</th>
   </thead>
@@ -51,6 +52,9 @@ Vulnerability Advisor は {{site.data.keyword.registryshort_notm}}のコンポ�
   </tbody>
 </table>
 
+<br />
+
+
 ## Kubernetes マスター
 {: #cs_security_master}
 
@@ -59,17 +63,20 @@ Kubernetes マスターを保護し、クラスター・ネットワーク通信
 
 <dl>
   <dt>完全に管理される専用 Kubernetes マスター</dt>
-    <dd>{{site.data.keyword.containershort_notm}}
-に含まれる Kubernetes クラスターはすべて、IBM が所有する {{site.data.keyword.BluSoftlayer_full}} アカウントで、IBM が管理する専用 Kubernetes マスターにより制御されます。Kubernetes マスターは、他の IBM のお客様とは共用されない、以下の専用コンポーネントを使用してセットアップされます。
-<ul><ul><li>etcd データ・ストア: サービス、デプロイメント、ポッドなどのクラスターのすべての Kubernetes リソースを保管します。
+    <dd>{{site.data.keyword.containershort_notm}} に含まれる Kubernetes クラスターはすべて、IBM が所有する IBM Bluemix Infrastructure (SoftLayer) アカウントで、IBM が管理する専用 Kubernetes マスターにより制御されます。Kubernetes マスターは、他の IBM のお客様とは共用されない、以下の専用コンポーネントを使用してセットアップされます。
+<ul><li>etcd データ・ストア: サービス、デプロイメント、ポッドなどのクラスターのすべての Kubernetes リソースを保管します。
 Kubernetes ConfigMaps および Secrets は、ポッドで実行されるアプリで使用できるように、キー値ペアとして保管されるアプリ・データです。
 etcd のデータは IBM によって管理される暗号化ディスクに保管され、ポッドに送信されるときには TLS で暗号化されるので、データの保護と完全性が確保されます。
-<li>kube-apiserver: ワーカー・ノードから Kubernetes マスターへのすべての要求のメインエントリー・ポイントとなります。
+</li>
+    <li>kube-apiserver: ワーカー・ノードから Kubernetes マスターへのすべての要求のメインエントリー・ポイントとなります。
 kube-apiserver は要求を検証して処理し、etcd データ・ストアに対する読み取り/書き込みを行うことができます。
-<li><kube-scheduler: ポッドをどこにデプロイするかを決定します。このとき、キャパシティーとパフォーマンスのニーズ、ハードウェアとソフトウェアのポリシー制約、アンチアフィニティー仕様、およびワークロード要件が考慮されます。要件に合致するワーカー・ノードが見つからなければ、ポッドはクラスターにデプロイされません。
-<li>kube-controller-manager: レプリカ・セットをモニターし、対応するポッドを作成して目的の状態を実現するためのコンポーネントです。
-<li>OpenVPN: {{site.data.keyword.containershort_notm}} 固有のコンポーネントであり、Kubernetes マスターからワーカー・ノードへのすべての通信のためのセキュア・ネットワーク接続を提供します。
-</ul></ul></dd>
+</li>
+    <li>kube-scheduler: ポッドをどこにデプロイするかを決定します。このとき、キャパシティーとパフォーマンスのニーズ、ハードウェアとソフトウェアのポリシー制約、アンチアフィニティー仕様、およびワークロード要件が考慮されます。
+要件に合致するワーカー・ノードが見つからなければ、ポッドはクラスターにデプロイされません。
+</li>
+    <li>kube-controller-manager: レプリカ・セットをモニターし、対応するポッドを作成して目的の状態を実現するためのコンポーネントです。
+</li>
+    <li>OpenVPN: {{site.data.keyword.containershort_notm}} 固有のコンポーネントであり、Kubernetes マスターからワーカー・ノードへのすべての通信のためのセキュア・ネットワーク接続を提供します。</li></ul></dd>
   <dt>ワーカー・ノードから Kubernetes マスターへのすべての通信のための TLS セキュア・ネットワーク接続</dt>
     <dd>Kubernetes マスターへのネットワーク通信を保護するために、{{site.data.keyword.containershort_notm}} によって TLS 証明書がクラスターごとに生成されます。これを使って kube-apiserver コンポーネントおよび etcd データ・ストア・コンポーネントとの間でやり取りされる通信が暗号化されます。
 これらの証明書は、クラスター間で共有されたり、Kubernetes マスター・コンポーネント間で共有されたりすることはありません。
@@ -85,7 +92,10 @@ kube-apiserver は要求を検証して処理し、etcd データ・ストアに
     <dd>{{site.data.keyword.containershort_notm}} は、Kubernetes マスターがデプロイされたすべてのノードにおいて、マスター・ノードを確実に保護するために適用する必要がある Kubernetes と OS 固有のセキュリティー修正の対象となる脆弱性を自動的にスキャンします。
 脆弱性が検出されると、{{site.data.keyword.containershort_notm}} はユーザーに代わって自動的に修正を適用し、脆弱性を解決します。
 </dd>
-</dl>  
+</dl>
+
+<br />
+
 
 ## ワーカー・ノード
 {: #cs_security_worker}
@@ -95,27 +105,17 @@ kube-apiserver は要求を検証して処理し、etcd データ・ストアに
 
 <dl>
   <dt>コンピュート、ネットワーク、およびストレージ・インフラストラクチャーの分離</dt>
-    <dd>クラスターを作成すると、お客様の {{site.data.keyword.BluSoftlayer_notm}} アカウントまたは IBM 提供の {{site.data.keyword.BluSoftlayer_notm}} アカウントに、仮想マシンがワーカー・ノードとしてプロビジョンされます。ワーカー・ノードは特定のクラスターの専用であり、他のクラスターのワークロードをホストすることはありません。</br>
-ワーカー・ノードのネットワーク・パフォーマンスと分離の品質を保証するために、すべての {{site.data.keyword.Bluemix_notm}} アカウントには、
-{{site.data.keyword.BluSoftlayer_notm}} VLAN がセットアップされます。
-</br>クラスターにデータを保存する場合は、{{site.data.keyword.BluSoftlayer_notm}} の NFS ベースの専用ファイル・ストレージをプロビジョンし、
-このプラットフォームの組み込みデータ・セキュリティー機能を利用することができます。
-</dd>
+    <dd>クラスターを作成すると、お客様の IBM Bluemix Infrastructure (SoftLayer) アカウントまたは IBM 提供の IBM Bluemix Infrastructure (SoftLayer) 専用アカウントに、仮想マシンがワーカー・ノードとしてプロビジョンされます。ワーカー・ノードは特定のクラスターの専用であり、他のクラスターのワークロードをホストすることはありません。</br>
+ワーカー・ノードのネットワーク・パフォーマンスと分離の品質を保証するために、すべての {{site.data.keyword.Bluemix_notm}} アカウントには、IBM Bluemix Infrastructure (SoftLayer) VLAN がセットアップされます。</br>クラスターにデータを保持する場合は、IBM Bluemix Infrastructure (SoftLayer) の NFS ベースの専用ファイル・ストレージをプロビジョンし、このプラットフォームの組み込みデータ・セキュリティー機能を利用することができます。</dd>
   <dt>保護されたワーカー・ノードのセットアップ</dt>
     <dd>すべてのワーカー・ノードは Ubuntu オペレーティング・システムを使用してセットアップされ、ユーザーが変更することはできません。
 ワーカー・ノードのオペレーティング・システムを潜在的な攻撃から保護するために、すべてのワーカー・ノードに、Linux iptable ルールによって適用されるエキスパート・ファイアウォール設定が構成されます。
 </br> Kubernetes 上で実行されるコンテナーはすべて、定義済みの Calico ネットワーク・ポリシー設定で保護されます。この設定は、クラスター作成時にワーカー・ノードごとに構成されます。このようなセットアップにより、ワーカー・ノードとポッドの間のセキュア・ネットワーク通信が確保されます。
 コンテナーがワーカー・ノード上で実行できるアクションをさらに制限するために、ユーザーは、ワーカー・ノードについて [AppArmor ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tutorials/clusters/apparmor/) を構成することを選択できます。</br> デフォルトでは、ワーカー・ノード上の root ユーザーへの SSH アクセスは無効になっています。ワーカー・ノードに追加機能をインストールする場合、すべてのワーカー・ノードで実行するすべてのアクションについて [Kubernetes デーモン・セット ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset) を使用できます。また、1 回限りのアクションについては、[Kubernetes ジョブ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) を使用できます。</dd>
   <dt>Kubernetes ワーカー・ノードのセキュリティー・コンプライアンス</dt>
-    <dd>IBM は、ワーカー・ノードのセキュリティー・コンプライアンス上の潜在的な問題を見つけるために社内外のセキュリティー助言チームと連携しています。
-そして、見つかった脆弱性に対処するためのコンプライアンス更新プログラムとセキュリティー・パッチを継続的にリリースしています。
-更新プログラムとセキュリティー・パッチは、IBM が、ワーカー・ノードのオペレーティング・システムに自動的にデプロイしています。
-そのために、IBM はワーカー・ノードへの SSH アクセスを保持しています。
-</br> <b>注</b>: 一部の更新プログラムでは、ワーカー・ノードのリブートが必要になります。ただし、IBM は、更新プログラムやセキュリティー・パッチのインストール時にワーカー・ノードをリブートしません。
-更新プログラムとセキュリティー・パッチのインストールを完了させるために、ユーザーには、ワーカー・ノードを定期的にリブートすることをお勧めします。
-</dd>
-  <dt>SoftLayer ネットワーク・ファイアウォールのサポート</dt>
-    <dd>{{site.data.keyword.containershort_notm}} は、すべての [{{site.data.keyword.BluSoftlayer_notm}} ファイアウォール・オファリング ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud-computing/bluemix/network-security) に対応しています。{{site.data.keyword.Bluemix_notm}} Public では、カスタム・ネットワーク・ポリシーをファイアウォールにセットアップして、
+    <dd>IBM は、社内と社外のセキュリティー顧問チームと協力して、セキュリティー・コンプライアンスにおける潜在的な脆弱性と取り組んでいます。オペレーティング・システムに更新プログラムやセキュリティー・パッチをデプロイするために、IBM はワーカー・ノードへの SSH アクセスを維持しています。</br> <b>重要</b>: ワーカー・ノードを定期的にリブートして、オペレーティング・システムに自動的にデプロイされた更新プログラムとセキュリティー・パッチがインストールされるようにします。ワーカー・ノードが IBM によってリブートされることはありません。</dd>
+  <dt>IBM Bluemix Infrastructure (SoftLayer) ネットワーク・ファイアウォールのサポート</dt>
+    <dd>{{site.data.keyword.containershort_notm}} は、すべての [ IBM Bluemix Infrastructure (SoftLayer) ファイアウォール・オファリング ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud-computing/bluemix/network-security) に対応しています。{{site.data.keyword.Bluemix_notm}} Public では、カスタム・ネットワーク・ポリシーをファイアウォールにセットアップして、
 クラスターのための専用ネットワーク・セキュリティーを設定し、ネットワーク侵入を検出して対処することができます。例えば、ファイアウォールとして不要なトラフィックをブロックするように [Vyatta ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://knowledgelayer.softlayer.com/topic/vyatta-1) をセットアップすることを選択できます。ファイアウォールをセットアップする場合は、マスター・ノードとワーカー・ノードが通信できるように、地域ごとに[必要なポートと IP アドレスを開く](#opening_ports)必要もあります。{{site.data.keyword.Bluemix_notm}} Dedicated では、ファイアウォール、DataPower、Fortigate、DNS が、標準の専用環境デプロイメントの一部として既に構成されています。</dd>
   <dt>サービスをプライベートにしておくか、サービスとアプリを選択的に公共のインターネットに公開する</dt>
     <dd>サービスとアプリをプライベートにして、このトピックで説明した組み込みのセキュリティー機能を利用して、ワーカー・ノードとポッドの間のセキュアな通信を確保することができます。
@@ -130,66 +130,144 @@ kube-apiserver は要求を検証して処理し、etcd データ・ストアに
 ### ファイアウォールで必要なポートと IP アドレスを開く
 {: #opening_ports}
 
-{{site.data.keyword.BluSoftlayer_notm}} アカウントでワーカー・ノード用にファイアウォールをセットアップするときやファイアウォール設定をカスタマイズするときは、ワーカー・ノードと Kubernetes マスターが通信できるように、特定のポートと IP アドレスを開く必要があります。
+ご使用のファイアウォールで特定のポートと IP アドレスを開く必要が生じる可能性のある、以下の状況を検討してください。
+* ワーカー・ノードに対してファイアウォールがセットアップされているとき、またはファイアウォール設定が IBM Bluemix Infrastructure (SoftLayer) アカウント内でカスタマイズされたときに、Kubernetes マスターとワーカー・ノード間の通信を可能にする
+* クラスターの外部からロード・バランサーまたは Ingress コントローラーにアクセスする
+* プロキシーまたはファイアウォール経由の公共のインターネットのエンドポイントへのアクセスが企業ネットワーク・ポリシーによって禁止されているときに、ローカル・システムから `kubectl` コマンドを実行する
 
-1.  以下を実行して、クラスター内のすべてのワーカー・ノードのパブリック IP アドレスをメモします。
+  1.  以下を実行して、クラスター内のすべてのワーカー・ノードのパブリック IP アドレスをメモします。
 
-    ```
+      ```
     bx cs workers <cluster_name_or_id>
     ```
-    {: pre}
+      {: pre}
 
-2.  ファイアウォールで、ワーカー・ノードとの間の以下の接続を許可します。
-
-  ```
-  TCP port 443 FROM <each_worker_node_publicIP> TO registry.<region>.bluemix.net, apt.dockerproject.org
-  ```
-  {: codeblock}
-
-    <ul><li>ワーカー・ノードからのアウトバウンド接続として、ソース・ワーカー・ノードから、`<each_worker_node_publicIP>` の宛先 TCP/UDP ポート範囲 (20000 から 32767 まで) への発信ネットワーク・トラフィック、および以下の IP アドレスとネットワーク・グループへの発信ネットワーク・トラフィックを許可します。</br>
-    
-
-    <table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
+  2.  ファイアウォールで、ワーカー・ノードからのアウトバウンド接続として、ソース・ワーカー・ノードから、`<each_worker_node_publicIP>` の宛先 TCP/UDP ポート範囲 (20000 から 32767 まで) およびポート 443 への発信ネットワーク・トラフィック、および以下の IP アドレスとネットワーク・グループへの発信ネットワーク・トラフィックを許可します。
+      - **重要**: ブートストラッピング・プロセスの際にロードのバランスを取るため、ポート 443 と地域内のすべてのロケーションで相互に対する発信トラフィックを許可する必要があります。例えば、クラスターが米国南部にある場合、ポート 443 から dal10 と dal12 への、そして dal10 と dal12 から互いへのトラフィックを許可する必要があります。
+      <p>
+  <table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
     <thead>
-      <th colspan=2><img src="images/idea.png"/> アウトバウンド IP アドレス</th>
+      <th>地域</th>
+      <th>ロケーション</th>
+      <th>IP アドレス</th>
       </thead>
     <tbody>
       <tr>
-        <td>ams03</td>
-        <td><code>169.50.169.110</code></td>
-      </tr>
-      <tr>
-        <td>dal10</td>
-        <td><code>169.46.7.238</code></td>
-       </tr>
-       <tr>
-        <td>dal12</td>
-        <td><code>169.47.70.10</code></td>
-       </tr>
-       <tr>
-        <td>fra02</td>
-        <td><code>169.50.56.174</code></td>
-       </tr>
-      </tbody>
-      <tr>
-       <td>lon02</td>
-       <td><code>159.122.242.78</code></td>
-      </tr>
-      <tr>
-       <td>lon04</td>
-       <td><code>158.175.65.170</code></td>
-      </tr>
-      <tr>
-       <td>syd01
+         <td>南アジア太平洋地域</td>
+         <td>mel01<br>syd01
 </td>
-       <td><code>168.1.8.195</code></td>
+         <td><code>168.1.97.67</code><br><code>168.1.8.195</code></td>
       </tr>
       <tr>
-       <td>syd04</td>
-       <td><code>130.198.64.19</code></td>
+         <td>中欧</td>
+         <td>ams03<br>fra02</td>
+         <td><code>169.50.169.110</code><br><code>169.50.56.174</code></td>
+        </tr>
+      <tr>
+        <td>英国南部</td>
+        <td>lon02<br>lon04</td>
+        <td><code>159.122.242.78</code><br><code>158.175.65.170</code></td>
       </tr>
+      <tr>
+        <td>米国東部</td>
+         <td>wdc06<br>wdc07</td>
+         <td><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+      </tr>
+      <tr>
+        <td>米国南部</td>
+        <td>dal10<br>dal12<br>dal13</td>
+        <td><code>169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
+      </tr>
+      </tbody>
     </table>
-</ul>
+</p>
+
+  3.  ワーカー・ノードから {{site.data.keyword.registrylong_notm}} への発信ネットワーク・トラフィックを許可します。
+      - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
+      - <em>&lt;registry_publicIP&gt;</em> は、トラフィックを許可するレジストリー地域のすべてのアドレスに置き換えます。
+        <p>      
+<table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
+    <thead>
+        <th colspan=2><img src="images/idea.png"/> レジストリー IP アドレス</th>
+        </thead>
+      <tbody>
+        <tr>
+          <td>registry.au-syd.bluemix.net</td>
+          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
+        </tr>
+        <tr>
+          <td>registry.eu-de.bluemix.net</td>
+          <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></td>
+         </tr>
+         <tr>
+          <td>registry.eu-gb.bluemix.net</td>
+          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></td>
+         </tr>
+         <tr>
+          <td>registry.ng.bluemix.net</td>
+          <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></td>
+         </tr>
+        </tbody>
+      </table>
+</p>
+
+  4.  オプション: ワーカー・ノードから {{site.data.keyword.monitoringlong_notm}} サービスと {{site.data.keyword.loganalysislong_notm}} サービスへの発信ネットワーク・トラフィックを許可します。
+      - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
+      - <em>&lt;monitoring_publicIP&gt;</em> は、トラフィックを許可するモニタリング地域のすべてのアドレスに置き換えます。
+        <p><table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
+    <thead>
+        <th colspan=2><img src="images/idea.png"/> モニタリング・パブリック IP アドレス</th>
+        </thead>
+      <tbody>
+        <tr>
+         <td>metrics.eu-de.bluemix.net</td>
+         <td><code>159.122.78.136/29</code></td>
+        </tr>
+        <tr>
+         <td>metrics.eu-gb.bluemix.net</td>
+         <td><code>169.50.196.136/29</code></td>
+        </tr>
+        <tr>
+          <td>metrics.ng.bluemix.net</td>
+          <td><code>169.47.204.128/29</code></td>
+         </tr>
+         
+        </tbody>
+      </table>
+</p>
+      - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
+      - <em>&lt;logging_publicIP&gt;</em> は、トラフィックを許可するロギング地域のすべてのアドレスに置き換えます。
+        <p><table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
+    <thead>
+        <th colspan=2><img src="images/idea.png"/> ロギング・パブリック IP アドレス</th>
+        </thead>
+      <tbody>
+        <tr>
+         <td>ingest.logging.eu-de.bluemix.net</td>
+         <td><code>169.50.25.125</code></td>
+        </tr>
+        <tr>
+         <td>ingest.logging.eu-gb.bluemix.net</td>
+         <td><code>169.50.115.113</code></td>
+        </tr>
+        <tr>
+          <td>ingest.logging.ng.bluemix.net</td>
+          <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
+         </tr>
+        </tbody>
+      </table>
+</p>
+
+  5. プライベート・ファイアウォールでは、IBM Bluemix Infrastructure (SoftLayer) のプライベート IP のために適切な範囲を許可します。[このリンク](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)の **Backend (private) Network** で始まるセクションを参照してください。
+      - 使用している[地域内のロケーション](cs_regions.html#locations)をすべて追加します
+      - dal01 のロケーション (データ・センター) を追加する必要があることに注意してください
+      - ポート 80 および 443 を開いて、クラスターのブートストラッピング処理を可能にします
+
+  6. オプション: VLAN の外部からロード・バランサーにアクセスするには、そのロード・バランサーの特定の IP アドレスで、着信ネットワーク・トラフィックのためのポートを開きます。
+
+  7. オプション: VLAN の外部から Ingress コントローラーにアクセスするには、その Ingress コントローラーの特定の IP アドレスで、着信ネットワーク・トラフィックのためのポート 80 または 443 を開きます (どちらのポートを構成したかに応じて異なります)。
+
+<br />
 
 
 ## ネットワーク・ポリシー
@@ -204,11 +282,17 @@ Kubernetes クラスターはそれぞれ、Calico と呼ばれるネットワ�
 Calico と Kubernetes のネイティブ機能のいずれかを選んで、ご使用のクラスター用のネットワーク・ポリシーを作成することができます。
 手始めには Kubernetes のネットワーク・ポリシーを使用することができますが、より堅牢な機能が必要であれば Calico のネットワーク・ポリシーを使用してください。
 
-<ul><li>[Kubernetes ネットワーク・ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/services-networking/network-policies/): 相互通信できるポッドを指定するなど、いくつかの基本的なオプションが用意されています。ポッドの着信ネットワーク・トラフィックは、ラベル、および接続しようとしているポッドの Kubernetes 名前空間に基づき、プロトコルおよびポートについて許可またはブロックできます。
-</br>これらのポリシーは
-`kubectl` コマンドまたは Kubernetes API を使用して適用できます。これらのポリシーが適用されると、Calico ネットワーク・ポリシーに変換され、Calico がこれらのポリシーを実施します。<li>[Calico ネットワーク・ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](http://docs.projectcalico.org/v2.0/getting-started/kubernetes/tutorials/advanced-policy): これらのポリシーは Kubernetes ネットワーク・ポリシーのスーパーセットであり、Kubernetes のネイティブ機能に以下の機能を追加して拡張したものです。
-<ul><ul><li>Kubernetes ポッドのトラフィックだけではなく、特定のネットワーク・インターフェース上のネットワーク・トラフィックを許可またはブロックします。
-<li>着信 (ingress) および発信 (egress) ネットワーク・トラフィックを許可またはブロックします。<li>送信元または宛先 IP アドレスまたは CIDR に基づき、トラフィックを許可またはブロックします。</ul></ul></br>
+<ul>
+  <li>[Kubernetes ネットワーク・ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/services-networking/network-policies/): 相互通信できるポッドを指定するなど、いくつかの基本的なオプションが用意されています。特定のプロトコルとポートにおいて、着信ネットワーク・トラフィックを許可またはブロックできます。このトラフィックは、他のポッドに接続しようとしているポッドのラベルと Kubernetes 名前空間に基づいて、フィルターに掛けることができます。</br>これらのポリシーは
+`kubectl` コマンドまたは Kubernetes API を使用して適用できます。これらのポリシーが適用されると、Calico ネットワーク・ポリシーに変換され、Calico がこれらのポリシーを実施します。</li>
+  <li>[Calico ネットワーク・ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](http://docs.projectcalico.org/v2.4/getting-started/kubernetes/tutorials/advanced-policy): これらのポリシーは Kubernetes ネットワーク・ポリシーのスーパーセットであり、Kubernetes のネイティブ機能に以下の機能を追加して拡張したものです。
+</li>
+    <ul><ul><li>Kubernetes ポッドのトラフィックだけではなく、特定のネットワーク・インターフェース上のネットワーク・トラフィックを許可またはブロックします。
+</li>
+    <li>着信 (ingress) および発信 (egress) ネットワーク・トラフィックを許可またはブロックします。</li>
+    <li>[LoadBalancer サービスまたは NodePort Kubernetes サービスへの着信 (ingress) トラフィックをブロックします](#cs_block_ingress)。</li>
+    <li>送信元または宛先 IP アドレスまたは CIDR に基づき、トラフィックを許可またはブロックします。</li></ul></ul></br>
+
 これらのポリシーは `calicoctl` コマンドを使用して適用されます。Calico は Kubernetes ワーカー・ノード上に Linux iptables 規則をセットアップすることによって、これらのポリシーを実施しますが、これには Calico ポリシーに変換された Kubernetes ネットワーク・ポリシーも含まれます。
 iptables 規則はワーカー・ノードのファイアウォールとして機能し、ネットワーク・トラフィックがターゲット・リソースに転送されるために満たさなければならない特性を定義します。
 </ul>
@@ -230,8 +314,7 @@ SSH アクセスと他のアクセスは、各ワーカー・ノードのプラ�
 **重要:** ポリシーを十分に理解していない限り、かつ、ポリシーにより許可されるトラフィックが必要ないと判断できるのでない限り、ホストのエンドポイントに適用されるポリシーを削除しないでください。
 
 
-
-  <table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
+ <table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
     <thead>
   <th colspan=2><img src="images/idea.png"/> 各クラスターのデフォルト・ポリシー</th>
   </thead>
@@ -258,8 +341,7 @@ Kubernetes ではサービス要求を正しいポッドに転送するために
    </tr>
    <tr>
       <td><code>allow-sys-mgmt</code></td>
-      <td>ワーカー・ノードを管理するために使用される特定の {{site.data.keyword.BluSoftlayer_notm}} システムの着信接続を許可します。
-</td>
+      <td>ワーカー・ノードを管理するために使用される特定の IBM Bluemix Infrastructure (SoftLayer) システムの着信接続を許可します。</td>
    </tr>
    <tr>
     <td><code>allow-vrrp</code></td>
@@ -277,22 +359,23 @@ Kubernetes ではサービス要求を正しいポッドに転送するために
 変更が必要であるとわかった場合は、Calico CLI をインストールし、独自のネットワーク・ポリシーを作成します。
 
 
-開始する前に、以下のステップを完了してください。 
+開始前に、以下のことを行います。
 
 1.  [{{site.data.keyword.containershort_notm}} および Kubernetes CLI をインストールします。](cs_cli_install.html#cs_cli_install)
 2.  [ライト・クラスターまたは標準クラスターを作成します。](cs_cluster.html#cs_cluster_ui)
 3.  [クラスターを Kubernetes CLI のターゲットとして設定](cs_cli_install.html#cs_cli_configure)します。`bx cs cluster-config` コマンドで `--admin` オプションを指定します。これは、証明書および許可ファイルのダウンロードに使用されます。
-このダウンロードには、Calico コマンドの実行に必要な管理者 rbac 役割の鍵も含まれています。
+このダウンロードには、Calico コマンドの実行に必要なスーパーユーザー役割の鍵も含まれています。
 
   ```
-  bx cs cluster-config <cluster_name> 
+  bx cs cluster-config <cluster_name> --admin
   ```
   {: pre}
 
+  **注**: Calico CLI バージョン 1.4.0 がサポートされています。
 
 ネットワーク・ポリシーを追加するには、以下のようにします。
 1.  Calico CLI をインストールします。
-    1.  [Calico CLI ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/projectcalico/calicoctl/releases/) をダウンロードします。
+    1.  [Calico CLI ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/projectcalico/calicoctl/releases/tag/v1.4.0) をダウンロードします。
 
         **ヒント:** Windows を使用している場合、Calico CLI を {{site.data.keyword.Bluemix_notm}} CLI と同じディレクトリーにインストールします。このようにセットアップすると、後でコマンドを実行するとき、ファイル・パスの変更を行う手間がいくらか少なくなります。
 
@@ -310,11 +393,11 @@ mv /<path_to_file>/calicoctl /usr/local/bin/calicoctl```
             -   OS X:
 
               ```
-mv /<path_to_file>/calico-darwin-amd64 /usr/local/bin/calicoctl```
+              mv /<path_to_file>/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
+              ```
               {: pre}
 
-        2.  バイナリー・ファイルを実行可能ファイルに変換します。
-
+        2.  ファイルを実行可能にします。
 
             ```
 chmod +x /usr/local/bin/calicoctl```
@@ -328,13 +411,14 @@ calicoctl version```
 
 2.  Calico CLI を構成します。
 
-    1.  Linux および OS X の場合、'/etc/calico' ディレクトリーを作成します。Windows の場合は、どのディレクトリーを使用しても構いません。
+    1.  Linux および OS X の場合、`/etc/calico` ディレクトリーを作成します。Windows の場合は、どのディレクトリーを使用しても構いません。
 
       ```
-mkdir -p /etc/calico/```
+      sudo mkdir -p /etc/calico/
+      ```
       {: pre}
 
-    2.  'calicoctl.cfg' ファイルを作成します。
+    2.  `calicoctl.cfg` ファイルを作成します。
         -   Linux および OS X:
 
           ```
@@ -345,7 +429,7 @@ sudo vi /etc/calico/calicoctl.cfg```
 
     3.  <code>calicoctl.cfg</code> ファイルに次の情報を入力します。
 
-      ```
+        ```
       apiVersion: v1
       kind: calicoApiConfig
       metadata:
@@ -355,14 +439,15 @@ sudo vi /etc/calico/calicoctl.cfg```
           etcdCertFile: <CERTS_DIR>/admin.pem
           etcdCACertFile: <CERTS_DIR>/<ca-*pem_file>
       ```
-      {: pre}
+        {: codeblock}
 
-        1.  `<ETCD_URL>` を取得します。
+        1.  `<ETCD_URL>` を取得します。このコマンドが `calico-config not found` エラーで失敗した場合は、この[トラブルシューティング・トピック](cs_troubleshoot.html#cs_calico_fails)を参照してください。
 
           -   Linux および OS X:
 
               ```
-kubectl describe pod -n kube-system `kubectl get pod -n kube-system | grep calico-policy-controller | awk '{print $1}'` | grep ETCD_ENDPOINTS | awk '{print $2}'```
+              kubectl get cm -n kube-system calico-config -o yaml | grep "etcd_endpoints:" | awk '{ print $2 }'
+              ```
               {: pre}
 
           -   出力例:
@@ -372,9 +457,8 @@ https://169.1.1.1:30001```
               {: screen}
 
           -   Windows:<ol>
-            <li>kube-system 名前空間内のポッドのリストを取得し、Calico コントローラー・ポッドを見つけます。</br><pre class="codeblock"><code>kubectl get pod -n kube-system</code></pre></br>例:</br><pre class="screen"><code>calico-policy-controller-1674857634-k2ckm</code></pre>
-            <li>Calico コントローラー・ポッドの詳細を表示します。</br> <pre class="codeblock"><code>kubectl describe pod -n kube-system calico-policy-controller-&lt;ID&gt;</code></pre>
-            <li>ETCD エンドポイント値を見つけます。例: <code>https://169.1.1.1:30001</code>
+            <li>calico 構成値を構成マップから取得します。</br><pre class="codeblock"><code>kubectl get cm -n kube-system calico-config -o yaml</code></pre></br>
+            <li>`data` セクションで、etcd_endpoints 値を見つけます。例: <code>https://169.1.1.1:30001</code>
             </ol>
 
         2.  `<CERTS_DIR>` (Kubernetes 証明書をダウンロードしたディレクトリー) を取得します。
@@ -414,10 +498,11 @@ dirname $KUBECONFIG```
             -   Linux および OS X:
 
               ```
-ls `dirname $KUBECONFIG` | grep ca-.*pem```
+              ls `dirname $KUBECONFIG` | grep "ca-"
+              ```
               {: pre}
 
-            -   Windows:<ol><li>最後のステップで取得したディレクトリーを開きます。</br><pre class="codeblock"><code>C:\Users\<user>\.bluemix\plugins\container-service\&#60;cluster_name&#62;-admin\</code></pre>
+            -   Windows:<ol><li>最後のステップで取得したディレクトリーを開きます。</br><pre class="codeblock"><code>C:\Users\<user>\.bluemix\plugins\container-service\&lt;cluster_name&gt;-admin\</code></pre>
               <li> <code>ca-*pem_file</code> ファイルを見つけます。</ol>
 
         4.  Calico 構成が正常に動作していることを確認します。
@@ -498,6 +583,58 @@ calicoctl get policy -o yaml```
           ```
           {: pre}
 
+### LoadBalancer サービスまたは NodePort サービスへの着信 (ingress) トラフィックをブロックします。
+{: #cs_block_ingress}
+
+デフォルトで、Kubernetes の `NodePort` サービスと `LoadBalancer` サービスは、パブリックとプライベートのすべてのクラスター・インターフェースでアプリを利用可能にするために設計されています。ただし、トラフィックのソースや宛先に基づいて、サービスへの着信トラフィックをブロックすることもできます。トラフィックをブロックするには、Calico `preDNAT` ネットワーク・ポリシーを作成します。
+
+Kubernetes の LoadBalancer サービスは NodePort サービスでもあります。LoadBalancer サービスにより、ロード・バランサーの IP アドレスとポート上でアプリが利用可能になり、サービスのノード・ポート上でアプリが利用可能になります。ノード・ポートは、クラスター内のすべてのノードのすべての IP アドレス (パブリックとプライベート) でアクセス可能です。
+
+クラスター管理者は、Calico `preDNAT` ネットワーク・ポリシーのブロックを以下に対して使用できます。
+
+  - NodePort サービスへのトラフィック。LoadBalancer サービスへのトラフィックは許可されます。
+  - ソース・アドレスまたは CIDR に基づくトラフィック。
+
+これらの機能の利点の 1 つは、クラスター管理者が、プライベート LoadBalancer サービスのパブリック・ノード・ポートへのトラフィックをブロックできることです。管理者は、NodePort サービスまたは LoadBalancer サービスへのアクセスをホワイトリスティングすることもできます。`preDNAT` ネットワーク・ポリシーは便利なポリシーです。なぜなら、デフォルトの Kubernetes ポリシーと Calico ポリシーでは、保護する Kubernetes の NodePort サービスと LoadBalancer サービスに対して生成された DNAT iptables 規則があるために、それらのサービスに対してポリシーを適用するのが困難であるためです。
+
+Calico `preDNAT` ネットワーク・ポリシーは、[Calico ネットワーク・ポリシー・リソース ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v2.4/reference/calicoctl/resources/policy) に基づいて、iptables 規則を生成します。
+
+
+1. Kubernetes サービスへの ingress アクセスのための、Calico `preDNAT` ネットワーク・ポリシーを定義します。この例では、すべてのノード・ポートをブロックします。
+
+
+  ```
+  apiVersion: v1
+  kind: policy
+  metadata:
+    name: deny-kube-node-port-services
+  spec:
+    preDNAT: true
+    selector: ibm.role in { 'worker_public', 'master_public' }
+    ingress:
+    - action: deny
+      protocol: tcp
+      destination:
+        ports:
+        - 30000:32767
+    - action: deny
+      protocol: udp
+      destination:
+        ports:
+        - 30000:32767
+  ```
+  {: codeblock}
+
+2. Calico preDNAT ネットワーク・ポリシーを適用します。ポリシーの変更内容がクラスター全体に適用されるまでには約 1 分かかります。
+
+
+  ```
+  /opt/bin/calicoctl apply -f deny-kube-node-port-services.yaml
+  ```
+  {: pre}
+
+<br />
+
 
 ## イメージ
 {: #cs_security_deployment}
@@ -517,9 +654,6 @@ calicoctl get policy -o yaml```
 イメージの脆弱性評価を表示するには、以下のようにします。
 
 
-1.  **カタログ**から**「コンテナー」**を選択します。
-
-2.  脆弱性評価を調べるイメージを選択します。
-
-3.  **「脆弱性評価」**セクションで、**「レポートの表示」**をクリックします。
-
+1.  **カタログ**の「コンテナー」セクションで、**「Container Registry」**を選択します。
+2.  **「プライベート・リポジトリー (Private Repositories)」**ページの**「リポジトリー (Repositories)」**表で、イメージを指定します。
+3.  **「セキュリティー・レポート (Security Report)」**列で、イメージの状況をクリックしてその脆弱性評価を取得します。

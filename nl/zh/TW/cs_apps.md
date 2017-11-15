@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-08-13"
+lastupdated: "2017-10-05"
 
 ---
 
@@ -26,13 +26,15 @@ lastupdated: "2017-08-13"
 
 1.  [安裝 CLI](cs_cli_install.html#cs_cli_install)。
 
-2.  建立應用程式的配置 Script。[檢閱 Kubernetes 的最佳作法。 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/overview/)
+2.  建立應用程式的配置檔。[檢閱 Kubernetes 的最佳作法。 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/overview/)
 
-3.  使用下列其中一種方法來執行配置 Script。
+3.  使用下列其中一種方法來執行配置檔。
     -   [Kubernetes CLI](#cs_apps_cli)
     -   Kubernetes 儀表板
         1.  [啟動 Kubernetes 儀表板。](#cs_cli_dashboard)
-        2.  [執行配置 Script。](#cs_apps_ui)
+        2.  [執行配置檔。](#cs_apps_ui)
+
+<br />
 
 
 ## 啟動 Kubernetes 儀表板
@@ -82,21 +84,24 @@ lastupdated: "2017-08-13"
         {: codeblock}
 
 
-完成 Kubernetes 儀表板之後，使用 `CTRL+C` 來結束 `proxy` 指令。
+完成 Kubernetes 儀表板之後，使用 `CTRL+C` 來結束 `proxy` 指令。在您結束之後，無法再使用 Kubernetes 儀表板。請重新執行 `proxy` 指令，以重新啟動 Kubernetes 儀表板。
+
+<br />
+
 
 ## 容許對應用程式的公用存取
 {: #cs_apps_public}
 
-若要將應用程式設為可公開使用，您必須先更新配置 Script，再將應用程式部署至叢集。
+若要將應用程式設為可公開使用，您必須先更新配置檔，再將應用程式部署至叢集。
 {:shortdesc}
 
 視您所建立的是精簡還是標準叢集而定，會有不同的方式可從網際網路存取您的應用程式。
 
 <dl>
-<dt><a href="#cs_apps_public_nodeport" target="_blank">NodePort 類型服務</a>（精簡及標準叢集）</dt>
-<dd>公開每個工作者節點上的公用埠，並使用任何工作者節點的公用 IP 位址來公開存取您在叢集中的服務。工作者節點的公用 IP 位址不是永久性的。移除或重建工作者節點時，會將新的公用 IP 位址指派給工作者節點。NodePort 類型服務可以用於測試應用程式的公用存取，也可以用於僅短時間需要公用存取時。當您需要服務端點的穩定公用 IP 位址及更高可用性時，請使用 LoadBalancer 類型服務或 Ingress 來公開應用程式。</dd>
-<dt><a href="#cs_apps_public_load_balancer" target="_blank">LoadBalancer 類型服務</a>（僅限標準叢集）</dt>
-<dd>每個標準叢集都會佈建 4 個可攜式公用 IP 位址，可用來建立應用程式的外部 TCP/ UDP 負載平衡器。您可以公開應用程式所需的任何埠來自訂負載平衡器。指派給負載平衡器的可攜式公用 IP 位址是永久性的，因此在叢集中重建工作者節點時並不會變更。</br>
+<dt><a href="#cs_apps_public_nodeport" target="_blank">NodePort 服務</a>（精簡及標準叢集）</dt>
+<dd>公開每個工作者節點上的公用埠，並使用任何工作者節點的公用 IP 位址來公開存取您在叢集中的服務。工作者節點的公用 IP 位址不是永久性的。移除或重建工作者節點時，會將新的公用 IP 位址指派給工作者節點。NodePort 服務可以用於測試應用程式的公用存取，也可以用於僅短時間需要公用存取時。當您需要服務端點的穩定公用 IP 位址及更高可用性時，請使用 LoadBalancer 服務或 Ingress 來公開應用程式。</dd>
+<dt><a href="#cs_apps_public_load_balancer" target="_blank">LoadBalancer 服務</a>（僅限標準叢集）</dt>
+<dd>每個標準叢集都會佈建 4 個可攜式公用 IP 位址及 4 個可攜式專用 IP 位址，可用來建立應用程式的外部 TCP/ UDP 負載平衡器。您可以公開應用程式所需的任何埠來自訂負載平衡器。指派給負載平衡器的可攜式公用 IP 位址是永久性的，因此在叢集中重建工作者節點時並不會變更。</br>
 如果您的應用程式需要 HTTP 或 HTTPS 負載平衡，而且要使用一個公用路徑將您叢集中的多個應用程式公開為服務，請使用
 {{site.data.keyword.containershort_notm}} 的內建 Ingress 支援。</dd>
 <dt><a href="#cs_apps_public_ingress" target="_blank">Ingress</a>（僅限標準叢集）</dt>
@@ -108,16 +113,16 @@ lastupdated: "2017-08-13"
 使用叢集中任何工作者節點的公用 IP 位址，並公開節點埠，以將應用程式設為可公開使用。請使用此選項來進行測試及短期公用存取。
 {:shortdesc}
 
-對於精簡或標準叢集，您可以將應用程式公開為 NodePort 類型的 Kubernetes 服務。
+對於精簡或標準叢集，您可以將應用程式公開為 Kubernetes NodePort 服務。
 
-對於「{{site.data.keyword.Bluemix_notm}} 專用」環境，防火牆會封鎖公用 IP 位址。若要讓應用程式可公開使用，請改用 [LoadBalancer 類型服務](#cs_apps_public_load_balancer)或 [Ingress](#cs_apps_public_ingress)。
+對於「{{site.data.keyword.Bluemix_notm}} 專用」環境，防火牆會封鎖公用 IP 位址。若要讓應用程式可公開使用，請改用 [LoadBalancer 服務](#cs_apps_public_load_balancer)或 [Ingress](#cs_apps_public_ingress)。
 
-**附註：**工作者節點的公用 IP 位址不是永久性的。如果必須重建工作者節點，則會將新的公用 IP 位址指派給工作者節點。如果您需要服務的穩定公用 IP 位址及更高可用性，請使用 [LoadBalancer 類型服務](#cs_apps_public_load_balancer)或 [Ingress](#cs_apps_public_ingress) 來公開應用程式。
-
-
+**附註：**工作者節點的公用 IP 位址不是永久性的。如果必須重建工作者節點，則會將新的公用 IP 位址指派給工作者節點。如果您需要服務的穩定公用 IP 位址及更高可用性，請使用 [LoadBalancer 服務](#cs_apps_public_load_balancer)或 [Ingress](#cs_apps_public_ingress) 來公開應用程式。
 
 
-1.  在配置 Script 定義 [service ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/service/) 區段。
+
+
+1.  在配置檔定義 [service ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/service/) 區段。
 2.  在服務的 `spec` 區段中，新增 NodePort 類型。
 
     ```
@@ -224,32 +229,59 @@ lastupdated: "2017-08-13"
 
 3.  形成具有其中一個工作者節點公用 IP 位址及 NodePort 的 URL。範例：`http://192.0.2.23:30872`
 
-### 使用負載平衡器服務類型來配置應用程式的公用存取
+### 使用負載平衡器服務類型來配置應用程式的存取
 {: #cs_apps_public_load_balancer}
 
-公開埠並使用可攜式公用 IP 位址，讓負載平衡器可以存取應用程式。與 NodePort 服務不同，負載平衡器服務的可攜式公用 IP 位址不是取決於在其上已部署應用程式的工作者節點。負載平衡器的可攜式公用 IP 位址會自動進行指派，而且不會在您新增或移除工作者節點時變更，這表示負載平衡器服務的可用性比 NodePort 服務的可用性更高。使用者可以選取負載平衡器的任何埠，而不只限於 NodePort 埠範圍。您可以針對 TCP 及 UDP 通訊協定使用負載平衡器服務。
+公開埠並使用可攜式公用或專用 IP 位址，讓負載平衡器可以存取應用程式。與 NodePort 服務不同，負載平衡器服務的可攜式 IP 位址不是取決於在其上已部署應用程式的工作者節點。不過，Kubernetes LoadBalancer 服務也是 NodePort 服務。LoadBalancer 服務可讓您的應用程式透過負載平衡器 IP 位址及埠提供使用，並讓您的應用程式可透過服務的節點埠提供使用。 
+
+ 負載平衡器的可攜式 IP 位址會自動進行指派，而且不會在您新增或移除工作者節點時變更。因此，負載平衡器服務的高可用性高於 NodePort 服務。使用者可以選取負載平衡器的任何埠，而不只限於 NodePort 埠範圍。您可以針對 TCP 及 UDP 通訊協定使用負載平衡器服務。
 
 當「{{site.data.keyword.Bluemix_notm}} 專用」帳戶[啟用叢集功能](cs_ov.html#setup_dedicated)時，您可以要求將公用子網路用於負載平衡器 IP 位址。[開立支援問題單](/docs/support/index.html#contacting-support)建立子網路，然後使用 [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) 指令將子網路新增至叢集。
 
-**附註：**負載平衡器服務不支援 TLS 終止。如果您的應用程式需要 TLS 終止，您可以透過 [Ingress](#cs_apps_public_ingress) 來公開應用程式，或配置應用程式來管理 TLS 終止。
+**附註：**負載平衡器服務不支援 TLS 終止。如果您的應用程式需要 TLS 終止，您可以使用 [Ingress](#cs_apps_public_ingress) 來公開應用程式，或配置應用程式來管理 TLS 終止。
 
 開始之前：
 
 -   只有標準叢集才能使用此特性。
--   您必須要有可指派給負載平衡器服務的可攜式公用 IP 位址。
+-   您必須要有可指派給負載平衡器服務的可攜式公用或專用 IP 位址。
+-   具有可攜式專用 IP 位址的負載平衡器服務仍然會在每個工作者節點上開啟一個公用節點埠。若要新增網路原則以防止公用資料流量，請參閱[封鎖送入的資料流量](cs_security.html#cs_block_ingress)。
 
 若要建立負載平衡器服務，請執行下列動作：
 
-1.  [將應用程式部署至叢集](#cs_apps_cli)。將應用程式部署至叢集時，會自動建立一個以上的 Pod，以在容器中執行您的應用程式。請確定您已將標籤新增至您部署中配置 Script 的 meta 資料區段。此標籤是識別您應用程式執行所在之所有 Pod 的必要項目，如此才能將 Pod 包含在負載平衡中。
-2.  為您要公開的應用程式建立負載平衡器服務。若要讓您的應用程式可在公用網際網路上使用，您必須建立應用程式的 Kubernetes 服務，並配置服務，以將所有構成應用程式的 Pod 包含在負載平衡中。
-    1.  例如，開啟偏好的編輯器，然後建立名為 `myloadbalancer.yaml` 的服務配置 Script。
-    2.  為您要公開給大眾使用的應用程式定義負載平衡器服務。
+1.  [將應用程式部署至叢集](#cs_apps_cli)。將應用程式部署至叢集時，會自動建立一個以上的 Pod，以在容器中執行您的應用程式。請確定您已將標籤新增至您部署中配置檔的 meta 資料區段。此標籤是識別您應用程式執行所在之所有 Pod 的必要項目，如此才能將 Pod 包含在負載平衡中。
+2.  為您要公開的應用程式建立負載平衡器服務。若要讓您的應用程式可在公用網際網路或專用網路上使用，請建立應用程式的 Kubernetes 服務。請配置服務，以將所有構成應用程式的 Pod 包含在負載平衡中。
+    1.  例如，建立名稱為 `myloadbalancer.yaml` 的服務配置檔。
+    2.  為您要公開的應用程式定義負載平衡器服務。
+        - 如果叢集是在公用 VLAN 上，則會使用可攜式公用 IP 位址。大部分叢集都在公用 VLAN 上。
+        - 如果您的叢集只能在專用 VLAN 上使用，則會使用可攜式專用 IP 位址。 
+        - 您可以透過將註釋新增至配置檔，要求 LoadBalancer 服務的可攜式公用或專用 IP 位址。
 
+        使用預設 IP 位址的 LoadBalancer 服務：
+        
         ```
         apiVersion: v1
         kind: Service
         metadata:
           name: <myservice>
+        spec:
+          type: LoadBalancer
+          selector:
+            <selectorkey>:<selectorvalue>
+          ports:
+           - protocol: TCP
+             port: 8080
+        ```
+        {: codeblock}
+        
+        使用註釋來指定專用或公用 IP 位址的 LoadBalancer 服務：
+        
+        ```
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: <myservice>
+          annotations: 
+            service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private> 
         spec:
           type: LoadBalancer
           selector:
@@ -266,27 +298,31 @@ lastupdated: "2017-08-13"
         </thead>
         <tbody>
         <tr>
-        <td><code>name</code></td>
-        <td>將 <em>&lt;myservice&gt;</em> 取代為負載平衡器服務的名稱。</td>
+          <td><code>name</code></td>
+          <td>將 <em>&lt;myservice&gt;</em> 取代為負載平衡器服務的名稱。</td>
         </tr>
         <tr>
-        <td><code>selector</code></td>
-        <td>輸入標籤索引鍵 (<em>&lt;selectorkey&gt;</em>) 及值 (<em>&lt;selectorvalue&gt;</em>) 配對，以用來將應用程式執行所在的 Pod 設為目標。例如，如果您使用下列選取器 <code>app: code</code>，會將所有其 meta 資料中具有此標籤的 Pod 都包含在負載平衡中。當您將應用程式部署至叢集時，請輸入所使用的相同標籤。</td>
-         </tr>
-         <td><code>port</code></td>
-         <td>服務所接聽的埠。</td>
-         </tbody></table>
-    3.  選用項目：如果您的叢集可用的特定負載平衡器，要使用特定的可攜式公用 IP 位址，可以將 `loadBalancerIP` 包含在 spec 區段，以指定該 IP 位址。如需相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/service/)。
-    4.  選用項目：您可以選擇在 spec 區段中指定 `loadBalancerSourceRanges`，以配置防火牆。如需相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/)。
-    5.  儲存變更。
-    6.  在叢集中建立服務。
+          <td><code>selector</code></td>
+          <td>輸入標籤索引鍵 (<em>&lt;selectorkey&gt;</em>) 及值 (<em>&lt;selectorvalue&gt;</em>) 配對，以用來將應用程式執行所在的 Pod 設為目標。例如，如果您使用下列選取器 <code>app: code</code>，會將所有其 meta 資料中具有此標籤的 Pod 都包含在負載平衡中。當您將應用程式部署至叢集時，請輸入所使用的相同標籤。</td>
+        </tr>
+        <tr>
+          <td><code>port</code></td>
+          <td>服務所接聽的埠。</td>
+        </tr>
+        <tr>
+          <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:`
+          <td>要指定 LoadBalancer 類型的註釋。值為 `private` 和 `public`。在公用 VLAN 的叢集中建立公用 LoadBalancer 時，不需要此註釋。
+        </tbody></table>
+    3.  選用項目：若要為叢集可用的特定負載平衡器，使用特定的可攜式 IP 位址，可以將 `loadBalancerIP` 包含在 spec 區段，以指定該 IP 位址。如需相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/service/)。
+    4.  選用項目：在 spec 區段中指定 `loadBalancerSourceRanges`，以配置防火牆。如需相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/)。
+    5.  在叢集中建立服務。
 
         ```
         kubectl apply -f myloadbalancer.yaml
         ```
         {: pre}
 
-        若已建立負載平衡器服務，可攜式公用 IP 位址即會自動指派給負載平衡器。如果沒有可用的可攜式公用 IP 位址，則建立負載平衡器服務會失敗。
+        若已建立負載平衡器服務，可攜式 IP 位址即會自動指派給負載平衡器。如果沒有可用的可攜式 IP 位址，則無法建立負載平衡器服務。
 3.  驗證已順利建立負載平衡器服務。將 _&lt;myservice&gt;_ 取代為您在前一個步驟中建立之負載平衡器服務的名稱。
 
     ```
@@ -294,9 +330,9 @@ lastupdated: "2017-08-13"
     ```
     {: pre}
 
-    **附註：**這可能需要幾分鐘的時間，才能適當地建立負載平衡器服務，以及在公用網際網路上使用應用程式。
+    **附註：**這可能需要幾分鐘的時間，才能適當地建立負載平衡器服務，以及提供使用應用程式。
 
-    CLI 輸出會與下列內容類似：
+    CLI 輸出範例：
 
     ```
     Name:                   <myservice>
@@ -318,8 +354,8 @@ lastupdated: "2017-08-13"
     ```
     {: screen}
 
-    **LoadBalancer Ingress** IP 位址是已指派給負載平衡器服務的可攜式公用 IP 位址。
-4.  從網際網路存取您的應用程式。
+    **LoadBalancer Ingress** IP 位址是已指派給負載平衡器服務的可攜式 IP 位址。
+4.  如果您已建立公用負載平衡器，請從網際網路存取您的應用程式。
     1.  開啟偏好的 Web 瀏覽器。
     2.  輸入負載平衡器的可攜式公用 IP 位址及埠。在上述範例中，`192.168.10.38` 可攜式公用 IP 位址已指派給負載平衡器服務。
 
@@ -334,7 +370,7 @@ lastupdated: "2017-08-13"
 
 建立 IBM 提供的 Ingress 控制器所管理的 Ingress 資源，以公開叢集中的多個應用程式。Ingress 控制器是一個外部 HTTP 或 HTTPS 負載平衡器，使用安全且唯一的公用進入點，將送入要求遞送給叢集內外部的應用程式。
 
-**附註：**Ingress 僅適用於標準叢集，而且叢集中需要至少兩個工作者節點才能確保高可用性。
+**附註：**Ingress 僅適用於標準叢集，而且叢集中需要至少兩個工作者節點才能確保高可用性。設定 Ingress 需要[管理者存取原則](cs_cluster.html#access_ov)。請驗證您的現行[存取原則](cs_cluster.html#view_access)。
 
 當您建立標準叢集時，會自動建立 Ingress 控制器，並獲指派一個可攜式公用 IP 位址及一個公用路徑。您可以配置 Ingress 控制器，以及為每個公開給大眾使用的應用程式定義個別遞送規則。每個透過 Ingress 公開的應用程式，都會獲指派一個附加至公用路徑的唯一路徑，以便您可以使用唯一 URL 來公開存取叢集中的應用程式。
 
@@ -360,9 +396,9 @@ lastupdated: "2017-08-13"
 
 若要配置 Ingress 控制器，請執行下列動作：
 
-1.  [將應用程式部署至叢集](#cs_apps_cli)。將應用程式部署至叢集時，會自動建立一個以上的 Pod，以在容器中執行您的應用程式。請確定您已將標籤新增至您部署中配置 Script 的 meta 資料區段。此標籤是識別您應用程式執行所在之所有 Pod 的必要項目，如此才能將 Pod 包含在 Ingress 負載平衡中。
+1.  [將應用程式部署至叢集](#cs_apps_cli)。將應用程式部署至叢集時，會自動建立一個以上的 Pod，以在容器中執行您的應用程式。請確定您已將標籤新增至您部署中配置檔的 meta 資料區段。此標籤是識別您應用程式執行所在之所有 Pod 的必要項目，如此才能將 Pod 包含在 Ingress 負載平衡中。
 2.  為要公開的應用程式，建立 Kubernetes 服務。只有在您的應用程式是透過叢集內的 Kubernetes 服務公開時，Ingress 控制器才能將應用程式包含在 Ingress 負載平衡中。
-    1.  例如，開啟偏好的編輯器，然後建立名為 `myservice.yaml` 的服務配置 Script。
+    1.  例如，開啟偏好的編輯器，然後建立名為 `myservice.yaml` 的服務配置檔。
     2.  為您要公開給大眾使用的應用程式定義服務。
 
         ```
@@ -430,8 +466,8 @@ lastupdated: "2017-08-13"
 
     您可以在 **Ingress subdomain** 欄位中看到 IBM 提供的網域。
 4.  建立 Ingress 資源。Ingress 資源定義您為應用程式所建立之 Kubernetes 服務的遞送規則，並且供 Ingress 控制器用來將送入網路資料流量遞送給服務。只要每個應用程式都是透過叢集內的 Kubernetes 服務公開時，您就可以使用一個 Ingress 資源來為多個應用程式定義遞送規則。
-    1.  例如，開啟偏好的編輯器，然後建立名為 `myingress.yaml` 的 Ingress 配置 Script。
-    2.  在配置 Script 中定義 Ingress 資源，以使用 IBM 提供的網域將送入的網路資料流量遞送至您先前建立的服務。
+    1.  例如，開啟偏好的編輯器，然後建立名為 `myingress.yaml` 的 Ingress 配置檔。
+    2.  在配置檔中定義 Ingress 資源，以使用 IBM 提供的網域將送入的網路資料流量遞送至您先前建立的服務。
 
         ```
         apiVersion: extensions/v1beta1
@@ -528,9 +564,9 @@ lastupdated: "2017-08-13"
 
 若要配置 Ingress 控制器，請執行下列動作：
 
-1.  [將應用程式部署至叢集](#cs_apps_cli)。請確定您已將標籤新增至您部署中配置 Script 的 meta 資料區段。此標籤會識別您應用程式執行所在的所有 Pod，如此才能將 Pod 包含在 Ingress 負載平衡中。
+1.  [將應用程式部署至叢集](#cs_apps_cli)。請確定您已將標籤新增至您部署中配置檔的 meta 資料區段。此標籤會識別您應用程式執行所在的所有 Pod，如此才能將 Pod 包含在 Ingress 負載平衡中。
 2.  為要公開的應用程式，建立 Kubernetes 服務。只有在您的應用程式是透過叢集內的 Kubernetes 服務公開時，Ingress 控制器才能將應用程式包含在 Ingress 負載平衡中。
-    1.  例如，開啟偏好的編輯器，然後建立名為 `myservice.yaml` 的服務配置 Script。
+    1.  例如，開啟偏好的編輯器，然後建立名為 `myservice.yaml` 的服務配置檔。
     2.  為您要公開給大眾使用的應用程式定義服務。
 
         ```
@@ -603,8 +639,8 @@ lastupdated: "2017-08-13"
     您可以在 **Ingress subdomain** 中看到 IBM 提供的網域，並在 **Ingress secret** 欄位中看到 IBM 提供的憑證。
 
 4.  建立 Ingress 資源。Ingress 資源定義您為應用程式所建立之 Kubernetes 服務的遞送規則，並且供 Ingress 控制器用來將送入網路資料流量遞送給服務。只要每個應用程式都是透過叢集內的 Kubernetes 服務公開時，您就可以使用一個 Ingress 資源來為多個應用程式定義遞送規則。
-    1.  例如，開啟偏好的編輯器，然後建立名為 `myingress.yaml` 的 Ingress 配置 Script。
-    2.  在配置 Script 中定義 Ingress 資源，以使用 IBM 提供的網域將送入的網路資料流量遞送至服務，以及使用 IBM 提供的憑證來管理 TLS 終止。針對每個服務，您可以定義附加至 IBM 提供網域的個別路徑，以建立應用程式的唯一路徑，例如 `https://ingress_domain/myapp`。當您將此路徑輸入 Web 瀏覽器時，會將網路資料流量遞送至 Ingress 控制器。Ingress 控制器會查閱關聯的服務，然後將網路資料流量傳送至服務，並進一步傳送至執行應用程式的 Pod。
+    1.  例如，開啟偏好的編輯器，然後建立名為 `myingress.yaml` 的 Ingress 配置檔。
+    2.  在配置檔中定義 Ingress 資源，以使用 IBM 提供的網域將送入的網路資料流量遞送至服務，以及使用 IBM 提供的憑證來管理 TLS 終止。針對每個服務，您可以定義附加至 IBM 提供網域的個別路徑，以建立應用程式的唯一路徑，例如 `https://ingress_domain/myapp`。當您將此路徑輸入 Web 瀏覽器時，會將網路資料流量遞送至 Ingress 控制器。Ingress 控制器會查閱關聯的服務，然後將網路資料流量傳送至服務，並進一步傳送至執行應用程式的 Pod。
 
         **附註：**應用程式必須接聽 Ingress 資源中所定義的路徑。否則，無法將網路資料流量轉遞至應用程式。大部分的應用程式不會接聽特定路徑，但使用根路徑及特定埠。在此情況下，請將根路徑定義為 `/`，並且不要為應用程式指定個別路徑。
 
@@ -722,12 +758,12 @@ lastupdated: "2017-08-13"
 1.  建立自訂網域。若要建立自訂網域，請與「網域名稱服務 (DNS)」提供者合作，登錄自訂網域。
 2.  配置網域，以將送入的網路資料流量遞送至 IBM Ingress 控制器。可選擇的選項有：
     -   將 IBM 提供的網域指定為「標準名稱記錄 (CNAME)」，以定義自訂網域的別名。若要尋找 IBM 提供的 Ingress 網域，請執行 `bx cs cluster-get <mycluster>`，並尋找 **Ingress subdomain** 欄位。
-    -   將自訂網域對映至 IBM 提供的 Ingress 控制器的可攜式公用 IP 位址，方法是將 IP 位址新增為「指標記錄 (PTR)」。若要尋找 Ingress 控制器的可攜式公用 IP 位址，請執行下列動作：
+    -   將自訂網域對映至 IBM 提供的 Ingress 控制器的可攜式公用 IP 位址，方法是將 IP 位址新增為記錄。若要尋找 Ingress 控制器的可攜式公用 IP 位址，請執行下列動作：
         1.  執行 `bx cs cluster-get <mycluster>` 並尋找 **Ingress subdomain** 欄位。
         2.  執行 `nslookup <Ingress subdomain>`。
-3.  建立以 base64 格式編碼的網域的 TLS 憑證及金鑰。
+3.  建立以 PEM 格式編碼的網域的 TLS 憑證及金鑰。
 4.  將 TLS 憑證及金鑰儲存至 Kubernetes Secret 中。
-    1.  例如，開啟偏好的編輯器，然後建立名為 `mysecret.yaml` 的 Kubernetes Secret 配置 Script。
+    1.  例如，開啟偏好的編輯器，然後建立名為 `mysecret.yaml` 的 Kubernetes Secret 配置檔。
     2.  定義使用 TLS 憑證及金鑰的 Secret。
 
         ```
@@ -759,7 +795,7 @@ lastupdated: "2017-08-13"
          <td>將 <em>&lt;tlskey&gt;</em> 取代為以 base64 格式編碼的自訂 TLS 金鑰。</td>
          </tbody></table>
 
-    3.  儲存配置 Script。
+    3.  儲存配置檔。
     4.  建立叢集的 TLS Secret。
 
         ```
@@ -767,11 +803,11 @@ lastupdated: "2017-08-13"
         ```
         {: pre}
 
-5.  [將應用程式部署至叢集](#cs_apps_cli)。將應用程式部署至叢集時，會自動建立一個以上的 Pod，以在容器中執行您的應用程式。請確定您已將標籤新增至您部署中配置 Script 的 meta 資料區段。此標籤是識別您應用程式執行所在之所有 Pod 的必要項目，如此才能將 Pod 包含在 Ingress 負載平衡中。
+5.  [將應用程式部署至叢集](#cs_apps_cli)。將應用程式部署至叢集時，會自動建立一個以上的 Pod，以在容器中執行您的應用程式。請確定您已將標籤新增至您部署中配置檔的 meta 資料區段。此標籤是識別您應用程式執行所在之所有 Pod 的必要項目，如此才能將 Pod 包含在 Ingress 負載平衡中。
 
 6.  為要公開的應用程式，建立 Kubernetes 服務。只有在您的應用程式是透過叢集內的 Kubernetes 服務公開時，Ingress 控制器才能將應用程式包含在 Ingress 負載平衡中。
 
-    1.  例如，開啟偏好的編輯器，然後建立名為 `myservice.yaml` 的服務配置 Script。
+    1.  例如，開啟偏好的編輯器，然後建立名為 `myservice.yaml` 的服務配置檔。
     2.  為您要公開給大眾使用的應用程式定義服務。
 
         ```
@@ -815,8 +851,8 @@ lastupdated: "2017-08-13"
 
     5.  針對每個您要公開給大眾使用的應用程式，重複這些步驟。
 7.  建立 Ingress 資源。Ingress 資源定義您為應用程式所建立之 Kubernetes 服務的遞送規則，並且供 Ingress 控制器用來將送入網路資料流量遞送給服務。只要每個應用程式都是透過叢集內的 Kubernetes 服務公開時，您就可以使用一個 Ingress 資源來為多個應用程式定義遞送規則。
-    1.  例如，開啟偏好的編輯器，然後建立名為 `myingress.yaml` 的 Ingress 配置 Script。
-    2.  在配置 Script 中定義 Ingress 資源，以使用自訂網域將送入的網路資料流量遞送至服務，以及使用自訂憑證來管理 TLS 終止。針對每個服務，您可以定義附加至自訂網域的個別路徑，以建立應用程式的唯一路徑，例如 `https://mydomain/myapp`。當您將此路徑輸入 Web 瀏覽器時，會將網路資料流量遞送至 Ingress 控制器。Ingress 控制器會查閱關聯的服務，然後將網路資料流量傳送至服務，並進一步傳送至執行應用程式的 Pod。
+    1.  例如，開啟偏好的編輯器，然後建立名為 `myingress.yaml` 的 Ingress 配置檔。
+    2.  在配置檔中定義 Ingress 資源，以使用自訂網域將送入的網路資料流量遞送至服務，以及使用自訂憑證來管理 TLS 終止。針對每個服務，您可以定義附加至自訂網域的個別路徑，以建立應用程式的唯一路徑，例如 `https://mydomain/myapp`。當您將此路徑輸入 Web 瀏覽器時，會將網路資料流量遞送至 Ingress 控制器。Ingress 控制器會查閱關聯的服務，然後將網路資料流量傳送至服務，並進一步傳送至執行應用程式的 Pod。
 
         **附註：**應用程式必須接聽 Ingress 資源中所定義的路徑。否則，無法將網路資料流量轉遞至應用程式。大部分的應用程式不會接聽特定路徑，但使用根路徑及特定埠。在此情況下，請將根路徑定義為 `/`，並且不要為應用程式指定個別路徑。
 
@@ -936,7 +972,7 @@ lastupdated: "2017-08-13"
 您可以配置 Ingress 控制器，以將 IBM 提供的網域上的送入網路資料流量遞送給叢集外部的應用程式。如果您要改用自訂網域及 TLS 憑證，請將 IBM 提供的網域及 TLS 憑證取代為[自訂網域及 TLS 憑證](#custom_domain_cert)。
 
 1.  配置 Kubernetes 端點，以定義您要包含在叢集負載平衡中的應用程式的外部位置。
-    1.  例如，開啟偏好的編輯器，然後建立名為 `myexternalendpoint.yaml` 的端點配置 Script。
+    1.  例如，開啟偏好的編輯器，然後建立名為 `myexternalendpoint.yaml` 的端點配置檔。
     2.  定義外部端點。請包含您可用來存取外部應用程式的所有公用 IP 位址及埠。
 
         ```
@@ -979,7 +1015,7 @@ lastupdated: "2017-08-13"
         {: pre}
 
 2.  建立叢集的 Kubernetes 服務，並且配置它以將送入的要求轉遞至您先前建立的外部端點。
-    1.  例如，開啟偏好的編輯器，然後建立名為 `myexternalservice.yaml` 的服務配置 Script。
+    1.  例如，開啟偏好的編輯器，然後建立名為 `myexternalservice.yaml` 的服務配置檔。
     2.  定義服務。
 
         ```
@@ -1048,8 +1084,8 @@ lastupdated: "2017-08-13"
     您可以在 **Ingress subdomain** 中看到 IBM 提供的網域，並在 **Ingress secret** 欄位中看到 IBM 提供的憑證。
 
 4.  建立 Ingress 資源。Ingress 資源定義您為應用程式所建立之 Kubernetes 服務的遞送規則，並且供 Ingress 控制器用來將送入網路資料流量遞送給服務。只要每個應用程式都是透過叢集內的 Kubernetes 服務使用其外部端點公開時，您就可以使用一個 Ingress 資源來為多個外部應用程式定義遞送規則。
-    1.  例如，開啟偏好的編輯器，然後建立名為 `myexternalingress.yaml` 的 Ingress 配置 Script。
-    2.  在配置 Script 中定義 Ingress 資源，以使用 IBM 提供的網域及 TLS 憑證將送入的網路資料流量遞送至外部應用程式，方法是使用您先前定義的外部端點。針對每個服務，您可以定義附加至 IBM 提供網域或自訂網域的個別路徑，以建立應用程式的唯一路徑，例如 `https://ingress_domain/myapp`。當您將此路徑輸入 Web 瀏覽器時，會將網路資料流量遞送至 Ingress 控制器。Ingress 控制器會查閱關聯的服務，然後將網路資料流量傳送至服務，並進一步傳送至外部應用程式。
+    1.  例如，開啟偏好的編輯器，然後建立名為 `myexternalingress.yaml` 的 Ingress 配置檔。
+    2.  在配置檔中定義 Ingress 資源，以使用 IBM 提供的網域及 TLS 憑證將送入的網路資料流量遞送至外部應用程式，方法是使用您先前定義的外部端點。針對每個服務，您可以定義附加至 IBM 提供網域或自訂網域的個別路徑，以建立應用程式的唯一路徑，例如 `https://ingress_domain/myapp`。當您將此路徑輸入 Web 瀏覽器時，會將網路資料流量遞送至 Ingress 控制器。Ingress 控制器會查閱關聯的服務，然後將網路資料流量傳送至服務，並進一步傳送至外部應用程式。
 
         **附註：**應用程式必須接聽 Ingress 資源中所定義的路徑。否則，無法將網路資料流量轉遞至應用程式。大部分的應用程式不會接聽特定路徑，但使用根路徑及特定埠。在此情況下，請將根路徑定義為 /，並且不要為應用程式指定個別路徑。
 
@@ -1171,7 +1207,9 @@ lastupdated: "2017-08-13"
 |[HTTP 重新導向至 HTTPS](#redirect_http_to_https)|將您網域上不安全的 HTTP 要求重新導向 HTTPS。|
 |[用戶端回應資料緩衝](#response_buffer)|將回應傳送至用戶端時，停用 Ingress 控制器上的用戶端回應緩衝。|
 |[自訂連接逾時和讀取逾時](#timeout)|調整 Ingress 控制器等待以連接及讀取後端應用程式的時間，在此時間之後，後端應用程式將被視為無法使用。|
-|[自訂用戶端要求內文大小上限](#client_max_body_size)|調整允許傳送至 Ingress 控制器的用戶端要求內文大小。|
+|[自訂用戶端要求內文大小上限](#client_max_body_size)|調整容許傳送至 Ingress 控制器的用戶端要求內文大小。|
+|[自訂 HTTP 及 HTTPS 埠](#custom_http_https_ports)|變更 HTTP 及 HTTPS 網路資料流量的預設埠。|
+
 
 ##### **使用重新編寫，將送入的網路資料流量遞送至不同路徑**
 {: #rewrite}
@@ -1190,7 +1228,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/rewrite-path: "serviceName=&lt;service_name1&gt; rewrite=&lt;rewrite_path1&gt;;serviceName=&lt;service_name2&gt; rewrite=&lt;rewrite_path2&gt;"
+    ingress.bluemix.net/rewrite-path: "serviceName=&lt;service_name1&gt; rewrite=&lt;target_path1&gt;;serviceName=&lt;service_name2&gt; rewrite=&lt;target_path2&gt;"
 spec:
   tls:
   - hosts:
@@ -1216,7 +1254,7 @@ spec:
 <tbody>
 <tr>
 <td><code>annotations</code></td>
-<td>將 <em>&lt;service_name&gt;</em> 取代為您為應用程式所建立之 Kubernetes 服務的名稱，並將 <em>&lt;rewrite-path&gt;</em> 取代為您的應用程式所接聽的路徑。Ingress 控制器網域上的送入網路資料流量即會使用此路徑轉遞至 Kubernetes 服務。大部分的應用程式不會接聽特定路徑，但使用根路徑及特定埠。在此情況下，將 <code>/</code> 定義為您應用程式的 <em>&lt;rewrite-path&gt;</em>。</td>
+<td>將 <em>&lt;service_name&gt;</em> 取代為您為應用程式所建立之 Kubernetes 服務的名稱，並將 <em>&lt;target-path&gt;</em> 取代為您的應用程式所接聽的路徑。Ingress 控制器網域上的送入網路資料流量即會使用此路徑轉遞至 Kubernetes 服務。大部分的應用程式不會接聽特定路徑，但使用根路徑及特定埠。在此情況下，將 <code>/</code> 定義為您應用程式的 <em>rewrite-path</em>。</td>
 </tr>
 <tr>
 <td><code>path</code></td>
@@ -1545,21 +1583,21 @@ spec:
   <td>請取代下列值：<ul><li><code><em>&lt;connect_timeout&gt;</em></code>：輸入要等待連接後端應用程式的秒數，例如 <strong>65s</strong>。
 
   </br></br>
-  <strong>附註：</strong>連接逾時不可超過 75 秒。</li><li><code><em>&lt;read_timeout&gt;</em></code>：輸入要等待從後端應用程式讀取的秒數，例如 <strong>65s</strong>。</li></ul></td>
+  <strong>附註：</strong>連接逾時不可超過 75 秒。</li><li><code><em>&lt;read_timeout&gt;</em></code>：輸入要在讀取後端應用程式之前等待的秒數，例如 <strong>65s</strong>。</li></ul></td>
   </tr>
   </tbody></table>
 
   </dd></dl>
 
-##### **設定用戶端要求內文的允許大小上限**
+##### **設定用戶端要求內文的容許大小上限**
 {: #client_max_body_size}
 
-使用這個註釋，可以調整用戶端可以傳送作為要求一部分的內文大小。
+調整用戶端可以傳送作為要求一部分的內文大小。
 {:shortdesc}
 
 <dl>
 <dt>說明</dt>
-<dd>為了維護預期的效能，用戶端要求內文大小上限設為 1 MB。當內文大小超過限制的用戶端要求傳送至 Ingress 控制器，而且用戶端不允許將資料分成多個片段時，Ingress 控制器會傳回 413（要求的實體太大）的 HTTP 回應給用戶端。在要求內文的大小減少之前，用戶端及 Ingress 控制器之間無法進行連線。當用戶端允許資料分割成多個片段時，資料會分成 1 MB 的套件，然後傳送至 Ingress 控制器。
+<dd>為了維護預期的效能，用戶端要求內文大小上限設為 1 MB。當內文大小超過限制的用戶端要求傳送至 Ingress 控制器，而且用戶端不容許將資料分成多個片段時，Ingress 控制器會傳回 413（要求的實體太大）的 HTTP 回應給用戶端。在要求內文的大小減少之前，用戶端及 Ingress 控制器之間無法進行連線。當用戶端容許資料分割成多個片段時，資料會分成 1 MB 的套件，然後傳送至 Ingress 控制器。
 
 </br></br>
 您可能會想要增加內文大小上限，因為您預期用戶端要求的內文大小會大於 1 MB。例如，您要讓用戶端能上傳大型檔案。增加要求內文大小上限可能會影響 Ingress 控制器的效能，因為對用戶端的連線必須維持開啟，直到收到要求為止。
@@ -1604,23 +1642,122 @@ spec:
   </tbody></table>
 
   </dd></dl>
+  
+
+##### **變更 HTTP 及 HTTPS 網路資料流量的預設埠**
+{: #custom_http_https_ports}
+
+使用此註釋，可變更 HTTP 及 HTTPS 網路資料流量的預設埠，HTTP 為埠 80，HTTPS 為埠 443。
+{:shortdesc}
+
+<dl>
+<dt>說明</dt>
+<dd>依預設，Ingress 控制器配置為在埠 80 上接聽送入的 HTTP 網路資料流量，並在埠 443 上接聽送入的 HTTPS 網路資料流量。您可以變更預設埠來新增 Ingress 控制器網域的安裝，或是只啟用 HTTPS 埠。
+</dd>
+
+
+<dt>Ingress 資源範例 YAML</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/custom-port: "protocol=&lt;protocol1&gt; port=&lt;port1&gt;;protocol=&lt;protocol2&gt;port=&lt;port2&gt;"
+spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mytlssecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
+
+<table>
+  <thead>
+  <th colspan=2><img src="images/idea.png"/> 瞭解 YAML 檔案元件</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>annotations</code></td>
+  <td>請取代下列值：<ul><li><code><em>&lt;protocol&gt;</em></code>：輸入 <strong>http</strong> 或 <strong>https</strong> 來變更送入之 HTTP 或 HTTPS 網路資料流量的預設埠。</li>
+  <li><code><em>&lt;port&gt;</em></code>：輸入要用於送入之 HTTP 或 HTTPS 網路資料流量的埠號。</li></ul>
+  <p><strong>附註：</strong>當為 HTTP 或 HTTPS 指定自訂埠時，預設埠對於 HTTP 和 HTTPS 便不再有效。例如，若要將 HTTPS 的預設埠變更為 8443，但 HTTP 使用預設埠，您必須兩者都設定自訂埠：<code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>。</p>
+  </td>
+  </tr>
+  </tbody></table>
+
+  </dd>
+  <dt>用法</dt>
+  <dd><ol><li>檢閱 Ingress 控制器的開啟埠。
+<pre class="pre">
+<code>kubectl get service -n kube-system</code></pre>
+CLI 輸出會與下列內容類似：
+<pre class="screen">
+<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
+public-ingress-ctl-svc   10.10.10.149   169.60.16.246   80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+<li>開啟 Ingress 控制器配置對映。
+<pre class="pre">
+<code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
+<li>將非預設的 HTTP 及 HTTPS 埠新增至配置對映。將 &lt;port&gt; 取代為您要開啟的 HTTP 或 HTTPS 埠。
+<pre class="codeblock">
+<code>apiVersion: v1
+kind: ConfigMap
+data:
+  public-ports: &lt;port1&gt;;&lt;port2&gt;
+metadata:
+  creationTimestamp: 2017-08-22T19:06:51Z
+  name: ibm-cloud-provider-ingress-cm
+  namespace: kube-system
+  resourceVersion: "1320"
+  selfLink: /api/v1/namespaces/kube-system/configmaps/ibm-cloud-provider-ingress-cm
+  uid: &lt;uid&gt;</code></pre></li>
+  <li>驗證您的 Ingress 控制器已使用非預設埠重新配置。
+<pre class="pre">
+<code>kubectl get service -n kube-system</code></pre>
+CLI 輸出會與下列內容類似：
+<pre class="screen">
+<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
+public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+<li>配置您的 Ingress，以在將送入的網路資料流量遞送至服務時使用非預設埠。請在此參照中使用範例 YAML。</li>
+<li>更新 Ingress 控制器配置。
+<pre class="pre">
+<code>kubectl apply -f &lt;yaml_file&gt;</code></pre>
+</li>
+<li>開啟偏好的 Web 瀏覽器以存取您的應用程式。範例：<code>https://&lt;ibmdomain&gt;:&lt;port&gt;/&lt;service_path&gt;/</code></li></ol></dd></dl>
+
+
+
+
+
+
+
+
+<br />
 
 
 ## 管理 IP 位址及子網路
 {: #cs_cluster_ip_subnet}
 
-您可以使用可攜式公用子網路及 IP 位址來公開叢集中的應用程式，並且將它們設為可從網際網路中進行存取。
+您可以使用可攜式公用及專用子網路及 IP 位址來公開叢集中的應用程式，並且將它們設為可從網際網路或在專用網路上進行存取。
 {:shortdesc}
 
-在 {{site.data.keyword.containershort_notm}} 中，您可以將網路子網路新增至叢集，為 Kubernetes 服務新增穩定的可攜式 IP。當您建立標準叢集時，{{site.data.keyword.containershort_notm}} 會自動佈建 1 個可攜式公用子網路及 5 個 IP 位址。可攜式公用 IP 位址是靜態的，不會在移除工作者節點或甚至叢集時變更。
+在 {{site.data.keyword.containershort_notm}} 中，您可以將網路子網路新增至叢集，為 Kubernetes 服務新增穩定的可攜式 IP。當您建立標準叢集時，{{site.data.keyword.containershort_notm}} 會自動佈建 1 個可攜式公用子網路、5 個可攜式公用及 5 個可攜式專用 IP 位址。可攜式 IP 位址是靜態的，不會在移除工作者節點或甚至叢集時變更。
 
-使用公用路徑，以將其中一個可攜式公用 IP 位址用於可用來公開叢集中多個應用程式的 [Ingress 控制器](#cs_apps_public_ingress)。[建立負載平衡器服務](#cs_apps_public_load_balancer)，即可使用其餘 4 個可攜式公用 IP 位址，將單一應用程式公開給大眾使用。
+ 兩個可攜式 IP 位址（一個公用、一個專用）會用於 [Ingress 控制器](#cs_apps_public_ingress)，您可以用 Ingress 控制器，藉由使用公用路徑來公開叢集中多個應用程式。4 個可攜式公用和 4 個專用 IP 位址可用來透過[建立負載平衡器服務](#cs_apps_public_load_balancer)來公開應用程式。 
 
 **附註：**可攜式公用 IP 位址是按月收費。如果您選擇在佈建叢集之後移除可攜式公用 IP 位址，則仍需要按月支付費用，即使您僅短時間使用。
 
 
 
-1.  建立名為 `myservice.yaml` 的 Kubernetes 服務配置 Script，並且使用虛擬負載平衡器 IP 位址來定義類型為 `LoadBalancer` 的服務。下列範例使用 IP 位址 1.1.1.1 作為負載平衡器 IP 位址。
+1.  建立名為 `myservice.yaml` 的 Kubernetes 服務配置檔，並且使用虛擬負載平衡器 IP 位址來定義類型為 `LoadBalancer` 的服務。下列範例使用 IP 位址 1.1.1.1 作為負載平衡器 IP 位址。
 
     ```
     apiVersion: v1
@@ -1666,10 +1803,10 @@ spec:
 
 </staging>
 
-### 釋放已使用的公用 IP 位址
+### 釋放已使用的 IP 位址
 {: #freeup_ip}
 
-您可以刪除使用可攜式公用 IP 位址的負載平衡器服務，以釋放已使用的可攜式公用 IP 位址。
+您可以刪除使用可攜式 IP 位址的負載平衡器服務，以釋放已使用的可攜式 IP 位址。
 
 [開始之前，請為您要使用的叢集設定環境定義。](cs_cli_install.html#cs_cli_configure)
 
@@ -1680,18 +1817,20 @@ spec:
     ```
     {: pre}
 
-2.  移除使用公用 IP 位址的負載平衡器服務。
+2.  移除使用公用或專用 IP 位址的負載平衡器服務。
 
     ```
     kubectl delete service <myservice>
     ```
     {: pre}
 
+<br />
+
 
 ## 使用 GUI 部署應用程式
 {: #cs_apps_ui}
 
-當您使用 Kubernetes 儀表板將應用程式部署至叢集時，會自動建立可建立、更新及管理叢集中 Pod 的部署。
+當您使用 Kubernetes 儀表板將應用程式部署至叢集時，會自動建立可建立、更新及管理叢集中 Pod 的部署資源。
 {:shortdesc}
 
 開始之前：
@@ -1703,9 +1842,12 @@ spec:
 
 1.  [開啟 Kubernetes 儀表板](#cs_cli_dashboard)。
 2.  從 Kubernetes 儀表板中，按一下 **+ 建立**。
-3.  選取**在下面指定應用程式詳細資料**以在 GUI 上輸入應用程式詳細資料，或選取**上傳 YAML 或 JSON 檔案**以上傳應用程式[配置檔 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/)。使用[此範例 YAML 檔案 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-{{site.data.keyword.Bluemix_notm}}/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml)，以在美國南部地區從 **ibmliberty** 映像檔部署容器。
+3.  選取**在下面指定應用程式詳細資料**以在 GUI 上輸入應用程式詳細資料，或選取**上傳 YAML 或 JSON 檔案**以上傳應用程式[配置檔 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/)。使用[此範例 YAML 檔案 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-Bluemix/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml)，以在美國南部地區從 **ibmliberty** 映像檔部署容器。
 4.  在 Kubernetes 儀表板中，按一下**部署**，以驗證已建立部署。
-5.  如果您使用節點埠服務讓應用程式可公開使用，負載平衡器服務（或 Ingress）會[確認您可以存取此應用程式](#cs_apps_public)。
+5.  如果您使用節點埠服務讓應用程式可公開使用，負載平衡器服務（或 Ingress）會確認您可以存取此應用程式。
+
+<br />
+
 
 ## 使用 CLI 部署應用程式
 {: #cs_apps_cli}
@@ -1720,7 +1862,7 @@ spec:
 
 若要部署應用程式，請執行下列動作：
 
-1.  根據 [Kubernetes 最佳作法 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/overview/) 建立配置 Script。配置 Script 通常會包含您在 Kubernetes 中建立之每一個資源的配置詳細資料。您的 Script 可能包括下列一個以上區段：
+1.  根據 [Kubernetes 最佳作法 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/overview/) 建立配置檔。配置檔通常會包含您在 Kubernetes 中建立之每一個資源的配置詳細資料。您的 Script 可能包括下列一個以上區段：
 
     -   [Deployment ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)：定義 Pod 和抄本集的建立。Pod 包括一個個別的容器化應用程式，而抄本集會控制多個 Pod 實例。
 
@@ -1728,15 +1870,91 @@ spec:
 
     -   [Ingress ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/ingress/)：指定一種負載平衡器，提供路徑來公開存取您的應用程式。
 
-2.  在叢集的環境定義中執行配置 Script。
+2.  在叢集的環境定義中執行配置檔。
 
     ```
     kubectl apply -f deployment_script_location
     ```
     {: pre}
 
-3.  如果您使用節點埠服務讓應用程式可公開使用，負載平衡器服務（或 Ingress）會[確認您可以存取此應用程式](#cs_apps_public)。
+3.  如果您使用節點埠服務讓應用程式可公開使用，負載平衡器服務（或 Ingress）會確認您可以存取此應用程式。
 
+<br />
+
+
+## 調整應用程式
+{: #cs_apps_scaling}
+
+<!--Horizontal auto-scaling is not working at the moment due to a port issue with heapster. The dev team is working on a fix. We pulled out this content from the public docs. It is only visible in staging right now.-->
+
+部署雲端應用程式，以回應應用程式要求的變更，並且只在需要時才使用資源。自動調整可根據 CPU 自動增加或減少應用程式的實例數。
+{:shortdesc}
+
+開始之前，請先將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為您的叢集。
+
+**附註：**您在尋找調整 Cloud Foundry 應用程式的相關資訊嗎？請查看 [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html)。
+
+使用 Kubernetes，您可以啟用 [Horizontal Pod Autoscaling ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)，根據 CPU 來調整應用程式。
+
+1.  從 CLI 將應用程式部署至叢集。當您部署應用程式時，必須要求 CPU。
+
+
+
+    ```
+    kubectl run <name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
+    ```
+    {: pre}
+
+    <table>
+    <thead>
+    <th colspan=2><img src="images/idea.png"/> 瞭解此指令的元件</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>--image</code></td>
+    <td>您要部署的應用程式。</td>
+    </tr>
+    <tr>
+    <td><code>--request=cpu</code></td>
+    <td>容器的必要 CPU（以 millicores 為單位指定）。例如，<code>--requests=200m</code>。</td>
+    </tr>
+    <tr>
+    <td><code>--expose</code></td>
+    <td>設為 true 時，會建立外部服務。</td>
+    </tr>
+    <tr>
+    <td><code>--port</code></td>
+    <td>透過此埠可讓您的應用程式供外部使用。</td>
+    </tr></tbody></table>
+
+    **附註：**若為更複雜的部署，您可能需要建立[配置檔](#cs_apps_cli)。
+2.  建立 Horizontal Pod Autoscaler，並定義您的原則。如需使用 `kubetcl autoscale` 指令的相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/user-guide/kubectl/v1.5/#autoscale)。
+
+    ```
+    kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
+    ```
+    {: pre}
+
+    <table>
+    <thead>
+    <th colspan=2><img src="images/idea.png"/> 瞭解此指令的元件</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>--cpu-percent</code></td>
+    <td>Horizontal Pod Autoscaler 所維護的平均 CPU 使用率（以百分比為指定單位）。</td>
+    </tr>
+    <tr>
+    <td><code>--min</code></td>
+    <td>用來維護指定 CPU 使用率百分比之已部署的 Pod 數目下限。</td>
+    </tr>
+    <tr>
+    <td><code>--max</code></td>
+    <td>用來維護指定 CPU 使用率百分比之已部署的 Pod 數目上限。</td>
+    </tr>
+    </tbody></table>
+
+<br />
 
 
 ## 管理漸進式部署
@@ -1807,6 +2025,9 @@ spec:
         kubectl rollout undo deployment/<depoyment_name> --to-revision=<number>
         ```
         {: pre}
+
+<br />
+
 
 ## 新增 {{site.data.keyword.Bluemix_notm}} 服務
 {: #cs_apps_service}
@@ -1919,7 +2140,7 @@ Kubernetes Secret 是一種儲存機密資訊（例如使用者名稱、密碼�
     {: screen}
 
 7.  記下 Pod 的**名稱**。
-8.  取得 Pod 的詳細資料，並尋找 Secret 名稱。
+8.  取得有關 Pod 的詳細資料，並尋找 Secret 名稱。
 
     ```
     kubectl describe pod <pod_name>
@@ -1944,33 +2165,44 @@ Kubernetes Secret 是一種儲存機密資訊（例如使用者名稱、密碼�
 
 您現在可以存取 {{site.data.keyword.Bluemix_notm}} 服務詳細資料及認證。若要使用 {{site.data.keyword.Bluemix_notm}} 服務，請確定應用程式已配置為在裝載目錄中尋找服務 Secret 檔案、剖析 JSON 內容，以及判定服務詳細資料。
 
+<br />
+
+
 ## 建立持續性儲存空間
 {: #cs_apps_volume_claim}
 
-您會建立持續性磁區宣告，以為叢集佈建 NFS 檔案儲存空間。您將此宣告裝載至 Pod，以確保即使 Pod 損毀或關閉，也能使用資料。
+建立持續性磁區宣告 (pvc)，以為叢集佈建 NFS 檔案儲存空間。然後，將此宣告裝載至 Pod，以確保即使 Pod 損毀或關閉，也能使用資料。
 {:shortdesc}
 
 IBM 已叢集化支援持續性磁區的 NFS 檔案儲存空間，可提供資料的高可用性。
 
-1.  檢閱可用的儲存空間類別。{{site.data.keyword.containerlong}} 提供三個預先定義的儲存空間類別，因此叢集管理者不需要建立任何儲存空間類別。
-
+1.  檢閱可用的儲存空間類別。{{site.data.keyword.containerlong}} 提供八個預先定義的儲存空間類別，因此叢集管理者不需要建立任何儲存空間類別。`ibmc-file-bronze` 儲存空間類別與 `default` 儲存空間類別相同。
 
     ```
     kubectl get storageclasses
     ```
     {: pre}
-
+    
     ```
     $ kubectl get storageclasses
     NAME                         TYPE
-    ibmc-file-bronze (default)   ibm.io/ibmc-file
-    ibmc-file-gold               ibm.io/ibmc-file
-    ibmc-file-silver             ibm.io/ibmc-file
+    default                      ibm.io/ibmc-file   
+    ibmc-file-bronze (default)   ibm.io/ibmc-file   
+    ibmc-file-custom             ibm.io/ibmc-file
+    ibmc-file-gold               ibm.io/ibmc-file   
+    ibmc-file-retain-bronze      ibm.io/ibmc-file   
+    ibmc-file-retain-custom      ibm.io/ibmc-file   
+    ibmc-file-retain-gold        ibm.io/ibmc-file   
+    ibmc-file-retain-silver      ibm.io/ibmc-file   
+    ibmc-file-silver             ibm.io/ibmc-file 
     ```
     {: screen}
 
-2.  檢閱儲存空間類別的 IOPS 或可用大小。
+2.  決定在刪除 pvc 之後，是否要儲存資料及 NFS 檔案共用。如果要保留資料，則請選擇 `retain` 儲存空間類別。如果您要在刪除 pvc 時刪除資料及檔案共用，請選擇儲存空間類別而不使用 `retain`。
 
+3.  檢閱儲存空間類別的 IOPS 和可用的儲存空間大小。
+    - 銅級、銀級和金級儲存空間類別使用 Endurance 儲存空間，每個類別各有一個定義的 IOPS per GB。IOPS 總計取決於儲存空間的大小。例如，每 GB 4 IOPS 的 1000Gi pvc 具有總計 4000 的 IOPS。
+ 
     ```
     kubectl describe storageclasses ibmc-file-silver
     ```
@@ -1982,8 +2214,24 @@ IBM 已叢集化支援持續性磁區的 NFS 檔案儲存空間，可提供資�
     Parameters: iopsPerGB=4,sizeRange=20Gi,40Gi,80Gi,100Gi,250Gi,500Gi,1000Gi,2000Gi,4000Gi,8000Gi,12000Gi
     ```
     {: screen}
+    
+    - 自訂儲存空間類別使用 [Performance 儲存空間 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/topic/performance-storage)，並且對總計 IOPS 和大小有不同的選項。
 
-3.  在您偏好的文字編輯器中，建立配置 Script 來定義持續性磁區宣告，以及將配置儲存為 `.yaml` 檔案。
+    ```
+    kubectl describe storageclasses ibmc-file-retain-custom 
+    ```
+    {: pre}
+
+    **parameters** 欄位提供每個與儲存空間類別相關聯的 IOPS 以及可用大小（以 GB 為單位）。例如，40Gi pvc 可以選取範圍 100 - 2000 IOPS 內，屬於 100 倍數的 IOPS。
+
+    ```
+    Parameters:	Note=IOPS value must be a multiple of 100,reclaimPolicy=Retain,sizeIOPSRange=20Gi:[100-1000],40Gi:[100-2000],80Gi:[100-4000],100Gi:[100-6000],1000Gi[100-6000],2000Gi:[200-6000],4000Gi:[300-6000],8000Gi:[500-6000],12000Gi:[1000-6000]
+    ```
+    {: screen}
+
+4.  建立配置檔來定義持續性磁區宣告，以及將配置儲存為 `.yaml` 檔案。
+    
+    銅級、銀級、金級類別的範例：
 
     ```
     apiVersion: v1
@@ -2000,6 +2248,25 @@ IBM 已叢集化支援持續性磁區的 NFS 檔案儲存空間，可提供資�
           storage: 20Gi
     ```
     {: codeblock}
+    
+    自訂類別的範例：
+
+    ```
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: <pvc_name>
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "ibmc-file-retain-custom"
+    spec:
+      accessModes:
+        - ReadWriteMany
+      resources:
+        requests:
+          storage: 40Gi
+          iops: "500"
+    ```
+    {: codeblock}
 
     <table>
     <thead>
@@ -2012,25 +2279,35 @@ IBM 已叢集化支援持續性磁區的 NFS 檔案儲存空間，可提供資�
     </tr>
     <tr>
     <td><code>metadata/annotations</code></td>
-    <td>指定儲存空間類別，定義持續性磁區之主機檔案共用的每個 GB 的 IOPS：<ul><li>ibmc-file-bronze：每個 GB 有 2 個 IOPS。</li><li>ibmc-file-silver：每個 GB 有 4 個 IOPS。</li><li>ibmc-file-gold：每個 GB 有 10 個 IOPS。</li>
+    <td>指定持續性磁區的儲存空間類別：
+      <ul>
+      <li>ibmc-file-bronze / ibmc-file-retain-bronze：每個 GB 有 2 個 IOPS。</li>
+      <li>ibmc-file-silver / ibmc-file-retain-silver：每個 GB 有 4 個 IOPS。</li>
+      <li>ibmc-file-gold / ibmc-file-retain-gold：每個 GB 有 10 個 IOPS。</li>
+      <li>ibmc-file-custom / ibmc-file-retain-custom：可以使用 IOPS 的多個值。
 
-    </li> 如果未指定任何儲存空間類別，則會建立具有 bronze 儲存空間類別的持續性磁區。</td>
+    </li> 如果未指定任何儲存空間類別，則會建立具有 bronze（銅級）儲存空間類別的持續性磁區。</td>
     </tr>
     <tr>
     <td><code>spec/accessModes</code>
     <code>resources/requests/storage</code></td>
     <td> 如果您選擇的大小不是所列出的大小，則會將此大小四捨五入。如果您選取的大小大於最大大小，則會對此大小進行無條件捨去。</td>
     </tr>
+    <tr>
+    <td><code>spec/accessModes</code>
+    <code>resources/requests/iops</code></td>
+    <td>這個選項只適用於 ibmc-file-custom / ibmc-file-retain-custom。請指定儲存空間的總計 IOPS。執行 `kubectl describe storageclasses ibmc-file-custom` 以查看所有選項。如果您選擇的 IOPS 不是所列出的 IOPS，則會將 IOPS 無條件進位。</td>
+    </tr>
     </tbody></table>
 
-4.  建立持續性磁區宣告。
+5.  建立持續性磁區宣告。
 
     ```
     kubectl apply -f <local_file_path>
     ```
     {: pre}
 
-5.  驗證持續性磁區宣告已建立並連結至持續性磁區。此處理程序可能需要幾分鐘的時間。
+6.  驗證持續性磁區宣告已建立並連結至持續性磁區。此處理程序可能需要幾分鐘的時間。
 
     ```
     kubectl describe pvc <pvc_name>
@@ -2058,7 +2335,7 @@ IBM 已叢集化支援持續性磁區的 NFS 檔案儲存空間，可提供資�
     ```
     {: screen}
 
-6.  {: #cs_apps_volume_mount}若要將持續性磁區宣告裝載至 Pod，請建立配置 Script。將配置儲存為 `.yaml` 檔案。
+6.  {: #cs_apps_volume_mount}若要將持續性磁區宣告裝載至 Pod，請建立配置檔。將配置儲存為 `.yaml` 檔案。
 
     ```
     apiVersion: v1
@@ -2106,14 +2383,14 @@ IBM 已叢集化支援持續性磁區的 NFS 檔案儲存空間，可提供資�
     </tr>
     </tbody></table>
 
-7.  建立 Pod，並將持續性磁區宣告裝載至 Pod。
+8.  建立 Pod，並將持續性磁區宣告裝載至 Pod。
 
     ```
     kubectl apply -f <local_yaml_path>
     ```
     {: pre}
 
-8.  驗證磁區已順利裝載至 Pod。
+9.  驗證磁區已順利裝載至 Pod。
 
     ```
     kubectl describe pod <pod_name>
@@ -2135,6 +2412,9 @@ IBM 已叢集化支援持續性磁區的 NFS 檔案儲存空間，可提供資�
 
     ```
     {: screen}
+
+<br />
+
 
 ## 新增非 root 使用者對持續性儲存空間的存取權
 {: #cs_apps_volumes_nonroot}
@@ -2235,7 +2515,7 @@ IBM 已叢集化支援持續性磁區的 NFS 檔案儲存空間，可提供資�
     ```
     {: pre}
 
-6.  建立配置 `.yaml` 檔案，以建立持續性磁區宣告。此範例使用較低效能的儲存類別。請執行 `kubectl get storageclasses`，以查看可用的儲存類別。
+6.  建立配置 `.yaml` 檔案，以建立持續性磁區宣告。此範例使用較低效能的儲存空間類別。請執行 `kubectl get storageclasses`，以查看可用的儲存空間類別。
 
     ```
     apiVersion: v1
@@ -2260,7 +2540,7 @@ IBM 已叢集化支援持續性磁區的 NFS 檔案儲存空間，可提供資�
     ```
     {: pre}
 
-8.  建立配置 Script，以裝載磁區然後從 nonroot 映像檔中執行 Pod。磁區裝載路徑 `/mnt/myvol` 符合 Dockerfile 中所指定的裝載路徑。將配置儲存為 `.yaml` 檔案。
+8.  建立配置檔，以裝載磁區然後從 nonroot 映像檔中執行 Pod。磁區裝載路徑 `/mnt/myvol` 符合 Dockerfile 中所指定的裝載路徑。將配置儲存為 `.yaml` 檔案。
 
     ```
     apiVersion: v1

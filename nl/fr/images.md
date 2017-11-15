@@ -12,7 +12,8 @@ copyright:
 # Images de conteneur
 *Dernière mise à jour : 11 novembre 2015*
 
-Vous pouvez créer des conteneurs à partir d'images IBM. Les images peuvent être déployées en tant que conteneurs uniques ou groupes de conteneurs évolutifs.{:shortdesc}
+Vous pouvez créer des conteneurs à partir d'images IBM. Les images peuvent être déployées en tant que conteneurs uniques ou groupes de conteneurs évolutifs.
+{:shortdesc}
 
 <ul class="runtimeIconList">
 <li>

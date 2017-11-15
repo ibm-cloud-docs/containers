@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-08-13"
+lastupdated: "2017-10-05"
 
 ---
 
@@ -26,13 +26,15 @@ Implementar um app geralmente inclui as etapas a seguir.
 
 1.  [Instale as CLIs](cs_cli_install.html#cs_cli_install).
 
-2.  Crie um script de configuração para seu app. [Revise as melhores práticas do Kubernetes. ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/overview/)
+2.  Crie um arquivo de configuração para seu app. [Revise as melhores práticas do Kubernetes. ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/overview/)
 
-3.  Execute o script de configuração usando um dos métodos a seguir.
+3.  Execute o arquivo de configuração usando um dos métodos a seguir.
     -   [A CLI do Kubernetes](#cs_apps_cli)
     -   O painel do Kubernetes
         1.  [Inicie o painel do Kubernetes.](#cs_cli_dashboard)
-        2.  [Execute o script de configuração.](#cs_apps_ui)
+        2.  [Execute o arquivo de configuração.](#cs_apps_ui)
+
+<br />
 
 
 ## Ativando o painel do Kubernetes
@@ -82,21 +84,25 @@ Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para s
         {: codeblock}
 
 
-Quando estiver pronto com o painel do Kubernetes, use `CTRL+C` para sair do comando `proxy`.
+Quando estiver pronto com o painel do Kubernetes, use `CTRL+C` para sair do comando `proxy`. Depois de sair, o painel do Kubernetes não estará mais disponível. Execute o comando `proxy` novamente para reiniciar o painel do Kubernetes.
+
+<br />
+
 
 ## Permitindo o acesso público a apps
 {: #cs_apps_public}
 
-Para disponibilizar um app publicamente, deve-se atualizar seu script de configuração antes de implementar o app em um cluster.
+Para tornar um app publicamente disponível, deve-se atualizar seu arquivo de configuração antes de implementar o app em um cluster.
 {:shortdesc}
 
 Dependendo de você ter criado um cluster lite ou padrão, existem maneiras diferentes de tornar seu app acessível na Internet.
 
 <dl>
-<dt><a href="#cs_apps_public_nodeport" target="_blank">Serviço do tipo NodePort</a> (clusters lite e padrão)</dt>
-<dd>Exponha uma porta pública em cada nó do trabalhador e use o endereço IP público de qualquer nó do trabalhador para acessar publicamente seu serviço no cluster. O endereço IP público do nó do trabalhador não é permanente. Quando um nó do trabalhador é removido ou recriado, um novo endereço IP público é designado ao nó do trabalhador. É possível usar o serviço do tipo NodePort para testar o acesso público para seu app ou quando o acesso público é necessário por somente um curto tempo. Quando um endereço IP público estável e mais disponibilidade para seu terminal em serviço forem requeridos, exponha seu app usando um serviço do tipo LoadBalancer ou Ingresso.</dd>
-<dt><a href="#cs_apps_public_load_balancer" target="_blank">Serviço do tipo LoadBalancer</a> (somente clusters padrão)</dt>
-<dd>Cada cluster padrão é provisionado com 4 endereços IP públicos móveis que podem ser usados para criar um balanceador de carga TCP/UDP externo para seu app. É possível customizar seu balanceador de carga expondo qualquer porta que seu app requer. O endereço IP público móvel que é designado para o balanceador de carga é permanente e não muda quando um nó do trabalhador é recriado no cluster.
+<dt><a href="#cs_apps_public_nodeport" target="_blank">serviço NodePort</a> (clusters lite e padrão)</dt>
+<dd>Exponha uma porta pública em cada nó do trabalhador e use o endereço IP público de qualquer nó do trabalhador para acessar publicamente seu serviço no cluster. O endereço IP público do nó do trabalhador não é permanente. Quando um nó do trabalhador é removido ou recriado, um novo endereço IP público é designado ao
+nó do trabalhador. É possível usar o serviço do NodePort para testar o acesso público para o seu aplicativo ou quando o acesso público for necessário apenas para uma quantia pequena de tempo. Ao requerer um endereço IP público estável e mais disponibilidade para seu terminal em serviço, exponha seu app usando um serviço LoadBalancer ou Ingresso.</dd>
+<dt><a href="#cs_apps_public_load_balancer" target="_blank">serviço LoadBalancer</a> (somente clusters padrão)</dt>
+<dd>Cada cluster padrão é provisionado com 4 endereços IP públicos móveis e 4 endereços IP privados móveis que podem ser usados para criar um balanceador de carga TCP/UDP externo para seu app. É possível customizar seu balanceador de carga expondo qualquer porta que seu app requer. O endereço IP público móvel que é designado para o balanceador de carga é permanente e não muda quando um nó do trabalhador é recriado no cluster.
 
 </br>
 Se você precisar de balanceamento de carga de HTTP ou HTTPS para o seu app e desejar usar uma rota pública para expor múltiplos apps em seu cluster como serviços, use o suporte do Ingresso integrado com o {{site.data.keyword.containershort_notm}}.</dd>
@@ -111,16 +117,16 @@ Se você precisar de balanceamento de carga de HTTP ou HTTPS para o seu app e de
 Torne seu app publicamente disponível usando o endereço IP público de qualquer nó do trabalhador em um cluster e expondo uma porta do nó. Use essa opção para teste e acesso público de curto prazo.
 {:shortdesc}
 
-É possível expor seu app como um serviço do Kubernetes do tipo NodePort para clusters lite ou padrão.
+É possível expor seu app como um serviço do Kubernetes NodePort para clusters lite ou padrão.
 
-Para ambientes do {{site.data.keyword.Bluemix_notm}} Dedicated, endereços IP públicos são bloqueadas por um firewall. Para disponibilizar um app publicamente, use um [serviço do tipo LoadBalancer](#cs_apps_public_load_balancer) ou o [Ingresso](#cs_apps_public_ingress), como alternativa.
+Para ambientes do {{site.data.keyword.Bluemix_notm}} Dedicated, endereços IP públicos são bloqueadas por um firewall. Para tornar um app publicamente disponível, use um [serviço LoadBalancer](#cs_apps_public_load_balancer) ou [Ingresso](#cs_apps_public_ingress) no lugar.
 
-**Nota:** o endereço IP público de um nó do trabalhador não é permanente. Se o nó do trabalhador precisar ser recriado, um novo endereço IP público será designado ao nó do trabalhador. Se você precisar de um endereço IP público estável e de mais disponibilidade para seu serviço, exponha seu app usando um [serviço do tipo LoadBalancer](#cs_apps_public_load_balancer) ou o [Ingresso](#cs_apps_public_ingress).
-
-
+**Nota:** o endereço IP público de um nó do trabalhador não é permanente. Se o nó do trabalhador precisar ser recriado, um novo endereço IP público será designado ao nó do trabalhador. Se você precisar de um endereço IP público estável e mais disponibilidade para seu serviço, exponha seu app usando um [serviço LoadBalancer](#cs_apps_public_load_balancer) ou [Ingresso](#cs_apps_public_ingress).
 
 
-1.  Defina uma seção de [serviço ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/services-networking/service/) no script de configuração.
+
+
+1.  Defina uma seção de [serviço ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/services-networking/service/) no arquivo de configuração.
 2.  Na seção `spec` do serviço, inclua o tipo NodePort.
 
     ```
@@ -227,32 +233,59 @@ Quando o app for implementado, será possível usar o endereço IP público de q
 
 3.  Forme a URL com um dos endereços IP públicos do nó do trabalhador e o NodePort. Exemplo: `http://192.0.2.23:30872`
 
-### Configurando o acesso público a um app usando o tipo de serviço do balanceador de carga
+### Configurando o acesso a um app usando o tipo de serviço do balanceador de carga
 {: #cs_apps_public_load_balancer}
 
-Exponha uma porta e use um endereço IP público móvel para o balanceador de carga para acessar o app. Diferentemente do serviço do NodePort, o endereço IP público móvel do serviço de balanceador de carga não é dependente do nó do trabalhador no qual o app é implementado. O endereço IP público móvel do balanceador de carga é designado para você e não muda quando você inclui ou remove nós do trabalhador, o que significa que os serviços do balanceador de carga são mais altamente disponíveis do que os serviços do NodePort. Os usuários podem selecionar qualquer porta para o balanceador de carga e não são limitados ao intervalo de portas NodePort. É possível usar serviços de balanceador de carga para os protocolos TCP e UDP.
+Exponha uma porta e use um endereço IP público ou privado móvel para que o balanceador de carga acesse o app. Diferente de um serviço NodePort, o endereço IP móvel do serviço de balanceador de carga não é dependente do nó do trabalhador em que o app está implementado. No entanto, um serviço do Kubernetes LoadBalancer também é um serviço NodePort. Um serviço LoadBalancer disponibiliza seu app por meio da porta e do endereço IP do balanceador de carga e por meio das portas do nó do serviço. 
+
+ O endereço IP móvel do balanceador de carga é designado para você e não muda quando você inclui ou remove nós do trabalhador. Portanto, os serviços do balanceador de carga são mais altamente disponíveis do que os serviços NodePort. Os usuários podem selecionar qualquer porta para o balanceador de carga e não são limitados ao intervalo de portas NodePort. É possível usar serviços de balanceador de carga para os protocolos TCP e UDP.
 
 Quando uma conta do {{site.data.keyword.Bluemix_notm}} Dedicated é [ativada para clusters](cs_ov.html#setup_dedicated), é possível solicitar que sub-redes públicas sejam usadas para endereços IP do balanceador de carga. [Abra um chamado de suporte](/docs/support/index.html#contacting-support) para criar a sub-rede e, em seguida, use o comando [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) para incluir a sub-rede no cluster.
 
-**Nota:** os serviços do balanceador de carga não suportam finalização do TLS. Se o seu app requerer finalização do TLS, será possível expor o seu app por meio do [Ingresso](#cs_apps_public_ingress) ou configurar o seu app para gerenciar a finalização do TLS.
+**Nota:** os serviços do balanceador de carga não suportam finalização do TLS. Se seu app requerer a finalização do TLS, será possível expor seu app usando [Ingresso](#cs_apps_public_ingress) ou configurar seu app para gerenciar a finalização do TLS.
 
 Antes de iniciar:
 
 -   Este recurso está disponível somente para clusters padrão.
--   Deve-se ter um endereço IP público móvel disponível para designar ao serviço de balanceador de carga.
+-   Deve-se ter um endereço IP público ou privado móvel disponível para designar ao serviço de balanceador de carga.
+-   Um serviço de balanceador de carga com um endereço IP privado móvel ainda tem uma porta do nó público aberta em cada nó do trabalhador. Para incluir uma política de rede para evitar o tráfego público, consulte [Bloqueando tráfego recebido](cs_security.html#cs_block_ingress).
 
 Para criar um serviço de balanceador de carga:
 
-1.  [Implemente o seu app no cluster](#cs_apps_cli). Quando você implementa o seu app no cluster, são criados para você um ou mais pods que executam o seu app em um contêiner. Assegure-se de incluir um rótulo em sua implementação na seção de metadados de seu script de configuração. Esse rótulo é necessário para identificar todos os pods nos quais o seu app está em execução, de modo que eles possam ser incluídos no balanceamento de carga.
-2.  Crie um serviço de balanceador de carga para o app que você deseja expor. Para disponibilizar o seu app na Internet pública, deve-se criar um serviço do Kubernetes para o seu app e configurar o seu serviço para incluir todos os pods que compõem o seu app no balanceamento de carga.
-    1.  Abra o seu editor preferencial e crie um script de configuração de serviço com o nome, por exemplo, de `myloadbalancer.yaml`.
-    2.  Defina um serviço de balanceador de carga para o app que você deseja expor para o público.
+1.  [Implemente o seu app no cluster](#cs_apps_cli). Quando você implementa o seu app no cluster, são criados para você um ou mais pods que executam o seu app em um contêiner. Certifique-se de incluir um rótulo à sua implementação na seção de metadados de seu arquivo de configuração. Esse rótulo é necessário para identificar todos os pods nos quais o seu app está em execução para que eles possam ser incluídos no balanceamento de carga.
+2.  Crie um serviço de balanceador de carga para o app que você deseja expor. Para tornar seu app disponível na Internet pública ou em uma rede privada, crie um serviço do Kubernetes para seu app. Configure seu serviço para incluir todos os pods que compõem o seu app no balanceamento de carga.
+    1.  Crie um arquivo de configuração de serviço que seja chamado, por exemplo, de `myloadbalancer.yaml`.
+    2.  Defina um serviço de balanceador de carga para o app que você deseja expor.
+        - Se o seu cluster estiver em uma VLAN pública, um endereço IP móvel público será usado. A maioria dos clusters está em uma VLAN pública.
+        - Se o seu cluster estiver disponível apenas em uma VLAN privada, então, um endereço IP móvel privado será usado. 
+        - É possível solicitar um endereço IP público ou privado móvel para um serviço LoadBalancer, incluindo uma anotação no arquivo de configuração.
 
+        O serviço LoadBalancer que usa um endereço IP padrão:
+        
         ```
         apiVersion: v1
         kind: Service
         metadata:
           name: <myservice>
+        spec:
+          type: LoadBalancer
+          selector:
+            <selectorkey>:<selectorvalue>
+          ports:
+           - protocol: TCP
+             port: 8080
+        ```
+        {: codeblock}
+        
+        O serviço LoadBalancer que usa uma anotação para especificar um endereço IP privado ou público:
+        
+        ```
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: <myservice>
+          annotations: 
+            service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private> 
         spec:
           type: LoadBalancer
           selector:
@@ -269,27 +302,31 @@ Para criar um serviço de balanceador de carga:
         </thead>
         <tbody>
         <tr>
-        <td><code>name</code></td>
-        <td>Substitua <em>&lt;myservice&gt;</em> por um nome para o seu serviço de balanceador de carga.</td>
+          <td><code>name</code></td>
+          <td>Substitua <em>&lt;myservice&gt;</em> por um nome para o seu serviço de balanceador de carga.</td>
         </tr>
         <tr>
-        <td><code>seletor</code></td>
-        <td>Insira o par de chave de etiqueta (<em>&lt;selectorkey&gt;</em>) e valor (<em>&lt;selectorvalue&gt;</em>) que você deseja usar para destinar os pods nos quais seu app é executado. Por exemplo, se você usar o seletor <code>app: code</code> a seguir, todos os pods que tiverem esse rótulo em seus metadados serão incluídos no balanceamento de carga. Insira o mesmo rótulo que você usou quando implementou o seu app no cluster. </td>
-         </tr>
-         <td><code>port</code></td>
-         <td>A porta na qual o serviço atende.</td>
-         </tbody></table>
-    3.  Opcional: se você desejar usar um endereço IP público móvel específico para o balanceador de carga que esteja disponível para seu cluster, será possível especificar esse endereço IP incluindo o `loadBalancerIP` na seção de especificação. Para obter mais informações, veja a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/services-networking/service/).
-    4.  Opcional: é possível optar por configurar um firewall especificando o `loadBalancerSourceRanges` na seção de especificação. Para obter mais informações, veja a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
-    5.  Salve as suas mudanças.
-    6.  Crie o serviço em seu cluster.
+          <td><code>seletor</code></td>
+          <td>Insira o par de chave de etiqueta (<em>&lt;selectorkey&gt;</em>) e valor (<em>&lt;selectorvalue&gt;</em>) que você deseja usar para destinar os pods nos quais seu app é executado. Por exemplo, se você usar o seletor <code>app: code</code> a seguir, todos os pods que tiverem esse rótulo em seus metadados serão incluídos no balanceamento de carga. Insira o mesmo rótulo que você usou quando implementou o seu app no cluster. </td>
+        </tr>
+        <tr>
+          <td><code>port</code></td>
+          <td>A porta na qual o serviço atende.</td>
+        </tr>
+        <tr>
+          <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:`
+          <td>Anotação para especificar o tipo de LoadBalancer. Os valores são `private` e `public`. Ao criar um LoadBalancer público em clusters em VLANs públicas, essa anotação não é necessária.
+        </tbody></table>
+    3.  Opcional: para usar um endereço IP móvel específico para o balanceador de carga que está disponível para seu cluster, é possível especificar esse endereço IP incluindo o `loadBalancerIP` na seção de especificação. Para obter mais informações, veja a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/services-networking/service/).
+    4.  Opcional: configure um firewall especificando o `loadBalancerSourceRanges` na seção de especificação. Para obter mais informações, veja a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
+    5.  Crie o serviço em seu cluster.
 
         ```
         kubectl apply -f myloadbalancer.yaml
         ```
         {: pre}
 
-        Quando o seu balanceador de carga for criado, um endereço IP público móvel será designado automaticamente para o balanceador de carga. Se nenhum endereço IP público móvel estiver disponível, a criação do serviço de balanceador de carga falhará.
+        Quando o serviço de balanceador de carga for criado, um endereço IP móvel será designado automaticamente ao balanceador de carga. Se nenhum endereço IP móvel estiver disponível, o serviço de balanceador de carga não poderá ser criado.
 3.  Verifique se o serviço de balanceador de carga foi criado com êxito. Substitua _&lt;myservice&gt;_ pelo nome do serviço de balanceador de carga que você criou na etapa anterior.
 
     ```
@@ -297,9 +334,9 @@ Para criar um serviço de balanceador de carga:
     ```
     {: pre}
 
-    **Nota:** pode levar alguns minutos para que o serviço de balanceador de carga seja criado corretamente e para que o app fique disponível na Internet pública.
+    **Nota:** pode levar alguns minutos para o serviço de balanceador de carga ser criado corretamente e para que o app fique disponível.
 
-    A saída da CLI é semelhante à seguinte:
+    Exemplo de saída da CLI:
 
     ```
     Name:                   <myservice>
@@ -321,8 +358,8 @@ Para criar um serviço de balanceador de carga:
     ```
     {: screen}
 
-    O endereço IP do **Ingresso de LoadBalancer** é o endereço IP público móvel que foi designado para o seu serviço de balanceador de carga.
-4.  Acesse seu app na Internet.
+    O endereço IP do **Ingresso de LoadBalancer** é o endereço IP móvel que foi designado ao seu serviço de balanceador de carga.
+4.  Se você tiver criado um balanceador de carga público, acesse seu app pela Internet.
     1.  Abra seu navegador da web preferencial.
     2.  Insira o endereço IP público móvel do balanceador de carga e a porta. No exemplo acima, o endereço IP público móvel `192.168.10.38` foi designado ao serviço de balanceador de carga.
 
@@ -337,7 +374,7 @@ Para criar um serviço de balanceador de carga:
 
 Exponha múltiplos apps em seu cluster criando recursos de Ingresso que são gerenciados pelo controlador de Ingresso fornecido pela IBM. O controlador de Ingresso é um balanceador de carga HTTP ou HTTPS externo que usa um ponto de entrada público assegurado e exclusivo para rotear solicitações recebidas para seus apps dentro ou fora do cluster.
 
-**Nota:** o Ingresso está disponível apenas para clusters padrão e requer pelo menos dois nós do trabalhador no cluster para assegurar alta disponibilidade.
+**Nota:** o Ingresso está disponível apenas para clusters padrão e requer pelo menos dois nós do trabalhador no cluster para assegurar alta disponibilidade. Configurar o Ingresso requer uma [política de acesso de Administrador](cs_cluster.html#access_ov). Verifique sua [política de acesso atual](cs_cluster.html#view_access).
 
 Quando você criar um cluster padrão, um controlador do Ingresso será criado automaticamente e designado com um endereço IP público móvel e uma rota pública. É possível configurar o controlador de Ingresso e definir regras de roteamento individuais para cada app que você expõe ao público. Cada app exposto por meio de Ingresso é designado um caminho exclusivo anexado à rota pública, para que seja possível usar uma URL exclusiva para acessar um app publicamente em seu cluster.
 
@@ -363,9 +400,9 @@ Antes de iniciar:
 
 Para configurar o controlador de Ingresso:
 
-1.  [Implemente o seu app no cluster](#cs_apps_cli). Quando você implementa o seu app no cluster, são criados para você um ou mais pods que executam o seu app em um contêiner. Assegure-se de incluir um rótulo em sua implementação na seção de metadados de seu script de configuração. Esse rótulo é necessário para identificar todos os pods nos quais o seu app está em execução, de modo que eles possam ser incluídos no balanceamento de carga do Ingresso.
+1.  [Implemente o seu app no cluster](#cs_apps_cli). Quando você implementa o seu app no cluster, são criados para você um ou mais pods que executam o seu app em um contêiner. Certifique-se de incluir um rótulo à sua implementação na seção de metadados de seu arquivo de configuração. Esse rótulo é necessário para identificar todos os pods nos quais o seu app está em execução, de modo que eles possam ser incluídos no balanceamento de carga do Ingresso.
 2.  Crie um serviço do Kubernetes para o app a ser exposto. O controlador do Ingresso poderá incluir o seu app no balanceamento de carga do Ingresso somente se o seu app for exposto por meio de um serviço do Kubernetes dentro do cluster.
-    1.  Abra seu editor preferencial e crie um script de configuração de serviço que seja nomeado, por exemplo, `myservice.yaml`.
+    1.  Abra o seu editor preferencial e crie um arquivo de configuração de serviço que seja denominado, por exemplo, `myservice.yaml`.
     2.  Defina um serviço para o app que você deseja expor para o público.
 
         ```
@@ -433,8 +470,8 @@ Para configurar o controlador de Ingresso:
 
     É possível ver o domínio fornecido pela IBM no campo **Subdomínio do Ingresso**.
 4.  Crie um recurso do Ingresso. Os recursos do Ingresso definem as regras de roteamento para o serviço do Kubernetes que você criou para o seu app e são usados pelo controlador do Ingresso para rotear o tráfego de rede recebido para o serviço. Será possível usar um recurso do Ingresso para definir regras de roteamento para múltiplos apps desde que cada app seja exposto por meio de um serviço do Kubernetes dentro do cluster.
-    1.  Abra seu editor preferencial e crie um script de configuração de Ingresso que seja nomeado, por exemplo, `myingress.yaml`.
-    2.  Defina um recurso do Ingresso em seu script de configuração que use o domínio fornecido pela IBM para rotear o tráfego de rede recebido para o serviço que você criou anteriormente.
+    1.  Abra o seu editor preferencial e crie um arquivo de configuração Ingresso que seja denominado, por exemplo, `myingress.yaml`.
+    2.  Defina um recurso do Ingresso em seu arquivo de configuração que usa o domínio fornecido pela IBM para rotear o tráfego de rede recebido para o serviço que você criou anteriormente.
 
         ```
         apiVersion: extensions/v1beta1
@@ -532,9 +569,9 @@ Antes de iniciar:
 
 Para configurar o controlador de Ingresso:
 
-1.  [Implemente o seu app no cluster](#cs_apps_cli). Assegure-se de incluir um rótulo em sua implementação na seção de metadados de seu script de configuração. Esse rótulo identifica todos os pods nos quais o app está em execução, para que sejam incluídos no balanceamento de carga do Ingresso.
+1.  [Implemente o seu app no cluster](#cs_apps_cli). Certifique-se de incluir um rótulo à sua implementação na seção de metadados de seu arquivo de configuração. Esse rótulo identifica todos os pods nos quais o app está em execução, para que sejam incluídos no balanceamento de carga do Ingresso.
 2.  Crie um serviço do Kubernetes para o app a ser exposto. O controlador do Ingresso poderá incluir o seu app no balanceamento de carga do Ingresso somente se o seu app for exposto por meio de um serviço do Kubernetes dentro do cluster.
-    1.  Abra seu editor preferencial e crie um script de configuração de serviço que seja nomeado, por exemplo, `myservice.yaml`.
+    1.  Abra o seu editor preferencial e crie um arquivo de configuração de serviço que seja denominado, por exemplo, `myservice.yaml`.
     2.  Defina um serviço para o app que você deseja expor para o público.
 
         ```
@@ -607,8 +644,8 @@ Para configurar o controlador de Ingresso:
     É possível ver o domínio fornecido pela IBM no **Subdomínio do Ingresso** e o certificado fornecido pela IBM no campo **Segredo do Ingresso**.
 
 4.  Crie um recurso do Ingresso. Os recursos do Ingresso definem as regras de roteamento para o serviço do Kubernetes que você criou para o seu app e são usados pelo controlador do Ingresso para rotear o tráfego de rede recebido para o serviço. Será possível usar um recurso do Ingresso para definir regras de roteamento para múltiplos apps desde que cada app seja exposto por meio de um serviço do Kubernetes dentro do cluster.
-    1.  Abra seu editor preferencial e crie um script de configuração de Ingresso que seja nomeado, por exemplo, `myingress.yaml`.
-    2.  Defina um recurso de Ingresso em seu script de configuração que use o domínio fornecido pela IBM para rotear o tráfego de rede recebido para seus serviços e o certificado fornecido pela IBM para gerenciar a finalização TLS para você. Para cada serviço, é possível definir um caminho individual que seja anexado ao domínio fornecido pela IBM para criar um caminho exclusivo para seu app, por exemplo, `https://ingress_domain/myapp`. Quando você insere essa rota em um navegador da web, o tráfego de rede é roteado para o controlador de Ingresso. O controlador de Ingresso consulta o serviço associado e envia o tráfego de rede para o serviço e, além disso, para os pods nos quais o app está em execução.
+    1.  Abra o seu editor preferencial e crie um arquivo de configuração Ingresso que seja denominado, por exemplo, `myingress.yaml`.
+    2.  Defina um recurso do Ingresso em seu arquivo de configuração que usa o domínio fornecido pela IBM para rotear o tráfego de rede recebido para seus serviços e o certificado fornecido pela IBM para gerenciar o encerramento do TLS para você. Para cada serviço, é possível definir um caminho individual que seja anexado ao domínio fornecido pela IBM para criar um caminho exclusivo para seu app, por exemplo, `https://ingress_domain/myapp`. Quando você insere essa rota em um navegador da web, o tráfego de rede é roteado para o controlador de Ingresso. O controlador de Ingresso consulta o serviço associado e envia o tráfego de rede para o serviço e, além disso, para os pods nos quais o app está em execução.
 
         **Nota:** seu app deve atender no caminho definido no recurso de Ingresso. Caso contrário, o tráfego de rede não poderá ser encaminhado para o app. A maioria dos apps não atende em um caminho específico, mas usa o caminho raiz e uma porta específica. Nesse caso, defina o caminho raiz como `/` e não especifique um caminho individual para seu app.
 
@@ -726,12 +763,12 @@ Para configurar o controlador de Ingresso:
 1.  Crie um domínio customizado. Para criar um domínio customizado, trabalhe com seu provedor Domain Name Service (DNS) para registrar seu domínio customizado.
 2.  Configure seu domínio para rotear o tráfego de rede recebido para o controlador de Ingresso IBM. Escolha entre estas opções:
     -   Defina um alias para seu domínio customizado especificando o domínio fornecido pela IBM como um registro de Nome Canônico (CNAME). Para localizar o domínio de Ingresso fornecido pela IBM, execute `bx cs cluster-get <mycluster>` e procure o campo **Subdomínio do Ingresso**.
-    -   Mapeie o seu domínio customizado para o endereço IP público móvel do controlador do Ingresso fornecido pela IBM incluindo o endereço IP como um Registro de ponteiro (PTR). Para localizar o endereço IP público móvel do controlador do Ingresso:
+    -   Mapeie o seu domínio customizado para o endereço IP público móvel do controlador do Ingresso fornecido pela IBM incluindo o endereço IP como um registro. Para localizar o endereço IP público móvel do controlador do Ingresso:
         1.  Execute `bx cs cluster-get <mycluster>` e procure o campo **Subdomínio do Ingresso**.
         2.  Execute `nslookup <Ingress subdomain>`.
-3.  Crie um certificado e chave TLS para seu domínio que sejam codificados no formato base64.
+3.  Crie um certificado e chave TLS para seu domínio que é codificado no formato PEM.
 4.  Armazene o certificado e chave TLS em um segredo do Kubernetes.
-    1.  Abra seu editor preferencial e crie um script de configuração de segredo do Kubernetes que seja nomeado, por exemplo, `mysecret.yaml`.
+    1.  Abra o seu editor preferencial e crie um arquivo de configuração de segredo do Kubernetes que seja chamado, por exemplo, de `mysecret.yaml`.
     2.  Defina um segredo que use seu certificado e chave do TLS.
 
         ```
@@ -763,7 +800,7 @@ Para configurar o controlador de Ingresso:
          <td>Substitua <em>&lt;tlskey&gt;</em> por sua chave TLS customizada que está codificada no formato base64.</td>
          </tbody></table>
 
-    3.  Salve seu script de configuração.
+    3.  Salve seu arquivo de configuração.
     4.  Crie o segredo do TLS para seu cluster.
 
         ```
@@ -771,11 +808,11 @@ Para configurar o controlador de Ingresso:
         ```
         {: pre}
 
-5.  [Implemente o seu app no cluster](#cs_apps_cli). Quando você implementa o seu app no cluster, são criados para você um ou mais pods que executam o seu app em um contêiner. Assegure-se de incluir um rótulo em sua implementação na seção de metadados de seu script de configuração. Esse rótulo é necessário para identificar todos os pods nos quais o seu app está em execução, de modo que eles possam ser incluídos no balanceamento de carga do Ingresso.
+5.  [Implemente o seu app no cluster](#cs_apps_cli). Quando você implementa o seu app no cluster, são criados para você um ou mais pods que executam o seu app em um contêiner. Assegure-se de incluir um rótulo em sua implementação na seção de metadados de seu arquivo de configuração. Esse rótulo é necessário para identificar todos os pods nos quais o seu app está em execução, de modo que eles possam ser incluídos no balanceamento de carga do Ingresso.
 
 6.  Crie um serviço do Kubernetes para o app a ser exposto. O controlador do Ingresso poderá incluir o seu app no balanceamento de carga do Ingresso somente se o seu app for exposto por meio de um serviço do Kubernetes dentro do cluster.
 
-    1.  Abra seu editor preferencial e crie um script de configuração de serviço que seja nomeado, por exemplo, `myservice.yaml`.
+    1.  Abra o seu editor preferencial e crie um arquivo de configuração de serviço que seja denominado, por exemplo, `myservice.yaml`.
     2.  Defina um serviço para o app que você deseja expor para o público.
 
         ```
@@ -819,8 +856,8 @@ Para configurar o controlador de Ingresso:
 
     5.  Repita essas etapas para cada app que você desejar expor para o público.
 7.  Crie um recurso do Ingresso. Os recursos do Ingresso definem as regras de roteamento para o serviço do Kubernetes que você criou para o seu app e são usados pelo controlador do Ingresso para rotear o tráfego de rede recebido para o serviço. Será possível usar um recurso do Ingresso para definir regras de roteamento para múltiplos apps desde que cada app seja exposto por meio de um serviço do Kubernetes dentro do cluster.
-    1.  Abra seu editor preferencial e crie um script de configuração de Ingresso que seja nomeado, por exemplo, `myingress.yaml`.
-    2.  Defina um recurso de Ingresso em seu script de configuração que use o domínio customizado para rotear o tráfego de rede recebido para seus serviços e o certificado customizado para gerenciar a finalização TLS. Para cada serviço, é possível definir um caminho individual que seja anexado ao domínio customizado para criar um caminho exclusivo para seu app, por exemplo, `https://mydomain/myapp`. Quando você insere essa rota em um navegador da web, o tráfego de rede é roteado para o controlador de Ingresso. O controlador de Ingresso consulta o serviço associado e envia o tráfego de rede para o serviço e, além disso, para os pods nos quais o app está em execução.
+    1.  Abra o seu editor preferencial e crie um arquivo de configuração Ingresso que seja denominado, por exemplo, `myingress.yaml`.
+    2.  Defina um recurso do Ingresso em seu arquivo de configuração que use o domínio customizado para rotear o tráfego de rede recebido para seus serviços e o certificado customizado para gerenciar o encerramento do TLS. Para cada serviço, é possível definir um caminho individual que seja anexado ao domínio customizado para criar um caminho exclusivo para seu app, por exemplo, `https://mydomain/myapp`. Quando você insere essa rota em um navegador da web, o tráfego de rede é roteado para o controlador de Ingresso. O controlador de Ingresso consulta o serviço associado e envia o tráfego de rede para o serviço e, além disso, para os pods nos quais o app está em execução.
 
         **Nota:** é importante que o app atenda no caminho definido no recurso de Ingresso. Caso contrário, o tráfego de rede não poderá ser encaminhado para o app. A maioria dos apps não atende em um caminho específico, mas usa o caminho raiz e uma porta específica. Nesse caso, defina o caminho raiz como `/` e não especifique um caminho individual para seu app.
 
@@ -943,7 +980,7 @@ Antes de iniciar:
 É possível configurar o controlador de Ingresso para rotear o tráfego de rede recebido no domínio fornecido pela IBM para apps localizados fora do cluster. Se desejar usar um domínio customizado e um certificado TLS como alternativa, substitua o domínio fornecido pela IBM e o certificado TLS pelo seu [domínio customizado e certificado TLS](#custom_domain_cert).
 
 1.  Configure um terminal do Kubernetes que defina o local externo do app que você deseja incluir no balanceamento de carga do cluster.
-    1.  Abra seu editor preferencial e crie um script de configuração de terminal com o nome, por exemplo, de `myexternalendpoint.yaml`.
+    1.  Abra seu editor preferencial e crie um arquivo de configuração do terminal que é chamado, por exemplo, de `myexternalendpoint.yaml`.
     2.  Defina seu terminal externo. Inclua todos os endereços IP públicos e portas que podem ser usados para acessar seu app externo.
 
         ```
@@ -986,7 +1023,7 @@ Antes de iniciar:
         {: pre}
 
 2.  Crie um serviço do Kubernetes para seu cluster e configure-o para encaminhar solicitações recebidas para o terminal externo que você criou anteriormente.
-    1.  Abra seu editor preferencial e crie um script de configuração de serviço com o nome, por exemplo, de `myexternalservice.yaml`.
+    1.  Abra seu editor preferencial e crie um arquivo de configuração de serviço que seja chamado, por exemplo, de `myexternalservice.yaml`.
     2.  Defina o serviço.
 
         ```
@@ -1055,8 +1092,8 @@ Antes de iniciar:
     É possível ver o domínio fornecido pela IBM no **Subdomínio do Ingresso** e o certificado fornecido pela IBM no campo **Segredo do Ingresso**.
 
 4.  Crie um recurso do Ingresso. Os recursos do Ingresso definem as regras de roteamento para o serviço do Kubernetes que você criou para o seu app e são usados pelo controlador do Ingresso para rotear o tráfego de rede recebido para o serviço. Será possível usar um recurso do Ingresso para definir regras de roteamento para múltiplos apps externos desde que cada app seja exposto com o seu terminal externo por meio de um serviço do Kubernetes dentro do cluster.
-    1.  Abra seu editor preferencial e crie um script de configuração de Ingresso com o nome, por exemplo, de `myexternalingress.yaml`.
-    2.  Defina um recurso de Ingresso em seu script de configuração que use o domínio fornecido pela IBM e certificado TLS para rotear o tráfego de rede recebido para seu app externo usando o terminal externo que você definiu anteriormente. Para cada serviço, é possível definir um caminho individual que seja anexado ao domínio customizado ou fornecido pela IBM para criar um caminho exclusivo para seu app, por exemplo, `https://ingress_domain/myapp`. Quando você insere essa rota em um navegador da web, o tráfego de rede é roteado para o controlador de Ingresso. O controlador de Ingresso consulta o serviço associado e envia o tráfego de rede para o serviço e, além disso, para o app externo.
+    1.  Abra seu editor preferencial e crie um arquivo de configuração do Ingresso que seja chamado, por exemplo, de `myexternalingress.yaml`.
+    2.  Defina um recurso do Ingresso em seu arquivo de configuração que usa o domínio fornecido pela IBM e o certificado TLS para rotear o tráfego de rede recebido para seu app externo usando o terminal externo que você definiu anteriormente. Para cada serviço, é possível definir um caminho individual que seja anexado ao domínio customizado ou fornecido pela IBM para criar um caminho exclusivo para seu app, por exemplo, `https://ingress_domain/myapp`. Quando você insere essa rota em um navegador da web, o tráfego de rede é roteado para o controlador de Ingresso. O controlador de Ingresso consulta o serviço associado e envia o tráfego de rede para o serviço e, além disso, para o app externo.
 
         **Nota:** é importante que o app atenda no caminho definido no recurso de Ingresso. Caso contrário, o tráfego de rede não poderá ser encaminhado para o app. A maioria dos apps não atende em um caminho específico, mas usa o caminho raiz e uma porta específica. Nesse caso, defina o caminho raiz como / e não especifique um caminho individual para seu app.
 
@@ -1117,7 +1154,7 @@ Antes de iniciar:
         <td>Substitua <em>&lt;myexternalservicepath&gt;</em> por uma barra ou pelo caminho exclusivo no qual seu app externo está atendendo, para que o tráfego de rede possa ser encaminhado para o app.
 
         </br>
-Para cada serviço do Kubernetes, é possível definir um caminho individual que seja anexado ao domínio customizado para criar um caminho exclusivo para seu app, por exemplo, <code>https://ibmdomain/myservicepath1</code>. Quando você insere essa rota em um navegador da web, o tráfego de rede é roteado para o controlador de Ingresso. O controlador de Ingresso consulta o serviço associado e envia tráfego de rede para o app externo usando o mesmo caminho. O app deve ser configurado para atender nesse caminho para receber o tráfego de rede de entrada.
+        Para cada serviço do Kubernetes, é possível definir um caminho individual que seja anexado ao domínio customizado para criar um caminho exclusivo para seu app, por exemplo, <code>https://ibmdomain/myservicepath1</code>. Quando você insere essa rota em um navegador da web, o tráfego de rede é roteado para o controlador de Ingresso. O controlador de Ingresso consulta o serviço associado e envia tráfego de rede para o app externo usando o mesmo caminho. O app deve ser configurado para atender nesse caminho para receber o tráfego de rede de entrada.
 
         </br></br>
         Muitos apps não atendem em um caminho específico, mas usam o caminho raiz e uma porta específica. Nesse caso, defina o caminho raiz como <code>/</code> e não especifique um caminho individual para seu app.
@@ -1174,10 +1211,12 @@ Para cada serviço do Kubernetes, é possível definir um caminho individual que
 |[Afinidade de sessão com cookies](#sticky_cookie)|Sempre rotear o tráfego de rede recebido para o mesmo servidor de envio de dados usando um cookie permanente.|
 |[Solicitação do cliente ou cabeçalho de resposta adicional](#add_header)|Incluir informações extras do cabeçalho em uma solicitação do cliente antes de encaminhar a solicitação para seu app backend ou para uma resposta do cliente antes de enviar a resposta para o cliente.|
 |[Remoção do cabeçalho de resposta do cliente](#remove_response_headers)|Remover informações do cabeçalho de uma resposta do cliente antes de encaminhar a resposta para o cliente.|
-|[HTTP redireciona para HTTPs](#redirect_http_to_https)|Redirecionar solicitações de HTTP não seguras em seu domínio para HTTPs.|
+|[HTTP redireciona para HTTPS](#redirect_http_to_https)|Redirecione solicitações de HTTP não seguras em seu domínio para HTTPS.|
 |[Armazenamento em buffer de dados de resposta do cliente](#response_buffer)|Desativar o armazenamento em buffer de uma resposta do cliente no controlador de Ingresso ao enviar a resposta para o cliente.|
 |[Tempos limite de conexão e tempos limite de leitura customizados](#timeout)|Ajustar o tempo que o controlador de Ingresso aguarda para conectar e ler do app backend antes de o app backend ser considerado não disponível.|
 |[Tamanho máximo do corpo de solicitação do cliente customizado](#client_max_body_size)|Ajustar o tamanho do corpo de solicitação do cliente que tem permissão para ser enviado para o controlador de Ingresso.|
+|[Portas HTTP e HTTPS customizadas](#custom_http_https_ports)|Mude as portas padrão para o tráfego de rede HTTP e HTTPS.|
+
 
 ##### **Rotear tráfego de rede recebido para um caminho diferente usando a anotação de nova gravação**
 {: #rewrite}
@@ -1196,7 +1235,7 @@ kind: Ingress
 metadados:
   name: myingress
   annotations:
-    ingress.bluemix.net/rewrite-path: "serviceName=&lt;service_name1&gt; rewrite=&lt;rewrite_path1&gt;;serviceName=&lt;service_name2&gt; rewrite=&lt;rewrite_path2&gt;"
+    ingress.bluemix.net/rewrite-path: "serviceName=&lt;service_name1&gt; rewrite=&lt;target_path1&gt;;serviceName=&lt;service_name2&gt; rewrite=&lt;target_path2&gt;"
 spec:
   tls:
   - System z:
@@ -1222,7 +1261,7 @@ spec:
 <tbody>
 <tr>
 <td><code>annotations</code></td>
-<td>Substitua <em>&lt;service_name&gt;</em> pelo nome do serviço do Kubernetes que você criou para o seu app e <em>&lt;rewrite-path&gt;</em> pelo caminho no qual o seu app atende. O tráfego de rede recebido no domínio do controlador do Ingresso é encaminhado para o serviço do Kubernetes usando este caminho. A maioria dos apps não atende em um caminho específico, mas usa o caminho raiz e uma porta específica. Neste caso, defina <code>/</code> como o <em>&lt;rewrite-path&gt;</em> para o seu app.</td>
+<td>Substitua <em>&lt;service_name&gt;</em> pelo nome do serviço do Kubernetes que você criou para o seu app e <em>&lt;target-path&gt;</em> pelo caminho em que seu app atende. O tráfego de rede recebido no domínio do controlador do Ingresso é encaminhado para o serviço do Kubernetes usando este caminho. A maioria dos apps não atende em um caminho específico, mas usa o caminho raiz e uma porta específica. Neste caso, defina <code>/</code> como o <em>rewrite-path</em> para o seu app.</td>
 </tr>
 <tr>
 <td><code>path</code></td>
@@ -1299,7 +1338,7 @@ spec:
  </dd></dl>
 
 
-##### **Incluindo cabeçalhos de HTTP customizados em uma solicitação ou uma resposta do cliente**
+##### **Incluindo cabeçalhos HTTP customizados em uma solicitação do cliente ou resposta do cliente**
 {: #add_header}
 
 Use essa anotação para incluir informações de cabeçalho extras em uma solicitação do cliente antes de enviar a solicitação para o app backend ou para uma resposta do cliente antes de enviar a resposta para o cliente.
@@ -1427,7 +1466,8 @@ spec:
 ##### **Redirecionando solicitações inseguras do cliente HTTP para HTTPS**
 {: #redirect_http_to_https}
 
-Use a anotação de redirecionamento para converter solicitações inseguras de clientes HTTP em HTTPs.{:shortdesc}
+Use a anotação de redirecionamento para converter solicitações inseguras de clientes HTTP em HTTPs.
+{:shortdesc}
 
 <dl>
 <dt>Descrição</dt>
@@ -1552,7 +1592,7 @@ spec:
   <td>Substitua os seguintes valores:<ul><li><code><em>&lt;connect_timeout&gt;</em></code>: insira o número de segundos que se deve esperar para se conectar ao app backend, por exemplo, <strong>65s</strong>.
 
   </br></br>
-  <strong>Nota:</strong> um tempo limite de conexão não pode exceder 75 segundos.</li><li><code><em>&lt;read_timeout&gt;</em></code>: insira o número de segundos que se deve esperar para ler o app backend, por exemplo, <strong>65s</strong>.</li></ul></td>
+  <strong>Nota:</strong> um tempo limite de conexão não pode exceder 75 segundos.</li><li><code><em>&lt;read_timeout&gt;</em></code>: insira o número de segundos que se deve esperar para ler o app backend, por exemplo, <strong>65 s</strong>.</li></ul></td>
   </tr>
   </tbody></table>
 
@@ -1561,7 +1601,7 @@ spec:
 ##### **Configurando o tamanho máximo permitido do corpo de solicitação do cliente**
 {: #client_max_body_size}
 
-Use essa anotação para ajustar o tamanho do corpo que o cliente pode enviar como parte de uma solicitação.
+Ajuste o tamanho do corpo que o cliente pode enviar como parte de uma solicitação.
 {:shortdesc}
 
 <dl>
@@ -1611,23 +1651,122 @@ spec:
   </tbody></table>
 
   </dd></dl>
+  
+
+##### **Mudando as portas padrão para o tráfego de rede HTTP e HTTPS**
+{: #custom_http_https_ports}
+
+Use essa anotação para mudar as portas padrão para tráfego de rede HTTP (porta 80) e HTTPS (porta 443).
+{:shortdesc}
+
+<dl>
+<dt>Descrição</dt>
+<dd>Por padrão, o controlador do Ingresso é configurado para atender ao tráfego de rede HTTP recebido na porta 80 e ao tráfego de rede HTTPS recebido na porta 443. É possível mudar as portas padrão para incluir segurança em seu domínio do controlador do Ingresso ou para ativar uma porta HTTPS somente.
+</dd>
+
+
+<dt>YAML do recurso de Ingresso de amostra</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadados:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/custom-port: "protocol=&lt;protocol1&gt; port=&lt;port1&gt;;protocol=&lt;protocol2&gt;port=&lt;port2&gt;"
+spec:
+  tls:
+  - System z:
+    - mydomain
+    secretName: mytlssecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
+
+<table>
+  <thead>
+  <th colspan=2><img src="images/idea.png"/> Entendendo os componentes de arquivo YAML</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>annotations</code></td>
+  <td>Substitua os seguintes valores:<ul><li><code><em>&lt;protocol&gt;</em></code>: insira <strong>http</strong> ou <strong>https</strong> para mudar a porta padrão para o tráfego de rede recebido HTTP ou HTTPS.</li>
+  <li><code><em>&lt;port&gt;</em></code>: insira o número da porta que você deseja usar para o tráfego de rede recebido HTTP ou HTTPS.</li></ul>
+  <p><strong>Nota:</strong> quando uma porta customizada é especificada para HTTP ou HTTPS, as portas padrão não são mais válidas para HTTP e HTTPS. Por exemplo, para mudar a porta padrão para HTTPS para 8443, mas usar a porta padrão para HTTP, deve-se configurar portas customizadas para ambos: <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p>
+  </td>
+  </tr>
+  </tbody></table>
+
+  </dd>
+  <dt>Uso</dt>
+  <dd><ol><li>Revise as portas abertas para seu controlador do Ingresso.
+<pre class="pre">
+<code>kubectl get service -n kube-system</code></pre>
+A saída da CLI é semelhante à seguinte: 
+<pre class="screen">
+<code>NAME CLUSTER-IP EXTERNAL-IP PORT(S) AGE
+public-ingress-ctl-svc   10.10.10.149   169.60.16.246   80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+<li>Abra o mapa de configuração do controlador do Ingresso.
+<pre class="pre">
+<code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
+<li>Inclua as portas HTTP e HTTPS não padrão no mapa de configuração. Substitua &lt;port&gt; pelas portas HTTP ou HTTPS que você deseja abrir.
+<pre class="codeblock">
+<code>apiVersion: v1
+kind: ConfigMap
+dados:
+  public-ports: &lt;port1&gt;;&lt;port2&gt;
+metadados:
+  creationTimestamp: 2017-08-22T19:06:51Z
+  name: ibm-cloud-provider-ingress-cm
+  namespace: kube-system
+  resourceVersion: "1320"
+  selfLink: /api/v1/namespaces/kube-system/configmaps/ibm-cloud-provider-ingress-cm
+  uid: &lt;uid&gt;</code></pre></li>
+  <li>Verifique se o seu controlador do Ingresso foi reconfigurado com as portas não padrão.
+<pre class="pre">
+<code>kubectl get service -n kube-system</code></pre>
+A saída da CLI é semelhante à seguinte: 
+<pre class="screen">
+<code>NAME CLUSTER-IP EXTERNAL-IP PORT(S) AGE
+public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+<li>Configure seu Ingresso para usar as portas não padrão ao rotear o tráfego de rede recebido para seus serviços. Use o arquivo YAML de amostra nesta referência. </li>
+<li>Atualize a configuração do controlador do Ingresso.
+<pre class="pre">
+<code>kubectl apply -f &lt;yaml_file&gt;</code></pre>
+</li>
+<li>Abra seu navegador da web preferencial para acessar seu app. Exemplo: <code>https://&lt;ibmdomain&gt;:&lt;port&gt;/&lt;service_path&gt;/</code></li></ol></dd></dl>
+
+
+
+
+
+
+
+
+<br />
 
 
 ## Gerenciando endereços IP e sub-redes
 {: #cs_cluster_ip_subnet}
 
-É possível usar sub-redes e endereços IP públicos móveis para expor apps em seu cluster e torná-los acessíveis na Internet.
+É possível usar sub-redes e endereços IP públicos e privados móveis para expor apps em seu cluster e torná-los acessíveis na Internet ou em uma rede privada.
 {:shortdesc}
 
-No {{site.data.keyword.containershort_notm}}, é possível incluir IPs móveis estáveis para serviços do Kubernetes, incluindo sub-redes da rede no cluster. Ao criar um cluster padrão, o {{site.data.keyword.containershort_notm}} provisiona automaticamente uma sub-rede e 5 endereços IP públicos móveis. Os endereços IP públicos móveis são estáticos e não mudam quando um nó do trabalhador ou até mesmo o cluster, é removido.
+No {{site.data.keyword.containershort_notm}}, é possível incluir IPs móveis estáveis para serviços do Kubernetes, incluindo sub-redes da rede no cluster. Ao criar um cluster padrão, o {{site.data.keyword.containershort_notm}} provisiona automaticamente uma sub-rede pública móvel, cinco endereços IP públicos móveis e cinco endereços IP privados móveis. Os endereços IP móveis são estáticos e não mudam quando um nó do trabalhador ou, até mesmo o cluster, é removido.
 
-Um dos endereços IP públicos móveis é usado para o [Controlador de ingresso](#cs_apps_public_ingress), que pode ser usado para expor múltiplos apps em seu cluster usando uma rota pública. Os outros 4 endereços IP públicos móveis podem ser usados para expor apps únicos ao público [criando um serviço de balanceador de carga](#cs_apps_public_load_balancer).
+ Dois dos endereços IP móveis, um público e um privado, são usados para o [controlador do Ingresso](#cs_apps_public_ingress) que pode ser usado para expor múltiplos apps em seu cluster usando uma rota pública. Quatro endereços IP públicos móveis e quatro endereços IP privados podem ser usados para expor apps [criando um serviço de balanceador de carga](#cs_apps_public_load_balancer). 
 
 **Nota:** os endereços IP públicos móveis são cobrados mensalmente. Se escolher remover os endereços IP públicos móveis depois que o cluster for provisionado, ainda assim terá que pagar o encargo mensal, mesmo se você os usou por um curto tempo.
 
 
 
-1.  Crie um script de configuração de serviço do Kubernetes que seja nomeado `myservice.yaml` e defina um serviço do tipo `LoadBalancer` com um endereço IP de balanceador de carga simulado. O exemplo a seguir usa o endereço IP 1.1.1.1 como o endereço IP do balanceador de carga.
+1.  Crie um arquivo de configuração de serviço do Kubernetes que seja chamado `myservice.yaml` e defina um serviço do tipo `LoadBalancer` com um endereço IP do balanceador de carga simulado. O exemplo a seguir usa o endereço IP 1.1.1.1 como o endereço IP do balanceador de carga.
 
     ```
     apiVersion: v1
@@ -1673,10 +1812,10 @@ Um dos endereços IP públicos móveis é usado para o [Controlador de ingresso]
 
 </staging>
 
-### Liberando os endereços IP públicos usados
+### Liberando os endereços IP usados
 {: #freeup_ip}
 
-É possível liberar um endereço IP público móvel usado excluindo o serviço de balanceador de carga que está usando o endereço IP público móvel.
+É possível liberar um endereço IP móvel usado excluindo o serviço de balanceador de carga que está usando o endereço IP móvel.
 
 [Antes de iniciar, configure o contexto para o cluster que você deseja usar.](cs_cli_install.html#cs_cli_configure)
 
@@ -1687,18 +1826,20 @@ Um dos endereços IP públicos móveis é usado para o [Controlador de ingresso]
     ```
     {: pre}
 
-2.  Remova o serviço de balanceador de carga que usa um endereço IP público.
+2.  Remova o serviço de balanceador de carga que usa um endereço IP público ou privado.
 
     ```
     kubectl delete service <myservice>
     ```
     {: pre}
 
+<br />
+
 
 ## Implementando apps com a GUI
 {: #cs_apps_ui}
 
-Ao implementar um app em seu cluster usando o painel do Kubernetes, uma implementação que cria, atualiza e gerencia os pods em seu cluster é criada automaticamente.
+Ao implementar um app em seu cluster usando o painel do Kubernetes, um recurso de implementação que cria, atualiza e gerencia os pods em seu cluster, será automaticamente criado.
 {:shortdesc}
 
 Antes de iniciar:
@@ -1710,9 +1851,12 @@ Para implementar seu app:
 
 1.  [Abra o painel do Kubernetes](#cs_cli_dashboard).
 2.  No painel do Kubernetes, clique em **+ Criar**.
-3.  Selecione **Especificar detalhes do app abaixo** para inserir os detalhes do app na GUI ou **Fazer upload de um arquivo YAML ou JSON** para fazer upload do [arquivo de configuração do app ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/). Use [este exemplo de arquivo YAML ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM-{{site.data.keyword.Bluemix_notm}}/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml) para implementar um contêiner da imagem **ibmliberty** na região sul dos EUA.
+3.  Selecione **Especificar detalhes do app abaixo** para inserir os detalhes do app na GUI ou **Fazer upload de um arquivo YAML ou JSON** para fazer upload do [arquivo de configuração do app ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/). Use [este exemplo de arquivo YAML ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM-Bluemix/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml) para implementar um contêiner da imagem **ibmliberty** na região sul dos EUA.
 4.  No painel do Kubernetes, clique em **Implementações** para verificar se a implementação foi criada.
-5.  Se você tiver disponibilizado publicamente o seu app usando um serviço de porta de nó, um serviço de balanceador de carga ou o Ingresso, [verifique se será possível acessar o app](#cs_apps_public).
+5.  Se você disponibilizou o seu aplicativo publicamente usando um serviço de porta de nó, um serviço de balanceamento de carga ou Ingresso, verifique se você pode acessar o aplicativo.
+
+<br />
+
 
 ## Implementando apps com a CLI
 {: #cs_apps_cli}
@@ -1727,7 +1871,7 @@ Antes de iniciar:
 
 Para implementar seu app:
 
-1.  Crie um script de configuração com base nas [melhores práticas do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/overview/). Geralmente, um script de configuração contém detalhes de configuração para cada um dos recursos que você cria no Kubernetes. Seu script pode incluir uma ou mais das seções a seguir:
+1.  Crie um arquivo de configuração com base nas [melhores práticas do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/overview/). Geralmente, um arquivo de configuração contém detalhes de configuração para cada um dos recursos que você estiver criando no Kubernetes. Seu script pode incluir uma ou mais das seções a seguir:
 
     -   [Implementação ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/): define a criação de pods e conjuntos de réplicas. Um pod inclui um app conteinerizado individual e os conjuntos de réplicas controlam múltiplas instâncias de pods.
 
@@ -1735,15 +1879,89 @@ Para implementar seu app:
 
     -   [Ingresso ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/services-networking/ingress/): especifica um tipo de balanceador de carga que fornece rotas para acessar seu app publicamente.
 
-2.  Execute o script de configuração no contexto de um cluster.
+2.  Execute o arquivo de configuração no contexto de um cluster.
 
     ```
     kubectl apply -f deployment_script_location
     ```
     {: pre}
 
-3.  Se você tiver disponibilizado publicamente o seu app usando um serviço de porta de nó, um serviço de balanceador de carga ou o Ingresso, [verifique se será possível acessar o app](#cs_apps_public).
+3.  Se você disponibilizou o seu aplicativo publicamente usando um serviço de porta de nó, um serviço de balanceamento de carga ou Ingresso, verifique se você pode acessar o aplicativo.
 
+<br />
+
+
+## Ajuste de escala de apps
+{: #cs_apps_scaling}
+
+<!--Horizontal auto-scaling is not working at the moment due to a port issue with heapster. The dev team is working on a fix. We pulled out this content from the public docs. It is only visible in staging right now.-->
+
+Implemente aplicativos em nuvem que respondam a mudanças em demanda para seus aplicativos e que usem recursos somente quando necessário. O Auto-scaling aumenta ou diminui automaticamente o número de instâncias de seus apps com base na CPU.
+{:shortdesc}
+
+Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para seu cluster.
+
+**Nota:** você está procurando informações sobre ajuste de escala de aplicativos Cloud Foundry? Confira [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html).
+
+Com o Kubernetes, é possível ativar o [Auto-scaling do pod horizontal ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) para escalar seus apps com base na CPU.
+
+1.  Implemente seu app no cluster a partir da CLI. Ao implementar seu app, deve-se solicitar a CPU.
+
+    ```
+    kubectl run <name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
+    ```
+    {: pre}
+
+    <table>
+    <thead>
+    <th colspan=2><img src="images/idea.png"/> Entendendo os componentes desse comando</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>--image</code></td>
+    <td>O aplicativo que você deseja implementar.</td>
+    </tr>
+    <tr>
+    <td><code>--request=cpu</code></td>
+    <td>A CPU necessária para o contêiner, que é especificada em milinúcleos. Como um exemplo, <code>--requests=200m</code>.</td>
+    </tr>
+    <tr>
+    <td><code>--expose</code></td>
+    <td>Quando true, cria um serviço externo.</td>
+    </tr>
+    <tr>
+    <td><code>--port</code></td>
+    <td>A porta em que seu app está disponível externamente.</td>
+    </tr></tbody></table>
+
+    **Nota:** para implementações mais complexas, pode ser necessário criar um [arquivo de configuração](#cs_apps_cli).
+2.  Crie um Escalador automático de ajuste de pod horizontal e defina sua política. Para obter mais informações sobre como trabalhar com o comando `kubetcl autoscale`, consulte [a documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/user-guide/kubectl/v1.5/#autoscale).
+
+    ```
+    kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
+    ```
+    {: pre}
+
+    <table>
+    <thead>
+    <th colspan=2><img src="images/idea.png"/>Entendendo os componentes desse comando</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>--cpu-percent</code></td>
+    <td>A utilização média da CPU que é mantida pelo Escalador automático de ajuste de pod horizontal, que é especificada em porcentagem.</td>
+    </tr>
+    <tr>
+    <td><code>--min</code></td>
+    <td>O número mínimo de pods implementados que são usados para manter a porcentagem de utilização da CPU especificada.</td>
+    </tr>
+    <tr>
+    <td><code>--max</code></td>
+    <td>O número máximo de pods implementados que são usados para manter a porcentagem de utilização da CPU especificada.</td>
+    </tr>
+    </tbody></table>
+
+<br />
 
 
 ## Gerenciando implementações de rolagem
@@ -1814,6 +2032,9 @@ Antes de iniciar, crie uma [implementação](#cs_apps_cli).
         kubectl rollout undo deployment/<depoyment_name> --to-revision=<number>
         ```
         {: pre}
+
+<br />
+
 
 ## Incluindo serviços do {{site.data.keyword.Bluemix_notm}}
 {: #cs_apps_service}
@@ -1951,32 +2172,44 @@ Quando você monta um volume de segredo para o seu pod, um arquivo denominado li
 
 Agora é possível acessar os detalhes e as credenciais de serviço do {{site.data.keyword.Bluemix_notm}}. Para trabalhar com o serviço do {{site.data.keyword.Bluemix_notm}}, certifique-se de que o seu app esteja configurado para localizar o arquivo de segredo de serviço no diretório de montagem, analise o conteúdo JSON e determine os detalhes do serviço.
 
+<br />
+
+
 ## Criando armazenamento persistente
 {: #cs_apps_volume_claim}
 
-Você cria uma solicitação de volume persistente para provisionar armazenamento de arquivo NFS para seu cluster. Você monta essa solicitação em um pod para assegurar-se de que os dados estejam disponíveis, mesmo no caso de travamento ou encerramento do pod.
+Crie uma solicitação de volume persistente (pvc) para provisionar o armazenamento de arquivo NFS para seu cluster. Em seguida, monte essa solicitação em um pod para assegurar que os dados estejam disponíveis mesmo se o pod travar ou for encerrado.
 {:shortdesc}
 
 O armazenamento de arquivo NFS que suporta o volume persistente é armazenado em cluster pela IBM para fornecer alta disponibilidade para seus dados.
 
-1.  Revise as classes de armazenamento disponíveis. O {{site.data.keyword.containerlong}} fornece três classes predefinidas de armazenamento para que o administrador de cluster não precise criar quaisquer classes de armazenamento.
+1.  Revise as classes de armazenamento disponíveis. O {{site.data.keyword.containerlong}} fornece oito classes predefinidas de armazenamento para que o administrador de cluster não precise criar quaisquer classes de armazenamento. A classe de armazenamento `ibmc-file-bronze` é a mesmo que a classe de armazenamento `padrão`.
 
     ```
     kubectl get storageclasses
     ```
     {: pre}
-
+    
     ```
     $ kubectl get storageclasses
     NAME                         TYPE
-    ibmc-file-bronze (default)   ibm.io/ibmc-file
-    ibmc-file-gold               ibm.io/ibmc-file
-    ibmc-file-silver             ibm.io/ibmc-file
+    default                      ibm.io/ibmc-file   
+    ibmc-file-bronze (default)   ibm.io/ibmc-file   
+    ibmc-file-custom             ibm.io/ibmc-file
+    ibmc-file-gold               ibm.io/ibmc-file   
+    ibmc-file-retain-bronze      ibm.io/ibmc-file   
+    ibmc-file-retain-custom      ibm.io/ibmc-file   
+    ibmc-file-retain-gold        ibm.io/ibmc-file   
+    ibmc-file-retain-silver      ibm.io/ibmc-file   
+    ibmc-file-silver             ibm.io/ibmc-file 
     ```
     {: screen}
 
-2.  Revise o IOPS de uma classe de armazenamento ou os tamanhos disponíveis.
+2.  Decida se você deseja salvar seus dados e o compartilhamento de arquivo NFS após você excluir o pvc. Se você desejar manter seus dados, escolha uma classe de armazenamento `retain`. Se desejar que os dados e seu compartilhamento de arquivo sejam excluídos na exclusão do pvc, escolha uma classe de armazenamento sem `retain`.
 
+3.  Revise o IOPS de uma classe de armazenamento e os tamanhos de armazenamento disponíveis.
+    - As classes de armazenamento bronze, prata e ouro usam o armazenamento Endurance e têm um IOPS único definido por GB para cada classe. O IOPS total depende do tamanho do armazenamento. Por exemplo, 1000Gi pvc em 4 IOPS por GB possui um total de 4.000 IOPS.
+ 
     ```
     kubectl describe storageclasses ibmc-file-silver
     ```
@@ -1988,8 +2221,24 @@ O armazenamento de arquivo NFS que suporta o volume persistente é armazenado em
     Parâmetros:	iopsPerGB=4,sizeRange=20Gi,40Gi,80Gi,100Gi,250Gi,500Gi,1000Gi,2000Gi,4000Gi,8000Gi,12000Gi
     ```
     {: screen}
+    
+    - As classes de armazenamento customizadas usam o [Desempenho de armazenamento ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://knowledgelayer.softlayer.com/topic/performance-storage) e possuem diferentes opções para o total do IOPS e o tamanho.
 
-3.  Em seu editor de texto preferencial, crie um script de configuração para definir sua solicitação de volume persistente e salvar a configuração como um arquivo `.yaml`.
+    ```
+    kubectl describe storageclasses ibmc-file-retain-custom 
+    ```
+    {: pre}
+
+    O campo **parâmetros** fornece o IOPS associado à classe de armazenamento e os tamanhos disponíveis em gigabytes. Por exemplo, um 40Gi pvc pode selecionar o IOPS que é um múltiplo de 100 que está no intervalo de 100 a 2.000 IOPS.
+
+    ```
+    Parameters:	Note=IOPS value must be a multiple of 100,reclaimPolicy=Retain,sizeIOPSRange=20Gi:[100-1000],40Gi:[100-2000],80Gi:[100-4000],100Gi:[100-6000],1000Gi[100-6000],2000Gi:[200-6000],4000Gi:[300-6000],8000Gi:[500-6000],12000Gi:[1000-6000]
+    ```
+    {: screen}
+
+4.  Crie um arquivo de configuração para definir sua solicitação de volume persistente e salve a configuração como um `.yaml`.
+    
+    Exemplo para classes bronze, prata, ouro:
 
     ```
     apiVersion: v1
@@ -2006,6 +2255,25 @@ O armazenamento de arquivo NFS que suporta o volume persistente é armazenado em
           storage: 20Gi
     ```
     {: codeblock}
+    
+    Exemplo para classes customizadas:
+
+    ```
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: <pvc_name>
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "ibmc-file-retain-custom"
+    spec:
+      accessModes:
+        - ReadWriteMany
+      resources:
+        requests:
+          storage: 40Gi
+          iops: "500"
+    ```
+    {: codeblock}
 
     <table>
     <thead>
@@ -2018,7 +2286,12 @@ O armazenamento de arquivo NFS que suporta o volume persistente é armazenado em
     </tr>
     <tr>
     <td><code>metadata/annotations</code></td>
-    <td>Especifique a classe de armazenamento que define o IOPS por GB do compartilhamento de arquivo host para o volume persistente:<ul><li>ibmc-file-bronze: 2 IOPS por GB.</li><li>ibmc-file-silver: 4 IOPS por GB.</li><li>ibmc-file-gold: 10 IOPS por GB.</li>
+    <td>Especifique a classe de armazenamento para o volume persistente:
+      <ul>
+      <li>ibmc-file-bronze / ibmc-file-retain-bronze : 2 IOPS por GB.</li>
+      <li>ibmc-file-silver / ibmc-file-retain-silver: 4 IOPS por GB.</li>
+      <li>ibmc-file-gold / ibmc-file-retain-gold: 10 IOPS por GB.</li>
+      <li>ibmc-file-custom / ibmc-file-retain-custom: vários valores de IOPS disponíveis.
 
     </li> Se você não especificar uma classe de armazenamento, o volume persistente será criado com a classe de armazenamento bronze.</td>
     </tr>
@@ -2027,16 +2300,21 @@ O armazenamento de arquivo NFS que suporta o volume persistente é armazenado em
     <code>resources/requests/storage</code></td>
     <td>Se você escolher um tamanho diferente do listado, ele será arredondado. Se você selecionar um tamanho maior que o maior tamanho, então o tamanho será arredondado para baixo.</td>
     </tr>
+    <tr>
+    <td><code>spec/accessModes</code>
+    <code>resources/requests/iops</code></td>
+    <td>Esta opção é para ibmc-file-custom / ibmc-file-retain-custom apenas. Especifique o IOPS total para o armazenamento. Execute `kubectl describe storageclasses ibmc-file-custom` para ver todas as opções. Se você escolher um IOPS diferente de um que esteja listado, o IOPS será arredondado para cima.</td>
+    </tr>
     </tbody></table>
 
-4.  Crie a solicitação de volume persistente.
+5.  Crie a solicitação de volume persistente.
 
     ```
     kubectl apply -f <local_file_path>
     ```
     {: pre}
 
-5.  Verifique se a sua solicitação de volume persistente foi criada e ligada ao volume persistente. Esse processo pode levar alguns minutos.
+6.  Verifique se a sua solicitação de volume persistente foi criada e ligada ao volume persistente. Esse processo pode levar alguns minutos.
 
     ```
     kubectl describe pvc <pvc_name>
@@ -2064,7 +2342,7 @@ O armazenamento de arquivo NFS que suporta o volume persistente é armazenado em
     ```
     {: screen}
 
-6.  {: #cs_apps_volume_mount}Para montar a solicitação de volume persistente em seu pod, crie um script de configuração. Salve a configuração como um arquivo `.yaml`.
+6.  {: #cs_apps_volume_mount}Para montar a solicitação de volume persistente em seu pod, crie um arquivo de configuração. Salve a configuração como um arquivo `.yaml`.
 
     ```
     apiVersion: v1
@@ -2112,14 +2390,14 @@ O armazenamento de arquivo NFS que suporta o volume persistente é armazenado em
     </tr>
     </tbody></table>
 
-7.  Crie o pod e monte a solicitação de volume persistente em seu pod.
+8.  Crie o pod e monte a solicitação de volume persistente em seu pod.
 
     ```
     kubectl apply -f <local_yaml_path>
     ```
     {: pre}
 
-8.  Verifique se o volume foi montado com êxito no pod.
+9.  Verifique se o volume foi montado com êxito no pod.
 
     ```
     kubectl describe pod <pod_name>
@@ -2141,6 +2419,9 @@ O armazenamento de arquivo NFS que suporta o volume persistente é armazenado em
 
     ```
     {: screen}
+
+<br />
+
 
 ## Incluindo acesso de usuário não raiz no armazenamento persistente
 {: #cs_apps_volumes_nonroot}
@@ -2266,7 +2547,7 @@ Para o {{site.data.keyword.containershort_notm}}, o proprietário padrão do cam
     ```
     {: pre}
 
-8.  Crie um script de configuração para montar o volume e executar o pod por meio da imagem não raiz. O caminho de montagem do volume `/mnt/myvol` corresponde ao caminho de montagem especificado no Dockerfile. Salve a configuração como um arquivo `.yaml`.
+8.  Crie um arquivo de configuração para montar o volume e execute o pod da imagem não raiz. O caminho de montagem do volume `/mnt/myvol` corresponde ao caminho de montagem especificado no Dockerfile. Salve a configuração como um arquivo `.yaml`.
 
     ```
     apiVersion: v1

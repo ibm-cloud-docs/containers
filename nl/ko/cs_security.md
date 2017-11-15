@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-08-15"
+lastupdated: "2017-10-24"
 
 ---
 
@@ -22,9 +22,10 @@ lastupdated: "2017-08-15"
 위험성 분석과 보안 보장을 위해 기본 제공 보안 기능을 사용할 수 있습니다. 이러한 기능을 사용하면 클러스터 인프라 및 네트워크 통신을 보호하고 컴퓨팅 리소스를 격리하며 인프라 컴포넌트 및 컨테이너 배치에서 보안 준수를 보장하는 데 도움이 됩니다.
 {: shortdesc}
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_security.png"><img src="images/cs_security.png" width="400" alt="{{site.data.keyword.containershort_notm}} 클러스터 보안" style="width:400px;" /></a>
+<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_security.png" ><img src="images/cs_security.png" width="400" alt="{{site.data.keyword.containershort_notm}} 클러스터 보안" style="width:400px; border-style: none"/></a>
 
-<table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
+
+  <table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
       <thead>
   <th colspan=2><img src="images/idea.png"/> {{site.data.keyword.containershort_notm}}의 기본 제공 클러스터 보안 설정</th>
   </thead>
@@ -44,6 +45,9 @@ lastupdated: "2017-08-15"
   </tbody>
 </table>
 
+<br />
+
+
 ## Kubernetes 마스터
 {: #cs_security_master}
 
@@ -51,13 +55,16 @@ Kubernetes 마스터를 보호하고 클러스터 네트워크 통신을 보호�
 {: shortdesc}
 
 <dl>
-  <dt>완전 관리되는 전용 Kubernetes 마스터</dt>
-    <dd>{{site.data.keyword.containershort_notm}}의
-모든 Kubernetes 클러스터는 IBM 소유 {{site.data.keyword.BluSoftlayer_full}} 계정에서 IBM이 관리하는 전용 Kubernetes 마스터에 의해 제어됩니다. Kubernetes 마스터는 다른 IBM 고객과 공유하지 않는 다음의 전용 컴포넌트로 설정됩니다. <ul><ul><li>etcd 데이터 저장소: 서비스, 배치, 포드와 같은 클러스터의 모든 Kubernetes 리소스를 저장합니다. Kubernetes ConfigMaps 및 시크릿은 포드에서 실행되는 앱에서 사용할 수 있도록 키 값 쌍으로 저장되는 앱 데이터입니다. etcd의 데이터는 IBM에서 관리하는 암호화된 디스크에 저장되며 데이터 보호와 무결성을 보장하기 위해 포드에 전송될 때 TLS를 통해
-암호화됩니다. <li>kube-apiserver: Kubernetes 마스터에 대한 작업자 노드의 모든 요청에 대해 기본 시작점 역할을 합니다. 
-kube-apiserver는 요청을 유효성 검증하고 처리하며 etcd 데이터 저장소에서 읽고 쓰기가 가능합니다. <li><kube-scheduler: 용량 및 성능 요구사항, 하드웨어 및 소프트웨어 정책 제한조건, 연관관계 방지 스펙, 그리고 워크로드 요구사항을 고려하여 포드가 배치될 위치를 결정합니다. 
-요구사항과 일치하는 작업자 노드를 찾을 수 없으면 포드가 클러스터에 배치되지 않습니다. <li>kube-controller-manager: 원하는 상태를 얻기 위한 상대 포드의 작성과 복제본 세트의 모니터링을 담당합니다. <li>OpenVPN: 모든 Kubernetes 마스터 대 작업자 노드 통신을 위한 보안 네트워크 연결을 제공하기 위한
-{{site.data.keyword.containershort_notm}} 특정 컴포넌트. </ul></ul></dd>
+  <dt>전체 관리되는 데디케이티드 Kubernetes 마스터</dt>
+    <dd>{{site.data.keyword.containershort_notm}}의 모든 Kubernetes 클러스터는 IBM에서 IBM 소유 IBM Bluemix Infrastructure(SoftLayer) 계정으로 관리하는 데디케이티드 Kubernetes 마스터로 제어됩니다. Kubernetes 마스터는 다른 IBM 고객과 공유하지 않는 다음의 데디케이티드 컴포넌트로 설정됩니다. <ul><li>etcd 데이터 저장소: 서비스, 배치, 포드와 같은 클러스터의 모든 Kubernetes 리소스를 저장합니다. Kubernetes ConfigMaps 및 시크릿은 포드에서 실행되는 앱에서 사용할 수 있도록 키 값 쌍으로 저장되는 앱 데이터입니다. etcd의 데이터는 IBM에서 관리하는 암호화된 디스크에 저장되며 데이터 보호와 무결성을 보장하기 위해 포드에 전송될 때 TLS를 통해
+암호화됩니다. </li>
+    <li>kube-apiserver: Kubernetes 마스터에 대한 작업자 노드의 모든 요청에 대해 기본 시작점 역할을 합니다. 
+kube-apiserver는 요청을 유효성 검증하고 처리하며 etcd 데이터 저장소에서 읽고 쓰기가 가능합니다. </li>
+    <li>kube-scheduler: 용량 및 성능 요구사항, 하드웨어 및 소프트웨어 정책 제한조건,
+연관관계 방지 스펙, 그리고 워크로드 요구사항을 고려하여 포드가 배치될 위치를 결정합니다. 
+요구사항과 일치하는 작업자 노드를 찾을 수 없으면 포드가 클러스터에 배치되지 않습니다. </li>
+    <li>kube-controller-manager: 원하는 상태를 얻기 위한 상대 포드의 작성과 복제본 세트의 모니터링을 담당합니다. </li>
+    <li>OpenVPN: 모든 Kubernetes 마스터 대 작업자 노드 통신을 위해 보안 네트워크 연결을 제공하기 위한 {{site.data.keyword.containershort_notm}} 특정 컴포넌트. </li></ul></dd>
   <dt>모든 작업자 노드 대 Kubernetes 마스터 통신을 위한 TLS 보안 네트워크 연결</dt>
     <dd>Kubernetes 마스터에 대한 네트워크 통신을 보호하기 위해,
 {{site.data.keyword.containershort_notm}}는 모든 클러스터에 대한
@@ -69,7 +76,10 @@ kube-apiserver 및 etcd 데이터 저장소 컴포넌트와의 양방향 통신�
     <dd>모든 Kubernetes 마스터는 프로세스 레벨 서비스 거부(DoS) 공격을 제어하고 처리하기 위해 IBM에 의해 지속적으로 모니터됩니다. </dd>
   <dt>Kubernetes 마스터 노드 보안 준수</dt>
     <dd>{{site.data.keyword.containershort_notm}}는 마스터 노드 보호를 보장하기 위해 적용이 필요한 OS 특정 보안 수정사항 및 Kubernetes에서 발견된 취약점에 대해 Kubernetes 마스터가 배치된 모든 노드를 자동으로 스캔합니다. 취약점이 발견된 경우, {{site.data.keyword.containershort_notm}}는 자동으로 수정사항을 적용하며 사용자를 위해 취약점을 해결합니다. </dd>
-</dl>  
+</dl>
+
+<br />
+
 
 ## 작업자 노드
 {: #cs_security_worker}
@@ -79,13 +89,16 @@ kube-apiserver 및 etcd 데이터 저장소 컴포넌트와의 양방향 통신�
 
 <dl>
   <dt>컴퓨팅, 네트워크 및 스토리지 인프라 격리</dt>
-    <dd>클러스터를 작성하는 경우 가상 머신은 고객 {{site.data.keyword.BluSoftlayer_notm}} 계정 또는 IBM의 전용 {{site.data.keyword.BluSoftlayer_notm}} 계정의 작업자 노드로 프로비저닝됩니다. 작업자 노드는 클러스터 전용이며, 기타 클러스터의 워크로드를 호스팅하지 않습니다. </br> 모든 {{site.data.keyword.Bluemix_notm}} 계정은 작업자 노드에서 고품질 네트워크 성능과 격리를 보장할 수 있도록 {{site.data.keyword.BluSoftlayer_notm}} VLAN으로 설정됩니다. </br>클러스터에서 데이터의 지속성을 위해 사용자는 {{site.data.keyword.BluSoftlayer_notm}}에서 전용 NFS 기반 파일 스토리지를 프로비저닝할 수 있으며 해당 플랫폼의 기본 제공되는 데이터 보안 기능을 최대한 활용할 수 있습니다. </dd>
+    <dd>클러스터를 작성할 때 가상 머신이 고객 IBM Bluemix Infrastructure(SoftLayer) 계정 또는 IBM의 전용 IBM Bluemix Infrastructure(SoftLayer) 계정의 작업자 노드로 프로비저닝됩니다. 작업자 노드는 클러스터 데디케이티드이며, 기타 클러스터의 워크로드를 호스팅하지 않습니다. </br> 모든 {{site.data.keyword.Bluemix_notm}} 계정은 작업자 노드에서 고품질 네트워크 성능과 격리를 보장할 수 있도록 IBM Bluemix Infrastructure(SoftLayer) VLAN으로 설정됩니다. </br>
+클러스터에서 데이터의 지속성을 위해 사용자는 IBM Bluemix Infrastructure(SoftLayer)에서 전용 NFS 기반 파일 스토리지를 프로비저닝할 수 있으며 해당 플랫폼의 기본 제공되는 데이터 보안 기능을 최대한 활용할 수 있습니다. </dd>
   <dt>안전한 작업자 노드 설정</dt>
     <dd>모든 작업자 노드는 사용자가 변경할 수 없는 Ubuntu 운영 체제로 설정됩니다. 잠재적인 공격으로부터 작업자 노드의 운영 체제를 보호하기 위해 모든 작업자 노드가 Linux iptable 규칙이 적용되는 전문 방화벽 설정으로 구성됩니다. </br> Kubernetes에서 실행되는 모든 컨테이너는 클러스터 작성 중에 모든 작업자 노드에서 구성되는 사전 정의된 Calico 네트워크 정책 설정에 의해 보호됩니다. 이 설정은 작업자 노드와 포드 간의 보안 네트워크 통신을 보장합니다. 컨테이너가 작업자 노드에서 수행할 수 있는 조치를 제한하기 위해 사용자가 작업자 노드에서 [AppArmor 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tutorials/clusters/apparmor/)을 구성하도록 선택할 수 있습니다. </br> 기본적으로, 루트 사용자에 대한 SSH 액세스는 작업자 노드에서 사용 불가능합니다. 작업자 노드에서 추가 기능을 설치하려면 모든 작업자 노드에서 실행할 모든 항목에 대해 [Kubernetes 디먼 세트 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset)를 사용하거나 실행해야 하는 일회성 조치에 대해서는 [Kubernetes 작업 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/)을 사용하십시오.</dd>
   <dt>Kubernetes 작업자 노드 보안 준수</dt>
-    <dd>IBM은 보안 자문 팀과 내부 및 외부적으로 공동 작업함으로써 작업자 노드에 대한 잠재적 보안 준수 문제를 식별하며 발견된 취약점을 해결할 수 있도록 지속적으로 준수 업데이트 및 보안 패치를 릴리스합니다. 업데이트 및 보안 패치는 IBM에 의해 작업자 노드의 운영 체제에 자동으로 배포됩니다. 이를 수행하기 위해 IBM은 작업자 노드에 대한 SSH 액세스를 유지합니다. </br> <b>노트</b>: 일부 업데이트를 수행하려면 작업자 노드를 다시 부팅해야 합니다. 그러나 IBM은 업데이트나 보안 패치의 설치 중에 작업자 노드를 다시 부팅하지 않습니다. 업데이트와 보안 패치의 설치 완료를 확인하기 위해 사용자에게는 정기적으로 작업자 노드를 다시 부팅하도록 권장됩니다. </dd>
-  <dt>SoftLayer 네트워크 방화벽 지원</dt>
-    <dd>{{site.data.keyword.containershort_notm}}는 모든 [{{site.data.keyword.BluSoftlayer_notm}} 방화벽 오퍼링 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/cloud-computing/bluemix/network-security)과 호환 가능합니다. {{site.data.keyword.Bluemix_notm}} 퍼블릭에서 사용자는 클러스터에 대한 전용 네트워크 보안을 제공하고 네트워크 침입을 발견하여 이를 해결하기 위한 사용자 정의 네트워크 정책으로 방화벽을 설정할 수 있습니다. 예를 들어, [Vyatta ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://knowledgelayer.softlayer.com/topic/vyatta-1)가 방화벽 역할을 수행하여 원하지 않는 트래픽을 차단하게 설정하도록 선택할 수 있습니다. 방화벽을 설정할 때 마스터와 작업자 노드가 통신할 수 있도록 각 지역의 [필수 포트와 IP 주소도 개방해야 합니다](#opening_ports). {{site.data.keyword.Bluemix_notm}} 데디케이티드에서 방화벽, DataPower, Fortigate 및 DNS는 표준 전용 환경 배치의 일부로서 이미 구성되어 있습니다. </dd>
+    <dd>IBM은 내부 및 외부 보안 자문 팀과 공동 작업하여 잠재적 보안 준수 취약점을 해결합니다. IBM은 운영 체제에 업데이트 및 보안 패치를 배치하기 위해 작업자 노드에 대한 SSH 액세스를 유지합니다.
+</br> <b>중요</b>: 자동으로 운영 체제에 배치되는 업데이트와 보안 패치가 설치될 수 있도록 정기적으로 작업자 노드를 다시 부팅하십시오. IBM에서는 작업자 노드를 다시 부팅하지 않습니다.
+</dd>
+  <dt>IBM Bluemix Infrastructure(SoftLayer) 네트워크 방화벽에 대한 지원</dt>
+    <dd>{{site.data.keyword.containershort_notm}}는 모든 [IBM Bluemix Infrastructure(SoftLayer) 방화벽 오퍼링 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/cloud-computing/bluemix/network-security)과 호환 가능합니다. {{site.data.keyword.Bluemix_notm}} 퍼블릭에서 사용자는 클러스터에 대한 데디케이티드 네트워크 보안을 제공하고 네트워크 침입을 발견하여 이를 해결하기 위한 사용자 정의 네트워크 정책으로 방화벽을 설정할 수 있습니다. 예를 들어, [Vyatta ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://knowledgelayer.softlayer.com/topic/vyatta-1)가 방화벽 역할을 수행하여 원하지 않는 트래픽을 차단하게 설정하도록 선택할 수 있습니다. 방화벽을 설정할 때 마스터와 작업자 노드가 통신할 수 있도록 각 지역의 [필수 포트와 IP 주소도 개방해야 합니다](#opening_ports). {{site.data.keyword.Bluemix_notm}} 데디케이티드에서 방화벽, DataPower, Fortigate 및 DNS는 표준 전용 환경 배치의 일부로서 이미 구성되어 있습니다. </dd>
   <dt>서비스를 개인용으로 설정하거나 일부 서비스 및 앱을 선택적으로 공용 인터넷에 노출</dt>
     <dd>사용자는 작업자 노드와 포드 간에 보안 통신을 보장하기 위해 서비스와 앱을 개인용으로 유지하고 이 주제에서 설명하는 기본 제공 보안 기능을 최대로 활용하도록 선택할 수 있습니다. 서비스와 앱을 공용 인터넷에 노출하기 위해, 공용으로 안전하게 서비스를 사용할 수 있도록 Ingress 및 로드 밸런서 지원을 활용할 수 있습니다. </dd>
   <dt>작업자 노드와 앱을 온프레미스 데이터 센터에 안전하게 연결하십시오.</dt>
@@ -97,65 +110,142 @@ kube-apiserver 및 etcd 데이터 저장소 컴포넌트와의 양방향 통신�
 ### 방화벽에서 필수 포트와 IP 주소 열기
 {: #opening_ports}
 
-작업자 노드용으로 방화벽을 설정하거나 {{site.data.keyword.BluSoftlayer_notm}} 계정에서 방화벽 설정을 사용자 정의할 때 작업자 노드와 Kubernetes 마스터가 통신할 수 있도록 특정 포트와 IP 주소를 열어야 합니다.
+방화벽에서 특정 포트 및 IP 주소을 열어야 할 수 있는 다음 상황을 검토하십시오.
+* 작업자 노드에 대한 방화벽이 설정되었거나 IBM Bluemix Infrastructure(SoftLayer) 계정의 방화벽 설정이 사용자 정의되었을 때 Kubernetes 마스터와 작업자 노드 간의 통신을 허용하려는 경우
+* 클러스터의 외부에서 로드 밸런서 또는 Ingress 제어기에 액세스하려는 경우
+* 회사 네트워크 정책으로 인해 프록시 또는 방화벽을 통해 공용 인터넷 엔드포인트에 액세스하지 못할 때 로컬 시스템에서 `kubectl` 명령을 실행하려는 경우
 
-1.  클러스터에서 모든 작업자 노드에 대한 공인 IP 주소를 기록해 놓으십시오. 
+  1.  클러스터에서 모든 작업자 노드에 대한 공인 IP 주소를 기록해 놓으십시오. 
 
-    ```
+      ```
     bx cs workers <cluster_name_or_id>
     ```
-    {: pre}
+      {: pre}
 
-2.  방화벽에서 작업자 노드와 양방향으로 다음 연결을 허용하십시오. 
-
-  ```
-  TCP port 443 FROM <each_worker_node_publicIP> TO registry.<region>.bluemix.net, apt.dockerproject.org
-  ```
-  {: codeblock}
-
-    <ul><li>작업자 노드에서의 OUTBOUND 연결의 경우 `<each_worker_node_publicIP>`의 소스 작업자 노드에서 대상 TCP/UDP 포트 범위 20000-32767 및 다음 IP 주소와 네트워크 그룹으로의 발신 네트워크 트래픽을 허용하십시오.</br>
-    
-
-    <table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
+  2.  작업자 노드로부터의 아웃바운드 연결을 위한 방화벽에서 소스 작업자 노드에서 대상 TCP/UDP 포트 범위 20000-32767 및 `<each_worker_node_publicIP>`의 포트 443과 다음 IP 주소 및 네트워크 그룹으로의 발신 네트워크 트래픽을 허용하십시오.
+      - **중요**: 부트스트랩 프로세스 중에 로드를 밸런싱하려면 포트 443으로의 발신 트래픽과 지역 내의 모든 위치 간 발신 트래픽을 허용해야 합니다. 예를 들어, 클러스터가 미국 남부에 있는 경우 포트 443에서 dal10 및 dal12로의 트래픽과 dal10 및 dal12 간 트래픽을 허용해야 합니다.
+    <p>
+  <table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
       <thead>
-      <th colspan=2><img src="images/idea.png"/> 아웃바운드 IP 주소</th>
+      <th>지역</th>
+      <th>위치</th>
+      <th>IP 주소</th>
       </thead>
     <tbody>
       <tr>
-        <td>ams03</td>
-        <td><code>169.50.169.110</code></td>
+         <td>AP 남부</td>
+         <td>mel01<br>syd01</td>
+         <td><code>168.1.97.67</code><br><code>168.1.8.195</code></td>
       </tr>
       <tr>
-        <td>dal10</td>
-        <td><code>169.46.7.238</code></td>
-       </tr>
-       <tr>
-        <td>dal12</td>
-        <td><code>169.47.70.10</code></td>
-       </tr>
-       <tr>
-        <td>fra02</td>
-        <td><code>169.50.56.174</code></td>
-       </tr>
+         <td>중앙 유럽</td>
+         <td>ams03<br>fra02</td>
+         <td><code>169.50.169.110</code><br><code>169.50.56.174</code></td>
+        </tr>
+      <tr>
+        <td>영국 남부</td>
+        <td>lon02<br>lon04</td>
+        <td><code>159.122.242.78</code><br><code>158.175.65.170</code></td>
+      </tr>
+      <tr>
+        <td>미국 동부</td>
+         <td>wdc06<br>wdc07</td>
+         <td><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+      </tr>
+      <tr>
+        <td>미국 남부</td>
+        <td>dal10<br>dal12<br>dal13</td>
+        <td><code>169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
+      </tr>
       </tbody>
-      <tr>
-       <td>lon02</td>
-       <td><code>159.122.242.78</code></td>
-      </tr>
-      <tr>
-       <td>lon04</td>
-       <td><code>158.175.65.170</code></td>
-      </tr>
-      <tr>
-       <td>syd01</td>
-       <td><code>168.1.8.195</code></td>
-      </tr>
-      <tr>
-       <td>syd04</td>
-       <td><code>130.198.64.19</code></td>
-      </tr>
     </table>
-</ul>
+</p>
+
+  3.  작업자 노드에서 {{site.data.keyword.registrylong_notm}}로의 발신 네트워크 트래픽을 허용하십시오.
+      - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
+      - 트래픽을 허용하려는 레지스트리 지역에 대한 모든 주소로 <em>&lt;registry_publicIP&gt;</em>를 대체하십시오. <p>      
+<table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
+      <thead>
+        <th colspan=2><img src="images/idea.png"/> 레지스트리 IP 주소</th>
+        </thead>
+      <tbody>
+        <tr>
+          <td>registry.au-syd.bluemix.net</td>
+          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
+        </tr>
+        <tr>
+          <td>registry.eu-de.bluemix.net</td>
+          <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></td>
+         </tr>
+         <tr>
+          <td>registry.eu-gb.bluemix.net</td>
+          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></td>
+         </tr>
+         <tr>
+          <td>registry.ng.bluemix.net</td>
+          <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></td>
+         </tr>
+        </tbody>
+      </table>
+</p>
+
+  4.  선택사항: 작업자 노드에서 {{site.data.keyword.monitoringlong_notm}} 및 {{site.data.keyword.loganalysislong_notm}} 서비스로의 발신 네트워크 트래픽을 허용하십시오.
+      - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
+      - 트래픽을 허용하려는 모니터링 지역에 대한 모든 주소로 <em>&lt;monitoring_publicIP&gt;</em>를 대체하십시오.
+      <p><table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
+      <thead>
+        <th colspan=2><img src="images/idea.png"/> 모니터링 공인 IP 주소</th>
+        </thead>
+      <tbody>
+        <tr>
+         <td>metrics.eu-de.bluemix.net</td>
+         <td><code>159.122.78.136/29</code></td>
+        </tr>
+        <tr>
+         <td>metrics.eu-gb.bluemix.net</td>
+         <td><code>169.50.196.136/29</code></td>
+        </tr>
+        <tr>
+          <td>metrics.ng.bluemix.net</td>
+          <td><code>169.47.204.128/29</code></td>
+         </tr>
+         
+        </tbody>
+      </table>
+</p>
+      - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
+      - 트래픽을 허용하려는 로깅 지역에 대한 모든 주소로 <em>&lt;logging_publicIP&gt;</em>를 대체하십시오.
+      <p><table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
+      <thead>
+        <th colspan=2><img src="images/idea.png"/> 로깅 공인 IP 주소</th>
+        </thead>
+      <tbody>
+        <tr>
+         <td>ingest.logging.eu-de.bluemix.net</td>
+         <td><code>169.50.25.125</code></td>
+        </tr>
+        <tr>
+         <td>ingest.logging.eu-gb.bluemix.net</td>
+         <td><code>169.50.115.113</code></td>
+        </tr>
+        <tr>
+          <td>ingest.logging.ng.bluemix.net</td>
+          <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
+         </tr>
+        </tbody>
+      </table>
+</p>
+
+  5. 사설 방화벽의 경우 적절한 IBM Bluemix Infrastructure(SoftLayer) 사설 IP 범위를 허용하십시오. [이 링크](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)의 **백엔드(사설) 네트워크** 섹션부터 참조하십시오.
+      - 사용 중인 [지역 내의 위치](cs_regions.html#locations)를 모두 추가하십시오.
+      - dal01 위치(데이터 센터)를 추가해야 합니다.
+      - 클러스터 부트스트랩 프로세스를 허용하려면 포트 80 및 443을 여십시오.
+
+  6. 선택사항: VLAN의 외부에서 로드 밸런서에 액세스하려면 해당 로드 밸런서의 특정 IP 주소에서 수신 네트워크 트래픽에 대한 포트를 여십시오.
+
+  7. 선택사항: VLAN의 외부에서 Ingress 제어기에 액세스하려면 구성한 포트에 따라 해당 Ingress 제어기의 특정 IP 주소에서 수신 네트워크 트래픽에 대해 포트 80 또는 443을 여십시오.
+
+<br />
 
 
 ## 네트워크 정책
@@ -166,11 +256,17 @@ kube-apiserver 및 etcd 데이터 저장소 컴포넌트와의 양방향 통신�
 
 클러스터에 대한 네트워크 정책을 작성하기 위해 Calico 및 기본 Kubernetes 기능 중에서 선택할 수 있습니다. Kubernetes 네트워크 정책을 사용하여 시작할 수 있지만, 더 강력한 기능을 위해서는 Calico 네트워크 정책을 사용하십시오. 
 
-<ul><li>[Kubernetes 네트워크 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/services-networking/network-policies/): 포드가 서로 통신할 수 있는지 지정하는 등의 일부 기본 옵션이 제공됩니다. 포드에 대한 수신 네트워크 트래픽은 연결을 시도하는 포드의 Kubernetes 네임스페이스 및
-레이블을 기반으로 프로토콜 및 포트에 대해 허용되거나 차단될 수 있습니다. </br>이러한 정책은
+<ul>
+  <li>[Kubernetes 네트워크 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/services-networking/network-policies/): 포드가 서로 통신할 수 있는지 지정하는 등의 일부 기본 옵션이 제공됩니다. 프로토콜 및 포트에 대한 수신 네트워크 트래픽을 허용하거나 차단할 수 있습니다. 다른 포드에 연결하려고 시도하는 포드의 Kubernetes 네임스페이스 및 레이블을 기반으로 이 트래픽을 필터링할 수 있습니다.</br>이러한 정책은
 `kubectl` 명령 또는 Kubernetes API를 사용하여 적용될 수 있습니다. 해당 정책이 적용되면
-Calico 네트워크 정책으로 변환되고 Calico는 이러한 정책을 시행합니다. <li>[Calico 네트워크 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](http://docs.projectcalico.org/v2.0/getting-started/kubernetes/tutorials/advanced-policy): 이러한 정책은 Kubernetes 네트워크 정책의 수퍼세트이며 다음 기능으로 기본 Kubernetes 기능을 향상시킵니다.
-<ul><ul><li>Kubernetes 포드 트래픽뿐만 아니라 특정 네트워크 인터페이스에서 네트워크 트래픽을 허용하거나 차단합니다. <li>수신(ingress) 및 발신(egress) 네트워크 트래픽을 허용하거나 차단합니다. <li>소스 또는 대상 IP 주소 또는 CIDR을 기반으로 하는 트래픽을 허용하거나 차단합니다. </ul></ul></br>
+Calico 네트워크 정책으로 변환되고 Calico는 이러한 정책을 시행합니다. </li>
+  <li>[Calico 네트워크 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](http://docs.projectcalico.org/v2.4/getting-started/kubernetes/tutorials/advanced-policy): 이러한 정책은 Kubernetes 네트워크 정책의 수퍼세트이며 다음 기능으로 기본 Kubernetes 기능을 향상시킵니다.
+</li>
+    <ul><ul><li>Kubernetes 포드 트래픽뿐만 아니라 특정 네트워크 인터페이스에서 네트워크 트래픽을 허용하거나 차단합니다. </li>
+    <li>수신(ingress) 및 발신(egress) 네트워크 트래픽을 허용하거나 차단합니다. </li>
+    <li>[LoadBalancer 또는 NodePort Kubernetes 서비스에 대한 수신(ingress) 트래픽을 차단](#cs_block_ingress)합니다.</li>
+    <li>소스 또는 대상 IP 주소 또는 CIDR을 기반으로 하는 트래픽을 허용하거나 차단합니다. </li></ul></ul></br>
+
 이러한 정책은 `calicoctl` 명령을 사용하여 적용됩니다. Calico는
 Kubernetes 작업자 노드에서 Linux iptables 규칙을 설정하여 Calico 정책으로 변환된 Kubernetes 네트워크 정책을 포함하는 해당 정책을
 시행합니다. Iptables 규칙은 대상으로 지정된 리소스에 전달되도록 네트워크 트래픽이 충족해야 하는 특성을 정의하기 위해
@@ -194,8 +290,7 @@ Kubernetes 노드 포트, 로드 밸런서 및 Ingress 서비스에 대한 액�
 **중요:** 정책을 완전히 이해하고 정책에서 허용하고 있는 트래픽이 필요하지 않다는 것을 아는 경우를 제외하고는 호스트 엔드포인트에 적용된 정책을 제거하지 마십시오. 
 
 
-
-  <table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
+ <table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
       <thead>
   <th colspan=2><img src="images/idea.png"/> 각 클러스터의 기본 정책</th>
   </thead>
@@ -220,7 +315,7 @@ Kubernetes 노드 포트, 로드 밸런서 및 Ingress 서비스에 대한 액�
    </tr>
    <tr>
       <td><code>allow-sys-mgmt</code></td>
-      <td>작업자 노드를 관리하는 데 사용되는 특정 {{site.data.keyword.BluSoftlayer_notm}} 시스템에 대한 수신 연결을 허용합니다. </td>
+      <td>작업자 노드를 관리하는 데 사용되는 특정 BM Bluemix Infrastructure(SoftLayer) 시스템에 대한 수신 연결을 허용합니다. </td>
    </tr>
    <tr>
     <td><code>allow-vrrp</code></td>
@@ -235,23 +330,24 @@ Kubernetes 노드 포트, 로드 밸런서 및 Ingress 서비스에 대한 액�
 
 대부분의 경우, 기본 정책은 변경할 필요가 없습니다. 고급 시나리오에만 변경사항이 필요할 수 있습니다. 변경사항을 작성해야 하는 경우, Calico CLI를 설치하고 사용자 고유의 네트워크 정책을 작성하십시오.
 
-시작하기 전에 다음 단계를 완료하십시오.
+시작하기 전에:
 
 1.  [{{site.data.keyword.containershort_notm}} 및 Kubernetes CLI를 설치하십시오.](cs_cli_install.html#cs_cli_install)
 2.  [라이트 또는 표준 클러스터를 작성하십시오.](cs_cluster.html#cs_cluster_ui)
 3.  [Kubernetes CLI를 클러스터에 대상으로 지정하십시오](cs_cli_install.html#cs_cli_configure). 
 `--admin` 옵션을 `bx cs cluster-config` 명령에 포함하십시오. 이는 인증서 및 권한 파일을 다운로드하는 데 사용됩니다.
-이 다운로드에는 Calico 명령을 실행하는 데 필요한 관리자 rbac 역할에 대한 키도 포함됩니다. 
+이 다운로드에는 Calico 명령을 실행하는 데 필요한 수퍼유저 역할에 대한 키도 포함됩니다. 
 
   ```
-  bx cs cluster-config <cluster_name> 
+  bx cs cluster-config <cluster_name> --admin
   ```
   {: pre}
 
+  **참고:** Calico CLI 버전 1.4.0이 지원됩니다.
 
 네트워크 정책을 추가하려면 다음을 수행하십시오. 
 1.  Calico CLI를 설치하십시오. 
-    1.  [Calico CLI 다운로드 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/projectcalico/calicoctl/releases/).
+    1.  [Calico CLI 다운로드 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/projectcalico/calicoctl/releases/tag/v1.4.0).
 
         **팁:** Windows를 사용하는 경우, {{site.data.keyword.Bluemix_notm}} CLI와 동일한 디렉토리에 Calico CLI를 설치하십시오. 이 설정을 사용하면 나중에 명령을 실행할 때 일부 파일 경로 변경이 필요하지 않습니다. 
 
@@ -268,11 +364,11 @@ Kubernetes 노드 포트, 로드 밸런서 및 Ingress 서비스에 대한 액�
             -   OS X:
 
               ```
-              mv /<path_to_file>/calico-darwin-amd64 /usr/local/bin/calicoctl
+              mv /<path_to_file>/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
               ```
               {: pre}
 
-        2.  바이너리 파일을 실행 파일로 변환하십시오. 
+        2.  파일을 실행 가능하도록 설정하십시오.
 
             ```
            chmod +x /usr/local/bin/calicoctl
@@ -288,14 +384,14 @@ Kubernetes 노드 포트, 로드 밸런서 및 Ingress 서비스에 대한 액�
 
 2.  Calico CLI를 구성하십시오. 
 
-    1.  Linux 및 OS X의 경우에는 '/etc/calico' 디렉토리를 작성하십시오. Windows의 경우에는 임의의 디렉토리가 사용될 수 있습니다. 
+    1.  Linux 및 OS X의 경우에는 `/etc/calico` 디렉토리를 작성하십시오. Windows의 경우에는 임의의 디렉토리가 사용될 수 있습니다. 
 
       ```
-      mkdir -p /etc/calico/
+      sudo mkdir -p /etc/calico/
       ```
       {: pre}
 
-    2.  'calicoctl.cfg' 파일을 작성하십시오. 
+    2.  `calicoctl.cfg` 파일을 작성하십시오. 
         -   Linux 및 OS X:
 
           ```
@@ -307,7 +403,7 @@ Kubernetes 노드 포트, 로드 밸런서 및 Ingress 서비스에 대한 액�
 
     3.  <code>calicoctl.cfg</code> 파일에 다음 정보를 입력하십시오. 
 
-      ```
+        ```
       apiVersion: v1
       kind: calicoApiConfig
       metadata:
@@ -317,14 +413,14 @@ Kubernetes 노드 포트, 로드 밸런서 및 Ingress 서비스에 대한 액�
           etcdCertFile: <CERTS_DIR>/admin.pem
           etcdCACertFile: <CERTS_DIR>/<ca-*pem_file>
       ```
-      {: pre}
+        {: codeblock}
 
-        1.  `<ETCD_URL>`을 검색하십시오.
+        1.  `<ETCD_URL>`을 검색하십시오. 이 명령이 실패하고 `calico-config not found` 오류가 발생하는 경우 이 [문제점 해결 주제](cs_troubleshoot.html#cs_calico_fails)를 참조하십시오.
 
           -   Linux 및 OS X:
 
               ```
-              kubectl describe pod -n kube-system `kubectl get pod -n kube-system | grep calico-policy-controller | awk '{print $1}'` | grep ETCD_ENDPOINTS | awk '{print $2}'
+              kubectl get cm -n kube-system calico-config -o yaml | grep "etcd_endpoints:" | awk '{ print $2 }'
               ```
               {: pre}
 
@@ -336,9 +432,8 @@ Kubernetes 노드 포트, 로드 밸런서 및 Ingress 서비스에 대한 액�
               {: screen}
 
           -   Windows:<ol>
-            <li>kube-system 네임스페이스에서 포드의 목록을 가져오고 Calico 제어기 포드를 찾으십시오. </br><pre class="codeblock"><code>kubectl get pod -n kube-system</code></pre></br>예:</br><pre class="screen"><code>calico-policy-controller-1674857634-k2ckm</code></pre>
-            <li>Calico 제어기 포드의 세부사항을 보십시오. </br> <pre class="codeblock"><code>kubectl describe pod -n kube-system calico-policy-controller-&lt;ID&gt;</code></pre>
-            <li>ETCD 엔드포인트 값을 찾으십시오. 예: <code>https://169.1.1.1:30001</code>
+            <li>구성 맵에서 calico 구성 값을 가져오십시오. </br><pre class="codeblock"><code>kubectl get cm -n kube-system calico-config -o yaml</code></pre></br>
+            <li>`data` 섹션에서 etcd_endpoints 값을 찾으십시오. 예: <code>https://169.1.1.1:30001</code>
             </ol>
 
         2.  Kubernetes 인증서가 다운로드되는 디렉토리인 `<CERTS_DIR>`을 검색하십시오. 
@@ -378,11 +473,11 @@ Kubernetes 노드 포트, 로드 밸런서 및 Ingress 서비스에 대한 액�
             -   Linux 및 OS X:
 
               ```
-              ls `dirname $KUBECONFIG` | grep ca-.*pem
+              ls `dirname $KUBECONFIG` | grep "ca-"
               ```
               {: pre}
 
-            -   Windows:<ol><li>이전 단계에서 검색한 디렉토리를 여십시오. </br><pre class="codeblock"><code>C:\Users\<user>\.bluemix\plugins\container-service\&#60;cluster_name&#62;-admin\</code></pre>
+            -   Windows:<ol><li>이전 단계에서 검색한 디렉토리를 여십시오. </br><pre class="codeblock"><code>C:\Users\<user>\.bluemix\plugins\container-service\&lt;cluster_name&gt;-admin\</code></pre>
               <li> <code>ca-*pem_file</code> 파일을 찾으십시오. </ol>
 
         4.  Calico 구성이 올바르게 작동하고 있는지 확인하십시오. 
@@ -460,6 +555,56 @@ Kubernetes 노드 포트, 로드 밸런서 및 Ingress 서비스에 대한 액�
           ```
           {: pre}
 
+### LoadBalancer 또는 NodePort 서비스에 대한 수신(Ingress) 서비스 차단
+{: #cs_block_ingress}
+
+기본적으로 Kubernetes `NodePort` 및 `LoadBalancer` 서비스는 앱을 모든 퍼블릭 및 프라이빗 클러스터 인터페이스에서 사용 가능하게 하도록 설계되었습니다. 그러나 트래픽 소스 또는 대상을 기반으로 서비스에 대한 수신 트래픽을 차단할 수 있습니다. 트래픽을 차단하려면 Calico `preDNAT` 네트워크 정책을 작성하십시오.
+
+Kubernetes LoadBalancer 서비스는 NodePort 서비스이기도 합니다. LoadBalancer 서비스는 로드 밸런서 IP 주소 및 포트를 통해 앱을 사용할 수 있도록 하고 서비스의 노드 포트를 통해 앱을 사용할 수 있도록 합니다. 클러스터 내의 모든 노드에 대한 모든 IP 주소(공인 및 사설)에서 노드 포트에 액세스할 수 있습니다.
+
+클러스터 관리자는 Calico `preDNAT` 네트워크 정책을 사용하여 다음을 차단할 수 있습니다.
+
+  - NodePort 서비스에 대한 트래픽. LoadBalancer 서비스에 대한 트래픽을 허용됩니다.
+  - 소스 어댑터 또는 CIDR을 기반으로 하는 트래픽
+
+이러한 기능의 이점 중 하나는 클러스터 관리자가 사설 LoadBalancer 서비스의 공용 노드 포트에 대한 트래픽을 차단할 수 있다는 것입니다.
+또한 관리자가 NodePort 또는 LoadBalancer 서비스에 대한 화이트리스트 액세스를 사용으로 설정할 수 있습니다. Kubernetes NodePort 및 LoadBalancer 서비스에 대해 생성된 DNAT iptables 규칙으로 인해 기본 Kubernetes 및 Calico 정책을 이러한 서비스의 보호에 적용하기 어렵기 때문에 `preDNAT` 네트워크 정책이 유용합니다.
+
+Calico `preDNAT` 네트워크 정책은 [Calico 네트워크 정책 리소스 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v2.4/reference/calicoctl/resources/policy)를 기반으로 iptables 규칙을 생성합니다.
+
+1. Kubernetes 서비스에 대한 Ingress 액세스를 위한 Calico `preDNAT` 네트워크 정책을 정의하십시오. 이 예에서는 모든 노드 포트를 차단합니다.
+
+  ```
+  apiVersion: v1
+  kind: policy
+  metadata:
+    name: deny-kube-node-port-services
+  spec:
+    preDNAT: true
+    selector: ibm.role in { 'worker_public', 'master_public' }
+    ingress:
+    - action: deny
+      protocol: tcp
+      destination:
+        ports:
+        - 30000:32767
+    - action: deny
+      protocol: udp
+      destination:
+        ports:
+        - 30000:32767
+  ```
+  {: codeblock}
+
+2. Calico preDNAT 네트워크 정책을 적용하십시오. 클러스터 전체에 정책 변경사항을 적용하는 데 약 1분이 걸립니다.
+
+  ```
+  /opt/bin/calicoctl apply -f deny-kube-node-port-services.yaml
+  ```
+  {: pre}
+
+<br />
+
 
 ## 이미지
 {: #cs_security_deployment}
@@ -477,6 +622,6 @@ Kubernetes 노드 포트, 로드 밸런서 및 Ingress 서비스에 대한 액�
 
 이미지에 대한 취약성 평가를 보려면 다음을 수행하십시오. 
 
-1.  **카탈로그**에서 **컨테이너**를 선택하십시오.
-2.  취약성 평가를 보고자 하는 이미지를 선택하십시오. 
-3.  **취약성 평가** 섹션에서 **보고서 보기**를 클릭하십시오. 
+1.  **카탈로그**의 컨테이너 섹션에서 **컨테이너 레지스트리**를 선택하십시오.
+2.  **개인용 저장소** 페이지의 **저장소** 테이블에서 이미지를 식별하십시오.
+3.  **보안 보고서** 열에서 이미지의 상태를 클릭하여 해당 취약성 평가를 검색하십시오.

@@ -3,21 +3,28 @@
 
 {: .toc subcollection="containers" audience="compute" href="/docs/containers/index.html"}
 IBM Bluemix Container Service
-    
+
     {: .navgroup id="learn"}
     container_index.md
     cs_ov.md
     cs_planning.md
-    cs_tutorials.md
+
+    {: .topicgroup}
+    Tutoriels
+        cs_tutorials.md
+        cs_tutorials_apps.md
+
     cs_security.md
     {: .navgroup-end}
 
     {: .navgroup id="reference"}
     cs_cli_reference.md
+    cs_versions.md
+    cs_regions.md
     cs_rellinks.md
     {: .navgroup-end}
 
-    {: .navgroup id="howto"}    
+    {: .navgroup id="howto"}
     cs_cli_install.md
     cs_cluster.md
     cs_apps.md
@@ -27,7 +34,7 @@ IBM Bluemix Container Service
         [Planification de conteneurs uniques et évolutifs](container_planning.html)
         [Sécurité des conteneurs uniques et évolutifs](container_security.html)
         [Configuration de l'interface CLI pour des conteneurs uniques et évolutifs](container_cli_cfic_install.html)
-        [Images IBM](container_images.html)
+        [Images IBM](../services/RegistryImages/index.html)
         [Exécution de tâches de courte durée en tant que conteneurs](container_single_ui.html)
         [Exécution de groupes à haute disponibilité](container_ha.html)
         [Stockage de données persistantes pour des conteneurs uniques et évolutifs](container_volumes_ov.html)
@@ -35,8 +42,9 @@ IBM Bluemix Container Service
         [Référence de l'interface de ligne de commande pour les conteneurs uniques et évolutifs](container_cli_reference_cfic.html)
         [Identification et résolution des incidents liés aux conteneurs uniques et évolutifs](container_troubleshoot.html)
     {: .navgroup-end}
-    
+
     {: .navgroup id="help"}
     cs_troubleshoot.md
+    cs_popular_topics.md
     {: .navgroup-end}
 

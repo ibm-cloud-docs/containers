@@ -19,7 +19,7 @@ lastupdated: "2017-08-14"
 # {{site.data.keyword.Bluemix_notm}} 데디케이티드 이미지 레지스트리에 대한 {{site.data.keyword.registryshort_notm}} 토큰 작성
 {: #cs_dedicated_tokens}
 
-단일 및 확장 가능 그룹에 대해 사용된 클러스터에서 이미지 레지스트리를 사용할 수 있도록 만료되지 않는 토큰을 작성합니다.
+클러스터와 함께 단일 및 확장 가능 그룹에 대해 사용한 이미지 레지스트리를 사용할 수 있도록 만료되지 않는 토큰을 작성합니다.
 {:shortdesc}
 
 1.  {{site.data.keyword.Bluemix_short}} 데디케이티드 환경에 로그인하십시오. 
@@ -109,7 +109,7 @@ lastupdated: "2017-08-14"
 
 7.  imagePullSecret을 참조하는 포드를 작성하십시오. 
 
-    1.  선호하는 편집기를 열고 mypod.yaml로 이름 지정된 포드 구성 스크립트를 작성하십시오. 
+    1.  선호하는 편집기를 열고 mypod.yaml이라는 이름의 포드 구성 스크립트를 작성하십시오. 
     2.  레지스트리에 액세스하기 위해 사용할 imagePullSecret 및 포드를 정의하십시오. 네임스페이스에서 개인용 이미지 사용: 
 
         ```

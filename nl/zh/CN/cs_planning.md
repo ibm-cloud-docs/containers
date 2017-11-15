@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-08-14"
+lastupdated: "2017-10-24"
 
 ---
 
@@ -12,7 +12,7 @@ lastupdated: "2017-08-14"
 {:pre: .pre}
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
-{:tip: .tip} 
+{:tip: .tip}
 {:download: .download}
 
 
@@ -21,6 +21,9 @@ lastupdated: "2017-08-14"
 
 {{site.data.keyword.containershort_notm}} 提供多个选项，用于配置和定制 Kubernetes 集群，以符合您组织的功能和非功能需求。其中有些配置在创建集群后即不可更改。事先了解这些配置可帮助确保所有资源（如内存、磁盘空间和 IP 地址）均可供开发团队使用。
 {:shortdesc}
+
+<br />
+
 
 ## 比较 Lite 和标准集群
 {: #cs_planning_cluster_type}
@@ -32,16 +35,19 @@ lastupdated: "2017-08-14"
 |---------------|-------------|-----------------|
 |[在 {{site.data.keyword.Bluemix_notm}} Public 中可用](cs_ov.html#public_environment)|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |[在集群内进行专用联网](#cs_planning_private_network)|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
-|[Nodeport 服务对应用程序的公共访问权](#cs_nodeport)|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
+|[NodePort 服务对应用程序的公共访问权](#cs_nodeport)|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |[用户访问管理](cs_cluster.html#cs_cluster_user)|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |[从集群和应用程序访问 {{site.data.keyword.Bluemix_notm}} 服务](cs_cluster.html#cs_cluster_service)|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |[工作程序节点上用于存储的磁盘空间](#cs_planning_apps_storage)|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
-|[基于 NFS 文件的持久存储器（带有卷）](#cs_planning_apps_storage)||<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
-|[LoadBalancer 服务对应用程序的公共访问权](#cs_loadbalancer)||<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
-|[Ingress 服务对应用程序的公共访问权](#cs_ingress)||<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
-|[可移植公共 IP 地址](cs_apps.html#cs_cluster_ip_subnet)||<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
-|[在 {{site.data.keyword.Bluemix_notm}} Dedicated 中可用（封闭 Beta 版）](cs_ov.html#dedicated_environment)||<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
+|[基于 NFS 文件的持久存储器（带有卷）](#cs_planning_apps_storage)| |<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
+|[LoadBalancer 服务对应用程序的公共或专用访问权](#cs_loadbalancer)| |<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
+|[Ingress 服务对应用程序的公共访问权](#cs_ingress)| |<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
+|[可移植公共 IP 地址](cs_apps.html#cs_cluster_ip_subnet)| |<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
+|[在 {{site.data.keyword.Bluemix_notm}} Dedicated 中可用（封闭 Beta 版）](cs_ov.html#dedicated_environment)| |<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 {: caption="表 1. Lite 集群与标准集群之间的差异" caption-side="top"}
+
+<br />
+
 
 ## 集群配置
 {: #cs_planning_cluster_config}
@@ -88,6 +94,8 @@ lastupdated: "2017-08-14"
 </dd>
 </dl>
 
+<br />
+
 
 ## 工作程序节点配置
 {: #cs_planning_worker_nodes}
@@ -95,7 +103,7 @@ lastupdated: "2017-08-14"
 Kubernetes 集群由虚拟机工作程序节点组成，并由 Kubernetes 主节点机进行集中监视和管理。集群管理员必须决定如何设置工作程序节点的集群，以确保集群用户具备在集群中部署和运行应用程序所需的所有资源。
 {:shortdesc}
 
-创建标准集群时，会在 {{site.data.keyword.BluSoftlayer_full}} 中代表您对工作程序节点进行排序，并在 {{site.data.keyword.Bluemix_notm}} 中对其进行设置。为每个工作程序节点分配唯一的工作程序节点标识和域名，在创建集群后，不得更改该标识和域名。根据选择的硬件隔离级别，可以将工作程序节点设置为共享或专用节点。每个工作程序节点都供应有特定机器类型，用于确定部署到该工作程序节点的容器可用的 vCPU 数、内存量和磁盘空间量。
+创建标准集群时，会在 IBM Bluemix Infrastructure (SoftLayer) 中代表您对工作程序节点进行排序，并在 {{site.data.keyword.Bluemix_notm}} 中对其进行设置。为每个工作程序节点分配唯一的工作程序节点标识和域名，在创建集群后，不得更改该标识和域名。根据选择的硬件隔离级别，可以将工作程序节点设置为共享或专用节点。每个工作程序节点都供应有特定机器类型，用于确定部署到该工作程序节点的容器可用的 vCPU 数、内存量和磁盘空间量。
 Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数。有关更多信息，请查看[工作程序节点和 pod 配额 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/admin/cluster-large/)。
 
 
@@ -111,9 +119,44 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 
 共享节点通常比专用节点更便宜，因为底层硬件的开销由多个客户分担。但是，在决定是使用共享还是专用节点时，可能需要咨询您的法律部门，以讨论应用程序环境所需的基础架构隔离和合规性级别。
 
-创建 Lite 集群时，工作程序节点会自动作为 {{site.data.keyword.IBM_notm}} {{site.data.keyword.BluSoftlayer_notm}} 帐户中的共享节点进行供应。
+创建 Lite 集群时，工作程序节点会自动作为 {{site.data.keyword.IBM_notm}} IBM Bluemix Infrastructure (SoftLayer) 帐户中的共享节点进行供应。
 
 在 {{site.data.keyword.Bluemix_notm}} Dedicated 中创建集群时，只会使用单租户集，并且所有物理资源仅供您专用。您可以将多个工作程序节点作为虚拟机部署在同一物理主机上。
+
+<br />
+
+
+## 集群管理责任
+{: #responsibilities}
+
+查看您与 IBM 共享的用于管理集群的责任。要查看在 {{site.data.keyword.Bluemix_notm}} Dedicated 环境中管理的集群的责任，请改为参阅[云环境之间集群管理的差异](cs_ov.html#env_differences)。
+{:shortdesc}
+
+**IBM 负责：**
+
+- 在集群中部署主节点、工作程序节点和管理组件，例如，在集群创建时部署 Ingress 控制器
+- 管理集群的 Kubernetes 主节点的更新、监视和恢复
+- 监视工作程序节点的运行状况并为这些工作程序节点的更新和恢复提供自动化
+- 对基础架构帐户执行自动化任务，包括添加工作程序节点、除去工作程序节点以及创建缺省子网
+- 管理、更新和恢复集群内的操作组件，例如，Ingress 控制器和存储插件
+- 在持久卷声明请求时供应存储卷
+- 在所有工作程序节点上提供安全性设置
+
+<br />
+**您负责：**
+
+- [在集群中部署和管理 Kubernetes 资源，例如，Pod、服务和部署](cs_apps.html#cs_apps_cli)
+- [利用服务和 Kubernetes 的功能以确保应用程序的高可用性](cs_planning.html#highly_available_apps)
+- [通过使用 CLI 添加或除去工作程序节点来添加或除去容量](cs_cli_reference.html#cs_worker_add)
+- [在 IBM Bluemix Infrastructure (SoftLayer) 中创建公用和专用 VLAN 以针对集群进行网络隔离 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://knowledgelayer.softlayer.com/topic/vlans)
+- [确保所有工作程序节点都具有到 Kibernetes 主节点 URL 的网络连接](cs_security.html#opening_ports)<p>**注**：如果工作程序节点同时具有公用和专用 VLAN，那么已配置网络连接。如果工作程序节点仅设置了专用 VLAN，那么需要 vyatta 来提供网络连接。</p>
+- [确定当 Kubernetes 主要或次要版本更新可用时，何时更新 kube-apiserver 和工作程序节点](cs_cluster.html#cs_cluster_update)
+- [通过运行 `kubectl` 命令（如 `cordon` 或 `drain`）以及运行 `bx cs` 命令（如 `reboot`、`reload` 或 `delete`](cs_cli_reference.html#cs_worker_reboot)）采取操作来恢复故障工作程序节点。
+- [根据需要在 IBM Bluemix Infrastructure (SoftLayer) 中添加或除去其他子网](cs_cluster.html#cs_cluster_subnet)
+- [在 IBM Bluemix Infrastructure (SoftLayer) 中备份和复原持久存储器中的数据 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](../services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter)
+
+<br />
+
 
 ## 部署 (Deployment)
 {: #highly_available_apps}
@@ -134,72 +177,64 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 
 <dl>
 <dt>使用部署和副本集来部署应用程序及其依赖项</dt>
-<dd>部署是一种 Kubernetes 资源，可用于声明应用程序的所有组件以及应用程序的依赖项。通过描述单个组件，而不是写下所有必要的步骤和创建这些步骤的顺序，您可以专注于应用程序在运行时的外观。</br>
+<dd>部署是一种 Kubernetes 资源，可用于声明应用程序的所有组件以及应用程序的依赖项。通过描述单个组件，而不是写下所有必要的步骤和创建这些步骤的顺序，您可以专注于应用程序在运行时的外观。</br></br>
 部署多个 pod 时，会自动为部署创建副本集；副本集用于监视这些 pod，并确保始终有所需数量的 pod 正常运行。pod 发生故障时，副本集会将无响应的 pod 替换为新的 pod。</br></br>
-您可以使用部署来定义应用程序的更新策略，包括在滚动更新期间要添加的 pod 数，以及允许同时不可用的 pod 数。执行滚动更新时，部署将检查修订版是否有效，并在检测到故障时停止应用。</br>
+您可以使用部署来定义应用程序的更新策略，包括在滚动更新期间要添加的 pod 数，以及允许同时不可用的 pod 数。执行滚动更新时，部署将检查修订版是否有效，并在检测到故障时停止应用。</br></br>
 部署还提供了同时部署具有不同标志的多个修订版的可能性，因此，例如您可以先测试部署，然后再决定是否将其推送到生产环境。</br></br>
 每个部署都会跟踪已部署的修订版。遇到更新无法按预期运行时，可以使用此修订版历史记录回滚到上一个版本。</dd>
 <dt>包含足够多的副本用于应用程序的工作负载，在此基础上再额外增加两个副本</dt>
-<dd>要使应用程序具有更高可用性且在出现故障时能够更快恢复，请考虑在处理预期工作负载所需最低要求的副本数基础上，再包含额外的副本。在某个 pod 崩溃且副本集尚未恢复已崩溃 pod 的情况下，额外的副本可处理工作负载。要针对同时发生两个故障的情况进行防护，请包含两个额外的副本。此设置是 N+2 模式，其中 N 是处理入局工作负载的副本数，+2 是额外两个副本。</dd>
+<dd>要使应用程序具有更高可用性且在出现故障时能够更快恢复，请考虑在处理预期工作负载所需最低要求的副本数基础上，再包含额外的副本。在某个 pod 崩溃且副本集尚未恢复已崩溃 pod 的情况下，额外的副本可处理工作负载。要针对同时发生两个故障的情况进行防护，请包含两个额外的副本。此设置是 N+2 模式，其中 N 是处理入局工作负载的副本数，+2 是额外两个副本。只要集群有足够的空间用于 pod，就可以在集群中拥有尽可能多的 pod。</dd>
 <dt>跨多个节点分布 pod（反亲缘关系）</dt>
 <dd>创建部署时，各个 pod 可能会部署到同一工作程序节点。这种 pod 存在于相同工作程序节点上的设置称为亲缘关系或共存。为了保护应用程序不受工作程序节点故障的影响，可以使用 <strong>podAntiAffinity</strong> 选项来强制您的部署跨多个工作程序节点分布 pod。此选项仅可用于标准集群。</br></br>
 <strong>注</strong>：以下 YAML 文件强制将每个 pod 部署到不同的工作程序节点。如果定义的副本数超过集群中可用的工作程序节点数，仅会部署可以满足反亲缘关系需求的副本数。任何其他副本都将保持暂挂状态，直到向集群添加了更多工作程序节点为止。<pre class="codeblock">
-<code>apiVersion: v1
-kind: Service
+<code>apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
 name: wasliberty
+spec:
+        replicas: 3
+        template:
+metadata:
 labels:
 app: wasliberty
 spec:
-ports:
-    # the port that this service should serve on
-  - port: 9080
-  selector:
-    app: wasliberty
-  type: NodePort
-
----
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  name: wasliberty
-spec:
-  replicas: 3
-  template:
-    metadata:
-      labels:
-        app: wasliberty
-      annotations:
-        scheduler.alpha.kubernetes.io/affinity: >
-            {
-              "podAntiAffinity": {
-"requiredDuringSchedulingIgnoredDuringExecution": [
-                  {
-                    "labelSelector": {
-"matchExpressions": [
-                        {
-                          "key": "app",
-                          "operator": "In",
-                          "values": ["wasliberty"]
-                        }
-                      ]
-                    },
-                    "topologyKey": "kubernetes.io/hostname"
-                 }
-                ]
-               }
-             }
-    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - wasliberty
+              topologyKey: kubernetes.io/hostname
       containers:
       - name: wasliberty
         image: registry.&lt;region&gt;.bluemix.net/ibmliberty
         ports:
-          - containerPort: 9080</code></pre>
+        - containerPort: 9080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wasliberty
+  labels:
+    app: wasliberty
+spec:
+  ports:
+    # the port that this service should serve on
+  - port: 9080
+  selector:
+    app: wasliberty
+  type: NodePort</code></pre>
 
 </dd>
 <dt>跨多个位置或区域分布 pod</dt>
 <dd>为了保护应用程序不受位置或区域故障的影响，可以在另一个位置或区域中创建第二个集群，并使用部署 YAML 来部署应用程序的重复副本集。通过在集群前端添加共享路径和负载均衡器，可以跨位置和区域分布工作负载。有关在集群之间共享路径的更多信息，请参阅<a href="https://console.bluemix.net/docs/containers/cs_cluster.html#cs_cluster" target="_blank">集群高可用性</a>。有关更多详细信息，请查看<a href="https://console.bluemix.net/docs/containers/cs_planning.html#cs_planning_cluster_config" target="_blank">高可用性部署</a>的选项。</dd>
 </dl>
+
 
 ### 最低应用程序部署
 {: #minimal_app_deployment}
@@ -209,7 +244,7 @@ Lite 或标准集群中的基本应用程序部署可能包含以下组件。
 
 <a href="../api/content/containers/images/cs_app_tutorial_components1.png">![部署设置](images/cs_app_tutorial_components1.png)</a>
 
-用于最简应用程序的配置脚本示例。
+用于最简应用程序的配置文件示例。
 ```
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -242,6 +277,9 @@ spec:
 ```
 {: codeblock}
 
+<br />
+
+
 ## 专用联网
 {: #cs_planning_private_network}
 
@@ -253,7 +291,7 @@ spec:
 |集群类型|集群的专用 VLAN 的管理方|
 |------------|-------------------------------------------|
 |{{site.data.keyword.Bluemix_notm}} Public 中的 Lite 集群|{{site.data.keyword.IBM_notm}}|
-|{{site.data.keyword.Bluemix_notm}} Public 中的标准集群|您通过您的 {{site.data.keyword.BluSoftlayer_notm}} 帐户<p>**提示**：要有权访问帐户中的所有 VLAN，请打开 [VLAN 生成 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://knowledgelayer.softlayer.com/procedure/enable-or-disable-vlan-spanning)。</p>|
+|{{site.data.keyword.Bluemix_notm}} Public 中的标准集群|您在 IBM Bluemix Infrastructure (SoftLayer) 帐户中<p>**提示**：要有权访问帐户中的所有 VLAN，请打开 [VLAN 生成 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://knowledgelayer.softlayer.com/procedure/enable-or-disable-vlan-spanning)。</p>|
 |{{site.data.keyword.Bluemix_notm}} Dedicated 中的标准集群|{{site.data.keyword.IBM_notm}}|
 {: caption="表 2. 专用 VLAN 管理责任" caption-side="top"}
 
@@ -265,6 +303,8 @@ spec:
 
 有关如何创建类型为集群 IP 的服务的更多信息，请参阅 [Kubernetes 服务 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services---service-types)。
 
+<br />
+
 
 ## 公共联网
 {: #cs_planning_public_network}
@@ -272,55 +312,62 @@ spec:
 创建集群时，每个集群都必须连接到一个公共 VLAN。公共 VLAN 用于确定在集群创建期间分配给工作程序节点的公共 IP 地址。
 {:shortdesc}
 
-公共 VLAN 受 {{site.data.keyword.BluSoftlayer_notm}} 防火墙保护，缺省情况下，该防火墙不允许与因特网的入站或出站连接。虽然 Kubernetes 主节点和工作程序节点使用其分配的公共 IP 地址通过公共 VLAN 进行通信，但是无法通过因特网对这些节点进行访问。
+Lite 集群和标准集群中的工作程序节点的公用网络接口受 Calico 网络策略的保护。缺省情况下，这些策略将阻止大多数入站流量，包括 SSH。但是，在与 NodePort、Loadbalancer 和 Ingress 服务连接时，允许 Kubernetes 运作所需的入站流量。有关这些策略的更多信息，包括如何修改这些策略，请参阅[网络策略](cs_security.html#cs_security_network_policies)。
 
 |集群类型|集群的公共 VLAN 的管理方|
 |------------|------------------------------------------|
 |{{site.data.keyword.Bluemix_notm}} Public 中的 Lite 集群|{{site.data.keyword.IBM_notm}}|
-|{{site.data.keyword.Bluemix_notm}} Public 中的标准集群|您通过您的 {{site.data.keyword.BluSoftlayer_notm}} 帐户|
+|{{site.data.keyword.Bluemix_notm}} Public 中的标准集群|您在 IBM Bluemix Infrastructure (SoftLayer) 帐户中|
 |{{site.data.keyword.Bluemix_notm}} Dedicated 中的标准集群|{{site.data.keyword.IBM_notm}}|
 {: caption="表 3. VLAN 管理责任" caption-side="top"}
 
 根据创建的是 Lite 集群还是标准集群，可以在以下选项中进行选择以向公众公开应用程序。
 
--   [类型为 NodePort 的服务](#cs_nodeport)（Lite 和标准集群）
--   [类型为 LoadBalancer 的服务](#cs_loadbalancer)（仅限标准集群）
+-   [NodePort 服务](#cs_nodeport)（Lite 和标准集群）
+-   [LoadBalancer 服务](#cs_loadbalancer)（仅限标准集群）
 -   [Ingress](#cs_ingress)（仅限标准集群）
 
 
-### 使用类型为 NodePort 的服务向因特网公开应用程序
+### 使用 NodePort 服务将应用程序公开到因特网
 {: #cs_nodeport}
 
 在您的工作程序节点上公开一个公共端口，并使用该工作程序节点的公共 IP 地址来公共访问集群中的服务。
 {:shortdesc}
 
-[![使用类型为 NodePort 的 Kubernetes 服务公开服务](images/cs_nodeport.png)](https://console.bluemix.net/docs/api/content/containers/images/cs_nodeport.png)
+[![使用 Kubernetes NodePort 服务公开服务](images/cs_nodeport.png)](https://console.bluemix.net/docs/api/content/containers/images/cs_nodeport.png)
 
-通过创建类型为 NodePort 的 Kubernetes 服务来公开应用程序时，将为该服务分配 30000-32767 范围内的 NodePort 以及内部集群 IP 地址。NodePort 服务充当应用程序入局请求的外部入口点。分配的 NodePort 在集群中每个工作程序节点的 kubeproxy 设置中公共公开。每个工作程序节点都会在分配的 NodePort 上开始侦听该服务的入局请求。要从因特网访问该服务，可以使用在集群创建期间分配的任何工作程序节点的公共 IP 地址以及 NodePort，格式为 `<ip_address>:<nodeport>`。
+通过创建类型为 NodePort 的 Kubernetes 服务来公开应用程序时，将为该服务分配 30000-32767 范围内的 NodePort 以及内部集群 IP 地址。NodePort 服务充当应用程序入局请求的外部入口点。分配的 NodePort 在集群中每个工作程序节点的 kubeproxy 设置中公共公开。每个工作程序节点都会在分配的 NodePort 上开始侦听该服务的入局请求。要从因特网访问该服务，可以使用在集群创建期间分配的任何工作程序节点的公共 IP 地址以及 NodePort，格式为 `<ip_address>:<nodeport>`. 除了公共 IP 地址外，NodePort 服务还可用于工作程序节点的专用 IP 地址。
 
-公共请求到达 NodePort 服务时，会自动转发到该服务的内部集群 IP，然后进一步从 kubeproxy 组件转发到部署了应用程序的 pod 的专用 IP 地址。该集群 IP 只能在集群内部访问。如果您的应用程序有多个副本在不同 pod 中运行，那么 kubeproxy 组件会在所有副本之间对入局请求进行负载均衡。
+请求到达 NodePort 服务时，会自动转发到该服务的内部集群 IP，然后进一步从 kubeproxy 组件转发到部署了应用程序的 pod 的专用 IP 地址。该集群 IP 只能在集群内部访问。如果您的应用程序有多个副本在不同 pod 中运行，那么 kubeproxy 组件会在所有副本之间对入局请求进行负载均衡。
 
-**注**：请记住，工作程序节点的公共 IP 地址不是永久固定的。除去或重新创建工作程序节点时，将为该工作程序节点分配新的公共 IP 地址。在测试应用程序的公共访问权时，或者在短时间内需要公共访问权时，可以使用类型为 NodePort 的服务。如果需要服务具有稳定的公共 IP 地址和更高可用性，请使用类型为 [LoadBalancer](#cs_loadbalancer) 或 [Ingress](#cs_ingress) 的服务来公开应用程序。
+**注**：工作程序节点的公共 IP 地址不是永久固定的。除去或重新创建工作程序节点时，将为该工作程序节点分配新的公共 IP 地址。在测试应用程序的公共访问权时，或者仅在短时间内需要公共访问权时，可以使用 NodePort 服务。如果需要服务具有稳定的公共 IP 地址和更高可用性，请使用 [LoadBalancer 服务](#cs_loadbalancer)或 [Ingress](#cs_ingress) 来公开应用程序。
 
 有关如何使用 {{site.data.keyword.containershort_notm}} 创建类型为 NodePort 的服务的更多信息，请参阅[使用 NodePort 服务类型来配置对应用程序的公共访问权](cs_apps.html#cs_apps_public_nodeport)。
 
 
-### 使用类型为 LoadBalancer 的服务向因特网公开应用程序
+### 使用 LoadBalancer 服务将应用程序公开到因特网
 {: #cs_loadbalancer}
 
-公开一个端口，并使用负载均衡器的公共 IP 地址来访问应用程序。
+公开一个端口，并使用负载均衡器的公共或专用 IP 地址来访问应用程序。
 
-[![使用类型为 LoadBalancer 的 Kubernetes 服务公开服务](images/cs_loadbalancer.png)](https://console.bluemix.net/docs/api/content/containers/images/cs_loadbalancer.png)
+[![使用 Kubernetes LoadBalancer 服务类型公开服务](images/cs_loadbalancer.png)](https://console.bluemix.net/docs/api/content/containers/images/cs_loadbalancer.png)
 
-创建标准集群时，{{site.data.keyword.containershort_notm}} 会自动请求 5 个可移植公共 IP 地址，并在集群创建期间将其供应给 {{site.data.keyword.BluSoftlayer_notm}}。其中一个可移植 IP 地址用于 [Ingress 控制器](#cs_ingress)。另外 4 个可移植公共 IP 地址可用于通过创建类型为 LoadBalancer 的服务来向公众公开应用程序。
+创建标准集群时，{{site.data.keyword.containershort_notm}} 会自动请求 5 个可移植公共 IP 地址和 5 个专用 IP 地址，并在集群创建期间将其供应给 IBM Bluemix Infrastructure (SoftLayer) 帐户。两个可移植 IP 地址，一个公共一个专用，用于 [Ingress 控制器](#cs_ingress)。通过创建 LoadBalancer 服务，可以使用 4 个可移植公共 IP 地址和 4 个专用 IP 地址来公开应用程序。
 
-创建类型为 LoadBalancer 的 Kubernetes 服务时，会创建一个外部负载均衡器，并为其分配 4 个可用公共 IP 地址之一。如果没有可移植公共 IP 地址可用，那么创建 LoadBalancer 服务会失败。LoadBalancer 服务充当应用程序入局请求的外部入口点。与类型为 NodePort 的服务不同，您可以为负载均衡器分配任何端口，而不限于特定端口范围。分配给 LoadBalancer 服务的可移植公共 IP 地址是永久固定的，不会在除去或重新创建工作程序节点时更改，因此 LoadBalancer 服务的可用性要比 NodePort 服务更高。要从因特网访问 LoadBalancer 服务，请使用负载均衡器的公共 IP 地址以及分配的端口，格式为 `<ip_address>:<port>`。
+在公用 VLAN 上于集群中创建 Kubernetes LoadBalancer 服务时，会创建一个外部负载均衡器。四个可用的公共 IP 地址之一会分配给负载均衡器。如果没有可移植公共 IP 地址可用，那么创建 LoadBalancer 服务会失败。LoadBalancer 服务充当应用程序入局请求的外部入口点。与 NodePort 服务不同，您可以为负载均衡器分配任何端口，而不限于特定端口范围。分配给 LoadBalancer 服务的可移植公共 IP 地址是永久固定的，在除去或重新创建工作程序节点时不会更改。因此，LoadBalancer 服务的可用性比 NodePort 服务更高。要从因特网访问 LoadBalancer 服务，请使用负载均衡器的公共 IP 地址以及分配的端口，格式为 `<ip_address>:<port>`.
 
-公共请求到达 LoadBalancer 服务时，会自动转发到在服务创建期间分配给 LoadBalancer 服务的内部集群 IP 地址。该集群 IP 地址只能在集群内部访问。入局请求会从该集群 IP 地址进一步转发到工作程序节点的 kubeproxy 组件，然后再转发到部署了应用程序的 pod 的专用 IP 地址。如果您的应用程序有多个副本在不同 pod 中运行，那么 kubeproxy 组件会在所有副本之间对入局请求进行负载均衡。
+请求到达 LoadBalancer 服务时，该请求会自动转发到在服务创建期间分配给 LoadBalancer 服务的内部集群 IP 地址。该集群 IP 地址只能在集群内部访问。入局请求会从该集群 IP 地址进一步转发到工作程序节点的 `kube-proxy` 组件。然后，这些请求再转发到部署了应用程序的 pod 的专用IP 地址。如果您的应用程序有多个副本在不同 pod 中运行，那么 `kube-proxy` 组件会在所有副本之间对入局请求进行负载均衡。
 
-有关如何使用 {{site.data.keyword.containershort_notm}} 创建类型为 LoadBalancer 的服务的更多信息，请参阅[使用 LoadBalancer 服务类型来配置对应用程序的公共访问权](cs_apps.html#cs_apps_public_load_balancer)。
+如果使用 LoadBalancer 服务，那么任何工作程序节点的每个 IP 地址上也提供一个节点端口。要在使用 LoadBalancer 服务时阻止访问节点端口，请参阅[阻止入局流量](cs_security.html#cs_block_ingress)。
 
+在创建 LoadBalancer 服务时，IP 地址的选项如下所示：
 
+- 如果集群位于公用 VLAN 上，那么将使用可移植的公共 IP 地址。
+- 如果集群仅在专用 VLAN 上可用，那么将使用可移植的专用 IP 地址。
+- 通过向配置文件添加注释，可请求用于 LoadBalancer 服务的可移植公共或专用 IP 地址：`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type
+<public_or_private>`.
+
+有关如何使用 {{site.data.keyword.containershort_notm}} 创建 LoadBalancer 的服务的更多信息，请参阅[使用 LoadBalancer 服务类型来配置对应用程序的公共访问权](cs_apps.html#cs_apps_public_load_balancer)。
 
 ### 使用 Ingress 向因特网公开应用程序
 {: #cs_ingress}
@@ -331,7 +378,7 @@ spec:
 
 Ingress 不会为您要向公众公开的每个应用程序创建一个 LoadBalancer 服务，而是提供唯一公共路径，用于根据公共请求的各个路径，将这些请求转发到集群内部和外部的应用程序。Ingress 由两个主要组件组成。Ingress 资源定义了有关如何对应用程序的入局请求进行路由的规则。所有 Ingress 资源都必须向 Ingress 控制器进行注册；Ingress 控制器基于为每个 Ingress 资源定义的规则来侦听入局 HTTP 或 HTTPS 服务请求并转发请求。
 
-创建标准集群时，{{site.data.keyword.containershort_notm}} 会自动为集群创建高可用性 Ingress 控制器，并为该控制器分配唯一公共路径，格式为 `<cluster_name>.<region>.containers.mybluemix.net`。该公共路径链接到在集群创建期间供应到 {{site.data.keyword.BluSoftlayer_notm}} 帐户中的可移植公共 IP 地址。
+创建标准集群时，{{site.data.keyword.containershort_notm}} 会自动为集群创建高可用性 Ingress 控制器，并为该控制器分配唯一公共路径，格式为 `<cluster_name>.<region>.containers.mybluemix.net`。该公共路径链接到在集群创建期间供应到 IBM Bluemix Infrastructure (SoftLayer) 帐户中的可移植公共 IP 地址。
 
 要通过 Ingress 公开应用程序，必须为应用程序创建 Kubernetes 服务，并通过定义 Ingress 资源向 Ingress 控制器注册此服务。Ingress 资源指定要附加到公共路径的路径，以构成所公开应用程序的唯一 URL，例如：`mycluster.us-south.containers.mybluemix.net/myapp`。在 Web 浏览器中输入此路径时，请求会发送到 Ingress 控制器的已链接可移植公共 IP 地址。Ingress 控制器会检查 `mycluster` 集群中 `myapp` 路径的路由规则是否存在。如果找到匹配的规则，那么包含单个路径的请求会转发到部署了应用程序的 pod，同时考虑在原始 Ingress 资源对象中定义的规则。为了使应用程序能够处理入局请求，请确保应用程序侦听在 Ingress 资源中定义的单个路径。
 
@@ -345,6 +392,8 @@ Ingress 不会为您要向公众公开的每个应用程序创建一个 LoadBala
 
 有关如何将 Ingress 用于 {{site.data.keyword.containershort_notm}} 的更多信息，请参阅[使用 Ingress 控制器来配置对应用程序的公共访问权](cs_apps.html#cs_apps_public_ingress)。
 
+<br />
+
 
 ## 用户访问管理
 {: #cs_planning_cluster_user}
@@ -353,6 +402,8 @@ Ingress 不会为您要向公众公开的每个应用程序创建一个 LoadBala
 {:shortdesc}
 
 有关更多信息，请参阅[在 {{site.data.keyword.containershort_notm}} 中管理用户和对集群的访问权](cs_cluster.html#cs_cluster_user)。
+
+<br />
 
 
 ## 映像注册表
@@ -376,6 +427,8 @@ Docker 映像是所创建的每一个容器的基础。映像通过 Dockerfile �
 
 有关如何访问公共或专用注册表以及使用映像创建容器的更多信息，请参阅[将专用和公共映像注册表用于 {{site.data.keyword.containershort_notm}}](cs_cluster.html#cs_apps_images)。
 
+<br />
+
 
 ## 持久数据存储
 {: #cs_planning_apps_storage}
@@ -394,32 +447,35 @@ Docker 映像是所创建的每一个容器的基础。映像通过 Dockerfile �
 </p><p>有关如何将 {{site.data.keyword.Bluemix_notm}} 服务绑定到 pod 的更多信息，请参阅[在 {{site.data.keyword.containershort_notm}} 中为应用程序添加 {{site.data.keyword.Bluemix_notm}} 服务](cs_apps.html#cs_apps_service)。</p>|
 {: caption="表 5. 用于在 Kubernetes 集群中进行部署的持久数据存储选项" caption-side="top"}
 
+<br />
 
-## 运行状况监视
+
+## 监视工具
 {: #cs_planning_health}
 
-您可以使用标准 Kubernetes 和 Docker 功能来监视集群以及部署到该集群的应用程序的运行状况。
+您可以使用标准 Kubernetes 和 Docker 功能来监视集群和应用程序的运行状况。
+要查找用于对集群和应用程序问题进行故障诊断的日志，请参阅[配置集群记录](cs_cluster.html#cs_logging)。
 {:shortdesc}
+
 <dl>
 <dt>{{site.data.keyword.Bluemix_notm}} 中的集群详细信息页面</dt>
 <dd>{{site.data.keyword.containershort_notm}} 提供了有关集群的运行状况和容量以及集群资源使用情况的信息。可以使用此 GUI 通过 {{site.data.keyword.Bluemix_notm}} 服务绑定来向外扩展集群、使用持久性存储器以及向集群添加其他功能。要查看集群详细信息页面，请转至 **{{site.data.keyword.Bluemix_notm}} 仪表板**，然后选择集群。</dd>
 <dt>Kubernetes 仪表板</dt>
 <dd>Kubernetes 仪表板是一个管理 Web 界面，可用于查看工作程序节点的运行状况，查找 Kubernetes 资源，部署容器化应用程序，以及基于日志记录和监视信息对应用程序进行故障诊断。有关如何访问 Kubernetes 仪表板的更多信息，请参阅[启动 {{site.data.keyword.containershort_notm}} 的 Kubernetes 仪表板](cs_apps.html#cs_cli_dashboard)。</dd>
-<dt>Docker 日志</dt>
-<dd>可以利用内置 Docker 日志记录功能来查看标准 STDOUT 和 STDERR 输出流上的活动。有关更多信息，请参阅[查看在 Kubernetes 集群中运行的容器的容器日志](/docs/services/CloudLogAnalysis/containers/logging_containers_other_logs.html#logging_containers_collect_data)。</dd>
-<dt>日志记录和监视</dt>
-<dd>{{site.data.keyword.containershort_notm}} 针对标准集群支持其他监视和日志记录功能。
-日志和度量值位于创建 Kubernetes 集群时登录到的 {{site.data.keyword.Bluemix_notm}} 空间中。<ul><li>将为集群中部署的所有容器自动收集容器度量值。这些度量值会通过 Grafana 发送并使其可用。有关度量值的更多信息，请参阅[监视 {{site.data.keyword.containershort_notm}}](/docs/services/cloud-monitoring/containers/analyzing_metrics_bmx_ui.html#analyzing_metrics_bmx_ui)。<p>要访问 Grafana 仪表板，请转至 `https://metrics.<region>.bluemix.net`。选择在其中创建集群的 {{site.data.keyword.Bluemix_notm}} 组织和空间。</p></li><li>容器日志在容器外部监视和转发。可以使用 Kibana 仪表板来访问容器的日志。有关日志记录的更多信息，请参阅[对 {{site.data.keyword.containershort_notm}} 进行日志记录](/docs/services/CloudLogAnalysis/index.html#getting-started-with-cla)。<p>要访问 Kibana 仪表板，请转至 `https://logging.<region>.bluemix.net`。选择在其中创建集群的 {{site.data.keyword.Bluemix_notm}} 组织和空间。</p></li></ul></dd>
-</dl>
+<dt>{{site.data.keyword.monitoringlong_notm}}</dt>
+<dd>对于标准集群，度量值位于创建 Kubernetes 集群时登录到的 {{site.data.keyword.Bluemix_notm}} 空间中。将为集群中部署的所有容器自动收集容器度量值。这些度量值会通过 Grafana 发送并使其可用。有关度量值的更多信息，请参阅[监视 {{site.data.keyword.containershort_notm}}](/docs/services/cloud-monitoring/containers/analyzing_metrics_bmx_ui.html#analyzing_metrics_bmx_ui)。<p>要访问 Grafana 仪表板，请转至以下某个 URL，然后选择您在其中创建集群的 {{site.data.keyword.Bluemix_notm}} 组织和空间。<ul><li>美国南部和美国东部：https://metrics.ng.bluemix.net
+</li><li>英国南部：https://metrics.eu-gb.bluemix.net</li><li>欧洲中部：https://metrics.eu-de.bluemix.net</li></ul></p></dd></dl>
 
 ### 其他运行状况监视工具
-{: #concept_xrh_dhj_wz}
+{: #cs_planning_health_tools}
 
 可以配置其他工具来执行其他日志记录和监视功能。
 <dl>
 <dt>Prometheus</dt>
 <dd>Prometheus 是一个开放式源代码监视、日志记录和警报工具，专为 Kubernetes 而设计，可基于 Kubernetes 日志记录信息检索有关集群、工作程序节点和部署运行状况的详细信息。有关设置信息，请参阅[将服务与 {{site.data.keyword.containershort_notm}} 集成](#cs_planning_integrations)。</dd>
 </dl>
+
+<br />
 
 
 ## 集成
@@ -438,8 +494,16 @@ Docker 映像是所创建的每一个容器的基础。映像通过 Dockerfile �
 </thead>
 <tbody>
 <tr>
-<td>IBM Blockchain</td>
+<td>Blockchain</td>
 <td>将 IBM Blockchain 的公共可用的开发环境部署到 {{site.data.keyword.containerlong_notm}} 中的 Kubernetes 集群。使用此环境来开发和定制自己的区块链网络，以部署应用程序来共享用于记录交易历史记录的不可改变的分类帐。有关更多信息，请参阅<a href="https://ibm-blockchain.github.io" target="_blank">在云沙箱 IBM Blockchain Platform 中进行开发 <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</td>
+</tr>
+<tr>
+<td>Continuous Delivery</td>
+<td>使用工具链自动构建应用程序并将容器部署到 Kubernetes 集群。有关设置信息，请参阅博客<a href="https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines/" target="_blank">使用 DevOps 管道将 Kubernetes pod 部署到 {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</td>
+</tr>
+<tr>
+<td>Helm</td>
+<td> <a href="https://helm.sh/" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 是 Kubernetes 软件包管理器。创建 Helm Chart，以定义、安装和升级在 {{site.data.keyword.containerlong_notm}} 集群中运行的复杂 Kubernetes 应用程序。了解有关如何<a href="https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/" target="_blank">利用 Kubernetes Helm Chart 提高部署速度 <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 的更多信息。</td>
 </tr>
 <tr>
 <td>Istio</td>
@@ -466,39 +530,41 @@ Docker 映像是所创建的每一个容器的基础。映像通过 Dockerfile �
 </tbody>
 </table>
 
+<br />
 
-## 访问 {{site.data.keyword.BluSoftlayer_notm}} 产品服务组合
+
+## 访问 IBM Bluemix Infrastructure (SoftLayer) 产品服务组合
 {: #cs_planning_unify_accounts}
 
-要创建标准 Kubernetes 集群，必须具有对 {{site.data.keyword.BluSoftlayer_notm}} 产品服务组合的访问权。需要此访问权才能为集群请求付费基础架构资源，如工作程序节点、可移植公共 IP 地址或持久存储器。
+要创建标准 Kubernetes 集群，必须具有对 IBM Bluemix Infrastructure (SoftLayer) 产品服务组合的访问权。需要此访问权才能为集群请求付费基础架构资源，如工作程序节点、可移植公共 IP 地址或持久存储器。
 {:shortdesc}
 
-在启用自动帐户链接后创建的 {{site.data.keyword.Bluemix_notm}} 现买现付帐户已设置为具有对 {{site.data.keyword.BluSoftlayer_notm}} 产品服务组合的访问权，因此无需额外配置即可为集群购买基础架构资源。
+在启用自动帐户链接后创建的 {{site.data.keyword.Bluemix_notm}}“现买现付”帐户已设置为具有对 IBM Bluemix Infrastructure (SoftLayer) 产品服务组合的访问权，因此无需额外配置即可为集群购买基础架构资源。
 
-具有其他 {{site.data.keyword.Bluemix_notm}} 帐户类型的用户或具有未链接到其 {{site.data.keyword.Bluemix_notm}} 帐户的现有 {{site.data.keyword.BluSoftlayer_notm}} 帐户的用户必须对其帐户进行配置才能创建标准集群。
+具有其他 {{site.data.keyword.Bluemix_notm}} 帐户类型的用户或具有未链接到其 {{site.data.keyword.Bluemix_notm}} 帐户的现有 IBM Bluemix Infrastructure (SoftLayer) 帐户的用户必须对其帐户进行配置才能创建标准集群。
 
 请查看下表以查找每种帐户类型的可用选项。
 
 |帐户类型|描述|用于创建标准集群的可用选项|
 |------------|-----------|----------------------------------------------|
-|免费试用帐户|免费试用帐户无法访问 {{site.data.keyword.BluSoftlayer_notm}} 产品服务组合。<p>如果您具有现有的 {{site.data.keyword.BluSoftlayer_notm}} 帐户，那么可以将其链接到您的免费试用帐户。</p>|<ul><li>选项 1：[将免费试用版帐户升级到 {{site.data.keyword.Bluemix_notm}} 现买现付帐户](/docs/pricing/billable.html#upgradetopayg)，该帐户设置为具有对 {{site.data.keyword.BluSoftlayer_notm}} 产品服务组合的访问权。</li><li>选项 2：[将免费试用帐户链接到现有 {{site.data.keyword.BluSoftlayer_notm}} 帐户](/docs/pricing/linking_accounts.html#unifyingaccounts)。<p>链接这两个帐户后，您的免费试用帐户将自动升级到“现买现付”帐户。链接帐户时，将通过 {{site.data.keyword.Bluemix_notm}}，为 {{site.data.keyword.Bluemix_notm}} 和 {{site.data.keyword.BluSoftlayer_notm}} 资源对您进行计费。</p><p>**注**：必须使用“超级用户”许可权设置您链接的 {{site.data.keyword.BluSoftlayer_notm}} 帐户。</p></li></ul>|
-|较旧的现买现付帐户|在自动帐户链接可用之前创建的“现买现付”帐户没有对 {{site.data.keyword.BluSoftlayer_notm}} 产品服务组合的访问权。<p>如果您具有现有的 {{site.data.keyword.BluSoftlayer_notm}} 帐户，那么无法将此帐户链接到较旧的“现买现付”帐户。</p>|<ul><li>选项 1：[创建新的现买现付帐户](/docs/pricing/billable.html#billable)，该帐户设置为具有对 {{site.data.keyword.BluSoftlayer_notm}} 产品服务组合的访问权。选择此选项时，您有两个单独的 {{site.data.keyword.Bluemix_notm}} 帐户和帐单。<p>如果您想要继续使用旧的“现买现付”帐户来创建标准集群，那么您可以使用新的“现买现付”帐户生成 API 密钥，以访问 {{site.data.keyword.BluSoftlayer_notm}} 产品服务组合。然后，必须为旧的“现买现付”帐户设置 API 密钥。有关更多信息，请参阅[为旧的现买现付和预订帐户生成 API 密钥](#old_account)。请记住，{{site.data.keyword.BluSoftlayer_notm}} 资源将通过新的“现买现付”帐户进行计费。</p></li><li>选项 2：如果您已经具有要使用的现有 {{site.data.keyword.BluSoftlayer_notm}} 帐户，那么可以为 {{site.data.keyword.Bluemix_notm}} 帐户[设置凭证](cs_cli_reference.html#cs_credentials_set)。<p>**注**：必须使用“超级用户”许可权设置您与 {{site.data.keyword.Bluemix_notm}} 帐户配合使用的 {{site.data.keyword.BluSoftlayer_notm}} 帐户。</p></li></ul>|
-|预订帐户|预订帐户未设置为具有对 {{site.data.keyword.BluSoftlayer_notm}} 产品服务组合的访问权。|<ul><li>选项 1：[创建新的现买现付帐户](/docs/pricing/billable.html#billable)，该帐户设置为具有对 {{site.data.keyword.BluSoftlayer_notm}} 产品服务组合的访问权。选择此选项时，您有两个单独的 {{site.data.keyword.Bluemix_notm}} 帐户和帐单。<p>如果您想要继续使用“预订”帐户来创建标准集群，那么您可以使用新的“现买现付”帐户生成 API 密钥，以访问 {{site.data.keyword.BluSoftlayer_notm}} 产品服务组合。然后，必须为“预订”帐户设置 API 密钥。有关更多信息，请参阅[为旧的现买现付和预订帐户生成 API 密钥](#old_account)。请记住，{{site.data.keyword.BluSoftlayer_notm}} 资源将通过新的“现买现付”帐户进行计费。</p></li><li>选项 2：如果您已经具有要使用的现有 {{site.data.keyword.BluSoftlayer_notm}} 帐户，那么可以为 {{site.data.keyword.Bluemix_notm}} 帐户[设置凭证](cs_cli_reference.html#cs_credentials_set)。<p>**注**：必须使用“超级用户”许可权设置您与 {{site.data.keyword.Bluemix_notm}} 帐户配合使用的 {{site.data.keyword.BluSoftlayer_notm}} 帐户。</p></li></ul>|
-|{{site.data.keyword.BluSoftlayer_notm}} 帐户，无{{site.data.keyword.Bluemix_notm}} 帐户|要创建标准集群，必须具有 {{site.data.keyword.Bluemix_notm}} 帐户。|<ul><li>选项 1：[创建新的现买现付帐户](/docs/pricing/billable.html#billable)，该帐户设置为具有对 {{site.data.keyword.BluSoftlayer_notm}} 产品服务组合的访问权。选择此选项时，将为您创建新的 {{site.data.keyword.BluSoftlayer_notm}}。您有两个独立的 {{site.data.keyword.BluSoftlayer_notm}} 帐户和帐单。</li><li>选项 2：[创建免费试用帐户](/docs/pricing/free.html#pricing)，并[将其链接到现有 {{site.data.keyword.BluSoftlayer_notm}} 帐户](/docs/pricing/linking_accounts.html#unifyingaccounts)。链接这两个帐户后，您的免费试用帐户将自动升级到“现买现付”帐户。链接帐户时，将通过 {{site.data.keyword.Bluemix_notm}}，为 {{site.data.keyword.Bluemix_notm}} 和 {{site.data.keyword.BluSoftlayer_notm}} 资源对您进行计费。<p>**注**：必须使用“超级用户”许可权设置您链接的 {{site.data.keyword.BluSoftlayer_notm}} 帐户。</p></li></ul>|
-{: caption="表 7. 用于通过未链接到 {{site.data.keyword.BluSoftlayer_notm}} 帐户的帐户来创建标准集群的可用选项" caption-side="top"}
+|免费试用帐户|免费试用帐户无法访问 IBM Bluemix Infrastructure (SoftLayer) 产品服务组合。<p>如果您具有现有的 IBM Bluemix Infrastructure (SoftLayer) 帐户，那么可以将其链接到您的免费试用帐户。</p>|<ul><li>选项 1：[将免费试用版帐户升级到 {{site.data.keyword.Bluemix_notm}} 现买现付帐户](/docs/pricing/billable.html#upgradetopayg)，该帐户设置为具有对 IBM Bluemix Infrastructure (SoftLayer) 产品服务组合的访问权。</li><li>选项 2：[将免费试用帐户链接到现有 IBM Bluemix Infrastructure (SoftLayer) 帐户](/docs/pricing/linking_accounts.html#unifyingaccounts)。<p>链接这两个帐户后，您的免费试用帐户将自动升级到“现买现付”帐户。链接帐户时，将通过 {{site.data.keyword.Bluemix_notm}}，为 {{site.data.keyword.Bluemix_notm}} 和 IBM Bluemix Infrastructure (SoftLayer) 资源对您进行计费。</p><p>**注**：必须使用“超级用户”许可权设置您链接的 IBM Bluemix Infrastructure (SoftLayer) 帐户。</p></li></ul>|
+|较旧的现买现付帐户|在自动帐户链接可用之前创建的“现买现付”帐户没有对 IBM Bluemix Infrastructure (SoftLayer) 产品服务组合的访问权。<p>如果您具有现有的 IBM Bluemix Infrastructure (SoftLayer) 帐户，那么无法将此帐户链接到较旧的“现买现付”帐户。</p>|<ul><li>选项 1：[创建新的现买现付帐户](/docs/pricing/billable.html#billable)，该帐户设置为具有对 IBM Bluemix Infrastructure (SoftLayer) 产品服务组合的访问权。选择此选项时，您有两个单独的 {{site.data.keyword.Bluemix_notm}} 帐户和帐单。<p>如果您想要继续使用旧的“现买现付”帐户来创建标准集群，那么您可以使用新的“现买现付”帐户生成 API 密钥，以访问 IBM Bluemix Infrastructure (SoftLayer) 产品服务组合。然后，必须为旧的“现买现付”帐户设置 API 密钥。有关更多信息，请参阅[为旧的现买现付和预订帐户生成 API 密钥](#old_account)。请记住，IBM Bluemix Infrastructure (SoftLayer) 资源将通过新的“现买现付”帐户进行计费。</p></li><li>选项 2：如果您已经具有要使用的现有 IBM Bluemix Infrastructure (SoftLayer) 帐户，那么可以为 {{site.data.keyword.Bluemix_notm}} 帐户[设置凭证](cs_cli_reference.html#cs_credentials_set)。<p>**注**：必须使用“超级用户”许可权设置您与 {{site.data.keyword.Bluemix_notm}} 帐户一起使用的 IBM Bluemix Infrastructure (SoftLayer) 帐户。</p></li></ul>|
+|预订帐户|预订帐户未设置为具有对 IBM Bluemix Infrastructure (SoftLayer) 产品服务组合的访问权。|<ul><li>选项 1：[创建新的现买现付帐户](/docs/pricing/billable.html#billable)，该帐户设置为具有对 IBM Bluemix Infrastructure (SoftLayer) 产品服务组合的访问权。选择此选项时，您有两个单独的 {{site.data.keyword.Bluemix_notm}} 帐户和帐单。<p>如果您想要继续使用“预订”帐户来创建标准集群，那么您可以使用新的“现买现付”帐户生成 API 密钥，以访问 IBM Bluemix Infrastructure (SoftLayer) 产品服务组合。然后，必须为“预订”帐户设置 API 密钥。有关更多信息，请参阅[为旧的现买现付和预订帐户生成 API 密钥](#old_account)。请记住，IBM Bluemix Infrastructure (SoftLayer) 资源将通过新的“现买现付”帐户进行计费。</p></li><li>选项 2：如果您已经具有要使用的现有 IBM Bluemix Infrastructure (SoftLayer) 帐户，那么可以为 {{site.data.keyword.Bluemix_notm}} 帐户[设置凭证](cs_cli_reference.html#cs_credentials_set)。<p>**注**：必须使用“超级用户”许可权设置您与 {{site.data.keyword.Bluemix_notm}} 帐户一起使用的 IBM Bluemix Infrastructure (SoftLayer) 帐户。</p></li></ul>|
+|IBM Bluemix Infrastructure (SoftLayer) 帐户，无 {{site.data.keyword.Bluemix_notm}} 帐户|要创建标准集群，必须具有 {{site.data.keyword.Bluemix_notm}} 帐户。|<ul><li>选项 1：[创建新的现买现付帐户](/docs/pricing/billable.html#billable)，该帐户设置为具有对 IBM Bluemix Infrastructure (SoftLayer) 产品服务组合的访问权。选择此选项时，将为您创建新的 IBM Bluemix Infrastructure (SoftLayer)。您有两个独立的 IBM Bluemix Infrastructure (SoftLayer) 帐户和记帐。</li><li>选项 2：[创建免费试用帐户](/docs/pricing/free.html#pricing)，并[将其链接到现有 IBM Bluemix Infrastructure (SoftLayer) 帐户](/docs/pricing/linking_accounts.html#unifyingaccounts)。链接这两个帐户后，您的免费试用帐户将自动升级到“现买现付”帐户。链接帐户时，将通过 {{site.data.keyword.Bluemix_notm}}，为 {{site.data.keyword.Bluemix_notm}} 和 IBM Bluemix Infrastructure (SoftLayer) 资源对您进行计费。<p>**注**：必须使用“超级用户”许可权设置您链接的 IBM Bluemix Infrastructure (SoftLayer) 帐户。</p></li></ul>|
+{: caption="表 7. 用于通过未链接到 IBM Bluemix Infrastructure (SoftLayer) 帐户的帐户来创建标准集群的可用选项" caption-side="top"}
 
 
-### 生成要与 {{site.data.keyword.Bluemix_notm}} 帐户配合使用的 {{site.data.keyword.BluSoftlayer_notm}} API 密钥
+### 生成要与 {{site.data.keyword.Bluemix_notm}} 帐户配合使用的 IBM Bluemix Infrastructure (SoftLayer) API 密钥
 {: #old_account}
 
 如果要继续使用旧的“现买现付”或“预订”帐户来创建标准集群，那么必须使用新的“现买现付”帐户生成 API 密钥，并为旧帐户设置 API 密钥。
 {:shortdesc}
 
-开始之前，请先创建一个自动设置为具有 {{site.data.keyword.BluSoftlayer_notm}} 产品服务组合访问权的 {{site.data.keyword.Bluemix_notm}}“现买现付”帐户。
+开始之前，请先创建一个自动设置为具有 IBM Bluemix Infrastructure (SoftLayer) 产品服务组合访问权的 {{site.data.keyword.Bluemix_notm}}“现买现付”帐户。
 
-1.  使用为新的“现买现付”帐户创建的 {{site.data.keyword.ibmid}}和密码登录到 [{{site.data.keyword.BluSoftlayer_notm}} 门户网站 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://control.softlayer.com/)。
+1.  使用为新的“现买现付”帐户创建的 {{site.data.keyword.ibmid}} 和密码登录到 [IBM Bluemix Infrastructure (SoftLayer) 门户网站 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://control.softlayer.com/)。
 2.  选择**帐户**，然后选择**用户**。
-3.  单击**生成**，为新的“现买现付”帐户生成 {{site.data.keyword.BluSoftlayer_notm}} API 密钥。
+3.  单击**生成**，为新的“现买现付”帐户生成 IBM Bluemix Infrastructure (SoftLayer) API 密钥。
 4.  复制 API 密钥。
 5.  在 CLI 中，使用旧的“现买现付”或“预订”帐户的 {{site.data.keyword.ibmid}}和密码登录到 {{site.data.keyword.Bluemix_notm}}。
 
@@ -507,7 +573,7 @@ Docker 映像是所创建的每一个容器的基础。映像通过 Dockerfile �
   ```
   {: pre}
 
-6.  设置先前生成的 API 密钥，以访问 {{site.data.keyword.BluSoftlayer_notm}} 产品服务组合。将 `<API_KEY>` 替换为 API 密钥，将 `<USERNAME>` 替换为新的“现买现付”帐户的 {{site.data.keyword.ibmid}}。
+6.  设置先前生成的 API 密钥，以访问 IBM Bluemix Infrastructure (SoftLayer) 产品服务组合。将 `<API_KEY>` 替换为 API 密钥，将 `<USERNAME>` 替换为新的“现买现付”帐户的 {{site.data.keyword.ibmid}}。
 
   ```
   bx cs credentials-set --infrastructure-api-key <API_KEY> --infrastructure-username <USERNAME>

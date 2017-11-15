@@ -1,8 +1,6 @@
 ---
 
-copyright:
-  years: 2014, 2017
-lastupdated: "2017-08-15"
+copyright: years: 2014, 2017 lastupdated: "2017-10-24"
 
 ---
 
@@ -22,15 +20,21 @@ lastupdated: "2017-08-15"
 # Resolvendo Problemas de Clusters
 {: #cs_troubleshoot}
 
-Durante a utilização do {{site.data.keyword.containershort_notm}}, considere estas técnicas para resolução de problemas e obtenção de ajuda.
+Ao usar {{site.data.keyword.containershort_notm}}, considere estas técnicas para resolução de problemas e obtenção de ajuda. Também é possível verificar o [status do sistema {{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/bluemix/support/#status).
+
+É possível levar algumas etapas gerais para assegurar que seus clusters estejam atualizados:
+- [Reinicialize seus nós do trabalhador](cs_cli_reference.html#cs_worker_reboot) regularmente para assegurar a instalação de atualizações e correções de segurança que a IBM implementa automaticamente no sistema operacional
+- Atualize seu cluster para [a versão padrão mais recente do Kubernetes](cs_versions.html) para {{site.data.keyword.containershort_notm}}
 
 {: shortdesc}
+
+<br />
 
 
 ## Depurando clusters
 {: #debug_clusters}
 
-Revise as opções que você tem para depurar seus clusters e localizar as causas raízes das falhas.
+Revise as opções para depurar seus clusters e localizar as causas raízes das falhas.
 
 1.  Liste o cluster e localize o `Estado` dele.
 
@@ -70,7 +74,7 @@ Revise as opções que você tem para depurar seus clusters e localizar as causa
     </tbody>
   </table>
 
-3.  Se o cluster estiver em um estado de **Aviso** ou **Crítico** ou estiver preso no estado **Pendente** por muito tempo, revise o estado dos nós do trabalhador. Se o cluster estiver em um estado **Implementando**, aguarde até que ele esteja totalmente implementado para revisar seu funcionamento. Os clusters em um estado **Normal** são considerados funcionais e não requerem uma ação no momento. 
+3.  Se o cluster estiver em um estado de **Aviso** ou **Crítico** ou estiver preso no estado **Pendente** por muito tempo, revise o estado dos nós do trabalhador. Se o cluster estiver em um estado **Implementando**, aguarde até que ele esteja totalmente implementado para revisar seu funcionamento. Clusters em um estado **Normal** são considerados funcionais e não requerem uma ação no momento.
 
   ```
   bx cs workers <cluster_name_or_id>
@@ -135,7 +139,7 @@ Revise as opções que você tem para depurar seus clusters e localizar as causa
     <tbody>
       <tr>
         <td>Exceção de infraestrutura do {{site.data.keyword.Bluemix_notm}}: sua conta está atualmente proibida de pedir 'Instâncias de cálculo'.</td>
-        <td>A conta do {{site.data.keyword.BluSoftlayer_notm}} pode ser restringida de pedir recursos de cálculo. Entre em contato com o suporte do {{site.data.keyword.Bluemix_notm}} abrindo um chamado de suporte do [{{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support).</td>
+        <td>Sua conta do IBM Bluemix Infrastructure (SoftLayer) pode ser restringida de pedir recursos de cálculo. Entre em contato com o suporte do {{site.data.keyword.Bluemix_notm}} abrindo um chamado de suporte do [{{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support).</td>
       </tr>
       <tr>
         <td>Exceção de infraestrutura do {{site.data.keyword.Bluemix_notm}}: não foi possível fazer a ordem. Há recursos insuficientes atrás do roteador 'router_name' para preencher a solicitação para os convidados a seguir: 'worker_id'.</td>
@@ -143,43 +147,107 @@ Revise as opções que você tem para depurar seus clusters e localizar as causa
       </tr>
       <tr>
         <td>Exceção de infraestrutura do {{site.data.keyword.Bluemix_notm}}: não foi possível obter a VLAN de rede com o ID: &lt;vlan id&gt;.</td>
-        <td>O nó do trabalhador não pôde ser provisionado porque o ID de VLAN selecionado não pôde ser localizado por um dos motivos a seguir:<ul><li>Talvez você tenha especificado o número da VLAN, em vez do ID da VLAN. O número da VLAN tem 3 ou 4 dígitos de comprimento, enquanto o ID da VLAN tem 7 dígitos. Execute <code>bx cs vlans &lt;location&gt;</code> para recuperar o ID da VLAN.<li>O ID da VLAN pode não estar associado à conta de Infraestrutura do Bluemix (SoftLayer) usada. Execute <code>bx cs vlans &lt;location&gt;</code> para listar os IDs de VLAN disponíveis para sua conta. Para mudar a conta do {{site.data.keyword.BluSoftlayer_notm}}, veja [bx cs credentials-set](cs_cli_reference.html#cs_credentials_set). </ul></td>
+        <td>O nó do trabalhador não pôde ser provisionado porque o ID de VLAN selecionado não pôde ser localizado por um dos motivos a seguir:<ul><li>Talvez você tenha especificado o número da VLAN, em vez do ID da VLAN. O número da VLAN tem 3 ou 4 dígitos de comprimento, enquanto o ID da VLAN tem 7 dígitos. Execute <code>bx cs vlans &lt;location&gt;</code> para recuperar o ID da VLAN.<li>O ID da VLAN pode não estar associado à conta do IBM Bluemix Infrastructure (SoftLayer) que você usa. Execute <code>bx cs vlans &lt;location&gt;</code> para listar os IDs de VLAN disponíveis para sua conta. Para mudar a conta do IBM Bluemix Infrastructure (SoftLayer), consulte [bx cs credentials-set](cs_cli_reference.html#cs_credentials_set). </ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation: o local fornecido para essa ordem é inválido. (HTTP 500)</td>
-        <td>O {{site.data.keyword.BluSoftlayer_notm}} não está configurado para pedir recursos de cálculo no data center selecionado. Entre em contato com o [suporte do {{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support) para verificar se a conta está configurada corretamente.</td>
+        <td>Seu IBM Bluemix Infrastructure (SoftLayer) não está configurado para solicitar recursos de cálculo no data center selecionado. Entre em contato com o [suporte do {{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support) para verificar se a conta está configurada corretamente.</td>
        </tr>
        <tr>
         <td>Exceção de infraestrutura do {{site.data.keyword.Bluemix_notm}}: o usuário não tem as permissões de infraestrutura necessárias do {{site.data.keyword.Bluemix_notm}} para incluir servidores
-        
+
         </br></br>
         Exceção de infraestrutura do {{site.data.keyword.Bluemix_notm}}: 'Item' deve ser pedido com permissão.</td>
-        <td>Talvez você não tenha as permissões necessárias para provisionar um nó do trabalhador do portfólio do {{site.data.keyword.BluSoftlayer_notm}}. Para localizar as permissões necessárias, veja [Configurar o acesso ao portfólio do {{site.data.keyword.BluSoftlayer_notm}} para criar clusters padrão do Kubernetes](cs_planning.html#cs_planning_unify_accounts).</td>
+        <td>Talvez você não tenha as permissões necessárias para provisionar um nó do trabalhador do portfólio IBM Bluemix Infrastructure (SoftLayer). Consulte [Configurar o acesso ao portfólio do IBM Bluemix Infrastructure (SoftLayer) para criar clusters padrão do Kubernetes](cs_planning.html#cs_planning_unify_accounts).</td>
       </tr>
     </tbody>
   </table>
 
-## Não é possível se conectar à conta do IBM {{site.data.keyword.BluSoftlayer_notm}} durante a criação de um cluster
+<br />
+
+
+## Depurando implementações de app
+{: #debug_apps}
+
+Revise as opções que você tiver para depurar suas implementações de app e localize as causas raiz das falhas.
+
+1. Procure anomalias nos recursos de serviço ou implementação executando o comando `describe`.
+
+ Exemplo:
+ <pre class="pre"><code>kubectl describe service &lt;service_name&gt; </code></pre>
+
+2. [Verifique se os contêineres estão presos no estado ContainerCreating](#stuck_creating_state).
+
+3. Verifique se o cluster está no estado `Crítico`. Se o cluster estiver em um estado `Crítico`, verifique as regras de firewall e verifique se o mestre pode se comunicar com os nós do trabalhador.
+
+4. Verifique se o serviço está atendendo na porta correta.
+   1. Obtenha o nome de um pod.
+     <pre class="pre"><code>kubectl get pods</code></pre>
+   2. Efetue login em um contêiner.
+     <pre class="pre"><code>kubectl exec -it &lt;pod_name&gt; -- /bin/bash</code></pre>
+   3. Executar curl do app de dentro do contêiner. Se a porta não estiver acessível, o serviço poderá não estar atendendo na porta correta ou o app pode ter problemas. Atualize o arquivo de configuração para o serviço com a porta correta e reimplemente ou investigue problemas em potencial com o app.
+     <pre class="pre"><code>curl localhost: &lt;port&gt;</code></pre>
+
+5. Verifique se o serviço está vinculado corretamente aos pods.
+   1. Obtenha o nome de um pod.
+     <pre class="pre"><code>kubectl get pods</code></pre>
+   2. Efetue login em um contêiner.
+     <pre class="pre"><code>kubectl exec -it &lt;pod_name&gt; -- /bin/bash</code></pre>
+   3. Executar curl do endereço IP do cluster e da porta do serviço. Se o endereço IP e a porta não estiverem acessíveis, observe os terminais para o serviço. Se não houver terminais, o seletor para o serviço não corresponderá ao pods. Se houver terminais, observe o campo da porta de destino no serviço e assegure-se de que a porta de destino seja a mesma que está sendo usada para os pods.
+     <pre class="pre"><code>curl &lt;cluster_IP&gt;:&lt;port&gt;</code></pre>
+
+6. Para serviços do Ingresso, verifique se o serviço está acessível de dentro do cluster.
+   1. Obtenha o nome de um pod.
+     <pre class="pre"><code>kubectl get pods</code></pre>
+   2. Efetue login em um contêiner.
+     <pre class="pre"><code>kubectl exec -it &lt;pod_name&gt; -- /bin/bash</code></pre>
+   2. Executar curl da URL especificada para o serviço do Ingresso. Se a URL não estiver acessível, procure um problema de firewall entre o cluster e o terminal externo.
+     <pre class="pre"><code>curl &lt;host_name&gt;.&lt;domain&gt;</code></pre>
+
+<br />
+
+
+## Identificando versões do cliente e do servidor locais de kubectl
+
+Para verificar qual versão da CLI do Kubernetes você está executando localmente ou se o seu cluster está
+em execução, execute o comando a seguir e verifique a versão.
+
+```
+kubectl version  --short
+```
+{: pre}
+
+Saída de exemplo:
+
+```
+Client Version: v1.5.6
+    Server Version: v1.5.6
+```
+{: screen}
+
+<br />
+
+
+## Não é possível se conectar à conta do IBM Bluemix Infrastructure (SoftLayer) durante a criação de um cluster
 {: #cs_credentials}
 
 {: tsSymptoms}
 Ao criar um novo cluster do Kubernetes, você receberá a mensagem a seguir.
 
 ```
-We were unable to connect to your {{site.data.keyword.BluSoftlayer_notm}} account. Creating a standard cluster requires that you have either a Pay-As-You-Go account that is linked to an {{site.data.keyword.BluSoftlayer_notm}} account term or that you have used the IBM
-{{site.data.keyword.Bluemix_notm}} Container Service CLI to set your {{site.data.keyword.Bluemix_notm}} Infrastructure API keys.
+Não foi possível se conectar à sua conta do IBM Bluemix Infrastructure (SoftLayer). Criar um cluster padrão requer que você tenha uma conta Pay-As-You-Go que está vinculada a um prazo de conta do IBM Bluemix Infrastructure (SoftLayer) ou que você usou a CLI do IBM {{site.data.keyword.Bluemix_notm}} Container Service para configura suas chaves API do {{site.data.keyword.Bluemix_notm}} Infrastructure.
 ```
 {: screen}
 
 {: tsCauses}
-Os usuários com uma conta do {{site.data.keyword.Bluemix_notm}} desvinculada devem criar uma nova conta Pagamento por uso ou incluir manualmente as chaves API do {{site.data.keyword.BluSoftlayer_notm}} usando a CLI do {{site.data.keyword.Bluemix_notm}}.
+Os usuários com uma conta {{site.data.keyword.Bluemix_notm}} desvinculada devem criar uma nova conta Pay-As-You-Go ou incluir manualmente as chaves API do IBM Bluemix Infrastructure (SoftLayer) usando a CLI do {{site.data.keyword.Bluemix_notm}}.
 
 {: tsResolve}
 Para incluir credenciais na conta do {{site.data.keyword.Bluemix_notm}}:
 
-1.  Entre em contato com o administrador do {{site.data.keyword.BluSoftlayer_notm}} para obter o nome do usuário e a chave API do {{site.data.keyword.BluSoftlayer_notm}}.
+1.  Entre em contato com o administrador do IBM Bluemix Infrastructure (SoftLayer) para obter o nome do usuário e a chave API do IBM Bluemix Infrastructure (SoftLayer).
 
-    **Nota:** a conta do {{site.data.keyword.BluSoftlayer_notm}} que for usada deverá ser configurada com permissões de Superusuário para criar clusters padrão com êxito.
+    **Nota:** a conta do IBM Bluemix Infrastructure (SoftLayer) que você usa deve ser configurada com permissões de Superusuário para criar clusters padrão com êxito.
 
 2.  Inclua as credenciais.
 
@@ -195,6 +263,8 @@ Para incluir credenciais na conta do {{site.data.keyword.Bluemix_notm}}:
   ```
   {: pre}
 
+<br />
+
 
 ## O acesso a seu nó do trabalhador com SSH falha
 {: #cs_ssh_worker}
@@ -207,6 +277,8 @@ O SSH via senha está desativado nos nós do trabalhador.
 
 {: tsResolve}
 Use [DaemonSets ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) para qualquer coisa que precisar ser executada em cada nó ou tarefas para qualquer ação única que precisar ser executada.
+
+<br />
 
 
 ## Os pods permanecem no estado pendente
@@ -255,31 +327,41 @@ Se esse cluster for um existente, verifique a capacidade dele.
 
 5.  Se os pods ainda estiverem em um estado **pendente** depois que o nó do trabalhador for totalmente implementado, revise a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) para solucionar posteriormente os problemas no estado pendente do pod.
 
-## A criação do nó do trabalhador falha com a mensagem provision_failed
-{: #cs_pod_space}
+<br />
+
+
+## Os pods são presos no estado de criação
+{: #stuck_creating_state}
 
 {: tsSymptoms}
-Ao criar um cluster do Kubernetes ou incluir nós do trabalhador, você verá um estado provision_failed. Execute o comando a seguir.
-
-```
-bx cs worker-get <WORKER_NODE_ID>
-```
-{: pre}
-
-A seguinte mensagem é exibida.
-
-```
-SoftLayer_Exception_Virtual_Host_Pool_InsufficientResources: Could not place order. There are insufficient resources behind router bcr<router_ID> to fulfill the request for the following guests: kube-<location>-<worker_node_ID>-w1 (HTTP 500)
-```
-{: screen}
+Quando você executa `kubectl get pods -o wide`, você vê que vários pods que estão em execução no mesmo nó do trabalhador estão presos no estado `ContainerCreating`.
 
 {: tsCauses}
-O {{site.data.keyword.BluSoftlayer_notm}} pode não ter capacidade suficiente neste momento para provisionar o nó do trabalhador.
+O sistema de arquivos no nó do trabalhador é somente leitura.
 
 {: tsResolve}
-Opção 1: criar o cluster em outro local.
+1. Faça backup de quaisquer dados que podem ser armazenados no nó do trabalhador ou em seus contêineres.
+2. Reconstrua o nó do trabalhador executando o comando a seguir.
 
-Opção 2: abrir um problema de suporte com o {{site.data.keyword.BluSoftlayer_notm}} e perguntar sobre a disponibilidade de capacidade no local.
+<pre class="pre"><code>bx cs worker-reload &lt;cluster_name&gt; &lt;worker_id&gt;</code></pre>
+
+<br />
+
+
+## Os contêineres não iniciam
+{: #containers_do_not_start}
+
+{: tsSymptoms}
+Os pods são implementados com êxito em clusters, mas os contêineres não iniciam.
+
+{: tsCauses}
+Os contêineres não podem ser iniciados quando a cota de registro é atingido.
+
+{: tsResolve}
+[Liberar armazenamento em {{site.data.keyword.registryshort_notm}}.](../services/Registry/registry_quota.html#registry_quota_freeup)
+
+<br />
+
 
 ## Acessar um pod em um novo nó do trabalhador falha com um tempo limite
 {: #cs_nodes_duplicate_ip}
@@ -339,11 +421,14 @@ Atualize manualmente a referência do endereço IP privado para apontar para o n
 
 O nó excluído não é mais listado no Calico.
 
+<br />
+
+
 ## Os nós do trabalhador falham ao se conectar
 {: #cs_firewall}
 
 {: tsSymptoms}
-Quando o proxy Kubectl falha ou você tenta acessar um serviço em seu cluster e sua conexão falha com uma das mensagens de erro a seguir:
+Quando os nós do trabalhador não são capazes de se conectar, é possível ver uma variedade de sintomas diferentes. É possível que você veja uma das mensagens a seguir quando o proxy kubectl falhar ou você tentar acessar um serviço em seu cluster e a conexão falhar.
 
   ```
   Conexão recusada
@@ -360,36 +445,29 @@ Quando o proxy Kubectl falha ou você tenta acessar um serviço em seu cluster e
   ```
   {: screen}
 
-Ou quando você usa kubectl exec, attach ou logs e recebe este erro:
+Se você executar kubectl exec, attach ou logs, é possível ver a mensagem a seguir.
 
   ```
   Error from server: error dialing backend: dial tcp XXX.XXX.XXX:10250: getsockopt: connection timed out
   ```
   {: screen}
 
-Ou quando o proxy kubectl é bem-sucedido, mas o painel não está disponível e você recebe este erro:
+Se o proxy kubectl for bem-sucedido, mas o painel não estiver disponível, será possível que você veja a mensagem a seguir.
 
   ```
   timeout on 172.xxx.xxx.xxx
   ```
   {: screen}
 
-Ou quando os nós do trabalhador estão presos em um loop recarregamento.
+
 
 {: tsCauses}
-Você pode ter um firewall adicional configurado ou customizado nas configurações de firewall existentes em sua conta do {{site.data.keyword.BluSoftlayer_notm}}. O {{site.data.keyword.containershort_notm}} requer que determinados endereços IP e portas sejam abertos para permitir a comunicação do nó do trabalhador com o mestre do Kubernetes e vice-versa.
+É possível que você tenha um firewall adicional configurado ou customizado nas configurações de firewall existentes em sua conta do IBM Bluemix Infrastructure (SoftLayer). O {{site.data.keyword.containershort_notm}} requer que determinados endereços IP e portas sejam abertos para permitir a comunicação do nó do trabalhador com o mestre do Kubernetes e vice-versa. Outro motivo talvez seja que os nós do trabalhador estejam presos em um loop de recarregamento.
 
 {: tsResolve}
 Esta tarefa requer uma [política de acesso de Administrador](cs_cluster.html#access_ov). Verifique sua [política de acesso atual](cs_cluster.html#view_access).
 
 Abra as portas e os endereços IP a seguir em seu firewall customizado.
-```
-TCP port 443 FROM '<each_worker_node_publicIP>' TO registry.ng.bluemix.net, apt.dockerproject.org
-```
-{: pre}
-
-
-<!--Inbound left for existing clusters. Once existing worker nodes are reloaded, users only need the Outbound information, which is found in the regular docs.-->
 
 1.  Anote o endereço IP público para todos os nós do trabalhador no cluster:
 
@@ -398,99 +476,148 @@ TCP port 443 FROM '<each_worker_node_publicIP>' TO registry.ng.bluemix.net, apt.
   ```
   {: pre}
 
-2.  Em seu firewall, permita as conexões a seguir para/de seus nós do trabalhador:
+2.  Em seu firewall para conectividade OUTBOUND de seus nós do trabalhador, permita o tráfego de rede de saída do nó do trabalhador de origem para o intervalo de portas TCP/UDP de destino de 20000 a 32767 e porta 443 para `<each_worker_node_publicIP>` e os endereços IP e grupos de rede a seguir.
+    - **Importante**: deve-se permitir o tráfego de saída para a porta 443 e todos os locais dentro da região entre si, para equilibrar a carga durante o processo de autoinicialização. Por exemplo, se o seu cluster estiver no Sul dos EUA, deve-se permitir o tráfego da porta 443 para dal10 e dal12, bem como de dal10 e dal12 uma para a outra.
+    <p>
+  <table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
+      <thead>
+      <th>Região</th>
+      <th>Localização</th>
+      <th>Endereço IP</th>
+      </thead>
+    <tbody>
+      <tr>
+         <td>AP Sul</td>
+         <td>mel01<br>syd01</td>
+         <td><code>168.1.97.67</code><br><code>168.1.8.195</code></td>
+      </tr>
+      <tr>
+         <td>União Europeia Central</td>
+         <td>ams03<br>fra02</td>
+         <td><code>169.50.169.110</code><br><code>169.50.56.174</code></td>
+        </tr>
+      <tr>
+        <td>Sul do Reino Unido</td>
+        <td>lon02<br>lon04</td>
+        <td><code>159.122.242.78</code><br><code>158.175.65.170</code></td>
+      </tr>
+      <tr>
+        <td>Leste dos EUA</td>
+         <td>wdc06<br>wdc07</td>
+         <td><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+      </tr>
+      <tr>
+        <td>SUL dos EUA</td>
+        <td>dal10<br>dal12<br>dal13</td>
+        <td><code>169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
+      </tr>
+      </tbody>
+    </table>
+</p>
+
+3.  Permita o tráfego de rede de saída dos nós do trabalhador para o {{site.data.keyword.registrylong_notm}}:
+    - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
+    - Substitua <em>&lt;registry_publicIP&gt;</em> por todos os endereços para as regiões de registro para as quais você deseja permitir o tráfego:
+      <p>      
+<table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
+        <thead>
+        <th colspan=2><img src="images/idea.png"/> Registro de endereços IP</th>
+        </thead>
+      <tbody>
+        <tr>
+          <td>registry.au-syd.bluemix.net</td>
+          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
+        </tr>
+        <tr>
+          <td>registry.eu-de.bluemix.net</td>
+          <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></td>
+         </tr>
+         <tr>
+          <td>registry.eu-gb.bluemix.net</td>
+          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></td>
+         </tr>
+         <tr>
+          <td>registry.ng.bluemix.net</td>
+          <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></td>
+         </tr>
+        </tbody>
+      </table>
+</p>
+
+4.  Opcional: permita o tráfego de rede de saída dos nós do trabalhador para os serviços do {{site.data.keyword.monitoringlong_notm}} e do {{site.data.keyword.loganalysislong_notm}}:
+    - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
+    - Substitua <em>&lt;monitoring_publicIP&gt;</em> por todos os endereços para as regiões de monitoramento para as quais você deseja permitir o tráfego:
+      <p><table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
+        <thead>
+        <th colspan=2><img src="images/idea.png"/> Monitoramento de endereços IP públicos</th>
+        </thead>
+      <tbody>
+        <tr>
+         <td>Metrics.eu-de.bluemix.net</td>
+         <td><code>159.122.78.136/29</code></td>
+        </tr>
+        <tr>
+         <td>Metrics.eu-gb.bluemix.net</td>
+         <td><code>169.50.196.136/29</code></td>
+        </tr>
+        <tr>
+          <td>Metrics.ng.bluemix.net</td>
+          <td><code>169.47.204.128/29</code></td>
+         </tr>
+         
+        </tbody>
+      </table>
+</p>
+    - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
+    - Substitua <em>&lt;logging_publicIP&gt;</em> por todos os endereços para as regiões de criação de log para as quais você deseja permitir tráfego:
+      <p><table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
+        <thead>
+        <th colspan=2><img src="images/idea.png"/> Criação de log de endereços IP públicos</th>
+        </thead>
+      <tbody>
+        <tr>
+         <td>ingest.logging.eu-de.bluemix.net</td>
+         <td><code>169.50.25.125</code></td>
+        </tr>
+        <tr>
+         <td>ingest.logging.eu-gb.bluemix.net</td>
+         <td><code>169.50.115.113</code></td>
+        </tr>
+        <tr>
+          <td>ingest.logging.ng.bluemix.net</td>
+          <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
+         </tr>
+        </tbody>
+      </table>
+</p>
+
+5. Se você tiver um firewall privado, permita os intervalos IP privados adequados do IBM Bluemix Infrastructure (SoftLayer). Consulte [este link](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) iniciando com a seção **Rede de backend (privada)**.
+    - Inclua todos os [locais dentro da(s) região(ões)](cs_regions.html#locations) que você estiver usando
+    - Observe que deve-se incluir o local de dal01 (data center)
+    - Abra as portas 80 e 443 para permitir o processo de autoinicialização do cluster
+
+<br />
+
+
+## Após atualizar ou recarregar um nó do trabalhador, nós duplicados e pods aparecem
+{: #cs_duplicate_nodes}
+
+{: tsSymptoms}
+Ao executar `kubectl get nodes`, você vê nós do trabalhador duplicados com o status **NotReady**. Os nós do trabalhador com **NotReady** têm endereços IP públicos, enquanto os nós do trabalhador com **Ready** possuem endereços IP privados.
+
+{: tsCauses}
+Clusters mais antigos tinham nós do trabalhador listados pelo endereço IP público do cluster. Agora, os nós do trabalhador são listados pelo endereço IP privado do cluster. Ao recarregar ou atualizar um nó, o endereço IP é mudado, mas a referência ao endereço IP público permanece.
+
+{: tsResolve}
+Não há interrupções de serviço devido a essas duplicatas, mas é necessário remover as referências do nó do trabalhador antigas do servidor de API.
 
   ```
-  TCP port 443 FROM '<each_worker_node_publicIP>' TO registry.ng.bluemix.net, apt.dockerproject.org
+  kubectl delete node <node_name1> <node_name2>
   ```
   {: pre}
 
-    <ul><li>Para conectividade de ENTRADA para os nós do trabalhador, permita tráfego de rede recebido dos grupos de rede e endereços IP de origem a seguir para a porta TCP/UDP 10250 de destino e `<public_IP_of _each_worker_node>`:</br>
-    
-    <table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
-      <thead>
-      <th colspan=2><img src="images/idea.png"/> Endereços IP de entrada</th>
-      </thead>
-    <tbody>
-      <tr>
-        <td>ams03</td>
-        <td><code>169.50.144.128/28</code></br><code>169.50.169.104/29</code></br><code>169.50.185.32/27</code></td>
-      </tr>
-      <tr>
-        <td>dal10</td>
-        <td><code>169.46.7.232/29</code></br><code>169.48.138.64/26</code></br><code>169.48.180.128/25</code></td>
-       </tr>
-       <tr>
-        <td>dal12</td>
-        <td><code>169.47.70.8/29</code></br><code>169.47.79.192/26</code></br><code>169.47.126.192/27</code></td>
-       </tr>
-       <tr>
-        <td>fra02</td>
-        <td><code>169.50.48.160/28</code></br><code>169.50.56.168/29</code></br><code>169.50.58.160/27</code></td>
-       </tr>
-      </tbody>
-      <tr>
-       <td>lon02</td>
-       <td><code>159.122.242.78</code></td>
-      </tr>
-      <tr>
-       <td>lon04</td>
-       <td><code>158.175.68.192/26</code></td>
-      </tr>
-      <tr>
-       <td>syd01</td>
-       <td><code>168.1.209.192/26</code></td>
-      </tr>
-      <tr>
-       <td>syd04</td>
-       <td><code>130.198.67.0/26</code></td>
-      </tr>
-    </table>
+<br />
 
-    <li>Para conectividade de SAÍDA dos nós do trabalhador, permita tráfego de rede de saída do nó do trabalhador de origem para o intervalo de portas TCP/UDP de destino 20.000 a 32.767, para `<each_worker_node_publicIP>` e os endereços IP e grupos de rede a seguir:</br>
-    
-    <table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
-      <thead>
-      <th colspan=2><img src="images/idea.png"/> Endereços IP de saída</th>
-      </thead>
-    <tbody>
-      <tr>
-        <td>ams03</td>
-        <td><code>169.50.169.110</code></td>
-      </tr>
-      <tr>
-        <td>dal10</td>
-        <td><code>169.46.7.238</code></td>
-       </tr>
-       <tr>
-        <td>dal12</td>
-        <td><code>169.47.70.10</code></td>
-       </tr>
-       <tr>
-        <td>fra02</td>
-        <td><code>169.50.56.174</code></td>
-       </tr>
-      </tbody>
-      <tr>
-       <td>lon02</td>
-       <td><code>159.122.242.78</code></td>
-      </tr>
-      <tr>
-       <td>lon04</td>
-       <td><code>158.175.65.170</code></td>
-      </tr>
-      <tr>
-       <td>syd01</td>
-       <td><code>168.1.8.195</code></td>
-      </tr>
-      <tr>
-       <td>syd04</td>
-       <td><code>130.198.64.19</code></td>
-      </tr>
-    </table>
-</ul>
-    
-    
 
 ## Falha ao conectar-se a um app por meio de Ingresso
 {: #cs_ingress_fails}
@@ -602,6 +729,9 @@ Para solucionar problemas do Ingresso:
 
     3.  Procure mensagens de erro nos logs do controlador de Ingresso.
 
+<br />
+
+
 ## Falha ao conectar-se a um app por meio de um serviço de balanceador de carga
 {: #cs_loadbalancer_fails}
 
@@ -644,7 +774,7 @@ Para solucionar problemas do serviço de balanceador de carga:
   ```
   {: pre}
 
-    1.  Verifique se definiu **LoadBlanacer** como o tipo do serviço.
+    1.  Verifique se você definiu **LoadBalancer** como o tipo para seu serviço.
     2.  Certifique-se de que tenha usado os mesmos **<selectorkey>** e **<selectorvalue>** usados na seção **rótulo/metadados** de quando implementou o app.
     3.  Verifique se usou a **porta** em que seu app atende.
 
@@ -674,6 +804,42 @@ Para solucionar problemas do serviço de balanceador de carga:
 
     2.  Verifique se o seu domínio customizado está mapeado para o endereço IP público móvel do serviço de balanceador de carga no registro de Ponteiro (PTR).
 
+<br />
+
+
+## A recuperação da URL do ETCD para configuração da CLI do Calico falha
+{: #cs_calico_fails}
+
+{: tsSymptoms}
+Quando você recuperar o `<ETCD_URL>` para [incluir políticas de rede](cs_security.html#adding_network_policies), você obtém uma mensagem de erro `calico-config not found`.
+
+{: tsCauses}
+Seu cluster não está em (Kubernetes versão 1.7)[cs_versions.html] ou mais recente.
+
+{: tsResolve}
+(Atualize seu cluster) [cs_cluster.html#cs_cluster_update] ou recupere o `<ETCD_URL>` com comandos que são compatíveis com versões anteriores do Kubernetes.
+
+Para recuperar o `<ETCD_URL>`, execute um dos comandos a seguir:
+
+- Linux e OS X:
+
+    ```
+    kubectl describe pod -n kube-system `kubectl get pod -n kube-system | grep calico-policy-controller | awk '{print $1}'` | grep ETCD_ENDPOINTS | awk '{print $2}'
+    ```
+    {: pre}
+
+- Windows:
+    <ol>
+    <li> Obtenha uma lista dos pods no namespace kube-system e localize o pod controlador do Calico. </br><pre class="codeblock"><code>kubectl get pod -n kube-system</code></pre></br>Exemplo:</br><pre class="screen"><code>calico-policy-controller-1674857634-k2ckm</code></pre>
+    <li> Visualize os detalhes do pod controlador do Calico.</br> <pre class="codeblock"><code>kubectl describe pod -n kube-system calico-policy-controller-&lt;ID&gt;</code></pre>
+    <li> Localize o valor de terminais do ETCD. Exemplo: <code>https://169.1.1.1:30001</code>
+    </ol>
+
+Quando você recuperar o `<ETCD_URL>`, continue com as etapas conforme listado em (Incluindo políticas de rede)[cs_security.html#adding_network_policies].
+
+<br />
+
+
 ## Problemas conhecidos
 {: #cs_known_issues}
 
@@ -687,11 +853,11 @@ Aprenda sobre os problemas conhecidos.
   <dt>Os apps Cloud Foundry no mesmo espaço do {{site.data.keyword.Bluemix_notm}} não podem acessar um cluster</dt>
     <dd>Ao criar um cluster do Kubernetes, o cluster é criado no nível de conta e não usa o espaço, exceto quando você liga serviços do {{site.data.keyword.Bluemix_notm}}. Se você desejar que o cluster acesse um app Cloud Foundry, deve-se tornar o app Cloud Foundry ou o app em seu cluster [publicamente disponíveis](cs_planning.html#cs_planning_public_network).</dd>
   <dt>Serviço NodePort do painel Kube foi desativado</dt>
-    <dd>Por motivos de segurança, o serviço NodePort do painel do Kubernetes está desativado. Para acessar seu painel do Kubernetes, execute o comando a seguir.</br><pre class="codeblock"><code>kubectl proxy</code></pre></br>Em seguida, será possível acessar o painel do Kubernetes em `http://localhost:8001/ui`.</dd>
+    <dd>Por razões de segurança, o serviço NodePort do painel do Kubernetes está desativado. Para acessar seu painel do Kubernetes, execute o comando a seguir.</br><pre class="codeblock"><code>kubectl proxy</code></pre></br>Em seguida, será possível acessar o painel do Kubernetes em `http://localhost:8001/ui`.</dd>
   <dt>Limitações com o tipo de serviço de balanceador de carga</dt>
     <dd><ul><li>Não é possível usar o balanceamento de carga em VLANs privadas.<li>Não é possível usar as anotações de serviço service.beta.kubernetes.io/external-traffic e service.beta.kubernetes.io/healthcheck-nodeport. Para obter mais informações sobre essas anotações, veja a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tutorials/services/source-ip/).</ul></dd>
-  <dt>O auto-scaling horizontal não funciona</dt>
-    <dd>Por motivos de segurança, a porta padrão usada por Heapster (10255) fica fechada em todos os nós do trabalhador. Como essa porta está fechada, o Heapster não consegue relatar métricas para nós do trabalhador e o auto-scaling horizontal não pode funcionar conforme documentado em [Auto-scaling do pod horizontal ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) na documentação do Kubernetes.</dd>
+  <dt>O Auto-scaling horizontal não funciona em alguns clusters</dt>
+    <dd>Por motivos de segurança, a porta padrão que é usada por Heapster (10255) é fechada em todos os nós do trabalhador em clusters antigos. Como essa porta está fechada, o Heapster não consegue relatar métricas para nós do trabalhador e o auto-scaling horizontal não pode funcionar conforme documentado em [Auto-scaling do pod horizontal ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) na documentação do Kubernetes. Crie outro cluster para evitar esse problema.</dd>
 </dl>
 
 ### Armazenamento Persistente

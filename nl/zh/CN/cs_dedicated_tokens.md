@@ -19,7 +19,7 @@ lastupdated: "2017-08-14"
 # 为 {{site.data.keyword.Bluemix_notm}} Dedicated 映像注册表创建 {{site.data.keyword.registryshort_notm}} 令牌
 {: #cs_dedicated_tokens}
 
-创建一个未到期的令牌，以便将映像注册表与用于单个组和可扩展组的集群一起使用。
+创建一个未到期的令牌，以便将用于单个组和可扩展组的映像注册表与集群一起使用。
 {:shortdesc}
 
 1.  登录到 {{site.data.keyword.Bluemix_short}} Dedicated 环境。
