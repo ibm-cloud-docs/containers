@@ -21,9 +21,12 @@ lastupdated: "2017-11-17"
 
 [{{site.data.keyword.Bluemix_notm}} regions](#bluemix_regions) differ from [{{site.data.keyword.containershort_notm}} regions](#container_regions).
 
+![{{site.data.keyword.containershort_notm}} regions and datacenters](/images/regions.png)
 
+Figure 1. {{site.data.keyword.containershort_notm}} regions and datacenters
 
 Supported {{site.data.keyword.containershort_notm}} regions:
+  * AP North
   * AP South
   * EU Central
   * UK South
@@ -35,7 +38,7 @@ You can create Kubernetes lite clusters in the following regions:
   * EU Central
   * UK South
   * US South
-  
+
   **Note**: If you are not a paid customer, you are unable to create lite clusters in the US South region.
 
 
@@ -57,7 +60,7 @@ To check which {{site.data.keyword.Bluemix_notm}} region you are currently in, r
       ```
       {: pre}
 
-  * Sydney
+  * Sydney and AP North
       ```
       bx login -a api.au-syd.bluemix.net
       ```
@@ -87,13 +90,12 @@ By using {{site.data.keyword.containershort_notm}} regions, you can create or ac
 {:shortdesc}
 
 {{site.data.keyword.containershort_notm}} region API endpoints:
+  * AP North: `https://ap-north.containers.bluemix.net`
   * AP South: `https://ap-south.containers.bluemix.net`
   * EU Central: `https://eu-central.containers.bluemix.net`
   * UK South: `https://uk-south.containers.bluemix.net`
   * US East: `https://us-east.containers.bluemix.net`
   * US South: `https://us-south.containers.bluemix.net`
-
-**Note:** US East is available for use with CLI commands only.
 
 To check which {{site.data.keyword.containershort_notm}} region you are currently in, run `bx cs api` and review the **Region** field.
 
@@ -107,6 +109,12 @@ You might want to log in to another {{site.data.keyword.containershort_notm}} re
 </br>
 
 Example commands to log in to an {{site.data.keyword.containershort_notm}} region:
+  * AP North:
+    ```
+    bx cs init --host https://ap-north.containers.bluemix.net
+    ```
+  {: pre}
+
   * AP South:
     ```
     bx cs init --host https://ap-south.containers.bluemix.net
@@ -145,6 +153,7 @@ Locations are data centers that are available within a region.
 
   | Region | Location | City |
   |--------|----------|------|
+  | AP North | hkg02, tok02 | Hong Kong, Tokyo |
   | AP South     | mel01, syd01, syd04        | Melbourne, Sydney |
   | EU Central     | ams03, fra02, par01        | Amsterdam, Frankfurt, Paris |
   | UK South      | lon02, lon04         | London |
@@ -165,6 +174,7 @@ Example of `GET /clusters` API in US South:
 </br>
 
 To view documentation on the API commands, append `swagger-api` to the endpoint for the region to view.
+  * AP North: https://ap-north.containers.bluemix.net/swagger-api/
   * AP South: https://ap-south.containers.bluemix.net/swagger-api/
   * EU Central: https://eu-central.containers.bluemix.net/swagger-api/
   * UK South: https://uk-south.containers.bluemix.net/swagger-api/
