@@ -489,9 +489,14 @@ Open the following ports and IP addresses in your customized firewall.
       </thead>
     <tbody>
       <tr>
+        <td>AP North</td>
+        <td>hkg02<br>tok02</td>
+        <td><code>169.56.132.234</code><br><code>161.202.126.210</code></td>
+       </tr>
+      <tr>
          <td>AP South</td>
-         <td>mel01<br>syd01</td>
-         <td><code>168.1.97.67</code><br><code>168.1.8.195</code></td>
+         <td>mel01<br>syd01<br>syd04</td>
+         <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19</code></td>
       </tr>
       <tr>
          <td>EU Central</td>
@@ -520,25 +525,31 @@ Open the following ports and IP addresses in your customized firewall.
 3.  Allow outgoing network traffic from the worker nodes to {{site.data.keyword.registrylong_notm}}:
     - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
     - Replace <em>&lt;registry_publicIP&gt;</em> with all of the addresses for registry regions to which you want to allow traffic:
-      <p>      
+      <p>
 <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
-        <thead>
-        <th colspan=2><img src="images/idea.png"/> Registry IP addresses</th>
-        </thead>
+      <thead>
+        <th>Container region</th>
+        <th>Registry address</th>
+        <th>Registry IP address</th>
+      </thead>
       <tbody>
         <tr>
+          <td>AP North, AP South</td>
           <td>registry.au-syd.bluemix.net</td>
           <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
         </tr>
         <tr>
+          <td>EU Central</td>
           <td>registry.eu-de.bluemix.net</td>
           <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></td>
          </tr>
          <tr>
+          <td>UK South</td>
           <td>registry.eu-gb.bluemix.net</td>
           <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></td>
          </tr>
          <tr>
+          <td>US East, US South</td>
           <td>registry.ng.bluemix.net</td>
           <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></td>
          </tr>
@@ -551,18 +562,23 @@ Open the following ports and IP addresses in your customized firewall.
     - Replace <em>&lt;monitoring_publicIP&gt;</em> with all of the addresses for the monitoring regions to which you want to allow traffic:
       <p><table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
         <thead>
-        <th colspan=2><img src="images/idea.png"/> Monitoring Public IP addresses</th>
+        <th>Container region</th>
+        <th>Monitoring address</th>
+        <th>Monitoring IP addresses</th>
         </thead>
       <tbody>
         <tr>
+         <td>EU Central</td>
          <td>metrics.eu-de.bluemix.net</td>
          <td><code>159.122.78.136/29</code></td>
         </tr>
         <tr>
+         <td>UK South</td>
          <td>metrics.eu-gb.bluemix.net</td>
          <td><code>169.50.196.136/29</code></td>
         </tr>
         <tr>
+          <td>US East, US South, AP North</td>
           <td>metrics.ng.bluemix.net</td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
@@ -574,18 +590,23 @@ Open the following ports and IP addresses in your customized firewall.
     - Replace <em>&lt;logging_publicIP&gt;</em> with all the addresses for the logging regions to which you want to allow traffic:
       <p><table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
         <thead>
-        <th colspan=2><img src="images/idea.png"/> Logging Public IP addresses</th>
+        <th>Container region</th>
+        <th>Logging address</th>
+        <th>Logging IP addresses</th>
         </thead>
       <tbody>
         <tr>
+         <td>EU Central</td>
          <td>ingest.logging.eu-de.bluemix.net</td>
          <td><code>169.50.25.125</code></td>
         </tr>
         <tr>
+         <td>UK South</td>
          <td>ingest.logging.eu-gb.bluemix.net</td>
          <td><code>169.50.115.113</code></td>
         </tr>
         <tr>
+          <td>US East, US South, AP North</td>
           <td>ingest.logging.ng.bluemix.net</td>
           <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
          </tr>
