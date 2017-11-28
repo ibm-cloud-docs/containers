@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-20"
+lastupdated: "2017-11-28"
 
 ---
 
@@ -33,7 +33,7 @@ You can create lite or standard clusters. Create lite clusters to get familiar a
 
 |Characteristics|Lite clusters|Standard clusters|
 |---------------|-------------|-----------------|
-|[Available in {{site.data.keyword.Bluemix_notm}} Public](cs_ov.html#public_environment)|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|[Available in {{site.data.keyword.Bluemix_notm}} Public](cs_ov.html#cs_ov)|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[In-cluster networking](#cs_planning_private_network)|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Public network app access by a NodePort service](#cs_nodeport)|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[User access management](cs_cluster.html#cs_cluster_user)|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
@@ -70,18 +70,18 @@ Learn more about how you can use these techniques to increase the availability o
 <dt>Include enough worker nodes to spread out app instances</dt>
 <dd>For high availability, allow your app developers to spread their containers across multiple worker nodes per cluster. Three worker nodes allow for the downtime of one worker node to occur without interrupting the usage of the app. You can specify how many worker nodes to include when you create a cluster from the [{{site.data.keyword.Bluemix_notm}} GUI](cs_cluster.html#cs_cluster_ui) or the [CLI](cs_cluster.html#cs_cluster_cli). Kubernetes limits the maximum number of worker nodes that you can have in a cluster. Review [worker node and pod quotas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/cluster-large/) for more information.
 <pre class="codeblock">
-<code>bx cs cluster-create --location &lt;dal10&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u1c.2x4&gt; --name &lt;my_cluster&gt;</code>
+<code>bx cs cluster-create --location &lt;dal10&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;my_cluster&gt;</code>
 </pre>
 </dd>
 <dt>Spread apps across clusters</dt>
 <dd>Create multiple clusters, each with multiple worker nodes. If an outage occurs with one cluster, users can still access an app that is also deployed in another cluster.
 <p>Cluster 1:</p>
 <pre class="codeblock">
-<code>bx cs cluster-create --location &lt;dal10&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u1c.2x4&gt; --name &lt;my_cluster1&gt;</code>
+<code>bx cs cluster-create --location &lt;dal10&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;my_cluster1&gt;</code>
 </pre>
 <p>Cluster 2:</p>
 <pre class="codeblock">
-<code>bx cs cluster-create --location &lt;dal12&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u1c.2x4&gt;  --name &lt;my_cluster2&gt;</code>
+<code>bx cs cluster-create --location &lt;dal12&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u2c.2x4&gt;  --name &lt;my_cluster2&gt;</code>
 </pre>
 </dd>
 <dt>Spread apps across clusters in different regions</dt>
@@ -89,11 +89,11 @@ Learn more about how you can use these techniques to increase the availability o
 <p><strong>Important:</strong> After you configure your custom domain, you might use these commands to create the clusters.</p>
 <p>Location 1:</p>
 <pre class="codeblock">
-<code>bx cs cluster-create --location &lt;dal10&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u1c.2x4&gt; --name &lt;my_cluster1&gt;</code>
+<code>bx cs cluster-create --location &lt;dal10&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;my_cluster1&gt;</code>
 </pre>
 <p>Location 2:</p>
 <pre class="codeblock">
-<code>bx cs cluster-create --location &lt;ams03&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u1c.2x4&gt; --name &lt;my_cluster2&gt;</code>
+<code>bx cs cluster-create --location &lt;ams03&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;my_cluster2&gt;</code>
 </pre>
 </dd>
 </dl>
@@ -127,6 +127,26 @@ When you create a lite cluster, your worker node is automatically provisioned as
 When you create a cluster in {{site.data.keyword.Bluemix_dedicated_notm}}, a single-tenant set up only is used and all physical resources are dedicated to you only. You deploy multiple worker nodes as virtual machines on the same physical host.
 
 <br />
+
+
+### Worker node memory limits
+{: #resource_limit_node}
+
+{{site.data.keyword.containershort_notm}} sets a memory limit on each worker node. When pods that are running on the worker node exceed this memory limit, the pods are removed. In Kubernetes, this limit is called a [hard eviction threshold ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#hard-eviction-thresholds).
+
+If your pods are removed frequently, add more worker nodes to your cluster or set [resource limits ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container) on your pods.
+
+Each machine type has a different memory capacity. When there is less memory available on the worker node than the mininum threshold that is allowed, Kubernetes immediately removes the pod. The pod reschedules onto another worker node if a worker node is available.
+
+|Worker node memory capacity|Minumum memory threshold of a worker node|
+|---------------------------|------------|
+|4 GB  | 256 MB |
+|16 GB | 1024 MB |
+|64 GB | 4096 MB |
+|128 GB| 4096 MB |
+|242 GB| 4096 MB |
+
+To review how much memory is used on your worker node, run [kubectl top node ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/user-guide/kubectl/v1.8/#top).
 
 
 ## Cluster management responsibilities
@@ -471,32 +491,6 @@ A container is, by design, short-lived. However, as shown in the following diagr
 <br />
 
 
-## Monitoring tools
-{: #cs_planning_health}
-
-You can use the standard Kubernetes and Docker features to monitor the health of your clusters and apps. To find logs for troubleshooting issues with your clusters and apps, see [Configuring cluster logging](cs_cluster.html#cs_logging).
-{:shortdesc}
-
-<dl>
-<dt>Cluster details page in {{site.data.keyword.Bluemix_notm}}</dt>
-<dd>{{site.data.keyword.containershort_notm}} provides information about the health and capacity of your cluster and the usage of your cluster resources. You can use this GUI to scale out your cluster, work with your persistent storage, and add additional capabilities to your cluster through {{site.data.keyword.Bluemix_notm}} service binding. To view the cluster details page, go to your **{{site.data.keyword.Bluemix_notm}} Dashboard** and select a cluster.</dd>
-<dt>Kubernetes dashboard</dt>
-<dd>The Kubernetes dashboard is an administrative web interface that you can use to review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and to troubleshoot apps based on logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containershort_notm}}](cs_apps.html#cs_cli_dashboard).</dd>
-<dt>{{site.data.keyword.monitoringlong_notm}}</dt>
-<dd>For standard clusters, metrics are located in the {{site.data.keyword.Bluemix_notm}} account that was logged in to when the Kubernetes cluster was created.  If you specified an {{site.data.keyword.Bluemix_notm}} space when you created the cluster, then metrics are located in that space. Container metrics are collected automatically for all containers that are deployed in a cluster. These metrics are sent and are made available through Grafana. For more information on metrics, see [Monitoring for the {{site.data.keyword.containershort_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov).<p>To access the Grafana dashboard, go to one of the following URLs and select the {{site.data.keyword.Bluemix_notm}} account or space where you created the cluster.<ul><li>US-South and US-East: https://metrics.ng.bluemix.net</li><li>UK-South: https://metrics.eu-gb.bluemix.net</li></ul></p></dd></dl>
-
-### Other health monitoring tools
-{: #cs_planning_health_tools}
-
-You can configure other tools for additional logging and monitoring capabilities.
-<dl>
-<dt>Prometheus</dt>
-<dd>Prometheus is an open source monitoring, logging, and alerting tool that was specifically designed for Kubernetes to retrieve detailed information about the cluster, worker nodes, and deployment health based on the Kubernetes logging information. For setup information, see [Integrating services with {{site.data.keyword.containershort_notm}}](#cs_planning_integrations).</dd>
-</dl>
-
-<br />
-
-
 ## Integrations
 {: #cs_planning_integrations}
 
@@ -572,10 +566,10 @@ Review the following table to find available options for each account type.
 
 |Account type|Description|Available options to create a standard cluster|
 |------------|-----------|----------------------------------------------|
-|Free trial or standard accounts|Free trial or standard accounts can provision 1 lite cluster and cannot provision a standard cluster. <p>To create a standard cluster, you have two options.</p>|<ul><li>Option 1: [Upgrade your free trial account to an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account](/docs/pricing/billable.html#upgradetopayg) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio.</li><li>Option 2: [Link your free trial account to an existing IBM Cloud infrastructure (SoftLayer) account](/docs/pricing/linking_accounts.html#unifyingaccounts).<p>After linking both accounts, your free trial account is automatically upgraded to a Pay-As-You-Go account. When you link your accounts, you are billed through {{site.data.keyword.Bluemix_notm}} for both, {{site.data.keyword.Bluemix_notm}} and IBM Cloud infrastructure (SoftLayer) resources.</p><p>**Note:** The IBM Cloud infrastructure (SoftLayer) account that you link must be set up with Super User permissions.</p></li></ul>|
+|Lite accounts|Lite accounts can provision only 1 lite cluster with 2 CPU and 4 GB RAM. <p>To create more clusters with different machine types, you have two options.</p>|<ul><li>Option 1: [Upgrade your lite account to an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account](/docs/pricing/billable.html#upgradetopayg) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio.</li><li>Option 2: [Link your lite account to an existing IBM Cloud infrastructure (SoftLayer) account](/docs/pricing/linking_accounts.html#unifyingaccounts).<p>After linking both accounts, your lite account is automatically upgraded to a Pay-As-You-Go account. When you link your accounts, you are billed through {{site.data.keyword.Bluemix_notm}} for both {{site.data.keyword.Bluemix_notm}} and IBM Cloud infrastructure (SoftLayer) resources.</p><p>**Note:** The IBM Cloud infrastructure (SoftLayer) account that you link must be set up with Super User permissions.</p></li></ul>|
 |Older Pay-As-You-Go accounts|Pay-As-You-Go accounts that were created before automatic account linking was available, did not come with access to the IBM Cloud infrastructure (SoftLayer) portfolio.<p>If you have an existing IBM Cloud infrastructure (SoftLayer) account, you cannot link this account to an older Pay-As-You-Go account.</p>|<ul><li>Option 1: [Create a new Pay-As-You-Go account](/docs/pricing/billable.html#billable) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. When you choose this option, you have two separate {{site.data.keyword.Bluemix_notm}} accounts and billings.<p>If you want to continue using your old Pay-As-You-Go account to create standard clusters, you can use your new Pay-As-You-Go account to generate an API key to access the IBM Cloud infrastructure (SoftLayer) portfolio. Then, you must set the API key for your old Pay-As-You-Go account. For more information, see [Generating an API key for old Pay-As-You-Go and Subscription accounts](#old_account). Keep in mind that IBM Cloud infrastructure (SoftLayer) resources are billed through your new Pay-As-You-Go account.</p></li><li>Option 2: If you already have an existing IBM Cloud infrastructure (SoftLayer) account that you want to use, you can [set your credentials](cs_cli_reference.html#cs_credentials_set) for your {{site.data.keyword.Bluemix_notm}} account.<p>**Note:** The IBM Cloud infrastructure (SoftLayer) account that you use with your {{site.data.keyword.Bluemix_notm}} account must be set up with Super User permissions.</p></li></ul>|
 |Subscription accounts|Subscription accounts are not set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio.|<ul><li>Option 1: [Create a new Pay-As-You-Go account](/docs/pricing/billable.html#billable) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. When you choose this option, you have two separate {{site.data.keyword.Bluemix_notm}} accounts and billings.<p>If you want to continue using your Subscription account to create standard clusters, you can use your new Pay-As-You-Go account to generate an API key to access the IBM Cloud infrastructure (SoftLayer) portfolio. Then, you must set the API key for your Subscription account. For more information, see [Generating an API key for old Pay-As-You-Go and Subscription accounts](#old_account). Keep in mind that IBM Cloud infrastructure (SoftLayer) resources are billed through your new Pay-As-You-Go account.</p></li><li>Option 2: If you already have an existing IBM Cloud infrastructure (SoftLayer) account that you want to use, you can [set your credentials](cs_cli_reference.html#cs_credentials_set) for your {{site.data.keyword.Bluemix_notm}} account.<p>**Note:** The IBM Cloud infrastructure (SoftLayer) account that you use with your {{site.data.keyword.Bluemix_notm}} account must be set up with Super User permissions.</p></li></ul>|
-|IBM Cloud infrastructure (SoftLayer) accounts, no {{site.data.keyword.Bluemix_notm}} account|To create a standard cluster, you must have an {{site.data.keyword.Bluemix_notm}} account.|<ul><li>Option 1: [Create a new Pay-As-You-Go account](/docs/pricing/billable.html#billable) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. When you choose this option, a new IBM Cloud infrastructure (SoftLayer) is created for you. You have two separate IBM Cloud infrastructure (SoftLayer) accounts and billing.</li><li>Option 2: [Create a free trial account](/docs/pricing/free.html#pricing) and [link it to your existing IBM Cloud infrastructure (SoftLayer) account](/docs/pricing/linking_accounts.html#unifyingaccounts). After linking both accounts, your free trial account is automatically upgraded to a Pay-As-You-Go account. When you link your accounts, you are billed through {{site.data.keyword.Bluemix_notm}} for both, {{site.data.keyword.Bluemix_notm}} and IBM Cloud infrastructure (SoftLayer) resources.<p>**Note:** The IBM Cloud infrastructure (SoftLayer) account that you link must be set up with Super User permissions.</p></li></ul>|
+|IBM Cloud infrastructure (SoftLayer) accounts, no {{site.data.keyword.Bluemix_notm}} account|To create a standard cluster, you must have an {{site.data.keyword.Bluemix_notm}} account.|<ul><li>Option 1: [Create a new Pay-As-You-Go account](/docs/pricing/billable.html#billable) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. When you choose this option, a new IBM Cloud infrastructure (SoftLayer) is created for you. You have two separate IBM Cloud infrastructure (SoftLayer) accounts and billing.</li><li>Option 2: [Create a lite account](/docs/pricing/free.html#pricing) and [link it to your existing IBM Cloud infrastructure (SoftLayer) account](/docs/pricing/linking_accounts.html#unifyingaccounts). After linking both accounts, your lite account is automatically upgraded to a Pay-As-You-Go account. When you link your accounts, you are billed through {{site.data.keyword.Bluemix_notm}} for both, {{site.data.keyword.Bluemix_notm}} and IBM Cloud infrastructure (SoftLayer) resources.<p>**Note:** The IBM Cloud infrastructure (SoftLayer) account that you link must be set up with Super User permissions.</p></li></ul>|
 {: caption="Table 7. Available options to create standard clusters with accounts that are not linked to an IBM Cloud infrastructure (SoftLayer) account" caption-side="top"}
 
 
