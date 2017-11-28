@@ -21,8 +21,7 @@ registro di immagini di {{site.data.keyword.Bluemix_notm}}
 dedicato
 {: #cs_dedicated_tokens}
 
-Crea un token senza scadenza per utilizzare un registro di immagini con i cluster che hai usato per
-i contenitori singoli e scalabili.
+Crea un token senza scadenza per utilizzare un registro di immagini che hai utilizzato per i gruppi scalabili o singoli con cluster.
 {:shortdesc}
 
 1.  Accedi all'ambiente {{site.data.keyword.Bluemix_short}} dedicato.
@@ -141,8 +140,7 @@ utilizzare un'immagine privata da uno spazio dei nomi:
         <table>
         <caption>Tabella 2.Descrizione dei componenti del file YAML</caption>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> Descrizione dei
-componenti del file YAML</th>
+        <th colspan=2><img src="images/idea.png"/> Descrizione dei componenti del file YAML</th>
         </thead>
         <tbody>
         <tr>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-08-13"
+lastupdated: "2017-10-05"
 
 ---
 
@@ -26,13 +26,15 @@ La distribuzione di un'applicazione in genere include i seguenti passi.
 
 1.  [Installa le CLI](cs_cli_install.html#cs_cli_install).
 
-2.  Crea uno script di configurazione per la tua applicazione. [Consulta le procedure consigliate da Kubernetes. ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/overview/)
+2.  Crea un file di configurazione per la tua applicazione. [Consulta le procedure consigliate da Kubernetes. ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/overview/)
 
-3.  Esegui lo script di configurazione utilizzando uno dei seguenti metodi.
+3.  Esegui il file di configurazione utilizzando uno dei seguenti metodi. 
     -   [La CLI Kubernetes](#cs_apps_cli)
     -   Il dashboard Kubernetes
         1.  [Avvia il dashboard Kubernetes.](#cs_cli_dashboard)
-        2.  [Esegui lo script di configurazione.](#cs_apps_ui)
+        2.  [Esegui il file di configurazione.](#cs_apps_ui)
+
+<br />
 
 
 ## Avvio del dashboard Kubernetes
@@ -84,28 +86,29 @@ Puoi utilizzare la porta predefinita o impostare una tua porta per avviare il da
 
 
 Quando hai finito con il dashboard Kubernetes, utilizza `CTRL+C` per uscire dal
-comando `proxy`.
+comando `proxy`. Dopo essere uscito, il dashboard Kubernetes non è più disponibile. Esegui nuovamente il comando `proxy` per riavviare il dashboard Kubernetes.
+
+<br />
+
 
 ## Consentire l'accesso pubblico alle applicazioni
 {: #cs_apps_public}
 
-Per rendere un'applicazione pubblicamente disponibile, devi aggiornare il tuo script di configurazione
-prima di distribuire l'applicazione in un cluster.
-{:shortdesc}
+Per rendere un'applicazione pubblicamente disponibile, devi aggiornare il tuo file di configurazione
+prima di distribuire l'applicazione in un cluster. {:shortdesc}
 
 A seconda che il cluster da te creato sia lite o standard, esistono diversi modi per rendere la tua applicazione accessibile da Internet.
 
 <dl>
-<dt><a href="#cs_apps_public_nodeport" target="_blank">Servizio di tipo NodePort</a> (cluster lite e standard)</dt>
+<dt><a href="#cs_apps_public_nodeport" target="_blank">Servizio NodePort</a> (cluster lite e standard)</dt>
 <dd>Esponi una porta pubblica su ogni nodo di lavoro e utilizza l'indirizzo IP pubblico di ognuno di questi nodi
 per accedere pubblicamente al tuo servizio nel cluster. L'indirizzo IP pubblico del nodo di lavoro non è
 permanente. Quando un nodo di lavoro viene rimosso
-o ricreato, a tale nodo viene assegnato un nuovo indirizzo IP pubblico. Puoi utilizzare il servizio di tipo NodePort per verificare l'accesso pubblico per la tua applicazione
+o ricreato, a tale nodo viene assegnato un nuovo indirizzo IP pubblico. Puoi utilizzare NodePort per verificare l'accesso pubblico per la tua applicazione
 o se l'accesso pubblico è richiesto solo per un breve periodo. Se hai bisogno di un indirizzo IP pubblico stabile
-e di una maggiore disponibilità per il tuo endpoint del servizio, esponi la tua applicazione utilizzando un servizio di tipo
-LoadBalancer o Ingress.</dd>
-<dt><a href="#cs_apps_public_load_balancer" target="_blank">Servizio di tipo LoadBalancer</a> (solo cluster standard)</dt>
-<dd>Ogni cluster standard viene fornito con 4 indirizzi IP pubblici portatili che puoi utilizzare per
+e di una maggiore disponibilità per il tuo endpoint del servizio, esponi la tua applicazione utilizzando un servizio LoadBalancer o Ingress.</dd>
+<dt><a href="#cs_apps_public_load_balancer" target="_blank">Servizio LoadBalancer</a> (solo cluster standard)</dt>
+<dd>Ogni cluster standard viene fornito con 4 indirizzi IP pubblici e privati portatili che puoi utilizzare per
 creare un programma di bilanciamento del carico TCP/ UDP esterno per la tua applicazione. Puoi personalizzare il tuo programma di bilanciamento del carico
 esponendo una qualsiasi porta richiesta dalla tua applicazione. L'indirizzo IP pubblico portatile che viene assegnato al programma di bilanciamento del carico è permanente
 e non cambia quando un nodo di lavoro viene ricreato nel cluster.
@@ -136,19 +139,18 @@ un cluster ed esponendo una porta del nodo. Utilizza questa opzione per la verif
 a breve termine.
 {:shortdesc}
 
-Puoi esporre la tua applicazione come servizio Kubernetes di tipo NodePort per i cluster lite o standard.
+Puoi esporre la tua applicazione come un servizio Kubernetes NodePort per i cluster lite o standard.
 
-Per gli ambienti {{site.data.keyword.Bluemix_notm}} dedicato, l'indirizzo IP pubblico viene bloccato da un firewall. Per rendere la tua applicazione disponibile pubblicamente, utilizza invece un servizio [del tipo LoadBalancer](#cs_apps_public_load_balancer) o [Ingress](#cs_apps_public_ingress).
+Per gli ambienti {{site.data.keyword.Bluemix_notm}} dedicato, l'indirizzo IP pubblico viene bloccato da un firewall. Per rendere la tua applicazione disponibile pubblicamente, utilizza invece un [Servizio LoadBalancer](#cs_apps_public_load_balancer) o [Ingress](#cs_apps_public_ingress).
 
 **Nota:** l'indirizzo IP pubblico di un nodo di lavoro non è permanente. Se è necessario ricreare un nodo di lavoro,
  a tale nodo viene assegnato un nuovo indirizzo IP pubblico. Se hai bisogno di un indirizzo IP pubblico stabile
-e di una maggiore disponibilità per il tuo servizio, esponi la tua applicazione utilizzando un [servizio di tipo LoadBalancer](#cs_apps_public_load_balancer)
-o [Ingress](#cs_apps_public_ingress).
+e di una maggiore disponibilità per il tuo servizio, esponi la tua applicazione utilizzando un [Servizio LoadBalancer](#cs_apps_public_load_balancer) o [Ingress](#cs_apps_public_ingress).
 
 
 
 
-1.  Definisci un servizio [ ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/services-networking/service/) nello script di configurazione.
+1.  Definisci un servizio [ ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/services-networking/service/) nel file di configurazione.
 2.  Nella sezione `spec` per il servizio, aggiungi il tipo NodePort.
 
     ```
@@ -262,46 +264,70 @@ assegnato.
 
 3.  Forma l'URL con uno degli indirizzi IP pubblici del nodo di lavoro e la NodePort. Esempio: `http://192.0.2.23:30872`
 
-### Configurazione dell'accesso pubblico a un'applicazione utilizzando il tipo di servizio LoadBalancer
+### Configurazione dell'accesso a un'applicazione utilizzando il tipo di servizio LoadBalancer 
 {: #cs_apps_public_load_balancer}
 
-Esponi una porta e utilizza un indirizzo IP pubblico portatile per il programma di bilanciamento del carico per accedere
-all'applicazione. A differenza del servizio NodePort, l'indirizzo IP pubblico portatile del servizio di bilanciamento del carico non dipende
-dal nodo di lavoro su cui viene distribuita l'applicazione. L'indirizzo IP pubblico portatile del programma di bilanciamento del carico viene assegnato
-automaticamente e non cambia quando aggiungi o rimuovi i nodi di lavoro, il che significa che
-i servizi del programma di bilanciamento del carico sono più disponibili dei servizi NodePort. Gli utenti possono selezionare qualsiasi porta per
+Esponi una porta e utilizza un indirizzo IP pubblico o privato portatile per il programma di bilanciamento del carico per accedere
+all'applicazione. A differenza di un servizio NodePort, l'indirizzo IP portatile del servizio di bilanciamento del carico non dipende
+dal nodo di lavoro su cui viene distribuita l'applicazione. Tuttavia, un servizio Kubernetes LoadBalancer è anche un servizio NodePort. Un servizio LoadBalancer rende la tua applicazione disponibile per la porta e l'indirizzo IP del programma di bilanciamento del carico e per le porte del nodo del servizio. 
+
+ L'indirizzo IP portatile del programma di bilanciamento del carico viene assegnato
+automaticamente e non cambia quando aggiungi o rimuovi i nodi di lavoro Il che significa che i servizi del programma di bilanciamento del carico sono più disponibili dei servizi NodePort. Gli utenti possono selezionare qualsiasi porta per
 il programma di bilanciamento del carico e non sono limitati all'intervallo di porte di NodePort. Puoi usare i servizi di bilanciamento del carico
 per i protocolli TCP e UDP.
 
 Quando un account {{site.data.keyword.Bluemix_notm}} dedicato viene [abilitato per i cluster](cs_ov.html#setup_dedicated), puoi richiedere sottoreti remote da utilizzare per gli indirizzi IP del programma di bilanciamento del carico. [Apri un ticket di supporto](/docs/support/index.html#contacting-support) per creare la sottorete e quindi utilizza il comando [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) per aggiungere la sottorete al cluster.
 
 **Nota:** i servizi del programma di bilanciamento del carico non supportano la chiusura TLS. Se la tua applicazione richiede la terminazione TLS,
-la puoi esporre tramite [Ingress](#cs_apps_public_ingress) o configurare la tua applicazione per gestire la terminazione TLS.
+la puoi esporre utilizzando [Ingress](#cs_apps_public_ingress) o configurare la tua applicazione per gestire la terminazione TLS. 
 
 Prima di iniziare:
 
 -   Questa funzione è disponibile solo per i cluster standard.
--   Devi avere un indirizzo IP pubblico portatile disponibile da assegnare al servizio di bilanciamento del carico.
+-   Devi avere un indirizzo IP pubblico o privato portatile disponibile da assegnare al servizio di bilanciamento del carico. 
+-   Un servizio del programma di bilanciamento del carico con un indirizzo IP privato portatile dispone ancora di una porta del nodo pubblica aperta per i nodi di lavoro. Per aggiungere una politica di rete per evitare il traffico pubblico, consulta [Blocco del traffico in entrata](cs_security.html#cs_block_ingress).
 
 Per creare un servizio del programma di bilanciamento del carico:
 
 1.  [Distribuisci la tua applicazione al cluster](#cs_apps_cli). Quando distribuisci la tua applicazione al cluster,
 vengono creati uno o più pod che eseguono la tua applicazione in un
-contenitore. Assicurati di aggiungere un'etichetta alla tua distribuzione nella sezione dei metadati del tuo script
+contenitore. Assicurati di aggiungere un'etichetta alla tua distribuzione nella sezione dei metadati del tuo file
 di configurazione. Questa etichetta è necessaria per identificare tutti i pod in cui è in esecuzione la tua applicazione, in modo che
-possano essere inclusi nel bilanciamento del carico.
+possano essere inclusi nel bilanciamento del carico. 
 2.  Crea un servizio del programma di bilanciamento del carico per l'applicazione che desideri esporre. Per rendere la tua applicazione disponibile
-pubblicamente su internet, devi creare un servizio Kubernetes per la tua applicazione e
-configurare il tuo servizio per includere tutti i pod che compongono la tua applicazione nel bilanciamento del carico.
-    1.  Apri il tuo editor preferito e crea uno script di configurazione del servizio denominato,
-ad esempio, `myloadbalancer.yaml`.
-    2.  Definisci un servizio del programma di bilanciamento del carico per l'applicazione che vuoi esporre al pubblico.
+pubblicamente su internet o su una rete privata, crea un servizio Kubernetes per la tua applicazione. Configura il tuo servizio per includere tutti i pod che compongono la tua applicazione nel bilanciamento del carico.
+    1.  Crea uno file di configurazione del servizio denominato, ad esempio, `myloadbalancer.yaml`.
+    2.  Definisci un servizio del programma di bilanciamento del carico per l'applicazione che vuoi esporre. 
+        - Se il tuo cluster è su una VLAN pubblica, viene utilizzato un indirizzo IP pubblico portatile. Molti cluster sono su una VLAN pubblica.
+        - Se il tuo cluster è disponibile solo su una VLAN privata, viene quindi utilizzato un indirizzo IP privato portatile. 
+        - Puoi richiedere un indirizzo IP pubblico o privato portatile per un servizio LoadBalancer aggiungendo un'annotazione al file di configurazione.
 
+        Servizio LoadBalancer che utilizza un indirizzo IP predefinito:
+        
         ```
         apiVersion: v1
         kind: Service
         metadata:
           name: <myservice>
+        spec:
+          type: LoadBalancer
+          selector:
+            <selectorkey>:<selectorvalue>
+          ports:
+           - protocol: TCP
+             port: 8080
+        ```
+        {: codeblock}
+        
+        Servizio LoadBalancer che utilizza un'annotazione per specificare un indirizzo IP pubblico o privato:
+        
+        ```
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: <myservice>
+          annotations: 
+            service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private> 
         spec:
           type: LoadBalancer
           selector:
@@ -318,36 +344,38 @@ ad esempio, `myloadbalancer.yaml`.
         </thead>
         <tbody>
         <tr>
-        <td><code>name</code></td>
-        <td>Sostituisci <em>&lt;myservice&gt;</em> con un nome per il tuo servizio del programma di bilanciamento del carico.</td>
+          <td><code>name</code></td>
+          <td>Sostituisci <em>&lt;myservice&gt;</em> con un nome per il tuo servizio del programma di bilanciamento del carico.</td>
         </tr>
         <tr>
-        <td><code>selector</code></td>
-        <td>Immetti la coppia di chiave (<em>&lt;selectorkey&gt;</em>) e valore
+          <td><code>selector</code></td>
+          <td>Immetti la coppia di chiave (<em>&lt;selectorkey&gt;</em>) e valore
 (<em>&lt;selectorvalue&gt;</em>) dell'etichetta che vuoi utilizzare per indirizzare i pod in cui viene eseguita la tua
 applicazione. Ad esempio, se utilizzi il seguente selettore <code>app: code</code>, tutti i pod che hanno
 questa etichetta nei rispettivi metadati vengono inclusi nel bilanciamento del carico. Immetti la stessa etichetta che hai utilizzato
 quando hai distribuito la tua applicazione al cluster. </td>
-         </tr>
-         <td><code> port</code></td>
-         <td>La porta su cui è in ascolto il servizio.</td>
-         </tbody></table>
-    3.  Facoltativo: se vuoi utilizzare uno specifico indirizzo IP pubblico portatile per il tuo programma di bilanciamento del carico
+        </tr>
+        <tr>
+          <td><code> port</code></td>
+          <td>La porta su cui è in ascolto il servizio.</td>
+        </tr>
+        <tr>
+          <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:`
+          <td>Annotazione per specificare il tipo di LoadBalancer. I valori sono `private` e `public`. Quando crei un LoadBalancer pubblico nei cluster su VLAN pubbliche, questa annotazione non è necessaria.
+        </tbody></table>
+    3.  Facoltativo: per utilizzare uno specifico indirizzo IP portatile per il tuo programma di bilanciamento del carico
 disponibile per il tuo cluster, puoi specificare tale indirizzo IP includendo `loadBalancerIP` nella sezione spec. Per ulteriori informazioni, consulta la [documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/services-networking/service/).
-    4.  Facoltativo: puoi scegliere di configurare un firewall specificando `loadBalancerSourceRanges` nella sezione spec. Per ulteriori informazioni, consulta la [documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
-    5.  Salva le modifiche.
-    6.  Crea il servizio nel tuo cluster.
+    4.  Facoltativo: configura un firewall specificando `loadBalancerSourceRanges` nella sezione spec. Per ulteriori informazioni, consulta la [documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
+    5.  Crea il servizio nel tuo cluster.
 
         ```
         kubectl apply -f myloadbalancer.yaml
         ```
         {: pre}
 
-        Quando viene creato il tuo servizio del programma di bilanciamento del carico,
-viene automaticamente assegnato un indirizzo IP pubblico portatile
-ad esso. Se non è disponibile alcun indirizzo IP pubblico portatile, è impossibile creare il servizio del programma di bilanciamento
-del carico.
-3.  Verifica che il servizio del programma di bilanciamento del carico sia stato creato correttamente. Sostituisci
+        Quando viene creato il tuo servizio del programma di bilanciamento del carico, viene automaticamente assegnato un
+indirizzo IP portatile ad esso. Se non è disponibile alcun indirizzo IP portatile, è impossibile creare il servizio del programma di bilanciamento
+del carico. 3.  Verifica che il servizio del programma di bilanciamento del carico sia stato creato correttamente. Sostituisci
 _&lt;myservice&gt;_ con il nome del servizio del programma di bilanciamento del carico che hai creato
 nel passo precedente.
 
@@ -356,10 +384,9 @@ nel passo precedente.
     ```
     {: pre}
 
-    **Nota:** perché il servizio del programma di bilanciamento del carico venga creato correttamente e l'applicazione sia disponibile
-sull'Internet pubblico potrebbero essere richiesti alcuni minuti.
+    **Nota:** perché il servizio del programma di bilanciamento del carico venga creato correttamente e l'applicazione sia disponibile potrebbero essere richiesti alcuni minuti.
 
-    L'output della CLI sarà simile al seguente:
+    Output CLI di esempio:
 
     ```
     Name:                   <myservice>
@@ -381,9 +408,9 @@ sull'Internet pubblico potrebbero essere richiesti alcuni minuti.
     ```
     {: screen}
 
-    L'indirizzo IP **LoadBalancer Ingress** è l'indirizzo IP pubblico portatile che è stato assegnato
+    L'indirizzo IP **LoadBalancer Ingress** è l'indirizzo IP portatile che è stato assegnato
 al tuo servizio del programma di bilanciamento del carico.
-4.  Accedi alla tua applicazione da Internet.
+4.  Se hai creato un servizio del programma di bilanciamento del carico pubblico, accedi alla tua applicazione da internet.
     1.  Apri il tuo browser web preferito.
     2.  Immetti l'indirizzo IP pubblico portatile del programma di bilanciamento del carico e della porta. Nell'esempio precedente, l'indirizzo IP pubblico portatile `192.168.10.38` è stato assegnato al servizio del programma di bilanciamento del carico.
 
@@ -401,7 +428,8 @@ controller Ingress fornito da IBM. Il controller Ingress è un programma di bila
 per instradare le richieste in entrata alle tue applicazioni all'interno o all'esterno del tuo cluster.
 
 **Nota:** Ingress è disponibile solo per i cluster standard e richiede almeno due nodi di lavoro nel
-cluster per garantire l'elevata disponibilità.
+cluster per garantire l'elevata disponibilità. La configurazione di Ingress richiede una [politica di accesso Amministratore](cs_cluster.html#access_ov). Verifica la tua [politica
+di accesso](cs_cluster.html#view_access) corrente.
 
 Quando crei un cluster standard, ti viene creato automaticamente un controller Ingress
 al quale viene assegnato un indirizzo IP pubblico portatile e una rotta pubblica. Puoi configurare il
@@ -440,13 +468,13 @@ Per configurare il controller Ingress:
 
 1.  [Distribuisci la tua applicazione al cluster](#cs_apps_cli). Quando distribuisci la tua applicazione al cluster,
 vengono creati uno o più pod che eseguono la tua applicazione in un
-contenitore. Assicurati di aggiungere un'etichetta alla tua distribuzione nella sezione dei metadati del tuo script
+contenitore. Assicurati di aggiungere un'etichetta alla tua distribuzione nella sezione dei metadati del tuo file
 di configurazione. Questa etichetta è necessaria per identificare tutti i pod in cui è in esecuzione la tua applicazione, in modo che
 possano essere inclusi nel bilanciamento del carico Ingress.
 2.  Crea un servizio Kubernetes per l'applicazione da esporre. Il controller
 Ingress può includere la tua applicazione nel bilanciamento del carico Ingress solo se la tua applicazione viene esposta
 tramite un servizio Kubernetes nel cluster.
-    1.  Apri il tuo editor preferito e crea uno script di configurazione del servizio denominato,
+    1.  Apri il tuo editor preferito e crea un file di configurazione del servizio denominato,
 ad esempio, `myservice.yaml`.
     2.  Definisci un servizio per l'applicazione che vuoi esporre al pubblico.
 
@@ -466,8 +494,7 @@ ad esempio, `myservice.yaml`.
 
         <table>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> Descrizione dei
-componenti del file YAML</th>
+        <th colspan=2><img src="images/idea.png"/> Descrizione dei componenti del file YAML</th>
         </thead>
         <tbody>
         <tr>
@@ -526,10 +553,10 @@ visualizzare il dominio fornito da IBM nel campo **Dominio secondario Ingress**.
 instradamento per la tua applicazione e sono utilizzate dal controller Ingress per
 instradare il traffico di rete in entrata al servizio. Puoi utilizzare una risorsa Ingress per definire le regole di instradamento
 per più applicazioni finché ogni applicazione è esposta tramite un servizio Kubernetes nel cluster.
-    1.  Apri il tuo editor preferito e crea uno script di configurazione Ingress denominato,
-ad esempio, `myingress.yaml`.
-    2.  Definisci una risorsa Ingress nel tuo script di configurazione che utilizza il dominio fornito da IBM
-per instradare il traffico di rete in entrata al servizio che hai creato in precedenza.
+    1.  Apri il tuo editor preferito e crea un file di configurazione Ingress denominato,
+ad esempio, `myingress.yaml`. 
+    2.  Definisci una risorsa Ingress nel tuo file di configurazione che utilizza il dominio fornito da IBM
+per instradare il traffico di rete in entrata al servizio che hai creato in precedenza. 
 
         ```
         apiVersion: extensions/v1beta1
@@ -554,8 +581,7 @@ per instradare il traffico di rete in entrata al servizio che hai creato in prec
 
         <table>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> Descrizione dei
-componenti del file YAML</th>
+        <th colspan=2><img src="images/idea.png"/> Descrizione dei componenti del file YAML</th>
         </thead>
         <tbody>
         <tr>
@@ -649,13 +675,13 @@ CLI](cs_cli_install.html#cs_cli_configure) al tuo cluster per eseguire i comandi
 
 Per configurare il controller Ingress:
 
-1.  [Distribuisci la tua applicazione al cluster](#cs_apps_cli). Assicurati di aggiungere un'etichetta alla tua distribuzione nella sezione dei metadati del tuo script
+1.  [Distribuisci la tua applicazione al cluster](#cs_apps_cli). Assicurati di aggiungere un'etichetta alla tua distribuzione nella sezione dei metadati del tuo file
 di configurazione. Questa etichetta identifica tutti i pod in cui è in esecuzione la tua applicazione, in modo che
 possano essere inclusi nel bilanciamento del carico Ingress.
 2.  Crea un servizio Kubernetes per l'applicazione da esporre. Il controller
 Ingress può includere la tua applicazione nel bilanciamento del carico Ingress solo se la tua applicazione viene esposta
 tramite un servizio Kubernetes nel cluster.
-    1.  Apri il tuo editor preferito e crea uno script di configurazione del servizio denominato,
+    1.  Apri il tuo editor preferito e crea un file di configurazione del servizio denominato,
 ad esempio, `myservice.yaml`.
     2.  Definisci un servizio per l'applicazione che vuoi esporre al pubblico.
 
@@ -675,8 +701,7 @@ ad esempio, `myservice.yaml`.
 
         <table>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> Descrizione dei
-componenti del file YAML</th>
+        <th colspan=2><img src="images/idea.png"/> Descrizione dei componenti del file YAML</th>
         </thead>
         <tbody>
         <tr>
@@ -740,9 +765,9 @@ IBM nel campo **Segreto Ingress**.
 instradamento per la tua applicazione e sono utilizzate dal controller Ingress per
 instradare il traffico di rete in entrata al servizio. Puoi utilizzare una risorsa Ingress per definire le regole di instradamento
 per più applicazioni finché ogni applicazione è esposta tramite un servizio Kubernetes nel cluster.
-    1.  Apri il tuo editor preferito e crea uno script di configurazione Ingress denominato,
-ad esempio, `myingress.yaml`.
-    2.  Definisci una risorsa Ingress nel tuo script di configurazione che utilizza il dominio fornito da IBM
+    1.  Apri il tuo editor preferito e crea un file di configurazione Ingress denominato,
+ad esempio, `myingress.yaml`. 
+    2.  Definisci una risorsa Ingress nel tuo file di configurazione che utilizza il dominio fornito da IBM
 per instradare il traffico di rete in entrata ai tuoi servizi e il certificato fornito da IBM per
 gestire per te la terminazione TLS. Per ogni
 servizio puoi definire un percorso individuale che viene aggiunto al dominio fornito da IBM per
@@ -782,8 +807,7 @@ in ascolto su uno specifico percorso, ma utilizza il percorso root e una porta s
 
         <table>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> Descrizione dei
-componenti del file YAML</th>
+        <th colspan=2><img src="images/idea.png"/> Descrizione dei componenti del file YAML</th>
         </thead>
         <tbody>
         <tr>
@@ -892,15 +916,14 @@ Per configurare il controller Ingress:
 Ingress IBM. Scegli tra queste opzioni:
     -   Definisci un alias per il tuo dominio personalizzato specificando il dominio fornito da IBM come un record di nome canonico
 (CNAME). Per trovare il dominio Ingress fornito da IBM, esegui `bx cs cluster-get <mycluster>` e cerca il campo **Dominio secondario Ingress**.
-    -   Associa il tuo dominio personalizzato all'indirizzo IP pubblico portatile del controller Ingress fornito da IBM aggiungendo l'indirizzo IP
-come record di puntatore (PTR). Per trovare l'indirizzo IP pubblico portatile del controller Ingress:
+    -   Associa il tuo dominio personalizzato all'indirizzo IP pubblico portatile del controller Ingress fornito da IBM aggiungendo l'indirizzo IP come un record. Per trovare l'indirizzo IP pubblico portatile del controller Ingress:
         1.  Esegui `bx cs cluster-get <mycluster>` e cerca il campo **Dominio secondario Ingress**.
         2.  Esegui `nslookup <Ingress subdomain>`.
 3.  Crea un certificato e una chiave TLS per il tuo dominio codificati in
-formato base64.
+formato PEM.
 4.  Memorizza il certificato e la chiave TLS in un segreto
 Kubernetes.
-    1.  Apri il tuo editor preferito e crea uno script di configurazione del segreto Kubernetes denominato,
+    1.  Apri il tuo editor preferito e crea un file di configurazione del segreto Kubernetes denominato,
 ad esempio, `mysecret.yaml`.
     2.  Definisci un segreto che utilizza il certificato e la chiave TLS.
 
@@ -918,8 +941,7 @@ ad esempio, `mysecret.yaml`.
 
         <table>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> Descrizione dei
-componenti del file YAML</th>
+        <th colspan=2><img src="images/idea.png"/> Descrizione dei componenti del file YAML</th>
         </thead>
         <tbody>
         <tr>
@@ -936,7 +958,7 @@ base64.</td>
 base64.</td>
          </tbody></table>
 
-    3.  Salva il tuo script di configurazione.
+    3.  Salva il tuo file di configurazione.
     4.  Crea il segreto TLS per il tuo cluster.
 
         ```
@@ -946,7 +968,7 @@ base64.</td>
 
 5.  [Distribuisci la tua applicazione al cluster](#cs_apps_cli). Quando distribuisci la tua applicazione al cluster,
 vengono creati uno o più pod che eseguono la tua applicazione in un
-contenitore. Assicurati di aggiungere un'etichetta alla tua distribuzione nella sezione dei metadati del tuo script
+contenitore. Assicurati di aggiungere un'etichetta alla tua distribuzione nella sezione dei metadati del tuo file
 di configurazione. Questa etichetta è necessaria per identificare tutti i pod in cui è in esecuzione la tua applicazione, in modo che
 possano essere inclusi nel bilanciamento del carico Ingress.
 
@@ -954,7 +976,7 @@ possano essere inclusi nel bilanciamento del carico Ingress.
 Ingress può includere la tua applicazione nel bilanciamento del carico Ingress solo se la tua applicazione viene esposta
 tramite un servizio Kubernetes nel cluster.
 
-    1.  Apri il tuo editor preferito e crea uno script di configurazione del servizio denominato,
+    1.  Apri il tuo editor preferito e crea un file di configurazione del servizio denominato,
 ad esempio, `myservice.yaml`.
     2.  Definisci un servizio per l'applicazione che vuoi esporre al pubblico.
 
@@ -974,8 +996,7 @@ ad esempio, `myservice.yaml`.
 
         <table>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> Descrizione dei
-componenti del file YAML</th>
+        <th colspan=2><img src="images/idea.png"/> Descrizione dei componenti del file YAML</th>
         </thead>
         <tbody>
         <tr>
@@ -1007,9 +1028,9 @@ quando hai distribuito la tua applicazione al cluster. </td>
 instradamento per la tua applicazione e sono utilizzate dal controller Ingress per
 instradare il traffico di rete in entrata al servizio. Puoi utilizzare una risorsa Ingress per definire le regole di instradamento
 per più applicazioni finché ogni applicazione è esposta tramite un servizio Kubernetes nel cluster.
-    1.  Apri il tuo editor preferito e crea uno script di configurazione Ingress denominato,
-ad esempio, `myingress.yaml`.
-    2.  Definisci una risorsa Ingress nello script di configurazione che utilizza il tuo dominio personalizzato
+    1.  Apri il tuo editor preferito e crea un file di configurazione Ingress denominato,
+ad esempio, `myingress.yaml`. 
+    2.  Definisci una risorsa Ingress nel file di configurazione che utilizza il tuo dominio personalizzato
 per instradare il traffico di rete in entrata ai tuoi servizi e il tuo certificato personalizzato per gestire la terminazione
 TLS. Per ogni
 servizio puoi definire un percorso individuale che viene aggiunto al tuo dominio personalizzato per
@@ -1049,8 +1070,7 @@ in ascolto su uno specifico percorso, ma utilizza il percorso root e una porta s
 
         <table>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> Descrizione dei
-componenti del file YAML</th>
+        <th colspan=2><img src="images/idea.png"/> Descrizione dei componenti del file YAML</th>
         </thead>
         <tbody>
         <tr>
@@ -1170,8 +1190,8 @@ il dominio fornito da IBM e il certificato TLS con [il tuo dominio e il tuo cert
 
 1.  Configura un endpoint Kubernetes che definisce la posizione esterna
 dell'applicazione che desideri includere nel bilanciamento del carico del cluster.
-    1.  Apri il tuo editor preferito e crea uno script di configurazione endpoint denominato,
-ad esempio, `myexternalendpoint.yaml`.
+    1.  Apri il tuo editor preferito e crea un file di configurazione endpoint denominato,
+ad esempio, `myexternalendpoint.yaml`. 
     2.  Definisci il tuo endpoint esterno. Includi tutti gli indirizzi IP pubblici e le porte
 che puoi utilizzare per accedere alla tua applicazione esterna.
 
@@ -1191,8 +1211,7 @@ che puoi utilizzare per accedere alla tua applicazione esterna.
 
         <table>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> Descrizione dei
-componenti del file YAML</th>
+        <th colspan=2><img src="images/idea.png"/> Descrizione dei componenti del file YAML</th>
         </thead>
         <tbody>
         <tr>
@@ -1218,7 +1237,7 @@ Kubernetes.</td>
 
 2.  Crea un servizio Kubernetes per il tuo cluster e configuralo per
 inoltrare le richieste in entrata all'endpoint esterno che hai creato in precedenza.
-    1.  Apri il tuo editor preferito e crea uno script di configurazione del servizio denominato,
+    1.  Apri il tuo editor preferito e crea un file di configurazione del servizio denominato,
 ad esempio, `myexternalservice.yaml`.
     2.  Definisci il servizio.
 
@@ -1238,8 +1257,7 @@ ad esempio, `myexternalservice.yaml`.
 
         <table>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> Descrizione dei
-componenti del file YAML</th>
+        <th colspan=2><img src="images/idea.png"/> Descrizione dei componenti del file YAML</th>
         </thead>
         <tbody>
         <tr>
@@ -1297,9 +1315,9 @@ instradamento per la tua applicazione e sono utilizzate dal controller Ingress p
 instradare il traffico di rete in entrata al servizio. Puoi utilizzare una risorsa Ingress per definire le regole di instradamento
 per più applicazioni esterne finché ogni applicazione è esposta con il proprio endpoint esterno
 tramite un servizio Kubernetes nel cluster.
-    1.  Apri il tuo editor preferito e crea uno script di configurazione Ingress denominato,
-ad esempio, `myexternalingress.yaml`.
-    2.  Definisci una risorsa Ingress nel tuo script di configurazione che utilizza il dominio fornito da IBM
+    1.  Apri il tuo editor preferito e crea un file di configurazione Ingress denominato,
+ad esempio, `myexternalingress.yaml`. 
+    2.  Definisci una risorsa Ingress nel tuo file di configurazione che utilizza il dominio fornito da IBM
 e il certificato TLS per instradare il traffico di rete in entrata alla tua applicazione esterna utilizzando
 l'endpoint esterno che hai creato in precedenza. Per ogni
 servizio puoi definire un percorso individuale che viene aggiunto al dominio fornito da IBM o personalizzato per
@@ -1340,8 +1358,7 @@ in ascolto su uno specifico percorso, ma utilizza il percorso root e una porta s
 
         <table>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> Descrizione dei
-componenti del file YAML</th>
+        <th colspan=2><img src="images/idea.png"/> Descrizione dei componenti del file YAML</th>
         </thead>
         <tbody>
         <tr>
@@ -1444,10 +1461,12 @@ Ingress.
 |[Affinità della sessione con i cookie](#sticky_cookie)|Instrada sempre il tuo traffico di rete in entrata allo stesso server upstream utilizzando un cookie permanente.|
 |[Intestazione della risposta o della richiesta del client aggiuntivo](#add_header)|Aggiungi ulteriori informazioni sull'intestazione a una richiesta client prima di inoltrarla alla tua applicazione di backend o a una risposta client prima di inviarla al client.|
 |[Rimozione intestazione risposta client](#remove_response_headers)|Rimuovi le informazioni sull'intestazione da una risposta client prima di inoltrarla al client.|
-|[Reindirizzamenti HTTP a HTTPs](#redirect_http_to_https)|Reindirizza le richieste HTTP nel tuo dominio a HTTPs.|
+|[Reindirizzamenti HTTP a HTTPS](#redirect_http_to_https)|Reindirizza le richieste HTTP nel tuo dominio a HTTPS.|
 |[Buffer dei dati della risposta client](#response_buffer)|Disabilita il buffer di una risposta client al controller Ingress mentre la invii al client.|
 |[Timeout di lettura e connessione personalizzati](#timeout)|Modifica il tempo in cui il controller Ingress attende il collegamento e la lettura da un'applicazione di backend prima che venga considerata non disponibile.|
 |[Dimensione corpo richiesta client massima personalizzata](#client_max_body_size)|Modifica la dimensione del corpo della richiesta client che è consentito inviare al controller Ingress.|
+|[Porte HTTP e HTTPS personalizzate](#custom_http_https_ports)|Modifica le porte predefinite per il traffico di rete HTTP e HTTPS.|
+
 
 ##### **Instradare il traffico di rete in entrata a un percorso diverso utilizzando le riscritture**
 {: #rewrite}
@@ -1471,7 +1490,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/rewrite-path: "serviceName=&lt;service_name1&gt; rewrite=&lt;rewrite_path1&gt;;serviceName=&lt;service_name2&gt; rewrite=&lt;rewrite_path2&gt;"
+    ingress.bluemix.net/rewrite-path: "serviceName=&lt;service_name1&gt; rewrite=&lt;target_path1&gt;;serviceName=&lt;service_name2&gt; rewrite=&lt;target_path2&gt;"
 spec:
   tls:
   - hosts:
@@ -1492,18 +1511,17 @@ spec:
 
 <table>
 <thead>
-<th colspan=2><img src="images/idea.png"/> Descrizione dei
-componenti del file YAML</th>
+<th colspan=2><img src="images/idea.png"/> Descrizione dei componenti del file YAML</th>
 </thead>
 <tbody>
 <tr>
 <td><code>annotations</code></td>
 <td>Sostituisci <em>&lt;service_name&gt;</em> con il nome del servizio Kubernetes che hai creato per la tua applicazione
-e <em>&lt;rewrite-path&gt;</em> con il percorso su cui è in ascolto la tua
+e <em>&lt;target-path&gt;</em> con il percorso su cui è in ascolto la tua
 applicazione. Il traffico di rete in entrata nel dominio del controller Ingress viene inoltrato al servizio Kubernetes
 utilizzando tale percorso. La maggior parte delle applicazioni non è
 in ascolto su uno specifico percorso, ma utilizza il percorso root e una porta specifica. In questo caso, definisci <code>/</code> come il
-<em>&lt;rewrite-path&gt;</em> per la tua applicazione.</td>
+<em>rewrite-path</em> per la tua applicazione.</td>
 </tr>
 <tr>
 <td><code>path</code></td>
@@ -1569,15 +1587,14 @@ spec:
           servicePort: 80</code></pre>
 
   <table>
-  <caption>Tabella 12. Descrizione dei componenti del file YAML </caption>
+  <caption>Tabella 12. Descrizione dei componenti del file YAML</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png"/> Descrizione dei
-componenti del file YAML</th>
+  <th colspan=2><img src="images/idea.png"/> Descrizione dei componenti del file YAML</th>
   </thead>
   <tbody>
   <tr>
   <td><code>annotations</code></td>
-  <td>Sostituisci i seguenti valori: <ul><li><code><em>&lt;service_name&gt;</em></code>: il nome del servizio Kubernetes che hai creato
+  <td>Sostituisci i seguenti valori:<ul><li><code><em>&lt;service_name&gt;</em></code>: il nome del servizio Kubernetes che hai creato
 per la tua applicazione.</li><li><code><em>&lt;cookie_name&gt;</em></code>: scegli un nome del cookie permanente creato durante una sessione.</li><li><code><em>&lt;expiration_time&gt;</em></code>: il tempo in secondi, minuti o ore prima che il cookie permanente scada. Il tempo non è dipendente dall'attività utente. Dopo che il cookie è scaduto, viene eliminato dal browser web del client e non viene più inviato al controller Ingress. Ad esempio, per impostare un orario di scadenza di 1 secondo, 1 minuto o 1 ora, immetti <strong>1s</strong>, <strong>1m</strong> o <strong>1h</strong>.</li><li><code><em>&lt;cookie_path&gt;</em></code>: il percorso accodato al dominio secondario Ingress e che indica per quali domini e domini secondari il cookie viene inviato al controller Ingress. Ad esempio, se il tuo dominio Ingress è <code>www.myingress.com</code> e desideri inviare il cookie in ogni richiesta client, devi impostare <code>path=/</code>. Se desideri inviare il cookie solo per <code>www.myingress.com/myapp</code> e a tutti i relativi domini secondari, devi impostare <code>path=/myapp</code>.</li><li><code><em>&lt;hash_algorithm&gt;</em></code>: l'algoritmo hash che protegge le informazioni nel cookie. È
 supportato solo <code>sha1</code>. SHA1 crea un riepilogo hash in base alle informazioni nel cookie e lo accoda ad esso. Il server può decrittografare le informazioni nel cookie e verificare l'integrità dei dati.</li></ul></td>
   </tr>
@@ -1586,7 +1603,7 @@ supportato solo <code>sha1</code>. SHA1 crea un riepilogo hash in base alle info
  </dd></dl>
 
 
-##### **Aggiunta delle intestazioni http personalizzate a una richiesta o risposta client**
+##### **Aggiunta delle intestazioni HTTP personalizzate a una richiesta o risposta client**
 {: #add_header}
 
 Utilizza questa annotazione per aggiungere ulteriori informazioni sull'intestazione a una richiesta client prima di inviarla all'applicazione di backend o a una risposta client prima di inviarla al client.
@@ -1643,13 +1660,12 @@ spec:
 
  <table>
   <thead>
-  <th colspan=2><img src="images/idea.png"/> Descrizione dei
-componenti del file YAML</th>
+  <th colspan=2><img src="images/idea.png"/> Descrizione dei componenti del file YAML</th>
   </thead>
   <tbody>
   <tr>
   <td><code>annotations</code></td>
-  <td>Sostituisci i seguenti valori: <ul><li><code><em>&lt;service_name&gt;</em></code>: il nome del servizio Kubernetes che hai creato
+  <td>Sostituisci i seguenti valori:<ul><li><code><em>&lt;service_name&gt;</em></code>: il nome del servizio Kubernetes che hai creato
 per la tua applicazione.</li><li><code><em>&lt;header&gt;</em></code>: la chiave delle informazioni sull'intestazione da aggiungere alla richiesta o alla risposta client.</li><li><code><em>&lt;value&gt;</em></code>: il valore delle informazioni sull'intestazione da aggiungere alla richiesta o alla risposta client.</li></ul></td>
   </tr>
   </tbody></table>
@@ -1665,7 +1681,7 @@ Utilizza questa annotazione per rimuovere le informazioni sull'intestazione incl
 <dl>
 <dt>Descrizione</dt>
 <dd>Il controller Ingress agisce come un proxy tra la tua applicazione di backend e il browser web del client. Le risposte client che vengono inviate al controller Ingress vengono elaborate (tramite proxy) e immesse in una nuova risposta che viene inviata dal controller Ingress al browser web del client. Sebbene la trasmissione tramite proxy di una risposta rimuova le informazioni sull'intestazione http che erano state inizialmente inviate dall'applicazione di backend, questo processo potrebbe non rimuovere tutte le intestazione specifiche dell'applicazione di backend. Utilizza questa annotazione per rimuovere le informazioni sull'intestazione da una risposta client prima che venga inoltrata dal controller Ingress al browser web del client.</dd>
-<dt>YAML risorsa Ingress di esempio </dt>
+<dt>YAML risorsa Ingress di esempio</dt>
 <dd>
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
@@ -1701,13 +1717,12 @@ spec:
 
  <table>
   <thead>
-  <th colspan=2><img src="images/idea.png"/> Descrizione dei
-componenti del file YAML</th>
+  <th colspan=2><img src="images/idea.png"/> Descrizione dei componenti del file YAML</th>
   </thead>
   <tbody>
   <tr>
   <td><code>annotations</code></td>
-  <td>Sostituisci i seguenti valori: <ul><li><code><em>&lt;service_name&gt;</em></code>: il nome del servizio Kubernetes che hai creato
+  <td>Sostituisci i seguenti valori:<ul><li><code><em>&lt;service_name&gt;</em></code>: il nome del servizio Kubernetes che hai creato
 per la tua applicazione.</li><li><code><em>&lt;header&gt;</em></code>: la chiave dell'intestazione da rimuovere dalla risposta client.</li></ul></td>
   </tr>
   </tbody></table>
@@ -1836,16 +1851,15 @@ spec:
 
 <table>
   <thead>
-  <th colspan=2><img src="images/idea.png"/> Descrizione dei
-componenti del file YAML</th>
+  <th colspan=2><img src="images/idea.png"/> Descrizione dei componenti del file YAML</th>
   </thead>
   <tbody>
   <tr>
   <td><code>annotations</code></td>
-  <td>Sostituisci i seguenti valori: <ul><li><code><em>&lt;connect_timeout&gt;</em></code>: immetti il numero di secondi da attendere per il collegamento all'applicazione di backend, ad esempio <strong>65s</strong>.
+  <td>Sostituisci i seguenti valori:<ul><li><code><em>&lt;connect_timeout&gt;</em></code>: immetti il numero di secondi da attendere per il collegamento all'applicazione di backend, ad esempio <strong>65s</strong>.
 
   </br></br>
-  <strong>Nota:</strong> un timeout di collegamento non può superare 75 secondi.</li><li><code><em>&lt;read_timeout&gt;</em></code>: immetti il numero di secondi da attendere per la lettura dall'applicazione di backend, ad esempio <strong>65s</strong>.</li></ul></td>
+  <strong>Nota:</strong> un timeout di collegamento non può superare 75 secondi.</li><li><code><em>&lt;read_timeout&gt;</em></code>: immetti il numero di secondi da attendere prima che venga letta l'applicazione di backend, ad esempio <strong>65s</strong>.</li></ul></td>
   </tr>
   </tbody></table>
 
@@ -1854,7 +1868,7 @@ componenti del file YAML</th>
 ##### **Configurazione della dimensione consentita massima del corpo della richiesta client**
 {: #client_max_body_size}
 
-Utilizza questa annotazione per modificare la dimensione del corpo che il client può inviare come parte di una richiesta.
+Modifica la dimensione del corpo che il client può inviare come parte di una richiesta.
 {:shortdesc}
 
 <dl>
@@ -1891,13 +1905,12 @@ spec:
 
 <table>
   <thead>
-  <th colspan=2><img src="images/idea.png"/> Descrizione dei
-componenti del file YAML</th>
+  <th colspan=2><img src="images/idea.png"/> Descrizione dei componenti del file YAML</th>
   </thead>
   <tbody>
   <tr>
   <td><code>annotations</code></td>
-  <td>Sostituisci il seguente valore: <ul><li><code><em>&lt;size&gt;</em></code>: immetti la dimensione massima del corpo della risposta client. Ad esempio, per impostarla su 200 megabyte, definisci <strong>200m</strong>.
+  <td>Sostituisci il seguente valore:<ul><li><code><em>&lt;size&gt;</em></code>: immetti la dimensione massima del corpo della risposta client. Ad esempio, per impostarla su 200 megabyte, definisci <strong>200m</strong>.
 
   </br></br>
   <strong>Nota:</strong> puoi impostare la dimensione su 0 per disabilitare il controllo della dimensione del corpo della richiesta client.</li></ul></td>
@@ -1905,25 +1918,122 @@ componenti del file YAML</th>
   </tbody></table>
 
   </dd></dl>
+  
+
+##### **Modifica delle porte predefinite per il traffico di rete HTTP e HTTPS**
+{: #custom_http_https_ports}
+
+Utilizza questa annotazione per modificare le porte predefinite per il traffico di rete HTTP (porta 80) e HTTPS (porta 443).
+{:shortdesc}
+
+<dl>
+<dt>Descrizione</dt>
+<dd>Per impostazione predefinita, il controller Ingress è configurato per essere in ascolto sul traffico di rete HTTP in entrata sulla porta 80 e per HTTPS sulla porta 443. Puoi modificare le porte predefinite per aggiungere sicurezza al tuo dominio del controller Ingress o per abilitare solo una porta HTTPS.
+</dd>
+
+
+<dt>YAML risorsa Ingress di esempio</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/custom-port: "protocol=&lt;protocol1&gt; port=&lt;port1&gt;;protocol=&lt;protocol2&gt;port=&lt;port2&gt;"
+spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mytlssecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
+
+<table>
+  <thead>
+  <th colspan=2><img src="images/idea.png"/> Descrizione dei componenti del file YAML</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>annotations</code></td>
+  <td>Sostituisci i seguenti valori:<ul><li><code><em>&lt;protocol&gt;</em></code>: immetti <strong>http</strong> o <strong>https</strong> per modificare la porta predefinita per il traffico di rete HTTP o HTTPS in entrata.</li>
+  <li><code><em>&lt;port&gt;</em></code>: immetti il numero di porta che desideri utilizzare per il traffico di rete HTTP o HTTPS in entrata.</li></ul>
+  <p><strong>Nota:</strong> quando viene specificata una porta personalizzata per HTTP o HTTPS, le porte predefinite non sono più valide. Ad esempio, per modificare la porta predefinita per HTTPS in 8443, ma utilizzare la porta predefinita per HTTP, devi impostare le porte personalizzate per entrambe: <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p>
+  </td>
+  </tr>
+  </tbody></table>
+
+  </dd>
+  <dt>Utilizzo</dt>
+  <dd><ol><li>Controlla le porte aperte del tuo controller Ingress.
+<pre class="pre">
+<code>kubectl get service -n kube-system</code></pre>
+L'output della CLI sarà simile al seguente: 
+<pre class="screen">
+<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
+public-ingress-ctl-svc   10.10.10.149   169.60.16.246   80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+<li>Apri la mappa di configurazione del controller Ingress.
+<pre class="pre">
+<code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
+<li>Aggiungi le porte HTTP e HTTPS non predefinite alla mappa di configurazione. Sostituisci &lt;port&gt; con la porta HTTP o HTTPS che desideri aprire.
+<pre class="codeblock">
+<code>apiVersion: v1
+kind: ConfigMap
+data:
+  public-ports: &lt;port1&gt;;&lt;port2&gt;
+metadata:
+  creationTimestamp: 2017-08-22T19:06:51Z
+  name: ibm-cloud-provider-ingress-cm
+  namespace: kube-system
+  resourceVersion: "1320"
+  selfLink: /api/v1/namespaces/kube-system/configmaps/ibm-cloud-provider-ingress-cm
+  uid: &lt;uid&gt;</code></pre></li>
+  <li>Verifica che il tuo controller Ingress sia stato riconfigurato con le porte non predefinite.
+<pre class="pre">
+<code>kubectl get service -n kube-system</code></pre>
+L'output della CLI sarà simile al seguente: 
+<pre class="screen">
+<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
+public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+<li>Configura il tuo Ingress in modo che utilizzi le porte non predefinite quando instrada il traffico di rete ai tuoi servizi. Utilizza il file YAML di esempio in questo riferimento. </li>
+<li>Aggiorna la configurazione del tuo controller Ingress.
+<pre class="pre">
+<code>kubectl apply -f &lt;yaml_file&gt;</code></pre>
+</li>
+<li>Apri il tuo browser web preferito per accedere alla tua applicazione. Esempio: <code>https://&lt;ibmdomain&gt;:&lt;port&gt;/&lt;service_path&gt;/</code></li></ol></dd></dl>
+
+
+
+
+
+
+
+
+<br />
 
 
 ## Gestione di sottoreti e indirizzi IP
 {: #cs_cluster_ip_subnet}
 
-Puoi utilizzare sottoreti e indirizzi IP pubblici portatili per esporre le applicazioni nel tuo cluster e
-renderle accessibili da Internet.
+Puoi utilizzare le sottoreti private e pubbliche e gli indirizzi IP per esporre le applicazioni nel tuo cluster e renderle accessibili da internet o da una rete privata.
 {:shortdesc}
 
 In {{site.data.keyword.containershort_notm}}, puoi aggiungere IP portatili
 stabili per i servizi Kubernetes aggiungendo delle sottoreti di rete al cluster. Quando crei un
 cluster standard, {{site.data.keyword.containershort_notm}} fornisce automaticamente
-una sottorete pubblica portatile e 5 indirizzi IP. Gli indirizzi IP pubblici portatili sono
-statici e non cambiano alla rimozione di un nodo di lavoro o di un cluster.
+una sottorete pubblica portatile e 5 indirizzi IP privati e pubblici portatili. Gli indirizzi IP portatili sono
+statici e non cambiano alla rimozione di un nodo di lavoro o di un cluster. 
 
-Uno degli indirizzi IP pubblici portatili è utilizzato per il [controller Ingress](#cs_apps_public_ingress) che puoi
-utilizzare per esporre più applicazioni nel tuo cluster utilizzando una rotta pubblica. I restanti 4 indirizzi IP pubblici
-portatili possono essere utilizzati per esporre singole applicazioni al pubblico mediante la [creazione di un servizio di
-bilanciamento del carico](#cs_apps_public_load_balancer).
+ Due degli indirizzi IP portatili, uno pubblico e uno privato, vengono utilizzati per il [controller Ingress](#cs_apps_public_ingress) che puoi
+utilizzare per esporre più applicazioni nel tuo cluster utilizzando una rotta pubblica. Possono essere utilizzati 4 indirizzi IP privati e 4 pubblici portatili per esporre le applicazioni
+[creando un servizio del programma di bilanciamento del carico](#cs_apps_public_load_balancer). 
 
 **Nota:** gli indirizzi IP pubblici portatili vengono addebitati mensilmente. Se scegli di rimuovere gli indirizzi IP pubblici portatili
 dopo il provisioning del tuo cluster, devi comunque pagare l'addebito mensile, anche se li hai utilizzati
@@ -1931,7 +2041,7 @@ solo per un breve periodo di tempo.
 
 
 
-1.  Crea uno script di configurazione del servizio Kubernetes denominato
+1.  Crea un file di configurazione del servizio Kubernetes denominato
 `myservice.yaml` e definisci un servizio di tipo `LoadBalancer` con
 un indirizzo IP del programma di bilanciamento del carico fittizio. Il seguente esempio utilizza l'indirizzo IP 1.1.1.1 come
 indirizzo IP del programma di bilanciamento del carico.
@@ -1982,11 +2092,11 @@ messaggio di errore e l'elenco di indirizzi IP pubblici disponibili per il clust
 
 </staging>
 
-### Liberazione degli indirizzi IP pubblici utilizzati
+### Liberazione degli indirizzi IP utilizzati 
 {: #freeup_ip}
 
-Puoi liberare un indirizzo IP pubblico portatile utilizzato eliminando il servizio di bilanciamento del carico
-che utilizza tale indirizzo IP.
+Puoi liberare un indirizzo IP portatile utilizzato eliminando il servizio di bilanciamento del carico
+che utilizza tale indirizzo IP. 
 
 [Prima di iniziare, imposta il contesto
 per il cluster che desideri utilizzare.](cs_cli_install.html#cs_cli_configure)
@@ -1998,20 +2108,21 @@ per il cluster che desideri utilizzare.](cs_cli_install.html#cs_cli_configure)
     ```
     {: pre}
 
-2.  Rimuovi il servizio di bilanciamento del carico che utilizza un indirizzo IP pubblico.
+2.  Rimuovi il servizio di bilanciamento del carico che utilizza un indirizzo IP pubblico o privato. 
 
     ```
     kubectl delete service <myservice>
     ```
     {: pre}
 
+<br />
+
 
 ## Distribuzione di applicazioni con la GUI
 {: #cs_apps_ui}
 
-Quando distribuisci un'applicazione al tuo cluster utilizzando il dashboard Kubernetes, viene automaticamente creata una distribuzione
-che crea, aggiorna e gestisce i pod nel tuo cluster.
-{:shortdesc}
+Quando distribuisci un'applicazione al tuo cluster utilizzando il dashboard Kubernetes, viene automaticamente creata una risorsa di distribuzione
+che crea, aggiorna e gestisce i pod nel tuo cluster. {:shortdesc}
 
 Prima di iniziare:
 
@@ -2022,9 +2133,12 @@ Per distribuire la tua applicazione:
 
 1.  [Apri il dashboard Kubernetes](#cs_cli_dashboard).
 2.  Dal dashboard Kubernetes, fai clic su **+ Create**.
-3.  Seleziona **Specify app details below** per immettere i dettagli dell'applicazione nella GUI o **Upload a YAML or JSON file** per caricare il tuo [file di configurazione dell'applicazione ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/). Utilizza [questo file YAML di esempio ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/IBM-{{site.data.keyword.Bluemix_notm}}/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml) per distribuire un contenitore dall'immagine **ibmliberty** nella regione Stati Uniti Sud.
+3.  Seleziona **Specify app details below** per immettere i dettagli dell'applicazione nella GUI o **Upload a YAML or JSON file** per caricare il tuo [file di configurazione dell'applicazione ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/). Utilizza [questo file YAML di esempio ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/IBM-Bluemix/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml) per distribuire un contenitore dall'immagine **ibmliberty** nella regione Stati Uniti Sud.
 4.  Nel dashboard Kubernetes, fai clic su **Deployments** per verificare che la distribuzione sia stata creata.
-5.  Se rendi la tua applicazione disponibile pubblicamente utilizzando un servizio della porta del nodo, un servizio del programma di bilanciamento del carico o Ingress [verifica di poter accedere all'applicazione](#cs_apps_public).
+5.  Se rendi la tua applicazione disponibile pubblicamente utilizzando un servizio della porta del nodo, un servizio del programma di bilanciamento del carico o Ingress, verifica di poter accedere all'applicazione.
+
+<br />
+
 
 ## Distribuzione di applicazioni con la CLI
 {: #cs_apps_cli}
@@ -2039,8 +2153,8 @@ Prima di iniziare:
 
 Per distribuire la tua applicazione:
 
-1.  Crea uno script di configurazione basato sulle [Procedure consigliate Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/overview/). Generalmente, uno script di configurazione contiene i dettagli di configurazione per ognuna delle risorse
-che crei in Kubernetes. Il tuo script potrebbe includere una o più delle seguenti sezioni: 
+1.  Crea un file di configurazione basato sulle [Procedure consigliate Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/overview/). Generalmente, un file di configurazione contiene i dettagli di configurazione per ognuna delle risorse
+che crei in Kubernetes. Il tuo script potrebbe includere una o più delle seguenti sezioni:
 
     -   [Distribuire ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/): definisce la creazione di pod e serie di repliche. Un pod include una singola
 applicazione inserita nel contenitore e le serie di repliche controllano più istanze dei pod.
@@ -2049,15 +2163,96 @@ applicazione inserita nel contenitore e le serie di repliche controllano più is
 
     -   [Ingress ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/services-networking/ingress/): specifica un tipo di programma di bilanciamento del carico che fornisce le rotte per accedere alla tua applicazione pubblicamente.
 
-2.  Esegui lo script di configurazione nel contesto di un cluster.
+2.  Esegui il file di configurazione nel contesto di un cluster.
 
     ```
     kubectl apply -f deployment_script_location
     ```
     {: pre}
 
-3.  Se rendi la tua applicazione disponibile pubblicamente utilizzando un servizio della porta del nodo, un servizio del programma di bilanciamento del carico o Ingress [verifica di poter accedere all'applicazione](#cs_apps_public).
+3.  Se rendi la tua applicazione disponibile pubblicamente utilizzando un servizio della porta del nodo, un servizio del programma di bilanciamento del carico o Ingress, verifica di poter accedere all'applicazione.
 
+<br />
+
+
+## Ridimensionamento delle applicazioni 
+{: #cs_apps_scaling}
+
+<!--Horizontal auto-scaling is not working at the moment due to a port issue with heapster. The dev team is working on a fix. We pulled out this content from the public docs. It is only visible in staging right now.-->
+
+Distribuisci le applicazioni cloud che rispondono alle variazioni della domanda per le tue applicazioni e
+che utilizzano risorse solo quando necessario. Il ridimensionamento automatico aumenta o riduce il numero di istanze
+delle tue applicazione in base alla CPU. {:shortdesc}
+
+Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) al tuo cluster.
+
+**Nota:** cerchi informazioni sul ridimensionamento delle applicazioni Cloud Foundry? Controlla [IBM Auto-Scaling per {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html).
+
+Con Kubernetes, puoi abilitare [Horizontal Pod Autoscaling ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) per ridimensionare le tue applicazioni in base alla CPU.
+
+1.  Distribuisci la tua applicazione al cluster dalla CLI. Quando distribuisci la tua applicazione, devi richiedere la CPU.
+
+    ```
+    kubectl run <name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
+    ```
+    {: pre}
+
+    <table>
+    <thead>
+    <th colspan=2><img src="images/idea.png"/> Descrizione dei componenti di questo comando</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>--image</code></td>
+    <td>L'applicazione che desideri distribuire.</td>
+    </tr>
+    <tr>
+    <td><code>--request=cpu</code></td>
+    <td>La CPU richiesta per il contenitore, specificata in milli-core. Ad esempio,
+<code>--requests=200m</code>.</td>
+    </tr>
+    <tr>
+    <td><code>--expose</code></td>
+    <td>Se true, crea un servizio esterno.</td>
+    </tr>
+    <tr>
+    <td><code>--port</code></td>
+    <td>La porta dove la tua applicazione è disponibile esternamente.</td>
+    </tr></tbody></table>
+
+    **Nota:** per distribuzioni più complesse, potresti dover creare uno [file di configurazione](#cs_apps_cli).
+2.  Crea un Horizontal Pod Autoscaler e definisci la tua politica. Per ulteriori informazioni sull'utilizzo del comando `kubetcl autoscale`, consulta la
+[documentazione Kubernetes
+![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/user-guide/kubectl/v1.5/#autoscale).
+
+    ```
+    kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
+    ```
+    {: pre}
+
+    <table>
+    <thead>
+    <th colspan=2><img src="images/idea.png"/> Understanding this command&apos;s components</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>--cpu-percent</code></td>
+    <td>L'utilizzo medio della CPU mantenuto da Horizontal Pod Autoscaler, che viene specificato
+come percentuale.</td>
+    </tr>
+    <tr>
+    <td><code>--min</code></td>
+    <td>Il numero minimo di pod distribuiti utilizzati per mantenere la percentuale di utilizzo della CPU
+specificata.</td>
+    </tr>
+    <tr>
+    <td><code>--max</code></td>
+    <td>Il numero massimo di pod distribuiti utilizzati per mantenere la percentuale di utilizzo della CPU
+specificata.</td>
+    </tr>
+    </tbody></table>
+
+<br />
 
 
 ## Gestione delle distribuzioni graduali
@@ -2100,7 +2295,7 @@ Prima di iniziare, crea una [distribuzione](#cs_apps_cli).
         ```
         {: pre}
 
-    Quando esegui i comandi, la modifica viene immediatamente applicata e registrata nella cronologia di distribuzione. 
+    Quando esegui i comandi, la modifica viene immediatamente applicata e registrata nella cronologia di distribuzione.
 
 2.  Controlla lo stato della tua distribuzione.
 
@@ -2130,6 +2325,9 @@ Prima di iniziare, crea una [distribuzione](#cs_apps_cli).
         kubectl rollout undo deployment/<depoyment_name> --to-revision=<number>
         ```
         {: pre}
+
+<br />
+
 
 ## Aggiunta di servizi {{site.data.keyword.Bluemix_notm}}
 {: #cs_apps_service}
@@ -2207,8 +2405,7 @@ segreto.
 
     <table>
     <thead>
-    <th colspan=2><img src="images/idea.png"/> Descrizione dei
-componenti del file YAML</th>
+    <th colspan=2><img src="images/idea.png"/> Descrizione dei componenti del file YAML</th>
     </thead>
     <tbody>
     <tr>
@@ -2280,35 +2477,47 @@ Puoi ora accedere ai dettagli e alle credenziali del servizio {{site.data.keywor
 configurata per trovare il file del segreto del servizio nella directory di montaggio, analizzare il contenuto JSON e
 determinare i dettagli del servizio.
 
+<br />
+
+
 ## Creazione di archiviazione persistente
 {: #cs_apps_volume_claim}
 
-Hai creato un'attestazione di un volume persistente per eseguire il provisioning dell'archivio file NFS per il tuo cluster. Hai montato questa attestazione in un pod per assicurarti che i dati siano disponibili anche se il pod ha un arresto anomalo o viene spento.
+Crea un'attestazione di un volume persistente (pvc) per eseguire il provisioning dell'archivio file NFS per il tuo cluster. Poi, monta questa attestazione in un pod per assicurarti che i dati siano disponibili anche se il pod ha un arresto anomalo o viene spento.
 {:shortdesc}
 
 L'archivio file NFS che ospita il volume persistente
-viene inserito in cluster da IBM per fornire elevata disponibilità per i tuoi dati. 
+viene inserito in cluster da IBM per fornire elevata disponibilità per i tuoi dati.
 
-1.  Rivedi le classi di archiviazione disponibili. {{site.data.keyword.containerlong}} fornisce tre
+1.  Rivedi le classi di archiviazione disponibili. {{site.data.keyword.containerlong}} fornisce otto
 classi di archiviazione predefinite in modo che l'amministratore del cluster non debba creare tutte le classi
-archiviazione.
+archiviazione. La classe di archiviazione `ibmc-file-bronze` è uguale a `default`.
 
     ```
     kubectl get storageclasses
     ```
     {: pre}
-
+    
     ```
     $ kubectl get storageclasses
     NAME                         TYPE
-    ibmc-file-bronze (default)   ibm.io/ibmc-file
-    ibmc-file-gold               ibm.io/ibmc-file
-    ibmc-file-silver             ibm.io/ibmc-file
+    default                      ibm.io/ibmc-file   
+    ibmc-file-bronze (default)   ibm.io/ibmc-file   
+    ibmc-file-custom             ibm.io/ibmc-file
+    ibmc-file-gold               ibm.io/ibmc-file   
+    ibmc-file-retain-bronze      ibm.io/ibmc-file   
+    ibmc-file-retain-custom      ibm.io/ibmc-file   
+    ibmc-file-retain-gold        ibm.io/ibmc-file   
+    ibmc-file-retain-silver      ibm.io/ibmc-file   
+    ibmc-file-silver             ibm.io/ibmc-file 
     ```
     {: screen}
 
-2.  Rivedi gli IOPS di una classe di archiviazione o le dimensioni disponibili.
+2.  Decidi se vuoi salvare i tuoi dati e la condivisione del file NFS dopo che hai eliminato il pvc. Se vuoi conservare i tuoi dati, scegli una classe di archiviazione `retain`. Se vuoi che i tuoi dati e la tua condivisione file vengano eliminati insieme al pvc, scegli una classe di archiviazione senza `retain`.
 
+3.  Rivedi gli IOPS di una classe di archiviazione e le dimensioni di archiviazione disponibili. 
+    - Le classi di archiviazione bronze, silver e gold utilizzano l'archiviazione di durata e dispongo di un solo IOPS definito per GB per ogni classe. Il totale di IOPS dipende dalla dimensione dell'archiviazione. Ad esempio, 1000Gi pvc a 4 IOPS per GB ha un totale di 4000 IOPS.
+ 
     ```
     kubectl describe storageclasses ibmc-file-silver
     ```
@@ -2321,9 +2530,27 @@ e le dimensioni disponibili in gigabyte.
     Parametri:	iopsPerGB=4,sizeRange=20Gi,40Gi,80Gi,100Gi,250Gi,500Gi,1000Gi,2000Gi,4000Gi,8000Gi,12000Gi
     ```
     {: screen}
+    
+    - Le classi di archiviazione personalizzate utilizzano
+[Performance storage ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://knowledgelayer.softlayer.com/topic/performance-storage) e hanno diverse opzioni per dimensione e IOPS totali.
 
-3.  Nel tuo editor di testo preferito e crea uno script di configurazione per definire la tua attestazione del volume persistente
+    ```
+    kubectl describe storageclasses ibmc-file-retain-custom 
+    ```
+    {: pre}
+
+    Il campo **parametri** fornisce gli IOPS associati alla classe di archiviazione
+e le dimensioni disponibili in gigabyte. Ad esempio, un pvc 40Gi può selezionare IOPS che è un multiplo di 100 nell'intervallo 100 - 2000 IOPS.
+
+    ```
+    Parameters:	Note=IOPS value must be a multiple of 100,reclaimPolicy=Retain,sizeIOPSRange=20Gi:[100-1000],40Gi:[100-2000],80Gi:[100-4000],100Gi:[100-6000],1000Gi[100-6000],2000Gi:[200-6000],4000Gi:[300-6000],8000Gi:[500-6000],12000Gi:[1000-6000]
+    ```
+    {: screen}
+
+4.  Crea un file di configurazione per definire la tua attestazione del volume persistente
 e salva la configurazione come un file `.yaml`. 
+    
+    Esempio di classi bronze, silver, gold:
 
     ```
     apiVersion: v1
@@ -2340,11 +2567,29 @@ e salva la configurazione come un file `.yaml`.
           storage: 20Gi
     ```
     {: codeblock}
+    
+    Esempio di classi personalizzate:
+
+    ```
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: <pvc_name>
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "ibmc-file-retain-custom"
+    spec:
+      accessModes:
+        - ReadWriteMany
+      resources:
+        requests:
+          storage: 40Gi
+          iops: "500"
+    ```
+    {: codeblock}
 
     <table>
     <thead>
-    <th colspan=2><img src="images/idea.png"/> Descrizione dei
-componenti del file YAML</th>
+    <th colspan=2><img src="images/idea.png"/> Descrizione dei componenti del file YAML</th>
     </thead>
     <tbody>
     <tr>
@@ -2353,7 +2598,12 @@ componenti del file YAML</th>
     </tr>
     <tr>
     <td><code>metadata/annotations</code></td>
-    <td>Specifica la classe di archiviazione che definisce gli IOPS per GB della condivisione del file host per il volume persistente.<ul><li>ibmc-file-bronze: 2 IOPS per GB.</li><li>ibmc-file-silver: 4 IOPS per GB.</li><li>ibmc-file-gold: 10 IOPS per GB.</li>
+    <td>Specifica la classe di archiviazione del volume persistente:
+      <ul>
+      <li>ibmc-file-bronze / ibmc-file-retain-bronze : 2 IOPS per GB.</li>
+      <li>ibmc-file-silver / ibmc-file-retain-silver: 4 IOPS per GB.</li>
+      <li>ibmc-file-gold / ibmc-file-retain-gold: 10 IOPS per GB.</li>
+      <li>ibmc-file-custom / ibmc-file-retain-custom: più valori di IOPS disponibili.
 
     </li> Se non specifichi alcuna classe di archiviazione, il volume persistente viene creato con la classe di archiviazione bronze. </td>
     </tr>
@@ -2362,16 +2612,21 @@ componenti del file YAML</th>
     <code>resources/requests/storage</code></td>
     <td>Se scegli una dimensione diversa da quella elencata, la dimensione viene arrotondata per eccesso. Se selezioni una dimensione superiore a quella più grande, la dimensione viene arrotondata per difetto.</td>
     </tr>
+    <tr>
+    <td><code>spec/accessModes</code>
+    <code>resources/requests/iops</code></td>
+    <td>Questa opzione è solo per ibmc-file-custom / ibmc-file-retain-custom. Specifica il totale di IOPS per l'archiviazione. Esegui `kubectl describe storageclasses ibmc-file-custom` per visualizzare tutte le opzioni. Se scegli un IOPS diverso da quello elencato, viene arrotondato per eccesso. </td>
+    </tr>
     </tbody></table>
 
-4.  Crea l'attestazione del volume persistente.
+5.  Crea l'attestazione del volume persistente.
 
     ```
     kubectl apply -f <local_file_path>
     ```
     {: pre}
 
-5.  Verifica che la tua attestazione del volume persistente sia stata creata e collegata al volume persistente. Questo processo può richiedere qualche minuto.
+6.  Verifica che la tua attestazione del volume persistente sia stata creata e collegata al volume persistente. Questo processo può richiedere qualche minuto.
 
     ```
     kubectl describe pvc <pvc_name>
@@ -2399,7 +2654,7 @@ componenti del file YAML</th>
     ```
     {: screen}
 
-6.  {: #cs_apps_volume_mount}Per montare l'attestazione del volume persistente al tuo pod, crea uno script di configurazione. Salva la configurazione come un file `.yaml` file.
+6.  {: #cs_apps_volume_mount}Per montare l'attestazione del volume persistente al tuo pod, crea un file di configurazione. Salva la configurazione come un file `.yaml` file.
 
     ```
     apiVersion: v1
@@ -2422,8 +2677,7 @@ componenti del file YAML</th>
 
     <table>
     <thead>
-    <th colspan=2><img src="images/idea.png"/> Descrizione dei
-componenti del file YAML</th>
+    <th colspan=2><img src="images/idea.png"/> Descrizione dei componenti del file YAML</th>
     </thead>
     <tbody>
     <tr>
@@ -2451,14 +2705,14 @@ e abilita l'utente a leggere e scrivere nel volume persistente.</td>
     </tr>
     </tbody></table>
 
-7.  Crea il pod e monta l'attestazione del volume persistente nel tuo pod.
+8.  Crea il pod e monta l'attestazione del volume persistente nel tuo pod.
 
     ```
     kubectl apply -f <local_yaml_path>
     ```
     {: pre}
 
-8.  Verifica che il volume sia stato correttamente montato nel tuo pod.
+9.  Verifica che il volume sia stato correttamente montato nel tuo pod.
 
     ```
     kubectl describe pod <pod_name>
@@ -2481,6 +2735,9 @@ e abilita l'utente a leggere e scrivere nel volume persistente.</td>
     ```
     {: screen}
 
+<br />
+
+
 ## Aggiunta di accesso utente non root alla archiviazione persistente
 {: #cs_apps_volumes_nonroot}
 
@@ -2492,7 +2749,7 @@ l'autorizzazione corretta.
 Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) al tuo cluster.
 
 Se stai progettando un'applicazione con un utente non root che richiede l'autorizzazione di scrittura nel volume,
-devi aggiungere i seguenti processi al tuo Dockerfile e al tuo script di punto di ingresso: 
+devi aggiungere i seguenti processi al tuo Dockerfile e al tuo script di punto di ingresso:
 
 -   Creare un utente non root.
 -   Aggiungere temporaneamente l'utente al gruppo root.
@@ -2611,7 +2868,7 @@ privato. Esegui `bx cr namespace-get` se devi trovare il tuo spazio dei nomi.
     ```
     {: pre}
 
-8.  Crea uno script di configurazione per montare il volume ed esegui il pod dall'immagine nonroot. Il percorso di montaggio del volume `/mnt/myvol` corrisponde al percorso di montaggio specificato nel
+8.  Crea un file di configurazione per montare il volume ed esegui il pod dall'immagine nonroot. Il percorso di montaggio del volume `/mnt/myvol` corrisponde al percorso di montaggio specificato nel
 Dockerfile. Salva la configurazione come un file `.yaml` file.
 
     ```

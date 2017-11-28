@@ -13,7 +13,8 @@ copyright:
 *Ultimo aggiornamento: 11 novembre 2015*
 
 Puoi creare contenitori dalle immagini IBM. Le immagini possono essere distribuite come singoli contenitori
-o come gruppi di contenitori scalabili. {:shortdesc}
+o come gruppi di contenitori scalabili.
+{:shortdesc}
 
 <ul class="runtimeIconList">
 <li>

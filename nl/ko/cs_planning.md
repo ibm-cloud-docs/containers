@@ -508,7 +508,7 @@ Docker 이미지는 작성하는 모든 컨테이너의 기초가 됩니다. 이
 <td>IBM Blockchain에 공개적으로 사용 가능한 배치 환경을 {{site.data.keyword.containerlong_notm}}의 Kubernetes 클러스터에 배치하십시오. 트랜잭션 히스토리를 기록하기 위해 불변 원장을 공유하는 앱을 배치하려면 이 환경을 사용하여 고유 블록체인 네트워크를 개발하여 사용자 정의하십시오. 자세한 정보는 <a href="https://ibm-blockchain.github.io" target="_blank"> 클라우드 샌드박스 IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="외부 링크 문서"></a>을 참조하십시오. </td>
 </tr>
 <tr>
-<td>지속적 딜리버리</td>
+<td>Continuous Delivery</td>
 <td>도구 체인을 사용하여 Kubernetes 클러스터에 대한 컨테이너 배치 및 앱 빌드를 자동화합니다. 설정 정보는 <a href="https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines/" target="_blank">DevOps 파이프라인을 사용하여 {{site.data.keyword.containerlong_notm}}에 Kubernetes 포드 배치 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a> 블로그를 참조하십시오. </td>
 </tr>
 <tr>

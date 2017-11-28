@@ -12,7 +12,8 @@ copyright:
 # Imágenes de contenedor
 *Última actualización: 11 de noviembre de 2015*
 
-Puede crear contenedores a partir de imágenes de IBM. Las imágenes se pueden desplegar como contenedores individuales o como grupos de contenedores escalables.{:shortdesc}
+Puede crear contenedores a partir de imágenes de IBM. Las imágenes se pueden desplegar como contenedores individuales o como grupos de contenedores escalables.
+{:shortdesc}
 
 <ul class="runtimeIconList">
 <li>

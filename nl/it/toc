@@ -3,21 +3,28 @@
 
 {: .toc subcollection="containers" audience="compute" href="/docs/containers/index.html"}
 Servizio IBM Bluemix Container
-    
+
     {: .navgroup id="learn"}
     container_index.md
     cs_ov.md
     cs_planning.md
-    cs_tutorials.md
+
+    {: .topicgroup}
+    Esercitazioni
+        cs_tutorials.md
+        cs_tutorials_apps.md
+
     cs_security.md
     {: .navgroup-end}
 
     {: .navgroup id="reference"}
     cs_cli_reference.md
+    cs_versions.md
+    cs_regions.md
     cs_rellinks.md
     {: .navgroup-end}
 
-    {: .navgroup id="howto"}    
+    {: .navgroup id="howto"}
     cs_cli_install.md
     cs_cluster.md
     cs_apps.md
@@ -27,7 +34,7 @@ Servizio IBM Bluemix Container
         [Pianificazione dei contenitori singoli e scalabili](container_planning.html)
         [Sicurezza dei contenitori singoli e scalabili](container_security.html)
         [Configurazione della CLI per i contenitori singoli e scalabili](container_cli_cfic_install.html)
-        [Immagini IBM](container_images.html)
+        [Immagini IBM](../services/RegistryImages/index.html)
         [Esecuzione di attività a breve termine come contenitori](container_single_ui.html)
         [Esecuzione di gruppi ad alta disponibilità](container_ha.html)
         [Archiviazione dei dati persistenti per i contenitori singoli e scalabili](container_volumes_ov.html)
@@ -35,8 +42,9 @@ Servizio IBM Bluemix Container
         [Riferimenti CLI per i contenitori singoli e scalabili](container_cli_reference_cfic.html)
         [Risoluzione dei problemi per i contenitori singoli e scalabili](container_troubleshoot.html)
     {: .navgroup-end}
-    
+
     {: .navgroup id="help"}
     cs_troubleshoot.md
+    cs_popular_topics.md
     {: .navgroup-end}
 

@@ -29,7 +29,7 @@ lastupdated: "2017-10-17"
 <tbody>
 <tr>
 <td>[시작하기](container_index.html)</td>
-<td>IBM 클라우드에서 Kubernetes 클러스터 및 Docker 컨테이너 내부의 고가용성 앱을 관리합니다. </td>
+<td>IBM Cloud에서 Kubernetes 클러스터 및 Docker 컨테이너 내부의 고가용성 앱을 관리합니다. </td>
 </tr>
 <tr>
 <td>[컨테이너 및 클러스터에 대한 정보](cs_ov.html)</td>

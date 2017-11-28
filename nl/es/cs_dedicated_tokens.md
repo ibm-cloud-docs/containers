@@ -16,13 +16,13 @@ lastupdated: "2017-08-14"
 {:download: .download}
 
 
-# Creación de una señal de {{site.data.keyword.registryshort_notm}} para un registro de imágenes de {{site.data.keyword.Bluemix_notm}} dedicado
+# Creación de una señal de {{site.data.keyword.registryshort_notm}} para un registro de imágenes de {{site.data.keyword.Bluemix_notm}} Dedicado
 {: #cs_dedicated_tokens}
 
-Cree una señal que no caducará para utilizar un registro de imágenes con clústeres que se pueden utilizar para grupos escalables y únicos.
+Cree una señal que no caduque para utilizar un registro de imágenes que pueda utilizar para grupos escalables con clústeres.
 {:shortdesc}
 
-1.  Inicie una sesión en el entorno de {{site.data.keyword.Bluemix_short}} dedicado. 
+1.  Inicie una sesión en el entorno de {{site.data.keyword.Bluemix_short}} Dedicado.
 
     ```
     bx login -a api.<dedicated_domain>
@@ -43,7 +43,7 @@ Cree una señal que no caducará para utilizar un registro de imágenes con clú
     ```
     {: pre}
 
-4.  Solicite una señal de registro permanente para la sesión actual. Sustituya su <dedicated_domain> con el dominio de su entorno {{site.data.keyword.Bluemix_notm}} dedicado. Esta señal otorga acceso a las imágenes en el espacio de nombres actual.
+4.  Solicite una señal de registro permanente para la sesión actual. Sustituya su <dedicated_domain> con el dominio de su entorno {{site.data.keyword.Bluemix_notm}} Dedicado. Esta señal otorga acceso a las imágenes en el espacio de nombres actual.
 
     ```
     curl -XPOST -H "Authorization: ${OAUTH_TOKEN}" -H "Organization: ${ORG_GUID}" https://registry.<dedicated_domain>/api/v1/tokens?permanent=true
@@ -66,7 +66,7 @@ Cree una señal que no caducará para utilizar un registro de imágenes con clú
     ```
     {: pre}
 
-    Puede utilizar este secreto para trabajar con IBM {{site.data.keyword.Bluemix_notm}} Container Service. 
+    Puede utilizar este secreto para trabajar con IBM {{site.data.keyword.Bluemix_notm}} Container Service.
 
 6.  Cree el secreto de Kubernetes para almacenar la información de la señal.
 
@@ -91,8 +91,7 @@ Cree una señal que no caducará para utilizar un registro de imágenes con clú
     </tr>
     <tr>
     <td><code>--docker-server &lt;registry_url&gt;</code></td>
-    <td>Obligatorio. URL del registro de imágenes en donde está configurado su espacio de nombres:
-registry.&lt;dedicated_domain&gt;</li></ul></td> 
+    <td>Obligatorio. URL del registro de imágenes en donde está configurado su espacio de nombres: registry.&lt;dedicated_domain&gt;</li></ul></td> 
     </tr>
     <tr>
     <td><code>--docker-username &lt;docker_username&gt;</code></td>
@@ -110,7 +109,7 @@ registry.&lt;dedicated_domain&gt;</li></ul></td>
 
 7.  Cree un pod que haga referencia a imagePullSecret.
 
-    1.  Abra el editor que prefiera y cree un script de configuración de pod llamado mypod.yaml. 
+    1.  Abra el editor que prefiera y cree un script de configuración de pod llamado mypod.yaml.
     2.  Defina el pod y el imagePullSecret que desea utilizar para acceder al registro. Para utilizar una imagen privada de un espacio de nombres:
 
         ```
