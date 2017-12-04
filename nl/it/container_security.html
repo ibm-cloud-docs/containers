@@ -1,0 +1,275 @@
+<!DOCTYPE html><html lang="it-it">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="dcterms.date" content="2017-11-10">
+<meta name="dcterms.rights" content="© Copyright IBM Corp. 2014, 2017">
+
+<meta name="description" content="IBM Bluemix Container Service fornisce una piattaforma cloud attendibile e sicura che ottimizza le funzionalità di sicurezza Linux e Docker. Quando crei ed esegui i contenitori con IBM Bluemix Container Service, la tua applicazione si avvale dell'isolamento della rete e del contenitore, dell'accesso limitato alle risorse e ai dati host e delle distribuzioni del contenitore.">
+<meta name="keywords" content="sicurezza, IBM Containers, contenitori, VPN (Virtual Private Network), VPN, data center, in loco, servizio">
+<meta name="geo.country" content="ZZ">
+<script>
+    digitalData = {
+      page: {
+        pageInfo: {
+  language: "it-it",
+
+  version: "v18",
+  ibm: {
+  country: "ZZ",
+  type: "CT701"
+  
+         }
+       }
+     }
+   };
+  </script><link rel="stylesheet" type="text/css" href="./ibmdita.css">
+<title>Sicurezza per contenitori singoli o scalabili</title>
+</head>
+<body><main role="main"><div><article class="nested0" role="article" aria-labelledby="d74541e6" id="container_security"><h1 class="topictitle1" id="d74541e6">Sicurezza per <span class="ph">contenitori singoli o scalabili</span></h1>
+<div class="abstract"><div class="shortdesc"><span class="keyword">IBM®
+Bluemix Container Service</span> fornisce una piattaforma cloud attendibile e sicura
+che ottimizza le funzionalità di sicurezza Linux e Docker. Quando crei ed esegui i contenitori con <span class="keyword">IBM
+Bluemix Container Service</span>,
+la tua applicazione si avvale dell'isolamento della rete e del contenitore, dell'accesso limitato alle risorse e ai dati host e
+delle distribuzioni del contenitore. </div>
+
+
+<div class="p"><div class="note attention"><span class="attentiontitle">Attenzione:</span> <span class="ph">Le versioni di prova gratuita per <span class="ph">contenitori singoli o scalabili</span>
+non sono disponibili. <a href="cs_ov.html" title="IBM Bluemix Container Service combina Docker e Kubernetes per offrire strumenti potenti, un'esperienza utente intuitiva e la sicurezza e l'isolamento integrati per automatizzare la distribuzione, l'operatività, il ridimensionamento e il monitoraggio delle applicazioni inserite in un contenitore in un cluster di host di calcolo indipendenti utilizzando le API Kubernetes.">Informazioni sulla gestione e migrazione dei
+cluster a Kubernetes in <span class="keyword">IBM
+Bluemix Container Service</span> su <span class="keyword">Bluemix</span> pubblico.</a></span></div>
+</div>
+
+
+<div class="p">In questa pagina: <div class="lines">&nbsp;&nbsp;&nbsp;&nbsp; • <a href="container_security.html#builtin">Impostazioni di sicurezza integrate</a> <br>
+&nbsp;&nbsp;&nbsp;&nbsp; • <a href="container_security.html#container_security_host" title="IBM Bluemix Container Service ottimizza le funzionalità di sicurezza Docker e kernel Linux per assicurare l'isolamento del contenitore e l'accesso limitato alle risorse host di calcolo..">Impostazioni della sicurezza dell'host di calcolo</a> <br>
+&nbsp;&nbsp;&nbsp;&nbsp; • <a href="container_security.html#container_security_network" title="Rivedi l'elenco delle funzioni IBM Bluemix Container Service integrate che garantisce la comunicazione sicura tra i contenitori nella stessa rete privata, tra i contenitori in spazi Bluemix diversi e tra il tuo spazio Bluemix e una rete remota.">Impostazioni della sicurezza della rete del contenitore privata</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• <a href="container_security.html#container_cli_login_exec" title="Se devi accedere al tuo contenitore in esecuzione, puoi utilizzare bx ic exec.">Registrazione in un contenitore utilizzando <samp class="ph codeph">exec</samp></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• <a href="container_security.html#container_vpn" title="Collegare in modo sicuro i singoli contenitori e gruppi di contenitori in una rete di contenitori privata in Bluemix a un data center aziendale utilizzando il servizio IBM® VPN (Virtual Private Network). IBM VPN fornisce un canale di comunicazione end-to-end sicuro in internet che si basa sulla suite del protocollo IPsec (industry-standard Internet Protocol Security). Il protocollo IPsec offre un'autenticazione peer al livello della rete, l'integrità dei dati e la confidenzialità dei dati con la crittografia dei pacchetti scambiati tra gli endpoint VPN. Per configurare una connessione sicura tra i contenitori in Bluemix e il data center aziendale, devi avere un gateway IPsec VPN o un server SoftLayer installato nel tuo data center in loco. Con il servizio IBM VPN, puoi configurare un gateway VPN per spazio e definire fino a 16 connessioni a destinazioni differenti.">Connessione dei contenitori in <span class="keyword">Bluemix</span> a un data center aziendale tramite VPN</a></div>
+</div>
+</div>
+<aside role="complementary" aria-labelledby="d74541e6">
+<ul class="ullinks">
+<li class="ulchildlink"><span class="ulchildlinktext"><a href="Chunk450586983.dita">Sicurezza immagine</a></span><br>
+</li>
+</ul>
+</aside><article class="topic concept nested1" role="article" aria-labelledby="d74541e188" id="builtin"><h2 class="topictitle2" id="d74541e188">Impostazioni di sicurezza integrate</h2>
+<div class="body conbody"><p><a href="../api/content/containers/images/container_security.png" rel="external" target="_blank" title="(Aprire in una nuova scheda o finestra)">Sicurezza <img id="builtin__image_tdd_lyz_nz" src="images/container_security.png" width="500" alt="IBM Containers"></a></p>
+<div class="tablenoborder"><table summary="" id="builtin__table_y15_trz_zw" class="defaultstyle"><caption><span class="tablecap">Tabella 1. Impostazioni di sicurezza integrata <span class="keyword">IBM
+Bluemix Container Service</span></span></caption><thead><tr><th id="d74541e210" class="thleft">Livello</th>
+<th id="d74541e212" class="thleft">Descrizione</th>
+</tr>
+</thead>
+<tbody><tr><td headers="d74541e210 ">Host di calcolo</td>
+<td headers="d74541e212 ">Tutti i contenitori vengono eseguiti come processi indipendenti e isolati
+negli host di calcolo e dispongono di accesso limitato alle risorse. Senza ulteriori configurazioni, le impostazioni di sicurezza integrata
+aiutano a proteggere il kernel Linux e il daemon Docker da attacchi DoS
+(denial-of-service). <p>Per ulteriori informazioni, consulta <a href="container_security.html#container_security_host" title="IBM Bluemix Container Service ottimizza le funzionalità di sicurezza Docker e kernel Linux per assicurare l'isolamento del contenitore e l'accesso limitato alle risorse host di calcolo..">Sicurezza host di calcolo</a>.</p>
+</td>
+</tr>
+<tr><td headers="d74541e210 ">Rete del contenitore privata</td>
+<td headers="d74541e212 ">Ogni contenitore viene eseguito in una rete privata sicura e isolata in cui il traffico di rete in entrata e in uscita
+viene monitorato per individuare e correggere dell'attività dannosa. Puoi configurare la tua applicazione
+senza accesso alla rete pubblica o esponendo selettivamente i servizi al pubblico. <p>Per collegare i contenitori in modo sicuro
+a un data center aziendale o ad altri spazi <span class="keyword">Bluemix</span>,
+<a href="container_security.html#container_security_network" title="Rivedi l'elenco delle funzioni IBM Bluemix Container Service integrate che garantisce la comunicazione sicura tra i contenitori nella stessa rete privata, tra i contenitori in spazi Bluemix diversi e tra il tuo spazio Bluemix e una rete remota.">puoi configurare una VPN (Virtual Private
+Network) utilizzando il servizio IBM VPN</a>.</p>
+</td>
+</tr>
+<tr><td headers="d74541e210 ">Immagine Docker</td>
+<td headers="d74541e212 ">A ogni organizzazione viene
+assegnato un registro delle immagini privato Docker v2 in cui le immagini vengono archiviate e condivise da tutti gli utenti
+nell'organizzazione. <p>Quando accedi a <span class="keyword">IBM
+Bluemix Container Service</span>
+per la prima volta, ad ogni organizzazione viene richiesto di configurare uno spazio dei nomi. Lo spazio dei nomi è utilizzato per creare un URL univoco che identifica il
+registro privato dell'organizzazione nel
+seguente formato: <span class="ph filepath">registry.<span class="keyword" data-hd-keyref="DomainName">DomainName</span>/<var class="keyword varname">namespace</var></span>.</p>
+<p>Per
+aggiungere immagini al tuo registro privato, puoi creare la tua propria immagine,
+aggiungere un'immagine locale esistente o copiare un'immagine direttamente dal Docker Hub. </p>
+<p>Per assicurare le distribuzioni del contenitore sicure, ogni immagine viene scansionata dal
+controllo vulnerabilità. Il controllo vulnerabilità esegue le scansioni per le vulnerabilità potenziali,
+effettua raccomandazioni e fornisce le istruzioni per risolvere le vulnerabilità.</p>
+Per ulteriori informazioni, consulta <a href="va/va_index.html" title="Il Controllo vulnerabilità controlla lo stato di sicurezza delle immagini del contenitore prima della distribuzione e anche lo stato dei contenitori in esecuzione.">Gestione della sicurezza dell'immagine e del contenitore con il Controllo vulnerabilità</a>.</td>
+</tr>
+<tr><td headers="d74541e210 ">Contenitore Docker</td>
+<td headers="d74541e212 ">Il controllo vulnerabilità controlla lo stato dei contenitori in esecuzione nella tua organizzazione per assicurarsi
+che i contenitori continuino ad essere protetti e conformi a un politica dell'organizzazione. Il controllo vulnerabilità esegue le scansioni per le vulnerabilità potenziali,
+effettua raccomandazioni e fornisce le istruzioni per risolvere le vulnerabilità.<p>Per ulteriori informazioni, consulta <a href="va/va_index.html" title="Il Controllo vulnerabilità controlla lo stato di sicurezza delle immagini del contenitore prima della distribuzione e anche lo stato dei contenitori in esecuzione.">Gestione della sicurezza dell'immagine e del contenitore con il Controllo vulnerabilità</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</article><article class="topic concept nested1" role="article" aria-labelledby="d74541e315" lang="it-it" id="container_security_host"><h2 class="topictitle2" id="d74541e315">Impostazioni di sicurezza per l'host di calcolo <span class="keyword">IBM
+Bluemix Container Service</span></h2>
+<div class="body conbody"><p class="shortdesc"><span class="keyword">IBM
+Bluemix Container Service</span>  ottimizza
+le funzionalità di sicurezza Docker e kernel Linux per assicurare l'isolamento del contenitore e l'accesso limitato
+alle risorse host di calcolo.. </p>
+<dl><dt class="dlterm">Daemon Docker sicuro e completamente gestito</dt>
+<dd>I daemon Docker in esecuzione negli host di calcolo IBM sono configurati senza un accesso utente diretto
+che può essere configurato solo da IBM. Tutti i socket daemon Docker sono protetti con i certificati TLS.</dd>
+<dt class="dlterm">Spazi dei nomi utente Docker abilitati</dt>
+<dd>La funzione <a href="https://docs.docker.com/engine/security/security/">Spazio dei nomi utente Docker</a>
+viene abilitata in Docker Engine per gli host di calcolo. La funzione degli spazi dei nomi utente isola i processi
+eseguiti in un contenitore da tutti gli altri processi e contenitori eseguiti
+nello stesso host di calcolo. L'utente root effettivo nel
+contenitore viene associato a un utente non root sull'host di calcolo. Anche se un utente root vuole uscire dal contenitore,
+non dispone di alcuna autorizzazione per manipolare i file, i processi o gli altri contenitori
+eseguiti nello stesso host di calcolo.</dd>
+<dt class="dlterm">Nessun contenitore privilegiato consentito</dt>
+<dd>L'opzione <samp class="ph codeph">--privileged</samp> nel comando <samp class="ph codeph">run</samp> non è supportata.
+I contenitori non hanno accesso ai dispositivi e ai dischi rigidi
+nell'host di calcolo.</dd>
+<dt class="dlterm">Gruppi di controllo gestiti (cgroups) per la memoria, la CPU e lo spazio su disco</dt>
+<dd>I contenitori eseguiti nello stesso host di calcolo condividono la memoria, la CPU
+e lo spazio su disco. Per prevenire che un contenitore utilizzi tutte le risorse disponibili o che
+riduca le applicazioni e i sistemi host, la quantità massima di memoria, CPU e spazio su disco
+che può essere assegnata a un contenitore è limitata. <p>La quantità massima di memoria, CPU e spazio su disco disponibile
+per il contenitore durante il runtime viene determinata dalla dimensione del contenitore selezionata
+durante la creazione del contenitore. Questa limitazione assicura che ogni contenitore nell'host di calcolo
+disponga della propria quantità di risorse host. Se un contenitore si comporta in modo anomalo, la risorsa
+di limitazione dell'utilizzo assicura un funzionamento e delle prestazioni consistenti per gli altri contenitori
+nell'host di calcolo. </p>
+</dd>
+<dt class="dlterm">Ottimizzazione kernel host di calcolo</dt>
+<dd>I kernel dell'host di calcolo limitano il numero totale di thread e processi possono essere eseguiti
+nell'host di calcolo da un gruppo o un utente specifico. Questa ottimizzazione assicura
+che l'host non sia sovraccaricato
+e che non esaurisca gli slot del processo finché non viene raggiunto il numero massimo di utenti.</dd>
+<dt class="dlterm">Monitoraggio dell'host di calcolo continuo</dt>
+<dd>Ogni host di calcolo è continuamente monitorato da IBM per controllare e risolvere fork-bomb e altri attacchi DOS (Denial-Of-Service) al livello del processo. </dd>
+<dt class="dlterm">Profilo AppArmor abilitato per i contenitori Docker</dt>
+<dd>Ogni host di calcolo applica il profilo <a href="http://wiki.apparmor.net/index.php/Documentation" rel="external" target="_blank" title="(Aprire in una nuova scheda o finestra)">AppArmor</a> specifico IBM
+per proteggere l'ambiente e limitare le funzionalità di un contenitore
+nell'host  di calcolo. AppArmor è un modulo di sicurezza kernel di Linux che controlla l'accesso alle cartelle, ai file,
+ai domini di rete e alle autorizzazioni per creare o modificare i dati.</dd>
+<dt class="dlterm">Montaggio del volume locale disabilitato per gli host di calcolo</dt>
+<dd><span class="keyword">IBM
+Bluemix Container Service</span> non supporta il montaggio
+dei volumi locali o delle directory locale/host per un contenitore. Invece, sono utilizzati i volumi
+nell'ambito dell'organizzazione per conservare i dati tra i riavvi del contenitore e per renderli disponibili
+per più contenitori. I volumi sono ospitati
+su condivisioni file isolate che archiviano in sicurezza i dati dell'applicazione e gestiscono l'accesso e l'autorizzazione
+ai file.<p>I volumi nell'ambito dell'organizzazione devono essere creati prima di poterli montare nel
+contenitore. Puoi creare un volume dalla GUI <a href="container_volumes_ov.html#container_volumes_ui" title="Un volume è un'ubicazione di archiviazione persistente per i dati creati da un'applicazione o per i file che l'applicazione richiede di eseguire. Puoi creare un volume per il tuo contenitore dalla GUI Bluemix."><span class="keyword">Bluemix</span></a> o
+dalla CLI <a href="container_volumes_ov.html#container_volumes_cli" title="Un volume è un'ubicazione di archiviazione persistente per i dati creati da un'applicazione o per i file che l'applicazione richiede di eseguire. Puoi creare un volume per il tuo contenitore dalla riga di comando.">Creazione di volumi con la riga di comando (CLI)</a>. </p>
+</dd>
+</dl>
+</div>
+</article><article class="topic concept nested1" role="article" aria-labelledby="d74541e445" lang="it-it" id="container_security_network"><h2 class="topictitle2" id="d74541e445">Impostazioni di sicurezza per la rete del contenitore privata <span class="keyword">IBM
+Bluemix Container Service</span></h2>
+<div class="body conbody"><p class="shortdesc">Rivedi l'elenco delle funzioni <span class="keyword">IBM
+Bluemix Container Service</span> integrate che garantisce
+la comunicazione sicura tra i contenitori nella stessa rete privata, tra i contenitori in spazi
+<span class="keyword">Bluemix</span> diversi e tra il tuo spazio
+<span class="keyword">Bluemix</span> e una rete remota.</p>
+<dl><dt class="dlterm">Rete del contenitore isolata L2 per spazio</dt>
+<dd><span class="ph">Una rete privata del contenitore crea un ambiente sicuro e isolato
+per i singoli contenitori e gruppi di contenitori in esecuzione su uno spazio. I contenitori collegati alla stessa rete privata
+possono inviare e ricevere dati da altri contenitori nella rete privata utilizzando
+gli indirizzi IP privati. I contenitori non sono disponibili pubblicamente finché non sono associati
+una porta pubblica e un indirizzo IP pubblico per i singoli contenitori o una rotta pubblica
+per i gruppi di contenitori.</span><p>In <span class="keyword">Bluemix</span>,
+ad ogni spazio è già fornita una rete pubblica in cui sono applicate le impostazioni di rete <span class="keyword">IBM
+Bluemix Container Service</span>
+predefinite. Quando crei i contenitori, vengono automaticamente collegati alla rete privata
+per lo spazio e assegnati a un indirizzo IP privato. </p>
+</dd>
+<dt class="dlterm">Mantieni i contenitori privati o esponi selettivamente i servizi al pubblico tramite Network Security Groups</dt>
+<dd>Ogni contenitore è protetto dai Network Security Groups specifici IBM
+che controllano il traffico di rete in entrata e vengono utilizzati come firewall del software al livello
+del gateway di rete privato. I dati
+inviati tramite il gateway di rete privato vengono controllati per la conformità delle regole di Network
+Security Group e possono essere trasmessi al contenitore recipiente o
+bloccati. <p>Quando crei un contenitore e non lo esponi pubblicamente, viene configurato con il
+Network Security Group privato predefinito. Questo gruppo di sicurezza consente la comunicazione
+di rete privata tra i contenitori utilizzando gli indirizzi IP privati. Per impostazione predefinita, tutte le porte del contenitore vengono automaticamente esposte su una rete
+privata. Non devi associare le porte del contenitore a una porta host.</p>
+<p>Per rendere la tua applicazione disponibile al pubblico, devi
+esporre una porta pubblica
+ed eseguire il bind di un indirizzo IP pubblico al tuo singolo contenitore o di una rotta pubblica al tuo gruppo di contenitori. <span class="ph" id="container_security_network__public_nsg">Quando esponi una porta pubblica utilizzando l'opzione <samp class="ph codeph">-p</samp> nel comando
+<samp class="ph codeph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> run</samp>, crei un gruppo di
+sicurezza di rete pubblico per il tuo contenitore che ti consente di inviare
+e ricevere dati pubblici solo nella porta esposta. Tutte le altre porte pubbliche sono chiuse
+e non possono essere utilizzate per accedere alla tua applicazione da internet. </span></p>
+</dd>
+<dt class="dlterm">Monitoraggio della rete aziendale continuo</dt>
+<dd>Tutto il traffico di rete in <span class="keyword">IBM
+Bluemix Container Service</span> è continuativamente monitorato da IBM
+per individuare e risolvere attività dannose. </dd>
+<dt class="dlterm">Supporto completo per i comandi <samp class="ph codeph">exec</samp>, <samp class="ph codeph">attach</samp> e
+<samp class="ph codeph">logs</samp> Docker</dt>
+<dd>Puoi accedere al tuo contenitore o visualizzarne l'output dettagliato durante il runtime utilizzando i comandi
+<samp class="ph codeph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> exec</samp>, <samp class="ph codeph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> attach</samp> o
+<samp class="ph codeph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> logs</samp>. Con questi comandi,
+puoi evitare di eseguire un daemon SSH non sicuro per accedere e monitorare il contenitore durante il runtime.
+<p>Per ulteriori informazioni su come
+accedere in sicurezza al tuo contenitore utilizzando <samp class="ph codeph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> exec</samp>, consulta
+<a href="container_security.html#container_cli_login_exec" title="Se devi accedere al tuo contenitore in esecuzione, puoi utilizzare bx ic exec.">Accesso a un contenitore con exec</a>.</p>
+</dd>
+<dt class="dlterm">VPN per l'accesso di rete privato sicuro ai servizi in altri spazi e in ogni rete remota </dt>
+<dd>I contenitori in una rete del contenitore privata possono essere connessi in sicurezza
+i data center aziendali
+utilizzando il servizio IBM® Virtual Private Network.<p data-hd-audience="yellow">Per ulteriori informazioni, consulta <a href="container_security.html#container_vpn" title="Collegare in modo sicuro i singoli contenitori e gruppi di contenitori in una rete di contenitori privata in Bluemix a un data center aziendale utilizzando il servizio IBM® VPN (Virtual Private Network). IBM VPN fornisce un canale di comunicazione end-to-end sicuro in internet che si basa sulla suite del protocollo IPsec (industry-standard Internet Protocol Security). Il protocollo IPsec offre un'autenticazione peer al livello della rete, l'integrità dei dati e la confidenzialità dei dati con la crittografia dei pacchetti scambiati tra gli endpoint VPN. Per configurare una connessione sicura tra i contenitori in Bluemix e il data center aziendale, devi avere un gateway IPsec VPN o un server SoftLayer installato nel tuo data center in loco. Con il servizio IBM VPN, puoi configurare un gateway VPN per spazio e definire fino a 16 connessioni a destinazioni differenti.">Configurazione di una connessione VPN
+tra i tuoi contenitori e un data center aziendale</a></p>
+</dd>
+</dl>
+</div>
+<article class="topic concept nested2" role="article" aria-labelledby="d74541e639" lang="it-it" id="container_cli_login_exec"><h3 class="topictitle3" id="d74541e639">Accesso a un contenitore con <samp class="ph codeph">exec</samp></h3>
+<div class="body conbody"><p class="shortdesc">Se devi accedere al tuo contenitore in esecuzione, puoi utilizzare <samp class="ph codeph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> exec</samp>. </p>
+<p>Gli utilizzi comuni del comando <samp class="ph codeph"><span class="ph"><samp class="ph codeph">bx ic</samp></span>
+exec</samp> includono l'apertura di una finestra bash e la visualizzazione dei file di un volume assegnato a un
+contenitore. Il comando <samp class="ph codeph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> exec</samp>
+può essere eseguito solo su un contenitore in uno stato in esecuzione. Per mantenere in esecuzione un contenitore,
+deve essere avviato con un comando a esecuzione prolungata. Se un contenitore è in pausa o è arrestato, deve essere riavviato
+con un comando a esecuzione prolungata prima che tu possa accedervi.</p>
+<section role="region" aria-labelledby="d74541e704"><h4 class="sectiontitle" id="d74541e704">Commando e parametri</h4>
+<pre class="codeblock"><code><span class="ph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> exec [-d] [-it ] [-u USER] CONTAINER CMD </span></code></pre>
+
+<div class="steps note"><span class="notetitle">Nota:</span> <span class="ph">*In questo comando, puoi sostituire <samp class="ph codeph"><span class="ph">bx ic</span></samp> con
+<samp class="ph codeph">docker</samp> quando <a href="container_cli_cfic_install.html#container_cli_login" title="Dopo che hai installato la CLI, esegui l'accesso per utilizzarla.">accedi a
+<span class="keyword">IBM
+Bluemix Container Service</span></a> e imposti le tue variabili di ambiente
+per utilizzare i comandi Docker nativi.</span></div>
+</section><section role="region" aria-labelledby="d74541e737"><h4 class="sectiontitle" id="d74541e737">Esempi</h4>
+<div class="p"><span class="ph">Questo comando di esempio esegue un terminale bash interattivo nel contenitore
+<var class="keyword varname">mio_contenitore</var>.</span><pre class="codeblock"><code><span class="ph"><samp class="ph codeph">bx ic</samp></span> exec -it <var class="keyword varname">mio_contenitore</var> bash</code></pre>
+</div>
+
+<div class="p"><span class="ph">Questo comando di esempio esegue un comando date nel contenitore
+<var class="keyword varname">mio_contenitore</var>. </span><pre class="codeblock"><code><span class="ph"><samp class="ph codeph">bx ic</samp></span> exec <var class="keyword varname">mio_contenitore</var> date</code></pre>
+</div>
+</section></div>
+</article><article class="topic task nested2" role="article" aria-labelledby="d74541e770" id="container_vpn"><h3 class="topictitle3" id="d74541e770">Collegamento dei contenitori a un data center aziendale configurando una VPN (Virtual Private Network)</h3>
+<div class="body taskbody"><p class="shortdesc"><span class="ph" id="vpn_def">Collegare in modo sicuro i singoli contenitori e gruppi di contenitori in una rete di contenitori privata
+in <span class="keyword">Bluemix</span> a un data center aziendale
+utilizzando il servizio IBM® VPN (Virtual Private Network). <span class="keyword">IBM
+VPN</span> fornisce un canale di comunicazione end-to-end sicuro
+in internet che si basa sulla suite del protocollo IPsec
+(industry-standard Internet Protocol Security). Il protocollo IPsec offre un'autenticazione peer al livello della rete, l'integrità dei dati
+e la confidenzialità dei dati con la crittografia dei pacchetti scambiati tra gli endpoint VPN. Per configurare
+una connessione sicura tra i contenitori in <span class="keyword">Bluemix</span> e il data center aziendale, devi
+avere un gateway IPsec VPN o un server SoftLayer installato nel tuo data center in loco. Con il servizio
+<span class="keyword">IBM
+VPN</span>, puoi configurare un gateway VPN
+per spazio e definire fino a 16 connessioni a destinazioni differenti.</span></p>
+<div class="section context"><p>Per collegare i contenitori a un data center aziendale, completare la seguente procedura. </p>
+</div><ol class="steps" id="container_vpn__vpn_steps"><li class="step stepexpand"><span class="cmd">Crea almeno un <a href="container_single_ui.html#container_single_ui" title="Utilizza un singolo contenitore per eseguire test semplici quando distribuisci un'applicazione o un servizio o per i processi a breve termine che non richiedo l'alta disponibilità. Per utilizzare il tuo front-end di rete, puoi assegnare un indirizzo IP pubblico al contenitore.">contenitore
+singolo</a> o un <a href="container_ha.html#container_group_ui" title="Crea e distribuisci il contenitore di gruppi scalabili dalla GUI Bluemix. Un gruppo di contenitori include due o più contenitori che eseguono la stessa immagine. Utilizza i gruppi di contenitori per l'esecuzione dei servizi a lungo termine con i carichi di lavoro che richiedono scalabilità e affidabilità o per la verifica alla scala richiesta.">gruppo di contenitori</a>
+nel spazio che desideri collegare al tuo data center aziendale. </span></li>
+<li class="step stepexpand"><span class="cmd">Crea un'istanza del servizio <span class="keyword">IBM
+VPN</span>
+nel tuo spazio seguendo il passi da 1 a 5 dell'argomento <a href="container_integrations.html#container_integrations_binding" title="IBM Bluemix ha un elenco di servizi e li gestisce per conto degli sviluppatori dell'applicazione. Per aggiungere un servizio Bluemix che possa essere utilizzato dal tuo contenitore, devi richiedere un'istanza di tale servizio ed eseguire il bind del servizio al contenitore.">Esecuzione del bind di un servizio</a>.</span> <div class="steps note"><span class="notetitle">Nota:</span> L'istanza del servizio <span class="keyword">IBM
+VPN</span> deve essere creata
+nello stesso spazio in cui hai creato i contenitori che desideri collegare al
+data center aziendale. </div>
+</li>
+<li class="step stepexpand"><span class="cmd">Segui le istruzioni riportate nell'argomento <a href="../services/vpn/index.html" rel="external" target="_blank" title="(Aprire in una nuova scheda o finestra)">Introduzione a <span class="keyword">IBM
+VPN</span></a> per configurare un gateway VPN e impostare le connessioni al tuo data
+center aziendale. </span></li>
+</ol>
+</div>
+</article></article></article></div></main></body></html>

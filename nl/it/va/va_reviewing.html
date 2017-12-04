@@ -1,0 +1,98 @@
+<!DOCTYPE html><html lang="it-it">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="dcterms.date" content="2017-11-10">
+<meta name="dcterms.rights" content="© Copyright IBM Corp. 2015, 2016">
+
+<meta name="description" content="Prima di distribuire un'immagine, ne puoi controllare i report del controllo vulnerabilità, che elenca in dettaglio i pacchetti vulnerabili, le impostazioni dell'applicazione o del contenitore non sicure e se l'immagine è conforme alle politiche dell'organizzazione.">
+<meta name="keywords" content="Controllo vulnerabilità, vulnerabilità, sicurezza contenitore, sicurezza immagine">
+<meta name="geo.country" content="ZZ">
+<script>
+    digitalData = {
+      page: {
+        pageInfo: {
+  language: "it-it",
+
+  version: "v18",
+  ibm: {
+  country: "ZZ",
+  type: "CT701"
+  
+         }
+       }
+     }
+   };
+  </script><link rel="stylesheet" type="text/css" href="./ibmdita.css">
+<title>Controllo di un report dell'immagine del controllo vulnerabilità</title>
+</head>
+<body id="va_reviewing"><main role="main"><article role="article" aria-labelledby="d351e2"><h1 class="topictitle1" id="d351e2">Controllo di un report VA dell'immagine</h1>
+<div class="body taskbody"><p class="shortdesc">Prima di distribuire un'immagine, ne puoi controllare i report del controllo vulnerabilità,
+che elenca in dettaglio i pacchetti vulnerabili, le impostazioni dell'applicazione o del contenitore non sicure
+e se l'immagine è conforme alle politiche dell'organizzazione.</p>
+<div class="section context"><p>Le immagini del contenitore sono fornite da IBMo
+possono essere aggiunte dalla tua organizzazione. Potresti dover configurare un'immagine prima di poterla distribuire in modo che rispetti
+i requisiti impostati dalla politica della tua organizzazione. Solo il gestore dell'organizzazione
+può modificare la politica per consentire a un'immagine vulnerabile di essere distribuita. Per istruzioni
+su come visualizzare e modificare la politica dell'organizzazione, consulta <a href="va_managing_policy.html" title="Se sei il gestore di un'organizzazione Bluemix, puoi impostare una politica che avvisi gli utenti o blocchi la distribuzione dei contenitori delle immagini con i problemi specificati.">Controllo delle politiche organizzative</a>.</p>
+
+<p>Riesamina i problemi di configurazione e sicurezza dell'immagine potenziali completando la seguente procedura:</p>
+</div><ol class="steps"><li class="step stepexpand"><span class="cmd">Accedi a <span class="keyword">Bluemix</span>. </span> <span class="ph">Controllo vulnerabilità</span> è disponibile nell'interfaccia utente solo quando hai eseguito
+l'accesso.</li>
+<li class="step stepexpand"><span class="cmd">Nella sezione <span class="ph uicontrol">Valutazione della vulnerabilità</span>, rivedi lo stato
+della tua valutazione della vulnerabilità.</span> Lo stato viene rappresentato da uno delle seguenti condizioni:
+<ul><li><span class="keyword wintitle">Distribuzione possibile senza rischi</span> - Non sono stati trovati problemi di sicurezza.</li>
+<li><span class="keyword wintitle">Distribuisci con cautela</span> - Sono stati trovati problemi di configurazione o sicurezza che devono essere
+risolti e la tua politica dell'organizzazione consente la distribuzione di immagini vulnerabili. Se distribuisci questa immagine,
+riceverai un'avvertenza.</li>
+<li><span class="keyword wintitle">Distribuzione bloccata</span> - Sono stati trovati problemi di configurazione o sicurezza che devono essere
+risolti prima che l'immagine possa essere distribuita perché la tua politica dell'organizzazione non consente la distribuzione
+di immagini vulnerabili.</li>
+<li><span class="keyword wintitle">Incompleto</span> - La scansione non è stata completata. La scansione potrebbe essere ancora in esecuzione o
+il sistema operativo dell'immagine potrebbe non essere compatibile. Attendi e prova di nuovo a eseguire la scansione. Se la scansione non
+viene ancora completata, distribuisci nuovamente l'immagine e avvia una nuova scansione. Le immagini con scansioni incomplete non vengono
+bloccate per la distribuzione.</li>
+</ul>
+
+<p>Rivedi il report dettagliato che costituisce la valutazione di sicurezza del controllo vulnerabilità</p>
+</li>
+<li class="step stepexpand"><span class="cmd">Seleziona l'immagine e nella sezione <span class="ph uicontrol">Valutazione della vulnerabilità</span>,
+fai clic su <span class="ph uicontrol">Visualizza report</span>.</span></li>
+<li class="step stepexpand"><span class="cmd">Riesamina le sezioni per visualizzare i problemi di configurazione e sicurezza potenziali per ogni pacchetto nell'immagine:</span> <div class="p"><ul id="va_reviewing__report"><li><span class="ph uicontrol">Politiche organizzative</span><p>Elenca se l'immagine
+rispetta la politica impostata dal gestore dell'organizzazione.</p>
+</li>
+<li><span class="ph uicontrol">Analisi del Rischio</span><p>Se l'immagine ha una o più vulnerabilità,
+questa sezione mostra la percentuale di rischio calcolata dal Controllo vulnerabilità. Il rischio
+viene calcolato utilizzando il calcolatore <a href="https://www.first.org/cvss" rel="external" target="_blank" title="(Aprire in una nuova scheda o finestra)">CVSS</a> e
+la tecnologia <a href="https://exchange.xforce.ibmcloud.com/" rel="external" target="_blank" title="(Aprire in una nuova scheda o finestra)"><span class="keyword">IBM® X-Force Exchange</span></a>. </p>
+</li>
+<li><span class="ph uicontrol">Pacchetti vulnerabili</span><p>Elenca i pacchetti con problemi di vulnerabilità noti,
+che vengono aggiornati giornalmente dalle informazioni particolari di sicurezza pubblicate per i tipi di immagine Docker
+elencati in <a href="va_index.html" title="Il Controllo vulnerabilità controlla lo stato di sicurezza delle immagini del contenitore prima della distribuzione e anche lo stato dei contenitori in esecuzione.">Gestione della sicurezza dell'immagine e del contenitore con il Controllo vulnerabilità</a>. Di norma, per fare in modo che un pacchetto vulnerabile superi con esito positivo la scansione, è necessaria
+una sua versione più recente che includa una correzione per la vulnerabilità in questione. Lo stesso pacchetto potrebbe elencare
+più vulnerabilità: in questo caso, un singolo upgrade del pacchetto potrebbe correggere più problemi. Fai clic
+sul codice dell'avviso di sicurezza per esaminare maggiori informazioni sul pacchetto e i passi per aggiornare
+il pacchetto.</p>
+</li>
+<li><span class="ph uicontrol">Impostazioni contenitore</span><p>Elenca i suggerimenti che puoi avere
+per aumentare la sicurezza dell'immagine. La colonna <span class="keyword wintitle">Azioni correttive</span>
+descrive come migliorare la sicurezza.</p>
+</li>
+<li><span class="ph uicontrol">Configurazioni dell'applicazione</span><p>Elenca le configurazioni di sicurezza per l'immagine
+che non sono sicure. La colonna <span class="keyword wintitle">Azioni correttive</span>
+descrive come migliorare la sicurezza.</p>
+</li>
+<li><span class="ph uicontrol">Istanze del contenitore</span><p>Elenca i contenitori che utilizzano questa immagine
+che sono già in esecuzione nella tua organizzazione.</p>
+</li>
+</ul>
+</div>
+
+
+<p>I suggerimenti o le azioni correttive sono forniti per ogni elemento che viene elencato.</p>
+</li>
+<li class="step stepexpand"><span class="cmd">Correggi i problemi descritti nel report <span class="ph uicontrol">Valutazione della vulnerabilità</span> e ricrea l'immagine.</span> Alcuni problemi nel Dockerfile possono essere risolti utilizzando il codice fornito in <a href="va_report.html" title="Dopo aver controllato il report sulla vulnerabilità, impara come risolvere le vulnerabilità riportate.">Risoluzione delle vulnerabilità nei contenitori o nelle immagini</a>. </li>
+</ol>
+<div class="section result"></div><div class="section postreq">Dopo aver distribuito la tua immagine, il Controllo vulnerabilità continuerà ad eseguire la scansione
+per ricercare problemi di configurazione o sicurezza nel contenitore. Puoi risolvere qualsiasi problema trovato seguendo le istruzioni
+descritte in <a href="va_reviewing_container.html" title="Nel tuo dashboard, puoi visualizzare lo stato di un contenitore per determinare se la sua sicurezza soddisfa la tua politica dell'organizzazione. Puoi anche riesaminare il report di vulnerabilità di un contenitore, che elenca in dettaglio i pacchetti vulnerabili e le impostazioni dell'applicazione o del contenitore non sicure.">Riesame delle vulnerabilità del contenitore</a>.</div></div>
+<aside role="complementary" aria-labelledby="d351e2"></aside></article></main></body></html>
