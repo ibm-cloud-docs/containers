@@ -17,7 +17,7 @@
   ibm: {
   country: "ZZ",
   type: "CT701"
-  
+
          }
        }
      }
@@ -464,7 +464,7 @@ Cloud Container Service</span>. <span class="ph">For
 details, see <a href="https://www.ibm.com/blogs/bluemix/2017/03/retirement-ibm-container-autoscaling-beta-capability" rel="external" target="_blank" title="(Opens in a new tab or window)">Auto-Scaling Retirement</a>.</span></p>
 <div class="section context">Are you looking for information about scaling Cloud Foundry applications? Check out <a href="https://www.ng.bluemix.net/docs/services/Auto-Scaling/index.html" rel="external" target="_blank" title="(Opens in a new tab or window)"><span class="keyword">IBM Auto-Scaling for IBM Cloud</span></a>.</div></div>
 <article class="topic task nested2" role="article" aria-labelledby="d49620e1845" id="migrating_autoscaling"><h3 class="topictitle3" id="d49620e1845">Migrating to Kubernetes Autoscaling</h3>
-<div class="body taskbody"><p class="li stepsection"><p>With <a href="cs_ov.html">Kubernetes</a>, you can enable <a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/" rel="external" target="_blank" title="(Opens in a new tab or window)">Horizontal Pod Autoscaling</a> to scale your apps based on CPU. </p>
+<div class="body taskbody"><p class="li stepsection"><p>With <a href="cs_ov.html">Kubernetes</a>, you can enable <a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale" rel="external" target="_blank" title="(Opens in a new tab or window)">Horizontal Pod Autoscaling</a> to scale your apps based on CPU. </p>
 </p><ol class="steps"><li class="step stepexpand"><span class="cmd">Install the required <a href="cs_cli_install.html#cs_cli_install_steps">CLIs</a>.</span></li>
 <li class="step stepexpand"><span class="cmd">Create a cluster by following the steps in <a href="container_index.html#clusters">Getting started with Kubernetes clusters in IBM Cloud</a>. Be sure to
 set up your cluster to replicate your current container group, including logging, monitoring,
@@ -1009,7 +1009,7 @@ private IP address of the load balancer, complete the following steps.</div><ol 
 container group does not have an exposed port, you must create a new container group and expose a
 port. The container group's load balancer is accessible only on the port that is exposed.  <pre class="codeblock"><code><span class="ph"><samp class="ph codeph">bx ic</samp></span> groups</code></pre>
 
-<pre class="pre screen"><code>Group ID                               Name                      Status            Created                         Updated   Port   
+<pre class="pre screen"><code>Group ID                               Name                      Status            Created                         Updated   Port
 cb628ddd-a1e7-4944-9a42-02abc80ea6ee   container_group_example   CREATE_COMPLETE   2016-09-26 15:43:00 -0400 EDT             9080   </code></pre>
 </li>
 <li class="step stepexpand"><span class="cmd">Inspect the container group.</span>  Replace <var class="keyword varname">container_group_example</var> with the name of your container group.
@@ -1017,7 +1017,7 @@ Review the <span class="ph uicontrol">private_ip_address</span> field in the
 <span class="ph uicontrol">Loadbalancer</span> section. <pre class="codeblock"><code><span class="ph"><samp class="ph codeph">bx ic</samp></span> group-inspect <var class="keyword varname">container_group_example</var></code></pre>
 
 <pre class="pre screen"><code>    "Loadbalancer": {
-        "intermediate_ip_address": "192.0.2.1", 
+        "intermediate_ip_address": "192.0.2.1",
         "private_ip_address": "198.51.100.27"
     }, </code></pre>
 
