@@ -276,6 +276,19 @@ To add credentials your {{site.data.keyword.Bluemix_notm}} account:
 <br />
 
 
+## Firewall prevents running `bx`, `kubectl`, or `calicoctl` CLI commands
+{: #ts_firewall_clis}
+
+{: tsSymptoms}
+When you run `bx`, `kubectl`, or `calicoctl` commands from the CLI, they fail.
+
+{: tsCauses}
+You might have corporate network policies that prevent access from your local system to public endpoints via proxies or firewalls.
+
+{: tsResolve}
+[Allow TCP access for the CLI commands to work](cs_security.html#opening_ports). This task requires an [Administrator access policy](cs_cluster.html#access_ov). Verify your current [access policy](cs_cluster.html#view_access).
+
+
 ## Firewall prevents worker nodes from connecting
 {: #cs_firewall}
 
@@ -317,178 +330,23 @@ If kubectl proxy succeeds, but the dashboard is not available, you might see the
 You might have an additional firewall set up or customized your existing firewall settings in your IBM Cloud infrastructure (SoftLayer) account. {{site.data.keyword.containershort_notm}} requires certain IP addresses and ports to be opened to allow communication from the worker node to the Kubernetes master and vice versa. Another reason might be that the worker nodes are stuck in a reloading loop.
 
 {: tsResolve}
-This task requires an [Administrator access policy](cs_cluster.html#access_ov). Verify your current [access policy](cs_cluster.html#view_access).
-
-Open the following ports and IP addresses in your customized firewall.
-
-1.  Note the public IP address for all your worker nodes in the cluster:
-
-  ```
-  bx cs workers '<cluster_name_or_id>'
-  ```
-  {: pre}
-
-2.  In your firewall for OUTBOUND connectivity from your worker nodes, allow outgoing network traffic from the source worker node to the destination TCP/UDP port range 20000-32767 and port 443 for `<each_worker_node_publicIP>`, and the following IP addresses and network groups.
-    - **Important**: You must allow outgoing traffic to port 443 for all of the locations within the region, to balance the load during the bootstrapping process. For example, if your cluster is in US South, you must allow traffic from port 443 to the IP addresses for all of the locations (dal10, dal12, and dal13).
-    <p>
-  <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
-      <thead>
-      <th>Region</th>
-      <th>Location</th>
-      <th>IP address</th>
-      </thead>
-    <tbody>
-      <tr>
-        <td>AP North</td>
-        <td>hkg02<br>tok02</td>
-        <td><code>169.56.132.234</code><br><code>161.202.126.210</code></td>
-       </tr>
-      <tr>
-         <td>AP South</td>
-         <td>mel01<br>syd01<br>syd04</td>
-         <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19, 130.198.66.34</code></td>
-      </tr>
-      <tr>
-         <td>EU Central</td>
-         <td>ams03<br>fra02<br>par01</td>
-         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.170, 169.50.56.174</code><br><code>159.8.86.149, 159.8.98.170</code></td>
-        </tr>
-      <tr>
-        <td>UK South</td>
-        <td>lon02<br>lon04</td>
-        <td><code>159.122.242.78</code><br><code>158.175.65.170, 158.175.74.170, 158.175.76.2</code></td>
-      </tr>
-      <tr>
-        <td>US East</td>
-         <td>tor01<br>wdc06<br>wdc07</td>
-         <td><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
-      </tr>
-      <tr>
-        <td>US South</td>
-        <td>dal10<br>dal12<br>dal13</td>
-        <td><code>169.47.234.18, 169.46.7.234</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
-      </tr>
-      </tbody>
-    </table>
-</p>
-
-3.  Allow outgoing network traffic from the worker nodes to {{site.data.keyword.registrylong_notm}}:
-    - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
-    - Replace <em>&lt;registry_publicIP&gt;</em> with all of the addresses for registry regions to which you want to allow traffic:
-      <p>
-<table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
-      <thead>
-        <th>Container region</th>
-        <th>Registry address</th>
-        <th>Registry IP address</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td>AP North, AP South</td>
-          <td>registry.au-syd.bluemix.net</td>
-          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
-        </tr>
-        <tr>
-          <td>EU Central</td>
-          <td>registry.eu-de.bluemix.net</td>
-          <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></td>
-         </tr>
-         <tr>
-          <td>UK South</td>
-          <td>registry.eu-gb.bluemix.net</td>
-          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></td>
-         </tr>
-         <tr>
-          <td>US East, US South</td>
-          <td>registry.ng.bluemix.net</td>
-          <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></td>
-         </tr>
-        </tbody>
-      </table>
-</p>
-
-4.  Optional: Allow outgoing network traffic from the worker nodes to {{site.data.keyword.monitoringlong_notm}} and {{site.data.keyword.loganalysislong_notm}} services:
-    - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
-    - Replace <em>&lt;monitoring_publicIP&gt;</em> with all of the addresses for the monitoring regions to which you want to allow traffic:
-      <p><table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
-        <thead>
-        <th>Container region</th>
-        <th>Monitoring address</th>
-        <th>Monitoring IP addresses</th>
-        </thead>
-      <tbody>
-        <tr>
-         <td>EU Central</td>
-         <td>metrics.eu-de.bluemix.net</td>
-         <td><code>159.122.78.136/29</code></td>
-        </tr>
-        <tr>
-         <td>UK South</td>
-         <td>metrics.eu-gb.bluemix.net</td>
-         <td><code>169.50.196.136/29</code></td>
-        </tr>
-        <tr>
-          <td>US East, US South, AP North</td>
-          <td>metrics.ng.bluemix.net</td>
-          <td><code>169.47.204.128/29</code></td>
-         </tr>
-         
-        </tbody>
-      </table>
-</p>
-    - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
-    - Replace <em>&lt;logging_publicIP&gt;</em> with all the addresses for the logging regions to which you want to allow traffic:
-      <p><table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
-        <thead>
-        <th>Container region</th>
-        <th>Logging address</th>
-        <th>Logging IP addresses</th>
-        </thead>
-        <tbody>
-          <tr>
-            <td>US East, US South</td>
-            <td>ingest.logging.ng.bluemix.net</td>
-            <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
-           </tr>
-          <tr>
-           <td>EU Central, UK South</td>
-           <td>ingest-eu-fra.logging.bluemix.net</td>
-           <td><code>158.177.88.43</code><br><code>159.122.87.107</code></td>
-          </tr>
-          <tr>
-           <td>AP South, AP North</td>
-           <td>ingest-au-syd.logging.bluemix.net</td>
-           <td><code>130.198.76.125</code><br><code>168.1.209.20</code></td>
-          </tr>
-         </tbody>
-       </table>
-</p>
-
-5. If you have a private firewall, allow the appropriate IBM Cloud infrastructure (SoftLayer) private IP ranges. Consult [this link](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) beginning with the **Backend (private) Network** section.
-    - Add all the [locations within the region(s)](cs_regions.html#locations) that you are using.
-    - Note that you must add the dal01 location (data center).
-    - Open ports 80 and 443 to allow the cluster bootstrapping process.
-
-6. To create persistent volume claims for data storage, allow egress access through your firewall for the [IBM Cloud infrastructure (SoftLayer) IP addresses](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) of the location (data center) that your cluster is in.
-    - To find the location (data center) of your cluster, run `bx cs clusters`.
-    - Allow access to the IP range for both the **Frontend (public) network** and **Backend (private) Network**.
-    - Note that you must add the dal01 location (data center) for the **Backend (private) Network**.
+[Allow the cluster to access infrastructure resources and other services](cs_security.html#firewall_outbound). This task requires an [Administrator access policy](cs_cluster.html#access_ov). Verify your current [access policy](cs_cluster.html#view_access).
 
 <br />
 
 
-## Accessing your worker node with SSH fails		
-{: #cs_ssh_worker}		
-	
-{: tsSymptoms}		
-You cannot access your worker node by using a SSH connection.		
-	
-{: tsCauses}		
-SSH is disabled on the worker nodes.		
-	
-{: tsResolve}		
-Use [DaemonSets ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) for anything you must run on every node or jobs for any one-time actions you must execute.		
-	
+## Accessing your worker node with SSH fails
+{: #cs_ssh_worker}
+
+{: tsSymptoms}
+You cannot access your worker node by using a SSH connection.
+
+{: tsCauses}
+SSH is disabled on the worker nodes.
+
+{: tsResolve}
+Use [DaemonSets ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) for anything you must run on every node or jobs for any one-time actions you must execute.
+
 <br />
 
 

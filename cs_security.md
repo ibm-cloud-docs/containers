@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-12-07"
+lastupdated: "2017-12-12"
 
 ---
 
@@ -95,7 +95,7 @@ Review the built-in worker node security features to protect the worker node env
   <dt>Kubernetes worker node security compliance</dt>
     <dd>IBM works with internal and external security advisory teams to address potential security compliance vulnerabilities. IBM maintains access to the worker nodes in order to deploy updates and security patches to the operating system.</br> <b>Important</b>: Reboot your worker nodes on a regular basis to ensure the installation of the updates and security patches that are automatically deployed to the operating system. IBM does not reboot your worker nodes.</dd>
   <dt>Support for IBM Cloud infrastructure (SoftLayer) network firewalls</dt>
-    <dd>{{site.data.keyword.containershort_notm}} is compatible with all [IBM Cloud infrastructure (SoftLayer) firewall offerings ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud-computing/bluemix/network-security). On {{site.data.keyword.Bluemix_notm}} Public, you can set up a firewall with custom network policies to provide dedicated network security for your cluster and to detect and remediate network intrusion. For example, you might choose to set up a [Vyatta ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/vyatta-1) to act as your firewall and block unwanted traffic. When you set up a firewall, [you must also open up the required ports and IP addresses](#opening_ports) for each region so that the master and the worker nodes can communicate. On {{site.data.keyword.Bluemix_dedicated_notm}}, firewalls, DataPower, Fortigate, and DNS are already configured as part of the standard dedicated environment deployment.</dd>
+    <dd>{{site.data.keyword.containershort_notm}} is compatible with all [IBM Cloud infrastructure (SoftLayer) firewall offerings ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud-computing/bluemix/network-security). On {{site.data.keyword.Bluemix_notm}} Public, you can set up a firewall with custom network policies to provide dedicated network security for your cluster and to detect and remediate network intrusion. For example, you might choose to set up a [Vyatta ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/vyatta-1) to act as your firewall and block unwanted traffic. When you set up a firewall, [you must also open up the required ports and IP addresses](#opening_ports) for each region so that the master and the worker nodes can communicate.</dd>
   <dt>Keep services private or selectively expose services and apps to the public internet</dt>
     <dd>You can choose to keep your services and apps private and leverage the built-in security features described in this topic to assure secured communication between worker nodes and pods. To expose services and apps to the public internet, you can leverage the Ingress and load balancer support to securely make your services publicly available.</dd>
   <dt>Securely connect your worker nodes and apps to an on-premises data center</dt>
@@ -110,9 +110,13 @@ Review the built-in worker node security features to protect the worker node env
 Manage the security and integrity of your images with built-in security features.
 {: shortdesc}
 
-**Secured Docker private image repository in {{site.data.keyword.registryshort_notm}}**: You can set up your own Docker image repository in a multi-tenant, highly available, and scalable private image registry that is hosted and managed by IBM to build, securely store, and share Docker images across cluster users.
+<dl>
+<dt>Secured Docker private image repository in {{site.data.keyword.registryshort_notm}}</dt>
+<dd>You can set up your own Docker image repository in a multi-tenant, highly available, and scalable private image registry that is hosted and managed by IBM to build, securely store, and share Docker images across cluster users.</dd>
 
-**Image security compliance**: When you use {{site.data.keyword.registryshort_notm}}, you can leverage the built-in security scanning that is provided by Vulnerability Advisor. Every image that is pushed to your namespace is automatically scanned for vulnerabilities against a database of known CentOS, Debian, Red Hat, and Ubuntu issues. If vulnerabilities are found, Vulnerability Advisor provides instructions for how to resolve them to assure image integrity and security.
+<dt>Image security compliance</dt>
+<dd>When you use {{site.data.keyword.registryshort_notm}}, you can leverage the built-in security scanning that is provided by Vulnerability Advisor. Every image that is pushed to your namespace is automatically scanned for vulnerabilities against a database of known CentOS, Debian, Red Hat, and Ubuntu issues. If vulnerabilities are found, Vulnerability Advisor provides instructions for how to resolve them to assure image integrity and security.</dd>
+</dl>
 
 To view the vulnerability assessment for your images, [review the Vulnerability Advisor documentation](/docs/services/va/va_index.html#va_registry_cli).
 
@@ -123,9 +127,138 @@ To view the vulnerability assessment for your images, [review the Vulnerability 
 {: #opening_ports}
 
 Review these situations in which you might need to open specific ports and IP addresses in your firewalls:
-* To allow communication between the Kubernetes master and the worker nodes when either a firewall is set up for the worker nodes or the firewall settings are customized in your IBM Cloud infrastructure (SoftLayer) account
-* To access the load balancer or Ingress controller from outside of the cluster
-* To run `kubectl` commands from your local system when corporate network policies prevent access to public internet endpoints via proxies or firewalls
+* [To run `bx` commands](#firewall_bx) from your local system when corporate network policies prevent access to public internet endpoints via proxies or firewalls.
+* [To run `kubectl` commands](#firewall_kubectl) from your local system when corporate network policies prevent access to public internet endpoints via proxies or firewalls.
+* [To run `calicoctl` commands](#firewall_calicoctl) from your local system when corporate network policies prevent access to public internet endpoints via proxies or firewalls.
+* [To allow communication between the Kubernetes master and the worker nodes](#firewall_outbound) when either a firewall is set up for the worker nodes or the firewall settings are customized in your IBM Cloud infrastructure (SoftLayer) account.
+* [To access the NodePort service, LoadBalancer service, or Ingress from outside of the cluster](#firewall_inbound).
+
+### Running `bx` commands from behind a firewall
+{: #firewall_bx}
+
+If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, to run `bx` commands, you must allow TCP access for {{site.data.keyword.containerlong_notm}}.
+
+1. Allow access to `containers.bluemix.net` on port 443.
+2. Verify your connection. If access is configured correctly, ships are displayed in the output.
+   ```
+   curl https://containers.bluemix.net/v1/
+   ```
+   {: pre}
+
+   Example output:
+   ```
+                                     )___(
+                              _______/__/_
+                     ___     /===========|   ___
+    ____       __   [\\\]___/____________|__[///]   __
+    \   \_____[\\]__/___________________________\__[//]___
+     \                                                    |
+      \                                                  /
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   ```
+   {: screen}
+
+### Running `kubectl` commands from behind a firewall
+{: #firewall_kubectl}
+
+If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, to run `kubectl` commands, you must allow TCP access for the cluster.
+
+When a cluster is created, the port in the master URL is randomly assigned from within 20000-32767. You can either choose to open port range 20000-32767 for any cluster that might get created or you can choose to allow access for a specific existing cluster.
+
+Before you begin, allow access to [run `bx` commands](#firewall_bx).
+
+To allow access for a specific cluster:
+
+1. Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. If you have a federated account, include the `--sso` option.
+
+    ```
+    bx login [--sso]
+    ```
+    {: pre}
+
+2. Select the region that your cluster is in.
+
+   ```
+   bx cs region-set
+   ```
+   {: pre}
+
+3. Get the name of your cluster.
+
+   ```
+   bx cs clusters
+   ```
+   {: pre}
+
+4. Retrieve the **Master URL** for your cluster.
+
+   ```
+   bx cs cluster-get <cluster_name_or_id>
+   ```
+   {: pre}
+
+   Example output:
+   ```
+   ...
+   Master URL:		https://169.46.7.238:31142
+   ...
+   ```
+   {: screen}
+
+5. Allow access to the **Master URL** on the port, such as port `31142` in the previous example.
+
+6. Verify your connection.
+
+   ```
+   curl --insecure <master_URL>/version
+   ```
+   {: pre}
+
+   Example command:
+   ```
+   curl --insecure https://169.46.7.238:31142/version
+   ```
+   {: pre}
+
+   Example output:
+   ```
+   {
+     "major": "1",
+     "minor": "7+",
+     "gitVersion": "v1.7.4-2+eb9172c211dc41",
+     "gitCommit": "eb9172c211dc4108341c0fd5340ee5200f0ec534",
+     "gitTreeState": "clean",
+     "buildDate": "2017-11-16T08:13:08Z",
+     "goVersion": "go1.8.3",
+     "compiler": "gc",
+     "platform": "linux/amd64"
+   }
+   ```
+   {: screen}
+
+7. Optional: Repeat these steps for each cluster that you need to expose.
+
+### Running `calicoctl` commands from behind a firewall
+{: #firewall_calicoctl}
+
+If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, to run `calicoctl` commands, you must allow TCP access for the Calico commands.
+
+Before you begin, allow access to run [`bx` commands](#firewall_bx) and [`kubectl` commands](#firewall_kubectl).
+
+1. Retrieve the IP address from the master URL that you used to allow the [`kubectl` commands](#firewall_kubectl).
+
+2. Get the port for ETCD.
+
+  ```
+  kubectl get cm -n kube-system calico-config -o yaml | grep etcd_endpoints
+  ```
+  {: pre}
+
+3. Allow access for the Calico policies via the master URL IP address and the ETCD port on port 443.
+
+### Allowing the cluster to access infrastructure resources and other services
+{: #firewall_outbound}
 
   1.  Note the public IP address for all your worker nodes in the cluster.
 
@@ -134,7 +267,7 @@ Review these situations in which you might need to open specific ports and IP ad
       ```
       {: pre}
 
-  2.  Allow outgoing network traffic from the source IP (such as the worker node) to the destination TCP/UDP port range 20000-32767 and port 443, and the following IP addresses and network groups. If you have a corporate firewall that prevents your local machine from accessing public internet endpoints, do this step for both your source worker nodes and your local machine.
+  2.  Allow outgoing network traffic from the source _<each_worker_node_publicIP>_ to the destination TCP/UDP port range 20000-32767 and port 443, and the following IP addresses and network groups. If you have a corporate firewall that prevents your local machine from accessing public internet endpoints, do this step for both your source worker nodes and your local machine.
       - **Important**: You must allow outgoing traffic to port 443 for all of the locations within the region, to balance the load during the bootstrapping process. For example, if your cluster is in US South, you must allow traffic from port 443 to the IP addresses for all of the locations (dal10, dal12, and dal13).
       <p>
   <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
@@ -280,9 +413,22 @@ Review these situations in which you might need to open specific ports and IP ad
       - Allow access to the IP range for both the **Frontend (public) network** and **Backend (private) Network**.
       - Note that you must add the dal01 location (data center) for the **Backend (private) Network**.
 
-  7. Optional: To access the load balancer from outside of the VLAN, open the port for incoming network traffic on the specific IP address of that load balancer.
+### Accessing NodePort, load balancer, and Ingress services from outside the cluster
+{: #firewall_inbound}
 
-  8. Optional: To access the Ingress controller from outside of the VLAN, open either port 80 or 443 for incoming network traffic on the specific IP address of that Ingress controller, depending on which port you have configured.
+You can allow incoming access to NodePort, load balancer, and Ingress services.
+
+<dl>
+  <dt>NodePort service</dt>
+  <dd>Open the port that you configured when you deployed the service to the public IP addresses for all of the worker nodes to allow traffic to. To find the port, run `kubectl get svc`. The port is in the 20000-32000 range.<dd>
+  <dt>LoadBalancer service</dt>
+  <dd>Open the port that you configured when you deployed the service to the load balancer service's public IP address.</dd>
+  <dt>Ingress</dt>
+  <dd>Open port 80 for HTTP or port 443 for HTTPS to the IP address for the Ingress application load balancer.</dd>
+</dl>
+
+<br />
+
 
 ## Setting up VPN connectivity with the Strongswan IPSec VPN service
 {: #vpn}
