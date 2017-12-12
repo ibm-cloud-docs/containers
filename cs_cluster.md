@@ -63,7 +63,7 @@ When the cluster is up and running, you can check out the following tasks:
 -   [Install the CLIs to start working with your cluster.](cs_cli_install.html#cs_cli_install)
 -   [Deploy an app in your cluster.](cs_apps.html#cs_apps_cli)
 -   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry/index.html)
-- If you have a firewall, you might need to [open the required ports](cs_security.md#opening_ports) to use `bx`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
+- If you have a firewall, you might need to [open the required ports](cs_security.html#opening_ports) to use `bx`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
 
 <br />
 
@@ -290,7 +290,7 @@ To create a cluster:
 -   [Deploy an app in your cluster.](cs_apps.html#cs_apps_cli)
 -   [Manage your cluster with the `kubectl` command line. ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/user-guide/kubectl/)
 -   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry/index.html)
-- If you have a firewall, you might need to [open the required ports](cs_security.md#opening_ports) to use `bx`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
+- If you have a firewall, you might need to [open the required ports](cs_security.html#opening_ports) to use `bx`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
 
 <br />
 
