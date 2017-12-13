@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-28"
+lastupdated: "2017-12-07"
 
 ---
 
@@ -31,6 +31,8 @@ You can take some general steps to ensure that your clusters are up-to-date:
 {: shortdesc}
 
 <br />
+
+
 
 
 ## Debugging clusters
@@ -168,6 +170,8 @@ Review the options to debug your clusters and find the root causes for failures.
 <br />
 
 
+
+
 ## Debugging app deployments
 {: #debug_apps}
 
@@ -209,6 +213,8 @@ Review the options that you have to debug your app deployments and find the root
 <br />
 
 
+
+
 ## Identifying local client and server versions of kubectl
 
 To check which version of the Kubernetes CLI that you are running locally or that your cluster is running, run the following command and check the version.
@@ -227,6 +233,8 @@ Server Version: v1.5.6
 {: screen}
 
 <br />
+
+
 
 
 ## Unable to connect to your IBM Cloud infrastructure (SoftLayer) account while creating a cluster
@@ -268,6 +276,81 @@ To add credentials your {{site.data.keyword.Bluemix_notm}} account:
 <br />
 
 
+## Firewall prevents running `bx`, `kubectl`, or `calicoctl` CLI commands
+{: #ts_firewall_clis}
+
+{: tsSymptoms}
+When you run `bx`, `kubectl`, or `calicoctl` commands from the CLI, they fail.
+
+{: tsCauses}
+You might have corporate network policies that prevent access from your local system to public endpoints via proxies or firewalls.
+
+{: tsResolve}
+[Allow TCP access for the CLI commands to work](cs_security.html#opening_ports). This task requires an [Administrator access policy](cs_cluster.html#access_ov). Verify your current [access policy](cs_cluster.html#view_access).
+
+
+## Firewall prevents worker nodes from connecting
+{: #cs_firewall}
+
+{: tsSymptoms}
+When the worker nodes are not able to connect, you might see a variety of different symptoms. You might see one of the following messages when kubectl proxy fails or you try to access a service in your cluster and the connection fails.
+
+  ```
+  Connection refused
+  ```
+  {: screen}
+
+  ```
+  Connection timed out
+  ```
+  {: screen}
+
+  ```
+  Unable to connect to the server: net/http: TLS handshake timeout
+  ```
+  {: screen}
+
+If you run kubectl exec, attach, or logs, you might see the following message.
+
+  ```
+  Error from server: error dialing backend: dial tcp XXX.XXX.XXX:10250: getsockopt: connection timed out
+  ```
+  {: screen}
+
+If kubectl proxy succeeds, but the dashboard is not available, you might see the following message.
+
+  ```
+  timeout on 172.xxx.xxx.xxx
+  ```
+  {: screen}
+
+
+
+{: tsCauses}
+You might have an additional firewall set up or customized your existing firewall settings in your IBM Cloud infrastructure (SoftLayer) account. {{site.data.keyword.containershort_notm}} requires certain IP addresses and ports to be opened to allow communication from the worker node to the Kubernetes master and vice versa. Another reason might be that the worker nodes are stuck in a reloading loop.
+
+{: tsResolve}
+[Allow the cluster to access infrastructure resources and other services](cs_security.html#firewall_outbound). This task requires an [Administrator access policy](cs_cluster.html#access_ov). Verify your current [access policy](cs_cluster.html#view_access).
+
+<br />
+
+
+## Accessing your worker node with SSH fails
+{: #cs_ssh_worker}
+
+{: tsSymptoms}
+You cannot access your worker node by using a SSH connection.
+
+{: tsCauses}
+SSH is disabled on the worker nodes.
+
+{: tsResolve}
+Use [DaemonSets ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) for anything you must run on every node or jobs for any one-time actions you must execute.
+
+<br />
+
+
+
 ## Accessing your worker node with SSH fails
 {: #cs_ssh_worker}
 
@@ -283,86 +366,28 @@ Use [DaemonSets ![External link icon](../icons/launch-glyph.svg "External link i
 <br />
 
 
-## Pods remain in pending state
-{: #cs_pods_pending}
+
+
+## After updating or reloading a worker node, duplicate nodes and pods appear
+{: #cs_duplicate_nodes}
 
 {: tsSymptoms}
-When you run `kubectl get pods`, you can see pods that remain in a **Pending** state.
+When you run `kubectl get nodes` you see duplicate worker nodes with the status **NotReady**. The worker nodes with **NotReady** have public IP addresses, while the worker nodes with **Ready** have private IP addresses.
 
 {: tsCauses}
-If you just created the Kubernetes cluster, the worker nodes might still be configuring. If this cluster is an existing one, you might not have enough capacity in your cluster to deploy the pod.
+Older clusters had worker nodes listed by the cluster's public IP address. Now, worker nodes are listed by the cluster's private IP address. When you reload or update a node, the IP address is changed, but the reference to the public IP address remains.
 
 {: tsResolve}
-This task requires an [Administrator access policy](cs_cluster.html#access_ov). Verify your current [access policy](cs_cluster.html#view_access).
-
-If you just created the Kubernetes cluster, run the following command and wait for the worker nodes to initialize.
-
-```
-kubectl get nodes
-```
-{: pre}
-
-If this cluster is an existing one, check your cluster capacity.
-
-1.  Set the proxy with the default port number.
+There are no service disruptions due to these duplicates, but you should remove the old worker node references from the API server.
 
   ```
-  kubectl proxy
-  ```
-   {: pre}
-
-2.  Open the Kubernetes dashboard.
-
-  ```
-  http://localhost:8001/ui
+  kubectl delete node <node_name1> <node_name2>
   ```
   {: pre}
 
-3.  Check if you have enough capacity in your cluster to deploy your pod.
-
-4.  If you don't have enough capacity in your cluster, add another worker node to your cluster.
-
-  ```
-  bx cs worker-add <cluster name or id> 1
-  ```
-  {: pre}
-
-5.  If your pods still stay in a **pending** state after the worker node is fully deployed, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) to further troubleshoot the pending state of your pod.
-
 <br />
 
 
-## Pods are stuck in the creating state
-{: #stuck_creating_state}
-
-{: tsSymptoms}
-When you run `kubectl get pods -o wide`, you see that multiple pods that are running on the same worker node are stuck in the `ContainerCreating` state.
-
-{: tsCauses}
-The file system on the worker node is read-only.
-
-{: tsResolve}
-1. Back up any data that might be stored on the worker node or in your containers.
-2. Rebuild the worker node by running the following command.
-
-<pre class="pre"><code>bx cs worker-reload &lt;cluster_name&gt; &lt;worker_id&gt;</code></pre>
-
-<br />
-
-
-## Containers do not start
-{: #containers_do_not_start}
-
-{: tsSymptoms}
-The pods deploy successfully to clusters, but the containers do not start.
-
-{: tsCauses}
-Containers might not start when the registry quota is reached.
-
-{: tsResolve}
-[Free up storage in {{site.data.keyword.registryshort_notm}}.](../services/Registry/registry_quota.html#registry_quota_freeup)
-
-<br />
 
 
 ## Accessing a pod on a new worker node fails with a timeout
@@ -426,220 +451,94 @@ The deleted node is no longer listed in Calico.
 <br />
 
 
-## Firewall prevents worker nodes from connecting
-{: #cs_firewall}
+
+
+## Pods remain in pending state
+{: #cs_pods_pending}
 
 {: tsSymptoms}
-When the worker nodes are not able to connect, you might see a variety of different symptoms. You might see one of the following messages when kubectl proxy fails or you try to access a service in your cluster and the connection fails.
-
-  ```
-  Connection refused
-  ```
-  {: screen}
-
-  ```
-  Connection timed out
-  ```
-  {: screen}
-
-  ```
-  Unable to connect to the server: net/http: TLS handshake timeout
-  ```
-  {: screen}
-
-If you run kubectl exec, attach, or logs, you might see the following message.
-
-  ```
-  Error from server: error dialing backend: dial tcp XXX.XXX.XXX:10250: getsockopt: connection timed out
-  ```
-  {: screen}
-
-If kubectl proxy succeeds, but the dashboard is not available, you might see the following message.
-
-  ```
-  timeout on 172.xxx.xxx.xxx
-  ```
-  {: screen}
-
-
+When you run `kubectl get pods`, you can see pods that remain in a **Pending** state.
 
 {: tsCauses}
-You might have an additional firewall set up or customized your existing firewall settings in your IBM Cloud infrastructure (SoftLayer) account. {{site.data.keyword.containershort_notm}} requires certain IP addresses and ports to be opened to allow communication from the worker node to the Kubernetes master and vice versa. Another reason might be that the worker nodes are stuck in a reloading loop.
+If you just created the Kubernetes cluster, the worker nodes might still be configuring. If this cluster is an existing one, you might not have enough capacity in your cluster to deploy the pod.
 
 {: tsResolve}
 This task requires an [Administrator access policy](cs_cluster.html#access_ov). Verify your current [access policy](cs_cluster.html#view_access).
 
-Open the following ports and IP addresses in your customized firewall.
+If you just created the Kubernetes cluster, run the following command and wait for the worker nodes to initialize.
 
-1.  Note the public IP address for all your worker nodes in the cluster:
+```
+kubectl get nodes
+```
+{: pre}
+
+If this cluster is an existing one, check your cluster capacity.
+
+1.  Set the proxy with the default port number.
 
   ```
-  bx cs workers '<cluster_name_or_id>'
+  kubectl proxy
+  ```
+   {: pre}
+
+2.  Open the Kubernetes dashboard.
+
+  ```
+  http://localhost:8001/ui
   ```
   {: pre}
 
-2.  In your firewall for OUTBOUND connectivity from your worker nodes, allow outgoing network traffic from the source worker node to the destination TCP/UDP port range 20000-32767 and port 443 for `<each_worker_node_publicIP>`, and the following IP addresses and network groups.
-    - **Important**: You must allow outgoing traffic to port 443 for all of the locations within the region, to balance the load during the bootstrapping process. For example, if your cluster is in US South, you must allow traffic from port 443 to the IP addresses for all of the locations (dal10, dal12, and dal13).
-    <p>
-  <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
-      <thead>
-      <th>Region</th>
-      <th>Location</th>
-      <th>IP address</th>
-      </thead>
-    <tbody>
-      <tr>
-        <td>AP North</td>
-        <td>hkg02<br>tok02</td>
-        <td><code>169.56.132.234</code><br><code>161.202.126.210</code></td>
-       </tr>
-      <tr>
-         <td>AP South</td>
-         <td>mel01<br>syd01<br>syd04</td>
-         <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19</code></td>
-      </tr>
-      <tr>
-         <td>EU Central</td>
-         <td>ams03<br>fra02<br>par01</td>
-         <td><code>169.50.169.110</code><br><code>169.50.56.174</code><br><code>159.8.86.149</code></td>
-        </tr>
-      <tr>
-        <td>UK South</td>
-        <td>lon02<br>lon04</td>
-        <td><code>159.122.242.78</code><br><code>158.175.65.170</code></td>
-      </tr>
-      <tr>
-        <td>US East</td>
-         <td>tor01<br>wdc06<br>wdc07</td>
-         <td><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
-      </tr>
-      <tr>
-        <td>US South</td>
-        <td>dal10<br>dal12<br>dal13</td>
-        <td><code>169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
-      </tr>
-      </tbody>
-    </table>
-</p>
+3.  Check if you have enough capacity in your cluster to deploy your pod.
 
-3.  Allow outgoing network traffic from the worker nodes to {{site.data.keyword.registrylong_notm}}:
-    - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
-    - Replace <em>&lt;registry_publicIP&gt;</em> with all of the addresses for registry regions to which you want to allow traffic:
-      <p>
-<table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
-      <thead>
-        <th>Container region</th>
-        <th>Registry address</th>
-        <th>Registry IP address</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td>AP North, AP South</td>
-          <td>registry.au-syd.bluemix.net</td>
-          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
-        </tr>
-        <tr>
-          <td>EU Central</td>
-          <td>registry.eu-de.bluemix.net</td>
-          <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></td>
-         </tr>
-         <tr>
-          <td>UK South</td>
-          <td>registry.eu-gb.bluemix.net</td>
-          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></td>
-         </tr>
-         <tr>
-          <td>US East, US South</td>
-          <td>registry.ng.bluemix.net</td>
-          <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></td>
-         </tr>
-        </tbody>
-      </table>
-</p>
+4.  If you don't have enough capacity in your cluster, add another worker node to your cluster.
 
-4.  Optional: Allow outgoing network traffic from the worker nodes to {{site.data.keyword.monitoringlong_notm}} and {{site.data.keyword.loganalysislong_notm}} services:
-    - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
-    - Replace <em>&lt;monitoring_publicIP&gt;</em> with all of the addresses for the monitoring regions to which you want to allow traffic:
-      <p><table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
-        <thead>
-        <th>Container region</th>
-        <th>Monitoring address</th>
-        <th>Monitoring IP addresses</th>
-        </thead>
-      <tbody>
-        <tr>
-         <td>EU Central</td>
-         <td>metrics.eu-de.bluemix.net</td>
-         <td><code>159.122.78.136/29</code></td>
-        </tr>
-        <tr>
-         <td>UK South</td>
-         <td>metrics.eu-gb.bluemix.net</td>
-         <td><code>169.50.196.136/29</code></td>
-        </tr>
-        <tr>
-          <td>US East, US South, AP North</td>
-          <td>metrics.ng.bluemix.net</td>
-          <td><code>169.47.204.128/29</code></td>
-         </tr>
-         
-        </tbody>
-      </table>
-</p>
-    - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
-    - Replace <em>&lt;logging_publicIP&gt;</em> with all the addresses for the logging regions to which you want to allow traffic:
-      <p><table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
-        <thead>
-        <th>Container region</th>
-        <th>Logging address</th>
-        <th>Logging IP addresses</th>
-        </thead>
-      <tbody>
-        <tr>
-         <td>EU Central</td>
-         <td>ingest.logging.eu-de.bluemix.net</td>
-         <td><code>169.50.25.125</code></td>
-        </tr>
-        <tr>
-         <td>UK South</td>
-         <td>ingest.logging.eu-gb.bluemix.net</td>
-         <td><code>169.50.115.113</code></td>
-        </tr>
-        <tr>
-          <td>US East, US South, AP North</td>
-          <td>ingest.logging.ng.bluemix.net</td>
-          <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
-         </tr>
-        </tbody>
-      </table>
-</p>
+  ```
+  bx cs worker-add <cluster name or id> 1
+  ```
+  {: pre}
 
-5. If you have a private firewall, allow the appropriate IBM Cloud infrastructure (SoftLayer) private IP ranges. Consult [this link](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) beginning with the **Backend (private) Network** section.
-    - Add all the [locations within the region(s)](cs_regions.html#locations) that you are using
-    - Note that you must add the dal01 location (data center)
-    - Open ports 80 and 443 to allow the cluster bootstrapping process
+5.  If your pods still stay in a **pending** state after the worker node is fully deployed, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) to further troubleshoot the pending state of your pod.
 
 <br />
 
 
-## After updating or reloading a worker node, duplicate nodes and pods appear
-{: #cs_duplicate_nodes}
+
+
+## Pods are stuck in the creating state
+{: #stuck_creating_state}
 
 {: tsSymptoms}
-When you run `kubectl get nodes` you see duplicate worker nodes with the status **NotReady**. The worker nodes with **NotReady** have public IP addresses, while the worker nodes with **Ready** have private IP addresses.
+When you run `kubectl get pods -o wide`, you see that multiple pods that are running on the same worker node are stuck in the `ContainerCreating` state.
 
 {: tsCauses}
-Older clusters had worker nodes listed by the cluster's public IP address. Now, worker nodes are listed by the cluster's private IP address. When you reload or update a node, the IP address is changed, but the reference to the public IP address remains.
+The file system on the worker node is read-only.
 
 {: tsResolve}
-There are no service disruptions due to these duplicates, but you should remove the old worker node references from the API server.
+1. Back up any data that might be stored on the worker node or in your containers.
+2. Rebuild the worker node by running the following command.
 
-  ```
-  kubectl delete node <node_name1> <node_name2>
-  ```
-  {: pre}
+<pre class="pre"><code>bx cs worker-reload &lt;cluster_name&gt; &lt;worker_id&gt;</code></pre>
 
 <br />
+
+
+
+
+## Containers do not start
+{: #containers_do_not_start}
+
+{: tsSymptoms}
+The pods deploy successfully to clusters, but the containers do not start.
+
+{: tsCauses}
+Containers might not start when the registry quota is reached.
+
+{: tsResolve}
+[Free up storage in {{site.data.keyword.registryshort_notm}}.](../services/Registry/registry_quota.html#registry_quota_freeup)
+
+<br />
+
+
 
 
 ## Logs do not appear
@@ -696,6 +595,8 @@ D. To trigger a log for an event, you can deploy Noisy, a sample pod that produc
 <br />
 
 
+
+
 ## Kubernetes dashboard does not display utilization graphs
 {: #cs_dashboard_graphs}
 
@@ -714,6 +615,8 @@ Delete the `kube-dashboard` pod to force a restart. The pod is re-created with R
   {: pre}
 
 <br />
+
+
 
 
 ## Connecting to an app via Ingress fails
@@ -813,7 +716,7 @@ To troubleshoot your Ingress:
     1.  Retrieve the ID of the Ingress pods that are running in your cluster.
 
       ```
-      kubectl get pods -n kube-system |grep ingress
+      kubectl get pods -n kube-system | grep alb1
       ```
       {: pre}
 
@@ -827,6 +730,8 @@ To troubleshoot your Ingress:
     3.  Look for error messages in the Ingress controller logs.
 
 <br />
+
+
 
 
 ## Connecting to an app via a load balancer service fails
@@ -904,6 +809,8 @@ To troubleshoot your load balancer service:
 <br />
 
 
+
+
 ## Retrieving the ETCD url for Calico CLI configuration fails
 {: #cs_calico_fails}
 
@@ -935,6 +842,8 @@ To retrieve the `<ETCD_URL>`, run one of the following commands:
 When you retrieve the `<ETCD_URL>`, continue with the steps as listed in (Adding network policies)[cs_security.html#adding_network_policies].
 
 <br />
+
+
 
 
 ## Getting help and support

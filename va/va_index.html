@@ -1,0 +1,334 @@
+<!DOCTYPE html><html lang="en-us">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="dcterms.date" content="2017-11-10">
+<meta name="dcterms.rights" content="© Copyright IBM Corporation 2015, 2017">
+
+<meta name="description" content="Vulnerability Advisor checks the security status of container images before deployment, and also checks the status of running containers.">
+<meta name="keywords" content="Vulnerability Advisor, vulnerabilities, container security, image security, problems, troubleshooting">
+<meta name="geo.country" content="ZZ">
+<script>
+    digitalData = {
+      page: {
+        pageInfo: {
+  language: "en-us",
+
+  version: "v18",
+  ibm: {
+  country: "ZZ",
+  type: "CT701"
+  
+         }
+       }
+     }
+   };
+  </script><!-- Licensed Materials - Property of IBM -->
+<!-- US Government Users Restricted Rights -->
+<!-- Use, duplication or disclosure restricted by -->
+<!-- GSA ADP Schedule Contract with IBM Corp. -->
+<link rel="stylesheet" type="text/css" href="./ibmdita.css">
+<title>Managing container and image security with Vulnerability Advisor</title>
+</head>
+<body><main role="main"><div><article class="nested0" role="article" aria-labelledby="d72e6" id="va_index"><h1 class="topictitle1" id="d72e6">Managing container and image security with Vulnerability Advisor</h1>
+<div class="abstract"><div class="shortdesc">Vulnerability Advisor checks the security status of container images before deployment,
+and also checks the status of running containers.</div>
+
+<div class="p">In this
+page:<div class="lines">&nbsp;&nbsp;&nbsp;&nbsp; • <a href="va_index.html#about">About Vulnerability Advisor</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp; • <a href="va_index.html#va_managing_policy" title="If you are the manager of a Cloud organization, you can set a policy that either warns users or blocks the deployment of containers from images with specific security and configuration issues.">Reviewing organizational policies</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp; • <a href="va_index.html#va_reviewing" title="Before you deploy an image, you can review its Vulnerability Advisor report, which details any vulnerable packages, nonsecure container or application settings, and whether the image is compliant with organizational policies.">Reviewing an image report</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp; • <a href="va_index.html#va_reviewing_container" title="In your dashboard, you can see the status of a container to determine whether its security complies with your organization's policy. You can also review a container's Vulnerability Advisor report, which details any vulnerable packages and nonsecure container or application settings, and whether the container is compliant with organizational policies.">Reviewing a container report</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp; • <a href="va_index.html#va_report" title="Find out how to fix any reported security and configuration issues that are reported by Vulnerability Advisor.">Resolving problems in containers or images</a></div>
+</div>
+</div>
+<aside role="complementary" aria-labelledby="d72e6"></aside><article class="topic task nested1" role="article" aria-labelledby="d72e73" id="about"><h2 class="topictitle2" id="d72e73">About Vulnerability Advisor</h2>
+<div class="body taskbody"><div class="section context" id="about__context_kcl_jzz_nz"><p>Vulnerability Advisor provides security management for <span class="keyword">IBM®
+Cloud Container Service</span>. Vulnerability Advisor generates a
+security status report, suggests fixes and best practices, and provides management to restrict
+nonsecure images from running. Fixing the security and configuration issues that are reported by
+Vulnerability Advisor can help you secure your <span class="keyword">Cloud</span> cloud computing
+infrastructure.</p>
+<p>Vulnerability Advisor includes the following features:</p>
+<div class="p"><ul id="about__ul_lcl_jzz_nz"><li>Scans images and running containers for vulnerabilities</li>
+<li>Provides an evaluation
+report based on security standards, such as ISO 27002, as well as security practices specific to
+<span class="keyword">IBM
+Cloud Container Service</span></li>
+<li>Detects file-based malware</li>
+<li>Provides recommendations to secure configuration files for a subset of application types</li>
+<li>Provides instructions on how to fix a reported vulnerability or configuration issue in its
+reports</li>
+<li>Provides organizational policies that enable <span class="keyword">Cloud</span> organization managers to manage images
+and containers by setting whether vulnerable images are blocked from deployment</li>
+<li>Confirms how many running containers in your <span class="keyword">Cloud</span> organization are based on a specific
+image.</li>
+</ul>
+</div>
+<dl><dt class="dlterm"><span class="ph uicontrol">Vulnerable Packages</span></dt>
+<dd><p>Vulnerability Advisor checks for vulnerable packages in specific types of Docker image, and
+provides a link to a security notice for more information about the vulnerability. Supported image
+types are described in the following table:</p>
+
+<div class="p"><div class="tablenoborder"><table summary="" id="about__os" class="defaultstyle"><caption><span class="tablecap">Table 1. Docker image types that Vulnerability
+Advisor checks for vulnerable packages</span></caption><thead><tr><th style="width: 50%" id="d72e142" class="thleft">Type of Docker image</th>
+<th style="width: 50%" id="d72e144" class="thleft">Source of security notices</th>
+</tr>
+</thead>
+<tbody><tr><td style="width: 50%" headers="d72e142 ">CentOS</td>
+<td style="width: 50%" headers="d72e144 "><a href="https://lists.centos.org/pipermail/centos-announce/" rel="external" target="_blank" title="(Opens in a new tab or window)">CentOS announce archives </a> and <a href="https://lists.centos.org/pipermail/centos-cr-announce/" rel="external" target="_blank" title="(Opens in a new tab or window)">CentOS
+CR announce archives</a></td>
+</tr>
+<tr><td style="width: 50%" headers="d72e142 ">Debian</td>
+<td style="width: 50%" headers="d72e144 "><a href="https://lists.debian.org/debian-security-announce/" rel="external" target="_blank" title="(Opens in a new tab or window)">Debian security announcements</a></td>
+</tr>
+<tr><td style="width: 50%" headers="d72e142 ">Red Hat Enterprise Linux (RHEL)</td>
+<td style="width: 50%" headers="d72e144 "><a href="https://www.redhat.com/archives/rhsa-announce" rel="external" target="_blank" title="(Opens in a new tab or window)">Red
+Hat RHSA announce archives</a></td>
+</tr>
+<tr><td style="width: 50%" headers="d72e142 ">Ubuntu</td>
+<td style="width: 50%" headers="d72e144 "><a href="https://www.ubuntu.com/usn/" rel="external" target="_blank" title="(Opens in a new tab or window)">Ubuntu Security
+Notices</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<p>Vulnerability Advisor updates its internal list against these security notices
+daily.</p>
+</dd>
+<dt class="dlterm">Recommendations</dt>
+<dd>In the <span class="ph uicontrol">Vulnerability Assessment</span> report, security recommendations
+are displayed in <span class="ph uicontrol">Container Settings</span> for container settings, and
+<span class="ph uicontrol">Application Configurations</span> for application configuration
+settings.<p>Vulnerability Advisor checks for known vulnerabilities in configuration settings for the
+following types of application:</p>
+<div class="p"><dl><dt class="dlterm">Applications</dt>
+<dd><ul id="about__ul_mcl_jzz_nz"><li>MySQL</li>
+<li>NGINX</li>
+<li>Apache</li>
+</ul>
+</dd>
+</dl>
+</div>
+<p>The recommendations that are made by Vulnerability Advisor are never blocked by
+organizational policies because they might not always be required in your architecture but represent
+good cloud security practices for <span class="keyword">IBM
+Cloud Container Service</span>.</p>
+</dd>
+</dl>
+The Vulnerability Advisor dashboard provides an overview and assessment of the
+security for an image or running container. You can also access a full list of the security and
+configuration issues that are checked by Vulnerability Advisor. Access the Vulnerability Advisor
+dashboard in the following ways:<ul id="about__ul_ocl_jzz_nz"><li>Select an image from the <span class="keyword">Cloud</span>
+catalog when you are logged in to <span class="keyword">Cloud</span>, and click <span class="ph uicontrol">View report</span>.</li>
+<li>In your <span class="keyword">Cloud</span> dashboard, select a
+running container. In the <span class="keyword wintitle">Vulnerability Advisor</span> pane, click <span class="ph uicontrol">View report</span>.</li>
+</ul>
+</div></div>
+</article><article class="topic task nested1" role="article" aria-labelledby="d72e244" lang="en-us" id="va_managing_policy"><h2 class="topictitle2" id="d72e244">Reviewing organizational policies</h2>
+<div class="body taskbody"><p class="shortdesc">If you are the manager of a <span class="keyword">Cloud</span> organization, you can set a policy that
+either warns users or blocks the deployment of containers from images with specific security and
+configuration issues. </p>
+<div class="section context"><div class="p">The organization manager can determine whether images in your organization can be deployed when a
+security or configuration issue is reported:<ul><li>If a specific security or configuration issue is found, the deployment of a container from the
+image can be blocked. </li>
+<li>Users can be warned that a specific security or configuration issue exists, but are allowed to
+deploy a container from the image.</li>
+</ul>
+</div>
+
+<p>By default, the organization policies allow images to be deployed with warnings. Policies for
+containers cannot be changed, and are provided by <span class="keyword">Cloud</span> for the security of all container users
+in the cloud.</p>
+
+<p>To set whether to allow or block deployment for images with specific security or configuration
+issues, complete the following steps.</p>
+</div><ol class="steps"><li class="step" id="va_managing_policy__va"><span class="cmd">Log in to <span class="keyword">Cloud</span>. </span> <span class="ph">Vulnerability Advisor</span> is available in the user interface when you are
+logged in only.</li>
+<li class="step"><span class="cmd">In the <span class="ph uicontrol">Vulnerability Assessment</span> section, click <span class="ph uicontrol">Manage policies</span>. </span> By default, the policy settings for <span class="ph uicontrol">Images</span> are displayed.</li>
+<li class="step"><span class="cmd">Review the <span class="keyword wintitle">Image Deployment Policies</span> settings.</span> Only organization managers can change the <span class="keyword wintitle">Image Deployment Policies</span>
+settings.</li>
+<li class="step"><span class="cmd">Review the Vulnerability Advisor report of all container images in your organization. </span> The listed images automatically refresh and are categorized to reflect any changes that are
+made in deployment settings.</li>
+<li class="step"><span class="cmd">Review the <span class="keyword wintitle">Container Policies</span> settings.</span> If containers that are running in your organization do not comply with <span class="keyword">Cloud</span> policy, they are listed in this
+view.</li>
+</ol>
+</div>
+<aside role="complementary" aria-labelledby="d72e244"></aside></article><article class="topic task nested1" role="article" aria-labelledby="d72e352" lang="en-us" id="va_reviewing"><h2 class="topictitle2" id="d72e352">Reviewing an image VA report</h2>
+<div class="body taskbody"><p class="shortdesc">Before you deploy an image, you can review its Vulnerability Advisor report, which
+details any vulnerable packages, nonsecure container or application settings, and whether the image
+is compliant with organizational policies.</p>
+<div class="section context"><p>Container images are provided by IBM or can be added
+by your organization. You might have to configure an image before you can deploy it so that it meets
+the requirements that are set by your organization's policy. Only the organization manager can
+change the policy to allow a vulnerable image to be deployed. For steps to view and change the
+organization policy, see <a href="va_index.html#va_managing_policy" title="If you are the manager of a Cloud organization, you can set a policy that either warns users or blocks the deployment of containers from images with specific security and configuration issues.">Reviewing organizational policies</a>.</p>
+
+<p>Review potential image security and configuration issues by completing the following steps:</p>
+</div><ol class="steps"><li class="step stepexpand"><span class="cmd">Log in to <span class="keyword">Cloud</span>. </span> <span class="ph">Vulnerability Advisor</span> is available in the user interface when you are
+logged in only.</li>
+<li class="step stepexpand"><span class="cmd">In the <span class="ph uicontrol">Vulnerability Assessment</span> section, review the status of
+your vulnerability assessment.</span> The status is displayed as one of the following conditions:<ul><li><span class="keyword wintitle">Safe to Deploy</span> - No security issues were found.</li>
+<li><span class="keyword wintitle">Deploy with Caution</span> - Security or configuration issues were found to be
+addressed, and your organizational policy permits deployment of vulnerable images. If you deploy
+this image, you will receive a warning.</li>
+<li><span class="keyword wintitle">Deployment Blocked</span> - Security or configuration issues were found and must
+be addressed before the image can be deployed because your organizational policy does not permit
+deployment of vulnerable images.</li>
+<li><span class="keyword wintitle">Incomplete</span> - The scan is not complete. The scan might still be running or
+the image’s operating system might not be compatible. Wait and try the scan again. If the scan still
+does not complete, push the image again to start a new scan. Images with incomplete scans are not
+blocked for deployment.</li>
+</ul>
+<p>Review the detailed report that forms the Vulnerability Advisor security
+assessment:</p>
+</li>
+<li class="step stepexpand"><span class="cmd">Select the image and in the <span class="ph uicontrol">Vulnerability Assessment</span> section,
+click <span class="ph uicontrol">View report</span>.</span></li>
+<li class="step stepexpand"><span class="cmd">Review the sections to see the potential security and configuration issues for each package in
+the image:</span> <div class="p"><ul id="va_reviewing__report"><li><span class="ph uicontrol">Organizational Policies</span><p>Lists whether the image adheres to the
+policy that was set by the organization manager.</p>
+</li>
+<li><span class="ph uicontrol">Risk Analysis</span><p>If the image has one or more
+vulnerabilities, this section displays the risk rating of the discovered vulnerabilities as
+calculated by Vulnerability Advisor. The risk is calculated by using the <a href="https://www.first.org/cvss" rel="external" target="_blank" title="(Opens in a new tab or window)">CVSS</a> calculator, and <a href="https://exchange.xforce.ibmcloud.com/" rel="external" target="_blank" title="(Opens in a new tab or window)"><span class="keyword">IBM X-Force® Exchange</span></a> technology.</p>
+</li>
+<li><span class="ph uicontrol">Vulnerable Packages</span><p>Lists packages with known vulnerability
+issues, which are updated daily from published security notices for the Docker image types that are
+listed in <a href="va_index.html#va_index" title="Vulnerability Advisor checks the security status of container images before deployment, and also checks the status of running containers.">Managing container and image security with Vulnerability Advisor</a>. Typically, for a vulnerable package to pass the scan, a
+later version of the package is required that includes a fix for the vulnerability. The same package
+might list multiple vulnerabilities, and in this case, a single package upgrade might correct
+multiple issues. Click the security notice code to review more information on the package and for
+steps to update the package.</p>
+</li>
+<li><span class="ph uicontrol">Container Settings</span><p>Lists suggestions that you can take to
+increase the security of the image. The <span class="keyword wintitle">Corrective Action</span> column describes how
+to improve security.</p>
+</li>
+<li><span class="ph uicontrol">Application Configurations</span><p>Lists application settings for the
+image that are nonsecure. The <span class="keyword wintitle">Corrective Action</span> column describes how to improve
+security.</p>
+</li>
+<li><span class="ph uicontrol">Container Instances</span><p>Lists containers that use this image
+that are already running in your organization.</p>
+</li>
+</ul>
+</div>
+
+<p>Corrective actions or suggestions are provided for each item that is listed.</p>
+</li>
+<li class="step stepexpand"><span class="cmd">Fix the problems that are described in the <span class="ph uicontrol">Vulnerability Assessment</span> report, and rebuild the image.</span> Some issues in the Dockerfile can be resolved by using the code that is provided in <a href="va_index.html#va_report" title="Find out how to fix any reported security and configuration issues that are reported by Vulnerability Advisor.">Resolving problems in containers or images</a>. </li>
+</ol>
+<div class="section result"></div><div class="section postreq">After you deploy your image, Vulnerability Advisor will continue to scan for security and
+configuration issues in the container. You can resolve any problems that are found by following the
+steps that are described in <a href="va_index.html#va_reviewing_container" title="In your dashboard, you can see the status of a container to determine whether its security complies with your organization's policy. You can also review a container's Vulnerability Advisor report, which details any vulnerable packages and nonsecure container or application settings, and whether the container is compliant with organizational policies.">Reviewing a container report</a>.</div></div>
+<aside role="complementary" aria-labelledby="d72e352"></aside></article><article class="topic task nested1" role="article" aria-labelledby="d72e536" lang="en-us" id="va_reviewing_container"><h2 class="topictitle2" id="d72e536">Reviewing a container report</h2>
+<div class="body taskbody"><p class="shortdesc">In your dashboard, you can see the status of a container to determine whether its
+security complies with your organization's policy. You can also review a container's Vulnerability
+Advisor report, which details any vulnerable packages and nonsecure container or application
+settings, and whether the container is compliant with organizational policies.</p>
+<div class="section context"><div class="p">Check that containers that are running in your space continue to be compliant with organizational
+policy by reviewing the <span class="ph uicontrol">POLICY STATUS</span> field. The status is displayed as one
+of the following conditions:<ul><li><span class="keyword wintitle">Compliant with Policy</span> - No security or configuration issues were
+found.</li>
+<li><span class="keyword wintitle">Not Compliant with Policy</span> - Vulnerability Advisor found potential security
+or configuration issues that caused the container to not be compliant with policy. If your
+organizational policy permits deployment of vulnerable images, the image might have been deployed in
+the state (<span class="keyword wintitle">Deploy with Caution</span>), and a warning was sent to the user that
+deployed it.</li>
+<li><span class="keyword wintitle">Incomplete Assessment</span> - The scan is not complete. The scan might still be
+running, or the operating system for that container instance might not be compatible.</li>
+</ul>
+</div>
+
+<p>If the <span class="ph uicontrol">POLICY STATUS</span> is not <span class="keyword wintitle">Compliant with Policy</span>,
+check that your container is as secure as possible by viewing its Vulnerability Advisor report and
+act on any reported security or configuration issues, by completing the following steps:</p>
+</div><ol class="steps"><li class="step stepexpand"><span class="cmd">In your Bluemix dashboard, select the container that you want to review.</span></li>
+<li class="step stepexpand"><span class="cmd">In the <span class="keyword wintitle">Vulnerability Advisor</span> pane, click <span class="ph uicontrol">View report</span>.</span></li>
+<li class="step stepexpand"><span class="cmd">Review the sections to see the potential security and configuration issues for each package in
+the image:</span> <div class="p"><ul id="va_reviewing_container__report"><li><span class="ph uicontrol">Organizational Policies</span><p>Lists whether the container adheres to
+the policy that was set by the organization manager.</p>
+</li>
+<li><span class="ph uicontrol">Risk Analysis</span><p>If the container has one or more
+vulnerabilities, this section displays the risk rating of the discovered vulnerabilities as
+calculated by Vulnerability Advisor. The risk is calculated by using the <a href="https://www.first.org/cvss" rel="external" target="_blank" title="(Opens in a new tab or window)">CVSS</a> calculator, and <a href="https://exchange.xforce.ibmcloud.com/" rel="external" target="_blank" title="(Opens in a new tab or window)"><span class="keyword">IBM X-Force Exchange</span></a> technology.</p>
+</li>
+<li><span class="ph uicontrol">Vulnerable Packages</span><p>Lists packages with known vulnerability
+issues, which are updated daily from published security notices for the Docker image types that are
+listed in <a href="va_index.html#va_index" title="Vulnerability Advisor checks the security status of container images before deployment, and also checks the status of running containers.">Managing container and image security with Vulnerability Advisor</a>. Typically, for a vulnerable package to pass the scan, a
+later version of the package is required that includes a fix for the vulnerability. The same package
+might list multiple vulnerabilities, and in this case, a single package upgrade might correct
+multiple issues. Click the security notice code to review more information on the package and for
+steps to update the package.</p>
+</li>
+<li><span class="ph uicontrol">Container Settings</span><p>Lists suggestions that you can take to
+increase the security of the container. The <span class="keyword wintitle">Corrective Action</span> column describes
+how to improve security.</p>
+</li>
+<li><span class="ph uicontrol">Application Configurations</span><p>Lists application settings for the
+container that are nonsecure. The <span class="keyword wintitle">Corrective Action</span> column describes how to
+improve security.</p>
+</li>
+<li><span class="ph uicontrol">Docker image source</span><p>Displays the image that was used to
+create this container.</p>
+</li>
+</ul>
+</div>
+
+<p>Corrective actions or suggestions are provided for each item that is listed.</p>
+</li>
+<li class="step stepexpand"><span class="cmd">Decide how to update the container so that you can resolve the problems. </span> <div class="note important"><span class="importanttitle">Important:</span> To fix problems with the container image, you must delete the old instance
+and redeploy, which means losing any data within the existing container. Ensure that you have a good
+understanding of your container architecture to choose the appropriate method of redeploying the
+container.</div>
+ <div class="p">For example:<ul><li>If your container is decoupled from data that it computes, you can stop the container and delete
+it, make the required changes to the image, and redeploy, with minimal data loss.</li>
+<li>You can use a <span class="keyword">Cloud</span> service to
+assist, such as <a href="https://console.bluemix.net/docs/services/ActiveDeploy/index.html" rel="external" target="_blank" title="(Opens in a new tab or window)"><span class="keyword">Active Deploy</span></a> or <a href="https://console.bluemix.net/docs/services/DeliveryPipeline/index.html" rel="external" target="_blank" title="(Opens in a new tab or window)"><span class="keyword">Delivery Pipeline</span></a> to
+update the vulnerable container instance.</li>
+<li>In a microservices architecture, you might route traffic to another container instance while you
+fix security or configuration issues, and push the new image in a red/black deployment; see <a href="https://console.bluemix.net/docs/services/a8/index.html" rel="external" target="_blank" title="(Opens in a new tab or window)">Amalgam8</a></li>
+</ul>
+</div>
+</li>
+<li class="step stepexpand"><span class="cmd">Fix the problems that are described in the <span class="ph uicontrol">Vulnerability Assessment</span> report, and rebuild the image or redeploy the container
+according to the method you chose.</span> Some issues in the Dockerfile can be resolved by using the code that is provided in <a href="va_index.html#va_report" title="Find out how to fix any reported security and configuration issues that are reported by Vulnerability Advisor.">Resolving problems in containers or images</a>. </li>
+</ol>
+</div>
+<aside role="complementary" aria-labelledby="d72e536"></aside></article><article class="topic reference nested1" role="article" aria-labelledby="d72e719" lang="en-us" id="va_report"><h2 class="topictitle2" id="d72e719">Resolving problems in containers or images</h2>
+<div class="body refbody"><p class="shortdesc">Find out how to fix any reported security and configuration issues that are reported by Vulnerability Advisor.</p>
+<div><p>Vulnerability Advisor provides corrective actions with reported security or configuration issues.
+Some of the reported problems can be fixed by updating your Dockerfile. To help you resolve common
+problems more quickly, use the following code examples to implement the solution in your
+Dockerfile.</p>
+
+</div><section role="region" aria-labelledby="d72e757"><h3 class="sectiontitle" id="d72e757">Maximum password age, minimum password days, and minimum password length</h3>
+<p>Problem: You receive one, or all of the following errors:</p>
+
+<div class="p"><pre class="pre screen"><code>Maximum password age must be set to 90 days.</code></pre>
+</div>
+
+<div class="p"><pre class="pre screen"><code>Minimum password length must be 8.</code></pre>
+</div>
+
+<div class="p"><pre class="pre screen"><code>Minimum days that must elapse between user-initiated password changes should be 1.</code></pre>
+</div>
+
+<p>Fix: Set password compliance by adding the following code to your Dockerfile.</p>
+
+<div class="p"><pre class="codeblock"><code>RUN \
+    sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs &amp;&amp; \
+    sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS    1/' /etc/login.defs &amp;&amp; \
+    sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password</code></pre>
+</div>
+</section><section role="region" aria-labelledby="d72e783"><h3 class="sectiontitle" id="d72e783">SSH vulnerability</h3>
+<p>Problem: The following error is returned:</p>
+
+<div class="p"><pre class="pre screen"><code>SSH server should not be installed.</code></pre>
+</div>
+
+<p>Fix: Instead of using SSH, use <samp class="ph codeph">docker attach</samp> or <samp class="ph codeph">docker exec</samp> to access your container. Ensure that your Dockerfile does not contain any steps for installing an SSH Server.</p>
+</section></div>
+<aside role="complementary" aria-labelledby="d72e719"></aside></article></article></div></main></body></html>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-28"
+lastupdated: "2017-12-11"
 
 ---
 
@@ -37,7 +37,6 @@ As shown in the diagram, deploying your apps across multiple worker nodes makes 
 
 A Kubernetes cluster is a set of worker nodes that are organized into a network. The purpose of the cluster is to define a set of resources, nodes, networks, and storage devices that keep applications highly available. Before you can deploy an app, you must create a cluster and set the definitions for the worker nodes in that cluster.
 {:shortdesc}
-For {{site.data.keyword.Bluemix_dedicated_notm}} users, see [Creating Kubernetes clusters from the GUI in {{site.data.keyword.Bluemix_dedicated_notm}} (Closed Beta)](#creating_ui_dedicated) instead.
 
 To create a cluster:
 1. In the catalog, select **Kubernetes Cluster**.
@@ -47,6 +46,7 @@ To create a cluster:
     2. Select a type of machine and specify the number of worker nodes that you need. The machine type defines the amount of virtual CPU and memory that is set up in each worker node and made available to the containers.
         - The micro machine type indicates the smallest option.
         - A balanced machine has an equal amount of memory that is assigned to each CPU, which optimizes performance.
+        - Machine types that include `encrypted` in the name encrypt the host's Docker data. The `/var/lib/docker` directory, where all container data is stored, is encrypted with LUKS encryption.
     3. Select a Public and Private VLAN from your IBM Cloud infrastructure (SoftLayer) account. Both VLANs communicate between worker nodes but the public VLAN also communicates with the IBM-managed Kubernetes master. You can use the same VLAN for multiple clusters.
         **Note**: If you choose not to select a public VLAN, you must configure an alternative solution.
     4. Select a type of hardware. Shared is a sufficient option for most situations.
@@ -63,28 +63,7 @@ When the cluster is up and running, you can check out the following tasks:
 -   [Install the CLIs to start working with your cluster.](cs_cli_install.html#cs_cli_install)
 -   [Deploy an app in your cluster.](cs_apps.html#cs_apps_cli)
 -   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry/index.html)
-
-
-### Creating clusters with the GUI in {{site.data.keyword.Bluemix_dedicated_notm}} (Closed Beta)
-{: #creating_ui_dedicated}
-
-1.  Log in to {{site.data.keyword.Bluemix_notm}} Public console ([https://console.bluemix.net ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net)) with your IBMid.
-2.  From the account menu, select your {{site.data.keyword.Bluemix_dedicated_notm}} account. The console is updated with the services and information for your {{site.data.keyword.Bluemix_dedicated_notm}} instance.
-3.  From the catalog, select **Containers** and click **Kubernetes cluster**.
-4.  Enter a **Cluster Name**.
-5.  Select a **Machine type**. The machine type defines the amount of virtual CPU and memory that is set up in each worker node and that is available for all the containers that you deploy in your nodes.
-    -   The micro machine type indicates the smallest option.
-    -   A balanced machine type has an equal amount of memory assigned to each CPU, which optimizes performance.
-6.  Choose the **Number of worker nodes** that you need. Select `3` to ensure high availability of your cluster.
-7.  Click **Create Cluster**. The details for the cluster open, but the worker nodes in the cluster take a few minutes to provision. In the **Worker nodes** tab, you can see the progress of the worker node deployment. When the worker nodes are ready, the state changes to **Ready**.
-
-**What's next?**
-
-When the cluster is up and running, you can check out the following tasks:
-
--   [Install the CLIs to start working with your cluster.](cs_cli_install.html#cs_cli_install)
--   [Deploy an app in your cluster.](cs_apps.html#cs_apps_cli)
--   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry/index.html)
+- If you have a firewall, you might need to [open the required ports](cs_security.html#opening_ports) to use `bx`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
 
 <br />
 
@@ -95,11 +74,9 @@ When the cluster is up and running, you can check out the following tasks:
 A cluster is a set of worker nodes that are organized into a network. The purpose of the cluster is to define a set of resources, nodes, networks, and storage devices that keep applications highly available. Before you can deploy an app, you must create a cluster and set the definitions for the worker nodes in that cluster.
 {:shortdesc}
 
-For {{site.data.keyword.Bluemix_dedicated_notm}} users, see [Creating Kubernetes clusters from the CLI in {{site.data.keyword.Bluemix_dedicated_notm}} (Closed Beta)](#creating_cli_dedicated) instead.
-
 To create a cluster:
 1.  Install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{site.data.keyword.containershort_notm}} plug-in](cs_cli_install.html#cs_cli_install).
-2.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. To specify an {{site.data.keyword.Bluemix_notm}} region, [include the API endpoint](cs_regions.html#bluemix_regions).
+2.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted.
 
     ```
     bx login
@@ -110,9 +87,7 @@ To create a cluster:
 
 3. If you have multiple {{site.data.keyword.Bluemix_notm}} accounts, select the account where you want to create your Kubernetes cluster.
 
-4.  If you want to create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, [specify the {{site.data.keyword.containershort_notm}} region API endpoint](cs_regions.html#container_login_endpoints).
-
-    **Note**: If you want to create a cluster in US East, you must specify the US East container region API endpoint using the `bx cs init --host https://us-east.containers.bluemix.net` command.
+4.  If you want to create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, run `bx cs region-set`.
 
 6.  Create a cluster.
     1.  Review the locations that are available. The locations that are shown depend on the {{site.data.keyword.containershort_notm}} region that you are logged in.
@@ -315,151 +290,7 @@ To create a cluster:
 -   [Deploy an app in your cluster.](cs_apps.html#cs_apps_cli)
 -   [Manage your cluster with the `kubectl` command line. ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/user-guide/kubectl/)
 -   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry/index.html)
-
-### Creating clusters with the CLI in {{site.data.keyword.Bluemix_dedicated_notm}} (Closed Beta)
-{: #creating_cli_dedicated}
-
-1.  Install the {{site.data.keyword.Bluemix_notm}} CLI and the [{{site.data.keyword.containershort_notm}} plug-in](cs_cli_install.html#cs_cli_install).
-2.  Log in to the public endpoint for {{site.data.keyword.containershort_notm}}. Enter your {{site.data.keyword.Bluemix_notm}} credentials and select the {{site.data.keyword.Bluemix_dedicated_notm}} account when prompted.
-
-    ```
-    bx login -a api.<region>.bluemix.net
-    ```
-    {: pre}
-
-    **Note:** If you have a federated ID, use `bx login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
-
-3.  Create a cluster with the `cluster-create` command. When you create a standard cluster, the hardware of the worker node is billed by hours of usage.
-
-    Example:
-
-    ```
-    bx cs cluster-create --location <location> --machine-type <machine-type> --name <cluster_name> --workers <number>
-    ```
-    {: pre}
-
-    <table>
-    <caption>Table 2. Understanding this command's components</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>cluster-create</code></td>
-    <td>The command to create a cluster in your {{site.data.keyword.Bluemix_notm}} organization.</td>
-    </tr>
-    <tr>
-    <td><code>--location <em>&lt;location&gt;</em></code></td>
-    <td>Replace &lt;location&gt; with the {{site.data.keyword.Bluemix_notm}} location ID where you want to create your cluster. [Available locations](cs_regions.html#locations) depend on the {{site.data.keyword.containershort_notm}} region you are logged in to.</td>
-    </tr>
-    <tr>
-    <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
-    <td>If you are creating a standard cluster, choose a machine type. The machine type specifies the virtual compute resources that are available to each worker node. Review [Comparison of lite and standard clusters for {{site.data.keyword.containershort_notm}}](cs_planning.html#cs_planning_cluster_type) for more information. For lite clusters, you do not have to define the machine type.</td>
-    </tr>
-    <tr>
-    <td><code>--name <em>&lt;name&gt;</em></code></td>
-    <td>Replace <em>&lt;name&gt;</em> with a name for your cluster.</td>
-    </tr>
-    <tr>
-    <td><code>--workers <em>&lt;number&gt;</em></code></td>
-    <td>The number of worker nodes to include in the cluster. If the <code>--workers</code> option is not specified, 1 worker node is created.</td>
-    </tr>
-    </tbody></table>
-
-4.  Verify that the creation of the cluster was requested.
-
-    ```
-    bx cs clusters
-    ```
-    {: pre}
-
-    **Note:** It can take up to 15 minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account.
-
-    When the provisioning of your cluster is completed, the state of your cluster changes to **deployed**.
-
-    ```
-    Name         ID                                   State      Created          Workers
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1
-    ```
-    {: screen}
-
-5.  Check the status of the worker nodes.
-
-    ```
-    bx cs workers <cluster>
-    ```
-    {: pre}
-
-    When the worker nodes are ready, the state changes to **normal** and the status is **Ready**. When the node status is **Ready**, you can then access the cluster.
-
-    ```
-    ID                                                  Public IP        Private IP     Machine Type   State      Status
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1   169.47.223.113   10.171.42.93   free           normal    Ready
-    ```
-    {: screen}
-
-6.  Set the cluster you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
-
-    1.  Get the command to set the environment variable and download the Kubernetes configuration files.
-
-        ```
-        bx cs cluster-config <cluster_name_or_id>
-        ```
-        {: pre}
-
-        When the download of the configuration files is finished, a command is displayed that you can use to set the path to the local Kubernetes configuration file as an environment variable.
-
-        Example for OS X:
-
-        ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
-        ```
-        {: screen}
-
-    2.  Copy and paste the command that is displayed in your terminal to set the `KUBECONFIG` environment variable.
-    3.  Verify that the `KUBECONFIG` environment variable is set properly.
-
-        Example for OS X:
-
-        ```
-        echo $KUBECONFIG
-        ```
-        {: pre}
-
-        Output:
-
-        ```
-        /Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
-
-        ```
-        {: screen}
-
-7.  Access your Kubernetes dashboard with the default port 8001.
-    1.  Set the proxy with the default port number.
-
-        ```
-        kubectl proxy
-        ```
-        {: pre}
-
-        ```
-        Starting to serve on 127.0.0.1:8001
-        ```
-        {: screen}
-
-    2.  Open the following URL in a web browser in order to see the Kubernetes dashboard.
-
-        ```
-        http://localhost:8001/ui
-        ```
-        {: codeblock}
-
-
-**What's next?**
-
--   [Deploy an app in your cluster.](cs_apps.html#cs_apps_cli)
--   [Manage your cluster with the `kubectl` command line. ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/user-guide/kubectl/)
--   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry/index.html)
+- If you have a firewall, you might need to [open the required ports](cs_security.html#opening_ports) to use `bx`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
 
 <br />
 
@@ -860,7 +691,6 @@ Before you begin:
 1. [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
 2. [Request an instance of the {{site.data.keyword.Bluemix_notm}} service](/docs/manageapps/reqnsi.html#req_instance).
    **Note:** To create an instance of a service in the Washington DC location, you must use the CLI.
-3. For {{site.data.keyword.Bluemix_dedicated_notm}} users, see [Adding {{site.data.keyword.Bluemix_notm}} services to clusters in {{site.data.keyword.Bluemix_dedicated_notm}} (Closed Beta)](#binding_dedicated) instead.
 
 **Note:**
 <ul><ul>
@@ -929,198 +759,54 @@ To add a service:
 
 To use the service in a pod that is deployed in the cluster, cluster users can access the service credentials of the {{site.data.keyword.Bluemix_notm}} service by [mounting the Kubernetes secret as a secret volume to a pod](cs_apps.html#cs_apps_service).
 
-### Adding {{site.data.keyword.Bluemix_notm}} services to clusters in {{site.data.keyword.Bluemix_dedicated_notm}} (Closed Beta)
-{: #binding_dedicated}
-
-**Note**: The cluster and the worker nodes must be deployed fully before you can add a service.
-
-1.  Set the path to your local {{site.data.keyword.Bluemix_dedicated_notm}} configuration file as the `DEDICATED_BLUEMIX_CONFIG` environment variable.
-
-    ```
-    export DEDICATED_BLUEMIX_CONFIG=<path_to_config_directory>
-    ```
-    {: pre}
-
-2.  Set the same path defined above as the `BLUEMIX_HOME` environment variable.
-
-    ```
-    export BLUEMIX_HOME=$DEDICATED_BLUEMIX_CONFIG
-    ```
-    {: pre}
-
-3.  Log in to the {{site.data.keyword.Bluemix_dedicated_notm}} environment where you want to create the service instance.
-
-    ```
-    bx login -a api.<dedicated_domain> -u <user> -p <password> -o <org> -s <space>
-    ```
-    {: pre}
-
-4.  List the available services in the {{site.data.keyword.Bluemix_notm}} catalog.
-
-    ```
-    bx service offerings
-    ```
-    {: pre}
-
-5.  Create an instance of the service you want to bind to the cluster.
-
-    ```
-    bx service create <service_name> <service_plan> <service_instance_name>
-    ```
-    {: pre}
-
-6.  Verify that you created your service instance by listing available {{site.data.keyword.Bluemix_notm}} services.
-
-    ```
-    bx service list
-    ```
-    {: pre}
-
-    Example CLI output:
-
-    ```
-    name                      service           plan    bound apps   last operation
-    <service_instance_name>   <service_name>    spark                create succeeded
-    ```
-    {: screen}
-
-7.  Unset the `BLUEMIX_HOME` environment variable to return to using {{site.data.keyword.Bluemix_notm}} Public.
-
-    ```
-    unset $BLUEMIX_HOME
-    ```
-    {: pre}
-
-8.  Log in to the public endpoint for {{site.data.keyword.containershort_notm}} and target your CLI to the cluster in your {{site.data.keyword.Bluemix_dedicated_notm}} environment.
-    1.  Log in to the account by using the public endpoint for {{site.data.keyword.containershort_notm}}. Enter your {{site.data.keyword.Bluemix_notm}} credentials and select the {{site.data.keyword.Bluemix_dedicated_notm}} account when prompted.
-
-        ```
-        bx login -a api.ng.bluemix.net
-        ```
-        {: pre}
-
-        **Note:** If you have a federated ID, use `bx login --sso` to log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
-
-    2.  Get a list of available clusters and identify the name of the cluster to target in your CLI.
-
-        ```
-        bx cs clusters
-        ```
-        {: pre}
-
-    3.  Get the command to set the environment variable and download the Kubernetes configuration files.
-
-        ```
-        bx cs cluster-config <cluster_name_or_id>
-        ```
-        {: pre}
-
-        When the download of the configuration files is finished, a command is displayed that you can use to set the path to the local Kubernetes configuration file as an environment variable.
-
-        Example for OS X:
-
-        ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
-        ```
-        {: screen}
-
-    4.  Copy and paste the command that is displayed in your terminal to set the `KUBECONFIG` environment variable.
-
-9.  Identify the cluster namespace that you want to use to add your service. Choose between the following options.
-    * List existing namespaces and choose a namespace that you want to use.
-        ```
-        kubectl get namespaces
-        ```
-        {: pre}
-
-    * Create a new namespace in your cluster.
-        ```
-        kubectl create namespace <namespace_name>
-        ```
-        {: pre}
-
-10.  Bind the service instance to your cluster.
-
-      ```
-      bx cs cluster-service-bind <cluster_name_or_id> <namespace> <service_instance_name>
-      ```
-      {: pre}
-
 <br />
+
 
 
 ## Managing cluster access
 {: #cs_cluster_user}
 
-You can grant access to your cluster to other users, so that they can access the cluster, manage the cluster, and deploy apps to the cluster.
+Every user that works with {{site.data.keyword.containershort_notm}} must be assigned a combination of service-specific user roles that determine which actions the user can perform.
 {:shortdesc}
-
-Every user that works with {{site.data.keyword.containershort_notm}} must be assigned a service-specific user role in Identity and Access Management that determines what actions this user can perform. Identity and Access Management differentiates between the following access permissions.
 
 <dl>
 <dt>{{site.data.keyword.containershort_notm}} access policies</dt>
-<dd>Access policies determine the cluster management actions that you can perform on a cluster, such as creating or removing clusters, and adding or removing extra worker nodes.</dd>
-<dt>Resource Groups</dt>
-<dd>A resource group is a way to organize {{site.data.keyword.Bluemix_notm}} services into groupings so that you can quickly assign users access to more than one resource at a time. Learn how to [manage users by using resource groups](/docs/admin/resourcegroups.html#rgs).</dd>
-<dt>RBAC roles</dt>
-<dd>Every user who is assigned an {{site.data.keyword.containershort_notm}} access policy is automatically assigned an RBAC role. RBAC roles determine the actions that you can perform on Kubernetes resources inside the cluster. RBAC roles are set up for the default namespace only. The cluster administrator can add RBAC roles for other namespaces in the cluster. See [Using RBAC Authorization ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) in the Kubernetes documentation for more information.</dd>
+<dd>In Identity and Access Management, {{site.data.keyword.containershort_notm}} access policies determine the cluster management actions that you can perform on a cluster, such as creating or removing clusters, and adding or removing extra worker nodes. These policies must be set in conjunction with infrastructure policies.</dd>
+<dt>Infrastructure access policies</dt>
+<dd>In Identity and Access Management, infrastructure access policies allow the actions that are requested from the {{site.data.keyword.containershort_notm}} user interface or the CLI to be completed in IBM Cloud infrastructure (SoftLayer). These policies must be set in conjunction with {{site.data.keyword.containershort_notm}} access policies. [Learn more about the available infrastructure roles](/docs/iam/infrastructureaccess.html#infrapermission).</dd>
+<dt>Resource groups</dt>
+<dd>A resource group is a way to organize {{site.data.keyword.Bluemix_notm}} services into groupings so that you can quickly assign users access to more than one resource at a time. [Learn how to manage users by using resource groups](/docs/admin/resourcegroups.html#rgs).</dd>
 <dt>Cloud Foundry roles</dt>
-<dd>Every user must be assigned a Cloud Foundry user role. This role determines the actions that the user can perform on the {{site.data.keyword.Bluemix_notm}} account, such as inviting other users, or viewing the quota usage. To review the permissions of each role, see [Cloud Foundry roles](/docs/iam/cfaccess.html#cfaccess).</dd>
+<dd>In Identity and Access Management, every user must be assigned a Cloud Foundry user role. This role determines the actions that the user can perform on the {{site.data.keyword.Bluemix_notm}} account, such as inviting other users, or viewing the quota usage. [Learn more about the available Cloud Foundry roles](/docs/iam/cfaccess.html#cfaccess).</dd>
+<dt>Kubernetes RBAC roles</dt>
+<dd>Every user who is assigned an {{site.data.keyword.containershort_notm}} access policy is automatically assigned a Kubernetes RBAC role. In Kubernetes, RBAC roles determine the actions that you can perform on Kubernetes resources inside the cluster. RBAC roles are set up for the default namespace only. The cluster administrator can add RBAC roles for other namespaces in the cluster. See [Using RBAC Authorization ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) in the Kubernetes documentation for more information.</dd>
 </dl>
 
-Choose from the following actions to proceed:
+In this section:
 
--   [View required access policies and permissions to work with clusters](#access_ov).
--   [View your current access policy](#view_access).
--   [Change the access policy of an existing user](#change_access).
--   [Add additional users to the {{site.data.keyword.Bluemix_notm}} account](#add_users).
+-   [Access policies and permissions](#access_ov)
+-   [Adding users to the {{site.data.keyword.Bluemix_notm}} account](#add_users)
+-   [Customizing infrastructure permissions for a user](#infrastructure_permissions)
 
-### Overview of required {{site.data.keyword.containershort_notm}} access policies and permissions
+### Access policies and permissions
 {: #access_ov}
 
 Review the access policies and permissions that you can grant to users in your {{site.data.keyword.Bluemix_notm}} account. The operator and editor roles have separate permissions. If you want a user to, for example, add worker nodes and bind services, then you must assign the user both the operator and editor roles.
 
-|Access policy|Cluster Management Permissions|Kubernetes Resource Permissions|
+|{{site.data.keyword.containershort_notm}} access policy|Cluster management permissions|Kubernetes resource permissions|
 |-------------|------------------------------|-------------------------------|
-|<ul><li>Role: Administrator</li><li>Service Instances: all current service instances</li></ul>|<ul><li>Create a lite or standard cluster</li><li>Set credentials for an {{site.data.keyword.Bluemix_notm}} account to access the IBM Cloud infrastructure (SoftLayer) portfolio</li><li>Remove a cluster</li><li>Assign and change {{site.data.keyword.containershort_notm}} access policies for other existing users in this account.</li></ul><br/>This role inherits permissions from the Editor, Operator, and Viewer roles for all clusters in this account.|<ul><li>RBAC Role: cluster-admin</li><li>Read/write access to resources in every namespace</li><li>Create roles within a namespace</li><li>Access Kubernetes dashboard</li><li>Create an Ingress resource that makes apps publically available</li></ul>|
-|<ul><li>Role: Administrator</li><li>Service Instances: a specific cluster ID</li></ul>|<ul><li>Remove a specific cluster.</li></ul><br/>This role inherits permissions from the Editor, Operator, and Viewer roles for the selected cluster.|<ul><li>RBAC Role: cluster-admin</li><li>Read/write access to resources in every namespace</li><li>Create roles within a namespace</li><li>Access Kubernetes dashboard</li><li>Create an Ingress resource that makes apps publically available</li></ul>|
-|<ul><li>Role: Operator</li><li>Service Instances: all current service instances/ a specific cluster ID</li></ul>|<ul><li>Add additional worker nodes to a cluster</li><li>Remove worker nodes from a cluster</li><li>Reboot a worker node</li><li>Reload a worker node</li><li>Add a subnet to a cluster</li></ul>|<ul><li>RBAC Role: admin</li><li>Read/write access to resources inside the default namespace but not to the namespace itself</li><li>Create roles within a namespace</li></ul>|
-|<ul><li>Role: Editor</li><li>Service Instances: all current service instances a specific cluster ID</li></ul>|<ul><li>Bind an {{site.data.keyword.Bluemix_notm}} service to a cluster.</li><li>Unbind an {{site.data.keyword.Bluemix_notm}} service to a cluster.</li><li>Create a webhook.</li></ul><br/>Use this role for your app developers.|<ul><li>RBAC Role: edit</li><li>Read/write access to resources inside the default namespace</li></ul>|
-|<ul><li>Role: Viewer</li><li>Service Instances: all current service instances/ a specific cluster ID</li></ul>|<ul><li>List a cluster</li><li>View details for a cluster</li></ul>|<ul><li>RBAC Role: view</li><li>Read access to resources inside the default namespace</li><li>No read access to Kubernetes secrets</li></ul>|
-|<ul><li>Cloud Foundry organization role: Manager</li></ul>|<ul><li>Add additional users to an {{site.data.keyword.Bluemix_notm}} account</li></ul>| |
-|<ul><li>Cloud Foundry space role: Developer</li></ul>|<ul><li>Create {{site.data.keyword.Bluemix_notm}} service instances/li><li>Bind {{site.data.keyword.Bluemix_notm}} service instances to clusters</li></ul>| |
-{: caption="Table 7. Overview of required {{site.data.keyword.containershort_notm}} access policies and permissions" caption-side="top"}
+|Administrator|This role inherits permissions from the Editor, Operator, and Viewer roles for all clusters in this account. <br/><br/>When set for all current service instances:<ul><li>Create a lite or standard cluster</li><li>Set credentials for an {{site.data.keyword.Bluemix_notm}} account to access the IBM Cloud infrastructure (SoftLayer) portfolio</li><li>Remove a cluster</li><li>Assign and change {{site.data.keyword.containershort_notm}} access policies for other existing users in this account.</li></ul><p>When set for a specific cluster ID:<ul><li>Remove a specific cluster</li></ul></p>Corresponding infrastructure access policy: Super user<br/><br/><b>Note</b>: To create resources such as machines, VLANs, and subnets, users need the **Super user** infrastructure role.|<ul><li>RBAC Role: cluster-admin</li><li>Read/write access to resources in every namespace</li><li>Create roles within a namespace</li><li>Access Kubernetes dashboard</li><li>Create an Ingress resource that makes apps publically available</li></ul>|
+|Operator|<ul><li>Add additional worker nodes to a cluster</li><li>Remove worker nodes from a cluster</li><li>Reboot a worker node</li><li>Reload a worker node</li><li>Add a subnet to a cluster</li></ul><p>Corresponding infrastructure access policy: Basic user</p>|<ul><li>RBAC Role: admin</li><li>Read/write access to resources inside the default namespace but not to the namespace itself</li><li>Create roles within a namespace</li></ul>|
+|Editor <br/><br/><b>Tip</b>: Use this role for app developers.|<ul><li>Bind an {{site.data.keyword.Bluemix_notm}} service to a cluster.</li><li>Unbind an {{site.data.keyword.Bluemix_notm}} service to a cluster.</li><li>Create a webhook.</li></ul><p>Corresponding infrastructure access policy: Basic user|<ul><li>RBAC Role: edit</li><li>Read/write access to resources inside the default namespace</li></ul></p>|
+|Viewer|<ul><li>List a cluster</li><li>View details for a cluster</li></ul><p>Corresponding infrastructure access policy: View only</p>|<ul><li>RBAC Role: view</li><li>Read access to resources inside the default namespace</li><li>No read access to Kubernetes secrets</li></ul>|
+{: caption="Table 7. {{site.data.keyword.containershort_notm}} access policies and permissions" caption-side="top"}
 
-### Verifying your {{site.data.keyword.containershort_notm}} access policy
-{: #view_access}
+|Cloud Foundry access policy|Account management permissions|
+|-------------|------------------------------|
+|Organization role: Manager|<ul><li>Add additional users to an {{site.data.keyword.Bluemix_notm}} account</li></ul>| |
+|Space role: Developer|<ul><li>Create {{site.data.keyword.Bluemix_notm}} service instances</li><li>Bind {{site.data.keyword.Bluemix_notm}} service instances to clusters</li></ul>| 
+{: caption="Table 8. Cloud Foundry access policies and permissions" caption-side="top"}
 
-You can review and verify your assigned access policy for {{site.data.keyword.containershort_notm}}. The access policy determines the cluster management actions that you can perform.
-
-1.  Select the {{site.data.keyword.Bluemix_notm}} account where you want to verify your {{site.data.keyword.containershort_notm}} access policy.
-2.  From the menu bar, click **Manage** > **Security** > **Identity and Access**. The **Users** window displays a list of users with their email addresses and current status for the selected account.
-3.  Select the user for whom you want to check the access policy.
-4.  In the **Access policies** section, review the access policy for the user. To find detailed information about the actions that you can perform with this role, see [Overview of required {{site.data.keyword.containershort_notm}} access policies and permissions](#access_ov).
-5.  Optional: [Change your current access policy](#change_access).
-
-    **Note:** Only users with an assigned Administrator service policy for all resources in {{site.data.keyword.containershort_notm}} can change the access policy for an existing user. To add further users to an {{site.data.keyword.Bluemix_notm}} account, you must have the Manager Cloud Foundry role for the account. To find the ID of the {{site.data.keyword.Bluemix_notm}} account owner, run `bx iam accounts` and look for the **Owner User ID**.
-
-
-### Changing the {{site.data.keyword.containershort_notm}} access policy for an existing user
-{: #change_access}
-
-You can change the access policy for an existing user to grant cluster management permissions for a cluster in your {{site.data.keyword.Bluemix_notm}} account.
-
-Before you begin, [verify that you have been assigned the Administrator access policy](#view_access) for all resources in {{site.data.keyword.containershort_notm}}.
-
-1.  Select the {{site.data.keyword.Bluemix_notm}} account where you want to change the {{site.data.keyword.containershort_notm}} access policy for an existing user.
-2.  From the menu bar, click **Manage** > **Security** > **Identity and Access**. The **Users** window displays a list of users with their email addresses and current status for the selected account.
-3.  Find the user for whom you want to change the access policy. If you do not find the user you are looking for, [invite this user to the {{site.data.keyword.Bluemix_notm}} account](#add_users).
-4.  From the **Access policies**, in the **Role** row, under the **Actions** column, expand and click **Edit policy**.
-5.  From the **Service** drop-down list, select **{{site.data.keyword.containershort_notm}}**.
-6.  From the **Regions** drop-down list, select the region for which you want to change the policy.
-7.  From the **Service instance** drop-down list, select the cluster for which you want to change the policy. To find the ID of a specific cluster, run `bx cs clusters`.
-8.  In the **Select roles** section, click the role that you want to change the user's access to. To find a list of supported actions per role, see [Overview of required {{site.data.keyword.containershort_notm}} access policies and permissions](#access_ov).
-9.  Click **Save** to save your changes.
 
 ### Adding users to an {{site.data.keyword.Bluemix_notm}} account
 {: #add_users}
@@ -1129,29 +815,38 @@ You can add additional users to an {{site.data.keyword.Bluemix_notm}} account to
 
 Before you begin, verify that you have been assigned the Manager Cloud Foundry role for an {{site.data.keyword.Bluemix_notm}} account.
 
-1.  Select the {{site.data.keyword.Bluemix_notm}} account where you want to add users.
-2.  From the menu bar, click **Manage** > **Security** > **Identity and Access**. The Users window displays a list of users with their email addresses and current status for the selected account.
-3.  Click **Invite users**.
-4.  In **Email address**, enter the email address of the user that you want to add to the {{site.data.keyword.Bluemix_notm}} account.
-5.  In the **Access** section, expand **Services**.
-6.  From the **Assign access to** drop-down list, decide whether you want to grant access only to your {{site.data.keyword.containershort_notm}} account (**Resource**), or to a collection of various resources within your account (**Resource group**).
-7.  If **Resource**:
-    1. From the **Services** drop-down list, select **{{site.data.keyword.containershort_notm}}**.
-    2. From the **Region** drop-down list, select the region that you want to invite the user to.
-    3. From the **Service instance** drop-down list, select the cluster that you want to invite the user to. To find the ID of a specific cluster, run `bx cs clusters`.
-    4. In the **Select roles** section, click the role that you want to change the user's access to. To find a list of supported actions per role, see [Overview of required {{site.data.keyword.containershort_notm}} access policies and permissions](#access_ov).
-8. If **Resource group**:
-    1. From the **Resource group** drop-down list, select the resource group that includes permissions for your account's {{site.data.keyword.containershort_notm}} resource.
-    2. From the **Assign access to a resource group** drop-down list, select the role you want the invited user to have. To find a list of supported actions per role, see [Overview of required {{site.data.keyword.containershort_notm}} access policies and permissions](#access_ov).
-9. Optional: To allow this user to add additional users to an {{site.data.keyword.Bluemix_notm}} account, assign the user a Cloud Foundry org role.
-    1. In the **Cloud Foundry roles** section, from the **Organization** drop-down list, select the organization that you want to grant the user permissions to.
-    2. From the **Organization Roles** drop-down list, select **Manager**.
-    3. From the **Region** drop-down list, select the region that you want to grant the user perissions to.
-    4. From the **Space** drop-down list, select the space that you want to grant the user perissions to.
-    5. From the **Space roles** drop-down list, select **Manager**.
-10. Click **Invite users**.
+1.  [Add the user to the account](../iam/iamuserinv.html#iamuserinv).
+2.  In the **Access** section, expand **Services**.
+3.  Assign an {{site.data.keyword.containershort_notm}} access role. From the **Assign access to** drop-down list, decide whether you want to grant access only to your {{site.data.keyword.containershort_notm}} account (**Resource**), or to a collection of various resources within your account (**Resource group**).
+  -  For **Resource**:
+      1. From the **Services** drop-down list, select **{{site.data.keyword.containershort_notm}}**.
+      2. From the **Region** drop-down list, select the region to invite the user to.
+      3. From the **Service instance** drop-down list, select the cluster to invite the user to. To find the ID of a specific cluster, run `bx cs clusters`.
+      4. In the **Select roles** section, choose a role. To find a list of supported actions per role, see [Access policies and permissions](#access_ov).
+  - For **Resource group**:
+      1. From the **Resource group** drop-down list, select the resource group that includes permissions for your account's {{site.data.keyword.containershort_notm}} resource.
+      2. From the **Assign access to a resource group** drop-down list, select a role. To find a list of supported actions per role, see [Access policies and permissions](#access_ov).
+4. [Optional: Assign an infrastructure role](/docs/iam/mnginfra.html#managing-infrastructure-access).
+5. [Optional: Assign a Cloud Foundry role](/docs/iam/mngcf.html#mngcf).
+5. Click **Invite users**.
+
+
+
+### Customizing infrastructure permissions for a user
+{: #infrastructure_permissions}
+
+When you set infrastructure policies in Identity and Access Management, a user is given permissions associated with a role. To customize those permissions, you must log into IBM Cloud infrastructure (SoftLayer) and adjust the permissions there.
+{: #view_access}
+
+For example, basic users can reboot a worker node, but they cannot reload a worker node. Without giving that person super user permissions, you can adjust the IBM Cloud infrastructure (SoftLayer) permissions and add the permission to run a reload command.
+
+1.  Log in to your IBM Cloud infrastructure (SoftLayer) account.
+2.  Select a user profile to update.
+3.  In the **Portal Permissions**, customize the user's access. For example, to add reload permission, in the **Devices** tab, select **Issue OS Reloads and Initiate Rescue Kernel**.
+9.  Save your changes.
 
 <br />
+
 
 
 ## Updating the Kubernetes master
@@ -1184,7 +879,7 @@ While IBM automatically applies patches to the Kubernetes master, you must expli
 - Use [replicas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#replicas) in your deployments to reschedule pods on available nodes.
 
 Updating production-level clusters:
-- To help avoid downtime for your apps, the update process prevents pods from being scheduled on the worker node during the update. See [`kubectl drain` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/user-guide/kubectl/v1.8/#drain) for more information.
+- To help avoid downtime for your apps, the update process prevents pods from being scheduled on the worker node during the update. See [`kubectl drain` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#drain) for more information.
 - Use a test cluster to validate that your workloads and the delivery process are not impacted by the update. You cannot roll back worker nodes to a previous version.
 - Production-level clusters should have capacity to survive a worker node failure. If your cluster does not, add a worker node before updating the cluster.
 - A rolling update is performed when multiple worker nodes are requested to upgrade. A maximum of 20 percent of the total amount of worker nodes in a cluster can be upgraded simultaneously. The upgrade process waits for a worker node to complete the upgrade before another worker starts upgrading.
@@ -1222,9 +917,9 @@ After you complete the update:
 Change the pool of available portable public or private IP addresses by adding subnets to your cluster.
 {:shortdesc}
 
-In {{site.data.keyword.containershort_notm}}, you can add stable, portable IPs for Kubernetes services by adding network subnets to the cluster. When you create a standard cluster, {{site.data.keyword.containershort_notm}} automatically provisions a portable public subnet with 5 public IP addresses and a portable private subnet with 5 private IP addresses. Portable public and private IP addresses are static and do not change when a worker node, or even the cluster, is removed.
+In {{site.data.keyword.containershort_notm}}, you can add stable, portable IPs for Kubernetes services by adding network subnets to the cluster. In this case, subnets are not being used with netmasking to create connectivity across one or more clusters. Instead, the subnets are used to provide permanent fixed IPs for a service from a cluster that can be used to access that service.
 
-One of the portable public and one of the portable private IP addresses are used for [Ingress controllers](cs_apps.html#cs_apps_public_ingress) that you can use to expose multiple apps in your cluster. The remaining 4 portable public and 4 portable private IP addresses can be used to expose single apps to the public by [creating a load balancer service](cs_apps.html#cs_apps_public_load_balancer).
+When you create a standard cluster, {{site.data.keyword.containershort_notm}} automatically provisions a portable public subnet with 5 public IP addresses and a portable private subnet with 5 private IP addresses. Portable public and private IP addresses are static and do not change when a worker node, or even the cluster, is removed. For each subnet, one of the portable public and one of the portable private IP addresses are used for [application load balancers](cs_apps.html#cs_apps_public_ingress) that you can use to expose multiple apps in your cluster. The remaining 4 portable public and 4 portable private IP addresses can be used to expose single apps to the public by [creating a load balancer service](cs_apps.html#cs_apps_public_load_balancer).
 
 **Note:** Portable public IP addresses are charged on a monthly basis. If you choose to remove portable public IP addresses after your cluster is provisioned, you still have to pay the monthly charge, even if you used them only for a short amount of time.
 
@@ -1233,8 +928,6 @@ One of the portable public and one of the portable private IP addresses are used
 
 You can add stable, portable public or private IPs to the cluster by assigning subnets to the cluster.
 
-For {{site.data.keyword.Bluemix_dedicated_notm}} users, instead of using this task, you must [open a support ticket](/docs/support/index.html#contacting-support) to create the subnet, and then use the [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) command to add the subnet to the cluster.
-
 Before you begin, make sure that you can access the IBM Cloud infrastructure (SoftLayer) portfolio through the {{site.data.keyword.Bluemix_notm}} GUI. To access the portfolio, you must set up or use an existing {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account.
 
 1.  From the catalog, in the **Infrastructure** section, select **Network**.
@@ -1242,7 +935,7 @@ Before you begin, make sure that you can access the IBM Cloud infrastructure (So
 3.  From the **Select the type of subnet to add to this account** drop-down menu, select **Portable Public** or **Portable Private**.
 4.  Select the number of IP addresses that you want to add from your portable subnet.
 
-    **Note:** When you add portable IP addresses for your subnet, three IP addresses are used to establish cluster-internal networking, so that you cannot use them for your Ingress controller or to create a load balancer service. For example, if you request eight portable public IP addresses, you can use five of them to expose your apps to the public.
+    **Note:** When you add portable IP addresses for your subnet, three IP addresses are used to establish cluster-internal networking, so that you cannot use them for your application load balancer or to create a load balancer service. For example, if you request eight portable public IP addresses, you can use five of them to expose your apps to the public.
 
 5.  Select the public or private VLAN where you want to route the portable public or private IP addresses to. You must select the public or private VLAN that an existing worker node is connected to. Review the public or private VLAN for a worker node.
 
@@ -1273,7 +966,7 @@ Before you begin, make sure that you can access the IBM Cloud infrastructure (So
         ```
         {: pre}
 
-    4.  Add the subnet to your cluster. When you make a subnet available to a cluster, a Kubernetes config map is created for you that includes all available portable public or private IP addresses that you can use. If no Ingress controller exists for your cluster, one portable public IP address is automatically used to create the public Ingress controller and one portable private IP address is automatically used to create the private Ingress controller. All other portable public and private IP addresses can be used to create load balancer services for your apps.
+    4.  Add the subnet to your cluster. When you make a subnet available to a cluster, a Kubernetes config map is created for you that includes all available portable public or private IP addresses that you can use. If no application load balancer exists for your cluster, one portable public IP address is automatically used to create the public application load balancer and one portable private IP address is automatically used to create the private application load balancer. All other portable public and private IP addresses can be used to create load balancer services for your apps.
 
         ```
         bx cs cluster-subnet-add <cluster name or id> <subnet id>
@@ -1368,7 +1061,7 @@ If you have an existing subnet in your IBM Cloud infrastructure (SoftLayer) port
     ```
     {: screen}
 
-6.  Add the subnet to your cluster by specifying the subnet ID. When you make a subnet available to a cluster, a Kubernetes config map is created for you that includes all available portable public IP addresses that you can use. If no Ingress controller already exists for your cluster, one portable public IP address is automatically used to create the Ingress controller. All other portable public IP addresses can be used to create load balancer services for your apps.
+6.  Add the subnet to your cluster by specifying the subnet ID. When you make a subnet available to a cluster, a Kubernetes config map is created for you that includes all available portable public IP addresses that you can use. If no application load balancers already exist for your cluster, one portable public and one portable private IP address is automatically used to create the public and private application load balancers. All other portable public and private IP addresses can be used to create load balancer services for your apps.
 
     ```
     bx cs cluster-subnet-add mycluster 807861
@@ -1467,7 +1160,7 @@ Kubernetes differentiates between persistent volumes that represent the actual h
 
 ![Create persistent volumes and persistent volume claims](images/cs_cluster_pv_pvc.png)
 
- As depicted in the diagram, to enable existing NFS file shares to be used with Kubernetes, you must create persistent volumes with a certain size and access mode and create a persistent volume claim that matches the persistent volume specification. If persistent volume and persistent volume claim match, they are bound to each other. Only bound persistent volume claims can be used by the cluster user to mount the volume to a pod. This process is referred to as static provisioning of persistent storage.
+ As depicted in the diagram, to enable existing NFS file shares to be used with Kubernetes, you must create persistent volumes with a certain size and access mode and create a persistent volume claim that matches the persistent volume specification. If persistent volume and persistent volume claim match, they are bound to each other. Only bound persistent volume claims can be used by the cluster user to mount the volume to a deployment. This process is referred to as static provisioning of persistent storage.
 
 Before you begin, make sure that you have an existing NFS file share that you can use to create your persistent volume.
 
@@ -1475,12 +1168,15 @@ Before you begin, make sure that you have an existing NFS file share that you ca
 
 To create a persistent volume and matching persistent volume claim, follow these steps.
 
-1.  In your IBM Cloud infrastructure (SoftLayer) account, look up the ID and path of the NFS file share where you want to create your persistent volume object.
+1.  In your IBM Cloud infrastructure (SoftLayer) account, look up the ID and path of the NFS file share where you want to create your persistent volume object. In addition, authorize the file storage to the subnets in the cluster. This authorization gives your cluster access to the storage.
     1.  Log in to your IBM Cloud infrastructure (SoftLayer) account.
     2.  Click **Storage**.
-    3.  Click **File Storage** and note the ID and path of the NFS file share that you want to use.
-2.  Open your preferred editor.
-3.  Create a storage configuration file for your persistent volume.
+    3.  Click **File Storage** and from the **Actions** menu, select **Authorize Host**.
+    4.  Click **Subnets**. After you authorize, every worker node on the subnet has access to the file storage.
+    5.  Select the subnet of your cluster's public VLAN from the menu and click **Submit**. If you need to find the subnet, run `bx cs cluster-get <cluster_name> --showResources`.
+    6.  Click the name of the file storage.
+    7.  Make note the **Mount Point** field. The field is displayed as `<server>:/<path>`.
+2.  Create a storage configuration file for your persistent volume. Include the server and path from the file storage **Mount Point** field.
 
     ```
     apiVersion: v1
@@ -1493,13 +1189,13 @@ To create a persistent volume and matching persistent volume claim, follow these
      accessModes:
        - ReadWriteMany
      nfs:
-       server: "nfslon0410b-fz.service.softlayer.com"
+       server: "nfslon0410b-fz.service.networklayer.com"
        path: "/IBM01SEV8491247_0908"
     ```
     {: codeblock}
 
     <table>
-    <caption>Table 8. Understanding the YAML file components</caption>
+    <caption>Table 9. Understanding the YAML file components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
     </thead>
@@ -1514,7 +1210,7 @@ To create a persistent volume and matching persistent volume claim, follow these
     </tr>
     <tr>
     <td><code>accessMode</code></td>
-    <td>Access modes define the way that the persistent volume claim can be mounted to a worker node.<ul><li>ReadWriteOnce (RWO): The persistent volume can be mounted to pods in a single worker node only. Pods that are mounted to this persistent volume can read from and write to the volume.</li><li>ReadOnlyMany (ROX): The persistent volume can be mounted to pods that are hosted on multiple worker nodes. Pods that are mounted to this persistent volume can only read from the volume.</li><li>ReadWriteMany (RWX): This persistent volume can be mounted to pods that are hosted on multiple worker nodes. Pods that are mounted to this persistent volume can read from and write to the volume.</li></ul></td>
+    <td>Access modes define the way that the persistent volume claim can be mounted to a worker node.<ul><li>ReadWriteOnce (RWO): The persistent volume can be mounted to deployments in a single worker node only. Containers in deployments that are mounted to this persistent volume can read from and write to the volume.</li><li>ReadOnlyMany (ROX): The persistent volume can be mounted to deployments that are hosted on multiple worker nodes. Deployments that are mounted to this persistent volume can only read from the volume.</li><li>ReadWriteMany (RWX): This persistent volume can be mounted to deployments that are hosted on multiple worker nodes. Deployments that are mounted to this persistent volume can read from and write to the volume.</li></ul></td>
     </tr>
     <tr>
     <td><code>server</code></td>
@@ -1526,7 +1222,7 @@ To create a persistent volume and matching persistent volume claim, follow these
     </tr>
     </tbody></table>
 
-4.  Create the persistent volume object in your cluster.
+3.  Create the persistent volume object in your cluster.
 
     ```
     kubectl apply -f <yaml_path>
@@ -1540,14 +1236,14 @@ To create a persistent volume and matching persistent volume claim, follow these
     ```
     {: pre}
 
-5.  Verify that the persistent volume is created.
+4.  Verify that the persistent volume is created.
 
     ```
     kubectl get pv
     ```
     {: pre}
 
-6.  Create another configuration file to create your persistent volume claim. In order for the persistent volume claim to match the persistent volume object that you created earlier, you must choose the same value for `storage` and `accessMode`. The `storage-class` field must be empty. If any of these fields do not match the persistent volume, then a new persistent volume is created automatically instead.
+5.  Create another configuration file to create your persistent volume claim. In order for the persistent volume claim to match the persistent volume object that you created earlier, you must choose the same value for `storage` and `accessMode`. The `storage-class` field must be empty. If any of these fields do not match the persistent volume, then a new persistent volume is created automatically instead.
 
     ```
     kind: PersistentVolumeClaim
@@ -1565,14 +1261,14 @@ To create a persistent volume and matching persistent volume claim, follow these
     ```
     {: codeblock}
 
-7.  Create your persistent volume claim.
+6.  Create your persistent volume claim.
 
     ```
     kubectl apply -f deploy/kube-config/mypvc.yaml
     ```
     {: pre}
 
-8.  Verify that your persistent volume claim is created and bound to the persistent volume object. This process can take a few minutes.
+7.  Verify that your persistent volume claim is created and bound to the persistent volume object. This process can take a few minutes.
 
     ```
     kubectl describe pvc mypvc
@@ -1600,7 +1296,7 @@ To create a persistent volume and matching persistent volume claim, follow these
     {: screen}
 
 
-You successfully created a persistent volume object and bound it to a persistent volume claim. Cluster users can now [mount the persistent volume claim](cs_apps.html#cs_apps_volume_mount) to their pod and start reading from and writing to the persistent volume object.
+You successfully created a persistent volume object and bound it to a persistent volume claim. Cluster users can now [mount the persistent volume claim](cs_apps.html#cs_apps_volume_mount) to their deployments and start reading from and writing to the persistent volume object.
 
 <br />
 
@@ -1664,7 +1360,7 @@ To forward your namespace logs to a syslog server:
     {: pre}
 
     <table>
-    <caption>Table 9. Understanding this command's components</caption>
+    <caption>Table 10. Understanding this command's components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
     </thead>
@@ -1751,7 +1447,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
     {: pre}
 
     <table>
-    <caption>Table 10. Understanding this command's components</caption>
+    <caption>Table 11. Understanding this command's components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
     </thead>
@@ -1814,10 +1510,10 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
     {: pre}
     Replace <em>&lt;my_cluster&gt;</em> with the name of the cluster that the logging configuration is in and <em>&lt;my_namespace&gt;</em> with the name of the namespace.
 
-### Configuring log forwarding for applications, worker nodes, the Kubernetes system component, and the Ingress controller
+### Configuring log forwarding for applications, worker nodes, the Kubernetes system component, and application load balancers
 {: #cs_configure_log_source_logs}
 
-By default, the {{site.data.keyword.containershort_notm}} forwards Docker container namespace logs to {{site.data.keyword.loganalysislong_notm}}. You can also configure log forwarding for other log sources, such as applications, worker nodes, Kubernetes clusters, and Ingress controllers.
+By default, the {{site.data.keyword.containershort_notm}} forwards Docker container namespace logs to {{site.data.keyword.loganalysislong_notm}}. You can also configure log forwarding for other log sources, such as applications, worker nodes, Kubernetes clusters, and application load balancers.
 {:shortdesc}
 
 Review the following options for information about each log source.
@@ -1827,8 +1523,8 @@ Review the following options for information about each log source.
 |`application`|Logs for your own application that runs in a Kubernetes cluster.|`/var/log/apps/**/*.log`, `/var/log/apps/**/*.err`
 |`worker`|Logs for virtual machine worker nodes within a Kubernetes cluster.|`/var/log/syslog`, `/var/log/auth.log`
 |`kubernetes`|Logs for the Kubernetes system component.|`/var/log/kubelet.log`, `/var/log/kube-proxy.log`
-|`ingress`|Logs for an Ingress controller that manages network traffic coming into a Kubernetes cluster.|`/var/log/alb/ids/*.log`, `/var/log/alb/ids/*.err`, `/var/log/alb/customerlogs/*.log`, `/var/log/alb/customerlogs/*.err`
-{: caption="Table 11. Log source characteristics." caption-side="top"}
+|`ingress`|Logs for an application load balancer, managed by the Ingress controller, that manages network traffic coming into a Kubernetes cluster.|`/var/log/alb/ids/*.log`, `/var/log/alb/ids/*.err`, `/var/log/alb/customerlogs/*.log`, `/var/log/alb/customerlogs/*.err`
+{: caption="Table 12. Log source characteristics." caption-side="top"}
 
 #### Enabling log forwarding for applications
 {: #cs_apps_enable}
@@ -1874,9 +1570,9 @@ Before you start, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
     ```
     {:pre}
 
-3. To create a log forwarding configuration, follow the steps in [Enabling log forwarding for worker nodes, the Kubernetes system component, and the Ingress controller](cs_cluster.html#cs_log_sources_enable).
+3. To create a log forwarding configuration, follow the steps in [Enabling log forwarding for worker nodes, the Kubernetes system component, and application load balancers](cs_cluster.html#cs_log_sources_enable).
 
-#### Enabling log forwarding for worker nodes, the Kubernetes system component, and the Ingress controller
+#### Enabling log forwarding for worker nodes, the Kubernetes system component, and application load balancers
 {: #cs_log_sources_enable}
 
 You can forward logs to {{site.data.keyword.loganalysislong_notm}} or to an external syslog server. If you forward logs to {{site.data.keyword.loganalysisshort_notm}}, they are forwarded to the same space in which you created the cluster. If you want to forward logs from one log source to both log collector servers, then you must create two logging configurations.
@@ -1891,7 +1587,7 @@ Before you begin:
 
 2. [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster where the log source is located.
 
-To enable log forwarding for worker nodes, the Kubernetes system component, or an Ingress controller:
+To enable log forwarding for worker nodes, the Kubernetes system component, or an application load balancer:
 
 1. Create a log forwarding configuration.
 
@@ -1911,7 +1607,7 @@ To enable log forwarding for worker nodes, the Kubernetes system component, or a
     {: pre}
 
     <table>
-    <caption>Table 12. Understanding this command's components</caption>
+    <caption>Table 13. Understanding this command's components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
     </thead>
@@ -1985,7 +1681,7 @@ To enable log forwarding for worker nodes, the Kubernetes system component, or a
 #### Updating the log collector server
 {: #cs_log_sources_update}
 
-You can update a logging configuration for an application, worker nodes, the Kubernetes system component, and the Ingress controller by changing the log collector server, or the log type.
+You can update a logging configuration for an application, worker nodes, the Kubernetes system component, and an application load balancer by changing the log collector server, or the log type.
 {: shortdesc}
 
 **Note**: To view logs in the Sydney location, you must forward logs to an external syslog server.
@@ -2008,7 +1704,7 @@ To change the log collector server for your log source:
     {: pre}
 
     <table>
-    <caption>Table 13. Understanding this command's components</caption>
+    <caption>Table 14. Understanding this command's components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
     </thead>
@@ -2131,7 +1827,7 @@ You can configure other tools for more monitoring capabilities.
 ### Configuring health monitoring for worker nodes with Autorecovery
 {: #cs_configure_worker_monitoring}
 
-The {{site.data.keyword.containerlong_notm}} Autorecovery system can be deployed into existing clusters of Kubernetes version 1.7 or later. The Autorecovery system uses various checks to query worker node health status. If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. Only one worker node undergoes a corrective action at a time. The worker node must successfully complete the corrective action before any other worker node undergoes a corrective action.
+The {{site.data.keyword.containerlong_notm}} Autorecovery system can be deployed into existing clusters of Kubernetes version 1.7 or later. The Autorecovery system uses various checks to query worker node health status. If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. Only one worker node undergoes a corrective action at a time. The worker node must successfully complete the corrective action before any other worker node undergoes a corrective action. For more information, see this [Autorecovery blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
 **NOTE**: Autorecovery requires at least one healthy node to function properly. Configure Autorecovery with active checks only in clusters with two or more worker nodes.
 
 Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster where you want to check worker node statuses.
@@ -2185,7 +1881,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
     {:codeblock}
 
     <table>
-    <caption>Table 15. Understanding the YAML file components</caption>
+    <caption>Table 16. Understanding the YAML file components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
     </thead>

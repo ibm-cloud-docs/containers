@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-28"
+lastupdated: "2017-12-11"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2017-11-28"
 # Planning clusters and apps
 {: #cs_planning}
 
-Get a feel for the decisions you can make to configure and customize Kubernetes clusters in {{site.data.keyword.containershort_notm}} and meet the requirements of your organization. Some of these configurations cannot be changed after a cluster is created. Knowing these configurations in advance can ensure that resources, such as memory, disk space, and IP addresses are available to your development teams as needed.
+Get a feel for the decisions you can make to configure and customize Kubernetes clusters in {{site.data.keyword.containershort_notm}}. Some of these configurations cannot be changed after a cluster is created. Knowing these configurations in advance can ensure that resources, such as memory, disk space, and IP addresses, are available to your development teams as needed.
 {:shortdesc}
 
 <br />
@@ -28,12 +28,12 @@ Get a feel for the decisions you can make to configure and customize Kubernetes 
 ## Comparison of lite and standard clusters
 {: #cs_planning_cluster_type}
 
-You can create lite or standard clusters. Create lite clusters to get familiar and test Kubernetes capabilities or create standard clusters to  use full Kubernetes capabilities to deploy apps.
+You can create lite or standard clusters. Try out lite clusters to get familiar and test a few Kubernetes capabilities, or create standard clusters to use the full capabilities of Kubernetes to deploy apps.
 {:shortdesc}
 
 |Characteristics|Lite clusters|Standard clusters|
 |---------------|-------------|-----------------|
-|[Available in {{site.data.keyword.Bluemix_notm}} Public](cs_ov.html#cs_ov)|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|[Available in {{site.data.keyword.Bluemix_notm}}](cs_ov.html#cs_ov)|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[In-cluster networking](#cs_planning_private_network)|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Public network app access by a NodePort service](#cs_nodeport)|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[User access management](cs_cluster.html#cs_cluster_user)|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
@@ -44,7 +44,7 @@ You can create lite or standard clusters. Create lite clusters to get familiar a
 |[Public network app access by an Ingress service](#cs_ingress)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Portable public IP addresses](cs_apps.html#cs_cluster_ip_subnet)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Logging and monitoring](cs_cluster.html#cs_logging)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|[Available in {{site.data.keyword.Bluemix_dedicated_notm}} (Closed Beta)](cs_ov.html#dedicated_environment)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|[Available in {{site.data.keyword.Bluemix_dedicated_notm}}](cs_dedicated.html#dedicated_environment)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 {: caption="Table 1. Differences between lite and standard clusters" caption-side="top"}
 
 <br />
@@ -64,11 +64,11 @@ Review these potential cluster setups that are ordered with increasing degrees o
 2.  Two clusters that run in different locations in the same region, each with multiple worker nodes
 3.  Two clusters that run in different regions, each with multiple worker nodes
 
-Learn more about how you can use these techniques to increase the availability of your cluster:
+Increase the availability of your cluster with these techniques:
 
 <dl>
-<dt>Include enough worker nodes to spread out app instances</dt>
-<dd>For high availability, allow your app developers to spread their containers across multiple worker nodes per cluster. Three worker nodes allow for the downtime of one worker node to occur without interrupting the usage of the app. You can specify how many worker nodes to include when you create a cluster from the [{{site.data.keyword.Bluemix_notm}} GUI](cs_cluster.html#cs_cluster_ui) or the [CLI](cs_cluster.html#cs_cluster_cli). Kubernetes limits the maximum number of worker nodes that you can have in a cluster. Review [worker node and pod quotas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/cluster-large/) for more information.
+<dt>Spread apps across worker nodes</dt>
+<dd>Allow developers to spread their apps in containers across multiple worker nodes per cluster. An app instance in each of three worker nodes allow for the downtime of one worker node without interrupting the usage of the app. You can specify how many worker nodes to include when you create a cluster from the [{{site.data.keyword.Bluemix_notm}} GUI](cs_cluster.html#cs_cluster_ui) or the [CLI](cs_cluster.html#cs_cluster_cli). Kubernetes limits the maximum number of worker nodes that you can have in a cluster, so keep in mind the [worker node and pod quotas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/cluster-large/).
 <pre class="codeblock">
 <code>bx cs cluster-create --location &lt;dal10&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;my_cluster&gt;</code>
 </pre>
@@ -85,8 +85,8 @@ Learn more about how you can use these techniques to increase the availability o
 </pre>
 </dd>
 <dt>Spread apps across clusters in different regions</dt>
-<dd>When you spread applications across clusters in different regions, you can allow load balancing to occur based on the region the user is in. If the cluster, hardware, or even an entire location in one region goes down, traffic is routed to the container that is deployed in another location.
-<p><strong>Important:</strong> After you configure your custom domain, you might use these commands to create the clusters.</p>
+<dd>When you spread apps across clusters in different regions, you can allow load balancing to occur based on the region the user is in. If the cluster, hardware, or even an entire location in one region goes down, traffic is routed to the container that is deployed in another location.
+<p><strong>Important:</strong> After you configure a custom domain, you can use these commands to create the clusters.</p>
 <p>Location 1:</p>
 <pre class="codeblock">
 <code>bx cs cluster-create --location &lt;dal10&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;my_cluster1&gt;</code>
@@ -104,7 +104,7 @@ Learn more about how you can use these techniques to increase the availability o
 ## Worker node configuration
 {: #cs_planning_worker_nodes}
 
-A Kubernetes cluster consists of virtual machine worker nodes and is centrally monitored and managed by the Kubernetes master. Cluster admins must decide how to set up the cluster of worker nodes to ensure that cluster users have all the resources to deploy and run apps in the cluster.
+A Kubernetes cluster consists of worker nodes and is centrally monitored and managed by the Kubernetes master. Cluster admins decide how to set up the cluster of worker nodes to ensure that cluster users have all the resources to deploy and run apps in the cluster.
 {:shortdesc}
 
 When you create a standard cluster, worker nodes are ordered in IBM Cloud infrastructure (SoftLayer) on your behalf and set up in {{site.data.keyword.Bluemix_notm}}. Every worker node is assigned a unique worker node ID and domain name that must not be changed after the cluster is created. Depending on the level of hardware isolation that you choose, worker nodes can be set up as shared or dedicated nodes. Every worker node is provisioned with a specific machine type that determines the number of vCPUs, memory, and disk space that are available to the containers that are deployed to the worker node. Kubernetes limits the maximum number of worker nodes that you can have in a cluster. Review [worker node and pod quotas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/cluster-large/) for more information.
@@ -113,7 +113,7 @@ When you create a standard cluster, worker nodes are ordered in IBM Cloud infras
 ### Hardware for worker nodes
 {: #shared_dedicated_node}
 
-Every worker node is set up as a virtual machine on physical hardware. When you create a standard cluster in {{site.data.keyword.Bluemix_notm}} Public, you must choose whether you want the underlying hardware to be shared by multiple {{site.data.keyword.IBM_notm}} customers (multi tenancy) or to be dedicated to you only (single tenancy).
+Every worker node is set up as a virtual machine on physical hardware. When you create a standard cluster in {{site.data.keyword.Bluemix_notm}}, you must choose whether you want the underlying hardware to be shared by multiple {{site.data.keyword.IBM_notm}} customers (multi tenancy) or to be dedicated to you only (single tenancy).
 {:shortdesc}
 
 In a multi-tenant set up, physical resources, such as CPU and memory, are shared across all virtual machines that are deployed to the same physical hardware. To ensure that every virtual machine can run independently, a virtual machine monitor, also referred to as the hypervisor, segments the physical resources into isolated entities and allocates them as dedicated resources to a virtual machine (hypervisor isolation).
@@ -123,8 +123,6 @@ In a single-tenant set up, all physical resources are dedicated to you only. You
 Shared nodes are usually cheaper than dedicated nodes because the costs for the underlying hardware are shared among multiple customers. However, when you decide between shared and dedicated nodes, you might want to check with your legal department to discuss the level of infrastructure isolation and compliance that your app environment requires.
 
 When you create a lite cluster, your worker node is automatically provisioned as a shared node in the {{site.data.keyword.IBM_notm}} IBM Cloud infrastructure (SoftLayer) account.
-
-When you create a cluster in {{site.data.keyword.Bluemix_dedicated_notm}}, a single-tenant set up only is used and all physical resources are dedicated to you only. You deploy multiple worker nodes as virtual machines on the same physical host.
 
 <br />
 
@@ -146,13 +144,13 @@ Each machine type has a different memory capacity. When there is less memory ava
 |128 GB| 4096 MB |
 |242 GB| 4096 MB |
 
-To review how much memory is used on your worker node, run [kubectl top node ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/user-guide/kubectl/v1.8/#top).
+To review how much memory is used on your worker node, run [kubectl top node ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#top).
 
 
 ## Cluster management responsibilities
 {: #responsibilities}
 
-Review the responsibilities that you share with IBM to manage your clusters. To review responsibilities for clusters that are managed in {{site.data.keyword.Bluemix_dedicated_notm}} environments, see [Differences in cluster management between the cloud environments](cs_ov.html#env_differences) instead.
+Review the responsibilities that you share with IBM to manage your clusters.
 {:shortdesc}
 
 **IBM is responsible for:**
@@ -172,7 +170,7 @@ Review the responsibilities that you share with IBM to manage your clusters. To 
 - [Leveraging the capabilities of the service and Kubernetes to ensure high availability of apps](cs_planning.html#highly_available_apps)
 - [Adding or removing capacity by using the CLI to add or remove worker nodes](cs_cli_reference.html#cs_worker_add)
 - [Creating public and private VLANs in IBM Cloud infrastructure (SoftLayer) for network isolation of your cluster ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/vlans)
-- [Ensuring that all worker nodes have network connectivity to the Kubernetes master URL](cs_security.html#opening_ports) <p>**Note**: If a worker node has both public and private VLANs, then network connectivity is configured. If the worker node has a private VLAN only set up, then a vyatta is required to provide network connectivity.</p>
+- [Ensuring that all worker nodes have network connectivity to the Kubernetes master URL](cs_security.html#opening_ports) <p>**Note**: If a worker node has both public and private VLANs, then network connectivity is configured. If the worker node has a private VLAN only set up, then a Vyatta is required to provide network connectivity.</p>
 - [Updating the master kube-apiserver and worker nodes when Kubernetes major or minor version updates are available](cs_cluster.html#cs_cluster_update)
 - [Taking action to recover troubled worker nodes by running `kubectl` commands, such as `cordon` or `drain`, and by running `bx cs` commands, such as `reboot`, `reload`, or `delete`](cs_cli_reference.html#cs_worker_reboot)
 - [Adding or removing additional subnets in IBM Cloud infrastructure (SoftLayer) as needed](cs_cluster.html#cs_cluster_subnet)
@@ -325,9 +323,8 @@ When you create a cluster, every cluster is automatically connected to a private
 
 |Cluster type|Manager of the private VLAN for the cluster|
 |------------|-------------------------------------------|
-|Lite clusters in {{site.data.keyword.Bluemix_notm}} Public|{{site.data.keyword.IBM_notm}}|
-|Standard clusters in {{site.data.keyword.Bluemix_notm}} Public|You in your IBM Cloud infrastructure (SoftLayer) account <p>**Tip:** To have access to all VLANs in your account, turn on [VLAN Spanning ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/procedure/enable-or-disable-vlan-spanning).</p>|
-|Standard clusters in {{site.data.keyword.Bluemix_dedicated_notm}}|{{site.data.keyword.IBM_notm}}|
+|Lite clusters in {{site.data.keyword.Bluemix_notm}}|{{site.data.keyword.IBM_notm}}|
+|Standard clusters in {{site.data.keyword.Bluemix_notm}}|You in your IBM Cloud infrastructure (SoftLayer) account <p>**Tip:** To have access to all VLANs in your account, turn on [VLAN Spanning ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/procedure/enable-or-disable-vlan-spanning).</p>|
 {: caption="Table 2. Private VLAN management responsibilities" caption-side="top"}
 
 All pods that are deployed to a worker node are also assigned a private IP address. Pods are assigned an IP in the 172.30.0.0/16 private address range and are routed between worker nodes only. To avoid conflicts, do not use this IP range on any nodes that will communicate with your worker nodes. Worker nodes and pods can securely communicate on the private network by using the private IP addresses. However, when a pod crashes or a worker node needs to be re-created, a new private IP address is assigned.
@@ -347,13 +344,12 @@ For more information about how to create a service of type cluster IP, see [Kube
 When you create a cluster, every cluster must be connected to a public VLAN. The public VLAN determines the public IP address that is assigned to a worker node during cluster creation.
 {:shortdesc}
 
-The public network interface for the worker nodes in both lite and standard clusters is protected by Calico network policies. These policies block most inbound traffic by default, including SSH. However, inbound traffic that is necessary for Kubernetes to function is allowed, as are connections to NodePort, Loadbalancer, and Ingress services. For more information about these policies, inlcuding how to modify them, see [Network policies](cs_security.html#cs_security_network_policies).
+The public network interface for the worker nodes in both lite and standard clusters is protected by Calico network policies. These policies block most inbound traffic by default. However, inbound traffic that is necessary for Kubernetes to function is allowed, as are connections to NodePort, Loadbalancer, and Ingress services. For more information about these policies, inlcuding how to modify them, see [Network policies](cs_security.html#cs_security_network_policies).
 
 |Cluster type|Manager of the public VLAN for the cluster|
 |------------|------------------------------------------|
-|Lite clusters in {{site.data.keyword.Bluemix_notm}} Public|{{site.data.keyword.IBM_notm}}|
-|Standard clusters in {{site.data.keyword.Bluemix_notm}} Public|You in your IBM Cloud infrastructure (SoftLayer) account|
-|Standard clusters in {{site.data.keyword.Bluemix_dedicated_notm}}|{{site.data.keyword.IBM_notm}}|
+|Lite clusters in {{site.data.keyword.Bluemix_notm}}|{{site.data.keyword.IBM_notm}}|
+|Standard clusters in {{site.data.keyword.Bluemix_notm}}|You in your IBM Cloud infrastructure (SoftLayer) account|
 {: caption="Table 3. VLAN management responsibilities" caption-side="top"}
 
 Depending on whether you created a lite or standard cluster, you can choose between the following options to expose an app to the public.
@@ -389,7 +385,7 @@ Expose a port and use the public or private IP address for the load balancer to 
 {:shortdesc}
 
 
-When you create a standard cluster, {{site.data.keyword.containershort_notm}} automatically requests five portable public and five private IP addresses and provisions them into your IBM Cloud infrastructure (SoftLayer) account during cluster creation. Two of the portable IP addresses, one public and one private, are used for the [Ingress controller](#cs_ingress). Four portable public and Four private IP addresses can be used to expose apps by creating a LoadBalancer service.
+When you create a standard cluster, {{site.data.keyword.containershort_notm}} automatically requests five portable public and five portable private IP addresses and provisions them into your IBM Cloud infrastructure (SoftLayer) account during cluster creation. Two of the portable IP addresses, one public and one private, are used for [Ingress application load balancers](#cs_ingress). Four portable public and four portable private IP addresses can be used to expose apps by creating a LoadBalancer service.
 
 When you create a Kubernetes LoadBalancer service in a cluster on a public VLAN, an external load balancer is created. One of the four available public IP addresses is assigned to the load balancer. If no portable public IP address is available, the creation of your LoadBalancer service fails. The LoadBalancer service serves as the external entry point for incoming requests for the app. Unlike with NodePort services, you can assign any port to your load balancer and are not bound to a certain port range. The portable public IP address that is assigned to your LoadBalancer service is permanent and does not change when a worker node is removed or re-created. Therefore, the LoadBalancer service is more available than the NodePort service. To access the LoadBalancer service from the internet, use the public IP address of your load balancer and the assigned port in the format `<ip_address>:<port>`.
 
@@ -477,6 +473,8 @@ For more information about how to access a public or private registry and use an
 {: #cs_planning_apps_storage}
 
 A container is, by design, short-lived. However, as shown in the following diagram, you can choose between several options to persist data for the case of a container failover and to share data between containers.
+
+**Note**: If you have a firewall, [allow egress access](cs_security.html#opening_ports) for the IBM Cloud infrastructure (SoftLayer) IP ranges of the locations (data centers) that your clusters are in, so that you can create persistent volume claims.
 {:shortdesc}
 
 ![Persistent storage options for deployments in Kubernetes clusters](images/cs_planning_apps_storage.png)
@@ -484,7 +482,7 @@ A container is, by design, short-lived. However, as shown in the following diagr
 |Option|Description|
 |------|-----------|
 |Option 1: Use `/emptyDir` to persist data using the available disk space on the worker node<p>This feature is available for lite and standard clusters.</p>|With this option, you can create an empty volume on the disk space of your worker node that is assigned to a pod. The container in that pod can read from and write to that volume. Because the volume is assigned to one specific pod, data cannot be shared with other pods in a replica set.<p>An `/emptyDir` volume and its data are removed when the assigned pod is permanently deleted from the worker node.</p><p>**Note:** If the container inside the pod crashes, the data in the volume is still available on the worker node.</p><p>For more information, see [Kubernetes volumes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/volumes/).</p>|
-|Option 2: Create a persistent volume claim to provision NFS based persistent storage for your deployment<p>This feature is available for standard clusters only.</p>|With this option, you can have persistent storage of app and container data through an unlimited number of NFS file shares and persistent volumes. You create a [persistent volume claim](cs_apps.html) to initiate a request for NFS based file storage. {{site.data.keyword.containershort_notm}} provides predefined storage classes that define the range of sizes of the storage, IOPS, and the read and write permissions for the volume. You can choose between these storage classes when you create your persistent volume claim. After you submit a persistent volume claim, {{site.data.keyword.containershort_notm}} dynamically provisions a persistent volume that is hosted on NFS based file storage. [You can mount the persistent volume claim](cs_apps.html#cs_apps_volume_claim) as a volume to your pod to allow the container in your pod to read from and write to the volume. Persistent volumes can be shared across pods in the same replica set or with other pods in the same cluster.<p>When a container crashes or a pod is removed from a worker node, the data is not removed and can still be accessed by other pods that mount the volume. Persistent volume claims are hosted on persistent storage but do not have backups. If you require a backup of your data, create a manual backup.</p><p>**Note:** Persistent NFS file share storage is charged on a monthly basis. If you provision persistent storage for your cluster and remove it immediately, you still have to pay the monthly charge for the persistent storage, even if you used it only for a short amount of time.</p>|
+|Option 2: Create a persistent volume claim to provision NFS-based persistent storage for your deployment<p>This feature is available for standard clusters only.</p>|<p>With this option, you can have persistent storage of app and container data through persistent volumes. The volumes are hosted on [Endurance and Performance NFS-based file storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/details). The file storage is encrypted at rest, and you can create replicas of the stored data.</p> <p>You create a [persistent volume claim](cs_apps.html) to initiate a request for NFS-based file storage. {{site.data.keyword.containershort_notm}} provides predefined storage classes that define the range of sizes of the storage, IOPS, the delete policy, and the read and write permissions for the volume. You can choose between these storage classes when you create your persistent volume claim. After you submit a persistent volume claim, {{site.data.keyword.containershort_notm}} dynamically provisions a persistent volume that is hosted on NFS-based file storage. [You can mount the persistent volume claim](cs_apps.html#cs_apps_volume_claim) as a volume to your deployment to allow the containers to read from and write to the volume. Persistent volumes can be shared across the same replica set or with other deployments in the same cluster.</p><p>When a container crashes or a pod is removed from a worker node, the data is not removed and can still be accessed by other deployments that mount the volume. Persistent volume claims are hosted on persistent storage but do not have backups. If you require a backup of your data, create a manual backup.</p><p>**Note:** Persistent NFS file share storage is charged on a monthly basis. If you provision persistent storage for your cluster and remove it immediately, you still pay the monthly charge for the persistent storage, even if you used it only for a short amount of time.</p>|
 |Option 3: Bind an {{site.data.keyword.Bluemix_notm}} database service to your pod<p>This feature is available for lite and standard clusters.</p>|With this option, you can persist and access data by using an {{site.data.keyword.Bluemix_notm}} database cloud service. When you bind the {{site.data.keyword.Bluemix_notm}} service to a namespace in your cluster, a Kubernetes secret is created. The Kubernetes secret holds confidential information about the service, such as the URL to the service, your user name, password. You can mount the secret as a secret volume to your pod and access the service by using the credentials in the secret. By mounting the secret volume to other pods, you can also share data between pods.<p>When a container crashes or a pod is removed from a worker node, the data is not removed and can still be accessed by other pods that mount the secret volume.</p><p>Most {{site.data.keyword.Bluemix_notm}} database services provide disk space for a small amount of data at no cost, so you can test its features.</p><p>For more information about how to bind an {{site.data.keyword.Bluemix_notm}} service to a pod, see [Adding {{site.data.keyword.Bluemix_notm}} services for apps in {{site.data.keyword.containershort_notm}}](cs_apps.html#cs_apps_service).</p>|
 {: caption="Table 5. Persistent data storage options for deployments in Kubernetes clusters" caption-side="top"}
 
@@ -521,7 +519,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="External link 
 </tr>
 <tr>
 <td>Instana</td>
-<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="External link icon"></a> provides infrastructure and app performance monitoring with a GUI that automatically discovers and maps your apps. In addition, Istana captures every request to your apps, which lets you troubleshoot and perform root cause analysis to prevent the problems from happening again. Check out the blog post about <a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">deploying Istana in {{site.data.keyword.containershort_notm}} to learn more <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
+<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="External link icon"></a> provides infrastructure and app performance monitoring with a GUI that automatically discovers and maps your apps. In addition, Istana captures every request to your apps, which lets you troubleshoot and perform root cause analysis to prevent the problems from happening again. Check out the blog post about <a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">deploying Istana in {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to learn more.</td>
 </tr>
 <tr>
 <td>Istio</td>
@@ -540,6 +538,10 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="External link 
 <li>After Prometheus is deployed in your cluster, edit the Prometheus data source in Grafana to refer to <code>prometheus.kube-system:30900</code>.</li>
 </ol>
 </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.bpshort}}</td>
+<td>{{site.data.keyword.bplong}} is an automation tool that uses Terraform to deploy your infrastructure as code. When you deploy your infrastructure as a single unit, you can reuse those cloud resource definitions across any number of environments. To define a Kubernetes cluster as a resource with {site.data.keyword.bpshort}}, try creating an environment with the [container-cluster template](https://console.bluemix.net/schematics/templates/details/Cloud-Schematics%2Fcontainer-cluster). For more information about Schematics, see [About {{site.data.keyword.bplong_notm}}](/docs/services/schematics/schematics_overview.html#about).</td>
 </tr>
 <tr>
 <td>Weave Scope</td>

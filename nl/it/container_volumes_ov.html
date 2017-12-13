@@ -1,0 +1,669 @@
+<!DOCTYPE html><html lang="it-it">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="dcterms.date" content="2017-11-10">
+<meta name="dcterms.rights" content="© Copyright IBM Corp. 2014, 2017">
+
+<meta name="description" content="Un volume di archiviazione è utilizzato per salvare in modo permanente i dati o per condividerli tra i contenitori in uno spazio Bluemix dell'organizzazione.">
+<meta name="keywords" content="IBM Containers, contenitori, archiviazione persistente, volume, creazione, CLI, aggiunta di file, montaggio, exec, docker cp, backup di dati, scrittura, eliminazione, condivisioni file, archiviazione, dashboard, gui, aggiungi, cli, fs, rimozione">
+<meta name="geo.country" content="ZZ">
+<script>
+    digitalData = {
+      page: {
+        pageInfo: {
+  language: "it-it",
+
+  version: "v18",
+  ibm: {
+  country: "ZZ",
+  type: "CT701"
+  
+         }
+       }
+     }
+   };
+  </script><link rel="stylesheet" type="text/css" href="./ibmdita.css">
+<title>Archiviazione di dati persistenti in IBM Bluemix Container Service per contenitori singoli o scalabili</title>
+</head>
+<body><main role="main"><div><article class="nested0" role="article" aria-labelledby="d90280e6" id="container_volumes_ov"><h1 class="topictitle1" id="d90280e6">Archiviazione di dati persistenti in un volume per <span class="ph">contenitori singoli o scalabili</span></h1>
+<div class="abstract"><div class="shortdesc">Un volume di archiviazione
+è utilizzato per salvare in modo permanente i dati o per condividerli tra i contenitori in uno spazio
+<span class="keyword">Bluemix</span> dell'organizzazione.</div>
+
+
+<div class="p"><div class="note attention"><span class="attentiontitle">Attenzione:</span> <span class="ph">Le versioni di prova gratuita per <span class="ph">contenitori singoli o scalabili</span>
+non sono disponibili. <a href="cs_ov.html" title="IBM Bluemix Container Service combina Docker e Kubernetes per offrire strumenti potenti, un'esperienza utente intuitiva e la sicurezza e l'isolamento integrati per automatizzare la distribuzione, l'operatività, il ridimensionamento e il monitoraggio delle applicazioni inserite in un contenitore in un cluster di host di calcolo indipendenti utilizzando le API Kubernetes.">Informazioni sulla gestione e migrazione dei
+cluster a Kubernetes in <span class="keyword">IBM®
+Bluemix Container Service</span> su <span class="keyword">Bluemix</span> pubblico.</a></span></div>
+</div>
+
+
+<div class="p">In questa pagina:<div class="lines">&nbsp;&nbsp;&nbsp;&nbsp; • <a href="container_volumes_ov.html#about_volumes">Informazioni sui volumi</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp; • Creazione di volumi con la <a href="container_volumes_ov.html#container_volumes_ui" title="Un volume è un'ubicazione di archiviazione persistente per i dati creati da un'applicazione o per i file che l'applicazione richiede di eseguire. Puoi creare un volume per il tuo contenitore dalla GUI Bluemix.">GUI</a> o la <a href="container_volumes_ov.html#container_volumes_cli" title="Un volume è un'ubicazione di archiviazione persistente per i dati creati da un'applicazione o per i file che l'applicazione richiede di eseguire. Puoi creare un volume per il tuo contenitore dalla riga di comando.">CLI</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp; • <a href="container_volumes_ov.html#container_volumes_mount" title="Dopo che hai creato un volume, puoi montarlo in un contenitore e aggiungere dei file accessibili a tutti i contenitori su cui è montato il volume.">Aggiunta di file</a> ai volumi<br>
+&nbsp;&nbsp;&nbsp;&nbsp; • <a href="container_volumes_ov.html#container_volumes_backup" title="I volumi del contenitore sono ospitati con un'archiviazione persistente ma non dispongono di backup. Se richiedi un backup dei tuoi dati del volume, puoi utilizzare bx ic cp per creare un backup manuale.">Backup e ripristino di </a> volumi<br>
+&nbsp;&nbsp;&nbsp;&nbsp; • Aggiunta dell'<a href="container_volumes_ov.html#container_volumes_write" title="Gli utenti non root non dispongono dell'autorizzazione di scrittura nel percorso di montaggio del volume. Per concedere l'autorizzazione di scrittura, devi modificare il Dockerfile dell'immagine per creare una directory nel percorso di montaggio con l'autorizzazione corretta.">accesso utente non root</a> ai volumi<br>
+&nbsp;&nbsp;&nbsp;&nbsp; • <a href="container_volumes_ov.html#container_volume_different_dc" title="Se stai pianificando di passare il tuo spazio Bluemix corrente a un nuovo data center, assicurati di aver eseguito il backup dei tuoi volumi, in modo da poter ripristinare e utilizzare i dati nel tuo nuovo data center.">Migrazione di dati</a> a un data center differente<br>
+&nbsp;&nbsp;&nbsp;&nbsp; • <a href="container_volumes_ov.html#container_volumes_remove" title="Se non hai più bisogno di un volume per memorizzare i dati per i tuoi contenitori, puoi rimuoverlo.">Rimozione di volumi</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp; • <a href="container_volumes_ov.html#container_fileshares_adding_ui" title="Una condivisione file è un sistema di archiviazione basato su NFS (Network File System) persistente che ospita i volumi Docker in uno spazio Bluemix e consente all'utente di archiviare e accedere ai file correlati all'applicazione e al contenitore. Per archiviare i file in una condivisione file, devi creare un volume del contenitore e salvare i dati in tale volume.">Aggiunta e rimozione di condivisioni file</a></div>
+</div>
+</div>
+<aside role="complementary" aria-labelledby="d90280e6"></aside><article class="topic task nested1" role="article" aria-labelledby="d90280e151" id="about_volumes"><h2 class="topictitle2" id="d90280e151">Informazioni sui volumi</h2>
+<div class="body taskbody"><div class="section context" id="about_volumes__context_kjv_lg1_4z"><figure class="fignone" id="about_volumes__file_share"><figcaption>Figura 1. Condivisione file e struttura del volume in un'organizzazione.</figcaption><object id="about_volumes__volume_organization" width="500" data="images/utd_volumes.svg"><img width="500" src="images/utd_volumes.jpg" alt="Condivisioni file che contengono volumi che contengono file."></object></figure>
+
+<p><span class="ph" id="about_volumes__volume_intro">Un contenitore è temporaneo e non puoi conservare i dati dell'applicazione in modo permanente in esso.
+Tuttavia, puoi
+utilizzare un volume per conservare i dati tra i riavvi del contenitore, per condividere i dati tra i contenitori in uno spazio e
+per avere accesso ai tuoi dati dell'applicazione quando il contenitore non è disponibile. Se elimini un contenitore, il
+                                    volume di archiviazione non viene eliminato. Il ciclo di vita d un volume di archiviazione
+    è indipendente dal ciclo di vita di un contenitore. Poiché i contenitori Docker in <span class="keyword">Bluemix</span>
+non hanno accesso all'host locale, i volumi sono montati su <a href="container_volumes_ov.html#container_fileshares_adding_ui" title="Una condivisione file è un sistema di archiviazione basato su NFS (Network File System) persistente che ospita i volumi Docker in uno spazio Bluemix e consente all'utente di archiviare e accedere ai file correlati all'applicazione e al contenitore. Per archiviare i file in una condivisione file, devi creare un volume del contenitore e salvare i dati in tale volume.">condivisioni file</a> di cui viene eseguito il provisioning.</span></p>
+
+<p>Queste sono le attività nel ciclo di vita di memorizzazione permanente:</p>
+</div><ol class="steps" id="about_volumes__steps_ljv_lg1_4z"><li class="step">Opzionale: <span class="cmd">Crea una condivisione file che ospiti i tuoi volumi utilizzando la <a href="container_volumes_ov.html#container_fileshares_adding_ui" title="Una condivisione file è un sistema di archiviazione basato su NFS (Network File System) persistente che ospita i volumi Docker in uno spazio Bluemix e consente all'utente di archiviare e accedere ai file correlati all'applicazione e al contenitore. Per archiviare i file in una condivisione file, devi creare un volume del contenitore e salvare i dati in tale volume.">GUI</a> o la
+<a href="container_volumes_ov.html#container_fileshares_adding_ui" title="Una condivisione file è un sistema di archiviazione basato su NFS (Network File System) persistente che ospita i volumi Docker in uno spazio Bluemix e consente all'utente di archiviare e accedere ai file correlati all'applicazione e al contenitore. Per archiviare i file in una condivisione file, devi creare un volume del contenitore e salvare i dati in tale volume.">CLI</a>.</span> Devi disporre di un ruolo di gestore dell'organizzazione per creare una condivisione file. Se non sei un gestore dell'organizzazione,
+procedi con la creazione di un volume. Viene fornita una condivisione file predefinita di 20 GB
+per ogni organizzazione Bluemix.</li>
+<li class="step"><span class="cmd">Crea un volume utilizzando il <a href="container_volumes_ov.html#container_volumes_ui" title="Un volume è un'ubicazione di archiviazione persistente per i dati creati da un'applicazione o per i file che l'applicazione richiede di eseguire. Puoi creare un volume per il tuo contenitore dalla GUI Bluemix.">GUI</a> o la <a href="container_volumes_ov.html#container_volumes_cli" title="Un volume è un'ubicazione di archiviazione persistente per i dati creati da un'applicazione o per i file che l'applicazione richiede di eseguire. Puoi creare un volume per il tuo contenitore dalla riga di comando.">CLI</a>.</span></li>
+<li class="step"><span class="cmd">Crea un backup automatico del tuo volume utilizzando <a href="../images/docker_image_ibmbackup_restore/ibmbackup_restore_starter.html#ibmbackup_restore_starter">ibm-backup-restore image</a>.</span></li>
+<li class="step"><span class="cmd">Elimina un <a href="container_volumes_ov.html#container_volumes_remove" title="Se non hai più bisogno di un volume per memorizzare i dati per i tuoi contenitori, puoi rimuoverlo.">volume</a>.</span></li>
+<li class="step"><span class="cmd">Elimina una <a href="container_volumes_ov.html#container_filestorage_managing" title="Un gestore dell'organizzazione può rimuovere le condivisioni file esistenti e visualizzare quali volumi sono montati su una condivisione file.">condivisione file</a>.</span></li>
+</ol>
+</div>
+</article><article class="topic task nested1" role="article" aria-labelledby="d90280e262" lang="it-it" id="container_volumes_ui"><h2 class="topictitle2" id="d90280e262">Creazione di un volume con la GUI <span class="keyword">Bluemix</span></h2>
+<div class="body taskbody"><p class="shortdesc"><span class="ph">Un volume è un'ubicazione di archiviazione persistente per i dati creati da un'applicazione
+o per i file che l'applicazione richiede di eseguire. </span> Puoi creare un volume per il tuo contenitore
+dalla GUI <span class="keyword">Bluemix</span>.</p>
+<div class="section prereq"></div><div class="section context"><figure class="fignone" id="container_volumes_ui__file_share"><figcaption>Figura 2. Condivisione file e struttura del volume in un'organizzazione.</figcaption><object id="container_volumes_ui__volume_organization" width="500" data="images/utd_volumes.svg"><img width="500" src="images/utd_volumes.jpg" alt="Condivisioni file che contengono volumi che contengono file."></object></figure>
+
+<p><span class="ph" id="container_volumes_ui__volume_intro">Un contenitore singolo è, come progettato, di breve durata. Tuttavia, puoi
+utilizzare un volume per conservare i dati tra i riavvi del contenitore, per condividere i dati tra i contenitori in uno spazio e
+condividere i dati tra le istanze del contenitore in un gruppo. Quando monti un volume in Docker, il volume viene montato nel tuo
+file system locale. In <span class="keyword">IBM
+Bluemix Container Service</span>, l'accesso al nodo di calcolo
+è limitato, per cui non puoi montare le directory host in un contenitore. Invece, sono utilizzati i volumi
+nell'ambito dell'organizzazione per conservare i dati tra i riavvi del contenitore. I volumi sono ospitati su
+<a href="container_volumes_ov.html#container_fileshares_adding_ui" title="Una condivisione file è un sistema di archiviazione basato su NFS (Network File System) persistente che ospita i volumi Docker in uno spazio Bluemix e consente all'utente di archiviare e accedere ai file correlati all'applicazione e al contenitore. Per archiviare i file in una condivisione file, devi creare un volume del contenitore e salvare i dati in tale volume.">condivisioni file</a> isolate che archiviano in sicurezza i dati dell'applicazione e gestiscono l'accesso e l'autorizzazione
+ai file. Un volume non viene interessato da alcun aggiornamento apportato a un contenitore o a un'immagine. Se elimini un contenitore, il
+volume di archiviazione non viene eliminato. </span></p>
+</div><ol class="steps"><li class="step"><span class="cmd"><span class="ph" data-hd-otherprops="registry_check">Dal catalogo, seleziona
+<span class="ph uicontrol">Contenitori</span> e scegli un'immagine.</span></span></li>
+<li class="step"><span class="cmd">Seleziona <span class="ph uicontrol">Opzioni avanzate</span> per espandere i campi di creazione del volume.</span></li>
+<li class="step"><span class="cmd">Fai clic su <span class="ph uicontrol">Crea un volume</span>.</span></li>
+<li class="step"><span class="cmd">Nel campo <span class="ph uicontrol">Nome volume</span>, immetti un nome.</span> I volumi sono univoci per ciascun spazio, per cui i nomi non possono essere riutilizzati in uno spazio. Il nome del volume può contenere lettere maiuscole, lettere minuscole, numeri,
+caratteri di sottolineatura (_) e trattini (-).</li>
+<li class="step"><span class="cmd">Se una condivisione file esiste, selezionare una condivisione file esistente dal menu a discesa
+<span class="ph uicontrol">Condivisione file</span>.</span> Se non esiste alcuna condivisione file, viene creata una condivisione file predefinita
+di 20 GB. Il gestore dell'organizzazione
+può allocare condivisioni file con una dimensione di archiviazione specifica e IOPS. Consulta <a href="container_volumes_ov.html#container_fileshares_adding_ui" title="Una condivisione file è un sistema di archiviazione basato su NFS (Network File System) persistente che ospita i volumi Docker in uno spazio Bluemix e consente all'utente di archiviare e accedere ai file correlati all'applicazione e al contenitore. Per archiviare i file in una condivisione file, devi creare un volume del contenitore e salvare i dati in tale volume.">Aggiunta
+di condivisioni file ai volumi</a> per ulteriori informazioni. Non è presente un limite di dimensione per un volume. I volumi possono essere aumentati fino alla dimensione
+della condivisione file che li ospita.</li>
+<li class="step"><span class="cmd">Fai clic su <span class="ph uicontrol">Crea</span>.</span> Servono alcuni minuti per creare un volume.</li>
+</ol>
+<div class="section result">Il volume è disponibile nel tuo spazio e può essere montato nel tuo
+<a href="container_single_ui.html#gui__volume">contenitore singolo</a> o nel tuo
+<a href="container_ha.html#container_group_ui__volume">gruppo di contenitori</a>
+selezionandolo dal menu a discesa <span class="ph uicontrol">Assegna un volume esistente</span> in <span class="ph uicontrol">Opzioni avanzate</span>. Come hai selezionato il volume, assegna il percorso file
+in cui è montato il volume all'interno del contenitore, come ad esempio
+<span class="ph filepath">/var/lib/my_volume</span>. Se richiedi un backup
+del tuo contenitore, consulta <a href="container_volumes_ov.html#container_volumes_remove" title="Se non hai più bisogno di un volume per memorizzare i dati per i tuoi contenitori, puoi rimuoverlo.">Backup e ripristino di dati</a>.</div></div>
+<aside role="complementary" aria-labelledby="d90280e262"></aside></article><article class="topic task nested1" role="article" aria-labelledby="d90280e435" lang="it-it" id="container_volumes_cli"><h2 class="topictitle2" id="d90280e435">Creazione di volumi con la riga di comando (CLI)</h2>
+<div class="body taskbody"><p class="shortdesc"><span class="ph">Un volume è un'ubicazione di archiviazione persistente per i dati creati da un'applicazione
+o per i file che l'applicazione richiede di eseguire. </span> Puoi creare un volume per il tuo contenitore
+dalla riga di comando.</p>
+<div class="section prereq"></div><div class="section context"><p><span class="ph">Un contenitore singolo è, come progettato, di breve durata. Tuttavia, puoi
+utilizzare un volume per conservare i dati tra i riavvi del contenitore, per condividere i dati tra i contenitori in uno spazio e
+condividere i dati tra le istanze del contenitore in un gruppo. Quando monti un volume in Docker, il volume viene montato nel tuo
+file system locale. In <span class="keyword">IBM
+Bluemix Container Service</span>, l'accesso al nodo di calcolo
+è limitato, per cui non puoi montare le directory host in un contenitore. Invece, sono utilizzati i volumi
+nell'ambito dell'organizzazione per conservare i dati tra i riavvi del contenitore. I volumi sono ospitati su
+<a href="container_volumes_ov.html#container_fileshares_adding_ui" title="Una condivisione file è un sistema di archiviazione basato su NFS (Network File System) persistente che ospita i volumi Docker in uno spazio Bluemix e consente all'utente di archiviare e accedere ai file correlati all'applicazione e al contenitore. Per archiviare i file in una condivisione file, devi creare un volume del contenitore e salvare i dati in tale volume.">condivisioni file</a> isolate che archiviano in sicurezza i dati dell'applicazione e gestiscono l'accesso e l'autorizzazione
+ai file. Un volume non viene interessato da alcun aggiornamento apportato a un contenitore o a un'immagine. Se elimini un contenitore, il
+volume di archiviazione non viene eliminato. </span></p>
+</div><ol class="steps"><li class="step stepexpand"><span class="cmd">Crea un volume immettendo il seguente comando.</span> I volumi possono essere aumentati fino alla dimensione
+della condivisione file che li ospita. La specifica di una condivisione file è facoltativa. Puoi visualizzare le condivisioni file esistenti eseguendo <samp class="ph codeph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> volume-fs</samp>. Se non esiste alcuna condivisione file, viene creata una condivisione file predefinita
+di 20 GB. Il gestore dell'organizzazione
+può allocare condivisioni file con una dimensione di archiviazione specifica e IOPS. Consulta <a href="container_volumes_ov.html#container_fileshares_adding_ui" title="Una condivisione file è un sistema di archiviazione basato su NFS (Network File System) persistente che ospita i volumi Docker in uno spazio Bluemix e consente all'utente di archiviare e accedere ai file correlati all'applicazione e al contenitore. Per archiviare i file in una condivisione file, devi creare un volume del contenitore e salvare i dati in tale volume.">Aggiunta
+di condivisioni file ai volumi</a> per ulteriori informazioni. <div class="p"><pre class="codeblock"><code><samp class="ph codeph"><span class="ph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> volume - create VOLNAME [ FSNAME ] </span></samp></code></pre>
+</div>
+
+
+<div class="p"><dl><dt class="dlterm"><samp class="ph codeph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> volume-create</samp>
+parametri </dt>
+<dd><dl class="parml"><dt class="pt dlterm"><var class="keyword varname">FSNAME</var></dt>
+<dd class="pd">(Facoltativo) Il nome della condivisione file. Se non è disponibile alcuna condivisione file o la denominazione del volume sarà creata
+nella condivisione file predefinita dello spazio.</dd>
+</dl>
+
+<dl class="parml"><dt class="pt dlterm"><var class="keyword varname">VOLNAME</var></dt>
+<dd class="pd">(Obbligatorio) Il nome del volume. <span class="ph" id="container_volumes_cli__d44286e4840">Il nome può contenere lettere maiuscole, lettere minuscole, numeri,
+caratteri di sottolineatura (_) e trattini (-).</span></dd>
+</dl>
+</dd>
+</dl>
+</div>
+</li>
+<li class="step stepexpand">Opzionale: <span class="cmd">Verifica che il volume sia stato creato correttamente eseguendo il seguente comando.</span> <div class="p"><pre class="codeblock"><code><span class="ph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> volumes [--table]</span></code></pre>
+</div>
+</li>
+</ol>
+<div class="section postreq"><p>Successivamente, assegna il volume al tuo <a href="container_single_ui.html#container_single_cli" title="Crea un contenitore utilizzando il comando run. Un contenitore deve includere un'immagine. Se non ne hai ancora, puoi utilizzare una delle immagini predefinite certificate da IBM disponibili nel registro delle immagini privato della tua organizzazione.">contenitore
+singolo</a> o al tuo <a href="container_ha.html#container_group_cli" title="Crea e distribuisci il contenitore di gruppi scalabili dalla CLI IBM Bluemix Container Service. Un gruppo di contenitori include due o più contenitori che eseguono la stessa immagine. Utilizza i gruppi di contenitori per l'esecuzione dei servizi a lungo termine con i carichi di lavoro che richiedono scalabilità e affidabilità o per la verifica alla scala richiesta.">gruppo di contenitori</a>. I volumi
+sono assegnati utilizzando l'opzione <samp class="ph codeph">--volume</samp> nel comando <samp class="ph codeph">run</samp> e nel comando <samp class="ph codeph">group-create</samp>, rispettivamente. <span class="ph"> Se richiedi un backup
+del tuo contenitore, consulta <a href="container_volumes_ov.html#container_volumes_remove" title="Se non hai più bisogno di un volume per memorizzare i dati per i tuoi contenitori, puoi rimuoverlo.">Backup e ripristino di dati</a>.</span></p>
+</div></div>
+<aside role="complementary" aria-labelledby="d90280e435"></aside></article><article class="topic task nested1" role="article" aria-labelledby="d90280e632" lang="it-it" id="container_volumes_mount"><h2 class="topictitle2" id="d90280e632">Aggiunta di file nei volumi con l'interfaccia riga di comando (CLI)</h2>
+<div class="body taskbody"><p class="shortdesc">Dopo che hai creato un volume, puoi montarlo in un contenitore e aggiungere dei file accessibili
+a tutti i contenitori su cui è montato il volume.</p>
+<div class="section prereq">Prima di iniziare, crea un volume <a href="container_volumes_ov.html#container_volumes_ui" title="Un volume è un'ubicazione di archiviazione persistente per i dati creati da un'applicazione o per i file che l'applicazione richiede di eseguire. Puoi creare un volume per il tuo contenitore dalla GUI Bluemix.">utilizzando la GUI
+<span class="keyword">Bluemix</span> GUI</a> o
+<a href="container_volumes_ov.html#container_volumes_cli" title="Un volume è un'ubicazione di archiviazione persistente per i dati creati da un'applicazione o per i file che l'applicazione richiede di eseguire. Puoi creare un volume per il tuo contenitore dalla riga di comando.">utilizzando la CLI</a>. </div><div class="section context"></div><ol class="steps"><li class="step stepexpand"><span class="cmd">Crea un contenitore con un volume montato.*</span> Sostituisci <samp class="ph codeph"><var class="keyword varname">my_volume</var></samp> con il nome del tuo volume,
+<samp class="ph codeph"><var class="keyword varname">container_path</var></samp> con il percorso di montaggio del volume,
+<samp class="ph codeph"><var class="keyword varname">mio_contenitore</var></samp> con il nome del tuo contenitore e
+registry.<span class="keyword" data-hd-keyref="DomainName">DomainName</span>/<var class="keyword varname">mio_spazionomi</var>/<var class="keyword varname">my_image</var> con l'immagine. <pre class="codeblock"><code><span class="ph">bx ic</span> run --volume <var class="keyword varname">my_volume</var>:/<var class="keyword varname">container_path</var> --name <var class="keyword varname">mio_contenitore</var> registry.<span class="keyword" data-hd-keyref="DomainName">DomainName</span>/<var class="keyword varname">&lt;mio_spazionomi&gt;</var>/<var class="keyword varname">my_image</var></code></pre>
+
+
+<div class="note tip"><span class="tiptitle">Suggerimento:</span> <span class="ph">Esegui <samp class="ph codeph"><span class="ph">bx ic</span> namespace-get</samp> per richiamare
+il tuo spazio dei nomi e sostituisci <var class="keyword varname">&lt;mio_spazionomi&gt;</var> con le informazioni del tuo spazio dei nomi.</span></div>
+
+
+<div class="steps note"><span class="notetitle">Nota:</span> <span class="ph" id="container_volumes_mount__d44449e178">*In questo comando, puoi sostituire <samp class="ph codeph"><span class="ph">bx ic</span></samp> con
+<samp class="ph codeph">docker</samp> quando <a href="container_cli_cfic_install.html#container_cli_login" title="Dopo che hai installato la CLI, esegui l'accesso per utilizzarla.">accedi a
+<span class="keyword">IBM
+Bluemix Container Service</span></a> e imposti le tue variabili di ambiente
+per utilizzare i comandi Docker nativi.</span><span class="ph" id="container_volumes_mount__d44449e190">In questo argomento puoi utilizzare i comandi Docker
+nativi in tutte le fasi contrassegnate con un asterisco (*). </span></div>
+</li>
+<li class="step stepexpand"><span class="cmd">Copia i file da una directory locale nel volume utilizzando il comando <samp class="ph codeph"><span class="ph">bx ic</span> cp</samp>.*</span> <p>In questo esempio, stai copiando un file <var class="keyword varname">config.txt</var> nel tuo volume
+che viene montato nel percorso <var class="keyword varname">/src/usr/tmp</var> all'interno del contenitore. Sostituisci il file con il tuo proprio file
+o directory che stai copiando e modifica il percorso del contenitore in modo che punti
+al tuo volume. Nel comando il percorso o il file di origine viene per primo
+e il percorso alla destinazione per secondo. Quando copi in o da un contenitore <span class="ph">devi includere il nome del
+contenitore, il delimitatore <span class="q">":"</span> e il percorso del file o della cartella di destinazione. Il percorso deve essere
+relativo alla directory root del contenitore. </span>Consulta la documentazione
+<a href="container_cli_reference_cfic.html#container_cli_reference_cfic__cp"><span class="ph">bx ic</span> cp</a> per ulteriori informazioni.</p>
+
+
+<pre class="codeblock"><code><span class="ph"><samp class="ph codeph">bx ic</samp></span> cp <span class="ph filepath"><var class="keyword varname">./config.txt</var></span> <var class="keyword varname">mio_contenitore</var>:<span class="ph filepath"><var class="keyword varname">/src/usr/tmp</var></span></code></pre>
+</li>
+<li class="step stepexpand"><span class="cmd">Accertati che i tuoi file siano nel tuo volume eseguendo l'accesso al tuo contenitore in esecuzione con il comando
+<samp class="ph codeph"><span class="ph">bx ic</span> exec</samp>.*</span> <pre class="codeblock"><code><span class="ph"><samp class="ph codeph">bx ic</samp></span> exec -it <var class="keyword varname">mio_contenitore</var> bash</code></pre>
+</li>
+<li class="step stepexpand"><span class="cmd">Passa alla directory in cui hai montato il tuo volume ed elenca i file.</span> Il tuo file è elencato nell'output. Ogni contenitore in questo volume è montato per avere accesso a questo
+file.
+<pre class="codeblock"><code># cd <var class="keyword varname">container_path</var>
+# ls
+config.txt  </code></pre>
+</li>
+</ol>
+</div>
+<aside role="complementary" aria-labelledby="d90280e632"></aside></article><article class="topic task nested1" role="article" aria-labelledby="d90280e874" lang="it-it" id="container_volumes_backup"><h2 class="topictitle2" id="d90280e874">Backup e ripristino dei dati con l'interfaccia riga di comando (CLI)</h2>
+<div class="body taskbody"><p class="shortdesc">I volumi del contenitore sono ospitati con un'archiviazione persistente ma non dispongono di backup. Se richiedi un backup
+dei tuoi dati del volume, puoi utilizzare <samp class="ph codeph"><span class="ph">bx ic</span> cp</samp> per creare un backup manuale.</p>
+<ol class="steps"><li class="step stepexpand"><span class="cmd">Identifica il percorso di montaggio del volume nel contenitore in esecuzione o arrestato di cui stai eseguendo il backup.*</span>  <div class="p"><pre class="codeblock"><code><span class="ph">bx ic</span> inspect <var class="keyword varname">mio_contenitore</var></code></pre>
+</div>
+
+
+<p>'output contiene una sezione simile a questo esempio con il nome del volume e il
+punto di montaggio del contenitore. In questo esempio, il punto di montaggio è la cartella
+<span class="ph filepath">/mnt/data</span>.</p>
+
+
+<pre class="codeblock"><code>        "Mounts": [
+            {
+                "Destination": "<span class="ph filepath">/mnt/data</span>",
+                "Driver": "",
+                "Mode": "rw",
+                "Name": "",
+                "RW": true,
+                "Source": "/vol/<var class="keyword varname">fa277ff4-8a64-435b-9b75-0f11d59a3ae4</var>/<var class="keyword varname">example_container_id</var>"
+            }</code></pre>
+
+
+<div class="steps note"><span class="notetitle">Nota:</span> <span class="ph" id="container_volumes_backup__d44065e178">*In questo comando, puoi sostituire <samp class="ph codeph"><span class="ph">bx ic</span></samp> con
+<samp class="ph codeph">docker</samp> quando <a href="container_cli_cfic_install.html#container_cli_login" title="Dopo che hai installato la CLI, esegui l'accesso per utilizzarla.">accedi a
+<span class="keyword">IBM
+Bluemix Container Service</span></a> e imposti le tue variabili di ambiente
+per utilizzare i comandi Docker nativi.</span><span class="ph" id="container_volumes_backup__d44065e190">In questo argomento puoi utilizzare i comandi Docker
+nativi in tutte le fasi contrassegnate con un asterisco (*). </span></div>
+</li>
+<li class="step stepexpand">Opzionale: <span class="cmd">Arresta tutti i contenitori in esecuzione che stanno scrivendo sul volume.*</span> Arrestando i contenitori, interrompi la copia dei dati che stanno venendo scritti. 
+<div class="p"><pre class="codeblock"><code><span class="ph">bx ic</span> stop <var class="keyword varname">mio_contenitore</var></code></pre>
+</div>
+</li>
+<li class="step stepexpand"><span class="cmd">Copia i file dal singolo contenitore al tuo computer locale.*</span> Quando desideri eseguire il backup di un volume per un gruppo di contenitori, è sufficiente eseguire questo comando su un'istanza
+del gruppo come su tutte le istanze che condividono lo stesso punto di montaggio del
+volume.
+<p>Ora hai un backup locale dei tuoi dati del volume.</p>
+
+<pre class="codeblock"><code><span class="ph">bx ic</span> cp <var class="keyword varname">mio_contenitore</var>:<var class="keyword varname">/mnt/data</var> <var class="keyword varname">my_local_folder</var></code></pre>
+
+<div class="tablenoborder"><table summary="" id="container_volumes_backup__table_wrq_nbl_nw" class="defaultstyle"><caption><span class="tablecap">Tabella 1. Gli elementi del comando <span class="ph">bx ic</span> cp</span></caption><thead><tr><th colspan="2" id="d90280e1029" class="thleft">Descrizione di questo comando</th>
+</tr>
+</thead>
+<tbody><tr><td style="width: 50%" headers="d90280e1029 "><samp class="ph codeph">cp</samp></td>
+<td style="width: 50%" headers="d90280e1029 "><a href="container_cli_reference_cfic.html#container_cli_reference_cfic__cp">Il comando di copia</a>.</td>
+</tr>
+<tr><td style="width: 50%" headers="d90280e1029 "><var class="keyword varname">mio_contenitore</var>:<var class="keyword varname">/mnt/data</var></td>
+<td style="width: 50%" headers="d90280e1029 ">Il percorso di origine per primo. In questo caso, stati copiando i dati del contenitore in una destinazione locale,
+per cui il percorso del file contenitore è l'origine. Devi includere il nome del contenitore, due punti e il percorso del file
+nel contenitore. In questo esempio, hai selezionato il punto di montaggio del volume dal passo precedente
+così da poter copiare tutti i file inclusi.</td>
+</tr>
+<tr><td style="width: 50%" headers="d90280e1029 "><var class="keyword varname">my_local_folder</var></td>
+<td style="width: 50%" headers="d90280e1029 ">Il percorso di destinazione per secondo. Il percorso locale può essere assoluto o relativo. In questo esempio,
+stai copiando i tuoi dati del contenitore nel percorso relativo <var class="keyword varname">my_local_folder</var>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li class="step stepexpand">Opzionale: <span class="cmd">Copia i tuoi dati dalla cartella locale al nuovo volume.*</span> Questo comando ripristina i tuoi dati in un nuovo contenitore o volume. Un motivo per trasferire i dati
+a un nuovo volume è che tale volume è stato montato in una nuova condivisione file con
+maggiore archiviazione o più IOPS rispetto alla vecchia condivisione file. Consulta <a href="container_volumes_ov.html#container_fileshares_adding_cli" title="Crea una condivisione file utilizzando il comando bx ic volume-fs-create.">Aggiunta di condivisioni file con l'interfaccia riga di comando (CLI)</a>
+per la creazione di una nuova condivisione file o <a href="container_volumes_ov.html#container_volumes_cli" title="Un volume è un'ubicazione di archiviazione persistente per i dati creati da un'applicazione o per i file che l'applicazione richiede di eseguire. Puoi creare un volume per il tuo contenitore dalla riga di comando.">Creazione di volumi con la riga di comando (CLI)</a> per la creazione di un nuovo
+volume.
+<pre class="codeblock"><code><span class="ph">bx ic</span> cp <var class="keyword varname">my_local_folder</var> <var class="keyword varname">my_new_container</var>:<var class="keyword varname">/mnt/data</var> </code></pre>
+</li>
+</ol>
+<div class="section result">I tuoi dati vengono ora copiati nella tua cartella locale e disponi di un backup manuale. In aggiunta,
+hai copiato i dati in un volume su un nuovo contenitore.</div></div>
+<aside role="complementary" aria-labelledby="d90280e874"></aside></article><article class="topic task nested1" role="article" aria-labelledby="d90280e1102" lang="it-it" id="container_volumes_write"><h2 class="topictitle2" id="d90280e1102">Aggiunta di accesso utente non root ai volumi con l'interfaccia riga di comando (CLI)</h2>
+<div class="body taskbody"><p class="shortdesc">Gli utenti non root non dispongono dell'autorizzazione di scrittura nel percorso di montaggio del volume. Per concedere l'autorizzazione di scrittura,
+devi modificare il Dockerfile dell'immagine per creare una directory nel percorso di montaggio con
+l'autorizzazione corretta.</p>
+<div class="section context"><p>Per <span class="keyword">IBM
+Bluemix Container Service</span>, la
+funzione dello spazio dei nomi dell'utente è abilitata per Docker Engine. Gli spazi dei nomi dell'utente forniscono isolamento
+in modo che l'utente root del contenitore non può concedere l'accesso ad altri contenitori o all'host di calcolo. Tuttavia,
+i volumi sono su condivisioni file NFS esterne agli host di calcolo del contenitore. I volumi sono configurati per riconoscere
+l'utente root nel contenitore ma poiché i volumi sono esterni al contenitore non sono ignorati
+dagli spazi dei nomi dell'utente.</p>
+<p>Per alcune applicazioni, solo l'utente all'interno di un
+contenitore è l'utente root. Tuttavia, molte applicazioni specificano un utente non root che scrive nel percorso di montaggio
+del contenitore. Se stai progettando un'applicazione con un utente non root che richiede l'autorizzazione di scrittura nel volume,
+devi aggiungere i seguenti processi al tuo Dockerfile e al tuo script di punto di ingresso:</p>
+<ul><li>Creare un utente non root.</li>
+<li>Aggiungere temporaneamente l'utente al gruppo root.</li>
+<li>Creare una directory nel percorso di montaggio volume con le autorizzazioni utente corrette.</li>
+</ul>
+<p></p>
+</div><ol class="steps"><li class="step stepexpand"><span class="cmd">Creare un Dockerfile in una directory locale.</span> Questo Dockerfile di esempio crea un utente non root denominato <var class="keyword varname">myguest</var>.  <pre class="codeblock"><code>FROM registry.<var class="keyword varname" data-hd-keyref="DomainName">domain_name</var>/ibmnode:latest
+
+#Crea un gruppo e un utente con GID &amp; UID <var class="keyword varname">1010</var>.
+#In questo caso stai creando un gruppo e un utente denominati <var class="keyword varname">myguest</var>. 
+#Il GUID e l'UID <var class="keyword varname">1010</var> è improbabile che creino un conflitto con un GUID o un UID utente esistenti nell'immagine.
+#Il GUID e l'UID devono essere compresi tra 0 e 65536. Altrimenti, la creazione del contenitore ha esito negativo.
+RUN groupadd --gid <var class="keyword varname">1010</var> <var class="keyword varname">myguest</var>
+RUN useradd --uid <var class="keyword varname">1010</var> --gid <var class="keyword varname">1010</var> -m --shell /bin/bash <var class="keyword varname">myguest</var>
+
+ENV MY_USER=myguest
+
+COPY entrypoint.sh /sbin/entrypoint.sh
+RUN chmod 755 /sbin/entrypoint.sh
+
+EXPOSE 22
+ENTRYPOINT ["/sbin/entrypoint.sh"]</code></pre>
+</li>
+<li class="step stepexpand"><span class="cmd">Crea lo script di punto di ingresso nella stessa cartella locale del Dockerfile.</span>  Questo script di punto di ingresso di esempio specifica
+<span class="ph filepath"><var class="keyword varname">/mnt/myvol</var></span> come percorso di montaggio del volume.
+<pre class="codeblock"><code>#!/bin/bash
+set -e
+
+#Questo è il punto di montaggio per il volume condiviso.
+# Utilizza il punto di montaggio con il comando <span class="ph"><samp class="ph codeph">bx ic</samp></span> run.
+#Per impostazione predefinita il punto di montaggio è gestito dall'utente root.
+MOUNTPATH="/<span class="ph filepath">mnt</span>/<span class="ph filepath">myvol</span>"
+MY_USER=${MY_USER:-"myguest"}
+
+#Questa funzione crea una directory secondaria gestita da 
+#l'utente non root nel percorso di montaggio del volume condiviso.
+create_data_dir() {
+  #Aggiungi l'utente non root al gruppo primario dell'utente root.
+  usermod -aG root $MY_USER
+
+  #Fornisci l'autorizzazione di lettura-scrittura-esecuzione al gruppo per il percorso di montaggio del volume condiviso.
+  chmod 775 $MOUNTPATH
+
+  #Crea una directory nel percorso condiviso gestito dall'utente non root <var class="keyword varname">myguest</var>.
+  su -c "mkdir -p ${MOUNTPATH}/mydata" -l $MY_USER
+  su -c "chmod 700 ${MOUNTPATH}/mydata" -l $MY_USER
+  ls -al ${MOUNTPATH}
+
+  #Per sicurezza, rimuovi l'utente non root dal gruppo di utenti root.
+  deluser $MY_USER root
+
+  #Modifica il percorso di montaggio del volume condiviso con l'autorizzazione di lettura-scrittura-esecuzione originale.
+  chmod 755 $MOUNTPATH
+  echo "Created Data directory..."
+}
+
+create_data_dir
+
+#Questo comando crea un processo a esecuzione prolungata per lo scopo di questo esempio.
+tail -F /dev/null</code></pre>
+</li>
+<li class="step stepexpand"><span class="cmd">Accedi a <span class="keyword">IBM
+Bluemix</span>.</span> <pre class="codeblock"><code>bx login [-a api.<span class="keyword" data-hd-keyref="DomainName">DomainName</span>] [-sso]</code></pre>
+
+<span class="ph">Il parametro SSO (Single Sign On) <span class="keyword option">--sso</span> è obbligatorio quando accedi con un ID
+federato. Se questa opzione viene utilizzata, apri <a href="https://login.ng.bluemix.net/UAALoginServerWAR/passcode" rel="external" target="_blank" title="(Aprire in una nuova scheda o finestra)">https://login.ng.bluemix.net/UAALoginServerWAR/passcode</a> per ottenere il passcode monouso. Se non includi l'opzione <span class="keyword option">--sso</span>, completa questi passi secondari.</span><ol type="a" class="ol substeps"><li class="li substep"><span class="cmd">Per <span class="ph uicontrol">Email</span>, immetti il tuo ID IBM per
+<span class="keyword">Bluemix</span>.</span></li>
+<li class="li substep"><span class="cmd">Per <span class="ph uicontrol">Password</span>, immetti la password per l'ID IBM.</span> Vengono richiamati i tuoi spazi e organizzazioni Bluemix.</li>
+<li class="li substep"><span class="cmd">Immetti il numero che rappresenta una delle tue organizzazioni <span class="keyword">Bluemix</span>. </span></li>
+<li class="li substep"><span class="cmd">Immetti il numero che rappresenta uno dei tuoi spazi <span class="keyword">Bluemix</span> esistenti. </span></li>
+</ol>
+</li>
+<li class="step stepexpand"><span class="cmd">Inizializza la CLI <span class="keyword">IBM
+Bluemix Container Service</span>.</span> <pre class="codeblock"><code><span class="ph">bx ic</span> init</code></pre>
+</li>
+<li class="step stepexpand"><span class="cmd">Aggiungi l'immagine al tuo registro Bluemix.*</span> Ricorda di sostituire <var class="keyword varname">&lt;mio_spazionomi&gt;</var> con lo spazio dei nomi del tuo registro delle immagini
+privato. Esegui <samp class="ph codeph"><span class="ph">bx ic</span> namespace-get</samp> se devi trovare il tuo spazio dei nomi. <pre class="codeblock"><code><span class="ph">bx ic</span> build -t registry.<var class="keyword varname" data-hd-keyref="DomainName">domain_name</var>/&lt;mio_spazionomi&gt;/nonroot .</code></pre>
+
+
+<div class="steps note"><span class="notetitle">Nota:</span> <span class="ph" id="container_volumes_write__d45202e178">*In questo comando, puoi sostituire <samp class="ph codeph"><span class="ph">bx ic</span></samp> con
+<samp class="ph codeph">docker</samp> quando <a href="container_cli_cfic_install.html#container_cli_login" title="Dopo che hai installato la CLI, esegui l'accesso per utilizzarla.">accedi a
+<span class="keyword">IBM
+Bluemix Container Service</span></a> e imposti le tue variabili di ambiente
+per utilizzare i comandi Docker nativi.</span><span class="ph" id="container_volumes_write__d45202e190">In questo argomento puoi utilizzare i comandi Docker
+nativi in tutte le fasi contrassegnate con un asterisco (*). </span></div>
+</li>
+<li class="step stepexpand"><span class="cmd">Crea un volume.</span> <pre class="codeblock"><code><span class="ph">bx ic</span> volume-create <var class="keyword varname">mio_volume</var></code></pre>
+</li>
+<li class="step stepexpand"><span class="cmd">Monta il volume ed esegui il contenitore dall'immagine <var class="keyword varname">nonroot</var>.*</span>  Il percorso di montaggio del volume <samp class="ph codeph">/<span class="ph filepath">mnt</span>/<span class="ph filepath">myvol</span></samp>
+corrisponde al percorso di montaggio specificato nel
+Dockerfile.
+<pre class="codeblock"><code><span class="ph">bx ic</span> run --name <var class="keyword varname">mio_contenitore</var> --volume <var class="keyword varname">mio_volume</var>:/<span class="ph filepath">mnt</span>/<span class="ph filepath">myvol</span> registry.ng.bluemix.net/&lt;mio_spazionomi&gt;/nonroot</code></pre>
+</li>
+<li class="step stepexpand"><span class="cmd">Conferma che <var class="keyword varname">mio_contenitore</var> sia in esecuzione.*</span> Se il contenitore visualizza lo stato <samp class="ph codeph">BUILDING</samp>, non è ancora possibile accedervi. <pre class="codeblock"><code><span class="ph"><samp class="ph codeph">bx ic</samp></span>ps</code></pre>
+
+
+<pre class="pre screen"><code>$<span class="ph"><samp class="ph codeph">bx ic</samp></span> ps
+CONTAINER ID        IMAGE                                           COMMAND             CREATED             STATUS                  PORTS                         NAMES
+d92ee43d-2af        registry.<var class="keyword varname" data-hd-keyref="DomainName">domain_name</var>/<var class="keyword varname">&lt;mio_spazionomi&gt;</var>/<var class="keyword varname">nonroot</var>:latest   ""                  41 seconds ago      Running 29 seconds ago               <var class="keyword varname">mio_contenitore</var></code></pre>
+</li>
+<li class="step stepexpand"><span class="cmd">Accedi al contenitore dopo che è in esecuzione.*</span> <pre class="codeblock"><code><span class="ph"><samp class="ph codeph">bx ic</samp></span> exec -it <var class="keyword varname">mio_contenitore</var> /bin/bash</code></pre>
+</li>
+<li class="step stepexpand"><span class="cmd">Visualizza le autorizzazioni del tuo percorso di montaggio del volume.</span> <pre class="codeblock"><code>ls -al <span class="ph filepath">/mnt/myvol/</span></code></pre>
+
+
+<pre class="pre screen"><code>root@instance-006ff76b:/# ls -al /mnt/myvol/                                                                                                                                                             
+total 12
+drwxr-xr-x 3 root    root    4096 Jul 13 19:03 .
+drwxr-xr-x 3 root    root    4096 Jul 13 19:03 ..
+drwx------ 2 myguest myguest 4096 Jul 13 19:03 mydata</code></pre>
+
+
+<p>Questo output mostra che root dispone delle autorizzazioni di lettura, scrittura e esecuzione nel percorso di montaggio del volume
+<var class="keyword varname">mnt/myvol/</var>, ma che l'utente <var class="keyword varname">myguest</var> non root dispone della autorizzazioni di
+lettura e scrittura per la cartella <var class="keyword varname">mnt/myvol/mydata</var>. Poiché queste autorizzazioni sono state aggiornate,
+l'utente non root può ora scrivere dati nel volume persistente.</p>
+</li>
+</ol>
+</div>
+<aside role="complementary" aria-labelledby="d90280e1102"></aside></article><article class="topic task nested1" role="article" aria-labelledby="d90280e1484" lang="it-it" id="container_volume_different_dc"><h2 class="topictitle2" id="d90280e1484">Migrazione dei dati del volume a un data center differente</h2>
+<div class="body taskbody"><p class="shortdesc">Se stai pianificando di passare il tuo spazio <span class="keyword">Bluemix</span> corrente a un nuovo data center,
+assicurati di aver eseguito il backup dei tuoi volumi, in modo da poter ripristinare e utilizzare i dati nel tuo nuovo data center.  </p>
+<div class="section context"><div class="p"><div class="note attention"><span class="attentiontitle">Attenzione:</span> Quando sposti uno spazio in un nuovo data center utilizzando il comando <samp class="ph codeph"><span class="ph">bx ic</span> reprovision</samp>,
+tutti i contenitori, gli indirizzi IP pubblici e i volumi che hai in questo spazio saranno permanentemente
+rimossi e non migrati nel nuovo data center. Per assicurarti di non perdere dati dopo il passaggio al nuovo data center,
+devi eseguire il backup di tutti i tuoi volumi e ripristinare i dati dopo il reprovisioning del tuo spazio
+nel nuovo data center. </div>
+</div>
+</div><ol class="steps"><li class="step stepexpand"><span class="cmd">Elenca tutti i volumi esistenti nello spazio <span class="keyword">Bluemix</span> di cui desideri eseguire il reprovisioning. </span> <pre class="codeblock"><code><span class="ph">bx ic</span> volumes</code></pre>
+</li>
+<li class="step stepexpand"><span class="cmd">Esegui il backup di ogni volume che desideri utilizzare nel nuovo data center. Scegli tra le seguenti opzioni:</span> <ul class="ul choices"><li class="li choice">Utilizza <a href="container_volumes_ov.html#container_volumes_backup" title="I volumi del contenitore sono ospitati con un'archiviazione persistente ma non dispongono di backup. Se richiedi un backup dei tuoi dati del volume, puoi utilizzare bx ic cp per creare un backup manuale."><span class="ph">bx ic</span> cp command</a> per
+eseguire il backup nella tua macchina locale. </li>
+<li class="li choice">Crea un contenitore di backup dall'<a href="../images/docker_image_ibmbackup_restore/ibmbackup_restore_starter.html">immagine di backup e ripristino di IBM</a>
+per salvare i dati in un'istanza <span class="keyword">IBM Object
+Storage for Bluemix</span>.</li>
+</ul>
+<div class="note attention"><span class="attentiontitle">Attenzione:</span> Se non esegui il backup del tuo volume ed esegui il reprovisioning del tuo spazio al nuovo
+data center, i dati vanno persi e non è possibile ripristinarli. </div>
+</li>
+<li class="step stepexpand"><span class="cmd"><a href="container_volumes_ov.html#container_volumes_remove" title="Se non hai più bisogno di un volume per memorizzare i dati per i tuoi contenitori, puoi rimuoverlo.">Rimuovi tutti i volumi nel tuo spazio</a>.</span></li>
+<li class="step stepexpand"><span class="cmd"><a href="container_volumes_ov.html#container_filestorage_managing" title="Un gestore dell'organizzazione può rimuovere le condivisioni file esistenti e visualizzare quali volumi sono montati su una condivisione file.">Rimuovi tutte le condivisioni file nel tuo spazio</a>. </span></li>
+<li class="step stepexpand"><span class="cmd">Esegui il reprovisioning del tuo sazio al nuovo data center. Sostituisci <var class="keyword varname">&lt;data_center&gt;</var> con il
+<a href="container_cli_reference_cfic.html#container_cli_reference_cfic__reprovision">data center</a> in cui desideri creare il tuo nuovo spazio. </span> <pre class="codeblock"><code><span class="ph">bx ic</span> reprovision <var class="keyword varname">&lt;data_center&gt;</var></code></pre>
+</li>
+<li class="step stepexpand"><span class="cmd"><a href="container_volumes_ov.html#container_fileshares_adding_cli" title="Crea una condivisione file utilizzando il comando bx ic volume-fs-create.">Crea una condivisione file nel nuovo spazio</a>. </span></li>
+<li class="step stepexpand"><span class="cmd"><a href="container_volumes_ov.html#container_volumes_cli" title="Un volume è un'ubicazione di archiviazione persistente per i dati creati da un'applicazione o per i file che l'applicazione richiede di eseguire. Puoi creare un volume per il tuo contenitore dalla riga di comando.">Crea un volume</a> che puoi utilizzare
+per ripristinare i dati di backup.</span></li>
+<li class="step stepexpand"><span class="cmd">Ripristina i dati nel tuo nuovo volume. A seconda del modo che hai utilizzato per eseguire il backup del tuo volume,
+scegli tra le seguenti opzioni. </span> <ul class="ul choices"><li class="li choice">Utilizza <a href="container_volumes_ov.html#container_volumes_backup" title="I volumi del contenitore sono ospitati con un'archiviazione persistente ma non dispongono di backup. Se richiedi un backup dei tuoi dati del volume, puoi utilizzare bx ic cp per creare un backup manuale."><span class="ph">bx ic</span> cp command</a>
+per ripristinare i dati dalla tua macchina locale.</li>
+<li class="li choice">Crea un contenitore di ripristino dall'<a href="../images/docker_image_ibmbackup_restore/ibmbackup_restore_starter.html">immagine di backup e ripristino di IBM</a>
+per ripristinare i dati dalla tua istanza <span class="keyword">IBM Object
+Storage for Bluemix</span>.</li>
+</ul>
+</li>
+</ol>
+</div>
+<aside role="complementary" aria-labelledby="d90280e1484"></aside></article><article class="topic task nested1" role="article" aria-labelledby="d90280e1657" lang="it-it" id="container_volumes_remove"><h2 class="topictitle2" id="d90280e1657">Rimozione di volumi con la riga di comando (CLI)</h2>
+<div class="body taskbody"><p class="shortdesc">Se non hai più bisogno di un volume per memorizzare i dati per i tuoi contenitori, puoi rimuoverlo.</p>
+<div class="section prereq"><ul><li><div class="note important"><span class="importanttitle">Importante:</span> La rimozione di un volume rimuove permanentemente anche tutti i dati persistenti o i
+file archiviati sul volume. Non viene eseguito il backup dei volumi automaticamente, così <a href="container_volumes_ov.html#container_volumes_backup" title="I volumi del contenitore sono ospitati con un'archiviazione persistente ma non dispongono di backup. Se richiedi un backup dei tuoi dati del volume, puoi utilizzare bx ic cp per creare un backup manuale.">esegui il backup del tuo volume</a> prima di rimuoverlo. </div>
+</li>
+</ul>
+</div><ol class="steps"><li class="step stepexpand"><span class="cmd">Identifica il nome del volume.</span> <pre class="codeblock"><code><span class="ph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> volumes [--table]</span></code></pre>
+</li>
+<li class="step stepexpand"><span class="cmd">Controlla il tuo volume per rivedere su quali contenitori è montato il volume.</span> <pre class="codeblock"><code><span class="ph">bx ic</span> volume-inspect <var class="keyword varname">example_volume</var></code></pre>
+
+
+<p>L'output contiene una sezione denominata <span class="ph uicontrol">mounted_on_containers</span> che
+elenca i contenitori su cui è montato il volume.</p>
+
+
+<pre class="codeblock"><code>    "mounted_on_containers": [
+        "<var class="keyword varname">example_container</var>"
+    ],</code></pre>
+</li>
+<li class="step stepexpand"><span class="cmd">Se il volume viene montato in un contenitore, rimuovi tutti i dati confidenziali prima di eliminare il
+volume. </span> <ol type="a" class="ol substeps"><li class="li substep substepexpand">Opzionale: <span class="cmd">Controlla il tuo contenitore per trovare il percorso di montaggio su cui è montato il volume.</span> <pre class="codeblock"><code><span class="ph">bx ic</span> inspect <var class="keyword varname">example_container</var></code></pre>
+Puoi
+trovare il percorso di montaggio nella sezione <span class="ph uicontrol">Volumi</span> della tua risposta CLI.
+
+<pre class="pre screen"><code>"Volumes": {
+        "/mount_path": "/vol/0e65c452-62413-46f2-8b22-ff06ab74ac21/<var class="keyword varname">example_volume</var>"</code></pre>
+</li>
+<li class="li substep substepexpand"><span class="cmd">Accedi al contenitore.</span> <pre class="codeblock"><code><span class="ph">bx ic</span> exec -it <var class="keyword varname">example_container</var> bash</code></pre>
+</li>
+<li class="li substep substepexpand"><span class="cmd">Passa al tuo percorso di montaggio. </span> <pre class="codeblock"><code>cd /<var class="keyword varname">mount_path</var></code></pre>
+</li>
+<li class="li substep substepexpand"><span class="cmd">Rimuovi tutti i dati confidenziali dal tuo volume. </span> <pre class="codeblock"><code>rm -rf *</code></pre>
+</li>
+<li class="li substep substepexpand"><span class="cmd">Verifica che tutti i dati siano stati rimossi.</span> <pre class="codeblock"><code>ls</code></pre>
+Se non vengono visualizzati file o directory, i dati sono stati correttamente rimossi dal percorso di montaggio del
+volume. </li>
+<li class="li substep substepexpand"><span class="cmd">Ripeti i passi a-e per tutti i contenitori montati sul volume e che contengono
+dati confidenziali nel loro percorso di montaggio del volume. </span></li>
+</ol>
+</li>
+<li class="step stepexpand"><span class="cmd">Arresta tutti i contenitori montati nel tuo volume prima di rimuoverlo.*</span> <pre class="codeblock"><code><span class="ph">bx ic</span> stop <var class="keyword varname">example_container</var></code></pre>
+
+
+<div class="steps note"><span class="notetitle">Nota:</span> <span class="ph" id="container_volumes_remove__d44812e178">*In questo comando, puoi sostituire <samp class="ph codeph"><span class="ph">bx ic</span></samp> con
+<samp class="ph codeph">docker</samp> quando <a href="container_cli_cfic_install.html#container_cli_login" title="Dopo che hai installato la CLI, esegui l'accesso per utilizzarla.">accedi a
+<span class="keyword">IBM
+Bluemix Container Service</span></a> e imposti le tue variabili di ambiente
+per utilizzare i comandi Docker nativi.</span><span class="ph" id="container_volumes_remove__d44812e190">In questo argomento puoi utilizzare i comandi Docker
+nativi in tutte le fasi contrassegnate con un asterisco (*). </span></div>
+</li>
+<li class="step stepexpand"><span class="cmd">Se il contenitore non serve più, rimuovilo.*</span> <pre class="codeblock"><code><span class="ph">bx ic</span> rm <var class="keyword varname">example_container</var></code></pre>
+</li>
+<li class="step stepexpand"><span class="cmd">Quando tutti i contenitori con il volume montato sono stati arrestati, rimuovi il volume.</span> <div class="p"><pre class="codeblock"><code><samp class="ph codeph"><span class="ph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> volume-remove VOLNAME </span></samp></code></pre>
+</div>
+
+
+<div class="p"><dl><dt class="dlterm"><samp class="ph codeph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> volume-remove</samp>
+parameters </dt>
+<dd><dl class="parml"><dt class="pt dlterm"><var class="keyword varname">VOLNAME</var></dt>
+<dd class="pd">(Obbligatorio) Il nome del volume.</dd>
+</dl>
+</dd>
+</dl>
+</div>
+</li>
+<li class="step stepexpand">Opzionale: <span class="cmd">Verifica che il volume è stato rimosso.</span> <pre class="codeblock"><code><span class="ph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> volumes [--table]</span></code></pre>
+</li>
+</ol>
+</div>
+<aside role="complementary" aria-labelledby="d90280e1657"></aside></article><article class="topic task nested1" role="article" aria-labelledby="d90280e1900" lang="it-it" id="container_fileshares_adding_ui"><h2 class="topictitle2" id="d90280e1900">Aggiunta di condivisioni file ai volumi con la GUI <span class="keyword">Bluemix</span></h2>
+<div class="body taskbody"><div class="abstract"><span class="shortdesc"><span class="ph">Una condivisione file è un sistema di archiviazione basato su NFS (Network File System) persistente che
+ospita i volumi Docker in uno spazio <span class="keyword">Bluemix</span> e consente all'utente
+di archiviare e accedere ai file correlati all'applicazione e al contenitore. Per archiviare i file in una condivisione file, devi creare un volume del contenitore
+e salvare i dati in tale volume.</span></span>
+</div>
+<div class="section prereq"><div class="p"><div class="steps note"><span class="notetitle">Nota:</span> Se hai già raggiunto i tuoi limiti massimi di quota, puoi
+richiedere di aggiungere ulteriore quota aprendo un <a href="../support/index.html#contacting-support">ticket di supporto
+<span class="keyword">Bluemix</span></a>.</div>
+</div>
+</div><div class="section context"><p>Poiché i contenitori in <span class="keyword">Bluemix</span>
+non hanno accesso all'host locale, i volumi sono montati su condivisioni file NFS di cui viene eseguito il provisioning. I volumi su una
+condivisione file sono simili alle directory su un computer host. Le condivisioni file e i volumi
+sono univoci per ciascuno spazio, pertanto un contenitore deve essere creato nello stesso spazio per poter accedere ai dati persistenti
+sul volume. Per ulteriori informazioni sulla configurazione delle organizzazioni e degli spazi, vedi <a href="../admin/orgs_spaces.html">Gestione di Bluemix pubblico</a>. Al momento della prima
+creazione di un volume in una organizzazione, viene eseguito automaticamente il provisioning di una condivisione file di 20 GB e 4 IOPS
+per ospitare il volume. Per
+soddisfare le esigenze di prestazione dei dati, il gestore dell'organizzazione può creare nuove <a href="http://knowledgelayer.softlayer.com/learning/introduction-endurance-storage" rel="external" target="_blank" title="(Aprire in una nuova scheda o finestra)">dimensioni di condivisioni file</a> che variano da 20 GB a 12 TB e con IOPS per GB di 0,25, 2 o
+4.</p>
+
+<figure class="fignone" id="container_fileshares_adding_ui__fig_ac1_lzt_q5"><figcaption>Figura 3. Condivisione file e struttura del volume in un'organizzazione.</figcaption><object id="container_fileshares_adding_ui__d27645e47" width="500" data="images/utd_volumes.svg"><img width="500" src="images/utd_volumes.jpg" alt="Condivisioni file che contengono volumi che contengono file."></object></figure>
+</div><ol class="steps"><li class="step stepexpand"><span class="cmd"><span class="ph">Dai dettagli dell'account, nella gestione delle organizzazioni,
+seleziona un'organizzazione.</span></span></li>
+<li class="step stepexpand"><span class="cmd"><span class="ph">Nella sezione della quota, visualizza
+i dettagli per i contenitori.</span></span></li>
+<li class="step stepexpand"><span class="cmd"><span class="ph">Crea una condivisione file. È stata creata una riga alla fine della tabella.</span></span></li>
+<li class="step stepexpand"><span class="cmd">Seleziona uno spazio esistente in cui creare la condivisione file.</span></li>
+<li class="step stepexpand"><span class="cmd">Immetti un nome per la condivisione file.</span> <span class="ph">Il nome può contenere lettere maiuscole, lettere minuscole, numeri,
+caratteri di sottolineatura (_) e trattini (-).</span></li>
+<li class="step stepexpand"><span class="cmd">Determina le esigenze di capacità della tua condivisione file.</span> La dimensione della condivisione file e l'IOPS per GB (opzioni di input/output al secondo) si moltiplicano
+per creare il totale di IOPS. La tabella illustra la relazione tra la dimensione della condivisione file e l'IOPS.
+<div class="tablenoborder"><table summary="" id="container_fileshares_adding_ui__file_share_ex" class="defaultstyle"><caption><span class="tablecap">Tabella 2. Esempi di dimensioni di condivisioni file e IOPS per GB</span></caption><thead><tr><th id="d90280e2032" class="thleft"> Dimensioni di condivisioni file</th>
+<th id="d90280e2034" class="thleft">IOPS per GB</th>
+<th id="d90280e2036" class="thleft">Totale IOPS</th>
+</tr>
+</thead>
+<tbody><tr><td headers="d90280e2032 ">20 GB</td>
+<td headers="d90280e2034 ">4</td>
+<td headers="d90280e2036 ">80</td>
+</tr>
+<tr><td headers="d90280e2032 ">100 GB</td>
+<td headers="d90280e2034 ">4</td>
+<td headers="d90280e2036 ">400</td>
+</tr>
+<tr><td headers="d90280e2032 ">1.000 GB</td>
+<td headers="d90280e2034 ">4</td>
+<td headers="d90280e2036 ">4.000</td>
+</tr>
+<tr><td headers="d90280e2032 ">4.000 GB</td>
+<td headers="d90280e2034 ">4</td>
+<td headers="d90280e2036 ">16.000</td>
+</tr>
+</tbody>
+</table>
+</div>
+Le applicazioni con carichi di lavoro elevati richiedono un totale di IOPS maggiore, quindi considera le applicazioni
+che scrivono nei tuoi volumi  quando scegli la configurazione della condivisione file.<ol type="a" class="ol substeps"><li class="li substep"><span class="cmd">Per la <span class="ph uicontrol">Dimensione</span>, seleziona un valore in gigabyte.</span></li>
+<li class="li substep"><span class="cmd">Per <span class="ph uicontrol">IOPS</span>, seleziona un valore in IOPS per gigabyte.</span> In base alle immissioni per <span class="ph uicontrol">Dimensione</span> e <span class="ph uicontrol">IOPS</span>, ti viene calcolato un prezzo
+mensile. Prima che continui, puoi modificare i valori per <span class="ph uicontrol">Dimensione</span> e <span class="ph uicontrol">IOPS</span> per modificare il calcolo del prezzo mensile. </li>
+</ol>
+</li>
+<li class="step stepexpand"><span class="cmd">Fai clic su <span class="ph uicontrol">Salva</span>.</span></li>
+</ol>
+<div class="section result"><p><span class="ph" id="container_fileshares_adding_ui__fs_results"> Servono diversi minuti affinché la condivisione file venga completata. Una volta terminata la
+creazione della condivisione file, l'icona di stato visualizza una segno di spunta. Ora hai una condivisione file disponibile
+nello spazio specificato nella tua organizzazione. Puoi creare più condivisioni file
+per ospitare più volumi o puoi ospitare più volumi in una condivisione file. Ogni volume condivide le risorse
+della condivisione file che ospita, di conseguenza ospitare più volumi su una condivisione file
+può ridurre le prestazioni.</span></p>
+</div><div class="section postreq">Quindi, se sei il gestore dell'organizzazione puoi visualizzare la tua condivisione file dell'organizzazione di fatturazione.<div class="p"><ol><li>Fai clic sull'avatar utente.</li>
+<li>Fai clic su <span class="ph uicontrol">Account</span>.</li>
+<li>Espandi la tua organizzazione facendo clic sul pulsante <span class="ph uicontrol">+</span>.</li>
+<li>Seleziona <span class="ph uicontrol">Dashboard di utilizzo</span> e rivedi i dettagli di utilizzo e fatturazione. </li>
+</ol>
+<span class="ph">Per ulteriori informazioni, vai a <span class="ph"><a href="../admin/account.html">Gestione del tuo
+account</a></span>.</span></div>
+</div></div>
+<aside role="complementary" aria-labelledby="d90280e1900"></aside><article class="topic task nested2" role="article" aria-labelledby="d90280e2136" lang="it-it" id="container_fileshares_adding_cli"><h3 class="topictitle3" id="d90280e2136">Aggiunta di condivisioni file con l'interfaccia riga di comando (CLI)</h3>
+<div class="body taskbody"><div class="abstract"><p></p>
+
+
+<div class="shortdesc">Crea una condivisione file utilizzando il comando <samp class="ph codeph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> volume-fs-create</samp>.</div>
+</div>
+<div class="section prereq"></div><ol class="steps"><li class="step stepexpand">Opzionale: <span class="cmd">Elenca le dimensioni della condivisione file eseguendo il seguente comando.</span> <pre class="codeblock"><code><span class="ph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> volume-fs-flavors </span></code></pre>
+</li>
+<li class="step stepexpand"><span class="cmd">Crea una condivisione file immettendo il seguente comando.</span> Per visualizzare i costi calcolati della condivisione file prima di crearla, consulta <a href="container_volumes_ov.html#container_fileshares_adding_ui" title="Una condivisione file è un sistema di archiviazione basato su NFS (Network File System) persistente che ospita i volumi Docker in uno spazio Bluemix e consente all'utente di archiviare e accedere ai file correlati all'applicazione e al contenitore. Per archiviare i file in una condivisione file, devi creare un volume del contenitore e salvare i dati in tale volume.">Aggiunta di condivisioni file ai volumi con la GUI Bluemix</a> <pre class="codeblock"><code><span class="ph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> volume-fs-create FSNAME FSSIZE FSIOPS </span></code></pre>
+
+
+<div class="p"><dl><dt class="dlterm"><samp class="ph codeph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> volume-fs-create</samp>
+parametri </dt>
+<dd><dl class="parml"><dt class="pt dlterm"><var class="keyword varname">FSIOPS</var></dt>
+<dd class="pd">(Obbligatorio) L'IOPS della condivisione file. I valori validi sono 0,25, 2 o 4 IOPS per GB.</dd>
+<dt class="pt dlterm"><var class="keyword varname">FSNAME</var></dt>
+<dd class="pd">(Obbligatorio) Il nome della condivisione file. <span class="ph">Il nome può contenere lettere maiuscole, lettere minuscole, numeri,
+caratteri di sottolineatura (_) e trattini (-).</span></dd>
+<dt class="pt dlterm"><var class="keyword varname">FSSIZE</var></dt>
+<dd class="pd">(Obbligatorio) La dimensione del sistema di condivisione file in GB. Usa <samp class="ph codeph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> volume-fs-flavors</samp> per elencare tutte le dimensioni valide.</dd>
+</dl>
+</dd>
+</dl>
+</div>
+</li>
+<li class="step stepexpand">Opzionale: <span class="cmd">Verifica che la condivisione file sia stata creata correttamente, eseguendo il seguente comando.</span> <pre class="codeblock"><code><span class="ph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> volume-fs</span></code></pre>
+</li>
+</ol>
+<div class="section result"><span class="ph"> Servono diversi minuti affinché la condivisione file venga completata. Una volta terminata la
+creazione della condivisione file, l'icona di stato visualizza una segno di spunta. Ora hai una condivisione file disponibile
+nello spazio specificato nella tua organizzazione. Puoi creare più condivisioni file
+per ospitare più volumi o puoi ospitare più volumi in una condivisione file. Ogni volume condivide le risorse
+della condivisione file che ospita, di conseguenza ospitare più volumi su una condivisione file
+può ridurre le prestazioni.</span></div><div class="section postreq">Quindi, se sei il gestore dell'organizzazione puoi visualizzare la tua condivisione file dell'organizzazione di fatturazione.<div class="p"><ol><li>Fai clic sull'avatar utente.</li>
+<li>Fai clic su <span class="ph uicontrol">Account</span>.</li>
+<li>Espandi la tua organizzazione facendo clic sul pulsante <span class="ph uicontrol">+</span>.</li>
+<li>Seleziona <span class="ph uicontrol">Dashboard di utilizzo</span> e rivedi i dettagli di utilizzo e fatturazione. </li>
+</ol>
+<span class="ph">Per ulteriori informazioni, vai a <span class="ph"><a href="../admin/account.html">Gestione del tuo
+account</a></span>.</span></div>
+</div></div>
+<aside role="complementary" aria-labelledby="d90280e2136"></aside></article><article class="topic task nested2" role="article" aria-labelledby="d90280e2314" lang="it-it" id="container_filestorage_managing"><h3 class="topictitle3" id="d90280e2314"> Rimozione delle condivisioni file</h3>
+<div class="body taskbody"><p class="shortdesc">Un gestore dell'organizzazione può rimuovere le condivisioni file esistenti e visualizzare quali volumi
+sono montati su una condivisione file.</p>
+<div class="section context">Il gestore dell'organizzazione può rivedere le condivisioni di file utilizzando la GUI <span class="keyword">Bluemix</span>
+e la CLI per visualizzare quali volumi sono montati su di essi e rimuovere le condivisioni file. I gestori dell'organizzazione possono scegliere di rimuovere le condivisioni file che al momento non sono utilizzate
+nello sviluppo o nella produzione.<div class="steps note"><span class="notetitle">Nota:</span> Le condivisioni file non possono essere eliminate
+alla fine del mese per via del ciclo del processo di fatturazione. Se ricevi un messaggio di errore
+alla fine del mese quando elimini una condivisione file, attendi fino al primo giorno del mese successivo
+per eliminarla.</div>
+</div></div>
+<article class="topic task nested3" role="article" aria-labelledby="d90280e2378" id="task_ets_khp_y5"><h4 class="topictitle4" id="d90280e2378">Utilizzo della GUI <span class="keyword">Bluemix</span></h4>
+<div class="body taskbody"><ol class="steps"><li class="step"><span class="cmd"><span class="ph">Dai dettagli dell'account, nella gestione delle organizzazioni,
+seleziona un'organizzazione.</span></span></li>
+<li class="step"><span class="cmd"><span class="ph">Nella sezione della quota, visualizza
+i dettagli per i contenitori.</span></span></li>
+</ol>
+<div class="section result">Nella tabella Archiviazione file, puoi trovare una colonna <span class="ph uicontrol">AZIONE</span> e una colonna
+<span class="ph uicontrol">NAME</span>.<ul><li>Fai clic sul nome della condivisione file per visualizzare i volumi collegati ad essa.</li>
+<li>Fai clic su <span class="ph uicontrol">Elimina</span> per eliminare la condivisione file. Devi prima rimuovere tutti i volumi allegati
+per poter eliminare una condivisione file. Quando una condivisione file è stata eliminata, viene permanentemente rimossa
+dal tuo account. Per rimuovere un volume, vedi <a href="container_volumes_ov.html#container_volumes_remove" title="Se non hai più bisogno di un volume per memorizzare i dati per i tuoi contenitori, puoi rimuoverlo.">Rimozione di volumi con la riga di comando (CLI)</a>.</li>
+</ul>
+</div></div>
+</article><article class="topic task nested3" role="article" aria-labelledby="d90280e2416" id="task_uvm_chp_y5"><h4 class="topictitle4" id="d90280e2416">Utilizzo della riga di comando</h4>
+<div class="body taskbody"><div class="section result">Per rimuovere una condivisione file utilizzando la CLI, immetti i seguenti comandi.<div class="p"><ol><li>Identifica il nome della condivisione file.<pre class="codeblock"><code><span class="ph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> volume-fs</span></code></pre>
+</li>
+<li>Esamina la condivisione file per determinare se sono presenti dei volumi
+in essa.<pre class="codeblock"><code><span class="ph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> volume-fs-inspect FSNAME </span></code></pre>
+</li>
+<li>Se necessario, rimuovi un volume esistente.<pre class="codeblock"><code><span class="ph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> volume-remove VOLNAME </span></code></pre>
+</li>
+<li>Rimuovi una condivisione file esistente.
+<pre class="codeblock"><code><span class="ph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> volume-fs-remove FSNAME </span></code></pre>
+</li>
+<li>Elenca le condivisioni file esistenti per confermare che la condivisione file è stata rimossa.<pre class="codeblock"><code><span class="ph"><span class="ph"><samp class="ph codeph">bx ic</samp></span> volume-fs</span></code></pre>
+</li>
+</ol>
+</div>
+</div></div>
+</article></article></article></article></div></main></body></html>
