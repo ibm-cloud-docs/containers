@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-14"
+lastupdated: "2017-10-20"
 
 ---
 
@@ -25,18 +25,21 @@ Ce second tutoriel vous explique comment utiliser Kubernetes pour déployer une 
 Dans ce scénario, le développeur d'applications de l'entreprise PR déploie une version Hello World de l'application dans le cluster
 Kubernetes créé par l'administrateur réseau au cours du [premier tutoriel](cs_tutorials.html#cs_cluster_tutorial).
 
-Chaque leçon explique comment déployer progressivement des versions plus compliquées de la même application. Le diagramme suivant illustre les composants des déploiements de l'application du tutoriel, excepté la quatrième partie. 
+Chaque leçon explique comment déployer progressivement des versions plus compliquées de la même application. Le diagramme illustre les composants des déploiements de l'application du tutoriel, excepté la quatrième partie.
 
-![Composants de la leçon](images/cs_app_tutorial_roadmap.png)
+<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_roadmap.png">![Composants de la leçon](images/cs_app_tutorial_roadmap.png)</a>
 
-Comme illustré dans le diagramme, Kubernetes utilise plusieurs types de ressources pour rendre vos applications opérationnelles dans des clusters. Dans Kubernetes, les déploiements et les services fonctionnent en tandem. Les déploiements incluent les définitions utilisées par l'application (par exemple, l'image à utiliser pour le conteneur et le port à exposer pour l'application). Lorsque vous créez un déploiement, un pod Kubernetes est créé pour chaque conteneur que vous avez défini dans le déploiement. Pour rendre votre application plus résiliente, vous pouvez définir plusieurs instances de la même application dans votre déploiement et
+Kubernetes utilise plusieurs types de ressources pour rendre vos applications opérationnelles dans des clusters. Dans Kubernetes, les déploiements et les services fonctionnent en tandem. Les déploiements incluent les définitions utilisées par l'application (par exemple, l'image à utiliser pour le conteneur et le port à exposer pour l'application). Lorsque vous créez un déploiement, un pod Kubernetes est créé pour chaque conteneur que vous avez défini dans le déploiement. Pour rendre votre application plus résiliente, vous pouvez définir plusieurs instances de la même application dans votre déploiement et
 permettre à Kubernetes de créer automatiquement un jeu de répliques pour vous. Le jeu de répliques surveille les pods et garantit que le nombre de pods désiré est en opération en tout temps. Si un pod ne répond plus, il est recréé automatiquement.
 
-Les services regroupent un ensemble de pods et fournissent une connexion réseau vers ces pods à d'autres services dans le cluster sans exposer l'adresse IP privée réelle de chaque pod. Vous pouvez utiliser les services Kubernetes pour rendre une application accessible à d'autres pods dans le cluster ou pour l'exposer sur Internet. Dans ce tutoriel, vous utiliserez un service Kubernetes pour accéder depuis Internet à votre application en opération en utilisant l'adresse IP publique affectée automatiquement à un noeud worker et un port public.
+Les services regroupent un ensemble de pods et fournissent une connexion réseau vers ces pods à d'autres services dans le cluster sans exposer l'adresse IP privée réelle de chaque pod. Vous pouvez utiliser les services Kubernetes pour rendre une application accessible à d'autres pods dans le cluster ou pour l'exposer sur Internet. Dans ce tutoriel, vous utiliserez un service Kubernetes pour accéder depuis Internet à votre application en opération en utilisant l'adresse IP publique affectée automatiquement à un noeud d'agent et un port public.
 
 Pour rendre votre application encore plus disponible, dans les clusters standard, vous pouvez créer plusieurs noeuds d'agent, de manière à disposer encore d'un plus grand nombre de répliques de votre application. Cette tâche n'est pas couverte par le tutoriel, mais envisagez-la en vue d'améliorations futures de la disponibilité d'une application.
 
-Une seule leçon couvre l'intégration d'un service {{site.data.keyword.Bluemix_notm}} dans une application, mais vous pouvez les utiliser qu'il s'agisse d'une application toute simple, ou aussi complexe que vous pouvez imaginer.
+Une seule leçon couvre l'intégration du service
+{{site.data.keyword.Bluemix_notm}} dans une
+application, mais vous pouvez les utiliser qu'il s'agisse d'une application toute simple,
+ou aussi complexe que vous pouvez imaginer.
 
 ## Objectifs
 
@@ -45,7 +48,8 @@ Une seule leçon couvre l'intégration d'un service {{site.data.keyword.Bluemix_
 * Rendre une application accessible au public
 * Déployer une instance unique d'une application dans un cluster à l'aide d'une commande Kubernetes et d'un script
 * Déployer plusieurs instances d'une application dans des conteneurs recréés lors de la vérification de leur état de santé
-* Déployer une application utilisant des fonctionnalités d'un service {{site.data.keyword.Bluemix_notm}}
+* Déployer une application utilisant des fonctionnalités d'un service
+{{site.data.keyword.Bluemix_notm}}
 
 ## Durée
 
@@ -63,15 +67,12 @@ prérequises
 ## Leçon 1 : Déploiement d'applications avec instance unique dans des clusters Kubernetes
 {: #cs_apps_tutorial_lesson1}
 
-Dans cette leçon, vous déployez une seule instance de l'application Hello World dans un cluster. Le diagramme suivant inclut les composants que vous déployez dans cette leçon.
-{:shortdesc}
+Dans cette leçon, vous déployez une seule instance de l'application Hello World dans un cluster.
 
-![Configuration de déploiement](images/cs_app_tutorial_components1.png)
-
-Depuis le tutoriel précédent, vous disposez d'un compte et d'un cluster contenant déjà un noeud worker. Dans cette leçon, vous configurez un déploiement et déployez l'application Hello world dans un pod Kubernetes du noeud worker. Pour une disponibilité publique, vous créez un service Kubernetes.
+<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_components1.png">![Configuration de déploiement](images/cs_app_tutorial_components1.png)</a>
 
 
-1.  Connectez-vous à l'interface CLI de {{site.data.keyword.Bluemix_notm}}. A l'invite, entrez vos données d'identification {{site.data.keyword.Bluemix_notm}}. Pour stipuler une région {{site.data.keyword.Bluemix_notm}}, [incluez son noeud final d'API](cs_regions.html#bluemix_regions).
+1.  Connectez-vous à l'interface CLI de {{site.data.keyword.Bluemix_notm}}. A l'invite, entrez vos données d'identification {{site.data.keyword.Bluemix_notm}}. Pour stipuler une région {{site.data.keyword.Bluemix_notm}}, [incluez le noeud final d'API](cs_regions.html#bluemix_regions).
 
     ```
     bx login
@@ -134,7 +135,7 @@ Kubernetes.
 
 3.  Lancez Docker.
     * Si vous utilisez Docker CE, aucune action n'est nécessaire.
-    * Si vous utilisez Linux, reportez-vous à la [documentation Docker ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.docker.com/engine/admin/) pour obtenir les instructions de lancement de Docker selon la distribution Linux que vous utilisez.
+    * Si vous utilisez Linux, reportez-vous à la [documentation Docker ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/admin/) pour obtenir les instructions de lancement de Docker selon la distribution Linux que vous utilisez.
     * Si vous utilisez Docker Toolbox sur Windows ou OSX, vous pouvez utiliser le programme Docker Quickstart Terminal,
 lequel démarre Docker pour vous. Utilisez ce programme dans les prochaines étapes pour exécuter les commandes
 Docker, puis revenez à l'interface CLI pour définir la variable de session `KUBECONFIG`.
@@ -159,10 +160,10 @@ Docker, puis revenez à l'interface CLI pour définir la variable de session `KU
         ```
         {: pre}
 
-5.  Clonez ou téléchargez le code source de l'[application Hello world ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/Osthanes/container-service-getting-started-wt) dans votre répertoire utilisateur personnel.
+5.  Clonez ou téléchargez le code source de l'[application Hello world ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM/container-service-getting-started-wt) dans votre répertoire utilisateur personnel.
 
     ```
-    git clone https://github.com/Osthanes/container-service-getting-started-wt.git
+    git clone https://github.com/IBM/container-service-getting-started-wt.git
     ```
     {: pre}
 
@@ -270,7 +271,7 @@ commande push avant de passer à l'étape suivante.
 instance de l'application, ce déploiement est plus rapide que dans les leçons ultérieures où plusieurs
 instances de l'application seront créées.
 
-9.  Rendez l'application accessible au public en exposant le déploiement en tant que service NodePort. Les services mettent en réseau l'application. Comme le cluster n'a qu'un seul noeud worker et non plusieurs, un équilibrage de charge entre les noeuds d'agent n'est pas nécessaire. De la sorte, un NodePort peut être utilisé pour accorder aux utilisateurs externes un accès à l'application. Tout comme quand vous exposez un port pour une application Cloud Foundry, le NodePort que vous exposez est celui sur lequel le noeud worker est à l'écoute de trafic. Dans une étape ultérieure, vous identifierez quel NodePort a été affecté aléatoirement au service.
+9.  Rendez l'application accessible au public en exposant le déploiement en tant que service NodePort. Les services mettent en réseau l'application. Comme le cluster n'a qu'un seul noeud d'agent et non plusieurs, un équilibrage de charge entre les noeuds d'agent n'est pas nécessaire. De la sorte, un NodePort peut être utilisé pour accorder aux utilisateurs externes un accès à l'application. Tout comme quand vous exposez un port pour une application Cloud Foundry, le NodePort que vous exposez est celui sur lequel le noeud d'agent est à l'écoute de trafic. Dans une étape ultérieure, vous identifierez quel NodePort a été affecté aléatoirement au service.
 
     ```
     kubectl expose deployment/hello-world-deployment --type=NodePort --port=8080 --name=hello-world-service --target-port=8080
@@ -347,7 +348,7 @@ instances de l'application seront créées.
         Les NodePorts sont affectés aléatoirement lorsqu'ils sont générés par la commande `expose`,
 mais sur la plage 30000 à 32767. Dans cet exemple, la valeur de NodePort est 30872.
 
-    2.  Identifiez l'adresse IP publique du noeud worker dans le cluster.
+    2.  Identifiez l'adresse IP publique du noeud d'agent dans le cluster.
 
         ```
         bx cs workers <pr_firm_cluster>
@@ -401,21 +402,16 @@ Félicitations ! Vous venez de déployer la première version de l'application.
 Trop de commandes dans cette leçon ? Nous sommes bien d'accord. Que diriez-vous d'utiliser un script de configuration pour se charger d'une partie du travail à votre place ? Pour utiliser un script de configuration pour la seconde version de l'application et pour
 promouvoir une plus haute disponibilité en déployant plusieurs instances de l'application, passez à la leçon suivante.
 
-
-
 ## Leçon 2 : Déploiement et mise à jour d'applications avec une plus haute disponibilité
 {: #cs_apps_tutorial_lesson2}
 
 Dans cette leçon, vous allez déployer trois instances de l'application Hello World dans un cluster pour assurer une plus haute disponibilité de l'application que dans la première version. Une plus haute disponibilité signifie que l'accès utilisateur est divisé entre les trois
 instances. Lorsqu'un trop grand nombre d'utilisateurs tentent d'accéder à la même instance de l'application, ils peuvent être confrontés à des temps de réponse lents. L'existence de plusieurs instances peut induire des temps de réponse plus rapides pour vos utilisateurs. Dans cette leçon, vous découvrirez également comment des bilans de santé et des mises à jour des déploiements peuvent opérer avec
 Kubernetes.
-{:shortdesc}
 
-Le diagramme suivant inclut les composants que vous déployez dans cette leçon.
 
-![Configuration de déploiement](images/cs_app_tutorial_components2.png)
+<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_components2.png">![Configuration de déploiement](images/cs_app_tutorial_components2.png)</a>
 
-Depuis le tutoriel précédent, vous disposez de votre compte et d'un cluster contenant un noeud worker. Dans cette leçon, vous configurez un déploiement et déployez trois instances de l'application Hello world. Chaque instance est déployée dans un pod Kubernetes dans le cadre d'un jeu de répliques dans le noeud worker. Pour une disponibilité publique, vous créez également un service Kubernetes. 
 
 Comme défini dans le script de configuration, Kubernetes peut utiliser une vérification de la disponibilité pour déterminer si un conteneur dans un pod est en opération ou non. Ces vérifications peuvent, par exemple, identifier des interblocages, où une application est en opération, mais ne parvient pas à progresser. Le redémarrage d'un conteneur dans cette situation peut aider à
 rendre l'application disponible malgré les bogues. Kubernetes utilise ensuite une vérification de l'état de préparation du conteneur pour déterminer quand il est à nouveau prêt à accepter le trafic. Un pod est considéré comme prêt quand son conteneur est lui-même prêt. Une fois le pod prêt, il est redémarré. Dans l'application Stage2, le délai d'attente de l'application expire toutes les 15 secondes. Lorsqu'un bilan de santé est configuré dans le script de configuration, les conteneurs sont recréés si cette vérification détecte un problème affectant une application.
@@ -540,7 +536,7 @@ instance.
 
   Maintenant que la tâche de déploiement est terminée, examinez les résultats. Vous pourriez constater un léger ralentissement vu que trois instances sont en exécution.
 
-8.  Ouvrez un navigateur et accédez à l'application. Pour composer l'URL, utilisez pour votre noeud worker la même adresse IP publique que dans la leçon précédente et combinez-la avec le NodePort spécifié dans le script de configuration. Pour obtenir l'adresse IP publique du noeud worker, utilisez la commande suivante :
+8.  Ouvrez un navigateur et accédez à l'application. Pour composer l'URL, utilisez pour votre noeud d'agent la même adresse IP publique que dans la leçon précédente et combinez-la avec le NodePort spécifié dans le script de configuration. Pour obtenir l'adresse IP publique du noeud d'agent, utilisez la commande suivante :
 
   ```
   bx cs workers <pr_firm_cluster>
@@ -621,16 +617,11 @@ service "hw-demo-service" deleted
 ## Leçon 3 : Déploiement et mise à jour de l'application Watson Tone Analyzer
 {: #cs_apps_tutorial_lesson3}
 
-Dans les leçons précédentes, les applications étaient déployées en tant que composants uniques dans un seul noeud worker. Dans cette leçon, vous allez déployer deux composants d'une application dans un cluster
+Dans les leçons précédentes, les applications étaient déployées en tant que composants uniques dans un seul noeud d'agent. Dans cette leçon, vous allez déployer deux composants d'une application dans un cluster
 qui utilise le service Watson Tone Analyzer que vous avez ajouté à votre cluster dans le
 tutoriel précédent. La dispersion des composants dans des conteneurs différents permet de mettre à jour un composant sans affecter l'autre. Vous mettrez ensuite à jour l'application pour l'étoffer avec d'autres répliques afin de la rendre plus disponible.
-{:shortdesc}
 
-Le diagramme suivant inclut les composants que vous déployez dans cette leçon.
-
-![Configuration de déploiement](images/cs_app_tutorial_components3.png)
-
-Depuis le tutoriel précédent, vous disposez de votre compte et d'un cluster contenant un noeud worker. Dans cette leçon, vous créez une instance de service Watson Tone Analyzer dans votre compte {{site.data.keyword.Bluemix_notm}} et configurez deux déploiements, un pour chaque composant de l'application. Chaque composant est déployé dans un pod Kubernetes dans le noeud worker. Pour que ces deux composants soient publics, vous créez également un service Kubernetes pour chaque composant. 
+<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_components3.png">![Configuration de déploiement](images/cs_app_tutorial_components3.png)</a>
 
 
 ### Leçon 3a : Déploiement de l'application Watson Tone Analyzer
@@ -959,7 +950,7 @@ que le déploiement s'est achevé.
 
 2.  Facultatif : Répétez les modifications pour le déploiement watson-pod.
 
-[Testez vos connaissances en répondant à un quiz !![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
+[Testez vos connaissances en répondant à un quiz !![External link icon](../icons/launch-glyph.svg "External link icon")](https://bluemix-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 
 Félicitations ! Vous avez déployé l'application Watson Tone Analyzer. L'entreprise PR peut absolument commencer à utiliser ce déploiement de l'application pour analyser ses communiqués de presse.
 
@@ -989,4 +980,4 @@ bx cs cluster-rm <pr_firm_cluster>
 
 ## Etape suivante ?
 
-Essayez d'explorer les méthodologies d'orchestration de conteneur sur le site [developerWorks ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/code/journey/category/container-orchestration/).
+Essayez d'explorer les méthodologies d'orchestration de conteneur sur le site [developerWorks ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/code/journey/category/container-orchestration/).

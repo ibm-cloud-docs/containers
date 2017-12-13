@@ -2,7 +2,7 @@
 {:topicgroup: .topicgroup}
 
 {: .toc subcollection="containers" audience="compute" href="/docs/containers/index.html"}
-IBM Cloud Container Service
+IBM Bluemix Container Service
 
     {: .navgroup id="learn"}
     container_index.md
@@ -21,14 +21,14 @@ IBM Cloud Container Service
     cs_cli_reference.md
     cs_versions.md
     cs_regions.md
-    cs_annotations.md
+    cs_rellinks.md
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
     cs_cli_install.md
     cs_cluster.md
     cs_apps.md
-    [Obsolète : Exécution de conteneurs uniques et évolutifs](cs_classic.html)
+    [Exécution de conteneurs uniques et évolutifs](cs_classic.html)
         [Migration de conteneurs uniques et évolutifs vers des clusters Kubernetes](cs_classic.html#cs_classic_migrating)
         [A propos des conteneurs uniques et évolutifs](container_ov.html)
         [Planification de conteneurs uniques et évolutifs](container_planning.html)
@@ -38,7 +38,7 @@ IBM Cloud Container Service
         [Exécution de tâches de courte durée en tant que conteneurs](container_single_ui.html)
         [Exécution de groupes à haute disponibilité](container_ha.html)
         [Stockage de données persistantes pour des conteneurs uniques et évolutifs](container_volumes_ov.html)
-        [Intégration de services à des conteneurs uniques et évolutifs](container_integrations.html)
+        [Intégration de services avec les conteneurs uniques et évolutifs](container_integrations.html)
         [Référence de l'interface de ligne de commande pour les conteneurs uniques et évolutifs](container_cli_reference_cfic.html)
         [Identification et résolution des incidents liés aux conteneurs uniques et évolutifs](container_troubleshoot.html)
     {: .navgroup-end}
@@ -46,5 +46,5 @@ IBM Cloud Container Service
     {: .navgroup id="help"}
     cs_troubleshoot.md
     cs_popular_topics.md
-    cs_rellinks.md
     {: .navgroup-end}
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-17"
+lastupdated: "2017-10-18"
 
 ---
 
@@ -21,26 +21,12 @@ lastupdated: "2017-11-17"
 
 [Les régions {{site.data.keyword.Bluemix_notm}}](#bluemix_regions) sont différentes des régions [{{site.data.keyword.containershort_notm}}](#container_regions).
 
-![{{site.data.keyword.containershort_notm}} régions et centres de données](/images/regions.png)
-
-Figure 1. Régions et centres de données {{site.data.keyword.containershort_notm}}
-
 Régions {{site.data.keyword.containershort_notm}} prises en charge :
-  * Asie-Pacifique nord
   * Asie-Pacifique sud
   * Europe centrale
   * Sud du Royaume-Uni
   * Est des Etats-Unis
   * Sud des Etats-Unis
-
-Vous pouvez créer des clusters légers Kubernetes dans les régions suivantes :
-  * Asie-Pacifique sud
-  * Europe centrale
-  * Sud du Royaume-Uni
-  * Sud des Etats-Unis
-
-  **Remarque** : si vous n'êtes pas un client ayant payé, vous ne pouvez pas créer de clusters légers dan la région Sud des Etats-Unis.
-
 
 ## Noeuds finaux d'API de régions {{site.data.keyword.Bluemix_notm}}
 {: #bluemix_regions}
@@ -60,7 +46,7 @@ Noeuds finaux d'API des régions {{site.data.keyword.Bluemix_notm}} avec des exe
       ```
       {: pre}
 
-  * Sydney et Asie-Pacifique nord
+  * Sydney
       ```
       bx login -a api.au-syd.bluemix.net
       ```
@@ -90,31 +76,26 @@ En utilisant des régions {{site.data.keyword.containershort_notm}}, vous pouvez
 {:shortdesc}
 
 Noeuds finaux d'API de régions {{site.data.keyword.containershort_notm}} :
-  * Asie-Pacifique nord : `https://ap-north.containers.bluemix.net`
   * Asie-Pacifique sud : `https://ap-south.containers.bluemix.net`
   * Europe centrale : `https://eu-central.containers.bluemix.net`
   * Sud du Royaume-Uni : `https://uk-south.containers.bluemix.net`
   * Est des Etats-Unis : `https://us-east.containers.bluemix.net`
   * Sud des Etats-Unis : `https://us-south.containers.bluemix.net`
 
+**Remarque :** l'Est des Etats-Unis ne peut être utilisé qu'avec les commandes de l'interface CLI.
+
 Pour vérifier dans quelle région {{site.data.keyword.containershort_notm}} vous vous trouvez, exécutez la commande `bx cs api` et consultez la zone **Region**.
 
 ### Connexion à une autre région du service de conteneur
 {: #container_login_endpoints}
 
-Vous souhaiterez peut-être vous connecter à une autre région {{site.data.keyword.containershort_notm}} pour les raisons suivantes :
+Vous souhaiterez peut-être vous connecter à une autre région {{site.data.keyword.containershort_notm}} pour les raisons suivantes : 
   * Vous avez créé des services {{site.data.keyword.Bluemix_notm}} ou des images Docker privées dans une région et vous souhaitez les utiliser avec {{site.data.keyword.containershort_notm}} dans une autre région.
   * Vous souhaitez accéder à un cluster dans une région différente de la région {{site.data.keyword.Bluemix_notm}} par défaut à laquelle vous êtes connecté.
 
 </br>
 
 Exemples de commandes pour se connecter à une région {{site.data.keyword.containershort_notm}} :
-  * Asie-Pacifique nord :
-    ```
-    bx cs init --host https://ap-north.containers.bluemix.net
-    ```
-  {: pre}
-
   * Asie-Pacifique sud :
     ```
     bx cs init --host https://ap-south.containers.bluemix.net
@@ -145,6 +126,14 @@ Exemples de commandes pour se connecter à une région {{site.data.keyword.conta
     ```
     {: pre}
 
+### Création de clusters légers dans les régions de service de conteneur
+{: #lite_regions}
+
+Vous pouvez créer des clusters légers Kubernetes dans les régions suivantes :
+  * Asie-Pacifique sud
+  * Europe centrale
+  * Sud du Royaume-Uni
+  * Sud des Etats-Unis
 
 ### Emplacements disponibles pour le service de conteneur
 {: #locations}
@@ -153,11 +142,10 @@ Les emplacements sont des centres de données disponibles dans une région.
 
   | Région | Emplacement | Ville |
   |--------|----------|------|
-  | Asie-Pacifique nord | hkg02, tok02 | Hong Kong, Tokyo |
-  | Asie-Pacifique sud     | mel01, syd01, syd04        | Melbourne, Sydney |
-  | Europe centrale     | ams03, fra02, par01        | Amsterdam, Frankfort, Paris |
-  | Sud du Royaume-Uni      | lon02, lon04         | Londres |
-  | Est des Etats-Unis      | tor01, wdc06, wdc07        | Toronto, Washington, DC |
+  | Asie-Pacifique sud| mel01, syd01, syd04        | Melbourne, Sydney |
+  | Europe centrale| ams03, fra02        | Amsterdam, Francfort |
+  | Sud du Royaume-Uni| lon02, lon04         | Londres |
+  | Est des Etats-Unis| wdc06, wdc07        | Washington, DC |
   | Sud des Etats-Unis     | dal10, dal12, dal13       | Dallas |
 
 ### Utilisation des commandes d'API du service de conteneur
@@ -174,7 +162,6 @@ Exemple d'API `GET /clusters` au Sud des Etats-Unis :
 </br>
 
 Pour consulter la documentation sur les commandes d'API, ajoutez `swagger-api` au noeud final correspondant à la région à afficher.
-  * Asie-Pacifique nord : https://ap-north.containers.bluemix.net/swagger-api/
   * Asie-Pacifique sud : https://ap-south.containers.bluemix.net/swagger-api/
   * Europe centrale : https://eu-central.containers.bluemix.net/swagger-api/
   * Sud du Royaume-Uni : https://uk-south.containers.bluemix.net/swagger-api/

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-02"
+lastupdated: "2017-08-14"
 
 ---
 
@@ -12,17 +12,18 @@ lastupdated: "2017-11-02"
 {:pre: .pre}
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
-{:tip: .tip}
+{:tip: .tip} 
 {:download: .download}
 
 
-# Création d'un jeton {{site.data.keyword.registryshort_notm}} pour un registre d'images {{site.data.keyword.Bluemix_dedicated_notm}}
+# Création d'un jeton {{site.data.keyword.registryshort_notm}} pour un registre d'images
+{{site.data.keyword.Bluemix_notm}} Dedicated
 {: #cs_dedicated_tokens}
 
 Créez un jeton sans date d'expiration pour utiliser un registre d'images que vous utilisez pour des groupes de conteneurs uniques et évolutifs avec des clusters.
 {:shortdesc}
 
-1.  Connectez-vous à l'environnement {{site.data.keyword.Bluemix_dedicated_notm}}.
+1.  Connectez-vous à l'environnement {{site.data.keyword.Bluemix_short}} Dedicated.
 
     ```
     bx login -a api.<dedicated_domain>
@@ -43,7 +44,8 @@ Créez un jeton sans date d'expiration pour utiliser un registre d'images que vo
     ```
     {: pre}
 
-4.  Extrayez un jeton de registre permanent pour la session actuelle. Remplacez <dedicated_domain> par le domaine pour votre environnement {{site.data.keyword.Bluemix_dedicated_notm}}. Ce jeton permet l'accès aux images dans l'espace de nom actuel.
+4.  Extrayez un jeton de registre permanent pour la session actuelle. Remplacez
+<dedicated_domain> par le domaine pour votre environnement {{site.data.keyword.Bluemix_notm}} Dedicated. Ce jeton permet l'accès aux images dans l'espace de nom actuel.
 
     ```
     curl -XPOST -H "Authorization: ${OAUTH_TOKEN}" -H "Organization: ${ORG_GUID}" https://registry.<dedicated_domain>/api/v1/tokens?permanent=true
@@ -74,36 +76,36 @@ Créez un jeton sans date d'expiration pour utiliser un registre d'images que vo
     kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_url> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
     ```
     {: pre}
-
+    
     <table>
     <caption>Tableau 1. Description des composantes de cette commande</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composantes de cette commande</th>
+    <th colspan=2><img src="images/idea.png"/> Description des composantes de cette commande</th>
     </thead>
     <tbody>
     <tr>
     <td><code>--namespace &lt;kubernetes_namespace&gt;</code></td>
-    <td>Obligatoire. Espace de nom Kubernetes de votre cluster dans lequel vous désirez utiliser la valeur confidentielle et déployer des conteneurs. Exécutez la commande <code>kubectl get namespaces</code> pour répertorier tous les espaces de nom dans votre cluster.</td>
+    <td>Obligatoire. Espace de nom Kubernetes de votre cluster dans lequel vous désirez utiliser la valeur confidentielle et déployer des conteneurs. Exécutez la commande <code>kubectl get namespaces</code> pour répertorier tous les espaces de nom dans votre cluster.</td> 
     </tr>
     <tr>
     <td><code>&lt;secret_name&gt;</code></td>
-    <td>Obligatoire. Nom que vous désirez utiliser pour l'élément imagePullSecret.</td>
+    <td>Obligatoire. Nom que vous désirez utiliser pour l'élément imagePullSecret.</td> 
     </tr>
     <tr>
     <td><code>--docker-server &lt;registry_url&gt;</code></td>
-    <td>Obligatoire. URL du registre d'images où votre espace de nom est configuré : registry.&lt;dedicated_domain&gt;</li></ul></td>
+    <td>Obligatoire. URL du registre d'images où votre espace de nom est configuré : registry.&lt;dedicated_domain&gt;</li></ul></td> 
     </tr>
     <tr>
     <td><code>--docker-username &lt;docker_username&gt;</code></td>
-    <td>Obligatoire. Nom d'utilisateur pour connexion à votre registre privé.</td>
+    <td>Obligatoire. Nom d'utilisateur pour connexion à votre registre privé.</td> 
     </tr>
     <tr>
     <td><code>--docker-password &lt;token_value&gt;</code></td>
-    <td>Obligatoire. Valeur de votre jeton de registre extraite auparavant.</td>
+    <td>Obligatoire. Valeur de votre jeton de registre extraite auparavant.</td> 
     </tr>
     <tr>
     <td><code>--docker-email &lt;docker-email&gt;</code></td>
-    <td>Obligatoire. Si vous en avez une, entrez votre adresse e-mail Docker. Si vous n'en avez pas, indiquez une adresse e-mail fictive (par exemple, a@b.c). Cet e-mail est obligatoire pour créer une valeur confidentielle Kubernetes, mais n'est pas utilisé après la création.</td>
+    <td>Obligatoire. Si vous en avez une, entrez votre adresse e-mail Docker. Si vous n'en avez pas, indiquez une adresse e-mail fictive (par exemple, a@b.c). Cet e-mail est obligatoire pour créer une valeur confidentielle Kubernetes, mais n'est pas utilisé après la création.</td> 
     </tr>
     </tbody></table>
 
@@ -134,26 +136,26 @@ Créez un jeton sans date d'expiration pour utiliser un registre d'images que vo
         <tbody>
         <tr>
         <td><code>&lt;pod_name&gt;</code></td>
-        <td>Nom du pod que vous désirez créer.</td>
+        <td>Nom du pod que vous désirez créer.</td> 
         </tr>
         <tr>
         <td><code>&lt;container_name&gt;</code></td>
-        <td>Nom du conteneur que vous désirez déployer dans votre cluster.</td>
+        <td>Nom du conteneur que vous désirez déployer dans votre cluster.</td> 
         </tr>
         <tr>
         <td><code>&lt;my_namespace&gt;</code></td>
-        <td>Espace de nom sous lequel votre image est stockée. Pour répertorier les espaces de nom disponibles, exécutez la commande `bx cr namespace-list`.</td>
+        <td>Espace de nom sous lequel votre image est stockée. Pour répertorier les espaces de nom disponibles, exécutez la commande `bx cr namespace-list`.</td> 
         </tr>
         <td><code>&lt;my_image&gt;</code></td>
-        <td>Nom de l'image que vous désirez utiliser. Pour répertorier les images disponibles dans un compte {{site.data.keyword.Bluemix_notm}}, exécutez la commande <code>bx cr image-list</code>.</td>
+        <td>Nom de l'image que vous désirez utiliser. Pour répertorier les images disponibles dans un compte {{site.data.keyword.Bluemix_notm}}, exécutez la commande <code>bx cr image-list</code>.</td> 
         </tr>
         <tr>
         <td><code>&lt;tag&gt;</code></td>
-        <td>Version de l'image que vous désirez utiliser. Si aucune étiquette n'est spécifiée, celle correspondant à <strong>latest</strong> (la plus récente) est utilisée par défaut.</td>
+        <td>Version de l'image que vous désirez utiliser. Si aucune étiquette n'est spécifiée, celle correspondant à <strong>latest</strong> (la plus récente) est utilisée par défaut.</td> 
         </tr>
         <tr>
         <td><code>&lt;secret_name&gt;</code></td>
-        <td>Nom de l'élément imagePullSecret que vous avez créé plus tôt.</td>
+        <td>Nom de l'élément imagePullSecret que vous avez créé plus tôt.</td> 
         </tr>
         </tbody></table>
 
@@ -165,3 +167,5 @@ Créez un jeton sans date d'expiration pour utiliser un registre d'images que vo
           kubectl apply -f mypod.yaml
           ```
           {: pre}
+
+
