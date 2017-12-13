@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-17"
+lastupdated: "2017-11-02"
 
 ---
 
@@ -17,14 +17,14 @@ lastupdated: "2017-10-17"
 
 
 # Rubriques les plus consultées pour {{site.data.keyword.containershort_notm}}
-{: #cs_internal}
+{: #cs_popular_topics}
 
 Découvrez les centres d'intérêt des développeurs de conteneur.
 {:shortdesc}
 
 <table>
 <thead>
-<th colspan=2><img src="images/idea.png"/>Rubriques les plus consultées pour les conteneurs et les clusters Kubernetes</th>
+<th colspan=2><img src="images/idea.png" alt="Icône Idée"/>Rubriques les plus consultées pour les conteneurs et les clusters Kubernetes</th>
 </thead>
 <tbody>
 <tr>
@@ -47,11 +47,15 @@ Découvrez les centres d'intérêt des développeurs de conteneur.
 <td>[Mise à jour vers Kubernetes 1.7](cs_versions.html)</td>
 <td>Consultez les modifications à effectuer dans vos clusters avant d'exécuter la mise à jour vers Kubernetes 1.7.</td>
 </tr>
+<tr>
+<td>[API REST pour les clusters ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://us-south.containers.bluemix.net/swagger)</td>
+<td>Affichez la documentation d'API pour gérer {{site.data.keyword.containershort_notm}}.</td>
+</tr>
 </tbody></table>
 
 ## Discussion avec des développeurs partageant les mêmes idées sur Slack
 {: #slack}
 
-Vous pouvez voir les thèmes de discussion d'autres personnes et poser vos propres questions dans [{{site.data.keyword.containershort_notm}} Slack. ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com)
+Vous pouvez voir les thèmes de discussion d'autres personnes et poser vos propres questions dans [{{site.data.keyword.containershort_notm}} Slack. ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com)
 
 Si vous n'utilisez pas un IBMid pour votre compte {{site.data.keyword.Bluemix_notm}}, écrivez à l'adresse [crosen@us.ibm.com](mailto:crosen@us.ibm.com) et demandez une invitation pour ce site Slack.
