@@ -1326,7 +1326,7 @@ workerNum: <em>&lt;number_workers&gt;</em>
   {: pre}
 
 
-### bx cs worker-get WORKER_NODE_ID
+### bx cs worker-get [CLUSTER_NAME_OR_ID] WORKER_NODE_ID
 {: #cs_worker_get}
 
 View details of a worker node.
@@ -1334,6 +1334,8 @@ View details of a worker node.
 <strong>Command options</strong>:
 
    <dl>
+   <dt><code><em>CLUSTER_NAME_OR_ID</em></code></dt>
+   <dd>The name or ID of the worker node's cluster. This value is optional.</dd>
    <dt><code><em>WORKER_NODE_ID</em></code></dt>
    <dd>The ID for a worker node. Run <code>bx cs workers <em>CLUSTER</em></code> to view the IDs for the worker nodes in a cluster. This value is required.</dd>
    </dl>
@@ -1341,7 +1343,7 @@ View details of a worker node.
 **Example**:
 
   ```
-  bx cs worker-get WORKER_NODE_ID
+  bx cs worker-get [CLUSTER_NAME_OR_ID] WORKER_NODE_ID
   ```
   {: pre}
 
