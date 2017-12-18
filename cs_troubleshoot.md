@@ -129,7 +129,7 @@ Review the options to debug your clusters and find the root causes for failures.
 4.  List the details for the worker node.
 
   ```
-  bx cs worker-get <worker_node_id>
+  bx cs worker-get [<cluster_name_or_id>] <worker_node_id>
   ```
   {: pre}
 
@@ -780,8 +780,8 @@ To troubleshoot your load balancer service:
     <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips</code></pre></br>You defined a portable public IP address for your load balancer service by using the **loadBalancerIP** section, but this portable public IP address is not available in your portable public subnet. Change your load balancer service configuration script and either choose one of the available portable public IP addresses, or remove the **loadBalancerIP** section from your script so that an available portable public IP address can be allocated automatically.
     <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>You do not have enough worker nodes to deploy a load balancer service. One reason might be that you deployed a standard cluster with more than one worker node, but the provisioning of the worker nodes failed.
     <ol><li>List available worker nodes.</br><pre class="codeblock"><code>kubectl get nodes</code></pre>
-    <li>If at least two available worker nodes are found, list the worker node details.</br><pre class="screen"><code>bx cs worker-get <worker_ID></code></pre>
-    <li>Make sure that the public and private VLAN IDs for the worker nodes that were returned by the 'kubectl get nodes' and the 'bx cs worker-get' commands match.</ol></ul></ul>
+    <li>If at least two available worker nodes are found, list the worker node details.</br><pre class="screen"><code>bx cs worker-get [<cluster_name_or_id>] <worker_ID></code></pre>
+    <li>Make sure that the public and private VLAN IDs for the worker nodes that were returned by the 'kubectl get nodes' and the 'bx cs [<cluster_name_or_id>] worker-get' commands match.</ol></ul></ul>
 
 4.  If you are using a custom domain to connect to your load balancer service, make sure that your custom domain is mapped to the public IP address of your load balancer service.
     1.  Find the public IP address of your load balancer service.
@@ -794,6 +794,7 @@ To troubleshoot your load balancer service:
     2.  Check that your custom domain is mapped to the portable public IP address of your load balancer service in the Pointer record (PTR).
 
 <br />
+
 
 
 
