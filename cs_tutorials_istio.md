@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-12-14"
+lastupdated: "2017-12-18"
 
 ---
 
@@ -65,14 +65,14 @@ Download and install Istio in your cluster.
 3. Add the `istioctl` client to your PATH. For example, run the following command on a MacOS or Linux system:
 
    ```
-   export PATH=$PWD/istio-0.3.0/bin:$PATH
+   export PATH=$PWD/istio-0.4.0/bin:$PATH
    ```
    {: pre}
 
 4. Change the directory to the Istio file location.
 
    ```
-   cd <path_to_istio-0.3.0>
+   cd <path_to_istio-0.4.0>
    ```
    {: pre}
 
