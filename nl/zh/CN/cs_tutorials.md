@@ -81,7 +81,7 @@ lastupdated: "2017-10-16"
 4.  安装 {{site.data.keyword.containershort_notm}} 插件以创建 Kubernetes 集群并管理工作程序节点。要运行 {{site.data.keyword.containershort_notm}} 插件命令，请使用前缀 `bx cs`。
 
     ```
-    bx plugin install container-service -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-service -r Bluemix
     ```
     {: pre}
 
@@ -129,7 +129,7 @@ lastupdated: "2017-10-16"
 6. 要在 {{site.data.keyword.registryshort_notm}} 中设置并管理专用映像存储库，请安装 {{site.data.keyword.registryshort_notm}} 插件。要运行注册表命令，请使用前缀 `bx cr`。
 
     ```
-    bx plugin install container-registry -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-registry -r Bluemix
     ```
     {: pre}
 
@@ -207,7 +207,7 @@ lastupdated: "2017-10-16"
 
     2.  复制并粘贴终端中显示的命令，以设置 `KUBECONFIG` 环境变量。
 
-    3.  验证已正确设置 `KUBECONFIG` 环境变量。
+    3.  验证是否已正确设置 `KUBECONFIG` 环境变量。
 
 
         OS X 的示例：
@@ -288,6 +288,6 @@ lastupdated: "2017-10-16"
 非常好！您已经配置了集群，并且您的本地环境已准备就绪，可以开始将应用程序部署到集群中。
 ## 接下来要做什么？
 
-* [测试您的掌握情况并进行测验！![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://bluemix-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
+* [测试您的掌握情况并进行测验！![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
 
 * 尝试[教程：在 {{site.data.keyword.containershort_notm}} 中将应用程序部署到 Kubernetes 集群](cs_tutorials_apps.html#cs_apps_tutorial)，以将公关公司的应用程序部署到已创建的集群。

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-24"
+lastupdated: "2017-11-03"
 
 ---
 
@@ -21,20 +21,96 @@ lastupdated: "2017-10-24"
 {{site.data.keyword.containerlong}}에서 사용 가능한 Kubernetes 버전을 검토하십시오.
 {:shortdesc}
 
-표에 클러스터를 새 버전으로 업데이트할 때 배치된 앱에 영향을 미칠 수 있는 업데이트가 포함되어 있습니다. Kubernetes 버전의 전체 변경사항 목록은 [Kubernetes changelog ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md)을 검토하십시오.
+{{site.data.keyword.containershort_notm}}는 여러 버전의 Kubernetes를 지원합니다. 다른 버전을 지정하지 않은 경우 클러스터를 작성하거나 업데이트할 때 기본 버전이 사용됩니다. 사용 가능한 Kubernetes 버전은 다음과 같습니다.
+- 1.8.2
+- 1.7.4(기본 버전)
+- 1.5.6
+
+다음 표에는 클러스터를 새 버전으로 업데이트할 때 배치된 앱에 영향을 미칠 수 있는 업데이트가 요약되어 있습니다. Kubernetes 버전의 전체 변경사항 목록은 [Kubernetes changelog ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md)를 검토하십시오.
 
 업데이트 프로세스에 대한 자세한 정보는 [클러스터 업데이트](cs_cluster.html#cs_cluster_update) 및 [작업자 노드 업데이트](cs_cluster.html#cs_cluster_worker_update)를 참조하십시오.
 
+## 업데이트 유형
+{: #version_types}
+
+Kubernetes는 다음 버전 업데이트 유형을 제공합니다.
+{:shortdesc}
+
+|업데이트 유형|버전 레이블의 예|업데이트 수행자|영향
+|-----|-----|-----|-----|
+|주요 |1.x.x|사용자|스크립트 또는 배치를 포함한 클러스터의 오퍼레이션 변경. |
+|보조 |x.5.x|사용자|스크립트 또는 배치를 포함한 클러스터의 오퍼레이션 변경. |
+|패치 |x.x.3|IBM 및 사용자|스크립트 또는 배치 변경 없음. IBM은 자동으로 마스터를 업데이트하지만 사용자는 작업자 노드에 패치를 적용합니다.|
+{: caption="Kubernetes 업데이트의 영향" caption-side="top"}
+
+기본적으로 부 버전의 차이가 2를 넘게(상위) Kubernetes 마스터를 업데이트할 수 없습니다. 예를 들어, 현재 마스터가 버전 1.5이고 1.8로 업데이트하려면 먼저 1.7로 업데이트해야 합니다. 업데이트를 강제로 계속할 수 있지만 2를 넘는 부 버전 업데이트로 인해 예상치 못한 결과가 발생할 수 있습니다.
+
+## 버전 1.8
+{: #cs_v18}
+Kubernetes 버전 1.8로 업데이트할 때 작성해야 할 변경사항을 검토하십시오.
+
+### 마스터 이전 업데이트
+{: #18_before}
+
+<table summary="버전 1.8의 Kubernetes 업데이트">
+<caption>마스터를 Kubernetes 1.8로 업데이트하기 전에 작성할 변경사항</caption>
+<thead>
+<tr>
+<th>유형</th>
+<th>설명</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan='2'>마스터를 업데이트하기 전에 필요한 변경사항 없음</td>
+</tr>
+</tbody>
+</table>
+
+### 마스터 이후 업데이트
+{: #18_after}
+
+<table summary="버전 1.8의 Kubernetes 업데이트">
+<caption>마스터를 Kubernetes 1.8로 업데이트한 후 작성할 변경사항</caption>
+<thead>
+<tr>
+<th>유형</th>
+<th>설명</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kubernetes 대시보드 로그인</td>
+<td>버전 1.8에서 Kubernetes 대시보드에 액세스하기 위한 URL이 변경되었고 로그인 프로세스에 새 인증 단계가 포함됩니다. 자세한 정보는 [Kubernetes 대시보드에 액세스](cs_apps.html#cs_cli_dashboard)를 참조하십시오.</td>
+</tr>
+<tr>
+<tr>
+<td>Kubernetes 대시보드 권한</td>
+<td>사용자가 신임 정보로 로그인하여 버전 1.8에서 클러스터 리소스를 보도록 하려면 1.7 ClusterRoleBinding RBAC 권한을 제거하십시오. `kubectl delete clusterrolebinding -n kube-system kubernetes-dashboard`를 실행하십시오.</td>
+</tr>
+<tr>
+<td>`kubectl delete`</td>
+<td>`kubectl delete` 명령은 오브젝트가 삭제되기 전에 포드와 같은 워크로드 API 오브젝트를 더 이상 축소하지 않습니다. 오브젝트를 축소해야 하는 경우 오브젝트를 삭제하기 전에 [kubectl scale ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/user-guide/kubectl/v1.8/#scale)을 사용하십시오.</td>
+</tr>
+<tr>
+<td>`kubectl run`</td>
+<td>`kubectl run` 명령은 쉼표로 구분된 인수 대신 `--env`의 다중 플래그를 사용해야 합니다. 예를 들어, `kubectl run --env <x>=<y>,<z>=<k>`가 아닌 `kubectl run --env <x>=<y> --env <z>=<k>`를 실행하십시오.</td>
+</tr>
+<td>`kubectl stop`</td>
+<td>`kubectl stop` 명령은 더 이상 사용 가능하지 않습니다.</td>
+</tr>
+</tbody>
+</table>
 
 
 ## 버전 1.7
 {: #cs_v17}
 
+Kubernetes 버전 1.7로 업데이트할 때 작성해야 할 변경사항을 검토하십시오.
+
 ### 마스터 이전 업데이트
 {: #17_before}
 
 <table summary="버전 1.7 및 1.6에 대한 Kubernetes 업데이트">
-<caption>표 1. 마스터를 Kubernetes 1.7로 업데이트하기 전에 작성할 변경사항</caption>
+<caption>마스터를 Kubernetes 1.7로 업데이트하기 전에 작성할 변경사항</caption>
 <thead>
 <tr>
 <th>유형</th>
@@ -45,14 +121,13 @@ lastupdated: "2017-10-24"
 <td>스토리지</td>
 <td>`../to/dir`과 같은 상위 디렉토리 참조를 포함하는 `hostPath` 및 `mountPath`가 있는 구성 스크립트는 허용되지 않습니다. 경로를 단순 절대 경로(예: `/path/to/dir`)로 변경하십시오.
 <ol>
-  <li>스토리지 경로를 업데이트해야 하는지 여부를 판별하려면 다음 명령을 실행하십시오.</br>
+  <li>스토리지 경로를 변경할지 여부를 판별하십시오.</br>
   ```
   kubectl get pods --all-namespaces -o yaml | grep "\.\." && echo "Action required"
   ```
   </br>
 
-  <li>`Action required`가 리턴되면 작업자 노드를 업데이트하기 전에 절대 경로를 참조하도록 영향을 받는 각 포드를 수정하십시오.
-다른 리소스(예: 배치)에서 포드를 소유하는 경우 해당 리소스 내에서 [_PodSpec_ ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core)을 수정하십시오.
+  <li>`Action required`가 리턴되면 작업자 노드를 모두 업데이트하기 전에 절대 경로를 참조하도록 포드를 변경하십시오. 다른 리소스(예: 배치)에서 포드를 소유하는 경우 해당 리소스 내에서 [_PodSpec_ ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core)을 변경하십시오.
 </ol>
 </td>
 </tr>
@@ -63,45 +138,45 @@ lastupdated: "2017-10-24"
 {: #17_after}
 
 <table summary="버전 1.7 및 1.6에 대한 Kubernetes 업데이트">
-<caption>표 2. 마스터를 Kubernetes 1.7로 업데이트한 후에 작성할 변경사항</caption>
+<caption>마스터를 Kubernetes 1.7로 업데이트한 후 작성할 변경사항</caption>
 <thead>
 <tr>
 <th>유형</th>
 <th>설명</tr>
 </thead>
-<tbod>
+<tbody>
 <tr>
 <td>kubectl</td>
-<td>`kubectl` CLI를 클러스터의 버전으로 업데이트한 후 다음 `kubectl` 명령에서 쉼표로 구분된 인수 대신 여러 개의 플래그를 사용해야 합니다. <ul>
- <li>`create role`
- <li>`create clusterrole`
- <li>`create rolebinding`
- <li>`create clusterrolebinding`
- <li>`create secret`
+<td>`kubectl` CLI 업데이트 후 이러한 `kubectl create` 명령은 쉼표로 구분된 인수 대신 다중 플래그를 사용해야 합니다.<ul>
+ <li>`role`
+ <li>`clusterrole`
+ <li>`rolebinding`
+ <li>`clusterrolebinding`
+ <li>`secret`
  </ul>
-</br>  예를 들어, `kubectl create role --resource-name <x>,<y>`이 아닌 `kubectl create role --resource-name <x> --resource-name<y>`을 실행하십시오.</td>
+</br>  예를 들어, `kubectl create role --resource-name <x> ,<y>`이 아닌 `kubectl create role --resource-name <x>,<y>`.</td>
 </tr>
 <tr>
 <td>포드 연관관계 스케줄링</td>
 <td> `scheduler.alpha.kubernetes.io/affinity` 어노테이션은 더 이상 사용되지 않습니다.
 <ol>
-  <li>포드 연관관계 스케줄링을 업데이트해야 하는지 여부를 판별하려면 `ibm-system` 및 `kube-system`을 제외한 각 네임스페이스에 대해 다음 명령을 실행하십시오.</br>
+  <li>`ibm-system` 및 `kube-system`을 제외한 각 네임스페이스에서 포드 선호도 스케줄링을 업데이트할지 여부를 판별하십시오.</br>
   ```
   kubectl get pods -n <namespace> -o yaml | grep "scheduler.alpha.kubernetes.io/affinity" && echo "Action required"
   ```
   </br>
-  <li>`"Action required"`가 리턴되는 경우 `scheduler.alpha.kubernetes.io/affinity` 어노테이션 대신 [_PodSpec_ ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _선호도_ 필드를 사용하도록 영향을 받는 포드를 수정하십시오.
+  <li>`"Action required"`가 리턴되는 경우 `scheduler.alpha.kubernetes.io/affinity` 어노테이션 대신 [_PodSpec_ ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _선호도_ 필드를 사용하십시오.
 </ol>
 </tr>
 <tr>
 <td>네트워크 정책</td>
-<td>`net.beta.kubernetes.io/network-policy` 어노테이션은 더 이상 지원되지 않습니다.
+<td>`net.beta.kubernetes.io/network-policy` 어노테이션은 더 이상 사용 가능하지 않습니다.
 <ol>
-  <li>네트워크 정책을 업데이트해야 하는지 여부를 판별하려면 다음 명령을 실행하십시오.</br>
+  <li>정책을 변경할지 여부를 판별하십시오.</br>
   ```
   kubectl get ns -o yaml | grep "net.beta.kubernetes.io/network-policy" | grep "DefaultDeny" && echo "Action required"
   ```
-  <li>`Action required`가 리턴되는 경우 나열된 각 Kubernetes 네임스페이스에 다음 네트워크 정책을 추가하십시오.</br>
+  <li>`"Action required"`가 리턴되는 경우 나열된 각 Kubernetes 네임스페이스에 다음 네트워크 정책을 추가하십시오.</br>
 
   <pre class="codeblock">
   <code>
@@ -117,7 +192,7 @@ spec:
   </code>
   </pre>
 
-  <li> 네트워크 정책이 준비되면 `net.beta.kubernetes.io/network-policy` 어노테이션을 제거하십시오.
+  <li> 네트워크 정책을 추가한 후 `net.beta.kubernetes.io/network-policy` 어노테이션을 제거하십시오.
   ```
   kubectl annotate ns <namespace> --overwrite "net.beta.kubernetes.io/network-policy-"
   ```
@@ -125,32 +200,34 @@ spec:
 </tr>
 <tr>
 <td>결함 허용</td>
-<td>`scheduler.alpha.kubernetes.io/tolerations` 어노테이션은 더 이상 지원되지 않습니다.
+<td>`scheduler.alpha.kubernetes.io/tolerations` 어노테이션은 더 이상 사용 가능하지 않습니다.
 <ol>
-  <li>결함 허용을 업데이트해야 하는지 여부를 판별하려면 `ibm-system` 및 `kube-system`을 제외한 각 네임스페이스에 대해 다음 명령을 실행하십시오.</br>
+  <li>`ibm-system` 및 `kube-system`을 제외한 각 네임스페이스에서 결함 허용을 변경할지 여부를 판별하십시오.</br>
   ```
   kubectl get pods -n <namespace> -o yaml | grep "scheduler.alpha.kubernetes.io/tolerations" && echo "Action required"
   ```
   </br>
 
-  <li>`"Action required"`가 리턴되는 경우 `scheduler.alpha.kubernetes.io/tolerations` 어노테이션 대신 [_PodSpec_ ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _결함 허용_ 필드를 사용하도록 영향받는 포드를 수정하십시오.
+  <li>`"Action required"`가 리턴되는 경우 `scheduler.alpha.kubernetes.io/tolerations` 어노테이션 대신 [_PodSpec_ ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _결함 허용_ 필드를 사용하십시오.
 </ol>
 </tr>
 <tr>
 <td>오염</td>
-<td>`scheduler.alpha.kubernetes.io/taints` 어노테이션은 더 이상 지원되지 않습니다.
+<td>`scheduler.alpha.kubernetes.io/taints` 어노테이션은 더 이상 사용 가능하지 않습니다.
 <ol>
-  <li>오염을 업데이트해야 하는지 여부를 판별하려면 다음 명령을 실행하십시오. </br>
+  <li>오염을 변경할지 여부를 판별하십시오.</br>
   ```
   kubectl get nodes -o yaml | grep "scheduler.alpha.kubernetes.io/taints" && echo "Action required"
   ```
-  <li>`"Action required"`가 리턴되는 경우 지원되지 않는 어노테이션이 있는 각 노드에 대한 `scheduler.alpha.kubernetes.io/taints` 어노테이션을 제거하십시오.</br>
+  <li>`"Action required"`가 리턴되는 경우 각 노드에 대해 `scheduler.alpha.kubernetes.io/taints` 어노테이션을 제거하십시오.</br>
   `kubectl annotate nodes <node> scheduler.alpha.kubernetes.io/taints-`
-  <li>지원되지 않는 어노테이션이 제거되면 각 노드에 오염을 추가하십시오. `kubectl` CLI 버전 1.6 이상이 있어야 합니다.</br>
+  <li>각 노드에 오염을 추가하십시오.</br>
   `kubectl taint node <node> <taint>`
   </ol>
 </tr>
+<tr>
+<td>StatefulSet 포드 DNS</td>
+<td>StatefulSet 포드는 마스터를 업데이트한 후 해당 Kubernetes DNS 항목을 잃습니다. DNS 항목을 복원하려면 StatefulSet 포드를 삭제하십시오. Kubernetes는 포드를 다시 작성하고 자동으로 DNS 항목을 복원합니다. 자세한 정보는 [Kubernetes 문제 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/issues/48327)를 참조하십시오.
+</tr>
 </tbody>
-</table></staging>
-  
-  
+</table>

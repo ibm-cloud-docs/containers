@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-17"
+lastupdated: "2017-11-02"
 
 ---
 
@@ -17,14 +17,14 @@ lastupdated: "2017-10-17"
 
 
 # {{site.data.keyword.containershort_notm}}에 대한 인기 있는 주제
-{: #cs_internal}
+{: #cs_popular_topics}
 
 컨테이너 개발자가 관심을 가지는 내용을 확인하십시오.
 {:shortdesc}
 
 <table>
 <thead>
-<th colspan=2><img src="images/idea.png"/>컨테이너 및 Kubernetes 클러스터에 대한 인기 있는 주제</th>
+<th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/>컨테이너 및 Kubernetes 클러스터에 대한 인기 있는 주제</th>
 </thead>
 <tbody>
 <tr>
@@ -47,6 +47,10 @@ lastupdated: "2017-10-17"
 <tr>
 <td>[Kubernetes 1.7로 업데이트](cs_versions.html)</td>
 <td>Kubernetes 1.7로 업데이트하기 전에 클러스터에 작성할 변경사항을 검토하십시오.</td>
+</tr>
+<tr>
+<td>[클러스터용 REST API![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://us-south.containers.bluemix.net/swagger)</td>
+<td>{{site.data.keyword.containershort_notm}}를 관리하려면 API 문서를 보십시오.</td>
 </tr>
 </tbody></table>
 

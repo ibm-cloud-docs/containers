@@ -19,7 +19,8 @@ lastupdated: "2017-10-16"
 # 튜토리얼: 클러스터 작성
 {: #cs_cluster_tutorial}
 
-클라우드의 고유 Kubernetes 클러스터를 배치하고 관리합니다. 작업자 노드라고 하는 독립적 컴퓨팅 호스트의 클러스터에서 컨테이너화된 앱의 배치, 오퍼레이션, 스케일링 및 모니터링을 자동화할 수 있습니다. {:shortdesc}
+클라우드의 고유 Kubernetes 클러스터를 배치하고 관리합니다. 작업자 노드라고 하는 독립적 컴퓨팅 호스트의 클러스터에서 컨테이너화된 앱의 배치, 오퍼레이션, 스케일링 및 모니터링을 자동화할 수 있습니다.
+{:shortdesc}
 
 이 튜토리얼 시리즈에서는 가상의 홍보(PR) 회사가 Kubernetes를 사용하여 {{site.data.keyword.Bluemix_short}}의 컨테이너화된 앱을 배치하는 방법을 보여줍니다. PR 회사에서는 Leveraging {{site.data.keyword.toneanalyzerfull}}를 활용하여 보도 자료를 분석하고 피드백을 받습니다.
 
@@ -48,7 +49,7 @@ lastupdated: "2017-10-16"
 
 ## 전제조건
 
--  [{{site.data.keyword.Bluemix_notm}} 계정![외부 External link icon](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/registration/)
+-  [{{site.data.keyword.Bluemix_notm}} 계정 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/registration/)
 
 
 
@@ -75,12 +76,12 @@ GUI에서 클러스터를 작성하고 필수 CLI를 설치합니다. 이 튜토
 CLI를 설치하려면 다음을 수행하십시오.
 
 1.  {{site.data.keyword.containershort_notm}} 플러그인의 필수 소프트웨어로서 [{{site.data.keyword.Bluemix_notm}} CLI ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://clis.ng.bluemix.net/ui/home.html)을 설치하십시오. {{site.data.keyword.Bluemix_notm}} CLI 명령을 실행하려면 `bx` 접두부를 사용하십시오.
-2.  프롬프트에 따라 계정 및 {{site.data.keyword.Bluemix_notm}} 조직을 선택하십시오. 클러스터는 계정에 특정하지만, {{site.data.keyword.Bluemix_notm}} 조직이나 영역과는 독립적입니다. 
+2.  프롬프트에 따라 계정 및 {{site.data.keyword.Bluemix_notm}} 조직을 선택하십시오. 클러스터는 계정에 특정하지만, {{site.data.keyword.Bluemix_notm}} 조직이나 영역에는 독립적입니다.
 
 4.  Kubernetes 클러스터를 작성하고 작업자 노드를 관리하려면 {{site.data.keyword.containershort_notm}} 플러그인을 설치하십시오. {{site.data.keyword.containershort_notm}} 플러그인 명령을 실행하려면 `bx cs` 접두부를 사용하십시오.
 
     ```
-    bx plugin install container-service -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-service -r Bluemix
     ```
     {: pre}
 
@@ -127,7 +128,7 @@ CLI를 설치하려면 다음을 수행하십시오.
 6. {{site.data.keyword.registryshort_notm}}에서 개인용 이미지 저장소를 설정하여 관리하려면 {{site.data.keyword.registryshort_notm}} 플러그인을 설치하십시오. 레지스트리 명령을 실행하려면 `bx cr` 접두부를 사용하십시오.
 
     ```
-    bx plugin install container-registry -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-registry -r Bluemix
     ```
     {: pre}
 
@@ -283,6 +284,6 @@ CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색�
 
 ## 다음 단계
 
-* [배운 내용을 테스트하고 퀴즈를 풀어보십시오! ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://bluemix-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
+* [배운 내용을 테스트하고 퀴즈를 풀어보십시오! ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
 
 * [튜토리얼: {{site.data.keyword.containershort_notm}}의 Kubernetes 클러스터에 앱 배치](cs_tutorials_apps.html#cs_apps_tutorial)를 시도하여 작성한 클러스터에 PR 회사의 앱을 배치하십시오.

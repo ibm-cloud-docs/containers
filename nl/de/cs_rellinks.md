@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-09-15"
+lastupdated: "2017-11-02"
 
 ---
 
@@ -12,38 +12,35 @@ lastupdated: "2017-09-15"
 {:pre: .pre}
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
-{:tip: .tip} 
+{:tip: .tip}
 {:download: .download}
 
 
 # Zugehörige Links
 {: #cs_rellinks}
 
-**Allgemein**  
-
-
-- [Docker-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.docker.com/engine/)
-- [Twitter ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://twitter.com/hashtag/ibmcontainers)
-- [Developers Community-Artikel ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/blogs/bluemix/tag/containers/)
-- [Microservices.TV ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/tv/microservices/)
-
-<br />
-
-
-
-**Links im Zusammenhang mit Clustern**  
+**Links im Zusammenhang mit Clustern**
 
 - [Preisrechner für Cluster ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/?direct=classic%2F&env_id=ibm%3Ayp%3Aus-south#/pricing/cloudOEPaneId=pricing&paneId=pricingSheet&orgGuid=83f3f6dd-e430-4955-8225-0963753d8b0f&spaceGuid=f616188f-e265-4e04-84be-1b3d2ec63db3)
 - [REST-API für Cluster ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://us-south.containers.bluemix.net/swagger)
+- [REST-API für Clusterprotokollierung ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://us-south.containers.bluemix.net/swagger-logging/)
 - [Lernprogramme für developerWorks-Containerorchestrierung ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/code/journey/category/container-orchestration/)
 - [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/)
+- [Docker-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.docker.com/engine/)
 - [Weave Scope ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.weave.works/oss/scope/)
 
 <br />
 
 
+**Glossare**
+- [{{site.data.keyword.Bluemix_notm}}-Glossar](/docs/overview/glossary/index.html)
+- [Kubernetes-Glossar ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/glossary/?fundamental=true)
+- [Docker-Glossar ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.docker.com/glossary/)
 
-**Links im Zusammenhang mit der Container-Registry**  
+<br />
+
+
+**Links im Zusammenhang mit der Container-Registry**
 
 - [{{site.data.keyword.registryshort_notm}}-Dokumentation](/docs/services/Registry/index.html)
 
@@ -52,7 +49,15 @@ lastupdated: "2017-09-15"
 
 
 
-**Links im Zusammenhang mit einzelnen und skalierbaren Containern**  
+**Links im Zusammenhang mit einzelnen und skalierbaren Containern**
 
 - [REST-API für einzelne und skalierbare Container ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](http://ccsapi-doc.mybluemix.net/)
+
+**Allgemein**
+
+- [Twitter ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://twitter.com/hashtag/ibmcontainers)
+- [Developers Community-Artikel ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/blogs/bluemix/tag/containers/)
+- [Microservices.TV ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/tv/microservices/)
+
+<br />
 

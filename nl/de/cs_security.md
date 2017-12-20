@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-24"
+lastupdated: "2017-11-16"
 
 ---
 
@@ -22,12 +22,14 @@ lastupdated: "2017-10-24"
 Sie können die integrierten Sicherheitsfunktionen für die Risikoanalyse und den Sicherheitsschutz verwenden. Diese Funktionen helfen Ihnen, die Clusterinfrastruktur und Netzkommunikation zu schützen, die Berechnungsressourcen zu isolieren und die Einhaltung von Sicherheitsbestimmungen über die einzelnen Infrastrukturkomponenten und Containerbereitstellungen hinweg sicherzustellen.
 {: shortdesc}
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_security.png" ><img src="images/cs_security.png" width="400" alt="{{site.data.keyword.containershort_notm}} Clustersicherheit" style="width:400px; border-style: none"/></a>
+Das folgende Diagramm zeigt die Sicherheitsfunktionen gruppiert nach Kubernetes-Master, Workerknoten und Container-Images.  
+<img src="images/cs_security.png" width="400" alt="{{site.data.keyword.containershort_notm}}-Clustersicherheit" style="width:400px; border-style: none"/>
 
 
   <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
+  <caption>Sicherheitsfunktionen</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png"/> Integrierte Sicherheitseinstellungen in {{site.data.keyword.containershort_notm}}</th>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Integrierte Clustersicherheitseinstellungen in {{site.data.keyword.containershort_notm}}</th>
   </thead>
   <tbody>
     <tr>
@@ -37,7 +39,7 @@ Sie können die integrierten Sicherheitsfunktionen für die Risikoanalyse und de
     <tr>
       <td>Workerknoten</td>
       <td>Container werden auf Workerknoten bereitgestellt, die der Nutzung durch einen Cluster vorbehalten sind und gegenüber IBM Kunden die Berechnungs-, Netz- und Speicherisolation sicherstellen. {{site.data.keyword.containershort_notm}} stellt integrierte Sicherheitsfunktionen zur Verfügung, um die Sicherheit
-Ihrer Workerknoten im privaten und im öffentlichen Netz sicherzustellen und für die Einhaltung von Sicherheitsbestimmungen für Workerknoten zu sorgen. Weitere Informationen enthält [Sicherheit von Workerknoten](#cs_security_worker).</td>
+Ihrer Workerknoten im privaten und im öffentlichen Netz sicherzustellen und für die Einhaltung von Sicherheitsbestimmungen für Workerknoten zu sorgen. Weitere Informationen enthält [Sicherheit von Workerknoten](#cs_security_worker). Zusätzlich können Sie [Calico-Netzrichtlinien](#cs_security_network_policies) hinzufügen, um den Netzverkehr anzugeben, den Sie zu und von einem Pod in einem Workerknoten zulassen oder blockieren. </td>
      </tr>
      <tr>
       <td>Images</td>
@@ -57,7 +59,7 @@ Prüfen Sie die integrierten Sicherheitsfeatures, die den Kubernetes-Master sch�
 
 <dl>
   <dt>Vollständig verwalteter und dedizierter Kubernetes-Master</dt>
-    <dd>Jeder Kubernetes-Cluster in {{site.data.keyword.containershort_notm}} wird von einem dedizierten Kubernetes-Master gesteuert, der von IBM in einem IBM eigenen Konto von IBM Bluemix Infrastructure (SoftLayer) verwaltet wird. Der Kubernetes-Master ist mit den folgenden dedizierten Komponenten konfiguriert, die nicht mit anderen IBM Kunden gemeinsam genutzt werden.
+    <dd>Jeder Kubernetes-Cluster in {{site.data.keyword.containershort_notm}} wird von einem dedizierten Kubernetes-Master gesteuert, der von IBM in einem IBM eigenen Konto von IBM Cloud Infrastructure (SoftLayer) verwaltet wird. Der Kubernetes-Master ist mit den folgenden dedizierten Komponenten konfiguriert, die nicht mit anderen IBM Kunden gemeinsam genutzt werden.
     <ul><li>Datenspeicher 'etcd': Speichert alle Kubernetes-Ressourcen eines Clusters, z. B. Services, Bereitstellungen und Pods. Kubernetes-Konfigurationsübersichten und geheime Kubernetes-Schlüssel sind App-Daten, die in Form von Schlüssel/Wert-Paaren gespeichert werden, damit sie von einer in einem Pod ausgeführten App verwendet werden können. Daten in 'etcd' werden auf einem verschlüsselten
 Datenträger gespeichert, der von IBM verwaltet wird, und mit TLS verschlüsselt, wenn sie an einen Pod gesendet werden, um Datenschutz und die Datenintegrität sicherzustellen.</li>
     <li>'kube-apiserver': Dient als Haupteinstiegspunkt für alle Anforderungen vom Workerknoten zum Kubernetes-Master. Die Komponente 'kube-apiserver' validiert und verarbeitet Anforderungen und besitzt Lese- und Schreibberechtigungen für den Datenspeicher 'etcd'.</li>
@@ -86,7 +88,7 @@ Speicherisolation sicherstellen.
 
 <dl>
   <dt>Isolation der Berechnungs-, Netz- und Speicherinfrastruktur</dt>
-    <dd>Wenn Sie einen Cluster bereitstellen, werden im Konto von IBM Bluemix Infrastructure (SoftLayer) oder im dedizierten Konto von IBM Bluemix Infrastructure (SoftLayer) von IBM virtuelle Maschinen als Workerknoten eingerichtet. Workerknoten sind einem Cluster zugeordnet und hosten nicht die Arbeitslast anderer Cluster.</br> Jedes {{site.data.keyword.Bluemix_notm}}-Konto wird mit VLANs von IBM Bluemix Infrastructure (SoftLayer) eingerichtet, um die Qualität der Netzleistung und Isolation auf den Workerknoten sicherzustellen. </br>Damit Daten in Ihrem Cluster als persistent erhalten bleiben, können Sie den dedizierten NFS-basierten Dateispeicher von IBM Bluemix Infrastructure (SoftLayer) einrichten und die integrierten Funktionen für Datensicherheit dieser Plattform nutzen.</dd>
+    <dd>Wenn Sie einen Cluster bereitstellen, werden im Konto von IBM Cloud Infrastructure (SoftLayer) oder im dedizierten Konto von IBM Cloud Infrastructure (SoftLayer) von IBM virtuelle Maschinen als Workerknoten eingerichtet. Workerknoten sind einem Cluster zugeordnet und hosten nicht die Arbeitslast anderer Cluster.</br> Jedes {{site.data.keyword.Bluemix_notm}}-Konto wird mit VLANs von IBM Cloud Infrastructure (SoftLayer) eingerichtet, um die Qualität der Netzleistung und Isolation auf den Workerknoten sicherzustellen. </br>Damit Daten in Ihrem Cluster als persistent erhalten bleiben, können Sie den dedizierten NFS-basierten Dateispeicher von IBM Cloud Infrastructure (SoftLayer) einrichten und die integrierten Funktionen für Datensicherheit dieser Plattform nutzen.</dd>
   <dt>Einrichtung geschützter Workerknoten</dt>
     <dd>Alle Workerknoten werden mit dem Betriebssystem Ubuntu eingerichtet, das nicht vom Benutzer geändert werden kann. Um das Betriebssystem der Workerknoten gegen potenzielle Angriffe zu schützen,
 wird jeder Workerknoten mit extrem fortgeschrittenen Firewalleinstellungen konfiguriert,
@@ -97,11 +99,9 @@ die bei der Clustererstellung auf jedem Workerknoten konfiguriert werden. Diese 
 auf den Workerknoten konfigurieren.</br> Standardmäßig ist der SSH-Zugriff für den Rootbenutzer beim Workerknoten inaktiviert. Wenn Sie zusätzliche Features auf dem Workerknoten installieren wollen, können Sie [Kubernetes-Dämon-Sets verwenden ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset) für Vorgänge, die auf jedem Knoten ausgeführt werden müssen, bzw. [Kubernetes-Jobs ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) für alle einmaligen Aktionen, die Sie ausführen müssen.</dd>
   <dt>Einhaltung der Sicherheitsbestimmungen für die Kubernetes-Workerknoten</dt>
     <dd>IBM arbeitet mit internen und externen Beratungsteams für Sicherheit zusammen, um potenzielle Schwachstellen in Bezug auf die Einhaltung von Sicherheitsbestimmungen zu beseitigen. IBM verwaltet den SSH-Zugriff auf die Workerknoten, um Aktualisierungen und Sicherheitspatches für das Betriebssystem bereitzustellen.</br> <b>Wichtig</b>: Führen Sie regelmäßig einen Warmstart für Ihre Workerknoten durch, um sicherzustellen, dass die Installation von Aktualisierungen und Sicherheitspatches, die automatisch für das Betriebssystem bereitgestellt werden, auch durchgeführt wird. IBM führt für Ihre Workerknoten keinen Warmstart durch.</dd>
-  <dt>Unterstützung für Netzfirewalls von IBM Bluemix Infrastructure (SoftLayer)</dt>
-    <dd>{{site.data.keyword.containershort_notm}} ist mit allen [Firewallangeboten von IBM Bluemix Infrastructure (SoftLayer) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link") kompatibel](https://www.ibm.com/cloud-computing/bluemix/network-security). Sie können unter
-{{site.data.keyword.Bluemix_notm}} Public eine Firewall mit angepassten Netzrichtlinien einrichten, um für Ihren Cluster dedizierte Netzsicherheit zu erzielen und unbefugten Zugriff zu erkennen und zu unterbinden. Sie können beispielsweise [Vyatta ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://knowledgelayer.softlayer.com/topic/vyatta-1) als Ihre Firewall und zum Blockieren unerwünschten Datenverkehrs einrichten. Wenn Sie eine Firewall einrichten, [müssen Sie auch die erforderlichen Ports und IP-Adressen für die einzelnen Regionen öffnen](#opening_ports), damit der Master und die Workernoten kommunizieren können. Unter
-{{site.data.keyword.Bluemix_notm}} Dedicated sind Firewalls, DataPower, Fortigate und DNS bereits als Teil der
-dedizierten Standardbereitstellung der Umgebung konfiguriert.</dd>
+  <dt>Unterstützung für Netzfirewalls von IBM Cloud Infrastructure (SoftLayer)</dt>
+    <dd>{{site.data.keyword.containershort_notm}} ist mit allen [Firewallangeboten von IBM Cloud Infrastructure (SoftLayer) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link") kompatibel](https://www.ibm.com/cloud-computing/bluemix/network-security). Sie können unter
+{{site.data.keyword.Bluemix_notm}} Public eine Firewall mit angepassten Netzrichtlinien einrichten, um für Ihren Cluster dedizierte Netzsicherheit zu erzielen und unbefugten Zugriff zu erkennen und zu unterbinden. Sie können beispielsweise [Vyatta ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://knowledgelayer.softlayer.com/topic/vyatta-1) als Ihre Firewall und zum Blockieren unerwünschten Datenverkehrs einrichten. Wenn Sie eine Firewall einrichten, [müssen Sie auch die erforderlichen Ports und IP-Adressen für die einzelnen Regionen öffnen](#opening_ports), damit der Master und die Workernoten kommunizieren können. Unter {{site.data.keyword.Bluemix_dedicated_notm}} sind Firewalls, DataPower, Fortigate und DNS bereits als Teil der dedizierten Standardbereitstellung der Umgebung konfiguriert.</dd>
   <dt>Services privat belassen oder Service und Apps selektiv dem öffentlichen Internet zugänglich machen</dt>
     <dd>Sie können entscheiden, ob Sie Ihre Services und Apps privat belassen wollen. Durch Nutzung der in diesem Abschnitt beschriebenen integrierten
 Sicherheitsfeatures können Sie außerdem die geschützte Kommunikation zwischen Workerknoten und Pods sicherstellen. Um Services und Apps dem öffentlichen Internet zugänglich zu machen, können Sie die Ingress-Unterstützung und die
@@ -116,7 +116,7 @@ Unterstützung der Lastausgleichsfunktion nutzen, um Ihre Services auf sichere W
 {: #opening_ports}
 
 Überprüfen Sie die hier aufgeführten Situationen, in denen Sie möglicherweise bestimmte Ports und IP-Adressen in Ihren Firewalls öffnen müssen, um folgende Aktionen zu ermöglichen:
-* Zulassen der Kommunikation zwischen dem Kubernetes-Master und den Workerknoten, wenn entweder eine Firewall für die Workerknoten eingerichtet wurde oder wenn die Firewalleinstellungen in Ihrem Konto von IBM Bluemix Infrastructure (SoftLayer) angepasst wurden.
+* Zulassen der Kommunikation zwischen dem Kubernetes-Master und den Workerknoten, wenn entweder eine Firewall für die Workerknoten eingerichtet wurde oder wenn die Firewalleinstellungen in Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) angepasst wurden.
 * Zugreifen auf die Lastausgleichsfunktion oder den Ingress-Controller von außerhalb des Clusters.
 * Ausführen der `kubectl`-Befehle über das lokale System, wenn die Netzrichtlinien eines Unternehmens den Zugriff auf öffentliche Internetendpunkte über Proxys oder Firewalls verhindern.
 
@@ -128,8 +128,8 @@ Unterstützung der Lastausgleichsfunktion nutzen, um Ihre Services auf sichere W
       {: pre}
 
   2.  In Ihrer Firewall für die OUTBOUND-Konnektivität Ihrer Workerknoten müssen Sie den ausgehenden Netzverkehr vom Quellen-Workerknoten zum TCP/UDP-Zielportbereich 20000 - 32767 und zum Port 443 für `<each_worker_node_publicIP>` und außerdem für die folgenden IP-Adressen und Netzgruppen zulassen.
-      - **Wichtig**: Sie müssen den ausgehenden Datenverkehr am Port 443 und von allen Standorten in der Region zu den jeweils anderen Standorten zulassen, um die Arbeitslast während des Bootstrap-Prozesses auszugleichen. Wenn Ihr Cluster sich beispielsweise in der Region 'Vereinigte Staaten (Süden)' befindet, dann müssen Sie Datenverkehr über den Port 443 an 'dal10' und 'dal12' sowie von 'dal10' und 'dal12' zu dem jeweils anderen Standort zulassen.
-      <p>
+      - **Wichtig**: Sie müssen den ausgehenden Datenverkehr am Port 443 für alle Standorte in der Region zu den jeweils anderen Standorten zulassen, um die Arbeitslast während des Bootstrap-Prozesses auszugleichen. Wenn Ihr Cluster sich beispielsweise in der Region 'Vereinigte Staaten (Süden)' befindet, dann müssen Sie Datenverkehr über den Port 443 an die IP-Adressen aller Standorte ('dal10', 'dal12' und 'dal13') zulassen.
+    <p>
   <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
       <thead>
       <th>Region</th>
@@ -138,14 +138,19 @@ Unterstützung der Lastausgleichsfunktion nutzen, um Ihre Services auf sichere W
       </thead>
     <tbody>
       <tr>
+        <td>Asien-Pazifik (Norden)</td>
+        <td>hkg02<br>tok02</td>
+        <td><code>169.56.132.234</code><br><code>161.202.126.210</code></td>
+       </tr>
+      <tr>
          <td>Asien-Pazifik (Süden)</td>
-         <td>mel01<br>syd01</td>
-         <td><code>168.1.97.67</code><br><code>168.1.8.195</code></td>
+         <td>mel01<br>syd01<br>syd04</td>
+         <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19</code></td>
       </tr>
       <tr>
          <td>Zentraleuropa</td>
-         <td>ams03<br>fra02</td>
-         <td><code>169.50.169.110</code><br><code>169.50.56.174</code></td>
+         <td>ams03<br>fra02<br>par01</td>
+         <td><code>169.50.169.110</code><br><code>169.50.56.174</code><br><code>159.8.86.149</code></td>
         </tr>
       <tr>
         <td>Großbritannien (Süden)</td>
@@ -154,8 +159,8 @@ Unterstützung der Lastausgleichsfunktion nutzen, um Ihre Services auf sichere W
       </tr>
       <tr>
         <td>Vereinigte Staaten (Osten)</td>
-         <td>wdc06<br>wdc07</td>
-         <td><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+         <td>tor01<br>wdc06<br>wdc07</td>
+         <td><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
       </tr>
       <tr>
         <td>Vereinigte Staaten (Süden)</td>
@@ -169,25 +174,31 @@ Unterstützung der Lastausgleichsfunktion nutzen, um Ihre Services auf sichere W
   3.  Erlauben Sie den ausgehenden Netzverkehr von den Workerknoten an {{site.data.keyword.registrylong_notm}}:
       - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
       - Ersetzen Sie <em>&lt;registry_publicIP&gt;</em> durch alle Adressen für Registry-Regionen, an die der Datenverkehr als zulässig definiert werden soll:
-        <p>      
+        <p>
 <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
-        <thead>
-        <th colspan=2><img src="images/idea.png"/> Registry-IP-Adressen</th>
-        </thead>
+      <thead>
+        <th>Containerregion</th>
+        <th>Registryadresse</th>
+        <th>Registry-IP-Adresse</th>
+      </thead>
       <tbody>
         <tr>
+          <td>Asien-Pazifik (Norden), Asien-Pazifik (Süden)</td>
           <td>registry.au-syd.bluemix.net</td>
           <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
         </tr>
         <tr>
+          <td>Zentraleuropa</td>
           <td>registry.eu-de.bluemix.net</td>
           <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></td>
          </tr>
          <tr>
+          <td>Großbritannien (Süden)</td>
           <td>registry.eu-gb.bluemix.net</td>
           <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></td>
          </tr>
          <tr>
+          <td>Vereinigte Staaten (Osten), Vereinigte Staaten (Süden)</td>
           <td>registry.ng.bluemix.net</td>
           <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></td>
          </tr>
@@ -200,18 +211,23 @@ Unterstützung der Lastausgleichsfunktion nutzen, um Ihre Services auf sichere W
       - Ersetzen Sie <em>&lt;monitoring_publicIP&gt;</em> durch alle Adressen für die Überwachungsregionen, an die der Datenverkehr als zulässig definiert werden soll:
         <p><table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
         <thead>
-        <th colspan=2><img src="images/idea.png"/> Überwachen öffentlicher IP-Adressen</th>
+        <th>Containerregion</th>
+        <th>Überwachungsadresse</th>
+        <th>IP-Adressen für die Überwachung</th>
         </thead>
       <tbody>
         <tr>
+         <td>Zentraleuropa</td>
          <td>metrics.eu-de.bluemix.net</td>
          <td><code>159.122.78.136/29</code></td>
         </tr>
         <tr>
+         <td>Großbritannien (Süden)</td>
          <td>metrics.eu-gb.bluemix.net</td>
          <td><code>169.50.196.136/29</code></td>
         </tr>
         <tr>
+          <td>Asien-Pazifik (Osten), Asien-Pazifik (Süden), Asien-Pazifik (Norden)</td>
           <td>metrics.ng.bluemix.net</td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
@@ -223,18 +239,23 @@ Unterstützung der Lastausgleichsfunktion nutzen, um Ihre Services auf sichere W
       - Ersetzen Sie <em>&lt;logging_publicIP&gt;</em> durch alle Adressen für die Protokollierungsregionen, an die der Datenverkehr als zulässig definiert werden soll:
         <p><table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
         <thead>
-        <th colspan=2><img src="images/idea.png"/> Protokollieren öffentlicher IP-Adressen</th>
+        <th>Containerregion</th>
+        <th>Protokollierungsadresse</th>
+        <th>IP-Adressen für die Protokollierung</th>
         </thead>
       <tbody>
         <tr>
+         <td>Zentraleuropa</td>
          <td>ingest.logging.eu-de.bluemix.net</td>
          <td><code>169.50.25.125</code></td>
         </tr>
         <tr>
+         <td>Großbritannien (Süden)</td>
          <td>ingest.logging.eu-gb.bluemix.net</td>
          <td><code>169.50.115.113</code></td>
         </tr>
         <tr>
+          <td>Asien-Pazifik (Osten), Asien-Pazifik (Süden), Asien-Pazifik (Norden)</td>
           <td>ingest.logging.ng.bluemix.net</td>
           <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
          </tr>
@@ -242,7 +263,7 @@ Unterstützung der Lastausgleichsfunktion nutzen, um Ihre Services auf sichere W
       </table>
 </p>
 
-  5. Für private Firewalls müssen Sie die entsprechenden Bereiche privater IPs für IBM Bluemix Infrastructure (SoftLayer) zulassen. Weitere Informationen finden Sie unter [diesem Link](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) ausgehend vom Abschnitt **Back-End-Netz (Privat)**.
+  5. Für private Firewalls müssen Sie die entsprechenden Bereiche privater IPs für IBM Cloud Infrastructure (SoftLayer) zulassen. Weitere Informationen finden Sie unter [diesem Link](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) ausgehend vom Abschnitt **Back-End-Netz (Privat)**.
       - Fügen Sie alle [Standorte in den Regionen](cs_regions.html#locations) hinzu, die von Ihnen verwendet werden.
       - Beachten Sie, dass Sie den Standort 'dal01' (Rechenzentrum) hinzufügen müssen.
       - Öffnen Sie die Ports 80 und 443, um die Durchführung des Cluster-Bootstrap-Prozesses zu erlauben.
@@ -250,6 +271,79 @@ Unterstützung der Lastausgleichsfunktion nutzen, um Ihre Services auf sichere W
   6. Optional: Um auf die Lastausgleichsfunktion von außerhalb des VLAN zugreifen zu können, müssen Sie den Port für den eingehenden Netzverkehr über eine bestimmte IP-Adresse dieser Lastausgleichsfunktion öffnen.
 
   7. Optional: Um auf den Ingress-Controller von außerhalb des VLAN zugreifen zu können, müssen Sie (abhängig vom für die Konfiguration verwendeten Port) entweder den Port 80 oder den Port 443 für den eingehenden Netzverkehr über eine bestimmte IP-Adresse dieses Ingress-Controllers öffnen.
+
+## Netzverkehr zu Edge-Workerknoten beschränken
+{: #cs_edge}
+
+Fügen Sie die Bezeichnung `dedicated=edge` zu mindestens zwei Workerknoten in Ihrem Cluster hinzu, um sicherzustellen, dass Ingress- und Lastausgleichsservices nur für diese Workerknoten bereitgestellt werden.
+
+Mit Edge-Workerknoten kann die Sicherheit des Clusters verbessert werden, indem der externe Zugriff auf Workerknoten beschränkt und die Netzarbeitslast isoliert wird. Wenn diese Workerknoten nur für den Netzbetrieb markiert sind, können andere Arbeitslasten nicht die CPU oder den Speicher des entsprechenden Workerknotens nutzen und somit Auswirkungen auf den Netzbetrieb haben.
+
+Vorbemerkungen:
+
+- [Erstellen Sie einen Standardcluster.](cs_cluster.html#cs_cluster_cli)
+- Stellen Sie sicher, dass der Cluster mindestens über ein öffentliches VLAN verfügt. Edge-Workerknoten stehen nicht für Cluster mit ausschließlich privaten VLANs zur Verfügung.
+- [Richten Sie die Kubernetes-CLI auf den Cluster aus](cs_cli_install.html#cs_cli_configure).
+
+
+1. Listen Sie alle Workerknoten im Cluster auf. Verwenden Sie die private IP-Adresse aus der Spalte **NAME**, um die Knoten anzugeben. Wählen Sie mindestens zwei Workerknoten als Edge-Workerknoten aus. Durch die Verwendung von zwei oder mehr Workerknoten wird die Verfügbarkeit der Netzressourcen verbessert.
+
+  ```
+  kubectl get nodes -L publicVLAN,privateVLAN,dedicated
+  ```
+  {: pre}
+
+2. Ordnen Sie den Workerknoten die Bezeichnung `dedicated=edge` zu. Nachdem ein Workerknoten mit der Bezeichnung `dedicated=edge` markiert wurde, werden alle Ingress- und Lastausgleichsservices auf einem Edge-Workerknoten bereitgestellt.
+
+  ```
+  kubectl label nodes <knotenname> <knotenname2> dedicated=edge
+  ```
+  {: pre}
+
+3. Rufen Sie alle vorhandenen Lastausgleichsservices in Ihrem Cluster auf.
+
+  ```
+  kubectl get services --all-namespaces -o jsonpath='{range .items[*]}kubectl get service -n {.metadata.namespace} {.metadata.name} -o yaml | kubectl apply -f - :{.spec.type},{end}' | tr "," "\n" | grep "LoadBalancer" | cut -d':' -f1
+  ```
+  {: pre}
+
+  Ausgabe:
+
+  ```
+  kubectl get service -n <namensbereich> <name> -o yaml | kubectl apply -f
+  ```
+  {: screen}
+
+4. Kopieren Sie unter Verwendung der Ausgabe aus dem vorherigen Schritt jede Zeile `kubectl get service` und fügen Sie sie ein. Mit diesem Befehl wird die Lastausgleichsfunktion erneut auf einem Edge-Workerknoten bereitgestellt. Nur öffentliche Lastausgleichsfunktionen müssen erneut bereitgestellt werden.
+
+  Ausgabe:
+
+  ```
+  service "<name>" configured
+  ```
+  {: screen}
+
+Sie haben Workerknoten mit der Bezeichnung `dedicated=edge` markiert und alle vorhandenen Lastausgleichs- sowie Ingress-Services erneut auf den Workerknoten bereitgestellt. Verhindern Sie nun als nächsten Schritt, dass andere [Arbeitslasten auf Edge-Workerknoten ausgeführt werden](#cs_edge_workloads) und [blockieren Sie eingehenden Datenverkehr an Knotenports auf Workerknoten](#cs_block_ingress).
+
+### Verhindern, dass Arbeitlasten auf Edge-Workerknoten ausgeführt werden
+{: #cs_edge_workloads}
+
+Einer der Vorteile von Edge-Workerknoten ist, dass diese so konfiguriert werden können, dass sie nur Netzservices ausführen. Die Verwendung der Tolerierung `dedicated=edge` bedeutet, dass alle Lastausgleichs- und Ingress-Services nur auf den markierten Workerknoten ausgeführt werden. Um jedoch zu verhindern, dass andere Arbeitslasten auf Edge-Workerknoten ausgeführt werden und deren Ressourcen verbrauchen, müssen Sie [Kubernetes-Taints ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) verwenden.
+
+1. Listen Sie alle Workerknoten mit der Bezeichnung `edge` auf.
+
+  ```
+  kubectl get nodes -L publicVLAN,privateVLAN,dedicated -l dedicated=edge
+  ```
+  {: pre}
+
+2. Wenden Sie einen Taint auf alle Workerknoten an, der verhindert, dass Pods auf den entsprechenden Workerknoten ausgeführt werden und der Pods von den Workerknoten entfernt, die nicht die Bezeichnung `edge` aufweisen. Die entfernten Pods werden auf anderen Workerknoten mit entsprechender Kapazität erneut bereitgestellt.
+
+  ```
+  kubectl taint node <knotenname> dedicated=edge:NoSchedule dedicated=edge:NoExecute
+  ```
+
+Nun werden nur Pods mit der Tolerierung `dedicated=edge` auf Ihren Edge-Workerknoten bereitgestellt.
 
 <br />
 
@@ -287,8 +381,7 @@ Wenn ein Cluster erstellt wird, werden Standardnetzrichtlinien automatisch für 
 jedes Workerknotens konfiguriert, um eingehenden Datenverkehr für einen Workerknoten aus dem öffentlichen Internet zu begrenzen. Diese Richtlinien wirken sich nicht auf Datenverkehr zwischen Pods aus
 und werden konfiguriert, um Zugriff auf den Kubernetes-Knotenport, die Lastausgleichsfunktion und die Ingress-Services zu ermöglichen.
 
-Standardrichtlinien werden nicht direkt auf Pods angewendet. Sie werden mithilfe eines Calico-[Host-Endpunkts ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](http://docs.projectcalico.org/v2.0/getting-started/bare-metal/bare-metal) auf die öffentliche Netzschnittstelle
-eines Workerknotens angewendet. Wenn ein Host-Endpunkt in Calico erstellt wird, wird der gesamte Datenverkehr zu und von der Netzschnittstelle dieses Workerknotens blockiert, es sei denn, eine Richtlinien lässt diesen Datenverkehr zu.
+Standardrichtlinien werden nicht direkt auf Pods angewendet. Sie werden mithilfe eines Calico-Host-Endpunkts auf die öffentliche Netzschnittstelle eines Workerknotens angewendet. Wenn ein Host-Endpunkt in Calico erstellt wird, wird der gesamte Datenverkehr zu und von der Netzschnittstelle dieses Workerknotens blockiert, es sei denn, eine Richtlinien lässt diesen Datenverkehr zu.
 
 Beachten Sie, dass es keine Richtlinie gibt, die SSH zulässt, deshalb ist SSH-Zugriff über die öffentliche Netzschnittstelle
 ebenfalls blockiert, ebenso wie alle anderen Ports, die sich nicht mithilfe einer Richtlinie öffnen lassen. SSH-Zugriff und alle anderen Zugriffe sind über die private Netzschnittstelle jedes Workerknotens möglich.
@@ -298,7 +391,7 @@ ebenfalls blockiert, ebenso wie alle anderen Ports, die sich nicht mithilfe eine
 
  <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
   <thead>
-  <th colspan=2><img src="images/idea.png"/> Standardrichtlinien für die einzelnen Cluster</th>
+  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Standardrichtlinien für die einzelnen Cluster</th>
   </thead>
   <tbody>
     <tr>
@@ -306,13 +399,13 @@ ebenfalls blockiert, ebenso wie alle anderen Ports, die sich nicht mithilfe eine
       <td>Lässt den gesamten ausgehenden Datenverkehr zu.</td>
     </tr>
     <tr>
+      <td><code>allow-bixfix-port</code></td>
+      <td>Lässt eingehenden Datenverkehr an Port 52311 zur BigFix-App zu, um erforderliche Aktualisierungen für Workerknoten zu ermöglichen.</td>
+    </tr>
+    <tr>
       <td><code>allow-icmp</code></td>
       <td>Lässt eingehende 'icmp'-Pakete (Pings) zu.</td>
      </tr>
-     <tr>
-      <td><code>allow-kubelet-port</code></td>
-      <td>Lässt den gesamten eingehenden Datenverkehr zu Port 10250 zu; dabei handelt es sich um den von Kubelet verwendeten Port. Aufgrund dieser Richtlinie funktionieren `kubectl logs` und `kubectl exec` ordnungsgemäß im Kubernetes-Cluster.</td>
-    </tr>
     <tr>
       <td><code>allow-node-port-dnat</code></td>
       <td>Lässt eingehenden Datenverkehr für den Knotenport, die Lastausgleichsfunktion und den Ingress-Service zu den Pods zu, die diese Services zugänglich machen. Beachten Sie, dass der Port, den diese Services in der öffentlichen
@@ -320,7 +413,7 @@ Schnittstelle zugänglich machen, nicht angegeben werden muss, weil Kubernetes D
    </tr>
    <tr>
       <td><code>allow-sys-mgmt</code></td>
-      <td>Lässt eingehende Verbindungen für bestimmte Systeme von IBM Bluemix Infrastructure (SoftLayer) zu, die zum Verwalten der Workerknoten verwendet werden.</td>
+      <td>Lässt eingehende Verbindungen für bestimmte Systeme von IBM Cloud Infrastructure (SoftLayer) zu, die zum Verwalten der Workerknoten verwendet werden.</td>
    </tr>
    <tr>
     <td><code>allow-vrrp</code></td>
@@ -342,17 +435,16 @@ Vorbemerkungen:
 2.  [Erstellen Sie einen Lite-Cluster oder Standardcluster.](cs_cluster.html#cs_cluster_ui)
 3.  [Richten Sie die Kubernetes-CLI auf den Cluster aus](cs_cli_install.html#cs_cli_configure). Schließen Sie die Option `--admin` mit dem Befehl `bx cs cluster-config` ein, der zum Herunterladen der Zertifikate und Berechtigungsdateien verwendet wird. In diesem Download sind auch die Schlüssel für die Rolle 'Superuser' enthalten, die Sie zum Ausführen von Calico-Befehlen benötigen.
 
-
   ```
   bx cs cluster-config <clustername> --admin
   ```
   {: pre}
 
-  **Hinweis**: Die Calico-CLI-Version 1.4.0 wird unterstützt.
+  **Hinweis**: Die Calico-CLI-Version 1.6.1 wird unterstützt.
 
 Gehen Sie wie folgt vor, um Netzrichtlinien hinzuzufügen:
 1.  Installieren Sie die Calico-CLI.
-    1.  [Laden Sie die Calico-CLI ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/projectcalico/calicoctl/releases/tag/v1.4.0) herunter.
+    1.  [Laden Sie die Calico-CLI ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/projectcalico/calicoctl/releases/tag/v1.6.1) herunter.
 
         **Tipp:** Wenn Sie Windows verwenden, installieren Sie die Calico-CLI in demselben Verzeichnis wie die {{site.data.keyword.Bluemix_notm}}-CLI. Diese Konstellation erspart Ihnen einige Dateipfadänderungen, wenn Sie spätere Befehle ausführen.
 
@@ -563,7 +655,7 @@ erzwungen wird, muss sie eine Kubernetes-Ressource finden, die mit dem Selektor 
           ```
           {: pre}
 
-### Eingehenden Datenverkehr (Ingress) zu LoadBalancer- oder NodePort-Services blockieren
+### Eingehenden Datenverkehr zu LoadBalancer- oder NodePort-Services blockieren
 {: #cs_block_ingress}
 
 Standardmäßig sind die Kubernetes-Services `NodePort` und `LoadBalancer` so konzipiert, dass Ihre App in allen öffentlichen und privaten Clusterschnittstellen verfügbar ist. Allerdings können Sie den eingehenden Datenverkehr zu Ihren Services auf Basis der Datenverkehrsquelle oder des Ziels blockieren. Zum Blockieren von Datenverkehr müssen Sie Calico-Netzrichtlinien vom Typ `preDNAT` erstellen.
@@ -575,11 +667,18 @@ Der Clusteradministrator kann die Calico-Netzrichtlinien vom Typ `preDNAT` verwe
   - Den Datenverkehr zu den NodePort-Services. Der Datenverkehr zu LoadBalancer-Services ist zulässig.
   - Den Datenverkehr, der auf einer Quellenadresse oder einem CIDR basiert.
 
-Ein Vorteil dieser Funktionen besteht darin, dass der Clusteradministrator den Datenverkehr an öffentliche Knotenports eines privaten LoadBalancer-Service blockieren kann. Der Administrator kann außerdem das Whitelisting des Zugriffs auf NodePort- oder LoadBalancer-Services aktivieren. Die Netzrichtlinien vom Typ `preDNAT` sind nützlich, weil die standardmäßigen Kubernetes- und Calico-Richtlinien aufgrund der DNAT-iptables-Regeln, die für die Kubernetes-NodePort- und Kubernetes-LoadBalancer-Services generiert werden, zum Schutz dieser Services schwierig anzuwenden sind.
+Nachfolgend finden Sie einige gängige Anwendungsbereiche für die Calico-Netzrichtlinien des Typs 
+
+  - Blockieren des Datenverkehrs an öffentliche Knotenports eines privaten LoadBalancer-Service.
+  - Blockieren des Datenverkehrs an öffentliche Knotenports in Clustern, in denen [Edge-Workerknoten](#cs_edge) ausgeführt werden. Durch das Blockieren von Knotenports wird sichergestellt, dass die Edge-Workerknoten die einzigen Workerknoten sind, die eingehenden Datenverkehr verarbeiten.
+
+Die Netzrichtlinien vom Typ `preDNAT` sind nützlich, weil die standardmäßigen Kubernetes- und Calico-Richtlinien aufgrund der DNAT-iptables-Regeln, die für die Kubernetes-NodePort- und Kubernetes-LoadBalancer-Services generiert werden, zum Schutz dieser Services schwierig anzuwenden sind.
 
 Die Calico-Netzrichtlinien vom Typ `preDNAT` generieren iptables-Regeln auf Basis einer [Calico-Netzrichtlinienressource ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v2.4/reference/calicoctl/resources/policy).
 
-1. Definieren Sie eine Calico-Netzrichtlinie vom Typ `preDNAT` für den Ingress-Zugriff auf Kubernetes-Services. Im vorliegenden Beispiel werden alle Knotenports blockiert.
+1. Definieren Sie eine Calico-Netzrichtlinie vom Typ `preDNAT` für den Ingress-Zugriff auf Kubernetes-Services.
+
+  Beispiel für die Blockierung aller Knotenports:
 
   ```
   apiVersion: v1
@@ -606,7 +705,7 @@ Die Calico-Netzrichtlinien vom Typ `preDNAT` generieren iptables-Regeln auf Basi
 2. Wenden Sie die Calico-Netzrichtlinie vom Typ 'preDNAT' an. Es dauert ca. eine Minute, bis die Richtlinienänderungen im Cluster angewendet sind.
 
   ```
-  /opt/bin/calicoctl apply -f deny-kube-node-port-services.yaml
+  calicoctl apply -f deny-kube-node-port-services.yaml
   ```
   {: pre}
 
@@ -627,8 +726,4 @@ Verwenden Sie integrierte Sicherheitsfunktionen, um die Sicherheit und Integrit�
 
 Wenn Sie {{site.data.keyword.registryshort_notm}} verwenden, können Sie die integrierte Sicherheitsfunktion zum Scannen einsetzen, die Vulnerability Advisor bereitstellt. Jedes Image, das mit einer Push-Operation an Ihren Namensbereich übertragen wird, wird automatisch auf Schwachstellen und Sicherheitslücken gescannt. Dieser Scanvorgang erfolgt im Abgleich mit einer Datenbank mit bekannten CentOS-, Debian-, Red Hat- und Ubuntu-Problemen. Werden derartige Schwachstellen oder Sicherheitslücken festgestellt, stellt Vulnerability Advisor Anweisung dazu bereit, wie Sie diese beseitigen bzw. schließen, um die Integrität und Sicherheit des Image sicherzustellen.
 
-Gehen Sie wie folgt vor, um die Schwachstellenanalyse für das Image anzuzeigen:
-
-1.  Wählen Sie im **Katalog** im Abschnitt 'Container' die Option **Container-Registry** aus.
-2.  Geben Sie auf der Seite **Private Repositorys** in der Tabelle **Repositorys** das Image an.
-3.  Klicken Sie in der Spalte **Sicherheitsbericht** auf den Status des Images, um die zugehörige Schwachstellenanalyse abzurufen.
+Informationen darüber, wie Sie die Schwachstellenanalyse für Ihre Images anzeigen, finden Sie in der [Dokumentation zu Vulnerability Advisor](/docs/services/va/va_index.html#va_registry_cli).

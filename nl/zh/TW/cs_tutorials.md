@@ -80,7 +80,7 @@ lastupdated: "2017-10-16"
 4.  安裝 {{site.data.keyword.containershort_notm}} 外掛程式以建立 Kubernetes 叢集，以及管理工作者節點。若要執行 {{site.data.keyword.containershort_notm}} 外掛程式指令，請使用字首 `bx cs`。
 
     ```
-    bx plugin install container-service -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-service -r Bluemix
     ```
     {: pre}
 
@@ -127,7 +127,7 @@ lastupdated: "2017-10-16"
 6. 若要在 {{site.data.keyword.registryshort_notm}} 中設定及管理專用映像檔儲存庫，請安裝 {{site.data.keyword.registryshort_notm}} 外掛程式。若要執行登錄指令，請使用字首 `bx cr`。
 
     ```
-    bx plugin install container-registry -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-registry -r Bluemix
     ```
     {: pre}
 
@@ -282,6 +282,6 @@ lastupdated: "2017-10-16"
 
 ## 下一步為何？
 
-* [測試您學到的知識，並進行隨堂測驗！![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://bluemix-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
+* [測試您學到的知識，並進行隨堂測驗！![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
 
 * 嘗試[指導教學：在 {{site.data.keyword.containershort_notm}} 中將應用程式部署至 Kubernetes 叢集](cs_tutorials_apps.html#cs_apps_tutorial)，以將公關公司的應用程式部署至您所建立的叢集。

@@ -76,12 +76,12 @@ As CLIs a seguir e seus pré-requisitos são usados para gerenciar clusters por 
 Para instalar as CLIs:
 
 1.  Como um pré-requisito para o plug-in do {{site.data.keyword.containershort_notm}}, instale a CLI do [{{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://clis.ng.bluemix.net/ui/home.html). Para executar comandos da CLI do {{site.data.keyword.Bluemix_notm}}, use o prefixo `bx`.
-2.  Siga os prompts para selecionar uma conta e uma organização do {{site.data.keyword.Bluemix_notm}}. Os clusters são específicos para uma conta, mas são independentes de uma organização ou um espaço do {{site.data.keyword.Bluemix_notm}}.
+2.  Siga os prompts para selecionar uma conta e uma organização do {{site.data.keyword.Bluemix_notm}}. Os clusters são específicos para uma conta, mas são independentes de uma organização ou espaço do {{site.data.keyword.Bluemix_notm}}.
 
 4.  Instale o plug-in do {{site.data.keyword.containershort_notm}} para criar clusters do Kubernetes e gerenciar nós do trabalhador. Para executar comandos de plug-in do {{site.data.keyword.containershort_notm}}, use o prefixo `bx cs`.
 
     ```
-    bx plugin install container-service -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-service -r Bluemix
     ```
     {: pre}
 
@@ -94,7 +94,8 @@ Para instalar as CLIs:
 
         Windows: [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
 
-          **Dica:** se estiver usando o Windows, instale a CLI do Kubernetes no mesmo diretório que a CLI do {{site.data.keyword.Bluemix_notm}}. Essa configuração economiza algumas mudanças de caminho de arquivo ao executar comandos posteriormente.
+          **Dica:** se estiver usando o Windows, instale a CLI do Kubernetes no mesmo diretório que a CLI do {{site.data.keyword.Bluemix_notm}}. Essa configuração economiza algumas
+mudanças de caminho de arquivo ao executar comandos posteriormente.
 
     2.  Se você estiver usando o S.O. X ou Linux, conclua as etapas a seguir.
         1.  Mova o arquivo executável para o diretório `/usr/local/bin`.
@@ -128,7 +129,7 @@ Para instalar as CLIs:
 6. Para configurar e gerenciar um repositório de imagem privada no {{site.data.keyword.registryshort_notm}}, instale o plug-in do {{site.data.keyword.registryshort_notm}}. Para executar comandos de registro, use o prefixo `bx cr`.
 
     ```
-    bx plugin install container-registry -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-registry -r Bluemix
     ```
     {: pre}
 
@@ -283,6 +284,6 @@ Bom trabalho! Você já configurou seu cluster e seu ambiente local está pronto
 
 ## O que Vem a Seguir?
 
-* [Teste seus conhecimentos e faça um teste! ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://bluemix-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
+* [Teste seus conhecimentos e faça um teste! ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
 
 * Tente o [Tutorial: implementando apps nos clusters do Kubernetes no {{site.data.keyword.containershort_notm}}](cs_tutorials_apps.html#cs_apps_tutorial) para implementar o app da firma PR no cluster que você criou.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-12"
+lastupdated: "2017-11-15"
 
 ---
 
@@ -43,7 +43,7 @@ Cette tâche inclut les informations relatives à l'installation de ces interfac
 <br>
 Pour installer les interfaces CLI, procédez comme suit :
 
-1.  Comme condition prérequise pour le plug-in {{site.data.keyword.containershort_notm}}, installez l'[interface CLI de {{site.data.keyword.Bluemix_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://clis.ng.bluemix.net/ui/home.html). Le préfixe pour l'exécution de commandes via l'interface CLI de {{site.data.keyword.Bluemix_notm}} est `bx`.
+1.  Comme condition prérequise pour le plug-in {{site.data.keyword.containershort_notm}}, installez l'[interface CLI de {{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://clis.ng.bluemix.net/ui/home.html). Le préfixe pour l'exécution de commandes via l'interface CLI de {{site.data.keyword.Bluemix_notm}} est `bx`.
 
 2.  Connectez-vous à l'interface CLI de {{site.data.keyword.Bluemix_notm}}. A l'invite, entrez vos données
 d'identification {{site.data.keyword.Bluemix_notm}}.
@@ -59,7 +59,7 @@ et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré
 3.  Pour créer des clusters Kubernetes et gérer les noeuds d'agent, installez le plug-in {{site.data.keyword.containershort_notm}}. Le préfixe pour l'exécution de commandes via le plug-in de {{site.data.keyword.containershort_notm}} est `bx`.
 
     ```
-    bx plugin install container-service -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-service -r Bluemix
     ```
     {: pre}
 
@@ -72,15 +72,15 @@ et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré
 
     Le plug-in de {{site.data.keyword.containershort_notm}} est affiché dans les résultats sous le nom container-service.
 
-4.  Pour afficher une version locale du tableau de bord Kubernetes et déployer des applications dans vos clusters, [installez l'interface CLI de Kubernetes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Le préfixe pour l'exécution de commandes via l'interface CLI de Kubernetes est `kubectl`.
+4.  Pour afficher une version locale du tableau de bord Kubernetes et déployer des applications dans vos clusters, [installez l'interface CLI de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Le préfixe pour l'exécution de commandes via l'interface CLI de Kubernetes est `kubectl`.
 
     1.  Pour obtenir la compatibilité fonctionnelle complète, téléchargez la version de l'interface CLI de Kubernetes qui correspond à la version du cluster Kubernetes que vous envisagez d'utiliser. La version de Kubernetes par défaut d'{{site.data.keyword.containershort_notm}} actuelle est 1.7.4.
 
-        OS X :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
+        OS X :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
 
-        Linux :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
+        Linux :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
 
-        Windows :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
+        Windows :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
 
         **Astuce :** si vous utilisez Windows, installez l'interface CLI de Kubernetes dans le même répertoire que l'interface CLI de {{site.data.keyword.Bluemix_notm}}. Cette configuration vous évite diverses modifications de chemin de fichier lorsque vous exécuterez des commandes plus tard.
 
@@ -116,7 +116,7 @@ et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré
 5.  Pour gérer un référentiel d'images privé, installez le plug-in {{site.data.keyword.registryshort_notm}}. Utilisez ce plug-in pour mettre en place votre propre espace de nom dans un registre d'images privé à service partagé, haute disponibilité et évolutif, hébergé par IBM, et pour stocker et partager des images Docker avec d'autres utilisateurs. Des images Docker sont requises pour pouvoir déployer des conteneurs dans un cluster. Le préfixe pour l'exécution de commandes de registre est `bx cr`.
 
     ```
-    bx plugin install container-registry -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-registry -r Bluemix
     ```
     {: pre}
 
@@ -129,7 +129,7 @@ et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré
 
     Le plug-in est affiché dans les résultats sous le nom container-registry.
 
-6.  Pour générer des images locales et les envoyer par commande push vers votre espace de nom du registre, [installez Docker ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.docker.com/community-edition#/download). Si vous utilisez Windows 8 ou version antérieure, vous pouvez installer à la place la trousse [Docker Toolbox ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.docker.com/products/docker-toolbox). L'interface CLI de Docker est utilisée pour générer des images d'applications. Le préfixe pour l'exécution de commandes via l'interface CLI de Docker est `docker`.
+6.  Pour générer des images locales et les envoyer par commande push vers votre espace de nom du registre, [installez Docker ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.docker.com/community-edition#/download). Si vous utilisez Windows 8 ou version antérieure, vous pouvez installer à la place la trousse [Docker Toolbox ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.docker.com/products/docker-toolbox). L'interface CLI de Docker est utilisée pour générer des images d'applications. Le préfixe pour l'exécution de commandes via l'interface CLI de Docker est `docker`.
 
 Ensuite, passez à l'étape [Création de clusters Kubernetes depuis l'interface CLI d'{{site.data.keyword.containershort_notm}}](cs_cluster.html#cs_cluster_cli).
 
@@ -138,7 +138,7 @@ reportez-vous à la documentation relative à ces outils.
 
 -   [Commandes `bx`](/docs/cli/reference/bluemix_cli/bx_cli.html)
 -   [Commandes `bx cs`](cs_cli_reference.html#cs_cli_reference)
--   [Commandes `kubectl` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/user-guide/kubectl/v1.7/)
+-   [Commandes `kubectl` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/user-guide/kubectl/v1.7/)
 -   [Commandes `bx cr`](/docs/cli/plugins/registry/index.html)
 
 <br />
@@ -152,7 +152,7 @@ Vous pouvez utiliser les commandes fournies avec l'interface de ligne de command
 
 Avant de pouvoir lancer des commandes `kubectl`, vous devez [installer les interfaces CLI requises](#cs_cli_install) et [créer un cluster](cs_cluster.html#cs_cluster_cli).
 
-1.  Connectez-vous à l'interface CLI de {{site.data.keyword.Bluemix_notm}}. A l'invite, entrez vos données d'identification {{site.data.keyword.Bluemix_notm}}. Pour stipuler une région {{site.data.keyword.Bluemix_notm}}, [incluez le noeud final d'API](cs_regions.html#bluemix_regions).
+1.  Connectez-vous à l'interface CLI de {{site.data.keyword.Bluemix_notm}}. A l'invite, entrez vos données d'identification {{site.data.keyword.Bluemix_notm}}. Pour stipuler une région {{site.data.keyword.Bluemix_notm}}, [incluez son noeud final d'API](cs_regions.html#bluemix_regions).
 
       ```
       bx login
@@ -162,10 +162,7 @@ Avant de pouvoir lancer des commandes `kubectl`, vous devez [installer les inter
       **Remarque :** si vous possédez un ID fédéré, exécutez la commande `bx login --sso` pour vous connecter à l'interface de ligne de commande {{site.data.keyword.Bluemix_notm}}. Entrez votre nom d'utilisateur et utilisez l'URL mentionnée dans la sortie CLI pour extraire votre code d'accès à usage unique. Si la connexion échoue alors que vous omettez l'option `--sso`
 et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré.
 
-  2.  Sélectionnez un compte {{site.data.keyword.Bluemix_notm}}. i vous êtes affecté à plusieurs organisations
-{{site.data.keyword.Bluemix_notm}},
-sélectionnez celle dans laquelle le cluster a été créé. Les clusters sont spécifiques à une organisation, mais sont indépendants
-de l'espace {{site.data.keyword.Bluemix_notm}}. Vous n'avez donc pas besoin de sélectionner un espace.
+  2.  Sélectionnez un compte {{site.data.keyword.Bluemix_notm}}. Si vous êtes affecté à plusieurs organisations {{site.data.keyword.Bluemix_notm}}, sélectionnez celle dans laquelle le cluster a été créé. Les clusters sont spécifiques à une organisation, mais sont indépendants d'un espace {{site.data.keyword.Bluemix_notm}}. Vous n'avez donc pas besoin de sélectionner un espace.
 
   3.  Si vous souhaitez créer ou accéder à des clusters Kubernetes dans une région qui n'est pas la région {{site.data.keyword.Bluemix_notm}} sélectionnée précédemment, [spécifiez le noeud final d'API de la région {{site.data.keyword.containershort_notm}}](cs_regions.html#container_login_endpoints).
 
@@ -233,7 +230,7 @@ Kubernetes.
       {: screen}
 
 Vous pouvez à présent exécuter des commandes `kubectl` pour gérer
-vos clusters dans {{site.data.keyword.Bluemix_notm}}. Pour obtenir la liste complète des commandes, voir la [documentation Kubernetes![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/user-guide/kubectl/v1.7/).
+vos clusters dans {{site.data.keyword.Bluemix_notm}}. Pour obtenir la liste complète des commandes, voir la [documentation Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/user-guide/kubectl/v1.7/).
 
 **Astuce :** si vous utilisez Windows et que l'interface CLI de Kubernetes n'est pas installée dans le même répertoire que l'interface CLI de {{site.data.keyword.Bluemix_notm}}, vous devez basculer entre les répertoires en spécifiant le chemin d'accès de l'installation de l'interface CLI de Kubernetes pour que l'exécution de `kubectl` puisse aboutir.
 
@@ -261,9 +258,9 @@ CLI.
 Pour mettre à jour les interfaces de ligne de commande, procédez comme suit :
 
 1.  Mettez à jour l'interface de ligne de commande
-{{site.data.keyword.Bluemix_notm}}. Téléchargez la [version la plus récente ![External link icon](../icons/launch-glyph.svg "External link icon")](https://clis.ng.bluemix.net/ui/home.html) et exécutez le programme d'installation.
+{{site.data.keyword.Bluemix_notm}}. Téléchargez la [version la plus récente ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://clis.ng.bluemix.net/ui/home.html) et exécutez le programme d'installation.
 
-2. Connectez-vous à l'interface CLI de {{site.data.keyword.Bluemix_notm}}. A l'invite, entrez vos données d'identification {{site.data.keyword.Bluemix_notm}}. Pour stipuler une région {{site.data.keyword.Bluemix_notm}}, [incluez le noeud final d'API](cs_regions.html#bluemix_regions).
+2. Connectez-vous à l'interface CLI de {{site.data.keyword.Bluemix_notm}}. A l'invite, entrez vos données d'identification {{site.data.keyword.Bluemix_notm}}. Pour stipuler une région {{site.data.keyword.Bluemix_notm}}, [incluez son noeud final d'API](cs_regions.html#bluemix_regions).
 
     ```
     bx login
@@ -277,19 +274,18 @@ et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré
     1.  Installez la mise à jour à partir du référentiel de plug-in {{site.data.keyword.Bluemix_notm}}.
 
         ```
-        bx plugin update container-service -r {{site.data.keyword.Bluemix_notm}}
+        bx plugin update container-service -r Bluemix
         ```
         {: pre}
 
-    2.  Vérifiez l'installation du plug-in en exécutant la commande suivante et en vérifiant la liste des
-plug-in installés.
+    2.  Vérifiez l'installation du plug-in en exécutant la commande suivante et en vérifiant la liste des plug-in installés.
 
         ```
         bx plugin list
         ```
         {: pre}
 
-        Le plug-in d'{{site.data.keyword.containershort_notm}} est affiché dans les résultats sous le nom container-service. 
+        Le plug-in d'{{site.data.keyword.containershort_notm}} est affiché dans les résultats sous le nom container-service.
 
     3.  Initialisez l'interface CLI.
 
@@ -301,11 +297,11 @@ plug-in installés.
 4.  Mettez à jour l'interface de ligne de commande Kubernetes.
     1.  Mettez à jour l'interface CLI de Kubernetes qui correspond à la version du cluster Kubernetes que vous envisagez d'utiliser. La version de Kubernetes par défaut d'{{site.data.keyword.containershort_notm}} actuelle est 1.7.4.
 
-        OS X :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
+        OS X :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
 
-        Linux :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
+        Linux :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
 
-        Windows :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
+        Windows :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
 
         **Astuce :** si vous utilisez Windows, installez l'interface CLI de Kubernetes dans le même répertoire que l'interface CLI de {{site.data.keyword.Bluemix_notm}}. Cette configuration vous évite diverses modifications de chemin de fichier lorsque vous exécuterez des commandes plus tard.
 
@@ -342,7 +338,7 @@ plug-in installés.
     1.  Installez la mise à jour à partir du référentiel de plug-in {{site.data.keyword.Bluemix_notm}}.
 
         ```
-        bx plugin update container-registry -r {{site.data.keyword.Bluemix_notm}}
+        bx plugin update container-registry -r Bluemix
         ```
         {: pre}
 
@@ -359,7 +355,7 @@ plug-in installés.
 6.  Mettez à jour Docker.
     -   Si vous utilisez Docker Community Edition, démarrez Docker, cliquez sur l'icône
 **Docker**, puis sur **Check for updates**.
-    -   Si vous utilisez Docker Toolbox, téléchargez la [version la plus récente ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.docker.com/products/docker-toolbox) et exécutez le programme d'installation.
+    -   Si vous utilisez Docker Toolbox, téléchargez la [version la plus récente ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.docker.com/products/docker-toolbox) et exécutez le programme d'installation.
 
 <br />
 
@@ -414,9 +410,9 @@ plug-in installés.
 6.  Désinstallez Docker. Les instructions de désinstallation de Docker varient selon le système d'exploitation
 utilisé.
 
-    - [OSX ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/docker-for-mac/#uninstall-or-reset)
-    - [Linux ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#uninstall-docker-ce)
-    - [Windows ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/toolbox/toolbox_install_mac/#how-to-uninstall-toolbox)
+    - [OSX ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.docker.com/docker-for-mac/#uninstall-or-reset)
+    - [Linux ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#uninstall-docker-ce)
+    - [Windows ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.docker.com/toolbox/toolbox_install_mac/#how-to-uninstall-toolbox)
 
 <br />
 
@@ -427,7 +423,7 @@ utilisé.
 Vous pouvez utiliser l'API {{site.data.keyword.containershort_notm}} pour automatiser la création le déploiement et la gestion de vos clusters Kubernetes.
 {:shortdesc}
 
-L'API {{site.data.keyword.containershort_notm}} requiert de fournir des informations d'en-tête dans votre demande d'API, lesquelles peuvent varier selon l'API à utiliser. Pour déterminer les informations d'en-tête requises pour votre API, voir la [documentation d'API {{site.data.keyword.containershort_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.bluemix.net/swagger-api).
+L'API {{site.data.keyword.containershort_notm}} requiert de fournir des informations d'en-tête dans votre demande d'API, lesquelles peuvent varier selon l'API à utiliser. Pour déterminer les informations d'en-tête requises pour votre API, voir la [documentation d'API {{site.data.keyword.containershort_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://us-south.containers.bluemix.net/swagger-api).
 
 **Remarque :** pour s'authentifier auprès d'{{site.data.keyword.containershort_notm}}, vous devez fournir un jeton IAM (Identity and Access Management) qui est généré avec vos données d'identification {{site.data.keyword.Bluemix_notm}} et qui comprend l'ID du compte {{site.data.keyword.Bluemix_notm}} dans lequel a été créé le cluster. Selon votre mode d'authentification auprès de {{site.data.keyword.Bluemix_notm}}, vous pouvez choisir parmi les options suivantes pour automatiser la création du jeton IAM.
 
@@ -440,17 +436,17 @@ L'API {{site.data.keyword.containershort_notm}} requiert de fournir des informat
 <tr>
 <td>ID non fédéré</td>
 <td><ul><li><strong>Nom d'utilisateur et mot de passe {{site.data.keyword.Bluemix_notm}} :</strong> vous pouvez suivre la procédure indiquée dans cette rubrique pour automatiser complètement la création de votre jeton d'accès IAM.</li>
-<li><strong>Générez une clé d'API {{site.data.keyword.Bluemix_notm}} :</strong> en guise d'alternative à l'utilisation du nom d'utilisateur et mot de passe {{site.data.keyword.Bluemix_notm}}, vous pouvez <a href="../iam/apikeys.html#manapikey" target="_blank">utiliser des clés d'API {{site.data.keyword.Bluemix_notm}}</a>. Les clés d'API {{site.data.keyword.Bluemix_notm}} dépendent du compte {{site.data.keyword.Bluemix_notm}} pour lequel elles ont été générées. Vous ne pouvez pas combiner votre clé d'API {{site.data.keyword.Bluemix_notm}} avec un autre ID de compte dans le même jeton IAM. Pour accéder aux clusters créés avec un compte autre que celui sur lequel votre clé d'API {{site.data.keyword.Bluemix_notm}} est basée, vous devez vous connecter au compte pour générer une nouvelle clé d'API. </li></ul></tr>
+<li><strong>Générez une clé d'API {{site.data.keyword.Bluemix_notm}} :</strong> en guise d'alternative à l'utilisation du nom d'utilisateur et du mot de passe {{site.data.keyword.Bluemix_notm}}, vous pouvez <a href="../iam/apikeys.html#manapikey" target="_blank">utiliser des clés d'API {{site.data.keyword.Bluemix_notm}}</a>. Les clés d'API {{site.data.keyword.Bluemix_notm}} dépendent du compte {{site.data.keyword.Bluemix_notm}} pour lequel elles ont été générées. Vous ne pouvez pas combiner votre clé d'API {{site.data.keyword.Bluemix_notm}} avec un autre ID de compte dans le même jeton IAM. Pour accéder aux clusters créés avec un compte autre que celui sur lequel votre clé d'API {{site.data.keyword.Bluemix_notm}} est basée, vous devez vous connecter au compte pour générer une nouvelle clé d'API. </li></ul></tr>
 <tr>
 <td>ID fédéré</td>
-<td><ul><li><strong>Générez une clé d'API {{site.data.keyword.Bluemix_notm}} :</strong> <a href="../iam/apikeys.html#manapikey" target="_blank">les clés d'API {{site.data.keyword.Bluemix_notm}}</a> dépendent du compte {{site.data.keyword.Bluemix_notm}} pour lequel elles ont été générées. Vous ne pouvez pas combiner votre clé d'API {{site.data.keyword.Bluemix_notm}} avec un autre ID de compte dans le même jeton IAM. Pour accéder aux clusters créés avec un compte autre que celui sur lequel votre clé d'API {{site.data.keyword.Bluemix_notm}} est basée, vous devez vous connecter au compte pour générer une nouvelle clé d'API. </li><li><strong>Utilisez un code d'accès à usage unique : </strong> si vous vous authentifiez auprès de {{site.data.keyword.Bluemix_notm}} en utilisant un code d'accès à usage unique, vous ne pouvez pas automatiser complètement la création de votre jeton IAM car l'extraction de ce code d'accès nécessite une interaction manelle avec votre navigateur Web. Pour automatiser complètement la création de votre jeton IAM, vous devez créer une clé d'API {{site.data.keyword.Bluemix_notm}} à la place. </ul></td>
+<td><ul><li><strong>Générez une clé d'API {{site.data.keyword.Bluemix_notm}} :</strong> <a href="../iam/apikeys.html#manapikey" target="_blank"> les clés d'API {{site.data.keyword.Bluemix_notm}}</a> dépendent du compte {{site.data.keyword.Bluemix_notm}} pour lequel elles ont été générées. Vous ne pouvez pas combiner votre clé d'API {{site.data.keyword.Bluemix_notm}} avec un autre ID de compte dans le même jeton IAM. Pour accéder aux clusters créés avec un compte autre que celui sur lequel votre clé d'API {{site.data.keyword.Bluemix_notm}} est basée, vous devez vous connecter au compte pour générer une nouvelle clé d'API. </li><li><strong>Utilisez un code d'accès à usage unique : </strong> si vous vous authentifiez auprès de {{site.data.keyword.Bluemix_notm}} en utilisant un code d'accès à usage unique, vous ne pouvez pas automatiser complètement la création de votre jeton IAM car l'extraction de ce code d'accès nécessite une interaction manelle avec votre navigateur Web. Pour automatiser complètement la création de votre jeton IAM, vous devez créer une clé d'API {{site.data.keyword.Bluemix_notm}} à la place. </ul></td>
 </tr>
 </tbody>
 </table>
 
 1.  Créez votre jeton d'accès IAM (Identity and Access Management). Les informations de corps contenues dans votre demande varient en fonction de la méthode d'authentification {{site.data.keyword.Bluemix_notm}} que vous utilisez. Remplacez les valeurs suivantes :
-  - _&lt;my_bluemix_username&gt;_ : votre nom d'utilisateur {{site.data.keyword.Bluemix_notm}}.
-  - _&lt;my_bluemix_password&gt;_ : votre mot de passe {{site.data.keyword.Bluemix_notm}}.
+  - _&lt;my_username&gt;_ : votre nom d'utilisateur {{site.data.keyword.Bluemix_notm}}.
+  - _&lt;my_password&gt;_ : votre mot de passe {{site.data.keyword.Bluemix_notm}}.
   - _&lt;my_api_key&gt;_ : votre clé d'API {{site.data.keyword.Bluemix_notm}}.
   - _&lt;my_passcode&gt;_ : votre code d'accès à usage unique {{site.data.keyword.Bluemix_notm}}. Exécutez la commande `bx login --sso` et suivez les instructions de la sortie de l'interface CLI pour extraire votre code d'accès à usage unique en utilisant votre navigateur Web.
 
@@ -467,18 +463,18 @@ L'API {{site.data.keyword.containershort_notm}} requiert de fournir des informat
     <tbody>
     <tr>
     <td>En-tête</td>
-    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=</li></ul>
+    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><b>Remarque</b> : Yng6Yng= est fourni automatiquement ; il s'agit de l'autorisation en codage URL pour le nom d'utilisateur **bx** et le mot de passe **bx**.</p></li></ul>
     </td>
     </tr>
     <tr>
     <td>Corps pour le nom d'utilisateur et le mot de passe {{site.data.keyword.Bluemix_notm}}</td>
     <td><ul><li>grant_type: password</li>
     <li>response_type: cloud_iam, uaa</li>
-    <li>username: <em>&lt;my_bluemix_username&gt;</em></li>
-    <li>password: <em>&lt;my_bluemix_password&gt;</em></li>
+    <li>username: <em>&lt;my_username&gt;</em></li>
+    <li>password: <em>&lt;my_password&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li></ul>
-    <p>**Remarque :** ajoutez la clé uaa_client_secret sans spécifier de valeur.</p></td>
+    <p><b>Remarque</b> : ajoutez la clé uaa_client_secret sans spécifier de valeur.</p></td>
     </tr>
     <tr>
     <td>Corps pour les clés d'API {{site.data.keyword.Bluemix_notm}}</td>
@@ -487,7 +483,7 @@ L'API {{site.data.keyword.containershort_notm}} requiert de fournir des informat
     <li>apikey: <em>&lt;my_api_key&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li></ul>
-    <p>**Remarque :** ajoutez la clé uaa_client_secret sans spécifier de valeur.</p></td>
+    <p><b>Remarque</b> : ajoutez la clé uaa_client_secret sans spécifier de valeur.</p></td>
     </tr>
     <tr>
     <td>Corps pour le code d'accès à usage unique {{site.data.keyword.Bluemix_notm}}</td>
@@ -496,7 +492,7 @@ L'API {{site.data.keyword.containershort_notm}} requiert de fournir des informat
     <li>passcode: <em>&lt;my_passcode&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li></ul>
-    <p>**Remarque :** ajoutez la clé uaa_client_secret sans spécifier de valeur.</p></td>
+    <p><b>Remarque</b> : ajoutez la clé uaa_client_secret sans spécifier de valeur.</p></td>
     </tr>
     </tbody>
     </table>
@@ -517,7 +513,7 @@ L'API {{site.data.keyword.containershort_notm}} requiert de fournir des informat
     ```
     {: screen}
 
-    Le jeton IAM figure dans la zone **access_token** de la sortie de votre API. Notez la valeur du jeton IAM pour extraire des informations d'en-tête supplémentaires dans les étapes suivantes. 
+    Le jeton IAM figure dans la zone **access_token** de la sortie de votre API. Notez la valeur du jeton IAM pour extraire des informations d'en-tête supplémentaires dans les étapes suivantes.
 
 2.  Extrayez l'ID du compte {{site.data.keyword.Bluemix_notm}} dans lequel a été créé le cluster. Remplacez _&lt;iam_token&gt;_ par le jeton IAM extrait à l'étape précédente.
 
@@ -552,8 +548,8 @@ L'API {{site.data.keyword.containershort_notm}} requiert de fournir des informat
       "resources":
         {
           "metadata": {
-            "guid": "<my_bluemix_account_id>",
-            "url": "/v1/accounts/<my_bluemix_account_id>",
+            "guid": "<my_account_id>",
+            "url": "/v1/accounts/<my_account_id>",
             "created_at": "2016-01-07T18:55:09.726Z",
             "updated_at": "2017-04-28T23:46:03.739Z",
             "origin": "BSS"
@@ -561,10 +557,9 @@ L'API {{site.data.keyword.containershort_notm}} requiert de fournir des informat
     ```
     {: screen}
 
-    L'ID de votre compte {{site.data.keyword.Bluemix_notm}} figure dans la zone
-**resources/metadata/guid** de la sortie de votre API.
+    L'ID de votre compte {{site.data.keyword.Bluemix_notm}} figure dans la zone **resources/metadata/guid** de la sortie de votre API.
 
-3.  Générez un nouveau jeton IAM comprenant vos données d'identification {{site.data.keyword.Bluemix_notm}} et l'ID du compte sur lequel a été créé le cluster. Remplacez _&lt;my_bluemix_account_id&gt;_ par l'ID du compte {{site.data.keyword.Bluemix_notm}} que vous avez obtenu à l'étape précédente.
+3.  Générez un nouveau jeton IAM comprenant vos données d'identification {{site.data.keyword.Bluemix_notm}} et l'ID du compte sur lequel a été créé le cluster. Remplacez _&lt;my_account_id&gt;_ par l'ID du compte {{site.data.keyword.Bluemix_notm}} extrait à l'étape précédente.
 
     **Remarque :** si vous utilisez une clé d'API {{site.data.keyword.Bluemix_notm}}, vous devez utiliser l'ID du compte {{site.data.keyword.Bluemix_notm}} pour lequel a été créée la clé d'API. Pour accéder aux clusters figurant dans un autre compte, connectez-vous à ce compte et créez une clé d'API {{site.data.keyword.Bluemix_notm}} basée sur ce compte.
 
@@ -581,19 +576,19 @@ L'API {{site.data.keyword.containershort_notm}} requiert de fournir des informat
     <tbody>
     <tr>
     <td>En-tête</td>
-    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=</li></ul>
+    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><b>Remarque</b> : Yng6Yng= est fourni automatiquement ; il s'agit de l'autorisation en codage URL pour le nom d'utilisateur **bx** et le mot de passe **bx**.</p></li></ul>
     </td>
     </tr>
     <tr>
     <td>Corps pour le nom d'utilisateur et le mot de passe {{site.data.keyword.Bluemix_notm}}</td>
     <td><ul><li>grant_type: password</li>
     <li>response_type: cloud_iam, uaa</li>
-    <li>username: <em>&lt;my_bluemix_username&gt;</em></li>
-    <li>password: <em>&lt;my_bluemix_password&gt;</em></li>
+    <li>username: <em>&lt;my_username&gt;</em></li>
+    <li>password: <em>&lt;my_password&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;my_bluemix_account_id&gt;</em></li></ul>
-    <p>**Remarque :** ajoutez la clé uaa_client_secret sans spécifier de valeur.</p></td>
+    <li>bss_account: <em>&lt;my_account_id&gt;</em></li></ul>
+    <p><b>Remarque</b> : ajoutez la clé uaa_client_secret sans spécifier de valeur.</p></td>
     </tr>
     <tr>
     <td>Corps pour les clés d'API {{site.data.keyword.Bluemix_notm}}</td>
@@ -602,8 +597,8 @@ L'API {{site.data.keyword.containershort_notm}} requiert de fournir des informat
     <li>apikey: <em>&lt;my_api_key&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;my_bluemix_account_id&gt;</em></li></ul>
-    <p>**Remarque :** ajoutez la clé uaa_client_secret sans spécifier de valeur.</p></td>
+    <li>bss_account: <em>&lt;my_account_id&gt;</em></li></ul>
+    <p><b>Remarque</b> : ajoutez la clé uaa_client_secret sans spécifier de valeur.</p></td>
     </tr>
     <tr>
     <td>Corps pour le code d'accès à usage unique {{site.data.keyword.Bluemix_notm}}</td>
@@ -612,8 +607,8 @@ L'API {{site.data.keyword.containershort_notm}} requiert de fournir des informat
     <li>passcode: <em>&lt;my_passcode&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;my_bluemix_account_id&gt;</em></li></ul>
-    <p>**Remarque :** ajoutez la clé uaa_client_secret sans spécifier de valeur.</p></td>
+    <li>bss_account: <em>&lt;my_account_id&gt;</em></li></ul>
+    <p><b>Remarque<b> : ajoutez la clé uaa_client_secret sans spécifier de valeur.</p></td>
     </tr>
     </tbody>
     </table>
@@ -634,83 +629,9 @@ L'API {{site.data.keyword.containershort_notm}} requiert de fournir des informat
     ```
     {: screen}
 
-    Le jeton IAM figure dans la zone **access_token**, le jeton d'actualisation IAM dans la zone **refresh_token** et le jeton UAA dans la zone **uaa_token** de la sortie de l'interface CLI.
+    Le jeton IAM figure dans la zone **access_token** et le jeton d'actualisation IAM dans la zone **refresh_token**.
 
-4.  Extrayez l'ID de l'espace {{site.data.keyword.Bluemix_notm}} dans lequel a été créé le cluster. 
-    1.  Extrayez le noeud final d'API pour accéder à l'ID d'espace. Remplacez _&lt;uaa_token&gt;_ par le jeton UAA extrait à l'étape précédente.
-
-        ```
-        GET https://api.<region>.bluemix.net/v2/organizations
-        ```
-        {: codeblock}
-
-        <table summary="Paramètres d'entrée pour extraire l'ID d'espace">
-        <thead>
-        <th>Paramètres d'entrée</th>
-        <th>Valeurs</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td>En-tête</td>
-        <td><ul><li>Content-Type: application/x-www-form-urlencoded;charset=utf</li>
-        <li>Authorization: bearer &lt;uaa_token&gt;</li>
-        <li>Accept: application/json;charset=utf-8</li></ul></td>
-        </tr>
-        </tbody>
-        </table>
-
-      Exemple de sortie d'API :
-
-      ```
-      {
-            "metadata": {
-              "guid": "<bluemix_org_id>",
-              "url": "/v2/organizations/<my_bluemix_org_id>",
-              "created_at": "2016-01-07T18:55:19Z",
-              "updated_at": "2016-02-09T15:56:22Z"
-            },
-            "entity": {
-              "name": "<bluemix_org_name>",
-              "billing_enabled": false,
-              "quota_definition_guid": "<bluemix_org_id>",
-              "status": "active",
-              "quota_definition_url": "/v2/quota_definitions/<bluemix_org_id>",
-              "spaces_url": "/v2/organizations/<bluemix_org_id>/spaces",
-      ...
-
-      ```
-      {: screen}
-
-5.  Notez la sortie de la zone **spaces_url**.
-6.  Extrayez l'ID de l'espace {{site.data.keyword.Bluemix_notm}} en utilisant le noeud final **spaces_url**.
-
-      ```
-      GET https://api.<region>.bluemix.net/v2/organizations/<bluemix_org_id>/spaces
-      ```
-      {: codeblock}
-
-      Exemple de sortie d'API :
-
-      ```
-      {
-            "metadata": {
-              "guid": "<bluemix_space_id>",
-              "url": "/v2/spaces/<my_bluemix_space_id>",
-              "created_at": "2016-01-07T18:55:22Z",
-              "updated_at": null
-            },
-            "entity": {
-              "name": "<bluemix_space_name>",
-              "organization_guid": "<bluemix_org_id>",
-              "space_quota_definition_guid": null,
-              "allow_ssh": true,
-      ...
-      ```
-      {: screen}
-
-      L'ID de l'espace {{site.data.keyword.Bluemix_notm}} figure dans la zone **metadata/guid** de la sortie de votre API.
-
-7.  Répertoriez tous les clusters Kubernetes dans votre compte. Utilisez les informations extraites auparavant pour construire vos informations d'en-tête.
+4.  Répertoriez tous les clusters Kubernetes dans votre compte. Utilisez les informations extraites auparavant pour construire vos informations d'en-tête.
 
     -   Sud des Etats-Unis
 
@@ -761,7 +682,7 @@ L'API {{site.data.keyword.containershort_notm}} requiert de fournir des informat
         </tbody>
         </table>
 
-8.  Consultez la [documentation d'API {{site.data.keyword.containershort_notm}}![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.bluemix.net/swagger-api) pour obtenir la liste des API prises en charge.
+5.  Consultez la [documentation d'API {{site.data.keyword.containershort_notm}}![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://us-south.containers.bluemix.net/swagger-api) pour obtenir la liste des API prises en charge.
 
 <br />
 
@@ -792,7 +713,7 @@ Procédez comme suit si vous désirez actualiser votre jeton IAM.
     <tr>
     <td>En-tête</td>
     <td><ul><li>Content-Type: application/x-www-form-urlencoded</li>
-    <li>Authorization: Basic Yng6Yng=</li></ul></td>
+    <li>Authorization: Basic Yng6Yng=<p><b>Remarque</b> : Yng6Yng= est fourni automatiquement ; il s'agit de l'autorisation en codage URL pour le nom d'utilisateur **bx** et le mot de passe **bx**.</p></li></ul></td>
     </tr>
     <tr>
     <td>Body</td>
@@ -801,7 +722,7 @@ Procédez comme suit si vous désirez actualiser votre jeton IAM.
     <li>refresh_token: <em>&lt;iam_refresh_token&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;bluemix_account_id&gt;</em></li></ul><p>**Remarque :** ajoutez la clé uaa_client_secret sans spécifier de valeur.</p></td>
+    <li>bss_account: <em>&lt;account_id&gt;</em></li></ul><p><b>Remarque</b> : ajoutez la clé uaa_client_secret sans spécifier de valeur.</p></td>
     </tr>
     </tbody>
     </table>
@@ -825,4 +746,4 @@ Procédez comme suit si vous désirez actualiser votre jeton IAM.
     Votre nouveau jeton IAM figure dans la zone **access_token** et le jeton d'actualisation IAM dans la zone
 **refresh_token** de la sortie d'API.
 
-2.  Continuez à travailler avec la [documentation d'API {{site.data.keyword.containershort_notm}}![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.bluemix.net/swagger-api) en utilisant le jeton de l'étape précédente.
+2.  Continuez à travailler avec la [documentation d'API {{site.data.keyword.containershort_notm}}![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://us-south.containers.bluemix.net/swagger-api) en utilisant le jeton de l'étape précédente.

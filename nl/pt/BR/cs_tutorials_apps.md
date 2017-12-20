@@ -1,8 +1,6 @@
 ---
 
-copyright:
-  years: 2014, 2017
-lastupdated: "2017-10-20"
+copyright: years: 2014, 2017 lastupdated: "14/11/2017
 
 ---
 
@@ -24,12 +22,11 @@ Este segundo tutorial continua ensinando como é possível usar o Kubernetes par
 
 Neste cenário, o desenvolvedor de app da firma PR implementa uma versão Hello World do app no cluster do Kubernetes que o administrador da rede criou no [primeiro tutorial](cs_tutorials.html#cs_cluster_tutorial).
 
-Cada lição ensina como implementar versões progressivamente mais complicadas do mesmo app.
-O diagrama mostra os componentes do tutorial das implementações do app, exceto a quarta parte.
+Cada lição ensina como implementar versões progressivamente mais complicadas do mesmo app. O diagrama a seguir mostra os componentes do tutorial das implementações do app, exceto a quarta parte.
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_roadmap.png">![Componentes da lição](images/cs_app_tutorial_roadmap.png)</a>
+![Componentes da lição](images/cs_app_tutorial_roadmap.png)
 
-O Kubernetes usa vários tipos diferentes de recursos para deixar seus apps funcionando em clusters. No Kubernetes, as implementações e os serviços funcionam juntos. As implementações incluem as definições para o
+Conforme descrito no diagrama, o Kubernetes usa vários tipos diferentes de recursos para deixar seus apps funcionando em clusters. No Kubernetes, as implementações e os serviços funcionam juntos. As implementações incluem as definições para o
 app, por exemplo, a imagem a ser usada para o contêiner e qual porta deve ser exposta para o app.
 Ao criar uma implementação, um pod do Kubernetes será criado para cada contêiner que você definiu na
 implementação. Para tornar seu app mais resiliente, é possível definir múltiplas instâncias do mesmo app em sua implementação e permitir que o Kubernetes crie automaticamente um conjunto de réplicas para você. O conjunto de réplicas monitora os pods e assegura que o número desejado de pods esteja funcionando sempre. Se um dos pods tornar-se não responsivo, o pod será recriado automaticamente.
@@ -65,9 +62,13 @@ Desenvolvedores de software e administradores da rede que nunca implementaram um
 ## Lição 1: implementando apps de instância única em clusters do Kubernetes
 {: #cs_apps_tutorial_lesson1}
 
-Nesta lição, você implementa uma instância única do app Hello World em um cluster.
+Nesta lição, você implementa uma instância única do app Hello World em um
+cluster. O diagrama a seguir inclui os componentes que você implementa concluindo esta lição.
+{:shortdesc}
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_components1.png">![Configuração de implementação](images/cs_app_tutorial_components1.png)</a>
+![Configuração de implementação](images/cs_app_tutorial_components1.png)
+
+No tutorial anterior, você já tem uma conta e um cluster com um nó do trabalhador. Nesta lição, você configura uma implementação e implementa o app Hello World em um pod do Kubernetes no nó do trabalhador. Para torná-lo publicamente disponível, você cria um serviço do Kubernetes.
 
 
 1.  Efetue login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira suas credenciais do {{site.data.keyword.Bluemix_notm}} quando solicitadas. Para especificar uma região do {{site.data.keyword.Bluemix_notm}}, [inclua o terminal de API](cs_regions.html#bluemix_regions).
@@ -152,10 +153,10 @@ Nesta lição, você implementa uma instância única do app Hello World em um c
         ```
         {: pre}
 
-5.  Clone ou faça download do código-fonte do [app Hello world ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM/container-service-getting-started-wt) para o diretório inicial do usuário.
+5.  Clone ou faça download do código-fonte do [app Hello world ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/Osthanes/container-service-getting-started-wt) para o diretório inicial do usuário.
 
     ```
-    git clone https://github.com/IBM/container-service-getting-started-wt.git
+    git clone https://github.com/Osthanes/container-service-getting-started-wt.git
     ```
     {: pre}
 
@@ -389,16 +390,22 @@ Parabéns! Você implementou sua primeira versão do app.
 
 Muitos comandos nesta lição? Acordado. Que tal usar um script de configuração para fazer alguns dos trabalhos para você? Para usar um script de configuração para a segunda versão do app e para criar maior disponibilidade implementando múltiplas instâncias desse app, continue com a próxima lição.
 
+
+
 ## Lição 2: implementando e atualizando apps com disponibilidade mais alta
 {: #cs_apps_tutorial_lesson2}
 
 Nesta lição, você implementa três instâncias do app Hello World em um cluster para
 disponibilidade mais alta do que a primeira versão do app. Disponibilidade mais alta significa que o acesso de usuário é
-dividido entre as três instâncias. Quando muitos usuários estão tentando acessar a mesma instância do app, eles podem observar tempos de resposta lentos. Múltiplas instâncias podem significar tempos de resposta mais rápidos para seus usuários. Nesta lição, você também aprenderá como as verificações de funcionamento e atualizações de implementação podem trabalhar com o Kubernetes.
+dividido entre as três instâncias. Quando muitos usuários estão tentando acessar a mesma instância do app, eles podem observar tempos de resposta lentos. Múltiplas instâncias podem significar tempos de resposta mais rápidos para seus usuários. Nesta lição, você também aprenderá como as verificações de funcionamento e atualizações de implementação podem trabalhar com
+o Kubernetes.
+{:shortdesc}
 
+O diagrama a seguir inclui os componentes que você implementa concluindo esta lição.
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_components2.png">![Configuração de implementação](images/cs_app_tutorial_components2.png)</a>
+![Configuração de implementação](images/cs_app_tutorial_components2.png)
 
+No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhador. Nesta lição, você configura uma implementação e implementa três instâncias do app Hello World. Cada instância é implementada em um pod do Kubernetes como parte de um conjunto de réplicas no nó do trabalhador. Para torná-la publicamente disponível, você também cria um serviço do Kubernetes. 
 
 Conforme definido no script de configuração, o Kubernetes pode usar uma verificação de disponibilidade para ver se um contêiner em um pod está em execução ou não. Por exemplo, essas verificações podem capturar conflitos, em que um app está em execução, mas não é possível fazer progresso. Reiniciar um contêiner que está nessa condição pode ajudar a tornar o app mais disponível apesar de erros. Então, o Kubernetes usa a verificação de prontidão para saber quando um contêiner está pronto para começar a aceitar o tráfego novamente. Um pod é considerado pronto quando seu contêiner está pronto. Quando o pod está pronto, ele é iniciado novamente. No app Stage2, a cada 15 segundos, o app atinge o tempo limite. Com uma verificação de funcionamento configurada no script de configuração, os contêineres serão recriados se a verificação de funcionamento localizar um problema com um app.
 
@@ -599,9 +606,15 @@ service "hw-demo-service" deleted
 ## Lição 3: implementando e atualizando o app Watson Tone Analyzer
 {: #cs_apps_tutorial_lesson3}
 
-Nas lições anteriores, os apps foram implementados como componentes únicos em um nó do trabalhador. Nesta lição, você implementa dois componentes de um app em um cluster que usam o serviço do Watson Tone Analyzer que você incluiu em seu cluster no tutorial anterior. Separar os componentes em diferentes contêineres assegura que seja possível atualizar um sem afetar os outros. Em seguida, você atualizará o app para escalá-lo para cima com mais réplicas para torná-lo mais altamente disponível.
+Nas lições anteriores, os apps foram implementados como componentes únicos em um nó do trabalhador. Nesta lição, você implementa dois componentes de um app em um cluster que usam o serviço do Watson Tone Analyzer que você incluiu em seu cluster no tutorial anterior. Separar os componentes em diferentes contêineres assegura que seja possível atualizar um sem afetar os outros. Em seguida, você atualizará o app para escalá-lo para cima com mais réplicas para torná-lo
+mais altamente disponível.
+{:shortdesc}
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_components3.png">![Configuração de implementação](images/cs_app_tutorial_components3.png)</a>
+O diagrama a seguir inclui os componentes que você implementa concluindo esta lição.
+
+![Configuração de implementação](images/cs_app_tutorial_components3.png)
+
+No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhador. Nesta lição, você cria uma instância do serviço Watson Tone Analyzer em sua conta do {{site.data.keyword.Bluemix_notm}} e configura duas implementações, uma implementação para cada componente do app. Cada componente é implementado em um pod do Kubernetes no nó do trabalhador. Para tornar ambos os componentes publicamente disponíveis, você também cria um serviço do Kubernetes para cada componente. 
 
 
 ### Lição 3a: implementando o app Watson Tone Analyzer
@@ -919,7 +932,7 @@ Enquanto uma implementação está em execução, é possível editá-la para mu
 
 2.  Opcional: repita as mudanças para a implementação watson-pod.
 
-[Teste seus conhecimentos e faça um teste! ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://bluemix-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
+[Teste seus conhecimentos e faça um teste! ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 
 Parabéns! Você implementou o app Watson Tone Analyzer. A firma PR pode definitivamente iniciar
 o uso dessa implementação do app para iniciar a análise de seus press releases.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-24"
+lastupdated: "2017-11-16"
 
 ---
 
@@ -22,12 +22,15 @@ lastupdated: "2017-10-24"
 您可以使用内置安全性功能来进行风险分析和安全保护。这些功能有助于保护集群基础架构和网络通信，隔离计算资源，以及确保基础架构组件和容器部署中的安全合规性。
 {: shortdesc}
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_security.png" ><img src="images/cs_security.png" width="400" alt="{{site.data.keyword.containershort_notm}} 集群安全性" style="width:400px; border-style: none"/></a>
+在下图中，可以看到按 Kubernetes 主节点、工作程序节点和容器映像分组的安全功能。
+  
+<img src="images/cs_security.png" width="400" alt="{{site.data.keyword.containershort_notm}} 集群安全性" style="width:400px; border-style: none"/>
 
 
   <table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
+  <caption>安全功能</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png"/> {{site.data.keyword.containershort_notm}} 中的内置集群安全设置</th>
+  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> {{site.data.keyword.containershort_notm}} 中的内置集群安全设置</th>
   </thead>
   <tbody>
     <tr>
@@ -36,7 +39,8 @@ lastupdated: "2017-10-24"
     </tr>
     <tr>
       <td>工作程序节点</td>
-      <td>容器部署在工作程序节点上；这些工作程序节点专用于集群，并确保为 IBM 客户提供计算、网络和存储隔离功能。{{site.data.keyword.containershort_notm}} 提供了内置安全性功能，以使工作程序节点在专用和公用网络上保持安全，并确保工作程序节点的安全合规性。有关更多信息，请参阅[工作程序节点安全性](#cs_security_worker)。</td>
+      <td>容器部署在工作程序节点上；这些工作程序节点专用于集群，并确保为 IBM 客户提供计算、网络和存储隔离功能。{{site.data.keyword.containershort_notm}} 提供了内置安全性功能，以使工作程序节点在专用和公用网络上保持安全，并确保工作程序节点的安全合规性。有关更多信息，请参阅[工作程序节点安全性](#cs_security_worker)。此外，可以添加 [Calico 网络策略](#cs_security_network_policies)，以进一步指定要允许或阻止与工作程序节点上的 pod 之间进出的哪些网络流量。
+</td>
      </tr>
      <tr>
       <td>映像</td>
@@ -56,7 +60,7 @@ lastupdated: "2017-10-24"
 
 <dl>
   <dt>全面管理的专用 Kubernetes 主节点</dt>
-    <dd>{{site.data.keyword.containershort_notm}} 中的每个 Kubernetes 集群都会由 IBM 拥有的 IBM Bluemix Infrastructure (SoftLayer) 帐户中 IBM 管理的专用 Kubernetes 主节点进行控制。Kubernetes 主节点设置有以下专用组件，这些组件不与其他 IBM 客户共享。<ul><li>etcd 数据存储器：存储集群的所有 Kubernetes 资源，例如服务、部署和 pod。Kubernetes ConfigMaps 和 Secrets 是存储为键/值对的应用程序数据，可由 pod 中运行的应用程序使用。etcd 中的数据存储在加密磁盘上，该磁盘由 IBM 管理，并在发送到 pod 时通过 TLS 加密，以确保数据保护和数据完整性。</li>
+    <dd>{{site.data.keyword.containershort_notm}} 中的每个 Kubernetes 集群都由 IBM 拥有的 IBM Cloud Infrastructure(SoftLayer) 帐户中 IBM 管理的专用 Kubernetes 主节点进行控制。Kubernetes 主节点设置有以下专用组件，这些组件不与其他 IBM 客户共享。<ul><li>etcd 数据存储器：存储集群的所有 Kubernetes 资源，例如服务、部署和 pod。Kubernetes ConfigMaps 和 Secrets 是存储为键/值对的应用程序数据，可由 pod 中运行的应用程序使用。etcd 中的数据存储在加密磁盘上，该磁盘由 IBM 管理，并在发送到 pod 时通过 TLS 加密，以确保数据保护和数据完整性。</li>
     <li>kube-apiserver：充当从工作程序节点到 Kubernetes 主节点的所有请求的主入口点。kube-apiserver 会验证并处理请求，并可以对 etcd 数据存储器执行读写操作。</li>
     <li>kube-scheduler：决定 pod 的部署位置，同时考虑容量和性能需求、软硬件策略约束、反亲缘关系规范和工作负载需求。如果找不到与这些需求相匹配的工作程序节点，那么不会在集群中部署 pod。</li>
     <li>kube-controller-manager：负责监视副本集，并创建相应的 pod 以实现所需状态。</li>
@@ -82,14 +86,14 @@ lastupdated: "2017-10-24"
 
 <dl>
   <dt>计算、网络和存储基础架构隔离</dt>
-    <dd>创建集群后，IBM 会将虚拟机作为客户 IBM Bluemix Infrastructure (SoftLayer) 帐户或专用 IBM Bluemix Infrastructure (SoftLayer) 帐户中的工作程序节点进行供应。工作程序节点专用于一个集群，而不托管其他集群的工作负载。</br> 每个 {{site.data.keyword.Bluemix_notm}} 帐户都设置有 IBM Bluemix Infrastructure (SoftLayer) VLAN，可确保工作程序节点上的高质量网络性能和隔离。</br>要在集群中持久存储数据，可以从 IBM Bluemix Infrastructure (SoftLayer) 供应基于 NFS 的专用文件存储器，并利用该平台的内置数据安全功能。</dd>
+    <dd>创建集群时，IBM 会将虚拟机作为客户 IBM Cloud infrastructure (SoftLayer) 帐户或专用 IBM Cloud infrastructure (SoftLayer) 帐户中的工作程序节点进行供应。工作程序节点专用于一个集群，而不托管其他集群的工作负载。</br> 每个 {{site.data.keyword.Bluemix_notm}} 帐户都设置有 IBM Cloud infrastructure (SoftLayer) VLAN，以确保工作程序节点上的高质量网络性能和隔离。</br>要在集群中持久存储数据，可以从 IBM Cloud infrastructure (SoftLayer) 供应基于 NFS 的专用文件存储器，并利用该平台的内置数据安全功能。</dd>
   <dt>安全的工作程序节点设置</dt>
     <dd>每个工作程序节点都由用户无法更改的 Ubuntu 操作系统进行设置。为保护工作程序节点的操作系统免受潜在攻击，每个工作程序节点都使用 Linux iptable 规则强制实施的专家防火墙设置进行配置。</br> 在 Kubernetes 上运行的所有容器都通过集群创建期间在每个工作程序节点上配置的预定义 Calico 网络策略设置进行保护。此设置将确保工作程序节点与 pod 之间的安全网络通信。要进一步限制容器可以对工作程序节点执行的操作，用户可以选择在工作程序节点上配置 [AppArmor 策略 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tutorials/clusters/apparmor/)。</br> 缺省情况下，在工作程序节点上会启用 root 用户的 SSH 访问权。如果要在工作程序节点上安装附加功能，那么您可以对要在每个工作程序节点上运行的任何对象使用 [Kubernetes 守护程序集 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset)，或者对您必须执行的任何一次性操作使用 [Kubernetes 作业 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/)。</dd>
   <dt>Kubernetes 工作程序节点安全合规性</dt>
     <dd>IBM 与内部和外部安全咨询团队合作，应对潜在的安全合规性漏洞。IBM 会维护对工作程序节点的 SSH 访问权，以将更新和安全补丁部署到操作系统。
 </br> <b>重要事项</b>：定期重新引导工作程序节点，以确保安装自动部署到操作系统的更新和安全补丁。IBM 不会重新引导您的工作程序节点。</dd>
-  <dt>对 IBM Bluemix Infrastructure (SoftLayer) 网络防火墙的支持</dt>
-    <dd>{{site.data.keyword.containershort_notm}} 与所有 [IBM Bluemix Infrastructure (SoftLayer) 防火墙产品 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/cloud-computing/bluemix/network-security) 相兼容。在 {{site.data.keyword.Bluemix_notm}} Public 上，可以使用定制网络策略来设置防火墙，以便为集群提供专用网络安全性，检测网络侵入并进行补救。例如，您可以选择设置 [Vyatta ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://knowledgelayer.softlayer.com/topic/vyatta-1) 以充当防火墙并阻止不需要的流量。设置防火墙时，[还必须为每个区域打开必需的端口和 IP 地址](#opening_ports)，以便主节点和工作程序节点可以通信。在 {{site.data.keyword.Bluemix_notm}} Dedicated 上，防火墙、DataPower、Fortigate 和 DNS 已配置为标准专用环境部署的一部分。</dd>
+  <dt>对 IBM Cloud infrastructure (SoftLayer) 网络防火墙的支持</dt>
+    <dd>{{site.data.keyword.containershort_notm}} 与所有 [IBM Cloud infrastructure (SoftLayer) 防火墙产品 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/cloud-computing/bluemix/network-security) 相兼容。在 {{site.data.keyword.Bluemix_notm}} Public 上，可以使用定制网络策略来设置防火墙，以便为集群提供专用网络安全性，检测网络侵入并进行补救。例如，您可以选择设置 [Vyatta ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://knowledgelayer.softlayer.com/topic/vyatta-1) 以充当防火墙并阻止不需要的流量。设置防火墙时，[还必须为每个区域打开必需的端口和 IP 地址](#opening_ports)，以便主节点和工作程序节点可以通信。在 {{site.data.keyword.Bluemix_dedicated_notm}} 上，防火墙、DataPower、Fortigate 和 DNS 已配置为标准专用环境部署的一部分。</dd>
   <dt>使服务保持专用，或者有选择地将服务和应用程序公开到公用因特网</dt>
     <dd>可以选择使服务和应用程序保持专用，并且利用本主题中所述的内置安全性功能来确保工作程序节点与 pod 之间的安全通信。要将服务和应用程序公开到公用因特网，可以利用 Ingress 和负载均衡器支持来安全地使服务公共可用。</dd>
   <dt>将工作程序节点和应用程序安全地连接到内部部署的数据中心</dt>
@@ -102,7 +106,7 @@ lastupdated: "2017-10-24"
 {: #opening_ports}
 
 查看以下情况，在这些情况下，您可能需要在防火墙中打开特定端口和 IP 地址：
-* 为工作程序节点设置防火墙或在 IBM Bluemix Infrastructure (SoftLayer) 帐户中定制防火墙设置时，允许 Kubernetes 主节点与工作程序节点之间进行通信
+* 为工作程序节点设置防火墙或在 IBM Cloud infrastructure (SoftLayer) 帐户中定制防火墙设置时，允许 Kubernetes 主节点与工作程序节点之间进行通信
 * 从集群外部访问负载均衡器或 Ingress 控制器
 * 在企业网络策略阻止通过代理或防火墙访问公用因特网端点时从本地系统运行 `kubectl` 命令
 
@@ -113,24 +117,30 @@ lastupdated: "2017-10-24"
     ```
       {: pre}
 
-  2.  在来自工作程序节点的出站连接的防火墙中，允许出局网络流量从源工作程序节点流至目标 TCP/UDP 端口范围 20000-32767 和端口 443（用于 `<each_worker_node_publicIP>`），以及以下 IP 地址和网络组。
-      - **重要事项**：必须允许流至端口 443 以及区域内所有位置的出站流量流至彼此，以便均衡引导过程中的负载。例如，如果集群位于美国南部，那么必须允许流量从端口 443 流至 dal10 和 dal12 以及从 dal10 和 dal12 流至彼此。<p>
+  2.  在来自工作程序节点的出站连接的防火墙中，允许从源工作程序节点到目标 TCP/UDP 端口范围 20000-32767 和端口 443（用于 `<each_worker_node_publicIP>`）以及以下 IP 地址和网络组的出局网络流量。
+      - **重要事项**：针对区域内的所有位置，必须允许出站流量从端口 443 流出，以便在引导过程中均衡负载。例如，如果集群位于美国南部，那么必须允许流量从端口 443 流至所有位置（dal10、dal12 和 dal13）的 IP 地址。
+      <p>
   <table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
-  <thead>
+      <thead>
       <th>区域</th>
       <th>位置</th>
       <th>IP 地址</th>
       </thead>
     <tbody>
       <tr>
+        <td>亚太地区北部</td>
+        <td>hkg02<br>tok02</td>
+        <td><code>169.56.132.234</code><br><code>161.202.126.210</code></td>
+       </tr>
+      <tr>
          <td>亚太地区南部</td>
-         <td>mel01<br>syd01</td>
-         <td><code>168.1.97.67</code><br><code>168.1.8.195</code></td>
+         <td>mel01<br>syd01<br>syd04</td>
+         <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19</code></td>
       </tr>
       <tr>
          <td>欧洲中部</td>
-         <td>ams03<br>fra02</td>
-         <td><code>169.50.169.110</code><br><code>169.50.56.174</code></td>
+         <td>ams03<br>fra02<br>par01</td>
+         <td><code>169.50.169.110</code><br><code>169.50.56.174</code><br><code>159.8.86.149</code></td>
         </tr>
       <tr>
         <td>英国南部</td>
@@ -139,8 +149,8 @@ lastupdated: "2017-10-24"
       </tr>
       <tr>
         <td>美国东部</td>
-         <td>wdc06<br>wdc07</td>
-         <td><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+         <td>tor01<br>wdc06<br>wdc07</td>
+         <td><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
       </tr>
       <tr>
         <td>美国南部</td>
@@ -153,25 +163,31 @@ lastupdated: "2017-10-24"
 
   3.  允许出站网络流量从工作程序节点流至 {{site.data.keyword.registrylong_notm}}：
       - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
-      - 将 <em>&lt;registry_publicIP&gt;</em> 替换为要允许流量的注册表区域的所有地址：<p>      
+      - 将 <em>&lt;registry_publicIP&gt;</em> 替换为要允许流量的注册表区域的所有地址：<p>
 <table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
-  <thead>
-        <th colspan=2><img src="images/idea.png"/> 注册表 IP 地址</th>
-        </thead>
+      <thead>
+        <th>容器区域</th>
+        <th>注册表地址</th>
+        <th>注册表 IP 地址</th>
+      </thead>
       <tbody>
         <tr>
+          <td>亚太地区北部和亚太地区南部</td>
           <td>registry.au-syd.bluemix.net</td>
           <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
         </tr>
         <tr>
+          <td>欧洲中部</td>
           <td>registry.eu-de.bluemix.net</td>
           <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></td>
          </tr>
          <tr>
+          <td>英国南部</td>
           <td>registry.eu-gb.bluemix.net</td>
           <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></td>
          </tr>
          <tr>
+          <td>美国东部和美国南部</td>
           <td>registry.ng.bluemix.net</td>
           <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></td>
          </tr>
@@ -183,18 +199,23 @@ lastupdated: "2017-10-24"
       - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
       - 将 <em>&lt;monitoring_publicIP&gt;</em> 替换为要允许流量的监视区域的所有地址：<p><table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
   <thead>
-        <th colspan=2><img src="images/idea.png"/> 监视公共 IP 地址</th>
+        <th>容器区域</th>
+        <th>监视地址</th>
+        <th>监视 IP 地址</th>
         </thead>
       <tbody>
         <tr>
+         <td>欧洲中部</td>
          <td>metrics.eu-de.bluemix.net</td>
          <td><code>159.122.78.136/29</code></td>
         </tr>
         <tr>
+         <td>英国南部</td>
          <td>metrics.eu-gb.bluemix.net</td>
          <td><code>169.50.196.136/29</code></td>
         </tr>
         <tr>
+          <td>美国东部、美国南部和亚太地区北部</td>
           <td>metrics.ng.bluemix.net</td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
@@ -205,18 +226,23 @@ lastupdated: "2017-10-24"
       - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
       - 将 <em>&lt;logging_publicIP&gt;</em> 替换为要允许流量的日志记录区域的所有地址：<p><table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
   <thead>
-        <th colspan=2><img src="images/idea.png"/> 日志记录公共 IP 地址</th>
+        <th>容器区域</th>
+        <th>日志记录地址</th>
+        <th>日志记录 IP 地址</th>
         </thead>
       <tbody>
         <tr>
+         <td>欧洲中部</td>
          <td>ingest.logging.eu-de.bluemix.net</td>
          <td><code>169.50.25.125</code></td>
         </tr>
         <tr>
+         <td>英国南部</td>
          <td>ingest.logging.eu-gb.bluemix.net</td>
          <td><code>169.50.115.113</code></td>
         </tr>
         <tr>
+          <td>美国东部、美国南部和亚太地区北部</td>
           <td>ingest.logging.ng.bluemix.net</td>
           <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
          </tr>
@@ -224,7 +250,7 @@ lastupdated: "2017-10-24"
       </table>
 </p>
 
-  5. 对于专用防火墙，允许适当的 IBM Bluemix Infrastructure (SoftLayer) 专用 IP 范围。请从**后端（专用）网络**部分开始查阅[此链接](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)。
+  5. 对于专用防火墙，允许适当的 IBM Cloud infrastructure (SoftLayer) 专用 IP 范围。请从**后端（专用）网络**部分开始查阅[此链接](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)。
       - 添加您正在使用的所有[区域内的位置](cs_regions.html#locations)
       - 请注意，必须添加 dal01 位置（数据中心）
       - 打开端口 80 和 443 以允许集群引导过程
@@ -232,6 +258,79 @@ lastupdated: "2017-10-24"
   6. 可选：要从 VLAN 外部访问负载均衡器，请打开该负载均衡器的特定 IP 地址上入局网络流量的端口。
 
   7. 可选：要从 VLAN 外部访问 Ingress 控制器，请根据所配置的端口，对该 Ingress 控制器的特定 IP 地址上的入局网络流量打开端口 80 或 443。
+
+## 将网络流量限于边缘工作程序节点
+{: #cs_edge}
+
+将 `dedicated=edge` 标签添加到集群中的两个或更多工作程序节点，以确保 Ingress 和负载均衡器仅部署到这些工作程序节点。
+
+边缘工作程序节点通过减少允许外部访问的工作程序节点，并隔离联网工作负载，可以提高集群的安全性。当这些工作程序节点标记为仅用于联网时，其他工作负载无法使用工作程序节点的 CPU 或内存，也不会干扰联网。
+
+开始之前：
+
+- [创建标准集群。](cs_cluster.html#cs_cluster_cli)
+- 确保集群至少具有一个公共 VLAN。边缘工作程序节点不可用于仅具有专用 VLAN 的集群。
+- [设定 Kubernetes CLI 的目标为集群](cs_cli_install.html#cs_cli_configure)。
+
+
+1. 列出集群中的所有工作程序节点。使用 **NAME** 列中的专用 IP 地址来标识节点。请至少选择两个工作程序节点作为边缘工作程序节点。使用两个或更多工作程序节点可提高联网资源的可用性。
+
+  ```
+  kubectl get nodes -L publicVLAN,privateVLAN,dedicated
+  ```
+  {: pre}
+
+2. 使用 `dedicated=edge` 标记工作程序节点。工作程序节点标记有 `dedicated=edge` 后，所有后续 Ingress 和负载均衡器都会部署到边缘工作程序节点。
+
+  ```
+  kubectl label nodes <node_name> <node_name2> dedicated=edge
+  ```
+  {: pre}
+
+3. 检索集群中的所有现有 LoadBalancer 服务。
+
+  ```
+  kubectl get services --all-namespaces -o jsonpath='{range .items[*]}kubectl get service -n {.metadata.namespace} {.metadata.name} -o yaml | kubectl apply -f - :{.spec.type},{end}' | tr "," "\n" | grep "LoadBalancer" | cut -d':' -f1
+  ```
+  {: pre}
+
+  输出：
+
+  ```
+  kubectl get service -n <namespace> <name> -o yaml | kubectl apply -f
+  ```
+  {: screen}
+
+4. 使用上一步中的输出内容，复制并粘贴每个 `kubectl get service` 行。此命令会将负载均衡器重新部署到边缘工作程序节点。只有公用负载均衡器需要重新部署。
+
+  输出：
+
+  ```
+  service "<name>" configured
+  ```
+  {: screen}
+
+您已使用 `dedicated=edge` 标记工作程序节点，并已将所有现有负载均衡器和 Ingress 重新部署到边缘工作程序节点。接下来，请[阻止其他工作负载在边缘工作程序节点上运行](#cs_edge_workloads)并[阻止流至工作程序节点上节点端口的入站流量](#cs_block_ingress)。
+
+### 阻止工作负载在边缘工作程序节点上运行
+{: #cs_edge_workloads}
+
+边缘工作程序节点的一个优点是，这些工作程序节点可以指定为仅运行联网服务。使用 `dedicated=edge` 容忍度意味着所有 LoadBalancer 和 Ingress 服务仅部署到已标记的工作程序节点。但是，要阻止其他工作负载在边缘工作程序节点上运行并使用工作程序节点资源，必须使用 [Kubernetes 污点 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)。
+
+1. 列出具有 `edge` 标签的所有工作程序节点。
+
+  ```
+  kubectl get nodes -L publicVLAN,privateVLAN,dedicated -l dedicated=edge
+  ```
+  {: pre}
+
+2. 将污点应用于每个工作程序节点，这将阻止 pod 在该工作程序节点上运行，并且会从该工作程序节点中除去没有 `edge` 标签的 pod。除去的 pod 会在具有容量的其他工作程序节点上重新部署。
+
+  ```
+  kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute
+  ```
+
+现在，仅具有 `dedicated=edge` 容忍度的 pod 会部署到边缘工作程序节点。
 
 <br />
 
@@ -260,7 +359,7 @@ lastupdated: "2017-10-24"
 
 创建集群时，会自动为每个工作程序节点的公共网络接口设置缺省网络策略，以限制来自公共因特网的工作程序节点的入局流量。这些策略不会影响 pod 到 pod 的流量，并设置为允许访问 Kubernetes NodePort、LoadBalancer 和 Ingress 服务。
 
-不会直接将缺省策略应用于 pod；缺省策略使用 Calico [主机端点 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://docs.projectcalico.org/v2.0/getting-started/bare-metal/bare-metal) 应用于工作程序节点的公共网络接口。在 Calico 中创建主机端点后，除非策略允许与工作程序节点网络接口之间进出的所有流量，否则将阻止该流量。
+不会直接将缺省策略应用于 pod；缺省策略使用 Calico 主机端点应用于工作程序节点的公共网络接口。在 Calico 中创建主机端点后，除非策略允许与工作程序节点网络接口之间进出的所有流量，否则将阻止该流量。
 
 请注意，不存在允许 SSH 的策略，所以会阻止通过公共网络接口进行的 SSH 访问，正如没有策略可将其打开的其他所有端口那样。SSH 访问和其他访问在每个工作程序节点的专用网络接口上可用。
 
@@ -269,7 +368,7 @@ lastupdated: "2017-10-24"
 
  <table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
   <thead>
-  <th colspan=2><img src="images/idea.png"/> 每个集群的缺省策略</th>
+  <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 每个集群的缺省策略</th>
   </thead>
   <tbody>
     <tr>
@@ -277,20 +376,20 @@ lastupdated: "2017-10-24"
       <td>允许所有出站流量。</td>
     </tr>
     <tr>
+      <td><code>allow-bixfix-port</code></td>
+      <td>允许端口 52311 的入局流量流至 bigfix 应用程序，以允许执行必需的工作程序节点更新。</td>
+    </tr>
+    <tr>
       <td><code>allow-icmp</code></td>
       <td>允许入局 icmp 包 (ping)。</td>
      </tr>
-     <tr>
-      <td><code>allow-kubelet-port</code></td>
-      <td>允许所有入局流量流入端口 10250，这是 kubelet 使用的端口。此策略允许 `kubectl logs` 和 `kubectl exec` 在 Kubernetes 集群中正常运行。</td>
-    </tr>
     <tr>
       <td><code>allow-node-port-dnat</code></td>
       <td>允许入局 NodePort、LoadBalancer 和 Ingress 服务流量流入这些服务公开的 pod。请注意，这些服务在公共接口上公开的端口不必加以指定，因为 Kubernetes 会使用目标网络地址转换 (DNAT) 将这些服务请求转发到正确的 pod。这一转发过程在 iptable 中应用主机端点策略之前执行。</td>
    </tr>
    <tr>
       <td><code>allow-sys-mgmt</code></td>
-      <td>允许用于管理工作程序节点的特定 IBM Bluemix Infrastructure (SoftLayer) 系统的入局连接。</td>
+      <td>允许用于管理工作程序节点的特定 IBM Cloud infrastructure (SoftLayer) 系统的入局连接。</td>
    </tr>
    <tr>
     <td><code>allow-vrrp</code></td>
@@ -316,11 +415,11 @@ lastupdated: "2017-10-24"
   ```
   {: pre}
 
-  **注**：支持 Calico CLI V1.4.0。
+  **注**：支持 Calico CLI V1.6.1。
 
 要添加网络策略，请执行以下操作：
 1.  安装 Calico CLI。
-    1.  [下载 Calico CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/projectcalico/calicoctl/releases/tag/v1.4.0)。
+    1.  [下载 Calico CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/projectcalico/calicoctl/releases/tag/v1.6.1)。
 
         **提示：**如果使用的是 Windows，请将 Calico CLI 安装在 {{site.data.keyword.Bluemix_notm}} CLI 所在的目录中。此安装将在您以后运行命令时减少一些文件路径更改操作。
 
@@ -527,23 +626,30 @@ lastupdated: "2017-10-24"
           ```
           {: pre}
 
-### 阻止流至 LoadBalancer 或 NodePort 服务的入局（Ingress）流量
+### 阻止流至 LoadBalancer 或 NodePort 服务的入局流量。
 {: #cs_block_ingress}
 
 缺省情况下， Kubernetes `NodePort` 和 `LoadBalancer` 服务旨在使应用程序在所有公用和专用集群接口上都可用。但是，您可以基于流量源或目标，阻止流至服务的入局流量。要阻止流量，请创建 Calico `preDNAT` 网络策略。
 
 Kubernetes LoadBalancer 服务也是 NodePort 服务。LoadBalancer 服务通过负载均衡器 IP 地址和端口提供应用程序，并通过服务的节点端口使应用程序可用。对于集群内的每个节点，在每个 IP 地址（公共和专用）上都可以访问节点端口。
 
-集群管理员可以使用 Calico `preDNAT` 网络策略块：
+集群管理员可以使用 Calico `preDNAT` 网络策略来阻止：
 
   - 流至 NodePort 服务的流量。允许使用流至 LoadBalancer 服务的流量。
   - 基于源地址或 CIDR 的流量。
 
-这些功能的一个优点是集群管理员可以阻止流至专用 LoadBalancer 服务的公共节点端口的流量。管理员还可以启用对 NodePort 或 LoadBalancer 服务的白名单访问。`preDNAT` 网络策略非常有用，因为在保护 Kubernetes NodePort 和 LoadBalancer 服务的情况下，由于会为这些服务生成 DNAT iptables 规则，所以很难应用缺省的 Kubernetes 和 Calico 策略。
+Calico `preDNAT` 网络策略的一些常见用法：
+
+  - 阻止流至专用 LoadBalancer 服务的公共节点端口的流量。
+  - 阻止流至正在运行[边缘工作程序节点](#cs_edge)的集群上公共节点端口的流量。阻止节点端口可确保边缘工作程序节点是处理入局流量的唯一工作程序节点。
+
+`preDNAT` 网络策略非常有用，因为在保护 Kubernetes NodePort 和 LoadBalancer 服务的情况下，由于会为这些服务生成 DNAT iptables 规则，所以很难应用缺省的 Kubernetes 和 Calico 策略。
 
 Calico `preDNAT` 网络策略基于 [Calico 网络策略资源 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v2.4/reference/calicoctl/resources/policy) 生成 iptables 规则。
 
-1. 定义 Calico `preDNAT` 网络策略，以对 Kubernetes 服务进行 Ingress 访问。此示例会阻止所有节点端口。
+1. 定义 Calico `preDNAT` 网络策略，以对 Kubernetes 服务进行 Ingress 访问。
+
+  用于阻止所有节点端口的示例：
 
   ```
   apiVersion: v1
@@ -570,7 +676,7 @@ Calico `preDNAT` 网络策略基于 [Calico 网络策略资源 ![外部链接图
 2. 应用 Calico preDNAT 网络策略。在整个集群中应用策略更改大约需要 1 分钟时间。
 
   ```
-  /opt/bin/calicoctl apply -f deny-kube-node-port-services.yaml
+  calicoctl apply -f deny-kube-node-port-services.yaml
   ```
   {: pre}
 
@@ -591,8 +697,4 @@ Calico `preDNAT` 网络策略基于 [Calico 网络策略资源 ![外部链接图
 
 使用 {{site.data.keyword.registryshort_notm}} 时，可以利用漏洞顾问程序提供的内置安全性扫描。对于推送到名称空间的每个映像，都会自动根据包含已知 CentOS、Debian、Red Hat 和 Ubuntu 问题的数据库进行扫描以确定是否有漏洞。如果发现了漏洞，漏洞顾问程序会提供指示信息指导如何解决这些漏洞，以确保映像完整性和安全性。
 
-要查看映像的漏洞评估，请执行以下操作：
-
-1.  从**目录**的“容器”部分中，选择**容器注册表**。
-2.  在**专用存储库**页面的**存储库**表中，标识映像。
-3.  在**安全性报告**列中，单击映像的状态以检索其漏洞评估。
+要查看映像的漏洞评估，请[查看漏洞顾问程序文档](/docs/services/va/va_index.html#va_registry_cli)。

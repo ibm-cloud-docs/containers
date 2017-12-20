@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-05"
+lastupdated: "2017-11-28"
 
 ---
 
@@ -22,17 +22,16 @@ lastupdated: "2017-10-05"
 您隨時可以使用 Kubernetes 技術部署應用程式，以及確保您的應用程式已啟動並在執行中。例如，您可以執行漸進式更新及回復，而不會對使用者造成任何關閉時間。
 {:shortdesc}
 
-部署應用程式一般會包括下列步驟。
+藉由按一下下列影像的區域，來瞭解部署應用程式的一般步驟。
 
-1.  [安裝 CLI](cs_cli_install.html#cs_cli_install)。
+<img usemap="#d62e18" border="0" class="image" id="basic_deployment_process" src="images/basic_deployment_process.png" width="780" style="width:780px;"/>
+<map name="d62e18" id="d62e18">
+<area href="cs_cli_install.html" target="_blank" alt="安裝 CLI。" title="安裝 CLI。" shape="rect" coords="30, 69, 179, 209" />
+<area href="https://kubernetes.io/docs/concepts/configuration/overview/" target="_blank" alt="為您的應用程式建立配置檔。請檢閱來自 Kubernetes 的最佳作法。" title="為您的應用程式建立配置檔。請檢閱來自 Kubernetes 的最佳作法。" shape="rect" coords="254, 64, 486, 231" />
+<area href="#cs_apps_cli" target="_blank" alt="選項 1：執行來自 Kubernetes CLI 的配置檔。" title="選項 1：執行來自 Kubernetes CLI 的配置檔。" shape="rect" coords="544, 67, 730, 124" />
+<area href="#cs_cli_dashboard" target="_blank" alt="選項 2：在本端啟動 Kubernetes 儀表板，並執行配置檔。" title="選項 2：在本端啟動 Kubernetes 儀表板，並執行配置檔。" shape="rect" coords="544, 141, 728, 204" />
+</map>
 
-2.  建立應用程式的配置檔。[檢閱 Kubernetes 的最佳作法。 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/overview/)
-
-3.  使用下列其中一種方法來執行配置檔。
-    -   [Kubernetes CLI](#cs_apps_cli)
-    -   Kubernetes 儀表板
-        1.  [啟動 Kubernetes 儀表板。](#cs_cli_dashboard)
-        2.  [執行配置檔。](#cs_apps_ui)
 
 <br />
 
@@ -46,8 +45,58 @@ lastupdated: "2017-10-05"
 開始之前，請先將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為您的叢集。此作業需要[管理者存取原則](cs_cluster.html#access_ov)。請驗證您的現行[存取原則](cs_cluster.html#view_access)。
 
 您可以使用預設埠或設定自己的埠，來啟動叢集的 Kubernetes 儀表板。
--   使用預設埠 8001 來啟動 Kubernetes 儀表板。
+
+1.  對於 Kubernetes 主要版本為 1.7.4 或之前版本的叢集：
+
     1.  使用預設埠號來設定 Proxy。
+
+        ```
+        kubectl proxy
+        ```
+        {: pre}
+
+        輸出：
+
+        ```
+        Starting to serve on 127.0.0.1:8001
+        ```
+        {: screen}
+
+    2.  在 Web 瀏覽器中開啟 Kubernetes 儀表板。
+
+        ```
+        http://localhost:8001/ui
+        ```
+        {: codeblock}
+
+2.  對於 Kubernetes 主要版本為 1.8.2 或更新版本的叢集：
+
+    1.  下載您的認證。
+
+        ```
+        bx cs cluster-config <cluster_name>
+        ```
+        {: codeblock}
+
+    2.  檢視已下載的叢集認證。使用在前一個步驟的匯出中指定的檔案路徑。
+
+        對於 macOS 或 Linux：
+
+        ```
+        cat <filepath_to_cluster_credentials>
+        ```
+        {: codeblock}
+
+        對於 Windows：
+
+        ```
+        type <filepath_to_cluster_credentials>
+        ```
+        {: codeblock}
+
+    3.  複製 **id-token** 欄位中的記號。
+
+    4.  使用預設埠號來設定 Proxy。
 
         ```
         kubectl proxy
@@ -61,38 +110,111 @@ lastupdated: "2017-10-05"
         ```
         {: screen}
 
-    2.  在 Web 瀏覽器中開啟下列 URL，以查看 Kubernetes 儀表板。
+    6.  登入儀表板。
 
-        ```
-        http://localhost:8001/ui
-        ```
-        {: codeblock}
+        1.  將此 URL 複製到您的瀏覽器。
 
--   使用您自己的埠來啟動 Kubernetes 儀表板。
-    1.  使用您自己的埠號來設定 Proxy。
+            ```
+            http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+            ```
+            {: codeblock}
 
-        ```
-        kubectl proxy -p <port>
-        ```
-        {: pre}
+        2.  在登入頁面中，選取**記號**鑑別方法。
 
-    2.  在瀏覽器開啟下列 URL。
+        3.  然後，將 **id-token** 值貼到**記號**欄位，然後按一下**登入**。
 
-        ```
-        http://localhost:<port>/ui
-        ```
-        {: codeblock}
+[接下來，您可以從儀表板執行配置檔。](#cs_apps_ui)
+
+完成 Kubernetes 儀表板之後，使用 `CTRL+C` 來結束 `proxy` 指令。在您結束之後，無法再使用 Kubernetes 儀表板。請執行 `proxy` 指令，以重新啟動 Kubernetes 儀表板。
 
 
-完成 Kubernetes 儀表板之後，使用 `CTRL+C` 來結束 `proxy` 指令。在您結束之後，無法再使用 Kubernetes 儀表板。請重新執行 `proxy` 指令，以重新啟動 Kubernetes 儀表板。
 
 <br />
+
+
+## 建立 Secret
+{: #secrets}
+
+Kubernetes Secret 是一種儲存機密資訊（例如使用者名稱、密碼或金鑰）的安全方式。
+
+
+<table>
+<caption>表格。需要藉由作業儲存在 Secret 中的檔案</caption>
+<thead>
+<th>作業</th>
+<th>要儲存在 Secret 中的必要檔案</th>
+</thead>
+<tbody>
+<tr>
+<td>將服務新增至叢集</td>
+<td>無。將服務連結至叢集時，系統會為您建立 Secret。</td>
+</tr>
+<tr>
+<td>選用項目：如果不是使用 ingress-secret，請配置 Ingress 服務與 TLS 搭配。<p><b>附註</b>：依預設，TLS 已啟用，且已針對「TLS 連線」建立 Secret。
+
+若要檢視預設 TLS Secret，請執行下列指令：
+<pre>
+bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
+</pre>
+</p>
+若要改為自行建立，請完成這個主題中的步驟。</td>
+<td>伺服器憑證及金鑰：<code>server.crt</code> 及 <code>server.key</code></td>
+<tr>
+<td>建立交互鑑別註釋。</td>
+<td>CA 憑證：<code>ca.crt</code></td>
+</tr>
+</tbody>
+</table>
+
+如需您可以在 Secret 中儲存哪些項目的相關資訊，請參閱 [Kubernetes 文件](https://kubernetes.io/docs/concepts/configuration/secret/)。
+
+
+
+若要使用憑證來建立 Secret，請執行下列動作：
+
+1. 從憑證提供者產生憑證管理中心 (CA) 憑證及金鑰。如果您有自己的網域，請為您的網域購買正式的 TLS 憑證。基於測試目的，您可以產生自簽憑證。
+
+ 重要事項：請確定每一個憑證的 [CN](https://support.dnsimple.com/articles/what-is-common-name/) 都不同。
+
+ 用戶端憑證及用戶端金鑰必須最多驗證到授信主要憑證（在此情況下，指的是 CA 憑證）。範例：
+
+ ```
+ Client Certificate: issued by Intermediate Certificate
+ Intermediate Certificate: issued by Root Certificate
+ Root Certificate: issued by itself
+ ```
+ {: codeblock}
+
+2. 建立憑證作為 Kubernetes Secret。
+
+ ```
+ kubectl create secret generic <secretName> --from-file=<cert_file>=<cert_file>
+ ```
+ {: pre}
+
+ 範例：
+ - TLS 連線：
+
+ ```
+ kubectl create secret tls <secretName> --from-file=tls.crt=server.crt --from-file=tls.key=server.key
+ ```
+ {: pre}
+
+ - 交互鑑別註釋：
+
+ ```
+ kubectl create secret generic <secretName> --from-file=ca.crt=ca.crt
+ ```
+ {: pre}
+
+<br />
+
 
 
 ## 容許對應用程式的公用存取
 {: #cs_apps_public}
 
-若要將應用程式設為可公開使用，您必須先更新配置檔，再將應用程式部署至叢集。
+若要將應用程式設為可在網際網路上公開使用，您必須先更新配置檔，再將應用程式部署至叢集。
 {:shortdesc}
 
 視您所建立的是精簡還是標準叢集而定，會有不同的方式可從網際網路存取您的應用程式。
@@ -110,12 +232,13 @@ lastupdated: "2017-10-05"
 ### 使用 NodePort 服務類型來配置應用程式的公用存取
 {: #cs_apps_public_nodeport}
 
-使用叢集中任何工作者節點的公用 IP 位址，並公開節點埠，以將應用程式設為可公開使用。請使用此選項來進行測試及短期公用存取。
+使用叢集中任何工作者節點的公用 IP 位址，並公開節點埠，將應用程式設為可在網際網路上進行存取。請使用此選項來進行測試及短期公用存取。
+
 {:shortdesc}
 
 對於精簡或標準叢集，您可以將應用程式公開為 Kubernetes NodePort 服務。
 
-對於「{{site.data.keyword.Bluemix_notm}} 專用」環境，防火牆會封鎖公用 IP 位址。若要讓應用程式可公開使用，請改用 [LoadBalancer 服務](#cs_apps_public_load_balancer)或 [Ingress](#cs_apps_public_ingress)。
+對於「{{site.data.keyword.Bluemix_dedicated_notm}}」環境，防火牆會封鎖公用 IP 位址。若要讓應用程式可公開使用，請改用 [LoadBalancer 服務](#cs_apps_public_load_balancer)或 [Ingress](#cs_apps_public_ingress)。
 
 **附註：**工作者節點的公用 IP 位址不是永久性的。如果必須重建工作者節點，則會將新的公用 IP 位址指派給工作者節點。如果您需要服務的穩定公用 IP 位址及更高可用性，請使用 [LoadBalancer 服務](#cs_apps_public_load_balancer)或 [Ingress](#cs_apps_public_ingress) 來公開應用程式。
 
@@ -196,8 +319,8 @@ lastupdated: "2017-10-05"
 
     ```
     ID                                                Public IP   Private IP    Size     State    Status
-    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w1  192.0.2.23  10.100.10.10  u1c.2x4  normal   Ready
-    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w2  192.0.2.27  10.100.10.15  u1c.2x4  normal   Ready
+    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w1  192.0.2.23  10.100.10.10  u2c.2x4  normal   Ready
+    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w2  192.0.2.27  10.100.10.15  u2c.2x4  normal   Ready
     ```
     {: screen}
 
@@ -232,11 +355,13 @@ lastupdated: "2017-10-05"
 ### 使用負載平衡器服務類型來配置應用程式的存取
 {: #cs_apps_public_load_balancer}
 
-公開埠並使用可攜式公用或專用 IP 位址，讓負載平衡器可以存取應用程式。與 NodePort 服務不同，負載平衡器服務的可攜式 IP 位址不是取決於在其上已部署應用程式的工作者節點。不過，Kubernetes LoadBalancer 服務也是 NodePort 服務。LoadBalancer 服務可讓您的應用程式透過負載平衡器 IP 位址及埠提供使用，並讓您的應用程式可透過服務的節點埠提供使用。 
+公開埠並使用可攜式 IP 位址，讓負載平衡器可以存取應用程式。使用公用 IP 位址，將應用程式設為可在網際網路上進行存取，或使用專用 IP 位址，將應用程式設為可在專用基礎架構網路上進行存取。
 
- 負載平衡器的可攜式 IP 位址會自動進行指派，而且不會在您新增或移除工作者節點時變更。因此，負載平衡器服務的高可用性高於 NodePort 服務。使用者可以選取負載平衡器的任何埠，而不只限於 NodePort 埠範圍。您可以針對 TCP 及 UDP 通訊協定使用負載平衡器服務。
+與 NodePort 服務不同，負載平衡器服務的可攜式 IP 位址不是取決於在其上已部署應用程式的工作者節點。不過，Kubernetes LoadBalancer 服務也是 NodePort 服務。LoadBalancer 服務可讓您的應用程式透過負載平衡器 IP 位址及埠提供使用，並讓您的應用程式可透過服務的節點埠提供使用。
 
-當「{{site.data.keyword.Bluemix_notm}} 專用」帳戶[啟用叢集功能](cs_ov.html#setup_dedicated)時，您可以要求將公用子網路用於負載平衡器 IP 位址。[開立支援問題單](/docs/support/index.html#contacting-support)建立子網路，然後使用 [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) 指令將子網路新增至叢集。
+負載平衡器的可攜式 IP 位址會自動進行指派，而且不會在您新增或移除工作者節點時變更。因此，負載平衡器服務的高可用性高於 NodePort 服務。使用者可以選取負載平衡器的任何埠，而不只限於 NodePort 埠範圍。您可以針對 TCP 及 UDP 通訊協定使用負載平衡器服務。
+
+當「{{site.data.keyword.Bluemix_dedicated_notm}}」帳戶[啟用叢集功能](cs_ov.html#setup_dedicated)時，您可以要求將公用子網路用於負載平衡器 IP 位址。[開立支援問題單](/docs/support/index.html#contacting-support)建立子網路，然後使用 [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) 指令將子網路新增至叢集。
 
 **附註：**負載平衡器服務不支援 TLS 終止。如果您的應用程式需要 TLS 終止，您可以使用 [Ingress](#cs_apps_public_ingress) 來公開應用程式，或配置應用程式來管理 TLS 終止。
 
@@ -253,11 +378,11 @@ lastupdated: "2017-10-05"
     1.  例如，建立名稱為 `myloadbalancer.yaml` 的服務配置檔。
     2.  為您要公開的應用程式定義負載平衡器服務。
         - 如果叢集是在公用 VLAN 上，則會使用可攜式公用 IP 位址。大部分叢集都在公用 VLAN 上。
-        - 如果您的叢集只能在專用 VLAN 上使用，則會使用可攜式專用 IP 位址。 
+        - 如果您的叢集只能在專用 VLAN 上使用，則會使用可攜式專用 IP 位址。
         - 您可以透過將註釋新增至配置檔，要求 LoadBalancer 服務的可攜式公用或專用 IP 位址。
 
         使用預設 IP 位址的 LoadBalancer 服務：
-        
+
         ```
         apiVersion: v1
         kind: Service
@@ -272,9 +397,9 @@ lastupdated: "2017-10-05"
              port: 8080
         ```
         {: codeblock}
-        
+
         使用註釋來指定專用或公用 IP 位址的 LoadBalancer 服務：
-        
+
         ```
         apiVersion: v1
         kind: Service
@@ -294,7 +419,7 @@ lastupdated: "2017-10-05"
 
         <table>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> 瞭解 YAML 檔案元件</th>
+        <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
         </thead>
         <tbody>
         <tr>
@@ -312,6 +437,7 @@ lastupdated: "2017-10-05"
         <tr>
           <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:`
           <td>要指定 LoadBalancer 類型的註釋。值為 `private` 和 `public`。在公用 VLAN 的叢集中建立公用 LoadBalancer 時，不需要此註釋。
+        </td>
         </tbody></table>
     3.  選用項目：若要為叢集可用的特定負載平衡器，使用特定的可攜式 IP 位址，可以將 `loadBalancerIP` 包含在 spec 區段，以指定該 IP 位址。如需相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/service/)。
     4.  選用項目：在 spec 區段中指定 `loadBalancerSourceRanges`，以配置防火牆。如需相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/)。
@@ -365,24 +491,34 @@ lastupdated: "2017-10-05"
         {: codeblock}
 
 
-### 使用 Ingress 控制器來配置應用程式的公用存取
+
+
+### 使用 Ingress 控制器來配置應用程式的存取
 {: #cs_apps_public_ingress}
 
-建立 IBM 提供的 Ingress 控制器所管理的 Ingress 資源，以公開叢集中的多個應用程式。Ingress 控制器是一個外部 HTTP 或 HTTPS 負載平衡器，使用安全且唯一的公用進入點，將送入要求遞送給叢集內外部的應用程式。
+建立 IBM 提供的 Ingress 控制器所管理的 Ingress 資源，以公開叢集中的多個應用程式。Ingress 控制器是一個外部 HTTP 或 HTTPS 負載平衡器，使用安全且唯一的公用或專用進入點，將送入要求遞送至叢集內外部的應用程式。
 
-**附註：**Ingress 僅適用於標準叢集，而且叢集中需要至少兩個工作者節點才能確保高可用性。設定 Ingress 需要[管理者存取原則](cs_cluster.html#access_ov)。請驗證您的現行[存取原則](cs_cluster.html#view_access)。
+**附註：**Ingress 僅適用於標準叢集，而且叢集中需要至少兩個工作者節點才能確保高可用性，並套用定期更新。設定 Ingress 需要[管理者存取原則](cs_cluster.html#access_ov)。請驗證您的現行[存取原則](cs_cluster.html#view_access)。
 
-當您建立標準叢集時，會自動建立 Ingress 控制器，並獲指派一個可攜式公用 IP 位址及一個公用路徑。您可以配置 Ingress 控制器，以及為每個公開給大眾使用的應用程式定義個別遞送規則。每個透過 Ingress 公開的應用程式，都會獲指派一個附加至公用路徑的唯一路徑，以便您可以使用唯一 URL 來公開存取叢集中的應用程式。
+當您建立標準叢集時，系統會為您自動建立並啟用一個獲指派可攜式公用 IP 位址及公用路徑的 Ingress 控制器。也會自動建立（但不會自動啟用）一個獲指派可攜式專用 IP 位址及專用路徑的 Ingress 控制器。您可以配置這些 Ingress 控制器，並且為每個公開給大眾或專用網路使用的應用程式定義個別遞送規則。每個透過 Ingress 公開給大眾使用的應用程式都會獲指派附加至公用路徑的唯一路徑，因此，您可以使用唯一 URL 來公開存取叢集中的應用程式。
 
-當「{{site.data.keyword.Bluemix_notm}} 專用」帳戶[啟用叢集功能](cs_ov.html#setup_dedicated)時，您可以要求將公用子網路用於 Ingress 控制器 IP 位址。然後，會建立 Ingress 控制器，並指派公用路徑。[開立支援問題單](/docs/support/index.html#contacting-support)建立子網路，然後使用 [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) 指令將子網路新增至叢集。
+當「{{site.data.keyword.Bluemix_dedicated_notm}}」帳戶[啟用叢集功能](cs_ov.html#setup_dedicated)時，您可以要求將公用子網路用於 Ingress 控制器 IP 位址。然後，會建立 Ingress 控制器，並指派公用路徑。[開立支援問題單](/docs/support/index.html#contacting-support)建立子網路，然後使用 [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) 指令將子網路新增至叢集。
 
-您可以針對下列情境配置 Ingress 控制器。
+若要將應用程式公開給大眾使用，您可以針對下列情境配置公用 Ingress 控制器。
 
 -   [使用沒有 TLS 終止的 IBM 提供的網域](#ibm_domain)
 -   [使用具有 TLS 終止的 IBM 提供的網域](#ibm_domain_cert)
 -   [使用自訂網域及 TLS 憑證來執行 TLS 終止](#custom_domain_cert)
 -   [使用具有 TLS 終止的 IBM 提供的網域或自訂網域，來存取叢集外部的應用程式](#external_endpoint)
--   [使用註釋自訂 Ingress 控制器](#ingress_annotation)
+-   [開啟 Ingress 負載平衡器中的埠](#opening_ingress_ports)
+-   [配置 HTTP 層次的 SSL 通訊協定及 SSL 密碼](#ssl_protocols_ciphers)
+-   [使用註釋自訂 Ingress 控制器](cs_annotations.html)
+{: #ingress_annotation}
+
+若要將應用程式公開給專用網路使用，首先請[啟用專用 Ingress 控制器](#private_ingress)。然後，您可以針對下列情境配置專用 Ingress 控制器。
+
+-   [使用沒有 TLS 終止的自訂網域](#private_ingress_no_tls)
+-   [使用自訂網域及 TLS 憑證來執行 TLS 終止](#private_ingress_tls)
 
 #### 使用沒有 TLS 終止的 IBM 提供的網域
 {: #ibm_domain}
@@ -417,7 +553,7 @@ lastupdated: "2017-10-05"
 
         <table>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> 瞭解 YAML 檔案元件</th>
+        <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
         </thead>
         <tbody>
         <tr>
@@ -492,7 +628,7 @@ lastupdated: "2017-10-05"
 
         <table>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> 瞭解 YAML 檔案元件</th>
+        <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
         </thead>
         <tbody>
         <tr>
@@ -517,7 +653,7 @@ lastupdated: "2017-10-05"
         許多應用程式不會接聽特定路徑，但卻使用根路徑及特定埠。在此情況下，請將根路徑定義為 <code>/</code>，並且不要為應用程式指定個別路徑。</br>
         範例：<ul><li>針對 <code>http://ingress_host_name/</code>，輸入 <code>/</code> 作為路徑。</li><li>針對 <code>http://ingress_host_name/myservicepath</code>，輸入 <code>/myservicepath</code> 作為路徑。</li></ul>
         </br>
-        <strong>提示：</strong>如果您要配置與應用程式所接聽路徑不同的 Ingress 接聽路徑，則可以使用<a href="#rewrite" target="_blank">重新編寫註釋</a>來建立應用程式的正確遞送。</td>
+        <strong>提示：</strong>如果您要配置與應用程式所接聽路徑不同的 Ingress 接聽路徑，則可以使用[重新編寫註釋](cs_annotations.html#rewrite-path)來建立應用程式的正確遞送。</td>
         </tr>
         <tr>
         <td><code>serviceName</code></td>
@@ -585,7 +721,7 @@ lastupdated: "2017-10-05"
 
         <table>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> 瞭解 YAML 檔案元件</th>
+        <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
         </thead>
         <tbody>
         <tr>
@@ -671,7 +807,7 @@ lastupdated: "2017-10-05"
 
         <table>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> 瞭解 YAML 檔案元件</th>
+        <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
         </thead>
         <tbody>
         <tr>
@@ -708,7 +844,7 @@ lastupdated: "2017-10-05"
 
         </br>
         範例：<ul><li>針對 <code>http://ingress_host_name/</code>，輸入 <code>/</code> 作為路徑。</li><li>針對 <code>http://ingress_host_name/myservicepath</code>，輸入 <code>/myservicepath</code> 作為路徑。</li></ul>
-        <strong>提示：</strong>如果您要配置與應用程式所接聽路徑不同的 Ingress 接聽路徑，則可以使用<a href="#rewrite" target="_blank">重新編寫註釋</a>來建立應用程式的正確遞送。</td>
+        <strong>提示：</strong>如果您要配置與應用程式所接聽路徑不同的 Ingress 接聽路徑，則可以使用[重新編寫註釋](cs_annotations.html#rewrite-path)來建立應用程式的正確遞送。</td>
         </tr>
         <tr>
         <td><code>serviceName</code></td>
@@ -742,7 +878,7 @@ lastupdated: "2017-10-05"
     ```
     {: codeblock}
 
-#### 搭配使用 Ingress 控制器與自訂網域及 TLS 憑證
+#### 使用 Ingress 控制器與自訂網域及 TLS 憑證搭配
 {: #custom_domain_cert}
 
 您可以配置 Ingress 控制器，將送入網路資料流量遞送至叢集中的應用程式，以及使用您自己的 TLS 憑證來管理 TLS 終止，同時使用您的自訂網域而非 IBM 提供的網域。
@@ -757,7 +893,7 @@ lastupdated: "2017-10-05"
 
 1.  建立自訂網域。若要建立自訂網域，請與「網域名稱服務 (DNS)」提供者合作，登錄自訂網域。
 2.  配置網域，以將送入的網路資料流量遞送至 IBM Ingress 控制器。可選擇的選項有：
-    -   將 IBM 提供的網域指定為「標準名稱記錄 (CNAME)」，以定義自訂網域的別名。若要尋找 IBM 提供的 Ingress 網域，請執行 `bx cs cluster-get <mycluster>`，並尋找 **Ingress subdomain** 欄位。
+    -   將 IBM 提供的網域指定為「標準名稱記錄 (CNAME)」，以定義自訂網域的別名。若要尋找 IBM 提供的 Ingress 網域，請執行 `bx cs cluster-get <mycluster>` 並尋找 **Ingress subdomain** 欄位。
     -   將自訂網域對映至 IBM 提供的 Ingress 控制器的可攜式公用 IP 位址，方法是將 IP 位址新增為記錄。若要尋找 Ingress 控制器的可攜式公用 IP 位址，請執行下列動作：
         1.  執行 `bx cs cluster-get <mycluster>` 並尋找 **Ingress subdomain** 欄位。
         2.  執行 `nslookup <Ingress subdomain>`。
@@ -780,7 +916,7 @@ lastupdated: "2017-10-05"
 
         <table>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> 瞭解 YAML 檔案元件</th>
+        <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
         </thead>
         <tbody>
         <tr>
@@ -826,7 +962,7 @@ lastupdated: "2017-10-05"
 
         <table>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> 瞭解 YAML 檔案元件</th>
+        <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
         </thead>
         <tbody>
         <tr>
@@ -883,7 +1019,7 @@ lastupdated: "2017-10-05"
 
         <table>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> 瞭解 YAML 檔案元件</th>
+        <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
         </thead>
         <tbody>
         <tr>
@@ -919,7 +1055,7 @@ lastupdated: "2017-10-05"
 
         </br></br>
         範例：<ul><li>針對 <code>https://mycustomdomain/</code>，輸入 <code>/</code> 作為路徑。</li><li>針對 <code>https://mycustomdomain/myservicepath</code>，輸入 <code>/myservicepath</code> 作為路徑。</li></ul>
-        <strong>提示：</strong>如果您要配置與應用程式所接聽路徑不同的 Ingress 接聽路徑，則可以使用<a href="#rewrite" target="_blank">重新編寫註釋</a>來建立應用程式的正確遞送。</td>
+        <strong>提示：</strong>如果您要配置與應用程式所接聽路徑不同的 Ingress 接聽路徑，則可以使用[重新編寫註釋](cs_annotations.html#rewrite-path)來建立應用程式的正確遞送。</td>
         </tr>
         <tr>
         <td><code>serviceName</code></td>
@@ -991,7 +1127,7 @@ lastupdated: "2017-10-05"
 
         <table>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> 瞭解 YAML 檔案元件</th>
+        <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
         </thead>
         <tbody>
         <tr>
@@ -1034,7 +1170,7 @@ lastupdated: "2017-10-05"
 
         <table>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> 瞭解 YAML 檔案元件</th>
+        <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
         </thead>
         <tbody>
         <tr>
@@ -1116,7 +1252,7 @@ lastupdated: "2017-10-05"
 
         <table>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> 瞭解 YAML 檔案元件</th>
+        <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
         </thead>
         <tbody>
         <tr>
@@ -1153,7 +1289,7 @@ lastupdated: "2017-10-05"
         許多應用程式不會接聽特定路徑，但卻使用根路徑及特定埠。在此情況下，請將根路徑定義為 <code>/</code>，並且不要為應用程式指定個別路徑。
 
         </br></br>
-        <strong>提示：</strong>如果您要配置與應用程式所接聽路徑不同的 Ingress 接聽路徑，則可以使用<a href="#rewrite" target="_blank">重新編寫註釋</a>來建立應用程式的正確遞送。</td>
+        <strong>提示：</strong>如果您要配置與應用程式所接聽路徑不同的 Ingress 接聽路徑，則可以使用[重新編寫註釋](cs_annotations.html#rewrite-path)來建立應用程式的正確遞送。</td>
         </tr>
         <tr>
         <td><code>serviceName</code></td>
@@ -1192,556 +1328,571 @@ lastupdated: "2017-10-05"
         {: codeblock}
 
 
-#### 支援的 Ingress 註釋
-{: #ingress_annotation}
 
-您可以指定 Ingress 資源的 meta 資料，以將功能新增至 Ingress 控制器。
-{: shortdesc}
+#### 開啟 Ingress 負載平衡器中的埠
+{: #opening_ingress_ports}
 
-|支援的註釋|說明|
-|--------------------|-----------|
-|[重新編寫](#rewrite)|將送入的網路資料流量遞送至後端應用程式接聽的不同路徑。|
-|[Cookie 的階段作業親緣性](#sticky_cookie)|使用 Sticky Cookie 一律將送入的網路資料流量遞送至相同的上游伺服器。|
-|[額外的用戶端要求或回應標頭](#add_header)|新增額外的標頭資訊至用戶端要求，然後才將要求轉遞至後端應用程式，或新增至用戶端回應，然後才將回應傳送至用戶端。|
-|[移除用戶端回應標頭](#remove_response_headers)|從用戶端回應移除標頭資訊，然後才將回應轉遞至用戶端。|
-|[HTTP 重新導向至 HTTPS](#redirect_http_to_https)|將您網域上不安全的 HTTP 要求重新導向 HTTPS。|
-|[用戶端回應資料緩衝](#response_buffer)|將回應傳送至用戶端時，停用 Ingress 控制器上的用戶端回應緩衝。|
-|[自訂連接逾時和讀取逾時](#timeout)|調整 Ingress 控制器等待以連接及讀取後端應用程式的時間，在此時間之後，後端應用程式將被視為無法使用。|
-|[自訂用戶端要求內文大小上限](#client_max_body_size)|調整容許傳送至 Ingress 控制器的用戶端要求內文大小。|
-|[自訂 HTTP 及 HTTPS 埠](#custom_http_https_ports)|變更 HTTP 及 HTTPS 網路資料流量的預設埠。|
+依預設，Ingress 負載平衡器中只會公開埠 80 及 443。若要公開其他埠，您可以編輯 ibm-cloud-provider-ingress-cm 配置對映資源。
+
+1.  為 ibm-cloud-provider-ingress-cm 配置對映資源建立配置檔的本端版本。新增 <code>data</code> 區段，並指定公用埠 80、443 以及您要新增至配置對映檔的任何其他埠，並以分號 (;) 區隔。
+
+ 附註：指定埠時，還必須包括 80 及 443，以讓那些埠保持開啟。任何未指定的埠都會關閉。
+
+ ```
+ apiVersion: v1
+ data:
+   public-ports: "80;443;<port3>"
+ kind: ConfigMap
+ metadata:
+   name: ibm-cloud-provider-ingress-cm
+   namespace: kube-system
+ ```
+ {: codeblock}
+
+ 範例：
+ ```
+ apiVersion: v1
+ data:
+   public-ports: "80;443;9443"
+ kind: ConfigMap
+ metadata:
+   name: ibm-cloud-provider-ingress-cm
+   namespace: kube-system
+ ```
+
+2. 套用配置檔。
+
+ ```
+ kubectl apply -f <path/to/configmap.yaml>
+ ```
+ {: pre}
+
+3. 驗證已套用配置檔。
+
+ ```
+ kubectl describe cm ibm-cloud-provider-ingress-cm -n kube-system
+ ```
+ {: pre}
+
+ 輸出：
+ ```
+ Name:        ibm-cloud-provider-ingress-cm
+ Namespace:    kube-system
+ Labels:        <none>
+ Annotations:    <none>
+
+ Data
+ ====
+
+  public-ports: "80;443;<port3>"
+ ```
+ {: codeblock}
+
+如需配置對映資源的相關資訊，請參閱 [Kubernetes 文件](https://kubernetes-v1-4.github.io/docs/user-guide/configmap/)。
 
 
-##### **使用重新編寫，將送入的網路資料流量遞送至不同路徑**
-{: #rewrite}
 
-使用重新編寫註釋，可以將 Ingress 控制器網域路徑上的送入網路資料流量遞送至與後端應用程式所接聽的不同路徑。
+#### 配置 HTTP 層次的 SSL 通訊協定及 SSL 密碼
+{: #ssl_protocols_ciphers}
+
+藉由編輯 `ibm-cloud-provider-ingress-cm` 配置對映，在廣域 HTTP 層次啟用 SSL 通訊協定及密碼。
+
+依預設，下列值用於 ssl-protocols 及 ssl-ciphers：
+
+```
+ssl-protocols : "TLSv1 TLSv1.1 TLSv1.2"
+ssl-ciphers : "HIGH:!aNULL:!MD5"
+```
+{: codeblock}
+
+如需這些參數的相關資訊，請參閱 NGINX 文件中的 [ssl-protocols ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_protocols) 及 [ssl-ciphers ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_ciphers)。
+
+若要變更預設值，請執行下列動作：
+1. 為 ibm-cloud-provider-ingress-cm 配置對映資源建立配置檔的本端版本。
+
+ ```
+ apiVersion: v1
+ data:
+   ssl-protocols: "TLSv1 TLSv1.1 TLSv1.2"
+   ssl-ciphers: "HIGH:!aNULL:!MD5"
+ kind: ConfigMap
+ metadata:
+   name: ibm-cloud-provider-ingress-cm
+   namespace: kube-system
+ ```
+ {: codeblock}
+
+2. 套用配置檔。
+
+ ```
+ kubectl apply -f <path/to/configmap.yaml>
+ ```
+ {: pre}
+
+3. 驗證已套用配置檔。
+
+ ```
+ kubectl describe cm ibm-cloud-provider-ingress-cm -n kube-system
+ ```
+ {: pre}
+
+ 輸出：
+ ```
+ Name:        ibm-cloud-provider-ingress-cm
+ Namespace:    kube-system
+ Labels:        <none>
+ Annotations:    <none>
+
+ Data
+ ====
+
+  ssl-protocols: "TLSv1 TLSv1.1 TLSv1.2"
+  ssl-ciphers: "HIGH:!aNULL:!MD5"
+ ```
+ {: screen}
+
+
+#### 啟用專用 Ingress 控制器
+{: #private_ingress}
+
+當您建立標準叢集時，系統會自動建立（但不會自動啟用）專用 Ingress 控制器。在可以使用專用 Ingress 控制器之前，您必須使用預先指派且由 IBM 提供的可攜式專用 IP 位址，或您自己的可攜式專用 IP 位址來啟用該控制器。**附註**：如果您在建立叢集時使用 `--no-subnet` 旗標，則必須先新增可攜式專用子網路或使用者管理的子網路，然後才能啟用專用 Ingress 控制器。如需相關資訊，請參閱[要求叢集的其他子網路](cs_cluster.html#add_subnet)。
+
+開始之前：
+
+-   如果您還沒有叢集，請[建立標準叢集](cs_cluster.html#cs_cluster_ui)。
+-   [將 CLI 的目標設為](cs_cli_install.html#cs_cli_configure)您的叢集。
+
+若要使用預先指派且由 IBM 提供的可攜式專用 IP 位址，來啟用專用 Ingress 控制器，請執行下列動作：
+
+1. 列出叢集中可用的 Ingress 控制器，以取得專用 Ingress 控制器的 ALB ID。將 <em>&lt;cluser_name&gt;</em> 取代為您要公開之應用程式部署所在的叢集名稱。
+
+    ```
+    bx cs albs --cluster <my_cluster>
+    ```
+    {: pre}
+
+    專用 Ingress 控制器的 **Status** 欄位是 _disabled_。
+    ```
+    ALB ID                                            Enabled   Status     Type      ALB IP
+    private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   false     disabled   private   -
+    public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    true      enabled    public    169.46.63.150
+    ```
+    {: screen}
+
+2. 啟用專用 Ingress 控制器。將 <em>&lt;private_ALB_ID&gt;</em> 取代為專用 Ingress 控制器的 ALB ID（來自前一個步驟中的輸出）。
+
+   ```
+   bx cs bx cs alb-configure --albID <private_ALB_ID> --enable
+   ```
+   {: pre}
+
+
+若要使用您自己的可攜式專用 IP 位址，來啟用專用 Ingress 控制器，請執行下列動作：
+
+1. 配置所選擇 IP 位址之使用者管理的子網路，以遞送叢集之專用 VLAN 上的資料流量。將 <em>&lt;cluser_name&gt;</em> 取代為您要公開之應用程式部署所在的叢集名稱或 ID、將 <em>&lt;subnet_CIDR&gt;</em> 取代為使用者管理之子網路的 CIDR，並將 <em>&lt;private_VLAN&gt;</em> 取代為可用的專用 VLAN ID。您可以藉由執行 `bx cs vlsans`，來尋找可用的專用 VLAN ID。
+
+   ```
+   bx cs cluster-user-subnet-add <cluster_name> <subnet_CIDR> <private_VLAN>
+   ```
+   {: pre}
+
+2. 列出叢集中可用的 Ingress 控制器，以取得專用 Ingress 控制器的 ALB ID。
+
+    ```
+    bx cs albs --cluster <my_cluster>
+    ```
+    {: pre}
+
+    專用 Ingress 控制器的 **Status** 欄位是 _disabled_。
+    ```
+    ALB ID                                            Enabled   Status     Type      ALB IP
+    private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   false     disabled   private   -
+    public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    true      enabled    public    169.46.63.150
+    ```
+    {: screen}
+
+3. 啟用專用 Ingress 控制器。將 <em>&lt;private_ALB_ID&gt;</em> 取代為專用 Ingress 控制器的 ALB ID（來自前一個步驟中的輸出），並將 <em>&lt;user_ip&gt;</em> 取代為您要使用的使用者管理之子網路的 IP 位址。
+
+   ```
+   bx cs bx cs alb-configure --albID <private_ALB_ID> --enable --user-ip <user_ip>
+   ```
+   {: pre}
+
+#### 使用專用 Ingress 控制器與自訂網域搭配
+{: #private_ingress_no_tls}
+
+您可以配置專用 Ingress 控制器，以使用自訂網域，將送入的網路資料流量遞送至叢集中的應用程式。
 {:shortdesc}
 
-<dl>
-<dt>說明</dt>
-<dd>Ingress 控制器網域會將 <code>mykubecluster.us-south.containers.mybluemix.net/beans</code> 上的送入網路資料流量遞送至您的應用程式。您的應用程式會接聽 <code>/coffee</code>，而非 <code>/beans</code>。若要將送入的網路資料流量轉遞至您的應用程式，請將重新編寫註釋新增至 Ingress 資源配置檔，如此，<code>/beans</code> 上的送入網路資料流量就會使用 <code>/coffee</code> 路徑轉遞至您的應用程式。包含多個服務時，只使用分號 (;) 來區隔它們。</dd>
-<dt>Ingress 資源範例 YAML</dt>
-<dd>
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/rewrite-path: "serviceName=&lt;service_name1&gt; rewrite=&lt;target_path1&gt;;serviceName=&lt;service_name2&gt; rewrite=&lt;target_path2&gt;"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /&lt;domain_path1&gt;
-        backend:
-          serviceName: &lt;service_name1&gt;
-          servicePort: &lt;service_port1&gt;
-      - path: /&lt;domain_path2&gt;
-        backend:
-          serviceName: &lt;service_name2&gt;
-          servicePort: &lt;service_port2&gt;</code></pre>
+開始之前，請[啟用專用 Ingress 控制器](#private_ingress)。
 
-<table>
-<thead>
-<th colspan=2><img src="images/idea.png"/> 瞭解 YAML 檔案元件</th>
-</thead>
-<tbody>
-<tr>
-<td><code>annotations</code></td>
-<td>將 <em>&lt;service_name&gt;</em> 取代為您為應用程式所建立之 Kubernetes 服務的名稱，並將 <em>&lt;target-path&gt;</em> 取代為您的應用程式所接聽的路徑。Ingress 控制器網域上的送入網路資料流量即會使用此路徑轉遞至 Kubernetes 服務。大部分的應用程式不會接聽特定路徑，但使用根路徑及特定埠。在此情況下，將 <code>/</code> 定義為您應用程式的 <em>rewrite-path</em>。</td>
-</tr>
-<tr>
-<td><code>path</code></td>
-<td>將 <em>&lt;domain_path&gt;</em> 取代為您要附加至 Ingress 控制器網域的路徑。這個路徑上的送入網路資料流量即會轉遞至您在註釋中所定義的重新編寫路徑。在上述範例中，請將網域路徑設定為 <code>/beans</code>，以將此路徑包含在 Ingress 控制器的負載平衡中。</td>
-</tr>
-<tr>
-<td><code>serviceName</code></td>
-<td>將 <em>&lt;service_name&gt;</em> 取代為您為應用程式所建立之 Kubernetes 服務的名稱。您在這裡使用的服務名稱，必須與在註釋中定義的名稱相同。</td>
-</tr>
-<tr>
-<td><code>servicePort</code></td>
-<td>將 <em>&lt;service_port&gt;</em> 取代為服務所接聽的埠。</td>
-</tr></tbody></table>
+若要配置專用 Ingress 控制器，請執行下列動作：
 
-</dd></dl>
+1.  建立自訂網域。若要建立自訂網域，請與「網域名稱服務 (DNS)」提供者合作，登錄自訂網域。
 
+2.  將自訂網域對映至 IBM 提供的專用 Ingress 控制器的可攜式專用 IP 位址，方法是將 IP 位址新增為記錄。若要尋找專用 Ingress 控制器的可攜式專用 IP 位址，請執行 `bx cs albs --cluster <cluster_name>`。
 
-##### **使用 Sticky Cookie 一律將送入的網路資料流量遞送至相同的上游伺服器**
-{: #sticky_cookie}
+3.  [將應用程式部署至叢集](#cs_apps_cli)。將應用程式部署至叢集時，會自動建立一個以上的 Pod，以在容器中執行您的應用程式。請確定您已將標籤新增至您部署中配置檔的 meta 資料區段。此標籤是識別您應用程式執行所在之所有 Pod 的必要項目，如此才能將 Pod 包含在 Ingress 負載平衡中。
 
-使用 Sticky Cookie 註釋，可以為 Ingress 控制器新增階段作業親緣性。
+4.  為要公開的應用程式，建立 Kubernetes 服務。只有在您的應用程式是透過叢集內的 Kubernetes 服務公開時，專用 Ingress 控制器才能將應用程式併入 Ingress 負載平衡。
+
+    1.  例如，開啟偏好的編輯器，然後建立名為 `myservice.yaml` 的服務配置檔。
+    2.  為您要公開給大眾使用的應用程式定義服務。
+
+        ```
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: <myservice>
+        spec:
+          selector:
+            <selectorkey>: <selectorvalue>
+          ports:
+           - protocol: TCP
+             port: 8080
+        ```
+       {: codeblock}
+
+        <table>
+        <thead>
+        <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+        </thead>
+        <tbody>
+        <tr>
+        <td><code>name</code></td>
+        <td>將 <em>&lt;myservice1&gt;</em> 取代為 Kubernetes 服務的名稱。</td>
+        </tr>
+        <tr>
+        <td><code>selector</code></td>
+        <td>輸入標籤索引鍵 (<em>&lt;selectorkey&gt;</em>) 及值 (<em>&lt;selectorvalue&gt;</em>) 配對，以用來將應用程式執行所在的 Pod 設為目標。例如，如果您使用下列選取器 <code>app: code</code>，會將所有其 meta 資料中具有此標籤的 Pod 都包含在負載平衡中。當您將應用程式部署至叢集時，請輸入所使用的相同標籤。</td>
+         </tr>
+         <td><code>port</code></td>
+         <td>服務所接聽的埠。</td>
+         </tbody></table>
+
+    3.  儲存變更。
+    4.  在叢集中建立服務。
+
+        ```
+        kubectl apply -f myservice.yaml
+        ```
+        {: pre}
+
+    5.  針對每個您要公開給專用網路使用的應用程式，重複這些步驟。
+7.  建立 Ingress 資源。Ingress 資源定義您為應用程式所建立之 Kubernetes 服務的遞送規則，並且供 Ingress 控制器用來將送入網路資料流量遞送給服務。只要每個應用程式都是透過叢集內的 Kubernetes 服務公開時，您就可以使用一個 Ingress 資源來為多個應用程式定義遞送規則。
+    1.  例如，開啟偏好的編輯器，然後建立名為 `myingress.yaml` 的 Ingress 配置檔。
+    2.  在配置檔中定義 Ingress 資源，以使用自訂網域將送入的網路資料流量遞送至您的服務。針對每個服務，您可以定義附加至自訂網域的個別路徑，以建立應用程式的唯一路徑，例如 `https://mydomain/myapp`。當您將此路徑輸入 Web 瀏覽器時，會將網路資料流量遞送至 Ingress 控制器。Ingress 控制器會查閱關聯的服務，然後將網路資料流量傳送至服務，並進一步傳送至執行應用程式的 Pod。
+
+        **附註：**應用程式必須接聽 Ingress 資源中所定義的路徑。否則，無法將網路資料流量轉遞至應用程式。大部分的應用程式不會接聽特定路徑，但使用根路徑及特定埠。在此情況下，請將根路徑定義為 `/`，並且不要為應用程式指定個別路徑。
+
+        ```
+        apiVersion: extensions/v1beta1
+        kind: Ingress
+        metadata:
+          name: <myingressname>
+          annotations:
+            ingress.bluemix.net/ALB-ID: "<private_ALB_ID>"
+        spec:
+          rules:
+          - host: <mycustomdomain>
+            http:
+              paths:
+              - path: /<myservicepath1>
+                backend:
+                  serviceName: <myservice1>
+                  servicePort: 80
+              - path: /<myservicepath2>
+                backend:
+                  serviceName: <myservice2>
+                  servicePort: 80
+        ```
+        {: codeblock}
+
+        <table>
+        <thead>
+        <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+        </thead>
+        <tbody>
+        <tr>
+        <td><code>name</code></td>
+        <td>將 <em>&lt;myingressname&gt;</em> 取代為 Ingress 資源的名稱。</td>
+        </tr>
+        <tr>
+        <td><code>ingress.bluemix.net/ALB-ID</code></td>
+        <td>將 <em>&lt;private_ALB_ID&gt;</em> 取代為專用 Ingress 控制器的 ALB ID。執行 <code>bx cs albs --cluster <my_cluster></code> 以尋找 ALB ID。</td>
+        </tr>
+        <td><code>host</code></td>
+        <td>將 <em>&lt;mycustomdomain&gt;</em> 取代為自訂網域。
+
+        </br></br>
+        <strong>附註：</strong>請不要使用 &ast; 作為您的主機，也不要讓主機內容保留為空白，以避免建立 Ingress 期間發生失敗。</td>
+        </tr>
+        <tr>
+        <td><code>path</code></td>
+        <td>將 <em>&lt;myservicepath1&gt;</em> 取代為斜線或應用程式所接聽的唯一路徑，以將網路資料流量轉遞至應用程式。
+
+        </br>
+        針對每個 Kubernetes 服務，您可以定義附加至自訂網域的個別路徑，以建立應用程式的唯一路徑，例如 <code>custom_domain/myservicepath1</code>。當您將此路徑輸入 Web 瀏覽器時，會將網路資料流量遞送至 Ingress 控制器。Ingress 控制器會查閱相關聯的服務，然後將網路資料流量傳送至服務，並使用相同路徑傳送至執行應用程式的 Pod。應用程式必須設定成接聽此路徑，以接收送入的網路資料流量。
+
+        </br>
+        許多應用程式不會接聽特定路徑，但卻使用根路徑及特定埠。在此情況下，請將根路徑定義為 <code>/</code>，並且不要為應用程式指定個別路徑。
+
+        </br></br>
+        範例：<ul><li>針對 <code>https://mycustomdomain/</code>，輸入 <code>/</code> 作為路徑。</li><li>針對 <code>https://mycustomdomain/myservicepath</code>，輸入 <code>/myservicepath</code> 作為路徑。</li></ul>
+        <strong>提示：</strong>如果您要配置與應用程式所接聽路徑不同的 Ingress 接聽路徑，則可以使用[重新編寫註釋](cs_annotations.html#rewrite-path)來建立應用程式的正確遞送。</td>
+        </tr>
+        <tr>
+        <td><code>serviceName</code></td>
+        <td>將 <em>&lt;myservice1&gt;</em> 取代為您為應用程式建立 Kubernetes 服務時所使用的服務名稱。</td>
+        </tr>
+        <tr>
+        <td><code>servicePort</code></td>
+        <td>您的服務所接聽的埠。請使用您為應用程式建立 Kubernetes 服務時所定義的相同埠。</td>
+        </tr>
+        </tbody></table>
+
+    3.  儲存變更。
+    4.  建立叢集的 Ingress 資源。
+
+        ```
+        kubectl apply -f myingress.yaml
+        ```
+        {: pre}
+
+8.  驗證已順利建立 Ingress 資源。將 <em>&lt;myingressname&gt;</em> 取代為您在前一個步驟中建立之 Ingress 資源的名稱。
+
+    ```
+    kubectl describe ingress <myingressname>
+    ```
+    {: pre}
+
+    **附註：**這可能需要幾秒鐘的時間，才能適當地建立 Ingress 資源，以及將應用程式設為可用。
+
+9.  從網際網路存取您的應用程式。
+    1.  開啟偏好的 Web 瀏覽器。
+    2.  輸入要存取的應用程式服務的 URL。
+
+        ```
+        http://<mycustomdomain>/<myservicepath1>
+        ```
+        {: codeblock}
+
+#### 使用專用 Ingress 控制器與自訂網域及 TLS 憑證搭配
+{: #private_ingress_tls}
+
+您可以配置專用 Ingress 控制器，將送入的網路資料流量遞送至叢集中的應用程式，以及使用自己的 TLS 憑證來管理 TLS 終止，同時使用自訂網域。
 {:shortdesc}
 
-<dl>
-<dt>說明</dt>
-<dd>您的應用程式設定可能需要您部署多個上游伺服器，它們會處理送入的用戶端要求並且確保高可用性。當用戶端連接至後端應用程式時，在階段作業持續時間，或是在完成作業所需的時間內，由相同的上游伺服器服務某一用戶端可能很有用。您可以配置 Ingress 控制器，一律將送入的網路資料流量遞送至相同的上游伺服器，以確保階段作業親緣性。
+開始之前，請[啟用專用 Ingress 控制器](#private_ingress)。
 
-</br>
-連接至您的後端應用程式的每個用戶端，會由 Ingress 控制器指派給其中一個可用的上游伺服器。Ingress 控制器會建立階段作業 Cookie，它儲存在用戶端應用程式，用戶端應用程式則包含在 Ingress 控制器與用戶端之間每個要求的標頭資訊中。Cookie 中的資訊確保所有要求在整個階段作業中，都由相同的上游伺服器處理。
+若要配置 Ingress 控制器，請執行下列動作：
 
-</br></br>
-當您包含多個服務時，請使用分號 (;) 來區隔它們。</dd>
-<dt>Ingress 資源範例 YAML</dt>
-<dd>
+1.  建立自訂網域。若要建立自訂網域，請與「網域名稱服務 (DNS)」提供者合作，登錄自訂網域。
 
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/sticky-cookie-services: "serviceName=&lt;service_name1&gt; name=&lt;cookie_name1&gt; expires=&lt;expiration_time1&gt; path=&lt;cookie_path1&gt; hash=&lt;hash_algorithm1&gt;;serviceName=&lt;service_name2&gt; name=&lt;cookie_name2&gt; expires=&lt;expiration_time2&gt; path=&lt;cookie_path2&gt; hash=&lt;hash_algorithm2&gt;"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: &lt;service_name1&gt;
-          servicePort: 8080
-      - path: /myapp
-        backend:
-          serviceName: &lt;service_name2&gt;
-          servicePort: 80</code></pre>
+2.  將自訂網域對映至 IBM 提供的專用 Ingress 控制器的可攜式專用 IP 位址，方法是將 IP 位址新增為記錄。若要尋找專用 Ingress 控制器的可攜式專用 IP 位址，請執行 `bx cs albs --cluster <cluster_name>`。
 
-  <table>
-  <caption>表 12. 瞭解 YAML 檔案元件</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png"/> 瞭解 YAML 檔案元件</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>annotations</code></td>
-  <td>請取代下列值：<ul><li><code><em>&lt;service_name&gt;</em></code>：您為應用程式所建立之 Kubernetes 服務的名稱。</li><li><code><em>&lt;cookie_name&gt;</em></code>：選擇在階段作業期間建立的 Sticky Cookie。</li><li><code><em>&lt;expiration_time&gt;</em></code>：Sticky Cookie 到期之前的時間量，以秒、分鐘或小時為單位。此時間與使用者活動無關。Cookie 到期之後，用戶端 Web 瀏覽器會刪除 Cookie，而且不再傳送到 Ingress 控制器。例如，若要設定 1 秒、1 分鐘或 1 小時的有效期限，請輸入 <strong>1s</strong>、<strong>1m</strong> 或 <strong>1h</strong>。</li><li><code><em>&lt;cookie_path&gt;</em></code>：附加至 Ingress 子網域的路徑，且該路徑指出針對哪些網域和子網域傳送 Cookie 到 Ingress 控制器。例如，如果您的 Ingress 網域是 <code>www.myingress.com</code> 且想要在每個用戶端要求中傳送 Cookie，您必須設定 <code>path=/</code>。如果您只想針對 <code>www.myingress.com/myapp</code> 及其所有子網域傳送 Cookie，則必須設定 <code>path=/myapp</code>。</li><li><code><em>&lt;hash_algorithm&gt;</em></code>：保護 Cookie 中資訊的雜湊演算法。僅支援 <code>sha1</code>。SHA1 會根據 Cookie 中的資訊建立雜湊總和，並將此雜湊總和附加到 Cookie。伺服器可以解密 Cookie 中的資訊，然後驗證資料完整性。</li></ul></td>
-  </tr>
-  </tbody></table>
+3.  建立以 PEM 格式編碼的網域的 TLS 憑證及金鑰。
 
- </dd></dl>
+4.  將 TLS 憑證及金鑰儲存至 Kubernetes Secret 中。
+    1.  例如，開啟偏好的編輯器，然後建立名為 `mysecret.yaml` 的 Kubernetes Secret 配置檔。
+    2.  定義使用 TLS 憑證及金鑰的 Secret。
 
+        ```
+        apiVersion: v1
+        kind: Secret
+        metadata:
+          name: <mytlssecret>
+        type: Opaque
+        data:
+          tls.crt: <tlscert>
+          tls.key: <tlskey>
+        ```
+        {: codeblock}
 
-##### **新增自訂 HTTP 標頭至用戶端要求或用戶端回應**
-{: #add_header}
+        <table>
+        <thead>
+        <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+        </thead>
+        <tbody>
+        <tr>
+        <td><code>name</code></td>
+        <td>將 <em>&lt;mytlssecret&gt;</em> 取代為 Kubernetes Secret 的名稱。</td>
+        </tr>
+        <tr>
+        <td><code>tls.cert</code></td>
+        <td>將 <em>&lt;tlscert&gt;</em> 取代為以 base64 格式編碼的自訂 TLS 憑證。</td>
+         </tr>
+         <td><code>tls.key</code></td>
+         <td>將 <em>&lt;tlskey&gt;</em> 取代為以 base64 格式編碼的自訂 TLS 金鑰。</td>
+         </tbody></table>
 
-使用此註釋，可以新增額外的標頭資訊至用戶端要求，然後才將要求傳送至後端應用程式，或新增至用戶端回應，然後才將回應傳送至用戶端。
-{:shortdesc}
+    3.  儲存配置檔。
+    4.  建立叢集的 TLS Secret。
 
-<dl>
-<dt>說明</dt>
-<dd>Ingress 控制器充當用戶端應用程式與後端應用程式之間的 Proxy。傳送到 Ingress 控制器的用戶端要求會被處理（代理），然後放入新的要求，從 Ingress 控制器傳送到您的後端應用程式。代理 (Proxy) 要求會移除一開始從用戶端傳送的 HTTP 標頭資訊，例如使用者名稱。如果您的後端應用程式需要此資訊，可以使用 <strong>ingress.bluemix.net/proxy-add-headers</strong> 註釋，將標頭資訊新增至用戶端要求，之後才將要求從 Ingress 控制器轉遞到您的後端應用程式。
+        ```
+        kubectl apply -f mysecret.yaml
+        ```
+        {: pre}
 
-</br></br>
-當後端應用程式傳送回應給用戶端時，回應會由 Ingress 控制器代理，並從回應移除 HTTP 標頭。用戶端 Web 應用程式可能需要此標頭資訊才能順利處理回應。您可以使用 <strong>ingress.bluemix.net/response-add-headers</strong> 註釋，將標頭資訊新增至用戶端回應，之後才將回應從 Ingress 控制器轉遞到用戶端 Web 應用程式。</dd>
-<dt>Ingress 資源範例 YAML</dt>
-<dd>
+5.  [將應用程式部署至叢集](#cs_apps_cli)。將應用程式部署至叢集時，會自動建立一個以上的 Pod，以在容器中執行您的應用程式。請確定您已將標籤新增至您部署中配置檔的 meta 資料區段。此標籤是識別您應用程式執行所在之所有 Pod 的必要項目，如此才能將 Pod 包含在 Ingress 負載平衡中。
 
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/proxy-add-headers: |
-      serviceName=&lt;service_name1&gt; {
-      &lt;header1> &lt;value1&gt;;
-      &lt;header2> &lt;value2&gt;;
-      }
-      serviceName=&lt;service_name2&gt; {
-      &lt;header3&gt; &lt;value3&gt;;
-      }
-    ingress.bluemix.net/response-add-headers: |
-      serviceName=&lt;service_name1&gt; {
-      "&lt;header1&gt;: &lt;value1&gt;";
-      "&lt;header2&gt;: &lt;value2&gt;";
-      }
-      serviceName=&lt;service_name1&gt; {
-      "&lt;header3&gt;: &lt;value3&gt;";
-      }
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: &lt;service_name1&gt;
-          servicePort: 8080
-      - path: /myapp
-        backend:
-          serviceName: &lt;service_name2&gt;
-          servicePort: 80</code></pre>
+6.  為要公開的應用程式，建立 Kubernetes 服務。只有在您的應用程式是透過叢集內的 Kubernetes 服務公開時，專用 Ingress 控制器才能將應用程式併入 Ingress 負載平衡。
 
- <table>
-  <thead>
-  <th colspan=2><img src="images/idea.png"/> 瞭解 YAML 檔案元件</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>annotations</code></td>
-  <td>請取代下列值：<ul><li><code><em>&lt;service_name&gt;</em></code>：您為應用程式所建立之 Kubernetes 服務的名稱。</li><li><code><em>&lt;header&gt;</em></code>：要新增至用戶端要求或用戶端回應的標頭資訊索引鍵。</li><li><code><em>&lt;value&gt;</em></code>：要新增至用戶端要求或用戶端回應的標頭資訊值。</li></ul></td>
-  </tr>
-  </tbody></table>
+    1.  例如，開啟偏好的編輯器，然後建立名為 `myservice.yaml` 的服務配置檔。
+    2.  為您要公開給大眾使用的應用程式定義服務。
 
- </dd></dl>
+        ```
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: <myservice>
+        spec:
+          selector:
+            <selectorkey>: <selectorvalue>
+          ports:
+           - protocol: TCP
+             port: 8080
+        ```
+       {: codeblock}
 
-##### **從用戶端回應移除 HTTP 標頭資訊**
-{: #remove_response_headers}
+        <table>
+        <thead>
+        <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+        </thead>
+        <tbody>
+        <tr>
+        <td><code>name</code></td>
+        <td>將 <em>&lt;myservice1&gt;</em> 取代為 Kubernetes 服務的名稱。</td>
+        </tr>
+        <tr>
+        <td><code>selector</code></td>
+        <td>輸入標籤索引鍵 (<em>&lt;selectorkey&gt;</em>) 及值 (<em>&lt;selectorvalue&gt;</em>) 配對，以用來將應用程式執行所在的 Pod 設為目標。例如，如果您使用下列選取器 <code>app: code</code>，會將所有其 meta 資料中具有此標籤的 Pod 都包含在負載平衡中。當您將應用程式部署至叢集時，請輸入所使用的相同標籤。</td>
+         </tr>
+         <td><code>port</code></td>
+         <td>服務所接聽的埠。</td>
+         </tbody></table>
 
-使用此註釋，可以移除來自後端應用程式之用戶端回應中包含的標頭資訊，再將回應傳送至用戶端。
-{:shortdesc}
+    3.  儲存變更。
+    4.  在叢集中建立服務。
 
-<dl>
-<dt>說明</dt>
-<dd>Ingress 控制器充當後端應用程式與用戶端 Web 瀏覽器之間的 Proxy。從後端應用程式傳送到 Ingress 控制器的用戶端回應會被處理（代理），然後放入新的回應，從 Ingress 控制器傳送到用戶端 Web 瀏覽器。雖然代理回應會移除一開始從後端應用程式傳送的 HTTP 標頭資訊，但這個程序不一定會移除所有後端應用程式特有的標頭。使用此註釋，可以從用戶端回應移除標頭資訊，之後才將回應從 Ingress 控制器轉遞到用戶端 Web 應用程式。</dd>
-<dt>Ingress 資源範例 YAML</dt>
-<dd>
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/response-remove-headers: |
-      serviceName=&lt;service_name1&gt; {
-      "&lt;header1&gt;";
-      "&lt;header2&gt;";
-      }
-      serviceName=&lt;service_name2&gt; {
-      "&lt;header3&gt;";
-      }
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: &lt;service_name1&gt;
-          servicePort: 8080
-      - path: /myapp
-        backend:
-          serviceName: &lt;service_name2&gt;
-          servicePort: 80</code></pre>
+        ```
+        kubectl apply -f myservice.yaml
+        ```
+        {: pre}
 
- <table>
-  <thead>
-  <th colspan=2><img src="images/idea.png"/> 瞭解 YAML 檔案元件</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>annotations</code></td>
-  <td>請取代下列值：<ul><li><code><em>&lt;service_name&gt;</em></code>：您為應用程式所建立之 Kubernetes 服務的名稱。</li><li><code><em>&lt;header&gt;</em></code>：要從用戶端回應移除的標頭索引鍵。</li></ul></td>
-  </tr>
-  </tbody></table>
+    5.  針對每個您要在專用網路上公開的應用程式，重複這些步驟。
+7.  建立 Ingress 資源。Ingress 資源定義您為應用程式所建立之 Kubernetes 服務的遞送規則，並且供 Ingress 控制器用來將送入網路資料流量遞送給服務。只要每個應用程式都是透過叢集內的 Kubernetes 服務公開時，您就可以使用一個 Ingress 資源來為多個應用程式定義遞送規則。
+    1.  例如，開啟偏好的編輯器，然後建立名為 `myingress.yaml` 的 Ingress 配置檔。
+    2.  在配置檔中定義 Ingress 資源，以使用自訂網域將送入的網路資料流量遞送至服務，以及使用自訂憑證來管理 TLS 終止。針對每個服務，您可以定義附加至自訂網域的個別路徑，以建立應用程式的唯一路徑，例如 `https://mydomain/myapp`。當您將此路徑輸入 Web 瀏覽器時，會將網路資料流量遞送至 Ingress 控制器。Ingress 控制器會查閱關聯的服務，然後將網路資料流量傳送至服務，並進一步傳送至執行應用程式的 Pod。
 
-  </dd></dl>
+        **附註：**應用程式必須接聽 Ingress 資源中所定義的路徑。否則，無法將網路資料流量轉遞至應用程式。大部分的應用程式不會接聽特定路徑，但使用根路徑及特定埠。在此情況下，請將根路徑定義為 `/`，並且不要為應用程式指定個別路徑。
 
+        ```
+        apiVersion: extensions/v1beta1
+        kind: Ingress
+        metadata:
+          name: <myingressname>
+          annotations:
+            ingress.bluemix.net/ALB-ID: "<private_ALB_ID>"
+        spec:
+          tls:
+          - hosts:
+            - <mycustomdomain>
+            secretName: <mytlssecret>
+          rules:
+          - host: <mycustomdomain>
+            http:
+              paths:
+              - path: /<myservicepath1>
+                backend:
+                  serviceName: <myservice1>
+                  servicePort: 80
+              - path: /<myservicepath2>
+                backend:
+                  serviceName: <myservice2>
+                  servicePort: 80
+        ```
+        {: codeblock}
 
-##### **將不安全的 HTTP 用戶端要求重新導向至 HTTPS**
-{: #redirect_http_to_https}
+        <table>
+        <thead>
+        <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+        </thead>
+        <tbody>
+        <tr>
+        <td><code>name</code></td>
+        <td>將 <em>&lt;myingressname&gt;</em> 取代為 Ingress 資源的名稱。</td>
+        </tr>
+        <tr>
+        <td><code>ingress.bluemix.net/ALB-ID</code></td>
+        <td>將 <em>&lt;private_ALB_ID&gt;</em> 取代為專用 Ingress 控制器的 ALB ID。執行 <code>bx cs albs --cluster <my_cluster></code> 以尋找 ALB ID。</td>
+        </tr>
+        <tr>
+        <td><code>tls/hosts</code></td>
+        <td>將 <em>&lt;mycustomdomain&gt;</em> 取代為您要配置 TLS 終止的自訂網域。
 
-使用重新導向註釋，可以將不安全的 HTTP 用戶端要求重新導向至 HTTPS。
-{:shortdesc}
+        </br></br>
+        <strong>附註：</strong>請不要使用 &ast; 作為您的主機，也不要讓主機內容保留為空白，以避免建立 Ingress 期間發生失敗。</td>
+        </tr>
+        <tr>
+        <td><code>tls/secretName</code></td>
+        <td>將 <em>&lt;mytlssecret&gt;</em> 取代為您先前建立的 Secret 的名稱，而此 Secret 可保留自訂 TLS 憑證及金鑰來管理自訂網域的 TLS 終止。</tr>
+        <tr>
+        <td><code>host</code></td>
+        <td>將 <em>&lt;mycustomdomain&gt;</em> 取代為您要配置 TLS 終止的自訂網域。
 
-<dl>
-<dt>說明</dt>
-<dd>您設定 Ingress 控制器，以 IBM 提供的 TLS 憑證或您的自訂 TLS 憑證來保護網域。有些使用者可能會嘗試對 Ingress 控制器網域使用不安全的 HTTP 要求存取您的應用程式，例如 <code>http://www.myingress.com</code>，而不是使用 <code>https</code>。您可以使用重新導向註釋，一律將不安全的 HTTP 用戶端要求重新導向至 HTTPS。如果您不使用此註釋，依預設，不安全的 HTTP 要求不會轉換成 HTTPS 要求，且可能使得機密資訊公開給大眾而未加密。
+        </br></br>
+        <strong>附註：</strong>請不要使用 &ast; 作為您的主機，也不要讓主機內容保留為空白，以避免建立 Ingress 期間發生失敗。</td>
+        </tr>
+        <tr>
+        <td><code>path</code></td>
+        <td>將 <em>&lt;myservicepath1&gt;</em> 取代為斜線或應用程式所接聽的唯一路徑，以將網路資料流量轉遞至應用程式。
 
-</br></br>
-依預設，會停用將 HTTP 要求重新導向至 HTTPS。</dd>
-<dt>Ingress 資源範例 YAML</dt>
+        </br>
+        針對每個 Kubernetes 服務，您可以定義附加至 IBM 所提供之網域的個別路徑，以建立應用程式的唯一路徑，例如 <code>ingress_domain/myservicepath1</code>。當您將此路徑輸入 Web 瀏覽器時，會將網路資料流量遞送至 Ingress 控制器。Ingress 控制器會查閱相關聯的服務，然後將網路資料流量傳送至服務，並使用相同路徑傳送至執行應用程式的 Pod。應用程式必須設定成接聽此路徑，以接收送入的網路資料流量。
 
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/redirect-to-https: "True"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-</dd></dl>
+        </br>
+        許多應用程式不會接聽特定路徑，但卻使用根路徑及特定埠。在此情況下，請將根路徑定義為 <code>/</code>，並且不要為應用程式指定個別路徑。
 
-##### **在 Ingress 控制器上停用後端回應的緩衝**
-{: #response_buffer}
+        </br></br>
+        範例：<ul><li>針對 <code>https://mycustomdomain/</code>，輸入 <code>/</code> 作為路徑。</li><li>針對 <code>https://mycustomdomain/myservicepath</code>，輸入 <code>/myservicepath</code> 作為路徑。</li></ul>
+        <strong>提示：</strong>如果您要配置與應用程式所接聽路徑不同的 Ingress 接聽路徑，則可以使用[重新編寫註釋](cs_annotations.html#rewrite-path)來建立應用程式的正確遞送。</td>
+        </tr>
+        <tr>
+        <td><code>serviceName</code></td>
+        <td>將 <em>&lt;myservice1&gt;</em> 取代為您為應用程式建立 Kubernetes 服務時所使用的服務名稱。</td>
+        </tr>
+        <tr>
+        <td><code>servicePort</code></td>
+        <td>您的服務所接聽的埠。請使用您為應用程式建立 Kubernetes 服務時所定義的相同埠。</td>
+        </tr>
+        </tbody></table>
 
-使用緩衝區註釋，可以停用在資料傳送至用戶端時，在 Ingress 控制器上儲存回應資料。
-{:shortdesc}
+    3.  儲存變更。
+    4.  建立叢集的 Ingress 資源。
 
-<dl>
-<dt>說明</dt>
-<dd>Ingress 控制器充當後端應用程式與用戶端 Web 瀏覽器之間的 Proxy。回應從後端應用程式傳送至用戶端時，依預設會將回應資料緩衝在 Ingress 控制器上。Ingress 控制器會代理用戶端回應，並開始按照用戶端的速度將回應傳送至用戶端。Ingress 控制器收到來自後端應用程式的所有資料之後，會關閉後端連線。從 Ingress 控制器到用戶端的連線會維持開啟，直到用戶端收到所有資料為止。
+        ```
+        kubectl apply -f myingress.yaml
+        ```
+        {: pre}
 
-</br></br>
-如果停用在 Ingress 控制器上緩衝回應資料，資料立即從 Ingress 控制器傳送至用戶端。用戶端必須能夠按照 Ingress 控制器的速度處理送入的資料。如果用戶端太慢，資料可能會遺失。
-</br></br>
-依預設會啟用 Ingress 控制器上的回應資料緩衝。</dd>
-<dt>Ingress 資源範例 YAML</dt>
-<dd>
+8.  驗證已順利建立 Ingress 資源。將 <em>&lt;myingressname&gt;</em> 取代為您先前建立的 Ingress 資源的名稱。
 
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/proxy-buffering: "False"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-</dd></dl>
+    ```
+    kubectl describe ingress <myingressname>
+    ```
+    {: pre}
 
+    **附註：**這可能需要幾秒鐘的時間，才能適當地建立 Ingress 資源，以及將應用程式設為可用。
 
-##### **為 Ingress 控制器設定自訂連接逾時和讀取逾時**
-{: #timeout}
+9.  從網際網路存取您的應用程式。
+    1.  開啟偏好的 Web 瀏覽器。
+    2.  輸入要存取的應用程式服務的 URL。
 
-調整 Ingress 控制器連接及讀取後端應用程式時等候的時間，在此時間之後，後端應用程式將被視為無法使用。
-{:shortdesc}
-
-<dl>
-<dt>說明</dt>
-<dd>用戶端要求傳送至 Ingress 控制器時，Ingress 控制器會開啟與後端應用程式的連線。依預設，Ingress 控制器會等待 60 秒，以便從後端應用程式收到回覆。如果後端應用程式未在 60 秒內回答，則會中斷連線要求，且後端應用程式將被視為無法使用。
-</br></br>
-Ingress 控制器連接至後端應用程式之後，Ingress 控制器會讀取來自後端應用程式的回應資料。在此讀取作業期間，Ingress 控制器在兩次讀取作業之間最多等待 60 秒，以接收來自後端應用程式的資料。如果後端應用程式未在 60 秒內傳送資料，則會關閉與後端應用程式的連線，且應用程式將被視為無法使用。
-</br></br>
-60 秒的連接逾時和讀取逾時，是 Proxy 上的預設逾時，理想中不應該加以變更。
-</br></br>
-如果應用程式的可用性不穩定，或是您的應用程式因為高工作負載而回應太慢，您或許會想增加連接逾時或讀取逾時。請記住，增加逾時會影響 Ingress 控制器的效能，因為與後端應用程式的連線必須維持開啟，直到達到逾時為止。
-</br></br>
-另一方面，您可以減少逾時以提高 Ingress 控制器的效能。請確保您的後端應用程式能夠在指定的逾時內處理要求，即使是在較高工作負載的時段。</dd>
-<dt>Ingress 資源範例 YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/proxy-connect-timeout: "&lt;connect_timeout&gt;s"
-    ingress.bluemix.net/proxy-read-timeout: "&lt;read_timeout&gt;s"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-
-<table>
-  <thead>
-  <th colspan=2><img src="images/idea.png"/> 瞭解 YAML 檔案元件</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>annotations</code></td>
-  <td>請取代下列值：<ul><li><code><em>&lt;connect_timeout&gt;</em></code>：輸入要等待連接後端應用程式的秒數，例如 <strong>65s</strong>。
-
-  </br></br>
-  <strong>附註：</strong>連接逾時不可超過 75 秒。</li><li><code><em>&lt;read_timeout&gt;</em></code>：輸入要在讀取後端應用程式之前等待的秒數，例如 <strong>65s</strong>。</li></ul></td>
-  </tr>
-  </tbody></table>
-
-  </dd></dl>
-
-##### **設定用戶端要求內文的容許大小上限**
-{: #client_max_body_size}
-
-調整用戶端可以傳送作為要求一部分的內文大小。
-{:shortdesc}
-
-<dl>
-<dt>說明</dt>
-<dd>為了維護預期的效能，用戶端要求內文大小上限設為 1 MB。當內文大小超過限制的用戶端要求傳送至 Ingress 控制器，而且用戶端不容許將資料分成多個片段時，Ingress 控制器會傳回 413（要求的實體太大）的 HTTP 回應給用戶端。在要求內文的大小減少之前，用戶端及 Ingress 控制器之間無法進行連線。當用戶端容許資料分割成多個片段時，資料會分成 1 MB 的套件，然後傳送至 Ingress 控制器。
-
-</br></br>
-您可能會想要增加內文大小上限，因為您預期用戶端要求的內文大小會大於 1 MB。例如，您要讓用戶端能上傳大型檔案。增加要求內文大小上限可能會影響 Ingress 控制器的效能，因為對用戶端的連線必須維持開啟，直到收到要求為止。
-</br></br>
-<strong>附註：</strong>部分用戶端 Web 瀏覽器無法適當地顯示 413 HTTP 回應訊息。</dd>
-<dt>Ingress 資源範例 YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/client-max-body-size: "&lt;size&gt;"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-
-<table>
-  <thead>
-  <th colspan=2><img src="images/idea.png"/> 瞭解 YAML 檔案元件</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>annotations</code></td>
-  <td>請取代下列值：<ul><li><code><em>&lt;size&gt;</em></code>：輸入用戶端回應內文的大小上限。例如，若要將它設為 200 MB，請定義 <strong>200m</strong>。
-
-  </br></br>
-  <strong>附註：</strong>您可以將大小設為 0，以停用用戶端要求內文大小的檢查。</li></ul></td>
-  </tr>
-  </tbody></table>
-
-  </dd></dl>
-  
-
-##### **變更 HTTP 及 HTTPS 網路資料流量的預設埠**
-{: #custom_http_https_ports}
-
-使用此註釋，可變更 HTTP 及 HTTPS 網路資料流量的預設埠，HTTP 為埠 80，HTTPS 為埠 443。
-{:shortdesc}
-
-<dl>
-<dt>說明</dt>
-<dd>依預設，Ingress 控制器配置為在埠 80 上接聽送入的 HTTP 網路資料流量，並在埠 443 上接聽送入的 HTTPS 網路資料流量。您可以變更預設埠來新增 Ingress 控制器網域的安裝，或是只啟用 HTTPS 埠。
-</dd>
-
-
-<dt>Ingress 資源範例 YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/custom-port: "protocol=&lt;protocol1&gt; port=&lt;port1&gt;;protocol=&lt;protocol2&gt;port=&lt;port2&gt;"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-
-<table>
-  <thead>
-  <th colspan=2><img src="images/idea.png"/> 瞭解 YAML 檔案元件</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>annotations</code></td>
-  <td>請取代下列值：<ul><li><code><em>&lt;protocol&gt;</em></code>：輸入 <strong>http</strong> 或 <strong>https</strong> 來變更送入之 HTTP 或 HTTPS 網路資料流量的預設埠。</li>
-  <li><code><em>&lt;port&gt;</em></code>：輸入要用於送入之 HTTP 或 HTTPS 網路資料流量的埠號。</li></ul>
-  <p><strong>附註：</strong>當為 HTTP 或 HTTPS 指定自訂埠時，預設埠對於 HTTP 和 HTTPS 便不再有效。例如，若要將 HTTPS 的預設埠變更為 8443，但 HTTP 使用預設埠，您必須兩者都設定自訂埠：<code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>。</p>
-  </td>
-  </tr>
-  </tbody></table>
-
-  </dd>
-  <dt>用法</dt>
-  <dd><ol><li>檢閱 Ingress 控制器的開啟埠。
-<pre class="pre">
-<code>kubectl get service -n kube-system</code></pre>
-CLI 輸出會與下列內容類似：
-<pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.10.10.149   169.60.16.246   80:30776/TCP,443:30412/TCP   8d</code></pre></li>
-<li>開啟 Ingress 控制器配置對映。
-<pre class="pre">
-<code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>將非預設的 HTTP 及 HTTPS 埠新增至配置對映。將 &lt;port&gt; 取代為您要開啟的 HTTP 或 HTTPS 埠。
-<pre class="codeblock">
-<code>apiVersion: v1
-kind: ConfigMap
-data:
-  public-ports: &lt;port1&gt;;&lt;port2&gt;
-metadata:
-  creationTimestamp: 2017-08-22T19:06:51Z
-  name: ibm-cloud-provider-ingress-cm
-  namespace: kube-system
-  resourceVersion: "1320"
-  selfLink: /api/v1/namespaces/kube-system/configmaps/ibm-cloud-provider-ingress-cm
-  uid: &lt;uid&gt;</code></pre></li>
-  <li>驗證您的 Ingress 控制器已使用非預設埠重新配置。
-<pre class="pre">
-<code>kubectl get service -n kube-system</code></pre>
-CLI 輸出會與下列內容類似：
-<pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
-<li>配置您的 Ingress，以在將送入的網路資料流量遞送至服務時使用非預設埠。請在此參照中使用範例 YAML。</li>
-<li>更新 Ingress 控制器配置。
-<pre class="pre">
-<code>kubectl apply -f &lt;yaml_file&gt;</code></pre>
-</li>
-<li>開啟偏好的 Web 瀏覽器以存取您的應用程式。範例：<code>https://&lt;ibmdomain&gt;:&lt;port&gt;/&lt;service_path&gt;/</code></li></ol></dd></dl>
-
-
-
-
-
-
-
-
-<br />
-
+        ```
+        https://<mycustomdomain>/<myservicepath1>
+        ```
+        {: codeblock}
 
 ## 管理 IP 位址及子網路
 {: #cs_cluster_ip_subnet}
@@ -1749,11 +1900,58 @@ public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,
 您可以使用可攜式公用及專用子網路及 IP 位址來公開叢集中的應用程式，並且將它們設為可從網際網路或在專用網路上進行存取。
 {:shortdesc}
 
-在 {{site.data.keyword.containershort_notm}} 中，您可以將網路子網路新增至叢集，為 Kubernetes 服務新增穩定的可攜式 IP。當您建立標準叢集時，{{site.data.keyword.containershort_notm}} 會自動佈建 1 個可攜式公用子網路、5 個可攜式公用及 5 個可攜式專用 IP 位址。可攜式 IP 位址是靜態的，不會在移除工作者節點或甚至叢集時變更。
+在 {{site.data.keyword.containershort_notm}} 中，您可以將網路子網路新增至叢集，為 Kubernetes 服務新增穩定的可攜式 IP。當您建立標準叢集時，{{site.data.keyword.containershort_notm}} 會自動佈建 1 個可攜式公用子網路（含 5 個可攜式公用 IP 位址）及 1 個可攜式專用子網路（含 5 個可攜式專用 IP 位址）。可攜式 IP 位址是靜態的，不會在移除工作者節點或甚至叢集時變更。
 
- 兩個可攜式 IP 位址（一個公用、一個專用）會用於 [Ingress 控制器](#cs_apps_public_ingress)，您可以用 Ingress 控制器，藉由使用公用路徑來公開叢集中多個應用程式。4 個可攜式公用和 4 個專用 IP 位址可用來透過[建立負載平衡器服務](#cs_apps_public_load_balancer)來公開應用程式。 
+ 兩個可攜式 IP 位址（一個公用、一個專用）會用於 [Ingress 控制器](#cs_apps_public_ingress)，您可以使用 Ingress 控制器，公開叢集中的多個應用程式。4 個可攜式公用和 4 個可攜式專用 IP 位址可用來藉由[建立負載平衡器服務](#cs_apps_public_load_balancer)來公開應用程式。
 
 **附註：**可攜式公用 IP 位址是按月收費。如果您選擇在佈建叢集之後移除可攜式公用 IP 位址，則仍需要按月支付費用，即使您僅短時間使用。
+
+
+
+1.  建立名為 `myservice.yaml` 的 Kubernetes 服務配置檔，並且使用虛擬負載平衡器 IP 位址來定義類型為 `LoadBalancer` 的服務。下列範例使用 IP 位址 1.1.1.1 作為負載平衡器 IP 位址。
+
+    ```
+    apiVersion: v1
+    kind: Service
+    metadata:
+      labels:
+        run: myservice
+      name: myservice
+      namespace: default
+    spec:
+      ports:
+      - port: 80
+        protocol: TCP
+        targetPort: 80
+      selector:
+        run: myservice
+      sessionAffinity: None
+      type: LoadBalancer
+      loadBalancerIP: 1.1.1.1
+    ```
+    {: codeblock}
+
+2.  在叢集中建立服務。
+
+    ```
+    kubectl apply -f myservice.yaml
+    ```
+    {: pre}
+
+3.  檢查服務。
+
+    ```
+    kubectl describe service myservice
+    ```
+    {: pre}
+
+    **附註：**建立此服務失敗，因為 Kubernetes 主節點在 Kubernetes 配置對映中找不到指定的負載平衡器 IP 位址。當您執行此指令時，可以看到錯誤訊息以及叢集可用的公用 IP 位址清單。
+
+    ```
+    Error on cloud load balancer a8bfa26552e8511e7bee4324285f6a4a for service default/myservice with UID 8bfa2655-2e85-11e7-bee4-324285f6a4af: Requested cloud provider IP 1.1.1.1 is not available. The following cloud provider IPs are available: <list_of_IP_addresses>
+    ```
+    {: screen}
+
 
 
 
@@ -1882,6 +2080,9 @@ public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,
 <br />
 
 
+
+
+
 ## 調整應用程式
 {: #cs_apps_scaling}
 
@@ -1907,7 +2108,7 @@ public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,
 
     <table>
     <thead>
-    <th colspan=2><img src="images/idea.png"/> 瞭解此指令的元件</th>
+    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解此指令的元件</th>
     </thead>
     <tbody>
     <tr>
@@ -1937,7 +2138,7 @@ public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,
 
     <table>
     <thead>
-    <th colspan=2><img src="images/idea.png"/> 瞭解此指令的元件</th>
+    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解此指令的元件</th>
     </thead>
     <tbody>
     <tr>
@@ -2097,7 +2298,7 @@ Kubernetes Secret 是一種儲存機密資訊（例如使用者名稱、密碼�
 
     <table>
     <thead>
-    <th colspan=2><img src="images/idea.png"/> 瞭解 YAML 檔案元件</th>
+    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
     </thead>
     <tbody>
     <tr>
@@ -2159,7 +2360,7 @@ Kubernetes Secret 是一種儲存機密資訊（例如使用者名稱、密碼�
     ```
     {: screen}
 
-    
+
 
 9.  實作應用程式時，請將它配置為在裝載目錄中尋找名為 **binding** 的 Secret 檔案、剖析 JSON 內容，以及判定可存取 {{site.data.keyword.Bluemix_notm}} 服務的 URL 及服務認證。
 
@@ -2176,13 +2377,17 @@ Kubernetes Secret 是一種儲存機密資訊（例如使用者名稱、密碼�
 
 IBM 已叢集化支援持續性磁區的 NFS 檔案儲存空間，可提供資料的高可用性。
 
+
+當「{{site.data.keyword.Bluemix_dedicated_notm}}」帳戶[啟用叢集功能](cs_ov.html#setup_dedicated)時，您不是使用此作業，而是必須[開立支援問題單](/docs/support/index.html#contacting-support)。藉由開立問題單，您可以要求備份磁區、從磁區還原，以及其他儲存空間功能。
+
+
 1.  檢閱可用的儲存空間類別。{{site.data.keyword.containerlong}} 提供八個預先定義的儲存空間類別，因此叢集管理者不需要建立任何儲存空間類別。`ibmc-file-bronze` 儲存空間類別與 `default` 儲存空間類別相同。
 
     ```
     kubectl get storageclasses
     ```
     {: pre}
-    
+
     ```
     $ kubectl get storageclasses
     NAME                         TYPE
@@ -2202,7 +2407,7 @@ IBM 已叢集化支援持續性磁區的 NFS 檔案儲存空間，可提供資�
 
 3.  檢閱儲存空間類別的 IOPS 和可用的儲存空間大小。
     - 銅級、銀級和金級儲存空間類別使用 Endurance 儲存空間，每個類別各有一個定義的 IOPS per GB。IOPS 總計取決於儲存空間的大小。例如，每 GB 4 IOPS 的 1000Gi pvc 具有總計 4000 的 IOPS。
- 
+
     ```
     kubectl describe storageclasses ibmc-file-silver
     ```
@@ -2214,7 +2419,7 @@ IBM 已叢集化支援持續性磁區的 NFS 檔案儲存空間，可提供資�
     Parameters: iopsPerGB=4,sizeRange=20Gi,40Gi,80Gi,100Gi,250Gi,500Gi,1000Gi,2000Gi,4000Gi,8000Gi,12000Gi
     ```
     {: screen}
-    
+
     - 自訂儲存空間類別使用 [Performance 儲存空間 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/topic/performance-storage)，並且對總計 IOPS 和大小有不同的選項。
 
     ```
@@ -2230,7 +2435,7 @@ IBM 已叢集化支援持續性磁區的 NFS 檔案儲存空間，可提供資�
     {: screen}
 
 4.  建立配置檔來定義持續性磁區宣告，以及將配置儲存為 `.yaml` 檔案。
-    
+
     銅級、銀級、金級類別的範例：
 
     ```
@@ -2248,7 +2453,7 @@ IBM 已叢集化支援持續性磁區的 NFS 檔案儲存空間，可提供資�
           storage: 20Gi
     ```
     {: codeblock}
-    
+
     自訂類別的範例：
 
     ```
@@ -2270,7 +2475,7 @@ IBM 已叢集化支援持續性磁區的 NFS 檔案儲存空間，可提供資�
 
     <table>
     <thead>
-    <th colspan=2><img src="images/idea.png"/> 瞭解 YAML 檔案元件</th>
+    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
     </thead>
     <tbody>
     <tr>
@@ -2358,7 +2563,7 @@ IBM 已叢集化支援持續性磁區的 NFS 檔案儲存空間，可提供資�
 
     <table>
     <thead>
-    <th colspan=2><img src="images/idea.png"/> 瞭解 YAML 檔案元件</th>
+    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
     </thead>
     <tbody>
     <tr>
@@ -2430,7 +2635,8 @@ IBM 已叢集化支援持續性磁區的 NFS 檔案儲存空間，可提供資�
 -   暫時將使用者新增至 root 群組。
 -   使用正確的使用者許可權在磁區裝載路徑中建立目錄。
 
-對於 {{site.data.keyword.containershort_notm}}，磁區裝載路徑的預設擁有者是擁有者 `nobody`。使用 NFS 儲存空間，如果擁有者不存在於 Pod 本端，則會建立 `nobody` 使用者。磁區設定成辨識容器中的 root 使用者，對部分應用程式而言，這是容器內唯一的使用者。不過，許多應用程式會指定寫入至容器裝載路徑且不是 `nobody` 的非 root 使用者。
+對於 {{site.data.keyword.containershort_notm}}，磁區裝載路徑的預設擁有者是擁有者 `nobody`。使用 NFS 儲存空間，如果擁有者不存在於 Pod 本端，則會建立 `nobody` 使用者。磁區設定成辨識容器中的 root 使用者，對部分應用程式而言，這是容器內唯一的使用者。不過，許多應用程式會指定寫入至容器裝載路徑且不是 `nobody` 的非 root 使用者。部分應用程式指定磁區必須由 root 使用者擁有。由於安全考量，通常應用程式不會使用 root 使用者。不過，如果您的應用程式需要 root 使用者，您可以聯絡 [{{site.data.keyword.Bluemix_notm}} 支援中心](/docs/support/index.html#contacting-support)以取得協助。
+
 
 1.  在本端目錄中建立 Dockerfile。此範例 Dockerfile 會建立名為 `myguest` 的非 root 使用者。
 
@@ -2615,5 +2821,3 @@ IBM 已叢集化支援持續性磁區的 NFS 檔案儲存空間，可提供資�
     {: screen}
 
     此輸出顯示 root 具有磁區裝載路徑 `mnt/myvol/` 的讀取、寫入及執行權，但非 root myguest 使用者則具有 `mnt/myvol/mydata` 資料夾的讀取及寫入權。因為這些更新過的許可權，所以非 root 使用者現在可以將資料寫入至持續性磁區。
-
-

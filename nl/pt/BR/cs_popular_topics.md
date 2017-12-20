@@ -1,8 +1,6 @@
 ---
 
-copyright:
-  years: 2014, 2017
-lastupdated: "2017-10-17"
+copyright: years: 2014, 2017 lastupdated: "02/11/2017
 
 ---
 
@@ -17,14 +15,14 @@ lastupdated: "2017-10-17"
 
 
 # Tópicos populares para {{site.data.keyword.containershort_notm}}
-{: #cs_internal}
+{: #cs_popular_topics}
 
 Confira no que os desenvolvedores de contêiner estão interessados.
 {:shortdesc}
 
 <table>
 <thead>
-<th colspan=2><img src="images/idea.png"/>Tópicos populares para contêineres e clusters do Kubernetes</th>
+<th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/>Tópicos populares para contêineres e clusters do Kubernetes</th>
 </thead>
 <tbody>
 <tr>
@@ -46,6 +44,10 @@ Confira no que os desenvolvedores de contêiner estão interessados.
 <tr>
 <td>[Atualizar para Kubernetes 1.7](cs_versions.html)</td>
 <td>Revise as mudanças feitas em seus clusters antes de atualizar para o Kubernetes 1.7.</td>
+</tr>
+<tr>
+<td>[API de REST para clusters ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://us-south.containers.bluemix.net/swagger)</td>
+<td>Visualize a documentação da API para gerenciar o {{site.data.keyword.containershort_notm}}.</td>
 </tr>
 </tbody></table>
 

@@ -388,13 +388,13 @@
 		<text id="XMLID_305_" transform="matrix(1 0 0 1 305.438 325.604)" class="st31 st32">ElasticSearch</text>
 		<text id="XMLID_304_" transform="matrix(1 0 0 1 482.278 325.466)" class="st31 st32">Grafana</text>
 		<text id="XMLID_303_" transform="matrix(1 0 0 1 535.463 325.465)" class="st31 st32">Kibana</text>
-		<text id="XMLID_273_" transform="matrix(1 0 0 1 500 243.442)" class="st31 st32">使用者介面</text>
+		<text id="XMLID_273_" transform="matrix(1 0 0 1 490.646 243.442)" class="st31 st32">使用者介面</text>
 		<text transform="matrix(1 0 0 1 386.852 325.604)" class="st31 st32">多方承租戶</text>
 		<text transform="matrix(1 0 0 1 400.852 340.004)" class="st31 st32">Proxy</text>
-		<text id="XMLID_36_" transform="matrix(1 0 0 1 468.949 195.927)" class="st31 st33">IBM Bluemix</text>
+		<text id="XMLID_36_" transform="matrix(1 0 0 1 468.949 195.927)" class="st31 st33">IBM Cloud</text>
 		<text transform="matrix(1 0 0 1 261.097 236.528)" class="st31 st32">記載</text>
 		<text transform="matrix(1 0 0 1 250 250.928)" class="st31 st32">專用網路</text>
-		<text id="XMLID_301_" transform="matrix(1 0 0 1 -111.616 195.927)" class="st31 st33">IBM Bluemix Container Service</text>
+		<text id="XMLID_301_" transform="matrix(1 0 0 1 -111.616 195.927)" class="st31 st33">IBM Cloud Container Service</text>
 		<text id="XMLID_300_" transform="matrix(1 0 0 1 75.16 195.927)" class="st34"><tspan x="0" y="0" class="st31 st32">     </tspan><tspan x="14.3" y="0" class="st31 st33">記載</tspan></text>
 		<text id="XMLID_269_" transform="matrix(1 0 0 1 32.108 303.554)" class="st31 st35">SSL 加密</text>
 		<text transform="matrix(1 0 0 1 -70 234.786)" class="st31 st32">容器</text>

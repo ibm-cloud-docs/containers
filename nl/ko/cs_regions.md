@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-18"
+lastupdated: "2017-11-17"
 
 ---
 
@@ -22,12 +22,26 @@ lastupdated: "2017-10-18"
 
 [{{site.data.keyword.Bluemix_notm}} 지역](#bluemix_regions)은 [{{site.data.keyword.containershort_notm}} 지역](#container_regions)과 다릅니다.
 
+![{{site.data.keyword.containershort_notm}} 지역 및 데이터 센터](/images/regions.png)
+
+그림 1. {{site.data.keyword.containershort_notm}} 지역 및 데이터 센터
+
 지원되는 {{site.data.keyword.containershort_notm}} 지역:
+  * AP 북부
   * AP 남부
   * 중앙 유럽
   * 영국 남부
   * 미국 동부
   * 미국 남부
+
+다음 지역에 Kubernetes 라이트 클러스터를 작성할 수 있습니다.
+  * AP 남부
+  * 중앙 유럽
+  * 영국 남부
+  * 미국 남부
+
+  **참고**: 유료 고객이 아닌 경우 미국 남부 지역에서 라이트 클러스터를 작성할 수 없습니다.
+
 
 ## {{site.data.keyword.Bluemix_notm}} 지역 API 엔드포인트
 {: #bluemix_regions}
@@ -47,7 +61,7 @@ lastupdated: "2017-10-18"
            ```
       {: pre}
 
-  * 시드니
+  * 시드니 및 AP 북부
       ```
         bx login -a api.au-syd.bluemix.net
         ```
@@ -77,13 +91,12 @@ lastupdated: "2017-10-18"
 {:shortdesc}
 
 {{site.data.keyword.containershort_notm}} 지역 API 엔드포인트:
+  * AP 북부: `https://ap-north.containers.bluemix.net`
   * AP 남부: `https://ap-south.containers.bluemix.net`
   * 중앙 유럽: `https://eu-central.containers.bluemix.net`
   * 영국 남부: `https://uk-south.containers.bluemix.net`
   * 미국 동부: `https://us-east.containers.bluemix.net`
   * 미국 남부: `https://us-south.containers.bluemix.net`
-
-**참고:** 미국 동부는 CLI 명령으로만 사용할 수 있습니다.
 
 현재 사용자가 속해 있는 {{site.data.keyword.containershort_notm}} 지역을 확인하려면 `bx cs api`를 실행하고 **지역** 필드를 검토하십시오.
 
@@ -97,6 +110,12 @@ lastupdated: "2017-10-18"
 </br>
 
 {{site.data.keyword.containershort_notm}} 지역에 로그인하기 위한 예제 명령:
+  * AP 북부:
+    ```
+    bx cs init --host https://ap-north.containers.bluemix.net
+    ```
+  {: pre}
+
   * AP 남부:
     ```
           bx cs init --host https://ap-south.containers.bluemix.net
@@ -127,14 +146,6 @@ lastupdated: "2017-10-18"
         ```
     {: pre}
 
-### 컨테이너 서비스 지역에 라이트 클러스터 작성
-{: #lite_regions}
-
-다음 지역에 Kubernetes 라이트 클러스터를 작성할 수 있습니다.
-  * AP 남부
-  * 중앙 유럽
-  * 영국 남부
-  * 미국 남부
 
 ### 컨테이너 서비스에 사용 가능한 위치
 {: #locations}
@@ -143,10 +154,11 @@ lastupdated: "2017-10-18"
 
   | 지역| 위치| 구/군/시|
   |--------|----------|------|
+  | AP 북부 | hkg02, tok02 | 홍콩, 도쿄 |
   | AP 남부      | mel01, syd01, syd04        | 멜버른, 시드니 |
-  | 중앙 유럽    | ams03, fra02        | 암스테르담, 프랑크푸르트|
+  | 중앙 유럽    | ams03, fra02, par01        | 암스테르담, 프랑크푸르트, 파리 |
   | 영국 남부    | lon02, lon04        | 런던|
-  | 미국 동부    | wdc06, wdc07        | 워싱턴, DC |
+  | 미국 동부    | tor01, wdc06, wdc07        | 토론토, 워싱턴, DC |
   | 미국 남부| dal10, dal12, dal13       | Dallas
 |
 
@@ -164,6 +176,7 @@ lastupdated: "2017-10-18"
 </br>
 
 API 명령에 대한 문서를 보려면 보려는 지역의 엔드포인트에 `swagger-api`를 추가하십시오.
+  * AP 북부: https://ap-north.containers.bluemix.net/swagger-api/
   * AP 남부: https://ap-south.containers.bluemix.net/swagger-api/
   * 중앙 유럽: https://eu-central.containers.bluemix.net/swagger-api/
   * 영국 남부: https://uk-south.containers.bluemix.net/swagger-api/

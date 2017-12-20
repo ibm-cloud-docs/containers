@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-17"
+lastupdated: "2017-11-02"
 
 ---
 
@@ -17,14 +17,14 @@ lastupdated: "2017-10-17"
 
 
 # {{site.data.keyword.containershort_notm}} でよく使用されるトピック
-{: #cs_internal}
+{: #cs_popular_topics}
 
 開発者が関心のあるコンテナーをご確認ください。
 {:shortdesc}
 
 <table>
 <thead>
-<th colspan=2><img src="images/idea.png"/>コンテナーと Kubernetes クラスターでよく使用されるトピック</th>
+<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>コンテナーと Kubernetes クラスターでよく使用されるトピック</th>
 </thead>
 <tbody>
 <tr>
@@ -37,7 +37,7 @@ lastupdated: "2017-10-17"
 </tr>
 <tr>
 <td>[アプリをクラスターにデプロイする](cs_apps.html)</td>
-<td>Kubernetes の技法を利用して、アプリをデプロイし、アプリの常時稼働を確保することができます。例えば、ダウン時間なしでローリング更新とロールバックを実行できます。</td>
+<td>Kubernetes の技法を利用して、アプリをデプロイし、アプリの常時稼働を確保することができます。 例えば、ダウン時間なしでローリング更新とロールバックを実行できます。</td>
 </tr>
 <tr>
 <td>[CLI のセットアップ](cs_cli_install.html)</td>
@@ -46,6 +46,10 @@ lastupdated: "2017-10-17"
 <tr>
 <td>[Kubernetes 1.7 への更新](cs_versions.html)</td>
 <td>Kubernetes 1.7 に更新する前に、クラスターへの変更を確認します。</td>
+</tr>
+<tr>
+<td>[クラスター用の REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://us-south.containers.bluemix.net/swagger)</td>
+<td>{{site.data.keyword.containershort_notm}} を管理するための API 文書を表示します。</td>
 </tr>
 </tbody></table>
 

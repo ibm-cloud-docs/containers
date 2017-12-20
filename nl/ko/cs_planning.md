@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-24"
+lastupdated: "2017-11-28"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2017-10-24"
 # 클러스터 및 앱 계획
 {: #cs_planning}
 
-{{site.data.keyword.containershort_notm}}는 조직의 기능 및 비기능 요구사항을 충족하도록 Kubernetes 클러스터를 구성하고 사용자 정의하기 위한 다수의 옵션을 제공합니다. 이러한 구성 중 일부는 클러스터가 작성된 이후에 변경이 불가능합니다. 이러한 구성을 사전에 알고 있으면 개발 팀이 모든 리소스(예: 메모리, 디스크 공간 및 IP 주소)를 사용할 수 있도록 보장하는 데 도움이 됩니다.
+{{site.data.keyword.containershort_notm}}의 Kubernetes 클러스터를 구성하고 사용자 정의하기 위한 의사결정을 파악하고 조직의 요구사항을 충족시키십시오. 이러한 구성 중 일부는 클러스터가 작성된 이후에 변경이 불가능합니다. 이러한 구성을 사전에 알고 있으면 필요에 따라 개발 팀이 모든 리소스(예: 메모리, 디스크 공간 및 IP 주소)를 사용할 수 있도록 보장할 수 있습니다.
 {:shortdesc}
 
 <br />
@@ -28,22 +28,23 @@ lastupdated: "2017-10-24"
 ## 라이트 및 표준 클러스터 비교
 {: #cs_planning_cluster_type}
 
-라이트 클러스터를 작성하여 Kubernetes 기능에 익숙해지고 테스트하거나 표준 클러스터를 작성하여 전체 Kubernetes 기능으로 앱 구현을 시작할 수 있습니다.
+라이트 또는 표준 클러스터를 작성할 수 있습니다. Kubernetes 기능을 익히고 테스트하려면 라이트 클러스터를 작성하고, 전체 Kubernetes 기능을 사용하여 앱을 배치하려면 표준 클러스터를 작성하십시오.
 {:shortdesc}
 
 |특성|라이트 클러스터|표준 클러스터|
 |---------------|-------------|-----------------|
-|[{{site.data.keyword.Bluemix_notm}} 퍼블릭에서 사용 가능](cs_ov.html#public_environment)|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
-|[클러스터의 사설 네트워킹](#cs_planning_private_network)|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
-|[NodePort 서비스의 공용 앱 액세스](#cs_nodeport)|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
+|[{{site.data.keyword.Bluemix_notm}} 퍼블릭에서 사용 가능](cs_ov.html#cs_ov)|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
+|[클러스터 내부 네트워킹](#cs_planning_private_network)|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
+|[NodePort 서비스에 의한 공용 네트워크 앱 액세스](#cs_nodeport)|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
 |[사용자 액세스 관리](cs_cluster.html#cs_cluster_user)|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
 |[클러스터와 앱에서 {{site.data.keyword.Bluemix_notm}} 서비스 액세스](cs_cluster.html#cs_cluster_service)|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
 |[스토리지를 위한 작업자 노드의 디스크 공간](#cs_planning_apps_storage)|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
 |[볼륨이 있는 지속적 NFS 파일 기반 스토리지](#cs_planning_apps_storage)| |<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
-|[로드 밸런서 서비스의 공용 또는 개인용 앱 액세스](#cs_loadbalancer)| |<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
-|[Ingress 서비스의 공용 앱 액세스](#cs_ingress)| |<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
+|[로드 밸런서 서비스에 의한 공용 또는 사설 네트워크 앱 액세스](#cs_loadbalancer)| |<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
+|[Ingress 서비스에 의한 공용 네트워크 앱 액세스](#cs_ingress)| |<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
 |[포터블 공인 IP 주소](cs_apps.html#cs_cluster_ip_subnet)| |<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
-|[{{site.data.keyword.Bluemix_notm}} 데디케이티드(비공개 베타)에서 사용 가능](cs_ov.html#dedicated_environment)| |<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
+|[로깅 및 모니터링](cs_cluster.html#cs_logging)| |<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
+|[{{site.data.keyword.Bluemix_dedicated_notm}}(비공개 베타)에서 사용 가능](cs_ov.html#dedicated_environment)| |<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
 {: caption="표 1. 라이트 클러스터와 표준 클러스터의 차이점" caption-side="top"}
 
 <br />
@@ -57,7 +58,7 @@ lastupdated: "2017-10-24"
 
 가용성의 정도가 증가하는 순서로 정렬된 다음의 잠재적 클러스터 설정을 검토하십시오. 
 
-[![클러스터의 고가용성 단계](images/cs_cluster_ha_roadmap.png)](https://console.bluemix.net/docs/api/content/containers/images/cs_cluster_ha_roadmap.png)
+![클러스터의 고가용성 단계](images/cs_cluster_ha_roadmap.png)
 
 1.  다중 작업자 노드의 단일 클러스터
 2.  동일한 지역의 서로 다른 위치에서 실행 중인 두 개의 클러스터(각각 다중 작업자 노드 보유)
@@ -69,18 +70,18 @@ lastupdated: "2017-10-24"
 <dt>앱 인스턴스를 전개하기 위해 충분한 작업자 노드 포함</dt>
 <dd>고가용성을 위해서는 앱 개발자가 클러스터당 다중 작업자 노드 간에 자체 컨테이너를 전개할 수 있도록 허용하십시오. 세 개의 작업자 노드를 사용하면 앱의 사용을 인터럽트하지 않고도 하나의 작업자 노드에서 가동 중단이 발생할 수 있습니다. 사용자는 [{{site.data.keyword.Bluemix_notm}} GUI](cs_cluster.html#cs_cluster_ui) 또는 [CLI](cs_cluster.html#cs_cluster_cli)에서 클러스터를 작성할 때 포함할 작업자 노드의 수를 지정할 수 있습니다. Kubernetes는 클러스터에 속할 수 있는 작업자 노드의 최대수를 제한합니다. 자세한 정보는 [작업자 노드 및 포드 할당량 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/admin/cluster-large/)을 검토하십시오.
 <pre class="codeblock">
-<code>bx cs cluster-create --location &lt;dal10&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u1c.2x4&gt; --name &lt;my_cluster&gt;</code>
+<code>bx cs cluster-create --location &lt;dal10&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;my_cluster&gt;</code>
 </pre>
 </dd>
 <dt>클러스터 간에 앱 전개</dt>
 <dd>각각 다중 작업자 노드가 있는 다중 클러스터를 작성하십시오. 하나의 클러스터에서 가동 중단이 발생하는 경우, 사용자는 또한 다른 클러스터에 배치된 앱에 계속해서 액세스할 수 있습니다.
 <p>클러스터 1:</p>
 <pre class="codeblock">
-<code>bx cs cluster-create --location &lt;dal10&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u1c.2x4&gt; --name &lt;my_cluster1&gt;</code>
+<code>bx cs cluster-create --location &lt;dal10&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;my_cluster1&gt;</code>
 </pre>
 <p>클러스터 2:</p>
 <pre class="codeblock">
-<code>bx cs cluster-create --location &lt;dal12&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u1c.2x4&gt;  --name &lt;my_cluster2&gt;</code>
+<code>bx cs cluster-create --location &lt;dal12&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u2c.2x4&gt;  --name &lt;my_cluster2&gt;</code>
 </pre>
 </dd>
 <dt>서로 다른 지역의 클러스터 간에 앱 전개</dt>
@@ -88,11 +89,11 @@ lastupdated: "2017-10-24"
 <p><strong>중요:</strong> 사용자 정의 도메인을 구성한 다음 이러한 명령을 사용하여 클러스터를 작성할 수 있습니다.</p>
 <p>위치 1:</p>
 <pre class="codeblock">
-<code>bx cs cluster-create --location &lt;dal10&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u1c.2x4&gt; --name &lt;my_cluster1&gt;</code>
+<code>bx cs cluster-create --location &lt;dal10&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;my_cluster1&gt;</code>
 </pre>
 <p>위치 2:</p>
 <pre class="codeblock">
-<code>bx cs cluster-create --location &lt;ams03&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u1c.2x4&gt; --name &lt;my_cluster2&gt;</code>
+<code>bx cs cluster-create --location &lt;ams03&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;my_cluster2&gt;</code>
 </pre>
 </dd>
 </dl>
@@ -106,7 +107,7 @@ lastupdated: "2017-10-24"
 Kubernetes 클러스터는 가상 머신 작업자 노드로 구성되어 있으며 Kubernetes 마스터에 의해 중앙 집중식으로 모니터링되고 관리됩니다. 클러스터 관리자는 클러스터 사용자가 클러스터에서 앱을 배치하고 실행하기 위해 모든 리소스를 보유하도록 보장하기 위해 작업자 노드의 클러스터를 설정하는 방법을 결정해야 합니다.
 {:shortdesc}
 
-표준 클러스터를 작성하면 작업자 노드가 사용자를 대신하여 IBM Bluemix Infrastructure(SoftLayer)에서 정렬되며 {{site.data.keyword.Bluemix_notm}}에 설정됩니다. 모든 작업자 노드에는 클러스터가 작성된 이후 변경될 수 없는 고유 작업자 노드 ID 및 도메인 이름이 지정됩니다. 사용자가 선택하는 하드웨어 격리 레벨에 따라서 작업자 노드를 공유 또는 전용 노드로 설정할 수 있습니다. 모든 작업자 노드는 작업자 노드에 배치된 컨테이너가 사용할 수 있는 vCPU 수, 메모리 및 디스크 공간을 판별하는 특정 시스템 유형으로 프로비저닝됩니다. Kubernetes는 클러스터에 속할 수 있는 작업자 노드의 최대수를 제한합니다. 자세한 정보는 [작업자 노드 및 포드 할당량 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/admin/cluster-large/)을 검토하십시오. 
+표준 클러스터를 작성하면 작업자 노드가 사용자를 대신하여 IBM Cloud 인프라(SoftLayer)에서 정렬되며 {{site.data.keyword.Bluemix_notm}}에 설정됩니다. 모든 작업자 노드에는 클러스터가 작성된 이후 변경될 수 없는 고유 작업자 노드 ID 및 도메인 이름이 지정됩니다. 사용자가 선택하는 하드웨어 격리 레벨에 따라서 작업자 노드를 공유 또는 전용 노드로 설정할 수 있습니다. 모든 작업자 노드는 작업자 노드에 배치된 컨테이너가 사용할 수 있는 vCPU 수, 메모리 및 디스크 공간을 판별하는 특정 시스템 유형으로 프로비저닝됩니다. Kubernetes는 클러스터에 속할 수 있는 작업자 노드의 최대수를 제한합니다. 자세한 정보는 [작업자 노드 및 포드 할당량 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/admin/cluster-large/)을 검토하십시오. 
 
 
 ### 작업자 노드용 하드웨어
@@ -121,17 +122,37 @@ Kubernetes 클러스터는 가상 머신 작업자 노드로 구성되어 있으
 
 기본 하드웨어의 비용이 여러 고객 간에 공유되므로, 공유 노드는 일반적으로 전용 노드보다 비용이 저렴합니다. 그러나 공유 및 전용 노드 간에 결정하는 경우, 사용자는 자체 법률 부서에 문의하여 앱 환경에서 요구하는 인프라 격리 및 준수의 레벨을 논의하고자 할 수 있습니다. 
 
-라이트 클러스터를 작성하면 작업자 노드가 {{site.data.keyword.IBM_notm}} IBM Bluemix Infrastructure(SoftLayer) 계정에서 공유 노드로 자동으로 프로비저닝됩니다. 
+라이트 클러스터를 작성하면 작업자 노드가 {{site.data.keyword.IBM_notm}} IBM Cloud 인프라(SoftLayer) 계정에서 공유 노드로 자동으로 프로비저닝됩니다.
 
-{{site.data.keyword.Bluemix_notm}} 데디케이티드에서 클러스터를 작성하는 경우에는 단일 테넌트 설정만 사용되며 모든 실제 리소스는 사용자 전용입니다. 사용자는 동일한 실제 호스트의 가상 머신으로서 다수의 작업자 노드를 배치합니다. 
+{{site.data.keyword.Bluemix_dedicated_notm}}에서 클러스터를 작성하는 경우에는 단일 테넌트 설정만 사용되며 모든 실제 리소스는 사용자 전용입니다. 사용자는 동일한 실제 호스트의 가상 머신으로서 다수의 작업자 노드를 배치합니다. 
 
 <br />
+
+
+### 작업자 노드 메모리 한계
+{: #resource_limit_node}
+
+{{site.data.keyword.containershort_notm}}는 각 작업자 노드에 대한 메모리 한계를 설정합니다. 작업자 노드에서 실행 중인 포드가 이 메모리 한계를 초과하는 경우 포드가 제거됩니다. Kubernetes에서 이 한계는 [하드 축출 임계값 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#hard-eviction-thresholds)이라고 합니다.
+
+포드가 자주 제거되면 클러스터에 작업자 노드를 추가하거나 포드에 [리소스 한계 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container)를 설정하십시오.
+
+각 시스템 유형에는 서로 다른 메모리 용량이 있습니다. 작업자 노드에서 사용 가능한 메모리가 허용되는 최소 임계값보다 작은 경우 Kubernetes가 즉시 포드를 제거합니다. 작업자 노드가 사용 가능한 경우 포드가 다른 작업자 노드에서 다시 스케줄됩니다.
+
+|작업자 노드 메모리 용량|작업자 노드의 최소 메모리 임계값|
+|---------------------------|------------|
+|4GB  | 256MB |
+|16GB | 1024MB |
+|64GB| 4096MB |
+|128GB| 4096MB |
+|242GB| 4096MB |
+
+작업자 노드에서 사용되는 메모리 양을 검토하려면 [kubectl top node ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/user-guide/kubectl/v1.8/#top)를 실행하십시오.
 
 
 ## 클러스터 관리 책임
 {: #responsibilities}
 
-클러스터를 관리하기 위해 IBM과 공유하는 책임을 검토하십시오. {{site.data.keyword.Bluemix_notm}} 데디케이티드 환경에서 관리되는 클러스터에 대한 책임을 검토하려면 대신 [클라우드 환경 간에 클러스터 관리의 차이점](cs_ov.html#env_differences)을 참조하십시오.
+클러스터를 관리하기 위해 IBM과 공유하는 책임을 검토하십시오. {{site.data.keyword.Bluemix_dedicated_notm}} 환경에서 관리되는 클러스터에 대한 책임을 검토하려면 대신 [클라우드 환경 간에 클러스터 관리의 차이점](cs_ov.html#env_differences)을 참조하십시오.
 {:shortdesc}
 
 **IBM은 다음을 담당합니다.**
@@ -150,12 +171,12 @@ Kubernetes 클러스터는 가상 머신 작업자 노드로 구성되어 있으
 - [클러스터 내의 Kubernetes 리소스(예: 포드, 서비스 및 배치) 배치 및 관리](cs_apps.html#cs_apps_cli)
 - [서비스 및 Kubernetes의 기능을 활용하여 앱의 고가용성 보장](cs_planning.html#highly_available_apps)
 - [CLI를 통해 작업자 노드를 추가하거나 제거하여 기능 추가 또는 제거](cs_cli_reference.html#cs_worker_add)
-- [클러스터의 네트워크 격리를 위해 IBM Bluemix Infrastructure(SoftLayer)에서 퍼블릭 및 프라이빗 VLAN 작성 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://knowledgelayer.softlayer.com/topic/vlans)
+- [클러스터의 네트워크 격리를 위해 IBM Cloud 인프라(SoftLayer)에서 공용 및 사설 VLAN 작성 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://knowledgelayer.softlayer.com/topic/vlans)
 - [모든 작업자 노드에서 Kubernetes 마스터 URL에 네트워크로 연결할 수 있는지 확인](cs_security.html#opening_ports) <p>**참고:Note** 작업자 노드에 퍼블릭 및 프라이빗 VLAN이 모두 있는 경우 네트워크 연결이 구성됩니다. 작업자 노드에 프라이빗 VLAN만 설정되어 있는 경우 네트워크 연결을 제공하려면 vyatta가 필요합니다.</p>
-- [Kubernetes 주 또는 부 버전 업데이트가 사용 가능한 경우 kube-apiserver 및 작업자 노드를 업데이트할 시기 판별](cs_cluster.html#cs_cluster_update)
+- [Kubernetes 주 또는 부 버전 업데이트가 사용 가능한 경우 마스터 kube-apiserver 및 작업자 노드 업데이트](cs_cluster.html#cs_cluster_update)
 - [`kubectl` 명령(예: `cordon` 또는 `drain`)을 실행하고 `bx cs` 명령(예: `reboot`, `reload` 또는 `delete`)을 실행하여 문제가 발생한 작업자 노드를 복구하기 위한 조치 수행](cs_cli_reference.html#cs_worker_reboot)
-- [필요에 따라 IBM Bluemix Infrastructure(SoftLayer)에서 더 많은 서브넷 추가 또는 제거](cs_cluster.html#cs_cluster_subnet)
-- [IBM Bluemix Infrastructure(SoftLayer)의 지속적 스토리지에 데이터 백업 및 복원 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](../services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter)
+- [필요에 따라 IBM Cloud 인프라(SoftLayer)에서 더 많은 서브넷 추가 또는 제거](cs_cluster.html#cs_cluster_subnet)
+- [IBM Cloud 인프라(SoftLayer)의 지속적 스토리지에 데이터 백업 및 복원 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](../services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter)
 
 <br />
 
@@ -168,7 +189,7 @@ Kubernetes 클러스터는 가상 머신 작업자 노드로 구성되어 있으
 
 가용성이 증가하는 순서로 정렬된 다음의 잠재적 앱 설정을 검토하십시오. 
 
-[![앱의 고가용성 단계](images/cs_app_ha_roadmap.png)](../api/content/containers/images/cs_app_ha_roadmap.png)
+![앱의 고가용성 단계](images/cs_app_ha_roadmap.png)
 
 1.  복제본 세트에 의해 관리되는 n+2 포드의 배치. 
 2.  복제본 세트에 의해 관리되며 같은 위치의 여러 노드 간에 전개된(연관관계 방지) n+2 포드의 배치. 
@@ -243,9 +264,9 @@ spec:
 
 </dd>
 <dt>여러 위치 또는 지역 간에 포드 분배</dt>
-<dd>위치 또는 지역 장애로부터 앱을 보호하기 위해 다른 위치 또는 지역에 두 번째 클러스터를 작성하고 배치 YAML을 사용하여 앱에 대한 중복 복제본 세트를 배치할 수 있습니다. 클러스터의 앞에 공유 라우트 및 로드 밸런서를 추가함으로써 위치 및 지역 간에 워크로드를 분배할 수 있습니다. 클러스터 간의 라우트 공유에 대한 자세한 정보는 <a href="https://console.bluemix.net/docs/containers/cs_cluster.html#cs_cluster" target="_blank">클러스터의 고가용성</a>을 참조하십시오.
+<dd>위치 또는 지역 장애로부터 앱을 보호하기 위해 다른 위치 또는 지역에 두 번째 클러스터를 작성하고 배치 YAML을 사용하여 앱에 대한 중복 복제본 세트를 배치할 수 있습니다. 클러스터의 앞에 공유 라우트 및 로드 밸런서를 추가함으로써 위치 및 지역 간에 워크로드를 분배할 수 있습니다. 클러스터 간의 라우트 공유에 대한 자세한 정보는 <a href="cs_cluster.html#cs_cluster" target="_blank">클러스터의 고가용성</a>을 참조하십시오.
 
-자세한 정보는 <a href="https://console.bluemix.net/docs/containers/cs_planning.html#cs_planning_cluster_config" target="_blank">고가용성 배치</a> 옵션을 검토하십시오.</dd>
+자세한 정보는 <a href="cs_planning.html#cs_planning_cluster_config" target="_blank">고가용성 배치</a> 옵션을 검토하십시오.</dd>
 </dl>
 
 
@@ -255,9 +276,9 @@ spec:
 라이트 또는 표준 클러스터의 기본 앱 배치에는 다음 컴포넌트가 포함될 수 있습니다.
 {:shortdesc}
 
-<a href="../api/content/containers/images/cs_app_tutorial_components1.png">![배치 설정](images/cs_app_tutorial_components1.png)</a>
+![배치 설정](images/cs_app_tutorial_components1.png)
 
-최소 앱을 위한 구성 파일 예제입니다.
+다이어그램에 표시된 대로 최소 앱을 위한 컴포넌트를 배치하려면 다음 예와 유사한 구성 파일을 사용합니다.
 ```
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -290,13 +311,15 @@ spec:
 ```
 {: codeblock}
 
+각 컴포넌트에 대해 자세히 보려면 [Kubernetes 기본](cs_ov.html#kubernetes_basics)을 검토하십시오.
+
 <br />
 
 
-## 사설 네트워킹
+## 클러스터 내부 네트워킹
 {: #cs_planning_private_network}
 
-작업자 노드 및 포드 간의 보안 사설 네트워크 통신은 사설 가상 근거리 통신망(프라이빗 VLAN이라고도 함)으로 실현됩니다. VLAN은 동일한 실제 회선에 연결된 것처럼 작업자 노드 및 포드의 그룹을 구성합니다.
+작업자 노드와 포드 간의 보안 클러스터 내 네트워크 통신은 사설 가상 근거리 통신망(VLAN)으로 실현됩니다. VLAN은 동일한 실제 회선에 연결된 것처럼 작업자 노드 및 포드의 그룹을 구성합니다.
 {:shortdesc}
 
 클러스터를 작성할 때 모든 클러스터가 자동으로 프라이빗 VLAN에 연결됩니다. 프라이빗 VLAN은 클러스터 작성 중에 작업자 노드에 지정된 사설 IP 주소를 판별합니다. 
@@ -304,8 +327,8 @@ spec:
 |클러스터 유형|클러스터의 프라이빗 VLAN 관리자|
 |------------|-------------------------------------------|
 |{{site.data.keyword.Bluemix_notm}} 퍼블릭의 라이트 클러스터|{{site.data.keyword.IBM_notm}}|
-|{{site.data.keyword.Bluemix_notm}} 퍼블릭의 표준 클러스터|IBM Bluemix Infrastructure(SoftLayer) 계정의 사용자 <p>**팁:** 계정의 모든 VLAN에 액세스하려면 [VLAN Spanning ![외부 링크 아이콘](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/procedure/enable-or-disable-vlan-spanning)을 켜십시오.</p>|
-|{{site.data.keyword.Bluemix_notm}} 데디케이티드의 표준 클러스터|{{site.data.keyword.IBM_notm}}|
+|{{site.data.keyword.Bluemix_notm}} 퍼블릭의 표준 클러스터|IBM Cloud 인프라(SoftLayer) 계정의 사용자 <p>**팁:** 계정의 모든 VLAN에 액세스하려면 [VLAN Spanning ![외부 링크 아이콘](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/procedure/enable-or-disable-vlan-spanning)을 켜십시오.</p>|
+|{{site.data.keyword.Bluemix_dedicated_notm}}의 표준 클러스터|{{site.data.keyword.IBM_notm}}|
 {: caption="표 2. 프라이빗 VLAN 관리 책임" caption-side="top"}
 
 작업자 노드에 배치된 모든 포드에도 사설 IP 주소가 지정됩니다. 포드에 172.30.0.0/16 사설 주소 범위에서 IP가 지정되고 작업자 노드 사이에서만 라우트됩니다. 충돌을 피하려면 사용자의 작업자 노드와 통신할 노드에 이 IP 범위를 사용하지 마십시오. 작업자 노드 및 포드는 사설 IP 주소를 사용하여 사설 네트워크에서 안전하게 통신할 수 있습니다. 그러나 포드에 장애가 발생하거나 작업자 노드의 재작성이 필요한 경우에는 새 사설 IP 주소가 지정됩니다. 
@@ -330,8 +353,8 @@ spec:
 |클러스터 유형|클러스터의 퍼블릭 VLAN 관리자|
 |------------|------------------------------------------|
 |{{site.data.keyword.Bluemix_notm}} 퍼블릭의 라이트 클러스터|{{site.data.keyword.IBM_notm}}|
-|{{site.data.keyword.Bluemix_notm}} 퍼블릭의 표준 클러스터|IBM Bluemix Infrastructure(SoftLayer) 계정의 사용자 |
-|{{site.data.keyword.Bluemix_notm}} 데디케이티드의 표준 클러스터|{{site.data.keyword.IBM_notm}}|
+|{{site.data.keyword.Bluemix_notm}} 퍼블릭의 표준 클러스터|IBM Cloud 인프라(SoftLayer) 계정의 사용자|
+|{{site.data.keyword.Bluemix_dedicated_notm}}의 표준 클러스터|{{site.data.keyword.IBM_notm}}|
 {: caption="표 3. VLAN 관리 책임" caption-side="top"}
 
 라이트 또는 표준 클러스터를 작성했는지 여부에 따라 다음 옵션 중에서 선택하여 앱을 공용으로 노출할 수 있습니다. 
@@ -344,14 +367,16 @@ spec:
 ### NodePort 서비스를 사용하여 인터넷에 앱 노출
 {: #cs_nodeport}
 
-작업자 노드에서 공용 포트를 노출하고, 작업자 노드의 공인 IP 주소를 사용하여 클러스터의 서비스에 공용으로 액세스합니다.
+작업자 노드에서 공용 포트를 노출하고, 작업자 노드의 공인 IP 주소를 사용하여 인터넷을 통해 클러스터의 서비스에 공용으로 액세스하십시오.
 {:shortdesc}
-
-[![Kubernetes NodePort 서비스를 사용하여 서비스 노출](images/cs_nodeport.png)](https://console.bluemix.net/docs/api/content/containers/images/cs_nodeport.png)
 
 NodePort 유형의 Kubernetes 서비스를 작성하여 앱을 노출하면 30000 - 32767 범위의 NodePort 및 내부 클러스터 IP 주소가 서비스에 지정됩니다. NodePort 서비스는 앱의 수신 요청에 대한 외부 시작점 역할을 합니다. 지정된 NodePort는 클러스터에 있는 각 작업자 노드의 kubeproxy 설정에서 공용으로 노출됩니다. 모든 작업자 노드는 지정된 NodePort에서 서비스의 수신 입력을 청취하기 시작합니다. 인터넷에서 서비스에 액세스하기 위해, 사용자는 `<ip_address>:<nodeport>` 형식의 NodePort 및 클러스터 작성 중에 지정된 작업자 노드의 공인 IP 주소를 사용할 수 있습니다. 공인 IP 주소 이외에 작업자 노드의 사설 IP 주소를 통해 NodePort 서비스를 사용할 수 있습니다. 
 
-요청이 NodePort 서비스에 도달하면 자동으로 서비스의 내부 클러스터 IP에 전달되며 추가로 kubeproxy 컴포넌트에서 앱이 배치된 포드의 사설 IP 주소로 전달됩니다. 클러스터 IP는 클러스터 내에서만 액세스가 가능합니다. 서로 다른 포드에서 실행 중인 앱의 다중 복제본이 있는 경우, kubeproxy 컴포넌트는 모든 복제본 간에 수신 요청을 로드 밸런싱합니다. 
+다음 다이어그램은 NodePort 서비스가 구성될 때 인터넷에서 앱으로 통신이 이루어지는 방식을 표시합니다.
+
+![Kubernetes NodePort 서비스를 사용하여 서비스 노출](images/cs_nodeport.png)
+
+다이어그램에 표시된 대로, 요청이 NodePort 서비스에 도달하면 자동으로 서비스의 내부 클러스터 IP에 전달되며 추가로 `kube-proxy` 컴포넌트에서 앱이 배치된 포드의 사설 IP 주소로 전달됩니다. 클러스터 IP는 클러스터 내에서만 액세스가 가능합니다. 서로 다른 포드에서 실행 중인 앱의 다중 복제본이 있는 경우 `kube-proxy` 컴포넌트가 모든 복제본 간에 수신 요청을 로드 밸런싱합니다.
 
 **참고:** 작업자 노드의 공인 IP 주소는 영구적이지 않습니다. 작업자 노드가 제거되거나 다시 작성되면 새 공인 IP 주소가 작업자 노드에 지정됩니다. 앱에 대한 공용 액세스를 테스트하기 위해 또는 짧은 시간 동안에만 공용 액세스가 필요한 경우에 NodePort 서비스를 사용할 수 있습니다. 서비스에 대한 추가 가용성과 안정적인 공인 IP 주소가 필요한 경우에는 [LoadBalancer 서비스](#cs_loadbalancer) 또는 [Ingress](#cs_ingress)를 사용하여 앱을 노출하십시오.
 
@@ -361,16 +386,19 @@ NodePort 유형의 Kubernetes 서비스를 작성하여 앱을 노출하면 3000
 ### LoadBalancer 서비스를 사용하여 인터넷에 앱 노출
 {: #cs_loadbalancer}
 
-포트를 노출하고 로드 밸런서의 공인 또는 사설 IP 주소를 사용하여 앱에 액세스합니다. 
+포트를 노출하고 로드 밸런서의 공인 또는 사설 IP 주소를 사용하여 앱에 액세스합니다. {:shortdesc}
 
-[![LoadBalancer 서비스 유형을 사용하여 서비스 노출](images/cs_loadbalancer.png)](https://console.bluemix.net/docs/api/content/containers/images/cs_loadbalancer.png)
 
-표준 클러스터를 작성할 때 {{site.data.keyword.containershort_notm}}는 5개의 포터블 공인 IP 주소와 5개의 사설 IP 주소를 자동으로 요청하며 클러스터 작성 중에 IBM Bluemix Infrastructure(SoftLayer) 계정에 프로비저닝됩니다. 포터블 IP 주소 중 2개(하나는 공인, 하나는 사설)는 [Ingress 제어기](#cs_ingress)에 사용됩니다. 4개의 포터블 공인 IP 주소와 4개의 사설 IP 주소는 LoadBalancer 서비스를 작성하여 앱을 노출하는 데 사용될 수 있습니다.
+표준 클러스터를 작성할 때 {{site.data.keyword.containershort_notm}}는 5개의 포터블 공인 IP 주소와 5개의 사설 IP 주소를 자동으로 요청하며 클러스터 작성 중에 IBM Cloud 인프라(SoftLayer) 계정에 프로비저닝합니다. 포터블 IP 주소 중 2개(하나는 공인, 하나는 사설)는 [Ingress 제어기](#cs_ingress)에 사용됩니다. 4개의 포터블 공인 IP 주소와 4개의 사설 IP 주소는 LoadBalancer 서비스를 작성하여 앱을 노출하는 데 사용될 수 있습니다.
 
 퍼블릭 VLAN의 클러스터에 Kubernetes LoadBalancer 서비스를 작성하는 경우 외부 로드 밸런서가 작성됩니다. 4개의 사용 가능한 공인 IP 주소 중 하나가 로드 밸런서에 지정됩니다. 포터블 공인 IP 주소를 사용할 수 없는 경우에는 LoadBalancer 서비스를 작성할 수 없습니다. LoadBalancer 서비스는 앱의 수신 요청에 대한 외부 시작점 역할을 합니다. NodePort 서비스와 다르게 로드 밸런서에 포트를 지정할 수 있으며 특정 포트 범위에 바인드되지 않습니다. LoadBalancer 서비스에 지정된 포터블 공인 IP 주소는 영구적이며 작업자 노드가 제거되거나 다시 작성될 때 변경되지 않습니다.
 따라서 LoadBalancer 서비스가 NodePort 서비스보다 고가용성입니다. 인터넷에서 LoadBalancer 서비스에 액세스하려면, `<ip_address>:<port>` 형식의 지정된 포트와 로드 밸런서의 공인 IP 주소를 사용하십시오. 
 
-요청이 LoadBalancer 서비스에 도달하면 서비스 작성 중에 LoadBalancer 서비스에 지정된 내부 클러스터 IP 주소로 자동으로 전달됩니다. 클러스터 IP 주소는 클러스터 내에서만 액세스가 가능합니다. 클러스터 IP 주소에서 수신 요청이 추가로 작업자 노드의 `kube-proxy` 컴포넌트로 전달됩니다.
+다음 다이어그램은 LoadBalancer가 인터넷에서 앱으로 통신하는 방식을 표시합니다.
+
+![LoadBalancer 서비스 유형을 사용하여 서비스 노출](images/cs_loadbalancer.png)
+
+다이어그램에 표시된 대로 요청이 LoadBalancer 서비스에 도달하면 서비스 작성 중에 LoadBalancer 서비스에 지정된 내부 클러스터 IP 주소로 자동으로 전달됩니다. 클러스터 IP 주소는 클러스터 내에서만 액세스가 가능합니다. 클러스터 IP 주소에서 수신 요청이 추가로 작업자 노드의 `kube-proxy` 컴포넌트로 전달됩니다.
 그런 다음, 앱이 배치된 포드의 사설 IP 주소로 요청이 전달됩니다. 서로 다른 포드에서 실행 중인 앱의 다중 복제본이 있는 경우 `kube-proxy` 컴포넌트가 모든 복제본 간에 수신 요청을 로드 밸런싱합니다.
 
 LoadBalancer 서비스를 사용하는 경우 작업자 노드의 각 IP 주소에서 노드 포트를 사용할 수도 있습니다. LoadBalancer 서비스를 사용하는 동안 노드 포트에 대한 액세스를 차단하려면 [수신 트래픽 차단](cs_security.html#cs_block_ingress)을 참조하십시오.
@@ -379,22 +407,24 @@ LoadBalancer 서비스를 작성할 때 IP 주소의 옵션은 다음과 같습�
 
 - 클러스터가 퍼블릭 VLAN에 있는 경우 포터블 공인 IP 주소가 사용됩니다.
 - 클러스터가 프라이빗 VLAN에서만 사용 가능한 경우 포터블 사설 IP 주소가 사용됩니다.
-- 구성 파일에 `service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>` 어노테이션을 추가하여 LoadBalancer 서비스에 대한 포터블 공인 또는 사설 IP 주소를 요청할 수 있습니다.
+- 구성 파일에 `service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>`.
 
 {{site.data.keyword.containershort_notm}}에서 LoadBalancer 서비스를 작성하는 방법에 대한 자세한 정보는 [로드 밸런서 서비스 유형을 사용하여 앱에 대한 공용 액세스 구성](cs_apps.html#cs_apps_public_load_balancer)을 참조하십시오.
 
 ### Ingress로 인터넷에 앱 노출
 {: #cs_ingress}
 
-Ingress를 사용하면 클러스터에서 여러 서비스를 노출할 수 있으며 단일 공용 시작점을 사용하여 이를 공용으로 사용 가능하게 할 수 있습니다. 
-
-[![{{site.data.keyword.containershort_notm}} ingress 지원을 사용하여 서비스 노출](images/cs_ingress.png)](https://console.bluemix.net/docs/api/content/containers/images/cs_ingress.png)
+Ingress를 사용하면 클러스터에서 여러 서비스를 노출할 수 있으며 단일 공용 시작점을 사용하여 이를 공용으로 사용 가능하게 할 수 있습니다. {:shortdesc}
 
 공용으로 노출하려는 각 앱에 대한 로드 밸런서 서비스를 작성하기 보다는 Ingress에서는 해당 개별 경로를 기반으로 클러스터 내부 및 외부의 앱으로 공용 요청을 전달할 수 있도록 허용하는 고유 공용 라우트를 제공합니다. Ingress는 두 개의 기본 컴포넌트로 구성되어 있습니다. Ingress 리소스는 앱의 수신 요청을 라우팅하는 방법에 대한 규칙을 정의합니다. 모든 Ingress 리소스는 수신 HTTP 또는 HTTPS 서비스 요청을 청취하고 각 Ingress 리소스에 정의된 규칙을 기반으로 요청을 전달하는 Ingress 제어기와 함께 등록되어야 합니다. 
 
-표준 클러스터를 작성하면 {{site.data.keyword.containershort_notm}}에서 클러스터의 고가용성 Ingress 제어기를 자동으로 작성하고 `<cluster_name>.<region>.containers.mybluemix.net` 형식으로 고유한 공용 라우트를 지정합니다. 공용 라우트는 클러스터 작성 중에 IBM Bluemix Infrastructure(SoftLayer) 계정으로 프로비저닝된 포터블 공인 IP 주소에 링크됩니다. 
+표준 클러스터를 작성하면 {{site.data.keyword.containershort_notm}}에서 클러스터의 고가용성 Ingress 제어기를 자동으로 작성하고 `<cluster_name>.<region>.containers.mybluemix.net` 형식으로 고유한 공용 라우트를 지정합니다. 공용 라우트는 클러스터 작성 중에 IBM Cloud 인프라(SoftLayer) 계정으로 프로비저닝된 포터블 공인 IP 주소에 링크됩니다.
 
-Ingress를 통해 앱을 노출하려면 앱에 대한 Kubernetes 서비스를 작성하고 Ingress 리소스를 정의하여 Ingress 제어기로 이 서비스를 등록해야 합니다. Ingress 리소스는 노출된 앱에 대한 고유 URL을 형성하기 위해 공용 라우트에 추가하려는 경로(예: `mycluster.us-south.containers.mybluemix.net/myapp`)를 지정합니다. 이 라우트를 웹 브라우저에 입력하면 요청이 Ingress 제어기의 링크된 포터블 공인 IP 주소로 전송됩니다. Ingress 제어기는 `mycluster` 클러스터에서 `myapp` 경로에 대한 라우팅 규칙이 존재하는지 여부를 확인합니다. 일치하는 규칙이 발견된 경우에는 원래 Ingress 리소스 오브젝트에 정의된 규칙을 고려하여 개별 경로가 포함된 요청이 앱이 배치된 포드에 전달됩니다. 앱이 수신 요청을 처리할 수 있도록 하려면, 앱이 Ingress 리소스에 정의된 개별 경로에서 청취하는지 확인하십시오. 
+다음 다이어그램은 Ingress가 인터넷에서 앱으로 통신하는 방식을 표시합니다.
+
+![{{site.data.keyword.containershort_notm}} Ingress 지원을 사용하여 서비스 노출](images/cs_ingress.png)
+
+Ingress를 통해 앱을 노출하려면 앱에 대한 Kubernetes 서비스를 작성하고 Ingress 리소스를 정의하여 Ingress 제어기로 이 서비스를 등록해야 합니다. Ingress 리소스는 노출된 앱에 대한 고유 URL을 형성하기 위해 공용 라우트에 추가하려는 경로(예: `mycluster.us-south.containers.mybluemix.net/myapp`)를 지정합니다. 다이어그램에 표시된 대로 이 라우트를 웹 브라우저에 입력하면 요청이 Ingress 제어기의 연결된 포터블 공인 IP 주소로 전송됩니다. Ingress 제어기는 `mycluster` 클러스터에서 `myapp` 경로에 대한 라우팅 규칙이 존재하는지 여부를 확인합니다. 일치하는 규칙이 발견된 경우에는 원래 Ingress 리소스 오브젝트에 정의된 규칙을 고려하여 개별 경로가 포함된 요청이 앱이 배치된 포드에 전달됩니다. 앱이 수신 요청을 처리할 수 있도록 하려면, 앱이 Ingress 리소스에 정의된 개별 경로에서 청취하는지 확인하십시오. 
 
 다음 시나리오를 위해 앱에 대한 수신 네트워크 트래픽을 관리하도록 Ingress 제어기를 구성할 수 있습니다. 
 
@@ -447,43 +477,17 @@ Docker 이미지는 작성하는 모든 컨테이너의 기초가 됩니다. 이
 ## 지속적 데이터 스토리지
 {: #cs_planning_apps_storage}
 
-컨테이너는 설계 상으로 수명이 짧습니다. 그러나 컨테이너 장애 조치(failover) 시에 데이터의 지속성을 유지하고 컨테이너 간에 데이터를 공유하기 위한 다수의 옵션 중에서 선택할 수 있습니다.
+컨테이너는 설계 상으로 수명이 짧습니다. 하지만 다음 다이어그램에 표시된 대로 컨테이너 장애 복구 시에 데이터의 지속성을 유지하고 컨테이너 간에 데이터를 공유하기 위한 다수의 옵션 중에서 선택할 수 있습니다.
 {:shortdesc}
 
-[![Kubernetes 클러스터의 배포를 위한 지속적 스토리지 옵션](images/cs_planning_apps_storage.png)](https://console.bluemix.net/docs/api/content/containers/images/cs_planning_apps_storage.png)
+![Kubernetes 클러스터의 배포를 위한 지속적 스토리지 옵션](images/cs_planning_apps_storage.png)
 
 |옵션 |설명|
 |------|-----------|
 |옵션 1: 작업자 노드에서 사용 가능한 디스크 공간을 사용하여 데이터의 지속성을 유지하도록 `/emptyDir` 사용<p>이 기능은 라이트 및 표준 클러스터에서 사용할 수 있습니다.</p>|이 옵션을 사용하면 포드에 지정된 작업자 노드의 디스크 공간에서 비어 있는 볼륨을 작성할 수 있습니다. 해당 포드의 컨테이너는 해당 볼륨에서 읽고 쓰기가 가능합니다. 볼륨이 하나의 특정 포드에 지정되므로, 데이터는 복제본 세트의 기타 포드와 공유될 수 없습니다. <p>`/emptyDir` 볼륨과 해당 데이터는 지정된 포드가 작업자 노드에서 영구 삭제될 때 제거됩니다. </p><p>**참고:** 포드 내의 컨테이너에 장애가 발생하는 경우, 볼륨의 데이터는 작업자 노드에서 계속 사용 가능합니다. </p><p>자세한 정보는 [Kubernetes 볼륨 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/storage/volumes/)을 참조하십시오.</p>|
 |옵션 2: 배치를 위한 NFS 기반 지속적 스토리지를 프로비저닝하는 지속적 볼륨 클레임 작성<p>이 기능은 표준 클러스터에 대해서만 사용 가능합니다.</p>|이 옵션을 사용하면 무제한 수의 NFS 파일 공유와 지속적 볼륨을 통해 컨테이너 데이터와 앱의 지속적 스토리지를 보유할 수 있습니다. NFS 기반 파일 스토리지의 요청을 시작하기 위해 [지속적 볼륨 클레임](cs_apps.html)을 작성합니다. {{site.data.keyword.containershort_notm}}는 볼륨에 대한 읽기/쓰기 권한, IOPS 및 스토리지의 크기 범위를 정의하는 사전 정의된 스토리지 클래스를 제공합니다. 지속적 볼륨 클레임을 작성할 때 이러한 스토리지 클래스 간에 선택할 수 있습니다. 지속적 볼륨 클레임을 제출한 후에 {{site.data.keyword.containershort_notm}}는 NFS 기반 파일 스토리지에 호스팅된 지속적 볼륨을 동적으로 프로비저닝합니다. 포드의 컨테이너가 볼륨에서 읽거나 볼륨에 쓸 수 있도록 허용하기 위해 사용자의 포드에 볼륨으로 [지속적 볼륨 클레임을 마운트할 수 있습니다.](cs_apps.html#cs_apps_volume_claim)지속적 볼륨은 동일한 복제본 세트의 포드 간에 또는 동일한 클러스터의 기타 포드와 공유가 가능합니다. <p>컨테이너에 장애가 발생하거나 포드가 작업자 노드에서 제거되는 경우, 데이터는 제거되지 않으며 볼륨을 마운트하는 기타 포드에 의해 계속해서 액세스될 수 있습니다. 지속적 볼륨 클레임은 지속적 스토리지에서 호스팅되지만 백업은 없습니다. 데이터를 백업해야 하는 경우 수동 백업을 작성하십시오.</p><p>**참고:** 지속적 NFS 파일 공유 스토리지는 월별 기반으로 비용이 부과됩니다. 클러스터에 대한 지속적 스토리지를 프로비저닝하며 이를 즉시 제거하는 경우, 비록 짧은 시간 동안만 사용했어도 지속적 스토리지에 대한 월별 비용을 계속 지불해야 합니다. </p>|
-|옵션 3: {{site.data.keyword.Bluemix_notm}} 데이터베이스 서비스를 포드에 바인드<p>이 기능은 라이트 및 표준 클러스터에서 사용할 수 있습니다.</p>|이 옵션을 사용하면 {{site.data.keyword.Bluemix_notm}} 데이터베이스 클라우드 서비스를 사용하여 데이터의 지속성을 유지하고 이에 액세스할 수 있습니다. {{site.data.keyword.Bluemix_notm}} 서비스를 클러스터의 네임스페이스에 바인드하면, Kubernetes 시크릿이 작성됩니다. Kubernetes 시크릿은 서비스에 대한 기밀 정보를 유지합니다(예: 서비스에 대한 URL, 사용자 이름 및 비밀번호). 시크릿을 시크릿 볼륨으로서 포드에 마운트하고, 시크릿의 신임 정보를 사용하여 서비스에 액세스할 수 있습니다. 시크릿 볼륨을 기타 포드에 마운트하여 포드 간의 데이터를 공유할 수도 있습니다. <p>컨테이너에 장애가 발생하거나 포드가 작업자 노드에서 제거되는 경우, 데이터는 제거되지 않으며 시크릿 볼륨을 마운트하는 기타 포드에 의해 계속해서 액세스될 수 있습니다. </p><p>대부분의 {{site.data.keyword.Bluemix_notm}} 데이터베이스 서비스에서는 적은 양의 데이터를 위한 디스크 공간을 무료로 제공하므로 해당 기능을 테스트할 수 있습니다. </p><p>{{site.data.keyword.Bluemix_notm}} 서비스를 포드에 바인드하는 방법에 대한 자세한 정보는 [{{site.data.keyword.containershort_notm}}에서 앱의 {{site.data.keyword.Bluemix_notm}} 서비스 추가](cs_apps.html#cs_apps_service)를 참조하십시오.</p>|
+|옵션 3: 포드에 {{site.data.keyword.Bluemix_notm}} 데이터베이스 서비스 바인드<p>이 기능은 라이트 및 표준 클러스터에서 사용할 수 있습니다.</p>|이 옵션을 사용하면 {{site.data.keyword.Bluemix_notm}} 데이터베이스 클라우드 서비스를 사용하여 데이터의 지속성을 유지하고 이에 액세스할 수 있습니다. {{site.data.keyword.Bluemix_notm}} 서비스를 클러스터의 네임스페이스에 바인드하면, Kubernetes 시크릿이 작성됩니다. Kubernetes 시크릿은 서비스에 대한 기밀 정보를 유지합니다(예: 서비스에 대한 URL, 사용자 이름 및 비밀번호). 시크릿을 시크릿 볼륨으로서 포드에 마운트하고, 시크릿의 신임 정보를 사용하여 서비스에 액세스할 수 있습니다. 시크릿 볼륨을 기타 포드에 마운트하여 포드 간의 데이터를 공유할 수도 있습니다. <p>컨테이너에 장애가 발생하거나 포드가 작업자 노드에서 제거되는 경우, 데이터는 제거되지 않으며 시크릿 볼륨을 마운트하는 기타 포드에 의해 계속해서 액세스될 수 있습니다. </p><p>대부분의 {{site.data.keyword.Bluemix_notm}} 데이터베이스 서비스에서는 적은 양의 데이터를 위한 디스크 공간을 무료로 제공하므로 해당 기능을 테스트할 수 있습니다. </p><p>{{site.data.keyword.Bluemix_notm}} 서비스를 포드에 바인드하는 방법에 대한 자세한 정보는 [{{site.data.keyword.containershort_notm}}에서 앱의 {{site.data.keyword.Bluemix_notm}} 서비스 추가](cs_apps.html#cs_apps_service)를 참조하십시오.</p>|
 {: caption="표 5. Kubernetes 클러스터에서의 배치를 위한 지속적 데이터 스토리지 옵션" caption-side="top"}
-
-<br />
-
-
-## 모니터링 도구
-{: #cs_planning_health}
-
-표준 Kubernetes 및 Docker 기능을 사용하여 클러스터 및 앱의 상태를 모니터할 수 있습니다. 클러스터와 앱의 문제점 해결을 위해 로그를 찾으려면 [클러스터 로깅 구성](cs_cluster.html#cs_logging)을 참조하십시오.
-{:shortdesc}
-
-<dl>
-<dt>{{site.data.keyword.Bluemix_notm}}의 클러스터 세부사항 페이지</dt>
-<dd>{{site.data.keyword.containershort_notm}}는 클러스터의 상태와 용량 및 클러스터 리소스의 사용에 대한 정보를 제공합니다. 이 GUI를 사용하면 클러스터를 확장하고 지속적 스토리지 관련 작업을 수행하며 {{site.data.keyword.Bluemix_notm}} 서비스 바인딩을 통해 클러스터에 부가 기능을 추가할 수 있습니다. 클러스터 세부사항 페이지를 보려면 **{{site.data.keyword.Bluemix_notm}}대시보드**로 이동하고 클러스터를 선택하십시오. </dd>
-<dt>Kubernetes 대시보드</dt>
-<dd>Kubernetes 대시보드는 작업자 노드의 상태를 검토하고 Kubernetes 리소스를 찾으며 컨테이너화된 앱을 배치하고 로깅 및 모니터링 정보를 기반으로 앱의 문제점을 해결하기 위해 사용할 수 있는 관리 웹 인터페이스입니다. Kubernetes 대시보드에 액세스하는 방법에 대한 자세한 정보는 [{{site.data.keyword.containershort_notm}}의 Kubernetes 대시보드 시작](cs_apps.html#cs_cli_dashboard)을 참조하십시오.</dd>
-<dt>{{site.data.keyword.monitoringlong_notm}}</dt>
-<dd>표준 클러스터의 경우 메트릭은 Kubernetes 클러스터가 작성될 때 로그인된 {{site.data.keyword.Bluemix_notm}} 영역에 위치합니다. 컨테이너 메트릭은 클러스터에 배치된 모든 컨테이너에 대해 자동으로 수집됩니다. 이러한 메트릭이 전송되고 Grafana를 통해 사용 가능하게 됩니다. 메트릭에 대한 자세한 정보는 [{{site.data.keyword.containershort_notm}} 모니터링](/docs/services/cloud-monitoring/containers/analyzing_metrics_bmx_ui.html#analyzing_metrics_bmx_ui)을 참조하십시오.<p>Grafana 대시보드에 액세스하려면 다음 URL 중 하나로 이동하여 클러스터를 작성한 {{site.data.keyword.Bluemix_notm}} 조직 및 영역을 선택하십시오. <ul><li>미국 남부 및 미국 동부: https://metrics.ng.bluemix.net</li><li>미국 남부: https://metrics.eu-gb.bluemix.net</li><li>중앙 유럽: https://metrics.eu-de.bluemix.net</li></ul></p></dd></dl>
-
-### 기타 상태 모니터링 도구
-{: #cs_planning_health_tools}
-
-추가 로깅 및 모니터링 기능을 위해 다른 도구를 구성할 수 있습니다. 
-<dl>
-<dt>Prometheus</dt>
-<dd>Prometheus는 Kubernetes 로깅 정보를 기반으로 배치 상태와 클러스터, 작업자 노드에 대한 세부 정보를 검색하기 위해 Kubernetes용으로 특별하게 설계된 오픈 소스 모니터링, 로깅 및 경보 도구입니다. 설정 정보는 [{{site.data.keyword.containershort_notm}}와 서비스 통합](#cs_planning_integrations)을 참조하십시오.</dd>
-</dl>
 
 <br />
 
@@ -516,6 +520,11 @@ Docker 이미지는 작성하는 모든 컨테이너의 기초가 됩니다. 이
 <td> <a href="https://helm.sh/" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>은 Kubernetes 패키지 관리자입니다. {{site.data.keyword.containerlong_notm}} 클러스터에서 실행 중인 복잡한 Kubernetes 애플리케이션을 정의, 설치 및 업그레이드하기 위한 Helm 차트를 작성하십시오. <a href="https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/" target="_blank">Kubernetes Helm 차트를 사용하여 배치 속도를 향상시키는 방법 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>에 대해 자세히 알아보십시오. </td>
 </tr>
 <tr>
+<td>Instana</td>
+<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>는 인프라 및 앱 성능 모니터링에 자동으로 앱을 발견하고 맵핑하는 GUI를 제공합니다. 또한 Istana는 앱에 대한 모든 요청을 캡처하며 이를 통해 사용자는 문제점을 해결하고 근본 원인 분석을 수행하여 문제점이 다시 발생하는 일을 방지할 수 있습니다. 
+<a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">{{site.data.keyword.containershort_notm}}에 Istana를 배치하여 자세히 보기 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>에 대한 블로그 게시물을 확인하십시오.</td>
+</tr>
+<tr>
 <td>Istio</td>
 <td>Istio는 Kubernetes와 같은 클라우드 오케스트레이션 플랫폼에서 서비스 메시(service mesh)로도 알려진 마이크로서비스의 네트워크에 연결하고, 보안, 관리 및 모니터하기 위한 방법을 개발자에게 제공하는 오픈 소스 서비스입니다. Istio는 네트워크 트래픽 관리, 마이크로서비스에서 로드 밸런스, 액세스 정책 적용 및 서비스 메시에서 서비스 ID 식별 기능을 제공합니다. {{site.data.keyword.containershort_notm}}의 Kubernetes 클러스터에 lstio를 설치하려면 lstio 문서의 <a href="https://istio.io/docs/tasks/installing-istio.html" target="_blank">설치 주제 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>을 참조하십시오. Kubernetes와 lstio를 사용하는 방법에 대한 샘플 개발자 과정을 검토하려면 <a href="https://developer.ibm.com/code/journey/manage-microservices-traffic-using-istio/" target="_blank">lstio를 사용하여 마이크로서비스 트래픽 관리 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오.</td>
 </tr>
@@ -544,38 +553,38 @@ Docker 이미지는 작성하는 모든 컨테이너의 기초가 됩니다. 이
 <br />
 
 
-## IBM Bluemix Infrastructure(SoftLayer) 포트폴리오 액세스
+## IBM Cloud 인프라(SoftLayer) 포트폴리오 액세스
 {: #cs_planning_unify_accounts}
 
-표준 Kubernetes 클러스터를 작성하려면 IBM Bluemix Infrastructure(SoftLayer) 포트폴리오에 대한 액세스 권한이 있어야 합니다. 이러한 액세스 권한은 작업자 노드, 포터블 공인 IP 주소 또는 클러스터에 대한 지속적 스토리지 등과 같은 유료 인프라 리소스를 요청하는 데 필요합니다.
+표준 Kubernetes 클러스터를 작성하려면 IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한이 있어야 합니다. 이러한 액세스 권한은 작업자 노드, 포터블 공인 IP 주소 또는 클러스터에 대한 지속적 스토리지 등과 같은 유료 인프라 리소스를 요청하는 데 필요합니다.
 {:shortdesc}
 
-자동 계정 링크가 사용 가능해진 후에 작성된 {{site.data.keyword.Bluemix_notm}} 종량과금제 계정은 IBM Bluemix Infrastructure(SoftLayer) 포트폴리오에 대한 액세스 권한으로 이미 설정되어 있으므로, 사용자는 추가 구성 없이 클러스터에 대한 인프라 리소스를 구매할 수 있습니다.
+자동 계정 링크가 사용 가능해진 후에 작성된 {{site.data.keyword.Bluemix_notm}} 종량과금제 계정은 IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한으로 이미 설정되어 있으므로, 사용자는 추가 구성 없이 클러스터에 대한 인프라 리소스를 구매할 수 있습니다.
 
-기타 {{site.data.keyword.Bluemix_notm}} 계정 유형의 사용자나 자체 {{site.data.keyword.Bluemix_notm}} 계정에 링크되지 않은 기존 IBM Bluemix Infrastructure(SoftLayer) 계정을 보유한 사용자는 표준 클러스터를 작성하기 위한 자체 계정을 구성해야 합니다.
+기타 {{site.data.keyword.Bluemix_notm}} 계정 유형의 사용자나 자체 {{site.data.keyword.Bluemix_notm}} 계정에 연결되지 않은 기존 IBM Cloud 인프라(SoftLayer) 계정을 보유한 사용자는 표준 클러스터를 작성하기 위한 자체 계정을 구성해야 합니다.
 
 각 계정 유형에 대해 사용 가능한 옵션을 찾으려면 다음 표를 검토하십시오.
 
 |계정 유형   |설명|표준 클러스터를 작성하기 위해 사용 가능한 옵션|
 |------------|-----------|----------------------------------------------|
-|무료 평가판 계정|무료 평가판 계정은 IBM Bluemix Infrastructure(SoftLayer) 포트폴리오에 액세스할 수 없습니다.<p>기존 IBM Bluemix Infrastructure(SoftLayer) 계정이 있으면 무료 평가판 계정에 링크할 수 있습니다.</p>|<ul><li>옵션 1: [무료 평가판 계정을 IBM Bluemix Infrastructure(SoftLayer) 포트폴리오에 대한 액세스 권한으로 설정된 {{site.data.keyword.Bluemix_notm}} 종량과금제로 업그레이드](/docs/pricing/billable.html#upgradetopayg)합니다.</li><li>옵션 2: [무료 평가판 계정을 기존 IBM Bluemix Infrastructure(SoftLayer) 계정에 링크](/docs/pricing/linking_accounts.html#unifyingaccounts)합니다.<p>두 계정이 모두 링크되면 무료 평가판 계정이 종량과금제 계정으로 자동 업그레이드됩니다. 계정을 링크하면 {{site.data.keyword.Bluemix_notm}}를 통해 {{site.data.keyword.Bluemix_notm}} 및 IBM Bluemix Infrastructure(SoftLayer) 리소스 모두에 대해 비용이 청구됩니다. </p><p>**참고:** 링크하는 IBM Bluemix Infrastructure(SoftLayer) 계정은 수퍼유저 사용자 권한으로 설정해야 합니다.</p></li></ul>|
-|이전 종량과금제 계정 |자동 계정 링크가 사용 가능하기 전에 작성된 종량과금제 계정에서는 IBM Bluemix Infrastructure(SoftLayer) 포트폴리오에 대한 액세스 권한을 제공하지 않았습니다. <p>기존 IBM Bluemix Infrastructure(SoftLayer) 계정이 있으면 이 계정을 이전 종량과금제 계정에 링크할 수 없습니다.</p>|<ul><li>옵션 1: IBM Bluemix Infrastructure(SoftLayer) 포트폴리오에 대한 액세스 권한으로 설정된 [새 종량과금제 계정을 작성](/docs/pricing/billable.html#billable)합니다. 이 옵션을 선택하는 경우에는 두 개의 별도 {{site.data.keyword.Bluemix_notm}} 계정과 비용 청구가 있습니다. <p>계속해서 이전 종량과금제 계정을 사용하여 표준 클러스터를 작성하려는 경우에는 새 종량과금제 계정을 사용하여 IBM Bluemix Infrastructure(SoftLayer) 포트폴리오에 액세스하기 위한 API 키를 생성할 수 있습니다. 그리고 이전 종량과금제 계정에 대해 API 키를 설정해야 합니다. 자세한 정보는 [이전 종량과금제 및 구독 계정에 대한 API 키 생성](#old_account)을 참조하십시오. IBM Bluemix Infrastructure(SoftLayer) 리소스가 새 종량과금제 계정을 통해 비용 청구된다는 점을 유념하십시오. </p></li><li>옵션 2: 사용하려는 기존 IBM Bluemix Infrastructure(SoftLayer) 계정이 이미 있는 경우에는 {{site.data.keyword.Bluemix_notm}} 계정에 대해 [신임 정보를 설정](cs_cli_reference.html#cs_credentials_set)할 수 있습니다.<p>**참고:** {{site.data.keyword.Bluemix_notm}} 계정과 함께 사용하는 IBM Bluemix Infrastructure(SoftLayer) 계정은 수퍼유저 권한으로 설정되어야 합니다.</p></li></ul>|
-|구독 계정|구독 계정은 IBM Bluemix Infrastructure(SoftLayer) 포트폴리오에 대한 액세스 권한으로 설정되지 않습니다.|<ul><li>옵션 1: IBM Bluemix Infrastructure(SoftLayer) 포트폴리오에 대한 액세스 권한으로 설정된 [새 종량과금제 계정을 작성](/docs/pricing/billable.html#billable)합니다. 이 옵션을 선택하는 경우에는 두 개의 별도 {{site.data.keyword.Bluemix_notm}} 계정과 비용 청구가 있습니다. <p>계속해서 구독 계정을 사용하여 표준 클러스터를 작성하려는 경우에는 새 종량과금제 계정을 사용하여 IBM Bluemix Infrastructure(SoftLayer) 포트폴리오에 액세스하기 위한 API 키를 생성할 수 있습니다. 그리고 사용자의 구독 계정에 대해 API 키를 설정해야 합니다. 자세한 정보는 [이전 종량과금제 및 구독 계정에 대한 API 키 생성](#old_account)을 참조하십시오. IBM Bluemix Infrastructure(SoftLayer) 리소스가 새 종량과금제 계정을 통해 비용 청구된다는 점을 유념하십시오. </p></li><li>옵션 2: 사용하려는 기존 IBM Bluemix Infrastructure(SoftLayer) 계정이 이미 있는 경우에는 {{site.data.keyword.Bluemix_notm}} 계정에 대해 [신임 정보를 설정](cs_cli_reference.html#cs_credentials_set)할 수 있습니다.<p>**참고:** {{site.data.keyword.Bluemix_notm}} 계정과 함께 사용하는 IBM Bluemix Infrastructure(SoftLayer) 계정은 수퍼유저 권한으로 설정되어야 합니다.</p></li></ul>|
-|{{site.data.keyword.Bluemix_notm}} 계정이 아닌 IBM Bluemix Infrastructure(SoftLayer) 계정|표준 클러스터를 작성하려면 {{site.data.keyword.Bluemix_notm}} 계정이 있어야 합니다. |<ul><li>옵션 1: IBM Bluemix Infrastructure(SoftLayer) 포트폴리오에 대한 액세스 권한으로 설정된 [새 종량과금제 계정을 작성](/docs/pricing/billable.html#billable)합니다. 이 옵션을 선택하는 경우에는 새 IBM Bluemix Infrastructure(SoftLayer)가 사용자를 위해 작성됩니다. 두 개의 별도 IBM Bluemix Infrastructure(SoftLayer) 계정과 비용 청구가 있습니다.</li><li>옵션 2: [무료 평가판 계정을 작성](/docs/pricing/free.html#pricing)하고 [이를 기존 IBM Bluemix Infrastructure(SoftLayer) 계정에 링크](/docs/pricing/linking_accounts.html#unifyingaccounts)합니다. 두 계정이 모두 링크되면 무료 평가판 계정이 종량과금제 계정으로 자동 업그레이드됩니다. 계정을 링크하면 {{site.data.keyword.Bluemix_notm}}를 통해 {{site.data.keyword.Bluemix_notm}} 및 IBM Bluemix Infrastructure(SoftLayer) 리소스 모두에 대해 비용이 청구됩니다. <p>**참고:** 링크하는 IBM Bluemix Infrastructure(SoftLayer) 계정은 수퍼유저 사용자 권한으로 설정해야 합니다.</p></li></ul>|
-{: caption="표 7. IBM Bluemix Infrastructure(SoftLayer) 계정에 링크되지 않은 계정으로 표준 클러스터를 작성하는 데 사용 가능한 옵션" caption-side="top"}
+|라이트 계정|라이트 계정은 2개의 CPU와 4GB RAM이 있는 하나의 라이트 클러스터만 프로비저닝할 수 있습니다. <p>다른 시스템 유형으로 더 많은 클러스터를 작성하려면 두 가지 옵션이 있습니다.</p>|<ul><li>옵션 1: [IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한으로 설정된 {{site.data.keyword.Bluemix_notm}} 종량과금제 계정으로 라이트 계정을 업그레이드](/docs/pricing/billable.html#upgradetopayg)합니다.</li><li>옵션 2: [라이트 계정을 기존 IBM Cloud 인프라(SoftLayer) 계정에 연결](/docs/pricing/linking_accounts.html#unifyingaccounts)합니다.<p>두 계정이 모두 연결되면 라이트 계정이 종량과금제 계정으로 자동 업그레이드됩니다. 계정을 연결하면 {{site.data.keyword.Bluemix_notm}}를 통해 {{site.data.keyword.Bluemix_notm}} 및 IBM Cloud 인프라(SoftLayer) 리소스 모두에 대해 비용이 청구됩니다.</p><p>**참고:** 연결하는 IBM Cloud 인프라(SoftLayer) 계정은 수퍼유저 사용자 권한으로 설정해야 합니다.</p></li></ul>|
+|이전 종량과금제 계정 |자동 계정 링크가 사용 가능하기 전에 작성된 종량과금제 계정에서는 IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한을 제공하지 않았습니다.<p>기존 IBM Cloud 인프라(SoftLayer) 계정이 있으면 이 계정을 이전 종량과금제 계정에 연결할 수 없습니다.</p>|<ul><li>옵션 1: IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한으로 설정된 [새 종량과금제 계정을 작성](/docs/pricing/billable.html#billable)합니다. 이 옵션을 선택하는 경우에는 두 개의 별도 {{site.data.keyword.Bluemix_notm}} 계정과 비용 청구가 있습니다. <p>계속해서 이전 종량과금제 계정을 사용하여 표준 클러스터를 작성하려는 경우에는 새 종량과금제 계정을 사용하여 IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하기 위한 API 키를 생성할 수 있습니다. 그리고 이전 종량과금제 계정에 대해 API 키를 설정해야 합니다. 자세한 정보는 [이전 종량과금제 및 구독 계정에 대한 API 키 생성](#old_account)을 참조하십시오. IBM Cloud 인프라(SoftLayer) 리소스가 새 종량과금제 계정을 통해 비용 청구된다는 점을 유념하십시오.</p></li><li>옵션 2: 사용할 기존 IBM Cloud 인프라(SoftLayer) 계정이 이미 있는 경우에는 {{site.data.keyword.Bluemix_notm}} 계정에 대해 [신임 정보를 설정](cs_cli_reference.html#cs_credentials_set)할 수 있습니다.<p>**참고:** {{site.data.keyword.Bluemix_notm}} 계정과 함께 사용하는 IBM Cloud 인프라(SoftLayer) 계정은 수퍼유저 권한으로 설정되어야 합니다.</p></li></ul>|
+|구독 계정|구독 계정은 IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한으로 설정되지 않습니다.|<ul><li>옵션 1: IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한으로 설정된 [새 종량과금제 계정을 작성](/docs/pricing/billable.html#billable)합니다. 이 옵션을 선택하는 경우에는 두 개의 별도 {{site.data.keyword.Bluemix_notm}} 계정과 비용 청구가 있습니다. <p>계속해서 구독 계정을 사용하여 표준 클러스터를 작성하려는 경우 새 종량과금제 계정을 사용하여 IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하기 위한 API 키를 생성할 수 있습니다. 그리고 사용자의 구독 계정에 대해 API 키를 설정해야 합니다. 자세한 정보는 [이전 종량과금제 및 구독 계정에 대한 API 키 생성](#old_account)을 참조하십시오. IBM Cloud 인프라(SoftLayer) 리소스가 새 종량과금제 계정을 통해 비용 청구된다는 점을 유념하십시오.</p></li><li>옵션 2: 사용할 기존 IBM Cloud 인프라(SoftLayer) 계정이 이미 있는 경우에는 {{site.data.keyword.Bluemix_notm}} 계정에 대해 [신임 정보를 설정](cs_cli_reference.html#cs_credentials_set)할 수 있습니다.<p>**참고:** {{site.data.keyword.Bluemix_notm}} 계정과 함께 사용하는 IBM Cloud 인프라(SoftLayer) 계정은 수퍼유저 권한으로 설정되어야 합니다.</p></li></ul>|
+|{{site.data.keyword.Bluemix_notm}} 계정이 아닌 IBM Cloud 인프라(SoftLayer) 계정|표준 클러스터를 작성하려면 {{site.data.keyword.Bluemix_notm}} 계정이 있어야 합니다.|<ul><li>옵션 1: IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한으로 설정된 [새 종량과금제 계정을 작성](/docs/pricing/billable.html#billable)합니다. 이 옵션을 선택하는 경우에는 새 IBM Cloud 인프라(SoftLayer)가 사용자를 위해 작성됩니다. 두 개의 별도 IBM Cloud 인프라(SoftLayer) 계정과 비용 청구가 있습니다.</li><li>옵션 2: [라이트 계정을 작성](/docs/pricing/free.html#pricing)하고 [이를 기존 IBM Cloud 인프라(SoftLayer) 계정에 연결](/docs/pricing/linking_accounts.html#unifyingaccounts)합니다. 두 계정이 모두 연결되면 라이트 계정이 종량과금제 계정으로 자동 업그레이드됩니다. 계정을 연결하면 {{site.data.keyword.Bluemix_notm}}를 통해 {{site.data.keyword.Bluemix_notm}} 및 IBM Cloud 인프라(SoftLayer) 리소스 모두에 대해 비용이 청구됩니다.<p>**참고:** 연결하는 IBM Cloud 인프라(SoftLayer) 계정은 수퍼유저 사용자 권한으로 설정해야 합니다.</p></li></ul>|
+{: caption="표 7. IBM Cloud 인프라(SoftLayer) 계정에 연결되지 않은 계정으로 표준 클러스터를 작성하는 데 사용 가능한 옵션" caption-side="top"}
 
 
-### {{site.data.keyword.Bluemix_notm}} 계정에서 사용할 IBM Bluemix Infrastructure(SoftLayer) API 키 생성
+### {{site.data.keyword.Bluemix_notm}} 계정에서 사용할 IBM Cloud 인프라(SoftLayer) API 키 생성
 {: #old_account}
 
 계속해서 이전 종량과금제 또는 구독 계정을 사용하여 표준 클러스터를 작성하려면 새 종량과금제 계정으로 API 키를 생성하고 이전 계정에 대해 API 키를 설정해야 합니다.
 {:shortdesc}
 
-시작하기 전에 IBM Bluemix Infrastructure(SoftLayer) 포트폴리오에 대한 액세스 권한으로 자동 설정된 {{site.data.keyword.Bluemix_notm}} 종량과금제 계정을 작성하십시오. 
+시작하기 전에 IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한으로 자동 설정된 {{site.data.keyword.Bluemix_notm}} 종량과금제 계정을 작성하십시오.
 
-1.  종량과금제 계정을 위해 작성된 {{site.data.keyword.ibmid}} 및 비밀번호를 사용하여 [ IBM Bluemix Infrastructure(SoftLayer) 포털 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://control.softlayer.com/)에 로그인하십시오.
+1.  새 종량과금제 계정을 위해 작성된 {{site.data.keyword.ibmid}} 및 비밀번호를 사용하여 [IBM Cloud 인프라(SoftLayer) 포털 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://control.softlayer.com/)에 로그인하십시오.
 2.  **계정**을 선택한 후에 **사용자**를 선택하십시오. 
-3.  **생성**을 클릭하여 새 종량과금제 계정에 대한 IBM Bluemix Infrastructure(SoftLayer) API 키를 생성하십시오.
+3.  **생성**을 클릭하여 새 종량과금제 계정에 대한 IBM Cloud 인프라(SoftLayer) API 키를 생성하십시오.
 4.  API 키를 복사하십시오. 
 5.  CLI에서 이전 종량과금제 또는 구독 계정의 {{site.data.keyword.ibmid}} 및 비밀번호를 사용하여 {{site.data.keyword.Bluemix_notm}}에 로그인하십시오. 
 
@@ -584,7 +593,7 @@ Docker 이미지는 작성하는 모든 컨테이너의 기초가 됩니다. 이
   ```
   {: pre}
 
-6.  IBM Bluemix Infrastructure(SoftLayer) 포트폴리오에 액세스할 수 있도록 이전에 생성된 API 키를 설정하십시오. `<API_KEY>`를 API 키로 대체하고 `<USERNAME>`을 새 종량과금제 계정의 {{site.data.keyword.ibmid}}로 대체하십시오.
+6.  IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스할 수 있도록 이전에 생성된 API 키를 설정하십시오. `<API_KEY>`를 API 키로 대체하고 `<USERNAME>`을 새 종량과금제 계정의 {{site.data.keyword.ibmid}}로 대체하십시오.
 
   ```
   bx cs credentials-set --infrastructure-api-key <API_KEY> --infrastructure-username <USERNAME>

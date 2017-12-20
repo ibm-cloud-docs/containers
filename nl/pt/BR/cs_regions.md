@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-18"
+lastupdated: "2017-11-17"
 
 ---
 
@@ -21,12 +21,26 @@ lastupdated: "2017-10-18"
 
 Regiões do [{{site.data.keyword.Bluemix_notm}} ](#bluemix_regions) diferem de regiões do [{{site.data.keyword.containershort_notm}} ](#container_regions).
 
+![{{site.data.keyword.containershort_notm}} regiões e data centers](/images/regions.png)
+
+Figura 1. Regiões e data centers do {{site.data.keyword.containershort_notm}}
+
 Regiões do {{site.data.keyword.containershort_notm}} suportadas:
+  * AP Norte
   * AP Sul
   * União Europeia Central
   * Sul do Reino Unido
   * Leste dos EUA
   * SUL dos EUA
+
+É possível criar os clusters lite do Kubernetes nas regiões a seguir:
+  * AP Sul
+  * União Europeia Central
+  * Sul do Reino Unido
+  * SUL dos EUA
+
+  **Nota**: se você não é um cliente pago, não é capaz de criar clusters Lite na região sul dos EUA.
+
 
 ## Terminais de API de região do {{site.data.keyword.Bluemix_notm}}
 {: #bluemix_regions}
@@ -46,7 +60,7 @@ Os terminais de API de região do {{site.data.keyword.Bluemix_notm}} com log de 
       ```
       {: pre}
 
-  * Sydney
+  * Sydney e Norte AP
       ```
       bx login -a api.au-syd.bluemix.net
       ```
@@ -76,13 +90,12 @@ Usando regiões do {{site.data.keyword.containershort_notm}}, é possível criar
 {:shortdesc}
 
 Terminais de API de região do {{site.data.keyword.containershort_notm}}:
+  * Note AP: `https://ap-north.containers.bluemix.net`
   * Sul AP: `https://ap-south.containers.bluemix.net`
   * UE Central: `https://eu-central.containers.bluemix.net`
   * Sul do Reino Unido: `https://uk-south.containers.bluemix.net`
   * Leste dos EUA: `https://us-east.containers.bluemix.net`
   * Sul dos EUA: `https://us-south.containers.bluemix.net`
-
-**Nota:** o Leste dos EUA está disponível para uso com comandos da CLI somente.
 
 Para verificar qual região do {{site.data.keyword.containershort_notm}} em que você está atualmente, execute `bx cs api` e revise o campo **Região**.
 
@@ -96,6 +109,12 @@ Talvez queira efetuar login em outra região do {{site.data.keyword.containersho
 </br>
 
 Exemplos de comando para efetuar login em uma região do {{site.data.keyword.containershort_notm}}:
+  * Norte AP:
+    ```
+    bx cs init --host https://ap-north.containers.bluemix.net
+    ```
+  {: pre}
+
   * AP Sul:
     ```
     bx cs init --host https://ap-south.containers.bluemix.net
@@ -126,14 +145,6 @@ Exemplos de comando para efetuar login em uma região do {{site.data.keyword.con
     ```
     {: pre}
 
-### Criando clusters lite em regiões de serviço de contêiner
-{: #lite_regions}
-
-É possível criar os clusters lite do Kubernetes nas regiões a seguir:
-  * AP Sul
-  * União Europeia Central
-  * Sul do Reino Unido
-  * SUL dos EUA
 
 ### Locais disponíveis para o serviço de contêiner
 {: #locations}
@@ -142,10 +153,11 @@ Os locais são data centers que estão disponíveis em uma região.
 
   | Região | Localização | Cidade |
   |--------|----------|------|
+  | AP Norte | hkg02, tok02 | Hong Kong, Tóquio |
   | AP Sul     | mel01, syd01, syd04        | Melbourne, Sydney |
-  | União Europeia Central     | ams03, fra02        | Amsterdã, Frankfurt |
+  | União Europeia Central     | ams03, fra02, par01        | Amsterdã, Frankfurt, Paris |
   | Sul do Reino Unido      | lon02, lon04         | Londres |
-  | Leste dos EUA      | wdc06, wdc07        | Washington, DC |
+  | Leste dos EUA      | tor01, wdc06, wdc07        | Toronto, Washington, DC |
   | SUL dos EUA     | dal10, dal12, dal13       | Dallas |
 
 ### Usando comandos da API do serviço de contêiner
@@ -162,6 +174,7 @@ Exemplo de API `GET /clusters` no Sul dos EUA:
 </br>
 
 Para visualizar a documentação sobre os comandos da API, anexe `swagger-api` ao terminal da região a ser visualizada.
+  * Norte AP: https://ap-north.containers.bluemix.net/swagger-api/
   * Sul AP: https://ap-south.containers.bluemix.net/swagger-api/
   * UE Central: https://eu-central.containers.bluemix.net/swagger-api/
   * Sul do Reino Unido: https://uk-south.containers.bluemix.net/swagger-api/

@@ -80,7 +80,7 @@ Gehen Sie wie folgt vor, um die Befehlszeilenschnittstellen (CLIs) zu installier
 4.  Installieren Sie das {{site.data.keyword.containershort_notm}}-Plug-in, um Kubernetes-Cluster zu erstellen und Workerknoten zu verwalten. Verwenden Sie zur Ausführung von {{site.data.keyword.containershort_notm}}-Plug-in-Befehlen das Präfix `bx cs`.
 
     ```
-    bx plugin install container-service -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-service -r Bluemix
     ```
     {: pre}
 
@@ -127,7 +127,7 @@ Gehen Sie wie folgt vor, um die Befehlszeilenschnittstellen (CLIs) zu installier
 6. Installieren Sie zum Einrichten und Verwalten eines privaten Image-Repositorys in {{site.data.keyword.registryshort_notm}} das {{site.data.keyword.registryshort_notm}}-Plug-in. Verwenden Sie zur Ausführung von Registry-Befehlen das Präfix `bx cr`.
 
     ```
-    bx plugin install container-registry -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-registry -r Bluemix
     ```
     {: pre}
 
@@ -285,6 +285,6 @@ Ganz hervorragend! Sie haben den Cluster konfiguriert und Ihre lokale Umgebung i
 
 ## Womit möchten Sie fortfahren?
 
-* [Testen Sie Ihr Wissen in einem Quiz! ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://bluemix-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
+* [Testen Sie Ihr Wissen in einem Quiz! ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
 
 * Machen Sie sich mit dem [Lernprogramm: Apps in Kubernetes-Clustern in {{site.data.keyword.containershort_notm}} bereitstellen](cs_tutorials_apps.html#cs_apps_tutorial) vertraut, um die App der PR-Firma in dem von Ihnen erstellten Cluster bereitzustellen.

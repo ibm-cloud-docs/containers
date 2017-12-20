@@ -1,6 +1,8 @@
 ---
 
-copyright: years: 2014, 2017 lastupdated: "2017-10-24"
+copyright:
+  years: 2014, 2017
+lastupdated: "2017-11-03"
 
 ---
 
@@ -19,20 +21,98 @@ copyright: years: 2014, 2017 lastupdated: "2017-10-24"
 Revise as versões do Kubernetes que estão disponíveis no {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
-A tabela contém atualizações que provavelmente têm impacto em apps implementados ao atualizar um cluster para uma nova versão. Revise o [log de mudanças do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Icone de link externo")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md) para uma lista completa de mudanças nas versões do Kubernetes.
+O {{site.data.keyword.containershort_notm}} suporta várias versões do Kubernetes. A versão padrão é usada quando você cria ou atualiza um cluster, a menos que especifique uma versão diferente. As versões disponíveis do Kubernetes são:
+- 1.8.2
+- 1.7.4 (versão padrão)
+- 1.5.6
+
+As informações a seguir resumem as atualizações que provavelmente têm impacto em apps implementados ao atualizar um cluster para uma nova versão. Revise o [log de mudanças do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Icone de link externo")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md) para uma lista completa de mudanças nas versões do Kubernetes.
 
 Para obter mais informações sobre o processo de atualização, consulte [Atualizando clusters](cs_cluster.html#cs_cluster_update) e [Atualizando nós do trabalhador](cs_cluster.html#cs_cluster_worker_update).
 
+## Tipos de atualização
+{: #version_types}
+
+O Kubernetes fornece estes tipos de atualização de versão:
+{:shortdesc}
+
+|Tipo de atualização|Exemplos de rótulos de versão|Atualizado por|Impacto
+|-----|-----|-----|-----|
+|Principal|1.x.x|Você|Mudanças de operação para clusters, incluindo scripts ou implementações.|
+|Menor|x.5.x|Você|Mudanças de operação para clusters, incluindo scripts ou implementações.|
+|Correção|x.x.3|IBM e você|Sem mudanças nos scripts ou implementações. A IBM atualiza os mestres automaticamente, mas você aplica correções a nós do trabalhador.|
+{: caption="Impactos de atualizações do Kubernetes" caption-side="top"}
+
+Por padrão, não será possível atualizar um mestre do Kubernetes mais de duas versões secundárias à frente. Por exemplo, se o seu mestre atual for versão 1.5 e você desejar atualizar para 1.8, deve-se atualizar para 1.7 primeiro. É possível forçar a atualização para continuar, mas atualizar mais de duas versões secundárias poderá causar resultados inesperados.
+
+## Versão 1.8
+{: #cs_v18}
+Revise as mudanças que você pode precisar fazer ao atualizar para o Kubernetes versão 1.8.
+
+### Atualizar antes do mestre
+{: #18_before}
+
+<table summary="Atualizações do Kubernetes para versões 1.8">
+<caption>Mudanças para fazer antes de atualizar o mestre para o Kubernetes 1.8</caption>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Descrição
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan='2'>Nenhuma mudança necessária antes de atualizar o mestre</td>
+</tr>
+</tbody>
+</table>
+
+### Atualizar depois do mestre
+{: #18_after}
+
+<table summary="Atualizações do Kubernetes para versões 1.8">
+<caption>Mudanças para fazer depois de atualizar o mestre para o Kubernetes 1.8</caption>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Descrição
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Login do painel do Kubernetes</td>
+<td>A URL para acessar o painel do Kubernetes na versão 1.8 mudou e o processo de login inclui uma nova etapa de autenticação. Veja [Acessando o painel do Kubernetes](cs_apps.html#cs_cli_dashboard) para obter mais informações.</td>
+</tr>
+<tr>
+<tr>
+<td>Permissões de painel do Kubernetes</td>
+<td>Para forçar os usuários a efetuar login com suas credenciais para visualizar recursos de cluster na versão 1.8, remova a autorização RBAC do ClusterRoleBinding 1.7. Execute `kubectl delete clusterrolebinding -n kube-system kubernetes-dashboard`.</td>
+</tr>
+<tr>
+<td>`kubectl delete`</td>
+<td>O comando `kubectl delete` não reduz mais os objetos da API de carga de trabalho, como pods, antes de o objeto ser excluído. Se for requerido que o objeto seja reduzido, use [kubectl scale ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/user-guide/kubectl/v1.8/#scale) antes de excluir o objeto.</td>
+</tr>
+<tr>
+<td>`kubectl run`</td>
+<td>O comando `kubectl run` deve usar múltiplas sinalizações para `--env` em vez de argumentos separados por vírgula. Por exemplo, execute `kubectl run --env <x>=<y> --env <z>=<k>` e não `kubectl run --env <x>=<y>,<z>=<k>`.</td>
+</tr>
+<td>`kubectl stop`</td>
+<td>O comando `kubectl stop` não está mais disponível.</td>
+</tr>
+</tbody>
+</table>
 
 
 ## Versão 1.7
 {: #cs_v17}
 
+Revise as mudanças que você pode precisar fazer ao atualizar para o Kubernetes versão 1.7.
+
 ### Atualizar antes do mestre
 {: #17_before}
 
 <table summary="Atualizações do Kubernetes para as versões 1.7 e 1.6">
-<caption>Tabela 1. Mudanças para fazer antes de atualizar o mestre para o Kubernetes 1.7</caption>
+<caption>Mudanças para fazer antes de atualizar o mestre para o Kubernetes 1.7</caption>
 <thead>
 <tr>
 <th>Tipo</th>
@@ -44,13 +124,13 @@ Para obter mais informações sobre o processo de atualização, consulte [Atual
 <td>Armazenamento</td>
 <td>Os scripts de configuração com `hostPath` e `mountPath` com o referência de diretório-pai como `../to/dir` não são permitidos. Mude os caminhos para caminhos absolutos simples, por exemplo, `/path/to/dir`.
 <ol>
-  <li>Execute este comando para determinar se você precisa atualizar seu caminhos de armazenamento.</br>
+  <li>Determine se você precisa mudar os caminhos de armazenamento:</br>
   ```
   kubectl get pods --all-namespaces -o yaml | grep "\.\." && echo "Action required"
   ```
   </br>
 
-  <li>Se `Action required` for retornado, modifique cada pod impactado para referenciar o caminho absoluto antes de atualizar todos os nós do trabalhador. Se o pod for de propriedade de outro recurso, como uma implementação, modifique o [_PodSpec_ ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) dentro desse recurso.
+  <li>Se `Ação necessária` é retornado, mude o pods para referenciar o caminho absoluto antes de atualizar todos os nós do trabalhador. Se o pod é de propriedade de outro recurso, como uma implementação, mude o [_PodSpec_ ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) dentro desse recurso.
 </ol>
 </td>
 </tr>
@@ -61,22 +141,22 @@ Para obter mais informações sobre o processo de atualização, consulte [Atual
 {: #17_after}
 
 <table summary="Atualizações do Kubernetes para as versões 1.7 e 1.6">
-<caption>Tabela 2. Mudanças feitas após a atualização do mestre para o Kubernetes 1.7</caption>
+<caption>Mudanças para fazer depois de atualizar o mestre para o Kubernetes 1.7</caption>
 <thead>
 <tr>
 <th>Tipo</th>
 <th>Descrição
 </tr>
 </thead>
-<tbod>
+<tbody>
 <tr>
 <td>kubectl</td>
-<td>Depois de atualizar a CLI `kubectl` para a versão do seu cluster, esses comandos `kubectl` deverão usar diversas sinalizações em vez de argumentos separados por vírgula. <ul>
- <li>`create role`
- <li>`create clusterrole`
- <li>`create rolebinding`
- <li>`create clusterrolebinding`
- <li>`create secret`
+<td>Após a atualização da CLI `kubectl`, estes comandos `kubectl create` devem usar múltiplas sinalizações em vez de argumentos separados por vírgula:<ul>
+ <li>`Função`
+ <li>`clusterrole`
+ <li>`rolebinding`
+ <li>`clusterrolebinding`
+ <li>`secret`
  </ul>
 </br>  Por exemplo, execute `kubectl create role --resource-name <x> --resource-name <y>` e não `kubectl create role --resource-name <x>,<y>`.</td>
 </tr>
@@ -84,23 +164,23 @@ Para obter mais informações sobre o processo de atualização, consulte [Atual
 <td>Planejamento de afinidade de Pod</td>
 <td> A anotação `scheduler.alpha.kubernetes.io/affinity` está descontinuada.
 <ol>
-  <li>Execute esse comando para cada namespace, exceto `ibm-system` e `kube-system` para determinar se é preciso atualizar o planejamento de afinidade de pod.</br>
+  <li>Para cada namespace, exceto `ibm-system` e `kube-system`, determine se você precisa atualizar o planejamento de afinidade de pod:</br>
   ```
   kubectl get pods -n <namespace> -o yaml | grep "scheduler.alpha.kubernetes.io/affinity" && echo "Action required"
   ```
   </br>
-  <li>Se `"Action required"` for retornado, modifique os pods impactados para usar o campo _afinidade_ de [_PodSpec_ ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) em vez da anotação `scheduler.alpha.kubernetes.io/affinity`.
+  <li>Se `"Action required"` for retornado, use o campo [_PodSpec_ ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _affinity_ em vez da anotação `scheduler.alpha.kubernetes.io/affinity`.
 </ol>
 </tr>
 <tr>
 <td>Network Policy</td>
-<td>A anotação `net.beta.kubernetes.io/network-policy` não é mais suportada.
+<td>A anotação `net.beta.kubernetes.io/network-policy` não está mais disponível.
 <ol>
-  <li>Execute esse comando para determinar se você precisa atualizar suas políticas de rede.</br>
+  <li>Determine se você precisa mudar as políticas:</br>
   ```
   kubectl get ns -o yaml | grep "net.beta.kubernetes.io/network-policy" | grep "DefaultDeny" && echo "Action required"
   ```
-  <li>Se `Action required` for retornado, inclua a política de rede a seguir em cada namespace do Kubernetes que foi listado.</br>
+  <li>Se `"Action required"` for retornado, inclua a política de rede a seguir em cada namespace do Kubernetes que foi listado:</br>
 
   <pre class="codeblock">
   <code>
@@ -116,7 +196,7 @@ Para obter mais informações sobre o processo de atualização, consulte [Atual
   </code>
   </pre>
 
-  <li> Com a política de rede no local, remova a anotação `net.beta.kubernetes.io/network-policy`.
+  <li> Depois de incluir a política de rede, remova a anotação `net.beta.kubernetes.io/network-policy`:
   ```
   kubectl annotate ns <namespace> --overwrite "net.beta.kubernetes.io/network-policy-"
   ```
@@ -124,30 +204,34 @@ Para obter mais informações sobre o processo de atualização, consulte [Atual
 </tr>
 <tr>
 <td>Tolerations</td>
-<td>A anotação `scheduler.alpha.kubernetes.io/tolerations` não é mais suportada.
+<td>A anotação `scheduler.alpha.kubernetes.io/tolerations` não está mais disponível.
 <ol>
-  <li>Execute esse comando para cada namespace, exceto para `ibm-system` e `kube-system` para determinar se é preciso atualizar tolerations.</br>
+  <li>Para cada namespace, exceto `ibm-system` e `kube-system`, determine se é necessário mudar as tolerâncias:</br>
   ```
   kubectl get pods -n <namespace> -o yaml | grep "scheduler.alpha.kubernetes.io/tolerations" && echo "Action required"
   ```
   </br>
 
-  <li>Se `"Action required"` for retornado, modifique os pods impactados para usar o campo _tolerations_ de [_PodSpec_ ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) em vez da anotação `scheduler.alpha.kubernetes.io/tolerations`.
+  <li>Se `"Action required"` for retornado, use o campo [_PodSpec_ ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _tolerations_ em vez da anotação `scheduler.alpha.kubernetes.io/tolerations`
 </ol>
 </tr>
 <tr>
 <td>Taints</td>
-<td>A anotação `scheduler.alpha.kubernetes.io/taints` não é mais suportada.
+<td>A anotação `scheduler.alpha.kubernetes.io/taints` não está mais disponível.
 <ol>
-  <li>Execute esse comando para determinar se você precisa atualizar taints. </br>
+  <li>Determine se você precisa mudar as contaminações:</br>
   ```
   kubectl get nodes -o yaml | grep "scheduler.alpha.kubernetes.io/taints" && echo "Action required"
   ```
-  <li>Se `"Action required"` for retornado, remova a anotação `scheduler.alpha.kubernetes.io/taints` para cada nó que possui a anotação não suportada.</br>
+  <li>Se `"Action required"` é retornado, remova a anotação `scheduler.alpha.kubernetes.io/taints` para cada nó:</br>
   `kubectl annotate nodes <node> scheduler.alpha.kubernetes.io/taints-`
-  <li>Quando a anotação não suportada é removida, inclua um taint em cada nó. Deve-se ter o `kubectl` CLI versão 1.6 ou mais recente.</br>
+  <li>Inclua uma contaminação em cada nó:</br>
   `kubectl taint node <node> <taint>`
   </ol>
 </tr>
+<tr>
+<td>DNS do pod StatefulSet</td>
+<td>Os pods StatefulSet perdem suas entradas DNS do Kubernetes depois de atualizar o mestre. Para restaurar as entradas DNS, exclua os pods StatefulSet. O Kubernetes recria os pods e restaura automaticamente as entradas DNS. Para obter mais informações, veja [Problema do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/issues/48327).
+</tr>
 </tbody>
-</table></staging>
+</table>

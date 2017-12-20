@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-08-14"
+lastupdated: "2017-11-02"
 
 ---
 
@@ -12,17 +12,17 @@ lastupdated: "2017-08-14"
 {:pre: .pre}
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
-{:tip: .tip} 
+{:tip: .tip}
 {:download: .download}
 
 
-# 为 {{site.data.keyword.Bluemix_notm}} Dedicated 映像注册表创建 {{site.data.keyword.registryshort_notm}} 令牌
+# 为 {{site.data.keyword.Bluemix_dedicated_notm}} 映像注册表创建 {{site.data.keyword.registryshort_notm}} 令牌
 {: #cs_dedicated_tokens}
 
 创建一个未到期的令牌，以便将用于单个组和可扩展组的映像注册表与集群一起使用。
 {:shortdesc}
 
-1.  登录到 {{site.data.keyword.Bluemix_short}} Dedicated 环境。
+1.  登录到 {{site.data.keyword.Bluemix_dedicated_notm}} 环境。
 
     ```
     bx login -a api.<dedicated_domain>
@@ -43,7 +43,7 @@ lastupdated: "2017-08-14"
     ```
     {: pre}
 
-4.  为当前会话请求永久注册表标记。将 <dedicated_domain> 替换为 {{site.data.keyword.Bluemix_notm}} Dedicated 环境的域。此令牌将授予对当前名称空间中的映像的访问权。
+4.  为当前会话请求永久注册表标记。将 <dedicated_domain> 替换为 {{site.data.keyword.Bluemix_dedicated_notm}} 环境的域。此令牌将授予对当前名称空间中的映像的访问权。
 
     ```
     curl -XPOST -H "Authorization: ${OAUTH_TOKEN}" -H "Organization: ${ORG_GUID}" https://registry.<dedicated_domain>/api/v1/tokens?permanent=true
@@ -74,36 +74,36 @@ lastupdated: "2017-08-14"
     kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_url> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
     ```
     {: pre}
-    
+
     <table>
     <caption>表 1. 了解此命令的组成部分</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png"/> 了解此命令的组成部分</th>
+    <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解此命令的组成部分</th>
     </thead>
     <tbody>
     <tr>
     <td><code>--namespace &lt;kubernetes_namespace&gt;</code></td>
-    <td>必需。要使用私钥并将容器部署到的集群的 Kubernetes 名称空间。运行 <code>kubectl get namespaces</code> 可列出集群中的所有名称空间。</td> 
+    <td>必需。要使用私钥并将容器部署到的集群的 Kubernetes 名称空间。运行 <code>kubectl get namespaces</code> 可列出集群中的所有名称空间。</td>
     </tr>
     <tr>
     <td><code>&lt;secret_name&gt;</code></td>
-    <td>必需。要用于 imagePullSecret 的名称。</td> 
+    <td>必需。要用于 imagePullSecret 的名称。</td>
     </tr>
     <tr>
     <td><code>--docker-server &lt;registry_url&gt;</code></td>
-    <td>必需。指向用于设置名称空间的映像注册表的 URL：registry.&lt;dedicated_domain&gt;</li></ul></td> 
+    <td>必需。指向用于设置名称空间的映像注册表的 URL：registry.&lt;dedicated_domain&gt;</li></ul></td>
     </tr>
     <tr>
     <td><code>--docker-username &lt;docker_username&gt;</code></td>
-    <td>必需。用于登录到专用注册表的用户名。</td> 
+    <td>必需。用于登录到专用注册表的用户名。</td>
     </tr>
     <tr>
     <td><code>--docker-password &lt;token_value&gt;</code></td>
-    <td>必需。先前检索到的注册表令牌的值。</td> 
+    <td>必需。先前检索到的注册表令牌的值。</td>
     </tr>
     <tr>
     <td><code>--docker-email &lt;docker-email&gt;</code></td>
-    <td>必需。如果您有 Docker 电子邮件地址，请输入该地址。如果没有，请输入虚构的电子邮件地址，例如 a@b.c。此电子邮件对于创建 Kubernetes 私钥是必需的，但在创建后不会再使用此电子邮件。</td> 
+    <td>必需。如果您有 Docker 电子邮件地址，请输入该地址。如果没有，请输入虚构的电子邮件地址，例如 a@b.c。此电子邮件对于创建 Kubernetes 私钥是必需的，但在创建后不会再使用此电子邮件。</td>
     </tr>
     </tbody></table>
 
@@ -135,26 +135,26 @@ lastupdated: "2017-08-14"
         <tbody>
         <tr>
         <td><code>&lt;pod_name&gt;</code></td>
-        <td>要创建的 pod 的名称。</td> 
+        <td>要创建的 pod 的名称。</td>
         </tr>
         <tr>
         <td><code>&lt;container_name&gt;</code></td>
-        <td>要部署到集群的容器的名称。</td> 
+        <td>要部署到集群的容器的名称。</td>
         </tr>
         <tr>
         <td><code>&lt;my_namespace&gt;</code></td>
-        <td>存储映像的名称空间。要列出可用名称空间，请运行 `bx cr namespace-list`。</td> 
+        <td>存储映像的名称空间。要列出可用名称空间，请运行 `bx cr namespace-list`。</td>
         </tr>
         <td><code>&lt;my_image&gt;</code></td>
-        <td>要使用的映像的名称。要列出 {{site.data.keyword.Bluemix_notm}} 帐户中的可用映像，请运行 <code>bx cr image-list</code>。</td> 
+        <td>要使用的映像的名称。要列出 {{site.data.keyword.Bluemix_notm}} 帐户中的可用映像，请运行 <code>bx cr image-list</code>。</td>
         </tr>
         <tr>
         <td><code>&lt;tag&gt;</code></td>
-        <td>要使用的映像的版本。如果未指定标记，那么缺省情况下会使用标记为 <strong>latest</strong> 的映像。</td> 
+        <td>要使用的映像的版本。如果未指定标记，那么缺省情况下会使用标记为 <strong>latest</strong> 的映像。</td>
         </tr>
         <tr>
         <td><code>&lt;secret_name&gt;</code></td>
-        <td>先前创建的 imagePullSecret 的名称。</td> 
+        <td>先前创建的 imagePullSecret 的名称。</td>
         </tr>
         </tbody></table>
 
@@ -166,5 +166,3 @@ lastupdated: "2017-08-14"
           kubectl apply -f mypod.yaml
           ```
           {: pre}
-
-

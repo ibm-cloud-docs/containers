@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-17"
+lastupdated: "2017-11-02"
 
 ---
 
@@ -17,14 +17,14 @@ lastupdated: "2017-10-17"
 
 
 # Gängige Themen für {{site.data.keyword.containershort_notm}}
-{: #cs_internal}
+{: #cs_popular_topics}
 
 Überprüfen Sie die relevanten Themen für Containerentwickler.
 {:shortdesc}
 
 <table>
 <thead>
-<th colspan=2><img src="images/idea.png"/>Gängige Themen für Container und Kubernetes-Cluster</th>
+<th colspan=2><img src="images/idea.png" alt="Ideensymbol"/>Gängige Themen für Container und Kubernetes-Cluster</th>
 </thead>
 <tbody>
 <tr>
@@ -46,6 +46,10 @@ lastupdated: "2017-10-17"
 <tr>
 <td>[System auf Kubernetes 1.7 aktualisieren](cs_versions.html)</td>
 <td>Überprüfen Sie die Änderungen, die an Ihren Clustern vorgenommen werden müssen, bevor Sie das System auf Kubernetes 1.7 aktualisieren.</td>
+</tr>
+<tr>
+<td>[REST-API für Cluster ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://us-south.containers.bluemix.net/swagger)</td>
+<td>Rufen Sie die API-Dokumentation zum Verwalten von {{site.data.keyword.containershort_notm}} auf.</td>
 </tr>
 </tbody></table>
 

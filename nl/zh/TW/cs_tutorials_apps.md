@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-20"
+lastupdated: "2017-11-14"
 
 ---
 
@@ -26,9 +26,9 @@ lastupdated: "2017-10-20"
 
 每一個課程都會教您如何以漸進方式部署相同應用程式的較複雜版本。下圖顯示指導教學中的應用程式部署元件，第四部分除外。
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_roadmap.png">![課程元件](images/cs_app_tutorial_roadmap.png)</a>
+![課程元件](images/cs_app_tutorial_roadmap.png)
 
-Kubernetes 使用數個不同類型的資源來讓您的應用程式在叢集中開始執行。在 Kubernetes 中，部署及服務會一起運作。部署包括應用程式的定義，例如用於容器的映像檔，以及必須為應用程式公開哪個埠。當您建立部署時，會針對您在部署中定義的每一個容器各建立一個 Kubernetes Pod。為了讓您的應用程式更具復原力，您可以在部署中定義相同應用程式的多個實例，並且讓 Kubernetes 自動為您建立抄本集。抄本集會監視 Pod，並確保隨時都有所需數目的 Pod 在執行。如果其中一個 Pod 變得沒有回應，就會自動重建該 Pod。
+如圖所示，Kubernetes 使用數個不同類型的資源來讓您的應用程式在叢集中開始執行。在 Kubernetes 中，部署及服務會一起運作。部署包括應用程式的定義，例如用於容器的映像檔，以及必須為應用程式公開哪個埠。當您建立部署時，會針對您在部署中定義的每一個容器各建立一個 Kubernetes Pod。為了讓您的應用程式更具復原力，您可以在部署中定義相同應用程式的多個實例，並且讓 Kubernetes 自動為您建立抄本集。抄本集會監視 Pod，並確保隨時都有所需數目的 Pod 在執行。如果其中一個 Pod 變得沒有回應，就會自動重建該 Pod。
 
 服務會將一組 Pod 群組在一起，並且為叢集中的其他服務提供這些 Pod 的網路連線，而不需公開每一個 Pod 的實際專用 IP 位址。您可以使用 Kubernetes 服務，讓叢集內的其他 Pod 能夠使用應用程式，或是將應用程式公開至網際網路。在本指導教學中，您將會使用 Kubernetes 服務，透過自動指派給工作者節點的公用 IP 位址以及公用埠，從網際網路存取執行中的應用程式。
 
@@ -60,9 +60,12 @@ Kubernetes 使用數個不同類型的資源來讓您的應用程式在叢集中
 ## 課程 1：將單一實例應用程式部署至 Kubernetes 叢集
 {: #cs_apps_tutorial_lesson1}
 
-在本課程中，您會將 Hello World 應用程式的單一實例部署至叢集中。
+在本課程中，您會將 Hello World 應用程式的單一實例部署至叢集中。下圖包括您藉由完成本課程所部署的元件。
+{:shortdesc}
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_components1.png">![部署設定](images/cs_app_tutorial_components1.png)</a>
+![部署設定](images/cs_app_tutorial_components1.png)
+
+在前一個指導教學中，您已有一個帳戶和一個具有一個工作者節點的叢集。在本課程中，您將配置一個部署，並在工作者節點的 Kubernet Pod 中部署 Hello World 應用程式。若要讓它可公開使用，請建立 Kubernetes 服務。
 
 
 1.  登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。若要指定 {{site.data.keyword.Bluemix_notm}} 地區，請[包括 API 端點](cs_regions.html#bluemix_regions)。
@@ -148,10 +151,10 @@ Kubernetes 使用數個不同類型的資源來讓您的應用程式在叢集中
         ```
         {: pre}
 
-5.  將 [Hello World 應用程式 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM/container-service-getting-started-wt) 的原始碼複製或下載至您的使用者起始目錄。
+5.  將 [Hello World 應用程式 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/Osthanes/container-service-getting-started-wt) 的原始碼複製或下載至您的使用者起始目錄。
 
     ```
-    git clone https://github.com/IBM/container-service-getting-started-wt.git
+    git clone https://github.com/Osthanes/container-service-getting-started-wt.git
     ```
     {: pre}
 
@@ -381,14 +384,19 @@ Kubernetes 使用數個不同類型的資源來讓您的應用程式在叢集中
 
 本課程中有太多指令？同意。那麼使用配置 Script 來為您執行某些工作怎麼樣呢？若要為第二個應用程式版本使用配置 Script，以及部署該應用程式的多個實例來建立可用性，請繼續進行下一個課程。
 
+
+
 ## 課程 2：部署及更新具有更高可用性的應用程式
 {: #cs_apps_tutorial_lesson2}
 
 在本課程中，您會將 Hello World 應用程式的三個實例部署至叢集中，以獲得比第一個應用程式版本更高的可用性。高可用性代表使用者存取作業會分流至這三個實例。當有太多使用者嘗試存取相同的應用程式實例時，他們可能會注意到回應時間變慢。對您的使用者而言，多個實例代表回應會更快。在本課程中，您也會學到性能檢查及部署更新如何使用 Kubernetes。
+{:shortdesc}
 
+下圖包括您藉由完成本課程所部署的元件。
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_components2.png">![部署設定](images/cs_app_tutorial_components2.png)</a>
+![部署設定](images/cs_app_tutorial_components2.png)
 
+在前一個指導教學中，您有自己的帳戶和一個具有一個工作者節點的叢集。在本課程中，您將配置一個部署，並部署三個 Hello World 應用程式實例。每一個實例都會部署在 Kubernetes Pod 中，作為工作者節點中抄本集的一部分。若要讓它可公開使用，請同時建立 Kubernetes 服務。 
 
 如配置 Script 中所定義，Kubernetes 可以使用可用性檢查來查看 Pod 中的容器是否正在執行中。例如，這些檢查可能會捕捉到死鎖、應用程式的執行位置，但無法繼續進行。將處於此狀況的容器重新啟動，有助於讓應用程式提高可用性，而不管有錯誤。然後，Kubernetes 會使用就緒檢查，以瞭解容器何時準備好，可以重新開始接受資料流量。當 Pod 的容器備妥時，就會將 Pod 視為備妥。當 Pod 備妥時，就會重新啟動。在 Stage2 應用程式中，每 15 秒，應用程式就會逾時。若已在配置 Script 中配置性能檢查，當性能檢查發現應用程式有問題時，就會重建容器。
 
@@ -586,8 +594,13 @@ service "hw-demo-service" deleted
 {: #cs_apps_tutorial_lesson3}
 
 在前面的課程中，應用程式是在一個工作者節點中部署成單一元件。在本課程中，您會將一個應用程式的兩個元件部署在叢集中，而該叢集會使用您在前一個指導教學中新增至叢集的 Watson Tone Analyzer 服務。將元件分開在不同的容器中，可確保您在更新其中一個元件時，不會影響其他元件。然後，您將會更新應用程式，使用更多抄本將其擴充，以提高可用性。
+{:shortdesc}
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_components3.png">![部署設定](images/cs_app_tutorial_components3.png)</a>
+下圖包括您藉由完成本課程所部署的元件。
+
+![部署設定](images/cs_app_tutorial_components3.png)
+
+在前一個指導教學中，您有自己的帳戶和一個具有一個工作者節點的叢集。在本課程中，您將在 {{site.data.keyword.Bluemix_notm}} 帳戶中建立 Watson Tone Analyzer 服務的實例，並配置兩個部署，分別部署應用程式的每一個元件。每一個元件都會部署在工作者節點的 Kubernetes Pod 中。若要讓這兩個元件可公開使用，請同時對每一個元件建立一個 Kubernetes 服務。 
 
 
 ### 課程 3a：部署 Watson Tone Analyzer 應用程式
@@ -905,7 +918,7 @@ service "hw-demo-service" deleted
 
 2.  選用項目：針對 watson-pod 部署重複這些變更。
 
-[測試您學到的知識，並進行隨堂測驗！![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://bluemix-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
+[測試您學到的知識，並進行隨堂測驗！![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 
 恭喜！您已部署 Watson Tone Analyzer 應用程式。公關公司可以真的開始使用這個應用程式的部署，以開始分析其新聞稿。
 

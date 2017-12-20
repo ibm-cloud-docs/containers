@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-20"
+lastupdated: "2017-11-14"
 
 ---
 
@@ -24,19 +24,17 @@ In diesem zweiten Lernprogramm erfahren Sie, wie Sie mit Kubernetes eine contain
 
 In diesem Szenario stellt der App-Entwickler des PR-Unternehmens eine 'Hello World'-Version der App in einem Kubernetes-Cluster bereit, der vom Netzadministrator im [ersten Lernprogramm](cs_tutorials.html#cs_cluster_tutorial) erstellt wurde.
 
-In jeder Lerneinheit erfahren Sie, wie Sie zunehmend komplexere Versionen ein und derselben App implementieren. Im Diagramm sind (mit Ausnahme von Teil 4) die Komponenten der App-Bereitstellungen des Lernprogramms sichtbar.
+In jeder Lerneinheit erfahren Sie, wie Sie zunehmend komplexere Versionen ein und derselben App implementieren. Im folgenden Diagramm sind (mit Ausnahme von Teil 4) die Komponenten der App-Bereitstellungen des Lernprogramms sichtbar.
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_roadmap.png">![Komponenten der Lerneinheit](images/cs_app_tutorial_roadmap.png)</a>
+![Komponenten der Lerneinheit](images/cs_app_tutorial_roadmap.png)
 
-Kubernetes verwendet diverse Typen von Ressourcen, um Ihre Apps betriebsbereit für die Ausführung in Clustern zu gestalten. In Kubernetes arbeiten Bereitstellungen und Services zusammen. Bereitstellungen enthalten die Definitionen für die App, wie z. B. das Image, das für den Container verwendet werden soll oder die Angabe, welcher Port für die App offengelegt werden soll. Beim Erstellen einer Bereitstellung wird für jeden Container, den Sie in der Bereitstellung definiert haben, jeweils ein Kubernetes-Pod erstellt. Um Ihre App widerstandsfähiger zu machen, können Sie in Ihrer Bereitstellung mehrere Instanzen derselben App definieren und von Kubernetes automatisch eine Replikatgruppe erstellen lassen. Die Replikatgruppe überwacht die Pods und stellt sicher, dass zu jedem beliebigen Zeitpunkt die gewünschte Anzahl von Pods betriebsbereit ist. Reagiert einer der Pods nicht mehr, so wird dieser automatisch neu erstellt.
+Wie im Diagramm dargestellt, verwendet Kubernetes verschiedene Typen von Ressourcen, um Ihre Apps betriebsbereit für die Ausführung in Clustern zu gestalten. In Kubernetes arbeiten Bereitstellungen und Services zusammen. Bereitstellungen enthalten die Definitionen für die App, wie z. B. das Image, das für den Container verwendet werden soll oder die Angabe, welcher Port für die App offengelegt werden soll. Beim Erstellen einer Bereitstellung wird für jeden Container, den Sie in der Bereitstellung definiert haben, jeweils ein Kubernetes-Pod erstellt. Um Ihre App widerstandsfähiger zu machen, können Sie in Ihrer Bereitstellung mehrere Instanzen derselben App definieren und von Kubernetes automatisch eine Replikatgruppe erstellen lassen. Die Replikatgruppe überwacht die Pods und stellt sicher, dass zu jedem beliebigen Zeitpunkt die gewünschte Anzahl von Pods betriebsbereit ist. Reagiert einer der Pods nicht mehr, so wird dieser automatisch neu erstellt.
 
 Services fassen eine Gruppe von Pods zusammen und stellen diesen Pods eine Netzverbindung für andere Services im Cluster bereit, ohne hierbei die tatsächlichen privaten IP-Adressen der einzelnen Pods preiszugeben. Mit Kubernetes-Services können Sie eine App anderen Pods im Cluster zur Verfügung stellen oder über das Internet verfügbar machen. Im vorliegenden Lernprogramm verwenden Sie einen Kubernetes-Service, um über eine öffentliche IP-Adresse, die automatisch einem Workerknoten zugewiesen wird, und einen öffentlichen Port vom Internet aus auf Ihre aktive App zuzugreifen.
 
 Um die Verfügbarkeit Ihrer App noch weiter zu steigern, können sie bei Standardclustern mehrere Workerknoten erstellen, die eine noch größere Anzahl an Replikaten der App ausführen. Obwohl diese Task im vorliegenden Lernprogramm nicht behandelt wird, sollten Sie dieses Konzept im Hinterkopf behalten, wenn Sie zu einem späteren Zeitpunkt die Verfügbarkeit einer App weiter verbessern möchten.
 
-Die Integration eines {{site.data.keyword.Bluemix_notm}}-Service
-in eine App wird nur in einer Lerneinheit behandelt. Sie können Services jedoch mit so einfach oder so komplex
-konzipierten Apps verwenden, wie überhaupt vorstellbar.
+Die Integration eines {{site.data.keyword.Bluemix_notm}}-Service in eine App wird nur in einer Lerneinheit behandelt. Sie können Services jedoch mit so einfach oder so komplex konzipierten Apps verwenden, wie überhaupt vorstellbar.
 
 ## Ziele
 
@@ -62,9 +60,12 @@ Softwareentwickler und Netzadministratoren, die noch nie zuvor eine App in einem
 ## Lerneinheit 1: Einzelinstanz-Apps auf Kubernetes-Clustern bereitstellen
 {: #cs_apps_tutorial_lesson1}
 
-In dieser Lerneinheit stellen Sie eine einzelne Instanz der App 'Hello World' in einem Cluster bereit.
+In dieser Lerneinheit stellen Sie eine einzelne Instanz der App 'Hello World' in einem Cluster bereit. Das folgende Diagramm enthält die von Ihnen im Rahmen der Lerneinheit bereitgestellten Komponenten.
+{:shortdesc}
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_components1.png">![Konfiguration für die Bereitstellung](images/cs_app_tutorial_components1.png)</a>
+![Konfiguration für die Bereitstellung](images/cs_app_tutorial_components1.png)
+
+Aus dem vorherigen Lernprogramm verfügen Sie bereits über ein Konto und einen Cluster mit einem Workerknoten. In dieser Lerneinheit konfigurieren Sie eine Bereitstellung und stellen die App 'Hello World' in einem Kubernetes-Pod im Workerknoten bereit. Um die App öffentlich zu machen, erstellen Sie einen Kubernetes-Service.
 
 
 1.  Melden Sie sich an der {{site.data.keyword.Bluemix_notm}}-CLI an. Geben Sie Ihre {{site.data.keyword.Bluemix_notm}}-Berechtigungsnachweise ein, wenn Sie dazu aufgefordert werden. Zur Angabe einer {{site.data.keyword.Bluemix_notm}}-Region müssen Sie den [API-Endpunkt einschließen](cs_regions.html#bluemix_regions).
@@ -152,10 +153,10 @@ um den Pfad zu der lokalen Kubernetes-Konfigurationsdatei als Umgebungsvariable 
         ```
         {: pre}
 
-5.  Klonen Sie den Quellcode für die [App 'Hello World' ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/IBM/container-service-getting-started-wt) oder laden Sie ihn in das Benutzerausgangsverzeichnis herunter.
+5.  Klonen Sie den Quellcode für die [App 'Hello World' ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/Osthanes/container-service-getting-started-wt) oder laden Sie ihn in das Benutzerausgangsverzeichnis herunter.
 
     ```
-    git clone https://github.com/IBM/container-service-getting-started-wt.git
+    git clone https://github.com/Osthanes/container-service-getting-started-wt.git
     ```
     {: pre}
 
@@ -387,14 +388,19 @@ Glückwunsch! Sie haben die erste Version der App bereitgestellt.
 
 Sie sind der Ansicht, dass diese Lerneinheit zu viele Befehle enthält? Ganz Ihrer Meinung. Warum also verwenden Sie nicht ein Konfigurationsscript, das Ihnen einen Teil der Arbeit abnimmt? Um für die zweite Version der App ein Konfigurationsscript zu verwenden und durch die Bereitstellung mehrerer Instanzen dieser App ein höheres Maß an Verfügbarkeit erreichen, fahren Sie mit der nächsten Lerneinheit fort.
 
+
+
 ## Lerneinheit 2: Apps mit höherer Verfügbarkeit bereitstellen und aktualisieren
 {: #cs_apps_tutorial_lesson2}
 
 In dieser Lerneinheit stellen Sie drei Instanzen der App 'Hello World' in einem Cluster für höhere Verfügbarkeit als in der ersten Version der App bereit. Höhere Verfügbarkeit bedeutet, dass der Benutzerzugriff auf drei Instanzen aufgeteilt ist. Versuchen zu viele Benutzer, auf dieselbe Instanz der App zuzugreifen, so können schleppende Reaktionszeiten auftreten. Eine höhere Anzahl von Instanzen kann für Ihre Benutzer gleichbedeutend mit geringeren Reaktionszeiten sein. In der vorliegenden Lerneinheit erfahren Sie außerdem, wie Statusprüfungen und Bereitstellungsaktualisierungen mit Kubernetes funktionieren können.
+{:shortdesc}
 
+Das folgende Diagramm enthält die von Ihnen im Rahmen der Lerneinheit bereitgestellten Komponenten.
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_components2.png">![Konfiguration für die Bereitstellung](images/cs_app_tutorial_components2.png)</a>
+![Konfiguration für die Bereitstellung](images/cs_app_tutorial_components2.png)
 
+Aus dem vorherigen Lernprogramm verfügen Sie bereits über ein Konto und einen Cluster mit einem Workerknoten. In dieser Lerneinheit konfigurieren Sie eine Bereitstellung und stellen drei Instanzen der App 'Hello World' bereit. Jede dieser Instanzen wird in einem Kubernetes-Pod als Teil einer Replikatgruppe im Workerknoten implementiert. Um die App öffentlich zu machen, erstellen Sie zudem einen Kubernetes-Service. 
 
 Wie im Konfigurationsscript definiert kann Kubernetes anhand einer Verfügbarkeitsprüfung feststellen, ob ein Container in einem Pod aktiv oder inaktiv ist. Mit diesen Prüfungen können gegebenenfalls Deadlocks abgefangen werden, bei denen eine App zwar aktiv, nicht aber in der Lage ist, Verarbeitungsfortschritt zu machen. Durch den Neustart eines Containers, der sich in einem solchen Zustand befindet, ist es möglich, die Verfügbarkeit der App trotz Fehlern zu erhöhen. Anhand einer Bereitschaftsprüfung ermittelt Kubernetes dann, wann ein Container wieder für die Entgegennahme von Datenverkehr ist. Ein Pod gilt als bereit, wenn sein Container bereit ist. Wenn der Pod bereit ist, wird er wieder gestartet. In der App 'Stage2' überschreitet die App alle 15 Sekunden das Zeitlimit. Da im Konfigurationsscript eine Statusprüfung konfiguriert ist, werden Container erneut  erstellt, falls bei der Statusprüfung ein Problem im Zusammenhang mit der App festgestellt wird.
 
@@ -595,8 +601,13 @@ service "hw-demo-service" deleted
 
 In den vorherigen Lerneinheiten wurden die Apps als einzelne Komponenten in einem Workerknoten bereitgestellt. In dieser Lerneinheit stellen Sie zwei Komponenten einer App in einem Cluster bereit, die den Service 'Watson Tone Analyzer' verwenden,
 den Sie im vorherigen Lernprogramm zu Ihrem Cluster hinzugefügt haben. Durch das Aufteilen der Komponenten auf verschiedene Container stellen Sie sicher, dass Sie ein Element aktualisieren können, ohne dass sich dies nachteilig auf die übrigen auswirkt. Dann aktualisieren Sie die App, um sie mit einer größeren Anzahl von Replikaten vertikal zu skalieren und so ihre Verfügbarkeit weiter zu steigern.
+{:shortdesc}
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_components3.png">![Konfiguration für die Bereitstellung](images/cs_app_tutorial_components3.png)</a>
+Das folgende Diagramm enthält die von Ihnen im Rahmen der Lerneinheit bereitgestellten Komponenten.
+
+![Konfiguration für die Bereitstellung](images/cs_app_tutorial_components3.png)
+
+Aus dem vorherigen Lernprogramm verfügen Sie bereits über ein Konto und einen Cluster mit einem Workerknoten. In dieser Lerneinheit erstellen Sie eine Instanz des Watson Tone Analyzer-Service in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto und konfigurieren zwei Bereitstellungen (eine Bereitstellung für jede Komponente der App). Jede Komponente wird in einem Kubernetes-Pod im Workerknoten implementiert. Um beide Komponenten öffentlich zu machen, erstellen Sie zudem für jede Komponente einen Kubernetes-Service. 
 
 
 ### Lerneinheit 3a: App 'Watson Tone Analyzer' bereitstellen
@@ -921,7 +932,7 @@ Revision 2 ist die Imageänderung, die Sie im vorherigen Schritt vorgenommen hab
 
 2.  Optional: Wiederholen Sie die Änderungen für die Bereitstellung 'watson-pod'.
 
-[Testen Sie Ihr Wissen in einem Quiz! ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://bluemix-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
+[Testen Sie Ihr Wissen in einem Quiz! ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 
 Glückwunsch! Sie haben die App 'Watson Tone Analyzer' bereitgestellt. Das PR-Unternehmen kann diese Bereitstellung der App künftig definitiv einsetzen, um mit der Analyse seiner Pressemitteilungen zu beginnen.
 

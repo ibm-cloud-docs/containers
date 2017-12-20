@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-24"
+lastupdated: "2017-11-28"
 
 ---
 
@@ -91,7 +91,7 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
     <tbody>
       <tr>
        <td>Unknown (Unbekannt)</td>
-       <td>Der Kubernetes-Master ist aus einem der folgenden Gründe nicht erreichbar:<ul><li>Sie haben ein Update Ihres Kubernetes-Masters angefordert. Der Status des Workerknotens kann während des Updates nicht abgerufen werden.</li><li>Sie haben möglicherweise eine zusätzliche Firewall, die Ihre Workerknoten schützt, oder Sie haben die Firewalleinstellungen kürzlich geändert. {{site.data.keyword.containershort_notm}} erfordert, dass bestimmte IP-Adressen und Ports geöffnet sind, damit die Kommunikation vom Workerknoten zum Kubernetes-Master und umgekehrt möglich ist. Weitere Informationen finden Sie unter [Workerknoten hängen in einer Neuladen-Schleife](#cs_firewall).</li><li>Der Kubernetes-Master ist inaktiv. Wenden Sie sich an den {{site.data.keyword.Bluemix_notm}}-Support, indem Sie ein [{{site.data.keyword.Bluemix_notm}}-Support-Ticket](/docs/support/index.html#contacting-support) öffnen.</li></ul></td>
+       <td>Der Kubernetes-Master ist aus einem der folgenden Gründe nicht erreichbar:<ul><li>Sie haben ein Update Ihres Kubernetes-Masters angefordert. Der Status des Workerknotens kann während des Updates nicht abgerufen werden.</li><li>Sie haben möglicherweise eine zusätzliche Firewall, die Ihre Workerknoten schützt, oder Sie haben die Firewalleinstellungen kürzlich geändert. {{site.data.keyword.containershort_notm}} erfordert, dass bestimmte IP-Adressen und Ports geöffnet sind, damit die Kommunikation vom Workerknoten zum Kubernetes-Master und umgekehrt möglich ist. Weitere Informationen finden Sie in [Firewall verhindert Verbindung für Workerknoten](#cs_firewall).</li><li>Der Kubernetes-Master ist inaktiv. Wenden Sie sich an den {{site.data.keyword.Bluemix_notm}}-Support, indem Sie ein [{{site.data.keyword.Bluemix_notm}}-Support-Ticket](/docs/support/index.html#contacting-support) öffnen.</li></ul></td>
       </tr>
       <tr>
         <td>Provisioning (Wird bereitgestellt)</td>
@@ -141,7 +141,7 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
     <tbody>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Your account is currently prohibited from ordering 'Computing Instances'.</td>
-        <td>Mit Ihrem Konto von IBM Bluemix Infrastructure (SoftLayer) können Sie möglicherweise keine Rechenressourcen bestellen. Wenden Sie sich an den {{site.data.keyword.Bluemix_notm}}-Support, indem Sie ein [{{site.data.keyword.Bluemix_notm}}-Support-Ticket](/docs/support/index.html#contacting-support) öffnen.</td>
+        <td>Mit Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) können Sie möglicherweise keine Rechenressourcen bestellen. Wenden Sie sich an den {{site.data.keyword.Bluemix_notm}}-Support, indem Sie ein [{{site.data.keyword.Bluemix_notm}}-Support-Ticket](/docs/support/index.html#contacting-support) öffnen.</td>
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not place order. There are insufficient resources behind router 'routername' to fulfill the request for the following guests: 'worker-id'.</td>
@@ -149,18 +149,18 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not obtain network VLAN with id: &lt;vlan-id&gt;.</td>
-        <td>Ihr Workerknoten konnte nicht bereitgestellt werden, weil die ausgewählte VLAN-ID aus einem der folgenden Gründe nicht gefunden werden konnte:<ul><li>Möglicherweise haben Sie statt der VLAN-ID die VLAN-Nummer angegeben. Die VLAN-Nummer umfasst 3 oder 4 Ziffern, während die VLAN-ID 7 Stellen hat. Führen Sie <code>bx cs vlans &lt;standort&gt;</code> aus, um die VLAN-ID abzurufen.<li>Möglicherweise ist die VLAN-ID nicht dem von Ihnen verwendeten Konto von IBM Bluemix Infrastructure (SoftLayer) zugeordnet. Führen Sie <code>bx cs vlans &lt;standort&gt;</code> aus, um verfügbare VLAN-IDs für Ihr Konto aufzulisten. Um das Konto von IBM Bluemix Infrastructure (SoftLayer) zu ändern, sollten Sie die Informationen unter [bx cs credentials-set](cs_cli_reference.html#cs_credentials_set) nachlesen. </ul></td>
+        <td>Ihr Workerknoten konnte nicht bereitgestellt werden, weil die ausgewählte VLAN-ID aus einem der folgenden Gründe nicht gefunden werden konnte:<ul><li>Möglicherweise haben Sie statt der VLAN-ID die VLAN-Nummer angegeben. Die VLAN-Nummer umfasst 3 oder 4 Ziffern, während die VLAN-ID 7 Stellen hat. Führen Sie <code>bx cs vlans &lt;standort&gt;</code> aus, um die VLAN-ID abzurufen.<li>Möglicherweise ist die VLAN-ID nicht dem von Ihnen verwendeten Konto von IBM Cloud Infrastructure (SoftLayer) zugeordnet. Führen Sie <code>bx cs vlans &lt;standort&gt;</code> aus, um verfügbare VLAN-IDs für Ihr Konto aufzulisten. Um das Konto von IBM Cloud Infrastructure (SoftLayer) zu ändern, sollten Sie die Informationen unter [bx cs credentials-set](cs_cli_reference.html#cs_credentials_set) nachlesen. </ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation: The location provided for this order is invalid. (HTTP 500)</td>
-        <td>Ihr System von IBM Bluemix Infrastructure (SoftLayer) ist nicht für das Bestellen von Rechenressourcen im ausgewählten Rechenzentrum eingerichtet. Wenden Sie sich an den [{{site.data.keyword.Bluemix_notm}}-Support](/docs/support/index.html#contacting-support), um sicherzustellen, dass Ihr Konto korrekt eingerichtet ist.</td>
+        <td>Ihr System von IBM Cloud Infrastructure (SoftLayer) ist nicht für das Bestellen von Rechenressourcen im ausgewählten Rechenzentrum eingerichtet. Wenden Sie sich an den [{{site.data.keyword.Bluemix_notm}}-Support](/docs/support/index.html#contacting-support), um sicherzustellen, dass Ihr Konto korrekt eingerichtet ist.</td>
        </tr>
        <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: The user does not have the necessary {{site.data.keyword.Bluemix_notm}} Infrastructure permissions to add servers
 
         </br></br>
         {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: 'Item' must be ordered with permission.</td>
-        <td>Möglicherweise verfügen Sie nicht über die erforderlichen Berechtigungen, um einen Workerknoten aus dem Portfolio von IBM Bluemix Infrastructure (SoftLayer) bereitzustellen. Weitere Informationen finden Sie unter [Zugriff auf das Portfolio von IBM Bluemix Infrastructure (SoftLayer) konfigurieren, um Kubernetes-Standardcluster zu erstellen](cs_planning.html#cs_planning_unify_accounts).</td>
+        <td>Möglicherweise verfügen Sie nicht über die erforderlichen Berechtigungen, um einen Workerknoten aus dem Portfolio von IBM Cloud Infrastructure (SoftLayer) bereitzustellen. Weitere Informationen finden Sie in [Zugriff auf das Portfolio von IBM Cloud Infrastructure (SoftLayer) konfigurieren, um Kubernetes-Standardcluster zu erstellen](cs_planning.html#cs_planning_unify_accounts).</td>
       </tr>
     </tbody>
   </table>
@@ -203,7 +203,7 @@ Informieren Sie sich über die Optionen, die Ihnen für das Debuggen Ihrer App-B
      <pre class="pre"><code>kubectl get pods</code></pre>
    2. Melden Sie sich am Container an.
      <pre class="pre"><code>kubectl exec -it &lt;podname&gt; -- /bin/bash</code></pre>
-   2. Führen Sie den Curl-Befehl für die URL aus, die für den Ingress-Service angegeben wurde. Wenn nicht auf die URL zugegriffen werden kann, dann überprüfen Sie das System auf ein Firewallproblem zwischen dem Cluster und dem externen Endpunkt.
+   2. Führen Sie den Curl-Befehl für die URL aus, die für den Ingress-Service angegeben wurde. Wenn nicht auf die URL zugegriffen werden kann, dann überprüfen Sie das System auf ein Firewallproblem zwischen dem Cluster und dem externen Endpunkt. 
      <pre class="pre"><code>curl &lt;hostname&gt;.&lt;domäne&gt;</code></pre>
 
 <br />
@@ -229,26 +229,26 @@ Client Version: v1.5.6
 <br />
 
 
-## Verbindung mit Ihrem Konto von IBM Bluemix Infrastructure (SoftLayer) während der Erstellung eines Clusters nicht möglich
+## Verbindung mit Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) während der Erstellung eines Clusters nicht möglich
 {: #cs_credentials}
 
 {: tsSymptoms}
 Wenn Sie einen neuen Kubernetes-Cluster erstellen, wird die folgende Nachricht angezeigt.
 
 ```
-Es konnte keine Verbindung zu Ihrem Konto von IBM Bluemix Infrastructure (SoftLayer) hergestellt werden. Zur Erstellung eines Standardclusters ist es erforderlich, dass Sie entweder über ein nutzungsabhängiges Konto mit einer Verbindung zum Konto von IBM Bluemix Infrastructure (SoftLayer) verfügen oder dass Sie die {{site.data.keyword.Bluemix_notm}} Container Service-CLI zum Einrichten der API-Schlüssel für {{site.data.keyword.Bluemix_notm}} Infrastructure verwendet haben.
+Es konnte keine Verbindung zu Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) hergestellt werden. Zur Erstellung eines Standardclusters ist es erforderlich, dass Sie entweder über ein nutzungsabhängiges Konto mit einer Verbindung zum Konto von IBM Cloud Infrastructure (SoftLayer) verfügen oder dass Sie die {{site.data.keyword.Bluemix_notm}} Container Service-CLI zum Einrichten der API-Schlüssel für {{site.data.keyword.Bluemix_notm}} Infrastructure verwendet haben.
 ```
 {: screen}
 
 {: tsCauses}
-Benutzer mit einem {{site.data.keyword.Bluemix_notm}}-Konto ohne Verbindung müssen ein neues nutzungsabhängiges Konto erstellen oder die API-Schlüssel von IBM Bluemix Infrastructure (SoftLayer) manuell über die {{site.data.keyword.Bluemix_notm}}-CLI hinzufügen.
+Benutzer mit einem {{site.data.keyword.Bluemix_notm}}-Konto ohne Verbindung müssen ein neues nutzungsabhängiges Konto erstellen oder die API-Schlüssel von IBM Cloud Infrastructure (SoftLayer) manuell über die {{site.data.keyword.Bluemix_notm}}-CLI hinzufügen.
 
 {: tsResolve}
 Gehen Sie wie folgt vor, um Berechtigungsnachweise für Ihr {{site.data.keyword.Bluemix_notm}}-Konto hinzuzufügen.
 
-1.  Wenden Sie sich an den Administrator von IBM Bluemix Infrastructure (SoftLayer), um den Benutzernamen und den API-Schlüssel für IBM Bluemix Infrastructure (SoftLayer) zu erhalten.
+1.  Wenden Sie sich an den Administrator von IBM Cloud Infrastructure (SoftLayer), um den Benutzernamen und den API-Schlüssel für IBM Cloud Infrastructure (SoftLayer) zu erhalten.
 
-    **Hinweis:** Das Konto von IBM Bluemix Infrastructure (SoftLayer), das Sie verwenden, muss mit SuperUser-Berechtigungen eingerichtet werden, damit Standardcluster erfolgreich erstellt werden können.
+    **Hinweis:** Das Konto von IBM Cloud Infrastructure (SoftLayer), das Sie verwenden, muss mit SuperUser-Berechtigungen eingerichtet werden, damit Standardcluster erfolgreich erstellt werden können.
 
 2.  Fügen Sie die Berechtigungsnachweise hinzu.
 
@@ -260,7 +260,7 @@ Gehen Sie wie folgt vor, um Berechtigungsnachweise für Ihr {{site.data.keyword.
 3.  Erstellen Sie einen Standardcluster.
 
   ```
-  bx cs cluster-create --location dal10 --public-vlan meine_id_des_öffentlichen_vlan --private-vlan meine_id_des_privaten_vlan --machine-type u1c.2x4 --name mein_cluster --hardware shared --workers 2
+  bx cs cluster-create --location dal10 --public-vlan meine_id_des_öffentlichen_vlan --private-vlan meine_id_des_privaten_vlan --machine-type u2c.2x4 --name mein_cluster --hardware shared --workers 2
   ```
   {: pre}
 
@@ -385,8 +385,8 @@ Aktualisieren Sie die Referenz der privaten IP-Adresse manuell, um auf den korre
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   192.0.2.0.12   203.0.113.144   b1c.4x16       normal    Ready
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   192.0.2.0.16   203.0.113.144   b1c.4x16       deleted    -
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   192.0.2.0.12   203.0.113.144   b2c.4x16       normal    Ready
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   192.0.2.0.16   203.0.113.144   b2c.4x16       deleted    -
   ```
   {: screen}
 
@@ -425,7 +425,7 @@ Der gelöschte Knoten wird nicht mehr in Calico aufgelistet.
 <br />
 
 
-## Workerknoten können nicht verbunden werden
+## Firewall verhindert Verbindung für Workerknoten
 {: #cs_firewall}
 
 {: tsSymptoms}
@@ -463,7 +463,7 @@ Wenn die Ausführung von 'kubectl proxy' erfolgreich verläuft, das Dashboard je
 
 
 {: tsCauses}
-Möglicherweise wurde eine zusätzliche Firewall eingerichtet oder Sie haben die vorhandenen Firewalleinstellungen für Ihr Konto von IBM Bluemix Infrastructure (SoftLayer) angepasst. {{site.data.keyword.containershort_notm}} erfordert, dass bestimmte IP-Adressen und Ports geöffnet sind, damit die Kommunikation vom Workerknoten zum Kubernetes-Master und umgekehrt möglich ist. Ein weiterer möglicher Grund kann sein, dass Ihre Workerknoten in einer Neuladen-Schleife hängen.
+Möglicherweise wurde eine zusätzliche Firewall eingerichtet oder Sie haben die vorhandenen Firewalleinstellungen für Ihr Konto von IBM Cloud Infrastructure (SoftLayer) angepasst. {{site.data.keyword.containershort_notm}} erfordert, dass bestimmte IP-Adressen und Ports geöffnet sind, damit die Kommunikation vom Workerknoten zum Kubernetes-Master und umgekehrt möglich ist. Ein weiterer möglicher Grund kann sein, dass Ihre Workerknoten in einer Neuladen-Schleife hängen.
 
 {: tsResolve}
 Für diese Task ist die [Zugriffsrichtlinie 'Administrator'](cs_cluster.html#access_ov) erforderlich. Überprüfen Sie Ihre aktuelle [Zugriffsrichtlinie](cs_cluster.html#view_access).
@@ -478,8 +478,8 @@ Für diese Task ist die [Zugriffsrichtlinie 'Administrator'](cs_cluster.html#acc
   {: pre}
 
 2.  In Ihrer Firewall für die OUTBOUND-Konnektivität Ihrer Workerknoten müssen Sie den ausgehenden Netzverkehr vom Quellen-Workerknoten zum TCP/UDP-Zielportbereich 20000 - 32767 und zum Port 443 für `<each_worker_node_publicIP>` und außerdem für die folgenden IP-Adressen und Netzgruppen zulassen.
-    - **Wichtig**: Sie müssen den ausgehenden Datenverkehr am Port 443 und von allen Standorten in der Region zu den jeweils anderen Standorten zulassen, um die Arbeitslast während des Bootstrap-Prozesses auszugleichen. Wenn Ihr Cluster sich beispielsweise in der Region 'Vereinigte Staaten (Süden)' befindet, dann müssen Sie Datenverkehr über den Port 443 an 'dal10' und 'dal12' sowie von 'dal10' und 'dal12' zu dem jeweils anderen Standort zulassen.
-      <p>
+    - **Wichtig**: Sie müssen den ausgehenden Datenverkehr am Port 443 für alle Standorte in der Region zu den jeweils anderen Standorten zulassen, um die Arbeitslast während des Bootstrap-Prozesses auszugleichen. Wenn Ihr Cluster sich beispielsweise in der Region 'Vereinigte Staaten (Süden)' befindet, dann müssen Sie Datenverkehr über den Port 443 an die IP-Adressen aller Standorte ('dal10', 'dal12' und 'dal13') zulassen.
+    <p>
   <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
       <thead>
       <th>Region</th>
@@ -488,14 +488,19 @@ Für diese Task ist die [Zugriffsrichtlinie 'Administrator'](cs_cluster.html#acc
       </thead>
     <tbody>
       <tr>
+        <td>Asien-Pazifik (Norden)</td>
+        <td>hkg02<br>tok02</td>
+        <td><code>169.56.132.234</code><br><code>161.202.126.210</code></td>
+       </tr>
+      <tr>
          <td>Asien-Pazifik (Süden)</td>
-         <td>mel01<br>syd01</td>
-         <td><code>168.1.97.67</code><br><code>168.1.8.195</code></td>
+         <td>mel01<br>syd01<br>syd04</td>
+         <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19</code></td>
       </tr>
       <tr>
          <td>Zentraleuropa</td>
-         <td>ams03<br>fra02</td>
-         <td><code>169.50.169.110</code><br><code>169.50.56.174</code></td>
+         <td>ams03<br>fra02<br>par01</td>
+         <td><code>169.50.169.110</code><br><code>169.50.56.174</code><br><code>159.8.86.149</code></td>
         </tr>
       <tr>
         <td>Großbritannien (Süden)</td>
@@ -504,8 +509,8 @@ Für diese Task ist die [Zugriffsrichtlinie 'Administrator'](cs_cluster.html#acc
       </tr>
       <tr>
         <td>Vereinigte Staaten (Osten)</td>
-         <td>wdc06<br>wdc07</td>
-         <td><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+         <td>tor01<br>wdc06<br>wdc07</td>
+         <td><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
       </tr>
       <tr>
         <td>Vereinigte Staaten (Süden)</td>
@@ -519,25 +524,31 @@ Für diese Task ist die [Zugriffsrichtlinie 'Administrator'](cs_cluster.html#acc
 3.  Erlauben Sie den ausgehenden Netzverkehr von den Workerknoten an {{site.data.keyword.registrylong_notm}}:
     - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
     - Ersetzen Sie <em>&lt;registry_publicIP&gt;</em> durch alle Adressen für Registry-Regionen, an die der Datenverkehr als zulässig definiert werden soll:
-        <p>      
+      <p>
 <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
-        <thead>
-        <th colspan=2><img src="images/idea.png"/> Registry-IP-Adressen</th>
-        </thead>
+      <thead>
+        <th>Containerregion</th>
+        <th>Registryadresse</th>
+        <th>Registry-IP-Adresse</th>
+      </thead>
       <tbody>
         <tr>
+          <td>Asien-Pazifik (Norden), Asien-Pazifik (Süden)</td>
           <td>registry.au-syd.bluemix.net</td>
           <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
         </tr>
         <tr>
+          <td>Zentraleuropa</td>
           <td>registry.eu-de.bluemix.net</td>
           <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></td>
          </tr>
          <tr>
+          <td>Großbritannien (Süden)</td>
           <td>registry.eu-gb.bluemix.net</td>
           <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></td>
          </tr>
          <tr>
+          <td>Vereinigte Staaten (Osten), Vereinigte Staaten (Süden)</td>
           <td>registry.ng.bluemix.net</td>
           <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></td>
          </tr>
@@ -548,20 +559,25 @@ Für diese Task ist die [Zugriffsrichtlinie 'Administrator'](cs_cluster.html#acc
 4.  Optional: Erlauben Sie den ausgehenden Netzverkehr von den Workerknoten an {{site.data.keyword.monitoringlong_notm}} und die {{site.data.keyword.loganalysislong_notm}}-Services:
     - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
     - Ersetzen Sie <em>&lt;monitoring_publicIP&gt;</em> durch alle Adressen für die Überwachungsregionen, an die der Datenverkehr als zulässig definiert werden soll:
-        <p><table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
+      <p><table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
         <thead>
-        <th colspan=2><img src="images/idea.png"/> Überwachen öffentlicher IP-Adressen</th>
+        <th>Containerregion</th>
+        <th>Überwachungsadresse</th>
+        <th>IP-Adressen für die Überwachung</th>
         </thead>
       <tbody>
         <tr>
+         <td>Zentraleuropa</td>
          <td>metrics.eu-de.bluemix.net</td>
          <td><code>159.122.78.136/29</code></td>
         </tr>
         <tr>
+         <td>Großbritannien (Süden)</td>
          <td>metrics.eu-gb.bluemix.net</td>
          <td><code>169.50.196.136/29</code></td>
         </tr>
         <tr>
+          <td>Asien-Pazifik (Osten), Asien-Pazifik (Süden), Asien-Pazifik (Norden)</td>
           <td>metrics.ng.bluemix.net</td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
@@ -571,20 +587,25 @@ Für diese Task ist die [Zugriffsrichtlinie 'Administrator'](cs_cluster.html#acc
 </p>
     - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
     - Ersetzen Sie <em>&lt;logging_publicIP&gt;</em> durch alle Adressen für die Protokollierungsregionen, an die der Datenverkehr als zulässig definiert werden soll:
-        <p><table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
+      <p><table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
         <thead>
-        <th colspan=2><img src="images/idea.png"/> Protokollieren öffentlicher IP-Adressen</th>
+        <th>Containerregion</th>
+        <th>Protokollierungsadresse</th>
+        <th>IP-Adressen für die Protokollierung</th>
         </thead>
       <tbody>
         <tr>
+         <td>Zentraleuropa</td>
          <td>ingest.logging.eu-de.bluemix.net</td>
          <td><code>169.50.25.125</code></td>
         </tr>
         <tr>
+         <td>Großbritannien (Süden)</td>
          <td>ingest.logging.eu-gb.bluemix.net</td>
          <td><code>169.50.115.113</code></td>
         </tr>
         <tr>
+          <td>Asien-Pazifik (Osten), Asien-Pazifik (Süden), Asien-Pazifik (Norden)</td>
           <td>ingest.logging.ng.bluemix.net</td>
           <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
          </tr>
@@ -592,7 +613,7 @@ Für diese Task ist die [Zugriffsrichtlinie 'Administrator'](cs_cluster.html#acc
       </table>
 </p>
 
-5. Wenn Sie über eine private Firewall verfügen, müssen Sie die entsprechenden Bereiche privater IPs für IBM Bluemix Infrastructure (SoftLayer) zulassen. Weitere Informationen finden Sie unter [diesem Link](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) ausgehend vom Abschnitt **Back-End-Netz (Privat)**.
+5. Wenn Sie über eine private Firewall verfügen, müssen Sie die entsprechenden Bereiche privater IPs für IBM Cloud Infrastructure (SoftLayer) zulassen. Weitere Informationen finden Sie unter [diesem Link](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) ausgehend vom Abschnitt **Back-End-Netz (Privat)**.
     - Fügen Sie alle [Standorte in den Regionen](cs_regions.html#locations) hinzu, die von Ihnen verwendet werden.
     - Beachten Sie, dass Sie den Standort 'dal01' (Rechenzentrum) hinzufügen müssen.
     - Öffnen Sie die Ports 80 und 443, um die Durchführung des Cluster-Bootstrap-Prozesses zu erlauben.
@@ -614,6 +635,80 @@ Es treten keine Serviceunterbrechungen aufgrund dieser Duplikate auf, Sie sollte
 
   ```
   kubectl delete node <knotenname1> <knotenname2>
+  ```
+  {: pre}
+
+<br />
+
+
+## Protokolle werden nicht angezeigt
+{: #cs_no_logs}
+
+{: tsSymptoms}
+Beim Zugriff auf das Kibana-Dashboard werden keine Protokolle angezeigt.
+
+{: tsCauses}
+Protokolle werden möglicherweise aus einem der folgenden Gründen nicht angezeigt:<br/><br/>
+    A. Der Cluster weist nicht den Status `Normal` auf.<br/><br/>
+    B. Das Kontingent für den Protokollspeicher ist erschöpft.<br/><br/>
+    C. Wenn Sie beim Erstellen des Clusters einen Bereich angegeben haben, verfügt der Kontoeigner nicht über die Berechtigungen eines Managers, Entwicklers oder Prüfers für diesen Bereich.<br/><br/>
+    D. Es sind noch keine Ereignisse, die eine Protokollierung auslösen, im Pod aufgetreten.<br/><br/>
+
+{: tsResolve}
+Sehen Sie sich die folgenden Optionen an, um herauszufinden, warum Protokolle nicht angezeigt werden:
+
+A. Informationen darüber, wie Sie den Status des Clusters überprüfen können, finden Sie in [Cluster debuggen](cs_troubleshoot.html#debug_clusters).<br/><br/>
+B. Informationen darüber, wie Sie die Protokollspeichergrenze erhöhen, finden Sie in der [{{site.data.keyword.loganalysislong_notm}}-Dokumentation](https://console.bluemix.net/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs).<br/><br/>
+C. Informationen zum Ändern der {{site.data.keyword.containershort_notm}}-Zugriffsberechtigungen für den Kontoeigner finden Sie in [Clusterzugriff verwalten](cs_cluster.html#cs_cluster_user). Sobald Berechtigungen geändert wurden, kann es bis zu 24 Stunden dauern, bis die entsprechenden Protokolle angezeigt werden.<br/><br/>
+D. Um ein Protokoll für ein Ereignis zu generieren, können Sie Noisy auf einem Workerknoten in Ihrem Cluster bereitstellen. Dabei handelt es sich einen Beispiel-Pod, der mehrere Protokollereignisse generiert.<br/>
+  1. [Geben Sie als Ziel der CLI](cs_cli_install.html#cs_cli_configure) einen Cluster an, auf dem Protokolle generiert werden sollen.
+
+  2. Erstellen Sie die Konfigurationsdatei `deploy-noisy.yaml`.
+
+      ```
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        name: noisy
+      spec:
+        containers:
+        - name: noisy
+          image: ubuntu:16.04
+          command: ["/bin/sh"]
+          args: ["-c", "while true; do sleep 10; echo 'Hello world!'; done"]
+          imagePullPolicy: "Always"
+        ```
+        {: codeblock}
+
+  3. Führen Sie die Konfigurationsdatei in dem Kontext des Clusters aus.
+
+        ```
+        kubectl apply -f <dateipfad_zu_noisy>
+        ```
+        {:pre}
+
+  4. Nach einigen Minuten werden die Protokolle im Kibana-Dashboard angezeigt. Zum Zugriff auf das Kibana-Dashboard müssen Sie eine der folgenden URLs aufrufen und dann das {{site.data.keyword.Bluemix_notm}}-Konto, in dem Sie den Cluster erstellt haben, auswählen. Wenn Sie beim Erstellen des Clusters einen Bereich angegeben haben, wechseln Sie stattdessen zu diesem Bereich.
+        - Vereinigte Staaten (Süden) und Vereinigte Staaten (Osten): https://logging.ng.bluemix.net
+        - Großbritannien (Süden): https://logging.eu-gb.bluemix.net
+        - Zentraleuropa: https://logging.eu-de.bluemix.net
+
+<br />
+
+
+## Im Kubernetes-Dashboard werden keine Nutzungsdiagramme angezeigt
+{: #cs_dashboard_graphs}
+
+{: tsSymptoms}
+Beim Zugriff auf das Kubernetes-Dashboard werden keine Nutzungsdiagramme angezeigt.
+
+{: tsCauses}
+Nach einer Clusteraktualisierung oder dem Neustart eines Workerknotens kann es vorkommen, dass der Pod `kube-dashboard` nicht aktualisiert wird.
+
+{: tsResolve}
+Löschen Sie den Pod `kube-dashboard`, um einen Neustart zu erzwingen. Der Pod wird mit RBAC-Richtlinien erneut erstellt, um die Informationen zur Auslastung von Heapster abzurufen.
+
+  ```
+  kubectl delete pod -n kube-system $(kubectl get pod -n kube-system --selector=k8s-app=kubernetes-dashboard -o jsonpath='{.items..metadata.name}')
   ```
   {: pre}
 
@@ -775,7 +870,7 @@ Gehen Sie wie folgt vor, um Fehler in Ihrem Lastausgleichsservice zu beheben:
   ```
   {: pre}
 
-    1.  Überprüfen Sie, dass Sie **LoadBalancer** als Typ für Ihren Service definiert haben. 
+    1.  Überprüfen Sie, dass Sie **LoadBalancer** als Typ für Ihren Service definiert haben.
     2.  Stellen Sie sicher, dass Sie denselben **<selektorschlüssel>** und **<selektorwert>** verwendet haben, den Sie beim Bereitstellen Ihrer App im Abschnitt **label/metadata** angegeben haben.
     3.  Prüfen Sie, dass Sie den **Port** verwendet haben, den Ihre App überwacht.
 
@@ -840,38 +935,6 @@ Wenn Sie den Wert für `<ETCD_URL>` abrufen, dann fahren Sie mit den Schritten f
 
 <br />
 
-
-## Bekannte Probleme
-{: #cs_known_issues}
-
-Erfahren Sie mehr über bekannte Probleme.
-{: shortdesc}
-
-### Cluster
-{: #ki_clusters}
-
-<dl>
-  <dt>Cloud Foundry-Apps in demselben {{site.data.keyword.Bluemix_notm}}-Bereich können nicht auf ein Cluster zugreifen</dt>
-    <dd>Wenn Sie einen Kubernetes-Cluster erstellen, wird der Cluster auf Kontoebene erstellt und verwendet den Bereich nicht, es sei denn, Sie binden {{site.data.keyword.Bluemix_notm}}-Services. Wenn Sie über eine Cloud Foundry-App
-verfügen, auf die der Cluster zugreifen soll, müssen Sie entweder die Cloud Foundry-App öffentlich zugänglich machen oder Sie müssen Ihre App in Ihrem Cluster [öffentlich zugänglich machen](cs_planning.html#cs_planning_public_network).</dd>
-  <dt>Service 'NodePort' im Kube-Dashboard wurde inaktiviert</dt>
-    <dd>Aus Sicherheitsgründen ist der Service 'NodePort' im Kubernetes-Dashboard inaktiviert. Führen Sie folgenden Befehl aus, um auf Ihr Kubernetes-Dashboard zuzugreifen:</br><pre class="codeblock"><code>kubectl proxy</code></pre></br>Anschließend können Sie auf das Kubernetes-Dashboard unter `http://localhost:8001/ui` zugreifen.</dd>
-  <dt>Einschränkungen beim Servicetyp für die Lastausgleichsfunktion (Load Balancer)</dt>
-    <dd><ul><li>Die Verwendung des Lastausgleichs für private LANs ist nicht möglich.<li>Es können keine Serviceannotationen für 'service.beta.kubernetes.io/external-traffic' und
-'service.beta.kubernetes.io/healthcheck-nodeport' verwenden. Weitere Informationen zu diesen Annotationen enthält die
-[Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tutorials/services/source-ip/).</ul></dd>
-  <dt>Horizontale Autoskalierung funktioniert in bestimmten Clustern nicht</dt>
-    <dd>Aus Sicherheitsgründen wird der Standardport, der von Heapster (10255) verwendet wird, in allen Workerknoten in alten Clustern geschlossen. Da dieser Port geschlossen ist, ist Heapster nicht in der Lage, Metriken für Workerknoten zu melden, und das horizontale automatische Skalieren funktioniert nicht wie im Abschnitt zum [automatischen horizontalen Skalieren von Pods ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) in der Kubernetes-Dokumentation dokumentiert. Erstellen Sie einen weiteren Cluster, um das Auftreten dieses Problems zu vermeiden.</dd>
-</dl>
-
-### Persistenter Speicher
-{: #persistent_storage}
-
-Der Befehl `kubectl describe <pvc_name>` zeigt **ProvisioningFailed** für einen Persistent Volume Claim (PVC) an:
-<ul><ul>
-<li>Wenn Sie einen Persistent Volume Claim (PVC) erstellen, ist kein Persistent Volume (PV) verfügbar. Daher gibt Kubernetes die Nachricht **ProvisioningFailed** zurück.
-<li>Nachdem ein Persistent Volume erstellt und an den Claim gebunden worden ist, gibt Kubernetes die Nachricht **ProvisioningSucceeded** zurück. Dieser Prozess kann einige Minuten dauern.
-</ul></ul>
 
 ## Hilfe und Unterstützung anfordern
 {: #ts_getting_help}

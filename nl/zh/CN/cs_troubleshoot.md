@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-24"
+lastupdated: "2017-11-28"
 
 ---
 
@@ -91,7 +91,7 @@ lastupdated: "2017-10-24"
     <tbody>
       <tr>
        <td>Unknown</td>
-       <td>由于以下某种原因，Kubernetes 主节点不可访问：<ul><li>您请求了更新 Kubernetes 主节点。在更新期间无法检索到工作程序节点的状态。</li><li>您可能有其他防火墙在保护工作程序节点，或者最近更改了防火墙设置。{{site.data.keyword.containershort_notm}} 需要打开特定 IP 地址和端口，以允许工作程序节点与 Kubernetes 主节点之间进行通信。有关更多信息，请参阅[工作程序节点卡在重新装入循环中](#cs_firewall)。</li><li>Kubernetes 主节点已停止运行。请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](/docs/support/index.html#contacting-support)来联系 {{site.data.keyword.Bluemix_notm}} 支持。</li></ul></td>
+       <td>由于以下某种原因，Kubernetes 主节点不可访问：<ul><li>您请求了更新 Kubernetes 主节点。在更新期间无法检索到工作程序节点的状态。</li><li>您可能有其他防火墙在保护工作程序节点，或者最近更改了防火墙设置。{{site.data.keyword.containershort_notm}} 需要打开特定 IP 地址和端口，以允许工作程序节点与 Kubernetes 主节点之间进行通信。有关更多信息，请参阅[防火墙阻止工作程序节点进行连接](#cs_firewall)。</li><li>Kubernetes 主节点已停止运行。请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](/docs/support/index.html#contacting-support)来联系 {{site.data.keyword.Bluemix_notm}} 支持。</li></ul></td>
       </tr>
       <tr>
         <td>Provisioning</td>
@@ -141,7 +141,7 @@ lastupdated: "2017-10-24"
     <tbody>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure 异常：当前禁止您的帐户订购“计算实例”。</td>
-        <td>您的 IBM Bluemix Infrastructure (SoftLayer) 帐户可能受到限制，无法订购计算资源。请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](/docs/support/index.html#contacting-support)来联系 {{site.data.keyword.Bluemix_notm}} 支持。</td>
+        <td>您的 IBM Cloud infrastructure (SoftLayer) 帐户可能受到限制，无法订购计算资源。请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](/docs/support/index.html#contacting-support)来联系 {{site.data.keyword.Bluemix_notm}} 支持。</td>
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure 异常：无法下单。路由器“router_name”后的资源不足，无法实现以下访客的请求：“worker_id”。</td>
@@ -149,17 +149,17 @@ lastupdated: "2017-10-24"
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure 异常：无法获取标识为 &lt;vlan id&gt; 的网络 VLAN。</td>
-        <td>由于以下某种原因而找不到所选的 VLAN 标识，因此无法供应工作程序节点：<ul><li>您可能指定的是 VLAN 编号，而不是 VLAN 标识。VLAN 编号的长度为 3 位或 4 位，而 VLAN 标识的长度为 7 位。运行 <code>bx cs vlans &lt;location&gt;</code> 以检索 VLAN 标识。<li>该 VLAN 标识可能未与所使用的 IBM Bluemix Infrastructure (SoftLayer) 帐户相关联。运行 <code>bx cs vlans &lt;location&gt;</code> 以列出您帐户的可用 VLAN 标识。要更改 IBM Bluemix Infrastructure (SoftLayer) 帐户，请参阅 [bx cs credentials-set](cs_cli_reference.html#cs_credentials_set)。</ul></td>
+        <td>由于以下某种原因而找不到所选的 VLAN 标识，因此无法供应工作程序节点：<ul><li>您可能指定的是 VLAN 编号，而不是 VLAN 标识。VLAN 编号的长度为 3 位或 4 位，而 VLAN 标识的长度为 7 位。运行 <code>bx cs vlans &lt;location&gt;</code> 以检索 VLAN 标识。<li>该 VLAN 标识可能未与所使用的 IBM Cloud infrastructure (SoftLayer) 帐户相关联。运行 <code>bx cs vlans &lt;location&gt;</code> 以列出您帐户的可用 VLAN 标识。要更改 IBM Cloud infrastructure (SoftLayer) 帐户，请参阅 [bx cs credentials-set](cs_cli_reference.html#cs_credentials_set)。</ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation：为此订单提供的位置无效。(HTTP 500)</td>
-        <td>IBM Bluemix Infrastructure (SoftLayer) 未设置为订购所选数据中心内的计算资源。请联系 [{{site.data.keyword.Bluemix_notm}} 支持](/docs/support/index.html#contacting-support)，以验证您的帐户是否正确设置。</td>
+        <td>IBM Cloud infrastructure (SoftLayer) 未设置为订购所选数据中心内的计算资源。请联系 [{{site.data.keyword.Bluemix_notm}} 支持](/docs/support/index.html#contacting-support)，以验证您的帐户是否正确设置。</td>
        </tr>
        <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure 异常：用户没有必需的 {{site.data.keyword.Bluemix_notm}} Infrastructure 许可权来添加服务器
 </br></br>
         {{site.data.keyword.Bluemix_notm}} Infrastructure 异常：必须具有许可权才能订购“项”。</td>
-        <td>您可能没有必需的许可权来从 IBM Bluemix Infrastructure (SoftLayer) 产品服务组合供应工作程序节点。请参阅[配置对 IBM Bluemix Infrastructure (SoftLayer) 产品服务组合的访问权以创建标准的 Kubernete 集群](cs_planning.html#cs_planning_unify_accounts)。</td>
+        <td>您可能没有必需的许可权来从 IBM Cloud infrastructure (SoftLayer) 产品服务组合供应工作程序节点。请参阅[配置对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权以创建标准 Kubernete 集群](cs_planning.html#cs_planning_unify_accounts)。</td>
       </tr>
     </tbody>
   </table>
@@ -230,26 +230,26 @@ lastupdated: "2017-10-24"
 <br />
 
 
-## 在创建集群时无法连接到 IBM Bluemix Infrastructure (SoftLayer) 帐户
+## 在创建集群时无法连接到 IBM Cloud infrastructure (SoftLayer) 帐户
 {: #cs_credentials}
 
 {: tsSymptoms}
 创建新的 Kubernetes 集群时，收到以下消息。
 
 ```
-我们无法连接到您的 IBM Bluemix Infrastructure (SoftLayer) 帐户。创建标准集群要求您有一个链接到 IBM Bluemix Infrastructure (SoftLayer) 帐户条款的“现买现付”帐户，或者您已使用 IBM {{site.data.keyword.Bluemix_notm}} Container Service CLI 设置 {{site.data.keyword.Bluemix_notm}} Infrastructure API 密钥。
+我们无法连接到您的 IBM Cloud infrastructure (SoftLayer) 帐户。创建标准集群要求您有链接到 IBM Cloud infrastructure (SoftLayer) 帐户条款的现买现付帐户，或者您已使用 IBM {{site.data.keyword.Bluemix_notm}} Container Service CLI 设置 {{site.data.keyword.Bluemix_notm}} Infrastructure API 密钥。
 ```
 {: screen}
 
 {: tsCauses}
-具有未链接 {{site.data.keyword.Bluemix_notm}} 帐户的用户必须创建新的“现买现付”帐户，或者使用 {{site.data.keyword.Bluemix_notm}} CLI 手动添加 IBM Bluemix Infrastructure (SoftLayer) API 密钥。
+具有未链接 {{site.data.keyword.Bluemix_notm}} 帐户的用户必须创建新的现买现付帐户，或者使用 {{site.data.keyword.Bluemix_notm}} CLI 手动添加 IBM Cloud infrastructure (SoftLayer) API 密钥。
 
 {: tsResolve}
 要向您的 {{site.data.keyword.Bluemix_notm}} 帐户添加凭证，请执行以下操作：
 
-1.  请联系 IBM Bluemix Infrastructure (SoftLayer) 管理员，以获取您的 IBM Bluemix Infrastructure (SoftLayer) 用户名和 API 密钥。
+1.  请联系 IBM Cloud infrastructure (SoftLayer) 管理员，以获取您的 IBM Cloud infrastructure (SoftLayer) 用户名和 API 密钥。
 
-    **注**：您使用的 IBM Bluemix Infrastructure (SoftLayer) 帐户必须设置有“超级用户”许可权才可成功创建标准集群。
+    **注**：您使用的 IBM Cloud infrastructure (SoftLayer) 帐户必须设置有“超级用户”许可权才可成功创建标准集群。
 
 2.  添加凭证。
 
@@ -261,7 +261,7 @@ lastupdated: "2017-10-24"
 3.  创建标准集群。
 
   ```
-  bx cs cluster-create --location dal10 --public-vlan my_public_vlan_id --private-vlan my_private_vlan_id --machine-type u1c.2x4 --name my_cluster --hardware shared --workers 2
+  bx cs cluster-create --location dal10 --public-vlan my_public_vlan_id --private-vlan my_private_vlan_id --machine-type u2c.2x4 --name my_cluster --hardware shared --workers 2
   ```
   {: pre}
 
@@ -386,8 +386,8 @@ pod 会成功部署到集群，但容器不启动。
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   192.0.2.0.12   203.0.113.144   b1c.4x16       normal    Ready
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   192.0.2.0.16   203.0.113.144   b1c.4x16       deleted    -
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   192.0.2.0.12   203.0.113.144   b2c.4x16       normal    Ready
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   192.0.2.0.16   203.0.113.144   b2c.4x16       deleted    -
   ```
   {: screen}
 
@@ -426,7 +426,7 @@ pod 会成功部署到集群，但容器不启动。
 <br />
 
 
-## 工作程序节点连接失败
+## 防火墙阻止工作程序节点进行连接
 {: #cs_firewall}
 
 {: tsSymptoms}
@@ -464,7 +464,7 @@ pod 会成功部署到集群，但容器不启动。
 
 
 {: tsCauses}
-您可能已在 IBM Bluemix Infrastructure (SoftLayer) 帐户中额外设置防火墙或定制现有防火墙设置。{{site.data.keyword.containershort_notm}} 需要打开特定 IP 地址和端口，以允许工作程序节点与 Kubernetes 主节点之间进行通信。另一个原因可能是工作程序节点陷入重新装入循环。
+您可能已在 IBM Cloud infrastructure (SoftLayer) 帐户中额外设置了防火墙或定制了现有防火墙设置。{{site.data.keyword.containershort_notm}} 需要打开特定 IP 地址和端口，以允许工作程序节点与 Kubernetes 主节点之间进行通信。另一个原因可能是工作程序节点陷入重新装入循环。
 
 {: tsResolve}
 此任务需要[管理员访问策略](cs_cluster.html#access_ov)。验证您当前的[访问策略](cs_cluster.html#view_access)。
@@ -478,8 +478,9 @@ pod 会成功部署到集群，但容器不启动。
   ```
   {: pre}
 
-2.  在来自工作程序节点的出站连接的防火墙中，允许出局网络流量从源工作程序节点流至目标 TCP/UDP 端口范围 20000-32767 和端口 443（用于 `<each_worker_node_publicIP>`），以及以下 IP 地址和网络组。
-    - **重要事项**：必须允许流至端口 443 以及区域内所有位置的出站流量流至彼此，以便均衡引导过程中的负载。例如，如果集群位于美国南部，那么必须允许流量从端口 443 流至 dal10 和 dal12 以及从 dal10 和 dal12 流至彼此。<p>
+2.  在来自工作程序节点的出站连接的防火墙中，允许从源工作程序节点到目标 TCP/UDP 端口范围 20000-32767 和端口 443（用于 `<each_worker_node_publicIP>`）以及以下 IP 地址和网络组的出局网络流量。
+    - **重要事项**：针对区域内的所有位置，必须允许出站流量从端口 443 流出，以便在引导过程中均衡负载。例如，如果集群位于美国南部，那么必须允许流量从端口 443 流至所有位置（dal10、dal12 和 dal13）的 IP 地址。
+      <p>
   <table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
       <thead>
       <th>区域</th>
@@ -488,14 +489,19 @@ pod 会成功部署到集群，但容器不启动。
       </thead>
     <tbody>
       <tr>
+        <td>亚太地区北部</td>
+        <td>hkg02<br>tok02</td>
+        <td><code>169.56.132.234</code><br><code>161.202.126.210</code></td>
+       </tr>
+      <tr>
          <td>亚太地区南部</td>
-         <td>mel01<br>syd01</td>
-         <td><code>168.1.97.67</code><br><code>168.1.8.195</code></td>
+         <td>mel01<br>syd01<br>syd04</td>
+         <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19</code></td>
       </tr>
       <tr>
          <td>欧洲中部</td>
-         <td>ams03<br>fra02</td>
-         <td><code>169.50.169.110</code><br><code>169.50.56.174</code></td>
+         <td>ams03<br>fra02<br>par01</td>
+         <td><code>169.50.169.110</code><br><code>169.50.56.174</code><br><code>159.8.86.149</code></td>
         </tr>
       <tr>
         <td>英国南部</td>
@@ -504,8 +510,8 @@ pod 会成功部署到集群，但容器不启动。
       </tr>
       <tr>
         <td>美国东部</td>
-         <td>wdc06<br>wdc07</td>
-         <td><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+         <td>tor01<br>wdc06<br>wdc07</td>
+         <td><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
       </tr>
       <tr>
         <td>美国南部</td>
@@ -518,25 +524,31 @@ pod 会成功部署到集群，但容器不启动。
 
 3.  允许出站网络流量从工作程序节点流至 {{site.data.keyword.registrylong_notm}}：
     - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
-    - 将 <em>&lt;registry_publicIP&gt;</em> 替换为要允许流量的注册表区域的所有地址：<p>      
+    - 将 <em>&lt;registry_publicIP&gt;</em> 替换为要允许流量的注册表区域的所有地址：<p>
 <table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
       <thead>
-        <th colspan=2><img src="images/idea.png"/> 注册表 IP 地址</th>
-        </thead>
+        <th>容器区域</th>
+        <th>注册表地址</th>
+        <th>注册表 IP 地址</th>
+      </thead>
       <tbody>
         <tr>
+          <td>亚太地区北部和亚太地区南部</td>
           <td>registry.au-syd.bluemix.net</td>
           <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
         </tr>
         <tr>
+          <td>欧洲中部</td>
           <td>registry.eu-de.bluemix.net</td>
           <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></td>
          </tr>
          <tr>
+          <td>英国南部</td>
           <td>registry.eu-gb.bluemix.net</td>
           <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></td>
          </tr>
          <tr>
+          <td>美国东部和美国南部</td>
           <td>registry.ng.bluemix.net</td>
           <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></td>
          </tr>
@@ -548,18 +560,23 @@ pod 会成功部署到集群，但容器不启动。
     - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
     - 将 <em>&lt;monitoring_publicIP&gt;</em> 替换为要允许流量的监视区域的所有地址：<p><table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
       <thead>
-        <th colspan=2><img src="images/idea.png"/> 监视公共 IP 地址</th>
+        <th>容器区域</th>
+        <th>监视地址</th>
+        <th>监视 IP 地址</th>
         </thead>
       <tbody>
         <tr>
+         <td>欧洲中部</td>
          <td>metrics.eu-de.bluemix.net</td>
          <td><code>159.122.78.136/29</code></td>
         </tr>
         <tr>
+         <td>英国南部</td>
          <td>metrics.eu-gb.bluemix.net</td>
          <td><code>169.50.196.136/29</code></td>
         </tr>
         <tr>
+          <td>美国东部、美国南部和亚太地区北部</td>
           <td>metrics.ng.bluemix.net</td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
@@ -570,18 +587,23 @@ pod 会成功部署到集群，但容器不启动。
     - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
     - 将 <em>&lt;logging_publicIP&gt;</em> 替换为要允许流量的日志记录区域的所有地址：<p><table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
       <thead>
-        <th colspan=2><img src="images/idea.png"/> 日志记录公共 IP 地址</th>
+        <th>容器区域</th>
+        <th>日志记录地址</th>
+        <th>日志记录 IP 地址</th>
         </thead>
       <tbody>
         <tr>
+         <td>欧洲中部</td>
          <td>ingest.logging.eu-de.bluemix.net</td>
          <td><code>169.50.25.125</code></td>
         </tr>
         <tr>
+         <td>英国南部</td>
          <td>ingest.logging.eu-gb.bluemix.net</td>
          <td><code>169.50.115.113</code></td>
         </tr>
         <tr>
+          <td>美国东部、美国南部和亚太地区北部</td>
           <td>ingest.logging.ng.bluemix.net</td>
           <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
          </tr>
@@ -589,7 +611,7 @@ pod 会成功部署到集群，但容器不启动。
       </table>
 </p>
 
-5. 如果您有专用防火墙，请允许适当的 IBM Bluemix Infrastructure (SoftLayer) 专用 IP 范围。请从**后端（专用）网络**部分开始查阅[此链接](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)。
+5. 如果您有专用防火墙，请允许适当的 IBM Cloud infrastructure (SoftLayer) 专用 IP 范围。请从**后端（专用）网络**部分开始查阅[此链接](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)。
     - 添加您正在使用的所有[区域内的位置](cs_regions.html#locations)
     - 请注意，必须添加 dal01 位置（数据中心）
     - 打开端口 80 和 443 以允许集群引导过程
@@ -612,6 +634,80 @@ pod 会成功部署到集群，但容器不启动。
   ```
   kubectl delete node <node_name1> <node_name2>
   ```
+  {: pre}
+
+<br />
+
+
+## 日志不显示
+{: #cs_no_logs}
+
+{: tsSymptoms}
+访问 Kibana 仪表板时，日志不显示。
+
+{: tsCauses}
+由于以下某种原因，日志可能不显示：<br/><br/>
+    A. 集群不处于`正常`状态。<br/><br/>
+    B. 已达到日志存储配额。<br/><br/>
+    C. 如果在创建集群时指定了空间，但帐户所有者没有对该空间的“管理员”、“开发者”或“审计员”许可权。<br/><br/>
+    D. pod 中尚未发生任何触发日志的事件。<br/><br/>
+
+{: tsResolve}
+查看以下选项来解决导致日志不显示的每种可能原因：
+
+A. 要检查集群的状态，请参阅[调试集群](cs_troubleshoot.html#debug_clusters)。<br/><br/>
+B. 要提高日志存储限制，请参阅 [{{site.data.keyword.loganalysislong_notm}} 文档](https://console.bluemix.net/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs)。<br/><br/>
+C. 要更改帐户所有者的 {{site.data.keyword.containershort_notm}} 访问许可权，请参阅[管理集群访问权](cs_cluster.html#cs_cluster_user)。更改许可权后，日志可能最长需要 24 小时才会开始显示。<br/><br/>
+D. 要触发记录事件的日志，可以在集群中的一个工作程序节点上部署 Noisy（用于生成多个日志事件的样本 pod）。<br/>
+  1. [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)，将目标设置为要在其中开始生成日志的集群。
+
+  2. 创建 `deploy-noisy.yaml` 配置文件。
+
+      ```
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        name: noisy
+      spec:
+        containers:
+        - name: noisy
+          image: ubuntu:16.04
+          command: ["/bin/sh"]
+          args: ["-c", "while true; do sleep 10; echo 'Hello world!'; done"]
+          imagePullPolicy: "Always"
+        ```
+        {: codeblock}
+
+  3. 在集群上下文中运行该配置文件。
+
+        ```
+        kubectl apply -f <filepath_to_noisy>
+        ```
+        {:pre}
+
+  4. 几分钟后，可以在 Kibana 仪表板中查看日志。要访问 Kibana 仪表板，请转至以下某个 URL，然后选择在其中创建了集群的 {{site.data.keyword.Bluemix_notm}} 帐户。如果在创建集群时指定了空间，请改为转至该空间。
+        - 美国南部和美国东部：https://logging.ng.bluemix.net
+        - 英国南部：https://logging.eu-gb.bluemix.net
+        - 欧洲中部：https://logging.eu-de.bluemix.net
+
+<br />
+
+
+## Kubernetes 仪表板不显示利用率图形
+{: #cs_dashboard_graphs}
+
+{: tsSymptoms}
+访问 Kibana 仪表板时，利用率图形不显示。
+
+{: tsCauses}
+有时，在集群更新或工作程序节点重新引导后，`kube-dashboard` pod 不会更新。
+
+{: tsResolve}
+删除 `kube-dashboard` pod 以强制重新启动。该 pod 会通过 RBAC 策略重新创建，以用于访问 heapster 来获取利用率信息。
+
+  ```
+    kubectl delete pod -n kube-system $(kubectl get pod -n kube-system --selector=k8s-app=kubernetes-dashboard -o jsonpath='{.items..metadata.name}')
+    ```
   {: pre}
 
 <br />
@@ -809,15 +905,15 @@ pod 会成功部署到集群，但容器不启动。
 {: #cs_calico_fails}
 
 {: tsSymptoms}
-当您检索 `<ETCD_URL>` 以[添加网络策略](cs_security.html#adding_network_policies)时，您获得 `calico-config not found` 错误消息。
+检索 `<ETCD_URL>` 以[添加网络策略](cs_security.html#adding_network_policies)时，您获得 `calico-config not found` 错误消息。
 
 {: tsCauses}
 集群不是 [Kubernetes V1.7](cs_versions.html) 或更高版本。
 
 {: tsResolve}
-[更新集群](cs_cluster.html#cs_cluster_update)或使用与较早版本 Kubernetes 兼容的命令检索 `<ETCD_URL>`。
+(更新集群)[cs_cluster.html#cs_cluster_update]或使用与较早版本 Kubernetes 兼容的命令检索 `<ETCD_URL>`。
 
-要检索 `<ETCD_URL>`，请运行以下其中一个命令：
+要检索 `<ETCD_URL>`，请运行以下某个命令：
 
 - Linux 和 OS X：
 
@@ -831,39 +927,10 @@ pod 会成功部署到集群，但容器不启动。
     <li> 查看 Calico 控制器 pod 的详细信息。</br> <pre class="codeblock"><code>kubectl describe pod -n kube-system calico-policy-controller-&lt;ID&gt;</code></pre>
     <li> 找到 ETCD 端点值。示例：<code>https://169.1.1.1:30001</code></ol>
 
-当您检索 `<ETCD_URL>` 时，继续执行[添加网络策略](cs_security.html#adding_network_policies)中列出的步骤。
+检索 `<ETCD_URL>` 时，继续执行(添加网络策略)[cs_security.html#adding_network_policies]中列出的步骤。
 
 <br />
 
-
-## 已知问题
-{: #cs_known_issues}
-
-了解已知问题。
-{: shortdesc}
-
-### 集群
-{: #ki_clusters}
-
-<dl>
-  <dt>同一 {{site.data.keyword.Bluemix_notm}} 空间中的 Cloud Foundry 应用程序不能访问集群</dt>
-    <dd>创建 Kubernetes 集群时，该集群是在帐户级别创建的，并不使用空间，但绑定 {{site.data.keyword.Bluemix_notm}} 服务时会使用空间。如果您有希望集群访问的 Cloud Foundry 应用程序，那么必须使该 Cloud Foundry 应用程序公共可用，或者必须使您的应用程序在集群中[公共可用](cs_planning.html#cs_planning_public_network)。</dd>
-  <dt>Kube 仪表板 NodePort 服务已禁用</dt>
-    <dd>出于安全原因，禁用了 Kubernetes 仪表板 NodePort 服务。要访问 Kubernetes 仪表板，请运行以下命令。</br><pre class="codeblock"><code>kubectl proxy</code></pre></br>然后，可以通过 `http://localhost:8001/ui` 访问 Kubernetes 仪表板。</dd>
-  <dt>对负载均衡器的服务类型的限制</dt>
-    <dd><ul><li>无法在专用 VLAN 上使用负载均衡。<li>您无法使用 service.beta.kubernetes.io/external-traffic 和 service.beta.kubernetes.io/healthcheck-nodeport 服务注释。有关这些注释的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tutorials/services/source-ip/)。</ul></dd>
-  <dt>水平自动扩展在某些集群中不起作用</dt>
-    <dd>出于安全原因，由 Heapster (10255) 使用的标准端口在旧集群的所有工作程序节点中都已关闭。由于此端口已关闭，因此 Heapster 无法报告工作程序节点的度量值，并且水平自动扩展无法如 Kubernetes 文档中[水平 Pod 自动扩展 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) 内所记录的那样工作。请创建其他集群以避免此问题。</dd>
-</dl>
-
-### 持久性存储器
-{: #persistent_storage}
-
-`kubectl describe <pvc_name>` 命令对于持久性卷申领显示 **ProvisioningFailed**：
-<ul><ul>
-<li>创建持久性卷申领时，没有持久性卷可用，所以 Kubernetes 返回消息 **ProvisioningFailed**。
-<li>创建了持久性卷并绑定到申领时，Kubernetes 会返回消息 **ProvisioningSucceeded**。此过程可能需要几分钟时间。
-</ul></ul>
 
 ## 获取帮助和支持
 {: #ts_getting_help}

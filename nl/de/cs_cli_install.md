@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-12"
+lastupdated: "2017-11-15"
 
 ---
 
@@ -60,7 +60,7 @@ verwenden Sie die bereitgestellte URL in Ihrer CLI-Ausgabe, um Ihren einmaligen 
 3.  Installieren Sie das {{site.data.keyword.containershort_notm}}-Plug-in, um Kubernetes-Cluster zu erstellen und Workerknoten zu verwalten. Das Präfix zum Ausführen von Befehlen mithilfe des {{site.data.keyword.containershort_notm}}-Plug-ins lautet `bx cs`.
 
     ```
-    bx plugin install container-service -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-service -r Bluemix
     ```
     {: pre}
 
@@ -118,7 +118,7 @@ verwenden Sie die bereitgestellte URL in Ihrer CLI-Ausgabe, um Ihren einmaligen 
 5.  Installieren Sie zum Verwalten eines privaten Image-Repositorys das {{site.data.keyword.registryshort_notm}}-Plug-in. Verwenden Sie dieses Plug-in zum Festlegen Ihres eigenen Namensbereichs in einer hoch verfügbaren, skalierbaren, privaten Multi-Tenant-Image-Registry, die von IBM gehostet wird, und zum Speichern und gemeinsamen Nutzen von Docker-Images mit anderen Benutzern. Docker-Images sind erforderlich, um Container in einem Cluster bereitzustellen. Das Präfix zum Ausführen von Registry-Befehlen lautet `bx cr`.
 
     ```
-    bx plugin install container-registry -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-registry -r Bluemix
     ```
     {: pre}
 
@@ -167,8 +167,7 @@ Damit Sie `kubectl`-Befehle ausführen können, [müssen Sie die erforderlichen 
 verwenden Sie die bereitgestellte URL in Ihrer CLI-Ausgabe, um Ihren einmaligen Kenncode abzurufen. Bei Verwendung einer eingebundenen ID schlägt die Anmeldung ohne die Option `--sso` fehl, mit der Option `--sso` ist sie erfolgreich.
 
   2.  Wählen Sie ein {{site.data.keyword.Bluemix_notm}}-Konto aus. Wenn Sie mehreren {{site.data.keyword.Bluemix_notm}}-Organisationen zugeordnet sind,
-wählen Sie die Organisation aus, in der der Cluster erstellt wurde. Cluster sind für eine Organisation spezifisch, jedoch von einem
-{{site.data.keyword.Bluemix_notm}}-Bereich unabhängig. Daher ist es nicht erforderlich, einen Bereich auszuwählen.
+wählen Sie die Organisation aus, in der der Cluster erstellt wurde. Cluster sind für eine Organisation spezifisch, jedoch von einem {{site.data.keyword.Bluemix_notm}}-Bereich unabhängig. Daher ist es nicht erforderlich, einen Bereich auszuwählen.
 
   3.  Wenn Sie Kubernetes-Cluster in einer anderen als der zuvor ausgewählten {{site.data.keyword.Bluemix_notm}}-Region erstellen oder dort auf diese Kubernetes-Cluster zugreifen wollen, dann [geben Sie den API-Endpunkt der {{site.data.keyword.containershort_notm}}-Region an](cs_regions.html#container_login_endpoints).
 
@@ -271,7 +270,7 @@ verwenden Sie die bereitgestellte URL in Ihrer CLI-Ausgabe, um Ihren einmaligen 
     1.  Installieren Sie das Update aus dem {{site.data.keyword.Bluemix_notm}}-Plug-in-Repository.
 
         ```
-        bx plugin update container-service -r {{site.data.keyword.Bluemix_notm}}
+        bx plugin update container-service -r Bluemix
         ```
         {: pre}
 
@@ -336,7 +335,7 @@ verwenden Sie die bereitgestellte URL in Ihrer CLI-Ausgabe, um Ihren einmaligen 
     1.  Installieren Sie das Update aus dem {{site.data.keyword.Bluemix_notm}}-Plug-in-Repository.
 
         ```
-        bx plugin update container-registry -r {{site.data.keyword.Bluemix_notm}}
+        bx plugin update container-registry -r Bluemix
         ```
         {: pre}
 
@@ -428,18 +427,18 @@ Die {{site.data.keyword.containershort_notm}}-API benötigt Headerinformationen,
 <tr>
 <td>Nicht eingebundene ID</td>
 <td><ul><li><strong>{{site.data.keyword.Bluemix_notm}}-Benutzername und -Kennwort:</strong> Sie können die Schritte im vorliegenden Abschnitt ausführen, um die Erstellung des IAM-Zugriffstokens vollständig zu automatisieren.</li>
-<li><strong>{{site.data.keyword.Bluemix_notm}}-API-Schlüssel generieren:</strong> Alternativ zur Verwendung des {{site.data.keyword.Bluemix_notm}}-Benutzernamens und des zugehörigen Kennworts können Sie <a href="../iam/apikeys.html#manapikey" target="_blank">auch {{site.data.keyword.Bluemix_notm}}-API-Schlüssel verwenden.</a> {{site.data.keyword.Bluemix_notm}}-API-Schlüssel sind von dem {{site.data.keyword.Bluemix_notm}}-Konto abhängig, für das sie generiert wurden. Sie können Ihren {{site.data.keyword.Bluemix_notm}}-API-Schlüssel nicht mit einer anderen Konto-ID in demselben IAM-Token kombinieren. Um auf Cluster zugreifen zu können, die mit einem anderen Konto als dem Konto erstellt wurden, auf dem der {{site.data.keyword.Bluemix_notm}}-API-Schlüssel basiert, müssen Sie sich bei dem Konto anmelden, um einen neuen API-Schlüssel zu generieren.</li></ul></tr>
+<li><strong>{{site.data.keyword.Bluemix_notm}}-API-Schlüssel generieren:</strong> Alternativ zur Verwendung des {{site.data.keyword.Bluemix_notm}}-Benutzernamens und des zugehörigen Kennworts können Sie <a href="../iam/apikeys.html#manapikey" target="_blank">auch {{site.data.keyword.Bluemix_notm}}-API-Schlüssel verwenden.</a> {{site.data.keyword.Bluemix_notm}}-API-Schlüssel sind von dem {{site.data.keyword.Bluemix_notm}}-Konto abhängig, für das sie generiert wurden. Sie können Ihren {{site.data.keyword.Bluemix_notm}}-API-Schlüssel nicht mit einer anderen Konto-ID in demselben IAM-Token kombinieren. Um auf Cluster zugreifen zu können, die mit einem anderen Konto als dem Konto erstellt wurden, auf dem der {{site.data.keyword.Bluemix_notm}}-API-Schlüssel basiert, müssen Sie sich bei dem Konto anmelden, um einen neuen API-Schlüssel zu generieren. </li></ul></tr>
 <tr>
 <td>Eingebundene ID</td>
-<td><ul><li><strong>{{site.data.keyword.Bluemix_notm}}-API-Schlüssel generieren:</strong> <a href="../iam/apikeys.html#manapikey" target="_blank">{{site.data.keyword.Bluemix_notm}}-API-Schlüssel</a> sind von dem {{site.data.keyword.Bluemix_notm}}-Konto abhängig, für das sie generiert wurden. Sie können Ihren {{site.data.keyword.Bluemix_notm}}-API-Schlüssel nicht mit einer anderen Konto-ID in demselben IAM-Token kombinieren. Um auf Cluster zugreifen zu können, die mit einem anderen Konto als dem Konto erstellt wurden, auf dem der {{site.data.keyword.Bluemix_notm}}-API-Schlüssel basiert, müssen Sie sich bei dem Konto anmelden, um einen neuen API-Schlüssel zu generieren.</li><li><strong>Einmaligen Kenncode verwenden:</strong> Wenn Sie sich bei {{site.data.keyword.Bluemix_notm}} authentifizieren, indem Sie einen einmaligen Kenncode verwenden, dann können Sie die Erstellung Ihres IAM-Tokens nicht vollständig automatisieren, weil das Abrufen des einmaligen Kenncodes einen manuellen Eingriff beim Web-Browser erfordert. Um die Erstellung Ihres IAM-Tokens vollständig zu automatisieren, müssen Sie stattdessen einen {{site.data.keyword.Bluemix_notm}}-API-Schlüssel erstellen.</ul></td>
+<td><ul><li><strong>{{site.data.keyword.Bluemix_notm}}-API-Schlüssel generieren:</strong> <a href="../iam/apikeys.html#manapikey" target="_blank">{{site.data.keyword.Bluemix_notm}}-API-Schlüssel</a> sind von dem {{site.data.keyword.Bluemix_notm}}-Konto abhängig, für das sie generiert wurden. Sie können Ihren {{site.data.keyword.Bluemix_notm}}-API-Schlüssel nicht mit einer anderen Konto-ID in demselben IAM-Token kombinieren. Um auf Cluster zugreifen zu können, die mit einem anderen Konto als dem Konto erstellt wurden, auf dem der {{site.data.keyword.Bluemix_notm}}-API-Schlüssel basiert, müssen Sie sich bei dem Konto anmelden, um einen neuen API-Schlüssel zu generieren. </li><li><strong>Einmaligen Kenncode verwenden:</strong> Wenn Sie sich bei {{site.data.keyword.Bluemix_notm}} authentifizieren, indem Sie einen einmaligen Kenncode verwenden, dann können Sie die Erstellung Ihres IAM-Tokens nicht vollständig automatisieren, weil das Abrufen des einmaligen Kenncodes einen manuellen Eingriff beim Web-Browser erfordert. Um die Erstellung Ihres IAM-Tokens vollständig zu automatisieren, müssen Sie stattdessen einen {{site.data.keyword.Bluemix_notm}}-API-Schlüssel erstellen. </ul></td>
 </tr>
 </tbody>
 </table>
 
 1.  Erstellen Sie Ihr IAM-Zugriffstoken (IAM = Identity and Access Management). Die Informationen des Hauptteils, der Bestandteil Ihrer Anforderung ist, kann abhängig von der {{site.data.keyword.Bluemix_notm}}-Authentifizierungsmethode, die verwendet wird, variieren. Ersetzen Sie die folgenden Werte:
-  - _&lt;mein_bluemix-benutzername&gt;_: Ihr {{site.data.keyword.Bluemix_notm}}-Benutzername. 
-  - _&lt;mein_bluemix_kennwort&gt;_: Ihr {{site.data.keyword.Bluemix_notm}}-Kennwort. 
-  - _&lt;mein_api-schlüssel&gt;_: Ihr {{site.data.keyword.Bluemix_notm}}-API-Schlüssel. 
+  - _&lt;mein_benutzername&gt;_: Ihr {{site.data.keyword.Bluemix_notm}}-Benutzername.
+  - _&lt;mein_kennwort&gt;_: Ihr {{site.data.keyword.Bluemix_notm}}-Kennwort.
+  - _&lt;mein_api-schlüssel&gt;_: Ihr {{site.data.keyword.Bluemix_notm}}-API-Schlüssel.
   - _&lt;mein_kenncode&gt;_: Ihr einmaliger {{site.data.keyword.Bluemix_notm}}-Kenncode. Führen Sie den Befehl `bx login --sso` aus und befolgen Sie die Anweisungen in der CLI-Ausgabe, um den einmaligen Kenncode über Ihren Web-Browser abzurufen.
 
     ```
@@ -455,18 +454,18 @@ Die {{site.data.keyword.containershort_notm}}-API benötigt Headerinformationen,
     <tbody>
     <tr>
     <td>Header</td>
-    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=</li></ul>
+    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><b>Hinweis</b>: Bereitgestellt für Sie ist 'Yng6Yng=', die URL-codierte Autorisierung für den Benutzernamen **bx** und das Kennwort **bx**.</p></li></ul>
     </td>
     </tr>
     <tr>
     <td>Hauptteil für {{site.data.keyword.Bluemix_notm}}-Benutzername und -Kennwort</td>
     <td><ul><li>grant_type: password</li>
     <li>response_type: cloud_iam, uaa</li>
-    <li>username: <em>&lt;mein_bluemix-benutzername&gt;</em></li>
-    <li>password: <em>&lt;mein_bluemix-kennwort&gt;</em></li>
+    <li>username: <em>&lt;mein_benutzername&gt;</em></li>
+    <li>password: <em>&lt;mein_kennwort&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li></ul>
-    <p>**Hinweis:** Fügen Sie den Schlüssel 'uaa_client_secret' ohne angegebenen Wert hinzu.</p></td>
+    <p><b>Hinweis</b>: Fügen Sie den Schlüssel 'uaa_client_secret' ohne angegebenen Wert hinzu.</p></td>
     </tr>
     <tr>
     <td>Hauptteil für {{site.data.keyword.Bluemix_notm}}-API-Schlüssel</td>
@@ -475,7 +474,7 @@ Die {{site.data.keyword.containershort_notm}}-API benötigt Headerinformationen,
     <li>apikey: <em>&lt;mein_api-schlüssel&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li></ul>
-    <p>**Hinweis:** Fügen Sie den Schlüssel 'uaa_client_secret' ohne angegebenen Wert hinzu.</p></td>
+    <p><b>Hinweis</b>: Fügen Sie den Schlüssel 'uaa_client_secret' ohne angegebenen Wert hinzu.</p></td>
     </tr>
     <tr>
     <td>Hauptteil für einmaligen {{site.data.keyword.Bluemix_notm}}-Kenncode</td>
@@ -484,7 +483,7 @@ Die {{site.data.keyword.containershort_notm}}-API benötigt Headerinformationen,
     <li>passcode: <em>&lt;mein_kenncode&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li></ul>
-    <p>**Hinweis:** Fügen Sie den Schlüssel 'uaa_client_secret' ohne angegebenen Wert hinzu.</p></td>
+    <p><b>Hinweis</b>: Fügen Sie den Schlüssel 'uaa_client_secret' ohne angegebenen Wert hinzu.</p></td>
     </tr>
     </tbody>
     </table>
@@ -540,8 +539,8 @@ Die {{site.data.keyword.containershort_notm}}-API benötigt Headerinformationen,
       "resources":
         {
           "metadata": {
-            "guid": "<meine_bluemix-konto-id>",
-            "url": "/v1/accounts/<meine_bluemix-konto-id>",
+            "guid": "<meine_konto-id>",
+            "url": "/v1/accounts/<meine_konto-id>",
             "created_at": "2016-01-07T18:55:09.726Z",
             "updated_at": "2017-04-28T23:46:03.739Z",
             "origin": "BSS"
@@ -551,7 +550,7 @@ Die {{site.data.keyword.containershort_notm}}-API benötigt Headerinformationen,
 
     Sie finden die ID Ihres {{site.data.keyword.Bluemix_notm}}-Kontos im Feld **resources/metadata/guid** Ihrer API-Ausgabe.
 
-3.  Generieren Sie ein neues IAM-Token, das Ihre {{site.data.keyword.Bluemix_notm}}-Berechtigungsnachweise und die Konto-ID enthält, unter der der Cluster erstellt wurde. Ersetzen Sie _&lt;meine_bluemix-konto-id&gt;_ durch die ID des {{site.data.keyword.Bluemix_notm}}-Kontos, die Sie im vorherigen Schritt abgerufen haben.
+3.  Generieren Sie ein neues IAM-Token, das Ihre {{site.data.keyword.Bluemix_notm}}-Berechtigungsnachweise und die Konto-ID enthält, unter der der Cluster erstellt wurde. Ersetzen Sie _&lt;meine_konto-id&gt;_ durch die ID des {{site.data.keyword.Bluemix_notm}}-Kontos, die Sie im vorherigen Schritt abgerufen haben.
 
     **Hinweis:** Wenn Sie einen {{site.data.keyword.Bluemix_notm}}-API-Schlüssel verwenden, dann müssen Sie die {{site.data.keyword.Bluemix_notm}}-Konto-ID verwenden, für die der API-Schlüssel erstellt wurde. Um auf Cluster in anderen Konten zugreifen zu können, müssen Sie sich bei dem betreffenden Konto anmelden und einen {{site.data.keyword.Bluemix_notm}}-API-Schlüssel erstellen, der auf diesem Konto basiert.
 
@@ -568,19 +567,19 @@ Die {{site.data.keyword.containershort_notm}}-API benötigt Headerinformationen,
     <tbody>
     <tr>
     <td>Header</td>
-    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=</li></ul>
+    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><b>Hinweis</b>: Bereitgestellt für Sie ist 'Yng6Yng=', die URL-codierte Autorisierung für den Benutzernamen **bx** und das Kennwort **bx**.</p></li></ul>
     </td>
     </tr>
     <tr>
     <td>Hauptteil für {{site.data.keyword.Bluemix_notm}}-Benutzername und -Kennwort</td>
     <td><ul><li>grant_type: password</li>
     <li>response_type: cloud_iam, uaa</li>
-    <li>username: <em>&lt;mein_bluemix-benutzername&gt;</em></li>
-    <li>password: <em>&lt;mein_bluemix-kennwort&gt;</em></li>
+    <li>username: <em>&lt;mein_benutzername&gt;</em></li>
+    <li>password: <em>&lt;mein_kennwort&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;meine_bluemix-konto-id&gt;</em></li></ul>
-    <p>**Hinweis:** Fügen Sie den Schlüssel 'uaa_client_secret' ohne angegebenen Wert hinzu.</p></td>
+    <li>bss_account: <em>&lt;meine_konto-id&gt;</em></li></ul>
+    <p><b>Hinweis</b>: Fügen Sie den Schlüssel 'uaa_client_secret' ohne angegebenen Wert hinzu.</p></td>
     </tr>
     <tr>
     <td>Hauptteil für {{site.data.keyword.Bluemix_notm}}-API-Schlüssel</td>
@@ -589,8 +588,8 @@ Die {{site.data.keyword.containershort_notm}}-API benötigt Headerinformationen,
     <li>apikey: <em>&lt;mein_api-schlüssel&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;meine_bluemix-konto-id&gt;</em></li></ul>
-    <p>**Hinweis:** Fügen Sie den Schlüssel 'uaa_client_secret' ohne angegebenen Wert hinzu.</p></td>
+    <li>bss_account: <em>&lt;meine_konto-id&gt;</em></li></ul>
+    <p><b>Hinweis</b>: Fügen Sie den Schlüssel 'uaa_client_secret' ohne angegebenen Wert hinzu.</p></td>
     </tr>
     <tr>
     <td>Hauptteil für einmaligen {{site.data.keyword.Bluemix_notm}}-Kenncode</td>
@@ -599,8 +598,8 @@ Die {{site.data.keyword.containershort_notm}}-API benötigt Headerinformationen,
     <li>passcode: <em>&lt;mein_kenncode&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;meine_bluemix-konto-id&gt;</em></li></ul>
-    <p>**Hinweis:** Fügen Sie den Schlüssel 'uaa_client_secret' ohne angegebenen Wert hinzu.</p></td>
+    <li>bss_account: <em>&lt;meine_konto-id&gt;</em></li></ul>
+    <p><b>Hinweis<b>: Fügen Sie den Schlüssel 'uaa_client_secret' ohne angegebenen Wert hinzu.</p></td>
     </tr>
     </tbody>
     </table>
@@ -621,83 +620,9 @@ Die {{site.data.keyword.containershort_notm}}-API benötigt Headerinformationen,
     ```
     {: screen}
 
-    Sie finden Ihr IAM-Token im Feld **access_token**, das IAM-Aktualisierungstoken im Feld **refresh_token** und das UAA-Token im Feld **uaa_token** Ihrer CLI-Ausgabe.
+    Sie finden das IAM-Token im Feld **access_token** und das IAM-Aktualisierungstoken im Feld **refresh_token**.
 
-4.  Rufen Sie die ID des {{site.data.keyword.Bluemix_notm}}-Bereichs ab, unter dem der Cluster erstellt wurde.
-    1.  Rufen Sie den API-Endpunkt ab, um auf die Bereichs-ID zuzugreifen. Ersetzen Sie _&lt;uaa-token&gt;_ durch das UAA-Token, das Sie im vorherigen Schritt abgerufen haben.
-
-        ```
-        GET https://api.<region>.bluemix.net/v2/organizations
-        ```
-        {: codeblock}
-
-        <table summary="Eingabeparameter zum Abrufen einer Bereichs-ID">
-        <thead>
-        <th>Eingabeparameter</th>
-        <th>Werte</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td>Header</td>
-        <td><ul><li>Content-Type: application/x-www-form-urlencoded;charset=utf</li>
-        <li>Authorization: bearer &lt;uaa-token&gt;</li>
-        <li>Accept: application/json;charset=utf-8</li></ul></td>
-        </tr>
-        </tbody>
-        </table>
-
-      API-Beispielausgabe:
-
-      ```
-      {
-            "metadata": {
-              "guid": "<bluemix-org-id>",
-              "url": "/v2/organizations/<meine_bluemix-org-id>",
-              "created_at": "2016-01-07T18:55:19Z",
-              "updated_at": "2016-02-09T15:56:22Z"
-            },
-            "entity": {
-              "name": "<bluemix-org-name>",
-              "billing_enabled": false,
-              "quota_definition_guid": "<bluemix-org-id>",
-              "status": "active",
-              "quota_definition_url": "/v2/quota_definitions/<bluemix-org-id>",
-              "spaces_url": "/v2/organizations/<bluemix-org-id>/spaces",
-      ...
-
-      ```
-      {: screen}
-
-5.  Notieren Sie die Ausgabe des Felds **spaces_url**.
-6.  Rufen Sie die ID des {{site.data.keyword.Bluemix_notm}}-Bereichs ab, indem Sie den Endpunkt **spaces_url** verwenden.
-
-      ```
-      GET https://api.<region>.bluemix.net/v2/organizations/<bluemix-org-id>/spaces
-      ```
-      {: codeblock}
-
-      API-Beispielausgabe:
-
-      ```
-      {
-            "metadata": {
-              "guid": "<bluemix-bereichs-id>",
-              "url": "/v2/spaces/<meine_bluemix-bereichs-id>",
-              "created_at": "2016-01-07T18:55:22Z",
-              "updated_at": null
-            },
-            "entity": {
-              "name": "<bluemix-bereichsname>",
-              "organization_guid": "<bluemix-org-id>",
-              "space_quota_definition_guid": null,
-              "allow_ssh": true,
-      ...
-      ```
-      {: screen}
-
-      Sie finden die ID des {{site.data.keyword.Bluemix_notm}}-Bereichs im Feld **metadata/guid** Ihrer API-Ausgabe.
-
-7.  Listen Sie alle Kubernetes-Cluster in Ihrem Konto auf. Verwenden Sie die in früheren Schritten abgerufenen Informationen, um Ihre Headerinformationen zu erstellen.
+4.  Listen Sie alle Kubernetes-Cluster in Ihrem Konto auf. Verwenden Sie die in früheren Schritten abgerufenen Informationen, um Ihre Headerinformationen zu erstellen.
 
     -   Vereinigte Staaten (Süden)
 
@@ -748,7 +673,7 @@ Die {{site.data.keyword.containershort_notm}}-API benötigt Headerinformationen,
         </tbody>
         </table>
 
-8.  Eine Liste von unterstützten APIs finden Sie in der [{{site.data.keyword.containershort_notm}}-API-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://us-south.containers.bluemix.net/swagger-api).
+5.  Eine Liste von unterstützten APIs finden Sie in der [{{site.data.keyword.containershort_notm}}-API-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://us-south.containers.bluemix.net/swagger-api).
 
 <br />
 
@@ -779,7 +704,7 @@ Führen Sie die folgenden Schritte aus, wenn Sie Ihre IAM-Tokens aktualisieren m
     <tr>
     <td>Header</td>
     <td><ul><li>Content-Type: application/x-www-form-urlencoded</li>
-    <li>Authorization: Basic Yng6Yng=</li></ul></td>
+    <li>Authorization: Basic Yng6Yng=<p><b>Hinweis</b>: Bereitgestellt für Sie ist 'Yng6Yng=', die URL-codierte Autorisierung für den Benutzernamen **bx** und das Kennwort **bx**.</p></li></ul></td>
     </tr>
     <tr>
     <td>Hauptteil</td>
@@ -788,7 +713,7 @@ Führen Sie die folgenden Schritte aus, wenn Sie Ihre IAM-Tokens aktualisieren m
     <li>refresh_token: <em>&lt;iam-aktualisierungstoken&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;bluemix-konto-id&gt;</em></li></ul><p>**Hinweis:** Fügen Sie den Schlüssel 'uaa_client_secret' ohne angegebenen Wert hinzu.</p></td>
+    <li>bss_account: <em>&lt;konto-id&gt;</em></li></ul><p><b>Hinweis</b>: Fügen Sie den Schlüssel 'uaa_client_secret' ohne angegebenen Wert hinzu.</p></td>
     </tr>
     </tbody>
     </table>

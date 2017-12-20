@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-24"
+lastupdated: "2017-11-28"
 
 ---
 
@@ -23,9 +23,11 @@ lastupdated: "2017-10-24"
 최대 가용성 및 용량을 위한 클러스터 설정을 설계합니다.
 {:shortdesc}
 
-시작하기 전에 [고가용성 클러스터 구성](cs_planning.html#cs_planning_cluster_config)에 대한 옵션을 검토하십시오. 
+다음 다이어그램에는 가용성이 증가하는 공통 클러스터 구성이 포함됩니다.
 
 ![클러스터의 고가용성 단계](images/cs_cluster_ha_roadmap.png)
+
+다이어그램에 표시된 대로 다중 작업자 노드에 앱을 배치하면 앱의 가용성이 높아집니다. 다중 클러스터에 앱을 배치하면 가용성이 훨씬 높아집니다. 최고의 가용성을 위해서는 여러 지역의 클러스터에 앱을 배치하십시오. [세부사항은 고가용성 클러스터 구성을 위한 옵션을 검토하십시오.](cs_planning.html#cs_planning_cluster_config)
 
 <br />
 
@@ -35,40 +37,40 @@ lastupdated: "2017-10-24"
 
 Kubernetes 클러스터는 네트워크로 구성된 작업자 노드의 세트입니다. 클러스터의 용도는 애플리케이션의 고가용성을 유지시키는 리소스, 노드, 네트워크 및 스토리지 디바이스의 세트를 정의하는 것입니다. 앱을 배치하려면 우선 클러스터를 작성하고 해당 클러스터에서 작업자 노드에 대한 정의를 설정해야 합니다.
 {:shortdesc}
-
-{{site.data.keyword.Bluemix_notm}} 데디케이티드 사용자의 경우 [{{site.data.keyword.Bluemix_notm}} 데디케이티드(비공개 베타)의 GUI에서 Kubernetes 클러스터 작성](#creating_ui_dedicated)을 대신 참조하십시오.
+{{site.data.keyword.Bluemix_dedicated_notm}} 사용자의 경우 대신 [{{site.data.keyword.Bluemix_dedicated_notm}}(비공개 베타)의 GUI에서 Kubernetes 클러스터 작성](#creating_ui_dedicated)을 참조하십시오.
 
 클러스터를 작성하려면 다음을 수행하십시오. 
 1. 카탈로그에서 **Kubernetes 클러스터**를 선택하십시오.
-2. 클러스터 플랜의 유형을 선택하십시오. **Lite** 또는 **종량과금제**를 선택할 수 있습니다. 종량과금제 플랜을 사용하면 고가용성 환경을 위한 다중 작업자 노드와 같은 기능이 있는 표준 클러스터를 프로비저닝할 수 있습니다.
+2. 클러스터 플랜의 유형을 선택하십시오. **라이트** 또는 **종량과금제**를 선택할 수 있습니다. 종량과금제 플랜을 사용하면 고가용성 환경을 위한 다중 작업자 노드와 같은 기능이 있는 표준 클러스터를 프로비저닝할 수 있습니다.
 3. 클러스터 세부사항을 구성하십시오.
     1. 클러스터 이름을 제공하고 Kubernetes 버전을 선택한 후 배치할 위치를 선택하십시오. 최고의 성능을 위해서는 실제로 사용자와 가장 가까운 위치를 선택하십시오. 사용자 국가 외부의 위치를 선택하는 경우에는 외국에서 데이터를 물리적으로 저장하기 전에 법적 인가를 받아야 할 수 있다는 점을 기억하십시오. 
     2. 시스템의 유형을 선택하고 필요한 작업자 노드의 수를 지정하십시오. 시스템 유형은 각 작업자 노드에서 설정되고 컨테이너에 사용 가능한 가상 CPU 및 메모리의 양을 정의합니다. 
-        - 마이크로 머신 유형은 최소 옵션을 표시합니다. 
-        - 밸런스 머신에는 각 CPU에 지정된 것과 동일한 양의 메모리가 있으며, 이는 성능을 최적화합니다. 
-    3. IBM Bluemix Infrastructure(SoftLayer) 계정에서 퍼블릭 및 프라이빗 VLAN을 선택하십시오. 두 VLAN 모두 작업자 노드 간에 통신하지만 퍼블릭 VLAN은 IBM 관리 Kubernetes 마스터와도 통신합니다. 다중 클러스터에 대해 동일한 VLAN을 사용할 수 있습니다.
-        **참고:**: 퍼블릭 VLAN 을 선택하지 않도록 결정한 경우에는 대체 솔루션을 구성해야 합니다.
+        - 마이크로 머신 유형은 최소 옵션을 나타냅니다. 
+        - 밸런스 머신에는 성능을 최적화하는 각 CPU에 지정된 것과 동일한 양의 메모리가 있습니다. 
+    3. IBM Cloud 인프라(SoftLayer) 계정에서 퍼블릭 및 프라이빗 VLAN을 선택하십시오. 두 VLAN 모두 작업자 노드 간에 통신하지만 퍼블릭 VLAN은 IBM 관리 Kubernetes 마스터와도 통신합니다. 다중 클러스터에 대해 동일한 VLAN을 사용할 수 있습니다.
+        **참고**: 퍼블릭 VLAN을 선택하지 않도록 결정한 경우에는 대체 솔루션을 구성해야 합니다.
     4. 하드웨어 유형을 선택하십시오. 대부분의 경우에는 공유 옵션으로도 충분합니다. 
         - **데디케이티드**: 실제 리소스의 완전한 격리를 보장합니다.
         - **공유**: 실제 리소스를 기타 IBM 고객과 동일한 하드웨어에 저장할 수 있습니다. 
 4. **클러스터 작성**을 클릭하십시오. **작업자 노드** 탭에서 작업자 노드 배치의 진행상태를 볼 수 있습니다. 배치가 완료되면 **개요** 탭에서 클러스터가 준비되었는지 확인할 수 있습니다.
-    **참고:** 모든 작업자 노드에는 클러스터가 작성된 이후 수동으로 변경될 수 없는 고유 작업자 노드 ID 및 도메인 이름이 지정됩니다. ID 또는 도메인 이름을 변경하면 Kubernetes 마스터가 클러스터를 관리할 수 없습니다. 
+    **참고:** 모든 작업자 노드에는 클러스터가 작성된 이후 수동으로 변경될 수 없는 고유 작업자 노드 ID 및 도메인 이름이 지정됩니다. 
+ID 또는 도메인 이름을 변경하면 Kubernetes 마스터가 클러스터를 관리할 수 없습니다. 
 
 
 **다음 단계: **
 
 클러스터가 시작되어 실행 중인 경우에는 다음 태스크를 수행할 수 있습니다. 
 
--   [클러스터 관련 작업을 시작하도록 CLI 설치.](cs_cli_install.html#cs_cli_install)
--   [클러스터에 앱을 배치하십시오. ](cs_apps.html#cs_apps_cli)
--   [Docker 이미지를 저장하고 다른 사용자들과 공유하도록 {{site.data.keyword.Bluemix_notm}}에서 개인용 레지스트리를 설정하십시오.](/docs/services/Registry/index.html)
+-   [클러스터 관련 작업을 시작하도록 CLI를 설치합니다.](cs_cli_install.html#cs_cli_install)
+-   [클러스터에 앱을 배치합니다. ](cs_apps.html#cs_apps_cli)
+-   [Docker 이미지를 저장하고 다른 사용자들과 공유하도록 {{site.data.keyword.Bluemix_notm}}에서 개인용 레지스트리를 설정합니다.](/docs/services/Registry/index.html)
 
 
-### {{site.data.keyword.Bluemix_notm}} 데디케이티드(비공개 베타)의 GUI로 클러스터 작성
+### {{site.data.keyword.Bluemix_dedicated_notm}}(비공개 베타)의 GUI를 사용하여 클러스터 작성
 {: #creating_ui_dedicated}
 
 1.  IBM ID를 사용하여 {{site.data.keyword.Bluemix_notm}} 퍼블릭 콘솔([https://console.bluemix.net ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net))에 로그인하십시오.
-2.  계정 메뉴에서 {{site.data.keyword.Bluemix_notm}} 데디케이티드 계정을 선택하십시오. 콘솔이 {{site.data.keyword.Bluemix_notm}} 데디케이티드 인스턴스에 대한 서비스와 정보로 업데이트됩니다. 
+2.  계정 메뉴에서 {{site.data.keyword.Bluemix_dedicated_notm}} 계정을 선택하십시오. 콘솔이 {{site.data.keyword.Bluemix_dedicated_notm}} 인스턴스에 대한 서비스와 정보로 업데이트됩니다.
 3.  카탈로그에서 **컨테이너**를 선택하고 **Kubernetes 클러스터**를 클릭하십시오. 
 4.  **클러스터 이름**을 입력하십시오. 
 5.  **시스템 유형**을 선택하십시오. 시스템 유형은 각 작업자 노드에서 설정되었으며 노드에 배치된 모든 컨테이너가 사용할 수 있는 가상 CPU 및 메모리의 양을 정의합니다. 
@@ -94,7 +96,7 @@ Kubernetes 클러스터는 네트워크로 구성된 작업자 노드의 세트�
 클러스터는 네트워크로 구성된 작업자 노드의 세트입니다. 클러스터의 용도는 애플리케이션의 고가용성을 유지시키는 리소스, 노드, 네트워크 및 스토리지 디바이스의 세트를 정의하는 것입니다. 앱을 배치하려면 우선 클러스터를 작성하고 해당 클러스터에서 작업자 노드에 대한 정의를 설정해야 합니다.
 {:shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} 데디케이티드 사용자의 경우 [{{site.data.keyword.Bluemix_notm}} 데디케이티드(비공개 베타)의 CLI에서 Kubernetes 클러스터 작성](#creating_cli_dedicated)을 대신 참조하십시오.
+{{site.data.keyword.Bluemix_dedicated_notm}} 사용자의 경우 대신 [{{site.data.keyword.Bluemix_dedicated_notm}}(비공개 베타)의 CLI에서 Kubernetes 클러스터 작성](#creating_cli_dedicated)을 참조하십시오.
 
 클러스터를 작성하려면 다음을 수행하십시오. 
 1.  {{site.data.keyword.Bluemix_notm}} CLI 및 [{{site.data.keyword.containershort_notm}} 플러그인](cs_cli_install.html#cs_cli_install)을 설치하십시오.
@@ -105,23 +107,15 @@ Kubernetes 클러스터는 네트워크로 구성된 작업자 노드의 세트�
         ```
     {: pre}
 
-    **참고:** 연합 ID가 있는 경우 `bx login --sso`를 사용하여 {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 사용자 이름을 입력하고 CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색하십시오. `--sso`가 없으면 로그인에 실패하고 `--sso` 옵션을 사용하면 성공하는 경우에는 연합 ID를 보유 중임을 알 수 있습니다. 
+    **참고:** 연합 ID가 있는 경우 `bx login --sso`를 사용하여 {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 사용자 이름을 입력하고 CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색하십시오. `--sso` 옵션을 사용하지 않으면 로그인에 실패하고 `--sso` 옵션을 사용하면 성공하는 경우에는 연합 ID를 보유하고 있다는 것입니다. 
 
-3. 여러 {{site.data.keyword.Bluemix_notm}} 계정이 있는 경우에는 Kubernetes 클러스터가 작성될 계정을 선택하십시오.
+3. 여러 {{site.data.keyword.Bluemix_notm}} 계정이 있는 경우에는 Kubernetes 클러스터를 작성할 계정을 선택하십시오.
 
-4.  Kubernetes 클러스터가 작성될 {{site.data.keyword.Bluemix_notm}} 조직 및 영역을 지정하십시오.
-    ```
-    bx target --cf
-    ```
-    {: pre}
-
-    **참고:** 클러스터는 계정 및 조직에 특정하지만 {{site.data.keyword.Bluemix_notm}} 영역과는 독립적입니다. 예를 들어, `test` 영역에 조직의 클러스터를 작성하면 나중에 `dev` 영역을 대상으로 하는 경우 해당 클러스터에 대해 계속 작업할 수 있습니다. 
-
-5.  이전에 선택한 {{site.data.keyword.Bluemix_notm}} 지역 이외의 지역에 Kubernetes 클러스터를 작성하거나 액세스하려는 경우 [{{site.data.keyword.containershort_notm}} 지역 API 엔드포인트를 지정](cs_regions.html#container_login_endpoints)하십시오.
+4.  이전에 선택한 {{site.data.keyword.Bluemix_notm}} 지역 이외의 지역에 Kubernetes 클러스터를 작성하거나 액세스하려는 경우 [{{site.data.keyword.containershort_notm}} 지역 API 엔드포인트를 지정](cs_regions.html#container_login_endpoints)하십시오.
 
     **참고**: 미국 동부에서 클러스터를 작성하려면 `bx cs init --host https://us-east.containers.bluemix.net` 명령을 사용하여 미국 동부 컨테이너 지역 API 엔드포인트를 지정해야 합니다.
 
-7.  클러스터를 작성하십시오.
+6.  클러스터를 작성하십시오.
     1.  사용 가능한 위치를 검토하십시오. 표시되는 위치는 로그인한 {{site.data.keyword.containershort_notm}} 지역에 따라 다릅니다. 
 
         ```
@@ -142,16 +136,16 @@ Kubernetes 클러스터는 네트워크로 구성된 작업자 노드의 세트�
         Getting machine types list...
         OK
         Machine Types
-        Name         Cores   Memory   Network Speed   OS             Storage   Server Type   
-        u1c.2x4      2       4GB      1000Mbps        UBUNTU_16_64   100GB     virtual   
-        b1c.4x16     4       16GB     1000Mbps        UBUNTU_16_64   100GB     virtual   
-        b1c.16x64    16      64GB     1000Mbps        UBUNTU_16_64   100GB     virtual   
-        b1c.32x128   32      128GB    1000Mbps        UBUNTU_16_64   100GB     virtual   
-        b1c.56x242   56      242GB    1000Mbps        UBUNTU_16_64   100GB     virtual 
+        Name         Cores   Memory   Network Speed   OS             Storage   Server Type
+        u2c.2x4      2       4GB      1000Mbps        UBUNTU_16_64   100GB     virtual
+        b2c.4x16     4       16GB     1000Mbps        UBUNTU_16_64   100GB     virtual
+        b2c.16x64    16      64GB     1000Mbps        UBUNTU_16_64   100GB     virtual
+        b2c.32x128   32      128GB    1000Mbps        UBUNTU_16_64   100GB     virtual
+        b2c.56x242   56      242GB    1000Mbps        UBUNTU_16_64   100GB     virtual
         ```
         {: screen}
 
-    3.  퍼블릭 및 프라이빗 VLAN이 이 계정에 대한 IBM Bluemix Infrastructure(SoftLayer)에 이미 존재하는지 확인하십시오. 
+    3.  퍼블릭 및 프라이빗 VLAN이 이 계정에 대한 IBM Cloud 인프라(SoftLayer)에 이미 존재하는지 확인하십시오.
 
         ```
         bx cs vlans <location>
@@ -169,10 +163,10 @@ Kubernetes 클러스터는 네트워크로 구성된 작업자 노드의 세트�
 
         퍼블릭 및 프라이빗 VLAN이 이미 존재하는 경우 일치하는 라우터를 기록해 놓으십시오. 프라이빗 VLAN 라우터는 항상 `bcr`(벡엔드 라우터)로 시작하고 퍼블릭 VLAN 라우터는 항상 `fcr`(프론트 엔드 라우터)로 시작합니다. 클러스터 작성 시 해당 VLAN을 사용하려면 해당 접두부 뒤의 숫자와 문자 조합이 일치해야 합니다. 출력 예에서는 라우터가 모두 `02a.dal10`을 포함하고 있기 때문에 프라이빗 VLAN이 퍼블릭 VLAN과 함께 사용될 수 있습니다. 
 
-    4.  `cluster-create` 명령을 실행하십시오. 2vCPU 및 4GB 메모리로 설정된 하나의 작업자 노드를 포함하는 라이트 클러스터와 IBM Bluemix Infrastructure(SoftLayer) 계정에서 선택한 수만큼 많은 작업자 노드를 포함할 수 있는 표준 클러스터 중에 선택할 수 있습니다. 표준 클러스터를 작성하는 경우, 기본적으로 작업자 노드의 하드웨어는 여러 IBM 고객에 의해 공유되며 사용 시간을 기준으로 비용이 청구됩니다. </br>표준 클러스터의 예: 
+    4.  `cluster-create` 명령을 실행하십시오. 2vCPU 및 4GB 메모리로 설정된 하나의 작업자 노드를 포함하는 라이트 클러스터 또는 IBM Cloud 인프라(SoftLayer) 계정에서 선택한 수만큼 많은 작업자 노드를 포함할 수 있는 표준 클러스터 중에서 선택할 수 있습니다. 표준 클러스터를 작성하는 경우, 기본적으로 작업자 노드의 하드웨어는 여러 IBM 고객에 의해 공유되며 사용 시간을 기준으로 비용이 청구됩니다. </br>표준 클러스터의 예: 
 
         ```
-        bx cs cluster-create --location dal10 --public-vlan <public_vlan_id> --private-vlan <private_vlan_id> --machine-type u1c.2x4 --workers 3 --name <cluster_name>
+        bx cs cluster-create --location dal10 --public-vlan <public_vlan_id> --private-vlan <private_vlan_id> --machine-type u2c.2x4 --workers 3 --name <cluster_name> --kube-version <major.minor.patch>
         ```
         {: pre}
 
@@ -184,9 +178,9 @@ Kubernetes 클러스터는 네트워크로 구성된 작업자 노드의 세트�
         {: pre}
 
         <table>
-        <caption>표 1. 이 명령의 컴포넌트 이해</caption>
+        <caption>표 1. <code>bx cs cluster-create</code> 명령 컴포넌트 이해</caption>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> 이 명령의 컴포넌트 이해</th>
+        <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 이 명령의 컴포넌트 이해</th>
         </thead>
         <tbody>
         <tr>
@@ -205,13 +199,13 @@ Kubernetes 클러스터는 네트워크로 구성된 작업자 노드의 세트�
         <td><code>--public-vlan <em>&lt;public_vlan_id&gt;</em></code></td>
         <td><ul>
           <li>라이트 클러스터의 경우, 퍼블릭 VLAN을 정의할 필요가 없습니다. 라이트 클러스터는 IBM이 소유하고 있는 퍼블릭 VLAN에 자동으로 연결됩니다. </li>
-          <li>표준 클러스터의 경우, 그 위치에 대한  IBM Bluemix Infrastructure(SoftLayer) 계정에 퍼블릭 VLAN이 이미 있으면 그 퍼블릭 VLAN의 ID를 입력하십시오. 계정에 퍼블릭 및 프라이빗 VLAN이 모두 없는 경우 이 옵션을 지정하지 마십시오. {{site.data.keyword.containershort_notm}}에서 사용자를 위해 자동으로 퍼블릭 VLAN을 작성합니다.<br/><br/>
+          <li>표준 클러스터의 경우, 해당 위치의 IBM Cloud 인프라(SoftLayer) 계정에 퍼블릭 VLAN이 이미 설정되어 있으면 퍼블릭 VLAN의 ID를 입력하십시오. 계정에 퍼블릭 및 프라이빗 VLAN이 둘 다 없는 경우 이 옵션을 지정하지 마십시오. {{site.data.keyword.containershort_notm}}에서 사용자를 위해 자동으로 퍼블릭 VLAN을 작성합니다.<br/><br/>
           <strong>참고:</strong>: 프라이빗 VLAN 라우터는 항상 <code>bcr</code>(벡엔드 라우터)로 시작하고 퍼블릭 VLAN 라우터는 항상 <code>fcr</code>(프론트 엔드 라우터)로 시작합니다. 클러스터 작성 시 해당 VLAN을 사용하려면 해당 접두부 뒤의 숫자와 문자 조합이 일치해야 합니다. </li>
         </ul></td>
         </tr>
         <tr>
         <td><code>--private-vlan <em>&lt;private_vlan_id&gt;</em></code></td>
-        <td><ul><li>라이트 클러스터의 경우, 프라이빗 VLAN을 정의할 필요가 없습니다. 라이트 클러스터는 IBM이 소유하고 있는 프라이빗 VLAN에 자동으로 연결됩니다. </li><li>표준 클러스터의 경우, 그 위치에 대한 IBM Bluemix Infrastructure(SoftLayer) 계정에 프라이빗 VLAN이 이미 있으면 그 프라이빗 VLAN의 ID를 입력하십시오. 계정에 퍼블릭 및 프라이빗 VLAN이 모두 없는 경우 이 옵션을 지정하지 마십시오. {{site.data.keyword.containershort_notm}}에서 사용자를 위해 자동으로 퍼블릭 VLAN을 작성합니다.<br/><br/><strong>참고:</strong>: 프라이빗 VLAN 라우터는 항상 <code>bcr</code>(벡엔드 라우터)로 시작하고 퍼블릭 VLAN 라우터는 항상 <code>fcr</code>(프론트 엔드 라우터)로 시작합니다. 클러스터 작성 시 해당 VLAN을 사용하려면 해당 접두부 뒤의 숫자와 문자 조합이 일치해야 합니다. </li></ul></td>
+        <td><ul><li>라이트 클러스터의 경우, 프라이빗 VLAN을 정의할 필요가 없습니다. 라이트 클러스터는 IBM이 소유하고 있는 프라이빗 VLAN에 자동으로 연결됩니다. </li><li>표준 클러스터의 경우, 해당 위치의 IBM Cloud 인프라(SoftLayer) 계정에 이미 프라이빗 VLAN이 설정되어 있으면 프라이빗 VLAN의 ID를 입력하십시오. 계정에 퍼블릭 및 프라이빗 VLAN이 모두 없는 경우 이 옵션을 지정하지 마십시오. {{site.data.keyword.containershort_notm}}에서 사용자를 위해 자동으로 퍼블릭 VLAN을 작성합니다.<br/><br/><strong>참고:</strong>: 프라이빗 VLAN 라우터는 항상 <code>bcr</code>(벡엔드 라우터)로 시작하고 퍼블릭 VLAN 라우터는 항상 <code>fcr</code>(프론트 엔드 라우터)로 시작합니다. 클러스터 작성 시 해당 VLAN을 사용하려면 해당 접두부 뒤의 숫자와 문자 조합이 일치해야 합니다. </li></ul></td>
         </tr>
         <tr>
         <td><code>--name <em>&lt;name&gt;</em></code></td>
@@ -221,9 +215,13 @@ Kubernetes 클러스터는 네트워크로 구성된 작업자 노드의 세트�
         <td><code>--workers <em>&lt;number&gt;</em></code></td>
         <td>클러스터에 포함할 작업자 노드의 수입니다. <code>--workers</code> 옵션이 지정되지 않은 경우 1개의 작업자 노드가 작성됩니다. </td>
         </tr>
+        <tr>
+          <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
+          <td>클러스터 마스터 노드를 위한 Kubernetes 버전입니다. 이 값은 선택사항입니다. 지정되지 않는 경우 클러스터는 지원되는 Kubernetes 버전의 기본값으로 작성됩니다. 사용 가능한 버전을 보려면 <code>bx cs kube-versions</code>를 실행하십시오.</td>
+        </tr>
         </tbody></table>
 
-8.  클러스터 작성이 요청되었는지 확인하십시오.
+7.  클러스터 작성이 요청되었는지 확인하십시오.
 
     ```
          bx cs clusters
@@ -240,7 +238,7 @@ Kubernetes 클러스터는 네트워크로 구성된 작업자 노드의 세트�
     ```
     {: screen}
 
-9.  작업자 노드의 상태를 확인하십시오. 
+8.  작업자 노드의 상태를 확인하십시오. 
 
     ```
     bx cs workers <cluster>
@@ -258,7 +256,7 @@ ID 또는 도메인 이름을 변경하면 Kubernetes 마스터가 클러스터�
     ```
     {: screen}
 
-10. 작성한 클러스터를 이 세션에 대한 컨텍스트로 설정하십시오. 클러스터 관련 작업을 수행할 때마다 다음 구성 단계를 완료하십시오. 
+9. 작성한 클러스터를 이 세션에 대한 컨텍스트로 설정하십시오. 클러스터 관련 작업을 수행할 때마다 다음 구성 단계를 완료하십시오. 
     1.  환경 변수를 설정하기 위한 명령을 가져오고 Kubernetes 구성 파일을 다운로드하십시오. 
 
         ```
@@ -266,7 +264,7 @@ ID 또는 도메인 이름을 변경하면 Kubernetes 마스터가 클러스터�
         ```
         {: pre}
 
-        구성 파일 다운로드가 완료되면 환경 변수로서 경로를 로컬 Kubernetes 구성 파일로 설정하는 데 사용할 수 있는 명령이 표시됩니다. 
+        구성 파일 다운로드가 완료되면 환경 변수로 경로를 로컬 Kubernetes 구성 파일로 설정하는 데 사용할 수 있는 명령이 표시됩니다. 
 
         OS X에 대한 예:
 
@@ -275,7 +273,7 @@ ID 또는 도메인 이름을 변경하면 Kubernetes 마스터가 클러스터�
         ```
         {: screen}
 
-    2.  `KUBECONFIG` 환경 변수를 설정하려면 터미널에 표시되는 명령을 복사하고 붙여넣기하십시오. 
+    2.  `KUBECONFIG` 환경 변수를 설정하려면 터미널에 표시되는 명령을 복사하여 붙여넣기하십시오. 
     3.  `KUBECONFIG` 환경 변수가 올바르게 설정되었는지 확인하십시오. 
 
         OS X에 대한 예:
@@ -288,12 +286,11 @@ ID 또는 도메인 이름을 변경하면 Kubernetes 마스터가 클러스터�
         출력:
 
         ```
-        /Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
-
+         /Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
         ```
         {: screen}
 
-11. 기본 포트 `8001`로 Kubernetes 대시보드를 실행하십시오.
+10. 기본 포트 `8001`로 Kubernetes 대시보드를 실행하십시오.
     1.  기본 포트 번호로 프록시를 설정하십시오. 
 
         ```
@@ -320,18 +317,18 @@ ID 또는 도메인 이름을 변경하면 Kubernetes 마스터가 클러스터�
 -   [`kubectl` 명령행을 사용하여 클러스터를 관리하십시오. ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/user-guide/kubectl/)
 -   [Docker 이미지를 저장하고 다른 사용자들과 공유하도록 {{site.data.keyword.Bluemix_notm}}에서 개인용 레지스트리를 설정하십시오.](/docs/services/Registry/index.html)
 
-### {{site.data.keyword.Bluemix_notm}} 데디케이티드(비공개 베타)의 CLI로 클러스터 작성
+### {{site.data.keyword.Bluemix_dedicated_notm}}(비공개 베타)의 CLI로 클러스터 작성
 {: #creating_cli_dedicated}
 
 1.  {{site.data.keyword.Bluemix_notm}} CLI 및 [{{site.data.keyword.containershort_notm}} 플러그인](cs_cli_install.html#cs_cli_install)을 설치하십시오.
-2.  {{site.data.keyword.containershort_notm}}의 공용 엔드포인트에 로그인하십시오. {{site.data.keyword.Bluemix_notm}} 신임 정보를 입력하고, 프롬프트가 표시되면 {{site.data.keyword.Bluemix_notm}} 데디케이티드 계정을 선택하십시오. 
+2.  {{site.data.keyword.containershort_notm}}의 공용 엔드포인트에 로그인하십시오. {{site.data.keyword.Bluemix_notm}} 신임 정보를 입력하고, 프롬프트가 표시되면 {{site.data.keyword.Bluemix_dedicated_notm}} 계정을 선택하십시오.
 
     ```
     bx login -a api.<region>.bluemix.net
     ```
     {: pre}
 
-    **참고:** 연합 ID가 있는 경우 `bx login --sso`를 사용하여 {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 사용자 이름을 입력하고 CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색하십시오. `--sso`가 없으면 로그인에 실패하고 `--sso` 옵션을 사용하면 성공하는 경우에는 연합 ID를 보유 중임을 알 수 있습니다. 
+    **참고:** 연합 ID가 있는 경우 `bx login --sso`를 사용하여 {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 사용자 이름을 입력하고 CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색하십시오. `--sso` 옵션을 사용하지 않으면 로그인에 실패하고 `--sso` 옵션을 사용하면 성공하는 경우에는 연합 ID를 보유하고 있다는 것입니다. 
 
 3.  `cluster-create` 명령을 사용하여 클러스터를 작성하십시오. 표준 클러스터를 작성하는 경우, 작업자 노드의 하드웨어는 사용 시간을 기준으로 비용이 청구됩니다. 
 
@@ -345,7 +342,7 @@ ID 또는 도메인 이름을 변경하면 Kubernetes 마스터가 클러스터�
     <table>
     <caption>표 2. 이 명령의 컴포넌트 이해</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png"/> 이 명령의 컴포넌트 이해</th>
+    <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 이 명령의 컴포넌트 이해</th>
     </thead>
     <tbody>
     <tr>
@@ -420,7 +417,7 @@ ID 또는 도메인 이름을 변경하면 Kubernetes 마스터가 클러스터�
         ```
         {: screen}
 
-    2.  `KUBECONFIG` 환경 변수를 설정하려면 터미널에 표시되는 명령을 복사하고 붙여넣기하십시오. 
+    2.  `KUBECONFIG` 환경 변수를 설정하려면 터미널에 표시되는 명령을 복사하여 붙여넣기하십시오. 
     3.  `KUBECONFIG` 환경 변수가 올바르게 설정되었는지 확인하십시오. 
 
         OS X에 대한 예:
@@ -450,7 +447,7 @@ ID 또는 도메인 이름을 변경하면 Kubernetes 마스터가 클러스터�
         ```
         {: screen}
 
-    2.  Kubernetes 대시보드를 볼 수 있도록 웹 브라우저에서 다음 URL을 여십시오. 
+    2.  Kubernetes 대시보드를 보기 위해 웹 브라우저에서 다음 URL을 여십시오. 
 
         ```
         http://localhost:8001/ui
@@ -470,7 +467,7 @@ ID 또는 도메인 이름을 변경하면 Kubernetes 마스터가 클러스터�
 ## 개인용 및 공용 이미지 레지스트리 사용
 {: #cs_apps_images}
 
-Docker 이미지는 작성하는 모든 컨테이너의 기초가 됩니다. 이미지는 이미지를 빌드하는 지시사항이 포함된 파일인 Dockerfile에서 작성됩니다. Dockerfile은 앱, 해당 앱의 구성 및 그 종속 항목과 같이 개별적으로 저장되는 해당 지시사항의 빌드 아티팩트를 참조할 수 있습니다. 일반적으로 이미지는 공용으로 액세스 가능한 레지스트리(공용 레지스트리) 또는 소규모 사용자 그룹에 대한 제한된 액세스 권한으로 설정된 레지스트리(개인용 레지스트리)에 저장됩니다.
+Docker 이미지는 작성하는 모든 컨테이너의 기초가 됩니다. 이미지는 이미지를 빌드하기 위한 지시사항이 포함되어 있는 Dockerfile에서 작성됩니다. Dockerfile은 앱, 해당 앱의 구성 및 그 종속 항목과 같이 개별적으로 저장되는 해당 지시사항의 빌드 아티팩트를 참조할 수 있습니다. 일반적으로 이미지는 공용으로 액세스 가능한 레지스트리(공용 레지스트리) 또는 소규모 사용자 그룹에 대한 제한된 액세스 권한으로 설정된 레지스트리(개인용 레지스트리)에 저장됩니다.
 {:shortdesc}
 
 다음 옵션을 검토하여 이미지 레지스트리를 설정하는 방법과 레지스트리의 이미지를 사용하는 방법에 대한 정보를 찾으십시오. 
@@ -479,17 +476,16 @@ Docker 이미지는 작성하는 모든 컨테이너의 기초가 됩니다. 이
 -   [Docker Hub에서 공용 이미지에 액세스](#dockerhub).
 -   [다른 개인용 레지스트리에 저장된 개인용 이미지에 액세스](#private_registry). 
 
-### IBM 제공 이미지와 사용자 고유의 개인용 Docker 이미지 관련 작업을 위해
-{{site.data.keyword.registryshort_notm}}의 네임스페이스에 액세스
+### IBM 제공 이미지 및 사용자 고유의 개인용 Docker 이미지 관련 작업을 위해 {{site.data.keyword.registryshort_notm}}의 네임스페이스에 액세스
 {: #bx_registry_default}
 
 {{site.data.keyword.registryshort_notm}}의 네임스페이스에 저장된 개인용 이미지나 IBM 제공 공용 이미지에서 클러스터로 컨테이너를 배치할 수 있습니다. 
 
 시작하기 전에:
 
-1. [{{site.data.keyword.Bluemix_notm}} 퍼블릭 또는 {{site.data.keyword.Bluemix_notm}} 데디케이티드의 {{site.data.keyword.registryshort_notm}}에 네임스페이스를 설정하고 이 네임스페이스에 이미지를 푸시](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add)하십시오.
-2. [클러스터를 작성](#cs_cluster_cli)하십시오. 
-3. [클러스터에 CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오. 
+1. [{{site.data.keyword.Bluemix_notm}} 퍼블릭 또는 {{site.data.keyword.Bluemix_dedicated_notm}}의 {{site.data.keyword.registryshort_notm}}에 네임스페이스를 설정하고 이 네임스페이스에 이미지를 푸시하십시오](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add).
+2. [클러스터를 작성하십시오](#cs_cluster_cli). 
+3. [클러스터에 CLI를 대상으로 지정하십시오](cs_cli_install.html#cs_cli_configure). 
 
 클러스터를 작성할 때 그 클러스터에 대해 만료되지 않는 레지스트리 토큰이 자동으로 작성됩니다. 이 토큰은 IBM 제공 공용 및 사용자 고유의 개인용 Docker 이미지 관련 작업이 가능하도록 {{site.data.keyword.registryshort_notm}}에서 사용자가 설정한 임의의 네임스페이스에 대한 읽기 전용 액세스 권한을 부여하는 데 사용됩니다. 토큰은 컨테이너화된 앱을 배치할 때 Kubernetes 클러스터에 액세스할 수 있도록 Kubernetes `imagePullSecret`에 저장되어야 합니다. 클러스터가 작성되면 {{site.data.keyword.containershort_notm}}가 이 토큰을 Kubernetes `imagePullSecret`에 자동으로 저장합니다. `imagePullSecret`은 기본 Kubernetes 네임스페이스, 그 네임스페이스에 대한 ServiceAccount에서 기본 시크릿 목록 및 kube-system 네임스페이스에 추가됩니다. 
 
@@ -536,16 +532,16 @@ Docker 이미지는 작성하는 모든 컨테이너의 기초가 됩니다. 이
     ```
     {: pre}
 
-### 다른 Kubernetes 네임스페이스에 이미지 배치 또는 다른 {{site.data.keyword.Bluemix_notm}} 지역과 계정의 이미지 액세스
+### 다른 Kubernetes 네임스페이스에 이미지를 배치하거나 다른 {{site.data.keyword.Bluemix_notm}} 지역 및 계정의 이미지에 액세스
 {: #bx_registry_other}
 
-사용자 고유의 imagePullSecret을 작성하여 컨테이너를 다른 Kubernetes 네임스페이스에 배치하고 다른 {{site.data.keyword.Bluemix_notm}} 지역 또는 계정에 저장된 이미지를 사용하거나 {{site.data.keyword.Bluemix_notm}} 데디케이티드에 저장된 이미지를 사용할 수 있습니다. 
+고유 imagePullSecret을 작성하여 컨테이너를 다른 Kubernetes 네임스페이스에 배치하거나 다른 {{site.data.keyword.Bluemix_notm}} 지역 또는 계정에 저장된 이미지를 사용하거나 {{site.data.keyword.Bluemix_dedicated_notm}}에 저장된 이미지를 사용할 수 있습니다.
 
 시작하기 전에:
 
-1.  [{{site.data.keyword.Bluemix_notm}} 퍼블릭 또는 {{site.data.keyword.Bluemix_notm}} 데디케이티드의 {{site.data.keyword.registryshort_notm}}에 네임스페이스를 설정하고 이 네임스페이스에 이미지를 푸시](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add)하십시오.
-2.  [클러스터를 작성](#cs_cluster_cli)하십시오. 
-3.  [클러스터에 CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오. 
+1.  [{{site.data.keyword.Bluemix_notm}} 퍼블릭 또는 {{site.data.keyword.Bluemix_dedicated_notm}}의 {{site.data.keyword.registryshort_notm}}에 네임스페이스를 설정하고 이 네임스페이스에 이미지를 푸시하십시오](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add).
+2.  [클러스터를 작성하십시오](#cs_cluster_cli). 
+3.  [클러스터에 CLI를 대상으로 지정하십시오](cs_cli_install.html#cs_cli_configure). 
 
 고유 imagePullSecret을 작성하려면 다음을 수행하십시오.
 
@@ -579,7 +575,7 @@ Docker 이미지는 작성하는 모든 컨테이너의 기초가 됩니다. 이
     <table>
     <caption>표 3. 이 명령의 컴포넌트 이해</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png"/> 이 명령의 컴포넌트 이해</th>
+    <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 이 명령의 컴포넌트 이해</th>
     </thead>
     <tbody>
     <tr>
@@ -592,7 +588,7 @@ Docker 이미지는 작성하는 모든 컨테이너의 기초가 됩니다. 이
     </tr>
     <tr>
     <td><code>--docker-server <em>&lt;registry_url&gt;</em></code></td>
-    <td>필수. 네임스페이스가 설정된 이미지 레지스트리에 대한 URL입니다. <ul><li>미국 남부 및 미국 동부에 설정된 네임스페이스: registry.ng.bluemix.net</li><li>미국 남부에 설정된 네임스페이스: registry.eu-gb.bluemix.net</li><li>중앙 유럽(프랑크푸르트)에 설정된 네임스페이스: registry.eu-de.bluemix.net</li><li>호주(시드니)에 설정된 네임스페이스: registry.au-syd.bluemix.net</li><li>{{site.data.keyword.Bluemix_notm}} 데디케이티드에 설정된 네임스페이스: registry.<em>&lt;dedicated_domain&gt;</em></li></ul></td>
+    <td>필수. 네임스페이스가 설정된 이미지 레지스트리에 대한 URL입니다. <ul><li>미국 남부 및 미국 동부에 설정된 네임스페이스: registry.ng.bluemix.net</li><li>미국 남부에 설정된 네임스페이스: registry.eu-gb.bluemix.net</li><li>중앙 유럽(프랑크푸르트)에 설정된 네임스페이스: registry.eu-de.bluemix.net</li><li>호주(시드니)에 설정된 네임스페이스: registry.au-syd.bluemix.net</li><li>{{site.data.keyword.Bluemix_dedicated_notm}} 레지스트리에 설정된 네임스페이스의 경우.<em>&lt;dedicated_domain&gt;</em></li></ul></td>
     </tr>
     <tr>
     <td><code>--docker-username <em>&lt;docker_username&gt;</em></code></td>
@@ -608,8 +604,7 @@ Docker 이미지는 작성하는 모든 컨테이너의 기초가 됩니다. 이
     </tr>
     </tbody></table>
 
-6.  시크릿이 작성되었는지 확인하십시오. <em>&lt;kubernetes_namespace&gt;</em>를 imagePullSecret을 작성한 네임스페이스의 이름으로 대체하십시오.
-
+6.  시크릿이 작성되었는지 확인하십시오. <em>&lt;kubernetes_namespace&gt;</em>를 imagePullSecret을 작성한 네임스페이스의 이름으로 대체하십시오. 
 
     ```
     kubectl get secrets --namespace <kubernetes_namespace>
@@ -655,7 +650,7 @@ Docker 이미지는 작성하는 모든 컨테이너의 기초가 됩니다. 이
         <table>
         <caption>표 4. YAML 파일 컴포넌트 이해</caption>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> YAML 파일 컴포넌트 이해</th>
+        <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
         </thead>
         <tbody>
         <tr>
@@ -668,7 +663,7 @@ Docker 이미지는 작성하는 모든 컨테이너의 기초가 됩니다. 이
         </tr>
         <tr>
         <td><code><em>&lt;my_image&gt;</em></code></td>
-        <td>사용하려는 이미지의 이름입니다. {{site.data.keyword.Bluemix_notm}} 계정에서 사용 가능한 이미지를 나열하려면 `bx cr image-list`를 실행하십시오. </td>
+        <td>사용하려는 이미지의 이름입니다. {{site.data.keyword.Bluemix_notm}} 계정에서 사용 가능한 이미지를 나열하려면 `bx cr image-list`을 실행하십시오.</td>
         </tr>
         <tr>
         <td><code><em>&lt;tag&gt;</em></code></td>
@@ -696,8 +691,8 @@ Docker Hub에 저장된 공용 이미지를 사용하여 추가 구성 없이 �
 
 시작하기 전에:
 
-1.  [클러스터를 작성](#cs_cluster_cli)하십시오. 
-2.  [클러스터에 CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오. 
+1.  [클러스터를 작성하십시오](#cs_cluster_cli). 
+2.  [클러스터에 CLI를 대상으로 지정하십시오](cs_cli_install.html#cs_cli_configure). 
 
 배치 구성 파일을 작성하십시오.
 
@@ -729,7 +724,7 @@ Docker Hub에 저장된 공용 이미지를 사용하여 추가 구성 없이 �
     ```
     {: pre}
 
-    **팁:** 또는 기존 구성 파일을 배치하십시오. 다음 예에서는 동일한 공용 NGINX 이미지를 사용하지만 클러스터에 직접 적용됩니다.
+    **팁:** 또는, 기존 구성 파일을 배치하십시오. 다음 예에서는 동일한 공용 NGINX 이미지를 사용하지만 클러스터에 직접 적용됩니다.
 
     ```
     kubectl apply -f https://raw.githubusercontent.com/IBM-{{site.data.keyword.Bluemix_notm}}/kube-samples/master/deploy-apps-clusters/deploy-nginx.yaml
@@ -744,8 +739,8 @@ Docker Hub에 저장된 공용 이미지를 사용하여 추가 구성 없이 �
 
 시작하기 전에:
 
-1.  [클러스터를 작성](#cs_cluster_cli)하십시오. 
-2.  [클러스터에 CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오. 
+1.  [클러스터를 작성하십시오](#cs_cluster_cli). 
+2.  [클러스터에 CLI를 대상으로 지정하십시오](cs_cli_install.html#cs_cli_configure). 
 
 imagePullSecret을 작성하려면 다음을 수행하십시오.
 
@@ -761,7 +756,7 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
     <table>
     <caption>표 5. 이 명령의 컴포넌트 이해</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png"/> 이 명령의 컴포넌트 이해</th>
+    <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 이 명령의 컴포넌트 이해</th>
     </thead>
     <tbody>
     <tr>
@@ -790,8 +785,7 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
     </tr>
     </tbody></table>
 
-2.  시크릿이 작성되었는지 확인하십시오. <em>&lt;kubernetes_namespace&gt;</em>를 imagePullSecret을 작성한 네임스페이스의 이름으로 대체하십시오.
-
+2.  시크릿이 작성되었는지 확인하십시오. <em>&lt;kubernetes_namespace&gt;</em>를 imagePullSecret을 작성한 네임스페이스의 이름으로 대체하십시오. 
 
     ```
     kubectl get secrets --namespace <kubernetes_namespace>
@@ -800,7 +794,7 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
 
 3.  imagePullSecret을 참조하는 포드를 작성하십시오. 
     1.  `mypod.yaml`이라는 이름의 포드 구성 파일을 작성하십시오.
-    2.  개인용 {{site.data.keyword.Bluemix_notm}} 레지스트리에 액세스하기 위해 사용하려는 포드 및 imagePullSecret을 정의하십시오. 개인용 레지스트리에서 개인용 이미지 사용: 
+    2.  개인용 {{site.data.keyword.Bluemix_notm}} 레지스트리에 액세스하기 위해 사용하려는 포드 및 imagePullSecret을 정의하십시오. 개인용 레지스트리의 개인용 이미지를 사용하려면 다음을 작성하십시오. 
 
         ```
         apiVersion: v1
@@ -819,7 +813,7 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
         <table>
         <caption>표 6. YAML 파일 컴포넌트 이해</caption>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> YAML 파일 컴포넌트 이해</th>
+        <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
         </thead>
         <tbody>
         <tr>
@@ -864,20 +858,20 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
 시작하기 전에:
 
 1. 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오. 
-2. 영역에서 [{{site.data.keyword.Bluemix_notm}} 서비스의 인스턴스를 요청](/docs/services/reqnsi.html#req_instance)하십시오.
+2. [{{site.data.keyword.Bluemix_notm}} 서비스의 인스턴스를 요청](/docs/manageapps/reqnsi.html#req_instance)하십시오.
    **참고:** 워싱턴 DC 위치에 서비스 인스턴스를 작성하려면 CLI를 사용해야 합니다.
-3. {{site.data.keyword.Bluemix_notm}} 데디케이티드 사용자의 경우 [{{site.data.keyword.Bluemix_notm}} 데디케이티드(비공개 베타)의 클러스터에 {{site.data.keyword.Bluemix_notm}} 서비스 추가](#binding_dedicated)를 대신 참조하십시오. 
+3. {{site.data.keyword.Bluemix_dedicated_notm}} 사용자의 경우 대신 [{{site.data.keyword.Bluemix_dedicated_notm}}(비공개 베타)의 클러스터에 {{site.data.keyword.Bluemix_notm}} 서비스 추가](#binding_dedicated)를 참조하십시오.
 
 **참고:**
 <ul><ul>
 <li>서비스 키를 지원하는
-{{site.data.keyword.Bluemix_notm}} 서비스만 추가할 수 있습니다. 서비스가 서비스 키를 지원하지 않는 경우 [외부 앱이 {{site.data.keyword.Bluemix_notm}} 서비스를 사용하도록 설정](/docs/services/reqnsi.html#req_instance)을 참조하십시오.</li>
+{{site.data.keyword.Bluemix_notm}} 서비스만 추가할 수 있습니다. 서비스가 서비스 키를 지원하지 않는 경우 [외부 앱이 {{site.data.keyword.Bluemix_notm}} 서비스를 사용하도록 설정](/docs/manageapps/reqnsi.html#req_instance)을 참조하십시오.</li>
 <li>서비스를 추가하기 전에 클러스터와 작업자 노드가 완전히 배치되어야 합니다.</li>
 </ul></ul>
 
 
 서비스를 추가하려면 다음을 수행하십시오. 
-2.  {{site.data.keyword.Bluemix_notm}} 영역의 모든 기존 서비스를 나열하십시오. 
+2.  사용 가능한 {{site.data.keyword.Bluemix_notm}} 서비스를 나열하십시오.
 
     ```
      bx service list
@@ -936,12 +930,12 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
 
 클러스터에 배치된 포드에서 서비스를 사용하려면 [Kubernetes 시크릿을 시크릿 볼륨으로 포드에 마운트](cs_apps.html#cs_apps_service)하여 클러스터 사용자가 {{site.data.keyword.Bluemix_notm}} 서비스의 서비스 자격 증명에 액세스할 수 있어야 합니다. 
 
-### {{site.data.keyword.Bluemix_notm}} 데디케이티드(비공개 베타)의 클러스터에 {{site.data.keyword.Bluemix_notm}} 서비스 추가
+### {{site.data.keyword.Bluemix_notm}}(비공개 베타)의 클러스터에 {{site.data.keyword.Bluemix_dedicated_notm}} 서비스 추가
 {: #binding_dedicated}
 
 **참고**: 서비스를 추가하기 전에 클러스터와 작업자 노드가 완전히 배치되어야 합니다.
 
-1.  로컬 {{site.data.keyword.Bluemix_notm}} 데디케이티드 구성 파일을 `DEDICATED_BLUEMIX_CONFIG` 환경 변수로 설정하십시오.
+1.  로컬 {{site.data.keyword.Bluemix_dedicated_notm}} 구성 파일에 대한 경로를 `DEDICATED_BLUEMIX_CONFIG` 환경 변수로 설정하십시오.
 
     ```
     export DEDICATED_BLUEMIX_CONFIG=<path_to_config_directory>
@@ -955,7 +949,7 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
     ```
     {: pre}
 
-3.  서비스 인스턴스를 작성하려는 {{site.data.keyword.Bluemix_notm}} 데디케이티드 환경에 로그인하십시오.
+3.  서비스 인스턴스를 작성할 {{site.data.keyword.Bluemix_dedicated_notm}} 환경에 로그인하십시오.
 
     ```
     bx login -a api.<dedicated_domain> -u <user> -p <password> -o <org> -s <space>
@@ -976,7 +970,7 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
     ```
     {: pre}
 
-6.  {{site.data.keyword.Bluemix_notm}} 영역의 기존 서비스를 모두 나열하여 서비스 인스턴스를 작성했는지 확인하십시오.
+6.  사용 가능한 {{site.data.keyword.Bluemix_notm}} 서비스를 나열하여 서비스 인스턴스를 작성했는지 확인하십시오.
 
     ```
      bx service list
@@ -998,15 +992,15 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
     ```
     {: pre}
 
-8.  {{site.data.keyword.containershort_notm}}의 공용 엔드포인트에 로그인하고 CLI의 대상을 {{site.data.keyword.Bluemix_notm}} 데디케이티드 환경의 클러스터로 지정하십시오. 
-    1.  {{site.data.keyword.containershort_notm}}의 공용 엔드포인트를 사용하여 계정에 로그인하십시오. {{site.data.keyword.Bluemix_notm}} 신임 정보를 입력하고, 프롬프트가 표시되면 {{site.data.keyword.Bluemix_notm}} 데디케이티드 계정을 선택하십시오. 
+8.  {{site.data.keyword.containershort_notm}}의 공용 엔드포인트에 로그인하고 CLI의 대상을 {{site.data.keyword.Bluemix_dedicated_notm}} 환경의 클러스터로 지정하십시오.
+    1.  {{site.data.keyword.containershort_notm}}의 공용 엔드포인트를 사용하여 계정에 로그인하십시오. {{site.data.keyword.Bluemix_notm}} 신임 정보를 입력하고, 프롬프트가 표시되면 {{site.data.keyword.Bluemix_dedicated_notm}} 계정을 선택하십시오.
 
         ```
             bx login -a api.ng.bluemix.net
            ```
         {: pre}
 
-        **참고:** 연합 ID가 있는 경우 `bx login --sso`를 사용하여 {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 사용자 이름을 입력하고 CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색하십시오. `--sso`가 없으면 로그인에 실패하고 `--sso` 옵션을 사용하면 성공하는 경우에는 연합 ID를 보유 중임을 알 수 있습니다. 
+        **참고:** 연합 ID가 있는 경우 `bx login --sso`를 사용하여 {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 사용자 이름을 입력하고 CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색하십시오. `--sso` 옵션을 사용하지 않으면 로그인에 실패하고 `--sso` 옵션을 사용하면 성공하는 경우에는 연합 ID를 보유하고 있다는 것입니다. 
 
     2.  사용 가능한 클러스터의 목록을 가져오고 CLI에서 대상으로 지정할 클러스터의 이름을 식별하십시오. 
 
@@ -1031,7 +1025,7 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
         ```
         {: screen}
 
-    4.  `KUBECONFIG` 환경 변수를 설정하려면 터미널에 표시되는 명령을 복사하고 붙여넣기하십시오. 
+    4.  `KUBECONFIG` 환경 변수를 설정하려면 터미널에 표시되는 명령을 복사하여 붙여넣기하십시오. 
 
 9.  서비스를 추가하는 데 사용할 클러스터 네임스페이스를 식별하십시오. 다음 옵션 중에 선택하십시오. 
     * 기존 네임스페이스를 나열하고 사용할 네임스페이스를 선택하십시오. 
@@ -1064,22 +1058,18 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
 
 {{site.data.keyword.containershort_notm}}로 작업하는 모든 사용자에게 이 사용자가 어떤 조치를 수행할 수 있는지 판별하는 ID 및 액세스 관리에서 서비스 특정 사용자 역할이 지정되어야 합니다. ID 및 액세스 관리는 다음 액세스 권한 사이의 차이점을 구별합니다. 
 
--   {{site.data.keyword.containershort_notm}} 액세스 정책
+<dl>
+<dt>{{site.data.keyword.containershort_notm}} 액세스 정책</dt>
+<dd>액세스 정책은 클러스터에서 수행할 수 있는 클러스터 관리 조치(예: 클러스터 작성 또는 제거, 추가 작업 노드 추가 또는 제거)를 판별합니다. </dd>
+<dt>리소스 그룹</dt>
+<dd>리소스 그룹은 한 번에 둘 이상의 리소스에 사용자 액세스를 신속하게 지정할 수 있도록 {{site.data.keyword.Bluemix_notm}} 서비스를 그룹으로 구성하는 방법입니다. [리소스 그룹을 사용하여 사용자를 관리](/docs/admin/resourcegroups.html#rgs)하는 방법을 알아보십시오.</dd>
+<dt>RBAC 역할</dt>
+<dd>{{site.data.keyword.containershort_notm}} 액세스 정책이 지정된 모든 사용자는 자동으로 RBAC 역할이 지정됩니다. RBAC 역할은 클러스터 내부의 Kubernetes 리소스에서 수행할 수 있는 조치를 판별합니다. RBAC 역할은 기본 네임스페이스에 대해서만 설정됩니다. 클러스터 관리자는 클러스터에서 다른 네임스페이스에 대한 RBAC 역할을 추가할 수 있습니다. 자세한 정보는 Kubernetes 문서의 [RBAC 인증 사용![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview)을 참조하십시오.</dd>
+<dt>Cloud Foundry 역할</dt>
+<dd>모든 사용자에게 Cloud Foundry 사용자 역할이 지정되어야 합니다. 이 역할은 사용자가 {{site.data.keyword.Bluemix_notm}} 계정에서 수행할 수 있는 조치(예: 다른 사용자 초대 또는 할당 사용량 보기)를 판별합니다. 각 역할의 권한을 검토하려면 [Cloud Foundry 역할](/docs/iam/cfaccess.html#cfaccess)을 참조하십시오. </dd>
+</dl>
 
-    액세스 정책은 클러스터에서 수행할 수 있는 클러스터 관리 조치(예: 클러스터 작성 또는 제거, 추가 작업 노드 추가 또는 제거)를 판별합니다. 
-
-<!-- If you want to prevent a user from deploying apps to a cluster or creating other Kubernetes resources, you must create RBAC policies for the cluster. -->
-
--   Cloud Foundry 역할
-
-    모든 사용자에게 Cloud Foundry 사용자 역할이 지정되어야 합니다. 이 역할은 사용자가 {{site.data.keyword.Bluemix_notm}} 계정에서 수행할 수 있는 조치(예: 다른 사용자 초대 또는 할당 사용량 보기)를 판별합니다. 각 역할의 권한을 검토하려면 [Cloud Foundry 역할](/docs/iam/users_roles.html#cfroles)을 참조하십시오. 
-
--   RBAC 역할
-
-    {{site.data.keyword.containershort_notm}} 액세스 정책이 지정된 모든 사용자는 자동으로 RBAC 역할이 지정됩니다. RBAC 역할은 클러스터 내부의 Kubernetes 리소스에서 수행할 수 있는 조치를 판별합니다. RBAC 역할은 기본 네임스페이스에 대해서만 설정됩니다. 클러스터 관리자는 클러스터에서 다른 네임스페이스에 대한 RBAC 역할을 추가할 수 있습니다. 자세한 정보는 Kubernetes 문서의 [RBAC 인증 사용![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview)을 참조하십시오.
-
-
-계속하려면 다음 조치 중에서 선택하십시오. 
+계속하려면 다음 조치 중에 선택하십시오.
 
 -   [클러스터로 작업하기 위해 필요한 액세스 정책 및 권한 보기](#access_ov). 
 -   [현재 액세스 정책 보기](#view_access).
@@ -1089,17 +1079,16 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
 ### 필수 {{site.data.keyword.containershort_notm}} 액세스 정책 및 권한의 개요
 {: #access_ov}
 
-{{site.data.keyword.Bluemix_notm}} 계정에서 사용자에게 권한을 부여할 수 있는 액세스 정책 및 권한을 검토하십시오. 
+{{site.data.keyword.Bluemix_notm}} 계정에서 사용자에게 권한을 부여할 수 있는 액세스 정책 및 권한을 검토하십시오. 운영자 및 편집자 역할에는 별도의 권한이 있습니다. 예를 들어, 사용자가 작업자 노드를 추가하고 서비스를 바인드하게 하려면 운영자와 편집자 역할 둘 다를 사용자에게 지정해야 합니다.
 
 |액세스 정책|클러스터 관리 권한|Kubernetes 리소스 권한|
 |-------------|------------------------------|-------------------------------|
-|<ul><li>역할: 관리자</li><li>서비스 인스턴스: 모든 현재 서비스 인스턴스</li></ul>|<ul><li>라이트 또는 표준 클러스터 작성</li><li>IBM Bluemix Infrastructure(SoftLayer) 포트폴리오에 액세스하도록 {{site.data.keyword.Bluemix_notm}} 계정에 대한 신임 정보 설정</li><li>클러스터 제거</li><li>이 계정의 다른 기존 사용자에 대한 {{site.data.keyword.containershort_notm}}
-액세스 정책 지정 및 변경. </li></ul><br/>이 역할은 이 계정의 모든 클러스터에 대한 편집자, 운영자 및 뷰어 역할에서 권한을 상속합니다. |<ul><li>RBAC 역할: cluster-admin</li><li>모든 네임스페이스의 리소스에 대한 읽기/쓰기 액세스 권한</li><li>네임스페이스 내에서 역할 작성</li><li>Kubernetes 대시보드에 액세스</li><li>앱을 공용으로 사용할 수 있도록 하는 Ingress 리소스 작성</li></ul>|
+|<ul><li>역할: 관리자</li><li>서비스 인스턴스: 모든 현재 서비스 인스턴스</li></ul>|<ul><li>라이트 또는 표준 클러스터 작성</li><li>IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하도록 {{site.data.keyword.Bluemix_notm}} 계정의 신임 정보 설정</li><li>클러스터 제거</li><li>이 계정의 다른 기존 사용자에 대한 {{site.data.keyword.containershort_notm}} 액세스 정책 지정 및 변경. </li></ul><br/>이 역할은 이 계정의 모든 클러스터에 대한 편집자, 운영자 및 뷰어 역할에서 권한을 상속합니다. |<ul><li>RBAC 역할: cluster-admin</li><li>모든 네임스페이스의 리소스에 대한 읽기/쓰기 액세스 권한</li><li>네임스페이스 내에서 역할 작성</li><li>Kubernetes 대시보드에 액세스</li><li>앱을 공용으로 사용할 수 있도록 하는 Ingress 리소스 작성</li></ul>|
 |<ul><li>역할: 관리자</li><li>서비스 인스턴스: 특정 클러스터 ID</li></ul>|<ul><li>특정 클러스터를 제거합니다.</li></ul><br/>이 역할은 선택된 클러스터에 대한 편집자, 운영자 및 뷰어 역할에서 권한을 상속합니다. |<ul><li>RBAC 역할: cluster-admin</li><li>모든 네임스페이스의 리소스에 대한 읽기/쓰기 액세스 권한</li><li>네임스페이스 내에서 역할 작성</li><li>Kubernetes 대시보드에 액세스</li><li>앱을 공용으로 사용할 수 있도록 하는 Ingress 리소스 작성</li></ul>|
 |<ul><li>역할: 운영자</li><li>서비스 인스턴스: 모든 현재 서비스 인스턴스/특정 클러스터 ID</li></ul>|<ul><li>추가 작업자 노드를 클러스터에 추가</li><li>작업자 노드를 클러스터에서 제거</li><li>작업자 노드를 다시 부팅</li><li>작업자 노드를 다시 로드</li><li>클러스터에 서브넷 추가</li></ul>|<ul><li>RBAC 역할: 관리</li><li>기본 네임스페이스 내의 리소스에 대한 읽기/쓰기 액세스 권한(네임스페이스 자체에는 해당되지 않음)</li><li>네임스페이스 내에서 역할 작성</li></ul>|
-|<ul><li>역할: 편집자</li><li>서비스 인스턴스: 모든 현재 서비스 인스턴스/특정 클러스터 ID</li></ul>|<ul><li>{{site.data.keyword.Bluemix_notm}} 서비스를 클러스터에 바인드합니다. </li><li>클러스터에 대해 {{site.data.keyword.Bluemix_notm}} 서비스의 바인드를 해제합니다. </li><li>웹훅을 작성합니다. </li></ul><br/>앱 개발자의 경우 이 역할을 사용하십시오. |<ul><li>RBAC 역할: 편집</li><li>기본 네임스페이스 내부의 리소스에 대한 읽기/쓰기 액세스 권한</li></ul>|
+|<ul><li>역할: 편집자</li><li>서비스 인스턴스: 모든 현재 서비스 인스턴스/특정 클러스터 ID</li></ul>|<ul><li>클러스터에 {{site.data.keyword.Bluemix_notm}} 서비스 바인드.</li><li>클러스터에 대한 {{site.data.keyword.Bluemix_notm}} 서비스 바인드 해제.</li><li>웹훅을 작성합니다. </li></ul><br/>앱 개발자의 경우 이 역할을 사용하십시오. |<ul><li>RBAC 역할: 편집</li><li>기본 네임스페이스 내부의 리소스에 대한 읽기/쓰기 액세스 권한</li></ul>|
 |<ul><li>역할: 뷰어</li><li>서비스 인스턴스: 모든 현재 서비스 인스턴스/특정 클러스터 ID</li></ul>|<ul><li>클러스터 나열</li><li>클러스터의 세부사항 보기</li></ul>|<ul><li>RBAC 역할: 보기</li><li>기본 네임스페이스 내부의 리소스에 대한 읽기 액세스 권한</li><li>Kubernetes 시크릿에 대한 읽기 액세스 권한 없음</li></ul>|
-|<ul><li>Cloud Foundry 조직 역할: 관리자</li></ul>|<ul><li>{{site.data.keyword.Bluemix_notm}} 계정에 추가 사용자 추가</li></ul>| |
+|<ul><li>Cloud Foundry 조직 역할: 관리자</li></ul>|<ul><li>{{site.data.keyword.Bluemix_notm}} 계정에 사용자 추가</li></ul>| |
 |<ul><li>Cloud Foundry 영역 역할: 개발자</li></ul>|<ul><li>{{site.data.keyword.Bluemix_notm}} 서비스 인스턴스 작성</li><li>{{site.data.keyword.Bluemix_notm}} 서비스 인스턴스를 클러스터에 바인드</li></ul>| |
 {: caption="표 7. 필수 {{site.data.keyword.containershort_notm}} 액세스 정책 및 권한" caption-side="top"}
 
@@ -1111,10 +1100,10 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
 1.  {{site.data.keyword.containershort_notm}} 액세스 정책을 검증하려는 {{site.data.keyword.Bluemix_notm}} 계정을 선택하십시오. 
 2.  메뉴 표시줄에서 **관리** > **보안** > **ID와 액세스**를 클릭하십시오. **사용자** 창에 사용자의 목록이 해당 이메일 주소 및 선택한 계정에 대한 현재 상태와 함께 표시됩니다. 
 3.  액세스 정책을 확인하려는 사용자를 선택하십시오. 
-4.  **서비스 정책** 섹션에서 사용자에 대한 액세스 정책을 검토하십시오. 이 역할로 수행할 수 있는 조치에 대한 자세한 정보는 [Overview of required {{site.data.keyword.containershort_notm}} 액세스 정책 및 권한](#access_ov)을 참조하십시오.
+4.  **액세스 정책** 섹션에서 사용자의 액세스 정책을 검토하십시오. 이 역할로 수행할 수 있는 조치에 대한 자세한 정보는 [필수 {{site.data.keyword.containershort_notm}} 액세스 정책 및 권한에 대한 개요](#access_ov)를 참조하십시오.
 5.  선택사항: [현재 액세스 정책을 변경](#change_access)하십시오.
 
-    **참고:** {{site.data.keyword.containershort_notm}}의 모든 리소스에 대해 지정된 관리자 서비스 정책이 있는 사용자만 기존 사용자를 위한 액세스 정책을 변경할 수 있습니다. {{site.data.keyword.Bluemix_notm}} 계정에 사용자를 더 추가하려면 해당 계정에 대한 관리자 Cloud Foundry 역할이 있어야 합니다. {{site.data.keyword.Bluemix_notm}} 계정 소유자의 ID를 찾으려면 `bx iam accounts`를 실행하고 **소유자 사용자 ID**를 찾으십시오. 
+    **참고:** {{site.data.keyword.containershort_notm}}의 모든 리소스에 대해 지정된 관리자 서비스 정책이 있는 사용자만 기존 사용자를 위한 액세스 정책을 변경할 수 있습니다. {{site.data.keyword.Bluemix_notm}} 계정에 사용자를 추가하려면 계정의 관리자 Cloud Foundry 역할이 있어야 합니다. {{site.data.keyword.Bluemix_notm}} 계정 소유자의 ID를 찾으려면 `bx iam accounts`를 실행하고 **소유자 사용자 ID**를 찾으십시오. 
 
 
 ### 기존 사용자에 대한 {{site.data.keyword.containershort_notm}} 액세스 정책 변경
@@ -1127,36 +1116,41 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
 1.  기존 사용자에 대한 {{site.data.keyword.containershort_notm}} 액세스 정책을 변경하려는 {{site.data.keyword.Bluemix_notm}} 계정을 선택하십시오. 
 2.  메뉴 표시줄에서 **관리** > **보안** > **ID와 액세스**를 클릭하십시오. **사용자** 창에 사용자의 목록이 해당 이메일 주소 및 선택한 계정에 대한 현재 상태와 함께 표시됩니다. 
 3.  액세스 정책을 변경하려는 사용자를 찾으십시오. 찾고 있는 사용자를 찾지 못한 경우, [이 사용자를 {{site.data.keyword.Bluemix_notm}} 계정에 초대](#add_users)하십시오. 
-4.  **조치** 탭에서 **정책 지정**을 클릭하십시오. 
+4.  **액세스 정책**에서 **역할** 행의 **조치** 열 아래에 펼치고 **정책 편집**을 클릭하십시오.
 5.  **서비스** 드롭 다운 목록에서 **{{site.data.keyword.containershort_notm}}**를 선택하십시오.
-6.  **역할** 드롭 다운 목록에서 지정하려는 액세스 정책을 선택하십시오. 특정 지역 또는 클러스터에 대한 제한 없이 역할을 선택하면 이 액세스 정책을 이 계정에서 작성된 모든 클러스터에 자동으로 적용합니다. 특정 클러스터 또는 지역으로 액세스를 제한하려면 **서비스 인스턴스** 및 **지역** 드롭 다운 목록에서 선택하십시오. 액세스 정책당 지원되는 조치 목록을 찾으려면 [필수 {{site.data.keyword.containershort_notm}} 액세스 정책 및 권한 개요](#access_ov)를 참조하십시오. 특정 클러스터의 ID를 찾으려면 `bx cs clusters`를 실행하십시오.
-7.  **정책 지정**을 클릭하여 변경사항을 저장하십시오. 
+6.  **지역** 드롭 다운 목록에서 정책을 변경할 지역을 선택하십시오.
+7.  **서비스 인스턴스** 드롭 다운 목록에서 정책을 변경할 클러스터를 선택하십시오. 특정 클러스터의 ID를 찾으려면 `bx cs clusters`를 실행하십시오.
+8.  **역할 선택** 섹션에서 사용자의 액세스를 변경할 역할을 클릭하십시오. 역할당 지원되는 조치 목록을 찾으려면 [필수 {{site.data.keyword.containershort_notm}} 액세스 정책 및 권한에 대한 개요](#access_ov)를 참조하십시오.
+9.  **저장**을 클릭하여 변경사항을 저장하십시오.
 
 ### {{site.data.keyword.Bluemix_notm}} 계정에 사용자 추가
 {: #add_users}
 
-클러스터에 대한 액세스 권한을 부여하기 위해 추가 사용자를 {{site.data.keyword.Bluemix_notm}} 계정에 추가할 수 있습니다. 
+{{site.data.keyword.Bluemix_notm}} 계정에 사용자를 추가하여 클러스터에 액세스를 부여할 수 있습니다.
 
-시작하기 전에 사용자에게 {{site.data.keyword.Bluemix_notm}} 계정에 대한 관리자 Cloud Foundry 역할이 지정되었는지 확인하십시오. 
+시작하기 전에 {{site.data.keyword.Bluemix_notm}} 계정의 관리자 Cloud Foundry 역할이 지정되어 있는지 확인하십시오.
 
 1.  사용자를 추가하려는 {{site.data.keyword.Bluemix_notm}} 계정을 선택하십시오. 
 2.  메뉴 표시줄에서 **관리** > **보안** > **ID와 액세스**를 클릭하십시오. 사용자 창에 사용자의 목록이 해당 이메일 주소 및 선택한 계정에 대한 현재 상태와 함께 표시됩니다. 
 3.  **사용자 초대**를 클릭하십시오. 
-4.  **이메일 주소 또는 기존 IBM ID**에서 {{site.data.keyword.Bluemix_notm}} 계정에 추가하려는 사용자의 이메일 주소를 입력하십시오. 
-5.  **액세스** 섹션에서 **ID 및 액세스 사용 서비스**를 펼치십시오. 
-6.  **서비스** 드롭 다운 목록에서 **{{site.data.keyword.containershort_notm}}**를 선택하십시오.
-7.  **지역** 드롭 다운 목록에서 지역을 선택하십시오. 원하는 지역이 나열되지 않고 [{{site.data.keyword.containershort_notm}}에 대해 지원](cs_regions.html)되는 경우 **모든 지역**을 선택하십시오.
-8.  **역할** 드롭 다운 목록에서 지정하려는 액세스 정책을 선택하십시오. 특정 지역 또는 클러스터에 대한 제한 없이 역할을 선택하면 이 액세스 정책을 이 계정에서 작성된 모든 클러스터에 자동으로 적용합니다. 특정 클러스터 또는 지역으로 액세스를 제한하려면 **서비스 인스턴스** 및 **지역** 드롭 다운 목록에서 값을 선택하십시오. 액세스 정책당 지원되는 조치 목록을 찾으려면 [필수 {{site.data.keyword.containershort_notm}} 액세스 정책 및 권한 개요](#access_ov)를 참조하십시오. 특정 클러스터의 ID를 찾으려면 `bx cs clusters`를 실행하십시오.
-9.  **Cloud Foundry 액세스** 섹션을 펼쳐서 사용자를 추가하려는 **조직** 드롭 다운 목록에서 {{site.data.keyword.Bluemix_notm}} 조직을 선택하십시오. 
-10.  **영역 역할** 드롭 다운 목록에서 역할을 선택하십시오. Kubernetes 클러스터는 {{site.data.keyword.Bluemix_notm}} 영역에서 독립적입니다. 
-11. **사용자 초대**를 클릭하십시오. 
-12. 선택사항: 이 사용자가 {{site.data.keyword.Bluemix_notm}} 계정에 더 많은 사용자를 추가하도록 허용하려면 사용자에게 Cloud Foundry 조직 역할을 지정하십시오.
-    1. **사용자** 개요 테이블의 **조치** 열에서 **사용자 관리**를 선택하십시오.
-    2. **Cloud Foundry 역할** 섹션에서 이전 단계에서 추가한 사용자에게 권한이 부여된
-Cloud Foundry 조직 역할을 찾으십시오. 
-    3. **조치** 탭에서 **조직 역할 편집**을 클릭하십시오. 
-    4. **조직 역할** 드롭 다운 목록에서 **관리자**를 선택하십시오. 
-    5. **역할 저장**을 클릭하십시오. 
+4.  **이메일 주소**에 {{site.data.keyword.Bluemix_notm}} 계정에 추가할 사용자의 이메일 주소를 입력하십시오.
+5.  **액세스** 섹션에서 **서비스**를 펼치십시오.
+6.  **액세스 지정 대상** 드롭 다운 목록에서 {{site.data.keyword.containershort_notm}} 계정(**리소스**)에만 액세스를 부여할지 아니면 계정 내 다양한 리소스의 콜렉션(**리소스 그룹**)에 액세스를 지정할지를 결정하십시오.
+7.  **리소스**의 경우:
+    1. **서비스** 드롭 다운 목록에서 **{{site.data.keyword.containershort_notm}}**를 선택하십시오.
+    2. **지역** 드롭 다운 목록에서 사용자를 초대할 지역을 선택하십시오.
+    3. **서비스 인스턴스** 드롭 다운 목록에서 사용자를 초대할 클러스터를 선택하십시오. 특정 클러스터의 ID를 찾으려면 `bx cs clusters`를 실행하십시오.
+    4. **역할 선택** 섹션에서 사용자의 액세스를 변경할 역할을 클릭하십시오. 역할당 지원되는 조치 목록을 찾으려면 [필수 {{site.data.keyword.containershort_notm}} 액세스 정책 및 권한에 대한 개요](#access_ov)를 참조하십시오.
+8. **리소스 그룹**의 경우:
+    1. **리소스 그룹** 드롭 다운 목록에서 계정의 {{site.data.keyword.containershort_notm}} 리소스 권한이 포함된 리소스 그룹을 선택하십시오.
+    2. **리소스 그룹에 액세스 지정** 드롭 다운 목록에서 초대한 사용자에게 부여할 역할을 선택하십시오. 역할당 지원되는 조치 목록을 찾으려면 [필수 {{site.data.keyword.containershort_notm}} 액세스 정책 및 권한에 대한 개요](#access_ov)를 참조하십시오.
+9. 선택사항: 이 사용자가 {{site.data.keyword.Bluemix_notm}} 계정에 더 많은 사용자를 추가하도록 허용하려면 사용자에게 Cloud Foundry 조직 역할을 지정하십시오.
+    1. **Cloud Foundry 역할** 섹션의 **조직** 드롭 다운 목록에서 사용자 권한을 부여할 조직을 선택하십시오.
+    2. **조직 역할** 드롭 다운 목록에서 **관리자**를 선택하십시오. 
+    3. **지역** 드롭 다운 목록에서 사용자 권한을 부여할 지역을 선택하십시오.
+    4. **영역** 드롭 다운 목록에서 사용자 권한을 부여할 영역을 선택하십시오.
+    5. **영역 역할** 드롭 다운 목록에서 **관리자**를 선택하십시오.
+10. **사용자 초대**를 클릭하십시오. 
 
 <br />
 
@@ -1164,28 +1158,20 @@ Cloud Foundry 조직 역할을 찾으십시오.
 ## Kubernetes 마스터 업데이트
 {: #cs_cluster_update}
 
-클러스터 업데이트는 2단계 프로세스입니다. 먼저 Kubernetes 마스터를 업데이트해야 합니다. 그런 다음 각 작업자 노드를 업데이트할 수 있습니다.
+Kubernetes는 주기적으로 [주, 부 및 패치 버전](cs_versions.html#version_types)을 업데이트하며 이는 클러스터에 영향을 줍니다. 클러스터 업데이트는 2단계 프로세스입니다. 먼저 Kubernetes 마스터를 업데이트해야 합니다. 그런 다음 각 작업자 노드를 업데이트할 수 있습니다.
 
-**주의:** 적절히 계획하지 않으면 업데이트 시 앱의 가동이 중단되거나 인터럽트가 _발생할 수 있습니다_.
+기본적으로 앞으로 부 버전의 차이가 2를 넘게 Kubernetes 마스터를 업데이트할 수 없습니다. 예를 들어, 현재 마스터가 버전 1.5이고 1.8로 업데이트하려면 먼저 1.7로 업데이트해야 합니다. 업데이트를 강제로 계속할 수 있지만 2를 넘는 부 버전 업데이트로 인해 예상치 못한 결과가 발생할 수 있습니다.
 
-Kubernetes는 다음과 같은 업데이트 유형을 제공합니다.
+**주의**: 업데이트 지시사항에 따라 테스트 클러스터를 사용하여 업데이트 중에 잠재적 앱 가동 중단 및 중단을 처리하십시오. 클러스터를 이전 버전으로 롤백할 수 없습니다.
 
-|업데이트 유형|버전 레이블|업데이트 수행자|영향
-|-----|-----|-----|-----|
-|주요 |예: 1.x.x|사용자|클러스터의 오퍼레이션에 대한 변경사항을 포함할 수 있으며 스크립트 또는 배치를 변경해야 할 수 있습니다.|
-|보조 |예: x.5.x|사용자|클러스터의 오퍼레이션에 대한 변경사항을 포함할 수 있으며 스크립트 또는 배치를 변경해야 할 수 있습니다.
-|패치 |예: x.x.3|IBM/사용자|시스템을 중단하지 않는 소규모 수정사항입니다. 패치의 경우 스크립트 또는 배치를 변경할 필요가 없습니다. IBM에서 자동으로 마스터를 업데이트하지만 패치를 적용하려면 사용자가 작업자 노드를 업데이트해야 합니다.|
-{: caption="Kubernetes 업데이트의 유형" caption-side="top"}
-
-
-_주요_ 또는 _보조_ 업데이트를 작성할 때 다음 단계를 완료하십시오. 프로덕션 환경을 업데이트하기 전에 테스트 클러스터를 사용하십시오. 클러스터를 이전 버전으로 롤백할 수 없습니다.
+_주요_ 또는 _보조_ 업데이트를 작성할 때 다음 단계를 완료하십시오. 
 
 1. [Kubernetes 변경사항](cs_versions.html)을 검토하고 _마스터 이전 업데이트_로 표시된 변경사항을 작성하십시오.
 2. GUI를 사용하거나 [CLI 명령](cs_cli_reference.html#cs_cluster_update)을 실행하여 Kubernetes 마스터를 업데이트하십시오.
 Kubernetes 마스터를 업데이트할 때 마스터가 약 5 - 10분 동안 작동 중지됩니다. 업데이트 중에는 클러스터에 액세스하거나 클러스터를 변경할 수 없습니다. 그러나 클러스터 사용자가 배치한 작업자 노드, 앱 및 리소스는 수정되지 않고 계속 실행됩니다.
 3. 업데이트가 완료되었는지 확인하십시오. {{site.data.keyword.Bluemix_notm}} 대시보드에서 Kubernetes 버전을 검토하거나 `bx cs clusters`를 실행하십시오.
 
-Kubernetes 마스터 업데이트가 완료되면 작업자 노드를 최신 버전으로 업데이트할 수 있습니다.
+Kubernetes 마스터 업데이트가 완료되면 작업자 노드를 업데이트할 수 있습니다.
 
 <br />
 
@@ -1193,45 +1179,43 @@ Kubernetes 마스터 업데이트가 완료되면 작업자 노드를 최신 버
 ## 작업자 노드 업데이트
 {: #cs_cluster_worker_update}
 
-작업자 노드를 Kubernetes 마스터의 Kubernetes 버전으로 업데이트할 수 있습니다. IBM에서 자동으로 Kubernetes 마스터에 패치를 적용하는 동안 작업자 노드에 업데이트 및 패치를 위한 사용자 명령이 필요합니다.
+IBM이 Kubernetes 마스터에 패치를 자동으로 적용할 때 주 및 부 업데이트를 위해 작업자 노드를 명시적으로 업데이트해야 합니다. 작업자 노드 버전은 Kubernetes 마스터보다 상위 버전일 수 없습니다. 
 
-**주의:** 작업자 노드 버전을 업데이트하면 앱과 서비스의 가동이 중단될 수 있습니다. 포드의 외부에 저장되지 않은 경우 데이터가 삭제됩니다.
-포드가 사용 가능한 노드로 재스케줄링하도록 허용하려면 [복제본 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#replicas)을 사용하십시오.
+**주의:** 작업자 노드에 대한 업데이트로 인해 앱과 서비스의 가동이 중단될 수 있습니다.
+- 포드의 외부에 저장되지 않은 경우 데이터가 삭제됩니다.
+
+- 배치에 [복제본 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#replicas)을 사용하여 사용 가능한 노드에서 포드를 다시 스케줄하십시오.
 
 프로덕션 레벨 클러스터 업데이트:
+- 앱의 가동 중단을 방지하려면 업데이트 프로세스를 통해 업데이트 중에 작업자 노드에서 포드를 스케줄하지 않도록 합니다. 자세한 정보는 [`kubectl drain` ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/user-guide/kubectl/v1.8/#drain)을 참조하십시오.
 - 테스트 클러스터를 사용하여 워크로드 및 전달 프로세스가 업데이트에 영향을 받지 않는지 유효성 검증하십시오. 작업자 노드를 이전 버전으로 롤백할 수 없습니다.
 - 프로덕션 레벨 클러스터에는 작업자 노드 장애를 극복할 수 있는 용량이 있어야 합니다. 클러스터에 이러한 용량이 없는 경우 클러스터를 업데이트하기 전에 작업자 노드를 추가하십시오.
-- 업데이트 전에 업데이트 프로세스는 노드를 드레인하지 않습니다. 앱의 작동 중단 시간을 피하는 데 도움을 받으려면
-[`drain` ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes-v1-4.github.io/docs/user-guide/kubectl/kubectl_drain/) 및 [`uncordon` ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes-v1-4.github.io/docs/user-guide/kubectl/kubectl_uncordon/) 사용을 고려하십시오.
+- 다중 작업자 노드가 업그레이드하도록 요청되는 경우 롤링 업데이트가 수행됩니다. 클러스터에 있는 총 작업자 노드 수의 최대 20퍼센트를 동시에 업그레이드할 수 있습니다. 업그레이드 프로세스는 다른 작업자가 업그레이드를 시작하기 전에 현재 작업자 노드가 업그레이드를 완료하도록 기다립니다.
 
-시작하기 전에 Kubernetes 마스터의 Kubernetes 버전과 일치하는 버전의 [`kubectl cli` ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)를 설치하십시오.
 
-1. [Kubernetes 변경사항](cs_versions.html)을 검토하고 필요에 따라 배치 스크립트에 _마스터 이후 업데이트_로 표시된 변경사항을 작성하십시오.
+1. Kubernetes 마스터의 Kubernetes 버전을 일치시키는 [`kubectl cli` ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)의 버전을 설치하십시오.
 
-2. 작업자 노드를 업데이트하십시오. {{site.data.keyword.Bluemix_notm}} 대시보드에서 업데이트하려면 클러스터의 `작업자 노드` 섹션으로 이동하여 `작업자 업데이트`를 클릭하십시오. 작업자 노드 ID를 가져오려면 `bx cs workers <cluster_name_or_id>`를 실행하십시오. 여러 작업자 노드를 선택하는 경우 작업자 노드가 한 번에 하나씩 업데이트됩니다.
+2. [Kubernetes 변경](cs_versions.html)에서 _Update after master_로 표시되는 변경사항을 작성하십시오.
+
+3. 작업자 노드를 업데이트하십시오.
+  * {{site.data.keyword.Bluemix_notm}} 대시보드에서 업데이트하려면 클러스터의 `작업자 노드` 섹션으로 이동하여 `작업자 업데이트`를 클릭하십시오. 
+  * 작업자 노드 ID를 가져오려면 `bx cs workers <cluster_name_or_id>`. 여러 작업자 노드를 선택하는 경우 작업자 노드가 한 번에 하나씩 업데이트됩니다.
 
     ```
     bx cs worker-update <cluster_name_or_id> <worker_node_id1> <worker_node_id2>
     ```
     {: pre}
 
-3. 작업자 노드가 업데이트되었는지 확인하십시오. {{site.data.keyword.Bluemix_notm}} 대시보드에서 Kubernetes 버전을 검토하거나
-`bx cs workers <cluster_name_or_id>`를 실행하십시오. 또한 `kubectl`을 통해 나열된 Kubernetes 버전이 업데이트되었는지 확인하십시오.
-일부 경우에 업데이트 후 이전 클러스터가 **NotReady** 상태의 중복된 작업자 노드를 나열할 수 있습니다. 중복 항목을 제거하려면 [문제점 해결](cs_troubleshoot.html#cs_duplicate_nodes)을 참조하십시오.
+4. 업데이트가 완료되었는지 확인하십시오.
+  * {{site.data.keyword.Bluemix_notm}} 대시보드에서 Kubernetes 버전을 검토하거나
+`bx cs workers <cluster_name_or_id>`.
+  * `kubectl get nodes`를 실행하여 작업자 노드의 Kubernets 버전을 검토하십시오.
+  * 일부 경우에 업데이트 후 이전 클러스터가 **NotReady** 상태의 중복된 작업자 노드를 나열할 수 있습니다. 중복 항목을 제거하려면 [문제점 해결](cs_troubleshoot.html#cs_duplicate_nodes)을 참조하십시오.
 
-    ```
-kubectl get nodes
-```
-    {: pre}
-
-5. Kubernetes 대시보드를 확인하십시오. 사용률 그래프가 Kubernetes 대시보드에 표시되지 않는 경우 `kube-dashboard` 포드를 삭제하여 강제로 다시 시작하십시오. 사용률 정보에 대한 heapster에 액세스하기 위해 RBAC 정책으로 포드가 다시 작성됩니다.
-
-    ```
-    kubectl delete pod -n kube-system $(kubectl get pod -n kube-system --selector=k8s-app=kubernetes-dashboard -o jsonpath='{.items..metadata.name}')
-    ```
-    {: pre}
-
-업데이트를 완료한 후 다른 클러스터에 대해 업데이트 프로세스를 반복하십시오. 또한 클러스터에서 작업하는 개발자에게 `kubectl` CLI를 Kubernetes 마스터의 버전으로 업데이트하도록 알리십시오.
+업데이트를 완료한 후:
+  - 다른 클러스터에서 업데이트 프로세스를 반복하십시오.
+  - 클러스터에서 작업하는 개발자에게 `kubectl` CLI를 Kubernetes 마스터의 버전으로 업데이트하도록 알리십시오.
+  - Kubernetes 대시보드에 사용률 그래프가 표시되지 않으면 [`kube-dashboard` 포드를 삭제](cs_troubleshoot.html#cs_dashboard_graphs)하십시오.
 
 <br />
 
@@ -1239,32 +1223,32 @@ kubectl get nodes
 ## 클러스터에 서브넷 추가
 {: #cs_cluster_subnet}
 
-클러스터에 서브넷을 추가하여 사용 가능한 포터블 공인 IP 주소의 풀을 변경합니다.
+클러스터에 서브넷을 추가하여 사용 가능한 포터블 공인 또는 사설 IP 주소의 풀을 변경하십시오.
 {:shortdesc}
 
-{{site.data.keyword.containershort_notm}}에서 사용자는 클러스터에 네트워크 서브넷을 추가하여 Kubernetes 서비스에 대한 안정적인 포터블 IP를 추가할 수 있습니다. 표준 클러스터를 작성하면 {{site.data.keyword.containershort_notm}}에서 포터블 공인 서브넷과 5개의 IP 주소를 자동으로 프로비저닝합니다. 포터블 공인 IP 주소는 정적이며 작업자 노드 또는 클러스터가 제거되더라도 변경되지 않습니다. 
+{{site.data.keyword.containershort_notm}}에서 사용자는 클러스터에 네트워크 서브넷을 추가하여 Kubernetes 서비스에 대한 안정적인 포터블 IP를 추가할 수 있습니다. 표준 클러스터를 작성하면 {{site.data.keyword.containershort_notm}}가 포터블 공인 서브넷에 5개의 공인 IP 주소를, 포터블 사설 서브넷에 5개의 사설 IP 주소를 자동으로 프로비저닝합니다. 포터블 공인 및 사설 IP 주소는 정적이며 작업자 노드 또는 클러스터가 제거되더라도 변경되지 않습니다.
 
-포터블 공인 IP 주소 중 하나가 공용 라우트를 사용하여 클러스터의 다중 앱을 노출하기 위해 사용할 수 있는 [Ingress 제어기](cs_apps.html#cs_apps_public_ingress)에 사용됩니다. 나머지 네 개의 포터블 공인 IP 주소는 [로드 밸런서 서비스 작성](cs_apps.html#cs_apps_public_load_balancer)을 통해 단일 앱을 공용으로 노출하는 데 사용될 수 있습니다. 
+포터블 공인 IP 주소 중 하나와 포터블 사설 IP 주소 중 하나는 클러스터에서 다중 앱을 노출하는 데 사용할 수 있는 [Ingress 제어기](cs_apps.html#cs_apps_public_ingress)에 사용됩니다. 나머지 네 개의 포터블 공인 IP 주소 및 네 개의 포터블 사설 IP 주소는 [로드 밸런서 서비스 작성](cs_apps.html#cs_apps_public_load_balancer)을 통해 단일 앱을 공용으로 노출하는 데 사용될 수 있습니다. 
 
 **참고:** 포터블 공인 IP 주소는 매월 비용이 청구됩니다. 클러스터가 프로비저닝된 후에 포터블 공인 IP 주소를 제거하도록 선택한 경우, 비록 짧은 시간 동안만 사용했어도 월별 비용을 계속 지불해야 합니다. 
 
 ### 클러스터에 대한 추가 서브넷 요청
 {: #add_subnet}
 
-클러스터에 서브넷을 지정하여 클러스터에 안정적인 포터블 공인 IP를 추가할 수 있습니다. 
+클러스터에 서브넷을 지정하여 클러스터에 안정적인 포터블 공인 또는 사설 IP를 추가할 수 있습니다.
 
-{{site.data.keyword.Bluemix_notm}} 데디케이티드 사용자의 경우 이 태스크를 사용하는 대신 [지원 티켓을 열어](/docs/support/index.html#contacting-support) 서브넷을 작성한 다음 [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) 명령을 사용하여 클러스터에 서브넷을 추가해야 합니다.
+{{site.data.keyword.Bluemix_dedicated_notm}} 사용자의 경우 이 태스크를 사용하는 대신 [지원 티켓을 열어](/docs/support/index.html#contacting-support) 서브넷을 작성한 다음 [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) 명령을 사용하여 클러스터에 서브넷을 추가해야 합니다.
 
-시작하기 전에 {{site.data.keyword.Bluemix_notm}} GUI를 통해 IBM Bluemix Infrastructure(SoftLayer) 포트폴리오에 액세스할 수 있는지 확인하십시오. 포트폴리오에 액세스하려면 기존 {{site.data.keyword.Bluemix_notm}} 종량과금제 계정을 설정하거나 사용해야 합니다. 
+시작하기 전에 {{site.data.keyword.Bluemix_notm}} GUI를 통해 IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스할 수 있는지 확인하십시오. 포트폴리오에 액세스하려면 기존 {{site.data.keyword.Bluemix_notm}} 종량과금제 계정을 설정하거나 사용해야 합니다. 
 
 1.  카탈로그의 **인프라** 섹션에서 **네트워크**를 선택하십시오. 
 2.  **서브넷/IP**를 선택하고 **작성**을 클릭하십시오. 
-3.  **이 계정에 추가할 서브넷 유형 선택** 드롭 다운 메뉴에서 **포터블 퍼블릭**을 선택하십시오. 
+3.  **이 계정에 추가할 서브넷 유형 선택** 드롭 다운 메뉴에서 **포터블 공용** 또는 **포터블 사설**을 선택하십시오.
 4.  포터블 서브넷에서 추가하려는 IP 주소의 번호를 선택하십시오. 
 
-    **참고:** 서브넷에 대한 포터블 공인 IP 주소를 추가할 때는 Ingress 제어기에 사용하거나 로드 밸런서 서비스를 작성하는 데 사용할 수 없도록 3개의 IP 주소를 사용하여 클러스터 내부 네트워킹을 설정합니다. 예를 들어, 8개의 포터블 공인 IP 주소를 요청하는 경우 이 중에서 5개를 사용하여 앱을 공용으로 노출할 수 있습니다. 
+    **참고:** 서브넷에 대한 포터블 IP 주소를 추가할 때 Ingress 제어기에 사용하거나 로드 밸런서 서비스를 작성하는 데 사용할 수 없도록 3개의 IP 주소를 사용하여 클러스터 내부 네트워킹을 설정합니다. 예를 들어, 8개의 포터블 공인 IP 주소를 요청하는 경우 이 중에서 5개를 사용하여 앱을 공용으로 노출할 수 있습니다. 
 
-5.  포터블 공인 IP 주소를 라우팅하려는 퍼블릭 VLAN을 선택하십시오. 기존 작업자 노드가 연결되어 있는 퍼블릭 VLAN을 선택해야 합니다. 작업자 노드에 대해 퍼블릭 VLAN을 검토하십시오. 
+5.  포터블 공인 또는 사설 IP 주소를 라우팅할 퍼블릭 또는 프라이빗 VLAN을 선택하십시오. 기존 작업자 노드가 연결되어 있는 퍼블릭 또는 프라이빗 VLAN을 선택해야 합니다. 작업자 노드에 대해 퍼블릭 또는 프라이빗 VLAN을 검토하십시오.
 
     ```
     bx cs worker-get <worker_id>
@@ -1285,7 +1269,7 @@ kubectl get nodes
         ```
         {: pre}
 
-        **참고:** 연합 ID가 있는 경우 `bx login --sso`를 사용하여 {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 사용자 이름을 입력하고 CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색하십시오. `--sso`가 없으면 로그인에 실패하고 `--sso` 옵션을 사용하면 성공하는 경우에는 연합 ID를 보유 중임을 알 수 있습니다. 
+        **참고:** 연합 ID가 있는 경우 `bx login --sso`를 사용하여 {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 사용자 이름을 입력하고 CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색하십시오. `--sso` 옵션을 사용하지 않으면 로그인에 실패하고 `--sso` 옵션을 사용하면 성공하는 경우에는 연합 ID를 보유하고 있다는 것입니다. 
 
     3.  계정의 모든 클러스터를 나열하고 사용자의 서브넷을 사용 가능하게 하려는 클러스터의 ID를 기록해 놓으십시오. 
 
@@ -1294,8 +1278,7 @@ kubectl get nodes
         ```
         {: pre}
 
-    4.  클러스터에 서브넷을 추가하십시오. 클러스터가 서브넷을 사용할 수 있도록 하는 경우에는 사용자가 사용할 수 있는 모든 사용 가능한 포터블 공인 IP 주소가 포함된 Kubernetes 구성 맵이 사용자를 위해 작성됩니다. 클러스터에 대해 Ingress 제어기가 존재하지 않으면 하나의 포터블 공인 IP 주소가 Ingress 제어기를 작성하는 데 자동으로 사용됩니다. 기타 모든 포터블 공인 IP 주소를 사용하여 사용자 앱에 대한 로드 밸런서 서비스를 작성할 수 있습니다.
-
+    4.  클러스터에 서브넷을 추가하십시오. 클러스터가 서브넷을 사용할 수 있도록 하는 경우 사용할 수 있는 모든 포터블 공인 또는 사설 IP 주소가 포함된 Kubernetes 구성 맵이 사용자를 위해 작성됩니다. 클러스터에 대한 Ingress 제어기가 존재하지 않으면 하나의 포터블 공인 IP 주소가 공용 Ingress 제어기를 작성하는 데 자동으로 사용되고 하나의 포터블 사설 IP 주소가 사설 Ingress 제어기를 작성하는 데 자동으로 사용됩니다. 기타 모든 포터블 공인 및 사설 IP 주소를 사용하여 사용자 앱에 대한 로드 밸런서 서비스를 작성할 수 있습니다.
 
         ```
         bx cs cluster-subnet-add <cluster name or id> <subnet id>
@@ -1312,11 +1295,11 @@ kubectl get nodes
 ### Kubernetes 클러스터에 사용자 정의 및 기존 서브넷 추가
 {: #custom_subnet}
 
-Kubernetes 클러스터에 기존의 포터블 공인 서브넷을 추가할 수 있습니다. 
+Kubernetes 클러스터에 기존의 포터블 공인 또는 사설 서브넷을 추가할 수 있습니다.
 
 시작하기 전에 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오. 
 
-사용하고자 하는 사용자 정의 방화벽 규칙이나 사용 가능한 IP 주소와 함께 BM Bluemix Infrastructure(SoftLayer) 포트폴리오에 기존 서브넷이 있는 경우에는 서브넷 없이 클러스터를 작성하고 클러스터가 프로비저닝할 때 클러스터에서 기존 서브넷을 사용할 수 있도록 하십시오. 
+사용할 사용자 정의 방화벽 규칙이나 사용 가능한 IP 주소와 함께 IBM Cloud 인프라(SoftLayer) 포트폴리오에 기존 서브넷이 있는 경우 서브넷 없이 클러스터를 작성하고 클러스터가 프로비저닝할 때 클러스터에서 기존 서브넷을 사용할 수 있도록 하십시오.
 
 1.  사용할 서브넷을 식별하십시오. 서브넷의 ID 및 VLAN ID를 기록해 두십시오. 이 예제에서 서브넷 ID는 807861이며 VLAN ID는 1901230입니다. 
 
@@ -1351,10 +1334,10 @@ Kubernetes 클러스터에 기존의 포터블 공인 서브넷을 추가할 수
     ```
     {: screen}
 
-3.  식별된 위치와 VLAN ID를 사용하여 클러스터를 작성하십시오. 새 포터블 공인 IP 서브넷이 자동으로 작성되지 않도록 `--no-subnet` 플래그를 포함하십시오. 
+3.  식별된 위치와 VLAN ID를 사용하여 클러스터를 작성하십시오. 새 포터블 공인 IP 서브넷 및 새 포터블 사설 IP 서브넷이 자동으로 작성되지 않도록 `--no-subnet` 플래그를 포함하십시오.
 
     ```
-    bx cs cluster-create --location dal10 --machine-type u1c.2x4 --no-subnet --public-vlan 1901230 --private-vlan 1900403 --workers 3 --name my_cluster 
+    bx cs cluster-create --location dal10 --machine-type u2c.2x4 --no-subnet --public-vlan 1901230 --private-vlan 1900403 --workers 3 --name my_cluster
     ```
     {: pre}
 
@@ -1390,8 +1373,7 @@ Kubernetes 클러스터에 기존의 포터블 공인 서브넷을 추가할 수
     ```
     {: screen}
 
-6.  서브넷 ID를 지정하여 클러스터에 서브넷을 추가하십시오. 클러스터가 서브넷을 사용할 수 있도록 하는 경우에는 사용자가 사용할 수 있는 모든 사용 가능한 포터블 공인 IP 주소가 포함된 Kubernetes 구성 맵이 사용자를 위해 작성됩니다. 클러스터에 대해 Ingress 제어기가 아직 존재하지 않으면 하나의 포터블 공인 IP 주소를 자동으로 사용하여 Ingress 제어기를 작성합니다. 기타 모든 포터블 공인 IP 주소를 사용하여 사용자 앱에 대한 로드 밸런서 서비스를 작성할 수 있습니다.
-
+6.  서브넷 ID를 지정하여 클러스터에 서브넷을 추가하십시오. 클러스터가 서브넷을 사용할 수 있도록 하는 경우에는 사용자가 사용할 수 있는 모든 사용 가능한 포터블 공인 IP 주소가 포함된 Kubernetes 구성 맵이 사용자를 위해 작성됩니다. 클러스터에 대해 Ingress 제어기가 아직 존재하지 않으면 하나의 포터블 공인 IP 주소를 자동으로 사용하여 Ingress 제어기를 작성합니다. 기타 모든 포터블 공인 IP 주소를 사용하여 사용자 앱에 대한 로드 밸런서 서비스를 작성할 수 있습니다. 
 
     ```
     bx cs cluster-subnet-add mycluster 807861
@@ -1408,9 +1390,9 @@ Kubernetes 클러스터에 기존의 포터블 공인 서브넷을 추가할 수
 - 서브넷 접두부 길이 한계는 /24 - /30입니다. 예를 들어, `203.0.113.0/24`는 253개의 사용 가능한 사설 IP 주소를 지정하지만 `203.0.113.0/30`은 1개의 사용 가능한 사설 IP 주소를 지정합니다.
 - 서브넷의 첫 번째 IP 주소는 서브넷에 대한 게이트웨이로 사용되어야 합니다.
 
-시작하기 전에: 외부 서브넷에 들어오고 나가는 네트워크 트래픽의 라우팅을 구성하십시오. 또한 온프레미스 데이터 센터 게이트웨이 디바이스와 IBM Bluemix Infrastructure(SoftLayer) 포트폴리오의 사설 네트워크 Vyatta 간의 VPN 연결이 있는지 확인하십시오. 자세한 정보는 이 [블로그 게시물 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/)을 참조하십시오.
+시작하기 전에: 외부 서브넷에 들어오고 나가는 네트워크 트래픽의 라우팅을 구성하십시오. 또한 온프레미스 데이터 센터 게이트웨이 디바이스와 IBM Cloud 인프라(SoftLayer) 포트폴리오의 사설 네트워크 Vyatta 간의 VPN 연결이 있는지 확인하십시오. 자세한 정보는 이 [블로그 게시물 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/)을 참조하십시오.
 
-1. 클러스터 프라이빗 VLAN의 ID를 보십시오. **VLAN** 섹션을 찾으십시오. **Is Public?** 필드에서 _false_인 VLAN ID를 식별하십시오.
+1. 클러스터 프라이빗 VLAN의 ID를 보십시오. **VLAN** 섹션을 찾으십시오. **사용자 관리** 필드에서 _false_인 VLAN ID를 식별하십시오.
 
     ```
     bx cs cluster-get --showResources <cluster_name>
@@ -1419,7 +1401,7 @@ Kubernetes 클러스터에 기존의 포터블 공인 서브넷을 추가할 수
 
     ```
     VLANs
-    VLAN ID   Subnet CIDR         Is Public?   Is BYOIP?
+    VLAN ID   Subnet CIDR         Public       User-managed
     1555503   192.0.2.0/24        true         false
     1555505   198.51.100.0/24     false        false
     ```
@@ -1428,18 +1410,18 @@ Kubernetes 클러스터에 기존의 포터블 공인 서브넷을 추가할 수
 2. 프라이빗 VLAN에 외부 서브넷을 추가하십시오. 포터블 사설 IP 주소가 클러스터의 구성 맵에 추가됩니다.
 
     ```
-    bx cs cluster-user-subnet-add <subnet_CIDR> <VLAN_ID>
+    bx cs cluster-user-subnet-add <cluster_name> <subnet_CIDR> <VLAN_ID>
     ```
     {: pre}
 
     예:
 
     ```
-    bx cs cluster-user-subnet-add 203.0.113.0/24 1555505
+    bx cs cluster-user-subnet-add my_cluster 203.0.113.0/24 1555505
     ```
     {: pre}
 
-3. 사용자 제공 서브넷이 추가되었는지 확인하십시오. **Is BYOIP?** 필드는 _true_입니다.
+3. 사용자 제공 서브넷이 추가되었는지 확인하십시오. **사용자 관리** 필드가 _true_입니다.
 
     ```
     bx cs cluster-get --showResources <cluster_name>
@@ -1448,14 +1430,14 @@ Kubernetes 클러스터에 기존의 포터블 공인 서브넷을 추가할 수
 
     ```
     VLANs
-    VLAN ID   Subnet CIDR         Is Public?   Is BYOIP?
+    VLAN ID   Subnet CIDR         Public       User-managed
     1555503   192.0.2.0/24        true         false
     1555505   198.51.100.0/24     false        false
     1555505   203.0.113.0/24      false        true
     ```
     {: screen}
 
-4. 사설 네트워크를 통해 앱에 액세스하려면 사설 로드 밸런서를 추가하십시오. 추가한 서브넷에서 사설 IP 주소를 사용하려면 사설 로드 밸런서를 작성할 때 IP 주소를 지정해야 합니다. 그렇지 않으면 IBM Bluemix Infrastructure(SoftLayer) 서브넷 또는 프라이빗 VLAN의 사용자 제공 서브넷에서 랜덤으로 IP 주소가 선택됩니다. 자세한 정보는 [앱에 대한 액세스 구성](cs_apps.html#cs_apps_public_load_balancer)을 참조하십시오.
+4. 사설 네트워크를 통해 앱에 액세스하려면 사설 로드 밸런서를 추가하십시오. 추가한 서브넷에서 사설 IP 주소를 사용하려면 사설 로드 밸런서를 작성할 때 IP 주소를 지정해야 합니다. 그렇지 않으면 IBM Cloud 인프라(SoftLayer) 서브넷 또는 프라이빗 VLAN의 사용자 제공 서브넷에서 랜덤으로 IP 주소가 선택됩니다. 자세한 정보는 [앱에 대한 액세스 구성](cs_apps.html#cs_apps_public_load_balancer)을 참조하십시오.
 
     지정된 IP 주소를 사용하는 사설 로드 밸런서 서비스에 대한 예제 구성 파일:
 
@@ -1483,21 +1465,23 @@ Kubernetes 클러스터에 기존의 포터블 공인 서브넷을 추가할 수
 ## 클러스터에서 기존 NFS 파일 공유 사용
 {: #cs_cluster_volume_create}
 
-Kubernetes와 함께 사용하려는 IBM Bluemix Infrastructure(SoftLayer) 계정에 기존 NFS 파일 공유가 이미 있는 경우, 기존 NFS 파일 공유에서 지속적 볼륨을 작성하여 수행할 수 있습니다. 지속적 볼륨은 Kubernetes 클러스터 리소스 역할을 하는 실제 하드웨어의 한 부분이며 클러스터 사용자가 이용할 수 있습니다.
+Kubernetes와 함께 사용할 IBM Cloud 인프라(SoftLayer) 계정의 기존 NFS 파일 공유가 이미 있는 경우, 기존 NFS 파일 공유에서 지속적 볼륨을 작성하여 수행할 수 있습니다. 지속적 볼륨은 Kubernetes 클러스터 리소스 역할을 하는 실제 하드웨어의 한 부분이며 클러스터 사용자가 이용할 수 있습니다.
 {:shortdesc}
 
+Kubernetes는 실제 하드웨어를 나타내는 지속적 볼륨과 일반적으로 클러스터 사용자가 시작하는 스토리지에 대한 요청인 지속적 볼륨 클레임을 구별합니다. 다음 다이어그램은 지속적 볼륨과 지속적 볼륨 클레임 간의 관계를 설명합니다.
+
+![지속적 볼륨 및 지속적 볼륨 클레임 작성](images/cs_cluster_pv_pvc.png)
+
+ 다이어그램에 표시된 대로 기존 NFS 파일 공유가 Kubernetes와 함께 사용될 수 있도록 하려면 특정 크기와 액세스 모드로 지속적 볼륨을 작성하고 그 지속적 볼륨 스펙과 일치하는 지속적 볼륨 클레임을 작성해야 합니다. 지속적 볼륨과 지속적 볼륨 클레임이 일치하는 경우 서로 바인드됩니다. 바인드된 지속적 볼륨 클레임만 볼륨을 포드에 마운트하기 위해 클러스터 사용자가 사용할 수 있습니다. 이 프로세스를 지속적 스토리지의 정적 프로비저닝이라고 합니다. 
+
 시작하기 전에 지속적 볼륨을 작성하기 위해 사용할 수 있는 기존 NFS 파일 공유가 있는지 확인하십시오. 
-
-[![지속적 볼륨 및 지속적 볼륨 클레임 작성](images/cs_cluster_pv_pvc.png)](https://console.bluemix.net/docs/api/content/containers/images/cs_cluster_pv_pvc.png)
-
-Kubernetes는 실제 하드웨어를 나타내는 지속적 볼륨과 일반적으로 클러스터 사용자가 시작하는 스토리지에 대한 요청인 지속적 볼륨 클레임을 구별합니다. 기존 NFS 파일 공유가 Kubernetes와 함께 사용될 수 있도록 하려면 특정 크기와 액세스 모드로 지속적 볼륨을 작성하고 그 지속적 볼륨 스펙과 일치하는 지속적 볼륨 클레임을 작성해야 합니다. 지속적 볼륨과 지속적 볼륨 클레임이 일치하는 경우 서로 바인드됩니다. 바인드된 지속적 볼륨 클레임만 볼륨을 포드에 마운트하기 위해 클러스터 사용자가 사용할 수 있습니다. 이 프로세스를 지속적 스토리지의 정적 프로비저닝이라고 합니다. 
 
 **참고:** 지속적 스토리지의 정적 프로비저닝은 기존 NFS 파일 공유에만 적용됩니다. 기존 NFS 파일 공유가 없는 경우, 클러스터 사용자는 지속적 볼륨을 추가하기 위해 [동적 프로비저닝](cs_apps.html#cs_apps_volume_claim) 프로세스를 사용할 수 있습니다. 
 
 지속적 볼륨 및 일치하는 지속적 볼륨 클레임을 작성하려면 다음 단계를 따르십시오. 
 
-1.  IBM Bluemix Infrastructure(SoftLayer) 계정에서 지속적 볼륨 오브젝트를 작성하려는 NFS 파일 공유의 ID 및 경로를 검색하십시오.
-    1.  IBM Bluemix Infrastructure(SoftLayer) 계정에 로그인하십시오.
+1.  IBM Cloud 인프라(SoftLayer) 계정에서 지속적 볼륨 오브젝트를 작성할 NFS 파일 공유의 ID 및 경로를 검색하십시오.
+    1.  IBM Cloud 인프라(SoftLayer) 계정에 로그인하십시오.
     2.  **스토리지**를 클릭하십시오.
     3.  **파일 스토리지**를 클릭하고 사용하려는 NFS 파일 공유의 ID 및 경로를 기록해 놓으십시오. 
 2.  선호하는 편집기를 여십시오. 
@@ -1522,7 +1506,7 @@ Kubernetes는 실제 하드웨어를 나타내는 지속적 볼륨과 일반적�
     <table>
     <caption>표 8. YAML 파일 컴포넌트 이해</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png"/> YAML 파일 컴포넌트 이해</th>
+    <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
     </thead>
     <tbody>
     <tr>
@@ -1629,7 +1613,7 @@ Kubernetes는 실제 하드웨어를 나타내는 지속적 볼륨과 일반적�
 ## 클러스터 로깅 구성
 {: #cs_logging}
 
-로그는 클러스트와 앱의 문제를 해결하는 데 도움이 됩니다. 다양한 클러스터 로그 소스에 대한 로그 전달을 사용으로 설정하고 로그가 전달되는 위치를 선택할 수 있습니다.
+로그는 클러스트와 앱의 문제를 해결하는 데 도움이 됩니다. 때때로 처리 또는 장기 저장을 위해 특정 위치에 로그를 전송할 수 있습니다. {{site.data.keyword.containershort_notm}}의 Kubernetes 클러스터에서 클러스터에에 대한 로그 전달을 사용으로 설정하고 로그가 전달되는 위치를 선택할 수 있습니다. **참고**: 로그 전달은 표준 클러스터에서만 지원됩니다.
 {:shortdesc}
 
 ### 로그 보기
@@ -1641,18 +1625,20 @@ Kubernetes는 실제 하드웨어를 나타내는 지속적 볼륨과 일반적�
 #### {{site.data.keyword.loganalysislong_notm}}
 {: #cs_view_logs_k8s}
 
-표준 클러스터의 경우 로그는 Kubernetes 클러스터를 작성할 때 로그인한 {{site.data.keyword.Bluemix_notm}} 영역에 있습니다.
-컨테이너 로그는 컨테이너 외부에서 모니터되고 전달됩니다. Kibana 대시보드를 사용하여 컨테이너에 대한 로그에 액세스할 수 있습니다. 로깅에 대한 자세한 정보는 [{{site.data.keyword.containershort_notm}} 로깅](/docs/services/CloudLogAnalysis/containers/logging_containers_ov.html#logging_containers_ov)을 참조하십시오.
+표준 클러스터의 경우 로그는 Kubernetes 클러스터를 작성할 때 로그인한 {{site.data.keyword.Bluemix_notm}} 계정에 있습니다. 클러스터를 작성할 때 {{site.data.keyword.Bluemix_notm}} 영역을 지정한 경우 로그는 해당 영역에 위치합니다. 컨테이너 로그는 컨테이너 외부에서 모니터되고 전달됩니다. Kibana 대시보드를 사용하여 컨테이너에 대한 로그에 액세스할 수 있습니다. 로깅에 대한 자세한 정보는 [{{site.data.keyword.containershort_notm}}에 대한 로깅](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes)을 참조하십시오.
 
-Kibana 대시보드에 액세스하려면 다음 URL 중 하나로 이동하여 클러스터를 작성한 {{site.data.keyword.Bluemix_notm}} 조직 및 영역을 선택하십시오. 
+**참고**: 클러스터 작성 시 지정한 영역에 로그가 있는 경우, 로그를 보려면 계정 소유자에게 해당 영역에 대한 관리자, 개발자 또는 감사자 권한이 있어야 합니다. {{site.data.keyword.containershort_notm}} 액세스 정책 및 권한 변경에 대한 자세한 정보는 [클러스터 액세스 관리](cs_cluster.html#cs_cluster_user)를 참조하십시오. 권한이 변경되면 로그가 나타나기 시작하는 데 최대 24시간이 걸릴 수 있습니다.
+
+Kibana 대시보드에 액세스하려면 다음 URL 중 하나로 이동하여 클러스터를 작성한 {{site.data.keyword.Bluemix_notm}} 계정 또는 영역을 선택하십시오.
 - 미국 남부 및 미국 동부: https://logging.ng.bluemix.net
-- 영국 남부: https://logging.eu-gb.bluemix.net
-- 중앙 유럽: https://logging.eu-de.bluemix.net
+- 영국 남부 및 EU 중부: https://logging.eu-fra.bluemix.net
+
+로그 보기에 대한 자세한 정보는 [웹 브라우저에서 Kibana로 이동](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser)을 참조하십시오.
 
 #### Docker 로그
 {: #cs_view_logs_docker}
 
-기본 제공 Docker 로깅 기능을 활용하여 표준 STDOUT 및 STDERR 출력 스트림에서 활동을 검토할 수 있습니다. 자세한 정보는 [Kubernetes 클러스터에서 실행되는 컨테이너에 대한 컨테이너 로그 보기](/docs/services/CloudLogAnalysis/containers/logging_containers_ov.html#logging_containers_ov_methods_view_kube)를 참조하십시오. 
+기본 제공 Docker 로깅 기능을 활용하여 표준 STDOUT 및 STDERR 출력 스트림에서 활동을 검토할 수 있습니다. 자세한 정보는 [Kubernetes 클러스터에서 실행되는 컨테이너에 대한 컨테이너 로그 보기](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes)를 참조하십시오. 
 
 ### Docker 컨테이너 네임스페이스에 대한 로그 전달 구성
 {: #cs_configure_namespace_logs}
@@ -1667,9 +1653,9 @@ Kibana 대시보드에 액세스하려면 다음 URL 중 하나로 이동하여 
 
 시작하기 전에:
 
-1. syslog 프로토콜을 허용할 수 있는 서버를 설정하십시오. 다음 두 가지 방법으로 syslog 서버를 실행할 수 있습니다.
+1. 다음 두 가지 방법 중 하나로 syslog 프로토콜을 허용할 수 있는 서버를 설정하십시오.
   * 자체 서버를 설정하여 관리하거나 제공자가 관리하도록 하십시오. 제공자가 사용자 대신 서버를 관리하는 경우 로깅 제공자로부터 로깅 엔드포인트를 가져오십시오. 
-  * 컨테이너에서 syslog를 실행하십시오. 예를 들어, 이 [배치 .yaml 파일](https://github.com/IBM-Bluemix/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube)을 사용하여 Kubernetes 클러스터에서 컨테이너를 실행하는 Docker 공용 이미지를 페치할 수 있습니다. 이 이미지는 공용 클러스터 IP 주소에 포트 `30514`를 공개하고 이 공용 클러스터 IP 주소를 사용하여 syslog 호스트를 구성합니다.
+  * 컨테이너에서 syslog를 실행하십시오. 예를 들어, 이 [배치 .yaml 파일 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/IBM-Bluemix/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml)을 사용하여 Kubernetes 클러스터에서 컨테이너를 실행하는 Docker 공용 이미지를 페치할 수 있습니다. 이미지는 공용 클러스터 IP 주소에 포트 `514`를 공개하고 이 공용 클러스터 IP 주소를 사용하여 syslog 호스트를 구성합니다.
 
 2. 네임스페이스가 있는 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
 
@@ -1678,14 +1664,14 @@ Kibana 대시보드에 액세스하려면 다음 URL 중 하나로 이동하여 
 1. 로깅 구성을 작성하십시오.
 
     ```
-    bx cs logging-config-update <my_cluster> --namespace <my_namespace> --hostname <log_server_hostname> --port <log_server_port> --type syslog
+    bx cs logging-config-create <my_cluster> --namespace <my_namespace> --hostname <log_server_hostname> --port <log_server_port> --type syslog
     ```
     {: pre}
 
     <table>
-    <caption>표 1. 이 명령의 컴포넌트 이해</caption>
+    <caption>표 9. 이 명령의 컴포넌트 이해</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png"/> 이 명령의 컴포넌트 이해</th>
+    <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 이 명령의 컴포넌트 이해</th>
     </thead>
     <tbody>
     <tr>
@@ -1716,43 +1702,43 @@ Kibana 대시보드에 액세스하려면 다음 URL 중 하나로 이동하여 
 
 2. 로그 전달 구성이 작성되었는지 확인하십시오.
 
-  * 클러스터의 모든 로깅 구성을 나열하려면 다음을 수행하십시오.
-    ```
+    * 클러스터의 모든 로깅 구성을 나열하려면 다음을 실행하십시오.
+      ```
     bx cs logging-config-get <my_cluster>
     ```
-    {: pre}
+      {: pre}
 
-    출력 예: 
+      출력 예: 
 
-    ```
-    Logging Configurations
-    ---------------------------------------------
-    Id                                    Source      Protocol Host       Port
-    f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes  syslog   localhost  5514
-    5bd9c609-13c8-4c48-9d6e-3a6664c825a9  ingress     ibm      -          -
+      ```
+      Logging Configurations
+      ---------------------------------------------
+      Id                                    Source        Host             Port    Protocol   Paths
+      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes    172.30.162.138   5514    syslog     /var/log/kubelet.log,/var/log/kube-proxy.log
+      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  application   localhost        -       ibm        /var/log/apps/**/*.log,/var/log/apps/**/*.err
 
-    Container Log Namespace configurations
-    ---------------------------------------------
-    Namespace         Protocol    Host        Port
-    default           syslog      localhost   5514
-    my-namespace      syslog      localhost   5514   
-    ```
-    {: screen}
+      Container Log Namespace configurations
+      ---------------------------------------------
+      Namespace         Host             Port    Protocol
+      default           myhostname.com   5514    syslog
+      my-namespace      localhost        5514    syslog
+      ```
+      {: screen}
 
-  * 네임스페이스 로깅 구성만 나열하려면 다음을 수행하십시오.
-    ```
+    * 네임스페이스 로깅 구성만 나열하려면 다음을 수행하십시오.
+      ```
     bx cs logging-config-get <my_cluster> --logsource namespaces
     ```
-    {: pre}
+      {: pre}
 
-    출력 예: 
+      출력 예: 
 
-    ```
-    Namespace         Protocol    Host        Port
-    default           syslog      localhost   5514
-    myapp-namespace   syslog      localhost   5514
-    ```
-    {: screen}
+      ```
+      Namespace         Host             Port    Protocol
+      default           myhostname.com   5514    syslog
+      my-namespace      localhost        5514    syslog
+      ```
+      {: screen}
 
 #### syslog 서버 구성 업데이트
 {: #cs_namespace_update}
@@ -1760,11 +1746,7 @@ Kibana 대시보드에 액세스하려면 다음 URL 중 하나로 이동하여 
 현재 syslog 서버 구성에 대한 세부사항을 업데이트하거나 다른 syslog 서버로 변경하려는 경우 로깅 전달 구성을 업데이트할 수 있습니다.
 {:shortdesc}
 
-시작하기 전에:
-
-1. 네임스페이스가 있는 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
-
-syslog 전달 구성의 세부사항을 변경하려면 다음을 수행하십시오.
+시작하기 전에 네임스페이스가 있는 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
 
 1. 로그 전달 구성을 업데이트하십시오.
 
@@ -1774,9 +1756,9 @@ syslog 전달 구성의 세부사항을 변경하려면 다음을 수행하십�
     {: pre}
 
     <table>
-    <caption>표 2. 이 명령의 컴포넌트 이해</caption>
+    <caption>표 10. 이 명령의 컴포넌트 이해</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png"/> 이 명령의 컴포넌트 이해</th>
+    <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 이 명령의 컴포넌트 이해</th>
     </thead>
     <tbody>
     <tr>
@@ -1789,7 +1771,7 @@ syslog 전달 구성의 세부사항을 변경하려면 다음을 수행하십�
     </tr>
     <tr>
     <td><code>--namepsace <em>&lt;my_namespace&gt;</em></code></td>
-    <td><em>&lt;log_source_id&gt;</em>를 로깅 구성이 있는 네임스페이스의 이름으로 대체하십시오.</td>
+    <td><em>&lt;my_namespace&gt;</em>를 로깅 구성이 있는 네임스페이스의 이름으로 대체하십시오.</td>
     </tr>
     <tr>
     <td><code>--hostname <em>&lt;log_server_hostname&gt;</em></code></td>
@@ -1814,9 +1796,9 @@ syslog 전달 구성의 세부사항을 변경하려면 다음을 수행하십�
     출력 예: 
 
     ```
-    Namespace         Protocol    Host        Port
-    default           syslog      localhost   5514
-    myapp-namespace   syslog      localhost   5514
+    Namespace         Host             Port    Protocol
+    default           myhostname.com   5514    syslog
+    my-namespace      localhost        5514    syslog
     ```
     {: screen}
 
@@ -1827,11 +1809,7 @@ syslog 전달 구성의 세부사항을 변경하려면 다음을 수행하십�
 
 **참고:** 이 조치는 syslog 서버로 로그를 전달하기 위한 구성만 삭제합니다. 네임스페이스에 대한 로그는 계속 {{site.data.keyword.loganalysislong_notm}}로 전달됩니다.
 
-시작하기 전에:
-
-1. 네임스페이스가 있는 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
-
-syslog로의 로그 전달을 중지하려면 다음을 수행하십시오.
+시작하기 전에 네임스페이스가 있는 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
 
 1. 로깅 구성을 삭제하십시오.
 
@@ -1841,6 +1819,511 @@ syslog로의 로그 전달을 중지하려면 다음을 수행하십시오.
     {: pre}
     <em>&lt;my_cluster&gt;</em>를 로깅 구성이 있는 클러스터의 이름으로 대체하고 <em>&lt;my_namespace&gt;</em>를 네임스페이스의 이름으로 대체하십시오.
 
+
+### 애플리케이션, 작업자 노드, Kubernetes 시스템 컴포넌트 및 Ingress 제어기에 대한 로그 전달 구성
+{: #cs_configure_log_source_logs}
+
+기본적으로 {{site.data.keyword.containershort_notm}}는 Docker 컨테이너 네임스페이스 로그를 {{site.data.keyword.loganalysislong_notm}}에 전달합니다. 또한 애플리케이션, 작업자 노드, Kubernetes 클러스터 및 Ingress 제어기와 같은 다른 로그 소스에 대한 로그 전달을 구성할 수 있습니다.
+{:shortdesc}
+
+각 로그 소스에 대한 정보를 보려면 다음 옵션을 검토하십시오.
+
+|로그 소스|특성|로그 경로|
+|----------|---------------|-----|
+|`application`|Kubernetes 클러스터에서 실행되는 고유 애플리케이션의 로그입니다.|`/var/log/apps/**/*.log`, `/var/log/apps/**/*.err`
+|`worker`|Kubernetes 클러스터 내 가상 머신 작업자 노드의 로그입니다.|`/var/log/syslog`, `/var/log/auth.log`
+|`kubernetes`|Kubernetes 시스템 컴포넌트의 로그입니다.|`/var/log/kubelet.log`, `/var/log/kube-proxy.log`
+|`ingress`|Kubernetes 클러스터로 수신되는 네트워크 트래픽을 관리하는 Ingress 제어기의 로그입니다.|`/var/log/alb/ids/*.log`, `/var/log/alb/ids/*.err`, `/var/log/alb/customerlogs/*.log`, `/var/log/alb/customerlogs/*.err`
+{: caption="표 11. 로그 소스 특성입니다." caption-side="top"}
+
+#### 애플리케이션에 대한 로그 전달 사용
+{: #cs_apps_enable}
+
+애플리케이션의 로그는 호스트 노드의 특정 디렉토리로 제한되어야 합니다. 마운트 경로를 통해 호스트 경로 볼륨을 컨테이너에 마운트하여 이를 수행할 수 있습니다. 이 마운트 경로는 애플리케이션 로그가 전송되는 컨테이너에서 디렉토리의 역할을 합니다. 볼륨 마운트를 작성하면 사전 정의된 호스트 경로 디렉토리 `/var/log/apps`가 자동으로 작성됩니다.
+
+애플리케이션 로그 전달에 대한 다음 측면을 검토하십시오.
+* 로그는 /var/log/apps 경로에서 재귀적으로 읽힙니다. 즉, /var/log/apps 경로의 서브디렉토리에 애플리케이션 로그를 배치할 수 있습니다.
+* `.log` 또는 `.err` 파일 확장자를 가진 애플리케이션 로그 파일만 전달됩니다.
+* 처음 로그 전달을 사용하면 애플리케이션 로그가 처음부터 읽히는 대신 사용 이후부터 읽힙니다. 즉, 애플리케이션 로깅이 사용되기 전에 이미 존재한 로그의 컨텐츠는 읽히지 않습니다. 로그는 로깅이 사용된 시점부터 읽힙니다. 하지만 처음 로그 전달이 사용된 후 로그는 항상 마지막에 중단된 위치부터 선택됩니다.
+* `/var/log/apps` 호스트 경로 볼륨을 컨테이너에 마운트하면 컨테이너는 모두 이 동일한 디렉토리에 작성됩니다. 즉, 컨테이너가 동일한 파일 이름으로 작성되면 컨테이너는 호스트의 동일한 파일에 작성됩니다. 이를 의도하지 않은 경우에는 각 컨테이너에서 서로 다르게 로그 파일의 이름을 지정하여 컨테이너가 동일한 로그 파일을 겹쳐쓰지 않도록 할 수 있습니다.
+* 모든 컨테이너가 동일한 파일 이름으로 작성되므로, ReplicaSets의 애플리케이션 로그를 전달하는 데 이 방법을 사용하지 마십시오. 대신 애플리케이션의 로그를 STDOUT 및 STDERR로 작성할 수 있습니다. 이러한 로그는 컨테이너 로그로 선택되며, 컨테이너 로그는 자동으로 {{site.data.keyword.loganalysisshort_notm}}에 전달됩니다. STDOUT 및 STDERR로 작성된 애플리케이션 로그를 외부 syslog 서버에 전달하려면 [syslog에 대한 로그 전달 사용](cs_cluster.html#cs_namespace_enable)의 단계를 따르십시오.
+
+시작하기 전에 로그 소스가 있는 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오. 
+
+1. 애플리케이션 포드의 `.yaml` 구성 파일을 여십시오.
+
+2. 구성 파일에 다음 `volumeMounts` 및 `volumes`를 추가하십시오.
+
+    ```
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: <pod_name>
+    containers:
+    - name: fluentd
+      image: "<your_registry_image>"
+      volumeMounts:
+        # Docker paths
+          - mountPath: /var/log/my-app-log-files-directory
+            name: app-log
+    volumes:
+    - name: app-log
+      hostPath:
+        path: /var/log/apps
+    ```
+    {: codeblock}
+
+2. 포드에 볼륨을 마운트하십시오.
+
+    ```
+    kubectl apply -f <local_yaml_path>
+    ```
+    {:pre}
+
+3. 로그 전달 구성을 작성하려면 [작업자 노드, Kubernetes 시스템 컴포넌트 및 Ingress 제어기에 대한 로그 전달 사용](cs_cluster.html#cs_log_sources_enable)의 단계를 따르십시오.
+
+#### 작업자 노드, Kubernetes 시스템 컴포넌트 및 Ingress 제어기에 대한 로그 전달 사용
+{: #cs_log_sources_enable}
+
+{{site.data.keyword.loganalysislong_notm}} 또는 외부 syslog 서버로 로그를 전달할 수 있습니다. {{site.data.keyword.loganalysisshort_notm}}에 로그를 전달하면 로그는 클러스터를 작성한 영역과 동일한 영역으로 전달됩니다. 하나의 로그 소스의 로그를 두 로그 콜렉터 서버로 전달하려면 두 로깅 구성을 작성해야 합니다.
+{:shortdesc}
+
+시작하기 전에:
+
+1. 로그를 외부 syslog 서버로 전달하려는 경우 다음 두 가지 방법으로 syslog 프로토콜을 허용하는 서버를 설정할 수 있습니다.
+  * 자체 서버를 설정하여 관리하거나 제공자가 관리하도록 하십시오. 제공자가 사용자 대신 서버를 관리하는 경우 로깅 제공자로부터 로깅 엔드포인트를 가져오십시오. 
+  * 컨테이너에서 syslog를 실행하십시오. 예를 들어, 이 [배치 .yaml 파일 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/IBM-Bluemix/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml)을 사용하여 Kubernetes 클러스터에서 컨테이너를 실행하는 Docker 공용 이미지를 페치할 수 있습니다. 이미지는 공용 클러스터 IP 주소에 포트 `514`를 공개하고 이 공용 클러스터 IP 주소를 사용하여 syslog 호스트를 구성합니다.
+**참고:**: 시드니 위치의 로그를 보려면 로그를 외부 syslog 서버로 전달해야 합니다.
+
+2. 로그 소스가 있는 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
+
+작업자 노드, Kubernetes 시스템 컴포넌트 또는 Ingress 제어기에 대한 로그 전달을 사용으로 설정하려면 다음을 수행하십시오.
+
+1. 로그 전달 구성을 작성하십시오.
+
+  * {{site.data.keyword.loganalysisshort_notm}}에 로그를 전달하려면 다음을 수행하십시오.
+
+    ```
+    bx cs logging-config-create <my_cluster> --logsource <my_log_source> --type ibm
+    ```
+    {: pre}
+    <em>&lt;my_cluster&gt;</em>를 클러스터의 이름 또는 ID로 대체하십시오. <em>&lt;my_log_source&gt;</em>를 로그 소스로 대체하십시오. 허용되는 값은 `application`, `worker`, `kubernetes` 및 `ingress`입니다.
+
+  * 로그를 외부 syslog 서버에 전달하려면 다음을 수행하십시오.
+
+    ```
+    bx cs logging-config-create <my_cluster> --logsource <my_log_source> --hostname <log_server_hostname> --port <log_server_port> --type syslog
+    ```
+    {: pre}
+
+    <table>
+    <caption>표 12. 이 명령의 컴포넌트 이해</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 이 명령의 컴포넌트 이해</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>logging-config-create</code></td>
+    <td>로그 소스에 대한 syslog 로그 전달 구성을 작성하기 위한 명령입니다.</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;my_cluster&gt;</em></code></td>
+    <td><em>&lt;my_cluster&gt;</em>를 클러스터의 이름 또는 ID로 대체하십시오.</td>
+    </tr>
+    <tr>
+    <td><code>--logsource <em>&lt;my_log_source&gt;</em></code></td>
+    <td> <em>&lt;my_log_source&gt;</em>를 로그 소스로 대체하십시오. 허용되는 값은 <code>application</code>, <code>worker</code>, <code>kubernetes</code> 및 <code>ingress</code>입니다. </td>
+    </tr>
+    <tr>
+    <td><code>--hostname <em>&lt;log_server_hostname&gt;</em></code></td>
+    <td><em>&lt;log_server_hostname&gt;</em>을 로그 콜렉터 서버의 호스트 이름 또는 IP 주소로 대체하십시오.</td>
+    </tr>
+    <tr>
+    <td><code>--port <em>&lt;log_collector_port&gt;</em></code></td>
+    <td><em>&lt;log_server_port&gt;</em>를 로그 콜렉터 서버의 포트로 대체하십시오. 포트를 지정하지 않으면 표준 포트 <code>514</code>가 syslog에 사용됩니다.</td>
+    </tr>
+    <tr>
+    <td><code>--type syslog</code></td>
+    <td>외부 syslog 서버의 로그 유형입니다.</td>
+    </tr>
+    </tbody></table>
+
+2. 로그 전달 구성이 작성되었는지 확인하십시오.
+
+    * 클러스터의 모든 로깅 구성을 나열하려면 다음을 실행하십시오.
+      ```
+      bx cs logging-config-get <my_cluster>
+      ```
+      {: pre}
+
+      출력 예: 
+
+      ```
+      Logging Configurations
+      ---------------------------------------------
+      Id                                    Source        Host             Port    Protocol   Paths
+      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes    172.30.162.138   5514    syslog     /var/log/kubelet.log,/var/log/kube-proxy.log
+      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  application   localhost        -       ibm        /var/log/apps/**/*.log,/var/log/apps/**/*.err
+
+      Container Log Namespace configurations
+      ---------------------------------------------
+      Namespace         Host             Port    Protocol
+      default           myhostname.com   5514    syslog
+      my-namespace      localhost        5514    syslog
+      ```
+      {: screen}
+
+    * 로그 소스의 한 가지 유형에 대한 로깅 구성을 나열하려면 다음을 실행하십시오.
+      ```
+      bx cs logging-config-get <my_cluster> --logsource worker
+      ```
+      {: pre}
+
+      출력 예: 
+
+      ```
+      Id                                    Source      Host        Port   Protocol   Paths
+      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  worker      localhost   5514   syslog     /var/log/syslog,/var/log/auth.log
+      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  worker      -           -      ibm        /var/log/syslog,/var/log/auth.log
+      ```
+      {: screen}
+
+#### 로그 콜렉터 서버 업데이트
+{: #cs_log_sources_update}
+
+로그 콜렉터 서버 또는 로그 유형을 변경하여 애플리케이션, 작업자 노드, Kubernetes 시스템 컴포넌트 및 Ingress 제어기의 로깅 구성을 업데이트할 수 있습니다.
+{: shortdesc}
+
+**참고:**: 시드니 위치의 로그를 보려면 로그를 외부 syslog 서버로 전달해야 합니다.
+
+시작하기 전에:
+
+1. 로그 콜렉터 서버를 syslog로 변경하는 경우 다음 두 가지 방법으로 syslog 프로토콜을 허용하는 서버를 설정할 수 있습니다.
+  * 자체 서버를 설정하여 관리하거나 제공자가 관리하도록 하십시오. 제공자가 사용자 대신 서버를 관리하는 경우 로깅 제공자로부터 로깅 엔드포인트를 가져오십시오. 
+  * 컨테이너에서 syslog를 실행하십시오. 예를 들어, 이 [배치 .yaml 파일 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/IBM-Bluemix/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml)을 사용하여 Kubernetes 클러스터에서 컨테이너를 실행하는 Docker 공용 이미지를 페치할 수 있습니다. 이미지는 공용 클러스터 IP 주소에 포트 `514`를 공개하고 이 공용 클러스터 IP 주소를 사용하여 syslog 호스트를 구성합니다.
+
+2. 로그 소스가 있는 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
+
+로그 소스의 로그 콜렉터 서버를 변경하려면 다음을 수행하십시오.
+
+1. 로깅 구성을 업데이트하십시오.
+
+    ```
+    bx cs logging-config-update <my_cluster> --id <log_source_id> --logsource <my_log_source> --hostname <log_server_hostname> --port <log_server_port> --type <logging_type>
+    ```
+    {: pre}
+
+    <table>
+    <caption>표 13. 이 명령의 컴포넌트 이해</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 이 명령의 컴포넌트 이해</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>logging-config-update</code></td>
+    <td>로그 소스에 대한 로그 전달 구성을 업데이트하기 위한 명령입니다.</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;my_cluster&gt;</em></code></td>
+    <td><em>&lt;my_cluster&gt;</em>를 클러스터의 이름 또는 ID로 대체하십시오.</td>
+    </tr>
+    <tr>
+    <td><code>--id <em>&lt;log_source_id&gt;</em></code></td>
+    <td><em>&lt;log_source_id&gt;</em>를 로그 소스 구성의 ID로 대체하십시오.</td>
+    </tr>
+    <tr>
+    <td><code>--logsource <em>&lt;my_log_source&gt;</em></code></td>
+    <td> <em>&lt;my_log_source&gt;</em>를 로그 소스로 대체하십시오. 허용되는 값은 <code>application</code>, <code>worker</code>, <code>kubernetes</code> 및 <code>ingress</code>입니다. </td>
+    </tr>
+    <tr>
+    <td><code>--hostname <em>&lt;log_server_hostname&gt;</em></code></td>
+    <td><em>&lt;log_server_hostname&gt;</em>을 로그 콜렉터 서버의 호스트 이름 또는 IP 주소로 대체하십시오.</td>
+    </tr>
+    <tr>
+    <td><code>--port <em>&lt;log_collector_port&gt;</em></code></td>
+    <td><em>&lt;log_server_port&gt;</em>를 로그 콜렉터 서버의 포트로 대체하십시오. 포트를 지정하지 않으면 표준 포트 <code>514</code>가 syslog에 사용됩니다.</td>
+    </tr>
+    <tr>
+    <td><code>--type <em>&lt;logging_type&gt;</em></code></td>
+    <td><em>&lt;logging_type&gt;</em>을 사용할 새 로그 전달 프로토콜로 대체하십시오. 현재 <code>syslog</code> 및 <code>ibm</code>이 지원됩니다. </td>
+    </tr>
+    </tbody></table>
+
+2. 로그 전달 구성이 업데이트되었는지 확인하십시오.
+
+  * 클러스터의 모든 로깅 구성을 나열하려면 다음을 실행하십시오.
+    ```
+    bx cs logging-config-get <my_cluster>
+    ```
+    {: pre}
+
+    출력 예: 
+
+    ```
+    Logging Configurations
+    ---------------------------------------------
+    Id                                    Source        Host             Port    Protocol   Paths
+    f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes    172.30.162.138   5514    syslog     /var/log/kubelet.log,/var/log/kube-proxy.log
+    5bd9c609-13c8-4c48-9d6e-3a6664c825a9  application   localhost        -       ibm        /var/log/apps/**/*.log,/var/log/apps/**/*.err
+
+    Container Log Namespace configurations
+    ---------------------------------------------
+    Namespace         Host             Port    Protocol
+    default           myhostname.com   5514    syslog
+    my-namespace      localhost        5514    syslog
+    ```
+    {: screen}
+
+  * 로그 소스의 한 가지 유형에 대한 로깅 구성을 나열하려면 다음을 실행하십시오.
+    ```
+    bx cs logging-config-get <my_cluster> --logsource worker
+    ```
+    {: pre}
+
+    출력 예: 
+
+    ```
+    Id                                    Source      Host        Port   Protocol   Paths
+    f4bc77c0-ee7d-422d-aabf-a4e6b977264e  worker      localhost   5514   syslog     /var/log/syslog,/var/log/auth.log
+    5bd9c609-13c8-4c48-9d6e-3a6664c825a9  worker      -           -      ibm        /var/log/syslog,/var/log/auth.log
+    ```
+    {: screen}
+
+#### 로그 전달 중지
+{: #cs_log_sources_delete}
+
+로깅 구성을 삭제하여 로그 전달을 중지할 수 있습니다.
+
+시작하기 전에 로그 소스가 있는 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
+
+1. 로깅 구성을 삭제하십시오.
+
+    ```
+    bx cs logging-config-rm <my_cluster> --id <log_source_id>
+    ```
+    {: pre}
+    <em>&lt;my_cluster&gt;</em>를 로깅 구성이 있는 클러스터의 이름으로 대체하고 <em>&lt;log_source_id&gt;</em>를 로그 소스 구성의 ID로 대체하십시오.
+
+
+## 클러스터 모니터링 구성
+{: #cs_monitoring}
+
+메트릭은 클러스터의 상태와 성능을 모니터하는 데 도움이 됩니다. 성능이 저하된 상태 또는 작동되지 않는 상태가 된 작업자를 자동으로 발견하여 정정하도록 작업자 노드의 상태 모니터링을 구성할 수 있습니다. **참고**: 모니터링은 표준 클러스터에서만 지원됩니다.
+{:shortdesc}
+
+### 메트릭 보기
+{: #cs_view_metrics}
+
+표준 Kubernetes 및 Docker 기능을 사용하여 클러스터 및 앱의 상태를 모니터할 수 있습니다. {:shortdesc}
+
+<dl>
+<dt>{{site.data.keyword.Bluemix_notm}}의 클러스터 세부사항 페이지</dt>
+<dd>{{site.data.keyword.containershort_notm}}는 클러스터의 상태와 용량 및 클러스터 리소스의 사용에 대한 정보를 제공합니다. 이 GUI를 사용하면 클러스터를 확장하고 지속적 스토리지 관련 작업을 수행하며 {{site.data.keyword.Bluemix_notm}} 서비스 바인딩을 통해 클러스터에 기능을 추가할 수 있습니다. 클러스터 세부사항 페이지를 보려면 **{{site.data.keyword.Bluemix_notm}}대시보드**로 이동하고 클러스터를 선택하십시오. </dd>
+<dt>Kubernetes 대시보드</dt>
+<dd>Kubernetes 대시보드는 작업자 노드의 상태를 검토하고 Kubernetes 리소스를 찾으며 컨테이너형 앱을 배치하고 로깅 및 모니터링 정보를 사용하여 앱의 문제점을 해결할 수 있는 관리 웹 인터페이스입니다. Kubernetes 대시보드에 액세스하는 방법에 대한 자세한 정보는 [{{site.data.keyword.containershort_notm}}의 Kubernetes 대시보드 시작](cs_apps.html#cs_cli_dashboard)을 참조하십시오.</dd>
+<dt>{{site.data.keyword.monitoringlong_notm}}</dt>
+<dd>표준 클러스터의 메트릭은 Kubernetes 클러스터가 작성될 때 로그인된 {{site.data.keyword.Bluemix_notm}} 계정에 위치합니다. 클러스터를 작성할 때 {{site.data.keyword.Bluemix_notm}} 영역을 지정한 경우 메트릭은 해당 영역에 위치합니다. 컨테이너 메트릭은 클러스터에 배치된 모든 컨테이너에 대해 자동으로 수집됩니다. 이러한 메트릭이 전송되며 Grafana를 통해 사용 가능하게 됩니다. 메트릭에 대한 자세한 정보는 [{{site.data.keyword.containershort_notm}}의 모니터링](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov)을 참조하십시오.<p>Grafana 대시보드에 액세스하려면 다음 URL 중 하나로 이동하여 클러스터를 작성한 {{site.data.keyword.Bluemix_notm}} 계정 또는 영역을 선택하십시오.<ul><li>미국 남부 및 미국 동부: https://metrics.ng.bluemix.net</li><li>미국 남부: https://metrics.eu-gb.bluemix.net</li></ul></p></dd></dl>
+
+#### 기타 상태 모니터링 도구
+{: #cs_health_tools}
+
+추가 모니터링 기능을 위해 다른 도구를 구성할 수 있습니다.
+<dl>
+<dt>Prometheus</dt>
+<dd>Prometheus는 Kubernetes에 맞게 설계된 오픈 소스 모니터링, 로깅 및 경보 도구입니다. 도구는 클러스터, 작업자 노드 및 Kubernetes 로깅 정보를 기반으로 한 배치 상태에 대한 자세한 정보를 검색합니다. 설정 정보는 [{{site.data.keyword.containershort_notm}}와 서비스 통합](cs_planning.html#cs_planning_integrations)을 참조하십시오.</dd>
+</dl>
+
+### 자동 복구를 통해 작업자 노드의 상태 모니터링 구성
+{: #cs_configure_worker_monitoring}
+
+{{site.data.keyword.containerlong_notm}} 자동 복구 시스템은 Kubernetes 버전 1.7 이상의 기존 클러스터에 배치할 수 있습니다. 자동 복구 시스템은 다양한 검사를 통해 작업자 노드 상태를 조회합니다. 자동 복구는 구성된 검사에 따라 비정상적인 작업자 노드를 발견하면 작업자 노드에서 OS 다시 로드와 같은 정정 조치를 트리거합니다. 한 번에 하나의 작업자 노드에서만 정정 조치가 이루어집니다. 다른 작업자 노드에서 정정 조치가 이루어지려면 먼저 현재 작업자 노드가 정정 조치를 완료해야 합니다.
+**참고**: 자동 복구에서는 하나 이상의 정상 노드가 올바르게 작동되어야 합니다. 둘 이상의 작업자 노드가 있는 클러스터에서만 활성 검사를 통한 자동 복구를 구성하십시오.
+
+시작하기 전에 작업자 노드 상태를 검사할 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
+
+1. 검사를 JSON 형식으로 정의하는 구성 맵 파일을 작성하십시오. 예를 들어, 다음 YAML 파일은 세 가지 검사(하나의 HTTP 검사와 두 개의 Kubernetes API 서버 검사)를 정의합니다.
+
+    ```
+    kind: ConfigMap
+    apiVersion: v1
+    metadata:
+      name: ibm-worker-recovery-checks
+      namespace: kube-system
+    data:
+      checkhttp.json: |
+        {
+          "Check":"HTTP",
+          "FailureThreshold":3,
+          "CorrectiveAction":"REBOOT",
+          "CooloffSeconds":1800,
+          "IntervalSeconds":180,
+          "TimeoutSeconds":10,
+          "Port":80,
+          "ExpectedStatus":200,
+          "Route":"/myhealth",
+          "Enabled":false
+        }
+      checknode.json: |
+        {
+          "Check":"KUBEAPI",
+          "Resource":"NODE",
+          "FailureThreshold":3,
+          "CorrectiveAction":"RELOAD",
+          "CooloffSeconds":1800,
+          "IntervalSeconds":180,
+          "TimeoutSeconds":10,
+          "Enabled":false
+        }
+      checkpod.json: |
+        {
+          "Check":"KUBEAPI",
+          "Resource":"POD",
+          "PodFailureThresholdPercent":50,
+          "FailureThreshold":3,
+          "CorrectiveAction":"REBOOT",
+          "CooloffSeconds":1800,
+          "IntervalSeconds":180,
+          "TimeoutSeconds":10,
+          "Enabled":false
+      }
+    ```
+    {:codeblock}
+
+    <table>
+    <caption>표 15. YAML 파일 컴포넌트 이해</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>name</code></td>
+    <td>구성 이름 <code>ibm-worker-recovery-checks</code>는 상수이고 변경될 수 없습니다.</td>
+    </tr>
+    <tr>
+    <td><code>namespace</code></td>
+    <td><code>kube-system</code> 네임스페이스는 상수이고 변경될 수 없습니다.</td>
+    </tr>
+    <tr>
+    <tr>
+    <td><code>Check</code></td>
+    <td>자동 복구에서 사용할 검사 유형을 입력하십시오. <ul><li><code>HTTP</code>: 자동 복구는 각 노드에서 실행되는 HTTP 서버를 호출하여 노드가 올바르게 실행 중인지 여부를 판별합니다.</li><li><code>KUBEAPI</code>: 자동 복구는 Kubernetes API 서버를 호출하고 작업자 노드에서 보고된 상태 데이터를 읽습니다.</li></ul></td>
+    </tr>
+    <tr>
+    <td><code>Resource</code></td>
+    <td>검사 유형이 <code>KUBEAPI</code>인 경우 자동 복구에서 검사할 리소스 유형을 입력하십시오. 허용된 값은 <code>NODE</code> 또는 <code>PODS</code>입니다.</td>
+    <tr>
+    <td><code>FailureThreshold</code></td>
+    <td>연속 실패한 검사의 수에 대한 임계값을 입력하십시오. 이 임계값에 도달하면 자동 복구가 지정된 정정 조치를 트리거합니다. 예를 들어, 값이 3이고 자동 복구가 구성된 검사에 세 번 연속 실패하면 자동 복구가 검사와 연관된 정정 조치를 트리거합니다.</td>
+    </tr>
+    <tr>
+    <td><code>PodFailureThresholdPercent</code></td>
+    <td>리소스 유형이 <code>PODS</code>인 경우 [NotReady ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes) 상태인 작업자 노드의 포드 백분율에 대한 임계값을 입력하십시오. 이 백분율은 작업자 노드에 대해 스케줄된 총 포드 수를 기준으로 합니다. 검사에서 비정상 포드의 백분율이 임계값을 초과한다고 판별되면 하나의 오류로 계수합니다.</td>
+    </tr>
+    <tr>
+    <td><code>CorrectiveAction</code></td>
+    <td>오류 임계값에 도달할 때 실행할 조치를 입력하십시오. 정정 조치는 다른 작업자가 수리되지 않는 동안에 그리고 작업자 노드가 이전 조치의 쿨오프 주기가 아닌 경우에만 실행됩니다.<ul><li><code>REBOOT</code>: 작업자 노드를 다시 부팅합니다.</li><li><code>RELOAD</code>: 클린 OS에서 작업자 노드에 필요한 모든 구성을 다시 로드합니다.</li></ul></td>
+    </tr>
+    <tr>
+    <td><code>CooloffSeconds</code></td>
+    <td>자동 복구가 이미 정정 조치가 실행된 노드로 인해 다른 정정 조치를 실행할 때까지 대기해야 하는 시간(초)을 입력하십시오. 쿨오프 주기는 정정 조치가 실행될 때 시작됩니다.</td>
+    </tr>
+    <tr>
+    <td><code>IntervalSeconds</code></td>
+    <td>연속 검사 간 시간(초)을 입력하십시오. 예를 들어, 값이 180이면 자동 복구는 3분마다 각 노드에서 검사를 실행합니다.</td>
+    </tr>
+    <tr>
+    <td><code>TimeoutSeconds</code></td>
+    <td>자동 복구가 호출 오퍼레이션을 종료하기 전까지 데이터베이스에 대한 검사 호출에 걸리는 최대 시간(초)을 입력하십시오. <code>TimeoutSeconds</code> 값은 <code>IntervalSeconds</code> 값보다 작아야 합니다.</td>
+    </tr>
+    <tr>
+    <td><code>Port</code></td>
+    <td>검사 유형이 <code>HTTP</code>인 경우 HTTP 서버가 작업자 노드에서 바인드해야 하는 포트를 입력하십시오. 이 포트는 클러스터에 있는 모든 작업자 노드의 IP에 노출되어야 합니다. 자동 복구에는 서버 검사를 위해 모든 노드에서 일정한 포트 번호가 필요합니다. 사용자 정의 서버를 클러스터에 배치할 때 [DaemonSets ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)를 사용하십시오.</td>
+    </tr>
+    <tr>
+    <td><code>ExpectedStatus</code></td>
+    <td>검사 유형이 <code>HTTP</code>인 경우 검사에서 리턴될 HTTP 서버 상태를 입력하십시오. 예를 들어, 값 200은 서버의 <code>OK</code> 응답을 예상함을 표시합니다.</td>
+    </tr>
+    <tr>
+    <td><code>Route</code></td>
+    <td>검사 유형이 <code>HTTP</code>인 경우 HTTP 서버에서 요청되는 경로를 입력하십시오. 이 값은 일반적으로 모든 작업자 노드에서 실행 중인 서버의 메트릭 경로입니다.</td>
+    </tr>
+    <tr>
+    <td><code>Enabled</code></td>
+    <td>검사를 사용으로 설정하려면 <code>true</code>를 입력하고 사용 안함으로 설정하려면 <code>false</code>를 입력하십시오.</td>
+    </tr>
+    </tbody></table>
+
+2. 클러스터에서 구성 맵을 작성하십시오.
+
+    ```
+    kubectl apply -f <my_file.yaml>
+    ```
+    {: pre}
+
+3. 적절한 검사를 통해 `kube-system` 네임스페이스에서 이름이 `ibm-worker-recovery-checks`인 구성 맵을 작성했는지 확인하십시오.
+
+    ```
+    kubectl -n kube-system get cm ibm-worker-recovery-checks -o yaml
+    ```
+    {: pre}
+
+4. `kube-system` 네임스페이스에서 이름이 `international-registry-docker-secret`인 Docker 가져오기 시크릿을 작성했는지 확인하십시오. 자동 복구는 {{site.data.keyword.registryshort_notm}}의 국제 Docker 레지스트리에서 호스팅됩니다. 국제 레지스트리에 대한 올바른 신임 정보가 포함된 Docker 레지스트리 시크릿을 작성하지 않은 경우 작성하여 자동 복구 시스템을 실행하십시오.
+
+    1. {{site.data.keyword.registryshort_notm}} 플러그인을 설치하십시오. 
+
+        ```
+        bx plugin install container-registry -r Bluemix
+        ```
+        {: pre}
+
+    2. 국제 레지스트리를 대상으로 지정하십시오.
+
+        ```
+        bx cr region-set international
+        ```
+        {: pre}
+
+    3. 국제 레지스트리 토큰을 작성하십시오.
+
+        ```
+        bx cr token-add --non-expiring --description internationalRegistryToken
+        ```
+        {: pre}
+
+    4. `INTERNATIONAL_REGISTRY_TOKEN` 환경 변수를 작성된 토큰으로 설정하십시오.
+
+        ```
+        INTERNATIONAL_REGISTRY_TOKEN=$(bx cr token-get $(bx cr tokens | grep internationalRegistryToken | awk '{print $1}') -q)
+        ```
+        {: pre}
+
+    5. `DOCKER_EMAIL` 환경 변수를 현재 사용자로 설정하십시오. 이메일 주소는 다음 단계에서 `kubectl` 명령을 실행하는 경우에만 필요합니다.
+
+        ```
+        DOCKER_EMAIL=$(bx target | grep "User" | awk '{print $2}')
+        ```
+        {: pre}
+
+    6. Docker 가져오기 시크릿을 작성하십시오.
+
+        ```
+        kubectl -n kube-system create secret docker-registry international-registry-docker-secret --docker-username=token --docker-password="$INTERNATIONAL_REGISTRY_TOKEN" --docker-server=registry.bluemix.net --docker-email="$DOCKER_EMAIL"
+        ```
+        {: pre}
+
+5. 이 YAML 파일을 적용하여 클러스터에 자동 복구를 배치하십시오.
+
+   ```
+   kubectl apply -f https://raw.githubusercontent.com/IBM-Bluemix/kube-samples/master/ibm-worker-recovery/ibm-worker-recovery.yml
+   ```
+   {: pre}
+
+6. 몇 분 후에 다음 명령의 출력에서 `Events` 섹션을 확인하여 자동 복구 배치의 활동을 볼 수 있습니다.
+
+    ```
+    kubectl -n kube-system describe deployment ibm-worker-recovery
+    ```
+    {: pre}
 
 <br />
 
@@ -1853,7 +2336,7 @@ Weave Scope는 서비스, 포드, 컨테이너, 프로세스, 노드 등을 포�
 
 시작하기 전에:
 
--   공용 인터넷에 클러스터 정보를 노출하지 않도록 유념하십시오. 이러한 단계를 완료하여 안전하게 Weave Scope를 배치하고 웹 브라우저에서 로컬로 이에 액세스하십시오. 
+-   공용 인터넷에 클러스터 정보를 노출하지 않도록 주의하십시오. 이러한 단계를 완료하여 안전하게 Weave Scope를 배치하고 웹 브라우저에서 로컬로 이에 액세스하십시오. 
 -   클러스터가 아직 없으면 [표준 클러스터를 작성](#cs_cluster_ui)하십시오. Weave Scope는 CPU를 많이 사용할 수 있습니다(특히, 앱의 경우). 라이트 클러스터가 아닌 더 큰 표준 클러스터에서 Weave Scope를 실행하십시오. 
 -   클러스터에 [CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하고 `kubectl` 명령을 실행하십시오.
 
@@ -1915,12 +2398,12 @@ Weave Scope는 서비스, 포드, 컨테이너, 프로세스, 노드 등을 포�
     ```
     {: screen}
 
-5.  `http://localhost:4040` 주소로 웹 브라우저를 여십시오. 클러스터에서 Kubernetes 리소스의 토폴로지 다이어그램이나 테이블을 보려면 선택하십시오.
+5.  `http://localhost:4040` 주소로 웹 브라우저를 여십시오. 기본 컴포넌트가 배치되지 않은 경우 다음 다이어그램이 표시됩니다. 클러스터에서 Kubernetes 리소스의 토폴로지 다이어그램이나 테이블을 보도록 선택할 수 있습니다.
 
-     <img src="images/weave_scope.png" alt="Weave Scope의 예제 토폴로지" style="width:357px;" />
+     <img src="images/weave_scope.png" alt="Weave Scope의 토폴로지 예" style="width:357px;" />
 
 
-[Weave Scope 기능 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")에 대해 자세히 알아보십시오](https://www.weave.works/docs/scope/latest/features/).
+[Weave Scope 기능에 대해 자세히 알아보십시오 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.weave.works/docs/scope/latest/features/).
 
 <br />
 
@@ -1931,9 +2414,9 @@ Weave Scope는 서비스, 포드, 컨테이너, 프로세스, 노드 등을 포�
 클러스터 관련 작업이 완료되면 클러스터가 더 이상 리소스를 이용하지 않도록 이를 제거할 수 있습니다.
 {:shortdesc}
 
-표준 또는 {{site.data.keyword.Bluemix_notm}} 종량과금제 계정으로 작성된 라이트 및 표준 클러스터는 더 이상 필요하지 않은 경우 사용자가 수동으로 제거해야 합니다. 무료 평가판 계정으로 작성된 라이트 클러스터는 무료 평가판 기간이 종료되면 자동으로 제거됩니다. 
+{{site.data.keyword.Bluemix_notm}} 라이트 또는 종량과금제 계정으로 작성된 라이트 및 표준 클러스터가 더 이상 필요하지 않게 되면 사용자가 이를 수동으로 제거해야 합니다.
 
-클러스터를 삭제하면 컨테이너, 포드, 바인딩된 서비스 및 시크릿 등이 포함된 클러스터의 리소스도 삭제됩니다. 클러스터를 삭제할 때 스토리지를 삭제하지 않은 경우에는 {{site.data.keyword.Bluemix_notm}} GUI의 IBM Bluemix Infrastructure(SoftLayer) 대시보드를 통해 스토리지를 삭제할 수 있습니다. 월별 비용 청구 주기로 인해, 매월 말일에는 지속적 볼륨 클레임을 삭제할 수 없습니다. 해당 월의 말일에 지속적 볼륨 클레임을 삭제하는 경우 다음 달이 시작될 때까지 삭제는 보류 상태를 유지합니다. 
+클러스터를 삭제하면 컨테이너, 포드, 바인딩된 서비스 및 시크릿 등이 포함된 클러스터의 리소스도 삭제됩니다. 클러스터를 삭제할 때 스토리지를 삭제하지 않은 경우에는 {{site.data.keyword.Bluemix_notm}} GUI의 IBM Cloud 인프라(SoftLayer) 대시보드를 통해 스토리지를 삭제할 수 있습니다. 월별 비용 청구 주기로 인해, 매월 말일에는 지속적 볼륨 클레임을 삭제할 수 없습니다. 해당 월의 말일에 지속적 볼륨 클레임을 삭제하는 경우 다음 달이 시작될 때까지 삭제는 보류 상태를 유지합니다. 
 
 **경고:** 지속적 스토리지에 클러스터 또는 데이터 백업이 작성되지 않았습니다. 클러스터를 삭제하면 영구적이며 실행 취소할 수 없습니다.
 
@@ -1956,4 +2439,7 @@ Weave Scope는 서비스, 포드, 컨테이너, 프로세스, 노드 등을 포�
 
     3.  프롬프트에 따라 클러스터 리소스 삭제 여부를 선택하십시오.
 
-클러스터를 제거할 때 포터블 공인 및 사설 서브넷은 자동으로 제거되지 않습니다. 서브넷은 로드 밸런서 서비스 또는 Ingress 제어기에 포터블 공인 IP 주소를 지정하는 데 사용됩니다. 서브넷을 수동으로 삭제하거나 새 클러스터에서 이를 재사용하도록 선택할 수 있습니다. 
+클러스터를 제거할 때 포터블 서브넷 및 이와 연관된 지속적 스토리지를 제거하도록 선택할 수 있습니다.
+- 서브넷은 로드 밸런서 서비스 또는 Ingress 제어기에 포터블 공인 IP 주소를 지정하는 데 사용됩니다. 이를 보관하면 새 클러스터에서 재사용하거나 나중에 IBM Cloud 인프라(SoftLayer) 포트폴리오에서 수동으로 삭제할 수 있습니다.
+- (기존 파일 공유)[#cs_cluster_volume_create]를 사용하여 지속적 볼륨 클레임을 작성한 경우 클러스터를 삭제할 때 파일 공유를 삭제할 수 없습니다. 나중에 IBM Cloud 인프라(SoftLayer) 포트폴리오에서 파일 공유를 수동으로 삭제해야 합니다.
+- 지속적 스토리지는 데이터의 고가용성을 제공합니다. 이를 삭제하면 데이터를 복구할 수 없습니다.

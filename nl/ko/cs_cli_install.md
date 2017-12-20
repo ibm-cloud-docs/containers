@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-12"
+lastupdated: "2017-11-15"
 
 ---
 
@@ -42,7 +42,7 @@ lastupdated: "2017-10-12"
 <br>
 CLI를 설치하려면 다음을 수행하십시오.
 
-1.  {{site.data.keyword.containershort_notm}} 플러그인의 필수 소프트웨어로서 [{{site.data.keyword.Bluemix_notm}} CLI ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://clis.ng.bluemix.net/ui/home.html)을 설치하십시오. {{site.data.keyword.Bluemix_notm}} CLI를 사용하여 명령을 실행하기 위한 접두부는 `bx`입니다.
+1.  {{site.data.keyword.containershort_notm}} 플러그인의 필수 소프트웨어로서 [{{site.data.keyword.Bluemix_notm}} CLI ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://clis.ng.bluemix.net/ui/home.html)를 설치하십시오. {{site.data.keyword.Bluemix_notm}} CLI를 사용하여 명령을 실행하기 위한 접두부는 `bx`입니다.
 
 2.  {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오.프롬프트가 표시되면 {{site.data.keyword.Bluemix_notm}} 신임 정보를 입력하십시오. 
 
@@ -56,7 +56,7 @@ CLI를 설치하려면 다음을 수행하십시오.
 3.  Kubernetes 클러스터를 작성하고 작업자 노드를 관리하려면 {{site.data.keyword.containershort_notm}} 플러그인을 설치하십시오. {{site.data.keyword.containershort_notm}} 플러그인을 사용하여 명령을 실행하기 위한 접두부는 `bx cs`입니다.
 
     ```
-    bx plugin install container-service -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-service -r Bluemix
     ```
     {: pre}
 
@@ -113,7 +113,7 @@ CLI를 설치하려면 다음을 수행하십시오.
 5.  개인용 이미지 저장소를 관리하려면 {{site.data.keyword.registryshort_notm}} 플러그인을 설치하십시오. 이 플러그인을 사용하여 IBM이 호스팅하는 멀티 테넌트, 고가용성 및 확장 가능한 개인용 이미지 레지스트리에서 사용자 고유의 네임스페이스를 설정할 수 있으며 Docker 이미지를 저장하고 이를 다른 사용자와 공유할 수 있습니다. Docker 이미지는 클러스터로 컨테이너를 배치하는 데 필요합니다. 레지스트리 명령을 실행하기 위한 접두부는 `bx cr`입니다.
 
     ```
-    bx plugin install container-registry -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-registry -r Bluemix
     ```
     {: pre}
 
@@ -218,7 +218,7 @@ Kubernetes CLI와 함께 제공되는 명령을 사용하여 {{site.data.keyword
       ```
       {: screen}
 
-이제 `kubectl` 명령을 실행하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터를 관리할 수 있습니다. 명령의 전체 목록은 [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/user-guide/kubectl/v1.7/)을 참조하십시오.
+이제 `kubectl` 명령을 실행하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터를 관리할 수 있습니다. 명령의 전체 목록은 [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/user-guide/kubectl/v1.7/)를 참조하십시오.
 
 **팁:** Windows를 사용 중이며 Kubernetes CLI가 {{site.data.keyword.Bluemix_notm}} CLI와 동일한 디렉토리에 설치되지 않은 경우, `kubectl` 명령을 정상적으로 실행하려면 Kubernetes CLI가 설치된 경로로 디렉토리를 변경해야 합니다. 
 
@@ -256,7 +256,7 @@ CLI를 업데이트하려면 다음을 수행하십시오.
     1.  {{site.data.keyword.Bluemix_notm}} 플러그인 저장소에서 업데이트를 설치하십시오.
 
         ```
-        bx plugin update container-service -r {{site.data.keyword.Bluemix_notm}}
+        bx plugin update container-service -r Bluemix
         ```
         {: pre}
 
@@ -320,7 +320,7 @@ CLI를 업데이트하려면 다음을 수행하십시오.
     1.  {{site.data.keyword.Bluemix_notm}} 플러그인 저장소에서 업데이트를 설치하십시오.
 
         ```
-        bx plugin update container-registry -r {{site.data.keyword.Bluemix_notm}}
+        bx plugin update container-registry -r Bluemix
         ```
         {: pre}
 
@@ -397,7 +397,7 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
 
 {{site.data.keyword.containershort_notm}} API를 사용하여 Kubernetes 클러스터의 작성, 배치 및 관리를 자동화할 수 있습니다. {:shortdesc}
 
-{{site.data.keyword.containershort_notm}} API는 헤더 정보가 필요합니다. 이 헤더 정보는 API 요청에 사용자가 제공해야 하며 사용하려는 API에 따라 다를 수 있습니다. API에 헤더 정보가 필요한지 판별하려면 [{{site.data.keyword.containershort_notm}} API 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://us-south.containers.bluemix.net/swagger-api)을 참조하십시오.
+{{site.data.keyword.containershort_notm}} API는 헤더 정보가 필요합니다. 이 헤더 정보는 API 요청에 사용자가 제공해야 하며 사용하려는 API에 따라 다를 수 있습니다. API에 헤더 정보가 필요한지 판별하려면 [{{site.data.keyword.containershort_notm}} API 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://us-south.containers.bluemix.net/swagger-api)를 참조하십시오.
 
 **참고:** {{site.data.keyword.containershort_notm}}에 인증하려면 {{site.data.keyword.Bluemix_notm}} 신임 정보를 사용하여 생성되고, 클러스터가 작성된 {{site.data.keyword.Bluemix_notm}} 계정 ID를 포함하는 IAM(Identity and Access Management) 토큰을 제공해야 합니다. {{site.data.keyword.Bluemix_notm}}로 인증하는 방법에 따라 IAM 토큰 작성을 자동화하기 위한 다음 옵션 중에서 선택할 수 있습니다.
 
@@ -420,8 +420,8 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
 </table>
 
 1.  IAM(Identity and Access Management) 액세스 토큰을 작성하십시오. 요청에 포함되는 본문 정보는 사용하는 {{site.data.keyword.Bluemix_notm}} 인증 메소드에 따라 다릅니다. 다음 값을 대체하십시오.
-  - _&lt;my_bluemix_username&gt;_: {{site.data.keyword.Bluemix_notm}} 사용자 이름
-  - _&lt;my_bluemix_password&gt;_: {{site.data.keyword.Bluemix_notm}} 비밀번호
+  - <em>&lt;my_username&gt;</em>:  {{site.data.keyword.Bluemix_notm}} 사용자 이름.
+  - _&lt;my_password&gt;_: {{site.data.keyword.Bluemix_notm}} 비밀번호.
   - _&lt;my_api_key&gt;_: {{site.data.keyword.Bluemix_notm}} API 키
   - _&lt;my_passcode&gt;_: {{site.data.keyword.Bluemix_notm}} 일회성 패스코드. `bx login --sso`를 실행하고 CLI 출력의 지시사항에 따라 웹 브라우저를 사용하여 일회성 패스코드를 검색하십시오.
 
@@ -438,18 +438,18 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
     <tbody>
     <tr>
     <td>헤더</td>
-    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>권한: Basic Yng6Yng=</li></ul>
+    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>권한: Basic Yng6Yng=<p><b>참고</b>: 사용자 이름 **bx** 및 비밀번호 **bx**에 대한 URL 인코딩 권한 Yng6Yng=가 제공됩니다.</p></li></ul>
     </td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 사용자 이름 및 비밀번호에 대한 본문</td>
     <td><ul><li>grant_type: password</li>
     <li>response_type: cloud_iam, uaa</li>
-    <li>username: <em>&lt;my_bluemix_username&gt;</em></li>
-    <li>password: <em>&lt;my_bluemix_password&gt;</em></li>
+    <li>username: <em>&lt;my_username&gt;</em></li>
+    <li>password: <em>&lt;my_password&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret: </li></ul>
-    <p>**참고:** 지정된 값이 없는 uaa_client_secret 키를 추가하십시오. </p></td>
+    <p><b>참고</b>: 지정된 값이 없는 uaa_client_secret 키를 추가하십시오.</p></td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} API 키에 대한 본문</td>
@@ -458,7 +458,7 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
     <li>apikey: <em>&lt;my_api_key&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret: </li></ul>
-    <p>**참고:** 지정된 값이 없는 uaa_client_secret 키를 추가하십시오. </p></td>
+    <p><b>참고</b>: 지정된 값이 없는 uaa_client_secret 키를 추가하십시오.</p></td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 일회성 패스코드에 대한 본문</td>
@@ -467,7 +467,7 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
     <li>passcode: <em>&lt;my_passcode&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret: </li></ul>
-    <p>**참고:** 지정된 값이 없는 uaa_client_secret 키를 추가하십시오. </p></td>
+    <p><b>참고</b>: 지정된 값이 없는 uaa_client_secret 키를 추가하십시오.</p></td>
     </tr>
     </tbody>
     </table>
@@ -524,8 +524,8 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
       "resources":
         {
           "metadata": {
-            "guid": "<my_bluemix_account_id>",
-            "url": "/v1/accounts/<my_bluemix_account_id>",
+"guid": "<my_account_id>",
+            "url": "/v1/accounts/<my_account_id>",
             "created_at": "2016-01-07T18:55:09.726Z",
             "updated_at": "2017-04-28T23:46:03.739Z",
             "origin": "BSS"
@@ -536,7 +536,7 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
     API 출력의 **resources/metadata/guid** 필드에서 {{site.data.keyword.Bluemix_notm}} 계정의 ID를 찾을 수 있습니다. 
 
 3.  사용자의 {{site.data.keyword.Bluemix_notm}} 신임 정보 및 클러스터가 작성된 계정 ID가 포함된 새 IAM 토큰을 작성하십시오.
-_&lt;my_bluemix_account_id&gt;_를 이전 단계에서 검색한 {{site.data.keyword.Bluemix_notm}} 계정의 ID로 대체하십시오.
+_&lt;my_account_id&gt;_를 이전 단계에서 검색한 {{site.data.keyword.Bluemix_notm}} 계정의 ID로 대체하십시오.
 
     **참고:** {{site.data.keyword.Bluemix_notm}} API 키를 사용 중인 경우 API 키가 작성된 {{site.data.keyword.Bluemix_notm}} 계정 ID를 사용해야 합니다. 다른 계정에서 클러스터에 액세스하려면 이 계정에 로그인하고 이 계정을 기반으로 하는 {{site.data.keyword.Bluemix_notm}} API 키를 작성하십시오.
 
@@ -553,19 +553,19 @@ _&lt;my_bluemix_account_id&gt;_를 이전 단계에서 검색한 {{site.data.key
     <tbody>
     <tr>
     <td>헤더</td>
-    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>권한: Basic Yng6Yng=</li></ul>
+    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>권한: Basic Yng6Yng=<p><b>참고</b>: 사용자 이름 **bx** 및 비밀번호 **bx**에 대한 URL 인코딩 권한 Yng6Yng=가 제공됩니다.</p></li></ul>
     </td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 사용자 이름 및 비밀번호에 대한 본문</td>
     <td><ul><li>grant_type: password</li>
     <li>response_type: cloud_iam, uaa</li>
-    <li>username: <em>&lt;my_bluemix_username&gt;</em></li>
-    <li>password: <em>&lt;my_bluemix_password&gt;</em></li>
+    <li>username: <em>&lt;my_username&gt;</em></li>
+    <li>password: <em>&lt;my_password&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret: </li>
-    <li>bss_account: <em>&lt;my_bluemix_account_id&gt;</em></li></ul>
-    <p>**참고:** 지정된 값이 없는 uaa_client_secret 키를 추가하십시오. </p></td>
+    <li>bss_account: <em>&lt;my_account_id&gt;</em></li></ul>
+    <p><b>참고</b>: 지정된 값이 없는 uaa_client_secret 키를 추가하십시오.</p></td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} API 키에 대한 본문</td>
@@ -574,8 +574,8 @@ _&lt;my_bluemix_account_id&gt;_를 이전 단계에서 검색한 {{site.data.key
     <li>apikey: <em>&lt;my_api_key&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret: </li>
-    <li>bss_account: <em>&lt;my_bluemix_account_id&gt;</em></li></ul>
-    <p>**참고:** 지정된 값이 없는 uaa_client_secret 키를 추가하십시오. </p></td>
+    <li>bss_account: <em>&lt;my_account_id&gt;</em></li></ul>
+    <p><b>참고</b>: 지정된 값이 없는 uaa_client_secret 키를 추가하십시오.</p></td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 일회성 패스코드에 대한 본문</td>
@@ -584,8 +584,8 @@ _&lt;my_bluemix_account_id&gt;_를 이전 단계에서 검색한 {{site.data.key
     <li>passcode: <em>&lt;my_passcode&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret: </li>
-    <li>bss_account: <em>&lt;my_bluemix_account_id&gt;</em></li></ul>
-    <p>**참고:** 지정된 값이 없는 uaa_client_secret 키를 추가하십시오. </p></td>
+    <li>bss_account: <em>&lt;my_account_id&gt;</em></li></ul>
+    <p><b>참고<b>: 지정된 값이 없는 uaa_client_secret 키를 추가하십시오.</p></td>
     </tr>
     </tbody>
     </table>
@@ -606,83 +606,9 @@ _&lt;my_bluemix_account_id&gt;_를 이전 단계에서 검색한 {{site.data.key
     ```
     {: screen}
 
-    **access_token**에서 IAM 토큰을 찾을 수 있고, **refresh_token**에서 IAM 새로 고치기 토큰을 찾을 수 있으며, CLI 출력의 **uaa_token** 필드에서 UAA 토큰을 찾을 수 있습니다.
+    **access_token**에서 IAM 토큰을 찾을 수 있고 **refresh_token**에서 IAM 새로 고치기 토큰을 찾을 수 있습니다.
 
-4.  클러스터가 작성된 {{site.data.keyword.Bluemix_notm}} 영역의 ID를 검색하십시오.
-    1.  영역 ID에 액세스하기 위한 API 엔드포인트를 검색하십시오. _&lt;uaa_token&gt;_을 이전 단계에서 검색한 UAA 토큰으로 대체하십시오.
-
-        ```
-        GET https://api.<region>.bluemix.net/v2/organizations
-        ```
-        {: codeblock}
-
-        <table summary="공간 ID를 가져오는 입력 매개변수">
-         <thead>
-        <th>입력 매개변수</th>
-        <th>값</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td>헤더</td>
-        <td><ul><li>Content-Type: application/x-www-form-urlencoded;charset=utf</li>
-        <li>권한: bearer &lt;uaa_token&gt;</li>
-        <li>승인: application/json;charset=utf-8</li></ul></td>
-        </tr>
-        </tbody>
-        </table>
-
-      API 출력 예제:
-
-      ```
-      {
-            "metadata": {
-"guid": "<bluemix_org_id>",
-              "url": "/v2/organizations/<my_bluemix_org_id>",
-              "created_at": "2016-01-07T18:55:19Z",
-              "updated_at": "2016-02-09T15:56:22Z"
-            },
-            "entity": {
-              "name": "<bluemix_org_name>",
-              "billing_enabled": false,
-              "quota_definition_guid": "<bluemix_org_id>",
-              "status": "active",
-              "quota_definition_url": "/v2/quota_definitions/<bluemix_org_id>",
-              "spaces_url": "/v2/organizations/<bluemix_org_id>/spaces",
-      ...
-
-      ```
-      {: screen}
-
-5.  **spaces_url** 필드의 출력을 기록해 두십시오. 
-6.  **spaces_url** 엔드포인트를 사용하여 {{site.data.keyword.Bluemix_notm}} 영역의 ID를 검색하십시오. 
-
-      ```
-      GET https://api.<region>.bluemix.net/v2/organizations/<bluemix_org_id>/spaces
-      ```
-      {: codeblock}
-
-      API 출력 예제:
-
-      ```
-      {
-            "metadata": {
-"guid": "<bluemix_space_id>",
-              "url": "/v2/spaces/<my_bluemix_space_id>",
-              "created_at": "2016-01-07T18:55:22Z",
-              "updated_at": null
-            },
-            "entity": {
-              "name": "<bluemix_space_name>",
-              "organization_guid": "<bluemix_org_id>",
-              "space_quota_definition_guid": null,
-              "allow_ssh": true,
-      ...
-      ```
-      {: screen}
-
-      API 출력의 **metadata/guid** 필드에서 {{site.data.keyword.Bluemix_notm}} 영역의 ID를 찾을 수 있습니다. 
-
-7.  계정의 모든 Kubernetes 클러스터를 나열하십시오. 사용자의 헤더 정보를 빌드하기 위해 이전 단계에서 검색한 정보를 사용하십시오. 
+4.  계정의 모든 Kubernetes 클러스터를 나열하십시오. 사용자의 헤더 정보를 빌드하기 위해 이전 단계에서 검색한 정보를 사용하십시오. 
 
     -   미국 남부
 
@@ -733,7 +659,7 @@ _&lt;my_bluemix_account_id&gt;_를 이전 단계에서 검색한 {{site.data.key
         </tbody>
         </table>
 
-8.  지원되는 API 목록은 [{{site.data.keyword.containershort_notm}} API 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://us-south.containers.bluemix.net/swagger-api)을 검토하십시오.
+5.  지원되는 API 목록은 [{{site.data.keyword.containershort_notm}} API 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://us-south.containers.bluemix.net/swagger-api)을 검토하십시오.
 
 <br />
 
@@ -763,7 +689,7 @@ IAM 토큰을 새로 고치려면 다음 단계를 사용하십시오.
     <tr>
     <td>헤더</td>
     <td><ul><li>Content-Type: application/x-www-form-urlencoded </li>
-    <li>권한: Basic Yng6Yng=</li></ul></td>
+    <li>권한: Basic Yng6Yng=<p><b>참고</b>: 사용자 이름 **bx** 및 비밀번호 **bx**에 대한 URL 인코딩 권한 Yng6Yng=가 제공됩니다.</p></li></ul></td>
     </tr>
     <tr>
     <td>본문</td>
@@ -772,7 +698,7 @@ IAM 토큰을 새로 고치려면 다음 단계를 사용하십시오.
     <li>refresh_token: <em>&lt;iam_refresh_token&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret: </li>
-    <li>bss_account: <em>&lt;bluemix_account_id&gt;</em></li></ul><p>**참고:** 지정된 값이 없는 uaa_client_secret 키를 추가하십시오. </p></td>
+    <li>bss_account: <em>&lt;account_id&gt;</em></li></ul><p><b>참고</b>: 지정된 값이 없는 uaa_client_secret 키를 추가하십시오.</p></td>
     </tr>
     </tbody>
     </table>

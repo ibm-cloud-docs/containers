@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-12"
+lastupdated: "2017-11-15"
 
 ---
 
@@ -56,7 +56,7 @@ lastupdated: "2017-10-12"
 3.  要创建 Kubernetes 集群以及管理工作程序节点，请安装 {{site.data.keyword.containershort_notm}} 插件。用于通过 {{site.data.keyword.containershort_notm}} 插件运行命令的前缀是 `bx cs`。
 
     ```
-    bx plugin install container-service -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-service -r Bluemix
     ```
     {: pre}
 
@@ -113,7 +113,7 @@ lastupdated: "2017-10-12"
 5.  要管理专用映像存储库，请安装 {{site.data.keyword.registryshort_notm}} 插件。使用此插件可在 IBM 托管的具备高可用性和高可扩展性的多租户专用映像注册表中设置自己的名称空间，存储 Docker 映像并与其他用户共享这些映像。要将容器部署到集群中，Docker 映像是必需的。用于运行注册表命令的前缀是 `bx cr`。
 
     ```
-    bx plugin install container-registry -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-registry -r Bluemix
     ```
     {: pre}
 
@@ -190,7 +190,7 @@ lastupdated: "2017-10-12"
           {: screen}
 
       2.  复制并粘贴终端中显示的命令，以设置 `KUBECONFIG` 环境变量。
-      3.  验证已正确设置 `KUBECONFIG` 环境变量。
+      3.  验证是否已正确设置 `KUBECONFIG` 环境变量。
 
 
           示例：
@@ -260,7 +260,7 @@ lastupdated: "2017-10-12"
     1.  通过 {{site.data.keyword.Bluemix_notm}} 插件存储库安装更新。
 
         ```
-        bx plugin update container-service -r {{site.data.keyword.Bluemix_notm}}
+        bx plugin update container-service -r Bluemix
         ```
         {: pre}
 
@@ -324,7 +324,7 @@ lastupdated: "2017-10-12"
     1.  通过 {{site.data.keyword.Bluemix_notm}} 插件存储库安装更新。
 
         ```
-        bx plugin update container-registry -r {{site.data.keyword.Bluemix_notm}}
+        bx plugin update container-registry -r Bluemix
         ```
         {: pre}
 
@@ -417,17 +417,17 @@ lastupdated: "2017-10-12"
 <tr>
 <td>未联合的标识</td>
 <td><ul><li><strong>{{site.data.keyword.Bluemix_notm}} 用户名和密码：</strong>您可以遵循本主题中的步骤来完全自动化 IAM 访问令牌的创建。</li>
-<li><strong>生成 {{site.data.keyword.Bluemix_notm}} API 密钥：</strong>作为使用 {{site.data.keyword.Bluemix_notm}} 用户名和密码的替代方法，您可以<a href="../iam/apikeys.html#manapikey" target="_blank">使用 {{site.data.keyword.Bluemix_notm}} API 密钥</a>。{{site.data.keyword.Bluemix_notm}} API 密钥取决于为其生成的 {{site.data.keyword.Bluemix_notm}} 帐户。您不能将 {{site.data.keyword.Bluemix_notm}} API 密钥与同一 IAM 令牌中的不同帐户标识组合使用。要访问使用非 {{site.data.keyword.Bluemix_notm}} API 密钥所基于的帐户创建的集群，必须登录该帐户以生成新的 API 密钥。</li></ul></tr>
+<li><strong>生成 {{site.data.keyword.Bluemix_notm}} API 密钥：</strong>作为使用 {{site.data.keyword.Bluemix_notm}} 用户名和密码的替代方法，您可以<a href="../iam/apikeys.html#manapikey" target="_blank">使用 {{site.data.keyword.Bluemix_notm}} API 密钥</a>。{{site.data.keyword.Bluemix_notm}} API 密钥依赖于为其生成这些密钥的 {{site.data.keyword.Bluemix_notm}} 帐户。您不能将 {{site.data.keyword.Bluemix_notm}} API 密钥与同一 IAM 令牌中的不同帐户标识组合使用。要访问使用非 {{site.data.keyword.Bluemix_notm}} API 密钥所基于的帐户创建的集群，必须登录该帐户以生成新的 API 密钥。</li></ul></tr>
 <tr>
 <td>联合标识</td>
-<td><ul><li><strong>生成 {{site.data.keyword.Bluemix_notm}} API 密钥：</strong><a href="../iam/apikeys.html#manapikey" target="_blank">{{site.data.keyword.Bluemix_notm}} API 密钥</a>取决于为其生成的 {{site.data.keyword.Bluemix_notm}} 帐户。您不能将 {{site.data.keyword.Bluemix_notm}} API 密钥与同一 IAM 令牌中的不同帐户标识组合使用。要访问使用非 {{site.data.keyword.Bluemix_notm}} API 密钥所基于的帐户创建的集群，必须登录该帐户以生成新的 API 密钥。</li><li><strong>使用一次性密码：</strong>如果使用一次性密码向 {{site.data.keyword.Bluemix_notm}} 进行认证，那么无法完全自动化 IAM 令牌的创建，因为检索一次性密码需要与 Web 浏览器进行手动交互。要完全自动化 IAM 令牌的创建，必须创建 {{site.data.keyword.Bluemix_notm}} API 密钥。</ul></td>
+<td><ul><li><strong>生成 {{site.data.keyword.Bluemix_notm}} API 密钥：</strong><a href="../iam/apikeys.html#manapikey" target="_blank">{{site.data.keyword.Bluemix_notm}} API 密钥</a>依赖于为其生成这些密钥的 {{site.data.keyword.Bluemix_notm}} 帐户。您不能将 {{site.data.keyword.Bluemix_notm}} API 密钥与同一 IAM 令牌中的不同帐户标识组合使用。要访问使用非 {{site.data.keyword.Bluemix_notm}} API 密钥所基于的帐户创建的集群，必须登录该帐户以生成新的 API 密钥。</li><li><strong>使用一次性密码：</strong>如果使用一次性密码向 {{site.data.keyword.Bluemix_notm}} 进行认证，那么无法完全自动化 IAM 令牌的创建，因为检索一次性密码需要与 Web 浏览器进行手动交互。要完全自动化 IAM 令牌的创建，必须改为创建 {{site.data.keyword.Bluemix_notm}} API 密钥。</ul></td>
 </tr>
 </tbody>
 </table>
 
 1.  创建 IAM (Identity and Access Management) 访问令牌。包含在请求中的主体信息根据您使用的 {{site.data.keyword.Bluemix_notm}} 认证方法而有所不同。替换以下值：
-  - _&lt;my_bluemix_username&gt;_：您的 {{site.data.keyword.Bluemix_notm}} 用户名。
-  - _&lt;my_bluemix_password&gt;_：您的 {{site.data.keyword.Bluemix_notm}} 密码。
+  - _&lt;my_username&gt;_：您的 {{site.data.keyword.Bluemix_notm}} 用户名。
+  - _&lt;my_password&gt;_：您的 {{site.data.keyword.Bluemix_notm}} 密码。
   - _&lt;my_api_key&gt;_：您的 {{site.data.keyword.Bluemix_notm}} API 密钥。
   - _&lt;my_passcode&gt;_：您的 {{site.data.keyword.Bluemix_notm}} 一次性密码。运行 `bx login --sso`，并按照 CLI 输出中的指示信息，使用 Web 浏览器检索一次性密码。
 
@@ -444,18 +444,18 @@ lastupdated: "2017-10-12"
     <tbody>
     <tr>
     <td>头</td>
-    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=</li></ul>
+    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><b>注</b>：为您提供的是 Yng6Yng=，即针对用户名 **bx** 和密码 **bx** 的 URL 编码的授权。</p></li></ul>
     </td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 用户名和密码的主体</td>
     <td><ul><li>grant_type: password</li>
     <li>response_type: cloud_iam, uaa</li>
-    <li>username: <em>&lt;my_bluemix_username&gt;</em></li>
-    <li>password: <em>&lt;my_bluemix_password&gt;</em></li>
+    <li>username: <em>&lt;my_username&gt;</em></li>
+    <li>password: <em>&lt;my_password&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret: </li></ul>
-    <p>**注**：添加不指定值的 uaa_client_secret 密钥。</p></td>
+    <p><b>注</b>：添加不指定值的 uaa_client_secret 密钥。</p></td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} API 密钥的主体</td>
@@ -464,7 +464,7 @@ lastupdated: "2017-10-12"
     <li>apikey: <em>&lt;my_api_key&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret: </li></ul>
-    <p>**注**：添加不指定值的 uaa_client_secret 密钥。</p></td>
+    <p><b>注</b>：添加不指定值的 uaa_client_secret 密钥。</p></td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 一次性密码的主体</td>
@@ -473,7 +473,7 @@ lastupdated: "2017-10-12"
     <li>passcode: <em>&lt;my_passcode&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret: </li></ul>
-    <p>**注**：添加不指定值的 uaa_client_secret 密钥。</p></td>
+    <p><b>注</b>：添加不指定值的 uaa_client_secret 密钥。</p></td>
     </tr>
     </tbody>
     </table>
@@ -530,8 +530,8 @@ lastupdated: "2017-10-12"
       "resources":
         {
           "metadata": {
-"guid": "<my_bluemix_account_id>",
-            "url": "/v1/accounts/<my_bluemix_account_id>",
+"guid": "<my_account_id>",
+            "url": "/v1/accounts/<my_account_id>",
             "created_at": "2016-01-07T18:55:09.726Z",
             "updated_at": "2017-04-28T23:46:03.739Z",
             "origin": "BSS"
@@ -541,7 +541,7 @@ lastupdated: "2017-10-12"
 
     可以在 API 输出的 **resources/metadata/guid** 字段中找到您的 {{site.data.keyword.Bluemix_notm}} 帐户的标识。
 
-3.  生成新的 IAM 令牌，该令牌包含您的 {{site.data.keyword.Bluemix_notm}} 凭证和创建集群的帐户标识。将 _&lt;my_bluemix_account_id&gt;_ 替换为在上一步中检索到的 {{site.data.keyword.Bluemix_notm}} 帐户的标识。
+3.  生成新的 IAM 令牌，该令牌包含您的 {{site.data.keyword.Bluemix_notm}} 凭证和创建集群的帐户标识。将 _&lt;my_account_id&gt;_ 替换为在上一步中检索到的 {{site.data.keyword.Bluemix_notm}} 帐户的标识。
 
     **注：**如果使用的是 {{site.data.keyword.Bluemix_notm}} API 密钥，那么必须使用为其创建 API 密钥的 {{site.data.keyword.Bluemix_notm}} 帐户标识。要访问其他帐户中的集群，请登录此帐户并创建基于此帐户的 {{site.data.keyword.Bluemix_notm}} API 密钥。
 
@@ -558,19 +558,19 @@ lastupdated: "2017-10-12"
     <tbody>
     <tr>
     <td>头</td>
-    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=</li></ul>
+    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><b>注</b>：为您提供的是 Yng6Yng=，即针对用户名 **bx** 和密码 **bx** 的 URL 编码的授权。</p></li></ul>
     </td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 用户名和密码的主体</td>
     <td><ul><li>grant_type: password</li>
     <li>response_type: cloud_iam, uaa</li>
-    <li>username: <em>&lt;my_bluemix_username&gt;</em></li>
-    <li>password: <em>&lt;my_bluemix_password&gt;</em></li>
+    <li>username: <em>&lt;my_username&gt;</em></li>
+    <li>password: <em>&lt;my_password&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret: </li>
-    <li>bss_account: <em>&lt;my_bluemix_account_id&gt;</em></li></ul>
-    <p>**注**：添加不指定值的 uaa_client_secret 密钥。</p></td>
+    <li>bss_account: <em>&lt;my_account_id&gt;</em></li></ul>
+    <p><b>注</b>：添加不指定值的 uaa_client_secret 密钥。</p></td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} API 密钥的主体</td>
@@ -579,8 +579,8 @@ lastupdated: "2017-10-12"
     <li>apikey: <em>&lt;my_api_key&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret: </li>
-    <li>bss_account: <em>&lt;my_bluemix_account_id&gt;</em></li></ul>
-    <p>**注**：添加不指定值的 uaa_client_secret 密钥。</p></td>
+    <li>bss_account: <em>&lt;my_account_id&gt;</em></li></ul>
+    <p><b>注</b>：添加不指定值的 uaa_client_secret 密钥。</p></td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 一次性密码的主体</td>
@@ -589,8 +589,8 @@ lastupdated: "2017-10-12"
     <li>passcode: <em>&lt;my_passcode&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret: </li>
-    <li>bss_account: <em>&lt;my_bluemix_account_id&gt;</em></li></ul>
-    <p>**注**：添加不指定值的 uaa_client_secret 密钥。</p></td>
+    <li>bss_account: <em>&lt;my_account_id&gt;</em></li></ul>
+    <p><b>注<b>：添加不指定值的 uaa_client_secret 密钥。</p></td>
     </tr>
     </tbody>
     </table>
@@ -611,83 +611,9 @@ lastupdated: "2017-10-12"
     ```
     {: screen}
 
-    可以在 CLI 输出的 **access_token** 中找到 IAM 令牌，在 **refresh_token** 中找到 IAM 刷新令牌，在 **uaa_token** 字段中找到 UAA 令牌。
+    您可以在 **access_token** 中找到 IAM 令牌，在 **refresh_token** 中找到 IAM 刷新令牌。
 
-4.  检索创建集群的 {{site.data.keyword.Bluemix_notm}} 空间的标识。
-    1.  检索 API 端点以访问空间标识。将 _&lt;uaa_token&gt;_ 替换为在上一步中检索到的 UAA 令牌。
-
-        ```
-        GET https://api.<region>.bluemix.net/v2/organizations
-        ```
-        {: codeblock}
-
-        <table summary="用于检索空间标识的输入参数">
-         <thead>
-        <th>输入参数</th>
-        <th>值</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td>头</td>
-        <td><ul><li> Content-Type: application/x-www-form-urlencoded;charset=utf</li>
-        <li>Authorization: bearer &lt;uaa_token&gt;</li>
-        <li>Accept: application/json;charset=utf-8</li></ul></td>
-        </tr>
-        </tbody>
-        </table>
-
-      示例 API 输出：
-
-      ```
-      {
-            "metadata": {
-"guid": "<bluemix_org_id>",
-              "url": "/v2/organizations/<my_bluemix_org_id>",
-              "created_at": "2016-01-07T18:55:19Z",
-              "updated_at": "2016-02-09T15:56:22Z"
-            },
-            "entity": {
-              "name": "<bluemix_org_name>",
-              "billing_enabled": false,
-              "quota_definition_guid": "<bluemix_org_id>",
-              "status": "active",
-              "quota_definition_url": "/v2/quota_definitions/<bluemix_org_id>",
-              "spaces_url": "/v2/organizations/<bluemix_org_id>/spaces",
-      ...
-
-      ```
-      {: screen}
-
-5.  记下 **spaces_url** 字段的输出。
-6.  使用 **spaces_url** 端点检索 {{site.data.keyword.Bluemix_notm}} 空间的标识。
-
-      ```
-      GET https://api.<region>.bluemix.net/v2/organizations/<bluemix_org_id>/spaces
-      ```
-      {: codeblock}
-
-      示例 API 输出：
-
-      ```
-      {
-            "metadata": {
-"guid": "<bluemix_space_id>",
-              "url": "/v2/spaces/<my_bluemix_space_id>",
-              "created_at": "2016-01-07T18:55:22Z",
-              "updated_at": null
-            },
-            "entity": {
-              "name": "<bluemix_space_name>",
-              "organization_guid": "<bluemix_org_id>",
-              "space_quota_definition_guid": null,
-              "allow_ssh": true,
-      ...
-      ```
-      {: screen}
-
-      可以在 API 输出的 **metadata/guid** 字段中找到 {{site.data.keyword.Bluemix_notm}} 空间的标识。
-
-7.  列出您帐户中的所有 Kubernetes 集群。使用在先前步骤中检索到的信息来构建头信息。
+4.  列出您帐户中的所有 Kubernetes 集群。使用在先前步骤中检索到的信息来构建头信息。
 
 
     -   美国南部
@@ -739,7 +665,7 @@ lastupdated: "2017-10-12"
         </tbody>
         </table>
 
-8.  请查看 [{{site.data.keyword.containershort_notm}} API 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://us-south.containers.bluemix.net/swagger-api)，以查找受支持 API 的列表。
+5.  请查看 [{{site.data.keyword.containershort_notm}} API 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://us-south.containers.bluemix.net/swagger-api)，以查找受支持 API 的列表。
 
 <br />
 
@@ -770,7 +696,7 @@ lastupdated: "2017-10-12"
     <tr>
     <td>头</td>
     <td><ul><li>Content-Type: application/x-www-form-urlencoded</li>
-    <li>Authorization: Basic Yng6Yng=</li></ul></td>
+    <li>Authorization: Basic Yng6Yng=<p><b>注</b>：为您提供的是 Yng6Yng=，即针对用户名 **bx** 和密码 **bx** 的 URL 编码的授权。</p></li></ul></td>
     </tr>
     <tr>
     <td>主体</td>
@@ -779,7 +705,7 @@ lastupdated: "2017-10-12"
     <li>refresh_token: <em>&lt;iam_refresh_token&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret: </li>
-    <li>bss_account: <em>&lt;bluemix_account_id&gt;</em></li></ul><p>**注**：添加不指定值的 uaa_client_secret 密钥。</p></td>
+    <li>bss_account: <em>&lt;account_id&gt;</em></li></ul><p><b>注</b>：添加不指定值的 uaa_client_secret 密钥。</p></td>
     </tr>
     </tbody>
     </table>

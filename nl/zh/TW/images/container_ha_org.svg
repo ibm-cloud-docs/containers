@@ -15,7 +15,7 @@
    viewBox="0 0 550 470"
    xml:space="preserve"
    id="svg2"
-   inkscape:version="0.48.5 r10040"
+   inkscape:version="0.47 r22583"
    width="100%"
    height="100%"
    sodipodi:docname="container_ha_org.svg"
@@ -26,7 +26,13 @@
    id="metadata318"><rdf:RDF><cc:Work
        rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
          rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title>Architecture of IBM Containers</dc:title><dc:description>A diagram of the architecture of IBM Containers.</dc:description></cc:Work></rdf:RDF></metadata><defs
-   id="defs316">
+   id="defs316"><inkscape:perspective
+   sodipodi:type="inkscape:persp3d"
+   inkscape:vp_x="0 : 235 : 1"
+   inkscape:vp_y="0 : 1000 : 0"
+   inkscape:vp_z="550 : 235 : 1"
+   inkscape:persp3d-origin="275 : 156.66667 : 1"
+   id="perspective152" />
 
 
 
@@ -350,17 +356,17 @@
    guidetolerance="10"
    inkscape:pageopacity="0"
    inkscape:pageshadow="2"
-   inkscape:window-width="1680"
-   inkscape:window-height="953"
+   inkscape:window-width="1440"
+   inkscape:window-height="853"
    id="namedview314"
    showgrid="true"
    inkscape:zoom="1.5395044"
    inkscape:cx="189.90804"
-   inkscape:cy="240.65225"
-   inkscape:window-x="-9"
-   inkscape:window-y="-9"
+   inkscape:cy="273.96616"
+   inkscape:window-x="-4"
+   inkscape:window-y="-4"
    inkscape:window-maximized="1"
-   inkscape:current-layer="Layer_1-9"
+   inkscape:current-layer="layer2"
    showguides="false"
    inkscape:guide-bbox="true"><inkscape:grid
      type="xygrid"
@@ -591,7 +597,7 @@
    sodipodi:cy="285.50531"
    sodipodi:rx="59.122883"
    sodipodi:ry="31.87093"
-   d="m 196.76834,285.50531 a 59.122883,31.87093 0 1 1 -118.245761,0 59.122883,31.87093 0 1 1 118.245761,0 z"
+   d="m 196.76834,285.50531 c 0,17.60183 -26.47021,31.87093 -59.12288,31.87093 -32.65266,0 -59.122881,-14.2691 -59.122881,-31.87093 0,-17.60183 26.470221,-31.87093 59.122881,-31.87093 32.65267,0 59.12288,14.2691 59.12288,31.87093 z"
    transform="matrix(0.76112662,0,0,0.78714908,-35.326394,55.781915)" /><rect
    x="278.13593"
    y="163.60275"
@@ -642,6 +648,7 @@
 
 
 
+
 <text
    y="283.47189"
    x="43.810497"
@@ -652,6 +659,7 @@
    sodipodi:linespacing="125%"><tspan
      style="fill:#152934;fill-opacity:1;stroke:none"
      id="tspan4088-8-1-5">GoRouter</tspan></text>
+
 
 
 
@@ -697,7 +705,7 @@
    sodipodi:cy="285.50531"
    sodipodi:rx="59.122883"
    sodipodi:ry="31.87093"
-   d="m 196.76834,285.50531 a 59.122883,31.87093 0 1 1 -118.245761,0 59.122883,31.87093 0 1 1 118.245761,0 z"
+   d="m 196.76834,285.50531 c 0,17.60183 -26.47021,31.87093 -59.12288,31.87093 -32.65266,0 -59.122881,-14.2691 -59.122881,-31.87093 0,-17.60183 26.470221,-31.87093 59.122881,-31.87093 32.65267,0 59.12288,14.2691 59.12288,31.87093 z"
    transform="matrix(1.102055,0,0,0.61277194,77.743706,251.64248)" /><path
    inkscape:connector-curvature="0"
    class="st25"
@@ -737,14 +745,16 @@
 
 
 
+
 <text
    y="331.49808"
-   x="450"
+   x="437.97534"
    transform="scale(0.99548983,1.0045306)"
    class="st11 st12 st13"
    id="text230-1-1"
    style="font-size:11.84632874px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#152934;fill-opacity:1;stroke:none;display:inline;font-family:Helvetica Neue for IBM;-inkscape-font-specification:Helvetica Neue for IBM"
    sodipodi:linespacing="125%">組織</text>
+
 
 
 
@@ -775,7 +785,7 @@
 
 <text
    y="576.3869"
-   x="215"
+   x="210.95139"
    transform="scale(0.99548984,1.0045306)"
    class="st11 st12 st13"
    id="text230-1-7-4-0-8-1"
@@ -788,9 +798,10 @@
 
 
 
+
 <text
    y="421.72095"
-   x="200"
+   x="201.39848"
    transform="scale(0.99548984,1.0045306)"
    class="st11 st12 st13"
    id="text230-1-7-4-0-9-2-1-7-3"
@@ -800,9 +811,10 @@
 
 
 
+
 <text
    y="432.75647"
-   x="200"
+   x="202.47957"
    transform="scale(0.99548984,1.0045306)"
    class="st11 st12 st13"
    style="font-size:11.84632874px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#152934;fill-opacity:1;stroke:none;display:inline;font-family:Helvetica Neue for IBM;-inkscape-font-specification:Helvetica Neue for IBM"
@@ -812,14 +824,16 @@
 
 
 
+
 <text
    y="386.19241"
-   x="195"
+   x="196.57771"
    transform="scale(0.99548984,1.0045306)"
    class="st11 st12 st13"
    id="text230-1-7-4-0-9-2-1-0"
    style="font-size:11.84632874px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#152934;fill-opacity:1;stroke:none;display:inline;font-family:Helvetica Neue for IBM;-inkscape-font-specification:Helvetica Neue for IBM"
    sodipodi:linespacing="125%">專用網路閘道</text>
+
 
 
 
@@ -833,7 +847,7 @@
    y="356.78357"
    x="268.13721" /><text
    y="473.03961"
-   x="200"
+   x="202.24376"
    transform="scale(0.99548983,1.0045306)"
    class="st11 st12 st13"
    id="text230-1-7-4-0-9-5-8"
@@ -845,9 +859,10 @@
 
 
 
+
 <text
    y="522.0918"
-   x="215"
+   x="214.45634"
    transform="scale(0.99548983,1.0045306)"
    class="st11 st12 st13"
    id="text230-1-7-4-0-9-5-4-3-61"
@@ -855,6 +870,7 @@
    sodipodi:linespacing="125%"><tspan
      style="font-weight:normal;fill:#152934;fill-opacity:1;stroke:none;-inkscape-font-specification:Helvetica Neue for IBM"
      id="tspan3268-5-8-2-89">磁區 1</tspan></text>
+
 
 
 
@@ -928,7 +944,7 @@
    sodipodi:cy="285.50531"
    sodipodi:rx="59.122883"
    sodipodi:ry="31.87093"
-   d="m 196.76834,285.50531 a 59.122883,31.87093 0 1 1 -118.245761,0 59.122883,31.87093 0 1 1 118.245761,0 z"
+   d="m 196.76834,285.50531 c 0,17.60183 -26.47021,31.87093 -59.12288,31.87093 -32.65266,0 -59.122881,-14.2691 -59.122881,-31.87093 0,-17.60183 26.470221,-31.87093 59.122881,-31.87093 32.65267,0 59.12288,14.2691 59.12288,31.87093 z"
    transform="matrix(1.102055,0,0,0.61277194,267.74372,252.55129)" /><path
    inkscape:connector-curvature="0"
    class="st25"
@@ -967,7 +983,7 @@
 
 <text
    y="577.29163"
-   x="405"
+   x="401.81219"
    transform="scale(0.99548984,1.0045306)"
    class="st11 st12 st13"
    id="text230-1-7-4-0-8-1-6"
@@ -978,9 +994,10 @@
 
 
 
+
 <text
    y="422.62564"
-   x="390"
+   x="390.25024"
    transform="scale(0.99548984,1.0045306)"
    class="st11 st12 st13"
    id="text230-1-7-4-0-9-2-1-7-3-8"
@@ -990,9 +1007,10 @@
 
 
 
+
 <text
    y="433.66116"
-   x="390"
+   x="391.33133"
    transform="scale(0.99548984,1.0045306)"
    class="st11 st12 st13"
    style="font-size:11.84632874px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#152934;fill-opacity:1;stroke:none;display:inline;font-family:Helvetica Neue for IBM;-inkscape-font-specification:Helvetica Neue for IBM"
@@ -1002,14 +1020,16 @@
 
 
 
+
 <text
    y="387.09711"
-   x="385"
+   x="387.43854"
    transform="scale(0.99548984,1.0045306)"
    class="st11 st12 st13"
    id="text230-1-7-4-0-9-2-1-0-9"
    style="font-size:11.84632874px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#152934;fill-opacity:1;stroke:none;display:inline;font-family:Helvetica Neue for IBM;-inkscape-font-specification:Helvetica Neue for IBM"
    sodipodi:linespacing="125%">專用網路閘道</text>
+
 
 
 
@@ -1023,7 +1043,7 @@
    y="357.69238"
    x="458.13721" /><text
    y="473.94431"
-   x="390"
+   x="393.10458"
    transform="scale(0.99548983,1.0045306)"
    class="st11 st12 st13"
    id="text230-1-7-4-0-9-5-8-3"
@@ -1035,9 +1055,10 @@
 
 
 
+
 <text
    y="522.99646"
-   x="405"
+   x="405.31714"
    transform="scale(0.99548983,1.0045306)"
    class="st11 st12 st13"
    id="text230-1-7-4-0-9-5-4-3-61-8"
@@ -1045,6 +1066,7 @@
    sodipodi:linespacing="125%"><tspan
      style="font-weight:normal;fill:#152934;fill-opacity:1;stroke:none;-inkscape-font-specification:Helvetica Neue for IBM"
      id="tspan3268-5-8-2-89-8">磁區 2</tspan></text>
+
 
 
 
@@ -1078,6 +1100,7 @@
 
 
 
+
 <path
    inkscape:connector-curvature="0"
    id="path42355-8-2-0-5-4"
@@ -1090,6 +1113,7 @@
    id="text230-1-1-1"
    style="font-size:11.84632874px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#152934;fill-opacity:1;stroke:none;display:inline;font-family:Helvetica Neue for IBM;-inkscape-font-specification:Helvetica Neue for IBM"
    sodipodi:linespacing="125%">地區</text>
+
 
 </g>
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-18"
+lastupdated: "2017-11-17"
 
 ---
 
@@ -21,12 +21,26 @@ lastupdated: "2017-10-18"
 
 [{{site.data.keyword.Bluemix_notm}} 地區](#bluemix_regions)與 [{{site.data.keyword.containershort_notm}} 地區](#container_regions)不同。
 
+![{{site.data.keyword.containershort_notm}} 地區與資料中心](/images/regions.png)
+
+圖 1. {{site.data.keyword.containershort_notm}} 地區與資料中心
+
 支援的 {{site.data.keyword.containershort_notm}} 地區：
+  * 亞太地區北部
   * 亞太地區南部
   * 歐盟中部
   * 英國南部
   * 美國東部
   * 美國南部
+
+您可以在下列地區建立 Kubernetes 精簡叢集：
+  * 亞太地區南部
+  * 歐盟中部
+  * 英國南部
+  * 美國南部
+
+  **附註**：如果您不是付費客戶，則無法在美國南部地區建立精簡叢集。
+
 
 ## {{site.data.keyword.Bluemix_notm}} 地區 API 端點
 {: #bluemix_regions}
@@ -46,7 +60,7 @@ lastupdated: "2017-10-18"
       ```
       {: pre}
 
-  * 雪梨
+  * 雪梨及亞太地區北部
       ```
       bx login -a api.au-syd.bluemix.net
       ```
@@ -76,13 +90,12 @@ lastupdated: "2017-10-18"
 {:shortdesc}
 
 {{site.data.keyword.containershort_notm}} 地區 API 端點：
+  * 亞太地區北部：`https://ap-north.containers.bluemix.net`
   * 亞太地區南部：`https://ap-south.containers.bluemix.net`
   * 歐盟中部：`https://eu-central.containers.bluemix.net`
   * 英國南部：`https://uk-south.containers.bluemix.net`
   * 美國東部：`https://us-east.containers.bluemix.net`
   * 美國南部：`https://us-south.containers.bluemix.net`
-
-**附註：**美國東部只能與 CLI 指令搭配使用。
 
 若要檢查您目前所在的 {{site.data.keyword.containershort_notm}} 地區，請執行 `bx cs api`，並檢閱**地區**欄位。
 
@@ -96,6 +109,12 @@ lastupdated: "2017-10-18"
 </br>
 
 用來登入 {{site.data.keyword.containershort_notm}} 地區的範例指令：
+  * 亞太地區北部：
+    ```
+    bx cs init --host https://ap-north.containers.bluemix.net
+    ```
+  {: pre}
+
   * 亞太地區南部：
     ```
     bx cs init --host https://ap-south.containers.bluemix.net
@@ -126,14 +145,6 @@ lastupdated: "2017-10-18"
     ```
     {: pre}
 
-### 在容器服務地區建立精簡叢集
-{: #lite_regions}
-
-您可以在下列地區建立 Kubernetes 精簡叢集：
-  * 亞太地區南部
-  * 歐盟中部
-  * 英國南部
-  * 美國南部
 
 ### 容器服務可用的位置
 {: #locations}
@@ -142,10 +153,11 @@ lastupdated: "2017-10-18"
 
   | 地區| 位置| 城市|
   |--------|----------|------|
+  | 亞太地區北部| hkg02、tok02| 香港、東京|
   | 亞太地區南部| mel01、syd01、syd04| 墨爾本、雪梨|
-  | 歐盟中部| ams03、fra02| 阿姆斯特丹、法蘭克福|
+  | 歐盟中部| ams03、fra02、par01| 阿姆斯特丹、法蘭克福、巴黎|
   | 英國南部| lon02、lon04| 倫敦|
-  | 美國東部| wdc06、wdc07| 華盛頓特區|
+  | 美國東部| tor01、wdc06、wdc07| 多倫多、華盛頓特區|
   | 美國南部| dal10、dal12、dal13| 達拉斯|
 
 ### 使用容器服務 API 指令
@@ -162,6 +174,7 @@ lastupdated: "2017-10-18"
 </br>
 
 若要檢視 API 指令的文件，請將 `swagger-api` 附加至地區的端點以便檢視。
+  * 亞太地區北部：https://ap-north.containers.bluemix.net/swagger-api/
   * 亞太地區南部：https://ap-south.containers.bluemix.net/swagger-api/
   * 歐盟中部：https://eu-central.containers.bluemix.net/swagger-api/
   * 英國南部：https://uk-south.containers.bluemix.net/swagger-api/

@@ -15,7 +15,7 @@
    viewBox="0 0 500 580"
    xml:space="preserve"
    id="svg2"
-   inkscape:version="0.48.5 r10040"
+   inkscape:version="0.91 r13725"
    width="100%"
    height="100%"
    sodipodi:docname="container_ha_region.svg"
@@ -471,15 +471,15 @@
    guidetolerance="10"
    inkscape:pageopacity="0"
    inkscape:pageshadow="2"
-   inkscape:window-width="1680"
-   inkscape:window-height="953"
+   inkscape:window-width="1280"
+   inkscape:window-height="668"
    id="namedview314"
    showgrid="true"
-   inkscape:zoom="1.5852037"
-   inkscape:cx="266.62335"
-   inkscape:cy="222.25989"
-   inkscape:window-x="-9"
-   inkscape:window-y="-9"
+   inkscape:zoom="0.79827586"
+   inkscape:cx="250"
+   inkscape:cy="290"
+   inkscape:window-x="-8"
+   inkscape:window-y="-8"
    inkscape:window-maximized="1"
    inkscape:current-layer="g3329"><inkscape:grid
      type="xygrid"
@@ -689,6 +689,7 @@
 
 
 
+
 <rect
    x="231.02553"
    y="472.23111"
@@ -771,7 +772,7 @@
    sodipodi:cy="285.50531"
    sodipodi:rx="59.122883"
    sodipodi:ry="31.87093"
-   d="m 196.76834,285.50531 a 59.122883,31.87093 0 1 1 -118.245761,0 59.122883,31.87093 0 1 1 118.245761,0 z"
+   d="m 196.76834,285.50531 a 59.122883,31.87093 0 0 1 -59.12288,31.87093 59.122883,31.87093 0 0 1 -59.122881,-31.87093 59.122883,31.87093 0 0 1 59.122881,-31.87093 59.122883,31.87093 0 0 1 59.12288,31.87093 z"
    transform="matrix(1.102055,0,0,0.61277194,179.22517,389.58531)" /><path
    inkscape:connector-curvature="0"
    class="st25"
@@ -807,6 +808,7 @@
    id="text230-1-1"
    style="font-size:11.84632874px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#152934;fill-opacity:1;stroke:none;display:inline;font-family:Helvetica Neue for IBM;-inkscape-font-specification:Helvetica Neue for IBM"
    sodipodi:linespacing="125%">Organização 1</text>
+
 
 
 
@@ -853,6 +855,7 @@
 
 
 
+
 <text
    y="559.04108"
    x="287.26706"
@@ -860,7 +863,10 @@
    class="st11 st12 st13"
    id="text230-1-7-4-0-9-2-1-7-3"
    style="font-size:11.84632874px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#152934;fill-opacity:1;stroke:none;display:inline;font-family:Helvetica Neue for IBM;-inkscape-font-specification:Helvetica Neue for IBM"
-   sodipodi:linespacing="125%">Balanceador de carga para</text>
+   sodipodi:linespacing="125%"><tspan
+     style="font-size:7.49999998px"
+     id="tspan3518">Balanceador de carga para</tspan></text>
+
 
 
 
@@ -872,7 +878,10 @@
    class="st11 st12 st13"
    style="font-size:11.84632874px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#152934;fill-opacity:1;stroke:none;display:inline;font-family:Helvetica Neue for IBM;-inkscape-font-specification:Helvetica Neue for IBM"
    sodipodi:linespacing="125%"
-   id="text3258-2">grupo de contêiner 1</text>
+   id="text3258-2"><tspan
+     style="font-size:7.49999998px"
+     id="tspan3520">grupo de contêiner 1</tspan></text>
+
 
 
 
@@ -884,7 +893,10 @@
    class="st11 st12 st13"
    id="text230-1-7-4-0-9-2-1-0"
    style="font-size:11.84632874px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#152934;fill-opacity:1;stroke:none;display:inline;font-family:Helvetica Neue for IBM;-inkscape-font-specification:Helvetica Neue for IBM"
-   sodipodi:linespacing="125%">Gateway de rede privada</text>
+   sodipodi:linespacing="125%"><tspan
+     style="font-size:9.99999997px"
+     id="tspan3512">Gateway de rede privada</tspan></text>
+
 
 
 
@@ -904,8 +916,9 @@
    id="text230-1-7-4-0-9-5-8"
    style="font-size:11.84632874px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#152934;fill-opacity:1;stroke:none;display:inline;font-family:Helvetica Neue for IBM;-inkscape-font-specification:Helvetica Neue for IBM"
    sodipodi:linespacing="125%"><tspan
-     style="font-weight:normal;fill:#152934;fill-opacity:1;stroke:none;-inkscape-font-specification:Helvetica Neue for IBM"
+     style="font-weight:normal;fill:#152934;fill-opacity:1;stroke:none;-inkscape-font-specification:Helvetica Neue for IBM;font-size:7.50000001px"
      id="tspan3268-5-5">Grupo de contêiner 1</tspan></text>
+
 
 
 
@@ -918,8 +931,9 @@
    id="text230-1-7-4-0-9-5-4-3-61"
    style="font-size:11.84632874px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#152934;fill-opacity:1;stroke:none;display:inline;font-family:Helvetica Neue for IBM;-inkscape-font-specification:Helvetica Neue for IBM"
    sodipodi:linespacing="125%"><tspan
-     style="font-weight:normal;fill:#152934;fill-opacity:1;stroke:none;-inkscape-font-specification:Helvetica Neue for IBM"
+     style="font-weight:normal;fill:#152934;fill-opacity:1;stroke:none;-inkscape-font-specification:Helvetica Neue for IBM;font-size:10.00000002px"
      id="tspan3268-5-8-2-89">Volume 1</tspan></text>
+
 
 
 
@@ -981,7 +995,7 @@
    sodipodi:cy="285.50531"
    sodipodi:rx="59.122883"
    sodipodi:ry="31.87093"
-   d="m 196.76834,285.50531 a 59.122883,31.87093 0 1 1 -118.245761,0 59.122883,31.87093 0 1 1 118.245761,0 z"
+   d="m 196.76834,285.50531 a 59.122883,31.87093 0 0 1 -59.12288,31.87093 59.122883,31.87093 0 0 1 -59.122881,-31.87093 59.122883,31.87093 0 0 1 59.122881,-31.87093 59.122883,31.87093 0 0 1 59.12288,31.87093 z"
    transform="matrix(1.102055,0,0,0.61277194,447.22518,392.49412)" /><path
    inkscape:connector-curvature="0"
    class="st25"
@@ -1033,6 +1047,7 @@
 
 
 
+
 <text
    y="561.93671"
    x="556.48163"
@@ -1040,7 +1055,10 @@
    class="st11 st12 st13"
    id="text230-1-7-4-0-9-2-1-7-3-8"
    style="font-size:11.84632874px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#152934;fill-opacity:1;stroke:none;display:inline;font-family:Helvetica Neue for IBM;-inkscape-font-specification:Helvetica Neue for IBM"
-   sodipodi:linespacing="125%">Balanceador de carga para</text>
+   sodipodi:linespacing="125%"><tspan
+     style="font-size:7.49999998px"
+     id="tspan3514">Balanceador de carga para</tspan></text>
+
 
 
 
@@ -1052,7 +1070,10 @@
    class="st11 st12 st13"
    style="font-size:11.84632874px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#152934;fill-opacity:1;stroke:none;display:inline;font-family:Helvetica Neue for IBM;-inkscape-font-specification:Helvetica Neue for IBM"
    sodipodi:linespacing="125%"
-   id="text3258-2-4">grupo de contêiner 2</text>
+   id="text3258-2-4"><tspan
+     style="font-size:7.49999998px"
+     id="tspan3516">grupo de contêiner 2</tspan></text>
+
 
 
 
@@ -1064,7 +1085,10 @@
    class="st11 st12 st13"
    id="text230-1-7-4-0-9-2-1-0-9"
    style="font-size:11.84632874px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#152934;fill-opacity:1;stroke:none;display:inline;font-family:Helvetica Neue for IBM;-inkscape-font-specification:Helvetica Neue for IBM"
-   sodipodi:linespacing="125%">Gateway de rede privada</text>
+   sodipodi:linespacing="125%"><tspan
+     style="font-size:9.99999997px"
+     id="tspan3510">Gateway de rede privada</tspan></text>
+
 
 
 
@@ -1084,8 +1108,9 @@
    id="text230-1-7-4-0-9-5-8-3"
    style="font-size:11.84632874px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#152934;fill-opacity:1;stroke:none;display:inline;font-family:Helvetica Neue for IBM;-inkscape-font-specification:Helvetica Neue for IBM"
    sodipodi:linespacing="125%"><tspan
-     style="font-weight:normal;fill:#152934;fill-opacity:1;stroke:none;-inkscape-font-specification:Helvetica Neue for IBM"
+     style="font-weight:normal;fill:#152934;fill-opacity:1;stroke:none;-inkscape-font-specification:Helvetica Neue for IBM;font-size:7.50000001px"
      id="tspan3268-5-5-7">Grupo de contêiner 2</tspan></text>
+
 
 
 
@@ -1098,8 +1123,9 @@
    id="text230-1-7-4-0-9-5-4-3-61-8"
    style="font-size:11.84632874px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#152934;fill-opacity:1;stroke:none;display:inline;font-family:Helvetica Neue for IBM;-inkscape-font-specification:Helvetica Neue for IBM"
    sodipodi:linespacing="125%"><tspan
-     style="font-weight:normal;fill:#152934;fill-opacity:1;stroke:none;-inkscape-font-specification:Helvetica Neue for IBM"
+     style="font-weight:normal;fill:#152934;fill-opacity:1;stroke:none;-inkscape-font-specification:Helvetica Neue for IBM;font-size:10.00000002px"
      id="tspan3268-5-8-2-89-8">Volume 2</tspan></text>
+
 
 
 
@@ -1133,6 +1159,7 @@
 
 
 
+
 <path
    style="fill:#152934;fill-opacity:1;stroke:#152934;stroke-width:1.50000024;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker-end:url(#TriangleOutM-89);display:inline"
    d="m 331.02553,432.23139 0.0116,77.39071"
@@ -1153,7 +1180,7 @@
    sodipodi:cy="285.50531"
    sodipodi:rx="59.122883"
    sodipodi:ry="31.87093"
-   d="m 196.76834,285.50531 a 59.122883,31.87093 0 1 1 -118.245761,0 59.122883,31.87093 0 1 1 118.245761,0 z"
+   d="m 196.76834,285.50531 a 59.122883,31.87093 0 0 1 -59.12288,31.87093 59.122883,31.87093 0 0 1 -59.122881,-31.87093 59.122883,31.87093 0 0 1 59.122881,-31.87093 59.122883,31.87093 0 0 1 59.12288,31.87093 z"
    transform="matrix(0.76112662,0,0,0.78714908,361.2599,99.495878)" /><rect
    x="426.87158"
    y="380.78293"
@@ -1174,6 +1201,7 @@
      id="tspan4088-8-2-8">Roteador com</tspan></text>
 
 
+
 <text
    y="326.98862"
    x="442.1936"
@@ -1186,6 +1214,7 @@
      id="tspan4088-8-1-5-5">GoRouter</tspan></text>
 
 
+
 <text
    y="255.14566"
    x="447.44742"
@@ -1196,6 +1225,7 @@
    sodipodi:linespacing="125%"><tspan
      style="fill:#152934;fill-opacity:1;stroke:none"
      id="tspan4088-4-1">Internet</tspan></text>
+
 
 
 <path
@@ -1218,6 +1248,7 @@
      id="tspan4088-8-2-7">firewall</tspan></text>
 
 
+
 <path
    inkscape:connector-curvature="0"
    id="path42355-8-2-0-5-4"
@@ -1230,6 +1261,7 @@
    id="text230-1-1-17"
    style="font-size:11.84632874px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#152934;fill-opacity:1;stroke:none;display:inline;font-family:Helvetica Neue for IBM;-inkscape-font-specification:Helvetica Neue for IBM"
    sodipodi:linespacing="125%">Região 1</text>
+
 <text
    y="490.01099"
    x="619.82074"
@@ -1238,6 +1270,7 @@
    id="text230-1-1-0"
    style="font-size:11.84632874px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#152934;fill-opacity:1;stroke:none;display:inline;font-family:Helvetica Neue for IBM;-inkscape-font-specification:Helvetica Neue for IBM"
    sodipodi:linespacing="125%">Organização 2</text>
+
 </g></g><g
    inkscape:groupmode="layer"
    id="layer2"

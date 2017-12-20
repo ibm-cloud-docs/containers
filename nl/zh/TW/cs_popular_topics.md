@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-17"
+lastupdated: "2017-11-02"
 
 ---
 
@@ -17,14 +17,14 @@ lastupdated: "2017-10-17"
 
 
 # {{site.data.keyword.containershort_notm}} 的熱門主題
-{: #cs_internal}
+{: #cs_popular_topics}
 
 查看容器開發人員感興趣的事情。
 {:shortdesc}
 
 <table>
 <thead>
-<th colspan=2><img src="images/idea.png"/>容器及 Kubernetes 叢集的熱門主題</th>
+<th colspan=2><img src="images/idea.png" alt="構想圖示"/>容器及 Kubernetes 叢集的熱門主題</th>
 </thead>
 <tbody>
 <tr>
@@ -47,6 +47,10 @@ lastupdated: "2017-10-17"
 <tr>
 <td>[更新至 Kubernetes 1.7](cs_versions.html)</td>
 <td>在更新為 Kubernetes 1.7 之前，請先檢閱對叢集所做的變更。</td>
+</tr>
+<tr>
+<td>[叢集的 REST API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://us-south.containers.bluemix.net/swagger)</td>
+<td>檢視 API 文件以管理 {{site.data.keyword.containershort_notm}}。</td>
 </tr>
 </tbody></table>
 

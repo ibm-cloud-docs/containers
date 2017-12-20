@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-20"
+lastupdated: "2017-11-14"
 
 ---
 
@@ -26,15 +26,15 @@ lastupdated: "2017-10-20"
 
 每一课会指导您如何以渐进方式部署同一应用程序的更复杂版本。下图显示了教程中应用程序部署的各个组成部分，但第四部分除外。
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_roadmap.png">![课程组成部分](images/cs_app_tutorial_roadmap.png)</a>
+![课程组成部分](images/cs_app_tutorial_roadmap.png)
 
-Kubernetes 使用多种不同类型的资源使应用程序在集群中启动并开始运行。在 Kubernetes 中，部署与服务一起工作。部署包含应用程序的定义，例如要用于容器的映像以及必须为应用程序公开的端口。创建部署时，会为部署中定义的每个容器创建一个 Kubernetes pod。要使应用程序更具弹性，可以在部署中定义同一应用程序的多个实例，并允许 Kubernetes 自动为您创建副本集。副本集用于监视 pod，并确保始终有所需数量的 pod 启动并在运行。如果其中一个 pod 无响应，那么会自动重新创建该 pod。
+如图中所示，Kubernetes 使用多种不同类型的资源使应用程序在集群中启动并开始运行。在 Kubernetes 中，部署与服务一起工作。部署包含应用程序的定义，例如要用于容器的映像以及必须为应用程序公开的端口。创建部署时，会为部署中定义的每个容器创建一个 Kubernetes pod。要使应用程序更具弹性，可以在部署中定义同一应用程序的多个实例，并允许 Kubernetes 自动为您创建副本集。副本集用于监视 pod，并确保始终有所需数量的 pod 启动并在运行。如果其中一个 pod 无响应，那么会自动重新创建该 pod。
 
 服务会将一些 pod 分组在一起，并提供与这些 pod 的网络连接，以供集群中的其他服务使用，而无需公开每个 pod 的实际专用 IP 地址。可以使用 Kubernetes 服务来使应用程序可供集群内的其他 pod 使用，也可以将应用程序公开到因特网。在本教程中，您将通过一个自动分配给工作程序节点的公共 IP 地址和一个公共端口，使用 Kubernetes 服务从因特网访问正在运行的应用程序。
 
 要使应用程序具有更高可用性，可以在标准集群中创建多个工作程序节点以运行应用程序的更多副本。本教程中未涉及此任务，但请记住这一概念，以便将来改进应用程序可用性时加以运用。
 
-虽然只有其中一个课程涉及将 {{site.data.keyword.Bluemix_notm}} 服务集成到应用程序中，但您可以将这些服务用于任何复杂程度的应用程序。
+虽然只有其中一课涉及将 {{site.data.keyword.Bluemix_notm}} 服务集成到应用程序中，但您可以将这些服务用于任何复杂程度的应用程序。
 
 ## 目标
 
@@ -60,9 +60,12 @@ Kubernetes 使用多种不同类型的资源使应用程序在集群中启动并
 ## 第 1 课：将单实例应用程序部署到 Kubernetes 集群
 {: #cs_apps_tutorial_lesson1}
 
-在本课中，您要将 Hello World 应用程序的单个实例部署到集群中。
+在本课中，您要将 Hello World 应用程序的单个实例部署到集群中。下图包含通过完成本课进行部署的组件。
+{:shortdesc}
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_components1.png">![部署设置](images/cs_app_tutorial_components1.png)</a>
+![部署设置](images/cs_app_tutorial_components1.png)
+
+在上一个教程中，您已具有帐户以及含一个工作程序节点的集群。在本课中，您将配置部署并在工作程序节点的 Korbernees pod 中部署 Hello World 应用程序。要使该应用程序公开可用，请创建 Kubernetes 服务。
 
 
 1.  登录到 {{site.data.keyword.Bluemix_notm}} CLI。根据提示，输入您的 {{site.data.keyword.Bluemix_notm}} 凭证。要指定 {{site.data.keyword.Bluemix_notm}} 区域，请[包含 API 端点](cs_regions.html#bluemix_regions)。
@@ -92,7 +95,7 @@ Kubernetes 使用多种不同类型的资源使应用程序在集群中启动并
         {: screen}
 
     2.  复制并粘贴终端中显示的命令，以设置 `KUBECONFIG` 环境变量。
-    3.  验证已正确设置 `KUBECONFIG` 环境变量。
+    3.  验证是否已正确设置 `KUBECONFIG` 环境变量。
 
         OS X 的示例：
 
@@ -148,10 +151,10 @@ Kubernetes 使用多种不同类型的资源使应用程序在集群中启动并
         ```
         {: pre}
 
-5.  将 [Hello world 应用程序 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/IBM/container-service-getting-started-wt) 的源代码克隆或下载到用户主目录。
+5.  将 [Hello world 应用程序 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/Osthanes/container-service-getting-started-wt) 的源代码克隆或下载到用户主目录。
 
     ```
-    git clone https://github.com/IBM/container-service-getting-started-wt.git
+    git clone https://github.com/Osthanes/container-service-getting-started-wt.git
     ```
     {: pre}
 
@@ -385,14 +388,19 @@ Kubernetes 使用多种不同类型的资源使应用程序在集群中启动并
 
 本课中的命令太多？没错。那么使用配置脚本为您执行其中一些工作怎么样？要为应用程序的第二个版本使用配置脚本，并要通过部署该应用程序的多个实例来创建更高可用性，请继续学习下一课。
 
+
+
 ## 第 2 课：部署和更新更高可用性的应用程序
 {: #cs_apps_tutorial_lesson2}
 
 在本课中，您要将 Hello World 应用程序的三个实例部署到集群中，以实现比应用程序的第一个版本更高的可用性。更高可用性意味着用户访问会在这三个实例之间分布。如果有过多用户尝试访问同一应用程序实例，他们可能会发现响应缓慢。而多个实例可提高对用户的响应速度。在本课中，您还将学习运行状况检查和部署更新可以如何用于 Kubernetes。
+{:shortdesc}
 
+下图包含通过完成本课进行部署的组件。
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_components2.png">![部署设置](images/cs_app_tutorial_components2.png)</a>
+![部署设置](images/cs_app_tutorial_components2.png)
 
+在上一个教程中，您已具有帐户以及含一个工作程序节点的集群。在本课中，您将配置部署并部署 Hello World 应用程序的三个实例。每个实例都会部署在一个 Kubernetes pod 中，作为工作程序节点中副本集的一部分。要使实例公开可用，也请创建 Kubernetes 服务。 
 
 如配置脚本中所定义，Kubernetes 可以使用可用性检查来查看 pod 中的容器是否在运行。例如，这些检查可以发现死锁情况，即应用程序在运行，但无法取得进展。重新启动处于这种状况的容器，有助于使应用程序在有错误的情况下仍能有更高可用性。然后，Kubernetes 会使用就绪性检查来确定容器何时已准备就绪可再次开始接受流量。在 pod 的容器准备就绪时，该 pod 即视为准备就绪。pod 准备就绪后，即会再次启动。在 Stage2 应用程序中，应用程序每 15 秒就会超时一次。通过在配置脚本中配置的运行状况检查，如果运行状况检查发现应用程序有问题，会重新创建容器。
 
@@ -593,8 +601,13 @@ service "hw-demo-service" deleted
 {: #cs_apps_tutorial_lesson3}
 
 在前几课中，应用程序部署为一个工作程序节点中的单独组件。在本课中，您要将应用程序的两个组件部署到集群中，该集群使用您在之前教程中添加到集群的 Watson Tone Analyzer服务。将组件分隔到不同的容器中可确保更新一个组件时不会影响其他组件。然后，您将更新应用程序以使用更多副本将其向上扩展，使其可用性更高。
+{:shortdesc}
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_components3.png">![部署设置](images/cs_app_tutorial_components3.png)</a>
+下图包含通过完成本课进行部署的组件。
+
+![部署设置](images/cs_app_tutorial_components3.png)
+
+在上一个教程中，您已具有帐户以及含一个工作程序节点的集群。在本课中，您将在 {{site.data.keyword.Bluemix_notm}} 帐户中创建 Watson Tone Analyzer 服务的实例，并配置两个部署，其中应用程序的每个组件对应一个部署。每个组件都会部署在工作程序节点的一个 Kubernetes pod 中。要使这两个组件公开可用，也请为每个组件创建一个 Kubernetes 服务。 
 
 
 ### 第 3a 课：部署 Watson Tone Analyzer 应用程序
@@ -918,7 +931,7 @@ service "hw-demo-service" deleted
 
 2.  可选：对 watson-pod 部署重复上述更改。
 
-[测试您的掌握情况并进行测验！![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://bluemix-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
+[测试您的掌握情况并进行测验！![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 
 祝贺您！您已部署了 Watson Tone Analyzer 应用程序。公关公司肯定可以开始使用应用程序的这一部署来着手分析其新闻稿。
 
