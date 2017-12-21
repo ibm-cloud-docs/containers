@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-24"
+lastupdated: "2017-11-28"
 
 ---
 
@@ -91,7 +91,7 @@ Revise las opciones para depurar sus clústeres y encontrar las causas raíz de 
     <tbody>
       <tr>
        <td>Desconocido</td>
-       <td>No se puede acceder al nodo Kubernetes maestro por uno de estos motivos:<ul><li>Ha solicitado una actualización del nodo Kubernetes maestro. El estado del nodo trabajador no se puede recuperar durante la actualización.</li><li>Es posible que tenga un cortafuegos adicional que está protegiendo sus nodos trabajadores o que haya modificado los valores del cortafuegos recientemente. {{site.data.keyword.containershort_notm}} requiere que determinadas direcciones IP y puertos estén abiertos para permitir la comunicación entre el nodo trabajador y el nodo Kubernetes maestro y viceversa. Para obtener más información, consulte [Los nodos de trabajo están bloqueados en un bucle de recarga](#cs_firewall).</li><li>El nodo Kubernetes maestro está inactivo. Para ponerse en contacto con el equipo de soporte de {{site.data.keyword.Bluemix_notm}}, abra una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support).</li></ul></td>
+       <td>No se puede acceder al nodo Kubernetes maestro por uno de estos motivos:<ul><li>Ha solicitado una actualización del nodo Kubernetes maestro. El estado del nodo trabajador no se puede recuperar durante la actualización.</li><li>Es posible que tenga un cortafuegos adicional que está protegiendo sus nodos trabajadores o que haya modificado los valores del cortafuegos recientemente. {{site.data.keyword.containershort_notm}} requiere que determinadas direcciones IP y puertos estén abiertos para permitir la comunicación entre el nodo trabajador y el nodo Kubernetes maestro y viceversa. Para obtener más información, consulte [El cortafuegos impide que los nodos trabajadores se conecten](#cs_firewall).</li><li>El nodo Kubernetes maestro está inactivo. Para ponerse en contacto con el equipo de soporte de {{site.data.keyword.Bluemix_notm}}, abra una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support).</li></ul></td>
       </tr>
       <tr>
         <td>Suministro</td>
@@ -141,7 +141,7 @@ Revise las opciones para depurar sus clústeres y encontrar las causas raíz de 
     <tbody>
       <tr>
         <td>Excepción de infraestructura de {{site.data.keyword.Bluemix_notm}}: En este momento su cuenta no tiene permitido solicitar 'Instancias de cálculo'.</td>
-        <td>Puede que su cuenta de IBM Bluemix Infrastructure (SoftLayer) tenga restringida la solicitud de recursos de cálculo. Para ponerse en contacto con el equipo de soporte de {{site.data.keyword.Bluemix_notm}}, abra una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support).</td>
+        <td>Puede que su cuenta de infraestructura de IBM Cloud (SoftLayer) tenga restringida la solicitud de recursos de cálculo. Para ponerse en contacto con el equipo de soporte de {{site.data.keyword.Bluemix_notm}}, abra una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support).</td>
       </tr>
       <tr>
         <td>Excepción de infraestructura de {{site.data.keyword.Bluemix_notm}}: No se ha podido realizar el pedido. No hay suficientes recursos tras el direccionador 'router_name' para realizar la solicitud para los siguientes invitados: 'worker_id'.</td>
@@ -149,18 +149,18 @@ Revise las opciones para depurar sus clústeres y encontrar las causas raíz de 
       </tr>
       <tr>
         <td>Excepción de infraestructura de {{site.data.keyword.Bluemix_notm}}: No se ha podido obtener la VLAN de red con el id: &lt;vlan id&gt;.</td>
-        <td>El nodo de trabajador no se ha podido suministrar porque no se ha encontrado el ID de VLAN por una de las siguientes razones:<ul><li>Puede que haya especificado el número de VLAN en lugar del ID de VLAN. El número de VLAN tiene 3 ó 4 dígitos, mientras que el ID de VLAN tiene 7 dígitos. Ejecute <code>bx cs vlans &lt;location&gt;</code> para recuperar el ID de VLAN.<li>Es posible que el ID de VLAN no esté asociado a la cuenta de IBM Bluemix Infrastructure (SoftLayer) que está utilizando. Ejecute <code>bx cs vlans &lt;location&gt;</code> ver una lista de los ID de VLAN disponibles para su cuenta. Para cambiar la cuenta de IBM Bluemix Infrastructure (SoftLayer), consulte [bx cs credentials-set](cs_cli_reference.html#cs_credentials_set). </ul></td>
+        <td>El nodo de trabajador no se ha podido suministrar porque no se ha encontrado el ID de VLAN por una de las siguientes razones:<ul><li>Puede que haya especificado el número de VLAN en lugar del ID de VLAN. El número de VLAN tiene 3 ó 4 dígitos, mientras que el ID de VLAN tiene 7 dígitos. Ejecute <code>bx cs vlans &lt;location&gt;</code> para recuperar el ID de VLAN.<li>Es posible que el ID de VLAN no esté asociado a la cuenta de infraestructura de IBM Cloud (SoftLayer) que está utilizando. Ejecute <code>bx cs vlans &lt;location&gt;</code> ver una lista de los ID de VLAN disponibles para su cuenta. Para cambiar la cuenta de infraestructura de IBM Cloud (SoftLayer), consulte [bx cs credentials-set](cs_cli_reference.html#cs_credentials_set). </ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation: La ubicación suministrara para este pedido no es válida. (HTTP 500)</td>
-        <td>Su cuenta de IBM Bluemix Infrastructure (SoftLayer) no está configurada para solicitar recursos de cálculo en el centro de datos seleccionado. Póngase en contacto con el [equipo de soporte de {{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support) para comprobar que la cuenta está correctamente configurada.</td>
+        <td>Su cuenta de infraestructura de IBM Cloud (SoftLayer) no está configurada para solicitar recursos de cálculo en el centro de datos seleccionado. Póngase en contacto con el [equipo de soporte de {{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support) para comprobar que la cuenta está correctamente configurada.</td>
        </tr>
        <tr>
         <td>Excepción de infraestructura de {{site.data.keyword.Bluemix_notm}}: El usuario no tiene los permisos necesarios de la infraestructura de {{site.data.keyword.Bluemix_notm}} para añadir servidores
 
         </br></br>
         Excepción de infraestructura de {{site.data.keyword.Bluemix_notm}}: El elemento 'Item' se debe solicitar con permiso.</td>
-        <td>Es posible que no tenga los permisos necesarios para suministrar un nodo trabajador desde el portafolio de IBM Bluemix Infrastructure (SoftLayer). Consulte [Configuración del acceso al portafolio de IBM Bluemix Infrastructure (SoftLayer) para crear clústeres de Kubernetes estándares](cs_planning.html#cs_planning_unify_accounts).</td>
+        <td>Es posible que no tenga los permisos necesarios para suministrar un nodo trabajador desde el portafolio de infraestructura de IBM Cloud (SoftLayer). Consulte [Configuración del acceso al portafolio de infraestructura de IBM Cloud (SoftLayer) para crear clústeres de Kubernetes estándares](cs_planning.html#cs_planning_unify_accounts).</td>
       </tr>
     </tbody>
   </table>
@@ -229,27 +229,27 @@ Client Version: v1.5.6
 <br />
 
 
-## No se puede conectar con la cuenta de IBM Bluemix Infrastructure (SoftLayer) mientras se crea un clúster
+## No se puede conectar con la cuenta de infraestructura de IBM Cloud (SoftLayer) mientras se crea un clúster
 {: #cs_credentials}
 
 {: tsSymptoms}
 Cuando crea un nuevo clúster de Kubernetes, recibe el siguiente mensaje.
 
 ```
-No se ha podido conectar con la cuenta de IBM Bluemix Infrastructure (SoftLayer). Para crear un clúster estándar, debe tener una cuenta de pago según uso enlazada a una cuenta de IBM Bluemix Infrastructure (SoftLayer) o debe haber utilizado la CLI de IBM
+No se ha podido conectar con la cuenta de IBM infraestructura de Cloud (SoftLayer). Para crear un clúster estándar, debe tener una cuenta de pago según uso enlazada a una cuenta de infraestructura de IBM Cloud (SoftLayer) o debe haber utilizado la CLI de IBM
 {{site.data.keyword.Bluemix_notm}} Container Service para configurar las claves de API de la infraestructura de {{site.data.keyword.Bluemix_notm}}.
 ```
 {: screen}
 
 {: tsCauses}
-Los usuarios con una cuenta de {{site.data.keyword.Bluemix_notm}} que no esté enlazada deben crear una nueva cuenta de pago según uso o deben añadir manualmente las claves de API de IBM Bluemix Infrastructure (SoftLayer) utilizando la CLI de {{site.data.keyword.Bluemix_notm}}.
+Los usuarios con una cuenta de {{site.data.keyword.Bluemix_notm}} que no esté enlazada deben crear una nueva cuenta de pago según uso o deben añadir manualmente las claves de API de infraestructura de IBM Cloud (SoftLayer) utilizando la CLI de {{site.data.keyword.Bluemix_notm}}.
 
 {: tsResolve}
 Para añadir credenciales de la cuenta de {{site.data.keyword.Bluemix_notm}}:
 
-1.  Póngase en contacto con el administrador de IBM Bluemix Infrastructure (SoftLayer) para obtener el nombre de usuario y la clave de API de IBM Bluemix Infrastructure (SoftLayer).
+1.  Póngase en contacto con el administrador de infraestructura de IBM Cloud (SoftLayer) para obtener el nombre de usuario y la clave de API de infraestructura de IBM Cloud (SoftLayer).
 
-    **Nota:** La cuenta de IBM Bluemix Infrastructure (SoftLayer) que utilice debe estar configurada con permisos de super usuario para poder crear correctamente clústeres estándares.
+    **Nota:** La cuenta de infraestructura de IBM Cloud (SoftLayer) que utilice debe estar configurada con permisos de superusuario para poder crear correctamente clústeres estándares.
 
 2.  Añada las credenciales.
 
@@ -261,7 +261,7 @@ Para añadir credenciales de la cuenta de {{site.data.keyword.Bluemix_notm}}:
 3.  Cree un clúster estándar.
 
   ```
-  bx cs cluster-create --location dal10 --public-vlan my_public_vlan_id --private-vlan my_private_vlan_id --machine-type u1c.2x4 --name my_cluster --hardware shared --workers 2
+  bx cs cluster-create --location dal10 --public-vlan my_public_vlan_id --private-vlan my_private_vlan_id --machine-type u2c.2x4 --name my_cluster --hardware shared --workers 2
   ```
   {: pre}
 
@@ -387,8 +387,8 @@ Actualice manualmente la referencia a la dirección IP privada de modo que apunt
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   192.0.2.0.12   203.0.113.144   b1c.4x16       normal    Ready
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   192.0.2.0.16   203.0.113.144   b1c.4x16       deleted    -
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   192.0.2.0.12   203.0.113.144   b2c.4x16       normal    Ready
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   192.0.2.0.16   203.0.113.144   b2c.4x16       deleted    -
   ```
   {: screen}
 
@@ -427,7 +427,7 @@ El nodo suprimido ya no aparece en Calico.
 <br />
 
 
-## Los nodos trabajadores no se pueden conectar
+## El cortafuegos impide conectar nodos de trabajador
 {: #cs_firewall}
 
 {: tsSymptoms}
@@ -465,7 +465,7 @@ Si el proxy kubectl se ejecuta correctamente pero el panel de control no está d
 
 
 {: tsCauses}
-Es posible que tenga un cortafuegos adicional configurado o que se hayan personalizado los valores existentes del cortafuegos en la cuenta de IBM Bluemix Infrastructure (SoftLayer). {{site.data.keyword.containershort_notm}} requiere que determinadas direcciones IP y puertos estén abiertos para permitir la comunicación entre el nodo trabajador y el nodo Kubernetes maestro y viceversa. Otro motivo puede ser que los nodos trabajadores están bloqueados en un bucle de recarga.
+Es posible que tenga un cortafuegos adicional configurado o que se hayan personalizado los valores existentes del cortafuegos en la cuenta de infraestructura de IBM Cloud (SoftLayer). {{site.data.keyword.containershort_notm}} requiere que determinadas direcciones IP y puertos estén abiertos para permitir la comunicación entre el nodo trabajador y el nodo Kubernetes maestro y viceversa. Otro motivo puede ser que los nodos trabajadores están bloqueados en un bucle de recarga.
 
 {: tsResolve}
 Esta tarea precisa de la [política de acceso de administrador](cs_cluster.html#access_ov). Verifique su [política de acceso](cs_cluster.html#view_access) actual.
@@ -481,8 +481,7 @@ Abra los siguientes puertos y direcciones IP en su cortafuegos personalizado.
   {: pre}
 
 2.  En el cortafuegos correspondiente a la conectividad de SALIDA de los nodos trabajadores, permita el tráfico de red de salida desde el nodo trabajador de origen al rango de puertos TCP/UDP de destino 20000-32767 y el puerto 443 para `<each_worker_node_publicIP>`, y las siguientes direcciones IP y grupos de red.
-    - **Importante**: También debe permitir el tráfico de salida al puerto 443 y a todas las ubicaciones entre una región y otra para equilibrar la carga durante el proceso de arranque. Por ejemplo, si el clúster está en el EE.UU. sur, debe permitir el tráfico procedente desde el de 443 a dal10 y dal12 y entre dal10 y dal12.
-    <p>
+    - **Importante**: También debe permitir el tráfico de salida al puerto 443 y a todas las ubicaciones entre una región y otra para equilibrar la carga durante el proceso de arranque. Por ejemplo, si el clúster está en EE.UU. sur, debe permitir el tráfico procedente desde el puerto 443 a las direcciones IP para todas las ubicaciones (dal10, dal12 y dal13).<p>
   <table summary="La primera fila de la tabla abarca ambas columnas. El resto de las filas se deben leer de izquierda a derecha; la ubicación del servidor está en la columna uno y las direcciones IP correspondientes en la columna dos. ">
       <thead>
       <th>Región</th>
@@ -491,14 +490,19 @@ Abra los siguientes puertos y direcciones IP en su cortafuegos personalizado.
       </thead>
     <tbody>
       <tr>
+        <td>AP Norte</td>
+        <td>hkg02<br>tok02</td>
+        <td><code>169.56.132.234</code><br><code>161.202.126.210</code></td>
+       </tr>
+      <tr>
          <td>AP Sur</td>
-         <td>mel01<br>syd01</td>
-         <td><code>168.1.97.67</code><br><code>168.1.8.195</code></td>
+         <td>mel01<br>syd01<br>syd04</td>
+         <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19</code></td>
       </tr>
       <tr>
          <td>UE Central</td>
-         <td>ams03<br>fra02</td>
-         <td><code>169.50.169.110</code><br><code>169.50.56.174</code></td>
+         <td>ams03<br>fra02<br>par01</td>
+         <td><code>169.50.169.110</code><br><code>169.50.56.174</code><br><code>159.8.86.149</code></td>
         </tr>
       <tr>
         <td>UK Sur</td>
@@ -507,8 +511,8 @@ Abra los siguientes puertos y direcciones IP en su cortafuegos personalizado.
       </tr>
       <tr>
         <td>EE.UU. este</td>
-         <td>wdc06<br>wdc07</td>
-         <td><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+         <td>tor01<br>wdc06<br>wdc07</td>
+         <td><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
       </tr>
       <tr>
         <td>EE.UU. Sur</td>
@@ -522,25 +526,31 @@ Abra los siguientes puertos y direcciones IP en su cortafuegos personalizado.
 3.  Permita el tráfico de red de salida de los nodos trabajadores a {{site.data.keyword.registrylong_notm}}:
     - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
     - Sustituya <em>&lt;registry_publicIP&gt;</em> por todas las direcciones de las regiones de registro a las que desea permitir el tráfico:
-      <p>      
+      <p>
 <table summary="La primera fila de la tabla abarca ambas columnas. El resto de las filas se deben leer de izquierda a derecha; la ubicación del servidor está en la columna uno y las direcciones IP correspondientes en la columna dos. ">
-        <thead>
-        <th colspan=2>Direcciones IP de registro de <img src="images/idea.png"/></th>
-        </thead>
+      <thead>
+        <th>Región del contenedor</th>
+        <th>Dirección de registro</th>
+        <th>Dirección IP de registro</th>
+      </thead>
       <tbody>
         <tr>
+          <td>AP Norte, AP Sur</td>
           <td>registry.au-syd.bluemix.net</td>
           <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
         </tr>
         <tr>
+          <td>UE Central</td>
           <td>registry.eu-de.bluemix.net</td>
           <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></td>
          </tr>
          <tr>
+          <td>UK Sur</td>
           <td>registry.eu-gb.bluemix.net</td>
           <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></td>
          </tr>
          <tr>
+          <td>EE.UU. Este, EE.UU. Sur</td>
           <td>registry.ng.bluemix.net</td>
           <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></td>
          </tr>
@@ -553,18 +563,23 @@ Abra los siguientes puertos y direcciones IP en su cortafuegos personalizado.
     - Sustituya <em>&lt;monitoring_publicIP&gt;</em> por todas las direcciones de las regiones de supervisión a las que desea permitir el tráfico:
       <p><table summary="La primera fila de la tabla abarca ambas columnas. El resto de las filas se deben leer de izquierda a derecha; la ubicación del servidor está en la columna uno y las direcciones IP correspondientes en la columna dos. ">
         <thead>
-        <th colspan=2>Direcciones IP públicas de supervisión de <img src="images/idea.png"/></th>
+        <th>Región del contenedor</th>
+        <th>Dirección de supervisión</th>
+        <th>Direcciones IP de supervisión</th>
         </thead>
       <tbody>
         <tr>
+         <td>UE Central</td>
          <td>metrics.eu-de.bluemix.net</td>
          <td><code>159.122.78.136/29</code></td>
         </tr>
         <tr>
+         <td>UK Sur</td>
          <td>metrics.eu-gb.bluemix.net</td>
          <td><code>169.50.196.136/29</code></td>
         </tr>
         <tr>
+          <td>EE.UU. Este, EE.UU. Sur, AP Norte</td>
           <td>metrics.ng.bluemix.net</td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
@@ -576,18 +591,23 @@ Abra los siguientes puertos y direcciones IP en su cortafuegos personalizado.
     - Sustituya <em>&lt;logging_publicIP&gt;</em> por todas las direcciones de las regiones de registro a las que desea permitir el tráfico:
       <p><table summary="La primera fila de la tabla abarca ambas columnas. El resto de las filas se deben leer de izquierda a derecha; la ubicación del servidor está en la columna uno y las direcciones IP correspondientes en la columna dos. ">
         <thead>
-        <th colspan=2>Direcciones IP públicas de registro de <img src="images/idea.png"/></th>
+        <th>Región del contenedor</th>
+        <th>Dirección de registro</th>
+        <th>Direcciones IP de registro</th>
         </thead>
       <tbody>
         <tr>
+         <td>UE Central</td>
          <td>ingest.logging.eu-de.bluemix.net</td>
          <td><code>169.50.25.125</code></td>
         </tr>
         <tr>
+         <td>UK Sur</td>
          <td>ingest.logging.eu-gb.bluemix.net</td>
          <td><code>169.50.115.113</code></td>
         </tr>
         <tr>
+          <td>EE.UU. Este, EE.UU. Sur, AP Norte</td>
           <td>ingest.logging.ng.bluemix.net</td>
           <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
          </tr>
@@ -595,7 +615,7 @@ Abra los siguientes puertos y direcciones IP en su cortafuegos personalizado.
       </table>
 </p>
 
-5. Si tiene un cortafuegos privado, permita los rangos de direcciones IP privadas adecuadas de IBM Bluemix Infrastructure (SoftLayer). Consulte [este enlace](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) a partir de la sección **Red de fondo (privada)**.
+5. Si tiene un cortafuegos privado, permita los rangos de direcciones IP privadas adecuadas de infraestructura de IBM Cloud (SoftLayer). Consulte [este enlace](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) a partir de la sección **Red de fondo (privada)**.
     - Añada todas las [ubicaciones dentro de la región o regiones](cs_regions.html#locations) que está utilizando
     - Tenga en cuenta que debe añadir la ubicación dal01 (centro de datos)
     - Abra los puertos 80 y 443 para permitir el proceso de arranque del clúster
@@ -617,6 +637,80 @@ Estos duplicados no ocasionan interrupciones en el servicio, pero debe eliminar 
 
   ```
   kubectl delete node <node_name1> <node_name2>
+  ```
+  {: pre}
+
+<br />
+
+
+## Los registros no aparecen
+{: #cs_no_logs}
+
+{: tsSymptoms}
+Al acceder al panel de control de Kibana, los registros no se visualizan.
+
+{: tsCauses}
+Posibles motivos por los que los registros no aparecen:<br/><br/>
+    A. El clúster no se encuentra en estado `Normal`.<br/><br/>
+    B. Se ha alcanzado el límite de almacenamiento de registro.<br/><br/>
+    C. Si ha especificado un espacio durante la creación del clúster, el propietario de la cuenta no tiene permisos de gestor, desarrollador o auditor para el espacio en cuestión.<br/><br/>
+    D. Todavía no se han producido sucesos que desencadenen registros en el pod.<br/><br/>
+
+{: tsResolve}
+Revise las siguientes opciones siguientes para resolver cada una de las posibles razones por las que puede que los registros no aparezcan:
+
+A. Para comprobar el estado del clúster, consulte [Depuración de clústeres](cs_troubleshoot.html#debug_clusters).<br/><br/>
+B. Para aumentar los límites del almacenamiento de registros, consulte la documentación de [{{site.data.keyword.loganalysislong_notm}}](https://console.bluemix.net/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs).<br/><br/>
+C. Para cambiar los permisos de acceso de {{site.data.keyword.containershort_notm}} para el propietario de la cuenta, consulte [Gestión del acceso al clúster](cs_cluster.html#cs_cluster_user). Cuando se cambian los permisos, los registros pueden tardar hasta 24 horas en aparecer.<br/><br/>
+D. Para desencadenar el registro de un suceso, puede desplegar Noisy, un pod de muestra que produce varios sucesos de registro, en un nodo trabajador en el clúster.<br/>
+  1. [Defina como objetivo de la CLI](cs_cli_install.html#cs_cli_configure) un clúster donde desee iniciar los registros de producción.
+
+  2. Cree el archivo de configuración `deploy-noisy.yaml`.
+
+      ```
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        name: noisy
+      spec:
+        containers:
+        - name: noisy
+          image: ubuntu:16.04
+          command: ["/bin/sh"]
+          args: ["-c", "while true; do sleep 10; echo 'Hello world!'; done"]
+          imagePullPolicy: "Always"
+        ```
+        {: codeblock}
+
+  3. Ejecute el archivo de configuración en el contexto del clúster.
+
+        ```
+        kubectl apply -f <filepath_to_noisy>
+        ```
+        {:pre}
+
+  4. Después de unos minutos, verá los registros en el panel. Para acceder al panel de control de Kibana, vaya a uno de los siguientes URL y seleccione la cuenta de {{site.data.keyword.Bluemix_notm}} en la que ha creado el clúster. Si ha especificado un espacio durante la creación del clúster, vaya al espacio.
+        - EE.UU. Sur y EE.UU. este: https://logging.ng.bluemix.net
+        - UK-Sur: https://logging.eu-gb.bluemix.net
+        - EU-Central: https://logging.eu-de.bluemix.net
+
+<br />
+
+
+## El panel de control de Kubernetes no muestra los gráficos de utilización
+{: #cs_dashboard_graphs}
+
+{: tsSymptoms}
+Al acceder al panel de control de Kubernetes, los gráficos de utilización no se visualizan.
+
+{: tsCauses}
+En ocasiones después de actualizar un clúster o reiniciar un nodo trabajador, el pod `kube-dashboard` no se actualiza.
+
+{: tsResolve}
+Suprima el pod `kube-dashboard` para forzar un reinicio. El pod se volverá a crear con políticas RBAC para acceder a Heapster para obtener información de utilización.
+
+  ```
+  kubectl delete pod -n kube-system $(kubectl get pod -n kube-system --selector=k8s-app=kubernetes-dashboard -o jsonpath='{.items..metadata.name}')
   ```
   {: pre}
 
@@ -817,7 +911,7 @@ Para resolver el problema del servicio equilibrador de carga:
 {: #cs_calico_fails}
 
 {: tsSymptoms}
-Cuando recupera el `<ETCD_URL>` para [añadir políticas de red](cs_security.html#adding_network_policies), obtiene un mensaje de error `calico-config not found`.
+Cuando recupere el `<ETCD_URL>` para [añadir políticas de red](cs_security.html#adding_network_policies), obtiene un mensaje de error `calico-config not found`.
 
 {: tsCauses}
 El clúster no está al nivel de (Kubernetes versión 1.7) [cs_versions.html] o posterior.
@@ -845,36 +939,6 @@ Cuando recupere el `<ETCD_URL>`, continúe con los pasos que figuran en (Adició
 
 <br />
 
-
-## Problemas conocidos
-{: #cs_known_issues}
-
-Información sobre los problemas conocidos.
-{: shortdesc}
-
-### Clústeres
-{: #ki_clusters}
-
-<dl>
-  <dt>Las apps de Cloud Foundry del mismo espacio de {{site.data.keyword.Bluemix_notm}} no pueden acceder a un clúster</dt>
-    <dd>Cuando se crea un clúster de Kubernetes, el clúster se crea a nivel de cuenta y no utiliza el espacio, excepto cuando se enlazan servicios de {{site.data.keyword.Bluemix_notm}}. Si tiene una app de Cloud Foundry a la que desea que el clúster acceda, debe poner la app de Cloud Foundry a disposición del público o debe poner la app en el clúster [a disposición del público](cs_planning.html#cs_planning_public_network).</dd>
-  <dt>El servicio NodePort del panel de control de Kube se ha inhabilitado</dt>
-    <dd>Por motivos de seguridad, el servicio NodePort del panel de control de Kubernetes se ha inhabilitado. Para acceder al panel de control de Kubernetes, ejecute el siguiente mandato.</br><pre class="codeblock"><code>kubectl proxy</code></pre></br>Luego puede acceder al panel de control de Kubernetes en `http://localhost:8001/ui`.</dd>
-  <dt>Limitaciones con el tipo de servicio del equilibrador de carga</dt>
-    <dd><ul><li>No puede utilizar el equilibrio de carga en VLAN privadas.<li>No puede utilizar las anotaciones de servicio service.beta.kubernetes.io/external-traffic y
-service.beta.kubernetes.io/healthcheck-nodeport. Para obtener más información sobre estas anotaciones, consulte la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tutorials/services/source-ip/).</ul></dd>
-  <dt>El escalado automático horizontal no funciona en algunos clústeres</dt>
-    <dd>Por razones de seguridad, se cierra el puerto estándar (10255) que utiliza Heapster en todos los nodos trabajadores de los clústeres antiguos. Puesto que este puerto está cerrado, Heapster no puede informar de métricas para los nodos trabajadores y el escalado automático horizontal no puede funcionar tal como se indica en [Escalado automático de pod horizontal![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) en la documentación de Kubernetes. Cree otro clúster para evitar este problema.</dd>
-</dl>
-
-### Almacén persistente
-{: #persistent_storage}
-
-El mandato `kubectl describe <pvc_name>` muestra **ProvisioningFailed** para una reclamación de volumen permanente:
-<ul><ul>
-<li>Cuando se crea una reclamación de volumen permanente, no hay ningún volumen permanente disponible, por lo que Kubernetes devuelve el mensaje **ProvisioningFailed**.
-<li>Cuando el volumen permanente se crea y se enlaza a la reclamación, Kubernetes devuelve el mensaje **ProvisioningSucceeded**. Este proceso puede tardar unos minutos.
-</ul></ul>
 
 ## Obtención de ayuda y soporte
 {: #ts_getting_help}

@@ -81,7 +81,7 @@ Para instalar las CLI:
 4.  Instale el plug-in de {{site.data.keyword.containershort_notm}} para crear clústeres de Kubernetes y gestionar nodos trabajadores. Para ejecutar mandatos del plug-in de {{site.data.keyword.containershort_notm}}, utilice el prefijo `bx cs`.
 
     ```
-    bx plugin install container-service -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-service -r Bluemix
     ```
     {: pre}
 
@@ -128,7 +128,7 @@ Para instalar las CLI:
 6. Para configurar y gestionar un repositorio de imágenes privadas en {{site.data.keyword.registryshort_notm}}, instale el plugin de registro de {{site.data.keyword.registryshort_notm}} Containers. Para ejecutar mandatos de registro, utilice el prefijo `bx cr`.
 
     ```
-    bx plugin install container-registry -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-registry -r Bluemix
     ```
     {: pre}
 
@@ -285,6 +285,6 @@ Kubernetes como variable de entorno.
 
 ## ¿Qué es lo siguiente?
 
-* [Probar sus conocimientos y responder a un cuestionario.![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://bluemix-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
+* [Probar sus conocimientos y responder a un cuestionario.![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
 
 * Probar la [Guía de aprendizaje: Despliegue de apps en clústeres de Kubernetes en {{site.data.keyword.containershort_notm}}](cs_tutorials_apps.html#cs_apps_tutorial) para desplegar la app de la empresa PR en el clúster que ha creado.

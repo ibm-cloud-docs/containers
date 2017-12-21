@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-20"
+lastupdated: "2017-11-14"
 
 ---
 
@@ -24,11 +24,11 @@ Esta segunda guía de aprendizaje continúa mostrando cómo puede desplegar una 
 
 En este caso de ejemplo, el desarrollador de apps de la empresa PR despliega una versión de Hello World de la app en el clúster de Kubernetes que el administrador de la red ha creado en la [primera guía de aprendizaje](cs_tutorials.html#cs_cluster_tutorial).
 
-En cada lección aprenderá a desplegar versiones cada vez más complicadas de la misma app. El diagrama muestra los componentes de la guía de aprendizaje de despliegues de apps, excepto la cuarta parte.
+En cada lección aprenderá a desplegar versiones cada vez más complicadas de la misma app.  El diagrama muestra los componentes de la guía de aprendizaje de despliegues de apps, excepto la cuarta parte.
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_roadmap.png">![Componentes de la lección](images/cs_app_tutorial_roadmap.png)</a>
+![Componentes de la lección](images/cs_app_tutorial_roadmap.png)
 
-Kubernetes utiliza varios tipos de recursos para configurar y ejecutar sus apps en los clústeres. En Kubernetes, los despliegues y los servicios trabajan conjuntamente. Los despliegues incluyen las definiciones de la app, como por ejemplo la imagen que se utilizará para el contenedor y el puerto que se debe exponer para la app. Cuando crea un despliegue, se crea un pod de Kubernetes para cada contenedor que haya definido en el despliegue. Para que la app resulte más resistente, puede definir varias instancias de la misma app en su despliegue y dejar que Kubernetes cree automáticamente una réplica. El conjunto de réplicas supervisa los pods y garantiza que el número deseado de pods están activos y en ejecución en todo momento. Si uno de los pods deja de responder, el pod se vuelve a crear automáticamente.
+Tal como ilustra el diagrama, Kubernetes utiliza varios tipos de recursos para configurar y ejecutar sus apps en los clústeres. En Kubernetes, los despliegues y los servicios trabajan conjuntamente. Los despliegues incluyen las definiciones de la app, como por ejemplo la imagen que se utilizará para el contenedor y el puerto que se debe exponer para la app. Cuando crea un despliegue, se crea un pod de Kubernetes para cada contenedor que haya definido en el despliegue. Para que la app resulte más resistente, puede definir varias instancias de la misma app en su despliegue y dejar que Kubernetes cree automáticamente una réplica. El conjunto de réplicas supervisa los pods y garantiza que el número deseado de pods están activos y en ejecución en todo momento. Si uno de los pods deja de responder, el pod se vuelve a crear automáticamente.
 
 Los servicios agrupan un conjunto de pods y proporciona conexión de red a estos pods para otros servicios del clúster sin exponer la dirección IP privada real de cada pod. Puede utilizar los servicios de Kubernetes para poner una app a disposición de otros pods dentro del clúster o para exponer una app en Internet. En esta guía de aprendizaje, utilizará un servicio de Kubernetes para acceder a la app en ejecución desde Internet utilizando una dirección IP pública que se asigna automáticamente a un nodo trabajador y un puerto público.
 
@@ -60,13 +60,16 @@ Desarrolladores de software y administradores de la red que nunca antes han desp
 ## Lección 1: Despliegue de apps de una sola instancia en clústeres de Kubernetes
 {: #cs_apps_tutorial_lesson1}
 
-En esta lección, desplegará una única instancia de la app Hello World en un clúster.
+En esta lección, desplegará una única instancia de la app Hello World en un clúster. El siguiente diagrama incluye los componentes que desplegará al completar esta lección.
+{:shortdesc}
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_components1.png">![Configuración del despliegue](images/cs_app_tutorial_components1.png)</a>
+![Configuración del despliegue](images/cs_app_tutorial_components1.png)
+
+En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un nodo trabajador. En esta lección, debe configurar un despliegue y desplegar la app Hello World en un contenedor Kubernetes en el nodo trabajador. Para hacerlo accesible a nivel público, puede crear un servicio Kubernetes.
 
 
 1.  Inicie la sesión en la CLI de {{site.data.keyword.Bluemix_notm}}. Escriba
-sus credenciales de {{site.data.keyword.Bluemix_notm}} cuando se le solicite. Para especificar una región de {{site.data.keyword.Bluemix_notm}}, [incluya el punto final de la API](cs_regions.html#bluemix_regions).
+sus credenciales de {{site.data.keyword.Bluemix_notm}} cuando se le solicite. Para especificar una región de {{site.data.keyword.Bluemix_notm}}, [incluya el punto final de API](cs_regions.html#bluemix_regions).
 
     ```
     bx login
@@ -152,10 +155,10 @@ Docker y luego vuelva a la CLI en la que ha definido la variable de sesión `KUB
         ```
         {: pre}
 
-5.  Clone o descargue el código fuente de la [app Hello world![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/IBM/container-service-getting-started-wt) en el directorio inicial de su usuario.
+5.  Clone o descargue el código fuente de la [app Hello world![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/Osthanes/container-service-getting-started-wt) en el directorio inicial de su usuario.
 
     ```
-    git clone https://github.com/IBM/container-service-getting-started-wt.git
+    git clone https://github.com/Osthanes/container-service-getting-started-wt.git
     ```
     {: pre}
 
@@ -391,14 +394,20 @@ World esté realmente disponible a nivel público.
 
 ¿Ha utilizado demasiados mandatos en esta lección? Es cierto. ¿Qué le parece si ahora utilizamos un script de configuración para realizar automáticamente parte del trabajo? Para utilizar un script de configuración para la segunda versión de la app y para aumentar la disponibilidad desplegando varias instancias de dicha app, continúe en la lección siguiente.
 
+
+
 ## Lección 2: Despliegue y actualización de apps con mayor disponibilidad
 {: #cs_apps_tutorial_lesson2}
 
 En esta lección, desplegará tres instancias de la app Hello World en un clúster para aumentar la disponibilidad con respecto a la primera versión de la app. Mayor disponibilidad significa que el acceso de usuario se divide entre las tres instancias. Cuando hay demasiados usuarios que intentan acceder a la misma instancia de la app, es posible que el tiempo de respuesta sea lento. Varias instancias puede significar mejores tiempos de respuesta para los usuarios. En esta lección, también aprenderá cómo funcionan las comprobaciones de estado y las actualizaciones de despliegue con Kubernetes.
+{:shortdesc}
+
+El siguiente diagrama incluye los componentes que desplegará al completar esta lección.
 
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_components2.png">![Configuración del despliegue](images/cs_app_tutorial_components2.png)</a>
+![Configuración del despliegue](images/cs_app_tutorial_components2.png)
 
+En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un nodo trabajador. En esta lección, debe configurar un despliegue y desplegar tres instancias de la app Hello World. Cada instancia se despliega en un pod de Kubernetes como parte de un conjunto de réplicas del nodo trabajador. Para hacerlo accesible a nivel público, puede crear un servicio Kubernetes. 
 
 Tal como se define en el script de configuración, Kubernetes puede utilizar una comprobación de disponibilidad para ver si un contenedor de un pod se está o no ejecutando. Por ejemplo, estas comprobaciones pueden detectar puntos muertos, en los que una app se está ejecutando pero no progresa. Reiniciar un contenedor que está en esta condición puede ayudar a mejorar la disponibilidad de la app a pesar de los errores. Luego Kubernetes utiliza la comprobación de preparación para ver si un contenedor está preparado para empezar de nuevo a aceptar tráfico. Se considera que un pod está preparado cuando su contenedor está preparado. Cuando el pod está preparado, se inicia de nuevo. En la app Stage2, cada 15 segundos se agota el tiempo de espera de la app. Con una comprobación de estado configurada en el script de configuración, los contenedores se vuelven a crear si la comprobación de estado encuentra un problema con una app.
 
@@ -597,8 +606,14 @@ service "hw-demo-service" deleted
 {: #cs_apps_tutorial_lesson3}
 
 En las lecciones anteriores, las apps se han desplegado como componentes únicos de un nodo trabajador. En esta lección, desplegará dos componentes de una app en un clúster y utiliza el servicio Watson Tone Analyzer que ha añadido al clúster en la guía de aprendizaje anterior. La separación de componentes en distintos contenedores garantiza que puede actualizar uno sin que afecte a los otros. A continuación, actualizará la app para ampliarla con más réplicas a fin de aumentar su disponibilidad.
+{:shortdesc}
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_components3.png">![Configuración del despliegue](images/cs_app_tutorial_components3.png)</a>
+El siguiente diagrama incluye los componentes que desplegará al completar esta lección.
+
+
+![Configuración del despliegue](images/cs_app_tutorial_components3.png)
+
+En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un nodo trabajador. En esta lección, se crea una instancia del servicio Watson Tone Analyzer en la cuenta de {{site.data.keyword.Bluemix_notm}} y se configuran dos despliegues, uno por cada componente de la app. Cada componente se despliega en un pod de Kubernetes del nodo trabajador. Para hacerlos accesibles a nivel público, también puede crear un servicio Kubernetes para cada componente. 
 
 
 ### Lección 3a: Despliegue de la app Watson Tone Analyzer
@@ -919,7 +934,7 @@ Mientras un despliegue se está ejecutando, puede editar el despliegue para camb
 
 2.  Opcional: Repita los cambios para el despliegue de watson-pod.
 
-[Probar sus conocimientos y responder a un cuestionario.![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://bluemix-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
+[Probar sus conocimientos y responder a un cuestionario.![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 
 ¡Enhorabuena! Ha desplegado la app Watson Tone Analyzer. La empresa PR puede empezar definitivamente a utilizar este despliegue de la app para empezar a analizar sus notas de prensa.
 

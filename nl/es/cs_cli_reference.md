@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-24"
+lastupdated: "2017-11-28"
 
 ---
 
@@ -32,52 +32,65 @@ Consulte estos mandatos para crear y gestionar clústeres.
     <th colspan=5>Mandatos para crear clústeres en {{site.data.keyword.Bluemix_notm}}</th>
  </thead>
  <tbody>
+  <tr>
+    <td>[bx cs albs](#cs_albs)</td>
+    <td>[bx cs alb-configure](#cs_alb_configure)</td>
+    <td>[bx cs alb-get](#cs_alb_get)</td>
+    <td>[bx cs alb-types](#cs_alb_types)</td>
+    <td>[bx cs cluster-config](#cs_cluster_config)</td>
+  </tr>
  <tr>
-    <td>[bx cs cluster-config](cs_cli_reference.html#cs_cluster_config)</td>
-    <td>[bx cs cluster-create](cs_cli_reference.html#cs_cluster_create)</td>
-    <td>[bx cs cluster-get](cs_cli_reference.html#cs_cluster_get)</td>
-    <td>[bx cs cluster-rm](cs_cli_reference.html#cs_cluster_rm)</td>
-    <td>[bx cs cluster-service-bind](cs_cli_reference.html#cs_cluster_service_bind)</td>
+    <td>[bx cs cluster-create](#cs_cluster_create)</td>
+    <td>[bx cs cluster-get](#cs_cluster_get)</td>
+    <td>[bx cs cluster-rm](#cs_cluster_rm)</td>
+    <td>[bx cs cluster-service-bind](#cs_cluster_service_bind)</td>
+    <td>[bx cs cluster-service-unbind](#cs_cluster_service_unbind)</td>
  </tr>
  <tr>
-    <td>[bx cs cluster-service-unbind](cs_cli_reference.html#cs_cluster_service_unbind)</td>
-    <td>[bx cs cluster-services](cs_cli_reference.html#cs_cluster_services)</td>
-    <td>[bx cs cluster-subnet-add](cs_cli_reference.html#cs_cluster_subnet_add)</td>
-    <td>[bx cs cluster-subnet-create](cs_cli_reference.html#cs_cluster_subnet_create)</td>
-    <td>[bx cs cluster-user-subnet-add](cs_cli_reference.html#cs_cluster_user_subnet_add)</td>
+    <td>[bx cs cluster-services](#cs_cluster_services)</td>
+    <td>[bx cs cluster-subnet-add](#cs_cluster_subnet_add)</td>
+    <td>[bx cs cluster-subnet-create](#cs_cluster_subnet_create)</td>
+    <td>[bx cs cluster-user-subnet-add](#cs_cluster_user_subnet_add)</td>
+    <td>[bx cs cluster-user-subnet-rm](#cs_cluster_user_subnet_rm)</td>
  </tr>
  <tr>
-   <td>[bx cs cluster-user-subnet-rm](cs_cli_reference.html#cs_cluster_user_subnet_rm)</td>
-   <td>[bx cs cluster-update](cs_cli_reference.html#cs_cluster_update)</td>
-   <td>[bx cs clusters](cs_cli_reference.html#cs_clusters)</td>
-   <td>[bx cs credentials-set](cs_cli_reference.html#cs_credentials_set)</td>
-   <td>[bx cs credentials-unset](cs_cli_reference.html#cs_credentials_unset)</td>
+    <td>[bx cs cluster-update](#cs_cluster_update)</td>
+    <td>[      bx cs clusters
+      ](#cs_clusters)</td>
+    <td>[bx cs credentials-set](#cs_credentials_set)</td>
+    <td>[  bx cs credentials-unset
+  ](#cs_credentials_unset)</td>
+    <td>[  bx cs help
+  ](#cs_help)</td>
  </tr>
  <tr>
-    <td>[bx cs help](cs_cli_reference.html#cs_help)</td>
-    <td>[bx cs init](cs_cli_reference.html#cs_init)</td>
-    <td>[bx cs locations](cs_cli_reference.html#cs_datacenters)</td>
-    <td>[bx cs logging-config-create](cs_cli_reference.html#cs_logging_create)</td>
+    <td>[        bx cs init
+        ](#cs_init)</td>
+    <td>[bx cs kube-versions](#cs_kube_versions)</td>
+    <td>[        bx cs locations
+        ](#cs_datacenters)</td>
+    <td>[bx cs logging-config-create](#cs_logging_create)</td>
+    <td>[bx cs logging-config-get](#cs_logging_get)</td>
  </tr>
  <tr>
-   <td>[bx cs logging-config-get](cs_cli_reference.html#cs_logging_get)</td>
-   <td>[bx cs logging-config-rm](cs_cli_reference.html#cs_logging_rm)</td>
-   <td>[bx cs logging-config-update](cs_cli_reference.html#cs_logging_update)</td>
-   <td>[bx cs machine-types](cs_cli_reference.html#cs_machine_types)</td>
-   <td>[bx cs subnets](cs_cli_reference.html#cs_subnets)</td>
+    <td>[bx cs logging-config-rm](#cs_logging_rm)</td>
+    <td>[bx cs logging-config-update](#cs_logging_update)</td>
+    <td>[bx cs machine-types](#cs_machine_types)</td>
+    <td>[    bx cs subnets
+    ](#cs_subnets)</td>
+    <td>[bx cs vlans](#cs_vlans)</td>
  </tr>
  <tr>
-   <td>[bx cs vlans](cs_cli_reference.html#cs_vlans)</td>
-   <td>[bx cs webhook-create](cs_cli_reference.html#cs_webhook_create)</td>
-   <td>[bx cs worker-add](cs_cli_reference.html#cs_worker_add)</td>
-   <td>[bx cs worker-rm](cs_cli_reference.html#cs_worker_rm)</td>
-   <td>[bx cs worker-update](cs_cli_reference.html#cs_worker_update)</td>
+    <td>[bx cs webhook-create](#cs_webhook_create)</td>
+    <td>[bx cs worker-add](#cs_worker_add)</td>
+    <td>[bx cs worker-get](#cs_worker_get)</td>
+    <td>[bx cs worker-rm](#cs_worker_rm)</td>
+    <td>[bx cs worker-update](#cs_worker_update)</td>
  </tr>
  <tr>
-    <td>[bx cs workers](cs_cli_reference.html#cs_workers)</td>
-    <td>[bx cs worker-get](cs_cli_reference.html#cs_worker_get)</td>
-    <td>[bx cs worker-reboot](cs_cli_reference.html#cs_worker_reboot)</td>
-    <td>[bx cs worker-reload](cs_cli_reference.html#cs_worker_reload)</td>
+    <td>[bx cs worker-reboot](#cs_worker_reboot)</td>
+    <td>[bx cs worker-reload](#cs_worker_reload)</td>
+    <td>[bx cs workers](#cs_workers)</td>
  </tr>
  </tbody>
  </table>
@@ -89,9 +102,113 @@ bx plugin list
 ```
 {: pre}
 
-
 ## Mandatos bx cs
 {: #cs_commands}
+
+
+### bx cs albs --cluster CLUSTER
+{: #cs_albs}
+
+Visualice el estado de todos los equilibradores de carga de aplicación (ALB) de un clúster. Los ALB también se denominan controladores de Ingress. Si no se devuelve ningún ID de ALB, significa que el clúster no tiene subred portátil. Puede [crear](#cs_cluster_subnet_create) o [añadir](#cs_cluster_subnet_add) subredes a un clúster.
+
+<strong>Opciones del mandato</strong>:
+
+   <dl>
+   <dt><code><em>--cluster </em>CLUSTER</code></dt>
+   <dd>El nombre o ID del clúster en el que se listan los equilibradores de carga de las aplicaciones. Este valor es obligatorio.</dd>
+   </dl>
+
+**Ejemplo**:
+
+  ```
+  bx cs albs --cluster mycluster
+  ```
+  {: pre}
+
+### bx cs alb-configure --albID ALB_ID [--enable][--disable][--user-ip USERIP]
+{: #cs_alb_configure}
+
+Habilite o inhabilite un equilibrador de carga de aplicación (ALB), también denominado controlador de Ingress, en el clúster estándar.El equilibrador de carga aplicación pública está habilitado de forma predeterminada.
+
+**Opciones del mandato**:
+
+   <dl>
+   <dt><code><em>--albID </em>ALB_ID</code></dt>
+   <dd>El ID de un alb. Ejecute <code>bx cs albs <em>--cluster </em>CLUSTER</code> para ver los ID para los ALB de un clúster. Este valor es obligatorio.</dd>
+
+   <dt><code>--enable</code></dt>
+   <dd>Incluya este distintivo para habilitar un ALB en un clúster.</dd>
+
+   <dt><code>--disable</code></dt>
+   <dd>Incluya este distintivo para inhabilitar un ALB en un clúster.</dd>
+
+   <dt><code>--user-ip <em>USER_IP</em></code></dt>
+   <dd>
+
+   <ul>
+    <li>Este parámetro está disponible solo para un alb privado.</li>
+    <li>El ALB privado se despliega con una dirección IP de una subred privada proporcionada por un usuario. Si no se proporciona la dirección IP, ALB se despliega con una dirección IP aleatoria de una subred privada en la infraestructura de IBM Cloud (SoftLayer).</li>
+   </ul>
+   </dd>
+   </dl>
+
+**Ejemplos**:
+
+  Ejemplo para habilitar un ALB:
+
+  ```
+  bx cs alb-configure --albID my_alb_id --enable
+  ```
+  {: pre}
+
+  Ejemplo para inhabilitar un ALB:
+
+  ```
+  bx cs alb-configure --albID my_alb_id --disable
+  ```
+  {: pre}
+
+  Ejemplo para habilitar un ALB con una dirección IP proporcionada por un usuario:
+
+  ```
+  bx cs alb-configure --albID my_private_alb_id --enable --user-ip user_ip
+  ```
+  {: pre}
+
+### bx cs alb-get --albID ALB_ID
+{: #cs_alb_get}
+
+Visualice los detalles de un equilibrador de carga aplicación (ALB).
+
+<strong>Opciones del mandato</strong>:
+
+   <dl>
+   <dt><code><em>--albID </em>ALB_ID</code></dt>
+   <dd>El ID de un ALB. Ejecute <code>bx cs albs --cluster <em>CLUSTER</em></code> para ver los ID de los albs en un clúster. Este valor es obligatorio.</dd>
+   </dl>
+
+**Ejemplo**:
+
+  ```
+  bx cs alb-get --albID ALB_ID
+  ```
+  {: pre}
+
+### bx cs alb-types
+{: #cs_alb_types}
+
+Visualice los tipos de equilibrador de carga de aplicaciones que están soportados en la región.
+
+<strong>Opciones del mandato</strong>:
+
+   Ninguno
+
+**Ejemplo**:
+
+  ```
+  bx cs alb-types
+  ```
+  {: pre}
 
 ### bx cs cluster-config CLUSTER [--admin][--export]
 {: #cs_cluster_config}
@@ -106,7 +223,7 @@ Después de iniciar una sesión, descargue certificados y datos de configuració
 
    <dt><code>--admin</code></dt>
    <dd>Descargar los certificados TLS y archivos de permisos para el rol de superusuario. Puede utilizar los certificados para automatizar las tareas de un clúster sin tener que volverse a autenticar. Los archivos se descargan en `<user_home_directory>/.bluemix/plugins/container-service/clusters/<cluster_name>-admin`. Este valor es opcional.</dd>
-   
+
    <dt><code>--export</code></dt>
    <dd>Descargar los datos de configuración y certificados de Kubernetes sin ningún mensaje aparte del mandato de exportación. Como no se muestran mensajes, puede utilizar este distintivo cuando cree scripts automatizados. Este valor es opcional.</dd>
    </dl>
@@ -120,7 +237,7 @@ bx cs cluster-config my_cluster
 
 
 
-### bx cs cluster-create [--file FILE_LOCATION][--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--no-subnet][--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN][--workers WORKER]
+### bx cs cluster-create [--file FILE_LOCATION][--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH][--no-subnet] [--private-vlan PRIVATE_VLAN][--public-vlan PUBLIC_VLAN] [--workers WORKER]
 {: #cs_cluster_create}
 
 Para crear un clúster en la organización.
@@ -130,22 +247,27 @@ Para crear un clúster en la organización.
 <dl>
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
 
-<dd>La vía de acceso al archivo YAML para crear el clúster estándar. En lugar de definir las características de su clúster mediante las opciones que se proporcionan en este mandato, puede utilizar un archivo YAML.  Este valor es opcional para clústeres estándar y no está disponible para clústeres lite. <p><strong>Nota:</strong> Si especifica la misma opción en el mandato y como parámetro en el archivo YAML, el valor en el mandato prevalece sobre el valor del archivo YAML. Por ejemplo, supongamos que define una ubicación en el archivo YAML y utiliza la opción <code>--location</code> en el mandato; el valor que especifique en la opción del mandato prevalece sobre el valor del archivo YAML.
+<dd>La vía de acceso al archivo YAML para crear el clúster estándar. En lugar de definir las características de su clúster mediante las opciones que se proporcionan en este mandato, puede utilizar un archivo YAML.  Este valor es opcional para clústeres estándar y no está disponible para clústeres lite.
+
+<p><strong>Nota:</strong> Si especifica la misma opción en el mandato y como parámetro en el archivo YAML, el valor en el mandato prevalece sobre el valor del archivo YAML. Por ejemplo, supongamos que define una ubicación en el archivo YAML y utiliza la opción <code>--location</code> en el mandato; el valor que especifique en la opción del mandato prevalece sobre el valor del archivo YAML.
 
 <pre class="codeblock">
 <code>name: <em>&lt;cluster_name&gt;</em>
 location: <em>&lt;location&gt;</em>
+no-subnet: <em>&lt;no-subnet&gt;</em>
 machine-type: <em>&lt;machine_type&gt;</em>
 private-vlan: <em>&lt;private_vlan&gt;</em>
 public-vlan: <em>&lt;public_vlan&gt;</em>
 hardware: <em>&lt;shared_or_dedicated&gt;</em>
-workerNum: <em>&lt;number_workers&gt;</em></code></pre>
+workerNum: <em>&lt;number_workers&gt;</em>
+kube-version: <em>&lt;kube-version&gt;</em>
+</code></pre>
 
 
 <table>
     <caption>Tabla 1. Visión general de los componentes del archivo YAML</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png"/>Visión general de los componentes del archivo YAML</th>
+    <th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Visión general de los componentes del archivo YAML</th>
     </thead>
     <tbody>
     <tr>
@@ -156,6 +278,10 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
     <td><code><em>location</em></code></td>
     <td>Sustituya <code><em>&lt;location&gt;</em></code> por la ubicación en la que desea crear el clúster. Las ubicaciones disponibles dependen de la región en la que ha iniciado la sesión. Para ver una lista de las ubicaciones disponibles, ejecute <code>cs bx ubicaciones</code>. </td>
      </tr>
+     <tr>
+     <td><code><em>no-subnet</em></code></td>
+     <td>De forma predeterminada, se crean tanto una subred pública portátil como una privada en la VLAN asociada con el clúster. Sustituya <code><em>&lt;no-subnet&gt;</em></code> por <code><em>true</em></code> para evitar crear subredes con el clúster. Puede [crear](#cs_cluster_subnet_create) o [añadir](#cs_cluster_subnet_add) subredes a un clúster más adelante.</td>
+      </tr>
      <tr>
      <td><code><em>machine-type</em></code></td>
      <td>Sustituya <code><em>&lt;machine_type&gt;</em></code> por el tipo de máquina que desea utilizar para los nodos trabajadores. Para ver una lista de los tipos de máquina disponibles para su ubicación, ejecute <code>bx cs machine-types <em>&lt;location&gt;</em></code>.</td>
@@ -176,27 +302,35 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
      <td><code><em>workerNum</em></code></td>
      <td>Sustituya <code><em>&lt;number_workers&gt;</em></code> por el número de nodos trabajadores que desea desplegar.</td>
      </tr>
+     <tr>
+      <td><code><em>kube-version</em></code></td>
+      <td>La versión Kubernetes del nodo maestro del clúster. Este valor es opcional. Si no se especifica, el clúster se crea con el valor predeterminado de las versiones de Kubernetes soportadas. Para ver todas las versiones disponibles, ejecute <code>bx cs kube-versions</code>.</td>
      </tbody></table>
     </p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
-<dd>El nivel de aislamiento del hardware del nodo trabajador. Utilice el valor dedicated para tener recursos físicos disponibles dedicados solo a usted, o shared para permitir que los recursos físicos se compartan con otros clientes de IBM. El valor predeterminado es shared.  Este valor es opcional para clústeres estándar y no está disponible para clústeres lite. </dd>
+<dd>El nivel de aislamiento del hardware del nodo trabajador. Utilice el valor dedicated para tener recursos físicos disponibles dedicados solo a usted, o shared para permitir que los recursos físicos se compartan con otros clientes de IBM. El valor predeterminado es shared.  Este valor es opcional para clústeres estándar y no está disponible para clústeres lite.</dd>
 
 <dt><code>--location <em>LOCATION</em></code></dt>
-<dd>La ubicación en la que desea crear el clúster. Las ubicaciones disponibles dependen de la región de {{site.data.keyword.Bluemix_notm}} en la que haya iniciado la sesión. Para obtener el mejor rendimiento, seleccione la región que esté físicamente más cercana a su ubicación.  Este valor es obligatorio para clústeres estándar y opcional para clústeres lite. <p>Consulte [ubicaciones disponibles](cs_regions.html#locations).
+<dd>La ubicación en la que desea crear el clúster. Las ubicaciones disponibles dependen de la región de {{site.data.keyword.Bluemix_notm}} en la que haya iniciado la sesión. Para obtener el mejor rendimiento, seleccione la región que esté físicamente más cercana a su ubicación.  Este valor es obligatorio para clústeres estándar y opcional para clústeres lite.
+
+<p>Consulte [ubicaciones disponibles](cs_regions.html#locations).
 </p>
 
 <p><strong>Nota:</strong> Si selecciona una ubicación que se encuentra fuera de su país, tenga en cuenta que es posible que se requiera autorización legal para poder almacenar datos físicamente en un país extranjero.</p>
 </dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>El tipo de máquina tipo que elija afecta a la cantidad de memoria y al espacio de disco que está disponible para los contenedores desplegados en el nodo trabajador. Para ver una lista de los tipos de máquina disponibles, ejecute [bx cs machine-types <em>LOCATION</em>](cs_cli_reference.html#cs_machine_types).  Este valor es obligatorio para clústeres estándar y no está disponible para clústeres lite. </dd>
+<dd>El tipo de máquina tipo que elija afecta a la cantidad de memoria y al espacio de disco que está disponible para los contenedores desplegados en el nodo trabajador. Para ver una lista de los tipos de máquina disponibles, ejecute [bx cs machine-types <em>LOCATION</em>](#cs_machine_types).  Este valor es obligatorio para clústeres estándar y no está disponible para clústeres lite.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
 <dd>El nombre del clúster.  Este valor es obligatorio.</dd>
 
+<dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
+<dd>La versión Kubernetes del nodo maestro del clúster. Este valor es opcional. Si no se especifica, el clúster se crea con el valor predeterminado de las versiones de Kubernetes soportadas. Para ver todas las versiones disponibles, ejecute <code>bx cs kube-versions</code>.</dd>
+
 <dt><code>--no-subnet</code></dt>
-<dd>Incluir el distintivo para crear un clúster sin una subred portátil. El valor predeterminado es no utilizar el distintivo y para crear una subred en la cartera de IBM Bluemix Infrastructure (SoftLayer). Este valor es opcional.</dd>
+<dd>De forma predeterminada, se crean tanto una subred pública portátil como una privada en la VLAN asociada con el clúster. Incluya el distintivo <code>--no-subnet</code> para evitar crear subredes con el clúster. Puede [crear](#cs_cluster_subnet_create) o [añadir](#cs_cluster_subnet_add) subredes a un clúster más adelante.</dd>
 
 <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
 <dd>
@@ -204,9 +338,7 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
 <ul>
 <li>Este parámetro no está disponible para clústeres lite.</li>
 <li>Si este es el primer clúster estándar que crea en esta ubicación, no incluya este distintivo. Al crear clústeres se crea automáticamente una VLAN privada.</li>
-<li>Si ha creado un clúster estándar antes en esta ubicación o ha creado una VLAN privada en IBM Bluemix Infrastructure (SoftLayer) antes, debe especificar la VLAN privada.
-
-<p><strong>Nota:</strong> Las VLAN pública y privada que especifique con el mandato create deben coincidir. Los direccionadores VLAN privados siempre
+<li>Si previamente ha creado un clúster estándar en esta ubicación o una VLAN privada en la infraestructura de IBM Cloud (SoftLayer), debe especificar la VLAN privada. <p><strong>Nota:</strong> Las VLAN pública y privada que especifique con el mandato create deben coincidir. Los direccionadores VLAN privados siempre
 empiezan por <code>bcr</code> (back-end router, direccionador de fondo) y los direccionadores VLAN públicos siempre
 empiezan por <code>fcr</code> (direccionador frontal). La combinación de números y letras que hay tras estos prefijos debe coincidir para poder utilizar dichas VLAN al crear un clúster. No utilice VLAN públicas y privadas que no coincidan para crear un clúster.</p></li>
 </ul>
@@ -218,8 +350,7 @@ empiezan por <code>fcr</code> (direccionador frontal). La combinación de númer
 <ul>
 <li>Este parámetro no está disponible para clústeres lite.</li>
 <li>Si este es el primer clúster estándar que crea en esta ubicación, no utilice este distintivo. Al crear el clúster se crea automáticamente una VLAN pública.</li>
-<li>Si ha creado un clúster estándar antes en esta ubicación o ha creado una VLAN pública en IBM Bluemix Infrastructure (SoftLayer) antes, debe especificar la VLAN pública.
-<p><strong>Nota:</strong> Las VLAN pública y privada que especifique con el mandato create deben coincidir. Los direccionadores VLAN privados siempre
+<li>Si previamente ha creado un clúster estándar en esta ubicación o una VLAN pública en la infraestructura de IBM Cloud (SoftLayer), debe especificar la VLAN pública. <p><strong>Nota:</strong> Las VLAN pública y privada que especifique con el mandato create deben coincidir. Los direccionadores VLAN privados siempre
 empiezan por <code>bcr</code> (back-end router, direccionador de fondo) y los direccionadores VLAN públicos siempre
 empiezan por <code>fcr</code> (direccionador frontal). La combinación de números y letras que hay tras estos prefijos debe coincidir para poder utilizar dichas VLAN al crear un clúster. No utilice VLAN públicas y privadas que no coincidan para crear un clúster.</p></li>
 </ul>
@@ -227,7 +358,9 @@ empiezan por <code>fcr</code> (direccionador frontal). La combinación de númer
 <p>Para saber si ya tiene una VLAN pública para una ubicación específica o para encontrar el nombre de una VLAN pública existente, ejecute <code>bx cs vlans <em>&lt;location&gt;</em></code>.</p></dd>
 
 <dt><code>--workers WORKER</code></dt>
-<dd>El número de nodos trabajadores que desea desplegar en el clúster. Si no especifica esta opción, se crea un clúster con 1 nodo trabajador. Este valor es opcional para clústeres estándar y no está disponible para clústeres lite. <p><strong>Nota:</strong> A cada nodo trabajador se la asigna un ID exclusivo y un nombre de dominio que no se debe cambiar de forma manual después de haber creado el clúster. Si se cambia el nombre de dominio o el ID se impide que el maestro de Kubernetes gestione el clúster.</p></dd>
+<dd>El número de nodos trabajadores que desea desplegar en el clúster. Si no especifica esta opción, se crea un clúster con 1 nodo trabajador. Este valor es opcional para clústeres estándar y no está disponible para clústeres lite.
+
+<p><strong>Nota:</strong> A cada nodo trabajador se la asigna un ID exclusivo y un nombre de dominio que no se debe cambiar de forma manual después de haber creado el clúster. Si se cambia el nombre de dominio o el ID se impide que el maestro de Kubernetes gestione el clúster.</p></dd>
 </dl>
 
 **Ejemplos**:
@@ -238,7 +371,7 @@ empiezan por <code>fcr</code> (direccionador frontal). La combinación de númer
   {: #example_cluster_create}
 
   ```
-  bx cs cluster-create --location dal10 --public-vlan my_public_vlan_id --private-vlan my_private_vlan_id --machine-type u1c.2x4 --name my_cluster --hardware shared --workers 2
+  bx cs cluster-create --location dal10 --public-vlan my_public_vlan_id --private-vlan my_private_vlan_id --machine-type u2c.2x4 --name my_cluster --hardware shared --workers 2
   ```
   {: pre}
 
@@ -249,7 +382,8 @@ empiezan por <code>fcr</code> (direccionador frontal). La combinación de númer
   ```
   {: pre}
 
-  Ejemplo para el entorno {{site.data.keyword.Bluemix_notm}} Dedicado:
+  Ejemplo para un entorno {{site.data.keyword.Bluemix_dedicated_notm}}:
+
 
   ```
   bx cs cluster-create --machine-type machine-type --workers number --name cluster_name
@@ -292,7 +426,7 @@ Eliminar un clúster de la organización.
    <dd>El nombre o ID del clúster. Este valor es obligatorio.</dd>
 
    <dt><code>-f</code></dt>
-   <dd>Utilice esta opción para forzar la eliminación de un clúster sin solicitudes de usuario.Este valor es opcional.</dd>
+   <dd>Utilice esta opción para forzar la eliminación de un clúster sin solicitudes de usuario. Este valor es opcional.</dd>
    </dl>
 
 **Ejemplo**:
@@ -308,7 +442,7 @@ Eliminar un clúster de la organización.
 
 Añadir un servicio de {{site.data.keyword.Bluemix_notm}} a un clúster.
 
-**Sugerencia:** Para usuarios de {{site.data.keyword.Bluemix_notm}} Dedicado, consulte [Adición de servicios de {{site.data.keyword.Bluemix_notm}} a clústeres en {{site.data.keyword.Bluemix_notm}} Dedicado (Beta cerrada)](cs_cluster.html#binding_dedicated).
+**Sugerencia:** Para usuarios de {{site.data.keyword.Bluemix_dedicated_notm}}, consulte [Adición de servicios de {{site.data.keyword.Bluemix_notm}} a clústeres en {{site.data.keyword.Bluemix_dedicated_notm}} (Beta cerrada)](cs_cluster.html#binding_dedicated).
 
 <strong>Opciones del mandato</strong>:
 
@@ -320,7 +454,7 @@ Añadir un servicio de {{site.data.keyword.Bluemix_notm}} a un clúster.
    <dd>El nombre del espacio de Kubernetes. Este valor es obligatorio.</dd>
 
    <dt><code><em>SERVICE_INSTANCE_GUID</em></code></dt>
-   <dd>El ID de la instancia de servicio de {{site.data.keyword.Bluemix_notm}} que desea vincular.Este valor es obligatorio.</dd>
+   <dd>El ID de la instancia de servicio de {{site.data.keyword.Bluemix_notm}} que desea vincular. Este valor es obligatorio.</dd>
    </dl>
 
 **Ejemplo**:
@@ -348,7 +482,7 @@ Eliminar un servicio de {{site.data.keyword.Bluemix_notm}} de un clúster.
    <dd>El nombre del espacio de Kubernetes. Este valor es obligatorio.</dd>
 
    <dt><code><em>SERVICE_INSTANCE_GUID</em></code></dt>
-   <dd>El ID de la instancia de servicio de {{site.data.keyword.Bluemix_notm}} que desea eliminar.Este valor es obligatorio.</dd>
+   <dd>El ID de la instancia de servicio de {{site.data.keyword.Bluemix_notm}} que desea eliminar. Este valor es obligatorio.</dd>
    </dl>
 
 **Ejemplo**:
@@ -389,7 +523,7 @@ Crear una lista de los servicios que están vinculados a uno o a todos los espac
 ### bx cs cluster-subnet-add CLUSTER SUBNET
 {: #cs_cluster_subnet_add}
 
-Poner la subred de la cuenta de IBM Bluemix Infrastructure (SoftLayer)
+Poner la subred de la cuenta de una infraestructura de IBM Cloud (SoftLayer)
 a disponibilidad de un determinado clúster.
 
 **Nota:** Cuando se pone una subred a disponibilidad de un clúster, las direcciones IP de esta subred se utilizan para la gestión de redes del clúster. Para evitar conflictos de direcciones IP, asegúrese de utilizar una subred con un solo clúster. No utilice una subred para varios clústeres o para otros fines externos a {{site.data.keyword.containershort_notm}} al mismo tiempo.
@@ -414,7 +548,7 @@ a disponibilidad de un determinado clúster.
 ### bx cs cluster-subnet-create CLUSTER SIZE VLAN_ID
 {: #cs_cluster_subnet_create}
 
-Crear una subred en una cuenta de IBM Bluemix Infrastructure (SoftLayer) y ponerla a disponibilidad de un determinado clúster en {{site.data.keyword.containershort_notm}}.
+Crear una subred en una cuenta de infraestructura de IBM Cloud (SoftLayer) y ponerla a disponibilidad de un determinado clúster en {{site.data.keyword.containershort_notm}}.
 
 
 **Nota:** Cuando se pone una subred a disponibilidad de un clúster, las direcciones IP de esta subred se utilizan para la gestión de redes del clúster. Para evitar conflictos de direcciones IP, asegúrese de utilizar una subred con un solo clúster. No utilice una subred para varios clústeres o para otros fines externos a {{site.data.keyword.containershort_notm}} al mismo tiempo.
@@ -442,9 +576,9 @@ Crear una subred en una cuenta de IBM Bluemix Infrastructure (SoftLayer) y poner
 ### bx cs cluster-user-subnet-add CLUSTER SUBNET_CIDR PRIVATE_VLAN
 {: #cs_cluster_user_subnet_add}
 
-Traer su propia subred privada a sus clústeres de {{site.data.keyword.containershort_notm}}. 
+Traer su propia subred privada a sus clústeres de {{site.data.keyword.containershort_notm}}.
 
-Esta subred privada no es la que proporciona IBM Bluemix Infrastructure (SoftLayer). Por lo tanto, debe configurar el direccionamiento del tráfico de la red de entrada y de salida para la subred. Para añadir una subred de IBM Bluemix Infrastructure (SoftLayer), utilice el [mandato](#cs_cluster_subnet_add) `bx cs cluster-subnet-add`.
+Esta subred privada no es la que proporciona la infraestructura de IBM Cloud (SoftLayer). Por lo tanto, debe configurar el direccionamiento del tráfico de la red de entrada y de salida para la subred. Para añadir una subred de infraestructura de IBM Cloud (SoftLayer), utilice el [mandato](#cs_cluster_subnet_add) `bx cs cluster-subnet-add`.
 
 **Nota:** Cuando añade una subred de usuario privada a un clúster, las direcciones IP de esta subred se utilizan para los equilibradores de carga privados del clúster. Para evitar conflictos de direcciones IP, asegúrese de utilizar una subred con un solo clúster. No utilice una subred para varios clústeres o para otros fines externos a {{site.data.keyword.containershort_notm}} al mismo tiempo.
 
@@ -455,7 +589,7 @@ Esta subred privada no es la que proporciona IBM Bluemix Infrastructure (SoftLay
    <dd>El nombre o ID del clúster. Este valor es obligatorio.</dd>
 
    <dt><code><em>SUBNET_CIDR</em></code></dt>
-   <dd>El Classless InterDomain Routing (CIDR) de la subred. Este valor es obligatorio y no debe estar en conflicto con ninguna subred que utilice IBM Bluemix Infrastructure (SoftLayer).    Los prefijos válidos son los comprendidos entre `/30` (1 dirección IP) y `/24` (253 direcciones IP). Si establece el valor de CIDR en una longitud de prefijo y luego lo tiene que modificar, añada primero un nuevo CIDR y luego [elimine el CIDR antiguo](#cs_cluster_user_subnet_rm).</dd>
+   <dd>El Classless InterDomain Routing (CIDR) de la subred. Este valor es obligatorio y no debe estar en conflicto con ninguna subred que utilice la infraestructura de IBM Cloud (SoftLayer).    Los prefijos válidos son los comprendidos entre `/30` (1 dirección IP) y `/24` (253 direcciones IP). Si establece el valor de CIDR en una longitud de prefijo y luego lo tiene que modificar, añada primero un nuevo CIDR y luego [elimine el CIDR antiguo](#cs_cluster_user_subnet_rm).</dd>
 
    <dt><code><em>PRIVATE_VLAN</em></code></dt>
    <dd>El ID de la VLAN privada. Este valor es obligatorio. Debe coincidir con el ID de VLAN privada de uno o varios nodos trabajadores del clúster.</dd>
@@ -472,9 +606,9 @@ Esta subred privada no es la que proporciona IBM Bluemix Infrastructure (SoftLay
 ### bx cs cluster-user-subnet-rm CLUSTER SUBNET_CIDR PRIVATE_VLAN
 {: #cs_cluster_user_subnet_rm}
 
-Elimine su propia subred privada de un clúster especificado. 
+Elimine su propia subred privada de un clúster especificado.
 
-**Nota:** Cualquier servicio que se haya desplegado en una dirección IP desde su propia subred privada permanece activo después de que se elimine la subred. 
+**Nota:** Cualquier servicio que se haya desplegado en una dirección IP desde su propia subred privada permanece activo después de que se elimine la subred.
 
 <strong>Opciones del mandato</strong>:
 
@@ -497,10 +631,10 @@ Elimine su propia subred privada de un clúster especificado.
   {: pre}
 
 
-### bx cs cluster-update [-f] CLUSTER
+### bx cs cluster-update [-f] CLUSTER [--kube-version MAJOR.MINOR.PATCH][--force-update]
 {: #cs_cluster_update}
 
-Actualice el Kubernetes maestro a la última versión de API. Durante la actualización, no puede acceder ni cambiar el clúster. Los nodos trabajadores, las apps y los recursos que los usuarios del clúster han desplegado no se modifican y continúan ejecutándose. 
+Actualice el Kubernetes maestro a la versión predeterminada de la API. Durante la actualización, no puede acceder ni cambiar el clúster. Los nodos trabajadores, las apps y los recursos que los usuarios del clúster han desplegado no se modifican y continúan ejecutándose.
 
 Es posible que tenga que modificar los archivos YAML para futuros despliegues. Revise esta [nota del release](cs_versions.html) para ver detalles.
 
@@ -509,9 +643,15 @@ Es posible que tenga que modificar los archivos YAML para futuros despliegues. R
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>El nombre o ID del clúster. Este valor es obligatorio.</dd>
+   
+   <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
+   <dd>La versión de Kubernetes del clúster. Si no se especifica este distintivo, el Kubernetes maestro se actualiza a la versión de la API predeterminada. Para ver todas las versiones disponibles, ejecute [bx cs kube-versions](#cs_kube_versions).Este valor es opcional.</dd>
 
    <dt><code>-f</code></dt>
    <dd>Utilice esta opción para forzar la actualización del maestro sin solicitudes de usuario. Este valor es opcional.</dd>
+   
+   <dt><code>--force-update</code></dt>
+   <dd>Intente la actualización incluso si el cambio es superior a dos versiones anteriores. Este valor es opcional.</dd>
    </dl>
 
 **Ejemplo**:
@@ -541,35 +681,39 @@ Ver una lista de los clústeres de la organización.
 ### bx cs credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME
 {: #cs_credentials_set}
 
-Definir las credenciales de cuenta de IBM Bluemix Infrastructure (SoftLayer) para su cuenta de {{site.data.keyword.Bluemix_notm}}. Estas credenciales le permiten acceder al portafolio IBM Bluemix Infrastructure (SoftLayer) a través de su cuenta de {{site.data.keyword.Bluemix_notm}}.
+Defina las credenciales de cuenta de la infraestructura de IBM Cloud (SoftLayer) para su cuenta de {{site.data.keyword.Bluemix_notm}}. Estas credenciales permiten acceder a la cartera de infraestructura de IBM Cloud (SoftLayer) mediante su cuenta de {{site.data.keyword.Bluemix_notm}}.
 
-**Nota:** No establezca varias credenciales para una cuenta de {{site.data.keyword.Bluemix_notm}}. Cada cuenta de {{site.data.keyword.Bluemix_notm}} está vinculada a un solo portafolio de IBM Bluemix Infrastructure (SoftLayer). 
+**Nota:** No establezca varias credenciales para una cuenta de {{site.data.keyword.Bluemix_notm}}. Cada cuenta de {{site.data.keyword.Bluemix_notm}} está vinculada a un portafolio de la infraestructura de IBM Cloud (SoftLayer). 
 
 <strong>Opciones del mandato</strong>:
 
    <dl>
    <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
-   <dd>Nombre de usuario de la cuenta de IBM Bluemix Infrastructure (SoftLayer). Este valor es obligatorio.</dd>
-   </dl>
+   <dd>Nombre usuario de la cuenta de infraestructura de IBM Cloud (SoftLayer). Este valor es obligatorio.</dd>
+   
 
    <dt><code>--infrastructure-api-key <em>API_KEY</em></code></dt>
-   <dd>Clave de API de la cuenta de IBM Bluemix Infrastructure (SoftLayer). Este valor es obligatorio. <p>
+   <dd>Clave de API de la cuenta de infraestructura de IBM Cloud (SoftLayer). Este valor es obligatorio.
+
+ <p>
   Para generar una clave de API:
 
   <ol>
-  <li>Inicie una sesión en el [portal de IBM Bluemix Infrastructure (SoftLayer) ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://control.softlayer.com/).</li>
+  <li>Inicie sesión en el [portal de la infraestructura de IBM Cloud (SoftLayer) ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://control.softlayer.com/).</li>
   <li>Seleccione <strong>Cuenta</strong> y, a continuación, <strong>Usuarios</strong>.</li>
-  <li>Pulse <strong>Generar</strong> para generar una clave de API de IBM Bluemix Infrastructure (SoftLayer) para su cuenta. </li>
+  <li>Pulse <strong>Generar</strong> para generar una clave de API de la infraestructura de IBM Cloud (SoftLayer) para su cuenta. </li>
   <li>Copie la clave de la API para utilizar en este mandato.</li>
   </ol>
 
   Para ver una clave de API existente:
   <ol>
-  <li>Inicie una sesión en el [portal de IBM Bluemix Infrastructure (SoftLayer) ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://control.softlayer.com/).</li>
+  <li>Inicie sesión en el [portal de la infraestructura de IBM Cloud (SoftLayer) ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://control.softlayer.com/).</li>
   <li>Seleccione <strong>Cuenta</strong> y, a continuación, <strong>Usuarios</strong>.</li>
   <li>Pulse <strong>Ver</strong> para ver la clave de API existente.</li>
   <li>Copie la clave de la API para utilizar en este mandato.</li>
-  </ol></p></dd>
+  </ol>
+  </p></dd>
+  </dl>
 
 **Ejemplo**:
 
@@ -582,7 +726,7 @@ Definir las credenciales de cuenta de IBM Bluemix Infrastructure (SoftLayer) par
 ### bx cs credentials-unset
 {: #cs_credentials_unset}
 
-Eliminar las credenciales de cuenta de IBM Bluemix Infrastructure (SoftLayer) de su cuenta de {{site.data.keyword.Bluemix_notm}}. Después de eliminar las credenciales, ya no podrá acceder al portafolio de IBM Bluemix Infrastructure (SoftLayer) a través de su cuenta de {{site.data.keyword.Bluemix_notm}}.
+Elimine las credenciales de cuenta de la infraestructura de IBM Cloud (SoftLayer) de su cuenta de {{site.data.keyword.Bluemix_notm}}. Después de eliminar las credenciales, ya no podrá acceder al portafolio de la infraestructura de IBM Cloud (SoftLayer) a través de su cuenta de {{site.data.keyword.Bluemix_notm}}.
 
 <strong>Opciones del mandato</strong>:
 
@@ -623,7 +767,7 @@ Inicialice el plug-in de {{site.data.keyword.containershort_notm}} o especifique
 
    <dl>
    <dt><code>--host <em>HOST</em></code></dt>
-   <dd>El punto final de API de {{site.data.keyword.containershort_notm}} que desea utilizar. Este valor es opcional.Ejemplos:
+   <dd>El punto final de API de {{site.data.keyword.containershort_notm}} que desea utilizar.  Este valor es opcional. Ejemplos:
 
     <ul>
     <li>EE. UU. Sur:
@@ -639,7 +783,7 @@ Inicialice el plug-in de {{site.data.keyword.containershort_notm}} o especifique
     </pre>
     <p><strong>Nota</strong>: EE.UU.este solo se puede utilizar con mandatos de CLI.</p></li>
 
-    <li>UK Sur: 
+    <li>UK Sur:
 
     <pre class="codeblock">
     <code>bx cs init --host https://uk-south.containers.bluemix.net</code>
@@ -661,7 +805,21 @@ Inicialice el plug-in de {{site.data.keyword.containershort_notm}} o especifique
 
 
 
+### bx cs kube-versions
+{: #cs_kube_versions}
 
+Visualice una lista de las versiones de Kubernetes soportadas en {{site.data.keyword.containershort_notm}}. Actualice su [clúster maestro](#cs_cluster_update) y [nodos trabajadores](#cs_worker_update) a la versión predeterminada para obtener las prestaciones más estables y recientes.
+
+**Opciones del mandato**:
+
+  Ninguno
+
+**Ejemplo**:
+
+  ```
+  bx cs kube-versions
+  ```
+  {: pre}
 
 ### bx cs locations
 {: #cs_datacenters}
@@ -679,7 +837,7 @@ Ver una lista de las ubicaciones disponibles en las que puede crear un clúster.
   ```
   {: pre}
 
-### bx cs logging-config-create CLUSTER [--namespace KUBERNETES_NAMESPACE][--logsource LOG_SOURCE] [--hostname LOG_SERVER_HOSTNAME][--port LOG_SERVER_PORT] --type LOG_TYPE
+### bx cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE][--hostname LOG_SERVER_HOSTNAME] [--port LOG_SERVER_PORT] --type LOG_TYPE
 {: #cs_logging_create}
 
 Crear una configuración de registro. De forma predeterminada, los registros de espacios de nombres se reenvían a {{site.data.keyword.loganalysislong_notm}}. Puede utilizar este mandato para reenviar los registros de espacios de nombres a un servidor syslog externo. También puede utilizar este mandato para reenviar los registros correspondientes a aplicaciones, nodos trabajadores, clústeres de Kubernetes y controladores Ingress a {{site.data.keyword.loganalysisshort_notm}} o a un servidor syslog externo.
@@ -688,9 +846,9 @@ Crear una configuración de registro. De forma predeterminada, los registros de 
 
 <dl>
 <dt><code><em>CLUSTER</em></code></dt>
-<dd>El nombre o ID del clúster. </dd>
+<dd>El nombre o ID del clúster.</dd>
 <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-<dd>El origen de registro para el que desea habilitar el reenvío de registros. Los valores aceptados son <code>application</code>, <code>worker</code>, <code>kubernetes</code> e <code>ingress</code>. Este valor es obligatorio para los orígenes de registro que no sean espacios de nombres de contenedores Docker.</dd>
+<dd>El origen de registro para el que desea habilitar el reenvío de registros. Los valores aceptados son <code>application</code>, <code>worker</code>, <code>kubernetes</code> e <code>ingress</code>. Este valor es obligatorio.</dd>
 <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
 <dd>El espacio de nombres del contenedor Docker desde el que desea reenviar registros a syslog. El reenvío de registros no recibe soporte para los espacios de nombres de Kubernetes <code>ibm-system</code> y <code>kube-system</code>. Este valor es obligatorio para los espacios de nombres. Si no especifica un espacio de nombres, todos los espacios de nombres del contenedor utilizarán esta configuración.</dd>
 <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
@@ -701,17 +859,19 @@ Crear una configuración de registro. De forma predeterminada, los registros de 
 <dd>El protocolo de reenvío de registros que desea utilizar. Actualmente se da soporte a <code>syslog</code> e <code>ibm</code>. Este valor es obligatorio.</dd>
 </dl>
 
-**Ejemplo para el origen de registro `namespace`**:
+**Ejemplos**:
+
+Ejemplo para el origen de registro `namespace`:
 
   ```
-  bx cs logging-config-create my_cluster --namespace my_namespace --hostname localhost --port 5514 --type syslog
+  bx cs logging-config-create my_cluster --logsource namespaces --namespace my_namespace --hostname localhost --port 5514 --type syslog
   ```
   {: pre}
 
-**Ejemplo para el origen de registro `ingress`**:
+Ejemplo para el origen de registro `ingress`:
 
   ```
-  bx cs logging-config-create my_cluster f4bc77c0-ee7d-422d-aabf-a4e6b977264e --type ibm
+  bx cs logging-config-create my_cluster --logsource ingress --type ibm
   ```
   {: pre}
 
@@ -726,7 +886,7 @@ Vea todas las configuraciones de reenvío de registro para un clúster, o filtre
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>El nombre o ID del clúster. Este valor es obligatorio.</dd>
    <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-   <dd>El tipo de origen de registro que desea filtrar. Sólo se devolverán las configuraciones de registro de este origen de registro en el clúster. Los valores aceptados son <code>namespace</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code> e <code>ingress</code>. Este valor es opcional.</dd>
+   <dd>El tipo de origen de registro que desea filtrar. Sólo se devolverán las configuraciones de registro de este origen de registro en el clúster. Los valores aceptados son <code>namespaces</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code> e <code>ingress</code>. Este valor es opcional.</dd>
    </dl>
 
 **Ejemplo**:
@@ -737,7 +897,7 @@ Vea todas las configuraciones de reenvío de registro para un clúster, o filtre
   {: pre}
 
 
-### bx cs logging-config-rm CLUSTER [--namespace KUBERNETES_NAMESPACE][--id LOG_SOURCE_LOGGING_ID]
+### bx cs logging-config-rm CLUSTER --id LOG_CONFIG_ID
 {: #cs_logging_rm}
 
 Suprime una configuración de reenvío de registro. Para un espacio de contenedores Docker, puede detener el reenvío de registros a un servidor syslog. El espacio de nombres sigue reenviando registros a {{site.data.keyword.loganalysislong_notm}}. Por un origen de registro que no sea un espacio de contenedores Docker, puede detener el reenvío de registros a un servidor syslog o a {{site.data.keyword.loganalysisshort_notm}}.
@@ -747,21 +907,19 @@ Suprime una configuración de reenvío de registro. Para un espacio de contenedo
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>El nombre o ID del clúster. Este valor es obligatorio.</dd>
-   <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
-   <dd>El espacio de nombres del contenedor Docker desde el que desea dejar de reenviar registros a syslog. Este valor es obligatorio para los espacios de nombres de contenedores Docker. </dd>
-   <dt><code>--id <em>LOG_SOURCE_LOGGING_ID</em></code></dt>
-   <dd>El ID de configuración de registro que desea eliminar del origen de registro. Este valor es obligatorio para los orígenes de registro que no sean espacios de nombres de contenedores Docker.</dd>
+   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
+   <dd>El ID de configuración de registro que desea eliminar del origen de registro. Este valor es obligatorio.</dd>
    </dl>
 
 **Ejemplo**:
 
   ```
-  bx cs logging-config-rm my_cluster --namespace my_namespace
+  bx cs logging-config-rm my_cluster --id my_log_config_id
   ```
   {: pre}
 
 
-### bx cs logging-config-update CLUSTER [--namespace NAMESPACE][--id LOG_SOURCE_LOGGING_ID] [--logsource LOG_SOURCE][--hostname LOG_SERVER_HOSTNAME] [--port LOG_SERVER_PORT] --type LOG_TYPE
+### bx cs logging-config-update CLUSTER [--namespace NAMESPACE][--id LOG_CONFIG_ID] [--hostname LOG_SERVER_HOSTNAME][--port LOG_SERVER_PORT] --type LOG_TYPE
 {: #cs_logging_update}
 
 Actualice el reenvío de registro al servidor de registro que desea utilizar. Para un espacio de nombres del contenedor Docker, puede utilizar este mandato para actualizar los detalles del servidor syslog actual o para cambiar a otro servidor syslog. Para un origen de registro que no sea un espacio de nombres de contenedores Docker, puede utilizar este mandato para cambiar el tipo de servidor del recolector de registros. Actualmente, 'syslog' e 'ibm' son los tipos de registro soportados.
@@ -772,10 +930,8 @@ Actualice el reenvío de registro al servidor de registro que desea utilizar. Pa
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>El nombre o ID del clúster. Este valor es obligatorio.</dd>
    <dt><code>--namespace <em>NAMESPACE</em></code></dt>
-   <dd>El espacio de nombres del contenedor Docker desde el que desea reenviar registros a syslog. El reenvío de registros no recibe soporte para los espacios de nombres de Kubernetes <code>ibm-system</code> y <code>kube-system</code>. Este valor es obligatorio para los espacios de nombres. </dd>
-   <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-   <dd>El origen de registro para el que desea actualizar el reenvío de registros. Los valores aceptados son <code>application</code>, <code>worker</code>, <code>kubernetes</code> e <code>ingress</code>. Este valor es obligatorio para los orígenes de registro que no sean espacios de nombres de contenedores Docker.</dd>
-   <dt><code>--id <em>LOG_SOURCE_LOGGING_ID</em></code></dt>
+   <dd>El espacio de nombres del contenedor Docker desde el que desea reenviar registros a syslog. El reenvío de registros no recibe soporte para los espacios de nombres de Kubernetes <code>ibm-system</code> y <code>kube-system</code>. Este valor es obligatorio para los espacios de nombres.</dd>
+   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
    <dd>El ID de configuración de registro que desea actualizar. Este valor es obligatorio para los orígenes de registro que no sean espacios de nombres de contenedores Docker.</dd>
    <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
    <dd>El nombre de host o dirección IP del servidor del recopilador de registro. Este valor es obligatorio cuando el tipo de registro es <code>syslog</code>.</dd>
@@ -799,17 +955,22 @@ Actualice el reenvío de registro al servidor de registro que desea utilizar. Pa
   ```
   {: pre}
 
+
 ### bx cs machine-types LOCATION
 {: #cs_machine_types}
 
-Ver una lista de los tipos de máquinas disponibles para sus nodos trabajadores. Cada tipo de máquina incluye cantidad de CPU virtual, memoria y espacio de disco para cada nodo trabajador del clúster.
+Ver una lista de los tipos de máquinas disponibles para sus nodos trabajadores. Cada tipo de máquina incluye cantidad de CPU virtual, memoria y espacio de disco para cada nodo trabajador del clúster. 
+- Los tipos de máquina con `u2c` o `b2c` en el nombre utilizan el disco local en lugar de la SAN por motivos de fiabilidad. Entre las ventajas de fiabilidad se incluyen un mejor rendimiento al serializar bytes en el disco local y una reducción de la degradación del sistema de archivos debido a anomalías de la red. Este tipo de máquinas contienen 25 GB de almacenamiento en disco local para el sistema de archivos de SO y 100 GB de almacenamiento en disco local para `/var/lib/docker`, el directorio en el que se graban todos los datos del contenedor. 
+- Los tipos de máquinas que incluyen `cifrado` en el nombre cifran los datos de docker del host. El directorio `/var/lib/docker`, donde están almacenados todos los datos de los contenedores, están cifrados mediante LUKS.
+- Los tipos de máquinas con `u1c` o `b1c` en el nombre están en desuso, como, por ejemplo,`u1c.2x4`. Para empezar a utilizar los tipos de máquinas `u2c` y `b2c`, utilice el mandato `bx cs worker-add` para añadir nodos trabajadores con el tipo de máquina actualizado. A continuación, elimine los nodos trabajadores que utilizan los tipos de máquinas en desuso mediante el mandato `bx cs worker-rm`.
+</p>
+
 
 <strong>Opciones del mandato</strong>:
 
    <dl>
    <dt><code><em>LOCATION</em></code></dt>
-   <dd>Especifique la ubicación de la que desea ver una lista de tipos de máquina disponibles. Este valor es obligatorio. Consulte [ubicaciones disponibles](cs_regions.html#locations).
-</dd></dl>
+   <dd>Especifique la ubicación de la que desea ver una lista de tipos de máquina disponibles. Este valor es obligatorio. Consulte [ubicaciones disponibles](cs_regions.html#locations).</dd></dl>
 
 **Ejemplo**:
 
@@ -822,7 +983,7 @@ Ver una lista de los tipos de máquinas disponibles para sus nodos trabajadores.
 ### bx cs subnets
 {: #cs_subnets}
 
-Ver una lista de subredes que están disponibles en una cuenta de IBM Bluemix Infrastructure (SoftLayer). 
+Ver una lista de subredes que están disponibles en una cuenta de infraestructura de IBM Cloud (SoftLayer). 
 
 <strong>Opciones del mandato</strong>:
 
@@ -839,15 +1000,14 @@ Ver una lista de subredes que están disponibles en una cuenta de IBM Bluemix In
 ### bx cs vlans LOCATION
 {: #cs_vlans}
 
-Crear una lista de las VLAN públicas y privadas disponibles para una ubicación en la cuenta de IBM Bluemix Infrastructure (SoftLayer). Para ver una lista de las VLAN disponibles,
+Crear una lista de las VLAN públicas y privadas disponibles para una ubicación en la cuenta de infraestructura de IBM Cloud (SoftLayer). Para ver una lista de las VLAN disponibles,
 debe tener una cuenta de pago.
 
 <strong>Opciones del mandato</strong>:
 
    <dl>
    <dt><code><em>LOCATION</em></code></dt>
-   <dd>Escriba la ubicación donde desea listar sus VLAN públicas y privadas. Este valor es obligatorio. Consulte [ubicaciones disponibles](cs_regions.html#locations).
-</dd>
+   <dd>Escriba la ubicación donde desea listar sus VLAN públicas y privadas. Este valor es obligatorio. Consulte [ubicaciones disponibles](cs_regions.html#locations).</dd>
    </dl>
 
 **Ejemplo**:
@@ -899,7 +1059,9 @@ Añadir nodos trabajadores al clúster estándar.
 <dd>El nombre o ID del clúster. Este valor es obligatorio.</dd>
 
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
-<dd>La vía de acceso al archivo YAML para añadir nodos trabajadores a su clúster. En lugar de definir los nodos trabajadores adicionales mediante las opciones que se proporcionan en este mandato, puede utilizar un archivo YAML. Este valor es opcional.<p><strong>Nota:</strong> Si especifica la misma opción en el mandato y como parámetro en el archivo YAML, el valor en el mandato prevalece sobre el valor del archivo YAML. Por ejemplo, supongamos que define un tipo de máquina en el archivo YAML y utiliza la opción --machine-type en el mandato; el valor que especifique en la opción del mandato prevalece sobre el valor del archivo YAML.
+<dd>La vía de acceso al archivo YAML para añadir nodos trabajadores a su clúster. En lugar de definir los nodos trabajadores adicionales mediante las opciones que se proporcionan en este mandato, puede utilizar un archivo YAML. Este valor es opcional.
+
+<p><strong>Nota:</strong> Si especifica la misma opción en el mandato y como parámetro en el archivo YAML, el valor en el mandato prevalece sobre el valor del archivo YAML. Por ejemplo, supongamos que define un tipo de máquina en el archivo YAML y utiliza la opción --machine-type en el mandato; el valor que especifique en la opción del mandato prevalece sobre el valor del archivo YAML.
 
 <pre class="codeblock">
 <code>name: <em>&lt;cluster_name_or_id&gt;</em>
@@ -913,7 +1075,7 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
 <table>
 <caption>Tabla 2. Visión general de los componentes del archivo YAML</caption>
 <thead>
-<th colspan=2><img src="images/idea.png"/>Visión general de los componentes del archivo YAML</th>
+<th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Visión general de los componentes del archivo YAML</th>
 </thead>
 <tbody>
 <tr>
@@ -950,18 +1112,22 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
 <dd>El nivel de aislamiento del hardware del nodo trabajador. Utilice el valor dedicated si desea tener recursos físicos disponibles dedicados solo a usted, o el valor shared para permitir que los recursos físicos se compartan con otros clientes de IBM. El valor predeterminado es shared. Este valor es opcional.</dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>El tipo de máquina tipo que elija afecta a la cantidad de memoria y al espacio de disco que está disponible para los contenedores desplegados en el nodo trabajador. Este valor es obligatorio. Para ver una lista de los tipos de máquina disponibles, ejecute [bx cs machine-types LOCATION](cs_cli_reference.html#cs_machine_types).</dd>
+<dd>El tipo de máquina tipo que elija afecta a la cantidad de memoria y al espacio de disco que está disponible para los contenedores desplegados en el nodo trabajador. Este valor es obligatorio. Para ver una lista de los tipos de máquina disponibles, ejecute [bx cs machine-types LOCATION](#cs_machine_types).</dd>
 
 <dt><code>--number <em>NUMBER</em></code></dt>
 <dd>Un entero que representa el número de nodos trabajadores que desea crear en el clúster. El valor predeterminado es 1. Este valor es opcional.</dd>
 
 <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
-<dd>La VLAN privada que se ha especificado al crear el clúster. Este valor es obligatorio. <p><strong>Nota:</strong> Las VLAN pública y privada que especifique deben coincidir. Los direccionadores VLAN privados siempre
+<dd>La VLAN privada que se ha especificado al crear el clúster. Este valor es obligatorio.
+
+<p><strong>Nota:</strong> Las VLAN pública y privada que especifique deben coincidir. Los direccionadores VLAN privados siempre
 empiezan por <code>bcr</code> (back-end router, direccionador de fondo) y los direccionadores VLAN públicos siempre
 empiezan por <code>fcr</code> (direccionador frontal). La combinación de números y letras que hay tras estos prefijos debe coincidir para poder utilizar dichas VLAN al crear un clúster. No utilice VLAN públicas y privadas que no coincidan para crear un clúster.</p></dd>
 
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
-<dd>La VLAN pública que se ha especificado al crear el clúster. Este valor es opcional.<p><strong>Nota:</strong> Las VLAN pública y privada que especifique deben coincidir. Los direccionadores VLAN privados siempre
+<dd>La VLAN pública que se ha especificado al crear el clúster. Este valor es opcional.
+
+<p><strong>Nota:</strong> Las VLAN pública y privada que especifique deben coincidir. Los direccionadores VLAN privados siempre
 empiezan por <code>bcr</code> (back-end router, direccionador de fondo) y los direccionadores VLAN públicos siempre
 empiezan por <code>fcr</code> (direccionador frontal). La combinación de números y letras que hay tras estos prefijos debe coincidir para poder utilizar dichas VLAN al crear un clúster. No utilice VLAN públicas y privadas que no coincidan para crear un clúster.</p></dd>
 </dl>
@@ -969,14 +1135,14 @@ empiezan por <code>fcr</code> (direccionador frontal). La combinación de númer
 **Ejemplos**:
 
   ```
-  bx cs worker-add --cluster my_cluster --number 3 --public-vlan my_public_vlan_id --private-vlan my_private_vlan_id --machine-type u1c.2x4 --hardware shared
+  bx cs worker-add --cluster my_cluster --number 3 --public-vlan my_public_vlan_id --private-vlan my_private_vlan_id --machine-type u2c.2x4 --hardware shared
   ```
   {: pre}
 
-  Ejemplo para {{site.data.keyword.Bluemix_notm}} Dedicado:
+  Ejemplo para {{site.data.keyword.Bluemix_dedicated_notm}}:
 
   ```
-  bx cs worker-add --cluster my_cluster --number 3 --machine-type u1c.2x4
+  bx cs worker-add --cluster my_cluster --number 3 --machine-type u2c.2x4
   ```
   {: pre}
 
@@ -1043,7 +1209,7 @@ Volver a cargar los nodos trabajadores en un clúster. Si existe un problema con
    <dd>El nombre o ID del clúster. Este valor es obligatorio.</dd>
 
    <dt><code>-f</code></dt>
-   <dd>Utilice esta opción para forzar que se vuelva a cargar un nodo trabajador sin solicitudes de usuario.Este valor es opcional.</dd>
+   <dd>Utilice esta opción para forzar que se vuelva a cargar un nodo trabajador sin solicitudes de usuario. Este valor es opcional.</dd>
 
    <dt><code><em>WORKER</em></code></dt>
    <dd>El nombre o ID de uno o varios nodos trabajadores. Utilice un espacio para ver una lista de varios nodos trabajadores. Este valor es obligatorio.</dd>
@@ -1081,10 +1247,10 @@ Eliminar uno o varios nodos trabajadores de un clúster.
   ```
   {: pre}
 
-### bx cs worker-update [-f] CLUSTER WORKER [WORKER]
+### bx cs worker-update [-f] CLUSTER WORKER [WORKER][--kube-version MAJOR.MINOR.PATCH] [--force-update]
 {: #cs_worker_update}
 
-Actualizar nodos trabajadores a la última versión Kubernetes. La ejecución de `bx cs worker-update` puede causar un tiempo de inactividad para sus apps y servicios. Durante la actualización, todos los pods se vuelven a planificar en otros nodos trabajadores y los datos se suprimen si no se guardan fuera del pod. Para evitar el tiempo de inactividad, asegúrese de tener suficientes nodos trabajadores para manejar la carga de trabajo mientras se estén actualizando los nodos trabajador seleccionados. 
+Actualizar nodos trabajadores a la última versión Kubernetes. La ejecución de `bx cs worker-update` puede causar un tiempo de inactividad para sus apps y servicios. Durante la actualización, todos los pods se vuelven a planificar en otros nodos trabajadores y los datos se suprimen si no se guardan fuera del pod. Para evitar el tiempo de inactividad, asegúrese de tener suficientes nodos trabajadores para manejar la carga de trabajo mientras se estén actualizando los nodos trabajador seleccionados.
 
 Es posible que tenga que modificar los archivos YAML para futuros despliegues antes de la actualización. Revise esta [nota del release](cs_versions.html) para ver detalles.
 
@@ -1093,10 +1259,16 @@ Es posible que tenga que modificar los archivos YAML para futuros despliegues an
    <dl>
 
    <dt><em>CLUSTER</em></dt>
-   <dd>El nombre o ID del clúster en el que se listan los nodos trabajadores disponibles.Este valor es obligatorio.</dd>
+   <dd>El nombre o ID del clúster en el que se listan los nodos trabajadores disponibles. Este valor es obligatorio.</dd>
+   
+   <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
+   <dd>La versión de Kubernetes del clúster. Si no se especifica este distintivo, el nodo maestro se actualiza a la versión predeterminada. Para ver todas las versiones disponibles, ejecute [bx cs kube-versions](#cs_kube_versions).Este valor es opcional.</dd>
 
    <dt><code>-f</code></dt>
    <dd>Utilice esta opción para forzar la actualización del maestro sin solicitudes de usuario. Este valor es opcional.</dd>
+   
+   <dt><code>--force-update</code></dt>
+   <dd> Intente la actualización incluso si el cambio es superior a dos versiones anteriores. Este valor es opcional.</dd>
 
    <dt><code><em>WORKER</em></code></dt>
    <dd>El ID de uno o varios nodos trabajadores. Utilice un espacio para ver una lista de varios nodos trabajadores. Este valor es obligatorio.</dd>
@@ -1118,7 +1290,7 @@ Ver una lista de los nodos trabajadores y el estado de cada uno de ellos en un c
 
    <dl>
    <dt><em>CLUSTER</em></dt>
-   <dd>El nombre o ID del clúster en el que se listan los nodos trabajadores disponibles.Este valor es obligatorio.</dd>
+   <dd>El nombre o ID del clúster en el que se listan los nodos trabajadores disponibles. Este valor es obligatorio.</dd>
    </dl>
 
 **Ejemplo**:
@@ -1143,5 +1315,5 @@ Puede ver el estado actual del clúster ejecutando el mandato bx cs clusters y l
 |Pendiente|El nodo Kubernetes maestro está desplegado. Los nodos trabajadores se están suministrando y aún no están disponibles en el clúster. Puede acceder al clúster, pero no puede desplegar apps en el clúster.|
 |Normal|Todos los nodos trabajadores de un clúster están activos y en ejecución. Puede acceder al clúster y desplegar apps en el clúster.|
 |Aviso|Al menos un nodo trabajador del clúster no está disponible, pero los otros nodos trabajadores están disponibles y pueden asumir la carga de trabajo. <ol><li>Obtenga una lista de los nodos trabajadores del clúster y anote el ID de los nodos trabajadores con el estado <strong>Aviso</strong>.<pre class="pre"><code>bx cs workers &lt;cluster_name_or_id&gt;</code></pre><li>Obtenga los detalles de un nodo trabajador.<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre><li>Revise los campos <strong>State</strong>, <strong>Status</strong> y <strong>Details</strong> para ver el problema raíz por el que el nodo trabajador está inactivo.</li><li>Si el nodo trabajador casi ha alcanzado el límite de memoria o de espacio de disco, reduzca la carga de trabajo del nodo trabajador o añada un nodo trabajador al clúster para ayudar a equilibrar la carga de trabajo.</li></ol>|
-|Crítico|No se puede acceder al nodo Kubernetes maestro o todos los nodos trabajadores del clúster están inactivos. <ol><li>Obtenga una lista de los nodos trabajadores del clúster.<pre class="pre"><code>bx cs workers &lt;cluser_name_or_id&gt;</code></pre><li>Obtener los detalles de cada nodo trabajador.<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre></li><li>Revise los campos <strong>State</strong>, <strong>Status</strong> y <strong>Details</strong> para ver el problema raíz por el que el nodo trabajador está inactivo.</li><li>Si el estado del nodo trabajador es <strong>Provision_failed</strong>, es posible que no tenga los permisos necesarios para suministrar un nodo trabajador desde el portafolio de IBM Bluemix Infrastructure (SoftLayer). Para ver los permisos necesarios, consulte [Configuración del acceso al portafolio de IBM Bluemix Infrastructure (SoftLayer) para crear clústeres de Kubernetes estándares](cs_planning.html#cs_planning_unify_accounts). </li><li>Si el estado del nodo trabajador es <strong>Critical</strong> y el estado del nodo trabajador es <strong>Out of disk (Sin disco)</strong>, significa que el nodo trabajador ha agotado su capacidad. Puede reducir la carga de trabajo del nodo trabajador o añadir un nodo trabajador al clúster para ayudar a equilibrar la carga de trabajo.</li><li>Si el estado del nodo trabajador es <strong>Critical</strong> y el estado del nodo trabajador es <strong>Unknown (Desconocido)</strong>, significa que el nodo Kubernetes maestro no está disponible. Para ponerse en contacto con el equipo de soporte de {{site.data.keyword.Bluemix_notm}}, abra una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support).</li></ol>|
+|Crítico|No se puede acceder al nodo Kubernetes maestro o todos los nodos trabajadores del clúster están inactivos. <ol><li>Obtenga una lista de los nodos trabajadores del clúster.<pre class="pre"><code>bx cs workers &lt;cluser_name_or_id&gt;</code></pre><li>Obtener los detalles de cada nodo trabajador.<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre></li><li>Revise los campos <strong>State</strong>, <strong>Status</strong> y <strong>Details</strong> para ver el problema raíz por el que el nodo trabajador está inactivo.</li><li>Si el estado del nodo trabajador es <strong>Provision_failed</strong>, es posible que no tenga los permisos necesarios para suministrar un nodo trabajador desde el portafolio de infraestructura de IBM Cloud (SoftLayer). Para ver los permisos necesarios, consulte [Configuración del acceso al portafolio de infraestructura de IBM Cloud (SoftLayer) para crear clústeres de Kubernetes estándares](cs_planning.html#cs_planning_unify_accounts). </li><li>Si el estado del nodo trabajador es <strong>Critical</strong> y el estado del nodo trabajador es <strong>Out of disk (Sin disco)</strong>, significa que el nodo trabajador ha agotado su capacidad. Puede reducir la carga de trabajo del nodo trabajador o añadir un nodo trabajador al clúster para ayudar a equilibrar la carga de trabajo.</li><li>Si el estado del nodo trabajador es <strong>Critical</strong> y el estado del nodo trabajador es <strong>Unknown (Desconocido)</strong>, significa que el nodo Kubernetes maestro no está disponible. Para ponerse en contacto con el equipo de soporte de {{site.data.keyword.Bluemix_notm}}, abra una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support).</li></ol>|
 {: caption="Tabla 3. Estados de un clúster" caption-side="top"}

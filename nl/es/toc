@@ -2,7 +2,7 @@
 {:topicgroup: .topicgroup}
 
 {: .toc subcollection="containers" audience="compute" href="/docs/containers/index.html"}
-IBM Bluemix Container Service
+IBM Cloud Container Service
 
     {: .navgroup id="learn"}
     container_index.md
@@ -21,15 +21,16 @@ IBM Bluemix Container Service
     cs_cli_reference.md
     cs_versions.md
     cs_regions.md
-    cs_rellinks.md
+    cs_annotations.md
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
     cs_cli_install.md
     cs_cluster.md
     cs_apps.md
-    [Ejecución de contenedores únicos y escalables](cs_classic.html)
-        [Migración de contenedores únicos y escalables a clústeres de Kubernetes](cs_classic.html#cs_classic_migrating) [Acerca de los contenedores únicos y escalables](container_ov.html)
+    [En desuso: Ejecución de contenedores únicos y escalables](cs_classic.html)
+        [Migración de contenedores únicos y escalables a clústeres de Kubernetes](cs_classic.html#cs_classic_migrating)
+        [Acerca de los contenedores únicos y escalables](container_ov.html)
         [Planificación de contenedores únicos y escalables](container_planning.html)
         [Seguridad para contenedores únicos y escalables](container_security.html)
         [Configuración de la CLI para contenedores únicos y escalables](container_cli_cfic_install.html)
@@ -45,5 +46,5 @@ IBM Bluemix Container Service
     {: .navgroup id="help"}
     cs_troubleshoot.md
     cs_popular_topics.md
+    cs_rellinks.md
     {: .navgroup-end}
-
