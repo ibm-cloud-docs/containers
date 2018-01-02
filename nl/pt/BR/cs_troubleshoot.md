@@ -1,6 +1,8 @@
 ---
 
-copyright: years: 2014, 2017 lastupdated: "28/11/2017
+copyright:
+  years: 2014, 2017
+lastupdated: "2017-11-28"
 
 ---
 
