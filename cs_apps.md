@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-18"
 
 ---
@@ -71,57 +71,41 @@ You can use the default port or set your own port to launch the Kubernetes dashb
 
 2.  For clusters with a Kubernetes master version of 1.8.2 or later:
 
-    1.  Download your credentials.
+    1.  Get your credentials for Kubernetes.
 
         ```
-        bx cs cluster-config <cluster_name>
+        kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
         ```
-        {: codeblock}
+        {: pre}
 
-    2.  View the cluster credentials that you downloaded. Use the filepath that is specified in the export in the previous step.
+    2.  Copy the **id-token** value that is shown in the output.
 
-        For macOS or Linux:
-
-        ```
-        cat <filepath_to_cluster_credentials>
-        ```
-        {: codeblock}
-
-        For Windows:
-
-        ```
-        type <filepath_to_cluster_credentials>
-        ```
-        {: codeblock}
-
-    3.  Copy the token in the **id-token** field.
-
-    4.  Set the proxy with the default port number.
+    3.  Set the proxy with the default port number.
 
         ```
         kubectl proxy
         ```
         {: pre}
 
-        Your CLI output looks as follows:
+        Example output:
 
         ```
         Starting to serve on 127.0.0.1:8001
         ```
         {: screen}
 
-    6.  Sign in to the dashboard.
+    4.  Sign in to the dashboard.
 
-        1.  Copy this URL into your browser.
+        1.  In your browser, navigate to the following URL:
 
             ```
             http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
             ```
             {: codeblock}
 
-        2.  In the sign on page, select the **Token** authentication method.
+        2.  In the sign-on page, select the **Token** authentication method.
 
-        3.  Then, paste the **id-token** value into the **Token** field and click **SIGN IN**.
+        3.  Then, paste the **id-token** value that you previously copied into the **Token** field and click **SIGN IN**.
 
 [Next, you can run a configuration file from the dashboard.](#cs_apps_ui)
 
