@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-17"
+lastupdated: "2017-11-02"
 
 ---
 
@@ -17,20 +17,20 @@ lastupdated: "2017-10-17"
 
 
 # Argomenti popolari di {{site.data.keyword.containershort_notm}}
-{: #cs_internal}
+{: #cs_popular_topics}
 
 Controlla a quale contenitore sono interessati gli sviluppatori.
 {:shortdesc}
 
 <table>
 <thead>
-<th colspan=2><img src="images/idea.png"/>Argomenti popolari per i contenitori e i cluster Kubernetes</th>
+<th colspan=2><img src="images/idea.png" alt="Icona Idea"/>Argomenti popolari per i contenitori e i cluster Kubernetes</th>
 </thead>
 <tbody>
 <tr>
 <td>[Introduzione](container_index.html)</td>
 <td>Gestisci le applicazioni ad
-elevata disponibilità all'interno dei contenitori Docker e dei cluster Kubernetes sul cloud IBM. </td>
+elevata disponibilità all'interno dei contenitori Docker e dei cluster Kubernetes sul cloud IBM.</td>
 </tr>
 <tr>
 <td>[Informazioni sui contenitori e i cluster](cs_ov.html)</td>
@@ -49,6 +49,10 @@ delle applicazioni inserite in un contenitore in un cluster.</td>
 <tr>
 <td>[Aggiorna a Kubernetes 1.7](cs_versions.html)</td>
 <td>Controlla le modifiche da effettuare ai tuoi cluster prima dell'aggiornamento a Kubernetes 1.7.</td>
+</tr>
+<tr>
+<td>[REST API for clusters ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://us-south.containers.bluemix.net/swagger)</td>
+<td>Visualizza la documentazione dell'API per gestire {{site.data.keyword.containershort_notm}}.</td>
 </tr>
 </tbody></table>
 

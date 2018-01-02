@@ -21,7 +21,8 @@ lastupdated: "2017-10-16"
 
 Distribuisci e gestisci il tuo proprio cluster Kubernetes nel cloud. Puoi automatizzare la distribuzione, l'operatività, il ridimensionamento e il monitoraggio
 delle applicazioni inserite in un contenitore in un cluster di host di calcolo indipendenti
-denominati nodi di lavoro. {:shortdesc}
+denominati nodi di lavoro.
+{:shortdesc}
 
 In questa serie di esercitazioni, puoi vedere come un'agenzia di PR immaginaria utilizza Kubernetes
 per distribuire un'applicazione in un contenitore in {{site.data.keyword.Bluemix_short}}. Utilizzo di {{site.data.keyword.toneanalyzerfull}}, l'agenzia di PR analizza i propri comunicati stampa e riceve i feedback.
@@ -31,7 +32,7 @@ per distribuire un'applicazione in un contenitore in {{site.data.keyword.Bluemix
 
 In questa prima esercitazione, agisci come l'amministratore di rete della società di PR. Configuri un cluster Kubernetes personalizzato utilizzato per distribuire un test a una versione Hello World dell'applicazione.
 
-Per configurare l'infrastruttura: 
+Per configurare l'infrastruttura:
 
 -   Crea un cluster Kubernetes con un nodo di lavoro
 -   Installa le CLI per utilizzare l'API Kubernetes e gestire le immagini Docker
@@ -52,7 +53,7 @@ non hanno mai creato prima un cluster Kubernetes.
 
 ## Prerequisiti
 
--  Un account [{{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/registration/)
+-  Un [account {{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/registration/)
 
 
 
@@ -64,8 +65,8 @@ Crea il tuo cluster nella GUI e installa le CLI richieste. Per questa esercitazi
 
 Per creare il tuo cluster:
 
-1. Servono alcuni minuti per eseguire il provisioning del tuo cluster. Per non perdere tempo, [crea il tuo cluster ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/containers-kubernetes/launch?env_id=ibm:yp:united-kingdom) prima di installare le CLI. Un cluster lite viene fornito con un nodo di lavoro in cui distribuire i pod del contenitore.  Un nodo di lavoro
-è l'host di calcolo, normalmente una macchina virtuale, su cui vengono eseguite le tue applicazioni. 
+1. Servono alcuni minuti per eseguire il provisioning del tuo cluster. Per non perdere tempo, [crea il tuo cluster ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/containers-kubernetes/launch?env_id=ibm:yp:united-kingdom) prima di installare le CLI. Un cluster lite viene fornito con un nodo di lavoro in cui distribuire i pod del contenitore. Un nodo di lavoro
+è l'host di calcolo, normalmente una macchina virtuale, su cui vengono eseguite le tue applicazioni.
 
 
 Le seguenti CLI e i rispettivi prerequisiti sono utilizzati per gestire i cluster tramite la CLI:
@@ -79,13 +80,12 @@ Le seguenti CLI e i rispettivi prerequisiti sono utilizzati per gestire i cluste
 Per installare le CLI:
 
 1.  Come prerequisito per il plugin {{site.data.keyword.containershort_notm}}, installa la CLI [{{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://clis.ng.bluemix.net/ui/home.html). Per eseguire i comandi della CLI {{site.data.keyword.Bluemix_notm}}, utilizza il prefisso `bx`.
-2.  Segui le istruzioni per selezionare un account e un'organizzazione {{site.data.keyword.Bluemix_notm}}. I cluster sono specifici di un
-ma sono indipendenti da uno spazio o un'organizzazione {{site.data.keyword.Bluemix_notm}}.
+2.  Segui le istruzioni per selezionare un account e un'organizzazione {{site.data.keyword.Bluemix_notm}}. I cluster sono specifici di un account, ma sono indipendenti da un'organizzazione o uno spazio {{site.data.keyword.Bluemix_notm}}. 
 
 4.  Installa il plugin {{site.data.keyword.containershort_notm}} per creare i cluster Kubernetes e gestire i nodi di lavoro. Per eseguire i comandi del plugin {{site.data.keyword.containershort_notm}}, utilizza il prefisso `bx cs`.
 
     ```
-    bx plugin install container-service -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-service -r Bluemix
     ```
     {: pre}
 
@@ -140,11 +140,11 @@ sarà simile al seguente.
 {{site.data.keyword.registryshort_notm}}. Per eseguire i comandi del registro, utilizza il prefisso `bx cr`.
 
     ```
-    bx plugin install container-registry -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-registry -r Bluemix
     ```
     {: pre}
 
-    Per verificare che i plugin container-service e container-registry siano installati correttamente, esegui il seguente comando: 
+    Per verificare che i plugin container-service e container-registry siano installati correttamente, esegui il seguente comando:
 
     ```
     bx plugin list
@@ -317,7 +317,7 @@ Ottimo lavoro! Il cluster è stato configurato e il tuo ambiente locale è pront
 
 ## Operazioni successive
 
-* [Verifica la tua conoscenza e fai un quiz! ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://bluemix-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
+* [Verifica la tua conoscenza e fai un quiz! ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
 
 * Prova [Esercitazione: distribuzione delle applicazioni nei cluster Kubernetes
 in {{site.data.keyword.containershort_notm}}](cs_tutorials_apps.html#cs_apps_tutorial) per distribuire l'applicazione dell'agenzia di PR

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-08-14"
+lastupdated: "2017-11-02"
 
 ---
 
@@ -12,19 +12,17 @@ lastupdated: "2017-08-14"
 {:pre: .pre}
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
-{:tip: .tip} 
+{:tip: .tip}
 {:download: .download}
 
 
-# Creazione di un token {{site.data.keyword.registryshort_notm}} per un
-registro di immagini di {{site.data.keyword.Bluemix_notm}}
-dedicato
+# Creazione di un token {{site.data.keyword.registryshort_notm}} per un registro di immagini di {{site.data.keyword.Bluemix_dedicated_notm}}
 {: #cs_dedicated_tokens}
 
 Crea un token senza scadenza per utilizzare un registro di immagini che hai utilizzato per i gruppi scalabili o singoli con cluster.
 {:shortdesc}
 
-1.  Accedi all'ambiente {{site.data.keyword.Bluemix_short}} dedicato.
+1.  Accedi all'ambiente {{site.data.keyword.Bluemix_dedicated_notm}}.
 
     ```
     bx login -a api.<dedicated_domain>
@@ -46,9 +44,7 @@ variabile.
     ```
     {: pre}
 
-4.  Richiedi un token di registro permanente per la sessione corrente. Sostituisci
-<dedicated_domain> con il dominio del tuo ambiente {{site.data.keyword.Bluemix_notm}}
-dedicato. Questo token concede l'accesso alle immagini nello spazio dei nomi corrente.
+4.  Richiedi un token di registro permanente per la sessione corrente. Sostituisci <dedicated_domain> con il dominio del tuo ambiente {{site.data.keyword.Bluemix_dedicated_notm}}. Questo token concede l'accesso alle immagini nello spazio dei nomi corrente.
 
     ```
     curl -XPOST -H "Authorization: ${OAUTH_TOKEN}" -H "Organization: ${ORG_GUID}" https://registry.<dedicated_domain>/api/v1/tokens?permanent=true
@@ -79,41 +75,41 @@ dedicato. Questo token concede l'accesso alle immagini nello spazio dei nomi cor
     kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_url> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
     ```
     {: pre}
-    
+
     <table>
     <caption>Tabella 1. Descrizione dei componenti di questo comando</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png"/> Descrizione dei componenti di questo comando</th>
+    <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti di questo comando</th>
     </thead>
     <tbody>
     <tr>
     <td><code>--namespace &lt;kubernetes_namespace&gt;</code></td>
     <td>Obbligatoria. Lo spazio dei nomi Kubernetes del cluster in cui vuoi utilizzare il segreto e a cui
 distribuire i contenitori. Esegui <code>kubectl get namespaces</code> per elencare tutti gli spazi dei nomi nel tuo
-cluster.</td> 
+cluster.</td>
     </tr>
     <tr>
     <td><code>&lt;secret_name&gt;</code></td>
-    <td>Obbligatoria. Il nome che vuoi utilizzare per imagePullSecret.</td> 
+    <td>Obbligatoria. Il nome che vuoi utilizzare per imagePullSecret.</td>
     </tr>
     <tr>
     <td><code>--docker-server &lt;registry_url&gt;</code></td>
     <td>Obbligatoria. L'URL del registro di immagini in cui è configurato il tuo spazio dei nomi:
-registry.&lt;dedicated_domain&gt;</li></ul></td> 
+registry.&lt;dedicated_domain&gt;</li></ul></td>
     </tr>
     <tr>
     <td><code>--docker-username &lt;docker_username&gt;</code></td>
-    <td>Obbligatoria. Il nome utente per accedere al tuo registro privato.</td> 
+    <td>Obbligatoria. Il nome utente per accedere al tuo registro privato.</td>
     </tr>
     <tr>
     <td><code>--docker-password &lt;token_value&gt;</code></td>
-    <td>Obbligatoria. Il valore del tuo token di registro che hai richiamato in precedenza.</td> 
+    <td>Obbligatoria. Il valore del tuo token di registro che hai richiamato in precedenza.</td>
     </tr>
     <tr>
     <td><code>--docker-email &lt;docker-email&gt;</code></td>
     <td>Obbligatoria. Se ne hai uno, immetti il tuo indirizzo e-mail Docker. Se non hai uno, immetti
 un indirizzo e-mail fittizio, come ad esempio a@b.c. Questa e-mail è obbligatoria per creare un segreto Kubernetes,
-ma non viene utilizzata dopo la creazione.</td> 
+ma non viene utilizzata dopo la creazione.</td>
     </tr>
     </tbody></table>
 
@@ -145,29 +141,28 @@ utilizzare un'immagine privata da uno spazio dei nomi:
         <tbody>
         <tr>
         <td><code>&lt;pod_name&gt;</code></td>
-        <td>Il nome del pod che vuoi creare.</td> 
+        <td>Il nome del pod che vuoi creare.</td>
         </tr>
         <tr>
         <td><code>&lt;container_name&gt;</code></td>
-        <td>Il nome del contenitore che vuoi distribuire al tuo cluster.</td> 
+        <td>Il nome del contenitore che vuoi distribuire al tuo cluster.</td>
         </tr>
         <tr>
         <td><code>&lt;my_namespace&gt;</code></td>
         <td>Lo spazio dei nomi in cui è memorizzata la tua immagine. Per elencare gli spazi dei nomi disponibili, esegui `bx cr
-namespace-list`.</td> 
+namespace-list`.</td>
         </tr>
         <td><code>&lt;my_image&gt;</code></td>
-        <td>Il nome dell'immagine che vuoi utilizzare. Per elencare le immagini disponibili in un account {{site.data.keyword.Bluemix_notm}}, esegui <code>bx cr
-image-list</code>.</td> 
+        <td>Il nome dell'immagine che vuoi utilizzare. Per elencare le immagini disponibili in un account {{site.data.keyword.Bluemix_notm}}, esegui <code>bx cr image-list</code>.</td>
         </tr>
         <tr>
         <td><code>&lt;tag&gt;</code></td>
         <td>La versione dell'immagine che vuoi utilizzare. Se non si specifica una tag, viene utilizzata l'immagine contrassegnata con
-<strong>latest</strong> per impostazione predefinita.</td> 
+<strong>latest</strong> per impostazione predefinita.</td>
         </tr>
         <tr>
         <td><code>&lt;secret_name&gt;</code></td>
-        <td>Il nome dell'imagePullSecret che hai creato in precedenza.</td> 
+        <td>Il nome dell'imagePullSecret che hai creato in precedenza.</td>
         </tr>
         </tbody></table>
 
@@ -179,5 +174,3 @@ image-list</code>.</td>
           kubectl apply -f mypod.yaml
           ```
           {: pre}
-
-

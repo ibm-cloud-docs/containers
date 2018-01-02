@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-12"
+lastupdated: "2017-11-02"
 
 ---
 
@@ -19,10 +19,7 @@ lastupdated: "2017-10-12"
 # Informazioni su {{site.data.keyword.containerlong_notm}}
 {: #cs_ov}
 
-{{site.data.keyword.containershort}} combina Docker e
-Kubernetes per offrire strumenti potenti, un'esperienza utente intuitiva e la sicurezza e l'isolamento integrati
-per automatizzare la distribuzione, l'operatività, il ridimensionamento e il monitoraggio
-delle applicazioni inserite in un contenitore in un cluster di host di calcolo indipendenti utilizzando le API Kubernetes.
+{{site.data.keyword.containershort}} offre potenti strumenti combinando le tecnologie Docker e Kubernetes, un'esperienza utente intuitiva e la sicurezza e l'isolamento integrati per automatizzare la distribuzione, il funzionamento, il ridimensionamento e il monitoraggio di applicazioni caricate nei contenitori in un cluster di host di calcolo indipendenti.
 {:shortdesc}
 
 
@@ -32,24 +29,22 @@ delle applicazioni inserite in un contenitore in un cluster di host di calcolo i
 ## Contenitori Docker
 {: #cs_ov_docker}
 
-Docker è un progetto open che è stato rilasciato da dotCloud nel 2013. Sviluppato sulle funzioni della tecnologia di contenitori Linux (LXC) esistente, Docker è diventato una piattaforma software che puoi usare per creare, testare, distribuire e ridimensionare applicazioni rapidamente. Docker impacchetta il software in unità standardizzate dette contenitori che includono tutti gli elementi di cui un'applicazione ha bisogno per l'esecuzione.
+Docker è un progetto open che è stato rilasciato da dotCloud nel 2013. Basato sulle funzioni della tecnologia di contenitori Linux (LXC) esistente, Docker è diventato una piattaforma software per la creazione, il test, la distribuzione e il ridimensionamento delle applicazioni in modo rapido. Docker impacchetta il software in unità standardizzate, chiamate contenitori, che includono tutti gli elementi necessari per l'esecuzione di un'applicazione.
 {:shortdesc}
 
 Rivedi questi concetti per ulteriori informazioni sui concetti Docker di base.
 
 <dl>
 <dt>Contenitore</dt>
-<dd>Un contenitore è un modo standard per impacchettare un'applicazione e tutte le sue dipendenze in modo che l'applicazione possa essere spostata tra gli ambienti ed eseguita senza modifiche. A differenza delle macchine virtuali, i contenitori non virtualizzano un dispositivo, il suo sistema operativo e l'hardware sottostante. Nel contenitore sono impacchettati solo il codice dell'applicazione, il runtime, gli strumenti di sistema, le librerie e le impostazioni. I contenitori vengono eseguiti come processi isolati sull'host di calcolo dove vengono distribuiti e condividono il sistema operativo host e le sue risorse hardware. Questo approccio rende un contenitore più leggero, portatile ed efficiente di una macchina virtuale.</dd>
+<dd>Un contenitore è un modo standard per impacchettare un'applicazione e tutte le sue dipendenze in modo che l'applicazione possa essere spostata tra gli ambienti ed eseguita senza modifiche. A differenza delle macchine virtuali, i contenitori non virtualizzano un dispositivo, il suo sistema operativo e l'hardware sottostante. Nel contenitore sono impacchettati solo il codice dell'applicazione, il runtime, gli strumenti di sistema, le librerie e le impostazioni. I contenitori vengono eseguiti come processi isolati su host di calcolo e condividono il sistema operativo host e le sue risorse hardware. Questo approccio rende un contenitore più leggero, portatile ed efficiente di una macchina virtuale.</dd>
 <dt>Immagine</dt>
-<dd>Ogni contenitore è basato su un'immagine Docker ed è considerato come un'istanza di un'immagine. Un'immagine
-viene creata da un Dockerfile, che è un file che contiene le istruzioni su come creare l'immagine
-e qualsiasi risorsa utente, come un'applicazione, la configurazione dell'applicazione e le relative dipendenze.</dd>
+<dd>Ogni contenitore è basato su un'immagine Docker ed è considerato come un'istanza di un'immagine. Un'immagine viene creata da un Dockerfile, che contiene le istruzioni su come creare l'immagine e qualsiasi risorsa di build, come un'applicazione, la configurazione dell'applicazione e le relative dipendenze.</dd>
 <dt>Registro</dt>
 <dd>Un registro delle immagini è un luogo dove si archiviano, richiamano e condividono immagini Docker. Le immagini archiviate in un registro possono essere disponibili pubblicamente (registro pubblico)
-o essere accessibili da un piccolo gruppo di utenti soltanto (registro privato). {{site.data.keyword.containershort_notm}} offre immagini pubbliche, come ibmliberty, che puoi utilizzare per iniziare a lavorare con Docker e Kubernetes per creare la tua prima applicazione inserita in un contenitore in un cluster. Quando si tratta di applicazioni aziendali, utilizza un registro privato come quello fornito in {{site.data.keyword.Bluemix_notm}} per proteggere le tue immagini da utilizzi e modifiche da parte di utenti non autorizzati.
+o essere accessibili da un piccolo gruppo di utenti soltanto (registro privato). {{site.data.keyword.containershort_notm}} offre immagini pubbliche, come ibmliberty, che puoi utilizzare per creare la tua prima applicazione caricata in un contenitore. Quando si tratta di applicazioni aziendali, utilizza un registro privato come quello fornito in {{site.data.keyword.Bluemix_notm}} per proteggere le tue immagini da utilizzi e modifiche da parte di utenti non autorizzati.
 
 </br></br>
-Quando vuoi distribuire un contenitore da un'immagine, devi assicurarti che l'immagine sia memorizzata in un registro delle immagini pubblico o privato.</dd>
+Per distribuire un contenitore da un'immagine, assicurati che l'immagine sia memorizzata in un registro di immagini pubblico o privato. </dd>
 </dl>
 
 ### Vantaggi chiave dell'utilizzo di contenitori
@@ -61,15 +56,13 @@ Quando vuoi distribuire un contenitore da un'immagine, devi assicurarti che l'im
 ambienti standardizzato ai team di sviluppo e produzione. Il runtime leggero del motore consente un ridimensionamento rapido in risposta
 al variare della domanda. Contribuiscono a eliminare
 la complessità data dalla gestione di piattaforme di sistemi operativi differenti
-e delle infrastrutture sottostanti. I contenitori ti aiutano a distribuire
-ed eseguire qualsiasi applicazione su qualsiasi infrastruttura, in modo rapido e affidabile.</dd>
+e delle infrastrutture sottostanti. I contenitori ti aiutano a distribuire ed eseguire una qualsiasi applicazione su qualsiasi infrastruttura in modo rapido e affidabile.</dd>
 <dt>I contenitori sono piccoli</dt>
 <dd>Puoi sistemare più contenitori nella stessa quantità di spazio richiesta da una singola macchina virtuale.</dd>
 <dt>I contenitori sono portabili</dt>
 <dd>Crea un'immagine per un altro contenitore utilizzando un'altra immagine come base. Lascia che qualcun altro
 faccia il grosso del lavoro su un'immagine e perfezionala prima di utilizzarla. Puoi anche effettuare rapidamente la migrazione del codice applicazione da un
-ambiente di preparazione a un ambiente produttivo. Il processo di migrazione può essere automatizzato con strumenti
-quali Delivery Pipeline o UrbanCode Deploy.</dd>
+ambiente di preparazione a un ambiente produttivo. Il processo di migrazione può essere automatizzato con gli strumenti di fornitura continua.</dd>
 </dl>
 
 
@@ -86,11 +79,14 @@ per fornire una piattaforma dell'applicazione sicura e isolata, portatile,
 estensibile e con l'autocorrezione nel caso di failover.
 {:shortdesc}
 
-Ulteriori informazioni sui principi di base della modalità di funzionamento di Kubernetes con un po' di terminologia.
+Scopri le basi di come Kubernetes funziona con una terminologia limitata come mostrato nel seguente diagramma.
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_components1.png">![Impostazioni di distribuzione](images/cs_app_tutorial_components1.png)</a>
+![Impostazioni di distribuzione](images/cs_app_tutorial_components1.png)
 
 <dl>
+<dt>Account</dt>
+<dd>L'account fa riferimento al tuo account {{site.data.keyword.Bluemix_notm}}.</dd>
+
 <dt>Cluster</dt>
 <dd>Un cluster Kubernetes è formato da una o più macchine virtuali denominate
 nodi di lavoro. Ogni nodo di lavoro rappresenta un host di calcolo dove puoi distribuire, eseguire e gestire
@@ -98,29 +94,25 @@ applicazioni inserite nel contenitore. I nodi di lavoro sono gestiti da un maste
 nel cluster. Quando distribuisci un'applicazione inserita in un contenitore,
 il master Kubernetes decide dove distribuire l'applicazione, tenendo conto dei requisiti di distribuzione e della capacità
 disponibile nel cluster.</dd>
+
+<dt>Servizio</dt>
+<dd>Un servizio Kubernetes raggruppa un insieme di pod e fornisce connettività di rete a questi pod senza esporre l'effettivo indirizzo IP privato di ciascun pod. Puoi utilizzare un servizio per rendere la tua applicazione disponibile nel tuo cluster o pubblicamente su Internet.
+</br></br>
+Per ulteriori informazioni sulla terminologia Kubernetes, <a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">prova questa esercitazione</a>.</dd>
+
+<dt>Distribuzione</dt>
+<dd>Una distribuzione è una risorsa Kubernetes in cui puoi specificare i contenitori e altre informazioni necessarie per eseguire la tua applicazione, come l'archiviazione persistente, i servizi o le annotazioni. Dovrai documentare una distribuzione in un file YAML di configurazione e quindi applicarla al cluster. Il master Kubernetes configura la risorsa e distribuisce i contenitori nei pod su nodi di lavoro con capacità disponibile.
+</br></br>
+Definisci le strategie di aggiornamento per la tua applicazione, incluso il numero di pod che vuoi aggiungere durante un aggiornamento continuo e il numero di pod che possono non essere disponibili contemporaneamente. Quando esegui un aggiornamento continuo, la distribuzione controlla se l'aggiornamento funziona e interrompe il rollout quando vengono rilevati errori.</dd>
+
 <dt>Pod</dt>
-<dd>Ogni applicazione inserita in un contenitore che viene distribuita in un cluster Kubernetes viene distribuita, eseguita e gestita da un pod. I pod rappresentano la più piccola unità distribuibile in un cluster Kubernetes e sono utilizzati per raggruppare i contenitori che devono
-essere trattati come una singola unità. Nella maggior parte dei casi, un
+<dd>Ogni applicazione inserita in un contenitore che viene distribuita in un cluster Kubernetes viene distribuita, eseguita e gestita da un pod. I pod rappresentano piccole unità distribuibili in un cluster Kubernetes e vengono utilizzati per raggruppare i contenitori che devono essere trattati come una singola unità. Nella maggior parte dei casi, un
 contenitore viene distribuito a un suo pod. Tuttavia, un'applicazione potrebbe richiedere un contenitore e altri contenitori helper per essere distribuita
 in un pod, in modo che tali contenitori possano essere indirizzati utilizzando lo stesso indirizzo IP privato.</dd>
-<dt>Distribuzione</dt>
-<dd>Una distribuzione è una risorsa Kubernetes in cui specifichi i tuoi contenitori e altre risorse Kubernetes
-che occorrono per eseguire la tua applicazione, quali l'archiviazione persistente, i servizi o le annotazioni. Le distribuzioni sono documentate in uno script di distribuzione Kubernetes. Quando esegui una distribuzione, il master
-Kubernetes distribuisce i contenitori specificati nei pod tenendo conto della capacità disponibile sui nodi di lavoro
-del cluster. Altre risorse Kubernetes vengono create e configurate come specificato nello script di distribuzione.
 
-</br></br>
-Puoi utilizzare una distribuzione per definire le strategie di aggiornamento per la tua applicazione incluso il numero di
-pod da aggiungere durante un aggiornamento continuo e il numero di pod che possono non essere disponibili
-in un determinato momento. Quando effettui un aggiornamento continuo, la distribuzione controlla che la revisione
-funzioni e arresta il rollout quando vengono rilevati degli errori.</dd>
-<dt>Servizio</dt>
-<dd>Un servizio Kubernetes raggruppa una serie
-di pod e fornisce la connessione di rete a tali pod per altri servizi nel cluster senza
-esporre l'indirizzo IP privato di ogni pod. Puoi utilizzare un servizio per rendere la tua applicazione disponibile nel tuo cluster o pubblicamente su Internet.
+<dt>Applicazione</dt>
+<dd>Un'applicazione fa riferimento a un'applicazione completa o a un componente di un'applicazione. Potresti distribuire i componenti della tua applicazione in pod separati o nodi di lavoro separati.</dd>
 
-</br></br>
-Per ulteriori informazioni sulla terminologia Kubernetes, prova l'<a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">esercitazione</a>.</dd>
 </dl>
 
 <br />
@@ -129,14 +121,13 @@ Per ulteriori informazioni sulla terminologia Kubernetes, prova l'<a href="cs_tu
 ## Vantaggi dell'utilizzo dei cluster
 {: #cs_ov_benefits}
 
-Ogni cluster viene distribuito in macchine virtuali dedicate o condivise che forniscono funzionalità aggiunte Kubernetes e {{site.data.keyword.IBM_notm}} native.
+I cluster vengono distribuiti su macchine virtuali condivise o dedicate che forniscono funzionalità aggiunte di Kubernetes e {{site.data.keyword.IBM_notm}} native.
 {:shortdesc}
 
 |Vantaggi|Descrizione|
 |-------|-----------|
 |Cluster Kubernetes a singolo tenant con calcolo, rete e isolamento dell'infrastruttura di archiviazione|<ul><li>Crea la tua propria infrastruttura personalizzata che soddisfi i requisiti dell'ambiente
-di sviluppo e di business.</li><li>Esegui il provisioning di un master Kubernetes sicuro e dedicato, dei nodi di lavoro, delle reti virtuali e dell'archiviazione
-utilizzando le risorse fornite dall'infrastruttura IBM Bluemix (SoftLayer).</li><li>Archivia i dati persistenti, i dati condivisi tra i pod Kubernetes e ripristinali quando necessario
+di sviluppo e di business.</li><li>Esegui il provisioning di un master Kubernetes sicuro e dedicato, dei nodi di lavoro, delle reti virtuali e dell'archiviazione utilizzando le risorse fornite dall'infrastruttura IBM Cloud (SoftLayer).</li><li>Archivia i dati persistenti, i dati condivisi tra i pod Kubernetes e ripristinali quando necessario
 con il servizio del volume protetto e integrato.</li><li>Master Kubernetes completamente gestito e continuamente monitorato da {{site.data.keyword.IBM_notm}} per mantenere il tuo cluster disponibile.</li><li>Vantaggi del supporto completo per le API Kubernetes native.</li></ul>|
 |Conformità della sicurezza dell'immagine con il Controllo vulnerabilità|<ul><li>Configura il tuo registro delle immagini privato Docker in cui le immagini vengono archiviate e condivise da tutti gli utenti
 nell'organizzazione.</li><li>Vantaggi dalla scansione automatica delle immagini nel tuo registro {{site.data.keyword.Bluemix_notm}} privato.</li><li>Rivedi la raccomandazioni specifiche del sistema operativo utilizzato nell'immagine per risolvere le vulnerabilità potenziali.</li></ul>|
@@ -186,33 +177,30 @@ Fai clic su una delle seguenti opzioni per iniziare:
     <area href="cs_classic.html#cs_classic" alt="Esecuzione di contenitori singoli e scalabili in {{site.data.keyword.containershort_notm}}" title="Esecuzione di contenitori singoli e scalabili in I{{site.data.keyword.containershort_notm}}" shape="rect" coords="181, -5, 320, 161" />
     </map>
 
-### {{site.data.keyword.Bluemix_notm}} dedicato
+### {{site.data.keyword.Bluemix_dedicated_notm}}
 {: #dedicated_environment}
 
 Distribuisci cluster (Chiuso beta) o i contenitori singoli e scalabili in un ambiente cloud dedicato
 (`https://<my-dedicated-cloud-instance>.bluemix.net`)  e connettiti
 con i servizi {{site.data.keyword.Bluemix_notm}} preselezionati che sono anche in esecuzione.
 
-I cluster con {{site.data.keyword.Bluemix_notm}} dedicato equivalgono ai
-cluster che vengono creati con l'hardware dedicato in {{site.data.keyword.Bluemix_notm}} pubblico. Le risorse fisiche
+I cluster con {{site.data.keyword.Bluemix_dedicated_notm}} sono equivalenti ai cluster creati con l'hardware dedicato in {{site.data.keyword.Bluemix_notm}} pubblico. Le risorse fisiche
 disponibili sono dedicate solo al tuo cluster e non vengono condivise con i cluster di altri clienti {{site.data.keyword.IBM_notm}}. Sia per l'ambiente pubblico che dedicato, viene utilizzato l'endpoint API
 pubblico per creare i cluster. Tuttavia, con {{site.data.keyword.Bluemix_notm}} dedicato, le differenza più
 significative sono le seguenti.
 
-*   {{site.data.keyword.IBM_notm}} possiede e gestisce l'account dell'infrastruttura IBM Bluemix (SoftLayer) in cui vengono distribuiti i nodi di lavoro, le VLAN e le sottoreti, anziché in un account
-di tua proprietà.
+*   {{site.data.keyword.IBM_notm}} possiede e gestisce l'account dell'infrastruttura IBM Cloud (SoftLayer) in cui vengono distribuiti i nodi di lavoro, le VLAN e le sottoreti, anziché in un account di tua proprietà.
 *   Le specifiche per tali VLAN e sottoreti vengono determinate quando viene creato l'ambiente dedicato
 e non quando viene creato il cluster.
 
-Potresti scegliere di configurare un ambiente {{site.data.keyword.Bluemix_notm}} dedicato se
-vuoi l'isolamento per il tuo cluster e richiedi tale isolamento anche per gli altri servizi {{site.data.keyword.Bluemix_notm}} che utilizzi.
+Potresti scegliere di configurare un ambiente {{site.data.keyword.Bluemix_dedicated_notm}} se vuoi l'isolamento per il tuo cluster e richiedi tale isolamento anche per gli altri servizi {{site.data.keyword.Bluemix_notm}} che utilizzi.
 
 Fai clic su una delle seguenti opzioni per iniziare:
 
-<img usemap="#dedicated_options" border="0" class="image" id="cs_ov_environments__image_hjb_4ln_j1b" src="images/cs_dedicated_options.png" width="600" alt="Con {{site.data.keyword.Bluemix_notm}} Dedicato, puoi creare i cluster Kubernetes o migrare i gruppi di contenitori scalabili o singoli ai cluster." style="width:600px;" />
+<img usemap="#dedicated_options" border="0" class="image" id="cs_ov_environments__image_hjb_4ln_j1b" src="images/cs_dedicated_options.png" width="600" alt="Con {{site.data.keyword.Bluemix_dedicated_notm}}, puoi creare cluster Kubernetes o migrare gruppi di contenitori singoli e scalabili ai cluster. " style="width:600px;" />
     <map name="dedicated_options" id="dedicated_options">
-    <area href="#setup_dedicated" alt="Configurazione di {{site.data.keyword.containershort_notm}} in {{site.data.keyword.Bluemix_notm}} Dedicato (Chiuso Beta)" title="Configurazione di {{site.data.keyword.containershort_notm}} in {{site.data.keyword.Bluemix_notm}} Dedicato (Chiuso Beta)" shape="rect" coords="-5, -15, 100, 153" />
-    <area href="container_index.html#dedicated" alt="Introduzione ai cluster Kubernetes in {{site.data.keyword.Bluemix_notm}} Dedicato (Chiuso Beta)" title="Introduzione ai cluster Kubernetes in {{site.data.keyword.Bluemix_notm}} Dedicato (Chiuso Beta)" shape="rect" coords="153, -10, 276, 182" />
+    <area href="#setup_dedicated" alt="Configurazione di {{site.data.keyword.containershort_notm}} su {{site.data.keyword.Bluemix_dedicated_notm}} (Beta chiusa)" title="Configurazione di {{site.data.keyword.containershort_notm}} su {{site.data.keyword.Bluemix_dedicated_notm}} (Beta chiusa)" shape="rect" coords="-5, -15, 100, 153" />
+    <area href="container_index.html#dedicated" alt="Introduzione ai cluster Kubernetes in {{site.data.keyword.Bluemix_notm}} dedicato (Beta chiusa)" title="Introduzione ai cluster Kubernetes in {{site.data.keyword.Bluemix_dedicated_notm}} (Beta chiusa)" shape="rect" coords="153, -10, 276, 182" />
     <area href="cs_classic.html#cs_classic" alt="Esecuzione di contenitori singoli e scalabili in {{site.data.keyword.containershort_notm}}" title="Esecuzione di contenitori singoli e scalabili in {{site.data.keyword.containershort_notm}}" shape="rect" coords="317, -11, 436, 188" />
     <area href="container_ha.html#container_group_ui" alt="Esecuzione dei servizi a lungo termine come gruppi di contenitori dalla GUI {{site.data.keyword.Bluemix_notm}} " title="Esecuzione dei servizi a lungo termine come gruppi di contenitori dalla GUI {{site.data.keyword.Bluemix_notm}} " shape="rect" coords="485, -1, 600, 173" />
     </map>
@@ -220,15 +208,14 @@ Fai clic su una delle seguenti opzioni per iniziare:
 ### Differenze nella gestione dei cluster tra gli ambienti cloud
 {: #env_differences}
 
-|Area|{{site.data.keyword.Bluemix_notm}} pubblico|{{site.data.keyword.Bluemix_notm}} dedicato (Chiuso beta)|
+|Area|{{site.data.keyword.Bluemix_notm}} pubblico|{{site.data.keyword.Bluemix_dedicated_notm}} (Beta chiusa)|
 |--|--------------|--------------------------------|
 |Creazione cluster|Crea un cluster lite o specifica i seguenti dettagli per un cluster standard:<ul><li>Tipo di cluster</li><li>Nome</li><li>Ubicazione</li><li>Tipo di macchina</li><li>Numero di nodi di lavoro</li><li>VLAN pubblica</li><li>VLAN privata</li><li>Hardware</li></ul>|Specifica i seguenti dettagli per un cluster standard:<ul><li>Nome</li><li>Versione Kubernetes</li><li>Tipo di macchina</li><li>Numero di nodi di lavoro</li></ul><p>**Nota:** le impostazioni VLAN e Hardware vengono predefinite durante la creazione dell'ambiente {{site.data.keyword.Bluemix_notm}}.</p>|
-|Hardware e proprietà del cluster|Nei cluster standard, l'hardware può essere condiviso da altri clienti {{site.data.keyword.IBM_notm}} o dedicato solo a te. Le VLAN pubbliche e private appartengono e sono gestite da te nel tuo account dell'infrastruttura IBM Bluemix (SoftLayer).|Nei cluster su {{site.data.keyword.Bluemix_notm}}
-dedicato, l'hardware è sempre dedicato. Le VLAN pubbliche e private appartengono e gestite da IBM per te. L'ubicazione è predefinita per l'ambiente {{site.data.keyword.Bluemix_notm}}.|
+|Hardware e proprietà del cluster|Nei cluster standard, l'hardware può essere condiviso da altri clienti {{site.data.keyword.IBM_notm}} o dedicato solo a te. Le VLAN pubbliche e private sono possedute e gestite da te nel tuo account dell'infrastruttura IBM Cloud (SoftLayer).|Nei cluster su {{site.data.keyword.Bluemix_dedicated_notm}}, l'hardware è sempre dedicato. Le VLAN pubbliche e private appartengono e gestite da IBM per te. L'ubicazione è predefinita per l'ambiente {{site.data.keyword.Bluemix_notm}}.|
 |Bind del servizio con un cluster|Utilizza il comando [bx cs cluster-service-bind](cs_cluster.html#cs_cluster_service) per eseguire il bind di un segreto Kubernetes
 al cluster.|Crea un [file della chiave JSON](cs_cluster.html#binding_dedicated) per le credenziali del servizio e quindi crea un segreto Kubernetes da tale file
-per eseguire il bind al cluster. |
-|Rete Programma di bilanciamento del carico e Ingress|Durante il provisioning dei cluster standard, si verificano automaticamente le seguenti azioni.<ul><li>Una sottorete portatile viene associata al tuo cluster e assegnata al tuo account dell'infrastruttura IBM Bluemix (SoftLayer).</li><li>Viene utilizzato un indirizzo IP pubblico portatile per un controller Ingress altamente disponibile e viene assegnata una rotta pubblica univoca nel formato &lt;cluster_name&gt;.containers.mybluemix.net. Puoi utilizzare questa rotta per esporre più applicazioni pubblicamente.</li><li>Vengono assegnati al cluster quattro indirizzi IP che possono venire utilizzati per esporre le applicazioni pubblicamente tramite i servizi del programma di bilanciamento del carico. Possono venire richieste ulteriori sottoreti tramite il tuo account dell'infrastruttura IBM Bluemix (SoftLayer).</li></ul>|Quando crei il tuo account dedicato, prendi le seguenti decisioni:<ul><li>Il numero di sottoreti che desideri</li><li>Il tipo di sottorete che vuoi, programma di bilanciamento del carico o Ingress. {{site.data.keyword.IBM_notm}} crea le sottoreti e svolge attività
+per eseguire il bind al cluster.|
+|Rete Programma di bilanciamento del carico e Ingress|Durante il provisioning dei cluster standard, si verificano automaticamente le seguenti azioni.<ul><li>Una sottorete portatile pubblica viene associata al tuo cluster e assegnata al tuo account dell'infrastruttura IBM Cloud (SoftLayer).</li><li>Viene utilizzato un indirizzo IP pubblico portatile per un controller Ingress altamente disponibile e viene assegnata una rotta pubblica univoca nel formato &lt;cluster_name&gt;.containers.mybluemix.net. Puoi utilizzare questa rotta per esporre più applicazioni pubblicamente.</li><li>Vengono assegnati al cluster quattro indirizzi IP che possono venire utilizzati per esporre le applicazioni pubblicamente tramite i servizi del programma di bilanciamento del carico. È possibile richiedere ulteriori sottoreti attraverso il tuo account dell'infrastruttura IBM Cloud (SoftLayer).</li></ul>|Quando crei il tuo account dedicato, prendi le seguenti decisioni:<ul><li>Il numero di sottoreti che desideri</li><li>Il tipo di sottorete che vuoi, programma di bilanciamento del carico o Ingress. {{site.data.keyword.IBM_notm}} crea le sottoreti e svolge attività
 di gestione della rete per te. A seconda delle tue selezioni, potrebbe essere creato un controller Ingress e assegnata
 una rotta pubblica. È possibile richiedere ulteriori sottoreti [aprendo un
 ticket di supporto](/docs/support/index.html#contacting-support) per creare la sottorete e quindi utilizzare il comando
@@ -240,25 +227,24 @@ per accedere pubblicamente al tuo servizio nel cluster.|Tutti gli indirizzi IP d
 dinamico](cs_apps.html#cs_apps_volume_claim) o il [provisioning
 statico](cs_cluster.html#cs_cluster_volume_create) dei volumi.|Utilizza il [provisioning
 dinamico](cs_apps.html) dei volumi.</li></ul>|
-|URL del registro di immagini in {{site.data.keyword.registryshort_notm}}|<ul><li>Stati Uniti Sud e Stati Uniti Est: <code>registry.ng bluemix.net</code></li><li>Regno Unito Sud: <code>registry.eu-gb.bluemix.net</code></li><li>Europa centrale (Francoforte): <code>registry.eu-de.bluemix.net</code></li><li>Australia (Sydney): <code>registry.au-syd.bluemix.net</code></li></ul>|<ul><li>Per i nuovi spazi dei nomi, utilizza gli stessi registri basati su regione definiti per {{site.data.keyword.Bluemix_notm}} pubblico.</li><li>Per gli spazi dei nomi configurati per i contenitori singoli e scalabili in {{site.data.keyword.Bluemix_notm}} dedicato, utilizza <code>registry.&lt;dedicated_domain&gt;</code></li></ul>|
+|URL del registro di immagini in {{site.data.keyword.registryshort_notm}}|<ul><li>Stati Uniti Sud e Stati Uniti Est: <code>registry.ng bluemix.net</code></li><li>Regno Unito Sud: <code>registry.eu-gb.bluemix.net</code></li><li>Europa centrale (Francoforte): <code>registry.eu-de.bluemix.net</code></li><li>Australia (Sydney): <code>registry.au-syd.bluemix.net</code></li></ul>|<ul><li>Per i nuovi spazi dei nomi, utilizza gli stessi registri basati su regione definiti per {{site.data.keyword.Bluemix_notm}} pubblico.</li><li>Per gli spazi dei nomi configurati per i contenitori singoli e scalabili in {{site.data.keyword.Bluemix_dedicated_notm}}, utilizza <code>registry.&lt;dedicated_domain&gt;</code></li></ul>|
 |Accesso al registro|Consulta le opzioni in [Utilizzo dei registri di immagini pubblici e privati con {{site.data.keyword.containershort_notm}}](cs_cluster.html#cs_apps_images).|<ul><li>Per i nuovi spazi dei nomi, vedi le opzioni in [Utilizzo dei registri di immagini pubblici e privati con {{site.data.keyword.containershort_notm}}](cs_cluster.html#cs_apps_images).</li><li>Per gli spazi dei nomi configurati per i gruppi di contenitori singoli e scalabili, [utilizza un token e crea un segreto
 Kubernetes](cs_dedicated_tokens.html#cs_dedicated_tokens) per l'autenticazione.</li></ul>|
-{: caption="Tabella 2. Differenze della funzione tra {{site.data.keyword.Bluemix_notm}} pubblico e {{site.data.keyword.Bluemix_notm}} dedicato" caption-side="top"}
+{: caption="Tabella 2. Differenze delle funzioni tra {{site.data.keyword.Bluemix_notm}} pubblico e {{site.data.keyword.Bluemix_dedicated_notm}}" caption-side="top"}
 
 
-### Configurazione di {{site.data.keyword.containershort_notm}} su {{site.data.keyword.Bluemix_notm}} dedicato (Chiuso beta)
+### Configurazione di {{site.data.keyword.containershort_notm}} su {{site.data.keyword.Bluemix_dedicated_notm}} (Beta chiusa)
 {: #setup_dedicated}
 
 Gli amministratori devono aggiungere l'ID amministratore e gli utenti IBM
 della tua organizzazione all'ambiente dedicato.
 
-Prima di iniziare, [configura un ambiente {{site.data.keyword.Bluemix_notm}} dedicato](/docs/dedicated/index.html#setupdedicated).
+Prima di iniziare, [configura un ambiente {{site.data.keyword.Bluemix_dedicated_notm}}](/docs/dedicated/index.html#setupdedicated).
 
 Per configurare l'ambiente dedicato per utilizzare i cluster:
 
 1.  Aggiungi l'ID amministratore IBM fornito all'ambiente.
-    1.  Seleziona il tuo account {{site.data.keyword.Bluemix_notm}}
-dedicato.
+    1.  Seleziona il tuo account {{site.data.keyword.Bluemix_dedicated_notm}}.
     2.  Dalla barra dei menu, fai clic
 su **Gestisci>Sicurezza>Identità e
 accesso**. La finestra Utenti visualizza un elenco di utenti
@@ -274,15 +260,11 @@ e l'identità**.
     8.  Fai clic su **Invita utenti**.
 2.  [Crea gli ID IBM per gli utenti finali del tuo account {{site.data.keyword.Bluemix_notm}}. ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/account/us-en/signup/register.html)
 3.  [Aggiungi gli utenti dal passo precedente del tuo account {{site.data.keyword.Bluemix_notm}}.](cs_cluster.html#add_users)
-4.  Accedi al tuo account {{site.data.keyword.Bluemix_notm}}
-dedicato attraverso la console dell'ambiente pubblico e inizia a creare i cluster.
+4.  Accedi al tuo account {{site.data.keyword.Bluemix_dedicated_notm}} tramite la console dell'ambiente pubblico e inizia a creare i cluster.
     1.  Accedi alla console {{site.data.keyword.Bluemix_notm}} pubblico ([https://console.bluemix.net ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net)) con il tuo ID IBM.
-    2.  Dal menu Account, seleziona il tuo account {{site.data.keyword.Bluemix_notm}} dedicato. La console
-viene aggiornata con i servizi e le informazioni per la tua istanza di {{site.data.keyword.Bluemix_notm}} dedicato.
-    3.  Dal catalogo della tua istanza di {{site.data.keyword.Bluemix_notm}}
-dedicato, seleziona **Contenitori** e fai clic su **Cluster
-Kubernetes**.
-    Per ulteriori informazioni sulla creazione di un cluster, consulta [Creazione di cluster Kubernetes dalla GUI in {{site.data.keyword.Bluemix_notm}} dedicato (Chiuso Beta)](cs_cluster.html#creating_ui_dedicated).
+    2.  Dal menu Account, seleziona il tuo account {{site.data.keyword.Bluemix_dedicated_notm}}. La console viene aggiornata con i servizi e le informazioni per la tua istanza di {{site.data.keyword.Bluemix_dedicated_notm}}.
+    3.  Dal catalogo della tua istanza di {{site.data.keyword.Bluemix_dedicated_notm}}, seleziona **Contenitori** e fai clic su **Cluster Kubernetes**.
+    Per ulteriori informazioni sulla creazione di un cluster, vedi [Creazione di cluster Kubernetes dalla GUI in {{site.data.keyword.Bluemix_dedicated_notm}} (Beta chiusa)](cs_cluster.html#creating_ui_dedicated).
 5. Se il tuo sistema locale o la tua rete aziendale controllano gli endpoint internet pubblici utilizzando i proxy o i firewall, consulta [Apertura delle porte e degli indirizzi IP necessari nel tuo firewall](cs_security.html#opening_ports) per ulteriori informazioni su come consentire il traffico in uscita.
 
 
@@ -300,9 +282,16 @@ utilizzando i certificati di sicurezza TLS e la connessione openVPN.
 
 *Figura 1. La rete e l'architettura Kubernetes in {{site.data.keyword.containershort_notm}}*
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_org_ov.png">![{{site.data.keyword.containerlong_notm}} architettura Kubernetes](images/cs_org_ov.png)</a>
+![{{site.data.keyword.containerlong_notm}} architettura Kubernetes](images/cs_org_ov.png)
 
+Il diagramma illustra cosa viene gestito da te e cosa da IBM in un cluster. Per ulteriori dettagli sulle attività di manutenzione, vedi [Responsabilità di gestione del cluster](cs_planning.html#responsibilities).
 
+### {{site.data.keyword.Bluemix_dedicated_notm}}
+{: #dedicated_architecture}
+
+*Figura 2. La rete e l'architettura Kubernetes in {{site.data.keyword.Bluemix_dedicated_notm}}*
+
+![{{site.data.keyword.containershort_notm}} Architettura Kubernetes in {{site.data.keyword.Bluemix_dedicated_notm}}](images/cs_dedicated_arch.png)
 
 <br />
 

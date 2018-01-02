@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-20"
+lastupdated: "2017-11-14"
 
 ---
 
@@ -27,12 +27,11 @@ utilizza {{site.data.keyword.watson}} per analizzare i propri comunicati stampa 
 In questo scenario, lo sviluppatore dell'applicazione dell'agenzia di PR distribuisce una versione Hello World dell'applicazione nel
 cluster Kubernetes che l'amministratore di rete ha creato nella [prima esercitazione](cs_tutorials.html#cs_cluster_tutorial).
 
-In ogni lezione ti verrà spiegato come distribuire versioni progressivamente più complicate della stessa applicazione.
-Il diagramma mostra i componenti dell'esercitazione relativi alle distribuzioni dell'applicazione, fatta eccezione per la quarta parte.
+In ogni lezione ti verrà spiegato come distribuire progressivamente versioni più complicate della stessa applicazione. Il seguente diagramma mostra i componenti dell'esercitazione relativi alle distribuzioni dell'applicazione, ad eccezione della quarta parte.
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_roadmap.png">![Componenti della lezione](images/cs_app_tutorial_roadmap.png)</a>
+![Componenti della lezione](images/cs_app_tutorial_roadmap.png)
 
-Kubernetes utilizza diversi tipi di risorse per rendere operative le tue applicazioni nei cluster. In Kubernetes, le distribuzioni e i servizi lavorano insieme. Le distribuzioni includono le definizioni per
+Come illustrato nel diagramma, Kubernetes utilizza diversi tipi di risorse per rendere operative le tue applicazioni nei cluster. In Kubernetes, le distribuzioni e i servizi lavorano insieme. Le distribuzioni includono le definizioni per
 l'applicazione, come ad esempio l'immagine da utilizzare per il contenitore e quale porta esporre per l'applicazione.
 Quando crei una distribuzione, viene creato un pod Kubernetes per ogni contenitore che definisci nella
 distribuzione. Per una maggiore resilienza della tua applicazione, puoi definire più istanze della stessa applicazione
@@ -51,7 +50,7 @@ Per rendere la tua applicazione ancora più disponibile, nei cluster standard, p
 per eseguire ancora più repliche della tua applicazione. Questa attività non è trattata in questa esercitazione, ma tieni
 a mente questo concetto per futuri miglioramenti alla disponibilità di un'applicazione.
 
-Solo una delle lezioni include l'integrazione di un servizio {{site.data.keyword.Bluemix_notm}} in un'applicazione, ma puoi servirtene con un'applicazione tanto semplice o complessa quanto tu possa immaginare.
+Solo una delle lezioni include l'integrazione di un servizio {{site.data.keyword.Bluemix_notm}} in un'applicazione, ma puoi utilizzarle con un'applicazione tanto semplice come complessa.
 
 ## Obiettivi
 
@@ -60,7 +59,7 @@ Solo una delle lezioni include l'integrazione di un servizio {{site.data.keyword
 * Rendere pubblicamente accessibile un'applicazione
 * Distribuire una singola istanza di un'applicazione in un cluster utilizzando un comando Kubernetes e uno script
 * Distribuire più istanze di un'applicazione in contenitori che vengono ricreati durante i controlli di integrità
-* Distribuire un'applicazione che utilizza la funzionalità da un servizio {{site.data.keyword.Bluemix_notm}}
+* Distribuire un'applicazione che utilizza funzionalità da un servizio {{site.data.keyword.Bluemix_notm}}
 
 ## Tempo richiesto
 
@@ -79,14 +78,16 @@ Kubernetes.
 {: #cs_apps_tutorial_lesson1}
 
 In questa lezione, distribuisci una singola istanza dell'applicazione Hello World in un
-cluster.
+cluster. Il seguente diagramma include i componenti che distribuisci completando questa lezione.
+{:shortdesc}
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_components1.png">![Impostazioni di distribuzione](images/cs_app_tutorial_components1.png)</a>
+![Impostazioni di distribuzione](images/cs_app_tutorial_components1.png)
+
+Dall'esercitazione precedente, hai già un account e un cluster con un nodo di lavoro. In questa lezione, configura una distribuzione e distribuisci l'applicazione Hello World in un pod Kubernetes nel nodo di lavoro. Per renderla pubblicamente disponibile, crea un servizio Kubernetes.
 
 
 1.  Accedi alla CLI {{site.data.keyword.Bluemix_notm}}. Immetti le tue credenziali
-{{site.data.keyword.Bluemix_notm}} quando richiesto. Per specificare una regione {{site.data.keyword.Bluemix_notm}},
-[includi l'endpoint dell'API](cs_regions.html#bluemix_regions).
+{{site.data.keyword.Bluemix_notm}} quando richiesto. Per specificare una regione {{site.data.keyword.Bluemix_notm}}, [includi l'endpoint API](cs_regions.html#bluemix_regions).
 
     ```
     bx login
@@ -175,10 +176,10 @@ esegui il seguente comando.
         ```
         {: pre}
 
-5.  Clona o scarica il codice di origine per l'[applicazione Hello world ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/IBM/container-service-getting-started-wt) nella tua directory home utente.
+5.  Clona o scarica il codice di origine per l'[applicazione Hello world ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/Osthanes/container-service-getting-started-wt) nella tua directory home utente.
 
     ```
-    git clone https://github.com/IBM/container-service-getting-started-wt.git
+    git clone https://github.com/Osthanes/container-service-getting-started-wt.git
     ```
     {: pre}
 
@@ -435,6 +436,8 @@ Troppi comandi in questa lezione? D'accordo. Come l'utilizzo di uno script di co
 può fare del lavoro al tuo posto? Per utilizzare uno script di configurazione per la seconda versione dell'applicazione e per creare
 elevata disponibilità distribuendo più istanze di tale applicazione, continua con la prossima lezione.
 
+
+
 ## Lezione 2: distribuzione e aggiornamento delle applicazioni con elevata disponibilità
 {: #cs_apps_tutorial_lesson2}
 
@@ -444,10 +447,13 @@ cluster per una maggiore disponibilità della prima versione dell'applicazione. 
 potrebbero ravvisare tempi di risposta lenti. Più istanze possono voler dire tempi di risposta più veloci per i tuoi
 utenti. In questa lezione, imparerai anche come i controlli di integrità e gli aggiornamenti della distribuzione possono funzionare con
 Kubernetes.
+{:shortdesc}
 
+Il seguente diagramma include i componenti che distribuisci completando questa lezione.
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_components2.png">![Impostazioni di distribuzione](images/cs_app_tutorial_components2.png)</a>
+![Impostazioni di distribuzione](images/cs_app_tutorial_components2.png)
 
+Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di lavoro. In questa lezione, configura una distribuzione e distribuisci tre istanze dell'applicazione Hello World. Ogni istanza viene distribuita in un pod Kubernetes come parte di una serie di repliche nel nodo di lavoro. Per renderla pubblicamente disponibile, crea anche un servizio Kubernetes. 
 
 Come definito nello script di configurazione, Kubernetes può utilizzare un controllo di disponibilità per visualizzare se
 un contenitore in un pod è in esecuzione o meno. Ad esempio, questi controlli potrebbero individuare dei deadlock,
@@ -677,11 +683,16 @@ service "hw-demo-service" deleted
 Nelle precedenti lezioni, le applicazioni sono state distribuite come singoli componenti in un nodo di lavoro. In questa lezione, distribuisci due componenti di un'applicazione in un cluster che utilizzano il servizio Watson Tone Analyzer che hai aggiunto al tuo cluster nell'esercitazione precedente. Separare i componenti in contenitori differenti ti assicura di poterne aggiornare uno
 senza influenzare gli altri. Quindi, aggiornerai l'applicazione per scalarla con più repliche per renderla
 altamente disponibile.
+{:shortdesc}
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_app_tutorial_components3.png">![Impostazioni di distribuzione](images/cs_app_tutorial_components3.png)</a>
+Il seguente diagramma include i componenti che distribuisci completando questa lezione.
+
+![Impostazioni di distribuzione](images/cs_app_tutorial_components3.png)
+
+Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di lavoro. In questa lezione, crea un'istanza del servizio Watson Tone Analyzer nel tuo account {{site.data.keyword.Bluemix_notm}} e configura due distribuzioni, una per ogni componente dell'applicazione. Ogni componente viene distribuito in un pod Kubernetes nel nodo di lavoro. Per rendere entrambi questi componenti pubblicamente disponibili, crea anche un servizio Kubernetes per ogni componente. 
 
 
-### Lezione 3a: distribuzione dell'applicazione Watson Tone Analyzer 
+### Lezione 3a: distribuzione dell'applicazione Watson Tone Analyzer
 {: #lesson3a}
 
 1.  In una CLI, passa alla directory della terza applicazione, `Stage3`. Se stai utilizzando Docker Toolbox per Windows o OS X, utilizza Docker Quickstart
@@ -1007,7 +1018,7 @@ alla distribuzione precedente.
 
 2.  Facoltativo: ripeti le modifiche per la distribuzione watson-pod.
 
-[Verifica la tua conoscenza e fai un quiz! ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://bluemix-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
+[Verifica la tua conoscenza e fai un quiz! ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 
 Congratulazioni! Hai distribuito l'applicazione Watson Tone Analyzer. L'agenzia di PR può definitamente iniziare ad utilizzare
 questa distribuzione dell'applicazione per iniziare l'analisi dei loro comunicati stampa.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-18"
+lastupdated: "2017-11-17"
 
 ---
 
@@ -21,14 +21,28 @@ lastupdated: "2017-10-18"
 
 [Le regioni {{site.data.keyword.Bluemix_notm}}](#bluemix_regions) sono diverse dalle regioni [{{site.data.keyword.containershort_notm}}](#container_regions).
 
+![{{site.data.keyword.containershort_notm}} - Regioni e data center](/images/regions.png)
+
+Figura 1. Regioni e data center {{site.data.keyword.containershort_notm}}
+
 Regioni {{site.data.keyword.containershort_notm}} supportate:
+  * Asia Pacifico Nord
   * Asia Pacifico Sud
   * Europa Centrale
   * Regno Unito Sud
-  * Stati Uniti Est 
+  * Stati Uniti Est
   * Stati Uniti Sud
 
-## Endpoint API regione {{site.data.keyword.Bluemix_notm}} 
+Puoi creare cluster lite Kubernetes nelle seguenti regioni:
+  * Asia Pacifico Sud
+  * Europa Centrale
+  * Regno Unito Sud
+  * Stati Uniti Sud
+
+  **Nota**: se non sei cliente di un servizio a pagamento, non puoi creare i cluster lite nella regione Stati Uniti Sud.
+
+
+## Endpoint API regione {{site.data.keyword.Bluemix_notm}}
 {: #bluemix_regions}
 
 Puoi organizzare le tue risorse con nei servizi {{site.data.keyword.Bluemix_notm}} utilizzando le regioni {{site.data.keyword.Bluemix_notm}}. Ad esempio, puoi creare un cluster Kubernetes utilizzando un'immagine Docker privata archiviata nel {{site.data.keyword.registryshort_notm}} della stessa regione.
@@ -40,13 +54,13 @@ Per verificare in quale regione {{site.data.keyword.Bluemix_notm}} sei al moment
 
 Endpoint API della regione {{site.data.keyword.Bluemix_notm}} con i comandi di accesso di esempio:
 
-  * Stati Uniti Sud e Stati Uniti Est 
+  * Stati Uniti Sud e Stati Uniti Est
       ```
       bx login -a api.ng.bluemix.net
       ```
       {: pre}
 
-  * Sydney
+  * Sydney e Asia Pacifico Nord
       ```
       bx login -a api.au-syd.bluemix.net
       ```
@@ -69,7 +83,7 @@ Endpoint API della regione {{site.data.keyword.Bluemix_notm}} con i comandi di a
 <br />
 
 
-## Ubicazioni e endpoint API della regione {{site.data.keyword.containershort_notm}} 
+## Ubicazioni e endpoint API della regione {{site.data.keyword.containershort_notm}}
 {: #container_regions}
 
 Utilizzando le regioni {{site.data.keyword.containershort_notm}}, puoi creare o accedere ai cluster Kubernetes in un'altra regione rispetto alla regione
@@ -78,33 +92,38 @@ Utilizzando le regioni {{site.data.keyword.containershort_notm}}, puoi creare o 
 {:shortdesc}
 
 Endpoint API regione {{site.data.keyword.containershort_notm}}:
+  * Asia Pacifico Nord: `https://ap-north.containers.bluemix.net`
   * Asia Pacifico Sud: `https://ap-south.containers.bluemix.net`
   * Europa centrale: `https://eu-central.containers.bluemix.net`
   * Regno Unito Sud: `https://uk-south.containers.bluemix.net`
   * Stati Uniti Est: `https://us-east.containers.bluemix.net`
   * Stati Uniti Sud: `https://us-south.containers.bluemix.net`
 
-**Nota:** Stati Uniti Est è disponibile per l'utilizzo solo con i comandi della CLI.
-
 Per verificare in quale regione {{site.data.keyword.containershort_notm}} sei al momento, esegui `bx cs api` e controlla il campo **Regione**.
 
 ### Accesso a una diversa regione del servizio del contenitore
 {: #container_login_endpoints}
 
-Potresti voler accedere a un'altra regione {{site.data.keyword.containershort_notm}} per i seguenti motivi: 
+Potresti voler accedere a un'altra regione {{site.data.keyword.containershort_notm}} per i seguenti motivi:
   * Hai creato i servizi {{site.data.keyword.Bluemix_notm}} o le immagini Docker private in una regione e desideri utilizzarle con {{site.data.keyword.containershort_notm}} in un'altra regione.
   * Vuoi accedere a un cluster in una regione diversa dalla regione {{site.data.keyword.Bluemix_notm}} predefinita a cui hai eseguito l'accesso.
 
 </br>
 
 Comandi di esempio per accedere a una regione {{site.data.keyword.containershort_notm}}:
+  * Asia Pacifico Nord:
+    ```
+    bx cs init --host https://ap-north.containers.bluemix.net
+    ```
+  {: pre}
+
   * Asia Pacifico Sud:
     ```
     bx cs init --host https://ap-south.containers.bluemix.net
     ```
     {: pre}
 
-  * Europa Centrale: 
+  * Europa Centrale:
     ```
     bx cs init --host https://eu-central.containers.bluemix.net
     ```
@@ -128,14 +147,6 @@ Comandi di esempio per accedere a una regione {{site.data.keyword.containershort
     ```
     {: pre}
 
-### Creazione di cluster lite nelle regioni del servizio del contenitore
-{: #lite_regions}
-
-Puoi creare cluster lite Kubernetes nelle seguenti regioni:
-  * Asia Pacifico Sud
-  * Europa Centrale
-  * Regno Unito Sud
-  * Stati Uniti Sud
 
 ### Ubicazioni disponibili per il servizio del contenitore
 {: #locations}
@@ -144,10 +155,11 @@ Le ubicazioni sono data center disponibili in una regione.
 
   | Regione | Ubicazione | Città |
   |--------|----------|------|
-  | Asia Pacifico Sud| mel01, syd01, syd04        | Melbourne, Sydney |
-  | Europa Centrale| ams03, fra02        | Amsterdam, Francoforte|
-  | Regno Unito Sud| lon02, lon04         | Londra |
-  | Stati Uniti Est | wdc06, wdc07        | Washington, DC |
+  | Asia Pacifico Nord | hkg02, tok02 | Hong Kong, Tokyo |
+  | Asia Pacifico Sud     | mel01, syd01, syd04        | Melbourne, Sydney |
+  | Europa Centrale     | ams03, fra02, par01        | Amsterdam, Francoforte, Parigi |
+  | Regno Unito Sud      | lon02, lon04         | Londra |
+  | Stati Uniti Est      | tor01, wdc06, wdc07        | Toronto, Washington, DC |
   | Stati Uniti Sud     | dal10, dal12, dal13       | Dallas |
 
 ### Utilizzo dei comandi API del servizio del contenitore
@@ -164,6 +176,7 @@ Esempio di API `GET /clusters` in Stati Uniti Sud:
 </br>
 
 Per visualizzare la documentazione sui comandi API, aggiungi `swagger-api` all'endpoint della regione da visualizzare.
+  * Asia Pacifico Nord: https://ap-north.containers.bluemix.net/swagger-api/
   * Asia Pacifico Sud: https://ap-south.containers.bluemix.net/swagger-api/
   * Europa centrale: https://eu-central.containers.bluemix.net/swagger-api/
   * Regno Unito Sud: https://uk-south.containers.bluemix.net/swagger-api/

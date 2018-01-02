@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-12"
+lastupdated: "2017-11-15"
 
 ---
 
@@ -37,7 +37,7 @@ Questa attività include le informazioni per l'installazione di queste CLI e que
 -   Plug-in {{site.data.keyword.containershort_notm}}
 -   CLI Kubernetes versione 1.7.4 o successiva
 -   Facoltativo: plug-in {{site.data.keyword.registryshort_notm}}
--   Facoltativo: Docker versione 1.9 o successive 
+-   Facoltativo: Docker versione 1.9 o successive
 
 <br>
 Per installare le CLI:
@@ -58,7 +58,7 @@ Per installare le CLI:
 3.  Per creare i cluster Kubernetes e gestire i nodi di lavoro, installa il plugin {{site.data.keyword.containershort_notm}}. Il prefisso per eseguire i comandi utilizzando il plugin {{site.data.keyword.containershort_notm}} è `bx cs`.
 
     ```
-    bx plugin install container-service -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-service -r Bluemix
     ```
     {: pre}
 
@@ -125,7 +125,7 @@ ospitato da IBM e per archiviare e condividere le immagini Docker
 con altri utenti. Le immagini Docker sono richieste per distribuire i contenitori in un cluster. Il prefisso per l'esecuzione dei comandi di registro è `bx cr`.
 
     ```
-    bx plugin install container-registry -r {{site.data.keyword.Bluemix_notm}}
+    bx plugin install container-registry -r Bluemix
     ```
     {: pre}
 
@@ -167,8 +167,7 @@ Prima di poter eseguire i comandi `kubectl`, [installa le CLI richieste](#cs_cli
 [crea un cluster](cs_cluster.html#cs_cluster_cli).
 
 1.  Accedi alla CLI {{site.data.keyword.Bluemix_notm}}. Immetti le tue credenziali
-{{site.data.keyword.Bluemix_notm}} quando richiesto. Per specificare una regione {{site.data.keyword.Bluemix_notm}},
-[includi l'endpoint dell'API](cs_regions.html#bluemix_regions).
+{{site.data.keyword.Bluemix_notm}} quando richiesto. Per specificare una regione {{site.data.keyword.Bluemix_notm}}, [includi l'endpoint API](cs_regions.html#bluemix_regions).
 
       ```
       bx login
@@ -179,8 +178,7 @@ Prima di poter eseguire i comandi `kubectl`, [installa le CLI richieste](#cs_cli
 `--sso` e positivo con l'opzione `--sso`.
 
   2.  Seleziona un account {{site.data.keyword.Bluemix_notm}}. Se sei assegnato a più organizzazioni {{site.data.keyword.Bluemix_notm}}, seleziona l'organizzazione
-dove è stato creato il cluster. I cluster sono specifici di un'organizzazione,
-ma sono indipendenti da uno spazio {{site.data.keyword.Bluemix_notm}}. Pertanto, non devi selezionare uno spazio.
+dove è stato creato il cluster. I cluster sono specifici di un'organizzazione, ma sono indipendenti da uno spazio {{site.data.keyword.Bluemix_notm}}. Pertanto, non devi selezionare uno spazio.
 
   3.  Se vuoi creare o accedere ai cluster Kubernetes in un'altra regione rispetto alla regione {{site.data.keyword.Bluemix_notm}} che hai selezionato precedentemente, [specifica l'endpoint dell'API della regione {{site.data.keyword.containershort_notm}} ](cs_regions.html#container_login_endpoints).
 
@@ -270,8 +268,7 @@ Per aggiornare le CLI:
 1.  Aggiorna la CLI {{site.data.keyword.Bluemix_notm}}. Scarica la [versione più recente ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://clis.ng.bluemix.net/ui/home.html) ed esegui il programma di installazione.
 
 2. Accedi alla CLI {{site.data.keyword.Bluemix_notm}}. Immetti le tue credenziali
-{{site.data.keyword.Bluemix_notm}} quando richiesto. Per specificare una regione {{site.data.keyword.Bluemix_notm}},
-[includi l'endpoint dell'API](cs_regions.html#bluemix_regions).
+{{site.data.keyword.Bluemix_notm}} quando richiesto. Per specificare una regione {{site.data.keyword.Bluemix_notm}}, [includi l'endpoint API](cs_regions.html#bluemix_regions).
 
     ```
     bx login
@@ -285,7 +282,7 @@ Per aggiornare le CLI:
     1.  Installa l'aggiornamento dal repository di plugin {{site.data.keyword.Bluemix_notm}}.
 
         ```
-        bx plugin update container-service -r {{site.data.keyword.Bluemix_notm}}
+        bx plugin update container-service -r Bluemix
         ```
         {: pre}
 
@@ -356,7 +353,7 @@ di sistema.
     1.  Installa l'aggiornamento dal repository di plugin {{site.data.keyword.Bluemix_notm}}.
 
         ```
-        bx plugin update container-registry -r {{site.data.keyword.Bluemix_notm}}
+        bx plugin update container-registry -r Bluemix
         ```
         {: pre}
 
@@ -447,24 +444,24 @@ utilizzare. Per determinare quali informazioni di intestazione sono necessarie p
 
 <table>
 <thead>
-<th>ID {{site.data.keyword.Bluemix_notm}} </th>
+<th>ID {{site.data.keyword.Bluemix_notm}}</th>
 <th>Opzioni personali</th>
 </thead>
 <tbody>
 <tr>
 <td>ID non federato</td>
 <td><ul><li>Nome utente e password <strong>{{site.data.keyword.Bluemix_notm}}:</strong> puoi seguire le istruzioni in questo argomento per automatizzare completamente la creazione del tuo token di accesso IAM.</li>
-<li><strong>Genera una chiave API {{site.data.keyword.Bluemix_notm}}:</strong> come alternativa all'utilizzo del nome utente e password {{site.data.keyword.Bluemix_notm}}, puoi <a href="../iam/apikeys.html#manapikey" target="_blank">utilizzare le chiavi API {{site.data.keyword.Bluemix_notm}} </a> le chiavi API {{site.data.keyword.Bluemix_notm}} sono dipendenti dall'account {{site.data.keyword.Bluemix_notm}} per cui sono state generate. Non puoi combinare la tua chiave API {{site.data.keyword.Bluemix_notm}} con un ID dell'account differente nello stesso token IAM. Per accedere ai cluster che sono stati creati con un account diverso da quello su cui si basa la tua chiave API {{site.data.keyword.Bluemix_notm}}, devi accedere all'account per generare una nuova chiave API. </li></ul></tr>
+<li><strong>Genera una chiave API {{site.data.keyword.Bluemix_notm}}:</strong> come alternativa all'utilizzo di nome utente e password {{site.data.keyword.Bluemix_notm}}, puoi <a href="../iam/apikeys.html#manapikey" target="_blank">utilizzare le chiavi API {{site.data.keyword.Bluemix_notm}}</a> Le chiavi API {{site.data.keyword.Bluemix_notm}} sono dipendenti dall'account {{site.data.keyword.Bluemix_notm}} per il quale sono state generate. Non puoi combinare la tua chiave API {{site.data.keyword.Bluemix_notm}} con un ID dell'account differente nello stesso token IAM. Per accedere ai cluster che sono stati creati con un account diverso da quello su cui si basa la tua chiave API {{site.data.keyword.Bluemix_notm}}, devi accedere all'account per generare una nuova chiave API. </li></ul></tr>
 <tr>
 <td>ID federato</td>
-<td><ul><li><strong>Genera una chiave API {{site.data.keyword.Bluemix_notm}}:</strong> <a href="../iam/apikeys.html#manapikey" target="_blank">le chiavi API {{site.data.keyword.Bluemix_notm}} </a> sono dipendenti dall'account {{site.data.keyword.Bluemix_notm}} per cui sono state generate. Non puoi combinare la tua chiave API {{site.data.keyword.Bluemix_notm}} con un ID dell'account differente nello stesso token IAM. Per accedere ai cluster che sono stati creati con un account diverso da quello su cui si basa la tua chiave API {{site.data.keyword.Bluemix_notm}}, devi accedere all'account per generare una nuova chiave API. </li><li><strong>Utilizza un passocde monouso: </strong> se ti autentichi a {{site.data.keyword.Bluemix_notm}} utilizzando un passcode monouso, non puoi automatizzare completamente la creazione del tuo token IAM perché il richiamo del tuo passcode monouso richiede un'interazione manuale con il tuo browser web. Per automatizzare completamente la creazione del tuo token IAM, devi invece creare una chiave API {{site.data.keyword.Bluemix_notm}}. </ul></td>
+<td><ul><li><strong>Genera una chiave API {{site.data.keyword.Bluemix_notm}}:</strong> <a href="../iam/apikeys.html#manapikey" target="_blank">le chiavi API {{site.data.keyword.Bluemix_notm}}</a> sono dipendenti dall'account {{site.data.keyword.Bluemix_notm}} per il quale sono state generate. Non puoi combinare la tua chiave API {{site.data.keyword.Bluemix_notm}} con un ID dell'account differente nello stesso token IAM. Per accedere ai cluster che sono stati creati con un account diverso da quello su cui si basa la tua chiave API {{site.data.keyword.Bluemix_notm}}, devi accedere all'account per generare una nuova chiave API. </li><li><strong>Utilizza un passcode monouso: </strong> se ti autentichi a {{site.data.keyword.Bluemix_notm}} utilizzando un passcode monouso, non puoi automatizzare completamente la creazione del tuo token IAM perché il richiamo del tuo passcode monouso richiede un'interazione manuale con il tuo browser web. Per automatizzare completamente la creazione del tuo token IAM, devi creare invece una chiave API {{site.data.keyword.Bluemix_notm}}. </ul></td>
 </tr>
 </tbody>
 </table>
 
 1.  Crea il tuo token di accesso IAM (Identity and Access Management). Le informazioni sul corpo incluse nella tue richiesta variano in base al metodo di autenticazione {{site.data.keyword.Bluemix_notm}} che utilizzi. Sostituisci i seguenti valori:
-  - _&lt;my_bluemix_username&gt;_: il tuo nome utente {{site.data.keyword.Bluemix_notm}}.
-  - _&lt;my_bluemix_password&gt;_: la tua password {{site.data.keyword.Bluemix_notm}}.
+  - _&lt;my_username&gt;_: il tuo nome utente {{site.data.keyword.Bluemix_notm}}.
+  - _&lt;my_password&gt;_: la tua password {{site.data.keyword.Bluemix_notm}}.
   - _&lt;my_api_key&gt;_: la tua chiave API {{site.data.keyword.Bluemix_notm}}.
   - _&lt;my_passcode&gt;_: il tuo passcode monouso {{site.data.keyword.Bluemix_notm}}. Esegui `bx login --sso` e segui le istruzioni nel tuo output della CLI per richiamare il tuo passcode monouso utilizzando il tuo browser web.
 
@@ -481,18 +478,18 @@ utilizzare. Per determinare quali informazioni di intestazione sono necessarie p
     <tbody>
     <tr>
     <td>Intestazione</td>
-    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=</li></ul>
+    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><b>Nota</b>: per te viene fornito Yng6Yng=, l'autorizzazione codificata URL per il nome utente **bx** e la password **bx**.</p></li></ul>
     </td>
     </tr>
     <tr>
     <td>Corpo per il nome utente e la password {{site.data.keyword.Bluemix_notm}}.</td>
     <td><ul><li>grant_type: password</li>
     <li>response_type: cloud_iam, uaa</li>
-    <li>username: <em>&lt;my_bluemix_username&gt;</em></li>
-    <li>password: <em>&lt;my_bluemix_password&gt;</em></li>
+    <li>username: <em>&lt;my_username&gt;</em></li>
+    <li>password: <em>&lt;my_password&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li></ul>
-    <p>**Nota:** aggiungi la chiave uaa_client_secret senza alcun valore specificato.</p></td>
+    <p><b>Nota</b>: aggiungi la chiave uaa_client_secret senza alcun valore specificato. </p></td>
     </tr>
     <tr>
     <td>Corpo per le chiavi API {{site.data.keyword.Bluemix_notm}}</td>
@@ -501,7 +498,7 @@ utilizzare. Per determinare quali informazioni di intestazione sono necessarie p
     <li>apikey: <em>&lt;my_api_key&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li></ul>
-    <p>**Nota:** aggiungi la chiave uaa_client_secret senza alcun valore specificato.</p></td>
+    <p><b>Nota</b>: aggiungi la chiave uaa_client_secret senza alcun valore specificato. </p></td>
     </tr>
     <tr>
     <td>Corpo per il passcode monouso {{site.data.keyword.Bluemix_notm}}</td>
@@ -510,7 +507,7 @@ utilizzare. Per determinare quali informazioni di intestazione sono necessarie p
     <li>passcode: <em>&lt;my_passcode&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li></ul>
-    <p>**Nota:** aggiungi la chiave uaa_client_secret senza alcun valore specificato.</p></td>
+    <p><b>Nota</b>: aggiungi la chiave uaa_client_secret senza alcun valore specificato. </p></td>
     </tr>
     </tbody>
     </table>
@@ -532,7 +529,7 @@ utilizzare. Per determinare quali informazioni di intestazione sono necessarie p
     {: screen}
 
     Puoi trovare il token IAM nel campo **access_token** del tuo output dell'API. Prendi nota del token IAM per recuperare
-ulteriori informazioni di intestazione nei prossimi passi. 
+ulteriori informazioni di intestazione nei prossimi passi.
 
 2.  Richiama l'ID dell'account {{site.data.keyword.Bluemix_notm}} in cui è stato creato il cluster. Sostituisci _&lt;iam_token&gt;_ con il token IAM recuperato nel
 passo precedente.
@@ -568,8 +565,8 @@ passo precedente.
       "resources":
         {
           "metadata": {
-            "guid": "<my_bluemix_account_id>",
-            "url": "/v1/accounts/<my_bluemix_account_id>",
+            "guid": "<my_account_id>",
+            "url": "/v1/accounts/<my_account_id>",
             "created_at": "2016-01-07T18:55:09.726Z",
             "updated_at": "2017-04-28T23:46:03.739Z",
             "origin": "BSS"
@@ -581,11 +578,9 @@ passo precedente.
 trovare l'ID del tuo account {{site.data.keyword.Bluemix_notm}}
 nel campo **resources/metadata/guid** dell'output dell'API.
 
-3.  Genera un nuovo token IAM che include le tue credenziali e il tuo ID account {{site.data.keyword.Bluemix_notm}} in cui è stato creato il cluster. Sostituisci
-_&lt;my_bluemix_account_id&gt;_ con l'ID dell'account {{site.data.keyword.Bluemix_notm}} richiamato nel passo precedente.
+3.  Genera un nuovo token IAM che include le tue credenziali e il tuo ID account {{site.data.keyword.Bluemix_notm}} in cui è stato creato il cluster. Sostituisci _&lt;my_account_id&gt;_ con l'ID dell'account {{site.data.keyword.Bluemix_notm}} richiamato nel passo precedente.
 
-    **Nota:** se stai utilizzando una chiave API {{site.data.keyword.Bluemix_notm}}, devi utilizzare l'ID dell'account e la chiave API
-{{site.data.keyword.Bluemix_notm}} per cui è stata creata. Per accedere ai cluster in altri account, accedi a questo account e crea una chiave API {{site.data.keyword.Bluemix_notm}} basata su questo account.
+    **Nota:** se utilizzi una chiave API {{site.data.keyword.Bluemix_notm}}, devi usare l'ID dell'account {{site.data.keyword.Bluemix_notm}} per il quale è stata creata la chiave API. Per accedere ai cluster in altri account, collegati a questo account e crea una chiave API {{site.data.keyword.Bluemix_notm}} basata su questo account.
 
     ```
     POST https://iam.<region>.bluemix.net/oidc/token
@@ -600,19 +595,19 @@ _&lt;my_bluemix_account_id&gt;_ con l'ID dell'account {{site.data.keyword.Bluemi
     <tbody>
     <tr>
     <td>Intestazione</td>
-    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=</li></ul>
+    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><b>Nota</b>: per te viene fornito Yng6Yng=, l'autorizzazione codificata URL per il nome utente **bx** e la password **bx**.</p></li></ul>
     </td>
     </tr>
     <tr>
     <td>Corpo per il nome utente e la password {{site.data.keyword.Bluemix_notm}}.</td>
     <td><ul><li>grant_type: password</li>
     <li>response_type: cloud_iam, uaa</li>
-    <li>username: <em>&lt;my_bluemix_username&gt;</em></li>
-    <li>password: <em>&lt;my_bluemix_password&gt;</em></li>
+    <li>username: <em>&lt;my_username&gt;</em></li>
+    <li>password: <em>&lt;my_password&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;my_bluemix_account_id&gt;</em></li></ul>
-    <p>**Nota:** aggiungi la chiave uaa_client_secret senza alcun valore specificato.</p></td>
+    <li>bss_account: <em>&lt;my_account_id&gt;</em></li></ul>
+    <p><b>Nota</b>: aggiungi la chiave uaa_client_secret senza alcun valore specificato. </p></td>
     </tr>
     <tr>
     <td>Corpo per le chiavi API {{site.data.keyword.Bluemix_notm}}</td>
@@ -621,8 +616,8 @@ _&lt;my_bluemix_account_id&gt;_ con l'ID dell'account {{site.data.keyword.Bluemi
     <li>apikey: <em>&lt;my_api_key&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;my_bluemix_account_id&gt;</em></li></ul>
-    <p>**Nota:** aggiungi la chiave uaa_client_secret senza alcun valore specificato.</p></td>
+    <li>bss_account: <em>&lt;my_account_id&gt;</em></li></ul>
+    <p><b>Nota</b>: aggiungi la chiave uaa_client_secret senza alcun valore specificato. </p></td>
     </tr>
     <tr>
     <td>Corpo per il passcode monouso {{site.data.keyword.Bluemix_notm}}</td>
@@ -631,8 +626,8 @@ _&lt;my_bluemix_account_id&gt;_ con l'ID dell'account {{site.data.keyword.Bluemi
     <li>passcode: <em>&lt;my_passcode&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;my_bluemix_account_id&gt;</em></li></ul>
-    <p>**Nota:** aggiungi la chiave uaa_client_secret senza alcun valore specificato.</p></td>
+    <li>bss_account: <em>&lt;my_account_id&gt;</em></li></ul>
+    <p><b>Nota<b>: aggiungi la chiave uaa_client_secret senza alcun valore specificato. </p></td>
     </tr>
     </tbody>
     </table>
@@ -653,88 +648,9 @@ _&lt;my_bluemix_account_id&gt;_ con l'ID dell'account {{site.data.keyword.Bluemi
     ```
     {: screen}
 
-    Puoi
-trovare il token IAM nel campo **access_token**, il token di aggiornamento IAM nel
-campo **refresh_token** e il token UAA nel campo **uaa_token**
-dell'output della CLI. 
+    Puoi trovare il token IAM nel campo **access_token** e il token di aggiornamento IAM nel campo **refresh_token**.
 
-4.  Richiama l'ID dello spazio {{site.data.keyword.Bluemix_notm}} in cui è stato creato il cluster. 
-    1.  Recupera l'endpoint API per accedere all'ID spazio. Sostituisci
-_&lt;uaa_token&gt;_ con il token UAA richiamato nel passo
-precedente.
-
-        ```
-        GET https://api.<region>.bluemix.net/v2/organizations
-        ```
-        {: codeblock}
-
-        <table summary="Parametri di input per richiamare l'ID spazio">
-        <thead>
-        <th>Parametri di input</th>
-        <th>Valori</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td>Intestazione</td>
-        <td><ul><li>Content-Type: application/x-www-form-urlencoded;charset=utf</li>
-        <li>Authorization: bearer &lt;uaa_token&gt;</li>
-        <li>Accept: application/json;charset=utf-8</li></ul></td>
-        </tr>
-        </tbody>
-        </table>
-
-      Output API di esempio:
-
-      ```
-      {
-            "metadata": {
-              "guid": "<bluemix_org_id>",
-              "url": "/v2/organizations/<my_bluemix_org_id>",
-              "created_at": "2016-01-07T18:55:19Z",
-              "updated_at": "2016-02-09T15:56:22Z"
-            },
-            "entity": {
-              "name": "<bluemix_org_name>",
-              "billing_enabled": false,
-              "quota_definition_guid": "<bluemix_org_id>",
-              "status": "active",
-              "quota_definition_url": "/v2/quota_definitions/<bluemix_org_id>",
-              "spaces_url": "/v2/organizations/<bluemix_org_id>/spaces",
-      ...
-
-      ```
-      {: screen}
-
-5.  Prendi nota dell'output del campo **spaces_url**.
-6.  Richiama l'ID dello spazio {{site.data.keyword.Bluemix_notm}} utilizzando l'endpoint **spaces_url**. 
-
-      ```
-      GET https://api.<region>.bluemix.net/v2/organizations/<bluemix_org_id>/spaces
-      ```
-      {: codeblock}
-
-      Output API di esempio:
-
-      ```
-      {
-            "metadata": {
-              "guid": "<bluemix_space_id>",
-              "url": "/v2/spaces/<my_bluemix_space_id>",
-              "created_at": "2016-01-07T18:55:22Z",
-              "updated_at": null
-            },
-            "entity": {
-              "name": "<bluemix_space_name>",
-              "organization_guid": "<bluemix_org_id>",
-              "space_quota_definition_guid": null,
-              "allow_ssh": true,
-      ...
-      ```
-      {: screen}
-
-      Puoi trovare l'ID dello spazio {{site.data.keyword.Bluemix_notm}} nel campo **metadata/guid** dell'output dell'API. 
-
-7.  Elenca tutti i cluster Kubernetes nel tuo account. Utilizza le informazioni che hai richiamato nei
+4.  Elenca tutti i cluster Kubernetes nel tuo account. Utilizza le informazioni che hai richiamato nei
 passi precedenti per creare le informazioni della tua intestazione.
 
     -   Stati Uniti Sud
@@ -744,7 +660,7 @@ passi precedenti per creare le informazioni della tua intestazione.
         ```
         {: codeblock}
 
-    -   Stati Uniti Est 
+    -   Stati Uniti Est
 
         ```
         GET https://us-east.containers.bluemix.net/v1/clusters
@@ -786,7 +702,7 @@ passi precedenti per creare le informazioni della tua intestazione.
         </tbody>
         </table>
 
-8.  Consulta la [Documentazione API {{site.data.keyword.containershort_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://us-south.containers.bluemix.net/swagger-api) per trovare un elenco di API supportate.
+5.  Consulta la [Documentazione API {{site.data.keyword.containershort_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://us-south.containers.bluemix.net/swagger-api) per trovare un elenco di API supportate.
 
 <br />
 
@@ -820,7 +736,7 @@ Attieniti alla seguente procedura se vuoi aggiornare il tuo token IAM.
     <tr>
     <td>Intestazione</td>
     <td><ul><li>Content-Type: application/x-www-form-urlencoded</li>
-    <li>Authorization: Basic Yng6Yng=</li></ul></td>
+    <li>Authorization: Basic Yng6Yng=<p><b>Nota</b>: per te viene fornito Yng6Yng=, l'autorizzazione codificata URL per il nome utente **bx** e la password **bx**.</p></li></ul></td>
     </tr>
     <tr>
     <td>Corpo</td>
@@ -829,7 +745,7 @@ Attieniti alla seguente procedura se vuoi aggiornare il tuo token IAM.
     <li>refresh_token: <em>&lt;token_aggiornamento_iam&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;bluemix_account_id&gt;</em></li></ul><p>**Nota:** aggiungi la chiave uaa_client_secret senza alcun valore specificato.</p></td>
+    <li>bss_account: <em>&lt;account_id&gt;</em></li></ul><p><b>Nota</b>: aggiungi la chiave uaa_client_secret senza alcun valore specificato. </p></td>
     </tr>
     </tbody>
     </table>

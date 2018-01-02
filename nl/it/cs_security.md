@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-24"
+lastupdated: "2017-11-16"
 
 ---
 
@@ -25,12 +25,14 @@ assicurare la conformità di sicurezza tra i tuoi componenti dell'infrastruttura
 le distribuzioni del contenitore.
 {: shortdesc}
 
-<a href="https://console.bluemix.net/docs/api/content/containers/images/cs_security.png" >Sicurezza cluster <img src="images/cs_security.png" width="400" alt="{{site.data.keyword.containershort_notm}} " style="width:400px; border-style: none"/></a>
+Nel seguente diagramma, puoi visualizzare le funzioni di sicurezza raggruppate per master Kubernetes, nodi di lavoro e immagini di contenitore.  
+<img src="images/cs_security.png" width="400" alt="{{site.data.keyword.containershort_notm}} - Sicurezza cluster " style="width:400px; border-style: none"/>
 
 
-  <table summary="La prima riga nella tabella si estende su entrambe le colonne. Le rimanenti righe devono essere lette da sinistra a destra, con l'ubicazione del server nella prima colonna e gli indirizzi IP corrispondenti nella seconda colonna.">
+  <table summary="La prima riga nella tabella si estende su entrambe le colonne. Le restanti righe devono essere lette da sinistra a destra, con la posizione del server nella prima colonna e gli indirizzi IP corrispondenti nella seconda colonna.">
+  <caption>Funzioni di sicurezza</caption>
   <thead>
-  <th colspan=2><img src="images/idea.png"/>Impostazioni di sicurezza cluster integrate in {{site.data.keyword.containershort_notm}}</th>
+  <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Impostazioni di sicurezza cluster integrate in {{site.data.keyword.containershort_notm}}</th>
   </thead>
   <tbody>
     <tr>
@@ -48,7 +50,7 @@ di lavoro disponibili. Per ulteriori informazioni, consulta [Sicurezza master Ku
       <td>I contenitori sono distribuiti su nodi di lavoro dedicati a un cluster e assicurano
 l'isolamento di calcolo, di rete e di archiviazione ai clienti IBM. {{site.data.keyword.containershort_notm}} fornisce funzioni di sicurezza integrate per
 mantenere protetti i tuoi nodi di lavoro sulla rete pubblica e privata e per assicurare la conformità
-di sicurezza del nodo di lavoro. Per ulteriori informazioni, consulta [Sicurezza nodo di lavoro](#cs_security_worker).</td>
+di sicurezza del nodo di lavoro. Per ulteriori informazioni, consulta [Sicurezza nodo di lavoro](#cs_security_worker). Inoltre, puoi aggiungere le [politiche di rete Calico](#cs_security_network_policies) per specificare ulteriormente il traffico di rete che vuoi consentire o bloccare da e verso un pod su un nodo di lavoro. </td>
      </tr>
      <tr>
       <td>Immagini</td>
@@ -73,8 +75,7 @@ e la comunicazione di rete del cluster.
 
 <dl>
   <dt>Master Kubernetes dedicato completamente gestito</dt>
-    <dd>Ogni cluster Kubernetes in {{site.data.keyword.containershort_notm}}
-è controllato da un master Kubernetes dedicato gestito da IBM in un account dell'infrastruttura IBM Bluemix (SoftLayer) di proprietà di IBM. Il master Kubernetes è configurato con i seguenti componenti dedicati che non sono condivisi con altri clienti IBM.
+    <dd>Ogni cluster Kubernetes in {{site.data.keyword.containershort_notm}} è controllato da un master Kubernetes dedicato gestito da IBM in un account dell'infrastruttura IBM Cloud (SoftLayer) di proprietà di IBM. Il master Kubernetes è configurato con i seguenti componenti dedicati che non sono condivisi con altri clienti IBM.
     <ul><li>etcd data store: archivia tutte le risorse Kubernetes di un cluster, come servizi, distribuzioni e pod. Le mappe di configurazione e i segreti Kubernetes sono dati dell'applicazione che vengono archiviati come coppie chiave-valore in modo che possano essere utilizzati da un'applicazione che viene eseguita in un pod. I dati in etcd sono archiviati su un disco crittografato gestito da IBM e crittografati tramite TLS quando vengono inviati a un pod per garantire la protezione e l'integrità dei dati.</li>
     <li>kube-apiserver: funge da punto di ingresso principale per tutte le richieste dal nodo di lavoro al master
 Kubernetes. kube-apiserver convalida ed elabora le richiese e può leggere e scrivere in
@@ -86,7 +87,7 @@ non viene distribuito nel cluster.</li>
     <li>kube-controller-manager: responsabile del monitoraggio delle serie di repliche e della creazione dei pod corrispondenti
 per archiviare lo stato desiderato.</li>
     <li>OpenVPN: componente specifico di {{site.data.keyword.containershort_notm}}
-per fornire la connettività di rete protetta per tutti i master Kubernetes alla comunicazione del nodo di lavoro. </li></ul></dd>
+per fornire la connettività di rete protetta per tutti i master Kubernetes alla comunicazione del nodo di lavoro.</li></ul></dd>
   <dt>Connettività di rete protetta TLS per tutti i nodi di lavoro alla comunicazione master Kubernetes</dt>
     <dd>Per proteggere la comunicazione di rete al master Kubernetes, {{site.data.keyword.containershort_notm}} genera i certificati
 TLS che codificano la comunicazione dai/ai componenti kube-apiserver e etcd data store per ogni cluster. Questi certificati non sono mai condivisi tra i cluster o tra i componenti master Kubernetes.</dd>
@@ -118,27 +119,21 @@ e per garantire l'isolamento di risorse, rete e archiviazione.
 
 <dl>
   <dt>Isolamento dell'infrastruttura di calcolo, di rete e di archiviazione</dt>
-    <dd>Quando crei un cluster, IBM esegue il provisioning delle macchine virtuali come nodi di lavoro nell'account dell'infrastruttura IBM Bluemix
-(SoftLayer) del cliente o nell'account dell'infrastruttura IBM Bluemix (SoftLayer) dedicato di IBM. I nodi di lavoro sono dedicati a un cluster e non ospitano i carichi di lavoro di altri cluster.</br> Ogni account {{site.data.keyword.Bluemix_notm}} è configurato con le VLAN dell'infrastruttura IBM Bluemix (SoftLayer) per garantire prestazioni di rete di qualità
-e l'isolamento sui nodi di lavoro. </br>Per conservare i dati nel tuo cluster, puoi
-eseguire il provisioning dell'archivio file basato su NFS dedicato dall'infrastruttura IBM Bluemix (SoftLayer) e utilizzare le funzioni di protezione dei dati integrate
-di questa piattaforma.</dd>
+    <dd>Quando crei un cluster, IBM esegue il provisioning delle macchine virtuali come nodi di lavoro nell'account dell'infrastruttura IBM Cloud (SoftLayer) del cliente o nell'account dell'infrastruttura IBM Cloud (SoftLayer) dedicato. I nodi di lavoro sono dedicati a un cluster e non ospitano i carichi di lavoro di altri cluster.</br> Ogni account {{site.data.keyword.Bluemix_notm}} è configurato con le VLAN dell'infrastruttura IBM Cloud (SoftLayer) per garantire prestazioni di rete di qualità e l'isolamento sui nodi di lavoro. </br>Per conservare i dati nel tuo cluster, puoi eseguire il provisioning dell'archivio file basato su NFS dedicato dall'infrastruttura IBM Cloud (SoftLayer) e utilizzare le funzioni di sicurezza dei dati integrate di questa piattaforma.</dd>
   <dt>Configurazione di nodi di lavoro protetti</dt>
     <dd>Ogni nodo di lavoro è configurato con un sistema operativo Ubuntu che non può essere modificato dall'utente. Per proteggere il sistema operativo dei nodi di lavoro da potenziali attacchi, ogni nodo di lavoro è configurato con delle impostazioni del firewall avanzate che sono implementate dalle regole iptable di Linux.</br> Tutti i contenitori in esecuzione su
 Kubernetes sono protetti da impostazioni di rete Calico predefinite configurate su ogni nodo di lavoro durante
-la creazione del cluster. Questa configurazione garantisce la comunicazione di rete tra i nodi di lavoro e i pod. Per limitare ulteriormente le azioni che un contenitore può eseguire sul nodo di lavoro, gli utenti possono scegliere di configurare le
+la creazione del cluster. Questa configurazione garantisce comunicazioni di rete sicure tra i nodi di lavoro e i pod. Per limitare ulteriormente le azioni che un contenitore può eseguire sul nodo di lavoro, gli utenti possono scegliere di configurare le
 [politiche AppArmor ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tutorials/clusters/apparmor/) nei nodi di lavoro.</br> Per impostazione predefinita, l'accesso SSH per l'utente root è disabilitato sul nodo di lavoro. Se vuoi installare delle funzioni aggiuntive sul nodo di lavoro, puoi utilizzare
 le [serie daemon Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset) per tutto quello che vuoi eseguire su ogni nodo di lavoro oppure i
 [lavori Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) per qualsiasi azione a singola ricorrenza che vuoi eseguire.</dd>
   <dt>Conformità di sicurezza del nodo di lavoro Kubernetes</dt>
-    <dd>IBM collabora con team di sicurezza esterni e interni per risolvere le vulnerabilità di conformità di sicurezza potenziali. IBM mantiene l'accesso SSH ai nodi di lavoro per distribuire gli aggiornamenti e le patch di sicurezza al sistema operativo. </br> <b>Importante</b>: riavvia regolarmente i nodi
+    <dd>IBM collabora con team di sicurezza esterni e interni per risolvere le vulnerabilità di conformità di sicurezza potenziali. IBM mantiene l'accesso SSH ai nodi di lavoro per distribuire gli aggiornamenti e le patch di sicurezza al sistema operativo.</br> <b>Importante</b>: riavvia regolarmente i nodi
 di lavoro per assicurarti che l'installazione di aggiornamenti e patch di sicurezza venga automaticamente distribuita al sistema operativo. IBM non riavvia i tuoi nodi di lavoro.</dd>
-  <dt>Supporto per i firewall della rete dell'infrastruttura IBM Bluemix (SoftLayer)</dt>
-    <dd>{{site.data.keyword.containershort_notm}} è compatibile con tutte le offerte firewall dell'[Infrastruttura
-IBM Bluemix (SoftLayer) ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/cloud-computing/bluemix/network-security). Su {{site.data.keyword.Bluemix_notm}} pubblico,
+  <dt>Supporto per i firewall di rete dell'infrastruttura IBM Cloud (SoftLayer)</dt>
+    <dd>{{site.data.keyword.containershort_notm}} è compatibile con tutte le [offerte firewall dell'infrastruttura IBM Cloud (SoftLayer) ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/cloud-computing/bluemix/network-security). Su {{site.data.keyword.Bluemix_notm}} pubblico,
 puoi configurare un firewall con politiche di rete personalizzate per fornire
-una sicurezza di rete dedicata al tuo cluster e per rilevare e risolvere intrusioni di rete. Ad esempio, puoi scegliere di configurare [Vyatta ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://knowledgelayer.softlayer.com/topic/vyatta-1) ad agire come tuo firewall e bloccare il traffico indesiderato. Quando configuri un firewall, [devi anche aprire le porte e gli indirizzi IP necessari](#opening_ports) per ogni regione in modo che il master e i nodi di lavoro possano comunicare. Si {{site.data.keyword.Bluemix_notm}} dedicato,
-i firewall, DataPower, Fortigate e DNS sono già configurati come parte della distribuzione dell'ambiente dedicato standard.</dd>
+una sicurezza di rete dedicata al tuo cluster e per rilevare e risolvere intrusioni di rete. Ad esempio, puoi scegliere di configurare [Vyatta ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://knowledgelayer.softlayer.com/topic/vyatta-1) ad agire come tuo firewall e bloccare il traffico indesiderato. Quando configuri un firewall, [devi anche aprire le porte e gli indirizzi IP necessari](#opening_ports) per ogni regione in modo che il master e i nodi di lavoro possano comunicare. Su {{site.data.keyword.Bluemix_dedicated_notm}}, i firewall, DataPower, Fortigate e DNS sono già configurati come parte della distribuzione dell'ambiente dedicato standard. </dd>
   <dt>Mantieni i servizi privati o esponi selettivamente i sevizi e le applicazioni a internet pubblicamente</dt>
     <dd>Puoi scegliere di mantenere privati i tuoi servizi e le tue applicazioni e di utilizzare le funzioni di sicurezza integrate
 descritte in questo argomento per garantire la comunicazione protetta tra i nodi di lavoro e i pod. Per esporre i servizi e le applicazioni pubblicamente su internet, puoi utilizzare il supporto Ingress e il programma di bilanciamento del carico per
@@ -154,7 +149,7 @@ e inviati al servizio di monitoraggio e registrazione di IBM.</dd>
 {: #opening_ports}
 
 Controlla le seguenti situazioni in cui potresti aver bisogno di aprire porte e indirizzi IP specifici nei tuoi firewall:
-* Per consentire la comunicazione tra il master Kubernetes e i nodi di lavoro quando è configurato un firewall per i nodi di lavoro o le impostazioni del firewall sono personalizzate nel tuo account dell'infrastruttura IBM Bluemix (SoftLayer)
+* Per consentire la comunicazione tra il master Kubernetes e i nodi di lavoro quando è configurato un firewall per i nodi di lavoro o le impostazioni del firewall sono personalizzate nel tuo account dell'infrastruttura IBM Cloud (SoftLayer)
 * Per accedere al programma di bilanciamento del carico o al controller Ingress dall'esterno del cluster
 * Per eseguire i comandi `kubectl` dal tuo sistema locale quando le politiche di rete aziendali impediscono l'accesso agli endpoint di rete pubblici tramite proxy o firewall.
 
@@ -167,7 +162,7 @@ Controlla le seguenti situazioni in cui potresti aver bisogno di aprire porte e 
 
   2.  Nel tuo firewall per la connettività IN USCITA dai tuoi nodi di lavoro, consenti il traffico di rete in uscita dal nodo di lavoro
 di origine alle porte TCP/UDP di destinazione comprese nell'intervallo 20000-32767 e la portata 443 per `<each_worker_node_publicIP>` e i seguenti indirizzi IP e gruppi di rete.
-      - **Importante**: devi consentire il traffico in uscita alla porta 443 e a tutte le ubicazioni nella regione tra di loro, per bilanciare il carico durante il processo di avvio. Ad esempio, se il tuo cluster è in Stati Uniti Sud, devi consentire il traffico dalla porta 443 per dal10 e dal12 e da dal10 e dal12 tra loro.
+      - **Importante**: devi consentire il traffico in uscita alla porta 443 per tutte le ubicazioni all'interno della regione, per bilanciare il carico durante il processo di avvio. Ad esempio, se il tuo cluster si trova in Stati Uniti Sud, devi consentire il traffico dalla porta 443 agli indirizzi IP per tutte le ubicazioni (dal10, dal12 e dal13).
       <p>
   <table summary="La prima riga nella tabella si estende su entrambe le colonne. Le rimanenti righe devono essere lette da sinistra a destra, con l'ubicazione del server nella prima colonna e gli indirizzi IP corrispondenti nella seconda colonna.">
       <thead>
@@ -177,14 +172,19 @@ di origine alle porte TCP/UDP di destinazione comprese nell'intervallo 20000-327
       </thead>
     <tbody>
       <tr>
+        <td>Asia Pacifico Nord</td>
+        <td>hkg02<br>tok02</td>
+        <td><code>169.56.132.234</code><br><code>161.202.126.210</code></td>
+       </tr>
+      <tr>
          <td>Asia Pacifico Sud</td>
-         <td>mel01<br>syd01</td>
-         <td><code>168.1.97.67</code><br><code>168.1.8.195</code></td>
+         <td>mel01<br>syd01<br>syd04</td>
+         <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19</code></td>
       </tr>
       <tr>
          <td>Europa Centrale</td>
-         <td>ams03<br>fra02</td>
-         <td><code>169.50.169.110</code><br><code>169.50.56.174</code></td>
+         <td>ams03<br>fra02<br>par01</td>
+         <td><code>169.50.169.110</code><br><code>169.50.56.174</code><br><code>159.8.86.149</code></td>
         </tr>
       <tr>
         <td>Regno Unito Sud</td>
@@ -192,9 +192,9 @@ di origine alle porte TCP/UDP di destinazione comprese nell'intervallo 20000-327
         <td><code>159.122.242.78</code><br><code>158.175.65.170</code></td>
       </tr>
       <tr>
-        <td>Stati Uniti Est </td>
-         <td>wdc06<br>wdc07</td>
-         <td><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+        <td>Stati Uniti Est</td>
+         <td>tor01<br>wdc06<br>wdc07</td>
+         <td><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
       </tr>
       <tr>
         <td>Stati Uniti Sud</td>
@@ -208,25 +208,31 @@ di origine alle porte TCP/UDP di destinazione comprese nell'intervallo 20000-327
   3.  Consenti il traffico di rete in uscita dai nodi di lavoro a {{site.data.keyword.registrylong_notm}}:
       - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
       - Sostituisci <em>&lt;registry_publicIP&gt;</em> con tutti gli indirizzi delle regioni del registro per cui desideri consentire il traffico:
-        <p>      
+        <p>
 <table summary="La prima riga nella tabella si estende su entrambe le colonne. Le rimanenti righe devono essere lette da sinistra a destra, con l'ubicazione del server nella prima colonna e gli indirizzi IP corrispondenti nella seconda colonna.">
-        <thead>
-        <th colspan=2><img src="images/idea.png"/> Indirizzi IP registro</th>
-        </thead>
+      <thead>
+        <th>Regione del contenitore</th>
+        <th>Indirizzo del registro</th>
+        <th>Indirizzo IP del registro</th>
+      </thead>
       <tbody>
         <tr>
+          <td>Asia Pacifico Nord, Asia Pacifico Sud</td>
           <td>registry.au-syd.bluemix.net</td>
           <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
         </tr>
         <tr>
+          <td>Europa Centrale</td>
           <td>registry.eu-de.bluemix.net</td>
           <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></td>
          </tr>
          <tr>
+          <td>Regno Unito Sud</td>
           <td>registry.eu-gb.bluemix.net</td>
           <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></td>
          </tr>
          <tr>
+          <td>Stati Uniti Est, Stati Uniti Sud</td>
           <td>registry.ng.bluemix.net</td>
           <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></td>
          </tr>
@@ -239,18 +245,23 @@ di origine alle porte TCP/UDP di destinazione comprese nell'intervallo 20000-327
       - Sostituisci <em>&lt;monitoring_publicIP&gt;</em> con tutti gli indirizzi delle regioni di monitoraggio per cui desideri consentire il traffico:
         <p><table summary="La prima riga nella tabella si estende su entrambe le colonne. Le rimanenti righe devono essere lette da sinistra a destra, con l'ubicazione del server nella prima colonna e gli indirizzi IP corrispondenti nella seconda colonna.">
         <thead>
-        <th colspan=2><img src="images/idea.png"/> Monitoraggio indirizzi IP pubblici</th>
+        <th>Regione del contenitore</th>
+        <th>Indirizzo di monitoraggio</th>
+        <th>Indirizzi IP di monitoraggio</th>
         </thead>
       <tbody>
         <tr>
+         <td>Europa Centrale</td>
          <td>metrics.eu-de.bluemix.net</td>
          <td><code>159.122.78.136/29</code></td>
         </tr>
         <tr>
+         <td>Regno Unito Sud</td>
          <td>metrics.eu-gb.bluemix.net</td>
          <td><code>169.50.196.136/29</code></td>
         </tr>
         <tr>
+          <td>Stati Uniti Est, Stati Uniti Sud, Asia Pacifico Nord</td>
           <td>metrics.ng.bluemix.net</td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
@@ -262,18 +273,23 @@ di origine alle porte TCP/UDP di destinazione comprese nell'intervallo 20000-327
       - Sostituisci <em>&lt;logging_publicIP&gt;</em> con tutti gli indirizzi delle regioni di registrazione per cui desideri consentire il traffico:
         <p><table summary="La prima riga nella tabella si estende su entrambe le colonne. Le rimanenti righe devono essere lette da sinistra a destra, con l'ubicazione del server nella prima colonna e gli indirizzi IP corrispondenti nella seconda colonna.">
         <thead>
-        <th colspan=2><img src="images/idea.png"/> Registrazione indirizzi IP pubblici</th>
+        <th>Regione del contenitore</th>
+        <th>Indirizzo di registrazione</th>
+        <th>Indirizzi IP di registrazione</th>
         </thead>
       <tbody>
         <tr>
+         <td>Europa Centrale</td>
          <td>ingest.logging.eu-de.bluemix.net</td>
          <td><code>169.50.25.125</code></td>
         </tr>
         <tr>
+         <td>Regno Unito Sud</td>
          <td>ingest.logging.eu-gb.bluemix.net</td>
          <td><code>169.50.115.113</code></td>
         </tr>
         <tr>
+          <td>Stati Uniti Est, Stati Uniti Sud, Asia Pacifico Nord</td>
           <td>ingest.logging.ng.bluemix.net</td>
           <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
          </tr>
@@ -281,7 +297,7 @@ di origine alle porte TCP/UDP di destinazione comprese nell'intervallo 20000-327
       </table>
 </p>
 
-  5. Per i firewall privati, consenti gli intervalli di IP privati dell'infrastruttura IBM Bluemix (SoftLayer) appropriati. Consulta [questo link](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) a iniziare dalla sezione **Backend (private) Network**.
+  5. Per i firewall privati, consenti gli intervalli di IP privati dell'infrastruttura IBM Cloud (SoftLayer) appropriati. Consulta [questo link](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) a iniziare dalla sezione **Backend (private) Network**.
       - Aggiungi tutte le [ubicazioni nelle regioni](cs_regions.html#locations) che stai utilizzando
       - Tieni presente che devi aggiungere l'ubicazione dal01 (data center)
       - Apri le porte 80 e 443 per consentire il processo di avvio del cluster
@@ -289,6 +305,80 @@ di origine alle porte TCP/UDP di destinazione comprese nell'intervallo 20000-327
   6. Facoltativo: per accedere al programma di bilanciamento del carico dall'esterno della VLAN, apri la porta per il traffico di rete in entrata per l'indirizzo IP specifico di tale programma di bilanciamento del carico.
 
   7. Facoltativo: per accedere al controller Ingress dall'esterno della VLAN, apri la porta 80 o 443 per il traffico di rete in entrata per l'indirizzo IP specifico di tale controller Ingress, a seconda di quale porta hai configurato.
+
+## Limitazione del traffico di rete ai nodi di lavoro edge
+{: #cs_edge}
+
+Aggiungi l'etichetta `dedicated=edge` a due o più nodi di lavoro nel tuo cluster per garantire che i programmi di bilanciamento del carico e Ingress vengano distribuiti solo a quei nodi di lavoro. 
+
+I nodi di lavoro edge possono migliorare la sicurezza del tuo cluster consentendo a un minor numero di nodi di lavoro di essere accessibili esternamente e isolando il carico di lavoro della rete. Quando questi nodi di lavoro sono contrassegnati solo per la rete, gli altri carichi di lavoro non possono consumare la CPU o la memoria del nodo di lavoro e interferire con la rete. 
+
+Prima di iniziare:
+
+- [Crea un cluster standard.](cs_cluster.html#cs_cluster_cli)
+- Assicurati che il tuo cluster abbia almeno una VLAN pubblica. I nodi di lavoro edge non sono disponibili per i cluster con solo le VLAN private.
+- [Indirizza la CLI Kubernetes CLI al
+cluster](cs_cli_install.html#cs_cli_configure).
+
+
+1. Elenca tutti i nodi di lavoro nel cluster. Utilizza l'indirizzo IP privato dalla colonna **NAME** per identificare i nodi. Seleziona almeno due nodi di lavoro per impostarli come nodi di lavoro edge. L'utilizzo di due o più nodi di lavoro migliora la disponibilità delle risorse di rete.
+
+  ```
+  kubectl get nodes -L publicVLAN,privateVLAN,dedicated
+  ```
+  {: pre}
+
+2. Etichetta i nodi di lavoro con `dedicated=edge`. Una volta che un nodo di lavoro è contrassegnato con `dedicated=edge`, tutti i successivi programmi di bilanciamento del carico e Ingress vengono distribuiti a un nodo di lavoro edge.
+
+  ```
+  kubectl label nodes <node_name> <node_name2> dedicated=edge
+  ```
+  {: pre}
+
+3. Richiama tutti i servizi di bilanciamento del carico esistenti nel cluster.
+
+  ```
+  kubectl get services --all-namespaces -o jsonpath='{range .items[*]}kubectl get service -n {.metadata.namespace} {.metadata.name} -o yaml | kubectl apply -f - :{.spec.type},{end}' | tr "," "\n" | grep "LoadBalancer" | cut -d':' -f1
+  ```
+  {: pre}
+
+  Output:
+
+  ```
+  kubectl get service -n <namespace> <name> -o yaml | kubectl apply -f
+  ```
+  {: screen}
+
+4. Utilizzando l'output dal passo precedente, copia e incolla ogni riga `kubectl get service`. Questo comando ridistribuisce il programma di bilanciamento del carico a un nodo di lavoro edge. Solo i programmi di bilanciamento del carico pubblici devono essere ridistribuiti.
+
+  Output:
+
+  ```
+  service "<name>" configured
+  ```
+  {: screen}
+
+Hai etichettato i nodi di lavoro con `dedicated=edge` e hai ridistribuito tutti i programmi di bilanciamento del carico e Ingress esistenti ai nodi di lavoro edge. Successivamente, impedisci [l'esecuzione di altri carichi di lavoro sui nodi di lavoro edge](#cs_edge_workloads) e [blocca il traffico in entrata verso le porte del nodo sui nodi di lavoro](#cs_block_ingress).
+
+### Impedisci l'esecuzione dei carichi di lavoro sui nodi di lavoro edge
+{: #cs_edge_workloads}
+
+Uno dei vantaggi dei nodi di lavoro edge è che è possibile specificare questi nodi di lavoro per eseguire solo i servizi di rete. L'utilizzo della tolleranza `dedicated=edge` indica che tutti i servizi di bilanciamento del carico e Ingress vengono distribuiti solo ai nodi di lavoro etichettati. Tuttavia, per impedire che altri carichi di lavoro vengano eseguiti sui nodi di lavoro edge e consumino le risorse dei nodi di lavoro, devi utilizzare le [corruzioni Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
+
+1. Elenca tutti i nodi di lavoro con l'etichetta `edge`.
+
+  ```
+  kubectl get nodes -L publicVLAN,privateVLAN,dedicated -l dedicated=edge
+  ```
+  {: pre}
+
+2. Applica una corruzione a ciascun nodo di lavoro che impedisce l'esecuzione dei pod sul nodo di lavoro e rimuove i pod che non hanno l'etichetta `edge` dal nodo di lavoro. I pod che vengono rimossi vengono ridistribuiti su altri nodi di lavoro con capacità.
+
+  ```
+  kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute
+  ```
+
+Adesso, solo i pod con la tolleranza `dedicated=edge` vengono distribuiti ai tuoi nodi di lavoro edge.
 
 <br />
 
@@ -336,9 +426,7 @@ l'interfaccia di rete pubblica di ogni nodo di lavoro per limitare il traffico i
 dall'Internet pubblico. Queste politiche non influiscono sul traffico tra i pod e sono configurate per consentire l'accesso ai
 servizi nodeport, programma di bilanciamento del carico e Ingress di Kubernetes.
 
-Le politiche predefinite non vengono applicate direttamente ai pod; vengono applicate all'interfaccia di rete pubblica
-di un nodo di lavoro utilizzando un [endpoint host
-![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](http://docs.projectcalico.org/v2.0/getting-started/bare-metal/bare-metal). Quando un endpoint host viene creato in Calico, tutto il traffico da e verso l'interfaccia
+Le politiche predefinite non vengono applicate direttamente ai pod; vengono applicate all'interfaccia di rete pubblica di un nodo di lavoro utilizzando un endpoint host Calico. Quando un endpoint host viene creato in Calico, tutto il traffico da e verso l'interfaccia
 di rete di tale nodo di lavoro viene bloccato, a meno che il traffico non sia consentito da un politica.
 
 Nota che non esiste una politica per consentire SSH, pertanto l'accesso SSH attraverso l'interfaccia di rete pubblica
@@ -351,7 +439,7 @@ tu non abbia compreso pienamente la politica e sappia che non hai bisogno del tr
 
  <table summary="La prima riga nella tabella si estende su entrambe le colonne. Le rimanenti righe devono essere lette da sinistra a destra, con l'ubicazione del server nella prima colonna e gli indirizzi IP corrispondenti nella seconda colonna.">
   <thead>
-  <th colspan=2><img src="images/idea.png"/> Politiche predefinite per ogni cluster</th>
+  <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Politiche predefinite per ogni cluster</th>
   </thead>
   <tbody>
     <tr>
@@ -359,14 +447,13 @@ tu non abbia compreso pienamente la politica e sappia che non hai bisogno del tr
       <td>Consente tutto il traffico in uscita.</td>
     </tr>
     <tr>
+      <td><code>allow-bixfix-port</code></td>
+      <td>Consente il traffico in entrata sulla porta 52311 nell'applicazione bigfix per consentire gli aggiornamenti necessari del nodo di lavoro.</td>
+    </tr>
+    <tr>
       <td><code>allow-icmp</code></td>
       <td>Consente i pacchetti icmp in entrata (ping).</td>
      </tr>
-     <tr>
-      <td><code>allow-kubelet-port</code></td>
-      <td>Consente tutto il traffico in entrata alla porta 10250, che è la porta utilizzata da kubelet. Questa politica permette a `kubectl logs` e `kubectl exec` di funzionare correttamente
-nel cluster Kubernetes.</td>
-    </tr>
     <tr>
       <td><code>allow-node-port-dnat</code></td>
       <td>Consente il traffico in entrata dei servizi nodeport, programma di bilanciamento del carico e Ingress ai pod a cui vengono
@@ -377,8 +464,7 @@ vengano applicate in iptables.</td>
    </tr>
    <tr>
       <td><code>allow-sys-mgmt</code></td>
-      <td>Consente le connessioni in entrata per specifici sistemi dell'infrastruttura IBM Bluemix (SoftLayer) utilizzati per gestire i
-nodi di lavoro.</td>
+      <td>Consente le connessioni in entrata per specifici sistemi dell'infrastruttura IBM Cloud (SoftLayer) utilizzati per gestire i nodi di lavoro.</td>
    </tr>
    <tr>
     <td><code>allow-vrrp</code></td>
@@ -403,18 +489,18 @@ Prima di iniziare:
 3.  [Indirizza la CLI Kubernetes CLI al
 cluster](cs_cli_install.html#cs_cli_configure). Includi l'opzione --admin con il comando bx cs
 cluster-config`, che viene utilizzato per scaricare i file di autorizzazione e i certificati. Questo download include inoltre le chiavi per il ruolo Super utente, di cui hai bisogno per eseguire i comandi
-Calico. 
+Calico.
 
   ```
   bx cs cluster-config <cluster_name> --admin
   ```
   {: pre}
 
-  **Nota**: la versione della CLI Calico 1.4.0 è supportata.
+  **Nota**: è supportata la CLI Calico versione 1.6.1.
 
 Per aggiungere le politiche di rete:
 1.  Installa la CLI Calico.
-    1.  [Scarica la CLI Calico ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/projectcalico/calicoctl/releases/tag/v1.4.0).
+    1.  [Scarica la CLI Calico ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/projectcalico/calicoctl/releases/tag/v1.6.1).
 
         **Suggerimento:** se utilizzi Windows, installa la CLI Calico
 nella stessa directory in cui si trova la CLI {{site.data.keyword.Bluemix_notm}}. Questa configurazione salva alcune modifiche al percorso file
@@ -642,7 +728,7 @@ che descrivono a quali pod, spazi dei nomi o host vengono applicate queste polit
           ```
           {: pre}
 
-### Bloccare il traffico in entrata ai servizi LoadBalancer o NodePort.
+### Blocca il traffico in entrata nei servizi LoadBalancer o NodePort.
 {: #cs_block_ingress}
 
 Per impostazione predefinita, i servizi Kubernetes `NodePort` e `LoadBalancer` sono progettati per rendere le tue applicazioni disponibili
@@ -650,18 +736,24 @@ su tutte le interfacce del cluster private e pubbliche. Tuttavia, puoi bloccare 
 
 Un servizio Kubernetes LoadBalancer è anche un servizio NodePort. Un servizio LoadBalancer rende la tua applicazione disponibile per la porta e l'indirizzo IP del programma di bilanciamento del carico e per le porte del nodo del servizio. È possibile accedere alle porte del nodo da ogni indirizzo IP (pubblico e privato) di ogni nodo all'interno del cluster.
 
-L'amministratore del cluster può utilizzare il blocco delle politiche di rete `preDNAT` Calico:
+L'amministratore del cluster può utilizzare le politiche di rete `preDNAT` Calico per bloccare il:
 
   - Traffico ai servizi NodePort. Il traffico ai servizi LoadBalancer è consentito.
   - Traffico basato su un indirizzo di origine o un CIDR.
 
-Un vantaggio di queste funzioni è che l'amministratore del cluster può bloccare il traffico alle porte del nodo pubbliche di un servizio LoadBalancer privato. L'amministratore può anche abilitare l'accesso all'elenco degli elementi consentiti ai servizi NodePort o LoadBalancer. Le politiche di rete `preDNAT` sono utili perché le politiche predefinite di Kubernetes e Calico sono difficili da applicare per la protezione dei servizi Kubernetes NodePort e LoadBalancer a causa delle regole iptables DNAT generate per questi servizi.
+Alcuni utilizzi comuni per le politiche di rete `preDNAT` Calico:
+
+  - Bloccare il traffico verso le porte del nodo pubblico di un servizio LoadBalancer privato.
+  - Bloccare il traffico verso le porte del nodo pubblico sui cluster che eseguono i [nodi di lavoro edge](#cs_edge). Il blocco delle porte del nodo assicura che i nodi di lavoro edge siano gli unici nodi di lavoro a gestire il traffico in entrata.
+
+Le politiche di rete `preDNAT` sono utili perché le politiche predefinite di Kubernetes e Calico sono difficili da applicare per la protezione dei servizi Kubernetes NodePort e LoadBalancer a causa delle regole iptables DNAT generate per questi servizi.
 
 Le politiche di rete `preDNAT` Calico generano le regole iptables in base a una [risorsa della politica di rete
 Calico ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v2.4/reference/calicoctl/resources/policy).
 
-1. Definisci una politica di rete `preDNAT` Calico per l'accesso in entrata ai servizi Kubernetes. Questo esempio
-blocca tutte le porte dei nodi.
+1. Definisci una politica di rete `preDNAT` Calico per l'accesso in entrata ai servizi Kubernetes.
+
+  Esempio che blocca tutte le porte del nodo:
 
   ```
   apiVersion: v1
@@ -689,7 +781,7 @@ blocca tutte le porte dei nodi.
 perché le modifiche alla politica vengano applicate nel cluster.
 
   ```
-  /opt/bin/calicoctl apply -f deny-kube-node-port-services.yaml
+  calicoctl apply -f deny-kube-node-port-services.yaml
   ```
   {: pre}
 
@@ -717,9 +809,4 @@ viene automaticamente scansionata alla ricerca di vulnerabilità
 con un database di problemi CentOS, Debian, Red Hat e Ubuntu conosciuti. Se vengono trovate delle vulnerabilità,
 il Controllo vulnerabilità fornisce le istruzioni su come risolverli per garantire la sicurezza e l'integrità dell'immagine.
 
-Per
-visualizzare la valutazione della vulnerabilità per la tua immagine:
-
-1.  Da **catalog**, nella sezione Containers, seleziona **Container Registry**.
-2.  Nella pagina **Private Repositories**, nella tabella **Repositories**, identifica l'immagine.
-3.  Nella colonna **Security Report**, fai clic sullo stato dell'immagine per richiamarne la valutazione della vulnerabilità.
+Per visualizzare la valutazione della vulnerabilità per le tue immagini, [consulta la documentazione del Controllo vulnerabilità](/docs/services/va/va_index.html#va_registry_cli).
