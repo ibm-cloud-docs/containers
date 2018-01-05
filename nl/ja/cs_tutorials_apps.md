@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-14"
+lastupdated: "2017-12-08"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -380,7 +380,7 @@ Kubernetes クラスターにアプリをデプロイしたことがないソフ
 
 13. **「ワークロード」**タブで、作成したリソースを表示します。 Kubernetes ダッシュボードでの検討作業が完了したら、CTRL+C を使用して `proxy` コマンドを終了します。
 
-最初のバージョンのアプリをデプロイできました。
+これで完了です。最初のバージョンのアプリをデプロイできました。
 
 このレッスンで実行したコマンドの数が多すぎると思うなら、一部の処理を自動化するために構成スクリプトを使用できます。 第 2 バージョンのアプリでは構成スクリプトを使用します。また、アプリのインスタンスを複数デプロイして可用性を高めます。その方法を学ぶために次のレッスンに進みましょう。
 
@@ -572,7 +572,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
     Kubernetes ダッシュボードでの検討作業が完了したら、CLI で CTRL+C と入力して `proxy` コマンドを終了します。
 
 
-2 つ目のバージョンのアプリをデプロイできました。 使用するコマンドの数を減らし、ヘルス・チェックの動作を学び、デプロイメントを編集できました。 Hello World アプリは、PR 会社のテストに合格したといえます。 次の段階として、PR 会社がプレス・リリースの分析作業を開始するのに役立つアプリをデプロイしましょう。
+これで完了です。2 つ目のバージョンのアプリをデプロイできました。 使用するコマンドの数を減らし、ヘルス・チェックの動作を学び、デプロイメントを編集できました。 Hello World アプリは、PR 会社のテストに合格したといえます。 次の段階として、PR 会社がプレス・リリースの分析作業を開始するのに役立つアプリをデプロイしましょう。
 
 作業を進める前に、これまで作成したリソースを削除してもかまいません。 同じ構成スクリプトを使用して、作成した両方のリソースを削除できます。
 
@@ -812,114 +812,49 @@ service "hw-demo-service" deleted
 ### レッスン 3b: 稼働中の Watson Tone Analyzer デプロイメントを更新する
 {: #lesson3b}
 
-デプロイメントの稼働中に、デプロイメントを編集してポッド・テンプレートの値を変更することができます。 このレッスンには、使用されるイメージの更新が含まれています。
+デプロイメントの稼働中に、デプロイメントを編集してポッド・テンプレートの値を変更することができます。 このレッスンには、使用されるイメージの更新が含まれています。 この PR 会社はデプロイメント内のアプリを変更します。
 
-1.  イメージの名前を変更します。 PR 会社は、同じデプロイメントで異なるアプリを試してみて、その新しいアプリに問題が見つかった場合はロールバックしたいと考えています。
+イメージの名前を変更します。
 
-    1.  稼働中のデプロイメントの構成スクリプトを開きます。
+1.  稼働中のデプロイメントの構成の詳細情報を開きます。
 
-        ```
-        kubectl edit deployment/watson-talk-pod
-        ```
-        {: pre}
+    ```
+    kubectl edit deployment/watson-talk-pod
+    ```
+    {: pre}
 
-        オペレーティング・システムの種類によって、vi エディターかテキスト・エディターのいずれかが開きます。
+    オペレーティング・システムの種類によって、vi エディターかテキスト・エディターのいずれかが開きます。
 
-    2.  イメージの名前を ibmliberty イメージに変更します。
+2.  イメージの名前を ibmliberty イメージに変更します。
 
-        ```
-        spec:
+    ```
+    spec:
               containers:
               - image: registry.<region>.bluemix.net/ibmliberty:latest
-        ```
-        {: codeblock}
+    ```
+    {: codeblock}
 
-    3.  変更内容を保存し、エディターを終了します。
+3.  変更内容を保存し、エディターを終了します。
 
-    4.  構成スクリプトの変更内容を稼働中のデプロイメントに適用します。
+4.  変更内容を稼働中のデプロイメントに適用します。
 
-        ```
-        kubectl rollout status deployment/watson-talk-pod
-        ```
-        {: pre}
+    ```
+    kubectl rollout status deployment/watson-talk-pod
+    ```
+    {: pre}
 
-        ロールアウトの完了を知らせる確認メッセージが表示されるのを待ちます。
+    ロールアウトの完了を知らせる確認メッセージが表示されるのを待ちます。
 
-        ```
-        deployment "watson-talk-pod" successfully rolled out
-        ```
-        {: screen}
+    ```
+    deployment "watson-talk-pod" successfully rolled out
+    ```
+    {: screen}
 
-        変更をロールアウトすると、Kubernetes によって別のポッドが作成されてテストされます。 テストが正常に完了すると、元のポッドは削除されます。
-
-    5.  変更内容に不備があった場合は、ロールバックできます。 この PR 会社の担当者がアプリの変更時でミスを犯したらしく、前のデプロイメントに戻さなければならなくなりました。
-
-        1.  リビジョンのバージョン番号を調べて、前のデプロイメントの番号を特定します。 バージョン番号が最も大きいのが最新リビジョンです。 この例では、リビジョン 1 が元のデプロイメントで、リビジョン 2 が前のステップで行ったイメージ変更です。
-
-            ```
-            kubectl rollout history deployment/watson-talk-pod
-            ```
-            {: pre}
-
-            出力:
-
-            ```
-            deployments "watson-talk-pod"
-            REVISION CHANGE-CAUSE
-            1          <none>
-            2          <none>
-
-            ```
-            {: screen}
-
-        2.  次のコマンドを実行して、デプロイメントを前のリビジョンに戻します。 Kubernetes によって再び別のポッドが作成されてテストされます。 テストが正常に完了すると、元のポッドは削除されます。
-
-            ```
-            kubectl rollout undo deployment/watson-talk-pod --to-revision=1
-            ```
-            {: pre}
-
-            出力:
-
-            ```
-            deployment "watson-talk-pod" rolled back
-            ```
-            {: screen}
-
-        3.  次のステップで使用するポッドの名前を取得します。
-
-            ```
-            kubectl get pods
-            ```
-            {: pre}
-
-            出力:
-
-            ```
-            NAME                              READY     STATUS    RESTARTS   AGE
-            watson-talk-pod-2511517105-6tckg  1/1       Running   0          2m
-            ```
-            {: screen}
-
-        4.  ポッドの詳細を調べて、イメージがロールバックされたことを確認します。
-
-            ```
-            kubectl describe pod <pod_name>
-            ```
-            {: pre}
-
-            出力:
-
-            ```
-            Image: registry.<region>.bluemix.net/namespace/watson-talk
-            ```
-            {: screen}
-
-2.  オプション: watson-pod のデプロイメントについても変更作業を繰り返します。
+    変更をロールアウトすると、Kubernetes によって別のポッドが作成されてテストされます。 テストが正常に完了すると、元のポッドは削除されます。
 
 [クイズに答えて知識を試してみましょう!![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 
-Watson Tone Analyzer アプリをデプロイできました。 この PR 会社は、このアプリのデプロイメントを使用してプレス・リリースの分析作業を開始できる状況になりました。
+これで完了です。Watson Tone Analyzer アプリをデプロイできました。 この PR 会社は、このアプリのデプロイメントを使用してプレス・リリースの分析作業を開始できる状況になりました。
 
 これまで作成したリソースを削除してもかまいません。 構成スクリプトを使用して、作成したリソースを削除できます。
 

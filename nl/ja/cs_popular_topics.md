@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-02"
+lastupdated: "2017-12-14"
 
 ---
 
@@ -44,11 +44,15 @@ lastupdated: "2017-11-02"
 <td>CLI を使用して、Kubernetes クラスターを作成して管理します。</td>
 </tr>
 <tr>
-<td>[Kubernetes 1.7 への更新](cs_versions.html)</td>
-<td>Kubernetes 1.7 に更新する前に、クラスターへの変更を確認します。</td>
+<td>[ファイアウォールで必要なポートと IP アドレスを開く](cs_security.html#opening_ports)</td>
+<td>CLI コマンドを実行したり、Kubernetes マスターとワーカー・ノードの間の通信を許可したりする場合に、ファイアウォールで特定のポートと IP アドレスを開く必要が生じる可能性があります。</td>
 </tr>
 <tr>
-<td>[クラスター用の REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://us-south.containers.bluemix.net/swagger)</td>
+<td>[Kubernetes を更新する](cs_versions.html)</td>
+<td>Kubernetes を更新する前に、クラスターへの変更を確認します。</td>
+</tr>
+<tr>
+<td>[クラスター用の REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.bluemix.net/swagger)</td>
 <td>{{site.data.keyword.containershort_notm}} を管理するための API 文書を表示します。</td>
 </tr>
 </tbody></table>
@@ -58,4 +62,4 @@ lastupdated: "2017-11-02"
 
 [{{site.data.keyword.containershort_notm}} Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com) で、他の開発者の間で話題となっている内容を確認したり、質問をしたりすることができます。
 
-{{site.data.keyword.Bluemix_notm}} アカウントに IBM ID を使用していない場合は、[crosen@us.ibm.com](mailto:crosen@us.ibm.com) に問い合わせて、この Slack への招待を要求してください。
+ヒント: {{site.data.keyword.Bluemix_notm}} アカウントに IBM ID を使用していない場合は、この Slack への[招待を要求](https://bxcs-slack-invite.mybluemix.net/)してください。

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-15"
+lastupdated: "2017-12-01"
 
 ---
 
@@ -134,7 +134,7 @@ CLI를 설치하려면 다음을 수행하십시오.
 
 -   [`bx` 명령](/docs/cli/reference/bluemix_cli/bx_cli.html)
 -   [`bx cs` 명령](cs_cli_reference.html#cs_cli_reference)
--   [`kubectl` 명령 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/user-guide/kubectl/v1.7/)
+-   [`kubectl` 명령 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)
 -   [`bx cr` 명령](/docs/cli/plugins/registry/index.html)
 
 <br />
@@ -143,8 +143,8 @@ CLI를 설치하려면 다음을 수행하십시오.
 ## `kubectl`을 실행하도록 CLI 구성
 {: #cs_cli_configure}
 
-Kubernetes CLI와 함께 제공되는 명령을 사용하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터를 관리할 수 있습니다. Kubernetes 1.7.4에서 사용 가능한 모든 `kubectl` 명령은 {{site.data.keyword.Bluemix_notm}}의 클러스터와 함께 사용할 수 있도록 지원됩니다. 클러스터를 작성한 후, 로컬 CLI에 대한 컨텍스트를 환경 변수가 있는 해당 클러스터로 설정하십시오. 그런 다음, Kubernetes `kubectl` 명령을 실행하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터 관련 작업을
-수행할 수 있습니다. {:shortdesc}
+Kubernetes CLI와 함께 제공되는 명령을 사용하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터를 관리할 수 있습니다. Kubernetes 1.7.4에서 사용 가능한 모든 `kubectl` 명령은 {{site.data.keyword.Bluemix_notm}}의 클러스터와 함께 사용할 수 있도록 지원됩니다. 클러스터를 작성한 후, 로컬 CLI에 대한 컨텍스트를 환경 변수가 있는 해당 클러스터로 설정하십시오. 그런 다음, Kubernetes `kubectl` 명령을 실행하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터 관련 작업을 수행할 수 있습니다.
+{:shortdesc}
 
 `kubectl` 명령을 실행하려면 우선 [필수 CLI를 설치](#cs_cli_install)하고 [클러스터를 작성](cs_cluster.html#cs_cluster_cli)하십시오. 
 
@@ -159,9 +159,7 @@ Kubernetes CLI와 함께 제공되는 명령을 사용하여 {{site.data.keyword
 
   2.  {{site.data.keyword.Bluemix_notm}} 계정을 선택하십시오. 여러 {{site.data.keyword.Bluemix_notm}} 조직에 지정된 경우에는 Kubernetes 클러스터가 작성된 조직을 선택하십시오. 클러스터는 조직마다 고유하지만 {{site.data.keyword.Bluemix_notm}} 영역에는 독립적입니다. 따라서 영역을 선택할 필요가 없습니다. 
 
-  3.  이전에 선택한 {{site.data.keyword.Bluemix_notm}} 지역 이외의 지역에 Kubernetes 클러스터를 작성하거나 액세스하려는 경우 [{{site.data.keyword.containershort_notm}} 지역 API 엔드포인트를 지정](cs_regions.html#container_login_endpoints)하십시오.
-
-      **참고**: 미국 동부에서 클러스터를 작성하려면 `bx cs init --host https://us-east.containers.bluemix.net` 명령을 사용하여 미국 동부 컨테이너 지역 API 엔드포인트를 지정해야 합니다.
+  3.  이전에 선택한 {{site.data.keyword.Bluemix_notm}} 지역 이외의 지역에 Kubernetes 클러스터를 작성하거나 액세스하려면 `bx cs region-set`를 실행하십시오. 
 
   4.  클러스터의 이름을 가져오려면 계정에 있는 모든 클러스터를 나열하십시오. 
 
@@ -218,7 +216,7 @@ Kubernetes CLI와 함께 제공되는 명령을 사용하여 {{site.data.keyword
       ```
       {: screen}
 
-이제 `kubectl` 명령을 실행하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터를 관리할 수 있습니다. 명령의 전체 목록은 [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/user-guide/kubectl/v1.7/)를 참조하십시오.
+이제 `kubectl` 명령을 실행하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터를 관리할 수 있습니다. 명령의 전체 목록은 [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)를 참조하십시오.
 
 **팁:** Windows를 사용 중이며 Kubernetes CLI가 {{site.data.keyword.Bluemix_notm}} CLI와 동일한 디렉토리에 설치되지 않은 경우, `kubectl` 명령을 정상적으로 실행하려면 Kubernetes CLI가 설치된 경로로 디렉토리를 변경해야 합니다. 
 
@@ -229,7 +227,8 @@ Kubernetes CLI와 함께 제공되는 명령을 사용하여 {{site.data.keyword
 ## CLI 업데이트
 {: #cs_cli_upgrade}
 
-새 기능을 사용하기 위해 CLI를 주기적으로 업데이트하고자 할 수 있습니다. {:shortdesc}
+새 기능을 사용하기 위해 CLI를 주기적으로 업데이트하고자 할 수 있습니다.
+{:shortdesc}
 
 이 태스크에는 다음의 CLI를 업데이트하기 위한 정보가 포함되어 있습니다. 
 
@@ -344,7 +343,8 @@ CLI를 업데이트하려면 다음을 수행하십시오.
 ## CLI 설치 제거
 {: #cs_cli_uninstall}
 
-CLI가 더 이상 필요하지 않으면 이를 설치 제거할 수 있습니다. {:shortdesc}
+CLI가 더 이상 필요하지 않으면 이를 설치 제거할 수 있습니다.
+{:shortdesc}
 
 이 태스크에는 다음의 CLI를 제거하기 위한 정보가 포함되어 있습니다.
 
@@ -395,7 +395,8 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
 ## API로 클러스터 배치 자동화
 {: #cs_api}
 
-{{site.data.keyword.containershort_notm}} API를 사용하여 Kubernetes 클러스터의 작성, 배치 및 관리를 자동화할 수 있습니다. {:shortdesc}
+{{site.data.keyword.containershort_notm}} API를 사용하여 Kubernetes 클러스터의 작성, 배치 및 관리를 자동화할 수 있습니다.
+{:shortdesc}
 
 {{site.data.keyword.containershort_notm}} API는 헤더 정보가 필요합니다. 이 헤더 정보는 API 요청에 사용자가 제공해야 하며 사용하려는 API에 따라 다를 수 있습니다. API에 헤더 정보가 필요한지 판별하려면 [{{site.data.keyword.containershort_notm}} API 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://us-south.containers.bluemix.net/swagger-api)를 참조하십시오.
 
@@ -410,7 +411,8 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
 <tr>
 <td>비연합 ID</td>
 <td><ul><li><strong>{{site.data.keyword.Bluemix_notm}} 사용자 이름 및 비밀번호:</strong> 이 주제의 단계에 따라 IAM 액세스 토큰 작성을 완전히 자동화할 수 있습니다.</li>
-<li><strong>{{site.data.keyword.Bluemix_notm}} API 키 생성:</strong> {{site.data.keyword.Bluemix_notm}} 사용자 이름 및 비밀번호 사용의 대안으로 <a href="../iam/apikeys.html#manapikey" target="_blank">{{site.data.keyword.Bluemix_notm}} API 키를 사용</a>할 수 있습니다. {{site.data.keyword.Bluemix_notm}} API 키는 해당 API 키가 생성된 {{site.data.keyword.Bluemix_notm}} 계정에 종속됩니다. {{site.data.keyword.Bluemix_notm}} API 키를 동일한 IAM 토큰의 다른 계정 ID와 결합할 수 없습니다. {{site.data.keyword.Bluemix_notm}} API 키의 기반이 되는 계정 이외의 계정으로 작성된 클러스터에 액세스하려면 계정에 로그인하여 새 API 키를 생성해야 합니다. </li></ul></tr>
+<li><strong>{{site.data.keyword.Bluemix_notm}} API 키 생성:</strong> {{site.data.keyword.Bluemix_notm}} 사용자 이름 및 비밀번호 사용의 대안으로 <a href="../iam/apikeys.html#manapikey" target="_blank">{{site.data.keyword.Bluemix_notm}} API 키를 사용</a>할 수 있습니다. {{site.data.keyword.Bluemix_notm}} API 키는 해당 API 키가 생성된 {{site.data.keyword.Bluemix_notm}} 계정에 종속됩니다. {{site.data.keyword.Bluemix_notm}} API 키를 동일한 IAM 토큰의 다른 계정 ID와 결합할 수 없습니다. {{site.data.keyword.Bluemix_notm}} API 키의 기반이 되는 계정 이외의 계정으로 작성된 클러스터에 액세스하려면 계정에 로그인하여 새 API 키를 생성해야 합니다.
+</li></ul></tr>
 <tr>
 <td>연합 ID</td>
 <td><ul><li><strong>{{site.data.keyword.Bluemix_notm}} API 키 생성:</strong> <a href="../iam/apikeys.html#manapikey" target="_blank">{{site.data.keyword.Bluemix_notm}} API 키</a>는 해당 API 키가 생성된 {{site.data.keyword.Bluemix_notm}} 계정에 종속됩니다. {{site.data.keyword.Bluemix_notm}} API 키를 동일한 IAM 토큰의 다른 계정 ID와 결합할 수 없습니다. {{site.data.keyword.Bluemix_notm}} API 키의 기반이 되는 계정 이외의 계정으로 작성된 클러스터에 액세스하려면 계정에 로그인하여 새 API 키를 생성해야 합니다.
@@ -429,6 +431,14 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
     POST https://iam.<region>.bluemix.net/oidc/token
     ```
     {: codeblock}
+
+    예:
+    ```
+    POST https://iam.ng.bluemix.net/oidc/token
+    ```
+    {: pre}
+
+    {{site.data.keyword.Bluemix_notm}} 지역을 지정하려면 [API 엔드포인트에서 사용되는 지역 약어를 검토](cs_regions.html#bluemix_regions)하십시오. 
 
     <table summary-"Input parameters to get tokens">
     <thead>
@@ -545,6 +555,14 @@ _&lt;my_account_id&gt;_를 이전 단계에서 검색한 {{site.data.keyword.Blu
     ```
     {: codeblock}
 
+    예:
+    ```
+    POST https://iam.ng.bluemix.net/oidc/token
+    ```
+    {: pre}
+
+    {{site.data.keyword.Bluemix_notm}} 지역을 지정하려면 [API 엔드포인트에서 사용되는 지역 약어를 검토](cs_regions.html#bluemix_regions)하십시오. 
+
     <table summary-"Input parameters to get tokens">
     <thead>
         <th>입력 매개변수</th>
@@ -610,38 +628,8 @@ _&lt;my_account_id&gt;_를 이전 단계에서 검색한 {{site.data.keyword.Blu
 
 4.  계정의 모든 Kubernetes 클러스터를 나열하십시오. 사용자의 헤더 정보를 빌드하기 위해 이전 단계에서 검색한 정보를 사용하십시오. 
 
-    -   미국 남부
-
         ```
-        GET https://us-south.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   미국 동부
-
-        ```
-        GET https://us-east.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   영국 남부
-
-        ```
-        GET https://uk-south.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   중앙 유럽
-
-        ```
-        GET https://eu-central.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   AP 남부
-
-        ```
-        GET https://ap-south.containers.bluemix.net/v1/clusters
+        GET https://containers.bluemix.net/v1/clusters
         ```
         {: codeblock}
 
@@ -659,7 +647,7 @@ _&lt;my_account_id&gt;_를 이전 단계에서 검색한 {{site.data.keyword.Blu
         </tbody>
         </table>
 
-5.  지원되는 API 목록은 [{{site.data.keyword.containershort_notm}} API 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://us-south.containers.bluemix.net/swagger-api)을 검토하십시오.
+5.  지원되는 API 목록은 [{{site.data.keyword.containershort_notm}} API 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.bluemix.net/swagger-api)을 검토하십시오.
 
 <br />
 
@@ -667,7 +655,8 @@ _&lt;my_account_id&gt;_를 이전 단계에서 검색한 {{site.data.keyword.Blu
 ## IAM 액세스 토큰 새로 고치기 
 {: #cs_api_refresh}
 
-API를 통해 발행된 모든 IAM(Identity and Access Management) 액세스 토큰은 한 시간 후에 만료됩니다. {{site.data.keyword.containershort_notm}} API에 대한 액세스가 보장되도록 사용자는 정기적으로 액세스 토큰을 새로 고쳐야 합니다. {:shortdesc}
+API를 통해 발행된 모든 IAM(Identity and Access Management) 액세스 토큰은 한 시간 후에 만료됩니다. {{site.data.keyword.containershort_notm}} API에 대한 액세스가 보장되도록 사용자는 정기적으로 액세스 토큰을 새로 고쳐야 합니다.
+{:shortdesc}
 
 시작하기 전에 새 액세스 토큰을 요청하는 데 사용할 수 있는 IAM 새로 고치기 토큰이 있는지 확인하십시오. 새로 고치기 토큰이 없으면 [{{site.data.keyword.containershort_notm}} API로 클러스터 작성 및 관리 프로세스 작동화](#cs_api)를 검토하여 액세스 토큰을 검색하십시오.
 
@@ -676,7 +665,7 @@ IAM 토큰을 새로 고치려면 다음 단계를 사용하십시오.
 1.  새 IAM 액세스 토큰을 생성하십시오. _&lt;iam_refresh_token&gt;_을 {{site.data.keyword.Bluemix_notm}}에서 인증되었을 때 받은 IAM 새로 고치기 토큰으로 대체하십시오. 
 
     ```
-    POST https://iam.ng.bluemix.net/oidc/token
+    POST https://iam.bluemix.net/identity/token
     ```
     {: codeblock}
 

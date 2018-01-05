@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-28"
+lastupdated: "2017-12-13"
 
 ---
 
@@ -22,10 +22,11 @@ lastupdated: "2017-11-28"
 クラスターの作成と管理を行うときに以下のコマンドを参照してください。
 {:shortdesc}
 
-**ヒント:** `bx cr` コマンドをお探しですか? [{{site.data.keyword.registryshort_notm}} CLI リファレンス](/docs/cli/plugins/registry/index.html)を参照してください。 `kubectl` コマンドをお探しですか? [Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/user-guide/kubectl/v1.5/) を参照してください。
+**ヒント:** `bx cr` コマンドをお探しですか? [{{site.data.keyword.registryshort_notm}} CLI リファレンス](/docs/cli/plugins/registry/index.html)を参照してください。 `kubectl` コマンドをお探しですか? [Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands) を参照してください。
 
 
 <!--[https://github.ibm.com/alchemy-containers/armada-cli ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.ibm.com/alchemy-containers/armada-cli)-->
+<!--If you're confused by the two tables... I (Rachael) have some extensive changes but dev needs to see it in staging first, so just adding a whole second staging table. Too hard to add staging tags for individual commands in the table.-->
 
 <table summary="{{site.data.keyword.Bluemix_notm}} でクラスターを作成するためのコマンド">
  <thead>
@@ -37,40 +38,47 @@ lastupdated: "2017-11-28"
     <td>[bx cs alb-configure](#cs_alb_configure)</td>
     <td>[bx cs alb-get](#cs_alb_get)</td>
     <td>[bx cs alb-types](#cs_alb_types)</td>
-    <td>[bx cs cluster-config](#cs_cluster_config)</td>
+    <td>[bx cs apiserver-config-set](#cs_apiserver_config_set)</td>
   </tr>
  <tr>
+    <td>[bx cs apiserver-refresh](#cs_apiserver_refresh)</td>
+    <td>[bx cs cluster-config](#cs_cluster_config)</td>
     <td>[bx cs cluster-create](#cs_cluster_create)</td>
     <td>[bx cs cluster-get](#cs_cluster_get)</td>
     <td>[bx cs cluster-rm](#cs_cluster_rm)</td>
-    <td>[bx cs cluster-service-bind](#cs_cluster_service_bind)</td>
-    <td>[bx cs cluster-service-unbind](#cs_cluster_service_unbind)</td>
  </tr>
  <tr>
+    <td>[bx cs cluster-service-bind](#cs_cluster_service_bind)</td>
+    <td>[bx cs cluster-service-unbind](#cs_cluster_service_unbind)</td>
     <td>[bx cs cluster-services](#cs_cluster_services)</td>
     <td>[bx cs cluster-subnet-add](#cs_cluster_subnet_add)</td>
     <td>[bx cs cluster-subnet-create](#cs_cluster_subnet_create)</td>
-    <td>[bx cs cluster-user-subnet-add](#cs_cluster_user_subnet_add)</td>
-    <td>[bx cs cluster-user-subnet-rm](#cs_cluster_user_subnet_rm)</td>
  </tr>
  <tr>
+    <td>[bx cs cluster-user-subnet-add](#cs_cluster_user_subnet_add)</td>
+    <td>[bx cs cluster-user-subnet-rm](#cs_cluster_user_subnet_rm)</td>
     <td>[bx cs cluster-update](#cs_cluster_update)</td>
     <td>[bx cs clusters](#cs_clusters)</td>
     <td>[bx cs credentials-set](#cs_credentials_set)</td>
-    <td>[bx cs credentials-unset](#cs_credentials_unset)</td>
-    <td>[bx cs help](#cs_help)</td>
  </tr>
  <tr>
+    <td>[bx cs credentials-unset](#cs_credentials_unset)</td>
+    <td>[bx cs help](#cs_help)</td>
     <td>[bx cs init](#cs_init)</td>
     <td>[bx cs kube-versions](#cs_kube_versions)</td>
     <td>[bx cs locations](#cs_datacenters)</td>
-    <td>[bx cs logging-config-create](#cs_logging_create)</td>
-    <td>[bx cs logging-config-get](#cs_logging_get)</td>
  </tr>
  <tr>
+    <td>[bx cs logging-config-create](#cs_logging_create)</td>
+    <td>[bx cs logging-config-get](#cs_logging_get)</td>
     <td>[bx cs logging-config-rm](#cs_logging_rm)</td>
     <td>[bx cs logging-config-update](#cs_logging_update)</td>
     <td>[bx cs machine-types](#cs_machine_types)</td>
+ </tr>
+ <tr>
+    <td>[bx cs region](#cs_region)</td>
+    <td>[bx cs region-set](#cs_region-set)</td>
+    <td>[bx cs regions](#cs_regions)</td>
     <td>[bx cs subnets](#cs_subnets)</td>
     <td>[bx cs vlans](#cs_vlans)</td>
  </tr>
@@ -89,6 +97,9 @@ lastupdated: "2017-11-28"
  </tbody>
  </table>
 
+
+
+
 **ヒント:** {{site.data.keyword.containershort_notm}} プラグインのバージョンを表示するには、以下のコマンドを実行します。
 
 ```
@@ -99,11 +110,10 @@ bx plugin list
 ## bx cs コマンド
 {: #cs_commands}
 
-
 ### bx cs albs --cluster CLUSTER
 {: #cs_albs}
 
-クラスター内のすべてのアプリケーション・ロード・バランサー (ALB) の状態を表示します。 ALB は Ingress コントローラーとも呼ばれます。 ALB ID が返されない場合、クラスターには移植可能なサブネットはありません。 サブネットを[作成](#cs_cluster_subnet_create)したり、クラスターに[追加](#cs_cluster_subnet_add)したりすることができます。
+クラスター内のすべてのアプリケーション・ロード・バランサーの状態を表示します。 アプリケーション・ロード・バランサーの ID が返されない場合、クラスターには移植可能なサブネットはありません。 サブネットを[作成](#cs_cluster_subnet_create)したり、クラスターに[追加](#cs_cluster_subnet_add)したりすることができます。
 
 <strong>コマンド・オプション</strong>:
 
@@ -119,50 +129,52 @@ bx plugin list
   ```
   {: pre}
 
+
+
 ### bx cs alb-configure --albID ALB_ID [--enable][--disable][--user-ip USERIP]
 {: #cs_alb_configure}
 
-標準クラスターで、Ingress コントローラーとも呼ばれるアプリケーション・ロード・バランサー (ALB) を有効または無効にします。 パブリック・アプリケーションのロード・バランサーは、デフォルトで有効になります。
+標準クラスターで、アプリケーション・ロード・バランサーを有効または無効にします。 パブリック・アプリケーションのロード・バランサーは、デフォルトで有効になります。
 
 **コマンド・オプション**:
 
    <dl>
    <dt><code><em>--albID </em>ALB_ID</code></dt>
-   <dd>ALB の ID。 クラスター内の ALB の ID を表示するには、<code>bx cs albs <em>--cluster </em>CLUSTER</code> を実行します。 この値は必須です。</dd>
+   <dd>アプリケーション・ロード・バランサーの ID。 クラスター内のアプリケーション・ロード・バランサーの ID を表示するには、<code>bx cs albs <em>--cluster </em>CLUSTER</code> を実行します。 この値は必須です。</dd>
 
    <dt><code>--enable</code></dt>
-   <dd>クラスター内の ALB を有効にするには、このフラグを指定します。</dd>
+   <dd>クラスター内のアプリケーション・ロード・バランサーを有効にするには、このフラグを指定します。</dd>
 
    <dt><code>--disable</code></dt>
-   <dd>クラスター内の ALB を無効にするには、このフラグを指定します。</dd>
+   <dd>クラスター内のアプリケーション・ロード・バランサーを無効にするには、このフラグを指定します。</dd>
 
    <dt><code>--user-ip <em>USER_IP</em></code></dt>
    <dd>
 
    <ul>
-    <li>このパラメーターはプライベート ALB の場合にのみ使用できます。</li>
-    <li>プライベート ALB は、ユーザー提供のプライベート・サブネットからの IP アドレスとともにデプロイされます。 IP アドレスが提供されていない場合、ALB は IBM Cloud インフラストラクチャー (SoftLayer) のプライベート・サブネットから取得したランダム IP アドレスを使用してデプロイされます。</li>
+    <li>このパラメーターはプライベート・アプリケーションのロード・バランサーの場合にのみ使用できます。</li>
+    <li>プライベート・アプリケーションのロード・バランサーは、ユーザー提供のプライベート・サブネットからの IP アドレスとともにデプロイされます。 IP アドレスが提供されない場合、アプリケーション・ロード・バランサーは、クラスターの作成時に自動的にプロビジョンされたポータブル・プライベート・サブネットのプライベート IP アドレスを使用してデプロイされます。</li>
    </ul>
    </dd>
    </dl>
 
 **例**:
 
-  ALB を有効にする場合の例:
+  アプリケーション・ロード・バランサーを有効にする場合の例:
 
   ```
   bx cs alb-configure --albID my_alb_id --enable
   ```
   {: pre}
 
-  ALB を無効にする場合の例:
+  アプリケーション・ロード・バランサーを無効にする場合の例:
 
   ```
   bx cs alb-configure --albID my_alb_id --disable
   ```
   {: pre}
 
-  ユーザー提供の IP アドレスを使用して ALB を有効にする場合の例:
+  ユーザー提供の IP アドレスを使用してアプリケーション・ロード・バランサーを有効にする場合の例:
 
   ```
   bx cs alb-configure --albID my_private_alb_id --enable --user-ip user_ip
@@ -172,13 +184,13 @@ bx plugin list
 ### bx cs alb-get --albID ALB_ID
 {: #cs_alb_get}
 
-アプリケーション・ロード・バランサー (ALB) の詳細を表示します。
+アプリケーション・ロード・バランサーの詳細を表示します。
 
 <strong>コマンド・オプション</strong>:
 
    <dl>
    <dt><code><em>--albID </em>ALB_ID</code></dt>
-   <dd>ALB の ID。 クラスター内の ALB の ID を表示するには、<code>bx cs albs --cluster <em>CLUSTER</em></code> を実行します。 この値は必須です。</dd>
+   <dd>アプリケーション・ロード・バランサーの ID。 クラスター内のアプリケーション・ロード・バランサーの ID を表示するには、<code>bx cs albs --cluster <em>CLUSTER</em></code> を実行します。 この値は必須です。</dd>
    </dl>
 
 **例**:
@@ -203,6 +215,101 @@ bx plugin list
   bx cs alb-types
   ```
   {: pre}
+
+
+### bx cs apiserver-config-set
+{: #cs_apiserver_config_set}
+
+クラスターの Kubernetes API サーバー構成のオプションを設定します。このコマンドは、設定する構成オプションに対する以下のいずれかのサブコマンドと結合させる必要があります。
+
+#### bx cs apiserver-config-get audit-webhook CLUSTER
+{: #cs_apiserver_api_webhook_get}
+
+API サーバー監査ログの送信先となるリモート・ロギング・サービスの URL を表示します。URL は、API サーバー構成の Web フック・バックエンドの作成時に指定されています。
+
+<strong>コマンド・オプション</strong>:
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>クラスターの名前または ID。 この値は必須です。</dd>
+   </dl>
+
+**例**:
+
+  ```
+  bx cs apiserver-config-get audit-webhook my_cluster
+  ```
+  {: pre}
+
+#### bx cs apiserver-config-set audit-webhook CLUSTER [--remoteServer SERVER_URL_OR_IP][--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH][--clientKey CLIENT_KEY_PATH]
+{: #cs_apiserver_api_webhook_set}
+
+API サーバー構成の Web フック・バックエンドを設定します。Web フック・バックエンドは、API サーバー監査ログをリモート・サーバーに転送します。Web フック構成は、このコマンドのフラグで指定する情報に基づいて作成されます。どのフラグにも情報を指定しない場合、デフォルトの Web フック構成が使用されます。
+
+<strong>コマンド・オプション</strong>:
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>クラスターの名前または ID。 この値は必須です。</dd>
+
+   <dt><code>--remoteServer <em>SERVER_URL</em></code></dt>
+   <dd>監査ログの送信先となるリモート・ロギング・サービスの URL または IP アドレス。非セキュアなサーバー URL を指定した場合、すべての証明書は無視されます。この値はオプションです。 リモート・サーバーの URL や IP アドレスを指定しない場合は、デフォルトの QRadar 構成が使用され、ログはクラスターが属する地域の QRadar インスタンスに送信されます。</dd>
+
+   <dt><code>--caCert <em>CA_CERT_PATH</em></code></dt>
+   <dd>リモート・ロギング・サービスの検証に使用される CA 証明書のファイル・パス。この値はオプションです。</dd>
+
+   <dt><code>--clientCert <em>CLIENT_CERT_PATH</em></code></dt>
+   <dd>リモート・ロギング・サービスに対する認証に使用されるクライアント証明書のファイル・パス。この値はオプションです。</dd>
+
+   <dt><code>--clientKey <em> CLIENT_KEY_PATH</em></code></dt>
+   <dd>リモート・ロギング・サービスへの接続に使用される、対応するクライアント・キーのファイル・パス。この値はオプションです。</dd>
+   </dl>
+
+**例**:
+
+  ```
+  bx cs apiserver-config-set audit-webhook my_cluster --remoteServer https://audit.example.com/audit --caCert /mnt/etc/kubernetes/apiserver-audit/ca.pem --clientCert /mnt/etc/kubernetes/apiserver-audit/cert.pem --clientKey /mnt/etc/kubernetes/apiserver-audit/key.pem
+  ```
+  {: pre}
+
+#### bx cs apiserver-config-unset audit-webhook CLUSTER
+{: #cs_apiserver_api_webhook_get}
+
+クラスターの API サーバーの Web フック・バックエンド構成を無効にします。Web フック・バックエンドを無効にすると、リモート・サーバーへの API サーバー監査ログの転送が停止します。
+
+<strong>コマンド・オプション</strong>:
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>クラスターの名前または ID。 この値は必須です。</dd>
+   </dl>
+
+**例**:
+
+  ```
+  bx cs apiserver-config-unset audit-webhook my_cluster
+  ```
+  {: pre}
+
+### bx cs apiserver-refresh CLUSTER
+{: #cs_apiserver_refresh}
+
+API サーバー構成への変更を適用するには、クラスター内の Kubernetes マスターを再始動します。
+
+<strong>コマンド・オプション</strong>:
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>クラスターの名前または ID。 この値は必須です。</dd>
+   </dl>
+
+**例**:
+
+  ```
+  bx cs apiserver-refresh my_cluster
+  ```
+  {: pre}
+
 
 ### bx cs cluster-config CLUSTER [--admin][--export]
 {: #cs_cluster_config}
@@ -231,7 +338,7 @@ bx cs cluster-config my_cluster
 
 
 
-### bx cs cluster-create [--file FILE_LOCATION][--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH][--no-subnet] [--private-vlan PRIVATE_VLAN][--public-vlan PUBLIC_VLAN] [--workers WORKER]
+### bx cs cluster-create [--file FILE_LOCATION][--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH][--no-subnet] [--private-vlan PRIVATE_VLAN][--public-vlan PUBLIC_VLAN] [--workers WORKER][--disable-disk-encrypt]
 {: #cs_cluster_create}
 
 組織内にクラスターを作成します。
@@ -255,6 +362,7 @@ public-vlan: <em>&lt;public_vlan&gt;</em>
 hardware: <em>&lt;shared_or_dedicated&gt;</em>
 workerNum: <em>&lt;number_workers&gt;</em>
 kube-version: <em>&lt;kube-version&gt;</em>
+
 </code></pre>
 
 
@@ -298,7 +406,10 @@ kube-version: <em>&lt;kube-version&gt;</em>
      </tr>
      <tr>
       <td><code><em>kube-version</em></code></td>
-      <td>クラスター・マスター・ノードの Kubernetes のバージョン。 この値はオプションです。 これを指定しなかった場合、クラスターは、サポートされている Kubernetes のバージョンのデフォルトを使用して作成されます。 使用可能なバージョンを確認するには、<code>bx cs kube-versions</code> を実行します。</td>
+      <td>クラスター・マスター・ノードの Kubernetes のバージョン。 この値はオプションです。 これを指定しなかった場合、クラスターは、サポートされている Kubernetes のバージョンのデフォルトを使用して作成されます。 使用可能なバージョンを確認するには、<code>bx cs kube-versions</code> を実行します。</td></tr>
+      <tr>
+      <td><code>diskEncryption: <em>false</em></code></td>
+      <td>ワーカー・ノードには、デフォルトでディスク暗号化の機能があります。[詳しくはこちらを参照してください](cs_security.html#cs_security_worker)。暗号化を無効にするには、このオプションを組み込んで値を <code>false</code> に設定します。</td></tr>
      </tbody></table>
     </p></dd>
 
@@ -355,6 +466,9 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <dd>クラスターにデプロイするワーカー・ノードの数。 このオプションを指定しない場合、1 つのワーカー・ノードを持つクラスターが作成されます。 この値は、標準クラスターではオプションで、ライト・クラスターでは使用できません。
 
 <p><strong>注:</strong> ワーカー・ノードごとに、固有のワーカー・ノード ID とドメイン名が割り当てられます。クラスターが作成された後にこれらを手動で変更してはいけません。 ID またはドメイン名を変更すると、Kubernetes マスターがクラスターを管理できなくなります。</p></dd>
+
+<dt><code>--disable-disk-encrypt</code></dt>
+<dd>ワーカー・ノードには、デフォルトでディスク暗号化の機能があります。[詳しくはこちらを参照してください](cs_security.html#cs_security_worker)。暗号化を無効にするには、このオプションを組み込みます。</dd>
 </dl>
 
 **例**:
@@ -434,8 +548,6 @@ kube-version: <em>&lt;kube-version&gt;</em>
 {: #cs_cluster_service_bind}
 
 {{site.data.keyword.Bluemix_notm}} サービスをクラスターに追加します。
-
-**ヒント:** {{site.data.keyword.Bluemix_dedicated_notm}} ユーザーの場合は、[{{site.data.keyword.Bluemix_dedicated_notm}} (最終ベータ版) のクラスターに {{site.data.keyword.Bluemix_notm}} サービスを追加する](cs_cluster.html#binding_dedicated)を参照してください。
 
 <strong>コマンド・オプション</strong>:
 
@@ -636,13 +748,13 @@ Kubernetes マスターをデフォルトの API バージョンに更新しま�
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>クラスターの名前または ID。 この値は必須です。</dd>
-   
+
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
    <dd>クラスターの Kubernetes のバージョン。 このフラグを指定しなかった場合、Kubernetes マスターはデフォルトの API バージョンに更新されます。 使用可能なバージョンを確認するには、[bx cs kube-versions](#cs_kube_versions) を実行します。 この値はオプションです。</dd>
 
    <dt><code>-f</code></dt>
    <dd>ユーザー・プロンプトを出さずにマスターを強制的に更新するには、このオプションを使用します。 この値はオプションです。</dd>
-   
+
    <dt><code>--force-update</code></dt>
    <dd>変更が 2 つのマイナー・バージョンより大規模である場合でも、更新を試行します。 この値はオプションです。</dd>
    </dl>
@@ -683,7 +795,7 @@ Kubernetes マスターをデフォルトの API バージョンに更新しま�
    <dl>
    <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
    <dd>IBM Cloud インフラストラクチャー (SoftLayer) アカウントのユーザー名。 この値は必須です。</dd>
-   
+
 
    <dt><code>--infrastructure-api-key <em>API_KEY</em></code></dt>
    <dd>IBM Cloud インフラストラクチャー (SoftLayer) アカウントの API キー。 この値は必須です。
@@ -760,43 +872,15 @@ Kubernetes マスターをデフォルトの API バージョンに更新しま�
 
    <dl>
    <dt><code>--host <em>HOST</em></code></dt>
-   <dd>使用する {{site.data.keyword.containershort_notm}} API エンドポイント。  この値はオプションです。 例:
-
-    <ul>
-    <li>米国南部:
-
-    <pre class="codeblock">
-    <code>bx cs init --host https://us-south.containers.bluemix.net</code>
-    </pre></li>
-
-    <li>米国東部:
-
-    <pre class="codeblock">
-    <code>bx cs init --host https://us-east.containers.bluemix.net</code>
-    </pre>
-    <p><strong>注</strong>: 米国東部を使用できるのは、CLI コマンドで使用する場合だけです。</p></li>
-
-    <li>英国南部:
-
-    <pre class="codeblock">
-    <code>bx cs init --host https://uk-south.containers.bluemix.net</code>
-    </pre></li>
-
-    <li>中欧:
-
-    <pre class="codeblock">
-    <code>bx cs init --host https://eu-central.containers.bluemix.net</code>
-    </pre></li>
-
-    <li>南アジア太平洋地域:
-
-    <pre class="codeblock">
-    <code>bx cs init --host https://ap-south.containers.bluemix.net</code>
-    </pre></li></ul>
-</dd>
-</dl>
+   <dd>使用する {{site.data.keyword.containershort_notm}} API エンドポイント。この値はオプションです。 [API エンドポイントの選択可能な値を表示します。](cs_regions.html#container_regions)</dd>
+   </dl>
 
 
+
+```
+bx cs init --host https://uk-south.containers.bluemix.net
+```
+{: pre}
 
 ### bx cs kube-versions
 {: #cs_kube_versions}
@@ -830,10 +914,10 @@ Kubernetes マスターをデフォルトの API バージョンに更新しま�
   ```
   {: pre}
 
-### bx cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE][--hostname LOG_SERVER_HOSTNAME] [--port LOG_SERVER_PORT] --type LOG_TYPE
+### bx cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT][--spaceName CLUSTER_SPACE] [--orgName CLUSTER_ORG] --type LOG_TYPE [--json]
 {: #cs_logging_create}
 
-ロギング構成を作成します。 名前空間ログはデフォルトで {{site.data.keyword.loganalysislong_notm}} に転送されます。 このコマンドを使用すると、名前空間ログを外部 syslog サーバーに転送できます。 また、このコマンドを使用して、アプリケーション、ワーカー・ノード、Kubernetes クラスター、Ingress コントローラーのログを {{site.data.keyword.loganalysisshort_notm}} または外部 syslog サーバーに転送することもできます。
+ロギング構成を作成します。 このコマンドを使用して、コンテナー、アプリケーション、ワーカー・ノード、Kubernetes クラスター、Ingress アプリケーション・ロード・バランサーのログを {{site.data.keyword.loganalysisshort_notm}} または外部 syslog サーバーに転送できます。
 
 <strong>コマンド・オプション</strong>:
 
@@ -841,34 +925,47 @@ Kubernetes マスターをデフォルトの API バージョンに更新しま�
 <dt><code><em>CLUSTER</em></code></dt>
 <dd>クラスターの名前または ID。</dd>
 <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-<dd>ログ転送を有効にする対象のログ・ソース。 指定可能な値は <code>application</code>、<code>worker</code>、<code>kubernetes</code>、<code>ingress</code> です。 この値は必須です。</dd>
+<dd>ログ転送を有効にする対象のログ・ソース。指定可能な値は <code>container</code>、<code>application</code>、<code>worker</code>、<code>kubernetes</code>、<code>ingress</code> です。 この値は必須です。</dd>
 <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
-<dd>syslog へのログの転送元になる Docker コンテナー名前空間。 ログ転送は、Kubernetes 名前空間 <code>ibm-system</code> と <code>kube-system</code> ではサポートされていません。 この値は名前空間の場合に必須です。 名前空間を指定しないと、コンテナー内のすべての名前空間でこの構成が使用されます。</dd>
+<dd>ログの転送元になる Docker コンテナー名前空間。ログ転送は、Kubernetes 名前空間 <code>ibm-system</code> と <code>kube-system</code> ではサポートされていません。 この値はコンテナー・ログ・ソースについてのみ有効で、オプションです。名前空間を指定しないと、コンテナー内のすべての名前空間でこの構成が使用されます。</dd>
 <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
-<dd>ログ・コレクター・サーバーのホスト名または IP アドレス。 この値は、ロギング・タイプが <code>syslog</code> の場合に必須です。</dd>
+<dd>ロギング・タイプが <code>syslog</code> であるとき、ログ・コレクター・サーバーのホスト名または IP アドレス。この値は <code>syslog</code> の場合に必須です。 ロギング・タイプが <code>ibm</code> であるとき、{{site.data.keyword.loganalysislong_notm}} 取り込み URL。選択可能な取り込み URL のリストは、[ここを参照してください](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)。取り込み URL を指定しない場合、クラスターが作成された地域のエンドポイントが使用されます。</dd>
 <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
-<dd>ログ・コレクター・サーバーのポート。 この値は、ロギング・タイプが <code>syslog</code> の場合にオプションです。 ポートを指定しないと、標準ポート <code>514</code> が <code>syslog</code> で使用されます。</dd>
+<dd>ログ・コレクター・サーバーのポート。 この値はオプションです。 ポートを指定しないと、標準ポート <code>514</code> が <code>syslog</code> で使用され、標準ポート <code>9091</code> が <code>ibm</code> で使用されます。</dd>
+<dt><code>--spaceName <em>CLUSTER_SPACE</em></code></dt>
+<dd>ログの送信先となるスペースの名前。この値はログ・タイプ <code>ibm</code> についてのみ有効で、オプションです。スペースを指定しない場合、ログはアカウント・レベルに送信されます。</dd>
+<dt><code>--orgName <em>CLUSTER_ORG</em></code></dt>
+<dd>このスペースが属する組織の名前。この値はログ・タイプ <code>ibm</code> についてのみ有効で、スペースを指定した場合には必須です。</dd>
 <dt><code>--type <em>LOG_TYPE</em></code></dt>
 <dd>使用するログ転送プロトコル。 現在、<code>syslog</code> と <code>ibm</code> がサポートされています。 この値は必須です。</dd>
+<dt><code>--json</code></dt>
+<dd>オプションで、コマンド出力を JSON フォーマットで出力します。</dd>
 </dl>
 
 **例**:
 
-ログ・ソース `namespace` の例
+デフォルト・ポート 9091 で `container` ログ・ソースから転送されるログ・タイプ `ibm` の例:
 
   ```
-  bx cs logging-config-create my_cluster --logsource namespaces --namespace my_namespace --hostname localhost --port 5514 --type syslog
-  ```
-  {: pre}
-
-ログ・ソース `ingress` の例
-
-  ```
-  bx cs logging-config-create my_cluster --logsource ingress --type ibm
+  bx cs logging-config-create my_cluster --logsource container --namespace my_namespace --hostname ingest.logging.ng.bluemix.net --type ibm
   ```
   {: pre}
 
-### bx cs logging-config-get CLUSTER [--logsource LOG_SOURCE]
+デフォルト・ポート 514 で `container` ログ・ソースから転送されるログ・タイプ `syslog` の例:
+
+  ```
+  bx cs logging-config-create my_cluster --logsource container --namespace my_namespace  --hostname my_hostname-or-IP --type syslog
+  ```
+  {: pre}
+
+  デフォルトではないポートで `ingress` ソースからログを転送するログ・タイプ `syslog` の例:
+
+    ```
+    bx cs logging-config-create my_cluster --logsource container --hostname my_hostname-or-IP --port 5514 --type syslog
+    ```
+    {: pre}
+
+### bx cs logging-config-get CLUSTER [--logsource LOG_SOURCE][--json]
 {: #cs_logging_get}
 
 クラスターのログ転送構成をすべて表示するか、またはログ・ソースを基準にロギング構成をフィルターに掛けます。
@@ -879,7 +976,9 @@ Kubernetes マスターをデフォルトの API バージョンに更新しま�
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>クラスターの名前または ID。 この値は必須です。</dd>
    <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-   <dd>フィルター操作で取得するログ・ソースの種類。 クラスター内のこのログ・ソースのロギング構成のみが返されます。 指定可能な値は <code>namespaces</code>、<code>application</code>、<code>worker</code>、<code>kubernetes</code>、<code>ingress</code> です。 この値はオプションです。</dd>
+   <dd>フィルター操作で取得するログ・ソースの種類。 クラスター内のこのログ・ソースのロギング構成のみが返されます。 指定可能な値は <code>container</code>、<code>application</code>、<code>worker</code>、<code>kubernetes</code>、<code>ingress</code> です。 この値はオプションです。</dd>
+   <dt><code>--json</code></dt>
+   <dd>オプションで、コマンド出力を JSON フォーマットで出力します。</dd>
    </dl>
 
 **例**:
@@ -890,61 +989,65 @@ Kubernetes マスターをデフォルトの API バージョンに更新しま�
   {: pre}
 
 
-### bx cs logging-config-rm CLUSTER --id LOG_CONFIG_ID
+### bx cs logging-config-rm CLUSTER LOG_CONFIG_ID
 {: #cs_logging_rm}
 
-ログ転送構成を削除します。 Docker コンテナー名前空間の場合は、syslog サーバーへのログの転送を停止できます。 名前空間から {{site.data.keyword.loganalysislong_notm}} へのログの転送は続行されます。 Docker コンテナー名前空間以外のログ・ソースの場合は、syslog サーバーまたは {{site.data.keyword.loganalysisshort_notm}} へのログの転送を停止できます。
+ログ転送構成を削除します。 これにより、syslog サーバーまたは {{site.data.keyword.loganalysisshort_notm}} へのログの転送が停止します。
 
 <strong>コマンド・オプション</strong>:
 
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>クラスターの名前または ID。 この値は必須です。</dd>
-   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
+   <dt><code><em>LOG_CONFIG_ID</em></code></dt>
    <dd>ログ・ソースから削除するロギング構成 ID。 この値は必須です。</dd>
    </dl>
 
 **例**:
 
   ```
-  bx cs logging-config-rm my_cluster --id my_log_config_id
+  bx cs logging-config-rm my_cluster f4bc77c0-ee7d-422d-aabf-a4e6b977264e
   ```
   {: pre}
 
 
-### bx cs logging-config-update CLUSTER [--namespace NAMESPACE][--id LOG_CONFIG_ID] [--hostname LOG_SERVER_HOSTNAME][--port LOG_SERVER_PORT] --type LOG_TYPE
+### bx cs logging-config-update CLUSTER LOG_CONFIG_ID [--hostname LOG_SERVER_HOSTNAME_OR_IP][--port LOG_SERVER_PORT] [--spaceName CLUSTER_SPACE][--orgName CLUSTER_ORG] --type LOG_TYPE [--json]
 {: #cs_logging_update}
 
-使用するロギング・サーバーへのログ転送を更新します。 Docker コンテナー名前空間の場合は、このコマンドを使用して、現在の syslog サーバーの詳細を更新したり、別の syslog サーバーに変更したりできます。 Docker コンテナー名前空間以外のロギング・ソースの場合は、このコマンドを使用して、ログ・コレクター・サーバーのタイプを変更できます。 現在、「syslog」と「ibm」がログ・タイプとしてサポートされています。
+ログ転送構成の詳細を更新します。
 
 <strong>コマンド・オプション</strong>:
 
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>クラスターの名前または ID。 この値は必須です。</dd>
-   <dt><code>--namespace <em>NAMESPACE</em></code></dt>
-   <dd>syslog へのログの転送元になる Docker コンテナー名前空間。 ログ転送は、Kubernetes 名前空間 <code>ibm-system</code> と <code>kube-system</code> ではサポートされていません。 この値は名前空間の場合に必須です。</dd>
-   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
-   <dd>更新するロギング構成 ID。 この値は、Docker コンテナー名前空間以外のログ・ソースの場合に必須です。</dd>
+   <dt><code><em>LOG_CONFIG_ID</em></code></dt>
+   <dd>更新するロギング構成 ID。 この値は必須です。</dd>
    <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
-   <dd>ログ・コレクター・サーバーのホスト名または IP アドレス。 この値は、ロギング・タイプが <code>syslog</code> の場合に必須です。</dd>
+   <dd>ロギング・タイプが <code>syslog</code> であるとき、ログ・コレクター・サーバーのホスト名または IP アドレス。この値は <code>syslog</code> の場合に必須です。 ロギング・タイプが <code>ibm</code> であるとき、{{site.data.keyword.loganalysislong_notm}} 取り込み URL。選択可能な取り込み URL のリストは、[ここを参照してください](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)。取り込み URL を指定しない場合、クラスターが作成された地域のエンドポイントが使用されます。</dd>
    <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
-   <dd>ログ・コレクター・サーバーのポート。 この値は、ロギング・タイプが <code>syslog</code> の場合にオプションです。 ポートを指定しないと、標準ポート 514 が <code>syslog</code> で使用されます。</dd>
+   <dd>ログ・コレクター・サーバーのポート。 この値は、ロギング・タイプが <code>syslog</code> の場合にオプションです。 ポートを指定しないと、標準ポート <code>514</code> が <code>syslog</code> で使用され、<code>9091</code> が <code>ibm</code> で使用されます。</dd>
+   <dt><code>--spaceName <em>CLUSTER_SPACE</em></code></dt>
+   <dd>ログの送信先となるスペースの名前。この値はログ・タイプ <code>ibm</code> についてのみ有効で、オプションです。スペースを指定しない場合、ログはアカウント・レベルに送信されます。</dd>
+   <dt><code>--orgName <em>CLUSTER_ORG</em></code></dt>
+   <dd>このスペースが属する組織の名前。この値はログ・タイプ <code>ibm</code> についてのみ有効で、スペースを指定した場合には必須です。</dd>
    <dt><code>--type <em>LOG_TYPE</em></code></dt>
    <dd>使用するログ転送プロトコル。 現在、<code>syslog</code> と <code>ibm</code> がサポートされています。 この値は必須です。</dd>
+   <dt><code>--json</code></dt>
+   <dd>オプションで、コマンド出力を JSON フォーマットで出力します。</dd>
    </dl>
 
 **ログ・タイプ `ibm`** の例
 
   ```
-  bx cs logging-config-update my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e --type ibm
+  bx cs logging-config-update my_cluster f4bc77c0-ee7d-422d-aabf-a4e6b977264e --type ibm
   ```
   {: pre}
 
 **ログ・タイプ `syslog` の例**
 
   ```
-  bx cs logging-config-update my_cluster --namespace my_namespace --hostname localhost --port 5514 --type syslog
+  bx cs logging-config-update my_cluster f4bc77c0-ee7d-422d-aabf-a4e6b977264e --hostname localhost --port 5514 --type syslog
   ```
   {: pre}
 
@@ -952,8 +1055,8 @@ Kubernetes マスターをデフォルトの API バージョンに更新しま�
 ### bx cs machine-types LOCATION
 {: #cs_machine_types}
 
-ワーカー・ノードのために使用できるマシン・タイプのリストを表示します。 各マシン・タイプには、クラスター内の各ワーカー・ノード用の仮想 CPU、メモリー、ディスク・スペースの量が含まれます。 
-- 名前に `u2c` または `b2c` が含まれるマシン・タイプは、信頼性を確保するためにストレージ・エリア・ネットワーク (SAN) ではなくローカル・ディスクを使用します。 信頼性が高いと、ローカル・ディスクへのバイトのシリアライズ時のスループットが向上し、ネットワーク障害が原因のファイル・システムのパフォーマンス低下が軽減されます。 これらのマシン・タイプには、OS ファイル・システム用のローカル・ディスク・ストレージ 25 GB と、すべてのコンテナー・データが書き込まれる `/var/lib/docker` ディレクトリー用のローカル・ディスク・ストレージ 100 GB があります。 
+ワーカー・ノードのために使用できるマシン・タイプのリストを表示します。 各マシン・タイプには、クラスター内の各ワーカー・ノード用の仮想 CPU、メモリー、ディスク・スペースの量が含まれます。
+- 名前に `u2c` または `b2c` が含まれるマシン・タイプは、信頼性を確保するためにストレージ・エリア・ネットワーク (SAN) ではなくローカル・ディスクを使用します。 信頼性が高いと、ローカル・ディスクへのバイトのシリアライズ時のスループットが向上し、ネットワーク障害が原因のファイル・システムのパフォーマンス低下が軽減されます。 これらのマシン・タイプには、OS ファイル・システム用のローカル・ディスク・ストレージ 25 GB と、すべてのコンテナー・データが書き込まれる `/var/lib/docker` ディレクトリー用のローカル・ディスク・ストレージ 100 GB があります。
 - 名前に `encrypted` が含まれているマシン・タイプは、ホストの Docker データを暗号化します。 すべてのコンテナー・データが格納される `/var/lib/docker` ディレクトリーは、LUKS 暗号化で暗号化されます。
 - 名前に `u1c` または `b1c` が含まれているマシン・タイプ (`u1c.2x4` など) は推奨されません。 マシン・タイプ `u2c` と `b2c` を使用するには、`bx cs worker-add` コマンドを使用して、その更新されたマシン・タイプを使用しているワーカー・ノードを追加します。 その後、`bx cs worker-rm` コマンドを使用して、推奨されないマシン・タイプを使用しているワーカー・ノードを削除します。
 </p>
@@ -968,10 +1071,92 @@ Kubernetes マスターをデフォルトの API バージョンに更新しま�
 **例**:
 
   ```
-  bx cs machine-types LOCATION
+  bx cs machine-types dal10
   ```
   {: pre}
 
+### bx cs region
+{: #cs_region}
+
+現在自分が属している {{site.data.keyword.containershort_notm}} 地域を見つけます。その地域に固有のクラスターを作成して管理します。地域を変更するには、`bx cs region-set` コマンドを使用します。
+
+**例**:
+
+```
+bx cs region
+```
+{: pre}
+
+**出力**:
+```
+Region: us-south
+```
+{: screen}
+
+### bx cs region-set [REGION]
+{: #cs_region-set}
+
+{{site.data.keyword.containershort_notm}} の地域を設定します。その地域に固有のクラスターを作成して管理します。高可用性を確保するために、複数の地域にクラスターを作成することもできます。
+
+例えば、米国南部地域の {{site.data.keyword.Bluemix_notm}} にログインしてクラスターを作成できます。次に `bx cs region-set eu-central` を使用して中欧地域をターゲットにし、別のクラスターを作成できます。最後に、`bx cs region-set us-south` を使用して米国南部地域に戻り、その地域のクラスターを管理できます。
+
+**コマンド・オプション**:
+
+<dl>
+<dt><code><em>REGION</em></code></dt>
+<dd>ターゲットにする地域を入力します。この値はオプションです。 地域を指定しない場合、出力に含まれるリストからそれを選択できます。
+
+選択可能な地域のリストを参照するには、[地域とロケーション](cs_regions.html)を確認するか、`bx cs regions` [コマンド](#cs_regions)を使用します。</dd></dl>
+
+**例**:
+
+```
+bx cs region-set eu-central
+```
+{: pre}
+
+```
+bx cs region-set
+```
+{: pre}
+
+**出力**:
+```
+Choose a region:
+1. ap-north
+2. ap-south
+3. eu-central
+4. uk-south
+5. us-east
+6. us-south
+Enter a number> 3
+OK
+```
+{: screen}
+
+### bx cs regions
+{: #cs_regions}
+
+選択可能な地域をリストします。`Region Name` は {{site.data.keyword.containershort_notm}} 名、`Region Alias` はその地域の一般的な {{site.data.keyword.Bluemix_notm}} 名です。
+
+**例**:
+
+```
+bx cs regions
+```
+{: pre}
+
+**出力**:
+```
+Region Name   Region Alias
+ap-north      jp-tok
+ap-south      au-syd
+eu-central    eu-de
+uk-south      eu-gb
+us-east       us-east
+us-south      us-south
+```
+{: screen}
 
 ### bx cs subnets
 {: #cs_subnets}
@@ -1039,7 +1224,7 @@ Web フックを作成します。
   {: pre}
 
 
-### bx cs worker-add --cluster CLUSTER [--file FILE_LOCATION][--hardware HARDWARE] --machine-type MACHINE_TYPE --number NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN
+### bx cs worker-add --cluster CLUSTER [--file FILE_LOCATION][--hardware HARDWARE] --machine-type MACHINE_TYPE --number NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt]
 {: #cs_worker_add}
 
 ワーカー・ノードを標準クラスターに追加します。
@@ -1062,7 +1247,8 @@ machine-type: <em>&lt;machine_type&gt;</em>
 private-vlan: <em>&lt;private_vlan&gt;</em>
 public-vlan: <em>&lt;public_vlan&gt;</em>
 hardware: <em>&lt;shared_or_dedicated&gt;</em>
-workerNum: <em>&lt;number_workers&gt;</em></code></pre>
+workerNum: <em>&lt;number_workers&gt;</em>
+</code></pre>
 
 <table>
 <caption>表 2. YAML ファイルの構成要素について</caption>
@@ -1098,6 +1284,9 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
 <td><code>workerNum</code></td>
 <td><code><em>&lt;number_workers&gt;</em></code> を、デプロイするワーカー・ノードの数に置き換えます。</td>
 </tr>
+<tr>
+<td><code>diskEncryption: <em>false</em></code></td>
+<td>ワーカー・ノードには、デフォルトでディスク暗号化の機能があります。[詳しくはこちらを参照してください](cs_security.html#cs_security_worker)。暗号化を無効にするには、このオプションを組み込んで値を <code>false</code> に設定します。</td></tr>
 </tbody></table></p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
@@ -1118,6 +1307,9 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
 <dd>クラスターの作成時に指定されたパブリック VLAN。 この値はオプションです。
 
 <p><strong>注:</strong> 指定するパブリック VLAN とプライベート VLAN は、一致していなければなりません。 必ず、プライベート VLAN ルーターの先頭は <code>bcr</code> (バックエンド・ルーター)、パブリック VLAN ルーターの先頭は <code>fcr</code> (フロントエンド・ルーター) になります。 クラスターを作成するときにこれらの VLAN を使用するには、それらの接頭部の後に続く数値と文字の組み合わせが一致していなければなりません。 クラスターを作成するときに、一致していないパブリック VLAN とプライベート VLAN を使用しないでください。</p></dd>
+
+<dt><code>--disable-disk-encrypt</code></dt>
+<dd>ワーカー・ノードには、デフォルトでディスク暗号化の機能があります。[詳しくはこちらを参照してください](cs_security.html#cs_security_worker)。暗号化を無効にするには、このオプションを組み込みます。</dd>
 </dl>
 
 **例**:
@@ -1135,7 +1327,7 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
   {: pre}
 
 
-### bx cs worker-get WORKER_NODE_ID
+### bx cs worker-get [CLUSTER_NAME_OR_ID] WORKER_NODE_ID
 {: #cs_worker_get}
 
 ワーカー・ノードの詳細を表示します。
@@ -1143,6 +1335,8 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
 <strong>コマンド・オプション</strong>:
 
    <dl>
+   <dt><code><em>CLUSTER_NAME_OR_ID</em></code></dt>
+   <dd>ワーカー・ノードのクラスターの名前または ID。この値はオプションです。</dd>
    <dt><code><em>WORKER_NODE_ID</em></code></dt>
    <dd>ワーカー・ノードの ID。 クラスター内のワーカー・ノードの ID を表示するには、<code>bx cs workers <em>CLUSTER</em></code> を実行します。 この値は必須です。</dd>
    </dl>
@@ -1150,7 +1344,7 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
 **例**:
 
   ```
-  bx cs worker-get WORKER_NODE_ID
+  bx cs worker-get [CLUSTER_NAME_OR_ID] WORKER_NODE_ID
   ```
   {: pre}
 
@@ -1248,13 +1442,13 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
 
    <dt><em>CLUSTER</em></dt>
    <dd>使用可能なワーカー・ノードをリストする対象のクラスターの名前または ID。 この値は必須です。</dd>
-   
+
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
    <dd>クラスターの Kubernetes のバージョン。 このフラグを指定しなかった場合、ワーカー・ノードはデフォルトのバージョンに更新されます。 使用可能なバージョンを確認するには、[bx cs kube-versions](#cs_kube_versions) を実行します。 この値はオプションです。</dd>
 
    <dt><code>-f</code></dt>
    <dd>ユーザー・プロンプトを出さずにマスターを強制的に更新するには、このオプションを使用します。 この値はオプションです。</dd>
-   
+
    <dt><code>--force-update</code></dt>
    <dd>変更が 2 つのマイナー・バージョンより大規模である場合でも、更新を試行します。 この値はオプションです。</dd>
 
@@ -1303,5 +1497,5 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
 |Pending|Kubernetes マスターはデプロイされています。 ワーカー・ノードはプロビジョン中であるため、まだクラスターでは使用できません。 クラスターにはアクセスできますが、アプリをクラスターにデプロイすることはできません。|
 |Normal|クラスター内のすべてのワーカー・ノードが稼働中です。 クラスターにアクセスし、アプリをクラスターにデプロイできます。|
 |Warning|クラスター内の 1 つ以上のワーカー・ノードが使用不可です。ただし、他のワーカー・ノードが使用可能であるため、ワークロードを引き継ぐことができます。 <ol><li>クラスター内のワーカー・ノードをリストして、<strong>Warning</strong> 状態のワーカー・ノードの ID をメモします。<pre class="pre"><code>bx cs workers &lt;cluster_name_or_id&gt;</code></pre><li>ワーカー・ノードの詳細を取得します。<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre><li><strong>「State」</strong>、<strong>「Status」</strong>、<strong>「Details」</strong>フィールドを参照して、ワーカー・ノードがダウンした根本問題を調べます。</li><li>ワーカー・ノードのメモリーやディスク・スペースが上限に近付いている場合は、ワーカー・ノードのワークロードを減らすか、ワークロードを分散できるようにクラスターにワーカー・ノードを追加してください。</li></ol>|
-|Critical|Kubernetes マスターにアクセスできないか、クラスター内のワーカー・ノードがすべてダウンしています。 <ol><li>クラスター内のワーカー・ノードをリストします。<pre class="pre"><code>bx cs workers &lt;cluser_name_or_id&gt;</code></pre><li>各ワーカー・ノードの詳細を取得します。<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre></li><li><strong>「State」</strong>、<strong>「Status」</strong>、<strong>「Details」</strong>フィールドを参照して、ワーカー・ノードがダウンした根本問題を調べます。</li><li>ワーカー・ノードの状態が <strong>Provision_failed</strong> の場合は、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオからワーカー・ノードをプロビジョンするために必要なアクセス権限がない可能性があります。 必要なアクセス権限については、[IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセス権限を構成して標準の Kubernetes クラスターを作成する](cs_planning.html#cs_planning_unify_accounts)を参照してください。</li><li>ワーカー・ノードの状態が <strong>Critical</strong> で、ワーカー・ノードの状況が <strong>Out of disk</strong> である場合は、ワーカー・ノードの容量が使い尽くされています。 ワーカー・ノードのワークロードを減らすか、またはワークロードを分散できるようにクラスターにワーカー・ノードを追加してください。</li><li>ワーカー・ノードの状態が <strong>Critical</strong> で、ワーカー・ノードの状況が <strong>Unknown</strong> である場合、Kubernetes マスターは使用不可です。 [{{site.data.keyword.Bluemix_notm}} サポート・チケット](/docs/support/index.html#contacting-support)を開いて、{{site.data.keyword.Bluemix_notm}} サポートに連絡してください。</li></ol>|
+|Critical|Kubernetes マスターにアクセスできないか、クラスター内のワーカー・ノードがすべてダウンしています。 <ol><li>クラスター内のワーカー・ノードをリストします。<pre class="pre"><code>bx cs workers &lt;cluser_name_or_id&gt;</code></pre><li>各ワーカー・ノードの詳細を取得します。<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre></li><li><strong>「State」</strong>および<strong>「Status」</strong>フィールドを参照して、ワーカー・ノードがダウンした根本問題を調べます。<ul><li>ワーカー・ノードの状態が <strong>Provision_failed</strong> の場合は、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオからワーカー・ノードをプロビジョンするために必要なアクセス権限がない可能性があります。 必要なアクセス権限については、[IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセス権限を構成して標準の Kubernetes クラスターを作成する](cs_planning.html#cs_planning_unify_accounts)を参照してください。</li><li>ワーカー・ノードの状態が <strong>Critical</strong> で状況が <strong>Not Ready</strong> である場合、ワーカー・ノードが IBM Cloud インフラストラクチャー (SoftLayer) に接続できない可能性があります。まず <code>bx cs worker-reboot --hard CLUSTER WORKER</code> を実行して、トラブルシューティングを開始してください。そのコマンドが失敗する場合は、<code>bx cs worker reload CLUSTER WORKER</code> を実行してください。</li><li>状態が <strong>Critical</strong> で、ワーカー・ノードの状況が <strong>Out of disk</strong> である場合は、ワーカー・ノードの容量が使い尽くされています。 ワーカー・ノードのワークロードを減らすか、またはワークロードを分散できるようにクラスターにワーカー・ノードを追加してください。</li><li>状態が <strong>Critical</strong> で、ワーカー・ノードの状況が <strong>Unknown</strong> である場合、Kubernetes マスターは使用不可です。 [{{site.data.keyword.Bluemix_notm}} サポート・チケット](/docs/support/index.html#contacting-support)を開いて、{{site.data.keyword.Bluemix_notm}} サポートに連絡してください。</li></ul></li></ol>|
 {: caption="表 3. クラスターの状態" caption-side="top"}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-15"
+lastupdated: "2017-12-01"
 
 ---
 
@@ -134,7 +134,7 @@ CLI をインストールするには、以下のことを行います。
 
 -   [`bx` コマンド](/docs/cli/reference/bluemix_cli/bx_cli.html)
 -   [`bx cs` コマンド](cs_cli_reference.html#cs_cli_reference)
--   [`kubectl` コマンド ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/user-guide/kubectl/v1.7/)
+-   [`kubectl` コマンド ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)
 -   [`bx cr` コマンド](/docs/cli/plugins/registry/index.html)
 
 <br />
@@ -159,9 +159,7 @@ Kubernetes CLI に用意されているコマンドを使用して、{{site.data
 
   2.  {{site.data.keyword.Bluemix_notm}} アカウントを選択します。 複数の {{site.data.keyword.Bluemix_notm}} の組織が割り当てられている場合は、対象クラスターが作成されている組織を選択してください。 クラスターは組織に固有のものですが、{{site.data.keyword.Bluemix_notm}} スペースからは独立しています。 そのため、スペースを選択する必要はありません。
 
-  3.  前に選択した {{site.data.keyword.Bluemix_notm}} 地域以外の地域で Kubernetes クラスターを作成したり、そうしたクラスターにアクセスしたりする場合、[{{site.data.keyword.containershort_notm}} 地域の API エンドポイントを指定します](cs_regions.html#container_login_endpoints)。
-
-      **注**: 米国東部でクラスターを作成する場合、`bx cs init --host https://us-east.containers.bluemix.net` コマンドを使用して、米国東部コンテナー地域の API エンドポイントを指定する必要があります。
+  3.  前に選択した {{site.data.keyword.Bluemix_notm}} 地域以外の地域で Kubernetes クラスターの作成とアクセスを行う場合は、`bx cs region-set` を実行します。
 
   4.  クラスターの名前を取得するために、アカウントに含まれているすべてのクラスターのリストを出力します。
 
@@ -218,7 +216,7 @@ Kubernetes CLI に用意されているコマンドを使用して、{{site.data
       ```
       {: screen}
 
-これで、`kubectl` のコマンドを実行して、{{site.data.keyword.Bluemix_notm}} のクラスターを管理できるようになりました。 すべてのコマンドのリストについては、[Kubernetes の資料![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/user-guide/kubectl/v1.7/) を参照してください。
+これで、`kubectl` のコマンドを実行して、{{site.data.keyword.Bluemix_notm}} のクラスターを管理できるようになりました。 すべてのコマンドのリストについては、[Kubernetes の資料![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands) を参照してください。
 
 **ヒント:** Windows を使用している場合、Kubernetes CLI が {{site.data.keyword.Bluemix_notm}} CLI と同じディレクトリーにインストールされていなければ、`kubectl` コマンドを正常に実行するために、Kubernetes CLI のインストール先パスにディレクトリーを変更する必要があります。
 
@@ -433,6 +431,14 @@ CLI をアンインストールするには、以下のようにします。
     ```
     {: codeblock}
 
+    例:
+    ```
+    POST https://iam.ng.bluemix.net/oidc/token
+    ```
+    {: pre}
+
+    {{site.data.keyword.Bluemix_notm}} 地域を指定するには、[API エンドポイントで使用される地域の略語を確認してください](cs_regions.html#bluemix_regions)。
+
     <table summary-"Input parameters to get tokens">
     <thead>
         <th>入力パラメーター</th>
@@ -546,6 +552,14 @@ CLI をアンインストールするには、以下のようにします。
     ```
     {: codeblock}
 
+    例:
+    ```
+    POST https://iam.ng.bluemix.net/oidc/token
+    ```
+    {: pre}
+
+    {{site.data.keyword.Bluemix_notm}} 地域を指定するには、[API エンドポイントで使用される地域の略語を確認してください](cs_regions.html#bluemix_regions)。
+
     <table summary-"Input parameters to get tokens">
     <thead>
         <th>入力パラメーター</th>
@@ -611,38 +625,8 @@ CLI をアンインストールするには、以下のようにします。
 
 4.  アカウント内の Kubernetes クラスターをすべてリストします。 前述のステップで取得した情報を使用して、ヘッダー情報をビルドします。
 
-    -   米国南部
-
         ```
-        GET https://us-south.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   米国東部
-
-        ```
-        GET https://us-east.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   英国南部
-
-        ```
-        GET https://uk-south.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   中欧
-
-        ```
-        GET https://eu-central.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   南アジア太平洋地域
-
-        ```
-        GET https://ap-south.containers.bluemix.net/v1/clusters
+        GET https://containers.bluemix.net/v1/clusters
         ```
         {: codeblock}
 
@@ -660,7 +644,7 @@ CLI をアンインストールするには、以下のようにします。
         </tbody>
         </table>
 
-5.  [{{site.data.keyword.containershort_notm}} API の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://us-south.containers.bluemix.net/swagger-api) を参照して、サポートされている API のリストを確認します。
+5.  [{{site.data.keyword.containershort_notm}} API の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.bluemix.net/swagger-api) を参照して、サポートされている API のリストを確認します。
 
 <br />
 
@@ -678,7 +662,7 @@ IAM トークンをリフレッシュするには、以下の手順を実行し�
 1.  新しい IAM アクセス・トークンを生成します。 _&lt;iam_refresh_token&gt;_ を、{{site.data.keyword.Bluemix_notm}} での認証時に受け取った IAM リフレッシュ・トークンに置き換えます。
 
     ```
-    POST https://iam.ng.bluemix.net/oidc/token
+    POST https://iam.bluemix.net/identity/token
     ```
     {: codeblock}
 

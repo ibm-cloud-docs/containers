@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-17"
+lastupdated: "2017-12-01"
 
 ---
 
@@ -34,13 +34,7 @@ lastupdated: "2017-11-17"
   * 미국 동부
   * 미국 남부
 
-다음 지역에 Kubernetes 라이트 클러스터를 작성할 수 있습니다.
-  * AP 남부
-  * 중앙 유럽
-  * 영국 남부
-  * 미국 남부
 
-  **참고**: 유료 고객이 아닌 경우 미국 남부 지역에서 라이트 클러스터를 작성할 수 없습니다.
 
 
 ## {{site.data.keyword.Bluemix_notm}} 지역 API 엔드포인트
@@ -90,15 +84,9 @@ lastupdated: "2017-11-17"
 {{site.data.keyword.containershort_notm}} 지역을 사용하여 사용자가 로그인한 {{site.data.keyword.Bluemix_notm}} 지역 이외의 지역에 Kubernetes 클러스터를 작성하거나 액세스할 수 있습니다. {{site.data.keyword.containershort_notm}} 지역 엔드포인트는 특별히 {{site.data.keyword.Bluemix_notm}}가 아니라 {{site.data.keyword.containershort_notm}}를 전체적으로 참조합니다.
 {:shortdesc}
 
-{{site.data.keyword.containershort_notm}} 지역 API 엔드포인트:
-  * AP 북부: `https://ap-north.containers.bluemix.net`
-  * AP 남부: `https://ap-south.containers.bluemix.net`
-  * 중앙 유럽: `https://eu-central.containers.bluemix.net`
-  * 영국 남부: `https://uk-south.containers.bluemix.net`
-  * 미국 동부: `https://us-east.containers.bluemix.net`
-  * 미국 남부: `https://us-south.containers.bluemix.net`
+단일 글로벌 엔드포인트 `https://containers.bluemix.net/`를 통해 {{site.data.keyword.containershort_notm}}에 액세스할 수 있습니다. 
 
-현재 사용자가 속해 있는 {{site.data.keyword.containershort_notm}} 지역을 확인하려면 `bx cs api`를 실행하고 **지역** 필드를 검토하십시오.
+현재 사용자가 있는 {{site.data.keyword.containershort_notm}} 지역을 확인하려면 `bx cs region`을 실행하십시오. 
 
 ### 다른 컨테이너 서비스 지역에 로그인
 {: #container_login_endpoints}
@@ -109,43 +97,7 @@ lastupdated: "2017-11-17"
 
 </br>
 
-{{site.data.keyword.containershort_notm}} 지역에 로그인하기 위한 예제 명령:
-  * AP 북부:
-    ```
-    bx cs init --host https://ap-north.containers.bluemix.net
-    ```
-  {: pre}
-
-  * AP 남부:
-    ```
-          bx cs init --host https://ap-south.containers.bluemix.net
-          ```
-    {: pre}
-
-  * 중앙 유럽:
-    ```
-        bx cs init --host https://eu-central.containers.bluemix.net
-        ```
-    {: pre}
-
-  * 영국 남부:
-    ```
-        bx cs init --host https://uk-south.containers.bluemix.net
-        ```
-    {: pre}
-
-  * 미국 동부:
-    ```
-    bx cs init --host https://us-east.containers.bluemix.net
-    ```
-    {: pre}
-
-  * 미국 남부:
-    ```
-         bx cs init --host https://us-south.containers.bluemix.net
-        ```
-    {: pre}
-
+지역을 신속하게 전환하려면 `bx cs region-set`를 실행하십시오. 
 
 ### 컨테이너 서비스에 사용 가능한 위치
 {: #locations}
@@ -156,29 +108,25 @@ lastupdated: "2017-11-17"
   |--------|----------|------|
   | AP 북부 | hkg02, tok02 | 홍콩, 도쿄 |
   | AP 남부      | mel01, syd01, syd04        | 멜버른, 시드니 |
-  | 중앙 유럽    | ams03, fra02, par01        | 암스테르담, 프랑크푸르트, 파리 |
+  | 중앙 유럽    | ams03, fra02, mil01, par01        | 암스테르담, 프랑크푸르트, 밀라노, 파리 |
   | 영국 남부    | lon02, lon04        | 런던|
   | 미국 동부    | tor01, wdc06, wdc07        | 토론토, 워싱턴, DC |
   | 미국 남부| dal10, dal12, dal13       | Dallas
 |
 
+**참고**: 밀라노(mil01)는 라이트 클러스터에만 사용 가능합니다. 
+
 ### 컨테이너 서비스 API 명령 사용
 {: #container_api}
 
-{{site.data.keyword.containershort_notm}} API와 상호작용하려면 명령 유형을 입력하고 `/v1/command`를 엔드포인트에 추가하십시오.
+{{site.data.keyword.containershort_notm}} API와 상호작용하려면 명령 유형을 입력하고 `/v1/command`를 글로벌 엔드포인트에 추가하십시오. 
 
-미국 남부의 `GET /clusters` API 예제:
+`GET /clusters` API 예제: 
   ```
-        GET https://us-south.containers.bluemix.net/v1/clusters
-        ```
+  GET https://containers.bluemix.net/v1/clusters
+  ```
   {: codeblock}
 
 </br>
 
-API 명령에 대한 문서를 보려면 보려는 지역의 엔드포인트에 `swagger-api`를 추가하십시오.
-  * AP 북부: https://ap-north.containers.bluemix.net/swagger-api/
-  * AP 남부: https://ap-south.containers.bluemix.net/swagger-api/
-  * 중앙 유럽: https://eu-central.containers.bluemix.net/swagger-api/
-  * 영국 남부: https://uk-south.containers.bluemix.net/swagger-api/
-  * 미국 동부: https://us-east.containers.bluemix.net/swagger-api/
-  * 미국 남부: https://us-south.containers.bluemix.net/swagger-api/
+API 명령에 대한 문서는 [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/)를 보십시오. 

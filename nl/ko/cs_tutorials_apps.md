@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-14"
+lastupdated: "2017-12-08"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -815,110 +815,45 @@ service "hw-demo-service" deleted
 ### 학습 3b. 실행 중인 Watson Tone Analyzer 배치 업데이트
 {: #lesson3b}
 
-배치가 실행 중인 동안에 포드 템플리트에서 배치를 편집하여 값을 변경할 수 있습니다. 이 학습에는 사용된 이미지 업데이트가 포함됩니다. 
+배치가 실행 중인 동안에 포드 템플리트에서 배치를 편집하여 값을 변경할 수 있습니다. 이 학습에는 사용된 이미지 업데이트가 포함됩니다. PR 회사는 배치에서 앱을 변경하려고 합니다. 
 
-1.  이미지의 이름을 변경하십시오. PR 회사는 같은 배치에서 다른 앱을 사용해 보려고 하지만 새 앱에서 문제가 발견되면 롤백하기 원합니다. 
+이미지의 이름을 변경하십시오. 
 
-    1.  실행 중인 배치에 대한 구성 스크립트를 여십시오. 
+1.  실행 중인 배치의 구성 세부사항을 여십시오. 
 
-        ```
+    ```
         kubectl edit deployment/watson-talk-pod
         ```
-        {: pre}
+    {: pre}
 
-        운영 체제에 따라, vi 편집기가 열리거나 텍스트 편집기가 열립니다. 
+    운영 체제에 따라, vi 편집기가 열리거나 텍스트 편집기가 열립니다. 
 
-    2.  이미지의 이름을 ibmliberty 이미지로 변경하십시오. 
+2.  이미지의 이름을 ibmliberty 이미지로 변경하십시오. 
 
-        ```
+    ```
         spec:
               containers:
               - image: registry.<region>.bluemix.net/ibmliberty:latest
         ```
-        {: codeblock}
+    {: codeblock}
 
-    3.  변경사항을 저장하고 편집기를 종료하십시오.
+3.  변경사항을 저장하고 편집기를 종료하십시오.
 
-    4.  구성 스크립트의 변경사항을 실행 중인 배치에 적용하십시오. 
+4.  실행 중인 배치에 변경사항을 적용하십시오. 
 
-        ```
+    ```
         kubectl rollout status deployment/watson-talk-pod
         ```
-        {: pre}
+    {: pre}
 
-        롤아웃이 완료되었음이 확인될 때까지 기다리십시오. 
+    롤아웃이 완료되었음이 확인될 때까지 기다리십시오. 
 
-        ```
+    ```
         deployment "watson-talk-pod" successfully rolled out
         ```
-        {: screen}
+    {: screen}
 
-        롤아웃을 변경하면 다른 포드가 작성되고 Kubernetes에서 테스트합니다. 테스트를 통과하면 이전 포드는 제거됩니다. 
-
-    5.  변경사항이 예상한 대로 나타나지 않으면 변경사항을 롤백할 수 있습니다. PR 회사의 직원이 앱 변경에서 실수를 범했을 수 있으며, 이전 배치로 되돌아가야 합니다. 
-
-        1.  이전 배치의 번호를 식별하려면 개정 버전 번호를 보십시오. 가장 높은 번호가 최신 개정입니다. 이 예에서는 개정 1이 원래 배치이고 개정 2가 이전 단계에서 만든 이미지 변경입니다. 
-
-            ```
-            kubectl rollout history deployment/watson-talk-pod
-            ```
-            {: pre}
-
-            출력:
-
-            ```
-            deployments "watson-talk-pod"
-            REVISION CHANGE-CAUSE
-            1          <none>
-            2          <none>
-
-            ```
-            {: screen}
-
-        2.  다음 명령을 실행하여 배치를 이전 개정으로 되돌리십시오. 다시 다른 포드가 작성되고 Kubernetes에서 테스트합니다. 테스트를 통과하면 이전 포드는 제거됩니다. 
-
-            ```
-            kubectl rollout undo deployment/watson-talk-pod --to-revision=1
-            ```
-            {: pre}
-
-            출력:
-
-            ```
-            deployment "watson-talk-pod" rolled back
-            ```
-            {: screen}
-
-        3.  다음 단계에서 사용할 포드의 이름을 가져오십시오. 
-
-            ```
-            kubectl get pods
-            ```
-            {: pre}
-
-            출력:
-
-            ```
-            NAME                              READY     STATUS    RESTARTS   AGE
-            watson-talk-pod-2511517105-6tckg  1/1       Running   0          2m
-            ```
-            {: screen}
-
-        4.  포드의 세부사항을 보고 이미지가 롤백되었는지 확인하십시오. 
-
-            ```
-            kubectl describe pod <pod_name>
-            ```
-            {: pre}
-
-            출력:
-
-            ```
-            Image: registry.<region>.bluemix.net/namespace/watson-talk
-            ```
-            {: screen}
-
-2.  선택사항: watson-pod 배치에 대해 변경을 반복하십시오. 
+    롤아웃을 변경하면 다른 포드가 작성되고 Kubernetes에서 테스트합니다. 테스트를 통과하면 이전 포드는 제거됩니다. 
 
 [배운 내용을 테스트하고 퀴즈를 풀어보십시오! ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 

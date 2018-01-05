@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-17"
+lastupdated: "2017-12-01"
 
 ---
 
@@ -33,13 +33,7 @@ lastupdated: "2017-11-17"
   * 米国東部
   * 米国南部
 
-Kubernetes ライト・クラスターを以下の地域に作成することができます。
-  * 南アジア太平洋地域
-  * 中欧
-  * 英国南部
-  * 米国南部
 
-  **注**: 有料カスタマーではない場合、米国南部地域にライト・クラスターを作成することはできません。
 
 
 ## {{site.data.keyword.Bluemix_notm}} 地域の API エンドポイント
@@ -89,15 +83,9 @@ Kubernetes ライト・クラスターを以下の地域に作成することが
 {{site.data.keyword.containershort_notm}} 地域を使用して、ログインしている {{site.data.keyword.Bluemix_notm}} 地域以外の地域で、Kubernetes クラスターの作成とアクセスを行うことができます。 {{site.data.keyword.containershort_notm}} 地域のエンドポイントとは、{{site.data.keyword.Bluemix_notm}} 全体ではなく、{{site.data.keyword.containershort_notm}} のみを指します。
 {:shortdesc}
 
-{{site.data.keyword.containershort_notm}} 地域の API エンドポイントは、以下のようになります。
-  * 北アジア太平洋地域: `https://ap-north.containers.bluemix.net`
-  * 南アジア太平洋地域: `https://ap-south.containers.bluemix.net`
-  * 中欧: `https://eu-central.containers.bluemix.net`
-  * 英国南部: `https://uk-south.containers.bluemix.net`
-  * 米国東部: `https://us-east.containers.bluemix.net`
-  * 米国南部: `https://us-south.containers.bluemix.net`
+1 つのグローバルなエンドポイント `https://containers.bluemix.net/` を使用して、{{site.data.keyword.containershort_notm}} にアクセスできます。
 
-現在どの {{site.data.keyword.containershort_notm}} 地域にいるのかを確認するには、`bx cs api` を実行し、**Region** フィールドを確認します。
+現在自分が属する {{site.data.keyword.containershort_notm}} 地域を確認するには、`bx cs region` を実行します。
 
 ### 別のコンテナー・サービス地域へのログイン
 {: #container_login_endpoints}
@@ -108,43 +96,7 @@ Kubernetes ライト・クラスターを以下の地域に作成することが
 
 </br>
 
-{{site.data.keyword.containershort_notm}} 地域にログインするためのコマンドの例を以下に示します。
-  * 北アジア太平洋地域:
-    ```
-    bx cs init --host https://ap-north.containers.bluemix.net
-    ```
-  {: pre}
-
-  * 南アジア太平洋地域:
-    ```
-    bx cs init --host https://ap-south.containers.bluemix.net
-    ```
-    {: pre}
-
-  * 中欧:
-    ```
-    bx cs init --host https://eu-central.containers.bluemix.net
-    ```
-    {: pre}
-
-  * 英国南部:
-    ```
-    bx cs init --host https://uk-south.containers.bluemix.net
-    ```
-    {: pre}
-
-  * 米国東部:
-    ```
-    bx cs init --host https://us-east.containers.bluemix.net
-    ```
-    {: pre}
-
-  * 米国南部:
-    ```
-    bx cs init --host https://us-south.containers.bluemix.net
-    ```
-    {: pre}
-
+地域をすぐに切り替えるには、`bx cs region-set` を実行します。
 
 ### コンテナー・サービスを使用できるロケーション
 {: #locations}
@@ -155,28 +107,24 @@ Kubernetes ライト・クラスターを以下の地域に作成することが
   |--------|----------|------|
   | 北アジア太平洋地域 | hkg02、tok02 | 香港、東京 |
   | 南アジア太平洋地域     | mel01、syd01、syd04        | メルボルン、シドニー |
-  | 中欧     | ams03、fra02、par01        | アムステルダム、フランクフルト、パリ |
+  | 中欧     | ams03、fra02、mil01、par01        | アムステルダム、フランクフルト、ミラノ、パリ |
   | 英国南部      | lon02、lon04         | London (ロンドン) |
   | 米国東部      | tor01、wdc06、wdc07        | トロント、ワシントン DC |
   | 米国南部     | dal10、dal12、dal13       | ダラス |
 
+**注**: ミラノ (mil01) はライト・クラスター専用です。
+
 ### コンテナー・サービスの API コマンドの使用
 {: #container_api}
 
-{{site.data.keyword.containershort_notm}} API と対話するには、コマンド・タイプを入力し、エンドポイントに `/v1/command` を追加します。
+{{site.data.keyword.containershort_notm}} API と対話するには、コマンド・タイプを入力し、グローバルなエンドポイントに `/v1/command` を追加します。
 
-米国南部における `GET /clusters` API の例を示します。
+`GET /clusters` API の例を示します。
   ```
-  GET https://us-south.containers.bluemix.net/v1/clusters
+  GET https://containers.bluemix.net/v1/clusters
   ```
   {: codeblock}
 
 </br>
 
-API コマンドの資料を表示するには、表示する地域のエンドポイントに `swagger-api` を追加します。
-  * 北アジア太平洋地域: https://ap-north.containers.bluemix.net/swagger-api/
-  * 南アジア太平洋地域: https://ap-south.containers.bluemix.net/swagger-api/
-  * 中欧: https://eu-central.containers.bluemix.net/swagger-api/
-  * 英国南部: https://uk-south.containers.bluemix.net/swagger-api/
-  * 米国東部: https://us-east.containers.bluemix.net/swagger-api/
-  * 米国南部: https://us-south.containers.bluemix.net/swagger-api/
+API コマンドの資料を参照するには、[https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/) を表示してください。

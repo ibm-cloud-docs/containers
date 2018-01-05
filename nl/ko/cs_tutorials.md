@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-16"
+lastupdated: "2017-12-13"
 
 ---
 
@@ -19,10 +19,10 @@ lastupdated: "2017-10-16"
 # 튜토리얼: 클러스터 작성
 {: #cs_cluster_tutorial}
 
-클라우드의 고유 Kubernetes 클러스터를 배치하고 관리합니다. 작업자 노드라고 하는 독립적 컴퓨팅 호스트의 클러스터에서 컨테이너화된 앱의 배치, 오퍼레이션, 스케일링 및 모니터링을 자동화할 수 있습니다.
+{{site.data.keyword.Bluemix_short}}에서 고유 Kubernetes 클러스터를 배치하고 관리하십시오. 작업자 노드라고 하는 독립적 컴퓨팅 호스트의 클러스터에서 컨테이너화된 앱의 배치, 오퍼레이션, 스케일링 및 모니터링을 자동화할 수 있습니다.
 {:shortdesc}
 
-이 튜토리얼 시리즈에서는 가상의 홍보(PR) 회사가 Kubernetes를 사용하여 {{site.data.keyword.Bluemix_short}}의 컨테이너화된 앱을 배치하는 방법을 보여줍니다. PR 회사에서는 Leveraging {{site.data.keyword.toneanalyzerfull}}를 활용하여 보도 자료를 분석하고 피드백을 받습니다.
+이 튜토리얼 시리즈에서는 가상의 홍보(PR) 회사가 Kubernetes 기능을 사용하여 {{site.data.keyword.Bluemix_notm}}의 컨테이너화된 앱을 배치하는 방법을 보여줍니다. PR 회사에서는 Leveraging {{site.data.keyword.toneanalyzerfull}}를 활용하여 보도 자료를 분석하고 피드백을 받습니다.
 
 
 ## 목표
@@ -32,7 +32,7 @@ lastupdated: "2017-10-16"
 인프라를 설정하려면 다음을 수행하십시오.
 
 -   단일 작업자 노드의 Kubernetes 클러스터 작성
--   Kubernetes API를 사용하고 Docker 이미지를 관리하기 위한 CLI 설치
+-   Kubernetes 명령 실행 및 Docker 이미지 관리를 위한 CLI 설치
 -   이미지를 저장하기 위해 {{site.data.keyword.registrylong_notm}}에서 개인용 이미지 저장소 작성
 -   클러스터의 앱이 해당 서비스를 사용할 수 있도록 {{site.data.keyword.toneanalyzershort}} 서비스를 클러스터에 추가
 
@@ -49,7 +49,8 @@ lastupdated: "2017-10-16"
 
 ## 전제조건
 
--  [{{site.data.keyword.Bluemix_notm}} 계정 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/registration/)
+-  종량과금제 또는 구독 [{{site.data.keyword.Bluemix_notm}} 계정 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/registration/)
+
 
 
 
@@ -147,12 +148,12 @@ CLI를 설치하려면 다음을 수행하십시오.
 ## 학습 2: 클러스터 환경 설정
 {: #cs_cluster_tutorial_lesson2}
 
-Kubernetes 클러스터를 작성하고, {{site.data.keyword.registryshort_notm}}에서 개인용 이미지 저장소를 설정하며, 앱이 {{site.data.keyword.toneanalyzershort}} 서비스에 액세스할 수 있도록 클러스터에 시크릿을 추가합니다. 
+{{site.data.keyword.registryshort_notm}}에서 개인용 이미지 저장소를 설정하고 {{site.data.keyword.toneanalyzershort}} 서비스에 액세스할 수 있도록 클러스터에 시크릿을 추가하십시오. 
 
 1.  프롬프트가 표시되면 {{site.data.keyword.Bluemix_notm}} 신임 정보를 사용하여 {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오.
 
     ```
-    bx login [--sso] -a api.eu-gb.bluemix.net
+    bx login [--sso]
     ```
     {: pre}
 

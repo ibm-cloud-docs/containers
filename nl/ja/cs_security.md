@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-16"
+lastupdated: "2017-12-13"
 
 ---
 
@@ -22,12 +22,19 @@ lastupdated: "2017-11-16"
 標準装備のセキュリティー・フィーチャーをリスク分析とセキュリティー保護に使用できます。 これらのフィーチャーは、クラスター・インフラストラクチャーとネットワーク通信を保護し、コンピュート・リソースを分離し、インフラストラクチャー・コンポーネントとコンテナー・デプロイメントにおけるセキュリティー・コンプライアンスを確保するためのものです。
 {: shortdesc}
 
-次の図には、セキュリティー・フィーチャーが、Kubernetes マスター、ワーカー・ノード、コンテナー・イメージのグループ別に示されています。  
+## クラスター・コンポーネントによるセキュリティー
+{: #cs_security_cluster}
+
+各 {{site.data.keyword.containerlong_notm}} クラスターには、その[マスター](#cs_security_master)と[ワーカー・](#cs_security_worker)ノードに組み込まれたセキュリティー・フィーチャーがあります。ファイアウォールがある場合、クラスター外からロード・バランシングにアクセスする必要がある場合、または公共のインターネットのエンドポイントへのアクセスが企業ネットワーク・ポリシーによって禁止されているときにローカル・システムから `kubectl` コマンドを実行しようとしている場合は、[ファイアウォールでポートを開き](#opening_ports)ます。クラスター内のアプリをオンプレミス・ネットワークまたはクラスター外の他のアプリに接続しようとしている場合は、[VPN 接続をセットアップ](#vpn)します。
+{: shortdesc}
+
+次の図には、セキュリティー・フィーチャーが、Kubernetes マスター、ワーカー・ノード、コンテナー・イメージのグループ別に示されています。
+
 <img src="images/cs_security.png" width="400" alt="{{site.data.keyword.containershort_notm}} クラスター・セキュリティー" style="width:400px; border-style: none"/>
 
 
   <table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
-  <caption>セキュリティー・フィーチャー</caption>
+  <caption>表 1. セキュリティー・フィーチャー</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> {{site.data.keyword.containershort_notm}} での組み込みのクラスター・セキュリティー設定</th>
   </thead>
@@ -47,10 +54,7 @@ lastupdated: "2017-11-16"
   </tbody>
 </table>
 
-<br />
-
-
-## Kubernetes マスター
+### Kubernetes マスター
 {: #cs_security_master}
 
 Kubernetes マスターを保護し、クラスター・ネットワーク通信をセキュリティーで保護するための Kubernetes マスターの組み込みセキュリティー機能について説明します。
@@ -77,7 +81,7 @@ Kubernetes マスターを保護し、クラスター・ネットワーク通信
 <br />
 
 
-## ワーカー・ノード
+### ワーカー・ノード
 {: #cs_security_worker}
 
 ワーカー・ノード環境を保護し、リソース、ネットワーク、ストレージの分離を保証する組み込みのワーカー・ノード・セキュリティー機能について説明します。
@@ -87,27 +91,179 @@ Kubernetes マスターを保護し、クラスター・ネットワーク通信
   <dt>コンピュート、ネットワーク、およびストレージ・インフラストラクチャーの分離</dt>
     <dd>クラスターを作成すると、お客様の IBM Cloud インフラストラクチャー (SoftLayer) アカウントまたは IBM 提供の IBM Cloud インフラストラクチャー (SoftLayer) 専用アカウントに、仮想マシンがワーカー・ノードとしてプロビジョンされます。 ワーカー・ノードは特定のクラスターの専用であり、他のクラスターのワークロードをホストすることはありません。</br> ワーカー・ノードのネットワーク・パフォーマンスと分離の品質を保証するために、すべての {{site.data.keyword.Bluemix_notm}} アカウントには、IBM Cloud インフラストラクチャー (SoftLayer) VLAN がセットアップされます。 </br>クラスターにデータを保持する場合は、IBM Cloud インフラストラクチャー (SoftLayer) の NFS ベースの専用ファイル・ストレージをプロビジョンし、このプラットフォームの組み込みデータ・セキュリティー機能を利用することができます。</dd>
   <dt>保護されたワーカー・ノードのセットアップ</dt>
-    <dd>すべてのワーカー・ノードは Ubuntu オペレーティング・システムを使用してセットアップされ、ユーザーが変更することはできません。 ワーカー・ノードのオペレーティング・システムを潜在的な攻撃から保護するために、すべてのワーカー・ノードに、Linux iptable ルールによって適用されるエキスパート・ファイアウォール設定が構成されます。</br> Kubernetes 上で実行されるコンテナーはすべて、定義済みの Calico ネットワーク・ポリシー設定で保護されます。この設定は、クラスター作成時にワーカー・ノードごとに構成されます。 このようなセットアップにより、ワーカー・ノードとポッドの間のセキュア・ネットワーク通信が確保されます。 コンテナーがワーカー・ノード上で実行できるアクションをさらに制限するために、ユーザーは、ワーカー・ノードについて [AppArmor ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tutorials/clusters/apparmor/) を構成することを選択できます。</br> デフォルトでは、ワーカー・ノード上の root ユーザーへの SSH アクセスは無効になっています。 ワーカー・ノードに追加機能をインストールする場合、すべてのワーカー・ノードで実行するすべてのアクションについて [Kubernetes デーモン・セット ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset) を使用できます。また、1 回限りのアクションについては、[Kubernetes ジョブ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) を使用できます。</dd>
+    <dd>すべてのワーカー・ノードは Ubuntu オペレーティング・システムを使用してセットアップされ、ユーザーが変更することはできません。 ワーカー・ノードのオペレーティング・システムを潜在的な攻撃から保護するために、すべてのワーカー・ノードに、Linux iptable ルールによって適用されるエキスパート・ファイアウォール設定が構成されます。</br> Kubernetes 上で実行されるコンテナーはすべて、定義済みの Calico ネットワーク・ポリシー設定で保護されます。この設定は、クラスター作成時にワーカー・ノードごとに構成されます。 このようなセットアップにより、ワーカー・ノードとポッドの間のセキュア・ネットワーク通信が確保されます。 コンテナーがワーカー・ノード上で実行できるアクションをさらに制限するために、ユーザーは、ワーカー・ノードについて [AppArmor ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tutorials/clusters/apparmor/) を構成することを選択できます。</br> ワーカー・ノード上の SSH アクセスは無効になっています。ワーカー・ノードに追加機能をインストールする場合、すべてのワーカー・ノードで実行するすべてのアクションについて [Kubernetes デーモン・セット ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset) を使用できます。また、1 回限りのアクションについては、[Kubernetes ジョブ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) を使用できます。</dd>
   <dt>Kubernetes ワーカー・ノードのセキュリティー・コンプライアンス</dt>
-    <dd>IBM は、社内と社外のセキュリティー顧問チームと協力して、セキュリティー・コンプライアンスにおける潜在的な脆弱性と取り組んでいます。 オペレーティング・システムに更新プログラムやセキュリティー・パッチをデプロイするために、IBM はワーカー・ノードへの SSH アクセスを維持しています。</br> <b>重要</b>: ワーカー・ノードを定期的にリブートして、オペレーティング・システムに自動的にデプロイされた更新プログラムとセキュリティー・パッチがインストールされるようにします。 ワーカー・ノードが IBM によってリブートされることはありません。</dd>
+    <dd>IBM は、社内と社外のセキュリティー顧問チームと協力して、セキュリティー・コンプライアンスにおける潜在的な脆弱性と取り組んでいます。 オペレーティング・システムに更新プログラムやセキュリティー・パッチをデプロイするために、IBM はワーカー・ノードへのアクセスを維持しています。</br> <b>重要</b>: ワーカー・ノードを定期的にリブートして、オペレーティング・システムに自動的にデプロイされた更新プログラムとセキュリティー・パッチがインストールされるようにします。 ワーカー・ノードが IBM によってリブートされることはありません。</dd>
+  <dt>暗号化ディスク</dt>
+  <dd>{{site.data.keyword.containershort_notm}} は、ワーカー・ノードのプロビジョン時にデフォルトですべてのワーカー・ノード用に 2 つのローカル SSD 暗号化データ・パーティションを提供します。1 つ目のパーティションは暗号化されず、2 つ目のパーティションは _/var/lib/docker_ にマウントされ、LUKS 暗号鍵を使用してプロビジョンされる際にアンロックされます。各 Kubernetes クラスター内の各ワーカーには、独自の固有の LUKS 暗号キーがあり、{{site.data.keyword.containershort_notm}} によって管理されます。クラスターを作成する際やワーカー・ノードを既存のクラスターに追加する際に、この鍵は安全にプルされてから、暗号化ディスクのアンロック後に破棄されます。
+  <p><b>注</b>: 暗号化はディスク入出力のパフォーマンスに影響します。高性能のディスク入出力が必要なワークロードの場合、暗号化を有効/無効にした両方のクラスターをテストし、暗号化をオフにするかどうかの決定に役立ててください。</p>
+  </dd>
   <dt>IBM Cloud インフラストラクチャー (SoftLayer) ネットワーク・ファイアウォールのサポート</dt>
     <dd>{{site.data.keyword.containershort_notm}} は、すべての [ IBM Cloud インフラストラクチャー (SoftLayer) ファイアウォール・オファリング ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud-computing/bluemix/network-security) に対応しています。 {{site.data.keyword.Bluemix_notm}} Public では、カスタム・ネットワーク・ポリシーをファイアウォールにセットアップして、
-クラスターのための専用ネットワーク・セキュリティーを設定し、ネットワーク侵入を検出して対処することができます。 例えば、ファイアウォールとして不要なトラフィックをブロックするように [Vyatta ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://knowledgelayer.softlayer.com/topic/vyatta-1) をセットアップすることを選択できます。 ファイアウォールをセットアップする場合は、マスター・ノードとワーカー・ノードが通信できるように、地域ごとに[必要なポートと IP アドレスを開く](#opening_ports)必要もあります。 {{site.data.keyword.Bluemix_dedicated_notm}} では、ファイアウォール、DataPower、Fortigate、DNS が、標準の専用環境デプロイメントの一部として既に構成されています。</dd>
+クラスターのための専用ネットワーク・セキュリティーを設定し、ネットワーク侵入を検出して対処することができます。 例えば、ファイアウォールとして不要なトラフィックをブロックするように [Vyatta ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://knowledgelayer.softlayer.com/topic/vyatta-1) をセットアップすることを選択できます。 ファイアウォールをセットアップする場合は、マスター・ノードとワーカー・ノードが通信できるように、地域ごとに[必要なポートと IP アドレスを開く](#opening_ports)必要もあります。</dd>
   <dt>サービスをプライベートにしておくか、サービスとアプリを選択的に公共のインターネットに公開する</dt>
     <dd>サービスとアプリをプライベートにして、このトピックで説明した組み込みのセキュリティー機能を利用して、ワーカー・ノードとポッドの間のセキュアな通信を確保することができます。 サービスとアプリを公共のインターネットに公開する場合は、Ingress とロード・バランサーのサポートを活用してサービスを安全に公開することができます。</dd>
   <dt>ワーカー・ノードとアプリをオンプレミス・データ・センターにセキュアに接続する</dt>
-    <dd>Vyatta Gateway Appliance または Fortigate Appliance をセットアップして、Kubernetes クラスターをオンプレミス・データ・センターに接続する IPSec VPN エンドポイントを構成できます。 暗号化されたトンネルを介して、Kubernetes クラスターで実行されるすべてのサービスは、ユーザー・ディレクトリー、データベース、メインフレームなどのオンプレミス・アプリとセキュアに通信できます。 詳しくは、[オンプレミス・データ・センターへのクラスターの接続 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/) を参照してください。</dd>
+  <dd>ワーカー・ノードとアプリをオンプレミス・データ・センターに接続するには、Strongswan サービス、Vyatta Gateway Appliance、または Fortigate Appliance を使用して VPN IPSec エンドポイントを構成できます。<br><ul><li><b>Strongswan IPSec VPN サービス</b>: Kubernetes クラスターをオンプレミス・ネットワークとセキュアに接続する [Strongswan IPSec VPN サービス ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.strongswan.org/) をセットアップできます。Strongswan IPSec VPN サービスは、業界標準の Internet Protocol Security (IPsec) プロトコル・スイートに基づき、インターネット上にセキュアなエンドツーエンドの通信チャネルを確立します。 クラスターとオンプレミス・ネットワークの間にセキュアな接続をセットアップするためには、オンプレミスのデータ・センターに IPsec VPN ゲートウェイまたは IBM Cloud インフラストラクチャー (SoftLayer) サーバーを設置する必要があります。その後、Kubernetes ポッドで [Strongswan IPSec VPN サービスの構成とデプロイ](cs_security.html#vpn)を行うことができます。</li><li><b>Vyatta Gateway Appliance または Fortigate Appliance</b>: クラスターが大きい場合は、Vyatta Gateway Appliance または Fortigate Appliance をセットアップして IPSec VPN エンドポイントを構成することもできます。詳しくは、この[オンプレミス・データ・センターへのクラスターの接続 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/) に関するブログ投稿を参照してください。</li></ul></dd>
   <dt>クラスター・アクティビティーの継続的なモニタリングとロギング</dt>
-    <dd>標準クラスターの場合、ワーカー・ノードの追加、ローリング更新の進行状況、キャパシティー使用状況情報などのすべてのクラスター関連イベントは、{{site.data.keyword.containershort_notm}} によってログに記録されてモニターされ、IBM のモニタリング・サービスとロギング・サービスに送られます。</dd>
+    <dd>標準クラスターの場合、ワーカー・ノードの追加、ローリング更新の進行状況、キャパシティー使用状況情報などのすべてのクラスター関連イベントを、{{site.data.keyword.containershort_notm}} によってログに記録してモニターし、{{site.data.keyword.loganalysislong_notm}} と {{site.data.keyword.monitoringlong_notm}} に送ることできます。ロギングとモニタリングのセットアップに関する情報については、[クラスター・ロギングの構成](https://console.bluemix.net/docs/containers/cs_cluster.html#cs_logging)と[クラスター・モニタリングの構成](https://console.bluemix.net/docs/containers/cs_cluster.html#cs_monitoring)を参照してください。</dd>
 </dl>
 
-### ファイアウォールで必要なポートと IP アドレスを開く
+### イメージ
+{: #cs_security_deployment}
+
+標準装備のセキュリティー・フィーチャーを使用して、イメージのセキュリティーと保全性を管理します。
+{: shortdesc}
+
+<dl>
+<dt>{{site.data.keyword.registryshort_notm}} の保護された Docker プライベート・イメージ・リポジトリー</dt>
+<dd>IBM がホストおよび管理するマルチテナントで可用性が高く拡張可能なプライベート・イメージ・レジストリー内に独自の Docker イメージ・リポジトリーをセットアップし、Docker イメージを作成して安全に保管し、クラスター・ユーザー間で共有することができます。</dd>
+
+<dt>イメージのセキュリティー・コンプライアンス</dt>
+<dd>{{site.data.keyword.registryshort_notm}}を使用する際、Vulnerability Advisor に標準装備のセキュリティー・スキャンを利用できます。 名前空間にプッシュされるどのイメージも、CentOS、Debian、Red Hat、および Ubuntu の既知の問題のデータベースに基づいて、脆弱性が自動的にスキャンされます。 脆弱性が検出されると、それらを解決してイメージの保全性とセキュリティーを確保する方法を Vulnerability Advisor が提示します。</dd>
+</dl>
+
+イメージの脆弱性評価を表示する方法については、[Vulnerability Advisor の文書を参照してください](/docs/services/va/va_index.html#va_registry_cli)。
+
+<br />
+
+
+## ファイアウォールで必要なポートと IP アドレスを開く
 {: #opening_ports}
 
 ご使用のファイアウォールで特定のポートと IP アドレスを開く必要が生じる可能性のある、以下の状況を検討してください。
-* ワーカー・ノードに対してファイアウォールがセットアップされているとき、またはファイアウォール設定が IBM Cloud インフラストラクチャー (SoftLayer) アカウント内でカスタマイズされたときに、Kubernetes マスターとワーカー・ノード間の通信を可能にする
-* クラスターの外部からロード・バランサーまたは Ingress コントローラーにアクセスする
-* プロキシーまたはファイアウォール経由の公共のインターネットのエンドポイントへのアクセスが企業ネットワーク・ポリシーによって禁止されているときに、ローカル・システムから `kubectl` コマンドを実行する
+* [プロキシーまたはファイアウォール経由の公共のインターネットのエンドポイントへのアクセスが企業ネットワーク・ポリシーによって禁止されているときに、ローカル・システムから `bx` コマンドを実行します](#firewall_bx)。
+* [プロキシーまたはファイアウォール経由の公共のインターネットのエンドポイントへのアクセスが企業ネットワーク・ポリシーによって禁止されているときに、ローカル・システムから `kubectl` コマンドを実行します](#firewall_kubectl)。
+* [プロキシーまたはファイアウォール経由の公共のインターネットのエンドポイントへのアクセスが企業ネットワーク・ポリシーによって禁止されているときに、ローカル・システムから `calicoctl` コマンドを実行します](#firewall_calicoctl)。
+* [ワーカー・ノードに対してファイアウォールがセットアップされているとき、またはファイアウォール設定が IBM Cloud インフラストラクチャー (SoftLayer) アカウント内でカスタマイズされたときに、Kubernetes マスターとワーカー・ノード間の通信を可能にします](#firewall_outbound)。
+* [クラスター外から NodePort サービス、LoadBalancer サービス、または Ingress へアクセス](#firewall_inbound)します。
+
+### ファイアウォール保護下での `bx cs` コマンドの実行
+{: #firewall_bx}
+
+ローカル・システムからプロキシーまたはファイアウォール経由での公共のエンドポイントへのアクセスが企業ネットワーク・ポリシーによって禁止されている場合、`bx cs` コマンドを実行するには、{{site.data.keyword.containerlong_notm}} における TCP アクセスを許可する必要があります。
+
+1. ポート 443 での `containers.bluemix.net` へのアクセスを許可します。
+2. 接続を確認します。アクセスが正しく構成されている場合は、出力に船が表示されます。
+   ```
+   curl https://containers.bluemix.net/v1/
+   ```
+   {: pre}
+
+   出力例:
+   ```
+                                     )___(
+                              _______/__/_
+                     ___     /===========|   ___
+    ____       __   [\\\]___/____________|__[///]   __
+    \   \_____[\\]__/___________________________\__[//]___
+     \                                                    |
+      \                                                  /
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   ```
+   {: screen}
+
+### ファイアウォール保護下での `kubectl` コマンドの実行
+{: #firewall_kubectl}
+
+ローカル・システムからプロキシーまたはファイアウォール経由での公共のエンドポイントへのアクセスが企業ネットワーク・ポリシーによって禁止されている場合、`kubectl` コマンドを実行するには、クラスターにおける TCP アクセスを許可する必要があります。
+
+クラスターの作成時に、マスター URL 内のポートは 20000 から 32767 の間でランダムに割り当てられます。作成される可能性のあるすべてのクラスターを対象に 20000 から 32767 までの範囲のポートを開くか、または特定の既存のクラスターを対象にアクセスを許可するかを選択できます。
+
+始めに、[`bx cs` コマンドを実行](#firewall_bx)するためのアクセスを許可します。
+
+特定のクラスターを対象にアクセスを許可するには、以下のようにします。
+
+1. {{site.data.keyword.Bluemix_notm}} CLI にログインします。 プロンプトが出されたら、{{site.data.keyword.Bluemix_notm}} 資格情報を入力します。 統合されたアカウントがある場合は、`--sso` オプションを含めます。
+
+    ```
+    bx login [--sso]
+    ```
+    {: pre}
+
+2. クラスターが属する地域を選択します。
+
+   ```
+   bx cs region-set
+   ```
+   {: pre}
+
+3. クラスターの名前を取得します。
+
+   ```
+   bx cs clusters
+   ```
+   {: pre}
+
+4. クラスターの**マスター URL** を取得します。
+
+   ```
+   bx cs cluster-get <cluster_name_or_id>
+   ```
+   {: pre}
+
+   出力例:
+   ```
+   ...
+   Master URL:		https://169.46.7.238:31142
+   ...
+   ```
+   {: screen}
+
+5. ポート上での**マスター URL** へのアクセスを許可します。前の例ではポート `31142` です。
+
+6. 接続を確認します。
+
+   ```
+   curl --insecure <master_URL>/version
+   ```
+   {: pre}
+
+   コマンド例:
+   ```
+   curl --insecure https://169.46.7.238:31142/version
+   ```
+   {: pre}
+
+   出力例:
+   ```
+   {
+     "major": "1",
+     "minor": "7+",
+     "gitVersion": "v1.7.4-2+eb9172c211dc41",
+     "gitCommit": "eb9172c211dc4108341c0fd5340ee5200f0ec534",
+     "gitTreeState": "clean",
+     "buildDate": "2017-11-16T08:13:08Z",
+     "goVersion": "go1.8.3",
+     "compiler": "gc",
+     "platform": "linux/amd64"
+   }
+   ```
+   {: screen}
+
+7. オプション: 公開する必要のあるクラスターごとに、上記のステップを繰り返します。
+
+### ファイアウォール保護下での `calicoctl` コマンドの実行
+{: #firewall_calicoctl}
+
+ローカル・システムからプロキシーまたはファイアウォール経由での公共のエンドポイントへのアクセスが企業ネットワーク・ポリシーによって禁止されている場合、`calicoctl` コマンドを実行するには、Calico コマンドにおける TCP アクセスを許可する必要があります。
+
+始めに、[`bx` コマンド](#firewall_bx)と [`kubectl` コマンド](#firewall_kubectl)を実行するためのアクセスを許可します。
+
+1. [`kubectl` コマンド](#firewall_kubectl)の許可に使用したマスター URL から IP アドレスを取得します。
+
+2. ETCD のポートを取得します。
+
+  ```
+  kubectl get cm -n kube-system calico-config -o yaml | grep etcd_endpoints
+  ```
+  {: pre}
+
+3. マスター URL の IP アドレスと ETCD ポート経由の Calico ポリシーにおけるアクセスを許可します。
+
+### クラスターからインフラストラクチャー・リソースや他のサービスへのアクセスの許可
+{: #firewall_outbound}
 
   1.  以下を実行して、クラスター内のすべてのワーカー・ノードのパブリック IP アドレスをメモします。
 
@@ -116,7 +272,7 @@ Kubernetes マスターを保護し、クラスター・ネットワーク通信
       ```
       {: pre}
 
-  2.  ファイアウォールで、ワーカー・ノードからのアウトバウンド接続として、ソース・ワーカー・ノードから、`<each_worker_node_publicIP>` の宛先 TCP/UDP ポート範囲 (20000 から 32767 まで) およびポート 443 への発信ネットワーク・トラフィック、および以下の IP アドレスとネットワーク・グループへの発信ネットワーク・トラフィックを許可します。
+  2.  ソースの _<each_worker_node_publicIP>_ から、宛先の TCP/UDP ポート (20000 から 32767 までの範囲とポート 443) への発信ネットワーク・トラフィックと、以下の IP アドレスとネットワーク・グループへの発信ネットワーク・トラフィックを許可します。ローカル・マシンから公共のインターネットのエンドポイントへのアクセスが企業ファイアウォールによって禁止されている場合は、ソースのワーカー・ノードとローカル・マシンの両方で以下のステップを実行します。
       - **重要**: ブートストラッピング・プロセスの際にロードのバランスを取るため、地域内のすべてのロケーションのために、ポート 443 への発信トラフィックを許可する必要があります。 例えば、クラスターが米国南部にある場合、ポート 443 からすべてのロケーションの IP アドレス (dal10、dal12、dal13) へのトラフィックを許可する必要があります。
       <p>
   <table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
@@ -134,17 +290,17 @@ Kubernetes マスターを保護し、クラスター・ネットワーク通信
       <tr>
          <td>南アジア太平洋地域</td>
          <td>mel01<br>syd01<br>syd04</td>
-         <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19</code></td>
+         <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19、130.198.66.34</code></td>
       </tr>
       <tr>
          <td>中欧</td>
-         <td>ams03<br>fra02<br>par01</td>
-         <td><code>169.50.169.110</code><br><code>169.50.56.174</code><br><code>159.8.86.149</code></td>
+         <td>ams03<br>fra02<br>mil01<br>par01</td>
+         <td><code>169.50.169.106、169.50.154.194</code><br><code>169.50.56.170、169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149、159.8.98.170</code></td>
         </tr>
       <tr>
         <td>英国南部</td>
         <td>lon02<br>lon04</td>
-        <td><code>159.122.242.78</code><br><code>158.175.65.170</code></td>
+        <td><code>159.122.242.78</code><br><code>158.175.65.170、158.175.74.170、158.175.76.2</code></td>
       </tr>
       <tr>
         <td>米国東部</td>
@@ -154,7 +310,7 @@ Kubernetes マスターを保護し、クラスター・ネットワーク通信
       <tr>
         <td>米国南部</td>
         <td>dal10<br>dal12<br>dal13</td>
-        <td><code>169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
+        <td><code>169.47.234.18、169.46.7.234</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
       </tr>
       </tbody>
     </table>
@@ -232,107 +388,239 @@ Kubernetes マスターを保護し、クラスター・ネットワーク通信
         <th>ロギング・アドレス</th>
         <th>ロギング IP アドレス</th>
         </thead>
-      <tbody>
-        <tr>
-         <td>中欧</td>
-         <td>ingest.logging.eu-de.bluemix.net</td>
-         <td><code>169.50.25.125</code></td>
-        </tr>
-        <tr>
-         <td>英国南部</td>
-         <td>ingest.logging.eu-gb.bluemix.net</td>
-         <td><code>169.50.115.113</code></td>
-        </tr>
-        <tr>
-          <td>米国東部、米国南部、北アジア太平洋地域</td>
-          <td>ingest.logging.ng.bluemix.net</td>
-          <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
-         </tr>
-        </tbody>
-      </table>
+        <tbody>
+          <tr>
+            <td>米国東部、米国南部</td>
+            <td>ingest.logging.ng.bluemix.net</td>
+            <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
+           </tr>
+          <tr>
+           <td>中欧、英国南部</td>
+           <td>ingest-eu-fra.logging.bluemix.net</td>
+           <td><code>158.177.88.43</code><br><code>159.122.87.107</code></td>
+          </tr>
+          <tr>
+           <td>南アジア太平洋地域、北アジア太平洋地域</td>
+           <td>ingest-au-syd.logging.bluemix.net</td>
+           <td><code>130.198.76.125</code><br><code>168.1.209.20</code></td>
+          </tr>
+         </tbody>
+       </table>
 </p>
 
   5. プライベート・ファイアウォールでは、IBM Cloud インフラストラクチャー (SoftLayer) のプライベート IP のために適切な範囲を許可します。 [このリンク](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)の **Backend (private) Network** で始まるセクションを参照してください。
-      - 使用している[地域内のロケーション](cs_regions.html#locations)をすべて追加します
-      - dal01 のロケーション (データ・センター) を追加する必要があることに注意してください
-      - ポート 80 および 443 を開いて、クラスターのブートストラッピング処理を可能にします
+      - 使用している[地域内のロケーション](cs_regions.html#locations)をすべて追加します。
+      - dal01 のロケーション (データ・センター) を追加する必要があることに注意してください。
+      - ポート 80 および 443 を開いて、クラスターのブートストラッピング処理を可能にします。
 
-  6. オプション: VLAN の外部からロード・バランサーにアクセスするには、そのロード・バランサーの特定の IP アドレスで、着信ネットワーク・トラフィックのためのポートを開きます。
+  6. データ・ストレージの永続ボリューム請求を作成するには、クラスターのあるロケーション (データ・センター) の [IBM Cloud インフラストラクチャー (SoftLayer) IP アドレス](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)における、ファイアウォールを介する発信 (egress) アクセスを許可します。
+      - クラスターのロケーション (データ・センター) を見つけるには、`bx cs clusters` を実行します。
+      - **フロントエンド (パブリック) ネットワーク**と**バックエンド (プライベート) ネットワーク**の両方の IP 範囲へのアクセスを許可します。
+      - **バックエンド (プライベート) ネットワーク**には、dal01 のロケーション (データ・センター) を追加する必要があることに注意してください。
 
-  7. オプション: VLAN の外部から Ingress コントローラーにアクセスするには、その Ingress コントローラーの特定の IP アドレスで、着信ネットワーク・トラフィックのためのポート 80 または 443 を開きます (どちらのポートを構成したかに応じて異なります)。
+### クラスター外から NodePort、ロード・バランサー、Ingress の各サービスへのアクセス
+{: #firewall_inbound}
 
-## ネットワーク・トラフィックをエッジ・ワーカー・ノードに制限する
-{: #cs_edge}
+NodePort、ロード・バランサー、Ingress の各サービスへの着信アクセスを許可できます。
 
-クラスター内の複数のノードに `dedicated=edge` ラベルを追加して、Ingress とロード・バランサーがそれらのワーカー・ノードにのみデプロイされるようにします。
+<dl>
+  <dt>NodePort サービス</dt>
+  <dd>トラフィックを許可するすべてのワーカー・ノードのパブリック IP アドレスへのサービスのデプロイ時に構成したポートを開きます。ポートを見つけるには、`kubectl get svc` を実行します。ポートの範囲は 20000 から 32000 までです。<dd>
+  <dt>LoadBalancer サービス</dt>
+  <dd>ロード・バランサー・サービスのパブリック IP アドレスへのサービスのデプロイ時に構成したポートを開きます。</dd>
+  <dt>Ingress</dt>
+  <dd>Ingress アプリケーション・ロード・バランサーの IP アドレスへのポート 80 (HTTP の場合) またはポート 443 (HTTPS の場合) を開きます。</dd>
+</dl>
 
-エッジ・ワーカー・ノードを使用すると、外部的にアクセスされるワーカー・ノードの数を減らし、ネットワーキングのワークロードを分離することができるので、クラスターのセキュリティーが改善されます。 これらのワーカー・ノードがネットワーキング専用としてマーク付けされると、他のワークロードはワーカー・ノードの CPU やメモリーを消費してネットワーキングに干渉することがなくなります。
+<br />
+
+
+## Strongswan IPSec VPN サービスの Helm Chart を使用した VPN 接続のセットアップ
+{: #vpn}
+
+VPN 接続を使用すると、Kubernetes クラスター内のアプリをオンプレミス・ネットワークにセキュアに接続できます。クラスター外のアプリを、クラスター内で実行中のアプリに接続することもできます。VPN 接続をセットアップするには、Helm Chart を使用して、Kubernetes ポッド内で [Strongswan IPSec VPN サービス ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.strongswan.org/) を構成してデプロイします。その後すべての VPN トラフィックはこのポッドを介してルーティングされます。Strongswan Chart のセットアップに使用する Helm コマンドについて詳しくは、[Helm の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.helm.sh/helm/) を参照してください。
 
 開始前に、以下のことを行います。
 
 - [標準クラスターを作成します。](cs_cluster.html#cs_cluster_cli)
-- クラスターに 1 つ以上のパブリック VLAN があることを確認してください。 エッジ・ワーカー・ノードは、プライベート VLAN だけがあるクラスターには使用できません。
+- [既存のクラスターを使用している場合は、バージョン 1.7.4 以降に更新します。](cs_cluster.html#cs_cluster_update)
+- クラスターに 1 つ以上の使用可能なパブリック・ロード・バランサー IP アドレスがなければなりません。
 - [クラスターを Kubernetes CLI のターゲットとして設定](cs_cli_install.html#cs_cli_configure)します。
 
+Strongswan との VPN 接続をセットアップするには、以下のようにします。
 
-1. クラスター内のすべてのワーカー・ノードをリストします。 **NAME** 列からプライベート IP アドレスを使用して、ノードを識別します。 エッジ・ワーカー・ノードとするワーカー・ノードを 2 つ以上選択します。 2 つ以上のワーカー・ノードを使用することにより、ネットワーキング・リソースの可用性が向上します。
+1. クラスターで Helm がまだ有効になっていない場合は、インストールして初期化します。
 
-  ```
-  kubectl get nodes -L publicVLAN,privateVLAN,dedicated
-  ```
-  {: pre}
+    1. [Helm CLI ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン") をインストールします](https://docs.helm.sh/using_helm/#installing-helm)。
 
-2. `dedicated=edge` により、ワーカー・ノードにラベルを付けます。 `dedicated=edge` によりワーカー・ノードにマークが付けられると、すべての後続の Ingress とロード・バランサーは、エッジ・ワーカー・ノードにデプロイされます。
+    2. Helm を初期化して `tiller` をインストールします。
 
-  ```
-  kubectl label nodes <node_name> <node_name2> dedicated=edge
-  ```
-  {: pre}
+        ```
+        helm init
+        ```
+        {: pre}
 
-3. クラスター内にあるすべての既存のロード・バランサー・サービスを検索します。
+    3. クラスター内の `tiller-deploy` ポッドの状況が `Running` になっていることを確認します。
 
-  ```
-  kubectl get services --all-namespaces -o jsonpath='{range .items[*]}kubectl get service -n {.metadata.namespace} {.metadata.name} -o yaml | kubectl apply -f - :{.spec.type},{end}' | tr "," "\n" | grep "LoadBalancer" | cut -d':' -f1
-  ```
-  {: pre}
+        ```
+        kubectl get pods -n kube-system -l app=helm
+        ```
+        {: pre}
 
-  出力:
+        出力例:
 
-  ```
-  kubectl get service -n <namespace> <name> -o yaml | kubectl apply -f
-  ```
-  {: screen}
+        ```
+        NAME                            READY     STATUS    RESTARTS   AGE
+        tiller-deploy-352283156-nzbcm   1/1       Running   0          10m
+        ```
+        {: screen}
 
-4. 直前のステップからの出力を使用して、それぞれの `kubectl get service` 行をコピーして貼り付けます。 このコマンドは、ロード・バランサーをエッジ・ワーカー・ノードに再デプロイします。 再デプロイする必要があるのは、パブリック・ロード・バランサーだけです。
+    4. {{site.data.keyword.containershort_notm}} Helm リポジトリーを Helm インスタンスに追加します。
 
-  出力:
+        ```
+        helm repo add bluemix  https://registry.bluemix.net/helm
+        ```
+        {: pre}
 
-  ```
-  service "<name>" configured
-  ```
-  {: screen}
+    5. Helm リポジトリー内に Strongswan Chart がリストされていることを確認します。
 
-`dedicated=edge` によりワーカー・ノードにラベルを付け、すべての既存のロード・バランサーと Ingress をエッジ・ワーカー・ノードに再デプロイしました。 次に、他の[ワークロードがエッジ・ワーカー・ノードで実行されないように](#cs_edge_workloads)、そして[ワーカー・ノード上のノード・ポートへのインバウンド・トラフィックをブロックするように](#cs_block_ingress)します。
+        ```
+        helm search bluemix
+        ```
+        {: pre}
 
-### ワークロードがエッジ・ワーカー・ノード上で実行されないようにする
-{: #cs_edge_workloads}
+2. ローカル YAML ファイル内に Strongswan Helm Chart のデフォルトの構成設定を保存します。
 
-エッジ・ワーカー・ノードの利点の 1 つは、これらのワーカー・ノードが、ネットワーク・サービスだけを実行するように指定できることです。 `dedicated=edge` 耐障害性の使用は、すべてのロード・バランサーと Ingress サービスが、ラベルの付けられたワーカー・ノードにのみデプロイされることを意味します。 ただし、他のワークロードがエッジ・ワーカー・ノード上で実行されてワーカー・ノードのリソースを消費することがないようにするため、[Kubernetes テイント ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) を使用する必要があります。
+    ```
+    helm inspect values bluemix/strongswan > config.yaml
+    ```
+    {: pre}
 
-1. `edge` ラベルのあるすべてのワーカー・ノードをリストします。
+3. `config.yaml` ファイルを開き、ご希望の VPN 構成に従ってデフォルト値に以下の変更を加えます。プロパティーに値の設定オプションがある場合は、このファイル内の各プロパティーの上のコメントにそれらの値がリストされます。**重要**: プロパティーを変更する必要がない場合は、そのプロパティーの前に `#` を付けてコメント化してください。
 
-  ```
-  kubectl get nodes -L publicVLAN,privateVLAN,dedicated -l dedicated=edge
-  ```
-  {: pre}
+    <table>
+    <caption>表 2. YAML ファイルの構成要素について</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>overRideIpsecConf</code></td>
+    <td>既存の <code>ipsec.conf</code> ファイルを使用する場合は、中括弧 (<code>{}</code>) を削除し、このプロパティーの後にこのファイルの内容を追加します。ファイル内容は字下げする必要があります。**注:** 独自のファイルを使用する場合は、<code>ipsec</code>、<code>local</code>、<code>remote</code> セクションの値は使用しません。</td>
+    </tr>
+    <tr>
+    <td><code>overRideIpsecSecrets</code></td>
+    <td>既存の <code>ipsec.secrets</code> ファイルを使用する場合は、中括弧 (<code>{}</code>) を削除し、このプロパティーの後にこのファイルの内容を追加します。ファイル内容は字下げする必要があります。**注:** 独自のファイルを使用する場合は、<code>preshared</code> セクションの値は使用しません。</td>
+    </tr>
+    <tr>
+    <td><code>ipsec.keyexchange</code></td>
+    <td>オンプレミスの VPN トンネル・エンドポイントが、接続を初期化する際のプロトコルとして <code>ikev2</code> をサポートしていない場合は、この値を <code>ikev1</code> に変更します。</td>
+    </tr>
+    <tr>
+    <td><code>ipsec.esp</code></td>
+    <td>この値を、オンプレミスの VPN トンネル・エンドポイントで接続に使用される ESP 暗号化/認証アルゴリズムのリストに変更します。</td>
+    </tr>
+    <tr>
+    <td><code>ipsec.ike</code></td>
+    <td>この値を、オンプレミスの VPN トンネル・エンドポイントで接続に使用される IKE/ISAKMP SA 暗号化/認証アルゴリズムのリストに変更します。</td>
+    </tr>
+    <tr>
+    <td><code>ipsec.auto</code></td>
+    <td>クラスターに VPN 接続を開始させる場合は、この値を <code>start</code> に変更します。</td>
+    </tr>
+    <tr>
+    <td><code>local.subnet</code></td>
+    <td>この値を、オンプレミス・ネットワークへの VPN 接続を介して公開する必要があるクラスター・サブネット CIDR のリストに変更します。以下のサブネットをこのリストに含めることができます。<ul><li>Kubernetes ポッドのサブネット CIDR: <code>172.30.0.0/16</code></li><li>Kubernetes サービスのサブネット CIDR: <code>172.21.0.0/16</code></li><li>プライベート・ネットワーク上で NodePort サービスによって公開されるアプリケーションがある場合は、ワーカー・ノードのプライベート・サブネット CIDR。この値を見つけるには、<code>bx cs subnets | grep <xxx.yyy.zzz></code> を実行します。&lt;xxx.yyy.zzz&gt; はワーカー・ノードのプライベート IP アドレスの最初の 3 つのオクテットです。</li><li>プライベート・ネットワーク上で LoadBalancer サービスによって公開されるアプリケーションがある場合は、クラスターのプライベートまたはユーザー管理サブネット CIDR。これらの値を見つけるには、<code>bx cs cluster-get <cluster name> --showResources</code> を実行します。<b>VLANS</b> セクションで、<b>Public</b> 値が <code>false</code> の CIDR を見つけます。</li></ul></td>
+    </tr>
+    <tr>
+    <td><code>local.id</code></td>
+    <td>この値を、VPN トンネル・エンドポイントで接続に使用される、ローカル Kubernetes クラスター側のストリング ID に変更します。</td>
+    </tr>
+    <tr>
+    <td><code>remote.gateway</code></td>
+    <td>この値を、オンプレミス VPN ゲートウェイのパブリック IP アドレスに変更します。</td>
+    </tr>
+    <td><code>remote.subnet</code></td>
+    <td>この値を、Kubernetes クラスターからアクセスできるオンプレミスのプライベート・サブネット CIDR のリストに変更します。</td>
+    </tr>
+    <tr>
+    <td><code>remote.id</code></td>
+    <td>この値を、VPN トンネル・エンドポイントで接続に使用される、リモートのオンプレミス側のストリング ID に変更します。</td>
+    </tr>
+    <tr>
+    <td><code>preshared.secret</code></td>
+    <td>この値を、オンプレミスの VPN トンネル・エンドポイント・ゲートウェイで接続に使用される事前共有シークレットに変更します。</td>
+    </tr>
+    </tbody></table>
 
-2. テイントを各ワーカー・ノードに適用します。このテイントは、ポッドがワーカー・ノード上で実行されるのを防ぎ、`edge` ラベルのないポッドをワーカー・ノードから削除します。 削除されるポッドは、容量のある他のワーカー・ノードに再デプロイされます。
+4. 更新した `config.yaml` ファイルを保存します。
 
-  ```
-  kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute
-  ```
+5. 更新した `config.yaml` ファイルと共に Helm Chart をクラスターにインストールします。更新したプロパティーが、Chart の構成マップに保管されます。
 
-これで、`dedicated=edge` 耐障害性のあるポッドだけがエッジ・ワーカー・ノードにデプロイされます。
+    ```
+    helm install -f config.yaml --namespace=kube-system --name=vpn bluemix/strongswan
+    ```
+    {: pre}
+
+6. Chart のデプロイメント状況を確認します。Chart の準備ができている場合は、出力の先頭付近の **STATUS** フィールドに `DEPLOYED` の値があります。
+
+    ```
+    helm status vpn
+    ```
+    {: pre}
+
+7. Chart をデプロイし終えたら、`config.yaml` ファイル内の更新済みの設定が使用されたことを確認します。
+
+    ```
+    helm get values vpn
+    ```
+    {: pre}
+
+8. 新しい VPN 接続をテストします。
+    1. オンプレミス・ゲートウェイ上の VPN がアクティブでない場合は、VPN を開始します。
+
+    2. `STRONGSWAN_POD` 環境変数を設定します。
+
+        ```
+        export STRONGSWAN_POD=$(kubectl get pod -n kube-system -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
+        ```
+        {: pre}
+
+    3. VPN の状況を確認します。 `ESTABLISHED` の状況は、VPN 接続が成功したことを意味します。
+
+        ```
+        kubectl exec -n kube-system  $STRONGSWAN_POD -- ipsec status
+        ```
+        {: pre}
+
+        出力例:
+        ```
+        Security Associations (1 up, 0 connecting):
+            k8s-conn[1]: ESTABLISHED 17 minutes ago, 172.30.244.42[ibm-cloud]...192.168.253.253[on-prem]
+            k8s-conn{2}:  INSTALLED, TUNNEL, reqid 12, ESP in UDP SPIs: c78cb6b1_i c5d0d1c3_o
+            k8s-conn{2}:   172.21.0.0/16 172.30.0.0/16 === 10.91.152.128/26
+        ```
+        {: screen}
+
+        **注:**
+          - この Helm Chart を初めて使用する際には、ほとんどの場合、VPN の状況は `ESTABLISHED` ではありません。接続が成功するまでに、オンプレミス VPN エンドポイントの設定を確認し、ステップ 3 に戻って、`config.yaml` ファイルを複数回変更する必要が生じる可能性があります。
+          - VPN ポッドが `ERROR` 状態か、クラッシュと再始動が続く場合は、Chart の構成マップ内の `ipsec.conf` 設定のパラメーター妥当性検査が原因の可能性があります。これが原因か調べるには、`kubectl logs -n kube-system $STRONGSWAN_POD` を実行して、Strongswan ポッドのログに妥当性検査エラーがあるかを確認してください。妥当性検査エラーがある場合、`helm delete --purge vpn` を実行し、ステップ 3 に戻って、`config.yaml` ファイル内の誤った値を修正し、ステップ 4 から 8 を繰り返します。クラスターに多数のワーカー・ノードがある場合は、`helm delete` と `helm install` を実行するより `helm upgrade` を使用する方が変更を迅速に適用できます。
+
+    4. VPN の状況が `ESTABLISHED` になったら、`ping` を使用して接続をテストします。以下の例は、Kubernetes クラスター内の VPN ポッドからオンプレミス VPN ゲートウェイのプライベート IP アドレスに ping を送信します。構成ファイル内で正しい `remote.subnet` と `local.subnet` が指定されていることと、ローカル・サブネット・リストに ping の送信元のソース IP アドレスが含まれていることを確認します。
+
+        ```
+        kubectl exec -n kube-system  $STRONGSWAN_POD -- ping -c 3  <on-prem_gateway_private_IP>
+        ```
+        {: pre}
+
+Strongswan IPSec VPN サービスを無効にするには、以下のようにします。
+
+1. Helm Chart を削除します。
+
+    ```
+    helm delete --purge vpn
+    ```
+    {: pre}
 
 <br />
 
@@ -364,12 +652,11 @@ Calico と Kubernetes のネイティブ機能のいずれかを選んで、ご�
 
 デフォルト・ポリシーはポッドに直接、適用されるわけではありません。Calico host エンドポイント を使用して、ワーカー・ノードのパブリック・ネットワーク・インターフェースに適用されます。 ホストのエンドポイントが Calico に作成されると、そのワーカー・ノードのネットワーク・インターフェースを出入りするトラフィックは、ポリシーによってそのトラフィックが許可されていない限り、すべてブロックされます。
 
-SSH を許可するポリシーは存在せず、そのため、パブリック・ネットワーク・インターフェースによる SSH アクセスはブロックされることに気を付けてください。これはポートを開くためのポリシーを持たない、他のすべてのポートも同様です。 SSH アクセスと他のアクセスは、各ワーカー・ノードのプライベート・ネットワーク・インターフェースで使用可能です。
-
 **重要:** ポリシーを十分に理解していない限り、かつ、ポリシーにより許可されるトラフィックが必要ないと判断できるのでない限り、ホストのエンドポイントに適用されるポリシーを削除しないでください。
 
 
  <table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
+ <caption>表 3. 各クラスターのデフォルト・ポリシー</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> 各クラスターのデフォルト・ポリシー</th>
   </thead>
@@ -689,18 +976,76 @@ Calico `preDNAT` ネットワーク・ポリシーは、[Calico ネットワー�
 <br />
 
 
-## イメージ
-{: #cs_security_deployment}
 
-標準装備のセキュリティー・フィーチャーを使用して、イメージのセキュリティーと保全性を管理します。
-{: shortdesc}
+## ネットワーク・トラフィックをエッジ・ワーカー・ノードに制限する
+{: #cs_edge}
 
-### {{site.data.keyword.registryshort_notm}} の保護された Docker プライベート・イメージ・リポジトリー:
+クラスター内の複数のノードに `dedicated=edge` ラベルを追加して、Ingress とロード・バランサーがそれらのワーカー・ノードにのみデプロイされるようにします。
 
- IBM がホストおよび管理するマルチテナントで可用性が高く拡張可能なプライベート・イメージ・レジストリー内に独自の Docker イメージ・リポジトリーをセットアップし、Docker イメージを作成して安全に保管し、クラスター・ユーザー間で共有することができます。
+エッジ・ワーカー・ノードを使用すると、外部的にアクセスされるワーカー・ノードの数を減らし、ネットワーキングのワークロードを分離することができるので、クラスターのセキュリティーが改善されます。 これらのワーカー・ノードがネットワーキング専用としてマーク付けされると、他のワークロードはワーカー・ノードの CPU やメモリーを消費してネットワーキングに干渉することがなくなります。
 
-### イメージのセキュリティー・コンプライアンス:
+開始前に、以下のことを行います。
 
-{{site.data.keyword.registryshort_notm}}を使用する際、Vulnerability Advisor に標準装備のセキュリティー・スキャンを利用できます。 名前空間にプッシュされるどのイメージも、CentOS、Debian、Red Hat、および Ubuntu の既知の問題のデータベースに基づいて、脆弱性が自動的にスキャンされます。 脆弱性が検出されると、それらを解決してイメージの保全性とセキュリティーを確保する方法を Vulnerability Advisor が提示します。
+- [標準クラスターを作成します。](cs_cluster.html#cs_cluster_cli)
+- クラスターに 1 つ以上のパブリック VLAN があることを確認してください。 エッジ・ワーカー・ノードは、プライベート VLAN だけがあるクラスターには使用できません。
+- [クラスターを Kubernetes CLI のターゲットとして設定](cs_cli_install.html#cs_cli_configure)します。
 
-イメージの脆弱性評価を表示する方法については、[Vulnerability Advisor の文書を参照してください](/docs/services/va/va_index.html#va_registry_cli)。
+
+1. クラスター内のすべてのワーカー・ノードをリストします。 **NAME** 列からプライベート IP アドレスを使用して、ノードを識別します。 エッジ・ワーカー・ノードとするワーカー・ノードを 2 つ以上選択します。 2 つ以上のワーカー・ノードを使用することにより、ネットワーキング・リソースの可用性が向上します。
+
+  ```
+  kubectl get nodes -L publicVLAN,privateVLAN,dedicated
+  ```
+  {: pre}
+
+2. `dedicated=edge` により、ワーカー・ノードにラベルを付けます。 `dedicated=edge` によりワーカー・ノードにマークが付けられると、すべての後続の Ingress とロード・バランサーは、エッジ・ワーカー・ノードにデプロイされます。
+
+  ```
+  kubectl label nodes <node_name> <node_name2> dedicated=edge
+  ```
+  {: pre}
+
+3. クラスター内にあるすべての既存のロード・バランサー・サービスを検索します。
+
+  ```
+  kubectl get services --all-namespaces -o jsonpath='{range .items[*]}kubectl get service -n {.metadata.namespace} {.metadata.name} -o yaml | kubectl apply -f - :{.spec.type},{end}' | tr "," "\n" | grep "LoadBalancer" | cut -d':' -f1
+  ```
+  {: pre}
+
+  出力:
+
+  ```
+  kubectl get service -n <namespace> <name> -o yaml | kubectl apply -f
+  ```
+  {: screen}
+
+4. 直前のステップからの出力を使用して、それぞれの `kubectl get service` 行をコピーして貼り付けます。 このコマンドは、ロード・バランサーをエッジ・ワーカー・ノードに再デプロイします。 再デプロイする必要があるのは、パブリック・ロード・バランサーだけです。
+
+  出力:
+
+  ```
+  service "<name>" configured
+  ```
+  {: screen}
+
+`dedicated=edge` によりワーカー・ノードにラベルを付け、すべての既存のロード・バランサーと Ingress をエッジ・ワーカー・ノードに再デプロイしました。 次に、他の[ワークロードがエッジ・ワーカー・ノードで実行されないように](#cs_edge_workloads)、そして[ワーカー・ノード上のノード・ポートへのインバウンド・トラフィックをブロックするように](#cs_block_ingress)します。
+
+### ワークロードがエッジ・ワーカー・ノード上で実行されないようにする
+{: #cs_edge_workloads}
+
+エッジ・ワーカー・ノードの利点の 1 つは、これらのワーカー・ノードが、ネットワーク・サービスだけを実行するように指定できることです。 `dedicated=edge` 耐障害性の使用は、すべてのロード・バランサーと Ingress サービスが、ラベルの付けられたワーカー・ノードにのみデプロイされることを意味します。 ただし、他のワークロードがエッジ・ワーカー・ノード上で実行されてワーカー・ノードのリソースを消費することがないようにするため、[Kubernetes テイント ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) を使用する必要があります。
+
+1. `edge` ラベルのあるすべてのワーカー・ノードをリストします。
+
+  ```
+  kubectl get nodes -L publicVLAN,privateVLAN,dedicated -l dedicated=edge
+  ```
+  {: pre}
+
+2. テイントを各ワーカー・ノードに適用します。このテイントは、ポッドがワーカー・ノード上で実行されるのを防ぎ、`edge` ラベルのないポッドをワーカー・ノードから削除します。 削除されるポッドは、容量のある他のワーカー・ノードに再デプロイされます。
+
+  ```
+  kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute
+  ```
+
+これで、`dedicated=edge` 耐障害性のあるポッドだけがエッジ・ワーカー・ノードにデプロイされます。

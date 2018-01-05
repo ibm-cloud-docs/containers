@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-03"
+lastupdated: "2017-12-18"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2017-11-03"
 {:shortdesc}
 
 {{site.data.keyword.containershort_notm}} は、Kubernetes のさまざまなバージョンをサポートします。 クラスターを作成または更新するときには、異なるバージョンを指定しない限り、デフォルトのバージョンが使用されます。 使用可能な Kubernetes のバージョンは以下のとおりです。
-- 1.8.2
+- 1.8.4
 - 1.7.4 (デフォルト・バージョン)
 - 1.5.6
 
@@ -47,7 +47,12 @@ Kubernetes には以下のようなバージョン更新のタイプがありま
 
 ## バージョン 1.8
 {: #cs_v18}
+
+<p><img src="images/certified_kubernetes_1x8.png" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" height="100" width="62.5" align="left" alt="このバッジは、IBM Cloud Container Service に関する Kubernetes バージョン 1.8 証明書を示しています。"/> {{site.data.keyword.containerlong_notm}} は、CNCF Kubernetes Software Conformance Certification プログラムにおけるバージョン 1.8 の認定 Kubernetes 製品です。</p>
+
 Kubernetes バージョン 1.8 に更新する際に、行うことが必要となる可能性がある変更を検討します。
+
+<br/>
 
 ### マスターの前に行う更新
 {: #18_before}
@@ -90,11 +95,11 @@ Kubernetes バージョン 1.8 に更新する際に、行うことが必要と�
 </tr>
 <tr>
 <td>`kubectl delete`</td>
-<td>`kubectl delete` コマンドは、ワークロード API オブジェクトを削除する前に、ポッドの場合のようにオブジェクトをスケールダウンすることはなくなりました。 オブジェクトのスケールダウンが必要な場合は、オブジェクトを削除する前に [kubectl scale ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/user-guide/kubectl/v1.8/#scale) を使用してください。</td>
+<td>`kubectl delete` コマンドは、ワークロード API オブジェクトを削除する前に、ポッドの場合のようにオブジェクトをスケールダウンすることはなくなりました。 オブジェクトのスケールダウンが必要な場合は、オブジェクトを削除する前に kubectl scale ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale) を使用してください。</td>
 </tr>
 <tr>
 <td>`kubectl run`</td>
-<td>`kubectl run` コマンドは、`--env` のために、コンマ区切りの引数ではなく複数のフラグを使用する必要があります。 例えば、`kubectl run --env <x>=<y>,<z>=<k>` ではなく `kubectl run --env <x>=<y> --env <z>=<k>` を実行します。</td>
+<td>`kubectl run` コマンドは、`--env` のために、コンマ区切りの引数ではなく複数のフラグを使用する必要があります。 例えば、<code>kubectl run --env <x>=<y>,<z>=&lt;a&gt;</code> ではなく <code>kubectl run --env <x>=<y> --env <z>=&lt;a&gt;</code> を実行します。</td>
 </tr>
 <td>`kubectl stop`</td>
 <td>`kubectl stop` コマンドは使用できなくなりました。</td>
@@ -106,7 +111,11 @@ Kubernetes バージョン 1.8 に更新する際に、行うことが必要と�
 ## バージョン 1.7
 {: #cs_v17}
 
+<p><img src="images/certified_kubernetes_1x7.png" height="100" width="62.5" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" align="left" alt="このバッジは、IBM Cloud Container Service に関する Kubernetes バージョン 1.7 証明書を示しています。"/> {{site.data.keyword.containerlong_notm}} は、CNCF Kubernetes Software Conformance Certification プログラムにおけるバージョン 1.7 の認定 Kubernetes 製品です。</p>
+
 Kubernetes バージョン 1.7 に更新する際に、行うことが必要となる可能性がある変更を検討します。
+
+<br/>
 
 ### マスターの前に行う更新
 {: #17_before}

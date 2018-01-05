@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-28"
+lastupdated: "2017-12-01"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2017-11-28"
 クラスターの作成と管理を行うときに以下のコマンドを参照してください。
 {:shortdesc}
 
-**ヒント:** `bx cr` コマンドをお探しですか? [{{site.data.keyword.registryshort_notm}} CLI リファレンス](/docs/cli/plugins/registry/index.html)を参照してください。 `kubectl` コマンドをお探しですか? [Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/user-guide/kubectl/v1.5/) を参照してください。
+**ヒント:** `bx cr` コマンドをお探しですか? [{{site.data.keyword.registryshort_notm}} CLI リファレンス](/docs/cli/plugins/registry/index.html)を参照してください。 `kubectl` コマンドをお探しですか? [Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands) を参照してください。
 
 
 <!--[https://github.ibm.com/alchemy-containers/armada-cli ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.ibm.com/alchemy-containers/armada-cli)-->
@@ -435,8 +435,6 @@ kube-version: <em>&lt;kube-version&gt;</em>
 
 {{site.data.keyword.Bluemix_notm}} サービスをクラスターに追加します。
 
-**ヒント:** {{site.data.keyword.Bluemix_dedicated_notm}} ユーザーの場合は、[{{site.data.keyword.Bluemix_dedicated_notm}} (最終ベータ版) のクラスターに {{site.data.keyword.Bluemix_notm}} サービスを追加する](cs_cluster.html#binding_dedicated)を参照してください。
-
 <strong>コマンド・オプション</strong>:
 
    <dl>
@@ -636,13 +634,13 @@ Kubernetes マスターをデフォルトの API バージョンに更新しま�
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>クラスターの名前または ID。 この値は必須です。</dd>
-   
+
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
    <dd>クラスターの Kubernetes のバージョン。 このフラグを指定しなかった場合、Kubernetes マスターはデフォルトの API バージョンに更新されます。 使用可能なバージョンを確認するには、[bx cs kube-versions](#cs_kube_versions) を実行します。 この値はオプションです。</dd>
 
    <dt><code>-f</code></dt>
    <dd>ユーザー・プロンプトを出さずにマスターを強制的に更新するには、このオプションを使用します。 この値はオプションです。</dd>
-   
+
    <dt><code>--force-update</code></dt>
    <dd>変更が 2 つのマイナー・バージョンより大規模である場合でも、更新を試行します。 この値はオプションです。</dd>
    </dl>
@@ -683,7 +681,7 @@ Kubernetes マスターをデフォルトの API バージョンに更新しま�
    <dl>
    <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
    <dd>IBM Cloud インフラストラクチャー (SoftLayer) アカウントのユーザー名。 この値は必須です。</dd>
-   
+
 
    <dt><code>--infrastructure-api-key <em>API_KEY</em></code></dt>
    <dd>IBM Cloud インフラストラクチャー (SoftLayer) アカウントの API キー。 この値は必須です。
@@ -952,8 +950,8 @@ Kubernetes マスターをデフォルトの API バージョンに更新しま�
 ### bx cs machine-types LOCATION
 {: #cs_machine_types}
 
-ワーカー・ノードのために使用できるマシン・タイプのリストを表示します。 各マシン・タイプには、クラスター内の各ワーカー・ノード用の仮想 CPU、メモリー、ディスク・スペースの量が含まれます。 
-- 名前に `u2c` または `b2c` が含まれるマシン・タイプは、信頼性を確保するためにストレージ・エリア・ネットワーク (SAN) ではなくローカル・ディスクを使用します。 信頼性が高いと、ローカル・ディスクへのバイトのシリアライズ時のスループットが向上し、ネットワーク障害が原因のファイル・システムのパフォーマンス低下が軽減されます。 これらのマシン・タイプには、OS ファイル・システム用のローカル・ディスク・ストレージ 25 GB と、すべてのコンテナー・データが書き込まれる `/var/lib/docker` ディレクトリー用のローカル・ディスク・ストレージ 100 GB があります。 
+ワーカー・ノードのために使用できるマシン・タイプのリストを表示します。 各マシン・タイプには、クラスター内の各ワーカー・ノード用の仮想 CPU、メモリー、ディスク・スペースの量が含まれます。
+- 名前に `u2c` または `b2c` が含まれるマシン・タイプは、信頼性を確保するためにストレージ・エリア・ネットワーク (SAN) ではなくローカル・ディスクを使用します。 信頼性が高いと、ローカル・ディスクへのバイトのシリアライズ時のスループットが向上し、ネットワーク障害が原因のファイル・システムのパフォーマンス低下が軽減されます。 これらのマシン・タイプには、OS ファイル・システム用のローカル・ディスク・ストレージ 25 GB と、すべてのコンテナー・データが書き込まれる `/var/lib/docker` ディレクトリー用のローカル・ディスク・ストレージ 100 GB があります。
 - 名前に `encrypted` が含まれているマシン・タイプは、ホストの Docker データを暗号化します。 すべてのコンテナー・データが格納される `/var/lib/docker` ディレクトリーは、LUKS 暗号化で暗号化されます。
 - 名前に `u1c` または `b1c` が含まれているマシン・タイプ (`u1c.2x4` など) は推奨されません。 マシン・タイプ `u2c` と `b2c` を使用するには、`bx cs worker-add` コマンドを使用して、その更新されたマシン・タイプを使用しているワーカー・ノードを追加します。 その後、`bx cs worker-rm` コマンドを使用して、推奨されないマシン・タイプを使用しているワーカー・ノードを削除します。
 </p>
@@ -1248,13 +1246,13 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
 
    <dt><em>CLUSTER</em></dt>
    <dd>使用可能なワーカー・ノードをリストする対象のクラスターの名前または ID。 この値は必須です。</dd>
-   
+
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
    <dd>クラスターの Kubernetes のバージョン。 このフラグを指定しなかった場合、ワーカー・ノードはデフォルトのバージョンに更新されます。 使用可能なバージョンを確認するには、[bx cs kube-versions](#cs_kube_versions) を実行します。 この値はオプションです。</dd>
 
    <dt><code>-f</code></dt>
    <dd>ユーザー・プロンプトを出さずにマスターを強制的に更新するには、このオプションを使用します。 この値はオプションです。</dd>
-   
+
    <dt><code>--force-update</code></dt>
    <dd>変更が 2 つのマイナー・バージョンより大規模である場合でも、更新を試行します。 この値はオプションです。</dd>
 

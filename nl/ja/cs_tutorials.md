@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-16"
+lastupdated: "2017-12-13"
 
 ---
 
@@ -19,10 +19,10 @@ lastupdated: "2017-10-16"
 # チュートリアル: クラスターの作成
 {: #cs_cluster_tutorial}
 
-独自の Kubernetes クラスターをクラウドにデプロイして管理します。 ワーカー・ノードという独立したコンピュート・ホストをまとめたクラスター上でのコンテナー化アプリのデプロイメント、操作、スケーリング、モニタリングを自動化することができます。
+独自の Kubernetes クラスターを {{site.data.keyword.Bluemix_short}} にデプロイして管理します。 ワーカー・ノードという独立したコンピュート・ホストをまとめたクラスター上でのコンテナー化アプリのデプロイメント、操作、スケーリング、モニタリングを自動化することができます。
 {:shortdesc}
 
-このチュートリアル・シリーズでは、架空の PR 会社が Kubernetes を使用してコンテナー化アプリを {{site.data.keyword.Bluemix_short}} にデプロイする方法を示します。 この PR 会社は、{{site.data.keyword.toneanalyzerfull}} を利用してプレス・リリースを分析し、フィードバックを受け取ります。
+このチュートリアル・シリーズでは、架空の PR 会社が Kubernetes 機能を使用してコンテナー化アプリを {{site.data.keyword.Bluemix_notm}} にデプロイする方法を示します。この PR 会社は、{{site.data.keyword.toneanalyzerfull}} を利用してプレス・リリースを分析し、フィードバックを受け取ります。
 
 
 ## 達成目標
@@ -32,7 +32,7 @@ lastupdated: "2017-10-16"
 インフラストラクチャーをセットアップするには、以下のようにします。
 
 -   1 つのワーカー・ノードがある Kubernetes クラスターを作成する
--   Kubernetes API を使用し Docker イメージを管理するための CLI をインストールする
+-   Kubernetes コマンドを実行し Docker イメージを管理するための CLI をインストールする
 -   イメージを格納するためのプライベート・イメージ・リポジトリーを {{site.data.keyword.registrylong_notm}} で作成する
 -   {{site.data.keyword.toneanalyzershort}} サービスをクラスターに追加して、そのサービスをクラスター内のアプリで使用できるようにする
 
@@ -49,7 +49,8 @@ lastupdated: "2017-10-16"
 
 ## 前提条件
 
--  [{{site.data.keyword.Bluemix_notm}} アカウント ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/registration/)
+-  従量課金 (PAYG) またはサブスクリプションの [{{site.data.keyword.Bluemix_notm}} アカウント ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/registration/)
+
 
 
 
@@ -140,18 +141,18 @@ CLI をインストールするには、以下のことを行います。
 
 7. ローカルにイメージを作成して、それらをプライベート・イメージ・リポジトリーにプッシュするには、[Docker CE CLI をインストールします![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.docker.com/community-edition#/download)。 Windows 8 以前を使用している場合、代わりに [Docker Toolbox ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.docker.com/products/docker-toolbox) をインストールしてください。
 
-CLI のインストールを正常に行うことができたので、次のレッスンとチュートリアルに進むことができます。 次に、クラスター環境をセットアップして {{site.data.keyword.toneanalyzershort}} サービスを追加します。
+これで完了です。CLI のインストールを正常に行うことができたので、次のレッスンとチュートリアルに進むことができます。 次に、クラスター環境をセットアップして {{site.data.keyword.toneanalyzershort}} サービスを追加します。
 
 
 ## レッスン 2: クラスター環境をセットアップする
 {: #cs_cluster_tutorial_lesson2}
 
-Kubernetes クラスターを作成し、{{site.data.keyword.registryshort_notm}} でプライベート・イメージ・リポジトリーをセットアップし、シークレットをクラスターに追加して、アプリが {{site.data.keyword.toneanalyzershort}} サービスにアクセスできるようにします。
+{{site.data.keyword.registryshort_notm}} でプライベート・イメージ・リポジトリーをセットアップし、シークレットをクラスターに追加して、アプリが {{site.data.keyword.toneanalyzershort}} サービスにアクセスできるようにします。
 
 1.  プロンプトが出されたら、{{site.data.keyword.Bluemix_notm}} 資格情報を使用して {{site.data.keyword.Bluemix_notm}} CLI にログインします。
 
     ```
-    bx login [--sso] -a api.eu-gb.bluemix.net
+    bx login [--sso]
     ```
     {: pre}
 

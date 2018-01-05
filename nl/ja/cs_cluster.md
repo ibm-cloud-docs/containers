@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-28"
+lastupdated: "2017-12-14"
 
 ---
 
@@ -37,7 +37,6 @@ lastupdated: "2017-11-28"
 
 Kubernetes クラスターとは、1 つのネットワークに編成されたワーカー・ノードの集合です。 クラスターの目的は、アプリケーションの高い可用性を維持する一連のリソース、ノード、ネットワーク、およびストレージ・デバイスを定義することです。 アプリをデプロイするには、その前にクラスターを作成して、そのクラスター内にワーカー・ノードの定義を設定する必要があります。
 {:shortdesc}
-{{site.data.keyword.Bluemix_dedicated_notm}} ユーザーの場合は、代わりに [{{site.data.keyword.Bluemix_dedicated_notm}} (最終ベータ版) における GUI からの Kubernetes クラスターの作成](#creating_ui_dedicated)を参照してください。
 
 クラスターを作成するには、以下のようにします。
 1. カタログで、**「Kubernetes クラスター」**を選択します。
@@ -47,11 +46,13 @@ Kubernetes クラスターとは、1 つのネットワークに編成された�
     2. マシンのタイプを選択し、必要なワーカー・ノードの数を指定します。 各ワーカー・ノードにセットアップされてコンテナーで使用可能になる仮想 CPU とメモリーの量は、マシン・タイプによって決まります。
         - 「マイクロ (micro)」のマシン・タイプは、最小のオプションを表しています。
         - 「分散型 (Balanced)」のマシンは、同じ容量のメモリーが各 CPU に割り当てられるので、パフォーマンスが最適化されます。
+        - 名前に `encrypted` が含まれているマシン・タイプは、ホストの Docker データを暗号化します。 すべてのコンテナー・データが格納される `/var/lib/docker` ディレクトリーは、LUKS 暗号化で暗号化されます。
     3. パブリック VLAN とプライベート VLAN を IBM Cloud インフラストラクチャー (SoftLayer) アカウントから選択します。 どちらの VLAN もワーカー・ノード間で通信を行いますが、パブリック VLAN は IBM 管理の Kubernetes マスターとも通信を行います。 複数のクラスターで同じ VLAN を使用できます。
         **注**: パブリック VLAN を選択しないことにした場合、代替ソリューションを構成する必要があります。
     4. ハードウェアのタイプを選択します。 ほとんどの状況では「共有」で十分間に合うはずです。
         - **専用**: お客様の物理リソースを完全に分離します。
         - **共有**: お客様の物理リソースを IBM の他のお客様と同じハードウェア上に保管することを許可します。
+        - ワーカー・ノードには、デフォルトでディスク暗号化の機能があります。[詳しくはこちらを参照してください](cs_security.html#cs_security_worker)。暗号化を無効にする場合は、**「ローカル・ディスクの暗号化 (Encrypt local disk)」**チェック・ボックスをクリアします。
 4. **「クラスターの作成」**をクリックします。 **「ワーカー・ノード」**タブでワーカー・ノードのデプロイメントの進行状況を確認できます。 デプロイが完了すると、クラスターが**「概要」**タブに準備されていることが分かります。
     **注:** ワーカー・ノードごとに、固有のワーカー・ノード ID とドメイン名が割り当てられます。クラスターが作成された後にこれらを手動で変更してはいけません。 ID またはドメイン名を変更すると、Kubernetes マスターがクラスターを管理できなくなります。
 
@@ -63,28 +64,7 @@ Kubernetes クラスターとは、1 つのネットワークに編成された�
 -   [CLI をインストールして、クラスターでの作業を開始します。](cs_cli_install.html#cs_cli_install)
 -   [クラスターにアプリをデプロイします。](cs_apps.html#cs_apps_cli)
 -   [独自のプライベート・レジストリーを {{site.data.keyword.Bluemix_notm}} でセットアップし、Docker イメージを保管して他のユーザーと共有します。](/docs/services/Registry/index.html)
-
-
-### {{site.data.keyword.Bluemix_dedicated_notm}} (最終ベータ版) における GUI によるクラスターの作成
-{: #creating_ui_dedicated}
-
-1.  IBMid を使用して {{site.data.keyword.Bluemix_notm}} Public コンソール ([https://console.bluemix.net ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net)) にログインします。
-2.  アカウント・メニューから、{{site.data.keyword.Bluemix_dedicated_notm}} アカウントを選択します。 コンソールが更新されて、ご使用の {{site.data.keyword.Bluemix_dedicated_notm}} インスタンスに関するサービスと情報が表示されます。
-3.  カタログから**「コンテナー」**を選択して、**「Kubernetes クラスター」**をクリックします。
-4.  **クラスター名**を入力します。
-5.  **マシン・タイプ**を選択します。 各ワーカー・ノードにセットアップされる (ノードにデプロイされるすべてのコンテナーで使用できる) 仮想 CPU とメモリーの量は、マシン・タイプによって決まります。
-    -   「マイクロ (micro)」のマシン・タイプは、最小のオプションを表しています。
-    -   「分散型 (Balanced)」のマシン・タイプは、同じ容量のメモリーが各 CPU に割り当てられるので、パフォーマンスが最適化されます。
-6.  必要な**ワーカー・ノードの数**を選択します。 `3` を選択して、クラスターの高可用性を確保します。
-7.  **「クラスターの作成」**をクリックします。 クラスターの詳細情報が表示されますが、クラスター内のワーカー・ノードのプロビジョンには数分の時間がかかります。 **「ワーカー・ノード (Worker nodes)」**タブで、ワーカー・ノードのデプロイメントの進行状況を確認できます。 ワーカー・ノードの準備が完了すると、状態が **Ready** に変わります。
-
-**次の作業**
-
-クラスターが稼働状態になったら、以下の作業について検討できます。
-
--   [CLI をインストールして、クラスターでの作業を開始します。](cs_cli_install.html#cs_cli_install)
--   [クラスターにアプリをデプロイします。](cs_apps.html#cs_apps_cli)
--   [独自のプライベート・レジストリーを {{site.data.keyword.Bluemix_notm}} でセットアップし、Docker イメージを保管して他のユーザーと共有します。](/docs/services/Registry/index.html)
+- ファイアウォールがある場合、[必要なポートを開く](cs_security.html#opening_ports)必要が生じることがあります。例えば、コマンド `bx`、`kubectl`、または `calicotl` を使用する場合、クラスターからのアウトバウンド・トラフィックを許可する場合、ネットワーク・サービスのインバウンド・トラフィックを許可する場合などです。
 
 <br />
 
@@ -95,11 +75,9 @@ Kubernetes クラスターとは、1 つのネットワークに編成された�
 クラスターとは、1 つのネットワークに編成されたワーカー・ノードの集合です。 クラスターの目的は、アプリケーションの高い可用性を維持する一連のリソース、ノード、ネットワーク、およびストレージ・デバイスを定義することです。 アプリをデプロイするには、その前にクラスターを作成して、そのクラスター内にワーカー・ノードの定義を設定する必要があります。
 {:shortdesc}
 
-{{site.data.keyword.Bluemix_dedicated_notm}} ユーザーの場合は、代わりに [{{site.data.keyword.Bluemix_dedicated_notm}} (最終ベータ版) における CLI からの Kubernetes クラスターの作成](#creating_cli_dedicated)を参照してください。
-
 クラスターを作成するには、以下のようにします。
 1.  {{site.data.keyword.Bluemix_notm}} CLI と [{{site.data.keyword.containershort_notm}} プラグイン](cs_cli_install.html#cs_cli_install)をインストールします。
-2.  {{site.data.keyword.Bluemix_notm}} CLI にログインします。 プロンプトが出されたら、{{site.data.keyword.Bluemix_notm}} 資格情報を入力します。 {{site.data.keyword.Bluemix_notm}} 地域を指定するには、[API エンドポイントを含めます](cs_regions.html#bluemix_regions)。
+2.  {{site.data.keyword.Bluemix_notm}} CLI にログインします。 プロンプトが出されたら、{{site.data.keyword.Bluemix_notm}} 資格情報を入力します。
 
     ```
     bx login
@@ -110,9 +88,7 @@ Kubernetes クラスターとは、1 つのネットワークに編成された�
 
 3. 複数の {{site.data.keyword.Bluemix_notm}} アカウントがある場合は、Kubernetes クラスターを作成するアカウントを選択します。
 
-4.  前に選択した {{site.data.keyword.Bluemix_notm}} 地域以外の地域で Kubernetes クラスターを作成したり、そうしたクラスターにアクセスしたりする場合、[{{site.data.keyword.containershort_notm}} 地域の API エンドポイントを指定します](cs_regions.html#container_login_endpoints)。
-
-    **注**: 米国東部でクラスターを作成する場合、`bx cs init --host https://us-east.containers.bluemix.net` コマンドを使用して、米国東部コンテナー地域の API エンドポイントを指定する必要があります。
+4.  前に選択した {{site.data.keyword.Bluemix_notm}} 地域以外の地域で Kubernetes クラスターの作成とアクセスを行う場合は、`bx cs region-set` を実行します。
 
 6.  クラスターを作成します。
     1.  使用可能なロケーションを確認します。 表示される場所は、ログインしている {{site.data.keyword.containershort_notm}} 地域によって異なります。
@@ -163,10 +139,10 @@ Kubernetes クラスターとは、1 つのネットワークに編成された�
         パブリック VLAN およびプライベート VLAN が既に存在する場合、対応するルーターをメモに取ります。 必ず、プライベート VLAN ルーターの先頭は `bcr` (バックエンド・ルーター)、パブリック VLAN ルーターの先頭は `fcr` (フロントエンド・ルーター) になります。 クラスターを作成するときにこれらの VLAN を使用するには、それらの接頭部の後に続く数値と文字の組み合わせが一致していなければなりません。 このサンプル出力では、すべてのルーターに
 `02a.dal10` が含まれているため、これらのプライベート VLAN とパブリック VLAN はどの組み合わせでも使用できます。
 
-    4.  `cluster-create` コマンドを実行します。 ライト・クラスター (vCPU 2 つとメモリー 4 GB でセットアップされたワーカー・ノード 1 つ) または標準クラスター (IBM Cloud インフラストラクチャー (SoftLayer) アカウントで選択した数のワーカー・ノード) のいずれかを選択できます。 標準クラスターを作成する場合、デフォルトでは、ワーカー・ノードのハードウェアは IBM の複数のお客様によって共有され、使用時間に応じて課金されます。 </br>標準クラスターの例:
+    4.  `cluster-create` コマンドを実行します。 ライト・クラスター (vCPU 2 つとメモリー 4 GB でセットアップされたワーカー・ノード 1 つ) または標準クラスター (IBM Cloud インフラストラクチャー (SoftLayer) アカウントで選択した数のワーカー・ノード) のいずれかを選択できます。 標準クラスターを作成する場合、デフォルトでは、ワーカー・ノードのディスクは暗号化され、そのハードウェアは IBM の複数のお客様によって共有され、使用時間に応じて課金されます。</br>標準クラスターの例:
 
         ```
-        bx cs cluster-create --location dal10 --public-vlan <public_vlan_id> --private-vlan <private_vlan_id> --machine-type u2c.2x4 --workers 3 --name <cluster_name> --kube-version <major.minor.patch>
+        bx cs cluster-create --location dal10 --public-vlan <public_vlan_id> --private-vlan <private_vlan_id> --machine-type u2c.2x4 --workers 3 --name <cluster_name> --kube-version <major.minor.patch> 
         ```
         {: pre}
 
@@ -218,6 +194,10 @@ Kubernetes クラスターとは、1 つのネットワークに編成された�
         <tr>
           <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
           <td>クラスター・マスター・ノードの Kubernetes のバージョン。 この値はオプションです。 これを指定しなかった場合、クラスターは、サポートされている Kubernetes のバージョンのデフォルトを使用して作成されます。 使用可能なバージョンを確認するには、<code>bx cs kube-versions</code> を実行します。</td>
+        </tr>
+        <tr>
+        <td><code>--disable-disk-encrypt</code></td>
+        <td>ワーカー・ノードには、デフォルトでディスク暗号化の機能があります。[詳しくはこちらを参照してください](cs_security.html#cs_security_worker)。暗号化を無効にする場合は、このオプションを組み込みます。</td>
         </tr>
         </tbody></table>
 
@@ -316,151 +296,7 @@ Kubernetes クラスターとは、1 つのネットワークに編成された�
 -   [クラスターにアプリをデプロイします。](cs_apps.html#cs_apps_cli)
 -   [`kubectl` コマンド・ラインを使用してクラスターを管理します。![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/user-guide/kubectl/)
 -   [独自のプライベート・レジストリーを {{site.data.keyword.Bluemix_notm}} でセットアップし、Docker イメージを保管して他のユーザーと共有します。](/docs/services/Registry/index.html)
-
-### {{site.data.keyword.Bluemix_dedicated_notm}} (最終ベータ版) における CLI によるクラスターの作成
-{: #creating_cli_dedicated}
-
-1.  {{site.data.keyword.Bluemix_notm}} CLI と [{{site.data.keyword.containershort_notm}} プラグイン](cs_cli_install.html#cs_cli_install)をインストールします。
-2.  {{site.data.keyword.containershort_notm}} のパブリック・エンドポイントにログインします。 {{site.data.keyword.Bluemix_notm}} 資格情報を入力し、プロンプトが出されたら、{{site.data.keyword.Bluemix_dedicated_notm}} アカウントを選択します。
-
-    ```
-    bx login -a api.<region>.bluemix.net
-    ```
-    {: pre}
-
-    **注:** フェデレーテッド ID がある場合は、`bx login --sso` を使用して、{{site.data.keyword.Bluemix_notm}} CLI にログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。 `--sso` なしではログインに失敗し、`--sso` オプションを指定すると成功する場合、フェデレーテッド ID があることがわかります。
-
-3.  `cluster-create` コマンドを使用してクラスターを作成します。 標準クラスターを作成する場合、ワーカー・ノードのハードウェアは、使用時間に応じて課金されます。
-
-    例:
-
-    ```
-    bx cs cluster-create --location <location> --machine-type <machine-type> --name <cluster_name> --workers <number>
-    ```
-    {: pre}
-
-    <table>
-    <caption>表 2. このコマンドの構成要素について</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> このコマンドの構成要素について</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>cluster-create</code></td>
-    <td>{{site.data.keyword.Bluemix_notm}} 組織内にクラスターを作成するためのコマンド。</td>
-    </tr>
-    <tr>
-    <td><code>--location <em>&lt;location&gt;</em></code></td>
-    <td>&lt;location&gt; を、クラスターを作成する {{site.data.keyword.Bluemix_notm}} 場所の ID に置き換えます。 [使用可能なロケーション](cs_regions.html#locations)は、ログインしている {{site.data.keyword.containershort_notm}} 地域によって異なります。</td>
-    </tr>
-    <tr>
-    <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
-    <td>標準クラスターを作成する場合、マシン・タイプを選択します。 マシン・タイプの指定によって、各ワーカー・ノードで使用可能な仮想コンピュート・リソースが決まります。 詳しくは、[{{site.data.keyword.containershort_notm}} のライト・クラスターと標準クラスターの比較](cs_planning.html#cs_planning_cluster_type)を参照してください。 ライト・クラスターの場合、マシン・タイプを定義する必要はありません。</td>
-    </tr>
-    <tr>
-    <td><code>--name <em>&lt;name&gt;</em></code></td>
-    <td><em>&lt;name&gt;</em> をクラスターの名前に置き換えます。</td>
-    </tr>
-    <tr>
-    <td><code>--workers <em>&lt;number&gt;</em></code></td>
-    <td>クラスターに含めるワーカー・ノードの数。 <code>--workers</code> オプションが指定されていない場合は、ワーカー・ノードが 1 つ作成されます。</td>
-    </tr>
-    </tbody></table>
-
-4.  クラスターの作成が要求されたことを確認します。
-
-    ```
-    bx cs clusters
-    ```
-    {: pre}
-
-    **注:** ワーカー・ノード・マシンが配列され、クラスターがセットアップされて自分のアカウントにプロビジョンされるまでに、最大 15 分かかります。
-
-    クラスターのプロビジョニングが完了すると、クラスターの状態が **deployed** に変わります。
-
-    ```
-    Name         ID                                   State      Created          Workers   
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1
-    ```
-    {: screen}
-
-5.  ワーカー・ノードの状況を確認します。
-
-    ```
-    bx cs workers <cluster>
-    ```
-    {: pre}
-
-    ワーカー・ノードの準備が完了すると、状態が **normal** に変わり、状況が **Ready** になります。 ノードの状況が**「Ready」**になったら、クラスターにアクセスできます。
-
-    ```
-    ID                                                  Public IP        Private IP     Machine Type   State      Status  
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1   169.47.223.113   10.171.42.93   free           normal    Ready
-    ```
-    {: screen}
-
-6.  作成したクラスターを、このセッションのコンテキストとして設定します。 次の構成手順は、クラスターの操作時に毎回行ってください。
-
-    1.  環境変数を設定して Kubernetes 構成ファイルをダウンロードするためのコマンドを取得します。
-
-        ```
-        bx cs cluster-config <cluster_name_or_id>
-        ```
-        {: pre}
-
-        構成ファイルのダウンロードが完了すると、そのローカルの Kubernetes 構成ファイルのパスを環境変数として設定するために使用できるコマンドが表示されます。
-
-        OS X の場合の例:
-
-        ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
-        ```
-        {: screen}
-
-    2.  `KUBECONFIG` 環境変数を設定するためのコマンドとしてターミナルに表示されたものを、コピーして貼り付けます。
-    3.  `KUBECONFIG` 環境変数が適切に設定されたことを確認します。
-
-        OS X の場合の例:
-
-        ```
-        echo $KUBECONFIG
-        ```
-        {: pre}
-
-        出力:
-
-        ```
-        /Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
-
-        ```
-        {: screen}
-
-7.  デフォルトのポート 8001 で Kubernetes ダッシュボードにアクセスします。
-    1.  デフォルトのポート番号でプロキシーを設定します。
-
-        ```
-        kubectl proxy
-        ```
-        {: pre}
-
-        ```
-        Starting to serve on 127.0.0.1:8001
-        ```
-        {: screen}
-
-    2.  Web ブラウザーで以下の URL を開いて、Kubernetes ダッシュボードを確認します。
-
-        ```
-        http://localhost:8001/ui
-        ```
-        {: codeblock}
-
-
-**次の作業**
-
--   [クラスターにアプリをデプロイします。](cs_apps.html#cs_apps_cli)
--   [`kubectl` コマンド・ラインを使用してクラスターを管理します。![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/user-guide/kubectl/)
--   [独自のプライベート・レジストリーを {{site.data.keyword.Bluemix_notm}} でセットアップし、Docker イメージを保管して他のユーザーと共有します。](/docs/services/Registry/index.html)
+- ファイアウォールがある場合、[必要なポートを開く](cs_security.html#opening_ports)必要が生じることがあります。例えば、コマンド `bx`、`kubectl`、または `calicotl` を使用する場合、クラスターからのアウトバウンド・トラフィックを許可する場合、ネットワーク・サービスのインバウンド・トラフィックを許可する場合などです。
 
 <br />
 
@@ -863,7 +699,6 @@ imagePullSecret を作成するには、以下のようにします。
 1. [CLI のターゲットを](cs_cli_install.html#cs_cli_configure)自分のクラスターに設定します。
 2. [{{site.data.keyword.Bluemix_notm}} サービスのインスタンスを要求](/docs/manageapps/reqnsi.html#req_instance)します。
    **注:** ワシントン DC のロケーションでサービスのインスタンスを作成するには、CLI を使用する必要があります。
-3. {{site.data.keyword.Bluemix_dedicated_notm}} ユーザーの場合は、代わりに [{{site.data.keyword.Bluemix_dedicated_notm}} (最終ベータ版) のクラスターに {{site.data.keyword.Bluemix_notm}} サービスを追加する](#binding_dedicated)を参照してください。
 
 **注:**
 <ul><ul>
@@ -932,200 +767,54 @@ imagePullSecret を作成するには、以下のようにします。
 
 クラスターにデプロイされたポッドでサービスを使用するために、クラスター・ユーザーは、この [Kubernetes シークレットをシークレット・ボリュームとしてポッドにマウントすることで](cs_apps.html#cs_apps_service)、{{site.data.keyword.Bluemix_notm}} サービスのサービス資格情報にアクセスできます。
 
-### {{site.data.keyword.Bluemix_dedicated_notm}} (最終ベータ版) のクラスターに {{site.data.keyword.Bluemix_notm}} サービスを追加する
-{: #binding_dedicated}
-
-**注**: サービスを追加するには、その前にクラスターとワーカー・ノードを完全にデプロイしておく必要があります。
-
-1.  ローカルの {{site.data.keyword.Bluemix_dedicated_notm}} 構成ファイルへのパスを `DEDICATED_BLUEMIX_CONFIG` 環境変数として設定します。
-
-    ```
-    export DEDICATED_BLUEMIX_CONFIG=<path_to_config_directory>
-    ```
-    {: pre}
-
-2.  上記で定義したパスと同じパスを `BLUEMIX_HOME` 環境変数として設定します。
-
-    ```
-    export BLUEMIX_HOME=$DEDICATED_BLUEMIX_CONFIG
-    ```
-    {: pre}
-
-3.  サービス・インスタンスを作成する {{site.data.keyword.Bluemix_dedicated_notm}} 環境にログインします。
-
-    ```
-    bx login -a api.<dedicated_domain> -u <user> -p <password> -o <org> -s <space>
-    ```
-    {: pre}
-
-4.  {{site.data.keyword.Bluemix_notm}} カタログ内の使用可能なサービスをリスト表示します。
-
-    ```
-    bx service offerings
-    ```
-    {: pre}
-
-5.  クラスターにバインドするサービスのインスタンスを作成します。
-
-    ```
-    bx service create <service_name> <service_plan> <service_instance_name>
-    ```
-    {: pre}
-
-6.  使用可能な {{site.data.keyword.Bluemix_notm}} サービスをリストして、サービス・インスタンスが作成されていることを確認します。
-
-    ```
-    bx service list
-    ```
-    {: pre}
-
-    CLI 出力例:
-
-    ```
-    name                      service           plan    bound apps   last operation   
-    <service_instance_name>   <service_name>    spark                create succeeded
-    ```
-    {: screen}
-
-7.  `BLUEMIX_HOME` 環境変数を設定解除して、{{site.data.keyword.Bluemix_notm}} Public を使用するように戻します。
-
-    ```
-    unset $BLUEMIX_HOME
-    ```
-    {: pre}
-
-8.  {{site.data.keyword.containershort_notm}} のパブリック・エンドポイントにログインし、CLI のターゲットを {{site.data.keyword.Bluemix_dedicated_notm}} 環境内のクラスターにします。
-    1.  {{site.data.keyword.containershort_notm}} のパブリック・エンドポイントを使用してアカウントにログインします。 {{site.data.keyword.Bluemix_notm}} 資格情報を入力し、プロンプトが出されたら、{{site.data.keyword.Bluemix_dedicated_notm}} アカウントを選択します。
-
-        ```
-        bx login -a api.ng.bluemix.net
-        ```
-        {: pre}
-
-        **注:** フェデレーテッド ID がある場合は、`bx login --sso` を使用して、{{site.data.keyword.Bluemix_notm}} CLI にログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。 `--sso` なしではログインに失敗し、`--sso` オプションを指定すると成功する場合、フェデレーテッド ID があることがわかります。
-
-    2.  使用可能なクラスターのリストを取得し、CLI でターゲットにするクラスターの名前を確認します。
-
-        ```
-        bx cs clusters
-        ```
-        {: pre}
-
-    3.  環境変数を設定して Kubernetes 構成ファイルをダウンロードするためのコマンドを取得します。
-
-        ```
-        bx cs cluster-config <cluster_name_or_id>
-        ```
-        {: pre}
-
-        構成ファイルのダウンロードが完了すると、そのローカルの Kubernetes 構成ファイルのパスを環境変数として設定するために使用できるコマンドが表示されます。
-
-        OS X の場合の例:
-
-        ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
-        ```
-        {: screen}
-
-    4.  `KUBECONFIG` 環境変数を設定するためのコマンドとしてターミナルに表示されたものを、コピーして貼り付けます。
-
-9.  サービスを追加するために使用するクラスターの名前空間を識別します。 次のいずれかのオプションを選択します。
-    * 既存の名前空間をリストして、使用する名前空間を選択します。
-        ```
-        kubectl get namespaces
-        ```
-        {: pre}
-
-    * クラスターに新しい名前空間を作成します。
-        ```
-        kubectl create namespace <namespace_name>
-        ```
-        {: pre}
-
-10.  サービス・インスタンスをクラスターにバインドします。
-
-      ```
-      bx cs cluster-service-bind <cluster_name_or_id> <namespace> <service_instance_name>
-      ```
-      {: pre}
-
 <br />
+
 
 
 ## クラスター・アクセス権限の管理
 {: #cs_cluster_user}
 
-クラスターへのアクセス権限を他のユーザーに付与することができます。そのようにすると、それらのユーザーがクラスターにアクセスして、クラスターを管理し、アプリをクラスターにデプロイすることができます。
+{{site.data.keyword.containershort_notm}} で操作をするすべてのユーザーに、ユーザーが実行可能なアクションを指定するサービス固有のユーザー役割を組み合わせて割り当てる必要があります。
 {:shortdesc}
-
-{{site.data.keyword.containershort_notm}} で操作をするすべてのユーザーに、「ID およびアクセス管理」でサービス固有のユーザー役割を割り当てる必要があります。割り当てられるユーザー役割によって、そのユーザーが実行できるアクションが決まります。 「ID およびアクセス管理」では、次のアクセス許可を区別します。
 
 <dl>
 <dt>{{site.data.keyword.containershort_notm}} アクセス・ポリシー</dt>
-<dd>アクセス・ポリシーは、クラスターで実行できるクラスター管理アクション (クラスターの作成または削除、ワーカー・ノードの追加または削除など) を判別します。</dd>
+<dd>ID およびアクセス管理において、{{site.data.keyword.containershort_notm}} アクセス・ポリシーは、クラスターで実行できるクラスター管理アクション (クラスターの作成または削除、ワーカー・ノードの追加または削除など) を判別します。これらのポリシーは、インフラストラクチャー・ポリシーとともに設定する必要があります。</dd>
+<dt>インフラストラクチャー・アクセス・ポリシー</dt>
+<dd>ID およびアクセス管理において、インフラストラクチャー・アクセス・ポリシーにより、{{site.data.keyword.containershort_notm}} ユーザー・インターフェースまたは CLI から要求されたアクションが IBM Cloud インフラストラクチャー (SoftLayer) 内で完了できるようになります。これらのポリシーは、{{site.data.keyword.containershort_notm}} アクセス・ポリシーとともに設定する必要があります。[インフラストラクチャーで選択可能な役割について詳しくは、こちらをご覧ください](/docs/iam/infrastructureaccess.html#infrapermission)。</dd>
 <dt>リソース・グループ</dt>
-<dd>リソース・グループは、各 {{site.data.keyword.Bluemix_notm}} サービスをいくつかのグループに編成したもので、これを使用すると、複数のリソースへのアクセス権限を各ユーザーに一度に素早く割り当てることができます。 [リソース・グループを使用してユーザーを管理](/docs/admin/resourcegroups.html#rgs)する方法を参照してください。</dd>
-<dt>RBAC 役割</dt>
-<dd>{{site.data.keyword.containershort_notm}} アクセス・ポリシーが割り当てられているすべてのユーザーには、RBAC 役割が自動的に割り当てられます。 RBAC 役割によって、クラスター内の Kubernetes リソースに対して実行できるアクションが決まります。 RBAC 役割は、デフォルトの名前空間に関してのみセットアップされます。 クラスター管理者は、クラスター内の他の名前空間の RBAC 役割を追加できます。 詳しくは、Kubernetes 資料の [Using RBAC Authorization ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) を参照してください。</dd>
+<dd>リソース・グループは、各 {{site.data.keyword.Bluemix_notm}} サービスをいくつかのグループに編成したもので、これを使用すると、複数のリソースへのアクセス権限を各ユーザーに一度に素早く割り当てることができます。 [リソース・グループを使用してユーザーを管理する方法を参照してください](/docs/admin/resourcegroups.html#rgs)。</dd>
 <dt>Cloud Foundry の役割</dt>
-<dd>すべてのユーザーに、Cloud Foundry ユーザー役割を割り当てる必要があります。 この役割は、ユーザーが {{site.data.keyword.Bluemix_notm}} アカウントで実行できるアクション (他のユーザーの招待や割り当て分の使用率の表示など) を決定します。 それぞれの役割の許可を確認するには、[Cloud Foundry の役割](/docs/iam/cfaccess.html#cfaccess)を参照してください。</dd>
+<dd>Identity and Access Management では、すべてのユーザーに、Cloud Foundry ユーザー役割を割り当てる必要があります。 この役割は、ユーザーが {{site.data.keyword.Bluemix_notm}} アカウントで実行できるアクション (他のユーザーの招待や割り当て分の使用率の表示など) を決定します。 [Cloud Foundry で選択可能な役割について詳しくは、こちらをご覧ください](/docs/iam/cfaccess.html#cfaccess)。</dd>
+<dt>Kubernetes RBAC の役割</dt>
+<dd>{{site.data.keyword.containershort_notm}} アクセス・ポリシーが割り当てられているすべてのユーザーには、Kubernetes RBAC 役割が自動的に割り当てられます。 Kubernetes では、RBAC 役割によって、クラスター内の Kubernetes リソースに対して実行できるアクションが決まります。 RBAC 役割は、デフォルトの名前空間に関してのみセットアップされます。 クラスター管理者は、クラスター内の他の名前空間の RBAC 役割を追加できます。 詳しくは、Kubernetes 資料の [Using RBAC Authorization ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) を参照してください。</dd>
 </dl>
 
-実行するアクションを次の中から選択します。
+このセクションでは、以下について説明します。
 
--   [クラスターで操作をするために必要なアクセス・ポリシーと許可を確認する](#access_ov)。
--   [現在のアクセス・ポリシーを表示する](#view_access)。
--   [既存のユーザーのアクセス・ポリシーを変更する](#change_access)。
--   [{{site.data.keyword.Bluemix_notm}} アカウントにユーザーを追加する](#add_users)。
+-   [アクセス・ポリシーと許可](#access_ov)
+-   [{{site.data.keyword.Bluemix_notm}} アカウントへのユーザーの追加](#add_users)
+-   [ユーザーのインフラストラクチャー許可のカスタマイズ](#infrastructure_permissions)
 
-### 必要な {{site.data.keyword.containershort_notm}} アクセス・ポリシーと許可の概要
+### アクセス・ポリシーと許可
 {: #access_ov}
 
 {{site.data.keyword.Bluemix_notm}} アカウント内のユーザーに付与できるアクセス・ポリシーと許可について説明します。 オペレーターの役割とエディターの役割は別個のアクセス権です。 例えば、ワーカー・ノードを追加してサービスをバインドする操作をユーザーに実行させるには、そのユーザーにオペレーターとエディターの両方の役割を割り当てる必要があります。
 
-|アクセス・ポリシー|クラスター管理許可|Kubernetes リソース許可|
+|{{site.data.keyword.containershort_notm}} アクセス・ポリシー|クラスター管理許可|Kubernetes リソース許可|
 |-------------|------------------------------|-------------------------------|
-|<ul><li>役割: 管理者</li><li>サービス・インスタンス: すべての現行サービス・インスタンス</li></ul>|<ul><li>ライト・クラスターまたは標準クラスターを作成する</li><li>IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするための {{site.data.keyword.Bluemix_notm}} アカウントの資格情報を設定する</li><li>クラスターを削除する</li><li>対象アカウント内の他の既存ユーザーの {{site.data.keyword.containershort_notm}} アクセス・ポリシーの割り当てと変更。</li></ul><br/>この役割は、対象アカウントのすべてのクラスターのエディター、オペレーター、およびビューアーの役割から許可を継承します。|<ul><li>RBAC 役割: クラスター管理</li><li>すべての名前空間内にあるリソースに対する読み取り/書き込みアクセス</li><li>名前空間内で役割を作成する</li><li>Kubernetes ダッシュボードにアクセスする</li><li>アプリをだれでも利用できるようにする Ingress リソースを作成する</li></ul>|
-|<ul><li>役割: 管理者</li><li>サービス・インスタンス: 特定のクラスター ID</li></ul>|<ul><li>特定のクラスターを削除する。</li></ul><br/>この役割は、選択したクラスターのエディター、オペレーター、およびビューアーの役割から許可を継承します。|<ul><li>RBAC 役割: クラスター管理</li><li>すべての名前空間内にあるリソースに対する読み取り/書き込みアクセス</li><li>名前空間内で役割を作成する</li><li>Kubernetes ダッシュボードにアクセスする</li><li>アプリをだれでも利用できるようにする Ingress リソースを作成する</li></ul>|
-|<ul><li>役割: オペレーター</li><li>サービス・インスタンス: すべての現行サービス・インスタンス/特定のクラスター ID</li></ul>|<ul><li>クラスターにワーカー・ノードを追加する</li><li>クラスターからワーカー・ノードを削除する</li><li>ワーカー・ノードをリブートする</li><li>ワーカー・ノードを再ロードする</li><li>クラスターにサブネットを追加する</li></ul>|<ul><li>RBAC 役割: 管理者</li><li>名前空間自体ではなく、デフォルトの名前空間内にあるリソースに対する読み取り/書き込みアクセス</li><li>名前空間内で役割を作成する</li></ul>|
-|<ul><li>役割: エディター</li><li>サービス・インスタンス: すべての現行サービス・インスタンス/特定のクラスター ID</li></ul>|<ul><li>{{site.data.keyword.Bluemix_notm}} サービスをクラスターにバインドします。</li><li>{{site.data.keyword.Bluemix_notm}} サービスをクラスターにアンバインドします。</li><li>Web フックを作成します。</li></ul><br/>アプリ開発者には、この役割を使用してください。|<ul><li>RBAC 役割: 編集</li><li>デフォルトの名前空間内にあるリソースに対する読み取り/書き込みアクセス</li></ul>|
-|<ul><li>役割: ビューアー</li><li>サービス・インスタンス: すべての現行サービス・インスタンス/特定のクラスター ID</li></ul>|<ul><li>クラスターをリスト表示する</li><li>クラスターの詳細を表示する</li></ul>|<ul><li>RBAC 役割: 表示</li><li>デフォルトの名前空間内にあるリソースに対する読み取りアクセス</li><li>Kubernetes シークレットに対する読み取りアクセス権限はなし</li></ul>|
-|<ul><li>Cloud Foundry の組織の役割: 管理者</li></ul>|<ul><li>{{site.data.keyword.Bluemix_notm}} アカウントにユーザーを追加する</li></ul>| |
-|<ul><li>Cloud Foundry のスペースの役割: 開発者</li></ul>|<ul><li>{{site.data.keyword.Bluemix_notm}} サービス・インスタンスを作成する><li>{{site.data.keyword.Bluemix_notm}} サービス・インスタンスをクラスターにバインドする</li></ul>| |
-{: caption="表 7. 必要な {{site.data.keyword.containershort_notm}} のアクセス・ポリシーと許可の概要" caption-side="top"}
+|管理者|この役割は、対象アカウントのすべてのクラスターのエディター、オペレーター、およびビューアーの役割から許可を継承します。 <br/><br/>すべての現行サービス・インスタンスに設定された場合:<ul><li>ライト・クラスターまたは標準クラスターを作成する</li><li>IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするための {{site.data.keyword.Bluemix_notm}} アカウントの資格情報を設定する</li><li>クラスターを削除する</li><li>対象アカウント内の他の既存ユーザーの {{site.data.keyword.containershort_notm}} アクセス・ポリシーの割り当てと変更。</li></ul><p>特定のクラスター ID に設定された場合:<ul><li>特定のクラスターを削除する</li></ul></p>対応するインフラストラクチャー・アクセス・ポリシー: スーパーユーザー<br/><br/><b>注</b>: マシン、VLAN、サブネットなどのリソースを作成するには、ユーザーにインフラストラクチャーの**スーパーユーザー**役割が必要です。|<ul><li>RBAC 役割: クラスター管理</li><li>すべての名前空間内にあるリソースに対する読み取り/書き込みアクセス</li><li>名前空間内で役割を作成する</li><li>Kubernetes ダッシュボードにアクセスする</li><li>アプリをだれでも利用できるようにする Ingress リソースを作成する</li></ul>|
+|オペレーター|<ul><li>クラスターにワーカー・ノードを追加する</li><li>クラスターからワーカー・ノードを削除する</li><li>ワーカー・ノードをリブートする</li><li>ワーカー・ノードを再ロードする</li><li>クラスターにサブネットを追加する</li></ul><p>対応するインフラストラクチャー・アクセス・ポリシー: 基本ユーザー</p>|<ul><li>RBAC 役割: 管理者</li><li>名前空間自体ではなく、デフォルトの名前空間内にあるリソースに対する読み取り/書き込みアクセス</li><li>名前空間内で役割を作成する</li></ul>|
+|エディター <br/><br/><b>ヒント</b>: アプリ開発者には、この役割を使用してください。|<ul><li>{{site.data.keyword.Bluemix_notm}} サービスをクラスターにバインドします。</li><li>{{site.data.keyword.Bluemix_notm}} サービスをクラスターにアンバインドします。</li><li>Web フックを作成します。</li></ul><p>対応するインフラストラクチャー・アクセス・ポリシー: 基本ユーザー|<ul><li>RBAC 役割: 編集</li><li>デフォルトの名前空間内にあるリソースに対する読み取り/書き込みアクセス</li></ul></p>|
+|ビューアー|<ul><li>クラスターをリスト表示する</li><li>クラスターの詳細を表示する</li></ul><p>対応するインフラストラクチャー・アクセス・ポリシー: 表示のみ</p>|<ul><li>RBAC 役割: 表示</li><li>デフォルトの名前空間内にあるリソースに対する読み取りアクセス</li><li>Kubernetes シークレットに対する読み取りアクセス権限はなし</li></ul>|
+{: caption="表 7. {{site.data.keyword.containershort_notm}} のアクセス・ポリシーと許可" caption-side="top"}
 
-### {{site.data.keyword.containershort_notm}} アクセス・ポリシーの検証
-{: #view_access}
+|Cloud Foundry アクセス・ポリシー|アカウント管理許可|
+|-------------|------------------------------|
+|組織の役割: 管理者|<ul><li>{{site.data.keyword.Bluemix_notm}} アカウントにユーザーを追加する</li></ul>| |
+|スペースの役割: 開発者|<ul><li>{{site.data.keyword.Bluemix_notm}} サービス・インスタンスを作成する</li><li>{{site.data.keyword.Bluemix_notm}} サービス・インスタンスをクラスターにバインドする</li></ul>| 
+{: caption="表 8. Cloud Foundry のアクセス・ポリシーと許可" caption-side="top"}
 
-割り当てた {{site.data.keyword.containershort_notm}} のアクセス・ポリシーを確認および検証できます。 アクセス・ポリシーによって、実行できるクラスター管理アクションが決まります。
-
-1.  {{site.data.keyword.containershort_notm}} アクセス・ポリシーを検証する {{site.data.keyword.Bluemix_notm}} アカウントを選択します。
-2.  メニュー・バーから、**「管理」** > **「セキュリティー」** > **「ID およびアクセス」**の順にクリックします。 **「ユーザー」**ウィンドウに、選択したアカウントのユーザーのリストが E メール・アドレスおよび現在の状況とともに表示されます。
-3.  アクセス・ポリシーを検査するユーザーを選択します。
-4.  **「アクセス・ポリシー」**セクションで、対象ユーザーのアクセス・ポリシーを確認します。 この役割で実行できるアクションの詳細については、[必要な {{site.data.keyword.containershort_notm}} のアクセス・ポリシーと許可の概要](#access_ov)を参照してください。
-5.  オプション: [現在のアクセス・ポリシーを変更します](#change_access)。
-
-    **注:** 既存のユーザーのアクセス・ポリシーを変更できるのは、{{site.data.keyword.containershort_notm}} 内のすべてのリソースに対する管理者サービス・ポリシーを割り当てられているユーザーのみです。 {{site.data.keyword.Bluemix_notm}} アカウントにユーザーを追加するには、対象アカウントに対する Cloud Foundry の管理者役割が必要です。 {{site.data.keyword.Bluemix_notm}} アカウント所有者の ID を確認するには、`bx iam
-accounts` を実行し、**「所有者ユーザー ID (Owner User ID)」**を探します。
-
-
-### 既存のユーザーの {{site.data.keyword.containershort_notm}} アクセス・ポリシーの変更
-{: #change_access}
-
-既存のユーザーのアクセス・ポリシーを変更し、{{site.data.keyword.Bluemix_notm}} アカウント内のクラスターに対するクラスター管理許可を付与できます。
-
-始める前に、{{site.data.keyword.containershort_notm}} 内のすべてのリソースに対する[管理者アクセス・ポリシーが自分に割り当てられていることを確認してください](#view_access)。
-
-1.  既存のユーザーの {{site.data.keyword.containershort_notm}} アクセス・ポリシーを変更する {{site.data.keyword.Bluemix_notm}} アカウントを選択します。
-2.  メニュー・バーから、**「管理」** > **「セキュリティー」** > **「ID およびアクセス」**の順にクリックします。 **「ユーザー」**ウィンドウに、選択したアカウントのユーザーのリストが E メール・アドレスおよび現在の状況とともに表示されます。
-3.  アクセス・ポリシーを変更するユーザーを見つけます。 探しているユーザーが見つからなければ、[このユーザーを {{site.data.keyword.Bluemix_notm}} アカウントに招待](#add_users)します。
-4.  **「アクセス・ポリシー」**の**「役割」**行にある**「アクション」**列で、**「ポリシーの編集」**を展開してクリックします。
-5.  **「サービス」**ドロップダウン・リストで、**「{{site.data.keyword.containershort_notm}}」**を選択します。
-6.  **「地域」**ドロップダウン・リストから、ポリシー変更の対象地域を選択します。
-7.  **「サービス・インスタンス」**ドロップダウン・リストから、ポリシー変更の対象クラスターを選択します。 特定のクラスターの ID を確認するには、
-`bx cs clusters` を実行します。
-8.  **「役割の選択」**セクションで、ユーザーのアクセス権限の変更後に付与する役割をクリックします。 役割別のサポート対象アクションの一覧については、[必要な {{site.data.keyword.containershort_notm}} のアクセス・ポリシーと許可の概要](#access_ov)を参照してください。
-9.  **「保存」**をクリックして、変更を保存します。
 
 ### {{site.data.keyword.Bluemix_notm}} アカウントへのユーザーの追加
 {: #add_users}
@@ -1134,30 +823,39 @@ accounts` を実行し、**「所有者ユーザー ID (Owner User ID)」**を�
 
 始める前に、{{site.data.keyword.Bluemix_notm}} アカウントに対する Cloud Foundry の管理者役割が自分に割り当てられていることを確認してください。
 
-1.  ユーザーを追加する {{site.data.keyword.Bluemix_notm}} アカウントを選択します。
-2.  メニュー・バーから、**「管理」** > **「セキュリティー」** > **「ID およびアクセス」**の順にクリックします。 「ユーザー」ウィンドウに、選択したアカウントのユーザーのリストが E メール・アドレスおよび現在の状況とともに表示されます。
-3.  **「ユーザーの招待」**をクリックします。
-4.  **「E メール・アドレス」**に、{{site.data.keyword.Bluemix_notm}} アカウントに追加するユーザーの E メール・アドレスを入力します。
-5.  **「アクセス」**セクションで**「サービス」**を展開します。
-6.  **「アクセス権限の割り当て先 (Assign access to)」**ドロップダウン・リストから、アクセス権限を {{site.data.keyword.containershort_notm}} アカウント (**リソース**) のみに付与するか、それともアカウント内のさまざまなリソースの集合 (**リソース・グループ**) に付与するかを決定します。
-7.  **リソース**の場合:
-    1. **「サービス」**ドロップダウン・リストで、**「{{site.data.keyword.containershort_notm}}」**を選択します。
-    2. **「地域」**ドロップダウン・リストから、ユーザーを招待する地域を選択します。
-    3. **「サービス・インスタンス」**ドロップダウン・リストから、ユーザーを招待するクラスターを選択します。 特定のクラスターの ID を確認するには、
+1.  [ユーザーをアカウントに追加します](../iam/iamuserinv.html#iamuserinv)。
+2.  **「アクセス」**セクションで**「サービス」**を展開します。
+3.  {{site.data.keyword.containershort_notm}} アクセス権限の役割を割り当てます。**「アクセス権限の割り当て先 (Assign access to)」**ドロップダウン・リストから、アクセス権限を {{site.data.keyword.containershort_notm}} アカウント (**リソース**) のみに付与するか、それともアカウント内のさまざまなリソースの集合 (**リソース・グループ**) に付与するかを決定します。
+  -  **リソース**の場合:
+      1. **「サービス」**ドロップダウン・リストで、**「{{site.data.keyword.containershort_notm}}」**を選択します。
+      2. **「地域」**ドロップダウン・リストから、ユーザーを招待する地域を選択します。
+      3. **「サービス・インスタンス」**ドロップダウン・リストから、ユーザーを招待するクラスターを選択します。 特定のクラスターの ID を確認するには、
 `bx cs clusters` を実行します。
-    4. **「役割の選択」**セクションで、ユーザーのアクセス権限の変更後に付与する役割をクリックします。 役割別のサポート対象アクションの一覧については、[必要な {{site.data.keyword.containershort_notm}} のアクセス・ポリシーと許可の概要](#access_ov)を参照してください。
-8. **リソース・グループ**の場合:
-    1. **「リソース・グループ」**ドロップダウン・リストから、自分のアカウントの {{site.data.keyword.containershort_notm}} リソースに対するアクセス権を付与されたリソース・グループを選択します。
-    2. **「リソース・グループへのアクセス権限の割り当て (Assign access to a resource group)」**ドロップダウン・リストから、招待されたユーザーに付与する役割を選択します。 役割別のサポート対象アクションの一覧については、[必要な {{site.data.keyword.containershort_notm}} のアクセス・ポリシーと許可の概要](#access_ov)を参照してください。
-9. オプション: このユーザーが他のユーザーを {{site.data.keyword.Bluemix_notm}} アカウントに追加できるようにするには、そのユーザーに Cloud Foundry の組織の役割を割り当てます。
-    1. **「Cloud Foundry の役割」**セクションの**「組織」**ドロップダウン・リストから、ユーザーにアクセス権を付与する組織を選択します。
-    2. **「組織の役割」**ドロップダウン・リストから、**「管理者」**を選択します。
-    3. **「地域」**ドロップダウン・リストから、ユーザーにアクセス権を付与する対象地域を選択します。
-    4. **「スペース」**ドロップダウン・リストから、ユーザーにアクセス権を付与する対象スペースを選択します。
-    5. **「スペースの役割」**ドロップダウン・リストから、**「管理者」**を選択します。
-10. **「ユーザーの招待」**をクリックします。
+      4. **「役割の選択」**セクションで、役割を選択します。役割別のサポート対象アクションの一覧については、[アクセス・ポリシーと許可](#access_ov)を参照してください。
+  - **リソース・グループ**の場合:
+      1. **「リソース・グループ」**ドロップダウン・リストから、自分のアカウントの {{site.data.keyword.containershort_notm}} リソースに対するアクセス権を付与されたリソース・グループを選択します。
+      2. **「リソース・グループへのアクセス権限の割り当て (Assign access to a resource group)」**ドロップダウン・リストから、役割を選択します。役割別のサポート対象アクションの一覧については、[アクセス・ポリシーと許可](#access_ov)を参照してください。
+4. [オプション: インフラストラクチャーの役割を割り当てます](/docs/iam/mnginfra.html#managing-infrastructure-access)。
+5. [オプション: Cloud Foundry の役割を割り当てます](/docs/iam/mngcf.html#mngcf)。
+5. **「ユーザーの招待」**をクリックします。
+
+
+
+### ユーザーのインフラストラクチャー許可のカスタマイズ
+{: #infrastructure_permissions}
+
+ID およびアクセス管理でインフラストラクチャー・ポリシーを設定すると、ユーザーには役割に関連付けられた許可が付与されます。それらの許可をカスタマイズするには、IBM Cloud インフラストラクチャー (SoftLayer) にログインし、そこで許可を調整する必要があります。
+{: #view_access}
+
+例えば、基本ユーザーはワーカー・ノードをリブートできますが、ワーカー・ノードを再ロードすることはできません。そのユーザーにスーパーユーザー権限を付与しなくても、IBM Cloud インフラストラクチャー (SoftLayer) の許可を調整して、再ロード・コマンドを実行する許可を追加できます。
+
+1.  IBM Cloud インフラストラクチャー (SoftLayer) アカウントにログインします。
+2.  更新するユーザー・プロファイルを選択します。
+3.  **「ポータルの許可」**で、ユーザーのアクセス権限をカスタマイズします。例えば、再ロード許可を追加するには、**「デバイス」**タブで**「OS 再ロードの発行とレスキュー・カーネルの開始」**を選択します。
+9.  変更を保存します。
 
 <br />
+
 
 
 ## Kubernetes マスターの更新
@@ -1190,7 +888,7 @@ Kubernetes マスターには IBM が自動的にパッチを適用しますが�
 - 使用可能なノードにポッドをスケジュール変更するには、デプロイメントで[レプリカ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#replicas) を使用します。
 
 実動レベルのクラスターを更新するには以下のようにします。
-- アプリのダウン時間を回避できるように、更新処理中にはポッドはワーカー・ノードでスケジュールされません。 詳しくは、[`kubectl drain` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/user-guide/kubectl/v1.8/#drain) を参照してください。
+- アプリのダウン時間を回避できるように、更新処理中にはポッドはワーカー・ノードでスケジュールされません。 詳しくは、[`kubectl drain` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#drain) を参照してください。
 - ワークロードやデリバリー・プロセスが更新の影響を受けないか検証するために、テスト・クラスターを使用します。 ワーカー・ノードを以前のバージョンにロールバックすることはできません。
 - 実動レベルのクラスターには、ワーカー・ノードの障害に対応できるだけのキャパシティーが必要です。 ご使用のクラスターにそのキャパシティーがない場合、クラスターを更新する前にワーカー・ノードを追加してください。
 - 複数のワーカー・ノードがアップグレードを要求されると、ローリング更新が実行されます。 クラスター内のワーカー・ノードの合計量の最大 20 パーセントを同時にアップグレードできます。 アップグレード・プロセスでは、1 つのワーカー・ノードのアップグレードが完了するのを待機してから、別のワーカーのアップグレードが開始されます。
@@ -1228,9 +926,9 @@ Kubernetes マスターには IBM が自動的にパッチを適用しますが�
 クラスターにサブネットを追加して、使用可能なポータブル・パブリック IP アドレスまたはポータブル・プライベート IP アドレスのプールを変更します。
 {:shortdesc}
 
-{{site.data.keyword.containershort_notm}} では、クラスターにネットワーク・サブネットを追加して、Kubernetes サービス用の安定したポータブル IP を追加できます。 標準クラスターを作成すると、{{site.data.keyword.containershort_notm}} は、5 つのパブリック IP アドレスを持つポータブル・パブリック・サブネットと、5 つのプライベート IP アドレスを持つポータブル・プライベート・サブネットを自動的にプロビジョンします。 ポータブル・パブリック IP アドレスおよびポータブル・プライベート IP アドレスは静的で、ワーカー・ノードまたはクラスターが削除されても変更されません。
+{{site.data.keyword.containershort_notm}} では、クラスターにネットワーク・サブネットを追加して、Kubernetes サービス用の安定したポータブル IP を追加できます。 このケースでは、1 つ以上のクラスター間に接続を作成するための、ネットマスキングを指定するサブネットは使用されません。代わりに、サービスへのアクセスに使用できるクラスターからそのサービスの永続的な固定 IP を利用できるように、サブネットが使用されます。
 
-ポータブル・パブリック IP アドレスのうち 1 つとポータブル・プライベート IP アドレスのうち 1 つは [Ingress コントローラー](cs_apps.html#cs_apps_public_ingress)用に使用され、これをクラスター内の複数のアプリを公開するために使用できます。 残りの 4 つのポータブル・パブリック IP アドレスと 4 つのポータブル・プライベート IP アドレスは、[ロード・バランサー・サービスを作成して](cs_apps.html#cs_apps_public_load_balancer)単一アプリをパブリックに公開するために使用できます。
+標準クラスターを作成すると、{{site.data.keyword.containershort_notm}} は、5 つのパブリック IP アドレスを持つポータブル・パブリック・サブネットと、5 つのプライベート IP アドレスを持つポータブル・プライベート・サブネットを自動的にプロビジョンします。 ポータブル・パブリック IP アドレスおよびポータブル・プライベート IP アドレスは静的で、ワーカー・ノードまたはクラスターが削除されても変更されません。 サブネットごとに、ポータブル・パブリック IP アドレスのうち 1 つとポータブル・プライベート IP アドレスのうち 1 つは [アプリケーション・ロード・バランサー](cs_apps.html#cs_apps_public_ingress)用に使用され、これをクラスター内の複数のアプリを公開するために使用できます。 残りの 4 つのポータブル・パブリック IP アドレスと 4 つのポータブル・プライベート IP アドレスは、[ロード・バランサー・サービスを作成して](cs_apps.html#cs_apps_public_load_balancer)単一アプリをパブリックに公開するために使用できます。
 
 **注:** ポータブル IP アドレスは、月単位で課金されます。 クラスターのプロビジョンの後にポータブル・パブリック IP アドレスを削除する場合、短時間しか使用しない場合でも月額課金を支払う必要があります。
 
@@ -1239,56 +937,44 @@ Kubernetes マスターには IBM が自動的にパッチを適用しますが�
 
 クラスターにサブネットを割り当て、安定したポータブル・パブリック IP またはポータブル・プライベート IP をクラスターに追加できます。
 
-{{site.data.keyword.Bluemix_dedicated_notm}} ユーザーは、このタスクを使用する代わりに、[サポート・チケットを開いて](/docs/support/index.html#contacting-support)サブネットを作成した後に、[`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) コマンドを使用してクラスターにサブネットを追加する必要があります。
+**注:** クラスターでサブネットを使用できるようにすると、このサブネットの IP アドレスは、クラスターのネットワーキングの目的で使用されるようになります。 IP アドレスの競合を回避するため、1 つのサブネットは必ず 1 つのクラスターでのみ使用してください。 あるサブネットを複数のクラスターで使用したり、同時に他の目的で {{site.data.keyword.containershort_notm}}の外部で使用したりしないでください。
 
-始める前に、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオに {{site.data.keyword.Bluemix_notm}} GUI を使用してアクセスできることを確認してください。 ポートフォリオにアクセスするには、{{site.data.keyword.Bluemix_notm}} 従量課金 (PAYG) アカウントをセットアップするか、既存の PAYG アカウントを使用する必要があります。
+始めに、[CLI のターゲット](cs_cli_install.html#cs_cli_configure)を自分のクラスターに設定してください。
 
-1.  カタログの「**インフラストラクチャー**」セクションで、
-「**ネットワーク**」を選択します。
-2.  **「サブネット/IP (Subnet/IPs)」**を選択し、
-**「作成」**をクリックします。
-3.  **「このアカウントに追加するサブネットのタイプの選択 (Select the type of subnet to add to this account)」**ドロップダウン・メニューから、**「ポータブル・パブリック」**または**「ポータブル・プライベート」**を選択します。
-4.  ポータブル・サブネットから追加する IP アドレスの数を選択します。
+IBM Cloud インフラストラクチャー (SoftLayer) アカウントでサブネットを作成し、指定されたクラスターでそのサブネットを使用できるようにするには、以下のようにします。
 
-    **注:** サブネットのポータブル IP アドレスを追加する場合、3 つの IP アドレスはクラスター内ネットワークの確立のために使用されるため、これらのアドレスは、Ingress コントローラーでは、あるいはロード・バランサー・サービスの作成には使用できません。 例えば、8 個のポータブル・パブリック IP アドレスを要求する場合は、そのうちの 5 個を、アプリをパブリックに公開するために使用できます。
-
-5.  ポータブル・パブリック IP アドレスまたはポータブル・プライベート IP アドレスのルーティング先となるパブリック VLAN またはプライベート VLAN を選択します。 既存のワーカー・ノードが接続されているパブリック VLAN またはプライベート VLAN を選択する必要があります。 ワーカー・ノードのパブリック VLAN またはプライベート VLAN を確認してください。
+1. 新しいサブネットをプロビジョンします。
 
     ```
-    bx cs worker-get <worker_id>
+    bx cs cluster-subnet-create <cluster_name_or_id> <subnet_size> <VLAN_ID>
     ```
     {: pre}
 
-6.  質問に対して入力し、**「注文する (Place order)」**をクリックします。
+    <table>
+    <caption>表 8. このコマンドの構成要素について</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> このコマンドの構成要素について</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>cluster-subnet-create</code></td>
+    <td>クラスターのためにサブネットをプロビジョンするコマンド。</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;cluster_name_or_id&gt;</em></code></td>
+    <td><code>&gt;cluster_name_or_id&lt;</code> をクラスターの名前または ID に置き換えます。</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;subnet_size&gt;</em></code></td>
+    <td><code>&gt;subnet_size&lt;</code> を、ポータブル・サブネットから追加する IP アドレスの数に置き換えます。受け入れられる値は 8、16、32、64 です。<p>**注:** サブネットのポータブル IP アドレスを追加する場合、3 つの IP アドレスはクラスター内ネットワークの確立のために使用されるため、これらのアドレスは、アプリケーション・ロード・バランサーでは、あるいはロード・バランサー・サービスの作成には使用できません。 例えば、8 個のポータブル・パブリック IP アドレスを要求する場合は、そのうちの 5 個を、アプリをパブリックに公開するために使用できます。</p> </td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;VLAN_ID&gt;</em></code></td>
+    <td><code>&gt;VLAN_ID&lt;</code> を、ポータブル・パブリック IP アドレスまたはポータブル・プライベート IP アドレスの割り振り先となるパブリック VLAN またはプライベート VLAN の ID に置き換えます。既存のワーカー・ノードが接続されているパブリック VLAN またはプライベート VLAN を選択する必要があります。 ワーカー・ノードのパブリック VLAN またはプライベート VLAN を確認するには、<code>bx cs worker-get &gt;worker_id&lt;</code> コマンドを実行します。</td>
+    </tr>
+    </tbody></table>
 
-    **注:** ポータブル IP アドレスは、月単位で課金されます。 ポータブル・パブリック IP アドレスを作成した後にそれを削除する場合、月の途中までしか使用していない場合であっても、月額課金を支払う必要があります。
-
-7.  サブネットがプロビジョンされた後、Kubernetes クラスターでそのサブネットを利用できるようにします。
-    1.  「インフラストラクチャー」ダッシュボードで、作成したサブネットを選択し、サブネットの ID をメモします。
-    2.  {{site.data.keyword.Bluemix_notm}} CLI にログインします。 {{site.data.keyword.Bluemix_notm}} 地域を指定するには、[API エンドポイントを含めます](cs_regions.html#bluemix_regions)。
-
-        ```
-        bx login
-        ```
-        {: pre}
-
-        **注:** フェデレーテッド ID がある場合は、`bx login --sso` を使用して、{{site.data.keyword.Bluemix_notm}} CLI にログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。 `--sso` なしではログインに失敗し、`--sso` オプションを指定すると成功する場合、フェデレーテッド ID があることがわかります。
-
-    3.  アカウント内のすべてのクラスターをリスト表示し、サブネットを使用できるようにするクラスターの ID をメモします。
-
-        ```
-        bx cs clusters
-        ```
-        {: pre}
-
-    4.  サブネットをクラスターに追加します。 クラスターでサブネットを使用できるようにすると、使用できるすべての使用可能なポータブル・パブリック IP アドレスまたはポータブル・プライベート IP アドレスが含まれる Kubernetes config マップが作成されます。 クラスターに Ingress コントローラーが存在しない場合は、パブリック Ingress コントローラーを作成するために 1 つのポータブル・パブリック IP アドレスが自動的に使用され、プライベート Ingress コントローラーを作成するために 1 つのポータブル・プライベート IP アドレスが自動的に使用されます。 その他のすべてのポータブル・パブリック IP アドレスおよびポータブル・プライベート IP アドレスは、アプリのロード・バランサー・サービスの作成に使用できます。
-
-        ```
-        bx cs cluster-subnet-add <cluster name or id> <subnet id>
-        ```
-        {: pre}
-
-8.  クラスターにサブネットが正常に追加されたことを確認します。 サブネットの CIDR は **VLANs** セクションにリストされます。
+2.  クラスターにサブネットが正常に作成されて追加されたことを確認します。サブネットの CIDR は **VLANs** セクションにリストされます。
 
     ```
     bx cs cluster-get --showResources <cluster name or id>
@@ -1376,7 +1062,7 @@ IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオに
     ```
     {: screen}
 
-6.  サブネット ID を指定してクラスターにサブネットを追加します。 クラスターでサブネットを使用できるようにすると、使用できるすべての使用可能なポータブル・パブリックIP アドレスが含まれる Kubernetes config マップが作成されます。 Ingress コントローラーがクラスターにまだ存在しない場合は、Ingress コントローラーの作成に 1 つのポータブル・パブリック IP アドレスが自動的に使用されます。 その他のすべてのポータブル・パブリック IP アドレスは、アプリのロード・バランサー・サービスの作成に使用できます。
+6.  サブネット ID を指定してクラスターにサブネットを追加します。 クラスターでサブネットを使用できるようにすると、使用できるすべての使用可能なポータブル・パブリックIP アドレスが含まれる Kubernetes config マップが作成されます。 アプリケーション・ロード・バランサーがまだクラスターに存在しない場合は、パブリック・アプリケーション・ロード・バランサーとプライベート・アプリケーション・ロード・バランサーを作成するために、1 つのポータブル・パブリック IP アドレスと 1 つのポータブル・プライベート IP アドレスが自動的に使用されます。その他のすべてのポータブル・パブリック IP アドレスおよびポータブル・プライベート IP アドレスは、アプリのロード・バランサー・サービスの作成に使用できます。
 
     ```
     bx cs cluster-subnet-add mycluster 807861
@@ -1440,27 +1126,7 @@ IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオに
     ```
     {: screen}
 
-4. プライベート・ネットワークを介してアプリにアクセスするために、プライベート・ロード・バランサーを追加します。 追加したサブネットのプライベート IP アドレスを使用する場合は、プライベート・ロード・バランサーの作成時に IP アドレスを指定する必要があります。 使用しない場合は、IP アドレスは IBM Cloud インフラストラクチャー (SoftLayer) サブネット、またはプライベート VLAN 上のユーザー提供のサブネットからランダムに選択されます。 詳しくは、[アプリへのアクセスの構成](cs_apps.html#cs_apps_public_load_balancer)を参照してください。
-
-    IP アドレスを指定したプライベート・ロード・バランサー・サービスの構成ファイルの例を以下に示します。
-
-    ```
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: <myservice>
-      annotations:
-        service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: private
-    spec:
-      type: LoadBalancer
-      selector:
-        <selectorkey>:<selectorvalue>
-      ports:
-       - protocol: TCP
-         port: 8080
-      loadBalancerIP: <private_ip_address>
-    ```
-    {: codeblock}
+4. プライベート・ネットワークを介してアプリにアクセスするために、プライベート・ロード・バランサー・サービスまたはプライベート Ingress アプリケーション・ロード・バランサーを追加します。プライベート・ロード・バランサーまたはプライベート Ingress アプリケーション・ロード・バランサーの作成時に追加したサブネットのプライベート IP アドレスを使用する場合は、IP アドレスを指定する必要があります。使用しない場合は、IP アドレスは IBM Cloud インフラストラクチャー (SoftLayer) サブネット、またはプライベート VLAN 上のユーザー提供のサブネットからランダムに選択されます。 詳しくは、[ロード・バランサー・タイプのサービスを使用してアプリへのアクセスを構成する方法](cs_apps.html#cs_apps_public_load_balancer)または[プライベート・アプリケーションのロード・バランサーを有効にする](cs_apps.html#private_ingress)を参照してください。
 
 <br />
 
@@ -1475,7 +1141,7 @@ Kubernetes は永続ボリューム (実際のハードウェアを表す) と�
 
 ![永続ボリュームと永続ボリューム請求の作成](images/cs_cluster_pv_pvc.png)
 
- 図に示すように、既存の NFS ファイル共有を Kubernetes で使用できるようにするには、特定のサイズとアクセス・モードを持つ永続ボリュームを作成し、その永続ボリュームの仕様と一致する永続ボリューム請求を作成する必要があります。 永続ボリュームと永続ボリューム請求が一致すると、それらは相互にバインドされます。 クラスター・ユーザーがポッドへのボリュームのマウントに使用できるのは、バインドされた永続ボリューム請求だけです。 この処理は永続ストレージの静的プロビジョニングと呼ばれます。
+ 図に示すように、既存の NFS ファイル共有を Kubernetes で使用できるようにするには、特定のサイズとアクセス・モードを持つ永続ボリュームを作成し、その永続ボリュームの仕様と一致する永続ボリューム請求を作成する必要があります。 永続ボリュームと永続ボリューム請求が一致すると、それらは相互にバインドされます。 クラスター・ユーザーがデプロイメントへのボリュームのマウントに使用できるのは、バインドされた永続ボリューム請求だけです。 この処理は永続ストレージの静的プロビジョニングと呼ばれます。
 
 始める前に、永続ボリュームの作成に使用できる既存の NFS ファイル共有があることを確認します。
 
@@ -1483,12 +1149,15 @@ Kubernetes は永続ボリューム (実際のハードウェアを表す) と�
 
 永続ボリューム、およびそれと一致する永続ボリューム請求を作成するには、次の手順を実行します。
 
-1.  IBM Cloud インフラストラクチャー (SoftLayer) アカウントで、永続ボリューム・オブジェクトを作成する NFS ファイル共有の ID とパスを検索します。
+1.  IBM Cloud インフラストラクチャー (SoftLayer) アカウントで、永続ボリューム・オブジェクトを作成する NFS ファイル共有の ID とパスを検索します。 さらに、クラスター内のサブネットに対する許可をファイル・ストレージに付与します。この許可により、クラスターにストレージへのアクセス権限が付与されます。
     1.  IBM Cloud インフラストラクチャー (SoftLayer) アカウントにログインします。
     2.  **「ストレージ」**をクリックします。
-    3.  **「ファイル・ストレージ」**をクリックし、使用する NFS ファイル共有の ID とパスをメモします。
-2.  任意のエディターを開きます。
-3.  永続ボリュームのストレージ構成ファイルを作成します。
+    3.  **「ファイル・ストレージ」**をクリックして、**「アクション」**メニューから**「ホストの許可」**を選択します。
+    4.  **「サブネット」**をクリックします。 許可した後、そのサブネット上のワーカー・ノードにはファイル・ストレージにアクセスできるようになります。
+    5.  クラスターのパブリック VLAN のサブネットをメニューから選択し、**「送信」**をクリックします。サブネットを見つける必要がある場合、`bx cs cluster-get <cluster_name> --showResources` を実行します。
+    6.  ファイル・ストレージの名前をクリックします。
+    7.  **「マウント・ポイント」**フィールドをメモします。フィールドは `<server>:/<path>` の形式で表示されます。
+2.  永続ボリュームのストレージ構成ファイルを作成します。 ファイル・ストレージの**「マウント・ポイント」**フィールドにあるサーバーとパスを含めます。
 
     ```
     apiVersion: v1
@@ -1501,13 +1170,13 @@ Kubernetes は永続ボリューム (実際のハードウェアを表す) と�
      accessModes:
        - ReadWriteMany
      nfs:
-       server: "nfslon0410b-fz.service.softlayer.com"
+       server: "nfslon0410b-fz.service.networklayer.com"
        path: "/IBM01SEV8491247_0908"
     ```
     {: codeblock}
 
     <table>
-    <caption>表 8. YAML ファイルの構成要素について</caption>
+    <caption>表 9. YAML ファイルの構成要素について</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
     </thead>
@@ -1522,7 +1191,7 @@ Kubernetes は永続ボリューム (実際のハードウェアを表す) と�
     </tr>
     <tr>
     <td><code>accessMode</code></td>
-    <td>アクセス・モードは、永続ボリューム請求をワーカー・ノードにマウントする方法を定義します。<ul><li>ReadWriteOnce (RWO): 永続ボリュームは、単一のワーカー・ノードのポッドにのみマウントできます。 この永続ボリュームにマウントされているポッドは、当該ボリュームに対する読み取り/書き込みを行うことができます。</li><li>ReadOnlyMany (ROX): 永続ボリュームは、複数のワーカー・ノードでホストされているポッドにマウントできます。 この永続ボリュームにマウントされているポッドは、当該ボリュームで読み取りだけを行うことができます。</li><li>ReadWriteMany (RWX): この永続ボリュームは、複数のワーカー・ノードでホストされているポッドにマウントできます。 この永続ボリュームにマウントされているポッドは、当該ボリュームに対する読み取り/書き込みを行うことができます。</li></ul></td>
+    <td>アクセス・モードは、永続ボリューム請求をワーカー・ノードにマウントする方法を定義します。<ul><li>ReadWriteOnce (RWO): 永続ボリュームは、単一のワーカー・ノードのデプロイメントにのみマウントできます。 この永続ボリュームにマウントされているデプロイメントのコンテナーは、当該ボリュームに対する読み取り/書き込みを行うことができます。</li><li>ReadOnlyMany (ROX): 永続ボリュームは、複数のワーカー・ノードでホストされているデプロイメントにマウントできます。 この永続ボリュームにマウントされているデプロイメントは、当該ボリュームで読み取りだけを行うことができます。</li><li>ReadWriteMany (RWX): この永続ボリュームは、複数のワーカー・ノードでホストされているデプロイメントにマウントできます。 この永続ボリュームにマウントされているデプロイメントは、当該ボリュームに対する読み取り/書き込みを行うことができます。</li></ul></td>
     </tr>
     <tr>
     <td><code>server</code></td>
@@ -1534,7 +1203,7 @@ Kubernetes は永続ボリューム (実際のハードウェアを表す) と�
     </tr>
     </tbody></table>
 
-4.  クラスターに永続ボリューム・オブジェクトを作成します。
+3.  クラスターに永続ボリューム・オブジェクトを作成します。
 
     ```
     kubectl apply -f <yaml_path>
@@ -1548,14 +1217,14 @@ Kubernetes は永続ボリューム (実際のハードウェアを表す) と�
     ```
     {: pre}
 
-5.  永続ボリュームが作成されたことを確認します。
+4.  永続ボリュームが作成されたことを確認します。
 
     ```
     kubectl get pv
     ```
     {: pre}
 
-6.  永続ボリューム請求を作成するために、別の構成ファイルを作成します。 永続ボリューム請求が、前の手順で作成した永続ボリューム・オブジェクトと一致するようにするには、`storage` および
+5.  永続ボリューム請求を作成するために、別の構成ファイルを作成します。 永続ボリューム請求が、前の手順で作成した永続ボリューム・オブジェクトと一致するようにするには、`storage` および
 `accessMode` に同じ値を選択する必要があります。 `storage-class` フィールドは空である必要があります。 これらのいずれかのフィールドが永続ボリュームと一致しない場合、代わりに新しい永続ボリュームが自動的に作成されます。
 
     ```
@@ -1574,14 +1243,14 @@ Kubernetes は永続ボリューム (実際のハードウェアを表す) と�
     ```
     {: codeblock}
 
-7.  永続ボリューム請求を作成します。
+6.  永続ボリューム請求を作成します。
 
     ```
     kubectl apply -f deploy/kube-config/mypvc.yaml
     ```
     {: pre}
 
-8.  永続ボリューム請求が作成され、永続ボリューム・オブジェクトにバインドされたことを確認します。 この処理には数分かかる場合があります。
+7.  永続ボリューム請求が作成され、永続ボリューム・オブジェクトにバインドされたことを確認します。 この処理には数分かかる場合があります。
 
     ```
     kubectl describe pvc mypvc
@@ -1609,7 +1278,7 @@ Kubernetes は永続ボリューム (実際のハードウェアを表す) と�
     {: screen}
 
 
-永続ボリューム・オブジェクトが正常に作成され、永続ボリューム請求にバインドされました。 これで、クラスター・ユーザーがポッドに[永続ボリューム請求をマウント](cs_apps.html#cs_apps_volume_mount)して、永続ボリューム・オブジェクトへの読み書きを開始できるようになりました。
+永続ボリューム・オブジェクトが正常に作成され、永続ボリューム請求にバインドされました。 これで、クラスター・ユーザーがデプロイメントに[永続ボリューム請求をマウント](cs_apps.html#cs_apps_volume_mount)して、永続ボリューム・オブジェクトへの読み書きを開始できるようになりました。
 
 <br />
 
@@ -1620,142 +1289,39 @@ Kubernetes は永続ボリューム (実際のハードウェアを表す) と�
 ログは、クラスターやアプリの問題のトラブルシューティングに役立ちます。 処理や長期保管のためにログを特定の場所に送信しなければならない場合があります。 {{site.data.keyword.containershort_notm}} の Kubernetes クラスターで、クラスターのログ転送を有効にしたり、ログの転送先を選択したりすることができます。 **注**: ログの転送は標準クラスターでのみサポートされています。
 {:shortdesc}
 
-### ログの表示
-{: #cs_view_logs}
+コンテナー、アプリケーション、ワーカー・ノード、Kubernetes クラスター、Ingress コントローラーなどのログ・ソースのログを転送することができます。それぞれのログ・ソースについては、以下の表を確認してください。
 
-クラスターとコンテナーのログを表示するには、Kubernetes と Docker の標準的なロギング機能を使用します。
+|ログ・ソース|特性|ログ・パス|
+|----------|---------------|-----|
+|`container`|Kubernetes クラスターで実行されるコンテナーのログ。|-|
+|`application`|Kubernetes クラスターで実行される独自のアプリケーションのログ。|`/var/log/apps/**/*.log`、`/var/log/apps/**/*.err`|
+|`worker`|Kubernetes クラスター内の仮想マシン・ワーカー・ノードのログ。|`/var/log/syslog`、`/var/log/auth.log`|
+|`kubernetes`|Kubernetes システム構成要素のログ。|`/var/log/kubelet.log`、`/var/log/kube-proxy.log`|
+|`ingress`|Ingress コントローラーによって管理される、Kubernetes クラスターに送信されるネットワーク・トラフィックを管理するアプリケーション・ロード・バランサーのログ。|`/var/log/alb/ids/*.log`、`/var/log/alb/ids/*.err`、`/var/log/alb/customerlogs/*.log`、`/var/log/alb/customerlogs/*.err`|
+{: caption="表 9. ログ・ソースの特性" caption-side="top"}
+
+### ログ転送の有効化
+{: #cs_log_sources_enable}
+
+ログは {{site.data.keyword.loganalysislong_notm}} または外部の syslog サーバーに転送することができます。 あるログ・ソースから両方のログ・コレクター・サーバーにログを転送する場合は、2 つのロギング構成を作成する必要があります。 **注**: アプリケーションのログを転送する方法については、[アプリケーションのログ転送の有効化](#cs_apps_enable)を参照してください。
 {:shortdesc}
-
-#### {{site.data.keyword.loganalysislong_notm}}
-{: #cs_view_logs_k8s}
-
-標準クラスターの場合、Kubernetes クラスターの作成時にログインした {{site.data.keyword.Bluemix_notm}} アカウントにログがあります。 クラスターの作成時に {{site.data.keyword.Bluemix_notm}} スペースを指定した場合、ログはそのスペースに配置されます。 コンテナーのログは、コンテナー外部からモニターされて転送されます。 コンテナーのログには Kibana ダッシュボードを使用してアクセスできます。 ロギングについて詳しくは、[{{site.data.keyword.containershort_notm}} のロギング](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes)を参照してください。
-
-**注**: クラスター作成時に指定したスペースにログがある場合、アカウント所有者がログを表示するには、そのスペースに対する管理者、開発者、または監査員の権限が必要です。 {{site.data.keyword.containershort_notm}} のアクセス・ポリシーとアクセス権限の変更について詳しくは、[クラスター・アクセス権限の管理](cs_cluster.html#cs_cluster_user)を参照してください。 権限を変更した後に、ログの表示が開始するまで最大で 24 時間かかります。
-
-Kibana ダッシュボードにアクセスするには、以下のいずれかの URL にアクセスし、クラスターを作成した {{site.data.keyword.Bluemix_notm}} アカウントまたはスペースを選択します。
-- 米国南部および米国東部: https://logging.ng.bluemix.net
-- 英国南部および中欧: https://logging.eu-fra.bluemix.net
-
-ログの表示について詳しくは、[Web ブラウザーから Kibana へのナビゲート](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser)を参照してください。
-
-#### Docker ログ
-{: #cs_view_logs_docker}
-
-組み込みの Docker ロギング機能を活用して、標準の STDOUT と STDERR 出力ストリームのアクティビティーを検討することができます。 詳しくは、[Kubernetes クラスターで実行されるコンテナーのコンテナー・ログの表示](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes)を参照してください。
-
-### Docker コンテナー名前空間のログ転送の構成
-{: #cs_configure_namespace_logs}
-
-デフォルトで、{{site.data.keyword.containershort_notm}} は Docker コンテナー名前空間ログを {{site.data.keyword.loganalysislong_notm}} に転送します。 コンテナー名前空間ログは、新しいログ転送構成を作成することによって外部 syslog サーバーに転送することもできます。
-{:shortdesc}
-
-**注**: シドニーのロケーションにあるログを表示するには、ログを外部 syslog サーバーに転送する必要があります。
-
-#### syslog へのログ転送の有効化
-{: #cs_namespace_enable}
 
 開始前に、以下のことを行います。
 
-1. 次の 2 つの方法のいずれかで、syslog プロトコルを受け入れることができるサーバーをセットアップします。
+1. ログを外部 syslog サーバーに転送する場合は、次の 2 つの方法で syslog プロトコルを受け入れるサーバーをセットアップできます。
   * 独自のサーバーをセットアップして管理するか、プロバイダーが管理するサーバーを使用します。 プロバイダーがサーバーを管理する場合は、ロギング・プロバイダーからロギング・エンドポイントを取得します。
   * コンテナーから syslog を実行します。 例えば、この[デプロイメント .yaml ファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/IBM-Bluemix/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) を使用して、Kubernetes クラスター内のコンテナーで実行されている Docker パブリック・イメージをフェッチできます。 このイメージは、パブリック・クラスター IP アドレスのポート `514` を公開し、このパブリック・クラスター IP アドレスを使用して syslog ホストを構成します。
 
-2. [CLI の宛先](cs_cli_install.html#cs_cli_configure)を、名前空間があるクラスターにします。
+2. [CLI の宛先](cs_cli_install.html#cs_cli_configure)を、ログ・ソースがあるクラスターにします。
 
-名前空間ログを syslog サーバーに転送するには、以下のようにします。
+コンテナー、ワーカー・ノード、Kubernetes システム構成要素、アプリケーション、または Ingress アプリケーション・ロード・バランサーのログ転送を有効にするには、以下のようにします。
 
-1. ロギング構成を作成します。
+1. ログ転送構成を作成します。
 
-    ```
-    bx cs logging-config-create <my_cluster> --namespace <my_namespace> --hostname <log_server_hostname> --port <log_server_port> --type syslog
-    ```
-    {: pre}
-
-    <table>
-    <caption>表 9. このコマンドの構成要素について</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> このコマンドの構成要素について</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>logging-config-create</code></td>
-    <td>名前空間のログ転送構成を作成するコマンド。</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;my_cluster&gt;</em></code></td>
-    <td><em>&lt;my_cluster&gt;</em> をクラスターの名前または ID に置き換えます。</td>
-    </tr>
-    <tr>
-    <td><code>--namespace <em>&lt;my_namespace&gt;</em></code></td>
-    <td><em>&lt;my_namespace&gt;</em> を名前空間の名前に置き換えます。 ログ転送は、Kubernetes 名前空間 <code>ibm-system</code> と <code>kube-system</code> ではサポートされていません。 名前空間を指定しないと、コンテナー内のすべての名前空間でこの構成が使用されます。</td>
-    </tr>
-    <tr>
-    <td><code>--hostname <em>&lt;log_server_hostname&gt;</em></code></td>
-    <td><em>&lt;log_server_hostname&gt;</em> をログ・コレクター・サーバーのホスト名または IP アドレスに置き換えます。</td>
-    </tr>
-    <tr>
-    <td><code>--port <em>&lt;log_server_port&gt;</em></code></td>
-    <td><em>&lt;log_server_port&gt;</em> をログ・コレクター・サーバーのポートに置き換えます。 ポートを指定しないと、標準ポート <code>514</code> が syslog で使用されます。</td>
-    </tr>
-    <tr>
-    <td><code>--type syslog</code></td>
-    <td>syslog のログ・タイプ。</td>
-    </tr>
-    </tbody></table>
-
-2. ログ転送構成が作成されたことを確認します。
-
-    * クラスター内のすべてのロギング構成をリスト表示するには、以下のようにします。
-      ```
-      bx cs logging-config-get <my_cluster>
-      ```
-      {: pre}
-
-      出力例:
-
-      ```
-      Logging Configurations
-      ---------------------------------------------
-      Id                                    Source        Host             Port    Protocol   Paths
-      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes    172.30.162.138   5514    syslog     /var/log/kubelet.log,/var/log/kube-proxy.log
-      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  application   localhost        -       ibm        /var/log/apps/**/*.log,/var/log/apps/**/*.err
-
-      Container Log Namespace configurations
-      ---------------------------------------------
-      Namespace         Host             Port    Protocol
-      default           myhostname.com   5514    syslog
-      my-namespace      localhost        5514    syslog
-      ```
-      {: screen}
-
-    * 名前空間のロギング構成のみをリスト表示するには、以下のようにします。
-      ```
-      bx cs logging-config-get <my_cluster> --logsource namespaces
-      ```
-      {: pre}
-
-      出力例:
-
-      ```
-      Namespace         Host             Port    Protocol
-      default           myhostname.com   5514    syslog
-      my-namespace      localhost        5514    syslog
-      ```
-      {: screen}
-
-#### syslog サーバー構成の更新
-{: #cs_namespace_update}
-
-現行の syslog サーバー構成の詳細を更新する場合、あるいは別の syslog サーバーに変更する場合は、ロギング転送構成を更新できます。
-{:shortdesc}
-
-始めに、[CLI のターゲット](cs_cli_install.html#cs_cli_configure)を、名前空間があるクラスターに設定してください。
-
-1. ログ転送構成を更新します。
+  * ログを {{site.data.keyword.loganalysislong_notm}} に転送する場合には、以下のようにします。
 
     ```
-    bx cs logging-config-update <my_cluster> --namespace <my_namespace> --hostname <log_server_hostname> --port <log_server_port> --type syslog
+    bx cs logging-config-create <my_cluster> --logsource <my_log_source> --namespace <kubernetes_namespace> --hostname <ingestion_URL> --port <ingestion_port> --spaceName <cluster_space> --orgName <cluster_org> --type ibm
     ```
     {: pre}
 
@@ -1766,78 +1332,118 @@ Kibana ダッシュボードにアクセスするには、以下のいずれか�
     </thead>
     <tbody>
     <tr>
-    <td><code>logging-config-update</code></td>
-    <td>名前空間のログ転送構成を更新するコマンド。</td>
+    <td><code>logging-config-create</code></td>
+    <td>{{site.data.keyword.loganalysislong_notm}} ログ転送構成を作成するコマンド。</td>
     </tr>
     <tr>
     <td><code><em>&lt;my_cluster&gt;</em></code></td>
     <td><em>&lt;my_cluster&gt;</em> をクラスターの名前または ID に置き換えます。</td>
     </tr>
     <tr>
-    <td><code>--namepsace <em>&lt;my_namespace&gt;</em></code></td>
-    <td><em>&lt;my_namespace&gt;</em> を、ロギング構成がある名前空間の名前に置き換えます。</td>
+    <td><code>--logsource <em>&lt;my_log_source&gt;</em></code></td>
+    <td><em>&lt;my_log_source&gt;</em> をログ・ソースに置き換えます。 指定可能な値は <code>container</code>、<code>application</code>、<code>worker</code>、<code>kubernetes</code>、<code>ingress</code> です。</td>
     </tr>
     <tr>
-    <td><code>--hostname <em>&lt;log_server_hostname&gt;</em></code></td>
-    <td><em>&lt;log_server_hostname&gt;</em> をログ・コレクター・サーバーのホスト名または IP アドレスに置き換えます。</td>
+    <td><code><em>&lt;kubernetes_namespace&gt;</em></code></td>
+    <td><em>&lt;kubernetes_namespace&gt;</em> を、ログの転送元になる Docker コンテナー名前空間に置き換えます。ログ転送は、Kubernetes 名前空間 <code>ibm-system</code> と <code>kube-system</code> ではサポートされていません。 この値はコンテナー・ログ・ソースについてのみ有効で、オプションです。名前空間を指定しないと、コンテナー内のすべての名前空間でこの構成が使用されます。</td>
     </tr>
     <tr>
-    <td><code>--port <em>&lt;log_collector_port&gt;</em></code></td>
+    <td><code>--hostname <em>&lt;ingestion_URL&gt;</em></code></td>
+    <td><em>&lt;ingestion_URL&gt;</em> を {{site.data.keyword.loganalysisshort_notm}} 取り込み URL に置き換えます。選択可能な取り込み URL のリストは、[ここを参照してください](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)。取り込み URL を指定しない場合、クラスターが作成された地域のエンドポイントが使用されます。</td>
+    </tr>
+    <tr>
+    <td><code>--port <em>&lt;ingestion_port&gt;</em></code></td>
+    <td><em>&lt;ingestion_port&gt;</em> を取り込みポートに置き換えます。ポートを指定しないと、標準ポート <code>9091</code> が使用されます。</td>
+    </tr>
+    <tr>
+    <td><code>--spaceName <em>&lt;cluster_space&gt;</em></code></td>
+    <td><em>&lt;cluster_space&gt;</em> を、ログの送信先となるスペースの名前に置き換えます。スペースを指定しない場合、ログはアカウント・レベルに送信されます。</td>
+    </tr>
+    <tr>
+    <td><code>--orgName <em>&lt;cluster_org&gt;</em></code></td>
+    <td><em>&lt;cluster_org&gt;</em> を、このスペースが属する組織の名前に置き換えます。この値は、スペースを指定した場合には必須です。</td>
+    </tr>
+    <tr>
+    <td><code>--type ibm</code></td>
+    <td>ログを {{site.data.keyword.loganalysisshort_notm}} に送信するためのログ・タイプ。</td>
+    </tr>
+    </tbody></table>
+
+  * ログを外部 syslog サーバーに転送する場合には、以下のようにします。
+
+    ```
+    bx cs logging-config-create <my_cluster> --logsource <my_log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog
+    ```
+    {: pre}
+
+    <table>
+    <caption>表 11. このコマンドの構成要素について</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> このコマンドの構成要素について</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>logging-config-create</code></td>
+    <td>syslog ログ転送構成を作成するコマンド。</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;my_cluster&gt;</em></code></td>
+    <td><em>&lt;my_cluster&gt;</em> をクラスターの名前または ID に置き換えます。</td>
+    </tr>
+    <tr>
+    <td><code>--logsource <em>&lt;my_log_source&gt;</em></code></td>
+    <td><em>&lt;my_log_source&gt;</em> をログ・ソースに置き換えます。 指定可能な値は <code>container</code>、<code>application</code>、<code>worker</code>、<code>kubernetes</code>、<code>ingress</code> です。</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;kubernetes_namespace&gt;</em></code></td>
+    <td><em>&lt;kubernetes_namespace&gt;</em> を、ログの転送元になる Docker コンテナー名前空間に置き換えます。ログ転送は、Kubernetes 名前空間 <code>ibm-system</code> と <code>kube-system</code> ではサポートされていません。 この値はコンテナー・ログ・ソースについてのみ有効で、オプションです。名前空間を指定しないと、コンテナー内のすべての名前空間でこの構成が使用されます。</td>
+    </tr>
+    <tr>
+    <td><code>--hostname <em>&lt;log_server_hostname_or_IP&gt;</em></code></td>
+    <td><em>&lt;log_server_hostname&gt;</em> をログ・コレクター・サービスのホスト名または IP アドレスに置き換えます。</td>
+    </tr>
+    <tr>
+    <td><code>--port <em>&lt;log_server_port&gt;</em></code></td>
     <td><em>&lt;log_server_port&gt;</em> をログ・コレクター・サーバーのポートに置き換えます。 ポートを指定しないと、標準ポート <code>514</code> が使用されます。</td>
     </tr>
     <tr>
     <td><code>--type syslog</code></td>
-    <td><code>syslog</code> のロギング・タイプ。</td>
+    <td>ログを外部 syslog サーバーに送信するためのログ・タイプ。</td>
     </tr>
     </tbody></table>
 
-2. ログ転送構成が更新されたことを確認します。
-    ```
-    bx cs logging-config-get <my_cluster> --logsource namespaces
-    ```
-    {: pre}
+2. ログ転送構成が作成されたことを確認します。
 
-    出力例:
+    * クラスター内のすべてのロギング構成をリスト表示する場合には、以下のようにします。
+      ```
+      bx cs logging-config-get <my_cluster>
+      ```
+      {: pre}
 
-    ```
-    Namespace         Host             Port    Protocol
-      default           myhostname.com   5514    syslog
-      my-namespace      localhost        5514    syslog
-    ```
-    {: screen}
+      出力例:
 
-#### syslog へのログ転送の停止
-{: #cs_namespace_delete}
+      ```
+      Id                                    Source       Namespace     Host                          Port   Org      Space      Protocol     Paths
+      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes   -             172.30.162.138                5514   -        -          syslog       /var/log/kubelet.log,/var/log/kube-proxy.log
+      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  application  -             ingest.logging.ng.bluemix.net 9091   my_org   my_space   ibm          /var/log/apps/**/*.log,/var/log/apps/**/*.err
+      8a284f1a-451c-4c48-b1b4-a4e6b977264e  containers   my-namespace  myhostname.common             5514   -        -          syslog       -
+      ```
+      {: screen}
 
-ロギング構成を削除すると、名前空間からのログの転送を停止できます。
+    * 1 つのタイプのログ・ソースのロギング構成をリストする場合には、以下のようにします。
+      ```
+      bx cs logging-config-get <my_cluster> --logsource worker
+      ```
+      {: pre}
 
-**注**: この操作によって削除されるのは、syslog サーバーへのログ転送の構成のみです。 名前空間のログは引き続き {{site.data.keyword.loganalysislong_notm}} に転送されます。
+      出力例:
 
-始めに、[CLI のターゲット](cs_cli_install.html#cs_cli_configure)を、名前空間があるクラスターに設定してください。
-
-1. ロギング構成を削除します。
-
-    ```
-    bx cs logging-config-rm <my_cluster> --namespace <my_namespace>
-    ```
-    {: pre}
-    <em>&lt;my_cluster&gt;</em> をロギング構成があるクラスターの名前に、<em>&lt;my_namespace&gt;</em> を名前空間の名前にそれぞれ置き換えます。
-
-### アプリケーション、ワーカー・ノード、Kubernetes システム構成要素、Ingress コントローラーのログ転送の構成
-{: #cs_configure_log_source_logs}
-
-デフォルトで、{{site.data.keyword.containershort_notm}} は Docker コンテナー名前空間ログを {{site.data.keyword.loganalysislong_notm}} に転送します。 また、アプリケーション、ワーカー・ノード、Kubernetes クラスター、Ingress コントローラーなどの他のログ・ソースのログ転送を構成することもできます。
-{:shortdesc}
-
-それぞれのログ・ソースについては、以下のオプションを確認してください。
-
-|ログ・ソース|特性|ログ・パス|
-|----------|---------------|-----|
-|`application`|Kubernetes クラスターで実行される独自のアプリケーションのログ。|`/var/log/apps/**/*.log`、`/var/log/apps/**/*.err`
-|`worker`|Kubernetes クラスター内の仮想マシン・ワーカー・ノードのログ。|`/var/log/syslog`、`/var/log/auth.log`
-|`kubernetes`|Kubernetes システム構成要素のログ。|`/var/log/kubelet.log`、`/var/log/kube-proxy.log`
-|`ingress`|Kubernetes クラスターに送信されるネットワーク・トラフィックを管理する Ingress コントローラーのログ。|`/var/log/alb/ids/*.log`、`/var/log/alb/ids/*.err`、`/var/log/alb/customerlogs/*.log`、`/var/log/alb/customerlogs/*.err`
-{: caption="表 11. ログ・ソースの特性。" caption-side="top"}
+      ```
+      Id                                    Source    Namespace   Host                            Port   Org    Space     Protocol    Paths
+      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  worker    -           ingest.logging.ng.bluemix.net   9091   -      -         ibm         /var/log/syslog,/var/log/auth.log
+      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  worker    -           172.30.162.138                  5514   -      -         syslog      /var/log/syslog,/var/log/auth.log
+      ```
+      {: screen}
 
 #### アプリケーションのログ転送の有効化
 {: #cs_apps_enable}
@@ -1849,7 +1455,7 @@ Kibana ダッシュボードにアクセスするには、以下のいずれか�
 * ファイル拡張子 `.log` または `.err` を持つアプリケーション・ログ・ファイルのみが転送されます。
 * ログ転送を初めて有効にすると、アプリケーション・ログはヘッドから読み取られるのではなく、テールされます。 つまり、アプリケーション・ロギングが有効になる前に既に存在していたログの内容は読み取られません。 ログは、ロギングが有効になった時点から読み取られます。 ただし、ログ転送の初回有効化時以降は、ログは常に最後に中止された場所から取得されます。
 * `/var/log/apps` ホスト・パス・ボリュームをコンテナーにマウントすると、コンテナーはすべてをこの同じディレクトリーに書き込みます。 つまり、コンテナーが同じファイル名に書き込みを行う場合は、ホスト上のまったく同じファイルに書き込みます。 これが意図しない動作である場合は、各コンテナーから取得するログ・ファイルに異なる名前を付けて、コンテナーが同じログ・ファイルを上書きしないようにすることができます。
-* すべてのコンテナーが同じファイル名に書き込みを行うため、この方法で ReplicaSets のアプリケーション・ログを転送しないでください。 代わりに、アプリケーションから取得されるログを STDOUT と STDERR に書き込むことができます。 これらのログはコンテナー・ログとして収集され、コンテナー・ログは自動的に {{site.data.keyword.loganalysisshort_notm}} に転送されます。 STDOUT と STDERR に書き込まれたアプリケーション・ログを、外部の syslog サーバーに転送するには、[syslog へのログ転送の有効化](cs_cluster.html#cs_namespace_enable)の手順に従ってください。
+* すべてのコンテナーが同じファイル名に書き込みを行うため、この方法で ReplicaSets のアプリケーション・ログを転送しないでください。 代わりに、アプリケーションのログを STDOUT と STDERR に書き込んで、コンテナー・ログとして取得することができます。STDOUT と STDERR に書き込まれたアプリケーション・ログを転送するには、[ログ転送の有効化](cs_cluster.html#cs_log_sources_enable)の手順に従います。
 
 始めに、[CLI のターゲット](cs_cli_install.html#cs_cli_configure)を、ログ・ソースがあるクラスターに設定してください。
 
@@ -1883,121 +1489,13 @@ Kibana ダッシュボードにアクセスするには、以下のいずれか�
     ```
     {:pre}
 
-3. ログ転送構成を作成するには、[ワーカー・ノード、Kubernetes システム構成要素、Ingress コントローラーのログ転送の有効化](cs_cluster.html#cs_log_sources_enable)の手順に従います。
+3. ログ転送構成を作成するには、[ログ転送の有効化](cs_cluster.html#cs_log_sources_enable)の手順に従います。
 
-#### ワーカー・ノード、Kubernetes システム構成要素、Ingress コントローラーのログ転送の有効化
-{: #cs_log_sources_enable}
-
-ログは {{site.data.keyword.loganalysislong_notm}} または外部の syslog サーバーに転送することができます。 {{site.data.keyword.loganalysisshort_notm}} にログを転送すると、クラスターを作成したのと同じスペースに転送されます。 あるログ・ソースから両方のログ・コレクター・サーバーにログを転送する場合は、2 つのロギング構成を作成する必要があります。
-{:shortdesc}
-
-開始前に、以下のことを行います。
-
-1. ログを外部 syslog サーバーに転送する場合は、次の 2 つの方法で syslog プロトコルを受け入れるサーバーをセットアップできます。
-  * 独自のサーバーをセットアップして管理するか、プロバイダーが管理するサーバーを使用します。 プロバイダーがサーバーを管理する場合は、ロギング・プロバイダーからロギング・エンドポイントを取得します。
-  * コンテナーから syslog を実行します。 例えば、この[デプロイメント .yaml ファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/IBM-Bluemix/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) を使用して、Kubernetes クラスター内のコンテナーで実行されている Docker パブリック・イメージをフェッチできます。 このイメージは、パブリック・クラスター IP アドレスのポート `514` を公開し、このパブリック・クラスター IP アドレスを使用して syslog ホストを構成します。
-**注**: シドニーのロケーションにあるログを表示するには、ログを外部 syslog サーバーに転送する必要があります。
-
-2. [CLI の宛先](cs_cli_install.html#cs_cli_configure)を、ログ・ソースがあるクラスターにします。
-
-ワーカー・ノード、Kubernetes システム構成要素、または Ingress コントローラーのログ転送を有効にするには、以下のようにします。
-
-1. ログ転送構成を作成します。
-
-  * ログを {{site.data.keyword.loganalysisshort_notm}} に転送する場合には、以下のようにします。
-
-    ```
-    bx cs logging-config-create <my_cluster> --logsource <my_log_source> --type ibm
-    ```
-    {: pre}
-    <em>&lt;my_cluster&gt;</em> をクラスターの名前または ID に置き換えます。 <em>&lt;my_log_source&gt;</em> をログ・ソースに置き換えます。 指定可能な値は `application`、`worker`、`kubernetes`、`ingress` です。
-
-  * ログを外部 syslog サーバーに転送する場合には、以下のようにします。
-
-    ```
-    bx cs logging-config-create <my_cluster> --logsource <my_log_source> --hostname <log_server_hostname> --port <log_server_port> --type syslog
-    ```
-    {: pre}
-
-    <table>
-    <caption>表 12. このコマンドの構成要素について</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> このコマンドの構成要素について</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>logging-config-create</code></td>
-    <td>ログ・ソースの syslog ログ転送構成を作成するコマンド。</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;my_cluster&gt;</em></code></td>
-    <td><em>&lt;my_cluster&gt;</em> をクラスターの名前または ID に置き換えます。</td>
-    </tr>
-    <tr>
-    <td><code>--logsource <em>&lt;my_log_source&gt;</em></code></td>
-    <td><em>&lt;my_log_source&gt;</em> をログ・ソースに置き換えます。 指定可能な値は <code>application</code>、<code>worker</code>、<code>kubernetes</code>、<code>ingress</code> です。</td>
-    </tr>
-    <tr>
-    <td><code>--hostname <em>&lt;log_server_hostname&gt;</em></code></td>
-    <td><em>&lt;log_server_hostname&gt;</em> をログ・コレクター・サーバーのホスト名または IP アドレスに置き換えます。</td>
-    </tr>
-    <tr>
-    <td><code>--port <em>&lt;log_collector_port&gt;</em></code></td>
-    <td><em>&lt;log_server_port&gt;</em> をログ・コレクター・サーバーのポートに置き換えます。 ポートを指定しないと、標準ポート <code>514</code> が syslog で使用されます。</td>
-    </tr>
-    <tr>
-    <td><code>--type syslog</code></td>
-    <td>外部 syslog サーバーのログ・タイプ。</td>
-    </tr>
-    </tbody></table>
-
-2. ログ転送構成が作成されたことを確認します。
-
-    * クラスター内のすべてのロギング構成をリスト表示する場合には、以下のようにします。
-      ```
-      bx cs logging-config-get <my_cluster>
-      ```
-      {: pre}
-
-      出力例:
-
-      ```
-      Logging Configurations
-      ---------------------------------------------
-      Id                                    Source        Host             Port    Protocol   Paths
-      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes    172.30.162.138   5514    syslog     /var/log/kubelet.log,/var/log/kube-proxy.log
-      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  application   localhost        -       ibm        /var/log/apps/**/*.log,/var/log/apps/**/*.err
-
-      Container Log Namespace configurations
-      ---------------------------------------------
-      Namespace         Host             Port    Protocol
-      default           myhostname.com   5514    syslog
-      my-namespace      localhost        5514    syslog
-      ```
-      {: screen}
-
-    * 1 つのタイプのログ・ソースのロギング構成をリストする場合には、以下のようにします。
-      ```
-      bx cs logging-config-get <my_cluster> --logsource worker
-      ```
-      {: pre}
-
-      出力例:
-
-      ```
-      Id                                    Source      Host        Port   Protocol   Paths
-      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  worker      localhost   5514   syslog     /var/log/syslog,/var/log/auth.log
-      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  worker      -           -      ibm        /var/log/syslog,/var/log/auth.log
-      ```
-      {: screen}
-
-#### ログ・コレクター・サーバーの更新
+### ログ転送構成の更新
 {: #cs_log_sources_update}
 
-アプリケーション、ワーカー・ノード、Kubernetes システム構成要素、Ingress コントローラーのロギング構成を更新するには、ログ・コレクター・サーバーまたはログ・タイプを変更します。
+コンテナー、アプリケーション、ワーカー・ノード、Kubernetes システム構成要素、または Ingress アプリケーション・ロード・バランサーのロギング構成を更新できます。
 {: shortdesc}
-
-**注**: シドニーのロケーションにあるログを表示するには、ログを外部 syslog サーバーに転送する必要があります。
 
 開始前に、以下のことを行います。
 
@@ -2007,17 +1505,17 @@ Kibana ダッシュボードにアクセスするには、以下のいずれか�
 
 2. [CLI の宛先](cs_cli_install.html#cs_cli_configure)を、ログ・ソースがあるクラスターにします。
 
-ログ・ソースのログ・コレクター・サーバーを変更するには、以下のようにします。
+ロギング構成の詳細を変更するには、以下のようにします。
 
 1. ロギング構成を更新します。
 
     ```
-    bx cs logging-config-update <my_cluster> --id <log_source_id> --logsource <my_log_source> --hostname <log_server_hostname> --port <log_server_port> --type <logging_type>
+    bx cs logging-config-update <my_cluster> <log_config_id> --logsource <my_log_source> --hostname <log_server_hostname_or_IP> --port <log_server_port> --spaceName <cluster_space> --orgName <cluster_org> --type <logging_type>
     ```
     {: pre}
 
     <table>
-    <caption>表 13. このコマンドの構成要素について</caption>
+    <caption>表 12. このコマンドの構成要素について</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> このコマンドの構成要素について</th>
     </thead>
@@ -2031,20 +1529,28 @@ Kibana ダッシュボードにアクセスするには、以下のいずれか�
     <td><em>&lt;my_cluster&gt;</em> をクラスターの名前または ID に置き換えます。</td>
     </tr>
     <tr>
-    <td><code>--id <em>&lt;log_source_id&gt;</em></code></td>
-    <td><em>&lt;log_source_id&gt;</em> をログ・ソース構成の ID に置き換えます。</td>
+    <td><code><em>&lt;log_config_id&gt;</em></code></td>
+    <td><em>&lt;log_config_id&gt;</em> をログ・ソース構成の ID に置き換えます。</td>
     </tr>
     <tr>
     <td><code>--logsource <em>&lt;my_log_source&gt;</em></code></td>
-    <td><em>&lt;my_log_source&gt;</em> をログ・ソースに置き換えます。 指定可能な値は <code>application</code>、<code>worker</code>、<code>kubernetes</code>、<code>ingress</code> です。</td>
+    <td><em>&lt;my_log_source&gt;</em> をログ・ソースに置き換えます。 指定可能な値は <code>container</code>、<code>application</code>、<code>worker</code>、<code>kubernetes</code>、<code>ingress</code> です。</td>
     </tr>
     <tr>
-    <td><code>--hostname <em>&lt;log_server_hostname&gt;</em></code></td>
-    <td><em>&lt;log_server_hostname&gt;</em> をログ・コレクター・サーバーのホスト名または IP アドレスに置き換えます。</td>
+    <td><code>--hostname <em>&lt;log_server_hostname_or_IP&gt;</em></code></td>
+    <td>ロギング・タイプが <code>syslog</code> であるとき、<em>&lt;log_server_hostname_or_IP&gt;</em> を、ログ・コレクター・サービスのホスト名または IP アドレスに置き換えます。ロギング・タイプが <code>ibm</code> であるとき、<em>&lt;log_server_hostname&gt;</em> を {{site.data.keyword.loganalysislong_notm}} 取り込み URL に置き換えます。選択可能な取り込み URL のリストは、[ここを参照してください](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)。取り込み URL を指定しない場合、クラスターが作成された地域のエンドポイントが使用されます。</td>
     </tr>
     <tr>
     <td><code>--port <em>&lt;log_collector_port&gt;</em></code></td>
-    <td><em>&lt;log_server_port&gt;</em> をログ・コレクター・サーバーのポートに置き換えます。 ポートを指定しないと、標準ポート <code>514</code> が syslog で使用されます。</td>
+    <td><em>&lt;log_server_port&gt;</em> をログ・コレクター・サーバーのポートに置き換えます。 ポートを指定しないと、標準ポート <code>514</code> が <code>syslog</code> で使用され、<code>9091</code> が <code>ibm</code> で使用されます。</td>
+    </tr>
+    <tr>
+    <td><code>--spaceName <em>&lt;cluster_space&gt;</em></code></td>
+    <td><em>&lt;cluster_space&gt;</em> を、ログの送信先となるスペースの名前に置き換えます。この値はログ・タイプ <code>ibm</code> についてのみ有効で、オプションです。スペースを指定しない場合、ログはアカウント・レベルに送信されます。</td>
+    </tr>
+    <tr>
+    <td><code>--orgName <em>&lt;cluster_org&gt;</em></code></td>
+    <td><em>&lt;cluster_org&gt;</em> を、このスペースが属する組織の名前に置き換えます。この値はログ・タイプ <code>ibm</code> についてのみ有効で、スペースを指定した場合には必須です。</td>
     </tr>
     <tr>
     <td><code>--type <em>&lt;logging_type&gt;</em></code></td>
@@ -2054,45 +1560,41 @@ Kibana ダッシュボードにアクセスするには、以下のいずれか�
 
 2. ログ転送構成が更新されたことを確認します。
 
-  * クラスター内のすべてのロギング構成をリスト表示する場合には、以下のようにします。
-    ```
-    bx cs logging-config-get <my_cluster>
-    ```
-    {: pre}
+    * クラスター内のすべてのロギング構成をリスト表示する場合には、以下のようにします。
 
-    出力例:
+      ```
+      bx cs logging-config-get <my_cluster>
+      ```
+      {: pre}
 
-    ```
-    Logging Configurations
-      ---------------------------------------------
-      Id                                    Source        Host             Port    Protocol   Paths
-      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes    172.30.162.138   5514    syslog     /var/log/kubelet.log,/var/log/kube-proxy.log
-      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  application   localhost        -       ibm        /var/log/apps/**/*.log,/var/log/apps/**/*.err
+      出力例:
 
-    Container Log Namespace configurations
-      ---------------------------------------------
-      Namespace         Host             Port    Protocol
-      default           myhostname.com   5514    syslog
-      my-namespace      localhost        5514    syslog
-    ```
-    {: screen}
+      ```
+      Id                                    Source       Namespace     Host                          Port   Org      Space      Protocol     Paths
+      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes   -             172.30.162.138                5514   -        -          syslog       /var/log/kubelet.log,/var/log/kube-proxy.log
+      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  application  -             ingest.logging.ng.bluemix.net 9091   my_org   my_space   ibm          /var/log/apps/**/*.log,/var/log/apps/**/*.err
+      8a284f1a-451c-4c48-b1b4-a4e6b977264e  containers   my-namespace  myhostname.common             5514   -        -          syslog       -
+      ```
+      {: screen}
 
-  * 1 つのタイプのログ・ソースのロギング構成をリストする場合には、以下のようにします。
-    ```
-    bx cs logging-config-get <my_cluster> --logsource worker
-    ```
-    {: pre}
+    * 1 つのタイプのログ・ソースのロギング構成をリストする場合には、以下のようにします。
 
-    出力例:
+      ```
+      bx cs logging-config-get <my_cluster> --logsource worker
+      ```
+      {: pre}
 
-    ```
-    Id                                    Source      Host        Port   Protocol   Paths
-      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  worker      localhost   5514   syslog     /var/log/syslog,/var/log/auth.log
-      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  worker      -           -      ibm        /var/log/syslog,/var/log/auth.log
-    ```
-    {: screen}
+      出力例:
 
-#### ログ転送の停止
+      ```
+      Id                                    Source    Namespace   Host                            Port   Org    Space     Protocol    Paths
+      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  worker    -           ingest.logging.ng.bluemix.net   9091   -      -         ibm         /var/log/syslog,/var/log/auth.log
+      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  worker    -           172.30.162.138                  5514   -      -         syslog      /var/log/syslog,/var/log/auth.log
+      ```
+
+      {: screen}
+
+### ログ転送の停止
 {: #cs_log_sources_delete}
 
 ロギング構成を削除すると、ログの転送を停止できます。
@@ -2102,10 +1604,136 @@ Kibana ダッシュボードにアクセスするには、以下のいずれか�
 1. ロギング構成を削除します。
 
     ```
-    bx cs logging-config-rm <my_cluster> --id <log_source_id>
+    bx cs logging-config-rm <my_cluster> <log_config_id>
     ```
     {: pre}
-    <em>&lt;my_cluster&gt;</em> をロギング構成が含まれているクラスターの名前で置き換え、<em>&lt;log_source_id&gt;</em> をログ・ソース構成の ID で置き換えます。
+    <em>&lt;my_cluster&gt;</em> をロギング構成が含まれているクラスターの名前で置き換え、<em>&lt;log_config_id&gt;</em> をログ・ソース構成の ID で置き換えます。
+
+### Kubernetes API 監査ログのログ転送の構成
+{: #cs_configure_api_audit_logs}
+
+Kubernetes API 監査ログは、クラスターから Kubernetes API サーバーへの呼び出しを収集します。Kubernetes API 監査ログの収集を開始するために、Kubernetes API サーバーを構成して、クラスター用の Web フック・バックエンドをセットアップすることができます。この Web フック・バックエンドにより、ログをリモート・サーバーに送信することができます。Kubernetes 監査ログについて詳しくは、Kubernetes 資料の<a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="_blank">監査トピック <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。
+
+**注:**
+* Kubernetes API 監査ログの転送は、Kubernetes バージョン 1.7 以降でのみサポートされています。
+* 現在は、このロギング構成のすべてのクラスターで、デフォルトの監査ポリシーが使用されます。
+
+#### Kubernetes API 監査ログの転送の有効化
+{: #cs_audit_enable}
+
+始めに、[CLI のターゲット](cs_cli_install.html#cs_cli_configure)を、API サーバー監査ログの収集対象となるクラスターに設定します。
+
+1. API サーバー構成の Web フック・バックエンドを設定します。Web フック構成は、このコマンドのフラグで指定する情報に基づいて作成されます。どのフラグにも情報を指定しない場合、デフォルトの Web フック構成が使用されます。
+
+    ```
+    bx cs apiserver-config-set audit-webhook <my_cluster> --remoteServer <server_URL_or_IP> --caCert <CA_cert_path> --clientCert <client_cert_path> --clientKey <client_key_path>
+    ```
+    {: pre}
+
+    <table>
+    <caption>表 13. このコマンドの構成要素について</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png"/> このコマンドの構成要素について</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>apiserver-config-set</code></td>
+    <td>クラスターの Kubernetes API サーバー構成のオプションを設定するコマンド。</td>
+    </tr>
+    <tr>
+    <td><code>audit-webhook</code></td>
+    <td>クラスターの Kubernetes API サーバーの監査 Web フック構成を設定するサブコマンド。</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;my_cluster&gt;</em></code></td>
+    <td><em>&lt;my_cluster&gt;</em> をクラスターの名前または ID に置き換えます。</td>
+    </tr>
+    <tr>
+    <td><code>--remoteServer <em>&lt;server_URL&gt;</em></code></td>
+    <td><em>&lt;server_URL&gt;</em> を、ログの送信先となるリモート・ロギング・サービスの URL または IP アドレスに置き換えます。非セキュアな serverURL を指定した場合、すべての証明書は無視されます。リモート・サーバーの URL や IP アドレスを指定しない場合は、デフォルトの QRadar 構成が使用され、ログはクラスターが属する地域の QRadar インスタンスに送信されます。</td>
+    </tr>
+    <tr>
+    <td><code>--caCert <em>&lt;CA_cert_path&gt;</em></code></td>
+    <td><em>&lt;CA_cert_path&gt;</em> を、リモート・ロギング・サービスの検証に使用される CA 証明書のファイル・パスに置き換えます。</td>
+    </tr>
+    <tr>
+    <td><code>--clientCert <em>&lt;client_cert_path&gt;</em></code></td>
+    <td><em>&lt;client_cert_path&gt;</em> を、リモート・ロギング・サービスに対する認証に使用されるクライアント証明書のファイル・パスに置き換えます。</td>
+    </tr>
+    <tr>
+    <td><code>--clientKey <em>&lt;client_key_path&gt;</em></code></td>
+    <td><em>&lt;client_key_path&gt;</em> を、リモート・ロギング・サービスへの接続に使用される、対応するクライアント・キーのファイル・パスに置き換えます。</td>
+    </tr>
+    </tbody></table>
+
+2. リモート・ロギング・サービスの URL を参照して、ログ転送が有効化されていることを確認します。
+
+    ```
+    bx cs apiserver-config-get audit-webhook <my_cluster>
+    ```
+    {: pre}
+
+    出力例:
+    ```
+    OK
+    Server:			https://8.8.8.8
+    ```
+    {: screen}
+
+3. Kubernetes マスターを再始動して、構成の更新を適用します。
+
+    ```
+    bx cs apiserver-refresh <my_cluster>
+    ```
+    {: pre}
+
+#### Kubernetes API 監査ログの転送の停止
+{: #cs_audit_delete}
+
+クラスターの API サーバーの Web フック・バックエンド構成を無効にすることにより、監査ログの転送を停止できます。
+
+始めに、[CLI のターゲット](cs_cli_install.html#cs_cli_configure)を、API サーバー監査ログの収集停止の対象となるクラスターに設定します。
+
+1. クラスターの API サーバーの Web フック・バックエンド構成を無効にします。
+
+    ```
+    bx cs apiserver-config-unset audit-webhook <my_cluster>
+    ```
+    {: pre}
+
+2. Kubernetes マスターを再始動して、構成の更新を適用します。
+
+    ```
+    bx cs apiserver-refresh <my_cluster>
+    ```
+    {: pre}
+
+### ログの表示
+{: #cs_view_logs}
+
+クラスターとコンテナーのログを表示するには、Kubernetes と Docker の標準的なロギング機能を使用します。
+{:shortdesc}
+
+#### {{site.data.keyword.loganalysislong_notm}}
+{: #cs_view_logs_k8s}
+
+標準クラスターの場合、Kubernetes クラスターの作成時にログインした {{site.data.keyword.Bluemix_notm}} アカウントにログがあります。 クラスターの作成時またはロギング構成の作成時に {{site.data.keyword.Bluemix_notm}} スペースを指定した場合、ログはそのスペースに配置されます。ログは、コンテナー外部からモニターされて転送されます。 コンテナーのログには Kibana ダッシュボードを使用してアクセスできます。 ロギングについて詳しくは、[{{site.data.keyword.containershort_notm}} のロギング](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes)を参照してください。
+
+**注**: クラスターまたはロギング構成の作成時にスペースを指定した場合、アカウント所有者がログを表示するには、そのスペースに対する管理者、開発者、または監査員の許可が必要です。{{site.data.keyword.containershort_notm}} のアクセス・ポリシーとアクセス権限の変更について詳しくは、[クラスター・アクセス権限の管理](cs_cluster.html#cs_cluster_user)を参照してください。 権限を変更した後に、ログの表示が開始するまで最大で 24 時間かかります。
+
+Kibana ダッシュボードにアクセスするには、以下のいずれかの URL にアクセスし、クラスターを作成した {{site.data.keyword.Bluemix_notm}} アカウントまたはスペースを選択します。
+- 米国南部および米国東部: https://logging.ng.bluemix.net
+- 英国南部および中欧: https://logging.eu-fra.bluemix.net
+- 南アジア太平洋地域: https://logging.au-syd.bluemix.net
+
+ログの表示について詳しくは、[Web ブラウザーから Kibana へのナビゲート](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser)を参照してください。
+
+#### Docker ログ
+{: #cs_view_logs_docker}
+
+組み込みの Docker ロギング機能を活用して、標準の STDOUT と STDERR 出力ストリームのアクティビティーを検討することができます。 詳しくは、[Kubernetes クラスターで実行されるコンテナーのコンテナー・ログの表示](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes)を参照してください。
+
+<br />
 
 
 ## クラスター・モニタリングの構成
@@ -2140,7 +1768,7 @@ Kubernetes と Docker の標準機能を使用して、クラスターとアプ�
 ### Autorecovery を使用したワーカー・ノードの正常性モニタリングの構成
 {: #cs_configure_worker_monitoring}
 
-{{site.data.keyword.containerlong_notm}} Autorecovery システムは、Kubernetes バージョン 1.7 以降の既存のクラスターにデプロイできます。 Autorecovery システムは、さまざまな検査機能を使用してワーカー・ノードの正常性状況を照会します。 Autorecovery は、構成された検査に基づいて正常でないワーカー・ノードを検出すると、ワーカー・ノードの OS の再ロードのような修正アクションをトリガーします。 修正アクションは、一度に 1 つのワーカー・ノードに対してのみ実行されます。 1 つのワーカー・ノードの修正アクションが正常に完了してからでないと、別のワーカー・ノードの修正アクションは実行されません。
+{{site.data.keyword.containerlong_notm}} Autorecovery システムは、Kubernetes バージョン 1.7 以降の既存のクラスターにデプロイできます。 Autorecovery システムは、さまざまな検査機能を使用してワーカー・ノードの正常性状況を照会します。 Autorecovery は、構成された検査に基づいて正常でないワーカー・ノードを検出すると、ワーカー・ノードの OS の再ロードのような修正アクションをトリガーします。 修正アクションは、一度に 1 つのワーカー・ノードに対してのみ実行されます。 1 つのワーカー・ノードの修正アクションが正常に完了してからでないと、別のワーカー・ノードの修正アクションは実行されません。 詳しくは、[Autorecovery に関するブログ投稿 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/) を参照してください。
 **注**: Autorecovery が正常に機能するためには、1 つ以上の正常なノードが必要です。 Autorecovery でのアクティブな検査は、複数のワーカー・ノードが存在するクラスターでのみ構成します。
 
 始めに、[CLI のターゲット](cs_cli_install.html#cs_cli_configure)を、ワーカー・ノードの状況を検査するクラスターに設定してください。
@@ -2194,7 +1822,7 @@ Kubernetes と Docker の標準機能を使用して、クラスターとアプ�
     {:codeblock}
 
     <table>
-    <caption>表 15. YAML ファイルの構成要素について</caption>
+    <caption>表 14. YAML ファイルの構成要素について</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
     </thead>
@@ -2418,7 +2046,7 @@ Weave Scope をクラスターで使用するには、以下のようにしま�
 クラスターの使用を終了したとき、クラスターがリソースを消費しないように削除することができます。
 {:shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} ライト・アカウントまたは従量課金 (PAYG) アカウントで作成したライト・クラスターと標準クラスターが不要になった場合は、ユーザーが手動で削除する必要があります。
+従量課金 (PAYG) アカウントで作成したライト・クラスターと標準クラスターが不要になった場合は、ユーザーが手動で削除する必要があります。
 
 クラスターを削除すると、コンテナー、ポッド、バインド済みサービス、シークレットなど、クラスター上のリソースも削除されます。 クラスターを削除するときにストレージを削除しない場合は、{{site.data.keyword.Bluemix_notm}} GUI 内の IBM Cloud インフラストラクチャー (SoftLayer) ダッシュボードを使用してストレージを削除できます。 毎月の課金サイクルの規定で、永続ボリューム請求を月の最終日に削除することはできません。 永続ボリューム請求を月の末日に削除した場合、削除は翌月初めまで保留状態になります。
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-28"
+lastupdated: "2017-12-01"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2017-11-28"
 클러스터를 작성하고 관리하려면 다음 명령을 참조하십시오.
 {:shortdesc}
 
-**팁:** `bx cr` 명령을 찾고 계십니까? [{{site.data.keyword.registryshort_notm}} CLI 참조](/docs/cli/plugins/registry/index.html)를 확인하십시오. `kubectl` 명령을 찾고 계십니까? [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/user-guide/kubectl/v1.5/)를 참조하십시오.
+**팁:** `bx cr` 명령을 찾고 계십니까? [{{site.data.keyword.registryshort_notm}} CLI 참조](/docs/cli/plugins/registry/index.html)를 확인하십시오. `kubectl` 명령을 찾고 계십니까? [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)를 참조하십시오.
 
 
 <!--[https://github.ibm.com/alchemy-containers/armada-cli ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.ibm.com/alchemy-containers/armada-cli)-->
@@ -445,8 +445,6 @@ kube-version: <em>&lt;kube-version&gt;</em>
 
 클러스터에 {{site.data.keyword.Bluemix_notm}} 서비스를 추가합니다.
 
-**팁:** {{site.data.keyword.Bluemix_dedicated_notm}} 사용자의 경우 [{{site.data.keyword.Bluemix_dedicated_notm}}(비공개 베타)의 클러스터에 {{site.data.keyword.Bluemix_notm}} 서비스 추가](cs_cluster.html#binding_dedicated)를 참조하십시오.
-
 <strong>명령 옵션</strong>:
 
    <dl>
@@ -659,13 +657,13 @@ Kubernetes 마스터를 기본 API 버전으로 업데이트합니다. 업데이
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
-   
+
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
-   <dd>클러스터의 Kubernetes 버전입니다. 이 플래그를 지정하지 않으면 Kubernetes 마스터가 기본 API 버전으로 업데이트됩니다. 사용 가능한 버전을 보려면 [bx cs kube-versions](#cs_kube_versions)를 실행하십시오.이 값은 선택사항입니다.</dd>
+   <dd>클러스터의 Kubernetes 버전입니다. 이 플래그를 지정하지 않으면 Kubernetes 마스터가 기본 API 버전으로 업데이트됩니다. 사용 가능한 버전을 보려면 [bx cs kube-versions](#cs_kube_versions)를 실행하십시오. 이 값은 선택사항입니다.</dd>
 
    <dt><code>-f</code></dt>
    <dd>사용자 프롬프트를 표시하지 않고 마스터 업데이트를 강제 실행하려면 이 옵션을 사용하십시오. 이 값은 선택사항입니다.</dd>
-   
+
    <dt><code>--force-update</code></dt>
    <dd>변경 시 부 버전의 차이가 2보다 큰 경우에도 업데이트를 시도합니다. 이 값은 선택사항입니다.</dd>
    </dl>
@@ -707,7 +705,7 @@ Kubernetes 마스터를 기본 API 버전으로 업데이트합니다. 업데이
    <dl>
    <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
    <dd>IBM Cloud 인프라(SoftLayer) 계정 사용자 이름입니다. 이 값은 필수입니다.</dd>
-   
+
 
    <dt><code>--infrastructure-api-key <em>API_KEY</em></code></dt>
    <dd>IBM Cloud 인프라(SoftLayer) 계정 API 키입니다. 이 값은 필수입니다. <p>
@@ -982,8 +980,8 @@ API 키를 생성하려면 다음을 수행하십시오. <ol>
 {: #cs_machine_types}
 
 작업자 노드에 대해 사용 가능한 시스템 유형의 목록을 봅니다. 각각의 시스템 유형에는
-클러스터의 각 작업자 노드에 대한 가상 CPU, 메모리 및 디스크 공간의 양이 포함됩니다.  
-- 이름에 `u2c` 또는 `b2c`가 있는 시스템 유형은 신뢰성을 위해 SAN(Storage Area Networing) 대신 로컬 디스크를 사용합니다. 신뢰성을 갖게 되면 로컬 디스크에 바이트를 직렬화하는 경우 처리량이 많아지고 네트워크 장애로 인한 파일 시스템 성능 저하를 줄일 수 있습니다. 이러한 시스템 유형에는 OS 파일 시스템을 위한 25GB 로컬 디스크 스토리지 및 모든 컨테이너 데이터가 기록되는 디렉토리 `/var/lib/docker`를 위한 100GB 로컬 디스크 스토리지가 포함됩니다. 
+클러스터의 각 작업자 노드에 대한 가상 CPU, 메모리 및 디스크 공간의 양이 포함됩니다. 
+- 이름에 `u2c` 또는 `b2c`가 있는 시스템 유형은 신뢰성을 위해 SAN(Storage Area Networing) 대신 로컬 디스크를 사용합니다. 신뢰성을 갖게 되면 로컬 디스크에 바이트를 직렬화하는 경우 처리량이 많아지고 네트워크 장애로 인한 파일 시스템 성능 저하를 줄일 수 있습니다. 이러한 시스템 유형에는 OS 파일 시스템을 위한 25GB 로컬 디스크 스토리지 및 모든 컨테이너 데이터가 기록되는 디렉토리 `/var/lib/docker`를 위한 100GB 로컬 디스크 스토리지가 포함됩니다.
 - 이름에 `encrypted`가 있는 시스템 유형은 호스트의 Docker 데이터를 암호화합니다. 모든 컨테이너 데이터가 저장된 `/var/lib/docker` 디렉토리는 LUKS 암호화를 통해 암호화됩니다.
 - 이름에 `u1c` 또는 `b1c`가 있는 시스템 유형은 더 이상 사용되지 않습니다(예: `u1c.2x4`). `u2c` 및 `b2c` 시스템 유형 사용을 시작하려면 `bx cs worker-add` 명령을 사용하여 업데이트된 시스템 유형의 작업자 노드를 추가하십시오. 그런 다음 `bx cs worker-rm` 명령을 사용하여 더 이상 사용되지 않는 시스템 유형을 사용하는 작업자 노드를 제거하십시오.
 </p>
@@ -1292,13 +1290,13 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
 
    <dt><em>CLUSTER</em></dt>
    <dd>사용 가능한 작업자 노드를 나열하는 클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
-   
+
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
    <dd>클러스터의 Kubernetes 버전입니다. 이 플래그를 지정하지 않으면 작업자 노드 기본 버전으로 업데이트됩니다. 사용 가능한 버전을 보려면 [bx cs kube-versions](#cs_kube_versions)를 실행하십시오. 이 값은 선택사항입니다.</dd>
 
    <dt><code>-f</code></dt>
    <dd>사용자 프롬프트를 표시하지 않고 마스터 업데이트를 강제 실행하려면 이 옵션을 사용하십시오. 이 값은 선택사항입니다.</dd>
-   
+
    <dt><code>--force-update</code></dt>
    <dd>변경 시 부 버전의 차이가 2보다 큰 경우에도 업데이트를 시도합니다. 이 값은 선택사항입니다.</dd>
 

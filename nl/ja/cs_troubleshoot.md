@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-28"
+lastupdated: "2017-12-14"
 
 ---
 
@@ -31,6 +31,8 @@ lastupdated: "2017-11-28"
 {: shortdesc}
 
 <br />
+
+
 
 
 ## クラスターのデバッグ
@@ -127,7 +129,7 @@ lastupdated: "2017-11-28"
 4.  ワーカー・ノードの詳細情報をリストします。
 
   ```
-  bx cs worker-get <worker_node_id>
+  bx cs worker-get [<cluster_name_or_id>] <worker_node_id>
   ```
   {: pre}
 
@@ -166,6 +168,8 @@ lastupdated: "2017-11-28"
   </table>
 
 <br />
+
+
 
 
 ## アプリ・デプロイメントのデバッグ
@@ -209,6 +213,8 @@ lastupdated: "2017-11-28"
 <br />
 
 
+
+
 ## kubectl のローカル・クライアントとサーバーのバージョンの特定
 
 ローカルまたはクラスターで実行されている Kubernetes CLI のバージョンを調べるには、以下のコマンドを実行して、バージョンを確認します。
@@ -227,6 +233,8 @@ Client Version: v1.5.6
 {: screen}
 
 <br />
+
+
 
 
 ## クラスターの作成中に IBM Cloud インフラストラクチャー (SoftLayer) アカウントに接続できない
@@ -268,6 +276,66 @@ We were unable to connect to your IBM Cloud infrastructure (SoftLayer) account. 
 <br />
 
 
+## ファイアウォールがあるために CLI コマンド `bx`、`kubectl`、または `calicoctl` を実行できない
+{: #ts_firewall_clis}
+
+{: tsSymptoms}
+CLI からコマンド `bx`、`kubectl`、または `calicoctl` を実行すると、失敗します。
+
+{: tsCauses}
+ローカル・システムからプロキシーまたはファイアウォール経由での公共のエンドポイントへのアクセスが企業ネットワーク・ポリシーによって禁止されている可能性があります。
+
+{: tsResolve}
+[CLI コマンドでの TCP アクセスを許可します](cs_security.html#opening_ports)。このタスクには、[管理者アクセス・ポリシー](cs_cluster.html#access_ov)が必要です。 現在の[アクセス・ポリシー](cs_cluster.html#view_access)を確認してください。
+
+
+## ファイアウォールがあるためにワーカー・ノードが接続しない
+{: #cs_firewall}
+
+{: tsSymptoms}
+ワーカー・ノードを接続できない場合、さまざまな症状が出現することがあります。 kubectl プロキシーに障害が起きると、またはクラスター内のサービスにアクセスしようとして接続が失敗すると、次のいずれかのメッセージが表示されることがあります。
+
+  ```
+  Connection refused
+  ```
+  {: screen}
+
+  ```
+  Connection timed out
+  ```
+  {: screen}
+
+  ```
+  Unable to connect to the server: net/http: TLS handshake timeout
+  ```
+  {: screen}
+
+kubectl exec、attach、または logs を実行する場合、以下のメッセージが表示されることがあります。
+
+  ```
+  Error from server: error dialing backend: dial tcp XXX.XXX.XXX:10250: getsockopt: connection timed out
+  ```
+  {: screen}
+
+kubectl プロキシーが正常に実行されても、ダッシュボードを使用できない場合は、次のエラー・メッセージが表示されることがあります。
+
+  ```
+  timeout on 172.xxx.xxx.xxx
+  ```
+  {: screen}
+
+
+
+{: tsCauses}
+追加のファイアウォールを設定したか、IBM Cloud インフラストラクチャー (SoftLayer) アカウントの既存のファイアウォール設定をカスタマイズした可能性があります。 {{site.data.keyword.containershort_notm}} では、ワーカー・ノードと Kubernetes マスター間で通信を行うには、特定の IP アドレスとポートが開いている必要があります。 別の原因として、ワーカー・ノードが再ロード・ループにはまっている可能性があります。
+
+{: tsResolve}
+[クラスターからインフラストラクチャー・リソースや他のサービスへのアクセスを許可](cs_security.html#firewall_outbound)します。このタスクには、[管理者アクセス・ポリシー](cs_cluster.html#access_ov)が必要です。 現在の[アクセス・ポリシー](cs_cluster.html#view_access)を確認してください。
+
+<br />
+
+
+
 ## SSH によるワーカー・ノードへのアクセスが失敗する
 {: #cs_ssh_worker}
 
@@ -283,86 +351,28 @@ SSH 接続を使用してワーカー・ノードにアクセスすることは�
 <br />
 
 
-## ポッドが保留状態のままである
-{: #cs_pods_pending}
+
+
+## ワーカー・ノードを更新または再ロードした後に、重複するノードとポッドが表示される
+{: #cs_duplicate_nodes}
 
 {: tsSymptoms}
-`kubectl get pods` を実行すると、ポッドの状態が **Pending** になる場合があります。
+`kubectl get nodes` を実行すると、状況が **NotReady** の重複したワーカー・ノードが表示されます。 **NotReady** のワーカー・ノードにはパブリック IP アドレスがありますが、**Ready** のワーカー・ノードにはプライベート IP アドレスがあります。
 
 {: tsCauses}
-Kubernetes クラスターを作成したばかりの場合は、まだワーカー・ノードが構成中の可能性があります。 クラスターが以前から存在するものである場合は、ポッドをデプロイするための十分な容量がクラスター内で不足している可能性があります。
+以前のクラスターでは、クラスターのパブリック IP アドレスごとにワーカー・ノードがリストされていました。 現在は、ワーカー・ノードはクラスターのプライベート IP アドレスごとにリストされています。 ノードを再ロードまたは更新すると、IP アドレスは変更されますがパブリック IP アドレスへの参照は残ります。
 
 {: tsResolve}
-このタスクには、[管理者アクセス・ポリシー](cs_cluster.html#access_ov)が必要です。 現在の[アクセス・ポリシー](cs_cluster.html#view_access)を確認してください。
-
-Kubernetes クラスターを作成したばかりの場合は、以下のコマンドを実行して、ワーカー・ノードが初期化するまで待ちます。
-
-```
-kubectl get nodes
-```
-{: pre}
-
-クラスターが以前から存在するものである場合は、クラスターの容量を確認します。
-
-1.  デフォルトのポート番号でプロキシーを設定します。
+これらの重複によってサービスが中断されることはありませんが、以前のワーカー・ノード参照を API サーバーから除去する必要があります。
 
   ```
-  kubectl proxy
-  ```
-   {: pre}
-
-2.  Kubernetes ダッシュボードを開きます。
-
-  ```
-  http://localhost:8001/ui
+  kubectl delete node <node_name1> <node_name2>
   ```
   {: pre}
 
-3.  ポッドをデプロイするための十分な容量がクラスター内にあるか確認します。
-
-4.  クラスターの容量が足りない場合は、クラスターに別のワーカー・ノードを追加します。
-
-  ```
-  bx cs worker-add <cluster name or id> 1
-  ```
-  {: pre}
-
-5.  ワーカー・ノードが完全にデプロイされたのにまだポッドが **pending** 状態のままである場合は、[Kubernetes の資料![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) を参照して、ポッドの pending 状態のトラブルシューティングを行ってください。
-
 <br />
 
 
-## ポッドが作成状態で停滞している
-{: #stuck_creating_state}
-
-{: tsSymptoms}
-`kubectl get pods -o wide` を実行すると、同じワーカー・ノードで稼働している複数のポッドが `ContainerCreating` 状態で停滞していることが判明します。
-
-{: tsCauses}
-ワーカー・ノード上のファイル・システムは読み取り専用です。
-
-{: tsResolve}
-1. ワーカー・ノード上またはコンテナー内に保管されている可能性のあるデータをバックアップします。
-2. 以下のコマンドを実行してワーカー・ノードを再作成します。
-
-<pre class="pre"><code>bx cs worker-reload &lt;cluster_name&gt; &lt;worker_id&gt;</code></pre>
-
-<br />
-
-
-## コンテナーが開始しない
-{: #containers_do_not_start}
-
-{: tsSymptoms}
-ポッドはクラスターに正常にデプロイされましたが、コンテナーが開始しません。
-
-{: tsCauses}
-レジストリーの割り当て量に到達すると、コンテナーが開始しないことがあります。
-
-{: tsResolve}
-[{{site.data.keyword.registryshort_notm}} 内のストレージを解放してください。](../services/Registry/registry_quota.html#registry_quota_freeup)
-
-<br />
 
 
 ## 新しいワーカー・ノード上のポッドへのアクセスがタイムアウトで失敗する
@@ -426,220 +436,94 @@ kubectl get nodes
 <br />
 
 
-## ファイアウォールがあるためにワーカー・ノードが接続しない
-{: #cs_firewall}
+
+
+## ポッドが保留状態のままである
+{: #cs_pods_pending}
 
 {: tsSymptoms}
-ワーカー・ノードを接続できない場合、さまざまな症状が出現することがあります。 kubectl プロキシーに障害が起きると、またはクラスター内のサービスにアクセスしようとして接続が失敗すると、次のいずれかのメッセージが表示されることがあります。
-
-  ```
-  Connection refused
-  ```
-  {: screen}
-
-  ```
-  Connection timed out
-  ```
-  {: screen}
-
-  ```
-  Unable to connect to the server: net/http: TLS handshake timeout
-  ```
-  {: screen}
-
-kubectl exec、attach、または logs を実行する場合、以下のメッセージが表示されることがあります。
-
-  ```
-  Error from server: error dialing backend: dial tcp XXX.XXX.XXX:10250: getsockopt: connection timed out
-  ```
-  {: screen}
-
-kubectl プロキシーが正常に実行されても、ダッシュボードを使用できない場合は、次のエラー・メッセージが表示されることがあります。
-
-  ```
-  timeout on 172.xxx.xxx.xxx
-  ```
-  {: screen}
-
-
+`kubectl get pods` を実行すると、ポッドの状態が **Pending** になる場合があります。
 
 {: tsCauses}
-追加のファイアウォールを設定したか、IBM Cloud インフラストラクチャー (SoftLayer) アカウントの既存のファイアウォール設定をカスタマイズした可能性があります。 {{site.data.keyword.containershort_notm}} では、ワーカー・ノードと Kubernetes マスター間で通信を行うには、特定の IP アドレスとポートが開いている必要があります。 別の原因として、ワーカー・ノードが再ロード・ループにはまっている可能性があります。
+Kubernetes クラスターを作成したばかりの場合は、まだワーカー・ノードが構成中の可能性があります。 クラスターが以前から存在するものである場合は、ポッドをデプロイするための十分な容量がクラスター内で不足している可能性があります。
 
 {: tsResolve}
 このタスクには、[管理者アクセス・ポリシー](cs_cluster.html#access_ov)が必要です。 現在の[アクセス・ポリシー](cs_cluster.html#view_access)を確認してください。
 
-カスタマイズ済みのファイアウォールで、以下のポートと IP アドレスを開きます。
+Kubernetes クラスターを作成したばかりの場合は、以下のコマンドを実行して、ワーカー・ノードが初期化するまで待ちます。
 
-1.  以下を実行して、クラスター内のすべてのワーカー・ノードのパブリック IP アドレスをメモします。
+```
+kubectl get nodes
+```
+{: pre}
+
+クラスターが以前から存在するものである場合は、クラスターの容量を確認します。
+
+1.  デフォルトのポート番号でプロキシーを設定します。
 
   ```
-  bx cs workers '<cluster_name_or_id>'
+  kubectl proxy
+  ```
+   {: pre}
+
+2.  Kubernetes ダッシュボードを開きます。
+
+  ```
+  http://localhost:8001/ui
   ```
   {: pre}
 
-2.  ファイアウォールで、ワーカー・ノードからのアウトバウンド接続として、ソース・ワーカー・ノードから、`<each_worker_node_publicIP>` の宛先 TCP/UDP ポート範囲 (20000 から 32767 まで) およびポート 443 への発信ネットワーク・トラフィック、および以下の IP アドレスとネットワーク・グループへの発信ネットワーク・トラフィックを許可します。
-    - **重要**: ブートストラッピング・プロセスの際にロードのバランスを取るため、地域内のすべてのロケーションのために、ポート 443 への発信トラフィックを許可する必要があります。 例えば、クラスターが米国南部にある場合、ポート 443 からすべてのロケーションの IP アドレス (dal10、dal12、dal13) へのトラフィックを許可する必要があります。
-    <p>
-  <table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
-      <thead>
-      <th>地域</th>
-      <th>ロケーション</th>
-      <th>IP アドレス</th>
-      </thead>
-    <tbody>
-      <tr>
-        <td>北アジア太平洋地域</td>
-        <td>hkg02<br>tok02</td>
-        <td><code>169.56.132.234</code><br><code>161.202.126.210</code></td>
-       </tr>
-      <tr>
-         <td>南アジア太平洋地域</td>
-         <td>mel01<br>syd01<br>syd04</td>
-         <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19</code></td>
-      </tr>
-      <tr>
-         <td>中欧</td>
-         <td>ams03<br>fra02<br>par01</td>
-         <td><code>169.50.169.110</code><br><code>169.50.56.174</code><br><code>159.8.86.149</code></td>
-        </tr>
-      <tr>
-        <td>英国南部</td>
-        <td>lon02<br>lon04</td>
-        <td><code>159.122.242.78</code><br><code>158.175.65.170</code></td>
-      </tr>
-      <tr>
-        <td>米国東部</td>
-         <td>tor01<br>wdc06<br>wdc07</td>
-         <td><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
-      </tr>
-      <tr>
-        <td>米国南部</td>
-        <td>dal10<br>dal12<br>dal13</td>
-        <td><code>169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
-      </tr>
-      </tbody>
-    </table>
-</p>
+3.  ポッドをデプロイするための十分な容量がクラスター内にあるか確認します。
 
-3.  ワーカー・ノードから {{site.data.keyword.registrylong_notm}} への発信ネットワーク・トラフィックを許可します。
-    - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
-    - <em>&lt;registry_publicIP&gt;</em> は、トラフィックを許可するレジストリー地域のすべてのアドレスに置き換えます。
-      <p>
-<table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
-      <thead>
-        <th>コンテナー地域</th>
-        <th>レジストリー・アドレス</th>
-        <th>レジストリー IP アドレス</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td>北アジア太平洋地域、南アジア太平洋地域</td>
-          <td>registry.au-syd.bluemix.net</td>
-          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
-        </tr>
-        <tr>
-          <td>中欧</td>
-          <td>registry.eu-de.bluemix.net</td>
-          <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></td>
-         </tr>
-         <tr>
-          <td>英国南部</td>
-          <td>registry.eu-gb.bluemix.net</td>
-          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></td>
-         </tr>
-         <tr>
-          <td>米国東部、米国南部</td>
-          <td>registry.ng.bluemix.net</td>
-          <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></td>
-         </tr>
-        </tbody>
-      </table>
-</p>
+4.  クラスターの容量が足りない場合は、クラスターに別のワーカー・ノードを追加します。
 
-4.  オプション: ワーカー・ノードから {{site.data.keyword.monitoringlong_notm}} サービスと {{site.data.keyword.loganalysislong_notm}} サービスへの発信ネットワーク・トラフィックを許可します。
-    - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
-    - <em>&lt;monitoring_publicIP&gt;</em> は、トラフィックを許可するモニタリング地域のすべてのアドレスに置き換えます。
-      <p><table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
-        <thead>
-        <th>コンテナー地域</th>
-        <th>モニタリング・アドレス</th>
-        <th>モニタリング IP アドレス</th>
-        </thead>
-      <tbody>
-        <tr>
-         <td>中欧</td>
-         <td>metrics.eu-de.bluemix.net</td>
-         <td><code>159.122.78.136/29</code></td>
-        </tr>
-        <tr>
-         <td>英国南部</td>
-         <td>metrics.eu-gb.bluemix.net</td>
-         <td><code>169.50.196.136/29</code></td>
-        </tr>
-        <tr>
-          <td>米国東部、米国南部、北アジア太平洋地域</td>
-          <td>metrics.ng.bluemix.net</td>
-          <td><code>169.47.204.128/29</code></td>
-         </tr>
-         
-        </tbody>
-      </table>
-</p>
-    - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
-    - <em>&lt;logging_publicIP&gt;</em> は、トラフィックを許可するロギング地域のすべてのアドレスに置き換えます。
-      <p><table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
-        <thead>
-        <th>コンテナー地域</th>
-        <th>ロギング・アドレス</th>
-        <th>ロギング IP アドレス</th>
-        </thead>
-      <tbody>
-        <tr>
-         <td>中欧</td>
-         <td>ingest.logging.eu-de.bluemix.net</td>
-         <td><code>169.50.25.125</code></td>
-        </tr>
-        <tr>
-         <td>英国南部</td>
-         <td>ingest.logging.eu-gb.bluemix.net</td>
-         <td><code>169.50.115.113</code></td>
-        </tr>
-        <tr>
-          <td>米国東部、米国南部、北アジア太平洋地域</td>
-          <td>ingest.logging.ng.bluemix.net</td>
-          <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
-         </tr>
-        </tbody>
-      </table>
-</p>
+  ```
+  bx cs worker-add <cluster name or id> 1
+  ```
+  {: pre}
 
-5. プライベート・ファイアウォールがある場合、IBM Cloud インフラストラクチャー (SoftLayer) のプライベート IP のために適切な範囲を許可します。 [このリンク](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)の **Backend (private) Network** で始まるセクションを参照してください。
-    - 使用している[地域内のロケーション](cs_regions.html#locations)をすべて追加します
-    - dal01 のロケーション (データ・センター) を追加する必要があることに注意してください
-    - ポート 80 および 443 を開いて、クラスターのブートストラッピング処理を可能にします
+5.  ワーカー・ノードが完全にデプロイされたのにまだポッドが **pending** 状態のままである場合は、[Kubernetes の資料![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) を参照して、ポッドの pending 状態のトラブルシューティングを行ってください。
 
 <br />
 
 
-## ワーカー・ノードを更新または再ロードした後に、重複するノードとポッドが表示される
-{: #cs_duplicate_nodes}
+
+
+## ポッドが作成状態で停滞している
+{: #stuck_creating_state}
 
 {: tsSymptoms}
-`kubectl get nodes` を実行すると、状況が **NotReady** の重複したワーカー・ノードが表示されます。 **NotReady** のワーカー・ノードにはパブリック IP アドレスがありますが、**Ready** のワーカー・ノードにはプライベート IP アドレスがあります。
+`kubectl get pods -o wide` を実行すると、同じワーカー・ノードで稼働している複数のポッドが `ContainerCreating` 状態で停滞していることが判明します。
 
 {: tsCauses}
-以前のクラスターでは、クラスターのパブリック IP アドレスごとにワーカー・ノードがリストされていました。 現在は、ワーカー・ノードはクラスターのプライベート IP アドレスごとにリストされています。 ノードを再ロードまたは更新すると、IP アドレスは変更されますがパブリック IP アドレスへの参照は残ります。
+ワーカー・ノード上のファイル・システムは読み取り専用です。
 
 {: tsResolve}
-これらの重複によってサービスが中断されることはありませんが、以前のワーカー・ノード参照を API サーバーから除去する必要があります。
+1. ワーカー・ノード上またはコンテナー内に保管されている可能性のあるデータをバックアップします。
+2. 以下のコマンドを実行してワーカー・ノードを再作成します。
 
-  ```
-  kubectl delete node <node_name1> <node_name2>
-  ```
-  {: pre}
+<pre class="pre"><code>bx cs worker-reload &lt;cluster_name&gt; &lt;worker_id&gt;</code></pre>
 
 <br />
+
+
+
+
+## コンテナーが開始しない
+{: #containers_do_not_start}
+
+{: tsSymptoms}
+ポッドはクラスターに正常にデプロイされましたが、コンテナーが開始しません。
+
+{: tsCauses}
+レジストリーの割り当て量に到達すると、コンテナーが開始しないことがあります。
+
+{: tsResolve}
+[{{site.data.keyword.registryshort_notm}} 内のストレージを解放してください。](../services/Registry/registry_quota.html#registry_quota_freeup)
+
+<br />
+
+
 
 
 ## ログが表示されない
@@ -650,18 +534,20 @@ Kibana ダッシュボードにアクセスするとき、ログが表示され�
 
 {: tsCauses}
 以下のいずれかの理由でログが表示されない可能性があります。<br/><br/>
-    A. クラスターが `Normal` 状態ではない。<br/><br/>
-    B. ログ・ストレージの割り当て量に達している。<br/><br/>
-    C. クラスター作成の際にスペースを指定した場合、アカウント所有者に、そのスペースに対する管理者、開発者、または監査員の権限がない。<br/><br/>
-    D. ログを起動するイベントがポッド内でまだ発生していない。<br/><br/>
+    A. ロギング構成がセットアップされていない。<br/><br/>
+    B. クラスターが `Normal` 状態ではない。<br/><br/>
+    C. ログ・ストレージの割り当て量に達している。<br/><br/>
+    D. クラスター作成の際にスペースを指定した場合、アカウント所有者に、そのスペースに対する管理者、開発者、または監査員の権限がない。<br/><br/>
+    E. ログを起動するイベントがポッド内でまだ発生していない。<br/><br/>
 
 {: tsResolve}
 ログが表示されない理由として考えられるそれぞれの点を解決するために、以下のオプションを確認してください。
 
-A. クラスターの状態を確認する方法については、[クラスターのデバッグ](cs_troubleshoot.html#debug_clusters)を参照してください。<br/><br/>
-B. ログ・ストレージの限度を増やす方法については、[{{site.data.keyword.loganalysislong_notm}}の資料](https://console.bluemix.net/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs)を参照してください。<br/><br/>
-C. アカウント所有者の {{site.data.keyword.containershort_notm}} アクセス権限を変更する方法については、[クラスター・アクセス権限の管理](cs_cluster.html#cs_cluster_user)を参照してください。 権限を変更した後に、ログの表示が開始するまで最大で 24 時間かかります。<br/><br/>
-D. イベントに対するログを起動するには、複数のログ・イベントを生成するサンプルのポッド Noisy をクラスター内のワーカー・ノードにデプロイすることができます。<br/>
+A. ログが送信されるようにするには、まずログを {{site.data.keyword.loganalysislong_notm}} に転送するようにロギング構成を作成する必要があります。ロギング構成を作成するには、[ログ転送の有効化](cs_cluster.html#cs_log_sources_enable)を参照してください。<br/><br/>
+B. クラスターの状態を確認する方法については、[クラスターのデバッグ](cs_troubleshoot.html#debug_clusters)を参照してください。<br/><br/>
+C. ログ・ストレージの限度を増やす方法については、[{{site.data.keyword.loganalysislong_notm}} の資料](https://console.bluemix.net/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs)を参照してください。<br/><br/>
+D. アカウント所有者の {{site.data.keyword.containershort_notm}} アクセス権限を変更する方法については、[クラスター・アクセス権限の管理](cs_cluster.html#cs_cluster_user)を参照してください。 権限を変更した後に、ログの表示が開始するまで最大で 24 時間かかります。<br/><br/>
+E. イベントに対するログを起動するには、複数のログ・イベントを生成するサンプルのポッド Noisy をクラスター内のワーカー・ノードにデプロイすることができます。<br/>
   1. クラスター上のログの生成を開始する場所に [CLI のターゲット](cs_cli_install.html#cs_cli_configure)を設定します。
 
   2. `deploy-noisy.yaml` 構成ファイルを作成します。
@@ -688,12 +574,14 @@ D. イベントに対するログを起動するには、複数のログ・イ�
         ```
         {:pre}
 
-  4. 数分後に、Kibana ダッシュボードにログが表示されます。 Kibana ダッシュボードにアクセスするには、以下のいずれかの URL にアクセスし、クラスターを作成した {{site.data.keyword.Bluemix_notm}} アカウントを選択します。 クラスター作成の際にスペースを指定した場合は、代わりにそのスペースに移動します。
+  4. 数分後に、Kibana ダッシュボードにログが表示されます。 Kibana ダッシュボードにアクセスするには、以下のいずれかの URL にアクセスし、クラスターを作成した {{site.data.keyword.Bluemix_notm}} アカウントを選択します。 クラスター作成の際にスペースを指定した場合は、代わりにそのスペースに移動します。        
         - 米国南部および米国東部: https://logging.ng.bluemix.net
-        - 英国南部: https://logging.eu-gb.bluemix.net
-        - 中欧: https://logging.eu-de.bluemix.net
+        - 英国南部および中欧: https://logging.eu-fra.bluemix.net
+        - 南アジア太平洋地域: https://logging.au-syd.bluemix.net
 
 <br />
+
+
 
 
 ## Kubernetes ダッシュボードに使用状況グラフが表示されない
@@ -714,6 +602,8 @@ Kubernetes ダッシュボードにアクセスするとき、使用状況グラ
   {: pre}
 
 <br />
+
+
 
 
 ## Ingress 経由でアプリに接続できない
@@ -813,7 +703,7 @@ Ingress のトラブルシューティングを行うには、以下のように
     1.  クラスター内で稼働している Ingress ポッドの ID を取得します。
 
       ```
-      kubectl get pods -n kube-system |grep ingress
+      kubectl get pods -n kube-system | grep alb1
       ```
       {: pre}
 
@@ -827,6 +717,8 @@ Ingress のトラブルシューティングを行うには、以下のように
     3.  Ingress コントローラーのログでエラー・メッセージを探します。
 
 <br />
+
+
 
 
 ## ロード・バランサー・サービス経由でアプリに接続できない
@@ -888,8 +780,8 @@ Ingress のトラブルシューティングを行うには、以下のように
     <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips</code></pre></br>**loadBalancerIP** セクションを使用してロード・バランサー・サービスのポータブル・パブリック IP アドレスを定義しましたが、そのポータブル・パブリック IP アドレスはポータブル・パブリック・サブネットに含まれていません。 ロード・バランサー・サービスの構成スクリプトを変更して、使用可能なポータブル・パブリック IP アドレスを選択するか、またはスクリプトから **loadBalancerIP** セクションを削除して、使用可能なポータブル・パブリック IP アドレスが自動的に割り振られるようにします。
     <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>ワーカー・ノードが不足しているため、ロード・バランサー・サービスをデプロイできません。 複数のワーカー・ノードを持つ標準クラスターをデプロイしましたが、ワーカー・ノードのプロビジョンが失敗した可能性があります。
     <ol><li>使用可能なワーカー・ノードのリストを表示します。</br><pre class="codeblock"><code>kubectl get nodes</code></pre>
-    <li>使用可能なワーカー・ノードが 2 つ以上ある場合は、ワーカー・ノードの詳細情報をリストします。</br><pre class="screen"><code>bx cs worker-get <worker_ID></code></pre>
-    <li>「kubectl get nodes」コマンドと「bx cs worker-get」コマンドから返されたワーカー・ノードのパブリック VLAN ID とプライベート VLAN ID が一致していることを確認します。</ol></ul></ul>
+    <li>使用可能なワーカー・ノードが 2 つ以上ある場合は、ワーカー・ノードの詳細情報をリストします。</br><pre class="screen"><code>bx cs worker-get [<cluster_name_or_id>] <worker_ID></code></pre>
+    <li>「kubectl get nodes」コマンドと「bx cs [<cluster_name_or_id>] worker-get」コマンドから返されたワーカー・ノードのパブリック VLAN ID とプライベート VLAN ID が一致していることを確認します。</ol></ul></ul>
 
 4.  カスタム・ドメインを使用してロード・バランサー・サービスに接続している場合は、カスタム・ドメインがロード・バランサー・サービスのパブリック IP アドレスにマップされていることを確認します。
     1.  ロード・バランサー・サービスのパブリック IP アドレスを見つけます。
@@ -902,6 +794,11 @@ Ingress のトラブルシューティングを行うには、以下のように
     2.  カスタム・ドメインが、ポインター・レコード (PTR) でロード・バランサー・サービスのポータブル・パブリック IP アドレスにマップされていることを確認します。
 
 <br />
+
+
+
+
+
 
 
 ## Calico CLI 構成の ETCD url の取得に失敗する
@@ -937,13 +834,15 @@ Ingress のトラブルシューティングを行うには、以下のように
 <br />
 
 
+
+
 ## ヘルプとサポートの取得
 {: #ts_getting_help}
 
 コンテナーのトラブルシューティングを開始するには、以下の方法があります。
 
 -   {{site.data.keyword.Bluemix_notm}} が使用可能かどうかを確認するために、[{{site.data.keyword.Bluemix_notm}} 状況ページを確認します![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/bluemix/support/#status)。
--   [{{site.data.keyword.containershort_notm}} Slack![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com) に質問を投稿します。 {{site.data.keyword.Bluemix_notm}} アカウントに IBM ID を使用していない場合は、[crosen@us.ibm.com](mailto:crosen@us.ibm.com) に問い合わせて、この Slack への招待を要求してください。
+-   [{{site.data.keyword.containershort_notm}} Slack![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com) に質問を投稿します。 ヒント: {{site.data.keyword.Bluemix_notm}} アカウントに IBM ID を使用していない場合は、この Slack への[招待を要求](https://bxcs-slack-invite.mybluemix.net/)してください。
 -   フォーラムを確認して、同じ問題が他のユーザーで起こっているかどうかを調べます。 フォーラムを使用して質問するときは、{{site.data.keyword.Bluemix_notm}} 開発チームの目に止まるように、質問にタグを付けてください。
 
     -   {{site.data.keyword.containershort_notm}} を使用したクラスターまたはアプリの開発やデプロイに関する技術的な質問がある場合は、[Stack Overflow![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](http://stackoverflow.com/search?q=bluemix+containers) に質問を投稿し、`ibm-bluemix`、`kubernetes`、`containers` のタグを付けてください。
