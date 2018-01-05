@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-13"
+lastupdated: "2018-01-05"
 
 ---
 
@@ -283,8 +283,8 @@ Before you begin, allow access to run [`bx` commands](#firewall_bx) and [`kubect
     <tbody>
       <tr>
         <td>AP North</td>
-        <td>hkg02<br>tok02</td>
-        <td><code>169.56.132.234</code><br><code>161.202.126.210</code></td>
+        <td>hkg02<br>sng01<br>tok02</td>
+        <td><code>169.56.132.234</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
        </tr>
       <tr>
          <td>AP South</td>
