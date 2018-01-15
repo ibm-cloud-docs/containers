@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-01-08"
+lastupdated: "2018-01-12"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2017-01-08"
 To add capabilities to your application load balancer, you can specify annotations as metadata in an Ingress resource.
 {: shortdesc}
 
-For general information about Ingress services and how to get started using them, see [Configuring public access to an app by using Ingress](cs_apps.html#cs_apps_public_ingress).
+For general information about Ingress services and how to get started using them, see [Configuring public access to an app by using Ingress](cs_ingress.html#config).
 
 <table>
 <col width="20%">
@@ -210,7 +210,7 @@ Add path definitions to external services, such as services hosted in {{site.dat
 
 <dl>
 <dt>Description</dt>
-<dd>Add path definitions to external services. This annotation is for special cases because it does not operate on a backend service and works on an external service. Annotations other than client-max-body-size, proxy-read-timeout, proxy-connect-timeout, proxy-buffering are not supported with an external service route.
+<dd>Add path definitions to external services. Use this annotation only when your app operates on an external service instead of a backend service. When you use this annotation to create an external service route, only `client-max-body-size`, `proxy-read-timeout`, `proxy-connect-timeout`, and `proxy-buffering` annotations are supported in conjunction. Any other annotations are not supported in conjunction with `proxy-external-service`.
 </dd>
 <dt>Sample Ingress resource YAML</dt>
 <dd>
@@ -1147,7 +1147,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/client-max-body-size: "&lt;size&gt;"
+   ingress.bluemix.net/client-max-body-size: "size=&lt;size&gt;"
 spec:
  tls:
  - hosts:
@@ -1465,8 +1465,8 @@ Configure mutual authentication for the Ingress application load balancer. The c
 <dt>Pre-requisites</dt>
 <dd>
 <ul>
-<li>[You must have a valid secret that contains the required certificate authority (CA)](cs_apps.html#secrets). The <code>client.key</code> and <code>client.crt</code> are also needed to authenticate with mutual authentication.</li>
-<li>To enable mutual authentication on a port other than 443, [configure the load balancer to open the valid port](cs_apps.html#opening_ingress_ports).</li>
+<li>[You must have a valid secret that contains the required certificate authority (CA)](cs_app.html#secrets). The <code>client.key</code> and <code>client.crt</code> are also needed to authenticate with mutual authentication.</li>
+<li>To enable mutual authentication on a port other than 443, [configure the load balancer to open the valid port](cs_ingress.html#opening_ingress_ports).</li>
 </ul>
 </dd>
 
