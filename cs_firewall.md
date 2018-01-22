@@ -211,8 +211,8 @@ Let your cluster access infrastructure resources and services from behind a fire
       </tr>
       <tr>
         <td>US East</td>
-         <td>tor01<br>wdc06<br>wdc07</td>
-         <td><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+         <td>mon01<br>tor01<br>wdc06<br>wdc07</td>
+         <td><code>169.54.126.219</code><br><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
       </tr>
       <tr>
         <td>US South</td>

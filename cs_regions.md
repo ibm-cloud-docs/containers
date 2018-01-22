@@ -112,7 +112,7 @@ Locations are data centers that are available within a region.
   | AP South     | mel01, syd01, syd04        | Melbourne, Sydney |
   | EU Central     | ams03, fra02, mil01, par01        | Amsterdam, Frankfurt, Milan, Paris |
   | UK South      | lon02, lon04         | London |
-  | US East      | tor01, wdc06, wdc07        | Toronto, Washington, DC |
+  | US East      | mon01, tor01, wdc06, wdc07        | Montreal, Toronto, Washington DC |
   | US South     | dal10, dal12, dal13       | Dallas |
 
 **Note**: Milan (mil01) is available for lite clusters only.
