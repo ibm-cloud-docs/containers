@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-03"
+lastupdated: "2017-12-18"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2017-11-03"
 {:shortdesc}
 
 {{site.data.keyword.containershort_notm}} 支持多个版本的 Kubernetes。除非您指定其他版本，否则在创建或更新集群时将使用缺省版本。可用的 Kubernetes 版本为：
-- 1.8.2
+- 1.8.4
 - 1.7.4（缺省版本）
 - 1.5.6
 
@@ -47,7 +47,12 @@ Kubernetes 提供以下版本更新类型：
 
 ## V1.8
 {: #cs_v18}
+
+<p><img src="images/certified_kubernetes_1x8.png" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" height="100" width="62.5" align="left" alt="此角标指示 IBM Cloud Container Service 的 Kubernetes V1.8 证书。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 计划下经认证的 V1.8 的 Kubernetes 产品。_Kubernetes® 是 Linux Foundation 在美国和其他国家或地区的注册商标，并根据 Linux Foundation 的许可证进行使用。_</p>
+
 查看更新到 Kubbernetes V1.8 时可能需要进行的更改。
+
+<br/>
 
 ### 在更新主节点之前更新
 {: #18_before}
@@ -88,11 +93,11 @@ Kubernetes 提供以下版本更新类型：
 </tr>
 <tr>
 <td>`kubectl delete`</td>
-<td>`kubectl delete` 命令在删除对象之前，不再向下扩展工作负载 API 对象（例如 pod）。如果需要该对象向下扩展，请在删除对象之前使用 [kubectl scale ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/user-guide/kubectl/v1.8/#scale)。</td>
+<td>`kubectl delete` 命令在删除对象之前，不再向下扩展工作负载 API 对象（例如 pod）。如果需要该对象向下扩展，请在删除对象之前使用 kubectl scale ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale)。</td>
 </tr>
 <tr>
 <td>`kubectl run`</td>
-<td>`kubectl run` 命令必须对 `--env` 使用多个标志而不是以逗号分隔的自变量。例如，运行 `kubectl run --env <x>=<y> --env <z>=<k>`，而非 `kubectl run --env <x>=<y>,<z>=<k>`。</td>
+<td>`kubectl run` 命令必须对 `--env` 使用多个标志而不是以逗号分隔的自变量。例如，运行 <code>kubectl run --env <x>=<y> --env <z>=&lt;a&gt;</code>，而不是 <code>kubectl run --env <x>=<y>,<z>=&lt;a&gt;</code>。</td>
 </tr>
 <td>`kubectl stop`</td>
 <td>`kubectl stop` 命令不再可用。</td>
@@ -104,7 +109,11 @@ Kubernetes 提供以下版本更新类型：
 ## V1.7
 {: #cs_v17}
 
+<p><img src="images/certified_kubernetes_1x7.png" height="100" width="62.5" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" align="left" alt="此角标指示 IBM Cloud Container Service 的 Kubernetes V1.7 证书。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 计划下经认证的 V1.7 的 Kubernetes 产品。</p>
+
 查看更新到 Kubbernetes V1.7 时可能需要进行的更改。
+
+<br/>
 
 ### 在更新主节点之前更新
 {: #17_before}

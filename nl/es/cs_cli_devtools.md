@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-28"
+lastupdated: "2017-12-01"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2017-11-28"
 Consulte estos mandatos para crear y gestionar clústeres.
 {:shortdesc}
 
-**Sugerencia:** ¿Está buscando mandatos `bx cr`? Revise la guía de [consulta de la CLI de {{site.data.keyword.registryshort_notm}}](/docs/cli/plugins/registry/index.html). ¿Está buscando mandatos `kubectl`? Consulte la [documentación de Kubernetes![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/user-guide/kubectl/v1.5/).
+**Sugerencia:** ¿Está buscando mandatos `bx cr`? Revise la guía de [consulta de la CLI de {{site.data.keyword.registryshort_notm}}](/docs/cli/plugins/registry/index.html). ¿Está buscando mandatos `kubectl`? Consulte la [documentación de Kubernetes![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).
 
 
 <!--[https://github.ibm.com/alchemy-containers/armada-cli ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.ibm.com/alchemy-containers/armada-cli)-->
@@ -128,7 +128,7 @@ Visualice el estado de todos los equilibradores de carga de aplicación (ALB) de
 ### bx cs alb-configure --albID ALB_ID [--enable][--disable][--user-ip USERIP]
 {: #cs_alb_configure}
 
-Habilite o inhabilite un equilibrador de carga de aplicación (ALB), también denominado controlador de Ingress, en el clúster estándar.El equilibrador de carga aplicación pública está habilitado de forma predeterminada.
+Habilite o inhabilite un equilibrador de carga de aplicación (ALB), también denominado controlador de Ingress, en el clúster estándar. El equilibrador de carga aplicación pública está habilitado de forma predeterminada.
 
 **Opciones del mandato**:
 
@@ -338,7 +338,9 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <ul>
 <li>Este parámetro no está disponible para clústeres lite.</li>
 <li>Si este es el primer clúster estándar que crea en esta ubicación, no incluya este distintivo. Al crear clústeres se crea automáticamente una VLAN privada.</li>
-<li>Si previamente ha creado un clúster estándar en esta ubicación o una VLAN privada en la infraestructura de IBM Cloud (SoftLayer), debe especificar la VLAN privada. <p><strong>Nota:</strong> Las VLAN pública y privada que especifique con el mandato create deben coincidir. Los direccionadores VLAN privados siempre
+<li>Si previamente ha creado un clúster estándar en esta ubicación o una VLAN privada en la infraestructura de IBM Cloud (SoftLayer), debe especificar la VLAN privada.
+
+<p><strong>Nota:</strong> Las VLAN pública y privada que especifique con el mandato create deben coincidir. Los direccionadores VLAN privados siempre
 empiezan por <code>bcr</code> (back-end router, direccionador de fondo) y los direccionadores VLAN públicos siempre
 empiezan por <code>fcr</code> (direccionador frontal). La combinación de números y letras que hay tras estos prefijos debe coincidir para poder utilizar dichas VLAN al crear un clúster. No utilice VLAN públicas y privadas que no coincidan para crear un clúster.</p></li>
 </ul>
@@ -350,7 +352,9 @@ empiezan por <code>fcr</code> (direccionador frontal). La combinación de númer
 <ul>
 <li>Este parámetro no está disponible para clústeres lite.</li>
 <li>Si este es el primer clúster estándar que crea en esta ubicación, no utilice este distintivo. Al crear el clúster se crea automáticamente una VLAN pública.</li>
-<li>Si previamente ha creado un clúster estándar en esta ubicación o una VLAN pública en la infraestructura de IBM Cloud (SoftLayer), debe especificar la VLAN pública. <p><strong>Nota:</strong> Las VLAN pública y privada que especifique con el mandato create deben coincidir. Los direccionadores VLAN privados siempre
+<li>Si previamente ha creado un clúster estándar en esta ubicación o una VLAN pública en la infraestructura de IBM Cloud (SoftLayer), debe especificar la VLAN pública.
+
+<p><strong>Nota:</strong> Las VLAN pública y privada que especifique con el mandato create deben coincidir. Los direccionadores VLAN privados siempre
 empiezan por <code>bcr</code> (back-end router, direccionador de fondo) y los direccionadores VLAN públicos siempre
 empiezan por <code>fcr</code> (direccionador frontal). La combinación de números y letras que hay tras estos prefijos debe coincidir para poder utilizar dichas VLAN al crear un clúster. No utilice VLAN públicas y privadas que no coincidan para crear un clúster.</p></li>
 </ul>
@@ -383,7 +387,6 @@ empiezan por <code>fcr</code> (direccionador frontal). La combinación de númer
   {: pre}
 
   Ejemplo para un entorno {{site.data.keyword.Bluemix_dedicated_notm}}:
-
 
   ```
   bx cs cluster-create --machine-type machine-type --workers number --name cluster_name
@@ -441,8 +444,6 @@ Eliminar un clúster de la organización.
 {: #cs_cluster_service_bind}
 
 Añadir un servicio de {{site.data.keyword.Bluemix_notm}} a un clúster.
-
-**Sugerencia:** Para usuarios de {{site.data.keyword.Bluemix_dedicated_notm}}, consulte [Adición de servicios de {{site.data.keyword.Bluemix_notm}} a clústeres en {{site.data.keyword.Bluemix_dedicated_notm}} (Beta cerrada)](cs_cluster.html#binding_dedicated).
 
 <strong>Opciones del mandato</strong>:
 
@@ -550,7 +551,6 @@ a disponibilidad de un determinado clúster.
 
 Crear una subred en una cuenta de infraestructura de IBM Cloud (SoftLayer) y ponerla a disponibilidad de un determinado clúster en {{site.data.keyword.containershort_notm}}.
 
-
 **Nota:** Cuando se pone una subred a disponibilidad de un clúster, las direcciones IP de esta subred se utilizan para la gestión de redes del clúster. Para evitar conflictos de direcciones IP, asegúrese de utilizar una subred con un solo clúster. No utilice una subred para varios clústeres o para otros fines externos a {{site.data.keyword.containershort_notm}} al mismo tiempo.
 
 <strong>Opciones del mandato</strong>:
@@ -589,7 +589,9 @@ Esta subred privada no es la que proporciona la infraestructura de IBM Cloud (So
    <dd>El nombre o ID del clúster. Este valor es obligatorio.</dd>
 
    <dt><code><em>SUBNET_CIDR</em></code></dt>
-   <dd>El Classless InterDomain Routing (CIDR) de la subred. Este valor es obligatorio y no debe estar en conflicto con ninguna subred que utilice la infraestructura de IBM Cloud (SoftLayer).    Los prefijos válidos son los comprendidos entre `/30` (1 dirección IP) y `/24` (253 direcciones IP). Si establece el valor de CIDR en una longitud de prefijo y luego lo tiene que modificar, añada primero un nuevo CIDR y luego [elimine el CIDR antiguo](#cs_cluster_user_subnet_rm).</dd>
+   <dd>El Classless InterDomain Routing (CIDR) de la subred. Este valor es obligatorio y no debe estar en conflicto con ninguna subred que utilice la infraestructura de IBM Cloud (SoftLayer).
+
+   Los prefijos válidos son los comprendidos entre `/30` (1 dirección IP) y `/24` (253 direcciones IP). Si establece el valor de CIDR en una longitud de prefijo y luego lo tiene que modificar, añada primero un nuevo CIDR y luego [elimine el CIDR antiguo](#cs_cluster_user_subnet_rm).</dd>
 
    <dt><code><em>PRIVATE_VLAN</em></code></dt>
    <dd>El ID de la VLAN privada. Este valor es obligatorio. Debe coincidir con el ID de VLAN privada de uno o varios nodos trabajadores del clúster.</dd>
@@ -643,13 +645,13 @@ Es posible que tenga que modificar los archivos YAML para futuros despliegues. R
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>El nombre o ID del clúster. Este valor es obligatorio.</dd>
-   
+
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
-   <dd>La versión de Kubernetes del clúster. Si no se especifica este distintivo, el Kubernetes maestro se actualiza a la versión de la API predeterminada. Para ver todas las versiones disponibles, ejecute [bx cs kube-versions](#cs_kube_versions).Este valor es opcional.</dd>
+   <dd>La versión de Kubernetes del clúster. Si no se especifica este distintivo, el Kubernetes maestro se actualiza a la versión de la API predeterminada. Para ver todas las versiones disponibles, ejecute [bx cs kube-versions](#cs_kube_versions). Este valor es opcional.</dd>
 
    <dt><code>-f</code></dt>
    <dd>Utilice esta opción para forzar la actualización del maestro sin solicitudes de usuario. Este valor es opcional.</dd>
-   
+
    <dt><code>--force-update</code></dt>
    <dd>Intente la actualización incluso si el cambio es superior a dos versiones anteriores. Este valor es opcional.</dd>
    </dl>
@@ -683,14 +685,14 @@ Ver una lista de los clústeres de la organización.
 
 Defina las credenciales de cuenta de la infraestructura de IBM Cloud (SoftLayer) para su cuenta de {{site.data.keyword.Bluemix_notm}}. Estas credenciales permiten acceder a la cartera de infraestructura de IBM Cloud (SoftLayer) mediante su cuenta de {{site.data.keyword.Bluemix_notm}}.
 
-**Nota:** No establezca varias credenciales para una cuenta de {{site.data.keyword.Bluemix_notm}}. Cada cuenta de {{site.data.keyword.Bluemix_notm}} está vinculada a un portafolio de la infraestructura de IBM Cloud (SoftLayer). 
+**Nota:** No establezca varias credenciales para una cuenta de {{site.data.keyword.Bluemix_notm}}. Cada cuenta de {{site.data.keyword.Bluemix_notm}} está vinculada a un portafolio de la infraestructura de IBM Cloud (SoftLayer).
 
 <strong>Opciones del mandato</strong>:
 
    <dl>
    <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
    <dd>Nombre usuario de la cuenta de infraestructura de IBM Cloud (SoftLayer). Este valor es obligatorio.</dd>
-   
+
 
    <dt><code>--infrastructure-api-key <em>API_KEY</em></code></dt>
    <dd>Clave de API de la cuenta de infraestructura de IBM Cloud (SoftLayer). Este valor es obligatorio.
@@ -701,7 +703,7 @@ Defina las credenciales de cuenta de la infraestructura de IBM Cloud (SoftLayer)
   <ol>
   <li>Inicie sesión en el [portal de la infraestructura de IBM Cloud (SoftLayer) ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://control.softlayer.com/).</li>
   <li>Seleccione <strong>Cuenta</strong> y, a continuación, <strong>Usuarios</strong>.</li>
-  <li>Pulse <strong>Generar</strong> para generar una clave de API de la infraestructura de IBM Cloud (SoftLayer) para su cuenta. </li>
+  <li>Pulse <strong>Generar</strong> para generar una clave de API de la infraestructura de IBM Cloud (SoftLayer) para su cuenta.</li>
   <li>Copie la clave de la API para utilizar en este mandato.</li>
   </ol>
 
@@ -959,8 +961,8 @@ Actualice el reenvío de registro al servidor de registro que desea utilizar. Pa
 ### bx cs machine-types LOCATION
 {: #cs_machine_types}
 
-Ver una lista de los tipos de máquinas disponibles para sus nodos trabajadores. Cada tipo de máquina incluye cantidad de CPU virtual, memoria y espacio de disco para cada nodo trabajador del clúster. 
-- Los tipos de máquina con `u2c` o `b2c` en el nombre utilizan el disco local en lugar de la SAN por motivos de fiabilidad. Entre las ventajas de fiabilidad se incluyen un mejor rendimiento al serializar bytes en el disco local y una reducción de la degradación del sistema de archivos debido a anomalías de la red. Este tipo de máquinas contienen 25 GB de almacenamiento en disco local para el sistema de archivos de SO y 100 GB de almacenamiento en disco local para `/var/lib/docker`, el directorio en el que se graban todos los datos del contenedor. 
+Ver una lista de los tipos de máquinas disponibles para sus nodos trabajadores. Cada tipo de máquina incluye cantidad de CPU virtual, memoria y espacio de disco para cada nodo trabajador del clúster.
+- Los tipos de máquina con `u2c` o `b2c` en el nombre utilizan el disco local en lugar de la SAN por motivos de fiabilidad. Entre las ventajas de fiabilidad se incluyen un mejor rendimiento al serializar bytes en el disco local y una reducción de la degradación del sistema de archivos debido a anomalías de la red. Este tipo de máquinas contienen 25 GB de almacenamiento en disco local para el sistema de archivos de SO y 100 GB de almacenamiento en disco local para `/var/lib/docker`, el directorio en el que se graban todos los datos del contenedor.
 - Los tipos de máquinas que incluyen `cifrado` en el nombre cifran los datos de docker del host. El directorio `/var/lib/docker`, donde están almacenados todos los datos de los contenedores, están cifrados mediante LUKS.
 - Los tipos de máquinas con `u1c` o `b1c` en el nombre están en desuso, como, por ejemplo,`u1c.2x4`. Para empezar a utilizar los tipos de máquinas `u2c` y `b2c`, utilice el mandato `bx cs worker-add` para añadir nodos trabajadores con el tipo de máquina actualizado. A continuación, elimine los nodos trabajadores que utilizan los tipos de máquinas en desuso mediante el mandato `bx cs worker-rm`.
 </p>
@@ -983,7 +985,7 @@ Ver una lista de los tipos de máquinas disponibles para sus nodos trabajadores.
 ### bx cs subnets
 {: #cs_subnets}
 
-Ver una lista de subredes que están disponibles en una cuenta de infraestructura de IBM Cloud (SoftLayer). 
+Ver una lista de subredes que están disponibles en una cuenta de infraestructura de IBM Cloud (SoftLayer).
 
 <strong>Opciones del mandato</strong>:
 
@@ -1260,13 +1262,13 @@ Es posible que tenga que modificar los archivos YAML para futuros despliegues an
 
    <dt><em>CLUSTER</em></dt>
    <dd>El nombre o ID del clúster en el que se listan los nodos trabajadores disponibles. Este valor es obligatorio.</dd>
-   
+
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
-   <dd>La versión de Kubernetes del clúster. Si no se especifica este distintivo, el nodo maestro se actualiza a la versión predeterminada. Para ver todas las versiones disponibles, ejecute [bx cs kube-versions](#cs_kube_versions).Este valor es opcional.</dd>
+   <dd>La versión de Kubernetes del clúster. Si no se especifica este distintivo, el nodo maestro se actualiza a la versión predeterminada. Para ver todas las versiones disponibles, ejecute [bx cs kube-versions](#cs_kube_versions). Este valor es opcional.</dd>
 
    <dt><code>-f</code></dt>
    <dd>Utilice esta opción para forzar la actualización del maestro sin solicitudes de usuario. Este valor es opcional.</dd>
-   
+
    <dt><code>--force-update</code></dt>
    <dd>Intente la actualización incluso si el cambio es superior a dos versiones anteriores. Este valor es opcional.</dd>
 

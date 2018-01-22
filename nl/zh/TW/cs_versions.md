@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-03"
+lastupdated: "2017-12-18"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2017-11-03"
 {:shortdesc}
 
 {{site.data.keyword.containershort_notm}} 支援數個 Kubernetes 版本。除非指定不同的版本，否則，建立或更新叢集時都會使用預設版本。可用的 Kubernetes 版本如下：
-- 1.8.2
+- 1.8.4
 - 1.7.4（預設版本）
 - 1.5.6
 
@@ -47,7 +47,12 @@ Kubernetes 提供下列版本更新類型：
 
 ## 1.8 版
 {: #cs_v18}
+
+<p><img src="images/certified_kubernetes_1x8.png" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" height="100" width="62.5" align="left" alt="此徽章指出 IBM Cloud Container Service 的 Kubernetes 1.8 版憑證。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 計畫下 1.8 版的認證 Kubernetes 產品。_Kubernetes® 是 The Linux Foundation 在美國及其他國家或地區的註冊商標，並且根據 The Linux Foundation 的授權予以使用。_</p>
+
 更新至 Kubernets 1.8 版時，請檢閱您可能需要進行的變更。
+
+<br/>
 
 ### 在主節點之前更新
 {: #18_before}
@@ -88,11 +93,11 @@ Kubernetes 提供下列版本更新類型：
 </tr>
 <tr>
 <td>`kubectl delete`</td>
-<td>在刪除物件之前，`kubectl delete` 指令不再縮減工作負載 API 物件（如 Pod）。如果需要縮減物件，請在刪除物件之前，使用 [kubectl scale ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/user-guide/kubectl/v1.8/#scale)。</td>
+<td>在刪除物件之前，`kubectl delete` 指令不再縮減工作負載 API 物件（如 Pod）。如果需要縮減物件，請在刪除物件之前，使用 kubectl scale ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")(https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale)。</td>
 </tr>
 <tr>
 <td>`kubectl run`</td>
-<td>`kubectl run` 指令必須對 `--env` 使用多個旗標，而非逗點區隔的引數。例如，執行 `kubectl run --env <x>=<y> --env <z>=<k>`，而非 `kubectl run --env <x>=<y>,<z>=<k>`。</td>
+<td>`kubectl run` 指令必須對 `--env` 使用多個旗標，而非逗點區隔的引數。例如，執行 <code>kubectl run --env <x>=<y> --env <z>=&lt;a&gt;</code>，而非 <code>kubectl run --env <x>=<y>,<z>=&lt;a&gt;</code>。</td>
 </tr>
 <td>`kubectl stop`</td>
 <td>`kubectl stop` 指令無法再使用。</td>
@@ -104,7 +109,11 @@ Kubernetes 提供下列版本更新類型：
 ## 1.7 版
 {: #cs_v17}
 
+<p><img src="images/certified_kubernetes_1x7.png" height="100" width="62.5" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" align="left" alt="此徽章指出 IBM Cloud Container Service 的 Kubernetes 1.7 版憑證。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 計畫下 1.7 版的認證 Kubernetes 產品。</p>
+
 更新至 Kubernets 1.7 版時，請檢閱您可能需要進行的變更。
+
+<br/>
 
 ### 在主節點之前更新
 {: #17_before}

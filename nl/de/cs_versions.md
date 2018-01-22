@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-03"
+lastupdated: "2017-12-18"
 
 ---
 
@@ -22,7 +22,7 @@ Informieren Sie sich über die Kubernetes-Versionen, die für {{site.data.keywor
 {:shortdesc}
 
 {{site.data.keyword.containershort_notm}} unterstützt mehrere Versionen von Kubernetes. Beim Erstellen oder Aktualisieren eines Clusters wird die Standardversion verwendet, es sei denn, Sie geben eine andere Version an. Die folgenden Kubernetes-Versionen stehen zur Verfügung:
-- 1.8.2
+- 1.8.4
 - 1.7.4 (Standardversion)
 - 1.5.6
 
@@ -33,7 +33,8 @@ Weitere Informationen zum Aktualisierungsprozess finden Sie in [Cluster aktualis
 ## Aktualisierungstypen
 {: #version_types}
 
-Kubernetes stellt die folgenden Versionsaktualisierungstypen zur Verfügung:{:shortdesc}
+Kubernetes stellt die folgenden Versionsaktualisierungstypen zur Verfügung:
+{:shortdesc}
 
 |Aktualisierungstyp|Beispiel für Versionskennzeichnungen|Aktualisierung durch|Auswirkung
 |-----|-----|-----|-----|
@@ -46,7 +47,12 @@ Standardmäßig ist für einen Kubernetes-Master eine Aktualisierung über mehr 
 
 ## Version 1.8
 {: #cs_v18}
+
+<p><img src="images/certified_kubernetes_1x8.png" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" height="100" width="62.5" align="left" alt="Diese Markierung zeigt die Kubernetes Version 1.8-Zertifizierung für IBM Cloud Container Service an."/> {{site.data.keyword.containerlong_notm}} ist ein zertifiziertes Kubernetes-Produkt für Version 1.8 unter dem CNCF Kubernetes Software Conformance Certification Program. _Kubernetes® ist eine eingetragene Marke von The Linux Foundation in den USA und anderen Ländern und wird entsprechend einer Lizenz von The Linux Foundation verwendet._</p>
+
 Überprüfen Sie Änderungen, die Sie möglicherweise bei einer Aktualisierung auf Kubernetes Version 1.8 vornehmen müssen.
+
+<br/>
 
 ### Vor Master aktualisieren
 {: #18_before}
@@ -89,11 +95,11 @@ Standardmäßig ist für einen Kubernetes-Master eine Aktualisierung über mehr 
 </tr>
 <tr>
 <td>`kubectl delete`</td>
-<td>Mit dem Befehl `kubectl delete` werden nicht länger API-Objekte für Arbeitslasten, wie Pods, vor dem Löschen des Objekts nach unten skaliert. Wenn das Objekt nach unten skaliert werden soll, verwenden Sie den Befehl [kubectl scale ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/user-guide/kubectl/v1.8/#scale), bevor Sie das Objekt löschen.</td>
+<td>Mit dem Befehl `kubectl delete` werden nicht länger API-Objekte für Arbeitslasten, wie Pods, vor dem Löschen des Objekts nach unten skaliert. Wenn das Objekt nach unten skaliert werden soll, verwenden Sie den Befehl 'kubectl scale' ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link") (https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale), bevor Sie das Objekt löschen.</td>
 </tr>
 <tr>
 <td>`kubectl run`</td>
-<td>Der Befehl `kubectl run` muss anstelle von durch Kommas getrennten Argumenten mehrere Flags für `--env` verwenden. Führen Sie beispielsweise `kubectl run --env <x>=<y> --env <z>=<k>` und nicht `kubectl run --env <x>=<y>,<z>=<k>` aus.</td>
+<td>Der Befehl `kubectl run` muss anstelle von durch Kommas getrennten Argumenten mehrere Flags für `--env` verwenden. Führen Sie beispielsweise <code>kubectl run --env <x>=<y> --env <z>=&lt;a&gt;</code> und nicht <code>kubectl run --env <x>=<y>,<z>=&lt;a&gt;</code> aus. </td>
 </tr>
 <td>`kubectl stop`</td>
 <td>Der Befehl `kubectl stop` ist nicht mehr verfügbar.</td>
@@ -105,7 +111,11 @@ Standardmäßig ist für einen Kubernetes-Master eine Aktualisierung über mehr 
 ## Version 1.7
 {: #cs_v17}
 
+<p><img src="images/certified_kubernetes_1x7.png" height="100" width="62.5" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" align="left" alt="Diese Markierung zeigt die Kubernetes Version 1.7-Zertifizierung für IBM Cloud Container Service an."/> {{site.data.keyword.containerlong_notm}} ist ein zertifiziertes Kubernetes-Produkt für Version 1.7 unter dem CNCF Kubernetes Software Conformance Certification Program. </p>
+
 Überprüfen Sie Änderungen, die Sie möglicherweise bei einer Aktualisierung auf Kubernetes Version 1.7 vornehmen müssen.
+
+<br/>
 
 ### Vor Master aktualisieren
 {: #17_before}

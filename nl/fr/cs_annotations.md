@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-14"
+lastupdated: "2017-12-01"
 
 ---
 
@@ -19,26 +19,27 @@ lastupdated: "2017-11-14"
 # Annotations Ingress
 {: #ingress_annotation}
 
-Pour ajouter des fonctionnalités à votre contrôleur Ingress, vous pouvez spécifier des annotations en tant que métadonnées dans une ressource Ingress.
+Pour ajouter des fonctionnalités à votre équilibreur de charge d'application, vous pouvez spécifier des annotations sous forme de métadonnées dans une ressource Ingress.
 {: shortdesc}
 
-Pour des informations générales sur les services Ingress et comment les utiliser, voir [Configuration d'un accès public à une application à l'aide du contrôleur Ingress](cs_apps.html#cs_apps_public_ingress).
+Pour des informations générales sur les services Ingress et comment les utiliser, voir [Configuration de l'accès public à une application à l'aide d'Ingress](cs_apps.html#cs_apps_public_ingress).
 
 
 |Annotation prise en charge|Description|
 |--------------------|-----------|
 |[En-tête de réponse ou de demande client supplémentaire](#proxy-add-headers)|Ajouter des informations d'en-tête à une demande client avant d'acheminer la demande vers votre application de back end ou à une réponse client avant d'envoyer la réponse au client.|
-|[Mise en mémoire tampon des données de réponse client](#proxy-buffering)|Désactiver la mise en mémoire tampon d'une réponse client sur le contrôleur Ingress lors de l'envoi de la réponse au client.|
+|[Mise en mémoire tampon des données de réponse client](#proxy-buffering)|Désactiver la mise en mémoire tampon d'une réponse client sur l'équilibreur de charge d'application lors de l'envoi de la réponse au client.|
 |[Retrait d'en-tête de réponse client](#response-remove-headers)|Retirer les informations d'en-tête d'une réponse client avant d'acheminer la réponse vers le client.|
-|[Personnalisation des paramètres connect-timeouts et read-timeouts](#proxy-connect-timeout)|Ajuster le délai d'attente observé par le contrôleur Ingress pour établir une connexion à et effectuer une lecture à partir de l'application de back end avant que celle-ci ne soit considérée comme indisponible.|
+|[Personnalisation des paramètres connect-timeouts et read-timeouts](#proxy-connect-timeout)|Ajustez le délai d'attente observé par l'équilibreur de charge d'application pour établir une connexion et effectuer une lecture à partir de l'application de back-end avant que celle-ci ne soit considérée comme indisponible.|
 |[Ports HTTP et HTTPS personnalisés](#custom-port)|Remplacer les ports par défaut pour le trafic réseau HTTP et HTTPS.|
-|[Personnaliser la taille du corps de demande client maximale](#client-max-body-size)|Ajuster la taille du corps de demande du client pouvant être envoyé au contrôleur Ingress.|
+|[Personnaliser la taille du corps de demande client maximale](#client-max-body-size)|Ajustez la taille du corps de la demande du client pouvant être envoyée à l'équilibreur de charge d'application.|
 |[Services externes](#proxy-external-service)|Ajoute la définition des chemins à des services externes, tel un service hébergé dans {{site.data.keyword.Bluemix_notm}}.|
 |[Limites de débit globales](#global-rate-limit)|Pour tous les services, limite le débit de traitement des demandes et connexions par une clé définie.|
 |[Redirection HTTP vers HTTPS](#redirect-to-https)|Rediriger les demandes HTTP non sécurisées sur votre domaine vers HTTPS.|
 |[Demandes de signal de présence](#keepalive-requests)|Configurer le nombre maximum de demandes pouvant être traitées via une connexion de signal de présence.|
 |[Délai d'expiration de signal de présence](#keepalive-timeout)|Configurer la durée d'ouverture d'une connexion de signal de présence sur le serveur.|
-|[Authentification mutuelle](#mutual-auth)|Configurer l'authentification mutuelle pour le contrôleur Ingress.|
+|[Authentification mutuelle](#mutual-auth)|Configurez une authentification mutuelle pour l'équilibreur de charge d'application.|
+|[Routage d'équilibreur de charge d'application privé](#alb-id)|Routez les demandes entrantes à vos applications  avec un équilibreur de charge d'application privé.|
 |[Tampons de proxy](#proxy-buffers)|Définit le nombre et la taille des tampons utilisés pour lire une réponse d'une seule connexion provenant du serveur relayé via un proxy.|
 |[Taille des tampons occupés de proxy](#proxy-busy-buffers-size)|Limite la taille totale des tampons pouvant être occupés à l'envoi d'une réponse au client alors que la réponse n'est pas encore totalement lue.|
 |[Taille de tampon de proxy](#proxy-buffer-size)|Définit la taille du tampon utilisé pour lire la première partie de la réponse reçue du serveur relayé via un proxy.|
@@ -51,9 +52,6 @@ Pour des informations générales sur les services Ingress et comment les utilis
 
 
 
-
-
-
 ## En-tête de réponse ou de demande client supplémentaire (proxy-add-headers)
 {: #proxy-add-headers}
 
@@ -62,10 +60,10 @@ Ajoutez des informations d'en-tête à une demande client avant d'envoyer la dem
 
 <dl>
 <dt>Description</dt>
-<dd>Le contrôleur Ingress agit comme un proxy enetre l'application client et votre application de back end. Les demandes client qui sont envoyées au contrôleur Ingress sont traitées (relayées via un proxy) et placées dans une nouvelle demande qui est ensuite envoyée à l'application de back end à partir du contrôleur Ingress. Lorsqu'une demande passe par un  proxy, les informations d'en-tête HTTP intialement envoyées par le client, par exemple, le nom d'utilisateur, sont retirées. Si votre application de back end a besoin de ces informations, vous pouvez utiliser l'annotation <strong>ingress.bluemix.net/proxy-add-headers</strong> pour ajouter des informations d'en-tête à la demande client avant que celle-ci ne soit acheminée vers votre application de back end à partir du contrôleur Ingress.
+<dd>L'équilibreur de charge d'application Ingress fait office de proxy entre l'application client et l'application de back end . Ls demandes client envoyées à l'quilibreur de charge d'application sont traitées (relayées via un proxy) et placées dans une nouvelles demande envoyée ensuite depuis l'équilibreur de charge d'application à votre application de back-end. Lorsqu'une demande passe par un  proxy, les informations d'en-tête HTTP intialement envoyées par le client, par exemple, le nom d'utilisateur, sont retirées. Si votre application de back end a besoin de cette information, vous pouvez utiliser l'annotation <strong>ingress.bluemix.net/proxy-add-headers</strong> pour ajouter les informations d'en-tête à la demande client avant qu'elle ne soit envoyée de l'équilibreur de charge d'application à votre application de back end.
 
 </br></br>
-Lorsqu'une application de back end envoie une réponse au client, la réponse est relayée via un proxy par le contrôleur Ingress et les en-têtes HTTP sont retirés de la réponse. L'application Web client peut avoir besoin de ces informations d'en-tête pour traiter correctement la réponse. Vous pouvez utiliser l'annotation <strong>ingress.bluemix.net/response-add-headers</strong> pour ajouter des informations d'en-tête à la réponse client avant que celle-ci ne soit acheminée vers votre application Web client à partir du contrôleur Ingress.</dd>
+Lorsqu'une application de back end envoie une réponse au client, celle-ci est relayée via proxy par l'équilibreur de charge d'application et les en-têtes HTTP sont supprimés de la réponse. L'application Web client peut avoir besoin de ces informations d'en-tête pour traiter correctement la réponse. Vous pouvez utiliser l'annotation <strong>ingress.bluemix.net/response-add-headers</strong> pour ajouter des informations d'en-tête à la réponse client avant que celle-ci ne soit envyée de l'équilibreur de charge d'application à l'application Web client.</dd>
 <dt>Exemple de fichier YAML de ressource Ingress</dt>
 <dd>
 
@@ -131,17 +129,17 @@ spec:
  ## Mise en mémoire tampon des données de réponse client (proxy-buffering)
  {: #proxy-buffering}
 
- Utilisez l'annotation buffer pour désactiver le stockage des données de réponse sur le contrôleur Ingress alors que les données sont envoyées au client.
+ Utilisez l'annotation de buffer pour désactiver le stockage de données de réponse sur l'équilibreur de charge d'application tandis que les données sont envoyées au client.
  {:shortdesc}
 
  <dl>
  <dt>Description</dt>
- <dd>Le contrôleur Ingress agit comme un proxy entre votre application de back end et l'application Web client. Lorsqu'une réponse est envoyée au client à partir de l'application de back end, par défaut, les données de réponse sont mises en mémoire tampon sur le contrôleur Ingress. La réponse client est relayée via un proxy par le contrôleur Ingress qui commence alors à l'envoyer au client au rythme de ce dernier. Une fois que toutes les données provenant de l'application de back end ont été reçues par le contrôleur Ingress, la connexion avec l'application de back end est fermée. La connexion entre le contrôleur Ingress et le client reste ouverte jusqu'à ce que ce dernier reçoive toutes les données.
+ <dd>L'équilibreur de charge d'application Ingress fait office de proxy entre votre application de back end et le navigateur Web du client. Lorsqu'une réponse est envoyée de l'application de back end au client, les données de réponse sont placées par défaut en mémoire tampon sur l'équilibreur de charge d'application. L'équilibreur de charge d'application met en proxy la réponse client et commence à envoyer la réponse au client à la cadence du client. Une fois que toutes les données du back end ont été reçues par l'quilibreur de charge d'application, la connexion à l'application de back end est clôturée. La connexion de l'équilibreur de charge au client reste ouverte jusqu'à ce que le client ait reçu toutes les données.
 
  </br></br>
- Si la mise en mémoire tampon des données de réponse sur le contrôleur Ingress est désactivée, les données sont immédiatement envoyées au client à partir du contrôleur Ingress. Le client doit être capable de traiter les données entrantes au rythme du contrôleur Ingress. Si le client est trop lent, les données risquent d'être perdues.
+ Si la mise en mémoire tampon des données de réponse sur l'équilibreur de charge d'application est désactivée, les données sont envoyées immédiatement de l'équilibreur de charge d'application au client. Le client doit être capable de traiter les données entrantes au rythme de l'équilibreur de charge d'application. Si le client est trop lent, les données risquent d'être perdues.
  </br></br>
- La mise en mémoire tampon des données de réponse sur le contrôleur Ingress est activée par défaut.</dd>
+ La mise en mémoire tampon des données de réponse sur l'équilibreur de charge d'application est activée par défaut.</dd>
  <dt>Exemple de fichier YAML de ressource Ingress</dt>
  <dd>
 
@@ -178,7 +176,7 @@ Retirez de l'application de back end les informations d'en-tête incluses dans l
 
  <dl>
  <dt>Description</dt>
- <dd>Le contrôleur Ingress agit comme un proxy entre votre application de back end et l'application Web client. Les réponses client de l'application de back end qui sont envoyées au contrôleur Ingress sont traitées (elles sont relayées via un proxy) et placées dans une nouvelle réponse qui est ensuite envoyée au navigateur Web client à partir du contrôleur Ingress. Même si le fait de relayer une réponse via un proxy permet de retirer les informations d'en-tête HTTP initialement envoyées à partir de l'application de back end, il se peut que les en-têtes propres à l'application de back end ne soient pas tous retirés par ce processus. Retirez les informations d'en-tête d'une réponse client avant que celle-ci ne soit acheminée du contrôleur Ingress vers le navigateur Web du client.</dd>
+ <dd>L'équilibreur de charge d'application Ingress fait office de proxy entre votre application de back end et le navigateur Web du client. Les réponses client de l'application de back end qui sont envoyées à l'équilibreur de charge d'application (relayées via proxy) et placées dans une nouvelle réponse qui est alors envoyée de l'équilibreur de charge d'application au navigateur Web du client. Même si le fait de relayer une réponse via un proxy permet de retirer les informations d'en-tête HTTP initialement envoyées à partir de l'application de back end, il se peut que les en-têtes propres à l'application de back end ne soient pas tous retirés par ce processus. Supprimez les informations d'en-tête d'une réponse client avant que celle-ci ne soit envoyée de l'équilibreur de charge d'application au navigateur Web du client.</dd>
  <dt>Exemple de fichier YAML de ressource Ingress</dt>
  <dd>
  <pre class="codeblock">
@@ -234,21 +232,20 @@ Retirez de l'application de back end les informations d'en-tête incluses dans l
 ## Personnalisation des paramètres connect-timeout et read-timeout (proxy-connect-timeout, proxy-read-timeout)
 {: #proxy-connect-timeout}
 
-Définissez un paramètre connect-timeout et un paramètre read-timeout personnalisés pour le contrôleur Ingress. Ajustez le délai d'attente observé par le contrôleur Ingress pour établir une connexion à et effectuer une lecture à partir de l'application de back end avant que celle-ci ne soit considérée comme indisponible.
-{:shortdesc}
+Définissez un paramètre connect-timeout et un paramètre read-timeout personnalisés pour l'équilibreur de charge d'application. Ajustez le délai d'attente observé par l'équilibreur de charge d'application pour établir une connexion et effectuer une lecture à partir de l'application de back-end avant que celle-ci ne soit considérée comme indisponible.{:shortdesc}
 
 <dl>
 <dt>Description</dt>
-<dd>Lorsqu'une demande client est envoyée au contrôleur Ingress, une connexion à l'application de back end est ouverte par le contrôleur Ingress. Par défaut, le contrôleur Ingress attend une réponse de l'application de back end pendant 60 secondes. Si l'application de back end ne répond pas au cours de ce délai de 60 secondes, la demande de connexion est abandonnée et l'application de back end est considérée comme indisponible.
+<dd>Lorsqu'une demande client est envoyée à l'équilibreur de charge d'application Ingress, une connexion à l'application de back end est ouverte par l'équilibreur de charge d'application. Par défaut, l'équilibreur de charge d'application patiente pendant 60 seconde pour la réception d'une réponse de l'application de back end. Si l'application de back end ne répond pas au cours de ce délai de 60 secondes, la demande de connexion est abandonnée et l'application de back end est considérée comme indisponible.
 
 </br></br>
-Une fois le contrôleur Ingress connecté à l'application de back end, le contrôleur Ingress lit les données de réponse de cette dernière. Au cours de cette opération de lecture, le contrôleur Ingress observe un délai d'attente maximal de 60 secondes entre deux opérations de lecture avant de recevoir les données de l'application de back end. Si l'application de back end n'envoie pas les données au cours de ce délai de 60 secondes, la connexion avec l'application de back end est fermée et cette dernière est considérée comme indisponible.
+Une fois que l'équilibreur de charge d'application est connecté à l'application de back end, les données de réponse sont lues depuis cette application par l'équilibreur de charge d'application. Au cours de cette opération de lecture, l'équilibreur de charge d'application patiente jusqu'à 60 secondes entre deux opérations de lecture pour recevoir des données de l'application de back end. Si l'application de back end n'envoie pas les données au cours de ce délai de 60 secondes, la connexion avec l'application de back end est fermée et cette dernière est considérée comme indisponible.
 </br></br>
 Sur un proxy, les paramètres connect-timeout et read-timeout sont définis par défaut sur 60 secondes et ne doivent généralement pas être modifiés.
 </br></br>
-En cas d'instabilité de la disponibilité de votre application ou si celle-ci est lente à répondre en raison de charges de travail élevées, vous souhaiterez peut-être augmenter la valeur du paramètre connect-timeout ou read-timeout. Gardez à l'esprit que le fait d'augmenter le délai d'attente aura un impact sur les performances du contrôleur Ingress car la connexion avec l'application de back end doit rester ouverte jusqu'à ce que le délai d'attente soit atteint.
+En cas d'instabilité de la disponibilité de votre application ou si celle-ci est lente à répondre en raison de charges de travail élevées, vous souhaiterez peut-être augmenter la valeur du paramètre connect-timeout ou read-timeout. Rappelez-vous que l'augmentation du délai d'attente a une incidence sur les performances de l'équilibreur de charge d'application puisque la connexion à l'application de back end doit rester ouverte jusqu'à expiration de ce délai.
 </br></br>
-D'un autre côté, vous pouvez réduire le délai d'attente afin d'améliorer les performances du contrôleur Ingress. Assurez-vous que votre application de back end est capable de traiter les demandes dans le délai d'attente imparti, même lorsque les charges de travail sont plus importantes.</dd>
+D'une autre côté, vous pouvez réduire le délai d'attente afin d'améliorer les performances de l'équilibreur de charge d'application. Assurez-vous que votre application de back end est capable de traiter les demandes dans le délai d'attente imparti, même lorsque les charges de travail sont plus importantes.</dd>
 <dt>Exemple de fichier YAML de ressource Ingress</dt>
 <dd>
 
@@ -301,7 +298,7 @@ Modifiez les ports par défaut pour le trafic réseau HTTP (port 80) et HTTPS (p
 
 <dl>
 <dt>Description</dt>
-<dd>Par défaut, le contrôleur Ingress est configuré pour écouter le trafic réseau HTTP entrant sur le port 80 et le trafic réseau HTTPS entrant sur le port 443. Vous pouvez modifier ces ports par défaut pour renforcer la sécurité dans le domaine du contrôleur Ingress ou pour activer uniquement un port HTTPS.
+<dd>Par défaut, l'équilibreur de charge d'application Ingress est configuré pour être à l'écoute du trafic réseau HTTP entrant sur le port 80 et du trafic réseau HTTPS entrant sur le port 443. Vous pouvez changer les ports par défaut pour renforcer la sécurité de votre domaine d'équilibreur de charge ou pour activer seulement un port HTTPS.
 </dd>
 
 
@@ -347,7 +344,7 @@ spec:
 
  </dd>
  <dt>Utilisation</dt>
- <dd><ol><li>Vérifiez les ports ouverts pour votre contrôleur Ingress. **Remarque : l'adresse IP doit être une adresse IP de documentation générique. Avec liaison à l'interface de ligne de commande kubectl qui cible ? Pas forcément.**
+ <dd><ol><li>Examinez les ports ouverts pour votre équilibreur de charge d'application.
 <pre class="pre">
 <code>kubectl get service -n kube-system</code></pre>
 La sortie de votre interface CLI sera similaire à ceci:
@@ -395,10 +392,9 @@ Ajustez la taille maximale du corps que le client peut envoyer dans le cadre d'u
 
 <dl>
 <dt>Description</dt>
-<dd>Dans le but de maintenir les performances attendues, la valeur définie pour la taille maximale du corps de la demande client est 1 mégaoctet. Lorqu'une demande client dont la taille du corps dépasse la limite est envoyée au contrôleur Ingress et que le client n'autorise pas le fractionnement des données, le contrôleur Ingress renvoie une réponse HTTP 413 (Request Entity Too Large) au client. Il est impossible d'établir une connexion entre le client et le contrôleur Ingress tant que la taille du corps de la demande n'est pas réduite. Lorsque le client autorise le fractionnement des données en plusieurs blocs, celles-ci sont scindées en blocs de 1 mégaoctet et envoyées au contrôleur Ingress.
-
+<dd>Dans le but de maintenir les performances attendues, la valeur définie pour la taille maximale du corps de la demande client est 1 mégaoctet. Lorsqu'une demande client dont la taille du corps dépasse la limite est envoyée à l'équilibreur de charge d'application Ingress et que le client n'autorise pas la division des données, l'équilibreur de charge d'application renvoie une réponse HTTP 413 (Entité de demande trop volumineuse) au client. Une connexion entre le client et l'équilibreur de charge d'application n'est pas possible tant que le corps de la demande n'a pas été réduit. Lorsque le client autorise le fractionnement des données en plusieurs blocs, les données sont divisées en packages de 1 mégoctet et envoyées à l'équilibreur de charge d'application.
 </br></br>
-Vous souhaiterez peut-être augmenter la taille maximale du corps car vous attendez des demandes client avec une taille de corps supérieure à 1 mégaoctet. Par exemple, vous voulez que votre client puisse télécharger des fichiers volumineux. Le fait d'augmenter la taille maximale du corps de demande peut avoir un impact sur les performances de votre contrôleur Ingress car la connexion avec le client doit rester ouverte jusqu'à ce que la demande soit reçue.
+Vous souhaiterez peut-être augmenter la taille maximale du corps car vous attendez des demandes client avec une taille de corps supérieure à 1 mégaoctet. Par exemple, vous voulez que votre client puisse télécharger des fichiers volumineux. L'augmentation de la taille de corps de demande maximale peut avoir une incidence sur les performances de votre équilibreur de charge d'application puisque la connexion au client doit rester ouverte jusqu'à ce que la réponse ait été reçue.
 </br></br>
 <strong>Remarque :</strong> certains navigateurs Web client ne peuvent pas afficher correctement le message de réponse HTTP 413.</dd>
 <dt>Exemple de fichier YAML de ressource Ingress</dt>
@@ -511,7 +507,8 @@ Pour tous les services, limitez le débit de traitement des demandes et le nombr
 <dl>
 <dt>Description</dt>
 <dd>
-Pour fixer la limite, des zones sont définies à l'aide des paramètres `ngx_http_limit_conn_module` et `ngx_http_limit_req_module`. Ces zones sont appliquées aux blocs du serveur qui correspondent à chaque hôte dans un mappage Ingress. </dd>
+Pour fixer la limite, des zones sont définies à l'aide des paramètres `ngx_http_limit_conn_module` et `ngx_http_limit_req_module`. Ces zones sont appliquées aux blocs du serveur qui correspondent à chaque hôte dans un mappage Ingress.
+</dd>
 
 
  <dt>Exemple de fichier YAML de ressource Ingress</dt>
@@ -568,7 +565,7 @@ Pour fixer la limite, des zones sont définies à l'aide des paramètres `ngx_ht
 
  <dl>
  <dt>Description</dt>
- <dd>Vous configurez votre contrôleur Ingress afin de sécuriser votre domaine avec le certificat TLS fourni par IBM ou votre certificat TLS personnalisé. Certains utilisateurs peuvent tenter d'accéder à vos applications en utilisant une demande HTTP non sécurisée sur votre domaine de contrôleur Ingress, par exemple, <code>http://www.myingress.com</code>, au lieu d'utiliser <code>https</code>. Vous pouvez utiliser l'annotation redirect pour convertir systématiquement les demandes HTTP non sécurisées en demandes HTTPS. Si vous n'utilisez pas cette annotation, les demandes HTTP non sécurisées ne sont pas converties en demandes HTTPS par défaut et peuvent exposer des informations confidentielles non chiffrées au public.
+ <dd>Configurez votre équilibreur de charge d'application Ingress pour sécuriser votre domaine avec le certificat TLS fourni par IBM ou votre certificat TLS personnalisé. Certains utilisateurs peuvent tenter d'accéder à vos applications en utilisant une demande HTTP non sécurisée vers le domaine d'équilibreur de charge de votre application (par exemple, <code>http://www.myingress.com</code> au lieu de d'utiliser <code>https</code>). Vous pouvez utiliser l'annotation redirect pour convertir systématiquement les demandes HTTP non sécurisées en demandes HTTPS. Si vous n'utilisez pas cette annotation, les demandes HTTP non sécurisées ne sont pas converties en demandes HTTPS par défaut et peuvent exposer des informations confidentielles non chiffrées au public.
 
  </br></br>
  La conversion des demandes HTTP en demandes HTTPS est désactivée par défaut.</dd>
@@ -603,7 +600,7 @@ Pour fixer la limite, des zones sont définies à l'aide des paramètres `ngx_ht
 
  <br />
 
- 
+
  ## Demandes de signal de présence (keepalive-requests)
  {: #keepalive-requests}
 
@@ -723,13 +720,14 @@ Pour fixer la limite, des zones sont définies à l'aide des paramètres `ngx_ht
  ## Authentification mutuelle (mutual-auth)
  {: #mutual-auth}
 
- Configurez l'authentification mutuelle pour le contrôleur Ingress.
+ Configurez une authentification mutuelle pour l'équilibreur de charge d'application.
  {:shortdesc}
 
  <dl>
  <dt>Description</dt>
  <dd>
- Configurer l'authentification mutuelle pour le contrôleur Ingress. Le client authentifie le serveur et le serveur authentifie également le client à l'aide de certificats. L'authentification mutuelle est également appelée authentification basée sur des certificats ou authentification bidirectionnelle.
+Configurez une authentification mutuelle pour l'équilibreur de charge d'application Ingress.
+ Le client authentifie le serveur et le serveur authentifie également le client à l'aide de certificats. L'authentification mutuelle est également appelée authentification basée sur des certificats ou authentification bidirectionnelle.
  </dd>
 
  <dt>Conditions prérequises</dt>
@@ -773,7 +771,7 @@ Pour fixer la limite, des zones sont définies à l'aide des paramètres `ngx_ht
   <tr>
   <td><code>annotations</code></td>
   <td>Remplacez les valeurs suivantes :<ul>
-  <li><code><em>&lt;serviceName&gt;</em></code> : Nom d'une ou plusieurs ressources Ingress. Ce paramètre est facultatif. </li>
+  <li><code><em>&lt;serviceName&gt;</em></code> : Nom d'une ou plusieurs ressources Ingress. Ce paramètre est facultatif.</li>
   <li><code><em>&lt;secretName&gt;</em></code> : Remplacez <em>&lt;secret_name&gt;</em> par le nom de la ressource de valeur confidentielle.</li>
   <li><code><em>&lt;port&gt;</em></code> : Entrez le numéro de port.</li>
   </ul>
@@ -787,10 +785,62 @@ Pour fixer la limite, des zones sont définies à l'aide des paramètres `ngx_ht
  <br />
 
 
+## Routage  d'équilibreur de charge d'application privé (ALB-ID)
+{: #alb-id}
+
+Routez les demandes entrantes vers vos applications à l'aide d'un équilibreur de charge d'application privé.
+{:shortdesc}
+
+<dl>
+<dt>Description</dt>
+<dd>
+Choisissez un équilibreur de charge d'application privé pour acheminer les demandes entrantes au lieu d'utiliser l'équilibreur de charge d'application public.</dd>
+
+
+ <dt>Exemple de fichier YAML de ressource Ingress</dt>
+ <dd>
+
+ <pre class="codeblock">
+ <code>apiVersion: extensions/v1beta1
+ kind: Ingress
+ metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/ALB-ID: "&lt;private_ALB_ID&gt;"
+ spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mytlssecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
+
+ <table>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>annotations</code></td>
+  <td>Remplacez <em>&lt;private_ALB_ID&gt;</em> par l'ID de votre équilibreur de charge d'application privé. Exécutez <code>bx cs albs --cluster <my_cluster></code> pour identifier l'ID de l'équilibreur de charge d'application. </td>
+  </tr>
+  </tbody></table>
+  </dd>
+  </dl>
+
+  <br />
+
+
  ## Tampons de proxy (proxy-buffers)
  {: #proxy-buffers}
- 
- Configurez des tampons de proxy pour le contrôleur Ingress.
+
+ Configurez des tampons de proxy pour l'équilibreur de charge d'application.
  {:shortdesc}
 
  <dl>
@@ -847,7 +897,7 @@ spec:
  ## Taille des tampons occupés de proxy (proxy-busy-buffers-size)
  {: #proxy-busy-buffers-size}
 
- Configurez la taille des tampons occupés de proxy du contrôleur Ingress.
+ Configurez la taille des tampons occupés de proxy pour l'équilibreur de charge d'application.
  {:shortdesc}
 
  <dl>
@@ -904,7 +954,7 @@ spec:
  ## Taille de tampon de proxy (proxy-buffer-size)
  {: #proxy-buffer-size}
 
- Configurez la taille de tampon de proxy du contrôleur Ingress.
+ Configurez la taille des tampons de proxy pour l'équilibreur de charge d'application.
  {:shortdesc}
 
  <dl>
@@ -964,13 +1014,12 @@ spec:
 ## Chemins de redirection (rewrite-path)
 {: #rewrite-path}
 
-Acheminez le trafic réseau entrant sur un chemin de domaine de contrôleur Ingress vers un chemin différent sur lequel votre application de back end est en mode écoute.
+Acheminez le trafic réseau entrant sur un chemin de domaine d'équilibreur de charge d'application différent de celui où votre application de back end est à l'écoute.
 {:shortdesc}
 
 <dl>
 <dt>Description</dt>
-<dd>Votre domaine de contrôleur Ingress achemine vers votre application le trafic réseau entrant sur
-<code>mykubecluster.us-south.containers.mybluemix.net/beans</code>. Votre application est en mode écoute sur <code>/coffee</code> au lieu de <code>/beans</code>. Pour acheminer le trafic réseau entrant vers votre application, ajoutez l'annotation rewrite au fichier de configuration de votre ressource Ingress. L'annotation rewrite garantit que le trafic réseau entrant sur <code>/beans</code> est réacheminé vers votre application en utilisant le chemin <code>/coffee</code>. Lorsque vous incluez plusieurs services, utilisez uniquement un point-virgule (;) pour les séparer.</dd>
+<dd>Votre domaine d'équilibreur de charge d'application Ingress achemine le trafic réseau sur <code>mykubecluster.us-south.containers.mybluemix.net/beans</code> à votre application. Votre application est en mode écoute sur <code>/coffee</code> au lieu de <code>/beans</code>. Pour acheminer le trafic réseau entrant vers votre application, ajoutez l'annotation rewrite au fichier de configuration de votre ressource Ingress. L'annotation rewrite garantit que le trafic réseau entrant sur <code>/beans</code> est réacheminé vers votre application en utilisant le chemin <code>/coffee</code>. Lorsque vous incluez plusieurs services, utilisez uniquement un point-virgule (;) pour les séparer.</dd>
 <dt>Exemple de fichier YAML de ressource Ingress</dt>
 <dd>
 <pre class="codeblock">
@@ -1005,12 +1054,11 @@ spec:
 <tbody>
 <tr>
 <td><code>annotations</code></td>
-<td>Remplacez <em>&lt;service_name&gt;</em> par le nom du service Kubernetes que vous avez créé pour votre application et <em>&lt;target-path&gt;</em>, par le chemin sur lequel votre application est à l'écoute. Le trafic réseau entrant sur le domaine du contrôleur Ingress est réacheminé au service Kubernetes en utilisant ce chemin. La plupart des applications ne sont pas à l'écoute sur un chemin spécifique, mais utilisent le chemin racine et un port spécifique. Dans ce cas, définissez <code>/</code> comme <em>chemin_redirection</em> pour votre application.</td>
+<td>Remplacez <em>&lt;service_name&gt;</em> par le nom du service Kubernetes que vous avez créé pour votre application et <em>&lt;target-path&gt;</em>, par le chemin sur lequel votre application est à l'écoute. Le trafic réseau entrant sur le domaine d'équilibreur de charge d'application est acheminé au service Kubernetes en utilisant ce chemin. La plupart des applications ne sont pas à l'écoute sur un chemin spécifique, mais utilisent le chemin racine et un port spécifique. Dans ce cas, définissez <code>/</code> comme <em>chemin_redirection</em> pour votre application.</td>
 </tr>
 <tr>
 <td><code>path</code></td>
-<td>Remplacez <em>&lt;domain_path&gt;</em> par le chemin que vous désirez ajouter en suffixe à votre domaine de contrôleur
-Ingress. Le trafic réseau entrant sur ce chemin est réacheminé vers le chemin de redirection que vous avez défini dans votre annotation. Dans l'exemple ci-dessus, affectez au chemin de domaine la valeur  <code>/beans</code> pour inclure ce chemin dans l'équilibrage de charge de votre contrôleur Ingress.</td>
+<td>Remplacez <em>&lt;domain_path&gt;</em> par le chemin à ajouter à votre domaine d'équilibreur de charge d'application. Le trafic réseau entrant sur ce chemin est réacheminé vers le chemin de redirection que vous avez défini dans votre annotation. Dans l'exemple ci-dessus, affectez au chemin de domaine la valeur  <code>/beans</code> pour inclure ce chemin dans l'équilibrage de charge de votre contrôleur Ingress.</td>
 </tr>
 <tr>
 <td><code>serviceName</code></td>
@@ -1087,15 +1135,14 @@ Pour définir la limite, des zones définies par `ngx_http_limit_conn_module` et
 ## Affinité de session avec des cookies (sticky-cookie-services)
 {: #sticky-cookie-services}
 
-Utilisez l'annotation sticky cookie pour ajouter une affinité de session à votre contrôleur Ingress et toujours réacheminer le trafic réseau entrant vers le même serveur en amont.
+Utilisez l'annotation sticky cookie pour ajouter une affinité de session à votre équilibreur de charge d'application et toujours acheminer le trafic réseau entrant au même serveur en amont.
 {:shortdesc}
 
 <dl>
 <dt>Description</dt>
-<dd>Pour la haute disponibilité, certaines configurations d'application nécessitent de déployer plusieurs serveurs en amont qui prennent en charge les demandes client entrantes. Lorsqu'un client se connecte à votre application de back end, vous pouvez utiliser l'affinité de session pour qu'un client soit servi par le même serveur en amont pendant toute la durée d'une session ou pendant la durée d'exécution d'une tâche. Vous pouvez configurer votre contrôleur Ingress pour garantir l'affinité de session en acheminant systématiquement le trafic réseau entrant vers le même serveur en amont.
-
+<dd>Pour la haute disponibilité, certaines configurations d'application nécessitent de déployer plusieurs serveurs en amont qui prennent en charge les demandes client entrantes. Lorsqu'un client se connecte à votre application de back end, vous pouvez utiliser l'affinité de session pour qu'un client soit servi par le même serveur en amont pendant toute la durée d'une session ou pendant la durée d'exécution d'une tâche. Vous pouvez configurer votre équilibreur de charge d'application pour assurer une affinité de session en acheminant toujours le trafic réseau entrant au meêm serveur en amont.
 </br></br>
-Chaque client qui se connecte à votre application de back end est affecté à l'un des serveurs en amont disponibles par le contrôleur Ingress. Le contrôleur Ingress crée un cookie de session qui est stocké dans l'application du client et qui est inclus dans les informations d'en-tête de chaque demande entre le contrôleur Ingress et le client. Les informations contenues dans le cookie garantissent la prise en charge de toutes les demandes par le même serveur en amont pendant toute la session.
+Chaque client qui se connecte à votre application de back end est affecté par l'équilibreur de charge d'application à l'un des serveurs n amont disponibles. L'équilibreur de charge d'application crée un cookie de session stocké dans l'application du client et inclus dans les informations d'en-tête de chaque demande entre l'équilibreur de charge d'application et le client. Les informations contenues dans le cookie garantissent la prise en charge de toutes les demandes par le même serveur en amont pendant toute la session.
 
 </br></br>
 Lorsque vous incluez plusieurs services, utilisez un point-virgule (;) pour les séparer.</dd>
@@ -1138,8 +1185,8 @@ spec:
   <td>Remplacez les valeurs suivantes :<ul>
   <li><code><em>&lt;service_name&gt;</em></code> : nom du service Kubernetes que vous avez créé pour votre application.</li>
   <li><code><em>&lt;cookie_name&gt;</em></code> : choisissez un nom pour le cookie compliqué créé au cours d'une session.</li>
-  <li><code><em>&lt;expiration_time&gt;</em></code> : délai, expriméen secondes, minutes ou heures avant l'expiration du cookie compliqué. Ce délai est indépendant de l'activité d'utilisateur. Une fois le cookie arrivé à expiration, il est supprimé par le navigateur Web du client et n'est plus envoyé au contrôleur Ingress. Par exemple, pour définir un délai d'expiration d'1 seconde, d'1 minute ou d'1 heure, entrez <strong>1s</strong>, <strong>1m</strong> ou <strong>1h</strong>.</li>
-  <li><code><em>&lt;cookie_path&gt;</em></code> : chemin qui est ajouté au sous-domaine Ingress et qui indique pour quels domaines et sous-domaines le cookie est envoyé au contrôleur Ingress. Par exemple, si votre domaine Ingress est <code>www.myingress.com</code> et que vous souhaitez envoyer le cookie dans chaque demande client, vous devez définir <code>path=/</code>. Si vous souhaitez envoyer le cookie uniquement pour <code>www.myingress.com/myapp</code> et tous ses sous-domaines, vous devez définir <code>path=/myapp</code>.</li>
+  <li><code><em>&lt;expiration_time&gt;</em></code> : délai, expriméen secondes, minutes ou heures avant l'expiration du cookie compliqué. Ce délai est indépendant de l'activité d'utilisateur. Une fois le cookie arrivé à expiration, il est supprimé par le navigateur Web du client et n'est plus envoyé à l'équilibreur de charge d'application. Par exemple, pour définir un délai d'expiration d'1 seconde, d'1 minute ou d'1 heure, entrez <strong>1s</strong>, <strong>1m</strong> ou <strong>1h</strong>.</li>
+  <li><code><em>&lt;cookie_path&gt;</em></code> : chemin ajouté au sous-domaine Ingress et qui indique pour quels domaines et sous-domaines le cookie est envoyé à l'équilibreur de charge d'application. Par exemple, si votre domaine Ingress est <code>www.myingress.com</code> et que vous souhaitez envoyer le cookie dans chaque demande client, vous devez définir <code>path=/</code>. Si vous souhaitez envoyer le cookie uniquement pour <code>www.myingress.com/myapp</code> et tous ses sous-domaines, vous devez définir <code>path=/myapp</code>.</li>
   <li><code><em>&lt;hash_algorithm&gt;</em></code> : algorithme de hachage qui protège les informations dans le cookie. Seul le type <code>sha1</code> est pris en charge. SHA1 crée une somme hachée basée sur les informations contenues dans le cookie et l'ajoute au cookie. Le serveur peut déchiffrer les informations contenues dans le cookie et vérifier l'intégrité des données.
   </li></ul></td>
   </tr>
@@ -1159,8 +1206,7 @@ Autorisez les demandes HTTPS et chiffrez le trafic vers vos applications en amon
 <dl>
 <dt>Description</dt>
 <dd>
-Chiffrer le trafic vers vos application en amont qui nécessitent HTTPS avec les contrôleurs Ingress.
-
+Chiffrez le trafic vers vos applications en amont qui requièrent d'utiliser HTTPS avec les équilibreurs de charge d'application.
 **Facultatif** : vous pouvez ajouter [l'authentification unidirectionnelle ou l'authentification mutuelle](#ssl-services-auth) à cette annotation.
 </dd>
 
@@ -1201,8 +1247,8 @@ spec:
   <tr>
   <td><code>annotations</code></td>
   <td>Remplacez les valeurs suivantes :<ul>
-  <li><code><em>&lt;myservice&gt;</em></code> : Entrez le nom du service qui représente votre application. Le trafic est chiffré entre le contrôleur Ingress et cette application.</li>
-  <li><code><em>&lt;ssl-secret&gt;</em></code> : Entrez la valeur confidentielle du service. Ce paramètre est facultatif. S'il est fourni, la valeur doit contenir la clé et le certificat que votre application attend du client. </li></ul>
+  <li><code><em>&lt;myservice&gt;</em></code> : Entrez le nom du service qui représente votre application. Le trafic depuis l'équilibreur de charge d'application vers cette application est chiffré.</li>
+  <li><code><em>&lt;ssl-secret&gt;</em></code> : Entrez la valeur confidentielle du service. Ce paramètre est facultatif. S'il est fourni, la valeur doit contenir la clé et le certificat que votre application attend du client.  </li></ul>
   </td>
   </tr>
   <tr>
@@ -1216,7 +1262,7 @@ spec:
   <td>Remplacez <em>&lt;myservicepath&gt;</em> par une barre oblique, ou par le chemin unique sur lequel votre application est à l'écoute, afin que ce trafic réseau puisse être réacheminé à l'application.
 
   </br>
-  Pour chaque service Kubernetes, vous pouvez définir un chemin individuel qui s'ajoute au domaine fourni par IBM afin de constituer un chemin unique vers votre application. Par exemple, <code>ingress_domain/myservicepath1</code>. Lorsque vous indiquez cette route dans un navigateur Web, le trafic réseau est acheminé au contrôleur Ingress. Le contrôleur Ingress recherche le service associé et lui envoie le trafic réseau, ainsi qu'aux pods sur lesquels l'application s'exécute, en utilisant ce même chemin. L'application doit être configurée pour être à l'écoute sur ce chemin afin de recevoir le trafic réseau entrant.
+  Pour chaque service Kubernetes, vous pouvez définir un chemin individuel qui s'ajoute au domaine fourni par IBM afin de constituer un chemin unique vers votre application. Par exemple, <code>ingress_domain/myservicepath1</code>. Lorsque vous spécifiez cette route dans un navigateur Web, le trafic réseau est acheminé à l'équilibreur de charge d'application. L'équilibreur de charge d'application recherche le service associé et envoie le trafic réseau au service, ainsi qu'aux pods où l'application s'exécute en utilisant le même chemin. L'application doit être configurée pour être à l'écoute sur ce chemin afin de recevoir le trafic réseau entrant.
 
   </br></br>
   Bon nombre d'applications ne sont pas à l'écoute sur un chemin spécifique mais utilisent le chemin racine et un port spécifique. Dans ce cas, définissez le chemin racine sous la forme <code>/</code>, sans spécifier de chemin individuel pour votre application.
@@ -1319,7 +1365,7 @@ spec:
   <td>Remplacez <em>&lt;myservicepath&gt;</em> par une barre oblique, ou par le chemin unique sur lequel votre application est à l'écoute, afin que ce trafic réseau puisse être réacheminé à l'application.
 
   </br>
-  Pour chaque service Kubernetes, vous pouvez définir un chemin individuel qui s'ajoute au domaine fourni par IBM afin de constituer un chemin unique vers votre application. Par exemple, <code>ingress_domain/myservicepath1</code>. Lorsque vous indiquez cette route dans un navigateur Web, le trafic réseau est acheminé au contrôleur Ingress. Le contrôleur Ingress recherche le service associé et lui envoie le trafic réseau, ainsi qu'aux pods sur lesquels l'application s'exécute, en utilisant ce même chemin. L'application doit être configurée pour être à l'écoute sur ce chemin afin de recevoir le trafic réseau entrant.
+  Pour chaque service Kubernetes, vous pouvez définir un chemin individuel qui s'ajoute au domaine fourni par IBM afin de constituer un chemin unique vers votre application. Par exemple, <code>ingress_domain/myservicepath1</code>. Lorsque vous spécifiez cette route dans un navigateur Web, le trafic réseau est acheminé à l'équilibreur de charge d'application. L'équilibreur de charge d'application recherche le service associé et envoie le trafic réseau au service, ainsi qu'aux pods où l'application s'exécute en utilisant le même chemin. L'application doit être configurée pour être à l'écoute sur ce chemin afin de recevoir le trafic réseau entrant.
 
   </br></br>
   De nombreuses applications ne sont pas à l'écoute sur un chemin spécifique mais utilisent le chemin racine et un port spécifique. Dans ce cas, définissez le chemin racine sous la forme <code>/</code>, sans spécifier de chemin individuel pour votre application.
@@ -1417,7 +1463,7 @@ data:
 
 
 
-## Ports TCP pour les contrôleurs Ingress (tcp-ports)
+## Ports TCP pour les équilibreurs de charge d'application (tcp-ports)
 {: #tcp-ports}
 
 Accédez à une application via un port TCP non standard.
@@ -1428,7 +1474,7 @@ Accédez à une application via un port TCP non standard.
 <dd>
 Utiliser cette annotation pour une application qui s'exécute sur une charge de travail de flux TCP.
 
-<p>**Remarque** : le contrôleur Ingress fonctionne en mode relais et réachemine le trafic vers les applications de back end. La terminaison SSL n'est pas prise en charge dans ce cas.</p>
+<p>**Remarque **: l'équilibreur de charge d'application opère en mode "pass-through" et achemine le trafic aux applications de back end. La terminaison SSL n'est pas prise en charge dans ce cas.</p>
 </dd>
 
 
@@ -1522,7 +1568,7 @@ Utiliser cette annotation pour une application qui s'exécute sur une charge de 
     <tr>
     <td><code>annotations</code></td>
     <td>Remplacez les valeurs suivantes :<ul>
-    <li><code><em>&lt;serviceName&gt;</em></code> : Remplacez <em>&lt;service_name&gt;</em> par le nom du service Kubernetes que vous avez créé pour votre application. </li>
+    <li><code><em>&lt;serviceName&gt;</em></code> : Remplacez <em>&lt;service_name&gt;</em> par le nom du service Kubernetes que vous avez créé pour votre application.</li>
     <li><code><em>&lt;keepalive&gt;</em></code> : Remplacez <em>&lt;max_connections&gt;</em> par le nombre maximum de connexions de signal de présence inactives au serveur en amont. La valeur par défaut est 64. Une valeur zéro désactive les connexions de signal de présence inactives pour le service spécifié.</li>
     </ul>
     </td>
@@ -1530,5 +1576,3 @@ Utiliser cette annotation pour une application qui s'exécute sur une charge de 
     </tbody></table>
     </dd>
     </dl>
-
-

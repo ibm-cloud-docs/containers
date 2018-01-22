@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-16"
+lastupdated: "2017-12-13"
 
 ---
 
@@ -19,10 +19,10 @@ lastupdated: "2017-10-16"
 # 教程：创建集群
 {: #cs_cluster_tutorial}
 
-在云中部署和管理您自己的 Kubernetes 集群。您可以在称为工作程序节点的独立计算主机集群中自动执行对容器化应用程序的部署、操作、扩展和监视。
+在 {{site.data.keyword.Bluemix_short}} 中部署和管理您自己的 Kubernetes 集群。您可以在称为工作程序节点的独立计算主机集群中自动执行对容器化应用程序的部署、操作、扩展和监视。
 {:shortdesc}
 
-在本教程系列中，您可以看到虚构的公共关系公司使用 Kubernetes 在 {{site.data.keyword.Bluemix_short}} 中部署容器化应用程序的方式。利用 {{site.data.keyword.toneanalyzerfull}}，该 PR 公司可以分析他们的新闻稿，并获得反馈。
+在本教程系列中，您可以看到虚构的公关公司使用 Kubernetes 功能在 {{site.data.keyword.Bluemix_notm}} 中部署容器化应用程序的方式。利用 {{site.data.keyword.toneanalyzerfull}}，该 PR 公司可以分析他们的新闻稿，并获得反馈。
 
 
 ## 目标
@@ -32,7 +32,7 @@ lastupdated: "2017-10-16"
 要设置基础结构，请执行以下操作：
 
 -   创建具有一个工作程序节点的 Kubernetes 集群
--   安装可使用 Kubernetes API 和管理 Docker 映像的 CLI
+-   安装 CLI 以运行 Kubernetes 命令并管理 Docker 映像
 -   在 {{site.data.keyword.registrylong_notm}} 中创建专用映像存储库以存储映像
 -   将 {{site.data.keyword.toneanalyzershort}} 服务添加到集群，以便集群中的任何应用程序都可使用该服务
 
@@ -49,7 +49,8 @@ lastupdated: "2017-10-16"
 
 ## 先决条件
 
--  [{{site.data.keyword.Bluemix_notm}} 帐户 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/registration/)
+-  现买现付或预订 [{{site.data.keyword.Bluemix_notm}} 帐户 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/registration/)
+
 
 
 
@@ -148,12 +149,12 @@ lastupdated: "2017-10-16"
 ## 第 2 课：设置集群环境
 {: #cs_cluster_tutorial_lesson2}
 
-创建 Kubernetes 集群，在 {{site.data.keyword.registryshort_notm}} 中设置专用映像存储库以及向集群添加私钥，以便应用程序可以访问 {{site.data.keyword.toneanalyzershort}} 服务。
+在 {{site.data.keyword.registryshort_notm}} 中设置专用映像存储库，并向集群添加私钥，以便应用程序可以访问 {{site.data.keyword.toneanalyzershort}} 服务。
 
 1.  收到提示时，使用 {{site.data.keyword.Bluemix_notm}} 凭证登录到 {{site.data.keyword.Bluemix_notm}} CLI。
 
     ```
-    bx login [--sso] -a api.eu-gb.bluemix.net
+    bx login [--sso]
     ```
     {: pre}
 

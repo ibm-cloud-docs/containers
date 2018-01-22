@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-28"
+lastupdated: "2017-12-01"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2017-11-28"
 Reportez-vous à ces commandes pour créer et gérer des clusters.
 {:shortdesc}
 
-**Astuce :** vous recherchez des commandes `bx cr` ? Consultez la [référence de l'interface CLI {{site.data.keyword.registryshort_notm}}](/docs/cli/plugins/registry/index.html). Vous recherchez des commandes `kubectl` ? Consultez la [documentation Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/user-guide/kubectl/v1.5/).
+**Astuce :** vous recherchez des commandes `bx cr` ? Consultez la [référence de l'interface CLI {{site.data.keyword.registryshort_notm}}](/docs/cli/plugins/registry/index.html). Vous recherchez des commandes `kubectl` ? Consultez la [documentation Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).
 
 
 <!--[https://github.ibm.com/alchemy-containers/armada-cli ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.ibm.com/alchemy-containers/armada-cli)-->
@@ -439,8 +439,6 @@ Supprimez un cluster de votre organisation.
 
 Ajoutez un service {{site.data.keyword.Bluemix_notm}} à un cluster.
 
-**Astuce :** dans le cas d'utilisateurs de {{site.data.keyword.Bluemix_dedicated_notm}}, voir [Ajout de services {{site.data.keyword.Bluemix_notm}} à des clusters dans {{site.data.keyword.Bluemix_dedicated_notm}} (version bêta fermée)](cs_cluster.html#binding_dedicated).
-
 <strong>Options de commande</strong> :
 
    <dl>
@@ -639,13 +637,13 @@ Vous pourriez devoir modifier vos fichiers YAML en vue de déploiements ultérie
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
-   
+
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
-   <dd>Version Kubernetes du cluster. Si cet indicateur n'est pas spécifié, le maître Kubernetes est mis à jour à la version par défaut de l'API. Pour connaître les versions disponibles, exécutez la commande [bx cs kube-versions](#cs_kube_versions).Cette valeur est facultative.</dd>
+   <dd>Version Kubernetes du cluster. Si cet indicateur n'est pas spécifié, le maître Kubernetes est mis à jour à la version par défaut de l'API. Pour connaître les versions disponibles, exécutez la commande [bx cs kube-versions](#cs_kube_versions). Cette valeur est facultative.</dd>
 
    <dt><code>-f</code></dt>
    <dd>Utilisez cette option pour forcer la mise à jour du maître sans invites utilisateur. Cette valeur est facultative.</dd>
-   
+
    <dt><code>--force-update</code></dt>
    <dd>Tentative de mise à jour alors que la modification est supérieure à deux niveaux de version mineure. Cette valeur est facultative.</dd>
    </dl>
@@ -686,7 +684,7 @@ Définissez les données d'identification du compte d'infrastructure IBM Cloud (
    <dl>
    <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
    <dd>Nom d'utilisateur du compte d'infrastructure IBM Cloud (SoftLayer). Cette valeur est obligatoire.</dd>
-   
+
 
    <dt><code>--infrastructure-api-key <em>API_KEY</em></code></dt>
    <dd>Clé d'API du compte d'infrastructure IBM Cloud (SoftLayer). Cette valeur est obligatoire.
@@ -955,8 +953,8 @@ Mettez à jour le transfert des journaux au serveur de journalisation que vous s
 ### bx cs machine-types LOCATION
 {: #cs_machine_types}
 
-Affichez la liste des types de machine disponibles pour vos noeuds d'agent. Chaque type de machine inclut la quantité d'UC virtuelles, de mémoire et d'espace disque pour chaque noeud worker dans le cluster. 
-- Les types de machine dont le nom inclut `u2c` ou `b2c` utilisent un disque local au lieu du réseau de stockage SAN pour plus de fiabilité. Un SAN procure, entre autres, une capacité de traitement plus élevée lors de la sérialisation des octets sur le disque local et réduit les risques de dégradation du système de fichiers en cas de défaillance du réseau. Ces types de machine contiennent un stockage sur disque local de 25 Go pour le système de fichiers du système d'exploitation et 100 Go de stockage sur disque local pour `/var/lib/docker`, répertoire dans lequel sont écrites toutes les données des conteneurs. 
+Affichez la liste des types de machine disponibles pour vos noeuds d'agent. Chaque type de machine inclut la quantité d'UC virtuelles, de mémoire et d'espace disque pour chaque noeud worker dans le cluster.
+- Les types de machine dont le nom inclut `u2c` ou `b2c` utilisent un disque local au lieu du réseau de stockage SAN pour plus de fiabilité. Un SAN procure, entre autres, une capacité de traitement plus élevée lors de la sérialisation des octets sur le disque local et réduit les risques de dégradation du système de fichiers en cas de défaillance du réseau. Ces types de machine contiennent un stockage sur disque local de 25 Go pour le système de fichiers du système d'exploitation et 100 Go de stockage sur disque local pour `/var/lib/docker`, répertoire dans lequel sont écrites toutes les données des conteneurs.
 - Les types de machine dont le nom inclut `encrypted` chiffrent les données Docker de l'hôte. Le répertoire `/var/lib/docker`, dans lequel sont stockées toutes les données des conteneurs, est chiffré avec le chiffrement LUKS.
 - Les types de machine dont le nom inclut `u1c` ou `b1c` sont obsolètes. Par exemple, `u1c.2x4`. Pour démarrer des machines de type `u2c` et`b2c`, utilisez la commande `bx cs worker-add` afin d'ajouter des noeuds d'agent avec les types de machine mis à jour. Ensuite, supprimez les noeuds d'agent qui utilisent les types de machine obsolètes à l'aide de la commande `bx cs worker-rm`.
 </p>
@@ -1250,13 +1248,13 @@ Vous pourriez devoir modifier vos fichiers YAML en vue des déploiements avant l
 
    <dt><em>CLUSTER</em></dt>
    <dd>Nom ou ID du cluster sur lequel répertorier les noeuds d'agent disponibles. Cette valeur est obligatoire.</dd>
-   
+
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
-   <dd>Version Kubernetes du cluster. Si cet indicateur n'est pas spécifié, le noeud worker est mis à jour à la version par défaut. Pour connaître les versions disponibles, exécutez la commande [bx cs kube-versions](#cs_kube_versions).Cette valeur est facultative.</dd>
+   <dd>Version Kubernetes du cluster. Si cet indicateur n'est pas spécifié, le noeud worker est mis à jour à la version par défaut. Pour connaître les versions disponibles, exécutez la commande [bx cs kube-versions](#cs_kube_versions). Cette valeur est facultative.</dd>
 
    <dt><code>-f</code></dt>
    <dd>Utilisez cette option pour forcer la mise à jour du maître sans invites utilisateur. Cette valeur est facultative.</dd>
-   
+
    <dt><code>--force-update</code></dt>
    <dd>Tentative de mise à jour alors que la modification est supérieure à deux niveaux de version mineure. Cette valeur est facultative.</dd>
 

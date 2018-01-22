@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-15"
+lastupdated: "2017-12-01"
 
 ---
 
@@ -138,7 +138,7 @@ reportez-vous à la documentation relative à ces outils.
 
 -   [Commandes `bx`](/docs/cli/reference/bluemix_cli/bx_cli.html)
 -   [Commandes `bx cs`](cs_cli_reference.html#cs_cli_reference)
--   [Commandes `kubectl` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/user-guide/kubectl/v1.7/)
+-   [Commandes `kubectl` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)
 -   [Commandes `bx cr`](/docs/cli/plugins/registry/index.html)
 
 <br />
@@ -164,9 +164,7 @@ et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré
 
   2.  Sélectionnez un compte {{site.data.keyword.Bluemix_notm}}. Si vous êtes affecté à plusieurs organisations {{site.data.keyword.Bluemix_notm}}, sélectionnez celle dans laquelle le cluster a été créé. Les clusters sont spécifiques à une organisation, mais sont indépendants d'un espace {{site.data.keyword.Bluemix_notm}}. Vous n'avez donc pas besoin de sélectionner un espace.
 
-  3.  Si vous souhaitez créer ou accéder à des clusters Kubernetes dans une région qui n'est pas la région {{site.data.keyword.Bluemix_notm}} sélectionnée précédemment, [spécifiez le noeud final d'API de la région {{site.data.keyword.containershort_notm}}](cs_regions.html#container_login_endpoints).
-
-      **Remarque** : si vous souhaitez créer un cluster dans l'Est des Etats-Unis, vous devez spécifiez le noeud final d'API de la région du conteneur Est des Etats-Unis, à l'aide de la commande `bx cs init --host https://us-east.containers.bluemix.net`.
+  3.  Si vous désirez créer ou accéder à des clusters Kubernetes dans une région {{site.data.keyword.Bluemix_notm}} autre que celle que vous aviez sélectionné auparavant, exécutez la commande `bx cs region-set`.
 
   4.  Répertoriez tous les clusters du compte pour obtenir le nom du cluster.
 
@@ -230,7 +228,7 @@ Kubernetes.
       {: screen}
 
 Vous pouvez à présent exécuter des commandes `kubectl` pour gérer
-vos clusters dans {{site.data.keyword.Bluemix_notm}}. Pour obtenir la liste complète des commandes, voir la [documentation Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/user-guide/kubectl/v1.7/).
+vos clusters dans {{site.data.keyword.Bluemix_notm}}. Pour obtenir la liste complète des commandes, voir la [documentation Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).
 
 **Astuce :** si vous utilisez Windows et que l'interface CLI de Kubernetes n'est pas installée dans le même répertoire que l'interface CLI de {{site.data.keyword.Bluemix_notm}}, vous devez basculer entre les répertoires en spécifiant le chemin d'accès de l'installation de l'interface CLI de Kubernetes pour que l'exécution de `kubectl` puisse aboutir.
 
@@ -278,14 +276,15 @@ et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré
         ```
         {: pre}
 
-    2.  Vérifiez l'installation du plug-in en exécutant la commande suivante et en vérifiant la liste des plug-in installés.
+    2.  Vérifiez l'installation du plug-in en exécutant la commande suivante et en vérifiant la liste des
+plug-in installés.
 
         ```
         bx plugin list
         ```
         {: pre}
 
-        Le plug-in d'{{site.data.keyword.containershort_notm}} est affiché dans les résultats sous le nom container-service.
+        Le plug-in {{site.data.keyword.containershort_notm}} est affiché dans les résultats en tant que container-service.
 
     3.  Initialisez l'interface CLI.
 
@@ -455,6 +454,14 @@ L'API {{site.data.keyword.containershort_notm}} requiert de fournir des informat
     ```
     {: codeblock}
 
+    Exemple :
+    ```
+    POST https://iam.ng.bluemix.net/oidc/token
+    ```
+    {: pre}
+
+    Pour spécifier une région {{site.data.keyword.Bluemix_notm}}, [examinez les abréviations de régions utilisées dans les noeuds finaux d'API](cs_regions.html#bluemix_regions).
+
     <table summary-"Input parameters to get tokens">
     <thead>
         <th>Paramètres d'entrée</th>
@@ -568,6 +575,14 @@ L'API {{site.data.keyword.containershort_notm}} requiert de fournir des informat
     ```
     {: codeblock}
 
+    Exemple :
+    ```
+    POST https://iam.ng.bluemix.net/oidc/token
+    ```
+    {: pre}
+
+    Pour spécifier une région {{site.data.keyword.Bluemix_notm}}, [examinez les abréviations de régions utilisées dans les noeuds finaux d'API](cs_regions.html#bluemix_regions).
+
     <table summary-"Input parameters to get tokens">
     <thead>
         <th>Paramètres d'entrée</th>
@@ -633,38 +648,8 @@ L'API {{site.data.keyword.containershort_notm}} requiert de fournir des informat
 
 4.  Répertoriez tous les clusters Kubernetes dans votre compte. Utilisez les informations extraites auparavant pour construire vos informations d'en-tête.
 
-    -   Sud des Etats-Unis
-
         ```
-        GET https://us-south.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   Est des Etats-Unis
-
-        ```
-        GET https://us-east.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   Sud du Royaume-Uni
-
-        ```
-        GET https://uk-south.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   Europe centrale
-
-        ```
-        GET https://eu-central.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   Asie-Pacifique sud
-
-        ```
-        GET https://ap-south.containers.bluemix.net/v1/clusters
+        GET https://containers.bluemix.net/v1/clusters
         ```
         {: codeblock}
 
@@ -682,7 +667,7 @@ L'API {{site.data.keyword.containershort_notm}} requiert de fournir des informat
         </tbody>
         </table>
 
-5.  Consultez la [documentation d'API {{site.data.keyword.containershort_notm}}![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://us-south.containers.bluemix.net/swagger-api) pour obtenir la liste des API prises en charge.
+5.  Examinez la docuemntation de l'API [{{site.data.keyword.containershort_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger-api) pour la liste des API prises en charge.
 
 <br />
 
@@ -700,7 +685,7 @@ Procédez comme suit si vous désirez actualiser votre jeton IAM.
 1.  Générez un nouveau jeton d'accès IAM. Remplacez _&lt;iam_refresh_token&gt;_ par le jeton d'actualisation IAM que vous avez reçu lors de votre authentification auprès de {{site.data.keyword.Bluemix_notm}}.
 
     ```
-    POST https://iam.ng.bluemix.net/oidc/token
+    POST https://iam.bluemix.net/identity/token
     ```
     {: codeblock}
 

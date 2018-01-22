@@ -16,14 +16,13 @@ lastupdated: "2017-11-02"
 {:download: .download}
 
 
-# Creación de una señal de {{site.data.keyword.registryshort_notm}} para un registro de imágenes de {{site.data.keyword.Bluemix_dedicated_notm}} Dedicado
+# Creación de una señal de {{site.data.keyword.registryshort_notm}} para un registro de imágenes de {{site.data.keyword.Bluemix_dedicated_notm}}
 {: #cs_dedicated_tokens}
 
 Cree una señal que no caduque para utilizar un registro de imágenes que pueda utilizar para grupos escalables con clústeres.
 {:shortdesc}
 
 1.  Inicie sesión en el entorno de {{site.data.keyword.Bluemix_dedicated_notm}}.
-
 
     ```
     bx login -a api.<dedicated_domain>

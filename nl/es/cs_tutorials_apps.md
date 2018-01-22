@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-14"
+lastupdated: "2017-12-08"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -24,7 +24,7 @@ Esta segunda guía de aprendizaje continúa mostrando cómo puede desplegar una 
 
 En este caso de ejemplo, el desarrollador de apps de la empresa PR despliega una versión de Hello World de la app en el clúster de Kubernetes que el administrador de la red ha creado en la [primera guía de aprendizaje](cs_tutorials.html#cs_cluster_tutorial).
 
-En cada lección aprenderá a desplegar versiones cada vez más complicadas de la misma app.  El diagrama muestra los componentes de la guía de aprendizaje de despliegues de apps, excepto la cuarta parte.
+En cada lección aprenderá a desplegar versiones cada vez más complicadas de la misma app. El diagrama muestra los componentes de la guía de aprendizaje de despliegues de apps, excepto la cuarta parte.
 
 ![Componentes de la lección](images/cs_app_tutorial_roadmap.png)
 
@@ -404,7 +404,6 @@ En esta lección, desplegará tres instancias de la app Hello World en un clúst
 
 El siguiente diagrama incluye los componentes que desplegará al completar esta lección.
 
-
 ![Configuración del despliegue](images/cs_app_tutorial_components2.png)
 
 En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un nodo trabajador. En esta lección, debe configurar un despliegue y desplegar tres instancias de la app Hello World. Cada instancia se despliega en un pod de Kubernetes como parte de un conjunto de réplicas del nodo trabajador. Para hacerlo accesible a nivel público, puede crear un servicio Kubernetes. 
@@ -609,7 +608,6 @@ En las lecciones anteriores, las apps se han desplegado como componentes únicos
 {:shortdesc}
 
 El siguiente diagrama incluye los componentes que desplegará al completar esta lección.
-
 
 ![Configuración del despliegue](images/cs_app_tutorial_components3.png)
 
@@ -829,110 +827,45 @@ de la app {{site.data.keyword.watson}} de esta guía de aprendizaje están confi
 ### Lección 3b. Actualización del despliegue de Watson Tone Analyzer en ejecución
 {: #lesson3b}
 
-Mientras un despliegue se está ejecutando, puede editar el despliegue para cambiar valores en la plantilla del pod. Esta lección incluye la actualización de la imagen que se utiliza.
+Mientras un despliegue se está ejecutando, puede editar el despliegue para cambiar valores en la plantilla del pod. Esta lección incluye la actualización de la imagen que se utiliza. La empresa PR quiere cambiar la app en el despliegue.
 
-1.  Cambie el nombre de la imagen. La empresa PR desea probar otra app en el mismo despliegue, pero quiere poder retrotraer si se detecta algún problema con la nueva app.
+Cambie el nombre de la imagen:
 
-    1.  Abra el script de configuración del despliegue en ejecución.
+1.  Abra los detalles de configuración del despliegue en ejecución.
 
-        ```
-        kubectl edit deployment/watson-talk-pod
-        ```
-        {: pre}
+    ```
+    kubectl edit deployment/watson-talk-pod
+    ```
+    {: pre}
 
-        En función del sistema operativo, lo abre un editor vi o un editor de texto.
+    En función del sistema operativo, lo abre un editor vi o un editor de texto.
 
-    2.  Cambie el nombre de la imagen por la imagen ibmliberty.
+2.  Cambie el nombre de la imagen por la imagen ibmliberty.
 
-        ```
-        spec:
+    ```
+    spec:
               containers:
               - image: registry.<region>.bluemix.net/ibmliberty:latest
-        ```
-        {: codeblock}
+    ```
+    {: codeblock}
 
-    3.  Guarde los cambios y salga del editor.
+3.  Guarde los cambios y salga del editor.
 
-    4.  Aplique los cambios del script de configuración al despliegue en ejecución.
+4.  Aplique los cambios en el despliegue en ejecución.
 
-        ```
-        kubectl rollout status deployment/watson-talk-pod
-        ```
-        {: pre}
+    ```
+    kubectl rollout status deployment/watson-talk-pod
+    ```
+    {: pre}
 
-        Espere a que se confirme que la actualización ha finalizado.
+    Espere a que se confirme que la actualización ha finalizado.
 
-        ```
-        deployment "watson-talk-pod" successfully rolled out
-        ```
-        {: screen}
+    ```
+    deployment "watson-talk-pod" successfully rolled out
+    ```
+    {: screen}
 
-        Cuando se despliega un cambio, se crea otro pod y Kubernetes lo prueba. Cuando la prueba se ejecuta correctamente, el pod antiguo se elimina.
-
-    5.  Si los cambios no tienen el efecto esperado, se pueden retrotraer. Es posible que alguien de la empresa PR haya cometido un error con los cambios en la app y tengan que recuperar el despliegue anterior.
-
-        1.  Ver los números de versión de revisión para identificar el número del despliegue anterior. La revisión más reciente es la que tiene el número de versión más alto. En este ejemplo, la revisión 1 era el despliegue original y la revisión 2 es el cambio de imagen que ha realizado en el paso anterior.
-
-            ```
-            kubectl rollout history deployment/watson-talk-pod
-            ```
-            {: pre}
-
-            Salida:
-
-            ```
-            deployments "watson-talk-pod"
-            REVISION CHANGE-CAUSE
-            1          <none>
-            2          <none>
-
-            ```
-            {: screen}
-
-        2.  Ejecute el siguiente mandato para revertir el despliegue a la revisión anterior. De nuevo, se crea otro pod y Kubernetes lo prueba. Cuando la prueba se ejecuta correctamente, el pod antiguo se elimina.
-
-            ```
-            kubectl rollout undo deployment/watson-talk-pod --to-revision=1
-            ```
-            {: pre}
-
-            Salida:
-
-            ```
-            deployment "watson-talk-pod" rolled back
-            ```
-            {: screen}
-
-        3.  Obtener el nombre del pod para utilizarlo en el paso siguiente.
-
-            ```
-            kubectl get pods
-            ```
-            {: pre}
-
-            Salida:
-
-            ```
-            NAME                              READY     STATUS    RESTARTS   AGE
-            watson-talk-pod-2511517105-6tckg  1/1       Running   0          2m
-            ```
-            {: screen}
-
-        4.  Ver los detalles del pod y verificar que la imagen se ha retrotraído.
-
-            ```
-            kubectl describe pod <pod_name>
-            ```
-            {: pre}
-
-            Salida:
-
-            ```
-            Image: registry.<region>.bluemix.net/namespace/watson-talk
-            ```
-            {: screen}
-
-2.  Opcional: Repita los cambios para el despliegue de watson-pod.
+    Cuando se despliega un cambio, se crea otro pod y Kubernetes lo prueba. Cuando la prueba se ejecuta correctamente, el pod antiguo se elimina.
 
 [Probar sus conocimientos y responder a un cuestionario.![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 

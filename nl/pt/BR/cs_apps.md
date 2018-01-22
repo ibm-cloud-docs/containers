@@ -1,8 +1,6 @@
 ---
 
-copyright:
-  years: 2014, 2017
-lastupdated: "2017-11-28"
+copyright: years: 2014, 2017 lastupdated: "2017-12-18"
 
 ---
 
@@ -42,7 +40,7 @@ Aprenda as etapas gerais para implementar apps clicando em uma área da imagem a
 Abra um painel do Kubernetes em seu sistema local para visualizar informações sobre um cluster e seus nós do trabalhador.
 {:shortdesc}
 
-Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para seu cluster. Essa tarefa requer a [política de acesso de Administrador](cs_cluster.html#access_ov). Verifique sua [política de acesso atual](cs_cluster.html#view_access).
+Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para seu cluster. Essa tarefa requer a [política de acesso de Administrador](cs_cluster.html#access_ov). Verifique sua [política de acesso](cs_cluster.html#view_access) atual.
 
 É possível usar a porta padrão ou configurar sua própria porta para ativar o painel do Kubernetes para um cluster.
 
@@ -217,21 +215,57 @@ Para criar um segredo com um certificado:
 Para tornar um app publicamente disponível na Internet, deve-se atualizar seu arquivo de configuração antes de implementar o app em um cluster.
 {:shortdesc}
 
-Dependendo de você ter criado um cluster lite ou padrão, existem maneiras diferentes de tornar seu app acessível na Internet.
+*Figura 1. Plano de dados do Kubernetes no {{site.data.keyword.containershort_notm}}*
+
+![{{site.data.keyword.containerlong_notm}} Arquitetura do Kubernetes](images/networking.png)
+
+O diagrama mostra como o Kubernetes transporta o tráfego de rede do usuário em {{site.data.keyword.containershort_notm}}. Dependendo de você ter criado um cluster lite ou padrão, existem maneiras diferentes de tornar seu app acessível na Internet.
 
 <dl>
 <dt><a href="#cs_apps_public_nodeport" target="_blank">serviço NodePort</a> (clusters lite e padrão)</dt>
-<dd>Exponha uma porta pública em cada nó do trabalhador e use o endereço IP público de qualquer nó do trabalhador para acessar publicamente seu serviço no cluster. O endereço IP público do nó do trabalhador não é permanente. Quando um nó do trabalhador é removido ou recriado, um novo endereço IP público é designado ao
-nó do trabalhador. É possível usar o serviço do NodePort para testar o acesso público para o seu aplicativo ou quando o acesso público for necessário apenas para uma quantia pequena de tempo. Ao requerer um endereço IP público estável e mais disponibilidade para seu terminal em serviço, exponha seu app usando um serviço LoadBalancer ou Ingresso.</dd>
+<dd>
+ <ul>
+  <li>Exponha uma porta pública em cada nó do trabalhador e use o endereço IP público de qualquer nó do trabalhador para acessar publicamente seu serviço no cluster.</li>
+  <li>Iptables é um recurso de kernel do Linux que faz o balanceamento de carga das solicitações dos Pods do aplicativo, fornece
+roteamento de rede de alto desempenho e controle de acesso de rede.</li>
+  <li>O endereço IP público do nó do trabalhador não é permanente. Quando um nó do trabalhador é removido ou recriado, um novo endereço IP público é designado ao
+nó do trabalhador.</li>
+  <li>O serviço NodePort é ótimo para testar o acesso público. Ele também pode ser usado se você precisa de acesso público somente por um curto tempo.</li>
+ </ul>
+</dd>
 <dt><a href="#cs_apps_public_load_balancer" target="_blank">serviço LoadBalancer</a> (somente clusters padrão)</dt>
-<dd>Cada cluster padrão é provisionado com 4 endereços IP públicos móveis e 4 endereços IP privados móveis que podem ser usados para criar um balanceador de carga TCP/UDP externo para seu app. É possível customizar seu balanceador de carga expondo qualquer porta que seu app requer. O endereço IP público móvel que é designado para o balanceador de carga é permanente e não muda quando um nó do trabalhador é recriado no cluster.
-
-</br>
-Se você precisar de balanceamento de carga de HTTP ou HTTPS para o seu app e desejar usar uma rota pública para expor múltiplos apps em seu cluster como serviços, use o suporte do Ingresso integrado com o {{site.data.keyword.containershort_notm}}.</dd>
+<dd>
+ <ul>
+  <li>Cada cluster padrão é provisionado com 4 endereços IP públicos móveis e 4 endereços IP privados móveis que podem ser usados para criar um balanceador de carga TCP/UDP externo para seu app.</li>
+  <li>Iptables é um recurso de kernel do Linux que faz o balanceamento de carga das solicitações dos Pods do aplicativo, fornece
+roteamento de rede de alto desempenho e controle de acesso de rede.</li>
+  <li>O endereço IP público móvel que é designado para o balanceador de carga é permanente e não muda quando um nó do trabalhador é recriado no cluster.</li>
+  <li>É possível customizar seu balanceador de carga expondo qualquer porta que seu app requer.</li></ul>
+</dd>
 <dt><a href="#cs_apps_public_ingress" target="_blank">Ingresso</a> (somente clusters padrão)</dt>
-<dd>Exponha múltiplos apps no cluster criando um balanceador de carga HTTP ou HTTPS externo que use um ponto de entrada público assegurado e exclusivo para rotear solicitações recebidas para seus apps. O ingresso consiste em dois componentes principais, o recurso de Ingresso e o controlador de Ingresso. O recurso de Ingresso define as regras de como rotear e balancear a carga de solicitações recebidas para um app. Todos os recursos de Ingresso devem ser registrados com o controlador de Ingresso que atende a solicitações de serviço HTTP ou HTTPS recebidas e encaminha solicitações com base nas regras definidas para cada recurso de Ingresso. Use Ingresso se desejar implementar seu próprio balanceador de carga com regras de roteamento customizadas e se precisar de finalização SSL para seus apps.
-
+<dd>
+ <ul>
+  <li>Exponha múltiplos apps no cluster criando um balanceador de carga HTTP ou HTTPS externo que use um ponto de entrada público assegurado e exclusivo para rotear solicitações recebidas para seus apps.</li>
+  <li>É possível usar uma rota pública para expor múltiplos apps em seu cluster como serviços.</li>
+  <li>O Ingress consiste em três componentes principais, o recurso do Ingress, o controlador do Ingress e o balanceador de carga de aplicativo.
+   <ul>
+    <li>O recurso de Ingresso define as regras de como rotear e balancear a carga de solicitações recebidas para um app.</li>
+    <li>O controlador do Ingress permite que o balanceador de carga de aplicativo, que atende o serviço HTTP ou HTTPS, solicite e encaminhe solicitações com base nas regras definidas para cada recurso do Ingress.</li>
+    <li>O carregador do balanceador de carga do aplicativo balanceia solicitações em todos os pods dos apps.
+   </ul>
+  <li>Use Ingresso se desejar implementar seu próprio balanceador de carga com regras de roteamento customizadas e se precisar de finalização SSL para seus apps.</li>
+ </ul>
 </dd></dl>
+
+Para escolher a melhor opção de rede para seu aplicativo, é possível seguir esta árvore de decisão:
+
+<img usemap="#networking_map" border="0" class="image" src="images/networkingdt.png" width="500px" alt="Esta imagem orienta na escolha da melhor opção de rede para seu aplicativo. Se esta imagem não estiver sendo exibida, a informação ainda poderá ser encontrada na documentação." style="width:500px;" />
+<map name="networking_map" id="networking_map">
+<area href="/docs/containers/cs_apps.html#cs_apps_public_nodeport" alt="Serviço Nodeport" shape="circle" coords="52, 283, 45"/>
+<area href="/docs/containers/cs_apps.html#cs_apps_public_load_balancer" alt="Serviço Loadbalancer" shape="circle" coords="247, 419, 44"/>
+<area href="/docs/containers/cs_apps.html#cs_apps_public_ingress" alt="Serviço Ingress" shape="circle" coords="445, 420, 45"/>
+</map>
+
 
 ### Configurando o acesso público para um app usando o tipo de serviço NodePort
 {: #cs_apps_public_nodeport}
@@ -242,8 +276,6 @@ curto prazo.
 {:shortdesc}
 
 É possível expor seu app como um serviço do Kubernetes NodePort para clusters lite ou padrão.
-
-Para ambientes {{site.data.keyword.Bluemix_dedicated_notm}}, os endereços IP públicos são bloqueados por um firewall. Para tornar um app publicamente disponível, use um [serviço LoadBalancer](#cs_apps_public_load_balancer) ou [Ingresso](#cs_apps_public_ingress) no lugar.
 
 **Nota:** o endereço IP público de um nó do trabalhador não é permanente. Se o nó do trabalhador precisar ser recriado, um novo endereço IP público será designado ao nó do trabalhador. Se você precisar de um endereço IP público estável e mais disponibilidade para seu serviço, exponha seu app usando um [serviço LoadBalancer](#cs_apps_public_load_balancer) ou [Ingresso](#cs_apps_public_ingress).
 
@@ -366,8 +398,6 @@ Diferente de um serviço NodePort, o endereço IP móvel do serviço de balancea
 
 O endereço IP móvel do balanceador de carga é designado para você e não muda quando você inclui ou remove nós do trabalhador. Portanto, os serviços do balanceador de carga são mais altamente disponíveis do que os serviços NodePort. Os usuários podem selecionar qualquer porta para o balanceador de carga e não são limitados ao intervalo de portas NodePort. É possível usar serviços de balanceador de carga para os protocolos TCP e UDP.
 
-Quando uma conta do {{site.data.keyword.Bluemix_dedicated_notm}} for [ativada para clusters](cs_ov.html#setup_dedicated), será possível solicitar que sub-redes públicas sejam usadas para endereços IP do balanceador de carga. [Abra um chamado de suporte](/docs/support/index.html#contacting-support) para criar a sub-rede e, em seguida, use o comando [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) para incluir a sub-rede no cluster.
-
 **Nota:** os serviços do balanceador de carga não suportam finalização do TLS. Se seu app requerer a finalização do TLS, será possível expor seu app usando [Ingresso](#cs_apps_public_ingress) ou configurar seu app para gerenciar a finalização do TLS.
 
 Antes de iniciar:
@@ -410,8 +440,8 @@ Para criar um serviço de balanceador de carga:
         kind: Service
         metadata:
           name: <myservice>
-          annotations: 
-            service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private> 
+          annotations:
+            service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>
         spec:
           type: LoadBalancer
           selector:
@@ -419,6 +449,7 @@ Para criar um serviço de balanceador de carga:
           ports:
            - protocol: TCP
              port: 8080
+          loadBalancerIp: <private_ip_address>
         ```
         {: codeblock}
 
@@ -442,6 +473,11 @@ Para criar um serviço de balanceador de carga:
         <tr>
           <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:`
           <td>Anotação para especificar o tipo de LoadBalancer. Os valores são `private` e `public`. Ao criar um LoadBalancer público em clusters em VLANs públicas, essa anotação não é necessária.</td>
+        </tr>
+        <tr>
+          <td><code>loadBalancerIp</code></td>
+          <td>Ao criar um LoadBalancer privado, substitua <em>&lt;loadBalancerIp&gt;</em> pelo endereço IP que você deseja usar para o LoadBalancer.</td>
+        </tr>
         </tbody></table>
     3.  Opcional: para usar um endereço IP móvel específico para o balanceador de carga que está disponível para seu cluster, é possível especificar esse endereço IP incluindo o `loadBalancerIP` na seção de especificação. Para obter mais informações, veja a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/services-networking/service/).
     4.  Opcional: configure um firewall especificando o `loadBalancerSourceRanges` na seção de especificação. Para obter mais informações, veja a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
@@ -495,46 +531,55 @@ Para criar um serviço de balanceador de carga:
         {: codeblock}
 
 
-
-
-### Configurando o acesso a um app usando o controlador de Ingresso
+### Configurando o acesso a um app usando Ingress
 {: #cs_apps_public_ingress}
 
-Exponha múltiplos apps em seu cluster criando recursos de Ingresso que são gerenciados pelo controlador de Ingresso fornecido pela IBM. O controlador de Ingresso é um balanceador de carga HTTP ou HTTPS externo que usa um ponto de entrada público ou privado seguro e exclusivo para rotear solicitações recebidas para seus apps dentro ou fora do cluster.
+Exponha múltiplos apps em seu cluster criando recursos de Ingresso que são gerenciados pelo controlador de Ingresso fornecido pela IBM. O controlador do Ingress cria os recursos necessários para usar um balanceador de carga de aplicativo. Um balanceador de carga de aplicativo é um balanceador de carga HTTP ou HTTPS externo que usa um ponto de entrada público ou privado assegurado e exclusivo para rotear solicitações recebidas para seus apps dentro ou fora do cluster.
 
-**Nota:** o Ingresso está disponível somente para clusters padrão e requer pelo menos dois nós do trabalhador no cluster para assegurar alta disponibilidade e que atualizações periódicas sejam aplicadas. Configurar o Ingresso requer uma [política de acesso de Administrador](cs_cluster.html#access_ov). Verifique sua [política de acesso atual](cs_cluster.html#view_access).
+**Nota:** o Ingresso está disponível somente para clusters padrão e requer pelo menos dois nós do trabalhador no cluster para assegurar alta disponibilidade e que atualizações periódicas sejam aplicadas. Configurar o Ingresso requer uma [política de acesso de Administrador](cs_cluster.html#access_ov). Verifique sua [política de acesso](cs_cluster.html#view_access) atual.
 
-Ao criar um cluster padrão, um controlador de Ingresso designado a um endereço IP público móvel e a uma rota pública é criado e ativado automaticamente para você. Um controlador de Ingresso designado a um endereço IP privado móvel e uma rota privada também é criado automaticamente, mas não é ativado automaticamente. É possível configurar esses controladores de Ingresso e definir regras de roteamento individual para cada app que você expõe ao público ou às redes privadas. Cada app que é exposto ao público por meio do Ingresso é designado a um caminho exclusivo que é anexado à rota pública, para que seja possível usar uma URL exclusiva para acessar um app publicamente em seu cluster.
+Ao criar um cluster padrão, o controlador de Ingress automaticamente cria e ativa um balanceador de carga de aplicativo que é designado um endereço IP público móvel e uma rota pública. Um balanceador de carga de aplicativo que é designado a um endereço IP privado móvel e a uma rota privada também é criado automaticamente, mas não é ativado automaticamente. É possível configurar esses balanceadores de carga de aplicativo e definir regras de roteamento individuais para cada app que você expõe ao público ou às redes privadas. Cada app que é exposto ao público por meio do Ingresso é designado a um caminho exclusivo que é anexado à rota pública, para que seja possível usar uma URL exclusiva para acessar um app publicamente em seu cluster.
 
-Quando uma conta do {{site.data.keyword.Bluemix_dedicated_notm}} é [ativada para clusters](cs_ov.html#setup_dedicated), é possível solicitar que sub-redes públicas sejam usadas para endereços IP do controlador de Ingresso. Em seguida, o controlador de Ingresso é criado e uma rota pública é designada. [Abra um chamado de suporte](/docs/support/index.html#contacting-support) para criar a sub-rede e, em seguida, use o comando [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) para incluir a sub-rede no cluster.
+Para expor seu app ao público, é possível configurar o balanceador de carga de aplicativo público para os cenários a seguir.
 
-Para expor seu app ao público, é possível configurar o controlador de Ingresso público para os cenários a seguir.
-
--   [Usar o domínio fornecido pela IBM sem finalização do TLS](#ibm_domain)
--   [Usar o domínio fornecido pela IBM com finalização do TLS](#ibm_domain_cert)
--   [Usar um domínio customizado e certificado TLS para executar a finalização do TLS](#custom_domain_cert)
+-   [Usar o domínio fornecido pela IBM sem finalização TLS](#ibm_domain)
+-   [Usar o domínio fornecido pela IBM com finalização TLS](#ibm_domain_cert)
+-   [Usar um domínio customizado e certificado TLS para executar a finalização TLS](#custom_domain_cert)
 -   [Usar o domínio fornecido pela IBM ou um customizado com finalização TLS para acessar apps fora de seu cluster](#external_endpoint)
--   [Abrindo portas no balanceador de carga do Ingresso](#opening_ingress_ports)
--   [Configurando protocolos SSL e cifras SSL no nível de HTTP](#ssl_protocols_ciphers)
--   [Customizar o seu controlador de Ingresso com anotações](cs_annotations.html)
+-   [Abrir portas no balanceador de carga do Ingress](#opening_ingress_ports)
+-   [Configurar protocolos SSL e cifras SSL no nível de HTTP](#ssl_protocols_ciphers)
+-   [Customizar seu balanceador de carga do aplicativo com anotações](cs_annotations.html)
 {: #ingress_annotation}
 
-Para expor seu app para redes privadas, primeiro [ative o controlador de Ingresso privado](#private_ingress). É possível então configurar o controlador de Ingresso privado para os cenários a seguir.
+Para expor seu app a redes privadas, primeiro [ative o balanceador de carga do aplicativo privado](#private_ingress). É possível, em seguida, configurar o balanceador de carga de aplicativo privado para os cenários a seguir.
 
 -   [Usar um domínio customizado sem finalização do TLS](#private_ingress_no_tls)
 -   [Usar um domínio customizado e certificado TLS para executar a finalização do TLS](#private_ingress_tls)
 
-#### Usando o domínio fornecido pela IBM sem finalização do TLS
+
+Para escolher a melhor configuração para o Ingress, é possível seguir esta árvore de decisão:
+
+<img usemap="#ingress_map" border="0" class="image" src="images/networkingdt-ingress.png" width="750px" alt="Esta imagem orienta na escolha da melhor configuração para seu controlador do Ingress. Se esta imagem não estiver sendo exibida, as informações ainda poderão ser encontradas na documentação." style="width:750px;" />
+<map name="ingress_map" id="ingress_map">
+<area href="/docs/containers/cs_apps.html#private_ingress_no_tls" alt="Usando o controlador do Ingress com um domínio customizado." shape="rect" coords="25, 246, 187, 294"/>
+<area href="/docs/containers/cs_apps.html#private_ingress_tls" alt="Usando o controlador privado do Ingress com um domínio customizado e um certificado TLS." shape="rect" coords="161, 337, 309, 385"/>
+<area href="/docs/containers/cs_apps.html#external_endpoint" alt="Configurando o controlador público do Ingress para rotear o tráfego de rede para apps fora do cluster." shape="rect" coords="313, 229, 466, 282"/>
+<area href="/docs/containers/cs_apps.html#custom_domain_cert" alt="Usando o controlador público do Ingress com um domínio customizado e certificado TLS." shape="rect" coords="365, 415, 518, 468"/>
+<area href="/docs/containers/cs_apps.html#ibm_domain" alt="Usando o controlador público do Ingress com o domínio fornecido pela IBM" shape="rect" coords="414, 609, 569, 659"/>
+<area href="/docs/containers/cs_apps.html#ibm_domain_cert" alt="Usando o controlador público do Ingress com o domínio fornecido pela IBM e o certificado TLS." shape="rect" coords="563, 681, 716, 734"/>
+</map>
+
+#### Usando o domínio fornecido pela IBM sem finalização TLS
 {: #ibm_domain}
 
-É possível configurar o controlador Ingresso como um balanceador de carga de HTTP para os apps em seu cluster e usar o domínio fornecido pela IBM para acessar seus apps na Internet.
+É possível configurar o balanceador de carga de aplicativo como um balanceador de carga de HTTP para os apps em seu cluster e usar o domínio fornecido pela IBM para acessar seus apps na Internet.
 
 Antes de iniciar:
 
 -   Se você não tiver nenhum ainda, [crie um cluster padrão](cs_cluster.html#cs_cluster_ui).
 -   [Destine sua CLI](cs_cli_install.html#cs_cli_configure) para seu cluster para executar comandos `kubectl`.
 
-Para configurar o controlador de Ingresso:
+Para configurar o balanceador de carga do aplicativo:
 
 1.  [Implemente o seu app no cluster](#cs_apps_cli). Quando você implementa o seu app no cluster, são criados para você um ou mais pods que executam o seu app em um contêiner. Certifique-se de incluir um rótulo à sua implementação na seção de metadados de seu arquivo de configuração. Esse rótulo é necessário para identificar todos os pods nos quais o seu app está em execução, de modo que eles possam ser incluídos no balanceamento de carga do Ingresso.
 2.  Crie um serviço do Kubernetes para o app a ser exposto. O controlador do Ingresso poderá incluir o seu app no balanceamento de carga do Ingresso somente se o seu app for exposto por meio de um serviço do Kubernetes dentro do cluster.
@@ -605,7 +650,8 @@ Para configurar o controlador de Ingresso:
     {: screen}
 
     É possível ver o domínio fornecido pela IBM no campo **Subdomínio do Ingresso**.
-4.  Crie um recurso do Ingresso. Os recursos do Ingresso definem as regras de roteamento para o serviço do Kubernetes que você criou para o seu app e são usados pelo controlador do Ingresso para rotear o tráfego de rede recebido para o serviço. Será possível usar um recurso do Ingresso para definir regras de roteamento para múltiplos apps desde que cada app seja exposto por meio de um serviço do Kubernetes dentro do cluster.
+4.  Crie um recurso do Ingresso. Recursos de ingresso definem as regras de roteamento para o serviço de Kubernetes que você criou para o seu aplicativo
+e são usados pelo balanceador de carga do aplicativo para rotear o tráfego de rede recebido para o serviço. Será possível usar um recurso do Ingresso para definir regras de roteamento para múltiplos apps desde que cada app seja exposto por meio de um serviço do Kubernetes dentro do cluster.
     1.  Abra o seu editor preferencial e crie um arquivo de configuração Ingresso que seja denominado, por exemplo, `myingress.yaml`.
     2.  Defina um recurso do Ingresso em seu arquivo de configuração que usa o domínio fornecido pela IBM para rotear o tráfego de rede recebido para o serviço que você criou anteriormente.
 
@@ -651,7 +697,8 @@ Para configurar o controlador de Ingresso:
         <td>Substitua <em>&lt;myservicepath1&gt;</em> por uma barra ou pelo caminho exclusivo no qual seu app está atendendo, para que o tráfego de rede possa ser encaminhado para o app.
 
         </br>
-        Para cada serviço do Kubernetes, é possível definir um caminho individual que seja anexado ao domínio fornecido pela IBM para criar um caminho exclusivo para seu app, por exemplo, <code>ingress_domain/myservicepath1</code>. Quando você insere essa rota em um navegador da web, o tráfego de rede é roteado para o controlador de Ingresso. O controlador de Ingresso consulta o serviço associado e envia tráfego de rede para o serviço e para os pods nos quais o app está em execução usando o mesmo caminho. O app deve ser configurado para atender nesse caminho para receber o tráfego de rede de entrada.
+        Para cada serviço do Kubernetes, é possível definir um caminho individual que seja anexado ao domínio fornecido pela IBM para criar um caminho exclusivo para seu app, por exemplo, <code>ingress_domain/myservicepath1</code>. Ao inserir essa rota em um navegador da web, o tráfego de rede é roteado para o balanceador de carga do aplicativo. O balanceador de carga do aplicativo consulta o serviço associado e envia o tráfego de rede para o serviço e para os Pods em
+que o aplicativo está em execução usando o mesmo caminho. O app deve ser configurado para atender nesse caminho para receber o tráfego de rede de entrada.
 
         </br></br>
         Muitos apps não atendem em um caminho específico, mas usam o caminho raiz e uma porta específica. Nesse caso, defina o caminho raiz como <code>/</code> e não especifique um caminho individual para seu app.
@@ -693,20 +740,21 @@ Para configurar o controlador de Ingresso:
     {: codeblock}
 
 
-#### Usando o domínio fornecido pela IBM com finalização do TLS
+#### Usando o domínio fornecido pela IBM com finalização TLS
 {: #ibm_domain_cert}
 
-É possível configurar o controlador de Ingresso para gerenciar conexões TLS recebidas para seus apps, decriptografar o tráfego de rede usando o certificado TLS fornecido pela IBM e encaminhar a solicitação não criptografada para os apps expostos em seu cluster.
+É possível configurar o balanceador de carga de aplicativo para gerenciar conexões TLS recebidas para seus apps, decriptografar o tráfego de rede usando o certificado TLS fornecido pela IBM e encaminhar a solicitação não criptografada para os apps expostos em seu cluster.
 
 Antes de iniciar:
 
 -   Se você não tiver nenhum ainda, [crie um cluster padrão](cs_cluster.html#cs_cluster_ui).
 -   [Destine sua CLI](cs_cli_install.html#cs_cli_configure) para seu cluster para executar comandos `kubectl`.
 
-Para configurar o controlador de Ingresso:
+Para configurar o balanceador de carga do aplicativo:
 
 1.  [Implemente o seu app no cluster](#cs_apps_cli). Certifique-se de incluir um rótulo à sua implementação na seção de metadados de seu arquivo de configuração. Esse rótulo identifica todos os pods nos quais o app está em execução, para que sejam incluídos no balanceamento de carga do Ingresso.
-2.  Crie um serviço do Kubernetes para o app a ser exposto. O controlador do Ingresso poderá incluir o seu app no balanceamento de carga do Ingresso somente se o seu app for exposto por meio de um serviço do Kubernetes dentro do cluster.
+2.  Crie um serviço do Kubernetes para o app a ser exposto. O balanceador de carga do aplicativo poderá incluir seu aplicativo no balanceamento de carga de Ingresso somente se o seu
+aplicativo for exposto por meio de um serviço Kubernetes dentro do cluster.
     1.  Abra o seu editor preferencial e crie um arquivo de configuração de serviço que seja denominado, por exemplo, `myservice.yaml`.
     2.  Defina um serviço para o app que você deseja expor para o público.
 
@@ -779,9 +827,11 @@ Para configurar o controlador de Ingresso:
 
     É possível ver o domínio fornecido pela IBM no **Subdomínio do Ingresso** e o certificado fornecido pela IBM no campo **Segredo do Ingresso**.
 
-4.  Crie um recurso do Ingresso. Os recursos do Ingresso definem as regras de roteamento para o serviço do Kubernetes que você criou para o seu app e são usados pelo controlador do Ingresso para rotear o tráfego de rede recebido para o serviço. Será possível usar um recurso do Ingresso para definir regras de roteamento para múltiplos apps desde que cada app seja exposto por meio de um serviço do Kubernetes dentro do cluster.
+4.  Crie um recurso do Ingresso. Recursos de ingresso definem as regras de roteamento para o serviço de Kubernetes que você criou para o seu aplicativo
+e são usados pelo balanceador de carga do aplicativo para rotear o tráfego de rede recebido para o serviço. Será possível usar um recurso do Ingresso para definir regras de roteamento para múltiplos apps desde que cada app seja exposto por meio de um serviço do Kubernetes dentro do cluster.
     1.  Abra o seu editor preferencial e crie um arquivo de configuração Ingresso que seja denominado, por exemplo, `myingress.yaml`.
-    2.  Defina um recurso do Ingresso em seu arquivo de configuração que usa o domínio fornecido pela IBM para rotear o tráfego de rede recebido para seus serviços e o certificado fornecido pela IBM para gerenciar o encerramento do TLS para você. Para cada serviço, é possível definir um caminho individual que seja anexado ao domínio fornecido pela IBM para criar um caminho exclusivo para seu app, por exemplo, `https://ingress_domain/myapp`. Quando você insere essa rota em um navegador da web, o tráfego de rede é roteado para o controlador de Ingresso. O controlador de Ingresso consulta o serviço associado e envia o tráfego de rede para o serviço e, além disso, para os pods nos quais o app está em execução.
+    2.  Defina um recurso do Ingresso em seu arquivo de configuração que usa o domínio fornecido pela IBM para rotear o tráfego de rede recebido para seus serviços e o certificado fornecido pela IBM para gerenciar o encerramento do TLS para você. Para cada serviço, é possível definir um caminho individual que seja anexado ao domínio fornecido pela IBM para criar um caminho exclusivo para seu app, por exemplo, `https://ingress_domain/myapp`. Ao inserir essa rota em um navegador da web, o tráfego de rede é roteado para o balanceador de carga do aplicativo. O balanceador de carga do aplicativo consulta o serviço associado e envia o tráfego de rede para o serviço e também para
+os Pods em que o aplicativo está em execução.
 
         **Nota:** seu app deve atender no caminho definido no recurso de Ingresso. Caso contrário, o tráfego de rede não poderá ser encaminhado para o app. A maioria dos apps não atende em um caminho específico, mas usa o caminho raiz e uma porta específica. Nesse caso, defina o caminho raiz como `/` e não especifique um caminho individual para seu app.
 
@@ -821,7 +871,7 @@ Para configurar o controlador de Ingresso:
         </tr>
         <tr>
         <td><code>tls/hosts</code></td>
-        <td>Substitua <em>&lt;ibmdomain&gt;</em> pelo nome do <strong>Subdomínio do Ingresso</strong> fornecido pela IBM na etapa anterior. Esse domínio é configurado para finalização do TLS.
+        <td>Substitua <em>&lt;ibmdomain&gt;</em> pelo nome do <strong>Subdomínio do Ingresso</strong> fornecido pela IBM na etapa anterior. Esse domínio é configurado para finalização TLS.
 
         </br></br>
         <strong>Nota:</strong> não use &ast; para o seu host ou deixe a propriedade do host vazia para evitar falhas durante a criação do Ingresso.</td>
@@ -832,7 +882,7 @@ Para configurar o controlador de Ingresso:
         </tr>
         <tr>
         <td><code>host</code></td>
-        <td>Substitua <em>&lt;ibmdomain&gt;</em> pelo nome do <strong>Subdomínio do Ingresso</strong> fornecido pela IBM na etapa anterior. Esse domínio é configurado para finalização do TLS.
+        <td>Substitua <em>&lt;ibmdomain&gt;</em> pelo nome do <strong>Subdomínio do Ingresso</strong> fornecido pela IBM na etapa anterior. Esse domínio é configurado para finalização TLS.
 
         </br></br>
         <strong>Nota:</strong> não use &ast; para o seu host ou deixe a propriedade do host vazia para evitar falhas durante a criação do Ingresso.</td>
@@ -842,7 +892,8 @@ Para configurar o controlador de Ingresso:
         <td>Substitua <em>&lt;myservicepath1&gt;</em> por uma barra ou pelo caminho exclusivo no qual seu app está atendendo, para que o tráfego de rede possa ser encaminhado para o app.
 
         </br>
-        Para cada serviço do Kubernetes, é possível definir um caminho individual que seja anexado ao domínio fornecido pela IBM para criar um caminho exclusivo para seu app, por exemplo, <code>ingress_domain/myservicepath1</code>. Quando você insere essa rota em um navegador da web, o tráfego de rede é roteado para o controlador de Ingresso. O controlador de Ingresso consulta o serviço associado e envia tráfego de rede para o serviço e para os pods nos quais o app está em execução usando o mesmo caminho. O app deve ser configurado para atender nesse caminho para receber o tráfego de rede de entrada.
+        Para cada serviço do Kubernetes, é possível definir um caminho individual que seja anexado ao domínio fornecido pela IBM para criar um caminho exclusivo para seu app, por exemplo, <code>ingress_domain/myservicepath1</code>. Ao inserir essa rota em um navegador da web, o tráfego de rede é roteado para o balanceador de carga do aplicativo. O balanceador de carga do aplicativo consulta o serviço associado e envia o tráfego de rede para o serviço e para os Pods em
+que o aplicativo está em execução usando o mesmo caminho. O app deve ser configurado para atender nesse caminho para receber o tráfego de rede de entrada.
 
         </br>
         Muitos apps não atendem em um caminho específico, mas usam o caminho raiz e uma porta específica. Nesse caso, defina o caminho raiz como <code>/</code> e não especifique um caminho individual para seu app.
@@ -883,10 +934,10 @@ Para configurar o controlador de Ingresso:
     ```
     {: codeblock}
 
-#### Usando o controlador de Ingresso com um domínio customizado e certificado TLS
+#### Usando o balanceador de carga de aplicativo com um domínio customizado e um certificado TLS
 {: #custom_domain_cert}
 
-É possível configurar o controlador de Ingresso para rotear o tráfego de rede recebido para os apps no cluster e usar seu próprio certificado TLS para gerenciar a finalização do TLS, enquanto usa seu domínio customizado em vez do domínio fornecido pela IBM.
+É possível configurar o balanceador de carga de aplicativo para rotear o tráfego de rede recebido para os apps em seu cluster e usar seu próprio certificado TLS para gerenciar a finalização do TLS, enquanto usa seu domínio customizado em vez do domínio fornecido pela IBM.
 {:shortdesc}
 
 Antes de iniciar:
@@ -894,47 +945,23 @@ Antes de iniciar:
 -   Se você não tiver nenhum ainda, [crie um cluster padrão](cs_cluster.html#cs_cluster_ui).
 -   [Destine sua CLI](cs_cli_install.html#cs_cli_configure) para seu cluster para executar comandos `kubectl`.
 
-Para configurar o controlador de Ingresso:
+Para configurar o balanceador de carga do aplicativo:
 
 1.  Crie um domínio customizado. Para criar um domínio customizado, trabalhe com seu provedor Domain Name Service (DNS) para registrar seu domínio customizado.
-2.  Configure seu domínio para rotear o tráfego de rede recebido para o controlador de Ingresso IBM. Escolha entre estas opções:
+2.  Configure seu domínio para rotear o tráfego de rede recebido para o balanceador de carga de aplicativo fornecido pela IBM. Escolha entre estas opções:
     -   Defina um alias para seu domínio customizado especificando o domínio fornecido pela IBM como um registro de Nome Canônico (CNAME). Para localizar o domínio de Ingresso fornecido pela IBM, execute `bx cs cluster-get <mycluster>` e procure o campo **Subdomínio do Ingresso**.
-    -   Mapeie o seu domínio customizado para o endereço IP público móvel do controlador do Ingresso fornecido pela IBM incluindo o endereço IP como um registro. Para localizar o endereço IP público móvel do controlador do Ingresso:
-        1.  Execute `bx cs cluster-get <mycluster>` e procure o campo **Subdomínio do Ingresso**.
-        2.  Execute `nslookup <Ingress subdomain>`.
+    -   Mapeie o seu domínio customizado para o endereço IP público móvel do balanceador de carga de aplicativo fornecido pela IBM, incluindo o endereço IP como um registro. Para localizar o endereço IP público móvel do balanceador de carga de aplicativo, execute `bx cs alb-se <public_alb_ID>`.
 3.  Crie um certificado e chave TLS para seu domínio que é codificado no formato PEM.
 4.  Armazene o certificado e chave TLS em um segredo do Kubernetes.
     1.  Abra o seu editor preferencial e crie um arquivo de configuração de segredo do Kubernetes que seja chamado, por exemplo, de `mysecret.yaml`.
-    2.  Defina um segredo que use seu certificado e chave do TLS.
+    2.  Defina um segredo que use seu certificado e chave do TLS. Substitua <em>&lt;mytlssecret&gt;</em> por um nome para o seu segredo do Kubernetes, <tls_key_filepath> com o caminho
+para o seu arquivo-chave TLS customizado e <tls_cert_filepath> com o caminho para o seu arquivo de certificado TLS
+customizado.
 
         ```
-        apiVersion: v1
-        kind: Secret
-        metadata:
-          name: <mytlssecret>
-        type: Opaque
-        data:
-          tls.crt: <tlscert>
-          tls.key: <tlskey>
+        kubectl create secret tls <mytlssecret> --key <tls_key_filepath> --cert <tls_cert_filepath>
         ```
-        {: codeblock}
-
-        <table>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>name</code></td>
-        <td>Substitua <em>&lt;mytlssecret&gt;</em> por um nome para seu segredo do Kubernetes.</td>
-        </tr>
-        <tr>
-        <td><code>tls.cert</code></td>
-        <td>Substitua <em>&lt;tlscert&gt;</em> por seu certificado TLS customizado que está codificado no formato base64.</td>
-         </tr>
-         <td><code>tls.key</code></td>
-         <td>Substitua <em>&lt;tlskey&gt;</em> por sua chave TLS customizada que está codificada no formato base64.</td>
-         </tbody></table>
+        {: pre}
 
     3.  Salve seu arquivo de configuração.
     4.  Crie o segredo do TLS para seu cluster.
@@ -946,7 +973,8 @@ Para configurar o controlador de Ingresso:
 
 5.  [Implemente o seu app no cluster](#cs_apps_cli). Quando você implementa o seu app no cluster, são criados para você um ou mais pods que executam o seu app em um contêiner. Certifique-se de incluir um rótulo à sua implementação na seção de metadados de seu arquivo de configuração. Esse rótulo é necessário para identificar todos os pods nos quais o seu app está em execução, de modo que eles possam ser incluídos no balanceamento de carga do Ingresso.
 
-6.  Crie um serviço do Kubernetes para o app a ser exposto. O controlador do Ingresso poderá incluir o seu app no balanceamento de carga do Ingresso somente se o seu app for exposto por meio de um serviço do Kubernetes dentro do cluster.
+6.  Crie um serviço do Kubernetes para o app a ser exposto. O balanceador de carga do aplicativo poderá incluir seu aplicativo no balanceamento de carga de Ingresso somente se o seu
+aplicativo for exposto por meio de um serviço Kubernetes dentro do cluster.
 
     1.  Abra o seu editor preferencial e crie um arquivo de configuração de serviço que seja denominado, por exemplo, `myservice.yaml`.
     2.  Defina um serviço para o app que você deseja expor para o público.
@@ -991,9 +1019,11 @@ Para configurar o controlador de Ingresso:
         {: pre}
 
     5.  Repita essas etapas para cada app que você desejar expor para o público.
-7.  Crie um recurso do Ingresso. Os recursos do Ingresso definem as regras de roteamento para o serviço do Kubernetes que você criou para o seu app e são usados pelo controlador do Ingresso para rotear o tráfego de rede recebido para o serviço. Será possível usar um recurso do Ingresso para definir regras de roteamento para múltiplos apps desde que cada app seja exposto por meio de um serviço do Kubernetes dentro do cluster.
+7.  Crie um recurso do Ingresso. Recursos de ingresso definem as regras de roteamento para o serviço de Kubernetes que você criou para o seu aplicativo
+e são usados pelo balanceador de carga do aplicativo para rotear o tráfego de rede recebido para o serviço. Será possível usar um recurso do Ingresso para definir regras de roteamento para múltiplos apps desde que cada app seja exposto por meio de um serviço do Kubernetes dentro do cluster.
     1.  Abra o seu editor preferencial e crie um arquivo de configuração Ingresso que seja denominado, por exemplo, `myingress.yaml`.
-    2.  Defina um recurso do Ingresso em seu arquivo de configuração que use o domínio customizado para rotear o tráfego de rede recebido para seus serviços e o certificado customizado para gerenciar o encerramento do TLS. Para cada serviço, é possível definir um caminho individual que seja anexado ao domínio customizado para criar um caminho exclusivo para seu app, por exemplo, `https://mydomain/myapp`. Quando você insere essa rota em um navegador da web, o tráfego de rede é roteado para o controlador de Ingresso. O controlador de Ingresso consulta o serviço associado e envia o tráfego de rede para o serviço e, além disso, para os pods nos quais o app está em execução.
+    2.  Defina um recurso do Ingresso em seu arquivo de configuração que use o domínio customizado para rotear o tráfego de rede recebido para seus serviços e o certificado customizado para gerenciar o encerramento do TLS. Para cada serviço, é possível definir um caminho individual que seja anexado ao domínio customizado para criar um caminho exclusivo para seu app, por exemplo, `https://mydomain/myapp`. Ao inserir essa rota em um navegador da web, o tráfego de rede é roteado para o balanceador de carga do aplicativo. O balanceador de carga do aplicativo consulta o serviço associado e envia o tráfego de rede para o serviço e também para
+os Pods em que o aplicativo está em execução.
 
         **Nota:** é importante que o app atenda no caminho definido no recurso de Ingresso. Caso contrário, o tráfego de rede não poderá ser encaminhado para o app. A maioria dos apps não atende em um caminho específico, mas usa o caminho raiz e uma porta específica. Nesse caso, defina o caminho raiz como `/` e não especifique um caminho individual para seu app.
 
@@ -1055,7 +1085,8 @@ Para configurar o controlador de Ingresso:
         <td>Substitua <em>&lt;myservicepath1&gt;</em> por uma barra ou pelo caminho exclusivo no qual seu app está atendendo, para que o tráfego de rede possa ser encaminhado para o app.
 
         </br>
-        Para cada serviço do Kubernetes, é possível definir um caminho individual que seja anexado ao domínio fornecido pela IBM para criar um caminho exclusivo para seu app, por exemplo, <code>ingress_domain/myservicepath1</code>. Quando você insere essa rota em um navegador da web, o tráfego de rede é roteado para o controlador de Ingresso. O controlador de Ingresso consulta o serviço associado e envia tráfego de rede para o serviço e para os pods nos quais o app está em execução usando o mesmo caminho. O app deve ser configurado para atender nesse caminho para receber o tráfego de rede de entrada.
+        Para cada serviço do Kubernetes, é possível definir um caminho individual que seja anexado ao domínio fornecido pela IBM para criar um caminho exclusivo para seu app, por exemplo, <code>ingress_domain/myservicepath1</code>. Ao inserir essa rota em um navegador da web, o tráfego de rede é roteado para o balanceador de carga do aplicativo. O balanceador de carga do aplicativo consulta o serviço associado e envia o tráfego de rede para o serviço e para os Pods em
+que o aplicativo está em execução usando o mesmo caminho. O app deve ser configurado para atender nesse caminho para receber o tráfego de rede de entrada.
 
         </br>
         Muitos apps não atendem em um caminho específico, mas usam o caminho raiz e uma porta específica. Nesse caso, defina o caminho raiz como <code>/</code> e não especifique um caminho individual para seu app.
@@ -1102,10 +1133,10 @@ Para configurar o controlador de Ingresso:
         {: codeblock}
 
 
-#### Configurando o controlador de Ingresso para rotear o tráfego de rede para apps fora do cluster
+#### Configurando o balanceador de carga de aplicativo para rotear o tráfego de rede para apps fora do cluster
 {: #external_endpoint}
 
-É possível configurar o controlador de Ingresso para apps que estão localizados fora do cluster para ser incluído no balanceamento de carga do cluster. As solicitações recebidas no domínio customizado ou fornecido pela IBM são encaminhadas automaticamente para o app externo.
+É possível configurar o balanceador de carga de aplicativo para apps que estão localizados fora do cluster a serem incluídos no balanceamento de carga do cluster. As solicitações recebidas no domínio customizado ou fornecido pela IBM são encaminhadas automaticamente para o app externo.
 
 Antes de iniciar:
 
@@ -1113,7 +1144,7 @@ Antes de iniciar:
 -   [Destine sua CLI](cs_cli_install.html#cs_cli_configure) para seu cluster para executar comandos `kubectl`.
 -   Assegure-se de que o app externo que você deseja incluir no balanceamento de carga do cluster possa ser acessado usando um endereço IP público.
 
-É possível configurar o controlador de Ingresso para rotear o tráfego de rede recebido no domínio fornecido pela IBM para apps localizados fora do cluster. Se desejar usar um domínio customizado e um certificado TLS como alternativa, substitua o domínio fornecido pela IBM e o certificado TLS pelo seu [domínio customizado e certificado TLS](#custom_domain_cert).
+É possível configurar o balanceador de carga de aplicativo para rotear o tráfego de rede recebido no domínio fornecido pela IBM para apps que estão localizados fora do cluster. Se desejar usar um domínio customizado e um certificado TLS como alternativa, substitua o domínio fornecido pela IBM e o certificado TLS pelo seu [domínio customizado e certificado TLS](#custom_domain_cert).
 
 1.  Configure um terminal do Kubernetes que defina o local externo do app que você deseja incluir no balanceamento de carga do cluster.
     1.  Abra seu editor preferencial e crie um arquivo de configuração do terminal que é chamado, por exemplo, de `myexternalendpoint.yaml`.
@@ -1227,9 +1258,10 @@ Antes de iniciar:
 
     É possível ver o domínio fornecido pela IBM no **Subdomínio do Ingresso** e o certificado fornecido pela IBM no campo **Segredo do Ingresso**.
 
-4.  Crie um recurso do Ingresso. Os recursos do Ingresso definem as regras de roteamento para o serviço do Kubernetes que você criou para o seu app e são usados pelo controlador do Ingresso para rotear o tráfego de rede recebido para o serviço. Será possível usar um recurso do Ingresso para definir regras de roteamento para múltiplos apps externos desde que cada app seja exposto com o seu terminal externo por meio de um serviço do Kubernetes dentro do cluster.
+4.  Crie um recurso do Ingresso. Recursos de ingresso definem as regras de roteamento para o serviço de Kubernetes que você criou para o seu aplicativo
+e são usados pelo balanceador de carga do aplicativo para rotear o tráfego de rede recebido para o serviço. Será possível usar um recurso do Ingresso para definir regras de roteamento para múltiplos apps externos desde que cada app seja exposto com o seu terminal externo por meio de um serviço do Kubernetes dentro do cluster.
     1.  Abra seu editor preferencial e crie um arquivo de configuração do Ingresso que seja chamado, por exemplo, de `myexternalingress.yaml`.
-    2.  Defina um recurso do Ingresso em seu arquivo de configuração que usa o domínio fornecido pela IBM e o certificado TLS para rotear o tráfego de rede recebido para seu app externo usando o terminal externo que você definiu anteriormente. Para cada serviço, é possível definir um caminho individual que seja anexado ao domínio customizado ou fornecido pela IBM para criar um caminho exclusivo para seu app, por exemplo, `https://ingress_domain/myapp`. Quando você insere essa rota em um navegador da web, o tráfego de rede é roteado para o controlador de Ingresso. O controlador de Ingresso consulta o serviço associado e envia o tráfego de rede para o serviço e, além disso, para o app externo.
+    2.  Defina um recurso do Ingresso em seu arquivo de configuração que usa o domínio fornecido pela IBM e o certificado TLS para rotear o tráfego de rede recebido para seu app externo usando o terminal externo que você definiu anteriormente. Para cada serviço, é possível definir um caminho individual que seja anexado ao domínio customizado ou fornecido pela IBM para criar um caminho exclusivo para seu app, por exemplo, `https://ingress_domain/myapp`. Ao inserir essa rota em um navegador da web, o tráfego de rede é roteado para o balanceador de carga do aplicativo. O balanceador de carga de aplicativo consulta o serviço associado e envia o tráfego de rede para o serviço e, além disso, para o app externo.
 
         **Nota:** é importante que o app atenda no caminho definido no recurso de Ingresso. Caso contrário, o tráfego de rede não poderá ser encaminhado para o app. A maioria dos apps não atende em um caminho específico, mas usa o caminho raiz e uma porta específica. Nesse caso, defina o caminho raiz como / e não especifique um caminho individual para seu app.
 
@@ -1269,7 +1301,7 @@ Antes de iniciar:
         </tr>
         <tr>
         <td><code>tls/hosts</code></td>
-        <td>Substitua <em>&lt;ibmdomain&gt;</em> pelo nome do <strong>Subdomínio do Ingresso</strong> fornecido pela IBM na etapa anterior. Esse domínio é configurado para finalização do TLS.
+        <td>Substitua <em>&lt;ibmdomain&gt;</em> pelo nome do <strong>Subdomínio do Ingresso</strong> fornecido pela IBM na etapa anterior. Esse domínio é configurado para finalização TLS.
 
         </br></br>
         <strong>Nota:</strong> não use &ast; para o seu host ou deixe a propriedade do host vazia para evitar falhas durante a criação do Ingresso.</td>
@@ -1280,7 +1312,7 @@ Antes de iniciar:
         </tr>
         <tr>
         <td><code>rules/host</code></td>
-        <td>Substitua <em>&lt;ibmdomain&gt;</em> pelo nome do <strong>Subdomínio do Ingresso</strong> fornecido pela IBM na etapa anterior. Esse domínio é configurado para finalização do TLS.
+        <td>Substitua <em>&lt;ibmdomain&gt;</em> pelo nome do <strong>Subdomínio do Ingresso</strong> fornecido pela IBM na etapa anterior. Esse domínio é configurado para finalização TLS.
 
         </br></br>
         <strong>Nota:</strong> não use &ast; para o seu host ou deixe a propriedade do host vazia para evitar falhas durante a criação do Ingresso.</td>
@@ -1290,7 +1322,7 @@ Antes de iniciar:
         <td>Substitua <em>&lt;myexternalservicepath&gt;</em> por uma barra ou pelo caminho exclusivo no qual seu app externo está atendendo, para que o tráfego de rede possa ser encaminhado para o app.
 
         </br>
-        Para cada serviço do Kubernetes, é possível definir um caminho individual que seja anexado ao domínio customizado para criar um caminho exclusivo para seu app, por exemplo, <code>https://ibmdomain/myservicepath1</code>. Quando você insere essa rota em um navegador da web, o tráfego de rede é roteado para o controlador de Ingresso. O controlador de Ingresso consulta o serviço associado e envia tráfego de rede para o app externo usando o mesmo caminho. O app deve ser configurado para atender nesse caminho para receber o tráfego de rede de entrada.
+        Para cada serviço do Kubernetes, é possível definir um caminho individual que seja anexado ao domínio customizado para criar um caminho exclusivo para seu app, por exemplo, <code>https://ibmdomain/myservicepath1</code>. Ao inserir essa rota em um navegador da web, o tráfego de rede é roteado para o balanceador de carga do aplicativo. O balanceador de carga de aplicativo procura o serviço associado e envia tráfego de rede para o app externo usando o mesmo caminho. O app deve ser configurado para atender nesse caminho para receber o tráfego de rede de entrada.
 
         </br></br>
         Muitos apps não atendem em um caminho específico, mas usam o caminho raiz e uma porta específica. Nesse caso, defina o caminho raiz como <code>/</code> e não especifique um caminho individual para seu app.
@@ -1457,32 +1489,32 @@ Para mudar os valores padrão:
  {: screen}
 
 
-#### Ativando o controlador de Ingresso privado
+#### Ativando o balanceador de carga de aplicativo privado
 {: #private_ingress}
 
-Ao criar um cluster padrão, um controlador de Ingresso privado é criado automaticamente, mas não ativado automaticamente. Antes de poder usar o controlador de Ingresso privado, deve-se ativá-lo com o endereço IP privado móvel pré-designado, fornecido pela IBM, ou seu próprio endereço IP privado móvel. **Nota**: se você usou a sinalização `--no-subnet` quando criou o cluster, deve-se incluir uma sub-rede privada móvel ou uma sub-rede gerenciada pelo usuário antes de poder ativar o controlador de Ingresso privado. Para obter mais informações, veja [Solicitando sub-redes adicionais para seu cluster](cs_cluster.html#add_subnet).
+Ao criar um cluster padrão, o controlador do Ingress cria automaticamente um balanceador de carga de aplicativo privado, mas não o ativa automaticamente. Antes de poder usar o balanceador de carga de aplicativo privado, deve-se ativá-lo com o endereço IP privado pré-designado, móvel, fornecido pela IBM ou seu próprio endereço IP privado móvel. **Observação**: se você usou a sinalização `-- no-subnet` quando criou o cluster, então deve-se incluir uma sub-rede privada móvel ou uma sub-rede gerenciada pelo usuário antes de poder ativar o balanceador de carga de aplicativo privado. Para obter mais informações, veja [Solicitando sub-redes adicionais para seu cluster](cs_cluster.html#add_subnet).
 
 Antes de iniciar:
 
 -   Se você não tiver nenhum ainda, [crie um cluster padrão](cs_cluster.html#cs_cluster_ui).
 -   [Destine sua CLI](cs_cli_install.html#cs_cli_configure) para seu cluster.
 
-Para ativar o controlador de Ingresso privado usando o endereço IP privado móvel pré-designado, fornecido pela IBM:
+Para ativar o balanceador de carga do aplicativo privado usando o endereço IP privado móvel pré-designado e fornecido pela IBM:
 
-1. Liste os controladores de Ingresso disponíveis em seu cluster para obter o ID do ALB de controlador de Ingresso privado. Substitua <em>&lt;cluser_name&gt;</em> pelo nome do cluster no qual o app que você deseja expor está implementado.
+1. Liste os balanceadores de carga de aplicativos disponíveis em seu cluster para obter o ID do balanceador de carga de aplicativo privado. Substitua <em>&lt;cluser_name&gt;</em> pelo nome do cluster no qual o app que você deseja expor está implementado.
 
     ```
     bx cs albs --cluster <my_cluster>
     ```
     {: pre}
 
-    O campo **Status** para o controlador de Ingresso privado é _desativado_.
+    O campo **Status** para o balanceador de carga do aplicativo privado está _desativado_.
     ```
     ALB ID Enabled Status Type ALB IP private-cr6d779503319d419ea3b4ab171d12c3b8-alb1 false disabled private - public-cr6d779503319d419ea3b4ab171d12c3b8-alb1 true enabled public 169.46.63.150
     ```
     {: screen}
 
-2. Ative o controlador de Ingresso privado. Substitua <em>&lt;private_ALB_ID&gt;</em> pelo ID de ALB para o controlador de Ingresso privado da saída na etapa anterior.
+2. Ativar o balanceador de carga de aplicativo privado. Substitua <em>&lt;private_ALB_ID&gt;</em> pelo ID para o balanceador de carga de aplicativo privado da saída na etapa anterior.
 
    ```
    bx cs bx cs alb-configure --albID <private_ALB_ID> --enable
@@ -1490,7 +1522,7 @@ Para ativar o controlador de Ingresso privado usando o endereço IP privado móv
    {: pre}
 
 
-Para ativar o controlador de Ingresso privado usando seu próprio endereço IP privado móvel:
+Para ativar o balanceador de carga de aplicativo privado usando seu próprio endereço IP privado móvel:
 
 1. Configure a sub-rede gerenciada pelo usuário de seu endereço IP escolhido para rotear o tráfego na VLAN privada do seu cluster. Substitua <em>&lt;cluser_name&gt;</em> pelo nome ou ID do cluster no qual o app que você deseja expor está implementado, <em>&lt;subnet_CIDR&gt;</em> pelo CIDR de sua sub-rede gerenciada pelo usuário e <em>&lt;private_VLAN&gt;</em> por um ID de VLAN privada disponível. É possível localizar o ID de uma VLAN privada disponível executando `bx cs vlans`.
 
@@ -1499,43 +1531,45 @@ Para ativar o controlador de Ingresso privado usando seu próprio endereço IP p
    ```
    {: pre}
 
-2. Liste os controladores de Ingresso disponíveis em seu cluster para obter o ID do ALB de controlador de Ingresso privado.
+2. Liste os balanceadores de carga de aplicativos disponíveis em seu cluster para obter o ID de balanceador de carga de aplicativo privado.
 
     ```
     bx cs albs --cluster <my_cluster>
     ```
     {: pre}
 
-    O campo **Status** para o controlador de Ingresso privado é _desativado_.
+    O campo **Status** para o balanceador de carga do aplicativo privado está _desativado_.
     ```
     ALB ID Enabled Status Type ALB IP private-cr6d779503319d419ea3b4ab171d12c3b8-alb1 false disabled private - public-cr6d779503319d419ea3b4ab171d12c3b8-alb1 true enabled public 169.46.63.150
     ```
     {: screen}
 
-3. Ative o controlador de Ingresso privado. Substitua <em>&lt;private_ALB_ID&gt;</em> pelo ID de ALB para o controlador de Ingresso privado da saída na etapa anterior e <em>&lt;user_ip&gt;</em> pelo endereço IP de sua sub-rede gerenciada pelo usuário gerenciado que você deseja usar.
+3. Ativar o balanceador de carga de aplicativo privado. Substitua <em>&lt;private_ALB_ID&gt;</em> pelo ID para o balanceador de carga de aplicativo privado da saída na etapa anterior e <em>&lt;user_ip&gt;</em> com o endereço IP de sua sub-rede gerenciada pelo usuário gerenciado que você deseja usar.
 
    ```
    bx cs bx cs alb-configure --albID <private_ALB_ID> --enable --user-ip <user_ip>
    ```
    {: pre}
 
-#### Usando o controlador de Ingresso privado com um domínio customizado
+#### Usando o balanceador de carga de aplicativo privado com um domínio customizado
 {: #private_ingress_no_tls}
 
-É possível configurar o controlador de Ingresso privado para rotear o tráfego de rede recebido para os apps em seu cluster usando um domínio customizado.
+É possível configurar o balanceador de carga de aplicativo privado para rotear o tráfego de rede recebido para os apps em seu cluster usando um domínio customizado.
 {:shortdesc}
 
-Antes de iniciar, [ative o controlador de Ingresso privado](#private_ingress).
+Antes de iniciar, [ative o balanceador de carga do aplicativo privado](#private_ingress).
 
-Para configurar o controlador de Ingresso privado:
+Para configurar o balanceador de carga de aplicativo privado:
 
 1.  Crie um domínio customizado. Para criar um domínio customizado, trabalhe com seu provedor Domain Name Service (DNS) para registrar seu domínio customizado.
 
-2.  Mapeie o seu domínio customizado para o endereço IP privado portátil do controlador de Ingresso privado fornecido pela IBM incluindo o endereço IP como um registro. Para localizar o endereço IP privado do controlador de Ingresso privado, execute `bx cs túnicas -- cluster <cluster_name>`.
+2.  Mapeie seu domínio customizado para o endereço IP privado móvel do balanceador de carga do aplicativo privado fornecido pela
+IBM incluindo o endereço IP como um registro. Para localizar o endereço IP privado móvel do balanceador de carga do aplicativo privado, execute `bx cs albs --cluster <cluster_name>`.
 
 3.  [Implemente o seu app no cluster](#cs_apps_cli). Quando você implementa o seu app no cluster, são criados para você um ou mais pods que executam o seu app em um contêiner. Certifique-se de incluir um rótulo à sua implementação na seção de metadados de seu arquivo de configuração. Esse rótulo é necessário para identificar todos os pods nos quais o seu app está em execução, de modo que eles possam ser incluídos no balanceamento de carga do Ingresso.
 
-4.  Crie um serviço do Kubernetes para o app a ser exposto. O controlador de Ingresso privado pode incluir o seu app no balanceamento de carga de Ingresso somente se o seu app for exposto por meio de um serviço do Kubernetes dentro do cluster.
+4.  Crie um serviço do Kubernetes para o app a ser exposto. O balanceador de carga do aplicativo privado poderá incluir seu aplicativo no balanceamento de carga de Ingresso somente se o seu
+aplicativo for exposto por meio de um serviço Kubernetes dentro do cluster.
 
     1.  Abra o seu editor preferencial e crie um arquivo de configuração de serviço que seja denominado, por exemplo, `myservice.yaml`.
     2.  Defina um serviço para o app que você deseja expor para o público.
@@ -1580,9 +1614,11 @@ Para configurar o controlador de Ingresso privado:
         {: pre}
 
     5.  Repita essas etapas para cada app que você desejar expor para a rede privada.
-7.  Crie um recurso do Ingresso. Os recursos do Ingresso definem as regras de roteamento para o serviço do Kubernetes que você criou para o seu app e são usados pelo controlador do Ingresso para rotear o tráfego de rede recebido para o serviço. Será possível usar um recurso do Ingresso para definir regras de roteamento para múltiplos apps desde que cada app seja exposto por meio de um serviço do Kubernetes dentro do cluster.
+7.  Crie um recurso do Ingresso. Recursos de ingresso definem as regras de roteamento para o serviço de Kubernetes que você criou para o seu aplicativo
+e são usados pelo balanceador de carga do aplicativo para rotear o tráfego de rede recebido para o serviço. Será possível usar um recurso do Ingresso para definir regras de roteamento para múltiplos apps desde que cada app seja exposto por meio de um serviço do Kubernetes dentro do cluster.
     1.  Abra o seu editor preferencial e crie um arquivo de configuração Ingresso que seja denominado, por exemplo, `myingress.yaml`.
-    2.  Defina um recurso do Ingresso em seu arquivo de configuração que usa o domínio customizado para rotear o tráfego de rede recebido para seus serviços. Para cada serviço, é possível definir um caminho individual que seja anexado ao domínio customizado para criar um caminho exclusivo para seu app, por exemplo, `https://mydomain/myapp`. Quando você insere essa rota em um navegador da web, o tráfego de rede é roteado para o controlador de Ingresso. O controlador de Ingresso consulta o serviço associado e envia o tráfego de rede para o serviço e, além disso, para os pods nos quais o app está em execução.
+    2.  Defina um recurso do Ingresso em seu arquivo de configuração que usa o domínio customizado para rotear o tráfego de rede recebido para seus serviços. Para cada serviço, é possível definir um caminho individual que seja anexado ao domínio customizado para criar um caminho exclusivo para seu app, por exemplo, `https://mydomain/myapp`. Ao inserir essa rota em um navegador da web, o tráfego de rede é roteado para o balanceador de carga do aplicativo. O balanceador de carga do aplicativo consulta o serviço associado e envia o tráfego de rede para o serviço e também para
+os Pods em que o aplicativo está em execução.
 
         **Nota:** é importante que o app atenda no caminho definido no recurso de Ingresso. Caso contrário, o tráfego de rede não poderá ser encaminhado para o app. A maioria dos apps não atende em um caminho específico, mas usa o caminho raiz e uma porta específica. Nesse caso, defina o caminho raiz como `/` e não especifique um caminho individual para seu app.
 
@@ -1620,7 +1656,7 @@ Para configurar o controlador de Ingresso privado:
         </tr>
         <tr>
         <td><code>ingress.bluemix.net/ALB-ID</code></td>
-        <td>Substitua <em>&lt;private_ALB_ID&gt;</em> pelo ID do ALB para o seu controlador de Ingresso privado. Execute <code>bx cs albs --cluster <my_cluster></code> para localizar o ID do ALB.</td>
+        <td>Substitua <em>&lt;private_ALB_ID&gt;</em> pelo ID do ALB para o seu controlador de Ingresso privado. Execute <code>bx cs albs --cluster <my_cluster></code> para localizar o ID do ALB. Para obter mais informações sobre essa anotação do Ingress, consulte [Balanceador de carga do aplicativo (ALB_ID)](cs_annotations.html#alb-id).</td>
         </tr>
         <td><code>host</code></td>
         <td>Substitua <em>&lt;mycustomdomain&gt;</em> pelo seu domínio customizado.
@@ -1634,7 +1670,8 @@ Para configurar o controlador de Ingresso privado:
         <td>Substitua <em>&lt;myservicepath1&gt;</em> por uma barra ou pelo caminho exclusivo no qual seu app está atendendo, para que o tráfego de rede possa ser encaminhado para o app.
 
         </br>
-        Para cada serviço do Kubernetes, é possível definir um caminho individual que seja anexado ao domínio customizado para criar um caminho exclusivo para seu app, por exemplo <code>custom_domain/myservicepath1</code>. Quando você insere essa rota em um navegador da web, o tráfego de rede é roteado para o controlador de Ingresso. O controlador de Ingresso consulta o serviço associado e envia tráfego de rede para o serviço e para os pods nos quais o app está em execução usando o mesmo caminho. O app deve ser configurado para atender nesse caminho para receber o tráfego de rede de entrada.
+        Para cada serviço do Kubernetes, é possível definir um caminho individual que seja anexado ao domínio customizado para criar um caminho exclusivo para seu app, por exemplo <code>custom_domain/myservicepath1</code>. Ao inserir essa rota em um navegador da web, o tráfego de rede é roteado para o balanceador de carga do aplicativo. O balanceador de carga do aplicativo consulta o serviço associado e envia o tráfego de rede para o serviço e para os Pods em
+que o aplicativo está em execução usando o mesmo caminho. O app deve ser configurado para atender nesse caminho para receber o tráfego de rede de entrada.
 
         </br>
         Muitos apps não atendem em um caminho específico, mas usam o caminho raiz e uma porta específica. Nesse caso, defina o caminho raiz como <code>/</code> e não especifique um caminho individual para seu app.
@@ -1680,54 +1717,33 @@ Para configurar o controlador de Ingresso privado:
         ```
         {: codeblock}
 
-#### Usando o controlador de Ingresso privado com um domínio customizado e certificado TLS
+#### Usando o balanceador de carga do aplicativo privado com um domínio customizado e um certificado TLS
 {: #private_ingress_tls}
 
-É possível configurar o controlador de Ingresso privado para rotear o tráfego de rede recebido para os apps no cluster e usar seu próprio certificado TLS para gerenciar a finalização do TLS, enquanto usa seu domínio customizado.
+É possível configurar o balanceador de carga de aplicativo privado para rotear o tráfego de rede recebido para os apps em seu cluster e usar seu próprio certificado TLS para gerenciar a finalização do TLS, enquanto usa seu domínio customizado.
 {:shortdesc}
 
-Antes de iniciar, [ative o controlador de Ingresso privado](#private_ingress).
+Antes de iniciar, [ative o balanceador de carga do aplicativo privado](#private_ingress).
 
-Para configurar o controlador de Ingresso:
+Para configurar o balanceador de carga do aplicativo:
 
 1.  Crie um domínio customizado. Para criar um domínio customizado, trabalhe com seu provedor Domain Name Service (DNS) para registrar seu domínio customizado.
 
-2.  Mapeie o seu domínio customizado para o endereço IP privado portátil do controlador de Ingresso privado fornecido pela IBM incluindo o endereço IP como um registro. Para localizar o endereço IP privado do controlador de Ingresso privado, execute `bx cs túnicas -- cluster <cluster_name>`.
+2.  Mapeie seu domínio customizado para o endereço IP privado móvel do balanceador de carga do aplicativo privado fornecido pela
+IBM incluindo o endereço IP como um registro. Para localizar o endereço IP privado móvel do balanceador de carga do aplicativo privado, execute `bx cs albs --cluster <cluster_name>`.
 
 3.  Crie um certificado e chave TLS para seu domínio que é codificado no formato PEM.
 
 4.  Armazene o certificado e chave TLS em um segredo do Kubernetes.
     1.  Abra o seu editor preferencial e crie um arquivo de configuração de segredo do Kubernetes que seja chamado, por exemplo, de `mysecret.yaml`.
-    2.  Defina um segredo que use seu certificado e chave do TLS.
+    2.  Defina um segredo que use seu certificado e chave do TLS. Substitua <em>&lt;mytlssecret&gt;</em> por um nome para o seu segredo do Kubernetes, <tls_key_filepath> com o caminho
+para o seu arquivo-chave TLS customizado e <tls_cert_filepath> com o caminho para o seu arquivo de certificado TLS
+customizado.
 
         ```
-        apiVersion: v1
-        kind: Secret
-        metadata:
-          name: <mytlssecret>
-        type: Opaque
-        data:
-          tls.crt: <tlscert>
-          tls.key: <tlskey>
+        kubectl create secret tls <mytlssecret> --key <tls_key_filepath> --cert <tls_cert_filepath>
         ```
-        {: codeblock}
-
-        <table>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>name</code></td>
-        <td>Substitua <em>&lt;mytlssecret&gt;</em> por um nome para seu segredo do Kubernetes.</td>
-        </tr>
-        <tr>
-        <td><code>tls.cert</code></td>
-        <td>Substitua <em>&lt;tlscert&gt;</em> por seu certificado TLS customizado que está codificado no formato base64.</td>
-         </tr>
-         <td><code>tls.key</code></td>
-         <td>Substitua <em>&lt;tlskey&gt;</em> por sua chave TLS customizada que está codificada no formato base64.</td>
-         </tbody></table>
+        {: pre}
 
     3.  Salve seu arquivo de configuração.
     4.  Crie o segredo do TLS para seu cluster.
@@ -1739,7 +1755,8 @@ Para configurar o controlador de Ingresso:
 
 5.  [Implemente o seu app no cluster](#cs_apps_cli). Quando você implementa o seu app no cluster, são criados para você um ou mais pods que executam o seu app em um contêiner. Certifique-se de incluir um rótulo à sua implementação na seção de metadados de seu arquivo de configuração. Esse rótulo é necessário para identificar todos os pods nos quais o seu app está em execução, de modo que eles possam ser incluídos no balanceamento de carga do Ingresso.
 
-6.  Crie um serviço do Kubernetes para o app a ser exposto. O controlador de Ingresso privado pode incluir o seu app no balanceamento de carga de Ingresso somente se o seu app for exposto por meio de um serviço do Kubernetes dentro do cluster.
+6.  Crie um serviço do Kubernetes para o app a ser exposto. O balanceador de carga do aplicativo privado poderá incluir seu aplicativo no balanceamento de carga de Ingresso somente se o seu
+aplicativo for exposto por meio de um serviço Kubernetes dentro do cluster.
 
     1.  Abra o seu editor preferencial e crie um arquivo de configuração de serviço que seja denominado, por exemplo, `myservice.yaml`.
     2.  Defina um serviço para o app que você deseja expor para o público.
@@ -1784,9 +1801,11 @@ Para configurar o controlador de Ingresso:
         {: pre}
 
     5.  Repita essas etapas para cada app que você deseja expor na rede privada.
-7.  Crie um recurso do Ingresso. Os recursos do Ingresso definem as regras de roteamento para o serviço do Kubernetes que você criou para o seu app e são usados pelo controlador do Ingresso para rotear o tráfego de rede recebido para o serviço. Será possível usar um recurso do Ingresso para definir regras de roteamento para múltiplos apps desde que cada app seja exposto por meio de um serviço do Kubernetes dentro do cluster.
+7.  Crie um recurso do Ingresso. Recursos de ingresso definem as regras de roteamento para o serviço de Kubernetes que você criou para o seu aplicativo
+e são usados pelo balanceador de carga do aplicativo para rotear o tráfego de rede recebido para o serviço. Será possível usar um recurso do Ingresso para definir regras de roteamento para múltiplos apps desde que cada app seja exposto por meio de um serviço do Kubernetes dentro do cluster.
     1.  Abra o seu editor preferencial e crie um arquivo de configuração Ingresso que seja denominado, por exemplo, `myingress.yaml`.
-    2.  Defina um recurso do Ingresso em seu arquivo de configuração que use o domínio customizado para rotear o tráfego de rede recebido para seus serviços e o certificado customizado para gerenciar o encerramento do TLS. Para cada serviço, é possível definir um caminho individual que seja anexado ao domínio customizado para criar um caminho exclusivo para seu app, por exemplo, `https://mydomain/myapp`. Quando você insere essa rota em um navegador da web, o tráfego de rede é roteado para o controlador de Ingresso. O controlador de Ingresso consulta o serviço associado e envia o tráfego de rede para o serviço e, além disso, para os pods nos quais o app está em execução.
+    2.  Defina um recurso do Ingresso em seu arquivo de configuração que use o domínio customizado para rotear o tráfego de rede recebido para seus serviços e o certificado customizado para gerenciar o encerramento do TLS. Para cada serviço, é possível definir um caminho individual que seja anexado ao domínio customizado para criar um caminho exclusivo para seu app, por exemplo, `https://mydomain/myapp`. Ao inserir essa rota em um navegador da web, o tráfego de rede é roteado para o balanceador de carga do aplicativo. O balanceador de carga do aplicativo consulta o serviço associado e envia o tráfego de rede para o serviço e também para
+os Pods em que o aplicativo está em execução.
 
         **Nota:** é importante que o app atenda no caminho definido no recurso de Ingresso. Caso contrário, o tráfego de rede não poderá ser encaminhado para o app. A maioria dos apps não atende em um caminho específico, mas usa o caminho raiz e uma porta específica. Nesse caso, defina o caminho raiz como `/` e não especifique um caminho individual para seu app.
 
@@ -1828,7 +1847,7 @@ Para configurar o controlador de Ingresso:
         </tr>
         <tr>
         <td><code>ingress.bluemix.net/ALB-ID</code></td>
-        <td>Substitua <em>&lt;private_ALB_ID&gt;</em> pelo ID do ALB para o seu controlador de Ingresso privado. Execute <code>bx cs albs --cluster <my_cluster></code> para localizar o ID do ALB.</td>
+        <td>Substitua <em>&lt;private_ALB_ID&gt;</em> pelo ID para o seu balanceador de carga de aplicativo privado. Execute <code>bx cs albs --cluster <my_cluster></code> para localizar o ID do balanceador de carga do aplicativo. Para obter mais informações sobre essa anotação do Ingress, consulte [Roteamento do balanceador de carga do aplicativo privado (ALB-ID)](cs_annotations.html#alb-id).</td>
         </tr>
         <tr>
         <td><code>tls/hosts</code></td>
@@ -1839,20 +1858,23 @@ Para configurar o controlador de Ingresso:
         </tr>
         <tr>
         <td><code>tls/secretName</code></td>
-        <td>Substitua <em>&lt;mytlssecret&gt;</em> pelo nome do segredo que você criou anteriormente e que retém o seu certificado e chave TLS customizados para gerenciar a finalização TLS para seu domínio customizado. </tr>
+        <td>Substitua <em>&lt;mytlssecret&gt;</em> pelo nome do segredo que você criou anteriormente e que retém o seu certificado e chave TLS customizados para gerenciar a finalização TLS para seu domínio customizado.
+        </tr>
         <tr>
         <td><code>host</code></td>
         <td>Substitua <em>&lt;mycustomdomain&gt;</em> pelo seu domínio customizado que você deseja configurar para finalização TLS.
 
         </br></br>
-        <strong>Nota:</strong> não use &ast; para o seu host ou deixe a propriedade do host vazia para evitar falhas durante a criação do Ingresso. </td>
+        <strong>Nota:</strong> não use &ast; para o seu host ou deixe a propriedade do host vazia para evitar falhas durante a criação do Ingresso.
+        </td>
         </tr>
         <tr>
         <td><code>path</code></td>
         <td>Substitua <em>&lt;myservicepath1&gt;</em> por uma barra ou pelo caminho exclusivo no qual seu app está atendendo, para que o tráfego de rede possa ser encaminhado para o app.
 
         </br>
-       Para cada serviço do Kubernetes, é possível definir um caminho individual que seja anexado ao domínio fornecido pela IBM para criar um caminho exclusivo para seu app, por exemplo, <code>ingress_domain/myservicepath1</code>. Quando você insere essa rota em um navegador da web, o tráfego de rede é roteado para o controlador de Ingresso. O controlador de Ingresso consulta o serviço associado e envia tráfego de rede para o serviço e para os pods nos quais o app está em execução usando o mesmo caminho. O app deve ser configurado para atender nesse caminho para receber o tráfego de rede de entrada.
+        Para cada serviço do Kubernetes, é possível definir um caminho individual que seja anexado ao domínio fornecido pela IBM para criar um caminho exclusivo para seu app, por exemplo, <code>ingress_domain/myservicepath1</code>. Ao inserir essa rota em um navegador da web, o tráfego de rede é roteado para o balanceador de carga do aplicativo. O balanceador de carga do aplicativo consulta o serviço associado e envia o tráfego de rede para o serviço e para os Pods em
+que o aplicativo está em execução usando o mesmo caminho. O app deve ser configurado para atender nesse caminho para receber o tráfego de rede de entrada.
 
         </br>
         Muitos apps não atendem em um caminho específico, mas usam o caminho raiz e uma porta específica. Nesse caso, defina o caminho raiz como <code>/</code> e não especifique um caminho individual para seu app.
@@ -1906,7 +1928,7 @@ Para configurar o controlador de Ingresso:
 
 No {{site.data.keyword.containershort_notm}}, é possível incluir IPs móveis estáveis para serviços do Kubernetes, incluindo sub-redes da rede no cluster. Ao criar um cluster padrão, o {{site.data.keyword.containershort_notm}} provisiona automaticamente uma sub-rede pública móvel com 5 endereços IP públicos móveis e uma sub-rede privada móvel com 5 endereços IP privados móveis. Os endereços IP móveis são estáticos e não mudam quando um nó do trabalhador ou, até mesmo o cluster, é removido.
 
- Dois dos endereços IP móveis, um público e um privado, são usados para os [controladores de Ingresso](#cs_apps_public_ingress) que podem ser usados para expor múltiplos apps em seu cluster. 4 endereços IP públicos móveis e 4 endereços IP privados móveis podem ser usados para expor apps [criando um serviço de balanceador de carga](#cs_apps_public_load_balancer).
+ Dois dos endereços IP móveis, um público e um privado, são usados para os [Balanceadores de carga de aplicativo do Ingress](#cs_apps_public_ingress) que você pode usar para expor múltiplos apps em seu cluster. 4 endereços IP públicos móveis e 4 endereços IP privados móveis podem ser usados para expor apps [criando um serviço de balanceador de carga](#cs_apps_public_load_balancer).
 
 **Nota:** os endereços IP públicos móveis são cobrados mensalmente. Se escolher remover os endereços IP públicos móveis depois que o cluster for provisionado, ainda assim terá que pagar o encargo mensal, mesmo se você os usou por um curto tempo.
 
@@ -2090,8 +2112,6 @@ Para implementar seu app:
 ## Ajuste de escala de apps
 {: #cs_apps_scaling}
 
-<!--Horizontal auto-scaling is not working at the moment due to a port issue with heapster. The dev team is working on a fix. We pulled out this content from the public docs. It is only visible in staging right now.-->
-
 Implemente aplicativos em nuvem que respondam a mudanças em demanda para seus aplicativos e que usem recursos somente quando necessário. O Auto-scaling aumenta ou diminui automaticamente o número de instâncias de seus apps com base na CPU.
 {:shortdesc}
 
@@ -2099,7 +2119,7 @@ Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para s
 
 **Nota:** você está procurando informações sobre ajuste de escala de aplicativos Cloud Foundry? Confira [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html).
 
-Com o Kubernetes, é possível ativar o [Auto-scaling do pod horizontal ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) para escalar seus apps com base na CPU.
+Com o Kubernetes, é possível ativar o [Auto-scaling do pod horizontal ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale) para escalar seus apps com base na CPU.
 
 1.  Implemente seu app no cluster a partir da CLI. Ao implementar seu app, deve-se solicitar a CPU.
 
@@ -2131,7 +2151,7 @@ Com o Kubernetes, é possível ativar o [Auto-scaling do pod horizontal ![Ícone
     </tr></tbody></table>
 
     **Nota:** para implementações mais complexas, pode ser necessário criar um [arquivo de configuração](#cs_apps_cli).
-2.  Crie um Escalador automático de ajuste de pod horizontal e defina sua política. Para obter mais informações sobre como trabalhar com o comando `kubetcl autoscale`, consulte [a documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/user-guide/kubectl/v1.5/#autoscale).
+2.  Crie um Escalador automático de ajuste de pod horizontal e defina sua política. Para obter mais informações sobre como trabalhar com o comando `kubectl autoscale`, consulte [a documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
 
     ```
     kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
@@ -2157,6 +2177,8 @@ Com o Kubernetes, é possível ativar o [Auto-scaling do pod horizontal ![Ícone
     </tr>
     </tbody></table>
 
+
+
 <br />
 
 
@@ -2168,7 +2190,7 @@ Com o Kubernetes, é possível ativar o [Auto-scaling do pod horizontal ![Ícone
 
 Antes de iniciar, crie uma [implementação](#cs_apps_cli).
 
-1.  [Apresente ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/user-guide/kubectl/v1.5/#rollout) uma mudança. Por exemplo, talvez você queira mudar a imagem usada na implementação inicial.
+1.  [Apresente ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#rollout) uma mudança. Por exemplo, talvez você queira mudar a imagem usada na implementação inicial.
 
     1.  Obtenha o nome da implementação.
 
@@ -2362,7 +2384,7 @@ Quando você monta um volume de segredo para o seu pod, um arquivo denominado li
     ```
     {: screen}
 
-
+    
 
 9.  Ao implementar seu app, configure-o para localizar o arquivo de segredo chamado **binding** no diretório de montagem, analise o conteúdo de JSON e determine a URL e as credenciais de serviço para acessar o serviço do {{site.data.keyword.Bluemix_notm}}.
 
@@ -2374,14 +2396,10 @@ Agora é possível acessar os detalhes e as credenciais de serviço do {{site.da
 ## Criando armazenamento persistente
 {: #cs_apps_volume_claim}
 
-Crie uma solicitação de volume persistente (pvc) para provisionar o armazenamento de arquivo NFS para seu cluster. Em seguida, monte essa solicitação em um pod para assegurar que os dados estejam disponíveis mesmo se o pod travar ou for encerrado.
+Crie uma solicitação de volume persistente (pvc) para provisionar o armazenamento de arquivo NFS para seu cluster. Em seguida, monte essa solicitação em uma implementação para assegurar que os dados estejam disponíveis mesmo que os pods travem ou sejam encerrados.
 {:shortdesc}
 
 O armazenamento de arquivo NFS que suporta o volume persistente é armazenado em cluster pela IBM para fornecer alta disponibilidade para seus dados.
-
-
-Quando uma conta do {{site.data.keyword.Bluemix_dedicated_notm}} é [ativada para clusters](cs_ov.html#setup_dedicated), em vez de usar essa tarefa, deve-se [abrir um chamado de suporte](/docs/support/index.html#contacting-support). Ao abrir um chamado, é possível solicitar um backup para seus volumes, uma restauração de seus volumes e outras funções de armazenamento.
-
 
 1.  Revise as classes de armazenamento disponíveis. O {{site.data.keyword.containerlong}} fornece oito classes predefinidas de armazenamento para que o administrador de cluster não precise criar quaisquer classes de armazenamento. A classe de armazenamento `ibmc-file-bronze` é a mesmo que a classe de armazenamento `padrão`.
 
@@ -2408,33 +2426,34 @@ Quando uma conta do {{site.data.keyword.Bluemix_dedicated_notm}} é [ativada par
 2.  Decida se você deseja salvar seus dados e o compartilhamento de arquivo NFS após você excluir o pvc. Se você desejar manter seus dados, escolha uma classe de armazenamento `retain`. Se desejar que os dados e seu compartilhamento de arquivo sejam excluídos na exclusão do pvc, escolha uma classe de armazenamento sem `retain`.
 
 3.  Revise o IOPS de uma classe de armazenamento e os tamanhos de armazenamento disponíveis.
-    - As classes de armazenamento bronze, prata e ouro usam o armazenamento Endurance e têm um IOPS único definido por GB para cada classe. O IOPS total depende do tamanho do armazenamento. Por exemplo, 1000Gi pvc em 4 IOPS por GB possui um total de 4.000 IOPS.
 
-    ```
-    kubectl describe storageclasses ibmc-file-silver
-    ```
-    {: pre}
+    - As classes de armazenamento bronze, prata e dourada usam o [Armazenamento de resistência ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://knowledgelayer.softlayer.com/topic/endurance-storage) e têm um único IOPS definido por GB para cada classe. O IOPS total depende do tamanho do armazenamento. Por exemplo, 1000Gi pvc em 4 IOPS por GB possui um total de 4.000 IOPS.
 
-    O campo **Parâmetros** fornece o IOPS por GB associado à classe de armazenamento e os tamanhos disponíveis em gigabytes.
+      ```
+      kubectl describe storageclasses ibmc-file-silver
+      ```
+      {: pre}
 
-    ```
-    Parâmetros:	iopsPerGB=4,sizeRange=20Gi,40Gi,80Gi,100Gi,250Gi,500Gi,1000Gi,2000Gi,4000Gi,8000Gi,12000Gi
-    ```
-    {: screen}
+      O campo **Parâmetros** fornece o IOPS por GB associado à classe de armazenamento e os tamanhos disponíveis em gigabytes.
+
+      ```
+      Parâmetros:	iopsPerGB=4,sizeRange=20Gi,40Gi,80Gi,100Gi,250Gi,500Gi,1000Gi,2000Gi,4000Gi,8000Gi,12000Gi
+      ```
+      {: screen}
 
     - As classes de armazenamento customizadas usam o [Desempenho de armazenamento ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://knowledgelayer.softlayer.com/topic/performance-storage) e possuem diferentes opções para o total do IOPS e o tamanho.
 
-    ```
-    kubectl describe storageclasses ibmc-file-retain-custom
-    ```
-    {: pre}
+      ```
+      kubectl describe storageclasses ibmc-file-retain-custom
+      ```
+      {: pre}
 
-    O campo **parâmetros** fornece o IOPS associado à classe de armazenamento e os tamanhos disponíveis em gigabytes. Por exemplo, um 40Gi pvc pode selecionar o IOPS que é um múltiplo de 100 que está no intervalo de 100 a 2.000 IOPS.
+      O campo **parâmetros** fornece o IOPS associado à classe de armazenamento e os tamanhos disponíveis em gigabytes. Por exemplo, um 40Gi pvc pode selecionar o IOPS que é um múltiplo de 100 que está no intervalo de 100 a 2.000 IOPS.
 
-    ```
-    Parameters:	Note=IOPS value must be a multiple of 100,reclaimPolicy=Retain,sizeIOPSRange=20Gi:[100-1000],40Gi:[100-2000],80Gi:[100-4000],100Gi:[100-6000],1000Gi[100-6000],2000Gi:[200-6000],4000Gi:[300-6000],8000Gi:[500-6000],12000Gi:[1000-6000]
-    ```
-    {: screen}
+      ```
+      Parameters:	Note=IOPS value must be a multiple of 100,reclaimPolicy=Retain,sizeIOPSRange=20Gi:[100-1000],40Gi:[100-2000],80Gi:[100-4000],100Gi:[100-6000],1000Gi[100-6000],2000Gi:[200-6000],4000Gi:[300-6000],8000Gi:[500-6000],12000Gi:[1000-6000]
+      ```
+      {: screen}
 
 4.  Crie um arquivo de configuração para definir sua solicitação de volume persistente e salve a configuração como um `.yaml`.
 
@@ -2542,24 +2561,29 @@ Quando uma conta do {{site.data.keyword.Bluemix_dedicated_notm}} é [ativada par
     ```
     {: screen}
 
-6.  {: #cs_apps_volume_mount}Para montar a solicitação de volume persistente em seu pod, crie um arquivo de configuração. Salve a configuração como um arquivo `.yaml`.
+6.  {: #cs_apps_volume_mount}Para montar a solicitação de volume persistente para sua implementação, crie um arquivo de configuração. Salve a configuração como um arquivo `.yaml`.
 
     ```
-    apiVersion: v1
-    kind: Pod
+    apiVersion: extensions/v1beta1
+    kind: Deployment
     metadata:
-     name: <pod_name>
+     name: <deployment_name>
+    replicas: 1
+    template:
+     metadata:
+       labels:
+         app: <app_name>
     spec:
      containers:
-     - image: nginx
-       name: mycontainer
+     - image: <image_name>
+       name: <container_name>
        volumeMounts:
-       - mountPath: /volumemount
-         name: myvol
+       - mountPath: /<file_path>
+         name: <volume_name>
      volumes:
-     - name: myvol
+     - name: <volume_name>
        persistentVolumeClaim:
-         claimName: mypvc
+         claimName: <pvc_name>
     ```
     {: codeblock}
 
@@ -2570,37 +2594,41 @@ Quando uma conta do {{site.data.keyword.Bluemix_dedicated_notm}} é [ativada par
     <tbody>
     <tr>
     <td><code>metadata/name</code></td>
-    <td>O nome do pod.</td>
+    <td>O nome da implementação.</td>
+    </tr>
+    <tr>
+    <td><code>template/metadata/labels/app</code></td>
+    <td>Um rótulo para a implementação.</td>
     </tr>
     <tr>
     <td><code>volumeMounts/mountPath</code></td>
-    <td>O caminho absoluto do diretório no qual o volume está montado dentro do contêiner.</td>
+    <td>O caminho absoluto do diretório no qual o volume está montado dentro da implementação.</td>
     </tr>
     <tr>
     <td><code>volumeMounts/name</code></td>
-    <td>O nome do volume que você monta em seu contêiner.</td>
+    <td>O nome do volume a montar para sua implementação.</td>
     </tr>
     <tr>
     <td><code>volumes/name</code></td>
-    <td>O nome do volume que você monta em seu contêiner. Geralmente, esse nome é o mesmo que <code>volumeMounts/name</code>.</td>
+    <td>O nome do volume a montar para sua implementação. Geralmente, esse nome é o mesmo que <code>volumeMounts/name</code>.</td>
     </tr>
     <tr>
     <td><code>volumes/name/persistentVolumeClaim</code></td>
-    <td>O nome da solicitação de volume persistente que você deseja usar como seu volume. Ao montar o volume no pod, o Kubernetes identifica o volume persistente que está ligado à solicitação de volume persistente e permite que o usuário leia e grave no volume persistente.</td>
+    <td>O nome da solicitação de volume persistente que você deseja usar como seu volume. Ao montar o volume para a implementação, o Kubernetes identificará o volume persistente que está ligado à solicitação de volume persistente e permitirá que o usuário leia e grave no volume persistente.</td>
     </tr>
     </tbody></table>
 
-8.  Crie o pod e monte a solicitação de volume persistente em seu pod.
+8.  Crie a implementação e monte a solicitação de volume persistente.
 
     ```
     kubectl apply -f <local_yaml_path>
     ```
     {: pre}
 
-9.  Verifique se o volume foi montado com êxito no pod.
+9.  Verifique se o volume foi montado com sucesso.
 
     ```
-    kubectl describe pod <pod_name>
+    kubectl describe deployment <deployment_name>
     ```
     {: pre}
 
@@ -2823,3 +2851,5 @@ Para o {{site.data.keyword.containershort_notm}}, o proprietário padrão do cam
     {: screen}
 
     Essa saída mostra que a raiz possui permissões de leitura, gravação e execução no caminho de montagem do volume `mnt/myvol/`, mas o usuário myguest não raiz tem permissão para ler e gravar na pasta `mnt/myvol/mydata`. Por causa dessas permissões atualizadas, o usuário não raiz pode agora gravar dados no volume persistente.
+
+

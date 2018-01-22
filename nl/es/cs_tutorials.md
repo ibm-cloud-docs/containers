@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-16"
+lastupdated: "2017-12-13"
 
 ---
 
@@ -19,10 +19,10 @@ lastupdated: "2017-10-16"
 # Guía de aprendizaje: Creación de clústeres
 {: #cs_cluster_tutorial}
 
-Despliegue y gestione su propio clúster de Kubernetes en la nube. Puede automatizar el despliegue, operación, escalado y supervisión de apps contenerizadas en un clúster de hosts de cálculo independientes denominados nodos trabajadores.
+Despliegue y gestione su propio clúster de Kubernetes en {{site.data.keyword.Bluemix_short}}. Puede automatizar el despliegue, operación, escalado y supervisión de apps contenerizadas en un clúster de hosts de cálculo independientes denominados nodos trabajadores.
 {:shortdesc}
 
-En esta serie de guías de aprendizaje verá cómo una firma de relaciones públicas ficticia utiliza Kubernetes para desplegar una app contenerizada en {{site.data.keyword.Bluemix_short}}. Mediante {{site.data.keyword.toneanalyzerfull}}, la empresa analiza sus notas de prensa y recibe comentarios.
+En esta serie de guías de aprendizaje verá cómo una firma de relaciones públicas ficticia utiliza funciones de Kubernetes para desplegar una app contenerizada en {{site.data.keyword.Bluemix_notm}}. Mediante {{site.data.keyword.toneanalyzerfull}}, la empresa analiza sus notas de prensa y recibe comentarios.
 
 
 ## Objetivos
@@ -33,7 +33,7 @@ Hello World de la app.
 Para configurar la infraestructura debe:
 
 -   Crear un clúster de Kubernetes con un nodo trabajador
--   Instalar las CLI para utilizar la API de Kubernetes y gestionar imágenes de Docker
+-   Instalar las CLI para ejecutar mandatos de Kubernetes y gestionar imágenes de Docker
 -   Crear un repositorio de imágenes privadas en {{site.data.keyword.registrylong_notm}} para almacenar las imágenes
 -   Añadir el servicio {{site.data.keyword.toneanalyzershort}} al clúster para que cualquier app del clúster pueda utilizar el servicio
 
@@ -50,7 +50,8 @@ Esta guía de aprendizaje está destinada a los desarrolladores de software y ad
 
 ## Requisitos previos
 
--  Una cuenta de [{{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/registration/)
+-  Una [cuenta de {{site.data.keyword.Bluemix_notm}} de Suscripción o Pago según uso ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://console.bluemix.net/registration/)
+
 
 
 
@@ -147,12 +148,12 @@ Para instalar las CLI:
 ## Lección 2: Configuración del entorno de clúster
 {: #cs_cluster_tutorial_lesson2}
 
-Cree su clúster de Kubernetes, configure un repositorio de imágenes privadas en {{site.data.keyword.registryshort_notm}} y añada secretos a su clúster para que la app pueda acceder al servicio {{site.data.keyword.toneanalyzershort}}.
+Configure un repositorio de imágenes privadas en {{site.data.keyword.registryshort_notm}} y añada secretos a su clúster para que la app pueda acceder al servicio {{site.data.keyword.toneanalyzershort}}.
 
 1.  Inicie una sesión en la CLI de {{site.data.keyword.Bluemix_notm}} utilizando sus credenciales de {{site.data.keyword.Bluemix_notm}} cuando se le soliciten.
 
     ```
-    bx login [--sso] -a api.eu-gb.bluemix.net
+    bx login [--sso]
     ```
     {: pre}
 

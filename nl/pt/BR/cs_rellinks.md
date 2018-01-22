@@ -1,8 +1,6 @@
 ---
 
-copyright:
-  years: 2014, 2017
-lastupdated: "2017-11-28"
+copyright: years: 2014, 2017 lastupdated: "2017-12-01"
 
 ---
 
@@ -22,11 +20,15 @@ lastupdated: "2017-11-28"
 **Links relacionados a clusters**
 
 - [Calculadora de precificação para clusters ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://console.bluemix.net/?direct=classic%2F&env_id=ibm%3Ayp%3Aus-south#/pricing/cloudOEPaneId=pricing&paneId=pricingSheet&orgGuid=83f3f6dd-e430-4955-8225-0963753d8b0f&spaceGuid=f616188f-e265-4e04-84be-1b3d2ec63db3)
-- [API de REST para clusters ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://us-south.containers.bluemix.net/swagger)
+- [API de REST para clusters
+![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://containers.bluemix.net/swagger)
 - [API de REST para criação de log de cluster![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://us-south.containers.bluemix.net/swagger-logging/)
+- [API de REST para o balanceador de carga de aplicativo de cluster![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://us-south.containers.bluemix.net/swagger-alb-api/)
 - [Jornadas de orquestração de contêiner do developerWorks ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/code/journey/category/container-orchestration/)
 - [Documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/)
 - [Documentação do Docker ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.docker.com/engine/)
+- [Documentação do Helm ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.helm.sh/helm/)
+- [Istio ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://istio.io/)
 - [Weave Scope ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.weave.works/oss/scope/)
 
 <br />

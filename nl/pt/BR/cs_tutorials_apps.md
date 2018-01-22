@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-14"
+lastupdated: "2017-12-08"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -397,9 +397,7 @@ Muitos comandos nesta lição? Acordado. Que tal usar um script de configuraçã
 ## Lição 2: implementando e atualizando apps com disponibilidade mais alta
 {: #cs_apps_tutorial_lesson2}
 
-Nesta lição, você implementa três instâncias do app Hello World em um cluster para
-disponibilidade mais alta do que a primeira versão do app. Disponibilidade mais alta significa que o acesso de usuário é
-dividido entre as três instâncias. Quando muitos usuários estão tentando acessar a mesma instância do app, eles podem observar tempos de resposta lentos. Múltiplas instâncias podem significar tempos de resposta mais rápidos para seus usuários. Nesta lição, você também aprenderá como as verificações de funcionamento e atualizações de implementação podem trabalhar com
+Nessa lição, você implementa três instâncias do app Hello World em um cluster para obter maior disponibilidade que a primeira versão do app. Disponibilidade mais alta significa que o acesso de usuário é dividido entre as três instâncias. Quando muitos usuários estão tentando acessar a mesma instância do app, eles podem observar tempos de resposta lentos. Múltiplas instâncias podem significar tempos de resposta mais rápidos para seus usuários. Nesta lição, você também aprenderá como as verificações de funcionamento e atualizações de implementação podem trabalhar com
 o Kubernetes.
 {:shortdesc}
 
@@ -829,110 +827,45 @@ No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhad
 ### Lição 3b. Atualizando a implementação em execução do Watson Tone Analyzer
 {: #lesson3b}
 
-Enquanto uma implementação está em execução, é possível editá-la para mudar valores no modelo de pod. Esta lição inclui atualizar a imagem que é usada.
+Enquanto uma implementação está em execução, é possível editá-la para mudar valores no modelo de pod. Esta lição inclui atualizar a imagem que é usada. A firma PR deseja mudar o app na implementação.
 
-1.  Mude o nome da imagem. A firma PR deseja testar um app diferente na mesma implementação, mas retroceder se um problema for localizado com o novo app.
+Mude o nome da imagem:
 
-    1.  Abra o script de configuração para a implementação em execução.
+1.  Abra os detalhes da configuração para a implementação em execução.
 
-        ```
-        kubectl edit deployment/watson-talk-pod
-        ```
-        {: pre}
+    ```
+    kubectl edit deployment/watson-talk-pod
+    ```
+    {: pre}
 
-        Dependendo do seu sistema operacional, um editor de vi ou um editor de texto se abre.
+    Dependendo do seu sistema operacional, um editor de vi ou um editor de texto se abre.
 
-    2.  Mude o nome da imagem para a imagem ibmliberty.
+2.  Mude o nome da imagem para a imagem ibmliberty.
 
-        ```
-        spec:
+    ```
+    spec:
               containers:
               - image: registry.<region>.bluemix.net/ibmliberty:latest
-        ```
-        {: codeblock}
+    ```
+    {: codeblock}
 
-    3.  Salve as mudanças e saia do editor.
+3.  Salve as mudanças e saia do editor.
 
-    4.  Aplique as mudanças no script de configuração à implementação em execução.
+4.  Aplique as mudanças na implementação em execução.
 
-        ```
-        kubectl rollout status deployment/watson-talk-pod
-        ```
-        {: pre}
+    ```
+    kubectl rollout status deployment/watson-talk-pod
+    ```
+    {: pre}
 
-        Aguarde a confirmação de que o lançamento esteja completo.
+    Aguarde a confirmação de que o lançamento esteja completo.
 
-        ```
-        deployment "watson-talk-pod" successfully rolled out
-        ```
-        {: screen}
+    ```
+    deployment "watson-talk-pod" successfully rolled out
+    ```
+    {: screen}
 
-        Quando você apresenta uma mudança, outro pod é criado e testado pelo Kubernetes. Quando o teste é bem-sucedido, o pod antigo é removido.
-
-    5.  Se as mudanças não estiverem conforme o esperado, será possível recuperá-las. Talvez alguém na firma PR tenha feito um erro com as mudanças do app e elas precisam voltar para a implementação anterior.
-
-        1.  Visualize os números de versão de revisão para identificar o número da implementação anterior. A revisão mais recente é o número mais alto da versão. Neste exemplo, a revisão 1 era a implementação original e a revisão 2 é a mudança de imagem feita na etapa anterior.
-
-            ```
-            kubectl rollout history deployment/watson-talk-pod
-            ```
-            {: pre}
-
-            Saída:
-
-            ```
-            deployments "watson-talk-pod"
-            REVISION CHANGE-CAUSE
-            1          <none>
-            2          <none>
-
-            ```
-            {: screen}
-
-        2.  Execute o comando a seguir para reverter a implementação para a revisão anterior. Novamente, outro pod é criado e testado pelo Kubernetes. Quando o teste é bem-sucedido, o pod antigo é removido.
-
-            ```
-            kubectl rollout undo deployment/watson-talk-pod --to-revision=1
-            ```
-            {: pre}
-
-            Saída:
-
-            ```
-            deployment "watson-talk-pod" rolled back
-            ```
-            {: screen}
-
-        3.  Obtenha o nome do pod para usar na próxima etapa.
-
-            ```
-            kubectl get pods
-            ```
-            {: pre}
-
-            Saída:
-
-            ```
-            NAME                              READY     STATUS    RESTARTS   AGE
-            watson-talk-pod-2511517105-6tckg  1/1       Running   0          2m
-            ```
-            {: screen}
-
-        4.  Visualize os detalhes do pod e verifique se a imagem foi retrocedida.
-
-            ```
-            kubectl describe pod <pod_name>
-            ```
-            {: pre}
-
-            Saída:
-
-            ```
-            Image: registry.<region>.bluemix.net/namespace/watson-talk
-            ```
-            {: screen}
-
-2.  Opcional: repita as mudanças para a implementação watson-pod.
+    Quando você apresenta uma mudança, outro pod é criado e testado pelo Kubernetes. Quando o teste é bem-sucedido, o pod antigo é removido.
 
 [Teste seus conhecimentos e faça um teste! ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 

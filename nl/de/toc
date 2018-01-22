@@ -1,7 +1,7 @@
 {:navgroup: .navgroup}
 {:topicgroup: .topicgroup}
 
-{: .toc subcollection="containers" audience="compute" href="/docs/containers/index.html"}
+{: .toc subcollection="containers" audience="compute" href="/docs/containers/container_index.html"}
 IBM Cloud Container Service
 
     {: .navgroup id="learn"}
@@ -13,8 +13,15 @@ IBM Cloud Container Service
     Lernprogramme
         cs_tutorials.md
         cs_tutorials_apps.md
+        cs_tutorials_istio.md
 
     cs_security.md
+    {: .navgroup-end}
+
+    {: .navgroup id="howto"}
+    cs_cli_install.md
+    cs_cluster.md
+    cs_apps.md
     {: .navgroup-end}
 
     {: .navgroup id="reference"}
@@ -22,25 +29,23 @@ IBM Cloud Container Service
     cs_versions.md
     cs_regions.md
     cs_annotations.md
-    {: .navgroup-end}
 
-    {: .navgroup id="howto"}
-    cs_cli_install.md
-    cs_cluster.md
-    cs_apps.md
+    {: .topicgroup}
+    IBM Cloud Dedicated
+        cs_dedicated.md
     [Veraltet: Einzelne und skalierbare Container ausführen](cs_classic.html)
-        [Einzelne und skalierbare Container in Kubernetes-Cluster migrieren](cs_classic.html#cs_classic_migrating)
-        [Informationen zu einzelnen und skalierbaren Containern](container_ov.html)
-        [Planung für einzelne und skalierbare Container durchführen](container_planning.html)
-        [Sicherheit für einzelne und skalierbare Container](container_security.html)
-        [CLI für einzelne und skalierbare Container einrichten](container_cli_cfic_install.html)
-        [IBM Images](../services/RegistryImages/index.html)
-        [Tasks mit kurzer Laufzeit als Container ausführen](container_single_ui.html)
-        [Gruppen mit hoher Verfügbarkeit ausführen](container_ha.html)
-        [Persistente Daten für einzelne und skalierbare Container speichern](container_volumes_ov.html)
-        [Services mit einzelnen und skalierbaren Containern integrieren](container_integrations.html)
-        [CLI-Referenz für einzelne und skalierbare Container](container_cli_reference_cfic.html)
-        [Fehlerbehebung für einzelne und skalierbare Container](container_troubleshoot.html)
+            [Einzelne und skalierbare Container in Kubernetes-Cluster migrieren](cs_classic.html#cs_classic_migrating)
+            [Informationen zu einzelnen und skalierbaren Containern](container_ov.html)
+            [Planung für einzelne und skalierbare Container durchführen](container_planning.html)
+            [Sicherheit für einzelne und skalierbare Container](container_security.html)
+            [CLI für einzelne und skalierbare Container einrichten](container_cli_cfic_install.html)
+            [IBM Images](../services/RegistryImages/index.html)
+            [Tasks mit kurzer Laufzeit als Container ausführen](container_single_ui.html)
+            [Gruppen mit hoher Verfügbarkeit ausführen](container_ha.html)
+            [Persistente Daten für einzelne und skalierbare Container speichern](container_volumes_ov.html)
+            [Services mit einzelnen und skalierbaren Containern integrieren](container_integrations.html)
+            [CLI-Referenz für einzelne und skalierbare Container](container_cli_reference_cfic.html)
+            [Fehlerbehebung für einzelne und skalierbare Container](container_troubleshoot.html)
     {: .navgroup-end}
 
     {: .navgroup id="help"}

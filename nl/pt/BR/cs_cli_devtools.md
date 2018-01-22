@@ -1,8 +1,6 @@
 ---
 
-copyright:
-  years: 2014, 2017
-lastupdated: "2017-11-28"
+copyright: years: 2014, 2017 lastupdated: "2017-12-01"
 
 ---
 
@@ -22,7 +20,8 @@ lastupdated: "2017-11-28"
 Refira-se a estes comandos para criar e gerenciar clusters.
 {:shortdesc}
 
-**Dica:** procurando comandos `bx cr`? Veja a [referência de CLI do {{site.data.keyword.registryshort_notm}}](/docs/cli/plugins/registry/index.html). Procurando comandos `kubectl`? Consulte a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/user-guide/kubectl/v1.5/).
+**Dica:** procurando comandos `bx cr`? Veja a [referência de CLI do {{site.data.keyword.registryshort_notm}}](/docs/cli/plugins/registry/index.html). Procurando comandos `kubectl`? Consulte a [documentação de Kubernetes
+![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).
 
 
 <!--[https://github.ibm.com/alchemy-containers/armada-cli ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.ibm.com/alchemy-containers/armada-cli)-->
@@ -197,7 +196,7 @@ Visualize os detalhes de um balanceador de carga de aplicativo (ALB).
 ### bx cs alb-types
 {: #cs_alb_types}
 
-Visualize os tipos de balanceador de carga de aplicativo que são suportados na região.
+Visualize os tipos balanceador de aplicativo que são suportados na região.
 
 <strong>Opções de comando</strong>:
 
@@ -443,8 +442,6 @@ Remover um cluster de sua organização.
 
 Inclua um serviço do {{site.data.keyword.Bluemix_notm}} em um cluster.
 
-**Dica:** para os usuários do {{site.data.keyword.Bluemix_dedicated_notm}}, veja [Incluindo serviços do {{site.data.keyword.Bluemix_notm}} em clusters no {{site.data.keyword.Bluemix_dedicated_notm}} (Beta encerrado)](cs_cluster.html#binding_dedicated).
-
 <strong>Opções de comando</strong>:
 
    <dl>
@@ -651,13 +648,13 @@ Pode ser necessário mudar seus arquivos YAML para implementações futuras. Rev
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>O nome ou ID do cluster. Este valor é obrigatório.</dd>
-   
+
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
    <dd>A versão do Kubernetes do cluster. Se essa sinalização não for especificada, o mestre do Kubernetes será atualizado para a versão de API padrão. Para ver versões disponíveis, execute [bx cs kube-versions](#cs_kube_versions). Esse valor é opcional.</dd>
 
    <dt><code>-f</code></dt>
    <dd>Use esta opção para forçar a atualização do mestre sem avisos do usuário. Esse valor é opcional.</dd>
-   
+
    <dt><code>--force-update</code></dt>
    <dd>Tente a atualização mesmo se a mudança for maior que duas versões secundárias. Esse valor é opcional.</dd>
    </dl>
@@ -698,7 +695,7 @@ Configure as credenciais de conta de infraestrutura do IBM Cloud (SoftLayer) par
    <dl>
    <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
    <dd>Nome do usuário de infraestrutura do IBM Cloud (SoftLayer). Este valor é obrigatório.</dd>
-   
+
 
    <dt><code>--infrastructure-api-key <em>API_KEY</em></code></dt>
    <dd>Chave API de infraestrutura do IBM Cloud infrastructure (SoftLayer). Esse valor é necessário.
@@ -968,8 +965,8 @@ Atualize o encaminhamento de log para o servidor de criação de log que você d
 {: #cs_machine_types}
 
 Visualizar uma lista de tipos de máquina disponíveis para seus nós do trabalhador. Cada tipo de máquina inclui a
-quantia de CPU, memória e espaço em disco virtual para cada nó do trabalhador no cluster. 
-- Tipos de máquina com `u2c` ou `b2c` no nome usam disco local em vez de rede de área de armazenamento (SAN) para confiabilidade. Os benefícios de confiabilidade incluem maior rendimento ao serializar bytes para o disco local e a degradação do sistema de arquivos reduzido devido a falhas de rede. Esses tipos de máquina contêm 25 GB de armazenamento em disco local para o sistema de arquivos de S.O. e 100 GB de armazenamento em disco local para `/var/lib/docker`, o diretório no qual todos os dados de contêiner são gravados. 
+quantia de CPU, memória e espaço em disco virtual para cada nó do trabalhador no cluster.
+- Tipos de máquina com `u2c` ou `b2c` no nome usam disco local em vez de rede de área de armazenamento (SAN) para confiabilidade. Os benefícios de confiabilidade incluem maior rendimento ao serializar bytes para o disco local e a degradação do sistema de arquivos reduzido devido a falhas de rede. Esses tipos de máquina contêm 25 GB de armazenamento em disco local para o sistema de arquivos de S.O. e 100 GB de armazenamento em disco local para `/var/lib/docker`, o diretório no qual todos os dados de contêiner são gravados.
 - Tipos de máquina que incluem `encrypted` na criptografia de nome de dados do docker do host. O diretório `/var/lib/docker`, no qual todos os dados de contêiner são armazenados, é criptografado com criptografia LUKS.
 - Tipos de máquina com `u1c` ou `b1c` no nome são descontinuados, como `u1c.2x4`. Para começar a usar os tipos de máquina `u2c` e `b2c`, use o comando `bx cs worker-add` para incluir nós do trabalhador com o tipo de máquina atualizado. Em seguida, remova os nós do trabalhador que estiverem usando os tipos de máquina descontinuados usando o comando `bx cs worker-rm`.
 </p>
@@ -1271,13 +1268,13 @@ Pode ser necessário mudar seus arquivos YAML para implementações antes de atu
 
    <dt><em>CLUSTER</em></dt>
    <dd>O nome ou ID do cluster no qual você lista nós do trabalhador disponíveis. Este valor é obrigatório.</dd>
-   
+
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
    <dd>A versão do Kubernetes do cluster. Se essa sinalização não for especificada, o nó do trabalhador será atualizado para a versão padrão. Para ver versões disponíveis, execute [bx cs kube-versions](#cs_kube_versions). Esse valor é opcional.</dd>
 
    <dt><code>-f</code></dt>
    <dd>Use esta opção para forçar a atualização do mestre sem avisos do usuário. Esse valor é opcional.</dd>
-   
+
    <dt><code>--force-update</code></dt>
    <dd>Tente a atualização mesmo se a mudança for maior que duas versões secundárias. Esse valor é opcional.</dd>
 

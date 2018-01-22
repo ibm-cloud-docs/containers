@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-17"
+lastupdated: "2017-12-01"
 
 ---
 
@@ -33,13 +33,7 @@ Unterstützte {{site.data.keyword.containershort_notm}}-Regionen:
   * Vereinigte Staaten (Osten)
   * Vereinigte Staaten (Süden)
 
-Sie können Kubernetes-Lite-Cluster in den folgenden Regionen erstellen:
-  * Asien-Pazifik (Süden)
-  * Zentraleuropa
-  * Großbritannien (Süden)
-  * Vereinigte Staaten (Süden)
 
-  **Hinweis**: Wenn Sie kein Bezahlkunde sind, können Sie keine Lite-Cluster in der Region 'Vereinigte Staaten (Süden)' erstellen.
 
 
 ## API-Endpunkte für {{site.data.keyword.Bluemix_notm}}-Regionen
@@ -89,15 +83,9 @@ API-Endpunkte für {{site.data.keyword.Bluemix_notm}}-Regionen mit Beispiel für
 Mithilfe von {{site.data.keyword.containershort_notm}}-Regionen können Sie Kubernetes-Cluster erstellen oder auf Kubernetes-Cluster in einer Region zugreifen, die von der {{site.data.keyword.Bluemix_notm}}-Region abweicht, in der Sie angemeldet sind. Die Endpunkte für die {{site.data.keyword.containershort_notm}}-Region verweisen speziell auf {{site.data.keyword.containershort_notm}} und nicht auf {{site.data.keyword.Bluemix_notm}} im Allgemeinen.
 {:shortdesc}
 
-API-Endpunkte für {{site.data.keyword.containershort_notm}}-Regionen:
-  * Asien-Pazifik (Norden): `https://ap-north.containers.bluemix.net`
-  * Asien-Pazifik (Süden): `https://ap-south.containers.bluemix.net`
-  * Zentraleuropa: `https://eu-central.containers.bluemix.net`
-  * Großbritannien (Süden): `https://uk-south.containers.bluemix.net`
-  * Vereinigte Staaten (Osten): `https://us-east.containers.bluemix.net`
-  * Vereinigte Staaten (Süden): `https://us-south.containers.bluemix.net`
+Sie können auf {{site.data.keyword.containershort_notm}} über einen globalen Endpunkt zugreifen: `https://containers.bluemix.net/`. 
 
-Um zu überprüfen, in welcher {{site.data.keyword.containershort_notm}}-Region Sie sich momentan befinden, müssen Sie den Befehl `bx cs api` ausführen und dann den Wert im Feld **Region** überprüfen.
+Um zu überprüfen, in welcher {{site.data.keyword.containershort_notm}}-Region Sie sich momentan befinden, führen Sie `bx cs region` aus. 
 
 ### Bei anderer Container-Service-Region anmelden
 {: #container_login_endpoints}
@@ -108,43 +96,7 @@ Sie können sich beispielsweise aus den folgenden Gründen bei einer anderen Reg
 
 </br>
 
-Beispielbefehle zur Anmeldung bei einer {{site.data.keyword.containershort_notm}}-Region:
-  * Asien-Pazifik (Norden):
-    ```
-    bx cs init --host https://ap-north.containers.bluemix.net
-    ```
-  {: pre}
-
-  * Asien-Pazifik (Süden):
-    ```
-    bx cs init --host https://ap-south.containers.bluemix.net
-    ```
-    {: pre}
-
-  * Zentraleuropa:
-    ```
-    bx cs init --host https://eu-central.containers.bluemix.net
-    ```
-    {: pre}
-
-  * Großbritannien (Süden):
-    ```
-    bx cs init --host https://uk-south.containers.bluemix.net
-    ```
-    {: pre}
-
-  * Vereinigte Staaten (Osten):
-    ```
-    bx cs init --host https://us-east.containers.bluemix.net
-    ```
-    {: pre}
-
-  * Vereinigte Staaten (Süden):
-    ```
-    bx cs init --host https://us-south.containers.bluemix.net
-    ```
-    {: pre}
-
+Um schnell zwischen Regionen zu wechseln, führen Sie `bx cs region-set`. 
 
 ### Für den Container-Service verfügbare Standorte
 {: #locations}
@@ -153,30 +105,26 @@ Bei Standorten handelt es sich um Rechenzentren, die in einer Region verfügbar 
 
   | Region | Standort | Ort |
   |--------|----------|------|
-  | Asien-Pazifik (Norden)| hkg02, tok02 | Hongkong, Tokio |
+  | Asien-Pazifik (Norden) | hkg02, tok02 | Hongkong, Tokio |
   | Asien-Pazifik (Süden)     | mel01, syd01, syd04        | Melbourne, Sydney |
-  | Zentraleuropa     | ams03, fra02, par01        | Amsterdam, Frankfurt, Paris |
+  | Zentraleuropa     | ams03, fra02, mil01, par01        | Amsterdam, Frankfurt, Milan, Paris |
   | Großbritannien (Süden)      | lon02, lon04         | London |
   | Vereinigte Staaten (Osten)      | tor01, wdc06, wdc07        | Toronto, Washington, DC |
   | Vereinigte Staaten (Süden)     | dal10, dal12, dal13       | Dallas |
 
+**Hinweis**: Milan (mil01) ist nur für Lite-Cluster verfügbar. 
+
 ### Container-Service-API-Befehle verwenden
 {: #container_api}
 
-Um mit der {{site.data.keyword.containershort_notm}}-API interagieren zu können, müssen Sie den Befehlstyp eingeben und an den Endpunkt die Zeichenfolge `/v1/command` anfügen.
+Um mit der {{site.data.keyword.containershort_notm}}-API interagieren zu können, müssen Sie den Befehlstyp eingeben und an den globalen Endpunkt die Zeichenfolge `/v1/command` anfügen. 
 
-Beispiel für die API `GET /clusters` in der Region 'Vereinigte Staaten (Süden)':
+Beispiel für die API `GET /clusters`: 
   ```
-  GET https://us-south.containers.bluemix.net/v1/clusters
+  GET https://containers.bluemix.net/v1/clusters
   ```
   {: codeblock}
 
 </br>
 
-Zur Anzeige der Dokumentation zu den API-Befehlen müssen Sie an den Endpunkt der Region, die angezeigt werden soll, die Zeichenfolge `swagger-api` anfügen.
-  * Asien-Pazifik (Norden): https://ap-north.containers.bluemix.net/swagger-api/
-  * Asien-Pazifik (Süden): https://ap-south.containers.bluemix.net/swagger-api/
-  * Zentraleuropa: https://eu-central.containers.bluemix.net/swagger-api/
-  * Großbritannien (Süden): https://uk-south.containers.bluemix.net/swagger-api/
-  * Vereinigte Staaten (Osten): https://us-east.containers.bluemix.net/swagger-api/
-  * Vereinigte Staaten (Süden): https://us-south.containers.bluemix.net/swagger-api/
+Die Dokumentation zu den API-Befehlen finden Sie unter [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/). 

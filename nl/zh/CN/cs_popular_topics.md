@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-02"
+lastupdated: "2017-12-14"
 
 ---
 
@@ -45,11 +45,15 @@ lastupdated: "2017-11-02"
 <td>通过 CLI，您可以创建和管理 Kubernetes 集群。</td>
 </tr>
 <tr>
-<td>[更新到 Kubernetes 1.7](cs_versions.html)</td>
-<td>在更新到 Kubernetes 1.7 之前，请查看对集群进行的更改。</td>
+<td>[在防火墙中打开必需的端口和 IP 地址](cs_security.html#opening_ports)</td>
+<td>您可能需要在防火墙中打开特定端口和 IP 地址，以运行 CLI 命令或允许 Kubernetes 主节点与工作程序节点之间进行通信。</td>
 </tr>
 <tr>
-<td>[用于集群的 REST API ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://us-south.containers.bluemix.net/swagger)</td>
+<td>[更新 Kubernetes](cs_versions.html)</td>
+<td>在更新到 Kubernetes 之前，请查看对集群进行的更改。</td>
+</tr>
+<tr>
+<td>[用于集群的 REST API ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.bluemix.net/swagger)</td>
 <td>查看 API 文档以管理 {{site.data.keyword.containershort_notm}}。</td>
 </tr>
 </tbody></table>
@@ -59,4 +63,4 @@ lastupdated: "2017-11-02"
 
 您可以在 [{{site.data.keyword.containershort_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 上中查看其他人正在讨论的内容并询问自己的问题。
 
-如果未将 IBM 标识用于 {{site.data.keyword.Bluemix_notm}} 帐户，请联系 [crosen@us.ibm.com](mailto:crosen@us.ibm.com) 并请求针对此 Slack 的邀请。
+提示：如果未将 IBM 标识用于 {{site.data.keyword.Bluemix_notm}} 帐户，请针对此 Slack [请求邀请](https://bxcs-slack-invite.mybluemix.net/)。

@@ -1,8 +1,6 @@
 ---
 
-copyright:
-  years: 2014, 2017
-lastupdated: "2017-11-16"
+copyright: years: 2014, 2017 lastupdated: "2017-12-13"
 
 ---
 
@@ -19,10 +17,10 @@ lastupdated: "2017-11-16"
 # Tutorial: criando clusters
 {: #cs_cluster_tutorial}
 
-Implemente e gerencie seu próprio cluster do Kubernetes na nuvem. É possível automatizar a implementação, a operação, o ajuste de escala e o monitoramento de apps conteinerizados em um cluster de hosts de cálculo independentes denominados de nós do trabalhador.
+Implemente e gerencie seu próprio cluster do Kubernetes no {{site.data.keyword.Bluemix_short}}. É possível automatizar a implementação, a operação, o ajuste de escala e o monitoramento de apps conteinerizados em um cluster de hosts de cálculo independentes denominados de nós do trabalhador.
 {:shortdesc}
 
-Nesta série de tutoriais, é possível ver como um escritório fictício de relações públicas usa o Kubernetes para implementar um app conteinerizado no {{site.data.keyword.Bluemix_short}}. Usando o {{site.data.keyword.toneanalyzerfull}}, o escritório de RP analisa seus press releases e recebe feedback.
+Nesta série de tutoriais, é possível ver como uma firma fictícia de relações públicas usa os recursos do Kubernetes para implementar um app conteinerizado no {{site.data.keyword.Bluemix_notm}}. Usando o {{site.data.keyword.toneanalyzerfull}}, o escritório de RP analisa seus press releases e recebe feedback.
 
 
 ## Objetivos
@@ -32,9 +30,9 @@ Neste primeiro tutorial, você atua como administrador de networking do escritó
 Para configurar a infraestrutura:
 
 -   Criar um cluster do Kubernetes com um nó do trabalhador
--   Instalar as CLIs para usar a API do Kubernetes e gerenciar imagens do Docker
+-   Instale as CLIs para executar comandos do Kubernetes e gerenciar imagens do Docker
 -   Crie um repositório de imagem privada no {{site.data.keyword.registrylong_notm}} para armazenar suas imagens
--   Inclua o serviço {{site.data.keyword.toneanalyzershort}} no cluster para que qualquer app no cluster possa usar o serviço
+-   Inclua o serviço {{site.data.keyword.toneanalyzershort}} no cluster para que qualquer app no cluster possa usar esse serviço
 
 
 ## Tempo Necessário
@@ -50,7 +48,8 @@ Este tutorial é destinado a desenvolvedores de software e administradores de re
 
 ## Pré-requisitos
 
--  Uma conta do [{{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://console.bluemix.net/registration/)
+-  Uma conta Pay-As-You-Go ou de Assinatura [{{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://console.bluemix.net/registration/)
+
 
 
 
@@ -148,12 +147,12 @@ Parabéns! Você instalou com êxito as CLIs para as lições e os tutoriais a s
 ## Lição 2: configurando seu ambiente em cluster
 {: #cs_cluster_tutorial_lesson2}
 
-Crie o cluster do Kubernetes, configure um repositório de imagem privada no {{site.data.keyword.registryshort_notm}}e inclua segredos em seu cluster para que o app possa acessar o serviço {{site.data.keyword.toneanalyzershort}}.
+Configure um repositório de imagem privada no {{site.data.keyword.registryshort_notm}} e inclua segredos em seu cluster para que o app possa acessar o serviço {{site.data.keyword.toneanalyzershort}}.
 
 1.  Efetue login na CLI do {{site.data.keyword.Bluemix_notm}} usando suas credenciais {{site.data.keyword.Bluemix_notm}}, quando solicitado.
 
     ```
-    bx login [--sso] -a api.eu-gb.bluemix.net
+    bx login [--sso]
     ```
     {: pre}
 

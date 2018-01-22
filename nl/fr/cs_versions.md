@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-03"
+lastupdated: "2017-12-18"
 
 ---
 
@@ -22,7 +22,7 @@ Passez en revue les versions de Kubernetes disponibles sur {{site.data.keyword.c
 {:shortdesc}
 
 {{site.data.keyword.containershort_notm}} prend en charge plusieurs versions de Kubernetes. La version par défaut est utilisée lorsque vous créez ou mettez à jour un cluster, sauf si vous spécifiez une autre version. Les versions disponibles de Kubernetes sont les suivantes :
-- 1.8.2
+- 1.8.4
 - 1.7.4 (version par défaut)
 - 1.5.6
 
@@ -47,7 +47,12 @@ Par défaut, vous ne pouvez pas mettre à jour le maître Kubernetes de plus de 
 
 ## Version 1.8
 {: #cs_v18}
+
+<p><img src="images/certified_kubernetes_1x8.png" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" height="100" width="62.5" align="left" alt="Ce badge indique la certification Kubernetes version 1.8 pour IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} est un produit certifié par Kubernetes pour la version 1.8 sous le programme CNCF de certification de conformité de logiciels Kubernetes. _Kubernetes® est une marque de la Fondation Linux aux Etats-Unis et dans d'autres pays et est utilisé dans le cadre d'une licence de la Fondation Linux._</p>
+
 Passez en revue les modifications éventuellement nécessaires si vous procédez à une mise à jour vers Kubernetes version 1.8.
+
+<br/>
 
 ### Mise à jour avant le maître
 {: #18_before}
@@ -90,11 +95,11 @@ Passez en revue les modifications éventuellement nécessaires si vous procédez
 </tr>
 <tr>
 <td>`kubectl delete`</td>
-<td>La commande `kubectl delete` ne réduit plus les objets d'API de charge de travail, tels que les pods, avant suppression de l'objet. Si vous avez besoin de réduire l'objet, utilisez la commande [kubectl scale ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/user-guide/kubectl/v1.8/#scale) avant de supprimer l'objet.</td>
+<td>La commande `kubectl delete` ne réduit plus les objets d'API de charge de travail, tels que les pods, avant suppression de l'objet. Si vous avez besoin de réduire l'objet, utilisez kubectl scale ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale) avant de supprimer l'objet.</td>
 </tr>
 <tr>
 <td>`kubectl run`</td>
-<td>La commande `kubectl run` doit utiliser plusieurs indicateurs pour `--env` au lieu d'arguments séparés par une virgule. Par exemple, exécutez `kubectl run --env <x>=<y> --env <z>=<k>` et non `kubectl run --env <x>=<y>,<z>=<k>`.</td>
+<td>La commande `kubectl run` doit utiliser plusieurs indicateurs pour `--env` au lieu d'arguments séparés par une virgule. Par exemple, exécutez <code>kubectl run --env <x>=<y> --env <z>=&lt;a&gt;</code> et non pas <code>kubectl run --env <x>=<y>,<z>=&lt;a&gt;</code>. </td>
 </tr>
 <td>`kubectl stop`</td>
 <td>La commande `kubectl stop` n'est plus disponible.</td>
@@ -106,7 +111,11 @@ Passez en revue les modifications éventuellement nécessaires si vous procédez
 ## Version 1.7
 {: #cs_v17}
 
+<p><img src="images/certified_kubernetes_1x7.png" height="100" width="62.5" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" align="left" alt="Ce badge indique une certification Kubernetes version 1.7 pour IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} est un produit certifié Kubernetes pour la version 1.7 sous le programme de certification de conformité de logiciel Kubernetes.</p>
+
 Passez en revue les modifications éventuellement nécessaires si vous procédez à une mise à jour vers Kubernetes version 1.7.
+
+<br/>
 
 ### Mise à jour avant le maître
 {: #17_before}

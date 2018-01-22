@@ -1,7 +1,7 @@
 {:navgroup: .navgroup}
 {:topicgroup: .topicgroup}
 
-{: .toc subcollection="containers" audience="compute" href="/docs/containers/index.html"}
+{: .toc subcollection="containers" audience="compute" href="/docs/containers/container_index.html"}
 IBM Cloud Container Service
 
     {: .navgroup id="learn"}
@@ -13,8 +13,15 @@ IBM Cloud Container Service
     教程
         cs_tutorials.md
         cs_tutorials_apps.md
+        cs_tutorials_istio.md
 
     cs_security.md
+    {: .navgroup-end}
+
+    {: .navgroup id="howto"}
+    cs_cli_install.md
+    cs_cluster.md
+    cs_apps.md
     {: .navgroup-end}
 
     {: .navgroup id="reference"}
@@ -22,25 +29,23 @@ IBM Cloud Container Service
     cs_versions.md
     cs_regions.md
     cs_annotations.md
-    {: .navgroup-end}
 
-    {: .navgroup id="howto"}
-    cs_cli_install.md
-    cs_cluster.md
-    cs_apps.md
-    [不推荐：运行单个和可扩展容器](cs_classic.html)
-        [将单个和可扩展容器迁移到 Kubernetes 集群](cs_classic.html#cs_classic_migrating)
-        [关于单个和可扩展容器](container_ov.html)
-        [计划单个和可扩展容器](container_planning.html)
-        [单个和可扩展容器的安全性](container_security.html)
-        [为单个和可扩展容器设置 CLI](container_cli_cfic_install.html)
-        [IBM 图像](../services/RegistryImages/index.html)
-        [作为容器运行短期任务](container_single_ui.html)
-        [运行高可用性组](container_ha.html)
-        [存储单个和可扩展容器的持久数据](container_volumes_ov.html)
-        [将服务与单个和可扩展容器集成](container_integrations.html)
-        [单个和可扩展容器的 CLI 参考](container_cli_reference_cfic.html)
-        [单个和可扩展容器故障诊断](container_troubleshoot.html)
+    {: .topicgroup}
+    IBM Cloud Dedicated
+        cs_dedicated.md
+        [已弃用：运行单个和可扩展容器](cs_classic.html)
+            [将单个和可扩展容器迁移到 Kubernetes 集群](cs_classic.html#cs_classic_migrating)
+            [关于单个和可扩展容器](container_ov.html)
+            [规划单个和可扩展容器](container_planning.html)
+            [单个和可扩展容器的安全性](container_security.html)
+            [设置单个和可扩展容器的 CLI](container_cli_cfic_install.html)
+            [IBM 映像](../services/RegistryImages/index.html)
+            [作为容器运行短期任务](container_single_ui.html)
+            [运行具备高可用性的组](container_ha.html)
+            [为单个和可扩展容器存储持久数据](container_volumes_ov.html)
+            [将服务与单个和可扩展容器集成](container_integrations.html)
+            [单个和可扩展容器的 CLI 参考](container_cli_reference_cfic.html)
+            [单个和可扩展容器的故障诊断](container_troubleshoot.html)
     {: .navgroup-end}
 
     {: .navgroup id="help"}

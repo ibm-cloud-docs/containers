@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-28"
+lastupdated: "2017-12-18"
 
 ---
 
@@ -216,16 +216,52 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 要使应用程序在因特网上公开可用，必须先更新配置文件，然后再将应用程序部署到集群中。
 {:shortdesc}
 
-根据创建的是 Lite 集群还是标准集群，有不同的方式使应用程序可从因特网进行访问。
+*图 1. {{site.data.keyword.containershort_notm}} 中的 Kubernetes 数据平面*
+
+![{{site.data.keyword.containerlong_notm}} Kubernetes 体系结构](images/networking.png)
+
+此图显示了 {{site.data.keyword.containershort_notm}} 中 Kubernetes 如何携带用户网络流量。根据创建的是 Lite 集群还是标准集群，有不同的方式使应用程序可从因特网进行访问。
 
 <dl>
 <dt><a href="#cs_apps_public_nodeport" target="_blank">NodePort 服务</a>（Lite 和标准集群）</dt>
-<dd>在每个工作程序节点上公开一个公共端口，并使用任一工作程序节点的公共 IP 地址来公共访问集群中的服务。工作程序节点的公共 IP 地址不是永久固定的。除去或重新创建工作程序节点时，将为该工作程序节点分配新的公共 IP 地址。在测试应用程序的公共访问权时，或者仅在短时间内需要公共访问权时，可以使用 NodePort 服务。需要服务端点具有稳定的公共 IP 地址和更高可用性时，请使用 LoadBalancer 服务或 Ingress 来公开应用程序。</dd>
+<dd>
+ <ul>
+  <li>在每个工作程序节点上公开一个公共端口，并使用任一工作程序节点的公共 IP 地址来公共访问集群中的服务。</li>
+  <li>Iptables 是一个 Linux 内核功能，它在应用程序的 pod 之间对请求进行负载均衡，提供高性能的网络路由，并提供网络访问控制。</li>
+  <li>工作程序节点的公共 IP 地址不是永久固定的。除去或重新创建工作程序节点时，将为该工作程序节点分配新的公共 IP 地址。</li>
+  <li>NodePort 服务适合于测试公共访问。如果您只需要短时间的公用访问，那么也可以使用它。</li>
+ </ul>
+</dd>
 <dt><a href="#cs_apps_public_load_balancer" target="_blank">LoadBalancer 服务</a>（仅限标准集群）</dt>
-<dd>每个标准集群供应有 4 个可移植的公共 IP 地址和 4 个可移植的专用 IP 地址，这些 IP 地址可以用于为应用程序创建外部 TCP/UDP 负载均衡器。您可以通过公开应用程序需要的任何端口来定制负载均衡器。分配给负载均衡器的可移植公共 IP 地址是永久固定的，在集群中重新创建工作程序节点时不会更改。</br>
-如果需要对应用程序进行 HTTP 或 HTTPS 负载均衡，并且要使用一个公共路径将集群中的多个应用程序作为服务公开，请使用 {{site.data.keyword.containershort_notm}} 的内置 Ingress 支持。</dd>
+<dd>
+ <ul>
+  <li>每个标准集群供应有 4 个可移植的公共 IP 地址和 4 个可移植的专用 IP 地址，这些 IP 地址可以用于为应用程序创建外部 TCP/UDP 负载均衡器。</li>
+  <li>Iptables 是一个 Linux 内核功能，它在应用程序的 pod 之间对请求进行负载均衡，提供高性能的网络路由，并提供网络访问控制。</li>
+  <li>分配给负载均衡器的可移植公共 IP 地址是永久固定的，在集群中重新创建工作程序节点时不会更改。</li>
+  <li>您可以通过公开应用程序需要的任何端口来定制负载均衡器。</li></ul>
+</dd>
 <dt><a href="#cs_apps_public_ingress" target="_blank">Ingress</a>（仅限标准集群）</dt>
-<dd>通过创建一个外部 HTTP 或 HTTPS 负载均衡器来使用安全的唯一公共入口点将入局请求路由到集群中的多个应用程序，从而公开这些应用程序。Ingress 由两个主要组件组成：Ingress 资源和 Ingress 控制器。Ingress 资源用于定义如何对应用程序的入局请求进行路由和负载均衡的规则。所有 Ingress 资源都必须向 Ingress 控制器进行注册；Ingress 控制器基于为每个 Ingress 资源定义的规则来侦听入局 HTTP 或 HTTPS 服务请求并转发请求。如果要使用定制路由规则实施自己的负载均衡器，并且需要对应用程序进行 SSL 终止，请使用 Ingress。</dd></dl>
+<dd>
+ <ul>
+  <li>通过创建一个外部 HTTP 或 HTTPS 负载均衡器来使用安全的唯一公共入口点将入局请求路由到集群中的多个应用程序，从而公开这些应用程序。</li>
+  <li>您可以使用一个公用路径，将集群中的多个应用程序显示为服务。</li>
+  <li>Ingress 由三个主要组件组成：Ingress 资源、Ingress 控制器和应用程序负载均衡器。<ul>
+    <li>Ingress 资源用于定义如何对应用程序的入局请求进行路由和负载均衡的规则。</li>
+    <li>Ingress 控制器会启用应用程序负载均衡器，其侦听入局 HTTP 或 HTTPS 服务请求，并根据为每个 Ingress 资源定义的规则转发请求。</li>
+    <li>应用程序负载均衡器在应用程序 pod 之间对请求进行负载均衡。</ul>
+  <li>如果要使用定制路由规则实施自己的负载均衡器，并且需要对应用程序进行 SSL 终止，请使用 Ingress。</li>
+ </ul>
+</dd></dl>
+
+要为应用程序选择最佳联网选项，可以遵循以下决策树：
+
+<img usemap="#networking_map" border="0" class="image" src="images/networkingdt.png" width="500px" alt="此图像指导您选择应用程序的最佳联网选项。如果此图像未显示，仍可在文档这找到此信息。" style="width:500px;" />
+<map name="networking_map" id="networking_map">
+<area href="/docs/containers/cs_apps.html#cs_apps_public_nodeport" alt="Nodeport 服务" shape="circle" coords="52, 283, 45"/>
+<area href="/docs/containers/cs_apps.html#cs_apps_public_load_balancer" alt="Loadbalancer 服务" shape="circle" coords="247, 419, 44"/>
+<area href="/docs/containers/cs_apps.html#cs_apps_public_ingress" alt="Ingress 服务" shape="circle" coords="445, 420, 45"/>
+</map>
+
 
 ### 使用 NodePort 服务类型来配置对应用程序的公共访问权
 {: #cs_apps_public_nodeport}
@@ -236,8 +272,6 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 {:shortdesc}
 
 对于 Lite 或标准集群，可以将应用程序公开为 Kubernetes NodePort 服务。
-
-对于 {{site.data.keyword.Bluemix_dedicated_notm}} 环境，防火墙会阻止公共 IP 地址。要使应用程序公开可用，请改为使用 [LoadBalancer 服务](#cs_apps_public_load_balancer)或 [Ingress](#cs_apps_public_ingress)。
 
 **注**：工作程序节点的公共 IP 地址不是永久固定的。如果必须重新创建工作程序节点，那么将为该工作程序节点分配新的公共 IP 地址。如果需要服务具有稳定的公共 IP 地址和更高可用性，请使用 [LoadBalancer 服务](#cs_apps_public_load_balancer)或 [Ingress](#cs_apps_public_ingress) 来公开应用程序。
 
@@ -361,8 +395,6 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 
 系统将为您分配负载均衡器的可移植 IP 地址，并且在添加或除去工作程序节点时不会更改此 IP 地址。因此，LoadBalancer 服务要比 NodePort 服务具有更高的可用性。用户可以选择负载均衡器的任何端口，端口不限于 NodePort 端口范围。可以将 LoadBalancer 服务用于 TCP 和 UDP 协议。
 
-[已针对集群启用](cs_ov.html#setup_dedicated) {{site.data.keyword.Bluemix_dedicated_notm}} 帐户时，可以请求将公用子网用于负载均衡器 IP 地址。请[开具支持凭单](/docs/support/index.html#contacting-support)来创建子网，然后使用 [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) 命令将子网添加到集群。
-
 **注**：LoadBalancer 服务不支持 TLS 终止。如果应用程序需要 TLS 终止，可以通过使用 [Ingress](#cs_apps_public_ingress) 公开应用程序，或者配置应用程序以管理 TLS 终止。
 
 开始之前：
@@ -405,8 +437,8 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
         kind: Service
         metadata:
           name: <myservice>
-          annotations: 
-            service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private> 
+          annotations:
+            service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>
         spec:
           type: LoadBalancer
           selector:
@@ -414,6 +446,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
           ports:
            - protocol: TCP
              port: 8080
+          loadBalancerIp: <private_ip_address>
         ```
         {: codeblock}
 
@@ -437,6 +470,11 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
         <tr>
           <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:`
           <td>指定 LoadBalancer 类型的注释。值为 `private` 和 `public`。在公用 VLAN 上的集群中创建公共 LoadBalancer 时，不需要此注释。</td>
+        </tr>
+        <tr>
+          <td><code>loadBalancerIp</code></td>
+          <td>创建专用 LoadBalancer 时，请将 <em>&lt;loadBalancerIp&gt;</em> 替换为要用于 LoadBalancer 的 IP 地址。</td>
+        </tr>
         </tbody></table>
     3.  可选：要将特定可移植 IP 地址用于可供集群使用的负载均衡器，可以通过在 spec 部分中包含 `loadBalancerIP` 来指定该 IP 地址。有关更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/services-networking/service/)。
     4.  可选：通过在 spec 部分中指定 `loadBalancerSourceRanges` 来配置防火墙。有关更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/)。
@@ -490,20 +528,16 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
         {: codeblock}
 
 
-
-
-### 使用 Ingress 控制器来配置对应用程序的访问权
+### 使用 Ingress 来配置对应用程序的访问权
 {: #cs_apps_public_ingress}
 
-通过创建由 IBM 提供的 Ingress 控制器管理的 Ingress 资源，公开集群中的多个应用程序。Ingress 控制器是一个外部 HTTP 或 HTTPS 负载均衡器，使用安全的唯一公共或专用入口点将入局请求路由到集群内部或外部的应用程序。
+通过创建由 IBM 提供的 Ingress 控制器管理的 Ingress 资源，公开集群中的多个应用程序。Ingress 控制器创建使用应用程序负载均衡器所需的资源。应用程序负载均衡器是一个外部 HTTP 或 HTTPS 负载均衡器，使用安全的唯一公共或专用入口点将入局请求路由到集群内部或外部的应用程序。
 
 **注**：Ingress 仅可用于标准集群，并要求集群中至少有两个工作程序节点以确保高可用性，同时要求定期进行更新。设置 Ingress 需要[管理员访问策略](cs_cluster.html#access_ov)。验证您当前的[访问策略](cs_cluster.html#view_access)。
 
-创建标准集群时，会自动创建并启用分配有可移植公共 IP 地址和公共路径的 Ingress 控制器。另外，还会自动创建分配有可移植专用 IP 地址和专用路径的 Ingress 控制器，但不会自动将其启用。可以配置这两种 Ingress 控制器，并为向公众或向专用网络公开的每个应用程序定义单独的路由规则。通过 Ingress 向公众公开的每个应用程序都会分配有唯一路径，此路径会附加到公共路径，以便您可以使用唯一 URL 在集群中公共访问应用程序。
+创建标准集群时，Ingress 控制器会自动创建并启用分配有可移植公共 IP 地址和公共路径的应用程序负载均衡器。另外，还会自动创建分配有可移植专用 IP 地址和专用路径的应用程序负载均衡器，但不会自动将其启用。可以配置这两种应用程序负载均衡器，并为向公众或向专用网络公开的每个应用程序定义单独的路由规则。通过 Ingress 向公众公开的每个应用程序都会分配有唯一路径，此路径会附加到公共路径，以便您可以使用唯一 URL 在集群中公共访问应用程序。
 
-[已针对集群启用](cs_ov.html#setup_dedicated) {{site.data.keyword.Bluemix_dedicated_notm}} 帐户时，可以请求将公用子网用于 Ingress 控制器 IP 地址。随后，创建 Ingress 控制器并分配公共路径。请[开具支持凭单](/docs/support/index.html#contacting-support)来创建子网，然后使用 [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) 命令将子网添加到集群。
-
-要向公众公开应用程序，可以针对以下场景配置公共 Ingress 控制器。
+要向公众公开应用程序，可以针对以下场景配置公共应用程序负载均衡器。
 
 -   [使用 IBM 提供的域（不带 TLS 终止）](#ibm_domain)
 -   [使用 IBM 提供的域（带 TLS 终止）](#ibm_domain_cert)
@@ -511,25 +545,38 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 -   [使用 IBM 提供的域或定制域（带 TLS 终止）访问集群外部的应用程序](#external_endpoint)
 -   [在 Ingress 负载均衡器中打开端口](#opening_ingress_ports)
 -   [在 HTTP 级别配置 SSL 协议和 SSL 密码](#ssl_protocols_ciphers)
--   [使用注释定制 Ingress 控制器](cs_annotations.html)
+-   [使用注释定制应用程序负载均衡器](cs_annotations.html)
 {: #ingress_annotation}
 
-要向专用网络公开应用程序，请首先[启用专用 Ingress 控制器](#private_ingress)。然后，可以针对以下场景配置专用 Ingress 控制器。
+要向专用网络公开应用程序，请首先[启用专用应用程序负载均衡器](#private_ingress)。然后，可以针对以下场景配置专用应用程序负载均衡器。
 
 -   [使用定制域（不带 TLS 终止）](#private_ingress_no_tls)
 -   [使用定制域和 TLS 证书执行 TLS 终止](#private_ingress_tls)
 
+
+要为 Ingress 选择最佳配置，可以遵循以下决策树：
+
+<img usemap="#ingress_map" border="0" class="image" src="images/networkingdt-ingress.png" width="750px" alt="此图像指导您选择 Ingress 控制器的最佳配置。如果此图像未显示，仍可在文档这找到此信息。" style="width:750px;" />
+<map name="ingress_map" id="ingress_map">
+<area href="/docs/containers/cs_apps.html#private_ingress_no_tls" alt="使用具有定制域的专用 Ingress 控制器。" shape="rect" coords="25, 246, 187, 294"/>
+<area href="/docs/containers/cs_apps.html#private_ingress_tls" alt="使用具有定制域和 TLS 证书的专用 Ingress 控制器。" shape="rect" coords="161, 337, 309, 385"/>
+<area href="/docs/containers/cs_apps.html#external_endpoint" alt="配置公共 Ingress 控制器以将网络流量路由到集群外部的应用程序。" shape="rect" coords="313, 229, 466, 282"/>
+<area href="/docs/containers/cs_apps.html#custom_domain_cert" alt="使用具有定制域和 TLS 证书的公共 Ingress 控制器。" shape="rect" coords="365, 415, 518, 468"/>
+<area href="/docs/containers/cs_apps.html#ibm_domain" alt="使用具有 IBM 提供的域的公共 Ingress 控制器。" shape="rect" coords="414, 609, 569, 659"/>
+<area href="/docs/containers/cs_apps.html#ibm_domain_cert" alt="使用具有 IBM 提供的域和 TLS 证书的公共 Ingress 控制器。" shape="rect" coords="563, 681, 716, 734"/>
+</map>
+
 #### 使用 IBM 提供的域（不带 TLS 终止）
 {: #ibm_domain}
 
-可以配置 Ingress 控制器作为集群中应用程序的 HTTP 负载均衡器，并使用 IBM 提供的域从因特网访问应用程序。
+可以配置应用程序负载均衡器作为集群中应用程序的 HTTP 负载均衡器，并使用 IBM 提供的域从因特网访问应用程序。
 
 开始之前：
 
 -   如果还没有标准集群，请[创建标准集群](cs_cluster.html#cs_cluster_ui)。
 -   [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群以运行 `kubectl` 命令。
 
-要配置 Ingress 控制器，请执行以下操作：
+要配置应用程序负载均衡器，请执行以下操作：
 
 1.  [将应用程序部署到集群](#cs_apps_cli)。将应用程序部署到集群时，将创建一个或多个 pod 以用于在容器中运行应用程序。确保在配置文件的 metadata 部分中添加针对您的部署的标签。需要此标签才能识别运行应用程序的所有 pod，以便可以将这些 pod 包含在 Ingress 负载均衡中。
 2.  针对要公开的应用程序创建 Kubernetes 服务。仅当通过集群内部的 Kubernetes 服务公开应用程序时，Ingress 控制器才能将该应用程序包含到 Ingress 负载均衡中。
@@ -600,7 +647,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
     {: screen}
 
 可以在 **Ingress subdomain** 字段中查看 IBM 提供的域。
-4.  创建 Ingress 资源。Ingress 资源针对您为应用程序创建的 Kubernetes 服务定义路由规则，并由 Ingress 控制器用于将入局网络流量路由到该服务。可以使用一个 Ingress 资源来针对多个应用程序定义路由规则，前提是每个应用程序都已通过集群内部的 Kubernetes 服务公开。
+4.  创建 Ingress 资源。Ingress 资源针对您为应用程序创建的 Kubernetes 服务定义路由规则，并由应用程序负载均衡器用于将入局网络流量路由到该服务。可以使用一个 Ingress 资源来针对多个应用程序定义路由规则，前提是每个应用程序都已通过集群内部的 Kubernetes 服务公开。
     1.  打开首选编辑器，并创建 Ingress 配置文件，例如名为 `myingress.yaml`。
     2.  在配置文件中定义 Ingress 资源，该资源使用 IBM 提供的域将入局网络流量路由到先前创建的服务。
 
@@ -646,7 +693,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
         <td>将 <em>&lt;myservicepath1&gt;</em> 替换为斜杠或应用程序正在侦听的唯一路径，以便可以将网络流量转发到应用程序。
 
         </br>
-        对于每个 Kubernetes 服务，可以定义附加到 IBM 提供的域的单独路径，以创建应用程序的唯一路径，例如 <code>ingress_domain/myservicepath1</code>。在 Web 浏览器中输入此路径时，网络流量会路由到 Ingress 控制器。Ingress 控制器会查找关联的服务，将网络流量发送到该服务，并使用相同路径发送到应用程序运行所在的 pod。应用程序必须设置为侦听此路径，才能接收入局网络流量。
+        对于每个 Kubernetes 服务，可以定义附加到 IBM 提供的域的单独路径，以创建应用程序的唯一路径，例如 <code>ingress_domain/myservicepath1</code>。在 Web 浏览器中输入此路径时，网络流量会路由到应用程序负载均衡器。应用程序负载均衡器会查找关联的服务，将网络流量发送到该服务，然后使用相同路径发送到运行应用程序的 pod。应用程序必须设置为侦听此路径，才能接收入局网络流量。
 
         </br></br>
         许多应用程序不会侦听特定路径，而是使用根路径和特定端口。在这种情况下，请将根路径定义为 <code>/</code>，并且不要为应用程序指定单独的路径。
@@ -691,17 +738,17 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 #### 使用 IBM 提供的域（带 TLS 终止）
 {: #ibm_domain_cert}
 
-可以配置 Ingress 控制器来管理应用程序的入局 TLS 连接，使用 IBM 提供的 TLS 证书解密网络流量，然后将未加密的请求转发到集群中公开的应用程序。
+可以配置应用程序负载均衡器来管理应用程序的入局 TLS 连接，使用 IBM 提供的 TLS 证书解密网络流量，然后将未加密的请求转发到集群中公开的应用程序。
 
 开始之前：
 
 -   如果还没有标准集群，请[创建标准集群](cs_cluster.html#cs_cluster_ui)。
 -   [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群以运行 `kubectl` 命令。
 
-要配置 Ingress 控制器，请执行以下操作：
+要配置应用程序负载均衡器，请执行以下操作：
 
 1.  [将应用程序部署到集群](#cs_apps_cli)。确保在配置文件的 metadata 部分中添加针对您的部署的标签。此标签用于识别运行应用程序的所有 pod，以便可以将这些 pod 包含在 Ingress 负载均衡中。
-2.  针对要公开的应用程序创建 Kubernetes 服务。仅当通过集群内部的 Kubernetes 服务公开应用程序时，Ingress 控制器才能将该应用程序包含到 Ingress 负载均衡中。
+2.  针对要公开的应用程序创建 Kubernetes 服务。仅当通过集群内部的 Kubernetes 服务公开应用程序时，应用程序负载均衡器才能将该应用程序包含到 Ingress 负载均衡中。
     1.  打开首选编辑器，并创建服务配置文件，例如名为 `myservice.yaml`。
     2.  针对要向公众公开的应用程序定义服务。
 
@@ -774,9 +821,9 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 
     可以在 **Ingress subdomain** 字段中查看 IBM 提供的域，在 **Ingress secret** 字段中查看 IBM 提供的证书。
 
-4.  创建 Ingress 资源。Ingress 资源针对您为应用程序创建的 Kubernetes 服务定义路由规则，并由 Ingress 控制器用于将入局网络流量路由到该服务。可以使用一个 Ingress 资源来针对多个应用程序定义路由规则，前提是每个应用程序都已通过集群内部的 Kubernetes 服务公开。
+4.  创建 Ingress 资源。Ingress 资源针对您为应用程序创建的 Kubernetes 服务定义路由规则，并由应用程序负载均衡器用于将入局网络流量路由到该服务。可以使用一个 Ingress 资源来针对多个应用程序定义路由规则，前提是每个应用程序都已通过集群内部的 Kubernetes 服务公开。
     1.  打开首选编辑器，并创建 Ingress 配置文件，例如名为 `myingress.yaml`。
-    2.  在配置文件中定义 Ingress 资源，该资源使用 IBM 提供的域将入局网络流量路由到服务，并使用 IBM 提供的证书来管理 TLS 终止。对于每个服务，可以定义附加到 IBM 提供的域的单独路径，以创建应用程序的唯一路径，例如 `https://ingress_domain/myapp`。在 Web 浏览器中输入此路径时，网络流量会路由到 Ingress 控制器。Ingress 控制器会查找关联的服务，并将网络流量发送到该服务，然后进一步发送到运行应用程序的 pod。
+    2.  在配置文件中定义 Ingress 资源，该资源使用 IBM 提供的域将入局网络流量路由到服务，并使用 IBM 提供的证书来管理 TLS 终止。对于每个服务，可以定义附加到 IBM 提供的域的单独路径，以创建应用程序的唯一路径，例如 `https://ingress_domain/myapp`。在 Web 浏览器中输入此路径时，网络流量会路由到应用程序负载均衡器。应用程序负载均衡器会查找关联的服务，并将网络流量发送到该服务，然后进一步发送到运行应用程序的 pod。
 
         **注**：应用程序必须侦听的是 Ingress 资源中定义的路径。否则，网络流量无法转发到该应用程序。大多数应用程序不会侦听特定路径，而是使用根路径和特定端口。在这种情况下，请将根路径定义为 `/`，并且不要为应用程序指定单独的路径。
 
@@ -836,7 +883,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
         <td>将 <em>&lt;myservicepath1&gt;</em> 替换为斜杠或应用程序正在侦听的唯一路径，以便可以将网络流量转发到应用程序。
 
         </br>
-        对于每个 Kubernetes 服务，可以定义附加到 IBM 提供的域的单独路径，以创建应用程序的唯一路径，例如 <code>ingress_domain/myservicepath1</code>。在 Web 浏览器中输入此路径时，网络流量会路由到 Ingress 控制器。Ingress 控制器会查找关联的服务，将网络流量发送到该服务，并使用相同路径发送到应用程序运行所在的 pod。应用程序必须设置为侦听此路径，才能接收入局网络流量。
+        对于每个 Kubernetes 服务，可以定义附加到 IBM 提供的域的单独路径，以创建应用程序的唯一路径，例如 <code>ingress_domain/myservicepath1</code>。在 Web 浏览器中输入此路径时，网络流量会路由到应用程序负载均衡器。应用程序负载均衡器会查找关联的服务，将网络流量发送到该服务，然后使用相同路径发送到运行应用程序的 pod。应用程序必须设置为侦听此路径，才能接收入局网络流量。
 
         </br>
         许多应用程序不会侦听特定路径，而是使用根路径和特定端口。在这种情况下，请将根路径定义为 <code>/</code>，并且不要为应用程序指定单独的路径。
@@ -877,10 +924,10 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
     ```
     {: codeblock}
 
-#### 将 Ingress 控制器用于定制域和 TLS 证书
+#### 使用具有定制域和 TLS 证书的应用程序负载均衡器
 {: #custom_domain_cert}
 
-使用定制域而不是 IBM 提供的域时，可以配置 Ingress 控制器以将入局网络流量路由到集群中的应用程序，并使用您自己的 TLS 证书来管理 TLS 终止。
+使用定制域而不是 IBM 提供的域时，可以配置应用程序负载均衡器以将入局网络流量路由到集群中的应用程序，并使用您自己的 TLS 证书来管理 TLS 终止。
 {:shortdesc}
 
 开始之前：
@@ -888,47 +935,21 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 -   如果还没有标准集群，请[创建标准集群](cs_cluster.html#cs_cluster_ui)。
 -   [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群以运行 `kubectl` 命令。
 
-要配置 Ingress 控制器，请执行以下操作：
+要配置应用程序负载均衡器，请执行以下操作：
 
 1.  创建定制域。要创建定制域，请使用域名服务 (DNS) 提供程序来注册定制域。
-2.  配置域以将入局网络流量路由到 IBM Ingress 控制器。在以下选项之间进行选择：
+2.  配置域以将入局网络流量路由到 IBM 提供的应用程序负载均衡器。在以下选项之间进行选择：
     -   通过将 IBM 提供的域指定为规范名称记录 (CNAME)，定义定制域的别名。要找到 IBM 提供的 Ingress 域，请运行 `bx cs cluster-get <mycluster>` 并查找 **Ingress subdomain** 字段。
-    -   通过将 IBM 提供的 Ingress 控制器的可移植公共 IP 地址添加为记录，将定制域映射到该 IP 地址。要找到 Ingress 控制器的可移植公共 IP 地址，请执行以下操作：
-        1.  运行 `bx cs cluster-get <mycluster>` 并查找 **Ingress subdomain** 字段。
-        2.  运行 `nslookup <Ingress subdomain>`.
+    -   通过将 IBM 提供的应用程序负载均衡器的可移植公共 IP 地址添加为记录，将定制域映射到该 IP 地址。要查找应用程序负载均衡器的可移植公共 IP 地址，请运行 `bx cs alb-get <public_alb_ID>`。
 3.  为域创建以 PEM 格式编码的 TLS 证书和密钥。
 4.  将 TLS 证书和密钥存储在 Kubernetes 私钥中。
     1.  打开首选编辑器，并创建 Kubernetes 私钥配置文件，例如名为 `mysecret.yaml`。
-    2.  定义使用您的 TLS 证书和密钥的私钥。
+    2.  定义使用您的 TLS 证书和密钥的私钥。将 <em>&lt;mytlssecret&gt;</em> 替换为您的 Kubernetes 私钥，将 <tls_key_filepath> 替换未定制 TLS 密钥文件的路径，并将 <tls_cert_filepath> 替换为定制 TLS 证书文件的路径。
 
         ```
-        apiVersion: v1
-        kind: Secret
-        metadata:
-          name: <mytlssecret>
-        type: Opaque
-        data:
-          tls.crt: <tlscert>
-          tls.key: <tlskey>
+        kubectl create secret tls <mytlssecret> --key <tls_key_filepath> --cert <tls_cert_filepath>
         ```
-        {: codeblock}
-
-        <table>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>name</code></td>
-        <td>将 <em>&lt;mytlssecret&gt;</em> 替换为 Kubernetes 私钥的名称。</td>
-        </tr>
-        <tr>
-        <td><code>tls.cert</code></td>
-        <td>将 <em>&lt;tlscert&gt;</em> 替换为以基本 64 位格式编码的定制 TLS 证书。</td>
-         </tr>
-         <td><code>tls.key</code></td>
-         <td>将 <em>&lt;tlskey&gt;</em> 替换为以基本 64 位格式编码的定制 TLS 密钥。</td>
-         </tbody></table>
+        {: pre}
 
     3.  保存配置文件。
     4.  为集群创建 TLS 私钥。
@@ -940,7 +961,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 
 5.  [将应用程序部署到集群](#cs_apps_cli)。将应用程序部署到集群时，将创建一个或多个 pod 以用于在容器中运行应用程序。确保在配置文件的 metadata 部分中添加针对您的部署的标签。需要此标签才能识别运行应用程序的所有 pod，以便可以将这些 pod 包含在 Ingress 负载均衡中。
 
-6.  针对要公开的应用程序创建 Kubernetes 服务。仅当通过集群内部的 Kubernetes 服务公开应用程序时，Ingress 控制器才能将该应用程序包含到 Ingress 负载均衡中。
+6.  针对要公开的应用程序创建 Kubernetes 服务。仅当通过集群内部的 Kubernetes 服务公开应用程序时，应用程序负载均衡器才能将该应用程序包含到 Ingress 负载均衡中。
 
     1.  打开首选编辑器，并创建服务配置文件，例如名为 `myservice.yaml`。
     2.  针对要向公众公开的应用程序定义服务。
@@ -985,9 +1006,9 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
         {: pre}
 
     5.  针对要向公众公开的每个应用程序，重复上述步骤。
-7.  创建 Ingress 资源。Ingress 资源针对您为应用程序创建的 Kubernetes 服务定义路由规则，并由 Ingress 控制器用于将入局网络流量路由到该服务。可以使用一个 Ingress 资源来针对多个应用程序定义路由规则，前提是每个应用程序都已通过集群内部的 Kubernetes 服务公开。
+7.  创建 Ingress 资源。Ingress 资源针对您为应用程序创建的 Kubernetes 服务定义路由规则，并由应用程序负载均衡器用于将入局网络流量路由到该服务。可以使用一个 Ingress 资源来针对多个应用程序定义路由规则，前提是每个应用程序都已通过集群内部的 Kubernetes 服务公开。
     1.  打开首选编辑器，并创建 Ingress 配置文件，例如名为 `myingress.yaml`。
-    2.  在配置文件中定义 Ingress 资源，该资源使用定制域将入局网络流量路由到服务，并使用定制证书来管理 TLS 终止。对于每个服务，可以定义附加到定制域的单独路径，以创建应用程序的唯一路径，例如 `https://mydomain/myapp`。在 Web 浏览器中输入此路径时，网络流量会路由到 Ingress 控制器。Ingress 控制器会查找关联的服务，并将网络流量发送到该服务，然后进一步发送到运行应用程序的 pod。
+    2.  在配置文件中定义 Ingress 资源，该资源使用定制域将入局网络流量路由到服务，并使用定制证书来管理 TLS 终止。对于每个服务，可以定义附加到定制域的单独路径，以创建应用程序的唯一路径，例如 `https://mydomain/myapp`。在 Web 浏览器中输入此路径时，网络流量会路由到应用程序负载均衡器。应用程序负载均衡器会查找关联的服务，并将网络流量发送到该服务，然后进一步发送到运行应用程序的 pod。
 
         **注**：务必确保应用程序侦听的是 Ingress 资源中定义的路径。否则，网络流量无法转发到该应用程序。大多数应用程序不会侦听特定路径，而是使用根路径和特定端口。在这种情况下，请将根路径定义为 `/`，并且不要为应用程序指定单独的路径。
 
@@ -1047,7 +1068,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
         <td>将 <em>&lt;myservicepath1&gt;</em> 替换为斜杠或应用程序正在侦听的唯一路径，以便可以将网络流量转发到应用程序。
 
         </br>
-        对于每个 Kubernetes 服务，可以定义附加到 IBM 提供的域的单独路径，以创建应用程序的唯一路径，例如 <code>ingress_domain/myservicepath1</code>。在 Web 浏览器中输入此路径时，网络流量会路由到 Ingress 控制器。Ingress 控制器会查找关联的服务，将网络流量发送到该服务，并使用相同路径发送到应用程序运行所在的 pod。应用程序必须设置为侦听此路径，才能接收入局网络流量。
+        对于每个 Kubernetes 服务，可以定义附加到 IBM 提供的域的单独路径，以创建应用程序的唯一路径，例如 <code>ingress_domain/myservicepath1</code>。在 Web 浏览器中输入此路径时，网络流量会路由到应用程序负载均衡器。应用程序负载均衡器会查找关联的服务，将网络流量发送到该服务，然后使用相同路径发送到运行应用程序的 pod。应用程序必须设置为侦听此路径，才能接收入局网络流量。
 
         </br>
         许多应用程序不会侦听特定路径，而是使用根路径和特定端口。在这种情况下，请将根路径定义为 <code>/</code>，并且不要为应用程序指定单独的路径。
@@ -1094,10 +1115,10 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
         {: codeblock}
 
 
-#### 配置 Ingress 控制器以将网络流量路由到集群外部的应用程序
+#### 配置应用程序负载均衡器以将网络流量路由到集群外部的应用程序
 {: #external_endpoint}
 
-可以针对要包含在集群负载均衡中的集群外部应用程序配置 Ingress 控制器。IBM 提供的域或定制域上的入局请求会自动转发到外部应用程序。
+可以针对要包含在集群负载均衡中的集群外部应用程序配置应用程序负载均衡器。IBM 提供的域或定制域上的入局请求会自动转发到外部应用程序。
 
 开始之前：
 
@@ -1105,7 +1126,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 -   [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群以运行 `kubectl` 命令。
 -   确保要包含在集群负载均衡中的外部应用程序可以使用公共 IP 地址进行访问。
 
-您可以配置 Ingress 控制器，以将 IBM 提供的域上的入局网络流量路由到位于集群外部的应用程序。如果要改为使用定制域和 TLS 证书，请将 IBM 提供的域和 TLS 证书替换为[定制域和 TLS 证书](#custom_domain_cert)。
+您可以配置应用程序负载均衡器，以将 IBM 提供的域上的入局网络流量路由到位于集群外部的应用程序。如果要改为使用定制域和 TLS 证书，请将 IBM 提供的域和 TLS 证书替换为[定制域和 TLS 证书](#custom_domain_cert)。
 
 1.  配置 Kubernetes 端点以定义要包含在集群负载均衡中的应用程序的外部位置。
     1.  打开首选编辑器，并创建端点配置文件，例如名为 `myexternalendpoint.yaml`。
@@ -1220,9 +1241,9 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 
     可以在 **Ingress subdomain** 字段中查看 IBM 提供的域，在 **Ingress secret** 字段中查看 IBM 提供的证书。
 
-4.  创建 Ingress 资源。Ingress 资源针对您为应用程序创建的 Kubernetes 服务定义路由规则，并由 Ingress 控制器用于将入局网络流量路由到该服务。可以使用一个 Ingress 资源来针对多个外部应用程序定义路由规则，前提是每个应用程序都已使用其外部端点通过集群内部的 Kubernetes 服务公开。
+4.  创建 Ingress 资源。Ingress 资源针对您为应用程序创建的 Kubernetes 服务定义路由规则，并由应用程序负载均衡器用于将入局网络流量路由到该服务。可以使用一个 Ingress 资源来针对多个外部应用程序定义路由规则，前提是每个应用程序都已使用其外部端点通过集群内部的 Kubernetes 服务公开。
     1.  打开首选编辑器，并创建 Ingress 配置文件，例如名为 `myexternalingress.yaml`。
-    2.  在配置文件中定义 Ingress 资源，该资源使用 IBM 提供的域和 TLS 证书，通过先前定义的外部端点将入局网络流量路由到外部应用程序。对于每个服务，可以定义附加到 IBM 提供的域或定制域的单独路径，以创建应用程序的唯一路径，例如 `https://ingress_domain/myapp`。在 Web 浏览器中输入此路径时，网络流量会路由到 Ingress 控制器。Ingress 控制器会查找关联的服务，并将网络流量发送到该服务，然后进一步发送到外部应用程序。
+    2.  在配置文件中定义 Ingress 资源，该资源使用 IBM 提供的域和 TLS 证书，通过先前定义的外部端点将入局网络流量路由到外部应用程序。对于每个服务，可以定义附加到 IBM 提供的域或定制域的单独路径，以创建应用程序的唯一路径，例如 `https://ingress_domain/myapp`。在 Web 浏览器中输入此路径时，网络流量会路由到应用程序负载均衡器。应用程序负载均衡器会查找关联的服务，并将网络流量发送到该服务，然后进一步发送到外部应用程序。
 
 
         **注**：务必确保应用程序侦听的是 Ingress 资源中定义的路径。否则，网络流量无法转发到该应用程序。大多数应用程序不会侦听特定路径，而是使用根路径和特定端口。在这种情况下，请将根路径定义为 /，并且不要为应用程序指定单独的路径。
@@ -1284,7 +1305,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
         <td>将 <em>&lt;myexternalservicepath&gt;</em> 替换为斜杠或外部应用程序正在侦听的唯一路径，以便可以将网络流量转发到应用程序。
 
         </br>
-        对于每个 Kubernetes 服务，可以定义附加到您的域的单独路径，以创建应用程序的唯一路径，例如 <code>https://ibmdomain/myservicepath1</code>。在 Web 浏览器中输入此路径时，网络流量会路由到 Ingress 控制器。Ingress 控制器查找关联的服务，并使用相同的路径将网络流量发送到外部应用程序。应用程序必须设置为侦听此路径，才能接收入局网络流量。
+        对于每个 Kubernetes 服务，可以定义附加到您的域的单独路径，以创建应用程序的唯一路径，例如 <code>https://ibmdomain/myservicepath1</code>。在 Web 浏览器中输入此路径时，网络流量会路由到应用程序负载均衡器。应用程序负载均衡器查找关联的服务，并使用相同的路径将网络流量发送到外部应用程序。应用程序必须设置为侦听此路径，才能接收入局网络流量。
 
         </br></br>
         许多应用程序不会侦听特定路径，而是使用根路径和特定端口。在这种情况下，请将根路径定义为 <code>/</code>，并且不要为应用程序指定单独的路径。
@@ -1454,26 +1475,26 @@ ssl-ciphers : "HIGH:!aNULL:!MD5"
  {: screen}
 
 
-#### 启用专用 Ingress 控制器
+#### 启用专用应用程序负载均衡器
 {: #private_ingress}
 
-创建标准集群时，会自动创建专用 Ingress 控制器，但不会自动将其启用。要能够使用专用 Ingress 控制器，必须先使用预先分配的由 IBM 提供的可移植专用 IP 地址或您自己的可移植专用 IP 地址来启用此控制器。**注**：如果在创建集群时使用了 `--no-subnet` 标志，那么必须先添加可移植专用子网或用户管理的子网，然后才能启用专用 Ingress 控制器。有关更多信息，请参阅[为集群请求其他子网](cs_cluster.html#add_subnet)。
+创建标准集群时，Ingress 控制器会自动创建专用应用程序负载均衡器，但不会自动将其启用。要能够使用专用应用程序负载均衡器，必须先使用预先分配的由 IBM 提供的可移植专用 IP 地址或您自己的可移植专用 IP 地址来启用此控制器。**注**：如果在创建集群时使用了 `--no-subnet` 标志，那么必须先添加可移植专用子网或用户管理的子网，然后才能启用专用应用程序负载均衡器。有关更多信息，请参阅[为集群请求其他子网](cs_cluster.html#add_subnet)。
 
 开始之前：
 
 -   如果还没有标准集群，请[创建标准集群](cs_cluster.html#cs_cluster_ui)。
 -   [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群。
 
-要使用预先分配的由 IBM 提供的可移植专用 IP 地址来启用专用 Ingress 控制器，请执行以下操作：
+要使用预先分配的由 IBM 提供的可移植专用 IP 地址来启用专用应用程序负载均衡器，请执行以下操作：
 
-1. 列出集群中的可用 Ingress 控制器，以获取专用 Ingress 控制器的 ALB 标识。将 <em>&lt;cluser_name&gt;</em> 替换为部署了要公开的应用程序的集群的名称。
+1. 列示集群中的可用应用程序负载均衡器，以获取专用应用程序负载均衡器的标识。将 <em>&lt;cluser_name&gt;</em> 替换为部署了要公开的应用程序的集群的名称。
 
     ```
     bx cs albs --cluster <my_cluster>
     ```
     {: pre}
 
-    专用 Ingress 控制器的**阶段状态**字段为 _disabled_。
+    专用应用程序负载均衡器的 **Status** 字段为 _disabled_。
     ```
     ALB ID                                            Enabled   Status     Type      ALB IP
     private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   false     disabled   private   -
@@ -1481,7 +1502,7 @@ ssl-ciphers : "HIGH:!aNULL:!MD5"
     ```
     {: screen}
 
-2. 启用专用 Ingress 控制器。将 <em>&lt;private_ALB_ID&gt;</em> 替换为上一步的输出中专用 Ingress 控制器的 ALB 标识。
+2. 启用专用应用程序负载均衡器。将 <em>&lt;private_ALB_ID&gt;</em> 替换为上一步的输出中专用应用程序负载均衡器的标识。
 
    ```
    bx cs bx cs alb-configure --albID <private_ALB_ID> --enable
@@ -1489,7 +1510,7 @@ ssl-ciphers : "HIGH:!aNULL:!MD5"
    {: pre}
 
 
-要使用您自己的可移植专用 IP 地址来启用专用 Ingress 控制器，请执行以下操作：
+要使用您自己的可移植专用 IP 地址来启用专用应用程序负载均衡器，请执行以下操作：
 
 1. 为所选 IP 地址配置用户管理的子网，以在集群的专用 VLAN 上路由流量。将 <em>&lt;cluser_name&gt;</em> 替换为部署了要公开的应用程序的集群的名称或标识，并将 <em>&lt;subnet_CIDR&gt;</em> 替换为用户管理的子网的 CIDR，将 <em>&lt;private_VLAN&gt;</em> 替换为可用的专用 VLAN 标识。可以通过运行 `bx cs vlans` 来查找可用专用 VLAN 的标识。
 
@@ -1498,14 +1519,14 @@ ssl-ciphers : "HIGH:!aNULL:!MD5"
    ```
    {: pre}
 
-2. 列出集群中的可用 Ingress 控制器，以获取专用 Ingress 控制器的 ALB 标识。
+2. 列示集群中的可用应用程序负载均衡器，以获取专用应用程序负载均衡器的标识。
 
     ```
     bx cs albs --cluster <my_cluster>
     ```
     {: pre}
 
-    专用 Ingress 控制器的**阶段状态**字段为 _disabled_。
+    专用应用程序负载均衡器的 **Status** 字段为 _disabled_。
     ```
     ALB ID                                            Enabled   Status     Type      ALB IP
     private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   false     disabled   private   -
@@ -1513,30 +1534,30 @@ ssl-ciphers : "HIGH:!aNULL:!MD5"
     ```
     {: screen}
 
-3. 启用专用 Ingress 控制器。将 <em>&lt;private_ALB_ID&gt;</em> 替换为上一步的输出中专用 Ingress 控制器的 ALB 标识，并将 <em>&lt;user_ip&gt;</em> 替换为要使用的用户管理子网中的 IP 地址。
+3. 启用专用应用程序负载均衡器。将 <em>&lt;private_ALB_ID&gt;</em> 替换为上一步的输出中专用应用程序负载均衡器的标识，并将 <em>&lt;user_ip&gt;</em> 替换为要使用的用户管理子网中的 IP 地址。
 
    ```
    bx cs bx cs alb-configure --albID <private_ALB_ID> --enable --user-ip <user_ip>
    ```
    {: pre}
 
-#### 将专用 Ingress 控制器用于定制域
+#### 使用具有定制域的专用应用程序负载均衡器
 {: #private_ingress_no_tls}
 
-可以配置专用 Ingress 控制器以使用定制域将入局网络流量路由到集群中的应用程序。
+可以配置专用应用程序负载均衡器以使用定制域将入局网络流量路由到集群中的应用程序。
 {:shortdesc}
 
-开始之前，请先[启用专用 Ingress 控制器](#private_ingress)。
+开始之前，请先[启用专用应用程序负载均衡器](#private_ingress)。
 
-要配置专用 Ingress 控制器，请执行以下操作：
+要配置专用应用程序负载均衡器，请执行以下操作：
 
 1.  创建定制域。要创建定制域，请使用域名服务 (DNS) 提供程序来注册定制域。
 
-2.  通过将 IBM 提供的专用 Ingress 控制器的可移植专用 IP 地址添加为记录，将定制域映射到该 IP 地址。要查找专用 Ingress 控制器的可移植专用 IP 地址，请运行 `bx cs albs --cluster <cluster_name>`。
+2.  通过将 IBM 提供的专用应用程序负载均衡器的可移植专用 IP 地址添加为记录，将定制域映射到该 IP 地址。要查找专用应用程序负载均衡器的可移植专用 IP 地址，请运行 `bx cs albs --cluster <cluster_name>`。
 
 3.  [将应用程序部署到集群](#cs_apps_cli)。将应用程序部署到集群时，将创建一个或多个 pod 以用于在容器中运行应用程序。确保在配置文件的 metadata 部分中添加针对您的部署的标签。需要此标签才能识别运行应用程序的所有 pod，以便可以将这些 pod 包含在 Ingress 负载均衡中。
 
-4.  针对要公开的应用程序创建 Kubernetes 服务。仅当通过集群内部的 Kubernetes 服务公开应用程序时，专用 Ingress 控制器才能将该应用程序包含到 Ingress 负载均衡中。
+4.  针对要公开的应用程序创建 Kubernetes 服务。仅当通过集群内部的 Kubernetes 服务公开应用程序时，专用应用程序负载均衡器才能将该应用程序包含到 Ingress 负载均衡中。
 
     1.  打开首选编辑器，并创建服务配置文件，例如名为 `myservice.yaml`。
     2.  针对要向公众公开的应用程序定义服务。
@@ -1581,9 +1602,9 @@ ssl-ciphers : "HIGH:!aNULL:!MD5"
         {: pre}
 
     5.  针对要向专用网络公开的每个应用程序，重复上述步骤。
-7.  创建 Ingress 资源。Ingress 资源针对您为应用程序创建的 Kubernetes 服务定义路由规则，并由 Ingress 控制器用于将入局网络流量路由到该服务。可以使用一个 Ingress 资源来针对多个应用程序定义路由规则，前提是每个应用程序都已通过集群内部的 Kubernetes 服务公开。
+7.  创建 Ingress 资源。Ingress 资源针对您为应用程序创建的 Kubernetes 服务定义路由规则，并由应用程序负载均衡器用于将入局网络流量路由到该服务。可以使用一个 Ingress 资源来针对多个应用程序定义路由规则，前提是每个应用程序都已通过集群内部的 Kubernetes 服务公开。
     1.  打开首选编辑器，并创建 Ingress 配置文件，例如名为 `myingress.yaml`。
-    2.  在配置文件中定义 Ingress 资源，该资源使用定制域将入局网络流量路由到服务。对于每个服务，可以定义附加到定制域的单独路径，以创建应用程序的唯一路径，例如 `https://mydomain/myapp`。在 Web 浏览器中输入此路径时，网络流量会路由到 Ingress 控制器。Ingress 控制器会查找关联的服务，并将网络流量发送到该服务，然后进一步发送到运行应用程序的 pod。
+    2.  在配置文件中定义 Ingress 资源，该资源使用定制域将入局网络流量路由到服务。对于每个服务，可以定义附加到定制域的单独路径，以创建应用程序的唯一路径，例如 `https://mydomain/myapp`。在 Web 浏览器中输入此路径时，网络流量会路由到应用程序负载均衡器。应用程序负载均衡器会查找关联的服务，并将网络流量发送到该服务，然后进一步发送到运行应用程序的 pod。
 
         **注**：务必确保应用程序侦听的是 Ingress 资源中定义的路径。否则，网络流量无法转发到该应用程序。大多数应用程序不会侦听特定路径，而是使用根路径和特定端口。在这种情况下，请将根路径定义为 `/`，并且不要为应用程序指定单独的路径。
 
@@ -1621,7 +1642,7 @@ ssl-ciphers : "HIGH:!aNULL:!MD5"
         </tr>
         <tr>
         <td><code>ingress.bluemix.net/ALB-ID</code></td>
-        <td>将 <em>&lt;private_ALB_ID&gt;</em> 替换为专用 Ingress 控制器的 ALB 标识。运行 <code>bx cs albs --cluster <my_cluster></code> 以查找 ALB 标识。</td>
+        <td>将 <em>&lt;private_ALB_ID&gt;</em> 替换为专用 Ingress 控制器的 ALB 标识。运行 <code>bx cs albs --cluster <my_cluster></code> 以查找 ALB 标识。有关此 Ingress 注释的更多信息，请参阅[应用程序负载均衡器标识 (ALB_ID)](cs_annotations.html#alb-id)。</td>
         </tr>
         <td><code>host</code></td>
         <td>将 <em>&lt;mycustomdomain&gt;</em> 替换为定制域。
@@ -1634,7 +1655,7 @@ ssl-ciphers : "HIGH:!aNULL:!MD5"
         <td>将 <em>&lt;myservicepath1&gt;</em> 替换为斜杠或应用程序正在侦听的唯一路径，以便可以将网络流量转发到应用程序。
 
         </br>
-        对于每个 Kubernetes 服务，可以定义附加到定制域的单独路径，以创建应用程序的唯一路径，例如 <code>custom_domain/myservicepath1</code>。在 Web 浏览器中输入此路径时，网络流量会路由到 Ingress 控制器。Ingress 控制器会查找关联的服务，将网络流量发送到该服务，并使用相同路径发送到应用程序运行所在的 pod。应用程序必须设置为侦听此路径，才能接收入局网络流量。
+        对于每个 Kubernetes 服务，可以定义附加到定制域的单独路径，以创建应用程序的唯一路径，例如 <code>custom_domain/myservicepath1</code>。在 Web 浏览器中输入此路径时，网络流量会路由到应用程序负载均衡器。应用程序负载均衡器会查找关联的服务，将网络流量发送到该服务，然后使用相同路径发送到运行应用程序的 pod。应用程序必须设置为侦听此路径，才能接收入局网络流量。
 
         </br>
         许多应用程序不会侦听特定路径，而是使用根路径和特定端口。在这种情况下，请将根路径定义为 <code>/</code>，并且不要为应用程序指定单独的路径。
@@ -1679,54 +1700,30 @@ ssl-ciphers : "HIGH:!aNULL:!MD5"
         ```
         {: codeblock}
 
-#### 将专用 Ingress 控制器用于定制域和 TLS 证书
+#### 使用具有定制域和 TLS 证书的专用应用程序负载均衡器
 {: #private_ingress_tls}
 
-使用定制域时，可以配置专用 Ingress 控制器以将入局网络流量路由到集群中的应用程序，并使用您自己的 TLS 证书来管理 TLS 终止。
+使用定制域时，可以配置专用应用程序负载均衡器以将入局网络流量路由到集群中的应用程序，并使用您自己的 TLS 证书来管理 TLS 终止。
 {:shortdesc}
 
-开始之前，请先[启用专用 Ingress 控制器](#private_ingress)。
+开始之前，请先[启用专用应用程序负载均衡器](#private_ingress)。
 
-要配置 Ingress 控制器，请执行以下操作：
+要配置应用程序负载均衡器，请执行以下操作：
 
 1.  创建定制域。要创建定制域，请使用域名服务 (DNS) 提供程序来注册定制域。
 
-2.  通过将 IBM 提供的专用 Ingress 控制器的可移植专用 IP 地址添加为记录，将定制域映射到该 IP 地址。要查找专用 Ingress 控制器的可移植专用 IP 地址，请运行 `bx cs albs --cluster <cluster_name>`.
+2.  通过将 IBM 提供的专用应用程序负载均衡器的可移植专用 IP 地址添加为记录，将定制域映射到该 IP 地址。要查找专用应用程序负载均衡器的可移植专用 IP 地址，请运行 `bx cs albs --cluster <cluster_name>`。
 
 3.  为域创建以 PEM 格式编码的 TLS 证书和密钥。
 
 4.  将 TLS 证书和密钥存储在 Kubernetes 私钥中。
     1.  打开首选编辑器，并创建 Kubernetes 私钥配置文件，例如名为 `mysecret.yaml`。
-    2.  定义使用您的 TLS 证书和密钥的私钥。
+    2.  定义使用您的 TLS 证书和密钥的私钥。将 <em>&lt;mytlssecret&gt;</em> 替换为您的 Kubernetes 私钥，将 <tls_key_filepath> 替换未定制 TLS 密钥文件的路径，并将 <tls_cert_filepath> 替换为定制 TLS 证书文件的路径。
 
         ```
-        apiVersion: v1
-        kind: Secret
-        metadata:
-          name: <mytlssecret>
-        type: Opaque
-        data:
-          tls.crt: <tlscert>
-          tls.key: <tlskey>
+        kubectl create secret tls <mytlssecret> --key <tls_key_filepath> --cert <tls_cert_filepath>
         ```
-        {: codeblock}
-
-        <table>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>name</code></td>
-        <td>将 <em>&lt;mytlssecret&gt;</em> 替换为 Kubernetes 私钥的名称。</td>
-        </tr>
-        <tr>
-        <td><code>tls.cert</code></td>
-        <td>将 <em>&lt;tlscert&gt;</em> 替换为以基本 64 位格式编码的定制 TLS 证书。</td>
-         </tr>
-         <td><code>tls.key</code></td>
-         <td>将 <em>&lt;tlskey&gt;</em> 替换为以基本 64 位格式编码的定制 TLS 密钥。</td>
-         </tbody></table>
+        {: pre}
 
     3.  保存配置文件。
     4.  为集群创建 TLS 私钥。
@@ -1738,7 +1735,7 @@ ssl-ciphers : "HIGH:!aNULL:!MD5"
 
 5.  [将应用程序部署到集群](#cs_apps_cli)。将应用程序部署到集群时，将创建一个或多个 pod 以用于在容器中运行应用程序。确保在配置文件的 metadata 部分中添加针对您的部署的标签。需要此标签才能识别运行应用程序的所有 pod，以便可以将这些 pod 包含在 Ingress 负载均衡中。
 
-6.  针对要公开的应用程序创建 Kubernetes 服务。仅当通过集群内部的 Kubernetes 服务公开应用程序时，专用 Ingress 控制器才能将该应用程序包含到 Ingress 负载均衡中。
+6.  针对要公开的应用程序创建 Kubernetes 服务。仅当通过集群内部的 Kubernetes 服务公开应用程序时，专用应用程序负载均衡器才能将该应用程序包含到 Ingress 负载均衡中。
 
     1.  打开首选编辑器，并创建服务配置文件，例如名为 `myservice.yaml`。
     2.  针对要向公众公开的应用程序定义服务。
@@ -1783,9 +1780,9 @@ ssl-ciphers : "HIGH:!aNULL:!MD5"
         {: pre}
 
     5.  针对要在专用网络上公开的每个应用程序，重复上述步骤。
-7.  创建 Ingress 资源。Ingress 资源针对您为应用程序创建的 Kubernetes 服务定义路由规则，并由 Ingress 控制器用于将入局网络流量路由到该服务。可以使用一个 Ingress 资源来针对多个应用程序定义路由规则，前提是每个应用程序都已通过集群内部的 Kubernetes 服务公开。
+7.  创建 Ingress 资源。Ingress 资源针对您为应用程序创建的 Kubernetes 服务定义路由规则，并由应用程序负载均衡器用于将入局网络流量路由到该服务。可以使用一个 Ingress 资源来针对多个应用程序定义路由规则，前提是每个应用程序都已通过集群内部的 Kubernetes 服务公开。
     1.  打开首选编辑器，并创建 Ingress 配置文件，例如名为 `myingress.yaml`。
-    2.  在配置文件中定义 Ingress 资源，该资源使用定制域将入局网络流量路由到服务，并使用定制证书来管理 TLS 终止。对于每个服务，可以定义附加到定制域的单独路径，以创建应用程序的唯一路径，例如 `https://mydomain/myapp`。在 Web 浏览器中输入此路径时，网络流量会路由到 Ingress 控制器。Ingress 控制器会查找关联的服务，并将网络流量发送到该服务，然后进一步发送到运行应用程序的 pod。
+    2.  在配置文件中定义 Ingress 资源，该资源使用定制域将入局网络流量路由到服务，并使用定制证书来管理 TLS 终止。对于每个服务，可以定义附加到定制域的单独路径，以创建应用程序的唯一路径，例如 `https://mydomain/myapp`。在 Web 浏览器中输入此路径时，网络流量会路由到应用程序负载均衡器。应用程序负载均衡器会查找关联的服务，并将网络流量发送到该服务，然后进一步发送到运行应用程序的 pod。
 
         **注**：务必确保应用程序侦听的是 Ingress 资源中定义的路径。否则，网络流量无法转发到该应用程序。大多数应用程序不会侦听特定路径，而是使用根路径和特定端口。在这种情况下，请将根路径定义为 `/`，并且不要为应用程序指定单独的路径。
 
@@ -1827,7 +1824,7 @@ ssl-ciphers : "HIGH:!aNULL:!MD5"
         </tr>
         <tr>
         <td><code>ingress.bluemix.net/ALB-ID</code></td>
-        <td>将 <em>&lt;private_ALB_ID&gt;</em> 替换为专用 Ingress 控制器的 ALB 标识。运行 <code>bx cs albs --cluster <my_cluster></code> 以查找 ALB 标识。</td>
+        <td>将 <em>&lt;private_ALB_ID&gt;</em> 替换为专用应用程序负载均衡器的标识。运行 <code>bx cs albs --cluster <my_cluster></code> 以查找应用程序负载均衡器标识。有关此 Ingress 注释的更多信息，请参阅[专用应用程序负载均衡器路由 (ALB-ID)](cs_annotations.html#alb-id)。</td>
         </tr>
         <tr>
         <td><code>tls/hosts</code></td>
@@ -1851,7 +1848,7 @@ ssl-ciphers : "HIGH:!aNULL:!MD5"
         <td>将 <em>&lt;myservicepath1&gt;</em> 替换为斜杠或应用程序正在侦听的唯一路径，以便可以将网络流量转发到应用程序。
 
         </br>
-        对于每个 Kubernetes 服务，可以定义附加到 IBM 提供的域的单独路径，以创建应用程序的唯一路径，例如 <code>ingress_domain/myservicepath1</code>。在 Web 浏览器中输入此路径时，网络流量会路由到 Ingress 控制器。Ingress 控制器会查找关联的服务，将网络流量发送到该服务，并使用相同路径发送到应用程序运行所在的 pod。应用程序必须设置为侦听此路径，才能接收入局网络流量。
+        对于每个 Kubernetes 服务，可以定义附加到 IBM 提供的域的单独路径，以创建应用程序的唯一路径，例如 <code>ingress_domain/myservicepath1</code>。在 Web 浏览器中输入此路径时，网络流量会路由到应用程序负载均衡器。应用程序负载均衡器会查找关联的服务，将网络流量发送到该服务，然后使用相同路径发送到运行应用程序的 pod。应用程序必须设置为侦听此路径，才能接收入局网络流量。
 
         </br>
         许多应用程序不会侦听特定路径，而是使用根路径和特定端口。在这种情况下，请将根路径定义为 <code>/</code>，并且不要为应用程序指定单独的路径。
@@ -1904,7 +1901,7 @@ ssl-ciphers : "HIGH:!aNULL:!MD5"
 
 在 {{site.data.keyword.containershort_notm}} 中，您可以通过将网络子网添加到集群来为 Kubernetes 服务添加稳定的可移植 IP。创建标准集群时，{{site.data.keyword.containershort_notm}} 会自动供应具有 5 个可移植公共 IP 地址的可移植公用子网和具有 5 个可移植专用 IP 地址的可移植专用子网。可移植 IP 地址是静态的，不会在除去工作程序节点甚至集群时更改。
 
- 其中两个可移植 IP 地址（一个公共，一个专用）用于可用于公开集群中多个应用程序的 [Ingress 控制器](#cs_apps_public_ingress)。通过[创建 LoadBalancer 服务](#cs_apps_public_load_balancer)，可以使用 4 个可移植公共 IP 地址和 4 个专用 IP 地址来公开应用程序。
+ 其中两个可移植 IP 地址（一个公共，一个专用）用于可用于公开集群中多个应用程序的 [Ingress 应用程序负载均衡器](#cs_apps_public_ingress)。通过[创建 LoadBalancer 服务](#cs_apps_public_load_balancer)，可以使用 4 个可移植公共 IP 地址和 4 个专用 IP 地址来公开应用程序。
 
 **注**：可移植公共 IP 地址按月收费。如果在供应集群后选择除去可移植公共 IP 地址，那么即使只使用了很短的时间，您也仍然必须支付一个月的费用。
 
@@ -2070,7 +2067,7 @@ ssl-ciphers : "HIGH:!aNULL:!MD5"
 
     -   [部署 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)：定义 pod 和副本集的创建。pod 包含单个容器化应用程序，而副本集用于控制多个 pod 实例。
 
-    -   [服务 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/services-networking/service/)：使用工作程序节点或负载均衡器公共 IP 地址或公共 Ingress 路径，提供对 Pod 的前端访问。
+    -   [服务 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/services-networking/service/)：使用工作程序节点或负载均衡器公共 IP 地址或公共 Ingress 路径，提供对 pod 的前端访问。
 
     -   [Ingress ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/services-networking/ingress/)：指定一种类型的负载均衡器，以提供用于公开访问应用程序的路径。
 
@@ -2092,8 +2089,6 @@ ssl-ciphers : "HIGH:!aNULL:!MD5"
 ## 扩展应用程序
 {: #cs_apps_scaling}
 
-<!--Horizontal auto-scaling is not working at the moment due to a port issue with heapster. The dev team is working on a fix. We pulled out this content from the public docs. It is only visible in staging right now.-->
-
 部署能够响应应用程序需求变化以及仅在需要时使用资源的云应用程序。自动扩展会根据 CPU 来自动增加或减少应用程序的实例数。
 {:shortdesc}
 
@@ -2101,7 +2096,7 @@ ssl-ciphers : "HIGH:!aNULL:!MD5"
 
 **注：**是否需要有关扩展 Cloud Foundry 应用程序的信息？请查看 [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html)。
 
-使用 Kubernetes，可以启用[水平 Pod 自动扩展 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) 以基于 CPU 扩展应用程序。
+使用 Kubernetes，可以启用[水平 pod 自动扩展 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale) 以基于 CPU 扩展应用程序。
 
 1.  通过 CLI 将应用程序部署到集群。部署应用程序时，必须请求 CPU。
 
@@ -2134,7 +2129,7 @@ ssl-ciphers : "HIGH:!aNULL:!MD5"
     </tr></tbody></table>
 
     **注：**对于更复杂的部署，有关更复杂的部署，可能需要创建[配置文件](#cs_apps_cli)。
-2.  创建 Horizontal Pod Autoscaler，然后定义策略。有关使用 `kubetcl autoscale` 命令的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/user-guide/kubectl/v1.5/#autoscale)。
+2.  创建 Horizontal Pod Autoscaler，然后定义策略。有关使用 `kubectl autoscale` 命令的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale)。
 
     ```
     kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
@@ -2160,6 +2155,8 @@ ssl-ciphers : "HIGH:!aNULL:!MD5"
     </tr>
     </tbody></table>
 
+
+
 <br />
 
 
@@ -2171,7 +2168,7 @@ ssl-ciphers : "HIGH:!aNULL:!MD5"
 
 开始之前，请创建[部署](#cs_apps_cli)。
 
-1.  [应用 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/user-guide/kubectl/v1.5/#rollout) 更改。例如，您可能希望更改初始部署中使用的映像。
+1.  [应用 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#rollout) 更改。例如，您可能希望更改初始部署中使用的映像。
 
     1.  获取部署名称。
 
@@ -2365,7 +2362,7 @@ Kubernetes 私钥是一种存储保密信息（如用户名、密码或密钥）
     ```
     {: screen}
 
-
+    
 
 9.  实施应用程序时，将其配置为在安装目录中查找名为 **binding** 的私钥文件，解析 JSON 内容，并确定用于访问 {{site.data.keyword.Bluemix_notm}} 服务的 URL 和服务凭证。
 
@@ -2377,14 +2374,10 @@ Kubernetes 私钥是一种存储保密信息（如用户名、密码或密钥）
 ## 创建持久性存储器
 {: #cs_apps_volume_claim}
 
-创建持久性卷申领 (pvc) 以便为集群供应 NFS 文件存储器。然后，将此申领安装到 pod 可确保即便该 pod 崩溃或关闭，数据也仍然可用。
+创建持久性卷申领 (pvc) 以便为集群供应 NFS 文件存储器。然后，将此申领安装到部署可确保即便 pod 崩溃或关闭，数据也仍然可用。
 {:shortdesc}
 
 支持持久性卷的 NFS 文件存储器由 IBM 建立集群，以便为数据提供高可用性。
-
-
-[已针对集群启用](cs_ov.html#setup_dedicated) {{site.data.keyword.Bluemix_dedicated_notm}} 帐户时，必须[开具支持凭单](/docs/support/index.html#contacting-support)，而不是使用此任务。通过开具凭单，可以请求对卷执行备份、请求从卷复原以及请求其他存储功能。
-
 
 1.  查看可用的存储类。{{site.data.keyword.containerlong}} 提供了八个预定义的存储类，因此集群管理员不必创建任何存储类。`ibmc-file-bronze` 存储类与 `default` 存储类相同。
 
@@ -2411,33 +2404,34 @@ Kubernetes 私钥是一种存储保密信息（如用户名、密码或密钥）
 2.  决定在删除 pvc 之后是否要保存数据和 NFS 文件共享。如果要保留数据，请选择 `retain` 存储类。如果要在删除 pvc 时删除数据和文件共享，请选择不带 `retain` 的存储类。
 
 3.  查看存储类的 IOPS 和可用存储器大小。
-    - 铜牌级、银牌级和金牌级存储类使用耐久性存储器，并且每个类每 GB 都具有单个已定义的 IOPS。总 IOPS 取决于存储器的大小。例如，每 GB 为 4 IOPS 的 1000Gi pvc 总共为 4000 IOPS。
 
-    ```
+    - 铜牌级、银牌级和金牌级存储类使用[耐久性存储器 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://knowledgelayer.softlayer.com/topic/endurance-storage)，并且每个类每 GB 都具有单个已定义的 IOPS。总 IOPS 取决于存储器的大小。例如，每 GB 为 4 IOPS 的 1000Gi pvc 总共为 4000 IOPS。
+
+      ```
     kubectl describe storageclasses ibmc-file-silver
     ```
-    {: pre}
+      {: pre}
 
-    **parameters** 字段提供与存储类关联的 IOPS/GB 以及可用大小（以千兆字节为单位）。
+      **parameters** 字段提供与存储类关联的 IOPS/GB 以及可用大小（以千兆字节为单位）。
 
-    ```
+      ```
     Parameters: iopsPerGB=4,sizeRange=20Gi,40Gi,80Gi,100Gi,250Gi,500Gi,1000Gi,2000Gi,4000Gi,8000Gi,12000Gi
     ```
-    {: screen}
+      {: screen}
 
     - 定制存储类使用[性能存储器 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://knowledgelayer.softlayer.com/topic/performance-storage)，并且具有针对总 IOPS 和大小的离散选项。
 
-    ```
+      ```
     kubectl describe storageclasses ibmc-file-retain-custom 
     ```
-    {: pre}
+      {: pre}
 
-    **parameters** 字段提供与存储类关联的 IOPS 以及可用大小（以千兆字节为单位）。例如，40Gi pvc 可以选择 100 - 2000 IOPS 范围内的 100 的倍数的 IOPS。
+      **parameters** 字段提供与存储类关联的 IOPS 以及可用大小（以千兆字节为单位）。例如，40Gi pvc 可以选择 100 - 2000 IOPS 范围内的 100 的倍数的 IOPS。
 
-    ```
+      ```
     Parameters:	Note=IOPS value must be a multiple of 100,reclaimPolicy=Retain,sizeIOPSRange=20Gi:[100-1000],40Gi:[100-2000],80Gi:[100-4000],100Gi:[100-6000],1000Gi[100-6000],2000Gi:[200-6000],4000Gi:[300-6000],8000Gi:[500-6000],12000Gi:[1000-6000]
     ```
-    {: screen}
+      {: screen}
 
 4.  创建配置文件以定义持久性卷申领，并将配置保存为 `.yaml` 文件。
 
@@ -2544,24 +2538,29 @@ Kubernetes 私钥是一种存储保密信息（如用户名、密码或密钥）
     ```
     {: screen}
 
-6.  {: #cs_apps_volume_mount}要将持久性卷申领安装到 pod，请创建配置文件。将配置保存为 `.yaml` 文件。
+6.  {: #cs_apps_volume_mount}要将持久性卷申领安装到部署，请创建配置文件。将配置保存为 `.yaml` 文件。
 
     ```
-    apiVersion: v1
-    kind: Pod
+    apiVersion: extensions/v1beta1
+    kind: Deployment
     metadata:
-     name: <pod_name>
+     name: <deployment_name>
+    replicas: 1
+    template:
+     metadata:
+       labels:
+         app: <app_name>
     spec:
      containers:
-     - image: nginx
-       name: mycontainer
+     - image: <image_name>
+       name: <container_name>
        volumeMounts:
-       - mountPath: /volumemount
-         name: myvol
+       - mountPath: /<file_path>
+         name: <volume_name>
      volumes:
-     - name: myvol
+     - name: <volume_name>
        persistentVolumeClaim:
-         claimName: mypvc
+         claimName: <pvc_name>
     ```
     {: codeblock}
 
@@ -2572,37 +2571,41 @@ Kubernetes 私钥是一种存储保密信息（如用户名、密码或密钥）
     <tbody>
     <tr>
     <td><code>metadata/name</code></td>
-    <td>pod 的名称。</td>
+    <td>部署的名称。</td>
+    </tr>
+    <tr>
+    <td><code>template/metadata/labels/app</code></td>
+    <td>部署的标签。</td>
     </tr>
     <tr>
     <td><code>volumeMounts/mountPath</code></td>
-    <td>在容器内安装卷的目录的绝对路径。</td>
+    <td>在部署中安装卷的目录的绝对路径。</td>
     </tr>
     <tr>
     <td><code>volumeMounts/name</code></td>
-    <td>要安装到容器的卷的名称。</td>
+    <td>要安装到部署中的卷的名称。</td>
     </tr>
     <tr>
     <td><code>volumes/name</code></td>
-    <td>要安装到容器的卷的名称。通常此名称与 <code>volumeMounts/name</code> 相同。</td>
+    <td>要安装到部署中的卷的名称。通常此名称与 <code>volumeMounts/name</code> 相同。</td>
     </tr>
     <tr>
     <td><code>volumes/name/persistentVolumeClaim</code></td>
-    <td>要用作卷的持久性卷申领的名称。将卷安装到 pod 时，Kubernetes 会识别绑定到该持久性卷申领的持久性卷，并支持用户对持久性卷执行读写操作。</td>
+    <td>要用作卷的持久性卷申领的名称。将卷安装到部署时，Kubernetes 会识别绑定到该持久性卷申领的持久性卷，并支持用户对持久性卷执行读写操作。</td>
     </tr>
     </tbody></table>
 
-8.  创建 pod 并将持久性卷申领安装到该 pod。
+8.  创建部署并安装持久性卷申领。
 
     ```
     kubectl apply -f <local_yaml_path>
     ```
     {: pre}
 
-9.  验证卷是否已成功安装到 pod。
+9.  验证是否已成功安装卷。
 
     ```
-    kubectl describe pod <pod_name>
+    kubectl describe deployment <deployment_name>
     ```
     {: pre}
 
@@ -2826,3 +2829,5 @@ Kubernetes 私钥是一种存储保密信息（如用户名、密码或密钥）
     {: screen}
 
     此输出显示 root 用户在卷安装路径 `mnt/myvol/` 上具有读、写和执行许可权，但非 root 用户 myguest 对 `mnt/myvol/mydata` 文件夹具有读和写许可权。由于这些更新的许可权，非 root 用户现在可以向持久性卷写入数据。
+
+

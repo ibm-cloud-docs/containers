@@ -1,8 +1,6 @@
 ---
 
-copyright:
-  years: 2014, 2017
-lastupdated: "2017-11-28"
+copyright: years: 2014, 2017 lastupdated: "2017-12-01"
 
 ---
 
@@ -135,7 +133,7 @@ Para obter informações de referência sobre essas CLIs, veja a documentação 
 
 -   [Comandos `bx`](/docs/cli/reference/bluemix_cli/bx_cli.html)
 -   [Comandos `bx cs`](cs_cli_reference.html#cs_cli_reference)
--   [Comandos `kubectl`![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/user-guide/kubectl/v1.7/)
+-   [comandos do `kubectl` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)
 -   [Comandos `bx cr`](/docs/cli/plugins/registry/index.html)
 
 <br />
@@ -160,9 +158,8 @@ Antes de poder executar comandos `kubectl`, [instale as CLIs necessárias](#cs_c
 
   2.  Selecione uma conta do {{site.data.keyword.Bluemix_notm}}. Se você estiver designado para múltiplas organizações do {{site.data.keyword.Bluemix_notm}}, selecione a organização na qual o cluster foi criado. Os clusters são específicos para uma organização, mas são independentes de um espaço do {{site.data.keyword.Bluemix_notm}}. Portanto, não é necessário selecionar um espaço.
 
-  3.  Se você deseja criar ou acessar clusters do Kubernetes em uma região diferente da região do {{site.data.keyword.Bluemix_notm}} que selecionou anteriormente, [especifique o terminal de API de região do {{site.data.keyword.containershort_notm}}](cs_regions.html#container_login_endpoints).
-
-      **Nota**: se você desejar criar um cluster no leste dos EUA, deverá especificar o terminal de API da região de contêiner do leste dos EUA usando o comando `bx cs init --host https://us-east.containers.bluemix.net`.
+  3.  Se desejar criar ou acessar clusters de Kubernetes em uma região diferente da região do
+{{site.data.keyword.Bluemix_notm}} que você selecionou anteriormente, execute `bx cs region-set`.
 
   4.  Liste todos os clusters na conta para obter o nome do cluster.
 
@@ -218,7 +215,7 @@ Antes de poder executar comandos `kubectl`, [instale as CLIs necessárias](#cs_c
       ```
       {: screen}
 
-Agora, é possível executar comandos `kubectl` para gerenciar seus clusters no {{site.data.keyword.Bluemix_notm}}. Para obter uma lista completa de comandos, veja a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/user-guide/kubectl/v1.7/).
+Agora, é possível executar comandos `kubectl` para gerenciar seus clusters no {{site.data.keyword.Bluemix_notm}}. Para obter uma lista completa de comandos, veja a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).
 
 **Dica:** se estiver usando o Windows e a CLI do Kubernetes não estiver instalada no mesmo diretório que a CLI do {{site.data.keyword.Bluemix_notm}}, você deverá mudar os diretórios para o caminho no qual a CLI do Kubernetes está instalada para executar comandos `kubectl` com êxito.
 
@@ -434,6 +431,15 @@ A API do {{site.data.keyword.containershort_notm}} requer informações do cabe�
     ```
     {: codeblock}
 
+    Exemplo:
+    ```
+    POST https://iam.ng.bluemix.net/oidc/token
+    ```
+    {: pre}
+
+    Para especificar uma região {{site.data.keyword.Bluemix_notm}}, [revise as
+abreviações de região conforme elas são usadas nos endpoints de API](cs_regions.html#bluemix_regions).
+
     <table summary-"Input parameters to get tokens">
     <thead>
         <th>Parâmetros de Entrada</th>
@@ -547,6 +553,15 @@ A API do {{site.data.keyword.containershort_notm}} requer informações do cabe�
     ```
     {: codeblock}
 
+    Exemplo:
+    ```
+    POST https://iam.ng.bluemix.net/oidc/token
+    ```
+    {: pre}
+
+    Para especificar uma região {{site.data.keyword.Bluemix_notm}}, [revise as
+abreviações de região conforme elas são usadas nos endpoints de API](cs_regions.html#bluemix_regions).
+
     <table summary-"Input parameters to get tokens">
     <thead>
         <th>Parâmetros de Entrada</th>
@@ -612,38 +627,8 @@ A API do {{site.data.keyword.containershort_notm}} requer informações do cabe�
 
 4.  Liste todos os clusters do Kubernetes em sua conta. Use as informações que você recuperou nas etapas anteriores para construir as informações do cabeçalho.
 
-    -   Sul dos EUA
-
         ```
-        GET https://us-south.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   Estados Unidos - Leste
-
-        ```
-        GET https://us-east.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   Sul do Reino Unido
-
-        ```
-        GET https://uk-south.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   UE Central
-
-        ```
-        GET https://eu-central.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   Sul da Ásia-Pacífico
-
-        ```
-        GET https://ap-south.containers.bluemix.net/v1/clusters
+        GET https://containers.bluemix.net/v1/clusters
         ```
         {: codeblock}
 
@@ -661,7 +646,7 @@ A API do {{site.data.keyword.containershort_notm}} requer informações do cabe�
         </tbody>
         </table>
 
-5.  Revise a [{{site.data.keyword.containershort_notm}}documentação da API ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://us-south.containers.bluemix.net/swagger-api) para localizar uma lista de APIs suportadas.
+5.  Revise a [{{site.data.keyword.containershort_notm}} Documentação da API ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://containers.bluemix.net/swagger-api) para localizar uma lista de APIs suportadas.
 
 <br />
 
@@ -679,7 +664,7 @@ Use as etapas a seguir se desejar atualizar seu token IAM.
 1.  Gere um novo token de acesso IAM. Substitua _&lt;iam_refresh_token&gt;_ pelo token de atualização IAM que você recebeu quando você autenticou com o {{site.data.keyword.Bluemix_notm}}.
 
     ```
-    POST https://iam.ng.bluemix.net/oidc/token
+    POST https://iam.bluemix.net/identity/token
     ```
     {: codeblock}
 

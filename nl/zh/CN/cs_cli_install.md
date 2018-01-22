@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-15"
+lastupdated: "2017-12-01"
 
 ---
 
@@ -134,7 +134,7 @@ lastupdated: "2017-11-15"
 
 -   [`bx` 命令](/docs/cli/reference/bluemix_cli/bx_cli.html)
 -   [`bx cs` 命令](cs_cli_reference.html#cs_cli_reference)
--   [`kubectl` 命令 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/user-guide/kubectl/v1.7/)
+-   [`kubectl` 命令 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)
 -   [`bx cr` 命令](/docs/cli/plugins/registry/index.html)
 
 <br />
@@ -160,9 +160,7 @@ lastupdated: "2017-11-15"
 
   2.  选择 {{site.data.keyword.Bluemix_notm}} 帐户。如果您分配有多个 {{site.data.keyword.Bluemix_notm}} 组织，请选择在其中创建集群的组织。集群是特定于组织的，但又独立于 {{site.data.keyword.Bluemix_notm}} 空间。因此，您无需选择空间。
 
-  3.  如果要在先前所选的 {{site.data.keyword.Bluemix_notm}} 区域以外的区域中创建或访问 Kubernetes 集群，请[指定 {{site.data.keyword.containershort_notm}} 区域 API 端点](cs_regions.html#container_login_endpoints)。
-
-      **注**：如果要在美国东部创建集群，那么必须使用 `bx cs init --host https://us-east.containers.bluemix.net` 命令，指定美国东部容器区域 API 端点。
+  3.  如果要在先前选择的 {{site.data.keyword.Bluemix_notm}} 区域以外的区域中创建或访问 Kubernetes 集群，请运行 `bx cs region-set`。
 
   4.  列出帐户中的所有集群以获取集群的名称。
 
@@ -221,7 +219,7 @@ lastupdated: "2017-11-15"
       ```
       {: screen}
 
-现在，可以运行 `kubectl` 命令，在 {{site.data.keyword.Bluemix_notm}} 中管理集群。有关完整的命令列表，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/user-guide/kubectl/v1.7/)。
+现在，可以运行 `kubectl` 命令，在 {{site.data.keyword.Bluemix_notm}} 中管理集群。有关完整的命令列表，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)。
 
 **提示：**如果使用的是 Windows，而 Kubernetes CLI 未安装在 {{site.data.keyword.Bluemix_notm}} CLI 所在的目录中，那么必须将目录更改为 Kubernetes CLI 的安装路径才能成功运行 `kubectl` 命令。
 
@@ -436,6 +434,14 @@ lastupdated: "2017-11-15"
     ```
     {: codeblock}
 
+    示例：
+    ```
+    POST https://iam.ng.bluemix.net/oidc/token
+    ```
+    {: pre}
+
+    要指定 {{site.data.keyword.Bluemix_notm}} 区域，请[复查 API 端点中使用的区域缩写](cs_regions.html#bluemix_regions)。
+
     <table summary-"Input parameters to get tokens">
     <thead>
         <th>输入参数</th>
@@ -550,6 +556,14 @@ lastupdated: "2017-11-15"
     ```
     {: codeblock}
 
+    示例：
+    ```
+    POST https://iam.ng.bluemix.net/oidc/token
+    ```
+    {: pre}
+
+    要指定 {{site.data.keyword.Bluemix_notm}} 区域，请[复查 API 端点中使用的区域缩写](cs_regions.html#bluemix_regions)。
+
     <table summary-"Input parameters to get tokens">
     <thead>
         <th>输入参数</th>
@@ -616,38 +630,8 @@ lastupdated: "2017-11-15"
 4.  列出您帐户中的所有 Kubernetes 集群。使用在先前步骤中检索到的信息来构建头信息。
 
 
-    -   美国南部
-
         ```
-        GET https://us-south.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   美国东部
-
-        ```
-        GET https://us-east.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   英国南部
-
-        ```
-        GET https://uk-south.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   欧洲中部
-
-        ```
-        GET https://eu-central.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   亚太南部
-
-        ```
-        GET https://ap-south.containers.bluemix.net/v1/clusters
+        GET https://containers.bluemix.net/v1/clusters
         ```
         {: codeblock}
 
@@ -665,7 +649,7 @@ lastupdated: "2017-11-15"
         </tbody>
         </table>
 
-5.  请查看 [{{site.data.keyword.containershort_notm}} API 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://us-south.containers.bluemix.net/swagger-api)，以查找受支持 API 的列表。
+5.  请查看 [{{site.data.keyword.containershort_notm}} API 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.bluemix.net/swagger-api)，以查找受支持 API 的列表。
 
 <br />
 
@@ -683,7 +667,7 @@ lastupdated: "2017-11-15"
 1.  生成新的 IAM 访问令牌。将 _&lt;iam_refresh_token&gt;_ 替换为向 {{site.data.keyword.Bluemix_notm}} 认证时接收到的 IAM 刷新令牌。
 
     ```
-    POST https://iam.ng.bluemix.net/oidc/token
+    POST https://iam.bluemix.net/identity/token
     ```
     {: codeblock}
 

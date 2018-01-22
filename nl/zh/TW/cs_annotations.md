@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-14"
+lastupdated: "2017-12-01"
 
 ---
 
@@ -19,26 +19,27 @@ lastupdated: "2017-11-14"
 # Ingress 註釋
 {: #ingress_annotation}
 
-若要將功能新增至 Ingress 控制器，您可以將註釋指定為 Ingress 資源中的 meta 資料。
+若要將功能新增至應用程式負載平衡器，您可以將註釋指定為 Ingress 資源中的 meta 資料。
 {: shortdesc}
 
-如需關於 Ingress 服務及如何開始使用它們的一般資訊，請參閱[使用 Ingress 控制器來配置應用程式的公用存取](cs_apps.html#cs_apps_public_ingress)。
+如需 Ingress 服務及如何開始使用它們的一般資訊，請參閱[使用 Ingress 來配置應用程式的公用存取](cs_apps.html#cs_apps_public_ingress)。
 
 
 |支援的註釋|說明|
 |--------------------|-----------|
 |[額外的用戶端要求或回應標頭](#proxy-add-headers)|將標頭資訊新增至用戶端要求，然後再將要求轉遞至後端應用程式，或新增至用戶端回應，然後再將回應傳送至用戶端。|
-|[用戶端回應資料緩衝](#proxy-buffering)|將回應傳送至用戶端時，停用 Ingress 控制器上的用戶端回應緩衝。|
+|[用戶端回應資料緩衝](#proxy-buffering)|將回應傳送至用戶端時，停用應用程式負載平衡器上的用戶端回應緩衝。|
 |[移除用戶端回應標頭](#response-remove-headers)|從用戶端回應移除標頭資訊，然後才將回應轉遞至用戶端。|
-|[自訂連接逾時和讀取逾時](#proxy-connect-timeout)|調整 Ingress 控制器等待以連接及讀取後端應用程式的時間，在此時間之後，後端應用程式將被視為無法使用。|
+|[自訂連接逾時和讀取逾時](#proxy-connect-timeout)|調整應用程式負載平衡器等待以連接及讀取後端應用程式的時間，在此時間之後，後端應用程式將被視為無法使用。|
 |[自訂 HTTP 及 HTTPS 埠](#custom-port)|變更 HTTP 及 HTTPS 網路資料流量的預設埠。|
-|[自訂用戶端要求內文大小上限](#client-max-body-size)|調整容許傳送至 Ingress 控制器的用戶端要求內文大小。|
+|[自訂用戶端要求內文大小上限](#client-max-body-size)|調整容許傳送至應用程式負載平衡器的用戶端要求內文的大小。|
 |[外部服務](#proxy-external-service)|將路徑定義新增至外部服務，例如 {{site.data.keyword.Bluemix_notm}} 中管理的服務。|
 |[廣域速率限制](#global-rate-limit)|對於所有服務，根據定義的金鑰，限制要求處理速率及連線數。|
 |[HTTP 重新導向至 HTTPS](#redirect-to-https)|將您網域上不安全的 HTTP 要求重新導向 HTTPS。|
 |[保留作用中要求](#keepalive-requests)|配置可以透過一個保留作用中連線提供的要求數目上限。|
 |[保留作用中逾時](#keepalive-timeout)|配置保留作用中連線在伺服器上保持開啟的時間。|
-|[交互鑑別](#mutual-auth)|配置 Ingress 控制器的交互鑑別。|
+|[交互鑑別](#mutual-auth)|配置應用程式負載平衡器的交互鑑別。|
+|[專用應用程式負載平衡器遞送](#alb-id)|使用專用應用程式負載平衡器，將送入的要求遞送至應用程式。|
 |[Proxy 緩衝區](#proxy-buffers)|針對來自 Proxy 伺服器的單一連線，設定用來讀取回應的緩衝區大小及數目。|
 |[Proxy 工作中緩衝區大小](#proxy-busy-buffers-size)|限制在尚未完全讀取回應時，可忙於將回應傳送至用戶端的緩衝區大小總計。|
 |[Proxy 緩衝區大小](#proxy-buffer-size)|設定緩衝區大小，用來讀取從 Proxy 伺服器收到之回應的第一部分。|
@@ -51,9 +52,6 @@ lastupdated: "2017-11-14"
 
 
 
-
-
-
 ## 其他用戶端要求或回應標頭 (proxy-add-headers)
 {: #proxy-add-headers}
 
@@ -62,10 +60,10 @@ lastupdated: "2017-11-14"
 
 <dl>
 <dt>說明</dt>
-<dd>Ingress 控制器充當用戶端應用程式與後端應用程式之間的 Proxy。傳送至 Ingress 控制器的用戶端要求會被處理（代理），然後放入新的要求，從 Ingress 控制器傳送到您的後端應用程式。代理 (Proxy) 要求會移除一開始從用戶端傳送的 HTTP 標頭資訊，例如使用者名稱。如果您的後端應用程式需要此資訊，可以使用 <strong>ingress.bluemix.net/proxy-add-headers</strong> 註釋，將標頭資訊新增至用戶端要求，之後才將要求從 Ingress 控制器轉遞到您的後端應用程式。
+<dd>Ingress 應用程式負載平衡器充當用戶端應用程式與後端應用程式之間的 Proxy。傳送至應用程式負載平衡器的用戶端要求會被處理（代理），然後放入新的要求，從應用程式負載平衡器傳送到您的後端應用程式。代理 (Proxy) 要求會移除一開始從用戶端傳送的 HTTP 標頭資訊，例如使用者名稱。如果您的後端應用程式需要此資訊，則可以使用 <strong>ingress.bluemix.net/proxy-add-headers</strong> 註釋，將標頭資訊新增至用戶端要求，之後才將要求從應用程式負載平衡器轉遞到您的後端應用程式。
 
 </br></br>
-當後端應用程式傳送回應給用戶端時，回應會由 Ingress 控制器代理，並從回應移除 HTTP 標頭。用戶端 Web 應用程式可能需要此標頭資訊才能順利處理回應。您可以使用 <strong>ingress.bluemix.net/response-add-headers</strong> 註釋，將標頭資訊新增至用戶端回應，之後才將回應從 Ingress 控制器轉遞到用戶端 Web 應用程式。</dd>
+當後端應用程式傳送回應給用戶端時，回應會由應用程式負載平衡器代理，並從回應移除 HTTP 標頭。用戶端 Web 應用程式可能需要此標頭資訊才能順利處理回應。您可以使用 <strong>ingress.bluemix.net/response-add-headers</strong> 註釋，將標頭資訊新增至用戶端回應，之後才將回應從應用程式負載平衡器轉遞到用戶端 Web 應用程式。</dd>
 <dt>Ingress 資源範例 YAML</dt>
 <dd>
 
@@ -131,17 +129,17 @@ kind: Ingress
  ## 用戶端回應資料緩衝 (proxy-buffering)
  {: #proxy-buffering}
 
- 使用緩衝區註釋，可以停用在資料傳送至用戶端時，在 Ingress 控制器上儲存回應資料。
-{:shortdesc}
+ 使用緩衝區註釋，可以在資料傳送至用戶端時，停用在應用程式負載平衡器上儲存回應資料的功能。
+ {:shortdesc}
 
  <dl>
  <dt>說明</dt>
- <dd>Ingress 控制器充當後端應用程式與用戶端 Web 瀏覽器之間的 Proxy。回應從後端應用程式傳送至用戶端時，依預設會將回應資料緩衝在 Ingress 控制器上。Ingress 控制器會代理用戶端回應，並開始按照用戶端的速度將回應傳送至用戶端。Ingress 控制器收到來自後端應用程式的所有資料之後，會關閉後端連線。從 Ingress 控制器到用戶端的連線會維持開啟，直到用戶端收到所有資料為止。
+ <dd>Ingress 應用程式負載平衡器充當後端應用程式與用戶端 Web 瀏覽器之間的 Proxy。當回應從後端應用程式傳送至用戶端時，依預設會將回應資料緩衝在應用程式負載平衡器上。應用程式負載平衡器會代理用戶端回應，並開始按照用戶端的速度將回應傳送至用戶端。應用程式負載平衡器收到來自後端應用程式的所有資料之後，會關閉後端應用程式的連線。從應用程式負載平衡器到用戶端的連線會維持開啟，直到用戶端收到所有資料為止。
 
  </br></br>
-如果停用在 Ingress 控制器上緩衝回應資料，資料立即從 Ingress 控制器傳送至用戶端。用戶端必須能夠按照 Ingress 控制器的速度處理送入的資料。如果用戶端太慢，資料可能會遺失。
+ 如果停用在應用程式負載平衡器上緩衝回應資料的功能，資料會立即從應用程式負載平衡器傳送至用戶端。用戶端必須能夠按照應用程式負載平衡器的速度處理送入的資料。如果用戶端太慢，資料可能會遺失。
 </br></br>
-依預設會啟用 Ingress 控制器上的回應資料緩衝。</dd>
+ 依預設，會啟用應用程式負載平衡器上的回應資料緩衝。</dd>
  <dt>Ingress 資源範例 YAML</dt>
  <dd>
 
@@ -178,7 +176,7 @@ kind: Ingress
 
  <dl>
  <dt>說明</dt>
- <dd>Ingress 控制器充當後端應用程式與用戶端 Web 瀏覽器之間的 Proxy。從後端應用程式傳送到 Ingress 控制器的用戶端回應會被處理（代理），然後放入新的回應，從 Ingress 控制器傳送到用戶端 Web 瀏覽器。雖然代理回應會移除一開始從後端應用程式傳送的 HTTP 標頭資訊，但這個程序不一定會移除所有後端應用程式特有的標頭。從用戶端回應移除標頭資訊，然後再將回應從 Ingress 控制器轉遞到用戶端 Web 應用程式。</dd>
+ <dd>Ingress 應用程式負載平衡器充當後端應用程式與用戶端 Web 瀏覽器之間的 Proxy。從後端應用程式傳送到應用程式負載平衡器的用戶端回應會被處理（代理），然後放入新的回應，從應用程式負載平衡器傳送到用戶端 Web 瀏覽器。雖然代理回應會移除一開始從後端應用程式傳送的 HTTP 標頭資訊，但這個程序不一定會移除所有後端應用程式特有的標頭。從用戶端回應移除標頭資訊，然後再將回應從應用程式負載平衡器轉遞到用戶端 Web 瀏覽器。</dd>
  <dt>Ingress 資源範例 YAML</dt>
  <dd>
  <pre class="codeblock">
@@ -234,21 +232,21 @@ kind: Ingress
 ## 自訂連接逾時及讀取逾時（proxy-connect-timeout、proxy-read-timeout）
 {: #proxy-connect-timeout}
 
-設定 Ingress 控制器的自訂連接逾時及讀取逾時。調整 Ingress 控制器連接及讀取後端應用程式時等候的時間，在此時間之後，後端應用程式將被視為無法使用。
+設定應用程式負載平衡器的自訂連接逾時及讀取逾時。調整應用程式負載平衡器連接及讀取後端應用程式時等候的時間，在此時間之後，後端應用程式將被視為無法使用。
 {:shortdesc}
 
 <dl>
 <dt>說明</dt>
-<dd>用戶端要求傳送至 Ingress 控制器時，Ingress 控制器會開啟與後端應用程式的連線。依預設，Ingress 控制器會等待 60 秒，以便從後端應用程式收到回覆。如果後端應用程式未在 60 秒內回覆，則會中斷連線要求，且後端應用程式將被視為無法使用。
+<dd>當用戶端要求傳送至 Ingress 應用程式負載平衡器時，應用程式負載平衡器會開啟與後端應用程式的連線。依預設，應用程式負載平衡器會等待 60 秒，以便從後端應用程式收到回覆。如果後端應用程式未在 60 秒內回覆，則會中斷連線要求，且後端應用程式將被視為無法使用。
 
 </br></br>
-在 Ingress 控制器連接至後端應用程式之後，Ingress 控制器會讀取來自後端應用程式的回應資料。在此讀取作業期間，Ingress 控制器在兩次讀取作業之間最多等待 60 秒，以接收來自後端應用程式的資料。如果後端應用程式未在 60 秒內傳送資料，則會關閉與後端應用程式的連線，且應用程式將被視為無法使用。
+在應用程式負載平衡器連接至後端應用程式之後，應用程式負載平衡器會讀取來自後端應用程式的回應資料。在此讀取作業期間，應用程式負載平衡器在兩次讀取作業之間最多等待 60 秒，以接收來自後端應用程式的資料。如果後端應用程式未在 60 秒內傳送資料，則會關閉與後端應用程式的連線，且應用程式將被視為無法使用。
 </br></br>
 60 秒的連接逾時及讀取逾時是 Proxy 上的預設逾時，通常不應該加以變更。
 </br></br>
-如果應用程式的可用性不穩定，或是您的應用程式因為高工作負載而回應太慢，您或許會想增加連接逾時或讀取逾時。請記住，增加逾時會影響 Ingress 控制器的效能，因為與後端應用程式的連線必須維持開啟，直到達到逾時為止。
+如果應用程式的可用性不穩定，或是您的應用程式因為高工作負載而回應太慢，您或許會想增加連接逾時或讀取逾時。請記住，增加逾時會影響應用程式負載平衡器的效能，因為與後端應用程式的連線必須維持開啟，直到達到逾時為止。
 </br></br>
-另一方面，您可以減少逾時以提高 Ingress 控制器的效能。請確保您的後端應用程式能夠在指定的逾時內處理要求，即使是在較高工作負載的時段。</dd>
+另一方面，您可以減少逾時以提高應用程式負載平衡器的效能。請確保您的後端應用程式能夠在指定的逾時內處理要求，即使是在較高工作負載的時段。</dd>
 <dt>Ingress 資源範例 YAML</dt>
 <dd>
 
@@ -301,7 +299,7 @@ paths:
 
 <dl>
 <dt>說明</dt>
-<dd>依預設，Ingress 控制器配置為在埠 80 上接聽送入的 HTTP 網路資料流量，並在埠 443 上接聽送入的 HTTPS 網路資料流量。您可以變更預設埠來新增 Ingress 控制器網域的安全，或是只啟用 HTTPS 埠。
+<dd>依預設，Ingress 應用程式負載平衡器配置為在埠 80 上接聽送入的 HTTP 網路資料流量，並在埠 443 上接聽送入的 HTTPS 網路資料流量。您可以變更預設埠來新增應用程式負載平衡器網域的安全，或是只啟用 HTTPS 埠。
 </dd>
 
 
@@ -347,8 +345,7 @@ paths:
 
  </dd>
  <dt>用法</dt>
- <dd><ol><li>檢閱 Ingress 控制器的開啟埠。
-**附註：IP 位址需要是一般文件 IP 位址。也需要鏈結至目標 kubectl cli 嗎？可能不需要。**
+ <dd><ol><li>檢閱應用程式負載平衡器的開啟埠。
 <pre class="pre">
 <code>kubectl get service -n kube-system</code></pre>
 CLI 輸出會與下列內容類似：
@@ -396,10 +393,10 @@ public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,
 
 <dl>
 <dt>說明</dt>
-<dd>為了維護預期的效能，用戶端要求內文大小上限設為 1 MB。當內文大小超過限制的用戶端要求傳送至 Ingress 控制器，而且用戶端不容許分割資料時，Ingress 控制器會傳回 413（要求的實體太大）的 HTTP 回應給用戶端。在要求內文的大小減少之前，用戶端及 Ingress 控制器之間無法進行連線。當用戶端容許資料分割成多個片段時，資料會分成多個 1 MB 的套件，然後傳送至 Ingress 控制器。
+<dd>為了維護預期的效能，用戶端要求內文大小上限設為 1 MB。當內文大小超過限制的用戶端要求傳送至 Ingress 應用程式負載平衡器，而且用戶端不容許分割資料時，應用程式負載平衡器會傳回 413（要求的實體太大）的 HTTP 回應給用戶端。在要求內文的大小減少之前，用戶端與應用程式負載平衡器之間無法進行連線。當用戶端容許資料分割成多個片段時，資料會分成多個 1 MB 的套件，然後傳送至應用程式負載平衡器。
 
 </br></br>
-您可能會想要增加內文大小上限，因為您預期用戶端要求的內文大小會大於 1 MB。例如，您要讓用戶端能上傳大型檔案。增加要求內文大小上限可能會影響 Ingress 控制器的效能，因為對用戶端的連線必須維持開啟，直到收到要求為止。
+您可能會想要增加內文大小上限，因為您預期用戶端要求的內文大小會大於 1 MB。例如，您要讓用戶端能上傳大型檔案。增加要求內文大小上限可能會影響應用程式負載平衡器的效能，因為與用戶端的連線必須維持開啟，直到收到要求為止。
 </br></br>
 <strong>附註：</strong>部分用戶端 Web 瀏覽器無法適當地顯示 413 HTTP 回應訊息。</dd>
 <dt>Ingress 資源範例 YAML</dt>
@@ -569,7 +566,7 @@ kind: Ingress
 
  <dl>
  <dt>說明</dt>
- <dd>您設定 Ingress 控制器，以 IBM 提供的 TLS 憑證或您的自訂 TLS 憑證來保護網域。有些使用者可能會嘗試對 Ingress 控制器網域使用不安全的 HTTP 要求存取您的應用程式，例如 <code>http://www.myingress.com</code>，而不是使用 <code>https</code>。您可以使用重新導向註釋，一律將不安全的 HTTP 用戶端要求重新導向至 HTTPS。如果您未使用此註釋，依預設，不安全的 HTTP 要求不會轉換成 HTTPS 要求，且可能會將未加密的機密資訊公開給大眾。
+ <dd>請設定 Ingress 應用程式負載平衡器，以 IBM 提供的 TLS 憑證或您的自訂 TLS 憑證來保護網域。有些使用者可能會嘗試對應用程式負載平衡器網域使用不安全的 HTTP 要求（例如 <code>http://www.myingress.com</code>）來存取您的應用程式，而不是使用 <code>https</code>。您可以使用重新導向註釋，一律將不安全的 HTTP 用戶端要求重新導向至 HTTPS。如果您未使用此註釋，依預設，不安全的 HTTP 要求不會轉換成 HTTPS 要求，且可能會將未加密的機密資訊公開給大眾。
 
 </br></br>
 依預設，會停用將 HTTP 要求重新導向至 HTTPS。</dd>
@@ -604,7 +601,7 @@ kind: Ingress
 
  <br />
 
- 
+
  ## 保留作用中要求 (keepalive-requests)
  {: #keepalive-requests}
 
@@ -724,13 +721,13 @@ kind: Ingress
  ## 交互鑑別 (mutual-auth)
  {: #mutual-auth}
 
- 配置 Ingress 控制器的交互鑑別。
+ 配置應用程式負載平衡器的交互鑑別。
  {:shortdesc}
 
  <dl>
  <dt>說明</dt>
  <dd>
- 配置 Ingress 控制器的交互鑑別。用戶端會鑑別伺服器，而伺服器也會使用憑證來鑑別用戶端。交互鑑別也稱為憑證型鑑別或雙向鑑別。
+ 配置 Ingress 應用程式負載平衡器的交互鑑別。用戶端會鑑別伺服器，而伺服器也會使用憑證來鑑別用戶端。交互鑑別也稱為憑證型鑑別或雙向鑑別。
  </dd>
 
  <dt>必要條件</dt>
@@ -788,10 +785,63 @@ kind: Ingress
  <br />
 
 
+## 專用應用程式負載平衡器遞送 (ALB-ID)
+{: #alb-id}
+
+使用專用應用程式負載平衡器，將送入的要求遞送至應用程式。
+{:shortdesc}
+
+<dl>
+<dt>說明</dt>
+<dd>
+選擇專用應用程式負載平衡器來遞送送入的要求，而非公用應用程式負載平衡器。</dd>
+
+
+ <dt>Ingress 資源範例 YAML</dt>
+ <dd>
+
+ <pre class="codeblock">
+ <code>apiVersion: extensions/v1beta1
+kind: Ingress
+  metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/ALB-ID: "&lt;private_ALB_ID&gt;"
+  spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mytlssecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
+
+ <table>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>annotations</code></td>
+  <td>將 <em>&lt;private_ALB_ID&gt;</em> 取代為專用應用程式負載平衡器的 ID。執行 <code>bx cs albs --cluster <my_cluster></code> 以尋找應用程式負載平衡器 ID。
+  </td>
+  </tr>
+  </tbody></table>
+  </dd>
+  </dl>
+
+  <br />
+
+
  ## Proxy 緩衝區 (proxy-buffers)
  {: #proxy-buffers}
- 
- 配置 Ingress 控制器的 Proxy 緩衝區。
+
+ 配置應用程式負載平衡器的 Proxy 緩衝區。
  {:shortdesc}
 
  <dl>
@@ -847,7 +897,7 @@ kind: Ingress
  ## Proxy 工作中緩衝區大小 (proxy-busy-buffers-size)
  {: #proxy-busy-buffers-size}
 
- 配置 Ingress 控制器的 Proxy 工作中緩衝區大小。
+ 配置應用程式負載平衡器的 Proxy 工作中緩衝區大小。
  {:shortdesc}
 
  <dl>
@@ -904,7 +954,7 @@ kind: Ingress
  ## Proxy 緩衝區大小 (proxy-buffer-size)
  {: #proxy-buffer-size}
 
- 配置 Ingress 控制器的 Proxy 緩衝區大小。
+ 配置應用程式負載平衡器的 Proxy 緩衝區大小。
  {:shortdesc}
 
  <dl>
@@ -964,12 +1014,12 @@ kind: Ingress
 ## 重新編寫路徑 (rewrite-path)
 {: #rewrite-path}
 
-將 Ingress 控制器網域路徑上的送入網路資料流量遞送至與後端應用程式所接聽的不同路徑。
+將應用程式負載平衡器網域路徑上的送入網路資料流量遞送至與後端應用程式所接聽的不同路徑。
 {:shortdesc}
 
 <dl>
 <dt>說明</dt>
-<dd>Ingress 控制器網域會將 <code>mykubecluster.us-south.containers.mybluemix.net/beans</code> 上的送入網路資料流量遞送至您的應用程式。您的應用程式會接聽 <code>/coffee</code>，而非 <code>/beans</code>。若要將送入的網路資料流量轉遞至您的應用程式，請將重新編寫註釋新增至您的 Ingress 資源配置檔。重新編寫註釋確保 <code>/beans</code> 上的送入網路資料流量會使用 <code>/coffee</code> 路徑轉遞至您的應用程式。包含多個服務時，只使用分號 (;) 來區隔它們。</dd>
+<dd>Ingress 應用程式負載平衡器網域會將 <code>mykubecluster.us-south.containers.mybluemix.net/beans</code> 上的送入網路資料流量遞送至您的應用程式。您的應用程式會接聽 <code>/coffee</code>，而非 <code>/beans</code>。若要將送入的網路資料流量轉遞至您的應用程式，請將重新編寫註釋新增至您的 Ingress 資源配置檔。重新編寫註釋確保 <code>/beans</code> 上的送入網路資料流量會使用 <code>/coffee</code> 路徑轉遞至您的應用程式。包含多個服務時，只使用分號 (;) 來區隔它們。</dd>
 <dt>Ingress 資源範例 YAML</dt>
 <dd>
 <pre class="codeblock">
@@ -1004,11 +1054,11 @@ kind: Ingress
 <tbody>
 <tr>
 <td><code>annotations</code></td>
-<td>將 <em>&lt;service_name&gt;</em> 取代為您為應用程式所建立之 Kubernetes 服務的名稱，並將 <em>&lt;target-path&gt;</em> 取代為您的應用程式所接聽的路徑。Ingress 控制器網域上的送入網路資料流量即會使用此路徑轉遞至 Kubernetes 服務。大部分的應用程式不會接聽特定路徑，但使用根路徑及特定埠。在此情況下，將 <code>/</code> 定義為您應用程式的 <em>rewrite-path</em>。</td>
+<td>將 <em>&lt;service_name&gt;</em> 取代為您為應用程式所建立之 Kubernetes 服務的名稱，並將 <em>&lt;target-path&gt;</em> 取代為您的應用程式所接聽的路徑。應用程式負載平衡器網域上的送入網路資料流量即會使用此路徑轉遞至 Kubernetes 服務。大部分的應用程式不會接聽特定路徑，但使用根路徑及特定埠。在此情況下，將 <code>/</code> 定義為您應用程式的 <em>rewrite-path</em>。</td>
 </tr>
 <tr>
 <td><code>path</code></td>
-<td>將 <em>&lt;domain_path&gt;</em> 取代為您要附加至 Ingress 控制器網域的路徑。這個路徑上的送入網路資料流量即會轉遞至您在註釋中所定義的重新編寫路徑。在上述範例中，請將網域路徑設定為 <code>/beans</code>，以將此路徑包含在 Ingress 控制器的負載平衡中。</td>
+<td>將 <em>&lt;domain_path&gt;</em> 取代為您要附加至應用程式負載平衡器網域的路徑。這個路徑上的送入網路資料流量即會轉遞至您在註釋中所定義的重新編寫路徑。在上述範例中，請將網域路徑設定為 <code>/beans</code>，以將此路徑包含在 Ingress 控制器的負載平衡中。</td>
 </tr>
 <tr>
 <td><code>serviceName</code></td>
@@ -1085,15 +1135,15 @@ kind: Ingress
 ## 使用 Cookie 的階段作業親緣性 (sticky-cookie-services)
 {: #sticky-cookie-services}
 
-使用 Sticky Cookie 註釋，可將階段作業親緣性新增至您的 Ingress 控制器，並一律將送入的網路資料流量遞送至相同的上游伺服器。
+使用 Sticky Cookie 註釋，可將階段作業親緣性新增至您的應用程式負載平衡器，並一律將送入的網路資料流量遞送至相同的上游伺服器。
 {:shortdesc}
 
 <dl>
 <dt>說明</dt>
-<dd>對於高可用性，部分應用程式設定需要您部署多個上游伺服器，用來處理送入的用戶端要求。當用戶端連接至您的後端應用程式時，您可以使用階段作業親緣性，以在階段作業時間，或是在完成作業所需的時間內，由相同的上游伺服器服務某一用戶端。您可以配置 Ingress 控制器，一律將送入的網路資料流量遞送至相同的上游伺服器，以確保階段作業親緣性。
+<dd>對於高可用性，部分應用程式設定需要您部署多個上游伺服器，用來處理送入的用戶端要求。當用戶端連接至您的後端應用程式時，您可以使用階段作業親緣性，以在階段作業時間，或是在完成作業所需的時間內，由相同的上游伺服器服務某一用戶端。您可以配置應用程式負載平衡器，一律將送入的網路資料流量遞送至相同的上游伺服器，以確保階段作業親緣性。
 
 </br></br>
-連接至您的後端應用程式的每個用戶端，會由 Ingress 控制器指派給其中一個可用的上游伺服器。Ingress 控制器會建立階段作業 Cookie，它儲存在用戶端應用程式中，而用戶端應用程式則內含在 Ingress 控制器與用戶端之間每個要求的標頭資訊中。Cookie 中的資訊確保所有要求在整個階段作業中，都由相同的上游伺服器處理。
+連接至您的後端應用程式的每個用戶端，會由應用程式負載平衡器指派給其中一個可用的上游伺服器。應用程式負載平衡器會建立階段作業 Cookie，它儲存在用戶端應用程式中，而用戶端應用程式則內含在應用程式負載平衡器與用戶端之間每個要求的標頭資訊中。Cookie 中的資訊確保所有要求在整個階段作業中，都由相同的上游伺服器處理。
 
 </br></br>
 當您包含多個服務時，請使用分號 (;) 來區隔它們。</dd>
@@ -1136,8 +1186,8 @@ kind: Ingress
   <td>請取代下列值：<ul>
   <li><code><em>&lt;service_name&gt;</em></code>：您為應用程式所建立之 Kubernetes 服務的名稱。</li>
   <li><code><em>&lt;cookie_name&gt;</em></code>：選擇在階段作業期間建立的 Sticky Cookie。</li>
-  <li><code><em>&lt;expiration_time&gt;</em></code>：Sticky Cookie 到期之前的時間量，以秒、分鐘或小時為單位。此時間與使用者活動無關。Cookie 到期之後，用戶端 Web 瀏覽器會刪除 Cookie，而且不再傳送到 Ingress 控制器。例如，若要設定 1 秒、1 分鐘或 1 小時的有效期限，請輸入 <strong>1s</strong>、<strong>1m</strong> 或 <strong>1h</strong>。</li>
-  <li><code><em>&lt;cookie_path&gt;</em></code>：附加至 Ingress 子網域的路徑，且該路徑指出針對哪些網域和子網域傳送 Cookie 到 Ingress 控制器。例如，如果您的 Ingress 網域是 <code>www.myingress.com</code> 且想要在每個用戶端要求中傳送 Cookie，您必須設定 <code>path=/</code>。如果您只想針對 <code>www.myingress.com/myapp</code> 及其所有子網域傳送 Cookie，則必須設定 <code>path=/myapp</code>。</li>
+  <li><code><em>&lt;expiration_time&gt;</em></code>：Sticky Cookie 到期之前的時間量，以秒、分鐘或小時為單位。此時間與使用者活動無關。Cookie 到期之後，用戶端 Web 瀏覽器會刪除 Cookie，而且不再傳送到應用程式負載平衡器。例如，若要設定 1 秒、1 分鐘或 1 小時的有效期限，請輸入 <strong>1s</strong>、<strong>1m</strong> 或 <strong>1h</strong>。</li>
+  <li><code><em>&lt;cookie_path&gt;</em></code>：附加至 Ingress 子網域的路徑，且該路徑指出針對哪些網域和子網域傳送 Cookie 到應用程式負載平衡器。例如，如果您的 Ingress 網域是 <code>www.myingress.com</code> 且想要在每個用戶端要求中傳送 Cookie，您必須設定 <code>path=/</code>。如果您只想針對 <code>www.myingress.com/myapp</code> 及其所有子網域傳送 Cookie，則必須設定 <code>path=/myapp</code>。</li>
   <li><code><em>&lt;hash_algorithm&gt;</em></code>：保護 Cookie 中資訊的雜湊演算法。僅支援 <code>sha1</code>。SHA1 會根據 Cookie 中的資訊建立雜湊總和，並將此雜湊總和附加到 Cookie。伺服器可以解密 Cookie 中的資訊，然後驗證資料完整性。</li></ul></td>
   </tr>
   </tbody></table>
@@ -1156,7 +1206,7 @@ kind: Ingress
 <dl>
 <dt>說明</dt>
 <dd>
-使用 Ingress 控制器加密要送至需要 HTTPS 之上游應用程式的資料流量。
+使用應用程式負載平衡器加密要送至需要 HTTPS 之上游應用程式的資料流量。
 
 **選用**：您可以將[單向鑑別或交互鑑別](#ssl-services-auth)新增至此註釋。
 </dd>
@@ -1198,7 +1248,7 @@ rules:
   <tr>
   <td><code>annotations</code></td>
   <td>請取代下列值：<ul>
-  <li><code><em>&lt;myservice&gt;</em></code>：輸入代表您應用程式的服務名稱。系統會加密從 Ingress 控制器到此應用程式的資料流量。</li>
+  <li><code><em>&lt;myservice&gt;</em></code>：輸入代表您應用程式的服務名稱。系統會加密從應用程式負載平衡器到此應用程式的資料流量。</li>
   <li><code><em>&lt;ssl-secret&gt;</em></code>：輸入服務的 Secret。這是選用參數。如果提供參數，則此值必須包含您的應用程式預期來自用戶端的金鑰及憑證。</li></ul>
   </td>
   </tr>
@@ -1213,7 +1263,7 @@ rules:
   <td>將 <em>&lt;myservicepath&gt;</em> 取代為斜線或應用程式所接聽的唯一路徑，以將網路資料流量轉遞至應用程式。
 
   </br>
-        針對每個 Kubernetes 服務，您可以定義附加至 IBM 所提供之網域的個別路徑，以建立應用程式的唯一路徑，例如 <code>ingress_domain/myservicepath1</code>。當您將此路徑輸入 Web 瀏覽器時，會將網路資料流量遞送至 Ingress 控制器。Ingress 控制器會查閱相關聯的服務，然後將網路資料流量傳送至服務，並使用相同路徑傳送至執行應用程式的 Pod。應用程式必須設定成接聽此路徑，以接收送入的網路資料流量。</br></br>
+        針對每個 Kubernetes 服務，您可以定義附加至 IBM 所提供之網域的個別路徑，以建立應用程式的唯一路徑，例如 <code>ingress_domain/myservicepath1</code>。當您將此路徑輸入 Web 瀏覽器時，會將網路資料流量遞送至應用程式負載平衡器。應用程式負載平衡器會查閱相關聯的服務，然後將網路資料流量傳送至服務，並使用相同路徑傳送至執行應用程式的 Pod。應用程式必須設定成接聽此路徑，以接收送入的網路資料流量。</br></br>
   許多應用程式不會接聽特定路徑，但卻使用根路徑及特定埠。在此情況下，請將根路徑定義為 <code>/</code>，並且不要為應用程式指定個別路徑。</br>
   範例：<ul><li>針對 <code>http://ingress_host_name/</code>，輸入 <code>/</code> 作為路徑。</li><li>針對 <code>http://ingress_host_name/myservicepath</code>，輸入 <code>/myservicepath</code> 作為路徑。</li></ul>
   </br>
@@ -1312,7 +1362,7 @@ name: &lt;myingressname&gt;
   <td>將 <em>&lt;myservicepath&gt;</em> 取代為斜線或應用程式所接聽的唯一路徑，以將網路資料流量轉遞至應用程式。
 
   </br>
-        針對每個 Kubernetes 服務，您可以定義附加至 IBM 所提供之網域的個別路徑，以建立應用程式的唯一路徑，例如 <code>ingress_domain/myservicepath1</code>。當您將此路徑輸入 Web 瀏覽器時，會將網路資料流量遞送至 Ingress 控制器。Ingress 控制器會查閱相關聯的服務，然後將網路資料流量傳送至服務，並使用相同路徑傳送至執行應用程式的 Pod。應用程式必須設定成接聽此路徑，以接收送入的網路資料流量。</br></br>
+        針對每個 Kubernetes 服務，您可以定義附加至 IBM 所提供之網域的個別路徑，以建立應用程式的唯一路徑，例如 <code>ingress_domain/myservicepath1</code>。當您將此路徑輸入 Web 瀏覽器時，會將網路資料流量遞送至應用程式負載平衡器。應用程式負載平衡器會查閱相關聯的服務，然後將網路資料流量傳送至服務，並使用相同路徑傳送至執行應用程式的 Pod。應用程式必須設定成接聽此路徑，以接收送入的網路資料流量。</br></br>
 許多應用程式不會接聽特定路徑，但卻使用根路徑及特定埠。在此情況下，請將根路徑定義為 <code>/</code>，並且不要為應用程式指定個別路徑。</br>
   範例：<ul><li>針對 <code>http://ingress_host_name/</code>，輸入 <code>/</code> 作為路徑。</li><li>針對 <code>http://ingress_host_name/myservicepath</code>，輸入 <code>/myservicepath</code> 作為路徑。</li></ul>
   </br>
@@ -1406,7 +1456,7 @@ data:
 
 
 
-## Ingress 控制器的 TCP 埠 (tcp-ports)
+## 應用程式負載平衡器的 TCP 埠 (tcp-ports)
 {: #tcp-ports}
 
 透過非標準 TCP 埠存取應用程式。
@@ -1417,7 +1467,7 @@ data:
 <dd>
 對正在執行 TCP 串流工作負載的應用程式使用此註釋。
 
-<p>**附註**：Ingress 控制器係以透通模式運作，並將資料流量傳遞至後端應用程式。在此情況下，不支援 SSL 終止。</p>
+<p>**附註**：應用程式負載平衡器係以透通模式運作，並將資料流量傳遞至後端應用程式。在此情況下，不支援 SSL 終止。</p>
 </dd>
 
 
@@ -1519,5 +1569,3 @@ kind: Ingress
     </tbody></table>
     </dd>
     </dl>
-
-

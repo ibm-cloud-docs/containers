@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-16"
+lastupdated: "2017-12-13"
 
 ---
 
@@ -19,10 +19,10 @@ lastupdated: "2017-10-16"
 # 指導教學：建立叢集
 {: #cs_cluster_tutorial}
 
-在雲端部署及管理自己的 Kubernete 叢集。您可以在稱為工作者節點的獨立運算主機叢集中，自動化進行容器化應用程式的部署、作業、擴充及監視。
+在 {{site.data.keyword.Bluemix_short}} 中部署及管理自己的 Kubernetes 叢集。您可以在稱為工作者節點的獨立運算主機叢集中，自動化進行容器化應用程式的部署、作業、擴充及監視。
 {:shortdesc}
 
-在本指導教學系列中，您可以看到虛構公關公司如何使用 Kubernetes 在 {{site.data.keyword.Bluemix_short}} 中部署容器化的應用程式。利用 {{site.data.keyword.toneanalyzerfull}}，公關公司會分析其新聞稿並收到回饋意見。
+在本指導教學系列中，您可以看到虛構公關公司如何使用 Kubernetes 功能在 {{site.data.keyword.Bluemix_notm}} 中部署容器化應用程式。利用 {{site.data.keyword.toneanalyzerfull}}，公關公司會分析其新聞稿並收到回饋意見。
 
 
 ## 目標
@@ -32,9 +32,9 @@ lastupdated: "2017-10-16"
 若要設定基礎架構，請執行下列動作：
 
 -   建立具有一個工作者節點的 Kubernetes 叢集
--   安裝用來使用 Kubernetes API 及管理 Docker 映像檔的 CLI
+-   安裝 CLI 來執行 Kubernetes 指令，以及管理 Docker 映像檔
 -   在 {{site.data.keyword.registrylong_notm}} 中建立專用映像檔儲存庫，以儲存您的映像檔
--   將 {{site.data.keyword.toneanalyzershort}} 服務新增至叢集，讓叢集中的任何應用程式都可以使用此服務
+-   將 {{site.data.keyword.toneanalyzershort}} 服務新增至叢集，讓叢集中的任何應用程式都可以使用該服務
 
 
 ## 所需時間
@@ -49,7 +49,8 @@ lastupdated: "2017-10-16"
 
 ## 必要條件
 
--  [{{site.data.keyword.Bluemix_notm}} 帳戶 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/registration/)
+-  隨收隨付制或訂閱 [{{site.data.keyword.Bluemix_notm}} 帳戶 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/registration/)
+
 
 
 
@@ -146,12 +147,12 @@ lastupdated: "2017-10-16"
 ## 課程 2：設定叢集環境
 {: #cs_cluster_tutorial_lesson2}
 
-建立 Kubernetes 叢集、在 {{site.data.keyword.registryshort_notm}} 中設定專用映像檔儲存庫，以及將密碼新增至叢集，讓應用程式可以存取 {{site.data.keyword.toneanalyzershort}} 服務。
+在 {{site.data.keyword.registryshort_notm}} 中設定專用映像檔儲存庫，以及將密碼新增至叢集，讓應用程式可以存取 {{site.data.keyword.toneanalyzershort}} 服務。
 
 1.  當出現提示時，使用 {{site.data.keyword.Bluemix_notm}} 認證登入 {{site.data.keyword.Bluemix_notm}} CLI。
 
     ```
-    bx login [--sso] -a api.eu-gb.bluemix.net
+    bx login [--sso]
     ```
     {: pre}
 

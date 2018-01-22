@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-03"
+lastupdated: "2017-12-18"
 
 ---
 
@@ -22,7 +22,7 @@ Revise las versiones de Kubernetes que están disponibles en {{site.data.keyword
 {:shortdesc}
 
 {{site.data.keyword.containershort_notm}} soporta varias versiones de Kubernetes. La versión predeterminada se utiliza al crear o actualizar un clúster, a menos que se especifica otra versión. Las versiones disponibles de Kubernetes son las siguientes:
-- 1.8.2
+- 1.8.4
 - 1.7.4 (versión predeterminada)
 - 1.5.6
 
@@ -33,7 +33,8 @@ Para obtener más información sobre el proceso de actualización, consulte [Act
 ## Tipos de actualización
 {: #version_types}
 
-Kubernetes proporciona estos tipos de actualización:{:shortdesc}
+Kubernetes proporciona estos tipos de actualización:
+{:shortdesc}
 
 |Tipo actualización|Ejemplos de etiquetas de versión|Actualizado por|Impacto
 |-----|-----|-----|-----|
@@ -46,7 +47,12 @@ De forma predeterminada, no se puede actualizar un maestro de Kubernetes con una
 
 ## Version 1.8
 {: #cs_v18}
+
+<p><img src="images/certified_kubernetes_1x8.png" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" height="100" width="62.5" align="left" alt="Este identificador indica la certificación de Kubernetes versión 1.8 para IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} es un producto Kubernetes certificado para la versión 1.8 bajo el programa CNCF de certificación de conformidad de software Kubernetes. _Kubernetes® es una marca registrada de The Linux Foundation en Estados Unidos y en otros países, y se utiliza de acuerdo con una licencia de The Linux Foundation._</p>
+
 Revise los cambios que necesite hacer cuando actualice a Kubernetes versión 1.8.
+
+<br/>
 
 ### Actualización antes de maestro
 {: #18_before}
@@ -89,11 +95,11 @@ Revise los cambios que necesite hacer cuando actualice a Kubernetes versión 1.8
 </tr>
 <tr>
 <td>`kubectl delete`</td>
-<td>El mandato `kubectl delete` ya no reduce los objetos de la API de carga de trabajo, como los pods, antes de suprimir el objeto. Si necesita reducir el objeto, utilice la [escala kubectl ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/user-guide/kubectl/v1.8/#scale) antes de suprimir el objeto.</td>
+<td>El mandato `kubectl delete` ya no reduce los objetos de la API de carga de trabajo, como los pods, antes de suprimir el objeto. Si necesita reducir el objeto, utilice la escala kubectl ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale) antes de suprimir el objeto.</td>
 </tr>
 <tr>
 <td>`kubectl run`</td>
-<td>El mandato `kubectl run` debe utilizar varios distintivos para `--env` en lugar de argumentos separados por comas. Por ejemplo, ejecute `kubectl run --env <x>=<y> --env <z>=<k>` en lugar de `kubectl run --env <x>=<y>,<z>=<k>`.</td>
+<td>El mandato `kubectl run` debe utilizar varios distintivos para `--env` en lugar de argumentos separados por comas. Por ejemplo, ejecute <code>kubectl run --env <x>=<y> --env <z>=&lt;a&gt;</code> y no <code>kubectl run --env <x>=<y>,<z>=&lt;a&gt;</code>. </td>
 </tr>
 <td>`kubectl stop`</td>
 <td>El mandato `kubectl stop` ya no está disponible.</td>
@@ -105,7 +111,11 @@ Revise los cambios que necesite hacer cuando actualice a Kubernetes versión 1.8
 ## Versión 1.7
 {: #cs_v17}
 
+<p><img src="images/certified_kubernetes_1x7.png" height="100" width="62.5" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" align="left" alt="Este identificador indica la certificación de Kubernetes versión 1.7 para IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} es un producto Kubernetes certificado para la versión 1.7 bajo el programa CNCF de certificación de conformidad de software Kubernetes.</p>
+
 Revise los cambios que necesite hacer cuando actualice a Kubernetes versión 1.7.
+
+<br/>
 
 ### Actualización antes de maestro
 {: #17_before}
@@ -150,7 +160,7 @@ Revise los cambios que necesite hacer cuando actualice a Kubernetes versión 1.7
 <tbody>
 <tr>
 <td>kubectl</td>
-<td>Después de actualizar la CLI `kubectl`, estos mandatos `kubectl create` deben utilizar varios distintivos en lugar de argumentos separados por comas: <ul>
+<td>Después de actualizar la CLI `kubectl`, estos mandatos `kubectl create` deben utilizar varios distintivos en lugar de argumentos separados por comas:<ul>
  <li>`role`
  <li>`clusterrole`
  <li>`rolebinding`
@@ -196,7 +206,7 @@ Revise los cambios que necesite hacer cuando actualice a Kubernetes versión 1.7
   </pre>
 
   <li> Una vez añadida la política de redes, elimine la anotación `net.beta.kubernetes.io/network-policy`:
-```
+  ```
   kubectl annotate ns <namespace> --overwrite "net.beta.kubernetes.io/network-policy-"
   ```
   </ol>

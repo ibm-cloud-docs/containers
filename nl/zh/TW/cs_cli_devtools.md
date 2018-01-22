@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-28"
+lastupdated: "2017-12-01"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2017-11-28"
 請參閱這些指令，以建立及管理叢集。
 {:shortdesc}
 
-**提示：**要尋找 `bx cr` 指令嗎？請參閱 [{{site.data.keyword.registryshort_notm}} CLI 參考資料](/docs/cli/plugins/registry/index.html)。要尋找 `kubectl` 指令嗎？請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/user-guide/kubectl/v1.5/)。
+**提示：**要尋找 `bx cr` 指令嗎？請參閱 [{{site.data.keyword.registryshort_notm}} CLI 參考資料](/docs/cli/plugins/registry/index.html)。要尋找 `kubectl` 指令嗎？請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)。
 
 
 <!--[https://github.ibm.com/alchemy-containers/armada-cli ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.ibm.com/alchemy-containers/armada-cli)-->
@@ -375,7 +375,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
   ```
   {: pre}
 
-  「{{site.data.keyword.Bluemix_dedicated_notm}}」環境的範例：
+  {{site.data.keyword.Bluemix_dedicated_notm}} 環境的範例：
 
   ```
   bx cs cluster-create --machine-type machine-type --workers number --name cluster_name
@@ -433,8 +433,6 @@ kube-version: <em>&lt;kube-version&gt;</em>
 {: #cs_cluster_service_bind}
 
 將 {{site.data.keyword.Bluemix_notm}} 服務新增至叢集。
-
-**提示：**若為「{{site.data.keyword.Bluemix_dedicated_notm}}」使用者，請參閱[在 {{site.data.keyword.Bluemix_dedicated_notm}}中將 {{site.data.keyword.Bluemix_notm}} 服務新增至叢集（封閉測試版）](cs_cluster.html#binding_dedicated)。
 
 <strong>指令選項</strong>：
 
@@ -635,13 +633,13 @@ kube-version: <em>&lt;kube-version&gt;</em>
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>叢集的名稱或 ID。這是必要值。</dd>
-   
+
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
    <dd>叢集的 Kubernedes 版本。如果未指定此旗標，則 Kubernetes 主節點會更新為預設 API 版本。若要查看可用的版本，請執行 [bx cs kube-versions](#cs_kube_versions)。這是選用值。</dd>
 
    <dt><code>-f</code></dt>
    <dd>使用此選項，以強制更新主節點，而不出現任何使用者提示。這是選用值。</dd>
-   
+
    <dt><code>--force-update</code></dt>
    <dd>即使變更大於兩個次要版本，也要嘗試更新。這是選用值。</dd>
    </dl>
@@ -682,7 +680,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
    <dl>
    <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
    <dd>IBM Cloud 基礎架構 (SoftLayer) 帳戶使用者名稱。這是必要值。</dd>
-   
+
 
    <dt><code>--infrastructure-api-key <em>API_KEY</em></code></dt>
    <dd>IBM Cloud 基礎架構 (SoftLayer) 帳戶 API 金鑰。這是必要值。
@@ -951,8 +949,8 @@ kube-version: <em>&lt;kube-version&gt;</em>
 ### bx cs machine-types LOCATION
 {: #cs_machine_types}
 
-檢視工作者節點的可用機型清單。每一個機型都包括叢集中每一個工作者節點的虛擬 CPU、記憶體及磁碟空間量。 
-- 名稱中具有 `u2c` 或 `b2c` 的機型會使用本端磁碟，而非儲存區網路 (SAN) 來取得可靠性。可靠性優點包括將位元組序列化到本端磁碟時的更高傳輸量，以及減少檔案系統由於網路故障而造成的退化。這些機型包含 25GB 本端磁碟儲存空間，供 OS 檔案系統使用，以及包含 100GB 本端磁碟儲存空間，供 `/var/lib/docker` 使用，而所有容器資料都會寫入至這個目錄中。 
+檢視工作者節點的可用機型清單。每一個機型都包括叢集中每一個工作者節點的虛擬 CPU、記憶體及磁碟空間量。
+- 名稱中具有 `u2c` 或 `b2c` 的機型會使用本端磁碟，而非儲存區網路 (SAN) 來取得可靠性。可靠性優點包括將位元組序列化到本端磁碟時的更高傳輸量，以及減少檔案系統由於網路故障而造成的退化。這些機型包含 25GB 本端磁碟儲存空間，供 OS 檔案系統使用，以及包含 100GB 本端磁碟儲存空間，供 `/var/lib/docker` 使用，而所有容器資料都會寫入至這個目錄中。
 - 名稱中包括 `encrypted` 的機型會加密主機的 Docker 資料。儲存所有容器資料的 `/var/lib/docker` 目錄是使用 LUKS 加密來進行加密。
 - 名稱中具有 `u1c` 或 `b1c` 的機型已被淘汰，例如 `u1c.2x4`。若要開始使用 `u2c` 及 `b2c` 機型，請使用 `bx cs worker-add` 指令，利用更新的機型新增工作者節點。然後，使用 `bx cs worker-rm` 指令，移除正在使用已淘汰機型的工作者節點。
 </p>
@@ -1126,7 +1124,7 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
   ```
   {: pre}
 
-  「{{site.data.keyword.Bluemix_dedicated_notm}}」的範例：
+  {{site.data.keyword.Bluemix_dedicated_notm}} 的範例：
 
   ```
   bx cs worker-add --cluster my_cluster --number 3 --machine-type u2c.2x4
@@ -1246,13 +1244,13 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
 
    <dt><em>CLUSTER</em></dt>
    <dd>列出可用工作者節點的叢集的名稱或 ID。這是必要值。</dd>
-   
+
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
    <dd>叢集的 Kubernedes 版本。如果未指定此旗標，則工作者節點會更新為預設版本。若要查看可用的版本，請執行 [bx cs kube-versions](#cs_kube_versions)。這是選用值。</dd>
 
    <dt><code>-f</code></dt>
    <dd>使用此選項，以強制更新主節點，而不出現任何使用者提示。這是選用值。</dd>
-   
+
    <dt><code>--force-update</code></dt>
    <dd>即使變更大於兩個次要版本，也要嘗試更新。這是選用值。</dd>
 

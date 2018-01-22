@@ -1,7 +1,7 @@
 {:navgroup: .navgroup}
 {:topicgroup: .topicgroup}
 
-{: .toc subcollection="containers" audience="compute" href="/docs/containers/index.html"}
+{: .toc subcollection="containers" audience="compute" href="/docs/containers/container_index.html"}
 IBM Cloud Container Service
 
     {: .navgroup id="learn"}
@@ -13,8 +13,15 @@ IBM Cloud Container Service
     指導教學
         cs_tutorials.md
         cs_tutorials_apps.md
+        cs_tutorials_istio.md
 
     cs_security.md
+    {: .navgroup-end}
+
+    {: .navgroup id="howto"}
+    cs_cli_install.md
+    cs_cluster.md
+    cs_apps.md
     {: .navgroup-end}
 
     {: .navgroup id="reference"}
@@ -22,25 +29,23 @@ IBM Cloud Container Service
     cs_versions.md
     cs_regions.md
     cs_annotations.md
-    {: .navgroup-end}
 
-    {: .navgroup id="howto"}
-    cs_cli_install.md
-    cs_cluster.md
-    cs_apps.md
-    [已淘汰：執行單一及可擴充容器](cs_classic.html)
-        [將單一及可擴充容器移轉至 Kubernetes 叢集](cs_classic.html#cs_classic_migrating)
-        [關於單一及可擴充容器](container_ov.html)
-        [規劃單一及可擴充容器](container_planning.html)
-        [單一及可擴充容器的安全](container_security.html)
-        [針對單一及可擴充容器設定 CLI](container_cli_cfic_install.html)
-        [IBM 映像檔](../services/RegistryImages/index.html)
-        [以容器執行短期作業](container_single_ui.html)
-        [執行高度可用的群組](container_ha.html)
-        [儲存單一及可擴充容器的持續資料](container_volumes_ov.html)
-        [整合服務與單一及可擴充容器](container_integrations.html)
-        [單一及可擴充容器的 CLI 參考資料](container_cli_reference_cfic.html)
-        [單一及可擴充容器疑難排解](container_troubleshoot.html)
+    {: .topicgroup}
+    IBM Cloud Dedicated
+        cs_dedicated.md
+        [已淘汰：執行單一及可擴充容器](cs_classic.html)
+            [將單一及可擴充容器移轉至 Kubernetes 叢集](cs_classic.html#cs_classic_migrating)
+            [關於單一及可擴充容器](container_ov.html)
+            [規劃單一及可擴充容器](container_planning.html)
+            [單一及可擴充容器的安全](container_security.html)
+            [針對單一及可擴充容器設定 CLI](container_cli_cfic_install.html)
+            [IBM 映像檔](../services/RegistryImages/index.html)
+            [以容器執行短期作業](container_single_ui.html)
+            [執行高度可用的群組](container_ha.html)
+            [儲存單一及可擴充容器的持續資料](container_volumes_ov.html)
+            [整合服務與單一及可擴充容器](container_integrations.html)
+            [單一及可擴充容器的 CLI 參考資料](container_cli_reference_cfic.html)
+            [單一及可擴充容器疑難排解](container_troubleshoot.html)
     {: .navgroup-end}
 
     {: .navgroup id="help"}

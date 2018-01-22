@@ -1,7 +1,7 @@
 {:navgroup: .navgroup}
 {:topicgroup: .topicgroup}
 
-{: .toc subcollection="containers" audience="compute" href="/docs/containers/index.html"}
+{: .toc subcollection="containers" audience="compute" href="/docs/containers/container_index.html"}
 IBM Cloud Container Service
 
     {: .navgroup id="learn"}
@@ -13,8 +13,15 @@ IBM Cloud Container Service
     Tutoriels
         cs_tutorials.md
         cs_tutorials_apps.md
+        cs_tutorials_istio.md
 
     cs_security.md
+    {: .navgroup-end}
+
+    {: .navgroup id="howto"}
+    cs_cli_install.md
+    cs_cluster.md
+    cs_apps.md
     {: .navgroup-end}
 
     {: .navgroup id="reference"}
@@ -22,25 +29,19 @@ IBM Cloud Container Service
     cs_versions.md
     cs_regions.md
     cs_annotations.md
-    {: .navgroup-end}
 
-    {: .navgroup id="howto"}
-    cs_cli_install.md
-    cs_cluster.md
-    cs_apps.md
-    [Obsolète : Exécution de conteneurs uniques et évolutifs](cs_classic.html)
-        [Migration de conteneurs uniques et évolutifs vers des clusters Kubernetes](cs_classic.html#cs_classic_migrating)
-        [A propos des conteneurs uniques et évolutifs](container_ov.html)
-        [Planification de conteneurs uniques et évolutifs](container_planning.html)
-        [Sécurité des conteneurs uniques et évolutifs](container_security.html)
-        [Configuration de l'interface CLI pour des conteneurs uniques et évolutifs](container_cli_cfic_install.html)
-        [Images IBM](../services/RegistryImages/index.html)
-        [Exécution de tâches de courte durée en tant que conteneurs](container_single_ui.html)
-        [Exécution de groupes à haute disponibilité](container_ha.html)
-        [Stockage de données persistantes pour des conteneurs uniques et évolutifs](container_volumes_ov.html)
-        [Intégration de services à des conteneurs uniques et évolutifs](container_integrations.html)
-        [Référence de l'interface de ligne de commande pour les conteneurs uniques et évolutifs](container_cli_reference_cfic.html)
-        [Identification et résolution des incidents liés aux conteneurs uniques et évolutifs](container_troubleshoot.html)
+    {: .topicgroup}
+    IBM Cloud Dedicated
+        cs_dedicated.md
+        [Obsolète : exécution de conteneurs uniques et évolutifs](cs_classic.html)
+            [Migration de conteneurs uniques et évolutifs vers des clusters Kubernetes](cs_classic.html#cs_classic_migrating) [A propos des conteneurs uniques et évolutifs](container_ov.html)
+            [Planification de conteneurs uniques et évolutifs](container_planning.html)
+            [Sécurité pour conteneurs uniques et évolutifs](container_security.html)
+            [Configuration de l'interface CLI pour conteneurs uniques et évolutifs](container_cli_cfic_install.html) [IBM Images](../services/RegistryImages/index.html)
+            [Exécution de tâches à court terme en tant que conteneurs](container_single_ui.html) [Exécution de groupes à haute disponibilité](container_ha.html)
+            [Stockage de données persistantes pour conteneurs uniques et évolutifs ](container_volumes_ov.html)
+            [Intégration de services avec des conteneurs uniques et évolutifs](container_integrations.html) [Référence CLI pour conteneurs uniques et évolutifs](container_cli_reference_cfic.html)
+            [Dépannage de conteneurs uniques et évolutifs](container_troubleshoot.html)
     {: .navgroup-end}
 
     {: .navgroup id="help"}

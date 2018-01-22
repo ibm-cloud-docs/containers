@@ -1,8 +1,6 @@
 ---
 
-copyright:
-  years: 2014, 2017
-lastupdated: "2017-11-28"
+copyright: years: 2014, 2017 lastupdated: "2017-12-13"
 
 ---
 
@@ -19,8 +17,8 @@ lastupdated: "2017-11-28"
 # Planejando clusters e apps
 {: #cs_planning}
 
-Tenha uma ideia das decisões que é possível tomar para configurar e customizar clusters do Kubernetes no {{site.data.keyword.containershort_notm}} e atender aos requisitos de sua organização. Algumas dessas configurações não podem ser mudadas depois que um cluster é
-criado. Conhecer essas configurações com antecedência pode assegurar que recursos, como memória, espaço em disco e endereços IP, estejam disponíveis para suas equipes de desenvolvimento conforme necessário.
+Tenha uma ideia das decisões que você pode fazer para configurar e customizar clusters do Kubernetes no {{site.data.keyword.containershort_notm}}. Algumas dessas configurações não podem ser mudadas depois que um cluster é
+criado. Conhecer essas configurações com antecedência pode assegurar que recursos, como memória, espaço em disco e endereços IP, estejam disponíveis para suas equipes de desenvolvimento, conforme necessário.
 {:shortdesc}
 
 <br />
@@ -29,12 +27,12 @@ criado. Conhecer essas configurações com antecedência pode assegurar que recu
 ## Comparação de clusters lite e padrão
 {: #cs_planning_cluster_type}
 
-É possível criar clusters Lite ou padrão. Crie clusters Lite para familiarizar-se e testar os recursos do Kubernetes ou criar clusters padrão para usar os recursos integrais do Kubernetes para implementar apps.
+É possível criar clusters Lite ou padrão. Experimente clusters Lite para familiarizar-se e testar alguns recursos do Kubernetes ou criar clusters padrão para usar os recursos completos do Kubernetes para implementar apps.
 {:shortdesc}
 
 |Características|Clusters lite|Clusters padrão|
 |---------------|-------------|-----------------|
-|[Disponível no {{site.data.keyword.Bluemix_notm}} Public](cs_ov.html#cs_ov)|<img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />|
+|[Disponível no {{site.data.keyword.Bluemix_notm}}](cs_ov.html#cs_ov)|<img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />|
 |[Rede em cluster](#cs_planning_private_network)|<img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />|
 |[Acesso ao app de rede pública por um serviço NodePort](#cs_nodeport)|<img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />|
 |[Gerenciamento de acesso do usuário](cs_cluster.html#cs_cluster_user)|<img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />|
@@ -45,7 +43,7 @@ criado. Conhecer essas configurações com antecedência pode assegurar que recu
 |[Acesso ao app de rede pública por um serviço de Ingresso](#cs_ingress)| |<img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />|
 |[Endereços IP públicos móveis](cs_apps.html#cs_cluster_ip_subnet)| |<img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />|
 |[Criando log e monitorando](cs_cluster.html#cs_logging)| |<img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />|
-|[Disponível no {{site.data.keyword.Bluemix_dedicated_notm}} (beta encerrado)](cs_ov.html#dedicated_environment)| |<img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />|
+|[Disponível no {{site.data.keyword.Bluemix_dedicated_notm}}](cs_dedicated.html#dedicated_environment)| |<img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />|
 {: caption="Tabela 1. Diferenças entre clusters lite e padrão" caption-side="top"}
 
 <br />
@@ -69,12 +67,11 @@ disponibilidade:
 múltiplos nós do trabalhador
 3.  Dois clusters que são executados em diferentes regiões, cada um com múltiplos nós do trabalhador
 
-Saiba mais sobre como é possível usar essas técnicas para aumentar a disponibilidade de seu cluster:
+Aumente a disponibilidade de seu cluster com estas técnicas:
 
 <dl>
-<dt>Incluir nós do trabalhador suficientes para difundir instâncias do app</dt>
-<dd>Para alta disponibilidade, permita que os desenvolvedores de app difundam seus contêineres em múltiplos
-nós do trabalhador por cluster. Três nós do trabalhador permitem que o tempo de inatividade de um nó do trabalhador ocorra sem interromper o uso do app. É possível especificar quantos nós do trabalhador incluir ao criar um cluster por meio da [GUI do {{site.data.keyword.Bluemix_notm}}](cs_cluster.html#cs_cluster_ui) ou da [CLI](cs_cluster.html#cs_cluster_cli). O Kubernetes limita o número máximo de nós do trabalhador que você pode ter em um cluster. Revise [cotas de nó do trabalhador e de pod ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/admin/cluster-large/) para obter mais informações.
+<dt>Difundir apps pelos nós do trabalhador</dt>
+<dd>Permita que os desenvolvedores difundam seus apps em contêineres em múltiplos nós do trabalhador por cluster. Uma instância de aplicativo em cada um dos três nós do trabalhador permite o tempo de inatividade de um nó do trabalhador, sem interromper o uso do aplicativo. É possível especificar quantos nós do trabalhador incluir ao criar um cluster por meio da [GUI do {{site.data.keyword.Bluemix_notm}}](cs_cluster.html#cs_cluster_ui) ou da [CLI](cs_cluster.html#cs_cluster_cli). O Kubernetes limita o número máximo de nós do trabalhador que você pode ter em um cluster, portanto, lembre-se do [nó do trabalhador e das cotas de pod ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/admin/cluster-large/).
 <pre class="codeblock">
 <code>bx cs cluster-create --location &lt;dal10&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;my_cluster&gt;</code>
 </pre>
@@ -94,10 +91,9 @@ cluster, ainda assim os usuários poderão acessar um app que também esteja imp
 </pre>
 </dd>
 <dt>Difundir apps entre clusters em diferentes regiões</dt>
-<dd>Ao difundir aplicativos entre clusters em diferentes regiões, é possível permitir que o balanceamento de carga
-ocorra com base na região em que o usuário está. Se o cluster, hardware ou até mesmo um local inteiro em
+<dd>Ao difundir aplicativos entre clusters em diferentes regiões, será possível permitir que o balanceamento de carga ocorra com base na região em que o usuário está. Se o cluster, hardware ou até mesmo um local inteiro em
 uma região ficar inativo, o tráfego será roteado para o contêiner que estiver implementado em outro local.
-<p><strong>Importante:</strong> depois de configurar seu domínio customizado, será possível usar esses comandos para criar os clusters.</p>
+<p><strong>Importante:</strong> depois de configurar um domínio customizado, você poderá usar esses comandos para criar os clusters.</p>
 <p>Local 1:</p>
 <pre class="codeblock">
 <code>bx cs cluster-create --location &lt;dal10&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;my_cluster1&gt;</code>
@@ -115,10 +111,7 @@ uma região ficar inativo, o tráfego será roteado para o contêiner que estive
 ## Configuração do nó do trabalhador
 {: #cs_planning_worker_nodes}
 
-Um cluster do Kubernetes consiste em nós do trabalhador da máquina virtual e é monitorado e gerenciado
-centralmente pelo mestre do Kubernetes. Os administradores de cluster devem decidir como configurar o cluster de nós
-do trabalhador para assegurar que os usuários do cluster tenham todos os recursos para implementar e executar apps no
-cluster.
+Um cluster do Kubernetes consiste em nós do trabalhador e é monitorado e gerenciado centralmente pelo mestre do Kubernetes. Os administradores de cluster decidem como configurar o cluster de nós do trabalhador para assegurar que os usuários do cluster tenham todos os recursos para implementar e executar apps no cluster.
 {:shortdesc}
 
 Ao criar um cluster padrão, os nós do trabalhador são pedidos na infraestrutura do IBM Cloud (SoftLayer) em seu nome e configurados no {{site.data.keyword.Bluemix_notm}}. A cada nó do trabalhador é designado
@@ -131,7 +124,7 @@ e espaço em disco que estão disponíveis para os contêineres que são impleme
 ### Hardware para nós do trabalhador
 {: #shared_dedicated_node}
 
-Cada nó do trabalhador é configurado como uma máquina virtual no hardware físico. Ao criar um cluster padrão no {{site.data.keyword.Bluemix_notm}} Public, você deverá escolher se deseja que o hardware subjacente seja compartilhado por múltiplos clientes {{site.data.keyword.IBM_notm}} (multiocupação) ou seja dedicado somente a você (ocupação única).
+Cada nó do trabalhador é configurado como uma máquina virtual no hardware físico. Quando você cria um cluster padrão no {{site.data.keyword.Bluemix_notm}}, deve-se escolher se deseja que o hardware subjacente seja compartilhado por múltiplos clientes do {{site.data.keyword.IBM_notm}} (multiocupação) ou seja dedicado somente a você (ocupação única).
 {:shortdesc}
 
 Em uma configuração de diversos locatários, os recursos físicos, como CPU e memória, são compartilhados entre todas as
@@ -150,10 +143,7 @@ subjacente são compartilhados entre múltiplos clientes. No entanto, ao decidir
 e dedicados, você pode desejar verificar com seu departamento jurídico para discutir o nível de isolamento
 e conformidade de infraestrutura que seu ambiente de app requer.
 
-Ao criar um cluster Lite, o nó do trabalhador é provisionado automaticamente como um nó compartilhado na conta de infraestrutura do {{site.data.keyword.IBM_notm}} IBM Cloud (SoftLayer).
-
-Ao criar um cluster no {{site.data.keyword.Bluemix_dedicated_notm}}, somente uma configuração de locatário único é usada e todos os recursos físicos são dedicados somente a você. Você implementa
-múltiplos nós do trabalhador como máquinas virtuais no mesmo host físico.
+Ao criar um cluster lite, seu nó do trabalhador é provisionado automaticamente como um nó compartilhado na conta de infraestrutura do IBM Cloud (SoftLayer).
 
 <br />
 
@@ -175,13 +165,13 @@ Cada tipo de máquina tem uma capacidade de memória diferente. Quando há menos
 |128 GB| 4096 MB |
 |242 GB| 4096 MB |
 
-Para revisar quanta memória é usada em seu nó do trabalhador, execute [kubectl top node ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/user-guide/kubectl/v1.8/#top).
+Para revisar quanta memória é usada em seu nó do trabalhador, execute [kubectl top node ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#top).
 
 
 ## Responsabilidades de gerenciamento de cluster
 {: #responsibilities}
 
-Revise as responsabilidades que você compartilha com a IBM para gerenciar seus clusters. Para revisar responsabilidades para clusters que são gerenciados em ambientes {{site.data.keyword.Bluemix_dedicated_notm}}, veja [Diferenças no gerenciamento de cluster entre os ambientes de nuvem](cs_ov.html#env_differences).
+Revise as responsabilidades que você compartilha com a IBM para gerenciar seus clusters.
 {:shortdesc}
 
 **A IBM é responsável por:**
@@ -201,7 +191,7 @@ Revise as responsabilidades que você compartilha com a IBM para gerenciar seus 
 - [Usar os recursos do serviço e o Kubernetes para assegurar a alta disponibilidade de apps](cs_planning.html#highly_available_apps)
 - [Incluir ou remover capacidade usando a CLI para incluir ou remover nós do trabalhador](cs_cli_reference.html#cs_worker_add)
 - [Criar VLANs públicas e privadas na infraestrutura do IBM Cloud (SoftLayer) para isolamento da rede de seu cluster ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://knowledgelayer.softlayer.com/topic/vlans)
-- [Assegurar que todos os nós do trabalhador tenham conectividade de rede com a URL do mestre](cs_security.html#opening_ports) <p>**Nota**: se um nó do trabalhador possuir duas VLANs públicas e privadas, a conectividade de rede será configurada. Se o nó do trabalhador tiver uma configuração única de VLAN privada, um vyatta será necessário para fornecer conectividade de rede.</p>
+- [Assegurar que todos os nós do trabalhador tenham conectividade de rede com a URL do mestre](cs_security.html#opening_ports) <p>**Nota**: se um nó do trabalhador possuir duas VLANs públicas e privadas, a conectividade de rede será configurada. Se o nó do trabalhador tiver somente uma VLAN privada configurada, então um Vyatta é necessário para fornecer conectividade de rede.</p>
 - [Atualizar o mestre kube-apiserver e os nós do trabalhador quando atualizações de versão principal ou secundária do Kubernetes estão disponíveis](cs_cluster.html#cs_cluster_update)
 - [Executar ações para recuperar nós do trabalhador problemáticos executando comandos `kubectl`, como `cordon` ou `drain` e executando comandos `bx cs`, como `reboot`, `reload` ou `delete`](cs_cli_reference.html#cs_worker_reboot)
 - [Incluir ou remover sub-redes adicionais na infraestrutura do IBM Cloud (SoftLayer) conforme necessário](cs_cluster.html#cs_cluster_subnet)
@@ -386,9 +376,8 @@ determina o endereço IP privado que é designado a um nó do trabalhador durant
 
 |Tipo de cluster|Gerenciador da VLAN privada para o cluster|
 |------------|-------------------------------------------|
-|Clusters lite no {{site.data.keyword.Bluemix_notm}} Public|{{site.data.keyword.IBM_notm}}|
-|Clusters padrão no {{site.data.keyword.Bluemix_notm}} Public|Você em sua conta de infraestrutura do IBM Cloud (SoftLayer) <p>**Dica:** para ter acesso a todas as VLANs em sua conta, ative a [Ampliação de VLAN ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://knowledgelayer.softlayer.com/procedure/enable-or-disable-vlan-spanning).</p>|
-|Clusters padrão no {{site.data.keyword.Bluemix_dedicated_notm}}|{{site.data.keyword.IBM_notm}}|
+|Clusters Lite em {{site.data.keyword.Bluemix_notm}}|{{site.data.keyword.IBM_notm}}|
+|Clusters padrão no {{site.data.keyword.Bluemix_notm}}|Você em sua conta de infraestrutura do IBM Cloud (SoftLayer) <p>**Dica:** para ter acesso a todas as VLANs em sua conta, ative a [Ampliação de VLAN ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://knowledgelayer.softlayer.com/procedure/enable-or-disable-vlan-spanning).</p>|
 {: caption="Tabela 2. Responsabilidades de gerenciamento da VLAN privada" caption-side="top"}
 
 Todos os pods implementados em um nó do trabalhador também são designados a um endereço IP privado. Os pods são
@@ -423,13 +412,12 @@ Ao criar um cluster, cada cluster deve ser conectado a uma VLAN pública. A VLAN
 determina o endereço IP público que é designado a um nó do trabalhador durante a criação de cluster.
 {:shortdesc}
 
-A interface de rede pública para os nós do trabalhador em ambos os clusters lite e padrão é protegida por políticas de rede do Calico. Essas políticas bloqueiam a maior parte do tráfego de entrada por padrão, incluindo SSH. No entanto, o tráfego de entrada que é necessário para o Kubernetes funcionar é permitida, assim como conexões NodePort, Loadbalancer e os serviços do Ingresso. Para obter mais informações sobre essas políticas, incluindo como modificá-las, consulte [Políticas de rede](cs_security.html#cs_security_network_policies).
+A interface de rede pública para os nós do trabalhador em ambos os clusters lite e padrão é protegida por políticas de rede do Calico. Essas políticas bloqueiam a maior parte do tráfego de entrada por padrão. No entanto, o tráfego de entrada que é necessário para o Kubernetes funcionar é permitida, assim como conexões NodePort, Loadbalancer e os serviços do Ingresso. Para obter mais informações sobre essas políticas, incluindo como modificá-las, consulte [Políticas de rede](cs_security.html#cs_security_network_policies).
 
 |Tipo de cluster|Gerenciador da VLAN pública para o cluster|
 |------------|------------------------------------------|
-|Clusters lite no {{site.data.keyword.Bluemix_notm}} Public|{{site.data.keyword.IBM_notm}}|
-|Clusters padrão no {{site.data.keyword.Bluemix_notm}} Public|Você em sua conta de infraestrutura do IBM Cloud (SoftLayer)|
-|Clusters padrão no {{site.data.keyword.Bluemix_dedicated_notm}}|{{site.data.keyword.IBM_notm}}|
+|Clusters Lite em {{site.data.keyword.Bluemix_notm}}|{{site.data.keyword.IBM_notm}}|
+|Clusters padrão no {{site.data.keyword.Bluemix_notm}}|Você em sua conta de infraestrutura do IBM Cloud (SoftLayer)|
 {: caption="Tabela 3. Responsabilidades de gerenciamento da VLAN" caption-side="top"}
 
 Dependendo de você ter criado um cluster lite ou padrão, será possível escolher entre as opções a seguir para expor um app ao público.
@@ -469,7 +457,7 @@ Exponha uma porta e use o endereço IP público ou privado para que o balanceado
 {:shortdesc}
 
 
-Ao criar um cluster padrão, o {{site.data.keyword.containershort_notm}} solicita automaticamente cinco endereços IP públicos móveis e cinco endereços IP privados e os provisiona em sua conta de infraestrutura do IBM Cloud (SoftLayer) durante a criação do cluster. Dois dos endereços IP móveis, um público e um privado, são usados para o [controlador do Ingresso](#cs_ingress). Quatro endereços IP públicos e quatro endereços IP privados podem ser usados para expor apps criando um serviço LoadBalancer.
+Ao criar um cluster padrão, o {{site.data.keyword.containershort_notm}} solicita automaticamente cinco endereços IP móveis públicos e cinco endereços IP móveis privados e os provisiona em sua conta de infraestrutura do IBM Cloud (SoftLayer) durante a criação do cluster. Dois dos endereços IP móveis, um público e um privado, são usados para [Balanceadores de carga de aplicativo do Ingress](#cs_ingress). Quatro endereços IP móveis públicos e quatro endereços IP móveis privados podem ser usados para expor apps criando um serviço LoadBalancer.
 
 Ao criar um serviço do Kubernetes LoadBalancer em um cluster em uma VLAN pública, um balanceador de carga externo é criado. Um dos quatro endereços IP públicos disponíveis é designado ao balanceador de carga. Se nenhum endereço
 IP público móvel estiver disponível, a criação de seu serviço LoadBalancer falhará. O serviço LoadBalancer serve como o ponto de entrada externo para solicitações recebidas para o app. Diferente dos serviços NodePort, é possível designar qualquer porta a seu balanceador de carga e não ser limitado a um determinado intervalo de portas. O endereço IP público móvel que é designado ao seu serviço LoadBalancer é permanente e não muda quando um nó do trabalhador é removido ou recriado. Portanto, o serviço LoadBalancer é mais disponível do que o serviço NodePort. Para acessar o serviço LoadBalancer por meio da Internet, use o endereço IP público do balanceador de carga e a porta designada no formato `<ip_address>:<port>`.
@@ -583,6 +571,8 @@ Para obter mais informações sobre como acessar um registro público ou privado
 {: #cs_planning_apps_storage}
 
 Um contêiner é, por design, de curta duração. No entanto, conforme mostrado no diagrama a seguir, é possível escolher entre várias opções para persistir dados para o caso de um failover de contêiner e para compartilhar dados entre contêineres.
+
+**Observação**: se você tiver um firewall, [permita acesso de saída](cs_security.html#opening_ports) para os intervalos de IP da infraestrutura do IBM Cloud (SoftLayer) dos locais (centros de dados) em que seus clusters estão, para que seja possível criar solicitações de volume persistentes.
 {:shortdesc}
 
 ![Opções de armazenamento persistente para implementações em clusters do Kubernetes](images/cs_planning_apps_storage.png)
@@ -594,18 +584,8 @@ no nó do trabalhador<p>Esse recurso está disponível para clusters lite e padr
 está designado a um pod. O contêiner nesse pod pode ler e gravar nesse volume. Como o
 volume está designado a um pod específico, os dados não podem ser compartilhados com outros pods em um conjunto de réplicas.<p>Um volume `/emptyDir` e seus dados são removidos quando o pod designado é
 excluído permanentemente do nó do trabalhador.</p><p>**Nota:** se o contêiner dentro do pod travar, os dados no volume ainda ficarão disponíveis no nó do trabalhador.</p><p>Para obter mais informações, veja [Volumes do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/storage/volumes/).</p>|
-|Opção 2: criar uma solicitação de volume persistente para provisionar armazenamento persistente baseado em NFS para sua
-implementação<p>Este recurso está disponível somente para clusters padrão.</p>|Com essa opção, é possível ter armazenamento persistente de dados do app e do contêiner por meio de um número ilimitado de compartilhamentos de arquivos NFS e de volumes persistentes. Você cria uma [solicitação de volume persistente](cs_apps.html) para iniciar uma solicitação para armazenamento de arquivo baseado em NFS. O {{site.data.keyword.containershort_notm}} fornece classes de armazenamento
-predefinidas que definem o intervalo de tamanhos do armazenamento, o IOPS e as permissões de leitura e gravação para
-o volume. É possível
-escolher entre essas classes de armazenamento ao criar sua solicitação de volume persistente. Depois que você envia
-uma solicitação de volume persistente, o {{site.data.keyword.containershort_notm}}
-provisiona dinamicamente um volume persistente que está hospedado no armazenamento de arquivo baseado em NFS. [É possível montar a solicitação de volume persistente](cs_apps.html#cs_apps_volume_claim) como um volume para seu pod para permitir que o contêiner no pod leia e grave no volume. Os volumes persistentes podem ser
-compartilhados entre o pods no mesmo conjunto de réplicas ou com outros pods no mesmo cluster.<p>Quando um
-contêiner trava ou um pod é removido de um nó do trabalhador, os dados não são removidos e ainda podem ser
-acessados por outros pods que montam o volume. As solicitações de volume persistente são hospedadas no armazenamento persistente, mas não possuem backups. Se você requerer um backup dos dados, crie um backup manual.</p><p>**Nota:** o armazenamento de compartilhamento de arquivo NFS é cobrado mensalmente. Se provisionar o armazenamento persistente para seu cluster e removê-lo
-imediatamente, ainda assim terá que pagar o encargo mensal para o armazenamento persistente, mesmo se
-você o usou somente por um curto tempo.</p>|
+|Opção 2: criar uma solicitação de volume persistente para provisionar armazenamento persistente baseado no NFS para sua implementação<p>Este recurso está disponível somente para clusters padrão.</p>|<p>Com essa opção, é possível ter armazenamento persistente de dados do app e do contêiner por meio de volumes persistentes. Os volumes são hospedados no [Resistência e Desempenho do armazenamento de arquivo baseado em NFS![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/cloud/file-storage/details). O armazenamento de arquivo é criptografado em repouso e é possível criar réplicas dos dados armazenados.</p> <p>Você cria uma [solicitação de volume persistente](cs_apps.html) para iniciar uma solicitação para o armazenamento de arquivos baseado em NFS. O {{site.data.keyword.containershort_notm}} fornece classes de armazenamento predefinidas que definem o intervalo de tamanhos do armazenamento, o IOPS, a política de exclusão e as permissões de leitura e gravação para o volume. É possível
+escolher entre essas classes de armazenamento ao criar sua solicitação de volume persistente. Depois de enviar uma solicitação de volume persistente, o {{site.data.keyword.containershort_notm}} provisiona dinamicamente um volume persistente que está hospedado no armazenamento de arquivo baseado em NFS. [É possível montar a solicitação de volume persistente](cs_apps.html#cs_apps_volume_claim) como um volume para a sua implementação para permitir que os contêineres leiam e gravem no volume. Os volumes persistentes podem ser compartilhados entre o mesmo conjunto de réplicas ou com outras implementações no mesmo cluster.</p><p>Quando um contêiner trava ou um pod é removido de um nó do trabalhador, os dados não são removidos e ainda podem ser acessados por outras implementações que montam o volume. As solicitações de volume persistente são hospedadas no armazenamento persistente, mas não possuem backups. Se você requerer um backup dos dados, crie um backup manual.</p><p>**Nota:** o armazenamento de compartilhamento de arquivo NFS é cobrado mensalmente. Se você provisionar o armazenamento persistente para seu cluster e removê-lo imediatamente, ainda pagará o encargo mensal para o armazenamento persistente, mesmo que você o tenha usado somente por um curto tempo.</p>|
 |Opção 3: ligar um serviço de banco de dados {{site.data.keyword.Bluemix_notm}} ao seu pod<p>Esse recurso está disponível para clusters lite e padrão.</p>|Com essa opção, é possível persistir e acessar dados usando um serviço de nuvem de banco de dados {{site.data.keyword.Bluemix_notm}}. Ao ligar
 o serviço do {{site.data.keyword.Bluemix_notm}} a um namespace em
 seu cluster, um segredo do Kubernetes é criado. O segredo do Kubernetes retém a informação confidencial
@@ -649,14 +629,11 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="Ícone de link
 </tr>
 <tr>
 <td>Instana</td>
-<td> O <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a> fornece monitoramento de desempenho de infraestrutura e app com uma GUI que descobre automaticamente e mapeia seus apps. Além disso, o Istana captura cada solicitação para seus apps, que permite solucionar problemas e executar análise de causa raiz para evitar que os problemas aconteçam novamente. Confira a postagem do blog sobre <a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">implementando o Istana no {{site.data.keyword.containershort_notm}} para aprender mais <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a>. </td>
+<td> O <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a> fornece monitoramento de desempenho de infraestrutura e app com uma GUI que descobre automaticamente e mapeia seus apps. Além disso, o Istana captura cada solicitação para seus apps, que permite solucionar problemas e executar análise de causa raiz para evitar que os problemas aconteçam novamente. Confira a postagem do blog sobre <a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">implementando o Istana no {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a> para saber mais.</td>
 </tr>
 <tr>
 <td>Istio</td>
-<td>Istio é um serviço de software livre que fornece aos desenvolvedores uma maneira de conectar, assegurar, gerenciar e
-monitorar uma rede de microsserviços, também conhecida como malha de serviço, em plataformas de orquestração de nuvem como
-o Kubernetes. O Istio fornece a capacidade de gerenciar o tráfego de rede, balanceamento de carga entre
-microsserviços, impingir políticas de acesso e verificar a identidade de serviço na rede de serviço. Para instalar o Istio no cluster do Kubernetes no {{site.data.keyword.containershort_notm}}, veja o <a href="https://istio.io/docs/tasks/installing-istio.html" target="_blank">tópico de instalação <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a> na documentação do Istio. Para revisar uma jornada de amostra do desenvolvedor sobre como usar o Istio com o Kubernetes, veja <a href="https://developer.ibm.com/code/journey/manage-microservices-traffic-using-istio/" target="_blank">Gerenciar o tráfego de microsserviços usando o Istio <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a>.</td>
+<td>O <a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio<img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a> é um serviço de software livre que fornece aos desenvolvedores uma maneira de conectar, proteger, gerenciar e monitorar uma rede de microsserviços, também conhecida como rede de serviços, em plataformas de orquestração de nuvem como o Kubernetes. Confira a postagem do blog sobre <a href="https://developer.ibm.com/dwblog/2017/istio/" target="_blank">como a IBM cofundou e lançou o Istio<img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a> para descobrir mais sobre o projeto de software livre. Para instalar o Istio em seu cluster do Kubernetes no {{site.data.keyword.containershort_notm}} e começar com um aplicativo de amostra, consulte [Tutorial: Gerenciando microsserviços com o Istio](cs_tutorials_istio.html#istio_tutorial).</td>
 </tr>
 <tr>
 <td>Prometheus</td>
@@ -676,6 +653,10 @@ para monitorar o desempenho e as cargas de trabalho em seu cluster.
 se referir a <code>prometheus.kube-system:30900</code>.</li>
 </ol>
 </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.bpshort}}</td>
+<td>{{site.data.keyword.bplong}} é uma ferramenta de automação que usa o Terraform para implementar sua infraestrutura como código. Ao implementar sua infraestrutura como uma única unidade, é possível reutilizar essas definições de recurso em nuvem em qualquer número de ambientes. Para definir um cluster do Kubernetes como um recurso com {site.data.keyword.bpshort}}, tente criar um ambiente com o [modelo de cluster de contêiner](https://console.bluemix.net/schematics/templates/details/Cloud-Schematics%2Fcontainer-cluster). Para obter mais informações sobre diagramas, consulte [Sobre o {{site.data.keyword.bplong_notm}}](/docs/services/schematics/schematics_overview.html#about).</td>
 </tr>
 <tr>
 <td>Weave Scope</td>
@@ -704,7 +685,7 @@ Revise a tabela a seguir para localizar opções disponíveis para cada tipo de 
 
 |Tipo de conta|Descrição|Opções disponíveis para criar um cluster padrão|
 |------------|-----------|----------------------------------------------|
-|Contas Lite|As contas Lite podem fornecer somente 1 cluster Lite com 2 CPUs e 4 GB de RAM. <p>Para criar mais clusters com tipos de máquinas diferentes, você tem duas opções.</p>|<ul><li>Opção 1: [faça upgrade de sua conta Lite para uma conta {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go](/docs/pricing/billable.html#upgradetopayg) que está configurada com acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer).</li><li>Opção 2: [vincule sua conta Lite a uma conta de infraestrutura do IBM Cloud (SoftLayer) existente](/docs/pricing/linking_accounts.html#unifyingaccounts).<p>Após vincular ambas as contas, a sua conta lite terá upgrade automático para uma conta Pay-As-You-Go. Ao vincular as suas contas, você é faturado por meio do {{site.data.keyword.Bluemix_notm}} para os recursos do {{site.data.keyword.Bluemix_notm}} e de infraestrutura do IBM Cloud (SoftLayer).</p><p>**Nota:** a conta de infraestrutura do IBM Cloud (SoftLayer) que você vincular deverá ser configurada com permissões de Superusuário.</p></li></ul>|
+|Contas Lite|Contas Lite não podem provisionar clusters.|<ul><li>[Faça upgrade da sua conta Lite para uma conta Pay-As-You-Go do {{site.data.keyword.Bluemix_notm}}](/docs/pricing/billable.html#upgradetopayg) que esteja configurada com acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer).</li></ul>|
 |Contas Pay-As-You-Go|As contas Pay-As-You-Go que foram criadas antes de a vinculação de conta automática estar disponível não vieram com acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer).<p>Se você tiver uma conta de infraestrutura do IBM Cloud existente (SoftLayer), não será possível vincular essa conta a uma conta Pay-As-You-Go mais antiga.</p>|<ul><li>Opção 1: [Criar uma nova conta Pay-As-You-Go](/docs/pricing/billable.html#billable) que estiver configurada com acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer). Ao escolher essa opção,
 você tem duas contas e faturamentos separados do
 {{site.data.keyword.Bluemix_notm}}.<p>Se você desejar continuar usando a sua antiga conta Pay-As-You-Go para criar clusters padrão, será possível usar sua nova conta Pay-As-You-Go para gerar uma chave API para acessar o portfólio de infraestrutura do IBM Cloud (SoftLayer). Em seguida, deve-se configurar a chave API
@@ -715,7 +696,7 @@ você tem duas contas e faturamentos separados do
 {{site.data.keyword.Bluemix_notm}}.<p>Se você desejar continuar usando a sua conta de Assinatura para criar clusters padrão, será possível usar a sua nova conta Pay-As-You-Go para gerar uma chave API para acessar o portfólio de infraestrutura do IBM Cloud (SoftLayer). Em seguida, deve-se configurar a chave API
 para sua conta de Assinatura. Para obter mais informações, veja [Gerando
 uma chave API para contas Pay-As-You-Go e de Assinatura antigas](#old_account). Mantenha em mente que os recursos de infraestrutura do IBM Cloud (SoftLayer) são cobrados através de sua nova conta Pay-As-You-Go.</p></li><li>Opção 2: se você já tiver uma conta de infraestrutura do IBM Cloud existente (SoftLayer) que você desejar usar, será possível [configurar as suas credenciais](cs_cli_reference.html#cs_credentials_set) para a sua conta do {{site.data.keyword.Bluemix_notm}}.<p>Nota: a conta de infraestrutura do IBM Cloud (SoftLayer) que você usar com a sua conta do {{site.data.keyword.Bluemix_notm}} deverá ser configurada com permissões de Superusuário.</p></li></ul>|
-|Contas de infraestrutura do IBM Cloud (SoftLayer), nenhuma conta do {{site.data.keyword.Bluemix_notm}}|Para criar um cluster padrão, deve-se ter uma conta do {{site.data.keyword.Bluemix_notm}}.|<ul><li>Opção 1: [Criar uma nova conta Pay-As-You-Go](/docs/pricing/billable.html#billable) que estiver configurada com acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer). Ao escolher essa opção, uma nova infraestrutura do IBM Cloud (SoftLayer) será criada para você. Você tem duas contas de infraestrutura do IBM Cloud (SoftLayer) separadas e faturamento.</li><li>Opção 2: [crie uma conta Lite](/docs/pricing/free.html#pricing) e [vincule-a à sua conta de infraestrutura do IBM Cloud (SoftLayer) existente](/docs/pricing/linking_accounts.html#unifyingaccounts). Após vincular ambas as contas, a sua conta lite terá upgrade automático para uma conta Pay-As-You-Go. Ao vincular suas contas, você é faturado por meio do {{site.data.keyword.Bluemix_notm}} para ambos, recursos do {{site.data.keyword.Bluemix_notm}} e da infraestrutura do IBM Cloud (SoftLayer).<p>**Nota:** a conta de infraestrutura do IBM Cloud (SoftLayer) que você vincular deverá ser configurada com permissões de Superusuário.</p></li></ul>|
+|Contas de infraestrutura do IBM Cloud (SoftLayer), nenhuma conta do {{site.data.keyword.Bluemix_notm}}|Para criar um cluster padrão, deve-se ter uma conta do {{site.data.keyword.Bluemix_notm}}.|<ul><li>[Criar uma nova conta Pay-As-You-Go](/docs/pricing/billable.html#billable) que esteja configurada com acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer). Ao escolher essa opção, uma infraestrutura IBM Cloud (SoftLayer) será criada para você. Você tem duas contas de infraestrutura do IBM Cloud (SoftLayer) separadas e faturamento.</li></ul>|
 {: caption="Tabela 7. As opções disponíveis para criar clusters padrão com contas que não estão vinculadas a uma conta de infraestrutura do IBM Cloud (SoftLayer)" caption-side="top"}
 
 

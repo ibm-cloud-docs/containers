@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-14"
+lastupdated: "2017-12-08"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -813,110 +813,45 @@ service "hw-demo-service" deleted
 ### 課程 3b. 更新執行中的 Watson Tone Analyzer 部署
 {: #lesson3b}
 
-部署執行時，您可以編輯部署來變更 Pod 範本中的值。此課程包括更新已使用的映像檔。
+部署執行時，您可以編輯部署來變更 Pod 範本中的值。此課程包括更新已使用的映像檔。公關公司想要在部署中變更應用程式。
 
-1.  變更映像檔的名稱。PR 公司想要在相同的部署中試用不同應用程式，且在新應用程式發生問題時進行回復。
+變更映像檔的名稱：
 
-    1.  開啟執行中部署的配置 Script。
+1.  開啟執行中部署的配置詳細資料。
 
-        ```
+    ```
         kubectl edit deployment/watson-talk-pod
         ```
-        {: pre}
+    {: pre}
 
-        視您的作業系統而定，可能會開啟 vi 編輯器或文字編輯器。
+    視您的作業系統而定，可能會開啟 vi 編輯器或文字編輯器。
 
-    2.  將映像檔的名稱變更為 ibmliberty 映像檔。
+2.  將映像檔的名稱變更為 ibmliberty 映像檔。
 
-        ```
+    ```
         spec:
               containers:
               - image: registry.<region>.bluemix.net/ibmliberty:latest
         ```
-        {: codeblock}
+    {: codeblock}
 
-    3.  儲存變更，並結束編輯器。
+3.  儲存變更，並結束編輯器。
 
-    4.  將配置 Script 中的變更套用至執行中部署。
+4.  將變更套用至執行中部署。
 
-        ```
+    ```
         kubectl rollout status deployment/watson-talk-pod
         ```
-        {: pre}
+    {: pre}
 
-        等待確認推出已完成。
+    等待確認推出已完成。
 
-        ```
+    ```
         deployment "watson-talk-pod" successfully rolled out
         ```
-        {: screen}
+    {: screen}
 
-        當您轉出變更時，Kubernetes 會建立並測試另一個 Pod。測試成功時，會移除舊的 Pod。
-
-    5.  如果變更看起來與預期不同，可以回復變更。可能是公關公司的某個人在變更應用程式時出錯，而他們需要回復至先前的部署。
-
-        1.  檢視修訂版本號碼，以識別前一個部署的編號。最新修訂的版本號碼最高。在此範例中，修訂 1 是原始部署，而修訂 2 是您在前一個步驟中進行的映像檔變更。
-
-            ```
-            kubectl rollout history deployment/watson-talk-pod
-            ```
-            {: pre}
-
-            輸出：
-
-            ```
-            deployments "watson-talk-pod"
-            REVISION CHANGE-CAUSE
-            1          <none>
-            2          <none>
-
-            ```
-            {: screen}
-
-        2.  執行下列指令，以將部署回復為前一個修訂。同樣地，Kubernetes 會建立並測試另一個 Pod。測試成功時，會移除舊的 Pod。
-
-            ```
-            kubectl rollout undo deployment/watson-talk-pod --to-revision=1
-            ```
-            {: pre}
-
-            輸出：
-
-            ```
-            deployment "watson-talk-pod" rolled back
-            ```
-            {: screen}
-
-        3.  取得 Pod 的名稱，以在下一個步驟中使用。
-
-            ```
-            kubectl get pods
-            ```
-            {: pre}
-
-            輸出：
-
-            ```
-            NAME                              READY     STATUS    RESTARTS   AGE
-            watson-talk-pod-2511517105-6tckg  1/1       Running   0          2m
-            ```
-            {: screen}
-
-        4.  檢視 Pod 的詳細資料，並驗證已回復映像檔。
-
-            ```
-            kubectl describe pod <pod_name>
-            ```
-            {: pre}
-
-            輸出：
-
-            ```
-            Image: registry.<region>.bluemix.net/namespace/watson-talk
-            ```
-            {: screen}
-
-2.  選用項目：針對 watson-pod 部署重複這些變更。
+    當您轉出變更時，Kubernetes 會建立並測試另一個 Pod。測試成功時，會移除舊的 Pod。
 
 [測試您學到的知識，並進行隨堂測驗！![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-15"
+lastupdated: "2017-12-01"
 
 ---
 
@@ -139,7 +139,7 @@ Referenzinformationen zu diesen CLIs finden Sie in der Dokumentation zu diesen T
 
 -   [`bx`-Befehle](/docs/cli/reference/bluemix_cli/bx_cli.html)
 -   [`bx cs`-Befehle](cs_cli_reference.html#cs_cli_reference)
--   [`kubectl`-Befehle ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/user-guide/kubectl/v1.7/)
+-   [`kubectl`-Befehle ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)
 -   [`bx cr`-Befehle](/docs/cli/plugins/registry/index.html)
 
 <br />
@@ -169,9 +169,7 @@ verwenden Sie die bereitgestellte URL in Ihrer CLI-Ausgabe, um Ihren einmaligen 
   2.  Wählen Sie ein {{site.data.keyword.Bluemix_notm}}-Konto aus. Wenn Sie mehreren {{site.data.keyword.Bluemix_notm}}-Organisationen zugeordnet sind,
 wählen Sie die Organisation aus, in der der Cluster erstellt wurde. Cluster sind für eine Organisation spezifisch, jedoch von einem {{site.data.keyword.Bluemix_notm}}-Bereich unabhängig. Daher ist es nicht erforderlich, einen Bereich auszuwählen.
 
-  3.  Wenn Sie Kubernetes-Cluster in einer anderen als der zuvor ausgewählten {{site.data.keyword.Bluemix_notm}}-Region erstellen oder dort auf diese Kubernetes-Cluster zugreifen wollen, dann [geben Sie den API-Endpunkt der {{site.data.keyword.containershort_notm}}-Region an](cs_regions.html#container_login_endpoints).
-
-      **Hinweis**: Wenn Sie einen Cluster in der Region 'Vereinigten Staaten (Osten)' erstellen wollen, dann müssen Sie mit dem Befehl `bx cs init --host https://us-east.containers.bluemix.net` den API-Endpunkt der Containerregion 'Vereinigte Staaten (Osten)' angeben.
+  3.  Wenn Sie Kubernetes-Cluster in einer anderen als der zuvor ausgewählten {{site.data.keyword.Bluemix_notm}}-Region erstellen wollen, führen Sie `bx cs region-set` aus. 
 
   4.  Listen Sie alle Cluster im Konto auf, um den Namen des Clusters zu ermitteln.
 
@@ -229,7 +227,7 @@ wählen Sie die Organisation aus, in der der Cluster erstellt wurde. Cluster sin
       {: screen}
 
 Nun können Sie `kubectl`-Befehle zum Verwalten Ihrer Cluster
-in {{site.data.keyword.Bluemix_notm}} ausführen. Eine vollständige Liste von Befehlen finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/user-guide/kubectl/v1.7/).
+in {{site.data.keyword.Bluemix_notm}} ausführen. Eine vollständige Liste von Befehlen finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).
 
 **Tipp:** Wenn Sie Windows verwenden und die Kubernetes-CLI nicht in demselben Verzeichnis wie die {{site.data.keyword.Bluemix_notm}}-CLI installiert ist, müssen Sie die Verzeichnisse zu dem Pfad wechseln, in dem die Kubernetes-CLI installiert ist, um `kubectl`-Befehle erfolgreich ausführen zu können..
 
@@ -446,6 +444,14 @@ Die {{site.data.keyword.containershort_notm}}-API benötigt Headerinformationen,
     ```
     {: codeblock}
 
+    Beispiel:
+    ```
+    POST https://iam.ng.bluemix.net/oidc/token
+    ```
+    {: pre}
+
+    Um eine {{site.data.keyword.Bluemix_notm}}-Region anzugeben, [sehen Sie nach, welche Regionsabkürzungen in den API-Endpunkten verwendet werden](cs_regions.html#bluemix_regions). 
+
     <table summary-"Input parameters to get tokens">
     <thead>
         <th>Eingabeparameter</th>
@@ -559,6 +565,14 @@ Die {{site.data.keyword.containershort_notm}}-API benötigt Headerinformationen,
     ```
     {: codeblock}
 
+    Beispiel:
+    ```
+    POST https://iam.ng.bluemix.net/oidc/token
+    ```
+    {: pre}
+
+    Um eine {{site.data.keyword.Bluemix_notm}}-Region anzugeben, [sehen Sie nach, welche Regionsabkürzungen in den API-Endpunkten verwendet werden](cs_regions.html#bluemix_regions). 
+
     <table summary-"Input parameters to get tokens">
     <thead>
         <th>Eingabeparameter</th>
@@ -624,38 +638,8 @@ Die {{site.data.keyword.containershort_notm}}-API benötigt Headerinformationen,
 
 4.  Listen Sie alle Kubernetes-Cluster in Ihrem Konto auf. Verwenden Sie die in früheren Schritten abgerufenen Informationen, um Ihre Headerinformationen zu erstellen.
 
-    -   Vereinigte Staaten (Süden)
-
         ```
-        GET https://us-south.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   Vereinigte Staaten (Osten)
-
-        ```
-        GET https://us-east.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   Großbritannien (Süden)
-
-        ```
-        GET https://uk-south.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   Zentraleuropa
-
-        ```
-        GET https://eu-central.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   Asiatisch-pazifischer Raum (Süden)
-
-        ```
-        GET https://ap-south.containers.bluemix.net/v1/clusters
+        GET https://containers.bluemix.net/v1/clusters
         ```
         {: codeblock}
 
@@ -673,7 +657,7 @@ Die {{site.data.keyword.containershort_notm}}-API benötigt Headerinformationen,
         </tbody>
         </table>
 
-5.  Eine Liste von unterstützten APIs finden Sie in der [{{site.data.keyword.containershort_notm}}-API-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://us-south.containers.bluemix.net/swagger-api).
+5.  Eine Liste von unterstützten APIs finden Sie in der [{{site.data.keyword.containershort_notm}}-API-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://containers.bluemix.net/swagger-api).
 
 <br />
 
@@ -691,7 +675,7 @@ Führen Sie die folgenden Schritte aus, wenn Sie Ihre IAM-Tokens aktualisieren m
 1.  Generieren Sie ein neues IAM-Zugriffstoken. Ersetzen Sie _&lt;iam-aktualisierungstoken&gt;_ durch das IAM-Aktualisierungstoken, das Sie bei der Authentifizierung bei {{site.data.keyword.Bluemix_notm}} erhalten haben.
 
     ```
-    POST https://iam.ng.bluemix.net/oidc/token
+    POST https://iam.bluemix.net/identity/token
     ```
     {: codeblock}
 

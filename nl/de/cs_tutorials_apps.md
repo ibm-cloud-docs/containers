@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-14"
+lastupdated: "2017-12-08"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -825,112 +825,45 @@ Serviceberechtigungsnachweise unter Verwendung des Datenträgermountpfads suchen
 ### Lerneinheit 3b. Aktive Bereitstellung von 'Watson Tone Analyzer' aktualisieren
 {: #lesson3b}
 
-Während der Ausführung einer Bereitstellung können Sie die Bereitstellung durch Änderung von Werten in der Pod-Vorlage bearbeiten. In dieser Lerneinheit aktualisieren Sie das verwendete Image.
+Während der Ausführung einer Bereitstellung können Sie die Bereitstellung durch Änderung von Werten in der Pod-Vorlage bearbeiten. In dieser Lerneinheit aktualisieren Sie das verwendete Image. Die PR-Firma möchte die App in der Bereitstellung ändern. 
 
-1.  Ändern Sie den Namen des Image. Das PR-Unternehmen möchte eine andere App in derselben Bereitstellung ausprobieren, aber die Änderungen rückgängig machen können, falls ein Problem mit der neuen App auftritt.
+Ändern Sie den Namen des Image: 
 
-    1.  Öffnen Sie das Konfigurationsscript für die aktive Bereitstellung.
+1.  Öffnen Sie die Konfigurationsdetails für die aktive Bereitstellung. 
 
-        ```
-        kubectl edit deployment/watson-talk-pod
-        ```
-        {: pre}
+    ```
+    kubectl edit deployment/watson-talk-pod
+    ```
+    {: pre}
 
-        Abhängig vom verwendeten Betriebssystem wird ein Editor vom Typ 'vi' oder ein Texteditor geöffnet.
+    Abhängig vom verwendeten Betriebssystem wird ein Editor vom Typ 'vi' oder ein Texteditor geöffnet.
 
-    2.  Ändern Sie den Namen des Image in das 'ibmliberty'-Image.
+2.  Ändern Sie den Namen des Image in das 'ibmliberty'-Image.
 
-        ```
-        spec:
+    ```
+    spec:
               containers:
               - image: registry.<region>.bluemix.net/ibmliberty:latest
-        ```
-        {: codeblock}
+    ```
+    {: codeblock}
 
-    3.  Speichern Sie die Änderungen und beenden Sie den Editor.
+3.  Speichern Sie die Änderungen und beenden Sie den Editor.
 
-    4.  Wenden Sie die Änderungen im Konfigurationsscript auf die aktive Bereitstellung an.
+4.  Wenden Sie die Änderungen auf die aktive Bereitstellung an.
 
-        ```
-        kubectl rollout status deployment/watson-talk-pod
-        ```
-        {: pre}
+    ```
+    kubectl rollout status deployment/watson-talk-pod
+    ```
+    {: pre}
 
-        Warten Sie die Bestätigung ab, dass der Rollout vollständig abgeschlossen wurde.
+    Warten Sie die Bestätigung ab, dass der Rollout vollständig abgeschlossen wurde.
 
-        ```
-        deployment "watson-talk-pod" successfully rolled out
-        ```
-        {: screen}
+    ```
+    deployment "watson-talk-pod" successfully rolled out
+    ```
+    {: screen}
 
-        Wenn Sie eine Änderung implementieren, wird ein weiterer Pod von Kubernetes erstellt getestet. Wenn der Test erfolgreich ist, wird der alte Pod entfernt.
-
-    5.  Wenn die Änderungen die Erwartungen nicht erfüllen, können sie rückgängig gemacht werden. Stellen Sie sich vor, dass jemand im PR-Unternehmen bei den App-Änderungen ein Fehler unterlaufen ist
-und es daher erforderlich ist, zur vorherigen Bereitstellung zurückzukehren.
-
-        1.  Zeigen Sie die Revisionsnummern an, um die Anzahl der vorherigen Bereitstellungen herauszufinden. Die aktuelle Revision hat die höchste Versionsnummer. In diesem Beispiel war Revision 1 die ursprüngliche Bereitstellung und
-Revision 2 ist die Imageänderung, die Sie im vorherigen Schritt vorgenommen haben.
-
-            ```
-            kubectl rollout history deployment/watson-talk-pod
-            ```
-            {: pre}
-
-            Ausgabe:
-
-            ```
-            deployments "watson-talk-pod"
-            REVISION CHANGE-CAUSE
-            1          <keine>
-            2          <keine>
-
-            ```
-            {: screen}
-
-        2.  Führen Sie den folgenden Befehl aus, um die Bereitstellung auf die vorherige Revision zurückzusetzen. Es wird wieder ein weiterer Pod von Kubernetes erstellt und getestet. Wenn der Test erfolgreich ist, wird der alte Pod entfernt.
-
-            ```
-            kubectl rollout undo deployment/watson-talk-pod --to-revision=1
-            ```
-            {: pre}
-
-            Ausgabe:
-
-            ```
-            deployment "watson-talk-pod" rolled back
-            ```
-            {: screen}
-
-        3.  Notieren Sie sich den Namen des Pods für den nächsten Schritt.
-
-            ```
-            kubectl get pods
-            ```
-            {: pre}
-
-            Ausgabe:
-
-            ```
-            NAME                              READY     STATUS    RESTARTS   AGE
-            watson-talk-pod-2511517105-6tckg  1/1       Running   0          2m
-            ```
-            {: screen}
-
-        4.  Zeigen Sie die Details des Pod an und überprüfen Sie, dass die Änderungen am Image rückgängig gemacht wurden.
-
-            ```
-            kubectl describe pod <podname>
-            ```
-            {: pre}
-
-            Ausgabe:
-
-            ```
-            Image: registry.<region>.bluemix.net/namespace/watson-talk
-            ```
-            {: screen}
-
-2.  Optional: Wiederholen Sie die Änderungen für die Bereitstellung 'watson-pod'.
+    Wenn Sie eine Änderung implementieren, wird ein weiterer Pod von Kubernetes erstellt getestet. Wenn der Test erfolgreich ist, wird der alte Pod entfernt.
 
 [Testen Sie Ihr Wissen in einem Quiz! ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 

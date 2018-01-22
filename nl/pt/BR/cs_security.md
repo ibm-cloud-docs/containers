@@ -1,8 +1,6 @@
 ---
 
-copyright:
-  years: 2014, 2017
-lastupdated: "2017-11-16"
+copyright: years: 2014, 2017 lastupdated: "2017-12-13"
 
 ---
 
@@ -22,12 +20,19 @@ lastupdated: "2017-11-16"
 É possível usar recursos de segurança integrados para análise de risco e proteção de segurança. Esses recursos ajudam você a proteger a sua infraestrutura de cluster e a comunicação de rede, a isolar os seus recursos de cálculo e a assegurar a conformidade de segurança em seus componentes de infraestrutura e implementações de contêiner.
 {: shortdesc}
 
-No diagrama a seguir, é possível ver recursos de segurança que são agrupados por mestre do Kubernetes, nós do trabalhador e imagens de contêiner.  
-<img src="images/cs_security.png" width="400" alt="{{site.data.keyword.containershort_notm}} segurança do cluster" style="width:400px; border-style: none"/>
+## Segurança por componente de cluster
+{: #cs_security_cluster}
+
+Cada cluster do {{site.data.keyword.containerlong_notm}} possui recursos de segurança integrados para seus nós [principal](#cs_security_master) e [trabalhador](#cs_security_worker). Se você tiver um firewall, será necessário acessar o balanceamento de carga de fora do cluster ou desejar executar os comandos `kubectl` de seu sistema local quando as políticas de rede corporativa impedirem o acesso aos terminais de Internet pública, [abra portas em seu firewall](#opening_ports). Se você deseja conectar os apps em seu cluster a uma rede no local ou a outros apps externos para seu cluster, [configure a conectividade da VPN](#vpn).
+{: shortdesc}
+
+No diagrama a seguir, é possível ver recursos de segurança que são agrupados por mestre do Kubernetes, nós do trabalhador e imagens de contêiner.
+
+<img src="images/cs_security.png" width="400" alt="{{site.data.keyword.containershort_notm}} cluster security" style="width:400px; border-style: none"/>
 
 
   <table summary="A primeira linha na tabela abrange ambas as colunas. As linhas restantes devem ser lidas da esquerda para a direita, com o local do servidor na coluna um e endereços IP para corresponder na coluna dois.">
-  <caption>Recursos de segurança</caption>
+  <caption>Tabela 1. Recursos de segurança</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> Configurações de segurança de cluster integrado no {{site.data.keyword.containershort_notm}}</th>
   </thead>
@@ -47,10 +52,7 @@ No diagrama a seguir, é possível ver recursos de segurança que são agrupados
   </tbody>
 </table>
 
-<br />
-
-
-## Mestre do Kubernetes
+### Mestre do Kubernetes
 {: #cs_security_master}
 
 Revise os recursos de segurança integrados do mestre do Kubernetes para proteger o mestre do Kubernetes e para assegurar a comunicação de rede de cluster.
@@ -84,7 +86,7 @@ para atingir o estado desejado.</li>
 <br />
 
 
-## Nós do trabalhador
+### Nós do trabalhador
 {: #cs_security_worker}
 
 Revise os recursos integrados de segurança do nó do trabalhador para proteger o ambiente do nó do trabalhador e assegurar o isolamento de recurso, rede e armazenamento.
@@ -94,26 +96,178 @@ Revise os recursos integrados de segurança do nó do trabalhador para proteger 
   <dt>Isolamento de infraestrutura de cálculo, rede e armazenamento</dt>
     <dd>Ao criar um cluster, as máquinas virtuais são provisionadas como nós do trabalhador na conta de infraestrutura do IBM Cloud (SoftLayer) do cliente ou na conta de infraestrutura dedicada do IBM Cloud (SoftLayer) pela IBM. Os nós do trabalhador são dedicados a um cluster e não hospedam cargas de outros clusters.</br> Cada conta do {{site.data.keyword.Bluemix_notm}} é configurada com VLANs de infraestrutura do IBM Cloud (SoftLayer) para assegurar o desempenho e o isolamento da rede de qualidade nos nós do trabalhador. </br>Para persistir dados em seu cluster, é possível provisionar armazenamento de arquivo baseado em NFS dedicado da infraestrutura do IBM Cloud (SoftLayer) e alavancar os recursos de segurança de dados integrados dessa plataforma.</dd>
   <dt>Configuração de nó do trabalhador seguro</dt>
-    <dd>Cada nó do trabalhador é configurado com um sistema operacional Ubuntu que não pode ser mudado pelo usuário. Para proteger o sistema operacional dos nós do trabalhador de potenciais ataques, cada nó do trabalhador é definido com configurações de firewall de especialista que são impingidas por regras iptable do Linux.</br> Todos os contêineres que são executados no Kubernetes são protegidos pelas configurações de política de rede Calico que são configuradas em cada nó do trabalhador durante a criação de cluster. Essa configuração assegura a comunicação de rede segura entre os nós do trabalhador e os pods. Para restringir ainda mais as ações que um contêiner pode executar no nó do trabalhador, os usuários podem escolher configurar [políticas de AppArmor ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tutorials/clusters/apparmor/) nos nós do trabalhador.</br> Por padrão, o acesso SSH para o usuário raiz é desativado no nó do trabalhador. Se desejar instalar recursos adicionais no nó do trabalhador, será possível usar [conjuntos de daemons do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset) para tudo o que você desejar executar em cada nó do trabalhador ou [tarefas do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) para qualquer ação única que precisar ser executada.</dd>
+    <dd>Cada nó do trabalhador é configurado com um sistema operacional Ubuntu que não pode ser mudado pelo usuário. Para proteger o sistema operacional dos nós do trabalhador de potenciais ataques, cada nó do trabalhador é definido com configurações de firewall de especialista que são impingidas por regras iptable do Linux.</br> Todos os contêineres que são executados no Kubernetes são protegidos pelas configurações de política de rede Calico que são configuradas em cada nó do trabalhador durante a criação de cluster. Essa configuração assegura a comunicação de rede segura entre os nós do trabalhador e os pods. Para restringir ainda mais as ações que um contêiner pode executar no nó do trabalhador, os usuários podem escolher configurar [políticas de AppArmor ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tutorials/clusters/apparmor/) nos nós do trabalhador.</br> Acesso SSH é desativado no nó do trabalhador. Se desejar instalar recursos adicionais no nó do trabalhador, será possível usar [conjuntos de daemons do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset) para tudo o que você desejar executar em cada nó do trabalhador ou [tarefas do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) para qualquer ação única que precisar ser executada.</dd>
   <dt>Conformidade de segurança do nó do trabalhador do Kubernetes</dt>
-    <dd>A IBM trabalha com as equipes consultivas de segurança interna e externa para resolver vulnerabilidades de conformidade de segurança em potencial. A IBM mantém o acesso SSH aos nós do trabalhador para implementar atualizações e correções de segurança no sistema operacional.</br> <b>Importante</b>: reinicialize os nós do trabalhador regularmente para assegurar a instalação das atualizações e correções de segurança que são implementadas automaticamente no sistema operacional. A IBM não reinicializa seus nós do trabalhador.</dd>
+    <dd>A IBM trabalha com as equipes consultivas de segurança interna e externa para resolver vulnerabilidades de conformidade de segurança em potencial. A IBM mantém o acesso aos nós do trabalhador para implementar atualizações e correções de segurança para o sistema operacional.</br> <b>Importante</b>: reinicialize os nós do trabalhador regularmente para assegurar a instalação das atualizações e correções de segurança que são implementadas automaticamente no sistema operacional. A IBM não reinicializa seus nós do trabalhador.</dd>
+  <dt>Disco criptografado</dt>
+  <dd>Por padrão, o {{site.data.keyword.containershort_notm}} fornece duas partições de dados criptografados de SSD local para todos os nós do trabalhador quando provisionados. A primeira partição não é criptografada e a segunda partição montada em _/var/lib/docker_ é desbloqueada quando provisionada usando chaves de criptografia LUKS. Cada trabalhador em cada cluster do Kubernetes tem sua própria chave de criptografia LUKS exclusiva, gerenciada pelo {{site.data.keyword.containershort_notm}}. Ao criar um cluster ou incluir um nó do trabalhador em um cluster existente, as chaves são obtidas de forma segura e, depois, descartadas após o disco criptografado ser desbloqueado.
+  <p><b>Observação</b>: a criptografia pode impactar o desempenho de E/S do disco. Para cargas de trabalho que requerem E/S de disco de alto desempenho, teste um cluster com criptografia ativada e desativada para ajudá-lo a decidir se deseja desativar a criptografia.</p>
+  </dd>
   <dt>Suporte para firewalls de rede da infraestrutura do IBM Cloud (SoftLayer)</dt>
-    <dd>O {{site.data.keyword.containershort_notm}} é compatível com todas as [ofertas de firewall do IBM Cloud (SoftLayer) ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/cloud-computing/bluemix/network-security). No {{site.data.keyword.Bluemix_notm}} Public, é possível configurar um firewall com políticas de rede customizadas para fornecer segurança de rede dedicada para seu cluster e para detectar e corrigir intrusão de rede. Por exemplo, é possível optar por configurar um [Vyatta ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://knowledgelayer.softlayer.com/topic/vyatta-1) para agir como seu firewall e bloquear tráfego indesejado. Ao configurar um firewall, [deve-se também abrir as portas e os endereços IP necessários](#opening_ports) para cada região para que o mestre e os nós do trabalhador possam se comunicar. No {{site.data.keyword.Bluemix_dedicated_notm}}, os firewalls, DataPower, Fortigate e DNS já estão configurados como parte da implementação de ambiente dedicado padrão.</dd>
+    <dd>O {{site.data.keyword.containershort_notm}} é compatível com todas as [ofertas de firewall do IBM Cloud (SoftLayer) ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/cloud-computing/bluemix/network-security). No {{site.data.keyword.Bluemix_notm}} Public, é possível configurar um firewall com políticas de rede customizadas para fornecer segurança de rede dedicada para seu cluster e para detectar e corrigir intrusão de rede. Por exemplo, é possível optar por configurar um [Vyatta ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://knowledgelayer.softlayer.com/topic/vyatta-1) para agir como seu firewall e bloquear tráfego indesejado. Ao configurar um firewall, [deve-se também abrir as portas e os endereços IP necessários](#opening_ports) para cada região para que o mestre e os nós do trabalhador possam se comunicar.</dd>
   <dt>Manter os serviços privados ou expor os serviços e apps seletivamente para a Internet pública</dt>
     <dd>É possível escolher manter seus serviços e apps privados e alavancar os recursos de segurança integrados descritos neste tópico para assegurar uma comunicação segura entre os nós do trabalhador e os pods. Para expor os serviços e apps para a Internet pública, é possível alavancar o suporte do Ingresso e do balanceador de carga para tornar os seus serviços publicamente disponíveis com segurança.</dd>
   <dt>Conecte com segurança seus nós do trabalhador e apps a um data center local</dt>
-    <dd>É possível instalar um Dispositivo de gateway Vyatta ou um Dispositivo Fortigate para configurar um terminal VPN IPSec que conecte o cluster do Kubernetes a um data center local. Em um túnel criptografado, todos os serviços executados no cluster do Kubernetes podem se comunicar de forma segura com apps locais, como diretórios do usuário, bancos de dados ou mainframes. Para obter mais informações, veja [Conectando um cluster a um data center local ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/).</dd>
+  <dd>Para conectar seus nós do trabalhador e apps a um data center no local, é possível configurar um terminal de VPN IPSec com um serviço Strongswan ou com um dispositivo de gateway Vyatta ou um dispositivo Fortigate.<br><ul><li><b>Serviço VPN do Strongswan IPSec</b>: é possível configurar um [Serviço VPN do Strongswan IPSec ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.strongswan.org/) que conecta de forma segura seu cluster do Kubernetes a uma rede no local. O serviço VPN do Strongswan IPSec fornece um canal de comunicação seguro de ponta a ponta na Internet, que é baseado no conjunto de protocolo padrão de mercado Internet Protocol Security (IPsec). Para configurar uma conexão segura entre seu cluster e uma rede no local, deve-se ter um gateway da VPN IPsec ou um servidor de infraestrutura do IBM Cloud (SoftLayer) instalado em seu datacenter no local. Então, é possível [configurar e implementar o serviço VPN do Strongswan IPSec](cs_security.html#vpn) em um pod do Kubernetes.</li><li><b>Dispositivo de gateway Vyatta ou dispositivo Fortigate</b>: se você tiver um cluster maior, será possível escolher configurar um Dispositivo de gateway Vyatta ou um Dispositivo Fortigate para configurar um terminal de VPN IPSec. Para obter mais informações, consulte esta postagem do blog em [Conectando um cluster a um data center local![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/).</li></ul></dd>
   <dt>Monitoramento contínuo e criação de log de atividade do cluster</dt>
-    <dd>Para clusters padrão, todos os eventos relacionados ao cluster, como incluir um nó do trabalhador, progresso de atualização contínua ou informações de uso de capacidade, são registrados e monitorados pelo {{site.data.keyword.containershort_notm}} e enviados para o IBM Monitoring and Logging Service.</dd>
+    <dd>Para clusters padrão, todos os eventos relacionados ao cluster, como incluir um nó do trabalhador, atualizar continuamente o progresso ou as informações de uso de capacidade podem ser registrados e monitorados pelo {{site.data.keyword.containershort_notm}} e enviados para {{site.data.keyword.loganalysislong_notm}} e o {{site.data.keyword.monitoringlong_notm}}. Para obter informações sobre como configurara criação de log e o monitoramento, consulte [Configurando clusters de log](https://console.bluemix.net/docs/containers/cs_cluster.html#cs_logging) e [Configurando o monitoramento de cluster](https://console.bluemix.net/docs/containers/cs_cluster.html#cs_monitoring).</dd>
 </dl>
 
-### Abrindo portas e endereços IP necessários em seu firewall
+### Imagens
+{: #cs_security_deployment}
+
+Gerencie a segurança e integridade de suas imagens com recursos de segurança integrada.
+{: shortdesc}
+
+<dl>
+<dt>Repositório seguro de imagem privada do Docker no {{site.data.keyword.registryshort_notm}}</dt>
+<dd>É possível configurar o seu próprio repositório de imagem do Docker em um registro de imagem privada de múltiplos locatários, altamente disponível e escalável que é hospedado pela IBM para construir, armazenar com segurança e compartilhar imagens do Docker entre usuários de cluster.</dd>
+
+<dt>Conformidade de segurança de imagem</dt>
+<dd>Quando você usar o {{site.data.keyword.registryshort_notm}}, será possível alavancar a varredura de segurança integrada que é fornecida pelo Vulnerability Advisor. Cada imagem enviada por push para o seu namespace é varrida automaticamente para obter vulnerabilidades com relação a um banco de dados de problemas conhecidos do CentOS, Debian, Red Hat e Ubuntu. Se vulnerabilidades forem localizadas, o Vulnerability Advisor fornecerá instruções de como resolvê-las para assegurar a integridade e segurança da imagem.</dd>
+</dl>
+
+Para visualizar a avaliação de vulnerabilidade para suas imagens, [revise a documentação do Vulnerability Advisor](/docs/services/va/va_index.html#va_registry_cli).
+
+<br />
+
+
+## Abrindo portas e endereços IP necessários em seu firewall
 {: #opening_ports}
 
 Revise essas situações nas quais pode ser necessário abrir portas e endereços IP específicos em seus firewalls:
-* Para permitir a comunicação entre o mestre do Kubernetes e os nós do trabalhador quando um firewall é configurado para os nós do trabalhador ou as configurações de firewall são customizadas em sua conta de infraestrutura do IBM Cloud (SoftLayer)
-* Para acessar o balanceador de carga ou controlador de Ingresso de fora do cluster
-* Para executar comandos `kubectl` por meio de seu sistema local quando as políticas de rede corporativa impedirem o acesso aos terminais de Internet pública por proxies ou firewalls
+* [Para executar comandos `bx` ](#firewall_bx) de seu sistema local quando as políticas de rede corporativa impedem o acesso aos terminais de Internet pública por meio de proxies ou de firewalls.
+* [Para executar comandos `kubectl`](#firewall_kubectl) em seu sistema local quando políticas de rede corporativas evitam acesso a terminais de Internet pública por meio de proxies ou de firewalls.
+* [Para executar comandos `calicoctl` ](#firewall_calicoctl)de seu sistema local quando as políticas de rede corporativa impedem o acesso aos terminais de Internet pública por meio de proxies ou de firewalls.
+* [Para permitir a comunicação entre o mestre do Kubernetes e os nós do trabalhador](#firewall_outbound) quando um firewall for configurado para os nós do trabalhador ou as configurações de firewall forem customizadas em sua conta de infraestrutura do IBM Cloud (SoftLayer).
+* [Para acessar o serviço NodePort, o serviço LoadBalancer ou o Ingress de fora do cluster](#firewall_inbound).
+
+### Executando comandos `bx cs` por trás de um firewall
+{: #firewall_bx}
+
+Se as políticas de rede corporativa impedirem o acesso de seu sistema local a terminais públicos por proxies ou firewalls, para executar os comandos `bx cs`, deve-se permitir acesso TCP ao {{site.data.keyword.containerlong_notm}}.
+
+1. Permita o acesso a `containers.bluemix.net` na porta 443.
+2. Verifique sua conexão. Se o acesso for configurado corretamente, navios serão exibidos na saída.
+   ```
+   curl https://containers.bluemix.net/v1/
+   ```
+   {: pre}
+
+   Saída de exemplo:
+   ```
+                                     )___(
+                              _______/__/_
+                     ___     /===========|   ___
+    ____       __   [\\\]___/____________|__[///]   __
+    \   \_____[\\]__/___________________________\__[//]___
+     \                                                    |
+      \                                                  /
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   ```
+   {: screen}
+
+### Executando comandos `kubectl` por trás de um firewall
+{: #firewall_kubectl}
+
+Se as políticas de rede corporativa impedirem o acesso de seu sistema local a terminais públicos por proxies ou firewalls, para executar os comandos `kubectl`, deve-se permitir o acesso TCP para o cluster.
+
+Quando um cluster é criado, a porta na URL principal é designada aleatoriamente de 20000 a 32767. É possível escolher abrir o intervalo de portas 20000 a 32767 para qualquer cluster que pode ser criado ou é possível escolher permitir o acesso a um cluster existente específico.
+
+Antes de iniciar, permita acesso aos comandos [executar `bx cs`](#firewall_bx).
+
+Para permitir acesso para um cluster específico:
+
+1. Efetue login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira suas credenciais do {{site.data.keyword.Bluemix_notm}} quando solicitadas. Se você tiver uma conta federada, inclua a opção `--sso`.
+
+    ```
+    bx login [--sso]
+    ```
+    {: pre}
+
+2. Selecione a região em que seu cluster está dentro.
+
+   ```
+   bx cs region-set
+   ```
+   {: pre}
+
+3. Obtenha o nome do cluster.
+
+   ```
+   bx cs clusters
+   ```
+   {: pre}
+
+4. Recupere a **URL principal** para seu cluster.
+
+   ```
+   bx cs cluster-get <cluster_name_or_id>
+   ```
+   {: pre}
+
+   Saída de exemplo:
+   ```
+   ...
+   URL principal:		https://169.46.7.238:31142
+   ...
+   ```
+   {: screen}
+
+5. Permita acesso à **URL principal** na porta, como a porta `31142` no exemplo anterior.
+
+6. Verifique sua conexão.
+
+   ```
+   curl --insecure <master_URL>/version
+   ```
+   {: pre}
+
+   Exemplo de comando:
+   ```
+   curl --insecure https://169.46.7.238:31142/version
+   ```
+   {: pre}
+
+   Saída de exemplo:
+   ```
+   {
+     "major": "1",
+     "minor": "7+",
+     "gitVersion": "v1.7.4-2+eb9172c211dc41",
+     "gitCommit": "eb9172c211dc4108341c0fd5340ee5200f0ec534",
+     "gitTreeState": "clean",
+     "buildDate": "2017-11-16T08:13:08Z",
+     "goVersion": "go1.8.3",
+     "compiler": "gc",
+     "platform": "linux/amd64"
+   }
+   ```
+   {: screen}
+
+7. Opcional: repita essas etapas para cada cluster que você precisa expor.
+
+### Executando comandos `calicoctl` por trás de um firewall
+{: #firewall_calicoctl}
+
+Se as políticas de rede corporativa impedem o acesso de seu sistema local a terminais públicos por proxies ou firewalls, para executar comandos `calicoctl`, deve-se permitir acesso TCP aos comandos do Calico.
+
+Antes de iniciar, permita acesso aos comandos [`bx` ](#firewall_bx) e aos comandos [`kubectl`](#firewall_kubectl).
+
+1. Recupere o endereço IP da URL principal que você usou para permitir os comandos [`kubectl`](#firewall_kubectl).
+
+2. Obtenha a porta para ETCD.
+
+  ```
+  kubectl get cm -n kube-system calico-config -o yaml | grep etcd_endpoints
+  ```
+  {: pre}
+
+3. Permita acesso para as políticas do Calico por meio do endereço IP principal da URL e a porta ETCD.
+
+### Permitindo o cluster para acessar recursos de infraestrutura e outros serviços
+{: #firewall_outbound}
 
   1.  Observe o endereço IP público para todos os nós do trabalhador no cluster.
 
@@ -122,7 +276,7 @@ Revise essas situações nas quais pode ser necessário abrir portas e endereço
       ```
       {: pre}
 
-  2.  Em seu firewall para conectividade OUTBOUND de seus nós do trabalhador, permita o tráfego de rede de saída do nó do trabalhador de origem para o intervalo de portas TCP/UDP de destino de 20000 a 32767 e porta 443 para `<each_worker_node_publicIP>` e os endereços IP e grupos de rede a seguir.
+  2.  Permita tráfego de rede de saída da origem _<each_worker_node_publicIP>_ para o intervalo de portas TCP/UDP de destino 20000 a 32767 e a porta 443 e os seguintes endereços IP e grupos de rede. Se você tiver um firewall corporativo que impede sua máquina local de acessar terminais de Internet pública, execute essa etapa para os nós do trabalhador de origem e sua máquina local.
       - **Importante**: deve-se permitir o tráfego de saída para a porta 443 para todos os locais dentro da região, para equilibrar a carga durante o processo de autoinicialização. Por exemplo, se o seu cluster estiver no Sul dos EUA, deve-se permitir o tráfego da porta 443 para os endereços IP para todos os locais (dal10, dal12 e dal13).
       <p>
   <table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
@@ -140,17 +294,17 @@ Revise essas situações nas quais pode ser necessário abrir portas e endereço
       <tr>
          <td>AP Sul</td>
          <td>mel01<br>syd01<br>syd04</td>
-         <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19</code></td>
+         <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19, 130.198.66.34</code></td>
       </tr>
       <tr>
          <td>União Europeia Central</td>
-         <td>ams03<br>fra02<br>par01</td>
-         <td><code>169.50.169.110</code><br><code>169.50.56.174</code><br><code>159.8.86.149</code></td>
+         <td>ams03<br>fra02<br>mil01<br>par01</td>
+         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.170, 169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
         </tr>
       <tr>
         <td>Sul do Reino Unido</td>
         <td>lon02<br>lon04</td>
-        <td><code>159.122.242.78</code><br><code>158.175.65.170</code></td>
+        <td><code>159.122.242.78</code><br><code>158.175.65.170, 158.175.74.170, 158.175.76.2</code></td>
       </tr>
       <tr>
         <td>Leste dos EUA</td>
@@ -160,7 +314,7 @@ Revise essas situações nas quais pode ser necessário abrir portas e endereço
       <tr>
         <td>SUL dos EUA</td>
         <td>dal10<br>dal12<br>dal13</td>
-        <td><code>169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
+        <td><code>169.47.234.18, 169.46.7.234</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
       </tr>
       </tbody>
     </table>
@@ -238,107 +392,239 @@ Revise essas situações nas quais pode ser necessário abrir portas e endereço
         <th>Endereço de criação de log</th>
         <th>Endereços IP de log</th>
         </thead>
-      <tbody>
-        <tr>
-         <td>União Europeia Central</td>
-         <td>ingest.logging.eu-de.bluemix.net</td>
-         <td><code>169.50.25.125</code></td>
-        </tr>
-        <tr>
-         <td>Sul do Reino Unido</td>
-         <td>ingest.logging.eu-gb.bluemix.net</td>
-         <td><code>169.50.115.113</code></td>
-        </tr>
-        <tr>
-          <td>Leste dos EUA, Sul dos EUA, AP Norte</td>
-          <td>ingest.logging.ng.bluemix.net</td>
-          <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
-         </tr>
-        </tbody>
-      </table>
+        <tbody>
+          <tr>
+            <td>Leste dos EUA, Sul dos EUA</td>
+            <td>ingest.logging.ng.bluemix.net</td>
+            <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
+           </tr>
+          <tr>
+           <td>UE Central, Sul do Reino Unido</td>
+           <td>ingest-eu-fra.logging.bluemix.net</td>
+           <td><code>158.177.88.43</code><br><code>159.122.87.107</code></td>
+          </tr>
+          <tr>
+           <td>AP Sul, AP Norte</td>
+           <td>ingest-au-syd.logging.bluemix.net</td>
+           <td><code>130.198.76.125</code><br><code>168.1.209.20</code></td>
+          </tr>
+         </tbody>
+       </table>
 </p>
 
   5. Para firewalls privados, permita os intervalos de IP privado da infraestrutura apropriada do IBM Cloud (SoftLayer). Consulte [este link](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) iniciando com a seção **Rede de backend (privada)**.
-      - Inclua todos os [locais dentro das regiões](cs_regions.html#locations) que você estiver usando
-      - Observe que deve-se incluir o local de dal01 (data center)
-      - Abra as portas 80 e 443 para permitir o processo de autoinicialização do cluster
+      - Inclua todos os [locais dentro das regiões](cs_regions.html#locations) que você está usando.
+      - Observe que se deve incluir o local de dal01 (data center).
+      - Abra as portas 80 e 443 para permitir o processo de autoinicialização do cluster.
 
-  6. Opcional: para acessar o balanceador de carga de fora da VLAN, abra a porta para o tráfego de rede recebido no endereço IP específico desse balanceador de carga.
+  6. Para criar solicitações de volume persistentes para armazenamento de dados, permita acesso de egresso por meio de seu firewall para [endereços IP da infraestrutura do IBM Cloud (SoftLayer)](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) do local (data center) em que seu cluster está.
+      - Para localizar o local (data center) de seu cluster, execute `bx cs clusters`.
+      - Permita acesso ao intervalo de IP para a **Rede frontend (pública)** e a **Rede backend (privada)**.
+      - Observe que se deve incluir o local de dal01 (data center) para a **Rede backend (privada)**.
 
-  7. Opcional: para acessar o controlador do Ingresso de fora da VLAN, abra a porta 80 ou 443 para o tráfego de rede recebido no endereço IP específico desse controlador do Ingresso, dependendo da porta que foi configurada.
+### Acessando o NodePort, o balanceador de carga e os serviços do Ingress de fora do cluster
+{: #firewall_inbound}
 
-## Restringindo o tráfego de rede para os nós do trabalhador de borda
-{: #cs_edge}
+É possível permitir acesso de entrada para o NodePort, o balanceador de carga e os serviços do Ingress.
 
-Inclua o rótulo `dedicated=edge` em dois ou mais nós do trabalhador em seu cluster para assegurar que o Ingresso e os balanceadores de carga sejam implementados somente nesses nós do trabalhador.
+<dl>
+  <dt>Serviço NodePort</dt>
+  <dd>Abra a porta que você configurou quando implementou o serviço aos endereços IP públicos para todos os nós do trabalhador para permitir o tráfego. Para localizar a porta, execute `kubectl get svc`. A porta está no intervalo de 20000 a 32000.<dd>
+  <dt>Serviço LoadBalancer</dt>
+  <dd>Abra a porta que você configurou quando implementou o serviço para o endereço IP público do serviço do balanceador de carga.</dd>
+  <dt>Entrada</dt>
+  <dd>Abra a porta 80 para HTTP ou a porta 443 para HTTPS para o endereço IP para o balanceador de carga do aplicativo Ingress.</dd>
+</dl>
 
-Os nós do trabalhador de borda podem melhorar a segurança de seu cluster, permitindo que menos nós do trabalhador sejam acessados externamente e isolando a carga de trabalho de rede. Quando esses nós do trabalhador são marcados somente para rede, outras cargas de trabalho não podem consumir a CPU ou memória do nó do trabalhador e interferir na rede.
+<br />
+
+
+## Configurando o diagrama Helm da conectividade de VPN com a VPN do Strongswan IPSec
+{: #vpn}
+
+A conectividade da VPN permite que você conecte seguramente apps em um cluster do Kubernetes a uma rede no local. Também é possível conectar apps que são externos ao seu cluster para um app que está em execução dentro de seu cluster. Para configurar a conectividade VPN, é possível usar um diagrama Helm para configurar e implementar o [serviço Helm do Strongswan IPSec![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.strongswan.org/) dentro de um pod do Kubernetes. Todo o tráfego de VPN é, então, roteado por meio deste pod. Para obter mais informações sobre os comandos Helm usado para configurar o gráfico do Strongswan, consulte a [documentação do Helm ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.helm.sh/helm/).
 
 Antes de iniciar:
 
 - [Crie um cluster padrão.](cs_cluster.html#cs_cluster_cli)
-- Assegure-se de que seu cluster tem pelo menos uma VLAN pública. Os nós do trabalhador de borda não estão disponíveis para clusters somente com VLANs privadas.
+- [Se você estiver usando um cluster existente, atualize a versão 1.7.4 ou mais recente.](cs_cluster.html#cs_cluster_update)
+- O cluster deve ter pelo menos um endereço IP público disponível do balanceador de carga.
 - [Destine a CLI do Kubernetes para o cluster](cs_cli_install.html#cs_cli_configure).
 
+Para configurar a conectividade da VPN com o Strongswan:
 
-1. Liste todos os nós do trabalhador no cluster. Use o endereço IP privado da coluna **NAME** para identificar os nós. Selecione pelo menos dois nós do trabalhador para serem os nós do trabalhador de borda. Usar dois ou mais nós do trabalhador melhora a disponibilidade dos recursos de rede.
+1. Se ele ainda não estiver ativado, instale e inicialize o Helm para seu cluster.
 
-  ```
-  kubectl get nodes -L publicVLAN,privateVLAN,dedicated
-  ```
-  {: pre}
+    1. [Instale a CLI do Helm ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.helm.sh/using_helm/#installing-helm).
 
-2. Rotule os nós do trabalhador com `dedicated=edge`. Após um nó do trabalhador ser marcado com `dedicated=edge`, todo Ingresso subsequente e balanceadores de carga são implementados em um nó do trabalhador de borda.
+    2. Inicialize o Helm e instale o `tiller`.
 
-  ```
-  kubectl label nodes <node_name> <node_name2> dedicated=edge
-  ```
-  {: pre}
+        ```
+        helm init
+        ```
+        {: pre}
 
-3. Recupere todos os serviços existentes do balanceador de carga em seu cluster.
+    3. Verifique se o pod `tiller-deploy` tem o status `Running` em seu cluster.
 
-  ```
-  kubectl get services --all-namespaces -o jsonpath='{range .items[*]}kubectl get service -n {.metadata.namespace} {.metadata.name} -o yaml | kubectl apply -f - :{.spec.type},{end}' | tr "," "\n" | grep "LoadBalancer" | cut -d':' -f1
-  ```
-  {: pre}
+        ```
+        kubectl get pods -n kube-system -l app=helm
+        ```
+        {: pre}
 
-  Saída:
+        Saída de exemplo:
 
-  ```
-  kubectl get service -n <namespace> <name> -o yaml | kubectl apply -f
-  ```
-  {: screen}
+        ```
+        NAME                            READY     STATUS    RESTARTS   AGE
+        tiller-deploy-352283156-nzbcm   1/1       Running   0          10m
+        ```
+        {: screen}
 
-4. Usando a saída da etapa anterior, copie e cole cada linha `kubectl get service`. Esse comando reimplementa o balanceador de carga para um nó do trabalhador de borda. somente balanceadores de carga públicos precisam ser reimplementados.
+    4. Inclua o repositório Helm do {{site.data.keyword.containershort_notm}} para sua instância do Helm.
 
-  Saída:
+        ```
+        helm repo add bluemix  https://registry.bluemix.net/helm
+        ```
+        {: pre}
 
-  ```
-  service "<name>" configured
-  ```
-  {: screen}
+    5. Verifique se o gráfico do Strongswan está listado no repositório Helm.
 
-Você rotulou os nós do trabalhador com `dedicated=edge` e reimplementou todos os balanceadores de carga existentes e o Ingresso para os nós do trabalhador de borda. Em seguida, evite que outras [cargas de trabalho sejam executadas em nós do trabalhador de ponta](#cs_edge_workloads) e [bloqueiem o tráfego de entrada para as portas de nós em nós do trabalhador](#cs_block_ingress).
+        ```
+        helm search bluemix
+        ```
+        {: pre}
 
-### Evitar que cargas de trabalho sejam executadas em nós do trabalhador de borda
-{: #cs_edge_workloads}
+2. Salve as definições de configuração padrão para o diagrama Helm do Strongswan em um arquivo YAML local.
 
-Um dos benefícios de nós do trabalhador de borda é que esses nós do trabalhador podem ser especificados para executar somente serviços de rede. Usar a tolerância `dedicated=edge` significa que todos os serviços de balanceador de carga e de Ingresso são implementados somente nos nós do trabalhador rotulados. No entanto, para evitar que outras cargas de trabalho sejam executadas em nós do trabalhador de borda e consumam recursos do nó do trabalhador, deve-se usar [contaminações do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
+    ```
+    helm inspect values bluemix/strongswan > config.yaml
+    ```
+    {: pre}
 
-1. Liste todos os nós do trabalhador com o rótulo `edge`.
+3. Abra o arquivo `config.yaml` e faça as mudanças a seguir para os valores padrão de acordo com a configuração de VPN que você desejar. Se uma propriedade tiver configurado opções para valores, elas serão listadas em comentários sobre cada propriedade no arquivo. **Importante**: se não for necessário mudar uma propriedade, deixe um comentário nessa propriedade, colocando um `#` na frente dela.
 
-  ```
-  kubectl get nodes -L publicVLAN,privateVLAN,dedicated -l dedicated=edge
-  ```
-  {: pre}
+    <table>
+    <caption>Tabela 2. Entendendo os componentes de arquivo YAML</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>overRideIpsecConf</code></td>
+    <td>Se você tiver um arquivo <code>ipsec.conf</code> existente que você deseja usar, remova as chaves (<code>{}</code>) e inclua o conteúdo do arquivo após essa propriedade. Os conteúdos do arquivo devem ser indentados. **Observação:** se você usar seu próprio arquivo, quaisquer valores para as seções <code>ipsec</code>, <code>local</code> e <code>remote</code> não serão usadas.</td>
+    </tr>
+    <tr>
+    <td><code>overRideIpsecSecrets</code></td>
+    <td>Se você tiver um arquivo <code>ipsec.secrets</code> existente que deseja usar, remova as chaves (<code>{}</code>) e inclua o conteúdo do arquivo após essa propriedade. Os conteúdos do arquivo devem ser indentados. **Observação:** se você usar seu próprio arquivo, nenhum valor para a seção <code>preshared</code> será usado.</td>
+    </tr>
+    <tr>
+    <td><code>ipsec.keyexchange</code></td>
+    <td>Se seu terminal de túnel de VPN local não suportar o <code>ikev2</code> como um protocolo para inicializar a conexão, mude esse valor para <code>ikev1</code>.</td>
+    </tr>
+    <tr>
+    <td><code>ipsec.esp</code></td>
+    <td>Mude esse valor para a lista de algoritmos de criptografia/autenticação ESP que o seu terminal de túnel de VPN local usa para a conexão.</td>
+    </tr>
+    <tr>
+    <td><code>ipsec.ike</code></td>
+    <td>Mude esse valor para a lista de algoritmos de criptografia/autenticação IKE/ISAKMP SA que o seu terminal de túnel da VPN local usa para a conexão.</td>
+    </tr>
+    <tr>
+    <td><code>ipsec.auto</code></td>
+    <td>Se você deseja que o cluster inicie a conexão de VPN, mude esse valor para <code>start</code>.</td>
+    </tr>
+    <tr>
+    <td><code>local.subnet</code></td>
+    <td>Mude esse valor para a lista de CIDRs de sub-rede de cluster que deve ser exposta durante a conexão de VPN com a rede local. Essa lista pode incluir as seguintes sub-redes: <ul><li>O CIDR de sub-rede de pod do Kubernetes: <code>172.30.0.0/16</code></li><li>O CIDR de sub-rede do serviço do Kubernetes: <code>172.21.0.0/16</code></li><li>Se você tiver aplicativos expostos por um serviço NodePort na rede privada, o CIDR de sub-rede privada do nó do trabalhador. Para encontrar esse valor, execute <code>bx cs subnets | grep <xxx.yyy.zzz></code>, em que &lt;xxx.yyy.zzz&gt; são os três primeiros octectos do endereço IP privado do nó do trabalhador.</li><li>Se você tiver aplicativos expostos pelos serviços LoadBalancer na rede privada, os CIDRs de sub-rede privados ou gerenciados pelo usuário do cluster. Para encontrar esses valores, execute <code>bx cs cluster-get <cluster name> --showResources</code>. Na seção <b>VLANS</b>, procure os CIDRs que possuem um valor <b>público</b> de <code>false</code>.</li></ul></td>
+    </tr>
+    <tr>
+    <td><code>local.id</code></td>
+    <td>Mude esse valor para o identificador de sequência para o lado cluster do Kubernetes local que o seu terminal de túnel da VPN usa para a conexão.</td>
+    </tr>
+    <tr>
+    <td><code>remote.gateway</code></td>
+    <td>Mude esse valor para o endereço IP público para o gateway da VPN no local.</td>
+    </tr>
+    <td><code>remote.subnet</code></td>
+    <td>Mude esse valor para a lista de CIDRs de sub-rede privada local a qual os clusters do Kubernetes têm permissão para acessar.</td>
+    </tr>
+    <tr>
+    <td><code>remote.id</code></td>
+    <td>Mude esse valor para o identificador de sequência para o lado local remoto que o seu terminal de túnel da VPN usa para a conexão.</td>
+    </tr>
+    <tr>
+    <td><code>preshared.secret</code></td>
+    <td>Mude esse valor para o segredo pré-compartilhado que o gateway do terminal do túnel da VPN local usa para a conexão.</td>
+    </tr>
+    </tbody></table>
 
-2. Aplique uma contaminação a cada nó do trabalhador que evita que os pods sejam executados no nó do trabalhador e que remove os pods que não possuem o rótulo `edge` do nó do trabalhador. Os pods removidos são reimplementados em outros nós do trabalhador com capacidade.
+4. Salve o arquivo `config.yaml` atualizado.
 
-  ```
-  kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute
-  ```
+5. Instale o diagrama Helm em seu cluster com o arquivo `config.yaml` atualizado. As propriedades atualizadas são armazenadas em um mapa de configuração para seu gráfico.
 
-Agora, somente pods com a tolerância `dedicated=edge` são implementados em nós do trabalhador de borda.
+    ```
+    helm install -f config.yaml --namespace=kube-system --name=vpn bluemix/strongswan
+    ```
+    {: pre}
+
+6. Verifique o status de implementação do gráfico. Quando o gráfico estiver pronto, o campo **STATUS** perto da parte superior da saída terá um valor de `DEPLOYED`.
+
+    ```
+    helm status vpn
+    ```
+    {: pre}
+
+7. Quando o gráfico for implementado, verifique se as configurações atualizadas no arquivo `config.yaml` foram usadas.
+
+    ```
+    helm get values vpn
+    ```
+    {: pre}
+
+8. Teste a nova conectividade da VPN.
+    1. Se a VPN no gateway local não estiver ativo, inicie a VPN.
+
+    2. Configure a variável de ambiente `STRONGSWAN_POD`.
+
+        ```
+        export STRONGSWAN_POD=$(kubectl get pod -n kube-system -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
+        ```
+        {: pre}
+
+    3. Verifique o status da VPN. Um status de `ESTABLISHED` significa que a conexão de VPN foi bem-sucedida.
+
+        ```
+        kubectl exec -n kube-system  $STRONGSWAN_POD -- ipsec status
+        ```
+        {: pre}
+
+        Saída de exemplo:
+        ```
+        Security Associations (1 up, 0 connecting):
+            k8s-conn[1]: ESTABLISHED 17 minutes ago, 172.30.244.42[ibm-cloud]...192.168.253.253[on-prem]
+            k8s-conn{2}:  INSTALLED, TUNNEL, reqid 12, ESP in UDP SPIs: c78cb6b1_i c5d0d1c3_o
+            k8s-conn{2}:   172.21.0.0/16 172.30.0.0/16 === 10.91.152.128/26
+        ```
+        {: screen}
+
+        **Nota**:
+          - É altamente provável que a VPN não tenha um status de `ESTABLISHED` na primeira vez que você usa esse diagrama Helm. Você pode precisar verificar as configurações do terminal de VPN local e retornar para a etapa 3 para mudar o arquivo `config.yaml` várias vezes antes que a conexão seja bem-sucedida.
+          - Se o pod VPN está em um estado de `ERROR` ou continua travando e reiniciando, pode ser devido à validação do parâmetro das configurações `ipsec.conf` no mapa de configuração do gráfico. Para ver se este é o caso, verifique se há erros de validação nos logs do pod do Strongswan, executando `kubectl logs -n kube-system $STRONGSWAN_POD`. Se houver erros de validação, execute `helm delete --purge vpn`, retorne para a etapa 3 para corrigir os valores incorretos no arquivo `config.yaml` e repita as etapas 4 e 8. Se o seu cluster tem um alto número de nós do trabalhador, também será possível utilizar o `helm upgrade` para aplicar mais rapidamente suas mudanças, em vez de executar o `helm delete` e o `helm install`.
+
+    4. Quando a VPN tiver um status de `ESTABLISHED`, teste a conexão com o `ping`. O exemplo a seguir envia um ping do pod da VPN no cluster do Kubernetes para o endereço IP privado do gateway da VPN local. Certifique-se de que `remote.subnet` e `local.subnet` sejam especificados no arquivo de configuração e que a lista de sub-rede local inclua o endereço IP de origem do qual você está enviando o ping.
+
+        ```
+        kubectl exec -n kube-system  $STRONGSWAN_POD -- ping -c 3  <on-prem_gateway_private_IP>
+        ```
+        {: pre}
+
+Para desativar o serviço de VPN do Strongswan IPSec:
+
+1. Exclua o diagrama Helm.
+
+    ```
+    helm delete --purge vpn
+    ```
+    {: pre}
 
 <br />
 
@@ -370,12 +656,11 @@ Quando um cluster é criado, as políticas de rede padrão são configuradas aut
 
 As políticas padrão não são aplicadas a pods diretamente; elas são aplicadas à interface de rede pública de um nó do trabalhador usando um terminal de host do Calico. Quando um terminal de host é criado no Calico, todo o tráfego para/da interface de rede desse nó do trabalhador é bloqueado, a menos que o tráfego seja permitido por uma política.
 
-Observe que uma política para permitir SSH não existe, então o acesso SSH por meio da interface de rede pública é bloqueado, assim como todas as outras portas que não têm uma política para abri-los. O acesso SSH e outro acesso estão disponíveis na interface de rede privada de cada nó do trabalhador.
-
 **Importante:** não remova as políticas aplicadas a um terminal de host, a menos que você entenda completamente a política e saiba que não precisará do tráfego que está sendo permitido pela política.
 
 
  <table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
+ <caption>Tabela 3. Políticas padrão para cada cluster</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> Políticas padrão para cada cluster</th>
   </thead>
@@ -696,18 +981,76 @@ As políticas de rede Calico `preDNAT` geram regras iptables com base em um [rec
 <br />
 
 
-## Imagens
-{: #cs_security_deployment}
 
-Gerencie a segurança e integridade de suas imagens com recursos de segurança integrada.
-{: shortdesc}
+## Restringindo o tráfego de rede para os nós do trabalhador de borda
+{: #cs_edge}
 
-### Repositório seguro de imagem privada do Docker no {{site.data.keyword.registryshort_notm}}:
+Inclua o rótulo `dedicated=edge` em dois ou mais nós do trabalhador em seu cluster para assegurar que o Ingresso e os balanceadores de carga sejam implementados somente nesses nós do trabalhador.
 
- É possível configurar o seu próprio repositório de imagem do Docker em um registro de imagem privada de múltiplos locatários, altamente disponível e escalável que é hospedado pela IBM para construir, armazenar com segurança e compartilhar imagens do Docker entre usuários de cluster.
+Os nós do trabalhador de borda podem melhorar a segurança de seu cluster, permitindo que menos nós do trabalhador sejam acessados externamente e isolando a carga de trabalho de rede. Quando esses nós do trabalhador são marcados somente para rede, outras cargas de trabalho não podem consumir a CPU ou memória do nó do trabalhador e interferir na rede.
 
-### Conformidade de segurança de imagem:
+Antes de iniciar:
 
-Quando você usar o {{site.data.keyword.registryshort_notm}}, será possível alavancar a varredura de segurança integrada que é fornecida pelo Vulnerability Advisor. Cada imagem enviada por push para o seu namespace é varrida automaticamente para obter vulnerabilidades com relação a um banco de dados de problemas conhecidos do CentOS, Debian, Red Hat e Ubuntu. Se vulnerabilidades forem localizadas, o Vulnerability Advisor fornecerá instruções de como resolvê-las para assegurar a integridade e segurança da imagem.
+- [Crie um cluster padrão.](cs_cluster.html#cs_cluster_cli)
+- Assegure-se de que seu cluster tem pelo menos uma VLAN pública. Os nós do trabalhador de borda não estão disponíveis para clusters somente com VLANs privadas.
+- [Destine a CLI do Kubernetes para o cluster](cs_cli_install.html#cs_cli_configure).
 
-Para visualizar a avaliação de vulnerabilidade para suas imagens, [revise a documentação do Vulnerability Advisor](/docs/services/va/va_index.html#va_registry_cli).
+
+1. Liste todos os nós do trabalhador no cluster. Use o endereço IP privado da coluna **NAME** para identificar os nós. Selecione pelo menos dois nós do trabalhador para serem os nós do trabalhador de borda. Usar dois ou mais nós do trabalhador melhora a disponibilidade dos recursos de rede.
+
+  ```
+  kubectl get nodes -L publicVLAN,privateVLAN,dedicated
+  ```
+  {: pre}
+
+2. Rotule os nós do trabalhador com `dedicated=edge`. Após um nó do trabalhador ser marcado com `dedicated=edge`, todo Ingresso subsequente e balanceadores de carga são implementados em um nó do trabalhador de borda.
+
+  ```
+  kubectl label nodes <node_name> <node_name2> dedicated=edge
+  ```
+  {: pre}
+
+3. Recupere todos os serviços existentes do balanceador de carga em seu cluster.
+
+  ```
+  kubectl get services --all-namespaces -o jsonpath='{range .items[*]}kubectl get service -n {.metadata.namespace} {.metadata.name} -o yaml | kubectl apply -f - :{.spec.type},{end}' | tr "," "\n" | grep "LoadBalancer" | cut -d':' -f1
+  ```
+  {: pre}
+
+  Saída:
+
+  ```
+  kubectl get service -n <namespace> <name> -o yaml | kubectl apply -f
+  ```
+  {: screen}
+
+4. Usando a saída da etapa anterior, copie e cole cada linha `kubectl get service`. Esse comando reimplementa o balanceador de carga para um nó do trabalhador de borda. somente balanceadores de carga públicos precisam ser reimplementados.
+
+  Saída:
+
+  ```
+  service "<name>" configured
+  ```
+  {: screen}
+
+Você rotulou os nós do trabalhador com `dedicated=edge` e reimplementou todos os balanceadores de carga existentes e o Ingresso para os nós do trabalhador de borda. Em seguida, evite que outras [cargas de trabalho sejam executadas em nós do trabalhador de ponta](#cs_edge_workloads) e [bloqueiem o tráfego de entrada para as portas de nós em nós do trabalhador](#cs_block_ingress).
+
+### Evitar que cargas de trabalho sejam executadas em nós do trabalhador de borda
+{: #cs_edge_workloads}
+
+Um dos benefícios de nós do trabalhador de borda é que esses nós do trabalhador podem ser especificados para executar somente serviços de rede. Usar a tolerância `dedicated=edge` significa que todos os serviços de balanceador de carga e de Ingresso são implementados somente nos nós do trabalhador rotulados. No entanto, para evitar que outras cargas de trabalho sejam executadas em nós do trabalhador de borda e consumam recursos do nó do trabalhador, deve-se usar [contaminações do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
+
+1. Liste todos os nós do trabalhador com o rótulo `edge`.
+
+  ```
+  kubectl get nodes -L publicVLAN,privateVLAN,dedicated -l dedicated=edge
+  ```
+  {: pre}
+
+2. Aplique uma contaminação a cada nó do trabalhador que evita que os pods sejam executados no nó do trabalhador e que remove os pods que não possuem o rótulo `edge` do nó do trabalhador. Os pods removidos são reimplementados em outros nós do trabalhador com capacidade.
+
+  ```
+  kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute
+  ```
+
+Agora, somente pods com a tolerância `dedicated=edge` são implementados em nós do trabalhador de borda.

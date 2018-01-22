@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-16"
+lastupdated: "2017-12-13"
 
 ---
 
@@ -19,10 +19,10 @@ lastupdated: "2017-10-16"
 # Tutoriel : Création de clusters
 {: #cs_cluster_tutorial}
 
-Déployez et gérez vos propres clusters Kubernetes dans le cloud. Vous pouvez automatiser le déploiement, l'exploitation, la mise à l'échelle et la surveillance d'applications conteneurisées dans un cluster d'hôtes de calcul indépendants nommés noeuds d'agent.
+Déployez et gérez votre propre cluster Kubernetes dans {{site.data.keyword.Bluemix_short}}. Vous pouvez automatiser le déploiement, l'exploitation, la mise à l'échelle et la surveillance d'applications conteneurisées dans un cluster d'hôtes de calcul indépendants nommés noeuds d'agent.
 {:shortdesc}
 
-Dans ce tutoriel, vous verrez comment une entreprise fictive de relations publiques utilise Kubernetes pour déployer une application conteneurisée {{site.data.keyword.Bluemix_short}}. En tirant parti d'{{site.data.keyword.toneanalyzerfull}}, l'entreprise de RP analyse ses communiqués de presse et reçoit des commentaires en retour.
+Dans cette série de tutoriels, vous découvrirez comment une entreprise de relations publiques fictive utilise des fonctionnalités Kubernetes pur déployer une application conteneurisée dans {{site.data.keyword.Bluemix_notm}}. En tirant parti d'{{site.data.keyword.toneanalyzerfull}}, l'entreprise de RP analyse ses communiqués de presse et reçoit des commentaires en retour.
 
 
 ## Objectifs
@@ -32,9 +32,9 @@ Dans ce premier tutoriel, vous endossez le rôle d'administrateur réseau de l'e
 Pour configurer l'infrastructure :
 
 -   Créez un cluster Kubernetes avec un noeud worker
--   Installez des interfaces CLI pour utiliser l'API Kubernetes et gérer des images Docker
+-   Installez les interfaces de ligne de commande pour exécution de commandes Kubernetes et gestion d'images Docker
 -   Créez un référentiel d'images privé dans {{site.data.keyword.registrylong_notm}} pour y stocker vos images
--   Ajoutez le service {{site.data.keyword.toneanalyzershort}} au cluster de sorte qu'une application du cluster puisse utiliser le service
+-   Ajoutez le service {{site.data.keyword.toneanalyzershort}} au cluster afin que n'importe quelle application dans le cluster puisse utiliser ce service
 
 
 ## Durée
@@ -49,7 +49,8 @@ Ce tutoriel est destiné aux développeurs de logiciel et aux administrateurs r�
 
 ## Conditions prérequises
 
--  Un compte [{{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://console.bluemix.net/registration/)
+-  Compte de type Paiement à la carte ou Abonnement [{{site.data.keyword.Bluemix_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/registration/)
+
 
 
 
@@ -75,7 +76,7 @@ Les interfaces CLI suivantes et leurs prérequis sont utilisés pour gérer les 
 Pour installer les interfaces CLI, procédez comme suit :
 
 1.  Comme condition prérequise pour le plug-in {{site.data.keyword.containershort_notm}}, installez l'[interface CLI de {{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://clis.ng.bluemix.net/ui/home.html). Pour exécuter des commandes CLI {{site.data.keyword.Bluemix_notm}}, utilisez le préfixe `bx`.
-2.  Suivez les invites pour sélectionner un compte et une organisation {{site.data.keyword.Bluemix_notm}}. Les clusters sont associés à un compte, mais sont indépendants de l'organisation ou d'un espace {{site.data.keyword.Bluemix_notm}}. 
+2.  Suivez les invites pour sélectionner un compte et une organisation {{site.data.keyword.Bluemix_notm}}. Les clusters sont associés à un compte, mais sont indépendants de l'organisation ou d'un espace {{site.data.keyword.Bluemix_notm}}.
 
 4.  Installez le plug-in {{site.data.keyword.containershort_notm}} pour créer des clusters Kubernetes et gérer les noeuds d'agent. Pour exécuter des commandes du plug-in {{site.data.keyword.containershort_notm}}, utilisez le préfixe `bx cs`.
 
@@ -146,12 +147,12 @@ Félicitations ! Vous avez installé les interfaces CLI utilisées dans les proc
 ## Leçon 2 : Configuration de votre environnement de cluster
 {: #cs_cluster_tutorial_lesson2}
 
-Créez votre cluster Kubernetes, configurez un registre d'images privé dans {{site.data.keyword.registryshort_notm}} et ajoutez des valeurs confidentielles à votre cluster afin que l'application puisse accéder au service {{site.data.keyword.toneanalyzershort}}.
+Configurez un référentiel d'images privé dans {{site.data.keyword.registryshort_notm}} et ajoutez des valeurs confidentielles à votre cluster de sorte que l'application puisse accéder au service {{site.data.keyword.toneanalyzershort}}.
 
 1.  A l'invite, connectez-vous à l'interface CLI de {{site.data.keyword.Bluemix_notm}} en utilisant vos données d'identification {{site.data.keyword.Bluemix_notm}}.
 
     ```
-    bx login [--sso] -a api.eu-gb.bluemix.net
+    bx login [--sso]
     ```
     {: pre}
 

@@ -1,8 +1,6 @@
 ---
 
-copyright:
-  years: 2014, 2017
-lastupdated: "2017-11-14"
+copyright: years: 2014, 2017 lastupdated: "2017-12-01"
 
 ---
 
@@ -19,26 +17,27 @@ lastupdated: "2017-11-14"
 # Anotações de ingresso
 {: #ingress_annotation}
 
-Para incluir recursos em seu controlador de Ingresso, é possível especificar anotações como metadados em um recurso de Ingresso.
+Para incluir recursos em seu balanceador de aplicativo, é possível especificar anotações como metadados em um recurso do Ingress.
 {: shortdesc}
 
-Para obter informações gerais sobre os serviços de Ingresso e como começar a usá-los, veja [Configurando o acesso público a um app usando o controlador de Ingresso](cs_apps.html#cs_apps_public_ingress).
+Para obter informações gerais sobre os serviços do Ingress e como começar a usá-los, consulte [Configurando o acesso público a um app usando o Ingress](cs_apps.html#cs_apps_public_ingress).
 
 
 |Anotação suportada|Descrição|
 |--------------------|-----------|
 |[Solicitação do cliente ou cabeçalho de resposta adicional](#proxy-add-headers)|Inclua informações do cabeçalho em uma solicitação do cliente antes de encaminhar a solicitação para seu app backend ou para uma resposta do cliente antes de enviar a resposta para o cliente.|
-|[Armazenamento em buffer de dados de resposta do cliente](#proxy-buffering)|Desativar o armazenamento em buffer de uma resposta do cliente no controlador de Ingresso ao enviar a resposta para o cliente.|
+|[Armazenamento em buffer de dados de resposta do cliente](#proxy-buffering)|Desative o armazenamento em buffer de uma resposta do cliente no balanceador de carga de aplicativo ao enviar a resposta para o cliente.|
 |[Remoção do cabeçalho de resposta do cliente](#response-remove-headers)|Remover informações do cabeçalho de uma resposta do cliente antes de encaminhar a resposta para o cliente.|
-|[Tempos limite de conexão e tempos limite de leitura customizados](#proxy-connect-timeout)|Ajustar o tempo que o controlador de Ingresso aguarda para conectar e ler do app backend antes de o app backend ser considerado não disponível.|
+|[Tempos limite de conexão e tempos limite de leitura customizados](#proxy-connect-timeout)|Ajuste o tempo que o balanceador de carga de aplicativo aguarda para conectar e ler do app backend antes de o app backend ser considerado não disponível.|
 |[Portas HTTP e HTTPS customizadas](#custom-port)|Mude as portas padrão para o tráfego de rede HTTP e HTTPS.|
-|[Tamanho máximo do corpo de solicitação do cliente customizado](#client-max-body-size)|Ajustar o tamanho do corpo de solicitação do cliente que tem permissão para ser enviado para o controlador de Ingresso.|
+|[Tamanho máximo do corpo de solicitação do cliente customizado](#client-max-body-size)|Ajuste o tamanho do corpo da solicitação do cliente que tem permissão para ser enviado para o balanceador de carga de aplicativo.|
 |[Serviços externos](#proxy-external-service)|Inclui definição de caminhos para serviços externos, como um serviço hospedado no {{site.data.keyword.Bluemix_notm}}.|
 |[Limites de taxa global](#global-rate-limit)|Para todos os serviços, limite a taxa de processamento de solicitação e conexões por uma chave definida.|
 |[HTTP redireciona para HTTPS](#redirect-to-https)|Redirecione solicitações de HTTP não seguras em seu domínio para HTTPS.|
 |[Solicitações de keep-alive](#keepalive-requests)|Configure o número máximo de solicitações que podem ser servidas por meio de uma conexão keepalive.|
 |[Tempo limite de keep-alive](#keepalive-timeout)|Configure o tempo que uma conexão keep-alive permanece aberta no servidor.|
-|[Autenticação mútua](#mutual-auth)|Configure a autenticação mútua para o controlador de Ingresso.|
+|[Autenticação mútua](#mutual-auth)|Configure a autenticação mútua para o balanceador de carga do aplicativo.|
+|[Roteamento do balanceador de carga privado do aplicativo](#alb-id)|Roteie solicitações recebidas para seus aplicativos com um balanceador de carga de aplicativo privado.|
 |[Buffers de proxy](#proxy-buffers)|Configura o número e o tamanho dos buffers que são usados para ler uma resposta para uma conexão única do servidor em proxy.|
 |[Tamanho de buffers ocupados de proxy](#proxy-busy-buffers-size)|Limita o tamanho total de buffers que podem estar ocupados enviando uma resposta ao cliente enquanto a resposta ainda não está totalmente lida.|
 |[Tamanho do buffer de proxy](#proxy-buffer-size)|Configura o tamanho do buffer que é usado para ler a primeira parte da resposta que é recebida do servidor em proxy.|
@@ -51,9 +50,6 @@ Para obter informações gerais sobre os serviços de Ingresso e como começar a
 
 
 
-
-
-
 ## Cabeçalho de solicitação ou resposta do cliente adicional (cabeçalhos adicionais de proxy)
 {: #proxy-add-headers}
 
@@ -62,10 +58,10 @@ Inclua informações extras do cabeçalho em uma solicitação do cliente antes 
 
 <dl>
 <dt>Descrição</dt>
-<dd>O controlador de Ingresso age como um proxy entre o app cliente e o app backend. As solicitações do cliente que são enviadas para o controlador de Ingresso são processadas (em proxy) e colocadas em uma nova solicitação que é então enviada do controlador de Ingresso para o app backend. Transmitir uma solicitação por proxy remove as informações do cabeçalho de HTTP, como o nome do usuário, que foi inicialmente enviado do cliente. Se o seu app backend requerer essas informações, será possível usar a anotação <strong>ingress.bluemix.net/proxy-add-headers</strong> para incluir informações do cabeçalho na solicitação do cliente antes de a solicitação ser encaminhada do controlador de Ingresso para seu app backend.
+<dd>O balanceador de carga de aplicativo do Ingress age como um proxy entre o aplicativo do cliente e o app backend. As solicitações do cliente que são enviadas para o balanceador de carga de aplicativo são processadas (por proxy) e colocadas em uma nova solicitação que é, então, enviada do balanceador de carga de aplicativo para seu app backend. Transmitir uma solicitação por proxy remove as informações do cabeçalho de HTTP, como o nome do usuário, que foi inicialmente enviado do cliente. Se o seu app backend requerer essas informações, será possível usar a anotação <strong>ingress.bluemix.net/proxy-add-headers</strong> para incluir informações do cabeçalho na solicitação do cliente antes de a solicitação ser encaminhada do balanceador de carga do aplicativo para seu app de backend.
 
 </br></br>
-Quando um app backend envia uma resposta para o cliente, a resposta é transmitida por proxy pelo controlador de Ingresso e os cabeçalhos de HTTP são removidos da resposta. O app da web do cliente pode requerer essas informações de cabeçalho para processar com êxito a resposta. É possível usar a anotação <strong>ingress.bluemix.net/response-add-headers</strong> para incluir informações do cabeçalho na resposta do cliente antes de a resposta ser encaminhada do controlador de Ingresso para o app da web do cliente.</dd>
+Quando um app backend envia uma resposta para o cliente, a resposta é enviada por proxy pelo balanceador de carga de aplicativo e os cabeçalhos de HTTP são removidos da resposta. O app da web do cliente pode requerer essas informações de cabeçalho para processar com êxito a resposta. É possível usar a anotação <strong>ingress.bluemix.net/response</strong> para incluir informações do cabeçalho na resposta do cliente antes de a resposta ser encaminhada do balanceador de carga de aplicativo para o app da web do cliente.</dd>
 <dt>YAML do recurso de Ingresso de amostra</dt>
 <dd>
 
@@ -131,17 +127,18 @@ spec:
  ## Buffer de dados de resposta do cliente (proxy-buffering)
  {: #proxy-buffering}
 
- Use a anotação de buffer para desativar o armazenamento de dados de resposta no controlador de Ingresso enquanto os dados são enviados para o cliente.
+ Use a anotação do buffer para desativar o armazenamento de dados de resposta no balanceador de carga de aplicativo enquanto os dados são enviados para o cliente.
  {:shortdesc}
 
  <dl>
  <dt>Descrição</dt>
- <dd>O controlador de Ingresso age como um proxy entre seu app backend e o navegador da web do cliente. Quando uma resposta é enviada do app backend para o cliente, os dados de resposta são armazenados em buffer no controlador de Ingresso por padrão. O controlador de Ingresso transmite por proxy a resposta do cliente e começa a enviar a resposta para o cliente no ritmo do cliente. Depois que todos os dados do app backend são recebidos pelo controlador de Ingresso, a conexão com o app backend é encerrada. A conexão do controlador de Ingresso para o cliente permanece aberta até que o cliente recebe todos os dados.
+ <dd>O balanceador de carga do aplicativo de Ingresso age como um proxy entre seu aplicativo de backend e o navegador da web do
+cliente. Quando uma resposta é enviada do app backend para o cliente, os dados de resposta são armazenados em buffer no balanceador de carga de aplicativo por padrão. O balanceador de carga de aplicativo envia a resposta do cliente por proxy e começa a enviar a resposta para o cliente no ritmo do cliente. Depois de todos os dados do app backend serem recebidos pelo balanceador de carga de aplicativo, a conexão com o app backend será encerrada. A conexão do balanceador de carga de aplicativo para o cliente permanece aberta até que o cliente receba todos os dados.
 
  </br></br>
- Se o armazenamento em buffer de dados de resposta no controlador de Ingresso estiver desativado, os dados serão enviados imediatamente do controlador de Ingresso para o cliente. O cliente deverá estar apto a manipular os dados recebidos no ritmo do controlador de Ingresso. Se o cliente for muito lento, poderá haver perda de dados.
+Se o armazenamento em buffer de dados de resposta no balanceador de carga de aplicativo está desativado, os dados são enviados imediatamente do balanceador de carga de aplicativo para o cliente. O cliente deve ser capaz de manipular dados recebidos no ritmo do balanceador de carga do aplicativo. Se o cliente for muito lento, poderá haver perda de dados.
  </br></br>
- O armazenamento em buffer de dados de resposta no controlador de Ingresso é ativado por padrão.</dd>
+O armazenamento em buffer de dados de resposta no balanceador de carga de aplicativo é ativado por padrão.</dd>
  <dt>YAML do recurso de Ingresso de amostra</dt>
  <dd>
 
@@ -178,7 +175,8 @@ Remova as informações do cabeçalho que são incluídas na resposta do cliente
 
  <dl>
  <dt>Descrição</dt>
- <dd>O controlador de Ingresso age como um proxy entre seu app backend e o navegador da web do cliente. As respostas do cliente do app backend enviadas para o controlador de Ingresso são processadas (por proxy) e colocadas em uma nova resposta que é então enviada do controlador de Ingresso para o navegador da web do cliente. Embora a transmissão de uma resposta por proxy remova as informações do cabeçalho de HTTP inicialmente enviadas do app backend, esse processo pode não remover todos os cabeçalhos específicos do app backend. Remova as informações do cabeçalho de uma resposta do cliente antes de a resposta ser encaminhada do controlador de Ingresso para o navegador da web do cliente.</dd>
+ <dd>O balanceador de carga do aplicativo de Ingresso age como um proxy entre seu aplicativo de backend e o navegador da web do
+cliente. As respostas do cliente do app backend que são enviadas para o balanceador de carga de aplicativo são processadas (por proxy) e colocadas em uma nova resposta, que é então enviada do balanceador de carga de aplicativo para o navegador da web do cliente. Embora a transmissão de uma resposta por proxy remova as informações do cabeçalho de HTTP inicialmente enviadas do app backend, esse processo pode não remover todos os cabeçalhos específicos do app backend. Remova informações do cabeçalho de uma resposta do cliente antes de a resposta ser encaminhada do balanceador de carga de aplicativo para o navegador da web do cliente.</dd>
  <dt>YAML do recurso de Ingresso de amostra</dt>
  <dd>
  <pre class="codeblock">
@@ -234,21 +232,21 @@ Remova as informações do cabeçalho que são incluídas na resposta do cliente
 ## Tempos limites de conexão e tempos limites de leitura customizados (proxy-connect-timeout, proxy-read-timeout)
 {: #proxy-connect-timeout}
 
-Configure um tempo limite de conexão e um tempo limite de leitura customizados para o controlador de Ingresso. Ajuste o tempo de espera do controlador de Ingresso enquanto se conecta e lê do app backend antes de o app backend ser considerado indisponível.
+Configure um tempo limite de conexão e um tempo limite de leitura customizados para o balanceador de carga de aplicativo. Ajuste o tempo para o balanceador de carga de aplicativo esperar enquanto se conecta e lê do app de backend antes de o app backend ser considerado indisponível.
 {:shortdesc}
 
 <dl>
 <dt>Descrição</dt>
-<dd>Quando uma solicitação do cliente é enviada para o controlador de Ingresso, uma conexão com o app backend é aberta pelo controlador de Ingresso. Por padrão, o controlador de Ingresso aguarda 60 segundos para receber uma resposta do app backend. Se o app backend não responder dentro de 60 segundos, a solicitação de conexão será interrompida e o app backend será considerado indisponível.
+<dd>Quando uma solicitação do cliente é enviada para o balanceador de carga de aplicativo Ingress, uma conexão com o app backend é aberta pelo balanceador de carga de aplicativo. Por padrão, o balanceador de carga de aplicativo aguarda 60 segundos para receber uma resposta do app backend. Se o app backend não responder dentro de 60 segundos, a solicitação de conexão será interrompida e o app backend será considerado indisponível.
 
 </br></br>
-Depois que o controlador de Ingresso é conectado ao app backend, os dados de resposta são lidos do app backend pelo controlador de Ingresso. Durante essa operação de leitura, o controlador de Ingresso aguarda um máximo de 60 segundos entre duas operações de leitura para receber dados do app backend. Se o app backend não enviar dados dentro de 60 segundos, a conexão com o app backend será encerrada e o app será considerado não disponível.
+Após o balanceador de carga de aplicativo estar conectado ao app backend, os dados de resposta são lidos do app backend pelo balanceador de carga de aplicativo. Durante essa operação de leitura, o balanceador de carga de aplicativo aguarda um máximo de 60 segundos entre duas operações de leitura para receber dados do app backend. Se o app backend não enviar dados dentro de 60 segundos, a conexão com o app backend será encerrada e o app será considerado não disponível.
 </br></br>
 Um tempo limite de conexão e de leitura de 60 segundos é o tempo limite padrão em um proxy e geralmente não deve ser mudado.
 </br></br>
-Se a disponibilidade de seu app não for estável ou seu app estiver lento para responder em razão de altas cargas de trabalho, talvez você queira aumentar o tempo limite de conexão ou de leitura. Lembre-se de que aumentar o tempo limite afetará o desempenho do controlador de Ingresso, pois a conexão com o app backend deverá permanecer aberta até que o tempo limite seja atingido.
+Se a disponibilidade de seu app não for estável ou seu app estiver lento para responder em razão de altas cargas de trabalho, talvez você queira aumentar o tempo limite de conexão ou de leitura. Lembre-se de que aumentar o tempo limite afeta o desempenho do balanceador de carga de aplicativo, já que a conexão com o app backend deverá permanecer aberta até que o tempo limite seja atingido.
 </br></br>
-Por outro lado, será possível diminuir o tempo limite para ganhar desempenho no controlador de Ingresso. Assegure-se de que seu app backend seja capaz de manipular solicitações dentro do tempo limite especificado, mesmo durante cargas de trabalho mais altas.</dd>
+Por outro lado, é possível diminuir o tempo limite para obter desempenho no balanceador de carga de aplicativo. Assegure-se de que seu app backend seja capaz de manipular solicitações dentro do tempo limite especificado, mesmo durante cargas de trabalho mais altas.</dd>
 <dt>YAML do recurso de Ingresso de amostra</dt>
 <dd>
 
@@ -301,7 +299,7 @@ Mude as portas padrão para o tráfego de rede HTTP (porta 80) e HTTPS (porta 44
 
 <dl>
 <dt>Descrição</dt>
-<dd>Por padrão, o controlador do Ingresso é configurado para atender ao tráfego de rede HTTP recebido na porta 80 e ao tráfego de rede HTTPS recebido na porta 443. É possível mudar as portas padrão para incluir segurança em seu domínio do controlador de Ingresso ou ativar somente uma porta HTTPS.
+<dd>Por padrão, o balanceador de carga do aplicativo Ingress é configurado para atender ao tráfego de rede HTTP recebido na porta 80 e para o tráfego de rede HTTPS recebido na porta 443. É possível mudar as portas padrão para incluir segurança para o domínio balanceador de seu aplicativo ou ativar somente uma porta HTTPS.
 </dd>
 
 
@@ -347,7 +345,7 @@ spec:
 
  </dd>
  <dt>Uso</dt>
- <dd><ol><li>Revise as portas abertas para seu controlador do Ingresso. **Nota: o endereço IP precisa ser endereço IP de doc genérico. Também precisa vincular à CLI kubectl de destino? Talvez não.**
+ <dd><ol><li>Revise as portas abertas para seu balanceador de carga de aplicativo.
 <pre class="pre">
 <code>kubectl get service -n kube-system</code></pre>
 A saída da CLI é semelhante à seguinte:
@@ -395,10 +393,10 @@ Ajuste o tamanho máximo do corpo que o cliente pode enviar como parte de uma so
 
 <dl>
 <dt>Descrição</dt>
-<dd>Para manter o desempenho esperado, o tamanho máximo do corpo de solicitação do cliente é configurado como 1 megabyte. Quando uma solicitação de cliente com um tamanho de corpo acima do limite é enviada para o controlador de Ingresso e o cliente não permite que os dados sejam divididos, o controlador de Ingresso retorna uma resposta de HTTP 413 (Entidade de solicitação muito grande) para o cliente. Uma conexão entre o cliente e o controlador de Ingresso não será possível até que o tamanho do corpo de solicitação seja reduzido. Quando o cliente permite a divisão dos dados em múltiplos chunks, os dados são divididos em pacotes de 1 megabyte e enviados para o controlador de Ingresso.
+<dd>Para manter o desempenho esperado, o tamanho máximo do corpo de solicitação do cliente é configurado como 1 megabyte. Quando uma solicitação de cliente com um tamanho de corpo sobre o limite é enviada para o balanceador de carga do aplicativo Ingress e o cliente não permite que os dados sejam divididos, o balanceador de carga de aplicativo retorna uma resposta HTTP 413 (Entidade de Pedido Muito Grande) ao cliente. Uma conexão entre o cliente e o balanceador de carga de aplicativo não é possível até que o tamanho do corpo de solicitação seja reduzido. Quando o cliente permite que os dados sejam divididos em múltiplos chunks, os dados são divididos em pacotes de 1 megabyte e enviados para o balanceador de carga de aplicativo.
 
 </br></br>
-Talvez você queira aumentar o tamanho máximo do corpo porque espera solicitações do cliente com um tamanho de corpo maior que 1 megabyte. Por exemplo, você deseja que seu cliente possa fazer upload de arquivos grandes. Aumentar o tamanho máximo do corpo de solicitação poderá afetar o desempenho de seu controlador de Ingresso, pois a conexão com o cliente deverá permanecer aberta até que a solicitação seja recebida.
+Talvez você queira aumentar o tamanho máximo do corpo porque espera solicitações do cliente com um tamanho de corpo maior que 1 megabyte. Por exemplo, você deseja que seu cliente possa fazer upload de arquivos grandes. Aumentar o tamanho máximo do corpo de solicitação poderá afetar o desempenho de seu balanceador de aplicativo porque a conexão com o cliente deverá permanecer aberta até que a solicitação seja recebida.
 </br></br>
 <strong>Nota:</strong> alguns navegadores da web do cliente não podem exibir a mensagem de resposta de HTTP 413 corretamente.</dd>
 <dt>YAML do recurso de Ingresso de amostra</dt>
@@ -569,7 +567,7 @@ Para configurar o limite, as zonas são definidas pelo `ngx_http_limit_conn_modu
 
  <dl>
  <dt>Descrição</dt>
- <dd>Configure seu controlador do Ingresso para proteger seu domínio com o certificado TLS fornecido pela IBM ou seu certificado TLS customizado. Alguns usuários podem tentar acessar seus apps usando uma solicitação de HTTP insegura para seu domínio do controlador de Ingresso, por exemplo, <code>http://www.myingress.com</code>, em vez de usar <code>https</code>. É possível usar a anotação de redirecionamento para sempre converter solicitações de HTTP inseguras em HTTPs. Se você não usar essa anotação, as solicitações não seguras de HTTP não serão convertidas em solicitações de HTTPS por padrão e poderão expor informações confidenciais não criptografadas ao público.
+ <dd>Você configura seu balanceador de carga do aplicativo Ingress para proteger seu domínio com o certificado TLS fornecido pela IBM ou seu certificado TLS customizado. Alguns usuários podem tentar acessar seus apps usando uma solicitação de HTTP insegura para o domínio do balanceador de carga de aplicativo, por exemplo <code>http://www.myingress.com</code>, em vez de usar <code>https</code>. É possível usar a anotação de redirecionamento para sempre converter solicitações de HTTP inseguras em HTTPs. Se você não usar essa anotação, as solicitações não seguras de HTTP não serão convertidas em solicitações de HTTPS por padrão e poderão expor informações confidenciais não criptografadas ao público.
 
  </br></br>
  O redirecionamento de solicitações de HTTP para HTTPs é desativado por padrão.</dd>
@@ -604,7 +602,7 @@ Para configurar o limite, as zonas são definidas pelo `ngx_http_limit_conn_modu
 
  <br />
 
- 
+
  ## Solicitações de keep-alive (keepalive-requests)
  {: #keepalive-requests}
 
@@ -724,13 +722,13 @@ Para configurar o limite, as zonas são definidas pelo `ngx_http_limit_conn_modu
  ## Autenticação mútua (mutual-auth)
  {: #mutual-auth}
 
- Configure a autenticação mútua para o controlador de Ingresso.
+ Configure a autenticação mútua para o balanceador de carga do aplicativo.
  {:shortdesc}
 
  <dl>
  <dt>Descrição</dt>
  <dd>
- Configure a autenticação mútua para o controlador de Ingresso. O cliente autentica o servidor e o servidor também autentica o cliente usando certificados. A autenticação mútua também é conhecida como autenticação baseada em certificado ou autenticação de duas vias.
+Configure a autenticação mútua para o balanceador de carga do aplicativo Ingress. O cliente autentica o servidor e o servidor também autentica o cliente usando certificados. A autenticação mútua também é conhecida como autenticação baseada em certificado ou autenticação de duas vias.
  </dd>
 
  <dt>Pré-requisitos</dt>
@@ -788,10 +786,63 @@ Para configurar o limite, as zonas são definidas pelo `ngx_http_limit_conn_modu
  <br />
 
 
+## Roteamento do balanceador de carga de aplicativo privado (ALB-ID)
+{: #alb-id}
+
+Roteie solicitações recebidas para seus aplicativos com um balanceador de carga de aplicativo privado.
+{:shortdesc}
+
+<dl>
+<dt>Descrição</dt>
+<dd>
+Escolha um balanceador de carga de aplicativo privado para rotear solicitações recebidas, em vez do balanceador de carga de aplicativo público.</dd>
+
+
+ <dt>YAML do recurso de Ingresso de amostra</dt>
+ <dd>
+
+ <pre class="codeblock">
+ <code>apiVersion: extensions/v1beta1
+ kind: Ingress
+ metadados:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/ALB-ID: "&lt;private_ALB_ID&gt;"
+ spec:
+  tls:
+  - System z:
+    - mydomain
+    secretName: mytlssecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
+
+ <table>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>annotations</code></td>
+  <td>Substitua <em>&lt;private_ALB_ID&gt;</em> pelo ID para o seu balanceador de carga de aplicativo privado. Execute <code>bx cs albs --cluster <my_cluster></code> para localizar o ID do balanceador de carga do aplicativo.
+  </td>
+  </tr>
+  </tbody></table>
+  </dd>
+  </dl>
+
+  <br />
+
+
  ## Buffers de proxy (proxy-buffers)
  {: #proxy-buffers}
- 
- Configure buffers de proxy para o controlador de Ingresso.
+
+ Configure buffers de proxy para o balanceador de carga de aplicativo.
  {:shortdesc}
 
  <dl>
@@ -848,7 +899,7 @@ spec:
  ## Tamanho de buffers ocupados de proxy (proxy-busy-buffers-size)
  {: #proxy-busy-buffers-size}
 
- Configure o tamanho de buffers ocupados de proxy para o controlador de Ingresso.
+ Configure o tamanho de buffers ocupados de proxy para o balanceador de carga de aplicativo.
  {:shortdesc}
 
  <dl>
@@ -905,7 +956,7 @@ spec:
  ## Tamanho do buffer de proxy (proxy-buffer-size)
  {: #proxy-buffer-size}
 
- Configure o tamanho do buffer de proxy para o controlador de Ingresso.
+ Configure o tamanho do buffer de proxy para o balanceador de carga de aplicativo.
  {:shortdesc}
 
  <dl>
@@ -965,12 +1016,12 @@ spec:
 ## Gravar novamente caminhos (rewrite-path)
 {: #rewrite-path}
 
-Roteie o tráfego de rede recebido em um caminho de domínio do controlador de Ingresso para um caminho diferente no qual seu aplicativo backend atende.
+Roteie o tráfego de rede recebido em um caminho de domínio do balanceador de carga de aplicativo para um caminho diferente no qual seu aplicativo backend atende.
 {:shortdesc}
 
 <dl>
 <dt>Descrição</dt>
-<dd>O seu domínio de controlador do Ingresso roteia o tráfego de rede recebido em <code>mykubecluster.us-south.containers.mybluemix.net/beans</code> para o seu app. O seu app atende em <code>/coffee</code>, em vez de <code>/beans</code>. Para encaminhar o tráfego de rede recebido para o seu app, inclua a anotação de regravação em seu arquivo de configuração do recurso de Ingresso. A anotação de nova gravação assegura que o tráfego de rede recebido em <code>/beans</code> seja encaminhado para o seu app usando o caminho <code>/coffee</code>. Ao incluir múltiplos serviços, use apenas um ponto e vírgula (;) para separá-los.</dd>
+<dd>O domínio do balanceador de carga do aplicativo Ingress roteia o tráfego de rede recebido no <code>mykubecluster.us-south.containers.mybluemix.net/beans</code> para o seu app. O seu app atende em <code>/coffee</code>, em vez de <code>/beans</code>. Para encaminhar o tráfego de rede recebido para o seu app, inclua a anotação de regravação em seu arquivo de configuração do recurso de Ingresso. A anotação de nova gravação assegura que o tráfego de rede recebido em <code>/beans</code> seja encaminhado para o seu app usando o caminho <code>/coffee</code>. Ao incluir múltiplos serviços, use apenas um ponto e vírgula (;) para separá-los.</dd>
 <dt>YAML do recurso de Ingresso de amostra</dt>
 <dd>
 <pre class="codeblock">
@@ -1005,11 +1056,11 @@ spec:
 <tbody>
 <tr>
 <td><code>annotations</code></td>
-<td>Substitua <em>&lt;service_name&gt;</em> pelo nome do serviço do Kubernetes que você criou para o seu app e <em>&lt;target-path&gt;</em> pelo caminho em que seu app atende. O tráfego de rede recebido no domínio do controlador do Ingresso é encaminhado para o serviço do Kubernetes usando este caminho. A maioria dos apps não atende em um caminho específico, mas usa o caminho raiz e uma porta específica. Neste caso, defina <code>/</code> como o <em>rewrite-path</em> para o seu app.</td>
+<td>Substitua <em>&lt;service_name&gt;</em> pelo nome do serviço do Kubernetes que você criou para o seu app e <em>&lt;target-path&gt;</em> pelo caminho em que seu app atende. O tráfego de rede recebido no domínio do balanceador de carga de aplicativo é encaminhado para o serviço do Kubernetes usando este caminho. A maioria dos apps não atende em um caminho específico, mas usa o caminho raiz e uma porta específica. Neste caso, defina <code>/</code> como o <em>rewrite-path</em> para o seu app.</td>
 </tr>
 <tr>
 <td><code>path</code></td>
-<td>Substitua <em>&lt;domain_path&gt;</em> pelo caminho que você deseja anexar em seu domínio de controlador do Ingresso. O tráfego de rede recebido nesse caminho é encaminhado para o caminho de regravação que você definiu em sua anotação. No exemplo acima, configure o caminho de domínio como <code>/beans</code> para incluir esse caminho no balanceamento de carga de seu controlador do Ingresso.</td>
+<td>Substitua <em>&lt;domain_path&gt;</em> pelo caminho que você deseja anexar ao domínio do balanceador de carga de aplicativo. O tráfego de rede recebido nesse caminho é encaminhado para o caminho de regravação que você definiu em sua anotação. No exemplo acima, configure o caminho de domínio como <code>/beans</code> para incluir esse caminho no balanceamento de carga de seu controlador do Ingresso.</td>
 </tr>
 <tr>
 <td><code>serviceName</code></td>
@@ -1086,15 +1137,15 @@ Para configurar o limite, as zonas definidas pelo `ngx_http_limit_conn_module` e
 ## Afinidade de sessão com cookies (sticky-cookie-services)
 {: #sticky-cookie-services}
 
-Use a anotação de cookie permanente para incluir a afinidade de sessão no controlador de Ingresso e sempre rotear o tráfego de rede recebido para o mesmo servidor de envio de dados.
+Use a anotação de cookie permanente para incluir a afinidade de sessão para seu balanceador de carga de aplicativo e sempre roteie o tráfego de rede recebido para o mesmo servidor de envio de dados.
 {:shortdesc}
 
 <dl>
 <dt>Descrição</dt>
-<dd>Para alta disponibilidade, algumas configurações de app requerem que você implemente múltiplos servidores de envio de dados que manipulam solicitações do cliente recebidas. Quando um cliente se conecta ao app backend, é possível usar a afinidade de sessão para que um cliente seja atendido pelo mesmo servidor de envio de dados pela duração de uma sessão ou pelo tempo que leva para concluir uma tarefa. É possível configurar o controlador de Ingresso para assegurar a afinidade de sessão sempre roteando o tráfego de rede recebido para o mesmo servidor de envio de dados.
+<dd>Para alta disponibilidade, algumas configurações de app requerem que você implemente múltiplos servidores de envio de dados que manipulam solicitações do cliente recebidas. Quando um cliente se conecta ao app backend, é possível usar a afinidade de sessão para que um cliente seja atendido pelo mesmo servidor de envio de dados pela duração de uma sessão ou pelo tempo que leva para concluir uma tarefa. É possível configurar seu balanceador de carga de aplicativo para assegurar a afinidade de sessão sempre roteando o tráfego de rede recebido para o mesmo servidor de envio de dados.
 
 </br></br>
-Cada cliente que se conecta ao app backend é designado a um dos servidores de envio de dados disponíveis pelo controlador de Ingresso. O controlador de Ingresso cria um cookie de sessão que é armazenado no app do cliente, que está incluído nas informações do cabeçalho de cada solicitação entre o controlador de Ingresso e o cliente. As informações no cookie asseguram que todas as solicitações sejam manipuladas pelo mesmo servidor de envio de dados em toda a sessão.
+Cada cliente que se conecta ao seu app backend é designado a um dos servidores de envio de dados disponíveis pelo balanceador de carga de aplicativo. O balanceador de carga de aplicativo cria um cookie de sessão que é armazenado no app do cliente, que está incluído nas informações do cabeçalho de cada solicitação entre o balanceador de carga de aplicativo e o cliente. As informações no cookie asseguram que todas as solicitações sejam manipuladas pelo mesmo servidor de envio de dados em toda a sessão.
 
 </br></br>
 Ao incluir múltiplos serviços, use um ponto e vírgula (;) para separá-los.</dd>
@@ -1137,8 +1188,8 @@ spec:
   <td>Substitua os seguintes valores:<ul>
   <li><code><em>&lt;service_name&gt;</em></code>: o nome do serviço do Kubernetes criado para o seu app.</li>
   <li><code><em>&lt;cookie_name&gt;</em></code>: escolha um nome do cookie permanente que é criado durante uma sessão.</li>
-  <li><code><em>&lt;expiration_time&gt;</em></code>: o tempo em segundos, minutos ou horas antes da expiração do cookie permanente. Esse tempo é independente da atividade do usuário. Depois que o cookie expira, ele é excluído pelo navegador da web do cliente e não é mais enviado para o controlador de Ingresso. Por exemplo, para configurar um prazo de expiração de 1 segundo, 1 minuto ou 1 hora, insira <strong>1s</strong>, <strong>1m</strong> ou <strong>1h</strong>.</li>
-  <li><code><em>&lt;cookie_path&gt;</em></code>: o caminho que é anexado ao subdomínio do Ingresso e que indica para quais domínios e subdomínios o cookie é enviado para o controlador de Ingresso. Por exemplo, se o seu domínio do Ingresso for <code>www.myingress.com</code> e você desejar enviar o cookie em cada solicitação do cliente, deverá configurar <code>path=/</code>. Se desejar enviar o cookie somente para <code>www.myingress.com/myapp</code> e todos os seus subdomínios, então deverá configurar <code>path=/myapp</code>.</li>
+  <li><code><em>&lt;expiration_time&gt;</em></code>: o tempo em segundos, minutos ou horas antes da expiração do cookie permanente. Esse tempo é independente da atividade do usuário. Depois que o cookie expira, ele é excluído pelo navegador da web do cliente e não é mais enviado para o balanceador de carga de aplicativo. Por exemplo, para configurar um prazo de expiração de 1 segundo, 1 minuto ou 1 hora, insira <strong>1s</strong>, <strong>1m</strong> ou <strong>1h</strong>.</li>
+  <li><code><em>&lt;cookie_path&gt;</em></code>: o caminho que é anexado ao subdomínio do Ingress e que indica para quais domínios e subdomínios o cookie é enviado para o balanceador de carga de aplicativo. Por exemplo, se o seu domínio do Ingresso for <code>www.myingress.com</code> e você desejar enviar o cookie em cada solicitação do cliente, deverá configurar <code>path=/</code>. Se desejar enviar o cookie somente para <code>www.myingress.com/myapp</code> e todos os seus subdomínios, então deverá configurar <code>path=/myapp</code>.</li>
   <li><code><em>&lt;hash_algorithm&gt;</em></code>: o algoritmo hash que protege as informações no cookie. Somente <code>sha1
 </code> é suportado. SHA1 cria uma soma de hash com base nas informações no cookie e anexa essa soma de hash ao cookie. O servidor pode decriptografar as informações no cookie e verificar a integridade de dados.
   </li></ul></td>
@@ -1159,7 +1210,7 @@ Permitir solicitações de HTTPS e criptografar o tráfego para seus apps de env
 <dl>
 <dt>Descrição</dt>
 <dd>
-Criptografe o tráfego para seus apps de envio de dados que requerem HTTPS com os controladores de Ingresso.
+Criptografe o tráfego para seus apps de envio de dados que requerem HTTPS com os balanceadores de carga de aplicativo.
 
 **Opcional**: é possível incluir [autenticação unidirecional ou autenticação mútua](#ssl-services-auth) nessa anotação.
 </dd>
@@ -1193,8 +1244,8 @@ spec:
   <tr>
   <td><code>annotations</code></td>
   <td>Substitua os seguintes valores:<ul>
-  <li><code><em>&lt;myservice&gt;</em></code>: insira o nome do serviço que representa seu app. O tráfego é criptografado do controlador de Ingresso para esse app.</li>
-  <li><code><em>&lt;ssl-secret&gt;</em></code>: insira o segredo para o serviço. Este parâmetro é opcional. Se o parâmetro for fornecido, o valor deverá conter a chave e o certificado que o seu app está esperando do cliente. </li></ul>
+  <li><code><em>&lt;myservice&gt;</em></code>: insira o nome do serviço que representa seu app. O tráfego é criptografado do balanceador de carga de aplicativo para esse app.</li>
+  <li><code><em>&lt;ssl-secret&gt;</em></code>: insira o segredo para o serviço. Este parâmetro é opcional. Se o parâmetro for fornecido, o valor deverá conter a chave e o certificado que o seu app está esperando do cliente.  </li></ul>
   </td>
   </tr>
   <tr>
@@ -1208,7 +1259,7 @@ spec:
   <td>Substitua <em>&lt;myservicepath&gt;</em> por uma barra ou pelo caminho exclusivo no qual o seu app estiver atendendo, para que o tráfego de rede possa ser encaminhado para o app.
 
   </br>
-  Para cada serviço do Kubernetes, é possível definir um caminho individual que seja anexado ao domínio fornecido pela IBM para criar um caminho exclusivo para seu app, por exemplo, <code>ingress_domain/myservicepath1</code>. Quando você insere essa rota em um navegador da web, o tráfego de rede é roteado para o controlador de Ingresso. O controlador de Ingresso consulta o serviço associado e envia o tráfego de rede para o serviço e para os pods nos quais o app está em execução usando o mesmo caminho. O app deve ser configurado para atender nesse caminho para receber
+  Para cada serviço do Kubernetes, é possível definir um caminho individual que seja anexado ao domínio fornecido pela IBM para criar um caminho exclusivo para seu app, por exemplo, <code>ingress_domain/myservicepath1</code>. Ao inserir essa rota em um navegador da web, o tráfego de rede é roteado para o balanceador de carga do aplicativo. O balanceador de carga de aplicativo consulta o serviço associado e envia o tráfego da rede para o serviço e para os pods nos quais o aplicativo está sendo executado usando o mesmo caminho. O app deve ser configurado para atender nesse caminho para receber
 o tráfego de rede de entrada.
 
   </br></br>
@@ -1303,7 +1354,8 @@ spec:
   <td>Substitua <em>&lt;myservicepath&gt;</em> por uma barra ou pelo caminho exclusivo no qual o seu app estiver atendendo, para que o tráfego de rede possa ser encaminhado para o app.
 
   </br>
-  Para cada serviço do Kubernetes, é possível definir um caminho individual que seja anexado ao domínio fornecido pela IBM para criar um caminho exclusivo para seu app, por exemplo, <code>ingress_domain/myservicepath1</code>. Quando você insere essa rota em um navegador da web, o tráfego de rede é roteado para o controlador de Ingresso. O controlador de Ingresso consulta o serviço associado e envia tráfego de rede para o serviço e para os pods nos quais o app está em execução usando o mesmo caminho. O app deve ser configurado para atender nesse caminho para receber
+  Para cada serviço do Kubernetes, é possível definir um caminho individual que seja anexado ao domínio fornecido pela IBM para criar um caminho exclusivo para seu app, por exemplo, <code>ingress_domain/myservicepath1</code>. Ao inserir essa rota em um navegador da web, o tráfego de rede é roteado para o balanceador de carga do aplicativo. O balanceador de carga do aplicativo consulta o serviço associado e envia o tráfego de rede para o serviço e para os Pods em
+que o aplicativo está em execução usando o mesmo caminho. O app deve ser configurado para atender nesse caminho para receber
 o tráfego de rede de entrada.
 
   </br></br>
@@ -1401,7 +1453,7 @@ dados:
 
 
 
-## Portas TCP para controladores de Ingresso (tcp-ports)
+## Portas TCP para balanceadores de carga de aplicativo (portas tcp)
 {: #tcp-ports}
 
 Acesse um app através de uma porta TCP não padrão.
@@ -1412,7 +1464,7 @@ Acesse um app através de uma porta TCP não padrão.
 <dd>
 Use essa anotação para um app que está executando uma carga de trabalho de fluxos de TCP.
 
-<p>**Nota**: o controlador de Ingresso opera no modo de passagem e encaminha o tráfego para apps backend. A finalização de SSL não é suportada neste caso.</p>
+<p>**Observação**: o balanceador de carga de aplicativo opera no modo de passagem e encaminha o tráfego para apps backend. A finalização de SSL não é suportada neste caso.</p>
 </dd>
 
 
@@ -1514,5 +1566,3 @@ Use essa anotação para um app que está executando uma carga de trabalho de fl
     </tbody></table>
     </dd>
     </dl>
-
-

@@ -1,7 +1,7 @@
 {:navgroup: .navgroup}
 {:topicgroup: .topicgroup}
 
-{: .toc subcollection="containers" audience="compute" href="/docs/containers/index.html"}
+{: .toc subcollection="containers" audience="compute" href="/docs/containers/container_index.html"}
 IBM Cloud Container Service
 
     {: .navgroup id="learn"}
@@ -13,8 +13,15 @@ IBM Cloud Container Service
     Guías de aprendizaje
         cs_tutorials.md
         cs_tutorials_apps.md
+        cs_tutorials_istio.md
 
     cs_security.md
+    {: .navgroup-end}
+
+    {: .navgroup id="howto"}
+    cs_cli_install.md
+    cs_cluster.md
+    cs_apps.md
     {: .navgroup-end}
 
     {: .navgroup id="reference"}
@@ -22,25 +29,23 @@ IBM Cloud Container Service
     cs_versions.md
     cs_regions.md
     cs_annotations.md
-    {: .navgroup-end}
 
-    {: .navgroup id="howto"}
-    cs_cli_install.md
-    cs_cluster.md
-    cs_apps.md
-    [En desuso: Ejecución de contenedores únicos y escalables](cs_classic.html)
-        [Migración de contenedores únicos y escalables a clústeres de Kubernetes](cs_classic.html#cs_classic_migrating)
-        [Acerca de los contenedores únicos y escalables](container_ov.html)
-        [Planificación de contenedores únicos y escalables](container_planning.html)
-        [Seguridad para contenedores únicos y escalables](container_security.html)
-        [Configuración de la CLI para contenedores únicos y escalables](container_cli_cfic_install.html)
-        [Imágenes de IBM](../services/RegistryImages/index.html)
-        [Ejecución de tareas a corto plazo como contenedores](container_single_ui.html)
-        [Ejecución de grupos de alta disponibilidad](container_ha.html)
-        [Almacenamiento de datos permanentes para contenedores únicos y escalables](container_volumes_ov.html)
-        [Integración de servicios con contenedores únicos y escalables](container_integrations.html)
-        [Consulta de CLI para contenedores únicos y escalables](container_cli_reference_cfic.html)
-        [Resolución de problemas de contenedores únicos y escalables](container_troubleshoot.html)
+    {: .topicgroup}
+    IBM Cloud dedicado
+        cs_dedicated.md
+        [En desuso: Ejecución de contenedores únicos y escalables](cs_classic.html)
+            [Migración de contenedores únicos y escalables a clústeres de Kubernetes](cs_classic.html#cs_classic_migrating)
+            [Acerca de los contenedores únicos y escalables](container_ov.html)
+            [Planificación de contenedores únicos y escalables](container_planning.html)
+            [Seguridad para contenedores únicos y escalables](container_security.html)
+            [Configuración de la CLI para contenedores únicos y escalables](container_cli_cfic_install.html)
+            [Imágenes de IBM](../services/RegistryImages/index.html)
+            [Ejecución de tareas a corto plazo como contenedores](container_single_ui.html)
+            [Ejecución de grupos de alta disponibilidad](container_ha.html)
+            [Almacenamiento de datos permanentes para contenedores únicos y escalables](container_volumes_ov.html)
+            [Integración de servicios con contenedores únicos y escalables](container_integrations.html)
+            [Consulta de CLI para contenedores únicos y escalables](container_cli_reference_cfic.html)
+            [Resolución de problemas de contenedores únicos y escalables](container_troubleshoot.html)
     {: .navgroup-end}
 
     {: .navgroup id="help"}

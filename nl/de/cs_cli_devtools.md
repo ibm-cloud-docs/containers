@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-28"
+lastupdated: "2017-12-01"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2017-11-28"
 Verwenden Sie diese Befehle, um Cluster zu erstellen und zu verwalten.
 {:shortdesc}
 
-**Tipp:** Suchen Sie nach `bx cr`-Befehlen? Werfen Sie einen Blick in die [{{site.data.keyword.registryshort_notm}}-CLI-Referenz ](/docs/cli/plugins/registry/index.html). Suchen Sie nach `kubectl`-Befehlen? Werfen Sie einen Blick in die [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/user-guide/kubectl/v1.5/).
+**Tipp:** Suchen Sie nach `bx cr`-Befehlen? Werfen Sie einen Blick in die [{{site.data.keyword.registryshort_notm}}-CLI-Referenz ](/docs/cli/plugins/registry/index.html). Suchen Sie nach `kubectl`-Befehlen? Werfen Sie einen Blick in die [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).
 
 
 <!--[https://github.ibm.com/alchemy-containers/armada-cli ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.ibm.com/alchemy-containers/armada-cli)-->
@@ -165,7 +165,7 @@ Aktivieren oder Inaktivieren einer Lastausgleichsfunktion für Anwendungen (Appl
   Beispiel für die Aktivierung einer ALB mit einer von einem Benutzer bereitgestellten IP-Adresse:
 
   ```
-  bx cs alb-configure --albID meine_private_alb-ip --enable --user-ip benutzer-ip
+  bx cs alb-configure --albID meine_private_alb-id --enable --user-ip benutzer-ip
   ```
   {: pre}
 
@@ -231,7 +231,7 @@ bx cs cluster-config mein_cluster
 
 
 
-### bx cs cluster-create [--file DATEIPOSITION][--hardware HARDWARE] --location STANDORT --machine-type MASCHINENTYP --name NAME [--kube-version MAJOR.MINOR.PATCH][--no-subnet] [--private-vlan PRIVATES_VLAN][--public-vlan PUBLIC_VLAN] [--workers WORKER]
+### bx cs cluster-create [--file DATEISTANDORT][--hardware HARDWARE] --location STANDORT --machine-type MASCHINENTYP --name NAME [--kube-version MAJOR.MINOR.PATCH][--no-subnet] [--private-vlan PRIVATES_VLAN][--public-vlan PUBLIC_VLAN] [--workers WORKER]
 {: #cs_cluster_create}
 
 Erstellung eines Clusters in Ihrer Organisation.
@@ -434,8 +434,6 @@ Entfernen eines Clusters aus der Organisation.
 {: #cs_cluster_service_bind}
 
 Hinzufügen eines {{site.data.keyword.Bluemix_notm}}-Service zu einem Cluster.
-
-**Tipp:** Für {{site.data.keyword.Bluemix_dedicated_notm}}-Benutzer finden Sie weitere Informationen unter [{{site.data.keyword.Bluemix_notm}}-Services zu Clustern in {{site.data.keyword.Bluemix_dedicated_notm}} (Closed Beta) hinzufügen](cs_cluster.html#binding_dedicated).
 
 <strong>Befehlsoptionen</strong>:
 
@@ -640,13 +638,13 @@ Möglicherweise müssen Sie Ihre YAML-Dateien für zukünftige Bereitstellungen 
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>Der Name oder die ID des Clusters. Dieser Wert ist erforderlich.</dd>
-   
+
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
    <dd>Die Kubernetes-Version des Clusters. Wenn dieses Flag nicht angegeben ist, wird der Kubernetes-Master auf die API-Standardversion aktualisiert. Führen Sie den Befehl [bx cs kube-versions](#cs_kube_versions) aus, um die verfügbaren Versionen anzuzeigen. Dieser Wert ist optional.</dd>
 
    <dt><code>-f</code></dt>
    <dd>Geben Sie diese Option an, um die Aktualisierung des Masters ohne Benutzereingabeaufforderungen zu erzwingen. Dieser Wert ist optional.</dd>
-   
+
    <dt><code>--force-update</code></dt>
    <dd>Versuch einer Aktualisierung, selbst wenn die Änderung sich über mehr als zwei Nebenversionen erstreckt. Dieser Wert ist optional.</dd>
    </dl>
@@ -687,7 +685,7 @@ Festlegen von Berechtigungsnachweisen für das Konto von IBM Cloud Infrastructur
    <dl>
    <dt><code>--infrastructure-username <em>BENUTZERNAME</em></code></dt>
    <dd>Der Benutzername für ein Konto von IBM Cloud Infrastructure (SoftLayer). Dieser Wert ist erforderlich.</dd>
-   
+
 
    <dt><code>--infrastructure-api-key <em>API-SCHLÜSSEL</em></code></dt>
    <dd>Der API-Schlüssel für ein Konto von IBM Cloud Infrastructure (SoftLayer). Dieser Wert ist erforderlich.
@@ -956,8 +954,8 @@ Aktualisieren Sie die Protokollweiterleitung an den Protokollierungsserver, der 
 ### bx cs machine-types STANDORT
 {: #cs_machine_types}
 
-Anzeige einer Liste der für Ihre Workerknoten verfügbaren Maschinentypen. Jeder Maschinentyp enthält die Menge an virtueller CPU, an Hauptspeicher und an Plattenspeicher für jeden Workerknoten im Cluster. 
-- Maschinentypen mit `u2c` oder `b2c` im Namen verwenden anstelle von Storage Area Networking (SAN) die lokale Festplatte für mehr Zuverlässigkeit. Zu den Vorteilen zählen ein höherer Durchsatz beim Serialisieren von Bytes für die lokale Festplatte und weniger Beeinträchtigungen des Dateisystems aufgrund von Netzausfällen. Diese Maschinentypen weisen 25 GB lokalen Plattenspeicher für das Dateisystem des Betriebssystems auf und 100 GB lokalen Plattenspeicher für `/var/lib/docker`, dem Verzeichnis, in das alle Containerdaten geschrieben werden. 
+Anzeige einer Liste der für Ihre Workerknoten verfügbaren Maschinentypen. Jeder Maschinentyp enthält die Menge an virtueller CPU, an Hauptspeicher und an Plattenspeicher für jeden Workerknoten im Cluster.
+- Maschinentypen mit `u2c` oder `b2c` im Namen verwenden anstelle von Storage Area Networking (SAN) die lokale Festplatte für mehr Zuverlässigkeit. Zu den Vorteilen zählen ein höherer Durchsatz beim Serialisieren von Bytes für die lokale Festplatte und weniger Beeinträchtigungen des Dateisystems aufgrund von Netzausfällen. Diese Maschinentypen weisen 25 GB lokalen Plattenspeicher für das Dateisystem des Betriebssystems auf und 100 GB lokalen Plattenspeicher für `/var/lib/docker`, dem Verzeichnis, in das alle Containerdaten geschrieben werden.
 - Maschinentypen mit `encrypted` im Namen verschlüsseln die Dockerdaten des Hosts. Das Verzeichnis `/var/lib/docker`, in dem alle Containerdaten gespeichert sind, ist mit der LUKS-Verschlüsselung verschlüsselt.
 - Maschinentypen mit `u1c` oder `b1c` im Namen, wie `u1c.2x4`, werden nicht mehr verwendet. Um die Maschinentypen `u2c` und `b2c` zu verwenden, setzen Sie den Befehl `bx cs worker-add` ab, um Workerknoten mit dem aktualisierten Maschinentyp hinzuzufügen. Entfernen Sie dann die Workerknoten, die die veralteten Maschinentypen verwenden, mithilfe des Befehls `bx cs worker-rm`.
 </p>
@@ -1071,7 +1069,7 @@ workerNum: <em>&lt;anzahl_worker&gt;</em></code></pre>
 <table>
 <caption>Tabelle 2. Erklärung der Komponenten der YAML-Datei</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Erklärung der YAML-Dateikomponenten</th>
+<th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
 </thead>
 <tbody>
 <tr>
@@ -1176,7 +1174,7 @@ Erneutes Starten (Warmstart) der Workerknoten in einem Cluster. Wenn bei einem W
    <dt><code>--hard</code></dt>
    <dd>Geben Sie diese Option an, um einen plötzlichen Neustart eines Workerknotens zu erzwingen, indem Sie die Stromversorgung zum Workerknoten kappen. Verwenden Sie diese Option, wenn der Workerknoten nicht antwortet oder Docker blockiert ist. Dieser Wert ist optional.</dd>
 
-   <dt><code><em>WORKERKNOTEN</em></code></dt>
+   <dt><code><em>WORKER</em></code></dt>
    <dd>Der Name oder die ID einzelner oder mehrerer Workerknoten. Trennen Sie bei einer Auflistung mehrerer Workerknoten die einzelnen Auflistungselemente jeweils durch ein Leerzeichen. Dieser Wert ist erforderlich.</dd>
    </dl>
 
@@ -1202,7 +1200,7 @@ Erneutes Laden der Workerknoten in einem Cluster. Wenn bei einem Workerknoten ei
    <dt><code>-f</code></dt>
    <dd>Geben Sie diese Option ein, um das Neuladen eines Workerknotens ohne Benutzereingabeaufforderungen zu erzwingen. Dieser Wert ist optional.</dd>
 
-   <dt><code><em>WORKERKNOTEN</em></code></dt>
+   <dt><code><em>WORKER</em></code></dt>
    <dd>Der Name oder die ID einzelner oder mehrerer Workerknoten. Trennen Sie bei einer Auflistung mehrerer Workerknoten die einzelnen Auflistungselemente jeweils durch ein Leerzeichen. Dieser Wert ist erforderlich.</dd>
    </dl>
 
@@ -1227,7 +1225,7 @@ Entfernen einzelner oder mehrerer Workerknoten von einem Cluster.
    <dt><code>-f</code></dt>
    <dd>Geben Sie diese Option ein, um die Entfernung eines Workerknotens ohne Benutzereingabeaufforderungen zu erzwingen. Dieser Wert ist optional.</dd>
 
-   <dt><code><em>WORKERKNOTEN</em></code></dt>
+   <dt><code><em>WORKER</em></code></dt>
    <dd>Der Name oder die ID einzelner oder mehrerer Workerknoten. Trennen Sie bei einer Auflistung mehrerer Workerknoten die einzelnen Auflistungselemente jeweils durch ein Leerzeichen. Dieser Wert ist erforderlich.</dd>
    </dl>
 
@@ -1251,15 +1249,15 @@ Möglicherweise müssen Sie Ihre YAML-Dateien für Bereitstellungen vor der Aktu
 
    <dt><em>CLUSTER</em></dt>
    <dd>Der Name oder die ID des Clusters, in dem Sie verfügbare Workerknoten auflisten. Dieser Wert ist erforderlich.</dd>
-   
+
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
    <dd>Die Kubernetes-Version des Clusters. Wenn dieses Flag nicht angegeben ist, wird der Workerknoten auf die Standardversion aktualisiert. Führen Sie den Befehl [bx cs kube-versions](#cs_kube_versions) aus, um die verfügbaren Versionen anzuzeigen. Dieser Wert ist optional.</dd>
 
    <dt><code>-f</code></dt>
    <dd>Geben Sie diese Option an, um die Aktualisierung des Masters ohne Benutzereingabeaufforderungen zu erzwingen. Dieser Wert ist optional.</dd>
-   
+
    <dt><code>--force-update</code></dt>
-   <dd>Versuch einer Aktualisierung, selbst wenn die Änderung sich über mehr als zwei Unterversionen erstreckt. Dieser Wert ist optional.</dd>
+   <dd>Versuch einer Aktualisierung, selbst wenn die Änderung sich über mehr als zwei Nebenversionen erstreckt. Dieser Wert ist optional.</dd>
 
    <dt><code><em>WORKER</em></code></dt>
    <dd>Die ID einzelner oder mehrerer Workerknoten. Trennen Sie bei einer Auflistung mehrerer Workerknoten die einzelnen Auflistungselemente jeweils durch ein Leerzeichen. Dieser Wert ist erforderlich.</dd>

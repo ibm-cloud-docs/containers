@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-28"
+lastupdated: "2017-12-18"
 
 ---
 
@@ -125,7 +125,7 @@ Puede utilizar el puerto predeterminado o definir su propio puerto para iniciar 
 
 [A continuación, puede ejecutar un archivo de configuración desde el panel de control.](#cs_apps_ui)
 
-Cuando termine de utilizar el panel de control de Kubernetes, utilice `CONTROL+C` para salir del mandato `proxy`. Después de salir, el panel de control Kubernetes deja de estar disponible. Ejecute el mandato `proxy` para reiniciar el panel de control de Kubernetes. 
+Cuando termine de utilizar el panel de control de Kubernetes, utilice `CONTROL+C` para salir del mandato `proxy`. Después de salir, el panel de control Kubernetes deja de estar disponible. Ejecute el mandato `proxy` para reiniciar el panel de control de Kubernetes.
 
 
 
@@ -150,7 +150,9 @@ Los secretos de Kubernetes constituyen una forma segura de almacenar informació
 <td>Ninguno. Un secreto se crea automáticamente al enlazar un servicio a un clúster.</td>
 </tr>
 <tr>
-<td>Opcional: Configure el servicio de Ingress con TLS, si no utiliza ingress-secret. <p><b>Nota</b>: TLS ya está habilitado de forma predeterminada y ya hay un secreto creado para la conexión TLS. Para ver el secreto de TLS predeterminado:
+<td>Opcional: Configure el servicio de Ingress con TLS, si no utiliza ingress-secret. <p><b>Nota</b>: TLS ya está habilitado de forma predeterminada y ya hay un secreto creado para la conexión TLS.
+
+Para ver el secreto de TLS predeterminado:
 <pre>
 bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 </pre>
@@ -212,22 +214,57 @@ Para crear un secreto con un certificado:
 ## Cómo permitir el acceso público a apps
 {: #cs_apps_public}
 
-Para que una app esté disponible a nivel público en Internet, debe actualizar el archivo de configuración antes de desplegar la app en un clúster.{:shortdesc}
+Para que una app esté disponible a nivel público en Internet, debe actualizar el archivo de configuración antes de desplegar la app en un clúster.
+{:shortdesc}
 
-Dependiendo de si ha creado un clúster lite o estándar, existen diversas formas de permitir el acceso a su app desde Internet.
+*Figura 1. Plano de datos de Kubernetes en {{site.data.keyword.containershort_notm}}*
+
+![{{site.data.keyword.containerlong_notm}} Arquitectura de Kubernetes](images/networking.png)
+
+El diagrama muestra cómo Kubernetes lleva el tráfico de red de usuario en {{site.data.keyword.containershort_notm}}. Dependiendo de si ha creado un clúster lite o estándar, existen diversas formas de permitir el acceso a su app desde Internet.
 
 <dl>
 <dt><a href="#cs_apps_public_nodeport" target="_blank">Servicio NodePort</a> (clústeres de tipo lite y estándar)</dt>
-<dd>Exponga un puerto público en cada nodo trabajador y utilice la dirección IP pública de cualquier nodo trabajador para acceder de forma pública al servicio en el clúster. La dirección IP pública del nodo trabajador no es permanente. Cuando un nodo trabajador se elimina o se vuelve a crear, se le asigna una nueva dirección IP pública. Puede utilizar el servicio NodePort para probar el acceso público para la app o cuando se necesita acceso público solo durante un breve periodo de tiempo. Si necesita una dirección IP pública estable y más disponibilidad para el servicio, exponga la app mediante un servicio LoadBalancer o Ingress.</dd>
+<dd>
+ <ul>
+  <li>Exponga un puerto público en cada nodo trabajador y utilice la dirección IP pública de cualquier nodo trabajador para acceder de forma pública al servicio en el clúster.</li>
+  <li>Iptables es una característica de kernel de Linux que equilibra la carga de las solicitudes en los pods de la app y proporciona un direccionamiento de red de alto rendimiento y control de acceso de red.</li>
+  <li>La dirección IP pública del nodo trabajador no es permanente. Cuando un nodo trabajador se elimina o se vuelve a crear, se le asigna una nueva dirección IP pública.</li>
+  <li>El servicio NodePort es una muy buena opción para probar el acceso público. También se puede utilizar si sólo se necesita acceso público para un breve periodo de tiempo.</li>
+ </ul>
+</dd>
 <dt><a href="#cs_apps_public_load_balancer" target="_blank">Servicio LoadBalancer</a> (solo clústeres estándares)</dt>
-<dd>Cada clúster estándar se suministra con 4 direcciones IP públicas portátiles y 4 direcciones IP privadas portátiles que puede utilizar para crear un equilibrador de carga TCP/UDP externo para la app. Puede personalizar el equilibrador de carga exponiendo cualquier puerto que necesite la app. La dirección IP pública portátil asignada al equilibrador de carga es permanente y no cambia cuando un nodo trabajador se vuelve a crear en el clúster.
-
-</br>
-Si necesita equilibrio de carga HTTP o HTTPS para la app y desea utilizar una ruta pública para exponer varias apps en el clúster como servicios, utilice el soporte de Ingress integrado en {{site.data.keyword.containershort_notm}}.</dd>
+<dd>
+ <ul>
+  <li>Cada clúster estándar se suministra con 4 direcciones IP públicas portátiles y 4 direcciones IP privadas portátiles que puede utilizar para crear un equilibrador de carga TCP/UDP externo para la app.</li>
+  <li>Iptables es una característica de kernel de Linux que equilibra la carga de las solicitudes en los pods de la app y proporciona un direccionamiento de red de alto rendimiento y control de acceso de red.</li>
+  <li>La dirección IP pública portátil asignada al equilibrador de carga es permanente y no cambia cuando un nodo trabajador se vuelve a crear en el clúster.</li>
+  <li>Puede personalizar el equilibrador de carga exponiendo cualquier puerto que necesite la app.</li></ul>
+</dd>
 <dt><a href="#cs_apps_public_ingress" target="_blank">Ingress</a> (solo clústeres estándares)</dt>
-<dd>Exponga varias apps en el clúster creando un equilibrador de carga HTTP o HTTPS externo que utilice un punto de entrada público seguro y exclusivo para direccionar las solicitudes entrantes a las apps. Ingress consta de dos componentes principales, el recurso de Ingress y el controlador de Ingress. El recurso de Ingress define las reglas sobre cómo direccionar y equilibrar la carga de las solicitudes de entrada para una app. Todos los recursos de Ingress deben estar registrados con el controlador de Ingress que escucha solicitudes de entrada de servicio HTTP o HTTPS y reenvía las solicitudes según las reglas definidas para cada recurso de Ingress. Utilice Ingress si desea implementar su propio equilibrador de carga con reglas de direccionamiento personalizadas y si necesita terminación SSL para sus apps.
-
+<dd>
+ <ul>
+  <li>Exponga varias apps en el clúster creando un equilibrador de carga HTTP o HTTPS externo que utilice un punto de entrada público seguro y exclusivo para direccionar las solicitudes entrantes a las apps.</li>
+  <li>Puede utilizar una ruta pública para exponer varias apps en el clúster como servicios.</li>
+  <li>Ingress consta de tres componentes principales, el recurso de Ingress, el controlador de Ingress y el equilibrador de carga de aplicación.
+   <ul>
+    <li>El recurso de Ingress define las reglas sobre cómo direccionar y equilibrar la carga de las solicitudes de entrada para una app.</li>
+    <li>El controlador de Ingress habilita el equilibrador de carga de aplicación, que escucha solicitudes de entrada de servicio HTTP o HTTPS y reenvía las solicitudes según las reglas definidas para cada recurso de Ingress.</li>
+    <li>El equilibrador de carga de aplicación equilibra la carga de las solicitudes en los pods de las apps.
+   </ul>
+  <li>Utilice Ingress si desea implementar su propio equilibrador de carga con reglas de direccionamiento personalizadas y si necesita terminación SSL para sus apps.</li>
+ </ul>
 </dd></dl>
+
+Para seleccionar la mejor opción de red para su aplicación, puede seguir este árbol de decisiones:
+
+<img usemap="#networking_map" border="0" class="image" src="images/networkingdt.png" width="500px" alt="Esta imagen le guía para elegir la mejor opción de red para la aplicación. Si esta imagen no se muestra, la información puede encontrarse en la documentación." style="width:500px;" />
+<map name="networking_map" id="networking_map">
+<area href="/docs/containers/cs_apps.html#cs_apps_public_nodeport" alt="Servicio Nodeport" shape="circle" coords="52, 283, 45"/>
+<area href="/docs/containers/cs_apps.html#cs_apps_public_load_balancer" alt="Servicio Loadbalancer" shape="circle" coords="247, 419, 44"/>
+<area href="/docs/containers/cs_apps.html#cs_apps_public_ingress" alt="Servicio Ingress" shape="circle" coords="445, 420, 45"/>
+</map>
+
 
 ### Configuración del acceso público a una app utilizando el tipo de servicio NodePort
 {: #cs_apps_public_nodeport}
@@ -237,8 +274,6 @@ Puede poner la app a disponibilidad pública en Internet utilizando la direcció
 {:shortdesc}
 
 Puede exponer la app como servicio de Kubernetes de tipo NodePort para clústeres de tipo lite o estándares.
-
-Para entornos de {{site.data.keyword.Bluemix_dedicated_notm}}, las direcciones IP están bloqueadas por un cortafuegos. Para hacer que una app esté disponible a nivel público, utilice un [servicio LoadBalancer](#cs_apps_public_load_balancer) o [Ingress](#cs_apps_public_ingress) en su lugar.
 
 **Nota:** La dirección IP pública de un nodo trabajador no es permanente. Si el nodo trabajador se debe volver a crear, se le asigna una nueva dirección IP pública. Si necesita una dirección IP pública estable y más disponibilidad para el servicio, exponga la app utilizando un [servicio LoadBalancer](#cs_apps_public_load_balancer) o [Ingress](#cs_apps_public_ingress).
 
@@ -361,8 +396,6 @@ A diferencia del servicio NodePort, la dirección IP portátil del servicio equi
 
 La dirección IP portátil del equilibrador de carga se asigna automáticamente y no cambia cuando se añaden o eliminan nodos trabajadores. Por lo tanto, los servicios del equilibrador de carga están más disponibles que los servicios NodePort. Los usuarios pueden seleccionar cualquier puerto para el equilibrador de carga y no están limitados al rango de puertos de NodePort. Puede utilizar los servicios equilibradores de carga para los protocolos TCP y UDP.
 
-Cuando una cuenta de {{site.data.keyword.Bluemix_dedicated_notm}} está [habilitada para clústeres](cs_ov.html#setup_dedicated), puede solicitar que se utilicen subredes públicas para las direcciones IP del equilibrador de carga. [Abra una incidencia de soporte](/docs/support/index.html#contacting-support) para crear la subred y luego utilice el mandato [`cs bx cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) para añadir la subred al clúster.
-
 **Nota:** Los servicios equilibradores de carga no soportan la terminación TLS. Si la app necesita terminación TLS, puede exponer la app mediante [Ingress](#cs_apps_public_ingress) o configurar la app de modo que gestione la terminación TLS.
 
 Antes de empezar:
@@ -414,6 +447,7 @@ Para crear un servicio equilibrador de carga:
           ports:
            - protocol: TCP
              port: 8080
+          loadBalancerIp: <private_ip_address>
         ```
         {: codeblock}
 
@@ -437,6 +471,11 @@ Para crear un servicio equilibrador de carga:
         <tr>
           <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:`
           <td>Anotación para especificar el tipo de LoadBalancer. Los valores son `private` y `public`. Cuando se crea un LoadBalancer público en clústeres en VLAN públicas, esta anotación no es necesaria.</td>
+        </tr>
+        <tr>
+          <td><code>loadBalancerIp</code></td>
+          <td>Al crear un LoadBalancer privado, sustituya <em>&lt;loadBalancerIp&gt;</em> por la dirección IP que desea utilizar para LoadBalancer.</td>
+        </tr>
         </tbody></table>
     3.  Opcional: Para utilizar una dirección IP portátil específica para el equilibrador de carga que esté disponible para el clúster, puede especificar dicha dirección IP incluyendo `loadBalancerIP` en la sección spec. Para obtener más información, consulte la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/services-networking/service/).
     4.  Opcional: Configure un cortafuegos especificando `loadBalancerSourceRanges` en la sección spec. Para obtener más información, consulte la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
@@ -490,20 +529,16 @@ Para crear un servicio equilibrador de carga:
         {: codeblock}
 
 
-
-
-### Configuración del acceso a una app utilizando el controlador de Ingress
+### Configuración del acceso a una app utilizando Ingress
 {: #cs_apps_public_ingress}
 
-Exponga varias apps en el clúster creando recursos Ingress gestionados por el controlador de Ingress proporcionado por IBM. El controlador de Ingress es un equilibrador de carga HTTP o HTTPS externo que utiliza un punto de entrada público o probado seguro y exclusivo para direccionar las solicitudes entrantes a las apps dentro o fuera del clúster.
+Exponga varias apps en el clúster creando recursos Ingress gestionados por el controlador de Ingress proporcionado por IBM. El controlador de Ingress crea los recursos necesarios para utilizar un equilibrador de carga de aplicación. Un equilibrador de carga de aplicación es un equilibrador de carga HTTP o HTTPS externo que utiliza un punto de entrada público o probado seguro y exclusivo para direccionar las solicitudes entrantes a las apps dentro o fuera del clúster.
 
 **Nota:** Ingress únicamente está disponible para los clústeres estándares y necesita de al menos dos nodos trabajadores en el clúster para asegurar la alta disponibilidad. Para configurar un servicio Ingress se necesita una [política de acceso de administrador](cs_cluster.html#access_ov). Verifique su [política de acceso](cs_cluster.html#view_access) actual.
 
-Cuando se crea un clúster estándar, se crea automáticamente un controlador de Ingress y se le asigna una dirección IP pública portátil y una ruta pública creada y habilitada para el usuario. Además se crea un controlador de Ingress con una dirección IP privada portátil asignada y una ruta privada, pero no se habilita de forma automática. Puede configurar los controladores de Ingress y definir reglas de direccionamiento individuales para cada app que exponga a las redes públicas o privadas. A cada app que se expone al público por medio de Ingress que se le asigna una vía de acceso exclusiva que se añade a la ruta pública, para que pueda utilizar un URL exclusivo para acceder a una app de forma pública en el clúster.
+Cuando se crea un clúster estándar, el controlador de Ingress crea y habilita automáticamente un equilibrador de carga de aplicación al que se le asigna una dirección IP pública portátil y una ruta pública. Además se crea un equilibrador de carga de aplicación con una dirección IP privada portátil asignada y una ruta privada, pero no se habilita de forma automática. Puede configurar los equilibradores de carga de aplicación y definir reglas de direccionamiento individuales para cada app que exponga a las redes públicas o privadas. A cada app que se expone al público por medio de Ingress que se le asigna una vía de acceso exclusiva que se añade a la ruta pública, para que pueda utilizar un URL exclusivo para acceder a una app de forma pública en el clúster.
 
-Cuando una cuenta de {{site.data.keyword.Bluemix_dedicated_notm}} está [habilitada para clústeres](cs_ov.html#setup_dedicated), puede solicitar que se utilicen subredes públicas para las direcciones IP del controlador de Ingress. A continuación, se crea el controlador de Ingress y se asigna una ruta pública. [Abra una incidencia de soporte](/docs/support/index.html#contacting-support) para crear la subred y luego utilice el mandato [`cs bx cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) para añadir la subred al clúster.
-
-Para exponer la app al público, puede configurar el controlador de Ingress para los siguientes casos. 
+Para exponer la app al público, puede configurar el equilibrador de carga de aplicación para los siguientes casos.
 
 -   [Se utiliza el dominio proporcionado por IBM sin terminación TLS](#ibm_domain)
 -   [Se utiliza el dominio proporcionado por IBM con terminación TLS](#ibm_domain_cert)
@@ -511,25 +546,38 @@ Para exponer la app al público, puede configurar el controlador de Ingress para
 -   [Se utiliza un dominio personalizado o proporcionado por IBM con terminación TLS para acceder a las apps fuera del clúster](#external_endpoint)
 -   [Abra puertos en el equilibrador de carga de Ingress](#opening_ingress_ports)
 -   [Configure protocolos SSL y cifrados SSL a nivel HTTP](#ssl_protocols_ciphers)
--   [Personalice su controlador Ingress con anotaciones](cs_annotations.html)
+-   [Personalice su equilibrador de carga de aplicación con anotaciones](cs_annotations.html)
 {: #ingress_annotation}
 
-Para exponer la app a redes privadas, primero [habilite el controlador de Ingress privado](#private_ingress). A continuación, puede configurar el controlador de Ingress para los siguientes casos. 
+Para exponer la app a redes privadas, primero [habilite el equilibrador de carga de aplicación privado](#private_ingress). A continuación, puede configurar el equilibrador de carga de aplicación privado para los siguientes casos.
 
 -   [Se utiliza un dominio personalizado sin terminación TLS](#private_ingress_no_tls)
 -   [Se utiliza un dominio personalizado y un certificado TLS para realizar la terminación TLS](#private_ingress_tls)
 
+
+Para seleccionar la mejor configuración de Ingress, puede seguir este árbol de decisiones:
+
+<img usemap="#ingress_map" border="0" class="image" src="images/networkingdt-ingress.png" width="750px" alt="Esta imagen le guía para elegir la mejor configuración para el controlador de Ingress. Si esta imagen no se muestra, la información puede encontrarse en la documentación." style="width:750px;" />
+<map name="ingress_map" id="ingress_map">
+<area href="/docs/containers/cs_apps.html#private_ingress_no_tls" alt="Utilización del controlador de Ingress privado con un dominio personalizado." shape="rect" coords="25, 246, 187, 294"/>
+<area href="/docs/containers/cs_apps.html#private_ingress_tls" alt="Utilización del controlador de Ingress privado con un dominio personalizado y un certificado TLS." shape="rect" coords="161, 337, 309, 385"/>
+<area href="/docs/containers/cs_apps.html#external_endpoint" alt="Configuración del controlador de Ingress público para direccionar el tráfico de red a las apps externas al clúster." shape="rect" coords="313, 229, 466, 282"/>
+<area href="/docs/containers/cs_apps.html#custom_domain_cert" alt="Utilización del controlador de Ingress público con un dominio personalizado y un certificado TLS." shape="rect" coords="365, 415, 518, 468"/>
+<area href="/docs/containers/cs_apps.html#ibm_domain" alt="Utilización del controlador de Ingress público con el dominio proporcionado por IBM" shape="rect" coords="414, 609, 569, 659"/>
+<area href="/docs/containers/cs_apps.html#ibm_domain_cert" alt="Utilización del controlador de Ingress público con el dominio proporcionado por IBM y un certificado TLS." shape="rect" coords="563, 681, 716, 734"/>
+</map>
+
 #### Utilización del dominio proporcionado por IBM sin terminación TLS
 {: #ibm_domain}
 
-Puede configurar el controlador de Ingress como un equilibrador de carga HTTP para las apps del clúster y utilizar el dominio proporcionado por IBM para acceder a las apps desde Internet.
+Puede configurar el equilibrador de carga de aplicación como un equilibrador de carga HTTP para las apps del clúster y utilizar el dominio proporcionado por IBM para acceder a las apps desde Internet.
 
 Antes de empezar:
 
 -   Si aún no tiene uno, [cree un clúster estándar](cs_cluster.html#cs_cluster_ui).
 -   [Defina su clúster como destino de la CLI](cs_cli_install.html#cs_cli_configure) para ejecutar mandatos `kubectl`.
 
-Para configurar el controlador de Ingress:
+Para configurar el equilibrador de carga de aplicación:
 
 1.  [Despliegue la app en el clúster](#cs_apps_cli). Cuando despliegue la app en el clúster, se crean uno o más pods que ejecutan la app en un contenedor. Asegúrese de añadir una etiqueta a su despliegue en la sección de metadatos del archivo de configuración. Esta etiqueta es necesaria para identificar todos los pods en los que se está ejecutando la app, de modo que puedan incluirse en el equilibrio de carga de Ingress.
 2.  Cree un servicio Kubernetes para poder exponer la app. El controlador de Ingress puede incluir la app en el equilibrio de carga de Ingress sólo si la app se expone mediante un servicio Kubernetes dentro del clúster.
@@ -600,7 +648,7 @@ Para configurar el controlador de Ingress:
     {: screen}
 
     Puede ver el dominio proporcionado por IBM en el campo **Subdominio de Ingress**.
-4.  Cree un recurso de Ingress. Los recursos de Ingress definen las reglas de direccionamiento para el servicio Kubernetes que ha creado para la app y el controlador de Ingress los utiliza para direccionar el tráfico de red de entrada al servicio. Puede utilizar un recurso de Ingress para definir las reglas de direccionamiento para varias apps siempre que cada app se exponga a través de un servicio Kubernetes dentro del clúster.
+4.  Cree un recurso de Ingress. Los recursos de Ingress definen las reglas de direccionamiento para el servicio Kubernetes que ha creado para la app y el equilibrador de carga de aplicación los utiliza para direccionar el tráfico de red de entrada al servicio. Puede utilizar un recurso de Ingress para definir las reglas de direccionamiento para varias apps siempre que cada app se exponga a través de un servicio Kubernetes dentro del clúster.
     1.  Abra el editor que prefiera y cree un archivo de configuración de Ingress llamado, por ejemplo, `myingress.yaml`.
     2.  Defina un recurso de Ingress en el archivo de configuración que utilice el dominio proporcionado por IBM para direccionar el tráfico de entrada de red al servicio que ha creado anteriormente.
 
@@ -646,7 +694,7 @@ Para configurar el controlador de Ingress:
         <td>Sustituya <em>&lt;myservicepath1&gt;</em> con una única barra o con la vía de acceso exclusiva en la que su app está a la escucha, de forma que el tráfico de la red se pueda reenviar a la app.
 
         </br>
-        Para cada servicio de Kubernetes, defina una vía de acceso individual que se añade al dominio que IBM proporciona para crear una vía de acceso exclusiva a su app como, por ejemplo, <code>ingress_domain/myservicepath1</code>. Cuando especifica esta ruta en un navegador web, el tráfico de la red se direcciona al controlador de Ingress. El controlador de Ingress busca el servicio asociado y envía el tráfico de red al servicio y a los pods en los que la app está en ejecución utilizando la misma vía de acceso. Se debe configurar a la app para que escuche en esta vía de servicio con el propósito de recibir el tráfico de red entrante.
+        Para cada servicio de Kubernetes, defina una vía de acceso individual que se añade al dominio que IBM proporciona para crear una vía de acceso exclusiva a su app como, por ejemplo, <code>ingress_domain/myservicepath1</code>. Cuando especifica esta ruta en un navegador web, el tráfico de la red se direcciona al equilibrador de carga de aplicación. El equilibrador de carga de aplicación busca el servicio asociado y envía el tráfico de red al servicio y a los pods en los que la app está en ejecución utilizando la misma vía de acceso. Se debe configurar a la app para que escuche en esta vía de servicio con el propósito de recibir el tráfico de red entrante.
 
         </br></br>
         Muchas apps no escuchan en una vía de acceso específica, sino que utilizan la vía de acceso raíz y un puerto específico. En este caso, defina la vía de acceso raíz como <code>/</code> y no especifique una vía de acceso individual para la app.
@@ -691,17 +739,17 @@ Para configurar el controlador de Ingress:
 #### Utilización del dominio proporcionado por IBM con terminación TLS
 {: #ibm_domain_cert}
 
-Puede configurar el controlador de Ingress de modo que gestione las conexiones TLS de entrada para las apps, descifre el tráfico de red utilizando el certificado TLS proporcionado por IBM y reenvíe la solicitud descifrada a las apps expuestas en el clúster.
+Puede configurar el equilibrador de carga de aplicación de modo que gestione las conexiones TLS de entrada para las apps, descifre el tráfico de red utilizando el certificado TLS proporcionado por IBM y reenvíe la solicitud descifrada a las apps expuestas en el clúster.
 
 Antes de empezar:
 
 -   Si aún no tiene uno, [cree un clúster estándar](cs_cluster.html#cs_cluster_ui).
 -   [Defina su clúster como destino de la CLI](cs_cli_install.html#cs_cli_configure) para ejecutar mandatos `kubectl`.
 
-Para configurar el controlador de Ingress:
+Para configurar el equilibrador de carga de aplicación:
 
 1.  [Despliegue la app en el clúster](#cs_apps_cli). Asegúrese de añadir una etiqueta a su despliegue en la sección de metadatos del archivo de configuración. Esta etiqueta identifica todos los pods en los que se está ejecutando la app, de modo que puedan incluirse en el equilibrio de carga de Ingress.
-2.  Cree un servicio Kubernetes para poder exponer la app. El controlador de Ingress puede incluir la app en el equilibrio de carga de Ingress sólo si la app se expone mediante un servicio Kubernetes dentro del clúster.
+2.  Cree un servicio Kubernetes para poder exponer la app. El equilibrador de carga de aplicación puede incluir la app en el equilibrio de carga de Ingress sólo si la app se expone mediante un servicio Kubernetes dentro del clúster.
     1.  Abra el editor que prefiera y cree un archivo de configuración de servicio llamado, por ejemplo, `myservice.yaml`.
     2.  Defina un servicio para la app que desea exponer al público.
 
@@ -774,9 +822,9 @@ Para configurar el controlador de Ingress:
 
     Puede ver el dominio proporcionado por IBM en el campo **Subdominio de Ingress** y el certificado proporcionado por IBM en el campo **Secreto de Ingress**.
 
-4.  Cree un recurso de Ingress. Los recursos de Ingress definen las reglas de direccionamiento para el servicio Kubernetes que ha creado para la app y el controlador de Ingress los utiliza para direccionar el tráfico de red de entrada al servicio. Puede utilizar un recurso de Ingress para definir las reglas de direccionamiento para varias apps siempre que cada app se exponga a través de un servicio Kubernetes dentro del clúster.
+4.  Cree un recurso de Ingress. Los recursos de Ingress definen las reglas de direccionamiento para el servicio Kubernetes que ha creado para la app y el equilibrador de carga de aplicación los utiliza para direccionar el tráfico de red de entrada al servicio. Puede utilizar un recurso de Ingress para definir las reglas de direccionamiento para varias apps siempre que cada app se exponga a través de un servicio Kubernetes dentro del clúster.
     1.  Abra el editor que prefiera y cree un archivo de configuración de Ingress llamado, por ejemplo, `myingress.yaml`.
-    2.  Defina un recurso de Ingress en el archivo de configuración que utilice el dominio proporcionado por IBM para direccionar el tráfico de entrada de red a los servicios y el certificado proporcionado por IBM para gestionar automáticamente la terminación TLS. Para cada servicio puede definir una vía de acceso individual que se añade al dominio proporcionado por IBM para crear una vía de acceso exclusiva a la app, por ejemplo `https://ingress_domain/myapp`. Cuando especifica esta ruta en un navegador web, el tráfico de la red se direcciona al controlador de Ingress. El controlador de Ingress consulta el servicio asociado y envía el tráfico de red de entrada al servicio, y luego a los pods en los que se ejecuta la app.
+    2.  Defina un recurso de Ingress en el archivo de configuración que utilice el dominio proporcionado por IBM para direccionar el tráfico de entrada de red a los servicios y el certificado proporcionado por IBM para gestionar automáticamente la terminación TLS. Para cada servicio puede definir una vía de acceso individual que se añade al dominio proporcionado por IBM para crear una vía de acceso exclusiva a la app, por ejemplo `https://ingress_domain/myapp`. Cuando especifica esta ruta en un navegador web, el tráfico de la red se direcciona al equilibrador de carga de aplicación. El equilibrador de carga de aplicación consulta el servicio asociado y envía el tráfico de red de entrada al servicio, y luego a los pods en los que se ejecuta la app.
 
         **Nota:** La app debe estar a la escucha en la vía de acceso que ha definido en el recurso Ingress. De lo contrario, el tráfico de red no se puede reenviar a la app. La mayoría de las apps no escuchan en una vía de acceso específica, sino que utilizan la vía de acceso raíz y un puerto específico. En este caso, defina la vía de acceso raíz como `/` y no especifique una vía de acceso individual para la app.
 
@@ -837,7 +885,7 @@ Para configurar el controlador de Ingress:
         <td>Sustituya <em>&lt;myservicepath1&gt;</em> con una única barra o con la vía de acceso exclusiva en la que su app está a la escucha, de forma que el tráfico de la red se pueda reenviar a la app.
 
         </br>
-        Para cada servicio de Kubernetes, defina una vía de acceso individual que se añade al dominio que IBM proporciona para crear una vía de acceso exclusiva a su app como, por ejemplo, <code>ingress_domain/myservicepath1</code>. Cuando especifica esta ruta en un navegador web, el tráfico de la red se direcciona al controlador de Ingress. El controlador de Ingress busca el servicio asociado y envía el tráfico de red al servicio y a los pods en los que la app está en ejecución utilizando la misma vía de acceso. Se debe configurar a la app para que escuche en esta vía de servicio con el propósito de recibir el tráfico de red entrante.
+        Para cada servicio de Kubernetes, defina una vía de acceso individual que se añade al dominio que IBM proporciona para crear una vía de acceso exclusiva a su app como, por ejemplo, <code>ingress_domain/myservicepath1</code>. Cuando especifica esta ruta en un navegador web, el tráfico de la red se direcciona al equilibrador de carga de aplicación. El equilibrador de carga de aplicación busca el servicio asociado y envía el tráfico de red al servicio y a los pods en los que la app está en ejecución utilizando la misma vía de acceso. Se debe configurar a la app para que escuche en esta vía de servicio con el propósito de recibir el tráfico de red entrante.
 
         </br>
         Muchas apps no escuchan en una vía de acceso específica, sino que utilizan la vía de acceso raíz y un puerto específico. En este caso, defina la vía de acceso raíz como <code>/</code> y no especifique una vía de acceso individual para la app.
@@ -878,10 +926,10 @@ Para configurar el controlador de Ingress:
     ```
     {: codeblock}
 
-#### Utilización del controlador de Ingress con un dominio personalizado y un certificado TLS
+#### Utilización del equilibrador de carga de aplicación con un dominio personalizado y un certificado TLS
 {: #custom_domain_cert}
 
-Puede configurar el controlador de Ingress para que direccione el tráfico de red de entrada a las apps del clúster y utilice su propio certificado TLS para gestionar la terminación de TLS, utilizando el dominio personalizado en lugar del proporcionado por IBM.
+Puede configurar el equilibrador de carga de aplicación para que direccione el tráfico de red de entrada a las apps del clúster y utilice su propio certificado TLS para gestionar la terminación de TLS, utilizando el dominio personalizado en lugar del proporcionado por IBM.
 {:shortdesc}
 
 Antes de empezar:
@@ -889,47 +937,21 @@ Antes de empezar:
 -   Si aún no tiene uno, [cree un clúster estándar](cs_cluster.html#cs_cluster_ui).
 -   [Defina su clúster como destino de la CLI](cs_cli_install.html#cs_cli_configure) para ejecutar mandatos `kubectl`.
 
-Para configurar el controlador de Ingress:
+Para configurar el equilibrador de carga de aplicación:
 
 1.  Cree un dominio personalizado. Para crear un dominio personalizado, póngase en contacto con el proveedor de DNS (Domain Name Service) y para que registre su dominio personalizado.
-2.  Configure el dominio de modo que direccione el tráfico de red de entrada al controlador de Ingress de IBM. Puede elegir entre las siguientes opciones:
+2.  Configure el dominio de modo que direccione el tráfico de red de entrada al equilibrador de carga de aplicación proporcionado por IBM. Puede elegir entre las siguientes opciones:
     -   Defina un alias para el dominio personalizado especificando el dominio proporcionado por IBM como CNAME (Registro de nombre canónico). Para encontrar el dominio de Ingress proporcionado por IBM, ejecute `bx cs cluster-get <mycluster>` y busque el campo **Subdominio de Ingress**.
-    -   Correlacione el dominio personalizado con la dirección IP pública portátil del controlador de Ingress proporcionado por IBM añadiendo la dirección IP como registro. Para buscar la dirección IP pública portátil del controlador de Ingress:
-        1.  Ejecute `bx cs cluster-get <mycluster>` y busque el campo **Subdominio de Ingress**.
-        2.  Ejecute `nslookup <Ingress subdomain>`.
+    -   Correlacione el dominio personalizado con la dirección IP pública portátil del equilibrador de carga de aplicación proporcionado por IBM añadiendo la dirección IP como registro. Para buscar la dirección IP pública portátil del equilibrador de carga de aplicación, ejecute `bx cs alb-get <public_alb_ID>`.
 3.  Cree un certificado TLS y una clave para el dominio que estén codificados en formato PEM.
 4.  Guarde el certificado TLS y la clave en un secreto de Kubernetes.
     1.  Abra el editor que prefiera y cree un archivo de configuración de secreto de Kubernetes llamado, por ejemplo, `mysecret.yaml`.
-    2.  Defina un secreto que utilice su certificado TLS y clave.
+    2.  Defina un secreto que utilice su certificado TLS y clave. Sustituya <em>&lt;mytlssecret&gt;</em> con un nombre para su secreto de Kubernetes, <tls_key_filepath> con la vía de acceso a su archivo de claves TLS personalizado y <tls_cert_filepath> con la vía de acceso al archivo de certificado TLS personalizado.
 
         ```
-        apiVersion: v1
-        kind: Secret
-        metadata:
-          name: <mytlssecret>
-        type: Opaque
-        data:
-          tls.crt: <tlscert>
-          tls.key: <tlskey>
+        kubectl create secret tls <mytlssecret> --key <tls_key_filepath> --cert <tls_cert_filepath>
         ```
-        {: codeblock}
-
-        <table>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Visión general de los componentes del archivo YAML</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>name</code></td>
-        <td>Sustituya <em>&lt;mytlssecret&gt;</em> por el nombre del secreto de Kubernetes.</td>
-        </tr>
-        <tr>
-        <td><code>tls.cert</code></td>
-        <td>Sustituya <em>&lt;tlscert&gt;</em> por su certificado TLS personalizado codificado en formato base64.</td>
-         </tr>
-         <td><code>tls.key</code></td>
-         <td>Sustituya <em>&lt;tlskey&gt;</em> por su clave TLS personalizada codificada en formato base64.</td>
-         </tbody></table>
+        {: pre}
 
     3.  Guarde el archivo de configuración.
     4.  Cree el secreto de TLS para el clúster.
@@ -941,7 +963,7 @@ Para configurar el controlador de Ingress:
 
 5.  [Despliegue la app en el clúster](#cs_apps_cli). Cuando despliegue la app en el clúster, se crean uno o más pods que ejecutan la app en un contenedor. Asegúrese de añadir una etiqueta a su despliegue en la sección de metadatos del archivo de configuración. Esta etiqueta es necesaria para identificar todos los pods en los que se está ejecutando la app, de modo que puedan incluirse en el equilibrio de carga de Ingress.
 
-6.  Cree un servicio Kubernetes para poder exponer la app. El controlador de Ingress puede incluir la app en el equilibrio de carga de Ingress sólo si la app se expone mediante un servicio Kubernetes dentro del clúster.
+6.  Cree un servicio Kubernetes para poder exponer la app. El equilibrador de carga de aplicación puede incluir la app en el equilibrio de carga de Ingress sólo si la app se expone mediante un servicio Kubernetes dentro del clúster.
 
     1.  Abra el editor que prefiera y cree un archivo de configuración de servicio llamado, por ejemplo, `myservice.yaml`.
     2.  Defina un servicio para la app que desea exponer al público.
@@ -986,9 +1008,9 @@ Para configurar el controlador de Ingress:
         {: pre}
 
     5.  Repita estos pasos para cada app que desee exponer al público.
-7.  Cree un recurso de Ingress. Los recursos de Ingress definen las reglas de direccionamiento para el servicio Kubernetes que ha creado para la app y el controlador de Ingress los utiliza para direccionar el tráfico de red de entrada al servicio. Puede utilizar un recurso de Ingress para definir las reglas de direccionamiento para varias apps siempre que cada app se exponga a través de un servicio Kubernetes dentro del clúster.
+7.  Cree un recurso de Ingress. Los recursos de Ingress definen las reglas de direccionamiento para el servicio Kubernetes que ha creado para la app y el equilibrador de carga de aplicación los utiliza para direccionar el tráfico de red de entrada al servicio. Puede utilizar un recurso de Ingress para definir las reglas de direccionamiento para varias apps siempre que cada app se exponga a través de un servicio Kubernetes dentro del clúster.
     1.  Abra el editor que prefiera y cree un archivo de configuración de Ingress llamado, por ejemplo, `myingress.yaml`.
-    2.  Defina un recurso de Ingress en el archivo de configuración que utilice el dominio personalizado para direccionar el tráfico de entrada de red a los servicios y el certificado personalizado para gestionar la terminación TLS. Por cada servicio puede definir una vía de acceso individual que se añade a su dominio personalizado para crear una vía de acceso exclusiva para la app, como por ejemplo `https://mydomain/myapp`. Cuando especifica esta ruta en un navegador web, el tráfico de la red se direcciona al controlador de Ingress. El controlador de Ingress consulta el servicio asociado y envía el tráfico de red de entrada al servicio, y luego a los pods en los que se ejecuta la app.
+    2.  Defina un recurso de Ingress en el archivo de configuración que utilice el dominio personalizado para direccionar el tráfico de entrada de red a los servicios y el certificado personalizado para gestionar la terminación TLS. Por cada servicio puede definir una vía de acceso individual que se añade a su dominio personalizado para crear una vía de acceso exclusiva para la app, como por ejemplo `https://mydomain/myapp`. Cuando especifica esta ruta en un navegador web, el tráfico de la red se direcciona al equilibrador de carga de aplicación. El equilibrador de carga de aplicación consulta el servicio asociado y envía el tráfico de red de entrada al servicio, y luego a los pods en los que se ejecuta la app.
 
         **Nota:** Es importante que la app esté a la escucha en la vía de acceso que ha definido en el recurso de Ingress. De lo contrario, el tráfico de red no se puede reenviar a la app. La mayoría de las apps no escuchan en una vía de acceso específica, sino que utilizan la vía de acceso raíz y un puerto específico. En este caso, defina la vía de acceso raíz como `/` y no especifique una vía de acceso individual para la app.
 
@@ -1050,7 +1072,7 @@ Para configurar el controlador de Ingress:
         <td>Sustituya <em>&lt;myservicepath1&gt;</em> con una única barra o con la vía de acceso exclusiva en la que su app está a la escucha, de forma que el tráfico de la red se pueda reenviar a la app.
 
         </br>
-        Para cada servicio de Kubernetes, defina una vía de acceso individual que se añade al dominio que IBM proporciona para crear una vía de acceso exclusiva a su app como, por ejemplo, <code>ingress_domain/myservicepath1</code>. Cuando especifica esta ruta en un navegador web, el tráfico de la red se direcciona al controlador de Ingress. El controlador de Ingress busca el servicio asociado y envía el tráfico de red al servicio y a los pods en los que la app está en ejecución utilizando la misma vía de acceso. Se debe configurar a la app para que escuche en esta vía de servicio con el propósito de recibir el tráfico de red entrante.
+        Para cada servicio de Kubernetes, defina una vía de acceso individual que se añade al dominio que IBM proporciona para crear una vía de acceso exclusiva a su app como, por ejemplo, <code>ingress_domain/myservicepath1</code>. Cuando especifica esta ruta en un navegador web, el tráfico de la red se direcciona al equilibrador de carga de aplicación. El equilibrador de carga de aplicación busca el servicio asociado y envía el tráfico de red al servicio y a los pods en los que la app está en ejecución utilizando la misma vía de acceso. Se debe configurar a la app para que escuche en esta vía de servicio con el propósito de recibir el tráfico de red entrante.
 
         </br>
         Muchas apps no escuchan en una vía de acceso específica, sino que utilizan la vía de acceso raíz y un puerto específico. En este caso, defina la vía de acceso raíz como <code>/</code> y no especifique una vía de acceso individual para la app.
@@ -1097,10 +1119,10 @@ Para configurar el controlador de Ingress:
         {: codeblock}
 
 
-#### Configuración del controlador de Ingress para que direcciones el tráfico de la red a apps externas al clúster
+#### Configuración del equilibrador de carga de aplicación para que direccione el tráfico de la red a apps externas al clúster
 {: #external_endpoint}
 
-Puede configurar el controlador de Ingress para que se incluyan en el equilibrio de la carga del clúster apps situadas fuera del clúster. Las solicitudes entrantes en el dominio personalizado o proporcionado por IBM se reenvían automáticamente a la app externa.
+Puede configurar el equilibrador de carga de aplicación para que se incluyan en el equilibrio de la carga del clúster apps situadas fuera del clúster. Las solicitudes entrantes en el dominio personalizado o proporcionado por IBM se reenvían automáticamente a la app externa.
 
 Antes de empezar:
 
@@ -1108,7 +1130,7 @@ Antes de empezar:
 -   [Defina su clúster como destino de la CLI](cs_cli_install.html#cs_cli_configure) para ejecutar mandatos `kubectl`.
 -   Asegúrese de que se pueda acceder a la app externa que desea incluir en el equilibrio de la carga del clúster mediante una dirección IP pública.
 
-Puede configurar el controlador de Ingress para que direccione el tráfico de red de entrada del dominio proporcionado por IBM a apps situadas fuera del clúster. Si desea utilizar en su lugar un dominio personalizado y terminación de TLS, sustituya el dominio proporcionado por IBM y el certificado de TLS por su [dominio personalizado y certificado TLS](#custom_domain_cert)dominio personalizado y certificado TLS.
+Puede configurar el equilibrador de carga de aplicación para que direccione el tráfico de red de entrada del dominio proporcionado por IBM a apps situadas fuera del clúster. Si desea utilizar en su lugar un dominio personalizado y terminación de TLS, sustituya el dominio proporcionado por IBM y el certificado de TLS por su [dominio personalizado y certificado TLS](#custom_domain_cert)dominio personalizado y certificado TLS.
 
 1.  Configure un punto final de Kubernetes que defina la ubicación externa de la app que desea incluir en el equilibrio de la carga del clúster.
     1.  Abra el editor que prefiera y cree un archivo de configuración de punto final llamado, por ejemplo, `myexternalendpoint.yaml`.
@@ -1222,9 +1244,9 @@ Puede configurar el controlador de Ingress para que direccione el tráfico de re
 
     Puede ver el dominio proporcionado por IBM en el campo **Subdominio de Ingress** y el certificado proporcionado por IBM en el campo **Secreto de Ingress**.
 
-4.  Cree un recurso de Ingress. Los recursos de Ingress definen las reglas de direccionamiento para el servicio Kubernetes que ha creado para la app y el controlador de Ingress los utiliza para direccionar el tráfico de red de entrada al servicio. Puede utilizar un recurso de Ingress para definir las reglas de direccionamiento para varias apps externas siempre que cada app esté expuesta con su punto final externo mediante un servicio Kubernetes dentro del clúster.
+4.  Cree un recurso de Ingress. Los recursos de Ingress definen las reglas de direccionamiento para el servicio Kubernetes que ha creado para la app y el equilibrador de carga de aplicación los utiliza para direccionar el tráfico de red de entrada al servicio. Puede utilizar un recurso de Ingress para definir las reglas de direccionamiento para varias apps externas siempre que cada app esté expuesta con su punto final externo mediante un servicio Kubernetes dentro del clúster.
     1.  Abra el editor que prefiera y cree un archivo de configuración de Ingress llamado, por ejemplo, `myexternalingress.yaml`.
-    2.  Defina un recurso de Ingress en el archivo de configuración que utilice el dominio proporcionado por IBM y el certificado TLS para direccionar el tráfico de entrada de red a la app externa utilizando el punto final externo que ha definido anteriormente. Para cada servicio puede definir una vía de acceso individual que se añade al dominio proporcionado por IBM o al dominio personalizado para crear una vía de acceso exclusiva a la app, por ejemplo `https://ingress_domain/myapp`. Cuando especifica esta ruta en un navegador web, el tráfico de la red se direcciona al controlador de Ingress. El controlador de Ingress consulta el servicio asociado y envía el tráfico de red de entrada al servicio, y luego a la app externa.
+    2.  Defina un recurso de Ingress en el archivo de configuración que utilice el dominio proporcionado por IBM y el certificado TLS para direccionar el tráfico de entrada de red a la app externa utilizando el punto final externo que ha definido anteriormente. Para cada servicio puede definir una vía de acceso individual que se añade al dominio proporcionado por IBM o al dominio personalizado para crear una vía de acceso exclusiva a la app, por ejemplo `https://ingress_domain/myapp`. Cuando especifica esta ruta en un navegador web, el tráfico de la red se direcciona al equilibrador de carga de aplicación. El equilibrador de carga de aplicación consulta el servicio asociado y envía el tráfico de red de entrada al servicio, y luego a la app externa.
 
         **Nota:** Es importante que la app esté a la escucha en la vía de acceso que ha definido en el recurso de Ingress. De lo contrario, el tráfico de red no se puede reenviar a la app. La mayoría de las apps no escuchan en una vía de acceso específica, sino que utilizan la vía de acceso raíz y un puerto específico. En este caso, defina la vía de acceso raíz como / y no especifique una vía de acceso individual para la app.
 
@@ -1285,7 +1307,7 @@ Puede configurar el controlador de Ingress para que direccione el tráfico de re
         <td>Sustituya <em>&lt;myexternalservicepath&gt;</em> con una única barra o con la vía de acceso exclusiva en la que su app externa está a la escucha, de forma que el tráfico de la red se pueda reenviar a la app.
 
         </br>
-        Por cada servicio de Kubernetes, puede definir una vía de acceso individual que se añade a su dominio para crear una vía de acceso exclusiva a la app, por ejemplo <code>https://ibmdomain/myservicepath1</code>. Cuando especifica esta ruta en un navegador web, el tráfico de la red se direcciona al controlador de Ingress. El controlador de Ingress busca el servicio asociado y envía el tráfico de red a la app externa utilizando la misma vía de acceso. Se debe configurar a la app para que escuche en esta vía de servicio con el propósito de recibir el tráfico de red entrante.
+        Por cada servicio de Kubernetes, puede definir una vía de acceso individual que se añade a su dominio para crear una vía de acceso exclusiva a la app, por ejemplo <code>https://ibmdomain/myservicepath1</code>. Cuando especifica esta ruta en un navegador web, el tráfico de la red se direcciona al equilibrador de carga de aplicación. El equilibrador de carga de aplicación busca el servicio asociado y envía el tráfico de red a la app externa utilizando la misma vía de acceso. Se debe configurar a la app para que escuche en esta vía de servicio con el propósito de recibir el tráfico de red entrante.
 
         </br></br>
         Muchas apps no escuchan en una vía de acceso específica, sino que utilizan la vía de acceso raíz y un puerto específico. En este caso, defina la vía de acceso raíz como <code>/</code> y no especifique una vía de acceso individual para la app.
@@ -1410,7 +1432,7 @@ ssl-ciphers : "HIGH:!aNULL:!MD5"
 Para obtener más información sobre estos parámetros, consulte la documentación de NGINX para [protocolos ssl![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_protocols) y [cifrados ssl![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_ciphers).
 
 Para cambiar los valores predeterminados:
-1. Cree una versión local del archivo de configuración del recurso del mapa de configuración ibm-cloud-provider-ingress-cm. 
+1. Cree una versión local del archivo de configuración del recurso del mapa de configuración ibm-cloud-provider-ingress-cm.
 
  ```
  apiVersion: v1
@@ -1454,26 +1476,26 @@ Para cambiar los valores predeterminados:
  {: screen}
 
 
-#### Habilitación del controlador de Ingress privado
+#### Habilitación del equilibrador de carga de aplicación privado
 {: #private_ingress}
 
-Cuando se crea un clúster estándar, se crea automáticamente un controlador de Ingress privado, pero no se habilita de forma automática. Para poder utilizar el controlador de Ingress privado, se debe habilitar con la dirección IP privada portátil asignada previamente y proporcionada por IBM o con su propia dirección IP privada portátil. **Nota**: si ha utilizado el distintivo `--no-subnet` al crear el clúster, debe añadir una subred privada portátil o una subred gestionada por el usuario para poder habilitar el controlador de Ingress privado. Para obtener más información, consulte [Solicitud de subredes adicionales para el clúster](cs_cluster.html#add_subnet).
+Cuando se crea un clúster estándar, el controlador de Ingress crea automáticamente un equilibrador de carga de aplicación privado pero no lo habilita automáticamente. Para poder utilizar el equilibrador de carga de aplicación privado, se debe habilitar con la dirección IP privada portátil asignada previamente y proporcionada por IBM o con su propia dirección IP privada portátil. **Nota**: si ha utilizado el distintivo `--no-subnet` al crear el clúster, debe añadir una subred privada portátil o una subred gestionada por el usuario para poder habilitar el equilibrador de carga de aplicación privado. Para obtener más información, consulte [Solicitud de subredes adicionales para el clúster](cs_cluster.html#add_subnet).
 
 Antes de empezar:
 
 -   Si aún no tiene uno, [cree un clúster estándar](cs_cluster.html#cs_cluster_ui).
 -   Defina su clúster como [destino de la CLI](cs_cli_install.html#cs_cli_configure).
 
-Para habilitar el controlador de Ingress privado utilizando la dirección IP privada portátil asignada previamente y proporcionada por IBM:
+Para habilitar el equilibrador de carga de aplicación privado utilizando la dirección IP privada portátil asignada previamente y proporcionada por IBM:
 
-1. Obtenga una lista de los controladores de Ingress disponible en el clúster para obtener el ID de ALB del controlador de Ingress privado. Sustituya <em>&lt;cluser_name&gt;</em> por el nombre del clúster en el que está desplegada la app que desea exponer.
+1. Obtenga una lista de los equilibradores de carga de aplicación disponibles en el clúster para obtener el ID del equilibrador de carga de aplicación privado. Sustituya <em>&lt;cluser_name&gt;</em> por el nombre del clúster en el que está desplegada la app que desea exponer.
 
     ```
     bx cs albs --cluster <my_cluster>
     ```
     {: pre}
 
-    El campo **Estado** del controlador de Ingress privado es _inhabilitado_.
+    El campo **Estado** del equilibrador de carga de aplicación privado es _inhabilitado_.
     ```
     ALB ID                                            Enabled   Status     Type      ALB IP
     private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   false     disabled   private   -
@@ -1481,7 +1503,7 @@ Para habilitar el controlador de Ingress privado utilizando la dirección IP pri
     ```
     {: screen}
 
-2. Habilite el controlador de Ingress privado. Sustituya <em>&lt;private_ALB_ID&gt;</em> por el ID de ALB del controlador de Ingress privado de la salida del paso anterior.
+2. Habilite el equilibrador de carga de aplicación privado. Sustituya <em>&lt;private_ALB_ID&gt;</em> por el ID del equilibrador de carga de aplicación privado de la salida del paso anterior.
 
    ```
    bx cs bx cs alb-configure --albID <private_ALB_ID> --enable
@@ -1489,7 +1511,7 @@ Para habilitar el controlador de Ingress privado utilizando la dirección IP pri
    {: pre}
 
 
-Para habilitar el controlador de Ingress privado utilizando la dirección IP privada portátil:
+Para habilitar el equilibrador de carga de aplicación privado utilizando la dirección IP privada portátil:
 
 1. Configure la subred gestionada por el usuario de la dirección IP seleccionada para direccionar el tráfico en la VLAN privada del clúster. Sustituya <em>&lt;cluster_name&gt;</em> por el nombre o ID del clúster en el que está desplegada la app que desea exponer, <em>&lt;subnet_CIDR&gt;</em> por el CIDR de la subred gestionada por el usuario y <em>&lt;private_VLAN&gt;</em> por el ID de la VLAN privada. Encontrará el ID de la VLAN privada disponible ejecutando `bx cs vlans`.
 
@@ -1498,14 +1520,14 @@ Para habilitar el controlador de Ingress privado utilizando la dirección IP pri
    ```
    {: pre}
 
-2. Obtenga una lista de los controladores de Ingress disponible en el clúster para obtener el ID de ALB del controlador de Ingress privado. 
+2. Obtenga una lista de los equilibradores de carga de aplicación disponibles en el clúster para obtener el ID del equilibrador de carga de aplicación privado.
 
     ```
     bx cs albs --cluster <my_cluster>
     ```
     {: pre}
 
-    El campo **Estado** del controlador de Ingress privado es _inhabilitado_.
+    El campo **Estado** del equilibrador de carga de aplicación privado es _inhabilitado_.
     ```
     ALB ID                                            Enabled   Status     Type      ALB IP
     private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   false     disabled   private   -
@@ -1513,29 +1535,30 @@ Para habilitar el controlador de Ingress privado utilizando la dirección IP pri
     ```
     {: screen}
 
-3. Habilite el controlador de Ingress privado. Sustituya <em>&lt;private_ALB_ID&gt;</em> por el ID de ALB del controlador de Ingress privado de la salida del paso anterior y <em>&lt;user_ip&gt;</em> por la dirección IP de la subred gestionada por el usuario que desea utilizar.
+3. Habilite el equilibrador de carga de aplicación privado. Sustituya <em>&lt;private_ALB_ID&gt;</em> por el ID del equilibrador de carga de aplicación privado de la salida del paso anterior y <em>&lt;user_ip&gt;</em> por la dirección IP de la subred gestionada por el usuario que desea utilizar.
 
    ```
    bx cs bx cs alb-configure --albID <private_ALB_ID> --enable --user-ip <user_ip>
    ```
    {: pre}
 
-#### Utilización del controlador de Ingress privado con un dominio personalizado
+#### Utilización del equilibrador de carga de aplicación privado con un dominio personalizado
 {: #private_ingress_no_tls}
 
-Puede configurar el controlador de Ingress privado para que direccione el tráfico de red entrante a las apps del clúster utilizando un dominio personalizado.{:shortdesc}
+Puede configurar el equilibrador de carga de aplicación privado para que direccione el tráfico de red entrante a las apps del clúster utilizando un dominio personalizado.
+{:shortdesc}
 
-Antes de empezar, [habilite el controlador de Ingress privado](#private_ingress).
+Antes de empezar, [habilite el equilibrador de carga de aplicación privado](#private_ingress).
 
-Para configurar el controlador de Ingress privado:
+Para configurar el equilibrador de carga de aplicación privado:
 
 1.  Cree un dominio personalizado. Para crear un dominio personalizado, póngase en contacto con el proveedor de DNS (Domain Name Service) y para que registre su dominio personalizado.
 
-2.  Correlacione el dominio personalizado con la dirección IP privada portátil del controlador de Ingress privado proporcionado por IBM añadiendo la dirección IP como registro. Para buscar la dirección IP privada portátil del controlador de Ingress privado, ejecute `bx cs albs --cluster <cluster_name>`.
+2.  Correlacione el dominio personalizado con la dirección IP privada portátil del equilibrador de carga de aplicación privado proporcionado por IBM añadiendo la dirección IP como registro. Para buscar la dirección IP privada portátil del equilibrador de carga de aplicación privado, ejecute `bx cs albs --cluster <cluster_name>`.
 
 3.  [Despliegue la app en el clúster](#cs_apps_cli). Cuando despliegue la app en el clúster, se crean uno o más pods que ejecutan la app en un contenedor. Asegúrese de añadir una etiqueta a su despliegue en la sección de metadatos del archivo de configuración. Esta etiqueta es necesaria para identificar todos los pods en los que se está ejecutando la app, de modo que puedan incluirse en el equilibrio de carga de Ingress.
 
-4.  Cree un servicio Kubernetes para poder exponer la app. El controlador de Ingress privado puede incluir la app en el equilibrio de carga de Ingress sólo si la app se expone mediante un servicio Kubernetes dentro del clúster. 
+4.  Cree un servicio Kubernetes para poder exponer la app. El equilibrador de carga de aplicación privado puede incluir la app en el equilibrio de carga de Ingress sólo si la app se expone mediante un servicio Kubernetes dentro del clúster.
 
     1.  Abra el editor que prefiera y cree un archivo de configuración de servicio llamado, por ejemplo, `myservice.yaml`.
     2.  Defina un servicio para la app que desea exponer al público.
@@ -1580,9 +1603,9 @@ Para configurar el controlador de Ingress privado:
         {: pre}
 
     5.  Repita estos pasos para cada app que desee exponer a la red privada.
-7.  Cree un recurso de Ingress. Los recursos de Ingress definen las reglas de direccionamiento para el servicio Kubernetes que ha creado para la app y el controlador de Ingress los utiliza para direccionar el tráfico de red de entrada al servicio. Puede utilizar un recurso de Ingress para definir las reglas de direccionamiento para varias apps siempre que cada app se exponga a través de un servicio Kubernetes dentro del clúster.
+7.  Cree un recurso de Ingress. Los recursos de Ingress definen las reglas de direccionamiento para el servicio Kubernetes que ha creado para la app y el equilibrador de carga de aplicación los utiliza para direccionar el tráfico de red de entrada al servicio. Puede utilizar un recurso de Ingress para definir las reglas de direccionamiento para varias apps siempre que cada app se exponga a través de un servicio Kubernetes dentro del clúster.
     1.  Abra el editor que prefiera y cree un archivo de configuración de Ingress llamado, por ejemplo, `myingress.yaml`.
-    2.  Defina un recurso de Ingress en el archivo de configuración que utilice el dominio personalizado para direccionar el tráfico de entrada de red a los servicios. Por cada servicio puede definir una vía de acceso individual que se añade a su dominio personalizado para crear una vía de acceso exclusiva para la app, como por ejemplo `https://mydomain/myapp`. Cuando especifica esta ruta en un navegador web, el tráfico de la red se direcciona al controlador de Ingress. El controlador de Ingress consulta el servicio asociado y envía el tráfico de red de entrada al servicio, y luego a los pods en los que se ejecuta la app.
+    2.  Defina un recurso de Ingress en el archivo de configuración que utilice el dominio personalizado para direccionar el tráfico de entrada de red a los servicios. Por cada servicio puede definir una vía de acceso individual que se añade a su dominio personalizado para crear una vía de acceso exclusiva para la app, como por ejemplo `https://mydomain/myapp`. Cuando especifica esta ruta en un navegador web, el tráfico de la red se direcciona al equilibrador de carga de aplicación. El equilibrador de carga de aplicación consulta el servicio asociado y envía el tráfico de red de entrada al servicio, y luego a los pods en los que se ejecuta la app.
 
         **Nota:** Es importante que la app esté a la escucha en la vía de acceso que ha definido en el recurso de Ingress. De lo contrario, el tráfico de red no se puede reenviar a la app. La mayoría de las apps no escuchan en una vía de acceso específica, sino que utilizan la vía de acceso raíz y un puerto específico. En este caso, defina la vía de acceso raíz como `/` y no especifique una vía de acceso individual para la app.
 
@@ -1620,7 +1643,7 @@ Para configurar el controlador de Ingress privado:
         </tr>
         <tr>
         <td><code>ingress.bluemix.net/ALB-ID</code></td>
-        <td>Sustituya <em>&lt;private_ALB_ID&gt;</em> por el ID de ALB del controlador de Ingress privado. Ejecute <code>bx cs albs --cluster <my_cluster></code> para buscar el ID de ALB.</td>
+        <td>Sustituya <em>&lt;private_ALB_ID&gt;</em> por el ID de ALB del controlador de Ingress privado. Ejecute <code>bx cs albs --cluster <my_cluster></code> para buscar el ID de ALB. Para obtener más información sobre esta anotación de Ingress, consulte [ID de equilibrador de carga de aplicación (ALB_ID)](cs_annotations.html#alb-id).</td>
         </tr>
         <td><code>host</code></td>
         <td>Sustituya <em>&lt;mycustomdomain&gt;</em> por dominio personalizado.
@@ -1634,7 +1657,7 @@ Para configurar el controlador de Ingress privado:
         <td>Sustituya <em>&lt;myservicepath1&gt;</em> con una única barra o con la vía de acceso exclusiva en la que su app está a la escucha, de forma que el tráfico de la red se pueda reenviar a la app.
 
         </br>
-        Para cada servicio de Kubernetes, defina una vía de acceso individual que se añade al dominio personalizado para crear una vía de acceso exclusiva a su app como, por ejemplo, <code>custom_domain/myservicepath1</code>. Cuando especifica esta ruta en un navegador web, el tráfico de la red se direcciona al controlador de Ingress. El controlador de Ingress busca el servicio asociado y envía el tráfico de red al servicio y a los pods en los que la app está en ejecución utilizando la misma vía de acceso. Se debe configurar a la app para que escuche en esta vía de servicio con el propósito de recibir el tráfico de red entrante.
+        Para cada servicio de Kubernetes, defina una vía de acceso individual que se añade al dominio personalizado para crear una vía de acceso exclusiva a su app como, por ejemplo, <code>custom_domain/myservicepath1</code>. Cuando especifica esta ruta en un navegador web, el tráfico de la red se direcciona al equilibrador de carga de aplicación. El equilibrador de carga de aplicación busca el servicio asociado y envía el tráfico de red al servicio y a los pods en los que la app está en ejecución utilizando la misma vía de acceso. Se debe configurar a la app para que escuche en esta vía de servicio con el propósito de recibir el tráfico de red entrante.
 
         </br>
         Muchas apps no escuchan en una vía de acceso específica, sino que utilizan la vía de acceso raíz y un puerto específico. En este caso, defina la vía de acceso raíz como <code>/</code> y no especifique una vía de acceso individual para la app.
@@ -1662,14 +1685,14 @@ Para configurar el controlador de Ingress privado:
         ```
         {: pre}
 
-8.  Verifique que el recurso de Ingress se haya creado correctamente. Sustituya <em>&lt;myingressname&gt;</em> por el nombre del recurso de Ingress que ha creado en el paso anterior. 
+8.  Verifique que el recurso de Ingress se haya creado correctamente. Sustituya <em>&lt;myingressname&gt;</em> por el nombre del recurso de Ingress que ha creado en el paso anterior.
 
     ```
     kubectl describe ingress <myingressname>
     ```
     {: pre}
 
-    **Nota:** Pueden transcurrir unos segundos hasta que el recurso de Ingress se cree correctamente y la app esté disponible. 
+    **Nota:** Pueden transcurrir unos segundos hasta que el recurso de Ingress se cree correctamente y la app esté disponible.
 
 9.  Acceda a la app desde Internet.
     1.  Abra el navegador web preferido.
@@ -1680,54 +1703,30 @@ Para configurar el controlador de Ingress privado:
         ```
         {: codeblock}
 
-#### Utilización del controlador de Ingress privado con un dominio personalizado y un certificado TLS
+#### Utilización del equilibrador de carga de aplicación privado con un dominio personalizado y un certificado TLS
 {: #private_ingress_tls}
 
-Puede configurar el controlador de Ingress privado para que direccione el tráfico de red de entrada a las apps del clúster y utilice su propio certificado TLS para gestionar la terminación de TLS, utilizando el dominio personalizado en lugar del proporcionado por IBM.
+Puede configurar el equilibrador de carga de aplicación privado para que direccione el tráfico de red de entrada a las apps del clúster y utilice su propio certificado TLS para gestionar la terminación de TLS, utilizando el dominio personalizado.
 {:shortdesc}
 
-Antes de empezar, [habilite el controlador de Ingress privado](#private_ingress).
+Antes de empezar, [habilite el equilibrador de carga de aplicación privado](#private_ingress).
 
-Para configurar el controlador de Ingress:
+Para configurar el equilibrador de carga de aplicación:
 
 1.  Cree un dominio personalizado. Para crear un dominio personalizado, póngase en contacto con el proveedor de DNS (Domain Name Service) y para que registre su dominio personalizado.
 
-2.  Correlacione el dominio personalizado con la dirección IP privada portátil del controlador de Ingress privado proporcionado por IBM añadiendo la dirección IP como registro. Para buscar la dirección IP privada portátil del controlador de Ingress privado, ejecute `bx cs albs --cluster <cluster_name>`.
+2.  Correlacione el dominio personalizado con la dirección IP privada portátil del equilibrador de carga de aplicación privado proporcionado por IBM añadiendo la dirección IP como registro. Para buscar la dirección IP privada portátil del equilibrador de carga de aplicación privado, ejecute `bx cs albs --cluster <cluster_name>`.
 
 3.  Cree un certificado TLS y una clave para el dominio que estén codificados en formato PEM.
 
 4.  Guarde el certificado TLS y la clave en un secreto de Kubernetes.
     1.  Abra el editor que prefiera y cree un archivo de configuración de secreto de Kubernetes llamado, por ejemplo, `mysecret.yaml`.
-    2.  Defina un secreto que utilice su certificado TLS y clave.
+    2.  Defina un secreto que utilice su certificado TLS y clave. Sustituya <em>&lt;mytlssecret&gt;</em> con un nombre para su secreto de Kubernetes, <tls_key_filepath> con la vía de acceso a su archivo de claves TLS personalizado y <tls_cert_filepath> con la vía de acceso al archivo de certificado TLS personalizado.
 
         ```
-        apiVersion: v1
-        kind: Secret
-        metadata:
-          name: <mytlssecret>
-        type: Opaque
-        data:
-          tls.crt: <tlscert>
-          tls.key: <tlskey>
+        kubectl create secret tls <mytlssecret> --key <tls_key_filepath> --cert <tls_cert_filepath>
         ```
-        {: codeblock}
-
-        <table>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Visión general de los componentes del archivo YAML</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>name</code></td>
-        <td>Sustituya <em>&lt;mytlssecret&gt;</em> por el nombre del secreto de Kubernetes.</td>
-        </tr>
-        <tr>
-        <td><code>tls.cert</code></td>
-        <td>Sustituya <em>&lt;tlscert&gt;</em> por su certificado TLS personalizado codificado en formato base64.</td>
-         </tr>
-         <td><code>tls.key</code></td>
-         <td>Sustituya <em>&lt;tlskey&gt;</em> por su clave TLS personalizada codificada en formato base64.</td>
-         </tbody></table>
+        {: pre}
 
     3.  Guarde el archivo de configuración.
     4.  Cree el secreto de TLS para el clúster.
@@ -1739,7 +1738,7 @@ Para configurar el controlador de Ingress:
 
 5.  [Despliegue la app en el clúster](#cs_apps_cli). Cuando despliegue la app en el clúster, se crean uno o más pods que ejecutan la app en un contenedor. Asegúrese de añadir una etiqueta a su despliegue en la sección de metadatos del archivo de configuración. Esta etiqueta es necesaria para identificar todos los pods en los que se está ejecutando la app, de modo que puedan incluirse en el equilibrio de carga de Ingress.
 
-6.  Cree un servicio Kubernetes para poder exponer la app. El controlador de Ingress privado puede incluir la app en el equilibrio de carga de Ingress sólo si la app se expone mediante un servicio Kubernetes dentro del clúster. 
+6.  Cree un servicio Kubernetes para poder exponer la app. El equilibrador de carga de aplicación privado puede incluir la app en el equilibrio de carga de Ingress sólo si la app se expone mediante un servicio Kubernetes dentro del clúster.
 
     1.  Abra el editor que prefiera y cree un archivo de configuración de servicio llamado, por ejemplo, `myservice.yaml`.
     2.  Defina un servicio para la app que desea exponer al público.
@@ -1784,9 +1783,9 @@ Para configurar el controlador de Ingress:
         {: pre}
 
     5.  Repita estos pasos para cada app que desee exponer en la red privada.
-7.  Cree un recurso de Ingress. Los recursos de Ingress definen las reglas de direccionamiento para el servicio Kubernetes que ha creado para la app y el controlador de Ingress los utiliza para direccionar el tráfico de red de entrada al servicio. Puede utilizar un recurso de Ingress para definir las reglas de direccionamiento para varias apps siempre que cada app se exponga a través de un servicio Kubernetes dentro del clúster.
+7.  Cree un recurso de Ingress. Los recursos de Ingress definen las reglas de direccionamiento para el servicio Kubernetes que ha creado para la app y el equilibrador de carga de aplicación los utiliza para direccionar el tráfico de red de entrada al servicio. Puede utilizar un recurso de Ingress para definir las reglas de direccionamiento para varias apps siempre que cada app se exponga a través de un servicio Kubernetes dentro del clúster.
     1.  Abra el editor que prefiera y cree un archivo de configuración de Ingress llamado, por ejemplo, `myingress.yaml`.
-    2.  Defina un recurso de Ingress en el archivo de configuración que utilice el dominio personalizado para direccionar el tráfico de entrada de red a los servicios y el certificado personalizado para gestionar la terminación TLS. Por cada servicio puede definir una vía de acceso individual que se añade a su dominio personalizado para crear una vía de acceso exclusiva para la app, como por ejemplo `https://mydomain/myapp`. Cuando especifica esta ruta en un navegador web, el tráfico de la red se direcciona al controlador de Ingress. El controlador de Ingress consulta el servicio asociado y envía el tráfico de red de entrada al servicio, y luego a los pods en los que se ejecuta la app.
+    2.  Defina un recurso de Ingress en el archivo de configuración que utilice el dominio personalizado para direccionar el tráfico de entrada de red a los servicios y el certificado personalizado para gestionar la terminación TLS. Por cada servicio puede definir una vía de acceso individual que se añade a su dominio personalizado para crear una vía de acceso exclusiva para la app, como por ejemplo `https://mydomain/myapp`. Cuando especifica esta ruta en un navegador web, el tráfico de la red se direcciona al equilibrador de carga de aplicación. El equilibrador de carga de aplicación consulta el servicio asociado y envía el tráfico de red de entrada al servicio, y luego a los pods en los que se ejecuta la app.
 
         **Nota:** Es importante que la app esté a la escucha en la vía de acceso que ha definido en el recurso de Ingress. De lo contrario, el tráfico de red no se puede reenviar a la app. La mayoría de las apps no escuchan en una vía de acceso específica, sino que utilizan la vía de acceso raíz y un puerto específico. En este caso, defina la vía de acceso raíz como `/` y no especifique una vía de acceso individual para la app.
 
@@ -1828,7 +1827,7 @@ Para configurar el controlador de Ingress:
         </tr>
         <tr>
         <td><code>ingress.bluemix.net/ALB-ID</code></td>
-        <td>Sustituya <em>&lt;private_ALB_ID&gt;</em> por el ID de ALB del controlador de Ingress privado. Ejecute <code>bx cs albs --cluster <my_cluster></code> para buscar el ID de ALB.</td>
+        <td>Sustituya <em>&lt;private_ALB_ID&gt;</em> por el ID del equilibrador de carga de aplicación privado. Ejecute <code>bx cs albs --cluster <my_cluster></code> para buscar el ID del equilibrador de carga de aplicación. Para obtener más información sobre esta anotación de Ingress, consulte [Direccionamiento del equilibrador de carga de aplicación privado (ALB-ID)](cs_annotations.html#alb-id).</td>
         </tr>
         <tr>
         <td><code>tls/hosts</code></td>
@@ -1854,7 +1853,7 @@ Para configurar el controlador de Ingress:
         <td>Sustituya <em>&lt;myservicepath1&gt;</em> con una única barra o con la vía de acceso exclusiva en la que su app está a la escucha, de forma que el tráfico de la red se pueda reenviar a la app.
 
         </br>
-        Para cada servicio de Kubernetes, defina una vía de acceso individual que se añade al dominio que IBM proporciona para crear una vía de acceso exclusiva a su app como, por ejemplo, <code>ingress_domain/myservicepath1</code>. Cuando especifica esta ruta en un navegador web, el tráfico de la red se direcciona al controlador de Ingress. El controlador de Ingress busca el servicio asociado y envía el tráfico de red al servicio y a los pods en los que la app está en ejecución utilizando la misma vía de acceso. Se debe configurar a la app para que escuche en esta vía de servicio con el propósito de recibir el tráfico de red entrante.
+        Para cada servicio de Kubernetes, defina una vía de acceso individual que se añade al dominio que IBM proporciona para crear una vía de acceso exclusiva a su app como, por ejemplo, <code>ingress_domain/myservicepath1</code>. Cuando especifica esta ruta en un navegador web, el tráfico de la red se direcciona al equilibrador de carga de aplicación. El equilibrador de carga de aplicación busca el servicio asociado y envía el tráfico de red al servicio y a los pods en los que la app está en ejecución utilizando la misma vía de acceso. Se debe configurar a la app para que escuche en esta vía de servicio con el propósito de recibir el tráfico de red entrante.
 
         </br>
         Muchas apps no escuchan en una vía de acceso específica, sino que utilizan la vía de acceso raíz y un puerto específico. En este caso, defina la vía de acceso raíz como <code>/</code> y no especifique una vía de acceso individual para la app.
@@ -1889,7 +1888,7 @@ Para configurar el controlador de Ingress:
     ```
     {: pre}
 
-    **Nota:** Pueden transcurrir unos segundos hasta que el recurso de Ingress se cree correctamente y la app esté disponible. 
+    **Nota:** Pueden transcurrir unos segundos hasta que el recurso de Ingress se cree correctamente y la app esté disponible.
 
 9.  Acceda a la app desde Internet.
     1.  Abra el navegador web preferido.
@@ -1908,7 +1907,7 @@ Puede utilizar subredes públicas y privadas portátiles y direcciones IP para e
 
 En {{site.data.keyword.containershort_notm}}, tiene la posibilidad de añadir direcciones IP portátiles y estables para los servicios de Kubernetes añadiendo subredes al clúster. Cuando se crea un clúster estándar, {{site.data.keyword.containershort_notm}} automáticamente suministra una subred pública portátil con 5 direcciones IP públicas portátiles y una subred privada portátil con 5 direcciones IP privadas. Las direcciones IP portátiles son estáticas y no cambian cuando se elimina un nodo trabajador o incluso el clúster.
 
- Dos de las direcciones IP portátiles, una pública y una privada, se utilizan para los [controladores de Ingress](#cs_apps_public_ingress), que puede utilizar para exponer varias apps en el clúster. Se pueden utilizar 4 direcciones IP públicas portátiles y 4 direcciones IP privadas para exponer apps mediante la [creación de un servicio equilibrador de carga](#cs_apps_public_load_balancer).
+ Dos de las direcciones IP portátiles, una pública y una privada, se utilizan para los [equilibradores de carga de aplicación Ingress](#cs_apps_public_ingress), que puede utilizar para exponer varias apps en el clúster. Se pueden utilizar 4 direcciones IP públicas portátiles y 4 direcciones IP privadas para exponer apps mediante la [creación de un servicio equilibrador de carga](#cs_apps_public_load_balancer).
 
 **Nota:** Las direcciones IP públicas portátiles se facturan mensualmente. Si decide retirar las direcciones IP públicas portátiles una vez suministrado el clúster, tendrá que pagar el cargo mensual, aunque solo las haya utilizado un breve periodo de tiempo.
 
@@ -2092,8 +2091,6 @@ Para desplegar la app:
 ## Escalado de apps
 {: #cs_apps_scaling}
 
-<!--Horizontal auto-scaling is not working at the moment due to a port issue with heapster. The dev team is working on a fix. We pulled out this content from the public docs. It is only visible in staging right now.-->
-
 Despliegue aplicaciones en la nube que respondan a cambios en la demanda para las aplicaciones y que utilicen los recursos solo cuando los necesiten. El escalado automático aumenta o reduce automáticamente el número de instancias de las apps en función de la CPU.
 {:shortdesc}
 
@@ -2101,7 +2098,7 @@ Antes de empezar, seleccione su clúster como [destino de la CLI](cs_cli_install
 
 **Nota:** ¿Está buscando información sobre las aplicaciones de escalado de Cloud Foundry? Consulte [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html).
 
-Con Kubernetes, puede habilitar el [escalado automático de pod horizontal ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) para escalar las apps en función de la CPU.
+Con Kubernetes, puede habilitar el [escalado automático de pod horizontal ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale) para escalar las apps en función de la CPU.
 
 1.  Despliegue la app en el clúster desde la CLI. Cuando despliegue la app, debe solicitar CPU.
 
@@ -2133,7 +2130,7 @@ Con Kubernetes, puede habilitar el [escalado automático de pod horizontal ![Ico
     </tr></tbody></table>
 
     **Nota:** Para despliegues más complejos, es posible que tenga que crear un [archivo de configuración](#cs_apps_cli).
-2.  Cree Horizontal Pod Autoscaler y defina la política. Para obtener más información sobre cómo trabajar con el mandato `kubetcl autoscale`, consulte [la documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/user-guide/kubectl/v1.5/#autoscale).
+2.  Cree Horizontal Pod Autoscaler y defina la política. Para obtener más información sobre cómo trabajar con el mandato `kubectl autoscale`, consulte [la documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
 
     ```
     kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
@@ -2159,6 +2156,8 @@ Con Kubernetes, puede habilitar el [escalado automático de pod horizontal ![Ico
     </tr>
     </tbody></table>
 
+
+
 <br />
 
 
@@ -2170,7 +2169,7 @@ Puede gestionar la implantación de los cambios de una forma automatizada y cont
 
 Antes de empezar, cree un [despliegue](#cs_apps_cli).
 
-1.  [Implante ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/user-guide/kubectl/v1.5/#rollout) un cambio. Por ejemplo, supongamos que desea cambiar la imagen que ha utilizado en el despliegue inicial.
+1.  [Implante ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#rollout) un cambio. Por ejemplo, supongamos que desea cambiar la imagen que ha utilizado en el despliegue inicial.
 
     1.  Obtener el nombre del despliegue.
 
@@ -2364,7 +2363,7 @@ Cuando monta un volumen secreto en un pod, se almacena un archivo denominado bin
     ```
     {: screen}
 
-
+    
 
 9.  Cuando implemente la app, configúrela de modo que encuentre el archivo secreto denominado **binding** en el directorio de montaje, analice el contenido JSON y determine el URL y las credenciales del servicio para acceder al servicio de {{site.data.keyword.Bluemix_notm}}.
 
@@ -2376,14 +2375,10 @@ Ahora puede acceder a los detalles y credenciales del servicio de {{site.data.ke
 ## Creación de almacenamiento permanente
 {: #cs_apps_volume_claim}
 
-Cree una reclamación de volumen permanente para suministrar almacenamiento de archivos NFS al clúster. Luego monte esta reclamación en un pod para asegurarse de que los datos estén disponibles aunque el pod se cuelgue o se cierre.
+Cree una reclamación de volumen permanente para suministrar almacenamiento de archivos NFS al clúster. Luego monte esta reclamación en un despliegue para asegurarse de que los datos estén disponibles aunque los pods se cuelguen o se cierren.
 {:shortdesc}
 
 IBM coloca el almacén de archivos NFS que contiene el volumen permanente en un clúster para ofrecer una alta disponibilidad de los datos.
-
-
-Cuando una cuenta de {{site.data.keyword.Bluemix_dedicated_notm}} está [habilitada para clústeres](cs_ov.html#setup_dedicated), en lugar de utilizar esta tarea, se debe [abrir una incidencia de soporte](/docs/support/index.html#contacting-support). Al abrir una incidencia de soporte, puede solicitar una copia de seguridad de los volúmenes, una restauración y otras funciones de almacenamiento.
-
 
 1.  Revise las clases de almacenamiento disponibles. {{site.data.keyword.containerlong}} ofrece ocho clases de almacenamiento predefinidas para que el administrador del clúster no tenga que crear ninguna clase de almacenamiento. La clase de almacenamiento `ibmc-file-bronze` es la misma que la clase de almacenamiento `default`.
 
@@ -2410,34 +2405,35 @@ Cuando una cuenta de {{site.data.keyword.Bluemix_dedicated_notm}} está [habilit
 2.  Decida si desea guardar los datos y la compartición de archivos NFS después de suprimir pvc. Si desea conservar los datos, seleccione la clase de almacenamiento `retain`. Si desea que los datos y la compartición de archivos se supriman cuando suprima el pvc, elija una clase de almacenamiento sin `retain`.
 
 3.  Revise el IOPS de una clase de almacenamiento y los tamaños de almacenamiento disponibles.
-    - Las clases de almacenamiento de bronce, plata y oro utilizar almacenamiento Endurance y tienen un único IOPS definido por GB para cada clase. El IOPS total depende del tamaño del almacenamiento. Por ejemplo, 1000Gi pvc a 4 IOPS por GB tiene un total de 4000 IOPS.
 
-    ```
-    kubectl describe storageclasses ibmc-file-silver
-    ```
-    {: pre}
+    - Las clases de almacenamiento de bronce, plata y oro utilizan [Almacenamiento resistente ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://knowledgelayer.softlayer.com/topic/endurance-storage) y tienen un único IOPS definido por GB para cada clase. El IOPS total depende del tamaño del almacenamiento. Por ejemplo, 1000Gi pvc a 4 IOPS por GB tiene un total de 4000 IOPS.
 
-    El campo **parameters** proporciona el IOPS por GB asociado a la clase de almacenamiento y los
+      ```
+      kubectl describe storageclasses ibmc-file-silver
+      ```
+      {: pre}
+
+      El campo **parameters** proporciona el IOPS por GB asociado a la clase de almacenamiento y los
 tamaños disponibles en gigabytes.
 
-    ```
-    Parameters:	iopsPerGB=4,sizeRange=20Gi,40Gi,80Gi,100Gi,250Gi,500Gi,1000Gi,2000Gi,4000Gi,8000Gi,12000Gi
-    ```
-    {: screen}
+      ```
+      Parameters:	iopsPerGB=4,sizeRange=20Gi,40Gi,80Gi,100Gi,250Gi,500Gi,1000Gi,2000Gi,4000Gi,8000Gi,12000Gi
+      ```
+      {: screen}
 
     - Las clases de almacenamiento personalizado utilizan [Almacenamiento de rendimiento ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://knowledgelayer.softlayer.com/topic/performance-storage) y ofrecen distintas opciones en cuanto al IOPS y tamaño totales.
 
-    ```
-    kubectl describe storageclasses ibmc-file-retain-custom
-    ```
-    {: pre}
+      ```
+      kubectl describe storageclasses ibmc-file-retain-custom
+      ```
+      {: pre}
 
-    El campo **parameters** proporciona el IOPS asociado a la clase de almacenamiento y los tamaños disponibles en gigabytes. Por ejemplo, un 40Gi pvc puede seleccionar un IOPS que sea múltiplo de 100 que esté comprendido entre 100 y 2000 IOPS.
+      El campo **parameters** proporciona el IOPS asociado a la clase de almacenamiento y los tamaños disponibles en gigabytes. Por ejemplo, un 40Gi pvc puede seleccionar un IOPS que sea múltiplo de 100 que esté comprendido entre 100 y 2000 IOPS.
 
-    ```
-    Parameters:	Note=IOPS value must be a multiple of 100,reclaimPolicy=Retain,sizeIOPSRange=20Gi:[100-1000],40Gi:[100-2000],80Gi:[100-4000],100Gi:[100-6000],1000Gi[100-6000],2000Gi:[200-6000],4000Gi:[300-6000],8000Gi:[500-6000],12000Gi:[1000-6000]
-    ```
-    {: screen}
+      ```
+      Parameters:	Note=IOPS value must be a multiple of 100,reclaimPolicy=Retain,sizeIOPSRange=20Gi:[100-1000],40Gi:[100-2000],80Gi:[100-4000],100Gi:[100-6000],1000Gi[100-6000],2000Gi:[200-6000],4000Gi:[300-6000],8000Gi:[500-6000],12000Gi:[1000-6000]
+      ```
+      {: screen}
 
 4.  Cree un archivo de configuración para definir su reclamación de volumen permanente y guarde la configuración como archivo `.yaml`.
 
@@ -2545,24 +2541,29 @@ tamaños disponibles en gigabytes.
     ```
     {: screen}
 
-6.  {: #cs_apps_volume_mount}Para montar la reclamación de volumen permanente en el pod, cree un archivo de configuración. Guarde la configuración como archivo `.yaml`.
+6.  {: #cs_apps_volume_mount}Para montar la reclamación de volumen permanente en el despliegue, cree un archivo de configuración. Guarde la configuración como archivo `.yaml`.
 
     ```
-    apiVersion: v1
-    kind: Pod
+    apiVersion: extensions/v1beta1
+    kind: Deployment
     metadata:
-     name: <pod_name>
+     name: <deployment_name>
+    replicas: 1
+    template:
+     metadata:
+       labels:
+         app: <app_name>
     spec:
      containers:
-     - image: nginx
-       name: mycontainer
+     - image: <image_name>
+       name: <container_name>
        volumeMounts:
-       - mountPath: /volumemount
-         name: myvol
+       - mountPath: /<file_path>
+         name: <volume_name>
      volumes:
-     - name: myvol
+     - name: <volume_name>
        persistentVolumeClaim:
-         claimName: mypvc
+         claimName: <pvc_name>
     ```
     {: codeblock}
 
@@ -2573,37 +2574,41 @@ tamaños disponibles en gigabytes.
     <tbody>
     <tr>
     <td><code>metadata/name</code></td>
-    <td>El nombre del pod.</td>
+    <td>Nombre del despliegue.</td>
+    </tr>
+    <tr>
+    <td><code>template/metadata/labels/app</code></td>
+    <td>Una etiqueta para el despliegue.</td>
     </tr>
     <tr>
     <td><code>volumeMounts/mountPath</code></td>
-    <td>La vía de acceso absoluta del directorio en el que el que está montado el volumen dentro del contenedor.</td>
+    <td>La vía de acceso absoluta del directorio en el que el que está montado el volumen dentro del despliegue.</td>
     </tr>
     <tr>
     <td><code>volumeMounts/name</code></td>
-    <td>El nombre del volumen que monta en el contenedor.</td>
+    <td>El nombre del volumen que va a montar en el despliegue.</td>
     </tr>
     <tr>
     <td><code>volumes/name</code></td>
-    <td>El nombre del volumen que monta en el contenedor. Normalmente, este nombre es el mismo que <code>volumeMounts/name</code>.</td>
+    <td>El nombre del volumen que va a montar en el despliegue. Normalmente, este nombre es el mismo que <code>volumeMounts/name</code>.</td>
     </tr>
     <tr>
     <td><code>volumes/name/persistentVolumeClaim</code></td>
-    <td>El nombre de la reclamación de volumen permanente que desea utilizar como volumen. Cuando monta el volumen en el pod, Kubernetes identifica el volumen permanente enlazado a la reclamación de volumen permanente y permite al usuario realizar operaciones de lectura y escritura en el volumen permanente.</td>
+    <td>El nombre de la reclamación de volumen permanente que desea utilizar como volumen. Cuando monta el volumen en el despliegue, Kubernetes identifica el volumen permanente enlazado a la reclamación de volumen permanente y permite al usuario realizar operaciones de lectura y escritura en el volumen permanente.</td>
     </tr>
     </tbody></table>
 
-8.  Cree el pod y monte la reclamación de volumen permanente en el pod.
+8.  Cree el despliegue y monte la reclamación de volumen permanente.
 
     ```
     kubectl apply -f <local_yaml_path>
     ```
     {: pre}
 
-9.  Verifique que el volumen se ha montado correctamente en el pod.
+9.  Verifique que el volumen se ha montado correctamente.
 
     ```
-    kubectl describe pod <pod_name>
+    kubectl describe deployment <deployment_name>
     ```
     {: pre}
 
@@ -2640,7 +2645,7 @@ Si está diseñando una app con un usuario no root que requiere permiso de escri
 -   Añada temporalmente el usuario al grupo raíz.
 -   Cree un directorio en la vía de acceso de montaje con los permisos de usuario correctos.
 
-Para {{site.data.keyword.containershort_notm}}, el propietario predeterminado de la vía de acceso de montaje del volumen es el propietario `nobody`. Con el almacenamiento NFS, si el propietario no existe localmente en el pod, se crea el usuario `nobody`. Los volúmenes están configurados para reconocer el usuario root en el contenedor, el cual, para algunas apps es el único usuario dentro de un contenedor. Sin embargo, muchas apps especifican un usuario no root que no es `nobody` que escribe en la vía de acceso de montaje del contenedor. Algunas apps especifican que el volumen debe ser propiedad del usuario root. Las apps no suelen utilizar el usuario root por motivos de seguridad. Con todo, si su app requiere un usuario root, póngase en contacto con el servicio de asistencia de [{{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support). 
+Para {{site.data.keyword.containershort_notm}}, el propietario predeterminado de la vía de acceso de montaje del volumen es el propietario `nobody`. Con el almacenamiento NFS, si el propietario no existe localmente en el pod, se crea el usuario `nobody`. Los volúmenes están configurados para reconocer el usuario root en el contenedor, el cual, para algunas apps es el único usuario dentro de un contenedor. Sin embargo, muchas apps especifican un usuario no root que no es `nobody` que escribe en la vía de acceso de montaje del contenedor. Algunas apps especifican que el volumen debe ser propiedad del usuario root. Las apps no suelen utilizar el usuario root por motivos de seguridad. Con todo, si su app requiere un usuario root, póngase en contacto con el servicio de asistencia de [{{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support).
 
 
 1.  Cree un Dockerfile en un directorio local. Este Dockerfile de ejemplo está creando un usuario no root denominado `myguest`.
@@ -2827,3 +2832,5 @@ Para {{site.data.keyword.containershort_notm}}, el propietario predeterminado de
     {: screen}
 
     Esta salida muestra que el usuario root tiene permisos de lectura, escritura y ejecución en la vía de acceso de montaje `mnt/myvol/`, pero el usuario no root myguest tiene permiso para leer y escribir en la carpeta `mnt/myvol/mydata`. Debido a estos permisos actualizados, el usuario no root ahora puede escribir datos en el volumen persistente.
+
+

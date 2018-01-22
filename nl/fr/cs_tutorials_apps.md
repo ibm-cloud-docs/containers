@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-14"
+lastupdated: "2017-12-08"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -25,7 +25,7 @@ Ce second tutoriel vous explique comment utiliser Kubernetes pour déployer une 
 Dans ce scénario, le développeur d'applications de l'entreprise PR déploie une version Hello World de l'application dans le cluster
 Kubernetes créé par l'administrateur réseau au cours du [premier tutoriel](cs_tutorials.html#cs_cluster_tutorial).
 
-Chaque leçon explique comment déployer progressivement des versions plus compliquées de la même application. Le diagramme suivant illustre les composants des déploiements de l'application du tutoriel, excepté la quatrième partie. 
+Chaque leçon explique comment déployer progressivement des versions plus compliquées de la même application. Le diagramme suivant illustre les composants des déploiements de l'application du tutoriel, excepté la quatrième partie.
 
 ![Composants de la leçon](images/cs_app_tutorial_roadmap.png)
 
@@ -853,111 +853,46 @@ volume sur le pod.
 ### Leçon 3b. Mise à jour du déploiement Watson Tone Analyzer en exécution
 {: #lesson3b}
 
-Vous pouvez éditer un déploiement en cours d'exécution en modifiant des valeurs dans le modèle de pod. Cette leçon comprend la mise à jour de l'image qui a été utilisée.
+Vous pouvez éditer un déploiement en cours d'exécution en modifiant des valeurs dans le modèle de pod. Cette leçon comprend la mise à jour de l'image qui a été utilisée. L'entreprise de relations publiques désire modifier l'application dans le déploiement.
 
-1.  Modifiez le nom de l'image. L'entreprise PR désire essayer une application différente dans le même déploiement, mais revenir en arrière si un problème est découvert dans la nouvelle application.
+Modifiez le nom de l'image :
 
-    1.  Ouvrez le script de configuration du déploiement en cours d'exécution.
+1.  Ouvrez les détails de configuration pour le déploiement en cours.
 
-        ```
-        kubectl edit deployment/watson-talk-pod
-        ```
-        {: pre}
+    ```
+    kubectl edit deployment/watson-talk-pod
+    ```
+    {: pre}
 
-        En fonction de votre système d'exploitation, un éditeur vi ou un éditeur de texte s'ouvre de votre système d'exploitation.
+    En fonction de votre système d'exploitation, un éditeur vi ou un éditeur de texte s'ouvre de votre système d'exploitation.
 
-    2.  Modifiez le nom de l'image en image ibmliberty.
+2.  Modifiez le nom de l'image en image ibmliberty.
 
-        ```
-        spec:
+    ```
+    spec:
               containers:
               - image: registry.<region>.bluemix.net/ibmliberty:latest
-        ```
-        {: codeblock}
+    ```
+    {: codeblock}
 
-    3.  Enregistrez vos modifications et quittez l'éditeur.
+3.  Enregistrez vos modifications et quittez l'éditeur.
 
-    4.  Appliquez les modifications dans le script de configuration au déploiement en exécution.
+4.  Appliquez les modifications au déploiement en cours.
 
-        ```
-        kubectl rollout status deployment/watson-talk-pod
-        ```
-        {: pre}
+    ```
+    kubectl rollout status deployment/watson-talk-pod
+    ```
+    {: pre}
 
-        Attendez la confirmation
+    Attendez la confirmation
 que le déploiement s'est achevé.
 
-        ```
-        deployment "watson-talk-pod" successfully rolled out
-        ```
-        {: screen}
+    ```
+    deployment "watson-talk-pod" successfully rolled out
+    ```
+    {: screen}
 
-        Lorsque vous déployez une modification, un autre pod est créé et testé par Kubernetes. Si le test aboutit, l'ancien pod est supprimé.
-
-    5.  Si les modifications ne semblent pas conformes, vous pouvez les annuler. Il se peut que quelqu'un dans l'entreprise PR ait commis une erreur dans les modifications et qu'il faille revenir au déploiement précédent.
-
-        1.  Examinez les numéros de version des révisions pour identifier le numéro du déploiement précédent. La dernière révision est celle avec le numéro de version le plus élevé. Dans cet exemple, la révision 1 correspondait au déploiement initial et la révision 2 à la modification d'image réalisée à l'étape précédente.
-
-            ```
-            kubectl rollout history deployment/watson-talk-pod
-            ```
-            {: pre}
-
-            Sortie :
-
-            ```
-            deployments "watson-talk-pod"
-            REVISION CHANGE-CAUSE
-            1          <none>
-            2          <none>
-
-            ```
-            {: screen}
-
-        2.  Exécutez la commande suivante pour rétablir le déploiement de la révision précédente. Un nouveau pod est à nouveau créé et testé par Kubernetes. Si le test aboutit, l'ancien pod est supprimé.
-
-            ```
-            kubectl rollout undo deployment/watson-talk-pod --to-revision=1
-            ```
-            {: pre}
-
-            Sortie :
-
-            ```
-            deployment "watson-talk-pod" rolled back
-            ```
-            {: screen}
-
-        3.  Extrayez le nom du pod à utiliser à l'étape suivante.
-
-            ```
-            kubectl get pods
-            ```
-            {: pre}
-
-            Sortie :
-
-            ```
-            NAME                              READY     STATUS    RESTARTS   AGE
-            watson-talk-pod-2511517105-6tckg  1/1       Running   0          2m
-            ```
-            {: screen}
-
-        4.  Examinez les détails du pod et vérifiez que l'image a été rétablie à sa version antérieure.
-
-            ```
-            kubectl describe pod <pod_name>
-            ```
-            {: pre}
-
-            Sortie :
-
-            ```
-            Image: registry.<region>.bluemix.net/namespace/watson-talk
-            ```
-            {: screen}
-
-2.  Facultatif : Répétez les modifications pour le déploiement watson-pod.
+    Lorsque vous déployez une modification, un autre pod est créé et testé par Kubernetes. Si le test aboutit, l'ancien pod est supprimé.
 
 [Testez vos connaissances en répondant à un quiz !![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 

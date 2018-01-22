@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-28"
+lastupdated: "2017-12-14"
 
 ---
 
@@ -37,7 +37,6 @@ Comme illustré dans le diagramme, le déploiement de vos applications dans plus
 
 Un cluster Kubernetes est un ensemble de noeuds d'agent organisés dans un réseau. L'objet de ce cluster est de définir un ensemble de ressources, de noeuds, de réseaux et de périphériques de stockage permettant d'assurer une haute disponibilité des applications. Avant de pouvoir déployer une application, vous devez créer un cluster et spécifier les définitions des noeuds d'agent dans ce cluster.
 {:shortdesc}
-Dans le cas d'utilisateurs {{site.data.keyword.Bluemix_dedicated_notm}}, voir à la place la rubrique [Création de clusters Kubernetes depuis l'interface graphique dans {{site.data.keyword.Bluemix_dedicated_notm}} (Closed Beta)](#creating_ui_dedicated).
 
 Pour créer un cluster, procédez comme suit :
 1. Dans le catalogue, sélectionnez **Cluster Kubernetes**.
@@ -47,11 +46,13 @@ Pour créer un cluster, procédez comme suit :
     2. Sélectionnez un type de machine et indiquez le nombre de noeuds d'agent dont vous avez besoin. Le type de machine détermine le nombre d'UC virtuelles et la mémoire configurés dans chaque noeud worker et rendus accessibles aux conteneurs.
         - Le type de machine micro correspond à l'option la plus modique.
         - Une machine équilibrée comporte la même quantité de mémoire qui est affectée à chaque UC, ce qui optimise les performances.
+        - Les types de machine dont le nom inclut `encrypted` chiffrent les données Docker de l'hôte. Le répertoire `/var/lib/docker`, dans lequel sont stockées toutes les données des conteneurs, est chiffré avec le chiffrement LUKS.
     3. Sélectionnez un réseau local virtuel (VLAN) public et un VLAN privé à partir de votre compte d'infrastructure IBM Cloud (SoftLayer). Ces deux réseaux VLAN communiquent entre les noeuds d'agent mais le réseau VLAN public communique également avec le noeud maître Kubernetes géré par IBM. Vous pouvez utiliser le même VLAN pour plusieurs clusters.
         **Remarque** : si vous choisissez de ne pas sélectionner de VLAN public, vous devez configurer une solution alternative.
     4. Sélectionnez un type de matériel. Partagé est une option satisfaisante pour la plupart des situations.
         - **Dédié** : assure un isolement complet de vos ressources physiques.
         - **Partagé** : permet le stockage de vos ressources physiques sur le même matériel que pour d'autres clients IBM.
+        - Les noeuds Worker exploitent par défaut le chiffrement de disque ; [En savoir plus](cs_security.html#cs_security_worker). Si vous désirez désactiver le chiffrement, décochez la case **Chiffrer le disque local**.
 4. Cliquez sur **Créer un cluster**. Vous pouvez voir la progression du déploiement du noeud worker dans l'onglet **Noeuds d'agent**. Une fois le déploiement terminé, vous pouvez voir si le cluster est prêt dans l'onglet **Vue d'ensemble**.
     **Remarque :** A chaque noeud worker sont affectés un ID de noeud worker unique et un nom de domaine qui ne doivent pas être modifiés manuellement après la création du cluster. La modification de l'ID ou du domaine empêcherait le maître Kubernetes de gérer votre cluster.
 
@@ -62,29 +63,8 @@ Une fois le cluster opérationnel, vous pouvez réaliser les tâches suivantes :
 
 -   [Installer les interfaces de ligne de commande pour commencer à utiliser votre cluster.](cs_cli_install.html#cs_cli_install)
 -   [Déployer une application dans votre cluster.](cs_apps.html#cs_apps_cli)
--   [Configurer votre propre registre privé dans {{site.data.keyword.Bluemix_notm}} afin de stocker et de partager des images Docker avec d'autres utilisateurs.](/docs/services/Registry/index.html)
-
-
-### Création de clusters à l'aide de l'interface graphique dans {{site.data.keyword.Bluemix_dedicated_notm}} (version bêta fermée)
-{: #creating_ui_dedicated}
-
-1.  Connectez-vous à la console {{site.data.keyword.Bluemix_notm}} Public ([https://console.bluemix.net ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://console.bluemix.net)) avec votre IBMid.
-2.  Dans le menu de compte, sélectionnez votre compte {{site.data.keyword.Bluemix_dedicated_notm}}. La console est mise à jour avec les services et les informations de votre instance {{site.data.keyword.Bluemix_dedicated_notm}}.
-3.  Dans le catalogue, sélectionnez **Conteneurs** et cliquez sur **Cluster Kubernetes**.
-4.  Renseignez la zone **Nom du cluster**.
-5.  Sélectionnez un **type de machine**. Le type de machine détermine le nombre d'UC virtuelles et la mémoire déployés dans chaque noeud worker et disponibles pour tous les conteneurs que vous déployez dans vos noeuds.
-    -   Le type de machine micro correspond à l'option la plus modique.
-    -   Un type de machine équilibré affecte la même quantité de mémoire à chaque UC, ce qui optimise les performances.
-6.  Sélectionnez le **nombre de noeuds d'agent** dont vous avez besoin. Sélectionnez `3` pour assurer une haute disponibilité de votre cluster.
-7.  Cliquez sur **Créer un cluster**. La section des informations détaillées sur le cluster s'ouvre, mais l'allocation de noeuds d'agent dans le cluster prend quelques minutes. Vous pouvez suivre la progression du déploiement du noeud worker dans l'onglet **Noeuds d'agent**. Lorsque les noeuds d'agent sont prêts, l'état passe à **Ready**.
-
-**Etape suivante ?**
-
-Une fois le cluster opérationnel, vous pouvez réaliser les tâches suivantes :
-
--   [Installer les interfaces de ligne de commande pour commencer à utiliser votre cluster.](cs_cli_install.html#cs_cli_install)
--   [Déployer une application dans votre cluster.](cs_apps.html#cs_apps_cli)
--   [Configurer votre propre registre privé dans {{site.data.keyword.Bluemix_notm}} afin de stocker et de partager des images Docker avec d'autres utilisateurs.](/docs/services/Registry/index.html)
+-   [Configurer votre propre registre privé dans {{site.data.keyword.Bluemix_notm}} pour stocker et partager des Docker avec d'autres utilisateurs.](/docs/services/Registry/index.html)
+- Si vous utilisez un pare-feu, vous devrez peut-être [ouvrir les ports requis](cs_security.html#opening_ports) afin d'utiliser les commandes `bx`, `kubectl` ou `calicotl`, autoriser le trafic sortant de votre cluster ou le trafic entrant pour les services réseau.
 
 <br />
 
@@ -95,11 +75,10 @@ Une fois le cluster opérationnel, vous pouvez réaliser les tâches suivantes :
 Un cluster est un ensemble de noeuds d'agent organisés dans un réseau. L'objet de ce cluster est de définir un ensemble de ressources, de noeuds, de réseaux et de périphériques de stockage permettant d'assurer une haute disponibilité des applications. Avant de pouvoir déployer une application, vous devez créer un cluster et spécifier les définitions des noeuds d'agent dans ce cluster.
 {:shortdesc}
 
-Dans le cas d'utilisateurs {{site.data.keyword.Bluemix_dedicated_notm}}, voir à la place la rubrique [Création de clusters Kubernetes depuis l'interface de ligne de commande dans {{site.data.keyword.Bluemix_dedicated_notm}} (Closed Beta)](#creating_cli_dedicated).
-
 Pour créer un cluster, procédez comme suit :
 1.  Installez l'interface de ligne de commande {{site.data.keyword.Bluemix_notm}} et le [plug-in {{site.data.keyword.containershort_notm}}](cs_cli_install.html#cs_cli_install).
-2.  Connectez-vous à l'interface de ligne de commande {{site.data.keyword.Bluemix_notm}}. A l'invite, entrez vos données d'identification {{site.data.keyword.Bluemix_notm}}. Pour stipuler une région {{site.data.keyword.Bluemix_notm}}, [incluez son noeud final d'API](cs_regions.html#bluemix_regions).
+2.  Connectez-vous à l'interface de ligne de commande {{site.data.keyword.Bluemix_notm}}. A l'invite, entrez vos données
+d'identification {{site.data.keyword.Bluemix_notm}}.
 
     ```
     bx login
@@ -110,9 +89,7 @@ Pour créer un cluster, procédez comme suit :
 
 3. Si vous disposez de plusieurs comptes {{site.data.keyword.Bluemix_notm}}, sélectionnez le compte que vous voulez utiliser pour créer votre cluster Kubernetes.
 
-4.  Si vous souhaitez créer ou accéder à des clusters Kubernetes dans une région qui n'est pas la région {{site.data.keyword.Bluemix_notm}} sélectionnée précédemment, [spécifiez le noeud final d'API de la région {{site.data.keyword.containershort_notm}}](cs_regions.html#container_login_endpoints).
-
-    **Remarque** : si vous souhaitez créer un cluster dans l'Est des Etats-Unis, vous devez spécifiez le noeud final d'API de la région du conteneur Est des Etats-Unis, à l'aide de la commande `bx cs init --host https://us-east.containers.bluemix.net`.
+4.  Si vous désirez créer ou accéder à des clusters Kubernetes dans une région {{site.data.keyword.Bluemix_notm}} autre que celle que vous aviez sélectionné auparavant, exécutez la commande `bx cs region-set`.
 
 6.  Créez un cluster.
     1.  Examinez les emplacements disponibles. Les emplacements affichés dépendent de la région {{site.data.keyword.containershort_notm}} à laquelle vous êtes connecté.
@@ -162,10 +139,10 @@ Pour créer un cluster, procédez comme suit :
 
         S'il existe déjà un réseau virtuel public et privé, notez les routeurs correspondants. Les routeurs de VLAN privé commencent toujours par `bcr` (routeur dorsal) et les routeurs de VLAN public par `fcr` (routeur frontal). Le numéro et la combinaison de lettres après ces préfixes doivent correspondre pour pouvoir utiliser ces réseaux locaux virtuels lors de la création d'un cluster. Dans l'exemple de sortie, n'importe quel réseau local virtuel privé peut être utilisé avec l'un des réseaux publics virtuels privés vu que les routeurs incluent tous `02a.dal10`.
 
-    4.  Exécutez la commande `cluster-create`. Vous avez le choix entre un cluster léger, qui inclut un noeud worker avec 2 UC virtuelles et 4 Go de mémoire, ou un cluster standard, lequel peut inclure autant de noeuds d'agent que vous le souhaitez dans votre compte d'infrastructure IBM Cloud (SoftLayer). Lorsque vous créez un cluster standard, le matériel du noeud worker est partagé par défaut par plusieurs clients IBM et facturé par heures d'utilisation. </br>Exemple pour un cluster standard :
+    4.  Exécutez la commande `cluster-create`. Vous avez le choix entre un cluster léger, qui inclut un noeud worker avec 2 UC virtuelles et 4 Go de mémoire, ou un cluster standard, lequel peut inclure autant de noeuds d'agent que vous le souhaitez dans votre compte d'infrastructure IBM Cloud (SoftLayer). Lorsque vous créez un cluster standard, par défaut, les disques de noeud worker sont chiffrés, son matériel est partagé par plusieurs clients IBM et il est facturé par heures d'utilisation. </br>Exemple pour un cluster standard :
 
         ```
-        bx cs cluster-create --location dal10 --public-vlan <public_vlan_id> --private-vlan <private_vlan_id> --machine-type u2c.2x4 --workers 3 --name <cluster_name> --kube-version <major.minor.patch>
+        bx cs cluster-create --location dal10 --public-vlan <public_vlan_id> --private-vlan <private_vlan_id> --machine-type u2c.2x4 --workers 3 --name <cluster_name> --kube-version <major.minor.patch> 
         ```
         {: pre}
 
@@ -217,6 +194,10 @@ Pour créer un cluster, procédez comme suit :
         <tr>
           <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
           <td>Version Kubernetes du noeud maître du cluster. Cette valeur est facultative. Sans spécification, le cluster est créé avec les versions Kubernetes prises en charge par défaut. Pour connaître les versions disponibles, exécutez la commande <code>bx cs kube-versions</code>.</td>
+        </tr>
+        <tr>
+        <td><code>--disable-disk-encrypt</code></td>
+        <td>Les noeuds Worker exploitent par défaut le chiffrement de disque ; [En savoir plus](cs_security.html#cs_security_worker). Incluez cette option si Si vous désirez désactiver le chiffrement.</td>
         </tr>
         </tbody></table>
 
@@ -315,151 +296,7 @@ Pour créer un cluster, procédez comme suit :
 -   [Déployez une application dans votre cluster.](cs_apps.html#cs_apps_cli)
 -   [Gérez votre cluster à l'aide de la ligne de commande `kubectl`. ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/user-guide/kubectl/)
 -   [Configurez votre propre registre privé dans {{site.data.keyword.Bluemix_notm}} afin de stocker et de partager des images Docker avec d'autres utilisateurs.](/docs/services/Registry/index.html)
-
-### Création de clusters à l'aide de l'interface de ligne de commande dans {{site.data.keyword.Bluemix_dedicated_notm}} (version bêta fermée)
-{: #creating_cli_dedicated}
-
-1.  Installez l'interface de ligne de commande {{site.data.keyword.Bluemix_notm}} et le [plug-in {{site.data.keyword.containershort_notm}}](cs_cli_install.html#cs_cli_install).
-2.  Connectez-vous au noeud final public d'{{site.data.keyword.containershort_notm}}. Entrez vos données d'identification {{site.data.keyword.Bluemix_notm}} et, à l'invite, sélectionnez le compte {{site.data.keyword.Bluemix_dedicated_notm}}.
-
-    ```
-    bx login -a api.<region>.bluemix.net
-    ```
-    {: pre}
-
-    **Remarque :** si vous possédez un ID fédéré, exécutez la commande `bx login --sso` pour vous connecter à l'interface de ligne de commande {{site.data.keyword.Bluemix_notm}}. Entrez votre nom d'utilisateur et utilisez l'URL mentionnée dans la sortie CLI pour extraire votre code d'accès à usage unique. Si la connexion échoue alors que vous omettez l'option `--sso` et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré.
-
-3.  Créez un cluster avec la commande `cluster-create`. Lorsque vous créez un cluster standard, le matériel du noeud worker est facturé par heures d'utilisation.
-
-    Exemple :
-
-    ```
-    bx cs cluster-create --location <location> --machine-type <machine-type> --name <cluster_name> --workers <number>
-    ```
-    {: pre}
-
-    <table>
-    <caption>Tableau 2. Description des composantes de cette commande</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composantes de cette commande</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>cluster-create</code></td>
-    <td>Commande de création d'un cluster dans votre organisation {{site.data.keyword.Bluemix_notm}}.</td>
-    </tr>
-    <tr>
-    <td><code>--location <em>&lt;location&gt;</em></code></td>
-    <td>Remplacez &lt;location&gt; par l'ID de l'emplacement {{site.data.keyword.Bluemix_notm}} où vous désirez créer votre cluster. Les [emplacements disponibles](cs_regions.html#locations) dépendent de la région {{site.data.keyword.containershort_notm}} à laquelle vous êtes connecté.</td>
-    </tr>
-    <tr>
-    <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
-    <td>Si vous créez un cluster standard, choisissez un type de machine. Le type de machine spécifie les ressources de traitement virtuelles disponibles pour chaque noeud worker. Pour plus d'informations, consultez la rubrique [Comparaison des clusters léger et standard pour {{site.data.keyword.containershort_notm}}](cs_planning.html#cs_planning_cluster_type). Pour les clusters légers, vous n'avez pas besoin de définir le type de machine.</td>
-    </tr>
-    <tr>
-    <td><code>--name <em>&lt;name&gt;</em></code></td>
-    <td>Remplacez <em>&lt;name&gt;</em> par le nom de votre cluster.</td>
-    </tr>
-    <tr>
-    <td><code>--workers <em>&lt;number&gt;</em></code></td>
-    <td>Nombre de noeuds d'agent à inclure dans le cluster. Si l'option <code>--workers</code> n'est pas spécifiée, 1 noeud worker est créé.</td>
-    </tr>
-    </tbody></table>
-
-4.  Vérifiez que la création du cluster a été demandée.
-
-    ```
-    bx cs clusters
-    ```
-    {: pre}
-
-    **Remarque :** la réservation des postes de noeud worker et la mise en place et la mise à disposition du cluster dans votre compte peuvent prendre jusqu'à 15 minutes.
-
-    Lorsque la mise à disposition de votre cluster est finalisée, l'état de votre cluster passe à **deployed**.
-
-    ```
-    Name         ID                                   State      Created          Workers
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1
-    ```
-    {: screen}
-
-5.  Vérifiez le statut des noeuds d'agent.
-
-    ```
-    bx cs workers <cluster>
-    ```
-    {: pre}
-
-    Lorsque les noeuds d'agent sont prêts, l'état passe à **normal** et le statut indique **Ready**. Lorsque le statut du noeud indique **Ready**, vous pouvez accéder au cluster.
-
-    ```
-    ID                                                  Public IP        Private IP     Machine Type   State      Status
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1   169.47.223.113   10.171.42.93   free           normal    Ready
-    ```
-    {: screen}
-
-6.  Définissez le cluster que vous avez créé comme contexte de cette session. Effectuez ces étapes de configuration à chaque fois que vous utilisez votre cluster.
-
-    1.  Obtenez la commande permettant de définir la variable d'environnement et téléchargez les fichiers de configuration Kubernetes.
-
-        ```
-        bx cs cluster-config <cluster_name_or_id>
-        ```
-        {: pre}
-
-        Une fois les fichiers de configuration téléchargés, une commande s'affiche ; elle vous permet de définir le chemin vers le fichier de configuration Kubernetes local en tant que variable d'environnement.
-
-        Exemple pour OS X :
-
-        ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
-        ```
-        {: screen}
-
-    2.  Copiez et collez la commande qui s'affiche sur votre terminal pour définir la variable d'environnement `KUBECONFIG`.
-    3.  Vérifiez que la variable d'environnement `KUBECONFIG` est correctement définie.
-
-        Exemple pour OS X :
-
-        ```
-        echo $KUBECONFIG
-        ```
-        {: pre}
-
-        Sortie :
-
-        ```
-        /Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
-
-        ```
-        {: screen}
-
-7.  Accédez à votre tableau de bord Kubernetes via le port par défaut (8001).
-    1.  Affectez le numéro de port par défaut au proxy.
-
-        ```
-        kubectl proxy
-        ```
-        {: pre}
-
-        ```
-        Starting to serve on 127.0.0.1:8001
-        ```
-        {: screen}
-
-    2.  Ouvrez l'URL suivante dans un navigateur Web pour accéder au tableau de bord Kubernetes.
-
-        ```
-        http://localhost:8001/ui
-        ```
-        {: codeblock}
-
-
-**Etape suivante ?**
-
--   [Déployer une application dans votre cluster.](cs_apps.html#cs_apps_cli)
--   [Gérez votre cluster à l'aide de la ligne de commande `kubectl`. ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/user-guide/kubectl/)
--   [Configurez votre propre registre privé dans {{site.data.keyword.Bluemix_notm}} afin de stocker et de partager des images Docker avec d'autres utilisateurs.](/docs/services/Registry/index.html)
+- Si vous utilisez un pare-feu, vous devrez peut-être [ouvrir les ports requis](cs_security.html#opening_ports) afin d'utiliser les commandes `bx`, `kubectl` ou `calicotl`, autoriser le trafic sortant de votre cluster ou le trafic entrant pour les services réseau.
 
 <br />
 
@@ -865,7 +702,6 @@ Avant de commencer :
 1. [Ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) vers votre cluster.
 2. [Demandez une instance du service {{site.data.keyword.Bluemix_notm}} service](/docs/manageapps/reqnsi.html#req_instance).
    **Remarque :** pour créer une instance de service sur le site Washington DC, vous devez utiliser l'interface CLI.
-3. Dans le cas d'utilisateurs {{site.data.keyword.Bluemix_dedicated_notm}}, voir à la place la rubrique [Ajout de services {{site.data.keyword.Bluemix_notm}} à des clusters dans {{site.data.keyword.Bluemix_dedicated_notm}} (Closed Beta)](#binding_dedicated).
 
 **Remarque :**
 <ul><ul>
@@ -934,200 +770,54 @@ Pour ajouter un service, procédez comme suit :
 
 Pour utiliser le service dans un pod qui est déployé dans le cluster, les utilisateurs du cluster peuvent accéder aux données d'identification du service {{site.data.keyword.Bluemix_notm}} en [montant la valeur confidentielle Kubernetes en tant que volume secret sur un pod.](cs_apps.html#cs_apps_service)
 
-### Ajout de services {{site.data.keyword.Bluemix_notm}} à des clusters dans {{site.data.keyword.Bluemix_dedicated_notm}} (version bêta fermée)
-{: #binding_dedicated}
-
-**Remarque** : le cluster et les noeuds d'agent doivent être complètement déployés pour pouvoir ajouter un service.
-
-1.  Définissez le chemin d'accès au fichier de configuration {{site.data.keyword.Bluemix_dedicated_notm}} local en tant que variable d'environnement `DEDICATED_BLUEMIX_CONFIG`.
-
-    ```
-    export DEDICATED_BLUEMIX_CONFIG=<path_to_config_directory>
-    ```
-    {: pre}
-
-2.  Définissez le même chemin défini ci-dessus en tant que variable d'environnement `BLUEMIX_HOME`.
-
-    ```
-    export BLUEMIX_HOME=$DEDICATED_BLUEMIX_CONFIG
-    ```
-    {: pre}
-
-3.  Connectez-vous à l'environnement {{site.data.keyword.Bluemix_dedicated_notm}} dans lequel vous voulez créer l'instance de service.
-
-    ```
-    bx login -a api.<dedicated_domain> -u <user> -p <password> -o <org> -s <space>
-    ```
-    {: pre}
-
-4.  Répertoriez les services disponibles dans le catalogue {{site.data.keyword.Bluemix_notm}}.
-
-    ```
-    bx service offerings
-    ```
-    {: pre}
-
-5.  Créez une instance du service que vous voulez lier au cluster.
-
-    ```
-    bx service create <service_name> <service_plan> <service_instance_name>
-    ```
-    {: pre}
-
-6.  Vérifiez que votre instance de service est créée en répertoriant les services {{site.data.keyword.Bluemix_notm}} disponibles.
-
-    ```
-    bx service list
-    ```
-    {: pre}
-
-    Exemple de sortie d'interface CLI :
-
-    ```
-    name                      service           plan    bound apps   last operation   
-    <service_instance_name>   <service_name>    spark                create succeeded
-    ```
-    {: screen}
-
-7.  Annulez la définition de la variable d'environnement `BLUEMIX_HOME` pour revenir à l'utilisation de {{site.data.keyword.Bluemix_notm}} Public.
-
-    ```
-    unset $BLUEMIX_HOME
-    ```
-    {: pre}
-
-8.  Connectez-vous au noeud final public d'{{site.data.keyword.containershort_notm}} et pointez votre interface de ligne de commande sur le cluster dans votre environnement {{site.data.keyword.Bluemix_dedicated_notm}}.
-    1.  Connectez-vous au compte à l'aide du noeud final public {{site.data.keyword.containershort_notm}}. Entrez vos données d'identification {{site.data.keyword.Bluemix_notm}} et, à l'invite, sélectionnez le compte {{site.data.keyword.Bluemix_dedicated_notm}}.
-
-        ```
-        bx login -a api.ng.bluemix.net
-        ```
-        {: pre}
-
-        **Remarque :** si vous possédez un ID fédéré, exécutez la commande `bx login --sso` pour vous connecter à l'interface de ligne de commande {{site.data.keyword.Bluemix_notm}}. Entrez votre nom d'utilisateur et utilisez l'URL mentionnée dans la sortie CLI pour extraire votre code d'accès à usage unique. Si la connexion échoue alors que vous omettez l'option `--sso` et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré.
-
-    2.  Extrayez la liste des clusters disponibles et identifiez le cluster à cibler dans votre interface CLI.
-
-        ```
-        bx cs clusters
-        ```
-        {: pre}
-
-    3.  Obtenez la commande permettant de définir la variable d'environnement et téléchargez les fichiers de configuration Kubernetes.
-
-        ```
-        bx cs cluster-config <cluster_name_or_id>
-        ```
-        {: pre}
-
-        Une fois les fichiers de configuration téléchargés, une commande s'affiche ; elle vous permet de définir le chemin vers le fichier de configuration Kubernetes local en tant que variable d'environnement.
-
-        Exemple pour OS X :
-
-        ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
-        ```
-        {: screen}
-
-    4.  Copiez et collez la commande qui s'affiche sur votre terminal pour définir la variable d'environnement `KUBECONFIG`.
-
-9.  Identifiez l'espace de nom du cluster que vous désirez ajouter à votre service. Sélectionnez l'une des options suivantes.
-    * Listez les espaces de nom existants et sélectionnez l'espace de nom à utiliser.
-        ```
-        kubectl get namespaces
-        ```
-        {: pre}
-
-    * Créez un nouvel espace de nom dans votre cluster.
-        ```
-        kubectl create namespace <namespace_name>
-        ```
-        {: pre}
-
-10.  Liez l'instance de service à votre cluster.
-
-      ```
-      bx cs cluster-service-bind <cluster_name_or_id> <namespace> <service_instance_name>
-      ```
-      {: pre}
-
 <br />
+
 
 
 ## Gestion de l'accès au cluster
 {: #cs_cluster_user}
 
-Vous pouvez accorder à d'autres utilisateurs un accès à votre cluster pour leur permettre d'y accéder, de le gérer et d'y déployer des applications.
+Chaque utilisateur d'{{site.data.keyword.containershort_notm}} doit être affecté à une combinaison de rôles utilisateur spécifique au service qui détermine les actions qu'il peut effectuer.
 {:shortdesc}
-
-Chaque utilisateur qui utilise {{site.data.keyword.containershort_notm}} doit se voir affecter dans Identity and Access Management un rôle utilisateur spécifique au service et qui détermine les actions qu'il peut effectuer. Identity and Access Management fait une distinction entre les autorisations d'accès suivantes.
 
 <dl>
 <dt>Règles d'accès {{site.data.keyword.containershort_notm}}</dt>
-<dd>Ces règles d'accès déterminent les actions de gestion du cluster que vous pouvez effectuer (par exemple, la création ou la suppression de clusters, ou l'ajout ou la suppression de noeuds d'agent).</dd>
+<dd>Dans Identity and Access Management, les règles d'accès {{site.data.keyword.containershort_notm}} déterminent les actions de gestion de cluster que vous pouvez effectuer, comme la création ou la suppression de clusters, ou l'ajout ou la suppression de noeuds worker. Ces règles doivent être définies en conjonction avec des règles d'infrastructure.</dd>
+<dt>Règles d'accès à l'infrastructure</dt>
+<dd>Dans Identity and Access Management, les règles d'accès à l'infrastructure permettent aux actions demandées dans l'interface utilisateur ou l'interface de ligne de commande d'{{site.data.keyword.containershort_notm}} de s'exécuter dans l'infrastructure IBM Cloud (SoftLayer). Ces règles doivent être définies en conjonction avec des règles d'accès à {{site.data.keyword.containershort_notm}}. [En savoir plus sur les rôles d'infrastructure disponibles](/docs/iam/infrastructureaccess.html#infrapermission).</dd>
 <dt>Groupes de ressources</dt>
-<dd>Un groupe de ressources permet de regrouper des services {{site.data.keyword.Bluemix_notm}} de manière à pouvoir affecter rapidement des accès à des utilisateurs à plusieurs ressources à la fois. Apprenez à [gérer des utilisateurs à l'aide de groupes de ressources](/docs/admin/resourcegroups.html#rgs).</dd>
-<dt>Rôles RBAC</dt>
-<dd>Chaque utilisateur auquel est affectée une règle d'accès {{site.data.keyword.containershort_notm}} se voit automatiquement affecter un rôle RBAC. Les rôles RBAC déterminent les actions que vous pouvez effectuer sur des ressources Kubernetes au sein du cluster. Les rôles RBAC ne sont configurés que pour l'espace de nom par défaut. L'administrateur du cluster peut ajouter des rôles RBAC pour d'autres espaces de nom dans le cluster. Pour plus d'informations, voir [Using RBAC Authorization ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) dans la documentation Kubernetes.</dd>
+<dd>Un groupe de ressources permet de regrouper des services {{site.data.keyword.Bluemix_notm}} de manière à pouvoir affecter rapidement des accès à des utilisateurs à plusieurs ressources à la fois. [Découvrez comment gérer des utilisateurs à l'aide de groupes de ressources](/docs/admin/resourcegroups.html#rgs).</dd>
 <dt>Rôles Cloud Foundry</dt>
-<dd>Chaque utilisateur doit se voir affecter un rôle utilisateur Cloud Foundry. Ce rôle détermine les actions que peut effectuer l'utilisateur sur le compte {{site.data.keyword.Bluemix_notm}} (par exemple, inviter d'autres utilisateurs ou examiner l'utilisation du quota). Pour examiner les autorisations correspondant à chaque rôle, voir [Rôles Cloud Foundry](/docs/iam/cfaccess.html#cfaccess).</dd>
+<dd>Dans Identity and Access Management, chaque utilisateur doit être affecté à un rôle utilisateur Cloud Foundry. Ce rôle détermine les actions que peut effectuer l'utilisateur sur le compte {{site.data.keyword.Bluemix_notm}} (par exemple, inviter d'autres utilisateurs ou examiner l'utilisation du quota). [En savoir plus sur les rôles Cloud Foundry disponibles](/docs/iam/cfaccess.html#cfaccess).</dd>
+<dt>Rôles RBAC Kubernetes</dt>
+<dd>Chaque utilisateur auquel est affectée une règle d'accès {{site.data.keyword.containershort_notm}} est automatiquement affecté à un rôle RBAC Kubernetes. Dans Kubernetes, les rôles RBAC déterminent les actions que vous pouvez effectuer sur des ressources Kubernetes dans le cluster. Les rôles RBAC ne sont configurés que pour l'espace de nom par défaut. L'administrateur du cluster peut ajouter des rôles RBAC pour d'autres espaces de nom dans le cluster. Pour plus d'informations, voir [Using RBAC Authorization ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) dans la documentation Kubernetes.</dd>
 </dl>
 
-Sélectionnez l'une des actions suivantes pour continuer :
+Cette section aborde les points suivants :
 
--   [Examen des règles d'accès et des autorisations requises pour utiliser des clusters](#access_ov).
--   [Examen de votre règle d'accès actuelle](#view_access).
--   [Modification de la règle d'accès d'un utilisateur existant](#change_access).
--   [Ajout d'utilisateurs supplémentaires au compte {{site.data.keyword.Bluemix_notm}} account](#add_users).
+-   [Règles et droits d'accès](#access_ov)
+-   [Ajout d'utilisateurs au compte {{site.data.keyword.Bluemix_notm}}](#add_users)
+-   [Personnalisation des droits sur l'infrastructure pour un utilisateur](#infrastructure_permissions)
 
-### Description des règles d'accès et des autorisations {{site.data.keyword.containershort_notm}} requises
+### Règles et droits d'accès
 {: #access_ov}
 
 Examinez les règles d'accès et les autorisations que vous pouvez attribuer à des utilisateurs dans votre compte {{site.data.keyword.Bluemix_notm}}. Les rôles opérateur et éditeur ont des droits distincts. Si vous voulez qu'un utilisateur puisse, par exemple, ajouter des noeuds d'agent et lier des services, vous devez lui attribuer le rôle opérateur et le rôle éditeur.
 
-|Règle d'accès|Autorisations de gestion du cluster|Autorisations sur les ressources Kubernetes|
+|Règles d'accès {{site.data.keyword.containershort_notm}}|Autorisations de gestion de cluster|Autorisations sur les ressources Kubernetes|
 |-------------|------------------------------|-------------------------------|
-|<ul><li>Rôle : Administrateur</li><li>Instances de service : toutes les instances de service actuelles</li></ul>|<ul><li>Créer un cluster léger ou standard</li><li>Définir les données d'identification pour un compte {{site.data.keyword.Bluemix_notm}} afin d'accéder au portefeuille d'infrastructure IBM Cloud (SoftLayer)</li><li>Supprimer un cluster</li><li>Affecter et modifier des règles d'accès {{site.data.keyword.containershort_notm}} pour d'autres utilisateurs existants dans ce compte.</li></ul><br/>Ce rôle hérite des autorisations des rôles Editeur, Opérateur et Visualiseur dans tous les clusters du compte.|<ul><li>Rôle RBAC : cluster-admin</li><li>Accès en lecture/écriture aux ressources dans tous les espaces de nom</li><li>Créer des rôles au sein d'un espace de nom</li><li>Accès au tableau de bord Kubernetes</li><li>Créer une ressource Ingress permettant de rendre les applications publiquement disponibles</li></ul>|
-|<ul><li>Rôle : Administrateur</li><li>Instances de service : ID de cluster spécifique</li></ul>|<ul><li>Retirer un cluster spécifique.</li></ul><br/>Ce rôle hérite des autorisations des rôles Editeur, Opérateur et Visualiseur dans le cluster sélectionné.|<ul><li>Rôle RBAC : cluster-admin</li><li>Accès en lecture/écriture aux ressources dans tous les espaces de nom</li><li>Créer des rôles au sein d'un espace de nom</li><li>Accès au tableau de bord Kubernetes</li><li>Créer une ressource Ingress permettant de rendre les applications publiquement disponibles</li></ul>|
-|<ul><li>Rôle : Opérateur</li><li>Instances de service : toutes les instances de service actuelles / ID de cluster spécifique</li></ul>|<ul><li>Ajouter des noeuds d'agent supplémentaires à un cluster</li><li>Supprimer des noeuds d'agent d'un cluster</li><li>Réamorcer un noeud worker</li><li>Recharger un noeud worker</li><li>Ajouter un sous-réseau à un cluster</li></ul>|<ul><li>Rôle RBAC : admin</li><li>Accès en lecture/écriture aux ressources dans l'espace de nom par défaut, mais non pas à l'espace de nom lui-même</li><li>Créer des rôles au sein d'un espace de nom</li></ul>|
-|<ul><li>Rôle : Editeur</li><li>Instances de service : toutes les instances de service actuelles/ID de cluster spécifique</li></ul>|<ul><li>Lier un service {{site.data.keyword.Bluemix_notm}} à un cluster.</li><li>Dissocier un service {{site.data.keyword.Bluemix_notm}} d'un cluster.</li><li>Créer un webhook.</li></ul><br/>Utilisez ce rôle pour vos développeurs d'applications.|<ul><li>Rôle RBAC : edit</li><li>Accès en lecture/écriture aux ressources dans l'espace de nom par défaut</li></ul>|
-|<ul><li>Rôle : Visualiseur</li><li>Instances de service : toutes les instances de service actuelles / ID de cluster spécifique</li></ul>|<ul><li>Lister un cluster</li><li>Afficher les détails d'un cluster</li></ul>|<ul><li>Rôle RBAC : view</li><li>Accès en lecture aux ressources dans l'espace de nom par défaut</li><li>Pas d'accès en lecture aux valeurs confidentielles Kubernetes</li></ul>|
-|<ul><li>Rôle dans l'organisation Cloud Foundry : Gestionnaire</li></ul>|<ul><li>Ajouter des utilisateurs supplémentaires dans un compte {{site.data.keyword.Bluemix_notm}}</li></ul>| |
-|<ul><li>Rôle dans l'espace Cloud Foundry : Développeur</li></ul>|<ul><li>Créer des instances de service {{site.data.keyword.Bluemix_notm}}</li><li>Lier des instances de service {{site.data.keyword.Bluemix_notm}} à des clusters</li></ul>| |
-{: caption="Tableau 7. Présentation des règles d'accès et des autorisations {{site.data.keyword.containershort_notm}} requises" caption-side="top"}
+|Administrateur|Ce rôle hérite des autorisations des rôles Editeur, Opérateur et Visualiseur dans tous les clusters du compte. <br/><br/>Lorsqu'il est défini pour toutes les instances de service en cours :<ul><li>Créer un cluster léger ou standard</li><li>Définir les données d'identification pour un compte {{site.data.keyword.Bluemix_notm}} afin d'accéder au portefeuille d'infrastructure IBM Cloud (SoftLayer)</li><li>Supprimer un cluster</li><li>Affecter et modifier des règles d'accès {{site.data.keyword.containershort_notm}} pour d'autres utilisateurs existants dans ce compte.</li></ul><p>Lorsqu'il est défini pour un ID de cluster spécifique :<ul><li>Supprimer un cluster spécifique</li></ul></p>Règle d'accès à l'infrastructure correspondante : Superutilisateur<br/><br/><b>Remarque </b>: pour créer des ressources telles que des machines, des réseaux locaux virtuels (VLAN) et des sous-réseaux, les utilisateurs ont besoin du rôle d'infrastructure **Superutilisateur**.|<ul><li>Rôle RBAC : cluster-admin</li><li>Accès en lecture/écriture aux ressources dans tous les espaces de nom</li><li>Créer des rôles au sein d'un espace de nom</li><li>Accès au tableau de bord Kubernetes</li><li>Créer une ressource Ingress permettant de rendre les applications publiquement disponibles</li></ul>|
+|Opérateur|<ul><li>Ajouter des noeuds worker supplémentaires à un cluster</li><li>Supprimer des noeuds worker d'un cluster</li><li>Réamorcer un noeud worker</li><li>Recharger un noeud worker</li><li>Ajouter un sous-réseau à un cluster</li></ul><p>Règles d'accès à l'infrastructure correspondante : Utilisateur de base</p>|<ul><li>Rôle RBAC : admin</li><li>Accès en lecture/écriture aux ressources dans l'espace de nom par défaut, mais non pas à l'espace de nom lui-même</li><li>Créer des rôles au sein d'un espace de nom</li></ul>|
+|Editeur <br/><br/><b>Conseil </b>: utilisez ce rôle pour les développeurs d'application.|<ul><li>Lier un service {{site.data.keyword.Bluemix_notm}} à un cluster.</li><li>Dissocier un service {{site.data.keyword.Bluemix_notm}} d'un cluster.</li><li>Créer un webhook.</li></ul><p>Règles d'accès à l'infrastructure correspondante : Utilisateur de base|<ul><li>Rôle RBAC : edit</li><li>Accès en lecture/écriture aux ressources dans l'espace de nom par défaut</li></ul></p>|
+|Afficheur|<ul><li>Lister un cluster</li><li>Afficher les détails d'un cluster</li></ul><p>Règles d'accès à l'infrastructure correspondante : visualisation uniquement</p>|<ul><li>Rôle RBAC : view</li><li>Accès en lecture aux ressources dans l'espace de nom par défaut</li><li>Pas d'accès en lecture aux valeurs confidentielles Kubernetes</li></ul>|
+{: caption="Tableau 7. {{site.data.keyword.containershort_notm}} Règles et droits d'accès" caption-side="top"}
 
-### Vérification de votre règle d'accès {{site.data.keyword.containershort_notm}}
-{: #view_access}
+|Règles d'accès Cloud Foundry|Autorisations de gestion des comptes|
+|-------------|------------------------------|
+|Rôle d'organisation : gestionnaire|<ul><li>Ajouter des utilisateurs supplémentaires dans un compte {{site.data.keyword.Bluemix_notm}}</li></ul>| |
+|Rôle d'espace : développeur|<ul><li>Créer des instances de service {{site.data.keyword.Bluemix_notm}}</li><li>Lier des instances de service {{site.data.keyword.Bluemix_notm}} à des clusters</li></ul>| 
+{: caption="Tableau 8. Règles et droits d'accès Cloud Foundry" caption-side="top"}
 
-Vous pouvez examiner et vérifier la règle d'accès qui vous est affectée pour {{site.data.keyword.containershort_notm}}. La règle d'accès détermine les actions de gestion de cluster que vous pouvez effectuer.
-
-1.  Sélectionnez le compte {{site.data.keyword.Bluemix_notm}} pour lequel vous désirez vérifier votre règle d'accès {{site.data.keyword.containershort_notm}}.
-2.  Dans la barre de menus, cliquez sur **Gérer** > **Sécurité** > **Identité et accès**. La fenêtre **Utilisateurs** affiche une liste des utilisateurs avec leurs adresses électroniques et leur statut actuel pour le compte sélectionné.
-3.  Sélectionnez l'utilisateur pour lequel vous désirez vérifier la règle d'accès.
-4.  Dans la section **Règles d'accès**, examinez la règle d'accès affectée à l'utilisateur. Pour obtenir des informations détaillées sur les actions que vous pouvez effectuer avec ce rôle, voir [Présentation des règles et autorisations d'accès {{site.data.keyword.containershort_notm}} obligatoires](#access_ov).
-5.  Facultatif : [Modifiez votre règle d'accès actuelle](#change_access).
-
-    **Remarque :** Seuls les utilisateurs auxquels une règle de service Administrateur est affectée sur toutes les ressources dans {{site.data.keyword.containershort_notm}} peuvent modifier la règle d'accès d'un utilisateur existant. Pour ajouter d'autres utilisateurs à un compte {{site.data.keyword.Bluemix_notm}}, vous devez avoir le rôle Gestionnaire Cloud Foundry pour ce compte. Pour identifier l'ID du propriétaire du compte {{site.data.keyword.Bluemix_notm}}, exécutez la commande `bx iam accounts` et recherchez la zone **Owner User ID**.
-
-
-### Modification de la règle d'accès {{site.data.keyword.containershort_notm}} pour un utilisateur existant
-{: #change_access}
-
-Vous pouvez modifier la règle d'accès pour un utilisateur existant en lui accordant des autorisations de gestion d'un cluster dans votre compte
-{{site.data.keyword.Bluemix_notm}}.
-
-Avant de commencer, [vérifiez que vous avez bien été affecté à la règle d'accès
-Administrateur](#view_access) sur toutes les ressources dans {{site.data.keyword.containershort_notm}}.
-
-1.  Sélectionnez le compte {{site.data.keyword.Bluemix_notm}} pour lequel vous désirez modifier la règle d'accès {{site.data.keyword.containershort_notm}} d'un utilisateur existant.
-2.  Dans la barre de menus, cliquez sur **Gérer** > **Sécurité** > **Identité et accès**. La fenêtre **Utilisateurs** affiche une liste des utilisateurs avec leurs adresses électroniques et leur statut actuel pour le compte sélectionné.
-3.  Recherchez l'utilisateur dont vous désirez modifier la règle d'accès. S'il est introuvable, [invitez cet utilisateur sur le compte {{site.data.keyword.Bluemix_notm}}](#add_users).
-4.  Dans la section **Règles d'accès**, sur la ligne **Rôle**, sous la colonne **Actions**, développez et cliquez sur **Editer la règle**.
-5.  Dans la liste déroulante **Service**, sélectionnez **{{site.data.keyword.containershort_notm}}**.
-6.  Dans la liste déroulante **Régions**, sélectionnez la région pour laquelle vous voulez modifier la règle.
-7.  Dans la liste déroulante **Instance de service**, sélectionnez le cluster pour lequel vous voulez modifier la règle. Pour identifier l'ID d'un cluster spécifique, exécutez la commande `bx cs clusters`.
-8.  Dans la section **Sélectionnez des rôles**, cliquez sur le rôle pour lequel vous voulez modifier l'accès de l'utilisateur. Pour consulter la liste des actions prises en charge pour chaque rôle, voir [Présentation des règles et autorisations d'accès {{site.data.keyword.containershort_notm}} obligatoires](#access_ov).
-9.  Cliquez sur **Sauvegarder** pour enregistrer vos modifications.
 
 ### Ajout d'utilisateurs à un compte {{site.data.keyword.Bluemix_notm}}
 {: #add_users}
@@ -1136,29 +826,38 @@ Vous pouvez ajouter des utilisateurs supplémentaires à un compte {{site.data.k
 
 Avant de commencer, vérifiez que vous détenez le rôle Gestionnaire Cloud Foundry pour un compte {{site.data.keyword.Bluemix_notm}}.
 
-1.  Sélectionnez le compte {{site.data.keyword.Bluemix_notm}} dans lequel vous désirez ajouter des utilisateurs.
-2.  Dans la barre de menus, cliquez sur **Gérer** > **Sécurité** > **Identité et accès**. La fenêtre Utilisateurs affiche une liste des utilisateurs avec leurs adresses électroniques et leur statut actuel pour le compte sélectionné.
-3.  Cliquez sur **Inviter des utilisateurs**.
-4.  Dans **Adresse électronique**, entrez l'adresse électronique de l'utilisateur que vous voulez ajouter au compte {{site.data.keyword.Bluemix_notm}}.
-5.  Dans la section **Accès**, développez **Services**.
-6.  Dans la liste déroulante **Affecter l'accès à**, déterminez si vous voulez accorder l'accès uniquement à votre compte {{site.data.keyword.containershort_notm}} (**Ressource**) ou à un ensemble de diverses ressources de votre compte (**Groupe de ressources**).
-7.  Si vous sélectionnez **Ressource** :
-    1. Dans la liste déroulante **Services**, sélectionnez **{{site.data.keyword.containershort_notm}}**.
-    2. Dans la liste déroulante **Région**, sélectionnez la région dans laquelle vous voulez inviter l'utilisateur.
-    3. Dans la liste déroulante **Instance de service**, sélectionnez le cluster dans lequel vous voulez inviter l'utilisateur. Pour identifier l'ID d'un cluster spécifique, exécutez la commande `bx cs clusters`.
-    4. Dans la section **Sélectionnez des rôles**, cliquez sur le rôle pour lequel vous voulez modifier l'accès de l'utilisateur. Pour consulter la liste des actions prises en charge pour chaque rôle, voir [Présentation des règles et autorisations d'accès {{site.data.keyword.containershort_notm}} obligatoires](#access_ov).
-8. Si vous sélectionnez **Groupe de ressources** :
-    1. Dans la liste déroulante **Groupe de ressources**, sélectionnez le groupe de ressources qui contient des droits sur la ressource {{site.data.keyword.containershort_notm}} de votre compte.
-    2. Dans la liste déroulante **Affecter l'accès à un groupe de ressources**, sélectionnez le rôle que vous voulez affecter à l'utilisateur invité. Pour consulter la liste des actions prises en charge pour chaque rôle, voir [Présentation des règles et autorisations d'accès {{site.data.keyword.containershort_notm}} obligatoires](#access_ov).
-9. Facultatif : pour autoriser cet utilisateur à ajouter des utilisateurs supplémentaires à un compte {{site.data.keyword.Bluemix_notm}}, affectez-lui le rôle d'organisation Cloud Foundry.
-    1. Dans la section **Rôles Cloud Foundry**, dans la liste déroulante **Organisation**, sélectionnez l'organisation à laquelle vous voulez accorder des droits à l'utilisateur.
-    2. Dans la liste déroulante **Rôles d'organisation**, sélectionnez **Gestionnaire**.
-    3. Dans la liste déroulante **Région**, sélectionnez la région à laquelle vous voulez accorder des droits à l'utilisateur.
-    4. Dans la liste déroulante **Espace**, sélectionnez l'espace auquel vous voulez accorder des droits à l'utilisateur.
-    5. Dans la liste déroulante **Rôles d'espace**, sélectionnez **Gestionnaire**.
-10. Cliquez sur **Inviter des utilisateurs**.
+1.  [Ajoutez l'utilisateur au compte](../iam/iamuserinv.html#iamuserinv).
+2.  Dans la section **Accès**, développez **Services**.
+3.  Affectez un rôle d'accès {{site.data.keyword.containershort_notm}}. Dans la liste déroulante **Affecter l'accès à**, déterminez si vous voulez accorder l'accès uniquement à votre compte {{site.data.keyword.containershort_notm}} (**Ressource**) ou à un ensemble de diverses ressources de votre compte (**Groupe de ressources**).
+  -  Pour **Ressource** :
+      1. Dans la liste déroulante **Services**, sélectionnez **{{site.data.keyword.containershort_notm}}**.
+      2. Dans la liste déroulante **Région**, sélectionnez celle où inviter l'utilisateur.
+      3. Dans la liste déroulante **Instance de service**, sélectionnez le cluster où inviter l'utilisateur. Pour identifier l'ID d'un cluster spécifique, exécutez la commande `bx cs clusters`.
+      4. Dans la section **Sélectionnez des rôles**, choisissez un rôle. Pour consulter la liste des actions prises en charge pour chaque rôle, voir [Règles et droits d'accès](#access_ov).
+  - Pour **Groupe de ressources** :
+      1. Dans la liste déroulante **Groupe de ressources**, sélectionnez le groupe de ressources qui contient des droits sur la ressource {{site.data.keyword.containershort_notm}} de votre compte.
+      2. Dans la liste déroulante **Affecter l'accès à un groupe de ressources**, sélectionnez un rôle. Pour consulter la liste des actions prises en charge pour chaque rôle, voir [Règles et droits d'accès](#access_ov).
+4. [Facultatif : affectez un rôle d'infrastructure](/docs/iam/mnginfra.html#managing-infrastructure-access).
+5. [Facultatif : affectez un rôle Cloud Foundry](/docs/iam/mngcf.html#mngcf).
+5. Cliquez sur **Inviter des utilisateurs**.
+
+
+
+### Personnalisation des autorisations utilisateur pour l'infrastructure
+{: #infrastructure_permissions}
+
+Lorsque vous définissez des règles sur l'infrastructure dans Identity and Access Management, des droits associés à un rôle sont attribués à un utilisateur. Pour personnaliser ces droits, vous devez vous connecter à l'infrastructure IBM Cloud (SoftLayer) et adapter ces droits.
+{: #view_access}
+
+Par exemple, les utilisateurs de base peuvent redémarrer un noeud worker, mais ne peuvent pas recharger un noeud worker. Sans attribuer à cette personne des doits superutilisateur, vous pouvez adapter les droits sur l'infrastructure IBM Cloud (SoftLayer) et autoriser l'utilisateur à exécuter une commande de rechargement.
+
+1.  Connectez-vous à votre compte d'infrastructure IBM Cloud (SoftLayer).
+2.  Sélectionnez un profil utilisateur à mettre à jour.
+3.  Dans **Autorisations du portail**, personnalisez l'accès de l'utilisateur. Par exemple, pour ajouter une autorisation de rechargement, dans l'onglet **Périphériques**, sélectionnez **Rechargement du système d'exploitation et lancement du noyau de secours**.
+9.  Sauvegardez vos modifications.
 
 <br />
+
 
 
 ## Mise à jour du maître Kubernetes
@@ -1191,7 +890,7 @@ Alors qu'IBM applique automatiquement des correctifs au maître de Kubernetes, v
 - Utilisez des [répliques ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#replicas) dans vos déploiements pour replanifier des pods sur les noeuds disponibles.
 
 Mise à jour des clusters au niveau de la production :
-- Pour vous aider à éviter des temps d'indisponibilité de vos applications, le processus de mise à jour empêche la planification de pods sur le noeud worker pendant la mise à jour. Pour plus d'informations, voir [`Flux kubectl` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/user-guide/kubectl/v1.8/#drain).
+- Pour vous aider à éviter des temps d'indisponibilité de vos applications, le processus de mise à jour empêche la planification de pods sur le noeud worker pendant la mise à jour. Pour plus d'informations, voir [`Flux kubectl` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#drain).
 - Utilisez un cluster de test pour valider que vos charges de travail et le processus de livraison ne sont pas impactés par la mise à jour. Vous ne pouvez pas revenir à la version précédente des noeuds d'agent.
 - Les clusters au niveau de la production doivent être en mesure de surmonter l'échec d'un noeud worker. Si ce n'est pas le cas de votre cluster, ajoutez un noeud worker avant de mettre à jour le cluster.
 - Une mise à jour tournante est effectuée lorsque plusieurs noeuds d'agent doivent être mis à niveau. Une mise à niveau peut s'appliquer simultanément à 20 pourcent maximum du nombre total de noeuds d'agent d'un cluster. Le processus de mise à niveau attend que la mise à niveau d'un noeud worker soit terminée avant de commencer la mise à niveau d'un autre agent.
@@ -1226,11 +925,12 @@ Une fois la mise à jour terminée :
 ## Ajout de sous-réseaux à des clusters
 {: #cs_cluster_subnet}
 
-Vous pouvez modifier le pool d'adresses IP portables publiques ou privées disponibles en ajoutant des sous-réseaux à votre cluster.{:shortdesc}
+Vous pouvez modifier le pool d'adresses IP portables publiques ou privées disponibles en ajoutant des sous-réseaux à votre cluster.
+{:shortdesc}
 
-Dans {{site.data.keyword.containershort_notm}}, vous pouvez ajouter des adresses IP portables stables pour les services Kubernetes en adjoignant des sous-réseaux au cluster. Lorsque vous créez un cluster standard, {{site.data.keyword.containershort_notm}} lui alloue automatiquement un sous-réseau public portable avec 5 adresses IP publiques et un sous-réseau privé portable avec 5 adresses IP privées. Les adresses IP publiques et privées portables sont statiques et ne changent pas lorsqu'un noeud worker, ou même le cluster, est retiré. 
+Dans {{site.data.keyword.containershort_notm}}, vous pouvez ajouter des adresses IP portables stables pour les services Kubernetes en adjoignant des sous-réseaux au cluster. Dans ce cas, des sous-réseaux ne sont pas utilisés avec le masque réseau pour créer une connectivité à travers un ou pluisurs clusters. A la place, les sous-réseaux sont utilisés pour fournir des adresses IP permanentes fixes pour un service d'un cluster pouvant être utilisées pour accéder à ce service.
 
-L'une des adresses IP publiques portables et l'une des adresses IP privées portables sont utilisées pour les [contrôleurs Ingress](cs_apps.html#cs_apps_public_ingress) que vous pouvez utiliser afin d'exposer plusieurs applications dans votre cluster. Les 4 adresses IP publiques portables et les 4 adresses IP privées portables restantes peuvent être utilisées pour exposer au public des applications distinctes en [créant un service d'équilibreur de charge](cs_apps.html#cs_apps_public_load_balancer).
+Lorsque vous créez un cluster standard, {{site.data.keyword.containershort_notm}} lui alloue automatiquement un sous-réseau public portable avec 5 adresses IP publiques et un sous-réseau privé portable avec 5 adresses IP privées. Les adresses IP publiques et privées portables sont statiques et ne changent pas lorsqu'un noeud worker, ou même le cluster, est retiré. Pour chaque sous-réseau, une adresse IP portable publique et une adresse IP portable privée sont utilisées pour les [équilibreurs de charge d'application](cs_apps.html#cs_apps_public_ingress) que vous pouvez utiliser pour exposer plusieurs applications dans votre cluster. Les 4 adresses IP publiques portables et les 4 adresses IP privées portables restantes peuvent être utilisées pour exposer au public des applications distinctes en [créant un service d'équilibreur de charge](cs_apps.html#cs_apps_public_load_balancer).
 
 **Remarque :** les adresses IP publiques portables sont facturées sur une base mensuelle. Si vous décidez de retirer les adresses IP portables après la mise en place de votre cluster, vous devez quand même payer les frais mensuels, même si vous ne les avez utilisées que brièvement.
 
@@ -1239,56 +939,44 @@ L'une des adresses IP publiques portables et l'une des adresses IP privées port
 
 Vous pouvez ajouter des adresses IP publiques ou privées portables stables au cluster en lui affectant des sous-réseaux.
 
-Dans le cas d'utilisateurs {{site.data.keyword.Bluemix_dedicated_notm}}, au lieu d'exécuter cette tâche, vous devez [ouvrir un ticket de demande de service](/docs/support/index.html#contacting-support) pour créer le sous-réseau, puis utiliser la commande [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) pour l'ajouter au cluster.
+**Remarque :** lorsque vous rendez un sous-réseau disponible pour un cluster, les adresses IP du sous-réseau sont utilisées pour l'opération réseau du cluster. Pour éviter des conflits d'adresse IP, prenez soin de n'utiliser le sous-réseau qu'avec un seul cluster. N'utilisez pas en même temps un sous-réseau pour plusieurs clusters ou à d'autres fins hors d'{{site.data.keyword.containershort_notm}}.
 
-Avant de commencer, vérifiez que vous pouvez accéder au portefeuille d'infrastructure IBM Cloud (SoftLayer) via l'interface graphique {{site.data.keyword.Bluemix_notm}}. Pour accéder au portefeuille, vous devez configurer ou utiliser un compte {{site.data.keyword.Bluemix_notm}} de type Paiement à la carte existant.
+Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) votre cluster.
 
-1.  Dans la section **Infrastructure** du catalogue, sélectionnez **Réseau**.
-2.  Sélectionnez **Sous-réseau/IP** et cliquez sur **Créer**.
-3.  Dans le menu déroulant **Sélectionner le type de sous-réseau à ajouter à ce compte**, sélectionnez **Public portable** ou **Privé portable**.
-4.  Sélectionnez le nombre d'adresses IP que vous désirez ajouter à votre sous-réseau portable.
+Pour créer un sous-réseau dans un compte d'infrastructure IBM Cloud (SoftLayer) et le rendre disponible pour un cluster spécifié :
 
-    **Remarque :** lorsque vous ajoutez des adresses IP portables à votre sous-réseau, trois adresses IP sont utilisées pour l'opération réseau interne au cluster, de sorte que vous ne pouvez pas les utiliser pour votre contrôleur Ingress ou pour créer un service d'équilibreur de charge. Par exemple, si vous demandez huit adresses IP publiques portables, vous pouvez en utiliser cinq pour exposer vos applications au public.
-
-5.  Sélectionnez le réseau local virtuel public ou privé vers lequel adresser les adresses IP publiques ou privées portables. Vous devez sélectionner le réseau local virtuel public ou privé auquel un noeud worker existant est connecté. Identifiez le réseau local virtuel public ou privé d'un noeud worker.
-
+1. Provisionnez un nouveau sous-réseau.
 
     ```
-    bx cs worker-get <worker_id>
+    bx cs cluster-subnet-create <nom_ou_ID_cluster> <taille_sous-réseau> <ID_VLAN>
     ```
     {: pre}
 
-6.  Renseignez le questionnaire et cliquez sur **Passer une commande**.
+    <table>
+    <caption>Tableau 8. Description des composantes de cette commande</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composantes de cette commande</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>cluster-subnet-create</code></td>
+    <td>Commande de création d'un sous-réseau pour votre cluster.</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;nom_ou_ID_cluster&gt;</em></code></td>
+    <td>Remplacez <code>&gt;nom_ou_ID_cluste&lt;</code> par le nom ou l'ID du cluster.</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;taille_sous-réseau&gt;</em></code></td>
+    <td>Remplacez <code>&gt;taille_sous-réseau&lt;</code> par le nombre d'adresses IP que vous désirez ajouter depuis votre sous-réseau portable. Valeurs admises : 8, 16, 32 ou 64. <p>**Remarque :** lorsque vous ajoutez des adresses IP portables pour votre sous-réseau, trois adresses IP sont utilisées pour l'opération réseau interne au cluster, de sorte que vous ne pouvez pas les utiliser pour votre équilibreur de charge d'application ou pour créer un service d'équilibreur de charge. Par exemple, si vous demandez huit adresses IP publiques portables, vous pouvez en utiliser cinq pour exposer vos applications au public.</p> </td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;VLAN_ID&gt;</em></code></td>
+    <td>Remplacez <code>&gt;ID_VLAN&lt;</code> par l'ID du VLAN privé ou public sur lequel vous désirez allouer les adresses IP portables publiques ou privées. Vous devez sélectionner le réseau local virtuel public ou privé auquel un noeud worker existant est connecté. Pour examiner le VLAN privé ou public d'un noeud worker, exécutez la commande <code>bx cs worker-get &gt;worker_id&lt;</code>.</td>
+    </tr>
+    </tbody></table>
 
-    **Remarque :** les adresses IP publiques portables sont facturées sur une base mensuelle. Si vous décidez de supprimer des adresses IP publiques portables après les avoir créées, les frais pour le mois en cours vous seront néanmoins facturés, même si vous ne les avez utilisées qu'une partie du mois.
-
-7.  Une fois le sous-réseau provisionné, rendez-le disponible pour votre cluster Kubernetes.
-    1.  Dans le tableau de bord Infrastructure, sélectionnez le sous-réseau que vous avez créé et notez son ID.
-    2.  Connectez-vous à l'interface de ligne de commande {{site.data.keyword.Bluemix_notm}}. Pour stipuler une région {{site.data.keyword.Bluemix_notm}}, [incluez son noeud final d'API](cs_regions.html#bluemix_regions).
-
-        ```
-        bx login
-        ```
-        {: pre}
-
-        **Remarque :** si vous possédez un ID fédéré, exécutez la commande `bx login --sso` pour vous connecter à l'interface de ligne de commande {{site.data.keyword.Bluemix_notm}}. Entrez votre nom d'utilisateur et utilisez l'URL mentionnée dans la sortie CLI pour extraire votre code d'accès à usage unique. Si la connexion échoue alors que vous omettez l'option `--sso` et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré.
-
-    3.  Recensez tous les clusters de votre compte et notez l'ID du cluster sur lequel vous désirez rendre disponible le sous-réseau.
-
-        ```
-        bx cs clusters
-        ```
-        {: pre}
-
-    4.  Ajoutez le sous-réseau à votre cluster. Lorsque vous rendez disponible un sous-réseau pour un cluster, une mappe de configuration Kubernetes est créée pour vous et inclut toutes les adresses IP publiques ou privées portables disponibles que vous pouvez utiliser. Si aucun contrôleur Ingress n'existe pour votre cluster, une adresse IP publique portable est automatiquement utilisée pour créer le contrôleur Ingress public et une adresse IP privée portable est automatiquement utilisée pour créer le contrôleur Ingress privé. Toutes les autres adresses peuvent être utilisées pour créer des services d'équilibreur de charge pour vos applications.
-
-
-        ```
-        bx cs cluster-subnet-add <cluster name or id> <subnet id>
-        ```
-        {: pre}
-
-8.  Vérifiez que l'ajout du sous-réseau à votre cluster a abouti. Le CIDR de sous-réseau est répertorié dans la section **VLAN**.
+2.  Vérifiez que le sous-réseau a bien été créé et ajouté à votre cluster. Le CIDR de sous-réseau est répertorié dans la section **VLAN**.
 
     ```
     bx cs cluster-get --showResources <cluster name or id>
@@ -1298,7 +986,7 @@ Avant de commencer, vérifiez que vous pouvez accéder au portefeuille d'infrast
 ### Ajout de sous-réseaux personnalisés et existants à des clusters Kubernetes
 {: #custom_subnet}
 
-Vous pouvez ajouter des sous-réseaux publics ou privés portables existants à votre cluster Kubernetes. 
+Vous pouvez ajouter des sous-réseaux publics ou privés portables existants à votre cluster Kubernetes.
 
 Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) votre cluster.
 
@@ -1376,7 +1064,7 @@ Si vous disposez d'un sous-réseau existant dans votre portefeuille d'infrastruc
     ```
     {: screen}
 
-6.  Ajoutez le sous-réseau à votre cluster en spécifiant l'ID du sous-réseau. Lorsque vous rendez disponible un sous-réseau pour un cluster, une mappe de configuration Kubernetes est créée pour vous et inclut toutes les adresses IP publiques portables disponibles que vous pouvez utiliser. Si aucun contrôleur Ingress n'existe encore pour votre cluster, une adresse IP publique portable est automatiquement utilisée pour créer le contrôleur Ingress. Toutes les autres peuvent être utilisées pour créer des services d'équilibreur de charge pour vos applications.
+6.  Ajoutez le sous-réseau à votre cluster en spécifiant l'ID du sous-réseau. Lorsque vous rendez disponible un sous-réseau pour un cluster, une mappe de configuration Kubernetes est créée pour vous et inclut toutes les adresses IP publiques portables disponibles que vous pouvez utiliser. Si aucun équilibreur de charge d'application n'existe encore pour votre cluster, une adresse IP portable publique et une adresse IP portable privée sont automatiquement utilisées pour créer les équilibreurs de charge d'application privés et publics. Toutes les autres adresses peuvent être utilisées pour créer des services d'équilibreur de charge pour vos applications.
 
     ```
     bx cs cluster-subnet-add mycluster 807861
@@ -1440,27 +1128,7 @@ Avant de commencer, configurez le routage du trafic réseau entrant et sortant d
     ```
     {: screen}
 
-4. Ajoutez un équilibreur de charge privé pour accéder à votre application via le réseau privé. Si vous voulez utiliser une adresse IP privée à partir du sous-réseau que vous avez ajouté, vous devez spécifier une adresse IP lorsque vous créez un équilibreur de charge privé. Autrement, une adresse IP est sélectionnée de manière aléatoire dans les sous-réseaux d'infrastructure IBM Cloud (SoftLayer) ou dans les sous-réseaux fournis par l'utilisateur sur le VLAN privé. Pour plus d'informations, voir [Configuration de l'accès à une application](cs_apps.html#cs_apps_public_load_balancer).
-
-    Exemple de fichier de configuration pour un service d'équilibreur de charge privé avec une adresse IP spécifiée :
-
-    ```
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: <myservice>
-      annotations:
-        service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: private
-    spec:
-      type: LoadBalancer
-      selector:
-        <selectorkey>:<selectorvalue>
-      ports:
-       - protocol: TCP
-         port: 8080
-      loadBalancerIP: <private_ip_address>
-    ```
-    {: codeblock}
+4. Ajoutez un service d'équilibrage de charge privé ou un équilibreur de charge d'application Ingress privé pour accéder à votre application à travers le réseau privé. Si vous désirez utiliser une adresse IP privée du sous-réseau que vous avez ajouté lorsque vous avez créé un équilibreur de charge privé ou un équilibreur de charge d'application Ingress privé, vous devez spécifier une adresse IP. Autrement, une adresse IP est sélectionnée de manière aléatoire dans les sous-réseaux d'infrastructure IBM Cloud (SoftLayer) ou dans les sous-réseaux fournis par l'utilisateur sur le VLAN privé. Pour plus d'informations, voir [Configuration de l'accès une application à l'aide du type de service d'équilibreur de charge](cs_apps.html#cs_apps_public_load_balancer) ou [Activation de l'équilibreur de charge d'application privé](cs_apps.html#private_ingress).
 
 <br />
 
@@ -1476,7 +1144,8 @@ Kubernetes fait une distinction entre les volumes persistants qui représentent 
 ![Créer des volumes persistants et des réservations de volumes persistants](images/cs_cluster_pv_pvc.png)
 
  Comme illustré dans le diagramme, pour permettre l'utilisation de partage de fichiers NLS existants avec Kubernetes, vous devez créer des volumes persistants d'une certaine taille et avec un mode d'accès déterminé,
-qui soient conformes à la spécification de volume persistant. Si le volume persistant et la réservation de volume persistant correspondent, ils sont liés l'un à l'autre. Seules les réservations de volume persistant liées peuvent être utilisées par l'utilisateur du cluster pour monter le volume sur un pod. Cette procédure est dénommée provisionnement statique de stockage persistant.
+qui soient conformes à la spécification de volume persistant. Si le volume persistant et la réservation de volume persistant correspondent, ils sont liés l'un à l'autre. Seules les réservations de volume persistant liées peuvent être utilisées par l'utilisateur du cluster pour monter le
+volume sur un déploiement. Cette procédure est dénommée provisionnement statique de stockage persistant.
 
 Avant de commencer, vérifiez que vous disposez d'un partage de fichiers NFS existant que vous pouvez utiliser pour créer votre volume persistant.
 
@@ -1485,12 +1154,15 @@ NFS existants, les utilisateurs du cluster peuvent utiliser la procédure de [pr
 
 Pour créer un volume persistant et une réservation correspondante, procédez comme suit.
 
-1.  Dans votre compte d'infrastructure IBM Cloud (SoftLayer), recherchez l'ID et le chemin du partage NFS où vous désirez créer votre objet de volume persistant.
+1.  Dans votre compte d'infrastructure IBM Cloud (SoftLayer), recherchez l'ID et le chemin du partage NFS où vous désirez créer votre objet de volume persistant. Par ailleurs, autorisez le stockage de fichiers sur les sous-réseaux du cluster. Cette autorisation permet à votre cluster d'accéder au stockage.
     1.  Connectez-vous à votre compte d'infrastructure IBM Cloud (SoftLayer).
     2.  Cliquez sur **Stockage**.
-    3.  Cliquez sur **Stockage de fichiers** et notez l'ID et le chemin du partage de fichiers NFS que vous désirez utiliser.
-2.  Ouvrez l'éditeur de votre choix.
-3.  Créez un fichier de configuration de stockage pour votre volume persistant.
+    3.  Cliquez sur **Stockage de fichiers** et, dans le menu **Actions**, sélectionnez **Autoriser l'hôte**.
+    4.  Cliquez sur **Sous-réseaux**. Après l'autorisation, chaque noeud worker sur le sous-réseau a accès au stockage de fichiers.
+    5.  Sélectionnez dans le menu le sous-réseau du VLAN public de votre cluster et cliquez sur **Soumettre**. Si vous devez identifier le sous-réseau, exécutez la commande `bx cs cluster-get <cluster_name> --showResources`.
+    6.  Cliquez sur le nom du stockage de fichiers.
+    7.  Notez la valeur de la zone **Point de montage**. Cette zone est affichée sous la forme `<server>:/<path>`.
+2.  Créez un fichier de configuration de stockage pour votre volume persistant. Incluez le serveur et le chemin de la zone**Point de montage** du système de fichiers.
 
     ```
     apiVersion: v1
@@ -1503,13 +1175,13 @@ Pour créer un volume persistant et une réservation correspondante, procédez c
      accessModes:
        - ReadWriteMany
      nfs:
-       server: "nfslon0410b-fz.service.softlayer.com"
+       server: "nfslon0410b-fz.service.networklayer.com"
        path: "/IBM01SEV8491247_0908"
     ```
     {: codeblock}
 
     <table>
-    <caption>Tableau 8. Description des composants du fichier YAML</caption>
+    <caption>Tableau 9. Description des composantes du fichier YAML</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
     </thead>
@@ -1524,7 +1196,7 @@ Pour créer un volume persistant et une réservation correspondante, procédez c
     </tr>
     <tr>
     <td><code>accessMode</code></td>
-    <td>Les modes d'accès définissent la manière dont une réservation de volume persistant peut être montée sur un noeud worker.<ul><li>ReadWriteOnce (RWO) : le volume persistant ne peut être monté sur des pods que dans un noeud worker unique. Les pods montés sur ce volume persistant peuvent lire et écrire sur le volume.</li><li>ReadOnlyMany (ROX) : le volume persistant peut être monté sur des pods hébergés sur plusieurs noeuds d'agent. Les pods montés sur ce volume persistant peuvent uniquement lire les données du volume.</li><li>ReadWriteMany (RWX) : le volume persistant peut être monté sur des pods hébergés sur plusieurs noeuds d'agent. Les pods montés sur ce volume persistant peuvent lire et écrire sur le volume.</li></ul></td>
+    <td>Les modes d'accès définissent la manière dont une réservation de volume persistant peut être montée sur un noeud worker.<ul><li>ReadWriteOnce (RWO): le volume persistant ne peut être monté sur des déploiements que dans un seul noeud worker. Les conteneurs dans des déploiements montés sur ce volume persistant peuvent accéder en lecture et en écriture au volume.</li><li>ReadOnlyMany (ROX) : le volume persistant peut être monté sur des déploiements hébergés sur plusieurs noeuds worker. Les déploiements montés sur ce volume persistant ne peuvent accéder au volume qu'en lecture.</li><li>ReadWriteMany (RWX) : ce volume persistant peut être monté sur des déploiements hébergés sur plusieurs noeuds worker. Les déploiements montés sur ce volume persistant peuvent accéder en lecture et en écriture au volume.</li></ul></td>
     </tr>
     <tr>
     <td><code>server</code></td>
@@ -1536,7 +1208,7 @@ Pour créer un volume persistant et une réservation correspondante, procédez c
     </tr>
     </tbody></table>
 
-4.  Créez le volume persistent dans votre cluster.
+3.  Créez le volume persistent dans votre cluster.
 
     ```
     kubectl apply -f <yaml_path>
@@ -1550,14 +1222,14 @@ Pour créer un volume persistant et une réservation correspondante, procédez c
     ```
     {: pre}
 
-5.  Vérifiez que le volume persistant a été créé.
+4.  Vérifiez que le volume persistant a été créé.
 
     ```
     kubectl get pv
     ```
     {: pre}
 
-6.  Créez un autre fichier de configuration pour créer votre réservation de volume persistant. Pour que la réservation de volume persistant corresponde à l'objet de volume persistant créé auparavant, vous devez sélectionner la même valeur pour `storage` et pour `accessMode`. La zone `storage-class` doit être vide. Si l'une de ces zones ne correspond pas au volume persistant, un nouveau volume persistant est créé automatiquement à la place.
+5.  Créez un autre fichier de configuration pour créer votre réservation de volume persistant. Pour que la réservation de volume persistant corresponde à l'objet de volume persistant créé auparavant, vous devez sélectionner la même valeur pour `storage` et pour `accessMode`. La zone `storage-class` doit être vide. Si l'une de ces zones ne correspond pas au volume persistant, un nouveau volume persistant est créé automatiquement à la place.
 
     ```
     kind: PersistentVolumeClaim
@@ -1575,14 +1247,14 @@ Pour créer un volume persistant et une réservation correspondante, procédez c
     ```
     {: codeblock}
 
-7.  Créez votre réservation de volume persistant.
+6.  Créez votre réservation de volume persistant.
 
     ```
     kubectl apply -f deploy/kube-config/mypvc.yaml
     ```
     {: pre}
 
-8.  Vérifiez que votre réservation de volume persistant a été créée et liée à l'objet de volume persistant. Ce processus peut prendre quelques minutes.
+7.  Vérifiez que votre réservation de volume persistant a été créée et liée à l'objet de volume persistant. Ce processus peut prendre quelques minutes.
 
     ```
     kubectl describe pvc mypvc
@@ -1611,7 +1283,7 @@ Pour créer un volume persistant et une réservation correspondante, procédez c
 
 
 Vous avez créé correctement un objet de stockage persistant et l'avez lié à une réclamation de volume
-persistant. Les utilisateurs du cluster peuvent à présent [monter la réservation de volume persistant](cs_apps.html#cs_apps_volume_mount) sur leur pod et lancer une lecture et écriture sur l'objet de volume persistant.
+persistant. Les utilisateurs du cluster peuvent à présent [monter la réservation de volume persistant](cs_apps.html#cs_apps_volume_mount) sur leurs déploiements et lancer une lecture et une écriture sur l'objet de volume persistant.
 
 <br />
 
@@ -1622,143 +1294,39 @@ persistant. Les utilisateurs du cluster peuvent à présent [monter la réservat
 Les journaux vous aident à identifier et résoudre les incidents liés à vos clusters et à vos applications. Vous voudrez parfois envoyer des journaux à un emplacement spécifique pour traitement ou stockage à long terme. Sur un cluster Kubernetes dans {{site.data.keyword.containershort_notm}}, vous pouvez activer le transfert de journaux pour votre cluster et choisir l'emplacement de destination de vos transferts de journaux. **Remarque** : le transfert de journaux n'est pris en charge que pour les clusters standard.
 {:shortdesc}
 
-### Affichage des journaux
-{: #cs_view_logs}
+Vous pouvez réacheminer les journaux de sources de journal telles que des conteneurs, des applications, des noeuds worker, des clusters Kubernetes et des contrôleurs Ingress. Examinez le tableau suivant pour plus d'information sur chaque source de journal.
 
-Pour afficher les journaux des clusters et des conteneurs, vous pouvez utiliser les fonctions de journalisation standard de Kubernetes et Docker.
+|Source de journal|Caractéristiques|Chemins d'accès aux journaux|
+|----------|---------------|-----|
+|`conteneur`|Journaux pour votre conteneur s'exécutant dans un cluster Kubernetes.|-|
+|`application`|Journaux de votre application qui s'exécute dans un cluster Kubernetes.|`/var/log/apps/**/*.log`, `/var/log/apps/**/*.err`|
+|`agent`|Journaux des noeuds d'agent de machine virtuelle dans un cluster Kubernetes.|`/var/log/syslog`, `/var/log/auth.log`|
+|`kubernetes`|Journaux du composant système Kubernetes.|`/var/log/kubelet.log`, `/var/log/kube-proxy.log`|
+|`ingress`|Journaux pour un équilibreur de charge d'application, géré par le conteneur Ingress et qui régit le trafic réseau entrant dans un cluster Kubernetes.|`/var/log/alb/ids/*.log`, `/var/log/alb/ids/*.err`, `/var/log/alb/customerlogs/*.log`, `/var/log/alb/customerlogs/*.err`|
+{: caption="Tableau 9. Caractéristiques de la source de journal." caption-side="top"}
+
+### Activation du transfert de journal
+{: #cs_log_sources_enable}
+
+Vous pouvez transférer des journaux vers {{site.data.keyword.loganalysislong_notm}} ou vers un serveur syslog externe. Si vous voulez transférer des journaux depuis une source de journal vers les deux serveurs collecteurs de journal, vous devez créer deux configurations de journalisation. **Remarque **: pour réacheminer des journaux d'applications, voir [Activation du transfert de journaux pour des applications](#cs_apps_enable).
 {:shortdesc}
-
-#### {{site.data.keyword.loganalysislong_notm}}
-{: #cs_view_logs_k8s}
-
-Pour les clusters standard, les journaux se trouvent dans le compte {{site.data.keyword.Bluemix_notm}} où vous vous êtes connecté lorsque vous avez créé le cluster Kubernetes. Si vous avez spécifié un espace {{site.data.keyword.Bluemix_notm}} lorsque vous avez créé le cluster, les journaux se trouvent dans cet espace. Les journaux de conteneur sont surveillés et réacheminés depuis l'extérieur du conteneur. Vous pouvez accéder aux journaux d'un conteneur via le tableau de bord Kibana. Pour plus d'informations sur la journalisation, voir [Journalisation pour {{site.data.keyword.containershort_notm}}](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
-
-**Remarque** : Si les journaux se trouvent dans l'espace spécifié lors de la création du cluster, le propriétaire du compte doit avoir les droits Gestionnaire, Développeur ou Auditeur sur cet espace pour afficher les journaux. Pour plus d'informations sur la modification des {{site.data.keyword.containershort_notm}} droits et règles d'accès, voir [Gestion de l'accès au cluster](cs_cluster.html#cs_cluster_user). Une fois les droits modifiés, il peut s'écouler jusqu'à 24 heures avant que les journaux commencent à s'afficher.
-
-Pour accéder au tableau de bord Kibana, accédez à l'une des URL suivantes et sélectionnez le compte ou l'espace {{site.data.keyword.Bluemix_notm}} dans lequel vous avez créé le cluster.
-- Sud et Est des Etats-Unis : https://logging.ng.bluemix.net
-- Sud du Royaume-Uni et Europe centrale : https://logging.eu-fra.bluemix.net
-
-Pour plus d'informations sur l'affichage des journaux, voir [Accès à Kibana à partir d'un navigateur Web](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser).
-
-#### Journaux Docker
-{: #cs_view_logs_docker}
-
-Vous pouvez exploiter les capacités de journalisation intégrées de Docker pour examiner les activités sur les flux de sortie
-STDOUT et STDERR standard. Pour plus d'informations, voir [Affichage des journaux pour un conteneur s'exécutant dans un cluster Kubernetes](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
-
-### Configuration de transfert des journaux pour un espace de nom du conteneur Docker
-{: #cs_configure_namespace_logs}
-
-Par défaut, {{site.data.keyword.containershort_notm}} transfère les journaux de l'espace de nom du conteneur Docker à {{site.data.keyword.loganalysislong_notm}}. Vous pouvez également transférer ces journaux à un serveur syslog externe en créant une nouvelle configuration de transfert de journaux.
-{:shortdesc}
-
-**Remarque** : pour afficher les journaux sur le site de Sydney, vous devez transférer les journaux à un serveur syslog externe.
-
-#### Activation du transfert de journaux vers syslog
-{: #cs_namespace_enable}
 
 Avant de commencer :
 
-1. Configurez de l'une des manières suivantes un serveur en mesure d'accepter un protocole syslog :
+1. Si vous voulez transférer des journaux vers un serveur syslog externe, vous pouvez configurer un serveur qui accepte un protocole syslog de deux manières :
   * Configurer et gérer votre propre serveur ou confier la gestion du serveur à un fournisseur. Dans ce cas, obtenez le noeud final de journalisation du fournisseur de journalisation.
   * Exécuter syslog à partir d'un conteneur. Par exemple, vous pouvez utiliser ce [fichier de déploiement .yaml ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/IBM-Bluemix/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) pour extraire une image publique Docker qui exécute un conteneur dans un cluster Kubernetes. L'image publie le port `514` sur l'adresse IP du cluster public et utilise cette adresse pour configurer l'hôte syslog.
 
-2. [Ciblez avec votre interface CLI](cs_cli_install.html#cs_cli_configure) le cluster où se trouve l'espace de nom.
+2. [Ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) le cluster où se trouve la source de journal.
 
-Pour transférer vos journaux d'espace de nom à un serveur syslog :
+Pour activer le transfert de journal pour un conteneur, un noeud worker, un composant du système Kubernetes ou un équilibreur de charge d'application :
 
-1. Créez la configuration de journalisation.
+1. Créez une configuration de transfert de journaux.
 
-    ```
-    bx cs logging-config-create <my_cluster> --namespace <my_namespace> --hostname <log_server_hostname> --port <log_server_port> --type syslog
-    ```
-    {: pre}
-
-    <table>
-    <caption>Tableau 9. Description des composantes de cette commande</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composantes de cette commande</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>logging-config-create</code></td>
-    <td>Commande pour créer la configuration de transfert des journaux pour votre espace de nom.</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;my_cluster&gt;</em></code></td>
-    <td>Remplacez <em>&lt;my_cluster&gt;</em> par le nom ou l'ID du cluster.</td>
-    </tr>
-    <tr>
-    <td><code>--namespace <em>&lt;my_namespace&gt;</em></code></td>
-    <td>Remplacez <em>&lt;my_namespace&gt;</em> par le nom de l'espace de nom. Le transfert des journaux n'est pas pris en charge pour les espaces de nom Kubernetes <code>ibm-system</code> et <code>kube-system</code>. Si vous n'indiquez pas d'espace de nom, tous les espaces de nom du conteneur utilisent cette configuration.</td>
-    </tr>
-    <tr>
-    <td><code>--hostname <em>&lt;log_server_hostname&gt;</em></code></td>
-    <td>Remplacez <em>&lt;log_server_hostname&gt;</em> par le nom d'hôte ou l'adresse IP du serveur collecteur de journal.</td>
-    </tr>
-    <tr>
-    <td><code>--port <em>&lt;log_server_port&gt;</em></code></td>
-    <td>Remplacez <em>&lt;log_server_port&gt;</em> par le port du serveur collecteur de journal. Si vous n'indiquez pas de port, le port standard <code>514</code> est utilisé pour syslog.</td>
-    </tr>
-    <tr>
-    <td><code>--type syslog</code></td>
-    <td>Type de journal pour syslog.</td>
-    </tr>
-    </tbody></table>
-
-2. Vérifiez que la configuration de transfert des journaux a été créée.
-
-    * Pour répertorier toutes les configurations de journalisation dans le cluster :
-      ```
-      bx cs logging-config-get <my_cluster>
-      ```
-      {: pre}
-
-      Exemple de sortie :
-
-      ```
-      Logging Configurations
-      ---------------------------------------------
-      Id                                    Source        Host             Port    Protocol   Paths
-      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes    172.30.162.138   5514    syslog     /var/log/kubelet.log,/var/log/kube-proxy.log
-      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  application   localhost        -       ibm        /var/log/apps/**/*.log,/var/log/apps/**/*.err
-
-      Container Log Namespace configurations
-      ---------------------------------------------
-      Namespace         Host             Port    Protocol
-      default           myhostname.com   5514    syslog
-      my-namespace      localhost        5514    syslog
-      ```
-      {: screen}
-
-    * Pour répertorier uniquement les configurations de journalisation d'espaces de nom :
-      ```
-      bx cs logging-config-get <my_cluster> --logsource namespaces
-      ```
-      {: pre}
-
-      Exemple de sortie :
-
-      ```
-      Namespace         Host             Port    Protocol
-      default           myhostname.com   5514    syslog
-      my-namespace      localhost        5514    syslog
-      ```
-      {: screen}
-
-#### Mise à jour de la configuration de serveur syslog
-{: #cs_namespace_update}
-
-Si vous souhaitez mettre à jour les détails de la configuration de serveur syslog actuelle ou changer de serveur syslog, vous pouvez mettre à jour la configuration de transfert des journaux.
-{:shortdesc}
-
-Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) le cluster où se trouve l'espace de nom.
-
-1. Mettez à jour la configuration de transfert des journaux.
+  * Pour transférer les journaux vers {{site.data.keyword.loganalysislong_notm}} :
 
     ```
-    bx cs logging-config-update <my_cluster> --namespace <my_namespace> --hostname <log_server_hostname> --port <log_server_port> --type syslog
+    bx cs logging-config-create <my_cluster> --logsource <my_log_source> --namespace <kubernetes_namespace> --hostname <ingestion_URL> --port <ingestion_port> --spaceName <cluster_space> --orgName <cluster_org> --type ibm
     ```
     {: pre}
 
@@ -1769,78 +1337,118 @@ Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_in
     </thead>
     <tbody>
     <tr>
-    <td><code>logging-config-update</code></td>
-    <td>Commande utilisée pour mettre à jour la configuration de transfert des journaux pour votre espace de nom.</td>
+    <td><code>logging-config-create</code></td>
+    <td>Commande de création d'une configuration de transfert de journal {{site.data.keyword.loganalysislong_notm}}.</td>
     </tr>
     <tr>
     <td><code><em>&lt;my_cluster&gt;</em></code></td>
     <td>Remplacez <em>&lt;my_cluster&gt;</em> par le nom ou l'ID du cluster.</td>
     </tr>
     <tr>
-    <td><code>--namepsace <em>&lt;my_namespace&gt;</em></code></td>
-    <td>Remplacez <em>&lt;my_namespace&gt;</em> par le nom de l'espace de nom avec la configuration de journalisation.</td>
+    <td><code>--logsource <em>&lt;my_log_source&gt;</em></code></td>
+    <td>Remplacez <em>&lt;my_log_source&gt;</em> par la source de journal. Valeurs admises : <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code> et <code>ingress</code>.</td>
     </tr>
     <tr>
-    <td><code>--hostname <em>&lt;log_server_hostname&gt;</em></code></td>
-    <td>Remplacez <em>&lt;log_server_hostname&gt;</em> par le nom d'hôte ou l'adresse IP du serveur collecteur de journal.</td>
+    <td><code><em>&lt;kubernetes_namespace&gt;</em></code></td>
+    <td>Remplacez <em>&lt;kubernetes_namespace&gt;</em> par l'espace de nom du conteneur Docker depuis lequel vous désirez réacheminer des journaux. Le transfert des journaux n'est pas pris en charge pour les espaces de nom Kubernetes <code>ibm-system</code> et <code>kube-system</code>. Cette valeur n'est valide que pour la source de journal de conteneur et est facultative. Si vous n'indiquez pas d'espace de nom, tous les espaces de nom du conteneur utilisent cette configuration.</td>
     </tr>
     <tr>
-    <td><code>--port <em>&lt;log_collector_port&gt;</em></code></td>
+    <td><code>--hostname <em>&lt;ingestion_URL&gt;</em></code></td>
+    <td>Remplacez <em>&lt;ingestion_URL&gt;</em> par l'URL d'ingestion {{site.data.keyword.loganalysisshort_notm}}. Vous trouverez [ici](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls) la liste des URL d'ingestion disponibles. Si vous n'en indiquez aucune, le noeud final de la région où a été créé votre cluster est utilisé.</td>
+    </tr>
+    <tr>
+    <td><code>--port <em>&lt;ingestion_port&gt;</em></code></td>
+    <td>Remplacez <em>&lt;ingestion_port&gt;</em> par le port d'ingestion. Si vous n'en spécifiez pas un, le port standard, <code>9091</code>, est utilisé.</td>
+    </tr>
+    <tr>
+    <td><code>--spaceName <em>&lt;cluster_space&gt;</em></code></td>
+    <td>Remplacez <em>&lt;cluster_space&gt;</em> par le nom de l'espace où vous désirez envoyer les journaux. Si vous n'en spécifiez pas un, les journaux sont envoyés au niveau du compte.</td>
+    </tr>
+    <tr>
+    <td><code>--orgName <em>&lt;cluster_org&gt;</em></code></td>
+    <td>Remplacez <em>&lt;cluster_org&gt;</em> par le nom de l'organisation où réside votre espace. Cette valeur est obligatoire si vous avez spécifié un espace.</td>
+    </tr>
+    <tr>
+    <td><code>--type ibm</code></td>
+    <td>Type de journal pour l'envoi de journaux à {{site.data.keyword.loganalysisshort_notm}}.</td>
+    </tr>
+    </tbody></table>
+
+  * Pour transférer les journaux vers un serveur syslog externe :
+
+    ```
+    bx cs logging-config-create <my_cluster> --logsource <my_log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog
+    ```
+    {: pre}
+
+    <table>
+    <caption>Tableau 11. Description des composantes de cette commande</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composantes de cette commande</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>logging-config-create</code></td>
+    <td>Commande de création d'une configuration de transfert de journal syslog.</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;my_cluster&gt;</em></code></td>
+    <td>Remplacez <em>&lt;my_cluster&gt;</em> par le nom ou l'ID du cluster.</td>
+    </tr>
+    <tr>
+    <td><code>--logsource <em>&lt;my_log_source&gt;</em></code></td>
+    <td>Remplacez <em>&lt;my_log_source&gt;</em> par la source de journal. Valeurs admises : <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code> et <code>ingress</code>.</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;kubernetes_namespace&gt;</em></code></td>
+    <td>Remplacez <em>&lt;kubernetes_namespace&gt;</em> par l'espace de nom du conteneur Docker depuis lequel vous désirez réacheminer des journaux. Le transfert des journaux n'est pas pris en charge pour les espaces de nom Kubernetes <code>ibm-system</code> et <code>kube-system</code>. Cette valeur n'est valide que pour la source de journal de conteneur et est facultative. Si vous n'indiquez pas d'espace de nom, tous les espaces de nom du conteneur utilisent cette configuration.</td>
+    </tr>
+    <tr>
+    <td><code>--hostname <em>&lt;log_server_hostname_or_IP&gt;</em></code></td>
+    <td>Remplacez <em>&lt;log_server_hostname&gt;</em> par le nom d'hôte ou l'adresse IP du service de collecteur de journal.</td>
+    </tr>
+    <tr>
+    <td><code>--port <em>&lt;log_server_port&gt;</em></code></td>
     <td>Remplacez <em>&lt;log_server_port&gt;</em> par le port du serveur collecteur de journal. Si vous n'indiquez pas de port, le port standard <code>514</code> est utilisé.</td>
     </tr>
     <tr>
     <td><code>--type syslog</code></td>
-    <td>Type de journalisation pour <code>syslog</code>.</td>
+    <td>Type de journal pour envoi de journaux à un serveur syslog externe.</td>
     </tr>
     </tbody></table>
 
-2. Vérifiez que la configuration de transfert des journaux a été mise à jour.
-    ```
-    bx cs logging-config-get <my_cluster> --logsource namespaces
-    ```
-    {: pre}
+2. Vérifiez que la configuration de transfert des journaux a été créée.
 
-    Exemple de sortie :
+    * Pour répertorier toutes les configurations de journalisation du cluster :
+      ```
+      bx cs logging-config-get <my_cluster>
+      ```
+      {: pre}
 
-    ```
-    Namespace         Host             Port    Protocol
-    default           myhostname.com   5514    syslog
-    my-namespace      localhost        5514    syslog
-    ```
-    {: screen}
+      Exemple de sortie :
 
-#### Arrêt du transfert de journaux vers syslog
-{: #cs_namespace_delete}
+      ```
+      Id                                    Source       Namespace     Host                          Port   Org      Space      Protocol     Paths
+      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes   -             172.30.162.138                5514   -        -          syslog       /var/log/kubelet.log,/var/log/kube-proxy.log
+      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  application  -             ingest.logging.ng.bluemix.net 9091   my_org   my_space   ibm          /var/log/apps/**/*.log,/var/log/apps/**/*.err
+      8a284f1a-451c-4c48-b1b4-a4e6b977264e  containers   my-namespace  myhostname.common             5514   -        -          syslog       -
+      ```
+      {: screen}
 
-Vous pouvez arrêter de transférer les journaux d'un espace de nom en supprimant la configuration de journalisation.
+    * Pour répertorier les configurations de journalisation d'un type de source de journal :
+      ```
+      bx cs logging-config-get <my_cluster> --logsource worker
+      ```
+      {: pre}
 
-**Remarque** : cette action supprime uniquement la configuration du transfert de journaux vers un serveur syslog. Les journaux de l'espace de nom continuent à être transférés à {{site.data.keyword.loganalysislong_notm}}.
+      Exemple de sortie :
 
-Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) le cluster où se trouve l'espace de nom.
-
-1. Supprimez la configuration de journalisation.
-
-    ```
-    bx cs logging-config-rm <my_cluster> --namespace <my_namespace>
-    ```
-    {: pre}
-    Remplacez <em>&lt;my_cluster&gt;</em> par le nom du cluster dans lequel se trouve la configuration de journalisation et <em>&lt;my_namespace&gt;</em> par le nom de l'espace de nom.
-
-### Configuration du transfert de journaux pour des applications, des noeuds d'agent, le composant système Kubernetes et le contrôleur Ingress
-{: #cs_configure_log_source_logs}
-
-Par défaut, {{site.data.keyword.containershort_notm}} transfère les journaux de l'espace de nom du conteneur Docker à {{site.data.keyword.loganalysislong_notm}}. Vous pouvez également configurer le transfert de journaux pour d'autres sources de journal, telles que des applications, des noeuds d'agent, des clusters Kubernetes et des contrôleurs Ingress.
-{:shortdesc}
-
-Pour plus d'informations sur chaque source de journal, revoyez les options suivantes.
-
-|Source de journal|Caractéristiques|Chemins d'accès aux journaux|
-|----------|---------------|-----|
-|`application`|Journaux de votre application qui s'exécute dans un cluster Kubernetes.|`/var/log/apps/**/*.log`, `/var/log/apps/**/*.err`
-|`agent`|Journaux des noeuds d'agent de machine virtuelle dans un cluster Kubernetes.|`/var/log/syslog`, `/var/log/auth.log`
-|`kubernetes`|Journaux du composant système Kubernetes.|`/var/log/kubelet.log`, `/var/log/kube-proxy.log`
-|`ingress`|Journaux d'un contrôleur Ingress qui gère le trafic réseau entrant dans un cluster Kubernetes.|`/var/log/alb/ids/*.log`, `/var/log/alb/ids/*.err`, `/var/log/alb/customerlogs/*.log`, `/var/log/alb/customerlogs/*.err`
-{: caption="Tableau 11. Caractéristiques de la source de journal." caption-side="top"}
+      ```
+      Id                                    Source    Namespace   Host                            Port   Org    Space     Protocol    Paths
+      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  worker    -           ingest.logging.ng.bluemix.net   9091   -      -         ibm         /var/log/syslog,/var/log/auth.log
+      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  worker    -           172.30.162.138                  5514   -      -         syslog      /var/log/syslog,/var/log/auth.log
+      ```
+      {: screen}
 
 #### Activation du transfert de journaux pour des applications
 {: #cs_apps_enable}
@@ -1852,7 +1460,7 @@ Prenez connaissance des aspects suivants concernant le transfert de journaux d'a
 * Seuls les fichiers journaux d'application ayant l'extension `.log` ou `.err` sont transférés.
 * Lorsque vous activez le transfert de journaux pour la première fois, les journaux d'application sont lus depuis la fin au lieu du début. Cela signifie que le contenu des journaux déjà présents avant activation du transfert de journaux n'est pas lu. Les journaux sont lus à partir du point où la consignation a été activée. Toutefois, après l'activation initiale du transfert de journaux, ceux-ci sont toujours prélevés à partir du point de dernier prélèvement.
 * Lorsque vous montez le volume de chemin d'hôte `/var/log/apps` sur des conteneurs, ces derniers écrivent tous dans le même répertoire. Cela signifie que si vos conteneurs écrivent dans le même nom de fichier, il écriront dans exactement le même fichier sur l'hôte. Si cela ne vous convient pas, vous pouvez empêcher vos conteneurs de réécrire dans les mêmes fichiers journaux en nommant les fichiers journaux de chaque conteneur différemment.
-* Etant donné que tous les conteneurs écrivent dans le même nom de fichier, n'utilisez pas cette méthode pour transférer des journaux d'application pour des jeux de répliques. Ecrivez plutôt les journaux depuis l'application vers STDOUT et STDERR. Ces journaux sont prélevés en tant que journaux de conteneur, et ces derniers sont automatiquement transférés vers {{site.data.keyword.loganalysisshort_notm}}. Pour transférer des journaux d'application écrits dans STDOUT et STDERR vers un serveur syslog externe, suivez la procédure décrite dans [Activation du transfert de journaux vers syslog](cs_cluster.html#cs_namespace_enable).
+* Etant donné que tous les conteneurs écrivent dans le même nom de fichier, n'utilisez pas cette méthode pour transférer des journaux d'application pour des jeux de répliques. Vous pouvez à la place consigner les journaux de l'application vers la sortie STDOUT et STDERR, lesquelles sont collectées comme journaux du conteneur. Pour transférer des journaux d'application consignés dans les sorties STDOUT et STDERR, suivez les étapes de la section [Activation du transfert des journaux](cs_cluster.html#cs_log_sources_enable).
 
 Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) le cluster où se trouve la source de journal.
 
@@ -1886,120 +1494,13 @@ Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_in
     ```
     {:pre}
 
-3. Pour créer une configuration de transfert de journaux, suivez la procédure décrite dans [Activation du transfert de journaux pour des noeuds d'agent, le composant système Kubernetes et le contrôleur Ingress](cs_cluster.html#cs_log_sources_enable).
+3. Pour créer une configuration de transfert des journaux, suivez les étapes de la section [Activation du transfert des journaux](cs_cluster.html#cs_log_sources_enable).
 
-#### Activation du transfert de journaux pour des noeuds d'agent, le composant système Kubernetes et le contrôleur Ingress
-{: #cs_log_sources_enable}
-
-Vous pouvez transférer des journaux vers {{site.data.keyword.loganalysislong_notm}} ou vers un serveur syslog externe. Si vous transférez les journaux vers {{site.data.keyword.loganalysisshort_notm}}, ils sont envoyés dans l'espace où vous avez créé le cluster. Si vous voulez transférer des journaux depuis une source de journal vers les deux serveurs collecteurs de journal, vous devez créer deux configurations de journalisation.
-{:shortdesc}
-
-Avant de commencer :
-
-1. Si vous voulez transférer des journaux vers un serveur syslog externe, vous pouvez configurer un serveur qui accepte un protocole syslog de deux manières :
-  * Configurer et gérer votre propre serveur ou confier la gestion du serveur à un fournisseur. Dans ce cas, obtenez le noeud final de journalisation du fournisseur de journalisation.
-  * Exécuter syslog à partir d'un conteneur. Par exemple, vous pouvez utiliser ce [fichier de déploiement .yaml ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/IBM-Bluemix/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) pour extraire une image publique Docker qui exécute un conteneur dans un cluster Kubernetes. L'image publie le port `514` sur l'adresse IP du cluster public et utilise cette adresse pour configurer l'hôte syslog.**Remarque** : pour afficher les journaux sur le site de Sydney, vous devez transférer les journaux à un serveur syslog externe.
-
-2. [Ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) le cluster où se trouve la source de journal.
-
-Pour activer le transfert de journaux pour des noeuds d'agent, le composant système Kubernetes ou un contrôleur Ingress :
-
-1. Créez une configuation de transfert de journaux.
-
-  * Pour transférer les journaux vers {{site.data.keyword.loganalysisshort_notm}} :
-
-    ```
-    bx cs logging-config-create <my_cluster> --logsource <my_log_source> --type ibm
-    ```
-    {: pre}
-    Remplacez <em>&lt;my_cluster&gt;</em> par le nom ou l'ID du cluster. Remplacez <em>&lt;my_log_source&gt;</em> par la source de journal. Les valeurs admises sont : `application`, `worker`, `kubernetes` et `ingress`.
-
-  * Pour transférer les journaux vers un serveur syslog externe :
-
-    ```
-    bx cs logging-config-create <my_cluster> --logsource <my_log_source> --hostname <log_server_hostname> --port <log_server_port> --type syslog
-    ```
-    {: pre}
-
-    <table>
-    <caption>Tableau 12. Description des composantes de cette commande</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composantes de cette commande</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>logging-config-create</code></td>
-    <td>Commande de création de la configuration de transfert des journaux syslog pour votre source de journal.</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;my_cluster&gt;</em></code></td>
-    <td>Remplacez <em>&lt;my_cluster&gt;</em> par le nom ou l'ID du cluster.</td>
-    </tr>
-    <tr>
-    <td><code>--logsource <em>&lt;my_log_source&gt;</em></code></td>
-    <td>Remplacez <em>&lt;my_log_source&gt;</em> par la source de journal. Les valeurs admises sont : <code>application</code>, <code>worker</code>, <code>kubernetes</code> et <code>ingress</code>.</td>
-    </tr>
-    <tr>
-    <td><code>--hostname <em>&lt;log_server_hostname&gt;</em></code></td>
-    <td>Remplacez <em>&lt;log_server_hostname&gt;</em> par le nom d'hôte ou l'adresse IP du serveur collecteur de journal.</td>
-    </tr>
-    <tr>
-    <td><code>--port <em>&lt;log_collector_port&gt;</em></code></td>
-    <td>Remplacez <em>&lt;log_server_port&gt;</em> par le port du serveur collecteur de journal. Si vous n'indiquez pas de port, le port standard <code>514</code> est utilisé pour syslog.</td>
-    </tr>
-    <tr>
-    <td><code>--type syslog</code></td>
-    <td>Type de journal d'un serveur syslog externe.</td>
-    </tr>
-    </tbody></table>
-
-2. Vérifiez que la configuration de transfert des journaux a été créée.
-
-    * Pour répertorier toutes les configurations de journalisation du cluster :
-      ```
-      bx cs logging-config-get <my_cluster>
-      ```
-      {: pre}
-
-      Exemple de sortie :
-
-      ```
-      Logging Configurations
-      ---------------------------------------------
-      Id                                    Source        Host             Port    Protocol   Paths
-      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes    172.30.162.138   5514    syslog     /var/log/kubelet.log,/var/log/kube-proxy.log
-      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  application   localhost        -       ibm        /var/log/apps/**/*.log,/var/log/apps/**/*.err
-
-      Container Log Namespace configurations
-      ---------------------------------------------
-      Namespace         Host             Port    Protocol
-      default           myhostname.com   5514    syslog
-      my-namespace      localhost        5514    syslog
-      ```
-      {: screen}
-
-    * Pour répertorier les configurations de journalisation d'un type de source de journal :
-      ```
-      bx cs logging-config-get <my_cluster> --logsource worker
-      ```
-      {: pre}
-
-      Exemple de sortie :
-
-      ```
-      Id                                    Source      Host        Port   Protocol   Paths
-      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  worker      localhost   5514   syslog     /var/log/syslog,/var/log/auth.log
-      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  worker      -           -      ibm        /var/log/syslog,/var/log/auth.log
-      ```
-      {: screen}
-
-#### Mise à jour du serveur collecteur de journal
+### Mise à jour de la configuration d'acheminement de journal
 {: #cs_log_sources_update}
 
-Vous pouvez mettre à jour la configuration de journalisation d'une application, des noeuds d'agent, du composant système Kubernetes et du contrôleur Ingress en modifiant le serveur collecteur de journal ou le type de journal.
+Vous pouvez mettre à jour une configuration de journalisation pour un conteneur, une application, un noeud worker, un composant du système Kubernetes ou un équilibreur de charge d'application Ingress.
 {: shortdesc}
-
-**Remarque** : pour afficher les journaux sur le site de Sydney, vous devez transférer les journaux à un serveur syslog externe.
 
 Avant de commencer :
 
@@ -2009,17 +1510,17 @@ Avant de commencer :
 
 2. [Ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) le cluster où se trouve la source de journal.
 
-Pour modifier le serveur collecteur de journal de votre source de journal :
+Pour modifier les détails d'une configuration de journalisation :
 
 1. Mettez à jour la configuration de journalisation.
 
     ```
-    bx cs logging-config-update <my_cluster> --id <log_source_id> --logsource <my_log_source> --hostname <log_server_hostname> --port <log_server_port> --type <logging_type>
+    bx cs logging-config-update <my_cluster> <log_config_id> --logsource <my_log_source> --hostname <log_server_hostname_or_IP> --port <log_server_port> --spaceName <cluster_space> --orgName <cluster_org> --type <logging_type>
     ```
     {: pre}
 
     <table>
-    <caption>Tableau 13. Description des composantes de cette commande</caption>
+    <caption>Tableau 12. Description des composantes de cette commande</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composantes de cette commande</th>
     </thead>
@@ -2033,20 +1534,28 @@ Pour modifier le serveur collecteur de journal de votre source de journal :
     <td>Remplacez <em>&lt;my_cluster&gt;</em> par le nom ou l'ID du cluster.</td>
     </tr>
     <tr>
-    <td><code>--id <em>&lt;log_source_id&gt;</em></code></td>
-    <td>Remplacez <em>&lt;log_source_id&gt;</em> par l'ID de la configuration de la source de journal.</td>
+    <td><code><em>&lt;log_config_id&gt;</em></code></td>
+    <td>Remplacez <em>&lt;log_config_id&gt;</em> par l'ID de la configuration de source de journal.</td>
     </tr>
     <tr>
     <td><code>--logsource <em>&lt;my_log_source&gt;</em></code></td>
-    <td>Remplacez <em>&lt;my_log_source&gt;</em> par la source de journal. Les valeurs admises sont : <code>application</code>, <code>worker</code>, <code>kubernetes</code> et <code>ingress</code>.</td>
+    <td>Remplacez <em>&lt;my_log_source&gt;</em> par la source de journal. Valeurs admises : <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code> et <code>ingress</code>.</td>
     </tr>
     <tr>
-    <td><code>--hostname <em>&lt;log_server_hostname&gt;</em></code></td>
-    <td>Remplacez <em>&lt;log_server_hostname&gt;</em> par le nom d'hôte ou l'adresse IP du serveur collecteur de journal.</td>
+    <td><code>--hostname <em>&lt;log_server_hostname_or_IP&gt;</em></code></td>
+    <td>Si le type de journalisation correspond à <code>syslog</code>, remplacez <em>&lt;log_server_hostname_or_IP&gt;</em> par le nom d'hôte ou l'adresse IP du service de collecteur de journal. Si le type de journalisation correspond à <code>ibm</code>, remplacez <em>&lt;log_server_hostname&gt;</em> par l'URL d'ingestion {{site.data.keyword.loganalysislong_notm}}URL. Vous trouverez [ici](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls) la liste des URL d'ingestion disponibles. Si vous n'en indiquez aucune, le noeud final de la région où a été créé votre cluster est utilisé.</td>
     </tr>
     <tr>
     <td><code>--port <em>&lt;log_collector_port&gt;</em></code></td>
-    <td>Remplacez <em>&lt;log_server_port&gt;</em> par le port du serveur collecteur de journal. Si vous n'indiquez pas de port, le port standard <code>514</code> est utilisé pour syslog.</td>
+    <td>Remplacez <em>&lt;log_server_port&gt;</em> par le port du serveur collecteur de journal. Si vous ne spécifiez pas de port, le port standard <code>514</code> est utilisé pour <code>syslog</code> et le port <code>9091</code> pour <code>ibm</code>.</td>
+    </tr>
+    <tr>
+    <td><code>--spaceName <em>&lt;cluster_space&gt;</em></code></td>
+    <td>Remplacez <em>&lt;cluster_space&gt;</em> par le nom de l'espace où vous désirez envoyer les journaux. Cette valeur est facultative et n'est valide que pour le type de journal <code>ibm</code>. Si vous ne spécifiez pas d'espace, les journaux sont envoyés au niveau du compte.</td>
+    </tr>
+    <tr>
+    <td><code>--orgName <em>&lt;cluster_org&gt;</em></code></td>
+    <td>Remplacez <em>&lt;cluster_org&gt;</em> par le nom de l'organisation où réside votre espace. Cette valeur n'est valide que pour le type de journal <code>ibm</code> et est obligatoire si vous avez spécifié un espace.</td>
     </tr>
     <tr>
     <td><code>--type <em>&lt;logging_type&gt;</em></code></td>
@@ -2056,45 +1565,41 @@ Pour modifier le serveur collecteur de journal de votre source de journal :
 
 2. Vérifiez que la configuration de transfert des journaux a été mise à jour.
 
-  * Pour répertorier toutes les configurations de journalisation du cluster :
-    ```
-    bx cs logging-config-get <my_cluster>
-    ```
-    {: pre}
+    * Pour répertorier toutes les configurations de journalisation du cluster :
 
-    Exemple de sortie :
+      ```
+      bx cs logging-config-get <my_cluster>
+      ```
+      {: pre}
 
-    ```
-    Logging Configurations
-    ---------------------------------------------
-    Id                                    Source        Host             Port    Protocol   Paths
-    f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes    172.30.162.138   5514    syslog     /var/log/kubelet.log,/var/log/kube-proxy.log
-    5bd9c609-13c8-4c48-9d6e-3a6664c825a9  application   localhost        -       ibm        /var/log/apps/**/*.log,/var/log/apps/**/*.err
+      Exemple de sortie :
 
-    Container Log Namespace configurations
-    ---------------------------------------------
-    Namespace         Host             Port    Protocol
-    default           myhostname.com   5514    syslog
-    my-namespace      localhost        5514    syslog
-    ```
-    {: screen}
+      ```
+      Id                                    Source       Namespace     Host                          Port   Org      Space      Protocol     Paths
+      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes   -             172.30.162.138                5514   -        -          syslog       /var/log/kubelet.log,/var/log/kube-proxy.log
+      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  application  -             ingest.logging.ng.bluemix.net 9091   my_org   my_space   ibm          /var/log/apps/**/*.log,/var/log/apps/**/*.err
+      8a284f1a-451c-4c48-b1b4-a4e6b977264e  containers   my-namespace  myhostname.common             5514   -        -          syslog       -
+      ```
+      {: screen}
 
-  * Pour répertorier les configurations de journalisation d'un type de source de journal :
-    ```
-    bx cs logging-config-get <my_cluster> --logsource worker
-    ```
-    {: pre}
+    * Pour répertorier les configurations de journalisation d'un type de source de journal :
 
-    Exemple de sortie :
+      ```
+      bx cs logging-config-get <my_cluster> --logsource worker
+      ```
+      {: pre}
 
-    ```
-    Id                                    Source      Host        Port   Protocol   Paths
-    f4bc77c0-ee7d-422d-aabf-a4e6b977264e  worker      localhost   5514   syslog     /var/log/syslog,/var/log/auth.log
-    5bd9c609-13c8-4c48-9d6e-3a6664c825a9  worker      -           -      ibm        /var/log/syslog,/var/log/auth.log
-    ```
-    {: screen}
+      Exemple de sortie :
 
-#### Arrêt du transfert de journaux
+      ```
+      Id                                    Source    Namespace   Host                            Port   Org    Space     Protocol    Paths
+      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  worker    -           ingest.logging.ng.bluemix.net   9091   -      -         ibm         /var/log/syslog,/var/log/auth.log
+      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  worker    -           172.30.162.138                  5514   -      -         syslog      /var/log/syslog,/var/log/auth.log
+      ```
+
+      {: screen}
+
+### Arrêt du transfert de journaux
 {: #cs_log_sources_delete}
 
 Vous pouvez arrêter de transférer les journaux en supprimant la configuration de journalisation.
@@ -2104,10 +1609,137 @@ Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_in
 1. Supprimez la configuration de journalisation.
 
     ```
-    bx cs logging-config-rm <my_cluster> --id <log_source_id>
+    bx cs logging-config-rm <my_cluster> <log_config_id>
     ```
     {: pre}
-    Remplacez <em>&lt;my_cluster&gt;</em> par le nom du cluster dans lequel se trouve la configuration de journalisation et <em>&lt;log_source_id&gt;</em> par l'ID de la configuration de la source de journal.
+    Remplacez <em>&lt;my_cluster&gt;</em> par le nom du cluster dans lequel se trouve la configuration de journalisation et <em>&lt;log_config_id&gt;</em> par l'ID de la configuration de source de journalisation
+
+### Configuration du transfert de journaux pour les journaux d'audit d'API Kubernetes
+{: #cs_configure_api_audit_logs}
+
+Les journaux d'audit d'API Kubernetes cpaturent tous les appels au serveur d'API Kubernetes depuis votre cluster. Pour commencer à collecter les journaux d'audit d'API Kubernetes, vous pouvez configurer le serveur d'API Kubernetes afin de mettre en place un backend webhook pour votre cluster. Ce backend webhook permet aux journaux d'être envoyés à un serveur distant. Pour plus d'informations sur les journaux d'audit Kubernetes, reportez-vous à la the <a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="_blank">rubrique consacrée à l'audit <img src="../icons/launch-glyph.svg" alt="External link icon"></a> dans la documentation Kubernetes.
+
+**Remarque **:
+* L'acheminement des journaux d'audit d'API Kubernetes n'est pris en charge que pour Kubernetes version 1.7 et ultérieure.
+* Actuellement, une règle d'audit pas défaut est utilisée pour tous les clusters avec cette configuration de journalisation.
+
+#### Activation de l'acheminement de journal d'audit d'API Kubernetes
+{: #cs_audit_enable}
+
+Avant de commencer, [ciblez votre interface de ligne de commande (CLI)](cs_cli_install.html#cs_cli_configure) sur le cluster depuis lequel vous désirez collecter des journaux d'audit de serveur d'API.
+
+1. Définissez le backend webhook pour la configuration de serveur d'API. Une configuration webhook est créé compte tenu des informations que vous soumettez dans les indicateurs de cette commande. Si vous ne soumettez pas d'informations dans les indicateurs, une configuration webhook par défaut est utilisée.
+
+    ```
+    bx cs apiserver-config-set audit-webhook <my_cluster> --remoteServer <server_URL_or_IP> --caCert <CA_cert_path> --clientCert <client_cert_path> --clientKey <client_key_path>
+    ```
+    {: pre}
+
+    <table>
+    <caption>Tableau 13. Description des composantes de cette commande</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png"/> Description des composantes de cette commande</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>apiserver-config-set</code></td>
+    <td>Commande permettant de dédinir une option pour la configuration de serveur d'API Kubernetes du cluster.</td>
+    </tr>
+    <tr>
+    <td><code>audit-webhook</code></td>
+    <td>Sous-commande permetant de définir la configuration webhook d'audit pour le serveur d'API Kubernetes du cluster.</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;my_cluster&gt;</em></code></td>
+    <td>Remplacez <em>&lt;my_cluster&gt;</em> par le nom ou l'ID du cluster.</td>
+    </tr>
+    <tr>
+    <td><code>--remoteServer <em>&lt;server_URL&gt;</em></code></td>
+    <td>Remplacez <em>&lt;server_URL&gt;</em> par l'URL ou l'adresse IP du service de journalisation distant auquel vous désirez envoyer les journaux. Si vous indiquez une URL de serveur non sécurisée, les éventuels certificats sont ignorés. Si vous ne spécifiez pas d'URL ou d'adresse IP de serveur distant, une configuration QRadar par défaut est utilisée et les journaux sont envoyés à l'instance QRadar correspondant à la région où est situé le cluster.</td>
+    </tr>
+    <tr>
+    <td><code>--caCert <em>&lt;CA_cert_path&gt;</em></code></td>
+    <td>Remplacez <em>&lt;CA_cert_path&gt;</em> par le chemin de fichier du certificat d'autorité de certification utilisé pour vérifier le service de journalisation distant.</td>
+    </tr>
+    <tr>
+    <td><code>--clientCert <em>&lt;client_cert_path&gt;</em></code></td>
+    <td>Remplacez <em>&lt;client_cert_path&gt;</em> par le chemin de fichier du certificat client utilisé pour authentification vis à vis du service de journalisation distant.</td>
+    </tr>
+    <tr>
+    <td><code>--clientKey <em>&lt;client_key_path&gt;</em></code></td>
+    <td>Remplacez <em>&lt;client_key_path&gt;</em> par le chemin de fichier de la clé client correspondante utilisée pour connexion au service de journalisation distant.</td>
+    </tr>
+    </tbody></table>
+
+2. Vérifiez que l'acheminement de journaux a été activé en examinant l'URL du service de journalisation distant.
+
+    ```
+    bx cs apiserver-config-get audit-webhook <my_cluster>
+    ```
+    {: pre}
+
+    Exemple de sortie :
+    ```
+    OK
+    Server:			https://8.8.8.8
+    ```
+    {: screen}
+
+3. Appliquez la mise à jour de la configuration en redémarrant le maître Kubernetes.
+
+    ```
+    bx cs apiserver-refresh <my_cluster>
+    ```
+    {: pre}
+
+#### Arrêt de l'acheminement de journaux d'audit d'API Kubernetes
+{: #cs_audit_delete}
+
+Vous pouvez cesser l'acheminement de journaux d'audit en désactivant la configuration de backend webhook pour le serveur d'API du cluster.
+
+Avant de commencer, [ciblez votre interface de ligne de commande (CLI)](cs_cli_install.html#cs_cli_configure) sur le cluster depuis lequel vous désirez cesser de collecter des journaux d'audit de serveur d'API.
+
+1. Désactivez la configuration de serveur dorsal webhook pour le serveur d'API du cluster. 
+
+    ```
+    bx cs apiserver-config-unset audit-webhook <my_cluster>
+    ```
+    {: pre}
+
+2. Appliquez la mise à jour de la configuration en redémarrant le maître Kubernetes.
+
+    ```
+    bx cs apiserver-refresh <my_cluster>
+    ```
+    {: pre}
+
+### Affichage des journaux
+{: #cs_view_logs}
+
+Pour afficher les journaux des clusters et des conteneurs, vous pouvez utiliser les fonctions de journalisation standard de Kubernetes et Docker.
+{:shortdesc}
+
+#### {{site.data.keyword.loganalysislong_notm}}
+{: #cs_view_logs_k8s}
+
+Pour les clusters standard, les journaux se trouvent dans le compte {{site.data.keyword.Bluemix_notm}} où vous vous êtes connecté lorsque vous avez créé le cluster Kubernetes. Si vous avez spécifié un espace {{site.data.keyword.Bluemix_notm}} lorsque vous avez créé le cluster ou la configuration de journalisation, les journaux sont situés dans cet espace. Les journaux sont surveillés et réacheminés depuis l'extérieur du conteneur. Vous pouvez accéder aux journaux d'un conteneur via le tableau de bord Kibana. Pour plus d'informations sur la journalisation, voir [Journalisation pour {{site.data.keyword.containershort_notm}}](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
+
+**Remarque **: si vous avez spécifié un espace lors de la création du cluster ou de la configuration de journalisation, le propriétaire du compte doit disposer des droits Responsable, Développeur ou Auditeur dans cet espace pour afficher les journaux. Pour plus d'informations sur la modification des {{site.data.keyword.containershort_notm}} droits et règles d'accès, voir [Gestion de l'accès au cluster](cs_cluster.html#cs_cluster_user). Une fois les droits modifiés, il peut s'écouler jusqu'à 24 heures avant que les journaux commencent à s'afficher.
+
+Pour accéder au tableau de bord Kibana, accédez à l'une des URL suivantes et sélectionnez le compte ou l'espace {{site.data.keyword.Bluemix_notm}} dans lequel vous avez créé le cluster.
+- Sud et Est des Etats-Unis : https://logging.ng.bluemix.net
+- Sud du Royaume-Uni et Europe centrale : https://logging.eu-fra.bluemix.net
+- Asie-Pacifique sud : https://logging.au-syd.bluemix.net
+
+Pour plus d'informations sur l'affichage des journaux, voir [Accès à Kibana à partir d'un navigateur Web](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser).
+
+#### Journaux Docker
+{: #cs_view_logs_docker}
+
+Vous pouvez exploiter les capacités de journalisation intégrées de Docker pour examiner les activités sur les flux de sortie
+STDOUT et STDERR standard. Pour plus d'informations, voir [Affichage des journaux pour un conteneur s'exécutant dans un cluster Kubernetes](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
+
+<br />
 
 
 ## Configuration de la surveillance de cluster
@@ -2143,7 +1775,7 @@ Vous pouvez configurer d'autres outils pour disposer de capacités de surveillan
 ### Configuration de la surveillance de l'état de santé des noeuds d'agent avec le système de reprise automatique
 {: #cs_configure_worker_monitoring}
 
-Le système de reprise automatique d'{{site.data.keyword.containerlong_notm}} peut être déployé dans des clusters existants de Kubernetes version 1.7 ou ultérieure. Le système de reprise automatique effectue diverses vérifications pour obtenir l'état de santé des noeuds d'agent. Si le système de reprise automatique détecte un mauvais état de santé d'un noeud worker d'après les vérifications configurées, il déclenche une mesure corrective (par exemple, un rechargement du système d'exploitation) sur le noeud worker. Un seul noeud worker à la fois fait l'objet d'une mesure corrective. La mesure corrective doit réussir sur le noeud worker pour que d'autre noeuds d'agent bénéficient d'une mesure corrective.
+Le système de reprise automatique d'{{site.data.keyword.containerlong_notm}} peut être déployé dans des clusters existants de Kubernetes version 1.7 ou ultérieure. Le système de reprise automatique effectue diverses vérifications pour obtenir l'état de santé des noeuds d'agent. Si le système de reprise automatique détecte un mauvais état de santé d'un noeud worker d'après les vérifications configurées, il déclenche une mesure corrective (par exemple, un rechargement du système d'exploitation) sur le noeud worker. Un seul noeud worker à la fois fait l'objet d'une mesure corrective. La mesure corrective doit réussir sur le noeud worker pour que d'autre noeuds d'agent bénéficient d'une mesure corrective. Pour plus d'informations, reportez-vous à cet [article du blogue Autorecovery ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
 **REMARQUE** : Le système de reprise automatique nécessite qu'au moins un noeud worker soit opérationnel pour fonctionner correctement. Configurez le système de reprise automatique avec des vérifications actives uniquement dans les clusters contenant au moins deux noeuds d'agent.
 
 Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) le cluster dans lequel vous voulez vérifier les statuts des noeuds d'agent.
@@ -2197,7 +1829,7 @@ Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_in
     {:codeblock}
 
     <table>
-    <caption>Tableau 15. Description des composants du fichier YAML</caption>
+    <caption>Tableau 14. Description des composants du fichier YAML</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
     </thead>
@@ -2421,7 +2053,7 @@ Pour utiliser Weave Scope avec un cluster, procédez comme suit :
 Lorsque vous avez fini d'utiliser un cluster, vous pouvez le supprimer afin qu'il ne consomme plus de ressources.
 {:shortdesc}
 
-Les clusters léger et standard créés avec un compte {{site.data.keyword.Bluemix_notm}} Lite ou de type Paiement à la carte doivent être supprimés manuellement par l'utilisateur lorsque celui-ci n'en a plus besoin.
+Les clusters légers et standard créés avec un compte de type Paiement à la carte doivent être supprimés manuellement par l'utilisateur lorsque vous n'en avez plus besoin.
 
 Lorsque vous supprimez un cluster, vous supprimez également les ressources sur le cluster, notamment les conteneurs, les pods, les services liés et les valeurs confidentielles. ISi vous ne supprimez pas l'espace de stockage lorsque vous supprimez votre cluster, vous pouvez le supprimer via le tableau de bord d'infrastructure IBM Cloud (SoftLayer) l'interface graphique {{site.data.keyword.Bluemix_notm}}. En raison du cycle de facturation mensuel, une réservation de volume persistant ne peut pas être supprimée le dernier jour du mois. Si vous supprimez la réservation de volume persistant le dernier jour du mois, la suppression reste en attente jusqu'au début du mois suivant.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-10-16"
+lastupdated: "2017-12-13"
 
 ---
 
@@ -19,10 +19,10 @@ lastupdated: "2017-10-16"
 # Lernprogramm: Cluster erstellen
 {: #cs_cluster_tutorial}
 
-Stellen Sie einen eigenen Kubernetes-Cluster in der Cloud bereit und verwalten Sie diesen Cluster. Sie können die Bereitstellung, den Betrieb, die Skalierung und Überwachung containerisierter Apps in einem Cluster unabhängiger Rechenhosts (sog. Workerknoten) automatisieren.
+Stellen Sie einen eigenen Kubernetes-Cluster in {{site.data.keyword.Bluemix_short}} bereit und verwalten Sie ihn darin. Sie können die Bereitstellung, den Betrieb, die Skalierung und Überwachung containerisierter Apps in einem Cluster unabhängiger Rechenhosts (sog. Workerknoten) automatisieren.
 {:shortdesc}
 
-In der vorliegenden Reihe von Lernprogrammen werden Sie erfahren, wie eine fiktive Public-Relations-Firma Kubernetes verwendet, um eine containerisierte App in {{site.data.keyword.Bluemix_short}} bereitzustellen. Diese PR-Firma nutzt {{site.data.keyword.toneanalyzerfull}} zur Analyse ihrer Pressemitteilungen und zum Empfang von Feedback.
+In der vorliegenden Reihe von Lernprogrammen werden Sie erfahren, wie eine fiktive Public-Relations-Firma Kubernetes-Funktionalität verwendet, um eine containerisierte App in {{site.data.keyword.Bluemix_notm}} bereitzustellen. Diese PR-Firma nutzt {{site.data.keyword.toneanalyzerfull}} zur Analyse ihrer Pressemitteilungen und zum Empfang von Feedback.
 
 
 ## Ziele
@@ -32,9 +32,9 @@ Im ersten Lernprogramm fungieren Sie als Netzadministrator der PR-Firma. Sie kon
 Führen Sie die folgenden Schritte aus, um die Infrastruktur einzurichten:
 
 -   Kubernetes-Cluster mit einem Workerknoten erstellen
--   CLIs zum Verwenden der Kubernetes-API und zum Verwalten von Docker-Images installieren
+-   CLIs zum Ausführen von Kubernetes-Befehlen und Verwalten von Docker-Images installieren
 -   Privates Image-Repository in {{site.data.keyword.registrylong_notm}} zum Speichern von Images erstellen
--   {{site.data.keyword.toneanalyzershort}}-Service zu dem Cluster hinzufügen, sodass jede App im Cluster den Service verwenden kann
+-   {{site.data.keyword.toneanalyzershort}}-Service zum Cluster hinzufügen, sodass alle Apps im Cluster diesen Service verwenden können
 
 
 ## Erforderlicher Zeitaufwand
@@ -49,7 +49,8 @@ Dieses Lernprogramm ist für Softwareentwickler und Netzadministratoren konzipie
 
 ## Voraussetzungen
 
--  Ein [{{site.data.keyword.Bluemix_notm}}-Konto ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/registration/)
+-  Ein nutzungsabhängiges [{{site.data.keyword.Bluemix_notm}}-Konto oder ein Abonnementkonto ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/registration/)
+
 
 
 
@@ -146,12 +147,12 @@ Glückwunsch! Sie haben die CLIs für die folgenden Lerneinheiten und Lernprogra
 ## Lerneinheit 2: Clusterumgebung einrichten
 {: #cs_cluster_tutorial_lesson2}
 
-Erstellen Sie Ihren Kubernetes-Cluster, richten Sie ein privates Image-Repository in {{site.data.keyword.registryshort_notm}} ein und fügen Sie geheime Schlüssel zu Ihrem Cluster hinzu, sodass die App auf den {{site.data.keyword.toneanalyzershort}}-Service zugreifen kann.
+Richten Sie ein privates Image-Repository in {{site.data.keyword.registryshort_notm}} ein und fügen Sie geheime Schlüssel zu Ihrem Cluster hinzu, sodass die App auf den {{site.data.keyword.toneanalyzershort}}-Service zugreifen kann.
 
 1.  Melden Sie sich bei der {{site.data.keyword.Bluemix_notm}}-CLI mithilfe Ihrer {{site.data.keyword.Bluemix_notm}}-Berechtigungsnachweise an, wenn Sie dazu aufgefordert werden.
 
     ```
-    bx login [--sso] -a api.eu-gb.bluemix.net
+    bx login [--sso]
     ```
     {: pre}
 

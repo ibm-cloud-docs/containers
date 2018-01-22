@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-28"
+lastupdated: "2017-12-14"
 
 ---
 
@@ -35,9 +35,8 @@ lastupdated: "2017-11-28"
 ## 使用 GUI 建立叢集
 {: #cs_cluster_ui}
 
-Kubernetes 叢集是一組組織成網路的工作者節點。叢集的用途是要定義一組資源、節點、網路及儲存裝置，以讓應用程式保持高度可用。您必須先建立叢集並設定該叢集中工作者節點的定義，才能部署應用程式。
+Kubernetes 叢集是組織成網路的一組工作者節點。叢集的用途是要定義一組資源、節點、網路及儲存裝置，以讓應用程式保持高度可用。您必須先建立叢集並設定該叢集中工作者節點的定義，才能部署應用程式。
 {:shortdesc}
-若為「{{site.data.keyword.Bluemix_dedicated_notm}}」使用者，請改為參閱[在 {{site.data.keyword.Bluemix_dedicated_notm}}中從 GUI 建立 Kubernetes 叢集（封閉測試版）](#creating_ui_dedicated)。
 
 若要建立叢集，請執行下列動作：
 1. 在型錄中，選取 **Kubernetes 叢集**。
@@ -47,10 +46,12 @@ Kubernetes 叢集是一組組織成網路的工作者節點。叢集的用途是
     2. 選取機器類型並指定您需要的工作者節點數目。機型會定義設定於每一個工作者節點中，且可供容器使用的虛擬 CPU 及記憶體數量。
         - 微機型指出最小選項。
         - 平衡機器具有指派給每一個 CPU 的相等記憶體數量，以最佳化效能。
+        - 名稱中包括 `encrypted` 的機型會加密主機的 Docker 資料。儲存所有容器資料的 `/var/lib/docker` 目錄是使用 LUKS 加密來進行加密。
     3. 從 IBM Cloud 基礎架構 (SoftLayer) 帳戶中選取公用及專用 VLAN。兩個 VLAN 會在工作者節點之間進行通訊，但公用 VLAN 也與 IBM 管理的 Kubernetes 主節點通訊。您可以將相同的 VLAN 用於多個叢集。**附註**：如果您選擇不要選取公用 VLAN，則必須配置替代方案。
     4. 選取硬體類型。在大部分情況中，共用選項就已足夠。
         - **專用**：確保完整隔離實體資源。
         - **共用**：容許實體資源儲存在與其他 IBM 客戶相同的硬體上。
+        - 依預設，工作者節點會具備磁碟加密；[進一步瞭解](cs_security.html#cs_security_worker)。如果您要停用加密，請清除**加密本端磁碟**勾選框。
 4. 按一下**建立叢集**。您可以在**工作者節點**標籤中查看工作者節點部署的進度。部署完成時，您可以在**概觀**標籤中看到叢集已備妥。**附註：**每個工作者節點都會獲指派唯一的工作者節點 ID 及網域名稱，在叢集建立之後即不得手動予以變更。變更 ID 或網域名稱會讓 Kubernetes 主節點無法管理叢集。
 
 
@@ -61,28 +62,7 @@ Kubernetes 叢集是一組組織成網路的工作者節點。叢集的用途是
 -   [安裝 CLI 以開始使用您的叢集。](cs_cli_install.html#cs_cli_install)
 -   [在叢集中部署應用程式。](cs_apps.html#cs_apps_cli)
 -   [在 {{site.data.keyword.Bluemix_notm}} 中設定您自己的專用登錄，以儲存 Docker 映像檔，並將它與其他使用者共用。](/docs/services/Registry/index.html)
-
-
-### 在 {{site.data.keyword.Bluemix_dedicated_notm}}中使用 GUI 建立叢集（封閉測試版）
-{: #creating_ui_dedicated}
-
-1.  使用 IBM ID，登入「{{site.data.keyword.Bluemix_notm}} 公用」主控台 ([https://console.bluemix.net ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net))。
-2.  從帳戶功能表中，選取「{{site.data.keyword.Bluemix_dedicated_notm}}」帳戶。即會使用「{{site.data.keyword.Bluemix_dedicated_notm}}」實例的服務及資訊來更新主控台。
-3.  從型錄中，選取**容器**，然後按一下 **Kubernetes 叢集**。
-4.  輸入**叢集名稱**。
-5.  選取**機型**。機型會定義設定於每一個工作者節點中，且可供節點中部署之所有容器使用的虛擬 CPU 及記憶體數量。
-    -   微機型指出最小選項。
-    -   平衡機型具有指派給每一個 CPU 的相等記憶體數量，以最佳化效能。
-6.  選擇您需要的**工作者節點數目**。選取 `3`，確保叢集的高可用性。
-7.  按一下**建立叢集**。即會開啟叢集的詳細資料，但叢集中的工作者節點需要數分鐘的時間進行佈建。在**工作者節點**標籤中，您可以看到工作者節點部署的進度。工作者節點備妥後，狀態會變更為 **Ready**。
-
-**下一步為何？**
-
-當叢集開始執行時，您可以查看下列作業：
-
--   [安裝 CLI 以開始使用您的叢集。](cs_cli_install.html#cs_cli_install)
--   [在叢集中部署應用程式。](cs_apps.html#cs_apps_cli)
--   [在 {{site.data.keyword.Bluemix_notm}} 中設定您自己的專用登錄，以儲存 Docker 映像檔，並將它與其他使用者共用。](/docs/services/Registry/index.html)
+- 如果您有防火牆，則可能需要[開啟必要埠](cs_security.html#opening_ports)，才能使用 `bx`、`kubectl` 或 `calicotl` 指令以容許來自叢集的出埠資料流量，或容許網路服務的入埠資料流量。
 
 <br />
 
@@ -90,14 +70,12 @@ Kubernetes 叢集是一組組織成網路的工作者節點。叢集的用途是
 ## 使用 CLI 建立叢集
 {: #cs_cluster_cli}
 
-叢集是一組組織成網路的工作者節點。叢集的用途是要定義一組資源、節點、網路及儲存裝置，以讓應用程式保持高度可用。您必須先建立叢集並設定該叢集中工作者節點的定義，才能部署應用程式。
+叢集是組織成網路的一組工作者節點。叢集的用途是要定義一組資源、節點、網路及儲存裝置，以讓應用程式保持高度可用。您必須先建立叢集並設定該叢集中工作者節點的定義，才能部署應用程式。
 {:shortdesc}
-
-若為「{{site.data.keyword.Bluemix_dedicated_notm}}」使用者，請改為參閱[在 {{site.data.keyword.Bluemix_dedicated_notm}}中從 CLI 建立 Kubernetes 叢集（封閉測試版）](#creating_cli_dedicated)。
 
 若要建立叢集，請執行下列動作：
 1.  安裝 {{site.data.keyword.Bluemix_notm}} CLI 及 [{{site.data.keyword.containershort_notm}} 外掛程式](cs_cli_install.html#cs_cli_install)。
-2.  登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。若要指定 {{site.data.keyword.Bluemix_notm}} 地區，請[包括 API 端點](cs_regions.html#bluemix_regions)。
+2.  登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。
 
     ```
     bx login
@@ -108,9 +86,7 @@ Kubernetes 叢集是一組組織成網路的工作者節點。叢集的用途是
 
 3. 如果您有多個 {{site.data.keyword.Bluemix_notm}} 帳戶，請選取您要在其中建立 Kubernetes 叢集的帳戶。
 
-4.  如果您要在先前所選取 {{site.data.keyword.Bluemix_notm}} 地區以外的地區中建立或存取 Kubernetes 叢集，請[指定 {{site.data.keyword.containershort_notm}} 地區 API 端點](cs_regions.html#container_login_endpoints)。
-
-    **附註**：如果您要在美國東部建立叢集，您必須使用 `bx cs init --host https://us-east.containers.bluemix.net` 指令來指定美國東部容器地區 API 端點。
+4.  如果您要在先前所選取 {{site.data.keyword.Bluemix_notm}} 地區以外的地區中建立或存取 Kubernetes 叢集，請執行 `bx cs region-set`。
 
 6.  建立叢集。
     1.  檢閱可用的位置。顯示的位置取決於您所登入的 {{site.data.keyword.containershort_notm}} 地區。
@@ -160,7 +136,7 @@ Kubernetes 叢集是一組組織成網路的工作者節點。叢集的用途是
 
         如果公用及專用 VLAN 已存在，請記下相符的路由器。專用 VLAN 路由器的開頭一律為 `bcr`（後端路由器），而公用 VLAN 路由器的開頭一律為 `fcr`（前端路由器）。這些字首後面的數字與字母組合必須相符，才能在建立叢集時使用這些 VLAN。在範例輸出中，任何專用 VLAN 都可以與任何公用 VLAN 搭配使用，因為路由器都會包括 `02a.dal10`。
 
-    4.  執行 `cluster-create` 指令。您可以選擇精簡叢集（包括一個已設定 2vCPU 及 4GB 記憶體的工作者節點）或標準叢集（可以在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中包括您所選擇數目的工作者節點）。當您建立標準叢集時，依預設，工作者節點的硬體由多位 IBM 客戶所共用，並且按小時計費。</br>標準叢集的範例：
+    4.  執行 `cluster-create` 指令。您可以選擇精簡叢集（包括一個已設定 2vCPU 及 4GB 記憶體的工作者節點）或標準叢集（可以在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中包括您所選擇數目的工作者節點）。當您建立標準叢集時，依預設，會加密工作者節點磁碟，其硬體由多位 IBM 客戶所共用，並且按使用時數計費。</br>標準叢集的範例：
 
         ```
         bx cs cluster-create --location dal10 --public-vlan <public_vlan_id> --private-vlan <private_vlan_id> --machine-type u2c.2x4 --workers 3 --name <cluster_name> --kube-version <major.minor.patch>
@@ -215,6 +191,10 @@ Kubernetes 叢集是一組組織成網路的工作者節點。叢集的用途是
         <tr>
           <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
           <td>叢集主節點的 Kubernetes 版本。這是選用值。除非另有指定，否則會使用支援的 Kubernetes 版本的預設值來建立叢集。若要查看可用的版本，請執行 <code>bx cs kube-versions</code>。</td>
+        </tr>
+        <tr>
+        <td><code>--disable-disk-encrypt</code></td>
+        <td>依預設，工作者節點會具備磁碟加密；[進一步瞭解](cs_security.html#cs_security_worker)。如果您要停用加密，請包括此選項。</td>
         </tr>
         </tbody></table>
 
@@ -313,151 +293,7 @@ Kubernetes 叢集是一組組織成網路的工作者節點。叢集的用途是
 -   [在叢集中部署應用程式。](cs_apps.html#cs_apps_cli)
 -   [使用 `kubectl` 指令行管理叢集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")。](https://kubernetes.io/docs/user-guide/kubectl/)
 -   [在 {{site.data.keyword.Bluemix_notm}} 中設定您自己的專用登錄，以儲存 Docker 映像檔，並將它與其他使用者共用。](/docs/services/Registry/index.html)
-
-### 在 {{site.data.keyword.Bluemix_dedicated_notm}}中使用 CLI 建立叢集（封閉測試版）
-{: #creating_cli_dedicated}
-
-1.  安裝 {{site.data.keyword.Bluemix_notm}} CLI 及 [{{site.data.keyword.containershort_notm}} 外掛程式](cs_cli_install.html#cs_cli_install)。
-2.  登入 {{site.data.keyword.containershort_notm}} 的公用端點。系統提示時，請輸入 {{site.data.keyword.Bluemix_notm}} 認證，然後選取「{{site.data.keyword.Bluemix_dedicated_notm}}」帳戶。
-
-    ```
-    bx login -a api.<region>.bluemix.net
-    ```
-    {: pre}
-
-    **附註：**如果您具有聯合 ID，請使用 `bx login --sso` 來登入 {{site.data.keyword.Bluemix_notm}} CLI。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。若沒有 `--sso` 時登入失敗，而有 `--sso` 選項時登入成功，即表示您有聯合 ID。
-
-3.  使用 `cluster-create` 指令來建立叢集。當您建立標準叢集時，工作者節點的硬體會按小時計費。
-
-    範例：
-
-    ```
-    bx cs cluster-create --location <location> --machine-type <machine-type> --name <cluster_name> --workers <number>
-    ```
-    {: pre}
-
-    <table>
-    <caption>表 2. 瞭解此指令的元件</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解此指令的元件</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>cluster-create</code></td>
-    <td>在 {{site.data.keyword.Bluemix_notm}} 組織中建立叢集的指令。</td>
-    </tr>
-    <tr>
-    <td><code>--location <em>&lt;location&gt;</em></code></td>
-    <td>將 &lt;location&gt; 取代為您要建立叢集的 {{site.data.keyword.Bluemix_notm}} 位置 ID。[可用的位置](cs_regions.html#locations)取決於您所登入的 {{site.data.keyword.containershort_notm}} 地區。</td>
-    </tr>
-    <tr>
-    <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
-    <td>如果您要建立標準叢集，請選擇機型。機型指定每一個工作者節點可用的虛擬運算資源。如需相關資訊，請檢閱[比較 {{site.data.keyword.containershort_notm}} 的精簡與標準叢集](cs_planning.html#cs_planning_cluster_type)。若為精簡叢集，您不需要定義機型。</td>
-    </tr>
-    <tr>
-    <td><code>--name <em>&lt;name&gt;</em></code></td>
-    <td>將 <em>&lt;name&gt;</em> 取代為叢集的名稱。</td>
-    </tr>
-    <tr>
-    <td><code>--workers <em>&lt;number&gt;</em></code></td>
-    <td>要包含在叢集中的工作者節點數目。如果未指定 <code>--workers</code> 選項，會建立 1 個工作者節點。</td>
-    </tr>
-    </tbody></table>
-
-4.  驗證已要求建立叢集。
-
-    ```
-    bx cs clusters
-    ```
-    {: pre}
-
-    **附註：**訂購工作者節點機器，並在您的帳戶中設定及佈建叢集，最多可能需要 15 分鐘。
-
-    叢集佈建完成之後，叢集的狀態會變更為 **deployed**。
-
-    ```
-    Name         ID                                   State      Created          Workers   
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1   
-    ```
-    {: screen}
-
-5.  檢查工作者節點的狀態。
-
-    ```
-    bx cs workers <cluster>
-    ```
-    {: pre}
-
-    工作者節點備妥後，狀態會變更為 **Normal**，而且狀態為 **Ready**。當節點狀態為 **Ready** 時，您就可以存取叢集。
-
-    ```
-    ID                                                  Public IP        Private IP     Machine Type   State      Status  
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1   169.47.223.113   10.171.42.93   free           normal    Ready
-    ```
-    {: screen}
-
-6.  將您建立的叢集設為此階段作業的環境定義。請在您每次使用叢集時，完成下列配置步驟。
-
-    1.  取得指令來設定環境變數，並下載 Kubernetes 配置檔。
-
-        ```
-        bx cs cluster-config <cluster_name_or_id>
-        ```
-        {: pre}
-
-        配置檔下載完成之後，會顯示一個指令，可讓您用來將本端 Kubernetes 配置檔的路徑設定為環境變數。
-
-        OS X 的範例：
-
-        ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
-        ```
-        {: screen}
-
-    2.  複製並貼上終端機中顯示的指令，以設定 `KUBECONFIG` 環境變數。
-    3.  驗證 `KUBECONFIG` 環境變數已適當設定。
-
-        OS X 的範例：
-
-        ```
-        echo $KUBECONFIG
-        ```
-        {: pre}
-
-        輸出：
-
-        ```
-        /Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
-
-        ```
-        {: screen}
-
-7.  使用預設埠 8001 來存取 Kubernetes 儀表板。
-    1.  使用預設埠號來設定 Proxy。
-
-        ```
-        kubectl proxy
-        ```
-        {: pre}
-
-        ```
-        Starting to serve on 127.0.0.1:8001
-        ```
-        {: screen}
-
-    2.  在 Web 瀏覽器中開啟下列 URL，以查看 Kubernetes 儀表板。
-
-        ```
-        http://localhost:8001/ui
-        ```
-        {: codeblock}
-
-
-**下一步為何？**
-
--   [在叢集中部署應用程式。](cs_apps.html#cs_apps_cli)
--   [使用 `kubectl` 指令行管理叢集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")。](https://kubernetes.io/docs/user-guide/kubectl/)
--   [在 {{site.data.keyword.Bluemix_notm}} 中設定您自己的專用登錄，以儲存 Docker 映像檔，並將它與其他使用者共用。](/docs/services/Registry/index.html)
+- 如果您有防火牆，則可能需要[開啟必要埠](cs_security.html#opening_ports)，才能使用 `bx`、`kubectl` 或 `calicotl` 指令以容許來自叢集的出埠資料流量，或容許網路服務的入埠資料流量。
 
 <br />
 
@@ -481,7 +317,7 @@ Docker 映像檔是您建立的每個容器的基礎。映像檔是從 Dockerfil
 
 開始之前：
 
-1. [在「{{site.data.keyword.Bluemix_notm}} 公用」或「{{site.data.keyword.Bluemix_dedicated_notm}}」上，於 {{site.data.keyword.registryshort_notm}} 中設定名稱空間，並將映像檔推送至此名稱空間](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add)。
+1. [在「{{site.data.keyword.Bluemix_notm}} 公用」或 {{site.data.keyword.Bluemix_dedicated_notm}} 上，於 {{site.data.keyword.registryshort_notm}} 中設定名稱空間，並將映像檔推送至此名稱空間](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add)。
 2. [建立叢集](#cs_cluster_cli)。
 3. [將 CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。
 
@@ -533,11 +369,11 @@ Docker 映像檔是您建立的每個容器的基礎。映像檔是從 Dockerfil
 ### 將映像檔部署至其他 Kubernetes 名稱空間，或存取其他 {{site.data.keyword.Bluemix_notm}} 地區及帳戶中的映像檔
 {: #bx_registry_other}
 
-您可以將容器部署至其他 Kubernetes 名稱空間、使用儲存在其他 {{site.data.keyword.Bluemix_notm}} 地區或帳戶中的映像檔，或使用儲存在「{{site.data.keyword.Bluemix_dedicated_notm}}」中的映像檔，方法是建立您自己的 imagePullSecret。
+您可以將容器部署至其他 Kubernetes 名稱空間、使用儲存在其他 {{site.data.keyword.Bluemix_notm}} 地區或帳戶中的映像檔，或使用儲存在 {{site.data.keyword.Bluemix_dedicated_notm}} 中的映像檔，方法是建立您自己的 imagePullSecret。
 
 開始之前：
 
-1.  [在「{{site.data.keyword.Bluemix_notm}} 公用」或「{{site.data.keyword.Bluemix_dedicated_notm}}」上，於 {{site.data.keyword.registryshort_notm}} 中設定名稱空間，並將映像檔推送至此名稱空間](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add)。
+1.  [在「{{site.data.keyword.Bluemix_notm}} 公用」或 {{site.data.keyword.Bluemix_dedicated_notm}} 上，於 {{site.data.keyword.registryshort_notm}} 中設定名稱空間，並將映像檔推送至此名稱空間](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add)。
 2.  [建立叢集](#cs_cluster_cli)。
 3.  [將 CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。
 
@@ -586,7 +422,7 @@ Docker 映像檔是您建立的每個容器的基礎。映像檔是從 Dockerfil
     </tr>
     <tr>
     <td><code>--docker-server <em>&lt;registry_url&gt;</em></code></td>
-    <td>必要。已設定名稱空間的映像檔登錄的 URL。<ul><li>對於美國南部及美國東部所設定的名稱空間：registry.ng.bluemix.net</li><li>對於英國南部所設定的名稱空間：registry.eu-gb.bluemix.net</li><li>對於歐盟中部（法蘭克福）所設定的名稱空間：registry.eu-de.bluemix.net</li><li>對於澳洲（雪梨）所設定的名稱空間：registry.au-syd.bluemix.net</li><li>對於「{{site.data.keyword.Bluemix_dedicated_notm}}」所設定的名稱空間：registry.<em>&lt;dedicated_domain&gt;</em></li></ul></td>
+    <td>必要。已設定名稱空間的映像檔登錄的 URL。<ul><li>對於美國南部及美國東部所設定的名稱空間：registry.ng.bluemix.net</li><li>對於英國南部所設定的名稱空間：registry.eu-gb.bluemix.net</li><li>對於歐盟中部（法蘭克福）所設定的名稱空間：registry.eu-de.bluemix.net</li><li>對於澳洲（雪梨）所設定的名稱空間：registry.au-syd.bluemix.net</li><li>對於 {{site.data.keyword.Bluemix_dedicated_notm}} 所設定的名稱空間：registry.<em>&lt;dedicated_domain&gt;</em></li></ul></td>
     </tr>
     <tr>
     <td><code>--docker-username <em>&lt;docker_username&gt;</em></code></td>
@@ -858,7 +694,6 @@ Docker 映像檔是您建立的每個容器的基礎。映像檔是從 Dockerfil
 1. [將 CLI 的目標設為](cs_cli_install.html#cs_cli_configure)您的叢集。
 2. [要求 {{site.data.keyword.Bluemix_notm}} 服務的實例](/docs/manageapps/reqnsi.html#req_instance)。
    **附註：**若要在華盛頓特區中建立服務實例，您必須使用 CLI。
-3. 若為「{{site.data.keyword.Bluemix_dedicated_notm}}」使用者，請改為參閱[在 {{site.data.keyword.Bluemix_dedicated_notm}}中將 {{site.data.keyword.Bluemix_notm}} 服務新增至叢集（封閉測試版）](#binding_dedicated)。
 
 **附註：**
 <ul><ul>
@@ -927,198 +762,54 @@ Docker 映像檔是您建立的每個容器的基礎。映像檔是從 Dockerfil
 
 若要在叢集中所部署的 Pod 中使用服務，叢集使用者可以存取 {{site.data.keyword.Bluemix_notm}} 服務的服務認證，方法是[將 Kubernetes 密碼以密碼磁區形式裝載至 Pod](cs_apps.html#cs_apps_service)。
 
-### 在 {{site.data.keyword.Bluemix_dedicated_notm}}中將 {{site.data.keyword.Bluemix_notm}} 服務新增至叢集（封閉測試版）
-{: #binding_dedicated}
-
-**附註**：必須完全部署叢集及工作者節點，才能新增服務。
-
-1.  將本端「{{site.data.keyword.Bluemix_dedicated_notm}}」配置檔的路徑設為 `DEDICATED_BLUEMIX_CONFIG` 環境變數。
-
-    ```
-    export DEDICATED_BLUEMIX_CONFIG=<path_to_config_directory>
-    ```
-    {: pre}
-
-2.  將上面定義的相同路徑設定為 `BLUEMIX_HOME` 環境變數。
-
-    ```
-    export BLUEMIX_HOME=$DEDICATED_BLUEMIX_CONFIG
-    ```
-    {: pre}
-
-3.  登入您要在其中建立服務實例的「{{site.data.keyword.Bluemix_dedicated_notm}}」環境。
-
-    ```
-    bx login -a api.<dedicated_domain> -u <user> -p <password> -o <org> -s <space>
-    ```
-    {: pre}
-
-4.  列出 {{site.data.keyword.Bluemix_notm}} 型錄中的可用服務。
-
-    ```
-    bx service offerings
-    ```
-    {: pre}
-
-5.  建立您要連結至叢集的服務實例。
-
-    ```
-    bx service create <service_name> <service_plan> <service_instance_name>
-    ```
-    {: pre}
-
-6.  列出可用的 {{site.data.keyword.Bluemix_notm}} 服務來驗證您已建立服務實例。
-
-    ```
-    bx service list
-    ```
-    {: pre}
-
-    CLI 輸出範例：
-
-    ```
-    name                      service           plan    bound apps   last operation   
-    <service_instance_name>   <service_name>    spark                create succeeded
-    ```
-    {: screen}
-
-7.  取消設定 `BLUEMIX_HOME` 環境變數，以回到使用「{{site.data.keyword.Bluemix_notm}} 公用」。
-
-    ```
-    unset $BLUEMIX_HOME
-    ```
-    {: pre}
-
-8.  登入 {{site.data.keyword.containershort_notm}} 的公用端點，並將 CLI 的目標設為「{{site.data.keyword.Bluemix_dedicated_notm}}」環境中的叢集。
-    1.  使用 {{site.data.keyword.containershort_notm}} 的公用端點登入帳戶。系統提示時，請輸入 {{site.data.keyword.Bluemix_notm}} 認證，然後選取「{{site.data.keyword.Bluemix_dedicated_notm}}」帳戶。
-
-        ```
-        bx login -a api.ng.bluemix.net
-        ```
-        {: pre}
-
-        **附註：**如果您具有聯合 ID，請使用 `bx login --sso` 來登入 {{site.data.keyword.Bluemix_notm}} CLI。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。若沒有 `--sso` 時登入失敗，而有 `--sso` 選項時登入成功，即表示您有聯合 ID。
-
-    2.  取得可用叢集清單，並識別 CLI 中要設為目標的叢集名稱。
-
-        ```
-        bx cs clusters
-        ```
-        {: pre}
-
-    3.  取得指令來設定環境變數，並下載 Kubernetes 配置檔。
-
-        ```
-        bx cs cluster-config <cluster_name_or_id>
-        ```
-        {: pre}
-
-        配置檔下載完成之後，會顯示一個指令，可讓您用來將本端 Kubernetes 配置檔的路徑設定為環境變數。
-
-        OS X 的範例：
-
-        ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
-        ```
-        {: screen}
-
-    4.  複製並貼上終端機中顯示的指令，以設定 `KUBECONFIG` 環境變數。
-
-9.  識別您要用來新增服務的叢集名稱空間。請選擇下列選項。
-    * 列出現有名稱空間，並選擇您要使用的名稱空間。
-        ```
-        kubectl get namespaces
-        ```
-        {: pre}
-
-    * 在叢集中建立新的名稱空間。
-        ```
-        kubectl create namespace <namespace_name>
-        ```
-        {: pre}
-
-10.  將服務實例連結至叢集。
-
-      ```
-      bx cs cluster-service-bind <cluster_name_or_id> <namespace> <service_instance_name>
-      ```
-      {: pre}
-
 <br />
+
 
 
 ## 管理叢集存取
 {: #cs_cluster_user}
 
-您可以將叢集的存取權授與其他使用者，讓他們可以存取叢集、管理叢集，以及將應用程式部署至叢集。
+每位使用 {{site.data.keyword.containershort_notm}} 的使用者都必須獲指派服務特定使用者角色的組合，以判斷使用者可以執行的動作。
 {:shortdesc}
-
-每位使用 {{site.data.keyword.containershort_notm}} 的使用者都必須在「身分及存取管理」中獲指派服務特定使用者角色，以判斷此使用者可以執行的動作。「身分及存取管理」可區分下列存取許可權。
 
 <dl>
 <dt>{{site.data.keyword.containershort_notm}} 存取原則</dt>
-<dd>存取原則可以判斷您可對叢集執行的叢集管理動作，例如，建立或移除叢集，以及新增或移除額外的工作者節點。</dd>
+<dd>在「身分及存取管理」中，{{site.data.keyword.containershort_notm}} 存取原則可以判斷您可對叢集執行的叢集管理動作，例如，建立或移除叢集，以及新增或移除額外的工作者節點。這些原則必須與基礎架構原則一起設定。</dd>
+<dt>基礎架構存取原則</dt>
+<dd>在「身分及存取管理」中，基礎架構存取原則容許在 IBM Cloud 基礎架構 (SoftLayer) 中完成從 {{site.data.keyword.containershort_notm}} 使用者介面或 CLI 所要求的動作。這些原則必須與 {{site.data.keyword.containershort_notm}} 存取原則一起設定。[進一步瞭解可用的基礎架構角色](/docs/iam/infrastructureaccess.html#infrapermission)。</dd>
 <dt>資源群組</dt>
-<dd>資源群組是一種將 {{site.data.keyword.Bluemix_notm}} 服務組織成群組的方式，讓您可以一次快速地指派使用者對多個資源的存取權。瞭解如何[使用資源群組來管理使用者](/docs/admin/resourcegroups.html#rgs)。</dd>
-<dt>RBAC 角色</dt>
-<dd>每位獲指派 {{site.data.keyword.containershort_notm}} 存取原則的使用者都會自動獲指派 RBAC 角色。RBAC 角色可以判斷您可對叢集內 Kubernetes 資源執行的動作。只有 default 名稱空間才能設定 RBAC 角色。叢集管理者可以為叢集中的其他名稱空間新增 RBAC 角色。如需相關資訊，請參閱 Kubernetes 文件中的[使用 RBAC 授權 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview)。</dd>
+<dd>資源群組是一種將 {{site.data.keyword.Bluemix_notm}} 服務組織成群組的方式，讓您可以一次快速地指派使用者對多個資源的存取權。[瞭解如何使用資源群組來管理使用者](/docs/admin/resourcegroups.html#rgs)。</dd>
 <dt>Cloud Foundry 角色</dt>
-<dd>每位使用者都必須獲指派 Cloud Foundry 使用者角色。此角色可以判斷使用者可對 {{site.data.keyword.Bluemix_notm}} 帳戶執行的動作，例如，邀請其他使用者，或檢視配額用量。若要檢閱每一個角色的許可權，請參閱 [Cloud Foundry 角色](/docs/iam/cfaccess.html#cfaccess)。</dd>
+<dd>在「身分及存取管理」中，每位使用者都必須獲指派 Cloud Foundry 使用者角色。此角色可以判斷使用者可對 {{site.data.keyword.Bluemix_notm}} 帳戶執行的動作，例如，邀請其他使用者，或檢視配額用量。[進一步瞭解可用的 Cloud Foundry 角色](/docs/iam/cfaccess.html#cfaccess)。</dd>
+<dt>Kubernetes RBAC 角色</dt>
+<dd>每位獲指派 {{site.data.keyword.containershort_notm}} 存取原則的使用者都會自動獲指派 Kubernetes RBAC 角色。在 Kubernetes 中，RBAC 角色可以判斷您可對叢集內 Kubernetes 資源執行的動作。只有 default 名稱空間才能設定 RBAC 角色。叢集管理者可以為叢集中的其他名稱空間新增 RBAC 角色。如需相關資訊，請參閱 Kubernetes 文件中的[使用 RBAC 授權 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview)。</dd>
 </dl>
 
-請選擇下列動作，以繼續進行：
+在此章節中：
 
--   [檢視使用叢集的必要存取原則及許可權](#access_ov)。
--   [檢視現行存取原則](#view_access)。
--   [變更現有使用者的存取原則](#change_access)。
--   [將其他使用者新增至 {{site.data.keyword.Bluemix_notm}} 帳戶](#add_users)。
+-   [存取原則及許可權](#access_ov)
+-   [將使用者新增至 {{site.data.keyword.Bluemix_notm}} 帳戶](#add_users)
+-   [自訂使用者的基礎架構許可權](#infrastructure_permissions)
 
-### 必要 {{site.data.keyword.containershort_notm}} 存取原則及許可權概觀
+### 存取原則及許可權
 {: #access_ov}
 
 檢閱您可以授與 {{site.data.keyword.Bluemix_notm}} 帳戶中使用者的存取原則及許可權。操作員及編輯者角色具有個別的許可權。例如，如果您想要使用者新增工作者節點及連結服務，您必須同時將操作員及編輯者角色指派給使用者。
 
-|存取原則|叢集管理許可權|Kubernetes 資源許可權|
+|{{site.data.keyword.containershort_notm}} 存取原則|叢集管理許可權|Kubernetes 資源許可權|
 |-------------|------------------------------|-------------------------------|
-|<ul><li>角色：管理者</li><li>服務實例：所有現行服務實例</li></ul>|<ul><li>建立精簡或標準叢集</li><li>設定 {{site.data.keyword.Bluemix_notm}} 帳戶的認證，以存取 IBM Cloud 基礎架構 (SoftLayer) 組合</li><li>移除叢集</li><li>指派及變更此帳戶中其他現有使用者的 {{site.data.keyword.containershort_notm}} 存取原則。</li></ul><br/>此角色會繼承此帳戶中所有叢集的「編輯者」、「操作員」及「檢視者」角色的許可權。|<ul><li>RBAC 角色：cluster-admin</li><li>每個名稱空間中資源的讀寫存取</li><li>建立名稱空間內的角色</li><li>存取 Kubernetes 儀表板</li><li>建立 Ingress 資源，使應用程式公開可用</li></ul>|
-|<ul><li>角色：管理者</li><li>服務實例：特定叢集 ID</li></ul>|<ul><li>移除特定叢集。</li></ul><br/>此角色會繼承所選取叢集的「編輯者」、「操作員」及「檢視者」角色的許可權。|<ul><li>RBAC 角色：cluster-admin</li><li>每個名稱空間中資源的讀寫存取</li><li>建立名稱空間內的角色</li><li>存取 Kubernetes 儀表板</li><li>建立 Ingress 資源，使應用程式公開可用</li></ul>|
-|<ul><li>角色：操作員</li><li>服務實例：所有現行服務實例/特定叢集 ID</li></ul>|<ul><li>將其他工作者節點新增至叢集</li><li>移除叢集中的工作者節點</li><li>重新啟動工作者節點</li><li>重新載入工作者節點</li><li>將子網路新增至叢集</li></ul>|<ul><li>RBAC 角色：admin</li><li>讀寫存取預設名稱空間內的資源，但不會讀寫存取名稱空間本身</li><li>建立名稱空間內的角色</li></ul>|
-|<ul><li>角色：編輯者</li><li>服務實例：所有現行服務實例或特定叢集 ID</li></ul>|<ul><li>將 {{site.data.keyword.Bluemix_notm}} 服務連結至叢集。</li><li>取消 {{site.data.keyword.Bluemix_notm}} 服務與叢集的連結。</li><li>建立 Webhook。</li></ul><br/>請對應用程式開發人員使用此角色。|<ul><li>RBAC 角色：edit</li><li>default 名稱空間內資源的讀寫存取</li></ul>|
-|<ul><li>角色：檢視者</li><li>服務實例：所有現行服務實例/特定叢集 ID</li></ul>|<ul><li>列出叢集</li><li>檢視叢集的詳細資料</li></ul>|<ul><li>RBAC 角色：view</li><li>default 名稱空間內資源的讀取權</li><li>沒有 Kubernetes Secret 的讀取權</li></ul>|
-|<ul><li>Cloud Foundry 組織角色：管理員</li></ul>|<ul><li>將其他使用者新增至 {{site.data.keyword.Bluemix_notm}} 帳戶</li></ul>| |
-|<ul><li>Cloud Foundry 空間角色：開發人員</li></ul>|<ul><li>建立 {{site.data.keyword.Bluemix_notm}} 服務實例</li><li>將 {{site.data.keyword.Bluemix_notm}} 服務實例連結至叢集</li></ul>| |
-{: caption="表 7. 必要 {{site.data.keyword.containershort_notm}} 存取原則及許可權的概觀" caption-side="top"}
+|管理者|此角色會繼承此帳戶中所有叢集的「編輯者」、「操作員」及「檢視者」角色的許可權。<br/><br/>針對所有現行服務實例設定時：<ul><li>建立精簡或標準叢集</li><li>設定 {{site.data.keyword.Bluemix_notm}} 帳戶的認證，以存取 IBM Cloud 基礎架構 (SoftLayer) 組合</li><li>移除叢集</li><li>指派及變更此帳戶中其他現有使用者的 {{site.data.keyword.containershort_notm}} 存取原則。</li></ul><p>針對特定叢集 ID 設定時：<ul><li>移除特定叢集</li></ul></p>對應的基礎架構存取原則：超級使用者<br/><br/><b>附註</b>：若要建立機器、VLAN 及子網路這類資源，使用者需要**超級使用者**基礎架構角色。|<ul><li>RBAC 角色：cluster-admin</li><li>每個名稱空間中資源的讀寫存取</li><li>建立名稱空間內的角色</li><li>存取 Kubernetes 儀表板</li><li>建立 Ingress 資源，使應用程式公開可用</li></ul>|
+|操作員|<ul><li>將其他工作者節點新增至叢集</li><li>移除叢集中的工作者節點</li><li>重新啟動工作者節點</li><li>重新載入工作者節點</li><li>將子網路新增至叢集</li></ul><p>對應的基礎架構存取原則：基本使用者</p>|<ul><li>RBAC 角色：admin</li><li>讀寫存取預設名稱空間內的資源，但不會讀寫存取名稱空間本身</li><li>建立名稱空間內的角色</li></ul>|
+|編輯者 <br/><br/><b>提示</b>：請對應用程式開發人員使用此角色。|<ul><li>將 {{site.data.keyword.Bluemix_notm}} 服務連結至叢集。</li><li>取消 {{site.data.keyword.Bluemix_notm}} 服務與叢集的連結。</li><li>建立 Webhook。</li></ul><p>對應的基礎架構存取原則：基本使用者|<ul><li>RBAC 角色：edit</li><li>default 名稱空間內資源的讀寫存取</li></ul></p>|
+|檢視者|<ul><li>列出叢集</li><li>檢視叢集的詳細資料</li></ul><p>對應的基礎架構存取原則：僅限檢視</p>|<ul><li>RBAC 角色：view</li><li>default 名稱空間內資源的讀取權</li><li>沒有 Kubernetes Secret 的讀取權</li></ul>|
+{: caption="表 7. {{site.data.keyword.containershort_notm}} 存取原則及許可權" caption-side="top"}
 
-### 驗證您的 {{site.data.keyword.containershort_notm}} 存取原則
-{: #view_access}
+|Cloud Foundry 存取原則|帳戶管理許可權|
+|-------------|------------------------------|
+|組織角色：管理員|<ul><li>將其他使用者新增至 {{site.data.keyword.Bluemix_notm}} 帳戶</li></ul>| |
+|空間角色：開發人員|<ul><li>建立 {{site.data.keyword.Bluemix_notm}} 服務實例</li><li>將 {{site.data.keyword.Bluemix_notm}} 服務實例連結至叢集</li></ul>| 
+{: caption="表 8. Cloud Foundry 存取原則及許可權" caption-side="top"}
 
-您可以檢閱及驗證您已獲指派的 {{site.data.keyword.containershort_notm}} 存取原則。存取原則可以判斷您可執行的叢集管理動作。
-
-1.  選取您要驗證您的 {{site.data.keyword.containershort_notm}} 存取原則的 {{site.data.keyword.Bluemix_notm}} 帳戶。
-2.  從功能表列中，按一下**管理** > **安全** > **身分及存取**。**使用者**視窗會顯示一份使用者清單，其中包含其電子郵件位址以及對所選取帳戶的現行狀態。
-3.  選取您要檢查存取原則的使用者。
-4.  在**存取原則**區段中，檢閱使用者的存取原則。若要尋找您可以使用此角色執行之動作的詳細資訊，請參閱[必要 {{site.data.keyword.containershort_notm}} 存取原則及許可權的概觀](#access_ov)。
-5.  選用項目：[變更現行存取原則](#change_access)。
-
-    **附註：**只有具有 {{site.data.keyword.containershort_notm}} 中所有資源的已指派「管理者」服務原則的使用者，才能變更現有使用者的存取原則。若要將更多使用者新增至 {{site.data.keyword.Bluemix_notm}} 帳戶，您必須具有此帳戶的「管理員」Cloud Foundry 角色。若要尋找 {{site.data.keyword.Bluemix_notm}} 帳戶擁有者的 ID，請執行 `bx iam accounts`，並尋找**擁有者使用者 ID**。
-
-
-### 變更現有使用者的 {{site.data.keyword.containershort_notm}} 存取原則
-{: #change_access}
-
-您可以變更現有使用者的存取原則，以授與 {{site.data.keyword.Bluemix_notm}} 帳戶中叢集的叢集管理許可權。
-
-開始之前，請針對 {{site.data.keyword.containershort_notm}} 中的所有資源，[驗證您已獲指派「管理者」存取原則](#view_access)。
-
-1.  選取您要變更現有使用者的 {{site.data.keyword.containershort_notm}} 存取原則的 {{site.data.keyword.Bluemix_notm}} 帳戶。
-2.  從功能表列中，按一下**管理** > **安全** > **身分及存取**。**使用者**視窗會顯示一份使用者清單，其中包含其電子郵件位址以及對所選取帳戶的現行狀態。
-3.  尋找您要變更存取原則的使用者。如果您找不到所要尋找的使用者，請[邀請此使用者加入 {{site.data.keyword.Bluemix_notm}} 帳戶](#add_users)。
-4.  從**存取原則**中，於**角色**列的**動作**欄下，展開並按一下**編輯原則**。
-5.  從**服務**下拉清單中，選取 **{{site.data.keyword.containershort_notm}}**。
-6.  從**地區**下拉清單中，選取您要變更其原則的地區。
-7.  從**服務實例**下拉清單中，選取您要變更其原則的叢集。若要尋找特定叢集的 ID，請執行 `bx cs clusters`。
-8.  在**選取角色**區段中，按一下您要變更使用者存取權的角色。若要尋找每個角色的支援動作清單，請參閱[必要 {{site.data.keyword.containershort_notm}} 存取原則及許可權的概觀](#access_ov)。
-9.  按一下**儲存**，以儲存您的變更。
 
 ### 將使用者新增至 {{site.data.keyword.Bluemix_notm}} 帳戶
 {: #add_users}
@@ -1127,29 +818,38 @@ Docker 映像檔是您建立的每個容器的基礎。映像檔是從 Dockerfil
 
 開始之前，請驗證您已獲指派 {{site.data.keyword.Bluemix_notm}} 帳戶的「管理員」Cloud Foundry 角色。
 
-1.  選取您要新增使用者的 {{site.data.keyword.Bluemix_notm}} 帳戶。
-2.  從功能表列中，按一下**管理** > **安全** > **身分及存取**。「使用者」視窗會顯示一份使用者清單，其中包含其電子郵件位址以及對所選取帳戶的現行狀態。
-3.  按一下**邀請使用者**。
-4.  在**電子郵件位址** 中，輸入您要新增至 {{site.data.keyword.Bluemix_notm}} 帳戶之使用者的電子郵件位址。
-5.  在**存取**區段中，展開**服務**。
-6.  從**指派存取權**下拉清單中，決定您只要將存取權授與 {{site.data.keyword.containershort_notm}} 帳戶（**資源**），還是授與您帳戶內各種資源的集合（**資源群組**）。
-7.  如果是**資源**：
-    1. 從**服務**下拉清單中，選取 **{{site.data.keyword.containershort_notm}}**。
-    2. 從**地區**下拉清單中，選取您要邀請使用者加入的地區。
-    3. 從**服務實例**下拉清單中，選取您要邀請使用者加入的叢集。若要尋找特定叢集的 ID，請執行 `bx cs clusters`。
-    4. 在**選取角色**區段中，按一下您要變更使用者存取權的角色。若要尋找每個角色的支援動作清單，請參閱[必要 {{site.data.keyword.containershort_notm}} 存取原則及許可權的概觀](#access_ov)。
-8. 如果是**資源群組**：
-    1. 從**資源群組**下拉清單中，選取包括您帳戶之 {{site.data.keyword.containershort_notm}} 資源許可權的資源群組。
-    2. 從**指派對資源群組的存取權**下拉清單中，選取您要受邀使用者具有的角色。若要尋找每個角色的支援動作清單，請參閱[必要 {{site.data.keyword.containershort_notm}} 存取原則及許可權的概觀](#access_ov)。
-9. 選用項目：若要容許此使用者將其他使用者新增至 {{site.data.keyword.Bluemix_notm}} 帳戶，請將 Cloud Foundry 組織角色指派給使用者。
-    1. 在 **Cloud Foundry 角色**區段中，從**組織**下拉清單中，選取您要授與使用者許可權的組織。
-    2. 從**組織角色**下拉清單中，選取**管理員**。
-    3. 從**地區**下拉清單中，選取您要授與使用者許可權的地區。
-    4. 從**空間**下拉清單中，選取您要授與使用者許可權的空間。
-    5. 從**空間角色**下拉清單中，選取**管理員**。
-10. 按一下**邀請使用者**。
+1.  [將使用者新增至帳戶](../iam/iamuserinv.html#iamuserinv)。
+2.  在**存取**區段中，展開**服務**。
+3.  指派 {{site.data.keyword.containershort_notm}} 存取角色。從**指派存取權**下拉清單中，決定您只要將存取權授與 {{site.data.keyword.containershort_notm}} 帳戶（**資源**），還是授與您帳戶內各種資源的集合（**資源群組**）。
+  -  對於**資源**：
+      1. 從**服務**下拉清單中，選取 **{{site.data.keyword.containershort_notm}}**。
+      2. 從**地區**下拉清單中，選取要邀請使用者加入的地區。
+      3. 從**服務實例**下拉清單中，選取要邀請使用者加入的叢集。若要尋找特定叢集的 ID，請執行 `bx cs clusters`。
+      4. 在**選取角色**區段中，選擇角色。若要尋找每個角色的支援動作清單，請參閱[存取原則及許可權](#access_ov)。
+  - 對於**資源群組**：
+      1. 從**資源群組**下拉清單中，選取包括您帳戶之 {{site.data.keyword.containershort_notm}} 資源許可權的資源群組。
+      2. 從**指派對資源群組的存取權**下拉清單中，選取角色。若要尋找每個角色的支援動作清單，請參閱[存取原則及許可權](#access_ov)。
+4. [選用項目：指派基礎架構角色](/docs/iam/mnginfra.html#managing-infrastructure-access)。
+5. [選用項目：指派 Cloud Foundry 角色](/docs/iam/mngcf.html#mngcf)。
+5. 按一下**邀請使用者**。
+
+
+
+### 自訂使用者的基礎架構許可權
+{: #infrastructure_permissions}
+
+當您在「身分及存取管理」中設定基礎架構原則時，使用者會獲得與角色相關聯的許可權。若要自訂這些許可權，您必須登入 IBM Cloud 基礎架構 (SoftLayer)，並在該處調整許可權。
+{: #view_access}
+
+例如，基本使用者可以重新啟動工作者節點，但無法重新載入工作者節點。如果未將超級使用者許可權授與該人員，您可以調整 IBM Cloud 基礎架構 (SoftLayer) 許可權，並新增可執行重新載入指令的許可權。
+
+1.  登入您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶。
+2.  選取要更新的使用者設定檔。
+3.  在**入口網站許可權**中，自訂使用者的存取權。例如，若要新增重新載入許可權，請在**裝置**標籤中選取**發出 OS 重新載入並起始救援核心**。
+9.  儲存變更。
 
 <br />
+
 
 
 ## 更新 Kubernetes 主節點
@@ -1182,7 +882,7 @@ Kubernetes 會定期更新[主要、次要及修補程式版本](cs_versions.htm
 - 在您的部署中，使用[抄本 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#replicas)，在可用節點上重新排定 Pod。
 
 更新正式作業層次叢集：
-- 為了協助避免應用程式關閉，更新程序會阻止在更新期間於工作者節點上排定 Pod。如需相關資訊，請參閱 [`kubectl drain` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/user-guide/kubectl/v1.8/#drain)。
+- 為了協助避免應用程式關閉，更新程序會阻止在更新期間於工作者節點上排定 Pod。如需相關資訊，請參閱 [`kubectl drain` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#drain)。
 - 使用測試叢集驗證您的工作負載及交付處理程序不受更新的影響。您無法將工作者節點回復至舊版。
 - 正式作業層次叢集應該有撐過工作者節點失敗存活下來的能力。如果您的叢集沒有，請在更新叢集之前，先新增工作者節點。
 - 要求升級多個工作者節點時，會執行漸進式更新。叢集中可同時升級的工作者節點總數上限為 20 %。升級程序會等待工作者節點完成升級後，另一個工作者才開始升級。
@@ -1220,9 +920,9 @@ Kubernetes 會定期更新[主要、次要及修補程式版本](cs_versions.htm
 將子網路新增至叢集，以變更可用的可攜式公用或專用 IP 位址的儲存區。
 {:shortdesc}
 
-在 {{site.data.keyword.containershort_notm}} 中，您可以將網路子網路新增至叢集，為 Kubernetes 服務新增穩定的可攜式 IP。當您建立標準叢集時，{{site.data.keyword.containershort_notm}} 會自動佈建 1 個可攜式公用子網路（含 5 個公用 IP 位址）及 1 個可攜式專用子網路（含 5 個專用 IP 位址）。可攜式公用及專用 IP 位址是靜態的，不會在移除工作者節點或甚至叢集時變更。
+在 {{site.data.keyword.containershort_notm}} 中，您可以將網路子網路新增至叢集，為 Kubernetes 服務新增穩定的可攜式 IP。在此情況下，子網路不會與網路遮罩搭配使用，以在一個以上的叢集中建立連線功能。而是使用子網路，從可用來存取該服務的叢集中提供服務的永久固定 IP。
 
-將其中一個可攜式公用 IP 位址及其中一個可攜式專用 IP 位址用於 [Ingress 控制器](cs_apps.html#cs_apps_public_ingress)，您可以使用 Ingress 控制器，公開叢集中的多個應用程式。藉由[建立負載平衡器服務](cs_apps.html#cs_apps_public_load_balancer)，即可使用其餘 4 個可攜式公用 IP 位址及 4 個可攜式專用 IP 位址，將單一應用程式公開給大眾使用。
+當您建立標準叢集時，{{site.data.keyword.containershort_notm}} 會自動佈建 1 個可攜式公用子網路（含 5 個公用 IP 位址）及 1 個可攜式專用子網路（含 5 個專用 IP 位址）。可攜式公用及專用 IP 位址是靜態的，不會在移除工作者節點或甚至叢集時變更。針對每一個子網路，將其中一個可攜式公用 IP 位址及其中一個可攜式專用 IP 位址用於[應用程式負載平衡器](cs_apps.html#cs_apps_public_ingress)，您可以使用應用程式負載平衡器來公開叢集中的多個應用程式。藉由[建立負載平衡器服務](cs_apps.html#cs_apps_public_load_balancer)，即可使用其餘 4 個可攜式公用 IP 位址及 4 個可攜式專用 IP 位址，將單一應用程式公開給大眾使用。
 
 **附註：**可攜式公用 IP 位址是按月收費。如果您選擇在佈建叢集之後移除可攜式公用 IP 位址，則仍需要按月支付費用，即使您僅短時間使用。
 
@@ -1231,54 +931,44 @@ Kubernetes 會定期更新[主要、次要及修補程式版本](cs_versions.htm
 
 您可以藉由將子網路指派給叢集，來為叢集新增穩定的可攜式公用或專用 IP。
 
-若為「{{site.data.keyword.Bluemix_dedicated_notm}}」使用者，您必須[開立支援問題單](/docs/support/index.html#contacting-support)來建立子網路，然後使用 [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) 指令將子網路新增至叢集，而不是使用此作業。
+**附註：**當您讓叢集可以使用子網路時，會使用這個子網路的 IP 位址來進行叢集網路連線。若要避免 IP 位址衝突，請確定您使用的子網路只有一個叢集。請不要同時將子網路用於多個叢集或 {{site.data.keyword.containershort_notm}} 以外的其他用途。
 
-開始之前，請確定您可以透過 {{site.data.keyword.Bluemix_notm}} GUI 存取 IBM Cloud 基礎架構 (SoftLayer) 組合。若要存取組合，您必須設定或使用現有的「{{site.data.keyword.Bluemix_notm}} 隨收隨付制」帳戶。
+開始之前，請先將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為您的叢集。
 
-1.  從型錄中，選取**基礎架構**區段中的**網路**。
-2.  選取**子網路/IP**，然後按一下**建立**。
-3.  從**選取要新增至此帳戶的子網路類型**下拉功能表中，選取**可攜式公用**或**可攜式專用**。
-4.  從可攜式子網路中，選取您要新增的 IP 位址數目。
+若要在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中建立子網路，並將它設為可供指定的叢集使用，請執行下列動作：
 
-    **附註：**當您新增子網路的可攜式 IP 位址時，會使用三個 IP 位址來建立叢集內部網路，因此，您無法將它們用於 Ingress 控制器，或是使用它們來建立負載平衡器服務。例如，如果您要求八個可攜式公用 IP 位址，則可以使用其中的五個將您的應用程式公開給大眾使用。
-
-5.  選取您要將可攜式公用或專用 IP 位址遞送至其中的公用或專用 VLAN。您必須選取現有工作者節點所連接的公用或專用 VLAN。請檢閱工作者節點的公用或專用 VLAN。
+1. 佈建新的子網路。
 
     ```
-    bx cs worker-get <worker_id>
+    bx cs cluster-subnet-create <cluster_name_or_id> <subnet_size> <VLAN_ID>
     ```
     {: pre}
 
-6.  完成問卷，然後按一下**下單**。
+    <table>
+    <caption>表 8. 瞭解此指令的元件</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解此指令的元件</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>cluster-subnet-create</code></td>
+    <td>佈建叢集子網路的指令。</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;cluster_name_or_id&gt;</em></code></td>
+    <td>將 <code>&gt;cluster_name_or_id&lt;</code> 取代為叢集的名稱或 ID。</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;subnet_size&gt;</em></code></td>
+    <td>將 <code>&gt;subnet_size&lt;</code> 取代為您要從可攜式子網路新增的 IP 位址數目。接受值為 8、16、32 或 64。<p>**附註：**當您新增子網路的可攜式 IP 位址時，會使用三個 IP 位址來建立叢集內部網路，因此，您無法將它們用於應用程式負載平衡器，或是使用它們來建立負載平衡器服務。例如，如果您要求八個可攜式公用 IP 位址，則可以使用其中的五個將您的應用程式公開給大眾使用。</p> </td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;VLAN_ID&gt;</em></code></td>
+    <td>將 <code>&gt;VLAN_ID&lt;</code> 取代為您要在其上配置可攜式公用或專用 IP 位址之公用或專用 VLAN 的 ID。您必須選取現有工作者節點所連接的公用或專用 VLAN。若要檢閱工作者節點的公用或專用 VLAN，請執行 <code>bx cs worker-get &gt;worker_id&lt;</code> 指令。</td>
+    </tr>
+    </tbody></table>
 
-    **附註：**可攜式公用 IP 位址是按月收費。如果您在建立可攜式公用 IP 位址之後選擇將它移除，則仍必須按月支付費用，即使您只使用不到一個月。
-
-7.  佈建子網路之後，讓子網路可供 Kubernetes 叢集使用。
-    1.  從「基礎架構」儀表板中，選取您已建立的子網路，並記下子網路的 ID。
-    2.  登入 {{site.data.keyword.Bluemix_notm}} CLI。若要指定 {{site.data.keyword.Bluemix_notm}} 地區，請[包括 API 端點](cs_regions.html#bluemix_regions)。
-
-        ```
-        bx login
-        ```
-        {: pre}
-
-        **附註：**如果您具有聯合 ID，請使用 `bx login --sso` 來登入 {{site.data.keyword.Bluemix_notm}} CLI。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。若沒有 `--sso` 時登入失敗，而有 `--sso` 選項時登入成功，即表示您有聯合 ID。
-
-    3.  列出帳戶中的所有叢集，並記下您要在其中使用子網路的叢集的 ID。
-
-        ```
-        bx cs clusters
-        ```
-        {: pre}
-
-    4.  將子網路新增至叢集。當您將子網路設為可供叢集使用時，會自動建立 Kubernetes 配置對映，其中包括您可以使用的所有可用的可攜式公用或專用 IP 位址。如果您的叢集沒有 Ingress 控制器，則會自動使用某個可攜式公用 IP 位址來建立公用 Ingress 控制器，以及自動使用某個可攜式專用 IP 位址來建立專用 Ingress 控制器。所有其他可攜式公用或專用 IP 位址，則可用來為您的應用程式建立負載平衡器服務。
-
-        ```
-        bx cs cluster-subnet-add <cluster name or id> <subnet id>
-        ```
-        {: pre}
-
-8.  驗證子網路已順利新增至叢集。子網路 CIDR 列在 **VLAN** 區段中。
+2.  驗證已順利建立子網路並將其新增至叢集。子網路 CIDR 列在 **VLAN** 區段中。
 
     ```
     bx cs cluster-get --showResources <cluster name or id>
@@ -1366,7 +1056,7 @@ Kubernetes 會定期更新[主要、次要及修補程式版本](cs_versions.htm
     ```
     {: screen}
 
-6.  指定子網路 ID，以將子網路新增至叢集。當您讓叢集可以使用子網路時，會自動建立 Kubernetes 配置對映，其中包括您可以使用的所有可用的可攜式公用 IP 位址。如果您的叢集還沒有 Ingress 控制器，會自動使用某個可攜式公用 IP 位址來建立 Ingress 控制器。所有其他可攜式公用 IP 位址，則可用來為您的應用程式建立負載平衡器服務。
+6.  指定子網路 ID，以將子網路新增至叢集。當您讓叢集可以使用子網路時，會自動建立 Kubernetes 配置對映，其中包括您可以使用的所有可用的可攜式公用 IP 位址。如果您的叢集還沒有應用程式負載平衡器，則會自動使用一個可攜式公用 IP 位址及一個可攜式專用 IP 位址來建立公用及專用應用程式負載平衡器。所有其他可攜式公用或專用 IP 位址，則可用來為您的應用程式建立負載平衡器服務。
 
     ```
     bx cs cluster-subnet-add mycluster 807861
@@ -1430,27 +1120,7 @@ Kubernetes 會定期更新[主要、次要及修補程式版本](cs_versions.htm
     ```
     {: screen}
 
-4. 新增專用負載平衡器，以透過專用網路存取您的應用程式。如果您要使用來自所新增之子網路的專用 IP 位址，在建立專用負載平衡器時必須指定 IP 位址。否則，會從 IBM Cloud 基礎架構 (SoftLayer) 子網路或專用 VLAN 上使用者提供的子網路中，隨機選擇一個 IP 位址。如需相關資訊，請參閱[配置應用程式的存取](cs_apps.html#cs_apps_public_load_balancer)。
-
-    具有指定 IP 位址的專用負載平衡器服務的範例配置檔：
-
-    ```
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: <myservice>
-      annotations:
-        service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: private
-    spec:
-      type: LoadBalancer
-      selector:
-        <selectorkey>:<selectorvalue>
-      ports:
-       - protocol: TCP
-         port: 8080
-      loadBalancerIP: <private_ip_address>
-    ```
-    {: codeblock}
+4. 新增專用負載平衡器服務或專用 Ingress 應用程式負載平衡器，以透過專用網路存取您的應用程式。如果您要使用來自建立專用負載平衡器或專用 Ingress 應用程式負載平衡器時所新增之子網路的專用 IP 位址，則必須指定 IP 位址。否則，會從 IBM Cloud 基礎架構 (SoftLayer) 子網路或專用 VLAN 上使用者提供的子網路中，隨機選擇一個 IP 位址。如需相關資訊，請參閱[使用負載平衡器服務類型來配置應用程式的存取](cs_apps.html#cs_apps_public_load_balancer)或[啟用專用應用程式負載平衡器](cs_apps.html#private_ingress)。
 
 <br />
 
@@ -1465,7 +1135,7 @@ Kubernetes 會區分代表實際硬體的持續性磁區與通常由叢集使用
 
 ![建立持續性磁區及持續性磁區宣告](images/cs_cluster_pv_pvc.png)
 
- 如圖所示，若要啟用與 Kubernetes 搭配使用的現有 NFS 檔案共用時，您必須建立具有特定大小及存取模式的持續性磁區，以及建立與持續性磁區規格相符的持續性磁區宣告。如果持續性磁區與持續性磁區宣告相符，它們會彼此連結。叢集使用者只能使用連結的持續性磁區宣告，將磁區裝載至 Pod。此處理程序稱為靜態佈建的持續性儲存空間。
+ 如圖所示，若要啟用與 Kubernetes 搭配使用的現有 NFS 檔案共用時，您必須建立具有特定大小及存取模式的持續性磁區，以及建立與持續性磁區規格相符的持續性磁區宣告。如果持續性磁區與持續性磁區宣告相符，它們會彼此連結。叢集使用者只能使用連結的持續性磁區宣告，將磁區裝載至部署。此處理程序稱為靜態佈建的持續性儲存空間。
 
 開始之前，請確定您有可用來建立持續性磁區的現有 NFS 檔案共用。
 
@@ -1473,12 +1143,15 @@ Kubernetes 會區分代表實際硬體的持續性磁區與通常由叢集使用
 
 若要建立持續性磁區及相符的持續性磁區宣告，請遵循下列步驟。
 
-1.  在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中，查閱您要建立持續性磁區物件的 NFS 檔案共用的 ID 及路徑。
+1.  在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中，查閱您要建立持續性磁區物件的 NFS 檔案共用的 ID 及路徑。此外，將檔案儲存空間授權給叢集中的子網路。此授權會將儲存空間的存取權授與叢集。
     1.  登入您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶。
     2.  按一下**儲存空間**。
-    3.  按一下**檔案儲存空間**，記下您要使用的 NFS 檔案共用的 ID 及路徑。
-2.  開啟您偏好的編輯器。
-3.  建立持續性磁區的儲存空間配置檔。
+    3.  按一下**檔案儲存空間**，並從**動作**功能表中選取**授權主機**。
+    4.  按一下**子網路**。在您授權之後，子網路上的每個工作者節點都可以存取檔案儲存空間。
+    5.  從功能表中選取叢集公用 VLAN 的子網路，然後按一下**提交**。如果您需要尋找子網路，請執行 `bx cs cluster-get <cluster_name> --showResources`。
+    6.  按一下檔案儲存空間的名稱。
+    7.  記下**裝載點**欄位。此欄位會顯示為 `<server>:/<path>`。
+2.  建立持續性磁區的儲存空間配置檔。從檔案儲存空間**裝載點**欄位中，包括伺服器及路徑。
 
     ```
     apiVersion: v1
@@ -1491,13 +1164,13 @@ Kubernetes 會區分代表實際硬體的持續性磁區與通常由叢集使用
      accessModes:
        - ReadWriteMany
      nfs:
-       server: "nfslon0410b-fz.service.softlayer.com"
+       server: "nfslon0410b-fz.service.networklayer.com"
        path: "/IBM01SEV8491247_0908"
     ```
     {: codeblock}
 
     <table>
-    <caption>表 8. 瞭解 YAML 檔案元件</caption>
+    <caption>表 9. 瞭解 YAML 檔案元件</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
     </thead>
@@ -1512,7 +1185,7 @@ Kubernetes 會區分代表實際硬體的持續性磁區與通常由叢集使用
     </tr>
     <tr>
     <td><code>accessMode</code></td>
-    <td>存取模式可定義將持續性磁區宣告裝載至工作者節點的方式。<ul><li>ReadWriteOnce (RWO)：持續性磁區只能裝載至單一工作者節點中的 Pod。裝載至此持續性磁區的 Pod 可以讀取及寫入磁區。</li><li>ReadOnlyMany (ROX)：持續性磁區可以裝載至在多個工作者節點上管理的 Pod。裝載至此持續性磁區的 Pod 只能讀取磁區。</li><li>ReadWriteMany (RWX)：此持續性磁區可以裝載至在多個工作者節點上管理的 Pod。裝載至此持續性磁區的 Pod 可以讀取及寫入磁區。</li></ul></td>
+    <td>存取模式可定義將持續性磁區宣告裝載至工作者節點的方式。<ul><li>ReadWriteOnce (RWO)：持續性磁區只能裝載至單一工作者節點中的部署。部署中裝載至此持續性磁區的容器可以讀取及寫入磁區。</li><li>ReadOnlyMany (ROX)：持續性磁區可以裝載至在多個工作者節點上管理的部署。裝載至此持續性磁區的部署只能讀取磁區。</li><li>ReadWriteMany (RWX)：此持續性磁區可以裝載至在多個工作者節點上管理的部署。裝載至此持續性磁區的部署可以讀取及寫入磁區。</li></ul></td>
     </tr>
     <tr>
     <td><code>server</code></td>
@@ -1524,7 +1197,7 @@ Kubernetes 會區分代表實際硬體的持續性磁區與通常由叢集使用
     </tr>
     </tbody></table>
 
-4.  在叢集中建立持續性磁區物件。
+3.  在叢集中建立持續性磁區物件。
 
     ```
     kubectl apply -f <yaml_path>
@@ -1538,14 +1211,14 @@ Kubernetes 會區分代表實際硬體的持續性磁區與通常由叢集使用
     ```
     {: pre}
 
-5.  驗證已建立持續性磁區。
+4.  驗證已建立持續性磁區。
 
     ```
     kubectl get pv
     ```
     {: pre}
 
-6.  建立另一個配置檔來建立持續性磁區宣告。為了讓持續性磁區宣告符合您先前建立的持續性磁區物件，您必須對 `storage` 及 `accessMode` 選擇相同的值。`storage-class` 欄位必須是空的。如果其中有任何欄位不符合持續性磁區，則會改為自動建立新的持續性磁區。
+5.  建立另一個配置檔來建立持續性磁區宣告。為了讓持續性磁區宣告符合您先前建立的持續性磁區物件，您必須對 `storage` 及 `accessMode` 選擇相同的值。`storage-class` 欄位必須是空的。如果其中有任何欄位不符合持續性磁區，則會改為自動建立新的持續性磁區。
 
     ```
     kind: PersistentVolumeClaim
@@ -1563,14 +1236,14 @@ Kubernetes 會區分代表實際硬體的持續性磁區與通常由叢集使用
     ```
     {: codeblock}
 
-7.  建立持續性磁區宣告。
+6.  建立持續性磁區宣告。
 
     ```
     kubectl apply -f deploy/kube-config/mypvc.yaml
     ```
     {: pre}
 
-8.  驗證持續性磁區宣告已建立並連結至持續性磁區物件。此處理程序可能需要幾分鐘的時間。
+7.  驗證持續性磁區宣告已建立並連結至持續性磁區物件。此處理程序可能需要幾分鐘的時間。
 
     ```
     kubectl describe pvc mypvc
@@ -1598,7 +1271,7 @@ Kubernetes 會區分代表實際硬體的持續性磁區與通常由叢集使用
     {: screen}
 
 
-您已順利建立持續性磁區物件，並將其連結至持續性磁區宣告。叢集使用者現在可以[將持續性磁區宣告裝載](cs_apps.html#cs_apps_volume_mount)至其 Pod，並開始讀取及寫入至持續性磁區物件。
+您已順利建立持續性磁區物件，並將其連結至持續性磁區宣告。叢集使用者現在可以[裝載持續性磁區宣告](cs_apps.html#cs_apps_volume_mount)至其部署，並開始讀取及寫入持續性磁區物件。
 
 <br />
 
@@ -1609,142 +1282,40 @@ Kubernetes 會區分代表實際硬體的持續性磁區與通常由叢集使用
 日誌可協助您對叢集及應用程式的問題進行疑難排解。有時，您可能想要將日誌傳送至用來處理或長期儲存的特定位置。在 {{site.data.keyword.containershort_notm}} 的 Kubernetes 叢集上，您可以針對叢集啟用日誌轉遞，並選擇日誌的轉遞位置。**附註**：只有標準叢集支援日誌轉遞。
 {:shortdesc}
 
-### 檢視日誌
-{: #cs_view_logs}
+您可以轉遞日誌來源（例如容器、應用程式、工作者節點、Kubernetes 叢集及 Ingress 控制器）的日誌。如需每一個日誌來源的相關資訊，請檢閱下表。
 
-若要檢視叢集及容器的日誌，您可以使用標準 Kubernetes 及 Docker 記載特性。
+|日誌來源|特徵|日誌路徑|
+|----------|---------------|-----|
+|`容器`|在 Kubernetes 叢集中執行之容器的日誌。|-|
+|`application`|在 Kubernetes 叢集中執行之自己的應用程式的日誌。|`/var/log/apps/**/*.log`、`/var/log/apps/**/*.err`|
+|`worker`|Kubernetes 叢集內虛擬機器工作者節點的日誌。|`/var/log/syslog`、`/var/log/auth.log`|
+|`kubernetes`|Kubernetes 系統元件的日誌。|`/var/log/kubelet.log`、`/var/log/kube-proxy.log`|
+|`ingress`|管理進入 Kubernetes 叢集之網路資料流量並由 Ingress 控制器管理之應用程式負載平衡器的日誌。|`/var/log/alb/ids/*.log`、`/var/log/alb/ids/*.err`、`/var/log/alb/customerlogs/*.log`、`/var/log/alb/customerlogs/*.err`|
+{: caption="表 9. 日誌來源特徵。" caption-side="top"}
+
+### 啟用日誌轉遞
+{: #cs_log_sources_enable}
+
+您可以將日誌轉遞至 {{site.data.keyword.loganalysislong_notm}} 或轉遞至外部 syslog 伺服器。如果您要將某個日誌來源中的日誌轉遞至這兩個日誌收集器伺服器，則必須建立兩個記載配置。
+**附註**：若要轉遞應用程式的日誌，請參閱[啟用應用程式的日誌轉遞](#cs_apps_enable)。
 {:shortdesc}
-
-#### {{site.data.keyword.loganalysislong_notm}}
-{: #cs_view_logs_k8s}
-
-若為標準叢集，日誌位於您在建立 Kubernetes 叢集時所登入的 {{site.data.keyword.Bluemix_notm}} 帳戶。如果您在建立叢集時指定了 {{site.data.keyword.Bluemix_notm}} 空間，則日誌位於該空間中。容器日誌是在容器外進行監視及轉遞。您可以使用 Kibana 儀表板來存取容器的日誌。如需記載的相關資訊，請參閱 [{{site.data.keyword.containershort_notm}} 的記載功能](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes)。
-
-**附註**：如果日誌位於您在建立叢集時所指定的空間，則帳戶擁有者必須對該空間具有「管理員」、「開發人員」或「審核員」許可權，才能檢視日誌。如需變更 {{site.data.keyword.containershort_notm}} 存取原則及許可權的相關資訊，請參閱[管理叢集存取](cs_cluster.html#cs_cluster_user)。在變更許可權之後，日誌最多需要 24 小時才會開始出現。
-
-若要存取 Kibana 儀表板，請移至下列其中一個 URL，然後選取您建立叢集所在的 {{site.data.keyword.Bluemix_notm}} 帳戶或空間。
-- 美國南部及美國東部：https://logging.ng.bluemix.net
-- 英國南部或歐盟中部：https://logging.eu-fra.bluemix.net
-
-如需檢視日誌的相關資訊，請參閱[從 Web 瀏覽器導覽至 Kibana](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser)。
-
-#### Docker 日誌
-{: #cs_view_logs_docker}
-
-您可以運用內建 Docker 記載功能來檢閱標準 STDOUT 及 STDERR 輸出串流的活動。如需相關資訊，請參閱[檢視在 Kubernetes 叢集中執行的容器的容器日誌](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes)。
-
-### 針對 Docker 容器名稱空間配置日誌轉遞
-{: #cs_configure_namespace_logs}
-
-依預設，{{site.data.keyword.containershort_notm}} 會將 Docker 容器名稱空間日誌轉遞給 {{site.data.keyword.loganalysislong_notm}}。您也可以建立新的日誌轉遞配置，將容器名稱空間日誌轉遞至外部 syslog 伺服器。
-{:shortdesc}
-
-**附註**：若要檢視雪梨位置的日誌，您必須將日誌轉遞至外部 syslog 伺服器。
-
-#### 啟用對 syslog 的日誌轉遞
-{: #cs_namespace_enable}
 
 開始之前：
 
-1. 使用下列兩種方式之一來設定可接受 syslog 通訊協定的伺服器：
+1. 如果您要將日誌轉遞至外部 syslog 伺服器，可以使用下列兩種方式來設定接受 syslog 通訊協定的伺服器：
   * 設定並管理自己的伺服器，或讓提供者為您管理。如果提供者為您管理伺服器，請從記載提供者取得記載端點。
   * 從容器執行 syslog。例如，您可以使用此[部署 .yaml 檔案![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-Bluemix/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml)，來提取在 Kubernet 叢集中執行容器的 Docker 公用映像檔。映像檔會發佈公用叢集 IP 位址上的埠 `514`，並使用這個公用叢集 IP 位址來配置 syslog 主機。
 
-2. [將 CLI 的目標設為](cs_cli_install.html#cs_cli_configure)名稱空間所在的叢集。
+2. 將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為日誌來源所在的叢集。
 
-若要將名稱空間日誌轉遞至 syslog 伺服器，請執行下列動作：
+若要啟用容器、工作者節點、Kubernetes 系統元件、應用程式或 Ingress 應用程式負載平衡器的日誌轉遞，請執行下列動作：
 
-1. 建立記載配置。
+1. 建立日誌轉遞配置。
 
-    ```
-    bx cs logging-config-create <my_cluster> --namespace <my_namespace> --hostname <log_server_hostname> --port <log_server_port> --type syslog
-    ```
-    {: pre}
-
-    <table>
-    <caption>表 9. 瞭解此指令的元件</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解此指令的元件</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>logging-config-create</code></td>
-    <td>用來為您的名稱空間建立日誌轉遞配置的指令。</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;my_cluster&gt;</em></code></td>
-    <td>將 <em>&lt;my_cluster&gt;</em> 取代為叢集的名稱或 ID。</td>
-    </tr>
-    <tr>
-    <td><code>--namespace <em>&lt;my_namespace&gt;</em></code></td>
-    <td>將 <em>&lt;my_namespace&gt;</em> 取代為名稱空間的名稱。<code>ibm-system</code> 及 <code>kube-system</code> Kubernetes 名稱空間不支援日誌轉遞。如果未指定名稱空間，則容器中的所有名稱空間都會使用此配置。</td>
-    </tr>
-    <tr>
-    <td><code>--hostname <em>&lt;log_server_hostname&gt;</em></code></td>
-    <td>將 <em>&lt;log_server_hostname&gt;</em> 取代為日誌收集器伺服器的主機名稱或 IP 位址。</td>
-    </tr>
-    <tr>
-    <td><code>--port <em>&lt;log_server_port&gt;</em></code></td>
-    <td>將 <em>&lt;log_server_port&gt;</em> 取代為日誌收集器伺服器的埠。如果您未指定埠，則會將標準埠 <code>514</code> 用於 syslog。</td>
-    </tr>
-    <tr>
-    <td><code>--type syslog</code></td>
-    <td>syslog 的日誌類型。</td>
-    </tr>
-    </tbody></table>
-
-2. 驗證已建立日誌轉遞配置。
-
-    * 列出叢集中的所有記載配置：
-      ```
-    bx cs logging-config-get <my_cluster>
-    ```
-      {: pre}
-
-      輸出範例：
-
-      ```
-      Logging Configurations
-      ---------------------------------------------
-      Id                                    Source        Host             Port    Protocol   Paths
-      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes    172.30.162.138   5514    syslog     /var/log/kubelet.log,/var/log/kube-proxy.log
-      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  application   localhost        -       ibm        /var/log/apps/**/*.log,/var/log/apps/**/*.err
-
-      Container Log Namespace configurations
-      ---------------------------------------------
-      Namespace         Host             Port    Protocol
-      default           myhostname.com   5514    syslog
-      my-namespace      localhost        5514    syslog
-      ```
-      {: screen}
-
-    * 僅列出名稱空間記載配置：
-      ```
-    bx cs logging-config-get <my_cluster> --logsource namespaces
-    ```
-      {: pre}
-
-      輸出範例：
-
-      ```
-      Namespace         Host             Port    Protocol
-      default           myhostname.com   5514    syslog
-      my-namespace      localhost        5514    syslog
-      ```
-      {: screen}
-
-#### 更新 syslog 伺服器配置
-{: #cs_namespace_update}
-
-如果您想要更新現行 syslog 伺服器配置的詳細資料，或變更為不同的 syslog 伺服器，您可以更新記載轉遞配置。
-{:shortdesc}
-
-開始之前，請先將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為名稱空間所在的叢集。
-
-1. 更新日誌轉遞配置。
+  * 若要將日誌轉遞至 {{site.data.keyword.loganalysislong_notm}}，請執行下列指令：
 
     ```
-    bx cs logging-config-update <my_cluster> --namespace <my_namespace> --hostname <log_server_hostname> --port <log_server_port> --type syslog
+    bx cs logging-config-create <my_cluster> --logsource <my_log_source> --namespace <kubernetes_namespace> --hostname <ingestion_URL> --port <ingestion_port> --spaceName <cluster_space> --orgName <cluster_org> --type ibm
     ```
     {: pre}
 
@@ -1755,79 +1326,118 @@ Kubernetes 會區分代表實際硬體的持續性磁區與通常由叢集使用
     </thead>
     <tbody>
     <tr>
-    <td><code>logging-config-update</code></td>
-    <td>用來為您的名稱空間更新日誌轉遞配置的指令。</td>
+    <td><code>logging-config-create</code></td>
+    <td>建立 {{site.data.keyword.loganalysislong_notm}} 日誌轉遞配置的指令。</td>
     </tr>
     <tr>
     <td><code><em>&lt;my_cluster&gt;</em></code></td>
     <td>將 <em>&lt;my_cluster&gt;</em> 取代為叢集的名稱或 ID。</td>
     </tr>
     <tr>
-    <td><code>--namepsace <em>&lt;my_namespace&gt;</em></code></td>
-    <td>將 <em>&lt;my_namespace&gt;</em> 取代為具有記載配置之名稱空間的名稱。</td>
+    <td><code>--logsource <em>&lt;my_log_source&gt;</em></code></td>
+    <td>將 <em>&lt;my_log_source&gt;</em> 取代為日誌來源。接受值為 <code>container</code>、<code>application</code>、<code>worker</code>、<code>kubernetes</code> 及 <code>ingress</code>。</td>
     </tr>
     <tr>
-    <td><code>--hostname <em>&lt;log_server_hostname&gt;</em></code></td>
-    <td>將 <em>&lt;log_server_hostname&gt;</em> 取代為日誌收集器伺服器的主機名稱或 IP 位址。</td>
+    <td><code><em>&lt;kubernetes_namespace&gt;</em></code></td>
+    <td>將 <em>&lt;kubernetes_namespace&gt;</em> 取代為您要從中轉遞日誌的 Docker 容器名稱空間。<code>ibm-system</code> 及 <code>kube-system</code> Kubernetes 名稱空間不支援日誌轉遞。此值僅對容器日誌來源有效且為選用。如果未指定名稱空間，則容器中的所有名稱空間都會使用此配置。</td>
     </tr>
     <tr>
-    <td><code>--port <em>&lt;log_collector_port&gt;</em></code></td>
+    <td><code>--hostname <em>&lt;ingestion_URL&gt;</em></code></td>
+    <td>將 <em>&lt;ingestion_URL&gt;</em> 取代為 {{site.data.keyword.loganalysisshort_notm}} 汲取 URL。您可以在[這裡](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)尋找可用的汲取 URL 清單。如果您未指定汲取 URL，則會使用您在其中建立叢集之地區的端點。</td>
+    </tr>
+    <tr>
+    <td><code>--port <em>&lt;ingestion_port&gt;</em></code></td>
+    <td>將 <em>&lt;ingestion_port&gt;</em> 取代為汲取埠。如果您未指定埠，則會使用標準埠 <code>9091</code>。</td>
+    </tr>
+    <tr>
+    <td><code>--spaceName <em>&lt;cluster_space&gt;</em></code></td>
+    <td>將 <em>&lt;cluster_space&gt;</em> 取代為您要將日誌傳送至其中的空間的名稱。如果您未指定空間，則會將日誌傳送至帳戶層次。</td>
+    </tr>
+    <tr>
+    <td><code>--orgName <em>&lt;cluster_org&gt;</em></code></td>
+    <td>將 <em>&lt;cluster_org&gt;</em> 取代為空間所在組織的名稱。如果您已指定空間，則這是必要值。</td>
+    </tr>
+    <tr>
+    <td><code>--type ibm</code></td>
+    <td>將日誌傳送至 {{site.data.keyword.loganalysisshort_notm}} 的日誌類型。</td>
+    </tr>
+    </tbody></table>
+
+  * 若要將日誌轉遞至外部 syslog 伺服器，請執行下列指令：
+
+    ```
+    bx cs logging-config-create <my_cluster> --logsource <my_log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog
+    ```
+    {: pre}
+
+    <table>
+    <caption>表 11. 瞭解此指令的元件</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解此指令的元件</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>logging-config-create</code></td>
+    <td>建立 syslog 日誌轉遞配置的指令。</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;my_cluster&gt;</em></code></td>
+    <td>將 <em>&lt;my_cluster&gt;</em> 取代為叢集的名稱或 ID。</td>
+    </tr>
+    <tr>
+    <td><code>--logsource <em>&lt;my_log_source&gt;</em></code></td>
+    <td>將 <em>&lt;my_log_source&gt;</em> 取代為日誌來源。接受值為 <code>container</code>、<code>application</code>、<code>worker</code>、<code>kubernetes</code> 及 <code>ingress</code>。</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;kubernetes_namespace&gt;</em></code></td>
+    <td>將 <em>&lt;kubernetes_namespace&gt;</em> 取代為您要從中轉遞日誌的 Docker 容器名稱空間。<code>ibm-system</code> 及 <code>kube-system</code> Kubernetes 名稱空間不支援日誌轉遞。此值僅對容器日誌來源有效且為選用。如果未指定名稱空間，則容器中的所有名稱空間都會使用此配置。</td>
+    </tr>
+    <tr>
+    <td><code>--hostname <em>&lt;log_server_hostname_or_IP&gt;</em></code></td>
+    <td>將 <em>&lt;log_server_hostname&gt;</em> 取代為日誌收集器服務的主機名稱或 IP 位址。</td>
+    </tr>
+    <tr>
+    <td><code>--port <em>&lt;log_server_port&gt;</em></code></td>
     <td>將 <em>&lt;log_server_port&gt;</em> 取代為日誌收集器伺服器的埠。如果您未指定埠，則會使用標準埠 <code>514</code>。</td>
     </tr>
     <tr>
     <td><code>--type syslog</code></td>
-    <td><code>syslog</code> 的記載類型。</td>
+    <td>將日誌傳送至外部 syslog 伺服器的日誌類型。</td>
     </tr>
     </tbody></table>
 
-2. 驗證已更新日誌轉遞配置。
-    ```
-    bx cs logging-config-get <my_cluster> --logsource namespaces
-    ```
-    {: pre}
+2. 驗證已建立日誌轉遞配置。
 
-    輸出範例：
+    * 若要列出叢集中的所有記載配置，請執行下列指令：
+      ```
+      bx cs logging-config-get <my_cluster>
+      ```
+      {: pre}
 
-    ```
-    Namespace         Host             Port    Protocol
-    default           myhostname.com   5514    syslog
-    my-namespace      localhost        5514    syslog
-    ```
-    {: screen}
+      輸出範例：
 
-#### 停止對 syslog 的日誌轉遞
-{: #cs_namespace_delete}
+      ```
+      Id                                    Source       Namespace     Host                          Port   Org      Space      Protocol     Paths
+      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes   -             172.30.162.138                5514   -        -          syslog       /var/log/kubelet.log,/var/log/kube-proxy.log
+      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  application  -             ingest.logging.ng.bluemix.net 9091   my_org   my_space   ibm          /var/log/apps/**/*.log,/var/log/apps/**/*.err
+      8a284f1a-451c-4c48-b1b4-a4e6b977264e  containers   my-namespace  myhostname.common             5514   -        -          syslog       -
+      ```
+      {: screen}
 
-您可以刪除記載配置，來停止從名稱空間轉遞日誌。
+    * 若要列出某種類型日誌來源的記載配置，請執行下列指令：
+      ```
+      bx cs logging-config-get <my_cluster> --logsource worker
+      ```
+      {: pre}
 
-**附註**：這個動作只會刪除將日誌轉遞至 syslog 伺服器的配置。名稱空間的日誌會繼續轉遞至 {{site.data.keyword.loganalysislong_notm}}。
+      輸出範例：
 
-開始之前，請先將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為名稱空間所在的叢集。
-
-1. 刪除記載配置。
-
-    ```
-    bx cs logging-config-rm <my_cluster> --namespace <my_namespace>
-    ```
-    {: pre}
-    將 <em>&lt;my_cluster&gt;</em> 取代為記載配置所在叢集的名稱，並將 <em>&lt;my_namespace&gt;</em> 取代為名稱空間的名稱。
-
-
-### 針對應用程式、工作者節點、Kubernetes 系統元件及 Ingress 控制器配置日誌轉遞
-{: #cs_configure_log_source_logs}
-
-依預設，{{site.data.keyword.containershort_notm}} 會將 Docker 容器名稱空間日誌轉遞給 {{site.data.keyword.loganalysislong_notm}}。您也可以針對其他日誌來源（例如應用程式、工作者節點、Kubernetes 叢集及 Ingress 控制器）配置日誌轉遞。
-{:shortdesc}
-
-如需每一個日誌來源的相關資訊，請檢閱下列選項。
-
-|日誌來源|特徵|日誌路徑|
-|----------|---------------|-----|
-|`application`|在 Kubernetes 叢集中執行之自己的應用程式的日誌。|`/var/log/apps/**/*.log`、`/var/log/apps/**/*.err`
-|`worker`|Kubernetes 叢集內虛擬機器工作者節點的日誌。|`/var/log/syslog`、`/var/log/auth.log`
-|`kubernetes`|Kubernetes 系統元件的日誌。|`/var/log/kubelet.log`、`/var/log/kube-proxy.log`
-|`ingress`|管理進入 Kubernetes 叢集的網路資料流量的 Ingress 控制器的日誌。|`/var/log/alb/ids/*.log`、`/var/log/alb/ids/*.err`、`/var/log/alb/customerlogs/*.log`、`/var/log/alb/customerlogs/*.err`
-{: caption="表 11. 日誌來源特徵" caption-side="top"}
+      ```
+      Id                                    Source    Namespace   Host                            Port   Org    Space     Protocol    Paths
+      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  worker    -           ingest.logging.ng.bluemix.net   9091   -      -         ibm         /var/log/syslog,/var/log/auth.log
+      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  worker    -           172.30.162.138                  5514   -      -         syslog      /var/log/syslog,/var/log/auth.log
+      ```
+      {: screen}
 
 #### 啟用應用程式的日誌轉遞
 {: #cs_apps_enable}
@@ -1839,7 +1449,7 @@ Kubernetes 會區分代表實際硬體的持續性磁區與通常由叢集使用
 * 只會轉遞副檔名為 `.log` 或 `.err` 的應用程式日誌檔。
 * 第一次啟用日誌轉遞時，應用程式日誌會加在後面，而不是從頭讀取。這表示在啟用應用程式記載之前，已存在之所有日誌的內容都不會被讀取。日誌是從啟用記載的時間點開始讀取。不過，在第一次啟用日誌轉遞之後，一律會從前次離開的位置來挑選日誌。
 * 當您將 `/var/log/apps` 主機路徑磁區裝載至容器時，容器全都會寫入至這個相同的目錄。這表示如果您的容器寫入至相同的檔名，則容器會寫入至主機上完全相同的檔案。如果這不是您的本意，您可以使用不同方式命名來自每一個容器的日誌檔，以防止容器改寫相同的日誌檔。
-* 因為所有容器都會寫入至相同的檔名，所以請不要使用此方法來轉遞 ReplicaSets 的應用程式日誌。反之，您可以將應用程式中的日誌寫入至 STDOUT 及 STDERR。系統會挑選這些日誌作為容器日誌，而且容器日誌會自動轉遞至 {{site.data.keyword.loganalysisshort_notm}}。若要將寫入至 STDOUT 及 STDERR 的應用程式日誌改為轉遞至外部 syslog 伺服器，請遵循[啟用對 syslog 的日誌轉遞](cs_cluster.html#cs_namespace_enable)中的步驟。
+* 因為所有容器都會寫入至相同的檔名，所以請不要使用此方法來轉遞 ReplicaSets 的應用程式日誌。反之，您可以將應用程式中的日誌寫入至 STDOUT 及 STDERR，而這些日誌是以容器日誌形式進行挑選。若要轉遞寫入至 STDOUT 及 STDERR 的應用程式日誌，請遵循[啟用日誌轉遞](cs_cluster.html#cs_log_sources_enable)中的步驟。
 
 開始之前，請先將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為日誌來源所在的叢集。
 
@@ -1873,118 +1483,13 @@ Kubernetes 會區分代表實際硬體的持續性磁區與通常由叢集使用
     ```
     {:pre}
 
-3. 若要建立日誌轉遞配置，請遵循[啟用工作者節點、Kubernetes 系統元件及 Ingress 控制器的日誌轉遞](cs_cluster.html#cs_log_sources_enable)中的步驟。
+3. 若要建立日誌轉遞配置，請遵循[啟用日誌轉遞](cs_cluster.html#cs_log_sources_enable)中的步驟。
 
-#### 啟用工作者節點、Kubernetes 系統元件及 Ingress 控制器的日誌轉遞
-{: #cs_log_sources_enable}
-
-您可以將日誌轉遞至 {{site.data.keyword.loganalysislong_notm}} 或轉遞至外部 syslog 伺服器。如果您將日誌轉遞至 {{site.data.keyword.loganalysisshort_notm}}，則它們會轉遞至您在其中建立叢集的同一個空間。如果您要將某個日誌來源中的日誌轉遞至這兩個日誌收集器伺服器，則必須建立兩個記載配置。
-{:shortdesc}
-
-開始之前：
-
-1. 如果您要將日誌轉遞至外部 syslog 伺服器，可以使用下列兩種方式來設定接受 syslog 通訊協定的伺服器：
-  * 設定並管理自己的伺服器，或讓提供者為您管理。如果提供者為您管理伺服器，請從記載提供者取得記載端點。
-  * 從容器執行 syslog。例如，您可以使用此[部署 .yaml 檔案![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-Bluemix/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml)，來提取在 Kubernet 叢集中執行容器的 Docker 公用映像檔。映像檔會發佈公用叢集 IP 位址上的埠 `514`，並使用這個公用叢集 IP 位址來配置 syslog 主機。**附註**：若要檢視雪梨位置的日誌，您必須將日誌轉遞至外部 syslog 伺服器。
-
-2. 將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為日誌來源所在的叢集。
-
-若要啟用工作者節點、Kubernetes 系統元件或 Ingress 控制器的日誌轉遞，請執行下列動作：
-
-1. 建立日誌轉遞配置。
-
-  * 若要將日誌轉遞至 {{site.data.keyword.loganalysisshort_notm}}，請執行下列指令：
-
-    ```
-    bx cs logging-config-create <my_cluster> --logsource <my_log_source> --type ibm
-    ```
-    {: pre}
-將 <em>&lt;my_cluster&gt;</em> 取代為叢集的名稱或 ID。將 <em>&lt;my_log_source&gt;</em> 取代為日誌來源。接受的值為 `application`、`worker`、`kubernetes` 及 `ingress`。  * 若要將日誌轉遞至外部 syslog 伺服器，請執行下列指令：
-
-    ```
-    bx cs logging-config-create <my_cluster> --logsource <my_log_source> --hostname <log_server_hostname> --port <log_server_port> --type syslog
-    ```
-    {: pre}
-
-    <table>
-    <caption>表 12. 瞭解此指令的元件</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解此指令的元件</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>logging-config-create</code></td>
-    <td>用來為您的日誌來源建立 syslog 日誌轉遞配置的指令。</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;my_cluster&gt;</em></code></td>
-    <td>將 <em>&lt;my_cluster&gt;</em> 取代為叢集的名稱或 ID。</td>
-    </tr>
-    <tr>
-    <td><code>--logsource <em>&lt;my_log_source&gt;</em></code></td>
-    <td>將 <em>&lt;my_log_source&gt;</em> 取代為日誌來源。接受的值為 <code>application</code>、<code>worker</code>、<code>kubernetes</code> 及 <code>ingress</code>。</td>
-    </tr>
-    <tr>
-    <td><code>--hostname <em>&lt;log_server_hostname&gt;</em></code></td>
-    <td>將 <em>&lt;log_server_hostname&gt;</em> 取代為日誌收集器伺服器的主機名稱或 IP 位址。</td>
-    </tr>
-    <tr>
-    <td><code>--port <em>&lt;log_collector_port&gt;</em></code></td>
-    <td>將 <em>&lt;log_server_port&gt;</em> 取代為日誌收集器伺服器的埠。如果您未指定埠，則會將標準埠 <code>514</code> 用於 syslog。</td>
-    </tr>
-    <tr>
-    <td><code>--type syslog</code></td>
-    <td>外部 syslog 伺服器的日誌類型。</td>
-    </tr>
-    </tbody></table>
-
-2. 驗證已建立日誌轉遞配置。
-
-    * 若要列出叢集中的所有記載配置，請執行下列指令：
-      ```
-      bx cs logging-config-get <my_cluster>
-      ```
-      {: pre}
-
-      輸出範例：
-
-      ```
-      Logging Configurations
-      ---------------------------------------------
-      Id                                    Source        Host             Port    Protocol   Paths
-      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes    172.30.162.138   5514    syslog     /var/log/kubelet.log,/var/log/kube-proxy.log
-      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  application   localhost        -       ibm        /var/log/apps/**/*.log,/var/log/apps/**/*.err
-
-      Container Log Namespace configurations
-      ---------------------------------------------
-      Namespace         Host             Port    Protocol
-      default           myhostname.com   5514    syslog
-      my-namespace      localhost        5514    syslog
-      ```
-      {: screen}
-
-    * 若要列出某種類型日誌來源的記載配置，請執行下列指令：
-      ```
-      bx cs logging-config-get <my_cluster> --logsource worker
-      ```
-      {: pre}
-
-      輸出範例：
-
-      ```
-      Id                                    Source      Host        Port   Protocol   Paths
-      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  worker      localhost   5514   syslog     /var/log/syslog,/var/log/auth.log
-      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  worker      -           -      ibm        /var/log/syslog,/var/log/auth.log
-      ```
-      {: screen}
-
-#### 更新日誌收集器伺服器
+### 更新日誌轉遞配置
 {: #cs_log_sources_update}
 
-您可以藉由變更日誌收集器伺服器或日誌類型，來更新應用程式、工作者節點、Kubernetes 系統元件及 Ingress 控制器的記載配置。
+您可以更新容器、應用程式、工作者節點、Kubernetes 系統元件或 Ingress 應用程式負載平衡器的記載配置。
 {: shortdesc}
-
-**附註**：若要檢視雪梨位置的日誌，您必須將日誌轉遞至外部 syslog 伺服器。
 
 開始之前：
 
@@ -1994,17 +1499,17 @@ Kubernetes 會區分代表實際硬體的持續性磁區與通常由叢集使用
 
 2. 將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為日誌來源所在的叢集。
 
-若要變更日誌來源的日誌收集器伺服器，請執行下列動作：
+若要變更記載配置的詳細資料，請執行下列動作：
 
 1. 更新記載配置。
 
     ```
-    bx cs logging-config-update <my_cluster> --id <log_source_id> --logsource <my_log_source> --hostname <log_server_hostname> --port <log_server_port> --type <logging_type>
+    bx cs logging-config-update <my_cluster> <log_config_id> --logsource <my_log_source> --hostname <log_server_hostname_or_IP> --port <log_server_port> --spaceName <cluster_space> --orgName <cluster_org> --type <logging_type>
     ```
     {: pre}
 
     <table>
-    <caption>表 13. 瞭解此指令的元件</caption>
+    <caption>表 12. 瞭解此指令的元件</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解此指令的元件</th>
     </thead>
@@ -2018,20 +1523,28 @@ Kubernetes 會區分代表實際硬體的持續性磁區與通常由叢集使用
     <td>將 <em>&lt;my_cluster&gt;</em> 取代為叢集的名稱或 ID。</td>
     </tr>
     <tr>
-    <td><code>--id <em>&lt;log_source_id&gt;</em></code></td>
-    <td>將 <em>&lt;log_source_id&gt;</em> 取代為日誌來源配置的 ID。</td>
+    <td><code><em>&lt;log_config_id&gt;</em></code></td>
+    <td>將 <em>&lt;log_config_id&gt;</em> 取代為日誌來源配置的 ID。</td>
     </tr>
     <tr>
     <td><code>--logsource <em>&lt;my_log_source&gt;</em></code></td>
-    <td>將 <em>&lt;my_log_source&gt;</em> 取代為日誌來源。接受的值為 <code>application</code>、<code>worker</code>、<code>kubernetes</code> 及 <code>ingress</code>。</td>
+    <td>將 <em>&lt;my_log_source&gt;</em> 取代為日誌來源。接受值為 <code>container</code>、<code>application</code>、<code>worker</code>、<code>kubernetes</code> 及 <code>ingress</code>。</td>
     </tr>
     <tr>
-    <td><code>--hostname <em>&lt;log_server_hostname&gt;</em></code></td>
-    <td>將 <em>&lt;log_server_hostname&gt;</em> 取代為日誌收集器伺服器的主機名稱或 IP 位址。</td>
+    <td><code>--hostname <em>&lt;log_server_hostname_or_IP&gt;</em></code></td>
+    <td>記載類型是 <code>syslog</code> 時，請將 <em>&lt;log_server_hostname_or_IP&gt;</em> 取代為日誌收集器服務的主機名稱或 IP 位址。記載類型是 <code>ibm</code> 時，請將 <em>&lt;log_server_hostname&gt;</em> 取代為 {{site.data.keyword.loganalysislong_notm}} 汲取 URL。您可以在[這裡](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)尋找可用的汲取 URL 清單。如果您未指定汲取 URL，則會使用您在其中建立叢集之地區的端點。</td>
     </tr>
     <tr>
     <td><code>--port <em>&lt;log_collector_port&gt;</em></code></td>
-    <td>將 <em>&lt;log_server_port&gt;</em> 取代為日誌收集器伺服器的埠。如果您未指定埠，則會將標準埠 <code>514</code> 用於 syslog。</td>
+    <td>將 <em>&lt;log_server_port&gt;</em> 取代為日誌收集器伺服器的埠。如果您未指定埠，則會將標準埠 <code>514</code> 用於 <code>syslog</code>，而將 <code>9091</code> 用於 <code>ibm</code>。</td>
+    </tr>
+    <tr>
+    <td><code>--spaceName <em>&lt;cluster_space&gt;</em></code></td>
+    <td>將 <em>&lt;cluster_space&gt;</em> 取代為您要將日誌傳送至其中的空間的名稱。此值僅對日誌類型 <code>ibm</code> 有效且為選用。如果您未指定空間，則會將日誌傳送至帳戶層次。</td>
+    </tr>
+    <tr>
+    <td><code>--orgName <em>&lt;cluster_org&gt;</em></code></td>
+    <td>將 <em>&lt;cluster_org&gt;</em> 取代為空間所在組織的名稱。此值僅對日誌類型 <code>ibm</code> 有效，而且如果您已指定空間，則這是必要值。</td>
     </tr>
     <tr>
     <td><code>--type <em>&lt;logging_type&gt;</em></code></td>
@@ -2041,45 +1554,41 @@ Kubernetes 會區分代表實際硬體的持續性磁區與通常由叢集使用
 
 2. 驗證已更新日誌轉遞配置。
 
-  * 若要列出叢集中的所有記載配置，請執行下列指令：
-    ```
-    bx cs logging-config-get <my_cluster>
-    ```
-    {: pre}
+    * 若要列出叢集中的所有記載配置，請執行下列指令：
 
-    輸出範例：
+      ```
+      bx cs logging-config-get <my_cluster>
+      ```
+      {: pre}
 
-    ```
-    Logging Configurations
-    ---------------------------------------------
-    Id                                    Source        Host             Port    Protocol   Paths
-    f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes    172.30.162.138   5514    syslog     /var/log/kubelet.log,/var/log/kube-proxy.log
-    5bd9c609-13c8-4c48-9d6e-3a6664c825a9  application   localhost        -       ibm        /var/log/apps/**/*.log,/var/log/apps/**/*.err
+      輸出範例：
 
-    Container Log Namespace configurations
-    ---------------------------------------------
-    Namespace         Host             Port    Protocol
-    default           myhostname.com   5514    syslog
-    my-namespace      localhost        5514    syslog
-    ```
-    {: screen}
+      ```
+      Id                                    Source       Namespace     Host                          Port   Org      Space      Protocol     Paths
+      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes   -             172.30.162.138                5514   -        -          syslog       /var/log/kubelet.log,/var/log/kube-proxy.log
+      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  application  -             ingest.logging.ng.bluemix.net 9091   my_org   my_space   ibm          /var/log/apps/**/*.log,/var/log/apps/**/*.err
+      8a284f1a-451c-4c48-b1b4-a4e6b977264e  containers   my-namespace  myhostname.common             5514   -        -          syslog       -
+      ```
+      {: screen}
 
-  * 若要列出某種類型日誌來源的記載配置，請執行下列指令：
-    ```
-    bx cs logging-config-get <my_cluster> --logsource worker
-    ```
-    {: pre}
+    * 若要列出某種類型日誌來源的記載配置，請執行下列指令：
 
-    輸出範例：
+      ```
+      bx cs logging-config-get <my_cluster> --logsource worker
+      ```
+      {: pre}
 
-    ```
-    Id                                    Source      Host        Port   Protocol   Paths
-    f4bc77c0-ee7d-422d-aabf-a4e6b977264e  worker      localhost   5514   syslog     /var/log/syslog,/var/log/auth.log
-    5bd9c609-13c8-4c48-9d6e-3a6664c825a9  worker      -           -      ibm        /var/log/syslog,/var/log/auth.log
-    ```
-    {: screen}
+      輸出範例：
 
-#### 停止日誌轉遞
+      ```
+      Id                                    Source    Namespace   Host                            Port   Org    Space     Protocol    Paths
+      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  worker    -           ingest.logging.ng.bluemix.net   9091   -      -         ibm         /var/log/syslog,/var/log/auth.log
+      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  worker    -           172.30.162.138                  5514   -      -         syslog      /var/log/syslog,/var/log/auth.log
+      ```
+
+      {: screen}
+
+### 停止日誌轉遞
 {: #cs_log_sources_delete}
 
 您可以藉由刪除記載配置來停止轉遞日誌。
@@ -2089,10 +1598,137 @@ Kubernetes 會區分代表實際硬體的持續性磁區與通常由叢集使用
 1. 刪除記載配置。
 
     ```
-    bx cs logging-config-rm <my_cluster> --id <log_source_id>
+    bx cs logging-config-rm <my_cluster> <log_config_id>
     ```
     {: pre}
-    將 <em>&lt;my_cluster&gt;</em> 取代為記載配置所在的叢集的名稱，並將 <em>&lt;log_source_id&gt;</em> 取代為日誌來源配置的 ID。
+    將 <em>&lt;my_cluster&gt;</em> 取代為記載配置所在叢集的名稱，並將 <em>&lt;log_config_id&gt;</em> 取代為日誌來源配置的 ID。
+
+### 針對 Kubernetes API 審核日誌配置日誌轉遞
+{: #cs_configure_api_audit_logs}
+
+Kubernetes API 審核日誌會從叢集中擷取任何 Kubernetes API 伺服器呼叫。若要開始收集 Kubernetes API 審核日誌，您可以配置 Kubernetes API 伺服器，為您的叢集設定 Webhook 後端。此 Webhook 後端可將日誌傳送至遠端伺服器。如需 Kubernetes 審核日誌的相關資訊，請參閱 Kubernetes 文件中的<a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="_blank">審核主題 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。
+
+**附註**：
+* 只有 Kubernetes 1.7 版及更新版本才支援轉遞 Kubernetes API 審核日誌。
+* 預設審核原則目前用於所有具有此記載配置的叢集。
+
+#### 啟用 Kubernetes API 審核日誌轉遞
+{: #cs_audit_enable}
+
+開始之前，請先將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為您要從中收集 API 伺服器審核日誌的叢集。
+
+1. 設定 API 伺服器配置的 Webhook 後端。將根據您在此指令旗標中提供的資訊，來建立 Webhook 配置。如果您未在旗標中提供任何資訊，則會使用預設 Webhook 配置。
+
+    ```
+    bx cs apiserver-config-set audit-webhook <my_cluster> --remoteServer <server_URL_or_IP> --caCert <CA_cert_path> --clientCert <client_cert_path> --clientKey <client_key_path>
+    ```
+    {: pre}
+
+    <table>
+    <caption>表 13. 瞭解此指令的元件</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png"/> 瞭解此指令的元件</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>apiserver-config-set</code></td>
+    <td>設定叢集 Kubernetes API 伺服器配置之選項的指令。</td>
+    </tr>
+    <tr>
+    <td><code>audit-webhook</code></td>
+    <td>設定叢集 Kubernetes API 伺服器之審核 Webhook 配置的次指令。</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;my_cluster&gt;</em></code></td>
+    <td>將 <em>&lt;my_cluster&gt;</em> 取代為叢集的名稱或 ID。</td>
+    </tr>
+    <tr>
+    <td><code>--remoteServer <em>&lt;server_URL&gt;</em></code></td>
+    <td>將 <em>&lt;server_URL&gt;</em> 取代為您要將日誌傳送至其中的遠端記載服務的 URL 或 IP 位址。如果您提供不安全的伺服器 URL，則會忽略任何憑證。如果您未指定遠端伺服器 URL 或 IP 位址，則會使用預設 QRadar 配置，並將日誌傳送至叢集所在地區的 QRadar 實例。</td>
+    </tr>
+    <tr>
+    <td><code>--caCert <em>&lt;CA_cert_path&gt;</em></code></td>
+    <td>將 <em>&lt;CA_cert_path&gt;</em> 取代為用來驗證遠端記載服務之 CA 憑證的檔案路徑。</td>
+    </tr>
+    <tr>
+    <td><code>--clientCert <em>&lt;client_cert_path&gt;</em></code></td>
+    <td>將 <em>&lt;client_cert_path&gt;</em> 取代為用來對遠端記載服務進行鑑別之用戶端憑證的檔案路徑。</td>
+    </tr>
+    <tr>
+    <td><code>--clientKey <em>&lt;client_key_path&gt;</em></code></td>
+    <td>將 <em>&lt;client_key_path&gt;</em> 取代為用來連接至遠端記載服務之對應用戶端金鑰的檔案路徑。</td>
+    </tr>
+    </tbody></table>
+
+2. 檢視遠端記載服務的 URL，驗證已啟用日誌轉遞。
+
+    ```
+    bx cs apiserver-config-get audit-webhook <my_cluster>
+    ```
+    {: pre}
+
+    輸出範例：
+    ```
+    OK
+    Server:			https://8.8.8.8
+    ```
+    {: screen}
+
+3. 重新啟動 Kubernetes 主節點，以套用配置更新。
+
+    ```
+    bx cs apiserver-refresh <my_cluster>
+    ```
+    {: pre}
+
+#### 停止 Kubernetes API 審核日誌轉遞
+{: #cs_audit_delete}
+
+您可以停用叢集 API 伺服器的 Webhook 後端配置，來停止轉遞審核日誌。
+
+開始之前，請先將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為您要從中停止收集 API 伺服器審核日誌的叢集。
+
+1. 停用叢集 API 伺服器的 Webhook 後端配置。
+
+    ```
+    bx cs apiserver-config-unset audit-webhook <my_cluster>
+    ```
+    {: pre}
+
+2. 重新啟動 Kubernetes 主節點，以套用配置更新。
+
+    ```
+    bx cs apiserver-refresh <my_cluster>
+    ```
+    {: pre}
+
+### 檢視日誌
+{: #cs_view_logs}
+
+若要檢視叢集及容器的日誌，您可以使用標準 Kubernetes 及 Docker 記載特性。
+{:shortdesc}
+
+#### {{site.data.keyword.loganalysislong_notm}}
+{: #cs_view_logs_k8s}
+
+若為標準叢集，日誌位於您在建立 Kubernetes 叢集時所登入的 {{site.data.keyword.Bluemix_notm}} 帳戶。如果您在建立叢集或建立記載配置時指定了 {{site.data.keyword.Bluemix_notm}} 空間，則日誌位於該空間中。日誌是在容器外部進行監視及轉遞。您可以使用 Kibana 儀表板來存取容器的日誌。如需記載的相關資訊，請參閱 [{{site.data.keyword.containershort_notm}} 的記載功能](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes)。
+
+**附註**：如果您在建立叢集或記載配置時指定了空間，則帳戶擁有者必須對該空間具有「管理員」、「開發人員」或「審核員」許可權，才能檢視日誌。如需變更 {{site.data.keyword.containershort_notm}} 存取原則及許可權的相關資訊，請參閱[管理叢集存取](cs_cluster.html#cs_cluster_user)。在變更許可權之後，日誌最多需要 24 小時才會開始出現。
+
+若要存取 Kibana 儀表板，請移至下列其中一個 URL，然後選取您建立叢集所在的 {{site.data.keyword.Bluemix_notm}} 帳戶或空間。
+- 美國南部及美國東部：https://logging.ng.bluemix.net
+- 英國南部或歐盟中部：https://logging.eu-fra.bluemix.net
+- 亞太地區南部：https://logging.au-syd.bluemix.net
+
+如需檢視日誌的相關資訊，請參閱[從 Web 瀏覽器導覽至 Kibana](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser)。
+
+#### Docker 日誌
+{: #cs_view_logs_docker}
+
+您可以運用內建 Docker 記載功能來檢閱標準 STDOUT 及 STDERR 輸出串流的活動。如需相關資訊，請參閱[檢視在 Kubernetes 叢集中執行的容器的容器日誌](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes)。
+
+<br />
+
 
 ## 配置叢集監視
 {: #cs_monitoring}
@@ -2127,6 +1763,7 @@ Kubernetes 會區分代表實際硬體的持續性磁區與通常由叢集使用
 {: #cs_configure_worker_monitoring}
 
 {{site.data.keyword.containerlong_notm}} 的「自動回復」系統可以部署至 Kubernetes 1.7 版或更新版本的現有叢集。「自動回復」系統會使用各種檢查來查詢工作者節點性能狀態。如果「自動回復」根據配置的檢查，偵測到性能不佳的工作者節點，則「自動回復」會觸發更正動作，如在工作者節點上重新載入 OS。一次只有一個工作者節點進行一個更正動作。工作者節點必須先順利完成更正動作，然後任何其他工作者節點才能進行更正動作。
+如需相關資訊，請參閱此[自動回復部落格文章 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/)。
 **附註**：「自動回復」至少需要一個性能良好的節點，才能正常運作。只在具有兩個以上工作者節點的叢集中，配置具有主動檢查的「自動回復」。
 
 開始之前，請先將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為您要在其中檢查工作者節點狀態的叢集。
@@ -2180,7 +1817,7 @@ Kubernetes 會區分代表實際硬體的持續性磁區與通常由叢集使用
     {:codeblock}
 
     <table>
-    <caption>表 15. 瞭解 YAML 檔案元件</caption>
+    <caption>表 14. 瞭解 YAML 檔案元件</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
     </thead>
@@ -2404,7 +2041,7 @@ Weave Scope 提供 Kubernetes 叢集內資源（包括服務、Pod、容器、�
 當您完成叢集時，即可予以移除，讓叢集不再使用資源。
 {:shortdesc}
 
-不再需要使用 {{site.data.keyword.Bluemix_notm}} 精簡或「隨收隨付制」帳戶所建立的精簡及標準叢集時，使用者必須手動予以移除。
+不再需要使用「隨收隨付制」帳戶所建立的精簡及標準叢集時，使用者必須手動予以移除。
 
 當您刪除叢集時，也會刪除叢集上的資源（包括容器、Pod、連結服務及 Secret）。如果您未在刪除叢集時刪除儲存空間，則可以透過 {{site.data.keyword.Bluemix_notm}} GUI 中的 IBM Cloud 基礎架構 (SoftLayer) 儀表板來刪除儲存空間。基於每月計費週期，不能在月底最後一天刪除持續性磁區宣告。如果您在該月份的最後一天刪除持續性磁區宣告，則刪除會保持擱置，直到下個月開始為止。
 

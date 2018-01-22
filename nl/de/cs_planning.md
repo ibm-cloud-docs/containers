@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-28"
+lastupdated: "2017-12-13"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2017-11-28"
 # Cluster und Apps planen
 {: #cs_planning}
 
-Lernen Sie, wie Sie die richtigen Entscheidungen beim Konfigurieren und Anpassen von Kubernetes-Clustern in {{site.data.keyword.containershort_notm}} treffen und die Anforderungen Ihrer Organisation erfüllen können. An einigen dieser Konfigurationen können nach der Erstellung eines Clusters keine Änderungen mehr durchgeführt werden. Wenn Sie sich im Vorfeld über diese Konfigurationen informieren, können Sie sicherstellen, dass den Entwicklungsteams bei Bedarf alle Ressourcen wie Hauptspeicher, Plattenspeicherplatz und IP-Adressen zur Verfügung stehen.
+Lernen Sie, wie Sie die richtigen Entscheidungen beim Konfigurieren und Anpassen von Kubernetes-Clustern in {{site.data.keyword.containershort_notm}} treffen. An einigen dieser Konfigurationen können nach der Erstellung eines Clusters keine Änderungen mehr durchgeführt werden. Wenn Sie sich im Vorfeld über diese Konfigurationen informieren, können Sie sicherstellen, dass den Entwicklungsteams bei Bedarf alle Ressourcen wie Hauptspeicher, Plattenspeicherplatz und IP-Adressen zur Verfügung stehen.
 {:shortdesc}
 
 <br />
@@ -28,12 +28,12 @@ Lernen Sie, wie Sie die richtigen Entscheidungen beim Konfigurieren und Anpassen
 ## Vergleich von Lite-Clustern und Standardclustern
 {: #cs_planning_cluster_type}
 
-Sie können Lite- oder Standardcluster erstellen. Erstellen Sie Lite-Cluster, um sich mit den Kubernetes-Leistungsmerkmalen vertraut zu machen und diese zu testen. Mit Standardclustern können Sie das vollständige Leistungsspektrum von Kubernetes zum Bereitstellen von Apps verwenden.
+Sie können Lite- oder Standardcluster erstellen. Testen Sie Lite-Cluster, um sich mit einigen Kubernetes-Leistungsmerkmalen vertraut zu machen. Oder erstellen Sie Standardcluster, um das vollständige Leistungsspektrum von Kubernetes zum Bereitstellen von Apps zu nutzen.
 {:shortdesc}
 
 |Merkmale|Lite-Cluster|Standardcluster|
 |---------------|-------------|-----------------|
-|[Verfügbar in {{site.data.keyword.Bluemix_notm}} Public](cs_ov.html#cs_ov)|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
+|[Verfügbar in {{site.data.keyword.Bluemix_notm}}](cs_ov.html#cs_ov)|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
 |[Netzbetrieb in Clustern](#cs_planning_private_network)|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
 |[Öffentlicher App-Zugriff durch einen NodePort-Service](#cs_nodeport)|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
 |[Benutzerzugriffsverwaltung](cs_cluster.html#cs_cluster_user)|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
@@ -44,7 +44,7 @@ Sie können Lite- oder Standardcluster erstellen. Erstellen Sie Lite-Cluster, um
 |[Öffentlicher App-Zugriff durch einen Ingress-Service](#cs_ingress)| |<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
 |[Portierbare öffentliche IP-Adressen](cs_apps.html#cs_cluster_ip_subnet)| |<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
 |[Protokollierung und Überwachung](cs_cluster.html#cs_logging)| |<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
-|[Verfügbar in {{site.data.keyword.Bluemix_dedicated_notm}} (Closed Beta)](cs_ov.html#dedicated_environment)| |<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
+|[Verfügbar in {{site.data.keyword.Bluemix_dedicated_notm}}](cs_dedicated.html#dedicated_environment)| |<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
 {: caption="Tabelle 1. Unterschiede zwischen Lite-Clustern und Standardclustern" caption-side="top"}
 
 <br />
@@ -66,11 +66,11 @@ Betrachten Sie diese potenziellen Clusterkonfigurationen, die nach zunehmendem G
 2.  Zwei Cluster, die an verschiedenen Standorten in derselben Region ausgeführt werden und jeweils mehrere Workerknoten besitzen.
 3.  Zwei Cluster, die in verschiedenen Regionen ausgeführt werden und jeweils mehrere Workerknoten besitzen.
 
-Erfahren Sie mehr über die Verwendung dieser Verfahren, um die Verfügbarkeit Ihres Clusters zu verbessern:
+Steigern Sie die Verfügbarkeit Ihres Clusters mithilfe dieser Verfahren: 
 
 <dl>
-<dt>Zur Streuung der App-Instanzen eine ausreichende Anzahl an Workerknoten einbeziehen</dt>
-<dd>Damit Hochverfügbarkeit erzielt werden kann, sollten Sie den Entwicklern der App die Streuung ihrer Container auf mehrere Workerknoten pro Cluster gewähren. Drei Workerknoten sind in der Lage, die Ausfallzeit eines Workerknotens so abzufangen, ohne dass hierbei die Nutzung der App unterbrochen wird. Sie können bei der Erstellung eines Clusters über die [{{site.data.keyword.Bluemix_notm}}-GUI](cs_cluster.html#cs_cluster_ui) oder die [-CLI](cs_cluster.html#cs_cluster_cli) angeben, wie viele Workerknoten einbezogen werden sollen. Kubernetes beschränkt die maximale Anzahl von Workerknoten, die in einem Cluster vorhanden sein können. Weitere Informationen finden Sie unter [Worker node and pod quotas ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/admin/cluster-large/).
+<dt>Streuung von Apps durch Verteilen auf mehrere Workerknoten </dt>
+<dd>Erlauben Sie den Entwicklern die Streuung ihrer Apps in Containern auf mehrere Workerknoten pro Cluster. Eine App-Instanz in jedem dritten Workerknoten ermöglicht, die Ausfallzeit eines Workerknotens abzufangen, ohne dass die Nutzung der App unterbrochen wird. Sie können angeben, wie viele Workerknoten eingeschlossen werden, wenn Sie einen Cluster über die [{{site.data.keyword.Bluemix_notm}}-GUI](cs_cluster.html#cs_cluster_ui) oder die [CLI](cs_cluster.html#cs_cluster_cli) erstellen. Kubernetes beschränkt die maximale Anzahl von Workerknoten, die in einem Cluster vorhanden sein können. Beachten Sie deshalb die [Kontingente für Workerknoten und Pods ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/admin/cluster-large/).
 <pre class="codeblock">
 <code>bx cs cluster-create --location &lt;dal10&gt; --workers 3 --public-vlan &lt;meine_id_des_öffentlichen_vlan&gt; --private-vlan &lt;meine_id_des_privaten_vlan&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;mein_cluster&gt;</code>
 </pre>
@@ -89,9 +89,9 @@ Erfahren Sie mehr über die Verwendung dieser Verfahren, um die Verfügbarkeit I
 </pre>
 </dd>
 <dt>Streuung von Apps durch Verteilen auf mehrere Cluster in verschiedenen Regionen</dt>
-<dd>Wenn Sie Anwendungen auf mehrere Cluster in verschiedenen Regionen verteilen, kann der Lastausgleich auf der Grundlage der Region erfolgen, in der sich der Benutzer befindet. Wenn der Cluster, die Hardware oder gar ein kompletter Standort in einer Region ausfällt, wird der Datenverkehr an den Container weitergeleitet,
+<dd>Wenn Sie Apps auf mehrere Cluster in verschiedenen Regionen verteilen, kann der Lastausgleich auf der Grundlage der Region erfolgen, in der sich der Benutzer befindet. Wenn der Cluster, die Hardware oder gar ein kompletter Standort in einer Region ausfällt, wird der Datenverkehr an den Container weitergeleitet,
 der an einem anderen Standort bereitgestellt ist.
-<p><strong>Wichtig:</strong> Nachdem Sie Ihre angepasste Domäne konfiguriert haben, können Sie die Cluster anhand der folgenden Befehle erstellen.</p>
+<p><strong>Wichtig:</strong> Nachdem Sie eine angepasste Domäne konfiguriert haben, können Sie die Cluster anhand der folgenden Befehle erstellen. </p>
 <p>Standort
 1:</p>
 <pre class="codeblock">
@@ -111,7 +111,7 @@ der an einem anderen Standort bereitgestellt ist.
 ## Konfiguration von Workerknoten
 {: #cs_planning_worker_nodes}
 
-Ein Kubernetes-Cluster besteht aus Workerknoten der virtuellen Maschine, die vom Kubernetes-Master zentral überwacht und verwaltet werden. Clusteradministratoren müssen entscheiden, wie sie den Cluster aus Workerknoten einrichten, um sicherzustellen, dass den Clusterbenutzern alle Ressourcen
+Ein Kubernetes-Cluster besteht aus Workerknoten, die vom Kubernetes-Master zentral überwacht und verwaltet werden. Clusteradministratoren entscheiden, wie sie den Cluster aus Workerknoten einrichten, um sicherzustellen, dass den Clusterbenutzern alle Ressourcen
 für die Bereitstellung und Ausführung von Apps im Cluster zur Verfügung stehen.
 {:shortdesc}
 
@@ -121,9 +121,7 @@ Wenn Sie einen Standardcluster erstellen, werden in IBM Cloud Infrastructure (So
 ### Hardware für Workerknoten
 {: #shared_dedicated_node}
 
-Jeder Arbeiterknoten wird als virtuelle Maschine auf physischer Hardware eingerichtet. Wenn Sie einen Standardcluster in {{site.data.keyword.Bluemix_notm}} Public erstellen, müssen Sie
-auswählen, ob die zugrunde liegende Hardware von mehreren {{site.data.keyword.IBM_notm}} Kunden gemeinsam genutzt werden kann (Multi-Tenant-Konfiguration) oder Sie die ausschließlich
-Ihnen vorbehaltene, dedizierte Nutzung vorziehen (Single-Tenant-Konfiguration).
+Jeder Arbeiterknoten wird als virtuelle Maschine auf physischer Hardware eingerichtet. Wenn Sie einen Standardcluster in {{site.data.keyword.Bluemix_notm}} erstellen, müssen Sie auswählen, ob die zugrunde liegende Hardware von mehreren {{site.data.keyword.IBM_notm}} Kunden gemeinsam genutzt werden kann (Multi-Tenant-Konfiguration) oder Sie die ausschließlich Ihnen vorbehaltene, dedizierte Nutzung vorziehen (Single-Tenant-Konfiguration).
 {:shortdesc}
 
 Bei einer Multi-Tenant-Konfiguration werden physische Ressourcen wie CPU und Speicher von allen virtuellen Maschinen, die auf derselben physischen Hardware bereitgestellt wurden, gemeinsam genutzt. Um sicherzustellen, dass jede virtuelle Maschine unabhängig von anderen Maschinen ausgeführt werden kann, segmentiert ein VM-Monitor, d. h. eine Überwachungsfunktion für virtuelle Maschinen, die auch als Hypervisor bezeichnet wird, die physischen Ressourcen in isolierte Entitäten und ordnet diese einer virtuellen Maschine als dedizierte Ressourcen zu. Dies wird als Hypervisor-Isolation bezeichnet.
@@ -132,10 +130,7 @@ Bei einer Single-Tenant-Konfiguration ist die Nutzung aller physischen Ressource
 
 Gemeinsam genutzte Knoten sind in der Regel kostengünstiger als dedizierte Knoten, weil die Kosten für die ihnen zugrunde liegende Hardware von mehreren Kunden getragen werden. Bei der Entscheidungsfindung hinsichtlich gemeinsam genutzter Knoten versus dedizierter Knoten sollten Sie mit Ihrer Rechtsabteilung Rücksprache halten, um zu klären, welcher Grad an Infrastrukturisolation und Compliance für Ihre App-Umgebung erforderlich ist.
 
-Wenn Sie einen Lite-Cluster erstellen, wird Ihr Workerknoten im Konto von IBM Cloud Infrastructure (SoftLayer) für {{site.data.keyword.IBM_notm}} automatisch als gemeinsam genutzter Knoten eingerichtet.
-
-Wenn Sie einen Cluster in {{site.data.keyword.Bluemix_dedicated_notm}} erstellen, wird nur eine Single-Tenant-Konfiguration verwendet und die Nutzung aller physischen Ressourcen ist ausschließlich Ihnen vorbehalten. Sie stellen mehrere
-Workerknoten als virtuelle Maschinen auf demselben physischen Host bereit.
+Wenn Sie einen Lite-Cluster erstellen, wird Ihr Workerknoten im Konto von IBM Cloud Infrastructure (SoftLayer) automatisch als gemeinsam genutzter Knoten eingerichtet. 
 
 <br />
 
@@ -157,14 +152,13 @@ Jeder Maschinentyp verfügt über eine andere Speicherkapazität. Wenn weniger S
 |128 GB| 4096 MB |
 |242 GB| 4096 MB |
 
-Um zu sehen, wie viel Speicher auf dem Workerknoten belegt ist, führen Sie [kubectl top node ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/user-guide/kubectl/v1.8/#top) aus.
+Um zu sehen, wie viel Speicher auf dem Workerknoten belegt ist, führen Sie [kubectl top node ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#top) aus.
 
 
 ## Zuständigkeiten beim Cluster-Management
 {: #responsibilities}
 
-Informieren Sie sich über die Zuständigkeiten, die Sie gemeinsam mit IBM bei der Verwaltung von Clustern haben. Zur Überprüfung der Zuständigkeiten für Cluster, die in {{site.data.keyword.Bluemix_dedicated_notm}}-Umgebungen verwaltet werden, sollten Sie hingegen die Informationen im Abschnitt [Unterschiede in der Clusterverwaltung zwischen den Cloudumgebungen](cs_ov.html#env_differences) lesen.
-{:shortdesc}
+Informieren Sie sich über die Zuständigkeiten, die Sie gemeinsam mit IBM bei der Verwaltung von Clustern haben. {:shortdesc}
 
 **IBM ist für Folgendes verantwortlich:**
 
@@ -340,9 +334,8 @@ Wenn Sie einen Cluster erstellen, wird jeder Cluster automatisch mit einem priva
 
 |Clustertyp|Manager des privaten VLANs für den Cluster|
 |------------|-------------------------------------------|
-|Lite-Cluster in {{site.data.keyword.Bluemix_notm}} Public|{{site.data.keyword.IBM_notm}}|
-|Standardcluster in {{site.data.keyword.Bluemix_notm}} Public|Sie bei Ihrem Konto von IBM Cloud Infrastructure (SoftLayer)<p>**Tipp:** Für den Zugriff auf alle VLANs in Ihrem Konto aktivieren Sie [VLAN-Spanning ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://knowledgelayer.softlayer.com/procedure/enable-or-disable-vlan-spanning).</p>|
-|Standardcluster in {{site.data.keyword.Bluemix_dedicated_notm}}|{{site.data.keyword.IBM_notm}}|
+|Lite-Cluster in {{site.data.keyword.Bluemix_notm}}|{{site.data.keyword.IBM_notm}}|
+|Standardcluster in {{site.data.keyword.Bluemix_notm}}|Sie bei Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) <p>**Tipp:** Für den Zugriff auf alle VLANs in Ihrem Konto aktivieren Sie [VLAN-Spanning ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://knowledgelayer.softlayer.com/procedure/enable-or-disable-vlan-spanning).</p>|
 {: caption="Tabelle 2. Zuständigkeiten beim Management von privaten VLANs" caption-side="top"}
 
 Allen Pods, die auf einem Workerknoten bereitgestellt werden, wird ebenfalls eine private IP-Adresse zugewiesen. Pods wird eine
@@ -365,13 +358,12 @@ Weitere Informationen zum Erstellen eines Service vom Typ 'Cluster-IP' finden Si
 Wenn Sie einen Cluster erstellen, muss jeder Cluster mit einem öffentlichen VLAN verbunden sein. Das öffentliche VLAN bestimmt, welche öffentliche IP-Adresse einem Workerknoten während der Clustererstellung zugewiesen wird.
 {:shortdesc}
 
-Die öffentliche Netzschnittstelle für Workerknoten in Lite-Clustern und Standardclustern wird anhand der Calico-Netzrichtlinien geschützt. Diese Richtlinien blockieren standardmäßig den Großteil des eingehenden Datenverkehrs einschließlich des SSH-Datenverkehrs. Allerdings wird der eingehende Datenverkehr, der zur ordnungsgemäßen Funktion von Kubernetes erforderlich ist, zugelassen. Dies gilt auch für die Verbindungen zu NodePort-, Loadbalancer- und Ingress-Services. Weitere Informationen zu diesen Richtlinien und zur Vorgehensweise bei der Änderung dieser Richtlinien finden Sie in [Netzrichtlinien](cs_security.html#cs_security_network_policies).
+Die öffentliche Netzschnittstelle für Workerknoten in Lite-Clustern und Standardclustern wird anhand der Calico-Netzrichtlinien geschützt. Diese Richtlinien blockieren standardmäßig den Großteil des eingehenden Datenverkehrs. Allerdings wird der eingehende Datenverkehr, der zur ordnungsgemäßen Funktion von Kubernetes erforderlich ist, zugelassen. Dies gilt auch für die Verbindungen zu NodePort-, Loadbalancer- und Ingress-Services. Weitere Informationen zu diesen Richtlinien und zur Vorgehensweise bei der Änderung dieser Richtlinien finden Sie in [Netzrichtlinien](cs_security.html#cs_security_network_policies).
 
 |Clustertyp|Manager des öffentlichen VLANs für den Cluster|
 |------------|------------------------------------------|
-|Lite-Cluster in {{site.data.keyword.Bluemix_notm}} Public|{{site.data.keyword.IBM_notm}}|
-|Standardcluster in {{site.data.keyword.Bluemix_notm}} Public|Sie bei Ihrem Konto von IBM Cloud Infrastructure (SoftLayer)|
-|Standardcluster in {{site.data.keyword.Bluemix_dedicated_notm}}|{{site.data.keyword.IBM_notm}}|
+|Lite-Cluster in {{site.data.keyword.Bluemix_notm}}|{{site.data.keyword.IBM_notm}}|
+|Standardcluster in {{site.data.keyword.Bluemix_notm}}|Sie bei Ihrem Konto von IBM Cloud Infrastructure (SoftLayer)|
 {: caption="Tabelle 3. Zuständigkeiten beim Management von VLANs" caption-side="top"}
 
 Je nachdem, ob Sie einen Lite-Cluster oder einen Standardcluster erstellt haben, können Sie zwischen den folgenden Optionen auswählen, um eine App öffentlich zugänglich zu machen.
@@ -407,7 +399,7 @@ Machen Sie einen Port zugänglich und verwenden Sie die öffentliche oder privat
 {:shortdesc}
 
 
-Wenn Sie einen Standardcluster erstellen, fordert {{site.data.keyword.containershort_notm}} automatisch fünf portierbare öffentliche IP-Adressen und fünf private IP-Adressen an und richtet diese bei der Erstellung des Clusters in Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) ein. Zwei der portierbaren IP-Adressen (eine öffentliche und eine private) werden für den [Ingress-Controller](#cs_ingress) verwendet. Vier portierbare öffentliche und vier private IP-Adressen können verwendet werden, um Apps verfügbar zu machen, indem Sie einen LoadBalancer-Service erstellen.
+Wenn Sie einen Standardcluster erstellen, fordert {{site.data.keyword.containershort_notm}} automatisch fünf portierbare öffentliche IP-Adressen und fünf portierbare private IP-Adressen an und richtet diese bei der Erstellung des Clusters in Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) ein. Zwei der portierbaren IP-Adressen (eine öffentliche und eine private) werden für [Ingress-Lastausgleichsfunktionen für Anwendungen](#cs_ingress) verwendet. Vier portierbare öffentliche und vier portierbare private IP-Adressen können verwendet werden, um Apps verfügbar zu machen, indem Sie einen LoadBalancer-Service erstellen.
 
 Wenn Sie einen Kubernetes-LoadBalancer-Service in einem Cluster in einem öffentlichen VLAN erstellen, wird eine externe Lastausgleichsfunktion erstellt. Eine der vier verfügbaren öffentlichen IP-Adressen wird der Lastausgleichsfunktion zugewiesen. Sind keine portierbaren öffentlichen IP-Adresse verfügbar, schlägt die Erstellung des 'LoadBalancer'-Service fehl. Der LoadBalancer-Service fungiert als externer Einstiegspunkt für eingehende Anforderungen an die App. Anders als bei NodePort-Services können Sie Ihrer Lastausgleichsfunktion jeden beliebigen Port zuweisen und sind dabei nicht an einen bestimmten Portnummernbereich gebunden. Die dem LoadBalancer-Service zugewiesene portierbare öffentliche IP-Adresse ist dauerhaft und ändert sich nicht, wenn ein Workerknoten entfernt oder neu erstellt wird. Dadurch bietet der LoadBalancer-Service eine höhere Verfügbarkeit als der NodePort-Service. Um vom Internet aus auf den LoadBalancer-Service zuzugreifen, können Sie die öffentliche IP-Adresse Ihrer Lastausgleichsfunktion in Verbindung mit der zugewiesenen Portnummer im Format `<ip_address>:<port>`.
 
@@ -498,6 +490,9 @@ Weitere Informationen dazu, wie Sie auf eine öffentliche oder eine private Regi
 {: #cs_planning_apps_storage}
 
 Ein Container ist designbedingt kurzlebig. Sie haben jedoch, wie im Diagramm dargestellt, die Wahl zwischen mehreren Optionen, um Daten für den Fall eines Container-Failovers persistent zu speichern und Daten zwischen mehreren Containern gemeinsam zu nutzen.
+
+
+**Hinweis**: Wenn Sie über eine Firewall verfügen, [gewähren Sie Egress-Zugriff](cs_security.html#opening_ports) für die IBM Cloud Infrastructure (SoftLayer)-IP-Bereiche der Standorte (Rechenzentren), in denen sich Ihre Cluster befinden, damit Sie Persistent Volume Claims erstellen können.
 {:shortdesc}
 
 ![Optionen für persistentes Speichern bei Bereitstellungen in Kubernetes-Clustern](images/cs_planning_apps_storage.png)
@@ -505,7 +500,7 @@ Ein Container ist designbedingt kurzlebig. Sie haben jedoch, wie im Diagramm dar
 |Option|Beschreibung|
 |------|-----------|
 |Option 1: Verwenden von `/emptyDir`, um Daten unter Verwendung des verfügbaren Plattenspeichers auf dem Workerknoten zu speichern<p>Dieses Feature ist nur für Lite-Cluster und Standardcluster verfügbar.</p>|Bei dieser Option können Sie auf dem Plattenspeicher Ihres Workerknotens einen leeren Datenträger erstellen, der einem Pod zugewiesen ist. Der Container in diesem Pod kann auf diesen Datenträger schreiben und von ihm lesen. Da der Datenträger einem ganz bestimmten Pod zugewiesen ist, können Daten nicht mit anderen Pods in einer Replikatgruppe gemeinsam genutzt werden.<p>Ein `/emptyDir`-Datenträger und die in ihm enthaltenen Daten werden entfernt, sobald der zugewiesene Pod endgültig vom Workerknoten gelöscht wird.</p><p>**Hinweis:** Wenn der Container im Pod ausfällt, sind die im Datenträger enthaltenen Daten trotzdem noch auf dem Workerknoten verfügbar.</p><p>Weitere Informationen finden Sie unter [Kubernetes-Datenträger ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/storage/volumes/).</p>|
-|Option 2: Erstellen eines Persistent Volume Claims (PVCs), um NFS-basierten persistenten Speicher für die Bereitstellung einzurichten<p>Dieses Feature ist nur für Standardcluster verfügbar.</p>|Diese Option bietet persistente Speicherung von App- und Containerdaten durch eine unbegrenzte Anzahl von NFS-Dateifreigaben und Persistent Volumes (PVs). Sie erstellen einen [Persistent Volume Claim](cs_apps.html) (PVC), um eine Anforderung für NFS-basierten Dateispeicher zu stellen. {{site.data.keyword.containershort_notm}} stellt vordefinierte Speicherklassen bereit, die den Größenbereich des Speichers, die E/A-Operationen pro Sekunde sowie die Lese- und Schreibberechtigungen für den Datenträger definieren. Beim Erstellen Ihres Persistent Volume Claims können Sie zwischen diesen Speicherklassen wählen. Nachdem Sie einen Persistent Volume Claim (PVC) übergeben haben, richtet {{site.data.keyword.containershort_notm}} dynamisch ein Persistent Volume (PV) ein, das auf NFS-basiertem Dateispeicher gehostet wird. [ Sie können den Persistent Volume Claim](cs_apps.html#cs_apps_volume_claim) als Datenträger an Ihren Pod anhängen, damit der Container in Ihrem Pod vom Datenträger und darauf schreiben kann. Persistent Volumes (PV) können von mehreren Pods in derselben Replikatgruppe oder von mehreren Pods in demselben Cluster gemeinsam genutzt werden.<p>Wenn ein Container ausfällt oder ein Pod von einem Workerknoten entfernt wird, werden die Daten selbst nicht entfernt; auf sie kann über andere Pods zugegriffen werden, an die der Datenträger angehängt ist. Persistent Volume Claims (PVCs) werden im persistenten Speicher gehostet, Sicherungen sind jedoch keine verfügbar. Falls Sie eine Sicherung Ihrer Daten benötigen, können Sie eine manuelle Sicherung erstellen.</p><p>**Hinweis:** Die Speicherung in persistenten NFS-Dateifreigaben wird monatlich berechnet. Wenn Sie persistenten Speicher für Ihren Cluster einrichten und diesen unverzüglich nach der Einrichtung entfernen, müssen Sie trotzdem die monatliche Gebühr für den persistenten Speicher bezahlen, auch wenn sie ihn nur über einen kurzen Zeitraum genutzt haben.</p>|
+|Option 2: Erstellen eines Persistent Volume Claims (PVCs), um NFS-basierten persistenten Speicher für die Bereitstellung einzurichten <p>Dieses Feature ist nur für Standardcluster verfügbar.</p>|<p>Diese Option bietet persistente Speicherung von App- und Containerdaten durch Persistent Volumes (PVs). Die Volumes sind in einem [NFS-basierten Endurance- und Performance-Dateispeicher ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud/file-storage/details) gehostet. Der Dateispeicher ist im Ruhezustand verschlüsselt und Sie können Replikate der gespeicherten Daten erstellen. </p> <p>Sie erstellen einen [Persistent Volume Claim](cs_apps.html) (PVC), um eine Anforderung für NFS-basierten Dateispeicher zu stellen. {{site.data.keyword.containershort_notm}} stellt vordefinierte Speicherklassen bereit, die den Größenbereich des Speichers, die E/A-Operationen pro Sekunde, die Löschrichtlinie sowie die Lese- und Schreibberechtigungen für den Datenträger definieren. Beim Erstellen Ihres Persistent Volume Claims können Sie zwischen diesen Speicherklassen wählen. Nachdem Sie einen Persistent Volume Claim (PVC) übergeben haben, stellt {{site.data.keyword.containershort_notm}} dynamisch ein Persistent Volume (PV) bereit, das in NFS-basiertem Dateispeicher gehostet wird. [Sie hängen den Persistent Volume Claim (PVC)](cs_apps.html#cs_apps_volume_claim) als Datenträger an Ihre Bereitstellung an, damit die Container den Datenträger lesen und beschreiben können. Persistent Volumes (PV) können in derselben Replikatgruppe oder von mehreren Bereitstellungen in demselben Cluster gemeinsam genutzt werden. </p><p>Wenn ein Container ausfällt oder ein Pod von einem Workerknoten entfernt wird, werden die Daten selbst nicht entfernt; auf sie kann über andere Bereitstellungen zugegriffen werden, an die der Datenträger angehängt ist. Persistent Volume Claims (PVCs) werden im persistenten Speicher gehostet, Sicherungen sind jedoch keine verfügbar. Falls Sie eine Sicherung Ihrer Daten benötigen, können Sie eine manuelle Sicherung erstellen.</p><p>**Hinweis:** Die Speicherung in persistenten NFS-Dateifreigaben wird monatlich berechnet. Wenn Sie persistenten Speicher für Ihren Cluster einrichten und diesen unverzüglich nach der Einrichtung entfernen, bezahlen Sie trotzdem die monatliche Gebühr für den persistenten Speicher, auch wenn sie ihn nur über einen kurzen Zeitraum genutzt haben. </p>|
 |Option 3: Binden eines {{site.data.keyword.Bluemix_notm}}-Datenbankservice an Ihren Pod<p>Dieses Feature ist nur für Lite-Cluster und Standardcluster verfügbar.</p>|Bei dieser Option können Sie unter Verwendung eines {{site.data.keyword.Bluemix_notm}}-Cloud-Service für Datenbanken Daten persistent speichern und auf diese zugreifen. Wenn Sie den {{site.data.keyword.Bluemix_notm}}-Service an einen Namensbereich in Ihrem Cluster anhängen, wird ein geheimer Kubernetes-Schlüssel erstellt. Der geheime Kubernetes-Schlüssel beherbergt vertrauliche Informationen zum Service wie zum Beispiel die URL zum Service, Ihren Benutzernamen und das zugehörige Kennwort. Sie können den geheimen Schlüssel als Datenträger für geheime Schlüssel an Ihren Pod anhängen und unter Verwendung der im geheimen Schlüssel gespeicherten Berechtigungsnachweise auf den Service zugreifen. Durch Anhängen des Datenträgers für geheime Schlüssel an andere Pods können Sie Daten podübergreifend gemeinsam nutzen.<p>Wenn ein Container ausfällt oder ein Pod von einem Workerknoten entfernt wird, werden die Daten selbst nicht entfernt; auf sie kann über andere Pods zugegriffen werden, an die der Datenträger für geheime Schlüssel angehängt ist.</p><p>Die meisten {{site.data.keyword.Bluemix_notm}}-Datenbankservices stellen Plattenspeicher für ein geringes Datenvolumen gebührenfrei zur Verfügung, damit Sie dessen Funktionen testen können.</p><p>Weitere Informationen zum Binden eines {{site.data.keyword.Bluemix_notm}}-Service an einen Pod finden Sie unter [{{site.data.keyword.Bluemix_notm}}-Services für Apps in {{site.data.keyword.containershort_notm}} hinzufügen](cs_apps.html#cs_apps_service).</p>|
 {: caption="Tabelle 5. Optionen für persistentes Speichern von Daten bei Bereitstellungen in Kubernetes-Clustern" caption-side="top"}
 
@@ -541,12 +536,12 @@ Sie können verschiedene externe Services und Services im {{site.data.keyword.Bl
 </tr>
 <tr>
 <td>Instana</td>
-<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> bietet eine Leistungsüberwachung von Infrastrukturen und Apps über eine grafische Benutzerschnittstelle, die automatisch Apps erkennt und zuordnet. Außerdem erfasst Istana alle Anforderungen an Ihre Apps, wodurch Sie Fehlerbehebungen und Ursachenanalysen durchführen können, um zu verhindern, dass Probleme erneut auftreten. Lesen Sie dazu den Blogeintrag zur <a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">Bereitstellung von Istana in {{site.data.keyword.containershort_notm}}, um weitere Informationen zu erhalten <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
+<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> bietet eine Leistungsüberwachung von Infrastrukturen und Apps über eine grafische Benutzerschnittstelle, die automatisch Apps erkennt und zuordnet. Außerdem erfasst Istana alle Anforderungen an Ihre Apps, wodurch Sie Fehlerbehebungen und Ursachenanalysen durchführen können, um zu verhindern, dass Probleme erneut auftreten. Lesen Sie dazu den Blogeintrag zur <a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">Bereitstellung von Istana in {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>, um weitere Informationen zu erhalten. </td>
 </tr>
 <tr>
 <td>Istio</td>
-<td>Istio ist ein Open-Source-Service, der Entwicklern eine Möglichkeit zum Verbinden, Sichern, Verwalten und Überwachen
-eines Netzes von Microservices, auch als Servicenetz bezeichnet, auf Cloudorchestrierungsplattformen wie Kubernetes bietet. Istio bietet die Funktionalität zum Verwalten von Netzverkehr, für einen Lastausgleich zwischen mehreren Microservices, zum Durchsetzen von Zugriffsrichtlinien und zum Überprüfen von Serviceidentitäten im Servicenetz. Weitere Informationen zum Installieren von Istio auf Ihrem Kubernetes-Cluster in {{site.data.keyword.containershort_notm}} finden Sie im <a href="https://istio.io/docs/tasks/installing-istio.html" target="_blank">Thema zur Installation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> in der Istio-Dokumentation. Eine beispielhafte Vorgehensweise eines Entwicklers zur Verwendung von Istio mit Kubernetes finden Sie unter <a href="https://developer.ibm.com/code/journey/manage-microservices-traffic-using-istio/" target="_blank">Datenverkehr von Mikroservices mithilfe von Istio verwalten <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.</td>
+<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> ist ein Open-Source-Service, der Entwicklern eine Möglichkeit zum Verbinden, Sichern, Verwalten und Überwachen
+eines Netzes von Microservices, auch als Servicenetz bezeichnet, auf Cloudorchestrierungsplattformen wie Kubernetes bietet. Lesen Sie den Blogbeitrag darüber, <a href="https://developer.ibm.com/dwblog/2017/istio/" target="_blank">wie IBM Istio mitgegründet und auf den Markt gebracht hat <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>, um weitere Informationen zu dem Open-Source-Projekt zu erhalten. Weitere Informationen zum Installieren von Istio aud Ihrem Kubernetes-Cluster in {{site.data.keyword.containershort_notm}} und zu den ersten Schritten mit einer Beispiel-App erhalten Sie im [Lernprogramm: Microservices mit Istio verwalten](cs_tutorials_istio.html#istio_tutorial). </td>
 </tr>
 <tr>
 <td>Prometheus</td>
@@ -561,6 +556,10 @@ eines Netzes von Microservices, auch als Servicenetz bezeichnet, auf Cloudorches
 <li>Bearbeiten Sie nach der erfolgten Bereitstellung von Prometheus in Ihrem Cluster die Prometheus-Datenquelle in Grafana, sodass sie sich auf <code>prometheus.kube-system:30900</code> bezieht.</li>
 </ol>
 </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.bpshort}}</td>
+<td>{{site.data.keyword.bplong}} ist ein Automatisierungstool, das Terraform für die Bereitstellung Ihrer Infrastruktur als Code verwendet. Wenn Sie Ihre Infrastruktur als einzelne Einheit bereitstellen, können Sie diese Cloudressourcendefinitionen in beliebig vielen Umgebungen wiederverwenden. Um einen Kubernetes-Cluster als Ressource mit {site.data.keyword.bpshort}} zu definieren, versuchen Sie, eine Umgebung mit [container-cluster template](https://console.bluemix.net/schematics/templates/details/Cloud-Schematics%2Fcontainer-cluster) zu erstellen. Weitere Informationen zu Schematics finden Sie unter [Informationen zu {{site.data.keyword.bplong_notm}}](/docs/services/schematics/schematics_overview.html#about). </td>
 </tr>
 <tr>
 <td>Weave Scope</td>
@@ -588,12 +587,12 @@ Sehen Sie sich die folgende Tabelle an, um die verfügbaren Optionen für die ei
 
 |Kontotyp|Beschreibung|Verfügbare Optionen zum Erstellen eines Standardclusters|
 |------------|-----------|----------------------------------------------|
-|Lite-Konten|Mit Lite-Konten kann nur ein Lite-Cluster mit zwei CPUs und 4 GB RAM bereitgestellt werden. <p>Um weitere Cluster mit anderen Maschinentypen zu erstellen, stehen Ihnen zwei Optionen zur Verfügung.</p>|<ul><li>Option 1: [Aktualisieren Sie Ihr Lite-Konto auf ein nutzungsabhängiges {{site.data.keyword.Bluemix_notm}}-Konto](/docs/pricing/billable.html#upgradetopayg), das mit Zugriff auf das Portfolio von IBM Cloud Infrastructure (SoftLayer) eingerichtet ist.</li><li>Option 2: [Verknüpfen Sie Ihr Lite-Konto mit einem vorhandenen Konto von IBM Cloud Infrastructure (SoftLayer)](/docs/pricing/linking_accounts.html#unifyingaccounts).<p>Nachdem beide Konten verknüpft wurden, wird Ihr Lite-Konto auf ein nutzungsabhängiges Konto automatisch aktualisiert. Wenn Sie die Konten verknüpfen, erfolgt die Rechnungsstellung sowohl für {{site.data.keyword.Bluemix_notm}}-Ressourcen als auch für Ressourcen von IBM Cloud Infrastructure (SoftLayer) über {{site.data.keyword.Bluemix_notm}}.</p><p>**Hinweis:** Das Konto von IBM Cloud Infrastructure (SoftLayer), das verknüpft wird, muss mit Superuser-Berechtigungen konfiguriert sein.</p></li></ul>|
+|Lite-Konten|Lite-Konten können keine Cluster bereitstellen.|<ul><li>[Aktualisieren Sie Ihr Lite-Konto auf ein nutzungsabhängiges {{site.data.keyword.Bluemix_notm}}-Konto](/docs/pricing/billable.html#upgradetopayg), das mit Zugriff auf das Portfolio von IBM Cloud Infrastructure (SoftLayer) eingerichtet ist.</li></ul>|
 |Ältere nutzungsabhängige Konten|Nutzungsabhängige Konten, die erstellt wurden, bevor die automatische Kontoverknüpfung verfügbar war, haben keinen Zugriff auf das Portfolio von IBM Cloud Infrastructure (SoftLayer).<p>Wenn Sie ein Konto von IBM Cloud Infrastructure (SoftLayer) haben, können Sie dieses Konto nicht mit einem älteren nutzungsabhängigen Konto verknüpfen.</p>|<ul><li>Option 1: [Erstellen Sie ein neues nutzungsabhängiges Konto](/docs/pricing/billable.html#billable), das mit Zugriff auf das Portfolio von IBM Cloud Infrastructure (SoftLayer) eingerichtet wird. Wenn Sie diese Option auswählen, erhalten Sie zwei separate {{site.data.keyword.Bluemix_notm}}-Konten und -Rechnungen.<p>Wenn Sie Ihr altes nutzungsabhängiges Konto weiterhin verwenden möchten, um Standardcluster zu erstellen, können Sie mit Ihrem neuen nutzungsabhängigen Konto einen API-Schlüssel generieren. Mit diesem API-Schlüssel greifen Sie auf das Portfolio von IBM Cloud Infrastructure (SoftLayer) zu. Sie müssen nur den API-Schlüssel für Ihr altes nutzungsabhängiges Konto einrichten. Weitere Informationen finden Sie unter
 [Einen API-Schlüssel für alte nutzungsabhängige Konten und Abonnementkonten generieren](#old_account). Beachten Sie, dass Ressourcen von IBM Cloud Infrastructure (SoftLayer) über Ihr neues nutzungsabhängiges Konto in Rechnung gestellt werden.</p></li><li>Option 2: Wenn Sie bereits ein Konto von IBM Cloud Infrastructure (SoftLayer) haben, das Sie verwenden möchten, können Sie [Ihre Berechtigungsnachweise](cs_cli_reference.html#cs_credentials_set) für Ihr {{site.data.keyword.Bluemix_notm}}-Konto festlegen.<p>**Hinweis:** Das Konto von IBM Cloud Infrastructure (SoftLayer), das Sie mit Ihrem {{site.data.keyword.Bluemix_notm}}-Konto verwenden, muss mit Superuser-Berechtigungen konfiguriert sein.</p></li></ul>|
 |Abonnementkonten|Abonnementkonten werden ohne Zugriff auf das Portfolio von IBM Cloud Infrastructure (SoftLayer) eingerichtet.|<ul><li>Option 1: [Erstellen Sie ein neues nutzungsabhängiges Konto](/docs/pricing/billable.html#billable), das mit Zugriff auf das Portfolio von IBM Cloud Infrastructure (SoftLayer) eingerichtet wird. Wenn Sie diese Option auswählen, erhalten Sie zwei separate {{site.data.keyword.Bluemix_notm}}-Konten und -Rechnungen.<p>Wenn Sie Ihr Abonnementkonto weiterhin verwenden möchten, um Standardcluster zu erstellen, können Sie mit Ihrem neuen nutzungsabhängigen Konto einen API-Schlüssel generieren. Mit diesem API-Schlüssel greifen Sie auf das Portfolio von IBM Cloud Infrastructure (SoftLayer) zu. Sie müssen nur den API-Schlüssel für Ihr Abonnementkonto einrichten. Weitere Informationen finden Sie unter
 [Einen API-Schlüssel für alte nutzungsabhängige Konten und Abonnementkonten generieren](#old_account). Beachten Sie, dass Ressourcen von IBM Cloud Infrastructure (SoftLayer) über Ihr neues nutzungsabhängiges Konto in Rechnung gestellt werden.</p></li><li>Option 2: Wenn Sie bereits ein Konto von IBM Cloud Infrastructure (SoftLayer) haben, das Sie verwenden möchten, können Sie [Ihre Berechtigungsnachweise](cs_cli_reference.html#cs_credentials_set) für Ihr {{site.data.keyword.Bluemix_notm}}-Konto festlegen.<p>**Hinweis:** Das Konto von IBM Cloud Infrastructure (SoftLayer), das Sie mit Ihrem {{site.data.keyword.Bluemix_notm}}-Konto verwenden, muss mit Superuser-Berechtigungen konfiguriert sein.</p></li></ul>|
-|Konten von IBM Cloud Infrastructure (SoftLayer), kein {{site.data.keyword.Bluemix_notm}}-Konto|Um einen Standardcluster zu erstellen, müssen Sie ein {{site.data.keyword.Bluemix_notm}}-Konto haben.|<ul><li>Option 1: [Erstellen Sie ein neues nutzungsabhängiges Konto](/docs/pricing/billable.html#billable), das mit Zugriff auf das Portfolio von IBM Cloud Infrastructure (SoftLayer) eingerichtet wird. Wenn Sie diese Option auswählen, wird ein neues Konto von IBM Cloud Infrastructure (SoftLayer) für Sie erstellt. Sie haben zwei separate Konten von IBM Cloud Infrastructure (SoftLayer) und eine jeweils separate Abrechnung.</li><li>Option 2: [Erstellen Sie ein Lite-Konto](/docs/pricing/free.html#pricing) und [verknüpfen Sie es mit Ihrem vorhandenen Konto von IBM Cloud Infrastructure (SoftLayer)](/docs/pricing/linking_accounts.html#unifyingaccounts). Nachdem beide Konten verknüpft wurden, wird Ihr Lite-Konto automatisch auf ein nutzungsabhängiges Konto aktualisiert. Wenn Sie die Konten verknüpfen, erfolgt die Rechnungsstellung sowohl für {{site.data.keyword.Bluemix_notm}}-Ressourcen als auch für Ressourcen von IBM Cloud Infrastructure (SoftLayer) über {{site.data.keyword.Bluemix_notm}}.<p>**Hinweis:** Das Konto von IBM Cloud Infrastructure (SoftLayer), das verknüpft wird, muss mit Superuser-Berechtigungen konfiguriert sein.</p></li></ul>|
+|Konten von IBM Cloud Infrastructure (SoftLayer), kein {{site.data.keyword.Bluemix_notm}}-Konto|Um einen Standardcluster zu erstellen, müssen Sie ein {{site.data.keyword.Bluemix_notm}}-Konto haben.|<ul><li>[Erstellen Sie ein neues nutzungsabhängiges Konto](/docs/pricing/billable.html#billable), das mit Zugriff auf das Portfolio von IBM Cloud Infrastructure (SoftLayer) eingerichtet wird. Wenn Sie diese Option auswählen, wird ein Konto von IBM Cloud Infrastructure (SoftLayer) für Sie erstellt. Sie haben zwei separate Konten von IBM Cloud Infrastructure (SoftLayer) und eine jeweils separate Abrechnung.</li></ul>|
 {: caption="Tabelle 7. Verfügbare Optionen zum Erstellen von Standardclustern mit Konten, die mit keinem Konto von IBM Cloud Infrastructure (SoftLayer) verknüpft sind" caption-side="top"}
 
 

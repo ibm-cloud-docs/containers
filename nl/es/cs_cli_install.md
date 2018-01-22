@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-15"
+lastupdated: "2017-12-01"
 
 ---
 
@@ -136,7 +136,7 @@ Para obtener información acerca de estas CLI, consulte la documentación de dic
 
 -   [Mandatos `bx`](/docs/cli/reference/bluemix_cli/bx_cli.html)
 -   [Mandatos `bx cs`](cs_cli_reference.html#cs_cli_reference)
--   Mandatos [`kubectl` ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/user-guide/kubectl/v1.7/)
+-   [Mandatos `kubectl`![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)
 -   [Mandatos `bx cr`](/docs/cli/plugins/registry/index.html)
 
 <br />
@@ -165,9 +165,7 @@ la sesión en la CLI de {{site.data.keyword.Bluemix_notm}}. Especifique su nombr
 organización en la que se ha creado el clúster. Los clústeres son específicos de una
 organización, pero son independientes de un espacio de {{site.data.keyword.Bluemix_notm}}. Por lo tanto, no es necesario que seleccione un espacio.
 
-  3.  Si desea crear o acceder a clústeres de Kubernetes en una región distinta de la región de {{site.data.keyword.Bluemix_notm}} seleccionada anteriormente, [especifique el punto final de la API de la región de {{site.data.keyword.containershort_notm}}](cs_regions.html#container_login_endpoints).
-
-      **Nota**: Si desea crear un clúster en EE.UU. este, debe especificar el punto final de la API de la región del contenedor de EE.UU. este mediante el mandato `bx cs init --host https://us-east.containers.bluemix.net`.
+  3.  Si desea crear o acceder a clústeres de Kubernetes en una región distinta de la región de {{site.data.keyword.Bluemix_notm}} seleccionada anteriormente, ejecute `bx cs region-set`.
 
   4.  Obtenga una lista de todos los clústeres de la cuenta para obtener el nombre del clúster.
 
@@ -225,7 +223,7 @@ Kubernetes local como variable de entorno.
       ```
       {: screen}
 
-Ahora puede ejecutar mandatos `kubectl` para gestionar sus clústeres en {{site.data.keyword.Bluemix_notm}}. Para ver una lista completa de mandatos, consulte la [documentación de Kubernetes![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/user-guide/kubectl/v1.7/).
+Ahora puede ejecutar mandatos `kubectl` para gestionar sus clústeres en {{site.data.keyword.Bluemix_notm}}. Para ver una lista completa de mandatos, consulte la [documentación de Kubernetes![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).
 
 **Sugerencia:** Si utiliza Windows y la CLI de Kubernetes no está instalada en el mismo directorio que la CLI de {{site.data.keyword.Bluemix_notm}}, debe cambiar los directorios por la vía de acceso donde está instalada la CLI de Kubernetes para poder ejecutar correctamente los mandatos `kubectl`.
 
@@ -435,7 +433,7 @@ La API de {{site.data.keyword.containershort_notm}} precisa de información de c
 
 1.  Cree su señal de acceso de IAM (Identity and Access Management). La información del cuerpo que se incluye en la solicitud varía en función del método de autenticación de {{site.data.keyword.Bluemix_notm}} que utilice. Sustituya los valores siguientes:
   - _&lt;my_username&gt;_: Su nombre de usuario de {{site.data.keyword.Bluemix_notm}}.
-  - _&lt;my_password&gt;_: Su contraseña de {{site.data.keyword.Bluemix_notm}}. 
+  - _&lt;my_password&gt;_: Su contraseña de {{site.data.keyword.Bluemix_notm}}.
   - _&lt;my_api_key&gt;_: Su clave de API de {{site.data.keyword.Bluemix_notm}}.
   - _&lt;my_passcode&gt;_: Su código de acceso puntual de {{site.data.keyword.Bluemix_notm}}. Ejecute `bx login --sso` y siga las instrucciones de la salida de la CLI para recuperar el código de acceso puntual mediante su navegador web.
 
@@ -443,6 +441,14 @@ La API de {{site.data.keyword.containershort_notm}} precisa de información de c
     POST https://iam.<region>.bluemix.net/oidc/token
     ```
     {: codeblock}
+
+    Ejemplo:
+    ```
+    POST https://iam.ng.bluemix.net/oidc/token
+    ```
+    {: pre}
+
+    Para especificar una región de {{site.data.keyword.Bluemix_notm}}, [consulte las abreviaturas de región tal como se usan en los puntos finales de la API](cs_regions.html#bluemix_regions).
 
     <table summary-"Input parameters to get tokens">
     <thead>
@@ -558,6 +564,14 @@ _&lt;my_account_id&gt;_ por el ID de la cuenta de {{site.data.keyword.Bluemix_no
     ```
     {: codeblock}
 
+    Ejemplo:
+    ```
+    POST https://iam.ng.bluemix.net/oidc/token
+    ```
+    {: pre}
+
+    Para especificar una región de {{site.data.keyword.Bluemix_notm}}, [consulte las abreviaturas de región tal como se usan en los puntos finales de la API](cs_regions.html#bluemix_regions).
+
     <table summary-"Input parameters to get tokens">
     <thead>
         <th>Parámetros de entrada</th>
@@ -621,41 +635,10 @@ _&lt;my_account_id&gt;_ por el ID de la cuenta de {{site.data.keyword.Bluemix_no
 
     Encontrará la señal de IAM en el campo **access_token**, y la señal de renovación de IAM en el campo **refresh_token**.
 
-
 4.  Obtenga una lista de todos los clústeres de Kubernetes de la cuenta. Utilice la información que ha recuperado en pasos anteriores para crear la información de cabecera.
 
-    -   EE.UU. Sur
-
         ```
-        GET https://us-south.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   EE.UU. este
-
-        ```
-        GET https://us-east.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   UK-Sur
-
-        ```
-        GET https://uk-south.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   UE-Central
-
-        ```
-        GET https://eu-central.containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
-
-    -   AP Sur
-
-        ```
-        GET https://ap-south.containers.bluemix.net/v1/clusters
+        GET https://containers.bluemix.net/v1/clusters
         ```
         {: codeblock}
 
@@ -673,7 +656,7 @@ _&lt;my_account_id&gt;_ por el ID de la cuenta de {{site.data.keyword.Bluemix_no
         </tbody>
         </table>
 
-5.  Consulte la [{{site.data.keyword.containershort_notm}} documentación de la API ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://us-south.containers.bluemix.net/swagger-api) para ver una lista de las API admitidas.
+5.  Consulte la [{{site.data.keyword.containershort_notm}} documentación de la API ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://containers.bluemix.net/swagger-api) para ver una lista de las API admitidas.
 
 <br />
 
@@ -691,7 +674,7 @@ Siga los pasos siguientes si desea renovar sus señales de acceso de IAM.
 1.  Genere una nueva señal de acceso de IAM. Sustituya _&lt;iam_refresh_token&gt;_ por la señal de renovación de IAM que recibió cuando se autenticó en {{site.data.keyword.Bluemix_notm}}.
 
     ```
-    POST https://iam.ng.bluemix.net/oidc/token
+    POST https://iam.bluemix.net/identity/token
     ```
     {: codeblock}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-28"
+lastupdated: "2017-12-01"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2017-11-28"
 请参阅以下命令来创建和管理集群。
 {:shortdesc}
 
-**提示：**在查找 `bx cr` 命令吗？请参阅 [{{site.data.keyword.registryshort_notm}} CLI 参考](/docs/cli/plugins/registry/index.html)。在查找 `kubectl` 命令吗？请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/user-guide/kubectl/v1.5/)。
+**提示：**在查找 `bx cr` 命令吗？请参阅 [{{site.data.keyword.registryshort_notm}} CLI 参考](/docs/cli/plugins/registry/index.html)。在查找 `kubectl` 命令吗？请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)。
 
 
 <!--[https://github.ibm.com/alchemy-containers/armada-cli ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.ibm.com/alchemy-containers/armada-cli)-->
@@ -435,8 +435,6 @@ kube-version: <em>&lt;kube-version&gt;</em>
 
 向集群添加 {{site.data.keyword.Bluemix_notm}} 服务。
 
-**提示**：对于 {{site.data.keyword.Bluemix_dedicated_notm}} 用户，请参阅[在 {{site.data.keyword.Bluemix_dedicated_notm}} 中向集群添加 {{site.data.keyword.Bluemix_notm}} 服务（封闭 Beta 版）](cs_cluster.html#binding_dedicated)。
-
 <strong>命令选项</strong>：
 
    <dl>
@@ -636,13 +634,13 @@ kube-version: <em>&lt;kube-version&gt;</em>
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>集群的名称或标识。此值是必需的。</dd>
-   
+
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
    <dd>集群的 Kubernetes 版本。如果未指定此标志，那么 Kubernetes 主节点将更新到缺省 API 版本。要查看可用版本，请运行 [bx cs kube-versions](#cs_kube_versions)。此值是可选的。</dd>
 
    <dt><code>-f</code></dt>
    <dd>使用此选项可强制更新主节点，而不显示用户提示。此值是可选的。</dd>
-   
+
    <dt><code>--force-update</code></dt>
    <dd>即便更改是跨 2 个以上的次版本，也仍尝试更新。此值是可选的。</dd>
    </dl>
@@ -683,10 +681,12 @@ kube-version: <em>&lt;kube-version&gt;</em>
    <dl>
    <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
    <dd>IBM Cloud infrastructure (SoftLayer) 帐户用户名。此值是必需的。</dd>
-   
+
 
    <dt><code>--infrastructure-api-key <em>API_KEY</em></code></dt>
-   <dd>IBM Cloud infrastructure (SoftLayer) 帐户 API 密钥。此值是必需的。<p>
+   <dd>IBM Cloud infrastructure (SoftLayer) 帐户 API 密钥。此值是必需的。
+
+<p>
 要生成 API 密钥：<ol>
   <li>登录到 [IBM Cloud infrastructure (SoftLayer) 门户网站 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://control.softlayer.com/)。</li>
   <li>选择<strong>帐户</strong>，然后选择<strong>用户</strong>。</li>
@@ -948,8 +948,8 @@ kube-version: <em>&lt;kube-version&gt;</em>
 ### bx cs machine-types LOCATION
 {: #cs_machine_types}
 
-查看可用于工作程序节点的机器类型的列表。每种机器类型都包含集群中每个工作程序节点的虚拟 CPU 量、内存量和磁盘空间量。 
-- 名称中具有 `u2c` 或 `b2c` 的机器类型使用本地磁盘，而不是存储区联网 (SAN)，从而实现可靠性。可靠性优势包括在将字节序列化到本地磁盘时可提高吞吐量，以及减少因网络故障而导致的文件系统降级。这些机器类型包含用于操作系统文件系统的 25 GB 本地磁盘存储和用于 `/var/lib/docker`（这是写入所有容器数据的目录）的 100 GB 本地磁盘存储。 
+查看可用于工作程序节点的机器类型的列表。每种机器类型都包含集群中每个工作程序节点的虚拟 CPU 量、内存量和磁盘空间量。
+- 名称中具有 `u2c` 或 `b2c` 的机器类型使用本地磁盘，而不是存储区联网 (SAN)，从而实现可靠性。可靠性优势包括在将字节序列化到本地磁盘时可提高吞吐量，以及减少因网络故障而导致的文件系统降级。这些机器类型包含用于操作系统文件系统的 25 GB 本地磁盘存储和用于 `/var/lib/docker`（这是写入所有容器数据的目录）的 100 GB 本地磁盘存储。
 - 名称中包含 `encrypted` 的机器类型将加密主机的 Docker 数据。存储所有容器数据的 `/var/lib/docker` 目录将使用 LUKS 加密进行加密。
 - 不推荐使用名称中具有 `u1c` 或 `b1c` 的机器类型，例如 `u1c.2x4`。要开始使用 `u2c` 和 `b2c` 机器类型，请使用 `bx cs worker-add` 命令来添加使用已更新机器类型的工作程序节点。然后，使用 `bx cs worker-rm` 命令除去使用不推荐机器类型的工作程序节点。
 </p>
@@ -1247,13 +1247,13 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
 
    <dt><em>CLUSTER</em></dt>
    <dd>列出了其中可用工作程序节点的集群的名称或标识。此值是必需的。</dd>
-   
+
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
    <dd>集群的 Kubernetes 版本。如果未指定此标志，那么工作程序节点将更新到缺省版本。要查看可用版本，请运行 [bx cs kube-versions](#cs_kube_versions)。此值是可选的。</dd>
 
    <dt><code>-f</code></dt>
    <dd>使用此选项可强制更新主节点，而不显示用户提示。此值是可选的。</dd>
-   
+
    <dt><code>--force-update</code></dt>
    <dd>即便更改是跨 2 个以上的次版本，也仍尝试更新。此值是可选的。</dd>
 

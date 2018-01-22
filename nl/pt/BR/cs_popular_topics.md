@@ -1,8 +1,6 @@
 ---
 
-copyright:
-  years: 2014, 2017
-lastupdated: "2017-11-28"
+copyright: years: 2014, 2017 lastupdated: "2017-12-14"
 
 ---
 
@@ -44,11 +42,16 @@ Confira no que os desenvolvedores de contêiner estão interessados.
 <td>Com a CLI, você cria e gerencia seus clusters do Kubernetes.</td>
 </tr>
 <tr>
-<td>[Atualizar para Kubernetes 1.7](cs_versions.html)</td>
-<td>Revise as mudanças feitas em seus clusters antes de atualizar para o Kubernetes 1.7.</td>
+<td>[Abrindo portas e endereços IP necessários em seu firewall](cs_security.html#opening_ports)</td>
+<td>Você pode precisar abrir portas e endereços IP específicos em seus firewalls para executar comandos da CLI ou para permitir a comunicação entre o mestre do Kubernetes e os nós do trabalhador.</td>
 </tr>
 <tr>
-<td>[API de REST para clusters ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://us-south.containers.bluemix.net/swagger)</td>
+<td>[Atualize o Kubernetes](cs_versions.html)</td>
+<td>Revise as mudanças feitas em seus clusters antes de atualizar o Kubernetes.</td>
+</tr>
+<tr>
+<td>[API de REST para clusters
+![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://containers.bluemix.net/swagger)</td>
 <td>Visualize a documentação da API para gerenciar o {{site.data.keyword.containershort_notm}}.</td>
 </tr>
 </tbody></table>
@@ -58,4 +61,5 @@ Confira no que os desenvolvedores de contêiner estão interessados.
 
 É possível ver sobre o que os outros estão falando e fazer suas próprias perguntas no [{{site.data.keyword.containershort_notm}} Slack. ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibm-container-service.slack.com)
 
-Se você não estiver usando um IBMid para sua conta do {{site.data.keyword.Bluemix_notm}}, entre em contato com [crosen@us.ibm.com](mailto:crosen@us.ibm.com) e solicite um convite para esse Slack.
+Dica: se você não estiver usando um IBMid para a sua conta do {{site.data.keyword.Bluemix_notm}},
+[solicite um convite](https://bxcs-slack-invite.mybluemix.net/) para esse Slack.

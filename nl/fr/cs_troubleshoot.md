@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-28"
+lastupdated: "2017-12-14"
 
 ---
 
@@ -31,6 +31,8 @@ Vous pouvez effectuer quelques étapes générales pour vérifier que vos cluste
 {: shortdesc}
 
 <br />
+
+
 
 
 ## Débogage des clusters
@@ -127,7 +129,7 @@ Passez en revue les options permettant de déboguer vos clusters et d'identifier
 4.  Affichez la liste des détails relatifs à votre noeud worker.
 
   ```
-  bx cs worker-get <worker_node_id>
+  bx cs worker-get [<cluster_name_or_id>] <worker_node_id>
   ```
   {: pre}
 
@@ -166,6 +168,8 @@ Passez en revue les options permettant de déboguer vos clusters et d'identifier
   </table>
 
 <br />
+
+
 
 
 ## Débogage de déploiements d'application
@@ -209,6 +213,8 @@ Passez en revue les options dont vous disposez pour déboguer vos déploiements 
 <br />
 
 
+
+
 ## Identification des versions de client local et de serveur de kubectl
 
 Pour vérifier quelle version de l'interface CLI de Kubernetes vous utilisez en local ou que votre cluster exécute, lancez la commande suivante et vérifiez la version renvoyée.
@@ -227,6 +233,8 @@ Client Version: v1.5.6
 {: screen}
 
 <br />
+
+
 
 
 ## Vous ne pouvez pas vous connecter à votre compte d'infrastructure IBM Cloud (SoftLayer) lors de la création d'un cluster
@@ -249,7 +257,7 @@ Pour ajouter des données d'identification à votre compte {{site.data.keyword.B
 
 1.  Contactez l'administrateur de l'infrastructure IBM Cloud (SoftLayer) pour obtenir votre nom d'utilisateur d'infrastructure IBM Cloud (SoftLayer) et la clé d'API.
 
-    **Remarque : ** le compte d'infrastructure IBM Cloud (SoftLayer) que vous utilisez doit être configuré avec des droits Superutilisateur pour vous permettre de créer des clusters standard. 
+    **Remarque : ** le compte d'infrastructure IBM Cloud (SoftLayer) que vous utilisez doit être configuré avec des droits Superutilisateur pour vous permettre de créer des clusters standard.
 
 2.  Ajoutez les données d'identification.
 
@@ -268,6 +276,66 @@ Pour ajouter des données d'identification à votre compte {{site.data.keyword.B
 <br />
 
 
+## Le pare-feu empêche l'exécution de commandes CLI `bx`, `kubectl` ou `calicoctl`
+{: #ts_firewall_clis}
+
+{: tsSymptoms}
+Lorsque vous exécutez des commandes `bx`, `kubectl` ou `calicoctl` depuis l'interface de ligne de commande, ces commandes échouent.
+
+{: tsCauses}
+Des règles réseau d'entreprise empêchent peut-être l'accès depuis votre système local à des noeuds finaux publics via des proxies ou des pare-feux.
+
+{: tsResolve}
+[Autorisez l'accès TCP afin que les commandes CLI fonctionnent](cs_security.html#opening_ports). Cette tâche nécessite d'utiliser une [règle d'accès administrateur](cs_cluster.html#access_ov). Vérifiez votre [règle d'accès actuelle](cs_cluster.html#view_access).
+
+
+## Pare-feu empêchant la connexion des noeuds d'agent
+{: #cs_firewall}
+
+{: tsSymptoms}
+Lorsque les connexions des noeuds d'agent sont impossibles, vous pourrez voir toute une série de symptômes différents. Vous pourrez obtenir l'un des messages suivants en cas d'échec de la commande kubectl proxy ou si vous essayez d'accéder à un service dans votre cluster et que la connexion échoue.
+
+  ```
+  Connection refused
+  ```
+  {: screen}
+
+  ```
+  Connection timed out
+  ```
+  {: screen}
+
+  ```
+  Unable to connect to the server: net/http: TLS handshake timeout
+  ```
+  {: screen}
+
+Si vous exécutez les commandes kubectl exec, attach ou logs, le message suivant peut s'afficher.
+
+  ```
+  Error from server: error dialing backend: dial tcp XXX.XXX.XXX:10250: getsockopt: connection timed out
+  ```
+  {: screen}
+
+Si la commande kubectl proxy aboutit, mais que le tableau de bord n'est pas disponible, vous pourrez voir le message suivant.
+
+  ```
+  timeout on 172.xxx.xxx.xxx
+  ```
+  {: screen}
+
+
+
+{: tsCauses}
+Vous pouvez disposer d'un pare-feu supplémentaire configuré ou avoir personnalisé vos paramètres de pare-feu existants dans votre compte d'infrastructure IBM Cloud (SoftLayer). {{site.data.keyword.containershort_notm}} requiert que certaines adresses IP et certains ports soient ouverts pour permettre la communication entre le noeud worker et le maître Kubernetes et inversement. Une autre cause peut être que les noeuds d'agent soient bloqués dans une boucle de rechargement.
+
+{: tsResolve}
+[Autorisez le cluster à accéder aux ressources d'infrastructure et à d'autres services](cs_security.html#firewall_outbound). Cette tâche nécessite d'utiliser une [règle d'accès administrateur](cs_cluster.html#access_ov). Vérifiez votre [règle d'accès actuelle](cs_cluster.html#view_access).
+
+<br />
+
+
+
 ## L'accès à votre noeud worker à l'aide de SSH échoue
 {: #cs_ssh_worker}
 
@@ -283,86 +351,28 @@ Utilisez des [ensembles de démons ![Icône de lien externe](../icons/launch-gly
 <br />
 
 
-## Des pods sont toujours en attente
-{: #cs_pods_pending}
+
+
+## Après avoir mis à jour ou rechargé un noeud worker, des noeuds et des pods en double apparaissent
+{: #cs_duplicate_nodes}
 
 {: tsSymptoms}
-Lorsque vous exécutez `kubectl get pods`, vous constatez que des pods sont toujours à l'état **pending**.
+Lorsque vous exécutez la commande `kubectl get nodes`, vous voyez des noeuds d'agent en double avec le statut **NotReady**. Les noeuds d'agent avec le statut **NotReady** ont des adresses IP publiques, alors que les noeuds d'agent avec le statut **Ready** ont des adresses IP privées.
 
 {: tsCauses}
-Si vous venez juste de créer le cluster Kubernetes, il se peut que les noeuds d'agent soient encore en phase de configuration. S'il s'agit d'un cluster existant, sa capacité est peut-être insuffisante pour y déployer le pod.
+D'anciens clusters avaient des noeuds d'agent répertoriés par l'adresse IP publique du cluster. A présent, les noeuds d'agent sont répertoriés par l'adresse IP privée du cluster. Lorsque vous rechargez ou mettez à jour un noeud, l'adresse IP est modifiée, mais la référence à l'adresse IP publique est conservée.
 
 {: tsResolve}
-Cette tâche nécessite d'utiliser une [règle d'accès administrateur](cs_cluster.html#access_ov). Vérifiez votre [règle d'accès](cs_cluster.html#view_access) actuelle.
-
-Si vous venez de créer le cluster Kubernetes, exécutez la commande suivante et attendez l'initialisation des noeuds d'agent.
-
-```
-kubectl get nodes
-```
-{: pre}
-
-S'il s'agit d'un cluster existant, vérifiez sa capacité.
-
-1.  Affectez le numéro de port par défaut au proxy.
+Il n'y a aucune interruption de service due à ces doublons, mais vous devez retirer les références des anciens noeuds d'agent du serveur d'API.
 
   ```
-  kubectl proxy
-  ```
-   {: pre}
-
-2.  Ouvrez le tableau de bord Kubernetes.
-
-  ```
-  http://localhost:8001/ui
+  kubectl delete node <node_name1> <node_name2>
   ```
   {: pre}
 
-3.  Vérifiez que vous disposez de suffisamment de capacité dans votre cluster pour déployer le pod.
-
-4.  Si vous ne disposez pas de suffisamment de capacité dans votre cluster, ajoutez un autre noeud worker à celui-ci.
-
-  ```
-  bx cs worker-add <cluster name or id> 1
-  ```
-  {: pre}
-
-5.  Si vos pods sont toujours à l'état **pending** après le déploiement complet du noeud worker, consultez la [documentation Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) pour effectuer d'autres tâches en vue d'identifier et de résoudre le problème.
-
 <br />
 
 
-## Les pods sont bloqués à l'état de création
-{: #stuck_creating_state}
-
-{: tsSymptoms}
-Lorsque vous exécutez la commande `kubectl get pods -o wide`, vous voyez que plusieurs pods qui s'exécutent sur le même noeud worker sont bloqués à l'état `ContainerCreating`.
-
-{: tsCauses}
-Le système de fichiers sur le noeud worker est en lecture seule.
-
-{: tsResolve}
-1. Sauvegardez les données éventuelles stockées sur le noeud worker ou dans vos conteneurs.
-2. Régénérez le noeud worker en exécutant la commande suivante.
-
-<pre class="pre"><code>bx cs worker-reload &lt;cluster_name&gt; &lt;worker_id&gt;</code></pre>
-
-<br />
-
-
-## Les conteneurs ne démarrent pas
-{: #containers_do_not_start}
-
-{: tsSymptoms}
-Les pods se déploient sur les clusters, mais les conteneurs ne démarrent pas.
-
-{: tsCauses}
-Il peut arriver que les conteneurs ne démarrent pas lorsque le quota de registre est atteint.
-
-{: tsResolve}
-[Libérez de l'espace de stockage dans {{site.data.keyword.registryshort_notm}}.](../services/Registry/registry_quota.html#registry_quota_freeup)
-
-<br />
 
 
 ## Echec de l'accès à un pod sur un nouveau noeud worker et dépassement du délai d'attente
@@ -426,220 +436,94 @@ Le noeud supprimé n'apparaît plus dans Calico.
 <br />
 
 
-## Pare-feu empêchant la connexion des noeuds d'agent
-{: #cs_firewall}
+
+
+## Des pods sont toujours en attente
+{: #cs_pods_pending}
 
 {: tsSymptoms}
-Lorsque les connexions des noeuds d'agent sont impossibles, vous pourrez voir toute une série de symptômes différents. Vous pourrez obtenir l'un des messages suivants en cas d'échec de la commande kubectl proxy ou si vous essayez d'accéder à un service dans votre cluster et que la connexion échoue.
-
-  ```
-  Connection refused
-  ```
-  {: screen}
-
-  ```
-  Connection timed out
-  ```
-  {: screen}
-
-  ```
-  Unable to connect to the server: net/http: TLS handshake timeout
-  ```
-  {: screen}
-
-Si vous exécutez les commandes kubectl exec, attach ou logs, le message suivant peut s'afficher.
-
-  ```
-  Error from server: error dialing backend: dial tcp XXX.XXX.XXX:10250: getsockopt: connection timed out
-  ```
-  {: screen}
-
-Si la commande kubectl proxy aboutit, mais que le tableau de bord n'est pas disponible, vous pourrez voir le message suivant.
-
-  ```
-  timeout on 172.xxx.xxx.xxx
-  ```
-  {: screen}
-
-
+Lorsque vous exécutez `kubectl get pods`, vous constatez que des pods sont toujours à l'état **pending**.
 
 {: tsCauses}
-Vous pouvez disposer d'un pare-feu supplémentaire configuré ou avoir personnalisé vos paramètres de pare-feu existants dans votre compte d'infrastructure IBM Cloud (SoftLayer). {{site.data.keyword.containershort_notm}} requiert que certaines adresses IP et certains ports soient ouverts pour permettre la communication entre le noeud worker et le maître Kubernetes et inversement. Une autre cause peut être que les noeuds d'agent soient bloqués dans une boucle de rechargement.
+Si vous venez juste de créer le cluster Kubernetes, il se peut que les noeuds d'agent soient encore en phase de configuration. S'il s'agit d'un cluster existant, sa capacité est peut-être insuffisante pour y déployer le pod.
 
 {: tsResolve}
 Cette tâche nécessite d'utiliser une [règle d'accès administrateur](cs_cluster.html#access_ov). Vérifiez votre [règle d'accès](cs_cluster.html#view_access) actuelle.
 
-Ouvrez les ports et adresses IP ci-après dans votre pare-feu personnalisé.
+Si vous venez de créer le cluster Kubernetes, exécutez la commande suivante et attendez l'initialisation des noeuds d'agent.
 
-1.  Notez l'adresse IP publique pour tous vos noeuds d'agent dans le cluster :
+```
+kubectl get nodes
+```
+{: pre}
+
+S'il s'agit d'un cluster existant, vérifiez sa capacité.
+
+1.  Affectez le numéro de port par défaut au proxy.
 
   ```
-  bx cs workers '<cluster_name_or_id>'
+  kubectl proxy
+  ```
+   {: pre}
+
+2.  Ouvrez le tableau de bord Kubernetes.
+
+  ```
+  http://localhost:8001/ui
   ```
   {: pre}
 
-2.  Dans votre pare-feu, pour la connectivité SORTANTE depuis vos noeuds d'agent, autorisez le trafic réseau sortant depuis le noeud worker source vers la plage de ports TCP/UDP de destination 20000 à 32767 et port 443 pour `<each_worker_node_publicIP>`, et les adresses IP et groupes réseau suivants.
-    - **Important** : vous devez autoriser le trafic sortant vers le port 443 pour tous les emplacements de la région afin d'équilibrer la charge lors du processus d'amorçage. Par exemple, si votre cluster se trouve au Sud des Etats-Unis, vous devez autoriser le trafic du port 443 vers les adresses IP de les emplacements (dal10, dal12 et dal13).
-    <p>
-  <table summary="La première ligne du tableau s'étend sur deux colonnes. Les autres lignes se lisent de gauche à droite. L'emplacement du serveur figure dans la première colonne et les adresses IP pour concordance dans la seconde colonne.">
-      <thead>
-      <th>Région</th>
-      <th>Emplacement</th>
-      <th>Adresse IP</th>
-      </thead>
-    <tbody>
-      <tr>
-        <td>Asie-Pacifique nord</td>
-        <td>hkg02<br>tok02</td>
-        <td><code>169.56.132.234</code><br><code>161.202.126.210</code></td>
-       </tr>
-      <tr>
-         <td>Asie-Pacifique sud</td>
-         <td>mel01<br>syd01<br>syd04</td>
-         <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19</code></td>
-      </tr>
-      <tr>
-         <td>Europe centrale</td>
-         <td>ams03<br>fra02<br>par01</td>
-         <td><code>169.50.169.110</code><br><code>169.50.56.174</code><br><code>159.8.86.149</code></td>
-        </tr>
-      <tr>
-        <td>Sud du Royaume-Uni</td>
-        <td>lon02<br>lon04</td>
-        <td><code>159.122.242.78</code><br><code>158.175.65.170</code></td>
-      </tr>
-      <tr>
-        <td>Est des Etats-Unis</td>
-         <td>tor01<br>wdc06<br>wdc07</td>
-         <td><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
-      </tr>
-      <tr>
-        <td>Sud des Etats-Unis</td>
-        <td>dal10<br>dal12<br>dal13</td>
-        <td><code>169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
-      </tr>
-      </tbody>
-    </table>
-</p>
+3.  Vérifiez que vous disposez de suffisamment de capacité dans votre cluster pour déployer le pod.
 
-3.  Autorisez le trafic réseau sortant depuis les noeuds d'agent vers {{site.data.keyword.registrylong_notm}} :
-    - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
-    - Remplacez <em>&lt;registry_publicIP&gt;</em> par toutes les adresses des régions du registre auxquelles vous voulez autoriser le trafic :
-      <p>
-<table summary="La première ligne du tableau s'étend sur deux colonnes. Les autres lignes se lisent de gauche à droite. L'emplacement du serveur figure dans la première colonne et les adresses IP pour concordance dans la seconde colonne.">
-      <thead>
-        <th>Région du conteneur</th>
-        <th>Adresse du registre</th>
-        <th>Adresse IP du registre</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Asie-Pacifique nord, Asie-Pacifique sud</td>
-          <td>registry.au-syd.bluemix.net</td>
-          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
-        </tr>
-        <tr>
-          <td>Europe centrale</td>
-          <td>registry.eu-de.bluemix.net</td>
-          <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></td>
-         </tr>
-         <tr>
-          <td>Sud du Royaume-Uni</td>
-          <td>registry.eu-gb.bluemix.net</td>
-          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></td>
-         </tr>
-         <tr>
-          <td>Est des Etats-Unis, Sud des Etats-Unis</td>
-          <td>registry.ng.bluemix.net</td>
-          <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></td>
-         </tr>
-        </tbody>
-      </table>
-</p>
+4.  Si vous ne disposez pas de suffisamment de capacité dans votre cluster, ajoutez un autre noeud worker à celui-ci.
 
-4.  Facultatif : autorisez le trafic réseau sortant depuis les noeuds d'agent vers les services {{site.data.keyword.monitoringlong_notm}} et {{site.data.keyword.loganalysislong_notm}} :
-    - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
-    - Remplacez <em>&lt;monitoring_publicIP&gt;</em> par toutes les adresses des régions de surveillance auxquelles vous voulez autoriser le trafic :
-      <p><table summary="La première ligne du tableau s'étend sur deux colonnes. Les autres lignes se lisent de gauche à droite. L'emplacement du serveur figure dans la première colonne et les adresses IP pour concordance dans la seconde colonne.">
-        <thead>
-        <th>Région du conteneur</th>
-        <th>Adresse de surveillance</th>
-        <th>Adresses IP de surveillance</th>
-        </thead>
-      <tbody>
-        <tr>
-         <td>Europe centrale</td>
-         <td>metrics.eu-de.bluemix.net</td>
-         <td><code>159.122.78.136/29</code></td>
-        </tr>
-        <tr>
-         <td>Sud du Royaume-Uni</td>
-         <td>metrics.eu-gb.bluemix.net</td>
-         <td><code>169.50.196.136/29</code></td>
-        </tr>
-        <tr>
-          <td>Est des Etats-Unis, Sud des Etats-Unis, Asie-Pacifique nord</td>
-          <td>metrics.ng.bluemix.net</td>
-          <td><code>169.47.204.128/29</code></td>
-         </tr>
-         
-        </tbody>
-      </table>
-</p>
-    - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
-    - Remplacez <em>&lt;logging_publicIP&gt;</em> par toutes les adresses de journalisation auxquelles vous voulez autoriser le trafic :
-      <p><table summary="La première ligne du tableau s'étend sur deux colonnes. Les autres lignes se lisent de gauche à droite. L'emplacement du serveur figure dans la première colonne et les adresses IP pour concordance dans la seconde colonne.">
-        <thead>
-        <th>Région du conteneur</th>
-        <th>Adresse de journalisation</th>
-        <th>Adresses IP de journalisation</th>
-        </thead>
-      <tbody>
-        <tr>
-         <td>Europe centrale</td>
-         <td>ingest.logging.eu-de.bluemix.net</td>
-         <td><code>169.50.25.125</code></td>
-        </tr>
-        <tr>
-         <td>Sud du Royaume-Uni</td>
-         <td>ingest.logging.eu-gb.bluemix.net</td>
-         <td><code>169.50.115.113</code></td>
-        </tr>
-        <tr>
-          <td>Est des Etats-Unis, Sud des Etats-Unis, Asie-Pacifique nord</td>
-          <td>ingest.logging.ng.bluemix.net</td>
-          <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
-         </tr>
-        </tbody>
-      </table>
-</p>
+  ```
+  bx cs worker-add <cluster name or id> 1
+  ```
+  {: pre}
 
-5. Si vous disposez d'un pare-feu privé, autorisez les plages d'adresses IP privées d'infrastructure IBM Cloud (SoftLayer) appropriées. Consultez [ce lien](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) en commençant par la section **Backend (private) Network**.
-    - Ajoutez tous les [emplacements dans la ou les régions](cs_regions.html#locations) que vous utilisez
-    - Notez que vous devez ajouter l'emplacement dal01 (centre de données)
-    - Ouvrez les ports 80 et 443 pour autoriser le processus d'amorçage du cluster
+5.  Si vos pods sont toujours à l'état **pending** après le déploiement complet du noeud worker, consultez la [documentation Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) pour effectuer d'autres tâches en vue d'identifier et de résoudre le problème.
 
 <br />
 
 
-## Après avoir mis à jour ou rechargé un noeud worker, des noeuds et des pods en double apparaissent
-{: #cs_duplicate_nodes}
+
+
+## Les pods sont bloqués à l'état de création
+{: #stuck_creating_state}
 
 {: tsSymptoms}
-Lorsque vous exécutez la commande `kubectl get nodes`, vous voyez des noeuds d'agent en double avec le statut **NotReady**. Les noeuds d'agent avec le statut **NotReady** ont des adresses IP publiques, alors que les noeuds d'agent avec le statut **Ready** ont des adresses IP privées.
+Lorsque vous exécutez la commande `kubectl get pods -o wide`, vous voyez que plusieurs pods qui s'exécutent sur le même noeud worker sont bloqués à l'état `ContainerCreating`.
 
 {: tsCauses}
-D'anciens clusters avaient des noeuds d'agent répertoriés par l'adresse IP publique du cluster. A présent, les noeuds d'agent sont répertoriés par l'adresse IP privée du cluster. Lorsque vous rechargez ou mettez à jour un noeud, l'adresse IP est modifiée, mais la référence à l'adresse IP publique est conservée.
+Le système de fichiers sur le noeud worker est en lecture seule.
 
 {: tsResolve}
-Il n'y a aucune interruption de service due à ces doublons, mais vous devez retirer les références des anciens noeuds d'agent du serveur d'API.
+1. Sauvegardez les données éventuelles stockées sur le noeud worker ou dans vos conteneurs.
+2. Régénérez le noeud worker en exécutant la commande suivante.
 
-  ```
-  kubectl delete node <node_name1> <node_name2>
-  ```
-  {: pre}
+<pre class="pre"><code>bx cs worker-reload &lt;cluster_name&gt; &lt;worker_id&gt;</code></pre>
 
 <br />
+
+
+
+
+## Les conteneurs ne démarrent pas
+{: #containers_do_not_start}
+
+{: tsSymptoms}
+Les pods se déploient sur les clusters, mais les conteneurs ne démarrent pas.
+
+{: tsCauses}
+Il peut arriver que les conteneurs ne démarrent pas lorsque le quota de registre est atteint.
+
+{: tsResolve}
+[Libérez de l'espace de stockage dans {{site.data.keyword.registryshort_notm}}.](../services/Registry/registry_quota.html#registry_quota_freeup)
+
+<br />
+
+
 
 
 ## Les journaux ne s'affichent pas
@@ -650,18 +534,20 @@ Lorsque vous accéder au tableau de bord Kibana, les journaux ne s'affichent pas
 
 {: tsCauses}
 Ils est possible que les journaux ne s'affichent pas pour l'une des raisons suivantes :<br/><br/>
-    A. Le cluster n'est pas à l'état `Normal`.<br/><br/>
-    B. Le quota de stockage des journaux a été atteint.<br/><br/>
-    C. Vous avez spécifié un espace lors de la création du cluster, mais le propriétaire du compte n'a pas les droits Gestionnaire, Développeur ou Auditeur sur cet espace.<br/><br/>
-    D. Aucun événement qui déclenche des journaux ne s'est encore produit dans votre pod.<br/><br/>
+    A. Aucune configuration de journalisation n'a été définie.<br/><br/>
+    B. L'état du cluster n'indique pas `Normal`.<br/><br/>
+    C. Le quota de stockage de journaux a été ateint.<br/><br/>
+    D. Si vous avez spécifié un espace lors de la création du cluster, le propréitaire du compte ne dispose pas de droits Responsable, Développeur ou Auditeur sur cet espace.<br/><br/>
+    E. Aucun événement déclencheur de journal ne s'est encore produit dans votre pod.<br/><br/>
 
 {: tsResolve}
 Passez en revue les options suivantes pour examiner chacune des raisons possibles du défaut d'affichage des journaux :
 
-A. Vérifier l'état du cluster, voir [Débogage des clusters](cs_troubleshoot.html#debug_clusters).<br/><br/>
-B. Augmenter les limites de stockage des journaux, voir la [documentation {{site.data.keyword.loganalysislong_notm}} ](https://console.bluemix.net/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs).<br/><br/>
-C. Modifier les {{site.data.keyword.containershort_notm}} droits d'accès du propriétaire de compte, voir [Gestion de l'accès au cluster](cs_cluster.html#cs_cluster_user). Une fois les droits modifiés, il peut s'écouler jusqu'à 24 heures avant que les journaux commencent à s'afficher.<br/><br/>
-D. Déclencher un journal pour un événement en déployant Noisy, exemple de pod qui génère plusieurs événements de journal, sur un noeud worker du cluster.<br/>
+A. Pour envoyer des journaux, vous devez d'abord créer une configuration de journalisation pour acheminer des journaux à {{site.data.keyword.loganalysislong_notm}}. Pour créer une configuration de journalisation, voir [Activation du transfert de journaux](cs_cluster.html#cs_log_sources_enable).<br/><br/>
+B. Pour vérifier l'état de votre cluster, voir [Débogage des clusters](cs_troubleshoot.html#debug_clusters).<br/><br/>
+C. Pour augmenter vos limites de stockage de journaux, reportez-vous à la [documentation {{site.data.keyword.loganalysislong_notm}}](https://console.bluemix.net/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs).<br/><br/>
+D. Pour changer les droits d'accès à {{site.data.keyword.containershort_notm}} pour le propriétaire du compte, voir [Gestion de l'accès au cluster](cs_cluster.html#cs_cluster_user). Une fois les droits modifiés, il peut s'écouler jusqu'à 24 heures avant que les journaux commencent à s'afficher.<br/><br/>
+E. Pour déclencher un journal pour un événement, vous pouvez déployer Noisy, un exemple de pod qui génère plusieurs événements de journal, sur un noeud worker dans votre cluster.<br/>
   1. [Ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) le cluster dans lequel vous voulez lancer la génération de journaux.
 
   2. Créez le fichier de configuration `deploy-noisy.yaml`.
@@ -688,12 +574,14 @@ D. Déclencher un journal pour un événement en déployant Noisy, exemple de po
         ```
         {:pre}
 
-  4. Au bout de quelques minutes, vos journaux s'affichent dans le tableau de bord Kibana. Pour accéder au tableau de bord Kibana, accédez à l'une des URL suivantes et sélectionnez le compte {{site.data.keyword.Bluemix_notm}} dans lequel vous avez créé le cluster. Si vous avez spécifié un espace lors de la création du cluster, accédez à la place à cet espace.
+  4. Au bout de quelques minutes, vos journaux s'affichent dans le tableau de bord Kibana. Pour accéder au tableau de bord Kibana, accédez à l'une des URL suivantes et sélectionnez le compte {{site.data.keyword.Bluemix_notm}} dans lequel vous avez créé le cluster. Si vous avez spécifié un espace lors de la création du cluster, accédez à la place à cet espace.        
         - Sud et Est des Etats-Unis : https://logging.ng.bluemix.net
-        - Sud du Royaume-Uni : https://logging.eu-gb.bluemix.net
-        - Europe centrale : https://logging.eu-de.bluemix.net
+        - Sud du Royaume-Uni et Europe centrale : https://logging.eu-fra.bluemix.net
+        - Asie-Pacifique sud : https://logging.au-syd.bluemix.net
 
 <br />
+
+
 
 
 ## Le tableau de bord Kubernetes n'affiche pas de graphiques d'utilisation
@@ -714,6 +602,8 @@ Supprimez le pod `kube-dashboard` pour forcer un redémarrage. Le pod est recré
   {: pre}
 
 <br />
+
+
 
 
 ## Echec de la connexion à une application via Ingress
@@ -813,7 +703,7 @@ Pour identifier et résoudre les problèmes liés à votre contrôleur Ingress :
     1.  Récupérez l'ID des pods Ingress qui sont en cours d'exécution dans votre cluster.
 
       ```
-      kubectl get pods -n kube-system |grep ingress
+      kubectl get pods -n kube-system | grep alb1
       ```
       {: pre}
 
@@ -827,6 +717,8 @@ Pour identifier et résoudre les problèmes liés à votre contrôleur Ingress :
     3.  Recherchez les messages d'erreur dans les journaux du contrôleur Ingress.
 
 <br />
+
+
 
 
 ## Echec de la connexion à une application via un service d'équilibreur de charge
@@ -888,8 +780,8 @@ Pour identifier et résoudre les problèmes liés à votre service d'équilibreu
     <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips</code></pre></br>Vous avez défini une adresse IP publique portable pour votre service d'équilibreur de charge à l'aide de la section **loadBalancerIP**, or, cette adresse IP publique portable n'est pas disponible dans votre sous-réseau public portable. Modifiez le script de configuration de votre service d'équilibreur de charge et choisissez l'une des adresses IP publiques portables disponibles ou retirez la section **loadBalancerIP** de votre script de sorte qu'une adresse IP publique portable puisse être allouée automatiquement.
     <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>Vous ne disposez pas de suffisamment de noeuds d'agent pour déployer un service d'équilibreur de charge. Il se pourrait que vous ayez déployé un cluster standard avec plusieurs noeuds d'agent, mais que la mise à disposition des noeuds d'agent ait échoué.
     <ol><li>Affichez la liste des noeuds d'agent disponibles.</br><pre class="codeblock"><code>kubectl get nodes</code></pre>
-    <li>Si au moins deux noeuds d'agent disponibles sont trouvés, affichez les détails de ces noeuds d'agent.</br><pre class="screen"><code>bx cs worker-get <worker_ID></code></pre>
-    <li>Assurez-vous que les ID VLAN public et privé des noeuds d'agent qui ont été renvoyés par les commandes 'kubectl get nodes' et 'bx cs worker-get' correspondent.</ol></ul></ul>
+    <li>Si au moins deux noeuds d'agent disponibles sont trouvés, affichez les détails de ces noeuds d'agent.</br><pre class="screen"><code>bx cs worker-get [<cluster_name_or_id>] <worker_ID></code></pre>
+    <li>Vérifiez que les ID de VLAN publics et privés pour les noeuds worker renvoyés par les commandes 'kubectl get nodes' et 'bx cs [<cluster_name_or_id>] worker-get' correspondent.</ol></ul></ul>
 
 4.  Si vous utilisez un domaine personnalisé pour vous connecter à votre service d'équilibreur de charge, assurez-vous que votre domaine personnalisé est mappé à l'adresse IP publique de votre service d'équilibreur de charge.
     1.  Identifiez l'adresse IP publique de votre service d'équilibreur de charge.
@@ -902,6 +794,11 @@ Pour identifier et résoudre les problèmes liés à votre service d'équilibreu
     2.  Assurez-vous que votre domaine personnalisé est mappé à l'adresse IP publique portable de votre service d'équilibreur de charge dans le pointeur (enregistrement PTR).
 
 <br />
+
+
+
+
+
 
 
 ## Echec de l'extraction de l'URL ETCD pour la configuration de l'interface CLI de Calico
@@ -937,13 +834,15 @@ Lorsque vous extrayez l'URL `<ETCD_URL>`, passez aux étapes répertoriées dans
 <br />
 
 
+
+
 ## Aide et assistance
 {: #ts_getting_help}
 
 Par où commencer pour traiter les incidents liés à un conteneur ?
 
 -   Pour déterminer si {{site.data.keyword.Bluemix_notm}} est disponible, [consultez la page de statut de {{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/bluemix/support/#status).
--   Publiez une question sur le site [{{site.data.keyword.containershort_notm}} Slack. ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com) Si vous n'utilisez pas un IBMid pour votre compte {{site.data.keyword.Bluemix_notm}}, écrivez à l'adresse [crosen@us.ibm.com](mailto:crosen@us.ibm.com) et demandez une invitation pour ce site Slack.
+-   Publiez une question sur le site [{{site.data.keyword.containershort_notm}} Slack. ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com) Conseil : si vous n'utilisez pas un ID IBM pour votre compte {{site.data.keyword.Bluemix_notm}}, [demandez une invitation à ce ](https://bxcs-slack-invite.mybluemix.net/)Slack.
 -   Consultez les forums pour établir si d'autres utilisateurs ont rencontré le même problème. Lorsque vous utilisez les forums pour poser une question, balisez votre question de sorte que les équipes de développement {{site.data.keyword.Bluemix_notm}} la voient.
 
     -   Si vous avez des questions d'ordre technique sur le développement ou le déploiement de clusters ou d'applications à l'aide d'{{site.data.keyword.containershort_notm}}, publiez-les sur le site [Stack Overflow ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://stackoverflow.com/search?q=bluemix+containers) en leur adjoignant les balises `ibm-bluemix`, `kubernetes` et `containers`.

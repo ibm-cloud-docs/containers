@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-28"
+lastupdated: "2017-12-14"
 
 ---
 
@@ -31,6 +31,8 @@ Sie können verschiedene allgemeine Schritte ausführen, um sicherzustellen, das
 {: shortdesc}
 
 <br />
+
+
 
 
 ## Cluster debuggen
@@ -127,7 +129,7 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
 4.  Listen Sie die Details für den Workerknoten auf.
 
   ```
-  bx cs worker-get <workerknoten-id>
+  bx cs worker-get [<clustername_oder_id>] <workerknoten-id>
   ```
   {: pre}
 
@@ -166,6 +168,8 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
   </table>
 
 <br />
+
+
 
 
 ## App-Bereitstellungen debuggen
@@ -209,6 +213,8 @@ Informieren Sie sich über die Optionen, die Ihnen für das Debuggen Ihrer App-B
 <br />
 
 
+
+
 ## Lokale Client- und Serverversionen von kubectl ermitteln
 
 Führen Sie den folgenden Befehl aus und überprüfen Sie die Version, um festzustellen, welche Version der Kubernetes-Befehlszeilenschnittstelle lokal oder in Ihrem Cluster ausgeführt wird.
@@ -227,6 +233,8 @@ Client Version: v1.5.6
 {: screen}
 
 <br />
+
+
 
 
 ## Verbindung mit Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) während der Erstellung eines Clusters nicht möglich
@@ -267,6 +275,66 @@ Gehen Sie wie folgt vor, um Berechtigungsnachweise für Ihr {{site.data.keyword.
 <br />
 
 
+## Firewall verhindert die Ausführung der CLI-Befehle `bx`, `kubectl` oder `calicoctl`. 
+{: #ts_firewall_clis}
+
+{: tsSymptoms}
+Wenn Sie die Befehle `bx`, `kubectl` oder `calicoctl` über die Befehlszeilenschnittstelle ausführen, schlagen sie fehl. 
+
+{: tsCauses}
+Möglicherweise verhindern Unternehmensnetzrichtlinien den Zugriff von Ihrem lokalen System auf öffentliche Endpunkte über Proxys oder Firewalls. 
+
+{: tsResolve}
+[Lassen Sie TCP-Zugriff zu, damit die CLI-Befehle ausgeführt werden können](cs_security.html#opening_ports). Für diese Task ist die [Zugriffsrichtlinie 'Administrator'](cs_cluster.html#access_ov) erforderlich. Überprüfen Sie Ihre aktuelle [Zugriffsrichtlinie](cs_cluster.html#view_access). 
+
+
+## Firewall verhindert Verbindung für Workerknoten
+{: #cs_firewall}
+
+{: tsSymptoms}
+Wenn die Workerknoten keine Verbindung herstellen können, dann werden Sie möglicherweise eine Vielzahl unterschiedlicher Symptome feststellen. Das System zeigt eventuell eine der folgenden Nachrichten an, wenn die Ausführung des Befehls 'kubectl proxy' fehlschlägt oder wenn Sie versuchen, auf einen Service in Ihrem Cluster zuzugreifen und diese Verbindung fehlschlägt.
+
+  ```
+  Connection refused
+  ```
+  {: screen}
+
+  ```
+  Connection timed out
+  ```
+  {: screen}
+
+  ```
+  Unable to connect to the server: net/http: TLS handshake timeout
+  ```
+  {: screen}
+
+Wenn Sie 'kubectl exec', kubectl attach' oder 'kubectl logs' ausführen, dann wird möglicherweise die folgende Nachricht angezeigt.
+
+  ```
+  Error from server: error dialing backend: dial tcp XXX.XXX.XXX:10250: getsockopt: connection timed out
+  ```
+  {: screen}
+
+Wenn die Ausführung von 'kubectl proxy' erfolgreich verläuft, das Dashboard jedoch nicht verfügbar ist, dann wird möglicherweise die folgende Nachricht angezeigt.
+
+  ```
+  timeout on 172.xxx.xxx.xxx
+  ```
+  {: screen}
+
+
+
+{: tsCauses}
+Möglicherweise wurde eine zusätzliche Firewall eingerichtet oder Sie haben die vorhandenen Firewalleinstellungen für Ihr Konto von IBM Cloud Infrastructure (SoftLayer) angepasst. {{site.data.keyword.containershort_notm}} erfordert, dass bestimmte IP-Adressen und Ports geöffnet sind, damit die Kommunikation vom Workerknoten zum Kubernetes-Master und umgekehrt möglich ist. Ein weiterer möglicher Grund kann sein, dass Ihre Workerknoten in einer Neuladen-Schleife hängen.
+
+{: tsResolve}
+[Gewähren Sie dem Cluster den Zugriff auf Infrastrukturressourcen und andere Services](cs_security.html#firewall_outbound). Für diese Task ist die [Zugriffsrichtlinie 'Administrator'](cs_cluster.html#access_ov) erforderlich. Überprüfen Sie Ihre aktuelle [Zugriffsrichtlinie](cs_cluster.html#view_access). 
+
+<br />
+
+
+
 ## Zugreifen auf Workerknoten mit SSH schlägt fehl
 {: #cs_ssh_worker}
 
@@ -282,86 +350,28 @@ Verwenden Sie [Dämon-Sets ![Symbol für externen Link](../icons/launch-glyph.sv
 <br />
 
 
-## Pods verweilen in  im Status 'Pending' (Anstehend)
-{: #cs_pods_pending}
+
+
+## Nachdem ein Workerknoten aktualisiert oder erneut geladen wurde, werden doppelte Knoten und Pods angezeigt
+{: #cs_duplicate_nodes}
 
 {: tsSymptoms}
-Beim Ausführen von `kubectl get pods` verbleiben Pods weiterhin im Status **Pending** (Anstehend).
+Wenn Sie `kubectl get nodes` ausführen, werden doppelte Workerknoten mit dem Status **NotReady** (Nicht bereit) angezeigt. Die Workerknoten mit dem Status **NotReady** verfügen über öffentliche IP-Adressen, während die Workerknoten mit dem Status **Ready** (Bereit) private IP-Adressen haben.
 
 {: tsCauses}
-Wenn Sie den Kubernetes-Cluster gerade erst erstellt haben, werden die Workerknoten möglicherweise noch konfiguriert. Falls dieser Cluster bereits vorhanden ist, steht unter Umständen nicht ausreichend Kapazität für die Bereitstellung des Pods in Ihrem Cluster zur Verfügung.
+Ältere Cluster haben über Workerknoten verfügt, die über die öffentliche IP-Adresse des Clusters aufgelistet wurden. Nun werden Workerknoten über die private IP-Adresse des Clusters aufgelistet. Wenn Sie einen Knoten erneut laden oder aktualisieren, dann wird die IP-Adresse geändert, der Verweis auf die öffentliche IP-Adresse bleibt jedoch erhalten.
 
 {: tsResolve}
-Für diese Task ist die [Zugriffsrichtlinie 'Administrator'](cs_cluster.html#access_ov) erforderlich. Überprüfen Sie Ihre aktuelle [Zugriffsrichtlinie](cs_cluster.html#view_access).
-
-Führen Sie den folgenden Befehl aus, wenn Sie den Kubernetes-Cluster gerade erst erstellt haben. Warten Sie, bis die Workerknoten initialisiert werden.
-
-```
-kubectl get nodes
-```
-{: pre}
-
-Falls dieser Cluster bereits vorhanden ist, prüfen Sie Ihre Clusterkapazität.
-
-1.  Legen Sie die Standardportnummer für den Proxy fest.
+Es treten keine Serviceunterbrechungen aufgrund dieser Duplikate auf, Sie sollten die alten Workerknotenverweise jedoch vom API-Server entfernen.
 
   ```
-  kubectl proxy
-  ```
-   {: pre}
-
-2.  Öffnen Sie das Kubernetes-Dashboard.
-
-  ```
-  http://localhost:8001/ui
+  kubectl delete node <knotenname1> <knotenname2>
   ```
   {: pre}
 
-3.  Überprüfen Sie, ob in Ihrem Cluster ausreichend Kapazität verfügbar ist, um Ihren Pod bereitzustellen.
-
-4.  Falls Ihr Cluster nicht genügend freie Kapazität bietet, fügen Sie einen weiteren Workerknoten zu ihm hinzu.
-
-  ```
-  bx cs worker-add <clustername_oder_id> 1
-  ```
-  {: pre}
-
-5.  Falls Ihre Pods auch weiterhin im Status **Pending** (Anstehend) verweilen, obwohl der Workerknoten voll bereitgestellt wurde, ziehen Sie die [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) zurate, um die Ursache für den andauernden Status 'Pending' Ihres Pods zu ermitteln und den Fehler zu beheben.
-
 <br />
 
 
-## Pods sind im Erstellungszustand blockiert
-{: #stuck_creating_state}
-
-{: tsSymptoms}
-Wenn Sie den Befehl `kubectl get pods -o wide` ausführen, dann können Sie erkennen, dass mehrere Pods, die auf demselben Workerknoten ausgeführt werden, im Zustand `ContainerCreating` blockiert sind.
-
-{: tsCauses}
-Das Dateisystem auf dem Workerknoten ist schreibgeschützt.
-
-{: tsResolve}
-1. Erstellen Sie eine Sicherungskopie aller Daten, die möglicherweise auf dem Workerknoten oder in Ihren Containern gespeichert werden.
-2. Erstellen Sie den Workerknoten neu, indem Sie den folgenden Befehl ausführen.
-
-<pre class="pre"><code>bx cs worker-reload &lt;clustername&gt; &lt;worker-id&gt;</code></pre>
-
-<br />
-
-
-## Container werden nicht gestartet
-{: #containers_do_not_start}
-
-{: tsSymptoms}
-Die Pods wurden erfolgreich auf den Clustern bereitgestellt, aber die Container können nicht gestartet werden.
-
-{: tsCauses}
-Die Container werden möglicherweise nicht gestartet, wenn die Registry-Quote erreicht ist.
-
-{: tsResolve}
-[Geben Sie Speicherplatz in {{site.data.keyword.registryshort_notm}} frei.](../services/Registry/registry_quota.html#registry_quota_freeup)
-
-<br />
 
 
 ## Zugriff auf einen Pod auf einem Workerknoten schlägt mit einer Zeitlimitüberschreitung fehl
@@ -425,220 +435,94 @@ Der gelöschte Knoten wird nicht mehr in Calico aufgelistet.
 <br />
 
 
-## Firewall verhindert Verbindung für Workerknoten
-{: #cs_firewall}
+
+
+## Pods verweilen in  im Status 'Pending' (Anstehend)
+{: #cs_pods_pending}
 
 {: tsSymptoms}
-Wenn die Workerknoten keine Verbindung herstellen können, dann werden Sie möglicherweise eine Vielzahl unterschiedlicher Symptome feststellen. Das System zeigt eventuell eine der folgenden Nachrichten an, wenn die Ausführung des Befehls 'kubectl proxy' fehlschlägt oder wenn Sie versuchen, auf einen Service in Ihrem Cluster zuzugreifen und diese Verbindung fehlschlägt.
-
-  ```
-  Connection refused
-  ```
-  {: screen}
-
-  ```
-  Connection timed out
-  ```
-  {: screen}
-
-  ```
-  Unable to connect to the server: net/http: TLS handshake timeout
-  ```
-  {: screen}
-
-Wenn Sie 'kubectl exec', kubectl attach' oder 'kubectl logs' ausführen, dann wird möglicherweise die folgende Nachricht angezeigt.
-
-  ```
-  Error from server: error dialing backend: dial tcp XXX.XXX.XXX:10250: getsockopt: connection timed out
-  ```
-  {: screen}
-
-Wenn die Ausführung von 'kubectl proxy' erfolgreich verläuft, das Dashboard jedoch nicht verfügbar ist, dann wird möglicherweise die folgende Nachricht angezeigt.
-
-  ```
-  timeout on 172.xxx.xxx.xxx
-  ```
-  {: screen}
-
-
+Beim Ausführen von `kubectl get pods` verbleiben Pods weiterhin im Status **Pending** (Anstehend).
 
 {: tsCauses}
-Möglicherweise wurde eine zusätzliche Firewall eingerichtet oder Sie haben die vorhandenen Firewalleinstellungen für Ihr Konto von IBM Cloud Infrastructure (SoftLayer) angepasst. {{site.data.keyword.containershort_notm}} erfordert, dass bestimmte IP-Adressen und Ports geöffnet sind, damit die Kommunikation vom Workerknoten zum Kubernetes-Master und umgekehrt möglich ist. Ein weiterer möglicher Grund kann sein, dass Ihre Workerknoten in einer Neuladen-Schleife hängen.
+Wenn Sie den Kubernetes-Cluster gerade erst erstellt haben, werden die Workerknoten möglicherweise noch konfiguriert. Falls dieser Cluster bereits vorhanden ist, steht unter Umständen nicht ausreichend Kapazität für die Bereitstellung des Pods in Ihrem Cluster zur Verfügung.
 
 {: tsResolve}
 Für diese Task ist die [Zugriffsrichtlinie 'Administrator'](cs_cluster.html#access_ov) erforderlich. Überprüfen Sie Ihre aktuelle [Zugriffsrichtlinie](cs_cluster.html#view_access).
 
-Öffnen Sie in Ihrer angepassten Firewall die folgenden Ports und IP-Adressen.
+Führen Sie den folgenden Befehl aus, wenn Sie den Kubernetes-Cluster gerade erst erstellt haben. Warten Sie, bis die Workerknoten initialisiert werden.
 
-1.  Notieren Sie die öffentlichen IP-Adressen für alle Workerknoten im Cluster:
+```
+kubectl get nodes
+```
+{: pre}
+
+Falls dieser Cluster bereits vorhanden ist, prüfen Sie Ihre Clusterkapazität.
+
+1.  Legen Sie die Standardportnummer für den Proxy fest.
 
   ```
-  bx cs workers '<clustername_oder_id>'
+  kubectl proxy
+  ```
+   {: pre}
+
+2.  Öffnen Sie das Kubernetes-Dashboard.
+
+  ```
+  http://localhost:8001/ui
   ```
   {: pre}
 
-2.  In Ihrer Firewall für die OUTBOUND-Konnektivität Ihrer Workerknoten müssen Sie den ausgehenden Netzverkehr vom Quellen-Workerknoten zum TCP/UDP-Zielportbereich 20000 - 32767 und zum Port 443 für `<each_worker_node_publicIP>` und außerdem für die folgenden IP-Adressen und Netzgruppen zulassen.
-    - **Wichtig**: Sie müssen den ausgehenden Datenverkehr am Port 443 für alle Standorte in der Region zu den jeweils anderen Standorten zulassen, um die Arbeitslast während des Bootstrap-Prozesses auszugleichen. Wenn Ihr Cluster sich beispielsweise in der Region 'Vereinigte Staaten (Süden)' befindet, dann müssen Sie Datenverkehr über den Port 443 an die IP-Adressen aller Standorte ('dal10', 'dal12' und 'dal13') zulassen.
-    <p>
-  <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
-      <thead>
-      <th>Region</th>
-      <th>Standort</th>
-      <th>IP-Adresse</th>
-      </thead>
-    <tbody>
-      <tr>
-        <td>Asien-Pazifik (Norden)</td>
-        <td>hkg02<br>tok02</td>
-        <td><code>169.56.132.234</code><br><code>161.202.126.210</code></td>
-       </tr>
-      <tr>
-         <td>Asien-Pazifik (Süden)</td>
-         <td>mel01<br>syd01<br>syd04</td>
-         <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19</code></td>
-      </tr>
-      <tr>
-         <td>Zentraleuropa</td>
-         <td>ams03<br>fra02<br>par01</td>
-         <td><code>169.50.169.110</code><br><code>169.50.56.174</code><br><code>159.8.86.149</code></td>
-        </tr>
-      <tr>
-        <td>Großbritannien (Süden)</td>
-        <td>lon02<br>lon04</td>
-        <td><code>159.122.242.78</code><br><code>158.175.65.170</code></td>
-      </tr>
-      <tr>
-        <td>Vereinigte Staaten (Osten)</td>
-         <td>tor01<br>wdc06<br>wdc07</td>
-         <td><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
-      </tr>
-      <tr>
-        <td>Vereinigte Staaten (Süden)</td>
-        <td>dal10<br>dal12<br>dal13</td>
-        <td><code>169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
-      </tr>
-      </tbody>
-    </table>
-</p>
+3.  Überprüfen Sie, ob in Ihrem Cluster ausreichend Kapazität verfügbar ist, um Ihren Pod bereitzustellen.
 
-3.  Erlauben Sie den ausgehenden Netzverkehr von den Workerknoten an {{site.data.keyword.registrylong_notm}}:
-    - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
-    - Ersetzen Sie <em>&lt;registry_publicIP&gt;</em> durch alle Adressen für Registry-Regionen, an die der Datenverkehr als zulässig definiert werden soll:
-      <p>
-<table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
-      <thead>
-        <th>Containerregion</th>
-        <th>Registryadresse</th>
-        <th>Registry-IP-Adresse</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Asien-Pazifik (Norden), Asien-Pazifik (Süden)</td>
-          <td>registry.au-syd.bluemix.net</td>
-          <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></td>
-        </tr>
-        <tr>
-          <td>Zentraleuropa</td>
-          <td>registry.eu-de.bluemix.net</td>
-          <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></td>
-         </tr>
-         <tr>
-          <td>Großbritannien (Süden)</td>
-          <td>registry.eu-gb.bluemix.net</td>
-          <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></td>
-         </tr>
-         <tr>
-          <td>Vereinigte Staaten (Osten), Vereinigte Staaten (Süden)</td>
-          <td>registry.ng.bluemix.net</td>
-          <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></td>
-         </tr>
-        </tbody>
-      </table>
-</p>
+4.  Falls Ihr Cluster nicht genügend freie Kapazität bietet, fügen Sie einen weiteren Workerknoten zu ihm hinzu.
 
-4.  Optional: Erlauben Sie den ausgehenden Netzverkehr von den Workerknoten an {{site.data.keyword.monitoringlong_notm}} und die {{site.data.keyword.loganalysislong_notm}}-Services:
-    - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
-    - Ersetzen Sie <em>&lt;monitoring_publicIP&gt;</em> durch alle Adressen für die Überwachungsregionen, an die der Datenverkehr als zulässig definiert werden soll:
-      <p><table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
-        <thead>
-        <th>Containerregion</th>
-        <th>Überwachungsadresse</th>
-        <th>IP-Adressen für die Überwachung</th>
-        </thead>
-      <tbody>
-        <tr>
-         <td>Zentraleuropa</td>
-         <td>metrics.eu-de.bluemix.net</td>
-         <td><code>159.122.78.136/29</code></td>
-        </tr>
-        <tr>
-         <td>Großbritannien (Süden)</td>
-         <td>metrics.eu-gb.bluemix.net</td>
-         <td><code>169.50.196.136/29</code></td>
-        </tr>
-        <tr>
-          <td>Asien-Pazifik (Osten), Asien-Pazifik (Süden), Asien-Pazifik (Norden)</td>
-          <td>metrics.ng.bluemix.net</td>
-          <td><code>169.47.204.128/29</code></td>
-         </tr>
-         
-        </tbody>
-      </table>
-</p>
-    - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
-    - Ersetzen Sie <em>&lt;logging_publicIP&gt;</em> durch alle Adressen für die Protokollierungsregionen, an die der Datenverkehr als zulässig definiert werden soll:
-      <p><table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
-        <thead>
-        <th>Containerregion</th>
-        <th>Protokollierungsadresse</th>
-        <th>IP-Adressen für die Protokollierung</th>
-        </thead>
-      <tbody>
-        <tr>
-         <td>Zentraleuropa</td>
-         <td>ingest.logging.eu-de.bluemix.net</td>
-         <td><code>169.50.25.125</code></td>
-        </tr>
-        <tr>
-         <td>Großbritannien (Süden)</td>
-         <td>ingest.logging.eu-gb.bluemix.net</td>
-         <td><code>169.50.115.113</code></td>
-        </tr>
-        <tr>
-          <td>Asien-Pazifik (Osten), Asien-Pazifik (Süden), Asien-Pazifik (Norden)</td>
-          <td>ingest.logging.ng.bluemix.net</td>
-          <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
-         </tr>
-        </tbody>
-      </table>
-</p>
+  ```
+  bx cs worker-add <clustername_oder_id> 1
+  ```
+  {: pre}
 
-5. Wenn Sie über eine private Firewall verfügen, müssen Sie die entsprechenden Bereiche privater IPs für IBM Cloud Infrastructure (SoftLayer) zulassen. Weitere Informationen finden Sie unter [diesem Link](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) ausgehend vom Abschnitt **Back-End-Netz (Privat)**.
-    - Fügen Sie alle [Standorte in den Regionen](cs_regions.html#locations) hinzu, die von Ihnen verwendet werden.
-    - Beachten Sie, dass Sie den Standort 'dal01' (Rechenzentrum) hinzufügen müssen.
-    - Öffnen Sie die Ports 80 und 443, um die Durchführung des Cluster-Bootstrap-Prozesses zu erlauben.
+5.  Falls Ihre Pods auch weiterhin im Status **Pending** (Anstehend) verweilen, obwohl der Workerknoten voll bereitgestellt wurde, ziehen Sie die [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) zurate, um die Ursache für den andauernden Status 'Pending' Ihres Pods zu ermitteln und den Fehler zu beheben.
 
 <br />
 
 
-## Nachdem ein Workerknoten aktualisiert oder erneut geladen wurde, werden doppelte Knoten und Pods angezeigt
-{: #cs_duplicate_nodes}
+
+
+## Pods sind im Erstellungszustand blockiert
+{: #stuck_creating_state}
 
 {: tsSymptoms}
-Wenn Sie `kubectl get nodes` ausführen, werden doppelte Workerknoten mit dem Status **NotReady** (Nicht bereit) angezeigt. Die Workerknoten mit dem Status **NotReady** verfügen über öffentliche IP-Adressen, während die Workerknoten mit dem Status **Ready** (Bereit) private IP-Adressen haben.
+Wenn Sie den Befehl `kubectl get pods -o wide` ausführen, dann können Sie erkennen, dass mehrere Pods, die auf demselben Workerknoten ausgeführt werden, im Zustand `ContainerCreating` blockiert sind.
 
 {: tsCauses}
-Ältere Cluster haben über Workerknoten verfügt, die über die öffentliche IP-Adresse des Clusters aufgelistet wurden. Nun werden Workerknoten über die private IP-Adresse des Clusters aufgelistet. Wenn Sie einen Knoten erneut laden oder aktualisieren, dann wird die IP-Adresse geändert, der Verweis auf die öffentliche IP-Adresse bleibt jedoch erhalten.
+Das Dateisystem auf dem Workerknoten ist schreibgeschützt.
 
 {: tsResolve}
-Es treten keine Serviceunterbrechungen aufgrund dieser Duplikate auf, Sie sollten die alten Workerknotenverweise jedoch vom API-Server entfernen.
+1. Erstellen Sie eine Sicherungskopie aller Daten, die möglicherweise auf dem Workerknoten oder in Ihren Containern gespeichert werden.
+2. Erstellen Sie den Workerknoten neu, indem Sie den folgenden Befehl ausführen.
 
-  ```
-  kubectl delete node <knotenname1> <knotenname2>
-  ```
-  {: pre}
+<pre class="pre"><code>bx cs worker-reload &lt;clustername&gt; &lt;worker-id&gt;</code></pre>
 
 <br />
+
+
+
+
+## Container werden nicht gestartet
+{: #containers_do_not_start}
+
+{: tsSymptoms}
+Die Pods wurden erfolgreich auf den Clustern bereitgestellt, aber die Container können nicht gestartet werden.
+
+{: tsCauses}
+Die Container werden möglicherweise nicht gestartet, wenn die Registry-Quote erreicht ist.
+
+{: tsResolve}
+[Geben Sie Speicherplatz in {{site.data.keyword.registryshort_notm}} frei.](../services/Registry/registry_quota.html#registry_quota_freeup)
+
+<br />
+
+
 
 
 ## Protokolle werden nicht angezeigt
@@ -649,18 +533,20 @@ Beim Zugriff auf das Kibana-Dashboard werden keine Protokolle angezeigt.
 
 {: tsCauses}
 Protokolle werden möglicherweise aus einem der folgenden Gründen nicht angezeigt:<br/><br/>
-    A. Der Cluster weist nicht den Status `Normal` auf.<br/><br/>
-    B. Das Kontingent für den Protokollspeicher ist erschöpft.<br/><br/>
-    C. Wenn Sie beim Erstellen des Clusters einen Bereich angegeben haben, verfügt der Kontoeigner nicht über die Berechtigungen eines Managers, Entwicklers oder Prüfers für diesen Bereich.<br/><br/>
-    D. Es sind noch keine Ereignisse, die eine Protokollierung auslösen, im Pod aufgetreten.<br/><br/>
+    A. Es ist keine Protokollierungskonfiguration eingerichtet. <br/><br/>
+    B. Der Cluster weist nicht den Status `Normal` auf.<br/><br/>
+    C. Das Kontingent für den Protokollspeicher ist erschöpft.<br/><br/>
+    D. Wenn Sie beim Erstellen des Clusters einen Bereich angegeben haben, verfügt der Kontoeigner nicht über die Berechtigungen eines Managers, Entwicklers oder Prüfers für diesen Bereich.<br/><br/>
+    E. Es sind noch keine Ereignisse, die eine Protokollierung auslösen, im Pod aufgetreten.<br/><br/>
 
 {: tsResolve}
 Sehen Sie sich die folgenden Optionen an, um herauszufinden, warum Protokolle nicht angezeigt werden:
 
-A. Informationen darüber, wie Sie den Status des Clusters überprüfen können, finden Sie in [Cluster debuggen](cs_troubleshoot.html#debug_clusters).<br/><br/>
-B. Informationen darüber, wie Sie die Protokollspeichergrenze erhöhen, finden Sie in der [{{site.data.keyword.loganalysislong_notm}}-Dokumentation](https://console.bluemix.net/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs).<br/><br/>
-C. Informationen zum Ändern der {{site.data.keyword.containershort_notm}}-Zugriffsberechtigungen für den Kontoeigner finden Sie in [Clusterzugriff verwalten](cs_cluster.html#cs_cluster_user). Sobald Berechtigungen geändert wurden, kann es bis zu 24 Stunden dauern, bis die entsprechenden Protokolle angezeigt werden.<br/><br/>
-D. Um ein Protokoll für ein Ereignis zu generieren, können Sie Noisy auf einem Workerknoten in Ihrem Cluster bereitstellen. Dabei handelt es sich einen Beispiel-Pod, der mehrere Protokollereignisse generiert.<br/>
+A. Damit Protokolle gesendet werden, müssen Sie zunächst eine Protokollierungskonfiguration erstellen, um Protokolle an {{site.data.keyword.loganalysislong_notm}} weiterzuleiten. Weitere Informationen zum Erstellen einer Protokollierungskonfiguration finden Sie unter [Protokollweiterleitung aktivieren](cs_cluster.html#cs_log_sources_enable). <br/><br/>
+B. Informationen darüber, wie Sie den Status des Clusters überprüfen können, finden Sie unter [Cluster debuggen](cs_troubleshoot.html#debug_clusters). <br/><br/>
+C. Informationen darüber, wie Sie die Protokollspeichergrenze erhöhen, finden Sie in der [{{site.data.keyword.loganalysislong_notm}}-Dokumentation](https://console.bluemix.net/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs). <br/><br/>
+D. Informationen zum Ändern der {{site.data.keyword.containershort_notm}}-Zugriffsberechtigungen für den Kontoeigner finden Sie in [Clusterzugriff verwalten](cs_cluster.html#cs_cluster_user). Sobald Berechtigungen geändert wurden, kann es bis zu 24 Stunden dauern, bis die entsprechenden Protokolle angezeigt werden.<br/><br/>
+E. Um ein Protokoll für ein Ereignis zu generieren, können Sie Noisy auf einem Workerknoten in Ihrem Cluster bereitstellen. Dabei handelt es sich einen Beispiel-Pod, der mehrere Protokollereignisse generiert. <br/>
   1. [Geben Sie als Ziel der CLI](cs_cli_install.html#cs_cli_configure) einen Cluster an, auf dem Protokolle generiert werden sollen.
 
   2. Erstellen Sie die Konfigurationsdatei `deploy-noisy.yaml`.
@@ -687,12 +573,14 @@ D. Um ein Protokoll für ein Ereignis zu generieren, können Sie Noisy auf einem
         ```
         {:pre}
 
-  4. Nach einigen Minuten werden die Protokolle im Kibana-Dashboard angezeigt. Zum Zugriff auf das Kibana-Dashboard müssen Sie eine der folgenden URLs aufrufen und dann das {{site.data.keyword.Bluemix_notm}}-Konto, in dem Sie den Cluster erstellt haben, auswählen. Wenn Sie beim Erstellen des Clusters einen Bereich angegeben haben, wechseln Sie stattdessen zu diesem Bereich.
+  4. Nach einigen Minuten werden die Protokolle im Kibana-Dashboard angezeigt. Zum Zugriff auf das Kibana-Dashboard müssen Sie eine der folgenden URLs aufrufen und dann das {{site.data.keyword.Bluemix_notm}}-Konto, in dem Sie den Cluster erstellt haben, auswählen. Wenn Sie beim Erstellen des Clusters einen Bereich angegeben haben, wechseln Sie stattdessen zu diesem Bereich.        
         - Vereinigte Staaten (Süden) und Vereinigte Staaten (Osten): https://logging.ng.bluemix.net
-        - Großbritannien (Süden): https://logging.eu-gb.bluemix.net
-        - Zentraleuropa: https://logging.eu-de.bluemix.net
+        - Großbritannien (Süden) und Zentraleuropa: https://logging.eu-fra.bluemix.net
+        - Asiatisch-pazifischer Raum (Süden): https://logging.au-syd.bluemix.net
 
 <br />
+
+
 
 
 ## Im Kubernetes-Dashboard werden keine Nutzungsdiagramme angezeigt
@@ -713,6 +601,8 @@ Löschen Sie den Pod `kube-dashboard`, um einen Neustart zu erzwingen. Der Pod w
   {: pre}
 
 <br />
+
+
 
 
 ## Verbindung mit einer App über Ingress schlägt fehl
@@ -812,7 +702,7 @@ Gehen Sie wie folgt vor, um Fehler in Ingress zu beheben:
     1.  Rufen Sie die ID der Ingress-Pods ab, die in Ihrem Cluster ausgeführt werden.
 
       ```
-      kubectl get pods -n kube-system |grep ingress
+      kubectl get pods -n kube-system | grep alb1
       ```
       {: pre}
 
@@ -826,6 +716,8 @@ Gehen Sie wie folgt vor, um Fehler in Ingress zu beheben:
     3.  Suchen Sie nach Fehlernachrichten in den Ingress-Controllerprotokollen.
 
 <br />
+
+
 
 
 ## Verbindung mit einer App über einen Lastausgleichsservice schlägt fehl
@@ -887,8 +779,8 @@ Gehen Sie wie folgt vor, um Fehler in Ihrem Lastausgleichsservice zu beheben:
     <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips</code></pre></br>Sie haben eine portierbare öffentliche IP-Adresse für Ihren Lastausgleichsservice mithilfe des Abschnitts **loadBalancerIP** definiert, aber diese portierbare öffentliche IP-Adresse ist in Ihrem portierbaren öffentlichen Teilnetz nicht verfügbar. Ändern Sie das Konfigurationsscript Ihres Lastausgleichsservice und wählen Sie entweder eine der portierbaren öffentlichen IP-Adressen aus, oder entfernen Sie den Abschnitt **loadBalancerIP** aus Ihrem Script, damit eine verfügbare portierbare öffentliche IP-Adresse automatisch zugeordnet werden kann.
     <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>Sie verfügen nicht über ausreichend Workerknoten, um einen Lastausgleichsservice bereitzustellen. Ein Grund kann sein, dass Sie einen Standardcluster mit mehr ale einem Workerknoten bereitgestellt haben, aber die Bereitstellung der Workerknoten ist fehlgeschlagen.
     <ol><li>Listen Sie verfügbare Workerknoten auf.</br><pre class="codeblock"><code>kubectl get nodes</code></pre>
-    <li>Werden mindestens zwei verfügbare Workerknoten gefunden, listen Sie die Details der Workerknoten auf.</br><pre class="screen"><code>bx cs worker-get <worker-id></code></pre>
-    <li>Stellen Sie sicher, dass die öffentlichen und privaten VLAN-IDs für die Workerknoten, die von den Befehlen 'kubectl get nodes' und 'bx cs worker-get' zurückgegeben wurden, übereinstimmen.</ol></ul></ul>
+    <li>Werden mindestens zwei verfügbare Workerknoten gefunden, listen Sie die Details der Workerknoten auf.</br><pre class="screen"><code>bx cs worker-get [<clustername_oder_id>] <worker-ID></code></pre>
+    <li>Stellen Sie sicher, dass die öffentlichen und privaten VLAN-IDs für die Workerknoten, die von den Befehlen 'kubectl get nodes' und 'bx cs [<clustername_oder_id>] worker-get' zurückgegeben wurden. </ol></ul></ul>
 
 4.  Wenn Sie eine angepasste Domäne verwenden, um Ihren Lastausgleichsservice zu verbinden, stellen Sie sicher, dass Ihre angepasste Domäne der öffentlichen IP-Adresse Ihres Lastausgleichsservice zugeordnet ist.
     1.  Suchen Sie nach der öffentlichen IP-Adresse Ihres Lastausgleichsservice.
@@ -901,6 +793,11 @@ Gehen Sie wie folgt vor, um Fehler in Ihrem Lastausgleichsservice zu beheben:
     2.  Prüfen Sie, dass Ihre angepasste Domäne der portierbaren öffentlichen IP-Adresse Ihres Lastausgleichsservice im Zeigerdatensatz (PTR) zugeordnet ist.
 
 <br />
+
+
+
+
+
 
 
 ## Abrufen der ETCD-URL für die Konfiguration der Calico-CLI ist fehlgeschlagen
@@ -936,13 +833,15 @@ Wenn Sie den Wert für `<ETCD_URL>` abrufen, dann fahren Sie mit den Schritten f
 <br />
 
 
+
+
 ## Hilfe und Unterstützung anfordern
 {: #ts_getting_help}
 
 Erste Schritte bei der Fehlerbehebung für einen Container
 
 -   [Überprüfen Sie auf der {{site.data.keyword.Bluemix_notm}}-Statusseite ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/bluemix/support/#status), ob {{site.data.keyword.Bluemix_notm}} verfügbar ist.
--   Veröffentlichen Sie eine Frage im [{{site.data.keyword.containershort_notm}}-Slack. ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com) Wenn Sie keine IBM ID für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, wenden Sie sich an [crosen@us.ibm.com](mailto:crosen@us.ibm.com) und fordern Sie eine Einladung zu diesem Slack an.
+-   Veröffentlichen Sie eine Frage im [{{site.data.keyword.containershort_notm}}-Slack. ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com) Tipp: Wenn Sie keine IBM ID für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, [fordern Sie eine Einladung](https://bxcs-slack-invite.mybluemix.net/) zu diesem Slack an. 
 -   Suchen Sie in entsprechenden Foren, ob andere Benutzer auf das gleiche Problem
 gestoßen sind. Versehen Sie Ihre Fragen in den Foren mit Tags, um sie für das Entwicklungsteam
 von {{site.data.keyword.Bluemix_notm}} erkennbar zu machen.

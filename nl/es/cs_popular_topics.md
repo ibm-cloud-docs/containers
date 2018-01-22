@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-02"
+lastupdated: "2017-12-14"
 
 ---
 
@@ -46,11 +46,15 @@ ofrecen funciones integradas de seguridad y detección y permiten automatizar el
 <td>Con la CLI, puede crear y gestionar sus clústeres de Kubernetes.</td>
 </tr>
 <tr>
-<td>[Actualización a Kubernetes 1.7](cs_versions.html)</td>
-<td>Revise los cambios que debe realizar en sus clústeres antes de actualizar a Kubernetes 1.7.</td>
+<td>[Apertura de los puertos y direcciones IP necesarios en el cortafuegos](cs_security.html#opening_ports)</td>
+<td>Puede que tenga que abrir puertos específicos y direcciones IP en el cortafuegos para ejecutar mandatos de CLI o para permitir la comunicación entre el nodo Kubernetes maestro y los nodos de trabajador.</td>
 </tr>
 <tr>
-<td>[API REST para clústeres ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://us-south.containers.bluemix.net/swagger)</td>
+<td>[Actualizar Kubernetes](cs_versions.html)</td>
+<td>Revise los cambios que debe realizar en sus clústeres antes de actualizar Kubernetes.</td>
+</tr>
+<tr>
+<td>[API REST para clústeres ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://containers.bluemix.net/swagger)</td>
 <td>Consulte la documentación de la API para gestionar el {{site.data.keyword.containershort_notm}}.</td>
 </tr>
 </tbody></table>
@@ -60,4 +64,4 @@ ofrecen funciones integradas de seguridad y detección y permiten automatizar el
 
 Vea de qué están hablando otros desarrolladores y realice sus propias preguntas en [{{site.data.keyword.containershort_notm}} Slack. ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibm-container-service.slack.com)
 
-Si no utiliza un ID de IBM para la cuenta de {{site.data.keyword.Bluemix_notm}}, póngase en contacto con [crosen@us.ibm.com](mailto:crosen@us.ibm.com) y solicite una invitación a este Slack.
+Consejo: si no utiliza un ID de IBM para la cuenta de {{site.data.keyword.Bluemix_notm}}, [solicite una invitación](https://bxcs-slack-invite.mybluemix.net/) a este Slack.

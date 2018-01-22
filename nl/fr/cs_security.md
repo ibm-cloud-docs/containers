@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-16"
+lastupdated: "2017-12-13"
 
 ---
 
@@ -22,12 +22,19 @@ lastupdated: "2017-11-16"
 Vous pouvez utiliser les fonctions de sécurité intégrées pour l'analyse des risques et la protection de la sécurité. Ces fonctions vous aident à protéger l'infrastructure de votre cluster et la communication réseau, à isoler vos ressources de traitement, et à garantir la conformité aux règles de sécurité dans les composants de votre infrastructure et les déploiements de conteneurs.
 {: shortdesc}
 
-Dans le diagramme suivant, vous voyez que les fonctions de sécurité sont regroupées par maître Kubernetes, noeuds d'agent et images de conteneur.  
+## Sécurité par composant du cluster
+{: #cs_security_cluster}
+
+Chaque cluster {{site.data.keyword.containerlong_notm}} dispose de fonctions de sécurité intégrées dans ses noeuds [maître](#cs_security_master) et [worker](#cs_security_worker). Si vous disposez d'un pare-feu, avec d'accéder l'équilibrage de charge depuis l'extérieur du cluster, ou désirez exécuter des commandes `kubectl` depuis votre système local lorsque les règles de réseau d'entreprise empêchent l'accès à des noeuds finaux Internet publics, [ouvrez des ports sur votre pare-feu](#opening_ports). Si vous désirez connecter des applications de votre cluster à un réseau sur site ou à d'autres applications externes à votre cluster, [configurez votre connectivité VPN ](#vpn).
+{: shortdesc}
+
+Dans le diagramme suivant, vous voyez que les fonctions de sécurité sont regroupées par maître Kubernetes, noeuds d'agent et images de conteneur.
+
 <img src="images/cs_security.png" width="400" alt="{{site.data.keyword.containershort_notm}} sécurité de cluster" style="width:400px; border-style: none"/>
 
 
   <table summary="La première ligne du tableau s'étend sur deux colonnes. Les autres lignes se lisent de gauche à droite. L'emplacement du serveur figure dans la première colonne et les adresses IP pour concordance dans la seconde colonne.">
-  <caption>Fonctions de sécurité</caption>
+  <caption>Tableau 1. Fonctions de sécurité</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Paramètres de sécurité de cluster intégrés dans {{site.data.keyword.containershort_notm}}</th>
   </thead>
@@ -50,10 +57,7 @@ votre registre privé est analysée par Vulnerability Advisor. Vulnerability Adv
   </tbody>
 </table>
 
-<br />
-
-
-## Maître Kubernetes
+### Maître Kubernetes
 {: #cs_security_master}
 
 Examinez les fonctions de sécurité du maître Kubernetes intégré destinées à
@@ -84,7 +88,7 @@ entre le maître Kubernetes et les noeuds d'agent lors de la création du cluste
 <br />
 
 
-## Noeuds d'agent
+### Noeuds d'agent
 {: #cs_security_worker}
 
 Examinez les fonctions de sécurité de noeud worker intégrées destinées à protéger l'environnement de noeud worker et à assurer l'isolement des ressources, du réseau et du stockage.
@@ -94,30 +98,181 @@ Examinez les fonctions de sécurité de noeud worker intégrées destinées à p
   <dt>Isolement de l'infrastructure de traitement, réseau et de stockage</dt>
     <dd>Lorsque vous créez un cluster, des machines virtuelles sont allouées par IBM en tant que noeuds d'agent dans le compte d'infrastructure IBM Cloud (SoftLayer) ou dans le compte d'infrastructure IBM Cloud (SoftLayer) dédié. Les noeuds d'agent sont dédiés à un cluster et n'hébergent pas la charge de travail d'autres clusters.</br> Chaque compte {{site.data.keyword.Bluemix_notm}} est configuré avec des réseaux locaux virtuels d'infrastructure IBM Cloud (SoftLayer) pour garantir des performances réseau satisfaisantes et l'isolement des noeuds d'agent. </br>Pour rendre persistantes les données dans votre cluster, vous pouvez allouer un stockage de fichiers NFS dédié depuis l'infrastructure IBM Cloud (SoftLayer) et tirer parti des fonctions intégrées de sécurité des données de cette plateforme.</dd>
   <dt>Noeud worker sécurisé configuré</dt>
-    <dd>Chaque noeud worker est configuré avec un système d'exploitation Ubuntu qui ne peut pas être modifié par l'utilisateur. Afin de protéger ce système d'exploitation face aux attaques potentielles, chaque noeud worker est configuré avec des paramètres de pare-feu avancés imposés par les règles iptable de Linux.</br> Tous les conteneurs s'exécutant sur Kubernetes sont protégés par des paramètres de règles réseau Calico prédéfinies qui sont configurées sur chaque noeud worker lors de la création du cluster. Cette configuration assure une communication réseau sécurisée entre les noeuds d'agent et les pods. Pour limiter davantage les actions qu'un conteneur peut effectuer sur le noeud worker, les utilisateurs peuvent choisir de configurer des [règles AppArmor ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tutorials/clusters/apparmor/) sur les noeuds d'agent.</br> Par défaut, l'accès SSH de l'utilisateur root est désactivé sur le noeud worker. Si vous souhaitez installer des fonctions supplémentaires sur votre noeud worker, vous pouvez utiliser des [jeux de démons Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset) pour tout ce que vous voulez exécuter sur chaque noeud worker, ou des [travaux Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) pour les actions ponctuelles que vous devez exécuter.</dd>
+    <dd>Chaque noeud worker est configuré avec un système d'exploitation Ubuntu qui ne peut pas être modifié par l'utilisateur. Afin de protéger ce système d'exploitation face aux attaques potentielles, chaque noeud worker est configuré avec des paramètres de pare-feu avancés imposés par les règles iptable de Linux.</br> Tous les conteneurs s'exécutant sur Kubernetes sont protégés par des paramètres de règles réseau Calico prédéfinies qui sont configurées sur chaque noeud worker lors de la création du cluster. Cette configuration assure une communication réseau sécurisée entre les noeuds d'agent et les pods. Pour limiter davantage les actions qu'un conteneur peut effectuer sur le noeud worker, les utilisateurs peuvent choisir de configurer des [règles AppArmor ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tutorials/clusters/apparmor/) sur les noeuds d'agent.</br> L'accès SSH est désactivé sur le noeud worker. Si vous souhaitez installer des fonctions supplémentaires sur votre noeud worker, vous pouvez utiliser des [jeux de démons Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset) pour tout ce que vous voulez exécuter sur chaque noeud worker, ou des [travaux Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) pour les actions ponctuelles que vous devez exécuter.</dd>
   <dt>Conformité à la sécurité de noeud worker Kubernetes</dt>
-    <dd>IBM collabore avec des équipes de conseil en sécurité, internes et externes, pour traiter les vulnérabilités de conformité aux règles de sécurité potentielles. IBM gère l'accès SSH aux noeuds d'agent afin de déployer des mises à jour et des correctifs de sécurité dans le système d'exploitation.</br> <b>Important</b> : Redémarrez vos noeuds d'agent régulièrement pour garantir l'installation des mises à jour et des correctifs de sécurité automatiquement déployés dans le système d'exploitation. IBM ne redémarre pas vos noeuds d'agent.</dd>
+    <dd>IBM collabore avec des équipes de conseil en sécurité, internes et externes, pour traiter les vulnérabilités de conformité aux règles de sécurité potentielles. IBM maintient l'accès aux noeuds en vue de déployer des correctifs de sécurité usr le système d'exploitation.</br> <b>Important</b> : Redémarrez vos noeuds d'agent régulièrement pour garantir l'installation des mises à jour et des correctifs de sécurité automatiquement déployés dans le système d'exploitation. IBM ne redémarre pas vos noeuds d'agent.</dd>
+  <dt>Disque chiffré</dt>
+  <dd>Par défaut, {{site.data.keyword.containershort_notm}} fournit deux partitions de données locales SSD chiffrées pour tous les noeuds worker lorsqu'il est provisionné. La première partition n'est pas chiffrée et la seconde partition montée sur _/var/lib/docker_ est déverrouillée lorsqu'elle est provisionnée à l'aide des clés de chiffrement LUKS. Chaque agent dans chaque cluster Kubernetes dispose de sa propre clé de chiffrement LUKS unique, gérée par {{site.data.keyword.containershort_notm}}. Lorsque vous créez un cluster ou ajoutez un noeud worker à un cluster existant, les clés sont extraites de manière sécurisée, puis ignorées une fois que le disque chiffré a été déverrouillé. <p><b>Remarque </b>: le chiffrement peut avoir une incidence sur les performances des E-S disque. Dans le cas de charges de travail exigeant de hautes performances des E-S, testez un cluster avec et sans chiffrement activé pour déterminer s'il convient de désactiver le chiffrement.</p>
+  </dd>
   <dt>Support pour les pare-feux réseau d'infrastructure IBM Cloud (SoftLayer)</dt>
-    <dd>{{site.data.keyword.containershort_notm}} est compatible avec toutes les [offres de pare-feu d'infrastructure IBM Cloud (SoftLayer) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud-computing/bluemix/network-security). Sur {{site.data.keyword.Bluemix_notm}} Public, vous pouvez mettre en place un pare-feu avec des règles réseau personnalisées afin de promouvoir une sécurité réseau dédiée pour votre cluster et de détecter et de parer à des intrusions réseau. Par exemple, vous pouvez choisir de configurer un [produit Vyatta ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://knowledgelayer.softlayer.com/topic/vyatta-1) qui agira en tant que pare-feu et bloquera le trafic indésirable. Lorsque vous configurez un pare-feu, [vous devez également ouvrir les adresses IP et les ports requis](#opening_ports) pour chaque région de manière à permettre au maître et aux noeuds d'agent de communiquer. Sur {{site.data.keyword.Bluemix_dedicated_notm}}, les pare-feux, DataPower, Fortigate et les DNS sont déjà configurés dans le cadre de l'environnement de déploiement dédié standard.</dd>
+    <dd>{{site.data.keyword.containershort_notm}} est compatible avec toutes les [offres de pare-feu d'infrastructure IBM Cloud (SoftLayer) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud-computing/bluemix/network-security). Sur {{site.data.keyword.Bluemix_notm}} Public, vous pouvez mettre en place un pare-feu avec des règles réseau personnalisées afin de promouvoir une sécurité réseau dédiée pour votre cluster et de détecter et de parer à des intrusions réseau. Par exemple, vous pouvez choisir de configurer un [produit Vyatta ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://knowledgelayer.softlayer.com/topic/vyatta-1) qui agira en tant que pare-feu et bloquera le trafic indésirable. Lorsque vous configurez un pare-feu, [vous devez également ouvrir les adresses IP et les ports requis](#opening_ports) pour chaque région de manière à permettre au maître et aux noeuds d'agent de communiquer.</dd>
   <dt>Gardez privés les services ou exposez sélectivement des services et des applications à l'Internet public</dt>
     <dd>Vous pouvez décider de garder privés vos services et applications et d'exploiter les fonctions de sécurité intégrées décrites dans cette rubrique pour assurer une communication sécurisée entre les noeuds d'agent et les pods. Si vous désirez exposer des services et des applications sur l'Internet public, vous
 pouvez exploiter la prise en charge d'Ingress et d'un équilibreur de charge pour rendre
 vos services accessibles au public de manière sécurisée.</dd>
-  <dt>Connectez vos noeuds d'agent et vos applications de manière sécurisée à un centre de données sur site</dt>
-    <dd>Vous pouvez mettre en place un produit Vyatta Gateway Appliance ou Fortigate Appliance pour configurer un noeud final IPSec VPN qui connecte votre cluster Kubernetes à un centre de données sur site. Via un tunnel chiffré, tous les services qui s'exécutent dans votre cluster Kubernetes peuvent communiquer de manière sécurisée avec des applications sur site, telles que des annuaires d'utilisateurs, des bases de données ou des grands systèmes. Pour plus d'informations, voir [Connexion d'un cluster à un centre de données sur site ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/).</dd>
+  <dt>Connectez de manière sécurisée vos noeuds worker et vos applications à un centre de données sur site </dt>
+  <dd>Pour connecter vos noeuds worker et vos applications à un centre de données sus site, vous pouvez configurer un noeud final VPN IPSec avec un service Strongswan ou un dispositif de passerelle Vyatta ou un dispositif Fortigate.<br><ul><li><b>Service VPN Strongswan IPSec </b>: vous pouvez définir un [service VPN Strongswan IPSec ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.strongswan.org/) connectant de manière sécurisée votre cluster Kubernetes avec un réseau sur site. Le service VPN Strongswan IPSec fournit un canal de communication de bout en bout sécurisé sur Internet basé sur la suite de protocoles IPSec (Internet Protocol Security) aux normes du secteur. Pour configurer une connexion sécurisée entre votre cluster et un réseau sur site, vous devez disposer d'une passerelle IPsec VPN ou d'un serveur d'infrastructure IBM Cloud (SoftLayer) installés sur votre centre de données sur site. Vous pouvez ensuite [configurer et déployer le service Strongswan IPSec VPN](cs_security.html#vpn) dans un pod Kubernetes.</li><li><b>Dispositif de passerelle Vyatta ou dispositif Fortigate </b>: si vous disposez d'un cluster plus volumineux, vous pouvez choisir de mettre en place en  dispositif de passerelle Vyatta ou un dispositif Fortigate pour configurer un noeud final IPSec VPN. Pour plus d'informations, reportez-vous à cet article de blogue sur la [Connexion d'un cluster à un centre de données sur site![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/).</li></ul></dd>
   <dt>Consignation au journal et surveillance en continu de l'activité du cluster</dt>
-    <dd>Dans le cas des clusters standard, tous les événements associés au cluster (tels que l'ajout d'un noeud worker, la progression d'une mise à jour tournante ou les informations sur l'utilisation des capacités) sont consignés au journal et surveillés par
-{{site.data.keyword.containershort_notm}} qui les envoie aux services IBM Monitoring et
-Logging Service.</dd>
+    <dd>Dans le cas de clusters standard, tous les événements associés au cluster, comme l'ajout d'un noeud worker, la progression d'une mise à jour tournante ou les informations d'utilisation des capacités, peuvent être consignés et surveillés par {{site.data.keyword.containershort_notm}} et envoyés à {{site.data.keyword.loganalysislong_notm}} et à {{site.data.keyword.monitoringlong_notm}}. Pour plus d'informations sur la configuration  de la consignation et de la surveillance, voir [Configuration de journalisation de cluster](https://console.bluemix.net/docs/containers/cs_cluster.html#cs_logging) et [Configuration de la surveillance de cluster](https://console.bluemix.net/docs/containers/cs_cluster.html#cs_monitoring).</dd>
 </dl>
 
-### Ouverture des ports et adresses IP requis dans votre pare-feu
+### Images
+{: #cs_security_deployment}
+
+Gérez la sécurité et l'intégrité de vos images via des fonctions de sécurité intégrées.
+{: shortdesc}
+
+<dl>
+<dt>Référentiel d'images Docker privé et sécurisé dans {{site.data.keyword.registryshort_notm}}</dt>
+<dd>Vous pouvez mettre en place votre propre registre d'images Docker dans un registre d'images privé, à service partagé, haute disponibilité et évolutif, hébergé et géré par IBM, pour construire, stocker en sécurité et partager entre les utilisateurs du cluster vos images Docker.</dd>
+
+<dt>Conformité de l'image avec les règles de sécurité</dt>
+<dd>En utilisant {{site.data.keyword.registryshort_notm}}, vous pouvez
+exploiter la fonctionnalité intégrée d'analyse de sécurité offerte par Vulnerability Advisor Chaque image envoyée par commande push à votre espace de nom est automatiquement analysée pour détection de vulnérabilités face à une base de données
+de problèmes CentOS, Debian, Red Hat et Ubuntu connus. si des vulnérabilités sont détectées, Vulnerability communique des instructions pour les résoudre et garantir l'intégrité et la sécurité de l'image.</dd>
+</dl>
+
+Pour examiner l'évaluation des vulnérabilités de vos images, [consultez la documentation de l'assistant de détection des vulnérabilités](/docs/services/va/va_index.html#va_registry_cli).
+
+<br />
+
+
+## Ouverture des ports et adresses IP requis dans votre pare-feu
 {: #opening_ports}
 
 Examinez ces situations pour lesquelles vous aurez peut-être à ouvrir des ports et des adresses IP spécifiques dans vos pare-feux :
-* Pour autoriser la communication entre le maître Kubernetes et les noeuds d'agent lorsqu'un pare-feu est configuré pour les noeuds d'agent ou que les paramètres de pare-feu sont personnalisés dans votre compte d'infrastructure IBM Cloud (SoftLayer)
-* Pour accéder à l'équilibreur de charge ou au contrôleur Ingress hors du cluster
-* Pour exécuter les commandes `kubectl` depuis votre système local lorsque des règles de réseau d'entreprise empêchent l'accès aux noeuds finaux d'Internet public via proxy ou pare-feux
+* [Pour exécuter des commandes `bx` commands](#firewall_bx) depuis votre système local lorsque les règles réseau de l'entreprise empêchent l'accès à des noeuds finaux Internet publics via des proxies ou des pare-feux.
+* [Pour exécuter des commandes `kubectl`](#firewall_kubectl) depuis votre système local lorsque les règles réseau de l'entreprise empêchent l'accès à des noeuds finaux Internet publics via des proxies ou des pare-feux.
+* [Pour exécuter des commandes `calicoctl` commands](#firewall_calicoctl) depuis votre système local lorsque les règles réseau de l'entreprise empêchent l'accès à des noeuds finaux Internet publics via des proxies ou des pare-feux. 
+* [Pour autoriser la communication entre le maître Kubernetes et les noeuds worker ](#firewall_outbound)lorsqu'un pare-feu a été mis en place pour les noeuds worker ou que les paramètres du pare-feu ont été personnalisés dans votre compte IBM Cloud infrastructure (SoftLayer).
+* [Pour accéder au service NodePort, au service LoasBalancer, ou à Ingress depuis l'extérieur du cluster](#firewall_inbound).
+
+### Exécution  de commandes `bx cs` de derrière un pare-feu
+{: #firewall_bx}
+
+Si les règles réseau de l'entreprise empêchent l'accès depuis votre système à des noeuds finaux publics via des proxies ou des pare-feux, pour exécuter des commandes `bx cs`, vous devez autoriser l'accès TCP pour {{site.data.keyword.containerlong_notm}}.
+
+1. Autorisez l'accès à `containers.bluemix.net` sur le port 443.
+2. Vérifiez votre connexion. Si l'accès est configuré correctement, des navires sont affichés dans la sortie.
+   ```
+   curl https://containers.bluemix.net/v1/
+   ```
+   {: pre}
+
+   Exemple de sortie :
+   ```
+                                     )___(
+                              _______/__/_
+                     ___     /===========|   ___
+    ____       __   [\\\]___/____________|__[///]   __
+    \   \_____[\\]__/___________________________\__[//]___
+     \                                                    |
+      \                                                  /
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   ```
+   {: screen}
+
+### Exécution de commandes `kubectl` de derrière un pare-feu
+{: #firewall_kubectl}
+
+Si les règles réseau de l'entreprise empêchent l'accès depuis votre système à des noeuds finaux publics via des proxies ou des pare-feux, pour exécuter des commandes `kubectl`, vous devez autoriser l'accès TCP pour le cluster.
+
+Lorsqu'un cluster est créé, le port dans l'URL maîtresse est affecté aléatoirement sur la plage 20000 à 32767. Vous pouvez choisir d'ouvrir la plage de ports 20000 à 32767 pour n'importe quel cluster pouvant être créé ou bien autoriser l'accès pour un cluster existant spécifique.
+
+Avant de commencer, autorisez l'accès aux commandes [run `bx cs`](#firewall_bx).
+
+Pour autoriser l'accès à un cluster spécifique :
+
+1. Connectez-vous à l'interface de ligne de commande {{site.data.keyword.Bluemix_notm}}. A l'invite, entrez vos données d'identification {{site.data.keyword.Bluemix_notm}}. Si vous disposez d'un compte fédéré, incluez l'option `--sso`.
+
+    ```
+    bx login [--sso]
+    ```
+    {: pre}
+
+2. Sélectionnez la région où réside votre cluster.
+
+   ```
+   bx cs region-set
+   ```
+   {: pre}
+
+3. Obtenez le nom de votre cluster.
+
+   ```
+   bx cs clusters
+   ```
+   {: pre}
+
+4. Extrayez la valeur **Master URL** pour votre cluster.
+
+   ```
+   bx cs cluster-get <cluster_name_or_id>
+   ```
+   {: pre}
+
+   Exemple de sortie :
+   ```
+   ...
+   Master URL:		https://169.46.7.238:31142
+   ...
+   ```
+   {: screen}
+
+5. Autorisez l'accès au **Master URL** sur le port (comme au port `31142` dans l'exemple précédent).
+
+6. Vérifiez votre connexion. 
+
+   ```
+   curl --insecure <master_URL>/version
+   ```
+   {: pre}
+
+   Exemple de commande :
+   ```
+   curl --insecure https://169.46.7.238:31142/version
+   ```
+   {: pre}
+
+   Exemple de sortie :
+   ```
+   {
+     "major": "1",
+     "minor": "7+",
+     "gitVersion": "v1.7.4-2+eb9172c211dc41",
+     "gitCommit": "eb9172c211dc4108341c0fd5340ee5200f0ec534",
+     "gitTreeState": "clean",
+     "buildDate": "2017-11-16T08:13:08Z",
+     "goVersion": "go1.8.3",
+     "compiler": "gc",
+     "platform": "linux/amd64"
+   }
+   ```
+   {: screen}
+
+7. Facultatif : répétez ces étapes pour chaque cluster que vous avec besoin d'exposer.
+
+### Exécution de commandes `calicoctl` de derrière un pare-feu
+{: #firewall_calicoctl}
+
+Si les règles réseau de l'entreprise empêchent l'accès depuis votre système à des noeuds finaux publics via des proxies ou des pare-feux, pour exécuter des commandes `calicoctl`, vous devez autoriser l'accès TCP pour les commandes Calico.
+
+Avant de commencer, autorisez l'accès pour exécution de commandes [`bx`](#firewall_bx) et [`kubectl`](#firewall_kubectl).
+
+1. Extrayez l'adresse IP de l'URL maîtresse que vous avez utilisée pour autoriser les commandes that you used to allow the [`kubectl`](#firewall_kubectl).
+
+2. Obtenez le port pour ETCD.
+
+  ```
+  kubectl get cm -n kube-system calico-config -o yaml | grep etcd_endpoints
+  ```
+  {: pre}
+
+3. Autorisez l'accès pour les règles Calico via l'adresse IP et le port ETCD de l'URL maîtresse.
+
+### Autorisation au cluster d'accéder aux ressources de l'infrastructure et à d'autres services
+{: #firewall_outbound}
 
   1.  Notez l'adresse IP publique pour tous vos noeuds d'agent dans le cluster.
 
@@ -126,9 +281,9 @@ Examinez ces situations pour lesquelles vous aurez peut-être à ouvrir des port
       ```
       {: pre}
 
-  2.  Dans votre pare-feu, pour la connectivité SORTANTE depuis vos noeuds d'agent, autorisez le trafic réseau sortant depuis le noeud worker source vers la plage de ports TCP/UDP de destination 20000 à 32767 et port 443 pour `<each_worker_node_publicIP>`, et les adresses IP et groupes réseau suivants.
+  2.  Autorisez le trafic entrant depuis la source _<each_worker_node_publicIP>_ vers la plage de ports TCP/UDP de destination 20000 à 32767 et le port 443, et aux adresses IP et groupes réseau suivants. Si un pare-feu d'entreprise empêche votre machine locale d'accéder à des noeuds finaux Internet publics, effectuez cette étape tant pour vos noeuds worker source que pour votre machine locale.
       - **Important** : vous devez autoriser le trafic sortant vers le port 443 pour tous les emplacements de la région afin d'équilibrer la charge lors du processus d'amorçage. Par exemple, si votre cluster se trouve au Sud des Etats-Unis, vous devez autoriser le trafic du port 443 vers les adresses IP de les emplacements (dal10, dal12 et dal13).
-    <p>
+      <p>
   <table summary="La première ligne du tableau s'étend sur deux colonnes. Les autres lignes se lisent de gauche à droite. L'emplacement du serveur figure dans la première colonne et les adresses IP pour concordance dans la seconde colonne.">
       <thead>
       <th>Région</th>
@@ -144,17 +299,17 @@ Examinez ces situations pour lesquelles vous aurez peut-être à ouvrir des port
       <tr>
          <td>Asie-Pacifique sud</td>
          <td>mel01<br>syd01<br>syd04</td>
-         <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19</code></td>
+         <td><code>168.1.97.67</code><br><code>168.1.8.195</code><br><code>130.198.64.19, 130.198.66.34</code></td>
       </tr>
       <tr>
          <td>Europe centrale</td>
-         <td>ams03<br>fra02<br>par01</td>
-         <td><code>169.50.169.110</code><br><code>169.50.56.174</code><br><code>159.8.86.149</code></td>
+         <td>ams03<br>fra02<br>mil01<br>par01</td>
+         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.170, 169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
         </tr>
       <tr>
         <td>Sud du Royaume-Uni</td>
         <td>lon02<br>lon04</td>
-        <td><code>159.122.242.78</code><br><code>158.175.65.170</code></td>
+        <td><code>159.122.242.78</code><br><code>158.175.65.170, 158.175.74.170, 158.175.76.2</code></td>
       </tr>
       <tr>
         <td>Est des Etats-Unis</td>
@@ -164,7 +319,7 @@ Examinez ces situations pour lesquelles vous aurez peut-être à ouvrir des port
       <tr>
         <td>Sud des Etats-Unis</td>
         <td>dal10<br>dal12<br>dal13</td>
-        <td><code>169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
+        <td><code>169.47.234.18, 169.46.7.234</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
       </tr>
       </tbody>
     </table>
@@ -242,107 +397,239 @@ Examinez ces situations pour lesquelles vous aurez peut-être à ouvrir des port
         <th>Adresse de journalisation</th>
         <th>Adresses IP de journalisation</th>
         </thead>
-      <tbody>
-        <tr>
-         <td>Europe centrale</td>
-         <td>ingest.logging.eu-de.bluemix.net</td>
-         <td><code>169.50.25.125</code></td>
-        </tr>
-        <tr>
-         <td>Sud du Royaume-Uni</td>
-         <td>ingest.logging.eu-gb.bluemix.net</td>
-         <td><code>169.50.115.113</code></td>
-        </tr>
-        <tr>
-          <td>Est des Etats-Unis, Sud des Etats-Unis, Asie-Pacifique nord</td>
-          <td>ingest.logging.ng.bluemix.net</td>
-          <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
-         </tr>
-        </tbody>
-      </table>
+        <tbody>
+          <tr>
+            <td>Est des Etats-Unis, Sud des Etats-Unis</td>
+            <td>ingest.logging.ng.bluemix.net</td>
+            <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
+           </tr>
+          <tr>
+           <td>Europe centrale, Sud du Royaume-Uni</td>
+           <td>ingest-eu-fra.logging.bluemix.net</td>
+           <td><code>158.177.88.43</code><br><code>159.122.87.107</code></td>
+          </tr>
+          <tr>
+           <td>Asie-Pacifique sud, Asie-Pacifique nord</td>
+           <td>ingest-au-syd.logging.bluemix.net</td>
+           <td><code>130.198.76.125</code><br><code>168.1.209.20</code></td>
+          </tr>
+         </tbody>
+       </table>
 </p>
 
   5. Dans le cas de pare-feux privés, autorisez les plages d'adresses IP privées d'infrastructure IBM Cloud (SoftLayer) appropriées. Consultez [ce lien](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) en commençant par la section **Backend (private) Network**.
-      - Ajoutez tous les [emplacements dans les régions](cs_regions.html#locations) que vous utilisez
-      - Notez que vous devez ajouter l'emplacement dal01 (centre de données)
-      - Ouvrez les ports 80 et 443 pour autoriser le processus d'amorçage du cluster
+      - Ajoutez tous les [emplacements dans les régions](cs_regions.html#locations) que vous utilisez.
+      - Notez que vous devez ajouter l'emplacement dal01 (centre de données).
+      - Ouvrez les ports 80 et 443 pour permettre le processus d'amorçage de cluster.
 
-  6. Facultatif : pour accéder à l'équilibreur de charge hors du VLAN, ouvrez le port pour le trafic réseau entrant sur l'adresse IP spécifique de cet équilibreur de charge.
+  6. Pour créer des réservations de volume persistant pour le stockage de données, permettez un accès sortant via votre pare-feu aux [adresses IP d'IBM Cloud infrastructure (SoftLayer)](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) de l'emplacement (centre de données) où réside votre cluster.
+      - Pour déterminer l'emplacement (centre de données) de votre cluster, exécutez la commande `bx cs clusters`.
+      - Autorisez l'accès à la plage d'adresses IP tant pour le réseau **Frontend (public) network** que **Backend (privé)**.
+      - Notez que vous devez ajouter l'emplacement dal01 (centre de données) pour le réseau **Backend (privé)**.
 
-  7. Facultatif : pour accéder au contrôleur Ingress hors du VLAN, ouvrez le port 80 ou 443 pour le trafic réseau entrant sur l'adresse IP spécifique de ce contrôleur Ingress, selon le port que vous avez configuré.
+### Accès à NodePort, à l'équilibreur de charge et aux services Ingress de l'extérieur du cluster
+{: #firewall_inbound}
 
-## Restriction du trafic réseau aux noeuds d'agent de périphérie
-{: #cs_edge}
+Vous pouvez autoriser l'accès entrant au NodePort, à l'équilibreur de charge et aux services Ingress.
 
-Ajoutez l'étiquette `dedicated=edge` à deux noeuds d'agent ou plus de votre cluster par garantir que Ingress et les équilibreurs de charge sont déployés uniquement sur ces noeuds d'agent.
+<dl>
+  <dt>Service NodePort</dt>
+  <dd>Ouvrez le port que vous avez configuré lorsque vous avez déployé le service sur les adresses IP publiques pour tous les noeuds worker vers lesquels autoriser le trafic. Pour identifier le port, exécutez la commande `kubectl get svc`. Le port est situé sur la plage 20000 à 32000.<dd>
+  <dt>Service LoadBalancer</dt>
+  <dd>Ouvrez le port que vous avez configuré lorsque vous avez déployé le service sur l'adresse IP publique du service d'équilibrage de charge.</dd>
+  <dt>Ingress</dt>
+  <dd>Ouvrez le port 80 pour HTTP ou le port 443 pour HTTPS vers l'adresse IP de l'équilibreur de charge d'application Ingress.</dd>
+</dl>
 
-Les noeuds d'agent de périphérie peuvent améliorer la sécurité de votre cluster en limitant les accès aux noeuds d'agent depuis l'extérieur et en isolant la charge de travail du réseau. Lorsque ces noeuds d'agent sont marqués pour mise en réseau uniquement, les autres charges de travail ne peuvent pas consommer d'unité centrale ou de mémoire ni interférer avec le réseau.
+<br />
+
+
+## Configuration d'une connectivité VPN avec le diagramme Helm du service Strongswan IPSec VPN
+{: #vpn}
+
+La connectivité VPN vous permet de connecter de manière sécurisée les applications d'un cluster Kubernetes à un réseau su site. Vous pouvez également connecter des applications externes au cluster à une application s'exécutant au sein de votre cluster. Pour définir une connectivité VPN, vous pouvez utiliser un digramme Helm pour configurer et déployer le [service VPN Strongswan IPSec ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.strongswan.org/) au sein d'un pod Kubernetes. Tous le trafic VPN est ensuite acheminé via ce pod. Pour plus d'informations sur les commandes Helm utilisées pour configurer le diagramme Strongswan, reportez-vous à la [Documentation Helm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.helm.sh/helm/).
 
 Avant de commencer :
 
 - [Créez un cluster standard.](cs_cluster.html#cs_cluster_cli)
-- Vérifiez que votre cluster dispose d'au moins un VLAN public. Les noeuds d'agent de périphérie ne sont pas disponibles pour les clusters avec VLAN privés uniquement.
+- [Si vous utilisez un cluster existant, mettez-le à jour vers la version 1.7.4 ou ultérieure.](cs_cluster.html#cs_cluster_update)
+- Le cluster doit disposer au moins d'une adresse IP d'équilibreur de charge publique disponible.
 - [Ciblez l'interface CLI de Kubernetes sur le cluster](cs_cli_install.html#cs_cli_configure).
 
+Pour configurer une connectivité VPN avec Strongswan :
 
-1. Répertoriez tous les noeuds d'agent présents dans votre cluster. Utilisez l'adresse IP privée de la colonne **NAME** pour identifier les noeuds. Sélectionnez au moins deux noeuds d'agent comme noeuds d'agent de périphérie. L'utilisation d'au moins deux noeuds d'agent améliore la disponibilité des ressource de mise en réseau.
+1. S'il n'est pas encore activé, installez et initialisez Helm sur votre cluster.
 
-  ```
-  kubectl get nodes -L publicVLAN,privateVLAN,dedicated
-  ```
-  {: pre}
+    1. [Installez l'interface de ligne de commande Helm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.helm.sh/using_helm/#installing-helm).
 
-2. Etiquetez les noeuds d'agent `dedicated=edge`. Une fois qu'un noeud worker est marqué avec `dedicated=edge`, tous les équilibreurs de charge et Ingress suivants sont déployés sur un noeud worker de périphérie.
+    2. Initialisez Helm et installez `tiller`.
 
-  ```
-  kubectl label nodes <node_name> <node_name2> dedicated=edge
-  ```
-  {: pre}
+        ```
+        helm init
+        ```
+        {: pre}
 
-3. Extrayez tous les services d'équilibreur de charge de votre cluster.
+    3. Vérifiez que le statut du pod `tiller-deploy` indique `En cours d'exécution` dans votre cluster.
 
-  ```
-  kubectl get services --all-namespaces -o jsonpath='{range .items[*]}kubectl get service -n {.metadata.namespace} {.metadata.name} -o yaml | kubectl apply -f - :{.spec.type},{end}' | tr "," "\n" | grep "LoadBalancer" | cut -d':' -f1
-  ```
-  {: pre}
+        ```
+        kubectl get pods -n kube-system -l app=helm
+        ```
+        {: pre}
 
-  Sortie :
+        Exemple de sortie :
 
-  ```
-  kubectl get service -n <namespace> <name> -o yaml | kubectl apply -f
-  ```
-  {: screen}
+        ```
+        NAME                            READY     STATUS    RESTARTS   AGE
+        tiller-deploy-352283156-nzbcm   1/1       Running   0          10m
+        ```
+        {: screen}
 
-4. A partir de la sortie de l'étape précédente, copiez et collez chaque ligne `kubectl get service`. Cette commande redéploie l'équilibreur de charge sur un noeud worker de périphérie. Seuls les équilibreurs de charge publics ont besoin d'être redéployés.
+    4. Ajoutez le référentiel {{site.data.keyword.containershort_notm}} Helm à votre instance Helm.
 
-  Sortie :
+        ```
+        helm repo add bluemix  https://registry.bluemix.net/helm
+        ```
+        {: pre}
 
-  ```
-  service "<name>" configured
-  ```
-  {: screen}
+    5. Vérifiez que le diagramme Strongswan est répertorié dans le référentiel Helm.
 
-Vous avez étiqueté des noeuds d'agent avec `dedicated=edge` et redéployé tous les équilibreurs de charge et Ingress existants sur les noeuds d'agent de périphérie. Ensuite, empêchez d'autres[charges de travail de s'exécuter sur des noeuds d'agent de périphérie](#cs_edge_workloads) et [bloquez le trafic entrant vers des ports de noeud sur des noeuds d'agent](#cs_block_ingress).
+        ```
+        helm search bluemix
+        ```
+        {: pre}
 
-### Empêcher l'exécution de charges de travail sur des noeuds d'agent de périphérie
-{: #cs_edge_workloads}
+2. Enregistrer les paramètres de configuration par défaut pour le diagramme Helm Strongswan dans un fichier YAML local.
 
-L'un des avantages des noeuds d'agent de périphérie est qu'ils peuvent être définis pour n'exécuter que des services de mise en réseau. La tolérance `dedicated=edge` implique que tous les services d'équilibreur de charge et Ingress sont déployés uniquement sur les noeuds d'agent étiquetés. Toutefois, pour empêcher d'autres charges de travail de s'exécuter sur des noeuds d'agent de périphérie et de consommer des ressources de noeud worker, vous devez utiliser une [annotation Kubernetes taints![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
+    ```
+    helm inspect values bluemix/strongswan > config.yaml
+    ```
+    {: pre}
 
-1. Répertoriez tous les noeuds d'agent étiquetés `edge`.
+3. Ouvrez le fichier `config.yaml` et apportez les modifications suivantes aux valeurs par défaut en fonction de la configuration VPN souhaitée. Si une propriété a des valeurs qui ont été définies, elles sont répertoriées en commentaires au-dessus de chaque propriété dans le fichier. **Important** : si vous n'avez pas besoin de modifier une propriété, mettez celle-ci en commentaire en la précédant du signe `#`.
 
-  ```
-  kubectl get nodes -L publicVLAN,privateVLAN,dedicated -l dedicated=edge
-  ```
-  {: pre}
+    <table>
+    <caption>Tableau 2. Description des composants du fichier YAML</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>overRideIpsecConf</code></td>
+    <td>Si vous disposez d'un fichier <code>ipsec.conf</code> existant que vous désirez utiliser, supprimez les accolades (<code>{}</code>) et ajoutez le contenu de votre fichier après cette propriété. Le contenu du fichier doit être mis en retrait. **Remarque :** si vous utilisez votre propre fichier, les éventuelles valeurs des sections <code>ipsec</code>, <code>local</code> et <code>remote</code> ne sont pas utilisées.</td>
+    </tr>
+    <tr>
+    <td><code>overRideIpsecSecrets</code></td>
+    <td>Si vous disposez d'un fichier <code>ipsec.secrets</code> existant que vous désirez utiliser, supprimez les accolades (<code>{}</code>) et ajoutez le contenu de votre fichier après cette propriété. Le contenu du fichier doit être mis en retrait. **Remarque :** si vous utilisez votre propre fichier, les éventuelles valeurs de la section <code>preshared</code> ne sont pas utilisées.</td>
+    </tr>
+    <tr>
+    <td><code>ipsec.keyexchange</code></td>
+    <td>Si le noeud final de tunnel VPN sur site ne gère pas le protocole <code>ikev2</code> pour initialisation de la connexion, remplacez cette valeur par <code>ikev1</code>.</td>
+    </tr>
+    <tr>
+    <td><code>ipsec.esp</code></td>
+    <td>Remplacez cette valeur par la liste des algorithmes de chiffrement/authentification ESP qu'utilise votre noeud final de tunnel VPN sur site pour la connexion.</td>
+    </tr>
+    <tr>
+    <td><code>ipsec.ike</code></td>
+    <td>Remplacez cette valeur par la liste des algorithmes de chiffrement/authentification IKE/ISAKMP SA  qu'utilise votre noeud final de tunnel VPN sur site pour la connexion.</td>
+    </tr>
+    <tr>
+    <td><code>ipsec.auto</code></td>
+    <td>Si vous désirez que le cluster initialise la connexion VPN, remplacez cette valeur par <code>start</code>.</td>
+    </tr>
+    <tr>
+    <td><code>local.subnet</code></td>
+    <td>Remplacez cette valeur par la liste des CIDR de sous-réseau de cluster à exposer sur la connexion VPN avec le réseau local. Cette liste peut inclure les sous-réseaux suivants : <ul><li>CIDR de sous-réseau du pod Kubernetes : <code>172.30.0.0/16</code></li><li>CIDR de sous-réseau du service Kubernetes : <code>172.21.0.0/16</code></li><li>Si vous disposez d'applications exposées par un service NodePort sur le réseau privé, le CIDR de sous-réseau privé du noeud worker. Pour identifier cette valeur, exécutez la commande <code>bx cs subnets | grep <xxx.yyy.zzz></code>, où &lt;xxx.yyy.zzz&gt; correspond aux trois premiers octets de l'adresse IP privée du noeud worker.</li><li>Si vous disposez d'applications exposées par des services LoadBalancer sur le réseau privé, CIDR de sous-réseau priévé ou géré par l'utilisateur du cluster. Pour identifier cs valeurs, exécutez la commande <code>bx cs cluster-get <cluster name> --showResources</code>. Dans la section <b>VLANS</b>, recherchez des CIDRs indiquant <code>false</code> pour <b>Public</b>. </li></ul></td>
+    </tr>
+    <tr>
+    <td><code>local.id</code></td>
+    <td>Remplacez cette valeur par l'identificateur chaîne côté cluster Kubernetes local utilisé par votre noeud final de tunnel VPN pour la connexion.</td>
+    </tr>
+    <tr>
+    <td><code>remote.gateway</code></td>
+    <td>Remplacez cette valeur par l'adresse IP publique de la passerelle VPN sur site.</td>
+    </tr>
+    <td><code>remote.subnet</code></td>
+    <td>Remplacez cette valeur par la liste des CIDR de sous-réseau privé sur site auxquels le cluster Kubernetes est autorisé à accéder.</td>
+    </tr>
+    <tr>
+    <td><code>remote.id</code></td>
+    <td>Remplacez cette valeur par l'identificateur chaîne côté sur site distant que votre noeud final de tunnel VPN utilise pour la connexion.</td>
+    </tr>
+    <tr>
+    <td><code>preshared.secret</code></td>
+    <td>Remplacez cette valeur par la valeur confidentielle pré-partagée que votre passerelle de noeud final de tunnel VPN utilise pour la connexion.</td>
+    </tr>
+    </tbody></table>
 
-2. Appliquez à chaque noeud worker une annotation taint qui empêche l'exécution des pods sur le noeud worker et qui supprime du noeud worker ceux qui n'ont pas l'étiquette `edge`. Les pods supprimés sont redéployés sur d'autres noeuds d'agent dont la capacité le permet.
+4. Enregistrez le fichier `config.yaml` mis à jour.
 
-  ```
-  kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute
-  ```
+5. Installez le diagramme Helm sur votre cluster avec le fichier `config.yaml` mis à jour. Les propriétés mises à jour sont stockées dans une mappe de configuration pour votre diagramme.
 
-Maintenant, seuls les pods ayant la tolérance `dedicated=edge` sont déployés sur vos noeuds d'agent de périphérie.
+    ```
+    helm install -f config.yaml --namespace=kube-system --name=vpn bluemix/strongswan
+    ```
+    {: pre}
+
+6. Vérifiez le statut de déploiement du diagramme. Lorsque le diagramme est prêt, la zone **Statut** vers le haut de la sortie indique `Déployé`.
+
+    ```
+    helm status vpn
+    ```
+    {: pre}
+
+7. Une fois le diagramme déployé, vérifiez que les paramètres mis à jour dans le fichier `config.yaml` ont été utilisés.
+
+    ```
+    helm get values vpn
+    ```
+    {: pre}
+
+8. Testez la nouvelle connectivité VPN.
+    1. Si le réseau privé virtuel sur la passerelle sur site n'est pas actif, démarrez le réseau privé virtuel.
+
+    2. Définissez ma variable d'environnement `STRONGSWAN_POD`.
+
+        ```
+        export STRONGSWAN_POD=$(kubectl get pod -n kube-system -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
+        ```
+        {: pre}
+
+    3. Vérifiez le staut du réseau privé virtuel. Un statut `Etabli` indique que la connexion VPN a abouti.
+
+        ```
+        kubectl exec -n kube-system  $STRONGSWAN_POD -- ipsec status
+        ```
+        {: pre}
+
+        Exemple de sortie :
+        ```
+        Security Associations (1 up, 0 connecting):
+            k8s-conn[1]: ESTABLISHED 17 minutes ago, 172.30.244.42[ibm-cloud]...192.168.253.253[on-prem]
+            k8s-conn{2}:  INSTALLED, TUNNEL, reqid 12, ESP in UDP SPIs: c78cb6b1_i c5d0d1c3_o
+            k8s-conn{2}:   172.21.0.0/16 172.30.0.0/16 === 10.91.152.128/26
+        ```
+        {: screen}
+
+        **Remarque **:
+          - Il est fort probable que le statut du VPN n'indique pas `Etabli` la première fois que vous utilisez ce diagramme Helm. Vous aurez peut-être besoin de vérifier les paramètres de neoud final VPN sur site et de revenir plusieurs fois à l'étape 3 pour modifier le fichier `config.yaml` avant que la connexion n'aboutisse.
+          - Si le pod VPN indique l'état `Erreur` ou continue à tomber en panne et à redémarrer, ceci peut être dû , à une validation de paramètres dans le section `ipsec.conf` de la mappe de configuration du diagramme. Pour savoir si tel est la cas, recherchez la présence d'erreurs de validation dans les journaux du pod Strongswan en exécutant la commande `kubectl logs -n kube-system $STRONGSWAN_POD`. En cas d'erreurs de validation, exécutez la commande `helm delete --purge vpn`, revenez à l'étape 3 pour corriger les valeurs incorrectes dans le fichier `config.yaml`, et répétez les étapes 4 à 8. Si votre cluster comporte un grand nombre de noeuds worker, vous pouvez également utiliser la commande `helm upgrade` pour appliquer rapidement vos modifications au lieu d'exécuter les commandes `helm delete` et `helm install`.
+
+    4. Une fois que le statut du VPN indique `Etabli`, testez la connexion avec une commande `ping`. L'exemple suivant envoie une sonde png depuis le pod VPN dans le cluster Kubernetes à l'adresse IP privée de la passerelle VPN sur site. Vérifiez que les valeurs correctes ont été spécifiées pour `remote.subnet` et `local.subnet` dans le fichier de configuration et que la liste de sous-réseaux locaux inclut l'adrese IP source depuis laquelle vous envoyez l'instruction.
+
+        ```
+        kubectl exec -n kube-system  $STRONGSWAN_POD -- ping -c 3  <on-prem_gateway_private_IP>
+        ```
+        {: pre}
+
+Pour désactiver le service VPN Strongswan IPSec :
+
+1. Supprimez le diagramme Helm.
+
+    ```
+    helm delete --purge vpn
+    ```
+    {: pre}
 
 <br />
 
@@ -378,12 +665,11 @@ Lorsqu'un cluster est créé, des règles réseau par défaut sont automatiqueme
 
 Des règles par défaut ne sont pas appliquées aux pods directement, mais à l'interface réseau publique d'un noeud worker à l'aide d'un noeud final d'hôte Calico. Quand un noeud final d'hôte est créé dans Calico, tout le trafic vers et depuis l'interface réseau publique de ce noeud worker est bloqué, sauf s'il est autorisé par une règle.
 
-Notez qu'il n'existe pas de règle pour autoriser le trafic SSH et donc l'accès SSH via l'interface réseau publique est bloqué, tout comme tous les autres ports qui ne sont pas ouverts par une règle. L'accès SSH, et un autre accès, est disponible sur l'interface réseau privée de chaque noeud worker.
-
 **Important :** prenez soin de ne pas supprimer de règles qui sont appliquées à un noeud final d'hôte à moins de comprendre parfaitement la règle et de savoir que vous n'avez pas besoin du trafic qui est autorisé par cette règle.
 
 
  <table summary="La première ligne du tableau s'étend sur deux colonnes. Les autres lignes se lisent de gauche à droite. L'emplacement du serveur figure dans la première colonne et les adresses IP pour concordance dans la seconde colonne.">
+ <caption>Tableau 3. Règles par défaut pour chaque cluster</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Règles par défaut pour chaque cluster</th>
   </thead>
@@ -506,7 +792,7 @@ X :
         ```
         {: codeblock}
 
-        1.  Récupérez l'URL `<ETCD_URL>`. En cas d'échec de cette commande avec l'erreur `calico-config not found`, consultez cette [rubrique de traitement des incidents](cs_troubleshoot.html#cs_calico_fails).
+        1.  Extrayez la valeur `<ETCD_URL>`. En cas d'échec de cette commande avec l'erreur `calico-config not found`, consultez cette [rubrique de traitement des incidents](cs_troubleshoot.html#cs_calico_fails).
 
           -   Linux et OS X :
 
@@ -528,7 +814,7 @@ X :
             <li>Dans la section `data`, localisez la valeur etcd_endpoints. Exemple : <code>https://169.1.1.1:30001</code>
             </ol>
 
-        2.  Récupérez le répertoire `<CERTS_DIR>` dans lequel les certificats Kubernetes sont téléchargés.
+        2.  Extrayez le répertoire `<CERTS_DIR>` dans lequel les certificats Kubernetes sont téléchargés.
 
             -   Linux et OS X :
 
@@ -708,20 +994,76 @@ soient appliquées dans tout le cluster.
 <br />
 
 
-## Images
-{: #cs_security_deployment}
 
-Gérez la sécurité et l'intégrité de vos images via des fonctions de sécurité intégrées.
-{: shortdesc}
+## Restriction du trafic réseau aux noeuds d'agent de périphérie
+{: #cs_edge}
 
-### Référentiel d'images Docker privé et sécurisé dans {{site.data.keyword.registryshort_notm}} :
+Ajoutez l'étiquette `dedicated=edge` à deux noeuds d'agent ou plus de votre cluster par garantir que Ingress et les équilibreurs de charge sont déployés uniquement sur ces noeuds d'agent.
 
- Vous pouvez mettre en place votre propre registre d'images Docker dans un registre d'images privé, à service partagé, haute disponibilité et évolutif, hébergé et géré par IBM, pour construire, stocker en sécurité et partager entre les utilisateurs du cluster vos images Docker.
+Les noeuds d'agent de périphérie peuvent améliorer la sécurité de votre cluster en limitant les accès aux noeuds d'agent depuis l'extérieur et en isolant la charge de travail du réseau. Lorsque ces noeuds d'agent sont marqués pour mise en réseau uniquement, les autres charges de travail ne peuvent pas consommer d'unité centrale ou de mémoire ni interférer avec le réseau.
 
-### Conformité de l'image avec les règles de sécurité :
+Avant de commencer :
 
-En utilisant {{site.data.keyword.registryshort_notm}}, vous pouvez
-exploiter la fonctionnalité intégrée d'analyse de sécurité offerte par Vulnerability Advisor Chaque image envoyée par commande push à votre espace de nom est automatiquement analysée pour détection de vulnérabilités face à une base de données
-de problèmes CentOS, Debian, Red Hat et Ubuntu connus. si des vulnérabilités sont détectées, Vulnerability communique des instructions pour les résoudre et garantir l'intégrité et la sécurité de l'image.
+- [Créez un cluster standard.](cs_cluster.html#cs_cluster_cli)
+- Vérifiez que votre cluster dispose d'au moins un VLAN public. Les noeuds d'agent de périphérie ne sont pas disponibles pour les clusters avec VLAN privés uniquement.
+- [Ciblez l'interface CLI de Kubernetes sur le cluster](cs_cli_install.html#cs_cli_configure).
 
-Pour examiner l'évaluation des vulnérabilités de vos images, [consultez la documentation de l'assistant de détection des vulnérabilités](/docs/services/va/va_index.html#va_registry_cli).
+
+1. Répertoriez tous les noeuds d'agent présents dans votre cluster. Utilisez l'adresse IP privée de la colonne **NAME** pour identifier les noeuds. Sélectionnez au moins deux noeuds d'agent comme noeuds d'agent de périphérie. L'utilisation d'au moins deux noeuds d'agent améliore la disponibilité des ressource de mise en réseau.
+
+  ```
+  kubectl get nodes -L publicVLAN,privateVLAN,dedicated
+  ```
+  {: pre}
+
+2. Etiquetez les noeuds d'agent `dedicated=edge`. Une fois qu'un noeud worker est marqué avec `dedicated=edge`, tous les équilibreurs de charge et Ingress suivants sont déployés sur un noeud worker de périphérie.
+
+  ```
+  kubectl label nodes <node_name> <node_name2> dedicated=edge
+  ```
+  {: pre}
+
+3. Extrayez tous les services d'équilibreur de charge de votre cluster.
+
+  ```
+  kubectl get services --all-namespaces -o jsonpath='{range .items[*]}kubectl get service -n {.metadata.namespace} {.metadata.name} -o yaml | kubectl apply -f - :{.spec.type},{end}' | tr "," "\n" | grep "LoadBalancer" | cut -d':' -f1
+  ```
+  {: pre}
+
+  Sortie :
+
+  ```
+  kubectl get service -n <namespace> <name> -o yaml | kubectl apply -f
+  ```
+  {: screen}
+
+4. A partir de la sortie de l'étape précédente, copiez et collez chaque ligne `kubectl get service`. Cette commande redéploie l'équilibreur de charge sur un noeud worker de périphérie. Seuls les équilibreurs de charge publics ont besoin d'être redéployés.
+
+  Sortie :
+
+  ```
+  service "<name>" configured
+  ```
+  {: screen}
+
+Vous avez étiqueté des noeuds d'agent avec `dedicated=edge` et redéployé tous les équilibreurs de charge et Ingress existants sur les noeuds d'agent de périphérie. Ensuite, empêchez d'autres[charges de travail de s'exécuter sur des noeuds d'agent de périphérie](#cs_edge_workloads) et [bloquez le trafic entrant vers des ports de noeud sur des noeuds d'agent](#cs_block_ingress).
+
+### Empêcher l'exécution de charges de travail sur des noeuds d'agent de périphérie
+{: #cs_edge_workloads}
+
+L'un des avantages des noeuds d'agent de périphérie est qu'ils peuvent être définis pour n'exécuter que des services de mise en réseau. La tolérance `dedicated=edge` implique que tous les services d'équilibreur de charge et Ingress sont déployés uniquement sur les noeuds d'agent étiquetés. Toutefois, pour empêcher d'autres charges de travail de s'exécuter sur des noeuds d'agent de périphérie et de consommer des ressources de noeud worker, vous devez utiliser une [annotation Kubernetes taints![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
+
+1. Répertoriez tous les noeuds d'agent étiquetés `edge`.
+
+  ```
+  kubectl get nodes -L publicVLAN,privateVLAN,dedicated -l dedicated=edge
+  ```
+  {: pre}
+
+2. Appliquez à chaque noeud worker une annotation taint qui empêche l'exécution des pods sur le noeud worker et qui supprime du noeud worker ceux qui n'ont pas l'étiquette `edge`. Les pods supprimés sont redéployés sur d'autres noeuds d'agent dont la capacité le permet.
+
+  ```
+  kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute
+  ```
+
+Maintenant, seuls les pods ayant la tolérance `dedicated=edge` sont déployés sur vos noeuds d'agent de périphérie.

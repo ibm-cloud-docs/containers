@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2017
-lastupdated: "2017-11-02"
+lastupdated: "2017-12-14"
 
 ---
 
@@ -45,11 +45,15 @@ lastupdated: "2017-11-02"
 <td>使用 CLI，您可以建立及管理 Kubernetes 叢集。</td>
 </tr>
 <tr>
-<td>[更新至 Kubernetes 1.7](cs_versions.html)</td>
-<td>在更新為 Kubernetes 1.7 之前，請先檢閱對叢集所做的變更。</td>
+<td>[在防火牆中開啟必要埠及 IP 位址](cs_security.html#opening_ports)</td>
+<td>您可能需要在防火牆中開啟特定的埠及 IP 位址來執行 CLI 指令，或是容許 Kubernetes 主節點與工作者節點之間的通訊。</td>
 </tr>
 <tr>
-<td>[叢集的 REST API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://us-south.containers.bluemix.net/swagger)</td>
+<td>[更新 Kubernetes](cs_versions.html)</td>
+<td>更新 Kubernetes 之前，請先檢閱對叢集所做的變更。</td>
+</tr>
+<tr>
+<td>[叢集的 REST API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.bluemix.net/swagger)</td>
 <td>檢視 API 文件以管理 {{site.data.keyword.containershort_notm}}。</td>
 </tr>
 </tbody></table>
@@ -59,4 +63,4 @@ lastupdated: "2017-11-02"
 
 您可以看到別人談論的內容，並在 [{{site.data.keyword.containershort_notm}} Slack ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-container-service.slack.com) 提出自己的問題。
 
-如果您的 {{site.data.keyword.Bluemix_notm}} 帳戶未使用 IBM ID，請與 [crosen@us.ibm.com](mailto:crosen@us.ibm.com) 聯絡，並要求對此 Slack 的邀請。
+提示：如果您的 {{site.data.keyword.Bluemix_notm}} 帳戶未使用 IBM ID，請[要求邀請](https://bxcs-slack-invite.mybluemix.net/)以加入此 Slack。
