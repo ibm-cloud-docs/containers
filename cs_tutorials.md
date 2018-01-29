@@ -139,7 +139,7 @@ To install the CLIs:
     ```
     {: pre}
 
-7. To build images locally and push them to your private image repository, [install the Docker CE CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.docker.com/community-edition#/download). If you are using Windows 8 or earlier, you can install the [Docker Toolbox ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.docker.com/products/docker-toolbox) instead.
+7. To build images locally and push them to your private image repository, [install the Docker CE CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.docker.com/community-edition#/download). If you are using Windows 8 or earlier, you can install the [Docker Toolbox ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/toolbox/toolbox_install_windows/) instead.
 
 Congratulations! You've successfully installed the CLIs for the following lessons and tutorials. Next, set up your cluster environment and add the {{site.data.keyword.toneanalyzershort}} service.
 
