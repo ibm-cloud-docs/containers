@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-01-29"
 
 ---
 
@@ -877,7 +877,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 
 **Examples**:
 
-  
+
 
   Example for a standard cluster:
   {: #example_cluster_create}
@@ -1354,7 +1354,7 @@ View a list of available machine types for your worker nodes. Each machine type 
   ```
   {: pre}
 
-### bx cs vlans LOCATION 
+### bx cs vlans LOCATION
 {: #cs_vlans}
 
 List the public and private VLANs that are available for a location in your IBM Cloud infrastructure (SoftLayer) account. To list available VLANs, you must have a paid account.
@@ -1364,7 +1364,7 @@ List the public and private VLANs that are available for a location in your IBM 
    <dl>
    <dt><code><em>LOCATION</em></code></dt>
    <dd>Enter the location where you want to list your private and public VLANs. This value is required. Review [available locations](cs_regions.html#locations).</dd>
-   
+
    </dl>
 
 **Example**:
