@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-02-01"
 
 ---
 
@@ -170,6 +170,13 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
     2.  If you are logging in for the first time, provide your Dedicated user ID and password when prompted. This authenticates the Dedicated account and links the Dedicated and public accounts together. Every time you log in after this first time, you only use your IBMid to log in. For more information, see [Connecting a dedicated ID to your public IBMid](/docs/cli/connect_dedicated_id.html#connect_dedicated_id).
 
         **Note**: You must log in to both your Dedicated account and your public account in order to create clusters. If you only want to log in to your Dedicated account, use the `--no-iam` flag when logging in to the Dedicated endpoint.
+
+    3.  To create or access clusters in the dedicated environment, you must set the region associated with that environment.
+
+        ```
+        bx cs region-set
+        ```
+        {: pre}
 
 5.  If you want to unlink your accounts, you can disconnect your IBMid from your Dedicated user ID. For more information, see [Disconnect your dedicated ID from the public IBMid](/docs/cli/connect_dedicated_id.html#disconnect-your-dedicated-id-from-the-public-ibmid).
 
