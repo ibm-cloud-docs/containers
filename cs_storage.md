@@ -292,102 +292,115 @@ The NFS file storage that backs the persistent volume is clustered by IBM in ord
 
 2.  Decide if you want to save your data and the NFS file share after you delete the pvc, called the reclaim policy. If you want to keep your data, then choose a `retain` storage class. If you want the data and your file share to be deleted when you delete the pvc, choose a storage class without `retain`.
 
-3.  Get the details for a storage class. Review the IOPS per gigabyte and the size range in the **paramters** field in your CLI output. 
+3.  Review the IOPS of a storage class and the available storage sizes. 
 
-    <ul>
-      <li>When you use bronze, silver, or gold storage classes, you get [Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage) that define the IOPS per GB for each class. However, you can determine the total IOPS by choosing a size within the available range. For example, if you select a 1000Gi file share size in the silver storage class of 4 IOPS per GB, your volume has a total of 4000 IOPS. The more IOPS your persistent volume has, the faster it processes input and output operations. <p>**Example command to describe storage class**:</p>
+    - The bronze, silver, and gold storage classes use [Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage) and have a single defined IOPS per GB for each class. The total IOPS depends on the size of the storage. For example, a 1000Gi pvc at 4 IOPS per GB has a total of 4000 IOPS. 
 
-       <pre class="pre">kubectl describe storageclasses ibmc-file-silver</pre>
+      **Example command to describe storage class**:
 
-       The **parameters** field provides the IOPS per GB associated with the storage class and the available sizes in gigabytes.
-       <pre class="pre">Parameters:	iopsPerGB=4,sizeRange=20Gi,40Gi,80Gi,100Gi,250Gi,500Gi,1000Gi,2000Gi,4000Gi,8000Gi,12000Gi</pre>
-       
-       </li>
-      <li>With custom storage classes, you get [Performance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/performance-storage) and have more control over choosing the combination of IOPS and size. <p>**Example command to describe custom storage class**:</p>
+      ```
+      kubectl describe storageclasses ibmc-file-silver
+      ```
+      {: pre}
 
-       <pre class="pre">kubectl describe storageclasses ibmc-file-retain-custom</pre>
+      The **parameters** field provides the IOPS per GB associated with the storage class and the available sizes in gigabytes.
 
-       The **parameters** field provides the IOPS associated with the storage class and the available sizes in gigabytes. For example, a 40Gi pvc can select IOPS that is a multiple of 100 that is in the range of 100 - 2000 IOPS.
+      ```
+      Parameters:	iopsPerGB=4,sizeRange=20Gi,40Gi,80Gi,100Gi,250Gi,500Gi,1000Gi,2000Gi,4000Gi,8000Gi,12000Gi
+      ```
+      {: screen}
+      
+    - The custom storage classes use [Performance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/performance-storage) and have discrete options for total IOPS and size. 
 
-       ```
-       Parameters:	Note=IOPS value must be a multiple of 100,reclaimPolicy=Retain,sizeIOPSRange=20Gi:[100-1000],40Gi:[100-2000],80Gi:[100-4000],100Gi:[100-6000],1000Gi[100-6000],2000Gi:[200-6000],4000Gi:[300-6000],8000Gi:[500-6000],12000Gi:[1000-6000]
-       ```
-       {: screen}
-       </li></ul>
+    **Example command to describe custom storage class**:
+
+    ```
+    kubectl describe storageclasses ibmc-file-retain-custom
+    ```
+    {: pre}
+
+    The **parameters** field provides the IOPS associated with the storage class and the available sizes in gigabytes. For example, a 40Gi pvc can select IOPS that is a multiple of 100 that is in the range of 100 - 2000 IOPS.
+
+    ```
+    Parameters:	Note=IOPS value must be a multiple of 100,reclaimPolicy=Retain,sizeIOPSRange=20Gi:[100-1000],40Gi:[100-2000],80Gi:[100-4000],100Gi:[100-6000],1000Gi[100-6000],2000Gi:[200-6000],4000Gi:[300-6000],8000Gi:[500-6000],12000Gi:[1000-6000]
+    ```
+    {: screen}
+    
 4. Create a configuration file to define your persistent volume claim and save the configuration as a `.yaml` file.
 
-    -  **Example for bronze, silver, gold storage classes**:
-       
+    **Example for bronze, silver, gold storage classes**: 
 
-       ```
-       apiVersion: v1
-       kind: PersistentVolumeClaim
-       metadata:
-        name: mypvc
-        annotations:
-          volume.beta.kubernetes.io/storage-class: "ibmc-file-silver"
-          
-       spec:
-        accessModes:
-          - ReadWriteMany
-        resources:
-          requests:
-            storage: 20Gi
-        ```
-        {: codeblock}
+    ```
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: mypvc
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "ibmc-file-silver"
+      
+    spec:
+      accessModes:
+        - ReadWriteMany
+      resources:
+        requests:
+          storage: 20Gi
+    ```
+    {: codeblock}
 
-    -  **Example for custom storage classes**:
-       
+    **Example for custom storage classes**: 
 
-       ```
-       apiVersion: v1
-       kind: PersistentVolumeClaim
-       metadata:
-         name: mypvc
-         annotations:
-           volume.beta.kubernetes.io/storage-class: "ibmc-file-retain-custom"
-         
-       spec:
-         accessModes:
-           - ReadWriteMany
-         resources:
-           requests:
-             storage: 40Gi
-             iops: "500"
-        ```
-        {: codeblock}
+    ```
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: mypvc
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "ibmc-file-retain-custom"
+      
+    spec:
+      accessModes:
+        - ReadWriteMany
+      resources:
+        requests:
+          storage: 40Gi
+          iops: "500"
+    ```
+    {: codeblock}
 
-        <table>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>metadata/name</code></td>
-        <td>Enter the name of the persistent volume claim.</td>
-        </tr>
-        <tr>
-        <td><code>metadata/annotations</code></td>
-        <td>Specify the storage class for the persistent volume:
-          <ul>
-          <li>ibmc-file-bronze / ibmc-file-retain-bronze : 2 IOPS per GB.</li>
-          <li>ibmc-file-silver / ibmc-file-retain-silver: 4 IOPS per GB.</li>
-          <li>ibmc-file-gold / ibmc-file-retain-gold: 10 IOPS per GB.</li>
-          <li>ibmc-file-custom / ibmc-file-retain-custom: Multiple values of IOPS available.</li>
-          <p>If you do not specify a storage class, the persistent volume is created with the bronze storage class.</p></td>
-        </tr>
-        
-        <tr>
-        <td><code>spec/accessModes</code>
-        <code>resources/requests/storage</code></td>
-        <td>If you choose a size other than one that is listed, the size is rounded up. If you select a size larger than the largest size, then the size is rounded down.</td>
-        </tr>
-        <tr>
-        <td><code>spec/accessModes</code>
-        <code>resources/requests/iops</code></td>
-        <td>This option is for customer storage classes only (`ibmc-file-custom / ibmc-file-retain-custom`). Specify the total IOPS for the storage. To see all options, run `kubectl describe storageclasses ibmc-file-custom`. If you choose an IOPS other than one that is listed, the IOPS is rounded up.</td>
-        </tr>
-        </tbody></table>
+    <table>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>metadata/name</code></td>
+    <td>Enter the name of the persistent volume claim.</td>
+    </tr>
+    <tr>
+    <td><code>metadata/annotations</code></td>
+    <td>Specify the storage class for the persistent volume:
+      <ul>
+      <li>ibmc-file-bronze / ibmc-file-retain-bronze : 2 IOPS per GB.</li>
+      <li>ibmc-file-silver / ibmc-file-retain-silver: 4 IOPS per GB.</li>
+      <li>ibmc-file-gold / ibmc-file-retain-gold: 10 IOPS per GB.</li>
+      <li>ibmc-file-custom / ibmc-file-retain-custom: Multiple values of IOPS available.</li>
+      <p>If you do not specify a storage class, the persistent volume is created with the bronze storage class.</p></td>
+    </tr>
+    <tr>
+      <td><code>metadata/labels/billingType</code></td>
+      <td>Specify the frequency for which your storage bill is calculated, "monthly" or "hourly". The default is "monthly".</td>
+    </tr>
+    <tr>
+    <td><code>spec/accessModes</code>
+    <code>resources/requests/storage</code></td>
+    <td>If you choose a size other than one that is listed, the size is rounded up. If you select a size larger than the largest size, then the size is rounded down.</td>
+    </tr>
+    <tr>
+    <td><code>spec/accessModes</code>
+    <code>resources/requests/iops</code></td>
+    <td>This option is for ibmc-file-custom / ibmc-file-retain-custom only. Specify the total IOPS for the storage. To see all options, run `kubectl describe storageclasses ibmc-file-custom`. If you choose an IOPS other than one that is listed, the IOPS is rounded up.</td>
+    </tr>
+    </tbody></table>
 
 5.  Create the persistent volume claim.
 
