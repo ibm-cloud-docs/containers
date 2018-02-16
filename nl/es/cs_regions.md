@@ -113,7 +113,7 @@ Las ubicaciones son centros de datos que están disponibles dentro de una regió
   | UE Central     | ams03, fra02, mil01, par01        | Ámsterdam, Frankfurt, Milán, París |
   | UK Sur      | lon02, lon04         | Londres |
   | EE.UU. este      | <ph class="mon">mon01, </ph>tor01, wdc06, wdc07        | <ph class="mon">Montreal, </ph>Toronto, Washington, DC |
-  | EE.UU. Sur     | dal10, dal12, dal13, sao01<!--sao-paolo--></ph>       | Dallas, São Paolo<!--sao-paolo--></ph> |
+  | EE.UU. Sur     | dal10, dal12, dal13      | Dallas |
 
 **Nota**: Milán (mil01) sólo está disponible para clústeres lite.
 

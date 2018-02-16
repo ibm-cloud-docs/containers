@@ -114,7 +114,7 @@ lastupdated: "2018-01-05"
   | 欧洲中部| ams03、fra02、mil01、par01| 阿姆斯特丹、法兰克福、米兰、巴黎|
   | 英国南部| lon02、lon04         | 伦敦|
   | 美国东部| <ph class="mon">mon01、</ph>tor01、wdc06、wdc07        | <ph class="mon">蒙特利尔、</ph>多伦多、华盛顿|
-  | 美国南部| dal10、dal12、dal13、sao01<!--sao-paolo--></ph>       | 达拉斯、 圣保罗<!--sao-paolo--></ph> |
+  | 美国南部| dal10、dal12、dal13      | 达拉斯 |
 
 **注**：米兰 (mil01) 仅可用于 Lite 集群。
 

@@ -113,7 +113,7 @@ lastupdated: "2018-01-05"
   | 중앙 유럽     | ams03, fra02, mil01, par01        | 암스테르담, 프랑크푸르트, 밀라노, 파리 |
   | 영국 남부      | lon02, lon04         | 런던 |
   | 미국 동부      | <ph class="mon">mon01, </ph>tor01, wdc06, wdc07        | <ph class="mon">몬트리올, </ph>토론토, 워싱턴, DC |
-  | 미국 남부     | dal10, dal12, dal13, sao01<!--sao-paolo--></ph>       | 댈러스, 상파울루<!--sao-paolo--></ph> |
+  | 미국 남부     | dal10, dal12, dal13       | 댈러스 |
 
 **참고**: 밀라노(mil01)는 라이트 클러스터에만 사용 가능합니다.
 

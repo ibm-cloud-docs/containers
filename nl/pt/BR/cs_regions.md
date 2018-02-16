@@ -113,7 +113,7 @@ Os locais são data centers que estão disponíveis em uma região.
   | União Europeia Central     | ams03, fra02, mil01, par01        | Amsterdam, Frankfurt, Milan, Paris |
   | Sul do Reino Unido      | lon02, lon04         | Londres |
   | Leste dos EUA      | <ph class="mon">mon01, </ph>tor01, wdc06, wdc07        | <ph class="mon">Montreal, </ph>Toronto, Washington, DC |
-  | SUL dos EUA     | dal10, dal12, dal13, sao01<!--sao-paolo--></ph>       | Dallas, São Paulo<!--sao-paolo--></ph> |
+  | SUL dos EUA     | dal10, dal12, dal13      | Dallas |
 
 **Observação**: Milan (mil01) está disponível somente para clusters Lite.
 
