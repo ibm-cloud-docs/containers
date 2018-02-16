@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-08"
 
 ---
@@ -277,7 +277,7 @@ lastupdated: "2017-12-08"
     <table summary=“Information about the expose command parameters.”>
     <caption>表 1. 命令参数</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png"/>关于 expose 参数的更多信息</th>
+    <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 关于 expose 参数的更多信息</th>
     </thead>
     <tbody>
     <tr>
@@ -400,7 +400,7 @@ lastupdated: "2017-12-08"
 
 ![部署设置](images/cs_app_tutorial_components2.png)
 
-在上一个教程中，您已具有帐户以及含一个工作程序节点的集群。在本课中，您将配置部署并部署 Hello World 应用程序的三个实例。每个实例都会部署在一个 Kubernetes pod 中，作为工作程序节点中副本集的一部分。要使实例公开可用，也请创建 Kubernetes 服务。 
+在上一个教程中，您已具有帐户以及含一个工作程序节点的集群。在本课中，您将配置部署并部署 Hello World 应用程序的三个实例。每个实例都会部署在一个 Kubernetes pod 中，作为工作程序节点中副本集的一部分。要使实例公开可用，也请创建 Kubernetes 服务。
 
 如配置脚本中所定义，Kubernetes 可以使用可用性检查来查看 pod 中的容器是否在运行。例如，这些检查可以发现死锁情况，即应用程序在运行，但无法取得进展。重新启动处于这种状况的容器，有助于使应用程序在有错误的情况下仍能有更高可用性。然后，Kubernetes 会使用就绪性检查来确定容器何时已准备就绪可再次开始接受流量。在 pod 的容器准备就绪时，该 pod 即视为准备就绪。pod 准备就绪后，即会再次启动。在 Stage2 应用程序中，应用程序每 15 秒就会超时一次。通过在配置脚本中配置的运行状况检查，如果运行状况检查发现应用程序有问题，会重新创建容器。
 
@@ -607,7 +607,7 @@ service "hw-demo-service" deleted
 
 ![部署设置](images/cs_app_tutorial_components3.png)
 
-在上一个教程中，您已具有帐户以及含一个工作程序节点的集群。在本课中，您将在 {{site.data.keyword.Bluemix_notm}} 帐户中创建 Watson Tone Analyzer 服务的实例，并配置两个部署，其中应用程序的每个组件对应一个部署。每个组件都会部署在工作程序节点的一个 Kubernetes pod 中。要使这两个组件公开可用，也请为每个组件创建一个 Kubernetes 服务。 
+在上一个教程中，您已具有帐户以及含一个工作程序节点的集群。在本课中，您将在 {{site.data.keyword.Bluemix_notm}} 帐户中创建 Watson Tone Analyzer 服务的实例，并配置两个部署，其中应用程序的每个组件对应一个部署。每个组件都会部署在工作程序节点的一个 Kubernetes pod 中。要使这两个组件公开可用，也请为每个组件创建一个 Kubernetes 服务。
 
 
 ### 第 3a 课：部署 Watson Tone Analyzer 应用程序
@@ -896,5 +896,6 @@ bx cs cluster-rm <pr_firm_cluster>
 {: pre}
 
 ## 接下来要做什么？
+{: #next}
 
 请尝试在 [developerWorks ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/code/journey/category/container-orchestration/) 上浏览容器编排过程。

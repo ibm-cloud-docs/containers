@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2017
-lastupdated: "2017-12-14"
+  years: 2014, 2018
+lastupdated: "2018-01-09"
 
 ---
 
@@ -162,7 +162,7 @@ lastupdated: "2017-12-14"
 
         </br></br>
         {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: 'Item' must be ordered with permission.</td>
-        <td>IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオからワーカー・ノードをプロビジョンするために必要なアクセス権限がない可能性があります。 [IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセス権限を構成して標準の Kubernetes クラスターを作成する](cs_planning.html#cs_planning_unify_accounts)を参照してください。</td>
+        <td>IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオからワーカー・ノードをプロビジョンするために必要なアクセス権限がない可能性があります。 [IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセス権限を構成して標準の Kubernetes クラスターを作成する](cs_infrastructure.html#unify_accounts)を参照してください。</td>
       </tr>
     </tbody>
   </table>
@@ -213,39 +213,17 @@ lastupdated: "2017-12-14"
 <br />
 
 
-
-
-## kubectl のローカル・クライアントとサーバーのバージョンの特定
-
-ローカルまたはクラスターで実行されている Kubernetes CLI のバージョンを調べるには、以下のコマンドを実行して、バージョンを確認します。
-
-```
-kubectl version  --short
-```
-{: pre}
-
-出力例:
-
-```
-Client Version: v1.5.6
-        Server Version: v1.5.6
-```
-{: screen}
-
-<br />
-
-
-
-
-## クラスターの作成中に IBM Cloud インフラストラクチャー (SoftLayer) アカウントに接続できない
+## インフラストラクチャー・アカウントに接続できない
 {: #cs_credentials}
 
 {: tsSymptoms}
 新しい Kubernetes クラスターを作成すると、以下のメッセージを受け取ります。
 
 ```
-We were unable to connect to your IBM Cloud infrastructure (SoftLayer) account. Creating a standard cluster requires that you have either a Pay-As-You-Go account that is linked to an IBM Cloud infrastructure (SoftLayer) account term or that you have used the IBM
-{{site.data.keyword.Bluemix_notm}} Container Service CLI to set your {{site.data.keyword.Bluemix_notm}} Infrastructure API keys.
+We were unable to connect to your IBM Cloud infrastructure (SoftLayer) account.
+Creating a standard cluster requires that you have either a Pay-As-You-Go account
+that is linked to an IBM Cloud infrastructure (SoftLayer) account term or that you have used the {{site.data.keyword.Bluemix_notm}}
+Container Service CLI to set your {{site.data.keyword.Bluemix_notm}} Infrastructure API keys.
 ```
 {: screen}
 
@@ -276,7 +254,7 @@ We were unable to connect to your IBM Cloud infrastructure (SoftLayer) account. 
 <br />
 
 
-## ファイアウォールがあるために CLI コマンド `bx`、`kubectl`、または `calicoctl` を実行できない
+## ファイアウォールがあるために CLI コマンドを実行できない
 {: #ts_firewall_clis}
 
 {: tsSymptoms}
@@ -286,10 +264,10 @@ CLI からコマンド `bx`、`kubectl`、または `calicoctl` を実行する�
 ローカル・システムからプロキシーまたはファイアウォール経由での公共のエンドポイントへのアクセスが企業ネットワーク・ポリシーによって禁止されている可能性があります。
 
 {: tsResolve}
-[CLI コマンドでの TCP アクセスを許可します](cs_security.html#opening_ports)。このタスクには、[管理者アクセス・ポリシー](cs_cluster.html#access_ov)が必要です。 現在の[アクセス・ポリシー](cs_cluster.html#view_access)を確認してください。
+[CLI コマンドでの TCP アクセスを許可します](cs_firewall.html#firewall)。 このタスクには、[管理者アクセス・ポリシー](cs_users.html#access_policies)が必要です。 現在の[アクセス・ポリシー](cs_users.html#infra_access)を確認してください。
 
 
-## ファイアウォールがあるためにワーカー・ノードが接続しない
+## ファイアウォールがあるためにクラスターからリソースに接続できない
 {: #cs_firewall}
 
 {: tsSymptoms}
@@ -330,7 +308,7 @@ kubectl プロキシーが正常に実行されても、ダッシュボードを
 追加のファイアウォールを設定したか、IBM Cloud インフラストラクチャー (SoftLayer) アカウントの既存のファイアウォール設定をカスタマイズした可能性があります。 {{site.data.keyword.containershort_notm}} では、ワーカー・ノードと Kubernetes マスター間で通信を行うには、特定の IP アドレスとポートが開いている必要があります。 別の原因として、ワーカー・ノードが再ロード・ループにはまっている可能性があります。
 
 {: tsResolve}
-[クラスターからインフラストラクチャー・リソースや他のサービスへのアクセスを許可](cs_security.html#firewall_outbound)します。このタスクには、[管理者アクセス・ポリシー](cs_cluster.html#access_ov)が必要です。 現在の[アクセス・ポリシー](cs_cluster.html#view_access)を確認してください。
+[クラスターからインフラストラクチャー・リソースや他のサービスへのアクセスを許可](cs_firewall.html#firewall_outbound)します。 このタスクには、[管理者アクセス・ポリシー](cs_users.html#access_policies)が必要です。 現在の[アクセス・ポリシー](cs_users.html#infra_access)を確認してください。
 
 <br />
 
@@ -350,6 +328,47 @@ SSH 接続を使用してワーカー・ノードにアクセスすることは�
 
 <br />
 
+
+
+## サービスをクラスターにバインドすると同名エラーが発生する
+{: #cs_duplicate_services}
+
+{: tsSymptoms}
+`bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>` を実行すると、以下のメッセージが表示されます。
+
+```
+Multiple services with the same name were found.
+Run 'bx service list' to view available Bluemix service instances...
+```
+{: screen}
+
+{: tsCauses}
+異なる地域にある複数のサービス・インスタンスの名前が等しい可能性があります。
+
+{: tsResolve}
+`bx cs cluster-service-bind` コマンドで、サービス・インスタンス名ではなくサービス GUID を使用してください。
+
+1. [バインドするサービス・インスタンスが含まれる地域にログインします。](cs_regions.html#bluemix_regions)
+
+2. サービス・インスタンスの GUID を取得します。
+  ```
+  bx service show <service_instance_name> --guid
+  ```
+  {: pre}
+
+  出力:
+  ```
+  Invoking 'cf service <service_instance_name> --guid'...
+  <service_instance_GUID>
+  ```
+  {: screen}
+3. サービスをクラスターに再びバインドします。
+  ```
+  bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_GUID>
+  ```
+  {: pre}
+
+<br />
 
 
 
@@ -401,7 +420,7 @@ SSH 接続を使用してワーカー・ノードにアクセスすることは�
   ```
   {: screen}
 
-2.  [Calico CLI](cs_security.html#adding_network_policies) をインストールします。
+2.  [Calico CLI](cs_network_policy.html#adding_network_policies) をインストールします。
 3.  Calico で使用可能なワーカー・ノードをリストします。 <path_to_file> は、Calico 構成ファイルのローカル・パスに置き換えてください。
 
   ```
@@ -448,7 +467,7 @@ SSH 接続を使用してワーカー・ノードにアクセスすることは�
 Kubernetes クラスターを作成したばかりの場合は、まだワーカー・ノードが構成中の可能性があります。 クラスターが以前から存在するものである場合は、ポッドをデプロイするための十分な容量がクラスター内で不足している可能性があります。
 
 {: tsResolve}
-このタスクには、[管理者アクセス・ポリシー](cs_cluster.html#access_ov)が必要です。 現在の[アクセス・ポリシー](cs_cluster.html#view_access)を確認してください。
+このタスクには、[管理者アクセス・ポリシー](cs_users.html#access_policies)が必要です。 現在の[アクセス・ポリシー](cs_users.html#infra_access)を確認してください。
 
 Kubernetes クラスターを作成したばかりの場合は、以下のコマンドを実行して、ワーカー・ノードが初期化するまで待ちます。
 
@@ -532,22 +551,37 @@ kubectl get nodes
 {: tsSymptoms}
 Kibana ダッシュボードにアクセスするとき、ログが表示されません。
 
-{: tsCauses}
-以下のいずれかの理由でログが表示されない可能性があります。<br/><br/>
-    A. ロギング構成がセットアップされていない。<br/><br/>
-    B. クラスターが `Normal` 状態ではない。<br/><br/>
-    C. ログ・ストレージの割り当て量に達している。<br/><br/>
-    D. クラスター作成の際にスペースを指定した場合、アカウント所有者に、そのスペースに対する管理者、開発者、または監査員の権限がない。<br/><br/>
-    E. ログを起動するイベントがポッド内でまだ発生していない。<br/><br/>
-
 {: tsResolve}
-ログが表示されない理由として考えられるそれぞれの点を解決するために、以下のオプションを確認してください。
+以下に示されている、ログが表示されない理由および対応するトラブルシューティング手順を確認してください。
 
-A. ログが送信されるようにするには、まずログを {{site.data.keyword.loganalysislong_notm}} に転送するようにロギング構成を作成する必要があります。ロギング構成を作成するには、[ログ転送の有効化](cs_cluster.html#cs_log_sources_enable)を参照してください。<br/><br/>
-B. クラスターの状態を確認する方法については、[クラスターのデバッグ](cs_troubleshoot.html#debug_clusters)を参照してください。<br/><br/>
-C. ログ・ストレージの限度を増やす方法については、[{{site.data.keyword.loganalysislong_notm}} の資料](https://console.bluemix.net/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs)を参照してください。<br/><br/>
-D. アカウント所有者の {{site.data.keyword.containershort_notm}} アクセス権限を変更する方法については、[クラスター・アクセス権限の管理](cs_cluster.html#cs_cluster_user)を参照してください。 権限を変更した後に、ログの表示が開始するまで最大で 24 時間かかります。<br/><br/>
-E. イベントに対するログを起動するには、複数のログ・イベントを生成するサンプルのポッド Noisy をクラスター内のワーカー・ノードにデプロイすることができます。<br/>
+<table>
+<col width="40%">
+<col width="60%">
+ <thead>
+ <th>現象の理由</th>
+ <th>修正方法</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td>ロギング構成がセットアップされていない。</td>
+ <td>ログが送信されるようにするには、まずログを {{site.data.keyword.loganalysislong_notm}} に転送するようにロギング構成を作成する必要があります。 ロギング構成を作成するには、<a href="cs_health.html#log_sources_enable">ログ転送の有効化</a>を参照してください。</td>
+ </tr>
+ <tr>
+ <td>クラスターが <code>Normal</code> 状態ではない。</td>
+ <td>クラスターの状態を確認する方法については、<a href="cs_troubleshoot.html#debug_clusters">クラスターのデバッグ</a>を参照してください。</td>
+ </tr>
+ <tr>
+ <td>ログ・ストレージの割り当て量に達している。</td>
+ <td>ログ・ストレージの限度を増やす方法については、<a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs">{{site.data.keyword.loganalysislong_notm}} の資料</a>を参照してください。</td>
+ </tr>
+ <tr>
+ <td>クラスター作成の際にスペースを指定した場合、アカウント所有者に、そのスペースに対する管理者、開発者、または監査員の権限がない。</td>
+ <td>アカウント所有者のアクセス許可を変更するには、以下のようにします。<ol><li>クラスターのアカウント所有者を見つけるために、<code>bx cs api-key-info &lt;cluster_name_or_id&gt;</code> を実行します。</li><li>そのアカウント所有者にスペースに対する管理者、開発者、または監査員の {{site.data.keyword.containershort_notm}} アクセス許可を付与する方法については、<a href="cs_users.html#managing">クラスター・アクセス権限の管理</a>を参照してください。</li><li>許可が変更された後にロギング・トークンをリフレッシュするには、<code>bx cs logging-config-refresh &lt;cluster_name_or_id&gt;</code> を実行します。</li></ol></td>
+ </tr>
+ </tbody></table>
+
+トラブルシューティング中に行った変更をテストするには、複数のログ・イベントを生成するサンプルのポッド Noisy をクラスター内のワーカー・ノードにデプロイすることができます。
+
   1. クラスター上のログの生成を開始する場所に [CLI のターゲット](cs_cli_install.html#cs_cli_configure)を設定します。
 
   2. `deploy-noisy.yaml` 構成ファイルを作成します。
@@ -574,7 +608,7 @@ E. イベントに対するログを起動するには、複数のログ・イ�
         ```
         {:pre}
 
-  4. 数分後に、Kibana ダッシュボードにログが表示されます。 Kibana ダッシュボードにアクセスするには、以下のいずれかの URL にアクセスし、クラスターを作成した {{site.data.keyword.Bluemix_notm}} アカウントを選択します。 クラスター作成の際にスペースを指定した場合は、代わりにそのスペースに移動します。        
+  4. 数分後に、Kibana ダッシュボードにログが表示されます。 Kibana ダッシュボードにアクセスするには、以下のいずれかの URL にアクセスし、クラスターを作成した {{site.data.keyword.Bluemix_notm}} アカウントを選択します。 クラスター作成の際にスペースを指定した場合は、代わりにそのスペースに移動します。
         - 米国南部および米国東部: https://logging.ng.bluemix.net
         - 英国南部および中欧: https://logging.eu-fra.bluemix.net
         - 南アジア太平洋地域: https://logging.au-syd.bluemix.net
@@ -604,6 +638,80 @@ Kubernetes ダッシュボードにアクセスするとき、使用状況グラ
 <br />
 
 
+## ロード・バランサー・サービス経由でアプリに接続できない
+{: #cs_loadbalancer_fails}
+
+{: tsSymptoms}
+クラスター内にロード・バランサー・サービスを作成して、アプリをパブリックに公開しました。 ロード・バランサーのパブリック IP アドレス経由でアプリに接続しようとすると、接続が失敗するかタイムアウトになります。
+
+{: tsCauses}
+次のいずれかの理由で、ロード・バランサー・サービスが正しく機能していない可能性があります。
+
+-   クラスターが、ライト・クラスターであるか、またはワーカー・ノードが 1 つしかない標準クラスターです。
+-   クラスターがまだ完全にデプロイされていません。
+-   ロード・バランサー・サービスの構成スクリプトにエラーが含まれています。
+
+{: tsResolve}
+ロード・バランサー・サービスのトラブルシューティングを行うには、以下のようにします。
+
+1.  標準クラスターをセットアップしたこと、クラスターが完全にデプロイされていること、また、ロード・バランサー・サービスの高可用性を確保するためにクラスターに 2 つ以上のワーカー・ノードがあることを確認します。
+
+  ```
+  bx cs workers <cluster_name_or_id>
+  ```
+  {: pre}
+
+    CLI 出力で、ワーカー・ノードの **Status** に **Ready** と表示され、**Machine Type** に **free** 以外のマシン・タイプが表示されていることを確認します。
+
+2.  ロード・バランサー・サービスの構成ファイルが正しいことを確認します。
+
+  ```
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: myservice
+  spec:
+    type: LoadBalancer
+    selector:
+      <selectorkey>:<selectorvalue>
+    ports:
+     - protocol: TCP
+       port: 8080
+  ```
+  {: pre}
+
+    1.  サービスのタイプとして **LoadBalancer** を定義したことを確認します。
+    2.  アプリをデプロイするときに **label/metadata** セクションで使用したものと同じ **<selectorkey>** と **<selectorvalue>** を使用していることを確認します。
+    3.  アプリで listen している **port** を使用していることを確認します。
+
+3.  ロード・バランサー・サービスを確認し、**Events** セクションを参照して、エラーがないか探します。
+
+  ```
+  kubectl describe service <myservice>
+  ```
+  {: pre}
+
+    次のようなエラー・メッセージを探します。
+
+    <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>ロード・バランサー・サービスを使用するには、2 つ以上のワーカー・ノードがある標準クラスターでなければなりません。</li>
+    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>このエラー・メッセージは、ロード・バランサー・サービスに割り振れるポータブル・パブリック IP アドレスが残っていないことを示しています。 クラスター用にポータブル・パブリック IP アドレスを要求する方法については、<a href="cs_subnets.html#subnets">クラスターへのサブネットの追加</a>を参照してください。 クラスターにポータブル・パブリック IP アドレスを使用できるようになると、ロード・バランサー・サービスが自動的に作成されます。</li>
+    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>**loadBalancerIP** セクションを使用してロード・バランサー・サービスのポータブル・パブリック IP アドレスを定義しましたが、そのポータブル・パブリック IP アドレスはポータブル・パブリック・サブネットに含まれていません。 ロード・バランサー・サービスの構成スクリプトを変更して、使用可能なポータブル・パブリック IP アドレスを選択するか、またはスクリプトから **loadBalancerIP** セクションを削除して、使用可能なポータブル・パブリック IP アドレスが自動的に割り振られるようにします。</li>
+    <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>ワーカー・ノードが不足しているため、ロード・バランサー・サービスをデプロイできません。 複数のワーカー・ノードを持つ標準クラスターをデプロイしましたが、ワーカー・ノードのプロビジョンが失敗した可能性があります。</li>
+    <ol><li>使用可能なワーカー・ノードのリストを表示します。</br><pre class="codeblock"><code>kubectl get nodes</code></pre></li>
+    <li>使用可能なワーカー・ノードが 2 つ以上ある場合は、ワーカー・ノードの詳細情報をリストします。</br><pre class="screen"><code>bx cs worker-get [&lt;cluster_name_or_id&gt;] &lt;worker_ID&gt;</code></pre></li>
+    <li><code>kubectl get nodes</code> コマンドと <code>bx cs [&lt;cluster_name_or_id&gt;] worker-get</code> コマンドから返されたワーカー・ノードのパブリック VLAN ID とプライベート VLAN ID が一致していることを確認します。</li></ol></li></ul>
+
+4.  カスタム・ドメインを使用してロード・バランサー・サービスに接続している場合は、カスタム・ドメインがロード・バランサー・サービスのパブリック IP アドレスにマップされていることを確認します。
+    1.  ロード・バランサー・サービスのパブリック IP アドレスを見つけます。
+
+      ```
+      kubectl describe service <myservice> | grep "LoadBalancer Ingress"
+      ```
+      {: pre}
+
+    2.  カスタム・ドメインが、ポインター・レコード (PTR) でロード・バランサー・サービスのポータブル・パブリック IP アドレスにマップされていることを確認します。
+
+<br />
 
 
 ## Ingress 経由でアプリに接続できない
@@ -720,98 +828,62 @@ Ingress のトラブルシューティングを行うには、以下のように
 
 
 
-
-## ロード・バランサー・サービス経由でアプリに接続できない
-{: #cs_loadbalancer_fails}
+## Ingress アプリケーション・ロード・バランサーのシークレットの問題
+{: #cs_albsecret_fails}
 
 {: tsSymptoms}
-クラスター内にロード・バランサー・サービスを作成して、アプリをパブリックに公開しました。 ロード・バランサーのパブリック IP アドレス経由でアプリに接続しようとすると、接続が失敗するかタイムアウトになります。
+Ingress アプリケーション・ロード・バランサーのシークレットをクラスターにデプロイした後に、{{site.data.keyword.cloudcerts_full_notm}} 内の証明書を参照すると、`Description` フィールドがそのシークレット名で更新されていません。
 
-{: tsCauses}
-次のいずれかの理由で、ロード・バランサー・サービスが正しく機能していない可能性があります。
-
--   クラスターが、ライト・クラスターであるか、またはワーカー・ノードが 1 つしかない標準クラスターです。
--   クラスターがまだ完全にデプロイされていません。
--   ロード・バランサー・サービスの構成スクリプトにエラーが含まれています。
+アプリケーション・ロード・バランサーのシークレットに関する情報をリストすると、状況は `*_failed` となっています。例えば、`create_failed`、`update_failed`、`delete_failed` などです。
 
 {: tsResolve}
-ロード・バランサー・サービスのトラブルシューティングを行うには、以下のようにします。
+以下に示されている、アプリケーション・ロード・バランサーのシークレットが失敗する場合の理由および対応するトラブルシューティング手順を確認してください。
 
-1.  標準クラスターをセットアップしたこと、クラスターが完全にデプロイされていること、また、ロード・バランサー・サービスの高可用性を確保するためにクラスターに 2 つ以上のワーカー・ノードがあることを確認します。
-
-  ```
-  bx cs workers <cluster_name_or_id>
-  ```
-  {: pre}
-
-    CLI 出力で、ワーカー・ノードの **Status** に **Ready** と表示され、**Machine Type** に **free** 以外のマシン・タイプが表示されていることを確認します。
-
-2.  ロード・バランサー・サービスの構成ファイルが正しいことを確認します。
-
-  ```
-  apiVersion: v1
-  kind: Service
-  metadata:
-    name: myservice
-  spec:
-    type: LoadBalancer
-    selector:
-      <selectorkey>:<selectorvalue>
-    ports:
-     - protocol: TCP
-       port: 8080
-  ```
-  {: pre}
-
-    1.  サービスのタイプとして **LoadBalancer** を定義したことを確認します。
-    2.  アプリをデプロイするときに **label/metadata** セクションで使用したものと同じ **<selectorkey>** と **<selectorvalue>** を使用していることを確認します。
-    3.  アプリで listen している **port** を使用していることを確認します。
-
-3.  ロード・バランサー・サービスを確認し、**Events** セクションを参照して、エラーがないか探します。
-
-  ```
-  kubectl describe service <myservice>
-  ```
-  {: pre}
-
-    次のようなエラー・メッセージを探します。
-    <ul><ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>ロード・バランサー・サービスを使用するには、2 つ以上のワーカー・ノードがある標準クラスターでなければなりません。
-    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>このエラー・メッセージは、ロード・バランサー・サービスに割り振れるポータブル・パブリック IP アドレスが残っていないことを示しています。 クラスター用にポータブル・パブリック IP アドレスを要求する方法については、[クラスターへのサブネットの追加](cs_cluster.html#cs_cluster_subnet)を参照してください。 クラスターにポータブル・パブリック IP アドレスを使用できるようになると、ロード・バランサー・サービスが自動的に作成されます。
-    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips</code></pre></br>**loadBalancerIP** セクションを使用してロード・バランサー・サービスのポータブル・パブリック IP アドレスを定義しましたが、そのポータブル・パブリック IP アドレスはポータブル・パブリック・サブネットに含まれていません。 ロード・バランサー・サービスの構成スクリプトを変更して、使用可能なポータブル・パブリック IP アドレスを選択するか、またはスクリプトから **loadBalancerIP** セクションを削除して、使用可能なポータブル・パブリック IP アドレスが自動的に割り振られるようにします。
-    <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>ワーカー・ノードが不足しているため、ロード・バランサー・サービスをデプロイできません。 複数のワーカー・ノードを持つ標準クラスターをデプロイしましたが、ワーカー・ノードのプロビジョンが失敗した可能性があります。
-    <ol><li>使用可能なワーカー・ノードのリストを表示します。</br><pre class="codeblock"><code>kubectl get nodes</code></pre>
-    <li>使用可能なワーカー・ノードが 2 つ以上ある場合は、ワーカー・ノードの詳細情報をリストします。</br><pre class="screen"><code>bx cs worker-get [<cluster_name_or_id>] <worker_ID></code></pre>
-    <li>「kubectl get nodes」コマンドと「bx cs [<cluster_name_or_id>] worker-get」コマンドから返されたワーカー・ノードのパブリック VLAN ID とプライベート VLAN ID が一致していることを確認します。</ol></ul></ul>
-
-4.  カスタム・ドメインを使用してロード・バランサー・サービスに接続している場合は、カスタム・ドメインがロード・バランサー・サービスのパブリック IP アドレスにマップされていることを確認します。
-    1.  ロード・バランサー・サービスのパブリック IP アドレスを見つけます。
-
-      ```
-      kubectl describe service <myservice> | grep "LoadBalancer Ingress"
-      ```
-      {: pre}
-
-    2.  カスタム・ドメインが、ポインター・レコード (PTR) でロード・バランサー・サービスのポータブル・パブリック IP アドレスにマップされていることを確認します。
+<table>
+<col width="40%">
+<col width="60%">
+ <thead>
+ <th>現象の理由</th>
+ <th>修正方法</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td>証明書データのダウンロードやアップデートに必要なアクセス役割を持っていない。</td>
+ <td>アカウント管理者に問い合わせて、{{site.data.keyword.cloudcerts_full_notm}} インスタンスに対する**オペレーター**と**エディター**の両方の役割を割り当てるように依頼してください。詳しくは、{{site.data.keyword.cloudcerts_short}} の <a href="/docs/services/certificate-manager/about.html#identity-access-management">ID およびアクセス管理</a>を参照してください。</td>
+ </tr>
+ <tr>
+ <td>作成時、更新時、または削除時に提供された証明書 CRN が、クラスターと同じアカウントに属していない。</td>
+ <td>提供した証明書 CRN が、クラスターと同じアカウントにデプロイされた、{{site.data.keyword.cloudcerts_short}} サービスのインスタンスにインポートされていることを確認します。</td>
+ </tr>
+ <tr>
+ <td>作成時に提供された証明書 CRN が正しくない。</td>
+ <td><ol><li>提供した証明書 CRN ストリングが正確であることを確認します。</li><li>証明書 CRN が正確である場合は、シークレットの更新を試行します。<pre class="pre"><code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li><li>このコマンドの結果が <code>update_failed</code> 状況になる場合、シークレットを削除します。<pre class="pre"><code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt;</code></pre></li><li>シークレットを再デプロイします。<pre class="pre"><code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li></ol></td>
+ </tr>
+ <tr>
+ <td>更新時に提供された証明書 CRN が正しくない。</td>
+ <td><ol><li>提供した証明書 CRN ストリングが正確であることを確認します。</li><li>証明書 CRN が正確である場合は、シークレットの削除を試行します。<pre class="pre"><code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt;</code></pre></li><li>シークレットを再デプロイします。<pre class="pre"><code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li><li>シークレットの更新を試行します。<pre class="pre"><code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li></ol></td>
+ </tr>
+ <tr>
+ <td>{{site.data.keyword.cloudcerts_long_notm}} サービスがダウンしている。</td>
+ <td>{{site.data.keyword.cloudcerts_short}} サービスが稼働中であることを確認します。</td>
+ </tr>
+ </tbody></table>
 
 <br />
 
 
 
-
-
-
-
-## Calico CLI 構成の ETCD url の取得に失敗する
+## Calico CLI 構成の ETCD URL を取得できない
 {: #cs_calico_fails}
 
 {: tsSymptoms}
-[ネットワーク・ポリシーを追加するための](cs_security.html#adding_network_policies) `<ETCD_URL>` を取得するときに、`calico-config not found` エラー・メッセージが出されます。
+[ネットワーク・ポリシーを追加するための](cs_network_policy.html#adding_network_policies) `<ETCD_URL>` を取得するときに、`calico-config not found` エラー・メッセージが出されます。
 
 {: tsCauses}
-クラスターが (Kubernetes バージョン 1.7)[cs_versions.html] 以降ではありません。
+クラスターが [Kubernetes バージョン 1.7](cs_versions.html) 以降ではありません。
 
 {: tsResolve}
-(クラスターを更新する)[cs_cluster.html#cs_cluster_update] か、または以前のバージョンの Kubernetes と互換性のあるコマンドによって `<ETCD_URL>` を取得します。
+[クラスターを更新する](cs_cluster_update.html#master)か、以前のバージョンの Kubernetes と互換性のあるコマンドによって `<ETCD_URL>` を取得します。
 
 `<ETCD_URL>` を取得するには、以下のいずれかのコマンドを実行します。
 
@@ -829,7 +901,7 @@ Ingress のトラブルシューティングを行うには、以下のように
     <li> ETCD エンドポイント値を見つけます。 例: <code>https://169.1.1.1:30001</code>
     </ol>
 
-`<ETCD_URL>` を取得するときには、(ネットワーク・ポリシーの追加)[cs_security.html#adding_network_policies] にリストされている手順を続行します。
+`<ETCD_URL>` を取得するときには、(ネットワーク・ポリシーの追加)[cs_network_policy.html#adding_network_policies] にリストされている手順を続行します。
 
 <br />
 

@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-13"
 
 ---
@@ -64,6 +64,6 @@ Kubernetes クラスターで稼動する Docker コンテナーに可用性の�
 クラスターが稼働状態になったら、クラスターを使用した作業を開始してください。
 
 * [CLI をインストールして、クラスターでの作業を開始します。](cs_cli_install.html#cs_cli_install)
-* [クラスターにアプリをデプロイします。](cs_apps.html#cs_apps_cli)
-* [可用性を高めるために、複数のノードを使用する標準クラスターを作成します。](cs_cluster.html#cs_cluster_ui)
+* [クラスターにアプリをデプロイします。](cs_app.html#app_cli)
+* [可用性を高めるために、複数のノードを使用する標準クラスターを作成します。](cs_clusters.html#clusters_ui)
 * [独自のプライベート・レジストリーを {{site.data.keyword.Bluemix_notm}} でセットアップし、Docker イメージを保管して他のユーザーと共有します。](/docs/services/Registry/index.html)

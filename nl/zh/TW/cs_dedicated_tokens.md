@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-11-02"
 
 ---
@@ -129,7 +129,7 @@ lastupdated: "2017-11-02"
         <table>
         <caption>表 2. 瞭解 YAML 檔案元件</caption>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> 瞭解 YAML 檔案元件</th>
+        <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
         </thead>
         <tbody>
         <tr>

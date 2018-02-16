@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2017
-lastupdated: "2017-12-14"
+  years: 2014, 2018
+lastupdated: "2018-01-09"
 
 ---
 
@@ -81,7 +81,7 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
 3.  Wenn Ihr Cluster den Status **Warning** oder **Critical** hat oder sich seit längerer Zeit im Status **Pending** befindet, überprüfen Sie den Status Ihrer Workerknoten. Wenn Ihr Cluster den Status **Deploying** hat, warten Sie, bis Ihr Cluster vollständig bereitgestellt wurde, und überprüfen Sie dann den Status Ihres Clusters. Für Cluster mit dem Status **Normal** wird angenommen, dass sie sich in einem in einwandfreiem Zustand befinden und dass derzeit keine Aktion für sie ausgeführt werden muss.
 
   ```
-  bx cs workers <clustername_oder_id>
+  bx cs workers <clustername_oder_-id>
   ```
   {: pre}
 
@@ -129,7 +129,7 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
 4.  Listen Sie die Details für den Workerknoten auf.
 
   ```
-  bx cs worker-get [<clustername_oder_id>] <workerknoten-id>
+  bx cs worker-get [<clustername_oder_-id>] <workerknoten-id>
   ```
   {: pre}
 
@@ -162,7 +162,7 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
 
         </br></br>
         {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: 'Item' must be ordered with permission.</td>
-        <td>Möglicherweise verfügen Sie nicht über die erforderlichen Berechtigungen, um einen Workerknoten aus dem Portfolio von IBM Cloud Infrastructure (SoftLayer) bereitzustellen. Weitere Informationen finden Sie in [Zugriff auf das Portfolio von IBM Cloud Infrastructure (SoftLayer) konfigurieren, um Kubernetes-Standardcluster zu erstellen](cs_planning.html#cs_planning_unify_accounts).</td>
+        <td>Möglicherweise verfügen Sie nicht über die erforderlichen Berechtigungen, um einen Workerknoten aus dem Portfolio von IBM Cloud Infrastructure (SoftLayer) bereitzustellen. Weitere Informationen finden Sie in [Zugriff auf das Portfolio von IBM Cloud Infrastructure (SoftLayer) konfigurieren, um Kubernetes-Standardcluster zu erstellen](cs_infrastructure.html#unify_accounts).</td>
       </tr>
     </tbody>
   </table>
@@ -213,38 +213,17 @@ Informieren Sie sich über die Optionen, die Ihnen für das Debuggen Ihrer App-B
 <br />
 
 
-
-
-## Lokale Client- und Serverversionen von kubectl ermitteln
-
-Führen Sie den folgenden Befehl aus und überprüfen Sie die Version, um festzustellen, welche Version der Kubernetes-Befehlszeilenschnittstelle lokal oder in Ihrem Cluster ausgeführt wird.
-
-```
-kubectl version  --short
-```
-{: pre}
-
-Beispielausgabe:
-
-```
-Client Version: v1.5.6
-        Server Version: v1.5.6
-```
-{: screen}
-
-<br />
-
-
-
-
-## Verbindung mit Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) während der Erstellung eines Clusters nicht möglich
+## Verbindung mit dem Infrastrukturkonto kann nicht hergestellt werden
 {: #cs_credentials}
 
 {: tsSymptoms}
 Wenn Sie einen neuen Kubernetes-Cluster erstellen, wird die folgende Nachricht angezeigt.
 
 ```
-Es konnte keine Verbindung zu Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) hergestellt werden. Zur Erstellung eines Standardclusters ist es erforderlich, dass Sie entweder über ein nutzungsabhängiges Konto mit einer Verbindung zum Konto von IBM Cloud Infrastructure (SoftLayer) verfügen oder dass Sie die {{site.data.keyword.Bluemix_notm}} Container Service-CLI zum Einrichten der API-Schlüssel für {{site.data.keyword.Bluemix_notm}} Infrastructure verwendet haben.
+Es konnte keine Verbindung zu Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) hergestellt werden.
+Zur Erstellung eines Standardclusters ist es erforderlich, dass Sie entweder über ein nutzungsabhängiges Konto
+mit einer Verbindung zum Konto von IBM Cloud Infrastructure (SoftLayer) verfügen oder dass Sie die {{site.data.keyword.Bluemix_notm}}
+Container Service-CLI zum Einrichten der API-Schlüssel für {{site.data.keyword.Bluemix_notm}} Infrastructure verwendet haben.
 ```
 {: screen}
 
@@ -275,20 +254,20 @@ Gehen Sie wie folgt vor, um Berechtigungsnachweise für Ihr {{site.data.keyword.
 <br />
 
 
-## Firewall verhindert die Ausführung der CLI-Befehle `bx`, `kubectl` oder `calicoctl`. 
+## Firewall verhindert das Ausführen von CLI-Befehlen
 {: #ts_firewall_clis}
 
 {: tsSymptoms}
-Wenn Sie die Befehle `bx`, `kubectl` oder `calicoctl` über die Befehlszeilenschnittstelle ausführen, schlagen sie fehl. 
+Wenn Sie die Befehle `bx`, `kubectl` oder `calicoctl` über die Befehlszeilenschnittstelle ausführen, schlagen sie fehl.
 
 {: tsCauses}
-Möglicherweise verhindern Unternehmensnetzrichtlinien den Zugriff von Ihrem lokalen System auf öffentliche Endpunkte über Proxys oder Firewalls. 
+Möglicherweise verhindern Unternehmensnetzrichtlinien den Zugriff von Ihrem lokalen System auf öffentliche Endpunkte über Proxys oder Firewalls.
 
 {: tsResolve}
-[Lassen Sie TCP-Zugriff zu, damit die CLI-Befehle ausgeführt werden können](cs_security.html#opening_ports). Für diese Task ist die [Zugriffsrichtlinie 'Administrator'](cs_cluster.html#access_ov) erforderlich. Überprüfen Sie Ihre aktuelle [Zugriffsrichtlinie](cs_cluster.html#view_access). 
+[Lassen Sie TCP-Zugriff zu, damit die CLI-Befehle ausgeführt werden können](cs_firewall.html#firewall). Für diese Task ist die [Zugriffsrichtlinie 'Administrator'](cs_users.html#access_policies) erforderlich. Überprüfen Sie Ihre aktuelle [Zugriffsrichtlinie](cs_users.html#infra_access).
 
 
-## Firewall verhindert Verbindung für Workerknoten
+## Firewall verhindert die Verbindung des Clusters mit Ressourcen
 {: #cs_firewall}
 
 {: tsSymptoms}
@@ -329,7 +308,7 @@ Wenn die Ausführung von 'kubectl proxy' erfolgreich verläuft, das Dashboard je
 Möglicherweise wurde eine zusätzliche Firewall eingerichtet oder Sie haben die vorhandenen Firewalleinstellungen für Ihr Konto von IBM Cloud Infrastructure (SoftLayer) angepasst. {{site.data.keyword.containershort_notm}} erfordert, dass bestimmte IP-Adressen und Ports geöffnet sind, damit die Kommunikation vom Workerknoten zum Kubernetes-Master und umgekehrt möglich ist. Ein weiterer möglicher Grund kann sein, dass Ihre Workerknoten in einer Neuladen-Schleife hängen.
 
 {: tsResolve}
-[Gewähren Sie dem Cluster den Zugriff auf Infrastrukturressourcen und andere Services](cs_security.html#firewall_outbound). Für diese Task ist die [Zugriffsrichtlinie 'Administrator'](cs_cluster.html#access_ov) erforderlich. Überprüfen Sie Ihre aktuelle [Zugriffsrichtlinie](cs_cluster.html#view_access). 
+[Gewähren Sie dem Cluster den Zugriff auf Infrastrukturressourcen und andere Services](cs_firewall.html#firewall_outbound). Für diese Task ist die [Zugriffsrichtlinie 'Administrator'](cs_users.html#access_policies) erforderlich. Überprüfen Sie Ihre aktuelle [Zugriffsrichtlinie](cs_users.html#infra_access).
 
 <br />
 
@@ -349,6 +328,47 @@ Verwenden Sie [Dämon-Sets ![Symbol für externen Link](../icons/launch-glyph.sv
 
 <br />
 
+
+
+## Bindung eines Service an einen Cluster führt zu Fehler wegen identischer Namen
+{: #cs_duplicate_services}
+
+{: tsSymptoms}
+Bei der Ausführung des Befehls `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>` wird die folgende Nachricht angezeigt:
+
+```
+Multiple services with the same name were found.
+Run 'bx service list' to view available Bluemix service instances...
+```
+{: screen}
+
+{: tsCauses}
+Unter Umständen haben mehrere Serviceinstanzen in unterschiedlichen Regionen denselben Namen.
+
+{: tsResolve}
+Verwenden Sie im Befehl `bx cs cluster-service-bind` die GUID des Service anstelle des Serviceinstanznamens.
+
+1. [Melden Sie sich in der Region an, in der sich die Serviceinstanz befindet, die gebunden werden soll.](cs_regions.html#bluemix_regions)
+
+2. Rufen Sie die GUID für die Serviceinstanz ab.
+  ```
+  bx service show <serviceinstanzname> --guid
+  ```
+  {: pre}
+
+  Ausgabe:
+  ```
+  Invoking 'cf service <serviceinstanzname> --guid'...
+  <serviceinstanz-GUID>
+  ```
+  {: screen}
+3. Binden Sie den Service erneut an den Cluster.
+  ```
+  bx cs cluster-service-bind <clustername> <namensbereich> <serviceinstanz-GUID>
+  ```
+  {: pre}
+
+<br />
 
 
 
@@ -400,7 +420,7 @@ Aktualisieren Sie die Referenz der privaten IP-Adresse manuell, um auf den korre
   ```
   {: screen}
 
-2.  Installieren Sie die [Calico-CLI](cs_security.html#adding_network_policies).
+2.  Installieren Sie die [Calico-CLI](cs_network_policy.html#adding_network_policies).
 3.  Listen Sie die verfügbaren Workerknoten in Calico auf. Ersetzen Sie <dateipfad> durch den lokalen Pfad zur Calico-Konfigurationsdatei.
 
   ```
@@ -447,7 +467,7 @@ Beim Ausführen von `kubectl get pods` verbleiben Pods weiterhin im Status **Pen
 Wenn Sie den Kubernetes-Cluster gerade erst erstellt haben, werden die Workerknoten möglicherweise noch konfiguriert. Falls dieser Cluster bereits vorhanden ist, steht unter Umständen nicht ausreichend Kapazität für die Bereitstellung des Pods in Ihrem Cluster zur Verfügung.
 
 {: tsResolve}
-Für diese Task ist die [Zugriffsrichtlinie 'Administrator'](cs_cluster.html#access_ov) erforderlich. Überprüfen Sie Ihre aktuelle [Zugriffsrichtlinie](cs_cluster.html#view_access).
+Für diese Task ist die [Zugriffsrichtlinie 'Administrator'](cs_users.html#access_policies) erforderlich. Überprüfen Sie Ihre aktuelle [Zugriffsrichtlinie](cs_users.html#infra_access).
 
 Führen Sie den folgenden Befehl aus, wenn Sie den Kubernetes-Cluster gerade erst erstellt haben. Warten Sie, bis die Workerknoten initialisiert werden.
 
@@ -477,7 +497,7 @@ Falls dieser Cluster bereits vorhanden ist, prüfen Sie Ihre Clusterkapazität.
 4.  Falls Ihr Cluster nicht genügend freie Kapazität bietet, fügen Sie einen weiteren Workerknoten zu ihm hinzu.
 
   ```
-  bx cs worker-add <clustername_oder_id> 1
+  bx cs worker-add <clustername_oder_-id> 1
   ```
   {: pre}
 
@@ -531,22 +551,37 @@ Die Container werden möglicherweise nicht gestartet, wenn die Registry-Quote er
 {: tsSymptoms}
 Beim Zugriff auf das Kibana-Dashboard werden keine Protokolle angezeigt.
 
-{: tsCauses}
-Protokolle werden möglicherweise aus einem der folgenden Gründen nicht angezeigt:<br/><br/>
-    A. Es ist keine Protokollierungskonfiguration eingerichtet. <br/><br/>
-    B. Der Cluster weist nicht den Status `Normal` auf.<br/><br/>
-    C. Das Kontingent für den Protokollspeicher ist erschöpft.<br/><br/>
-    D. Wenn Sie beim Erstellen des Clusters einen Bereich angegeben haben, verfügt der Kontoeigner nicht über die Berechtigungen eines Managers, Entwicklers oder Prüfers für diesen Bereich.<br/><br/>
-    E. Es sind noch keine Ereignisse, die eine Protokollierung auslösen, im Pod aufgetreten.<br/><br/>
-
 {: tsResolve}
-Sehen Sie sich die folgenden Optionen an, um herauszufinden, warum Protokolle nicht angezeigt werden:
+Überprüfen Sie die folgenden möglichen Ursachen für nicht angezeigte Protokolle sowie die entsprechenden Fehlerbehebungsschritte:
 
-A. Damit Protokolle gesendet werden, müssen Sie zunächst eine Protokollierungskonfiguration erstellen, um Protokolle an {{site.data.keyword.loganalysislong_notm}} weiterzuleiten. Weitere Informationen zum Erstellen einer Protokollierungskonfiguration finden Sie unter [Protokollweiterleitung aktivieren](cs_cluster.html#cs_log_sources_enable). <br/><br/>
-B. Informationen darüber, wie Sie den Status des Clusters überprüfen können, finden Sie unter [Cluster debuggen](cs_troubleshoot.html#debug_clusters). <br/><br/>
-C. Informationen darüber, wie Sie die Protokollspeichergrenze erhöhen, finden Sie in der [{{site.data.keyword.loganalysislong_notm}}-Dokumentation](https://console.bluemix.net/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs). <br/><br/>
-D. Informationen zum Ändern der {{site.data.keyword.containershort_notm}}-Zugriffsberechtigungen für den Kontoeigner finden Sie in [Clusterzugriff verwalten](cs_cluster.html#cs_cluster_user). Sobald Berechtigungen geändert wurden, kann es bis zu 24 Stunden dauern, bis die entsprechenden Protokolle angezeigt werden.<br/><br/>
-E. Um ein Protokoll für ein Ereignis zu generieren, können Sie Noisy auf einem Workerknoten in Ihrem Cluster bereitstellen. Dabei handelt es sich einen Beispiel-Pod, der mehrere Protokollereignisse generiert. <br/>
+<table>
+<col width="40%">
+<col width="60%">
+ <thead>
+ <th>Mögliche Ursache</th>
+ <th>Fehlerbehebungsmaßnahme</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td>Es ist keine Protokollierungskonfiguration eingerichtet.</td>
+ <td>Damit Protokolle gesendet werden, müssen Sie zunächst eine Protokollierungskonfiguration erstellen, um Protokolle an {{site.data.keyword.loganalysislong_notm}} weiterzuleiten. Weitere Informationen zum Erstellen einer Protokollierungskonfiguration finden Sie unter <a href="cs_health.html#log_sources_enable">Protokollweiterleitung aktivieren</a>.</td>
+ </tr>
+ <tr>
+ <td>Der Cluster weist nicht den Status <code>Normal</code> auf.</td>
+ <td>Informationen darüber, wie Sie den Status des Clusters überprüfen können, finden Sie unter <a href="cs_troubleshoot.html#debug_clusters">Cluster debuggen</a>.</td>
+ </tr>
+ <tr>
+ <td>Das Kontingent für den Protokollspeicher ist erschöpft.</td>
+ <td>Informationen darüber, wie Sie die Protokollspeichergrenze erhöhen können, finden Sie in der <a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs">{{site.data.keyword.loganalysislong_notm}}-Dokumentation</a>.</td>
+ </tr>
+ <tr>
+ <td>Wenn Sie beim Erstellen des Clusters einen Bereich angegeben haben, verfügt der Kontoeigner nicht über die Berechtigungen eines Managers, Entwicklers oder Prüfers für diesen Bereich.</td>
+ <td>Gehen Sie wie folgt vor, um die Zugriffsberechtigungen für den Kontoeigner zu ändern:<ol><li>Führen Sie den folgenden Befehl aus, um den Kontoeigner für den Cluster zu ermitteln: <code>bx cs api-key-info &lt;clustername_oder_-id&gt;</code></li><li>Informationen darüber, wie dem betreffenden Kontoeigner die {{site.data.keyword.containershort_notm}}-Zugriffsberechtigung eines Managers, Entwicklers oder Prüfers für den Bereich zugeordnet werden kann, finden Sie unter <a href="cs_users.html#managing">Clusterzugriff verwalten</a>.</li><li>Führen Sie den folgenden Befehl aus, um das Protokollierungstoken nach Änderung der Berechtigungen zu aktualisieren: <code>bx cs logging-config-refresh &lt;clustername_oder_-id&gt;</code>.</li></ol></td>
+ </tr>
+ </tbody></table>
+
+Um Änderungen zu testen, die Sie während der Fehlerbehebung vorgenommen haben, können Sie Noisy auf einem Workerknoten in Ihrem Cluster bereitstellen. Dabei handelt es sich um einen Beispiel-Pod, der mehrere Protokollereignisse generiert.
+
   1. [Geben Sie als Ziel der CLI](cs_cli_install.html#cs_cli_configure) einen Cluster an, auf dem Protokolle generiert werden sollen.
 
   2. Erstellen Sie die Konfigurationsdatei `deploy-noisy.yaml`.
@@ -573,7 +608,7 @@ E. Um ein Protokoll für ein Ereignis zu generieren, können Sie Noisy auf einem
         ```
         {:pre}
 
-  4. Nach einigen Minuten werden die Protokolle im Kibana-Dashboard angezeigt. Zum Zugriff auf das Kibana-Dashboard müssen Sie eine der folgenden URLs aufrufen und dann das {{site.data.keyword.Bluemix_notm}}-Konto, in dem Sie den Cluster erstellt haben, auswählen. Wenn Sie beim Erstellen des Clusters einen Bereich angegeben haben, wechseln Sie stattdessen zu diesem Bereich.        
+  4. Nach einigen Minuten werden die Protokolle im Kibana-Dashboard angezeigt. Zum Zugriff auf das Kibana-Dashboard müssen Sie eine der folgenden URLs aufrufen und dann das {{site.data.keyword.Bluemix_notm}}-Konto, in dem Sie den Cluster erstellt haben, auswählen. Wenn Sie beim Erstellen des Clusters einen Bereich angegeben haben, wechseln Sie stattdessen zu diesem Bereich.
         - Vereinigte Staaten (Süden) und Vereinigte Staaten (Osten): https://logging.ng.bluemix.net
         - Großbritannien (Süden) und Zentraleuropa: https://logging.eu-fra.bluemix.net
         - Asiatisch-pazifischer Raum (Süden): https://logging.au-syd.bluemix.net
@@ -603,9 +638,83 @@ Löschen Sie den Pod `kube-dashboard`, um einen Neustart zu erzwingen. Der Pod w
 <br />
 
 
+## Verbindung mit einer App über einen Lastausgleichsservice kann nicht hergestellt werden
+{: #cs_loadbalancer_fails}
+
+{: tsSymptoms}
+Sie haben Ihre App öffentlich zugänglich gemacht, indem Sie einen Lastausgleichsservice in Ihrem Cluster erstellt haben. Als Sie versuchten, eine Verbindung mit Ihrer App über die öffentliche IP-Adresse der Lastausgleichsfunktion herzustellen, ist die Verbindung fehlgeschlagen oder sie hat das zulässige Zeitlimit überschritten.
+
+{: tsCauses}
+Ihr Lastausgleichsservice funktioniert aus einem der folgenden Gründe möglicherweise nicht ordnungsgemäß:
+
+-   Der Cluster ist ein Lite-Cluster oder Standardcluster mit nur einem Workerknoten.
+-   Der Cluster ist noch nicht vollständig bereitgestellt.
+-   Das Konfigurationsscript für Ihren Lastausgleichsservice enthält Fehler.
+
+{: tsResolve}
+Gehen Sie wie folgt vor, um Fehler in Ihrem Lastausgleichsservice zu beheben:
+
+1.  Prüfen Sie, dass Sie einen Standardcluster einrichten, der vollständig bereitgestellt ist und mindestens zwei Workerknoten umfasst, um Hochverfügbarkeit für Ihren Lastausgleichsservice zu gewährleisten.
+
+  ```
+  bx cs workers <clustername_oder_-id>
+  ```
+  {: pre}
+
+    Stellen Sie in Ihrer CLI-Ausgabe sicher, dass der **Status** Ihrer Workerknoten **Ready** (Bereit) lautet und dass für den **Maschinentyp** etwas anderes als **free** (frei) anzeigt wird.
+
+2.  Prüfen Sie die Richtigkeit der Konfigurationsdatei für Ihren Lastausgleichsservice.
+
+  ```
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: myservice
+  spec:
+    type: LoadBalancer
+    selector:
+      <selektorschlüssel>:<selektorwert>
+    ports:
+     - protocol: TCP
+       port: 8080
+  ```
+  {: pre}
+
+    1.  Überprüfen Sie, dass Sie **LoadBalancer** als Typ für Ihren Service definiert haben.
+    2.  Stellen Sie sicher, dass Sie denselben **<selektorschlüssel>** und **<selektorwert>** verwendet haben, den Sie beim Bereitstellen Ihrer App im Abschnitt **label/metadata** angegeben haben.
+    3.  Prüfen Sie, dass Sie den **Port** verwendet haben, den Ihre App überwacht.
+
+3.  Prüfen Sie Ihren Lastausgleichsservice und suchen Sie im Abschnitt zu den Ereignissen (**Events**) nach potenziellen Fehlern.
+
+  ```
+  kubectl describe service <myservice>
+  ```
+  {: pre}
+
+    Suchen Sie nach den folgenden Fehlernachrichten:
+
+    <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>Um den Lastausgleichsservice verwenden zu können, müssen Sie über ein Standardcluster mit mindestens zwei Workerknoten verfügen.</li>
+    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>Diese Fehlernachricht weist darauf hin, dass keine portierbaren öffentlichen IP-Adressen mehr verfügbar sind, die Ihrem Lastausgleichsservice zugeordnet werden können. Informationen zum Anfordern portierbarer IP-Adressen für Ihren Cluster finden Sie unter <a href="cs_subnets.html#subnets">Clustern Teilnetze hinzufügen</a>. Nachdem portierbare öffentliche IP-Adressen im Cluster verfügbar gemacht wurden, wird der Lastausgleichsservice automatisch erstellt.</li>
+    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>Sie haben eine portierbare öffentliche IP-Adresse für Ihren Lastausgleichsservice mithilfe des Abschnitts **loadBalancerIP** definiert, aber diese portierbare öffentliche IP-Adresse ist in Ihrem portierbaren öffentlichen Teilnetz nicht verfügbar. Ändern Sie das Konfigurationsscript Ihres Lastausgleichsservice und wählen Sie entweder eine der portierbaren öffentlichen IP-Adressen aus, oder entfernen Sie den Abschnitt **loadBalancerIP** aus Ihrem Script, damit eine verfügbare portierbare öffentliche IP-Adresse automatisch zugeordnet werden kann.</li>
+    <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>Sie verfügen nicht über ausreichend Workerknoten, um einen Lastausgleichsservice bereitzustellen. Ein Grund kann sein, dass Sie einen Standardcluster mit mehr ale einem Workerknoten bereitgestellt haben, aber die Bereitstellung der Workerknoten ist fehlgeschlagen.</li>
+    <ol><li>Listen Sie verfügbare Workerknoten auf.</br><pre class="codeblock"><code>kubectl get nodes</code></pre></li>
+    <li>Werden mindestens zwei verfügbare Workerknoten gefunden, listen Sie die Details der Workerknoten auf.</br><pre class="screen"><code>bx cs worker-get [&lt;clustername_oder_-id&gt;] &lt;worker-ID&gt;</code></pre></li>
+    <li>Stellen Sie sicher, dass die öffentlichen und privaten VLAN-IDs für die Workerknoten, die von den Befehlen <code>kubectl get nodes</code> und <code>bx cs [&lt;clustername_oder_-id&gt;] worker-get</code> zurückgegeben wurden, übereinstimmen.</li></ol></li></ul>
+
+4.  Wenn Sie eine angepasste Domäne verwenden, um Ihren Lastausgleichsservice zu verbinden, stellen Sie sicher, dass Ihre angepasste Domäne der öffentlichen IP-Adresse Ihres Lastausgleichsservice zugeordnet ist.
+    1.  Suchen Sie nach der öffentlichen IP-Adresse Ihres Lastausgleichsservice.
+
+      ```
+      kubectl describe service <mein_service> | grep "LoadBalancer Ingress"
+      ```
+      {: pre}
+
+    2.  Prüfen Sie, dass Ihre angepasste Domäne der portierbaren öffentlichen IP-Adresse Ihres Lastausgleichsservice im Zeigerdatensatz (PTR) zugeordnet ist.
+
+<br />
 
 
-## Verbindung mit einer App über Ingress schlägt fehl
+## Verbindung mit einer App über Ingress kann nicht hergestellt werden
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
@@ -614,7 +723,7 @@ Sie haben Ihre App öffentlich zugänglich gemacht, indem Sie eine Ingress-Resso
 {: tsCauses}
 Ingress funktioniert aus den folgenden Gründen möglicherweise nicht ordnungsgemäß:
 <ul><ul>
-<li>Der Cluster ist nocht nicht vollständig bereitgestellt.
+<li>Der Cluster ist noch nicht vollständig bereitgestellt.
 <li>Der Cluster wurde als Lite-Cluster oder als Standardcluster mit nur einem Workerknoten eingerichtet.
 <li>Das Ingress-Konfigurationsscript enthält Fehler.
 </ul></ul>
@@ -625,7 +734,7 @@ Gehen Sie wie folgt vor, um Fehler in Ingress zu beheben:
 1.  Prüfen Sie, dass Sie einen Standardcluster einrichten, der vollständig bereitgestellt ist und mindestens zwei Workerknoten umfasst, um Hochverfügbarkeit für Ihren Ingress-Controller zu gewährleisten.
 
   ```
-  bx cs workers <clustername_oder_id>
+  bx cs workers <clustername_oder_-id>
   ```
   {: pre}
 
@@ -636,7 +745,7 @@ Gehen Sie wie folgt vor, um Fehler in Ingress zu beheben:
     1.  Rufen Sie die Unterdomäne des Ingress-Controllers ab.
 
       ```
-      bx cs cluster-get <clustername_oder_id> | grep "Ingress subdomain"
+      bx cs cluster-get <clustername_oder_-id> | grep "Ingress subdomain"
       ```
       {: pre}
 
@@ -689,7 +798,7 @@ Gehen Sie wie folgt vor, um Fehler in Ingress zu beheben:
     ```
     {: codeblock}
 
-    1.  Prüfen Sie, dass die Unterdomäne des Ingress-Controllers und das TLS-Zertifikat korrekt sind. Sie finden die von IBM bereitgestellte Unterdomäne und das TLS-Zertifikat, indem Sie 'bx cs cluster-get <clustername_oder_id>' ausführen.
+    1.  Prüfen Sie, dass die Unterdomäne des Ingress-Controllers und das TLS-Zertifikat korrekt sind. Sie finden die von IBM bereitgestellte Unterdomäne und das TLS-Zertifikat, indem Sie 'bx cs cluster-get <clustername_oder_-id>' ausführen.
     2.  Stellen Sie sicher, dass Ihre App denselben Pfad überwacht, der im Abschnitt **path** von Ingress konfiguriert ist. Wenn Ihre App so eingerichtet ist, dass sie den Rootpfad überwacht, schließen Sie **/** als Ihren Pfad ein.
 5.  Prüfen Sie Ihre Ingress-Bereitstellung und suchen Sie nach potenziellen Fehlernachrichten.
 
@@ -719,98 +828,62 @@ Gehen Sie wie folgt vor, um Fehler in Ingress zu beheben:
 
 
 
-
-## Verbindung mit einer App über einen Lastausgleichsservice schlägt fehl
-{: #cs_loadbalancer_fails}
+## Probleme mit geheimen Schlüsseln der Ingress-Lastausgleichsfunktion für Anwendungen
+{: #cs_albsecret_fails}
 
 {: tsSymptoms}
-Sie haben Ihre App öffentlich zugänglich gemacht, indem Sie einen Lastausgleichsservice in Ihrem Cluster erstellt haben. Als Sie versuchten, eine Verbindung mit Ihrer App über die öffentliche IP-Adresse der Lastausgleichsfunktion herzustellen, ist die Verbindung fehlgeschlagen oder sie hat das zulässige Zeitlimit überschritten.
+Nach der Bereitstellung eines geheimen Schlüssels der Ingress-Lastausgleichsfunktion für Anwendungen für Ihren Cluster wird das Beschreibungsfeld `Description` nicht mit dem Namen des geheimen Schlüssels aktualisiert, wenn Sie Ihr Zertifikat in {{site.data.keyword.cloudcerts_full_notm}} anzeigen.
 
-{: tsCauses}
-Ihr Lastausgleichsservice funktioniert aus einem der folgenden Gründe möglicherweise nicht ordnungsgemäß:
-
--   Der Cluster ist ein Lite-Cluster oder Standardcluster mit nur einem Workerknoten.
--   Der Cluster ist nocht nicht vollständig bereitgestellt.
--   Das Konfigurationsscript für Ihren Lastausgleichsservice enthält Fehler.
+Beim Auflisten von Informationen zum geheimen Schlüssel der Lastausgleichsfunktion für Anwendungen wird der Status `*_failed` angezeigt. Beispiel: `create_failed`, `update_failed` oder `delete_failed`.
 
 {: tsResolve}
-Gehen Sie wie folgt vor, um Fehler in Ihrem Lastausgleichsservice zu beheben:
+Überprüfen Sie die folgenden möglichen Ursachen für ein Fehlschlagen des geheimen Schlüssels der Lastausgleichsfunktion für Anwendungen sowie die entsprechenden Fehlerbehebungsschritte:
 
-1.  Prüfen Sie, dass Sie einen Standardcluster einrichten, der vollständig bereitgestellt ist und mindestens zwei Workerknoten umfasst, um Hochverfügbarkeit für Ihren Lastausgleichsservice zu gewährleisten.
-
-  ```
-  bx cs workers <clustername_oder_id>
-  ```
-  {: pre}
-
-    Stellen Sie in Ihrer CLI-Ausgabe sicher, dass der **Status** Ihrer Workerknoten **Ready** (Bereit) lautet und dass für den **Maschinentyp** etwas anderes als **free** (frei) anzeigt wird.
-
-2.  Prüfen Sie die Richtigkeit der Konfigurationsdatei für Ihren Lastausgleichsservice.
-
-  ```
-  apiVersion: v1
-  kind: Service
-  metadata:
-    name: myservice
-  spec:
-    type: LoadBalancer
-    selector:
-      <selektorschlüssel>:<selektorwert>
-    ports:
-     - protocol: TCP
-       port: 8080
-  ```
-  {: pre}
-
-    1.  Überprüfen Sie, dass Sie **LoadBalancer** als Typ für Ihren Service definiert haben.
-    2.  Stellen Sie sicher, dass Sie denselben **<selektorschlüssel>** und **<selektorwert>** verwendet haben, den Sie beim Bereitstellen Ihrer App im Abschnitt **label/metadata** angegeben haben.
-    3.  Prüfen Sie, dass Sie den **Port** verwendet haben, den Ihre App überwacht.
-
-3.  Prüfen Sie Ihren Lastausgleichsservice und suchen Sie im Abschnitt zu den Ereignissen (**Events**) nach potenziellen Fehlern.
-
-  ```
-  kubectl describe service <myservice>
-  ```
-  {: pre}
-
-    Suchen Sie nach den folgenden Fehlernachrichten:
-    <ul><ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>Um den Lastausgleichsservice verwenden zu können, müssen Sie über ein Standardcluster mit mindestens zwei Workerknoten verfügen.
-    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>Diese Fehlernachricht weist darauf hin, dass keine portierbaren öffentlichen IP-Adressen mehr verfügbar sind, die Ihrem Lastausgleichsservice zugeordnet werden können. Informationen zum Anfordern portierbarer IP-Adressen für Ihren Cluster finden Sie unter [Clustern Teilnetze hinzufügen](cs_cluster.html#cs_cluster_subnet). Nachdem portierbare öffentliche IP-Adressen im Cluster verfügbar gemacht wurden, wird der Lastausgleichsservice automatisch erstellt.
-    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips</code></pre></br>Sie haben eine portierbare öffentliche IP-Adresse für Ihren Lastausgleichsservice mithilfe des Abschnitts **loadBalancerIP** definiert, aber diese portierbare öffentliche IP-Adresse ist in Ihrem portierbaren öffentlichen Teilnetz nicht verfügbar. Ändern Sie das Konfigurationsscript Ihres Lastausgleichsservice und wählen Sie entweder eine der portierbaren öffentlichen IP-Adressen aus, oder entfernen Sie den Abschnitt **loadBalancerIP** aus Ihrem Script, damit eine verfügbare portierbare öffentliche IP-Adresse automatisch zugeordnet werden kann.
-    <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>Sie verfügen nicht über ausreichend Workerknoten, um einen Lastausgleichsservice bereitzustellen. Ein Grund kann sein, dass Sie einen Standardcluster mit mehr ale einem Workerknoten bereitgestellt haben, aber die Bereitstellung der Workerknoten ist fehlgeschlagen.
-    <ol><li>Listen Sie verfügbare Workerknoten auf.</br><pre class="codeblock"><code>kubectl get nodes</code></pre>
-    <li>Werden mindestens zwei verfügbare Workerknoten gefunden, listen Sie die Details der Workerknoten auf.</br><pre class="screen"><code>bx cs worker-get [<clustername_oder_id>] <worker-ID></code></pre>
-    <li>Stellen Sie sicher, dass die öffentlichen und privaten VLAN-IDs für die Workerknoten, die von den Befehlen 'kubectl get nodes' und 'bx cs [<clustername_oder_id>] worker-get' zurückgegeben wurden. </ol></ul></ul>
-
-4.  Wenn Sie eine angepasste Domäne verwenden, um Ihren Lastausgleichsservice zu verbinden, stellen Sie sicher, dass Ihre angepasste Domäne der öffentlichen IP-Adresse Ihres Lastausgleichsservice zugeordnet ist.
-    1.  Suchen Sie nach der öffentlichen IP-Adresse Ihres Lastausgleichsservice.
-
-      ```
-      kubectl describe service <mein_service> | grep "LoadBalancer Ingress"
-      ```
-      {: pre}
-
-    2.  Prüfen Sie, dass Ihre angepasste Domäne der portierbaren öffentlichen IP-Adresse Ihres Lastausgleichsservice im Zeigerdatensatz (PTR) zugeordnet ist.
+<table>
+<col width="40%">
+<col width="60%">
+ <thead>
+ <th>Mögliche Ursache</th>
+ <th>Fehlerbehebungsmaßnahme</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td>Sie verfügen nicht über die erforderlichen Zugriffsrollen für das Herunterladen und Aktualisieren von Zertifikatsdaten.</td>
+ <td>Bitten Sie Ihren Kontoadministrator, Ihnen sowohl die Rolle eines **Operators** als auch die Rolle eines **Bearbeiters** für Ihre Instanz von {{site.data.keyword.cloudcerts_full_notm}} zuzuweisen. Weitere Informationen hierzu finden Sie im Thema <a href="/docs/services/certificate-manager/about.html#identity-access-management">Identitäts- und Zugriffsmanagement</a> für {{site.data.keyword.cloudcerts_short}}.</td>
+ </tr>
+ <tr>
+ <td>Die CRN des Zertifikats, die zum Zeitpunkt der Erstellung, Aktualisierung oder Entfernung angegeben wurde, gehört nicht zu demselben Konto wie der Cluster.</td>
+ <td>Vergewissern Sie sich, dass die von Ihnen angegebene CRN des Zertifikats in eine Instanz des {{site.data.keyword.cloudcerts_short}}-Service importiert wurde, die in demselben Konto wie Ihr Cluster bereitgestellt wird.</td>
+ </tr>
+ <tr>
+ <td>Die zum Zeitpunkt der Erstellung angegebene CRN des Zertifikats ist falsch.</td>
+ <td><ol><li>Überprüfen Sie die Richtigkeit der von Ihnen angegebenen Zeichenfolge für die CRN des Zertifikats.</li><li>Wenn die CRN des Zertifikats korrekt angegeben wurde, versuchen Sie, den geheimen Schlüssel zu aktualisieren: <pre class="pre"><code>bx cs alb-cert-deploy --update --cluster &lt;clustername_oder_-id&gt; --secret-name &lt;name_des_geheimen_schlüssels&gt; --cert-crn &lt;CRN_des_zertifikats&gt;</code></pre></li><li>Wenn dieser Befehl den Status <code>update_failed</code> zurückgibt, dann entfernen Sie den geheimen Schlüssel: <pre class="pre"><code>bx cs alb-cert-rm --cluster &lt;clustername_oder_-id&gt; --secret-name &lt;name_des_geheimen_schlüssels&gt;</code></pre></li><li>Stellen Sie den geheimen Schlüssel erneut bereit: <pre class="pre"><code>bx cs alb-cert-deploy --cluster &lt;clustername_oder_-id&gt; --secret-name &lt;name_des_geheimen_schlüssels&gt; --cert-crn &lt;CRN_des_zertifikats&gt;</code></pre></li></ol></td>
+ </tr>
+ <tr>
+ <td>Die zum Zeitpunkt der Aktualisierung angegebene CRN des Zertifikats ist falsch.</td>
+ <td><ol><li>Überprüfen Sie die Richtigkeit der von Ihnen angegebenen Zeichenfolge für die CRN des Zertifikats.</li><li>Wenn die CRN des Zertifikats korrekt angegeben wurde, dann entfernen Sie den geheimen Schlüssel: <pre class="pre"><code>bx cs alb-cert-rm --cluster &lt;clustername_oder_-id&gt; --secret-name &lt;name_des_geheimen_schlüssels&gt;</code></pre></li><li>Stellen Sie den geheimen Schlüssel erneut bereit: <pre class="pre"><code>bx cs alb-cert-deploy --cluster &lt;clustername_oder_-id&gt; --secret-name &lt;name_des_geheimen_schlüssels&gt; --cert-crn &lt;CRN_des_zertifikats&gt;</code></pre></li><li>Versuchen Sie, den geheimen Schlüssel zu aktualisieren: <pre class="pre"><code>bx cs alb-cert-deploy --update --cluster &lt;clustername_oder_-id&gt; --secret-name &lt;name_des_geheimen_schlüssels&gt; --cert-crn &lt;CRN_des_zertifikats&gt;</code></pre></li></ol></td>
+ </tr>
+ <tr>
+ <td>Der {{site.data.keyword.cloudcerts_long_notm}}-Service ist ausgefallen.</td>
+ <td>Vergewissern Sie sich, dass Ihr {{site.data.keyword.cloudcerts_short}}-Service betriebsbereit ist.</td>
+ </tr>
+ </tbody></table>
 
 <br />
 
 
 
-
-
-
-
-## Abrufen der ETCD-URL für die Konfiguration der Calico-CLI ist fehlgeschlagen
+## ETCD-URL für die Konfiguration der Calico-CLI kann nicht abgerufen werden
 {: #cs_calico_fails}
 
 {: tsSymptoms}
-Wenn Sie den Wert für `<ETCD_URL>` abrufen, um [Netzrichtlinien hinzuzufügen](cs_security.html#adding_network_policies), dann gibt das System die Fehlernachricht `calico-config nicht gefunden` aus.
+Wenn Sie den Wert für `<ETCD_URL>` abrufen, um [Netzrichtlinien hinzuzufügen](cs_network_policy.html#adding_network_policies), dann gibt das System die Fehlernachricht `calico-config nicht gefunden` aus.
 
 {: tsCauses}
-Ihr Cluster hat nicht (Kubernetes Version 1.7)[cs_versions.html] oder höher.
+Ihr Cluster verfügt nicht über [Kubernetes Version 1.7](cs_versions.html) oder höher.
 
 {: tsResolve}
-(Aktualisieren Sie den Cluster)[cs_cluster.html#cs_cluster_update] oder rufen Sie den Wert für `<ETCD_URL>` mit Befehlen ab, die mit älteren Versionen von Kubernetes kompatibel sind.
+[Aktualisieren Sie Ihren Cluster](cs_cluster_update.html#master) oder rufen Sie die `<ETCD_URL>` mithilfe von Befehlen ab, die mit älteren Versionen von Kubernetes kompatibel sind.
 
 Führen Sie die folgenden Befehle aus, um den Wert für `<ETCD_URL>` abzurufen:
 
@@ -828,7 +901,7 @@ Führen Sie die folgenden Befehle aus, um den Wert für `<ETCD_URL>` abzurufen:
     <li> Suchen Sie den etcd-Endpunktwert. Beispiel: <code>https://169.1.1.1:30001</code>
     </ol>
 
-Wenn Sie den Wert für `<ETCD_URL>` abrufen, dann fahren Sie mit den Schritten fort, die unter (Netzrichtlinien hinzufügen)[cs_security.html#adding_network_policies] aufgeführt sind.
+Wenn Sie die `<ETCD_URL>` abrufen, dann arbeiten Sie mit den Schritten weiter, die unter (Netzrichtlinien hinzufügen)[cs_network_policy.html#adding_network_policies] aufgeführt sind.
 
 <br />
 
@@ -841,7 +914,7 @@ Wenn Sie den Wert für `<ETCD_URL>` abrufen, dann fahren Sie mit den Schritten f
 Erste Schritte bei der Fehlerbehebung für einen Container
 
 -   [Überprüfen Sie auf der {{site.data.keyword.Bluemix_notm}}-Statusseite ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/bluemix/support/#status), ob {{site.data.keyword.Bluemix_notm}} verfügbar ist.
--   Veröffentlichen Sie eine Frage im [{{site.data.keyword.containershort_notm}}-Slack. ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com) Tipp: Wenn Sie keine IBM ID für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, [fordern Sie eine Einladung](https://bxcs-slack-invite.mybluemix.net/) zu diesem Slack an. 
+-   Veröffentlichen Sie eine Frage im [{{site.data.keyword.containershort_notm}}-Slack. ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com) Tipp: Wenn Sie keine IBM ID für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, [fordern Sie eine Einladung](https://bxcs-slack-invite.mybluemix.net/) zu diesem Slack an.
 -   Suchen Sie in entsprechenden Foren, ob andere Benutzer auf das gleiche Problem
 gestoßen sind. Versehen Sie Ihre Fragen in den Foren mit Tags, um sie für das Entwicklungsteam
 von {{site.data.keyword.Bluemix_notm}} erkennbar zu machen.

@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2017
-lastupdated: "2017-12-01"
+  years: 2014, 2018
+lastupdated: "2017-01-02"
 
 ---
 
@@ -99,11 +99,10 @@ bx plugin list
 ## 'bx cs'-Befehle
 {: #cs_commands}
 
-
 ### bx cs albs --cluster CLUSTER
 {: #cs_albs}
 
-Anzeigen des Status aller Lastausgleichsfunktionen für Anwendungen (Application Load Balancers, ALBs) in einem Cluster. Eine ALB wird auch als Ingress-Controller bezeichnet. Wenn keine ALB-IDs zurückgegeben werden, verfügt der Cluster nicht über ein portierbares Teilnetz. Sie können Teilnetze [erstellen](#cs_cluster_subnet_create) oder zu einem Cluster [hinzufügen](#cs_cluster_subnet_add).
+Anzeigen des Status aller Lastausgleichsfunktionen für Anwendungen (Application Load Balancers, ALBs) in einem Cluster. Wenn keine ALB-IDs zurückgegeben werden, verfügt der Cluster nicht über ein portierbares Teilnetz. Sie können Teilnetze [erstellen](#cs_cluster_subnet_create) oder zu einem Cluster [hinzufügen](#cs_cluster_subnet_add).
 
 <strong>Befehlsoptionen</strong>:
 
@@ -119,50 +118,52 @@ Anzeigen des Status aller Lastausgleichsfunktionen für Anwendungen (Application
   ```
   {: pre}
 
+
+
 ### bx cs alb-configure --albID ALB-ID [--enable][--disable][--user-ip BENUTZER-IP]
 {: #cs_alb_configure}
 
-Aktivieren oder Inaktivieren einer Lastausgleichsfunktion für Anwendungen (Application Load Balancer, ALB), auch bezeichnet als Ingress-Controller, in Ihrem Standardcluster. Die öffentliche Lastausgleichsfunktion für Anwendungen ist standardmäßig aktiviert.
+Aktivieren oder Inaktivieren einer Lastausgleichsfunktion für Anwendungen (Application Load Balancer, ALB) in Ihrem Standardcluster. Die öffentliche Lastausgleichsfunktion für Anwendungen ist standardmäßig aktiviert.
 
 **Befehlsoptionen**:
 
    <dl>
    <dt><code><em>--albID </em>ALB-ID</code></dt>
-   <dd>Die ID für eine ALB. Führen Sie den Befehl <code>bx cs albs <em>--cluster </em>CLUSTER</code> aus, um die IDs für die ALBs in einem Cluster anzuzeigen. Dieser Wert ist erforderlich.</dd>
+   <dd>Die ID für eine Lastausgleichsfunktion für Anwendungen. Führen Sie <code>bx cs albs <em>--cluster </em>CLUSTER</code> aus, um die IDs für die Lastausgleichsfunktionen für Anwendungen in einem Cluster anzuzeigen. Dieser Wert ist erforderlich.</dd>
 
    <dt><code>--enable</code></dt>
-   <dd>Schließen Sie dieses Flag ein, um eine ALB in einem Cluster zu aktivieren.</dd>
+   <dd>Schließen Sie dieses Flag ein, um eine Lastausgleichsfunktion für Anwendungen in einem Cluster zu aktivieren.</dd>
 
    <dt><code>--disable</code></dt>
-   <dd>Schließen Sie dieses Flag ein, um eine ALB in einem Cluster zu inaktivieren.</dd>
+   <dd>Schließen Sie dieses Flag ein, um eine Lastausgleichsfunktion für Anwendungen in einem Cluster zu inaktivieren.</dd>
 
    <dt><code>--user-ip <em>BENUTZER-IP</em></code></dt>
    <dd>
 
    <ul>
-    <li>Dieser Parameter ist nur für eine private ALB verfügbar.</li>
-    <li>Die private ALB wird mit einer IP-Adresse aus einem von einem Benutzer bereitgestellten privaten Teilnetz implementiert. Wird keine IP-Adresse angegeben, wird die ALB mit einer beliebigen IP-Adresse aus einem privaten Teilnetz in IBM Cloud Infrastructure (SoftLayer) bereitgestellt.</li>
+    <li>Dieser Parameter ist nur für eine private Lastausgleichsfunktion für Anwendungen verfügbar.</li>
+    <li>Die private Lastausgleichsfunktion für Anwendungen wird mit einer IP-Adresse aus einem von einem Benutzer bereitgestellten privaten Teilnetz implementiert. Wird keine IP-Adresse bereitgestellt, wird die Lastausgleichsfunktion für Anwendungen mit einer privaten IP-Adresse aus dem portierbaren privaten Teilnetz bereitgestellt, die beim Erstellen des Clusters automatisch bereitgestellt wurde.</li>
    </ul>
    </dd>
    </dl>
 
 **Beispiele**:
 
-  Beispiel für die Aktivierung einer ALB:
+  Beispiel für die Aktivierung einer Lastausgleichsfunktion für Anwendungen:
 
   ```
   bx cs alb-configure --albID meine_alb-id --enable
   ```
   {: pre}
 
-  Beispiel für die Inaktivierung einer ALB:
+  Beispiel für die Inaktivierung einer Lastausgleichsfunktion für Anwendungen:
 
   ```
   bx cs alb-configure --albID meine_alb-id --disable
   ```
   {: pre}
 
-  Beispiel für die Aktivierung einer ALB mit einer von einem Benutzer bereitgestellten IP-Adresse:
+  Beispiel für die Aktivierung einer Lastausgleichsfunktion für Anwendungen mit einer vom Benutzer bereitgestellten IP-Adresse:
 
   ```
   bx cs alb-configure --albID meine_private_alb-id --enable --user-ip benutzer-ip
@@ -172,19 +173,19 @@ Aktivieren oder Inaktivieren einer Lastausgleichsfunktion für Anwendungen (Appl
 ### bx cs alb-get --albID ALB-ID
 {: #cs_alb_get}
 
-Anzeigen der Details einer Lastausgleichsfunktion für Anwendungen (Application Load Balancer, ALB).
+Zeigen Sie die Details einer Lastausgleichsfunktion für Anwendungen an.
 
 <strong>Befehlsoptionen</strong>:
 
    <dl>
    <dt><code><em>--albID </em>ALB-ID</code></dt>
-   <dd>Die ID für eine ALB. Führen Sie den Befehl <code>bx cs albs --cluster <em>CLUSTER</em></code> aus, um die IDs für die ALBs in einem Cluster anzuzeigen. Dieser Wert ist erforderlich.</dd>
+   <dd>Die ID für eine Lastausgleichsfunktion für Anwendungen. Führen Sie <code>bx cs albs --cluster <em>CLUSTER</em></code> aus, um die IDs für die Lastausgleichsfunktionen für Anwendungen in einem Cluster anzuzeigen. Dieser Wert ist erforderlich.</dd>
    </dl>
 
 **Beispiel**:
 
   ```
-  bx cs alb-get --albID ALB_ID
+  bx cs alb-get --albID ALB-ID
   ```
   {: pre}
 
@@ -203,6 +204,101 @@ Anzeigen der Lastverteilertypen für Anwendungen, die in der Region unterstützt
   bx cs alb-types
   ```
   {: pre}
+
+
+### bx cs apiserver-config-set
+{: #cs_apiserver_config_set}
+
+Legen Sie eine Option für die Kubernetes-API-Serverkonfiguration eines Clusters fest. Dieser Befehl muss mit einem der folgenden Unterbefehle für die Konfigurationsoption, die Sie festlegen möchten, kombiniert werden.
+
+#### bx cs apiserver-config-get audit-webhook CLUSTER
+{: #cs_apiserver_api_webhook_get}
+
+Zeigen Sie die URL für den fernen Protokollierungsservice an, an den Sie API-Serverauditprotokolle senden. Die URL wurde angegeben, als Sie das Webhook-Back-End für die API-Serverkonfiguration erstellt haben.
+
+<strong>Befehlsoptionen</strong>:
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>Der Name oder die ID des Clusters. Dieser Wert ist erforderlich.</dd>
+   </dl>
+
+**Beispiel**:
+
+  ```
+  bx cs apiserver-config-get audit-webhook mein_cluster
+  ```
+  {: pre}
+
+#### bx cs apiserver-config-set audit-webhook CLUSTER [--remoteServer SERVER-URL_ODER_-IP][--caCert CA_CERT_PATH] [--clientCert PFAD_DES_CLIENTZERTIFIKATS][--clientKey CLIENT_KEY_PATH]
+{: #cs_apiserver_api_webhook_set}
+
+Legen Sie das Webhook-Back-End für die API-Serverkonfiguration fest. Das Webhook-Back-End leitet API-Serverauditprotokolle an einen fernen Server weiter. Eine Webhook-Konfiguration wird auf der Grundlage der Informationen erstellt, die Sie in den Flags dieses Befehls bereitstellen. Wenn Sie keine Informationen in den Flags bereitstellen, wird eine Standard-Webhook-Konfiguration verwendet.
+
+<strong>Befehlsoptionen</strong>:
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>Der Name oder die ID des Clusters. Dieser Wert ist erforderlich.</dd>
+
+   <dt><code>--remoteServer <em>SERVER-URL</em></code></dt>
+   <dd>Die URL oder IP-Adresse für den fernen Protokollierungsservice, an den Sie Auditprotokolle senden möchten. Wenn Sie eine unsichere Server-URL angeben, werden alle Zertifikate ignoriert. Dieser Wert ist optional.</dd>
+
+   <dt><code>--caCert <em>PFAD_DES_CA-ZERTIFIKATS</em></code></dt>
+   <dd>Der Dateipfad für das CA-Zertifikat, das zum Überprüfen des fernen Protokollierungsservice verwendet werden. Dieser Wert ist optional.</dd>
+
+   <dt><code>--clientCert <em>PFAD_DES_CLIENTZERTIFIKATS</em></code></dt>
+   <dd>Der Dateipfad des Clientzertifikats, das zum Authentifizieren beim fernen Protokollierungsservice verwendet wird. Dieser Wert ist optional.</dd>
+
+   <dt><code>--clientKey <em>PFAD_DES_CLIENTSCHLÜSSELS</em></code></dt>
+   <dd>Der Dateipfad für den entsprechenden Clientschlüssel, der zum Verbinden mit dem fernen Protokollierungsservice verwendet wird. Dieser Wert ist optional.</dd>
+   </dl>
+
+**Beispiel**:
+
+  ```
+  bx cs apiserver-config-set audit-webhook mein_cluster --remoteServer https://audit.example.com/audit --caCert /mnt/etc/kubernetes/apiserver-audit/ca.pem --clientCert /mnt/etc/kubernetes/apiserver-audit/cert.pem --clientKey /mnt/etc/kubernetes/apiserver-audit/key.pem
+  ```
+  {: pre}
+
+#### bx cs apiserver-config-unset audit-webhook CLUSTER
+{: #cs_apiserver_api_webhook_unset}
+
+Inaktivieren Sie die Webhook-Back-End-Konfiguration für den API-Server des Clusters. Wenn Sie das Webhook-Back-End inaktivieren, wird die Weiterleitung von API-Serverauditprotokollen an einen fernen Server gestoppt.
+
+<strong>Befehlsoptionen</strong>:
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>Der Name oder die ID des Clusters. Dieser Wert ist erforderlich.</dd>
+   </dl>
+
+**Beispiel**:
+
+  ```
+  bx cs apiserver-config-unset audit-webhook mein_cluster
+  ```
+  {: pre}
+
+### bx cs apiserver-refresh CLUSTER
+{: #cs_apiserver_refresh}
+
+Starten Sie den Kubernetes-Master im Cluster, um Änderungen an der API-Serverkonfiguration anzuwenden.
+
+<strong>Befehlsoptionen</strong>:
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>Der Name oder die ID des Clusters. Dieser Wert ist erforderlich.</dd>
+   </dl>
+
+**Beispiel**:
+
+  ```
+  bx cs apiserver-refresh mein_cluster
+  ```
+  {: pre}
+
 
 ### bx cs cluster-config CLUSTER [--admin][--export]
 {: #cs_cluster_config}
@@ -231,7 +327,7 @@ bx cs cluster-config mein_cluster
 
 
 
-### bx cs cluster-create [--file DATEISTANDORT][--hardware HARDWARE] --location STANDORT --machine-type MASCHINENTYP --name NAME [--kube-version MAJOR.MINOR.PATCH][--no-subnet] [--private-vlan PRIVATES_VLAN][--public-vlan PUBLIC_VLAN] [--workers WORKER]
+### bx cs cluster-create [--file DATEISTANDORT][--hardware HARDWARE] --location STANDORT --machine-type MASCHINENTYP --name NAME [--kube-version MAJOR.MINOR.PATCH][--no-subnet] [--private-vlan PRIVATES_VLAN][--public-vlan PUBLIC_VLAN] [--workers WORKER][--disable-disk-encrypt]
 {: #cs_cluster_create}
 
 Erstellung eines Clusters in Ihrer Organisation.
@@ -255,6 +351,7 @@ public-vlan: <em>&lt;öffentliches_vlan&gt;</em>
 hardware: <em>&lt;shared_oder_dedicated&gt;</em>
 workerNum: <em>&lt;anzahl_worker&gt;</em>
 kube-version: <em>&lt;kube-version&gt;</em>
+
 </code></pre>
 
 
@@ -298,7 +395,10 @@ kube-version: <em>&lt;kube-version&gt;</em>
      </tr>
      <tr>
       <td><code><em>kube-version</em></code></td>
-      <td>Die Kubernetes-Version für den Cluster-Masterknoten. Dieser Wert ist optional. Wenn nicht anders angegeben, wird der Cluster mit dem Standard für unterstützte Kubernetes-Versionen erstellt. Führen Sie den Befehl <code>bx cs kube-versions</code> aus, um die verfügbaren Versionen anzuzeigen.</td>
+      <td>Die Kubernetes-Version für den Cluster-Masterknoten. Dieser Wert ist optional. Wenn nicht anders angegeben, wird der Cluster mit dem Standard für unterstützte Kubernetes-Versionen erstellt. Führen Sie den Befehl <code>bx cs kube-versions</code> aus, um die verfügbaren Versionen anzuzeigen.</td></tr>
+      <tr>
+      <td><code>diskEncryption: <em>false</em></code></td>
+      <td>Workerknoten weisen standardmäßig Verschlüsselung auf. [Weitere Informationen finden Sie hier](cs_secure.html#worker). Um die Verschlüsselung zu inaktivieren, schließen Sie diese Option ein und legen Sie den Wert auf <code>false</code> fest.</td></tr>
      </tbody></table>
     </p></dd>
 
@@ -355,6 +455,9 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <dd>Die Anzahl von Workerknoten, die Sie in Ihrem Cluster bereitstellen wollen. Wenn Sie diese Option nicht angeben, wird ein Cluster mit einem Workerknoten erstellt. Dieser Wert ist für Standardcluster optional und steht für Lite-Cluster nicht zur Verfügung.
 
 <p><strong>Hinweis:</strong> Jedem Workerknoten werden eine eindeutige Workerknoten-ID und ein Domänenname zugeordnet, die nach dem Erstellen des Clusters nicht manuell geändert werden dürfen. Wenn die ID oder der Domänenname geändert wird, kann der Kubernetes-Master Ihren Cluster nicht mehr verwalten.</p></dd>
+
+<dt><code>--disable-disk-encrypt</code></dt>
+<dd>Workerknoten weisen standardmäßig Verschlüsselung auf. [Weitere Informationen finden Sie hier](cs_secure.html#worker). Wenn Sie die Verschlüsselung inaktivieren möchten, schließen Sie diese Option ein.</dd>
 </dl>
 
 **Beispiele**:
@@ -533,11 +636,11 @@ Zwecke außerhalb von {{site.data.keyword.containershort_notm}} gleichzeitig.
 **Beispiel**:
 
   ```
-  bx cs cluster-subnet-add mein_cluster subnet
+  bx cs cluster-subnet-add mein_cluster teilnetz
   ```
   {: pre}
 
-### bx cs cluster-subnet-create CLUSTER SIZE VLAN_ID
+### bx cs cluster-subnet-create CLUSTER GRÖSSE VLAN-ID
 {: #cs_cluster_subnet_create}
 
 Erstellung eines Teilnetzes in einem Konto von IBM Cloud Infrastructure (SoftLayer) und Zurverfügungstellung dieses Teilnetzes für einen angegebenen Cluster in {{site.data.keyword.containershort_notm}}.
@@ -554,7 +657,7 @@ Zwecke außerhalb von {{site.data.keyword.containershort_notm}} gleichzeitig.
    <dt><code><em>GRÖSSE</em></code></dt>
    <dd>Die Anzahl der IP-Teilnetzadressen. Dieser Wert ist erforderlich. Gültige Werte sind 8, 16, 32 oder 64.</dd>
 
-   <dt><code><em>VLAN_ID</em></code></dt>
+   <dt><code><em>VLAN-ID</em></code></dt>
    <dd>Das VLAN, in dem das Teilnetz erstellt werden soll. Dieser Wert ist erforderlich. Verwenden Sie zum Auflisten der verfügbaren VLANs den [Befehl](#cs_vlans) `bx cs vlans <location>`.</dd>
    </dl>
 
@@ -565,7 +668,7 @@ Zwecke außerhalb von {{site.data.keyword.containershort_notm}} gleichzeitig.
   ```
   {: pre}
 
-### bx cs cluster-user-subnet-add CLUSTER SUBNET_CIDR PRIVATE_VLAN
+### bx cs cluster-user-subnet-add CLUSTER TEILNETZ-CIDR PRIVATES_VLAN
 {: #cs_cluster_user_subnet_add}
 
 Verwenden Sie das eigene private Teilnetz in Ihren {{site.data.keyword.containershort_notm}}-Clustern.
@@ -581,7 +684,7 @@ Zwecke außerhalb von {{site.data.keyword.containershort_notm}} gleichzeitig.
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>Der Name oder die ID des Clusters. Dieser Wert ist erforderlich.</dd>
 
-   <dt><code><em>TEILNETZ_CIDR</em></code></dt>
+   <dt><code><em>TEILNETZ-CIDR</em></code></dt>
    <dd>Das CIDR (Classless InterDomain Routing) des Teilnetzes. Dieser Wert ist erforderlich und darf keinen Konflikt mit einem anderen Teilnetz verursachen, das von IBM Cloud Infrastructure (SoftLayer) verwendet wird.
 
    Die unterstützten Präfixe liegen zwischen `/30` (1 IP-Adresse) und `/24` (253 IP-Adressen). Wenn Sie das CIDR mit einer Präfixlänge festlegen und später ändern müssen, dann sollten Sie zuerst das neue CIDR hinzufügen und anschließend das [alte CIDR entfernen](#cs_cluster_user_subnet_rm).</dd>
@@ -593,12 +696,12 @@ Zwecke außerhalb von {{site.data.keyword.containershort_notm}} gleichzeitig.
 **Beispiel**:
 
   ```
-  bx cs cluster-user-subnet-add my_cluster 192.168.10.0/29 1502175
+  bx cs cluster-user-subnet-add mein_cluster 192.168.10.0/29 1502175
   ```
   {: pre}
 
 
-### bx cs cluster-user-subnet-rm CLUSTER SUBNET_CIDR PRIVATE_VLAN
+### bx cs cluster-user-subnet-rm CLUSTER TEILNETZ-CIDR PRIVATES_VLAN
 {: #cs_cluster_user_subnet_rm}
 
 Entfernen Sie Ihr eigenes privates Teilnetz aus einem angegebenen Cluster.
@@ -611,7 +714,7 @@ Entfernen Sie Ihr eigenes privates Teilnetz aus einem angegebenen Cluster.
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>Der Name oder die ID des Clusters. Dieser Wert ist erforderlich.</dd>
 
-   <dt><code><em>TEILNETZ_CIDR</em></code></dt>
+   <dt><code><em>TEILNETZ-CIDR</em></code></dt>
    <dd>Das CIDR (Classless InterDomain Routing) des Teilnetzes. Dieser Wert ist erforderlich und muss mit dem CIDR übereinstimmen, das mit dem [Befehl](#cs_cluster_user_subnet_add) `bx cs cluster-user-subnet-add` festgelegt wurde.</dd>
 
    <dt><code><em>PRIVATES_VLAN</em></code></dt>
@@ -621,7 +724,7 @@ Entfernen Sie Ihr eigenes privates Teilnetz aus einem angegebenen Cluster.
 **Beispiel**:
 
   ```
-  bx cs cluster-user-subnet-rm my_cluster 192.168.10.0/29 1502175
+  bx cs cluster-user-subnet-rm mein_cluster 192.168.10.0/29 1502175
   ```
   {: pre}
 
@@ -762,43 +865,15 @@ Initialisieren des {{site.data.keyword.containershort_notm}}-Plug-ins oder Angeb
 
    <dl>
    <dt><code>--host <em>HOST</em></code></dt>
-   <dd>Der {{site.data.keyword.containershort_notm}}-API-Endpunkt, den Sie verwenden möchten.  Dieser Wert ist optional. Beispiel:
-
-    <ul>
-    <li>Vereinigte Staaten (Süden):
-
-    <pre class="codeblock">
-    <code>bx cs init --host https://us-south.containers.bluemix.net</code>
-    </pre></li>
-
-    <li>Vereinigte Staaten (Osten):
-
-    <pre class="codeblock">
-    <code>bx cs init --host https://us-east.containers.bluemix.net</code>
-    </pre>
-    <p><strong>Hinweis</strong>: Die Region 'Vereinigte Staaten (Osten)' ist nur zur Verwendung mit CLI-Befehlen verfügbar.</p></li>
-
-    <li>Großbritannien (Süden):
-
-    <pre class="codeblock">
-    <code>bx cs init --host https://uk-south.containers.bluemix.net</code>
-    </pre></li>
-
-    <li>Zentraleuropa:
-
-    <pre class="codeblock">
-    <code>bx cs init --host https://eu-central.containers.bluemix.net</code>
-    </pre></li>
-
-    <li>Asien-Pazifik (Süden):
-
-    <pre class="codeblock">
-    <code>bx cs init --host https://ap-south.containers.bluemix.net</code>
-    </pre></li></ul>
-</dd>
-</dl>
+   <dd>Der zu verwendende {{site.data.keyword.containershort_notm}}-API-Endpunkt.  Dieser Wert ist optional. [Zeigen Sie die verfügbaren API-Endpunktwerte an.](cs_regions.html#container_regions)</dd>
+   </dl>
 
 
+
+```
+bx cs init --host https://uk-south.containers.bluemix.net
+```
+{: pre}
 
 ### bx cs kube-versions
 {: #cs_kube_versions}
@@ -832,10 +907,10 @@ Anzeigen einer Liste von verfügbaren Standorten, in denen Sie einen Cluster ers
   ```
   {: pre}
 
-### bx cs logging-config-create CLUSTER --logsource PROTOKOLLQUELLE [--namespace KUBERNETES-NAMENSBEREICH][--hostname LOG_SERVER_HOSTNAME] [--port PORT_DES_PROTOKOLLSERVERS] --type PROTOKOLLTYP
+### bx cs logging-config-create CLUSTER --logsource PROTOKOLLQUELLE [--namespace KUBERNETES-NAMENSBEREICH][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port PROTOKOLLSERVER-PORT][--space CLUSTER_SPACE] [--org CLUSTERORG] --type PROTOKOLLTYP [--json]
 {: #cs_logging_create}
 
-Erstellen Sie eine Protokollierungskonfiguration. Standardmäßig werden Namensbereichsprotokolle an {{site.data.keyword.loganalysislong_notm}} weitergeleitet. Sie können diesen Befehl verwenden, um Namensbereichsprotokolle an einen externen Systemprotokollserver weiterzuleiten. Sie können diesen Befehl auch verwenden, um Protokolle für Anwendungen, Workerknoten, Kubernetes-Cluster und Ingress-Controller an {{site.data.keyword.loganalysisshort_notm}} oder an einen externen Systemprotokollserver weiterzuleiten.
+Erstellen Sie eine Protokollierungskonfiguration. Sie können diesen Befehl verwenden, um Protokolle für Container, Anwendungen, Workerknoten, Kubernetes-Cluster und Ingress-Lastausgleichsfunktionen für Anwendungen an {{site.data.keyword.loganalysisshort_notm}} oder an einen externen Systemprotokollserver weiterzuleiten.
 
 <strong>Befehlsoptionen</strong>:
 
@@ -843,34 +918,47 @@ Erstellen Sie eine Protokollierungskonfiguration. Standardmäßig werden Namensb
 <dt><code><em>CLUSTER</em></code></dt>
 <dd>Der Name oder die ID des Clusters.</dd>
 <dt><code>--logsource <em>PROTOKOLLQUELLE</em></code></dt>
-<dd>Die Protokollquelle, für die Sie die Protokollweiterleitung aktivieren möchten. Gültige Werte sind <code>application</code>, <code>worker</code>, <code>kubernetes</code> und <code>ingress</code>. Dieser Wert ist erforderlich.</dd>
-<dt><code>--namespace <em>KUBERNETES_NAMENSBEREICH</em></code></dt>
-<dd>Der Namensbereich für Docker-Container, von dem aus Protokolle ans Systemprotokoll weitergeleitet werden sollen. Die Weiterleitung von Protokollen wird für die Kubernetes-Namensbereiche <code>ibm-system</code> und <code>kube-system</code> nicht unterstützt. Dieser Wert ist für Namensbereiche erforderlich. Wenn Sie keinen Namensbereich angeben, verwenden alle Namensbereiche im Container diese Konfiguration.</dd>
+<dd>Die Protokollquelle, für die Sie die Protokollweiterleitung aktivieren möchten. Gültige Werte sind <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code> und <code>ingress</code>. Dieser Wert ist erforderlich.</dd>
+<dt><code>--namespace <em>KUBERNETES-NAMENSBEREICH</em></code></dt>
+<dd>Der Namensbereich für Docker-Container, von dem aus Protokolle weitergeleitet werden sollen. Die Weiterleitung von Protokollen wird für die Kubernetes-Namensbereiche <code>ibm-system</code> und <code>kube-system</code> nicht unterstützt. Dieser Wert ist nur für die Containerprotokollquelle gültig und optional. Wenn Sie keinen Namensbereich angeben, verwenden alle Namensbereiche im Container diese Konfiguration.</dd>
 <dt><code>--hostname <em>PROTOKOLLSERVER-HOSTNAME</em></code></dt>
-<dd>Der Hostname oder die IP-Adresse des Protokollcollector-Servers. Dieser Wert ist erforderlich, wenn der Protokollierungstyp <code>syslog</code> lautet.</dd>
+<dd>Wenn der Protokollierungstyp <code>syslog</code> lautet, der Hostname oder die IP-Adresse des Protokollcollector-Servers. Dieser Wert ist für <code>syslog</code> erforderlich. Wenn der Protokollierungstyp <code>ibm</code> lautet, die {{site.data.keyword.loganalysislong_notm}}-Einpflege-URL. Sie finden die Liste von verfügbaren Einpflege-URLs [hier](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). Wenn Sie keine Einpflege-URL angeben, wird der Endpunkt für die Region, in der Ihr Cluster erstellt wurde, verwendet.</dd>
 <dt><code>--port <em>PROTOKOLLSERVER-PORT</em></code></dt>
-<dd>Der Port des Protokollcollector-Servers. Dieser Wert ist optional, wenn der Protokollierungstyp <code>syslog</code> lautet. Wenn Sie keinen Port angeben, dann wird für <code>syslog</code> der Standardport <code>514</code> verwendet.</dd>
+<dd>Der Port des Protokollcollector-Servers. Dieser Wert ist optional. Wenn Sie keinen Port angeben, wird der Standardport <code>514</code> für <code>syslog</code> und der Standardport <code>9091</code> für <code>ibm</code> verwendet.</dd>
+<dt><code>--space <em>CLUSTERBEREICH</em></code></dt>
+<dd>Der Name des Bereichs, an den Protokolle gesendet werden sollen. Dieser Wert ist nur für den Protokolltyp <code>ibm</code> gültig und optional. Wenn Sie keinen Bereich angeben, werden Protokolle an die Kontoebene gesendet.</dd>
+<dt><code>--org <em>CLUSTERORG</em></code></dt>
+<dd>Der Name der Organisation, in der sich der Bereich befindet. Dieser Wert ist nur für den Protokolltyp <code>ibm</code> gültig und erforderlich, wenn Sie einen Bereich angegeben haben.</dd>
 <dt><code>--type <em>PROTOKOLLTYP</em></code></dt>
 <dd>Das Protokollweiterleitungsprotokoll, das Sie verwenden möchten. Momentan werden <code>syslog</code> und <code>ibm</code> unterstützt. Dieser Wert ist erforderlich.</dd>
+<dt><code>--json</code></dt>
+<dd>Druckt die Befehlsausgabe optional im JSON-Format.</dd>
 </dl>
 
 **Beispiele**:
 
-Beispiel für die Protokollquelle `namespaces`:
+Beispiel für Protokolltyp `ibm`, der aus einer `container`-Protokollquelle am Standardport 9091 weiterleitet:
 
   ```
-  bx cs logging-config-create mein_cluster --logsource namespaces --namespace mein_namensbereich --hostname localhost --port 5514 --type syslog
-  ```
-  {: pre}
-
-Beispiel für die Protokollquelle `ingress`:
-
-  ```
-  bx cs logging-config-create mein_cluster --logsource ingress --type ibm
+  bx cs logging-config-create mein_cluster --logsource container --namespace mein_namensbereich --hostname ingest.logging.ng.bluemix.net --type ibm
   ```
   {: pre}
 
-### bx cs logging-config-get CLUSTER [--logsource PROTOKOLLQUELLE]
+Beispiel für Protokolltyp `syslog`, der aus einer `container`-Protokollquelle am Standardport 514 weiterleitet:
+
+  ```
+  bx cs logging-config-create mein_cluster --logsource container --namespace mein_namensbereich  --hostname mein_hostname_oder_meine_IP --type syslog
+  ```
+  {: pre}
+
+  Beispiel für Protokolltyp `syslog`, der Protokolle aus einer `ingress`-Quelle an einen anderen Port als den Standardport weiterleitet:
+
+    ```
+    bx cs logging-config-create mein_cluster --logsource container --hostname mein_hostname_oder_meine_IP --port 5514 --type syslog
+    ```
+    {: pre}
+
+### bx cs logging-config-get CLUSTER [--logsource PROTOKOLLQUELLE][--json]
 {: #cs_logging_get}
 
 Zeigen Sie alle Protokollweiterleitungskonfigurationen für einen Cluster an oder filtern Sie die Protokollierungskonfigurationen auf Basis der Protokollquelle.
@@ -881,7 +969,9 @@ Zeigen Sie alle Protokollweiterleitungskonfigurationen für einen Cluster an ode
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>Der Name oder die ID des Clusters. Dieser Wert ist erforderlich.</dd>
    <dt><code>--logsource <em>PROTOKOLLQUELLE</em></code></dt>
-   <dd>Die Art der Protokollquelle, für die die Filterung durchgeführt werden soll. Nur Protokollierungskonfigurationen dieser Protokollquelle im Cluster werden zurückgegeben. Gültige Werte sind <code>namespaces</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code> und <code>ingress</code>. Dieser Wert ist optional.</dd>
+   <dd>Die Art der Protokollquelle, für die die Filterung durchgeführt werden soll. Nur Protokollierungskonfigurationen dieser Protokollquelle im Cluster werden zurückgegeben. Gültige Werte sind <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code> und <code>ingress</code>. Dieser Wert ist optional.</dd>
+   <dt><code>--json</code></dt>
+   <dd>Druckt die Befehlsausgabe optional im JSON-Format.</dd>
    </dl>
 
 **Beispiel**:
@@ -892,61 +982,65 @@ Zeigen Sie alle Protokollweiterleitungskonfigurationen für einen Cluster an ode
   {: pre}
 
 
-### bx cs logging-config-rm CLUSTER --id PROTOKOLLKONFIGURATIONS-ID
+### bx cs logging-config-rm CLUSTER PROTOKOLLKONFIGURATIONS-ID
 {: #cs_logging_rm}
 
-Löscht eine Protokollweiterleitungskonfiguration. Für einen Namensbereich für Docker-Container können Sie die Weiterleitung von Protokollen an einen Systemprotokollserver stoppen. Der Namensbereich leitet weiterhin Protokolle an {{site.data.keyword.loganalysislong_notm}} weiter. Bei einer anderen Protokollquelle als einem Namensbereich für Docker-Container können Sie das Weiterleiten von Protokollen an einen Systemprotokollserver oder an {{site.data.keyword.loganalysisshort_notm}} stoppen.
+Löscht eine Protokollweiterleitungskonfiguration. Dies stoppt die Protokollweiterleitung an einen Systemprotokollserver bzw. an {{site.data.keyword.loganalysisshort_notm}}.
 
 <strong>Befehlsoptionen</strong>:
 
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>Der Name oder die ID des Clusters. Dieser Wert ist erforderlich.</dd>
-   <dt><code>--id <em>PROTOKOLLKONFIGURATIONS-ID</em></code></dt>
+   <dt><code><em>PROTOKOLLKONFIGURATIONS-ID</em></code></dt>
    <dd>Die ID der Protokollierungskonfiguration, die aus der Protokollquelle entfernt werden soll. Dieser Wert ist erforderlich.</dd>
    </dl>
 
 **Beispiel**:
 
   ```
-  bx cs logging-config-rm mein_cluster --id meine_protokollkonfigurations-id
+  bx cs logging-config-rm mein_cluster f4bc77c0-ee7d-422d-aabf-a4e6b977264e
   ```
   {: pre}
 
 
-### bx cs logging-config-update CLUSTER [--namespace NAMENSBEREICH][--id LOG_CONFIG_ID] [--hostname HOSTNAME_DES_PROTOKOLLSERVERS][--port LOG_SERVER_PORT] --type PROTOKOLLTYP
+### bx cs logging-config-update CLUSTER PROTOKOLLKONFIGURATIONS-ID [--hostname PROTOKOLLSERVER-HOSTNAME_ODER_-IP][--port LOG_SERVER_PORT] [--space CLUSTERBEREICH][--org CLUSTER_ORG] --type PROTOKOLLTYP [--json]
 {: #cs_logging_update}
 
-Aktualisieren Sie die Protokollweiterleitung an den Protokollierungsserver, der verwendet werden soll. Für einen Namensbereich für Docker-Container können Sie diesen Befehl verwenden, um die Details des aktuellen Systemprotokollservers zu aktualisieren oder zu einem anderen Systemprotokollserver zu wechseln. Bei einer anderen Protokollierungsquelle als einem Namensbereich für Docker-Container können Sie diesen Befehl verwenden, um den Typ des Protokollcollector-Servers zu ändern. Momentan werden als Protokolltypen 'syslog' und 'ibm' unterstützt.
+Aktualisieren Sie die Details einer Protokollweiterleitungskonfiguration.
 
 <strong>Befehlsoptionen</strong>:
 
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>Der Name oder die ID des Clusters. Dieser Wert ist erforderlich.</dd>
-   <dt><code>--namespace <em>NAMENSBEREICH</em></code></dt>
-   <dd>Der Namensbereich für Docker-Container, von dem aus Protokolle ans Systemprotokoll weitergeleitet werden sollen. Die Weiterleitung von Protokollen wird für die Kubernetes-Namensbereiche <code>ibm-system</code> und <code>kube-system</code> nicht unterstützt. Dieser Wert ist für Namensbereiche erforderlich.</dd>
-   <dt><code>--id <em>PROTOKOLLKONFIGURATIONS-ID</em></code></dt>
-   <dd>Die ID der Protokollierungskonfiguration, die aktualisiert werden soll. Dieser Wert ist für alle Protokollquellen mit Ausnahme von Namensbereichen für Docker-Container erforderlich.</dd>
+   <dt><code><em>PROTOKOLLKONFIGURATIONS-ID</em></code></dt>
+   <dd>Die ID der Protokollierungskonfiguration, die aktualisiert werden soll. Dieser Wert ist erforderlich.</dd>
    <dt><code>--hostname <em>PROTOKOLLSERVER-HOSTNAME</em></code></dt>
-   <dd>Der Hostname oder die IP-Adresse des Protokollcollector-Servers. Dieser Wert ist erforderlich, wenn der Protokollierungstyp <code>syslog</code> lautet.</dd>
+   <dd>Wenn der Protokollierungstyp <code>syslog</code> lautet, der Hostname oder die IP-Adresse des Protokollcollector-Servers. Dieser Wert ist für <code>syslog</code> erforderlich. Wenn der Protokollierungstyp <code>ibm</code> lautet, die {{site.data.keyword.loganalysislong_notm}}-Einpflege-URL. Sie finden die Liste von verfügbaren Einpflege-URLs [hier](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). Wenn Sie keine Einpflege-URL angeben, wird der Endpunkt für die Region, in der Ihr Cluster erstellt wurde, verwendet.</dd>
    <dt><code>--port <em>PROTOKOLLSERVER-PORT</em></code></dt>
-   <dd>Der Port des Protokollcollector-Servers. Dieser Wert ist optional, wenn der Protokollierungstyp <code>syslog</code> lautet. Wenn Sie keinen Port angeben, dann wird für <code>syslog</code> der Standardport 514 verwendet.</dd>
+   <dd>Der Port des Protokollcollector-Servers. Dieser Wert ist optional, wenn der Protokollierungstyp <code>syslog</code> lautet. Wenn Sie keinen Port angeben, wird der Standardport <code>514</code> für <code>syslog</code> und <code>9091</code> für <code>ibm</code> verwendet.</dd>
+   <dt><code>--space <em>CLUSTERBEREICH</em></code></dt>
+   <dd>Der Name des Bereichs, an den Protokolle gesendet werden sollen. Dieser Wert ist nur für den Protokolltyp <code>ibm</code> gültig und optional. Wenn Sie keinen Bereich angeben, werden Protokolle an die Kontoebene gesendet.</dd>
+   <dt><code>--org <em>CLUSTERORG</em></code></dt>
+   <dd>Der Name der Organisation, in der sich der Bereich befindet. Dieser Wert ist nur für den Protokolltyp <code>ibm</code> gültig und erforderlich, wenn Sie einen Bereich angegeben haben.</dd>
    <dt><code>--type <em>PROTOKOLLTYP</em></code></dt>
    <dd>Das Protokollweiterleitungsprotokoll, das Sie verwenden möchten. Momentan werden <code>syslog</code> und <code>ibm</code> unterstützt. Dieser Wert ist erforderlich.</dd>
+   <dt><code>--json</code></dt>
+   <dd>Druckt die Befehlsausgabe optional im JSON-Format.</dd>
    </dl>
 
 **Beispiel für Protokolltyp `ibm`**:
 
   ```
-  bx cs logging-config-update mein_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e --type ibm
+  bx cs logging-config-update mein_cluster f4bc77c0-ee7d-422d-aabf-a4e6b977264e --type ibm
   ```
   {: pre}
 
 **Beispiel für Protokolltyp `syslog`**:
 
   ```
-  bx cs logging-config-update mein_cluster --namespace mein_namensbereich --hostname localhost --port 5514 --type syslog
+  bx cs logging-config-update mein_cluster f4bc77c0-ee7d-422d-aabf-a4e6b977264e --hostname localhost --port 5514 --type syslog
   ```
   {: pre}
 
@@ -970,10 +1064,92 @@ Anzeige einer Liste der für Ihre Workerknoten verfügbaren Maschinentypen. Jede
 **Beispiel**:
 
   ```
-  bx cs machine-types STANDORT
+  bx cs machine-types dal10
   ```
   {: pre}
 
+### bx cs region
+{: #cs_region}
+
+Suchen Sie nach der {{site.data.keyword.containershort_notm}}-Region, in der Sie sich aktuell befinden. Sie erstellen und verwalten Cluster, die für diese Region spezifisch sind. Verwenden Sie den Befehl `bx cs region-set`, um die Region zu ändern.
+
+**Beispiel**:
+
+```
+bx cs region
+```
+{: pre}
+
+**Ausgabe**:
+```
+Region: us-south
+```
+{: screen}
+
+### bx cs region-set [REGION]
+{: #cs_region-set}
+
+Legen Sie die Region für {{site.data.keyword.containershort_notm}} fest. Sie erstellen und verwalten Cluster, die für die Region spezifisch sind, und benötigen zum Zwecke der Hochverfügbarkeit unter Umständen Cluster in mehreren Regionen.
+
+Sie können sich beispielsweise bei {{site.data.keyword.Bluemix_notm}} in der Region 'Vereinigte Staaten (Süden)' anmelden und einen Cluster erstellen. Anschließend können Sie `bx cs region-set eu-central` verwenden, um die Region 'Zentraleuropa' als Ziel festzulegen, und einen weiteren Cluster erstellen. Und schließlich können Sie `bx cs region-set us-south` verwenden, um zur Region 'Vereinigte Staaten (Süden)' zurückzukehren und Ihren Cluster in dieser Region zu verwalten.
+
+**Befehlsoptionen**:
+
+<dl>
+<dt><code><em>REGION</em></code></dt>
+<dd>Geben Sie die Region ein, die Sie als Ziel festlegen möchten. Dieser Wert ist optional. Wenn Sie die Region nicht angeben, können Sie sie aus der Liste in der Ausgabe auswählen.
+
+Eine Liste von verfügbaren Regionen finden Sie unter [Regionen und Standorte](cs_regions.html). Oder setzen Sie den [Befehl](#cs_regions) `bx cs regions` ab.</dd></dl>
+
+**Beispiel**:
+
+```
+bx cs region-set eu-central
+```
+{: pre}
+
+```
+bx cs region-set
+```
+{: pre}
+
+**Ausgabe**:
+```
+Choose a region:
+1. ap-north
+2. ap-south
+3. eu-central
+4. uk-south
+5. us-east
+6. us-south
+Enter a number> 3
+OK
+```
+{: screen}
+
+### bx cs regions
+{: #cs_regions}
+
+Listet die verfügbaren Regionen auf. Der `Region Name` ist der {{site.data.keyword.containershort_notm}}-Name und der `Region Alias` ist der allgemeine {{site.data.keyword.Bluemix_notm}}-Name für die Region.
+
+**Beispiel**:
+
+```
+bx cs regions
+```
+{: pre}
+
+**Ausgabe**:
+```
+Region Name   Region Alias
+ap-north      jp-tok
+ap-south      au-syd
+eu-central    eu-de
+uk-south      eu-gb
+us-east       us-east
+us-south      us-south
+```
+{: screen}
 
 ### bx cs subnets
 {: #cs_subnets}
@@ -1041,7 +1217,7 @@ Erstellen von Webhooks.
   {: pre}
 
 
-### bx cs worker-add --cluster CLUSTER [--file DATEISTANDORT][--hardware HARDWARE] --machine-type MASCHINENTYP --number ANZAHL --private-vlan PRIVATES_VLAN --public-vlan ÖFFENTLICHES_VLAN
+### bx cs worker-add --cluster CLUSTER [--file DATEISTANDORT][--hardware HARDWARE] --machine-type MASCHINENTYP --number ANZAHL --private-vlan PRIVATES_VLAN --public-vlan ÖFFENTLICHES_VLAN [--disable-disk-encrypt]
 {: #cs_worker_add}
 
 Fügen Sie Ihrem Standardcluster Workerknoten hinzu.
@@ -1058,13 +1234,14 @@ Fügen Sie Ihrem Standardcluster Workerknoten hinzu.
 <p><strong>Hinweis:</strong> Wenn Sie dieselbe Option wie im Befehl als Parameter in der YAML-Datei bereitstellen, hat der Wert im Befehl Vorrang vor dem Wert in der YAML. Beispiel: Sie definieren einen Maschinentyp in Ihrer YAML-Datei und verwenden die Option '--machine-type' im Befehl. Der Wert, den Sie in der Befehlsoption eingegeben haben, überschreibt den Wert in der YAML-Datei.
 
 <pre class="codeblock">
-<code>name: <em>&lt;clustername_oder_id&gt;</em>
+<code>name: <em>&lt;clustername_oder_-id&gt;</em>
 location: <em>&lt;standort&gt;</em>
 machine-type: <em>&lt;maschinentyp&gt;</em>
 private-vlan: <em>&lt;privates_vlan&gt;</em>
 public-vlan: <em>&lt;öffentliches_vlan&gt;</em>
 hardware: <em>&lt;shared_oder_dedicated&gt;</em>
-workerNum: <em>&lt;anzahl_worker&gt;</em></code></pre>
+workerNum: <em>&lt;anzahl_worker&gt;</em>
+</code></pre>
 
 <table>
 <caption>Tabelle 2. Erklärung der Komponenten der YAML-Datei</caption>
@@ -1074,7 +1251,7 @@ workerNum: <em>&lt;anzahl_worker&gt;</em></code></pre>
 <tbody>
 <tr>
 <td><code><em>name</em></code></td>
-<td>Ersetzen Sie <code><em>&lt;clustername_oder_id&gt;</em></code> durch den Namen oder die ID des Clusters, in dem Sie Workerknoten hinzufügen möchten.</td>
+<td>Ersetzen Sie <code><em>&lt;clustername_oder_-id&gt;</em></code> durch den Namen oder die ID des Clusters, in dem Sie Workerknoten hinzufügen möchten.</td>
 </tr>
 <tr>
 <td><code><em>standort</em></code></td>
@@ -1100,6 +1277,9 @@ workerNum: <em>&lt;anzahl_worker&gt;</em></code></pre>
 <td><code>anzahl_worker</code></td>
 <td>Ersetzen Sie <code><em>&lt;anzahl_worker&gt;</em></code> durch die Anzahl von Workerknoten, die Sie implementieren wollen.</td>
 </tr>
+<tr>
+<td><code>diskEncryption: <em>false</em></code></td>
+<td>Workerknoten weisen standardmäßig Verschlüsselung auf. [Weitere Informationen finden Sie hier](cs_secure.html#worker). Um die Verschlüsselung zu inaktivieren, schließen Sie diese Option ein und legen Sie den Wert auf <code>false</code> fest.</td></tr>
 </tbody></table></p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
@@ -1120,6 +1300,9 @@ workerNum: <em>&lt;anzahl_worker&gt;</em></code></pre>
 <dd>Das öffentliche VLAN, das bei der Erstellung des Clusters angegeben wurde. Dieser Wert ist optional.
 
 <p><strong>Hinweis:</strong> Die öffentlichen und privaten VLANs, die Sie angeben, müssen übereinstimmen. Private VLAN-Router beginnen immer mit <code>bcr</code> (Back-End-Router) und öffentliche VLAN-Router immer mit <code>fcr</code> (Front-End-Router). Die Zahlen- und Buchstabenkombination nach diesen Präfixen muss übereinstimmen, damit diese VLANs beim Erstellen eines Clusters verwendet werden können. Verwenden Sie keine abweichenden öffentlichen und privaten VLANs, um ein Cluster zu erstellen.</p></dd>
+
+<dt><code>--disable-disk-encrypt</code></dt>
+<dd>Workerknoten weisen standardmäßig Verschlüsselung auf. [Weitere Informationen finden Sie hier](cs_secure.html#worker). Wenn Sie die Verschlüsselung inaktivieren möchten, schließen Sie diese Option ein.</dd>
 </dl>
 
 **Beispiele**:
@@ -1137,7 +1320,7 @@ workerNum: <em>&lt;anzahl_worker&gt;</em></code></pre>
   {: pre}
 
 
-### bx cs worker-get WORKERKNOTEN-ID
+### bx cs worker-get [CLUSTERNAME_ODER_-ID] WORKERKNOTEN-ID
 {: #cs_worker_get}
 
 Anzeigen der Details eines Workerknotens.
@@ -1145,6 +1328,8 @@ Anzeigen der Details eines Workerknotens.
 <strong>Befehlsoptionen</strong>:
 
    <dl>
+   <dt><code><em>CLUSTERNAME_ODER_-ID</em></code></dt>
+   <dd>Der Name oder die ID des Workerknotenclusters. Dieser Wert ist optional.</dd>
    <dt><code><em>WORKERKNOTEN-ID</em></code></dt>
    <dd>Die ID für einen Workerknoten. Führen Sie den Befehl <code>bx cs workers <em>CLUSTER</em></code> aus, um die IDs für die Workerknoten in einem Cluster anzuzeigen. Dieser Wert ist erforderlich.</dd>
    </dl>
@@ -1152,7 +1337,7 @@ Anzeigen der Details eines Workerknotens.
 **Beispiel**:
 
   ```
-  bx cs worker-get WORKERKNOTEN-ID
+  bx cs worker-get [CLUSTERNAME_ODER_-ID] WORKERKNOTEN_ID
   ```
   {: pre}
 
@@ -1288,3 +1473,6 @@ Anzeigen einer Liste der Workerknoten und ihres jeweiligen Status in einem Clust
   bx cs workers mein_cluster
   ```
   {: pre}
+
+<br />
+

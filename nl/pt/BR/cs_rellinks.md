@@ -1,6 +1,8 @@
 ---
 
-copyright: years: 2014, 2017 lastupdated: "2017-12-01"
+copyright:
+  years: 2014, 2018
+lastupdated: "2017-12-01"
 
 ---
 
@@ -27,9 +29,9 @@ copyright: years: 2014, 2017 lastupdated: "2017-12-01"
 - [Jornadas de orquestração de contêiner do developerWorks ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/code/journey/category/container-orchestration/)
 - [Documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/)
 - [Documentação do Docker ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.docker.com/engine/)
-- [Documentação do Helm ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.helm.sh/helm/)
-- [Istio ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://istio.io/)
-- [Weave Scope ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.weave.works/oss/scope/)
+- <a href="https://docs.helm.sh/helm/" target="_blank">Documentação do Helm <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a> para gerenciamento de pacote do Kubernetes
+- [Malha do serviço Istio ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://istio.io/)
+- [Visualização do Weave Scope ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.weave.works/oss/scope/)
 
 <br />
 

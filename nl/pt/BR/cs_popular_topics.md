@@ -1,6 +1,8 @@
 ---
 
-copyright: years: 2014, 2017 lastupdated: "2017-12-14"
+copyright:
+  years: 2014, 2018
+lastupdated: "2017-12-14"
 
 ---
 
@@ -34,7 +36,7 @@ Confira no que os desenvolvedores de contêiner estão interessados.
 <td>O Docker e o Kubernetes fornecem segurança e isolamento integrados e eles automatizam a implementação, a operação, o ajuste de escala e o monitoramento de apps conteinerizados em um cluster de hosts de cálculo independentes.</td>
 </tr>
 <tr>
-<td>[Implementando apps em clusters](cs_apps.html)</td>
+<td>[Implementando apps em clusters](cs_app.html)</td>
 <td>É possível usar técnicas do Kubernetes para implementar apps e assegurar que seus aplicativos estejam funcionando em todos os momentos. Por exemplo, é possível executar atualizações e recuperações contínuas sem tempo de inatividade para seus usuários.</td>
 </tr>
 <tr>
@@ -42,7 +44,7 @@ Confira no que os desenvolvedores de contêiner estão interessados.
 <td>Com a CLI, você cria e gerencia seus clusters do Kubernetes.</td>
 </tr>
 <tr>
-<td>[Abrindo portas e endereços IP necessários em seu firewall](cs_security.html#opening_ports)</td>
+<td>[Abrindo portas e endereços IP necessários em seu firewall](cs_firewall.html#firewall)</td>
 <td>Você pode precisar abrir portas e endereços IP específicos em seus firewalls para executar comandos da CLI ou para permitir a comunicação entre o mestre do Kubernetes e os nós do trabalhador.</td>
 </tr>
 <tr>

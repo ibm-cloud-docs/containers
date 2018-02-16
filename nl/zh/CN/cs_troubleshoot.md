@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2017
-lastupdated: "2017-12-14"
+  years: 2014, 2018
+lastupdated: "2018-01-09"
 
 ---
 
@@ -161,7 +161,7 @@ lastupdated: "2017-12-14"
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure 异常：用户没有必需的 {{site.data.keyword.Bluemix_notm}} Infrastructure 许可权来添加服务器
 </br></br>
         {{site.data.keyword.Bluemix_notm}} Infrastructure 异常：必须具有许可权才能订购“项”。</td>
-        <td>您可能没有必需的许可权来从 IBM Cloud infrastructure (SoftLayer) 产品服务组合供应工作程序节点。请参阅[配置对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权以创建标准 Kubernete 集群](cs_planning.html#cs_planning_unify_accounts)。</td>
+        <td>您可能没有必需的许可权来从 IBM Cloud infrastructure (SoftLayer) 产品服务组合供应工作程序节点。请参阅[配置对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权以创建标准 Kubernete 集群](cs_infrastructure.html#unify_accounts)。</td>
       </tr>
     </tbody>
   </table>
@@ -214,38 +214,14 @@ lastupdated: "2017-12-14"
 <br />
 
 
-
-
-## 确定 kubectl 的本地客户机和服务器版本
-
-要检查您正在本地运行或您的集群正在运行的 Kubernetes CLI 版本，请运行以下命令并检查版本。
-
-```
-        kubectl version  --short
-        ```
-{: pre}
-
-输出示例：
-
-```
-        Client Version: v1.5.6
-        Server Version: v1.5.6
-        ```
-{: screen}
-
-<br />
-
-
-
-
-## 在创建集群时无法连接到 IBM Cloud infrastructure (SoftLayer) 帐户
+## 无法连接到 Infrastructure 帐户
 {: #cs_credentials}
 
 {: tsSymptoms}
 创建新的 Kubernetes 集群时，收到以下消息。
 
 ```
-我们无法连接到您的 IBM Cloud infrastructure (SoftLayer) 帐户。创建标准集群要求您有链接到 IBM Cloud infrastructure (SoftLayer) 帐户条款的现买现付帐户，或者您已使用 IBM {{site.data.keyword.Bluemix_notm}} Container Service CLI 设置 {{site.data.keyword.Bluemix_notm}} Infrastructure API 密钥。
+我们无法连接到您的 IBM Cloud infrastructure (SoftLayer) 帐户。创建标准集群要求您有链接到 IBM Cloud infrastructure (SoftLayer) 帐户条款的现买现付帐户，或者您已使用 {{site.data.keyword.Bluemix_notm}} Container Service CLI 设置 {{site.data.keyword.Bluemix_notm}} Infrastructure API 密钥。
 ```
 {: screen}
 
@@ -276,7 +252,7 @@ lastupdated: "2017-12-14"
 <br />
 
 
-## 防火墙阻止运行 `bx`、`kubectl` 或 `calicoctl` CLI 命令
+## 防火墙阻止 CLI 命令运行
 {: #ts_firewall_clis}
 
 {: tsSymptoms}
@@ -286,10 +262,10 @@ lastupdated: "2017-12-14"
 您可能具有企业网络策略，这些策略灰阻止通过代理或防火墙从本地系统访问公共端点。
 
 {: tsResolve}
-[允许 TCP 访问以使 CLI 命令能够运作](cs_security.html#opening_ports)。此任务需要[管理员访问策略](cs_cluster.html#access_ov)。验证您当前的[访问策略](cs_cluster.html#view_access)。
+[允许 TCP 访问以使 CLI 命令能够运作](cs_firewall.html#firewall)。此任务需要[管理员访问策略](cs_users.html#access_policies)。验证您当前的[访问策略](cs_users.html#infra_access)。
 
 
-## 防火墙阻止工作程序节点进行连接
+## 防火墙阻止集群连接到资源
 {: #cs_firewall}
 
 {: tsSymptoms}
@@ -330,7 +306,7 @@ lastupdated: "2017-12-14"
 您可能已在 IBM Cloud infrastructure (SoftLayer) 帐户中额外设置了防火墙或定制了现有防火墙设置。{{site.data.keyword.containershort_notm}} 需要打开特定 IP 地址和端口，以允许工作程序节点与 Kubernetes 主节点之间进行通信。另一个原因可能是工作程序节点陷入重新装入循环。
 
 {: tsResolve}
-[允许集群访问基础架构资源和其他服务](cs_security.html#firewall_outbound)。此任务需要[管理员访问策略](cs_cluster.html#access_ov)。验证您当前的[访问策略](cs_cluster.html#view_access)。
+[允许集群访问基础架构资源和其他服务](cs_firewall.html#firewall_outbound)。此任务需要[管理员访问策略](cs_users.html#access_policies)。验证您当前的[访问策略](cs_users.html#infra_access)。
 
 <br />
 
@@ -350,6 +326,47 @@ lastupdated: "2017-12-14"
 
 <br />
 
+
+
+## 将服务绑定到集群导致同名错误
+{: #cs_duplicate_services}
+
+{: tsSymptoms}
+运行 `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>` 时，看到以下消息。
+
+```
+Multiple services with the same name were found.
+Run 'bx service list' to view available Bluemix service instances...
+```
+{: screen}
+
+{: tsCauses}
+多个服务实例可能在不同区域中具有相同名称。
+
+{: tsResolve}
+在 `bx cs cluster-service-bind` 命令中，请使用服务 GUID，而不要使用服务实例名称。
+
+1. [登录到包含要绑定的服务实例的区域](cs_regions.html#bluemix_regions)。
+
+2. 获取服务实例的 GUID。
+  ```
+  bx service show <service_instance_name> --guid
+  ```
+  {: pre}
+
+  输出：
+  ```
+  Invoking 'cf service <service_instance_name> --guid'...
+  <service_instance_GUID>
+  ```
+  {: screen}
+3. 再次将服务绑定到集群。
+  ```
+  bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_GUID>
+  ```
+  {: pre}
+
+<br />
 
 
 
@@ -401,7 +418,7 @@ lastupdated: "2017-12-14"
   ```
   {: screen}
 
-2.  安装 [Calico CLI](cs_security.html#adding_network_policies)。
+2.  安装 [Calico CLI](cs_network_policy.html#adding_network_policies)。
 3.  列出 Calico 中的可用工作程序节点。将 <path_to_file> 替换为 Calico 配置文件的本地路径。
 
   ```
@@ -448,7 +465,7 @@ lastupdated: "2017-12-14"
 如果刚刚创建了 Kubernetes 集群，那么工作程序节点可能仍在配置中。如果这是现有集群，那么可能是集群中没有足够的容量来部署 pod。
 
 {: tsResolve}
-此任务需要[管理员访问策略](cs_cluster.html#access_ov)。验证您当前的[访问策略](cs_cluster.html#view_access)。
+此任务需要[管理员访问策略](cs_users.html#access_policies)。验证您当前的[访问策略](cs_users.html#infra_access)。
 
 如果刚创建了 Kubernetes 集群，请运行以下命令并等待工作程序节点初始化。
 
@@ -532,22 +549,37 @@ pod 会成功部署到集群，但容器不启动。
 {: tsSymptoms}
 访问 Kibana 仪表板时，日志不显示。
 
-{: tsCauses}
-由于以下某种原因，日志可能不显示：<br/><br/>
-    A. 未设置任何日志记录配置。<br/><br/>
-    B. 集群未处于 `Normal` 状态。<br/><br/>
-    C. 已命中日志存储配额。<br/><br/>
-    D. 如果在创建集群时指定了空间，但帐户所有者没有对该空间的“管理员”、“开发者”或“审计员”许可权。<br/><br/>
-    E. pod 中尚未发生任何触发日志的事件。<br/><br/>
-
 {: tsResolve}
-查看以下选项来解决导致日志不显示的每种可能原因：
+查看以下导致日志不显示的原因以及对应的故障诊断步骤：
 
-A. 要发送日志，必须先创建日志记录配置，以便将日志转发到 {{site.data.keyword.loganalysislong_notm}}。要创建日志记录配置，请参阅[启用日志转发](cs_cluster.html#cs_log_sources_enable)。<br/><br/>
-B. 要检查集群的状态，请参阅[调试集群](cs_troubleshoot.html#debug_clusters)。<br/><br/>
-C. 要提高日志存储限制，请参阅 [{{site.data.keyword.loganalysislong_notm}} 文档](https://console.bluemix.net/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs)。<br/><br/>
-D. 要更改帐户所有者的 {{site.data.keyword.containershort_notm}} 访问许可权，请参阅[管理集群访问权](cs_cluster.html#cs_cluster_user)。更改许可权后，日志可能最长需要 24 小时才会开始显示。<br/><br/>
-E. 要触发记录事件的日志，可以在集群中的一个工作程序节点上部署 Noisy（用于生成多个日志事件的样本 pod）。<br/>
+<table>
+<col width="40%">
+<col width="60%">
+ <thead>
+ <th>问题原因</th>
+ <th>解决方法</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td>未设置任何日志记录配置。</td>
+ <td>要发送日志，必须先创建日志记录配置，以便将日志转发到 {{site.data.keyword.loganalysislong_notm}}。要创建日志记录配置，请参阅<a href="cs_health.html#log_sources_enable">启用日志转发</a>。</td>
+ </tr>
+ <tr>
+ <td>集群不处于 <code>Normal</code> 状态。</td>
+ <td>要检查集群的状态，请参阅<a href="cs_troubleshoot.html#debug_clusters">调试集群</a>。</td>
+ </tr>
+ <tr>
+ <td>已达到日志存储配额。</td>
+ <td>要提高日志存储限制，请参阅 <a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs">{{site.data.keyword.loganalysislong_notm}} 文档</a>。</td>
+ </tr>
+ <tr>
+ <td>如果您在创建集群时指定了空间，帐户所有者没有对该空间的“管理员”、“开发者”或“审计员”许可权。</td>
+ <td>要更改帐户所有者的访问许可权，请执行以下操作：<ol><li>要找出集群的帐户所有者，请运行 <code>bx cs api-key-info &lt;cluster_name_or_id&gt;</code>。</li><li>要授予帐户所有者对空间的 {{site.data.keyword.containershort_notm}}“管理员”、“开发者”或“审计员”访问许可权，请参阅<a href="cs_users.html#managing">管理集群访问权</a>。</li><li>要在更改许可权后刷新日志记录令牌，请运行 <code>bx cs logging-config-refresh &lt;cluster_name_or_id&gt;</code>。</li></ol></td>
+ </tr>
+ </tbody></table>
+
+要测试在故障诊断期间进行的更改，可以在集群中的一个工作程序节点上部署 Noisy（用于生成多个日志事件的样本 pod）。
+
   1. [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)，将目标设置为要在其中开始生成日志的集群。
 
   2. 创建 `deploy-noisy.yaml` 配置文件。
@@ -574,7 +606,7 @@ E. 要触发记录事件的日志，可以在集群中的一个工作程序节�
         ```
         {:pre}
 
-  4. 几分钟后，可以在 Kibana 仪表板中查看日志。要访问 Kibana 仪表板，请转至以下某个 URL，然后选择在其中创建了集群的 {{site.data.keyword.Bluemix_notm}} 帐户。如果在创建集群时指定了空间，请改为转至该空间。        
+  4. 几分钟后，可以在 Kibana 仪表板中查看日志。要访问 Kibana 仪表板，请转至以下某个 URL，然后选择在其中创建了集群的 {{site.data.keyword.Bluemix_notm}} 帐户。如果在创建集群时指定了空间，请改为转至该空间。
         - 美国南部和美国东部：https://logging.ng.bluemix.net
         - 英国南部和欧洲中部：https://logging.eu-fra.bluemix.net
         - 亚太南部：https://logging.au-syd.bluemix.net
@@ -604,9 +636,88 @@ E. 要触发记录事件的日志，可以在集群中的一个工作程序节�
 <br />
 
 
+## 无法通过 LoadBalancer 服务连接到应用程序
+{: #cs_loadbalancer_fails}
+
+{: tsSymptoms}
+您已通过在集群中创建 LoadBalancer 服务来向公众公开应用程序。但尝试通过负载均衡器的公共 IP 地址连接到应用程序时，连接失败或超时。
+
+{: tsCauses}
+由于以下某种原因，LoadBalancer 服务可能未正常运行：
+
+-   集群为 Lite 集群，或者为仅具有一个工作程序节点的标准集群。
+-   集群尚未完全部署。
+-   LoadBalancer 服务的配置脚本包含错误。
+
+{: tsResolve}
+要对 LoadBalancer 服务进行故障诊断，请执行以下操作：
+
+1.  检查是否设置了完全部署的标准集群，以及该集群是否至少有两个工作程序节点，以确保 LoadBalancer 服务具有高可用性。
+
+  ```
+  bx cs workers <cluster_name_or_id>
+  ```
+  {: pre}
+
+    在 CLI 输出中，确保工作程序节点的 **Status** 显示 **Ready**，并且 **Machine Type** 显示除了 **free** 之外的机器类型。
+
+2.  检查 LoadBalancer 服务的配置文件是否准确。
+
+  ```
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: myservice
+  spec:
+    type: LoadBalancer
+    selector:
+      <selectorkey>:<selectorvalue>
+    ports:
+     - protocol: TCP
+       port: 8080
+  ```
+  {: pre}
+
+    1.  检查是否已将 **LoadBalancer** 定义为服务类型。
+    2.  确保使用的是部署应用程序时在 **label/metadata** 部分中所用的 **<selectorkey>** 和 **<selectorvalue>**。
+    3.  检查是否使用的是应用程序侦听的**端口**。
+
+3.  检查 LoadBalancer 服务，并查看 **Events** 部分以查找潜在错误。
+
+  ```
+  kubectl describe service <myservice>
+  ```
+  {: pre}
+
+    查找以下错误消息：
+    
+
+    <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>要使用 LoadBalancer 服务，您必须有至少包含两个工作程序节点的标准集群。
+    </li>
+    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>此错误消息指示没有任何可移植公共 IP 地址可供分配给 LoadBalancer 服务。请参阅<a href="cs_subnets.html#subnets">向集群添加子网</a>，以了解有关如何为集群请求可移植公共 IP 地址的信息。有可移植的公共 IP 地址可供集群使用后，将自动创建 LoadBalancer 服务。
+    </li>
+    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>您使用 **loadBalancerIP** 部分为 LoadBalancer 服务定义了可移植公共 IP 地址，但此可移植公共 IP 地址在可移植公共子网中不可用。请更改 LoadBalancer 服务配置脚本，并选择其中一个可用的可移植公共 IP 地址，或者从脚本中除去 **loadBalancerIP** 部分，以便可以自动分配可用的可移植公共 IP 地址。
+    </li>
+    <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>您没有足够的工作程序节点可部署 LoadBalancer 服务。一个原因可能是您已部署了包含多个工作程序节点的标准集群，但供应这些工作程序节点失败。
+    </li>
+    <ol><li>列出可用的工作程序节点。</br><pre class="codeblock"><code>kubectl get nodes</code></pre></li>
+    <li>如果找到了至少两个可用的工作程序节点，请列出工作程序节点详细信息。</br><pre class="screen"><code>bx cs worker-get [&lt;cluster_name_or_id&gt;] &lt;worker_ID&gt;</code></pre></li>
+    <li>确保分别由 <code>kubectl get nodes</code> 和 <code>bx cs [&lt;cluster_name_or_id&gt;] worker-get</code> 命令返回的工作程序节点的公共和专用 VLAN 标识相匹配。</li></ol></li></ul>
+
+4.  如果使用定制域来连接到 LoadBalancer 服务，请确保定制域已映射到 LoadBalancer 服务的公共 IP 地址。
+    1.  找到 LoadBalancer 服务的公共 IP 地址。
+
+      ```
+      kubectl describe service <myservice> | grep "LoadBalancer Ingress"
+      ```
+      {: pre}
+
+    2.  检查定制域是否已映射到指针记录 (PTR) 中 LoadBalancer 服务的可移植公共 IP 地址。
+
+<br />
 
 
-## 通过 Ingress 连接到应用程序失败
+## 无法通过 Ingress 连接到应用程序
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
@@ -720,98 +831,62 @@ E. 要触发记录事件的日志，可以在集群中的一个工作程序节�
 
 
 
-
-## 通过 LoadBalancer 服务连接到应用程序失败
-{: #cs_loadbalancer_fails}
+## Ingress 应用程序负载均衡器私钥问题
+{: #cs_albsecret_fails}
 
 {: tsSymptoms}
-您已通过在集群中创建 LoadBalancer 服务来向公众公开应用程序。但尝试通过负载均衡器的公共 IP 地址连接到应用程序时，连接失败或超时。
+将 Ingress 应用程序负载均衡器私钥部署到集群后，在 {{site.data.keyword.cloudcerts_full_notm}} 中查看证书时，`Description` 字段未使用该私钥名称进行更新。
 
-{: tsCauses}
-由于以下某种原因，LoadBalancer 服务可能未正常运行：
-
--   集群为 Lite 集群，或者为仅具有一个工作程序节点的标准集群。
--   集群尚未完全部署。
--   LoadBalancer 服务的配置脚本包含错误。
+列出有关应用程序负载均衡器私钥的信息时，阶段状态为 `*_failed`。例如，`create_failed`、`update_failed` 或 `delete_failed`。
 
 {: tsResolve}
-要对 LoadBalancer 服务进行故障诊断，请执行以下操作：
+查看以下导致应用程序负载均衡器私钥可能失败的原因以及对应的故障诊断步骤：
 
-1.  检查是否设置了完全部署的标准集群，以及该集群是否至少有两个工作程序节点，以确保 LoadBalancer 服务具有高可用性。
-
-  ```
-  bx cs workers <cluster_name_or_id>
-  ```
-  {: pre}
-
-    在 CLI 输出中，确保工作程序节点的 **Status** 显示 **Ready**，并且 **Machine Type** 显示除了 **free** 之外的机器类型。
-
-2.  检查 LoadBalancer 服务的配置文件是否准确。
-
-  ```
-  apiVersion: v1
-  kind: Service
-  metadata:
-    name: myservice
-  spec:
-    type: LoadBalancer
-    selector:
-      <selectorkey>:<selectorvalue>
-    ports:
-     - protocol: TCP
-       port: 8080
-  ```
-  {: pre}
-
-    1.  检查是否已将 **LoadBalancer** 定义为服务类型。
-    2.  确保使用的是部署应用程序时在 **label/metadata** 部分中所用的 **<selectorkey>** 和 **<selectorvalue>**。
-    3.  检查是否使用的是应用程序侦听的**端口**。
-
-3.  检查 LoadBalancer 服务，并查看 **Events** 部分以查找潜在错误。
-
-  ```
-  kubectl describe service <myservice>
-  ```
-  {: pre}
-
-    查找以下错误消息：
-    <ul><ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>要使用 LoadBalancer 服务，您必须有至少包含两个工作程序节点的标准集群。
-    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>此错误消息指示没有任何可移植公共 IP 地址可供分配给 LoadBalancer 服务。请参阅[向集群添加子网](cs_cluster.html#cs_cluster_subnet)，以了解有关如何为集群请求可移植公共 IP 地址的信息。有可移植的公共 IP 地址可供集群使用后，将自动创建 LoadBalancer 服务。
-    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips</code></pre></br>您使用 **loadBalancerIP** 部分为 LoadBalancer 服务定义了可移植公共 IP 地址，但此可移植公共 IP 地址在可移植公共子网中不可用。请更改 LoadBalancer 服务配置脚本，并选择其中一个可用的可移植公共 IP 地址，或者从脚本中除去 **loadBalancerIP** 部分，以便可以自动分配可用的可移植公共 IP 地址。
-    <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>您没有足够的工作程序节点可部署 LoadBalancer 服务。一个原因可能是您已部署了包含多个工作程序节点的标准集群，但供应这些工作程序节点失败。
-    <ol><li>列出可用的工作程序节点。</br><pre class="codeblock"><code>kubectl get nodes</code></pre>
-    <li>如果找到了至少两个可用的工作程序节点，请列出工作程序节点详细信息。</br><pre class="screen"><code>bx cs worker-get [<cluster_name_or_id>] <worker_ID></code></pre>
-    <li>确保分别由“kubectl get nodes”和“bx cs [<cluster_name_or_id>] worker-get”命令返回的工作程序节点的公共和专用 VLAN 标识相匹配。</ol></ul></ul>
-
-4.  如果使用定制域来连接到 LoadBalancer 服务，请确保定制域已映射到 LoadBalancer 服务的公共 IP 地址。
-    1.  找到 LoadBalancer 服务的公共 IP 地址。
-
-      ```
-      kubectl describe service <myservice> | grep "LoadBalancer Ingress"
-      ```
-      {: pre}
-
-    2.  检查定制域是否已映射到指针记录 (PTR) 中 LoadBalancer 服务的可移植公共 IP 地址。
+<table>
+<col width="40%">
+<col width="60%">
+ <thead>
+ <th>问题原因</th>
+ <th>解决方法</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td>您没有下载和更新证书数据所需的访问角色。</td>
+ <td>请咨询帐户管理员，要求为您分配对 {{site.data.keyword.cloudcerts_full_notm}} 实例的**操作员**和**编辑者**角色。有关更多详细信息，请参阅 {{site.data.keyword.cloudcerts_short}} 的<a href="/docs/services/certificate-manager/about.html#identity-access-management">身份和访问权管理</a>。</td>
+ </tr>
+ <tr>
+ <td>创建、更新或除去时提供的证书 CRN 所属的帐户与集群不同。</td>
+ <td>检查提供的证书 CRN 导入到的 {{site.data.keyword.cloudcerts_short}} 服务实例是否与集群部署在同一帐户中。</td>
+ </tr>
+ <tr>
+ <td>创建时提供的证书 CRN 不正确。</td>
+ <td><ol><li>检查提供的证书 CRN 字符串的准确性。</li><li>如果发现证书 CRN 正确，请尝试更新私钥。<pre class="pre"><code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li><li>如果此命令生成 <code>update_failed</code> 阶段状态，请除去私钥。<pre class="pre"><code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt;</code></pre></li><li>重新部署私钥。<pre class="pre"><code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li></ol></td>
+ </tr>
+ <tr>
+ <td>更新时提供的证书 CRN 不正确。</td>
+ <td><ol><li>检查提供的证书 CRN 字符串的准确性。</li><li>如果发现证书 CRN 正确，请除去私钥。<pre class="pre"><code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt;</code></pre></li><li>重新部署私钥。<pre class="pre"><code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li><li>尝试更新私钥。<pre class="pre"><code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li></ol></td>
+ </tr>
+ <tr>
+ <td>{{site.data.keyword.cloudcerts_long_notm}} 服务遭遇停机时间。</td>
+ <td>检查 {{site.data.keyword.cloudcerts_short}} 服务是否已启动并在运行。</td>
+ </tr>
+ </tbody></table>
 
 <br />
 
 
 
-
-
-
-
-## 检索用于 Calico CLI 配置的 ETCD URL 失败
+## 无法检索用于 Calico CLI 配置的 ETCD URL
 {: #cs_calico_fails}
 
 {: tsSymptoms}
-检索 `<ETCD_URL>` 以[添加网络策略](cs_security.html#adding_network_policies)时，您获得 `calico-config not found` 错误消息。
+检索 `<ETCD_URL>` 以[添加网络策略](cs_network_policy.html#adding_network_policies)时，您获得 `calico-config not found` 错误消息。
 
 {: tsCauses}
 集群不是 [Kubernetes V1.7](cs_versions.html) 或更高版本。
 
 {: tsResolve}
-[更新集群](cs_cluster.html#cs_cluster_update)或使用与较早版本 Kubernetes 兼容的命令检索 `<ETCD_URL>`。
+[更新集群](cs_cluster_update.html#master)或使用与较早版本 Kubernetes 兼容的命令检索 `<ETCD_URL>`。
 
 要检索 `<ETCD_URL>`，请运行以下某个命令：
 
@@ -827,7 +902,7 @@ E. 要触发记录事件的日志，可以在集群中的一个工作程序节�
     <li> 查看 Calico 控制器 pod 的详细信息。</br> <pre class="codeblock"><code>kubectl describe pod -n kube-system calico-policy-controller-&lt;ID&gt;</code></pre>
     <li> 找到 ETCD 端点值。示例：<code>https://169.1.1.1:30001</code></ol>
 
-检索 `<ETCD_URL>` 时，继续执行(添加网络策略)[cs_security.html#adding_network_policies]中列出的步骤。
+检索 `<ETCD_URL>` 时，继续执行(添加网络策略)[cs_network_policy.html#adding_network_policies]中列出的步骤。
 
 <br />
 

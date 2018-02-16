@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2017
-lastupdated: "2017-12-18"
+  years: 2014, 2018
+lastupdated: "2018-01-05"
 
 ---
 
@@ -22,13 +22,25 @@ lastupdated: "2017-12-18"
 {:shortdesc}
 
 {{site.data.keyword.containershort_notm}} 支援數個 Kubernetes 版本。除非指定不同的版本，否則，建立或更新叢集時都會使用預設版本。可用的 Kubernetes 版本如下：
-- 1.8.4
+- 1.8.6
 - 1.7.4（預設版本）
 - 1.5.6
 
-下列資訊彙總當您將叢集更新為新版本時，可能會對已部署的應用程式造成影響的更新。請檢閱 [Kubernetes 變更日誌 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md)，以取得 Kubernetes 版本變更的完整清單。
+若要檢查本端執行的 Kubernetes CLI 版本或您的叢集所執行的 Kubernetes CLI 版本，請執行下列指令並檢查版本。
 
-如需更新程序的相關資訊，請參閱[更新叢集](cs_cluster.html#cs_cluster_update)及[更新工作者節點](cs_cluster.html#cs_cluster_worker_update)。
+
+```
+kubectl version  --short
+```
+{: pre}
+
+輸出範例：
+
+```
+Client Version: 1.7.4
+Server Version: 1.7.4
+```
+{: screen}
 
 ## 更新類型
 {: #version_types}
@@ -44,6 +56,11 @@ Kubernetes 提供下列版本更新類型：
 {: caption="Kubernetes 更新的影響" caption-side="top"}
 
 依預設，Kibernetes 主節點無法更新超過兩個次要版本。例如，如果現行主節點是 1.5 版，而您要更新至 1.8，則必須先更新至 1.7。您可以強制更新繼續進行，但更新超過兩個次要版本可能會造成非預期的結果。
+{: tip}
+
+下列資訊彙總當您將叢集更新為新版本時，可能會對已部署的應用程式造成影響的更新。請檢閱 [Kubernetes 變更日誌 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md)，以取得 Kubernetes 版本變更的完整清單。
+
+如需更新程序的相關資訊，請參閱[更新叢集](cs_cluster_update.html#master)及[更新工作者節點](cs_cluster_update.html#worker_node)。
 
 ## 1.8 版
 {: #cs_v18}
@@ -62,7 +79,8 @@ Kubernetes 提供下列版本更新類型：
 <thead>
 <tr>
 <th>類型</th>
-<th>說明</tr>
+<th>說明</th>
+</tr>
 </thead>
 <tbody>
 <tr>
@@ -79,26 +97,27 @@ Kubernetes 提供下列版本更新類型：
 <thead>
 <tr>
 <th>類型</th>
-<th>說明</tr>
+<th>說明</th>
+</tr>
 </thead>
 <tbody>
 <tr>
 <td>Kubernetes 儀表板登入</td>
-<td>用於存取 1.8 版中 Kubbernetes 儀表板的 URL 已變更，且登入處理程序包括新的鑑別步驟。如需相關資訊，請參閱[存取 Kubernetes 儀表板](cs_apps.html#cs_cli_dashboard)。</td>
+<td>用於存取 1.8 版中 Kubbernetes 儀表板的 URL 已變更，且登入處理程序包括新的鑑別步驟。如需相關資訊，請參閱[存取 Kubernetes 儀表板](cs_app.html#cli_dashboard)。</td>
 </tr>
-<tr>
 <tr>
 <td>Kubernetes 儀表板許可權</td>
 <td>若要強制使用者利用其認證登入以檢視 1.8 版中的叢集資源，請移除 1.7 ClusterRoleBinding RBAC 授權。執行 `kubectl delete clusterrolebinding -n kube-system kubernetes-dashboard`。</td>
 </tr>
 <tr>
 <td>`kubectl delete`</td>
-<td>在刪除物件之前，`kubectl delete` 指令不再縮減工作負載 API 物件（如 Pod）。如果需要縮減物件，請在刪除物件之前，使用 kubectl scale ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")(https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale)。</td>
+<td>在刪除物件之前，`kubectl delete` 指令不再縮減工作負載 API 物件（如 Pod）。如果需要縮減物件，請在刪除物件之前，使用 [kubectl scale ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale)。</td>
 </tr>
 <tr>
 <td>`kubectl run`</td>
-<td>`kubectl run` 指令必須對 `--env` 使用多個旗標，而非逗點區隔的引數。例如，執行 <code>kubectl run --env <x>=<y> --env <z>=&lt;a&gt;</code>，而非 <code>kubectl run --env <x>=<y>,<z>=&lt;a&gt;</code>。</td>
+<td>`kubectl run` 指令必須對 `--env` 使用多個旗標，而非逗點區隔的引數。例如，執行 <code>kubectl run --env &lt;x&gt;=&lt;y&gt; --env &lt;z&gt;=&lt;a&gt;</code>，而非 <code>kubectl run --env &lt;x&gt;=&lt;y&gt;,&lt;z&gt;=&lt;a&gt;</code>。</td>
 </tr>
+<tr>
 <td>`kubectl stop`</td>
 <td>`kubectl stop` 指令無法再使用。</td>
 </tr>
@@ -123,7 +142,8 @@ Kubernetes 提供下列版本更新類型：
 <thead>
 <tr>
 <th>類型</th>
-<th>說明</tr>
+<th>說明</th>
+</tr>
 </thead>
 <tbody>
 <tr>
@@ -150,7 +170,8 @@ Kubernetes 提供下列版本更新類型：
 <thead>
 <tr>
 <th>類型</th>
-<th>說明</tr>
+<th>說明</th>
+</tr>
 </thead>
 <tbody>
 <tr>
@@ -172,8 +193,9 @@ Kubernetes 提供下列版本更新類型：
   ```
   kubectl get pods -n <namespace> -o yaml | grep "scheduler.alpha.kubernetes.io/affinity" && echo "Action required"
   ```
-  </br>
-  <li>如果傳回 `"Action required"`，請使用 [_PodSpec_ ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _affinity_ 欄位，而非 `scheduler.alpha.kubernetes.io/affinity` 註釋。</ol>
+  </br></li>
+  <li>如果傳回 `"Action required"`，請使用 [_PodSpec_ ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _affinity_ 欄位，而非 `scheduler.alpha.kubernetes.io/affinity` 註釋。</li>
+</ol>
 </tr>
 <tr>
 <td>網路原則</td>
@@ -203,7 +225,7 @@ Kubernetes 提供下列版本更新類型：
   ```
   kubectl annotate ns <namespace> --overwrite "net.beta.kubernetes.io/network-policy-"
   ```
-  </ol>
+  </li></ol>
 </tr>
 <tr>
 <td>容忍</td>
@@ -230,7 +252,7 @@ Kubernetes 提供下列版本更新類型：
   `kubectl annotate nodes <node> scheduler.alpha.kubernetes.io/taints-`
   <li>將污點新增至每一個節點：</br>
   `kubectl taint node <node> <taint>`
-  </ol>
+  </li></ol>
 </tr>
 <tr>
 <td>StatefulSet Pod DNS</td>

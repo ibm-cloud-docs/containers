@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2017
-lastupdated: "2017-12-14"
+  years: 2014, 2018
+lastupdated: "2018-01-09"
 
 ---
 
@@ -161,7 +161,7 @@ lastupdated: "2017-12-14"
         <td>{{site.data.keyword.Bluemix_notm}} 基礎架構異常狀況：使用者沒有新增伺服器的必要 {{site.data.keyword.Bluemix_notm}} 基礎架構許可權
 </br></br>
         {{site.data.keyword.Bluemix_notm}} 基礎架構異常狀況：必須要有許可權才能訂購「項目」。</td>
-        <td>您可能沒有從 IBM Cloud 基礎架構 (SoftLayer) 組合佈建工作者節點的必要許可權。請參閱[配置對 IBM Cloud 基礎架構 (SoftLayer) 組合的存取權以建立標準 Kubernetes 叢集](cs_planning.html#cs_planning_unify_accounts)。</td>
+        <td>您可能沒有從 IBM Cloud 基礎架構 (SoftLayer) 組合佈建工作者節點的必要許可權。請參閱[配置對 IBM Cloud 基礎架構 (SoftLayer) 組合的存取權以建立標準 Kubernetes 叢集](cs_infrastructure.html#unify_accounts)。</td>
       </tr>
     </tbody>
   </table>
@@ -212,40 +212,16 @@ lastupdated: "2017-12-14"
 <br />
 
 
-
-
-## 識別本端用戶端及伺服器版本的 kubectl
-
-若要檢查本端執行的 Kubernetes CLI 版本或您的叢集所執行的 Kubernetes CLI 版本，請執行下列指令並檢查版本。
-
-
-```
-        kubectl version  --short
-        ```
-{: pre}
-
-輸出範例：
-
-```
-        Client Version: v1.5.6
-        Server Version: v1.5.6
-        ```
-{: screen}
-
-<br />
-
-
-
-
-## 建立叢集時無法連接至您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶
+## 無法連接至基礎架構帳戶
 {: #cs_credentials}
 
 {: tsSymptoms}
 當您建立新的 Kubernetes 叢集時，會收到下列訊息。
 
 ```
-We were unable to connect to your IBM Cloud infrastructure (SoftLayer) account. Creating a standard cluster requires that you have either a Pay-As-You-Go account that is linked to an IBM Cloud infrastructure (SoftLayer) account term or that you have used the IBM
-{{site.data.keyword.Bluemix_notm}} Container Service CLI to set your {{site.data.keyword.Bluemix_notm}} Infrastructure API keys.
+We were unable to connect to your IBM Cloud infrastructure (SoftLayer) account. Creating a standard cluster requires that you have either a Pay-As-You-Go account
+that is linked to an IBM Cloud infrastructure (SoftLayer) account term or that you have used the {{site.data.keyword.Bluemix_notm}}
+Container Service CLI to set your {{site.data.keyword.Bluemix_notm}} Infrastructure API keys.
 ```
 {: screen}
 
@@ -268,7 +244,6 @@ We were unable to connect to your IBM Cloud infrastructure (SoftLayer) account. 
 
 3.  建立標準叢集。
 
-
   ```
   bx cs cluster-create --location dal10 --public-vlan my_public_vlan_id --private-vlan my_private_vlan_id --machine-type u2c.2x4 --name my_cluster --hardware shared --workers 2
   ```
@@ -277,20 +252,20 @@ We were unable to connect to your IBM Cloud infrastructure (SoftLayer) account. 
 <br />
 
 
-## 防火牆會防止執行 `bx`、`kubectl` 或 `calicoctl` CLI 指令
+## 防火牆阻止執行 CLI 指令
 {: #ts_firewall_clis}
 
 {: tsSymptoms}
 當您從 CLI 執行 `bx`、`kubectl` 或 `calicoctl` 指令時，它們會失敗。
 
 {: tsCauses}
-您的組織網路原則可能會阻止透過 Proxy 或防火牆從本端系統存取公用端點。
+您的組織網路原則可能會導致無法透過 Proxy 或防火牆從本端系統存取公用端點。
 
 {: tsResolve}
-[容許 TCP 存取以讓 CLI 指令運作](cs_security.html#opening_ports)。此作業需要[管理者存取原則](cs_cluster.html#access_ov)。請驗證您的現行[存取原則](cs_cluster.html#view_access)。
+[容許 TCP 存取以讓 CLI 指令運作](cs_firewall.html#firewall)。此作業需要[管理者存取原則](cs_users.html#access_policies)。請驗證您的現行[存取原則](cs_users.html#infra_access)。
 
 
-## 防火牆阻止工作者節點連接
+## 防火牆阻止叢集連接至資源
 {: #cs_firewall}
 
 {: tsSymptoms}
@@ -331,7 +306,7 @@ We were unable to connect to your IBM Cloud infrastructure (SoftLayer) account. 
 您可能已在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中設定其他防火牆，或自訂其中的現有防火牆設定。{{site.data.keyword.containershort_notm}} 需要開啟特定 IP 位址及埠，以容許從工作者節點到 Kubernetes 主節點的通訊，反之亦然。另一個原因可能是工作者節點停留在重新載入的迴圈中。
 
 {: tsResolve}
-[容許叢集存取基礎架構資源及其他服務](cs_security.html#firewall_outbound)。此作業需要[管理者存取原則](cs_cluster.html#access_ov)。請驗證您的現行[存取原則](cs_cluster.html#view_access)。
+[容許叢集存取基礎架構資源及其他服務](cs_firewall.html#firewall_outbound)。此作業需要[管理者存取原則](cs_users.html#access_policies)。請驗證您的現行[存取原則](cs_users.html#infra_access)。
 
 <br />
 
@@ -351,6 +326,47 @@ We were unable to connect to your IBM Cloud infrastructure (SoftLayer) account. 
 
 <br />
 
+
+
+## 將服務連結至叢集導致相同名稱錯誤
+{: #cs_duplicate_services}
+
+{: tsSymptoms}
+當您執行 `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>` 時，看到下列。
+
+```
+Multiple services with the same name were found.
+Run 'bx service list' to view available Bluemix service instances...
+```
+{: screen}
+
+{: tsCauses}
+多個服務實例可能在不同的地區中具有相同的名稱。
+
+{: tsResolve}
+請在 `bx cs cluster-service-bind` 指令中使用服務 GUID 而不要使用服務實例名稱。
+
+1. [登入包含要連結之服務實例的地區。](cs_regions.html#bluemix_regions)
+
+2. 取得服務實例的 GUID。
+  ```
+  bx service show <service_instance_name> --guid
+  ```
+  {: pre}
+
+  輸出：
+  ```
+  Invoking 'cf service <service_instance_name> --guid'...
+  <service_instance_GUID>
+  ```
+  {: screen}
+3. 再次將服務連結至叢集。
+  ```
+  bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_GUID>
+  ```
+  {: pre}
+
+<br />
 
 
 
@@ -402,7 +418,7 @@ We were unable to connect to your IBM Cloud infrastructure (SoftLayer) account. 
   ```
   {: screen}
 
-2.  安裝 [Calico CLI](cs_security.html#adding_network_policies)。
+2.  安裝 [Calico CLI](cs_network_policy.html#adding_network_policies)。
 3.  列出 Calico 中的可用工作者節點。請將 &lt;path_to_file> 取代為 Calico 配置檔的本端路徑。
 
   ```
@@ -449,7 +465,7 @@ We were unable to connect to your IBM Cloud infrastructure (SoftLayer) account. 
 如果您才剛剛建立 Kubernetes 叢集，則可能仍在配置工作者節點。如果此叢集是現有叢集，則您的叢集中可能沒有足夠的容量可部署 Pod。
 
 {: tsResolve}
-此作業需要[管理者存取原則](cs_cluster.html#access_ov)。請驗證您的現行[存取原則](cs_cluster.html#view_access)。
+此作業需要[管理者存取原則](cs_users.html#access_policies)。請驗證您的現行[存取原則](cs_users.html#infra_access)。
 
 如果您才剛剛建立 Kubernetes 叢集，請執行下列指令，並等待起始設定工作者節點。
 
@@ -533,22 +549,37 @@ Pod 順利部署至叢集，但容器未啟動。
 {: tsSymptoms}
 存取 Kibana 儀表板時，未顯示任何日誌。
 
-{: tsCauses}
-因下列其中一個原因，日誌可能不會出現：<br/><br/>
-    A. 未設定任何記載配置。<br/><br/>
-    B. 叢集未處於 `Normal` 狀態。<br/><br/>
-    C. 已達到日誌儲存空間配額。<br/><br/>
-    D. 如果您在建立叢集時指定了空間，則帳戶擁有者對該空間沒有「管理員」、「開發人員」或「審核員」許可權。<br/><br/>
-    E. 您的 Pod 中未發生任何觸發日誌的事件。<br/><br/>
-
 {: tsResolve}
-請檢閱下列選項，以解決日誌為何未出現的每一個原因：
+請檢閱下列原因，以了解日誌為何未出現以及對應的疑難排解步驟：
 
-A. 若要傳送日誌，您必須先建立記載配置，以將日誌轉遞給 {{site.data.keyword.loganalysislong_notm}}。若要建立記載配置，請參閱[啟用日誌轉遞](cs_cluster.html#cs_log_sources_enable)。<br/><br/>
-B. 若要檢查叢集的狀態，請參閱[叢集除錯](cs_troubleshoot.html#debug_clusters)。<br/><br/>
-C. 若要增加日誌儲存空間限制，請參閱 [{{site.data.keyword.loganalysislong_notm}} 文件](https://console.bluemix.net/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs)。<br/><br/>
-D. 若要變更帳戶擁有者的 {{site.data.keyword.containershort_notm}} 存取權，請參閱[管理叢集存取](cs_cluster.html#cs_cluster_user)。在變更許可權之後，日誌最多需要 24 小時才會開始出現。<br/><br/>
-E. 若要觸發事件的日誌，您可以在叢集中的工作者節點上部署 Noisy，這是可以產生數個日誌事件的範例 Pod。<br/>
+<table>
+<col width="40%">
+<col width="60%">
+ <thead>
+ <th>發生原因</th>
+ <th>修正方式</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td>未設定任何記載配置。</td>
+ <td>若要傳送日誌，您必須先建立記載配置，以將日誌轉遞給 {{site.data.keyword.loganalysislong_notm}}。若要建立記載配置，請參閱<a href="cs_health.html#log_sources_enable">啟用日誌轉遞</a>。</td>
+ </tr>
+ <tr>
+ <td>叢集未處於 <code>Normal</code> 狀態。</td>
+ <td>若要檢查叢集的狀態，請參閱<a href="cs_troubleshoot.html#debug_clusters">叢集除錯</a>。</td>
+ </tr>
+ <tr>
+ <td>已達到日誌儲存空間配額。</td>
+ <td>若要增加日誌儲存空間限制，請參閱 <a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs">{{site.data.keyword.loganalysislong_notm}} 文件</a>。</td>
+ </tr>
+ <tr>
+ <td>如果您在建立叢集時指定了空間，則帳戶擁有者對該空間沒有「管理員」、「開發人員」或「審核員」許可權。</td>
+ <td>若要變更帳戶擁有者的存取權，請執行下列動作：<ol><li>若要找出叢集的帳戶擁有者是誰，請執行 <code>bx cs api-key-info &lt;cluster_name_or_id&gt;</code>。</li><li>若要授與該帳戶擁有者對空間的「管理員」、「開發人員」或「審核員」等 {{site.data.keyword.containershort_notm}} 存取許可權，請參閱<a href="cs_users.html#managing">管理叢集存取</a>。</li><li>若要在許可權變更之後重新整理記載記號，請執行 <code>bx cs logging-config-refresh &lt;cluster_name_or_id&gt;</code>。</li></ol></td>
+ </tr>
+ </tbody></table>
+
+若要測試您在疑難排解期間所做的變更，您可以在叢集中的工作者節點上部署 Noisy，這是可以產生數個日誌事件的範例 Pod。
+
   1. 將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為您要在其中開始產生日誌的叢集。
 
   2. 建立 `deploy-noisy.yaml` 配置檔。
@@ -575,7 +606,7 @@ E. 若要觸發事件的日誌，您可以在叢集中的工作者節點上部�
         ```
         {:pre}
 
-  4. 幾分鐘之後，您可以在 Kibana 儀表板中檢視日誌。若要存取 Kibana 儀表板，請移至下列其中一個 URL，然後選取您建立叢集所在的 {{site.data.keyword.Bluemix_notm}} 帳戶。如果您在建立叢集時指定了空間，請改為移至該空間。        
+  4. 幾分鐘之後，您可以在 Kibana 儀表板中檢視日誌。若要存取 Kibana 儀表板，請移至下列其中一個 URL，然後選取您建立叢集所在的 {{site.data.keyword.Bluemix_notm}} 帳戶。如果您在建立叢集時指定了空間，請改為移至該空間。
         - 美國南部及美國東部：https://logging.ng.bluemix.net
         - 英國南部或歐盟中部：https://logging.eu-fra.bluemix.net
         - 亞太地區南部：https://logging.au-syd.bluemix.net
@@ -598,16 +629,95 @@ E. 若要觸發事件的日誌，您可以在叢集中的工作者節點上部�
 刪除 `kube-dashboard` Pod，以強制重新啟動。系統會以 RBAC 原則重建 Pod，存取 heapster 以取得使用率資訊。
 
   ```
-    kubectl delete pod -n kube-system $(kubectl get pod -n kube-system --selector=k8s-app=kubernetes-dashboard -o jsonpath='{.items..metadata.name}')
-    ```
+  kubectl delete pod -n kube-system $(kubectl get pod -n kube-system --selector=k8s-app=kubernetes-dashboard -o jsonpath='{.items..metadata.name}')
+  ```
   {: pre}
 
 <br />
 
 
+## 無法透過負載平衡器服務連接至應用程式
+{: #cs_loadbalancer_fails}
+
+{: tsSymptoms}
+您已透過在叢集中建立負載平衡器服務，來公開應用程式。當您嘗試透過負載平衡器的公用 IP 位址連接至應用程式時，連線失敗或逾時。
+
+{: tsCauses}
+負載平衡器服務可能因下列其中一個原因而未正常運作：
+
+-   叢集是精簡叢集或只有一個工作者節點的標準叢集。
+-   尚未完整部署叢集。
+-   負載平衡器服務的配置 Script 包含錯誤。
+
+{: tsResolve}
+若要對負載平衡器服務進行疑難排解，請執行下列動作：
+
+1.  確認您所設定的標準叢集已完整部署並且至少有兩個工作者節點，以確保負載平衡器服務的高可用性。
+
+  ```
+  bx cs workers <cluster_name_or_id>
+  ```
+  {: pre}
+
+    在 CLI 輸出中，確定工作者節點的 **Status** 顯示 **Ready**，而且 **Machine Type** 顯示 **free** 以外的機型。
+
+2.  檢查負載平衡器服務配置檔的正確性。
+
+  ```
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: myservice
+  spec:
+    type: LoadBalancer
+    selector:
+      <selectorkey>:<selectorvalue>
+    ports:
+     - protocol: TCP
+       port: 8080
+  ```
+  {: pre}
+
+    1.  確認您已將 **LoadBalancer** 定義為服務的類型。
+    2.  確定您使用了與部署應用程式時在 **label/metadata** 區段中所使用的相同 **<selectorkey>** 及 **<selectorvalue>**。
+    3.  確認您已使用應用程式所接聽的**埠**。
+
+3.  檢查負載平衡器服務，並檢閱**事件**區段來尋找可能的錯誤。
+
+  ```
+  kubectl describe service <myservice>
+  ```
+  {: pre}
+
+    尋找下列錯誤訊息：
+    
+
+    <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>若要使用負載平衡器服務，您必須有至少包含兩個工作者節點的標準叢集。
+    </li>
+    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>此錯誤訊息指出未將可攜式公用 IP 位址配置給負載平衡器服務。請參閱<a href="cs_subnets.html#subnets">將子網路新增至叢集</a>，以尋找如何要求叢集之可攜式公用 IP 位址的相關資訊。叢集可以使用可攜式公用 IP 位址之後，會自動建立負載平衡器服務。
+    </li>
+    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>您已使用 **loadBalancerIP** 區段定義負載平衡器服務的可攜式公用 IP 位址，但在可攜式公用子網路中無法使用此可攜式公用 IP 位址。請變更負載平衡器服務配置 Script，然後選擇其中一個可用的可攜式公用 IP 位址，或是移除 Script 中的 **loadBalancerIP** 區段，以便能自動配置可用的可攜式公用 IP 位址。
+    </li>
+    <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>您沒有足夠的工作者節點可部署負載平衡器服務。其中一個原因可能是您所部署的標準叢集有多個工作者節點，但佈建工作者節點失敗。
+    </li>
+    <ol><li>列出可用的工作者節點。</br><pre class="codeblock"><code>kubectl get nodes</code></pre></li>
+    <li>如果找到至少兩個可用的工作者節點，則會列出工作者節點詳細資料。</br><pre class="screen"><code>bx cs worker-get [&lt;cluster_name_or_id&gt;] &lt;worker_ID&gt;</code></pre></li>
+    <li>確定 <code>kubectl get nodes</code> 及 <code>bx cs [&lt;cluster_name_or_id&gt;] worker-get</code> 指令所傳回的工作者節點的公用及專用 VLAN ID 相符。</li></ol></li></ul>
+
+4.  如果您要使用自訂網域連接至負載平衡器服務，請確定已將自訂網域對映至負載平衡器服務的公用 IP 位址。
+    1.  尋找負載平衡器服務的公用 IP 位址。
+
+      ```
+      kubectl describe service <myservice> | grep "LoadBalancer Ingress"
+      ```
+      {: pre}
+
+    2.  確認在「指標記錄 (PTR)」中已將自訂網域對映至負載平衡器服務的可攜式公用 IP 位址。
+
+<br />
 
 
-## 透過 Ingress 連接至應用程式失敗
+## 無法透過 Ingress 連接至應用程式
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
@@ -721,98 +831,62 @@ Ingress 可能未正常運作，原因如下：
 
 
 
-
-## 透過負載平衡器服務連接至應用程式失敗
-{: #cs_loadbalancer_fails}
+## Ingress 應用程式負載平衡器 Secret 問題
+{: #cs_albsecret_fails}
 
 {: tsSymptoms}
-您已透過在叢集中建立負載平衡器服務，來公開應用程式。當您嘗試透過負載平衡器的公用 IP 位址連接至應用程式時，連線失敗或逾時。
+將 Ingress 應用程式負載平衡器 Secret 部署到叢集之後，當您在 {{site.data.keyword.cloudcerts_full_notm}} 檢視憑證時，`Description` 欄位不會更新 Secret 名稱。
 
-{: tsCauses}
-負載平衡器服務可能因下列其中一個原因而未正常運作：
-
--   叢集是精簡叢集或只有一個工作者節點的標準叢集。
--   尚未完整部署叢集。
--   負載平衡器服務的配置 Script 包含錯誤。
+當您列出應用程式負載平衡器 Secret 的相關資訊時，狀態指出 `*_failed`。例如，`create_failed`、`update_failed`、`delete_failed`。
 
 {: tsResolve}
-若要對負載平衡器服務進行疑難排解，請執行下列動作：
+請檢閱下列原因，以了解應用程式負載平衡器 Secret 為何失敗以及對應的疑難排解步驟：
 
-1.  確認您所設定的標準叢集已完整部署並且至少有兩個工作者節點，以確保負載平衡器服務的高可用性。
-
-  ```
-  bx cs workers <cluster_name_or_id>
-  ```
-  {: pre}
-
-    在 CLI 輸出中，確定工作者節點的 **Status** 顯示 **Ready**，而且 **Machine Type** 顯示 **free** 以外的機型。
-
-2.  檢查負載平衡器服務配置檔的正確性。
-
-  ```
-  apiVersion: v1
-  kind: Service
-  metadata:
-    name: myservice
-  spec:
-    type: LoadBalancer
-    selector:
-      <selectorkey>:<selectorvalue>
-    ports:
-     - protocol: TCP
-       port: 8080
-  ```
-  {: pre}
-
-    1.  確認您已將 **LoadBalancer** 定義為服務的類型。
-    2.  確定您使用了與部署應用程式時在 **label/metadata** 區段中所使用的相同 **<selectorkey>** 及 **<selectorvalue>**。
-    3.  確認您已使用應用程式所接聽的**埠**。
-
-3.  檢查負載平衡器服務，並檢閱**事件**區段來尋找可能的錯誤。
-
-  ```
-  kubectl describe service <myservice>
-  ```
-  {: pre}
-
-    尋找下列錯誤訊息：
-    <ul><ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>若要使用負載平衡器服務，您必須有至少包含兩個工作者節點的標準叢集。
-    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>此錯誤訊息指出未將可攜式公用 IP 位址配置給負載平衡器服務。請參閱[將子網路新增至叢集](cs_cluster.html#cs_cluster_subnet)，以尋找如何要求叢集之可攜式公用 IP 位址的相關資訊。叢集可以使用可攜式公用 IP 位址之後，會自動建立負載平衡器服務。
-    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips</code></pre></br>您已使用 **loadBalancerIP** 區段定義負載平衡器服務的可攜式公用 IP 位址，但在可攜式公用子網路中無法使用此可攜式公用 IP 位址。請變更負載平衡器服務配置 Script，然後選擇其中一個可用的可攜式公用 IP 位址，或是移除 Script 中的 **loadBalancerIP** 區段，以便能自動配置可用的可攜式公用 IP 位址。
-    <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>您沒有足夠的工作者節點可部署負載平衡器服務。其中一個原因可能是您所部署的標準叢集有多個工作者節點，但佈建工作者節點失敗。
-    <ol><li>列出可用的工作者節點。</br><pre class="codeblock"><code>kubectl get nodes</code></pre>
-    <li>如果找到至少兩個可用的工作者節點，則會列出工作者節點詳細資料。</br><pre class="screen"><code>bx cs worker-get [<cluster_name_or_id>] <worker_ID></code></pre>
-    <li>確定 'kubectl get nodes' 及 'bx cs [<cluster_name_or_id>] worker-get' 指令所傳回的工作者節點的公用及專用 VLAN ID 相符。</ol></ul></ul>
-
-4.  如果您要使用自訂網域連接至負載平衡器服務，請確定已將自訂網域對映至負載平衡器服務的公用 IP 位址。
-    1.  尋找負載平衡器服務的公用 IP 位址。
-
-      ```
-      kubectl describe service <myservice> | grep "LoadBalancer Ingress"
-      ```
-      {: pre}
-
-    2.  確認在「指標記錄 (PTR)」中已將自訂網域對映至負載平衡器服務的可攜式公用 IP 位址。
+<table>
+<col width="40%">
+<col width="60%">
+ <thead>
+ <th>發生原因</th>
+ <th>修正方式</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td>您沒有必要的存取角色，無法下載及更新憑證資料。</td>
+ <td>請洽詢帳戶管理者，指派您 {{site.data.keyword.cloudcerts_full_notm}} 實例的**操作員**和**編輯者**角色。如需詳細資料，請參閱 {{site.data.keyword.cloudcerts_short}} 的 <a href="/docs/services/certificate-manager/about.html#identity-access-management">Identity and Access Management</a>。</td>
+ </tr>
+ <tr>
+ <td>建立、更新或移除時提供的憑證 CRN 與叢集不屬於相同的帳戶。</td>
+ <td>請確定您提供的憑證 CRN 已匯入到部署在與叢集相同帳戶中的 {{site.data.keyword.cloudcerts_short}} 服務實例。</td>
+ </tr>
+ <tr>
+ <td>建立時提供的憑證 CRN 不正確。</td>
+ <td><ol><li>檢查您提供之憑證 CRN 字串的正確性。</li><li>如果發現憑證 CRN 正確，那麼請嘗試更新 Secret。<pre class="pre"><code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li><li>如果這個指令導致 <code>update_failed</code> 狀態，則請移除 Secret。<pre class="pre"><code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt;</code></pre></li><li>再次部署 Secret。<pre class="pre"><code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li></ol></td>
+ </tr>
+ <tr>
+ <td>更新時提供的憑證 CRN 不正確。</td>
+ <td><ol><li>檢查您提供之憑證 CRN 字串的正確性。</li><li>如果發現憑證 CRN 正確，那麼請移除 Secret。<pre class="pre"><code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt;</code></pre></li><li>再次部署 Secret。<pre class="pre"><code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li><li>嘗試更新 Secret。<pre class="pre"><code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li></ol></td>
+ </tr>
+ <tr>
+ <td>{{site.data.keyword.cloudcerts_long_notm}} 服務遭遇關閉時間。</td>
+ <td>確定您的 {{site.data.keyword.cloudcerts_short}} 服務已啟動並執行。</td>
+ </tr>
+ </tbody></table>
 
 <br />
 
 
 
-
-
-
-
-## 擷取 Calico CLI 配置的 ETCD URL 失敗
+## 無法擷取 Calico CLI 配置的 ETCD URL
 {: #cs_calico_fails}
 
 {: tsSymptoms}
-當您擷取 `<ETCD_URL>` 以[新增網路原則](cs_security.html#adding_network_policies)時，得到 `calico-config not found` 錯誤訊息。
+當您擷取 `<ETCD_URL>` 以[新增網路原則](cs_network_policy.html#adding_network_policies)時，得到 `calico-config not found` 錯誤訊息。
 
 {: tsCauses}
-您的叢集不是 (Kubernetes 1.7 版)[cs_versions.html]或更新版本。
+您的叢集不是 [Kubernetes 1.7 版](cs_versions.html)或更新版本。
 
 {: tsResolve}
-請[更新叢集](cs_cluster.html#cs_cluster_update)或使用與舊版 Kubernetes 相容的指令擷取 `<ETCD_URL>`。
+請[更新叢集](cs_cluster_update.html#master)或使用與舊版 Kubernetes 相容的指令擷取 `<ETCD_URL>`。
 
 若要擷取 `<ETCD_URL>`，請執行下列其中一個指令：
 
@@ -827,9 +901,9 @@ Ingress 可能未正常運作，原因如下：
     <li> 取得 kube-system 名稱空間中的 Pod 清單，並找出 Calico 控制器 Pod。</br><pre class="codeblock"><code>kubectl get pod -n kube-system</code></pre></br>範例：</br><pre class="screen"><code>calico-policy-controller-1674857634-k2ckm</code></pre>
     <li> 檢視 Calico 控制器 Pod 的詳細資料。</br> <pre class="codeblock"><code>kubectl describe pod -n kube-system calico-policy-controller-&lt;ID&gt;</code></pre>
     <li> 找出 ETCD 端點值。範例：<code>https://169.1.1.1:30001</code>
-            </ol>
+    </ol>
 
-當您擷取 `<ETCD_URL>` 時，請繼續執行[新增網路原則](cs_security.html#adding_network_policies)中所列的步驟。
+當您擷取 `<ETCD_URL>` 時，請繼續執行[新增網路原則](cs_network_policy.html#adding_network_policies)中所列的步驟。
 
 <br />
 

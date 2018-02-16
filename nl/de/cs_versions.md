@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2017
-lastupdated: "2017-12-18"
+  years: 2014, 2018
+lastupdated: "2018-01-05"
 
 ---
 
@@ -22,13 +22,24 @@ Informieren Sie sich über die Kubernetes-Versionen, die für {{site.data.keywor
 {:shortdesc}
 
 {{site.data.keyword.containershort_notm}} unterstützt mehrere Versionen von Kubernetes. Beim Erstellen oder Aktualisieren eines Clusters wird die Standardversion verwendet, es sei denn, Sie geben eine andere Version an. Die folgenden Kubernetes-Versionen stehen zur Verfügung:
-- 1.8.4
+- 1.8.6
 - 1.7.4 (Standardversion)
 - 1.5.6
 
-Nachfolgend finden Sie eine Zusammenfassung der Aktualisierungen, die sich voraussichtlich auf die bereitgestellten Apps auswirken, wenn Sie einen Cluster auf eine neue Version aktualisieren. Im [Kubernetes-Änderungsprotokoll ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md) finden Sie eine vollständige Liste der Änderungen, die in den verschiedenen Kubernetes-Versionen vorgenommen wurden.
+Führen Sie den folgenden Befehl aus und überprüfen Sie die Version, um festzustellen, welche Version der Kubernetes-Befehlszeilenschnittstelle lokal oder in Ihrem Cluster ausgeführt wird.
 
-Weitere Informationen zum Aktualisierungsprozess finden Sie in [Cluster aktualisieren](cs_cluster.html#cs_cluster_update) und [Workerknoten aktualisieren](cs_cluster.html#cs_cluster_worker_update).
+```
+kubectl version  --short
+```
+{: pre}
+
+Beispielausgabe:
+
+```
+Client Version: 1.7.4
+Server Version: 1.7.4
+```
+{: screen}
 
 ## Aktualisierungstypen
 {: #version_types}
@@ -44,6 +55,11 @@ Kubernetes stellt die folgenden Versionsaktualisierungstypen zur Verfügung:
 {: caption="Auswirkungen auf Kubernetes-Aktualisierungen" caption-side="top"}
 
 Standardmäßig ist für einen Kubernetes-Master eine Aktualisierung über mehr als zwei Nebenversionen hinweg nicht möglich. Wenn die aktuelle Masterversion beispielsweise 1.5 ist und Sie eine Aktualisierung auf 1.8 durchführen möchten, müssen Sie zunächst auf Version 1.7 aktualisieren. Sie können die gewünschte Aktualisierung zwar erzwingen, jedoch kann eine Aktualisierung über mehr als zwei Nebenversionen hinweg zu nicht erwarteten Ergebnissen führen.
+{: tip}
+
+Nachfolgend finden Sie eine Zusammenfassung der Aktualisierungen, die sich voraussichtlich auf die bereitgestellten Apps auswirken, wenn Sie einen Cluster auf eine neue Version aktualisieren. Im [Kubernetes-Änderungsprotokoll ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md) finden Sie eine vollständige Liste der Änderungen, die in den verschiedenen Kubernetes-Versionen vorgenommen wurden.
+
+Weitere Informationen zum Aktualisierungsprozess finden Sie in [Cluster aktualisieren](cs_cluster_update.html#master) und [Workerknoten aktualisieren](cs_cluster_update.html#worker_node).
 
 ## Version 1.8
 {: #cs_v18}
@@ -62,7 +78,7 @@ Standardmäßig ist für einen Kubernetes-Master eine Aktualisierung über mehr 
 <thead>
 <tr>
 <th>Typ</th>
-<th>Beschreibung
+<th>Beschreibung</th>
 </tr>
 </thead>
 <tbody>
@@ -80,27 +96,27 @@ Standardmäßig ist für einen Kubernetes-Master eine Aktualisierung über mehr 
 <thead>
 <tr>
 <th>Typ</th>
-<th>Beschreibung
+<th>Beschreibung</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Anmeldung beim Kubernetes-Dashboard</td>
-<td>Die URL für den Zugriff auf das Kubernetes-Dashboard in Version 1.8 wurde geändert und für den Anmeldeprozess ist ein neuer Authentifizierungsschritt erforderlich. Weitere Informationen hierzu finden Sie im Abschnitt zum [Zugriff auf das Kubernetes-Dashboard](cs_apps.html#cs_cli_dashboard).</td>
+<td>Die URL für den Zugriff auf das Kubernetes-Dashboard in Version 1.8 wurde geändert und für den Anmeldeprozess ist ein neuer Authentifizierungsschritt erforderlich. Weitere Informationen hierzu finden Sie im Abschnitt zum [Zugriff auf das Kubernetes-Dashboard](cs_app.html#cli_dashboard).</td>
 </tr>
-<tr>
 <tr>
 <td>Berechtigungen für das Kubernetes-Dashboard</td>
 <td>Damit sich Benutzer mit ihren Berechtigungsnachweisen anmelden müssen, um Clusterressourcen in Version 1.8 anzeigen zu können, entfernen Sie die RBAC-Berechtigung 'ClusterRoleBinding' aus Version 1.7. Führen Sie dazu `kubectl delete clusterrolebinding -n kube-system kubernetes-dashboard` aus.</td>
 </tr>
 <tr>
 <td>`kubectl delete`</td>
-<td>Mit dem Befehl `kubectl delete` werden nicht länger API-Objekte für Arbeitslasten, wie Pods, vor dem Löschen des Objekts nach unten skaliert. Wenn das Objekt nach unten skaliert werden soll, verwenden Sie den Befehl 'kubectl scale' ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link") (https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale), bevor Sie das Objekt löschen.</td>
+<td>Mit dem Befehl `kubectl delete` werden nicht länger API-Objekte für Arbeitslasten, wie Pods, vor dem Löschen des Objekts nach unten skaliert. Wenn das Objekt nach unten skaliert werden soll, verwenden Sie den Befehl [kubectl scale ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale), bevor Sie das Objekt löschen.</td>
 </tr>
 <tr>
 <td>`kubectl run`</td>
-<td>Der Befehl `kubectl run` muss anstelle von durch Kommas getrennten Argumenten mehrere Flags für `--env` verwenden. Führen Sie beispielsweise <code>kubectl run --env <x>=<y> --env <z>=&lt;a&gt;</code> und nicht <code>kubectl run --env <x>=<y>,<z>=&lt;a&gt;</code> aus. </td>
+<td>Der Befehl `kubectl run` muss anstelle von durch Kommas getrennten Argumenten mehrere Flags für `--env` verwenden. Führen Sie beispielsweise <code>kubectl run --env &lt;x&gt;=&lt;y&gt; --env &lt;z&gt;=&lt;a&gt;</code> und nicht <code>kubectl run --env &lt;x&gt;=&lt;y&gt;,&lt;z&gt;=&lt;a&gt;</code> aus. </td>
 </tr>
+<tr>
 <td>`kubectl stop`</td>
 <td>Der Befehl `kubectl stop` ist nicht mehr verfügbar.</td>
 </tr>
@@ -111,7 +127,7 @@ Standardmäßig ist für einen Kubernetes-Master eine Aktualisierung über mehr 
 ## Version 1.7
 {: #cs_v17}
 
-<p><img src="images/certified_kubernetes_1x7.png" height="100" width="62.5" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" align="left" alt="Diese Markierung zeigt die Kubernetes Version 1.7-Zertifizierung für IBM Cloud Container Service an."/> {{site.data.keyword.containerlong_notm}} ist ein zertifiziertes Kubernetes-Produkt für Version 1.7 unter dem CNCF Kubernetes Software Conformance Certification Program. </p>
+<p><img src="images/certified_kubernetes_1x7.png" height="100" width="62.5" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" align="left" alt="Diese Markierung zeigt die Kubernetes Version 1.7-Zertifizierung für IBM Cloud Container Service an."/> {{site.data.keyword.containerlong_notm}} ist ein zertifiziertes Kubernetes-Produkt für Version 1.7 unter dem CNCF Kubernetes Software Conformance Certification Program.</p>
 
 Überprüfen Sie Änderungen, die Sie möglicherweise bei einer Aktualisierung auf Kubernetes Version 1.7 vornehmen müssen.
 
@@ -125,7 +141,7 @@ Standardmäßig ist für einen Kubernetes-Master eine Aktualisierung über mehr 
 <thead>
 <tr>
 <th>Typ</th>
-<th>Beschreibung
+<th>Beschreibung</th>
 </tr>
 </thead>
 <tbody>
@@ -154,7 +170,7 @@ Standardmäßig ist für einen Kubernetes-Master eine Aktualisierung über mehr 
 <thead>
 <tr>
 <th>Typ</th>
-<th>Beschreibung
+<th>Beschreibung</th>
 </tr>
 </thead>
 <tbody>
@@ -177,8 +193,8 @@ Standardmäßig ist für einen Kubernetes-Master eine Aktualisierung über mehr 
   ```
   kubectl get pods -n <namensbereich> -o yaml | grep "scheduler.alpha.kubernetes.io/affinity" && echo "Action required"
   ```
-  </br>
-  <li>Wenn das System die Meldung `"Action required"` (Aktion erforderlich) zurückgibt, verwenden Sie anstelle der Annotation `scheduler.alpha.kubernetes.io/affinity` das Feld _affinity_ der [_PodSpec_ ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core).
+  </br></li>
+  <li>Wenn das System die Meldung `"Action required"` (Aktion erforderlich) zurückgibt, verwenden Sie anstelle der Annotation `scheduler.alpha.kubernetes.io/affinity` das Feld _affinity_ der [_PodSpec_ ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core).</li>
 </ol>
 </tr>
 <tr>
@@ -209,7 +225,7 @@ Standardmäßig ist für einen Kubernetes-Master eine Aktualisierung über mehr 
   ```
   kubectl annotate ns <namensbereich> --overwrite "net.beta.kubernetes.io/network-policy-"
   ```
-  </ol>
+  </li></ol>
 </tr>
 <tr>
 <td>Tolerierungen</td>
@@ -236,7 +252,7 @@ Standardmäßig ist für einen Kubernetes-Master eine Aktualisierung über mehr 
   `kubectl annotate nodes <node> scheduler.alpha.kubernetes.io/taints-`
   <li>Fügen Sie zu jedem Knoten einen Taint hinzu:</br>
   `kubectl taint node <node> <taint>`
-  </ol>
+  </li></ol>
 </tr>
 <tr>
 <td>StatefulSet pod DNS</td>

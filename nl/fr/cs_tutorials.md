@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-13"
 
 ---
@@ -49,7 +49,7 @@ Ce tutoriel est destiné aux développeurs de logiciel et aux administrateurs r�
 
 ## Conditions prérequises
 
--  Compte de type Paiement à la carte ou Abonnement [{{site.data.keyword.Bluemix_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/registration/)
+-  Compte de type Paiement à la carte ou Abonnement [{{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://console.bluemix.net/registration/)
 
 
 
@@ -285,6 +285,7 @@ avec ce tutoriel.
 Parfait ! Vous avez configuré votre cluster et votre environnement local est prêt pour commencer le déploiement d'applications dans le cluster.
 
 ## Etape suivante ?
+{: #next}
 
 * [Testez vos connaissances en répondant à un quiz !![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
 

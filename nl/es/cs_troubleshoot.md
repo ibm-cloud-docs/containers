@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2017
-lastupdated: "2017-12-14"
+  years: 2014, 2018
+lastupdated: "2018-01-09"
 
 ---
 
@@ -162,7 +162,7 @@ Revise las opciones para depurar sus clústeres y encontrar las causas raíz de 
 
         </br></br>
         Excepción de infraestructura de {{site.data.keyword.Bluemix_notm}}: El elemento 'Item' se debe solicitar con permiso.</td>
-        <td>Es posible que no tenga los permisos necesarios para suministrar un nodo trabajador desde el portafolio de infraestructura de IBM Cloud (SoftLayer). Consulte [Configuración del acceso al portafolio de infraestructura de IBM Cloud (SoftLayer) para crear clústeres de Kubernetes estándares](cs_planning.html#cs_planning_unify_accounts).</td>
+        <td>Es posible que no tenga los permisos necesarios para suministrar un nodo trabajador desde el portafolio de infraestructura de IBM Cloud (SoftLayer). Consulte [Configuración del acceso al portafolio de infraestructura de IBM Cloud (SoftLayer) para crear clústeres de Kubernetes estándares](cs_infrastructure.html#unify_accounts).</td>
       </tr>
     </tbody>
   </table>
@@ -213,39 +213,15 @@ Revise las opciones que tiene para depurar sus despliegues de app y busque las c
 <br />
 
 
-
-
-## Identificación de versiones de cliente y servidor local de kubectl
-
-Para comprobar la versión de la CLI de Kubernetes que ejecuta localmente o que el clúster ejecuta, ejecute el mandato siguiente y compruebe la versión.
-
-```
-kubectl version  --short
-```
-{: pre}
-
-Salida de ejemplo:
-
-```
-Client Version: v1.5.6
-        Server Version: v1.5.6
-```
-{: screen}
-
-<br />
-
-
-
-
-## No se puede conectar con la cuenta de infraestructura de IBM Cloud (SoftLayer) mientras se crea un clúster
+## No se puede conectar con la cuenta de infraestructura
 {: #cs_credentials}
 
 {: tsSymptoms}
 Cuando crea un nuevo clúster de Kubernetes, recibe el siguiente mensaje.
 
 ```
-No se ha podido conectar con la cuenta de IBM infraestructura de Cloud (SoftLayer). Para crear un clúster estándar, debe tener una cuenta de pago según uso enlazada a una cuenta de infraestructura de IBM Cloud (SoftLayer) o debe haber utilizado la CLI de IBM
-{{site.data.keyword.Bluemix_notm}} Container Service para configurar las claves de API de la infraestructura de {{site.data.keyword.Bluemix_notm}}.
+No se ha podido conectar con la cuenta de IBM infraestructura de Cloud (SoftLayer).
+Para crear un clúster estándar, debe tener una cuenta de pago según uso enlazada a una cuenta de infraestructura de IBM Cloud (SoftLayer) o debe haber utilizado la CLI de {{site.data.keyword.Bluemix_notm}} Container Service para configurar las claves de API de la infraestructura de {{site.data.keyword.Bluemix_notm}}.
 ```
 {: screen}
 
@@ -276,7 +252,7 @@ Para añadir credenciales de la cuenta de {{site.data.keyword.Bluemix_notm}}:
 <br />
 
 
-## El cortafuegos impide ejecutar los mandatos de CLI `bx`, `kubectl` o `calicoctl`
+## El cortafuegos impide ejecutar mandatos de CLI
 {: #ts_firewall_clis}
 
 {: tsSymptoms}
@@ -286,10 +262,10 @@ Cuando ejecuta los mandatos `bx`, `kubectl` o `calicoctl` desde la CLI, fallan.
 Puede que tenga políticas de red corporativas que impidan el acceso desde el sistema local a los puntos finales públicos mediante proxies o cortafuegos.
 
 {: tsResolve}
-[Permita el acceso TCP para que funciones los mandatos de CLI](cs_security.html#opening_ports). Esta tarea precisa de la [política de acceso de administrador](cs_cluster.html#access_ov). Verifique su [política de acceso](cs_cluster.html#view_access) actual.
+[Permita el acceso TCP para que funciones los mandatos de CLI](cs_firewall.html#firewall). Esta tarea precisa de la [política de acceso de administrador](cs_users.html#access_policies). Verifique su [política de acceso](cs_users.html#infra_access) actual.
 
 
-## El cortafuegos impide conectar nodos de trabajador
+## El cortafuegos impide que el clúster se conecte a recursos
 {: #cs_firewall}
 
 {: tsSymptoms}
@@ -330,7 +306,7 @@ Si el proxy kubectl se ejecuta correctamente pero el panel de control no está d
 Es posible que tenga un cortafuegos adicional configurado o que se hayan personalizado los valores existentes del cortafuegos en la cuenta de infraestructura de IBM Cloud (SoftLayer). {{site.data.keyword.containershort_notm}} requiere que determinadas direcciones IP y puertos estén abiertos para permitir la comunicación entre el nodo trabajador y el nodo Kubernetes maestro y viceversa. Otro motivo puede ser que los nodos trabajadores están bloqueados en un bucle de recarga.
 
 {: tsResolve}
-[Permita que el clúster acceda a los recursos de infraestructura y a otros servicios](cs_security.html#firewall_outbound). Esta tarea precisa de la [política de acceso de administrador](cs_cluster.html#access_ov). Verifique su [política de acceso](cs_cluster.html#view_access) actual.
+[Permita que el clúster acceda a los recursos de infraestructura y a otros servicios](cs_firewall.html#firewall_outbound). Esta tarea precisa de la [política de acceso de administrador](cs_users.html#access_policies). Verifique su [política de acceso](cs_users.html#infra_access) actual.
 
 <br />
 
@@ -350,6 +326,46 @@ Utilice [DaemonSets ![Icono de enlace externo](../icons/launch-glyph.svg "Icono 
 
 <br />
 
+
+
+## Al enlazar un servicio a un clúster se produce un error de nombre
+{: #cs_duplicate_services}
+
+{: tsSymptoms}
+Cuando ejecute `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>` verá el siguiente mensaje. 
+
+```
+Se han encontrado varios servicios con el mismo nombre. Ejecute 'bx service list' para ver las instancias de servicio de Bluemix disponibles...
+```
+{: screen}
+
+{: tsCauses}
+Varias instancias de servicio pueden tener el mismo nombre en distintas regiones.
+
+{: tsResolve}
+Utilice el GUID de servicio en lugar del nombre de instancia de servicio en el mandato `bx cs cluster-service-bind`.
+
+1. [Inicie sesión en la región que incluye la instancia de servicio que se debe enlazar.](cs_regions.html#bluemix_regions)
+
+2. Obtenga el GUID de la instancia de servicio.
+  ```
+  bx service show <service_instance_name> --guid
+  ```
+  {: pre}
+
+  Salida:
+  ```
+ Invocando 'cf service <service_instance_name> --guid'...
+  <service_instance_GUID>
+  ```
+  {: screen}
+3. Vuelva a enlazar el servicio al clúster.
+  ```
+  bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_GUID>
+  ```
+  {: pre}
+
+<br />
 
 
 
@@ -401,7 +417,7 @@ Actualice manualmente la referencia a la dirección IP privada de modo que apunt
   ```
   {: screen}
 
-2.  Instale la [CLI de Calico](cs_security.html#adding_network_policies).
+2.  Instale la [CLI de Calico](cs_network_policy.html#adding_network_policies).
 3.  Obtenga una lista de los nodos trabajadores disponibles en Calico. Sustituya <path_to_file> por la vía de acceso local al archivo de configuración de Calico.
 
   ```
@@ -448,8 +464,7 @@ Cuando se ejecuta `kubectl get pods`, puede ver que los pods permanecen en el es
 Si acaba de crear el clúster de Kubernetes, es posible que los nodos trabajadores aún se estén configurando. Si este clúster ya existe, es posible que no tenga suficiente capacidad en el clúster para desplegar el pod.
 
 {: tsResolve}
-Esta tarea precisa de la [política de acceso de administrador](cs_cluster.html#access_ov). Verifique su [política de acceso](cs_cluster.html#view_access) actual.
-
+Esta tarea precisa de la [política de acceso de administrador](cs_users.html#access_policies). Verifique su [política de acceso](cs_users.html#infra_access) actual.
 
 Si acaba de crear el clúster de Kubernetes, ejecute el siguiente mandato y espere que se hayan inicializado los nodos trabajadores.
 
@@ -533,22 +548,37 @@ Es posible que los contenedores no se inicien cuando se alcanza la cuota de regi
 {: tsSymptoms}
 Al acceder al panel de control de Kibana, los registros no se visualizan.
 
-{: tsCauses}
-Posibles motivos por los que los registros no aparecen:<br/><br/>
-    A. No hay ninguna configuración de registro definida.<br/><br/>
-    B. El clúster no se encuentra en estado `Normal`.<br/><br/>
-    C. Se ha alcanzado el límite de almacenamiento de registro.<br/><br/>
-    D. Si ha especificado un espacio durante la creación del clúster, el propietario de la cuenta no tiene permisos de gestor, desarrollador o auditor para el espacio en cuestión.<br/><br/>
-    E. Todavía no se han producido sucesos que desencadenen registros en el pod.<br/><br/>
-
 {: tsResolve}
-Revise las siguientes opciones siguientes para resolver cada una de las posibles razones por las que puede que los registros no aparezcan:
+Revise los siguientes motivos por los que no aparecen los registros y los pasos de resolución de problemas correspondientes:
 
-A. Para que se envíen los registros, debe crear una configuración de registro para reenviar los registros a {{site.data.keyword.loganalysislong_notm}}. Para crear una configuración de registro, consulte [Habilitación del reenvío de registros](cs_cluster.html#cs_log_sources_enable).<br/><br/>
-B. Para comprobar el estado del clúster, consulte [Depuración de clústeres](cs_troubleshoot.html#debug_clusters).<br/><br/>
-C. Para aumentar los límites del almacenamiento de registros, consulte la documentación de [{{site.data.keyword.loganalysislong_notm}}](https://console.bluemix.net/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs).<br/><br/>
-D. Para cambiar los permisos de acceso de {{site.data.keyword.containershort_notm}} para el propietario de la cuenta, consulte [Gestión del acceso al clúster](cs_cluster.html#cs_cluster_user). Cuando se cambian los permisos, los registros pueden tardar hasta 24 horas en aparecer.<br/><br/>
-E. Para desencadenar el registro de un suceso, puede desplegar Noisy, un pod de muestra que produce varios sucesos de registro, en un nodo trabajador en el clúster.<br/>
+<table>
+<col width="40%">
+<col width="60%">
+ <thead>
+ <th>Por qué está ocurriendo</th>
+ <th>Cómo solucionarlo</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td>No hay ninguna configuración de registro definida.</td>
+ <td>Para que se envíen los registros, debe crear una configuración de registro para reenviar los registros a {{site.data.keyword.loganalysislong_notm}}. Para crear una configuración de registro, consulte <a href="cs_health.html#log_sources_enable">Habilitación del reenvío de registros</a>.</td>
+ </tr>
+ <tr>
+ <td>El clúster no se encuentra en estado <code>Normal</code>.</td>
+ <td>Para comprobar el estado del clúster, consulte <a href="cs_troubleshoot.html#debug_clusters">Depuración de clústeres</a>.</td>
+ </tr>
+ <tr>
+ <td>Se ha alcanzado el límite de almacenamiento de registro.</td>
+ <td>Para aumentar los limites del almacenamiento de registros, consulte la documentación de <a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs">{{site.data.keyword.loganalysislong_notm}}</a>.</td>
+ </tr>
+ <tr>
+ <td>Si ha especificado un espacio durante la creación del clúster, el propietario de la cuenta no tiene permisos de gestor, desarrollador o auditor para el espacio en cuestión.</td>
+ <td>Para cambiar los permisos de acceso para el propietario de la cuenta:<ol><li>Para descubrir quién es el propietario de la cuenta del clúster, ejecute <code>bx cs api-key-info &lt;cluster_name_or_id&gt;</code>.</li><li>Para otorgar a dicho propietario de cuenta permisos de acceso de {{site.data.keyword.containershort_notm}} de Gestor, Desarrollador o Auditor al espacio, consulte <a href="cs_users.html#managing">Gestión de acceso a clústeres</a>.</li><li>Para renovar la señal de registro tras cambiar los permisos, ejecute <code>bx cs logging-config-refresh &lt;cluster_name_or_id&gt;</code>.</li></ol></td>
+ </tr>
+ </tbody></table>
+
+Para probar los cambios que ha realizado durante la resolución de problemas, puede desplegar Noisy, un pod de muestra que produce varios sucesos de registro, en un nodo trabajador en el clúster.
+
   1. [Defina como objetivo de la CLI](cs_cli_install.html#cs_cli_configure) un clúster donde desee iniciar los registros de producción.
 
   2. Cree el archivo de configuración `deploy-noisy.yaml`.
@@ -575,7 +605,7 @@ E. Para desencadenar el registro de un suceso, puede desplegar Noisy, un pod de 
         ```
         {:pre}
 
-  4. Después de unos minutos, verá los registros en el panel. Para acceder al panel de control de Kibana, vaya a uno de los siguientes URL y seleccione la cuenta de {{site.data.keyword.Bluemix_notm}} en la que ha creado el clúster. Si ha especificado un espacio durante la creación del clúster, vaya al espacio.        
+  4. Después de unos minutos, verá los registros en el panel. Para acceder al panel de control de Kibana, vaya a uno de los siguientes URL y seleccione la cuenta de {{site.data.keyword.Bluemix_notm}} en la que ha creado el clúster. Si ha especificado un espacio durante la creación del clúster, vaya al espacio.
         - EE.UU. Sur y EE.UU. este: https://logging.ng.bluemix.net
         - UK-Sur y UE-Central: https://logging.eu-fra.bluemix.net
         - AP Sur: https://logging.au-syd.bluemix.net
@@ -605,9 +635,84 @@ Suprima el pod `kube-dashboard` para forzar un reinicio. El pod se volverá a cr
 <br />
 
 
+## No se puede conectar a una app mediante un servicio de equilibrador de carga.
+{: #cs_loadbalancer_fails}
+
+{: tsSymptoms}
+Ha expuesto a nivel público la app creando un servicio equilibrador de carga en el clúster. Cuando intenta conectar con la app a través de la dirección IP pública o equilibrador de carga, la conexión falla o supera el tiempo de espera.
+
+{: tsCauses}
+Posibles motivos por los que el servicio del equilibrador de carga no funciona correctamente:
+
+-   El clúster es un clúster lite o un clúster estándar con un solo nodo trabajador.
+-   El clúster todavía no se ha desplegado por completo.
+-   El script de configuración correspondiente al servicio equilibrador de carga incluye errores.
+
+{: tsResolve}
+Para resolver el problema del servicio equilibrador de carga:
+
+1.  Compruebe que ha configurado un clúster estándar que se ha desplegado por completo y que tiene al menos dos nodos trabajadores para garantizar la alta disponibilidad del servicio equilibrador de carga.
+
+  ```
+  bx cs workers <cluster_name_or_id>
+  ```
+  {: pre}
+
+    En la salida de la CLI, asegúrese de que el **Estado** de los nodos trabajadores sea **Listo** y que el **Tipo de máquina** muestre un tipo de máquina que no sea **gratuito (free)**.
+
+2.  Compruebe si el archivo de configuración correspondiente al servicio equilibrador de carga es preciso.
+
+  ```
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: myservice
+  spec:
+    type: LoadBalancer
+    selector:
+      <selectorkey>:<selectorvalue>
+    ports:
+     - protocol: TCP
+       port: 8080
+  ```
+  {: pre}
+
+    1.  Verifique que ha definido **LoadBalancer** como tipo de servicio.
+    2.  Asegúrese de haber utilizado los mismos valores de **<selectorkey>** y **<selectorvalue>** que ha utilizado en la sección **label/metadata** cuando desplegó la app.
+    3.  Compruebe que ha utilizado el **puerto** en el que escucha la app.
+
+3.  Compruebe el servicio equilibrador de carga y revisar la sección de **Sucesos** para ver si hay errores.
+
+  ```
+  kubectl describe service <myservice>
+  ```
+  {: pre}
+
+    Busque los siguientes mensajes de error:
+
+    <ul><li><pre class="screen"><code>Los clústeres con un nodo deben utilizar servicios de tipo NodePort</code></pre></br>Para utilizar el servicio equilibrador de carga, debe tener un clúster estándar con al menos dos nodos trabajadores.</li>
+    <li><pre class="screen"><code>No hay ninguna IP de proveedor de nube disponible para dar respuesta a la solicitud de servicio del equilibrador de carga. Añada una subred portátil al clúster y vuélvalo a intentar</code></pre></br>Este mensaje de error indica que no queda ninguna dirección IP pública portátil que se pueda asignar al servicio equilibrador de carga. Consulte la sección sobre <a href="cs_subnets.html#subnets">Adición de subredes a clústeres</a> para ver información sobre cómo solicitar direcciones IP públicas portátiles para el clúster. Cuando haya direcciones IP públicas portátiles disponibles para el clúster, el servicio equilibrador de carga se creará automáticamente.</li>
+    <li><pre class="screen"><code>La IP de proveedor de nube solicitada <cloud-provider-ip> no está disponible. Están disponibles las siguientes IP de proveedor de nube: <available-cloud-provider-ips></code></pre></br>Ha definido una dirección IP pública portátil para el servicio equilibrador de carga mediante la sección **loadBalancerIP**, pero esta dirección IP pública portátil no está disponible en la subred pública portátil. Cambie el script de configuración del servicio equilibrador de carga y elija una de las direcciones IP públicas portátiles disponibles o elimine la sección **loadBalancerIP** del script para que la dirección IP pública portátil disponible se pueda asignar automáticamente.</li>
+    <li><pre class="screen"><code>No hay nodos disponibles para el servicio equilibrador de carga</code></pre>No tiene suficientes nodos trabajadores para desplegar un servicio equilibrador de carga. Una razón posible es que ha desplegado un clúster estándar con más de un nodo trabajador, pero el suministro de los nodos trabajadores ha fallado.</li>
+    <ol><li>Obtenga una lista de los nodos trabajadores disponibles.</br><pre class="codeblock"><code>kubectl get nodes</code></pre></li>
+    <li>Si se encuentran al menos dos nodos trabajadores disponibles, obtenga una lista de los detalles de los nodos trabajadores.</br><pre class="screen"><code>bx cs worker-get [&lt;cluster_name_or_id&gt;] &lt;worker_ID&gt;</code></pre></li>
+    <li>Asegúrese de que los ID de las VLAN públicas y privadas correspondientes a los nodos trabajadores devueltos por los mandatos <code>kubectl get nodes</code> y <code>bx cs [&lt;cluster_name_or_id&gt;] worker-get</code> coinciden. </li></ol></li></ul>
+
+4.  Si utiliza un dominio personalizado para conectar con el servicio equilibrador de carga, asegúrese de que el dominio personalizado está correlacionado con la dirección IP pública del servicio equilibrador de carga.
+    1.  Busque la dirección IP pública del servicio equilibrador de carga.
+
+      ```
+      kubectl describe service <myservice> | grep "LoadBalancer Ingress"
+      ```
+      {: pre}
+
+    2.  Compruebe que el dominio personalizado esté correlacionado con la dirección IP pública portátil del servicio equilibrador de carga en el registro de puntero
+(PTR).
+
+<br />
 
 
-## La conexión con una app mediante Ingress falla
+## No se puede conectar a una app mediante Ingress.
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
@@ -702,7 +807,7 @@ Para resolver el problema de Ingress:
   {: pre}
 
 6.  Compruebe los registros correspondientes al controlador de Ingress.
-    1.  Recupere el ID de los pod de Ingress que se ejecutan en el clúster.
+    1.  Recupere el ID de los pods de Ingress que se ejecutan en el clúster.
 
       ```
       kubectl get pods -n kube-system | grep alb1
@@ -722,99 +827,62 @@ Para resolver el problema de Ingress:
 
 
 
-
-## La conexión con una app mediante el servicio equilibrador de carga falla
-{: #cs_loadbalancer_fails}
+## Problemas con secretos del equilibrador de carga de aplicación de Ingress
+{: #cs_albsecret_fails}
 
 {: tsSymptoms}
-Ha expuesto a nivel público la app creando un servicio equilibrador de carga en el clúster. Cuando intenta conectar con la app a través de la dirección IP pública o equilibrador de carga, la conexión falla o supera el tiempo de espera.
+Después de desplegar un secreto de equilibrador de carga de aplicación de Ingress al clúster, el campo `Descripción` no se actualiza con el nombre de secreto al visualizar el certificado en {{site.data.keyword.cloudcerts_full_notm}}.
 
-{: tsCauses}
-Posibles motivos por los que el servicio del equilibrador de carga no funciona correctamente:
-
--   El clúster es un clúster lite o un clúster estándar con un solo nodo trabajador.
--   El clúster todavía no se ha desplegado por completo.
--   El script de configuración correspondiente al servicio equilibrador de carga incluye errores.
+Cuando lista información sobre el secreto del equilibrador de carga de aplicación, el estado indica `*_failed`. Por ejemplo, `create_failed`, `update_failed`, `delete_failed`.
 
 {: tsResolve}
-Para resolver el problema del servicio equilibrador de carga:
+Revise los motivos siguientes por los que puede fallar el secreto del equilibrador de carga de aplicación y los pasos de resolución de problemas correspondientes:
 
-1.  Compruebe que ha configurado un clúster estándar que se ha desplegado por completo y que tiene al menos dos nodos trabajadores para garantizar la alta disponibilidad del servicio equilibrador de carga.
-
-  ```
-  bx cs workers <cluster_name_or_id>
-  ```
-  {: pre}
-
-    En la salida de la CLI, asegúrese de que el **Estado** de los nodos trabajadores sea **Listo** y que el **Tipo de máquina** muestre un tipo de máquina que no sea **gratuito (free)**.
-
-2.  Compruebe si el archivo de configuración correspondiente al servicio equilibrador de carga es preciso.
-
-  ```
-  apiVersion: v1
-  kind: Service
-  metadata:
-    name: myservice
-  spec:
-    type: LoadBalancer
-    selector:
-      <selectorkey>:<selectorvalue>
-    ports:
-     - protocol: TCP
-       port: 8080
-  ```
-  {: pre}
-
-    1.  Verifique que ha definido **LoadBalancer** como tipo de servicio.
-    2.  Asegúrese de haber utilizado los mismos valores de **<selectorkey>** y **<selectorvalue>** que ha utilizado en la sección **label/metadata** cuando desplegó la app.
-    3.  Compruebe que ha utilizado el **puerto** en el que escucha la app.
-
-3.  Compruebe el servicio equilibrador de carga y revisar la sección de **Sucesos** para ver si hay errores.
-
-  ```
-  kubectl describe service <myservice>
-  ```
-  {: pre}
-
-    Busque los siguientes mensajes de error:
-    <ul><ul><li><pre class="screen"><code>Los clústeres con un nodo deben utilizar servicios de tipo NodePort</code></pre></br>Para utilizar el servicio equilibrador de carga, debe tener un clúster estándar con al menos dos nodos trabajadores.
-    <li><pre class="screen"><code>No hay ninguna IP de proveedor de nube disponible para dar respuesta a la solicitud de servicio del equilibrador de carga. Añada una subred portátil al clúster y vuélvalo a intentar</code></pre></br>Este mensaje de error indica que no queda ninguna dirección IP pública portátil que se pueda asignar al servicio equilibrador de carga. Consulte la sección sobre [Adición de subredes a clústeres](cs_cluster.html#cs_cluster_subnet) para ver información sobre cómo solicitar direcciones IP públicas portátiles para el clúster. Cuando haya direcciones IP públicas portátiles disponibles para el clúster, el servicio equilibrador de carga se creará automáticamente.
-    <li><pre class="screen"><code>La IP de proveedor de nube solicitada <cloud-provider-ip> no está disponible. Están disponibles las siguientes IP de proveedor de nube: <available-cloud-provider-ips</code></pre></br>Ha definido una dirección IP pública portátil para el servicio equilibrador de carga mediante la sección **loadBalancerIP**, pero esta dirección IP pública portátil no está disponible en la subred pública portátil. Cambie el script de configuración del servicio equilibrador de carga y elija una de las direcciones IP públicas portátiles disponibles o elimine la sección **loadBalancerIP** del script para que la dirección IP pública portátil disponible se pueda asignar automáticamente.
-    <li><pre class="screen"><code>No hay nodos disponibles para el servicio equilibrador de carga</code></pre>No tiene suficientes nodos trabajadores para desplegar un servicio equilibrador de carga. Una razón posible es que ha desplegado un clúster estándar con más de un nodo trabajador, pero el suministro de los nodos trabajadores ha fallado.
-    <ol><li>Obtenga una lista de los nodos trabajadores disponibles.</br><pre class="codeblock"><code>kubectl get nodes</code></pre>
-    <li>Si se encuentran al menos dos nodos trabajadores disponibles, obtenga una lista de los detalles de los nodos trabajadores.</br><pre class="screen"><code>bx cs worker-get [<cluster_name_or_id>] <worker_ID></code></pre>
-    <li>Asegúrese de que los ID de las VLAN públicas y privadas correspondientes a los nodos trabajadores devueltos por los mandatos 'kubectl get nodes' y 'bx cs [<cluster_name_or_id>]' coinciden.</ol></ul></ul>
-
-4.  Si utiliza un dominio personalizado para conectar con el servicio equilibrador de carga, asegúrese de que el dominio personalizado está correlacionado con la dirección IP pública del servicio equilibrador de carga.
-    1.  Busque la dirección IP pública del servicio equilibrador de carga.
-
-      ```
-      kubectl describe service <myservice> | grep "LoadBalancer Ingress"
-      ```
-      {: pre}
-
-    2.  Compruebe que el dominio personalizado esté correlacionado con la dirección IP pública portátil del servicio equilibrador de carga en el registro de puntero
-(PTR).
+<table>
+<col width="40%">
+<col width="60%">
+ <thead>
+ <th>Por qué está ocurriendo</th>
+ <th>Cómo solucionarlo</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td>No dispone de los roles de acceso necesarios para descargar y actualizar los datos de certificado.</td>
+ <td>Solicite al administrador de su cuenta que le asigne los roles de **Operador** y **Editor** para su instancia de {{site.data.keyword.cloudcerts_full_notm}}. Para obtener más detalles, consulte <a href="/docs/services/certificate-manager/about.html#identity-access-management">Identity and Access Management</a> para {{site.data.keyword.cloudcerts_short}}.</td>
+ </tr>
+ <tr>
+ <td>El CRN de certificado proporcionado en el momento de la creación, actualización o eliminación no pertenece a la misma cuenta que el clúster. </td>
+ <td>Compruebe que el CRN de certificado que ha proporcionado se haya importado a una instancia del servicio de {{site.data.keyword.cloudcerts_short}} en la misma cuenta que su clúster. </td>
+ </tr>
+ <tr>
+ <td>El CRN de certificado proporcionado en el momento de la creación no es correcto. </td>
+ <td><ol><li>Compruebe que la serie de CRN de certificado es correcta. </li><li>Si el CRN de certificado no es correcto, intente actualizar el secreto. <pre class="pre"><code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li><li>Si el resultado de este mandato es <code>update_failed</code>, elimine el secreto. <pre class="pre"><code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt;</code></pre></li><li>Vuelva a desplegar el secreto. <pre class="pre"><code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li></ol></td>
+ </tr>
+ <tr>
+ <td>El CRN de certificado proporcionado en el momento de la actualización no es correcto. </td>
+ <td><ol><li>Compruebe que la serie de CRN de certificado es correcta. </li><li>Si el CRN de certificado no es correcto, elimine el secreto. <pre class="pre"><code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt;</code></pre></li><li>Vuelva a desplegar el secreto. <pre class="pre"><code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li><li>Intente actualizar el secreto. <pre class="pre"><code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li></ol></td>
+ </tr>
+ <tr>
+ <td>El servicio {{site.data.keyword.cloudcerts_long_notm}} está experimentando un tiempo de inactividad. </td>
+ <td>Compruebe que el servicio {{site.data.keyword.cloudcerts_short}} esté activo y en ejecución. </td>
+ </tr>
+ </tbody></table>
 
 <br />
 
 
 
-
-
-
-
-## La recuperación del url de ETCD para la configuración de la CLI de Calico falla
+## No se puede recuperar el URL de ETCD para la configuración de la CLI de Calico.
 {: #cs_calico_fails}
 
 {: tsSymptoms}
-Cuando recupere el `<ETCD_URL>` para [añadir políticas de red](cs_security.html#adding_network_policies), obtiene un mensaje de error `calico-config not found`.
+Cuando recupere el `<ETCD_URL>` para [añadir políticas de red](cs_network_policy.html#adding_network_policies), obtiene un mensaje de error `calico-config not found`.
 
 {: tsCauses}
-El clúster no está al nivel de (Kubernetes versión 1.7) [cs_versions.html] o posterior.
+El clúster no está en el nivel de [Kubernetes versión 1.7](cs_versions.html) o posterior. 
 
 {: tsResolve}
-(Actualice el clúster)[cs_cluster.html#cs_cluster_update] o recupere el `<ETCD_URL>` con mandatos compatibles con versiones anteriores de Kubernetes.
+[Actualice el clúster](cs_cluster_update.html#master) o recupere el `<ETCD_URL>` con mandatos compatibles con versiones anteriores de Kubernetes.
 
 Para recuperar el `<ETCD_URL>`, ejecute uno de los mandatos siguientes:
 
@@ -832,7 +900,7 @@ Para recuperar el `<ETCD_URL>`, ejecute uno de los mandatos siguientes:
     <li> Localice el valor de los puntos finales de ETCD. Ejemplo: <code>https://169.1.1.1:30001</code>
     </ol>
 
-Cuando recupere el `<ETCD_URL>`, continúe con los pasos que figuran en (Adición de políticas de red) [cs_security.html#adding_network_policies].
+Cuando recupere el `<ETCD_URL>`, continúe con los pasos que figuran en (Adición de políticas de red) [cs_network_policy.html#adding_network_policies].
 
 <br />
 
@@ -849,7 +917,7 @@ Cuando recupere el `<ETCD_URL>`, continúe con los pasos que figuran en (Adició
 -   Revise los foros para ver si otros usuarios se han encontrado con el mismo problema. Cuando utiliza los foros para formular una pregunta, etiquete la pregunta para que la puedan ver los equipos de desarrollo de {{site.data.keyword.Bluemix_notm}}.
 
     -   Si tiene preguntas técnicas sobre el desarrollo o despliegue de clústeres o apps con {{site.data.keyword.containershort_notm}}, publique su pregunta en [Stack Overflow ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](http://stackoverflow.com/search?q=bluemix+containers) y etiquete su pregunta con `ibm-bluemix`, `kubernetes` y `containers`.
-    -   Para las preguntas relativas a las instrucciones de inicio y el servicio, utilice el foro [IBM developerWorks dW Answers![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluya las etiquetas `bluemix`
+    -   Para las preguntas relativas a las instrucciones de inicio y el servicio, utilice el foro [IBM developerWorks dW Answers ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluya las etiquetas `bluemix`
 y `containers`.
     Consulte [Obtención de ayuda](/docs/support/index.html#getting-help) para obtener más detalles sobre cómo utilizar los foros.
 

@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-13"
 
 ---
@@ -64,6 +64,6 @@ Bien joué ! Vous venez de créer votre premier cluster !
 Une fois le cluster opérationnel, vous pouvez commencer à l'utiliser.
 
 * [Installez les interfaces de ligne de commande pour commencer à utiliser votre cluster.](cs_cli_install.html#cs_cli_install)
-* [Déployez une application dans votre cluster.](cs_apps.html#cs_apps_cli)
-* [Créez un cluster standard avec plusieurs noeuds pour une plus haute disponibilité.](cs_cluster.html#cs_cluster_ui)
+* [Déployer une application dans votre cluster.](cs_app.html#app_cli)
+* [Créez un cluster standard avec plusieurs noeuds pour une plus haute disponibilité.](cs_clusters.html#clusters_ui)
 * [Configurez votre propre registre privé dans {{site.data.keyword.Bluemix_notm}} afin de stocker et de partager des images Docker avec d'autres utilisateurs.](/docs/services/Registry/index.html)

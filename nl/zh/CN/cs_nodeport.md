@@ -1,0 +1,154 @@
+---
+
+copyright:
+  years: 2014, 2018
+lastupdated: "2018-01-12"
+
+---
+
+{:new_window: target="_blank"}
+{:shortdesc: .shortdesc}
+{:screen: .screen}
+{:pre: .pre}
+{:table: .aria-labeledby="caption"}
+{:codeblock: .codeblock}
+{:tip: .tip}
+{:download: .download}
+
+
+# 设置 NodePort 服务
+{: #nodeport}
+
+通过使用集群中任何工作程序节点的公共 IP 地址并公开节点端口，使应用程序可通过因特网访问。此选项可用于测试公共访问权和短期使用公共访问权。
+{:shortdesc}
+
+## 使用 NodePort 服务类型来配置对应用程序的公共访问权
+{: #config}
+
+对于 Lite 或标准集群，可以将应用程序公开为 Kubernetes NodePort 服务。
+{:shortdesc}
+
+**注**：工作程序节点的公共 IP 地址不是永久固定的。如果必须重新创建工作程序节点，那么将为该工作程序节点分配新的公共 IP 地址。如果需要服务具有稳定的公共 IP 地址和更高可用性，请使用 [LoadBalancer 服务](cs_loadbalancer.html)或 [Ingress](cs_ingress.html) 来公开应用程序。
+
+如果还没有应用程序准备就绪，可以使用名为 [Guestbook ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/blob/master/examples/guestbook/all-in-one/guestbook-all-in-one.yaml) 的 Kubernetes 示例应用程序。
+
+1.  在应用程序的配置文件中，定义 [service ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/services-networking/service/) 部分。
+
+    示例：
+
+    ```
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: <my-nodeport-service>
+      labels:
+        run: <my-demo>
+    spec:
+      selector:
+        run: <my-demo>
+      type: NodePort
+      ports:
+       - port: <8081>
+         # nodePort: <31514>
+
+    ```
+    {: codeblock}
+
+    <table>
+    <caption>了解此 YAML 文件的组成部分</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 NodePort 服务部分的组成部分</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>name</code></td>
+    <td>将 <code><em>&lt;my-nodeport-service&gt;</em></code> 替换为 NodePort 服务的名称。</td>
+    </tr>
+    <tr>
+    <td><code>run</code></td>
+    <td>将 <code><em>&lt;my-demo&gt;</em></code> 替换为部署的名称。</td>
+    </tr>
+    <tr>
+    <td><code>port</code></td>
+    <td>将 <code><em>&lt;8081&gt;</em></code> 替换为服务侦听的端口。</td>
+     </tr>
+     <tr>
+     <td><code>nodePort</code></td>
+     <td>可选：将 <code><em>&lt;31514&gt;</em></code> 替换为范围为 30000-32767 的 NodePort。不要指定其他服务已经在使用的 NodePort。如果未分配 NodePort，系统将为您分配随机的 NodePort。<br><br>如果要指定 NodePort，并希望查看哪些 NodePort 已在使用，可以运行以下命令：<pre class="pre"><code>    kubectl get svc
+    </code></pre>所有已在使用的 NodePort 都会显示在**端口**字段下。</td>
+     </tr>
+     </tbody></table>
+
+
+    对于 Guestbook 示例，配置文件中已经存在前端服务部分。要使 Guestbook 应用程序在外部可用，请向前端服务部分添加 NodePort 类型以及范围为 30000-32767 的 NodePort。
+
+    ```
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: frontend
+      labels:
+        app: guestbook
+        tier: frontend
+    spec:
+      type: NodePort
+      ports:
+      - port: 80
+        nodePort: 31513
+      selector:
+        app: guestbook
+        tier: frontend
+    ```
+    {: codeblock}
+
+2.  保存已更新的配置文件。
+
+3.  针对要向因特网公开的每个应用程序，重复上述步骤以创建 NodePort 服务。
+
+**接下来要做什么？**
+
+应用程序部署后，可以使用任何工作程序节点的公共 IP 地址和 NodePort 来构成公共 URL，以用于在浏览器中访问该应用程序。
+
+1.  获取集群中工作程序节点的公共 IP 地址。
+
+    ```
+    bx cs workers <cluster_name>
+    ```
+    {: pre}
+
+    输出：
+
+    ```
+    ID                                                Public IP   Private IP    Size     State    Status
+    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w1  192.0.2.23  10.100.10.10  u2c.2x4  normal   Ready
+    prod-dal10-pa215dcf5bbc0844a990fa6b0fcdbff286-w2  192.0.2.27  10.100.10.15  u2c.2x4  normal   Ready
+    ```
+    {: screen}
+
+2.  如果分配了随机 NodePort，请了解分配的是哪个 NodePort。
+
+    ```
+    kubectl describe service <service_name>
+    ```
+    {: pre}
+
+    输出：
+
+    ```
+    Name:                   <service_name>
+    Namespace:              default
+    Labels:                 run=<deployment_name>
+    Selector:               run=<deployment_name>
+    Type:                   NodePort
+    IP:                     10.10.10.8
+    Port:                   <unset> 8080/TCP
+    NodePort:               <unset> 30872/TCP
+    Endpoints:              172.30.171.87:8080
+    Session Affinity:       None
+    No events.
+    ```
+    {: screen}
+
+    在此示例中，NodePort为 `30872`。
+
+3.  使用其中一个工作程序节点公共 IP 地址和 NodePort 来构成 URL。示例：`http://192.0.2.23:30872`

@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2017
-lastupdated: "2017-12-01"
+  years: 2014, 2018
+lastupdated: "2018-01-05"
 
 ---
 
@@ -84,8 +84,11 @@ Mediante regiones de {{site.data.keyword.containershort_notm}}, puede crear o ac
 {:shortdesc}
 
 Puede acceder a {{site.data.keyword.containershort_notm}} mediante un punto final global: `https://containers.bluemix.net/`.
+* Para comprobar la región de {{site.data.keyword.containershort_notm}} en la que está actualmente, ejecute `bx cs region`.
+* Para recuperar una lista de regiones disponibles y sus puntos finales, ejecute `bx cs regions`.
 
-Para comprobar la región de {{site.data.keyword.containershort_notm}} en la que está actualmente, ejecute `bx cs region`.
+Para utilizar la API con el punto final global, en todas las solicitudes, pase el nombre de región en una cabecera `X-Region`.
+{: tip}
 
 ### Inicio de sesión en una región de servicio de contenedor diferente
 {: #container_login_endpoints}
@@ -105,12 +108,12 @@ Las ubicaciones son centros de datos que están disponibles dentro de una regió
 
   | Región | Ubicación | Ciudad |
   |--------|----------|------|
-  | AP Norte | hkg02, tok02 | Hong Kong, Tokio |
+  | AP Norte | hkg02, sng01, tok02 | Hong Kong, Singapore, Tokyo |
   | AP Sur     | mel01, syd01, syd04        | Melbourne, Sidney |
   | UE Central     | ams03, fra02, mil01, par01        | Ámsterdam, Frankfurt, Milán, París |
   | UK Sur      | lon02, lon04         | Londres |
-  | EE.UU. este      | tor01, wdc06, wdc07        | Toronto, Washington, DC |
-  | EE.UU. Sur     | dal10, dal12, dal13       | Dallas |
+  | EE.UU. este      | <ph class="mon">mon01, </ph>tor01, wdc06, wdc07        | <ph class="mon">Montreal, </ph>Toronto, Washington, DC |
+  | EE.UU. Sur     | dal10, dal12, dal13, sao01<!--sao-paolo--></ph>       | Dallas, São Paolo<!--sao-paolo--></ph> |
 
 **Nota**: Milán (mil01) sólo está disponible para clústeres lite.
 
@@ -126,5 +129,8 @@ Ejemplo de API `GET /clusters`:
   {: codeblock}
 
 </br>
+
+Para utilizar la API con el punto final global, en todas las solicitudes, pase el nombre de región en una cabecera `X-Region`. Para ver una lista de las regiones disponibles, ejecute `bx cs regions`.
+{: tip}
 
 Para ver la documentación sobre los mandatos de API, consulte [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/).

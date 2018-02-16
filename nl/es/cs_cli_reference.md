@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2017
-lastupdated: "2017-12-13"
+  years: 2014, 2018
+lastupdated: "2018-01-09"
 
 ---
 
@@ -22,11 +22,13 @@ lastupdated: "2017-12-13"
 Consulte estos mandatos para crear y gestionar clústeres.
 {:shortdesc}
 
-**Sugerencia:** ¿Está buscando mandatos `bx cr`? Revise la guía de [consulta de la CLI de {{site.data.keyword.registryshort_notm}}](/docs/cli/plugins/registry/index.html). ¿Está buscando mandatos `kubectl`? Consulte la [documentación de Kubernetes![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).
+## Mandatos bx cs
+{: #cs_commands}
+
+**Sugerencia:** ¿Está buscando mandatos `bx cr`? Revise la guía de [consulta de la CLI de {{site.data.keyword.registryshort_notm}}](/docs/cli/plugins/registry/index.html). ¿Está buscando mandatos `kubectl`? Consulte la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).
 
 
 <!--[https://github.ibm.com/alchemy-containers/armada-cli ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.ibm.com/alchemy-containers/armada-cli)-->
-<!--If you're confused by the two tables... I (Rachael) have some extensive changes but dev needs to see it in staging first, so just adding a whole second staging table. Too hard to add staging tags for individual commands in the table.-->
 
 <table summary="Mandatos para crear clústeres en {{site.data.keyword.Bluemix_notm}}">
  <thead>
@@ -34,12 +36,19 @@ Consulte estos mandatos para crear y gestionar clústeres.
  </thead>
  <tbody>
   <tr>
-    <td>[bx cs albs](#cs_albs)</td>
+    <td>[bx cs alb-cert-deploy](#cs_alb_cert_deploy)</td>
+    <td>[bx cs alb-cert-get](#cs_alb_cert_get)</td>
+    <td>[bx cs alb-cert-rm](#cs_alb_cert_rm)</td>
+    <td>[bx cs alb-certs](#cs_alb_certs)</td>
     <td>[bx cs alb-configure](#cs_alb_configure)</td>
+ </tr>
+ <tr>
     <td>[bx cs alb-get](#cs_alb_get)</td>
     <td>[bx cs alb-types](#cs_alb_types)</td>
+    <td>[bx cs albs](#cs_albs)</td>
+    <td>[bx cs api-key-info](#cs_api_key_info)</td>
     <td>[bx cs apiserver-config-set](#cs_apiserver_config_set)</td>
-  </tr>
+ </tr>
  <tr>
     <td>[bx cs apiserver-refresh](#cs_apiserver_refresh)</td>
     <td>[bx cs cluster-config](#cs_cluster_config)</td>
@@ -58,53 +67,45 @@ Consulte estos mandatos para crear y gestionar clústeres.
     <td>[bx cs cluster-user-subnet-add](#cs_cluster_user_subnet_add)</td>
     <td>[bx cs cluster-user-subnet-rm](#cs_cluster_user_subnet_rm)</td>
     <td>[bx cs cluster-update](#cs_cluster_update)</td>
-    <td>[      bx cs clusters
-      ](#cs_clusters)</td>
+    <td>[bx cs clusters](#cs_clusters)</td>
     <td>[bx cs credentials-set](#cs_credentials_set)</td>
  </tr>
  <tr>
-    <td>[  bx cs credentials-unset
-  ](#cs_credentials_unset)</td>
-    <td>[  bx cs help
-  ](#cs_help)</td>
-    <td>[        bx cs init
-        ](#cs_init)</td>
+    <td>[bx cs credentials-unset](#cs_credentials_unset)</td>
+    <td>[bx cs help](#cs_help)</td>
+    <td>[bx cs init](#cs_init)</td>
     <td>[bx cs kube-versions](#cs_kube_versions)</td>
-    <td>[        bx cs locations
-        ](#cs_datacenters)</td>
+    <td>[bx cs locations](#cs_datacenters)</td>
  </tr>
  <tr>
     <td>[bx cs logging-config-create](#cs_logging_create)</td>
     <td>[bx cs logging-config-get](#cs_logging_get)</td>
+    <td>[bx cs logging-config-refresh](#cs_logging_refresh)</td>
     <td>[bx cs logging-config-rm](#cs_logging_rm)</td>
     <td>[bx cs logging-config-update](#cs_logging_update)</td>
-    <td>[bx cs machine-types](#cs_machine_types)</td>
  </tr>
  <tr>
+    <td>[bx cs machine-types](#cs_machine_types)</td>
     <td>[bx cs region](#cs_region)</td>
     <td>[bx cs region-set](#cs_region-set)</td>
     <td>[bx cs regions](#cs_regions)</td>
-    <td>[    bx cs subnets
-    ](#cs_subnets)</td>
-    <td>[bx cs vlans](#cs_vlans)</td>
+    <td>[bx cs subnets](#cs_subnets)</td>
  </tr>
  <tr>
+    <td>[bx cs vlans](#cs_vlans)</td>
     <td>[bx cs webhook-create](#cs_webhook_create)</td>
     <td>[bx cs worker-add](#cs_worker_add)</td>
     <td>[bx cs worker-get](#cs_worker_get)</td>
-    <td>[bx cs worker-rm](#cs_worker_rm)</td>
-    <td>[bx cs worker-update](#cs_worker_update)</td>
+    <td>[bx cs worker-reboot](#cs_worker_reboot)</td>
  </tr>
  <tr>
-    <td>[bx cs worker-reboot](#cs_worker_reboot)</td>
     <td>[bx cs worker-reload](#cs_worker_reload)</td>
+    <td>[bx cs worker-rm](#cs_worker_rm)</td>
+    <td>[bx cs worker-update](#cs_worker_update)</td>
     <td>[bx cs workers](#cs_workers)</td>
  </tr>
  </tbody>
  </table>
-
-
-
 
 **Sugerencia:** Para ver la versión del plug-in de {{site.data.keyword.containershort_notm}}, consulte el siguiente mandato.
 
@@ -113,28 +114,144 @@ bx plugin list
 ```
 {: pre}
 
-## Mandatos bx cs
-{: #cs_commands}
+## Mandatos de equilibrador de carga de aplicación
 
-### bx cs albs --cluster CLUSTER
-{: #cs_albs}
+### bx cs alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NAME --cert-crn CERTIFICATE_CRN
+{: #cs_alb_cert_deploy}
 
-Visualice el estado de todos los equilibradores de carga de aplicación de un clúster. Si no se devuelve ningún ID de equilibrador de carga de aplicación, significa que el clúster no tiene subred portátil. Puede [crear](#cs_cluster_subnet_create) o [añadir](#cs_cluster_subnet_add) subredes a un clúster.
+Despliegue o actualice un certificado de la instancia de {{site.data.keyword.cloudcerts_long_notm}} al equilibrador de carga de aplicación de un clúster. 
 
-<strong>Opciones del mandato</strong>:
+**Nota:**
+* Sólo un usuario con el rol de acceso de Administrador puede ejecutar este mandato. 
+* Sólo puede actualizar certificados que importados de la misma instancia de {{site.data.keyword.cloudcerts_long_notm}}.
+
+<strong>Opciones del mandato</strong>
 
    <dl>
-   <dt><code><em>--cluster </em>CLUSTER</code></dt>
-   <dd>El nombre o ID del clúster en el que se listan los equilibradores de carga de las aplicaciones. Este valor es obligatorio.</dd>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>El nombre o ID del clúster. Este valor es obligatorio.</dd>
+
+   <dt><code>--update</code></dt>
+   <dd>Incluya este distintivo para actualizar el certificado para un secreto de equilibrador de carga de aplicación en un clúster. Este valor es opcional.</dd>
+
+   <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
+   <dd>El nombre del secreto del equilibrador de carga de aplicación. Este valor es obligatorio.</dd>
+
+   <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
+   <dd>El CRN de certificado. Este valor es obligatorio.</dd>
+   </dl>
+
+**Ejemplos**:
+
+Ejemplo para desplegar un secreto de equilibrador de carga de aplicación:
+
+   ```
+   bx cs alb-cert-deploy --secret-name my_alb_secret_name --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
+   ```
+ {: pre}
+
+Ejemplo para actualizar un secreto de equilibrador de carga de aplicación existente:
+
+ ```
+ bx cs alb-cert-deploy --update --secret-name my_alb_secret_name --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:7e21fde8ee84a96d29240327daee3eb2
+ ```
+ {: pre}
+
+
+### bx cs alb-cert-get --cluster CLUSTER [--secret-name SECRET_NAME][--cert-crn CERTIFICATE_CRN]
+{: #cs_alb_cert_get}
+
+Visualice información sobre un secreto de equilibrio de carga de aplicación en un clúster. 
+
+**Nota:** Sólo un usuario con el rol de acceso de Administrador puede ejecutar este mandato.
+
+<strong>Opciones del mandato</strong>
+
+  <dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+  <dd>El nombre o ID del clúster. Este valor es obligatorio.</dd>
+
+  <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
+  <dd>El nombre del secreto del equilibrador de carga de aplicación. Este valor es necesario para obtener información sobre un secreto de equilibrador de carga de aplicación específico en el clúster.</dd>
+
+  <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
+  <dd>El CRN de certificado. Este valor es necesario para obtener información sobre todos los secretos de equilibrador de carga de aplicación coincidentes con un CRN de certificado determinado en el clúster.</dd>
+  </dl>
+
+**Ejemplos**:
+
+ Ejemplo para captar un secreto de equilibrador de carga de aplicación:
+
+ ```
+ bx cs alb-cert-get --cluster my_cluster --secret-name my_alb_secret_name
+ ```
+ {: pre}
+
+ Ejemplo para obtener información sobre todos los secretos de equilibrador de carga que coinciden con un CRN de certificado especificado:
+
+ ```
+ bx cs alb-cert-get --cluster my_cluster --cert-crn  crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
+ ```
+ {: pre}
+
+
+### bx cs alb-cert-rm --cluster CLUSTER [--secret-name SECRET_NAME][--cert-crn CERTIFICATE_CRN]
+{: #cs_alb_cert_rm}
+
+Elimine un secreto de equilibrador de carga de aplicación en un clúster. 
+
+**Nota:** Sólo un usuario con el rol de acceso de Administrador puede ejecutar este mandato.
+
+<strong>Opciones del mandato</strong>
+
+  <dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+  <dd>El nombre o ID del clúster. Este valor es obligatorio.</dd>
+
+  <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
+  <dd>El nombre del secreto de ALB. Este valor es necesario para eliminar un secreto de equilibrador de carga de aplicación específico en el clúster.</dd>
+
+  <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
+  <dd>El CRN de certificado. Este valor es necesario para eliminar todos los secretos de equilibrador de carga de aplicación coincidentes con un CRN de certificado determinado en el clúster.</dd>
+  </dl>
+
+**Ejemplos**:
+
+ Ejemplo para eliminar un secreto equilibrador de carga de aplicación:
+
+ ```
+ bx cs alb-cert-rm --cluster my_cluster --secret-name my_alb_secret_name
+ ```
+ {: pre}
+
+ Ejemplo para eliminar todos los secretos de equilibrador de carga que coinciden con un CRN de certificado especificado:
+
+ ```
+ bx cs alb-cert-rm --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
+ ```
+ {: pre}
+
+
+### bx cs alb-certs --cluster CLUSTER
+{: #cs_alb_certs}
+
+Visualice una lista de secretos de equilibrador de carga de aplicación en un clúster. 
+
+**Nota:** Sólo un usuario con el rol de acceso de Administrador puede ejecutar este mandato.
+
+<strong>Opciones del mandato</strong>
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>El nombre o ID del clúster. Este valor es obligatorio.</dd>
    </dl>
 
 **Ejemplo**:
 
-  ```
-  bx cs albs --cluster mycluster
-  ```
-  {: pre}
-
+ ```
+ bx cs alb-certs --cluster my_cluster
+ ```
+ {: pre}
 
 
 ### bx cs alb-configure --albID ALB_ID [--enable][--disable][--user-ip USERIP]
@@ -223,12 +340,52 @@ Visualice los tipos de equilibrador de carga de aplicaciones que están soportad
   {: pre}
 
 
-### bx cs apiserver-config-set
+### bx cs albs --cluster CLUSTER
+{: #cs_albs}
+
+Visualice el estado de todos los equilibradores de carga de aplicación de un clúster. Si no se devuelve ningún ID de equilibrador de carga de aplicación, significa que el clúster no tiene subred portátil. Puede [crear](#cs_cluster_subnet_create) o [añadir](#cs_cluster_subnet_add) subredes a un clúster.
+
+<strong>Opciones del mandato</strong>:
+
+   <dl>
+   <dt><code><em>--cluster </em>CLUSTER</code></dt>
+   <dd>El nombre o ID del clúster en el que se listan los equilibradores de carga de las aplicaciones. Este valor es obligatorio.</dd>
+   </dl>
+
+**Ejemplo**:
+
+  ```
+  bx cs albs --cluster mycluster
+  ```
+  {: pre}
+
+
+## bx cs api-key-info CLUSTER
+{: #cs_api_key_info}
+
+Visualice el nombre y la dirección de correo electrónico del propietario de la clave de API IAM del clúster. 
+
+<strong>Opciones del mandato</strong>:
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>El nombre o ID del clúster. Este valor es obligatorio.</dd>
+   </dl>
+
+**Ejemplo**:
+
+  ```
+  bx cs api-key-info my_cluster
+  ```
+  {: pre}
+
+
+## bx cs apiserver-config-set
 {: #cs_apiserver_config_set}
 
 Establecer una opción para la configuración de servidor de API de Kubernetes de un clúster. Este mandato debe combinarse con uno de los siguientes submandatos para la opción de configuración que desea establecer.
 
-#### bx cs apiserver-config-get audit-webhook CLUSTER
+### bx cs apiserver-config-get audit-webhook CLUSTER
 {: #cs_apiserver_api_webhook_get}
 
 Ver el URL para el servicio de registro remoto al que está enviando registros de auditoría de servidor de API. El URL se ha especificado al crear el programa de fondo del webhook para la configuración del servidor de API.
@@ -247,7 +404,7 @@ Ver el URL para el servicio de registro remoto al que está enviando registros d
   ```
   {: pre}
 
-#### bx cs apiserver-config-set audit-webhook CLUSTER [--remoteServer SERVER_URL_OR_IP][--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH][--clientKey CLIENT_KEY_PATH]
+### bx cs apiserver-config-set audit-webhook CLUSTER [--remoteServer SERVER_URL_OR_IP][--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH][--clientKey CLIENT_KEY_PATH]
 {: #cs_apiserver_api_webhook_set}
 
 Establecer el programa de fondo del webhook para la configuración del servidor de API. El programa de fondo del webhook reenvía registros de auditoría del servidor de API a un servidor remoto. Se crea una configuración de webhook basándose en la información que proporciona en los distintivos de este mandato. Si no proporciona ninguna información en los distintivos, se utiliza una configuración de webhook predeterminada.
@@ -259,7 +416,7 @@ Establecer el programa de fondo del webhook para la configuración del servidor 
    <dd>El nombre o ID del clúster. Este valor es obligatorio.</dd>
 
    <dt><code>--remoteServer <em>SERVER_URL</em></code></dt>
-   <dd>La dirección IP o el URL del servicio de registro remoto al que desea enviar registros de auditoría. Si proporciona un URL de servidor no seguro, se ignoran los certificados. Este valor es opcional. Si no especifica una dirección IP o un URL del servidor remoto, se utiliza una configuración predeterminada de QRadar y los registros se envían a la instancia de QRadar de la región en la que se encuentra el clúster.</dd>
+   <dd>La dirección IP o el URL del servicio de registro remoto al que desea enviar registros de auditoría. Si proporciona un URL de servidor no seguro, se ignoran los certificados. Este valor es opcional.</dd>
 
    <dt><code>--caCert <em>CA_CERT_PATH</em></code></dt>
    <dd>La vía de acceso de archivo del certificado de CA que se utiliza para verificar el servicio de registro remoto. Este valor es opcional.</dd>
@@ -278,8 +435,8 @@ Establecer el programa de fondo del webhook para la configuración del servidor 
   ```
   {: pre}
 
-#### bx cs apiserver-config-unset audit-webhook CLUSTER
-{: #cs_apiserver_api_webhook_get}
+### bx cs apiserver-config-unset audit-webhook CLUSTER
+{: #cs_apiserver_api_webhook_unset}
 
 Inhabilitar la configuración del programa de fondo del webhook para el servidor de API del clúster. Al inhabilitar el programa de fondo del webhook, se detiene el reenvío registros de auditoría del servidor de API a un servidor remoto.
 
@@ -297,7 +454,7 @@ Inhabilitar la configuración del programa de fondo del webhook para el servidor
   ```
   {: pre}
 
-### bx cs apiserver-refresh CLUSTER
+## bx cs apiserver-refresh CLUSTER
 {: #cs_apiserver_refresh}
 
 Reinicie el Kubernetes maestro en el clúster para aplicar los cambios a la configuración del servidor de API.
@@ -316,6 +473,7 @@ Reinicie el Kubernetes maestro en el clúster para aplicar los cambios a la conf
   ```
   {: pre}
 
+## Mandatos de clúster
 
 ### bx cs cluster-config CLUSTER [--admin][--export]
 {: #cs_cluster_config}
@@ -415,7 +573,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
       <td>La versión Kubernetes del nodo maestro del clúster. Este valor es opcional. Si no se especifica, el clúster se crea con el valor predeterminado de las versiones de Kubernetes soportadas. Para ver todas las versiones disponibles, ejecute <code>bx cs kube-versions</code>.</td></tr>
       <tr>
       <td><code>diskEncryption: <em>false</em></code></td>
-      <td>Los nodos de trabajador tienen cifrado de disco de forma predeterminada; [más información](cs_security.html#cs_security_worker). Para inhabilitar el cifrado, incluya esta opción y establezca el valor en <code>false</code>.</td></tr>
+      <td>Los nodos de trabajador tienen cifrado de disco de forma predeterminada; [más información](cs_secure.html#worker). Para inhabilitar el cifrado, incluya esta opción y establezca el valor en <code>false</code>.</td></tr>
      </tbody></table>
     </p></dd>
 
@@ -478,7 +636,7 @@ empiezan por <code>fcr</code> (direccionador frontal). La combinación de númer
 <p><strong>Nota:</strong> A cada nodo trabajador se la asigna un ID exclusivo y un nombre de dominio que no se debe cambiar de forma manual después de haber creado el clúster. Si se cambia el nombre de dominio o el ID se impide que el maestro de Kubernetes gestione el clúster.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>Los nodos de trabajador tienen cifrado de disco de forma predeterminada; [más información](cs_security.html#cs_security_worker). Para inhabilitar el cifrado, incluya esta opción.</dd>
+<dd>Los nodos de trabajador tienen cifrado de disco de forma predeterminada; [más información](cs_secure.html#worker). Para inhabilitar el cifrado, incluya esta opción.</dd>
 </dl>
 
 **Ejemplos**:
@@ -793,6 +951,7 @@ Ver una lista de los clústeres de la organización.
   ```
   {: pre}
 
+## Mandatos de credenciales
 
 ### bx cs credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME
 {: #cs_credentials_set}
@@ -857,7 +1016,7 @@ Elimine las credenciales de cuenta de la infraestructura de IBM Cloud (SoftLayer
 
 
 
-### bx cs help
+## bx cs help
 {: #cs_help}
 
 Ver una lista de mandatos y parámetros admitidos.
@@ -874,7 +1033,7 @@ Ver una lista de mandatos y parámetros admitidos.
   {: pre}
 
 
-### bx cs init [--host HOST]
+## bx cs init [--host HOST]
 {: #cs_init}
 
 Inicialice el plug-in de {{site.data.keyword.containershort_notm}} o especifique la región donde desea crear o acceder a clústeres de Kubernetes.
@@ -893,7 +1052,7 @@ bx cs init --host https://uk-south.containers.bluemix.net
 ```
 {: pre}
 
-### bx cs kube-versions
+## bx cs kube-versions
 {: #cs_kube_versions}
 
 Visualice una lista de las versiones de Kubernetes soportadas en {{site.data.keyword.containershort_notm}}. Actualice su [clúster maestro](#cs_cluster_update) y [nodos trabajadores](#cs_worker_update) a la versión predeterminada para obtener las prestaciones más estables y recientes.
@@ -909,7 +1068,7 @@ Visualice una lista de las versiones de Kubernetes soportadas en {{site.data.key
   ```
   {: pre}
 
-### bx cs locations
+## bx cs locations
 {: #cs_datacenters}
 
 Ver una lista de las ubicaciones disponibles en las que puede crear un clúster.
@@ -925,7 +1084,9 @@ Ver una lista de las ubicaciones disponibles en las que puede crear un clúster.
   ```
   {: pre}
 
-### bx cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT][--spaceName CLUSTER_SPACE] [--orgName CLUSTER_ORG] --type LOG_TYPE [--json]
+## Mandatos de registro
+
+### bx cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT][--space CLUSTER_SPACE] [--org CLUSTER_ORG] --type LOG_TYPE [--json]
 {: #cs_logging_create}
 
 Crear una configuración de registro. Puede utilizar este mandato para reenviar los registros correspondientes a contenedores, aplicaciones, nodos trabajadores, clústeres de Kubernetes y equilibradores de carga de aplicación de Ingress a {{site.data.keyword.loganalysisshort_notm}} o a un servidor syslog externo.
@@ -938,15 +1099,15 @@ Crear una configuración de registro. Puede utilizar este mandato para reenviar 
 <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
 <dd>El origen de registro para el que desea habilitar el reenvío de registros. Los valores aceptados son <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code> e <code>ingress</code>. Este valor es obligatorio.</dd>
 <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
-<dd>El espacio de nombres del contenedor Docker desde el que desea reenviar registros. El reenvío de registros no recibe soporte para los espacios de nombres de Kubernetes <code>ibm-system</code> y <code>kube-system</code>. Este valor sólo es válido para el origen de registro de contenedor y es opcional. Si no especifica un espacio de nombres, todos los espacios de nombres del contenedor utilizarán esta configuración.</dd>
+<dd>El espacio de Kubernetes desde el que desea reenviar registros. El reenvío de registros no recibe soporte para los espacios de nombres de Kubernetes <code>ibm-system</code> y <code>kube-system</code>. Este valor sólo es válido para el origen de registro de contenedor y es opcional. Si no especifica un espacio de nombres, todos los espacios de nombres del clúster utilizarán esta configuración.</dd>
 <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
 <dd>Cuando el tipo de registro es <code>syslog</code>, el nombre de host o dirección IP del servidor del recopilador de registro. Este valor es obligatorio para <code>syslog</code>. Cuando el tipo de registro es <code>ibm</code>, el URL de ingestión de {{site.data.keyword.loganalysislong_notm}}. Puede encontrar la lista de URL de ingestión disponible [aquí](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). Si no especifica un URL de ingestión, se utiliza el punto final de la región en la que se ha creado el clúster.</dd>
 <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
 <dd>El puerto del servidor del recopilador de registro. Este valor es opcional. Si no especifica un puerto, se utiliza el puerto estándar <code>514</code> para <code>syslog</code> y el puerto estándar <code>9091</code> para <code>ibm</code>.</dd>
-<dt><code>--spaceName <em>CLUSTER_SPACE</em></code></dt>
-<dd>El nombre del espacio al que desea enviar registros. Este valor sólo es válido para el registro de tipo <code>ibm</code> y es opcional. Si no especifica un espacio, los registros se envían al nivel de cuenta.</dd>
-<dt><code>--orgName <em>CLUSTER_ORG</em></code></dt>
-<dd>El nombre de la organización en la que está el espacio. Este valor sólo es válido para el registro de tipo <code>ibm</code> y es necesario si ha especificado un espacio.</dd>
+<dt><code>--space <em>CLUSTER_SPACE</em></code></dt>
+<dd>El nombre del espacio de Cloud Foundry al que desea enviar registros. Este valor sólo es válido para el registro de tipo <code>ibm</code> y es opcional. Si no especifica un espacio, los registros se envían al nivel de cuenta.</dd>
+<dt><code>--org <em>CLUSTER_ORG</em></code></dt>
+<dd>El nombre de la organización de Cloud Foundry en la que está el espacio. Este valor sólo es válido para el registro de tipo <code>ibm</code> y es necesario si ha especificado un espacio.</dd>
 <dt><code>--type <em>LOG_TYPE</em></code></dt>
 <dd>El protocolo de reenvío de registros que desea utilizar. Actualmente se da soporte a <code>syslog</code> e <code>ibm</code>. Este valor es obligatorio.</dd>
 <dt><code>--json</code></dt>
@@ -969,12 +1130,12 @@ Ejemplo de registro de tipo `syslog` que reenvía desde un origen de registro de
   ```
   {: pre}
 
-  Ejemplo de registro de tipo `syslog` que reenvía registros desde un origen de `ingress` en un puerto distinto al predeterminado:
+Ejemplo de registro de tipo `syslog` que reenvía registros desde un origen de `ingress` en un puerto distinto al predeterminado:
 
-    ```
-    bx cs logging-config-create my_cluster --logsource container --hostname my_hostname-or-IP --port 5514 --type syslog
-    ```
-    {: pre}
+  ```
+  bx cs logging-config-create my_cluster --logsource container --hostname my_hostname-or-IP --port 5514 --type syslog
+  ```
+  {: pre}
 
 ### bx cs logging-config-get CLUSTER [--logsource LOG_SOURCE][--json]
 {: #cs_logging_get}
@@ -1000,29 +1161,49 @@ Vea todas las configuraciones de reenvío de registro para un clúster, o filtre
   {: pre}
 
 
-### bx cs logging-config-rm CLUSTER LOG_CONFIG_ID
-{: #cs_logging_rm}
+### bx cs logging-config-refresh CLUSTER
+{: #cs_logging_refresh}
 
-Suprime una configuración de reenvío de registro. Esto detiene el reenvío del registro a un servidor syslog o a {{site.data.keyword.loganalysisshort_notm}}.
+Renueve la configuración de registro para el clúster. Renueva la señal de registro para cualquier configuración de registro que se esté reenviando al nivel de espacio en el clúster. 
 
 <strong>Opciones del mandato</strong>:
 
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>El nombre o ID del clúster. Este valor es obligatorio.</dd>
-   <dt><code><em>LOG_CONFIG_ID</em></code></dt>
+   </dl>
+
+**Ejemplo**:
+
+  ```
+  bx cs logging-config-refresh my_cluster
+  ```
+  {: pre}
+
+
+### bx cs logging-config-rm CLUSTER --id LOG_CONFIG_ID
+{: #cs_logging_rm}
+
+Suprima una configuración de reenvío de registro. Esto detiene el reenvío del registro a un servidor syslog remoto o a {{site.data.keyword.loganalysisshort_notm}}.
+
+<strong>Opciones del mandato</strong>:
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>El nombre o ID del clúster. Este valor es obligatorio.</dd>
+   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
    <dd>El ID de configuración de registro que desea eliminar del origen de registro. Este valor es obligatorio.</dd>
    </dl>
 
 **Ejemplo**:
 
   ```
-  bx cs logging-config-rm my_cluster f4bc77c0-ee7d-422d-aabf-a4e6b977264e
+  bx cs logging-config-rm my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e
   ```
   {: pre}
 
 
-### bx cs logging-config-update CLUSTER LOG_CONFIG_ID [--hostname LOG_SERVER_HOSTNAME_OR_IP][--port LOG_SERVER_PORT] [--spaceName CLUSTER_SPACE][--orgName CLUSTER_ORG] --type LOG_TYPE [--json]
+### bx cs logging-config-update CLUSTER --id LOG_CONFIG_ID [--hostname LOG_SERVER_HOSTNAME_OR_IP][--port LOG_SERVER_PORT] [--space CLUSTER_SPACE][--org CLUSTER_ORG] --type LOG_TYPE [--json]
 {: #cs_logging_update}
 
 Actualizar los detalles de una configuración de reenvío de registros.
@@ -1032,15 +1213,15 @@ Actualizar los detalles de una configuración de reenvío de registros.
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>El nombre o ID del clúster. Este valor es obligatorio.</dd>
-   <dt><code><em>LOG_CONFIG_ID</em></code></dt>
+   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
    <dd>El ID de configuración de registro que desea actualizar. Este valor es obligatorio.</dd>
    <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
    <dd>Cuando el tipo de registro es <code>syslog</code>, el nombre de host o dirección IP del servidor del recopilador de registro. Este valor es obligatorio para <code>syslog</code>. Cuando el tipo de registro es <code>ibm</code>, el URL de ingestión de {{site.data.keyword.loganalysislong_notm}}. Puede encontrar la lista de URL de ingestión disponible [aquí](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). Si no especifica un URL de ingestión, se utiliza el punto final de la región en la que se ha creado el clúster.</dd>
    <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
    <dd>El puerto del servidor del recopilador de registro. Este valor es opcional cuando el tipo de registro es <code>syslog</code>. Si no especifica un puerto, se utiliza el puerto estándar <code>514</code> para <code>syslog</code> y el <code>9091</code> para <code>ibm</code>.</dd>
-   <dt><code>--spaceName <em>CLUSTER_SPACE</em></code></dt>
+   <dt><code>--space <em>CLUSTER_SPACE</em></code></dt>
    <dd>El nombre del espacio al que desea enviar registros. Este valor sólo es válido para el registro de tipo <code>ibm</code> y es opcional. Si no especifica un espacio, los registros se envían al nivel de cuenta.</dd>
-   <dt><code>--orgName <em>CLUSTER_ORG</em></code></dt>
+   <dt><code>--org <em>CLUSTER_ORG</em></code></dt>
    <dd>El nombre de la organización en la que está el espacio. Este valor sólo es válido para el registro de tipo <code>ibm</code> y es necesario si ha especificado un espacio.</dd>
    <dt><code>--type <em>LOG_TYPE</em></code></dt>
    <dd>El protocolo de reenvío de registros que desea utilizar. Actualmente se da soporte a <code>syslog</code> e <code>ibm</code>. Este valor es obligatorio.</dd>
@@ -1051,24 +1232,24 @@ Actualizar los detalles de una configuración de reenvío de registros.
 **Ejemplo de registro de tipo `ibm`**:
 
   ```
-  bx cs logging-config-update my_cluster f4bc77c0-ee7d-422d-aabf-a4e6b977264e --type ibm
+  bx cs logging-config-update my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e --type ibm
   ```
   {: pre}
 
 **Ejemplo de registro de tipo `syslog`**:
 
   ```
-  bx cs logging-config-update my_cluster f4bc77c0-ee7d-422d-aabf-a4e6b977264e --hostname localhost --port 5514 --type syslog
+  bx cs logging-config-update my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e --hostname localhost --port 5514 --type syslog
   ```
   {: pre}
 
 
-### bx cs machine-types LOCATION
+## bx cs machine-types LOCATION
 {: #cs_machine_types}
 
 Ver una lista de los tipos de máquinas disponibles para sus nodos trabajadores. Cada tipo de máquina incluye cantidad de CPU virtual, memoria y espacio de disco para cada nodo trabajador del clúster.
+- De forma predeterminada, los datos de Docker del host están cifrados en los tipos de máquina. El directorio `/var/lib/docker`, donde están almacenados todos los datos de los contenedores, están cifrados mediante LUKS. Si la opción `disable-disk-encrypt` se incluye durante la creación de clústeres, los datos de Docker del host no se cifrarán. [Más información sobre el cifrado.](cs_secure.html#encrypted_disks)
 - Los tipos de máquina con `u2c` o `b2c` en el nombre utilizan el disco local en lugar de la SAN por motivos de fiabilidad. Entre las ventajas de fiabilidad se incluyen un mejor rendimiento al serializar bytes en el disco local y una reducción de la degradación del sistema de archivos debido a anomalías de la red. Este tipo de máquinas contienen 25 GB de almacenamiento en disco local para el sistema de archivos de SO y 100 GB de almacenamiento en disco local para `/var/lib/docker`, el directorio en el que se graban todos los datos del contenedor.
-- Los tipos de máquinas que incluyen `cifrado` en el nombre cifran los datos de Docker del host. El directorio `/var/lib/docker`, donde están almacenados todos los datos de los contenedores, están cifrados mediante LUKS.
 - Los tipos de máquinas con `u1c` o `b1c` en el nombre están en desuso, como, por ejemplo,`u1c.2x4`. Para empezar a utilizar los tipos de máquinas `u2c` y `b2c`, utilice el mandato `bx cs worker-add` para añadir nodos trabajadores con el tipo de máquina actualizado. A continuación, elimine los nodos trabajadores que utilizan los tipos de máquinas en desuso mediante el mandato `bx cs worker-rm`.
 </p>
 
@@ -1085,6 +1266,8 @@ Ver una lista de los tipos de máquinas disponibles para sus nodos trabajadores.
   bx cs machine-types dal10
   ```
   {: pre}
+
+## Mandatos de región
 
 ### bx cs region
 {: #cs_region}
@@ -1169,7 +1352,7 @@ us-south      us-south
 ```
 {: screen}
 
-### bx cs subnets
+## bx cs subnets
 {: #cs_subnets}
 
 Ver una lista de subredes que están disponibles en una cuenta de infraestructura de IBM Cloud (SoftLayer).
@@ -1186,7 +1369,7 @@ Ver una lista de subredes que están disponibles en una cuenta de infraestructur
   {: pre}
 
 
-### bx cs vlans LOCATION
+## bx cs vlans LOCATION
 {: #cs_vlans}
 
 Crear una lista de las VLAN públicas y privadas disponibles para una ubicación en la cuenta de infraestructura de IBM Cloud (SoftLayer). Para ver una lista de las VLAN disponibles,
@@ -1207,7 +1390,7 @@ debe tener una cuenta de pago.
   {: pre}
 
 
-### bx cs webhook-create --cluster CLUSTER --level LEVEL --type slack --URL URL
+## bx cs webhook-create --cluster CLUSTER --level LEVEL --type slack --URL URL
 {: #cs_webhook_create}
 
 Crear webhooks.
@@ -1235,6 +1418,7 @@ Crear webhooks.
   ```
   {: pre}
 
+## Mandatos de trabajador
 
 ### bx cs worker-add --cluster CLUSTER [--file FILE_LOCATION][--hardware HARDWARE] --machine-type MACHINE_TYPE --number NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt]
 {: #cs_worker_add}
@@ -1286,7 +1470,7 @@ workerNum: <em>&lt;number_workers&gt;</em>
 </tr>
 <tr>
 <td><code>public-vlan</code></td>
-<td>Sustituya <code>&lt;public_vlan&gt;</code> por el ID de la VLAN pública que desea utilizar para sus nodos trabajadores. Para ver una lista de las VLAN disponibles, ejecute <code>bx cs vlans&lt;location&gt;</code> y busque direccionadores de VLAN que empiecen por <code>fcr</code> ("front-end router", direccionador frontal).</td>
+<td>Sustituya <code>&lt;public_vlan&gt;</code> por el ID de la VLAN pública que desea utilizar para sus nodos trabajadores. Para ver una lista de las VLAN disponibles, ejecute <code>bx cs vlans &lt;location&gt;</code> y busque direccionadores de VLAN que empiecen por <code>fcr</code> ("front-end router", direccionador frontal).</td>
 </tr>
 <tr>
 <td><code>hardware</code></td>
@@ -1298,7 +1482,7 @@ workerNum: <em>&lt;number_workers&gt;</em>
 </tr>
 <tr>
 <td><code>diskEncryption: <em>false</em></code></td>
-<td>Los nodos de trabajador tienen cifrado de disco de forma predeterminada; [más información](cs_security.html#cs_security_worker). Para inhabilitar el cifrado, incluya esta opción y establezca el valor en <code>false</code>.</td></tr>
+<td>Los nodos de trabajador tienen cifrado de disco de forma predeterminada; [más información](cs_secure.html#worker). Para inhabilitar el cifrado, incluya esta opción y establezca el valor en <code>false</code>.</td></tr>
 </tbody></table></p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
@@ -1325,7 +1509,7 @@ empiezan por <code>bcr</code> (back-end router, direccionador de fondo) y los di
 empiezan por <code>fcr</code> (direccionador frontal). La combinación de números y letras que hay tras estos prefijos debe coincidir para poder utilizar dichas VLAN al crear un clúster. No utilice VLAN públicas y privadas que no coincidan para crear un clúster.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>Los nodos de trabajador tienen cifrado de disco de forma predeterminada; [más información](cs_security.html#cs_security_worker). Para inhabilitar el cifrado, incluya esta opción.</dd>
+<dd>Los nodos de trabajador tienen cifrado de disco de forma predeterminada; [más información](cs_secure.html#worker). Para inhabilitar el cifrado, incluya esta opción.</dd>
 </dl>
 
 **Ejemplos**:
@@ -1500,18 +1684,3 @@ Ver una lista de los nodos trabajadores y el estado de cada uno de ellos en un c
 
 <br />
 
-
-## Estados de un clúster
-{: #cs_cluster_states}
-
-Puede ver el estado actual del clúster ejecutando el mandato bx cs clusters y localizando el campo **State**. El estado del clúster proporciona información sobre la disponibilidad y la capacidad del clúster, y posibles problemas que puedan haberse producido.
-{:shortdesc}
-
-|Estado del clúster|Motivo|
-|-------------|------|
-|Despliegue|El nodo Kubernetes maestro no está completamente desplegado. No puede acceder a su clúster.|
-|Pendiente|El nodo Kubernetes maestro está desplegado. Los nodos trabajadores se están suministrando y aún no están disponibles en el clúster. Puede acceder al clúster, pero no puede desplegar apps en el clúster.|
-|Normal|Todos los nodos trabajadores de un clúster están activos y en ejecución. Puede acceder al clúster y desplegar apps en el clúster.|
-|Aviso|Al menos un nodo trabajador del clúster no está disponible, pero los otros nodos trabajadores están disponibles y pueden asumir la carga de trabajo. <ol><li>Obtenga una lista de los nodos trabajadores del clúster y anote el ID de los nodos trabajadores con el estado <strong>Aviso</strong>.<pre class="pre"><code>bx cs workers &lt;cluster_name_or_id&gt;</code></pre><li>Obtenga los detalles de un nodo trabajador.<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre><li>Revise los campos <strong>State</strong>, <strong>Status</strong> y <strong>Details</strong> para ver el problema raíz por el que el nodo trabajador está inactivo.</li><li>Si el nodo trabajador casi ha alcanzado el límite de memoria o de espacio de disco, reduzca la carga de trabajo del nodo trabajador o añada un nodo trabajador al clúster para ayudar a equilibrar la carga de trabajo.</li></ol>|
-|Crítico|No se puede acceder al nodo Kubernetes maestro o todos los nodos trabajadores del clúster están inactivos. <ol><li>Obtenga una lista de los nodos trabajadores del clúster.<pre class="pre"><code>bx cs workers &lt;cluser_name_or_id&gt;</code></pre><li>Obtener los detalles de cada nodo trabajador.<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre></li><li>Revise los campos <strong>State</strong> y <strong>Status</strong> para ver el problema raíz por el que el nodo trabajador está inactivo.<ul><li>Si el estado del nodo trabajador es <strong>Provision_failed</strong>, es posible que no tenga los permisos necesarios para suministrar un nodo trabajador desde el portafolio de infraestructura de IBM Cloud (SoftLayer). Para ver los permisos necesarios, consulte [Configuración del acceso al portafolio de infraestructura de IBM Cloud (SoftLayer) para crear clústeres de Kubernetes estándares](cs_planning.html#cs_planning_unify_accounts).</li><li>Si el campo state del nodo trabajador es <strong>Critical</strong> y el campo status es <strong>Not Ready</strong>, significa que puede que el nodo trabajador no pueda conectarse a la infraestructura de IBM Cloud (SoftLayer). Para resolver el problema, empiece ejecutando <code>bx cs worker-reboot --hard CLUSTER WORKER</code>. Si el mandato no resuelve el problema, ejecute <code>bx cs worker reload CLUSTER WORKER</code>.</li><li>Si el campo state del nodo trabajador es <strong>Critical</strong> y el campo status es <strong>Out of disk</strong>, significa que el nodo trabajador ha agotado su capacidad. Puede reducir la carga de trabajo del nodo trabajador o añadir un nodo trabajador al clúster para ayudar a equilibrar la carga de trabajo.</li><li>Si el campo state del nodo trabajador es <strong>Critical</strong> y el campo status es <strong>Unknown</strong>, significa que el nodo Kubernetes maestro no está disponible. Para ponerse en contacto con el equipo de soporte de {{site.data.keyword.Bluemix_notm}}, abra una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support).</li></ul></li></ol>|
-{: caption="Tabla 3. Estados de un clúster" caption-side="top"}

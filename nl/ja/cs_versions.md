@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2017
-lastupdated: "2017-12-18"
+  years: 2014, 2018
+lastupdated: "2018-01-05"
 
 ---
 
@@ -22,13 +22,24 @@ lastupdated: "2017-12-18"
 {:shortdesc}
 
 {{site.data.keyword.containershort_notm}} は、Kubernetes のさまざまなバージョンをサポートします。 クラスターを作成または更新するときには、異なるバージョンを指定しない限り、デフォルトのバージョンが使用されます。 使用可能な Kubernetes のバージョンは以下のとおりです。
-- 1.8.4
+- 1.8.6
 - 1.7.4 (デフォルト・バージョン)
 - 1.5.6
 
-以下の情報は、クラスターを新しいバージョンに更新するときに、デプロイされたアプリに影響を与える可能性が高い更新を要約しています。 Kubernetes の各バージョンでの変更内容を示す完全なリストについては、[Kubernetes changelog ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md) を参照してください。
+ローカルまたはクラスターで実行されている Kubernetes CLI のバージョンを調べるには、以下のコマンドを実行して、バージョンを確認します。
 
-更新処理について詳しくは、[クラスターの更新](cs_cluster.html#cs_cluster_update)と[ワーカー・ノードの更新](cs_cluster.html#cs_cluster_worker_update)を参照してください。
+```
+kubectl version  --short
+```
+{: pre}
+
+出力例:
+
+```
+Client Version: 1.7.4
+Server Version: 1.7.4
+```
+{: screen}
 
 ## 更新タイプ
 {: #version_types}
@@ -44,6 +55,11 @@ Kubernetes には以下のようなバージョン更新のタイプがありま
 {: caption="Kubernetes 更新の影響" caption-side="top"}
 
 デフォルトでは、Kubernetes マスターを更新できるのは 2 つ先のマイナー・バージョンまでです。 例えば、現在のマスターがバージョン 1.5 であり 1.8 に更新する計画の場合、まず 1.7 に更新する必要があります。 続けて更新を強制実行することは可能ですが、2 つのマイナー・バージョンを超える更新は予期しない結果を生じることがあります。
+{: tip}
+
+以下の情報は、クラスターを新しいバージョンに更新するときに、デプロイされたアプリに影響を与える可能性が高い更新を要約しています。 Kubernetes の各バージョンでの変更内容を示す完全なリストについては、[Kubernetes changelog ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md) を参照してください。
+
+更新処理について詳しくは、[クラスターの更新](cs_cluster_update.html#master)と[ワーカー・ノードの更新](cs_cluster_update.html#worker_node)を参照してください。
 
 ## バージョン 1.8
 {: #cs_v18}
@@ -62,7 +78,7 @@ Kubernetes バージョン 1.8 に更新する際に、行うことが必要と�
 <thead>
 <tr>
 <th>タイプ</th>
-<th>説明
+<th>説明</th>
 </tr>
 </thead>
 <tbody>
@@ -80,27 +96,27 @@ Kubernetes バージョン 1.8 に更新する際に、行うことが必要と�
 <thead>
 <tr>
 <th>タイプ</th>
-<th>説明
+<th>説明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Kubernetes ダッシュボード・ログイン</td>
-<td>バージョン 1.8 で Kubernetes ダッシュボードにアクセスするための URL は変更され、ログイン・プロセスには新しい認証ステップが含まれています。 詳しくは、[Kubernetes ダッシュボードにアクセスする](cs_apps.html#cs_cli_dashboard)を参照してください。</td>
+<td>バージョン 1.8 で Kubernetes ダッシュボードにアクセスするための URL は変更され、ログイン・プロセスには新しい認証ステップが含まれています。 詳しくは、[Kubernetes ダッシュボードにアクセスする](cs_app.html#cli_dashboard)を参照してください。</td>
 </tr>
-<tr>
 <tr>
 <td>Kubernetes ダッシュボードの権限</td>
 <td>バージョン 1.8 のクラスター・リソースを表示するユーザーが資格情報を使用してログインするように強制するには、1.7 ClusterRoleBinding RBAC 許可を除去します。 `kubectl delete clusterrolebinding -n kube-system kubernetes-dashboard` を実行します。</td>
 </tr>
 <tr>
 <td>`kubectl delete`</td>
-<td>`kubectl delete` コマンドは、ワークロード API オブジェクトを削除する前に、ポッドの場合のようにオブジェクトをスケールダウンすることはなくなりました。 オブジェクトのスケールダウンが必要な場合は、オブジェクトを削除する前に kubectl scale ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale) を使用してください。</td>
+<td>`kubectl delete` コマンドは、ワークロード API オブジェクトを削除する前に、ポッドの場合のようにオブジェクトをスケールダウンすることはなくなりました。 オブジェクトのスケールダウンが必要な場合は、オブジェクトを削除する前に [kubectl scale ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale) を使用してください。</td>
 </tr>
 <tr>
 <td>`kubectl run`</td>
-<td>`kubectl run` コマンドは、`--env` のために、コンマ区切りの引数ではなく複数のフラグを使用する必要があります。 例えば、<code>kubectl run --env <x>=<y>,<z>=&lt;a&gt;</code> ではなく <code>kubectl run --env <x>=<y> --env <z>=&lt;a&gt;</code> を実行します。</td>
+<td>`kubectl run` コマンドは、`--env` のために、コンマ区切りの引数ではなく複数のフラグを使用する必要があります。 例えば、<code>kubectl run --env &lt;x&gt;=&lt;y&gt;,&lt;z&gt;=&lt;a&gt;</code> ではなく <code>kubectl run --env &lt;x&gt;=&lt;y&gt; --env &lt;z&gt;=&lt;a&gt;</code> を実行します。 </td>
 </tr>
+<tr>
 <td>`kubectl stop`</td>
 <td>`kubectl stop` コマンドは使用できなくなりました。</td>
 </tr>
@@ -125,7 +141,7 @@ Kubernetes バージョン 1.7 に更新する際に、行うことが必要と�
 <thead>
 <tr>
 <th>タイプ</th>
-<th>説明
+<th>説明</th>
 </tr>
 </thead>
 <tbody>
@@ -154,7 +170,7 @@ Kubernetes バージョン 1.7 に更新する際に、行うことが必要と�
 <thead>
 <tr>
 <th>タイプ</th>
-<th>説明
+<th>説明</th>
 </tr>
 </thead>
 <tbody>
@@ -177,8 +193,8 @@ Kubernetes バージョン 1.7 に更新する際に、行うことが必要と�
   ```
   kubectl get pods -n <namespace> -o yaml | grep "scheduler.alpha.kubernetes.io/affinity" && echo "Action required"
   ```
-  </br>
-  <li>`「Action required」`が返された場合、`scheduler.alpha.kubernetes.io/affinity` アノテーションではなく [_PodSpec_ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) の _affinity_ フィールドを使用します。
+  </br></li>
+  <li>`「Action required」`が返された場合、`scheduler.alpha.kubernetes.io/affinity` アノテーションではなく [_PodSpec_ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) の _affinity_ フィールドを使用します。</li>
 </ol>
 </tr>
 <tr>
@@ -209,7 +225,7 @@ Kubernetes バージョン 1.7 に更新する際に、行うことが必要と�
   ```
   kubectl annotate ns <namespace> --overwrite "net.beta.kubernetes.io/network-policy-"
   ```
-  </ol>
+  </li></ol>
 </tr>
 <tr>
 <td>耐障害性</td>
@@ -236,7 +252,7 @@ Kubernetes バージョン 1.7 に更新する際に、行うことが必要と�
   `kubectl annotate nodes <node> scheduler.alpha.kubernetes.io/taints-`
   <li>各ノードにテイントを追加します。</br>
   `kubectl taint node <node> <taint>`
-  </ol>
+  </li></ol>
 </tr>
 <tr>
 <td>StatefulSet ポッド DNS</td>

@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-01"
 
 ---
@@ -131,14 +131,14 @@ et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré
 
 6.  Pour générer des images locales et les envoyer par commande push vers votre espace de nom du registre, [installez Docker ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.docker.com/community-edition#/download). Si vous utilisez Windows 8 ou version antérieure, vous pouvez installer à la place la trousse [Docker Toolbox ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.docker.com/products/docker-toolbox). L'interface CLI de Docker est utilisée pour générer des images d'applications. Le préfixe pour l'exécution de commandes via l'interface CLI de Docker est `docker`.
 
-Ensuite, passez à l'étape [Création de clusters Kubernetes depuis l'interface CLI d'{{site.data.keyword.containershort_notm}}](cs_cluster.html#cs_cluster_cli).
+Ensuite, passez à l'étape [Création de clusters Kubernetes depuis l'interface CLI d'{{site.data.keyword.containershort_notm}}](cs_clusters.html#clusters_cli).
 
 Pour des informations de référence sur ces interfaces de ligne de commande,
 reportez-vous à la documentation relative à ces outils.
 
 -   [Commandes `bx`](/docs/cli/reference/bluemix_cli/bx_cli.html)
 -   [Commandes `bx cs`](cs_cli_reference.html#cs_cli_reference)
--   [Commandes `kubectl` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)
+-   [Commandes `kubectl` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)
 -   [Commandes `bx cr`](/docs/cli/plugins/registry/index.html)
 
 <br />
@@ -150,7 +150,7 @@ reportez-vous à la documentation relative à ces outils.
 Vous pouvez utiliser les commandes fournies avec l'interface de ligne de commande Kubernetes pour gérer les clusters dans {{site.data.keyword.Bluemix_notm}}. Toutes les commandes `kubectl` disponibles dans Kubernetes 1.7.4 sont prises en charge pour être utilisées avec des clusters dans {{site.data.keyword.Bluemix_notm}}. Après avoir créé un cluster, définissez le contexte de votre interface de ligne de commande locale vers ce cluster à l'aide d'une variable d'environnement. Vous pouvez ensuite exécuter les commandes Kubernetes `kubectl` pour utiliser votre cluster dans {{site.data.keyword.Bluemix_notm}}.
 {:shortdesc}
 
-Avant de pouvoir lancer des commandes `kubectl`, vous devez [installer les interfaces CLI requises](#cs_cli_install) et [créer un cluster](cs_cluster.html#cs_cluster_cli).
+Avant de pouvoir lancer des commandes `kubectl`, vous devez [installer les interfaces CLI requises](#cs_cli_install) et [créer un cluster](cs_clusters.html#clusters_cli).
 
 1.  Connectez-vous à l'interface CLI de {{site.data.keyword.Bluemix_notm}}. A l'invite, entrez vos données d'identification {{site.data.keyword.Bluemix_notm}}. Pour stipuler une région {{site.data.keyword.Bluemix_notm}}, [incluez son noeud final d'API](cs_regions.html#bluemix_regions).
 
@@ -667,7 +667,7 @@ L'API {{site.data.keyword.containershort_notm}} requiert de fournir des informat
         </tbody>
         </table>
 
-5.  Examinez la docuemntation de l'API [{{site.data.keyword.containershort_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.bluemix.net/swagger-api) pour la liste des API prises en charge.
+5.  Examinez la documentation de l'API [{{site.data.keyword.containershort_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://containers.bluemix.net/swagger-api) pour la liste des API prises en charge.
 
 <br />
 

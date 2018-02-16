@@ -1,6 +1,8 @@
 ---
 
-copyright: years: 2014, 2017 lastupdated: "2017-12-18"
+copyright:
+  years: 2014, 2018
+lastupdated: "2017-12-18"
 
 ---
 
@@ -43,7 +45,7 @@ Este tutorial é destinado a desenvolvedores de software e administradores de re
 ## Pré-requisitos
 
 -  [Instale a CLI](cs_cli_install.html#cs_cli_install_steps)
--  [Crie um cluster](cs_cluster.html#cs_cluster_cli)
+-  [Crie um cluster](cs_clusters.html#clusters_cli)
 -  [Direcione a CLI para o seu cluster](cs_cli_install.html#cs_cli_configure)
 
 ## Lição 1: Fazer download e instalar o Istio

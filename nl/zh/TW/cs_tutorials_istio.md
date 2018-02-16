@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-18"
 
 ---
@@ -45,7 +45,7 @@ lastupdated: "2017-12-18"
 ## 必要條件
 
 -  [安裝 CLI](cs_cli_install.html#cs_cli_install_steps)
--  [建立叢集](cs_cluster.html#cs_cluster_cli)
+-  [建立叢集](cs_clusters.html#clusters_cli)
 -  [將 CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)
 
 ## 課程 1：下載並安裝 Istio

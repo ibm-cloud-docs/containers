@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-08"
 
 ---
@@ -274,7 +274,7 @@ lastupdated: "2017-12-08"
     <table summary="expose 指令參數的相關資訊。">
     <caption>表 1. 指令參數</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png"/> expose 參數的相關資訊</th>
+    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 進一步瞭解 expose 參數</th>
     </thead>
     <tbody>
     <tr>
@@ -396,7 +396,7 @@ lastupdated: "2017-12-08"
 
 ![部署設定](images/cs_app_tutorial_components2.png)
 
-在前一個指導教學中，您有自己的帳戶和一個具有一個工作者節點的叢集。在本課程中，您將配置一個部署，並部署三個 Hello World 應用程式實例。每一個實例都會部署在 Kubernetes Pod 中，作為工作者節點中抄本集的一部分。若要讓它可公開使用，請同時建立 Kubernetes 服務。 
+在前一個指導教學中，您有自己的帳戶和一個具有一個工作者節點的叢集。在本課程中，您將配置一個部署，並部署三個 Hello World 應用程式實例。每一個實例都會部署在 Kubernetes Pod 中，作為工作者節點中抄本集的一部分。若要讓它可公開使用，請同時建立 Kubernetes 服務。
 
 如配置 Script 中所定義，Kubernetes 可以使用可用性檢查來查看 Pod 中的容器是否正在執行中。例如，這些檢查可能會捕捉到死鎖、應用程式的執行位置，但無法繼續進行。將處於此狀況的容器重新啟動，有助於讓應用程式提高可用性，而不管有錯誤。然後，Kubernetes 會使用就緒檢查，以瞭解容器何時準備好，可以重新開始接受資料流量。當 Pod 的容器備妥時，就會將 Pod 視為備妥。當 Pod 備妥時，就會重新啟動。在 Stage2 應用程式中，每 15 秒，應用程式就會逾時。若已在配置 Script 中配置性能檢查，當性能檢查發現應用程式有問題時，就會重建容器。
 
@@ -600,7 +600,7 @@ service "hw-demo-service" deleted
 
 ![部署設定](images/cs_app_tutorial_components3.png)
 
-在前一個指導教學中，您有自己的帳戶和一個具有一個工作者節點的叢集。在本課程中，您將在 {{site.data.keyword.Bluemix_notm}} 帳戶中建立 Watson Tone Analyzer 服務的實例，並配置兩個部署，分別部署應用程式的每一個元件。每一個元件都會部署在工作者節點的 Kubernetes Pod 中。若要讓這兩個元件可公開使用，請同時對每一個元件建立一個 Kubernetes 服務。 
+在前一個指導教學中，您有自己的帳戶和一個具有一個工作者節點的叢集。在本課程中，您將在 {{site.data.keyword.Bluemix_notm}} 帳戶中建立 Watson Tone Analyzer 服務的實例，並配置兩個部署，分別部署應用程式的每一個元件。每一個元件都會部署在工作者節點的 Kubernetes Pod 中。若要讓這兩個元件可公開使用，請同時對每一個元件建立一個 Kubernetes 服務。
 
 
 ### 課程 3a：部署 Watson Tone Analyzer 應用程式
@@ -813,7 +813,7 @@ service "hw-demo-service" deleted
 ### 課程 3b. 更新執行中的 Watson Tone Analyzer 部署
 {: #lesson3b}
 
-部署執行時，您可以編輯部署來變更 Pod 範本中的值。此課程包括更新已使用的映像檔。公關公司想要在部署中變更應用程式。
+部署執行時，您可以編輯部署來變更 Pod 範本中的值。此課程包括更新已使用的映像檔。公關公司想要變更部署裡的應用程式。
 
 變更映像檔的名稱：
 
@@ -837,7 +837,7 @@ service "hw-demo-service" deleted
 
 3.  儲存變更，並結束編輯器。
 
-4.  將變更套用至執行中部署。
+4.  將變更套用至執行中的部署。
 
     ```
         kubectl rollout status deployment/watson-talk-pod
@@ -882,5 +882,6 @@ bx cs cluster-rm <pr_firm_cluster>
 {: pre}
 
 ## 下一步為何？
+{: #next}
 
 請嘗試探索 [developerWorks ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/code/journey/category/container-orchestration/) 上的容器編排行程。

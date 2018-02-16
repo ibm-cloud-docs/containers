@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-11-02"
 
 ---
@@ -130,7 +130,7 @@ lastupdated: "2017-11-02"
         <table>
         <caption>表 2. 了解 YAML 文件的组成部分</caption>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> 了解 YAML 文件的组成部分</th>
+        <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
         </thead>
         <tbody>
         <tr>

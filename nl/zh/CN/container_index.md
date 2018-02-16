@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-13"
 
 ---
@@ -64,6 +64,6 @@ lastupdated: "2017-12-13"
 集群启动并开始运行后，请首先对集群执行一些操作。
 
 * [安装 CLI 以开始使用集群。](cs_cli_install.html#cs_cli_install)
-* [在集群中部署应用程序。](cs_apps.html#cs_apps_cli)
-* [创建具有多个节点的标准集群以获得更高可用性。](cs_cluster.html#cs_cluster_ui)
+* [在集群中部署应用程序。](cs_app.html#app_cli)
+* [创建具有多个节点的标准集群以获得更高可用性。](cs_clusters.html#clusters_ui)
 * [在 {{site.data.keyword.Bluemix_notm}} 中设置自己的专用注册表，以存储 Docker 映像并与其他用户共享这些映像。](/docs/services/Registry/index.html)

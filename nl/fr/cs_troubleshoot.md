@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2017
-lastupdated: "2017-12-14"
+  years: 2014, 2018
+lastupdated: "2018-01-09"
 
 ---
 
@@ -162,7 +162,7 @@ Passez en revue les options permettant de déboguer vos clusters et d'identifier
 
         </br></br>
         Exception liée à l'infrastructure {{site.data.keyword.Bluemix_notm}} : des droits sont nécessaires pour réserver 'Item'.</td>
-        <td>Vous ne disposez peut-être pas des droits nécessaires pour mettre à disposition un noeud worker à partir du portefeuille d'infrastructure IBM Cloud (SoftLayer). Voir [Configuration de l'accès au portefeuille d'infrastructure IBM Cloud (SoftLayer) pour créer des clusters Kubernetes standard](cs_planning.html#cs_planning_unify_accounts).</td>
+        <td>Vous ne disposez peut-être pas des droits nécessaires pour mettre à disposition un noeud worker à partir du portefeuille d'infrastructure IBM Cloud (SoftLayer). Voir [Configuration de l'accès au portefeuille d'infrastructure IBM Cloud (SoftLayer) pour créer des clusters Kubernetes standard](cs_infrastructure.html#unify_accounts).</td>
       </tr>
     </tbody>
   </table>
@@ -213,39 +213,17 @@ Passez en revue les options dont vous disposez pour déboguer vos déploiements 
 <br />
 
 
-
-
-## Identification des versions de client local et de serveur de kubectl
-
-Pour vérifier quelle version de l'interface CLI de Kubernetes vous utilisez en local ou que votre cluster exécute, lancez la commande suivante et vérifiez la version renvoyée.
-
-```
-kubectl version  --short
-```
-{: pre}
-
-Exemple de sortie :
-
-```
-Client Version: v1.5.6
-        Server Version: v1.5.6
-```
-{: screen}
-
-<br />
-
-
-
-
-## Vous ne pouvez pas vous connecter à votre compte d'infrastructure IBM Cloud (SoftLayer) lors de la création d'un cluster
+## Impossible de se connecter à votre compte d'infrastructure
 {: #cs_credentials}
 
 {: tsSymptoms}
 Lorsque vous créez un nouveau cluster Kubernetes, vous rencontrez le message suivant.
 
 ```
-We were unable to connect to your IBM Cloud infrastructure (SoftLayer) account. Creating a standard cluster requires that you have either a Pay-As-You-Go account that is linked to an IBM Cloud infrastructure (SoftLayer) account term or that you have used the IBM
-{{site.data.keyword.Bluemix_notm}} Container Service CLI to set your {{site.data.keyword.Bluemix_notm}} Infrastructure API keys.
+We were unable to connect to your IBM Cloud infrastructure (SoftLayer) account.
+La création d'un cluster standard nécessite un compte de type Paiement à la carte lié aux
+conditions d'un compte de l'infrastructure IBM Cloud (SoftLayer) ou d'avoir utilisé l'interface de ligne de commande {{site.data.keyword.Bluemix_notm}}
+Container Service pour définir vos clés d'API d'{{site.data.keyword.Bluemix_notm}} Infrastructure.
 ```
 {: screen}
 
@@ -276,7 +254,7 @@ Pour ajouter des données d'identification à votre compte {{site.data.keyword.B
 <br />
 
 
-## Le pare-feu empêche l'exécution de commandes CLI `bx`, `kubectl` ou `calicoctl`
+## Le pare-feu empêche l'exécution de commandes via la ligne de commande
 {: #ts_firewall_clis}
 
 {: tsSymptoms}
@@ -286,10 +264,10 @@ Lorsque vous exécutez des commandes `bx`, `kubectl` ou `calicoctl` depuis l'int
 Des règles réseau d'entreprise empêchent peut-être l'accès depuis votre système local à des noeuds finaux publics via des proxies ou des pare-feux.
 
 {: tsResolve}
-[Autorisez l'accès TCP afin que les commandes CLI fonctionnent](cs_security.html#opening_ports). Cette tâche nécessite d'utiliser une [règle d'accès administrateur](cs_cluster.html#access_ov). Vérifiez votre [règle d'accès actuelle](cs_cluster.html#view_access).
+[Autorisez l'accès TCP afin que les commandes CLI fonctionnent](cs_firewall.html#firewall). Cette tâche nécessite d'utiliser une [règle d'accès administrateur](cs_users.html#access_policies). Vérifiez votre [règle d'accès actuelle](cs_users.html#infra_access).
 
 
-## Pare-feu empêchant la connexion des noeuds d'agent
+## Le pare-feu empêche le cluster de se connecter aux ressources
 {: #cs_firewall}
 
 {: tsSymptoms}
@@ -330,7 +308,7 @@ Si la commande kubectl proxy aboutit, mais que le tableau de bord n'est pas disp
 Vous pouvez disposer d'un pare-feu supplémentaire configuré ou avoir personnalisé vos paramètres de pare-feu existants dans votre compte d'infrastructure IBM Cloud (SoftLayer). {{site.data.keyword.containershort_notm}} requiert que certaines adresses IP et certains ports soient ouverts pour permettre la communication entre le noeud worker et le maître Kubernetes et inversement. Une autre cause peut être que les noeuds d'agent soient bloqués dans une boucle de rechargement.
 
 {: tsResolve}
-[Autorisez le cluster à accéder aux ressources d'infrastructure et à d'autres services](cs_security.html#firewall_outbound). Cette tâche nécessite d'utiliser une [règle d'accès administrateur](cs_cluster.html#access_ov). Vérifiez votre [règle d'accès actuelle](cs_cluster.html#view_access).
+[Autorisez le cluster à accéder aux ressources d'infrastructure et à d'autres services](cs_firewall.html#firewall_outbound). Cette tâche nécessite d'utiliser une [règle d'accès administrateur](cs_users.html#access_policies). Vérifiez votre [règle d'accès actuelle](cs_users.html#infra_access).
 
 <br />
 
@@ -350,6 +328,47 @@ Utilisez des [ensembles de démons ![Icône de lien externe](../icons/launch-gly
 
 <br />
 
+
+
+## La liaison d'un service à un cluster renvoie une erreur due à une utilisation du même nom
+{: #cs_duplicate_services}
+
+{: tsSymptoms}
+Lorsque vous exécutez la commande `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>`, le message suivant s'affiche. 
+
+```
+Multiple services with the same name were found.
+Run 'bx service list' to view available Bluemix service instances...
+```
+{: screen}
+
+{: tsCauses}
+Il se peut que plusieurs instances de service aient le même nom dans différentes régions.
+
+{: tsResolve}
+Utilisez l'identificateur global unique (GUID) du service au lieu du nom de l'instance de service dans la commande `bx cs cluster-service-bind`.
+
+1. [Connectez-vous à la région hébergeant l'instance de service à lier.](cs_regions.html#bluemix_regions)
+
+2. Extrayez l'identificateur global unique (GUID) de l'instance de service.
+  ```
+  bx service show <service_instance_name> --guid
+  ```
+  {: pre}
+
+  Sortie :
+  ```
+  Invoking 'cf service <service_instance_name> --guid'...
+  <service_instance_GUID>
+  ```
+  {: screen}
+3. Liez à nouveau le service au cluster.
+  ```
+  bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_GUID>
+  ```
+  {: pre}
+
+<br />
 
 
 
@@ -401,7 +420,7 @@ Mettez manuellement à jour la référence de l'adresse IP privée pour qu'elle 
   ```
   {: screen}
 
-2.  Installez l'[interface de ligne de commande Calico](cs_security.html#adding_network_policies).
+2.  Installez l'[interface de ligne de commande Calico](cs_network_policy.html#adding_network_policies).
 3.  Répertoriez les noeuds d'agent disponibles dans Calico. Remplacez <path_to_file> par le chemin d'accès local au fichier de configuration Calico.
 
   ```
@@ -448,7 +467,7 @@ Lorsque vous exécutez `kubectl get pods`, vous constatez que des pods sont touj
 Si vous venez juste de créer le cluster Kubernetes, il se peut que les noeuds d'agent soient encore en phase de configuration. S'il s'agit d'un cluster existant, sa capacité est peut-être insuffisante pour y déployer le pod.
 
 {: tsResolve}
-Cette tâche nécessite d'utiliser une [règle d'accès administrateur](cs_cluster.html#access_ov). Vérifiez votre [règle d'accès](cs_cluster.html#view_access) actuelle.
+Cette tâche nécessite d'utiliser une [règle d'accès administrateur](cs_users.html#access_policies). Vérifiez votre [règle d'accès actuelle](cs_users.html#infra_access).
 
 Si vous venez de créer le cluster Kubernetes, exécutez la commande suivante et attendez l'initialisation des noeuds d'agent.
 
@@ -532,22 +551,37 @@ Il peut arriver que les conteneurs ne démarrent pas lorsque le quota de registr
 {: tsSymptoms}
 Lorsque vous accéder au tableau de bord Kibana, les journaux ne s'affichent pas.
 
-{: tsCauses}
-Ils est possible que les journaux ne s'affichent pas pour l'une des raisons suivantes :<br/><br/>
-    A. Aucune configuration de journalisation n'a été définie.<br/><br/>
-    B. L'état du cluster n'indique pas `Normal`.<br/><br/>
-    C. Le quota de stockage de journaux a été ateint.<br/><br/>
-    D. Si vous avez spécifié un espace lors de la création du cluster, le propréitaire du compte ne dispose pas de droits Responsable, Développeur ou Auditeur sur cet espace.<br/><br/>
-    E. Aucun événement déclencheur de journal ne s'est encore produit dans votre pod.<br/><br/>
-
 {: tsResolve}
-Passez en revue les options suivantes pour examiner chacune des raisons possibles du défaut d'affichage des journaux :
+Ci-dessous figurent les motifs pour lesquels les journaux peuvent ne pas apparaître, ainsi que les étapes de résolution correspondantes :
 
-A. Pour envoyer des journaux, vous devez d'abord créer une configuration de journalisation pour acheminer des journaux à {{site.data.keyword.loganalysislong_notm}}. Pour créer une configuration de journalisation, voir [Activation du transfert de journaux](cs_cluster.html#cs_log_sources_enable).<br/><br/>
-B. Pour vérifier l'état de votre cluster, voir [Débogage des clusters](cs_troubleshoot.html#debug_clusters).<br/><br/>
-C. Pour augmenter vos limites de stockage de journaux, reportez-vous à la [documentation {{site.data.keyword.loganalysislong_notm}}](https://console.bluemix.net/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs).<br/><br/>
-D. Pour changer les droits d'accès à {{site.data.keyword.containershort_notm}} pour le propriétaire du compte, voir [Gestion de l'accès au cluster](cs_cluster.html#cs_cluster_user). Une fois les droits modifiés, il peut s'écouler jusqu'à 24 heures avant que les journaux commencent à s'afficher.<br/><br/>
-E. Pour déclencher un journal pour un événement, vous pouvez déployer Noisy, un exemple de pod qui génère plusieurs événements de journal, sur un noeud worker dans votre cluster.<br/>
+<table>
+<col width="40%">
+<col width="60%">
+ <thead>
+ <th>Motifs</th>
+ <th>Procédure de résolution du problème</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td>Aucune configuration de journalisation n'a été définie.</td>
+ <td>Pour que les journaux soient envoyés, vous devez d'abord créer une configuration de journalisation visant à acheminer les journaux à {{site.data.keyword.loganalysislong_notm}}. Pour créer une configuration de journalisation, voir <a href="cs_health.html#log_sources_enable">Activation du transfert de journaux</a>.</td>
+ </tr>
+ <tr>
+ <td>L'état du cluster n'indique pas <code>Normal</code>.</td>
+ <td>Pour vérifier l'état de votre cluster, voir <a href="cs_troubleshoot.html#debug_clusters">Débogage des clusters</a>.</td>
+ </tr>
+ <tr>
+ <td>Le quota de stockage des journaux a été atteint.</td>
+ <td>Pour augmenter vos limites de stockage de journaux, reportez-vous à la <a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs">Documentation d'{{site.data.keyword.loganalysislong_notm}}</a>.</td>
+ </tr>
+ <tr>
+ <td>Si vous avez spécifié un espace lors de la création du cluster, les droits d'accès Responsable, Développeur  ou Auditeur n'ont pas été affectées au propriétaire du compte sur cet espace.</td>
+ <td>Pour modifier les droits d'accès du propriétaire du compte :<ol><li>Pour identifier le propriétaire du compte pour le cluster, exécutez la commande <code>bx cs api-key-info &lt;cluster_name_or_id&gt;</code>.</li><li>Pout attribuer au propriétaire du compte les droits d'accès Responsable, Développeur ou Auditeur dans {{site.data.keyword.containershort_notm}} sur cet espace, voir <a href="cs_users.html#managing">Gestion de l'accès au cluster</a>.</li><li>Pour actualiser le jeton d'accès après que les droits d'accès ont été modifiés, exécutez la commande <code>bx cs logging-config-refresh &lt;cluster_name_or_id&gt;</code>.</li></ol></td>
+ </tr>
+ </tbody></table>
+
+Pour tester les modifications apportées lors de la résolution des incidents, vous pouvez déployer l'exemple de pod Noisy, lequel génère plusieurs événements de journal sur un noeud worker dans votre cluster.
+
   1. [Ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) le cluster dans lequel vous voulez lancer la génération de journaux.
 
   2. Créez le fichier de configuration `deploy-noisy.yaml`.
@@ -574,7 +608,7 @@ E. Pour déclencher un journal pour un événement, vous pouvez déployer Noisy,
         ```
         {:pre}
 
-  4. Au bout de quelques minutes, vos journaux s'affichent dans le tableau de bord Kibana. Pour accéder au tableau de bord Kibana, accédez à l'une des URL suivantes et sélectionnez le compte {{site.data.keyword.Bluemix_notm}} dans lequel vous avez créé le cluster. Si vous avez spécifié un espace lors de la création du cluster, accédez à la place à cet espace.        
+  4. Au bout de quelques minutes, vos journaux s'affichent dans le tableau de bord Kibana. Pour accéder au tableau de bord Kibana, accédez à l'une des URL suivantes et sélectionnez le compte {{site.data.keyword.Bluemix_notm}} dans lequel vous avez créé le cluster. Si vous avez spécifié un espace lors de la création du cluster, accédez à la place à cet espace.
         - Sud et Est des Etats-Unis : https://logging.ng.bluemix.net
         - Sud du Royaume-Uni et Europe centrale : https://logging.eu-fra.bluemix.net
         - Asie-Pacifique sud : https://logging.au-syd.bluemix.net
@@ -604,9 +638,83 @@ Supprimez le pod `kube-dashboard` pour forcer un redémarrage. Le pod est recré
 <br />
 
 
+## Impossible de se connecter à une application via un service d'équilibreur de charge
+{: #cs_loadbalancer_fails}
+
+{: tsSymptoms}
+Vous avez exposé votre application au public en créant un service d'équilibreur de charge dans votre cluster. Lorsque vous avez essayé de vous connecter à votre application via l'adresse IP publique de l'équilibreur de charge, la connexion a échoué ou expiré.
+
+{: tsCauses}
+Il se peut que le service d'équilibreur de charge ne fonctionne pas correctement pour l'une des raisons suivantes :
+
+-   Le cluster est un cluster léger ou un cluster standard avec un seul noeud worker.
+-   Le cluster n'est pas encore complètement déployé.
+-   Le script de configuration pour votre service d'équilibreur de charge comporte des erreurs.
+
+{: tsResolve}
+Pour identifier et résoudre les problèmes liés à votre service d'équilibreur de charge :
+
+1.  Prenez soin de configurer un cluster standard qui est entièrement déployé et qui comporte au moins deux noeuds d'agent afin d'assurer la haute disponibilité de votre service d'équilibreur de charge.
+
+  ```
+  bx cs workers <cluster_name_or_id>
+  ```
+  {: pre}
+
+    Dans la sortie générée par votre interface de ligne de commande, vérifiez que la valeur **Ready** apparaît dans la zone **Status** pour vos noeuds d'agent et qu'une valeur autre **free** est spécifiée dans la zone **Machine Type**
+
+2.  Vérifiez que le fichier de configuration du service d'équilibreur de charge est correct.
+
+  ```
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: myservice
+  spec:
+    type: LoadBalancer
+    selector:
+      <selectorkey>:<selectorvalue>
+    ports:
+     - protocol: TCP
+       port: 8080
+  ```
+  {: pre}
+
+    1.  Vérifiez que vous avez défini **LoadBalancer** comme type de service.
+    2.  Vérifiez que vous avez utilisé les mêmes valeurs **<selectorkey>** et **<selectorvalue>** que celles que vous aviez spécifiées dans la section **label/metadata** lors du déploiement de votre application.
+    3.  Vérifiez que vous avez utilisé le **port** sur lequel votre application est en mode écoute.
+
+3.  Vérifiez votre service d'équilibreur de charge et passez en revue la section **Events** à la recherche d'éventuelles erreurs.
+
+  ```
+  kubectl describe service <myservice>
+  ```
+  {: pre}
+
+    Recherchez les messages d'erreur suivants :
+
+    <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>Pour utiliser le service d'équilibreur de charge, vous devez disposer d'un cluster standard et d'au moins deux noeuds d'agent.</li>
+    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>Ce message d'erreur indique qu'il ne reste aucune adresse IP publique portable à attribuer à votre service d'équilibreur de charge. Pour savoir comment demander des adresses IP publiques portables pour votre cluster, voir la rubrique <a href="cs_subnets.html#subnets">Ajout de sous-réseaux à des clusters</a>. Dès lors que des adresses IP publiques portables sont disponibles pour le cluster, le service d'équilibreur de charge est automatiquement créé.</li>
+    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>Vous avez défini une adresse IP publique portable pour votre service d'équilibreur de charge à l'aide de la section **loadBalancerIP**, or, cette adresse IP publique portable n'est pas disponible dans votre sous-réseau public portable. Modifiez le script de configuration de votre service d'équilibreur de charge et choisissez l'une des adresses IP publiques portables disponibles ou retirez la section **loadBalancerIP** de votre script de sorte qu'une adresse IP publique portable puisse être allouée automatiquement.</li>
+    <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>Vous ne disposez pas de suffisamment de noeuds d'agent pour déployer un service d'équilibreur de charge. Il se pourrait que vous ayez déployé un cluster standard avec plusieurs noeuds d'agent, mais que la mise à disposition des noeuds d'agent ait échoué.</li>
+    <ol><li>Affichez la liste des noeuds d'agent disponibles.</br><pre class="codeblock"><code>kubectl get nodes</code></pre></li>
+    <li>Si au moins deux noeuds d'agent disponibles sont trouvés, affichez les détails de ces noeuds d'agent.</br><pre class="screen"><code>bx cs worker-get [&lt;cluster_name_or_id&gt;] &lt;worker_ID&gt;</code></pre></li>
+    <li>Vérifiez que les ID de VLAN privé et public pour les noeuds worker renvoyés par les commandes <code>kubectl get nodes</code> et <code>bx cs [&lt;cluster_name_or_id&gt;] worker-get</code> correspondent.</li></ol></li></ul>
+
+4.  Si vous utilisez un domaine personnalisé pour vous connecter à votre service d'équilibreur de charge, assurez-vous que votre domaine personnalisé est mappé à l'adresse IP publique de votre service d'équilibreur de charge.
+    1.  Identifiez l'adresse IP publique de votre service d'équilibreur de charge.
+
+      ```
+      kubectl describe service <myservice> | grep "LoadBalancer Ingress"
+      ```
+      {: pre}
+
+    2.  Assurez-vous que votre domaine personnalisé est mappé à l'adresse IP publique portable de votre service d'équilibreur de charge dans le pointeur (enregistrement PTR).
+
+<br />
 
 
-## Echec de la connexion à une application via Ingress
+## Impossible de se connecter à une application via Ingress
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
@@ -720,98 +828,62 @@ Pour identifier et résoudre les problèmes liés à votre contrôleur Ingress :
 
 
 
-
-## Echec de la connexion à une application via un service d'équilibreur de charge
-{: #cs_loadbalancer_fails}
+## Problèmes de valeur confidentielle de l'équilibreur de charge d'application Ingress
+{: #cs_albsecret_fails}
 
 {: tsSymptoms}
-Vous avez exposé votre application au public en créant un service d'équilibreur de charge dans votre cluster. Lorsque vous avez essayé de vous connecter à votre application via l'adresse IP publique de l'équilibreur de charge, la connexion a échoué ou expiré.
+Après avoir déployé une valeur confidentielle d'équilibreur de charge d'application Ingress dans votre cluster, la zone `Description` n'est pas actualisée avec le nom de valeur confidentielle lorsque vous examinez votre certificat dans {{site.data.keyword.cloudcerts_full_notm}}.
 
-{: tsCauses}
-Il se peut que le service d'équilibreur de charge ne fonctionne pas correctement pour l'une des raisons suivantes :
-
--   Le cluster est un cluster léger ou un cluster standard avec un seul noeud worker.
--   Le cluster n'est pas encore complètement déployé.
--   Le script de configuration pour votre service d'équilibreur de charge comporte des erreurs.
+Lorsque vous listez les informations sur la valeur confidentielle de l'équilibreur de charge, son statut indique `*_failed` (Echec). Par exemple, `create_failed`, `update_failed`, `delete_failed`.
 
 {: tsResolve}
-Pour identifier et résoudre les problèmes liés à votre service d'équilibreur de charge :
+Ci-dessous figurent les motifs pour lesquels la valeur confidentielle de l'équilibreur de charge d'application peut échouer, ainsi que les étapes de résolution correspondantes :
 
-1.  Prenez soin de configurer un cluster standard qui est entièrement déployé et qui comporte au moins deux noeuds d'agent afin d'assurer la haute disponibilité de votre service d'équilibreur de charge.
-
-  ```
-  bx cs workers <cluster_name_or_id>
-  ```
-  {: pre}
-
-    Dans la sortie générée par votre interface de ligne de commande, vérifiez que la valeur **Ready** apparaît dans la zone **Status** pour vos noeuds d'agent et qu'une valeur autre **free** est spécifiée dans la zone **Machine Type**
-
-2.  Vérifiez que le fichier de configuration du service d'équilibreur de charge est correct.
-
-  ```
-  apiVersion: v1
-  kind: Service
-  metadata:
-    name: myservice
-  spec:
-    type: LoadBalancer
-    selector:
-      <selectorkey>:<selectorvalue>
-    ports:
-     - protocol: TCP
-       port: 8080
-  ```
-  {: pre}
-
-    1.  Vérifiez que vous avez défini **LoadBalancer** comme type de service.
-    2.  Vérifiez que vous avez utilisé les mêmes valeurs **<selectorkey>** et **<selectorvalue>** que celles que vous aviez spécifiées dans la section **label/metadata** lors du déploiement de votre application.
-    3.  Vérifiez que vous avez utilisé le **port** sur lequel votre application est en mode écoute.
-
-3.  Vérifiez votre service d'équilibreur de charge et passez en revue la section **Events** à la recherche d'éventuelles erreurs.
-
-  ```
-  kubectl describe service <myservice>
-  ```
-  {: pre}
-
-    Recherchez les messages d'erreur suivants :
-    <ul><ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>Pour utiliser le service d'équilibreur de charge, vous devez disposer d'un cluster standard et d'au moins deux noeuds d'agent.
-    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>Ce message d'erreur indique qu'il ne reste aucune adresse IP publique portable à attribuer à votre service d'équilibreur de charge. Pour savoir comment demander des adresses IP publiques portables pour votre cluster, voir la rubrique [Ajout de sous-réseaux à des clusters](cs_cluster.html#cs_cluster_subnet). Dès lors que des adresses IP publiques portables sont disponibles pour le cluster, le service d'équilibreur de charge est automatiquement créé.
-    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips</code></pre></br>Vous avez défini une adresse IP publique portable pour votre service d'équilibreur de charge à l'aide de la section **loadBalancerIP**, or, cette adresse IP publique portable n'est pas disponible dans votre sous-réseau public portable. Modifiez le script de configuration de votre service d'équilibreur de charge et choisissez l'une des adresses IP publiques portables disponibles ou retirez la section **loadBalancerIP** de votre script de sorte qu'une adresse IP publique portable puisse être allouée automatiquement.
-    <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>Vous ne disposez pas de suffisamment de noeuds d'agent pour déployer un service d'équilibreur de charge. Il se pourrait que vous ayez déployé un cluster standard avec plusieurs noeuds d'agent, mais que la mise à disposition des noeuds d'agent ait échoué.
-    <ol><li>Affichez la liste des noeuds d'agent disponibles.</br><pre class="codeblock"><code>kubectl get nodes</code></pre>
-    <li>Si au moins deux noeuds d'agent disponibles sont trouvés, affichez les détails de ces noeuds d'agent.</br><pre class="screen"><code>bx cs worker-get [<cluster_name_or_id>] <worker_ID></code></pre>
-    <li>Vérifiez que les ID de VLAN publics et privés pour les noeuds worker renvoyés par les commandes 'kubectl get nodes' et 'bx cs [<cluster_name_or_id>] worker-get' correspondent.</ol></ul></ul>
-
-4.  Si vous utilisez un domaine personnalisé pour vous connecter à votre service d'équilibreur de charge, assurez-vous que votre domaine personnalisé est mappé à l'adresse IP publique de votre service d'équilibreur de charge.
-    1.  Identifiez l'adresse IP publique de votre service d'équilibreur de charge.
-
-      ```
-      kubectl describe service <myservice> | grep "LoadBalancer Ingress"
-      ```
-      {: pre}
-
-    2.  Assurez-vous que votre domaine personnalisé est mappé à l'adresse IP publique portable de votre service d'équilibreur de charge dans le pointeur (enregistrement PTR).
+<table>
+<col width="40%">
+<col width="60%">
+ <thead>
+ <th>Motifs</th>
+ <th>Procédure de résolution du problème</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td>Les rôles d'accès requis pour télécharger et mettre à jour des données de certificat ne vous ont pas été attribués.</td>
+ <td>Contactez l'administrateur de votre compte afin qu'il vous affecte les rôles **Opérateur** et **Editeur** sur votre instance {{site.data.keyword.cloudcerts_full_notm}}. Pour plus de détails, voir <a href="/docs/services/certificate-manager/about.html#identity-access-management">Identity and Access Management</a> pour {{site.data.keyword.cloudcerts_short}}.</td>
+ </tr>
+ <tr>
+ <td>Le CRN de certificat indiqué lors de la création, de la mise à jour ou de la suppression ne relève pas du même compte que le cluster.</td>
+ <td>Vérifiez que le CRN de certificat que vous avez fourni est importé dans une instance du service {{site.data.keyword.cloudcerts_short}} déployée dans le même compte que votre cluster.</td>
+ </tr>
+ <tr>
+ <td>Le CRN de certificat fourni lors de la création est incorrect.</td>
+ <td><ol><li>Vérifiez l'exactitude de la chaîne de CRN de certificat soumise.</li><li>S'il s'avère que le CRN de certificat est correct, essayez de mettre à jour sa valeur confidentielle. <pre class="pre"><code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li><li>Si cette commande débouche sur le statut <code>update_failed</code> (échec de la mise à jour), supprimez la valeur confidentielle. <pre class="pre"><code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt;</code></pre></li><li>Déployez à nouveau la valeur confidentielle. <pre class="pre"><code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li></ol></td>
+ </tr>
+ <tr>
+ <td>Le CRN de certificat soumis lors de la mise à jour est incorrect.</td>
+ <td><ol><li>Vérifiez l'exactitude de la chaîne de CRN de certificat soumise.</li><li>S'il s'avère que le CRN de certificat est correct, supprimez sa valeur confidentielle. <pre class="pre"><code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt;</code></pre></li><li>Déployez à nouveau la valeur confidentielle. <pre class="pre"><code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li><li>Essayez de mettre à jour la valeur confidentielle. <pre class="pre"><code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li></ol></td>
+ </tr>
+ <tr>
+ <td>Le service {{site.data.keyword.cloudcerts_long_notm}} est confronté à un temps d'indisponibilité.</td>
+ <td>Vérifiez que votre service {{site.data.keyword.cloudcerts_short}} est opérationnel.</td>
+ </tr>
+ </tbody></table>
 
 <br />
 
 
 
-
-
-
-
-## Echec de l'extraction de l'URL ETCD pour la configuration de l'interface CLI de Calico
+## Impossible d'extraire l'URL ETCD pour la configuration d'interface CLI de Calico
 {: #cs_calico_fails}
 
 {: tsSymptoms}
-Lorsque vous extrayez l'URL `<ETCD_URL>` pour [ajouter des règles réseau](cs_security.html#adding_network_policies), vous obtenez le message d'erreur `calico-config not found`.
+Lorsque vous extrayez l'URL `<ETCD_URL>` pour [ajouter des règles réseau](cs_network_policy.html#adding_network_policies), vous obtenez le message d'erreur `calico-config not found`.
 
 {: tsCauses}
-Votre cluster n'est pas à la (version Kubernetes 1.7)[cs_versions.html] ou ultérieure.
+Votre cluster n'est pas à la [version Kubernetes 1.7](cs_versions.html) ou ultérieure.
 
 {: tsResolve}
-(Mettez à jour votre cluster)[cs_cluster.html#cs_cluster_update] ou extrayez l'URL `<ETCD_URL>` avec des commandes compatibles avec les versions antérieures de Kubernetes.
+[Mettez à jour votre cluster](cs_cluster_update.html#master) ou extrayez l'`<ETCD_URL>` avec des commandes compatibles avec les versions antérieures de Kubernetes.
 
 Pour extraire l'URL `<ETCD_URL>`, Exécutez l'une des commandes suivantes :
 
@@ -829,7 +901,7 @@ Pour extraire l'URL `<ETCD_URL>`, Exécutez l'une des commandes suivantes :
     <li> Localisez la valeur des noeuds finaux ETCD. Exemple : <code>https://169.1.1.1:30001</code>
     </ol>
 
-Lorsque vous extrayez l'URL `<ETCD_URL>`, passez aux étapes répertoriées dans (Ajout de règles réseau)[cs_security.html#adding_network_policies].
+Lorsque vous extrayez l'URL `<ETCD_URL>`, continuez avec les étapes mentionnées dans (Ajout de règles réseau)[cs_network_policy.html#adding_network_policies].
 
 <br />
 

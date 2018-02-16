@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-18"
 
 ---
@@ -46,7 +46,7 @@ Esta guía de aprendizaje está destinada a los desarrolladores de software y ad
 ## Requisitos previos
 
 -  [Instalar la CLI](cs_cli_install.html#cs_cli_install_steps)
--  [Crear un clúster](cs_cluster.html#cs_cluster_cli)
+-  [Crear un clúster](cs_clusters.html#clusters_cli)
 -  [Definir el clúster como destino de la CLI](cs_cli_install.html#cs_cli_configure)
 
 ## Lección 1: Descargar e instalar Istio

@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-01"
 
 ---
@@ -133,7 +133,7 @@ verwenden Sie die bereitgestellte URL in Ihrer CLI-Ausgabe, um Ihren einmaligen 
 
 6.  Um Images lokal zu erstellen und per Push-Operation an Ihren Registry-Namensbereich übertragen zu können, müssen Sie [Docker installieren ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.docker.com/community-edition#/download). Wenn Sie Windows 8 oder älter verwenden, können Sie stattdessen [Docker Toolbox ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.docker.com/products/docker-toolbox) installieren. Die Befehlszeilenschnittstelle von Docker wird verwendet, um Apps zu Images zu kompilieren. Das Präfix zum Ausführen von Befehlen über die Docker-CLI lautet `docker`.
 
-Beginnen Sie anschließend damit, [Kubernetes-Cluster über die CLI mit {{site.data.keyword.containershort_notm}} zu erstellen](cs_cluster.html#cs_cluster_cli).
+Beginnen Sie anschließend damit, [Kubernetes-Cluster über die CLI mit {{site.data.keyword.containershort_notm}} zu erstellen](cs_clusters.html#clusters_cli).
 
 Referenzinformationen zu diesen CLIs finden Sie in der Dokumentation zu diesen Tools.
 
@@ -154,7 +154,7 @@ mit einer Umgebungsvariablen auf diesen Cluster festlegen. Anschließend können
 um in {{site.data.keyword.Bluemix_notm}} mit Ihrem Cluster zu arbeiten.
 {:shortdesc}
 
-Damit Sie `kubectl`-Befehle ausführen können, [müssen Sie die erforderlichen Befehlszeilenschnittstellen installieren](#cs_cli_install) und [einen Cluster erstellen](cs_cluster.html#cs_cluster_cli).
+Damit Sie `kubectl`-Befehle ausführen können, [müssen Sie die erforderlichen Befehlszeilenschnittstellen (CLIs) installieren](#cs_cli_install) und [einen Cluster erstellen](cs_clusters.html#clusters_cli).
 
 1.  Melden Sie sich an der {{site.data.keyword.Bluemix_notm}}-CLI an. Geben Sie Ihre {{site.data.keyword.Bluemix_notm}}-Berechtigungsnachweise ein, wenn Sie dazu aufgefordert werden. Zur Angabe einer {{site.data.keyword.Bluemix_notm}}-Region müssen Sie den [API-Endpunkt einschließen](cs_regions.html#bluemix_regions).
 
@@ -169,7 +169,7 @@ verwenden Sie die bereitgestellte URL in Ihrer CLI-Ausgabe, um Ihren einmaligen 
   2.  Wählen Sie ein {{site.data.keyword.Bluemix_notm}}-Konto aus. Wenn Sie mehreren {{site.data.keyword.Bluemix_notm}}-Organisationen zugeordnet sind,
 wählen Sie die Organisation aus, in der der Cluster erstellt wurde. Cluster sind für eine Organisation spezifisch, jedoch von einem {{site.data.keyword.Bluemix_notm}}-Bereich unabhängig. Daher ist es nicht erforderlich, einen Bereich auszuwählen.
 
-  3.  Wenn Sie Kubernetes-Cluster in einer anderen als der zuvor ausgewählten {{site.data.keyword.Bluemix_notm}}-Region erstellen wollen, führen Sie `bx cs region-set` aus. 
+  3.  Wenn Sie Kubernetes-Cluster in einer anderen als der zuvor ausgewählten {{site.data.keyword.Bluemix_notm}}-Region erstellen wollen, führen Sie `bx cs region-set` aus.
 
   4.  Listen Sie alle Cluster im Konto auf, um den Namen des Clusters zu ermitteln.
 
@@ -182,7 +182,7 @@ wählen Sie die Organisation aus, in der der Cluster erstellt wurde. Cluster sin
       1.  Ermitteln Sie den Befehl zum Festlegen der Umgebungsvariablen und laden Sie die Kubernetes-Konfigurationsdateien herunter.
 
           ```
-          bx cs cluster-config <clustername_oder_id>
+          bx cs cluster-config <clustername_oder_-id>
           ```
           {: pre}
 
@@ -450,7 +450,7 @@ Die {{site.data.keyword.containershort_notm}}-API benötigt Headerinformationen,
     ```
     {: pre}
 
-    Um eine {{site.data.keyword.Bluemix_notm}}-Region anzugeben, [sehen Sie nach, welche Regionsabkürzungen in den API-Endpunkten verwendet werden](cs_regions.html#bluemix_regions). 
+    Um eine {{site.data.keyword.Bluemix_notm}}-Region anzugeben, [sehen Sie nach, welche Regionsabkürzungen in den API-Endpunkten verwendet werden](cs_regions.html#bluemix_regions).
 
     <table summary-"Input parameters to get tokens">
     <thead>
@@ -571,7 +571,7 @@ Die {{site.data.keyword.containershort_notm}}-API benötigt Headerinformationen,
     ```
     {: pre}
 
-    Um eine {{site.data.keyword.Bluemix_notm}}-Region anzugeben, [sehen Sie nach, welche Regionsabkürzungen in den API-Endpunkten verwendet werden](cs_regions.html#bluemix_regions). 
+    Um eine {{site.data.keyword.Bluemix_notm}}-Region anzugeben, [sehen Sie nach, welche Regionsabkürzungen in den API-Endpunkten verwendet werden](cs_regions.html#bluemix_regions).
 
     <table summary-"Input parameters to get tokens">
     <thead>

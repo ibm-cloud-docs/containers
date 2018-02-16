@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-13"
 
 ---
@@ -288,6 +288,7 @@ lastupdated: "2017-12-13"
 </br>
 非常好！您已经配置了集群，并且您的本地环境已准备就绪，可以开始将应用程序部署到集群中。
 ## 接下来要做什么？
+{: #next}
 
 * [测试您的掌握情况并进行测验！![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
 

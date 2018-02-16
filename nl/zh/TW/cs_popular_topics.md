@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-14"
 
 ---
@@ -36,7 +36,7 @@ lastupdated: "2017-12-14"
 <td>Docker 及 Kubernetes 提供內建安全與隔離，它們可在獨立運算主機的叢集中，自動部署、操作、調整及監視容器化的應用程式。</td>
 </tr>
 <tr>
-<td>[在叢集中部署應用程式](cs_apps.html)</td>
+<td>[在叢集中部署應用程式](cs_app.html)</td>
 <td>您隨時可以使用 Kubernetes 技術部署應用程式，以及確保您的應用程式已啟動並在執行中。例如，您可以執行漸進式更新及回復，而不會對使用者造成任何關閉時間。
 </td>
 </tr>
@@ -45,7 +45,7 @@ lastupdated: "2017-12-14"
 <td>使用 CLI，您可以建立及管理 Kubernetes 叢集。</td>
 </tr>
 <tr>
-<td>[在防火牆中開啟必要埠及 IP 位址](cs_security.html#opening_ports)</td>
+<td>[在防火牆中開啟必要埠及 IP 位址](cs_firewall.html#firewall)</td>
 <td>您可能需要在防火牆中開啟特定的埠及 IP 位址來執行 CLI 指令，或是容許 Kubernetes 主節點與工作者節點之間的通訊。</td>
 </tr>
 <tr>

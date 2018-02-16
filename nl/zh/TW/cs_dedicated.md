@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2017
-lastupdated: "2017-12-14"
+  years: 2014, 2018
+lastupdated: "2018-01-12"
 
 ---
 
@@ -42,12 +42,12 @@ lastupdated: "2017-12-14"
 |--|--------------|--------------------------------|
 |叢集建立|建立精簡叢集，或針對標準叢集指定下列詳細資料：<ul><li>叢集類型</li><li>名稱</li><li>位置</li><li>機型</li><li>工作者節點數目</li><li>公用 VLAN</li><li>專用 VLAN</li><li>硬體</li></ul>|針對標準叢集指定下列詳細資料：<ul><li>名稱</li><li>Kubernetes 版本</li><li>機型</li><li>工作者節點數目</li></ul><p>**附註：**VLAN 及「硬體」設定是在建立 {{site.data.keyword.Bluemix_notm}} 環境期間所預先定義。</p>|
 |叢集硬體及所有權|在標準叢集中，硬體可以與其他 {{site.data.keyword.IBM_notm}} 客戶共用，或者只供您專用。在您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶中，是由您擁有及管理公用及專用 VLAN。|在 {{site.data.keyword.Bluemix_dedicated_notm}} 的叢集中，硬體一律是專用的。IBM 會為您擁有及管理公用及專用 VLAN。位置是針對 {{site.data.keyword.Bluemix_notm}} 環境所預先定義。|
-|負載平衡器及 Ingress 網路|在佈建標準叢集期間，會自動執行下列動作。<ul><li>一個可攜式公用子網路及一個可攜式專用子網路會連結至叢集，並指派給您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶。</li><li>一個可攜式公用 IP 位址用於高可用性應用程式負載平衡器，並以 &lt;cluster_name&gt;.containers.mybluemix.net 的格式指派唯一公用路徑。您可以使用此路徑將多個應用程式公開給大眾使用。一個可攜式專用 IP 位址用於專用應用程式負載平衡器。</li><li>四個可攜式公用及四個可攜式專用 IP 位址會指派給叢集，而此叢集可用來透過負載平衡器服務來公開應用程式。您可以透過 IBM Cloud 基礎架構 (SoftLayer) 帳戶要求其他子網路。</li></ul>|當您建立「專用」帳戶時，請做出要如何公開及存取叢集服務的連線功能決策。如果您要使用自己的企業 IP 範圍（使用者管理的 IP），則必須在[設定 {{site.data.keyword.Bluemix_dedicated_notm}} 環境](/docs/dedicated/index.html#setupdedicated)時提供它們。<ul><li>依預設，沒有可攜式公用子網路會連結至您在「專用」帳戶中建立的叢集。相反地，您可以靈活地選擇最適合您企業的連線功能模型。</li><li>在您建立叢集之後，請針對負載平衡器或 Ingress 連線功能，選擇您要連結以及與叢集搭配使用的子網路類型。<ul><li>針對公用或專用可攜式子網路，您可以[將子網路新增至叢集](cs_cluster.html#cs_cluster_subnet)</li><li>針對您在「專用」上線時提供給 IBM 之使用者管理的 IP 位址，您可以[將使用者管理的子網路新增至叢集](#dedicated_byoip_subnets)。</li></ul></li><li>將子網路連結至叢集之後，即會建立 Ingress 控制器。只有在您使用可攜式公用子網路時，才會建立公用 Ingress 路徑。</li></ul>|
+|負載平衡器及 Ingress 網路|在佈建標準叢集期間，會自動執行下列動作。<ul><li>一個可攜式公用子網路及一個可攜式專用子網路會連結至叢集，並指派給您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶。</li><li>一個可攜式公用 IP 位址用於高可用性應用程式負載平衡器，並以 &lt;cluster_name&gt;.containers.mybluemix.net 的格式指派唯一公用路徑。您可以使用此路徑將多個應用程式公開給大眾使用。一個可攜式專用 IP 位址用於專用應用程式負載平衡器。</li><li>四個可攜式公用及四個可攜式專用 IP 位址會指派給叢集，而此叢集可用來透過負載平衡器服務來公開應用程式。您可以透過 IBM Cloud 基礎架構 (SoftLayer) 帳戶要求其他子網路。</li></ul>|當您建立「專用」帳戶時，您會決定要如何公開及存取叢集服務的連線功能。如果您要使用自己的企業 IP 範圍（使用者管理的 IP），則必須在[設定 {{site.data.keyword.Bluemix_dedicated_notm}} 環境](/docs/dedicated/index.html#setupdedicated)時提供它們。<ul><li>依預設，不會將任何可攜式公用子網路連結至您在「專用」帳戶中建立的叢集。相反地，您可以彈性地選擇最適合您企業的連線功能模型。</li><li>在您建立叢集之後，請針對負載平衡器或 Ingress 連線功能，選擇您要連結以及與叢集搭配使用的子網路類型。<ul><li>針對公用或專用可攜式子網路，您可以[將子網路新增至叢集](cs_subnets.html#subnets)</li><li>針對您在「專用」上線時提供給 IBM 之使用者管理的 IP 位址，您可以[將使用者管理的子網路新增至叢集](#dedicated_byoip_subnets)。</li></ul></li><li>將子網路連結至叢集之後，即會建立 Ingress 控制器。只有在您使用可攜式公用子網路時，才會建立公用 Ingress 路徑。</li></ul>|
 |NodePort 網路|公開工作者節點上的公用埠，並使用工作者節點的公用 IP 位址來公開存取您在叢集中的服務。|工作者節點的所有公用 IP 位址都會遭到防火牆封鎖。不過，針對新增至叢集的 {{site.data.keyword.Bluemix_notm}} 服務，可以透過公用 IP 位址或專用 IP 位址存取節點埠。|
-|持續性儲存空間|使用磁區的[動態佈建](cs_apps.html#cs_apps_volume_claim)或[靜態佈建](cs_cluster.html#cs_cluster_volume_create)。|使用磁區的[動態佈建](cs_apps.html#cs_apps_volume_claim)。[開立支援問題單](/docs/support/index.html#contacting-support)以要求備份磁區、要求從磁區還原，以及執行其他儲存空間功能。</li></ul>|
+|持續性儲存空間|使用磁區的[動態佈建](cs_storage.html#create)或[靜態佈建](cs_storage.html#existing)。|使用磁區的[動態佈建](cs_storage.html#create)。[開立支援問題單](/docs/support/index.html#contacting-support)以要求備份磁區、要求從磁區還原，以及執行其他儲存空間功能。</li></ul>|
 |{{site.data.keyword.registryshort_notm}} 中的映像檔登錄 URL|<ul><li>美國南部及美國東部：<code>registry.ng bluemix.net</code></li><li>英國南部：<code>registry.eu-gb.bluemix.net</code></li><li>歐盟中部（法蘭克福）：<code>registry.eu-de.bluemix.net</code></li><li>澳洲（雪梨）：<code>registry.au-syd.bluemix.net</code></li></ul>|<ul><li>若為新的名稱空間，請使用針對 {{site.data.keyword.Bluemix_notm}} 公用所定義的相同地區型登錄。</li><li>若為已針對 {{site.data.keyword.Bluemix_dedicated_notm}} 中的單一及可擴充容器所設定的名稱空間，請使用 <code>registry.&lt;dedicated_domain&gt;</code></li></ul>|
-|存取登錄|請參閱[搭配使用專用及公用映像檔登錄與 {{site.data.keyword.containershort_notm}}](cs_cluster.html#cs_apps_images) 中的選項。|<ul><li>若為新的名稱空間，請參閱[搭配使用專用及公用映像檔登錄與 {{site.data.keyword.containershort_notm}}](cs_cluster.html#cs_apps_images) 中的選項。</li><li>若為已針對單一及可擴充群組所設定的名稱空間，請[使用記號及建立 Kubernetes 密碼](cs_dedicated_tokens.html#cs_dedicated_tokens)來進行鑑別。</li></ul>|
-{: caption="表 1. {{site.data.keyword.Bluemix_notm}} 公用與 {{site.data.keyword.Bluemix_dedicated_notm}} 的特性差異" caption-side="top"}
+|存取登錄|請參閱[搭配使用專用及公用映像檔登錄與 {{site.data.keyword.containershort_notm}}](cs_images.html) 中的選項。|<ul><li>若為新的名稱空間，請參閱[搭配使用專用及公用映像檔登錄與 {{site.data.keyword.containershort_notm}}](cs_images.html) 中的選項。</li><li>若為已針對單一及可擴充群組所設定的名稱空間，請[使用記號及建立 Kubernetes 密碼](cs_dedicated_tokens.html#cs_dedicated_tokens)來進行鑑別。</li></ul>|
+{: caption="{{site.data.keyword.Bluemix_notm}} 公用與 {{site.data.keyword.Bluemix_dedicated_notm}} 的特性差異" caption-side="top"}
 
 <br />
 
@@ -58,7 +58,7 @@ lastupdated: "2017-12-14"
 每一個工作者節點都已設定 {{site.data.keyword.IBM_notm}} 所管理的 Docker Engine、不同的運算資源、網路及磁區服務。內建安全特性可提供隔離、資源管理功能及工作者節點安全相符性。工作者節點會使用安全 TLS 憑證及 openVPN 連線來與主節點進行通訊。
 {:shortdesc}
 
-*圖 1. {{site.data.keyword.Bluemix_dedicated_notm}} 中的 Kubernetes 架構及網路*
+*{{site.data.keyword.Bluemix_dedicated_notm}} 中的 Kubernetes 架構及網路*
 
 ![{{site.data.keyword.containershort_notm}} {{site.data.keyword.Bluemix_dedicated_notm}}](images/cs_dedicated_arch.png)
 
@@ -72,7 +72,8 @@ lastupdated: "2017-12-14"
 
 開始之前：
   * [設定 {{site.data.keyword.Bluemix_dedicated_notm}} 環境](/docs/dedicated/index.html#setupdedicated)。
-  * 如果您的本端系統或組織網路使用 Proxy 或防火牆控制公用網際網路端點，則必須[在您的防火牆中開啟必要的埠和 IP 位址](cs_security.html#opening_ports)。
+  * 如果您的本端系統或組織網路使用 Proxy 或防火牆控制公用網際網路端點，則必須[在您的防火牆中開啟必要的埠和 IP 位址](cs_firewall.html#firewall)。
+  * [下載 Cloud Foundy CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/cloudfoundry/cli/releases) 並[新增 IBM Cloud 管理 CLI 外掛程式](/docs/cli/plugins/bluemix_admin/index.html#adding-the-ibm-cloud-admin-cli-plug-in)。
 
 若要容許 {{site.data.keyword.Bluemix_dedicated_notm}} 使用者存取叢集，請執行下列動作：
 
@@ -86,14 +87,14 @@ lastupdated: "2017-12-14"
 
         **附註：**如果您具有聯合 ID，請使用 `bx login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` 來登入 {{site.data.keyword.Bluemix_notm}} CLI。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。若沒有 `--sso` 時登入失敗，而有 `--sso` 選項時登入成功，即表示您有聯合 ID。
 
-    2.  產生用於邀請使用者加入公用帳戶的 API 金鑰。請記下「專用」帳戶管理者將在下一步中使用的 API 金鑰值。
+    2.  產生用於邀請使用者加入公用帳戶的 API 金鑰。請記下 API 金鑰值，「專用」帳戶管理者將在下一步中使用。
 
         ```
         bx iam api-key-create <key_name> -d "Key to invite users to <dedicated_account_name>"
         ```
         {: pre}
 
-    3.  記下您要邀請使用者加入的公用帳戶組織的 GUID，而「專用」帳戶管理者將在下一步中使用它。
+    3.  記下您要邀請使用者加入的公用帳戶組織的 GUID，「專用」帳戶管理者將在下一步中使用。
 
         ```
         bx account orgs
@@ -118,7 +119,7 @@ lastupdated: "2017-12-14"
             ```
             {: pre}
 
-            將 <em>&lt;user_IBMid&gt;</em> 取代為您要邀請之使用者的電子郵件、將 <em>&lt;public_api_key&gt;</em> 取代為前一個步驟中所產生的 API 金鑰，並將 <em>&lt;public_org_id&gt;</em> 取代為公用帳戶組織的 GUID。
+            將 <em>&lt;user_IBMid&gt;</em> 取代為您要邀請之使用者的電子郵件、將 <em>&lt;public_api_key&gt;</em> 取代為前一個步驟中所產生的 API 金鑰，並將 <em>&lt;public_org_id&gt;</em> 取代為公用帳戶組織的 GUID。如需這個指令的相關資訊，請參閱[從 IBM Cloud Dedicated 邀請使用者](/docs/cli/plugins/bluemix_admin/index.html#admin_dedicated_invite_public)。
 
         * 若要邀請目前在「專用」帳戶組織中的所有使用者，請執行下列指令：
 
@@ -126,7 +127,7 @@ lastupdated: "2017-12-14"
             bx cf bluemix-admin invite-users-to-public -organization=<dedicated_org_id> -apikey=<public_api_key> -public_org_id=<public_org_id>
             ```
 
-            將 <em>&lt;dedicated_org_id&gt;</em> 取代為「專用」帳戶組織 ID、將 <em>&lt;public_api_key&gt;</em> 取代為前一個步驟中所產生的 API 金鑰，並將 <em>&lt;public_org_id&gt;</em> 取代為公用帳戶組織的 GUID。
+            將 <em>&lt;dedicated_org_id&gt;</em> 取代為「專用」帳戶組織 ID、將 <em>&lt;public_api_key&gt;</em> 取代為前一個步驟中所產生的 API 金鑰，並將 <em>&lt;public_org_id&gt;</em> 取代為公用帳戶組織的 GUID。如需這個指令的相關資訊，請參閱[從 IBM Cloud Dedicated 邀請使用者](/docs/cli/plugins/bluemix_admin/index.html#admin_dedicated_invite_public)。
 
     3.  如果使用者有 IBM ID，則會自動將使用者新增至公用帳戶中的指定組織。如果使用者還沒有 IBM ID，則會將邀請傳送到使用者的電子郵件位址。使用者接受邀請之後，就會為使用者建立 IBM ID，並將使用者新增至公用帳戶中的指定組織。
 
@@ -139,7 +140,21 @@ lastupdated: "2017-12-14"
 
         具有現有 IBM ID 的受邀使用者將會有 `ACTIVE` 狀態。沒有現有 IBM ID 的受邀使用者將會有 `PENDING` 或 `ACTIVE` 狀態（視他們是否已接受邀請加入帳戶而定）。
 
-3.  將使用者新增至「公用」帳戶之後，您必須將「管理者」角色授與任何需要建立叢集的使用者。如需如何授與「管理者」角色的相關資訊，請參閱[管理使用者存取權](cs_cluster.html#cs_cluster_user)。
+3.  如果任何使用者需要叢集建立專用權，您必須授與管理者角色給該位使用者。
+
+    1.  從公用主控台的功能表列，按一下**管理 > 安全 > 身分及存取**，然後按一下**使用者**。
+
+    2.  從您要指派存取權的使用者列，選取**動作**功能表，然後按一下**指派存取權**。
+
+    3.  選取**將存取權指派給資源**。
+
+    4.  從**服務**清單，選取 **IBM Cloud Container Service**。
+
+    5.  從**地區**清單，選取**所有現行地區**或特定的地區（如果您收到提示的話）。
+
+    6. 在**選取角色**下，選取「管理者」。
+
+    7. 按一下**指派**。
 
 4.  使用者現在可以登入「專用」帳戶端點來開始建立叢集。
 
@@ -152,11 +167,11 @@ lastupdated: "2017-12-14"
 
         **附註：**如果您具有聯合 ID，請使用 `bx login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` 來登入 {{site.data.keyword.Bluemix_notm}} CLI。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。若沒有 `--sso` 時登入失敗，而有 `--sso` 選項時登入成功，即表示您有聯合 ID。
 
-    2.  如果您是第一次登入，請在系統提示時提供您的「專用」使用者 ID 及密碼。這會鑑別「專用」帳戶，並將「專用」與公用帳戶鏈結在一起。在第一次登入後的每次登入，都只需使用您的 IBM ID 來登入。
+    2.  如果您是第一次登入，請在系統提示時提供您的「專用」使用者 ID 及密碼。這會鑑別「專用」帳戶，並將「專用」與公用帳戶鏈結在一起。在第一次登入後的每次登入，都只需使用您的 IBM ID 來登入。如需相關資訊，請參閱[將專用 ID 連接至公用 IBM ID](/docs/cli/connect_dedicated_id.html#connect_dedicated_id)。
 
         **附註**：您必須同時登入「專用」帳戶及公用帳戶，才能建立叢集。如果您只要登入「專用」帳戶，請在登入「專用」端點時使用 `--no-iam` 旗標。
 
-5.  如果您要解除鏈結您的帳戶，則可以中斷 IBM ID 與「專用」使用者 ID 的連線。
+5.  如果您要解除鏈結您的帳戶，則可以中斷 IBM ID 與「專用」使用者 ID 的連線。如需相關資訊，請參閱[中斷專用 ID 與公用 IBM ID 的連線](/docs/cli/connect_dedicated_id.html#disconnect-your-dedicated-id-from-the-public-ibmid)。
 
     ```
     bx iam dedicated-id-disconnect
@@ -211,7 +226,7 @@ lastupdated: "2017-12-14"
     {: pre}
 
     <table>
-    <caption>表 2. 瞭解此指令的元件</caption>
+    <caption>瞭解此指令的元件</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解此指令的元件</th>
     </thead>
@@ -226,7 +241,7 @@ lastupdated: "2017-12-14"
     </tr>
     <tr>
     <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
-    <td>如果您要建立標準叢集，請選擇機型。機型指定每一個工作者節點可用的虛擬運算資源。如需相關資訊，請檢閱[比較 {{site.data.keyword.containershort_notm}} 的精簡與標準叢集](cs_planning.html#cs_planning_cluster_type)。若為精簡叢集，您不需要定義機型。</td>
+    <td>如果您要建立標準叢集，請選擇機型。機型指定每一個工作者節點可用的虛擬運算資源。如需相關資訊，請檢閱[比較 {{site.data.keyword.containershort_notm}} 的精簡與標準叢集](cs_why.html#cluster_types)。若為精簡叢集，您不需要定義機型。</td>
     </tr>
     <tr>
     <td><code>--name <em>&lt;name&gt;</em></code></td>
@@ -329,13 +344,13 @@ lastupdated: "2017-12-14"
 ### 使用專用及公用映像檔登錄
 {: #dedicated_images}
 
-若為新的名稱空間，請參閱[搭配使用專用及公用映像檔登錄與 {{site.data.keyword.containershort_notm}}](cs_cluster.html#cs_apps_images) 中的選項。若為已針對單一及可擴充群組所設定的名稱空間，請[使用記號及建立 Kubernetes 密碼](cs_dedicated_tokens.html#cs_dedicated_tokens)來進行鑑別。
+若為新的名稱空間，請參閱[搭配使用專用及公用映像檔登錄與 {{site.data.keyword.containershort_notm}}](cs_images.html) 中的選項。若為已針對單一及可擴充群組所設定的名稱空間，請[使用記號及建立 Kubernetes 密碼](cs_dedicated_tokens.html#cs_dedicated_tokens)來進行鑑別。
 
 ### 將子網路新增至叢集
 {: #dedicated_cluster_subnet}
 
 將子網路新增至叢集，以變更可用的可攜式公用 IP 位址的儲存區。
-如需相關資訊，請參閱[將子網路新增至叢集](cs_cluster.html#cs_cluster_subnet)。請檢閱下列將子網路新增至「專用」叢集的差異。
+如需相關資訊，請參閱[將子網路新增至叢集](cs_subnets.html#subnets)。請檢閱下列將子網路新增至「專用」叢集的差異。
 
 #### 將其他使用者管理的子網路及 IP 位址新增至 Kubernetes 叢集
 {: #dedicated_byoip_subnets}
@@ -347,7 +362,7 @@ lastupdated: "2017-12-14"
 - 子網路字首長度限制為 /24 到 /30。例如，`203.0.113.0/24` 指定 253 個可用的專用 IP 位址，而 `203.0.113.0/30` 指定 1 個可用的專用 IP 位址。
 - 子網路中的第一個 IP 位址必須用來作為子網路的閘道。
 
-開始之前：請配置網路資料流量進出企業網路到將利用使用者管理子網路之 {{site.data.keyword.Bluemix_dedicated_notm}} 網路的遞送。
+開始之前：請配置進入您企業網路的網路資料流量，以及離開您的企業網路到將利用使用者管理子網路之 {{site.data.keyword.Bluemix_dedicated_notm}} 網路的網路資料流量遞送。
 
 1. 若要使用您自己的子網路，請[開立支援問題單](/docs/support/index.html#contacting-support)，並提供您要使用的子網路 CIDR 清單。
     **附註**：針對內部部署及內部帳戶連線功能管理 ALB 及負載平衡器的方式會不同（視子網路 CIDR 的格式而定）。請參閱最終步驟，以瞭解配置差異。
@@ -376,21 +391,21 @@ lastupdated: "2017-12-14"
     {: screen}
 
 4. 若要配置內部部署及內部帳戶連線功能，請從下列選項中進行選擇：
-  - 如果您已使用子網路的 10.x.x.x 專用 IP 位址範圍，請使用該範圍中的有效 IP，以使用 Ingress 及負載平衡器來配置內部部署及內部帳戶連線功能。如需相關資訊，請參閱[配置應用程式的存取](cs_apps.html#cs_apps_public)。
-  - 如果您未使用子網路的 10.x.x.x 專用 IP 位址範圍，請使用該範圍中的有效 IP，以使用 Ingress 及負載平衡器來配置內部部署連線功能。如需相關資訊，請參閱[配置應用程式的存取](cs_apps.html#cs_apps_public)。不過，您必須使用 IBM Cloud 基礎架構 (SoftLayer) 可攜式專用子網路，來配置叢集與其他 Cloud Foundry 型服務之間的內部帳戶連線功能。您可以使用 [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) 指令來建立可攜式專用子網路。在此情境中，您的叢集同時具有用於內部部署連線功能的使用者管理子網路，以及具有用於內部帳戶連線功能的 IBM Cloud 基礎架構 (SoftLayer) 可攜式專用子網路。
+  - 如果您已使用子網路的 10.x.x.x 專用 IP 位址範圍，請使用該範圍中的有效 IP，以使用 Ingress 及負載平衡器來配置內部部署及內部帳戶連線功能。如需相關資訊，請參閱[配置應用程式的存取](cs_network_planning.html#planning)。
+  - 如果您未使用子網路的 10.x.x.x 專用 IP 位址範圍，請使用該範圍中的有效 IP，以使用 Ingress 及負載平衡器來配置內部部署連線功能。如需相關資訊，請參閱[配置應用程式的存取](cs_network_planning.html#planning)。不過，您必須使用 IBM Cloud 基礎架構 (SoftLayer) 可攜式專用子網路，來配置叢集與其他 Cloud Foundry 型服務之間的內部帳戶連線功能。您可以使用 [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) 指令來建立可攜式專用子網路。在此情境中，您的叢集同時具有用於內部部署連線功能的使用者管理子網路，以及用於內部帳戶連線功能的 IBM Cloud 基礎架構 (SoftLayer) 可攜式專用子網路。
 
 ### 其他叢集配置
 {: #dedicated_other}
 
 請檢閱下列用於其他叢集配置的選項：
-  * [管理叢集存取](cs_cluster.html#cs_cluster_user)
-  * [更新 Kubernetes 主節點](cs_cluster.html#cs_cluster_update)
-  * [更新工作者節點](cs_cluster.html#cs_cluster_worker_update)
-  * [配置叢集記載](cs_cluster.html#cs_logging)
-  * [配置叢集監視](cs_cluster.html#cs_monitoring)
+  * [管理叢集存取](cs_users.html#managing)
+  * [更新 Kubernetes 主節點](cs_cluster_update.html#master)
+  * [更新工作者節點](cs_cluster_update.html#worker_node)
+  * [配置叢集記載](cs_health.html#logging)
+  * [配置叢集監視](cs_health.html#monitoring)
       * **附註**：每一個 {{site.data.keyword.Bluemix_dedicated_notm}} 帳戶內都會有 `ibm-monitoring` 叢集。此叢集會持續監視「專用」環境中的 {{site.data.keyword.containerlong_notm}} 性能，並檢查環境的穩定性及連線功能。請不要從環境中移除此叢集。
-  * [視覺化 Kubernetes 叢集資源](cs_cluster.html#cs_weavescope)
-  * [移除叢集](cs_cluster.html#cs_cluster_remove)
+  * [視覺化 Kubernetes 叢集資源](cs_integrations.html#weavescope)
+  * [移除叢集](cs_clusters.html#remove)
 
 <br />
 
@@ -401,7 +416,7 @@ lastupdated: "2017-12-14"
 您可以使用 Kubernetes 技術，在 {{site.data.keyword.Bluemix_dedicated_notm}} 叢集中部署應用程式，並確保應用程式一律已啟動並在執行中。
 {:shortdesc}
 
-若要在叢集中部署應用程式，您可以遵循[在 {{site.data.keyword.Bluemix_notm}} 公用叢集中部署應用程式](cs_apps.html#cs_apps)的指示。請檢閱下列 {{site.data.keyword.Bluemix_dedicated_notm}} 叢集的差異。
+若要在叢集中部署應用程式，您可以遵循[在 {{site.data.keyword.Bluemix_notm}} 公用叢集中部署應用程式](cs_app.html#app)的指示。請檢閱下列 {{site.data.keyword.Bluemix_dedicated_notm}} 叢集的差異。
 
 ### 容許對應用程式的公用存取
 {: #dedicated_apps_public}
@@ -411,14 +426,14 @@ lastupdated: "2017-12-14"
 #### 使用負載平衡器服務類型來配置應用程式的存取
 {: #dedicated_apps_public_load_balancer}
 
-如果您要將公用 IP 位址用於負載平衡器，請確定已向 IBM 提供企業防火牆白名單，或[開立支援問題單](/docs/support/index.html#contacting-support)來配置防火牆白名單。然後遵循[使用負載平衡器服務類型來配置應用程式的存取](cs_apps.html#cs_apps_public_load_balancer)中的步驟。
+如果您要將公用 IP 位址用於負載平衡器，請確定已向 IBM 提供企業防火牆白名單，或[開立支援問題單](/docs/support/index.html#contacting-support)來配置防火牆白名單。然後遵循[使用負載平衡器服務類型來配置應用程式的存取](cs_loadbalancer.html#config)中的步驟。
 
 #### 使用 Ingress 來配置應用程式的公用存取
 {: #dedicated_apps_public_ingress}
 
-如果您要將公用 IP 位址用於應用程式負載平衡器，請確定已向 IBM 提供企業防火牆白名單，或[開立支援問題單](/docs/support/index.html#contacting-support)來配置防火牆白名單。然後遵循[使用 Ingress 來配置應用程式的存取](cs_apps.html#cs_apps_public_ingress)中的步驟。
+如果您要將公用 IP 位址用於應用程式負載平衡器，請確定已向 IBM 提供企業防火牆白名單，或[開立支援問題單](/docs/support/index.html#contacting-support)來配置防火牆白名單。然後遵循[使用 Ingress 來配置應用程式的存取](cs_ingress.html#config)中的步驟。
 
 ### 建立持續性儲存空間
 {: #dedicated_apps_volume_claim}
 
-若要檢閱用於建立持續性儲存空間的選項，請參閱[持續性資料儲存空間](cs_planning.html#cs_planning_apps_storage)。若要要求備份磁區、從磁區還原，以及其他儲存空間功能，您必須[開立支援問題單](/docs/support/index.html#contacting-support)。
+若要檢閱用於建立持續性儲存空間的選項，請參閱[持續性資料儲存空間](cs_storage.html#planning)。若要要求備份磁區、從磁區還原，以及其他儲存空間功能，您必須[開立支援問題單](/docs/support/index.html#contacting-support)。

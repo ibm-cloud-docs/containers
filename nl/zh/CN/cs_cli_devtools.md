@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2017
-lastupdated: "2017-12-01"
+  years: 2014, 2018
+lastupdated: "2017-01-02"
 
 ---
 
@@ -99,11 +99,10 @@ bx plugin list
 ## bx cs 命令
 {: #cs_commands}
 
-
 ### bx cs albs --cluster CLUSTER
 {: #cs_albs}
 
-查看集群中所有应用程序负载均衡器 (ALB) 的状态。ALB 也称为 Ingress 控制器。如果未返回任何 ALB 标识，说明集群没有可移植子网。您可以为集群[创建](#cs_cluster_subnet_create)或[添加](#cs_cluster_subnet_add)子网。
+查看集群中所有应用程序负载均衡器的状态。如果未返回任何应用程序负载均衡器标识，说明集群没有可移植子网。您可以为集群[创建](#cs_cluster_subnet_create)或[添加](#cs_cluster_subnet_add)子网。
 
 <strong>命令选项</strong>：
 
@@ -119,50 +118,52 @@ bx plugin list
   ```
   {: pre}
 
+
+
 ### bx cs alb-configure --albID ALB_ID [--enable][--disable][--user-ip USERIP]
 {: #cs_alb_configure}
 
-在标准集群中启用或禁用应用程序负载均衡器 (ALB)，也称为 Ingress 控制器。缺省情况下，已启用公共应用程序负载均衡器。
+在标准集群中启用或禁用应用程序负载均衡器。缺省情况下，已启用公共应用程序负载均衡器。
 
 **命令选项**：
 
    <dl>
    <dt><code><em>--albID </em>ALB_ID</code></dt>
-   <dd>ALB 的标识。运行 <code>bx cs albs <em>--cluster </em>CLUSTER</code> 可查看集群中 ALB 的标识。此值是必需的。</dd>
+   <dd>应用程序负载均衡器的标识。运行 <code>bx cs albs <em>--cluster </em>CLUSTER</code> 可查看集群中应用程序负载均衡器的标识。此值是必需的。</dd>
 
    <dt><code>--enable</code></dt>
-   <dd>包含此标志可在集群中启用 ALB。</dd>
+   <dd>包含此标志可在集群中启用应用程序负载均衡器。</dd>
 
    <dt><code>--disable</code></dt>
-   <dd>包含此标志可在集群中禁用 ALB。</dd>
+   <dd>包含此标志可在集群中禁用应用程序负载均衡器。</dd>
 
    <dt><code>--user-ip <em>USER_IP</em></code></dt>
    <dd>
 
    <ul>
-    <li>此参数仅可用于专用 ALB</li>
-    <li>专用 ALB 将使用用户提供的专用子网中的 IP 地址进行部署。如果未提供任何 IP 地址，那么该 ALB 将使用 IBM Cloud infrastructure (SoftLayer) 的专用子网中的随机 IP 地址进行部署。</li>
+    <li>此参数仅可用于专用应用程序负载均衡器</li>
+    <li>专用应用程序负载均衡器将使用用户提供的专用子网中的 IP 地址进行部署。如果未提供任何 IP 地址，那么该应用程序负载均衡器将使用创建集群时自动供应的可移植专用子网中的专用 IP 地址进行部署。</li>
    </ul>
    </dd>
    </dl>
 
 **示例**：
 
-  启用 ALB 的示例：
+  启用应用程序负载均衡器的示例：
 
   ```
   bx cs alb-configure --albID my_alb_id --enable
   ```
   {: pre}
 
-  禁用 ALB 的示例：
+  禁用应用程序负载均衡器的示例：
 
   ```
   bx cs alb-configure --albID my_alb_id --disable
   ```
   {: pre}
 
-  使用用户提供的 IP 地址启用 ALB 的示例：
+  使用用户提供的 IP 地址启用应用程序负载均衡器的示例：
 
   ```
   bx cs alb-configure --albID my_private_alb_id --enable --user-ip user_ip
@@ -172,13 +173,13 @@ bx plugin list
 ### bx cs alb-get --albID ALB_ID
 {: #cs_alb_get}
 
-查看应用程序负载均衡器 (ALB) 的详细信息。
+查看应用程序负载均衡器的详细信息。
 
 <strong>命令选项</strong>：
 
    <dl>
    <dt><code><em>--albID </em>ALB_ID</code></dt>
-   <dd>ALB 的标识。运行 <code>bx cs albs --cluster <em>CLUSTER</em></code> 可查看集群中 ALB 的标识。此值是必需的。</dd>
+   <dd>应用程序负载均衡器的标识。运行 <code>bx cs albs --cluster <em>CLUSTER</em></code> 可查看集群中应用程序负载均衡器的标识。此值是必需的。</dd>
    </dl>
 
 **示例**：
@@ -203,6 +204,101 @@ bx plugin list
   bx cs alb-types
   ```
   {: pre}
+
+
+### bx cs apiserver-config-set
+{: #cs_apiserver_config_set}
+
+为集群的 Kubernetes API 服务器配置设置选项。对于要设置的配置选项，此命令必须与下列其中一个子命令组合在一起。
+
+#### bx cs apiserver-config-get audit-webhook CLUSTER
+{: #cs_apiserver_api_webhook_get}
+
+查看要向其发送 API 服务器审计日志的远程日志记录服务的 URL。URL 是在您为 API 服务器配置创建 Webhook 后端时指定的。
+
+<strong>命令选项</strong>：
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>集群的名称或标识。此值是必需的。</dd>
+   </dl>
+
+**示例**：
+
+  ```
+  bx cs apiserver-config-get audit-webhook my_cluster
+  ```
+  {: pre}
+
+#### bx cs apiserver-config-set audit-webhook CLUSTER [--remoteServer SERVER_URL_OR_IP][--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH][--clientKey CLIENT_KEY_PATH]
+{: #cs_apiserver_api_webhook_set}
+
+设置 API 服务器配置的 Webhook 后端。Webhook 后端将 API 服务器审计日志转发到远程服务器。根据您在此命令标志中提供的信息来创建 Webhook 配置。如果未在标志中提供任何信息，那么将使用缺省的 Webhook 配置。
+
+<strong>命令选项</strong>：
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>集群的名称或标识。此值是必需的。</dd>
+
+   <dt><code>--remoteServer <em>SERVER_URL</em></code></dt>
+   <dd>要向其发送审计日志的远程日志记录服务的 URL 或 IP 地址。如果提供不安全的服务器 URL，那么将忽略任何证书。此值是可选的。</dd>
+
+   <dt><code>--caCert <em>CA_CERT_PATH</em></code></dt>
+   <dd>用于验证远程日志记录服务的 CA 证书的文件路径。此值是可选的。</dd>
+
+   <dt><code>--clientCert <em>CLIENT_CERT_PATH</em></code></dt>
+   <dd>用于针对远程日志记录服务进行认证的客户机证书的文件路径。此值是可选的。</dd>
+
+   <dt><code>--clientKey <em> CLIENT_KEY_PATH</em></code></dt>
+   <dd>用于连接到远程日志记录服务的相应客户机密钥的文件路径。此值是可选的。</dd>
+   </dl>
+
+**示例**：
+
+  ```
+  bx cs apiserver-config-set audit-webhook my_cluster --remoteServer https://audit.example.com/audit --caCert /mnt/etc/kubernetes/apiserver-audit/ca.pem --clientCert /mnt/etc/kubernetes/apiserver-audit/cert.pem --clientKey /mnt/etc/kubernetes/apiserver-audit/key.pem
+  ```
+  {: pre}
+
+#### bx cs apiserver-config-unset audit-webhook CLUSTER
+{: #cs_apiserver_api_webhook_unset}
+
+禁用集群 API 服务器的 Webhook 后端配置。对 Webhook 后端进行拨号将停止将 API 服务器审计日志转发到远程服务器。
+
+<strong>命令选项</strong>：
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>集群的名称或标识。此值是必需的。</dd>
+   </dl>
+
+**示例**：
+
+  ```
+  bx cs apiserver-config-unset audit-webhook my_cluster
+  ```
+  {: pre}
+
+### bx cs apiserver-refresh CLUSTER
+{: #cs_apiserver_refresh}
+
+在集群中重新启动 Kubernetes 主节点以将更改应用于 API 服务器配置。
+
+<strong>命令选项</strong>：
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>集群的名称或标识。此值是必需的。</dd>
+   </dl>
+
+**示例**：
+
+  ```
+  bx cs apiserver-refresh my_cluster
+  ```
+  {: pre}
+
 
 ### bx cs cluster-config CLUSTER [--admin][--export]
 {: #cs_cluster_config}
@@ -231,7 +327,7 @@ bx cs cluster-config my_cluster
 
 
 
-### bx cs cluster-create [--file FILE_LOCATION][--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH][--no-subnet] [--private-vlan PRIVATE_VLAN][--public-vlan PUBLIC_VLAN] [--workers WORKER]
+### bx cs cluster-create [--file FILE_LOCATION][--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH][--no-subnet] [--private-vlan PRIVATE_VLAN][--public-vlan PUBLIC_VLAN] [--workers WORKER][--disable-disk-encrypt]
 {: #cs_cluster_create}
 
 在组织中创建集群。
@@ -254,6 +350,7 @@ public-vlan: <em>&lt;public_vlan&gt;</em>
 hardware: <em>&lt;shared_or_dedicated&gt;</em>
 workerNum: <em>&lt;number_workers&gt;</em>
 kube-version: <em>&lt;kube-version&gt;</em>
+
 </code></pre>
 
 
@@ -297,7 +394,10 @@ kube-version: <em>&lt;kube-version&gt;</em>
      </tr>
      <tr>
       <td><code><em>kube-version</em></code></td>
-      <td>集群主节点的 Kubernetes 版本。此值是可选的。除非指定，否则会使用受支持 Kubernetes 版本的缺省值来创建集群。要查看可用版本，请运行 <code>bx cs kube-versions</code>。</td>
+      <td>集群主节点的 Kubernetes 版本。此值是可选的。除非指定，否则会使用受支持 Kubernetes 版本的缺省值来创建集群。要查看可用版本，请运行 <code>bx cs kube-versions</code>。</td></tr>
+      <tr>
+      <td><code>diskEncryption: <em>false</em></code></td>
+      <td>工作程序节点缺省情况下具有磁盘加密功能：[了解更多](cs_secure.html#worker)。要禁用加密，请包括此选项并将值设置为 <code>false</code>。</td></tr>
      </tbody></table>
     </p></dd>
 
@@ -355,6 +455,9 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <dd>要在集群中部署的工作程序节点数。如果未指定此选项，将创建具有 1 个工作程序节点的集群。此值对于标准集群是可选的，且不可用于 Lite 集群。
 
 <p><strong>注</strong>：为每个工作程序节点分配了唯一的工作程序节点标识和域名，在创建集群后，不得手动更改该标识和域名。更改标识或域名会阻止 Kubernetes 主节点管理集群。</p></dd>
+
+<dt><code>--disable-disk-encrypt</code></dt>
+<dd>工作程序节点缺省情况下具有磁盘加密功能：[了解更多](cs_secure.html#worker)。要禁用加密，请包括此选项。</dd>
 </dl>
 
 **示例**：
@@ -756,43 +859,15 @@ kube-version: <em>&lt;kube-version&gt;</em>
 
    <dl>
    <dt><code>--host <em>HOST</em></code></dt>
-   <dd>要使用的 {{site.data.keyword.containershort_notm}} API 端点。此值是可选的。示例：
-
-    <ul>
-    <li>美国南部：
-
-    <pre class="codeblock">
-    <code>bx cs init --host https://us-south.containers.bluemix.net</code>
-    </pre></li>
-
-    <li>美国东部：
-
-    <pre class="codeblock">
-    <code>bx cs init --host https://us-east.containers.bluemix.net</code>
-    </pre>
-    <p><strong>注</strong>：美国东部仅可与 CLI 命令一起使用。</p></li>
-
-    <li>英国南部：
-
-    <pre class="codeblock">
-    <code>bx cs init --host https://uk-south.containers.bluemix.net</code>
-    </pre></li>
-
-    <li>欧洲中部：
-
-    <pre class="codeblock">
-    <code>bx cs init --host https://eu-central.containers.bluemix.net</code>
-    </pre></li>
-
-    <li>亚太地区南部：
-
-    <pre class="codeblock">
-    <code>bx cs init --host https://ap-south.containers.bluemix.net</code>
-    </pre></li></ul>
-</dd>
-</dl>
+   <dd>要使用的 {{site.data.keyword.containershort_notm}} API 端点。此值是可选的。[查看可用的 API 端点值。](cs_regions.html#container_regions)</dd>
+   </dl>
 
 
+
+```
+          bx cs init --host https://uk-south.containers.bluemix.net
+          ```
+{: pre}
 
 ### bx cs kube-versions
 {: #cs_kube_versions}
@@ -826,10 +901,10 @@ kube-version: <em>&lt;kube-version&gt;</em>
   ```
   {: pre}
 
-### bx cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE][--hostname LOG_SERVER_HOSTNAME] [--port LOG_SERVER_PORT] --type LOG_TYPE
+### bx cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT][--space CLUSTER_SPACE] [--org CLUSTER_ORG] --type LOG_TYPE [--json]
 {: #cs_logging_create}
 
-创建日志记录配置。缺省情况下，名称空间日志会转发到 {{site.data.keyword.loganalysislong_notm}}。您可以使用此命令将名称空间日志转发到外部 syslog 服务器。您还可以使用此命令将应用程序、工作程序节点、Kubernetes 集群和 Ingress 控制器的日志转发至 {{site.data.keyword.loganalysisshort_notm}} 或外部 syslog 服务器。
+创建日志记录配置。您可以使用此命令将容器、应用程序、工作程序节点、Kubernetes 集群以及 Ingress 应用程序负载均衡器的日志转发到 {{site.data.keyword.loganalysisshort_notm}} 或外部 syslog 服务器。
 
 <strong>命令选项</strong>：
 
@@ -837,34 +912,47 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <dt><code><em>CLUSTER</em></code></dt>
 <dd>集群的名称或标识。</dd>
 <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-<dd>要对其启用日志转发的日志源。接受的值为 <code>application</code>、<code>worker</code>、<code>kubernetes</code> 和 <code>ingress</code>。此值是必需的。</dd>
+<dd>要对其启用日志转发的日志源。接受的值为 <code>container</code>、<code>application</code>、<code>worker</code>、<code>kubernetes</code> 和 <code>ingress</code>。此值是必需的。</dd>
 <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
-<dd>要从中将日志转发到 syslog 的 Docker 容器名称空间。<code>ibm-system</code> 和 <code>kube-system</code> Kubernetes 名称空间不支持日志转发。对于名称空间，此值是必需的。如果未指定名称空间，那么容器中的所有名称空间都将使用此配置。</dd>
+<dd>要从中转发日志的 Docker 容器名称空间。<code>ibm-system</code> 和 <code>kube-system</code> Kubernetes 名称空间不支持日志转发。此值仅对容器日志源有效，并且是可选的。如果未指定名称空间，那么容器中的所有名称空间都将使用此配置。</dd>
 <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
-<dd>日志收集器服务器的主机名或 IP 地址。当记录类型为 <code>syslog</code> 时，此值是必需的。</dd>
+<dd>日志记录类型为 <code>syslog</code> 时，日志收集器服务器的主机名或 IP 地址。此值对于 <code>syslog</code> 是必需的。日志记录类型为 <code>ibm</code> 时，{{site.data.keyword.loganalysislong_notm}} 数据获取 URL。您可以在[此处](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)找到可用数据获取 URL 的列表。如果未指定数据获取 URL，那么将使用创建集群所在区域的端点。</dd>
 <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
-<dd>日志收集器服务器的端口。当记录类型为 <code>syslog</code> 时，此值是可选的。如果未指定端口，那么将对 <code>syslog</code> 使用标准端口 <code>514</code>。</dd>
+<dd>日志收集器服务器的端口。此值是可选的。如果未指定端口，那么标准端口 <code>514</code> 将用于 <code>syslog</code>，并且标准端口 <code>9091</code> 将用于 <code>ibm</code>。</dd>
+<dt><code>--space <em>CLUSTER_SPACE</em></code></dt>
+<dd>要向其发送日志的空间的名称。此值仅对日志类型 <code>ibm</code> 有效，并且是可选的。如果未指定空间，日志将发送到帐户级别。</dd>
+<dt><code>--org <em>CLUSTER_ORG</em></code></dt>
+<dd>空间所在组织的名称。此值仅对日志类型 <code>ibm</code> 有效，如果指定了空间，那么此值是必需的。</dd>
 <dt><code>--type <em>LOG_TYPE</em></code></dt>
 <dd>您要使用的日志转发协议。目前支持 <code>syslog</code> 和 <code>ibm</code>。此值是必需的。</dd>
+<dt><code>--json</code></dt>
+<dd>（可选）以 JSON 格式打印命令输出。</dd>
 </dl>
 
 **示例**：
 
-日志源 `namespace` 的示例：
+缺省端口 9091 上从 `container` 日志源转发的日志类型 `ibm` 的示例：
 
   ```
-  bx cs logging-config-create my_cluster --logsource namespaces --namespace my_namespace --hostname localhost --port 5514 --type syslog
-  ```
-  {: pre}
-
-日志源 `ingress` 的示例：
-
-  ```
-  bx cs logging-config-create my_cluster --logsource ingress --type ibm
+  bx cs logging-config-create my_cluster --logsource container --namespace my_namespace --hostname ingest.logging.ng.bluemix.net --type ibm
   ```
   {: pre}
 
-### bx cs logging-config-get CLUSTER [--logsource LOG_SOURCE]
+缺省端口 514 上从 `container` 日志源转发的日志类型 `syslog` 的示例：
+
+  ```
+  bx cs logging-config-create my_cluster --logsource container --namespace my_namespace  --hostname my_hostname-or-IP --type syslog
+  ```
+  {: pre}
+
+  非缺省端口上从 `ingress` 源转发日志的日志类型 `syslog` 的实例：
+
+    ```
+    bx cs logging-config-create my_cluster --logsource container --hostname my_hostname-or-IP --port 5514 --type syslog
+    ```
+    {: pre}
+
+### bx cs logging-config-get CLUSTER [--logsource LOG_SOURCE][--json]
 {: #cs_logging_get}
 
 查看集群的所有日志转发配置，或基于日志源过滤日志记录配置。
@@ -875,7 +963,9 @@ kube-version: <em>&lt;kube-version&gt;</em>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>集群的名称或标识。此值是必需的。</dd>
    <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-   <dd>要过滤的日志源的类型。仅会返回集群中此日志源的日志记录配置。接受的值为 <code>namespaces</code>、<code>application</code>、<code>worker</code>、<code>kubernetes</code> 和 <code>ingress</code>。此值是可选的。</dd>
+   <dd>要过滤的日志源的类型。仅会返回集群中此日志源的日志记录配置。接受的值为 <code>container</code>、<code>application</code>、<code>worker</code>、<code>kubernetes</code> 和 <code>ingress</code>。此值是可选的。</dd>
+   <dt><code>--json</code></dt>
+   <dd>（可选）以 JSON 格式打印命令输出。</dd>
    </dl>
 
 **示例**：
@@ -886,61 +976,65 @@ kube-version: <em>&lt;kube-version&gt;</em>
   {: pre}
 
 
-### bx cs logging-config-rm CLUSTER --id LOG_CONFIG_ID
+### bx cs logging-config-rm CLUSTER LOG_CONFIG_ID
 {: #cs_logging_rm}
 
-删除日志转发配置。对于 Docker 容器名称空间，您可以停止将日志转发到 syslog 服务器。名称空间会继续将日志转发到 {{site.data.keyword.loganalysislong_notm}}。对于 Docker 容器名称空间以外的日志源，您可以停止将日志转发到 syslog 服务器或 {{site.data.keyword.loganalysisshort_notm}}。
+删除日志转发配置。这会停止将日志转发到 syslog 服务器或 {{site.data.keyword.loganalysisshort_notm}}。
 
 <strong>命令选项</strong>：
 
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>集群的名称或标识。此值是必需的。</dd>
-   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
+   <dt><code><em>LOG_CONFIG_ID</em></code></dt>
    <dd>要从日志源中除去的日志记录配置标识。此值是必需的。</dd>
    </dl>
 
 **示例**：
 
   ```
-  bx cs logging-config-rm my_cluster --id my_log_config_id
+  bx cs logging-config-rm my_cluster f4bc77c0-ee7d-422d-aabf-a4e6b977264e
   ```
   {: pre}
 
 
-### bx cs logging-config-update CLUSTER [--namespace NAMESPACE][--id LOG_CONFIG_ID] [--hostname LOG_SERVER_HOSTNAME][--port LOG_SERVER_PORT] --type LOG_TYPE
+### bx cs logging-config-update CLUSTER LOG_CONFIG_ID [--hostname LOG_SERVER_HOSTNAME_OR_IP][--port LOG_SERVER_PORT] [--space CLUSTER_SPACE][--org CLUSTER_ORG] --type LOG_TYPE [--json]
 {: #cs_logging_update}
 
-将日志转发更新到要使用的日志记录服务器。对于 Docker 容器名称空间，您可以使用此命令来更新当前 syslog 服务器的详细信息或更改为其他 syslog 服务器。对于 Docker 容器名称空间以外的日志源，可以使用此命令来更改日志收集器服务器类型。目前，“syslog”和“ibm”是受支持的日志类型。
+更新日志转发配置的详细信息。
 
 <strong>命令选项</strong>：
 
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>集群的名称或标识。此值是必需的。</dd>
-   <dt><code>--namespace <em>NAMESPACE</em></code></dt>
-   <dd>要从中将日志转发到 syslog 的 Docker 容器名称空间。<code>ibm-system</code> 和 <code>kube-system</code> Kubernetes 名称空间不支持日志转发。对于名称空间，此值是必需的。</dd>
-   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
-   <dd>要更新的日志记录配置标识。对于 Docker 容器名称空间以外的日志源，此值是必需的。</dd>
+   <dt><code><em>LOG_CONFIG_ID</em></code></dt>
+   <dd>要更新的日志记录配置标识。此值是必需的。</dd>
    <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
-   <dd>日志收集器服务器的主机名或 IP 地址。当记录类型为 <code>syslog</code> 时，此值是必需的。</dd>
+   <dd>日志记录类型为 <code>syslog</code> 时，日志收集器服务器的主机名或 IP 地址。此值对于 <code>syslog</code> 是必需的。日志记录类型为 <code>ibm</code> 时，{{site.data.keyword.loganalysislong_notm}} 数据获取 URL。您可以在[此处](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)找到可用数据获取 URL 的列表。如果未指定数据获取 URL，那么将使用创建集群所在区域的端点。</dd>
    <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
-   <dd>日志收集器服务器的端口。当记录类型为 <code>syslog</code> 时，此值是可选的。如果未指定端口，那么将对 <code>syslog</code> 使用标准端口 514。</dd>
+   <dd>日志收集器服务器的端口。当记录类型为 <code>syslog</code> 时，此值是可选的。如果未指定端口，那么标准端口 <code>514</code> 将用于 <code>syslog</code>，并且 <code>9091</code> 将用于 <code>ibm</code>。</dd>
+   <dt><code>--space <em>CLUSTER_SPACE</em></code></dt>
+   <dd>要向其发送日志的空间的名称。此值仅对日志类型 <code>ibm</code> 有效，并且是可选的。如果未指定空间，日志将发送到帐户级别。</dd>
+   <dt><code>--org <em>CLUSTER_ORG</em></code></dt>
+   <dd>空间所在组织的名称。此值仅对日志类型 <code>ibm</code> 有效，如果指定了空间，那么此值是必需的。</dd>
    <dt><code>--type <em>LOG_TYPE</em></code></dt>
    <dd>您要使用的日志转发协议。目前支持 <code>syslog</code> 和 <code>ibm</code>。此值是必需的。</dd>
+   <dt><code>--json</code></dt>
+   <dd>（可选）以 JSON 格式打印命令输出。</dd>
    </dl>
 
 **日志类型 `ibm` 的示例**：
 
   ```
-  bx cs logging-config-update my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e --type ibm
+  bx cs logging-config-update my_cluster f4bc77c0-ee7d-422d-aabf-a4e6b977264e --type ibm
   ```
   {: pre}
 
 **日志类型 `syslog` 的示例**：
 
   ```
-  bx cs logging-config-update my_cluster --namespace my_namespace --hostname localhost --port 5514 --type syslog
+  bx cs logging-config-update my_cluster f4bc77c0-ee7d-422d-aabf-a4e6b977264e --hostname localhost --port 5514 --type syslog
   ```
   {: pre}
 
@@ -965,10 +1059,92 @@ kube-version: <em>&lt;kube-version&gt;</em>
 **示例**：
 
   ```
-  bx cs machine-types LOCATION
+  bx cs machine-types dal10
   ```
   {: pre}
 
+### bx cs region
+{: #cs_region}
+
+查找当前所在的 {{site.data.keyword.containershort_notm}} 区域。您可以创建和管理特定于该区域的集群。使用 `bx cs region-set` 命令可更改区域。
+
+**示例**：
+
+```
+bx cs region
+```
+{: pre}
+
+**输出**：
+```
+Region: us-south
+```
+{: screen}
+
+### bx cs region-set [REGION]
+{: #cs_region-set}
+
+设置 {{site.data.keyword.containershort_notm}} 的区域。您可以创建和管理特定于该区域的集群，并且您可能希望在多个区域中创建集群以实现高可用性。
+
+例如，您可以登录到美国南部区域的 {{site.data.keyword.Bluemix_notm}} 并创建集群。接下来，您可以使用 `bx cs region-set eu-central` 将欧洲中部区域作为目标，并创建另一个集群。最后，您可以使用 `bx cs region-set us-south` 返回到美国南部以管理该区域中的集群。
+
+**命令选项**：
+
+<dl>
+<dt><code><em>REGION</em></code></dt>
+<dd>输入要作为目标的区域。此值是可选的。如果您未提供区域，那么可以从输出中的列表中选择区域。
+
+要获取可用区域的列表，请查看[区域和位置](cs_regions.html)或使用 `bx cs regions` [命令](#cs_regions)。</dd></dl>
+
+**示例**：
+
+```
+bx cs region-set eu-central
+```
+{: pre}
+
+```
+bx cs region-set
+```
+{: pre}
+
+**输出**：
+```
+Choose a region:
+1. ap-north
+2. ap-south
+3. eu-central
+4. uk-south
+5. us-east
+6. us-south
+Enter a number> 3
+OK
+```
+{: screen}
+
+### bx cs regions
+{: #cs_regions}
+
+列出可用的区域。`Region Name` 是 {{site.data.keyword.containershort_notm}} 名称，`Region Alias` 是区域的常规 {{site.data.keyword.Bluemix_notm}} 名称。
+
+**示例**：
+
+```
+bx cs regions
+```
+{: pre}
+
+**输出**：
+```
+Region Name   Region Alias
+ap-north      jp-tok
+ap-south      au-syd
+eu-central    eu-de
+uk-south      eu-gb
+us-east       us-east
+us-south      us-south
+```
+{: screen}
 
 ### bx cs subnets
 {: #cs_subnets}
@@ -1037,7 +1213,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
   {: pre}
 
 
-### bx cs worker-add --cluster CLUSTER [--file FILE_LOCATION][--hardware HARDWARE] --machine-type MACHINE_TYPE --number NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN
+### bx cs worker-add --cluster CLUSTER [--file FILE_LOCATION][--hardware HARDWARE] --machine-type MACHINE_TYPE --number NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt]
 {: #cs_worker_add}
 
 将工作程序节点添加到标准集群。
@@ -1062,7 +1238,8 @@ machine-type: <em>&lt;machine_type&gt;</em>
 private-vlan: <em>&lt;private_vlan&gt;</em>
 public-vlan: <em>&lt;public_vlan&gt;</em>
 hardware: <em>&lt;shared_or_dedicated&gt;</em>
-workerNum: <em>&lt;number_workers&gt;</em></code></pre>
+workerNum: <em>&lt;number_workers&gt;</em>
+</code></pre>
 
 <table>
 <caption>表 2. 了解 YAML 文件的组成部分</caption>
@@ -1098,6 +1275,9 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
 <td><code>workerNum</code></td>
 <td>将 <code><em>&lt;number_workers&gt;</em></code> 替换为要部署的工作程序节点数。</td>
 </tr>
+<tr>
+<td><code>diskEncryption: <em>false</em></code></td>
+<td>工作程序节点缺省情况下具有磁盘加密功能：[了解更多](cs_secure.html#worker)。要禁用加密，请包括此选项并将值设置为 <code>false</code>。</td></tr>
 </tbody></table></p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
@@ -1118,6 +1298,9 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
 <dd>创建集群时指定的公用 VLAN。此值是可选的。
 
 <p><strong>注：</strong>您指定的公用和专用 VLAN 必须匹配。专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。这两个前缀后面的数字和字母组合必须匹配，才可在创建集群时使用这些 VLAN。不要使用不匹配的公用和专用 VLAN 来创建集群。</p></dd>
+
+<dt><code>--disable-disk-encrypt</code></dt>
+<dd>工作程序节点缺省情况下具有磁盘加密功能：[了解更多](cs_secure.html#worker)。要禁用加密，请包括此选项。</dd>
 </dl>
 
 **示例**：
@@ -1135,7 +1318,7 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
   {: pre}
 
 
-### bx cs worker-get WORKER_NODE_ID
+### bx cs worker-get [CLUSTER_NAME_OR_ID] WORKER_NODE_ID
 {: #cs_worker_get}
 
 查看工作程序节点的详细信息。
@@ -1143,6 +1326,8 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
 <strong>命令选项</strong>：
 
    <dl>
+   <dt><code><em>CLUSTER_NAME_OR_ID</em></code></dt>
+   <dd>工作程序节点的集群的名称或标识。此值是可选的。</dd>
    <dt><code><em>WORKER_NODE_ID</em></code></dt>
    <dd>工作程序节点的标识。运行 <code>bx cs workers <em>CLUSTER</em></code> 可查看集群中工作程序节点的标识。此值是必需的。</dd>
    </dl>
@@ -1150,7 +1335,7 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
 **示例**：
 
   ```
-  bx cs worker-get WORKER_NODE_ID
+  bx cs worker-get [CLUSTER_NAME_OR_ID] WORKER_NODE_ID
   ```
   {: pre}
 
@@ -1286,3 +1471,6 @@ workerNum: <em>&lt;number_workers&gt;</em></code></pre>
   bx cs workers mycluster
   ```
   {: pre}
+
+<br />
+

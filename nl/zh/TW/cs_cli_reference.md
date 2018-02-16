@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2017
-lastupdated: "2017-12-13"
+  years: 2014, 2018
+lastupdated: "2018-01-09"
 
 ---
 
@@ -22,11 +22,13 @@ lastupdated: "2017-12-13"
 請參閱這些指令，以建立及管理叢集。
 {:shortdesc}
 
+## bx cs 指令
+{: #cs_commands}
+
 **提示：**要尋找 `bx cr` 指令嗎？請參閱 [{{site.data.keyword.registryshort_notm}} CLI 參考資料](/docs/cli/plugins/registry/index.html)。要尋找 `kubectl` 指令嗎？請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)。
 
 
 <!--[https://github.ibm.com/alchemy-containers/armada-cli ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.ibm.com/alchemy-containers/armada-cli)-->
-<!--If you're confused by the two tables... I (Rachael) have some extensive changes but dev needs to see it in staging first, so just adding a whole second staging table. Too hard to add staging tags for individual commands in the table.-->
 
 <table summary="在 {{site.data.keyword.Bluemix_notm}} 上用來建立叢集的指令">
  <thead>
@@ -34,12 +36,19 @@ lastupdated: "2017-12-13"
  </thead>
  <tbody>
   <tr>
-    <td>[bx cs albs](#cs_albs)</td>
+    <td>[bx cs alb-cert-deploy](#cs_alb_cert_deploy)</td>
+    <td>[bx cs alb-cert-get](#cs_alb_cert_get)</td>
+    <td>[bx cs alb-cert-rm](#cs_alb_cert_rm)</td>
+    <td>[bx cs alb-certs](#cs_alb_certs)</td>
     <td>[bx cs alb-configure](#cs_alb_configure)</td>
+ </tr>
+ <tr>
     <td>[bx cs alb-get](#cs_alb_get)</td>
     <td>[bx cs alb-types](#cs_alb_types)</td>
+    <td>[bx cs albs](#cs_albs)</td>
+    <td>[bx cs api-key-info](#cs_api_key_info)</td>
     <td>[bx cs apiserver-config-set](#cs_apiserver_config_set)</td>
-  </tr>
+ </tr>
  <tr>
     <td>[bx cs apiserver-refresh](#cs_apiserver_refresh)</td>
     <td>[bx cs cluster-config](#cs_cluster_config)</td>
@@ -71,34 +80,32 @@ lastupdated: "2017-12-13"
  <tr>
     <td>[bx cs logging-config-create](#cs_logging_create)</td>
     <td>[bx cs logging-config-get](#cs_logging_get)</td>
+    <td>[bx cs logging-config-refresh](#cs_logging_refresh)</td>
     <td>[bx cs logging-config-rm](#cs_logging_rm)</td>
     <td>[bx cs logging-config-update](#cs_logging_update)</td>
-    <td>[bx cs machine-types](#cs_machine_types)</td>
  </tr>
  <tr>
+    <td>[bx cs machine-types](#cs_machine_types)</td>
     <td>[bx cs region](#cs_region)</td>
     <td>[bx cs region-set](#cs_region-set)</td>
     <td>[bx cs regions](#cs_regions)</td>
     <td>[bx cs subnets](#cs_subnets)</td>
-    <td>[bx cs vlans](#cs_vlans)</td>
  </tr>
  <tr>
+    <td>[bx cs vlans](#cs_vlans)</td>
     <td>[bx cs webhook-create](#cs_webhook_create)</td>
     <td>[bx cs worker-add](#cs_worker_add)</td>
     <td>[bx cs worker-get](#cs_worker_get)</td>
-    <td>[bx cs worker-rm](#cs_worker_rm)</td>
-    <td>[bx cs worker-update](#cs_worker_update)</td>
+    <td>[bx cs worker-reboot](#cs_worker_reboot)</td>
  </tr>
  <tr>
-    <td>[bx cs worker-reboot](#cs_worker_reboot)</td>
     <td>[bx cs worker-reload](#cs_worker_reload)</td>
+    <td>[bx cs worker-rm](#cs_worker_rm)</td>
+    <td>[bx cs worker-update](#cs_worker_update)</td>
     <td>[bx cs workers](#cs_workers)</td>
  </tr>
  </tbody>
  </table>
-
-
-
 
 **提示：**若要查看 {{site.data.keyword.containershort_notm}} 外掛程式的版本，請執行下列指令。
 
@@ -107,28 +114,144 @@ bx plugin list
 ```
 {: pre}
 
-## bx cs 指令
-{: #cs_commands}
+## 應用程式負載平衡器指令
 
-### bx cs albs --cluster CLUSTER
-{: #cs_albs}
+### bx cs alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NAME --cert-crn CERTIFICATE_CRN
+{: #cs_alb_cert_deploy}
 
-檢視叢集中所有應用程式負載平衡器的狀態。如果未傳回任何應用程式負載平衡器 ID，則叢集沒有可攜式子網路。您可以[建立](#cs_cluster_subnet_create)或[新增](#cs_cluster_subnet_add)子網路至叢集。
+從您的 {{site.data.keyword.cloudcerts_long_notm}} 實例，將憑證部署或更新至叢集中的應用程式負載平衡器。
 
-<strong>指令選項</strong>：
+**附註：**
+* 只有具有管理者存取角色的使用者能執行這個指令。
+* 您只能更新從相同 {{site.data.keyword.cloudcerts_long_notm}} 實例匯入的憑證。
+
+<strong>指令選項</strong>
 
    <dl>
-   <dt><code><em>--cluster </em>CLUSTER</code></dt>
-   <dd>列出其中可用應用程式負載平衡器的叢集的名稱或 ID。這是必要值。</dd>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>叢集的名稱或 ID。這是必要值。</dd>
+
+   <dt><code>--update</code></dt>
+   <dd>包括此旗標，以在叢集中更新應用程式負載平衡器的憑證。這是選用值。</dd>
+
+   <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
+   <dd>應用程式負載平衡器 Secret 的名稱。這是必要值。</dd>
+
+   <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
+   <dd>憑證 CRN。這是必要值。</dd>
    </dl>
 
 **範例**：
 
-  ```
-  bx cs albs --cluster mycluster
-  ```
-  {: pre}
+部署應用程式負載平衡器 Secret 的範例：
 
+   ```
+   bx cs alb-cert-deploy --secret-name my_alb_secret_name --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
+   ```
+ {: pre}
+
+更新現有應用程式負載平衡器 Secret 的範例：
+
+ ```
+ bx cs alb-cert-deploy --update --secret-name my_alb_secret_name --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:7e21fde8ee84a96d29240327daee3eb2
+ ```
+ {: pre}
+
+
+### bx cs alb-cert-get --cluster CLUSTER [--secret-name SECRET_NAME][--cert-crn CERTIFICATE_CRN]
+{: #cs_alb_cert_get}
+
+檢視叢集中應用程式負載平衡器 Secret 的相關資訊。
+
+**附註：**只有具有管理者存取角色的使用者能執行這個指令。
+
+<strong>指令選項</strong>
+
+  <dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+  <dd>叢集的名稱或 ID。這是必要值。</dd>
+
+  <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
+  <dd>應用程式負載平衡器 Secret 的名稱。這是必要值，以便取得叢集中特定應用程式負載平衡器 Secret 的相關資訊。</dd>
+
+  <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
+  <dd>憑證 CRN。這是必要值，以便取得符合叢集中特定憑證 CRN 之所有應用程式負載平衡器 Secret 的相關資訊。</dd>
+  </dl>
+
+**範例**：
+
+ 提取應用程式負載平衡器 Secret 相關資訊的範例：
+
+ ```
+ bx cs alb-cert-get --cluster my_cluster --secret-name my_alb_secret_name
+ ```
+ {: pre}
+
+ 提取符合指定憑證 CRN 之所有應用程式負載平衡器 Secret 相關資訊的範例：
+
+ ```
+ bx cs alb-cert-get --cluster my_cluster --cert-crn  crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
+ ```
+ {: pre}
+
+
+### bx cs alb-cert-rm --cluster CLUSTER [--secret-name SECRET_NAME][--cert-crn CERTIFICATE_CRN]
+{: #cs_alb_cert_rm}
+
+移除叢集中的應用程式負載平衡器 Secret。
+
+**附註：**只有具有管理者存取角色的使用者能執行這個指令。
+
+<strong>指令選項</strong>
+
+  <dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+  <dd>叢集的名稱或 ID。這是必要值。</dd>
+
+  <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
+  <dd>ALB Secret 的名稱。這是必要值，以便移除叢集中的特定應用程式負載平衡器 Secret。</dd>
+
+  <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
+  <dd>憑證 CRN。這是必要值，以便移除符合叢集中特定憑證 CRN 的所有應用程式負載平衡器 Secret。</dd>
+  </dl>
+
+**範例**：
+
+ 移除應用程式負載平衡器 Secret 的範例：
+
+ ```
+ bx cs alb-cert-rm --cluster my_cluster --secret-name my_alb_secret_name
+ ```
+ {: pre}
+
+ 移除符合指定憑證 CRN 之所有應用程式負載平衡器 Secret 的範例：
+
+ ```
+ bx cs alb-cert-rm --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
+ ```
+ {: pre}
+
+
+### bx cs alb-certs --cluster CLUSTER
+{: #cs_alb_certs}
+
+檢視叢集中的應用程式負載平衡器清單。
+
+**附註：**只有具有管理者存取角色的使用者能執行這個指令。
+
+<strong>指令選項</strong>
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>叢集的名稱或 ID。這是必要值。</dd>
+   </dl>
+
+**範例**：
+
+ ```
+ bx cs alb-certs --cluster my_cluster
+ ```
+ {: pre}
 
 
 ### bx cs alb-configure --albID ALB_ID [--enable][--disable][--user-ip USERIP]
@@ -153,7 +276,7 @@ bx plugin list
 
    <ul>
     <li>僅專用應用程式負載平衡器才能使用此參數</li>
-    <li>專用應用程式負載平衡器是使用來自使用者所提供之專用子網路的 IP 位址進行部署。如果未提供 IP 位址，則會使用專用 IP 位址來部署應用程式負載平衡器，而專用 IP 位址來自建立叢集時自動佈建的可攜式專用子網路。</li>
+    <li>專用應用程式負載平衡器是使用來自使用者所提供之專用子網路的 IP 位址進行部署。如果未提供 IP 位址，則部署應用程式負載平衡器時會使用來自建立叢集時自動佈建之可攜式專用子網路的專用 IP 位址。</li>
    </ul>
    </dd>
    </dl>
@@ -217,12 +340,52 @@ bx plugin list
   {: pre}
 
 
-### bx cs apiserver-config-set
+### bx cs albs --cluster CLUSTER
+{: #cs_albs}
+
+檢視叢集中所有應用程式負載平衡器的狀態。如果未傳回任何應用程式負載平衡器 ID，則叢集沒有可攜式子網路。您可以[建立](#cs_cluster_subnet_create)或[新增](#cs_cluster_subnet_add)子網路至叢集。
+
+<strong>指令選項</strong>：
+
+   <dl>
+   <dt><code><em>--cluster </em>CLUSTER</code></dt>
+   <dd>列出其中可用應用程式負載平衡器的叢集的名稱或 ID。這是必要值。</dd>
+   </dl>
+
+**範例**：
+
+  ```
+  bx cs albs --cluster mycluster
+  ```
+  {: pre}
+
+
+## bx cs api-key-info CLUSTER
+{: #cs_api_key_info}
+
+檢視叢集 IAM API 金鑰擁有者的名稱及電子郵件位址。
+
+<strong>指令選項</strong>：
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>叢集的名稱或 ID。這是必要值。</dd>
+   </dl>
+
+**範例**：
+
+  ```
+  bx cs api-key-info my_cluster
+  ```
+  {: pre}
+
+
+## bx cs apiserver-config-set
 {: #cs_apiserver_config_set}
 
 設定叢集 Kubernetes API 伺服器配置的選項。此指令必須與您要設定之配置選項的下列其中一個次指令一起使用。
 
-#### bx cs apiserver-config-get audit-webhook CLUSTER
+### bx cs apiserver-config-get audit-webhook CLUSTER
 {: #cs_apiserver_api_webhook_get}
 
 檢視您要將 API 伺服器審核日誌傳送至其中的遠端記載服務的 URL。URL 是在建立 API 伺服器配置的 Webhook 後端時指定。
@@ -241,7 +404,7 @@ bx plugin list
   ```
   {: pre}
 
-#### bx cs apiserver-config-set audit-webhook CLUSTER [--remoteServer SERVER_URL_OR_IP][--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH][--clientKey CLIENT_KEY_PATH]
+### bx cs apiserver-config-set audit-webhook CLUSTER [--remoteServer SERVER_URL_OR_IP][--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH][--clientKey CLIENT_KEY_PATH]
 {: #cs_apiserver_api_webhook_set}
 
 設定 API 伺服器配置的 Webhook 後端。Webhook 後端會將 API 伺服器審核日誌轉遞至遠端伺服器。將根據您在此指令旗標中提供的資訊，來建立 Webhook 配置。如果您未在旗標中提供任何資訊，則會使用預設 Webhook 配置。
@@ -253,7 +416,7 @@ bx plugin list
    <dd>叢集的名稱或 ID。這是必要值。</dd>
 
    <dt><code>--remoteServer <em>SERVER_URL</em></code></dt>
-   <dd>您要將審核日誌傳送至其中的遠端記載服務的 URL 或 IP 位址。如果您提供不安全的伺服器 URL，則會忽略任何憑證。這是選用值。如果您未指定遠端伺服器 URL 或 IP 位址，則會使用預設 QRadar 配置，並將日誌傳送至叢集所在地區的 QRadar 實例。</dd>
+   <dd>您要將審核日誌傳送至其中的遠端記載服務的 URL 或 IP 位址。如果您提供不安全的伺服器 URL，則會忽略任何憑證。這是選用值。</dd>
 
    <dt><code>--caCert <em>CA_CERT_PATH</em></code></dt>
    <dd>用來驗證遠端記載服務之 CA 憑證的檔案路徑。這是選用值。</dd>
@@ -272,8 +435,8 @@ bx plugin list
   ```
   {: pre}
 
-#### bx cs apiserver-config-unset audit-webhook CLUSTER
-{: #cs_apiserver_api_webhook_get}
+### bx cs apiserver-config-unset audit-webhook CLUSTER
+{: #cs_apiserver_api_webhook_unset}
 
 停用叢集 API 伺服器的 Webhook 後端配置。停用 Webhook 後端會停止將 API 伺服器審核日誌轉遞至遠端伺服器。
 
@@ -291,7 +454,7 @@ bx plugin list
   ```
   {: pre}
 
-### bx cs apiserver-refresh CLUSTER
+## bx cs apiserver-refresh CLUSTER
 {: #cs_apiserver_refresh}
 
 重新啟動叢集中的 Kubernetes 主節點，以將變更套用至 API 伺服器配置。
@@ -310,6 +473,7 @@ bx plugin list
   ```
   {: pre}
 
+## 叢集指令
 
 ### bx cs cluster-config CLUSTER [--admin][--export]
 {: #cs_cluster_config}
@@ -409,7 +573,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
       <td>叢集主節點的 Kubernetes 版本。這是選用值。除非另有指定，否則會使用支援的 Kubernetes 版本的預設值來建立叢集。若要查看可用的版本，請執行 <code>bx cs kube-versions</code>。</td></tr>
       <tr>
       <td><code>diskEncryption: <em>false</em></code></td>
-      <td>依預設，工作者節點會具備磁碟加密；[進一步瞭解](cs_security.html#cs_security_worker)。若要停用加密，請包括此選項，並將值設為 <code>false</code>。</td></tr>
+      <td>依預設，工作者節點會具備磁碟加密；[進一步瞭解](cs_secure.html#worker)。若要停用加密，請包含此選項，並將值設為 <code>false</code>。</td></tr>
      </tbody></table>
     </p></dd>
 
@@ -467,7 +631,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <p><strong>附註：</strong>每個工作者節點都會獲指派唯一的工作者節點 ID 及網域名稱，在叢集建立之後即不得手動予以變更。變更 ID 或網域名稱會讓 Kubernetes 主節點無法管理叢集。</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>依預設，工作者節點會具備磁碟加密；[進一步瞭解](cs_security.html#cs_security_worker)。若要停用加密，請包括此選項。</dd>
+<dd>依預設，工作者節點會具備磁碟加密；[進一步瞭解](cs_secure.html#worker)。若要停用加密，請包含此選項。</dd>
 </dl>
 
 **範例**：
@@ -781,6 +945,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
   ```
   {: pre}
 
+## Credentials 指令
 
 ### bx cs credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME
 {: #cs_credentials_set}
@@ -845,7 +1010,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 
 
 
-### bx cs help
+## bx cs help
 {: #cs_help}
 
 檢視所支援指令及參數的清單。
@@ -862,7 +1027,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
   {: pre}
 
 
-### bx cs init [--host HOST]
+## bx cs init [--host HOST]
 {: #cs_init}
 
 起始設定 {{site.data.keyword.containershort_notm}} 外掛程式，或指定您要建立或存取 Kubernetes 叢集的地區。
@@ -881,7 +1046,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
     ```
 {: pre}
 
-### bx cs kube-versions
+## bx cs kube-versions
 {: #cs_kube_versions}
 
 檢視 {{site.data.keyword.containershort_notm}} 中支援的 Kubernetes 版本清單。將您的[主要叢集](#cs_cluster_update)及[工作者節點](#cs_worker_update)更新為最新且功能穩定的預設版本。
@@ -897,7 +1062,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
   ```
   {: pre}
 
-### bx cs locations
+## bx cs locations
 {: #cs_datacenters}
 
 檢視可讓您在其中建立叢集的可用位置清單。
@@ -913,7 +1078,9 @@ kube-version: <em>&lt;kube-version&gt;</em>
   ```
   {: pre}
 
-### bx cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT][--spaceName CLUSTER_SPACE] [--orgName CLUSTER_ORG] --type LOG_TYPE [--json]
+## Logging 指令
+
+### bx cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT][--space CLUSTER_SPACE] [--org CLUSTER_ORG] --type LOG_TYPE [--json]
 {: #cs_logging_create}
 
 建立記載配置。您可以使用這個指令，將容器、應用程式、工作者節點、Kubernetes 叢集及 Ingress 應用程式負載平衡器的日誌轉遞至 {{site.data.keyword.loganalysisshort_notm}} 或外部 syslog 伺服器。
@@ -926,15 +1093,15 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
 <dd>您要為其啟用日誌轉遞的日誌來源。接受值為 <code>container</code>、<code>application</code>、<code>worker</code>、<code>kubernetes</code> 及 <code>ingress</code>。這是必要值。</dd>
 <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
-<dd>您要從中轉遞日誌的 Docker 容器名稱空間。<code>ibm-system</code> 及 <code>kube-system</code> Kubernetes 名稱空間不支援日誌轉遞。此值僅對容器日誌來源有效且為選用。如果未指定名稱空間，則容器中的所有名稱空間都會使用此配置。</dd>
+<dd>您要從該處轉遞日誌的 Kubernetes 名稱空間。<code>ibm-system</code> 及 <code>kube-system</code> Kubernetes 名稱空間不支援日誌轉遞。此值僅對容器日誌來源有效且為選用。如果未指定名稱空間，則叢集中的所有名稱空間都會使用此配置。</dd>
 <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
 <dd>記載類型是 <code>syslog</code> 時，則為日誌收集器伺服器的主機名稱或 IP 位址。這對於 <code>syslog</code> 是必要值。記載類型是 <code>ibm</code> 時，則為 {{site.data.keyword.loganalysislong_notm}} 汲取 URL。您可以在[這裡](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)尋找可用的汲取 URL 清單。如果您未指定汲取 URL，則會使用您在其中建立叢集之地區的端點。</dd>
 <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
 <dd>日誌收集器伺服器的埠。這是選用值。如果您未指定埠，則會將標準埠 <code>514</code> 用於 <code>syslog</code>，而將標準埠 <code>9091</code> 用於 <code>ibm</code>。</dd>
-<dt><code>--spaceName <em>CLUSTER_SPACE</em></code></dt>
-<dd>您要將日誌傳送至其中的空間的名稱。此值僅對日誌類型 <code>ibm</code> 有效且為選用。如果您未指定空間，則會將日誌傳送至帳戶層次。</dd>
-<dt><code>--orgName <em>CLUSTER_ORG</em></code></dt>
-<dd>空間所在組織的名稱。此值僅對日誌類型 <code>ibm</code> 有效，而且如果您已指定空間，則這是必要值。</dd>
+<dt><code>--space <em>CLUSTER_SPACE</em></code></dt>
+<dd>您要將日誌傳送至其中的 Cloud Foundry 空間的名稱。此值僅對日誌類型 <code>ibm</code> 有效且為選用。如果您未指定空間，則會將日誌傳送至帳戶層次。</dd>
+<dt><code>--org <em>CLUSTER_ORG</em></code></dt>
+<dd>空間所在的 Cloud Foundry 組織的名稱。此值僅對日誌類型 <code>ibm</code> 有效，而且如果您已指定空間，則這是必要值。</dd>
 <dt><code>--type <em>LOG_TYPE</em></code></dt>
 <dd>您要使用的日誌轉遞通訊協定。目前支援 <code>syslog</code> 和 <code>ibm</code>。這是必要值。</dd>
 <dt><code>--json</code></dt>
@@ -957,12 +1124,12 @@ kube-version: <em>&lt;kube-version&gt;</em>
   ```
   {: pre}
 
-  在與預設值不同的埠上從 `ingress` 來源轉遞日誌之日誌類型 `syslog` 的範例：
+在與預設值不同的埠上從 `ingress` 來源轉遞日誌之日誌類型 `syslog` 的範例：
 
-    ```
+  ```
     bx cs logging-config-create my_cluster --logsource container --hostname my_hostname-or-IP --port 5514 --type syslog
     ```
-    {: pre}
+  {: pre}
 
 ### bx cs logging-config-get CLUSTER [--logsource LOG_SOURCE][--json]
 {: #cs_logging_get}
@@ -988,29 +1155,49 @@ kube-version: <em>&lt;kube-version&gt;</em>
   {: pre}
 
 
-### bx cs logging-config-rm CLUSTER LOG_CONFIG_ID
-{: #cs_logging_rm}
+### bx cs logging-config-refresh CLUSTER
+{: #cs_logging_refresh}
 
-刪除日誌轉遞配置。這會停止將日誌轉遞至 syslog 伺服器或 {{site.data.keyword.loganalysisshort_notm}}。
+重新整理叢集的記載配置。這會為轉遞至您叢集空間層次的任何記載配置，重新整理其記載記號。
 
 <strong>指令選項</strong>：
 
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>叢集的名稱或 ID。這是必要值。</dd>
-   <dt><code><em>LOG_CONFIG_ID</em></code></dt>
+   </dl>
+
+**範例**：
+
+  ```
+  bx cs logging-config-refresh my_cluster
+  ```
+  {: pre}
+
+
+### bx cs logging-config-rm CLUSTER --id LOG_CONFIG_ID
+{: #cs_logging_rm}
+
+刪除日誌轉遞配置。這會停止將日誌轉遞至遠端 syslog 伺服器或 {{site.data.keyword.loganalysisshort_notm}}。
+
+<strong>指令選項</strong>：
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>叢集的名稱或 ID。這是必要值。</dd>
+   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
    <dd>您要從日誌來源移除的記載配置 ID。這是必要值。</dd>
    </dl>
 
 **範例**：
 
   ```
-  bx cs logging-config-rm my_cluster f4bc77c0-ee7d-422d-aabf-a4e6b977264e
+  bx cs logging-config-rm my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e
   ```
   {: pre}
 
 
-### bx cs logging-config-update CLUSTER LOG_CONFIG_ID [--hostname LOG_SERVER_HOSTNAME_OR_IP][--port LOG_SERVER_PORT] [--spaceName CLUSTER_SPACE][--orgName CLUSTER_ORG] --type LOG_TYPE [--json]
+### bx cs logging-config-update CLUSTER --id LOG_CONFIG_ID [--hostname LOG_SERVER_HOSTNAME_OR_IP][--port LOG_SERVER_PORT] [--space CLUSTER_SPACE][--org CLUSTER_ORG] --type LOG_TYPE [--json]
 {: #cs_logging_update}
 
 更新日誌轉遞配置的詳細資料。
@@ -1020,15 +1207,15 @@ kube-version: <em>&lt;kube-version&gt;</em>
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>叢集的名稱或 ID。這是必要值。</dd>
-   <dt><code><em>LOG_CONFIG_ID</em></code></dt>
+   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
    <dd>您要更新的記載配置 ID。這是必要值。</dd>
    <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
    <dd>記載類型是 <code>syslog</code> 時，則為日誌收集器伺服器的主機名稱或 IP 位址。這對於 <code>syslog</code> 是必要值。記載類型是 <code>ibm</code> 時，則為 {{site.data.keyword.loganalysislong_notm}} 汲取 URL。您可以在[這裡](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)尋找可用的汲取 URL 清單。如果您未指定汲取 URL，則會使用您在其中建立叢集之地區的端點。</dd>
    <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
    <dd>日誌收集器伺服器的埠。當記載類型是 <code>syslog</code> 時，這是選用值。如果您未指定埠，則會將標準埠 <code>514</code> 用於 <code>syslog</code>，而將 <code>9091</code> 用於 <code>ibm</code>。</dd>
-   <dt><code>--spaceName <em>CLUSTER_SPACE</em></code></dt>
+   <dt><code>--space <em>CLUSTER_SPACE</em></code></dt>
    <dd>您要將日誌傳送至其中的空間的名稱。此值僅對日誌類型 <code>ibm</code> 有效且為選用。如果您未指定空間，則會將日誌傳送至帳戶層次。</dd>
-   <dt><code>--orgName <em>CLUSTER_ORG</em></code></dt>
+   <dt><code>--org <em>CLUSTER_ORG</em></code></dt>
    <dd>空間所在組織的名稱。此值僅對日誌類型 <code>ibm</code> 有效，而且如果您已指定空間，則這是必要值。</dd>
    <dt><code>--type <em>LOG_TYPE</em></code></dt>
    <dd>您要使用的日誌轉遞通訊協定。目前支援 <code>syslog</code> 和 <code>ibm</code>。這是必要值。</dd>
@@ -1039,24 +1226,24 @@ kube-version: <em>&lt;kube-version&gt;</em>
 **日誌類型 `ibm`** 的範例：
 
   ```
-  bx cs logging-config-update my_cluster f4bc77c0-ee7d-422d-aabf-a4e6b977264e --type ibm
+  bx cs logging-config-update my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e --type ibm
   ```
   {: pre}
 
 **日誌類型 `syslog`** 的範例：
 
   ```
-  bx cs logging-config-update my_cluster f4bc77c0-ee7d-422d-aabf-a4e6b977264e --hostname localhost --port 5514 --type syslog
+  bx cs logging-config-update my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e --hostname localhost --port 5514 --type syslog
   ```
   {: pre}
 
 
-### bx cs machine-types LOCATION
+## bx cs machine-types LOCATION
 {: #cs_machine_types}
 
 檢視工作者節點的可用機型清單。每一個機型都包括叢集中每一個工作者節點的虛擬 CPU、記憶體及磁碟空間量。
+- 依預設，主機的 Docker 資料是以機型來加密。儲存所有容器資料的 `/var/lib/docker` 目錄是使用 LUKS 加密來進行加密。如果在建立叢集的期間包含了 `disable-disk-encrypt` 選項，則主機的 Docker 資料不會加密。[進一步瞭解加密。](cs_secure.html#encrypted_disks)
 - 名稱中具有 `u2c` 或 `b2c` 的機型會使用本端磁碟，而非儲存區網路 (SAN) 來取得可靠性。可靠性優點包括將位元組序列化到本端磁碟時的更高傳輸量，以及減少檔案系統由於網路故障而造成的退化。這些機型包含 25GB 本端磁碟儲存空間，供 OS 檔案系統使用，以及包含 100GB 本端磁碟儲存空間，供 `/var/lib/docker` 使用，而所有容器資料都會寫入至這個目錄中。
-- 名稱中包括 `encrypted` 的機型會加密主機的 Docker 資料。儲存所有容器資料的 `/var/lib/docker` 目錄是使用 LUKS 加密來進行加密。
 - 名稱中具有 `u1c` 或 `b1c` 的機型已被淘汰，例如 `u1c.2x4`。若要開始使用 `u2c` 及 `b2c` 機型，請使用 `bx cs worker-add` 指令，利用更新的機型新增工作者節點。然後，使用 `bx cs worker-rm` 指令，移除正在使用已淘汰機型的工作者節點。
 </p>
 
@@ -1073,6 +1260,8 @@ kube-version: <em>&lt;kube-version&gt;</em>
   bx cs machine-types dal10
   ```
   {: pre}
+
+## Region 指令
 
 ### bx cs region
 {: #cs_region}
@@ -1157,7 +1346,7 @@ us-south      us-south
 ```
 {: screen}
 
-### bx cs subnets
+## bx cs subnets
 {: #cs_subnets}
 
 檢視 IBM Cloud 基礎架構 (SoftLayer) 帳戶中可用的子網路清單。
@@ -1174,7 +1363,7 @@ us-south      us-south
   {: pre}
 
 
-### bx cs vlans LOCATION
+## bx cs vlans LOCATION
 {: #cs_vlans}
 
 列出 IBM Cloud 基礎架構 (SoftLayer) 帳戶中的位置可用的公用及專用 VLAN。若要列出可用的 VLAN，您必須具有付費帳戶。
@@ -1194,7 +1383,7 @@ us-south      us-south
   {: pre}
 
 
-### bx cs webhook-create --cluster CLUSTER --level LEVEL --type slack --URL URL
+## bx cs webhook-create --cluster CLUSTER --level LEVEL --type slack --URL URL
 {: #cs_webhook_create}
 
 建立 Webhook。
@@ -1222,6 +1411,7 @@ us-south      us-south
   ```
   {: pre}
 
+## Worker 指令
 
 ### bx cs worker-add --cluster CLUSTER [--file FILE_LOCATION][--hardware HARDWARE] --machine-type MACHINE_TYPE --number NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt]
 {: #cs_worker_add}
@@ -1285,7 +1475,7 @@ workerNum: <em>&lt;number_workers&gt;</em>
 </tr>
 <tr>
 <td><code>diskEncryption: <em>false</em></code></td>
-<td>依預設，工作者節點會具備磁碟加密；[進一步瞭解](cs_security.html#cs_security_worker)。若要停用加密，請包括此選項，並將值設為 <code>false</code>。</td></tr>
+<td>依預設，工作者節點會具備磁碟加密；[進一步瞭解](cs_secure.html#worker)。若要停用加密，請包含此選項，並將值設為 <code>false</code>。</td></tr>
 </tbody></table></p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
@@ -1308,7 +1498,7 @@ workerNum: <em>&lt;number_workers&gt;</em>
 <p><strong>附註：</strong>您指定的公用及專用 VLAN 必須相符。專用 VLAN 路由器的開頭一律為 <code>bcr</code>（後端路由器），而公用 VLAN 路由器的開頭一律為 <code>fcr</code>（前端路由器）。這些字首後面的數字與字母組合必須相符，才能在建立叢集時使用這些 VLAN。請不要使用不相符的公用及專用 VLAN 來建立叢集。</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>依預設，工作者節點會具備磁碟加密；[進一步瞭解](cs_security.html#cs_security_worker)。若要停用加密，請包括此選項。</dd>
+<dd>依預設，工作者節點會具備磁碟加密；[進一步瞭解](cs_secure.html#worker)。若要停用加密，請包含此選項。</dd>
 </dl>
 
 **範例**：
@@ -1482,18 +1672,3 @@ workerNum: <em>&lt;number_workers&gt;</em>
 
 <br />
 
-
-## 叢集狀態
-{: #cs_cluster_states}
-
-您可以執行 bx cs clusters 指令並找出 **State** 欄位，以檢視現行叢集狀態。叢集狀態可提供叢集可用性及容量的相關資訊，以及可能已發生的潛在問題。
-{:shortdesc}
-
-|叢集狀態|原因|
-|-------------|------|
-|Deploying|Kubernetes 主節點尚未完整部署。您無法存取叢集。|
-|Pending|已部署 Kubernetes 主節點。正在佈建工作者節點，因此還無法在叢集中使用。您可以存取叢集，但無法將應用程式部署至叢集。|
-|Normal|叢集中的所有工作者節點都已開始執行。您可以存取叢集，並將應用程式部署至叢集。|
-|Warning|叢集中至少有一個工作者節點無法使用，但有其他工作者節點可用，並且可以接管工作負載。<ol><li>列出叢集中的工作者節點，並記下顯示 <strong>Warning</strong> 狀態之工作者節點的 ID。<pre class="pre"><code>bx cs workers &lt;cluster_name_or_id&gt;</code></pre><li>取得工作者節點的詳細資料。<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre><li>檢閱 <strong>State</strong>、<strong>Status</strong> 及 <strong>Details</strong> 欄位，以尋找工作者節點為何關閉的根本問題。</li><li>如果您的工作者節點幾乎達到記憶體或磁碟空間限制，請減少工作者節點上的工作負載，或將工作者節點新增至叢集，以協助對工作負載進行負載平衡。</li></ol>|
-|Critical|無法聯繫 Kubernetes 主節點，或叢集中的所有工作者節點都已關閉。<ol><li>列出叢集中的工作者節點。<pre class="pre"><code>bx cs workers &lt;cluser_name_or_id&gt;</code></pre><li>取得每一個工作者節點的詳細資料。<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre></li><li>檢閱 <strong>State</strong> 及 <strong>Status</strong> 欄位，以尋找工作者節點為何關閉的根本問題。<ul><li>如果工作者節點狀態顯示 <strong>Provision_failed</strong>，則您可能沒有從 IBM Cloud 基礎架構 (SoftLayer) 組合佈建工作者節點的必要許可權。若要尋找必要許可權，請參閱[配置對 IBM Cloud 基礎架構 (SoftLayer) 組合的存取權以建立標準 Kubernetes 叢集](cs_planning.html#cs_planning_unify_accounts)。</li><li>如果工作者節點狀態 (State) 顯示 <strong>Critical</strong>，而狀態 (Status) 顯示 <strong>Not Ready</strong>，則工作者節點可能無法連接至 IBM Cloud 基礎架構 (SoftLayer)。請先執行 <code>bx cs worker-reboot --hard CLUSTER WORKER</code>，來開始疑難排解。如果該指令不成功，則請執行 <code>bx cs worker reload CLUSTER WORKER</code>。</li><li>如果工作者節點狀態 (State) 顯示 <strong>Critical</strong>，而狀態 (Status) 顯示 <strong>Out of disk</strong>，則工作者節點已用完容量。您可以減少工作者節點上的工作負載，或將工作者節點新增至叢集，以協助對工作負載進行負載平衡。</li><li>如果工作者節點狀態 (State) 顯示 <strong>Critical</strong>，而狀態 (Status) 顯示 <strong>Unknown</strong>，則 Kubernetes 主節點無法使用。請開立 [{{site.data.keyword.Bluemix_notm}} 支援問題單](/docs/support/index.html#contacting-support)，以與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡。</li></ul></li></ol>|
-{: caption="表 3. 叢集狀態" caption-side="top"}

@@ -1,6 +1,8 @@
 ---
 
-copyright: years: 2014, 2017 lastupdated: "02/11/2017
+copyright:
+  years: 2014, 2018
+lastupdated: "2017-11-02"
 
 ---
 
@@ -127,7 +129,7 @@ Crie um token que não expira para usar um registro de imagem que você usou par
         <table>
         <caption>Tabela 2. Entendendo os componentes de arquivo YAML</caption>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> Entendendo os componentes de arquivo YAML</th>
+        <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
         </thead>
         <tbody>
         <tr>

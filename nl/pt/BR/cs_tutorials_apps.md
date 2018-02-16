@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-08"
 
 ---
@@ -282,7 +282,7 @@ o NodePort exposto é a porta na qual o nó do trabalhador atende o tráfego. Em
     <table summary=“Information about the expose command parameters.”>
     <caption>Tabela 1. Parâmetros de comando</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png"/> Mais sobre os parâmetros de exposição</th>
+    <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> Mais sobre os parâmetros de exposição</th>
     </thead>
     <tbody>
     <tr>
@@ -405,7 +405,7 @@ O diagrama a seguir inclui os componentes que você implementa concluindo esta l
 
 ![Configuração de implementação](images/cs_app_tutorial_components2.png)
 
-No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhador. Nesta lição, você configura uma implementação e implementa três instâncias do app Hello World. Cada instância é implementada em um pod do Kubernetes como parte de um conjunto de réplicas no nó do trabalhador. Para torná-la publicamente disponível, você também cria um serviço do Kubernetes. 
+No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhador. Nesta lição, você configura uma implementação e implementa três instâncias do app Hello World. Cada instância é implementada em um pod do Kubernetes como parte de um conjunto de réplicas no nó do trabalhador. Para torná-la publicamente disponível, você também cria um serviço do Kubernetes.
 
 Conforme definido no script de configuração, o Kubernetes pode usar uma verificação de disponibilidade para ver se um contêiner em um pod está em execução ou não. Por exemplo, essas verificações podem capturar conflitos, em que um app está em execução, mas não é possível fazer progresso. Reiniciar um contêiner que está nessa condição pode ajudar a tornar o app mais disponível apesar de erros. Então, o Kubernetes usa a verificação de prontidão para saber quando um contêiner está pronto para começar a aceitar o tráfego novamente. Um pod é considerado pronto quando seu contêiner está pronto. Quando o pod está pronto, ele é iniciado novamente. No app Stage2, a cada 15 segundos, o app atinge o tempo limite. Com uma verificação de funcionamento configurada no script de configuração, os contêineres serão recriados se a verificação de funcionamento localizar um problema com um app.
 
@@ -614,7 +614,7 @@ O diagrama a seguir inclui os componentes que você implementa concluindo esta l
 
 ![Configuração de implementação](images/cs_app_tutorial_components3.png)
 
-No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhador. Nesta lição, você cria uma instância do serviço Watson Tone Analyzer em sua conta do {{site.data.keyword.Bluemix_notm}} e configura duas implementações, uma implementação para cada componente do app. Cada componente é implementado em um pod do Kubernetes no nó do trabalhador. Para tornar ambos os componentes publicamente disponíveis, você também cria um serviço do Kubernetes para cada componente. 
+No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhador. Nesta lição, você cria uma instância do serviço Watson Tone Analyzer em sua conta do {{site.data.keyword.Bluemix_notm}} e configura duas implementações, uma implementação para cada componente do app. Cada componente é implementado em um pod do Kubernetes no nó do trabalhador. Para tornar ambos os componentes publicamente disponíveis, você também cria um serviço do Kubernetes para cada componente.
 
 
 ### Lição 3a: implementando o app Watson Tone Analyzer
@@ -897,5 +897,6 @@ bx cs cluster-rm <pr_firm_cluster>
 {: pre}
 
 ## O que Vem a Seguir?
+{: #next}
 
 Tente explorar as jornadas de orquestração de contêiner no [developerWorks ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/code/journey/category/container-orchestration/).

@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-01"
 
 ---
@@ -128,7 +128,7 @@ lastupdated: "2017-12-01"
 
 6.  要在本地构建映像并将其推送到注册表名称空间，请[安装 Docker ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.docker.com/community-edition#/download)。如果使用的是 Windows 8 或更低版本，可以改为安装 [Docker Toolbox ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.docker.com/products/docker-toolbox)。Docker CLI 用于将应用程序构建成映像。用于通过 Docker CLI 运行命令的前缀是 `docker`。
 
-接下来，开始[使用 {{site.data.keyword.containershort_notm}} 通过 CLI 创建 Kubernetes 集群](cs_cluster.html#cs_cluster_cli)。
+接下来，开始[使用 {{site.data.keyword.containershort_notm}} 通过 CLI 创建 Kubernetes 集群](cs_clusters.html#clusters_cli)。
 
 有关这些 CLI 的参考信息，请参阅那些工具的文档。
 
@@ -147,7 +147,7 @@ lastupdated: "2017-12-01"
 然后，您可以运行 Kubernetes `kubectl` 命令，以在 {{site.data.keyword.Bluemix_notm}} 中使用集群。
 {:shortdesc}
 
-[安装必需的 CLI](#cs_cli_install) 并[创建集群](cs_cluster.html#cs_cluster_cli)后，才能运行 `kubectl` 命令。
+[安装必需的 CLI](#cs_cli_install) 并[创建集群](cs_clusters.html#clusters_cli)后，才能运行 `kubectl` 命令。
 
 1.  登录到 {{site.data.keyword.Bluemix_notm}} CLI。根据提示，输入您的 {{site.data.keyword.Bluemix_notm}} 凭证。要指定 {{site.data.keyword.Bluemix_notm}} 区域，请[包含 API 端点](cs_regions.html#bluemix_regions)。
 

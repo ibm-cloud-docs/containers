@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2017
-lastupdated: "2017-12-18"
+  years: 2014, 2018
+lastupdated: "2018-01-05"
 
 ---
 
@@ -22,13 +22,24 @@ Passez en revue les versions de Kubernetes disponibles sur {{site.data.keyword.c
 {:shortdesc}
 
 {{site.data.keyword.containershort_notm}} prend en charge plusieurs versions de Kubernetes. La version par défaut est utilisée lorsque vous créez ou mettez à jour un cluster, sauf si vous spécifiez une autre version. Les versions disponibles de Kubernetes sont les suivantes :
-- 1.8.4
+- 1.8.6
 - 1.7.4 (version par défaut)
 - 1.5.6
 
-Les informations qui suivent récapitulent les mises à jour susceptibles d'avoir un impact sur les applications déployées lorsque vous mettez à jour un cluster vers une nouvelle version. Consultez le journal [Kubernetes changelog ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md) pour obtenir la liste complète des modifications dans les versions de Kubernetes.
+Pour vérifier quelle version de l'interface CLI de Kubernetes vous utilisez en local ou que votre cluster exécute, lancez la commande suivante et vérifiez la version renvoyée.
 
-Pour plus d'informations sur le processus de mise à jour, voir [Mise à jour des clusters](cs_cluster.html#cs_cluster_update) et [Mise à jour des noeuds d'agent](cs_cluster.html#cs_cluster_worker_update).
+```
+kubectl version  --short
+```
+{: pre}
+
+Exemple de sortie :
+
+```
+Version client : 1.7.4
+Version serveur : 1.7.4
+```
+{: screen}
 
 ## Types de mise à jour
 {: #version_types}
@@ -44,6 +55,11 @@ Kubernetes fournit les types de mise à jour de version suivants :
 {: caption="Impacts des mises à jour Kubernetes" caption-side="top"}
 
 Par défaut, vous ne pouvez pas mettre à jour le maître Kubernetes de plus de deux versions mineures. Par exemple, si votre version maître actuelle est la version 1.5 et que vous voulez passer à la version 1.8, vous devez d'abord passer en version 1.7. Vous pouvez forcer la mise à jour pour continuer, mais passer à plus de deux versions au-dessus de la version en cours risque d'entraîner des résultats inattendus.
+{: tip}
+
+Les informations qui suivent récapitulent les mises à jour susceptibles d'avoir un impact sur les applications déployées lorsque vous mettez à jour un cluster vers une nouvelle version. Consultez le journal [Kubernetes changelog ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md) pour obtenir la liste complète des modifications dans les versions de Kubernetes.
+
+Pour plus d'informations sur le processus de mise à jour, voir [Mise à jour des clusters](cs_cluster_update.html#master) et [Mise à jour des noeuds d'agent](cs_cluster_update.html#worker_node).
 
 ## Version 1.8
 {: #cs_v18}
@@ -62,7 +78,7 @@ Passez en revue les modifications éventuellement nécessaires si vous procédez
 <thead>
 <tr>
 <th>Type</th>
-<th>Description
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
@@ -80,27 +96,27 @@ Passez en revue les modifications éventuellement nécessaires si vous procédez
 <thead>
 <tr>
 <th>Type</th>
-<th>Description
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Connexion au tableau de bord Kubernetes</td>
-<td>L'URL d'accès au tableau de bord Kubernetes en version 1.8 a changé et le processus de connexion inclut une nouvelle étape d'authentification. Pour plus d'informations, voir [Accès au tableau de bord Kubernetes](cs_apps.html#cs_cli_dashboard).</td>
+<td>L'URL d'accès au tableau de bord Kubernetes en version 1.8 a changé et le processus de connexion inclut une nouvelle étape d'authentification. Pour plus d'informations, voir [Accès au tableau de bord Kubernetes](cs_app.html#cli_dashboard).</td>
 </tr>
-<tr>
 <tr>
 <td>Droits sur le tableau de bord Kubernetes</td>
 <td>Pour forcer des utilisateurs à se connecter avec leurs données d'identification pour afficher des ressources de cluster en version 1.8, supprimez l'autorisation RBAC 1.7 ClusterRoleBinding. Exécutez `kubectl delete clusterrolebinding -n kube-system kubernetes-dashboard`.</td>
 </tr>
 <tr>
 <td>`kubectl delete`</td>
-<td>La commande `kubectl delete` ne réduit plus les objets d'API de charge de travail, tels que les pods, avant suppression de l'objet. Si vous avez besoin de réduire l'objet, utilisez kubectl scale ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale) avant de supprimer l'objet.</td>
+<td>La commande `kubectl delete` ne réduit plus les objets d'API de charge de travail, tels que les pods, avant suppression de l'objet. Si vous avez besoin de réduire l'objet, utilisez la commande [kubectl scale ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale) avant de supprimer l'objet.</td>
 </tr>
 <tr>
 <td>`kubectl run`</td>
-<td>La commande `kubectl run` doit utiliser plusieurs indicateurs pour `--env` au lieu d'arguments séparés par une virgule. Par exemple, exécutez <code>kubectl run --env <x>=<y> --env <z>=&lt;a&gt;</code> et non pas <code>kubectl run --env <x>=<y>,<z>=&lt;a&gt;</code>. </td>
+<td>La commande `kubectl run` doit utiliser plusieurs indicateurs pour `--env` au lieu d'arguments séparés par une virgule. Par exemple, exécutez <code>kubectl run --env &lt;x&gt;=&lt;y&gt; --env &lt;z&gt;=&lt;a&gt;</code> et non pas <code>kubectl run --env &lt;x&gt;=&lt;y&gt;,&lt;z&gt;=&lt;a&gt;</code>. </td>
 </tr>
+<tr>
 <td>`kubectl stop`</td>
 <td>La commande `kubectl stop` n'est plus disponible.</td>
 </tr>
@@ -125,7 +141,7 @@ Passez en revue les modifications éventuellement nécessaires si vous procédez
 <thead>
 <tr>
 <th>Type</th>
-<th>Description
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
@@ -154,7 +170,7 @@ Passez en revue les modifications éventuellement nécessaires si vous procédez
 <thead>
 <tr>
 <th>Type</th>
-<th>Description
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
@@ -177,8 +193,8 @@ Passez en revue les modifications éventuellement nécessaires si vous procédez
   ```
   kubectl get pods -n <namespace> -o yaml | grep "scheduler.alpha.kubernetes.io/affinity" && echo "Action required"
   ```
-  </br>
-  <li>Si `"Action required"` es renvoyé, utilisez la zone [_PodSpec_ ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _affinity_ au lieu de l'annotation `scheduler.alpha.kubernetes.io/affinity`.
+  </br></li>
+  <li>Si `"Action required"` es renvoyé, utilisez la zone [_PodSpec_ ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _affinity_ au lieu de l'annotation `scheduler.alpha.kubernetes.io/affinity`.</li>
 </ol>
 </tr>
 <tr>
@@ -209,7 +225,7 @@ Passez en revue les modifications éventuellement nécessaires si vous procédez
   ```
   kubectl annotate ns <namespace> --overwrite "net.beta.kubernetes.io/network-policy-"
   ```
-  </ol>
+  </li></ol>
 </tr>
 <tr>
 <td>Annotation tolerations</td>
@@ -236,7 +252,7 @@ Passez en revue les modifications éventuellement nécessaires si vous procédez
   `kubectl annotate nodes <node> scheduler.alpha.kubernetes.io/taints-`
   <li>Ajoutez une annotation taint à chaque noeud :</br>
   `kubectl taint node <node> <taint>`
-  </ol>
+  </li></ol>
 </tr>
 <tr>
 <td>DNS de pod StatefulSet</td>

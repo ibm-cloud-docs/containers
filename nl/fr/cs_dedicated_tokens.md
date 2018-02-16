@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-11-02"
 
 ---
@@ -129,7 +129,7 @@ Créez un jeton sans date d'expiration pour utiliser un registre d'images que vo
         <table>
         <caption>Tableau 2. Description des composants du fichier YAML</caption>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> Description des composants du fichier YAML</th>
+        <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
         </thead>
         <tbody>
         <tr>

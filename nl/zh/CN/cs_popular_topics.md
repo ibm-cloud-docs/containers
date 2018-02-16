@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-14"
 
 ---
@@ -36,7 +36,7 @@ lastupdated: "2017-12-14"
 <td>Docker 和 Kubernetes 提供内置的安全性和隔离，可自动在独立计算主机集群中对容器化的应用程序进行部署、操作、扩展和监视。</td>
 </tr>
 <tr>
-<td>[在集群中部署应用程序](cs_apps.html)</td>
+<td>[在集群中部署应用程序](cs_app.html)</td>
 <td>您可以使用 Kubernetes 方法来部署应用程序，并确保应用程序始终正常运行。例如，可以执行滚动更新以及回滚，而不给用户造成任何停机时间。
 </td>
 </tr>
@@ -45,7 +45,7 @@ lastupdated: "2017-12-14"
 <td>通过 CLI，您可以创建和管理 Kubernetes 集群。</td>
 </tr>
 <tr>
-<td>[在防火墙中打开必需的端口和 IP 地址](cs_security.html#opening_ports)</td>
+<td>[在防火墙中打开必需的端口和 IP 地址](cs_firewall.html#firewall)</td>
 <td>您可能需要在防火墙中打开特定端口和 IP 地址，以运行 CLI 命令或允许 Kubernetes 主节点与工作程序节点之间进行通信。</td>
 </tr>
 <tr>

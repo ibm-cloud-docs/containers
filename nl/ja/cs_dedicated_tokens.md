@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-11-02"
 
 ---
@@ -129,7 +129,7 @@ lastupdated: "2017-11-02"
         <table>
         <caption>表 2. YAML ファイルの構成要素について</caption>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> YAML ファイルの構成要素について</th>
+        <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
         </thead>
         <tbody>
         <tr>

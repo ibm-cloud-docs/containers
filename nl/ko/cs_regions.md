@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2017
-lastupdated: "2017-12-01"
+  years: 2014, 2018
+lastupdated: "2018-01-05"
 
 ---
 
@@ -16,8 +16,7 @@ lastupdated: "2017-12-01"
 {:download: .download}
 
 # 지역 및 위치
-{{site.data.keyword.Bluemix}}는 전세계적으로 호스팅됩니다. 지역은 엔드포인트에서 액세스하는 지리적 영역입니다.
-위치는 지역 내의 데이터 센터입니다. {{site.data.keyword.Bluemix_notm}} 내의 서비스는 글로벌로 사용 가능하거나 특정 지역 내에서 사용 가능할 수 있습니다.
+{{site.data.keyword.Bluemix}}는 전세계적으로 호스팅됩니다. 지역은 엔드포인트에서 액세스하는 지리적 영역입니다. 위치는 지역 내의 데이터 센터입니다. {{site.data.keyword.Bluemix_notm}} 내의 서비스는 글로벌로 사용 가능하거나 특정 지역 내에서 사용 가능할 수 있습니다.
 {:shortdesc}
 
 [{{site.data.keyword.Bluemix_notm}} 지역](#bluemix_regions)은 [{{site.data.keyword.containershort_notm}} 지역](#container_regions)과 다릅니다.
@@ -52,25 +51,25 @@ lastupdated: "2017-12-01"
   * 미국 남부 및 미국 동부
       ```
            bx login -a api.ng.bluemix.net
-           ```
+      ```
       {: pre}
 
   * 시드니 및 AP 북부
       ```
         bx login -a api.au-syd.bluemix.net
-        ```
+      ```
       {: pre}
 
   * 독일
       ```
            bx login -a api.eu-de.bluemix.net
-           ```
+      ```
       {: pre}
 
   * 영국
       ```
            bx login -a api.eu-gb.bluemix.net
-           ```
+      ```
       {: pre}
 
 
@@ -84,9 +83,12 @@ lastupdated: "2017-12-01"
 {{site.data.keyword.containershort_notm}} 지역을 사용하여 사용자가 로그인한 {{site.data.keyword.Bluemix_notm}} 지역 이외의 지역에 Kubernetes 클러스터를 작성하거나 액세스할 수 있습니다. {{site.data.keyword.containershort_notm}} 지역 엔드포인트는 특별히 {{site.data.keyword.Bluemix_notm}}가 아니라 {{site.data.keyword.containershort_notm}}를 전체적으로 참조합니다.
 {:shortdesc}
 
-단일 글로벌 엔드포인트 `https://containers.bluemix.net/`를 통해 {{site.data.keyword.containershort_notm}}에 액세스할 수 있습니다. 
+단일 글로벌 엔드포인트 `https://containers.bluemix.net/`를 통해 {{site.data.keyword.containershort_notm}}에 액세스할 수 있습니다.
+* 현재 사용자가 있는 {{site.data.keyword.containershort_notm}} 지역을 확인하려면 `bx cs region`을 실행하십시오.
+* 사용 가능한 지역과 해당 엔드포인트 목록을 검색하려면 `bx cs regions`를 실행하십시오. 
 
-현재 사용자가 있는 {{site.data.keyword.containershort_notm}} 지역을 확인하려면 `bx cs region`을 실행하십시오. 
+모든 요청에서 글로벌 엔드포인트가 있는 API를 사용하려면 `X-Region` 헤더에 지역 이름을 전달하십시오.
+{: tip}
 
 ### 다른 컨테이너 서비스 지역에 로그인
 {: #container_login_endpoints}
@@ -97,31 +99,30 @@ lastupdated: "2017-12-01"
 
 </br>
 
-지역을 신속하게 전환하려면 `bx cs region-set`를 실행하십시오. 
+지역을 신속하게 전환하려면 `bx cs region-set`를 실행하십시오.
 
 ### 컨테이너 서비스에 사용 가능한 위치
 {: #locations}
 
 위치는 지역 내에서 사용 가능한 데이터 센터입니다.
 
-  | 지역| 위치| 구/군/시|
+  | 지역 | 위치 | 도시 |
   |--------|----------|------|
-  | AP 북부 | hkg02, tok02 | 홍콩, 도쿄 |
-  | AP 남부      | mel01, syd01, syd04        | 멜버른, 시드니 |
-  | 중앙 유럽    | ams03, fra02, mil01, par01        | 암스테르담, 프랑크푸르트, 밀라노, 파리 |
-  | 영국 남부    | lon02, lon04        | 런던|
-  | 미국 동부    | tor01, wdc06, wdc07        | 토론토, 워싱턴, DC |
-  | 미국 남부| dal10, dal12, dal13       | Dallas
-|
+  | AP 북부 | hkg02, sng01, tok02 | 홍콩, 싱가포르, 도쿄 |
+  | AP 남부     | mel01, syd01, syd04        | 멜버른, 시드니 |
+  | 중앙 유럽     | ams03, fra02, mil01, par01        | 암스테르담, 프랑크푸르트, 밀라노, 파리 |
+  | 영국 남부      | lon02, lon04         | 런던 |
+  | 미국 동부      | <ph class="mon">mon01, </ph>tor01, wdc06, wdc07        | <ph class="mon">몬트리올, </ph>토론토, 워싱턴, DC |
+  | 미국 남부     | dal10, dal12, dal13, sao01<!--sao-paolo--></ph>       | 댈러스, 상파울루<!--sao-paolo--></ph> |
 
-**참고**: 밀라노(mil01)는 라이트 클러스터에만 사용 가능합니다. 
+**참고**: 밀라노(mil01)는 라이트 클러스터에만 사용 가능합니다.
 
 ### 컨테이너 서비스 API 명령 사용
 {: #container_api}
 
-{{site.data.keyword.containershort_notm}} API와 상호작용하려면 명령 유형을 입력하고 `/v1/command`를 글로벌 엔드포인트에 추가하십시오. 
+{{site.data.keyword.containershort_notm}} API와 상호작용하려면 명령 유형을 입력하고 `/v1/command`를 글로벌 엔드포인트에 추가하십시오.
 
-`GET /clusters` API 예제: 
+`GET /clusters` API 예제:
   ```
   GET https://containers.bluemix.net/v1/clusters
   ```
@@ -129,4 +130,7 @@ lastupdated: "2017-12-01"
 
 </br>
 
-API 명령에 대한 문서는 [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/)를 보십시오. 
+모든 요청에서 글로벌 엔드포인트가 있는 API를 사용하려면 `X-Region` 헤더에 지역 이름을 전달하십시오. 사용 가능한 지역을 나열하려면 `bx cs regions`를 실행하십시오.
+{: tip}
+
+API 명령에 대한 문서는 [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/)를 보십시오.

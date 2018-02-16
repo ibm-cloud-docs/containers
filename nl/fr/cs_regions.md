@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2017
-lastupdated: "2017-12-01"
+  years: 2014, 2018
+lastupdated: "2018-01-05"
 
 ---
 
@@ -84,8 +84,11 @@ En utilisant des régions {{site.data.keyword.containershort_notm}}, vous pouvez
 {:shortdesc}
 
 Vous pouvez accéder à {{site.data.keyword.containershort_notm}} via un noeud final global : `https://containers.bluemix.net/`.
+* Pour vérifier dans quelle région {{site.data.keyword.containershort_notm}} vous êtes actuellement,  exécutez la commande `bx cs region`.
+* Pour extraire la liste des régions disponibles et de leurs noeuds finaux, exécutez la commande `bx cs regions`.
 
-Pour vérifier dans quelle région {{site.data.keyword.containershort_notm}} vous êtes actuellement,  exécutez la commande `bx cs region`.
+Pour utiliser l'API avec le noeud final global, dans toutes vos demandes, transmettez le nom de région dans un en-tête `X-Region`.
+{: tip}
 
 ### Connexion à une autre région du service de conteneur
 {: #container_login_endpoints}
@@ -105,12 +108,12 @@ Les emplacements sont des centres de données disponibles dans une région.
 
   | Région | Emplacement | Ville |
   |--------|----------|------|
-  | Asie-Pacifique nord | hkg02, tok02 | Hong Kong, Tokyo |
+  | Asie-Pacifique nord | hkg02, sng01, tok02 | Hong Kong, Singapour, Tokyo |
   | Asie-Pacifique sud     | mel01, syd01, syd04        | Melbourne, Sydney |
   | Europe centrale     | ams03, fra02, mil01, par01        | Amsterdam, Frankfurt, Milan, Paris |
   | Sud du Royaume-Uni      | lon02, lon04         | Londres |
-  | Est des Etats-Unis      | tor01, wdc06, wdc07        | Toronto, Washington, DC |
-  | Sud des Etats-Unis     | dal10, dal12, dal13       | Dallas |
+  | Est des Etats-Unis      | <ph class="mon">mon01, </ph>tor01, wdc06, wdc07        | <ph class="mon">Montréal, </ph>Toronto, Washington, DC |
+  | Sud des Etats-Unis     | dal10, dal12, dal13, sao01<!--sao-paolo--></ph>       | Dallas, São Paolo<!--sao-paolo--></ph> |
 
 **Remarque **: Milan (mil01) n'est disponible que pour les clusters légers.
 
@@ -119,12 +122,16 @@ Les emplacements sont des centres de données disponibles dans une région.
 
 Pour intergair avec l'API {{site.data.keyword.containershort_notm}}, entrez le type de commande et ajoutez `/v1/command` au noeud final global.
 
-Exemple d'aPI `GET /clusters` :
+Exemple d'API `GET /clusters` :
   ```
   GET https://containers.bluemix.net/v1/clusters
   ```
   {: codeblock}
 
 </br>
+
+Pour utiliser l'API avec le noeud final global, dans toutes vos demandes, transmettez le nom de région dans un en-tête `X-Region`.
+Pour afficher la liste des régions disponibles, exécutez la commande `bx cs regions`.
+{: tip}
 
 Pour afficher la documentation sur les commandes d'API, accédez à [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/).

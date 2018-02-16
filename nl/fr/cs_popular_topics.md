@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-14"
 
 ---
@@ -36,7 +36,7 @@ Découvrez les centres d'intérêt des développeurs de conteneur.
 <td>Docker et Kubernetes offrent une sécurité et un isolement intégrés et automatisent le déploiement, l'exploitation, la mise à l'échelle et la surveillance d'applications conteneurisées dans un cluster d'hôtes de calcul indépendants.</td>
 </tr>
 <tr>
-<td>[Déploiement d'applications dans des clusters](cs_apps.html)</td>
+<td>[Déploiement d'applications dans des clusters](cs_app.html)</td>
 <td>Vous pouvez utiliser des techniques Kubernetes pour déployer des applications et faire en sorte qu'elles soient toujours opérationnelles. Par exemple, vous pouvez effectuer des mises à jour et des rétromigrations tournantes sans générer de temps d'indisponibilité pour vos utilisateurs.</td>
 </tr>
 <tr>
@@ -44,7 +44,7 @@ Découvrez les centres d'intérêt des développeurs de conteneur.
 <td>Avec l'interface de ligne de commande (CLI), vous pouvez créer et gérer vos clusters Kubernetes.</td>
 </tr>
 <tr>
-<td>[Ouverture des ports et adresses IP requis dans votre pare-feu](cs_security.html#opening_ports)</td>
+<td>[Ouverture des ports et adresses IP requis dans votre pare-feu](cs_firewall.html#firewall)</td>
 <td>Vous pouvez être amené à ouvrir des ports et des adresses IP spécifiques dans vos pare-feux pour exécuter des commandes CLI ou pour autoriser la communication entre la maître Kubernetes et les noeuds worker.</td>
 </tr>
 <tr>

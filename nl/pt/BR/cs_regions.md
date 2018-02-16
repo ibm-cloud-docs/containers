@@ -1,6 +1,8 @@
 ---
 
-copyright: years: 2014, 2017 lastupdated: "2017-12-01"
+copyright:
+  years: 2014, 2018
+lastupdated: "2018-01-05"
 
 ---
 
@@ -82,8 +84,11 @@ Usando regiões do {{site.data.keyword.containershort_notm}}, é possível criar
 {:shortdesc}
 
 É possível acessar o {{site.data.keyword.containershort_notm}} por meio de um terminal global: `https://containers.bluemix.net/`.
+* Para verificar em qual região do {{site.data.keyword.containershort_notm}} você está atualmente, execute `bx cs region`.
+* Para recuperar uma lista de regiões disponíveis e seus terminais, execute `bx cs regions`.
 
-Para verificar em qual região do {{site.data.keyword.containershort_notm}} você está atualmente, execute `bx cs region`.
+Para usar a API com o terminal global, em todas as suas solicitações, passe o nome da região em um cabeçalho `X-Region`.
+{: tip}
 
 ### Efetuando login em uma região de serviço de contêiner diferente
 {: #container_login_endpoints}
@@ -103,12 +108,12 @@ Os locais são data centers que estão disponíveis em uma região.
 
   | Região | Localização | Cidade |
   |--------|----------|------|
-  | AP Norte | hkg02, tok02 | Hong Kong, Tóquio |
+  | AP Norte | hkg02, sng01, tok02 | Hong Kong, Singapura, Tóquio |
   | AP Sul     | mel01, syd01, syd04        | Melbourne, Sydney |
   | União Europeia Central     | ams03, fra02, mil01, par01        | Amsterdam, Frankfurt, Milan, Paris |
   | Sul do Reino Unido      | lon02, lon04         | Londres |
-  | Leste dos EUA      | tor01, wdc06, wdc07        | Toronto, Washington, DC |
-  | SUL dos EUA     | dal10, dal12, dal13       | Dallas |
+  | Leste dos EUA      | <ph class="mon">mon01, </ph>tor01, wdc06, wdc07        | <ph class="mon">Montreal, </ph>Toronto, Washington, DC |
+  | SUL dos EUA     | dal10, dal12, dal13, sao01<!--sao-paolo--></ph>       | Dallas, São Paulo<!--sao-paolo--></ph> |
 
 **Observação**: Milan (mil01) está disponível somente para clusters Lite.
 
@@ -124,5 +129,8 @@ Exemplo da API `GET /clusters`:
   {: codeblock}
 
 </br>
+
+Para usar a API com o terminal global, em todas as suas solicitações, passe o nome da região em um cabeçalho `X-Region`. Para listar as regiões disponíveis, execute `bx cs regions`.
+{: tip}
 
 Para visualizar a documentação nos comandos da API, visualize [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/).

@@ -1,6 +1,8 @@
 ---
 
-copyright: years: 2014, 2017 lastupdated: "2017-12-13"
+copyright:
+  years: 2014, 2018
+lastupdated: "2017-12-13"
 
 ---
 
@@ -282,6 +284,7 @@ os desenvolvedores podem usar para acessar imagens privadas do Docker.
 Bom trabalho! Você já configurou seu cluster e seu ambiente local está pronto para você começar a implementar apps no cluster.
 
 ## O que Vem a Seguir?
+{: #next}
 
 * [Teste seus conhecimentos e faça um teste! ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
 

@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-13"
 
 ---
@@ -282,6 +282,7 @@ lastupdated: "2017-12-13"
 做得好！您已配置叢集，且您的本端環境已備妥，可開始將應用程式部署到叢集。
 
 ## 下一步為何？
+{: #next}
 
 * [測試您學到的知識，並進行隨堂測驗！![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
 

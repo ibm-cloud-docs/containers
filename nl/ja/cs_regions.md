@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2017
-lastupdated: "2017-12-01"
+  years: 2014, 2018
+lastupdated: "2018-01-05"
 
 ---
 
@@ -84,8 +84,11 @@ lastupdated: "2017-12-01"
 {:shortdesc}
 
 1 つのグローバルなエンドポイント `https://containers.bluemix.net/` を使用して、{{site.data.keyword.containershort_notm}} にアクセスできます。
+* 現在自分が属する {{site.data.keyword.containershort_notm}} 地域を確認するには、`bx cs region` を実行します。
+* 使用可能な地域とそのエンドポイントのリストを取得するには、`bx cs regions` を実行します。
 
-現在自分が属する {{site.data.keyword.containershort_notm}} 地域を確認するには、`bx cs region` を実行します。
+グローバル・エンドポイントと共に API を使用するには、すべての要求で、`X-Region` ヘッダーによって地域名を渡します。
+{: tip}
 
 ### 別のコンテナー・サービス地域へのログイン
 {: #container_login_endpoints}
@@ -105,12 +108,12 @@ lastupdated: "2017-12-01"
 
   | 地域 | ロケーション | 市区町村 |
   |--------|----------|------|
-  | 北アジア太平洋地域 | hkg02、tok02 | 香港、東京 |
+  | 北アジア太平洋地域 | hkg02、sng01、tok02 | 香港、シンガポール、東京 |
   | 南アジア太平洋地域     | mel01、syd01、syd04        | メルボルン、シドニー |
   | 中欧     | ams03、fra02、mil01、par01        | アムステルダム、フランクフルト、ミラノ、パリ |
   | 英国南部      | lon02、lon04         | London (ロンドン) |
-  | 米国東部      | tor01、wdc06、wdc07        | トロント、ワシントン DC |
-  | 米国南部     | dal10、dal12、dal13       | ダラス |
+  | 米国東部      | <ph class="mon">mon01、</ph>tor01、wdc06、wdc07        | <ph class="mon">モントリオール、</ph>トロント、ワシントン DC |
+  | 米国南部     | dal10、dal12、dal13、sao01<!--sao-paolo--></ph>       | ダラス、サンパウロ<!--sao-paolo--></ph> |
 
 **注**: ミラノ (mil01) はライト・クラスター専用です。
 
@@ -126,5 +129,8 @@ lastupdated: "2017-12-01"
   {: codeblock}
 
 </br>
+
+グローバル・エンドポイントと共に API を使用するには、すべての要求で、`X-Region` ヘッダーによって地域名を渡します。使用可能な地域をリストするには、`bx cs regions` を実行します。
+{: tip}
 
 API コマンドの資料を参照するには、[https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/) を表示してください。

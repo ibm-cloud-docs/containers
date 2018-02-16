@@ -1,6 +1,8 @@
 ---
 
-copyright: years: 2014, 2017 lastupdated: "2017-12-14"
+copyright:
+  years: 2014, 2018
+lastupdated: "2018-01-09"
 
 ---
 
@@ -160,7 +162,7 @@ Revise as opções para depurar seus clusters e localizar as causas raízes das 
 
         </br></br>
         Exceção de infraestrutura do {{site.data.keyword.Bluemix_notm}}: 'Item' deve ser pedido com permissão.</td>
-        <td>Você pode não ter as permissões necessárias para provisionar um nó do trabalhador do portfólio da infraestrutura do IBM Cloud (SoftLayer). Veja [Configurar o acesso ao portfólio da infraestrutura do IBM Cloud (SoftLayer) para criar clusters do Kubernetes padrão](cs_planning.html#cs_planning_unify_accounts).</td>
+        <td>Você pode não ter as permissões necessárias para provisionar um nó do trabalhador do portfólio da infraestrutura do IBM Cloud (SoftLayer). Veja [Configurar o acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer) para criar clusters padrão do Kubernetes](cs_infrastructure.html#unify_accounts).</td>
       </tr>
     </tbody>
   </table>
@@ -211,40 +213,17 @@ Revise as opções que você tiver para depurar suas implementações de app e l
 <br />
 
 
-
-
-## Identificando versões do cliente e do servidor locais de kubectl
-
-Para verificar qual versão da CLI do Kubernetes você está executando localmente ou se o seu cluster está
-em execução, execute o comando a seguir e verifique a versão.
-
-```
-kubectl version  --short
-```
-{: pre}
-
-Saída de exemplo:
-
-```
-Client Version: v1.5.6
-    Server Version: v1.5.6
-```
-{: screen}
-
-<br />
-
-
-
-
-## Não é possível se conectar à sua conta de infraestrutura do IBM Cloud (SoftLayer) durante a criação de um cluster
+## Não é possível se conectar à sua conta de infraestrutura
 {: #cs_credentials}
 
 {: tsSymptoms}
 Ao criar um novo cluster do Kubernetes, você receberá a mensagem a seguir.
 
 ```
-Não foi possível se conectar à sua conta de infraestrutura do IBM Cloud (SoftLayer). Criar um cluster padrão requer que você tenha uma conta Pay-As-You-Go que esteja vinculada a um termo da conta de infraestrutura do IBM Cloud (SoftLayer) ou que tenha usado o IBM
-{{site.data.keyword.Bluemix_notm}} Container Service CLI para configurar as chaves API da Infraestrutura do {{site.data.keyword.Bluemix_notm}}.
+Não foi possível se conectar à sua conta de infraestrutura do IBM Cloud (SoftLayer).
+Criar um cluster padrão requer que você tenha uma conta Pay-As-You-Go
+vinculada a um termo da conta de infraestrutura do IBM Cloud (SoftLayer) ou que tenha usado a CLI do {{site.data.keyword.Bluemix_notm}}
+Container Service para configurar suas chaves API da infraestrutura do {{site.data.keyword.Bluemix_notm}}.
 ```
 {: screen}
 
@@ -275,7 +254,7 @@ Para incluir credenciais na conta do {{site.data.keyword.Bluemix_notm}}:
 <br />
 
 
-## O firewall impede a execução dos comandos `bx`, `kubectl` ou `calicoctl` da CLI
+## O firewall evita a execução de comandos da CLI
 {: #ts_firewall_clis}
 
 {: tsSymptoms}
@@ -285,10 +264,10 @@ Quando você executa os comandos `bx`, `kubectl` ou `calicoctl` na CLI, eles fal
 Você pode ter políticas de rede corporativa que impedem o acesso de seu sistema local a terminais públicos por proxies ou firewalls.
 
 {: tsResolve}
-[Permita acesso TCP para os comandos da CLI funcionarem](cs_security.html#opening_ports). Esta tarefa requer uma [política de acesso de Administrador](cs_cluster.html#access_ov). Verifique sua [política de acesso](cs_cluster.html#view_access) atual.
+[Permita acesso TCP para os comandos da CLI funcionarem](cs_firewall.html#firewall). Essa tarefa requer uma [Política de acesso de administrador](cs_users.html#access_policies). Verifique sua [política de acesso](cs_users.html#infra_access) atual.
 
 
-## O firewall evita que os nós do trabalhador se conectem
+## O firewall evita que o cluster se conecte a recursos
 {: #cs_firewall}
 
 {: tsSymptoms}
@@ -329,7 +308,7 @@ Se o proxy kubectl for bem-sucedido, mas o painel não estiver disponível, ser�
 Você pode ter um firewall adicional configurado ou ter customizado as suas configurações de firewall existentes em sua conta de infraestrutura do IBM Cloud (SoftLayer). O {{site.data.keyword.containershort_notm}} requer que determinados endereços IP e portas sejam abertos para permitir a comunicação do nó do trabalhador com o mestre do Kubernetes e vice-versa. Outro motivo talvez seja que os nós do trabalhador estejam presos em um loop de recarregamento.
 
 {: tsResolve}
-[Permita que o cluster acesse recursos de infraestrutura e outros serviços](cs_security.html#firewall_outbound). Esta tarefa requer uma [política de acesso de Administrador](cs_cluster.html#access_ov). Verifique sua [política de acesso](cs_cluster.html#view_access) atual.
+[Permita que o cluster acesse os recursos de infraestrutura e outros serviços](cs_firewall.html#firewall_outbound). Essa tarefa requer uma [Política de acesso de administrador](cs_users.html#access_policies). Verifique sua [política de acesso](cs_users.html#infra_access) atual.
 
 <br />
 
@@ -349,6 +328,47 @@ Use [DaemonSets ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de l
 
 <br />
 
+
+
+## Ligar um serviço a um cluster resulta no erro de mesmo nome
+{: #cs_duplicate_services}
+
+{: tsSymptoms}
+Ao executar `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>`, você vê a mensagem a seguir.
+
+```
+Múltiplos serviços com o mesmo nome foram localizados.
+Execute 'bx service list' para visualizar as instâncias de serviço disponíveis do Bluemix...
+```
+{: screen}
+
+{: tsCauses}
+Múltiplas instâncias de serviço podem ter o mesmo nome em regiões diferentes.
+
+{: tsResolve}
+Use o GUID de serviço em vez do nome da instância de serviço no comando `bx cs cluster-service-bind`.
+
+1. [Efetue login na região que inclui a instância de serviço para ligação.](cs_regions.html#bluemix_regions)
+
+2. Obtenha o GUID para a instância de serviço.
+  ```
+  bx service show <service_instance_name> --guid
+  ```
+  {: pre}
+
+  Saída:
+  ```
+  Invoking 'cf service <service_instance_name> --guid'...
+  <service_instance_GUID>
+  ```
+  {: screen}
+3. Ligue o serviço ao cluster novamente.
+  ```
+  bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_GUID>
+  ```
+  {: pre}
+
+<br />
 
 
 
@@ -400,7 +420,7 @@ Atualize manualmente a referência do endereço IP privado para apontar para o n
   ```
   {: screen}
 
-2.  Instale a [CLI do Calico](cs_security.html#adding_network_policies).
+2.  Instale a [CLI do Calico](cs_network_policy.html#adding_network_policies).
 3.  Liste os nós do trabalhador disponíveis no Calico. Substitua <path_to_file> pelo caminho local para o arquivo de configuração do Calico.
 
   ```
@@ -447,7 +467,7 @@ Ao executar `kubectl get pods`, será possível ver pods que permanecem em um es
 Se você acabou de criar o cluster do Kubernetes, os nós do trabalhador podem ainda estar configurando. Se esse cluster for um existente, você talvez não tenha capacidade suficiente no cluster para implementar o pod.
 
 {: tsResolve}
-Esta tarefa requer uma [política de acesso de Administrador](cs_cluster.html#access_ov). Verifique sua [política de acesso](cs_cluster.html#view_access) atual.
+Essa tarefa requer uma [Política de acesso de administrador](cs_users.html#access_policies). Verifique sua [política de acesso](cs_users.html#infra_access) atual.
 
 Se você acabou de criar o cluster do Kubernetes, execute o comando a seguir e aguarde a inicialização dos nós do trabalhador.
 
@@ -531,22 +551,37 @@ Os contêineres não podem ser iniciados quando a cota de registro é atingido.
 {: tsSymptoms}
 Quando você acessa o painel do Kibana, os logs não são exibidos.
 
-{: tsCauses}
-Os logs podem não estar aparecendo por uma das razões a seguir:<br/><br/>
-    A. Nenhuma configuração de criação de log está configurada.<br/><br/>
-    B. O cluster não está em um estado `Normal`.<br/><br/>
-    C. A cota de armazenamento do log foi atingida.<br/><br/>
-    D. Se você especificou um espaço na criação de cluster, o proprietário da conta não terá as permissões de Gerenciador, Desenvolvedor ou Auditor para esse espaço.<br/><br/>
-    E. Nenhum evento que aciona logs ocorreu em seu pod ainda.<br/><br/>
-
 {: tsResolve}
-Revise as opções a seguir para resolver cada uma das razões possíveis pelas quais os logs não aparecem:
+Revise as razões a seguir porque os logs não estão aparecendo e as etapas de resolução de problemas correspondentes:
 
-A. Para que os logs sejam enviados, deve-se primeiro criar uma configuração de criação de log para encaminhar logs para o {{site.data.keyword.loganalysislong_notm}}. Para criar uma configuração de criação de log, consulte [Ativando o encaminhamento de log](cs_cluster.html#cs_log_sources_enable).<br/><br/>
-B. Para verificar o estado do cluster, consulte [Depurando clusters](cs_troubleshoot.html#debug_clusters).<br/><br/>
-C. Para aumentar os seus limites de armazenamento de log, consulte a [ documentação do {{site.data.keyword.loganalysislong_notm}}](https://console.bluemix.net/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs).<br/><br/>
-D. Para mudar as permissões de acesso do {{site.data.keyword.containershort_notm}} para o proprietário da conta, consulte [Gerenciando o acesso ao cluster](cs_cluster.html#cs_cluster_user). Quando as permissões são mudadas, pode levar até 24 horas para os logs começarem a aparecer.<br/><br/>
-E. Para acionar um log para um evento, é possível implementar o Noisy, um pod de amostra que produz vários eventos de log, em um nó do trabalhador em seu cluster.<br/>
+<table>
+<col width="40%">
+<col width="60%">
+ <thead>
+ <th>Por que isso está acontecendo?</th>
+ <th>Como corrigi-lo</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td>Nenhuma configuração de criação de log está definida.</td>
+ <td>Para que os logs sejam enviados, deve-se primeiro criar uma configuração de criação de log para encaminhar logs para o {{site.data.keyword.loganalysislong_notm}}. Para criar uma configuração de criação de log, consulte <a href="cs_health.html#log_sources_enable">Ativando o encaminhamento de log</a>.</td>
+ </tr>
+ <tr>
+ <td>O cluster não está em um estado <code>Normal</code>.</td>
+ <td>Para verificar o estado do seu cluster, veja <a href="cs_troubleshoot.html#debug_clusters">Depurando clusters</a>.</td>
+ </tr>
+ <tr>
+ <td>A cota de armazenamento do log foi atingida.</td>
+ <td>Para aumentar os seus limites de armazenamento de log, veja a <a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs">documentação do {{site.data.keyword.loganalysislong_notm}}</a>.</td>
+ </tr>
+ <tr>
+ <td>Se você especificou um espaço na criação do cluster, o proprietário da conta não tem permissões de Gerenciador, Desenvolvedor ou Auditor para esse espaço.</td>
+ <td>Para mudar permissões de acesso para o proprietário da conta:<ol><li>Para descobrir quem é o proprietário da conta para o cluster, execute <code>bx cs api-key-info &lt;cluster_name_or_id&gt;</code>.</li><li>Para conceder a esse proprietário da conta as permissões de acesso de Gerenciador, Desenvolvedor ou Auditor do {{site.data.keyword.containershort_notm}} para o espaço, veja <a href="cs_users.html#managing">Gerenciando o acesso ao cluster</a>.</li><li>Para atualizar o token de criação de log depois que as permissões foram mudadas, execute <code>bx cs logging-config-refresh &lt;cluster_name_or_id&gt;</code>.</li></ol></td>
+ </tr>
+ </tbody></table>
+
+Para testar as mudanças feitas durante a resolução de problemas, é possível implementar o Noisy, um pod de amostra que produz vários eventos de log, em um nó do trabalhador em seu cluster.
+
   1. [Direcione sua CLI](cs_cli_install.html#cs_cli_configure) para um cluster no qual você deseja começar a produzir logs.
 
   2. Crie o arquivo de configuração `deploy-noisy.yaml`.
@@ -573,7 +608,7 @@ E. Para acionar um log para um evento, é possível implementar o Noisy, um pod 
         ```
         {:pre}
 
-  4. Após alguns minutos, é possível visualizar seus logs no painel do Kibana. Para acessar o painel do Kibana, acesse uma das URLs a seguir e selecione a conta do {{site.data.keyword.Bluemix_notm}} na qual você criou o cluster. Se você especificou um espaço na criação do cluster, acesse esse espaço.        
+  4. Após alguns minutos, é possível visualizar seus logs no painel do Kibana. Para acessar o painel do Kibana, acesse uma das URLs a seguir e selecione a conta do {{site.data.keyword.Bluemix_notm}} na qual você criou o cluster. Se você especificou um espaço na criação do cluster, acesse esse espaço.
         - Sul e Leste dos EUA: https://logging.ng.bluemix.net
         - Sul do Reino Unido e UE Central: https://logging.eu-fra.bluemix.net
         - AP-South: https://logging.au-syd.bluemix.net
@@ -603,9 +638,83 @@ Exclua o pod `kube-painel` para forçar uma reinicialização. O pod é recriado
 <br />
 
 
+## Não é possível se conectar a um app por meio de um serviço de balanceador de carga
+{: #cs_loadbalancer_fails}
+
+{: tsSymptoms}
+Você expôs publicamente seu app criando um serviço de balanceador de carga no cluster. Quando tentou se conectar ao app por meio do endereço IP público ou do balanceador de carga, a conexão falhou ou atingiu o tempo limite.
+
+{: tsCauses}
+O serviço de balanceador de carga pode não estar funcionando corretamente por um dos motivos a seguir:
+
+-   O cluster é um cluster lite ou um cluster padrão com apenas um nó do trabalhador.
+-   O cluster não está totalmente implementado ainda.
+-   O script de configuração para o serviço de balanceador de carga inclui erros.
+
+{: tsResolve}
+Para solucionar problemas do serviço de balanceador de carga:
+
+1.  Verifique se configura um cluster padrão totalmente implementado e se tem pelo menos dois nós do trabalhador para assegurar alta disponibilidade para o serviço de balanceador de carga.
+
+  ```
+  bx cs workers <cluster_name_or_id>
+  ```
+  {: pre}
+
+    Na saída da CLI, certifique-se de que o **Status** dos nós do trabalhador exiba **Pronto** e que o **Tipo de máquina** mostre um tipo de máquina diferente de **livre**.
+
+2.  Verifique a precisão do arquivo de configuração para o serviço de balanceador de carga.
+
+  ```
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: myservice
+  spec:
+    type: LoadBalancer
+    selector:
+      <selectorkey>:<selectorvalue>
+    ports:
+     - protocol: TCP
+       port: 8080
+  ```
+  {: pre}
+
+    1.  Verifique se você definiu **LoadBalancer** como o tipo para seu serviço.
+    2.  Certifique-se de que tenha usado os mesmos **<selectorkey>** e **<selectorvalue>** usados na seção **rótulo/metadados** de quando implementou o app.
+    3.  Verifique se usou a **porta** em que seu app atende.
+
+3.  Verifique o serviço de balanceador de carga e revise a seção **Eventos** para localizar erros em potencial.
+
+  ```
+  kubectl describe service <myservice>
+  ```
+  {: pre}
+
+    Procure as mensagens de erro a seguir:
+
+    <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>Para usar o serviço de balanceador de carga, deve-se ter um cluster padrão com pelo menos dois nós do trabalhador.</li>
+    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>Essa mensagem de erro indica que não sobrou nenhum endereço IP público móvel para ser alocado para o serviço de balanceador de carga. Consulte <a href="cs_subnets.html#subnets">Incluindo sub-redes nos clusters</a> para localizar informações sobre como solicitar endereços IP públicos móveis para seu cluster. Depois que os endereços IP públicos móveis estiverem disponíveis para o cluster, o serviço de balanceador de carga será criado automaticamente.</li>
+    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>Você definiu um endereço IP público móvel para o serviço de balanceador de carga usando a seção **loadBalancerIP**, mas esse endereço IP público móvel não está disponível em sua sub-rede pública móvel. Mude o script de configuração do serviço de balanceador de carga e escolha um dos endereços IP públicos móveis disponíveis ou remova a seção **loadBalancerIP** de seu script para que um endereço IP público móvel disponível possa ser alocado automaticamente.</li>
+    <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>Você não tem nós do trabalhador suficientes para implementar um serviço de balanceador de carga. Um motivo talvez seja que você tenha implementado um cluster padrão com mais de um nó do trabalhador, mas o fornecimento dos nós do trabalhador tenha falhado.</li>
+    <ol><li>Liste os nós do trabalhador disponíveis.</br><pre class="codeblock"><code>kubectl get nodes</code></pre></li>
+    <li>Se pelo menos dois nós do trabalhador disponíveis forem localizados, liste os detalhes do nó do trabalhador.</br><pre class="screen"><code>bx cs worker-get [&lt;cluster_name_or_id&gt;] &lt;worker_ID&gt;</code></pre></li>
+    <li>Certifique-se de que os IDs da VLAN pública e privada para os nós do trabalhador que foram retornados pelos comandos <code>kubectl get nodes</code> e <code>bx cs [&lt;cluster_name_or_id&gt;] worker-get</code> correspondam.</li></ol></li></ul>
+
+4.  Se você estiver usando um domínio customizado para se conectar ao serviço de balanceador de carga, certifique-se de que seu domínio customizado seja mapeado para o endereço IP público do serviço de balanceador de carga.
+    1.  Localize o endereço IP público do serviço de balanceador de carga.
+
+      ```
+      kubectl describe service <myservice> | grep "LoadBalancer Ingress"
+      ```
+      {: pre}
+
+    2.  Verifique se o seu domínio customizado está mapeado para o endereço IP público móvel do serviço de balanceador de carga no registro de Ponteiro (PTR).
+
+<br />
 
 
-## Falha ao conectar-se a um app por meio de Ingresso
+## Não é possível se conectar a um app por meio de Ingresso
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
@@ -719,98 +828,62 @@ Para solucionar problemas do Ingresso:
 
 
 
-
-## Falha ao conectar-se a um app por meio de um serviço de balanceador de carga
-{: #cs_loadbalancer_fails}
+## Problemas de segredo do balanceador de carga de aplicativo de Ingresso
+{: #cs_albsecret_fails}
 
 {: tsSymptoms}
-Você expôs publicamente seu app criando um serviço de balanceador de carga no cluster. Quando tentou se conectar ao app por meio do endereço IP público ou do balanceador de carga, a conexão falhou ou atingiu o tempo limite.
+Após a implementação de um segredo do balanceador de carga de aplicativo de Ingresso para seu cluster, o campo `Description` não está atualizando com o nome secreto quando você visualiza seu certificado no {{site.data.keyword.cloudcerts_full_notm}}.
 
-{: tsCauses}
-O serviço de balanceador de carga pode não estar funcionando corretamente por um dos motivos a seguir:
-
--   O cluster é um cluster lite ou um cluster padrão com apenas um nó do trabalhador.
--   O cluster não está totalmente implementado ainda.
--   O script de configuração para o serviço de balanceador de carga inclui erros.
+Quando você lista informações sobre o segredo do balanceador de carga de aplicativo, o status diz `*_failed`. Por exemplo, `create_failed`, `update_failed`, `delete_failed`.
 
 {: tsResolve}
-Para solucionar problemas do serviço de balanceador de carga:
+Revise as razões a seguir porque o segredo do balanceador de carga de aplicativo pode falhar e as etapas de resolução de problemas correspondentes:
 
-1.  Verifique se configura um cluster padrão totalmente implementado e se tem pelo menos dois nós do trabalhador para assegurar alta disponibilidade para o serviço de balanceador de carga.
-
-  ```
-  bx cs workers <cluster_name_or_id>
-  ```
-  {: pre}
-
-    Na saída da CLI, certifique-se de que o **Status** dos nós do trabalhador exiba **Pronto** e que o **Tipo de máquina** mostre um tipo de máquina diferente de **livre**.
-
-2.  Verifique a precisão do arquivo de configuração para o serviço de balanceador de carga.
-
-  ```
-  apiVersion: v1
-  kind: Service
-  metadata:
-    name: myservice
-  spec:
-    type: LoadBalancer
-    selector:
-      <selectorkey>:<selectorvalue>
-    ports:
-     - protocol: TCP
-       port: 8080
-  ```
-  {: pre}
-
-    1.  Verifique se você definiu **LoadBalancer** como o tipo para seu serviço.
-    2.  Certifique-se de que tenha usado os mesmos **<selectorkey>** e **<selectorvalue>** usados na seção **rótulo/metadados** de quando implementou o app.
-    3.  Verifique se usou a **porta** em que seu app atende.
-
-3.  Verifique o serviço de balanceador de carga e revise a seção **Eventos** para localizar erros em potencial.
-
-  ```
-  kubectl describe service <myservice>
-  ```
-  {: pre}
-
-    Procure as mensagens de erro a seguir:
-    <ul><ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>Para usar o serviço de balanceador de carga, deve-se ter um cluster padrão com pelo menos dois nós do trabalhador.
-    <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>Essa mensagem de erro indica que não sobrou nenhum endereço IP público móvel para ser alocado para o serviço de balanceador de carga. Consulte [Incluindo sub-redes nos clusters](cs_cluster.html#cs_cluster_subnet) para localizar informações sobre como solicitar endereços IP públicos móveis para seu cluster. Depois que os endereços IP públicos móveis estiverem disponíveis para o cluster, o serviço de balanceador de carga será criado automaticamente.
-    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips</code></pre></br>Você definiu um endereço IP público móvel para o serviço de balanceador de carga usando a seção **loadBalancerIP**, mas esse endereço IP público móvel não está disponível em sua sub-rede pública móvel. Mude o script de configuração do serviço de balanceador de carga e escolha um dos endereços IP públicos móveis disponíveis ou remova a seção **loadBalancerIP** de seu script para que um endereço IP público móvel disponível possa ser alocado automaticamente.
-    <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>Você não tem nós do trabalhador suficientes para implementar um serviço de balanceador de carga. Um motivo talvez seja que você tenha implementado um cluster padrão com mais de um nó do trabalhador, mas o fornecimento dos nós do trabalhador tenha falhado.
-    <ol><li>Liste os nós do trabalhador disponíveis.</br><pre class="codeblock"><code>kubectl get nodes</code></pre>
-    <li>Se pelo menos dois nós do trabalhador disponíveis forem localizados, liste os detalhes do nó do trabalhador.</br><pre class="screen"><code>bx cs worker-get [<cluster_name_or_id>] <worker_ID></code></pre>
-    <li>Certifique-se de que os IDs da VLAN pública e privada para os nós do trabalhador que foram retornados pelos comandos 'kubectl get nodes' e 'bx cs [<cluster_name_or_id>] worker-get' correspondam.</ol></ul></ul>
-
-4.  Se você estiver usando um domínio customizado para se conectar ao serviço de balanceador de carga, certifique-se de que seu domínio customizado seja mapeado para o endereço IP público do serviço de balanceador de carga.
-    1.  Localize o endereço IP público do serviço de balanceador de carga.
-
-      ```
-      kubectl describe service <myservice> | grep "LoadBalancer Ingress"
-      ```
-      {: pre}
-
-    2.  Verifique se o seu domínio customizado está mapeado para o endereço IP público móvel do serviço de balanceador de carga no registro de Ponteiro (PTR).
+<table>
+<col width="40%">
+<col width="60%">
+ <thead>
+ <th>Por que isso está acontecendo?</th>
+ <th>Como corrigi-lo</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td>Você não tem as funções de acesso necessárias para fazer download e atualizar os dados do certificado.</td>
+ <td>Verifique com seu Administrador de conta para designar a você as funções de **Operador** e **Editor** para sua instância do {{site.data.keyword.cloudcerts_full_notm}}. Para obter mais detalhes, veja <a href="/docs/services/certificate-manager/about.html#identity-access-management">Identity and Access Management</a> para o {{site.data.keyword.cloudcerts_short}}.</td>
+ </tr>
+ <tr>
+ <td>O CRN do certificado fornecido no tempo de criação, atualização ou remoção não pertence à mesma conta que o cluster.</td>
+ <td>Verifique se o CRN do certificado fornecido é importado para uma instância do serviço {{site.data.keyword.cloudcerts_short}} que está implementado na mesma conta que seu cluster.</td>
+ </tr>
+ <tr>
+ <td>O CRN do certificado fornecido no tempo de criação está incorreto.</td>
+ <td><ol><li>Verifique a precisão da sequência CRN do certificado que você fornece.</li><li>Se for constatado que o CRN do certificado está exato, tente atualizar o segredo. <pre class="pre"><code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li><li>Se esse comando resultar no status <code>update_failed</code>, remova o segredo. <pre class="pre"><code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt;</code></pre></li><li>Implemente o segredo novamente. <pre class="pre"><code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li></ol></td>
+ </tr>
+ <tr>
+ <td>O CRN do certificado fornecido no tempo de atualização está incorreto.</td>
+ <td><ol><li>Verifique a precisão da sequência CRN do certificado que você fornece.</li><li>Se for constatado que o CRN do certificado está exato, remova o segredo. <pre class="pre"><code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt;</code></pre></li><li>Implemente o segredo novamente. <pre class="pre"><code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li><li>Tente atualizar o segredo. <pre class="pre"><code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li></ol></td>
+ </tr>
+ <tr>
+ <td>O serviço {{site.data.keyword.cloudcerts_long_notm}} está tendo tempo de inatividade.</td>
+ <td>Verifique se o serviço {{site.data.keyword.cloudcerts_short}} está funcionando.</td>
+ </tr>
+ </tbody></table>
 
 <br />
 
 
 
-
-
-
-
-## A recuperação da URL do ETCD para configuração da CLI do Calico falha
+## Não é possível recuperar a URL do ETCD para configuração da CLI do Calico
 {: #cs_calico_fails}
 
 {: tsSymptoms}
-Quando você recuperar o `<ETCD_URL>` para [incluir políticas de rede](cs_security.html#adding_network_policies), você obtém uma mensagem de erro `calico-config not found`.
+Quando você recuperar o `<ETCD_URL>` para [incluir políticas de rede](cs_network_policy.html#adding_network_policies), você obtém uma mensagem de erro `calico-config not found`.
 
 {: tsCauses}
-Seu cluster não está em (Kubernetes versão 1.7)[cs_versions.html] ou mais recente.
+Seu cluster não está no [Kubernetes versão 1.7](cs_versions.html) ou mais recente.
 
 {: tsResolve}
-(Atualize seu cluster) [cs_cluster.html#cs_cluster_update] ou recupere o `<ETCD_URL>` com comandos que são compatíveis com versões anteriores do Kubernetes.
+[Atualize o seu cluster](cs_cluster_update.html#master) ou recupere o `<ETCD_URL>` com comandos que são compatíveis com versões anteriores do Kubernetes.
 
 Para recuperar o `<ETCD_URL>`, execute um dos comandos a seguir:
 
@@ -828,7 +901,7 @@ Para recuperar o `<ETCD_URL>`, execute um dos comandos a seguir:
     <li> Localize o valor de terminais do ETCD. Exemplo: <code>https://169.1.1.1:30001</code>
     </ol>
 
-Quando você recuperar o `<ETCD_URL>`, continue com as etapas conforme listado em (Incluindo políticas de rede)[cs_security.html#adding_network_policies].
+Quando você recuperar o `<ETCD_URL>`, continue com as etapas conforme listado em (Incluindo políticas de rede) [cs_network_policy.html#adding_network_policies].
 
 <br />
 

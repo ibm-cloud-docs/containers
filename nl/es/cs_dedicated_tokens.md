@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-11-02"
 
 ---
@@ -129,7 +129,7 @@ Cree una señal que no caduque para utilizar un registro de imágenes que pueda 
         <table>
         <caption>Tabla 2. Visión general de los componentes del archivo YAML</caption>
         <thead>
-        <th colspan=2><img src="images/idea.png"/>Visión general de los componentes del archivo YAML</th>
+        <th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Visión general de los componentes del archivo YAML</th>
         </thead>
         <tbody>
         <tr>

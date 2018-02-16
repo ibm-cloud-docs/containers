@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-18"
 
 ---
@@ -45,7 +45,7 @@ lastupdated: "2017-12-18"
 ## 先决条件
 
 -  [安装 CLI](cs_cli_install.html#cs_cli_install_steps)
--  [创建群集](cs_cluster.html#cs_cluster_cli)
+-  [创建群集](cs_clusters.html#clusters_cli)
 -  [将 CLI 设定为集群目标](cs_cli_install.html#cs_cli_configure)
 
 ## 第 1 课：下载并安装 Istio

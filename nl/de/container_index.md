@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-13"
 
 ---
@@ -41,7 +41,7 @@ Sie möchten eine App in einem Container bereitstellen? Dann müssen Sie als Ers
 
 Und was ist ein Cluster? Ein Cluster ist eine Gruppe von Ressourcen, Knoten, Netzen und Speichereinheiten, die die Hochverfügbarkeit von Apps sicherstellen. Nachdem Sie den Cluster erstellt haben, können Sie Ihre Apps in Containern bereitstellen.
 
-[Sie müssen über ein nutzungsabhängiges {{site.data.keyword.Bluemix_notm}}-Konto oder ein Abonnementkonto verfügen, um einen Lite-Cluster zu erstellen.](https://console.bluemix.net/registration/) 
+[Sie müssen über ein nutzungsabhängiges {{site.data.keyword.Bluemix_notm}}-Konto oder ein Abonnementkonto verfügen, um einen Lite-Cluster zu erstellen.](https://console.bluemix.net/registration/)
 
 
 Gehen Sie wie folgt vor, um einen Lite-Cluster zu erstellen:
@@ -64,6 +64,6 @@ Hervorragend! Sie haben Ihren ersten Cluster erstellt!
 Wenn der Cluster betriebsbereit ist, können Sie verschiedene Aktionen für Ihren Cluster durchführen.
 
 * [Installieren Sie die Befehlszeilenschnittstellen und nehmen Sie die Arbeit mit dem Cluster auf.](cs_cli_install.html#cs_cli_install)
-* [Stellen Sie eine App in Ihrem Cluster bereit.](cs_apps.html#cs_apps_cli)
-* [Erstellen Sie einen Standardcluster mit mehreren Knoten zwecks höherer Verfügbarkeit.](cs_cluster.html#cs_cluster_ui)
+* [Stellen Sie eine App in Ihrem Cluster bereit.](cs_app.html#app_cli)
+* [Erstellen Sie einen Standardcluster mit mehreren Knoten zwecks höherer Verfügbarkeit.](cs_clusters.html#clusters_ui)
 * [Richten Sie Ihre eigene private Registry in {{site.data.keyword.Bluemix_notm}} ein, um Docker-Images zu speichern und gemeinsam mit anderen Benutzern zu verwenden.](/docs/services/Registry/index.html)

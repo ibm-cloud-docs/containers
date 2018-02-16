@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2017
-lastupdated: "2017-12-18"
+  years: 2014, 2018
+lastupdated: "2018-01-05"
 
 ---
 
@@ -22,13 +22,24 @@ lastupdated: "2017-12-18"
 {:shortdesc}
 
 {{site.data.keyword.containershort_notm}} 支持多个版本的 Kubernetes。除非您指定其他版本，否则在创建或更新集群时将使用缺省版本。可用的 Kubernetes 版本为：
-- 1.8.4
+- 1.8.6
 - 1.7.4（缺省版本）
 - 1.5.6
 
-以下信息总结了在将集群更新到新版本时可能对已部署应用程序产生影响的更新。请查看 [Kubernetes changelog ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md)，以获取 Kubernetes 版本中更改的完整列表。
+要检查您正在本地运行或您的集群正在运行的 Kubernetes CLI 版本，请运行以下命令并检查版本。
 
-有关更新过程的更多信息，请参阅[更新集群](cs_cluster.html#cs_cluster_update)和[更新工作程序节点](cs_cluster.html#cs_cluster_worker_update)。
+```
+        kubectl version  --short
+        ```
+{: pre}
+
+输出示例：
+
+```
+Client Version: 1.7.4
+Server Version: 1.7.4
+```
+{: screen}
 
 ## 更新类型
 {: #version_types}
@@ -44,6 +55,11 @@ Kubernetes 提供以下版本更新类型：
 {: caption="Kubernetes 更新的影响" caption-side="top"}
 
 缺省情况下，您最多只能跨 Kubernetes 主节点的两个次版本进行更新。例如，如果当前主节点的版本是 1.5，而您要更新到 1.8，那么必须先更新到 1.7。可以强制更新继续，但跨两个以上的次版本更新可能会导致意外结果。
+{: tip}
+
+以下信息总结了在将集群更新到新版本时可能对已部署应用程序产生影响的更新。请查看 [Kubernetes changelog ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md)，以获取 Kubernetes 版本中更改的完整列表。
+
+有关更新过程的更多信息，请参阅[更新集群](cs_cluster_update.html#master)和[更新工作程序节点](cs_cluster_update.html#worker_node)。
 
 ## V1.8
 {: #cs_v18}
@@ -62,7 +78,8 @@ Kubernetes 提供以下版本更新类型：
 <thead>
 <tr>
 <th>类型</th>
-<th>描述</tr>
+<th>描述</th>
+</tr>
 </thead>
 <tbody>
 <tr>
@@ -79,26 +96,27 @@ Kubernetes 提供以下版本更新类型：
 <thead>
 <tr>
 <th>类型</th>
-<th>描述</tr>
+<th>描述</th>
+</tr>
 </thead>
 <tbody>
 <tr>
 <td>Kubernetes 仪表板登录</td>
-<td>用于访问 V1.8 中 Kubernetes 仪表板的 URL 已更改，并且登录过程包含新的认证步骤。有关更多信息，请参阅[访问 Kubernetes 仪表板](cs_apps.html#cs_cli_dashboard)。</td>
+<td>用于访问 V1.8 中 Kubernetes 仪表板的 URL 已更改，并且登录过程包含新的认证步骤。有关更多信息，请参阅[访问 Kubernetes 仪表板](cs_app.html#cli_dashboard)。</td>
 </tr>
-<tr>
 <tr>
 <td>Kubernetes 仪表板许可权</td>
 <td>要强制用户使用其凭证登录以查看 V1.8 中的集群资源，请除去 1.7 ClusterRoleBinding RBAC 权限。运行 `kubectl delete clusterrolebinding -n kube-system kubernetes-dashboard`。</td>
 </tr>
 <tr>
 <td>`kubectl delete`</td>
-<td>`kubectl delete` 命令在删除对象之前，不再向下扩展工作负载 API 对象（例如 pod）。如果需要该对象向下扩展，请在删除对象之前使用 kubectl scale ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale)。</td>
+<td>`kubectl delete` 命令在删除对象之前，不再向下扩展工作负载 API 对象（例如 pod）。如果需要该对象向下扩展，请在删除对象之前使用 [kubectl scale ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale)。</td>
 </tr>
 <tr>
 <td>`kubectl run`</td>
-<td>`kubectl run` 命令必须对 `--env` 使用多个标志而不是以逗号分隔的自变量。例如，运行 <code>kubectl run --env <x>=<y> --env <z>=&lt;a&gt;</code>，而不是 <code>kubectl run --env <x>=<y>,<z>=&lt;a&gt;</code>。</td>
+<td>`kubectl run` 命令必须对 `--env` 使用多个标志而不是以逗号分隔的自变量。例如，运行 <code>kubectl run --env &lt;x&gt;=&lt;y&gt; --env &lt;z&gt;=&lt;a&gt;</code>，而不是 <code>kubectl run --env &lt;x&gt;=&lt;y&gt;,&lt;z&gt;=&lt;a&gt;</code>。</td>
 </tr>
+<tr>
 <td>`kubectl stop`</td>
 <td>`kubectl stop` 命令不再可用。</td>
 </tr>
@@ -123,7 +141,8 @@ Kubernetes 提供以下版本更新类型：
 <thead>
 <tr>
 <th>类型</th>
-<th>描述</tr>
+<th>描述</th>
+</tr>
 </thead>
 <tbody>
 <tr>
@@ -150,7 +169,8 @@ Kubernetes 提供以下版本更新类型：
 <thead>
 <tr>
 <th>类型</th>
-<th>描述</tr>
+<th>描述</th>
+</tr>
 </thead>
 <tbody>
 <tr>
@@ -171,8 +191,9 @@ Kubernetes 提供以下版本更新类型：
   ```
   kubectl get pods -n <namespace> -o yaml | grep "scheduler.alpha.kubernetes.io/affinity" && echo "Action required"
   ```
-  </br>
-  <li>如果返回 `"Action required"`，请使用 [_PodSpec_ ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _affinity_ 字段，而不是使用 `scheduler.alpha.kubernetes.io/affinity` 注释。</ol>
+  </br></li>
+  <li>如果返回 `"Action required"`，请使用 [_PodSpec_ ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _affinity_ 字段，而不是使用 `scheduler.alpha.kubernetes.io/affinity` 注释。</li>
+</ol>
 </tr>
 <tr>
 <td>网络策略</td>
@@ -201,7 +222,7 @@ spec:
   ```
   kubectl annotate ns <namespace> --overwrite "net.beta.kubernetes.io/network-policy-"
   ```
-  </ol>
+  </li></ol>
 </tr>
 <tr>
 <td>容忍度</td>
@@ -227,7 +248,7 @@ spec:
   `kubectl annotate nodes <node> scheduler.alpha.kubernetes.io/taints-`
   <li>向每个节点添加污点：</br>
   `kubectl taint node <node> <taint>`
-  </ol>
+  </li></ol>
 </tr>
 <tr>
 <td>StatefulSet pod DNS</td>

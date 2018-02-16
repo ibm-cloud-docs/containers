@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-08"
 
 ---
@@ -288,7 +288,7 @@ instances de l'application seront créées.
     <table summary=“Information about the expose command parameters.”>
     <caption>Tableau 1. Paramètres de commande</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png"/> Informations additionnelles sur les paramètres de la commande expose</th>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Informations additionnelles sur les paramètres de la commande expose</th>
     </thead>
     <tbody>
     <tr>
@@ -415,7 +415,7 @@ Le diagramme suivant inclut les composants que vous déployez dans cette leçon.
 
 ![Configuration de déploiement](images/cs_app_tutorial_components2.png)
 
-Depuis le tutoriel précédent, vous disposez de votre compte et d'un cluster contenant un noeud worker. Dans cette leçon, vous configurez un déploiement et déployez trois instances de l'application Hello world. Chaque instance est déployée dans un pod Kubernetes dans le cadre d'un jeu de répliques dans le noeud worker. Pour une disponibilité publique, vous créez également un service Kubernetes. 
+Depuis le tutoriel précédent, vous disposez de votre compte et d'un cluster contenant un noeud worker. Dans cette leçon, vous configurez un déploiement et déployez trois instances de l'application Hello world. Chaque instance est déployée dans un pod Kubernetes dans le cadre d'un jeu de répliques dans le noeud worker. Pour une disponibilité publique, vous créez également un service Kubernetes.
 
 Comme défini dans le script de configuration, Kubernetes peut utiliser une vérification de la disponibilité pour déterminer si un conteneur dans un pod est en opération ou non. Ces vérifications peuvent, par exemple, identifier des interblocages, où une application est en opération, mais ne parvient pas à progresser. Le redémarrage d'un conteneur dans cette situation peut aider à
 rendre l'application disponible malgré les bogues. Kubernetes utilise ensuite une vérification de l'état de préparation du conteneur pour déterminer quand il est à nouveau prêt à accepter le trafic. Un pod est considéré comme prêt quand son conteneur est lui-même prêt. Une fois le pod prêt, il est redémarré. Dans l'application Stage2, le délai d'attente de l'application expire toutes les 15 secondes. Lorsqu'un bilan de santé est configuré dans le script de configuration, les conteneurs sont recréés si cette vérification détecte un problème affectant une application.
@@ -630,7 +630,7 @@ Le diagramme suivant inclut les composants que vous déployez dans cette leçon.
 
 ![Configuration de déploiement](images/cs_app_tutorial_components3.png)
 
-Depuis le tutoriel précédent, vous disposez de votre compte et d'un cluster contenant un noeud worker. Dans cette leçon, vous créez une instance de service Watson Tone Analyzer dans votre compte {{site.data.keyword.Bluemix_notm}} et configurez deux déploiements, un pour chaque composant de l'application. Chaque composant est déployé dans un pod Kubernetes dans le noeud worker. Pour que ces deux composants soient publics, vous créez également un service Kubernetes pour chaque composant. 
+Depuis le tutoriel précédent, vous disposez de votre compte et d'un cluster contenant un noeud worker. Dans cette leçon, vous créez une instance de service Watson Tone Analyzer dans votre compte {{site.data.keyword.Bluemix_notm}} et configurez deux déploiements, un pour chaque composant de l'application. Chaque composant est déployé dans un pod Kubernetes dans le noeud worker. Pour que ces deux composants soient publics, vous créez également un service Kubernetes pour chaque composant.
 
 
 ### Leçon 3a : Déploiement de l'application Watson Tone Analyzer
@@ -923,5 +923,6 @@ bx cs cluster-rm <pr_firm_cluster>
 {: pre}
 
 ## Etape suivante ?
+{: #next}
 
 Essayez d'explorer les méthodologies d'orchestration de conteneur sur le site [developerWorks ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/code/journey/category/container-orchestration/).

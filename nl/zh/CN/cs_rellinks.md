@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-01"
 
 ---
@@ -28,9 +28,9 @@ lastupdated: "2017-12-01"
 - [developerWorks 容器编排之旅 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/code/journey/category/container-orchestration/)
 - [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/)
 - [Docker 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/engine/)
-- [Helm 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.helm.sh/helm/)
-- [Istio ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/)
-- [Weave Scope ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.weave.works/oss/scope/)
+- <a href="https://docs.helm.sh/helm/" target="_blank">Helm 文档 <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>，了解 Kubernetes 软件包管理的信息
+- [Istio ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/) 服务网
+- [Weave Scope ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.weave.works/oss/scope/) 可视化
 
 <br />
 

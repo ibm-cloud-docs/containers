@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-13"
 
 ---
@@ -140,7 +140,7 @@ Para instalar las CLI:
     ```
     {: pre}
 
-7. Para crear imágenes localmente y enviarlas por push al repositorio de imágenes privadas, [instale la CLI de Docker CE![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.docker.com/community-edition#/download). Si está utilizando Windows 8 o anterior, puede instalar [Docker Toolbox ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.docker.com/products/docker-toolbox) en su lugar.
+7. Para crear imágenes localmente y enviarlas por push al repositorio de imágenes privadas, [instale la CLI de Docker CE ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.docker.com/community-edition#/download). Si está utilizando Windows 8 o anterior, puede instalar [Docker Toolbox ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.docker.com/products/docker-toolbox) en su lugar.
 
 ¡Enhorabuena! Ha instalado correctamente las CLI para las siguientes lecciones y guías de aprendizaje. A continuación, configure el entorno de clúster y añada el servicio {{site.data.keyword.toneanalyzershort}}.
 
@@ -285,6 +285,7 @@ Kubernetes como variable de entorno.
 ¡Buen trabajo! Ha configurado el clúster y el entorno local está preparado para que empiece a desplegar apps en el clúster.
 
 ## ¿Qué es lo siguiente?
+{: #next}
 
 * [Probar sus conocimientos y responder a un cuestionario.![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
 

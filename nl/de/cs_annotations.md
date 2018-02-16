@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2017
-lastupdated: "2017-12-01"
+  years: 2014, 2018
+lastupdated: "2018-01-12"
 
 ---
 
@@ -22,48 +22,368 @@ lastupdated: "2017-12-01"
 Um Ihrer Lastausgleichsfunktion für Anwendungen Funktionalität hinzuzufügen, können Sie Annotationen als Metadaten in einer Ingress-Ressource angeben.
 {: shortdesc}
 
-Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwendung finden Sie in [Öffentlichen Zugriff auf eine App durch Verwenden von Ingress konfigurieren](cs_apps.html#cs_apps_public_ingress). 
+Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwendung finden Sie in [Öffentlichen Zugriff auf eine App durch Verwenden von Ingress konfigurieren](cs_ingress.html#config).
+
+<table>
+<col width="20%">
+<col width="20%">
+<col width="60%">
+ <thead>
+ <th colspan=3>Allgemeine Annotationen</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><a href="#proxy-external-service">Externe Services</a></td>
+ <td><code>proxy-external-service</code></td>
+ <td>Pfaddefinitionen zu externen Services wie beispielsweise einem in {{site.data.keyword.Bluemix_notm}} gehosteten Service hinzufügen.</td>
+ </tr>
+ <tr>
+ <td><a href="#alb-id">Weiterleitung der privaten Lastausgleichsfunktion für Anwendungen</a></td>
+ <td><code>ALB-ID</code></td>
+ <td>Eingehende Anforderungen an Ihre Apps mit einer privaten Lastausgleichsfunktion für Anwendungen weiterleiten.</td>
+ </tr>
+ <tr>
+ <td><a href="#rewrite-path">Pfade neu schreiben</a></td>
+ <td><code>rewrite-path</code></td>
+ <td>Eingehenden Netzverkehr an einen anderen Pfad weiterleiten, den Ihre Back-End-App überwacht.</td>
+ </tr>
+ <tr>
+ <td><a href="#sticky-cookie-services">Sitzungsaffinität mit Cookies</a></td>
+ <td><code>sticky-cookie-services</code></td>
+ <td>Eingehenden Netzverkehr mithilfe eines permanenten Cookies immer an denselben Upstream-Server weiterleiten.</td>
+ </tr>
+ <tr>
+ <td><a href="#tcp-ports">TCP-Ports</a></td>
+ <td><code>tcp-ports</code></td>
+ <td>Zugriff auf eine App über einen vom Standard abweichenden TCP-Port.</td>
+ </tr>
+ </tbody></table>
 
 
-|Unterstützte Annotation|Beschreibung|
-|--------------------|-----------|
-|[Zusätzlicher Clientanforderungs- oder -antwortheader](#proxy-add-headers)|Einer Clientanforderung Headerinformationen hinzufügen, bevor Sie die Anforderung an Ihre Back-End-App weiterleiten, bzw. einer Clientantwort, bevor Sie die Antwort an den Client senden.|
-|[Pufferung von Clientantwortdaten](#proxy-buffering)|Pufferung einer Clientantwort in der Lastausgleichsfunktion für Anwenudngen inaktivieren, während die Antwort an den Client gesendet wird.|
-|[Entfernen des Clientantwortheaders](#response-remove-headers)|Headerinformationen aus einer Clientantwort entfernen, bevor die Antwort an den Client weitergeleitet wird.|
-|[Angepasste Verbindungs- und Lesezeitlimits](#proxy-connect-timeout)|Wartezeit der Lastausgleichsfunktion für Anwendungen für das Verbinden mit und Lesen aus der Back-End-App, bis die Back-End-App als nicht verfügbar betrachtet wird, anpassen. |
-|[Angepasste HTTP- und HTTPS-Ports](#custom-port)|Standardports für HTTP- und HTTPS-Netzverkehr ändern.|
-|[Angepasste maximale Länge des Clientanforderungshauptteils](#client-max-body-size)|Länge des Clientanforderungshauptteils anpassen, die an die Lastausgleichsfunktion für Anwendungen gesendet werden darf.|
-|[Externe Services](#proxy-external-service)|Pfaddefinitionen zu externen Services, wie einem unter {{site.data.keyword.Bluemix_notm}} gehosteten Service, hinzufügen.|
-|[Grenzwerte für globale Rate](#global-rate-limit)|Für alle Services die Verarbeitungsrate für Anforderungen und Verbindungen anhand eines definierten Schlüssels begrenzen.|
-|[HTTP-Weiterleitungen an HTTPS](#redirect-to-https)|Unsichere HTTP-Anforderungen an Ihre Domäne an HTTPS weiterleiten.|
-|[Keepalive-Anforderungen](#keepalive-requests)|Maximale Anzahl von Anforderungen konfigurieren, die über eine Keepalive-Verbindung bedient werden können.|
-|[Keepalive-Zeitlimit](#keepalive-timeout)|Zeitspanne konfigurieren, die eine Keepalive-Verbindung auf dem Server geöffnet bleibt.|
-|[Gegenseitige Authentifizierung](#mutual-auth)|Gegenseitige Authentifizierung für die Lastausgleichsfunktion für Anwendungen konfigurieren.|
-|[Weiterleitung der privaten Lastausgleichsfunktion für Anwendungen](#alb-id)|Eingehende Anforderungen an Ihre Apps mit einer privaten Lastausgleichsfunktion für Anwendungen weiterleiten.|
-|[Proxy-Puffer](#proxy-buffers)|Anzahl und Größe der Puffer festlegen, mit denen eine Antwort für eine einzelne Verbindung von einem Proxy-Server gelesen wird.|
-|[Größe belegter Puffer des Proxys](#proxy-busy-buffers-size)|Gesamtgröße der Puffer begrenzen, die eine Antwort an den Client senden, während die Antwort noch nicht vollständig gelesen wurde.|
-|[Puffergröße des Proxys](#proxy-buffer-size)|Größe des Puffers festlegen, mit dem der erste Teil der Antwort gelesen wird, die vom Proxy-Server empfangen wird.|
-|[Pfade neu schreiben](#rewrite-path)|Eingehenden Netzverkehr an einen anderen Pfad weiterleiten, den Ihre Back-End-App überwacht.|
-|[Sitzungsaffinität mit Cookies](#sticky-cookie-services)|Eingehenden Netzverkehr mithilfe eines permanenten Cookies immer an denselben Upstream-Server weiterleiten.|
-|[Grenzwerte für Servicerate](#service-rate-limit)|Für bestimmte Services die Verarbeitungsrate für Anforderungen und Verbindungen anhand eines definierten Schlüssels begrenzen.|
-|[Unterstützung für SSL-Services](#ssl-services)|Unterstützung für SSL-Services für den Lastausgleich zulassen.|
-|[TCP-Ports](#tcp-ports)|Zugriff auf eine App über einen vom Standard abweichenden TCP-Port.|
-|[Keepalive-Verbindungen für Upstream-Server](#upstream-keepalive)|Maximale Anzahl der inaktiven Keepalive-Verbindungen für einen Upstream-Server konfigurieren.|
+<table>
+<col width="20%">
+<col width="20%">
+<col width="60%">
+ <thead>
+  <th colspan=3>Annotationen für Verbindungen</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><a href="#proxy-connect-timeout">Angepasste Verbindungs- und Lesezeitlimits</a></td>
+  <td><code>proxy-connect-timeout</code></td>
+  <td>Zeitraum anpassen, über den die Lastausgleichsfunktion für Anwendungen auf das Herstellen einer Verbindung mit bzw. auf das Lesen von Daten aus der Back-End-App warten soll, bis die Back-End-App als nicht verfügbar betrachtet wird.</td>
+  </tr>
+  <tr>
+  <td><a href="#keepalive-requests">Keepalive-Anforderungen</a></td>
+  <td><code>keepalive-requests</code></td>
+  <td>Maximale Anzahl von Anforderungen konfigurieren, die über eine Keepalive-Verbindung bedient werden können.</td>
+  </tr>
+  <tr>
+  <td><a href="#keepalive-timeout">Keepalive-Zeitlimit</a></td>
+  <td><code>keepalive-timeout</code></td>
+  <td>Zeitspanne konfigurieren, die eine Keepalive-Verbindung auf dem Server geöffnet bleibt.</td>
+  </tr>
+  <tr>
+  <td><a href="#upstream-keepalive">Keepalive-Verbindungen für Upstream-Server</a></td>
+  <td><code>upstream-keepalive</code></td>
+  <td>Maximale Anzahl der inaktiven Keepalive-Verbindungen für einen Upstream-Server konfigurieren.</td>
+  </tr>
+  </tbody></table>
+
+
+<table>
+<col width="20%">
+<col width="20%">
+<col width="60%">
+ <thead>
+ <th colspan=3>Annotationen für Proxypuffer</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><a href="#proxy-buffering">Pufferung von Clientantwortdaten</a></td>
+ <td><code>proxy-buffering</code></td>
+ <td>Pufferung einer Clientantwort in der Lastausgleichsfunktion für Anwendungen inaktivieren, während die Antwort an den Client gesendet wird.</td>
+ </tr>
+ <tr>
+ <td><a href="#proxy-buffers">Proxy-Puffer</a></td>
+ <td><code>proxy-buffers</code></td>
+ <td>Anzahl und Größe der Puffer festlegen, mit denen eine Antwort für eine einzelne Verbindung von einem Proxy-Server gelesen wird.</td>
+ </tr>
+ <tr>
+ <td><a href="#proxy-buffer-size">Puffergröße des Proxys</a></td>
+ <td><code>proxy-buffer-size</code></td>
+ <td>Größe des Puffers festlegen, mit dem der erste Teil der Antwort gelesen wird, die vom Proxy-Server empfangen wird.</td>
+ </tr>
+ <tr>
+ <td><a href="#proxy-busy-buffers-size">Größe belegter Puffer des Proxys</a></td>
+ <td><code>proxy-busy-buffers-size</code></td>
+ <td>Größe für Proxypuffer festlegen, die belegt sein können.</td>
+ </tr>
+ </tbody></table>
+
+
+<table>
+<col width="20%">
+<col width="20%">
+<col width="60%">
+<thead>
+<th colspan=3>Annotationen für Anforderungen und Antworten</th>
+</thead>
+<tbody>
+<tr>
+<td><a href="#proxy-add-headers">Zusätzlicher Clientanforderungs- oder -antwortheader</a></td>
+<td><code>proxy-add-headers</code></td>
+<td>Einer Clientanforderung Headerinformationen hinzufügen, bevor Sie die Anforderung an Ihre Back-End-App weiterleiten, bzw. einer Clientantwort, bevor Sie die Antwort an den Client senden.</td>
+</tr>
+<tr>
+<td><a href="#response-remove-headers">Entfernen des Clientantwortheaders</a></td>
+<td><code>response-remove-headers</code></td>
+<td>Headerinformationen aus einer Clientantwort entfernen, bevor die Antwort an den Client weitergeleitet wird.</td>
+</tr>
+<tr>
+<td><a href="#client-max-body-size">Angepasste maximale Länge des Clientanforderungshauptteils</a></td>
+<td><code>client-max-body-size</code></td>
+<td>Länge des Clientanforderungshauptteils anpassen, die an die Lastausgleichsfunktion für Anwendungen gesendet werden darf.</td>
+</tr>
+</tbody></table>
+
+<table>
+<col width="20%">
+<col width="20%">
+<col width="60%">
+<thead>
+<th colspan=3>Annotationen für Servicegrenzwerte</th>
+</thead>
+<tbody>
+<tr>
+<td><a href="#global-rate-limit">Grenzwerte für globale Rate</a></td>
+<td><code>global-rate-limit</code></td>
+<td>Verarbeitungsrate für Anforderungen und Anzahl der Verbindungen anhand eines definierten Schlüssels für alle Services begrenzen.</td>
+</tr>
+<tr>
+<td><a href="#service-rate-limit">Grenzwerte für Servicerate</a></td>
+<td><code>service-rate-limit</code></td>
+<td>Verarbeitungsrate für Anforderungen und Anzahl der Verbindungen anhand eines definierten Schlüssels für bestimmte Services begrenzen.</td>
+</tr>
+</tbody></table>
+
+<table>
+<col width="20%">
+<col width="20%">
+<col width="60%">
+<thead>
+<th colspan=3>Annotationen für HTTPS- und TLS/SSL-Authentifizierung</th>
+</thead>
+<tbody>
+<tr>
+<td><a href="#custom-port">Angepasste HTTP- und HTTPS-Ports</a></td>
+<td><code>custom-port</code></td>
+<td>Standardports für den HTTP-Netzverkehr (Port 80) und den HTTPS-Netzverkehr (Port 443) ändern.</td>
+</tr>
+<tr>
+<td><a href="#redirect-to-https">HTTP-Weiterleitungen an HTTPS</a></td>
+<td><code>redirect-to-https</code></td>
+<td>Unsichere HTTP-Anforderungen an Ihre Domäne an HTTPS weiterleiten.</td>
+</tr>
+<tr>
+<td><a href="#mutual-auth">Gegenseitige Authentifizierung</a></td>
+<td><code>mutual-auth</code></td>
+<td>Gegenseitige Authentifizierung für die Lastausgleichsfunktion für Anwendungen konfigurieren.</td>
+</tr>
+<tr>
+<td><a href="#ssl-services">Unterstützung für SSL-Services</a></td>
+<td><code>ssl-services</code></td>
+<td>Unterstützung für SSL-Services für den Lastausgleich zulassen.</td>
+</tr>
+</tbody></table>
 
 
 
-## Zusätzlicher Clientanforderungs- oder Clientantwortheader (proxy-add-headers)
-{: #proxy-add-headers}
+## Allgemeine Annotationen
+{: #general}
 
-Fügen Sie einer Clientanforderung zusätzliche Headerinformationen hinzu, bevor Sie die Anforderung an Ihre Back-End-App senden, bzw. einer Clientantwort, bevor Sie die Antwort an den Client senden.
+### Externe Services (proxy-external-service)
+{: #proxy-external-service}
+
+Hinzufügen von Pfaddefinitionen zu externen Services, wie beispielsweise in {{site.data.keyword.Bluemix_notm}} gehosteten Services.
 {:shortdesc}
 
 <dl>
 <dt>Beschreibung</dt>
-<dd>Die Ingress-Lastausgleichsfunktion für Anwendungen fungiert als Proxy zwischen der Client-App und Ihrer Back-End-App. Clientanforderungen, die an die Lastausgleichsfunktion für Anwendungen gesendet werden, werden (als Proxy) verarbeitet und in eine neue Anforderung umgesetzt, die anschließend vom Ingress-Controller an Ihre Back-End-App gesendet wird. Beim Senden einer Anforderung als Proxy werden Headerinformationen entfernt, z. B. der Benutzername, der ursprünglich vom Client gesendet wurde. Falls Ihre Back-End-App diese Informationen erfordert, können Sie die Annotation <strong>ingress.bluemix.net/proxy-add-headers</strong> verwenden, um der Clientanforderung Headerinformationen hinzuzufügen, bevor die Anforderung von der Lastausgleichsfunktion für Anwendungen an Ihre Back-End-App weitergeleitet wird.
+<dd>Fügen Sie Pfaddefinitionen zu externen Services hinzu. Verwenden Sie diese Annotation nur dann, wenn Ihre App für einen externen Service, nicht für einen Back-End-Service, betrieben wird. Wenn Sie diese Annotation verwenden, um eine externe Serviceroute zu erstellen, dann werden zusammen mit ihr nur die Annotationen `client-max-body-size`, `proxy-read-timeout`, `proxy-connect-timeout` und `proxy-buffering` unterstützt. Darüber hinaus werden keine weiteren Annotationen zusammen mit `proxy-external-service` unterstützt.
+</dd>
+<dt>YAML-Beispiel einer Ingress-Ressource</dt>
+<dd>
+
+<pre class="codeblock">
+<code>
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cafe-ingress
+  annotations:
+    ingress.bluemix.net/proxy-external-service: "path=&lt;mein_pfad&gt; external-svc=https:&lt;externer_service&gt; host=&lt;meine_domäne&gt;"
+spec:
+  tls:
+  - hosts:
+    - meine_domäne
+    secretName: mein_geheimer_schlüssel
+  rules:
+  - host: meine_domäne
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: mein_service
+          servicePort: 80
+</code></pre>
+
+<table>
+ <thead>
+ <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>path</code></td>
+ <td>Ersetzen Sie <code>&lt;<em>mein_pfad</em>&gt;</code> durch den Pfad, an dem der externe Service empfangsbereit ist.</td>
+ </tr>
+ <tr>
+ <td><code>external-svc</code></td>
+ <td>Ersetzen Sie <code>&lt;<em>externer_service</em>&gt;</code> durch den externen Service, der aufgerufen werden soll. Beispiel: <code>https://&lt;mein_service&gt;.&lt;region&gt;.mybluemix.net</code>.</td>
+ </tr>
+ <tr>
+ <td><code>host</code></td>
+ <td>Ersetzen Sie <code>&lt;<em>meine_domäne</em>&gt;</code> durch die Hostdomäne für den externen Service.</td>
+ </tr>
+ </tbody></table>
+
+ </dd></dl>
+
+<br />
+
+
+
+### Weiterleitung der privaten Lastausgleichsfunktion für Anwendungen
+{: #alb-id}
+
+Leiten Sie eingehende Anforderungen an Ihre Apps mit einer privaten Lastausgleichsfunktion für Anwendungen weiter.
+{:shortdesc}
+
+<dl>
+<dt>Beschreibung</dt>
+<dd>
+Wählen Sie statt der öffentlichen eine private Lastausgleichsfunktion für Anwendungen für die Weiterleitung von eingehenden Anforderungen aus.</dd>
+
+
+<dt>YAML-Beispiel einer Ingress-Ressource</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+name: myingress
+annotations:
+  ingress.bluemix.net/ALB-ID: "&lt;private_ALB-ID&gt;"
+spec:
+tls:
+- hosts:
+  - meine_domäne
+    secretName: mein_geheimer_tls-schlüssel
+  rules:
+- host: meine_domäne
+  http:
+    paths:
+    - path: /
+        backend:
+          serviceName: mein_service
+          servicePort: 8080</code></pre>
+
+<table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;private_ALB-ID&gt;</code></td>
+<td>Die ID Ihrer privaten Lastausgleichsfunktion für Anwendungen (Application Load Balancer, ALB). Führen Sie <code>bx cs albs --cluster <mein_cluster></code> aus, um nach der ID der privaten Lastausgleichsfunktion für Anwendungen zu suchen.
+</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
+
+<br />
+
+
+
+### Pfade neu schreiben (rewrite-path)
+{: #rewrite-path}
+
+Weiterleitung des eingehenden Netzverkehrs für den Pfad in der Domäne einer Lastausgleichsfunktion für Anwendungen an einen anderen Pfad, an dem die Back-End-Anwendung empfangsbereit ist.
+{:shortdesc}
+
+<dl>
+<dt>Beschreibung</dt>
+<dd>Die Domäne der Ingress-Lastausgleichsfunktion für Anwendungen leitet eingehenden Netzverkehr für <code>mykubecluster.us-south.containers.mybluemix.net/beans</code> an Ihre App weiter. Ihre App überwacht <code>/coffee</code> statt <code>/beans</code>. Zum Weiterleiten des eingehenden Netzverkehrs an Ihre App fügen Sie eine Annotation zum erneuten Schreiben (rewrite) zur Konfigurationsdatei der Ingress-Ressource hinzu. Dadurch wird sichergestellt, dass der an <code>/beans</code> eingehende Netzverkehr mithilfe des Pfads <code>/coffee</code> an Ihre App weitergeleitet wird. Wenn Sie mehrere Services einschließen, verwenden Sie nur ein Semikolon (;) zum Trennen der Services.</dd>
+<dt>YAML-Beispiel einer Ingress-Ressource</dt>
+<dd>
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/rewrite-path: "serviceName=&lt;mein_service1&gt; rewrite=&lt;zielpfad1&gt;;serviceName=&lt;mein_service2&gt; rewrite=&lt;zielpfad2&gt;"
+spec:
+  tls:
+  - hosts:
+    - meine_domäne
+    secretName: mein_geheimer_schlüssel
+  rules:
+  - host: meine_domäne
+    http:
+      paths:
+      - path: /beans
+        backend:
+          serviceName: mein_service1
+          servicePort: 80
+</code></pre>
+
+<table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben.</td>
+</tr>
+<tr>
+<td><code>rewrite</code></td>
+<td>Ersetzen Sie <code>&lt;<em>zielpfad</em>&gt;</code> durch den Pfad, an dem Ihre App empfangsbereit ist. Der eingehende Netzverkehr in der Domäne der Lastausgleichsfunktion für Anwendungen wird mithilfe dieses Pfads an den Kubernetes-Service weitergeleitet. Die meisten Apps überwachen keinen bestimmten Pfad, sondern verwenden den Rootpfad und einen bestimmten Port. Im vorstehenden Beispiel wurde der Pfad für 'rewrite' als <code>/coffee</code> definiert.</td>
+</tr>
+</tbody></table>
+
+</dd></dl>
+
+<br />
+
+
+### Sitzungsaffinität mit Cookies (sticky-cookie-services)
+{: #sticky-cookie-services}
+
+Verwendung der permanenten Cookie-Annotation, um der Lastausgleichsfunktion für Anwendungen Sitzungsaffinität hinzuzufügen und eingehenden Netzverkehr immer an denselben Upstream-Server weiterzuleiten. {:shortdesc}
+
+<dl>
+<dt>Beschreibung</dt>
+<dd>Um eine hohe Verfügbarkeit zu erreichen, müssen Sie bei einigen Appkonfigurationen unter Umständen mehrere Upstream-Server bereitstellen, die eingehende Clientanforderungen verarbeiten. Wenn ein Client eine Verbindung mit Ihrer Back-End-App herstellt, kann ein Client für die Dauer einer Sitzung bzw. für die Zeit, die für den Abschluss einer Task erforderlich ist, von demselben Upstream-Server bedient werden. Sie können Ihre Lastausgleichsfunktion für Anwendungen so konfigurieren, dass Sitzungsaffinität sichergestellt ist, indem Sie eingehenden Netzverkehr immer an denselben Upstream-Server weiterleiten.
 
 </br></br>
-Wenn eine Back-End-App eine Antwort an den Client sendet, wird die Antwort von der Lastausgleichsfunktion für Anwendungen als Proxy gesendet, und die HTTP-Header werden aus der Antwort entfernt. Die Client-Web-App benötigt diese Headerinformationen, um die Antwort erfolgreich verarbeiten zu können. Sie können die Annotation <strong>ingress.bluemix.net/response-add-headers</strong> verwenden, um der Clientanforderung Headerinformationen hinzuzufügen, bevor die Anforderung von der Lastausgleichsfunktion für Anwendungen an Ihre Back-End-App weitergeleitet wird.</dd>
+Jeder Client, der eine Verbindung mit Ihrer Back-End-App herstellt, wird durch die Lastausgleichsfunktion für Anwendungen einem der verfügbaren Upstream-Server zugeordnet. Die Lastausgleichsfunktion für Anwendungen erstellt ein Sitzungscookie, das in der App des Clients gespeichert wird und das in die Headerinformationen jeder Anforderung zwischen der Lastausgleichsfunktion für Anwendungen und dem Client eingeschlossen wird. Die Informationen im Cookie stellen sicher, dass alle Anforderungen während der gesamten Sitzung von demselben Upstream-Server verarbeitet werden.
+
+</br></br>
+Wenn Sie mehrere Services einschließen, verwenden Sie ein Semikolon (;) zum Trennen der Services.</dd>
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
 <dd>
 
@@ -73,38 +393,96 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/proxy-add-headers: |
-      serviceName=&lt;servicename1&gt; {
-      &lt;header1> &lt;wert1&gt;;
-      &lt;header2> &lt;wert2&gt;;
-      }
-      serviceName=&lt;servicename2&gt; {
-      &lt;header3&gt; &lt;wert3&gt;;
-      }
-    ingress.bluemix.net/response-add-headers: |
-      serviceName=&lt;servicename1&gt; {
-      "&lt;header1&gt;: &lt;wert1&gt;";
-      "&lt;header2&gt;: &lt;wert2&gt;";
-      }
-      serviceName=&lt;servicename1&gt; {
-      "&lt;header3&gt;: &lt;wert3&gt;";
-      }
+    ingress.bluemix.net/sticky-cookie-services: "serviceName=&lt;mein_service1&gt; name=&lt;cookiename1&gt; expires=&lt;ablaufzeit1&gt; path=&lt;cookiepfad1&gt; hash=&lt;hashalgorithmus1&gt;;serviceName=&lt;mein_service2&gt; name=&lt;cookiename2&gt; expires=&lt;ablaufzeit2&gt; path=&lt;cookiepfad2&gt; hash=&lt;hashalgorithmus2&gt;"
 spec:
   tls:
   - hosts:
-    - mydomain
-    secretName: mytlssecret
+    - meine_domäne
+    secretName: mein_geheimer_tls-schlüssel
   rules:
-  - host: mydomain
+  - host: meine_domäne
     http:
       paths:
       - path: /
         backend:
-          serviceName: &lt;servicename1&gt;
+          serviceName: &lt;mein_service1&gt;
           servicePort: 8080
-      - path: /meine_app
+      - path: /myapp
         backend:
-          serviceName: &lt;servicename2&gt;
+          serviceName: &lt;mein_service2&gt;
+          servicePort: 80</code></pre>
+
+  <table>
+  <caption>Erklärung der Komponenten der YAML-Datei</caption>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>serviceName</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben.</td>
+  </tr>
+  <tr>
+  <td><code>name</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>cookiename</em>&gt;</code> durch den Namen eines permanenten Cookies, das während einer Sitzung erstellt wird.</td>
+  </tr>
+  <tr>
+  <td><code>expires</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>ablaufzeit</em>&gt;</code> durch den Zeitraum in Sekunden (s), Minuten (m) oder Stunden (h), nach dem das permanente Cookie abläuft. Diese Zeit ist unabhängig von der Benutzeraktivität. Nachdem das Cookie abgelaufen ist, wird es durch den Web-Browser des Clients gelöscht und nicht mehr an die Lastausgleichsfunktion für Anwendungen gesendet. Um beispielsweise eine Ablaufzeit von einer Sekunde, einer Minute oder einer Stunde festzulegen, geben Sie <code>1s</code>, <code>1m</code> oder <code>1h</code> ein.</td>
+  </tr>
+  <tr>
+  <td><code>path</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>cookiepfad</em>&gt;</code> durch den Pfad, der an die Ingress-Unterdomäne angehängt werden soll und der angibt, für welche Domänen und Unterdomänen das Cookie an die Lastausgleichsfunktion für Anwendungen gesendet wird. Wenn Ihre Ingress-Domäne beispielsweise <code>www.myingress.com</code> ist und Sie das Cookie in jeder Clientanforderung senden möchten, müssen Sie <code>path=/</code> festlegen. Wenn Sie das Cookie nur für <code>www.myingress.com/myapp</code> und alle zugehörigen Unterdomänen senden möchten, müssen Sie <code>path=/myapp</code> festlegen.</td>
+  </tr>
+  <tr>
+  <td><code>hash</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>hashalgorithmus</em>&gt;</code> durch den Hashalgorithmus, der die Informationen im Cookie schützt. Nur <code>sha1</code> wird unterstützt. SHA1 erstellt eine Hashsumme auf der Grundlage der Informationen im Cookie und hängt die Hashsumme an das Cookie an. Der Server kann die Informationen im Cookie entschlüsseln und die Datenintegrität bestätigen.</td>
+  </tr>
+  </tbody></table>
+
+ </dd></dl>
+
+<br />
+
+
+
+### TCP-Ports für Lastausgleichsfunktionen für Anwendungen (tcp-ports)
+{: #tcp-ports}
+
+Zugriff auf eine App über einen vom Standard abweichenden TC-Port.
+{:shortdesc}
+
+<dl>
+<dt>Beschreibung</dt>
+<dd>
+Verwenden Sie diese Annotation für eine App, für die eine Arbeitslast für TCP-Datenströme ausgeführt wird.
+
+<p>**Hinweis**: Die Lastausgleichsfunktion für Anwendungen arbeitet im Durchgriffsmodus und leitet den Datenverkehr an Backend-Apps weiter. Die SSL-Terminierung wird in diesem Fall nicht unterstützt.</p>
+</dd>
+
+
+<dt>YAML-Beispiel einer Ingress-Ressource</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+name: myingress
+annotations:
+  ingress.bluemix.net/tcp-ports: "serviceName=&lt;mein_service&gt; ingressPort=&lt;ingress-port&gt; [servicePort=&lt;service-port&gt;]"
+spec:
+  tls:
+  - hosts:
+    - meine_domäne
+    secretName: mein_geheimer_schlüssel
+  rules:
+  - host: meine_domäne
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: &lt;mein_service&gt;
           servicePort: 80</code></pre>
 
  <table>
@@ -113,126 +491,32 @@ spec:
   </thead>
   <tbody>
   <tr>
-  <td><code>annotations</code></td>
-  <td>Ersetzen Sie die folgenden Werte:<ul>
-  <li><code><em>&lt;servicename&gt;</em></code>: Der Name des Kubernetes-Service, den Sie für Ihre App erstellt haben.</li>
-  <li><code><em>&lt;header&gt;</em></code>: Der Schlüssel der Headerinformationen, die der Clientanforderung oder der Clientantwort hinzugefügt werden sollen.</li>
-  <li><code><em>&lt;wert&gt;</em></code>: Der Wert der Headerinformationen, die der Clientanforderung oder der Clientantwort hinzugefügt werden sollen.</li>
-  </ul></td>
+  <td><code>serviceName</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes-Service, auf den über einen vom Standard abweichenden TCP-Port zugegriffen werden soll.</td>
+  </tr>
+  <tr>
+  <td><code>ingressPort</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>ingress-port</em>&gt;</code> durch den TCP-Port, an dem Sie auf Ihre App zugreifen wollen.</td>
+  </tr>
+  <tr>
+  <td><code>servicePort</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>service-port</em>&gt;</code> gegebenenfalls durch den gewünschten Wert. Dieser Parameter ist optional. Wenn ein Wert bereitgestellt wird, wird der Port durch diesen Wert ersetzt, bevor der Datenverkehr an die Backend-App gesendet wird. Andernfalls entspricht der Port weiterhin dem Ingress-Port.</td>
   </tr>
   </tbody></table>
- </dd></dl>
+  </dd>
+  </dl>
 
 <br />
 
 
- ## Pufferung von Clientantwortdaten (proxy-buffering)
- {: #proxy-buffering}
 
- Verwenden Sie die 'buffer'-Annotation, um das Speichern von Antwortdaten in der Lastausgleichsfunktion für Anwendungen während des Sendens von Daten an den Client zu inaktivieren.
- {:shortdesc}
+## Annotationen für Verbindungen
+{: #connection}
 
- <dl>
- <dt>Beschreibung</dt>
- <dd>Die Ingress-Lastausgleichsfunktion für Anwendungen fungiert als Proxy zwischen Ihrer Back-End-App und dem Client-Web-Browser. Wenn eine Antwort von der Back-End-App an den Client gesendet wird, werden die Antwortdaten standardmäßig in der Lastausgleichsfunktion für Anwendungen gepuffert. Die Lastausgleichsfunktion für Anwendungen verarbeitet die Clientantwort als Proxy und beginnt mit dem Senden der Antwort an den Client (in der Geschwindigkeit des Clients). Nachdem alle Daten aus der Back-End-App von der Lastausgleichsfunktion für Anwendungen empfangen wurden, wird die Verbindung zur Back-End-App gekappt. Die Verbindung von der Lastausgleichsfunktion für Anwendungen zum Client bleibt geöffnet, bis der Client alle Daten empfangen hat.
-
-</br></br>
- Falls die Pufferung von Antwortdaten in der Lastausgleichsfunktion für Anwendungen inaktiviert ist, werden Daten sofort von der Lastausgleichsfunktion für Anwendungen an den Client gesendet. Der Client muss eingehende Daten in der Geschwindigkeit der Lastausgleichsfunktion für Anwendungen verarbeiten können. Falls der Client zu langsam ist, gehen unter Umständen Daten verloren.
- </br></br>
- Die Pufferung von Antwortdaten in der Lastausgleichsfunktion für Anwendungen ist standardmäßig aktiviert. </dd>
- <dt>YAML-Beispiel einer Ingress-Ressource</dt>
- <dd>
-
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
- kind: Ingress
- metadata:
-   name: myingress
-   annotations:
-     ingress.bluemix.net/proxy-buffering: "False"
- spec:
-   tls:
-   - hosts:
-     - mydomain
-    secretName: mytlssecret
-  rules:
-   - host: mydomain
-    http:
-      paths:
-       - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
- </dd></dl>
-
-<br />
-
-
- ## Entfernen des Clientantwortheaders (response-remove-headers)
- {: #response-remove-headers}
-
-Entfernen Sie Headerinformationen, die aus der Back-End-App in die Clientantwort eingeschlossen werden sollen, bevor die Antwort an den Client gesendet wird.
- {:shortdesc}
-
- <dl>
- <dt>Beschreibung</dt>
- <dd>Die Ingress-Lastausgleichsfunktion für Anwendungen fungiert als Proxy zwischen Ihrer Back-End-App und dem Client-Web-Browser. Clientantworten von der Back-End-App, die an die Lastausgleichsfunktion für Anwendungen gesendet werden, werden (als Proxy) verarbeitet und in eine neue Antwort umgesetzt, die anschließend von der Lastausgleichsfunktion für Anwendungen an Ihren Client-Web-Browser gesendet wird. Auch wenn beim Senden einer Antwort als Proxy die HTTP-Headerinformationen entfernt werden, die ursprünglich von der Back-End-App gesendet wurden, entfernt dieser Prozess möglicherweise nicht alle Back-End-App-spezifischen Header. Entfernen Sie Headerinformationen aus einer Clientantwort, bevor die Antwort von der Lastausgleichsfunktion für Anwendungen an den Client-Web-Browser weitergeleitet wird. </dd>
- <dt>YAML-Beispiel einer Ingress-Ressource</dt>
- <dd>
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
- kind: Ingress
- metadata:
-   name: myingress
-   annotations:
-     ingress.bluemix.net/response-remove-headers: |
-       serviceName=&lt;servicename1&gt; {
-       "&lt;header1&gt;";
-       "&lt;header2&gt;";
-       }
-       serviceName=&lt;servicename2&gt; {
-       "&lt;header3&gt;";
-       }
- spec:
-   tls:
-   - hosts:
-     - mydomain
-    secretName: mytlssecret
-  rules:
-   - host: mydomain
-    http:
-      paths:
-       - path: /
-        backend:
-          serviceName: &lt;servicename1&gt;
-          servicePort: 8080
-       - path: /meine_app
-        backend:
-          serviceName: &lt;servicename2&gt;
-          servicePort: 80</code></pre>
-
-  <table>
-   <thead>
-   <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-   </thead>
-   <tbody>
-   <tr>
-   <td><code>annotations</code></td>
-   <td>Ersetzen Sie die folgenden Werte:<ul>
-   <li><code><em>&lt;servicename&gt;</em></code>: Der Name des Kubernetes-Service, den Sie für Ihre App erstellt haben.</li>
-   <li><code><em>&lt;header&gt;</em></code>: Der Schlüssel des Headers, der aus der Clientantwort gesendet werden soll.</li>
-   </ul></td>
-   </tr>
-   </tbody></table>
-   </dd></dl>
-
-<br />
-
-
-## Angepasste Verbindungs- und Lesezeitlimits (proxy-connect-timeout, proxy-read-timeout)
+### Angepasste Verbindungs- und Lesezeitlimits (proxy-connect-timeout, proxy-read-timeout)
 {: #proxy-connect-timeout}
 
-Legen Sie ein angepasstes Verbindungs- und Lesezeitlimit für die Lastausgleichsfunktion für Anwendungen fest. Passen Sie die Wartezeit der Lastausgleichsfunktion für Anwendungen für das Verbinden mit und Lesen aus der Back-End-App, bis die Back-End-App als nicht verfügbar betrachtet wird, an.
+Festlegen eines angepassten Verbindungs- und Lesezeitlimits für die Lastausgleichsfunktion für Anwendungen. Anpassen des Zeitraums, über den die Lastausgleichsfunktion für Anwendungen auf das Herstellen einer Verbindung mit bzw. auf das Lesen von Daten aus der Back-End-App warten soll, bis die Back-End-App als nicht verfügbar betrachtet wird.
 {:shortdesc}
 
 <dl>
@@ -261,15 +545,15 @@ metadata:
 spec:
  tls:
  - hosts:
-   - mydomain
-    secretName: mytlssecret
+   - meine_domäne
+    secretName: mein_geheimer_tls-schlüssel
   rules:
- - host: mydomain
+ - host: meine_domäne
    http:
      paths:
      - path: /
         backend:
-          serviceName: myservice
+          serviceName: mein_service
           servicePort: 8080</code></pre>
 
 <table>
@@ -278,11 +562,12 @@ spec:
  </thead>
  <tbody>
  <tr>
- <td><code>annotations</code></td>
- <td>Ersetzen Sie die folgenden Werte:<ul><li><code><em>&lt;verbindungszeitlimit&gt;</em></code>: Geben Sie die Anzahl von Sekunden ein, die auf eine Verbindung mit der Back-End-App gewartet werden soll, z. B. <strong>65s</strong>.
-
- </br></br>
- <strong>Hinweis:</strong> Ein Verbindungszeitlimit kann nicht größer als 75 Sekunden sein.</li><li><code><em>&lt;lesezeitlimit&gt;</em></code>: Geben Sie die Anzahl von Sekunden ein, die auf das Lesen der Back-End-App gewartet werden soll, z. B. <strong>65s</strong>.</li></ul></td>
+ <td><code>&lt;verbindungszeitlimit&gt;</code></td>
+ <td>Die Anzahl der Sekunden, die auf die Herstellung einer Verbindung mit der Back-End-App gewartet werden soll. Beispiel: <code>65s</code>. <strong>Hinweis:</strong> Ein Verbindungszeitlimit kann nicht größer als 75 Sekunden sein.</td>
+ </tr>
+ <tr>
+ <td><code>&lt;lesezeitlimit&gt;</code></td>
+ <td>Die Anzahl der Sekunden, die auf das Lesen von Daten aus der Back-End-App gewartet werden soll. Beispiel: <code>65s</code>.</td>
  </tr>
  </tbody></table>
 
@@ -291,10 +576,748 @@ spec:
 <br />
 
 
-## Angepasste HTTP- und HTTPS-Ports (custom-port)
+
+### Keepalive-Anforderungen (keepalive-requests)
+{: #keepalive-requests}
+
+Konfiguration der maximalen Anzahl von Anforderungen, die über eine Keepalive-Verbindung bedient werden können.
+{:shortdesc}
+
+<dl>
+<dt>Beschreibung</dt>
+<dd>
+Legen Sie die maximale Anzahl von Anforderungen fest, die über eine Keepalive-Verbindung bedient werden können.
+</dd>
+
+
+<dt>YAML-Beispiel einer Ingress-Ressource</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+name: myingress
+annotations:
+  ingress.bluemix.net/keepalive-requests: "serviceName=&lt;mein_service&gt; requests=&lt;max._anzahl_anforderungen&gt;"
+spec:
+tls:
+- hosts:
+  - meine_domäne
+    secretName: mein_geheimer_tls-schlüssel
+  rules:
+- host: meine_domäne
+  http:
+    paths:
+    - path: /
+      backend:
+        serviceName: &lt;mein_service&gt;
+        servicePort: 8080</code></pre>
+
+<table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben. Dieser Parameter ist optional. Die Konfiguration wird auf alle Services auf dem Ingress-Host angewendet, es sei denn, es wird ein Service angegeben. Wird der Parameter bereitgestellt, werden die Keepalive-Anforderung für den angegebenen Service festgelegt. Wird der Parameter nicht bereitgestellt, werden die Keepalive-Anforderungen auf der Serverebene der Datei <code>nginx.conf</code> für alle Services festgelegt, für die die Keepalive-Anforderungen nicht konfiguriert sind.</td>
+</tr>
+<tr>
+<td><code>requests</code></td>
+<td>Ersetzen Sie <code>&lt;<em>max._anzahl_anforderungen</em>&gt;</code> durch die maximale Anzahl der Anforderungen, die über eine einzige Keepalive-Verbindung bedient werden können.</td>
+</tr>
+</tbody></table>
+
+</dd>
+</dl>
+
+<br />
+
+
+
+### Keepalive-Zeitlimit (keepalive-timeout)
+{: #keepalive-timeout}
+
+Konfiguration der Zeitspanne, die eine Keepalive-Verbindung serverseitig geöffnet bleibt.
+{:shortdesc}
+
+<dl>
+<dt>Beschreibung</dt>
+<dd>
+Legen Sie die Zeitspanne fest, die eine Keepalive-Verbindung auf dem Server geöffnet bleibt.
+</dd>
+
+
+<dt>YAML-Beispiel einer Ingress-Ressource</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: myingress
+ annotations:
+   ingress.bluemix.net/keepalive-timeout: "serviceName=&lt;mein_service&gt; timeout=&lt;zeit&gt;s"
+spec:
+ tls:
+ - hosts:
+   - meine_domäne
+    secretName: mein_geheimer_tls-schlüssel
+  rules:
+ - host: meine_domäne
+   http:
+     paths:
+     - path: /
+       backend:
+         serviceName: mein_service
+         servicePort: 8080</code></pre>
+
+<table>
+ <thead>
+ <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>serviceName</code></td>
+ <td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben. Dieser Parameter ist optional. Wird der Parameter bereitgestellt, wird das Keepalive-Zeitlimit für den angegebenen Service festgelegt. Wird der Parameter nicht bereitgestellt, wird das Keepalive-Zeitlimit auf der Serverebene der Datei <code>nginx.conf</code> für alle Services festgelegt, für die das Keepalive-Zeitlimit nicht konfiguriert ist.</td>
+ </tr>
+ <tr>
+ <td><code>timeout</code></td>
+ <td>Ersetzen Sie <code>&lt;<em>zeit</em>&gt;</code> durch den Zeitraum in Sekunden. Beispiel:<code>timeout=20s</code>. Der Wert null inaktiviert die Keepalive-Verbindungen für den Client.</td>
+ </tr>
+ </tbody></table>
+
+ </dd>
+ </dl>
+
+<br />
+
+
+
+### Keepalive-Verbindungen für Upstream-Server (upstream-keepalive)
+{: #upstream-keepalive}
+
+Konfiguration der maximalen Anzahl der inaktiven Keepalive-Verbindungen für einen Upstream-Server.
+{:shortdesc}
+
+<dl>
+<dt>Beschreibung</dt>
+<dd>
+Ändern Sie die maximale Anzahl inaktiver Keepalive-Verbindungen zu einem Upstream-Server für einen angegebenen Service. Der Upstream-Server verfügt standardmäßig über 64 inaktive Keepalive-Verbindungen.
+</dd>
+
+
+ <dt>YAML-Beispiel einer Ingress-Ressource</dt>
+ <dd>
+
+ <pre class="codeblock">
+ <code>apiVersion: extensions/v1beta1
+ kind: Ingress
+ metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/upstream-keepalive: "serviceName=&lt;mein_service&gt; keepalive=&lt;max._anzahl_verbindungen&gt;"
+ spec:
+  tls:
+  - hosts:
+    - meine_domäne
+    secretName: mein_geheimer_tls-schlüssel
+  rules:
+  - host: meine_domäne
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: mein_service
+          servicePort: 8080</code></pre>
+
+ <table>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>serviceName</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben.</td>
+  </tr>
+  <tr>
+  <td><code>keepalive</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>max._anzahl_verbindungen</em>&gt;</code> durch die maximal zulässige Anzahl der inaktiven Keepalive-Verbindungen zum Upstream-Server. Der Standardwert ist <code>64</code>. Bei Angabe des Werts <code>0</code> werden Keepalive-Verbindungen zum Upstream-Server für den angegebenen Service inaktiviert.</td>
+  </tr>
+  </tbody></table>
+  </dd>
+  </dl>
+
+<br />
+
+
+
+## Annotationen für Proxypuffer
+{: #proxy-buffer}
+
+
+### Pufferung von Clientantwortdaten (proxy-buffering)
+{: #proxy-buffering}
+
+Verwendung der 'buffer'-Annotation, um das Speichern von Antwortdaten in der Lastausgleichsfunktion für Anwendungen während des Sendens von Daten an den Client zu inaktivieren.
+{:shortdesc}
+
+<dl>
+<dt>Beschreibung</dt>
+<dd>Die Ingress-Lastausgleichsfunktion für Anwendungen fungiert als Proxy zwischen Ihrer Back-End-App und dem Client-Web-Browser. Wenn eine Antwort von der Back-End-App an den Client gesendet wird, werden die Antwortdaten standardmäßig in der Lastausgleichsfunktion für Anwendungen gepuffert. Die Lastausgleichsfunktion für Anwendungen verarbeitet die Clientantwort als Proxy und beginnt mit dem Senden der Antwort an den Client (in der Geschwindigkeit des Clients). Nachdem alle Daten aus der Back-End-App von der Lastausgleichsfunktion für Anwendungen empfangen wurden, wird die Verbindung zur Back-End-App gekappt. Die Verbindung von der Lastausgleichsfunktion für Anwendungen zum Client bleibt geöffnet, bis der Client alle Daten empfangen hat.
+
+</br></br>
+Falls die Pufferung von Antwortdaten in der Lastausgleichsfunktion für Anwendungen inaktiviert ist, werden Daten sofort von der Lastausgleichsfunktion für Anwendungen an den Client gesendet. Der Client muss eingehende Daten in der Geschwindigkeit der Lastausgleichsfunktion für Anwendungen verarbeiten können. Falls der Client zu langsam ist, gehen unter Umständen Daten verloren.
+</br></br>
+Die Pufferung von Antwortdaten in der Lastausgleichsfunktion für Anwendungen ist standardmäßig aktiviert.</dd>
+<dt>YAML-Beispiel einer Ingress-Ressource</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: myingress
+ annotations:
+   ingress.bluemix.net/proxy-buffering: "False"
+spec:
+ tls:
+ - hosts:
+   - meine_domäne
+    secretName: mein_geheimer_tls-schlüssel
+  rules:
+ - host: meine_domäne
+   http:
+     paths:
+     - path: /
+        backend:
+          serviceName: mein_service
+          servicePort: 8080</code></pre>
+</dd></dl>
+
+<br />
+
+
+
+### Proxypuffer (proxy-buffers)
+{: #proxy-buffers}
+
+Konfiguration der Anzahl und Größe der Proxypuffer für die Lastausgleichsfunktion für Anwendungen.
+{:shortdesc}
+
+<dl>
+<dt>Beschreibung</dt>
+<dd>
+Legen Sie die Anzahl und Größe der Puffer fest, mit denen eine Antwort für eine einzelne Verbindung von einem Proxy-Server gelesen wird. Die Konfiguration wird auf alle Services auf dem Ingress-Host angewendet, es sei denn, es wird ein Service angegeben. Wenn beispielsweise eine Konfiguration wie <code>serviceName=SERVICE number=2 size=1k</code> angegeben wird, wird '1k' auf den Service angewendet. Wenn eine Konfiguration wie <code>number=2 size=1k</code> angegeben wird, wird '1k' auf alle Services auf dem Ingress-Host angewendet.
+</dd>
+<dt>YAML-Beispiel einer Ingress-Ressource</dt>
+<dd>
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: proxy-ingress
+ annotations:
+   ingress.bluemix.net/proxy-buffers: "serviceName=&lt;mein_service&gt; number=&lt;anzahl_puffer&gt; size=&lt;größe&gt;"
+spec:
+ tls:
+ - hosts:
+   - meine_domäne
+    secretName: mein_geheimer_tls-schlüssel
+  rules:
+ - host: meine_domäne
+   http:
+     paths:
+     - path: /
+        backend:
+          serviceName: mein_service
+          servicePort: 8080</code></pre>
+
+<table>
+ <thead>
+ <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>serviceName</code></td>
+ <td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen eines Service, der 'proxy-buffers' anwenden soll.</td>
+ </tr>
+ <tr>
+ <td><code>number</code></td>
+ <td>Ersetzen Sie <code>&lt;<em>anzahl_puffer</em>&gt;</code> durch eine Zahl. Beispiel: <em>2</em>.</td>
+ </tr>
+ <tr>
+ <td><code>size</code></td>
+ <td>Ersetzen Sie <code>&lt;<em>größe</em>&gt;</code> durch die Größe der einzelnen Puffer in Kilobyte (k oder K). Beispiel: <em>1K</em>.</td>
+ </tr>
+ </tbody>
+ </table>
+ </dd></dl>
+
+<br />
+
+
+### Puffergröße des Proxys (proxy-buffer-size)
+{: #proxy-buffer-size}
+
+Konfiguration der Größe des Proxypuffers, der den ersten Teil der Antwort liest.
+{:shortdesc}
+
+<dl>
+<dt>Beschreibung</dt>
+<dd>
+Legen Sie die Größe des Puffers fest, mit dem der erste Teil der Antwort gelesen wird, die vom Proxy-Server empfangen wird. Dieser Teil der Antwort enthält normalerweise einen kleinen Antwortheader. Die Konfiguration wird auf alle Services auf dem Ingress-Host angewendet, es sei denn, es wird ein Service angegeben. Wenn beispielsweise eine Konfiguration wie <code>serviceName=SERVICE size=1k</code> angegeben wird, wird '1k' auf den Service angewendet. Wenn eine Konfiguration wie <code>size=1k</code> angegeben wird, wird '1k' auf alle Services auf dem Ingress-Host angewendet.
+</dd>
+
+
+<dt>YAML-Beispiel einer Ingress-Ressource</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: proxy-ingress
+ annotations:
+   ingress.bluemix.net/proxy-buffer-size: "serviceName=&lt;mein_service&gt; size=&lt;größe&gt;"
+spec:
+ tls:
+ - hosts:
+   - meine_domäne
+   secretName: mein_geheimer_tls-schlüssel
+ rules:
+ - host: meine_domäne
+   http:
+     paths:
+     - path: /
+        backend:
+          serviceName: mein_service
+          servicePort: 8080
+ </code></pre>
+
+<table>
+ <thead>
+ <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>serviceName</code></td>
+ <td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen eines Service, der 'proxy-buffers-size' anwenden soll.</td>
+ </tr>
+ <tr>
+ <td><code>size</code></td>
+ <td>Ersetzen Sie <code>&lt;<em>größe</em>&gt;</code> durch die Größe der einzelnen Puffer in Kilobyte (k oder K). Beispiel: <em>1K</em>.</td>
+ </tr>
+ </tbody></table>
+
+ </dd>
+ </dl>
+
+<br />
+
+
+
+### Größe belegter Puffer des Proxys (proxy-busy-buffers-size)
+{: #proxy-busy-buffers-size}
+
+Konfiguration der Größe für Proxy-Puffer, die belegt sein können.
+{:shortdesc}
+
+<dl>
+<dt>Beschreibung</dt>
+<dd>
+Begrenzen Sie die Größe aller Puffer, die eine Antwort an den Client senden, während die Antwort noch nicht vollständig gelesen wurde. In der Zwischenzeit können die verbleibenden Puffer die Antwort lesen und bei Bedarf einen Teil der Antwort in einer temporären Datei puffern. Die Konfiguration wird auf alle Services auf dem Ingress-Host angewendet, es sei denn, es wird ein Service angegeben. Wenn beispielsweise eine Konfiguration wie <code>serviceName=SERVICE size=1k</code> angegeben wird, wird '1k' auf den Service angewendet. Wenn eine Konfiguration wie <code>size=1k</code> angegeben wird, wird '1k' auf alle Services auf dem Ingress-Host angewendet.
+</dd>
+
+
+<dt>YAML-Beispiel einer Ingress-Ressource</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: proxy-ingress
+ annotations:
+   ingress.bluemix.net/proxy-busy-buffers-size: "serviceName=&lt;servicename&gt; size=&lt;größe&gt;"
+spec:
+ tls:
+ - hosts:
+   - meine_domäne
+   secretName: mein_geheimer_tls-schlüssel
+ rules:
+ - host: meine_domäne
+   http:
+     paths:
+     - path: /
+       backend:
+         serviceName: mein_service
+         servicePort: 8080
+         </code></pre>
+
+<table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen eines Service, der 'proxy-busy-buffers-size' anwenden soll.</td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td>Ersetzen Sie <code>&lt;<em>größe</em>&gt;</code> durch die Größe der einzelnen Puffer in Kilobyte (k oder K). Beispiel: <em>1K</em>.</td>
+</tr>
+</tbody></table>
+
+ </dd>
+ </dl>
+
+<br />
+
+
+
+## Annotationen für Anforderungen und Antworten
+{: #request-response}
+
+
+### Zusätzlicher Clientanforderungs- oder Clientantwortheader (proxy-add-headers)
+{: #proxy-add-headers}
+
+Hinzufügen von zusätzlichen Headerinformationen zu einer Clientanforderung, bevor die Anforderung an die Back-End-App gesendet wird, bzw. zu einer Clientantwort, bevor die Antwort an den Client gesendet wird.
+{:shortdesc}
+
+<dl>
+<dt>Beschreibung</dt>
+<dd>Die Ingress-Lastausgleichsfunktion für Anwendungen fungiert als Proxy zwischen der Client-App und Ihrer Back-End-App. Clientanforderungen, die an die Lastausgleichsfunktion für Anwendungen gesendet werden, werden (als Proxy) verarbeitet und in eine neue Anforderung umgesetzt, die anschließend vom Ingress-Controller an Ihre Back-End-App gesendet wird. Beim Senden einer Anforderung als Proxy werden Headerinformationen entfernt, z. B. der Benutzername, der ursprünglich vom Client gesendet wurde. Falls Ihre Back-End-App diese Informationen erfordert, können Sie die Annotation <strong>ingress.bluemix.net/proxy-add-headers</strong> verwenden, um der Clientanforderung Headerinformationen hinzuzufügen, bevor die Anforderung von der Lastausgleichsfunktion für Anwendungen an Ihre Back-End-App weitergeleitet wird.
+
+</br></br>
+Wenn eine Back-End-App eine Antwort an den Client sendet, wird die Antwort von der Lastausgleichsfunktion für Anwendungen als Proxy gesendet, und die HTTP-Header werden aus der Antwort entfernt. Die Client-Web-App benötigt diese Headerinformationen, um die Antwort erfolgreich verarbeiten zu können. Sie können die Annotation <strong>ingress.bluemix.net/response-add-headers</strong> verwenden, um der Clientanforderung Headerinformationen hinzuzufügen, bevor die Anforderung von der Lastausgleichsfunktion für Anwendungen an Ihre Back-End-App weitergeleitet wird.</dd>
+<dt>YAML-Beispiel einer Ingress-Ressource</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/proxy-add-headers: |
+      serviceName=&lt;mein_service1&gt; {
+      &lt;header1&gt; &lt;wert1&gt;;
+      &lt;header2&gt; &lt;wert2&gt;;
+      }
+      serviceName=&lt;mein_service2&gt; {
+      &lt;header3&gt; &lt;wert3&gt;;
+      }
+    ingress.bluemix.net/response-add-headers: |
+      serviceName=&lt;mein_service1&gt; {
+      "&lt;header1&gt;: &lt;wert1&gt;";
+      "&lt;header2&gt;: &lt;wert2&gt;";
+      }
+      serviceName=&lt;mein_service2&gt; {
+      "&lt;header3&gt;: &lt;wert3&gt;";
+      }
+spec:
+  tls:
+  - hosts:
+    - meine_domäne
+    secretName: mein_geheimer_tls-schlüssel
+  rules:
+  - host: meine_domäne
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: &lt;mein_service1&gt;
+          servicePort: 8080
+      - path: /myapp
+        backend:
+          serviceName: &lt;mein_service2&gt;
+          servicePort: 80</code></pre>
+
+ <table>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>serviceName</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben.</td>
+  </tr>
+  <tr>
+  <td><code>&lt;header&gt;</code></td>
+  <td>Der Schlüssel der Headerinformationen, die der Clientanforderung bzw. der Clientantwort hinzugefügt werden sollen.</td>
+  </tr>
+  <tr>
+  <td><code>&lt;wert&gt;</code></td>
+  <td>Der Wert der Headerinformationen, die der Clientanforderung bzw. der Clientantwort hinzugefügt werden sollen.</td>
+  </tr>
+  </tbody></table>
+ </dd></dl>
+
+<br />
+
+
+
+### Entfernen des Clientantwortheaders (response-remove-headers)
+{: #response-remove-headers}
+
+Entfernen von Headerinformationen, die in der Clientantwort von der Back-End-App eingeschlossen sind, bevor die Antwort an den Client gesendet wird.
+ {:shortdesc}
+
+ <dl>
+ <dt>Beschreibung</dt>
+ <dd>Die Ingress-Lastausgleichsfunktion für Anwendungen fungiert als Proxy zwischen Ihrer Back-End-App und dem Client-Web-Browser. Clientantworten von der Back-End-App, die an die Lastausgleichsfunktion für Anwendungen gesendet werden, werden (als Proxy) verarbeitet und in eine neue Antwort umgesetzt, die anschließend von der Lastausgleichsfunktion für Anwendungen an Ihren Client-Web-Browser gesendet wird. Auch wenn beim Senden einer Antwort als Proxy die HTTP-Headerinformationen entfernt werden, die ursprünglich von der Back-End-App gesendet wurden, entfernt dieser Prozess möglicherweise nicht alle Back-End-App-spezifischen Header. Entfernen Sie Headerinformationen aus einer Clientantwort, bevor die Antwort von der Lastausgleichsfunktion für Anwendungen an den Client-Web-Browser weitergeleitet wird.</dd>
+ <dt>YAML-Beispiel einer Ingress-Ressource</dt>
+ <dd>
+ <pre class="codeblock">
+ <code>apiVersion: extensions/v1beta1
+ kind: Ingress
+ metadata:
+   name: myingress
+   annotations:
+     ingress.bluemix.net/response-remove-headers: |
+      serviceName=&lt;mein_service1&gt; {
+       "&lt;header1&gt;";
+       "&lt;header2&gt;";
+       }
+      serviceName=&lt;mein_service2&gt; {
+       "&lt;header3&gt;";
+       }
+ spec:
+   tls:
+   - hosts:
+     - meine_domäne
+    secretName: mein_geheimer_tls-schlüssel
+  rules:
+   - host: meine_domäne
+    http:
+      paths:
+       - path: /
+         backend:
+           serviceName: &lt;mein_service1&gt;
+           servicePort: 8080
+       - path: /myapp
+         backend:
+           serviceName: &lt;mein_service2&gt;
+           servicePort: 80</code></pre>
+
+  <table>
+   <thead>
+   <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td><code>serviceName</code></td>
+   <td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben.</td>
+   </tr>
+   <tr>
+   <td><code>&lt;header&gt;</code></td>
+   <td>Der Schlüssel des Headers, der aus der Clientantwort entfernt werden soll.</td>
+   </tr>
+   </tbody></table>
+   </dd></dl>
+
+<br />
+
+
+### Angepasste maximale Länge des Clientanforderungshauptteils (client-max-body-size)
+{: #client-max-body-size}
+
+Anpassen der maximalen Größe des Hauptteils, den der Client als Teil einer Anforderung senden kann.
+{:shortdesc}
+
+<dl>
+<dt>Beschreibung</dt>
+<dd>Um die erwartete Leistung beizubehalten, ist die maximale Größe des Clientanforderungshauptteils auf 1 Megabyte festgelegt. Wenn eine Clientanforderung mit einer das Limit überschreitenden Hauptteilgröße an die Ingress-Lastausgleichsfunktion für Anwendungen gesendet wird und der Client das Unterteilen von Daten nicht zulässt, gibt die Lastausgleichsfunktion für Anwendungen die HTTP-Antwort 413 (Anforderungsentität zu groß) an den Client zurück. Eine Verbindung zwischen dem Client und der Lastausgleichsfunktion für Anwendungen ist erst möglich, wenn der Anforderungshauptteil verkleinert wird. Wenn der Client das Unterteilen in mehrere Blöcke zulässt, werden die Daten in Pakete von 1 Megabyte aufgeteilt und an die die der Lastausgleichsfunktion für Anwendungen gesendet.
+
+</br></br>
+Wenn Sie Clientanforderungen mit einer Hauptteilgröße über 1 Megabyte erwarten, können Sie die maximale Größe des Hauptteils erhöhen. Beispiel: Sie möchten, dass Ihr Client große Dateien hochladen kann. Das Erhöhen der maximalen Größe des Anforderungshauptteils kann sich negativ auf die Leistung Ihrer Lastausgleichsfunktion für Anwendungen auswirken, weil die Verbindung mit dem Client geöffnet bleiben muss, bis die Anforderung empfangen wird.
+</br></br>
+<strong>Hinweis:</strong> Einige Client-Web-Browser können die HTTP-Antwortnachricht 413 nicht ordnungsgemäß anzeigen.</dd>
+<dt>YAML-Beispiel einer Ingress-Ressource</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: myingress
+ annotations:
+   ingress.bluemix.net/client-max-body-size: "size=&lt;größe&gt;"
+spec:
+ tls:
+ - hosts:
+   - meine_domäne
+    secretName: mein_geheimer_tls-schlüssel
+  rules:
+ - host: meine_domäne
+   http:
+     paths:
+     - path: /
+        backend:
+          serviceName: mein_service
+          servicePort: 8080</code></pre>
+
+<table>
+ <thead>
+ <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>&lt;size&gt;</code></td>
+ <td>Die maximal zulässige Größe des Hauptteils der Clientantwort. Um sie beispielsweise auf 200 Megabyte festzulegen, definieren Sie <code>200m</code>.  <strong>Hinweis:</strong> Sie können die Größe auf '0' festlegen, um die Prüfung der Größe des Clientanforderungshauptteils zu inaktivieren.</td>
+ </tr>
+ </tbody></table>
+
+ </dd></dl>
+
+<br />
+
+
+
+## Annotationen für Servicegrenzwerte
+{: #service-limit}
+
+
+### Grenzwerte für globale Rate (global-rate-limit)
+{: #global-rate-limit}
+
+Begrenzung der Verarbeitungsrate für Anforderungen und Anzahl der Verbindungen anhand eines definierten Schlüssels für alle Services.
+{:shortdesc}
+
+<dl>
+<dt>Beschreibung</dt>
+<dd>
+Begrenzen Sie für alle Services anhand eines definierten Schlüssels die Verarbeitungsrate für Anforderungen und die Anzahl der Verbindungen, die von einer einzelnen IP-Adresse für alle Pfade der ausgewählten Backend-Systeme kommen.
+</dd>
+
+
+ <dt>YAML-Beispiel einer Ingress-Ressource</dt>
+ <dd>
+
+ <pre class="codeblock">
+ <code>apiVersion: extensions/v1beta1
+ kind: Ingress
+ metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/global-rate-limit: "key=&lt;schlüssel&gt; rate=&lt;rate&gt; conn=&lt;anzahl_der_verbindungen&gt;"
+ spec:
+  tls:
+  - hosts:
+    - meine_domäne
+    secretName: mein_geheimer_tls-schlüssel
+  rules:
+  - host: meine_domäne
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: mein_service
+          servicePort: 8080</code></pre>
+
+ <table>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>key</code></td>
+  <td>Um einen globalen Grenzwert für eingehenden Anforderungen basierend auf dem Standort des Service festzulegen, verwenden Sie `key=location`. Um einen globalen Grenzwert für eingehenden Anforderungen basierend auf dem Header festzulegen, verwenden Sie `X-USER-ID key==$http_x_user_id`.</td>
+  </tr>
+  <tr>
+  <td><code>rate</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>rate</em>&gt;</code> durch die Verarbeitungsrate. Geben Sie einen Wert als Rate pro Sekunde (r/s) oder Rate pro Minute (r/m) an. Beispiel: <code>50r/m</code>.</td>
+  </tr>
+  <tr>
+  <td><code>conn</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>anzahl_der_verbindungen</em>&gt;</code> durch die Anzahl der Verbindungen.</td>
+  </tr>
+  </tbody></table>
+
+  </dd>
+  </dl>
+
+<br />
+
+
+
+### Grenzwerte für Servicerate (service-rate-limit)
+{: #service-rate-limit}
+
+Begrenzung der Verarbeitungsrate für Anforderungen und Anzahl der Verbindungen für bestimmte Services.
+{:shortdesc}
+
+<dl>
+<dt>Beschreibung</dt>
+<dd>Begrenzen Sie für bestimmte Services die Verarbeitungsrate für Anforderungen und die Anzahl der Verbindungen anhand eines definierten Schlüssels, die von einer einzelnen IP-Adresse für alle Pfade der ausgewählten Backend-Systeme kommen.
+</dd>
+
+
+ <dt>YAML-Beispiel einer Ingress-Ressource</dt>
+ <dd>
+
+ <pre class="codeblock">
+ <code>apiVersion: extensions/v1beta1
+ kind: Ingress
+ metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/service-rate-limit: "serviceName=&lt;mein_service&gt; key=&lt;schlüssel&gt; rate=&lt;rate&gt; conn=&lt;anzahl_der_verbindungen&gt;"
+ spec:
+  tls:
+  - hosts:
+    - meine_domäne
+    secretName: mein_geheimer_tls-schlüssel
+  rules:
+  - host: meine_domäne
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: mein_service
+          servicePort: 8080</code></pre>
+
+ <table>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>serviceName</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Service, für den Sie die Verarbeitungsrate begrenzen wollen.</li>
+  </tr>
+  <tr>
+  <td><code>key</code></td>
+  <td>Um einen globalen Grenzwert für eingehenden Anforderungen basierend auf dem Standort des Service festzulegen, verwenden Sie `key=location`. Um einen globalen Grenzwert für eingehenden Anforderungen basierend auf dem Header festzulegen, verwenden Sie `X-USER-ID key==$http_x_user_id`.</td>
+  </tr>
+  <tr>
+  <td><code>rate</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>rate</em>&gt;</code> durch die Verarbeitungsrate. Um eine Rate pro Sekunde zu definieren, verwenden Sie 'r/s': <code>10r/s</code>. Um eine Rate pro Minute zu definieren, verwenden Sie 'r/m': <code>50r/m</code>.</td>
+  </tr>
+  <tr>
+  <td><code>conn</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>anzahl_der_verbindungen</em>&gt;</code> durch die Anzahl der Verbindungen.</td>
+  </tr>
+  </tbody></table>
+  </dd>
+  </dl>
+
+  <br />
+
+
+
+## Annotationen für HTTPS- und TLS/SSL-Authentifizierung
+{: #https-auth}
+
+
+### Angepasste HTTP- und HTTPS-Ports (custom-port)
 {: #custom-port}
 
-Ändern Sie die Standardports für den HTTP- (Port 80) und den HTTPS-Netzverkehr (Port 443).
+Änderung der Standardports für den HTTP-Netzverkehr (Port 80) und den HTTPS-Netzverkehr (Port 443).
 {:shortdesc}
 
 <dl>
@@ -316,15 +1339,15 @@ metadata:
 spec:
  tls:
  - hosts:
-   - mydomain
-    secretName: mytlssecret
+   - meine_domäne
+    secretName: mein_geheimer_tls-schlüssel
   rules:
- - host: mydomain
+ - host: meine_domäne
    http:
      paths:
      - path: /
         backend:
-          serviceName: myservice
+          serviceName: mein_service
           servicePort: 8080</code></pre>
 
 <table>
@@ -333,19 +1356,19 @@ spec:
  </thead>
  <tbody>
  <tr>
- <td><code>annotations</code></td>
- <td>Ersetzen Sie die folgenden Werte:<ul>
- <li><code><em>&lt;protokoll&gt;</em></code>: Geben Sie <strong>http</strong> oder <strong>https</strong> ein, um den Standardport für eingehenden HTTP- oder HTTPS-Netzverkehr zu ändern.</li>
- <li><code><em>&lt;port&gt;</em></code>: Geben Sie die Portnummer ein, die Sie für eingehenden HTTP- oder HTTPS-Netzverkehr verwenden wollen.</li>
- </ul>
- <p><strong>Hinweis:</strong> Wenn für HTTP oder HTTPS ein angepasster Port angegeben wird, dann sind die Standardports für HTTP und auch für HTTPS nicht mehr gültig. Um beispielsweise den Standardport für HTTPS in 8443 zu ändern, für HTTP jedoch weiterhin den Standardport zu verwenden, müssen Sie für beide Protokolle angepasste Ports festlegen: <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p>
- </td>
+ <td><code>&lt;protocol&gt;</code></td>
+ <td>Geben Sie <strong>http</strong> oder <strong>https</strong> ein, um den Standardport für eingehenden HTTP- bzw. HTTPS-Netzverkehr zu ändern.</td>
+ </tr>
+ <tr>
+ <td><code>&lt;port&gt;</code></td>
+ <td>Geben Sie die Portnummer ein, die Sie für eingehenden HTTP- bzw. HTTPS-Netzverkehr verwenden wollen. <p><strong>Hinweis:</strong> Wenn für HTTP oder HTTPS ein angepasster Port angegeben wird, dann sind die Standardports für HTTP und auch für HTTPS nicht mehr gültig. Um beispielsweise den Standardport für HTTPS in 8443 zu ändern, für HTTP jedoch weiterhin den Standardport zu verwenden, müssen Sie für beide Protokolle angepasste Ports festlegen: <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p></td>
  </tr>
  </tbody></table>
 
  </dd>
  <dt>Syntax</dt>
- <dd><ol><li>Überprüfen Sie offene Ports für Ihre Lastausgleichsfunktion für Anwendungen. <pre class="pre">
+ <dd><ol><li>Überprüfen Sie offene Ports für Ihre Lastausgleichsfunktion für Anwendungen. 
+<pre class="pre">
 <code>kubectl get service -n kube-system</code></pre>
 Die Ausgabe in der Befehlszeilenschnittstelle (CLI) ähnelt der folgenden:
 <pre class="screen">
@@ -379,670 +1402,98 @@ public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,
 <pre class="pre">
 <code>kubectl apply -f &lt;yaml-datei&gt;</code></pre>
 </li>
-<li>Öffnen Sie Ihren bevorzugten Web-Browser, um auf Ihre App zuzugreifen. Beispiel: <code>https://&lt;ibm-domäne&gt;:&lt;port&gt;/&lt;servicepfad&gt;/</code></li></ol></dd></dl>
+<li>Öffnen Sie Ihren bevorzugten Web-Browser, um auf Ihre App zuzugreifen. Beispiel: <code>https://&lt;ibm_domäne&gt;:&lt;port&gt;/&lt;servicepfad&gt;/</code></li></ol></dd></dl>
 
 <br />
 
 
-## Angepasste maximale Länge des Clientanforderungshauptteils (client-max-body-size)
-{: #client-max-body-size}
 
-Passen Sie die maximale Größe des Hauptteils an, den der Client als Teil einer Anforderung senden kann.
+### HTTP-Weiterleitungen an HTTPS (redirect-to-https)
+{: #redirect-to-https}
+
+Konvertierung von unsicheren HTTP-Clientanforderungen in HTTPS.
 {:shortdesc}
 
 <dl>
 <dt>Beschreibung</dt>
-<dd>Um die erwartete Leistung beizubehalten, ist die maximale Größe des Clientanforderungshauptteils auf 1 Megabyte festgelegt. Wenn eine Clientanforderung mit einer das Limit überschreitenden Größe des Hauptteils an die Ingress-Lastausgleichsfunktion für Anwendungen gesendet wird und der Client das Unterteilen von Daten nicht zulässt, gibt die Lastausgleichsfunktion für Anwendungen die HTTP-Antwort 413 (Anforderungsentität zu groß) an den Client zurück. Eine Verbindung zwischen dem Client und der Lastausgleichsfunktion für Anwendungen ist erst möglich, wenn der Anforderungshauptteil verkleinert wird. Wenn der Client das Unterteilen in mehrere Blöcke zulässt, werden die Daten in Pakete von 1 Megabyte aufgeteilt und an die die der Lastausgleichsfunktion für Anwendungen gesendet.
+<dd>Sie konfigurieren Ihre Ingress-Lastausgleichsfunktion für Anwendungen für die Sicherung Ihrer Domäne mit dem von IBM bereitgestellten TLS-Zertifikat oder Ihrem angepassten TLS-Zertifikat. Manche Benutzer versuchen unter Umständen, auf Ihre Apps zuzugreifen, indem Sie eine unsichere HTTP-Anforderung an die Domäne Ihrer Lastausgleichsfunktion für Anwendungen senden, z. B. <code>http://www.myingress.com</code>, anstatt <code>https</code> zu verwenden. Sie können die 'redirect'-Annotation verwenden, um unsichere HTTP-Anforderungen immer in HTTPS zu konvertieren. Wenn Sie diese Annotation nicht verwenden, werden unsichere HTTP-Anforderungen nicht standardmäßig in HTTPS-Anforderungen konvertiert und machen unter Umständen vertrauliche Daten ohne Verschlüsselung öffentlich zugänglich.
 
 </br></br>
-Wenn Sie Clientanforderungen mit einer Hauptteilgröße über 1 Megabyte erwarten, können Sie die maximale Größe des Hauptteils erhöhen. Beispiel: Sie möchten, dass Ihr Client große Dateien hochladen kann. Das Erhöhen der maximalen Größe des Anforderungshauptteils kann sich negativ auf die Leistung Ihrer Lastausgleichsfunktion für Anwendungen auswirken, weil die Verbindung mit dem Client geöffnet bleiben muss, bis die Anforderung empfangen wird.
-</br></br>
-<strong>Hinweis:</strong> Manche Client-Web-Browser können die HTTP-Antwortnachricht 413 nicht ordnungsgemäß anzeigen.</dd>
+Das Umadressieren von HTTP-Anforderungen in HTTPS ist standardmäßig inaktiviert.</dd>
+
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
 <dd>
-
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/client-max-body-size: "&lt;größe&gt;"
+   ingress.bluemix.net/redirect-to-https: "True"
 spec:
  tls:
  - hosts:
-   - mydomain
-    secretName: mytlssecret
-  rules:
- - host: mydomain
+   - meine_domäne
+   secretName: mein_geheimer_tls-schlüssel
+ rules:
+ - host: meine_domäne
    http:
      paths:
      - path: /
         backend:
-          serviceName: myservice
+          serviceName: mein_service
           servicePort: 8080</code></pre>
-
-<table>
- <thead>
- <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
- </thead>
- <tbody>
- <tr>
- <td><code>annotations</code></td>
- <td>Ersetzen Sie den folgenden Wert:<ul>
- <li><code><em>&lt;größe&gt;</em></code>: Geben Sie die maximale Größe des Clientantworthauptteils ein. Um sie beispielsweise auf 200 Megabyte festzulegen, definieren Sie <strong>200m</strong>.
-
- </br></br>
- <strong>Hinweis:</strong> Sie können die Größe auf '0' festlegen, um die Prüfung der Größe des Clientanforderungshauptteils zu inaktivieren.</li></ul></td>
- </tr>
- </tbody></table>
-
- </dd></dl>
+</dd></dl>
 
 <br />
 
 
-<hierher zurückkehren>
 
-## Externe Services (proxy-external-service)
-{: #proxy-external-service}
-Fügen Sie Pfaddefinitionen zu externen Services hinzu, wie unter {{site.data.keyword.Bluemix_notm}} gehosteten Services, hinzu.
+### Gegenseitige Authentifizierung (mutual-auth)
+{: #mutual-auth}
+
+Konfigurieren Sie gegenseitige Authentifizierung für die Lastausgleichsfunktion für Anwendungen.
 {:shortdesc}
 
 <dl>
 <dt>Beschreibung</dt>
-<dd>Fügen Sie Pfaddefinitionen zu externen Services hinzu. Diese Annotation wird in speziellen Fällen verwendet, da sie nicht für einen Back-End-Service eingesetzt und für einen externen Service verwendet wird. Annotationen, außer 'client-max-body-size', 'proxy-read-timeout, 'proxy-connect-timeout' und 'proxy-buffering', werden nicht für eine externe Serviceroute unterstützt.
+<dd>
+Konfigurieren Sie gegenseitige Authentifizierung für die Ingress-Lastausgleichsfunktion für Anwendungen. Der Client authentifiziert den Server und der Server authentifiziert den Client anhand von Zertifikaten. Die gegenseitige Authentifizierung wird auch als zertifikatbasierte Authentifizierung oder Zweiwegeauthentifizierung bezeichnet.
 </dd>
-<dt>YAML-Beispiel einer Ingress-Ressource</dt>
+
+<dt>Voraussetzungen</dt>
 <dd>
-
-<pre class="codeblock">
-<code>
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: cafe-ingress
-  annotations:
-    ingress.bluemix.net/proxy-external-service: "path=&lt;pfad&gt; external-svc=https:&lt;externer_service&gt; host=&lt;meine_domäne&gt;"
-spec:
-  tls:
-  - hosts:
-    - &lt;meine_domäne&gt;
-    secretName: mysecret
-  rules:
-  - host: &lt;meine_domäne&gt;
-    http:
-      paths:
-      - path: &lt;pfad&gt;
-        backend:
-          serviceName: myservice
-          servicePort: 80
-</code></pre>
-
-<table>
- <thead>
- <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
- </thead>
- <tbody>
- <tr>
- <td><code>annotations</code></td>
- <td>Ersetzen Sie den folgenden Wert:
- <ul>
- <li><code><em>&lt;externer_service&gt;</em></code>: Geben Sie den externen Service ein, der aufgerufen werden soll. Beispiel: https://&lt;mein_service&gt;.&lt;region&gt;.mybluemix.net.</li>
- </ul>
- </tr>
- </tbody></table>
-
- </dd></dl>
-
-
-<br />
-
-
-## Grenzwerte für globale Rate (global-rate-limit)
-{: #global-rate-limit}
-
-Begrenzen Sie für alle Services die Verarbeitungsrate für Anforderungen und die Anzahl der Verbindungen anhand eines definierten Schlüssels, die von einer einzelnen IP-Adresse für alle Hosts in einer Ingress-Zuordnung kommen.
-{:shortdesc}
-
-<dl>
-<dt>Beschreibung</dt>
-<dd>
-Zum Festlegen des Grenzwerts werden Zonen anhand von `ngx_http_limit_conn_module` und `ngx_http_limit_req_module` definiert. Diese Zonen werden in den Serverblöcken angewendet, die den einzelnen Hosts in einer Ingress-Zuordnung entsprechen.
+<ul>
+<li>[Sie müssen über einen geheimen Schlüssel verfügen, der die erforderliche Zertifizierungsstelle (CA) enthält](cs_app.html#secrets). Außerdem werden die Dateien <code>client.key</code> und <code>client.crt</code> für die gegenseitige Authentifizierung benötigt.</li>
+<li>Um die gegenseitige Authentifizierung an einem anderen Port als 443 zu ermöglichen, [konfigurieren Sie die Lastausgleichsfunktion zum Öffnen des gültigen Ports](cs_ingress.html#opening_ingress_ports).</li>
+</ul>
 </dd>
 
 
- <dt>YAML-Beispiel einer Ingress-Ressource</dt>
- <dd>
-
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
- kind: Ingress
- metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/global-rate-limit: "key=&lt;schlüssel&gt; rate=&lt;rate&gt; conn=&lt;anzahl_der_verbindungen&gt;"
- spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-
- <table>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>annotations</code></td>
-  <td>Ersetzen Sie die folgenden Werte:<ul>
-  <li><code><em>&lt;key&gt;</em></code>: Um einen globalen Grenzwert für eingehenden Anforderungen basierend auf dem Standort des Service festzulegen, verwenden Sie `key=location`. Um einen globalen Grenzwert für eingehenden Anforderungen basierend auf dem Header festzulegen, verwenden Sie `X-USER-ID key==$http_x_user_id`.</li>
-  <li><code><em>&lt;rate&gt;</em></code>: Die Rate.</li>
-  <li><code><em>&lt;conn&gt;</em></code>: Die Anzahl der Verbindungen.</li>
-  </ul>
-  </td>
-  </tr>
-  </tbody></table>
-
-  </dd>
-  </dl>
-
-  <br />
-
-
- ## HTTP-Weiterleitungen an HTTPS (redirect-to-https)
- {: #redirect-to-https}
-
- Konvertieren Sie unsichere HTTP-Clientanforderungen in HTTPS.
- {:shortdesc}
-
- <dl>
- <dt>Beschreibung</dt>
- <dd>Sie konfigurieren Ihre Ingress-Lastausgleichsfunktion für Anwendungen für die Sicherung Ihrer Domäne mit dem von IBM bereitgestellten TLS-Zertifikat oder Ihrem angepassten TLS-Zertifikat. Manche Benutzer versuchen unter Umständen, auf Ihre Apps zuzugreifen, indem Sie eine unsichere HTTP-Anforderung an die Domäne Ihrer Lastausgleichsfunktion für Anwendungen senden, z. B. <code>http://www.myingress.com</code>, anstatt <code>https</code> zu verwenden. Sie können die 'redirect'-Annotation verwenden, um unsichere HTTP-Anforderungen immer in HTTPS zu konvertieren. Wenn Sie diese Annotation nicht verwenden, werden unsichere HTTP-Anforderungen nicht standardmäßig in HTTPS-Anforderungen konvertiert und machen unter Umständen vertrauliche Daten ohne Verschlüsselung öffentlich zugänglich.
-
- </br></br>
- Das Umadressieren von HTTP-Anforderungen in HTTPS ist standardmäßig inaktiviert.</dd>
- <dt>YAML-Beispiel einer Ingress-Ressource</dt>
-<dd>
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
- kind: Ingress
- metadata:
-   name: myingress
-   annotations:
-     ingress.bluemix.net/redirect-to-https: "True"
- spec:
-   tls:
-   - hosts:
-     - mydomain
-    secretName: mytlssecret
-  rules:
-   - host: mydomain
-    http:
-      paths:
-       - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
- </dd></dl>
-
-<br />
-
-
-
-
- <br />
-
-
- ## Keepalive-Anforderungen (keepalive-requests)
- {: #keepalive-requests}
-
- Konfigurieren Sie die maximale Anzahl von Anforderungen, die über eine Keepalive-Verbindung bedient werden können.
- {:shortdesc}
-
- <dl>
- <dt>Beschreibung</dt>
- <dd>
- Legt die maximale Anzahl von Anforderungen fest, die über eine Keepalive-Verbindung bedient werden können.
- </dd>
-
-
- <dt>YAML-Beispiel einer Ingress-Ressource</dt>
- <dd>
-
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
- kind: Ingress
- metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/keepalive-requests: "serviceName=&lt;servicename&gt; requests=&lt;maximale_anforderungen&gt;"
- spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-
- <table>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>annotations</code></td>
-  <td>Ersetzen Sie die folgenden Werte:<ul>
-  <li><code><em>&lt;serviceName&gt;</em></code>: Ersetzen Sie <em>&lt;servicename&gt;</em> durch den Namen des Kubernetes-Service, den Sie für die App erstellt haben. Dieser Parameter ist optional. Die Konfiguration wird auf alle Services auf dem Ingress-Host angewendet, es sei denn, es wird ein Service angegeben. Wird der Parameter bereitgestellt, werden die Keepalive-Anforderung für den angegebenen Service festgelegt. Wird der Parameter nicht bereitgestellt, werden die Keepalive-Anforderungen auf der Serverebene der Datei <code>nginx.conf</code> für alle Services festgelegt, für die die Keepalive-Anforderungen nicht konfiguriert sind.</li>
-  <li><code><em>&lt;requests&gt;</em></code>: Ersetzen Sie <em>&lt;maximale_anforderungen&gt;</em> durch die maximale Anzahl der Anforderungen, die über eine Keepalive-Verbindung bedient werden können.</li>
-  </ul>
-  </td>
-  </tr>
-  </tbody></table>
-
-  </dd>
-  </dl>
-
- <br />
-
-
- ## Keepalive-Zeitlimit (keepalive-timeout)
- {: #keepalive-timeout}
-
-  Konfigurieren Sie die Zeitspanne, die eine Keepalive-Verbindung serverseitig geöffnet bleibt.
-  {:shortdesc}
-
-  <dl>
-  <dt>Beschreibung</dt>
-  <dd>
-  Legt die Zeitspanne fest, die eine Keepalive-Verbindung auf dem Server geöffnet bleibt.
-  </dd>
-
-
-  <dt>YAML-Beispiel einer Ingress-Ressource</dt>
-  <dd>
-
-  <pre class="codeblock">
-  <code>apiVersion: extensions/v1beta1
-  kind: Ingress
-  metadata:
-   name: myingress
-   annotations:
-     ingress.bluemix.net/keepalive-timeout: "serviceName=&lt;servicename&gt; timeout=&lt;zeit&gt;s"
-  spec:
-   tls:
-   - hosts:
-     - mydomain
-    secretName: mytlssecret
-  rules:
-   - host: mydomain
-    http:
-      paths:
-       - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-
-  <table>
-   <thead>
-   <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-   </thead>
-   <tbody>
-   <tr>
-   <td><code>annotations</code></td>
-   <td>Ersetzen Sie die folgenden Werte:<ul>
-   <li><code><em>&lt;serviceName&gt;</em></code>: Ersetzen Sie <em>&lt;servicename&gt;</em> durch den Namen des Kubernetes-Service, den Sie für die App erstellt haben. Dieser Parameter ist optional. Wird der Parameter bereitgestellt, wird das Keepalive-Zeitlimit für den angegebenen Service festgelegt. Wird der Parameter nicht bereitgestellt, wird das Keepalive-Zeitlimit auf der Serverebene der Datei <code>nginx.conf</code> für alle Services festgelegt, für die das Keepalive-Zeitlimit nicht konfiguriert ist.</li>
-   <li><code><em>&lt;timeout&gt;</em></code>: Ersetzen Sie <em>&lt;zeit&gt;</em> durch die Zeitspanne in Sekunden. Beispiel:<code><em>timeout=20s</em></code>. Der Wert null inaktiviert die Keepalive-Verbindungen für den Client.</li>
-   </ul>
-   </td>
-   </tr>
-   </tbody></table>
-
-   </dd>
-   </dl>
-
- <br />
-
-
- ## Gegenseitige Authentifizierung (mutual-auth)
- {: #mutual-auth}
-
- Konfigurieren Sie gegenseitige Authentifizierung für die Lastausgleichsfunktion für Anwendungen. {:shortdesc}
-
- <dl>
- <dt>Beschreibung</dt>
- <dd>
- Konfigurieren Sie gegenseitige Authentifizierung für die Ingress-Lastausgleichsfunktion für Anwendungen. Der Client authentifiziert den Server und der Server authentifiziert den Client anhand von Zertifikaten. Die gegenseitige Authentifizierung wird auch als zertifikatbasierte Authentifizierung oder Zweiwegeauthentifizierung bezeichnet.
- </dd>
-
- <dt>Voraussetzungen</dt>
- <dd>
- <ul>
- <li>[Sie müssen über einen geheimen Schlüssel verfügen, der die erforderliche Zertifizierungsstelle (CA) enthält](cs_apps.html#secrets). Außerdem werden die Dateien <code>client.key</code> und <code>client.crt</code> für die gegenseitige Authentifizierung benötigt.</li>
- <li>Um die gegenseitige Authentifizierung an einem anderen Port als 443 zu ermöglichen, [konfigurieren Sie die Lastausgleichsfunktion zum Öffnen des gültigen Ports](cs_apps.html#opening_ingress_ports).</li>
- </ul>
- </dd>
-
-
- <dt>YAML-Beispiel einer Ingress-Ressource</dt>
- <dd>
-
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
- kind: Ingress
- metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/mutual-auth: "port=&lt;port&gt; secretName=&lt;name_des_geheimen_schlüssels&gt; serviceName=&lt;service1&gt;,&lt;service2&gt;"
- spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-
- <table>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>annotations</code></td>
-  <td>Ersetzen Sie die folgenden Werte:<ul>
-  <li><code><em>&lt;serviceName&gt;</em></code>: Der Name mindestens einer Ingress-Ressource. Dieser Parameter ist optional.</li>
-  <li><code><em>&lt;secretName&gt;</em></code>: Ersetzen Sie <em>&lt;name_des_geheimen_schlüssels&gt;</em> durch einen Namen für die geheime Ressource.</li>
-  <li><code><em>&lt;port&gt;</em></code>: Geben Sie die Portnummer ein.</li>
-  </ul>
-  </td>
-  </tr>
-  </tbody></table>
-
-  </dd>
-  </dl>
-
- <br />
-
-
-## Weiterleitung der privaten Lastausgleichsfunktion für Anwendungen
-{: #alb-id}
-
-Leiten Sie eingehende Anforderungen an Ihre Apps mit einer privaten Lastausgleichsfunktion für Anwendungen weiter. {:shortdesc}
-
-<dl>
-<dt>Beschreibung</dt>
-<dd>
-Wählen Sie statt der öffentlichen eine private Lastausgleichsfunktion für Anwendungen für die Weiterleitung von eingehenden Anforderungen aus. </dd>
-
-
- <dt>YAML-Beispiel einer Ingress-Ressource</dt>
- <dd>
-
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
- kind: Ingress
- metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/ALB-ID: "&lt;private_ALB-ID&gt;"
- spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-
- <table>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>annotations</code></td>
-  <td>Ersetzen Sie <em>&lt;private_ALB-ID&gt;</em> durch die ID für Ihre private Lastausgleichsfunktion für Anwendungen. Führen Sie <code>bx cs albs --cluster <mein_cluster></code> aus, um nach der ID der Lastausgleichsfunktion für Anwendungen zu suchen. </td>
-  </tr>
-  </tbody></table>
-  </dd>
-  </dl>
-
-  <br />
-
-
- ## Proxypuffer (proxy-buffers)
- {: #proxy-buffers}
-
- Konfigurieren Sie Proxy-Puffer für die Lastausgleichsfunktion für Anwendungen. {:shortdesc}
-
- <dl>
- <dt>Beschreibung</dt>
- <dd>
- Legen Sie die Anzahl und Größe der Puffer fest, mit denen eine Antwort für eine einzelne Verbindung von einem Proxy-Server gelesen wir. Die Konfiguration wird auf alle Services auf dem Ingress-Host angewendet, es sei denn, es wird ein Service angegeben. Wenn beispielsweise eine Konfiguration wie <code>serviceName=SERVICE number=2 size=1k</code> angegeben wird, wird '1k' auf den Service angewendet. Wenn eine Konfiguration wie <code>number=2 size=1k</code> angegeben wird, wird '1k' auf alle Services auf dem Ingress-Host angewendet.
- </dd>
- <dt>YAML-Beispiel einer Ingress-Ressource</dt>
- <dd>
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: proxy-ingress
-  annotations:
-    ingress.bluemix.net/proxy-buffers: "serviceName=&lt;servicename&gt; number=&lt;anzahl_der_puffer&gt; size=&lt;größe&gt;"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-
- <table>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>annotations</code></td>
-  <td>Ersetzen Sie die folgenden Werte:
-  <ul>
-  <li><code><em>&lt;serviceName&gt;</em></code>: Ersetzen Sie <em>&lt;servicename&gt;</em> durch den Namen für den Service, um 'proxy-buffers' anzuwenden. </li>
-  <li><code><em>&lt;number&gt;</em></code>: Ersetzen Sie <em>&lt;anzahl_der_puffer&gt;</em> durch eine Zahl, wie <em>2</em>.</li>
-  <li><code><em>&lt;size&gt;</em></code>: Geben Sie die Größe der einzelnen Puffer in Kilobyte (k oder K) ein, wie <em>1K</em>.</li>
-  </ul>
-  </td>
-  </tr>
-  </tbody>
-  </table>
-  </dd>
-  </dl>
-
- <br />
-
-
- ## Größe belegter Puffer des Proxys (proxy-busy-buffers-size)
- {: #proxy-busy-buffers-size}
-
- Konifgurieren Sie die Größe belegter Puffer des Proxys für die Lastausgleichsfunktion für Anwendungen.
- {:shortdesc}
-
- <dl>
- <dt>Beschreibung</dt>
- <dd>
- Wenn das Puffern von Antworten vom Proxy-Server aktiviert ist, begrenzen Sie die Gesamtgröße der Puffer, die eine Antwort an den Client senden, während die Antwort noch nicht vollständig gelesen wurde. In der Zwischenzeit kann der Rest der Puffer zum Lesen der Antwort und bei Bedarf zum Puffern eines Teils der Antwort in eine temporäre Datei verwendet werden. Die Konfiguration wird auf alle Services auf dem Ingress-Host angewendet, es sei denn, es wird ein Service angegeben. Wenn beispielsweise eine Konfiguration wie <code>serviceName=SERVICE size=1k</code> angegeben wird, wird '1k' auf den Service angewendet. Wenn eine Konfiguration wie <code>size=1k</code> angegeben wird, wird '1k' auf alle Services auf dem Ingress-Host angewendet.
- </dd>
-
-
- <dt>YAML-Beispiel einer Ingress-Ressource</dt>
- <dd>
-
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: proxy-ingress
-  annotations:
-    ingress.bluemix.net/proxy-busy-buffers-size: "serviceName=&lt;servicename&gt; size=&lt;größe&gt;"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
- <table>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>annotations</code></td>
-  <td>Ersetzen Sie die folgenden Werte:<ul>
-  <li><code><em>&lt;serviceName&gt;</em></code>: Ersetzen Sie <em>&lt;servicename&gt;</em> durch den Namen des Service, um 'proxy-busy-buffers-size' anzuwenden.</li>
-  <li><code><em>&lt;size&gt;</em></code>: Geben Sie die Größe der einzelnen Puffer in Kilobyte (k oder K) ein, wie <em>1K</em>.</li>
-  </ul>
-  </td>
-  </tr>
-  </tbody></table>
-
-  </dd>
-  </dl>
-
- <br />
-
-
- ## Puffergröße des Proxys (proxy-buffer-size)
- {: #proxy-buffer-size}
-
- Konfigurieren Sie die Größe des Proxy-Puffers für die Lastausgleichsfunktion für Anwendungen.
- {:shortdesc}
-
- <dl>
- <dt>Beschreibung</dt>
- <dd>
- Legen Sie die Größe des Puffers fest, mit dem der erste Teil der Antwort gelesen wird, die vom Proxy-Server empfangen wird. Dieser Teil der Antwort enthält normalerweise einen kleinen Antwortheader. Die Konfiguration wird auf alle Services auf dem Ingress-Host angewendet, es sei denn, es wird ein Service angegeben. Wenn beispielsweise eine Konfiguration wie <code>serviceName=SERVICE size=1k</code> angegeben wird, wird '1k' auf den Service angewendet. Wenn eine Konfiguration wie <code>size=1k</code> angegeben wird, wird '1k' auf alle Services auf dem Ingress-Host angewendet.
- </dd>
-
-
- <dt>YAML-Beispiel einer Ingress-Ressource</dt>
- <dd>
-
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: proxy-ingress
-  annotations:
-    ingress.bluemix.net/proxy-buffer-size: "serviceName=&lt;servicename&gt; size=&lt;größe&gt;"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080
- </code></pre>
-
- <table>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>annotations</code></td>
-  <td>Ersetzen Sie die folgenden Werte:<ul>
-  <li><code><em>&lt;serviceName&gt;</em></code>: Ersetzen Sie <em>&lt;servicename&gt;</em> durch den Namen des Service, um 'proxy-busy-buffers-size' anzuwenden.</li>
-  <li><code><em>&lt;size&gt;</em></code>: Geben Sie die Größe der einzelnen Puffer in Kilobyte (k oder K) ein, wie <em>1K</em>.</li>
-  </ul>
-  </td>
-  </tr>
-  </tbody></table>
-
-  </dd>
-  </dl>
-
- <br />
-
-
-
-## Pfade neu schreiben (rewrite-path)
-{: #rewrite-path}
-
-Leiten Sie eingehenden Netzverkehr für den Pfad in der Domäne einer Lastausgleichsfunktion für Anwendungen an einen anderen Pfad weiter, an dem die Back-End-Anwendung empfangsbereit ist.
-{:shortdesc}
-
-<dl>
-<dt>Beschreibung</dt>
-<dd>Die Domäne der Ingress-Lastausgleichsfunktion für Anwendungen leitet eingehenden Netzverkehr für <code>mykubecluster.us-south.containers.mybluemix.net/beans</code> an Ihre App weiter. Ihre App überwacht <code>/coffee</code> statt <code>/beans</code>. Zum Weiterleiten des eingehenden Netzverkehrs an Ihre App fügen Sie eine Annotation zum erneuten Schreiben (rewrite) zur Konfigurationsdatei der Ingress-Ressource hinzu. Dadurch wird sichergestellt, dass der an <code>/beans</code> eingehende Netzverkehr mithilfe des Pfads <code>/coffee</code> an Ihre App weitergeleitet wird. Wenn Sie mehrere Services einschließen, verwenden Sie nur ein Semikolon (;) zum Trennen der Services.</dd>
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
 <dd>
+
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/rewrite-path: "serviceName=&lt;servicename1&gt; rewrite=&lt;zielpfad1&gt;;serviceName=&lt;servicename2&gt; rewrite=&lt;zielpfad2&gt;"
+name: myingress
+annotations:
+  ingress.bluemix.net/mutual-auth: "secretName=&lt;mein_geheimer_schlüssel&gt; port=&lt;port&gt; serviceName=&lt;servicename1&gt;,&lt;servicename2&gt;"
 spec:
   tls:
   - hosts:
-    - mydomain
-    secretName: &lt;mein_geheimer_tls-schlüssel&gt;
+    - meine_domäne
+    secretName: mein_geheimer_tls-schlüssel
   rules:
-  - host: mydomain
+  - host: meine_domäne
     http:
       paths:
-      - path: /&lt;domänenpfad1&gt;
+      - path: /
         backend:
-          serviceName: &lt;servicename1&gt;
-          servicePort: &lt;serviceport1&gt;
-      - path: /&lt;domänenpfad2&gt;
-        backend:
-          serviceName: &lt;servicename2&gt;
-          servicePort: &lt;serviceport2&gt;</code></pre>
+          serviceName: mein_service
+          servicePort: 8080
+          </code></pre>
 
 <table>
 <thead>
@@ -1050,152 +1501,27 @@ spec:
 </thead>
 <tbody>
 <tr>
-<td><code>annotations</code></td>
-<td>Ersetzen Sie <em>&lt;servicename&gt;</em> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben, und <em>&lt;zielpfad&gt;</em> durch den Pfad, an dem Ihre App empfangsbereit ist. Der eingehende Netzverkehr in der Domäne der Lastausgleichsfunktion für Anwendungen wird mithilfe dieses Pfads an den Kubernetes-Service weitergeleitet. Die meisten Apps überwachen keinen bestimmten Pfad, sondern verwenden den Rootpfad und einen bestimmten Port. Definieren Sie in diesem Fall <code>/</code> als <em>neu_geschriebener_pfad</em> für Ihre App.</td>
+<td><code>secretName</code></td>
+<td>Ersetzen Sie <code>&lt;<em>mein_geheimer_schlüssel</em>&gt;</code> durch einen Namen für die Ressource mit dem geheimen Schlüssel.</td>
 </tr>
 <tr>
-<td><code>path</code></td>
-<td>Ersetzen Sie <em>&lt;domänenpfadh&gt;</em> durch den Pfad, den Sie an die Domäne Ihrer Lastausgleichsfunktion für Anwendungen anhängen möchten. Der für diesen Pfad eingehende Netzverkehr wird an den neu geschriebenen Pfad weitergeleitet, den Sie in der Annotation definiert haben. Im obigen Beispiel muss als Pfad der Domäne <code>/beans</code> festgelegt sein, damit dieser Pfad in den Lastenausgleich des Ingress-Controllers aufgenommen wird.</td>
+<td><code>&lt;port&gt;</code></td>
+<td>Die Nummer des Ports der Lastausgleichsfunktion für Anwendungen.</td>
 </tr>
 <tr>
-<td><code>serviceName</code></td>
-<td>Ersetzen Sie <em>&lt;servicename&gt;</em> durch den Namen des Kubernetes-Service, den Sie für die App erstellt haben. Der hier verwendete Servicename muss mit dem Namen identisch sein, den Sie in der Annotation definiert haben.</td>
+<td><code>&lt;serviceName&gt;</code></td>
+<td>Der Namen von mindestens einer Ingress-Ressource. Dieser Parameter ist optional.</td>
 </tr>
-<tr>
-<td><code>servicePort</code></td>
-<td>Ersetzen Sie <em>&lt;serviceport&gt;</em> durch den Port, an dem der Service empfangsbereit ist.</td>
-</tr></tbody></table>
+</tbody></table>
 
-</dd></dl>
+</dd>
+</dl>
 
 <br />
 
 
-## Grenzwerte für Servicerate (service-rate-limit)
-{: #service-rate-limit}
 
-Begrenzen Sie für bestimmte Services die Verarbeitungsrate für Anforderungen und die Anzahl der Verbindungen anhand eines definierten Schlüssels, die von einer einzelnen IP-Adresse für alle Pfade der ausgewählten Backend-Systeme kommen.
-{:shortdesc}
-
-<dl>
-<dt>Beschreibung</dt>
-<dd>
-Zum Festlegen des Grenzwerts werden Zonen angewendet, die anhand von `ngx_http_limit_conn_module` und `ngx_http_limit_req_module` in allen Positionsblöcken definiert sind, die den Services entsprechen, die als Ziel in der Annotation in der Ingress-Zuordnung angegeben sind. </dd>
-
-
- <dt>YAML-Beispiel einer Ingress-Ressource</dt>
- <dd>
-
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
- kind: Ingress
- metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/service-rate-limit: "serviceName=&lt;servicename&gt; key=&lt;schlüssel&gt; rate=&lt;rate&gt; conn=&lt;anzahl_der_verbindungen&gt;"
- spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-
- <table>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>annotations</code></td>
-  <td>Ersetzen Sie die folgenden Werte:<ul>
-  <li><code><em>&lt;serviceName&gt;</em></code>: Der Name der Ingress-Ressource.</li>
-  <li><code><em>&lt;key&gt;</em></code>: Um einen globalen Grenzwert für eingehenden Anforderungen basierend auf dem Standort des Service festzulegen, verwenden Sie `key=location`. Um einen globalen Grenzwert für eingehenden Anforderungen basierend auf dem Header festzulegen, verwenden Sie `X-USER-ID key==$http_x_user_id`.</li>
-  <li><code><em>&lt;rate&gt;</em></code>: Die Rate.</li>
-  <li><code><em>&lt;conn&gt;</em></code>: Die Anzahl der Verbindungen.</li>
-  </ul>
-  </td>
-  </tr>
-  </tbody></table>
-  </dd>
-  </dl>
-
-  <br />
-
-
-## Sitzungsaffinität mit Cookies (sticky-cookie-services)
-{: #sticky-cookie-services}
-
-Verwenden Sie die permanente Cookie-Annotation, um Ihrer Lastausgleichsfunktion für Anwendungen Sitzungsaffinität hinzuzufügen und eingehenden Netzverkehr immer an denselben Upstream-Server weiterzuleiten.
-{:shortdesc}
-
-<dl>
-<dt>Beschreibung</dt>
-<dd>Um eine hohe Verfügbarkeit zu erreichen, müssen Sie bei einigen Appkonfigurationen unter Umständen mehrere Upstream-Server bereitstellen, die eingehende Clientanforderungen verarbeiten. Wenn ein Client eine Verbindung mit Ihrer Back-End-App herstellt, kann ein Client für die Dauer einer Sitzung bzw. für die Zeit, die für den Abschluss einer Task erforderlich ist, von demselben Upstream-Server bedient werden. Sie können Ihre Lastausgleichsfunktion für Anwendungen so konfigurieren, dass Sitzungsaffinität sichergestellt ist, indem Sie eingehenden Netzverkehr immer an denselben Upstream-Server weiterleiten.
-
-</br></br>
-Jeder Client, der eine Verbindung mit Ihrer Back-End-App herstellt, wird durch die Lastausgleichsfunktion für Anwendungen einem der verfügbaren Upstream-Server zugeordnet. Die Lastausgleichsfunktion für Anwendungen erstellt ein Sitzungscookie, das in der App des Clients gespeichert wird und das in die Headerinformationen jeder Anforderung zwischen der Lastausgleichsfunktion für Anwendungen und dem Client eingeschlossen wird. Die Informationen im Cookie stellen sicher, dass alle Anforderungen während der gesamten Sitzung von demselben Upstream-Server verarbeitet werden.
-
-</br></br>
-Wenn Sie mehrere Services einschließen, verwenden Sie ein Semikolon (;) zum Trennen der Services.</dd>
-<dt>YAML-Beispiel einer Ingress-Ressource</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/sticky-cookie-services: "serviceName=&lt;servicename1&gt; name=&lt;cookiename1&gt; expires=&lt;ablaufzeit1&gt; path=&lt;cookiepfad1&gt; hash=&lt;hash-algorithmus1&gt;;serviceName=&lt;servicename2&gt; name=&lt;cookiename2&gt; expires=&lt;ablaufzeit2&gt; path=&lt;cookiepfad2&gt; hash=&lt;hash-algorithmus2&gt;"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: &lt;servicename1&gt;
-          servicePort: 8080
-      - path: /meine_app
-        backend:
-          serviceName: &lt;servicename2&gt;
-          servicePort: 80</code></pre>
-
-  <table>
-  <caption>Erklärung der Komponenten der YAML-Datei</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>annotations</code></td>
-  <td>Ersetzen Sie die folgenden Werte:<ul>
-  <li><code><em>&lt;servicename&gt;</em></code>: Der Name des Kubernetes-Service, den Sie für Ihre App erstellt haben.</li>
-  <li><code><em>&lt;cookiename&gt;</em></code>: Wählen Sie einen Namen für das permanente Cookie aus, das während einer Sitzung erstellt wird.</li>
-  <li><code><em>&lt;ablaufzeit&gt;</em></code>: Die Zeit in Sekunden, Minuten oder Stunden, bevor das permanente Cookie abläuft. Diese Zeit ist unabhängig von der Benutzeraktivität. Nachdem das Cookie abgelaufen ist, wird es durch den Web-Browser des Clients gelöscht und nicht mehr an die Lastausgleichsfunktion für Anwendungen gesendet. Um beispielsweise eine Ablaufzeit von einer Sekunde, einer Minute oder einer Stunde festzulegen, geben Sie <strong>1s</strong>, <strong>1m</strong> oder <strong>1h</strong> ein.</li>
-  <li><code><em>&lt;cookiepfad&gt;</em></code>: Der Pfad, der an die Ingress-Unterdomäne angehängt ist, und der angibt, für welche Domänen und Unterdomänen das Cookie an die Lastausgleichsfunktion für Anwendungen gesendet wird. Wenn Ihre Ingress-Domäne beispielsweise <code>www.myingress.com</code> ist und Sie das Cookie in jeder Clientanforderung senden möchten, müssen Sie <code>path=/</code> festlegen. Wenn Sie das Cookie nur für <code>www.myingress.com/meine_app</code> und alle zugehörigen Unterdomänen senden möchten, müssen Sie <code>path=/meine_app</code> festlegen.</li>
-  <li><code><em>&lt;hash-algorithmus&gt;</em></code>: Der Hashalgorithmus, der die Informationen im Cookie schützt. Nur <code>sha1</code> wird unterstützt. SHA1 erstellt eine Hashsumme auf der Grundlage der Informationen im Cookie und hängt die Hashsumme an das Cookie an. Der Server kann die Informationen im Cookie entschlüsseln und die Datenintegrität bestätigen.
-  </li></ul></td>
-  </tr>
-  </tbody></table>
-
- </dd></dl>
-
-<br />
-
-
-## Unterstützung für SSL-Services (ssl-services)
+### Unterstützung für SSL-Services (ssl-services)
 {: #ssl-services}
 
 Lassen Sie HTTPS-Anforderungen zu und verschlüsseln Sie Datenverkehr zu Ihren Upstream-Apps.
@@ -1219,19 +1545,19 @@ kind: Ingress
 metadata:
   name: &lt;mein_ingress-name&gt;
   annotations:
-    ingress.bluemix.net/ssl-services: ssl-service=&lt;service1&gt; [ssl-secret=&lt;geheimer_ssl-schlüssel_von_service1&gt;];ssl-service=&lt;service2&gt; [ssl-secret=&lt;geheimer_ssl-schlüssel_von_service2&gt;]
+    ingress.bluemix.net/ssl-services: "ssl-service=&lt;mein_service1&gt; [ssl-secret=&lt;geheimer_ssl-schlüssel_für_service1&gt;];ssl-service=&lt;mein_service2&gt; [ssl-secret=&lt;geheimer_ssl-schlüssel_für_service2&gt;]
 spec:
   rules:
-  - host: &lt;ibm_domäne&gt;
+  - host: meine_domäne
     http:
       paths:
-      - path: /&lt;mein_servicepfad1&gt;
+      - path: /
         backend:
-          serviceName: &lt;mein_service1&gt;
+          serviceName: mein_service1
           servicePort: 8443
-      - path: /&lt;mein_servicepfad2&gt;
+      - path: /
         backend:
-          serviceName: &lt;mein_service2&gt;
+          serviceName: mein_service2
           servicePort: 8444</code></pre>
 
 <table>
@@ -1240,44 +1566,12 @@ spec:
   </thead>
   <tbody>
   <tr>
-  <td><code>name</code></td>
-  <td>Ersetzen Sie <em>&lt;mein_ingress-name&gt;</em> durch einen Namen für Ihre Ingress-Ressource.</td>
+  <td><code>ssl-service</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Service, der Ihre App darstellt. Der Datenverkehr wird von der Lastausgleichsfunktion für Anwendungen zu dieser App verschlüsselt.</td>
   </tr>
   <tr>
-  <td><code>annotations</code></td>
-  <td>Ersetzen Sie die folgenden Werte:<ul>
-  <li><code><em>&lt;myservice&gt;</em></code>: Geben Sie den Namen des Service ein, der für Ihre App steht. Der Datenverkehr wird von der Lastausgleichsfunktion für Anwendungen zu dieser App verschlüsselt.</li>
-  <li><code><em>&lt;ssl-secret&gt;</em></code>: Geben Sie den geheimen Schlüssel für den Service ein. Dieser Parameter ist optional. Wenn der Parameter bereitgestellt wird, muss der Wert den Schlüssel und das Zertifikat enthalten, den/das die App vom Client erwartet.  </li></ul>
-  </td>
-  </tr>
-  <tr>
-  <td><code>rules/host</code></td>
-  <td>Ersetzen Sie <em>&lt;ibm_domäne&gt;</em> durch den von IBM im Feld für die Ingress-Unterdomäne (<strong>Ingress subdomain</strong>) bereitgestellten Namen.
-  <br><br>
-  <strong>Hinweis:</strong> Um Fehler während der Ingress-Erstellung zu vermeiden, verwenden Sie keine Sternchen (*) für Ihren Host oder lassen Sie die Hosteigenschaft leer.</td>
-  </tr>
-  <tr>
-  <td><code>rules/path</code></td>
-  <td>Ersetzen Sie <em>&lt;mein_servicepfad&gt;</em> durch einen Schrägstrich oder den eindeutigen Pfad, den Ihre Anwendung überwacht, sodass Netzverkehr an die App weitergeleitet werden kann.
-
-  </br>
-  Für jeden Kubernetes-Service können Sie einen individuellen Pfad definieren, der an die von IBM bereitgestellte Domäne angehängt wird, um einen eindeutigen Pfad zu Ihrer App zu erstellen, z. B. <code>ingress-domäne/mein_servicepfad1</code>. Wenn Sie diese Route in einen Web-Browser eingeben, wird der Netzverkehr an die Lastausgleichsfunktion für Anwendungen weitergeleitet. Die Lastausgleichsfunktion für Anwendungen sucht nach dem zugehörigen Service. Er sendet Netzverkehr an ihn und dann weiter an die Pods, in denen die App ausgeführt wird, indem derselbe Pfad verwendet wird. Die App muss so konfiguriert werden, dass dieser Pfad überwacht wird, um eingehenden Datenverkehr im Netz
-zu erhalten.
-
-  </br></br>
-  Die meisten Apps überwachen keinen bestimmten Pfad, sondern verwenden den Rootpfad und einen bestimmten Port. In diesem Fall definieren Sie den Rootpfad als <code>/</code> und geben keinen individuellen Pfad für Ihre App an.
-  </br>
-  Beispiel: <ul><li>Geben Sie für <code>http://ingress-hostname/</code> als Pfad <code>/</code> ein.</li><li>Geben Sie für <code>http://ingress-hostname/mein_servicepfad</code> als Pfad <code>/mein_servicepfad</code> ein.</li></ul>
-  </br>
-  <strong>Tipp:</strong> Um Ingress für die Überwachung eines Pfads zu konfigurieren, der von dem Pfad abweicht, den Ihre App überwacht, können Sie mit <a href="#rewrite-path" target="_blank">Annotation neu schreiben</a> eine richtige Weiterleitung an Ihre App einrichten.</td>
-  </tr>
-  <tr>
-  <td><code>serviceName</code></td>
-  <td>Ersetzen Sie <em>&lt;mein_service&gt;</em> durch den Namen des Service, den Sie beim Erstellen des Kubernetes-Service für Ihre App verwendet haben.</td>
-  </tr>
-  <tr>
-  <td><code>servicePort</code></td>
-  <td>Der Port, den Ihr Service überwacht. Verwenden Sie denselben Port, die Sie beim Erstellen des Kubernetes-Service für Ihre App definiert haben.</td>
+  <td><code>ssl-secret</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>geheimer_ssl-schlüssel_für_service</em>&gt;</code> durch den geheimen Schlüssel für den Service. Dieser Parameter ist optional. Wenn der Parameter bereitgestellt wird, muss der Wert den Schlüssel und das Zertifikat enthalten, den/das die App vom Client erwartet.</td>
   </tr>
   </tbody></table>
 
@@ -1287,7 +1581,7 @@ zu erhalten.
 <br />
 
 
-### Unterstützung für SSL-Services mit Authentifizierung
+#### Unterstützung für SSL-Services mit Authentifizierung
 {: #ssl-services-auth}
 
 Lassen Sie HTTPS-Anforderungen zu und verschlüsseln Sie Datenverkehr zu Ihren Upstream-Apps für zusätzliche Sicherheit mit der unidirektionalen oder gegenseitigen Authentifizierung.
@@ -1307,31 +1601,32 @@ Konfigurieren Sie die gegenseitige Authentifizierung für Lastausgleichs-Apps, f
 <dd>
 
 <pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+<code>^apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: &lt;mein_ingress-name&gt;
   annotations:
     ingress.bluemix.net/ssl-services: |
-      ssl-service=&lt;service1&gt; ssl-secret=&lt;geheimer_ssl-schlüssel_für_service1&gt;;
-      ssl-service=&lt;service2&gt; ssl-secret=&lt;geheimer_ssl-schlüssel_für_service2&gt;
+      ssl-service=&lt;mein_service1&gt; ssl-secret=&lt;geheimer_ssl-schlüssel_für_service1&gt;;
+      ssl-service=&lt;mein_service2&gt; ssl-secret=&lt;geheimer_ssl-schlüssel_für_service2&gt;
 spec:
   tls:
   - hosts:
-    - &lt;ibm_domäne&gt;
-    secretName: &lt;name_des_geheimen_schlüssels&gt;
+    - meine_domäne
+    secretName: mein_geheimer_schlüssel
   rules:
-  - host: &lt;ibm_domäne&gt;
+  - host: meine_domäne
     http:
       paths:
-      - path: /&lt;mein_servicepfad1&gt;
+      - path: /
         backend:
-          serviceName: &lt;mein_service1&gt;
+          serviceName: mein_service1
           servicePort: 8443
-      - path: /&lt;mein_servicepfad2&gt;
+      - path: /
         backend:
-          serviceName: &lt;mein_service2&gt;
-          servicePort: 8444</code></pre>
+          serviceName: mein_service2
+          servicePort: 8444
+          </code></pre>
 
 <table>
   <thead>
@@ -1339,239 +1634,20 @@ spec:
   </thead>
   <tbody>
   <tr>
-  <td><code>name</code></td>
-  <td>Ersetzen Sie <em>&lt;mein_ingress-name&gt;</em> durch einen Namen für Ihre Ingress-Ressource.</td>
+  <td><code>ssl-service</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Service, der Ihre App darstellt. Der Datenverkehr wird von der Lastausgleichsfunktion für Anwendungen zu dieser App verschlüsselt.</td>
   </tr>
   <tr>
-  <td><code>annotations</code></td>
-  <td>Ersetzen Sie die folgenden Werte:<ul>
-  <li><code><em>&lt;service&gt;</em></code>: Geben Sie den Namen des Service ein.</li>
-  <li><code><em>&lt;geheimer_ssl-schlüssel_für_service&gt;</em></code>: Geben Sie den geheimen Schlüssel für den Service ein.</li></ul>
-  </td>
-  </tr>
-  <tr>
-  <td><code>tls/host</code></td>
-  <td>Ersetzen Sie <em>&lt;ibm_domäne&gt;</em> durch den von IBM im Feld für die Ingress-Unterdomäne (<strong>Ingress subdomain</strong>) bereitgestellten Namen.
-  <br><br>
-  <strong>Hinweis:</strong> Um Fehler während der Ingress-Erstellung zu vermeiden, verwenden Sie keine Sternchen (*) für Ihren Host oder lassen Sie die Hosteigenschaft leer.</td>
-  </tr>
-  <tr>
-  <td><code>tls/secretName</code></td>
-  <td>Ersetzen Sie <em>&lt;name_des_geheimen_schlüssels&gt;</em> durch den Namen des geheimen Schlüssels, in dem sich das Zertifikat und für die gegenseitige Authentifizierung der Schlüssel befindet.
-  </tr>
-  <tr>
-  <td><code>rules/path</code></td>
-  <td>Ersetzen Sie <em>&lt;mein_servicepfad&gt;</em> durch einen Schrägstrich oder den eindeutigen Pfad, den Ihre Anwendung überwacht, sodass Netzverkehr an die App weitergeleitet werden kann.
-
-  </br>
-  Für jeden Kubernetes-Service können Sie einen individuellen Pfad definieren, der an die von IBM bereitgestellte Domäne angehängt wird, um einen eindeutigen Pfad zu Ihrer App zu erstellen, z. B. <code>ingress-domäne/mein_servicepfad1</code>. Wenn Sie diese Route in einen Web-Browser eingeben, wird der Netzverkehr an die Lastausgleichsfunktion für Anwendungen weitergeleitet. Die Lastausgleichsfunktion für Anwendungen sucht nach dem zugehörigen Service. Er sendet Netzverkehr an ihn und dann weiter an die Pods, in denen die App ausgeführt wird, indem derselbe Pfad verwendet wird. Die App muss so konfiguriert werden, dass dieser Pfad überwacht wird, um eingehenden Datenverkehr im Netz
-zu erhalten.
-
-  </br></br>
-  Die meisten Apps überwachen keinen bestimmten Pfad, sondern verwenden den Rootpfad und einen bestimmten Port. In diesem Fall definieren Sie den Rootpfad als <code>/</code> und geben keinen individuellen Pfad für Ihre App an.
-  </br>
-  Beispiel: <ul><li>Geben Sie für <code>http://ingress-hostname/</code> als Pfad <code>/</code> ein.</li><li>Geben Sie für <code>http://ingress-hostname/mein_servicepfad</code> als Pfad <code>/mein_servicepfad</code> ein.</li></ul>
-  </br>
-  <strong>Tipp:</strong> Um Ingress für die Überwachung eines Pfads zu konfigurieren, der von dem Pfad abweicht, den Ihre App überwacht, können Sie mit <a href="#rewrite-path" target="_blank">Annotation neu schreiben</a> eine richtige Weiterleitung an Ihre App einrichten.</td>
-  </tr>
-  <tr>
-  <td><code>serviceName</code></td>
-  <td>Ersetzen Sie <em>&lt;mein_service&gt;</em> durch den Namen des Service, den Sie beim Erstellen des Kubernetes-Service für Ihre App verwendet haben.</td>
-  </tr>
-  <tr>
-  <td><code>servicePort</code></td>
-  <td>Der Port, den Ihr Service überwacht. Verwenden Sie denselben Port, die Sie beim Erstellen des Kubernetes-Service für Ihre App definiert haben.</td>
+  <td><code>ssl-secret</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>geheimer_ssl-schlüssel_für_service</em>&gt;</code> durch den geheimen Schlüssel für den Service. Dieser Parameter ist optional. Wenn der Parameter bereitgestellt wird, muss der Wert den Schlüssel und das Zertifikat enthalten, den/das die App vom Client erwartet.</td>
   </tr>
   </tbody></table>
 
   </dd>
+  </dl>
 
-
-
-<dt>YAML-Beispieldatei eines geheimen Schlüssels für die unidirektionale Authentifizierung</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: v1
-kind: Secret
-metadata:
-  name: &lt;name_des_geheimen_schlüssels&gt;
-type: Opaque
-data:
-  trusted.crt: &lt;zertifikatsname&gt;
-</code></pre>
-
-<table>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>name</code></td>
-  <td>Ersetzen Sie <em>&lt;name_des_geheimen_schlüssels&gt;</em> durch einen Namen für die Ressource mit dem geheimen Schlüssel.</td>
-  </tr>
-  <tr>
-  <td><code>data</code></td>
-  <td>Ersetzen Sie den folgenden Wert:<ul>
-  <li><code><em>&lt;zertifikatsname&gt;</em></code>: Geben Sie den Namen des vertrauenswürdigen Zertifikats ein.</li>
-  </ul>
-  </td>
-  </tr>
-  </tbody></table>
-
-  </dd>
-
-<dt>YAML-Beispieldatei eines geheimen Schlüssels für die gegenseitige Authentifizierung</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: v1
-kind: Secret
-metadata:
-  name: &lt;name_des_geheimen_schlüssels&gt;
-type: Opaque
-data:
-  trusted.crt: &lt;zertifikatsname&gt;
-    client.crt : &lt;clientzertifikatsname&gt;
-    client.key : &lt;zertifikatsschlüssel&gt;
-</code></pre>
-
-<table>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>name</code></td>
-  <td>Ersetzen Sie <em>&lt;name_des_geheimen_schlüssels&gt;</em> durch einen Namen für die Ressource mit dem geheimen Schlüssel.</td>
-  </tr>
-  <tr>
-  <td><code>data</code></td>
-  <td>Ersetzen Sie die folgenden Werte:<ul>
-  <li><code><em>&lt;zertifikatsname&gt;</em></code>: Geben Sie den Namen des vertrauenswürdigen Zertifikats ein.</li>
-  <li><code><em>&lt;clientzertifikatsname&gt;</em></code>: Geben Sie den Namen des Clientzertifikats ein.</li>
-  <li><code><em>&lt;zertifikatsschlüssel&gt;</em></code>: Geben Sie den Schlüssel für das Clientzertifikat ein.</li></ul>
-  </td>
-  </tr>
-  </tbody></table>
-
-  </dd>
-</dl>
 
 <br />
 
 
 
-## TCP-Ports für Lastausgleichsfunktionen für Anwendungen (tcp-ports)
-{: #tcp-ports}
-
-Greifen Sie auf eine App über einen vom Standard abweichenden TC-Port zu.
-{:shortdesc}
-
-<dl>
-<dt>Beschreibung</dt>
-<dd>
-Verwenden Sie diese Annotation für eine App, für die eine Arbeitslast für TCP-Datenströme ausgeführt wird.
-
-<p>**Hinweis**: Die Lastausgleichsfunktion für Anwendungen arbeitet im Durchgriffsmodus und leitet den Datenverkehr an Backend-Apps weiter. Die SSL-Terminierung wird in diesem Fall nicht unterstützt.</p>
-</dd>
-
-
- <dt>YAML-Beispiel einer Ingress-Ressource</dt>
- <dd>
-
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
- kind: Ingress
- metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/tcp-ports: "serviceName=&lt;servicename&gt; ingressPort=&lt;ingress-port&gt; [servicePort=&lt;service-port&gt;]"
- spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-
- <table>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>annotations</code></td>
-  <td>Ersetzen Sie die folgenden Werte:<ul>
-  <li><code><em>&lt;ingressPort&gt;</em></code>: Der TCP-Port, an dem Sie auf Ihre App zugreifen möchten.</li>
-  <li><code><em>&lt;serviceName&gt;</em></code>: Der Name des Kubernetes-Service, auf den über einen vom Standard abweichenden Port zugegriffen wird.</li>
-  <li><code><em>&lt;servicePort&gt;</em></code>: Dieser Parameter ist optional. Wenn ein Wert bereitgestellt wird, wird der Port durch diesen Wert ersetzt, bevor der Datenverkehr an die Backend-App gesendet wird. Andernfalls entspricht der Port weiterhin dem Ingress-Port.</li>
-  </ul>
-  </td>
-  </tr>
-  </tbody></table>
-  </dd>
-  </dl>
-
-  <br />
-
-
-  ## Keepalive-Verbindungen für Upstream-Server (upstream-keepalive)
-  {: #upstream-keepalive}
-
-  Konfigurieren Sie die maximale Anzahl der inaktiven Keepalive-Verbindungen für einen Upstream-Server.
-  {:shortdesc}
-
-  <dl>
-  <dt>Beschreibung</dt>
-  <dd>
-  Ändern Sie die maximale Anzahl inaktiver Keepalive-Verbindungen zu einem Upstream-Server für einen angegebenen Service. Der Upstream-Server verfügt standardmäßig über 64 inaktive Keepalive-Verbindungen.
-  </dd>
-
-
-   <dt>YAML-Beispiel einer Ingress-Ressource</dt>
-   <dd>
-
-   <pre class="codeblock">
-   <code>apiVersion: extensions/v1beta1
-   kind: Ingress
-   metadata:
-    name: myingress
-    annotations:
-      ingress.bluemix.net/upstream-keepalive: "serviceName=&lt;servicename&gt; keepalive=&lt;maximale_verbindungen&gt;"
-   spec:
-    tls:
-    - hosts:
-      - mydomain
-    secretName: mytlssecret
-  rules:
-    - host: mydomain
-    http:
-      paths:
-        - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-
-   <table>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>annotations</code></td>
-    <td>Ersetzen Sie die folgenden Werte:<ul>
-    <li><code><em>&lt;serviceName&gt;</em></code>: Ersetzen Sie <em>&lt;servicename&gt;</em> durch den Namen des Kubernetes-Service, den Sie für die App erstellt haben.</li>
-    <li><code><em>&lt;keepalive&gt;</em></code>: Ersetzen Sie <em>&lt;max_verbindungen&gt;</em> durch die maximale Anzahl der inaktiven Keepalive-Verbindungen zum Upstream-Server. Der Standardwert ist '64'. Mit dem Wert null werden Keepalive-Verbindungen zum Upstream-Server für den angegebenen Service inaktiviert.</li>
-    </ul>
-    </td>
-    </tr>
-    </tbody></table>
-    </dd>
-    </dl>

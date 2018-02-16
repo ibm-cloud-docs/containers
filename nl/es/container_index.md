@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-13"
 
 ---
@@ -64,7 +64,7 @@ Enhorabuena. ¡Ha creado su primer clúster!
 Cuando el clúster esté activo y en ejecución, empiece a utilizarlo.
 
 * [Instalar las CLI para empezar a trabajar con el clúster.](cs_cli_install.html#cs_cli_install)
-* [Desplegar una app en el clúster.](cs_apps.html#cs_apps_cli)
-* [Cree un clúster estándar con varios nodos para aumentar la disponibilidad.](cs_cluster.html#cs_cluster_ui)
+* [Desplegar una app en el clúster.](cs_app.html#app_cli)
+* [Cree un clúster estándar con varios nodos para aumentar la disponibilidad.](cs_clusters.html#clusters_ui)
 * [Configure su propio registro privado en {{site.data.keyword.Bluemix_notm}}
 para almacenar y compartir imágenes de Docker con otros usuarios. ](/docs/services/Registry/index.html)

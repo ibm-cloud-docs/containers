@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-01"
 
 ---
@@ -25,20 +25,20 @@ lastupdated: "2017-12-01"
 - [API REST para clústeres ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://containers.bluemix.net/swagger)
 - [API REST para registro de clústeres ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://us-south.containers.bluemix.net/swagger-logging/)
 - [API REST para el equilibrador de carga de aplicación de clúster ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://us-south.containers.bluemix.net/swagger-alb-api/)
-- [Trayectos de orquestación de contenedores developerWorks![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/code/journey/category/container-orchestration/)
+- [Trayectos de orquestación de contenedores developerWorks ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/code/journey/category/container-orchestration/)
 - [Documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/)
-- [Documentación de Docker![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.docker.com/engine/)
-- [Documentación de Helm ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.helm.sh/helm/)
-- [Istio ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://istio.io/)
-- [Weave Scope ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.weave.works/oss/scope/)
+- [Documentación de Docker ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.docker.com/engine/)
+- <a href="https://docs.helm.sh/helm/" target="_blank">Documentación de Helm <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> para la gestión de paquetes de Kubernetes
+- [Malla de servicios ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://istio.io/)
+- [Visualización de Weave Scope ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.weave.works/oss/scope/)
 
 <br />
 
 
 **Glosarios**
 - [{{site.data.keyword.Bluemix_notm}} glosario](/docs/overview/glossary/index.html)
-- [Glosario de Kubernetes![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/glossary/?fundamental=true)
-- [Glosario de Docker![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.docker.com/glossary/)
+- [Glosario de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/glossary/?fundamental=true)
+- [Glosario de Docker ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.docker.com/glossary/)
 
 <br />
 
@@ -54,12 +54,12 @@ lastupdated: "2017-12-01"
 
 **Enlaces relacionados con contenedores únicos y escalables**
 
-- [API REST para contenedores únicos y escalables![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](http://ccsapi-doc.mybluemix.net/)
+- [API REST para contenedores únicos y escalables ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](http://ccsapi-doc.mybluemix.net/)
 
 **General**
 
 - [Twitter ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://twitter.com/hashtag/ibmcontainers)
-- [Artículos de la comunidad de desarrolladores![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/blogs/bluemix/tag/containers/)
+- [Artículos de la comunidad de desarrolladores ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/blogs/bluemix/tag/containers/)
 - [Microservices.TV ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/tv/microservices/)
 
 <br />

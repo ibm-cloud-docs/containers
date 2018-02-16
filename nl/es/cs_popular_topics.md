@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-14"
 
 ---
@@ -38,7 +38,7 @@ apps de alta disponibilidad dentro de contenedores Docker y clústeres de Kubern
 ofrecen funciones integradas de seguridad y detección y permiten automatizar el despliegue, operación, escalado y supervisión de apps contenerizadas en un clúster de hosts de cálculo independientes.</td>
 </tr>
 <tr>
-<td>[Despliegue de apps en clústeres](cs_apps.html)</td>
+<td>[Despliegue de apps en clústeres](cs_app.html)</td>
 <td>Puede utilizar las técnicas de Kubernetes para desplegar apps y asegurarse de que sus apps están siempre activas y en funcionamiento. Por ejemplo, puede realizar actualizaciones continuas y retrotracciones sin causar a los usuarios tiempos de inactividad.</td>
 </tr>
 <tr>
@@ -46,7 +46,7 @@ ofrecen funciones integradas de seguridad y detección y permiten automatizar el
 <td>Con la CLI, puede crear y gestionar sus clústeres de Kubernetes.</td>
 </tr>
 <tr>
-<td>[Apertura de los puertos y direcciones IP necesarios en el cortafuegos](cs_security.html#opening_ports)</td>
+<td>[Apertura de los puertos y direcciones IP necesarios en el cortafuegos](cs_firewall.html#firewall)</td>
 <td>Puede que tenga que abrir puertos específicos y direcciones IP en el cortafuegos para ejecutar mandatos de CLI o para permitir la comunicación entre el nodo Kubernetes maestro y los nodos de trabajador.</td>
 </tr>
 <tr>

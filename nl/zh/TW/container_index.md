@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-13"
 
 ---
@@ -41,7 +41,7 @@ lastupdated: "2017-12-13"
 
 何謂叢集？叢集是一組資源、工作者節點、網路及儲存裝置，可讓應用程式保持高度可用。在您具有叢集之後，即可在容器中部署您的應用程式。
 
-[開始之前，您必須具有隨收隨付制或訂閱 {{site.data.keyword.Bluemix_notm}} 帳戶，才能建立精簡叢集。](https://console.bluemix.net/registration/)
+[開始之前，您必須具有隨收隨付制或訂閱制的 {{site.data.keyword.Bluemix_notm}} 帳戶，才能建立精簡叢集。](https://console.bluemix.net/registration/)
 
 
 若要建立精簡叢集，請執行下列動作：
@@ -64,6 +64,6 @@ lastupdated: "2017-12-13"
 叢集開始進行時，請處理您的叢集。
 
 * [安裝 CLI 以開始使用您的叢集。](cs_cli_install.html#cs_cli_install)
-* [在叢集中部署應用程式。](cs_apps.html#cs_apps_cli)
-* [建立含有多個節點的標準叢集，以提高可用性。](cs_cluster.html#cs_cluster_ui)
+* [在叢集中部署應用程式。](cs_app.html#app_cli)
+* [建立含有多個節點的標準叢集，以提高可用性。](cs_clusters.html#clusters_ui)
 * [在 {{site.data.keyword.Bluemix_notm}} 中設定您自己的專用登錄，以儲存 Docker 映像檔，並將它與其他使用者共用。](/docs/services/Registry/index.html)

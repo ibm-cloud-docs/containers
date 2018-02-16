@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2017
-lastupdated: "2017-12-01"
+  years: 2014, 2018
+lastupdated: "2018-01-05"
 
 ---
 
@@ -85,8 +85,11 @@ lastupdated: "2017-12-01"
 {:shortdesc}
 
 您可以通过一个全局端点来访问 {{site.data.keyword.containershort_notm}}：`https://containers.bluemix.net/`。
+* 要检查您当前所在的 {{site.data.keyword.containershort_notm}} 区域，请运行 `bx cs region`。
+* 要检索可用区域及其端点的列表，请运行 `bx cs regions`。
 
-要检查您当前所在的 {{site.data.keyword.containershort_notm}} 区域，请运行 `bx cs region`。
+要将 API 用于全局端点，请在所有请求的 `X-Region` 头中传递区域名称。
+{: tip}
 
 ### 登录到其他容器服务区域
 {: #container_login_endpoints}
@@ -106,12 +109,12 @@ lastupdated: "2017-12-01"
 
   | 区域| 位置| 城市|
   |--------|----------|------|
-  | 亚太地区北部| hkg02、tok02 | 香港、东京|
+  | 亚太地区北部| hkg02、sng01、tok02 | 香港、新加坡、东京|
   | 亚太地区南部| mel01、syd01、syd04        | 墨尔本、悉尼|
   | 欧洲中部| ams03、fra02、mil01、par01| 阿姆斯特丹、法兰克福、米兰、巴黎|
   | 英国南部| lon02、lon04         | 伦敦|
-  | 美国东部| tor01、wdc06、wdc07        | 多伦多、华盛顿|
-  | 美国南部| dal10、dal12、dal13       | 达拉斯|
+  | 美国东部| <ph class="mon">mon01、</ph>tor01、wdc06、wdc07        | <ph class="mon">蒙特利尔、</ph>多伦多、华盛顿|
+  | 美国南部| dal10、dal12、dal13、sao01<!--sao-paolo--></ph>       | 达拉斯、 圣保罗<!--sao-paolo--></ph> |
 
 **注**：米兰 (mil01) 仅可用于 Lite 集群。
 
@@ -127,5 +130,8 @@ lastupdated: "2017-12-01"
   {: codeblock}
 
 </br>
+
+要将 API 用于全局端点，请在所有请求的 `X-Region` 头中传递区域名称。要列出可用区域，请运行 `bx cs regions`。
+{: tip}
 
 要查看有关 API 命令的文档，请查看 [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/)。

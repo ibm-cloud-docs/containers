@@ -1,6 +1,8 @@
 ---
 
-copyright: years: 2014, 2017 lastupdated: "2017-12-13"
+copyright:
+  years: 2014, 2018
+lastupdated: "2017-12-13"
 
 ---
 
@@ -65,7 +67,7 @@ recursos quando você cria um cluster padrão.
 Quando o cluster estiver funcionando, comece a fazer algo com o seu cluster.
 
 * [Instale as CLIs para iniciar o trabalho com seu cluster.](cs_cli_install.html#cs_cli_install)
-* [Implementar um app no cluster.](cs_apps.html#cs_apps_cli)
+* [Implementar um app no cluster.](cs_app.html#app_cli)
 * [Crie um cluster padrão com múltiplos
-nós para disponibilidade mais alta.](cs_cluster.html#cs_cluster_ui)
+nós para disponibilidade mais alta.](cs_clusters.html#clusters_ui)
 * [Configure seu próprio registro privado no {{site.data.keyword.Bluemix_notm}} para armazenar e compartilhar imagens do Docker com outros usuários.](/docs/services/Registry/index.html)

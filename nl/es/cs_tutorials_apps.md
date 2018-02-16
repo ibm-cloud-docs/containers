@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-08"
 
 ---
@@ -155,7 +155,7 @@ Docker y luego vuelva a la CLI en la que ha definido la variable de sesión `KUB
         ```
         {: pre}
 
-5.  Clone o descargue el código fuente de la [app Hello world![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/Osthanes/container-service-getting-started-wt) en el directorio inicial de su usuario.
+5.  Clone o descargue el código fuente de la [app Hello world ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/Osthanes/container-service-getting-started-wt) en el directorio inicial de su usuario.
 
     ```
     git clone https://github.com/Osthanes/container-service-getting-started-wt.git
@@ -280,7 +280,7 @@ NodePort se asigna aleatoriamente al servicio.
     <table summary=“Information about the expose command parameters.”>
     <caption>Tabla 1. Parámetros del mandato</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png"/> Más información acerca de los parámetros de exposición</th>
+    <th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Más información acerca de los parámetros de exposición</th>
     </thead>
     <tbody>
     <tr>
@@ -406,7 +406,7 @@ El siguiente diagrama incluye los componentes que desplegará al completar esta 
 
 ![Configuración del despliegue](images/cs_app_tutorial_components2.png)
 
-En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un nodo trabajador. En esta lección, debe configurar un despliegue y desplegar tres instancias de la app Hello World. Cada instancia se despliega en un pod de Kubernetes como parte de un conjunto de réplicas del nodo trabajador. Para hacerlo accesible a nivel público, puede crear un servicio Kubernetes. 
+En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un nodo trabajador. En esta lección, debe configurar un despliegue y desplegar tres instancias de la app Hello World. Cada instancia se despliega en un pod de Kubernetes como parte de un conjunto de réplicas del nodo trabajador. Para hacerlo accesible a nivel público, puede crear un servicio Kubernetes.
 
 Tal como se define en el script de configuración, Kubernetes puede utilizar una comprobación de disponibilidad para ver si un contenedor de un pod se está o no ejecutando. Por ejemplo, estas comprobaciones pueden detectar puntos muertos, en los que una app se está ejecutando pero no progresa. Reiniciar un contenedor que está en esta condición puede ayudar a mejorar la disponibilidad de la app a pesar de los errores. Luego Kubernetes utiliza la comprobación de preparación para ver si un contenedor está preparado para empezar de nuevo a aceptar tráfico. Se considera que un pod está preparado cuando su contenedor está preparado. Cuando el pod está preparado, se inicia de nuevo. En la app Stage2, cada 15 segundos se agota el tiempo de espera de la app. Con una comprobación de estado configurada en el script de configuración, los contenedores se vuelven a crear si la comprobación de estado encuentra un problema con una app.
 
@@ -611,7 +611,7 @@ El siguiente diagrama incluye los componentes que desplegará al completar esta 
 
 ![Configuración del despliegue](images/cs_app_tutorial_components3.png)
 
-En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un nodo trabajador. En esta lección, se crea una instancia del servicio Watson Tone Analyzer en la cuenta de {{site.data.keyword.Bluemix_notm}} y se configuran dos despliegues, uno por cada componente de la app. Cada componente se despliega en un pod de Kubernetes del nodo trabajador. Para hacerlos accesibles a nivel público, también puede crear un servicio Kubernetes para cada componente. 
+En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un nodo trabajador. En esta lección, se crea una instancia del servicio Watson Tone Analyzer en la cuenta de {{site.data.keyword.Bluemix_notm}} y se configuran dos despliegues, uno por cada componente de la app. Cada componente se despliega en un pod de Kubernetes del nodo trabajador. Para hacerlos accesibles a nivel público, también puede crear un servicio Kubernetes para cada componente.
 
 
 ### Lección 3a: Despliegue de la app Watson Tone Analyzer
@@ -896,5 +896,6 @@ bx cs cluster-rm <pr_firm_cluster>
 {: pre}
 
 ## ¿Qué es lo siguiente?
+{: #next}
 
 Intente explorar los trayectos de orquestación del contenedor de [developerWorks ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/code/journey/category/container-orchestration/).

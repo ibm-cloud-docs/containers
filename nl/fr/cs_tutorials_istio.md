@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-12-18"
 
 ---
@@ -19,7 +19,7 @@ lastupdated: "2017-12-18"
 # Tutoriel : Installation d'Istio sur {{site.data.keyword.containerlong_notm}}
 {: #istio_tutorial}
 
-[Istio](https://www.ibm.com/cloud/info/istio) est une plateforme ouverte qui permet aux développeurs de se connecter, de sécuriser et de gérer de manière uniforme un réseau de microservices, également dénomé maillage de services, sur des plateformes cloud telles que Kubernetes. Istio offre la possibilité de gérer le trafic réseau, d'équilibrer la charge entre les microservices, de mettre en vigueur des règles d'accès, de vérifier l'identité des services sur le maillage des services et bien d'autres capacités.
+[Istio](https://www.ibm.com/cloud/info/istio) est une plateforme ouverte qui permet aux développeurs de se connecter, de sécuriser et de gérer de manière uniforme un réseau de microservices, également dénommé maillage de services, sur des plateformes cloud telles que Kubernetes. Istio offre la possibilité de gérer le trafic réseau, d'équilibrer la charge entre les microservices, de mettre en vigueur des règles d'accès, de vérifier l'identité des services sur le maillage des services et bien d'autres capacités.
 
 {:shortdesc}
 
@@ -29,7 +29,7 @@ Dans ce tutoriel, vous découvrirez comment installer Istio de pair avec quatre 
 
 ## Objectifs
 
--   Télécharger et installez Istio dan votre cluster
+-   Télécharger et installez Istio dans votre cluster
 -   Déployer l'exemple d'application BookInfo
 -   Injecter des proxies sidecar Envoy dans les pods des quatre microservices de l'application pour les connecter au maillage des services
 -   Vérifiez le déploiement de l'application BookInfo à travers les trois versions du service d'évaluation
@@ -40,21 +40,21 @@ Dans ce tutoriel, vous découvrirez comment installer Istio de pair avec quatre 
 
 ## Public
 
-Ce tutoriel est detiné aux développeurs de logiciels et aux administrateurs réseau qui n'ont encore jamais utilisé Istio.
+Ce tutoriel est destiné aux développeurs de logiciels et aux administrateurs réseau qui n'ont encore jamais utilisé Istio.
 
 ## Conditions
 prérequises
 
 -  [Installez l'interface de ligne de commande (CLI)](cs_cli_install.html#cs_cli_install_steps)
--  [Créez un cluster](cs_cluster.html#cs_cluster_cli)
--  [cibles l'interface de ligne de commande sur votre cluster](cs_cli_install.html#cs_cli_configure)
+-  [Créez un cluster](cs_clusters.html#clusters_cli)
+-  [Ciblez l'interface de ligne de commande sur votre cluster](cs_cli_install.html#cs_cli_configure)
 
 ## Leçon 1 : Téléchargement et installation d'Istio
 {: #istio_tutorial1}
 
 Téléchargez et installez Istio dans votre cluster.
 
-1. Téléchargez directement Istio depuis [https://github.com/istio/istio/releases ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/istio/istio/releases) ou obtenez la version la plus récente via curl :
+1. Téléchargez directement Istio depuis [https://github.com/istio/istio/releases ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/istio/istio/releases) ou obtenez la version la plus récente via curl :
 
    ```
    curl -L https://git.io/getLatestIstio | sh -
@@ -123,9 +123,9 @@ Félicitations ! L'installation d'Istio dans votre cluster a abouti. Déployez e
 ## Leçon 2 : Déploiement de l'application BookInfo
 {: #istio_tutorial2}
 
-Déployez les microservices de l'exemple d'application BookInfo dans votre cluster Kubernetes. Ces quatre microservices incluent une page Web de produit, les détails de livres, leurs revues (avec plusieurs versions du microservice de revue), et leurs évaluations. Tous les fichiers utilisés dans cet exemple figurent sous votre répertoire d'installation Istio 
+Déployez les microservices de l'exemple d'application BookInfo dans votre cluster Kubernetes. Ces quatre microservices incluent une page Web de produit, les détails de livres, leurs revues (avec plusieurs versions du microservice de revue), et leurs évaluations. Tous les fichiers utilisés dans cet exemple figurent sous votre répertoire d'installation Istio
 
-Lorsque vous déployez BookInfo, des proxies sidecar Envoy sont injectés en tant que conteneurs dans les pods des microservices de votre application avant que ces pods ne soient déployés. Istio utilise une version étendue du proxy Envoy pour médiation de tout le trafic e,trant et sortant des tous les microservices du maillage de services. Pour plus d'informations sur Envoy, reportez-vous à la [Documentation Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/concepts/what-is-istio/overview.html#envoy).
+Lorsque vous déployez BookInfo, des proxies sidecar Envoy sont injectés en tant que conteneurs dans les pods des microservices de votre application avant que ces pods ne soient déployés. Istio utilise une version étendue du proxy Envoy pour médiation de tout le trafic entrant et sortant des tous les microservices du maillage de services. Pour plus d'informations sur Envoy, reportez-vous à la [Documentation Istio ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://istio.io/docs/concepts/what-is-istio/overview.html#envoy).
 
 1. Déployez l'application BookInfo. La commande `kube-inject` ajoute Envoy au fichier `bookinfo.yaml` et utilise ce fichier mis à jour pour déployer l'application. Lors du déploiement des microservices d'application, le sidecar Envoy est également déployé dans chaque pod de microservice.
 
@@ -198,7 +198,7 @@ Lorsque vous déployez BookInfo, des proxies sidecar Envoy sont injectés en tan
        ```
        {: pre}
 
-       Exportez l'adresse IP publique du noeud worker comme URL de passerelle avec l commande suivante. Vous utiliserez l'URL de passerelle à l'étape suivante pour accéder à la page du produit BookInfo.
+       Exportez l'adresse IP publique du noeud worker comme URL de passerelle avec la commande suivante. Vous utiliserez l'URL de passerelle à l'étape suivante pour accéder à la page du produit BookInfo.
 
        ```
        export GATEWAY_URL=<worker_node_public_IP>:$(kubectl get svc istio-ingress -n istio-system -o jsonpath='{.spec.ports[0].nodePort}')
@@ -230,7 +230,7 @@ Si vous ne désirez pas explorer les autres fonctionnalités Istio décrites dan
    ```
    {: pre}
 
-2. Désinstallez Istio. 
+2. Désinstallez Istio.
 
    ```
    kubectl delete -f install/kubernetes/istio.yaml
@@ -240,8 +240,8 @@ Si vous ne désirez pas explorer les autres fonctionnalités Istio décrites dan
 ## Etape suivante ?
 {: #istio_tutorial_whatsnext}
 
-Si vous désirez explorer plus avant les fonctionnalités Istio, d'autres guides figurent dans la [Documentation Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/).
+Si vous désirez explorer plus avant les fonctionnalités Istio, d'autres guides figurent dans la [Documentation Istio ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://istio.io/).
 
-* [Intelligent Routing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/guides/intelligent-routing.html) : cet exemple illustre comment utiliser diverses capacités de gestion d'Istio avec BookInfo pour acheminer le trafic à une version spécifique de la revue et des microservices d'évaluation.
+* [Intelligent Routing ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://istio.io/docs/guides/intelligent-routing.html) : cet exemple illustre comment utiliser diverses capacités de gestion d'Istio avec BookInfo pour acheminer le trafic à une version spécifique de la revue et des microservices d'évaluation.
 
-* [In-Depth Telemetry ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/guides/telemetry.html) : cet exemple illustre comment obtenir des métriques, des journaux et des traces unformes à travers les microservices BookInfo à l'aide d'Istio Mixer etu du proxy Envoy.
+* [In-Depth Telemetry ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://istio.io/docs/guides/telemetry.html) : cet exemple illustre comment obtenir des métriques, des journaux et des traces uniformes à travers les microservices BookInfo à l'aide d'Istio Mixer etu du proxy Envoy.

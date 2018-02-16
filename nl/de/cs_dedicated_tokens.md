@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2014, 2017
+  years: 2014, 2018
 lastupdated: "2017-11-02"
 
 ---
@@ -129,7 +129,7 @@ Erstellen Sie ein nicht ablaufbares Token, um eine Image-Registry zu verwenden, 
         <table>
         <caption>Tabelle 2. Erklärung der Komponenten der YAML-Datei</caption>
         <thead>
-        <th colspan=2><img src="images/idea.png"/> Erklärung der Komponenten der YAML-Datei</th>
+        <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
         </thead>
         <tbody>
         <tr>
