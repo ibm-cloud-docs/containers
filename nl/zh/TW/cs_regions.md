@@ -113,7 +113,7 @@ lastupdated: "2018-01-05"
   | 歐盟中部| ams03、fra02、mil01、par01| 阿姆斯特丹、法蘭克福、米蘭、巴黎|
   | 英國南部| lon02、lon04| 倫敦|
   | 美國東部| <ph class="mon">mon01、</ph>tor01、wdc06、wdc07| <ph class="mon">蒙特婁、</ph>多倫多、華盛頓特區|
-  | 美國南部| dal10、dal12、dal13、sao01<!--sao-paolo--></ph>       | 達拉斯、聖保羅</ph> |
+  | 美國南部| dal10、dal12、dal13       | 達拉斯 |
 
 **附註**：米蘭 (mil01) 僅適用於精簡叢集。
 

@@ -113,7 +113,7 @@ lastupdated: "2018-01-05"
   | 中欧     | ams03、fra02、mil01、par01        | アムステルダム、フランクフルト、ミラノ、パリ |
   | 英国南部      | lon02、lon04         | London (ロンドン) |
   | 米国東部      | <ph class="mon">mon01、</ph>tor01、wdc06、wdc07        | <ph class="mon">モントリオール、</ph>トロント、ワシントン DC |
-  | 米国南部     | dal10、dal12、dal13、sao01<!--sao-paolo--></ph>       | ダラス、サンパウロ<!--sao-paolo--></ph> |
+  | 米国南部     | dal10、dal12、dal13      | ダラス|
 
 **注**: ミラノ (mil01) はライト・クラスター専用です。
 

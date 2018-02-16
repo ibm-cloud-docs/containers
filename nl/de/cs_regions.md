@@ -113,7 +113,7 @@ Bei Standorten handelt es sich um Rechenzentren, die in einer Region verfügbar 
   | Zentraleuropa     | ams03, fra02, mil01, par01        | Amsterdam, Frankfurt, Mailand, Paris |
   | Großbritannien (Süden)      | lon02, lon04         | London |
   | Vereinigte Staaten (Osten)      | <ph class="mon">mon01, </ph>tor01, wdc06, wdc07        | <ph class="mon">Montreal, </ph>Toronto, Washington, DC |
-  | Vereinigte Staaten (Süden)     | dal10, dal12, dal13, sao01<!--sao-paolo--></ph>       | Dallas, São Paolo<!--sao-paolo--></ph> |
+  | Vereinigte Staaten (Süden)     | dal10, dal12, dal13       | Dallas |
 
 **Hinweis**: Mailand (mil01) ist nur für Lite-Cluster verfügbar.
 
