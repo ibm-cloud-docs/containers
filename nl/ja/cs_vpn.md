@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-29"
 
 ---
 
@@ -18,7 +18,7 @@ lastupdated: "2018-01-12"
 # VPN 接続のセットアップ
 {: #vpn}
 
-VPN 接続を使用すると、Kubernetes クラスター内のアプリをオンプレミス・ネットワークにセキュアに接続できます。 クラスター外のアプリを、クラスター内で実行中のアプリに接続することもできます。
+VPN 接続を使用すると、Kubernetes クラスター内のアプリをオンプレミス・ネットワークにセキュアに接続できます。クラスター外のアプリを、クラスター内で実行中のアプリに接続することもできます。
 {:shortdesc}
 
 ## Strongswan IPSec VPN サービスの Helm Chart を使用した VPN 接続のセットアップ
@@ -83,7 +83,7 @@ Strongswan との VPN 接続をセットアップするには、以下のよう�
     ```
     {: pre}
 
-3. `config.yaml` ファイルを開き、ご希望の VPN 構成に従ってデフォルト値に以下の変更を加えます。 プロパティーに選択可能な特定の値がある場合は、このファイル内の各プロパティーの上のコメントにそれらの値がリストされます。**重要**: プロパティーを変更する必要がない場合は、そのプロパティーの前に `#` を付けてコメント化してください。
+3. `config.yaml` ファイルを開き、ご希望の VPN 構成に従ってデフォルト値に以下の変更を加えます。 プロパティーに選択可能な特定の値がある場合は、このファイル内の各プロパティーの上のコメントにそれらの値がリストされます。 **重要**: プロパティーを変更する必要がない場合は、そのプロパティーの前に `#` を付けてコメント化してください。
 
     <table>
     <caption>YAML ファイルの構成要素について</caption>
@@ -117,7 +117,7 @@ Strongswan との VPN 接続をセットアップするには、以下のよう�
     </tr>
     <tr>
     <td><code>local.subnet</code></td>
-    <td>この値を、オンプレミス・ネットワークへの VPN 接続を介して公開する必要があるクラスター・サブネット CIDR のリストに変更します。 以下のサブネットをこのリストに含めることができます。 <ul><li>Kubernetes ポッドのサブネット CIDR: <code>172.30.0.0/16</code></li><li>Kubernetes サービスのサブネット CIDR: <code>172.21.0.0/16</code></li><li>プライベート・ネットワーク上で NodePort サービスによって公開されるアプリケーションがある場合は、ワーカー・ノードのプライベート・サブネット CIDR。 この値を見つけるには、<code>bx cs subnets | grep <xxx.yyy.zzz></code> を実行します。&lt;xxx.yyy.zzz&gt; はワーカー・ノードのプライベート IP アドレスの最初の 3 つのオクテットです。</li><li>プライベート・ネットワーク上で LoadBalancer サービスによって公開されるアプリケーションがある場合は、クラスターのプライベートまたはユーザー管理サブネット CIDR。 これらの値を見つけるには、<code>bx cs cluster-get <cluster name> --showResources</code> を実行します。 <b>VLANS</b> セクションで、<b>Public</b> 値が <code>false</code> の CIDR を見つけます。</li></ul></td>
+    <td>この値を、VPN 接続を介してオンプレミス・ネットワークに公開するクラスター・サブネット CIDR のリストに変更します。以下のサブネットをこのリストに含めることができます。 <ul><li>Kubernetes ポッドのサブネット CIDR: <code>172.30.0.0/16</code></li><li>Kubernetes サービスのサブネット CIDR: <code>172.21.0.0/16</code></li><li>アプリケーションをプライベート・ネットワークで NodePort サービスを使用して公開する場合は、ワーカー・ノードのプライベート・サブネット CIDR。この値を見つけるには、<code>bx cs subnets | grep <xxx.yyy.zzz></code> を実行します。<code>&lt;xxx.yyy.zzz&gt;</code> はワーカー・ノードのプライベート IP アドレスの最初の 3 つのオクテットです。</li><li>プライベート・ネットワーク上で LoadBalancer サービスによって公開されるアプリケーションがある場合は、クラスターのプライベートまたはユーザー管理サブネット CIDR。 これらの値を見つけるには、<code>bx cs cluster-get <cluster name> --showResources</code> を実行します。 <b>VLANS</b> セクションで、<b>Public</b> 値が <code>false</code> の CIDR を見つけます。</li></ul></td>
     </tr>
     <tr>
     <td><code>local.id</code></td>
@@ -189,9 +189,9 @@ Strongswan との VPN 接続をセットアップするには、以下のよう�
         ```
         {: screen}
 
-        **注:**
-          - この Helm Chart を初めて使用する際には、ほとんどの場合、VPN の状況は `ESTABLISHED` ではありません。 接続が成功するまでに、オンプレミス VPN エンドポイントの設定を確認し、ステップ 3 に戻って、`config.yaml` ファイルを複数回変更する必要が生じる可能性があります。
-          - VPN ポッドが `ERROR` 状態か、クラッシュと再始動が続く場合は、Chart の構成マップ内の `ipsec.conf` 設定のパラメーター妥当性検査が原因の可能性があります。 これが原因か調べるには、`kubectl logs -n kube-system $STRONGSWAN_POD` を実行して、Strongswan ポッドのログに妥当性検査エラーがあるかを確認してください。 妥当性検査エラーがある場合、`helm delete --purge vpn` を実行し、ステップ 3 に戻って、`config.yaml` ファイル内の誤った値を修正し、ステップ 4 から 8 を繰り返します。クラスターに多数のワーカー・ノードがある場合は、`helm delete` と `helm install` を実行するより `helm upgrade` を使用する方が変更を迅速に適用できます。
+      **注:**
+          - この Helm Chart を初めて使用する際には、ほとんどの場合、VPN の状況は `ESTABLISHED` ではありません。接続が成功するまでに、オンプレミス VPN エンドポイントの設定を確認し、ステップ 3 に戻って、`config.yaml` ファイルを複数回変更する必要が生じる可能性があります。
+          - VPN ポッドが `ERROR` 状態か、クラッシュと再始動が続く場合は、Chart の構成マップ内の `ipsec.conf` 設定のパラメーター妥当性検査が原因の可能性があります。 `kubectl logs -n kube-system $STRONGSWAN_POD` を実行して、Strongswan ポッドのログに妥当性検査エラーがあるかを確認してください。 妥当性検査エラーがある場合、`helm delete --purge vpn` を実行し、ステップ 3 に戻って、`config.yaml` ファイル内の誤った値を修正し、ステップ 4 から 8 を繰り返します。 クラスターに多数のワーカー・ノードがある場合は、`helm delete` と `helm install` を実行するより `helm upgrade` を使用する方が変更を迅速に適用できます。
 
     4. VPN の状況が `ESTABLISHED` になったら、`ping` を使用して接続をテストします。 以下の例は、Kubernetes クラスター内の VPN ポッドからオンプレミス VPN ゲートウェイのプライベート IP アドレスに ping を送信します。 構成ファイル内で正しい `remote.subnet` と `local.subnet` が指定されていることと、ローカル・サブネット・リストに ping の送信元のソース IP アドレスが含まれていることを確認します。
 

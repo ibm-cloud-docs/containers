@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-09"
+lastupdated: "2018-01-29"
 
 ---
 
@@ -15,9 +15,9 @@ lastupdated: "2018-01-09"
 {:tip: .tip}
 {:download: .download}
 
-# 此頁面已移動！
+# 您正在尋找的內容已遭移動。
 
-尋找安全主題：
+請參閱新位置中最新的資訊：
  - [依叢集元件的安全](cs_secure.html#cluster)
    - [Kubernetes 主節點](cs_secure.html#master)
    - [工作者節點](cs_secure.html#worker)
@@ -31,3 +31,5 @@ lastupdated: "2018-01-09"
  - [使用 Strongswan IPSec VPN 服務 Helm 圖表設定 VPN 連線功能](cs_vpn.html#vpn)
  - [網路原則](cs_network_policy.html#network_policies)
  - [限制送至邊緣工作者節點的網路資料流量](cs_edge.html#edge)
+
+

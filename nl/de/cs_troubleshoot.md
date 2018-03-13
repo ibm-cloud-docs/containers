@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-09"
+lastupdated: "2018-01-31"
 
 ---
 
@@ -55,30 +55,34 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
     <th>Beschreibung</th>
     </thead>
     <tbody>
+  
+  <tr>
+      <td>Critical (Kritisch)</td>
+      <td>Der Kubernetes-Master kann nicht erreicht werden oder alle Workerknoten in dem Cluster sind inaktiv.</td>
+     </tr>
+  
       <tr>
         <td>Deploying (Wird bereitgestellt)</td>
         <td>Der Kubernetes-Master ist noch nicht vollständig implementiert. Sie können auf Ihren Cluster nicht zugreifen.</td>
        </tr>
        <tr>
-        <td>Pending (Anstehend)</td>
-        <td>Der Kubernetes-Master ist bereitgestellt. Die Workerknoten werden gerade eingerichtet und sind noch nicht im Cluster verfügbar. Sie können auf den Cluster zugreifen, aber Sie können keine Apps auf dem Cluster bereitstellen.</td>
-      </tr>
-      <tr>
         <td>Normal</td>
         <td>Alle Workerknoten in einem Cluster sind betriebsbereit. Sie können auf den Cluster zugreifen und Apps auf dem Cluster bereitstellen.</td>
      </tr>
+       <tr>
+        <td>Pending (Anstehend)</td>
+        <td>Der Kubernetes-Master ist bereitgestellt. Die Workerknoten werden gerade eingerichtet und sind noch nicht im Cluster verfügbar. Sie können auf den Cluster zugreifen, aber Sie können keine Apps auf dem Cluster bereitstellen.</td>
+      </tr>
+  
      <tr>
         <td>Warning (Warnung)</td>
         <td>Mindestens ein Workerknoten in dem Cluster ist nicht verfügbar, aber andere Workerknoten sind verfügbar und können die Workload übernehmen.</td>
-     </tr>
-     <tr>
-      <td>Critical (Kritisch)</td>
-      <td>Der Kubernetes-Master kann nicht erreicht werden oder alle Workerknoten in dem Cluster sind inaktiv.</td>
-     </tr>
+     </tr>  
     </tbody>
   </table>
 
-3.  Wenn Ihr Cluster den Status **Warning** oder **Critical** hat oder sich seit längerer Zeit im Status **Pending** befindet, überprüfen Sie den Status Ihrer Workerknoten. Wenn Ihr Cluster den Status **Deploying** hat, warten Sie, bis Ihr Cluster vollständig bereitgestellt wurde, und überprüfen Sie dann den Status Ihres Clusters. Für Cluster mit dem Status **Normal** wird angenommen, dass sie sich in einem in einwandfreiem Zustand befinden und dass derzeit keine Aktion für sie ausgeführt werden muss.
+3.  Wenn Ihr Cluster den Status **Warning**, **Critical** oder **Delete failed** aufweist oder sich seit längerer Zeit im Status **Pending** befindet, überprüfen Sie den Status Ihrer Workerknoten. Wenn Ihr Cluster den Status **Deploying** hat, warten Sie, bis Ihr Cluster vollständig bereitgestellt wurde, und überprüfen Sie dann den Status Ihres Clusters. Für Cluster mit dem Status **Normal** wird angenommen, dass derzeit keine Aktion für sie ausgeführt werden muss. 
+<p>Gehen Sie wie folgt vor, um den Status Ihrer Workerknoten zu prüfen:</p>
 
   ```
   bx cs workers <clustername_oder_-id>
@@ -93,7 +97,7 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
     <tbody>
       <tr>
        <td>Unknown (Unbekannt)</td>
-       <td>Der Kubernetes-Master ist aus einem der folgenden Gründe nicht erreichbar:<ul><li>Sie haben ein Update Ihres Kubernetes-Masters angefordert. Der Status des Workerknotens kann während des Updates nicht abgerufen werden.</li><li>Sie haben möglicherweise eine zusätzliche Firewall, die Ihre Workerknoten schützt, oder Sie haben die Firewalleinstellungen kürzlich geändert. {{site.data.keyword.containershort_notm}} erfordert, dass bestimmte IP-Adressen und Ports geöffnet sind, damit die Kommunikation vom Workerknoten zum Kubernetes-Master und umgekehrt möglich ist. Weitere Informationen finden Sie in [Firewall verhindert Verbindung für Workerknoten](#cs_firewall).</li><li>Der Kubernetes-Master ist inaktiv. Wenden Sie sich an den {{site.data.keyword.Bluemix_notm}}-Support, indem Sie ein [{{site.data.keyword.Bluemix_notm}}-Support-Ticket](/docs/support/index.html#contacting-support) öffnen.</li></ul></td>
+       <td>Der Kubernetes-Master ist aus einem der folgenden Gründe nicht erreichbar:<ul><li>Sie haben ein Update Ihres Kubernetes-Masters angefordert. Der Status des Workerknotens kann während des Updates nicht abgerufen werden.</li><li>Sie haben möglicherweise eine zusätzliche Firewall, die Ihre Workerknoten schützt, oder Sie haben die Firewalleinstellungen kürzlich geändert. {{site.data.keyword.containershort_notm}} erfordert, dass bestimmte IP-Adressen und Ports geöffnet sind, damit die Kommunikation vom Workerknoten zum Kubernetes-Master und umgekehrt möglich ist. Weitere Informationen finden Sie in [Firewall verhindert Verbindung für Workerknoten](#cs_firewall).</li><li>Der Kubernetes-Master ist inaktiv. Wenden Sie sich an den {{site.data.keyword.Bluemix_notm}}-Support, indem Sie ein [{{site.data.keyword.Bluemix_notm}}-Support-Ticket](/docs/get-support/howtogetsupport.html#getting-customer-support) öffnen.</li></ul></td>
       </tr>
       <tr>
         <td>Provisioning (Wird bereitgestellt)</td>
@@ -143,11 +147,11 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
     <tbody>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Your account is currently prohibited from ordering 'Computing Instances'.</td>
-        <td>Mit Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) können Sie möglicherweise keine Rechenressourcen bestellen. Wenden Sie sich an den {{site.data.keyword.Bluemix_notm}}-Support, indem Sie ein [{{site.data.keyword.Bluemix_notm}}-Support-Ticket](/docs/support/index.html#contacting-support) öffnen.</td>
+        <td>Mit Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) können Sie möglicherweise keine Rechenressourcen bestellen. Wenden Sie sich an den {{site.data.keyword.Bluemix_notm}}-Support, indem Sie ein [{{site.data.keyword.Bluemix_notm}}-Support-Ticket](/docs/get-support/howtogetsupport.html#getting-customer-support) öffnen.</td>
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not place order. There are insufficient resources behind router 'routername' to fulfill the request for the following guests: 'worker-id'.</td>
-        <td>Das ausgewählte VLAN ist einem Pod im Rechenzentrum zugeordnet, der nicht über ausreichend Speicherplatz zum Bereitstellen Ihres Workerknotens verfügt. Sie können zwischen den folgenden Optionen wählen:<ul><li>Stellen Sie Ihren Workerknoten in einem anderen Rechenzentrum bereit. Führen Sie <code>bx cs locations</code> aus, um verfügbare Rechenzentren aufzulisten.<li>Wenn Sie ein vorhandenes Paar aus öffentlichem und privatem VLAN haben, das einem anderen Pod in dem Rechenzentrum zugeordnet ist, verwenden Sie dieses VLAN stattdessen.<li>Wenden Sie sich an den {{site.data.keyword.Bluemix_notm}}-Support, indem Sie ein [{{site.data.keyword.Bluemix_notm}}-Support-Ticket](/docs/support/index.html#contacting-support) öffnen.</ul></td>
+        <td>Das ausgewählte VLAN ist einem Pod im Rechenzentrum zugeordnet, der nicht über ausreichend Speicherplatz zum Bereitstellen Ihres Workerknotens verfügt. Sie können zwischen den folgenden Optionen wählen:<ul><li>Stellen Sie Ihren Workerknoten in einem anderen Rechenzentrum bereit. Führen Sie <code>bx cs locations</code> aus, um verfügbare Rechenzentren aufzulisten.<li>Wenn Sie ein vorhandenes Paar aus öffentlichem und privatem VLAN haben, das einem anderen Pod in dem Rechenzentrum zugeordnet ist, verwenden Sie dieses VLAN stattdessen.<li>Wenden Sie sich an den {{site.data.keyword.Bluemix_notm}}-Support, indem Sie ein [{{site.data.keyword.Bluemix_notm}}-Support-Ticket](/docs/get-support/howtogetsupport.html#getting-customer-support) öffnen.</ul></td>
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not obtain network VLAN with id: &lt;vlan-id&gt;.</td>
@@ -155,7 +159,7 @@ Informieren Sie sich über die Optionen, die Ihnen für die Fehlerbehebung bei I
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation: The location provided for this order is invalid. (HTTP 500)</td>
-        <td>Ihr System von IBM Cloud Infrastructure (SoftLayer) ist nicht für das Bestellen von Rechenressourcen im ausgewählten Rechenzentrum eingerichtet. Wenden Sie sich an den [{{site.data.keyword.Bluemix_notm}}-Support](/docs/support/index.html#contacting-support), um sicherzustellen, dass Ihr Konto korrekt eingerichtet ist.</td>
+        <td>Ihr System von IBM Cloud Infrastructure (SoftLayer) ist nicht für das Bestellen von Rechenressourcen im ausgewählten Rechenzentrum eingerichtet. Wenden Sie sich an den [{{site.data.keyword.Bluemix_notm}}-Support](/docs/get-support/howtogetsupport.html#getting-customer-support), um sicherzustellen, dass Ihr Konto korrekt eingerichtet ist.</td>
        </tr>
        <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: The user does not have the necessary {{site.data.keyword.Bluemix_notm}} Infrastructure permissions to add servers
@@ -572,11 +576,11 @@ Beim Zugriff auf das Kibana-Dashboard werden keine Protokolle angezeigt.
  </tr>
  <tr>
  <td>Das Kontingent für den Protokollspeicher ist erschöpft.</td>
- <td>Informationen darüber, wie Sie die Protokollspeichergrenze erhöhen können, finden Sie in der <a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs">{{site.data.keyword.loganalysislong_notm}}-Dokumentation</a>.</td>
+ <td>Informationen darüber, wie Sie die Protokollspeichergrenze erhöhen können, finden Sie in der <a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html">{{site.data.keyword.loganalysislong_notm}}-Dokumentation</a>.</td>
  </tr>
  <tr>
  <td>Wenn Sie beim Erstellen des Clusters einen Bereich angegeben haben, verfügt der Kontoeigner nicht über die Berechtigungen eines Managers, Entwicklers oder Prüfers für diesen Bereich.</td>
- <td>Gehen Sie wie folgt vor, um die Zugriffsberechtigungen für den Kontoeigner zu ändern:<ol><li>Führen Sie den folgenden Befehl aus, um den Kontoeigner für den Cluster zu ermitteln: <code>bx cs api-key-info &lt;clustername_oder_-id&gt;</code></li><li>Informationen darüber, wie dem betreffenden Kontoeigner die {{site.data.keyword.containershort_notm}}-Zugriffsberechtigung eines Managers, Entwicklers oder Prüfers für den Bereich zugeordnet werden kann, finden Sie unter <a href="cs_users.html#managing">Clusterzugriff verwalten</a>.</li><li>Führen Sie den folgenden Befehl aus, um das Protokollierungstoken nach Änderung der Berechtigungen zu aktualisieren: <code>bx cs logging-config-refresh &lt;clustername_oder_-id&gt;</code>.</li></ol></td>
+ <td>Gehen Sie wie folgt vor, um die Zugriffsberechtigungen für den Kontoeigner zu ändern:<ol><li>Führen Sie den folgenden Befehl aus, um den Kontoeigner für den Cluster zu ermitteln: <code>bx cs api-key-info &lt;clustername_oder_-id&gt;</code>.</li><li>Informationen darüber, wie dem betreffenden Kontoeigner die {{site.data.keyword.containershort_notm}}-Zugriffsberechtigung eines Managers, Entwicklers oder Prüfers für den Bereich zugeordnet werden kann, finden Sie unter <a href="cs_users.html#managing">Clusterzugriff verwalten</a>.</li><li>Führen Sie den folgenden Befehl aus, um das Protokollierungstoken nach Änderung der Berechtigungen zu aktualisieren: <code>bx cs logging-config-refresh &lt;clustername_oder_-id&gt;</code>.</li></ol></td>
  </tr>
  </tbody></table>
 
@@ -609,9 +613,10 @@ Um Änderungen zu testen, die Sie während der Fehlerbehebung vorgenommen haben,
         {:pre}
 
   4. Nach einigen Minuten werden die Protokolle im Kibana-Dashboard angezeigt. Zum Zugriff auf das Kibana-Dashboard müssen Sie eine der folgenden URLs aufrufen und dann das {{site.data.keyword.Bluemix_notm}}-Konto, in dem Sie den Cluster erstellt haben, auswählen. Wenn Sie beim Erstellen des Clusters einen Bereich angegeben haben, wechseln Sie stattdessen zu diesem Bereich.
-        - Vereinigte Staaten (Süden) und Vereinigte Staaten (Osten): https://logging.ng.bluemix.net
-        - Großbritannien (Süden) und Zentraleuropa: https://logging.eu-fra.bluemix.net
-        - Asiatisch-pazifischer Raum (Süden): https://logging.au-syd.bluemix.net
+      - Vereinigte Staaten (Süden) und Vereinigte Staaten (Osten): https://logging.ng.bluemix.net
+      - Großbritannien (Süden): https://logging.eu-gb.bluemix.net
+      - Zentraleuropa: https://logging.eu-fra.bluemix.net
+      - Asiatisch-pazifischer Raum (Süden): https://logging.au-syd.bluemix.net
 
 <br />
 
@@ -647,7 +652,7 @@ Sie haben Ihre App öffentlich zugänglich gemacht, indem Sie einen Lastausgleic
 {: tsCauses}
 Ihr Lastausgleichsservice funktioniert aus einem der folgenden Gründe möglicherweise nicht ordnungsgemäß:
 
--   Der Cluster ist ein Lite-Cluster oder Standardcluster mit nur einem Workerknoten.
+-   Der Cluster ist ein kostenloser Cluster oder Standardcluster mit nur einem Workerknoten.
 -   Der Cluster ist noch nicht vollständig bereitgestellt.
 -   Das Konfigurationsscript für Ihren Lastausgleichsservice enthält Fehler.
 
@@ -718,20 +723,20 @@ Gehen Sie wie folgt vor, um Fehler in Ihrem Lastausgleichsservice zu beheben:
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
-Sie haben Ihre App öffentlich zugänglich gemacht, indem Sie eine Ingress-Ressource für Ihre App in Ihrem Cluster erstellt haben. Als Sie versuchten, eine Verbindung mit Ihrer App über die öffentliche IP-Adresse oder eine Unterdomäne des Ingress-Controllers herzustellen, ist die Verbindung fehlgeschlagen oder sie hat das zulässige Zeitlimit überschritten.
+Sie haben Ihre App öffentlich zugänglich gemacht, indem Sie eine Ingress-Ressource für Ihre App in Ihrem Cluster erstellt haben. Als Sie versuchten, eine Verbindung mit Ihrer App über die öffentliche IP-Adresse oder Unterdomäne der Ingress-Lastausgleichsfunktion für Anwendungen herzustellen, ist die Verbindung fehlgeschlagen oder sie hat das zulässige Zeitlimit überschritten.
 
 {: tsCauses}
 Ingress funktioniert aus den folgenden Gründen möglicherweise nicht ordnungsgemäß:
 <ul><ul>
 <li>Der Cluster ist noch nicht vollständig bereitgestellt.
-<li>Der Cluster wurde als Lite-Cluster oder als Standardcluster mit nur einem Workerknoten eingerichtet.
+<li>Der Cluster wurde als kostenloser Cluster oder als Standardcluster mit nur einem Workerknoten eingerichtet.
 <li>Das Ingress-Konfigurationsscript enthält Fehler.
 </ul></ul>
 
 {: tsResolve}
 Gehen Sie wie folgt vor, um Fehler in Ingress zu beheben:
 
-1.  Prüfen Sie, dass Sie einen Standardcluster einrichten, der vollständig bereitgestellt ist und mindestens zwei Workerknoten umfasst, um Hochverfügbarkeit für Ihren Ingress-Controller zu gewährleisten.
+1.  Prüfen Sie, dass Sie einen Standardcluster einrichten, der vollständig ist und mindestens zwei Workerknoten umfasst, um Hochverfügbarkeit für Ihre Ingress-Lastausgleichsfunktion für Anwendungen zu gewährleisten.
 
   ```
   bx cs workers <clustername_oder_-id>
@@ -740,7 +745,7 @@ Gehen Sie wie folgt vor, um Fehler in Ingress zu beheben:
 
     Stellen Sie in Ihrer CLI-Ausgabe sicher, dass der **Status** Ihrer Workerknoten **Ready** (Bereit) lautet und dass für den **Maschinentyp** etwas anderes als **free** (frei) anzeigt wird.
 
-2.  Rufen Sie die Unterdomäne und die öffentliche IP-Adresse des Ingress-Controllers ab und setzen Sie dann ein Pingsignal an beide ab.
+2.  Rufen Sie die Unterdomäne und die öffentliche IP-Adresse der Ingress-Lastausgleichsfunktion für Anwendungen ab und setzen Sie anschließend ein Pingsignal an beide ab.
 
     1.  Rufen Sie die Unterdomäne des Ingress-Controllers ab.
 
@@ -749,33 +754,33 @@ Gehen Sie wie folgt vor, um Fehler in Ingress zu beheben:
       ```
       {: pre}
 
-    2.  Setzen Sie in Pingsignal an die Unterdomäne des Ingress-Controllers ab.
+    2.  Setzen Sie ein Pingsignal an die Unterdomäne der Ingress-Lastausgleichsfunktion für Anwendungen ab.
 
       ```
       ping <unterdomäne_des_ingress-controllers>
       ```
       {: pre}
 
-    3.  Rufen Sie die öffentliche IP-Adresse Ihres Ingress-Controllers ab.
+    3.  Rufen Sie die öffentliche IP-Adresse Ihrer Ingress-Lastausgleichsfunktion für Anwendungen ab.
 
       ```
       nslookup <unterdomäne_des_ingress-controllers>
       ```
       {: pre}
 
-    4.  Setzen Sie ein Pingsignal an die öffentliche IP-Adresse des Ingress-Controllers ab.
+    4.  Setzen Sie ein Pingsignal an die öffentliche IP-Adresse der Ingress-Lastausgleichsfunktion für Anwendungen ab.
 
       ```
       ping <ip_des_ingress-controllers>
       ```
       {: pre}
 
-    Falls die CLI eine Zeitlimitüberschreitung für die öffentliche IP-Adresse oder die Unterdomäne des Ingress-Controllers zurückgibt und Sie eine angepasste Firewall eingerichtet haben, die Ihre Workerknoten schützt, müssen Sie unter Umständen zusätzliche Ports und Netzgruppen in Ihrer [Firewall](#cs_firewall) öffnen.
+    Falls die CLI eine Zeitlimitüberschreitung für die öffentliche IP-Adresse oder die Unterdomäne der Ingress-Lastausgleichsfunktion für Anwendungen zurückgibt und Sie eine angepasste Firewall eingerichtet haben, die Ihre Workerknoten schützt, müssen Sie unter Umständen zusätzliche Ports und Netzgruppen in Ihrer [Firewall](#cs_firewall) öffnen.
 
-3.  Wenn Sie eine angepasste Domäne verwenden, stellen Sie sicher, dass Ihre angepasste Domäne der öffentlichen IP-Adresse oder Unterdomäne des von IBM bereitgestellten Ingress-Controllers mit Ihrem DNS-Anbieter (Domain Name Service) zugeordnet ist.
-    1.  Wenn Sie die Unterdomäne des Ingress-Controllers verwendet haben, prüfen Sie Ihren CNAME-Datensatz (Canonical Name, kanonischer Name).
-    2.  Wenn Sie die öffentliche IP-Adresse des Ingress-Controllers verwendet haben, prüfen Sie, dass Ihre angepasste Domäne der portierbaren öffentlichen IP-Adresse im Zeigerdatensatz (PTR) zugeordnet ist.
-4.  Prüfen Sie Ihre Ingress-Konfigurationsdatei.
+3.  Wenn Sie eine angepasste Domäne verwenden, stellen Sie sicher, dass Ihre angepasste Domäne der öffentlichen IP-Adresse oder Unterdomäne der von IBM bereitgestellten Ingress-Lastausgleichsfunktion für Anwendungen mit Ihrem DNS-Anbieter (Domain Name Service) zugeordnet ist.
+    1.  Wenn Sie die Unterdomäne der Ingress-Lastausgleichsfunktion für Anwendungen verwendet haben, prüfen Sie Ihren CNAME-Datensatz (Canonical Name, kanonischer Name).
+    2.  Wenn Sie die öffentliche IP-Adresse der Ingress-Lastausgleichsfunktion für Anwendungen verwendet haben, prüfen Sie, dass Ihre angepasste Domäne der portierbaren öffentlichen IP-Adresse im Zeigerdatensatz (PTR) zugeordnet ist.
+4.  Prüfen Sie Ihre Ingress-Ressourcenkonfigurationsdatei.
 
     ```
     apiVersion: extensions/v1beta1
@@ -798,7 +803,7 @@ Gehen Sie wie folgt vor, um Fehler in Ingress zu beheben:
     ```
     {: codeblock}
 
-    1.  Prüfen Sie, dass die Unterdomäne des Ingress-Controllers und das TLS-Zertifikat korrekt sind. Sie finden die von IBM bereitgestellte Unterdomäne und das TLS-Zertifikat, indem Sie 'bx cs cluster-get <clustername_oder_-id>' ausführen.
+    1.  Prüfen Sie, dass die Unterdomäne der Ingress-Lastausgleichsfunktion für Anwendungen und das TLS-Zertifikat korrekt sind. Sie finden die von IBM bereitgestellte Unterdomäne und das TLS-Zertifikat, indem Sie 'bx cs cluster-get <clustername_oder_-id>' ausführen.
     2.  Stellen Sie sicher, dass Ihre App denselben Pfad überwacht, der im Abschnitt **path** von Ingress konfiguriert ist. Wenn Ihre App so eingerichtet ist, dass sie den Rootpfad überwacht, schließen Sie **/** als Ihren Pfad ein.
 5.  Prüfen Sie Ihre Ingress-Bereitstellung und suchen Sie nach potenziellen Fehlernachrichten.
 
@@ -818,7 +823,7 @@ Gehen Sie wie folgt vor, um Fehler in Ingress zu beheben:
     2.  Rufen Sie die Protokolle für jeden Ingress-Pod ab.
 
       ```
-      kubectl logs <ingress-pod-id> -n kube-system
+      kubectl logs <ingress-pod-id> nginx-ingress -n kube-system
       ```
       {: pre}
 
@@ -877,7 +882,7 @@ Beim Auflisten von Informationen zum geheimen Schlüssel der Lastausgleichsfunkt
 {: #cs_calico_fails}
 
 {: tsSymptoms}
-Wenn Sie den Wert für `<ETCD_URL>` abrufen, um [Netzrichtlinien hinzuzufügen](cs_network_policy.html#adding_network_policies), dann gibt das System die Fehlernachricht `calico-config nicht gefunden` aus.
+Wenn Sie die `<ETCD_URL>` abrufen, um [Netzrichtlinien hinzuzufügen](cs_network_policy.html#adding_network_policies), dann gibt das System die Fehlernachricht `calico-config nicht gefunden` aus.
 
 {: tsCauses}
 Ihr Cluster verfügt nicht über [Kubernetes Version 1.7](cs_versions.html) oder höher.
@@ -919,12 +924,14 @@ Erste Schritte bei der Fehlerbehebung für einen Container
 gestoßen sind. Versehen Sie Ihre Fragen in den Foren mit Tags, um sie für das Entwicklungsteam
 von {{site.data.keyword.Bluemix_notm}} erkennbar zu machen.
 
-    -   Posten Sie technische Fragen zur Entwicklung oder Bereitstellung von Clustern oder Apps mit {{site.data.keyword.containershort_notm}} haben, veröffentlichen Sie Ihre Frage auf [Stack Overflow ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link icon")](http://stackoverflow.com/search?q=bluemix+containers) und versehen Sie sie mit den Tags `ibm-bluemix`, `kubernetes` und `containers`.
-    -   Verwenden Sie für Fragen zum Service und zu ersten Schritten das Forum [IBM developerWorks dW Answers ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Geben Sie die Tags `bluemix`
-und `containers` an.
+    -   Wenn Sie technische Fragen zur Entwicklung oder Bereitstellung von Clustern oder Apps mit {{site.data.keyword.containershort_notm}} haben, veröffentlichen Sie Ihre Frage auf [Stack Overflow ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) und versehen Sie sie mit den Tags `ibm-cloud`, `kubernetes` und `containers`.
+    -   Verwenden Sie für Fragen zum Service und zu ersten Schritten das Forum [IBM developerWorks dW Answers ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Geben Sie die Tags `ibm-cloud` und `containers` an.
     Weitere Details zur Verwendung der Foren
-finden Sie unter [Hilfe anfordern](/docs/support/index.html#getting-help).
+finden Sie unter [Hilfe anfordern](/docs/get-support/howtogetsupport.html#using-avatar).
 
 -   Wenden Sie sich an den IBM Support. Informationen zum Öffnen eines IBM
 Support-Tickets oder zu Supportstufen und zu Prioritätsstufen von Tickets finden Sie unter
-[Support kontaktieren](/docs/support/index.html#contacting-support).
+[Support kontaktieren](/docs/get-support/howtogetsupport.html#getting-customer-support).
+
+{:tip}
+Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `bx cs clusters` aus, um Ihre Cluster-ID abzurufen.

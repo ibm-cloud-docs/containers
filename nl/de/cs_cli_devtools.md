@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-01-02"
+lastupdated: "2017-01-24"
 
 ---
 
@@ -25,7 +25,7 @@ Verwenden Sie diese Befehle, um Cluster zu erstellen und zu verwalten.
 **Tipp:** Suchen Sie nach `bx cr`-Befehlen? Werfen Sie einen Blick in die [{{site.data.keyword.registryshort_notm}}-CLI-Referenz ](/docs/cli/plugins/registry/index.html). Suchen Sie nach `kubectl`-Befehlen? Werfen Sie einen Blick in die [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).
 
 
-<!--[https://github.ibm.com/alchemy-containers/armada-cli ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.ibm.com/alchemy-containers/armada-cli)-->
+
 
 <table summary="Befehle zum Erstellen von Clustern in {{site.data.keyword.Bluemix_notm}}">
  <thead>
@@ -337,7 +337,7 @@ Erstellung eines Clusters in Ihrer Organisation.
 <dl>
 <dt><code>--file <em>DATEISTANDORT</em></code></dt>
 
-<dd>Der Pfad zur YAML-Datei für die Erstellung Ihres Standardclusters. Statt die Merkmale Ihres Clusters mithilfe der in diesem Befehl bereitgestellten Optionen zu definieren, können Sie eine YAML-Datei verwenden.  Dieser Wert ist für Standardcluster optional und steht für Lite-Cluster nicht zur Verfügung.
+<dd>Der Pfad zur YAML-Datei für die Erstellung Ihres Standardclusters. Statt die Merkmale Ihres Clusters mithilfe der in diesem Befehl bereitgestellten Optionen zu definieren, können Sie eine YAML-Datei verwenden. Dieser Wert ist für Standardcluster optional und steht für kostenlose Cluster nicht zur Verfügung.
 
 <p><strong>Hinweis:</strong> Wenn Sie dieselbe Option wie im Befehl als Parameter in der YAML-Datei bereitstellen, hat der Wert im Befehl Vorrang vor dem Wert in der YAML. Beispiel: Sie definieren eine Position in Ihrer YAML-Datei und verwenden die Option <code>--location</code> im Befehl. Der Wert, den Sie in die Befehlsoption eingegeben haben, überschreibt den Wert in der YAML-Datei.
 
@@ -403,10 +403,10 @@ kube-version: <em>&lt;kube-version&gt;</em>
     </p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
-<dd>Der Grad an Hardware-Isolation für Ihren Workerknoten. Verwenden Sie 'dedicated', wenn Sie verfügbare physische Ressourcen haben möchten, die nur Sie nutzen können, oder 'shared', um zuzulassen, dass physische Ressourcen mit anderen IBM Kunden gemeinsam genutzt werden können. Die Standardeinstellung ist 'shared'.  Dieser Wert ist für Standardcluster optional und steht für Lite-Cluster nicht zur Verfügung.</dd>
+<dd>Der Grad an Hardware-Isolation für Ihren Workerknoten. Verwenden Sie 'dedicated', wenn Sie verfügbare physische Ressourcen haben möchten, die nur Sie nutzen können, oder 'shared', um zuzulassen, dass physische Ressourcen mit anderen IBM Kunden gemeinsam genutzt werden können. Die Standardeinstellung ist 'shared'. Dieser Wert ist für Standardcluster optional und steht für kostenlose Cluster nicht zur Verfügung.</dd>
 
 <dt><code>--location <em>STANDORT</em></code></dt>
-<dd>Der Standort, an dem Sie den Cluster erstellen möchten. Welche Standorte Ihnen zur Verfügung stehen, hängt von der {{site.data.keyword.Bluemix_notm}}-Region ab, bei der Sie angemeldet sind. Wählen Sie die Region aus, die Ihrem Standort am nächsten ist, um eine optimale Leistung zu erhalten.  Dieser Wert ist für Standardcluster erforderlich und für Lite-Cluster optional.
+<dd>Der Standort, an dem Sie den Cluster erstellen möchten. Welche Standorte Ihnen zur Verfügung stehen, hängt von der {{site.data.keyword.Bluemix_notm}}-Region ab, bei der Sie angemeldet sind. Wählen Sie die Region aus, die Ihrem Standort am nächsten ist, um eine optimale Leistung zu erhalten. Dieser Wert ist für Standardcluster erforderlich und für kostenlose Cluster optional.
 
 <p>Überprüfen Sie die [verfügbaren Standorte](cs_regions.html#locations).
 </p>
@@ -415,7 +415,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 </dd>
 
 <dt><code>--machine-type <em>MASCHINENTYP</em></code></dt>
-<dd>Der Maschinentyp, den Sie auswählen, wirkt sich auf die Menge an Hauptspeicher und Plattenspeicher aus, die den in Ihrem Workerknoten bereitgestellten Containern zur Verfügung steht. Führen Sie [bx cs machine-types <em>STANDORT</em>](#cs_machine_types) aus, um verfügbare Maschinentypen aufzulisten.  Dieser Wert ist für Standardcluster erforderlich und steht für Lite-Cluster nicht zur Verfügung.</dd>
+<dd>Der Maschinentyp, den Sie auswählen, wirkt sich auf die Menge an Hauptspeicher und Plattenspeicher aus, die den in Ihrem Workerknoten bereitgestellten Containern zur Verfügung steht. Führen Sie [bx cs machine-types <em>STANDORT</em>](#cs_machine_types) aus, um verfügbare Maschinentypen aufzulisten. Dieser Wert ist für Standardcluster erforderlich und steht für kostenlose Cluster nicht zur Verfügung.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
 <dd>Der Name für den Cluster.  Dieser Wert ist erforderlich.</dd>
@@ -430,7 +430,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <dd>
 
 <ul>
-<li>Dieser Parameter ist für Lite-Cluster nicht verfügbar.</li>
+<li>Dieser Parameter ist für kostenlose Cluster nicht verfügbar.</li>
 <li>Wenn dieser Standardcluster der erste Standardcluster ist, den Sie an diesem Standort erstellen, schließen Sie dieses Flag nicht ein. Ein privates VLAN wird zusammen mit den Clustern für Sie erstellt.</li>
 <li>Wenn Sie bereits einen Standardcluster an diesem Standort oder ein privates VLAN in IBM Cloud Infrastructure (SoftLayer) erstellt haben, müssen Sie dieses private VLAN angeben.
 
@@ -442,7 +442,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <dt><code>--public-vlan <em>ÖFFENTLICHES_VLAN</em></code></dt>
 <dd>
 <ul>
-<li>Dieser Parameter ist für Lite-Cluster nicht verfügbar.</li>
+<li>Dieser Parameter ist für kostenlose Cluster nicht verfügbar.</li>
 <li>Wenn dieser Standardcluster der erste Standardcluster ist, den Sie an diesem Standort erstellen, verwenden Sie dieses Flag nicht. Ein öffentliches VLAN wird zusammen mit dem Cluster für Sie erstellt.</li>
 <li>Wenn Sie bereits einen Standardcluster an diesem Standort oder ein öffentliches VLAN in IBM Cloud Infrastructure (SoftLayer) erstellt haben, müssen Sie dieses öffentliche VLAN angeben.
 
@@ -452,7 +452,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <p>Führen Sie <code>bx cs vlans <em>&lt;standort&gt;</em></code> aus, um herauszufinden, ob Sie bereits über ein öffentliches VLAN für einen bestimmten Standort verfügen, oder um den Namen eines vorhandenen öffentlichen VLANs zu erfahren.</p></dd>
 
 <dt><code>--workers WORKER</code></dt>
-<dd>Die Anzahl von Workerknoten, die Sie in Ihrem Cluster bereitstellen wollen. Wenn Sie diese Option nicht angeben, wird ein Cluster mit einem Workerknoten erstellt. Dieser Wert ist für Standardcluster optional und steht für Lite-Cluster nicht zur Verfügung.
+<dd>Die Anzahl von Workerknoten, die Sie in Ihrem Cluster bereitstellen wollen. Wenn Sie diese Option nicht angeben, wird ein Cluster mit einem Workerknoten erstellt. Dieser Wert ist für Standardcluster optional und steht für kostenlose Cluster nicht zur Verfügung.
 
 <p><strong>Hinweis:</strong> Jedem Workerknoten werden eine eindeutige Workerknoten-ID und ein Domänenname zugeordnet, die nach dem Erstellen des Clusters nicht manuell geändert werden dürfen. Wenn die ID oder der Domänenname geändert wird, kann der Kubernetes-Master Ihren Cluster nicht mehr verwalten.</p></dd>
 
@@ -472,7 +472,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
   ```
   {: pre}
 
-  Beispiel eines Lite-Clusters:
+  Beispiel für einen kostenlosen Cluster:
 
   ```
   bx cs cluster-create --name mein_cluster

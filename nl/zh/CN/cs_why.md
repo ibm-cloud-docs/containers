@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-01-30"
 
 ---
 
@@ -21,35 +21,33 @@ lastupdated: "2018-01-11"
 {{site.data.keyword.containershort}} 通过组合 Docker 和 Kubernetes 技术、直观的用户体验以及内置安全性和隔离，提供功能强大的工具来自动对计算主机集群中的容器化应用程序进行部署、操作、扩展和监视。
 {:shortdesc}
 
-## 使用集群的优点
+## 使用服务的优点
 {: #benefits}
 
-集群会部署在提供本机 Kubernetes 和 {{site.data.keyword.IBM_notm}} 所添加功能的计算主机上。
+集群会部署在提供本机 Kubernetes 和特定于 {{site.data.keyword.IBM_notm}} 的功能的计算主机上。
 {:shortdesc}
 
 |优点|描述|
 |-------|-----------|
-|隔离了计算、网络和存储基础架构的单租户 Kubernetes 集群|<ul><li>创建自己的定制基础架构，以满足组织的需求。</li><li>使用 IBM Cloud infrastructure (SoftLayer) 提供的资源来供应专用而安全的 Kubernetes 主节点、工作程序节点、虚拟网络和存储器。</li><li>存储持久数据，在 Kubernetes pod 之间共享数据，以及在需要时使用集成和安全卷服务复原数据。</li><li>由 {{site.data.keyword.IBM_notm}} 持续监视和更新的完全受管 Kubernetes 主节点，使您的集群可用。</li><li>受益于对所有本机 Kubernetes API 的完全支持。</li></ul>|
+|隔离了计算、网络和存储基础架构的单租户 Kubernetes 集群|<ul><li>创建自己的定制基础架构，以满足组织的需求。</li><li>使用 IBM Cloud infrastructure (SoftLayer) 提供的资源来供应专用而安全的 Kubernetes 主节点、工作程序节点、虚拟网络和存储器。</li><li>由 {{site.data.keyword.IBM_notm}} 持续监视和更新的完全受管 Kubernetes 主节点，使您的集群可用。</li><li>存储持久数据，在 Kubernetes pod 之间共享数据，以及在需要时使用集成和安全卷服务复原数据。</li><li>受益于对所有本机 Kubernetes API 的完全支持。</li></ul>|
 |使用漏洞顾问程序确保映像安全合规性|<ul><li>设置自己的安全 Docker 专用映像注册表，映像会存储在该注册表中，并供组织中的所有用户共享。</li><li>受益于自动扫描专用 {{site.data.keyword.Bluemix_notm}} 注册表中的映像。</li><li>查看特定于映像中所用操作系统的建议，以修复潜在漏洞。</li></ul>|
-|自动扩展应用程序|<ul><li>定义定制策略，以基于 CPU 和内存使用量来向上和向下扩展应用程序。</li></ul>|
 |持续监视集群运行状况|<ul><li>使用集群仪表板可快速查看和管理集群、工作程序节点和容器部署的运行状况。</li><li>使用 {{site.data.keyword.monitoringlong}}，找到详细的使用量度量值，并快速扩展集群以满足工作负载需求。</li><li>使用 {{site.data.keyword.loganalysislong}} 复查日志记录信息，以查看详细的集群活动。</li></ul>|
-|自动恢复运行状况欠佳的容器|<ul><li>对部署在工作程序节点上的容器持续执行运行状况检查。</li><li>在容器发生故障时，自动重新创建容器。</li></ul>|
-|服务发现和服务管理|<ul><li>集中注册应用程序服务可使这些服务可供集群中的其他应用程序使用，而不必将其公共公开。</li><li>发现注册的服务，而无需跟踪变化的 IP 地址或容器标识，并且受益于自动路由到可用实例。</li></ul>|
-|安全地向公众公开服务|<ul><li>具有完全负载均衡器和 Ingress 支持的专用覆盖网络，可使应用程序公共可用，并跨多个工作程序节点均衡工作负载，而无需跟踪集群内变化的 IP 地址。</li><li>在公共 IP 地址、{{site.data.keyword.IBM_notm}} 提供的路径或自己的定制域之间进行选择，以通过因特网访问集群中的服务。</li></ul>|
-|{{site.data.keyword.Bluemix_notm}} 服务集成|<ul><li>通过集成 {{site.data.keyword.Bluemix_notm}} 服务（例如，Watson API、Blockchain、数据服务或 Internet of Things）向应用程序添加额外的功能，并帮助集群用户简化应用程序开发和容器管理过程。</li></ul>|
+|安全地向公众公开应用程序|<ul><li>在公共 IP 地址、{{site.data.keyword.IBM_notm}} 提供的路径或自己的定制域之间进行选择，以通过因特网访问集群中的服务。</li></ul>|
+|{{site.data.keyword.Bluemix_notm}} 服务集成|<ul><li>通过集成 {{site.data.keyword.Bluemix_notm}} 服务（例如，Watson API、Blockchain、数据服务或 Internet of Things）向应用程序添加额外的功能。</li></ul>|
+
+
 
 <br />
 
 
-## 比较 Lite 和标准集群
+## 比较免费和标准集群
 {: #cluster_types}
 
-可以创建 Lite 或标准集群。试用 Lite 集群以熟悉和测试一些 Kubernetes 功能，或者创建标准集群以使用完整的 Kubernetes 功能来部署应用程序。
+您可以创建一个免费集群或创建任意数量的标准集群。试用免费集群以熟悉和测试一些 Kubernetes 功能，或者创建标准集群以使用完整的 Kubernetes 功能来部署应用程序。
 {:shortdesc}
 
-|特征|Lite 集群|标准集群|
+|特征|免费集群|标准集群|
 |---------------|-------------|-----------------|
-|[在 {{site.data.keyword.Bluemix_notm}} 中可用](cs_why.html)|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |[集群内联网](cs_secure.html#in_cluster_network)|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |[NodePort 服务对公用网络应用程序的访问权](cs_network_planning.html#nodeport)|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |[用户访问管理](cs_users.html#managing)|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
@@ -91,8 +89,8 @@ lastupdated: "2018-01-11"
 - [在 IBM Cloud infrastructure (SoftLayer) 中创建公用和专用 VLAN 以针对集群进行网络隔离](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
 - [确保所有工作程序节点都具有到 Kibernetes 主节点 URL 的网络连接](cs_firewall.html#firewall)<p>**注**：如果工作程序节点同时具有公用和专用 VLAN，那么已配置网络连接。如果工作程序节点仅设置了专用 VLAN，那么需要 Vyatta 来提供网络连接。</p>
 - [Kubernetes 主版本或次版本更新可用时，更新 kube-apiserver 主节点和工作程序节点](cs_cluster_update.html#master)
-- [通过运行 `kubectl` 命令（如 `cordon` 或 `drain`）以及运行 `bx cs` 命令（如 `reboot`、`reload` 或 `delete`](cs_cli_reference.html#cs_worker_reboot)）采取操作来恢复故障工作程序节点。
-- [根据需要在 IBM Cloud infrastructure (SoftLayer) 中添加或除去其他子网](cs_subnets.html#subnets)
+- [通过运行 `kubectl` 命令（如 `cordon` 或 `drain`）以及运行 `bx cs` 命令（如 `reboot`、`reload` 或 `delete`](cs_cli_reference.html#cs_worker_reboot)）来恢复有故障的工作程序节点。
+- [根据需要在 IBM Cloud infrastructure (SoftLayer) 中添加或除去子网](cs_subnets.html#subnets)
 - [在 IBM Cloud infrastructure (SoftLayer) 中备份和复原持久性存储器中的数据 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](../services/RegistryImages/ibm-backup-restore/index.html)
 
 <br />

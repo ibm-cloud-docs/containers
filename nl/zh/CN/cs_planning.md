@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-10"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -15,10 +15,10 @@ lastupdated: "2018-01-10"
 {:tip: .tip}
 {:download: .download}
 
-# 此页面已移动！
+# 您查找的内容已移动
 
-请在此查找规划主题：
- - [比较 Lite 和标准集群](cs_why.html#cluster_types)
+请在其新位置查看最新信息：
+ - [比较免费和标准集群](cs_why.html#cluster_types)
  - [集群配置](cs_clusters.html#planning_clusters)
  - [工作程序节点配置](cs_clusters.html#planning_worker_nodes)
  - [集群管理责任](cs_why.html#responsibilities)

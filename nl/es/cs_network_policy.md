@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -87,12 +87,13 @@ Las políticas predeterminadas no se aplican directamente a los pods; se aplican
 ## Adición de políticas de red
 {: #adding_network_policies}
 
-En la mayoría de los casos, no es necesario modificar las políticas predeterminadas. Sólo en escenarios avanzados se pueden requerir cambios. Si debe realizar cambios, instale la CLI de Calico y cree sus propias políticas de red. {:shortdesc}
+En la mayoría de los casos, no es necesario modificar las políticas predeterminadas. Sólo en escenarios avanzados se pueden requerir cambios. Si debe realizar cambios, instale la CLI de Calico y cree sus propias políticas de red.
+{:shortdesc}
 
 Antes de empezar:
 
 1.  [Instale las CLI de {{site.data.keyword.containershort_notm}} y de Kubernetes.](cs_cli_install.html#cs_cli_install)
-2.  [Cree un clúster lite o estándar.](cs_clusters.html#clusters_ui)
+2.  [Cree un clúster gratuito o estándar.](cs_clusters.html#clusters_ui)
 3.  [Defina el clúster como destino de la CLI de Kubernetes](cs_cli_install.html#cs_cli_configure). Incluya la opción `--admin` con el mandato `bx cs cluster-config`, que se utiliza para descargar los certificados y los archivos de permiso. Esta descarga también incluye las claves para el rol de superusuario, que necesita para ejecutar mandatos Calico.
 
   ```
@@ -138,6 +139,8 @@ X:
         calicoctl version
         ```
         {: pre}
+
+    4.  Si las políticas de red corporativas impiden el acceso desde el sistema local a los puntos finales públicos mediante proxies o cortafuegos, consulte [Ejecución de mandatos `calicoctl` desde detrás de un cortafuegos](cs_firewall.html#firewall) para obtener instrucciones sobre cómo permitir el acceso TCP para los mandatos Calico.
 
 2.  Configure la CLI de Calico.
 

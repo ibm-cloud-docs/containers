@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-01"
+lastupdated: "2018-01-29"
 
 ---
 
@@ -35,7 +35,7 @@ Esta tarea incluye la información para instalar estas CLI y plug-ins:
 
 -   {{site.data.keyword.Bluemix_notm}} CLI versión 0.5.0 o posterior
 -   Plug-in de {{site.data.keyword.containershort_notm}}
--   CLI de Kubernetes versión 1.7.4 o posterior
+-   CLI de Kubernetes versión 1.8.6 o posterior
 -   Opcional: plug-in {{site.data.keyword.registryshort_notm}}
 -   Opcional: Docker versión 1.9 o posterior
 
@@ -73,13 +73,13 @@ la sesión en la CLI de {{site.data.keyword.Bluemix_notm}}. Especifique su nombr
 
 4.  Para ver una versión local del panel de control Kubernetes y desplegar apps en los clústeres, [instale la CLI de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). El prefijo para ejecutar mandatos utilizando la CLI de Kubernetes es `kubectl`.
 
-    1.  Para disponer de compatibilidad funcional completa, descargue la versión de la CLI de Kubernetes que coincida con la versión del clúster Kubernetes que piensa utilizar. La versión de Kubernetes predeterminada actual de {{site.data.keyword.containershort_notm}} es la 1.7.4.
+    1.  Para disponer de compatibilidad funcional completa, descargue la versión de la CLI de Kubernetes que coincida con la versión del clúster Kubernetes que piensa utilizar. La versión de Kubernetes predeterminada actual de {{site.data.keyword.containershort_notm}} es la 1.8.6.
 
-        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
+        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
 
-        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
+        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
 
-        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
+        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
 
         **Sugerencia:** Si utiliza Windows, instale la CLI de Kubernetes en el mismo directorio que la CLI de {{site.data.keyword.Bluemix_notm}}. Esta configuración le ahorra algunos cambios en filepath cuando ejecute mandatos posteriormente.
 
@@ -128,7 +128,7 @@ la sesión en la CLI de {{site.data.keyword.Bluemix_notm}}. Especifique su nombr
 
     El plug-in se muestra en los resultados como registro de contenedor.
 
-6.  Para crear imágenes localmente y enviarlas por push al espacio de nombres del registro, [instale Docker ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.docker.com/community-edition#/download). Si está utilizando Windows 8 o anterior, puede instalar [Docker Toolbox ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.docker.com/products/docker-toolbox) en su lugar. La CLI de Docker se utiliza para crear apps en imágenes. El prefijo para ejecutar mandatos utilizando la CLI de Docker es `docker`.
+6.  Para crear imágenes localmente y enviarlas por push al espacio de nombres del registro, [instale Docker ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.docker.com/community-edition#/download). Si está utilizando Windows 8 o anterior, puede instalar [Docker Toolbox ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.docker.com/toolbox/toolbox_install_windows/) en su lugar. La CLI de Docker se utiliza para crear apps en imágenes. El prefijo para ejecutar mandatos utilizando la CLI de Docker es `docker`.
 
 A continuación, empiece a [crear clústeres de Kubernetes desde la CLI con {{site.data.keyword.containershort_notm}}](cs_clusters.html#clusters_cli).
 
@@ -145,7 +145,7 @@ Para obtener información acerca de estas CLI, consulte la documentación de dic
 ## Configuración de la CLI para que ejecute mandatos `kubectl`
 {: #cs_cli_configure}
 
-Puede utilizar los mandatos que se proporcionan con la CLI de Kubernetes para gestionar clústeres en {{site.data.keyword.Bluemix_notm}}. Todos los mandatos `kubectl` que están disponibles en Kubernetes 1.7.4 se pueden utilizar con clústeres en {{site.data.keyword.Bluemix_notm}}. Después de crear un clúster, establezca el contexto de la CLI local para dicho clúster con una variable de entorno. A continuación, puede ejecutar el mandato de Kubernetes `kubectl` para trabajar con el clúster en {{site.data.keyword.Bluemix_notm}}.
+Puede utilizar los mandatos que se proporcionan con la CLI de Kubernetes para gestionar clústeres en {{site.data.keyword.Bluemix_notm}}. Todos los mandatos `kubectl` que están disponibles en Kubernetes 1.8.6 se pueden utilizar con clústeres en {{site.data.keyword.Bluemix_notm}}. Después de crear un clúster, establezca el contexto de la CLI local para dicho clúster con una variable de entorno. A continuación, puede ejecutar el mandato de Kubernetes `kubectl` para trabajar con el clúster en {{site.data.keyword.Bluemix_notm}}.
 {:shortdesc}
 
 Para poder ejecutar mandatos `kubectl`, [instale las CLI necesarias](#cs_cli_install) y [cree un clúster](cs_clusters.html#clusters_cli).
@@ -218,8 +218,8 @@ Kubernetes local como variable de entorno.
       Salida de ejemplo:
 
       ```
-      Client Version: v1.7.4
-      Server Version: v1.7.4
+      Client Version: v1.8.6
+      Server Version: v1.8.6
       ```
       {: screen}
 
@@ -241,7 +241,7 @@ Esta tarea incluye la información para actualizar estas CLI.
 
 -   {{site.data.keyword.Bluemix_notm}} CLI versión 0.5.0 o posterior
 -   Plug-in de {{site.data.keyword.containershort_notm}}
--   CLI de Kubernetes versión 1.7.4 o posterior
+-   CLI de Kubernetes versión 1.8.6 o posterior
 -   Plug-in de {{site.data.keyword.registryshort_notm}}
 -   Docker versión 1.9. o posterior
 
@@ -287,13 +287,13 @@ y compruebe la lista de plug-ins instalados.
         {: pre}
 
 4.  Actualice la CLI de Kubernetes.
-    1.  Actualice la versión de la CLI de Kubernetes que coincida con la versión del clúster Kubernetes que piensa utilizar. La versión de Kubernetes predeterminada actual de {{site.data.keyword.containershort_notm}} es la 1.7.4.
+    1.  Actualice la versión de la CLI de Kubernetes que coincida con la versión del clúster Kubernetes que piensa utilizar. La versión de Kubernetes predeterminada actual de {{site.data.keyword.containershort_notm}} es la 1.8.6.
 
-        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
+        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
 
-        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
+        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
 
-        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
+        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
 
         **Sugerencia:** Si utiliza Windows, instale la CLI de Kubernetes en el mismo directorio que la CLI de {{site.data.keyword.Bluemix_notm}}. Esta configuración le ahorra algunos cambios en filepath cuando ejecute mandatos posteriormente.
 
@@ -346,7 +346,7 @@ y compruebe la lista de plug-ins instalados.
 
 6.  Actualice Docker.
     -   Si utiliza Docker Community Edition, inicie Docker, pulse el icono **Docker** y pulse **Comprobar si hay actualizaciones**.
-    -   Si está utilizando Docker Toolbox, descargue la [versión más reciente ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.docker.com/products/docker-toolbox) y ejecute el instalador.
+    -   Si está utilizando Docker Toolbox, descargue la [versión más reciente ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.docker.com/toolbox/toolbox_install_windows/) y ejecute el instalador.
 
 <br />
 
@@ -361,7 +361,7 @@ Esta tarea incluye la información para eliminar estas CLI:
 
 
 -   Plug-in de {{site.data.keyword.containershort_notm}}
--   CLI de Kubernetes versión 1.7.4 o posterior
+-   CLI de Kubernetes versión 1.8.6 o posterior
 -   Plug-in de {{site.data.keyword.registryshort_notm}}
 -   Docker versión 1.9. o posterior
 
@@ -399,7 +399,7 @@ Para desinstalar las CLI:
 
     - [OSX ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.docker.com/docker-for-mac/#uninstall-or-reset)
     - [Linux ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#uninstall-docker-ce)
-    - [Windows ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.docker.com/toolbox/toolbox_install_mac/#how-to-uninstall-toolbox)
+    - [Windows ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.docker.com/toolbox/toolbox_install_windows/#how-to-uninstall-toolbox)
 
 <br />
 

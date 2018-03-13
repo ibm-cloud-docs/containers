@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-05"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-01-05"
 
 [{{site.data.keyword.Bluemix_notm}} 区域](#bluemix_regions)与 [{{site.data.keyword.containershort_notm}} 区域](#container_regions)不同。
 
-![{{site.data.keyword.containershort_notm}} 区域和数据中心](/images/regions.png)
+![{{site.data.keyword.containershort_notm}} 区域和数据中心](images/regions.png)
 
 图 1. {{site.data.keyword.containershort_notm}} 区域和数据中心
 
@@ -46,7 +46,7 @@ lastupdated: "2018-01-05"
 
 可以通过在登录时指定 API 端点来访问 {{site.data.keyword.Bluemix_notm}} 区域。如果未指定区域，那么您会自动登录到离您最近的区域。
 
-使用示例登录命令的 {{site.data.keyword.Bluemix_notm}} 区域 API 端点：
+使用示例 login 命令登录到 {{site.data.keyword.Bluemix_notm}} 区域 API 端点：
 
   * 美国南部和美国东部
       ```
@@ -109,14 +109,14 @@ lastupdated: "2018-01-05"
 
   | 区域| 位置| 城市|
   |--------|----------|------|
-  | 亚太地区北部| hkg02、sng01、tok02 | 香港、新加坡、东京|
+  | 亚太地区北部| hkg02、seo01、sng01、tok02 | 香港、首尔、新加坡和东京|
   | 亚太地区南部| mel01、syd01、syd04        | 墨尔本、悉尼|
   | 欧洲中部| ams03、fra02、mil01、par01| 阿姆斯特丹、法兰克福、米兰、巴黎|
   | 英国南部| lon02、lon04         | 伦敦|
-  | 美国东部| <ph class="mon">mon01、</ph>tor01、wdc06、wdc07        | <ph class="mon">蒙特利尔、</ph>多伦多、华盛顿|
-  | 美国南部| dal10、dal12、dal13      | 达拉斯 |
+  | 美国东部| mon01、tor01、wdc06、wdc07        | 蒙特利尔、多伦多、华盛顿|
+  | 美国南部| dal10、dal12、dal13、sao01        | 达拉斯、圣保罗|
 
-**注**：米兰 (mil01) 仅可用于 Lite 集群。
+**注**：米兰 (mil01) 仅可用于免费集群。
 
 ### 使用容器服务 API 命令
 {: #container_api}

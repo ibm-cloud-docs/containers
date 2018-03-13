@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-05"
+lastupdated: "2018-02-08"
 
 ---
 
@@ -18,26 +18,26 @@ lastupdated: "2018-01-05"
 # Versiones de Kubernetes para {{site.data.keyword.containerlong_notm}}
 {: #cs_versions}
 
-Revise las versiones de Kubernetes que están disponibles en {{site.data.keyword.containerlong}}.
+{{site.data.keyword.containerlong}} da soporte a varias versiones de Kubernetes simultáneamente: la versión más reciente, una versión predeterminada y una versión soportada, que normalmente es dos versiones anteriores a la última. La versión predeterminada puede ser la misma que la versión más reciente, y se utiliza al crear o actualizar un clúster, a menos que especifique otra versión.
 {:shortdesc}
 
-{{site.data.keyword.containershort_notm}} soporta varias versiones de Kubernetes. La versión predeterminada se utiliza al crear o actualizar un clúster, a menos que se especifica otra versión. Las versiones disponibles de Kubernetes son las siguientes:
-- 1.8.6
-- 1.7.4 (versión predeterminada)
-- 1.5.6
+Las versiones de Kubernetes actualmente soportadas son:
 
-Para comprobar la versión de la CLI de Kubernetes que ejecuta localmente o que el clúster ejecuta, ejecute el mandato siguiente y compruebe la versión.
+- Más reciente: 1.9.2
+- Predeterminada: 1.8.6
+- Soportada: 1.7.4
+
+Si está ejecutando clústeres en una versión de Kubernetes que no esté soportada actualmente, [revise las posibles repercusiones](#version_types) de las actualizaciones y, a continuación, [actualice su clúster](cs_cluster_update.html#update) inmediatamente para continuar recibiendo importantes actualizaciones de seguridad y soporte. Para comprobar la versión del servidor, ejecute el siguiente mandato.
 
 ```
-kubectl version  --short
+kubectl version  --short | grep -i server
 ```
 {: pre}
 
 Salida de ejemplo:
 
 ```
-Client Version: 1.7.4
-Server Version: 1.7.4
+Versión del servidor: 1.8.6
 ```
 {: screen}
 
@@ -57,16 +57,89 @@ Kubernetes proporciona estos tipos de actualización:
 De forma predeterminada, no se puede actualizar un maestro de Kubernetes con una antigüedad superior a dos versiones. Por ejemplo, si el maestro actual es de la versión 1.5 y desea actualizar a 1.8, primero se debe actualizar a la versión 1.7. Puede formar la actualización para continuar, pero actualizar a dos versiones anteriores puede provocar resultados imprevistos.
 {: tip}
 
-La siguiente información resume las actualizaciones que pueden tener un impacto probable sobre las apps desplegadas cuando se actualice un clúster a una nueva versión. Revise el [registro de cambios de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md) para ver una lista completa de los cambios en las versiones Kubernetes.
+La siguiente información resume las actualizaciones que pueden tener un impacto probable sobre las apps desplegadas cuando se actualice un clúster a una nueva versión desde la versión anterior. Revise el [registro de cambios de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md) para ver una lista completa de los cambios en las versiones Kubernetes.
 
 Para obtener más información sobre el proceso de actualización, consulte [Actualización de clústeres](cs_cluster_update.html#master) y [Actualización de nodos trabajadores](cs_cluster_update.html#worker_node).
 
-## Version 1.8
+## Versión 1.9
+{: #cs_v19}
+
+
+
+Revise los cambios que necesite hacer cuando actualice de la versión anterior de Kubernetes a 1.9.
+
+<br/>
+
+### Actualización antes de maestro
+{: #19_before}
+
+<table summary="Actualizaciones de Kubernetes para la versión 1.9">
+<caption>Cambios necesarios antes de actualizar el maestro a Kubernetes 1.9</caption>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API de admisión de Webhook</td>
+<td>La API de admisión, que se utiliza cuando el servidor de API llama a webhooks de control de admisión, se desplaza de <code>admission.v1alpha1</code> a <code>admission.v1beta1</code>. <em>Debe suprimir cualquier webhook existente antes de actualizar el clúster</em>, así como actualizar los archivos de configuración de webhook para utilizar la API más reciente. Este cambio no es compatible con versiones anteriores.</td>
+</tr>
+</tbody>
+</table>
+
+### Actualización después de maestro
+{: #19_after}
+
+<table summary="Actualizaciones de Kubernetes para la versión 1.9">
+<caption>Cambios necesarios después de actualizar el maestro a Kubernetes 1.9</caption>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Salida `kubectl`</td>
+<td>Ahora, cuando se utiliza el mandato `kubectl` para especificar `-o custom-columns` y no se encuentra la columna en el objeto, verá una salida de `<none>`.<br>
+Antes, la operación fallaba y se mostraba el mensaje de error `No se ha encontrado xxx`. Si sus scripts se basan en el comportamiento anterior, actualícelos.</td>
+</tr>
+<tr>
+<td>`kubectl patch`</td>
+<td>Ahora, si no se realizan cambios en el recurso al que se aplican parches, el mandato `kubectl patch` falla con `exit code 1`. Si sus scripts se basan en el comportamiento anterior, actualícelos.</td>
+</tr>
+<tr>
+<td>Permisos del panel de control de Kubernetes</td>
+<td>Los usuarios ahora tienen que iniciar sesión en el panel de control de Kubernetes con sus credenciales para ver los recursos del clúster. La autorización RBAC del panel de control de Kubernetes `ClusterRoleBinding` predeterminado se ha eliminado. Para obtener instrucciones, consulte [Inicio del panel de control de Kubernetes](cs_app.html#cli_dashboard).</td>
+</tr>
+<tr>
+<td>RBAC para `default` `ServiceAccount`</td>
+<td>Se ha eliminado el administrador `ClusterRoleBinding` para `default` `ServiceAccount` en el espacio de nombres `default`. Si sus aplicaciones se basan en esta política RBAC para acceder a la API de Kubernetes, [actualice sus políticas RBAC](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview).</td>
+</tr>
+<tr>
+<td>Corrupciones y tolerancias</td>
+<td>Las corrupciones `node.alpha.kubernetes.io/notReady` y `node.alpha.kubernetes.io/unreachable` se han cambiado a `node.kubernetes.io/not-ready` y `node.kubernetes.io/unreachable` respectivamente.<br>
+A pesar de que las corrupciones se actualizan automáticamente, deberá actualizar manualmente las tolerancias para dichas corrupciones. Para cada espacio de nombres excepto `ibm-system` y `kube-system`, determine si tiene que cambiar las tolerancias:<br>
+<ul><li><code>kubectl get pods -n &lt;namespace&gt; -o yaml | grep "node.alpha.kubernetes.io/notReady" && echo "Action required"</code></li><li>
+<code>kubectl get pods -n &lt;namespace&gt; -o yaml | grep "node.alpha.kubernetes.io/unreachable" && echo "Action required"</code></li></ul><br>
+Si se devuelve `Action required`, modifique las tolerancias de pod en consonancia.</td>
+</tr>
+<tr>
+<td>API de admisión de Webhook</td>
+<td>Si ha suprimido los webhooks existentes antes de actualizar el clúster, cree nuevos webhooks.</td>
+</tr>
+</tbody>
+</table>
+
+
+## Versión 1.8
 {: #cs_v18}
 
 <p><img src="images/certified_kubernetes_1x8.png" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" height="100" width="62.5" align="left" alt="Este identificador indica la certificación de Kubernetes versión 1.8 para IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} es un producto Kubernetes certificado para la versión 1.8 bajo el programa CNCF de certificación de conformidad de software Kubernetes. _Kubernetes® es una marca registrada de The Linux Foundation en Estados Unidos y en otros países, y se utiliza de acuerdo con una licencia de The Linux Foundation._</p>
 
-Revise los cambios que necesite hacer cuando actualice a Kubernetes versión 1.8.
+Revise los cambios que necesite hacer cuando actualice de la versión anterior de Kubernetes a 1.8.
 
 <br/>
 
@@ -110,7 +183,7 @@ Revise los cambios que necesite hacer cuando actualice a Kubernetes versión 1.8
 </tr>
 <tr>
 <td>`kubectl delete`</td>
-<td>El mandato `kubectl delete` ya no reduce los objetos de la API de carga de trabajo, como los pods, antes de suprimir el objeto. Si necesita reducir el objeto, utilice la [escala kubectl ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale) antes de suprimir el objeto. </td>
+<td>El mandato `kubectl delete` ya no reduce los objetos de la API de carga de trabajo, como los pods, antes de suprimir el objeto. Si necesita reducir el objeto, utilice la [escala kubectl ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale) antes de suprimir el objeto.</td>
 </tr>
 <tr>
 <td>`kubectl run`</td>
@@ -129,7 +202,7 @@ Revise los cambios que necesite hacer cuando actualice a Kubernetes versión 1.8
 
 <p><img src="images/certified_kubernetes_1x7.png" height="100" width="62.5" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" align="left" alt="Este identificador indica la certificación de Kubernetes versión 1.7 para IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} es un producto Kubernetes certificado para la versión 1.7 bajo el programa CNCF de certificación de conformidad de software Kubernetes.</p>
 
-Revise los cambios que necesite hacer cuando actualice a Kubernetes versión 1.7.
+Revise los cambios que necesite hacer cuando actualice de la versión anterior de Kubernetes a 1.7.
 
 <br/>
 
@@ -256,7 +329,7 @@ Revise los cambios que necesite hacer cuando actualice a Kubernetes versión 1.7
 </tr>
 <tr>
 <td>StatefulSet pod DNS</td>
-<td>Los StatefulSet pods pierden las entradas Kubernetes DNS correspondientes después de haber actualizado el maestro. Para restaurar las entradas DNS, suprima los StatefulSet pods. Kubernetes vuelve a crear los pods y restaura automáticamente las entradas DNS. Para más información, consulte el [Tema sobre Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/kubernetes/issues/48327).
+<td>Los pods StatefulSet pierden las entradas Kubernetes DNS correspondientes después de haber actualizado el maestro. Para restaurar las entradas DNS, suprima los pods StatefulSet. Kubernetes vuelve a crear los pods y restaura automáticamente las entradas DNS. Para más información, consulte el [Tema sobre Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/kubernetes/issues/48327).
 </tr>
 </tbody>
 </table>

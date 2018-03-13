@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-09"
+lastupdated: "2018-01-31"
 
 ---
 
@@ -55,30 +55,34 @@ lastupdated: "2018-01-09"
     <th>説明</th>
     </thead>
     <tbody>
+  
+  <tr>
+      <td>Critical</td>
+      <td>Kubernetes マスターにアクセスできないか、クラスター内のワーカー・ノードがすべてダウンしています。</td>
+     </tr>
+  
       <tr>
         <td>Deploying</td>
         <td>Kubernetes マスターがまだ完全にデプロイされていません。 クラスターにアクセスできません。</td>
        </tr>
        <tr>
-        <td>Pending</td>
-        <td>Kubernetes マスターはデプロイされています。 ワーカー・ノードはプロビジョン中であるため、まだクラスターでは使用できません。 クラスターにはアクセスできますが、アプリをクラスターにデプロイすることはできません。</td>
-      </tr>
-      <tr>
         <td>Normal</td>
         <td>クラスター内のすべてのワーカー・ノードが稼働中です。 クラスターにアクセスし、アプリをクラスターにデプロイできます。</td>
      </tr>
+       <tr>
+        <td>Pending</td>
+        <td>Kubernetes マスターはデプロイされています。 ワーカー・ノードはプロビジョン中であるため、まだクラスターでは使用できません。 クラスターにはアクセスできますが、アプリをクラスターにデプロイすることはできません。</td>
+      </tr>
+  
      <tr>
         <td>Warning</td>
         <td>クラスター内の 1 つ以上のワーカー・ノードが使用不可です。ただし、他のワーカー・ノードが使用可能であるため、ワークロードを引き継ぐことができます。</td>
-     </tr>
-     <tr>
-      <td>Critical</td>
-      <td>Kubernetes マスターにアクセスできないか、クラスター内のワーカー・ノードがすべてダウンしています。</td>
-     </tr>
+     </tr>  
     </tbody>
   </table>
 
-3.  クラスターが **Warning** 状態または **Critical** 状態の場合、あるいは **Pending** 状態が長時間続いている場合は、ワーカー・ノードの状態を確認してください。 クラスターが **Deploying** 状態の場合は、クラスターが完全にデプロイされるまで待ってからクラスターの正常性を確認してください。 **Normal** 状態のクラスターは、正常と見なされるので、この時点ではアクションは不要です。
+3.  クラスターが **Warning**、**Critical**、または **Delete failed** 状態の場合、あるいは **Pending** 状態が長時間続いている場合は、ワーカー・ノードの状態を確認してください。クラスターが **Deploying** 状態の場合は、クラスターが完全にデプロイされるまで待ってからクラスターの正常性を確認してください。 **Normal** 状態のクラスターは、この時点ではアクションは不要です。 
+<p>ワーカー・ノードの状態を確認するには、以下のようにします。</p>
 
   ```
   bx cs workers <cluster_name_or_id>
@@ -93,7 +97,7 @@ lastupdated: "2018-01-09"
     <tbody>
       <tr>
        <td>Unknown</td>
-       <td>次のいずれかの理由で、Kubernetes マスターにアクセスできません。<ul><li>Kubernetes マスターの更新を要求しました。 更新中は、ワーカー・ノードの状態を取得できません。</li><li>ワーカー・ノードを保護している追加のファイアウォールが存在するか、最近ファイアウォールの設定が変更された可能性があります。 {{site.data.keyword.containershort_notm}} では、ワーカー・ノードと Kubernetes マスター間で通信を行うには、特定の IP アドレスとポートが開いている必要があります。 詳しくは、[ファイアウォールがあるためにワーカー・ノードが接続しない](#cs_firewall)を参照してください。</li><li>Kubernetes マスターがダウンしています。 [{{site.data.keyword.Bluemix_notm}} サポート・チケット](/docs/support/index.html#contacting-support)を開いて、{{site.data.keyword.Bluemix_notm}} サポートに連絡してください。</li></ul></td>
+       <td>次のいずれかの理由で、Kubernetes マスターにアクセスできません。<ul><li>Kubernetes マスターの更新を要求しました。 更新中は、ワーカー・ノードの状態を取得できません。</li><li>ワーカー・ノードを保護している追加のファイアウォールが存在するか、最近ファイアウォールの設定が変更された可能性があります。 {{site.data.keyword.containershort_notm}} では、ワーカー・ノードと Kubernetes マスター間で通信を行うには、特定の IP アドレスとポートが開いている必要があります。 詳しくは、[ファイアウォールがあるためにワーカー・ノードが接続しない](#cs_firewall)を参照してください。</li><li>Kubernetes マスターがダウンしています。 [{{site.data.keyword.Bluemix_notm}} サポート・チケット](/docs/get-support/howtogetsupport.html#getting-customer-support)を開いて、{{site.data.keyword.Bluemix_notm}} サポートに連絡してください。</li></ul></td>
       </tr>
       <tr>
         <td>Provisioning</td>
@@ -143,11 +147,11 @@ lastupdated: "2018-01-09"
     <tbody>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Your account is currently prohibited from ordering 'Computing Instances'.</td>
-        <td>ご使用の IBM Cloud インフラストラクチャー (SoftLayer) アカウントは、コンピュート・リソースの注文を制限されている可能性があります。 [{{site.data.keyword.Bluemix_notm}} サポート・チケット](/docs/support/index.html#contacting-support)を開いて、{{site.data.keyword.Bluemix_notm}} サポートに連絡してください。</td>
+        <td>ご使用の IBM Cloud インフラストラクチャー (SoftLayer) アカウントは、コンピュート・リソースの注文を制限されている可能性があります。 [{{site.data.keyword.Bluemix_notm}} サポート・チケット](/docs/get-support/howtogetsupport.html#getting-customer-support)を開いて、{{site.data.keyword.Bluemix_notm}} サポートに連絡してください。</td>
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not place order. There are insufficient resources behind router 'router_name' to fulfill the request for the following guests: 'worker_id'.</td>
-        <td>選択した VLAN に関連付けられているデータ・センター内のポッドのスペースが不足しているため、ワーカー・ノードをプロビジョンできません。 以下の選択肢があります。<ul><li>別のデータ・センターを使用してワーカー・ノードをプロビジョンします。 使用可能なデータ・センターをリストするには、<code>bx cs locations</code> を実行します。<li>データ・センター内の別のポッドに関連付けられているパブリック VLAN とプライベート VLAN の既存のペアがある場合は、代わりにその VLAN ペアを使用します。<li>[{{site.data.keyword.Bluemix_notm}} サポート・チケット](/docs/support/index.html#contacting-support)を開いて、{{site.data.keyword.Bluemix_notm}} サポートに連絡してください。</ul></td>
+        <td>選択した VLAN に関連付けられているデータ・センター内のポッドのスペースが不足しているため、ワーカー・ノードをプロビジョンできません。 以下の選択肢があります。<ul><li>別のデータ・センターを使用してワーカー・ノードをプロビジョンします。 使用可能なデータ・センターをリストするには、<code>bx cs locations</code> を実行します。<li>データ・センター内の別のポッドに関連付けられているパブリック VLAN とプライベート VLAN の既存のペアがある場合は、代わりにその VLAN ペアを使用します。<li>[{{site.data.keyword.Bluemix_notm}} サポート・チケット](/docs/get-support/howtogetsupport.html#getting-customer-support)を開いて、{{site.data.keyword.Bluemix_notm}} サポートに連絡してください。</ul></td>
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not obtain network VLAN with id: &lt;vlan id&gt;.</td>
@@ -155,7 +159,7 @@ lastupdated: "2018-01-09"
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation: The location provided for this order is invalid. (HTTP 500)</td>
-        <td>ご使用の IBM Cloud インフラストラクチャー (SoftLayer) は、選択したデータ・センター内のコンピュート・リソースを注文するようにセットアップされていません。 [{{site.data.keyword.Bluemix_notm}} サポート](/docs/support/index.html#contacting-support)に問い合わせて、アカウントが正しくセットアップされているか確認してください。</td>
+        <td>ご使用の IBM Cloud インフラストラクチャー (SoftLayer) は、選択したデータ・センター内のコンピュート・リソースを注文するようにセットアップされていません。 [{{site.data.keyword.Bluemix_notm}} サポート](/docs/get-support/howtogetsupport.html#getting-customer-support)に問い合わせて、アカウントが正しくセットアップされているか確認してください。</td>
        </tr>
        <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: The user does not have the necessary {{site.data.keyword.Bluemix_notm}} Infrastructure permissions to add servers
@@ -572,11 +576,11 @@ Kibana ダッシュボードにアクセスするとき、ログが表示され�
  </tr>
  <tr>
  <td>ログ・ストレージの割り当て量に達している。</td>
- <td>ログ・ストレージの限度を増やす方法については、<a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs">{{site.data.keyword.loganalysislong_notm}} の資料</a>を参照してください。</td>
+ <td>ログ・ストレージの限度を増やす方法については、<a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html">{{site.data.keyword.loganalysislong_notm}} の資料</a>を参照してください。</td>
  </tr>
  <tr>
  <td>クラスター作成の際にスペースを指定した場合、アカウント所有者に、そのスペースに対する管理者、開発者、または監査員の権限がない。</td>
- <td>アカウント所有者のアクセス許可を変更するには、以下のようにします。<ol><li>クラスターのアカウント所有者を見つけるために、<code>bx cs api-key-info &lt;cluster_name_or_id&gt;</code> を実行します。</li><li>そのアカウント所有者にスペースに対する管理者、開発者、または監査員の {{site.data.keyword.containershort_notm}} アクセス許可を付与する方法については、<a href="cs_users.html#managing">クラスター・アクセス権限の管理</a>を参照してください。</li><li>許可が変更された後にロギング・トークンをリフレッシュするには、<code>bx cs logging-config-refresh &lt;cluster_name_or_id&gt;</code> を実行します。</li></ol></td>
+ <td>アカウント所有者のアクセス許可を変更するには、以下のようにします。<ol><li>クラスターのアカウント所有者を見つけるために、<code>bx cs api-key-info &lt;cluster_name_or_ID&gt;</code> を実行します。</li><li>そのアカウント所有者にスペースに対する管理者、開発者、または監査員の {{site.data.keyword.containershort_notm}} アクセス許可を付与する方法については、<a href="cs_users.html#managing">クラスター・アクセス権限の管理</a>を参照してください。</li><li>許可が変更された後にロギング・トークンをリフレッシュするには、<code>bx cs logging-config-refresh &lt;cluster_name_or_ID&gt;</code> を実行します。</li></ol></td>
  </tr>
  </tbody></table>
 
@@ -609,9 +613,10 @@ Kibana ダッシュボードにアクセスするとき、ログが表示され�
         {:pre}
 
   4. 数分後に、Kibana ダッシュボードにログが表示されます。 Kibana ダッシュボードにアクセスするには、以下のいずれかの URL にアクセスし、クラスターを作成した {{site.data.keyword.Bluemix_notm}} アカウントを選択します。 クラスター作成の際にスペースを指定した場合は、代わりにそのスペースに移動します。
-        - 米国南部および米国東部: https://logging.ng.bluemix.net
-        - 英国南部および中欧: https://logging.eu-fra.bluemix.net
-        - 南アジア太平洋地域: https://logging.au-syd.bluemix.net
+      - 米国南部および米国東部: https://logging.ng.bluemix.net
+      - 英国南部: https://logging.eu-gb.bluemix.net
+      - EU 中央: https://logging.eu-fra.bluemix.net
+      - 南アジア太平洋地域: https://logging.au-syd.bluemix.net
 
 <br />
 
@@ -647,7 +652,7 @@ Kubernetes ダッシュボードにアクセスするとき、使用状況グラ
 {: tsCauses}
 次のいずれかの理由で、ロード・バランサー・サービスが正しく機能していない可能性があります。
 
--   クラスターが、ライト・クラスターであるか、またはワーカー・ノードが 1 つしかない標準クラスターです。
+-   クラスターが、フリー・クラスターであるか、またはワーカー・ノードが 1 つしかない標準クラスターです。
 -   クラスターがまだ完全にデプロイされていません。
 -   ロード・バランサー・サービスの構成スクリプトにエラーが含まれています。
 
@@ -718,20 +723,20 @@ Kubernetes ダッシュボードにアクセスするとき、使用状況グラ
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
-クラスターでアプリ用の Ingress リソースを作成して、アプリをパブリックに公開しました。 Ingress コントローラーのパブリック IP アドレスまたはサブドメインを経由してアプリに接続しようとすると、接続に失敗するかタイムアウトになります。
+クラスターでアプリ用の Ingress リソースを作成して、アプリをパブリックに公開しました。 Ingress アプリケーション・ロード・バランサーのパブリック IP アドレスまたはサブドメインを経由してアプリに接続しようとすると、接続に失敗するかタイムアウトになります。
 
 {: tsCauses}
 次の理由で、Ingress が正しく機能していない可能性があります。
 <ul><ul>
 <li>クラスターがまだ完全にデプロイされていません。
-<li>クラスターが、ライト・クラスターとして、またはワーカー・ノードが 1 つしかない標準クラスターとしてセットアップされました。
+<li>クラスターが、フリー・クラスターとして、またはワーカー・ノードが 1 つしかない標準クラスターとしてセットアップされました。
 <li>Ingress 構成スクリプトにエラーがあります。
 </ul></ul>
 
 {: tsResolve}
 Ingress のトラブルシューティングを行うには、以下のようにします。
 
-1.  標準クラスターをセットアップしたこと、クラスターが完全にデプロイされていること、また、Ingress コントローラーの高可用性を確保するためにクラスターに 2 つ以上のワーカー・ノードがあることを確認します。
+1.  標準クラスターをセットアップしたこと、クラスターが完全にデプロイされていること、また、Ingress アプリケーション・ロード・バランサーの高可用性を確保するためにクラスターに 2 つ以上のワーカー・ノードがあることを確認します。
 
   ```
   bx cs workers <cluster_name_or_id>
@@ -740,7 +745,7 @@ Ingress のトラブルシューティングを行うには、以下のように
 
     CLI 出力で、ワーカー・ノードの **Status** に **Ready** と表示され、**Machine Type** に **free** 以外のマシン・タイプが表示されていることを確認します。
 
-2.  Ingress コントローラーのサブドメインとパブリック IP アドレスを取得し、それぞれを ping します。
+2.  Ingress アプリケーション・ロード・バランサーのサブドメインとパブリック IP アドレスを取得し、それぞれを ping します。
 
     1.  Ingress コントローラーのサブドメインを取得します。
 
@@ -749,33 +754,33 @@ Ingress のトラブルシューティングを行うには、以下のように
       ```
       {: pre}
 
-    2.  Ingress コントローラーのサブドメインを ping します。
+    2.  Ingress アプリケーション・ロード・バランサーのサブドメインを ping します。
 
       ```
       ping <ingress_controller_subdomain>
       ```
       {: pre}
 
-    3.  Ingress コントローラーのパブリック IP アドレスを取得します。
+    3.  Ingress アプリケーション・ロード・バランサーのパブリック IP アドレスを取得します。
 
       ```
       nslookup <ingress_controller_subdomain>
       ```
       {: pre}
 
-    4.  Ingress コントローラーのパブリック IP アドレスを ping します。
+    4.  Ingress アプリケーション・ロード・バランサーのパブリック IP アドレスを ping します。
 
       ```
       ping <ingress_controller_ip>
       ```
       {: pre}
 
-    Ingress コントローラーのパブリック IP アドレスまたはサブドメインで CLI からタイムアウトが返された場合は、カスタム・ファイアウォールをセットアップしてワーカー・ノードを保護しているのであれば、[ファイアウォール](#cs_firewall)で追加のポートとネットワーキング・グループを開く必要があります。
+    Ingress アプリケーション・ロード・バランサーのパブリック IP アドレスまたはサブドメインで CLI からタイムアウトが返された場合は、カスタム・ファイアウォールをセットアップしてワーカー・ノードを保護しているのであれば、[ファイアウォール](#cs_firewall)で追加のポートとネットワーキング・グループを開く必要があります。
 
-3.  カスタム・ドメインを使用している場合は、ドメイン・ネーム・サービス (DNS) プロバイダーで、カスタム・ドメインが IBM 提供の Ingress コントローラーのパブリック IP アドレスまたはサブドメインにマップされていることを確認します。
-    1.  Ingress コントローラーのサブドメインを使用した場合は、正規名レコード (CNAME) を確認します。
-    2.  Ingress コントローラーのパブリック IP アドレスを使用した場合は、カスタム・ドメインがポインター・レコード (PTR) でポータブル・パブリック IP アドレスにマップされていることを確認します。
-4.  Ingress 構成ファイルを確認します。
+3.  カスタム・ドメインを使用している場合は、ドメイン・ネーム・サービス (DNS) プロバイダーで、カスタム・ドメインが IBM 提供の Ingress アプリケーション・ロード・バランサーのパブリック IP アドレスまたはサブドメインにマップされていることを確認します。
+    1.  Ingress アプリケーション・ロード・バランサーのサブドメインを使用した場合は、正規名レコード (CNAME) を確認します。
+    2.  Ingress アプリケーション・ロード・バランサーのパブリック IP アドレスを使用した場合は、カスタム・ドメインがポインター・レコード (PTR) でポータブル・パブリック IP アドレスにマップされていることを確認します。
+4.  Ingress リソース構成ファイルを確認します。
 
     ```
     apiVersion: extensions/v1beta1
@@ -798,7 +803,7 @@ Ingress のトラブルシューティングを行うには、以下のように
     ```
     {: codeblock}
 
-    1.  Ingress コントローラーのサブドメインと TLS 証明書が正しいことを確認します。 IBM 提供のサブドメインと TLS 証明書を見つけるには、bx cs cluster-get <cluster_name_or_id> を実行します。
+    1.  Ingress アプリケーション・ロード・バランサーのサブドメインと TLS 証明書が正しいことを確認します。 IBM 提供のサブドメインと TLS 証明書を見つけるには、bx cs cluster-get <cluster_name_or_id> を実行します。
     2.  アプリが、Ingress の **path** セクションで構成されているパスを使用して listen していることを確認します。 アプリがルート・パスで listen するようにセットアップされている場合は、**/** をパスとして含めます。
 5.  Ingress デプロイメントを確認して、エラー・メッセージがないか探します。
 
@@ -818,7 +823,7 @@ Ingress のトラブルシューティングを行うには、以下のように
     2.  Ingress ポッドごとにログを取得します。
 
       ```
-      kubectl logs <ingress_pod_id> -n kube-system
+      kubectl logs <ingress_pod_id> nginx-ingress -n kube-system
       ```
       {: pre}
 
@@ -834,7 +839,7 @@ Ingress のトラブルシューティングを行うには、以下のように
 {: tsSymptoms}
 Ingress アプリケーション・ロード・バランサーのシークレットをクラスターにデプロイした後に、{{site.data.keyword.cloudcerts_full_notm}} 内の証明書を参照すると、`Description` フィールドがそのシークレット名で更新されていません。
 
-アプリケーション・ロード・バランサーのシークレットに関する情報をリストすると、状況は `*_failed` となっています。例えば、`create_failed`、`update_failed`、`delete_failed` などです。
+アプリケーション・ロード・バランサーのシークレットに関する情報をリストすると、状況は `*_failed` となっています。 例えば、`create_failed`、`update_failed`、`delete_failed` などです。
 
 {: tsResolve}
 以下に示されている、アプリケーション・ロード・バランサーのシークレットが失敗する場合の理由および対応するトラブルシューティング手順を確認してください。
@@ -849,7 +854,7 @@ Ingress アプリケーション・ロード・バランサーのシークレッ
  <tbody>
  <tr>
  <td>証明書データのダウンロードやアップデートに必要なアクセス役割を持っていない。</td>
- <td>アカウント管理者に問い合わせて、{{site.data.keyword.cloudcerts_full_notm}} インスタンスに対する**オペレーター**と**エディター**の両方の役割を割り当てるように依頼してください。詳しくは、{{site.data.keyword.cloudcerts_short}} の <a href="/docs/services/certificate-manager/about.html#identity-access-management">ID およびアクセス管理</a>を参照してください。</td>
+ <td>アカウント管理者に問い合わせて、{{site.data.keyword.cloudcerts_full_notm}} インスタンスに対する**オペレーター**と**エディター**の両方の役割を割り当てるように依頼してください。 詳しくは、{{site.data.keyword.cloudcerts_short}} の <a href="/docs/services/certificate-manager/about.html#identity-access-management">ID およびアクセス管理</a>を参照してください。</td>
  </tr>
  <tr>
  <td>作成時、更新時、または削除時に提供された証明書 CRN が、クラスターと同じアカウントに属していない。</td>
@@ -857,11 +862,11 @@ Ingress アプリケーション・ロード・バランサーのシークレッ
  </tr>
  <tr>
  <td>作成時に提供された証明書 CRN が正しくない。</td>
- <td><ol><li>提供した証明書 CRN ストリングが正確であることを確認します。</li><li>証明書 CRN が正確である場合は、シークレットの更新を試行します。<pre class="pre"><code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li><li>このコマンドの結果が <code>update_failed</code> 状況になる場合、シークレットを削除します。<pre class="pre"><code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt;</code></pre></li><li>シークレットを再デプロイします。<pre class="pre"><code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li></ol></td>
+ <td><ol><li>提供した証明書 CRN ストリングが正確であることを確認します。</li><li>証明書 CRN が正確である場合は、シークレットの更新を試行します。 <pre class="pre"><code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li><li>このコマンドの結果が <code>update_failed</code> 状況になる場合、シークレットを削除します。 <pre class="pre"><code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt;</code></pre></li><li>シークレットを再デプロイします。 <pre class="pre"><code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li></ol></td>
  </tr>
  <tr>
  <td>更新時に提供された証明書 CRN が正しくない。</td>
- <td><ol><li>提供した証明書 CRN ストリングが正確であることを確認します。</li><li>証明書 CRN が正確である場合は、シークレットの削除を試行します。<pre class="pre"><code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt;</code></pre></li><li>シークレットを再デプロイします。<pre class="pre"><code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li><li>シークレットの更新を試行します。<pre class="pre"><code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li></ol></td>
+ <td><ol><li>提供した証明書 CRN ストリングが正確であることを確認します。</li><li>証明書 CRN が正確である場合は、シークレットの削除を試行します。 <pre class="pre"><code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt;</code></pre></li><li>シークレットを再デプロイします。 <pre class="pre"><code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li><li>シークレットの更新を試行します。 <pre class="pre"><code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li></ol></td>
  </tr>
  <tr>
  <td>{{site.data.keyword.cloudcerts_long_notm}} サービスがダウンしている。</td>
@@ -917,8 +922,11 @@ Ingress アプリケーション・ロード・バランサーのシークレッ
 -   [{{site.data.keyword.containershort_notm}} Slack![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com) に質問を投稿します。 ヒント: {{site.data.keyword.Bluemix_notm}} アカウントに IBM ID を使用していない場合は、この Slack への[招待を要求](https://bxcs-slack-invite.mybluemix.net/)してください。
 -   フォーラムを確認して、同じ問題が他のユーザーで起こっているかどうかを調べます。 フォーラムを使用して質問するときは、{{site.data.keyword.Bluemix_notm}} 開発チームの目に止まるように、質問にタグを付けてください。
 
-    -   {{site.data.keyword.containershort_notm}} を使用したクラスターまたはアプリの開発やデプロイに関する技術的な質問がある場合は、[Stack Overflow![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](http://stackoverflow.com/search?q=bluemix+containers) に質問を投稿し、`ibm-bluemix`、`kubernetes`、`containers` のタグを付けてください。
-    -   サービスや概説の説明について質問がある場合は、[IBM developerWorks dW Answers ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) フォーラムを使用してください。 `bluemix` と `containers` のタグを含めてください。
-    フォーラムの使用について詳しくは、[ヘルプの取得](/docs/support/index.html#getting-help)を参照してください。
+    -   {{site.data.keyword.containershort_notm}} を使用したクラスターまたはアプリの開発やデプロイに関する技術的な質問がある場合は、[Stack Overflow![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) に質問を投稿し、`ibm-cloud`、`kubernetes`、`containers` のタグを付けてください。
+    -   サービスや概説の説明について質問がある場合は、[IBM developerWorks dW Answers ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) フォーラムを使用してください。 `ibm-cloud` と `containers` のタグを含めてください。
+    フォーラムの使用について詳しくは、[ヘルプの取得](/docs/get-support/howtogetsupport.html#using-avatar)を参照してください。
 
--   IBM サポートにお問い合わせください。 IBM サポート・チケットを開く方法や、サポート・レベルとチケットの重大度については、[サポートへのお問い合わせ](/docs/support/index.html#contacting-support)を参照してください。
+-   IBM サポートにお問い合わせください。 IBM サポート・チケットを開く方法や、サポート・レベルとチケットの重大度については、[サポートへのお問い合わせ](/docs/get-support/howtogetsupport.html#getting-customer-support)を参照してください。
+
+{:tip}
+問題を報告する際に、クラスター ID も報告してください。クラスター ID を取得するには、`bx cs clusters` を実行します。

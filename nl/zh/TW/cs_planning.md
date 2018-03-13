@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-10"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -15,10 +15,10 @@ lastupdated: "2018-01-10"
 {:tip: .tip}
 {:download: .download}
 
-# 此頁面已移動！
+# 您正在尋找的內容已遭移動
 
-尋找規劃主題：
- - [比較精簡與標準叢集](cs_why.html#cluster_types)
+請參閱新位置中最新的資訊：
+ - [比較免費與標準叢集](cs_why.html#cluster_types)
  - [叢集配置](cs_clusters.html#planning_clusters)
  - [工作者節點配置](cs_clusters.html#planning_worker_nodes)
  - [叢集管理責任](cs_why.html#responsibilities)

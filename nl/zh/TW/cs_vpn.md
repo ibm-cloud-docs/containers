@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-29"
 
 ---
 
@@ -18,7 +18,7 @@ lastupdated: "2018-01-12"
 # 設定 VPN 連線功能
 {: #vpn}
 
-VPN 連線功能可讓您將 Kubernetes 叢集中的應用程式安全地連接至內部部署網路。您也可以將叢集外部的應用程式連接至叢集內部執行的應用程式。
+使用 VPN 連線功能，您可將 Kubernetes 叢集中的應用程式安全地連接至內部部署網路。您也可以將叢集外部的應用程式連接至叢集內部執行的應用程式。
 {:shortdesc}
 
 ## 使用 Strongswan IPSec VPN 服務 Helm 圖表設定 VPN 連線功能
@@ -29,8 +29,7 @@ VPN 連線功能可讓您將 Kubernetes 叢集中的應用程式安全地連接�
 
 開始之前：
 
-- [建立標準叢集。
-](cs_clusters.html#clusters_cli)
+- [建立標準叢集。](cs_clusters.html#clusters_cli)
 - [如果您要使用現有叢集，請將它更新至 1.7.4 版或更新版本。](cs_cluster_update.html#master)
 - 叢集必須至少有一個可用的公用「負載平衡器」IP 位址。
 - [將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。
@@ -118,7 +117,7 @@ VPN 連線功能可讓您將 Kubernetes 叢集中的應用程式安全地連接�
     </tr>
     <tr>
     <td><code>local.subnet</code></td>
-    <td>將此值變更為應該透過 VPN 連線公開到內部部署網路的叢集子網路 CIDR 清單。此清單可能包括下列子網路：<ul><li>Kubernetes Pod 子網路 CIDR：<code>172.30.0.0/16</code></li><li>Kubernetes 服務子網路 CIDR：<code>172.21.0.0/16</code></li><li>如果您在專用網路上具有 NodePort 服務所公開的應用程式，則為工作者節點的專用子網路 CIDR。若要尋找此值，請執行 <code>bx cs subnets | grep <xxx.yyy.zzz></code>，其中 &lt;xxx.yyy.zzz&gt; 是工作者節點專用 IP 位址的前 3 個八位元組。</li><li>如果您在專用網路上具有 LoadBalancer 服務所公開的應用程式，則為叢集的專用或使用者管理子網路 CIDR。若要尋找這些值，請執行 <code>bx cs cluster-get <cluster name> --showResources</code>。在 <b>VLANS</b> 區段中，請尋找 <b>Public</b> 值為 <code>false</code> 的 CIDR。</li></ul></td>
+    <td>將此值變更為要透過 VPN 連線公開給內部部署網路使用之叢集子網路 CIDR 的清單。此清單可能包括下列子網路：<ul><li>Kubernetes Pod 子網路 CIDR：<code>172.30.0.0/16</code></li><li>Kubernetes 服務子網路 CIDR：<code>172.21.0.0/16</code></li><li>如果在專用網路上您的應用程式是由 NodePort 服務公開，則為工作者節點的專用子網路 CIDR。若要尋找此值，請執行 <code>bx cs subnets | grep <xxx.yyy.zzz></code>，其中 <code>&lt;xxx.yyy.zzz&gt;</code> 是工作者節點專用 IP 位址的前三個八位元組。</li><li>如果您在專用網路上具有 LoadBalancer 服務所公開的應用程式，則為叢集的專用或使用者管理子網路 CIDR。若要尋找這些值，請執行 <code>bx cs cluster-get <cluster name> --showResources</code>。在 <b>VLANS</b> 區段中，請尋找 <b>Public</b> 值為 <code>false</code> 的 CIDR。</li></ul></td>
     </tr>
     <tr>
     <td><code>local.id</code></td>
@@ -190,9 +189,9 @@ VPN 連線功能可讓您將 Kubernetes 叢集中的應用程式安全地連接�
         ```
         {: screen}
 
-        **附註**：
-          - 第一次使用此「Helm 圖表」時，VPN 極不可能有 `ESTABLISHED` 狀態。您可能需要檢查內部部署 VPN 端點設定，並回到步驟 3 數次變更 `config.yaml` 檔案，連線才會成功。
-          - 如果 VPN Pod 處於 `ERROR` 狀態，或持續損毀並重新啟動，則可能是圖表配置對映中 `ipsec.conf` 設定的參數驗證所造成。若要查看是否為此狀況，請執行 `kubectl logs -n kube-system $STRONGSWAN_POD`，檢查 Strongswan Pod 日誌中是否有任何驗證錯誤。如果發生驗證錯誤，請執行 `helm delete --purge vpn`，並回到步驟 3 以修正 `config.yaml` 檔案中不正確的值，然後重複步驟 4 到 8。如果叢集具有大量工作者節點，您也可以使用 `helm upgrade` 更快速地套用您的變更，而不是執行 `helm delete` 及 `helm install`。
+      **附註**：
+          - 第一次使用此「Helm 圖表」時，VPN 狀態很可能不是 `ESTABLISHED`。您可能需要檢查內部部署 VPN 端點設定，並回到步驟 3 數次變更 `config.yaml` 檔案，連線才會成功。
+          - 如果 VPN Pod 處於 `ERROR` 狀態，或持續損毀並重新啟動，則可能是圖表配置對映中 `ipsec.conf` 設定的參數驗證所造成。請執行 `kubectl logs -n kube-system $STRONGSWAN_POD`，檢查 Strongswan Pod 日誌中是否有任何驗證錯誤。如果發生驗證錯誤，請執行 `helm delete --purge vpn`，並回到步驟 3 以修正 `config.yaml` 檔案中不正確的值，然後重複步驟 4 - 8。如果叢集具有大量工作者節點，您也可以使用 `helm upgrade` 更快速地套用您的變更，而不是執行 `helm delete` 及 `helm install`。
 
     4. VPN 的狀態為 `ESTABLISHED` 之後，請使用 `ping` 來測試連線。下列範例會將來自 Kubernetes 叢集中 VPN Pod 的 ping 傳送至內部部署 VPN 閘道的專用 IP 位址。請確定已在配置檔中指定正確的 `remote.subnet` 及 `local.subnet`，而且本端子網路清單包含您要從該處傳送 ping 的來源 IP 位址。
 

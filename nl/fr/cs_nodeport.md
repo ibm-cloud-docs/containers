@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -25,7 +25,7 @@ Rendez votre application accessible sur Internet en utilisant l'adresse IP publi
 ## Configuration de l'accès public à une application à l'aide du type de service NodePort
 {: #config}
 
-Vous pouvez exposer votre application en tant que service Kubernetes NodePort pour les clusters léger ou standard.
+Vous pouvez exposer votre application en tant que service Kubernetes NodePort pour les clusters gratuits ou standards.
 {:shortdesc}
 
 **Remarque :** l'adresse IP publique d'un noeud worker n'est pas permanente. Si le noeud worker doit être recréé, une nouvelle adresse IP publique lui est affectée. Si vous avez besoin d'une adresse IP publique stable et d'une plus grande disponibilité de votre service, exposez votre application en utilisant un [service LoadBalancer](cs_loadbalancer.html) ou [Ingress](cs_ingress.html).

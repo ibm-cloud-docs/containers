@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -34,10 +34,10 @@ lastupdated: "2018-01-12"
 
 |帐户类型|描述|用于创建标准集群的可用选项|
 |------------|-----------|----------------------------------------------|
-|Lite 帐户|Lite 帐户无法供应集群。|[将 Lite 帐户升级到 {{site.data.keyword.Bluemix_notm}} 现买现付帐户](/docs/pricing/billable.html#upgradetopayg)，该帐户设置为具有对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权。|
-|较旧的现买现付帐户|在自动帐户链接可用之前创建的现买现付帐户没有对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权。<p>如果您有现有的 IBM Cloud infrastructure (SoftLayer) 帐户，那么无法将此帐户链接到较旧的现买现付帐户。</p>|选项 1：[创建新的现买现付帐户](/docs/pricing/billable.html#billable)，该帐户设置为具有对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权。选择此选项时，您有两个单独的 {{site.data.keyword.Bluemix_notm}} 帐户和帐单。<p>如果要继续使用旧的现买现付帐户来创建标准集群，那么可以使用新的现买现付帐户生成 API 密钥，以用于访问 IBM Cloud infrastructure (SoftLayer) 产品服务组合。然后，必须为旧的现买现付帐户设置 API 密钥。有关更多信息，请参阅[为旧的现买现付和预订帐户生成 API 密钥](#old_account)。请记住，IBM Cloud infrastructure (SoftLayer) 资源将通过新的现买现付帐户进行计费。</p></br><p>选项 2：如果您已经拥有要使用的现有 IBM Cloud infrastructure (SoftLayer) 帐户，那么可以为 {{site.data.keyword.Bluemix_notm}} 帐户[设置凭证](cs_cli_reference.html#cs_credentials_set)。</p><p>**注**：必须使用“超级用户”许可权设置与 {{site.data.keyword.Bluemix_notm}} 帐户一起使用的 IBM Cloud infrastructure (SoftLayer) 帐户。</p>|
-|预订帐户|预订帐户未设置为具有对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权。|选项 1：[创建新的现买现付帐户](/docs/pricing/billable.html#billable)，该帐户设置为具有对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权。选择此选项时，您有两个单独的 {{site.data.keyword.Bluemix_notm}} 帐户和帐单。<p>如果要继续使用预订帐户来创建标准集群，那么可以使用新的现买现付帐户生成 API 密钥，以用于访问 IBM Cloud infrastructure (SoftLayer) 产品服务组合。然后，必须为预订帐户设置 API 密钥。有关更多信息，请参阅[为旧的现买现付和预订帐户生成 API 密钥](#old_account)。请记住，IBM Cloud infrastructure (SoftLayer) 资源将通过新的现买现付帐户进行计费。</p></br><p>选项 2：如果您已经拥有要使用的现有 IBM Cloud infrastructure (SoftLayer) 帐户，那么可以为 {{site.data.keyword.Bluemix_notm}} 帐户[设置凭证](cs_cli_reference.html#cs_credentials_set)。<p>**注**：必须使用“超级用户”许可权设置与 {{site.data.keyword.Bluemix_notm}} 帐户一起使用的 IBM Cloud infrastructure (SoftLayer) 帐户。</p>|
-|IBM Cloud infrastructure (SoftLayer) 帐户，无 {{site.data.keyword.Bluemix_notm}} 帐户|要创建标准集群，您必须具有 {{site.data.keyword.Bluemix_notm}} 帐户。|<p>[创建新的现买现付帐户](/docs/pricing/billable.html#billable)，该帐户设置为具有对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权。选择此选项时，将为您创建 IBM Cloud infrastructure (SoftLayer)。您有两个独立的 IBM Cloud infrastructure (SoftLayer) 帐户，两者单独进行计费。</p>|
+|Lite 帐户|Lite 帐户无法供应集群。|[将 Lite 帐户升级到 {{site.data.keyword.Bluemix_notm}} 现买现付帐户](/docs/account/index.html#billableacts)，该帐户设置为具有对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权。|
+|较旧的现买现付帐户|在自动帐户链接可用之前创建的现买现付帐户没有对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权。<p>如果您有现有的 IBM Cloud infrastructure (SoftLayer) 帐户，那么无法将此帐户链接到较旧的现买现付帐户。</p>|选项 1：[创建新的现买现付帐户](/docs/account/index.html#billableacts)，该帐户设置为具有对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权。选择此选项时，您有两个单独的 {{site.data.keyword.Bluemix_notm}} 帐户和帐单。<p>如果要继续使用旧的现买现付帐户来创建标准集群，那么可以使用新的现买现付帐户生成 API 密钥，以用于访问 IBM Cloud infrastructure (SoftLayer) 产品服务组合。然后，必须为旧的现买现付帐户设置 API 密钥。有关更多信息，请参阅[为旧的现买现付和预订帐户生成 API 密钥](#old_account)。请记住，IBM Cloud infrastructure (SoftLayer) 资源将通过新的现买现付帐户进行计费。</p></br><p>选项 2：如果您已经拥有要使用的现有 IBM Cloud infrastructure (SoftLayer) 帐户，那么可以为 {{site.data.keyword.Bluemix_notm}} 帐户[设置凭证](cs_cli_reference.html#cs_credentials_set)。</p><p>**注**：必须使用“超级用户”许可权设置与 {{site.data.keyword.Bluemix_notm}} 帐户一起使用的 IBM Cloud infrastructure (SoftLayer) 帐户。</p>|
+|预订帐户|预订帐户未设置为具有对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权。|选项 1：[创建新的现买现付帐户](/docs/account/index.html#billableacts)，该帐户设置为具有对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权。选择此选项时，您有两个单独的 {{site.data.keyword.Bluemix_notm}} 帐户和帐单。<p>如果要继续使用预订帐户来创建标准集群，那么可以使用新的现买现付帐户生成 API 密钥，以用于访问 IBM Cloud infrastructure (SoftLayer) 产品服务组合。然后，必须为预订帐户设置 API 密钥。有关更多信息，请参阅[为旧的现买现付和预订帐户生成 API 密钥](#old_account)。请记住，IBM Cloud infrastructure (SoftLayer) 资源将通过新的现买现付帐户进行计费。</p></br><p>选项 2：如果您已经拥有要使用的现有 IBM Cloud infrastructure (SoftLayer) 帐户，那么可以为 {{site.data.keyword.Bluemix_notm}} 帐户[设置凭证](cs_cli_reference.html#cs_credentials_set)。<p>**注**：必须使用“超级用户”许可权设置与 {{site.data.keyword.Bluemix_notm}} 帐户一起使用的 IBM Cloud infrastructure (SoftLayer) 帐户。</p>|
+|IBM Cloud infrastructure (SoftLayer) 帐户，无 {{site.data.keyword.Bluemix_notm}} 帐户|要创建标准集群，您必须具有 {{site.data.keyword.Bluemix_notm}} 帐户。|<p>[创建新的现买现付帐户](/docs/account/index.html#billableacts)，该帐户设置为具有对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权。选择此选项时，将为您创建 IBM Cloud infrastructure (SoftLayer)。您有两个独立的 IBM Cloud infrastructure (SoftLayer) 帐户，两者单独进行计费。</p>|
 
 <br />
 

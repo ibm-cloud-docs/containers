@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-13"
+lastupdated: "2017-01-29"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -53,17 +53,16 @@ Este tutorial é destinado a desenvolvedores de software e administradores de re
 -  Uma conta Pay-As-You-Go ou de Assinatura [{{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://console.bluemix.net/registration/)
 
 
-
-
 ## Lição 1: criando um cluster e configurando a CLI
 {: #cs_cluster_tutorial_lesson1}
 
-Crie seu cluster na GUI e instalar as CLIs necessárias. Para esse tutorial, crie seu cluster na região sul do Reino Unido.
+Crie seu cluster na GUI e instalar as CLIs necessárias.
+{: shortdesc}
 
 
 Para criar seu cluster:
 
-1. Pode levar alguns minutos para provisionar seu cluster. Para aproveitar ao máximo seu tempo, [crie seu cluster ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://console.bluemix.net/containers-kubernetes/launch?env_id=ibm:yp:united-kingdom) antes de instalar as CLIs. Um cluster lite vem com um nó do trabalhador no qual implementar pods do contêiner. Um nó do trabalhador é o host de cálculo, geralmente uma máquina virtual, no qual seus apps são executados.
+1. Pode levar alguns minutos para provisionar seu cluster. Para aproveitar ao máximo seu tempo, [crie seu cluster na GUI ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://console.bluemix.net/containers-kubernetes/launch?env_id=ibm:yp:united-kingdom) antes de instalar as CLIs. Para este tutorial, crie seu cluster na região leste dos EUA.
 
 
 As CLIs a seguir e seus pré-requisitos são usados para gerenciar clusters por meio da CLI:
@@ -74,7 +73,7 @@ As CLIs a seguir e seus pré-requisitos são usados para gerenciar clusters por 
 -   Docker CLI
 
 </br>
-Para instalar as CLIs:
+Para instalar as CLIs e seus pré-requisitos:
 
 1.  Como um pré-requisito para o plug-in do {{site.data.keyword.containershort_notm}}, instale a CLI do [{{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://clis.ng.bluemix.net/ui/home.html). Para executar comandos da CLI do {{site.data.keyword.Bluemix_notm}}, use o prefixo `bx`.
 2.  Siga os prompts para selecionar uma conta e uma organização do {{site.data.keyword.Bluemix_notm}}. Os clusters são específicos para uma conta, mas são independentes de uma organização ou espaço do {{site.data.keyword.Bluemix_notm}}.
@@ -87,7 +86,7 @@ Para instalar as CLIs:
     {: pre}
 
 5.  Para visualizar uma versão local do painel do Kubernetes e implementar apps em seus clusters, [instale a CLI do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Para executar comandos usando a CLI do Kubernetes, use o prefixo `kubectl`.
-    1.  Para obter compatibilidade funcional completa, faça download da versão de CLI do Kubernetes que corresponda à versão do cluster do Kubernetes que você planeja usar. A versão do Kubernetes atual do {{site.data.keyword.containershort_notm}} é 1.7.4.
+    1.  Para obter compatibilidade funcional completa, faça download da versão de CLI do Kubernetes que corresponda à versão do cluster do Kubernetes que você planeja usar. A versão atual do Kubernetes padrão do {{site.data.keyword.containershort_notm}} é 1.8.6.
 
         OS X: [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
 
@@ -141,12 +140,11 @@ mudanças de caminho de arquivo ao executar comandos posteriormente.
     ```
     {: pre}
 
-7. Para construir imagens localmente e enviá-las por push para o repositório de imagem privada, [instale a CLI do Docker CE ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.docker.com/community-edition#/download). Se você estiver usando o Windows 8 ou anterior, será possível instalar o [Docker Toolbox ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.docker.com/products/docker-toolbox) como alternativa.
+7. Para construir imagens localmente e enviá-las por push para o repositório de imagem privada, [instale a CLI do Docker CE ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.docker.com/community-edition#/download). Se você estiver usando o Windows 8 ou anterior, será possível instalar o [Docker Toolbox ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.docker.com/toolbox/toolbox_install_windows/) como alternativa.
 
 Parabéns! Você instalou com êxito as CLIs para as lições e os tutoriais a seguir. Em seguida, configure seu ambiente em cluster e inclua o serviço {{site.data.keyword.toneanalyzershort}}.
 
-
-## Lição 2: configurando seu ambiente em cluster
+## Lição 2: configurando seu registro privado
 {: #cs_cluster_tutorial_lesson2}
 
 Configure um repositório de imagem privada no {{site.data.keyword.registryshort_notm}} e inclua segredos em seu cluster para que o app possa acessar o serviço {{site.data.keyword.toneanalyzershort}}.
@@ -163,7 +161,7 @@ Configure um repositório de imagem privada no {{site.data.keyword.registryshort
 2.  Configure o seu próprio repositório de imagem privada no {{site.data.keyword.registryshort_notm}} para armazenar com segurança e compartilhar imagens do Docker com todos os usuários do cluster. Um repositório de imagem privada no {{site.data.keyword.Bluemix_notm}} é identificado por um namespace. O namespace é usado para criar uma URL exclusiva para o seu repositório de imagem que
 os desenvolvedores podem usar para acessar imagens privadas do Docker.
 
-    Neste exemplo, a firma PR deseja criar somente um repositório de imagem no {{site.data.keyword.registryshort_notm}}; portanto, eles escolhem _pr_firm_ como o seu namespace para agrupar todas as imagens em sua conta. Substitua _&lt;your_namespace&gt;_ por um espaço de nomes de sua opção e não por algo que seja relacionado ao tutorial.
+    Neste exemplo, a firma PR deseja criar somente um repositório de imagem no {{site.data.keyword.registryshort_notm}}; portanto, eles escolhem _pr_firm_ como o seu namespace para agrupar todas as imagens em sua conta. Substitua _&lt;your_namespace&gt;_ por um namespace de sua escolha que não esteja relacionado ao tutorial.
 
     ```
     bx cr namespace-add <your_namespace>
@@ -177,7 +175,7 @@ os desenvolvedores podem usar para acessar imagens privadas do Docker.
     ```
      {: pre}
 
-    Quando o fornecimento do nó do trabalhador é concluído, o status muda para **Pronto** e é possível iniciar a ligação de serviços do {{site.data.keyword.Bluemix_notm}} para uso em um tutorial futuro.
+    Quando seu nó do trabalhador conclui o fornecimento, o status muda para **Pronto** e é possível iniciar a ligação de serviços do {{site.data.keyword.Bluemix_notm}}.
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status
@@ -185,85 +183,92 @@ os desenvolvedores podem usar para acessar imagens privadas do Docker.
     ```
     {: screen}
 
-4.  Configure o contexto para seu cluster na CLI. Toda vez que você efetua login na CLI do contêiner para trabalhar com clusters, deve-se executar esses comandos para configurar o caminho para o arquivo de configuração do cluster como uma variável de sessão. O Kubernetes CLI usa essa variável para localizar um arquivo de configuração local e certificados que são necessárias para se conectar ao cluster no {{site.data.keyword.Bluemix_notm}}.
+## Lição 3: configurando seu ambiente em cluster
+{: #cs_cluster_tutorial_lesson3}
 
-    1.  Obtenha o comando para configurar a variável de ambiente e fazer download dos arquivos de configuração do Kubernetes.
+Configure o contexto para seu cluster na CLI. Toda vez que você efetua login na CLI do contêiner para trabalhar com clusters, deve-se executar esses comandos para configurar o caminho para o arquivo de configuração do cluster como uma variável de sessão. O Kubernetes CLI usa essa variável para localizar um arquivo de configuração local e certificados que são necessárias para se conectar ao cluster no {{site.data.keyword.Bluemix_notm}}.
 
-        ```
-        bx cs cluster-config <cluster_name>
-        ```
-        {: pre}
+1.  Obtenha o comando para configurar a variável de ambiente e fazer download dos arquivos de configuração do Kubernetes.
 
-        Quando o download dos arquivos de configuração estiver concluído, será exibido um comando que poderá ser usado para configurar o caminho para o seu arquivo de configuração local do Kubernetes como uma variável de ambiente.
+    ```
+    bx cs cluster-config <cluster_name>
+    ```
+    {: pre}
 
-        Exemplo para OS X:
+    Quando o download dos arquivos de configuração estiver concluído, será exibido um comando que poderá ser usado para configurar o caminho para o seu arquivo de configuração local do Kubernetes como uma variável de ambiente.
 
-        ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
-        ```
-        {: screen}
+    Exemplo para OS X:
 
-    2.  Copie e cole o comando que é exibido em seu terminal para configurar a variável de ambiente `KUBECONFIG`.
+    ```
+    export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
+    ```
+    {: screen}
 
-    3.  Verifique se a variável de ambiente `KUBECONFIG` está configurada corretamente.
+2.  Copie e cole o comando que é exibido em seu terminal para configurar a variável de ambiente `KUBECONFIG`.
 
-        Exemplo para OS X:
+3.  Verifique se a variável de ambiente `KUBECONFIG` está configurada corretamente.
 
-        ```
-        echo $KUBECONFIG
-        ```
-        {: pre}
+    Exemplo para OS X:
 
-        Saída:
+    ```
+    echo $KUBECONFIG
+    ```
+    {: pre}
 
-        ```
-        /Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
-        ```
-        {: screen}
+    Saída:
 
-    4.  Verifique se os comandos `kubectl` são executados adequadamente com seu cluster verificando a versão do servidor de CLI do Kubernetes.
+    ```
+    /Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
+    ```
+    {: screen}
 
-        ```
-        kubectl version  --short
-        ```
-        {: pre}
+4.  Verifique se os comandos `kubectl` são executados adequadamente com seu cluster verificando a versão do servidor de CLI do Kubernetes.
 
-        Saída de exemplo:
+    ```
+    kubectl version  --short
+    ```
+    {: pre}
 
-        ```
-        Versão do cliente: v1.7.4 Versão do servidor: v1.7.4
-        ```
-        {: screen}
+    Saída de exemplo:
 
-5.  Inclua o serviço {{site.data.keyword.toneanalyzershort}} no cluster. Com serviços {{site.data.keyword.Bluemix_notm}}, é possível aproveitar a funcionalidade já desenvolvida nos apps. Qualquer serviço do {{site.data.keyword.Bluemix_notm}} que estiver ligado ao cluster poderá ser usado por qualquer app que for implementado nesse cluster. Repita as etapas a seguir para cada serviço do {{site.data.keyword.Bluemix_notm}} que você deseja usar com seus apps.
-    1.  Inclua o serviço {{site.data.keyword.toneanalyzershort}} em sua conta do {{site.data.keyword.Bluemix_notm}}.
+    ```
+    Versão do cliente: v1.8.6 Versão do servidor: v1.8.6
+    ```
+    {: screen}
 
-        **Nota:** quando você incluir o serviço {{site.data.keyword.toneanalyzershort}} em sua conta, será exibida uma mensagem de que o serviço não é grátis. Se você limitar sua chamada API, este tutorial não incorrerá em encargos do serviço {{site.data.keyword.watson}}. [Revise as informações de precificação para o serviço {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/watson/developercloud/tone-analyzer.html#pricing-block).
+## Lição 4: incluindo um serviço em seu cluster
+{: #cs_cluster_tutorial_lesson4}
 
-        ```
-        bx service create tone_analyzer standard <mytoneanalyzer>
-        ```
-        {: pre}
+Com serviços {{site.data.keyword.Bluemix_notm}}, é possível aproveitar a funcionalidade já desenvolvida nos apps. Qualquer serviço do {{site.data.keyword.Bluemix_notm}} que estiver ligado ao cluster poderá ser usado por qualquer app que for implementado nesse cluster. Repita as etapas a seguir para cada serviço do {{site.data.keyword.Bluemix_notm}} que você deseja usar com seus apps.
 
-    2.  Ligue a instância do {{site.data.keyword.toneanalyzershort}} ao namespace `padrão` do Kubernetes para o cluster. Posteriormente, será possível criar seus próprios namespaces para gerenciar o acesso de usuário aos recursos do Kubernetes, mas por enquanto, use o namespace `padrão`. Os namespaces do Kubernetes são diferentes do namespace de registro que você criou anteriormente.
+1.  Inclua o serviço {{site.data.keyword.toneanalyzershort}} em sua conta do {{site.data.keyword.Bluemix_notm}}.
 
-        ```
-        bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
-        ```
-        {: pre}
+    **Nota:** quando você incluir o serviço {{site.data.keyword.toneanalyzershort}} em sua conta, será exibida uma mensagem de que o serviço não é grátis. Se você limitar sua chamada API, este tutorial não incorrerá em encargos do serviço {{site.data.keyword.watson}}. [Revise as informações de precificação para o serviço {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/watson/developercloud/tone-analyzer.html#pricing-block).
 
-        Saída:
+    ```
+    bx service create tone_analyzer standard <mytoneanalyzer>
+    ```
+    {: pre}
 
-        ```
-        bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
+2.  Ligue a instância do {{site.data.keyword.toneanalyzershort}} ao namespace `padrão` do Kubernetes para o cluster. Posteriormente, será possível criar seus próprios namespaces para gerenciar o acesso de usuário aos recursos do Kubernetes, mas por enquanto, use o namespace `padrão`. Os namespaces do Kubernetes são diferentes do namespace de registro que você criou anteriormente.
+
+    ```
+    bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
+    ```
+    {: pre}
+
+    Saída:
+
+    ```
+    bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
         Binding service instance to namespace...
         OK
         Namespace:	default
         Secret name:	binding-mytoneanalyzer
-        ```
-        {: screen}
+    ```
+    {: screen}
 
-6.  Verifique se o segredo do Kubernetes foi criado em seu namespace do cluster. Cada serviço do {{site.data.keyword.Bluemix_notm}} é definido por um arquivo JSON que inclui informação confidencial sobre o serviço, como o nome do usuário, senha e URL que o contêiner usa para acessar o serviço. Para armazenar essas informações com segurança, segredos do Kubernetes são usados. Neste exemplo, o segredo inclui as credenciais para acessar a instância do {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} que é provisionada em sua conta.
+3.  Verifique se o segredo do Kubernetes foi criado em seu namespace do cluster. Cada serviço do {{site.data.keyword.Bluemix_notm}} é definido por um arquivo JSON que inclui informação confidencial sobre o serviço, como o nome do usuário, senha e URL que o contêiner usa para acessar o serviço. Para armazenar essas informações com segurança, segredos do Kubernetes são usados. Neste exemplo, o segredo inclui as credenciais para acessar a instância do {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} que é provisionada em sua conta.
 
     ```
     kubectl get secrets --namespace=default

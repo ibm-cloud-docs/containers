@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-09"
+lastupdated: "2018-01-29"
 
 ---
 
@@ -15,9 +15,9 @@ lastupdated: "2018-01-09"
 {:tip: .tip}
 {:download: .download}
 
-# Diese Seite wurde verschoben!
+# Der gesuchte Inhalt wurde verschoben.
 
-Die Sicherheitsthemen finden Sie hier:
+Aktuelle Informationen finden Sie an der neuen Position:
  - [Sicherheit nach Clusterkomponente](cs_secure.html#cluster)
    - [Kubernetes-Master](cs_secure.html#master)
    - [Workerknoten](cs_secure.html#worker)
@@ -31,3 +31,5 @@ Die Sicherheitsthemen finden Sie hier:
  - [Helm-Diagramme zur Einrichtung von VPN-Konnektivität mit dem Strongswan-IPSec-VPN-Service](cs_vpn.html#vpn)
  - [Netzrichtlinien](cs_network_policy.html#network_policies)
  - [Netzverkehr zu Edge-Workerknoten beschränken](cs_edge.html#edge)
+
+

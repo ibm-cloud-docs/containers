@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-02"
 
 ---
 
@@ -78,7 +78,7 @@ lastupdated: "2018-01-11"
 Kubernetes 叢集包含工作者節點，並且由 Kubernetes 主節點集中進行監視及管理。叢集管理者可以決定如何設定工作者節點的叢集，以確保叢集使用者具有部署及執行叢集中應用程式的所有資源。
 {:shortdesc}
 
-當您建立標準叢集時，會代表您在 IBM Cloud 基礎架構 (SoftLayer) 中訂購以及在 {{site.data.keyword.Bluemix_notm}} 中設定工作者節點。每個工作者節點都會獲指派建立叢集之後即不得變更的唯一工作者節點 ID 及網域名稱。視您選擇的硬體隔離層次而定，工作者節點可以設定為共用或專用節點。每個工作者節點都會佈建特定機型，而此機型可決定部署至工作者節點的容器可用的 vCPU 數目、記憶體及磁碟空間。Kubernetes 會限制您在叢集中可以有的工作者節點數目上限。如需相關資訊，請檢閱[工作者節點及 Pod 配額 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/admin/cluster-large/)。
+當您建立標準叢集時，會代表您在 IBM Cloud 基礎架構 (SoftLayer) 中訂購以及在 {{site.data.keyword.Bluemix_notm}} 中設定工作者節點。每個工作者節點都會獲指派建立叢集之後即不得變更的唯一工作者節點 ID 及網域名稱。視您選擇的硬體隔離層次而定，工作者節點可以設定為共用或專用節點。您也可以選擇想要工作者節點連接至公用 VLAN 及專用 VLAN，還是僅連接至專用 VLAN。每個工作者節點都會佈建特定機型，而此機型可決定部署至工作者節點的容器可用的 vCPU 數目、記憶體及磁碟空間。Kubernetes 會限制您在叢集中可以有的工作者節點數目上限。如需相關資訊，請檢閱[工作者節點及 Pod 配額 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/admin/cluster-large/)。
 
 
 ### 工作者節點的硬體
@@ -93,7 +93,15 @@ Kubernetes 叢集包含工作者節點，並且由 Kubernetes 主節點集中進
 
 因為基礎硬體的成本是由多個客戶分攤，所以共用節點通常會比專用節點便宜。不過，當您決定共用或專用節點時，可能會想要與法務部門討論應用程式環境所需的基礎架構隔離層次及相符性。
 
-當您建立精簡叢集時，工作者節點會自動佈建為 IBM Cloud 基礎架構 (SoftLayer) 帳戶中的共用節點。
+當您建立免費叢集時，工作者節點會自動佈建為 IBM Cloud 基礎架構 (SoftLayer) 帳戶中的共用節點。
+
+### 工作者節點的 VLAN 連線
+{: #worker_vlan_connection}
+
+當您建立叢集時，工作者節點會自動從 IBM Cloud 基礎架構 (SoftLayer) 帳戶連接至 VLAN。VLAN 會配置一組工作者節點及 Pod，就像它們已連接至相同的實體佈線。
+專用 VLAN 會判定在建立叢集期間指派給工作者節點的專用 IP 位址，而公用 VLAN 會判定在建立叢集期間指派給工作者節點的公用 IP 位址。
+
+若為免費叢集，叢集的工作者節點會在建立叢集期間連接至 IBM 擁有的公用 VLAN 及專用 VLAN。若為標準叢集，您可以將工作者節點同時連接至公用 VLAN 及專用 VLAN，或僅連接至專用 VLAN。如果想要工作者節點僅連接至專用 VLAN，則您可以在建立叢集期間指定現有專用 VLAN 的 ID。不過，您也須配置替代選項，在工作者節點與 Kubernetes 主節點之間啟用安全連線。例如，您可以配置 Vyatta，將專用 VLAN 工作者節點中的資料流量傳遞至 Kubernetes 主節點。如需相關資訊，請參閱 [IBM Cloud 基礎架構 (SoftLayer) 文件](https://knowledgelayer.softlayer.com/procedure/basic-configuration-vyatta)中的「設定自訂的 Vyatta 以安全地將工作者節點連接至 Kubernetes 主節點」。
 
 ### 工作者節點記憶體限制
 {: #resource_limit_node}
@@ -124,22 +132,21 @@ Kubernetes 叢集包含工作者節點，並且由 Kubernetes 主節點集中進
 ## 使用 GUI 建立叢集
 {: #clusters_ui}
 
-Kubernetes 叢集是組織成網路的一組工作者節點。叢集的用途是要定義一組資源、節點、網路及儲存裝置，以讓應用程式保持高度可用。您必須先建立叢集並設定該叢集中工作者節點的定義，才能部署應用程式。
+Kubernetes 叢集是組織成網路的一組工作者節點。叢集的用途是要定義一組資源、節點、網路及儲存裝置，以讓應用程式保持高可用性。您必須先建立叢集並設定該叢集中工作者節點的定義，才能部署應用程式。
 {:shortdesc}
 
 若要建立叢集，請執行下列動作：
 1. 在型錄中，選取 **Kubernetes 叢集**。
-2. 選取叢集方案的類型。您可以選擇**精簡**或**隨收隨付制**。使用「隨收隨付制」方案，您可以針對高可用性環境，佈建一個具有例如多工作者節點之特性的標準叢集。
-3. 配置叢集詳細資料。
-    1. 為叢集命名、選擇 Kubernetes 的版本，以及選取要在其中部署的位置。選取實際上與您最接近的位置以獲得最佳效能。當您選取所在國家/地區以外的位置時，請謹記，您可能需要有合法授權，才能將資料實際儲存在其他國家/地區。
-    2. 選取機器類型並指定您需要的工作者節點數目。機型會定義設定於每一個工作者節點中，且可供容器使用的虛擬 CPU 及記憶體數量。
-        - 微機型指出最小選項。
-        - 平衡機器具有指派給每一個 CPU 的相等記憶體數量，以最佳化效能。
-        - 依預設，主機的 Docker 資料是以機型來加密。儲存所有容器資料的 `/var/lib/docker` 目錄是使用 LUKS 加密來進行加密。如果在建立叢集的期間包含了 `disable-disk-encrypt` 選項，則主機的 Docker 資料不會加密。[進一步瞭解加密。](cs_secure.html#encrypted_disks)
-    3. 從 IBM Cloud 基礎架構 (SoftLayer) 帳戶中選取公用及專用 VLAN。兩個 VLAN 會在工作者節點之間進行通訊，但公用 VLAN 也與 IBM 管理的 Kubernetes 主節點通訊。您可以將相同的 VLAN 用於多個叢集。**附註**：如果您選擇不要選取公用 VLAN，則必須配置替代方案。
-    4. 選取硬體類型。在大部分情況中，共用選項就已足夠。
-        - **專用**：確保完整隔離實體資源。
-        - **共用**：容許實體資源儲存在與其他 IBM 客戶相同的硬體上。
+2. 選取要部署叢集的區域。
+3. 選取叢集方案的類型。您可以選擇**免費**或**隨收隨付制**。使用「隨收隨付制」方案，您可以針對高可用性環境，佈建一個具有例如多工作者節點之特性的標準叢集。
+4. 配置叢集詳細資料。
+    1. 為叢集命名、選擇 Kubernetes 的版本，以及選取要在其中部署叢集的位置。如需最佳效能，請選取實際上與您最接近的位置。當您選取所在國家/地區以外的位置時，請謹記，您可能需要有合法授權，才能將資料實際儲存在其他國家/地區。
+    2. 選取機器類型並指定您需要的工作者節點數目。機型會定義設定於每一個工作者節點中，且可供容器使用的虛擬 CPU、記憶體及磁碟空間數量。
+    3. 從 IBM Cloud 基礎架構 (SoftLayer) 帳戶中選取公用及專用 VLAN。兩個 VLAN 會在工作者節點之間進行通訊，但公用 VLAN 也與 IBM 管理的 Kubernetes 主節點通訊。您可以將相同的 VLAN 用於多個叢集。**附註**：如果您選擇不要選取公用 VLAN，則必須配置替代方案。如需相關資訊，請參閱[工作者節點的 VLAN 連線](#worker_vlan_connection)。
+    4. 選取硬體類型。
+        - **專用**：您的工作者節點是在專用於您帳戶的基礎架構上進行管理。您的資源已完全隔離。
+        - **共用**：基礎架構資源（例如 Hypervisor 及實體硬體）在您與其他 IBM 客戶之間配送，但每一個工作者節點僅供您存取。雖然此選項的成本比較低，但在大部分情況下已足夠，您可能會想要使用公司原則來驗證您的效能及基礎架構需求。
+    5. 依預設，會選取**加密本端磁碟**。如果您選擇清除這個勾選框，主機的 Docker 資料不會加密。[進一步瞭解加密](cs_secure.html#encrypted_disks)。
 4. 按一下**建立叢集**。您可以在**工作者節點**標籤中查看工作者節點部署的進度。部署完成時，您可以在**概觀**標籤中看到叢集已備妥。**附註：**每個工作者節點都會獲指派唯一的工作者節點 ID 及網域名稱，在叢集建立之後即不得手動予以變更。變更 ID 或網域名稱會讓 Kubernetes 主節點無法管理叢集。
 
 
@@ -158,7 +165,7 @@ Kubernetes 叢集是組織成網路的一組工作者節點。叢集的用途是
 ## 使用 CLI 建立叢集
 {: #clusters_cli}
 
-叢集是組織成網路的一組工作者節點。叢集的用途是要定義一組資源、節點、網路及儲存裝置，以讓應用程式保持高度可用。您必須先建立叢集並設定該叢集中工作者節點的定義，才能部署應用程式。
+叢集是組織成網路的一組工作者節點。叢集的用途是要定義一組資源、節點、網路及儲存裝置，以讓應用程式保持高可用性。您必須先建立叢集並設定該叢集中工作者節點的定義，才能部署應用程式。
 {:shortdesc}
 
 若要建立叢集，請執行下列動作：
@@ -224,14 +231,14 @@ Kubernetes 叢集是組織成網路的一組工作者節點。叢集的用途是
 
         如果公用及專用 VLAN 已存在，請記下相符的路由器。專用 VLAN 路由器的開頭一律為 `bcr`（後端路由器），而公用 VLAN 路由器的開頭一律為 `fcr`（前端路由器）。這些字首後面的數字與字母組合必須相符，才能在建立叢集時使用這些 VLAN。在範例輸出中，任何專用 VLAN 都可以與任何公用 VLAN 搭配使用，因為路由器都會包括 `02a.dal10`。
 
-    4.  執行 `cluster-create` 指令。您可以選擇精簡叢集（包括一個已設定 2vCPU 及 4GB 記憶體的工作者節點）或標準叢集（可以在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中包括您所選擇數目的工作者節點）。當您建立標準叢集時，依預設，會加密工作者節點磁碟，其硬體由多位 IBM 客戶所共用，並且按使用時數計費。</br>標準叢集的範例：
+    4.  執行 `cluster-create` 指令。您可以選擇免費叢集（包括一個已設定 2vCPU 及 4GB 記憶體的工作者節點）或標準叢集（可以在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中包括您所選擇數目的工作者節點）。當您建立標準叢集時，依預設，會加密工作者節點磁碟，其硬體由多位 IBM 客戶所共用，並且按使用時數計費。</br>標準叢集的範例：
 
         ```
-        bx cs cluster-create --location dal10 --public-vlan <public_vlan_id> --private-vlan <private_vlan_id> --machine-type u2c.2x4 --workers 3 --name <cluster_name> --kube-version <major.minor.patch>
+        bx cs cluster-create --location dal10 --machine-type u2c.2x4 --hardware <shared_or_dedicated> --public-vlan <public_vlan_id> --private-vlan <private_vlan_id> --workers 3 --name <cluster_name> --kube-version <major.minor.patch> 
         ```
         {: pre}
 
-        精簡叢集的範例：
+        免費叢集的範例：
 
         ```
         bx cs cluster-create --name my_cluster
@@ -239,7 +246,7 @@ Kubernetes 叢集是組織成網路的一組工作者節點。叢集的用途是
         {: pre}
 
         <table>
-        <caption>表格. 瞭解 <code>bx cs cluster-create</code> 指令元件</caption>
+        <caption>表格。瞭解 <code>bx cs cluster-create</code> 指令元件</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解此指令的元件</th>
         </thead>
@@ -254,19 +261,23 @@ Kubernetes 叢集是組織成網路的一組工作者節點。叢集的用途是
         </tr>
         <tr>
         <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
-        <td>如果您要建立標準叢集，請選擇機型。機型指定每一個工作者節點可用的虛擬運算資源。如需相關資訊，請檢閱[比較 {{site.data.keyword.containershort_notm}} 的精簡與標準叢集](cs_why.html#cluster_types)。若為精簡叢集，您不需要定義機型。</td>
+        <td>如果您要建立標準叢集，請選擇機型。機型指定每一個工作者節點可用的虛擬運算資源。如需相關資訊，請檢閱[比較 {{site.data.keyword.containershort_notm}} 的免費與標準叢集](cs_why.html#cluster_types)。若為免費叢集，您不需要定義機型。</td>
+        </tr>
+        <tr>
+        <td><code>--hardware <em>&lt;shared_or_dedicated&gt;</em></code></td>
+        <td>工作者節點的硬體隔離層次。若要讓可用的實體資源只供您專用，請使用 dedicated，或者，若要容許與其他 IBM 客戶共用實體資源，請使用 shared。預設值為 shared。此值對於標準叢集是選用的，不適用於免費叢集。</td>
         </tr>
         <tr>
         <td><code>--public-vlan <em>&lt;public_vlan_id&gt;</em></code></td>
         <td><ul>
-          <li>若為精簡叢集，您不需要定義公用 VLAN。精簡叢集會自動連接至 IBM 所擁有的公用 VLAN。</li>
+          <li>若為免費叢集，您不需要定義公用 VLAN。免費叢集會自動連接至 IBM 所擁有的公用 VLAN。</li>
           <li>若為標準叢集，如果您已在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中設定該位置的公用 VLAN，請輸入公用 VLAN 的 ID。如果您的帳戶中未同時具有公用和專用 VLAN，請不要指定此選項。{{site.data.keyword.containershort_notm}} 會為您自動建立公用 VLAN。<br/><br/>
           <strong>附註</strong>：專用 VLAN 路由器的開頭一律為 <code>bcr</code>（後端路由器），而公用 VLAN 路由器的開頭一律為 <code>fcr</code>（前端路由器）。這些字首後面的數字與字母組合必須相符，才能在建立叢集時使用這些 VLAN。</li>
         </ul></td>
         </tr>
         <tr>
         <td><code>--private-vlan <em>&lt;private_vlan_id&gt;</em></code></td>
-        <td><ul><li>若為精簡叢集，您不需要定義專用 VLAN。精簡叢集會自動連接至 IBM 所擁有的專用 VLAN。</li><li>若為標準叢集，如果您已在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中設定該位置的專用 VLAN，請輸入專用 VLAN 的 ID。如果您的帳戶中未同時具有公用和專用 VLAN，請不要指定此選項。{{site.data.keyword.containershort_notm}} 會為您自動建立公用 VLAN。<br/><br/><strong>附註</strong>：專用 VLAN 路由器的開頭一律為 <code>bcr</code>（後端路由器），而公用 VLAN 路由器的開頭一律為 <code>fcr</code>（前端路由器）。這些字首後面的數字與字母組合必須相符，才能在建立叢集時使用這些 VLAN。</li></ul></td>
+        <td><ul><li>若為免費叢集，您不需要定義專用 VLAN。免費叢集會自動連接至 IBM 所擁有的專用 VLAN。</li><li>若為標準叢集，如果您已在 IBM Cloud 基礎架構 (SoftLayer) 帳戶中設定該位置的專用 VLAN，請輸入專用 VLAN 的 ID。如果您的帳戶中未同時具有公用和專用 VLAN，請不要指定此選項。{{site.data.keyword.containershort_notm}} 會為您自動建立公用 VLAN。<br/><br/><strong>附註</strong>：專用 VLAN 路由器的開頭一律為 <code>bcr</code>（後端路由器），而公用 VLAN 路由器的開頭一律為 <code>fcr</code>（前端路由器）。這些字首後面的數字與字母組合必須相符，才能在建立叢集時使用這些 VLAN。</li></ul></td>
         </tr>
         <tr>
         <td><code>--name <em>&lt;name&gt;</em></code></td>
@@ -394,11 +405,15 @@ Kubernetes 叢集是組織成網路的一組工作者節點。叢集的用途是
 
 |叢集狀態|原因|
 |-------------|------|
+
+|Critical|無法呼叫到 Kubernetes 主節點，或叢集中的所有工作者節點都已關閉。<ol><li>列出叢集中的工作者節點。<pre class="pre"><code>bx cs workers &lt;cluser_name_or_id&gt;</code></pre><li>取得每一個工作者節點的詳細資料。<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre></li><li>檢閱 <strong>State</strong> 及 <strong>Status</strong> 欄位，以尋找工作者節點為何關閉的根本問題。<ul><li>如果工作者節點狀態顯示 <strong>Provision_failed</strong>，則您可能沒有從 IBM Cloud 基礎架構 (SoftLayer) 組合佈建工作者節點的必要許可權。若要尋找必要許可權，請參閱[配置對 IBM Cloud 基礎架構 (SoftLayer) 組合的存取權以建立標準 Kubernetes 叢集](cs_infrastructure.html#unify_accounts)。</li><li>如果工作者節點狀態 (State) 顯示 <strong>Critical</strong>，而狀態 (Status) 顯示 <strong>Not Ready</strong>，則工作者節點可能無法連接至 IBM Cloud 基礎架構 (SoftLayer)。請先執行 <code>bx cs worker-reboot --hard CLUSTER WORKER</code>，來開始疑難排解。如果該指令不成功，則請執行 <code>bx cs worker reload CLUSTER WORKER</code>。</li><li>如果工作者節點狀態 (State) 顯示 <strong>Critical</strong>，而狀態 (Status) 顯示 <strong>Out of disk</strong>，則工作者節點已用完容量。您可以減少工作者節點上的工作負載，或將工作者節點新增至叢集，以協助對工作負載進行負載平衡。</li><li>如果工作者節點狀態 (State) 顯示 <strong>Critical</strong>，而狀態 (Status) 顯示 <strong>Unknown</strong>，則 Kubernetes 主節點無法使用。請開立 [{{site.data.keyword.Bluemix_notm}} 支援問題單](/docs/get-support/howtogetsupport.html#using-avatar)，以與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡。</li></ul></li></ol>|
+
 |Deploying|Kubernetes 主節點尚未完整部署。您無法存取叢集。|
-|Pending|已部署 Kubernetes 主節點。正在佈建工作者節點，因此還無法在叢集中使用。您可以存取叢集，但無法將應用程式部署至叢集。|
 |Normal|叢集中的所有工作者節點都已開始執行。您可以存取叢集，並將應用程式部署至叢集。|
+|Pending|已部署 Kubernetes 主節點。正在佈建工作者節點，因此還無法在叢集中使用。您可以存取叢集，但無法將應用程式部署至叢集。|
+
 |Warning|叢集中至少有一個工作者節點無法使用，但有其他工作者節點可用，並且可以接管工作負載。<ol><li>列出叢集中的工作者節點，並記下顯示 <strong>Warning</strong> 狀態之工作者節點的 ID。<pre class="pre"><code>bx cs workers &lt;cluster_name_or_id&gt;</code></pre><li>取得工作者節點的詳細資料。<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre><li>檢閱 <strong>State</strong>、<strong>Status</strong> 及 <strong>Details</strong> 欄位，以尋找工作者節點為何關閉的根本問題。</li><li>如果您的工作者節點幾乎達到記憶體或磁碟空間限制，請減少工作者節點上的工作負載，或將工作者節點新增至叢集，以協助對工作負載進行負載平衡。</li></ol>|
-|Critical|無法聯繫 Kubernetes 主節點，或叢集中的所有工作者節點都已關閉。<ol><li>列出叢集中的工作者節點。<pre class="pre"><code>bx cs workers &lt;cluser_name_or_id&gt;</code></pre><li>取得每一個工作者節點的詳細資料。<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre></li><li>檢閱 <strong>State</strong> 及 <strong>Status</strong> 欄位，以尋找工作者節點為何關閉的根本問題。<ul><li>如果工作者節點狀態顯示 <strong>Provision_failed</strong>，則您可能沒有從 IBM Cloud 基礎架構 (SoftLayer) 組合佈建工作者節點的必要許可權。若要尋找必要許可權，請參閱[配置對 IBM Cloud 基礎架構 (SoftLayer) 組合的存取權以建立標準 Kubernetes 叢集](cs_infrastructure.html#unify_accounts)。</li><li>如果工作者節點狀態 (State) 顯示 <strong>Critical</strong>，而狀態 (Status) 顯示 <strong>Not Ready</strong>，則工作者節點可能無法連接至 IBM Cloud 基礎架構 (SoftLayer)。請先執行 <code>bx cs worker-reboot --hard CLUSTER WORKER</code>，來開始疑難排解。如果該指令不成功，則請執行 <code>bx cs worker reload CLUSTER WORKER</code>。</li><li>如果工作者節點狀態 (State) 顯示 <strong>Critical</strong>，而狀態 (Status) 顯示 <strong>Out of disk</strong>，則工作者節點已用完容量。您可以減少工作者節點上的工作負載，或將工作者節點新增至叢集，以協助對工作負載進行負載平衡。</li><li>如果工作者節點狀態 (State) 顯示 <strong>Critical</strong>，而狀態 (Status) 顯示 <strong>Unknown</strong>，則 Kubernetes 主節點無法使用。請開立 [{{site.data.keyword.Bluemix_notm}} 支援問題單](/docs/support/index.html#getting-help)，以與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡。</li></ul></li></ol>|
+
 {: caption="表格。叢集狀態" caption-side="top"}
 
 <br />
@@ -410,7 +425,7 @@ Kubernetes 叢集是組織成網路的一組工作者節點。叢集的用途是
 當您完成叢集時，即可予以移除，讓叢集不再使用資源。
 {:shortdesc}
 
-不再需要使用「隨收隨付制」帳戶所建立的精簡及標準叢集時，使用者必須手動予以移除。
+不再需要使用「隨收隨付制」帳戶所建立的免費及標準叢集時，使用者必須手動予以移除。
 
 當您刪除叢集時，也會刪除叢集上的資源（包括容器、Pod、連結服務及 Secret）。如果您未在刪除叢集時刪除儲存空間，則可以透過 {{site.data.keyword.Bluemix_notm}} GUI 中的 IBM Cloud 基礎架構 (SoftLayer) 儀表板來刪除儲存空間。基於每月計費週期，不能在月底最後一天刪除持續性磁區宣告。如果您在該月份的最後一天刪除持續性磁區宣告，則刪除會保持擱置，直到下個月開始為止。
 
@@ -436,6 +451,6 @@ Kubernetes 叢集是組織成網路的一組工作者節點。叢集的用途是
     3.  遵循提示，然後選擇是否刪除叢集資源。
 
 移除叢集時，您可以選擇移除與其相關聯的可攜式子網路及持續性儲存空間：
-- 子網路是用來將可攜式公用 IP 位址指派給負載平衡器服務或 Ingress 控制器。如果保留它們，則可以在新的叢集中重複使用它們，或稍後從 IBM Cloud 基礎架構 (SoftLayer) 組合中手動刪除它們。
+- 子網路是用來將可攜式公用 IP 位址指派給負載平衡器服務或 Ingress 應用程式負載平衡器。如果保留它們，則可以在新的叢集中重複使用它們，或稍後從 IBM Cloud 基礎架構 (SoftLayer) 組合中手動刪除它們。
 - 如果您使用[現有的檔案共用](cs_storage.html#existing)建立了持續性磁區宣告，則在刪除叢集時，無法刪除檔案共用。您必須稍後從 IBM Cloud 基礎架構 (SoftLayer) 組合中手動刪除檔案共用。
 - 持續性儲存空間為您的資料提供高可用性。如果刪除它，則無法回復您的資料。

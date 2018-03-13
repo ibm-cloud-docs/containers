@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-29"
 
 ---
 
@@ -18,7 +18,7 @@ lastupdated: "2018-01-12"
 # 设置 VPN 连接
 {: #vpn}
 
-VPN 连接允许您将 Kubernetes 集群中的应用程序安全地连接到内部部署网络。您还可以将集群外部的应用程序连接到正在集群内部运行的应用程序。
+通过 VPN 连接，您可以将 Kubernetes 集群中的应用程序安全地连接到内部部署网络。您还可以将集群外部的应用程序连接到正在集群内部运行的应用程序。
 {:shortdesc}
 
 ## 使用 Strongswan IPSec VPN 服务 Helm 图表设置 VPN 连接
@@ -117,7 +117,7 @@ VPN 连接允许您将 Kubernetes 集群中的应用程序安全地连接到内�
     </tr>
     <tr>
     <td><code>local.subnet</code></td>
-    <td>将此值更改为应该通过 VPN 连接显示在内部部署网络上的集群子网 CIDR 的列表。此列表可以包含以下子网：<ul><li>Kubernetes pod 子网 CIDR：<code>172.30.0.0/16</code></li><li>Kubernetes 服务子网 CIDR：<code>172.21.0.0/16</code></li><li>工作程序节点的专用子网 CIDR（如果应用程序由专用网络上的 NodePort 服务显示）。要查找此值，请运行 <code>bx cs subnets | grep <xxx.yyy.zzz></code>，其中 &lt;xxx.yyy.zzz&gt; 是工作程序节点的专用 IP 地址的前 3 个八位字节。</li><li>集群的专用或用户管理的子网 CIDR（如果应用程序由专用网络上的 LoadBalancer 服务显示）。要查找这些值，请运行 <code>bx cs cluster-get <cluster name> --showResources</code>。在 <b>VLANS</b> 部分中，查找 <b>Public</b> 值为 <code>false</code> 的 CIDR。</li></ul></td>
+    <td>将此值更改为要通过内部部署网络的 VPN 连接公开的集群子网 CIDR 的列表。此列表可以包含以下子网：<ul><li>Kubernetes pod 子网 CIDR：<code>172.30.0.0/16</code></li><li>Kubernetes 服务子网 CIDR：<code>172.21.0.0/16</code></li><li>工作程序节点的专用子网 CIDR（如果应用程序由专用网络上的 NodePort 服务公开）。要查找此值，请运行 <code>bx cs subnets | grep <xxx.yyy.zzz></code>，其中 <code>&lt;xxx.yyy.zzz&gt;</code> 是工作程序节点的专用 IP 地址的前 3 个八位字节。</li><li>集群的专用或用户管理的子网 CIDR（如果应用程序由专用网络上的 LoadBalancer 服务显示）。要查找这些值，请运行 <code>bx cs cluster-get <cluster name> --showResources</code>。在 <b>VLANS</b> 部分中，查找 <b>Public</b> 值为 <code>false</code> 的 CIDR。</li></ul></td>
     </tr>
     <tr>
     <td><code>local.id</code></td>
@@ -189,9 +189,9 @@ VPN 连接允许您将 Kubernetes 集群中的应用程序安全地连接到内�
         ```
         {: screen}
 
-        **注**：
-          - 首次使用此 Helm 图表时，VPN 的状态很可能不是 `ESTABLISHED`。您可能需要检查内部部署 VPN 端点设置并返回到步骤 3 以更改 `config.yaml` 文件数次，连接才能成功。
-          - 如果 VPN pod 处于 `ERROR` 状态或继续崩溃并重新启动，那么可能是由于在图表的配置映射中对 `ipsec.conf` 设置进行了参数验证。要查看是否是这个原因，请通过运行 `kubectl logs -n kube-system $STRONGAN_POD` 来检查 Strongswan pod 日志中是否存在任何验证错误。如果存在验证错误，请运行 `helm delete --purge vpn`，返回到步骤 3 以修正 `config.yaml` 文件中的错误值，并重复步骤 4 到 8。如果集群具有大量工作程序节点，那么还可以使用 `helm upgrade` 来更迅速地应用更改，而不是运行 `helm delete` 和 `helm install`。
+      **注**：
+          - 首次使用此 Helm 图表时，VPN 的状态可能并不是 `ESTABLISHED`。您可能需要检查内部部署 VPN 端点设置并返回到步骤 3 以更改 `config.yaml` 文件数次，连接才能成功。
+          - 如果 VPN pod 处于 `ERROR` 状态或继续崩溃并重新启动，那么可能是由于在图表的配置映射中对 `ipsec.conf` 设置进行了参数验证。请通过运行 `kubectl logs -n kube-system $STRONGSWAN_POD` 来检查 Strongswan pod 日志中是否存在任何验证错误。如果存在验证错误，请运行 `helm delete --purge vpn`，返回到步骤 3 以修正 `config.yaml` 文件中的错误值，并重复步骤 4 到 8。如果集群具有大量工作程序节点，那么还可以使用 `helm upgrade` 来更迅速地应用更改，而不运行 `helm delete` 和 `helm install`。
 
     4. VPN 的状态为 `ESTABLISHED` 后，请使用 `ping` 测试连接。以下示例将 ping 从 Kubernetes 集群中的 VPN pod 发送到内部部署 VPN 网关的专用 IP 地址。请确保在配置文件中指定了正确的 `remote.subnet` 和 `local.subnet`，并且本地子网列表包含发送 ping 的源 IP 地址。
 

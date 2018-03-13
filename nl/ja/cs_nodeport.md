@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -25,7 +25,7 @@ lastupdated: "2018-01-12"
 ## NodePort タイプのサービスを使用してアプリへのパブリック・アクセスを構成する方法
 {: #config}
 
-ライト・クラスターでも標準クラスターでも、アプリは Kubernetes NodePort サービスとして公開できます。
+フリー・クラスターでも標準クラスターでも、アプリは Kubernetes NodePort サービスとして公開できます。
 {:shortdesc}
 
 **注:** ワーカー・ノードのパブリック IP アドレスは永続的なアドレスではありません。 ワーカー・ノードを再作成しなければならない場合は、新しいパブリック IP アドレスがワーカー・ノードに割り当てられます。 安定的なパブリック IP アドレスによってサービスの可用性を高める必要がある場合は、[LoadBalancer サービス](cs_loadbalancer.html)または [Ingress](cs_ingress.html) を使用してアプリを公開してください。
@@ -70,16 +70,16 @@ lastupdated: "2018-01-12"
     </tr>
     <tr>
     <td><code>port</code></td>
-    <td><code><em>&lt;8081&gt;</em></code> を、サービスが listen するポートに置き換えます。</td>
+    <td><code><em>&lt;8081&gt;</em></code> を、サービスが listen するポートに置き換えます。 </td>
      </tr>
      <tr>
      <td><code>nodePort</code></td>
-     <td>オプション: <code><em>&lt;31514&gt;</em></code> を、30000 から 32767 の範囲の NodePort に置き換えます。別のサービスで既に使用されている NodePort は指定しないでください。 NodePort を割り当てなければ、ランダムに割り当てられます。<br><br>NodePort を指定する時に使用中の NodePort を確認する場合は、以下のコマンドを実行できます。 <pre class="pre"><code>kubectl get svc</code></pre>使用中の NodePorts は、**Ports** フィールドの下に表示されます。</td>
+     <td>オプション: <code><em>&lt;31514&gt;</em></code> を、30000 から 32767 の範囲の NodePort に置き換えます。 別のサービスで既に使用されている NodePort は指定しないでください。 NodePort を割り当てなければ、ランダムに割り当てられます。<br><br>NodePort を指定する時に使用中の NodePort を確認する場合は、以下のコマンドを実行できます。 <pre class="pre"><code>kubectl get svc</code></pre>使用中の NodePorts は、**Ports** フィールドの下に表示されます。</td>
      </tr>
      </tbody></table>
 
 
-    Guestbook サンプルで、フロントエンド・サービス・セクションは構成ファイル内に既に存在しています。Guestbook アプリを外部で使用できるようにするには、NodePort タイプと、30000 から 32767 の範囲の NodePort をフロントエンド・サービス・セクションに追加します。
+    Guestbook サンプルで、フロントエンド・サービス・セクションは構成ファイル内に既に存在しています。 Guestbook アプリを外部で使用できるようにするには、NodePort タイプと、30000 から 32767 の範囲の NodePort をフロントエンド・サービス・セクションに追加します。
 
     ```
     apiVersion: v1
@@ -150,4 +150,4 @@ lastupdated: "2018-01-12"
 
     この例では、NodePort は `30872` です。
 
-3.  ワーカー・ノードのパブリック IP アドレスの 1 つと NodePort を使用して URL を作成します。例: `http://192.0.2.23:30872`
+3.  ワーカー・ノードのパブリック IP アドレスの 1 つと NodePort を使用して URL を作成します。 例: `http://192.0.2.23:30872`

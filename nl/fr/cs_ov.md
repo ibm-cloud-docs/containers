@@ -16,9 +16,9 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# Cette page a été déplacée
+# Le contenu que vous cherchez a été déplacé.
 
-Accédez aux rubriques correspondantes ici :
+Consultez les informations les plus récentes dans son nouvel emplacement :
  - [Conteneurs Docker](cs_tech.html#docker_containers)
  - [Concepts de base de Kubernetes](cs_tech.html#kubernetes_basics)
  - [Avantages de l'utilisation de clusters](cs_why.html#benefits)

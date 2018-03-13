@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-06"
 
 ---
 
@@ -22,15 +22,15 @@ lastupdated: "2018-01-12"
 當您建立叢集時，每個叢集都必須連接至公用 VLAN。公用 VLAN 會判定在建立叢集期間指派給工作者節點的公用 IP 位址。
 {:shortdesc}
 
-精簡和標準叢集中的工作者節點公用網路介面都受到 Calico 網路原則的保護。依預設，這些原則會封鎖大部分入埠資料流量。不過，會容許讓 Kubernetes 運作所需的入埠資料流量，對 NodePort、Loadbalancer 及 Ingress 服務的連線也是相同。如需這些原則的相關資訊，包括如何修改它們，請參閱[網路原則](cs_network_policy.html#network_policies)。
+免費和標準叢集中的工作者節點公用網路介面都受到 Calico 網路原則的保護。依預設，這些原則會封鎖大部分入埠資料流量。不過，會容許讓 Kubernetes 運作所需的入埠資料流量，對 NodePort、Loadbalancer 及 Ingress 服務的連線也是相同。如需這些原則的相關資訊，包括如何修改它們，請參閱[網路原則](cs_network_policy.html#network_policies)。
 
 |叢集類型|叢集之公用 VLAN 的管理員|
 |------------|------------------------------------------|
-|{{site.data.keyword.Bluemix_notm}} 中的精簡叢集|{{site.data.keyword.IBM_notm}}|
+|{{site.data.keyword.Bluemix_notm}} 中的免費叢集|{{site.data.keyword.IBM_notm}}|
 |{{site.data.keyword.Bluemix_notm}}中的標準叢集|在您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶中時|
 {: caption="VLAN 管理責任" caption-side="top"}
 
-
+如需工作者節點與 Pod 之間叢集內網路通訊的相關資訊，請參閱[叢集內網路](cs_secure.html#in_cluster_network)。如需將 Kubernetes 叢集中執行的應用程式安全地連接至內部部署網路，或您叢集外的應用程式的相關資訊，請參閱[設定 VPN 連線功能](cs_vpn.html)。
 
 ## 容許對應用程式的公用存取
 {: #public_access}
@@ -42,10 +42,10 @@ lastupdated: "2018-01-12"
 
 ![{{site.data.keyword.containerlong_notm}} Kubernetes 架構](images/networking.png)
 
-此圖顯示 Kubernetes 在 {{site.data.keyword.containershort_notm}} 中如何攜帶使用者網路資料流量。視您所建立的是精簡還是標準叢集而定，會有不同的方式可從網際網路存取您的應用程式。
+此圖顯示 Kubernetes 在 {{site.data.keyword.containershort_notm}} 中如何攜帶使用者網路資料流量。視您所建立的是免費還是標準叢集而定，會有不同的方式可從網際網路存取您的應用程式。
 
 <dl>
-<dt><a href="#nodeport" target="_blank">NodePort 服務</a>（精簡及標準叢集）</dt>
+<dt><a href="#nodeport" target="_blank">NodePort 服務</a>（免費及標準叢集）</dt>
 <dd>
  <ul>
   <li>公開每個工作者節點上的公用埠，並使用任何工作者節點的公用 IP 位址來公開存取您在叢集中的服務。</li>
@@ -67,13 +67,12 @@ lastupdated: "2018-01-12"
  <ul>
   <li>公開您叢集中的多個應用程式，方法是建立一個外部 HTTP 或 HTTPS 負載平衡器，以使用安全且唯一的公用進入點，將送入要求遞送給應用程式。</li>
   <li>您可以使用一個公用路徑，將叢集中的多個應用程式公開為服務。</li>
-  <li>Ingress 包含三個主要元件：Ingress 資源、Ingress 控制器及應用程式負載平衡器。
+  <li>Ingress 包含兩個主要元件：Ingress 資源及應用程式負載平衡器。
    <ul>
     <li>Ingress 資源會定義如何遞送及負載平衡應用程式送入要求的規則。</li>
-    <li>Ingress 控制器會啟用應用程式負載平衡器，以接聽送入的 HTTP 或 HTTPS 服務要求，並根據針對每一個 Ingress 資源所定義的規則來轉遞要求。</li>
-    <li>應用程式負載平衡器會在應用程式的 Pod 之間負載平衡要求。
+    <li>應用程式負載平衡器會根據針對每一個 Ingress 資源所定義的規則，來接聽送入的 HTTP 或 HTTPS 服務要求，及在應用程式 Pod 間轉遞要求。</li>
    </ul>
-  <li>如果您要使用自訂遞送規則來實作自己的負載平衡器，以及需要應用程式的 SSL 終止，請使用 Ingress。</li>
+  <li>如果您要使用自訂遞送規則來實作自己的應用程式負載平衡器，以及如果需要應用程式的 SSL 終止，請使用 Ingress。</li>
  </ul>
 </dd></dl>
 
@@ -137,6 +136,8 @@ lastupdated: "2018-01-12"
 - 如果您的叢集只能在專用 VLAN 上使用，則會使用可攜式專用 IP 位址。
 - 您可以透過將註釋新增至配置檔，要求 LoadBalancer 服務的可攜式公用或專用 IP 位址：`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>`。
 
+
+
 如需如何使用 {{site.data.keyword.containershort_notm}} 來建立 LoadBalancer 服務的指示，請參閱[使用負載平衡器服務類型來配置應用程式的公用存取](cs_loadbalancer.html#config)。
 
 
@@ -150,17 +151,19 @@ lastupdated: "2018-01-12"
 Ingress 可讓您公開叢集中的多個服務，並使用單一公用進入點將它們設為可公開使用。
 {:shortdesc}
 
-Ingress 提供唯一公用路徑，讓您可以根據個別路徑，將公用要求轉遞給叢集內外部的應用程式，而不是為您要公開給大眾使用的每一個應用程式建立負載平衡器服務。Ingress 包含兩個主要元件。Ingress 資源會定義如何遞送應用程式送入要求的規則。所有 Ingress 資源都必須向 Ingress 控制器登錄，而 Ingress 控制器會接聽送入 HTTP 或 HTTPS 服務要求，並根據針對每一個 Ingress 資源所定義的規則來轉遞要求。
+Ingress 提供唯一公用路徑，讓您可以根據個別路徑，將公用要求轉遞給叢集內外部的應用程式，而不是為您要公開給公用網路使用的每一個應用程式建立負載平衡器服務。Ingress 包含兩個主要元件。Ingress 資源會定義如何遞送應用程式送入要求的規則。所有 Ingress 資源都必須向 Ingress 應用程式負載平衡器登錄，而 Ingress 應用程式負載平衡器會根據針對每一個 Ingress 資源所定義的規則，來接聽送入的 HTTP 或 HTTPS 服務要求及轉遞要求。
 
-當您建立標準叢集時，{{site.data.keyword.containershort_notm}} 會自動建立叢集的高可用性 Ingress 控制器，並將格式為 `<cluster_name>.<region>.containers.mybluemix.net` 的唯一公用路徑指派給它。公用路徑會鏈結至在建立叢集期間佈建至 IBM Cloud 基礎架構 (SoftLayer) 帳戶的可攜式公用 IP 位址。
+當您建立標準叢集時，{{site.data.keyword.containershort_notm}} 會自動建立叢集的高可用性應用程式負載平衡器，並將格式為 `<cluster_name>.<region>.containers.mybluemix.net` 的唯一公用路徑指派給它。公用路徑會鏈結至在建立叢集期間佈建至 IBM Cloud 基礎架構 (SoftLayer) 帳戶的可攜式公用 IP 位址。也會自動建立專用應用程式負載平衡器，但不會自動啟用。
 
 下圖顯示 Ingress 如何將通訊從網際網路導向至應用程式：
 
 ![使用 {{site.data.keyword.containershort_notm}} Ingress 支援來公開服務](images/cs_ingress.png)
 
-若要透過 Ingress 公開應用程式，您必須建立應用程式的 Kubernetes 服務，並藉由定義 Ingress 資源向 Ingress 控制器登錄此服務。Ingress 資源指定您要附加至公用路徑的路徑，以形成所公開應用程式的唯一 URL，例如：`mycluster.us-south.containers.mybluemix.net/myapp`。如圖所示，當您將此路徑輸入 Web 瀏覽器時，會將要求傳送給 Ingress 控制器的鏈結可攜式公用 IP 位址。Ingress 控制器會檢查 `mycluster` 叢集中是否有 `myapp` 路徑的遞送規則。如果找到相符規則，則會將包括個別路徑的要求轉遞給已部署應用程式的 Pod，請考慮已在原始 Ingress 資源物件中定義的規則。若要讓應用程式處理送入要求，請確定應用程式接聽 Ingress 資源中已定義的個別路徑。
+若要透過 Ingress 公開應用程式，您必須建立應用程式的 Kubernetes 服務，並藉由定義 Ingress 資源向應用程式負載平衡器登錄此服務。Ingress 資源指定您要附加至公用路徑的路徑，以形成所公開應用程式的唯一 URL，例如 `mycluster.us-south.containers.mybluemix.net/myapp`。如圖所示，當您將此路徑輸入 Web 瀏覽器時，會將要求傳送給應用程式負載平衡器的鏈結可攜式公用 IP 位址。應用程式負載平衡器會檢查 `mycluster` 叢集中是否有 `myapp` 路徑的遞送規則。如果找到相符規則，則會將包括個別路徑的要求轉遞給已部署應用程式的 Pod，請考慮已在原始 Ingress 資源物件中定義的規則。若要讓應用程式處理送入要求，請確定應用程式接聽 Ingress 資源中已定義的個別路徑。
 
-您可以針對下列情境配置 Ingress 控制器來管理應用程式的送入網路資料流量：
+
+
+您可以針對下列情境配置應用程式負載平衡器來管理應用程式的送入網路資料流量：
 
 -   使用 IBM 提供的網域且不搭配 TLS 終止
 -   使用 IBM 提供的網域且搭配 TLS 終止

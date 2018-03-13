@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-02"
 
 ---
 
@@ -36,7 +36,7 @@ Sie können Protokolle für andere Protokollquellen, wie Container, Anwendungen,
 |`application`|Protokolle für Ihre eigene Anwendung, die in einem Kubernetes-Cluster ausgeführt wird.|`/var/log/apps/**/*.log`, `/var/log/apps/**/*.err`|
 |`worker`|Protokolle für Workerknoten für virtuelle Maschinen in einem Kubernetes-Cluster.|`/var/log/syslog`, `/var/log/auth.log`|
 |`kubernetes`|Protokolle für die Kubernetes-Systemkomponente.|`/var/log/kubelet.log`, `/var/log/kube-proxy.log`|
-|`ingress`|Protokolle für eine Lastausgleichsfunktion für Anwendungen, die vom Ingress-Controller verwaltet wird, der den aus einem Kubernetes-Cluster kommenden Datenverkehr verwaltet.|`/var/log/alb/ids/*.log`, `/var/log/alb/ids/*.err`, `/var/log/alb/customerlogs/*.log`, `/var/log/alb/customerlogs/*.err`|
+|`ingress`|Protokolle für eine Ingress-Lastausgleichsfunktion für Anwendungen, die den eingehenden Netzverkehr für einen Kubernetes-Cluster verwaltet.|`/var/log/alb/ids/*.log`, `/var/log/alb/ids/*.err`, `/var/log/alb/customerlogs/*.log`, `/var/log/alb/customerlogs/*.err`|
 {: caption="Merkmale von Protokollquellen" caption-side="top"}
 
 ## Protokollweiterleitung aktivieren
@@ -280,8 +280,8 @@ Gehen Sie wie folgt vor, um die Details der Protokollierungskonfiguration zu än
     <td>Ersetzen Sie <em>&lt;meine_protokollquelle&gt;</em> durch die Protokollquelle. Gültige Werte sind <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code> und <code>ingress</code>.</td>
     </tr>
     <tr>
-    <td><code>--hostname <em>&lt;protokollserver-hostname_oder_-ip&gt;</em></code></td>
-    <td>Wenn der Protokollierungstyp <code>syslog</code> lautet, ersetzen Sie <em>&lt;protokollserver-hostname_oder_-ip&gt;</em> durch den Hostnamen oder die IP-Adresse des Protokollcollector-Service. Wenn der Protokollierungstyp <code>ibm</code> lautet, ersetzen Sie <em>&lt;protokollserver-hostname&gt;</em> durch die {{site.data.keyword.loganalysislong_notm}}-Einpflege-URL. Sie finden die Liste von verfügbaren Einpflege-URLs [hier](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). Wenn Sie keine Einpflege-URL angeben, wird der Endpunkt für die Region, in der Ihr Cluster erstellt wurde, verwendet.</td>
+    <td><code>--hostname <em>&lt;hostname_oder_ip_des_protokollservers&gt;</em></code></td>
+    <td>Wenn der Protokollierungstyp <code>syslog</code> lautet, ersetzen Sie <em>&lt;hostname_oder_ip_des_protokollservers&gt;</em> durch den Hostnamen oder die IP-Adresse des Protokollcollector-Service. Wenn der Protokollierungstyp <code>ibm</code> lautet, ersetzen Sie <em>&lt;protokollserver-hostname&gt;</em> durch die {{site.data.keyword.loganalysislong_notm}}-Einpflege-URL. Sie finden die Liste von verfügbaren Einpflege-URLs [hier](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). Wenn Sie keine Einpflege-URL angeben, wird der Endpunkt für die Region, in der Ihr Cluster erstellt wurde, verwendet.</td>
     </tr>
     <tr>
     <td><code>--port <em>&lt;protokollserver-port&gt;</em></code></td>
@@ -481,7 +481,8 @@ Für Standardcluster befinden sich die Protokolle in dem {{site.data.keyword.Blu
 
 Zum Zugriff auf das Kibana-Dashboard müssen Sie eine der folgenden URLs aufrufen und dann das {{site.data.keyword.Bluemix_notm}}-Konto oder den entsprechenden Bereich auswählen, in dem Sie den Cluster erstellt haben.
 - Vereinigte Staaten (Süden) und Vereinigte Staaten (Osten): https://logging.ng.bluemix.net
-- Großbritannien (Süden) und Zentraleuropa: https://logging.eu-fra.bluemix.net
+- Großbritannien (Süden): https://logging.eu-gb.bluemix.net
+- Zentraleuropa: https://logging.eu-fra.bluemix.net
 - Asiatisch-pazifischer Raum (Süden): https://logging.au-syd.bluemix.net
 
 Weitere Informationen zum Anzeigen von Protokollen finden Sie im Abschnitt zum [Navigieren zu Kibana über einen Web-Browser](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser).
@@ -583,96 +584,96 @@ Führen Sie zunächst den folgenden Schritt aus: [Geben Sie als Ziel der CLI](cs
     {:codeblock}
 
 
-    <table summary="Erklärung der Komponenten der Konfigurationszuordnung">
-    <caption>Erklärung der Komponenten der Konfigurationszuordnung</caption>
-      <thead>
-        <th colspan=2><img src="images/idea.png"/>Erklärung der Komponenten der Konfigurationszuordnung</th>
-      </thead>
-      <tbody>
-       <tr>
-          <td><code>name</code></td>
-          <td>Der Konfigurationsname <code>ibm-worker-recovery-checks</code> ist eine Konstante und kann nicht geändert werden.</td>
-       </tr>
-       <tr>
-          <td><code>namespace</code></td>
-          <td>Der Namensbereich <code>kube-system</code> ist eine Konstante und kann nicht geändert werden.</td>
-       </tr>
-      <tr>
-          <td><code>checkhttp.json</code></td>
-          <td>Definiert eine HTTP-Prüfung, die von einem HTTP-Server für die IP-Adresse jedes Knotens an Port 80 durchgeführt wird, und gibt die Antwort 200 im Pfad <code>/myhealth</code> zurück. Die IP-Adresse eines Knotens kann durch Ausführen des Befehls <code>kubectl get nodes</code> ermittelt werden.
-               Beispiel: Angenommen, ein Cluster enthält zwei Knoten mit den IP-Adressen 10.10.10.1 und 10.10.10.2. In diesem Beispiel werden zwei Routen hinsichtlich einer Antwort 200 für OK geprüft: <code>http://10.10.10.1:80/myhealth</code> und <code>http://10.10.10.2:80/myhealth</code>.
-               Die Prüfung in der vorstehenden YAML-Beispieldatei wird alle Minuten durchgeführt. Schlägt die Prüfung 3 Mal hintereinander fehl, wird der Knoten neu gestartet. Diese Aktion ist äquivalent zur Ausführung des Befehls <code>bx cs worker-reboot</code>. Die HTTP-Prüfung wird erst dann aktiviert, wenn Sie das Feld <b>Enabled</b> auf den Wert <code>true</code> setzen.</td>
-        </tr>
-        <tr>
-          <td><code>checknode.json</code></td>
-          <td>Definiert eine Kubernetes-API-Knotenprüfung, mit der ermittelt wird, ob sich jeder Knoten im Bereitstatus (<code>Ready</code>) befindet. Die Prüfung eines bestimmten Knotens wird als Fehler gezählt, wenn sich der betreffende Knoten nicht im Status <code>Ready</code> befindet.
-               Die Prüfung in der vorstehenden YAML-Beispieldatei wird alle Minuten durchgeführt. Schlägt die Prüfung 3 Mal hintereinander fehl, wird der Knoten neu geladen. Diese Aktion ist äquivalent zur Ausführung des Befehls <code>bx cs worker-reload</code>. Die Knotenprüfung bleibt so lange aktiviert, bis Sie das Feld <b>Enabled</b> auf den Wert <code>false</code> setzen oder die Prüfung entfernen.</td>
-        </tr>
-        <tr>
-          <td><code>checkpod.json</code></td>
-          <td>Definiert eine Kubernetes-API-Podprüfung, mit der auf Basis der Gesamtzahl der einem Knoten zugeordneten Pods ermittelt wird, welcher prozentuale Anteil der Pods in dem betreffenden Knoten insgesamt den Status <code>NotReady</code> (nicht bereit) aufweist. Die Prüfung eines bestimmten Knotens wird als Fehler gezählt, wenn der Gesamtprozentsatz der Pods im Status <code>NotReady</code> größer ist als der für <code>PodFailureThresholdPercent</code> festgelegte Wert.
-               Die Prüfung in der vorstehenden YAML-Beispieldatei wird alle Minuten durchgeführt. Schlägt die Prüfung 3 Mal hintereinander fehl, wird der Knoten neu geladen. Diese Aktion ist äquivalent zur Ausführung des Befehls <code>bx cs worker-reload</code>. Die Podprüfung bleibt so lange aktiviert, bis Sie das Feld <b>Enabled</b> auf den Wert <code>false</code> setzen oder die Prüfung entfernen.</td>
-        </tr>
-      </tbody>
-    </table>
+<table summary="Erklärung der Komponenten der Konfigurationszuordnung">
+<caption>Erklärung der Komponenten der Konfigurationszuordnung</caption>
+<thead>
+<th colspan=2><img src="images/idea.png"/>Erklärung der Komponenten der Konfigurationszuordnung</th>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>Der Konfigurationsname <code>ibm-worker-recovery-checks</code> ist eine Konstante und kann nicht geändert werden.</td>
+</tr>
+<tr>
+<td><code>namespace</code></td>
+<td>Der Namensbereich <code>kube-system</code> ist eine Konstante und kann nicht geändert werden.</td>
+</tr>
+<tr>
+<td><code>checkhttp.json</code></td>
+<td>Definiert eine HTTP-Prüfung, die von einem HTTP-Server für die IP-Adresse jedes Knotens an Port 80 durchgeführt wird, und gibt die Antwort 200 im Pfad <code>/myhealth</code> zurück. Die IP-Adresse eines Knotens kann durch Ausführen des Befehls <code>kubectl get nodes</code> ermittelt werden.
+Beispiel: Angenommen, ein Cluster enthält zwei Knoten mit den IP-Adressen 10.10.10.1 und 10.10.10.2. In diesem Beispiel werden zwei Routen hinsichtlich einer Antwort 200 für OK geprüft: <code>http://10.10.10.1:80/myhealth</code> und <code>http://10.10.10.2:80/myhealth</code>.
+Die Prüfung in der vorstehenden YAML-Beispieldatei wird alle Minuten durchgeführt. Schlägt die Prüfung 3 Mal hintereinander fehl, wird der Knoten neu gestartet. Diese Aktion ist äquivalent zur Ausführung des Befehls <code>bx cs worker-reboot</code>. Die HTTP-Prüfung wird erst dann aktiviert, wenn Sie das Feld <b>Enabled</b> auf den Wert <code>true</code> setzen.</td>
+</tr>
+<tr>
+<td><code>checknode.json</code></td>
+<td>Definiert eine Kubernetes-API-Knotenprüfung, mit der ermittelt wird, ob sich jeder Knoten im Bereitstatus (<code>Ready</code>) befindet. Die Prüfung eines bestimmten Knotens wird als Fehler gezählt, wenn sich der betreffende Knoten nicht im Status <code>Ready</code> befindet.
+Die Prüfung in der vorstehenden YAML-Beispieldatei wird alle Minuten durchgeführt. Schlägt die Prüfung 3 Mal hintereinander fehl, wird der Knoten neu geladen. Diese Aktion ist äquivalent zur Ausführung des Befehls <code>bx cs worker-reload</code>. Die Knotenprüfung bleibt so lange aktiviert, bis Sie das Feld <b>Enabled</b> auf den Wert <code>false</code> setzen oder die Prüfung entfernen.</td>
+</tr>
+<tr>
+<td><code>checkpod.json</code></td>
+<td>Definiert eine Kubernetes-API-Podprüfung, mit der auf Basis der Gesamtzahl der einem Knoten zugeordneten Pods ermittelt wird, welcher prozentuale Anteil der Pods in dem betreffenden Knoten insgesamt den Status <code>NotReady</code> (nicht bereit) aufweist. Die Prüfung eines bestimmten Knotens wird als Fehler gezählt, wenn der Gesamtprozentsatz der Pods im Status <code>NotReady</code> größer ist als der für <code>PodFailureThresholdPercent</code> festgelegte Wert.
+Die Prüfung in der vorstehenden YAML-Beispieldatei wird alle Minuten durchgeführt. Schlägt die Prüfung 3 Mal hintereinander fehl, wird der Knoten neu geladen. Diese Aktion ist äquivalent zur Ausführung des Befehls <code>bx cs worker-reload</code>. Die Podprüfung bleibt so lange aktiviert, bis Sie das Feld <b>Enabled</b> auf den Wert <code>false</code> setzen oder die Prüfung entfernen.</td>
+</tr>
+</tbody>
+</table>
 
 
-    <table summary="Erklärung der Komponenten einzelner Regeln">
-    <caption>Erklärung der Komponenten einzelner Regeln</caption>
-      <thead>
-        <th colspan=2><img src="images/idea.png"/>Erklärung der Komponenten einzelner Regeln </th>
-      </thead>
-      <tbody>
-       <tr>
-           <td><code>Check</code></td>
-           <td>Geben Sie die Art der Prüfung an, die im Rahmen der automatischen Wiederherstellung verwendet werden soll. <ul><li><code>HTTP</code>: Bei der automatischen Wiederherstellung werden HTTP-Server aufgerufen, die auf den einzelnen Knoten aktiv sind, um zu ermitteln, ob die Knoten ordnungsgemäß ausgeführt werden.</li><li><code>KUBEAPI</code>: Bei der automatischen Wiederherstellung wird der Kubernetes-API-Server aufgerufen und die Daten zum Allgemeinzustand gelesen, die von den Workerknoten gemeldet werden.</li></ul></td>
-           </tr>
-       <tr>
-           <td><code>Ressource</code></td>
-           <td>Wenn der Prüfungstyp <code>KUBEAPI</code> lautet, geben Sie den Ressourcentyp an, der im Rahmen der automatischen Wiederherstellung geprüft werden soll. Gültige Werte sind <code>NODE</code> oder <code>PODS</code>.</td>
-           </tr>
-       <tr>
-           <td><code>FailureThreshold</code></td>
-           <td>Geben Sie den Schwellenwert für die Anzahl der Prüfungen ein, die nacheinander fehlgeschlagen sind. Wenn dieser Schwellenwert erreicht wird, löst die automatische Wiederherstellung die angegebene Korrekturmaßnahme aus. Wenn beispielsweise der Schwellenwert '3' lautet und im Rahmen der automatischen Wiederherstellung dreimal in Folge eine konfigurierte Prüfung fehlschlägt, wird die der Prüfung zugeordnete Korrekturmaßnahme ausgelöst.</td>
-       </tr>
-       <tr>
-           <td><code>PodFailureThresholdPercent</code></td>
-           <td>Wenn der Ressourcentyp <code>PODS</code> lautet, geben Sie den Schwellenwert für den Prozentsatz der Pods auf einem Workerknoten an, die den Zustand ['NotReady' ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes) aufweisen können. Dieser Prozentsatz basiert auf der Gesamtanzahl an Pods, die auf einem Workerknoten geplant sind. Wenn durch eine Prüfung festgestellt wird, dass der Prozentsatz nicht ordnungsgemäß funktionierender Pods größer ist als der Schwellenwert, zählt die Prüfung als ein Fehler.</td>
-           </tr>
-        <tr>
-            <td><code>CorrectiveAction</code></td>
-            <td>Geben Sie die Aktion ein, die ausgeführt werden soll, wenn der Fehlerschwellenwert erreicht wird. Eine Korrekturmaßnahme wird nur ausgeführt, während keine weiteren Worker repariert werden und wenn dieser Workerknoten sich nicht in einer 'Erholungsphase' von einer vorherigen Aktion befindet. <ul><li><code>REBOOT</code>: Startet den Workerknoten neu.</li><li><code>RELOAD</code>: Lädt alle erforderlichen Konfigurationen für den Workerknoten erneut von einem bereinigten Betriebssystem.</li></ul></td>
-            </tr>
-        <tr>
-            <td><code>CooloffSeconds</code></td>
-            <td>Geben Sie die Anzahl der Sekunden an, die die automatische Wiederherstellung warten muss, bis eine weitere Korrekturmaßnahme für einen Knoten abgesetzt werden kann, für den bereits eine Korrekturmaßnahme ausgelöst wurde. Die 'Erholungsphase' startet zu dem Zeitpunkt, zu dem eine Korrekturmaßnahme ausgegeben wird.</td>
-            </tr>
-        <tr>
-            <td><code>IntervalSeconds</code></td>
-            <td>Geben Sie die Anzahl der Sekunden für den Zeitraum zwischen zwei aufeinanderfolgenden Prüfungen ein. Wenn der Wert beispielsweise '180' lautet, führt die automatische Wiederherstellung die Prüfung alle drei Minuten für einen Knoten aus.</td>
-            </tr>
-        <tr>
-            <td><code>TimeoutSeconds</code></td>
-            <td>Geben Sie die maximale Anzahl der Sekunden ein, die ein Prüfungsaufruf an die Datenbank dauern darf, bevor die automatische Wiederherstellung die Aufrufoperation beendet. Der Wert für <code>TimeoutSeconds</code> muss kleiner sein als der Wert für <code>IntervalSeconds</code>.</td>
-            </tr>
-        <tr>
-            <td><code>Port</code></td>
-            <td>Wenn der Prüfungstyp <code>HTTP</code> lautet, geben Sie den Port ein, an den der HTTP-Server auf dem Workerknoten gebunden werden muss. Dieser Port muss an der IP jedes Workerknotens im Cluster zugänglich sein. Bei der automatischen Wiederherstellung ist für die Prüfung von Servern eine konstante Portnummer auf allen Knoten erforderlich. Verwenden Sie [DaemonSets ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) bei der Bereitstellung eines angepassten Servers in einem Cluster.</td>
-            </tr>
-        <tr>
-            <td><code>ExpectedStatus</code></td>
-            <td>Wenn der Prüfungstyp <code>HTTP</code> lautet, geben sie den HTTP-Serverstatus ein, der als Rückgabewert der Prüfung erwartet wird. Beispielsweise gibt der Wert '200' an, dass Sie als Antwort <code>OK</code> vom Server erwarten.</td>
-            </tr>
-        <tr>
-            <td><code>Route</code></td>
-            <td>Wenn der Prüfungstyp <code>HTTP</code> lautet, geben Sie den Pfad an, der vom HTTP-Server angefordert wird. Der Wert ist in der Regel der Metrikenpfad für den Server, der auf allen Workerknoten ausgeführt wird.</td>
-            </tr>
-        <tr>
-            <td><code>Enabled</code></td>
-            <td>Geben Sie <code>true</code> ein, um die Prüfung zu aktivieren, oder <code>false</code>, um die Prüfung zu inaktivieren.</td>
-            </tr>
-      </tbody>
-    </table>
+<table summary="Erklärung der Komponenten einzelner Regeln">
+<caption>Erklärung der Komponenten einzelner Regeln</caption>
+<thead>
+<th colspan=2><img src="images/idea.png"/>Erklärung der Komponenten einzelner Regeln </th>
+</thead>
+<tbody>
+<tr>
+<td><code>Check</code></td>
+<td>Geben Sie die Art der Prüfung an, die im Rahmen der automatischen Wiederherstellung verwendet werden soll. <ul><li><code>HTTP</code>: Bei der automatischen Wiederherstellung werden HTTP-Server aufgerufen, die auf den einzelnen Knoten aktiv sind, um zu ermitteln, ob die Knoten ordnungsgemäß ausgeführt werden.</li><li><code>KUBEAPI</code>: Bei der automatischen Wiederherstellung wird der Kubernetes-API-Server aufgerufen und die Daten zum Allgemeinzustand gelesen, die von den Workerknoten gemeldet werden.</li></ul></td>
+</tr>
+<tr>
+<td><code>Ressource</code></td>
+<td>Wenn der Prüfungstyp <code>KUBEAPI</code> lautet, geben Sie den Ressourcentyp an, der im Rahmen der automatischen Wiederherstellung geprüft werden soll. Gültige Werte sind <code>NODE</code> oder <code>PODS</code>.</td>
+</tr>
+<tr>
+<td><code>FailureThreshold</code></td>
+<td>Geben Sie den Schwellenwert für die Anzahl der Prüfungen ein, die nacheinander fehlgeschlagen sind. Wenn dieser Schwellenwert erreicht wird, löst die automatische Wiederherstellung die angegebene Korrekturmaßnahme aus. Wenn beispielsweise der Schwellenwert '3' lautet und im Rahmen der automatischen Wiederherstellung dreimal in Folge eine konfigurierte Prüfung fehlschlägt, wird die der Prüfung zugeordnete Korrekturmaßnahme ausgelöst.</td>
+</tr>
+<tr>
+<td><code>PodFailureThresholdPercent</code></td>
+<td>Wenn der Ressourcentyp <code>PODS</code> lautet, geben Sie den Schwellenwert für den Prozentsatz der Pods auf einem Workerknoten an, die den Zustand ['NotReady' ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes) aufweisen können. Dieser Prozentsatz basiert auf der Gesamtanzahl an Pods, die auf einem Workerknoten geplant sind. Wenn durch eine Prüfung festgestellt wird, dass der Prozentsatz nicht ordnungsgemäß funktionierender Pods größer ist als der Schwellenwert, zählt die Prüfung als ein Fehler.</td>
+</tr>
+<tr>
+<td><code>CorrectiveAction</code></td>
+<td>Geben Sie die Aktion ein, die ausgeführt werden soll, wenn der Fehlerschwellenwert erreicht wird. Eine Korrekturmaßnahme wird nur ausgeführt, während keine weiteren Worker repariert werden und wenn dieser Workerknoten sich nicht in einer 'Erholungsphase' von einer vorherigen Aktion befindet. <ul><li><code>REBOOT</code>: Startet den Workerknoten neu.</li><li><code>RELOAD</code>: Lädt alle erforderlichen Konfigurationen für den Workerknoten erneut von einem bereinigten Betriebssystem.</li></ul></td>
+</tr>
+<tr>
+<td><code>CooloffSeconds</code></td>
+<td>Geben Sie die Anzahl der Sekunden an, die die automatische Wiederherstellung warten muss, bis eine weitere Korrekturmaßnahme für einen Knoten abgesetzt werden kann, für den bereits eine Korrekturmaßnahme ausgelöst wurde. Die 'Erholungsphase' startet zu dem Zeitpunkt, zu dem eine Korrekturmaßnahme ausgegeben wird.</td>
+</tr>
+<tr>
+<td><code>IntervalSeconds</code></td>
+<td>Geben Sie die Anzahl der Sekunden für den Zeitraum zwischen zwei aufeinanderfolgenden Prüfungen ein. Wenn der Wert beispielsweise '180' lautet, führt die automatische Wiederherstellung die Prüfung alle drei Minuten für einen Knoten aus.</td>
+</tr>
+<tr>
+<td><code>TimeoutSeconds</code></td>
+<td>Geben Sie die maximale Anzahl der Sekunden ein, die ein Prüfungsaufruf an die Datenbank dauern darf, bevor die automatische Wiederherstellung die Aufrufoperation beendet. Der Wert für <code>TimeoutSeconds</code> muss kleiner sein als der Wert für <code>IntervalSeconds</code>.</td>
+</tr>
+<tr>
+<td><code>Port</code></td>
+<td>Wenn der Prüfungstyp <code>HTTP</code> lautet, geben Sie den Port ein, an den der HTTP-Server auf dem Workerknoten gebunden werden muss. Dieser Port muss an der IP jedes Workerknotens im Cluster zugänglich sein. Bei der automatischen Wiederherstellung ist für die Prüfung von Servern eine konstante Portnummer auf allen Knoten erforderlich. Verwenden Sie [DaemonSets ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) bei der Bereitstellung eines angepassten Servers in einem Cluster.</td>
+</tr>
+<tr>
+<td><code>ExpectedStatus</code></td>
+<td>Wenn der Prüfungstyp <code>HTTP</code> lautet, geben sie den HTTP-Serverstatus ein, der als Rückgabewert der Prüfung erwartet wird. Beispielsweise gibt der Wert '200' an, dass Sie als Antwort <code>OK</code> vom Server erwarten.</td>
+</tr>
+<tr>
+<td><code>Route</code></td>
+<td>Wenn der Prüfungstyp <code>HTTP</code> lautet, geben Sie den Pfad an, der vom HTTP-Server angefordert wird. Der Wert ist in der Regel der Metrikenpfad für den Server, der auf allen Workerknoten ausgeführt wird.</td>
+</tr>
+<tr>
+<td><code>Enabled</code></td>
+<td>Geben Sie <code>true</code> ein, um die Prüfung zu aktivieren, oder <code>false</code>, um die Prüfung zu inaktivieren.</td>
+</tr>
+</tbody>
+</table>
 
 2. Erstellen Sie die Konfigurationszuordnung in Ihrem Cluster.
 
@@ -688,58 +689,15 @@ Führen Sie zunächst den folgenden Schritt aus: [Geben Sie als Ziel der CLI](cs
     ```
     {: pre}
 
-4. Stellen Sie sicher, dass Sie einen geheimen Schlüssel für Docker-Pulloperationen namens `international-registry-docker-secret` im Namensbereich `kube-system` erstellt haben. Die automatische Wiederherstellung ist in der internationalen Docker-Registry von {{site.data.keyword.registryshort_notm}} gehostet. Wenn Sie keinen geheimen Schlüssel für die Docker-Registry erstellt haben, der gültige Berechtigungsnachweise für die internationale Registry aufweist, erstellen Sie einen solchen Schlüssel zum Ausführen des System für die automatische Wiederherstellung.
 
-    1. Installieren Sie das {{site.data.keyword.registryshort_notm}}-Plug-in.
-
-        ```
-        bx plugin install container-registry -r Bluemix
-        ```
-        {: pre}
-
-    2. Wechseln Sie zur internationalen Registry.
-
-        ```
-        bx cr region-set international
-        ```
-        {: pre}
-
-    3. Erstellen Sie ein Token für die internationale Registry.
-
-        ```
-        bx cr token-add --non-expiring --description internationalRegistryToken
-        ```
-        {: pre}
-
-    4. Setzen Sie die Umgebungsvariable `INTERNATIONAL_REGISTRY_TOKEN` auf das von Ihnen erstellte Token.
-
-        ```
-        INTERNATIONAL_REGISTRY_TOKEN=$(bx cr token-get $(bx cr tokens | grep internationalRegistryToken | awk '{print $1}') -q)
-        ```
-        {: pre}
-
-    5. Setzen Sie die Umgebungsvariable `DOCKER_EMAIL` auf den aktuellen Benutzer. Ihre E-Mail-Adresse wird nur zum Ausführen des Befehls `kubectl` im nächsten Schritt benötigt.
-
-        ```
-        DOCKER_EMAIL=$(bx target | grep "User" | awk '{print $2}')
-        ```
-        {: pre}
-
-    6. Erstellen Sie einen geheimen Schlüssel für die Docker-Pulloperation.
-
-        ```
-        kubectl -n kube-system create secret docker-registry international-registry-docker-secret --docker-username=token --docker-password="$INTERNATIONAL_REGISTRY_TOKEN" --docker-server=registry.bluemix.net --docker-email="$DOCKER_EMAIL"
-        ```
-        {: pre}
-
-5. Stellen Sie die automatische Wiederherstellung in Ihrem Cluster durch das Anwenden der folgenden YAML-Datei bereit.
+4. Stellen Sie die automatische Wiederherstellung in Ihrem Cluster durch das Anwenden der folgenden YAML-Datei bereit.
 
    ```
    kubectl apply -f https://raw.githubusercontent.com/IBM-Bluemix/kube-samples/master/ibm-worker-recovery/ibm-worker-recovery.yml
    ```
    {: pre}
 
-6. Nach einigen Minuten können Sie den Abschnitt `Events` in der Ausgabe des folgenden Befehls auf mögliche Aktivitäten bei der Bereitstellung der automatischen Wiederherstellung überprüfen.
+5. Nach einigen Minuten können Sie den Abschnitt `Events` in der Ausgabe des folgenden Befehls auf mögliche Aktivitäten bei der Bereitstellung der automatischen Wiederherstellung überprüfen.
 
     ```
     kubectl -n kube-system describe deployment ibm-worker-recovery

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-05"
 
 ---
 
@@ -32,12 +32,32 @@ lastupdated: "2018-01-11"
 </thead>
 <tbody>
 <tr>
+<td>Aqua Security</td>
+  <td>作為<a href="/docs/services/va/va_index.html" target="_blank">漏洞警告器</a>的補充，您可以使用 <a href="https://www.aquasec.com/" target="_blank">Aqua Security<img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>，透過減少容許應用程式執行的內容來改善容器部署的安全。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2017/06/protecting-container-deployments-bluemix-aqua-security/" target="_blank">使用 Aqua Security 保護 {{site.data.keyword.Bluemix_notm}} 上的容器部署 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+</tr>
+<tr>
 <td>Blockchain</td>
 <td>將 IBM Blockchain 的可公開使用開發環境部署至 {{site.data.keyword.containerlong_notm}} 中的 Kubernetes 叢集。使用此環境開發及自訂您自己的區塊鏈網路，以部署應用程式來共用可記錄交易歷程的不可變分類帳。如需相關資訊，請參閱<a href="https://ibm-blockchain.github.io" target="_blank">在雲端沙盤推演 IBM Blockchain 平台中開發 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
 <tr>
-<td>Continuous Delivery</td>
+<td>{{site.data.keyword.cloudcerts_short}}</td>
+<td>您可以使用 <a href="../services/certificate-manager/index.html" target="_blank">{{site.data.keyword.cloudcerts_long}}<img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來儲存及管理應用程式的 SSL 憑證。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">使用 {{site.data.keyword.cloudcerts_long_notm}} 與 {{site.data.keyword.containershort_notm}} 搭配來部署自訂網域 TLS 憑證 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+</tr>
+<tr>
+<td>Codeship</td>
+<td>您可以使用 <a href="https://codeship.com" target="_blank">Codeship <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>，以持續整合及遞送容器。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2017/10/using-codeship-pro-deploy-workloads-ibm-container-service/" target="_blank">使用 Codeship Pro 將工作負載部署至 {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.contdelivery_short}}</td>
 <td>使用工具鏈自動建置應用程式，並將容器部署至 Kubernetes 叢集。如需設定資訊，請參閱部落格 <a href="https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines/" target="_blank">Deploy Kubernetes pods to the {{site.data.keyword.containerlong_notm}} using DevOps Pipelines <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+</tr>
+<tr>
+<td>CoScale</td>
+<td>使用 <a href="https://www.coscale.com/" target="_blank">CoScale <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來監視工作者節點、容器、抄本集、抄寫控制器及服務。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2017/06/monitoring-ibm-bluemix-container-service-coscale/" target="_blank">使用 CoScale 監視 {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+</tr>
+<tr>
+<td>Datadog</td>
+<td>使用 <a href="https://www.datadoghq.com/" target="_blank">Dataloadog <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來監視您的叢集，並檢視基礎架構和應用程式效能度量值。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2017/07/monitoring-ibm-bluemix-container-service-datadog/" target="_blank">使用 Datadog 監視 {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
 <tr>
 <td>Helm</td>
@@ -45,29 +65,38 @@ lastupdated: "2018-01-11"
 </tr>
 <tr>
 <td>Instana</td>
-<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 透過自動探索及對映應用程式的 GUI，提供基礎架構及應用程式效能監視。此外，Istana 也會擷取向應用程式提出的每一個要求，讓您可以進行疑難排解，並執行主要原因分析，以避免問題再次發生。如需進一步瞭解，請參閱關於<a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">在 {{site.data.keyword.containershort_notm}} 中部署 Istana <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 的部落格文章。</td>
+<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 透過自動探索及對映應用程式的 GUI，提供基礎架構及應用程式效能監視。Istana 會擷取向應用程式提出的每一個要求，讓您可以進行疑難排解，並執行主要原因分析，以避免問題再次發生。如需進一步瞭解，請參閱關於<a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">在 {{site.data.keyword.containershort_notm}} 中部署 Istana <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 的部落格文章。</td>
 </tr>
 <tr>
 <td>Istio</td>
 <td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio<img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 是一種開放程式碼服務，提供方法讓開發人員連接、保護、管理及監視雲端編排平台上微服務（也稱為服務網）的網路，例如 Kubernetes。請參閱關於 <a href="https://developer.ibm.com/dwblog/2017/istio/" target="_blank">IBM 如何共同建立及啟動 Istio <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 的部落格文章，以進一步瞭解開放程式碼專案的相關資訊。若要在 {{site.data.keyword.containershort_notm}} 的 Kubernetes 叢集上安裝 Istio，並開始使用範例應用程式，請參閱[指導教學：使用 Istio 管理微服務](cs_tutorials_istio.html#istio_tutorial)。</td>
 </tr>
 <tr>
+<td>NeuVector</td>
+<td>使用 <a href="https://neuvector.com/" target="_blank">Neutretor <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來保護容器與雲端原生防火牆。如需相關資訊，請參閱 <a href="https://www.ibm.com/us-en/marketplace/neuvector-container-security" target="_blank">NeuVector Container Security <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+</tr>
+<tr>
 <td>Prometheus</td>
-<td>Prometheus 是一個專為 Kubernetes 所設計的開放程式碼監視、記載及警示工具，可根據 Kubernetes 記載資訊來擷取叢集、工作者節點及部署性能的詳細資訊。會收集叢集中所有執行中容器的 CPU、記憶體、I/O 及網路活動，並且可以用於自訂查詢或警示中，以監視叢集中的效能及工作負載。<p>若要使用 Prometheus，請執行下列動作：</p>
-<ol>
-<li>遵循 <a href="https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus" target="_blank">CoreOS 指示 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來安裝 Prometheus。
-<ol>
-<li>當您執行 export 指令時，請使用 kube-system 名稱空間。
-<p><code>export NAMESPACE=kube-system hack/cluster-monitoring/deploy</code></p></li>
-</ol>
-</li>
-<li>在叢集中部署 Prometheus 之後，請在 Grafana 中編輯 Prometheus 資料來源，以參照 <code>prometheus.kube-system:30900</code>。</li>
-</ol>
+<td>Prometheus 是一個專為 Kubernetes 所設計的開放程式碼監視、記載及警示工具，可根據 Kubernetes 記載資訊來擷取叢集、工作者節點及部署性能的詳細資訊。會收集叢集中所有執行中容器的 CPU、記憶體、I/O 及網路活動，並且可以用於自訂查詢或警示中，以監視叢集中的效能及工作負載。
+
+<p>若要使用 Prometheus，請遵循 <a href="https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus" target="_blank">CoreOS 指示 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</p>
 </td>
 </tr>
 <tr>
 <td>{{site.data.keyword.bpshort}}</td>
 <td>{{site.data.keyword.bplong}} 是一種自動化工具，可使用 Terraform 將基礎架構部署為程式碼。當您將基礎架構部署為單一單元時，可以跨任意數目的環境重複使用那些雲端資源定義。若要使用 {{site.data.keyword.bpshort}} 將 Kubernetes 叢集定義為資源，請嘗試使用 [container-cluster 範本](https://console.bluemix.net/schematics/templates/details/Cloud-Schematics%2Fcontainer-cluster)來建立環境。如需 Schematics 的相關資訊，請參閱[關於 {{site.data.keyword.bplong_notm}}](/docs/services/schematics/schematics_overview.html#about)。</td>
+</tr>
+<tr>
+<td>Sematext</td>
+<td>使用 <a href="https://sematext.com/" target="_blank">Sematext <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來檢視容器化應用程式的度量值和日誌。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2017/09/monitoring-logging-ibm-bluemix-container-service-sematext/" target="_blank">使用 Sematext 監視及記載容器 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+</tr>
+<tr>
+<td>Sysdig</td>
+<td>使用 <a href="https://sysdig.com/" target="_blank">Sysindig <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>，以單一檢測點來擷取應用程式、容器、statsd 及主機度量值。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2017/08/monitoring-ibm-bluemix-container-service-sysdig-container-intelligence/" target="_blank">使用 Sysdig Container Intelligence 監視 {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+</tr>
+<tr>
+<td>Twistlock</td>
+<td>作為<a href="/docs/services/va/va_index.html" target="_blank">漏洞警告器</a>的補充，您可以使用 <a href="https://www.twistlock.com/" target="_blank">Twistlock <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來管理防火牆、威脅保護及突發事件回應。如需相關資訊，請參閱 <a href="https://www.ibm.com/blogs/bluemix/2017/07/twistlock-ibm-bluemix-container-service/" target="_blank">{{site.data.keyword.containershort_notm}} 上的 Twistlock <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
 <tr>
 <td>Weave Scope</td>
@@ -91,12 +120,12 @@ lastupdated: "2018-01-11"
 開始之前：
 
 1. [將 CLI 的目標設為](cs_cli_install.html#cs_cli_configure)您的叢集。
-2. [要求 {{site.data.keyword.Bluemix_notm}} 服務的實例](/docs/manageapps/reqnsi.html#req_instance)。
+2. [要求 {{site.data.keyword.Bluemix_notm}} 服務的實例](/docs/apps/reqnsi.html#req_instance)。
    **附註：**若要在華盛頓特區中建立服務實例，您必須使用 CLI。
 
 **附註：**
 <ul><ul>
-<li>您只能新增支援服務金鑰的 {{site.data.keyword.Bluemix_notm}} 服務。如果服務不支援服務金鑰，請參閱[啟用外部應用程式以使用 {{site.data.keyword.Bluemix_notm}} 服務](/docs/manageapps/reqnsi.html#accser_external)。</li>
+<li>您只能新增支援服務金鑰的 {{site.data.keyword.Bluemix_notm}} 服務。如果服務不支援服務金鑰，請參閱[啟用外部應用程式以使用 {{site.data.keyword.Bluemix_notm}} 服務](/docs/apps/reqnsi.html#accser_external)。</li>
 <li>必須完全部署叢集及工作者節點，才能新增服務。</li>
 </ul></ul>
 
@@ -197,7 +226,7 @@ Kubernetes Secret 是一種儲存機密資訊（例如使用者名稱、密碼�
 
 3.  開啟您偏好的編輯器。
 
-4.  建立 YAML 檔案，以配置可透過 Secret 磁區存取服務詳細資料的 Pod。
+4.  建立 YAML 檔案，以配置可透過 Secret 磁區存取服務詳細資料的 Pod。如果您連結了多個服務，請驗證每一個密碼是否與正確的服務相關聯。
 
     ```
     apiVersion: extensions/v1beta1
@@ -314,7 +343,7 @@ Weave Scope 提供 Kubernetes 叢集內資源（包括服務、Pod、容器、�
 開始之前：
 
 -   請記住不要在公用網際網路上公開叢集資訊。請完成下列步驟，以安全地部署 Weave Scope，並於本端從 Web 瀏覽器進行存取。
--   如果您還沒有叢集，請[建立標準叢集](cs_clusters.html#clusters_ui)。Weave Scope 可能需要大量 CPU，特別是應用程式。請搭配執行 Weave Scope 與較大的標準叢集，而非精簡叢集。
+-   如果您還沒有叢集，請[建立標準叢集](cs_clusters.html#clusters_ui)。Weave Scope 可能需要大量 CPU，特別是應用程式。請搭配執行 Weave Scope 與較大的標準叢集，而非免費叢集。
 -   [將 CLI 的目標設為](cs_cli_install.html#cs_cli_configure)叢集，才能執行 `kubectl` 指令。
 
 
@@ -331,7 +360,7 @@ Weave Scope 提供 Kubernetes 叢集內資源（包括服務、Pod、容器、�
     若要啟用唯讀許可權，請執行下列動作：
 
     ```
-    kubectl apply -f "https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/weave-scope/weave-scope-rbac-readonly.yaml"
+    kubectl apply --namespace weave -f "https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/weave-scope/weave-scope-rbac-readonly.yaml"
     ```
     {: pre}
 
@@ -346,7 +375,7 @@ Weave Scope 提供 Kubernetes 叢集內資源（包括服務、Pod、容器、�
 3.  部署 Weave Scope 服務（只能透過叢集 IP 位址進行私密存取）。
 
     <pre class="pre">
-    <code>kubectl apply --namespace kube-system -f "https://cloud.weave.works/k8s/scope.yaml?k8s-version=$(kubectl version | base64 | tr -d '&bsol;n')"</code>
+    <code>kubectl apply --namespace weave -f "https://cloud.weave.works/k8s/scope.yaml?k8s-version=$(kubectl version | base64 | tr -d '&bsol;n')"</code>
     </pre>
 
     輸出：
@@ -362,7 +391,7 @@ Weave Scope 提供 Kubernetes 叢集內資源（包括服務、Pod、容器、�
 4.  在您的電腦上執行埠轉遞指令，以啟動服務。既然 Weave Scope 已配置叢集，則下一次存取 Weave Scope 時，您就可以執行此埠轉遞指令，而不需要再次完成先前的配置步驟。
 
     ```
-    kubectl port-forward -n kube-system "$(kubectl get -n kube-system pod --selector=weave-scope-component=app -o jsonpath='{.items..metadata.name}')" 4040
+    kubectl port-forward -n weave "$(kubectl get -n weave pod --selector=weave-scope-component=app -o jsonpath='{.items..metadata.name}')" 4040
     ```
     {: pre}
 

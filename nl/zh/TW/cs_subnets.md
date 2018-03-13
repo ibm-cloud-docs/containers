@@ -58,15 +58,15 @@ lastupdated: "2018-01-12"
     </tr>
     <tr>
     <td><code><em>&lt;cluster_name_or_id&gt;</em></code></td>
-    <td>將 <code>&gt;cluster_name_or_id&lt;</code> 取代為叢集的名稱或 ID。</td>
+    <td>將 <code>&lt;cluster_name_or_id&gt;</code> 取代為叢集的名稱或 ID。</td>
     </tr>
     <tr>
     <td><code><em>&lt;subnet_size&gt;</em></code></td>
-    <td>將 <code>&gt;subnet_size&lt;</code> 取代為您要從可攜式子網路新增的 IP 位址數目。接受值為 8、16、32 或 64。<p>**附註：**當您新增子網路的可攜式 IP 位址時，會使用三個 IP 位址來建立叢集內部網路，因此，您無法將它們用於應用程式負載平衡器，或是使用它們來建立負載平衡器服務。例如，如果您要求八個可攜式公用 IP 位址，則可以使用其中的五個將您的應用程式公開給大眾使用。</p> </td>
+    <td>將 <code>&lt;subnet_size&gt;</code> 取代為您要從可攜式子網路新增的 IP 位址數目。接受值為 8、16、32 或 64。<p>**附註：**當您新增子網路的可攜式 IP 位址時，會使用三個 IP 位址來建立叢集內部網路，因此，您無法將它們用於應用程式負載平衡器，或是使用它們來建立負載平衡器服務。例如，如果您要求八個可攜式公用 IP 位址，則可以使用其中的五個將您的應用程式公開給大眾使用。</p> </td>
     </tr>
     <tr>
     <td><code><em>&lt;VLAN_ID&gt;</em></code></td>
-    <td>將 <code>&gt;VLAN_ID&lt;</code> 取代為您要在其上配置可攜式公用或專用 IP 位址之公用或專用 VLAN 的 ID。您必須選取現有工作者節點所連接的公用或專用 VLAN。若要檢閱工作者節點的公用或專用 VLAN，請執行 <code>bx cs worker-get &gt;worker_id&lt;</code> 指令。</td>
+    <td>將 <code>&lt;VLAN_ID&gt;</code> 取代為您要在其上配置可攜式公用或專用 IP 位址之公用或專用 VLAN 的 ID。您必須選取現有工作者節點所連接的公用或專用 VLAN。若要檢閱工作者節點的公用或專用 VLAN，請執行 <code>bx cs worker-get &lt;worker_id&gt;</code> 指令。</td>
     </tr>
     </tbody></table>
 

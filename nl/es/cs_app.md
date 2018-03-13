@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -36,13 +36,12 @@ Conozca los pasos generales para desplegar apps pulsando en un área de la image
 <br />
 
 
-## Planificación de despliegue
+## Planificación de despliegues de alta disponibilidad
 {: #highly_available_apps}
 
 Cuanto más ampliamente distribuya la configuración entre varios nodos trabajadores y clústeres, menor será la probabilidad de que los usuarios experimenten tiempo de inactividad con la app.
-{:shortdesc}
 
-Revise estas configuraciones potenciales de apps que están ordenadas por grados de disponibilidad en orden ascendente:
+Revise las siguientes configuraciones potenciales de apps que están ordenadas por grados de disponibilidad en orden ascendente.{:shortdesc}
 
 ![Etapas de alta disponibilidad de una app](images/cs_app_ha_roadmap.png)
 
@@ -128,7 +127,7 @@ Para obtener más información, revise las opciones correspondientes a <a href="
 ### Despliegue de una app mínima
 {: #minimal_app_deployment}
 
-Un despliegue básico de app en un clúster lite o estándar puede incluir los siguientes componentes.
+Un despliegue básico de app en un clúster gratuito o estándar puede incluir los siguientes componentes.
 {:shortdesc}
 
 ![Configuración del despliegue](images/cs_app_tutorial_components1.png)
@@ -215,7 +214,7 @@ Puede utilizar el puerto predeterminado o definir su propio puerto para iniciar 
         ```
         {: pre}
 
-    2.  Copie el valor **id-token** que se muestra en la salida. 
+    2.  Copie el valor **id-token** que se muestra en la salida.
 
     3.  Establezca el proxy con el número de puerto predeterminado.
 

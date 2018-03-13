@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-06"
 
 ---
 
@@ -22,6 +22,8 @@ lastupdated: "2018-01-12"
 포트를 노출하고 로드 밸런서의 포터블 IP 주소를 사용하여 앱에 액세스하십시오. 공인 IP 주소를 사용하여 인터넷에서 앱에 액세스할 수 있게 하거나, 사설 IP 주소를 사용하여 사설 인프라 네트워크에서 앱에 액세스할 수 있게 하십시오.
 {:shortdesc}
 
+
+
 ## 로드 밸런서 서비스 유형을 사용하여 앱에 대한 액세스 구성
 {: #config}
 
@@ -30,7 +32,7 @@ NodePort 서비스와 다르게 로드 밸런서 서비스의 포터블 IP 주�
 
 로드 밸런서의 포터블 IP 주소가 지정되며 사용자가 작업자 노드를 추가하거나 제거해도 변경되지 않습니다. 따라서 로드 밸런서 서비스가 NodePort 서비스보다 가용성이 더 높습니다.  사용자는 로드 밸런서에 대한 임의의 포트를 선택할 수 있으며, 이는 NodePort 포트 범위로 제한되지 않습니다. 사용자는 TCP 및 UDP 프로토콜에 대한 로드 밸런서 서비스를 사용할 수 있습니다.
 
-**참고:** 로드 밸런서 서비스는 TLS 종료를 지원하지 않습니다. 앱에서 TLS 종료가 필요한 경우 [Ingress](cs_ingress.html)를 사용하여 앱을 노출하거나 TLS 종료를 관리하도록 앱을 구성할 수 있습니다.
+**참고:** LoadBalancer 서비스는 TLS 종료를 지원하지 않습니다. 앱에서 TLS 종료가 필요한 경우 [Ingress](cs_ingress.html)를 사용하여 앱을 노출하거나 TLS 종료를 관리하도록 앱을 구성할 수 있습니다.
 
 시작하기 전에:
 
@@ -40,9 +42,10 @@ NodePort 서비스와 다르게 로드 밸런서 서비스의 포터블 IP 주�
 
 로드 밸런서 서비스를 작성하려면 다음을 수행하십시오.
 
-1.  [클러스터에 앱을 배치하십시오](cs_app.html#app_cli). 클러스터에 앱을 배치하면 컨테이너에서 앱을 실행하는 사용자에 대한 하나 이상의 포드가 작성됩니다. 구성 파일의 메타데이터 섹션에서 배치에 레이블을 추가했는지 확인하십시오. 이 레이블은 로드 밸런싱에 포함될 수 있도록 앱이 실행 중인 모든 포드를 식별하는 데 필요합니다.
+1.  [클러스터에 앱을 배치](cs_app.html#app_cli)하십시오. 클러스터에 앱을 배치하면 컨테이너에서 앱을 실행하는 사용자에 대한 하나 이상의 포드가 작성됩니다. 구성 파일의 메타데이터 섹션에서 배치에 레이블을 추가했는지 확인하십시오. 이 레이블은 로드 밸런싱에 포함될 수 있도록 앱이 실행 중인 모든 포드를 식별하는 데 필요합니다.
 2.  노출시키려는 앱에 대해 로드 밸런서 서비스를 정의하십시오. 공용 인터넷 또는 사설 네트워크에서 앱을 사용할 수 있으려면 앱에 대한 Kubernetes 서비스를 작성하십시오. 앱을 구성하는 모든 포드를 로드 밸런싱에 포함하도록 서비스를 구성하십시오.
     1.  예를 들어, `myloadbalancer.yaml`이라는 이름의 서비스 구성 파일을 작성하십시오.
+
     2.  노출하려는 앱에 대한 로드 밸런서 서비스를 정의하십시오.
         - 클러스터가 퍼블릭 VLAN에 있는 경우 포터블 공인 IP 주소가 사용됩니다. 대부분의 클러스터는 퍼블릭 VLAN에 있습니다.
         - 클러스터가 프라이빗 VLAN에서만 사용 가능한 경우 포터블 사설 IP 주소가 사용됩니다.
@@ -141,6 +144,7 @@ NodePort 서비스와 다르게 로드 밸런서 서비스의 포터블 IP 주�
     Labels:                 <none>
     Selector:               <selectorkey>=<selectorvalue>
     Type:                   LoadBalancer
+    Location:               dal10
     IP:                     10.10.10.90
     LoadBalancer Ingress:   192.168.10.38
     Port:                   <unset> 8080/TCP
@@ -148,14 +152,15 @@ NodePort 서비스와 다르게 로드 밸런서 서비스의 포터블 IP 주�
     Endpoints:              172.30.171.87:8080
     Session Affinity:       None
     Events:
-    FirstSeen LastSeen Count From   SubObjectPath Type  Reason   Message
-      --------- -------- ----- ----   ------------- -------- ------   -------
-      10s  10s  1 {service-controller }   Normal  CreatingLoadBalancer Creating load balancer
-      10s  10s  1 {service-controller }   Normal  CreatedLoadBalancer Created load balancer
+    FirstSeen	LastSeen	Count	From			SubObjectPath	Type		Reason			Message
+      ---------	--------	-----	----			-------------	--------	------			-------
+      10s		10s		1	{service-controller }			Normal		CreatingLoadBalancer	Creating load balancer
+      10s		10s		1	{service-controller }			Normal		CreatedLoadBalancer	Created load balancer
     ```
     {: screen}
 
-**LoadBalancer Ingress** IP 주소는 로드 밸런서 서비스에 지정된 포터블 IP 주소입니다.
+    **LoadBalancer Ingress** IP 주소는 로드 밸런서 서비스에 지정된 포터블 IP 주소입니다.
+
 4.  공용 로드 밸런서를 작성한 경우 인터넷에서 앱에 액세스하십시오.
     1.  선호하는 웹 브라우저를 여십시오.
     2.  로드 밸런서 및 포트의 포터블 공인 IP 주소를 입력하십시오. 위의 예제에서는 포터블 공인 IP 주소 `192.168.10.38`이 로드 밸런서 서비스에 지정되었습니다.

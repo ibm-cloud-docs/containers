@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-01"
 
 ---
 
@@ -40,11 +40,11 @@ Las diferencias más importantes entre {{site.data.keyword.Bluemix_notm}} públi
 
 |Área|{{site.data.keyword.Bluemix_notm}} público|{{site.data.keyword.Bluemix_dedicated_notm}}|
 |--|--------------|--------------------------------|
-|Creación del clúster|Se crea un clúster Lite o se especifican los siguientes detalles para un clúster estándar:<ul><li>Tipo de clúster</li><li>Nombre</li><li>Ubicación</li><li>Tipo de máquina</li><li>Número de nodos trabajadores</li><li>VLAN pública</li><li>VLAN privada</li><li>Hardware</li></ul>|Se especifican los siguientes detalles para un clúster estándar:<ul><li>Nombre</li><li>Versión de Kubernetes</li><li>Tipo de máquina</li><li>Número de nodos trabajadores</li></ul><p>**Nota:** Los valores de hardware y VLAN se definen de forma previa durante la creación del entorno de {{site.data.keyword.Bluemix_notm}}.</p>|
+|Creación del clúster|Cree un clúster gratuito o especifique los siguientes detalles para un clúster estándar:<ul><li>Tipo de clúster</li><li>Nombre</li><li>Ubicación</li><li>Tipo de máquina</li><li>Número de nodos trabajadores</li><li>VLAN pública</li><li>VLAN privada</li><li>Hardware</li></ul>|Especifique los siguientes detalles para un clúster estándar:<ul><li>Nombre</li><li>Versión de Kubernetes</li><li>Tipo de máquina</li><li>Número de nodos trabajadores</li></ul><p>**Nota:** Los valores de hardware y VLAN se definen de forma previa durante la creación del entorno de {{site.data.keyword.Bluemix_notm}}.</p>|
 |Propiedad y hardware del clúster|En los clústeres estándares, el hardware se puede compartir con otros clientes de {{site.data.keyword.IBM_notm}} o puede estar dedicado a usted únicamente. Las VLAN privadas y públicas las posee y gestiona cada usuario en su cuenta de infraestructura de IBM Cloud (SoftLayer).|En los clústeres del entorno de {{site.data.keyword.Bluemix_dedicated_notm}}, el hardware es siempre dedicado. Las VLAN privadas y públicas las posee y gestiona IBM en nombre del usuario. La ubicación se define de forma previa para el entorno de {{site.data.keyword.Bluemix_notm}}.|
 |Redes de Ingress y de equilibrio de carga|Durante el suministro del clúster estándar, se llevan a cabo de forma automática las siguientes acciones.<ul><li>Se vinculan una subred portátil pública y una subred portátil privada al clúster y se asignan a su cuenta de infraestructura de IBM Cloud (SoftLayer).</li><li>Se utiliza una dirección IP pública portátil para un equilibrador de carga de aplicación de alta disponibilidad y se asigna una ruta pública exclusiva en el formato &lt;cluster_name&gt;.containers.mybluemix.net. Puede utilizar esta ruta para exponer varias apps al público. Se utiliza dirección IP privada portátil para un equilibrador de carga de aplicación privado.</li><li>Se asignan cuatro direcciones IP públicas portátiles y cuatro direcciones IP privadas portátiles al clúster que se pueden utilizar para exponer apps mediante servicios del equilibrador de carga. Se pueden solicitar subredes adicionales a través de su cuenta de infraestructura de IBM Cloud (SoftLayer).</li></ul>|Cuando se crea una cuenta para el entorno Dedicado, se toma la decisión de conectividad sobre cómo se desea exponer los servicios del clúster y acceder a ellos. Si desea utilizar los rangos de IP de su propia empresa (IP gestionadas por el usuario), debe proporcionarlos cuando [configure un entorno de {{site.data.keyword.Bluemix_dedicated_notm}}](/docs/dedicated/index.html#setupdedicated). <ul><li>De forma predeterminada, no se vincula ninguna subred portátil pública a los clústeres que crea en su cuenta dedicada. En su lugar, tiene la flexibilidad de elegir el modelo de conectividad que mejor se adapte a su empresa.</li><li>Después de crear el clúster, elija el tipo de subredes que desea enlazar y utilizar con el clúster para la conectividad de Ingress o del equilibrador de carga.<ul><li>Para las subredes portátiles públicas o privadas, puede [añadir subredes a los clústeres](cs_subnets.html#subnets)</li><li>Para las direcciones IP gestionadas por el usuario que ha proporcionado a IBM en la incorporación dedicada, puede [añadir subredes gestionadas por el usuario a los clústeres](#dedicated_byoip_subnets).</li></ul></li><li>Después de enlazar una subred a su clúster, se crea el controlador de Ingress. Se crea una ruta de Ingress pública solo si utiliza una subred pública portátil.</li></ul>|
 |Redes de NodePort|Exponga un puerto público en el nodo trabajador y utilice la dirección IP pública del nodo trabajador para acceder de forma pública al servicio en el clúster.|Todas las direcciones IP públicas de los nodos trabajadores están bloqueados por un cortafuegos. Sin embargo, para los servicios de {{site.data.keyword.Bluemix_notm}} que se añadan al clúster, se puede acceder al puerto del nodo mediante una dirección IP pública o una dirección IP privada.|
-|Almacén persistente|Utiliza el [suministro dinámico](cs_storage.html#create) o el [suministro estático](cs_storage.html#existing) de volúmenes.|Utiliza el [suministro dinámico](cs_storage.html#create) de volúmenes. [Abra una incidencia de soporte](/docs/support/index.html#contacting-support) para solicitar una copia de seguridad y una restauración de los volúmenes y para realizar otras funciones de almacenamiento.</li></ul>|
+|Almacén persistente|Utiliza el [suministro dinámico](cs_storage.html#create) o el [suministro estático](cs_storage.html#existing) de volúmenes.|Utiliza el [suministro dinámico](cs_storage.html#create) de volúmenes. [Abra una incidencia de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support) para solicitar una copia de seguridad y una restauración de los volúmenes y para realizar otras funciones de almacenamiento.</li></ul>|
 |URL de registro de imágenes en {{site.data.keyword.registryshort_notm}}|<ul><li>EE.UU. Sur y EE.UU. Este: <code>registry.ng bluemix.net</code></li><li>UK Sur: <code>registry.eu-gb.bluemix.net</code></li><li>UE Central (Frankfurt): <code>registry.eu-de.bluemix.net</code></li><li>Australia (Sidney): <code>registry.au-syd.bluemix.net</code></li></ul>|<ul><li>Para los nuevos espacios de nombres, utilice los mismos registros basados en regiones que los definidos para el entorno de {{site.data.keyword.Bluemix_notm}} público.</li><li>Para los espacios de nombres que se configuraron para contenedores escalables y únicos en {{site.data.keyword.Bluemix_dedicated_notm}}, utilice <code>registry.&lt;dedicated_domain&gt;</code></li></ul>|
 |Acceso al registro|Consulte las opciones del apartado sobre [Utilización de registros de imágenes privadas y públicas con {{site.data.keyword.containershort_notm}}](cs_images.html).|<ul><li>Para los espacios de nombres nuevos, consulte las opciones del apartado sobre [Utilización de registros de imágenes privadas y públicas con {{site.data.keyword.containershort_notm}}](cs_images.html).</li><li>Para espacios de nombres que se configuraron para grupos escalables y únicos, se [utiliza una señal para crear un secreto de Kubernetes](cs_dedicated_tokens.html#cs_dedicated_tokens) para la autenticación.</li></ul>|
 {: caption="Diferencias entre las características de {{site.data.keyword.Bluemix_notm}} público y {{site.data.keyword.Bluemix_dedicated_notm}}" caption-side="top"}
@@ -55,7 +55,7 @@ Las diferencias más importantes entre {{site.data.keyword.Bluemix_notm}} públi
 ### Arquitectura del servicio
 {: #dedicated_ov_architecture}
 
-Cada nodo trabajador está configurado con un motor Docker gestionado por {{site.data.keyword.IBM_notm}}, distintos recursos de cálculo, sistema de red y servicio de volúmenes. Las características integradas de seguridad proporcionan aislamiento, funciones de gestión de recursos y conformidad con la seguridad de los nodos trabajadores. El nodo trabajador se comunica con el nodo maestro mediante certificados TLS seguros y conexión openVPN.
+Cada nodo trabajador está configurado con un motor Docker gestionado por {{site.data.keyword.IBM_notm}}, distintos recursos de cálculo, sistema de red y servicio de volúmenes. Las características integradas de seguridad proporcionan aislamiento, funciones de gestión de recursos y conformidad con la seguridad de los nodos trabajadores. El nodo trabajador se comunica con el maestro mediante certificados TLS seguros y conexión openVPN.
 {:shortdesc}
 
 *Arquitectura de Kubernetes y sistema de red en {{site.data.keyword.Bluemix_dedicated_notm}}*
@@ -140,7 +140,7 @@ Para permitir a los usuarios de {{site.data.keyword.Bluemix_dedicated_notm}} acc
 
         Los usuarios invitados que tienen IBMid tendrán el estado `ACTIVE`. Los usuarios invitados que no tienen IBMid tendrán el estado `PENDING` o `ACTIVE`, en función de si ya han aceptado la invitación a la cuenta o no.
 
-3.  Si un usuario necesita privilegios de creación de clústeres, debe otorgarle el rol de Administrador. 
+3.  Si un usuario necesita privilegios de creación de clústeres, debe otorgarle el rol de Administrador.
 
     1.  En la barra de menús de la consola pública, pulse **Gestionar > Seguridad > Identidad y acceso** y pulse **Usuarios**.
 
@@ -170,6 +170,13 @@ Para permitir a los usuarios de {{site.data.keyword.Bluemix_dedicated_notm}} acc
     2.  Si inicia sesión por primera vez, proporcione su ID de usuario dedicado y su contraseña cuando se le solicite. De esta forma, se autentica la cuenta dedicada y se enlazan la cuenta dedicada y la pública. Cada vez que inicie sesión después de esta primera vez, sólo utilizará el IBMid. Para obtener más información, consulte [Conexión de un ID dedicado a su IBMid público](/docs/cli/connect_dedicated_id.html#connect_dedicated_id).
 
         **Nota**: debe iniciar sesión en su cuenta dedicada y en su cuenta pública para crear clústeres. Si solo desea iniciar sesión en la cuenta dedicada, utilice el distintivo `--no-iam` al iniciar sesión en el punto final dedicado.
+
+    3.  Para crear o acceder a clústeres en el entorno dedicado, debe establecer la región asociada con ese entorno.
+
+        ```
+        bx cs region-set
+        ```
+        {: pre}
 
 5.  Si desea desenlazar sus cuentas, puede desconectar el IBMid del ID de usuario dedicado. Para obtener más información, consulte [Desconectar el ID dedicado del IBMid público](/docs/cli/connect_dedicated_id.html#disconnect-your-dedicated-id-from-the-public-ibmid).
 
@@ -241,7 +248,7 @@ Diseñe la configuración de su clúster de {{site.data.keyword.Bluemix_dedicate
     </tr>
     <tr>
     <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
-    <td>Si está creando un clúster estándar, elija un tipo de máquina. El tipo de máquina especifica los recursos de cálculo virtuales que están disponibles para cada nodo trabajador. Consulte el apartado sobre [Comparación entre los clústeres lite y estándar para {{site.data.keyword.containershort_notm}}](cs_why.html#cluster_types) para obtener más información. Para los clústeres de tipo lite, no tiene que definir el tipo de máquina.</td>
+    <td>Si está creando un clúster estándar, elija un tipo de máquina. El tipo de máquina especifica los recursos de cálculo virtuales que están disponibles para cada nodo trabajador. Consulte el apartado sobre [Comparación entre los clústeres gratuitos y estándares para {{site.data.keyword.containershort_notm}}](cs_why.html#cluster_types) para obtener más información. Para los clústeres gratuitos, no tiene que definir el tipo de máquina.</td>
     </tr>
     <tr>
     <td><code>--name <em>&lt;name&gt;</em></code></td>
@@ -365,7 +372,7 @@ Requisitos:
 
 Antes de empezar: configure el direccionamiento del tráfico de red de entrada y de salida de la red de empresa a la red de {{site.data.keyword.Bluemix_dedicated_notm}} que utilizará la subred gestionada por el usuario.
 
-1. Para utilizar su propia subred, [abra una incidencia de soporte](/docs/support/index.html#contacting-support) y proporcione la lista de CIDR de subred que desea utilizar.
+1. Para utilizar su propia subred, [abra una incidencia de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support) y proporcione la lista de CIDR de subred que desea utilizar.
     **Nota**: la forma en la que se gestionan los equilibradores de carga y los ALB para la conectividad de cuenta interna y local varía según el formato del CIDR de subred. Consulte el paso final para ver las diferencias de configuración.
 
 2. Una vez que {{site.data.keyword.IBM_notm}} suministre las subredes gestionadas por el usuario, ponga la subred a disposición del clúster de Kubernetes.
@@ -374,7 +381,7 @@ Antes de empezar: configure el direccionamiento del tráfico de red de entrada y
     bx cs cluster-user-subnet-add <cluster_name> <subnet_CIDR> <private_VLAN>
     ```
     {: pre}
-    Sustituya <em>&lt;cluster_name&gt;</em> con el nombre o el ID del clúster, <em>&lt;subnet_CIDR&&gt;</em> con uno de los CIDR de subred que ha proporcionado en la incidencia de soporte y <em>&lt;private_VLAN&gt;</em> con un ID de VLAN privada. Encontrará el ID de la VLAN privada disponible ejecutando `bx cs vlans`.
+    Sustituya <em>&lt;cluster_name&gt;</em> con el nombre o el ID del clúster, <em>&lt;subnet_CIDR&gt;</em> con uno de los CIDR de subred que ha proporcionado en la incidencia de soporte y <em>&lt;private_VLAN&gt;</em> con un ID de VLAN privada. Encontrará el ID de la VLAN privada disponible ejecutando `bx cs vlans`.
 
 3. Compruebe que las subredes se hayan añadido al clúster. El campo **User-managed** de las subredes proporcionadas por el usuario es _true_.
 
@@ -401,7 +408,7 @@ Antes de empezar: configure el direccionamiento del tráfico de red de entrada y
 
 Revise las siguientes opciones de otras configuraciones de clúster:
   * [Gestión de acceso a clústeres](cs_users.html#managing)
-  * [Actualización del Kubernetes maestro](cs_cluster_update.html#master)
+  * [Actualización del maestro de Kubernetes](cs_cluster_update.html#master)
   * [Actualización de nodos trabajadores](cs_cluster_update.html#worker_node)
   * [Configuración del registro de clúster](cs_health.html#logging)
   * [Configuración de la supervisión del clúster](cs_health.html#monitoring)
@@ -428,14 +435,14 @@ Para entornos de {{site.data.keyword.Bluemix_dedicated_notm}}, las direcciones I
 #### Configuración del acceso a una app utilizando el tipo de servicio LoadBalancer
 {: #dedicated_apps_public_load_balancer}
 
-Si desea utilizar direcciones IP públicas para el equilibrador de carga, asegúrese de que se ha proporcionado una lista blanca de cortafuegos de empresa a IBM, o [abra una incidencia de soporte](/docs/support/index.html#contacting-support) para configurar la lista blanca del cortafuegos. A continuación, siga los pasos de [Configuración del acceso a una app utilizando el tipo de servicio LoadBalancer](cs_loadbalancer.html#config).
+Si desea utilizar direcciones IP públicas para el equilibrador de carga, asegúrese de que se ha proporcionado una lista blanca de cortafuegos de empresa a IBM, o [abra una incidencia de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support) para configurar la lista blanca del cortafuegos. A continuación, siga los pasos de [Configuración del acceso a una app utilizando el tipo de servicio LoadBalancer](cs_loadbalancer.html#config).
 
 #### Configuración del acceso público a una app utilizando Ingress
 {: #dedicated_apps_public_ingress}
 
-Si desea utilizar direcciones IP públicas para el equilibrador de carga de aplicación, asegúrese de que se ha proporcionado una lista blanca de cortafuegos de empresa a IBM, o [abra una incidencia de soporte](/docs/support/index.html#contacting-support) para configurar la lista blanca del cortafuegos. A continuación, siga los pasos de [Configuración del acceso a una app utilizando Ingress](cs_ingress.html#config).
+Si desea utilizar direcciones IP públicas para el equilibrador de carga de aplicación, asegúrese de que se ha proporcionado una lista blanca de cortafuegos de empresa a IBM, o [abra una incidencia de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support) para configurar la lista blanca del cortafuegos. A continuación, siga los pasos de [Configuración del acceso a una app utilizando Ingress](cs_ingress.html#config).
 
 ### Creación de almacenamiento permanente
 {: #dedicated_apps_volume_claim}
 
-Para revisar las opciones para crear almacenamiento persistente, consulte [Almacenamiento de datos permanentes](cs_storage.html#planning). Para solicitar una copia de seguridad de los volúmenes, una restauración y otras funciones de almacenamiento, debe [abrir una incidencia de soporte](/docs/support/index.html#contacting-support).
+Para revisar las opciones para crear almacenamiento persistente, consulte [Almacenamiento de datos permanentes](cs_storage.html#planning). Para solicitar una copia de seguridad de los volúmenes, una restauración y otras funciones de almacenamiento, debe [abrir una incidencia de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).

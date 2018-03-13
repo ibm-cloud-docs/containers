@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-02"
 
 ---
 
@@ -25,7 +25,7 @@ Configure el registro y la supervisión de clústeres para que le ayude a resolv
 ## Configuración del registro de clúster
 {: #logging}
 
-Puede enviar registros a una ubicación específica para su procesamiento o almacenamiento a largo plazo. En un clúster de Kubernetes en {{site.data.keyword.containershort_notm}}, puede habilitar el reenvío de registros a varios orígenes de registro de clúster y elegir dónde se reenvían los registros. **Nota**: el reenvío de registros solo se soporta para los clústeres estándar.
+Puede enviar registros a una ubicación específica para su procesamiento o almacenamiento a largo plazo. En un clúster de Kubernetes en {{site.data.keyword.containershort_notm}}, puede habilitar el reenvío de registros a varios orígenes de registro de clúster y elegir dónde se reenvían los registros. **Nota**: el reenvío de registros solo se soporta para los clústeres estándares.
 {:shortdesc}
 
 Puede reenviar registros para orígenes de registro, como aplicaciones, nodos trabajadores, clústeres de Kubernetes y controladores de Ingress. Revise la tabla siguiente para obtener información sobre cada origen de registro.
@@ -36,7 +36,7 @@ Puede reenviar registros para orígenes de registro, como aplicaciones, nodos tr
 |`aplicación`|Registra la aplicación que se ejecuta en un clúster de Kubernetes.|`/var/log/apps/**/*.log`, `/var/log/apps/**/*.err`|
 |`worker`|Registra nodos trabajadores de máquinas virtuales dentro de un clúster de Kubernetes.|`/var/log/syslog`, `/var/log/auth.log`|
 |`kubernetes`|Registra el componente del sistema de Kubernetes.|`/var/log/kubelet.log`, `/var/log/kube-proxy.log`|
-|`ingress`|Registra un equilibrador de carga de aplicación, gestionado por el controlador de Ingress, que gestiona el tráfico de red entrante en un clúster de Kubernetes.|`/var/log/alb/ids/*.log`, `/var/log/alb/ids/*.err`, `/var/log/alb/customerlogs/*.log`, `/var/log/alb/customerlogs/*.err`|
+|`ingress`|Registra un equilibrador de carga de aplicación de Ingress que gestiona el tráfico de red entrante en un clúster de Kubernetes.|`/var/log/alb/ids/*.log`, `/var/log/alb/ids/*.err`, `/var/log/alb/customerlogs/*.log`, `/var/log/alb/customerlogs/*.err`|
 {: caption="Características del origen de registro" caption-side="top"}
 
 ## Habilitación del reenvío de registros
@@ -53,7 +53,7 @@ Antes de empezar:
 
 2. Elija como [destino de la CLI](cs_cli_install.html#cs_cli_configure) el clúster en el que se encuentra el origen de registro.
 
-Para habilitar el reenvío de registros para un contenedor, nodo de trabajador, componente del sistema Kubernetes, aplicación o equilibrador de carga de aplicación de Ingress:
+Para habilitar el reenvío de registros para un contenedor, nodo trabajador, componente del sistema Kubernetes, aplicación o equilibrador de carga de aplicación de Ingress:
 
 1. Cree una configuración de reenvío de registro.
 
@@ -237,7 +237,7 @@ Antes de empezar, [destino su CLI](cs_cli_install.html#cs_cli_configure) para el
 ## Actualización de la configuración de reenvío de registros
 {: #log_sources_update}
 
-Puede actualizar una configuración de registro para un contenedor, aplicación, nodo de trabajador, componente del sistema Kubernetes o equilibrador de carga de aplicación de Ingress.
+Puede actualizar una configuración de registro para un contenedor, aplicación, nodo trabajador, componente del sistema Kubernetes o equilibrador de carga de aplicación de Ingress.
 {: shortdesc}
 
 Antes de empezar:
@@ -435,7 +435,7 @@ Para reenviar registros de auditoría de API de Kubernetes:
     ```
     {: screen}
 
-3. Aplique la actualización de configuración reiniciando el Kubernetes maestro.
+3. Aplique la actualización de configuración reiniciando el maestro de Kubernetes.
 
     ```
     bx cs apiserver-refresh <my_cluster>
@@ -456,7 +456,7 @@ Antes de empezar, seleccione [como destino de la CLI](cs_cli_install.html#cs_cli
     ```
     {: pre}
 
-2. Aplique la actualización de configuración reiniciando el Kubernetes maestro.
+2. Aplique la actualización de configuración reiniciando el maestro de Kubernetes.
 
     ```
     bx cs apiserver-refresh <my_cluster>
@@ -480,9 +480,10 @@ Para clústeres estándares, los registros se encuentran en la cuenta de {{site.
 **Nota**: si ha especificado un espacio al crear el clúster o la configuración de registro, el propietario de la cuenta necesita permisos de gestor, desarrollador o auditor para dicho espacio para ver registros. Para obtener más información sobre cómo cambiar políticas de acceso y permisos de {{site.data.keyword.containershort_notm}}, consulte [Gestión de acceso a clústeres](cs_users.html#managing). Cuando se cambian los permisos, los registros pueden tardar hasta 24 horas en aparecer.
 
 Para acceder al panel de control de Kibana, vaya a uno de los siguientes URL y seleccione la cuenta o espacio de {{site.data.keyword.Bluemix_notm}} en la que ha creado el clúster.
-- EE.UU. Sur y EE.UU. este: https://logging.ng.bluemix.net
-- UK-Sur y UE-Central: https://logging.eu-fra.bluemix.net
-- AP Sur: https://logging.au-syd.bluemix.net
+- EE.UU. sur y EE.UU. este: https://logging.ng.bluemix.net
+- UK sur: https://logging.eu-gb.bluemix.net
+- UE central: https://logging.eu-fra.bluemix.net
+- AP sur: https://logging.au-syd.bluemix.net
 
 Para obtener más información sobre la visualización de registros, consulte [Navegación a Kibana desde un navegador web](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser).
 
@@ -497,7 +498,7 @@ Puede aprovechar las funciones incorporadas de registro de Docker para revisar l
 ## Configuración de la supervisión del clúster
 {: #monitoring}
 
-Las métricas le ayudan a supervisar el estado y el rendimiento de sus clústeres. Puede configurar la supervisión del estado de los nodos trabajadores para detectar de forma automática los trabajadores que pasen a un estado degradado o no operativo. **Nota**: La supervisión se soporta solo para los clústeres estándar.
+Las métricas le ayudan a supervisar el estado y el rendimiento de sus clústeres. Puede configurar la supervisión del estado de los nodos trabajadores para detectar de forma automática los trabajadores que pasen a un estado degradado o no operativo. **Nota**: La supervisión se soporta solo para los clústeres estándares.
 {:shortdesc}
 
 ## Visualización de métricas
@@ -530,7 +531,7 @@ Puede configurar otras herramientas para disponer de funciones adicionales.
 ## Configuración de la supervisión de estado de los nodos trabajadores con recuperación automática
 {: #autorecovery}
 
-El sistema de recuperación automática de {{site.data.keyword.containerlong_notm}} se puede desplegar en clústeres existentes de Kubernetes versión 1.7 o posterior. El sistema de recuperación automática utiliza varias comprobaciones para consultar el estado de salud del nodo trabajador de la consulta. Si la recuperación automática detecta un nodo trabajador erróneo basado en las comprobaciones configuradas, desencadena una acción correctiva, como una recarga del SI, en el nodo trabajador. Solo se aplica una acción correctiva por nodo trabajador cada vez. El nodo trabajador debe completar correctamente la acción correctiva antes de otro nodo trabajador empiece otra acción correctiva. Para obtener más información, consulte esta [publicación del blog sobre recuperación automática ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
+El sistema de recuperación automática de {{site.data.keyword.containerlong_notm}} se puede desplegar en clústeres existentes de Kubernetes versión 1.7 o posterior. El sistema de recuperación automática utiliza varias comprobaciones para consultar el estado de salud del nodo trabajador de la consulta. Si la recuperación automática detecta un nodo trabajador erróneo basado en las comprobaciones configuradas, desencadena una acción correctiva, como una recarga del sistema operativo, en el nodo trabajador. Solo se aplica una acción correctiva por nodo trabajador cada vez. El nodo trabajador debe completar correctamente la acción correctiva antes de otro nodo trabajador empiece otra acción correctiva. Para obtener más información, consulte esta [publicación del blog sobre recuperación automática ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
 **NOTA**: La recuperación automática requiere que al menos haya un nodo en buen estado que funcione correctamente. Configure la recuperación automática solo con las comprobaciones activas en los clústeres con dos o varios nodos trabajadores.
 
 Antes de empezar, seleccione el clúster cuyos estados de nodos trabajadores desea comprobar como [destino de la CLI](cs_cli_install.html#cs_cli_configure).
@@ -584,96 +585,96 @@ Antes de empezar, seleccione el clúster cuyos estados de nodos trabajadores des
     {:codeblock}
 
 
-    <table summary="Visión general de los componentes del mapa de configuración">
-    <caption>Visión general de los componentes del mapa de configuración</caption>
-      <thead>
-        <th colspan=2><img src="images/idea.png"/>Visión general de los componentes del mapa de configuración</th>
-      </thead>
-      <tbody>
-       <tr>
-          <td><code>name</code></td>
-          <td>El nombre de configuración <code>ibm-worker-recovery-checks</code> es una constante y no se puede cambiar.</td>
-       </tr>
-       <tr>
-          <td><code>namespace</code></td>
-          <td>El espacio de nombre <code>kube-system</code> es una constante y no se puede cambiar.</td>
-       </tr>
-      <tr>
-          <td><code>checkhttp.json</code></td>
-          <td>Define una comprobación HTTP que comprueba si un servidor HTTP se está ejecutando en la dirección IP de cada nodo en el puerto 80 y devuelve una respuesta 200 en la vía de acceso <code>/myhealth</code>. Para encontrar la dirección IP de un nodo, ejecute <code>kubectl get nodes</code>.
-               Por ejemplo, considere dos nodos en un clúster que tienen las direcciones IP 10.10.10.1 y 10.10.10.2. En este ejemplo, se comprueban dos rutas para obtener respuestas 200 OK: <code>http://10.10.10.1:80/myhealth</code> y <code>http://10.10.10.2:80/myhealth</code>.
-               La comprobación del YAML de ejemplo anterior se ejecuta cada 3 minutos. Si falla 3 veces consecutivas, se rearrancará el nodo. Esta acción equivale a ejecutar <code>bx cs worker-reboot</code>. La comprobación HTTP está inhabilitada hasta que se establece el campo <b>Habilitado</b> en <code>true</code>.</td>
-        </tr>
-        <tr>
-          <td><code>checknode.json</code></td>
-          <td>Define una comprobación de nodo de API de Kubernetes que comprueba si cada nodo está en estado <code>Listo</code>. La comprobación de un nodo específico cuenta como fallo si el nodo no está en estado <code>Listo</code>.
-               La comprobación del YAML de ejemplo anterior se ejecuta cada 3 minutos. Si falla 3 veces consecutivas, se recarga el nodo. Esta acción equivale a ejecutar <code>bx cs worker-reload</code>. La comprobación de nodo está habilitada hasta que se establezca el campo <b>Habilitado</b> en <code>false</code> o se elimine la comprobación.</td>
-        </tr>
-        <tr>
-          <td><code>checkpod.json</code></td>
-          <td>Define una comprobación de pod de API que comprueba el porcentaje total de pods <code>NotReady</code> en un nodo en relación con el número total de pods asignados a dicho nodo. La comprobación de un nodo específico cuenta como fallo si el porcentaje total de pods <code>NotReady</code> es superior al definido en <code>PodFailureThresholdPercent</code>.
-               La comprobación del YAML de ejemplo anterior se ejecuta cada 3 minutos. Si falla 3 veces consecutivas, se recarga el nodo. Esta acción equivale a ejecutar <code>bx cs worker-reload</code>. La comprobación de pod está habilitada hasta que se establezca el campo <b>Habilitado</b> en <code>false</code> o se elimine la comprobación.</td>
-        </tr>
-      </tbody>
-    </table>
+<table summary="Visión general de los componentes del mapa de configuración">
+<caption>Visión general de los componentes del mapa de configuración</caption>
+<thead>
+<th colspan=2><img src="images/idea.png"/>Visión general de los componentes del mapa de configuración</th>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>El nombre de configuración <code>ibm-worker-recovery-checks</code> es una constante y no se puede cambiar.</td>
+</tr>
+<tr>
+<td><code>namespace</code></td>
+<td>El espacio de nombre <code>kube-system</code> es una constante y no se puede cambiar.</td>
+</tr>
+<tr>
+<td><code>checkhttp.json</code></td>
+<td>Define una comprobación HTTP que comprueba si un servidor HTTP se está ejecutando en la dirección IP de cada nodo en el puerto 80 y devuelve una respuesta 200 en la vía de acceso <code>/myhealth</code>. Para encontrar la dirección IP de un nodo, ejecute <code>kubectl get nodes</code>.
+Por ejemplo, considere dos nodos en un clúster que tienen las direcciones IP 10.10.10.1 y 10.10.10.2. En este ejemplo, se comprueban dos rutas para obtener respuestas 200 OK: <code>http://10.10.10.1:80/myhealth</code> y <code>http://10.10.10.2:80/myhealth</code>.
+La comprobación del YAML de ejemplo anterior se ejecuta cada 3 minutos. Si falla 3 veces consecutivas, se rearrancará el nodo. Esta acción equivale a ejecutar <code>bx cs worker-reboot</code>. La comprobación HTTP está inhabilitada hasta que se establece el campo <b>Habilitado</b> en <code>true</code>.</td>
+</tr>
+<tr>
+<td><code>checknode.json</code></td>
+<td>Define una comprobación de nodo de API de Kubernetes que comprueba si cada nodo está en estado <code>Listo</code>. La comprobación de un nodo específico cuenta como fallo si el nodo no está en estado <code>Listo</code>.
+La comprobación del YAML de ejemplo anterior se ejecuta cada 3 minutos. Si falla 3 veces consecutivas, se recarga el nodo. Esta acción equivale a ejecutar <code>bx cs worker-reload</code>. La comprobación de nodo está habilitada hasta que se establezca el campo <b>Habilitado</b> en <code>false</code> o se elimine la comprobación.</td>
+</tr>
+<tr>
+<td><code>checkpod.json</code></td>
+<td>Define una comprobación de pod de API que comprueba el porcentaje total de pods <code>NotReady</code> en un nodo en relación con el número total de pods asignados a dicho nodo. La comprobación de un nodo específico cuenta como fallo si el porcentaje total de pods <code>NotReady</code> es superior al definido en <code>PodFailureThresholdPercent</code>.
+La comprobación del YAML de ejemplo anterior se ejecuta cada 3 minutos. Si falla 3 veces consecutivas, se recarga el nodo. Esta acción equivale a ejecutar <code>bx cs worker-reload</code>. La comprobación de pod está habilitada hasta que se establezca el campo <b>Habilitado</b> en <code>false</code> o se elimine la comprobación.</td>
+</tr>
+</tbody>
+</table>
 
 
-    <table summary="Visión general de los componentes de reglas individuales">
-    <caption>Visión general de los componentes de reglas individuales</caption>
-      <thead>
-        <th colspan=2><img src="images/idea.png"/>Visión general de los componentes de reglas individuales </th>
-      </thead>
-      <tbody>
-       <tr>
-           <td><code>Check</code></td>
-           <td>Introduzca el tipo de comprobación que desee que utilice la recuperación automática. <ul><li><code>HTTP</code>: La recuperación automática llama a los servidores HTTP que se ejecutan en cada nodo para determinar si los nodos se están ejecutando correctamente.</li><li><code>KUBEAPI</code>: La recuperación automática llama al servidor de AP de Kubernetes y lee los datos del estado de salud notificado por los nodos trabajadores.</li></ul></td>
-           </tr>
-       <tr>
-           <td><code>Resource</code></td>
-           <td>Cuando el tipo de comprobación es <code>KUBEAPI</code>, especifique el tipo de recurso que desee que compruebe la recuperación automática. Los valores aceptados son <code>NODE</code> o <code>PODS</code>.</td>
-           </tr>
-       <tr>
-           <td><code>FailureThreshold</code></td>
-           <td>Especifique el umbral para el número de comprobaciones consecutivas fallidas. Cuando se alcance el umbral, la recuperación automática desencadenará la acción correctiva especificada. Por ejemplo, si el valor es 3 y la recuperación automática falla una comprobación configurada tres veces consecutivas, la recuperación automática desencadena la acción correctiva asociada con la comprobación.</td>
-       </tr>
-       <tr>
-           <td><code>PodFailureThresholdPercent</code></td>
-           <td>Cuando el tipo de recurso sea <code>PODS</code>, especifique el umbral del porcentaje de pods en un nodo trabajador que puede encontrarse en estado [NotReady ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes). Este porcentaje se basa en el número total de pods que están programados para un nodo trabajador. Cuando una comprobación determina que el porcentaje de pods erróneos es superior al umbral, cuenta un error.</td>
-           </tr>
-        <tr>
-            <td><code>CorrectiveAction</code></td>
-            <td>Especifique que se ejecute la acción cuando se alcance el umbral de errores. Una acción correctiva solo se ejecuta cuando no se repara ningún otro trabajador y cuando el nodo trabajador no está en un período de calma tras una acción anterior. <ul><li><code>REBOOT</code>: Reinicia el nodo trabajador.</li><li><code>RELOAD</code>: Vuelve a cargar las configuraciones necesarias del nodo trabajador desde un SO limpio.</li></ul></td>
-            </tr>
-        <tr>
-            <td><code>CooloffSeconds</code></td>
-            <td>Especifique el número de segundos que debe esperar la recuperación automática para un nodo que ya ha emitido una acción correctiva. El período de calma empieza a la hora en que se emite la acción correctiva.</td>
-            </tr>
-        <tr>
-            <td><code>IntervalSeconds</code></td>
-            <td>Especifique el número de segundos entre comprobaciones consecutivas. Por ejemplo, si el valor es 180, la recuperación automática ejecuta la comprobación en cada nodo cada 3 minutos.</td>
-            </tr>
-        <tr>
-            <td><code>TimeoutSeconds</code></td>
-            <td>Especifique el número máximo de segundos que tarda una llamada de comprobación a la base de datos antes de que la recuperación automática finalice la operación de llamada. El valor <code>TimeoutSeconds</code> debe ser inferior al valor de <code>IntervalSeconds</code>.</td>
-            </tr>
-        <tr>
-            <td><code>Port</code></td>
-            <td>Cuando el tipo de comprobación sea <code>HTTP</code>, especifique el puerto con el que se debe vincular el servidor HTTP en los nodos trabajadores. Este puerto debe estar expuesto a la IP de cada nodo trabajador en el clúster. La recuperación automática requiere un número de puerto en todos los nodos para la comprobación de servidores. Utilice [DaemonSets ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)cuando despliegue un servidor personalizado en un clúster.</td>
-            </tr>
-        <tr>
-            <td><code>ExpectedStatus</code></td>
-            <td>Cuando el tipo de comprobación sea <code>HTTP</code>, especifique el estado del servidor HTTP que espera que se devuelva desde la comprobación. Por ejemplo, un valor de 200 indica que espera una respuesta <code>OK</code> del servidor.</td>
-            </tr>
-        <tr>
-            <td><code>Route</code></td>
-            <td>Cuando el tipo de comprobación es <code>HTTP</code>, especifique la vía de acceso solicitada desde el servidor HTTP. Este valor suele ser la vía de acceso de las métricas del servidor que se ejecuta en todos los nodos trabajadores.</td>
-            </tr>
-        <tr>
-            <td><code>Enabled</code></td>
-            <td>Especifique <code>true</code> para habilitar la comprobación o <code>false</code> para inhabilitar la comprobación.</td>
-            </tr>
-      </tbody>
-    </table>
+<table summary="Visión general de los componentes de reglas individuales">
+<caption>Visión general de los componentes de reglas individuales</caption>
+<thead>
+<th colspan=2><img src="images/idea.png"/>Visión general de los componentes de reglas individuales </th>
+</thead>
+<tbody>
+<tr>
+<td><code>Check</code></td>
+<td>Introduzca el tipo de comprobación que desee que utilice la recuperación automática. <ul><li><code>HTTP</code>: La recuperación automática llama a los servidores HTTP que se ejecutan en cada nodo para determinar si los nodos se están ejecutando correctamente.</li><li><code>KUBEAPI</code>: La recuperación automática llama al servidor de API de Kubernetes y lee los datos del estado de salud notificado por los nodos trabajadores.</li></ul></td>
+</tr>
+<tr>
+<td><code>Resource</code></td>
+<td>Cuando el tipo de comprobación es <code>KUBEAPI</code>, especifique el tipo de recurso que desee que compruebe la recuperación automática. Los valores aceptados son <code>NODE</code> o <code>PODS</code>.</td>
+</tr>
+<tr>
+<td><code>FailureThreshold</code></td>
+<td>Especifique el umbral para el número de comprobaciones consecutivas fallidas. Cuando se alcance el umbral, la recuperación automática desencadenará la acción correctiva especificada. Por ejemplo, si el valor es 3 y la recuperación automática falla una comprobación configurada tres veces consecutivas, la recuperación automática desencadena la acción correctiva asociada con la comprobación.</td>
+</tr>
+<tr>
+<td><code>PodFailureThresholdPercent</code></td>
+<td>Cuando el tipo de recurso sea <code>PODS</code>, especifique el umbral del porcentaje de pods en un nodo trabajador que puede encontrarse en estado [NotReady ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes). Este porcentaje se basa en el número total de pods que están programados para un nodo trabajador. Cuando una comprobación determina que el porcentaje de pods erróneos es superior al umbral, cuenta un error.</td>
+</tr>
+<tr>
+<td><code>CorrectiveAction</code></td>
+<td>Especifique que se ejecute la acción cuando se alcance el umbral de errores. Una acción correctiva solo se ejecuta cuando no se repara ningún otro trabajador y cuando el nodo trabajador no está en un período de calma tras una acción anterior. <ul><li><code>REBOOT</code>: Reinicia el nodo trabajador.</li><li><code>RELOAD</code>: Vuelve a cargar las configuraciones necesarias del nodo trabajador desde un SO limpio.</li></ul></td>
+</tr>
+<tr>
+<td><code>CooloffSeconds</code></td>
+<td>Especifique el número de segundos que debe esperar la recuperación automática para un nodo que ya ha emitido una acción correctiva. El período de calma empieza a la hora en que se emite la acción correctiva.</td>
+</tr>
+<tr>
+<td><code>IntervalSeconds</code></td>
+<td>Especifique el número de segundos entre comprobaciones consecutivas. Por ejemplo, si el valor es 180, la recuperación automática ejecuta la comprobación en cada nodo cada 3 minutos.</td>
+</tr>
+<tr>
+<td><code>TimeoutSeconds</code></td>
+<td>Especifique el número máximo de segundos que tarda una llamada de comprobación a la base de datos antes de que la recuperación automática finalice la operación de llamada. El valor <code>TimeoutSeconds</code> debe ser inferior al valor de <code>IntervalSeconds</code>.</td>
+</tr>
+<tr>
+<td><code>Port</code></td>
+<td>Cuando el tipo de comprobación sea <code>HTTP</code>, especifique el puerto con el que se debe vincular el servidor HTTP en los nodos trabajadores. Este puerto debe estar expuesto a la IP de cada nodo trabajador en el clúster. La recuperación automática requiere un número de puerto en todos los nodos para la comprobación de servidores. Utilice [DaemonSets ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)cuando despliegue un servidor personalizado en un clúster.</td>
+</tr>
+<tr>
+<td><code>ExpectedStatus</code></td>
+<td>Cuando el tipo de comprobación sea <code>HTTP</code>, especifique el estado del servidor HTTP que espera que se devuelva desde la comprobación. Por ejemplo, un valor de 200 indica que espera una respuesta <code>OK</code> del servidor.</td>
+</tr>
+<tr>
+<td><code>Route</code></td>
+<td>Cuando el tipo de comprobación es <code>HTTP</code>, especifique la vía de acceso solicitada desde el servidor HTTP. Este valor suele ser la vía de acceso de las métricas del servidor que se ejecuta en todos los nodos trabajadores.</td>
+</tr>
+<tr>
+<td><code>Enabled</code></td>
+<td>Especifique <code>true</code> para habilitar la comprobación o <code>false</code> para inhabilitar la comprobación.</td>
+</tr>
+</tbody>
+</table>
 
 2. Cree el mapa de configuración en el clúster.
 
@@ -689,58 +690,15 @@ Antes de empezar, seleccione el clúster cuyos estados de nodos trabajadores des
     ```
     {: pre}
 
-4. Asegúrese de haber creado un secreto de extracción Docker con el nombre `international-registry-docker-secret` en el espacio de nombre `kube-system`. La recuperación automática se aloja en el registro de Docker internacional de {{site.data.keyword.registryshort_notm}}. Si no ha creado un secreto de registro de Docker que contenga credenciales válidas para el registro internacional, cree uno en el sistema de recuperación automática.
 
-    1. Instale el plug-in de {{site.data.keyword.registryshort_notm}}.
-
-        ```
-        bx plugin install container-registry -r Bluemix
-        ```
-        {: pre}
-
-    2. Establezca el registro internacional como destino.
-
-        ```
-        bx cr region-set international
-        ```
-        {: pre}
-
-    3. Cree una señal de registro internacional.
-
-        ```
-        bx cr token-add --non-expiring --description internationalRegistryToken
-        ```
-        {: pre}
-
-    4. Establezca la variable de entorno `INTERNATIONAL_REGISTRY_TOKEN` en la señal que ha creado.
-
-        ```
-        INTERNATIONAL_REGISTRY_TOKEN=$(bx cr token-get $(bx cr tokens | grep internationalRegistryToken | awk '{print $1}') -q)
-        ```
-        {: pre}
-
-    5. Establezca la variable de entorno `DOCKER_EMAIL` en el usuario actual. La dirección de correo electrónico solo se necesita para ejecutar el mandato `kubectl` en el siguiente paso.
-
-        ```
-        DOCKER_EMAIL=$(bx target | grep "User" | awk '{print $2}')
-        ```
-        {: pre}
-
-    6. Cree el secreto de extracción de Docker.
-
-        ```
-        kubectl -n kube-system create secret docker-registry international-registry-docker-secret --docker-username=token --docker-password="$INTERNATIONAL_REGISTRY_TOKEN" --docker-server=registry.bluemix.net --docker-email="$DOCKER_EMAIL"
-        ```
-        {: pre}
-
-5. Despliegue la recuperación automática en el clúster aplicando este archivo YAML.
+4. Despliegue la recuperación automática en el clúster aplicando este archivo YAML.
 
    ```
    kubectl apply -f https://raw.githubusercontent.com/IBM-Bluemix/kube-samples/master/ibm-worker-recovery/ibm-worker-recovery.yml
    ```
    {: pre}
 
-6. Pasados unos minutos, podrá comprobar la sección `Sucesos` en la salida del siguiente mandato para ver la actividad en el despliegue de la recuperación automática.
+5. Pasados unos minutos, podrá comprobar la sección `Sucesos` en la salida del siguiente mandato para ver la actividad en el despliegue de la recuperación automática.
 
     ```
     kubectl -n kube-system describe deployment ibm-worker-recovery

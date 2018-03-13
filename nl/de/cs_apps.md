@@ -16,9 +16,9 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# Diese Seite wurde verschoben!
+# Der gesuchte Inhalt wurde verschoben.
 
-Die Themen finden Sie hier:
+Aktuelle Informationen finden Sie an der neuen Position:
 - [Kubernetes-Dashboard starten](cs_app.html#cli_dashboard)
 - [Geheime Schlüssel erstellen](cs_app.html#secrets)
 - [Öffentlichen Zugriff auf Apps zulassen](cs_network_planning.html#planning)

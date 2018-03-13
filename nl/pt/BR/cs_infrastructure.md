@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -36,18 +36,18 @@ Revise a tabela a seguir para localizar opções disponíveis para cada tipo de 
 
 |Tipo de conta|Descrição|Opções disponíveis para criar um cluster padrão|
 |------------|-----------|----------------------------------------------|
-|Contas Lite|Contas Lite não podem provisionar clusters.|[Faça upgrade da sua conta Lite para uma conta Pay-As-You-Go do {{site.data.keyword.Bluemix_notm}}](/docs/pricing/billable.html#upgradetopayg) que esteja configurada com acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer).|
-|Contas Pay-As-You-Go|As contas Pay-As-You-Go que foram criadas antes de a vinculação de conta automática estar disponível não vieram com acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer).<p>Se você tiver uma conta de infraestrutura do IBM Cloud existente (SoftLayer), não será possível vincular essa conta a uma conta Pay-As-You-Go mais antiga.</p>|Opção 1: [Criar uma nova conta Pay-As-You-Go](/docs/pricing/billable.html#billable) que estiver configurada com acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer). Ao escolher essa opção,
+|Contas Lite|Contas Lite não podem provisionar clusters.|[Faça upgrade de sua conta Lite para uma {{site.data.keyword.Bluemix_notm}}conta Pay-As-You-Go](/docs/account/index.html#billableacts) que está configurada com acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer).|
+|Contas Pay-As-You-Go|As contas Pay-As-You-Go que foram criadas antes de a vinculação de conta automática estar disponível não vieram com acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer).<p>Se você tiver uma conta de infraestrutura do IBM Cloud existente (SoftLayer), não será possível vincular essa conta a uma conta Pay-As-You-Go mais antiga.</p>|Opção 1: [Criar uma nova conta de Pay-As-You-Go](/docs/account/index.html#billableacts) que esteja configurada com acesso ao portfólio da infraestrutura do IBM Cloud (SoftLayer). Ao escolher essa opção,
 você tem duas contas e faturamentos separados do
 {{site.data.keyword.Bluemix_notm}}.<p>Se você desejar continuar usando a sua antiga conta Pay-As-You-Go para criar clusters padrão, será possível usar sua nova conta Pay-As-You-Go para gerar uma chave API para acessar o portfólio de infraestrutura do IBM Cloud (SoftLayer). Em seguida, deve-se configurar a chave API
 para sua conta Pay-As-You-Go antiga. Para obter mais informações, veja [Gerando
 uma chave API para contas Pay-As-You-Go e de Assinatura antigas](#old_account). Mantenha em mente que os recursos de infraestrutura do IBM Cloud (SoftLayer) são cobrados através de sua nova conta Pay-As-You-Go.</p></br><p>Opção 2: se você já tiver uma conta de infraestrutura do IBM Cloud existente (SoftLayer) que você desejar usar, será possível [configurar as suas credenciais](cs_cli_reference.html#cs_credentials_set) para a sua conta do {{site.data.keyword.Bluemix_notm}}.</p><p>Nota: a conta de infraestrutura do IBM Cloud (SoftLayer) que você usar com a sua conta do {{site.data.keyword.Bluemix_notm}} deverá ser configurada com permissões de Superusuário.</p>|
-|Contas de assinatura|As contas de assinatura não são configuradas com acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer).|Opção 1: [Criar uma nova conta Pay-As-You-Go](/docs/pricing/billable.html#billable) que estiver configurada com acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer). Ao escolher essa opção,
+|Contas de assinatura|As contas de assinatura não são configuradas com acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer).|Opção 1: [Criar uma nova conta de Pay-As-You-Go](/docs/account/index.html#billableacts) que esteja configurada com acesso ao portfólio da infraestrutura do IBM Cloud (SoftLayer). Ao escolher essa opção,
 você tem duas contas e faturamentos separados do
 {{site.data.keyword.Bluemix_notm}}.<p>Se você desejar continuar usando a sua conta de Assinatura para criar clusters padrão, será possível usar a sua nova conta Pay-As-You-Go para gerar uma chave API para acessar o portfólio de infraestrutura do IBM Cloud (SoftLayer). Em seguida, deve-se configurar a chave API
 para sua conta de Assinatura. Para obter mais informações, veja [Gerando
 uma chave API para contas Pay-As-You-Go e de Assinatura antigas](#old_account). Mantenha em mente que os recursos de infraestrutura do IBM Cloud (SoftLayer) são cobrados através de sua nova conta Pay-As-You-Go.</p></br><p>Opção 2: se você já tiver uma conta de infraestrutura do IBM Cloud existente (SoftLayer) que você desejar usar, será possível [configurar as suas credenciais](cs_cli_reference.html#cs_credentials_set) para a sua conta do {{site.data.keyword.Bluemix_notm}}.<p>Nota: a conta de infraestrutura do IBM Cloud (SoftLayer) que você usar com a sua conta do {{site.data.keyword.Bluemix_notm}} deverá ser configurada com permissões de Superusuário.</p>|
-|Contas de infraestrutura do IBM Cloud (SoftLayer), nenhuma conta do {{site.data.keyword.Bluemix_notm}}|Para criar um cluster padrão, deve-se ter uma conta do {{site.data.keyword.Bluemix_notm}}.|<p>[Criar uma nova conta Pay-As-You-Go](/docs/pricing/billable.html#billable) que esteja configurada com acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer). Ao escolher essa opção, uma infraestrutura IBM Cloud (SoftLayer) será criada para você. Você tem duas contas de infraestrutura do IBM Cloud (SoftLayer) separadas e faturamento.</p>|
+|Contas de infraestrutura do IBM Cloud (SoftLayer), nenhuma conta do {{site.data.keyword.Bluemix_notm}}|Para criar um cluster padrão, deve-se ter uma conta do {{site.data.keyword.Bluemix_notm}}.|<p>[Criar uma nova conta Pay-As-You-Go](/docs/account/index.html#billableacts) que esteja configurada com acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer). Ao escolher essa opção, uma infraestrutura IBM Cloud (SoftLayer) será criada para você. Você tem duas contas de infraestrutura do IBM Cloud (SoftLayer) separadas e faturamento.</p>|
 
 <br />
 

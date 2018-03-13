@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-31"
 
 ---
 
@@ -23,8 +23,6 @@ Vous pouvez octroyer un accès au cluster à d'autres utilisateurs pour garantir
 {:shortdesc}
 
 
-
-
 ## Gestion de l'accès au cluster
 {: #managing}
 
@@ -37,7 +35,7 @@ Chaque utilisateur d'{{site.data.keyword.containershort_notm}} doit être affect
 <dt>Règles d'accès à l'infrastructure</dt>
 <dd>Dans Identity and Access Management, les règles d'accès à l'infrastructure permettent aux actions demandées dans l'interface utilisateur ou l'interface de ligne de commande d'{{site.data.keyword.containershort_notm}} de s'exécuter dans l'infrastructure IBM Cloud (SoftLayer). Ces règles doivent être définies en conjonction avec des règles d'accès à {{site.data.keyword.containershort_notm}}. [En savoir plus sur les rôles d'infrastructure disponibles](/docs/iam/infrastructureaccess.html#infrapermission).</dd>
 <dt>Groupes de ressources</dt>
-<dd>Un groupe de ressources permet de regrouper des services {{site.data.keyword.Bluemix_notm}} de manière à pouvoir affecter rapidement des accès à des utilisateurs à plusieurs ressources à la fois. [Découvrez comment gérer des utilisateurs à l'aide de groupes de ressources](/docs/admin/resourcegroups.html#rgs).</dd>
+<dd>Un groupe de ressources permet de regrouper des services {{site.data.keyword.Bluemix_notm}} de manière à pouvoir affecter rapidement des accès à des utilisateurs à plusieurs ressources à la fois. [Découvrez comment gérer des utilisateurs à l'aide de groupes de ressources](/docs/account/resourcegroups.html#rgs).</dd>
 <dt>Rôles Cloud Foundry</dt>
 <dd>Dans Identity and Access Management, chaque utilisateur doit être affecté à un rôle utilisateur Cloud Foundry. Ce rôle détermine les actions que peut effectuer l'utilisateur sur le compte {{site.data.keyword.Bluemix_notm}} (par exemple, inviter d'autres utilisateurs ou examiner l'utilisation du quota). [En savoir plus sur les rôles Cloud Foundry disponibles](/docs/iam/cfaccess.html#cfaccess).</dd>
 <dt>Rôles RBAC Kubernetes</dt>
@@ -50,11 +48,11 @@ Chaque utilisateur d'{{site.data.keyword.containershort_notm}} doit être affect
 ## Règles et droits d'accès
 {: #access_policies}
 
-Examinez les règles d'accès et les autorisations que vous pouvez attribuer à des utilisateurs dans votre compte {{site.data.keyword.Bluemix_notm}}. Les rôles opérateur et éditeur ont des droits distincts. Si vous voulez qu'un utilisateur puisse, par exemple, ajouter des noeuds d'agent et lier des services, vous devez lui attribuer le rôle opérateur et le rôle éditeur.
+Examinez les règles d'accès et les autorisations que vous pouvez attribuer à des utilisateurs dans votre compte {{site.data.keyword.Bluemix_notm}}. Les rôles opérateur et éditeur ont des droits distincts. Si vous voulez qu'un utilisateur puisse, par exemple, ajouter des noeuds d'agent et lier des services, vous devez lui attribuer le rôle opérateur et le rôle éditeur. Si vous modifiez la règle d'accès d'un utilisateur, {{site.data.keyword.containershort_notm}} nettoie pour vous les règles RBAC associées à la modification dans votre cluster.
 
 |Règles d'accès {{site.data.keyword.containershort_notm}}|Autorisations de gestion de cluster|Autorisations sur les ressources Kubernetes|
 |-------------|------------------------------|-------------------------------|
-|Administrateur|Ce rôle hérite des autorisations des rôles Editeur, Opérateur et Visualiseur dans tous les clusters du compte. <br/><br/>Lorsqu'il est défini pour toutes les instances de service en cours :<ul><li>Créer un cluster léger ou standard</li><li>Définir les données d'identification pour un compte {{site.data.keyword.Bluemix_notm}} afin d'accéder au portefeuille d'infrastructure IBM Cloud (SoftLayer)</li><li>Supprimer un cluster</li><li>Affecter et modifier des règles d'accès {{site.data.keyword.containershort_notm}} pour d'autres utilisateurs existants dans ce compte.</li></ul><p>Lorsqu'il est défini pour un ID de cluster spécifique :<ul><li>Supprimer un cluster spécifique</li></ul></p>Règle d'accès à l'infrastructure correspondante : Superutilisateur<br/><br/><b>Remarque </b>: pour créer des ressources telles que des machines, des réseaux locaux virtuels (VLAN) et des sous-réseaux, les utilisateurs ont besoin du rôle d'infrastructure **Superutilisateur**.|<ul><li>Rôle RBAC : cluster-admin</li><li>Accès en lecture/écriture aux ressources dans tous les espaces de nom</li><li>Créer des rôles au sein d'un espace de nom</li><li>Accès au tableau de bord Kubernetes</li><li>Créer une ressource Ingress permettant de rendre les applications publiquement disponibles</li></ul>|
+|Administrateur|Ce rôle hérite des autorisations des rôles Editeur, Opérateur et Visualiseur dans tous les clusters du compte. <br/><br/>Lorsqu'il est défini pour toutes les instances de service en cours :<ul><li>Créer un cluster gratuit ou standard</li><li>Définir les données d'identification pour un compte {{site.data.keyword.Bluemix_notm}} afin d'accéder au portefeuille d'infrastructure IBM Cloud (SoftLayer)</li><li>Supprimer un cluster</li><li>Affecter et modifier des règles d'accès {{site.data.keyword.containershort_notm}} pour d'autres utilisateurs existants dans ce compte.</li></ul><p>Lorsqu'il est défini pour un ID de cluster spécifique :<ul><li>Supprimer un cluster spécifique</li></ul></p>Règle d'accès à l'infrastructure correspondante : Superutilisateur<br/><br/><b>Remarque </b>: pour créer des ressources telles que des machines, des réseaux locaux virtuels (VLAN) et des sous-réseaux, les utilisateurs ont besoin du rôle d'infrastructure **Superutilisateur**.|<ul><li>Rôle RBAC : cluster-admin</li><li>Accès en lecture/écriture aux ressources dans tous les espaces de nom</li><li>Créer des rôles au sein d'un espace de nom</li><li>Accès au tableau de bord Kubernetes</li><li>Créer une ressource Ingress permettant de rendre les applications publiquement disponibles</li></ul>|
 |Opérateur|<ul><li>Ajouter des noeuds d'agent supplémentaires à un cluster</li><li>Supprimer des noeuds d'agent d'un cluster</li><li>Réamorcer un noeud worker</li><li>Recharger un noeud worker</li><li>Ajouter un sous-réseau à un cluster</li></ul><p>Règles d'accès à l'infrastructure correspondante : Utilisateur de base</p>|<ul><li>Rôle RBAC : admin</li><li>Accès en lecture/écriture aux ressources dans l'espace de nom par défaut, mais non pas à l'espace de nom lui-même</li><li>Créer des rôles au sein d'un espace de nom</li></ul>|
 |Editeur <br/><br/><b>Conseil </b>: utilisez ce rôle pour les développeurs d'application.|<ul><li>Lier un service {{site.data.keyword.Bluemix_notm}} à un cluster.</li><li>Dissocier un service {{site.data.keyword.Bluemix_notm}} d'un cluster.</li><li>Créer un webhook.</li></ul><p>Règles d'accès à l'infrastructure correspondante : Utilisateur de base|<ul><li>Rôle RBAC : edit</li><li>Accès en lecture/écriture aux ressources dans l'espace de nom par défaut</li></ul></p>|
 |Afficheur|<ul><li>Lister un cluster</li><li>Afficher les détails d'un cluster</li></ul><p>Règles d'accès à l'infrastructure correspondante : visualisation uniquement</p>|<ul><li>Rôle RBAC : view</li><li>Accès en lecture aux ressources dans l'espace de nom par défaut</li><li>Pas d'accès en lecture aux valeurs confidentielles Kubernetes</li></ul>|

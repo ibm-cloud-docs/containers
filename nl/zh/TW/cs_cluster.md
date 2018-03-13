@@ -17,9 +17,9 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# 此頁面已移動！
+# 您正在尋找的內容已遭移動。
 
-尋找主題：
+請參閱新位置中最新的資訊：
 - [使用 GUI 建立叢集](cs_clusters.html#clusters_ui)
 - [使用 CLI 建立叢集](cs_clusters.html#clusters_cli)
 - [使用專用及公用映像檔登錄](cs_images.html#images)

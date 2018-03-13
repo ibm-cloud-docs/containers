@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-16"
 
 ---
 
@@ -29,7 +29,9 @@ Para obtener información general sobre los servicios de Ingress y cómo empezar
 <col width="20%">
 <col width="60%">
  <thead>
- <th colspan=3>Anotaciones generales</th>
+ <th>Anotaciones generales</th>
+ <th>Nombre</th>
+ <th>Descripción</th>
  </thead>
  <tbody>
  <tr>
@@ -65,7 +67,9 @@ Para obtener información general sobre los servicios de Ingress y cómo empezar
 <col width="20%">
 <col width="60%">
  <thead>
-  <th colspan=3>Anotaciones de conexión</th>
+ <th>Anotaciones de conexión</th>
+ <th>Nombre</th>
+ <th>Descripción</th>
   </thead>
   <tbody>
   <tr>
@@ -96,7 +100,9 @@ Para obtener información general sobre los servicios de Ingress y cómo empezar
 <col width="20%">
 <col width="60%">
  <thead>
- <th colspan=3>Anotaciones de almacenamiento intermedio de proxy</th>
+ <th>Anotaciones de almacenamiento intermedio de proxy</th>
+ <th>Nombre</th>
+ <th>Descripción</th>
  </thead>
  <tbody>
  <tr>
@@ -107,7 +113,7 @@ Para obtener información general sobre los servicios de Ingress y cómo empezar
  <tr>
  <td><a href="#proxy-buffers">Almacenamientos intermedios de proxy</a></td>
  <td><code>proxy-buffers</code></td>
- <td> Establece el número y el tamaño de los almacenamientos intermedios que leen una respuesta de una única conexión desde el servidor mediante proxy. </td>
+ <td>Establece el número y el tamaño de los almacenamientos intermedios que leen una respuesta de una única conexión desde el servidor mediante proxy.</td>
  </tr>
  <tr>
  <td><a href="#proxy-buffer-size">Tamaño de almacenamiento intermedio de proxy</a></td>
@@ -117,7 +123,7 @@ Para obtener información general sobre los servicios de Ingress y cómo empezar
  <tr>
  <td><a href="#proxy-busy-buffers-size">Tamaño de los almacenamientos intermedios ocupados del proxy</a></td>
  <td><code>proxy-busy-buffers-size</code></td>
- <td>Establezca el tamaño de los almacenamientos intermedios de proxy que puedan estar ocupados. </td>
+ <td>Establezca el tamaño de los almacenamientos intermedios de proxy que puedan estar ocupados.</td>
  </tr>
  </tbody></table>
 
@@ -127,7 +133,9 @@ Para obtener información general sobre los servicios de Ingress y cómo empezar
 <col width="20%">
 <col width="60%">
 <thead>
-<th colspan=3>Anotaciones de solicitud y respuesta</th>
+<th>Anotaciones de solicitud y respuesta</th>
+<th>Nombre</th>
+<th>Descripción</th>
 </thead>
 <tbody>
 <tr>
@@ -152,18 +160,20 @@ Para obtener información general sobre los servicios de Ingress y cómo empezar
 <col width="20%">
 <col width="60%">
 <thead>
-<th colspan=3>Anotaciones de límite de servicio</th>
+<th>Anotaciones de límite de servicio</th>
+<th>Nombre</th>
+<th>Descripción</th>
 </thead>
 <tbody>
 <tr>
 <td><a href="#global-rate-limit">Límites de velocidad global</a></td>
 <td><code>global-rate-limit</code></td>
-<td>Limite la velocidad de procesamiento de solicitudes y el número de conexiones por una clave definida para todos los servicios. </td>
+<td>Limite la velocidad de procesamiento de solicitudes y el número de conexiones por una clave definida para todos los servicios.</td>
 </tr>
 <tr>
 <td><a href="#service-rate-limit">Límites de velocidad de servicio</a></td>
 <td><code>service-rate-limit</code></td>
-<td>Limite la velocidad de procesamiento de solicitudes y el número de conexiones por una clave definida para servicios específicos. </td>
+<td>Limite la velocidad de procesamiento de solicitudes y el número de conexiones por una clave definida para servicios específicos.</td>
 </tr>
 </tbody></table>
 
@@ -172,7 +182,9 @@ Para obtener información general sobre los servicios de Ingress y cómo empezar
 <col width="20%">
 <col width="60%">
 <thead>
-<th colspan=3>Anotaciones de autenticación TLS/SSL y HTTPS</th>
+<th>Anotaciones de autenticación TLS/SSL y HTTPS</th>
+<th>Nombre</th>
+<th>Descripción</th>
 </thead>
 <tbody>
 <tr>
@@ -245,7 +257,7 @@ spec:
  <tbody>
  <tr>
  <td><code>path</code></td>
- <td>Sustituya <code>&lt;<em>mypath</em>&gt;</code> por la vía de acceso en la que escucha el servicio externo. </td>
+ <td>Sustituya <code>&lt;<em>mypath</em>&gt;</code> por la vía de acceso en la que escucha el servicio externo.</td>
  </tr>
  <tr>
  <td><code>external-svc</code></td>
@@ -357,7 +369,7 @@ spec:
 <tbody>
 <tr>
 <td><code>serviceName</code></td>
-<td>Sustituya <code>&lt;<em>myservice</em>&gt;</code> por el nombre del servicio de Kubernetes que ha creado para la app. </td>
+<td>Sustituya <code>&lt;<em>myservice</em>&gt;</code> por el nombre del servicio de Kubernetes que ha creado para la app.</td>
 </tr>
 <tr>
 <td><code>rewrite</code></td>
@@ -421,11 +433,11 @@ spec:
   <tbody>
   <tr>
   <td><code>serviceName</code></td>
-  <td>Sustituya <code>&lt;<em>myservice</em>&gt;</code> por el nombre del servicio de Kubernetes que ha creado para la app. </td>
+  <td>Sustituya <code>&lt;<em>myservice</em>&gt;</code> por el nombre del servicio de Kubernetes que ha creado para la app.</td>
   </tr>
   <tr>
   <td><code>name</code></td>
-  <td>Sustituya <code>&lt;<em>cookie_name</em>&gt;</code> por el nombre de una "stickie cookie" que se crea durante una sesión. </td>
+  <td>Sustituya <code>&lt;<em>cookie_name</em>&gt;</code> por el nombre de una "stickie cookie" que se crea durante una sesión.</td>
   </tr>
   <tr>
   <td><code>expires</code></td>
@@ -494,15 +506,16 @@ spec:
   <tbody>
   <tr>
   <td><code>serviceName</code></td>
-  <td>Sustituya <code>&lt;<em>myservice</em>&gt;</code> por el nombre del servicio Kubernetes para acceder a través del puerto TCP no estándar. </td>
+  <td>Sustituya <code>&lt;<em>myservice</em>&gt;</code> por el nombre del servicio Kubernetes para acceder a través del puerto TCP no estándar.</td>
   </tr>
   <tr>
   <td><code>ingressPort</code></td>
-  <td>Sustituya <code>&lt;<em>ingress_port</em>&gt;</code> por el puerto TCP en el que desea acceder a la app. </td>
+  <td>Sustituya <code>&lt;<em>ingress_port</em>&gt;</code> por el puerto TCP en el que desea acceder a la app.</td>
   </tr>
   <tr>
   <td><code>servicePort</code></td>
-  <td>Sustituir <code>&lt;<em>service_port</em>&gt;</code> por este parámetro es opcional. Cuando se proporciona, el puerto se sustituye por este valor antes de que el tráfico se envíe a la app de backend. En caso contrario, el puerto permanece igual que el puerto de Ingress.</td>
+  <td>Este parámetro
+es opcional. Cuando se proporciona, el puerto se sustituye por este valor antes de que el tráfico se envíe a la app de backend. En caso contrario, el puerto permanece igual que el puerto de Ingress.</td>
   </tr>
   </tbody></table>
   </dd>
@@ -518,7 +531,8 @@ spec:
 ### Tiempos de espera excedidos de conexión y tiempos de espera excedidos de lectura personalizados (proxy-connect-timeout, proxy-read-timeout)
 {: #proxy-connect-timeout}
 
-Establecimiento de un tiempo de espera excedido de conexión y de un tiempo de espera excedido de lectura personalizados para el equilibrador de carga de aplicación. Ajusta el tiempo que el equilibrador de carga de aplicación espera para conectarse a la app de fondo y para leer información de la misma antes de considerar que la app de fondo no está disponible.{:shortdesc}
+Establecimiento de un tiempo de espera excedido de conexión y de un tiempo de espera excedido de lectura personalizados para el equilibrador de carga de aplicación. Ajusta el tiempo que el equilibrador de carga de aplicación espera para conectarse a la app de fondo y para leer información de la misma antes de considerar que la app de fondo no está disponible.
+{:shortdesc}
 
 <dl>
 <dt>Descripción</dt>
@@ -568,7 +582,7 @@ spec:
  </tr>
  <tr>
  <td><code>&lt;read_timeout&gt;</code></td>
- <td>El número de segundos que se debe esperar a que se lea la app de fondo, por ejemplo <code>65s</code>. </td>
+ <td>El número de segundos que se debe esperar a que se lea la app de fondo, por ejemplo <code>65s</code>. <strong>Nota:</strong> El valor de read-timeout no puede superar los 120 segundos.</td>
  </tr>
  </tbody></table>
 
@@ -742,7 +756,7 @@ Cambia el número máximo de conexiones de estado activo desocupadas para el ser
   <tbody>
   <tr>
   <td><code>serviceName</code></td>
-  <td>Sustituya <code>&lt;<em>myservice</em>&gt;</code> por el nombre del servicio de Kubernetes que ha creado para la app. </td>
+  <td>Sustituya <code>&lt;<em>myservice</em>&gt;</code> por el nombre del servicio de Kubernetes que ha creado para la app.</td>
   </tr>
   <tr>
   <td><code>keepalive</code></td>
@@ -844,7 +858,7 @@ spec:
  <tbody>
  <tr>
  <td><code>serviceName</code></td>
- <td>Sustituya <code>&lt;<em>myservice</em>&gt;</code> por el nombre de un servicio para aplicar almacenamientos intermedios de proxy. </td>
+ <td>Sustituya <code>&lt;<em>myservice</em>&gt;</code> por el nombre de un servicio para aplicar almacenamientos intermedios de proxy.</td>
  </tr>
  <tr>
  <td><code>number_of_buffers</code></td>
@@ -870,7 +884,7 @@ Configure el tamaño del almacenamiento intermedio de proxy que lee la primera p
 <dl>
 <dt>Descripción</dt>
 <dd>
-Establezca el tamaño del almacenamiento intermedio que lee la primera parte de la respuesta que se recibe del servidor proxy.Esta parte de la respuesta normalmente contiene una cabecera de respuesta pequeña. La configuración se aplica a todos los servicios del host de Ingress a menos que se especifique un servicio. Por ejemplo, si se especifica una configuración como <code>serviceName=SERVICE size=1k</code>, se aplica 1 k al servicio. Si se especifica una configuración como <code>size=1k</code>, se aplica 1 k a todos los servicios del host de Ingress.
+Establezca el tamaño del almacenamiento intermedio que lee la primera parte de la respuesta que se recibe del servidor proxy. Esta parte de la respuesta normalmente contiene una cabecera de respuesta pequeña. La configuración se aplica a todos los servicios del host de Ingress a menos que se especifique un servicio. Por ejemplo, si se especifica una configuración como <code>serviceName=SERVICE size=1k</code>, se aplica 1 k al servicio. Si se especifica una configuración como <code>size=1k</code>, se aplica 1 k a todos los servicios del host de Ingress.
 </dd>
 
 
@@ -924,7 +938,8 @@ spec:
 ### Tamaño de los almacenamientos intermedios ocupados del proxy (proxy-busy-buffers-size)
 {: #proxy-busy-buffers-size}
 
-Configure el tamaño de los almacenamientos intermedios de proxy que puedan estar ocupados. {:shortdesc}
+Configure el tamaño de los almacenamientos intermedios de proxy que puedan estar ocupados.
+{:shortdesc}
 
 <dl>
 <dt>Descripción</dt>
@@ -1045,7 +1060,7 @@ spec:
   <tbody>
   <tr>
   <td><code>service_name</code></td>
-  <td>Sustituya <code>&lt;<em>myservice</em>&gt;</code> por el nombre del servicio de Kubernetes que ha creado para la app. </td>
+  <td>Sustituya <code>&lt;<em>myservice</em>&gt;</code> por el nombre del servicio de Kubernetes que ha creado para la app.</td>
   </tr>
   <tr>
   <td><code>&lt;header&gt;</code></td>
@@ -1112,7 +1127,7 @@ Elimine la información de cabecera que se incluye en la respuesta del cliente d
    <tbody>
    <tr>
    <td><code>service_name</code></td>
-   <td>Sustituya <code>&lt;<em>myservice</em>&gt;</code> por el nombre del servicio de Kubernetes que ha creado para la app. </td>
+   <td>Sustituya <code>&lt;<em>myservice</em>&gt;</code> por el nombre del servicio de Kubernetes que ha creado para la app.</td>
    </tr>
    <tr>
    <td><code>&lt;header&gt;</code></td>
@@ -1186,7 +1201,8 @@ spec:
 ### Límites de velocidad global (global-rate-limit)
 {: #global-rate-limit}
 
-Limite la velocidad de procesamiento de solicitudes y el número de conexiones por una clave definida para todos los servicios. {:shortdesc}
+Limite la velocidad de procesamiento de solicitudes y el número de conexiones por una clave definida para todos los servicios.
+{:shortdesc}
 
 <dl>
 <dt>Descripción</dt>
@@ -1248,7 +1264,8 @@ Para todos los servicios, limite la velocidad de servicio de solicitudes y el n�
 ### Límites de velocidad de servicio (service-rate-limit)
 {: #service-rate-limit}
 
-Limita la velocidad de procesamiento de solicitudes y el número de conexiones para servicios específicos. {:shortdesc}
+Limita la velocidad de procesamiento de solicitudes y el número de conexiones para servicios específicos.
+{:shortdesc}
 
 <dl>
 <dt>Descripción</dt>
@@ -1295,7 +1312,7 @@ Limita la velocidad de procesamiento de solicitudes y el número de conexiones p
   </tr>
   <tr>
   <td><code>rate</code></td>
-  <td>Sustituya <code>&lt;<em>rate</em>&gt;</code> por la velocidad de procesamiento. Para definir una velocidad por segundo, utilice r/s: <code>10r/s</code>. Para definir una velocidad por minuto, utilice r/m: <code>50r/m</code>. </td>
+  <td>Sustituya <code>&lt;<em>rate</em>&gt;</code> por la velocidad de procesamiento. Para definir una velocidad por segundo, utilice r/s: <code>10r/s</code>. Para definir una velocidad por minuto, utilice r/m: <code>50r/m</code>.</td>
   </tr>
   <tr>
   <td><code>number-of_connections</code></td>
@@ -1360,7 +1377,7 @@ spec:
  </tr>
  <tr>
  <td><code>&lt;port&gt;</code></td>
- <td>Especifique el número de puerto que desea utilizar para el tráfico de red de entrada HTTP o HTTPS. <p><strong>Nota:</strong> Cuando se especifica un puerto personalizado para HTTP o HTTPS, los puertos predeterminados dejan de ser válidos para HTTP y HTTPS. Por ejemplo, para cambiar el puerto predeterminado de HTTPS por 8443, pero utilizar el puerto predeterminado para HTTP, debe definir ciertos puertos personalizados para ambos: <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p></td>
+ <td>Especifique el número de puerto que desea utilizar para el tráfico de red de entrada HTTP o HTTPS.  <p><strong>Nota:</strong> Cuando se especifica un puerto personalizado para HTTP o HTTPS, los puertos predeterminados dejan de ser válidos para HTTP y HTTPS. Por ejemplo, para cambiar el puerto predeterminado de HTTPS por 8443, pero utilizar el puerto predeterminado para HTTP, debe definir ciertos puertos personalizados para ambos: <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p></td>
  </tr>
  </tbody></table>
 
@@ -1417,7 +1434,7 @@ Convierte las solicitudes de cliente HTTP no seguras en HTTPS.
 <dt>Descripción</dt>
 <dd>Puede configurar el equilibrador de carga de aplicación de Ingress de modo que proteja el dominio con el certificado TLS proporcionado por IBM o por un certificado TLS personalizado. Es posible que algunos usuarios intenten acceder a sus apps mediante una solicitud http no segura al dominio del equilibrador de carga de aplicación, por ejemplo <code>http://www.myingress.com</code>, en lugar hacerlo de mediante <code>https</code>. Puede utilizar la anotación redirect para convertir siempre las solicitudes HTTP no seguras en HTTPS. Si no utiliza esta anotación, las solicitudes HTTP no seguras no se convertirán en solicitud HTTPS de forma predeterminada y se podría exponer información confidencial sin cifrado al público.
 
- </br></br>
+</br></br>
 La redirección de solicitudes HTTP a HTTPS está inhabilitada de forma predeterminada.</dd>
 
 <dt>YAML del recurso de Ingress de ejemplo</dt>

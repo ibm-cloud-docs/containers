@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -36,13 +36,14 @@ lastupdated: "2018-01-11"
 <br />
 
 
-## 部署规划
+## 规划高可用性部署
 {: #highly_available_apps}
 
 设置在多个工作程序节点和集群上分发得越广泛，用户使用应用程序时遭遇停机时间的可能性就越低。
-{:shortdesc}
 
-查看以下潜在的应用程序设置（按可用性程度从低到高排序）：
+
+查看以下潜在的应用程序设置（按可用性程度从低到高排序）。
+{:shortdesc}
 
 ![应用程序的高可用性阶段](images/cs_app_ha_roadmap.png)
 
@@ -63,8 +64,12 @@ lastupdated: "2018-01-11"
 <dt>包含足够多的副本用于应用程序的工作负载，在此基础上再额外增加两个副本</dt>
 <dd>要使应用程序具有更高可用性且在出现故障时能够更快恢复，请考虑在处理预期工作负载所需最低要求的副本数基础上，再包含额外的副本。在某个 pod 崩溃且副本集尚未恢复已崩溃 pod 的情况下，额外的副本可处理工作负载。要针对同时发生两个故障的情况进行防护，请包含两个额外的副本。此设置是 N+2 模式，其中 N 是处理入局工作负载的副本数，+2 是额外两个副本。只要集群有足够的空间用于 pod，就可以在集群中拥有尽可能多的 pod。</dd>
 <dt>跨多个节点分布 pod（反亲缘关系）</dt>
-<dd>创建部署时，各个 pod 可能会部署到同一工作程序节点。这种 pod 存在于相同工作程序节点上的设置称为亲缘关系或共存。为了保护应用程序不受工作程序节点故障的影响，可以使用 <strong>podAntiAffinity</strong> 选项来强制您的部署跨多个工作程序节点分布 pod。此选项仅可用于标准集群。</br></br>
-<strong>注</strong>：以下 YAML 文件强制将每个 pod 部署到不同的工作程序节点。如果定义的副本数超过集群中可用的工作程序节点数，仅会部署可以满足反亲缘关系需求的副本数。任何其他副本都将保持暂挂状态，直到向集群添加了更多工作程序节点为止。<pre class="codeblock">
+<dd>创建部署时，各个 pod 可能会部署到同一工作程序节点。这种 pod 存在于相同工作程序节点上的设置称为亲缘关系或共存。为了保护应用程序不受工作程序节点故障的影响，可以使用 <strong>podAntiAffinity</strong> 选项来强制您的部署跨多个工作程序节点分布 pod。此选项仅可用于标准集群。
+
+</br></br>
+<strong>注</strong>：以下 YAML 文件强制将每个 pod 部署到不同的工作程序节点。如果定义的副本数超过集群中可用的工作程序节点数，仅会部署可以满足反亲缘关系需求的副本数。任何其他副本都将保持暂挂状态，直到向集群添加了更多工作程序节点为止。
+
+<pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -110,14 +115,16 @@ spec:
 
 </dd>
 <dt>跨多个位置或区域分布 pod</dt>
-<dd>为了保护应用程序不受位置或区域故障的影响，可以在另一个位置或区域中创建第二个集群，并使用部署 YAML 来部署应用程序的重复副本集。通过在集群前端添加共享路径和负载均衡器，可以跨位置和区域分布工作负载。有关在集群之间共享路径的更多信息，请参阅<a href="cs_clusters.html#clusters" target="_blank">集群高可用性</a>。有关更多详细信息，请查看<a href="cs_clusters.html#planning_clusters" target="_blank">高可用性部署</a>的选项。</dd>
+<dd>为了保护应用程序不受位置或区域故障的影响，可以在另一个位置或区域中创建第二个集群，并使用部署 YAML 来部署应用程序的重复副本集。通过在集群前端添加共享路径和负载均衡器，可以跨位置和区域分布工作负载。有关在集群之间共享路径的更多信息，请参阅<a href="cs_clusters.html#clusters" target="_blank">集群高可用性</a>。
+
+有关更多详细信息，请查看<a href="cs_clusters.html#planning_clusters" target="_blank">高可用性部署</a>的选项。</dd>
 </dl>
 
 
 ### 最低应用程序部署
 {: #minimal_app_deployment}
 
-Lite 或标准集群中的基本应用程序部署可能包含以下组件。
+免费或标准集群中的基本应用程序部署可能包含以下组件。
 {:shortdesc}
 
 ![部署设置](images/cs_app_tutorial_components1.png)
@@ -263,6 +270,8 @@ Kubernetes 私钥是一种存储保密信息（如用户名、密码或密钥）
 </tr>
 <tr>
 <td>可选：如果不打算使用 ingress-secret，请将 Ingress 服务配置为使用 TLS。<p><b>注</b>：缺省情况下已启用 TLS，并且已经为 TLS 连接创建私钥。
+
+
 要查看缺省 TLS 私钥：
 <pre>
 bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"

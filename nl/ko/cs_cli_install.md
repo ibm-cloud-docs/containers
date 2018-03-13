@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-01"
+lastupdated: "2018-01-29"
 
 ---
 
@@ -35,7 +35,7 @@ lastupdated: "2017-12-01"
 
 -   {{site.data.keyword.Bluemix_notm}} CLI 버전 0.5.0 이상
 -   {{site.data.keyword.containershort_notm}} 플러그인
--   Kubernetes CLI 버전 1.7.4 이상
+-   Kubernetes CLI 버전 1.8.6 이상
 -   선택사항: {{site.data.keyword.registryshort_notm}} 플러그인
 -   선택사항: Docker 버전 1.9 이상
 
@@ -51,7 +51,7 @@ CLI를 설치하려면 다음을 수행하십시오.
     ```
     {: pre}
 
-    **참고:** 연합 ID가 있는 경우 `bx login --sso`를 사용하여 {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 사용자 이름을 입력하고 CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색하십시오. `--sso`가 없으면 로그인에 실패하고 `--sso` 옵션을 사용하면 성공하는 경우에는 연합 ID를 보유 중임을 알 수 있습니다.
+    **참고:** 연합 ID가 있는 경우 `bx login --sso`를 사용하여 {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 사용자 이름을 입력하고 CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색하십시오. `--sso` 옵션을 사용하지 않으면 로그인에 실패하고 `--sso` 옵션을 사용하면 성공하는 경우에는 연합 ID를 보유하고 있다는 것입니다.
 
 3.  Kubernetes 클러스터를 작성하고 작업자 노드를 관리하려면 {{site.data.keyword.containershort_notm}} 플러그인을 설치하십시오. {{site.data.keyword.containershort_notm}} 플러그인을 사용하여 명령을 실행하기 위한 접두부는 `bx cs`입니다.
 
@@ -63,7 +63,7 @@ CLI를 설치하려면 다음을 수행하십시오.
     플러그인이 올바르게 설치되었는지 확인하려면 다음 명령을 실행하십시오.
 
     ```
-     bx plugin list
+        bx plugin list
     ```
     {: pre}
 
@@ -71,7 +71,7 @@ CLI를 설치하려면 다음을 수행하십시오.
 
 4.  Kubernetes 대시보드의 로컬 버전을 보고 클러스터에 앱을 배치하려면 [Kubernetes CLI를 설치 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)하십시오. Kubernetes CLI를 사용하여 명령을 실행하기 위한 접두부는 `kubectl`입니다.
 
-    1.  전체 기능 호환성을 위해 사용하려는 Kubernetes 클러스터 버전과 일치하는 Kubernetes CLI 버전을 다운로드하십시오. 현재 {{site.data.keyword.containershort_notm}} 기본 Kubernetes 버전은 1.7.4입니다.
+    1.  전체 기능 호환성을 위해 사용하려는 Kubernetes 클러스터 버전과 일치하는 Kubernetes CLI 버전을 다운로드하십시오. 현재 {{site.data.keyword.containershort_notm}} 기본 Kubernetes 버전은 1.8.6입니다.
 
         OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
 
@@ -120,15 +120,15 @@ CLI를 설치하려면 다음을 수행하십시오.
     플러그인이 올바르게 설치되었는지 확인하려면 다음 명령을 실행하십시오.
 
     ```
-     bx plugin list
+        bx plugin list
     ```
     {: pre}
 
     플러그인이 container-registry로서 결과에 표시됩니다.
 
-6.  로컬에 이미지를 빌드하고 레지스트리 네임스페이스에 푸시하려면 [Docker를 설치 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.docker.com/community-edition#/download)하십시오. Windows 8 이하를 사용 중인 경우 [Docker Toolbox ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.docker.com/products/docker-toolbox)를 대신 설치할 수 있습니다. Docker CLI는 앱을 이미지로 빌드하는 데 사용됩니다. Docker CLI를 사용하여 명령을 실행하기 위한 접두부는 `docker`입니다.
+6.  로컬에 이미지를 빌드하고 레지스트리 네임스페이스에 푸시하려면 [Docker를 설치 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.docker.com/community-edition#/download)하십시오. Windows 8 이하를 사용 중인 경우 [Docker Toolbox ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.docker.com/toolbox/toolbox_install_windows/)를 대신 설치할 수 있습니다. Docker CLI는 앱을 이미지로 빌드하는 데 사용됩니다. Docker CLI를 사용하여 명령을 실행하기 위한 접두부는 `docker`입니다.
 
-다음으로 [{{site.data.keyword.containershort_notm}}의 CLI에서 Kubernetes 클러스터 작성](cs_clusters.html#clusters_cli)을 시작하십시오. 
+다음으로 [{{site.data.keyword.containershort_notm}}의 CLI에서 Kubernetes 클러스터 작성](cs_clusters.html#clusters_cli)을 시작하십시오.
 
 이러한 CLI에 대한 참조 정보는 해당 도구의 문서를 참조하십시오.
 
@@ -143,7 +143,7 @@ CLI를 설치하려면 다음을 수행하십시오.
 ## `kubectl`을 실행하도록 CLI 구성
 {: #cs_cli_configure}
 
-Kubernetes CLI와 함께 제공되는 명령을 사용하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터를 관리할 수 있습니다. Kubernetes 1.7.4에서 사용 가능한 모든 `kubectl` 명령은 {{site.data.keyword.Bluemix_notm}}의 클러스터와 함께 사용할 수 있도록 지원됩니다. 클러스터를 작성한 후, 로컬 CLI에 대한 컨텍스트를 환경 변수가 있는 해당 클러스터로 설정하십시오. 그런 다음, Kubernetes `kubectl` 명령을 실행하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터 관련 작업을 수행할 수 있습니다.
+Kubernetes CLI와 함께 제공되는 명령을 사용하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터를 관리할 수 있습니다. Kubernetes 1.8.6에서 사용 가능한 모든 `kubectl` 명령은 {{site.data.keyword.Bluemix_notm}}의 클러스터와 함께 사용할 수 있도록 지원됩니다. 클러스터를 작성한 후, 로컬 CLI에 대한 컨텍스트를 환경 변수가 있는 해당 클러스터로 설정하십시오. 그런 다음, Kubernetes `kubectl` 명령을 실행하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터 관련 작업을 수행할 수 있습니다.
 {:shortdesc}
 
 `kubectl` 명령을 실행하려면 우선 [필수 CLI를 설치](#cs_cli_install)하고 [클러스터를 작성](cs_clusters.html#clusters_cli)하십시오.
@@ -155,7 +155,7 @@ Kubernetes CLI와 함께 제공되는 명령을 사용하여 {{site.data.keyword
       ```
       {: pre}
 
-      **참고:** 연합 ID가 있는 경우 `bx login --sso`를 사용하여 {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 사용자 이름을 입력하고 CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색하십시오. `--sso`가 없으면 로그인에 실패하고 `--sso` 옵션을 사용하면 성공하는 경우에는 연합 ID를 보유 중임을 알 수 있습니다.
+      **참고:** 연합 ID가 있는 경우 `bx login --sso`를 사용하여 {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 사용자 이름을 입력하고 CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색하십시오. `--sso` 옵션을 사용하지 않으면 로그인에 실패하고 `--sso` 옵션을 사용하면 성공하는 경우에는 연합 ID를 보유하고 있다는 것입니다.
 
   2.  {{site.data.keyword.Bluemix_notm}} 계정을 선택하십시오. 여러 {{site.data.keyword.Bluemix_notm}} 조직에 지정된 경우에는 Kubernetes 클러스터가 작성된 조직을 선택하십시오. 클러스터는 조직마다 고유하지만 {{site.data.keyword.Bluemix_notm}} 영역에는 독립적입니다. 따라서 영역을 선택할 필요가 없습니다.
 
@@ -185,7 +185,7 @@ Kubernetes CLI와 함께 제공되는 명령을 사용하여 {{site.data.keyword
           ```
           {: screen}
 
-      2.  `KUBECONFIG` 환경 변수를 설정하려면 터미널에 표시되는 명령을 복사하고 붙여넣기하십시오.
+      2.  `KUBECONFIG` 환경 변수를 설정하려면 터미널에 표시되는 명령을 복사하여 붙여넣기하십시오.
       3.  `KUBECONFIG` 환경 변수가 올바르게 설정되었는지 확인하십시오.
 
           예:
@@ -211,8 +211,8 @@ Kubernetes CLI와 함께 제공되는 명령을 사용하여 {{site.data.keyword
       출력 예:
 
       ```
-      Client Version: v1.7.4
-      Server Version: v1.7.4
+      Client Version: v1.8.6
+      Server Version: v1.8.6
       ```
       {: screen}
 
@@ -234,7 +234,7 @@ Kubernetes CLI와 함께 제공되는 명령을 사용하여 {{site.data.keyword
 
 -   {{site.data.keyword.Bluemix_notm}} CLI 버전 0.5.0 이상
 -   {{site.data.keyword.containershort_notm}} 플러그인
--   Kubernetes CLI 버전 1.7.4 이상
+-   Kubernetes CLI 버전 1.8.6 이상
 -   {{site.data.keyword.registryshort_notm}} 플러그인
 -   Docker 버전 1.9. 이상
 
@@ -250,7 +250,7 @@ CLI를 업데이트하려면 다음을 수행하십시오.
     ```
     {: pre}
 
-     **참고:** 연합 ID가 있는 경우 `bx login --sso`를 사용하여 {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 사용자 이름을 입력하고 CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색하십시오. `--sso`가 없으면 로그인에 실패하고 `--sso` 옵션을 사용하면 성공하는 경우에는 연합 ID를 보유 중임을 알 수 있습니다.
+     **참고:** 연합 ID가 있는 경우 `bx login --sso`를 사용하여 {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 사용자 이름을 입력하고 CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색하십시오. `--sso` 옵션을 사용하지 않으면 로그인에 실패하고 `--sso` 옵션을 사용하면 성공하는 경우에는 연합 ID를 보유하고 있다는 것입니다.
 
 3.  {{site.data.keyword.containershort_notm}} 플러그인을 업데이트하십시오.
     1.  {{site.data.keyword.Bluemix_notm}} 플러그인 저장소에서 업데이트를 설치하십시오.
@@ -277,7 +277,7 @@ CLI를 업데이트하려면 다음을 수행하십시오.
         {: pre}
 
 4.  Kubernetes CLI를 업데이트하십시오.
-    1.  사용할 계획인 Kubernetes 클러스터 버전과 일치하는 Kubernetes CLI 버전으로 업데이트하십시오. 현재 {{site.data.keyword.containershort_notm}} 기본 Kubernetes 버전은 1.7.4입니다.
+    1.  사용할 계획인 Kubernetes 클러스터 버전과 일치하는 Kubernetes CLI 버전으로 업데이트하십시오. 현재 {{site.data.keyword.containershort_notm}} 기본 Kubernetes 버전은 1.8.6입니다.
 
         OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
 
@@ -336,7 +336,7 @@ CLI를 업데이트하려면 다음을 수행하십시오.
 6.  Docker를 업데이트하십시오.
     -   Docker Community Edition을 사용 중인 경우 Docker를 시작하고 **Docker** 아이콘을 클릭한 후
 **업데이트 확인**을 클릭하십시오.
-    -   Docker Toolbox를 사용 중인 경우 [최신 버전![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.docker.com/products/docker-toolbox)을 다운로드하고 설치 프로그램을 실행하십시오.
+    -   Docker Toolbox를 사용 중인 경우 [최신 버전![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.docker.com/toolbox/toolbox_install_windows/)을 다운로드하고 설치 프로그램을 실행하십시오.
 
 <br />
 
@@ -351,7 +351,7 @@ CLI가 더 이상 필요하지 않으면 이를 설치 제거할 수 있습니�
 
 
 -   {{site.data.keyword.containershort_notm}} 플러그인
--   Kubernetes CLI 버전 1.7.4 이상
+-   Kubernetes CLI 버전 1.8.6 이상
 -   {{site.data.keyword.registryshort_notm}} 플러그인
 -   Docker 버전 1.9. 이상
 
@@ -389,7 +389,7 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
 
     - [OSX ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.docker.com/docker-for-mac/#uninstall-or-reset)
     - [Linux ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#uninstall-docker-ce)
-    - [Windows ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.docker.com/toolbox/toolbox_install_mac/#how-to-uninstall-toolbox)
+    - [Windows ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.docker.com/toolbox/toolbox_install_windows/#how-to-uninstall-toolbox)
 
 <br />
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-31"
 
 ---
 
@@ -23,8 +23,6 @@ lastupdated: "2018-01-12"
 {:shortdesc}
 
 
-
-
 ## 管理叢集存取
 {: #managing}
 
@@ -37,7 +35,7 @@ lastupdated: "2018-01-12"
 <dt>基礎架構存取原則</dt>
 <dd>在「身分及存取管理」中，基礎架構存取原則容許在 IBM Cloud 基礎架構 (SoftLayer) 中完成從 {{site.data.keyword.containershort_notm}} 使用者介面或 CLI 所要求的動作。這些原則必須與 {{site.data.keyword.containershort_notm}} 存取原則一起設定。[進一步瞭解可用的基礎架構角色](/docs/iam/infrastructureaccess.html#infrapermission)。</dd>
 <dt>資源群組</dt>
-<dd>資源群組是一種將 {{site.data.keyword.Bluemix_notm}} 服務組織成群組的方式，讓您可以一次快速地指派使用者對多個資源的存取權。[瞭解如何使用資源群組來管理使用者](/docs/admin/resourcegroups.html#rgs)。</dd>
+<dd>資源群組是一種將 {{site.data.keyword.Bluemix_notm}} 服務組織成群組的方式，讓您可以一次快速地指派使用者對多個資源的存取權。[瞭解如何使用資源群組來管理使用者](/docs/account/resourcegroups.html#rgs)。</dd>
 <dt>Cloud Foundry 角色</dt>
 <dd>在「身分及存取管理」中，每位使用者都必須獲指派 Cloud Foundry 使用者角色。此角色可以判斷使用者可對 {{site.data.keyword.Bluemix_notm}} 帳戶執行的動作，例如，邀請其他使用者，或檢視配額用量。[進一步瞭解可用的 Cloud Foundry 角色](/docs/iam/cfaccess.html#cfaccess)。</dd>
 <dt>Kubernetes RBAC 角色</dt>
@@ -50,11 +48,11 @@ lastupdated: "2018-01-12"
 ## 存取原則及許可權
 {: #access_policies}
 
-檢閱您可以授與 {{site.data.keyword.Bluemix_notm}} 帳戶中使用者的存取原則及許可權。操作員及編輯者角色具有個別的許可權。例如，如果您想要使用者新增工作者節點及連結服務，您必須同時將操作員及編輯者角色指派給使用者。
+檢閱您可以授與 {{site.data.keyword.Bluemix_notm}} 帳戶中使用者的存取原則及許可權。操作員及編輯者角色具有個別的許可權。例如，如果您想要使用者新增工作者節點及連結服務，您必須同時將操作員及編輯者角色指派給使用者。如果您變更使用者的存取原則，{{site.data.keyword.containershort_notm}} 會為您清理與叢集中變更相關聯的 RBAC 原則。
 
 |{{site.data.keyword.containershort_notm}} 存取原則|叢集管理許可權|Kubernetes 資源許可權|
 |-------------|------------------------------|-------------------------------|
-|管理者|此角色會繼承此帳戶中所有叢集的「編輯者」、「操作員」及「檢視者」角色的許可權。<br/><br/>針對所有現行服務實例設定時：<ul><li>建立精簡或標準叢集</li><li>設定 {{site.data.keyword.Bluemix_notm}} 帳戶的認證，以存取 IBM Cloud 基礎架構 (SoftLayer) 組合</li><li>移除叢集</li><li>指派及變更此帳戶中其他現有使用者的 {{site.data.keyword.containershort_notm}} 存取原則。</li></ul><p>針對特定叢集 ID 設定時：<ul><li>移除特定叢集</li></ul></p>對應的基礎架構存取原則：超級使用者<br/><br/><b>附註</b>：若要建立機器、VLAN 及子網路這類資源，使用者需要**超級使用者**基礎架構角色。|<ul><li>RBAC 角色：cluster-admin</li><li>每個名稱空間中資源的讀寫存取</li><li>建立名稱空間內的角色</li><li>存取 Kubernetes 儀表板</li><li>建立 Ingress 資源，使應用程式公開可用</li></ul>|
+|管理者|此角色會繼承此帳戶中所有叢集的「編輯者」、「操作員」及「檢視者」角色的許可權。<br/><br/>針對所有現行服務實例設定時：<ul><li>建立免費或標準叢集</li><li>設定 {{site.data.keyword.Bluemix_notm}} 帳戶的認證，以存取 IBM Cloud 基礎架構 (SoftLayer) 組合</li><li>移除叢集</li><li>指派及變更此帳戶中其他現有使用者的 {{site.data.keyword.containershort_notm}} 存取原則。</li></ul><p>針對特定叢集 ID 設定時：<ul><li>移除特定叢集</li></ul></p>對應的基礎架構存取原則：超級使用者<br/><br/><b>附註</b>：若要建立機器、VLAN 及子網路這類資源，使用者需要**超級使用者**基礎架構角色。|<ul><li>RBAC 角色：cluster-admin</li><li>每個名稱空間中資源的讀寫存取</li><li>建立名稱空間內的角色</li><li>存取 Kubernetes 儀表板</li><li>建立 Ingress 資源，使應用程式公開可用</li></ul>|
 |操作員|<ul><li>將其他工作者節點新增至叢集</li><li>移除叢集中的工作者節點</li><li>重新啟動工作者節點</li><li>重新載入工作者節點</li><li>將子網路新增至叢集</li></ul><p>對應的基礎架構存取原則：基本使用者</p>|<ul><li>RBAC 角色：admin</li><li>讀寫存取預設名稱空間內的資源，但不會讀寫存取名稱空間本身</li><li>建立名稱空間內的角色</li></ul>|
 |編輯者 <br/><br/><b>提示</b>：請對應用程式開發人員使用此角色。|<ul><li>將 {{site.data.keyword.Bluemix_notm}} 服務連結至叢集。</li><li>取消 {{site.data.keyword.Bluemix_notm}} 服務與叢集的連結。</li><li>建立 Webhook。</li></ul><p>對應的基礎架構存取原則：基本使用者|<ul><li>RBAC 角色：edit</li><li>default 名稱空間內資源的讀寫存取</li></ul></p>|
 |檢視者|<ul><li>列出叢集</li><li>檢視叢集的詳細資料</li></ul><p>對應的基礎架構存取原則：僅限檢視</p>|<ul><li>RBAC 角色：view</li><li>default 名稱空間內資源的讀取權</li><li>沒有 Kubernetes Secret 的讀取權</li></ul>|
@@ -63,6 +61,7 @@ lastupdated: "2018-01-12"
 |-------------|------------------------------|
 |組織角色：管理員|<ul><li>將其他使用者新增至 {{site.data.keyword.Bluemix_notm}} 帳戶</li></ul>| |
 |空間角色：開發人員|<ul><li>建立 {{site.data.keyword.Bluemix_notm}} 服務實例</li><li>將 {{site.data.keyword.Bluemix_notm}} 服務實例連結至叢集</li></ul>| 
+
 <br />
 
 

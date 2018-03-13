@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-02"
 
 ---
 
@@ -26,7 +26,7 @@ Concevez la configuration de vos clusters en vue d'une disponibilité et d'une c
 ## Planification de la configuration d'un cluster
 {: #planning_clusters}
 
-Utilisez des clusters standard pour accroître la disponibilité des applications. Vos utilisateurs risquent moins de rencontrer des indisponibilités lorsque vous disséminez votre configuration entre plusieurs noeuds d'agent et clusters. Les fonctions intégrées, telles que l'équilibrage de charge et l'isolement, augmentent la résilience en cas de pannes d'hôtes, de réseaux ou d'applications.
+Utilisez des clusters standards pour accroître la disponibilité des applications. Vos utilisateurs risquent moins de rencontrer des indisponibilités lorsque vous disséminez votre configuration entre plusieurs noeuds d'agent et clusters. Les fonctions intégrées, telles que l'équilibrage de charge et l'isolement, augmentent la résilience en cas de pannes d'hôtes, de réseaux ou d'applications.
 {:shortdesc}
 
 Examinez ces configurations potentielles de cluster, classées par ordre croissant de disponibilité :
@@ -83,7 +83,7 @@ en  panne, le trafic est acheminé au conteneur déployé dans un autre emplacem
 Un cluster Kubernetes est composé de noeuds worker et est surveillé et géré de manière centralisée par le maître Kubernetes. Les administrateurs du cluster décident comment configurer le cluster de noeuds worker pour garantir que les utilisateurs du cluster disposent de toutes les ressources pour d&ployer et exécuter des applications dans le cluster.
 {:shortdesc}
 
-Lorsque vous créez un cluster standard, les noeuds d'agent sont organisés pour vous dans l'infrastructure IBM Cloud (SoftLayer) et configurés dans {{site.data.keyword.Bluemix_notm}}. A chaque noeud worker sont affectés un ID de noeud worker unique et un nom de domaine qui ne doivent pas être modifiés après la création du cluster. Selon le niveau d'isolement du matériel que vous sélectionnez, les noeuds d'agent peuvent être configurés en tant que noeuds partagés ou dédiés. Chaque noeud worker est doté d'un type de machine spécifique qui détermine le nombre d'UC, la mémoire et l'espace disque disponibles pour les conteneurs déployés sur le noeud worker. Kubernetes limite le nombre maximal de noeuds d'agent dont vous pouvez disposer dans un cluster. Pour plus d'informations, voir la rubrique sur les [quotas de noeud worker et de pod ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/admin/cluster-large/).
+Lorsque vous créez un cluster standard, les noeuds d'agent sont organisés pour vous dans l'infrastructure IBM Cloud (SoftLayer) et configurés dans {{site.data.keyword.Bluemix_notm}}. A chaque noeud worker sont affectés un ID de noeud worker unique et un nom de domaine qui ne doivent pas être modifiés après la création du cluster. Selon le niveau d'isolement du matériel que vous sélectionnez, les noeuds d'agent peuvent être configurés en tant que noeuds partagés ou dédiés. Vous pouvez également décider si vos noeuds worker doivent se connecter à un VLAN public et à un VLAN privé, ou seulement à un VLAN privé. Chaque noeud worker est doté d'un type de machine spécifique qui détermine le nombre d'UC, la mémoire et l'espace disque disponibles pour les conteneurs déployés sur le noeud worker. Kubernetes limite le nombre maximal de noeuds d'agent dont vous pouvez disposer dans un cluster. Pour plus d'informations, voir la rubrique sur les [quotas de noeud worker et de pod ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/admin/cluster-large/).
 
 
 ### Matériel pour les noeuds d'agent
@@ -98,7 +98,14 @@ Dans une configuration de service exclusif, toutes les ressources physiques vous
 
 Les noeuds partagés sont généralement moins coûteux que les noeuds dédiés vu que les coûts du matériel sous-jacent sont partagés entre plusieurs clients. Toutefois, lorsque vous choisissez entre noeuds partagés et noeud dédiés, vous devriez contacter votre service juridique pour déterminer le niveau d'isolement de l'infrastructure et de conformité requis par votre environnement d'application.
 
-Lorsque vous créez un cluster léger, votre noeud worker est automatiquement provisionné en tant que noeud dans le compte d'infrastructure IBM Cloud (SoftLayer).
+Lorsque vous créez un cluster gratuit, votre noeud worker est automatiquement provisionné en tant que noeud partagé dans le compte IBM Cloud infrastructure (SoftLayer).
+
+### Connexion de réseau virtuel (VLAN) pour noeuds worker
+{: #worker_vlan_connection}
+
+Lorsque vous créez un cluster, chaque cluster est automatiquement connecté à un réseau local virtuel depuis votre compte IBM Cloud Infrastructure (SoftLayer). Un réseau local virtuel configure un groupe de noeuds d'agent et de pods comme s'ils étaient reliés physiquement au même câble. Le réseau privé virtuel privé détermine l'adresse IP privée affectée à un noeud worker lors de la création du cluster, et le réseau virtuel public, l'adresse IP publique affectée au noeud worker.
+
+Dans le cas de clusters gratuits, les noeuds worker du cluster sont connectés lors de la création du cluster à un réseau virtuel public et à un réseau privé virtuel dont IBM est le propriétaire. Dans le cas de clusters standards, vous pouvez connecter vos noeuds worker à la fois à un réseau virtuel public et à un réseau virtuel privé, ou seulement à un réseau virtuel privé. Si vous désirez connecter vos noeuds worker seulement à un réseau privé, vous pouvez spécifier l'ID d'un réseau virtuel privé existant lors de la création du cluster. Vous devez toutefois configurer une solution alternative pour permettre une connexion sécurisée entre les noeuds worker et le maître Kubernetes. Vous pourriez, par exemple, configurer un Vyatta pour transmettre le trafic des noeuds worker du réseau virtuel privé au maître Kubernetes. Voir "Configuration d'un Vyatta personnalisé pour connexion sécurisée de vos noeuds worker au maître Kubernetes" dans la [documentation d'IBM Cloud infrastructure (SoftLayer)](https://knowledgelayer.softlayer.com/procedure/basic-configuration-vyatta) pour plus d'informations.
 
 ### Limite de mémoire des noeuds d'agent
 {: #resource_limit_node}
@@ -134,18 +141,17 @@ Un cluster Kubernetes est un ensemble de noeuds d'agent organisés dans un rése
 
 Pour créer un cluster, procédez comme suit :
 1. Dans le catalogue, sélectionnez **Cluster Kubernetes**.
-2. Sélectionnez un type de plan de cluster. Vous pouvez choisir entre **Lite** ou **Paiement à la carte**. Avec le plan Paiement à la carte, vous pouvez mettre à disposition un cluster standard avec des fonctions, telles que des noeuds d'agent multiples pour un environnement à haute disponibilité.
-3. Configurez les détails de votre cluster.
-    1. Donnez un nom à votre cluster, choisissez une version de Kubernetes et sélectionnez un emplacement pour le déploiement. Sélectionnez l'emplacement qui est le plus proche de vous physiquement pour obtenir les meilleures performances. N'oubliez pas qu'il se peut que vous ayez besoin d'une autorisation des autorités pour stocker physiquement les données dans un autre pays, si vous sélectionnez un emplacement à l'étranger.
-    2. Sélectionnez un type de machine et indiquez le nombre de noeuds d'agent dont vous avez besoin. Le type de machine détermine le nombre d'UC virtuelles et la mémoire configurés dans chaque noeud worker et rendus accessibles aux conteneurs.
-        - Le type de machine micro correspond à l'option la plus modique.
-        - Une machine équilibrée comporte la même quantité de mémoire qui est affectée à chaque UC, ce qui optimise les performances.
-        - Par défaut, les données Docker de l'hôte sont chiffrées dans les types de machine. Le répertoire `/var/lib/docker`, dans lequel sont stockées toutes les données des conteneurs, est chiffré avec le chiffrement LUKS. Si l'option `disable-disk-encrypt` est incluse lors de la création du cluster, les données Docker de l'hôte ne sont pas chiffrées. [En savoir plus sur le chiffrement.](cs_secure.html#encrypted_disks)
+2. Sélectionnez une région dans lequel déployer votre cluster.
+3. Sélectionnez un type de plan de cluster. Vous avez le choix entre **Free** (Gratuit) ou **Pay-As-You-Go** (Paiement à la carte). Avec le plan Paiement à la carte, vous pouvez mettre à disposition un cluster standard avec des fonctions, telles que des noeuds d'agent multiples pour un environnement à haute disponibilité.
+4. Configurez les détails de votre cluster.
+    1. Attribuez un nom à votre cluster, sélectionnez une version de Kubernetes et l'emplacement dans lequel déployer votre cluster. Pour performances optimales, sélectionnez l'emplacement physiquement le plus proche. N'oubliez pas si vous sélectionnez un emplacement hors de votre pays que vous aurez peut-être besoin d'une autorisation des autorités pour stocker physiquement des données à l'étranger.
+    2. Sélectionnez un type de machine et indiquez le nombre de noeuds d'agent dont vous avez besoin. Le type de machine définit le nombre d'UC virtuelles, la mémoire et l'espace disque configurés dans chaque noeud worker et rendus disponibles aux conteneurs.
     3. Sélectionnez un réseau local virtuel (VLAN) public et un VLAN privé à partir de votre compte d'infrastructure IBM Cloud (SoftLayer). Ces deux réseaux VLAN communiquent entre les noeuds d'agent mais le réseau VLAN public communique également avec le noeud maître Kubernetes géré par IBM. Vous pouvez utiliser le même VLAN pour plusieurs clusters.
-        **Remarque** : si vous choisissez de ne pas sélectionner de VLAN public, vous devez configurer une solution alternative.
-    4. Sélectionnez un type de matériel. Partagé est une option satisfaisante pour la plupart des situations.
-        - **Dédié** : assure un isolement complet de vos ressources physiques.
-        - **Partagé** : permet le stockage de vos ressources physiques sur le même matériel que pour d'autres clients IBM.
+        **Remarque** : si vous choisissez de ne pas sélectionner de VLAN public, vous devez configurer une solution alternative. Voir [Connexion de réseau virtuel pour noeuds worker](#worker_vlan_connection) pour plus d'informations.
+    4. Sélectionnez un type de matériel.
+        - **Dédié **: vos noeuds worker sont hébergés sur l'infrastructure dédiée à votre compte. Vos ressources sont complètement isolées.
+        - **Partagé **: les ressources de l'infrastructure, comme l'hyperviseur et le matériel physique, sont partagées avec d'autres clients IBM, mais chaque noeud worker est accessible uniquement par vous. Bien que cette solution soit moins onéreuse et généralement suffisante, vérifiez cependant les consignes de votre entreprise quant aux exigences en termes de performance et d'infrastructure.
+    5. Par défaut, l'option **Chiffrer le disque local** est sélectionnée. Si vous décochez cette case, les données Docker de l'hôte ne sont pas chiffrées. [En savoir plus sur le chiffrement](cs_secure.html#encrypted_disks).
 4. Cliquez sur **Créer un cluster**. Vous pouvez voir la progression du déploiement du noeud worker dans l'onglet **Noeuds d'agent**. Une fois le déploiement terminé, vous pouvez voir si le cluster est prêt dans l'onglet **Vue d'ensemble**.
     **Remarque :** A chaque noeud worker sont affectés un ID de noeud worker unique et un nom de domaine qui ne doivent pas être modifiés manuellement après la création du cluster. La modification de l'ID ou du domaine empêcherait le maître
 Kubernetes de gérer votre cluster.
@@ -157,7 +163,7 @@ Une fois le cluster opérationnel, vous pouvez réaliser les tâches suivantes :
 
 -   [Installer les interfaces de ligne de commande pour commencer à utiliser votre cluster.](cs_cli_install.html#cs_cli_install)
 -   [Déployer une application dans votre cluster.](cs_app.html#app_cli)
--   [Configurer votre propre registre privé dans {{site.data.keyword.Bluemix_notm}} pour stocker et partager des Docker avec d'autres utilisateurs.](/docs/services/Registry/index.html)
+-   [Configurer votre propre registre privé dans {{site.data.keyword.Bluemix_notm}} pour stocker et partager des images Docker avec d'autres utilisateurs.](/docs/services/Registry/index.html)
 - Si vous utilisez un pare-feu, vous devrez peut-être [ouvrir les ports requis](cs_firewall.html#firewall) afin d'utiliser les commandes `bx`, `kubectl` ou `calicotl`, autoriser le trafic sortant de votre cluster ou le trafic entrant pour les services réseau.
 
 <br />
@@ -183,7 +189,7 @@ d'identification {{site.data.keyword.Bluemix_notm}}.
 
 3. Si vous disposez de plusieurs comptes {{site.data.keyword.Bluemix_notm}}, sélectionnez le compte que vous voulez utiliser pour créer votre cluster Kubernetes.
 
-4.  Si vous désirez créer ou accéder à des clusters Kubernetes dans une région {{site.data.keyword.Bluemix_notm}} autre que celle que vous aviez sélectionné auparavant, exécutez la commande `bx cs region-set`.
+4.  Si vous désirez créer ou accéder à des clusters Kubernetes dans une région {{site.data.keyword.Bluemix_notm}} autre que celle que vous aviez sélectionnée auparavant, exécutez la commande `bx cs region-set`.
 
 6.  Créez un cluster.
     1.  Examinez les emplacements disponibles. Les emplacements affichés dépendent de la région {{site.data.keyword.containershort_notm}} à laquelle vous êtes connecté.
@@ -233,14 +239,14 @@ d'identification {{site.data.keyword.Bluemix_notm}}.
 
         S'il existe déjà un réseau virtuel public et privé, notez les routeurs correspondants. Les routeurs de VLAN privé commencent toujours par `bcr` (routeur dorsal) et les routeurs de VLAN public par `fcr` (routeur frontal). Le numéro et la combinaison de lettres après ces préfixes doivent correspondre pour pouvoir utiliser ces réseaux locaux virtuels lors de la création d'un cluster. Dans l'exemple de sortie, n'importe quel réseau local virtuel privé peut être utilisé avec l'un des réseaux publics virtuels privés vu que les routeurs incluent tous `02a.dal10`.
 
-    4.  Exécutez la commande `cluster-create`. Vous avez le choix entre un cluster léger, qui inclut un noeud worker avec 2 UC virtuelles et 4 Go de mémoire, ou un cluster standard, lequel peut inclure autant de noeuds d'agent que vous le souhaitez dans votre compte d'infrastructure IBM Cloud (SoftLayer). Lorsque vous créez un cluster standard, par défaut, les disques de noeud worker sont chiffrés, son matériel est partagé par plusieurs clients IBM et il est facturé par heures d'utilisation. </br>Exemple pour un cluster standard :
+    4.  Exécutez la commande `cluster-create`. Vous avez le choix entre un cluster gratuit, lequel inclut un noeud worker configuré avec 2 UC virtuelles et 4 Go de mémoire, et un cluster standard, doté d'autant de noeuds worker que vous le désirez dans votre compte IBM Cloud infrastructure (SoftLayer). Lorsque vous créez un cluster standard, par défaut, les disques de noeud worker sont chiffrés, son matériel est partagé par plusieurs clients IBM et il est facturé par heures d'utilisation. </br>Exemple pour un cluster standard :
 
         ```
-        bx cs cluster-create --location dal10 --public-vlan <public_vlan_id> --private-vlan <private_vlan_id> --machine-type u2c.2x4 --workers 3 --name <cluster_name> --kube-version <major.minor.patch> 
+        bx cs cluster-create --location dal10 --machine-type u2c.2x4 --hardware <shared_or_dedicated> --public-vlan <public_vlan_id> --private-vlan <private_vlan_id> --workers 3 --name <cluster_name> --kube-version <major.minor.patch>
         ```
         {: pre}
 
-        Exemple pour un cluster léger :
+        Exemple pour un cluster gratuit :
 
         ```
         bx cs cluster-create --name my_cluster
@@ -263,19 +269,23 @@ d'identification {{site.data.keyword.Bluemix_notm}}.
         </tr>
         <tr>
         <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
-        <td>Si vous créez un cluster standard, choisissez un type de machine. Le type de machine spécifie les ressources de traitement virtuelles disponibles pour chaque noeud worker. Pour plus d'informations, consultez la rubrique [Comparaison des clusters léger et standard pour {{site.data.keyword.containershort_notm}}](cs_why.html#cluster_types). Pour les clusters légers, vous n'avez pas besoin de définir le type de machine.</td>
+        <td>Si vous créez un cluster standard, choisissez un type de machine. Le type de machine spécifie les ressources de traitement virtuelles disponibles pour chaque noeud worker. Consultez la rubrique [Comparaison de clusters gratuits et standards {{site.data.keyword.containershort_notm}}](cs_why.html#cluster_types) pour plus d'informations. Dans le cas de clusters gratuits, vous n'avez pas besoin de définir le type de machine.</td>
+        </tr>
+        <tr>
+        <td><code>--hardware <em>&lt;shared_or_dedicated&gt;</em></code></td>
+        <td>Niveau d'isolation du matériel pour votre noeud worker. Utilisez dedicated pour que toutes les ressources physiques vous soient dédiées exclusivement ou shared pour permettre leur partage avec d'autres clients IBM. La valeur par défaut est shared. Cette valeur est facultative pour les clusters standards et n'est pas disponible pour les clusters gratuits.</td>
         </tr>
         <tr>
         <td><code>--public-vlan <em>&lt;public_vlan_id&gt;</em></code></td>
         <td><ul>
-          <li>Pour les clusters légers, vous n'avez pas besoin de définir un VLAN public. Votre cluster léger est automatiquement connecté à un VLAN public dont IBM est propriétaire.</li>
+          <li>Dans le cas de clusters gratuits, vous n'avez pas besoin de définir de réseau local virtuel public. Votre cluster gratuit est automatiquement connecté à un VLAN public dont IBM est propriétaire.</li>
           <li>Pour un cluster standard, si vous disposez déjà d'un VLAN public configuré dans votre compte d'infrastructure IBM Cloud (SoftLayer) pour cet emplacement, entrez l'ID du VLAN public. Si vous ne disposez pas d'un VLAN public et d'un VLAN privé dans votre compte, ne spécifiez pas cette option. {{site.data.keyword.containershort_notm}} crée automatiquement un VLAN public pour vous.<br/><br/>
           <strong>Remarque</strong> : les routeurs de VLAN privé commencent toujours par <code>bcr</code> (routeur dorsal) et les routeurs de VLAN public par <code>fcr</code> (routeur frontal). Le numéro et la combinaison de lettres après ces préfixes doivent correspondre pour pouvoir utiliser ces réseaux locaux virtuels lors de la création d'un cluster.</li>
         </ul></td>
         </tr>
         <tr>
         <td><code>--private-vlan <em>&lt;private_vlan_id&gt;</em></code></td>
-        <td><ul><li>Pour les clusters légers, vous n'avez pas besoin de définir un VLAN privé. Votre cluster léger est automatiquement connecté à un VLAN privé dont IBM est propriétaire.</li><li>Pour un cluster standard, si vous disposez déjà d'un VLAN privé configuré dans votre compte d'infrastructure IBM Cloud (SoftLayer) pour cet emplacement, entrez l'ID du VLAN privé. Si vous ne disposez pas d'un VLAN public et d'un VLAN privé dans votre compte, ne spécifiez pas cette option. {{site.data.keyword.containershort_notm}} crée automatiquement un VLAN public pour vous.<br/><br/><strong>Remarque</strong> : les routeurs de VLAN privé commencent toujours par <code>bcr</code> (routeur dorsal) et les routeurs de VLAN public par <code>fcr</code> (routeur frontal). Le numéro et la combinaison de lettres après ces préfixes doivent correspondre pour pouvoir utiliser ces réseaux locaux virtuels lors de la création d'un cluster.</li></ul></td>
+        <td><ul><li>Dans le cas de clusters gratuits, vous n'avez pas besoin de définir de réseau local virtuel privé. Votre cluster gratuit est automatiquement connecté à un VLAN privé dont IBM est propriétaire.</li><li>Pour un cluster standard, si vous disposez déjà d'un VLAN privé configuré dans votre compte d'infrastructure IBM Cloud (SoftLayer) pour cet emplacement, entrez l'ID du VLAN privé. Si vous ne disposez pas d'un VLAN public et d'un VLAN privé dans votre compte, ne spécifiez pas cette option. {{site.data.keyword.containershort_notm}} crée automatiquement un VLAN public pour vous.<br/><br/><strong>Remarque</strong> : les routeurs de VLAN privé commencent toujours par <code>bcr</code> (routeur dorsal) et les routeurs de VLAN public par <code>fcr</code> (routeur frontal). Le numéro et la combinaison de lettres après ces préfixes doivent correspondre pour pouvoir utiliser ces réseaux locaux virtuels lors de la création d'un cluster.</li></ul></td>
         </tr>
         <tr>
         <td><code>--name <em>&lt;name&gt;</em></code></td>
@@ -392,7 +402,7 @@ variable d'environnement.
 
 -   [Déployer une application dans votre cluster.](cs_app.html#app_cli)
 -   [Gérez votre cluster à l'aide de la ligne de commande `kubectl`. ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/user-guide/kubectl/)
--   [Configurer votre propre registre privé dans {{site.data.keyword.Bluemix_notm}} pour stocker et partager des Docker avec d'autres utilisateurs.](/docs/services/Registry/index.html)
+-   [Configurer votre propre registre privé dans {{site.data.keyword.Bluemix_notm}} pour stocker et partager des images Docker avec d'autres utilisateurs.](/docs/services/Registry/index.html)
 - Si vous utilisez un pare-feu, vous devrez peut-être [ouvrir les ports requis](cs_firewall.html#firewall) afin d'utiliser les commandes `bx`, `kubectl` ou `calicotl`, autoriser le trafic sortant de votre cluster ou le trafic entrant pour les services réseau.
 
 <br />
@@ -406,12 +416,16 @@ Vous pouvez vérifier l'état actuel du cluster en exécutant la commande `bx cs
 
 |Etat du cluster|Cause|
 |-------------|------|
-|Deploying|Le maître Kubernetes n'est pas encore complètement déployé. Vous ne pouvez pas accéder à votre cluster.|
-|Pending|Le maître Kubernetes est déployé. La mise à disposition des noeuds d'agent est en cours. Ces derniers ne sont pas encore disponibles dans le cluster. Vous pouvez accéder au cluster, mais vous ne pouvez pas déployer d'applications sur le cluster.|
-|Normal|Tous les noeuds d'agent d'un cluster sont opérationnels. Vous pouvez accéder au cluster et déployer les applications sur le cluster.|
-|Warning|Au moins un noeud worker du cluster n'est pas disponible. Cela dit, les autres noeuds d'agent sont disponibles et peuvent prendre le relais pour la charge de travail. <ol><li>Répertoriez les noeuds d'agent présents dans votre cluster et notez l'ID des noeuds d'agent dont l'état indique <strong>Warning</strong>.<pre class="pre"><code>bx cs workers &lt;cluster_name_or_id&gt;</code></pre><li>Affichez les détails relatifs à votre noeud worker.<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre><li>Passez en revue les champs <strong>State</strong>, <strong>Status</strong> et <strong>Details</strong> pour identifier la principale cause de l'arrêt du noeud worker.</li><li>Si votre noeud worker a pratiquement atteint sa limite en termes de mémoire ou d'espace disque, réduisez la charge de travail sur votre noeud worker ou ajoutez un noeud worker à votre cluster pour contribuer à l'équilibrage de la charge de travail.</li></ol>|
-|Critical|Le maître Kubernetes est inaccessible ou tous les noeuds d'agent du cluster sont arrêtés. <ol><li>Affichez la liste des noeuds d'agent présents dans votre cluster.<pre class="pre"><code>bx cs workers &lt;cluster_name_or_id&gt;</code></pre><li>Affichez les détails relatifs à chaque noeud worker.<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre></li><li>Passez en revue les zones <strong>State</strong> (Etat) et <strong>Status</strong> (Statut) pour identifier la cause principale de la panne du noeud worker.<ul><li>Si l'état du noeud worker est <strong>Provision_failed</strong>, vous ne disposez peut-être pas des droits nécessaires pour mettre à disposition un noeud worker à partir du portefeuille d'infrastructure IBM Cloud (SoftLayer). Pour identifier les droits nécessaires, voir [Configuration de l'accès au portefeuille d'infrastucture IBM Cloud (SoftLayer) pour créer des clusters Kubernetes standard](cs_infrastructure.html#unify_accounts).</li><li>Si l'état du noeud worker indique <strong>Critical</strong> (Critique) et son statut <strong>Not Ready</strong> (Non prêt), il se peut que votre noeud worker ne parvienne pas à se connecter à l'infrastructure IBM Cloud(SoftLayer). Lancez l'identification et la résolution des problèmes en exécutant d'abord la commande <code>bx cs worker-reboot --hard CLUSTER WORKER</code>. Si cette commande n'aboutit pas, exécutez la commande <code>bx cs worker reload CLUSTER WORKER</code>.</li><li>Si l'état du noeud worker indique <strong>Critical</strong> (Critique) et son statut <strong>Out of disk
-</strong> (Disque saturé), ceci indique que votre noeud a épuisé sa capacité. Vous pouvez réduire la charge de travail sur votre noeud worker ou ajouter un noeud worker à votre cluster pour contribuer à l'équilibrage de la charge de travail.</li><li>Si l'état du noeud worker indique <strong>Critical</strong> (Critique) et son statut <strong>Unknown</strong> (Inconnu), le maître Kubernetes n'est pas disponible. Contactez le support {{site.data.keyword.Bluemix_notm}} en ouvrant un [ticket de demande de service {{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#getting-help).</li></ul></li></ol>|
+
+|Critique| Le maître Kubernetes est inaccessible ou tous les noeuds worker du cluster sont arrêtés. <ol><li>Affichez la liste des noeuds d'agent présents dans votre cluster.<pre class="pre"><code>bx cs workers &lt;cluster_name_or_id&gt;</code></pre><li>Affichez les détails relatifs à chaque noeud worker.<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre></li><li>Passez en revue les zones <strong>State</strong> (Etat) et <strong>Status</strong> (Statut) pour identifier la cause principale de la panne du noeud worker.<ul><li>Si l'état du noeud worker est <strong>Provision_failed</strong>, vous ne disposez peut-être pas des droits nécessaires pour mettre à disposition un noeud worker à partir du portefeuille d'infrastructure IBM Cloud (SoftLayer). Pour identifier les droits nécessaires, voir [Configuration de l'accès au portefeuille d'infrastucture IBM Cloud (SoftLayer) pour créer des clusters Kubernetes standard](cs_infrastructure.html#unify_accounts).</li><li>Si l'état du noeud worker indique <strong>Critical</strong> (Critique) et son statut <strong>Not Ready</strong> (Non prêt), il se peut que votre noeud worker ne parvienne pas à se connecter à l'infrastructure IBM Cloud(SoftLayer). Lancez l'identification et la résolution des problèmes en exécutant d'abord la commande <code>bx cs worker-reboot --hard CLUSTER WORKER</code>. Si cette commande n'aboutit pas, exécutez la commande <code>bx cs worker reload CLUSTER WORKER</code>.</li><li>Si l'état du noeud worker indique <strong>Critical</strong> (Critique) et son statut <strong>Out of disk
+</strong> (Disque saturé), ceci indique que votre noeud a épuisé sa capacité. Vous pouvez réduire la charge de travail sur votre noeud worker ou ajouter un noeud worker à votre cluster pour contribuer à l'équilibrage de la charge de travail.</li><li>Si l'état du noeud worker indique <strong>Critical</strong> (Critique) et son statut <strong>Unknown</strong> (Inconnu), le maître Kubernetes n'est pas disponible. Contactez le support {{site.data.keyword.Bluemix_notm}} en ouvrant un [ticket de demande de service {{site.data.keyword.Bluemix_notm}}](/docs/get-support/howtogetsupport.html#using-avatar).</li></ul></li></ol>|
+
+|En cours de déploiement| Le déploiement du maître Kubernetes n'est pas terminé. Vous ne pouvez pas encore accéder à votre cluster.|
+|Normal| All Tous les noeuds worker du cluster sont opérationnels. Vous pouvez accéder au cluster et y déployer des applications.|
+|En attente| Le maître Kubernetes a été déployé. La mise à disposition des noeuds d'agent est en cours. Ces derniers ne sont pas encore disponibles dans le cluster. Vous pouvez accéder au cluster, mais ne pouvez pas encore y déployer des applications.|
+
+|Avertissement| Au moins un noeud worker du cluster n'est pas accessible, mais d'autres sont disponibles et peuvent assumer la charge de travail. <ol><li>Répertoriez les noeuds d'agent présents dans votre cluster et notez l'ID des noeuds d'agent dont l'état indique <strong>Warning</strong>.<pre class="pre"><code>bx cs workers &lt;cluster_name_or_id&gt;</code></pre><li>Affichez les détails relatifs à votre noeud worker.<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre><li>Passez en revue les champs <strong>State</strong>, <strong>Status</strong> et <strong>Details</strong> pour identifier la principale cause de l'arrêt du noeud worker.</li><li>Si votre noeud worker a pratiquement atteint sa limite en termes de mémoire ou d'espace disque, réduisez la charge de travail sur votre noeud worker ou ajoutez un noeud worker à votre cluster pour contribuer à l'équilibrage de la charge de travail.</li></ol>|
+
 {: caption="Table. Etats de cluster" caption-side="top"}
 
 <br />
@@ -423,7 +437,7 @@ Vous pouvez vérifier l'état actuel du cluster en exécutant la commande `bx cs
 Lorsque vous avez fini d'utiliser un cluster, vous pouvez le supprimer afin qu'il ne consomme plus de ressources.
 {:shortdesc}
 
-Les clusters légers et standard créés avec un compte de type Paiement à la carte doivent être supprimés manuellement par l'utilisateur lorsque vous n'en avez plus besoin.
+Les clusters gratuits et standards créés avec un compte de type Paiement à la carte doivent être supprimés manuellement par l'utilisateur lorsque vous n'en avez plus besoin.
 
 Lorsque vous supprimez un cluster, vous supprimez également les ressources sur le cluster, notamment les conteneurs, les pods, les services liés et les valeurs confidentielles. ISi vous ne supprimez pas l'espace de stockage lorsque vous supprimez votre cluster, vous pouvez le supprimer via le tableau de bord d'infrastructure IBM Cloud (SoftLayer) l'interface graphique {{site.data.keyword.Bluemix_notm}}. En raison du cycle de facturation mensuel, une réservation de volume persistant ne peut pas être supprimée le dernier jour du mois. Si vous supprimez la réservation de volume persistant le dernier jour du mois, la suppression reste en attente jusqu'au début du mois suivant.
 
@@ -449,6 +463,6 @@ Lorsque vous supprimez un cluster, vous supprimez également les ressources sur 
     3.  Suivez les invites et indiquez si vous souhaitez supprimer les ressources de cluster.
 
 Lorsque vous supprimez un cluster, vous pouvez supprimer les sous-réseaux portables et le stockage persistant associés au cluster :
-- Les sous-réseaux sont utilisés pour affecter des adresses IP portables publiques aux services d'équilibreur de charge ou à votre contrôleur Ingress. Si vous les conservez, vous pouvez les réutiliser dans un nouveau cluster ou les supprimer manuellement ultérieurement de votre portefeuille d'infrastructure IBM Cloud (SoftLayer).
+- Les sous-réseaux sont utilisés pour affecter des adresses IP portables publiques aux services d'équilibreur de charge ou à votre équilibreur de charge d'application Ingress. Si vous les conservez, vous pouvez les réutiliser dans un nouveau cluster ou les supprimer manuellement ultérieurement de votre portefeuille d'infrastructure IBM Cloud (SoftLayer).
 - Si vous avez créé une réservation de volume persistant via un [partage de fichiers existant](cs_storage.html#existing), vous ne pouvez pas supprimer ce dernier lorsque vous supprimez le cluster. Vous devez ultérieurement supprimer ce partage de fichiers manuellement de votre portefeuille d'infrastructure IBM Cloud (SoftLayer).
 - Un stockage persistant procure une haute disponibilité à vos données. Si vous le supprimez, vous ne pouvez pas récupérer vos données.

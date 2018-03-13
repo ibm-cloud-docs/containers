@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-16"
 
 ---
 
@@ -29,7 +29,9 @@ Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwe
 <col width="20%">
 <col width="60%">
  <thead>
- <th colspan=3>Allgemeine Annotationen</th>
+ <th>Allgemeine Annotationen</th>
+ <th>Name</th>
+ <th>Beschreibung</th>
  </thead>
  <tbody>
  <tr>
@@ -65,7 +67,9 @@ Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwe
 <col width="20%">
 <col width="60%">
  <thead>
-  <th colspan=3>Annotationen für Verbindungen</th>
+ <th>Annotationen für Verbindungen</th>
+ <th>Name</th>
+ <th>Beschreibung</th>
   </thead>
   <tbody>
   <tr>
@@ -96,7 +100,9 @@ Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwe
 <col width="20%">
 <col width="60%">
  <thead>
- <th colspan=3>Annotationen für Proxypuffer</th>
+ <th>Annotationen für Proxypuffer</th>
+ <th>Name</th>
+ <th>Beschreibung</th>
  </thead>
  <tbody>
  <tr>
@@ -127,7 +133,9 @@ Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwe
 <col width="20%">
 <col width="60%">
 <thead>
-<th colspan=3>Annotationen für Anforderungen und Antworten</th>
+<th>Annotationen für Anforderungen und Antworten</th>
+<th>Name</th>
+<th>Beschreibung</th>
 </thead>
 <tbody>
 <tr>
@@ -152,7 +160,9 @@ Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwe
 <col width="20%">
 <col width="60%">
 <thead>
-<th colspan=3>Annotationen für Servicegrenzwerte</th>
+<th>Annotationen für Servicegrenzwerte</th>
+<th>Name</th>
+<th>Beschreibung</th>
 </thead>
 <tbody>
 <tr>
@@ -172,7 +182,9 @@ Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwe
 <col width="20%">
 <col width="60%">
 <thead>
-<th colspan=3>Annotationen für HTTPS- und TLS/SSL-Authentifizierung</th>
+<th>Annotationen für HTTPS- und TLS/SSL-Authentifizierung</th>
+<th>Name</th>
+<th>Beschreibung</th>
 </thead>
 <tbody>
 <tr>
@@ -373,7 +385,8 @@ spec:
 ### Sitzungsaffinität mit Cookies (sticky-cookie-services)
 {: #sticky-cookie-services}
 
-Verwendung der permanenten Cookie-Annotation, um der Lastausgleichsfunktion für Anwendungen Sitzungsaffinität hinzuzufügen und eingehenden Netzverkehr immer an denselben Upstream-Server weiterzuleiten. {:shortdesc}
+Verwendung der permanenten Cookie-Annotation, um der Lastausgleichsfunktion für Anwendungen Sitzungsaffinität hinzuzufügen und eingehenden Netzverkehr immer an denselben Upstream-Server weiterzuleiten.
+{:shortdesc}
 
 <dl>
 <dt>Beschreibung</dt>
@@ -500,7 +513,7 @@ spec:
   </tr>
   <tr>
   <td><code>servicePort</code></td>
-  <td>Ersetzen Sie <code>&lt;<em>service-port</em>&gt;</code> gegebenenfalls durch den gewünschten Wert. Dieser Parameter ist optional. Wenn ein Wert bereitgestellt wird, wird der Port durch diesen Wert ersetzt, bevor der Datenverkehr an die Backend-App gesendet wird. Andernfalls entspricht der Port weiterhin dem Ingress-Port.</td>
+  <td>Dieser Parameter ist optional. Wenn ein Wert bereitgestellt wird, wird der Port durch diesen Wert ersetzt, bevor der Datenverkehr an die Backend-App gesendet wird. Andernfalls entspricht der Port weiterhin dem Ingress-Port.</td>
   </tr>
   </tbody></table>
   </dd>
@@ -567,7 +580,7 @@ spec:
  </tr>
  <tr>
  <td><code>&lt;lesezeitlimit&gt;</code></td>
- <td>Die Anzahl der Sekunden, die auf das Lesen von Daten aus der Back-End-App gewartet werden soll. Beispiel: <code>65s</code>.</td>
+ <td>Die Anzahl der Sekunden, die auf das Lesen von Daten aus der Back-End-App gewartet werden soll. Beispiel: <code>65s</code>. <strong>Hinweis:</strong> Ein Lesezeitlimit kann nicht größer als 120 Sekunden sein.</td>
  </tr>
  </tbody></table>
 
@@ -669,9 +682,9 @@ spec:
    http:
      paths:
      - path: /
-       backend:
-         serviceName: mein_service
-         servicePort: 8080</code></pre>
+        backend:
+          serviceName: mein_service
+          servicePort: 8080</code></pre>
 
 <table>
  <thead>
@@ -885,8 +898,8 @@ spec:
  tls:
  - hosts:
    - meine_domäne
-   secretName: mein_geheimer_tls-schlüssel
- rules:
+    secretName: mein_geheimer_tls-schlüssel
+  rules:
  - host: meine_domäne
    http:
      paths:
@@ -945,8 +958,8 @@ spec:
  tls:
  - hosts:
    - meine_domäne
-   secretName: mein_geheimer_tls-schlüssel
- rules:
+    secretName: mein_geheimer_tls-schlüssel
+  rules:
  - host: meine_domäne
    http:
      paths:
@@ -1079,11 +1092,11 @@ Entfernen von Headerinformationen, die in der Clientantwort von der Back-End-App
    name: myingress
    annotations:
      ingress.bluemix.net/response-remove-headers: |
-      serviceName=&lt;mein_service1&gt; {
+       serviceName=&lt;mein_service1&gt; {
        "&lt;header1&gt;";
        "&lt;header2&gt;";
        }
-      serviceName=&lt;mein_service2&gt; {
+       serviceName=&lt;mein_service2&gt; {
        "&lt;header3&gt;";
        }
  spec:
@@ -1361,7 +1374,7 @@ spec:
  </tr>
  <tr>
  <td><code>&lt;port&gt;</code></td>
- <td>Geben Sie die Portnummer ein, die Sie für eingehenden HTTP- bzw. HTTPS-Netzverkehr verwenden wollen. <p><strong>Hinweis:</strong> Wenn für HTTP oder HTTPS ein angepasster Port angegeben wird, dann sind die Standardports für HTTP und auch für HTTPS nicht mehr gültig. Um beispielsweise den Standardport für HTTPS in 8443 zu ändern, für HTTP jedoch weiterhin den Standardport zu verwenden, müssen Sie für beide Protokolle angepasste Ports festlegen: <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p></td>
+ <td>Geben Sie die Portnummer ein, die Sie für eingehenden HTTP- bzw. HTTPS-Netzverkehr verwenden wollen.  <p><strong>Hinweis:</strong> Wenn für HTTP oder HTTPS ein angepasster Port angegeben wird, dann sind die Standardports für HTTP und auch für HTTPS nicht mehr gültig. Um beispielsweise den Standardport für HTTPS in 8443 zu ändern, für HTTP jedoch weiterhin den Standardport zu verwenden, müssen Sie für beide Protokolle angepasste Ports festlegen: <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p></td>
  </tr>
  </tbody></table>
 
@@ -1434,8 +1447,8 @@ spec:
  tls:
  - hosts:
    - meine_domäne
-   secretName: mein_geheimer_tls-schlüssel
- rules:
+    secretName: mein_geheimer_tls-schlüssel
+  rules:
  - host: meine_domäne
    http:
      paths:
@@ -1601,7 +1614,7 @@ Konfigurieren Sie die gegenseitige Authentifizierung für Lastausgleichs-Apps, f
 <dd>
 
 <pre class="codeblock">
-<code>^apiVersion: extensions/v1beta1
+<code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: &lt;mein_ingress-name&gt;

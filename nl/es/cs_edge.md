@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-07"
 
 ---
 
@@ -20,6 +20,8 @@ lastupdated: "2018-01-12"
 
 Los nodos trabajadores de extremo pueden mejorar la seguridad de su clúster al permitir el acceso externo a un número inferior de nodos trabajadores y aislar la carga de trabajo en red. Cuando estos nodos trabajadores se marcan solo para trabajo en red, las demás cargas de trabajo no pueden consumir la CPU ni la memoria del nodo trabajador ni interferir con la red.
 {:shortdesc}
+
+
 
 ## Etiquetar nodos trabajadores como nodos extremos
 {: #edge_nodes}

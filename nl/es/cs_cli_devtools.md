@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-01-02"
+lastupdated: "2017-01-24"
 
 ---
 
@@ -25,7 +25,7 @@ Consulte estos mandatos para crear y gestionar clústeres.
 **Sugerencia:** ¿Está buscando mandatos `bx cr`? Revise la guía de [consulta de la CLI de {{site.data.keyword.registryshort_notm}}](/docs/cli/plugins/registry/index.html). ¿Está buscando mandatos `kubectl`? Consulte la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).
 
 
-<!--[https://github.ibm.com/alchemy-containers/armada-cli ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.ibm.com/alchemy-containers/armada-cli)-->
+
 
 <table summary="Mandatos para crear clústeres en {{site.data.keyword.Bluemix_notm}}">
  <thead>
@@ -283,7 +283,7 @@ Inhabilitar la configuración del programa de fondo del webhook para el servidor
 ### bx cs apiserver-refresh CLUSTER
 {: #cs_apiserver_refresh}
 
-Reinicie el Kubernetes maestro en el clúster para aplicar los cambios a la configuración del servidor de API.
+Reinicie el maestro de Kubernetes en el clúster para aplicar los cambios a la configuración del servidor de API.
 
 <strong>Opciones del mandato</strong>:
 
@@ -337,7 +337,7 @@ Para crear un clúster en la organización.
 <dl>
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
 
-<dd>La vía de acceso al archivo YAML para crear el clúster estándar. En lugar de definir las características de su clúster mediante las opciones que se proporcionan en este mandato, puede utilizar un archivo YAML.  Este valor es opcional para clústeres estándar y no está disponible para clústeres lite.
+<dd>La vía de acceso al archivo YAML para crear el clúster estándar. En lugar de definir las características de su clúster mediante las opciones que se proporcionan en este mandato, puede utilizar un archivo YAML.  Este valor es opcional para clústeres estándares y no está disponible para clústeres gratuitos.
 
 <p><strong>Nota:</strong> Si especifica la misma opción en el mandato y como parámetro en el archivo YAML, el valor en el mandato prevalece sobre el valor del archivo YAML. Por ejemplo, supongamos que define una ubicación en el archivo YAML y utiliza la opción <code>--location</code> en el mandato; el valor que especifique en la opción del mandato prevalece sobre el valor del archivo YAML.
 
@@ -398,15 +398,15 @@ kube-version: <em>&lt;kube-version&gt;</em>
       <td>La versión Kubernetes del nodo maestro del clúster. Este valor es opcional. Si no se especifica, el clúster se crea con el valor predeterminado de las versiones de Kubernetes soportadas. Para ver todas las versiones disponibles, ejecute <code>bx cs kube-versions</code>.</td></tr>
       <tr>
       <td><code>diskEncryption: <em>false</em></code></td>
-      <td>Los nodos de trabajador tienen cifrado de disco de forma predeterminada; [más información](cs_secure.html#worker). Para inhabilitar el cifrado, incluya esta opción y establezca el valor en <code>false</code>.</td></tr>
+      <td>Los nodos trabajadores tienen cifrado de disco de forma predeterminada; [más información](cs_secure.html#worker). Para inhabilitar el cifrado, incluya esta opción y establezca el valor en <code>false</code>.</td></tr>
      </tbody></table>
     </p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
-<dd>El nivel de aislamiento del hardware del nodo trabajador. Utilice el valor dedicated para tener recursos físicos disponibles dedicados solo a usted, o shared para permitir que los recursos físicos se compartan con otros clientes de IBM. El valor predeterminado es shared.  Este valor es opcional para clústeres estándar y no está disponible para clústeres lite.</dd>
+<dd>El nivel de aislamiento del hardware del nodo trabajador. Utilice el valor dedicated para tener recursos físicos disponibles dedicados solo a usted, o shared para permitir que los recursos físicos se compartan con otros clientes de IBM. El valor predeterminado es shared.  Este valor es opcional para clústeres estándares y no está disponible para clústeres gratuitos.</dd>
 
 <dt><code>--location <em>LOCATION</em></code></dt>
-<dd>La ubicación en la que desea crear el clúster. Las ubicaciones disponibles dependen de la región de {{site.data.keyword.Bluemix_notm}} en la que haya iniciado la sesión. Para obtener el mejor rendimiento, seleccione la región que esté físicamente más cercana a su ubicación.  Este valor es obligatorio para clústeres estándar y opcional para clústeres lite.
+<dd>La ubicación en la que desea crear el clúster. Las ubicaciones disponibles dependen de la región de {{site.data.keyword.Bluemix_notm}} en la que haya iniciado la sesión. Para obtener el mejor rendimiento, seleccione la región que esté físicamente más cercana a su ubicación.  Este valor es obligatorio para clústeres estándares y opcional para clústeres gratuitos.
 
 <p>Consulte [ubicaciones disponibles](cs_regions.html#locations).
 </p>
@@ -415,7 +415,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 </dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>El tipo de máquina tipo que elija afecta a la cantidad de memoria y al espacio de disco que está disponible para los contenedores desplegados en el nodo trabajador. Para ver una lista de los tipos de máquina disponibles, ejecute [bx cs machine-types <em>LOCATION</em>](#cs_machine_types).  Este valor es obligatorio para clústeres estándar y no está disponible para clústeres lite.</dd>
+<dd>El tipo de máquina tipo que elija afecta a la cantidad de memoria y al espacio de disco que está disponible para los contenedores desplegados en el nodo trabajador. Para ver una lista de los tipos de máquina disponibles, ejecute [bx cs machine-types <em>LOCATION</em>](#cs_machine_types).  Este valor es obligatorio para clústeres estándares y no está disponible para clústeres gratuitos.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
 <dd>El nombre del clúster.  Este valor es obligatorio.</dd>
@@ -430,7 +430,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <dd>
 
 <ul>
-<li>Este parámetro no está disponible para clústeres lite.</li>
+<li>Este parámetro no está disponible para clústeres gratuitos.</li>
 <li>Si este es el primer clúster estándar que crea en esta ubicación, no incluya este distintivo. Al crear clústeres se crea automáticamente una VLAN privada.</li>
 <li>Si previamente ha creado un clúster estándar en esta ubicación o una VLAN privada en la infraestructura de IBM Cloud (SoftLayer), debe especificar la VLAN privada.
 
@@ -444,7 +444,7 @@ empiezan por <code>fcr</code> (direccionador frontal). La combinación de númer
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
 <dd>
 <ul>
-<li>Este parámetro no está disponible para clústeres lite.</li>
+<li>Este parámetro no está disponible para clústeres gratuitos.</li>
 <li>Si este es el primer clúster estándar que crea en esta ubicación, no utilice este distintivo. Al crear el clúster se crea automáticamente una VLAN pública.</li>
 <li>Si previamente ha creado un clúster estándar en esta ubicación o una VLAN pública en la infraestructura de IBM Cloud (SoftLayer), debe especificar la VLAN pública.
 
@@ -456,12 +456,12 @@ empiezan por <code>fcr</code> (direccionador frontal). La combinación de númer
 <p>Para saber si ya tiene una VLAN pública para una ubicación específica o para encontrar el nombre de una VLAN pública existente, ejecute <code>bx cs vlans <em>&lt;location&gt;</em></code>.</p></dd>
 
 <dt><code>--workers WORKER</code></dt>
-<dd>El número de nodos trabajadores que desea desplegar en el clúster. Si no especifica esta opción, se crea un clúster con 1 nodo trabajador. Este valor es opcional para clústeres estándar y no está disponible para clústeres lite.
+<dd>El número de nodos trabajadores que desea desplegar en el clúster. Si no especifica esta opción, se crea un clúster con 1 nodo trabajador. Este valor es opcional para clústeres estándares y no está disponible para clústeres gratuitos.
 
 <p><strong>Nota:</strong> A cada nodo trabajador se la asigna un ID exclusivo y un nombre de dominio que no se debe cambiar de forma manual después de haber creado el clúster. Si se cambia el nombre de dominio o el ID se impide que el maestro de Kubernetes gestione el clúster.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>Los nodos de trabajador tienen cifrado de disco de forma predeterminada; [más información](cs_secure.html#worker). Para inhabilitar el cifrado, incluya esta opción.</dd>
+<dd>Los nodos trabajadores tienen cifrado de disco de forma predeterminada; [más información](cs_secure.html#worker). Para inhabilitar el cifrado, incluya esta opción.</dd>
 </dl>
 
 **Ejemplos**:
@@ -476,7 +476,7 @@ empiezan por <code>fcr</code> (direccionador frontal). La combinación de númer
   ```
   {: pre}
 
-  Ejemplo para un clúster lite:
+  Ejemplo para un clúster gratuito:
 
   ```
   bx cs cluster-create --name my_cluster
@@ -733,7 +733,7 @@ Elimine su propia subred privada de un clúster especificado.
 ### bx cs cluster-update [-f] CLUSTER [--kube-version MAJOR.MINOR.PATCH][--force-update]
 {: #cs_cluster_update}
 
-Actualice el Kubernetes maestro a la versión predeterminada de la API. Durante la actualización, no puede acceder ni cambiar el clúster. Los nodos trabajadores, las apps y los recursos que los usuarios del clúster han desplegado no se modifican y continúan ejecutándose.
+Actualice el maestro de Kubernetes a la versión predeterminada de la API. Durante la actualización, no puede acceder ni cambiar el clúster. Los nodos trabajadores, las apps y los recursos que los usuarios del clúster han desplegado no se modifican y continúan ejecutándose.
 
 Es posible que tenga que modificar los archivos YAML para futuros despliegues. Revise esta [nota del release](cs_versions.html) para ver detalles.
 
@@ -744,7 +744,7 @@ Es posible que tenga que modificar los archivos YAML para futuros despliegues. R
    <dd>El nombre o ID del clúster. Este valor es obligatorio.</dd>
 
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
-   <dd>La versión de Kubernetes del clúster. Si no se especifica este distintivo, el Kubernetes maestro se actualiza a la versión de la API predeterminada. Para ver todas las versiones disponibles, ejecute [bx cs kube-versions](#cs_kube_versions). Este valor es opcional.</dd>
+   <dd>La versión de Kubernetes del clúster. Si no se especifica este distintivo, el maestro de Kubernetes se actualiza a la versión de la API predeterminada. Para ver todas las versiones disponibles, ejecute [bx cs kube-versions](#cs_kube_versions). Este valor es opcional.</dd>
 
    <dt><code>-f</code></dt>
    <dd>Utilice esta opción para forzar la actualización del maestro sin solicitudes de usuario. Este valor es opcional.</dd>
@@ -1050,7 +1050,7 @@ Actualizar los detalles de una configuración de reenvío de registros.
 {: #cs_machine_types}
 
 Ver una lista de los tipos de máquinas disponibles para sus nodos trabajadores. Cada tipo de máquina incluye cantidad de CPU virtual, memoria y espacio de disco para cada nodo trabajador del clúster.
-- Los tipos de máquina con `u2c` o `b2c` en el nombre utilizan el disco local en lugar de la SAN por motivos de fiabilidad. Entre las ventajas de fiabilidad se incluyen un mejor rendimiento al serializar bytes en el disco local y una reducción de la degradación del sistema de archivos debido a anomalías de la red. Este tipo de máquinas contienen 25 GB de almacenamiento en disco local para el sistema de archivos de SO y 100 GB de almacenamiento en disco local para `/var/lib/docker`, el directorio en el que se graban todos los datos del contenedor.
+- Los tipos de máquina con `u2c` o `b2c` en el nombre utilizan el disco local en lugar de la red de área de almacenamiento (SAN) por motivos de fiabilidad. Entre las ventajas de fiabilidad se incluyen un mejor rendimiento al serializar bytes en el disco local y una reducción de la degradación del sistema de archivos debido a anomalías de la red. Este tipo de máquinas contienen 25 GB de almacenamiento en disco local para el sistema de archivos de SO y 100 GB de almacenamiento en disco local para `/var/lib/docker`, el directorio en el que se graban todos los datos del contenedor.
 - Los tipos de máquinas que incluyen `cifrado` en el nombre cifran los datos de Docker del host. El directorio `/var/lib/docker`, donde están almacenados todos los datos de los contenedores, están cifrados mediante LUKS.
 - Los tipos de máquinas con `u1c` o `b1c` en el nombre están en desuso, como, por ejemplo,`u1c.2x4`. Para empezar a utilizar los tipos de máquinas `u2c` y `b2c`, utilice el mandato `bx cs worker-add` para añadir nodos trabajadores con el tipo de máquina actualizado. A continuación, elimine los nodos trabajadores que utilizan los tipos de máquinas en desuso mediante el mandato `bx cs worker-rm`.
 </p>
@@ -1281,7 +1281,7 @@ workerNum: <em>&lt;number_workers&gt;</em>
 </tr>
 <tr>
 <td><code>diskEncryption: <em>false</em></code></td>
-<td>Los nodos de trabajador tienen cifrado de disco de forma predeterminada; [más información](cs_secure.html#worker). Para inhabilitar el cifrado, incluya esta opción y establezca el valor en <code>false</code>.</td></tr>
+<td>Los nodos trabajadores tienen cifrado de disco de forma predeterminada; [más información](cs_secure.html#worker). Para inhabilitar el cifrado, incluya esta opción y establezca el valor en <code>false</code>.</td></tr>
 </tbody></table></p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
@@ -1308,7 +1308,7 @@ empiezan por <code>bcr</code> (back-end router, direccionador de fondo) y los di
 empiezan por <code>fcr</code> (direccionador frontal). La combinación de números y letras que hay tras estos prefijos debe coincidir para poder utilizar dichas VLAN al crear un clúster. No utilice VLAN públicas y privadas que no coincidan para crear un clúster.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>Los nodos de trabajador tienen cifrado de disco de forma predeterminada; [más información](cs_secure.html#worker). Para inhabilitar el cifrado, incluya esta opción.</dd>
+<dd>Los nodos trabajadores tienen cifrado de disco de forma predeterminada; [más información](cs_secure.html#worker). Para inhabilitar el cifrado, incluya esta opción.</dd>
 </dl>
 
 **Ejemplos**:
@@ -1431,7 +1431,7 @@ Eliminar uno o varios nodos trabajadores de un clúster.
 ### bx cs worker-update [-f] CLUSTER WORKER [WORKER][--kube-version MAJOR.MINOR.PATCH] [--force-update]
 {: #cs_worker_update}
 
-Actualizar nodos trabajadores a la última versión Kubernetes. La ejecución de `bx cs worker-update` puede causar un tiempo de inactividad para sus apps y servicios. Durante la actualización, todos los pods se vuelven a planificar en otros nodos trabajadores y los datos se suprimen si no se guardan fuera del pod. Para evitar el tiempo de inactividad, asegúrese de tener suficientes nodos trabajadores para manejar la carga de trabajo mientras se estén actualizando los nodos trabajador seleccionados.
+Actualizar nodos trabajadores a la última versión Kubernetes. La ejecución de `bx cs worker-update` puede causar un tiempo de inactividad para sus apps y servicios. Durante la actualización, todos los pods se vuelven a planificar en otros nodos trabajadores y los datos se suprimen si no se guardan fuera del pod. Para evitar el tiempo de inactividad, asegúrese de tener suficientes nodos trabajadores para manejar la carga de trabajo mientras se estén actualizando los nodos trabajadores seleccionados.
 
 Es posible que tenga que modificar los archivos YAML para futuros despliegues antes de la actualización. Revise esta [nota del release](cs_versions.html) para ver detalles.
 
@@ -1443,7 +1443,7 @@ Es posible que tenga que modificar los archivos YAML para futuros despliegues an
    <dd>El nombre o ID del clúster en el que se listan los nodos trabajadores disponibles. Este valor es obligatorio.</dd>
 
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
-   <dd>La versión de Kubernetes del clúster. Si no se especifica este distintivo, el nodo maestro se actualiza a la versión predeterminada. Para ver todas las versiones disponibles, ejecute [bx cs kube-versions](#cs_kube_versions). Este valor es opcional.</dd>
+   <dd>La versión de Kubernetes del clúster. Si no se especifica este distintivo, el nodo trabajador se actualiza a la versión predeterminada. Para ver todas las versiones disponibles, ejecute [bx cs kube-versions](#cs_kube_versions). Este valor es opcional.</dd>
 
    <dt><code>-f</code></dt>
    <dd>Utilice esta opción para forzar la actualización del maestro sin solicitudes de usuario. Este valor es opcional.</dd>

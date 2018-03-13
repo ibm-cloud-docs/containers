@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-09"
+lastupdated: "2018-01-31"
 
 ---
 
@@ -55,30 +55,34 @@ Revise as opções para depurar seus clusters e localizar as causas raízes das 
     <th>Descrição</th>
     </thead>
     <tbody>
+  
+  <tr>
+      <td>Crítico</td>
+      <td>O mestre do Kubernetes não pode ser atingido ou todos os nós do trabalhador no cluster estão inativos.</td>
+     </tr>
+  
       <tr>
         <td>Implementando</td>
         <td>O mestre do Kubernetes não está totalmente implementado ainda. Não é possível acessar seu cluster.</td>
        </tr>
        <tr>
-        <td>Pendente</td>
-        <td>O mestre do Kubernetes foi implementado. Os nós do trabalhador estão sendo provisionados e ainda não estão disponíveis no cluster. É possível acessar o cluster, mas não é possível implementar apps no cluster.</td>
-      </tr>
-      <tr>
         <td>Normal</td>
         <td>Todos os nós do trabalhador em um cluster estão funcionando. É possível acessar o cluster e implementar apps no cluster.</td>
      </tr>
+       <tr>
+        <td>Pendente</td>
+        <td>O mestre do Kubernetes foi implementado. Os nós do trabalhador estão sendo provisionados e ainda não estão disponíveis no cluster. É possível acessar o cluster, mas não é possível implementar apps no cluster.</td>
+      </tr>
+  
      <tr>
         <td>Avisar</td>
         <td>Pelo menos um nó do trabalhador no cluster não está disponível, mas outros nós do trabalhador estão disponíveis e podem assumir o controle da carga de trabalho.</td>
-     </tr>
-     <tr>
-      <td>Crítico</td>
-      <td>O mestre do Kubernetes não pode ser atingido ou todos os nós do trabalhador no cluster estão inativos.</td>
-     </tr>
+     </tr>  
     </tbody>
   </table>
 
-3.  Se o cluster estiver em um estado de **Aviso** ou **Crítico** ou estiver preso no estado **Pendente** por muito tempo, revise o estado dos nós do trabalhador. Se o cluster estiver em um estado **Implementando**, aguarde até que ele esteja totalmente implementado para revisar seu funcionamento. Clusters em um estado **Normal** são considerados funcionais e não requerem uma ação no momento.
+3.  Se o cluster estiver em um estado de **Aviso**, **Crítico** ou de **Falha na exclusão** ou estiver preso no estado **Pendente** por muito tempo, revise o estado dos nós do trabalhador. Se o cluster estiver em um estado **Implementando**, aguarde até que ele esteja totalmente implementado para revisar seu funcionamento. Os clusters em um estado **Normal** não requerem uma ação no momento. 
+<p>Para revisar o estado de seus nós do trabalhador:</p>
 
   ```
   bx cs workers <cluster_name_or_id>
@@ -93,7 +97,7 @@ Revise as opções para depurar seus clusters e localizar as causas raízes das 
     <tbody>
       <tr>
        <td>Desconhecido</td>
-       <td>O mestre do Kubernetes não está acessível por um dos motivos a seguir:<ul><li>Você solicitou uma atualização do mestre do Kubernetes. O estado do nó do trabalhador não pode ser recuperado durante a atualização.</li><li>É possível que você tenha um firewall adicional que esteja protegendo seus nós do trabalhador ou que tenha mudado as configurações do firewall recentemente. O {{site.data.keyword.containershort_notm}} requer que determinados endereços IP e portas sejam abertos para permitir a comunicação do nó do trabalhador com o mestre do Kubernetes e vice-versa. Para obter mais informações, veja [O firewall evita que os nós do trabalhador se conectem](#cs_firewall).</li><li>O mestre do Kubernetes está inativo. Entre em contato com o suporte do {{site.data.keyword.Bluemix_notm}} abrindo um chamado de suporte do [{{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support).</li></ul></td>
+       <td>O mestre do Kubernetes não está acessível por um dos motivos a seguir:<ul><li>Você solicitou uma atualização do mestre do Kubernetes. O estado do nó do trabalhador não pode ser recuperado durante a atualização.</li><li>É possível que você tenha um firewall adicional que esteja protegendo seus nós do trabalhador ou que tenha mudado as configurações do firewall recentemente. O {{site.data.keyword.containershort_notm}} requer que determinados endereços IP e portas sejam abertos para permitir a comunicação do nó do trabalhador com o mestre do Kubernetes e vice-versa. Para obter mais informações, veja [O firewall evita que os nós do trabalhador se conectem](#cs_firewall).</li><li>O mestre do Kubernetes está inativo. Entre em contato com o suporte do {{site.data.keyword.Bluemix_notm}} abrindo um [chamado de suporte do {{site.data.keyword.Bluemix_notm}}](/docs/get-support/howtogetsupport.html#getting-customer-support).</li></ul></td>
       </tr>
       <tr>
         <td>Provisionando</td>
@@ -143,11 +147,11 @@ Revise as opções para depurar seus clusters e localizar as causas raízes das 
     <tbody>
       <tr>
         <td>Exceção de infraestrutura do {{site.data.keyword.Bluemix_notm}}: sua conta está atualmente proibida de pedir 'Instâncias de cálculo'.</td>
-        <td>Sua conta de infraestrutura do IBM Cloud (SoftLayer) pode ser restringida de pedir recursos de cálculo. Entre em contato com o suporte do {{site.data.keyword.Bluemix_notm}} abrindo um chamado de suporte do [{{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support).</td>
+        <td>Sua conta de infraestrutura do IBM Cloud (SoftLayer) pode ser restringida de pedir recursos de cálculo. Entre em contato com o suporte do {{site.data.keyword.Bluemix_notm}} abrindo um [chamado de suporte do {{site.data.keyword.Bluemix_notm}}](/docs/get-support/howtogetsupport.html#getting-customer-support).</td>
       </tr>
       <tr>
         <td>Exceção de infraestrutura do {{site.data.keyword.Bluemix_notm}}: não foi possível fazer a ordem. Há recursos insuficientes atrás do roteador 'router_name' para preencher a solicitação para os convidados a seguir: 'worker_id'.</td>
-        <td>A VLAN selecionada está associada a um pod no data center que possui espaço insuficiente para provisionar o nó do trabalhador. Você pode escolher entre as seguintes opções:<ul><li>Use um data center diferente para provisionar o nó do trabalhador. Execute <code>bx cs locations</code> para listar o data center disponível.<li>Se você tiver um par existente de VLAN pública e privada que esteja associado a outro pod no data center, use esse par de VLAN como alternativa.<li>Entre em contato com o suporte do {{site.data.keyword.Bluemix_notm}} abrindo um chamado de suporte do [{{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support).</ul></td>
+        <td>A VLAN selecionada está associada a um pod no data center que possui espaço insuficiente para provisionar o nó do trabalhador. Você pode escolher entre as seguintes opções:<ul><li>Use um data center diferente para provisionar o nó do trabalhador. Execute <code>bx cs locations</code> para listar o data center disponível.<li>Se você tiver um par existente de VLAN pública e privada que esteja associado a outro pod no data center, use esse par de VLAN como alternativa.<li>Entre em contato com o suporte do {{site.data.keyword.Bluemix_notm}} abrindo um [chamado de suporte do {{site.data.keyword.Bluemix_notm}}](/docs/get-support/howtogetsupport.html#getting-customer-support).</ul></td>
       </tr>
       <tr>
         <td>Exceção de infraestrutura do {{site.data.keyword.Bluemix_notm}}: não foi possível obter a VLAN de rede com o ID: &lt;vlan id&gt;.</td>
@@ -155,7 +159,7 @@ Revise as opções para depurar seus clusters e localizar as causas raízes das 
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation: o local fornecido para essa ordem é inválido. (HTTP 500)</td>
-        <td>A infraestrutura do IBM Cloud (SoftLayer) não está configurada para pedir recursos de cálculo no data center selecionado. Entre em contato com o [suporte do {{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support) para verificar se a conta está configurada corretamente.</td>
+        <td>A infraestrutura do IBM Cloud (SoftLayer) não está configurada para pedir recursos de cálculo no data center selecionado. Entre em contato com o [suporte do {{site.data.keyword.Bluemix_notm}}](/docs/get-support/howtogetsupport.html#getting-customer-support) para verificar se a conta está configurada corretamente.</td>
        </tr>
        <tr>
         <td>Exceção de infraestrutura do {{site.data.keyword.Bluemix_notm}}: o usuário não tem as permissões de infraestrutura necessárias do {{site.data.keyword.Bluemix_notm}} para incluir servidores
@@ -572,11 +576,11 @@ Revise as razões a seguir porque os logs não estão aparecendo e as etapas de 
  </tr>
  <tr>
  <td>A cota de armazenamento do log foi atingida.</td>
- <td>Para aumentar os seus limites de armazenamento de log, veja a <a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs">documentação do {{site.data.keyword.loganalysislong_notm}}</a>.</td>
+ <td>Para aumentar os seus limites de armazenamento de log, veja a <a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html"> documentação do {{site.data.keyword.loganalysislong_notm}}</a>.</td>
  </tr>
  <tr>
  <td>Se você especificou um espaço na criação do cluster, o proprietário da conta não tem permissões de Gerenciador, Desenvolvedor ou Auditor para esse espaço.</td>
- <td>Para mudar permissões de acesso para o proprietário da conta:<ol><li>Para descobrir quem é o proprietário da conta para o cluster, execute <code>bx cs api-key-info &lt;cluster_name_or_id&gt;</code>.</li><li>Para conceder a esse proprietário da conta as permissões de acesso de Gerenciador, Desenvolvedor ou Auditor do {{site.data.keyword.containershort_notm}} para o espaço, veja <a href="cs_users.html#managing">Gerenciando o acesso ao cluster</a>.</li><li>Para atualizar o token de criação de log depois que as permissões foram mudadas, execute <code>bx cs logging-config-refresh &lt;cluster_name_or_id&gt;</code>.</li></ol></td>
+ <td>Para mudar permissões de acesso para o proprietário da conta:<ol><li>Para descobrir quem é o proprietário da conta para o cluster, execute <code>bx cs api-key-info &lt;cluster_name_or_ID&gt;</code>.</li><li>Para conceder a esse proprietário da conta as permissões de acesso de Gerenciador, Desenvolvedor ou Auditor do {{site.data.keyword.containershort_notm}} para o espaço, veja <a href="cs_users.html#managing">Gerenciando o acesso ao cluster</a>.</li><li>Para atualizar o token de criação de log depois que as permissões foram mudadas, execute <code>bx cs logging-config-refresh &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
  </tr>
  </tbody></table>
 
@@ -609,9 +613,10 @@ Para testar as mudanças feitas durante a resolução de problemas, é possível
         {:pre}
 
   4. Após alguns minutos, é possível visualizar seus logs no painel do Kibana. Para acessar o painel do Kibana, acesse uma das URLs a seguir e selecione a conta do {{site.data.keyword.Bluemix_notm}} na qual você criou o cluster. Se você especificou um espaço na criação do cluster, acesse esse espaço.
-        - Sul e Leste dos EUA: https://logging.ng.bluemix.net
-        - Sul do Reino Unido e UE Central: https://logging.eu-fra.bluemix.net
-        - AP-South: https://logging.au-syd.bluemix.net
+      - Sul e Leste dos EUA: https://logging.ng.bluemix.net
+      - Sul do Reino Unido: https://logging.eu-gb.bluemix.net
+      - UE Central: https://logging.eu-fra.bluemix.net
+      - AP-South: https://logging.au-syd.bluemix.net
 
 <br />
 
@@ -647,7 +652,7 @@ Você expôs publicamente seu app criando um serviço de balanceador de carga no
 {: tsCauses}
 O serviço de balanceador de carga pode não estar funcionando corretamente por um dos motivos a seguir:
 
--   O cluster é um cluster lite ou um cluster padrão com apenas um nó do trabalhador.
+-   O cluster é um cluster grátis ou um cluster padrão com somente um nó do trabalhador.
 -   O cluster não está totalmente implementado ainda.
 -   O script de configuração para o serviço de balanceador de carga inclui erros.
 
@@ -718,20 +723,20 @@ Para solucionar problemas do serviço de balanceador de carga:
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
-Você expôs publicamente seu app criando um recurso de Ingresso para seu app no cluster. Quando tentou se conectar ao app por meio do endereço IP público ou do subdomínio do controlador de Ingresso, a conexão falhou ou atingiu o tempo limite.
+Você expôs publicamente seu app criando um recurso de Ingresso para seu app no cluster. Ao tentar se conectar ao app por meio do endereço IP público ou o subdomínio do balanceador de carga de aplicativo de Ingresso, a conexão falhou ou atingiu o tempo limite.
 
 {: tsCauses}
 O Ingresso pode não estar funcionando corretamente pelos motivos a seguir:
 <ul><ul>
 <li>O cluster não está totalmente implementado ainda.
-<li>O cluster foi configurado como um cluster lite ou como um cluster padrão com apenas um nó do trabalhador.
+<li>O cluster foi configurado como um cluster grátis ou como um cluster padrão com somente um nó do trabalhador.
 <li>O script de configuração de Ingresso inclui erros.
 </ul></ul>
 
 {: tsResolve}
 Para solucionar problemas do Ingresso:
 
-1.  Verifique se configura um cluster padrão totalmente implementado e se tem pelo menos dois nós do trabalhador para assegurar alta disponibilidade para o controlador de Ingresso.
+1.  Verifique se você configurou um cluster padrão que esteja totalmente implementado e tenha pelo menos dois nós do trabalhador para assegurar alta disponibilidade para o balanceador de carga de aplicativo de Ingresso.
 
   ```
   bx cs workers <cluster_name_or_id>
@@ -740,7 +745,7 @@ Para solucionar problemas do Ingresso:
 
     Na saída da CLI, certifique-se de que o **Status** dos nós do trabalhador exiba **Pronto** e que o **Tipo de máquina** mostre um tipo de máquina diferente de **livre**.
 
-2.  Recupere o subdomínio e o endereço IP público do controlador de Ingresso e, em seguida, execute ping de cada um.
+2.  Recupere o subdomínio de balanceador de carga de aplicativo de Ingresso e o endereço IP público e, em seguida execute ping de cada um.
 
     1.  Recupere o subdomínio do controlador de Ingresso.
 
@@ -749,33 +754,33 @@ Para solucionar problemas do Ingresso:
       ```
       {: pre}
 
-    2.  Execute ping do subdomínio do controlador de Ingresso.
+    2.  Execute ping do subdomínio de balanceador de carga de aplicativo de Ingresso.
 
       ```
       ping <ingress_controller_subdomain>
       ```
       {: pre}
 
-    3.  Recupere o endereço IP público do controlador de Ingresso.
+    3.  Recupere o endereço IP público de seu balanceador de carga de aplicativo de Ingresso.
 
       ```
       nslookup <ingress_controller_subdomain>
       ```
       {: pre}
 
-    4.  Execute ping do endereço IP público do controlador de Ingresso.
+    4.  Execute ping do endereço IP público do balanceador de carga de aplicativo de Ingresso.
 
       ```
       ping <ingress_controller_ip>
       ```
       {: pre}
 
-    Se a CLI retornar um tempo limite para o endereço IP público ou o subdomínio do controlador de Ingresso e você tiver configurado um firewall customizado que esteja protegendo os nós do trabalhador, poderá ser necessário abrir portas e grupos de rede adicionais no [firewall](#cs_firewall).
+    Se a CLI retornar um tempo limite para o endereço IP público ou subdomínio do balanceador de carga de aplicativo de Ingresso e você tiver configurado um firewall customizado que esteja protegendo seus nós do trabalhador, poderá ser necessário abrir portas e grupos de rede adicionais no seu [firewall](#cs_firewall).
 
-3.  Se você estiver usando um domínio customizado, certifique-se de que seu domínio customizado seja mapeado para o endereço IP público ou o subdomínio do controlador de Ingresso fornecido pela IBM com o provedor Domain Name Service (DNS).
-    1.  Se tiver usado o subdomínio do controlador de Ingresso, verifique seu registro de Nome canônico (CNAME).
-    2.  Se tiver usado o endereço IP público do controlador de Ingresso, verifique se o seu domínio customizado está mapeado para o endereço IP público móvel no Registro de ponteiro (PTR).
-4.  Verifique o arquivo de configuração do Ingresso.
+3.  Se você estiver usando um domínio customizado, certifique-se de que seu domínio customizado esteja mapeado para o endereço IP público ou subdomínio do balanceador de carga de aplicativo de Ingresso fornecido pela IBM com o provedor de Domain Name Service (DNS).
+    1.  Se você usou o subdomínio do balanceador de carga de aplicativo de Ingresso, verifique seu registro de Canonical Name (CNAME).
+    2.  Se você usou o endereço IP público do balanceador de carga de aplicativo de Ingresso, verifique se o seu domínio customizado está mapeado para o endereço IP público móvel no Registro de Ponteiro (PTR).
+4.  Verifique seu arquivo de configuração do recurso de Ingresso.
 
     ```
     apiVersion: extensions/v1beta1
@@ -798,7 +803,7 @@ Para solucionar problemas do Ingresso:
     ```
     {: codeblock}
 
-    1.  Verifique se o subdomínio do controlador de Ingresso e o certificado TLS estão corretos. Para localizar o subdomínio fornecido pela IBM e o certificado TLS, execute bx cs cluster-get <cluster_name_or_id>.
+    1.  Verifique se o subdomínio do balanceador de carga de aplicativo de Ingresso e o certificado TLS estão corretos. Para localizar o subdomínio fornecido pela IBM e o certificado TLS, execute bx cs cluster-get <cluster_name_or_id>.
     2.  Certifique-se de que seu app atenda no mesmo caminho configurado na seção de **caminho** de seu Ingresso. Se o seu app estiver configurado para atender no caminho raiz, inclua **/** como seu caminho.
 5.  Verifique sua implementação do Ingresso e procure mensagens de erro em potencial.
 
@@ -818,7 +823,7 @@ Para solucionar problemas do Ingresso:
     2.  Recupere os logs para cada pod do Ingresso.
 
       ```
-      kubectl logs <ingress_pod_id> -n kube-system
+      kubectl logs <ingress_pod_id> nginx-ingress -n kube-system
       ```
       {: pre}
 
@@ -918,8 +923,11 @@ Onde você inicia a resolução de problemas de um contêiner?
 [solicite um convite](https://bxcs-slack-invite.mybluemix.net/) para esse Slack.
 -   Revise os fóruns para ver se outros usuários tiveram o mesmo problema. Ao usar os fóruns para fazer uma pergunta, marque sua pergunta para que ela seja vista pelas equipes de desenvolvimento do {{site.data.keyword.Bluemix_notm}}.
 
-    -   Se tiver questões técnicas sobre como desenvolver ou implementar clusters ou apps com o {{site.data.keyword.containershort_notm}}, poste sua pergunta no [Stack Overflow ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](http://stackoverflow.com/search?q=bluemix+containers) e identifique a sua pergunta com `ibm-bluemix`, `kubernetes` e `containers`.
-    -   Para perguntas sobre o serviço e instruções de introdução, use o fórum [IBM developerWorks dW Answers ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Inclua as tags `bluemix` e `containers`.
-    Consulte [Obtendo ajuda](/docs/support/index.html#getting-help) para obter mais detalhes sobre o uso dos fóruns.
+    -   Se você tiver questões técnicas sobre como desenvolver ou implementar clusters ou apps com o {{site.data.keyword.containershort_notm}}, poste sua pergunta no [Stack Overflow ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) e identifique a sua pergunta com `ibm-cloud`, `kubernetes` e `containers`.
+    -   Para perguntas sobre o serviço e instruções de introdução, use o fórum [IBM developerWorks dW Answers ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Inclua as tags `ibm-cloud` e `containers`.
+    Consulte [Obtendo ajuda](/docs/get-support/howtogetsupport.html#using-avatar) para obter mais detalhes sobre o uso dos fóruns.
 
--   Entre em contato com o Suporte IBM. Para obter informações sobre como abrir um chamado de suporte IBM ou sobre níveis de suporte e severidades de chamado, consulte [Entrando em contato com o suporte](/docs/support/index.html#contacting-support).
+-   Entre em contato com o Suporte IBM. Para obter informações sobre como abrir um chamado de suporte IBM ou sobre níveis de suporte e severidades de chamado, consulte [Entrando em contato com o suporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
+
+{:tip}
+Ao relatar um problema, inclua seu ID do cluster. Para obter o ID do cluster, execute `bx cs clusters`.

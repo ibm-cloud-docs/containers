@@ -60,15 +60,15 @@ IBM Cloud 인프라(SoftLayer) 계정에서 서브넷을 작성하고 지정된 
     </tr>
     <tr>
     <td><code><em>&lt;cluster_name_or_id&gt;</em></code></td>
-    <td><code>&gt;cluster_name_or_id&lt;</code>를 클러스터의 이름 또는 ID로 대체하십시오.</td>
+    <td><code>&lt;cluster_name_or_id&gt;</code>를 클러스터의 이름 또는 ID로 대체하십시오.</td>
     </tr>
     <tr>
     <td><code><em>&lt;subnet_size&gt;</em></code></td>
-    <td><code>&gt;subnet_size&lt;</code>를 포터블 서브넷에서 추가할 IP 주소의 수로 대체하십시오. 허용되는 값은 8, 16, 32 또는 64입니다. <p>**참고:** 서브넷에 대한 포터블 IP 주소를 추가할 때 세 개의 IP 주소를 사용하여 클러스터 내부 네트워킹을 설정하므로 이들을 애플리케이션 로드 밸런서에 대해 사용하거나 로드 밸런서 서비스를 작성하는 데 사용할 수 없습니다. 예를 들어, 8개의 포터블 공인 IP 주소를 요청하는 경우 이 중에서 5개를 사용하여 앱을 공용으로 노출할 수 있습니다.</p> </td>
+    <td><code>&lt;subnet_size&gt;</code>를 포터블 서브넷에서 추가할 IP 주소의 수로 대체하십시오. 허용되는 값은 8, 16, 32 또는 64입니다. <p>**참고:** 서브넷에 대한 포터블 IP 주소를 추가할 때 세 개의 IP 주소를 사용하여 클러스터 내부 네트워킹을 설정하므로 이들을 애플리케이션 로드 밸런서에 대해 사용하거나 로드 밸런서 서비스를 작성하는 데 사용할 수 없습니다. 예를 들어, 8개의 포터블 공인 IP 주소를 요청하는 경우 이 중에서 5개를 사용하여 앱을 공용으로 노출할 수 있습니다.</p> </td>
     </tr>
     <tr>
     <td><code><em>&lt;VLAN_ID&gt;</em></code></td>
-    <td><code>&gt;VLAN_ID&lt;</code>를 포터블 공인 또는 사설 IP 주소를 할당할 퍼블릭 또는 프라이빗 VLAN의 ID로 대체하십시오. 기존 작업자 노드가 연결되어 있는 퍼블릭 또는 프라이빗 VLAN을 선택해야 합니다. 작업자 노드의 퍼플릭 또는 프라이빗 VLAN을 검토하려면 <code>bx cs worker-get &gt;worker_id&lt;</code> 명령을 실행하십시오.</td>
+    <td><code>&lt;VLAN_ID&gt;</code>를 포터블 공인 또는 사설 IP 주소를 할당할 퍼블릭 또는 프라이빗 VLAN의 ID로 대체하십시오. 기존 작업자 노드가 연결되어 있는 퍼블릭 또는 프라이빗 VLAN을 선택해야 합니다. 작업자 노드의 퍼플릭 또는 프라이빗 VLAN을 검토하려면 <code>bx cs worker-get &lt;worker_id&gt;</code> 명령을 실행하십시오. </td>
     </tr>
     </tbody></table>
 
@@ -184,8 +184,8 @@ Kubernetes 클러스터에 기존의 포터블 공인 또는 사설 서브넷을
 - 서브넷의 첫 번째 IP 주소는 서브넷에 대한 게이트웨이로 사용되어야 합니다.
 
 시작하기 전에:
-- 외부 서브넷에 들어오고 나가는 네트워크 트래픽의 라우팅을 구성하십시오. 
-- 온프레미스 데이터 센터 게이트웨이 디바이스와 IBM Cloud 인프라(SoftLayer) 포트폴리오의 사설 네트워크 Vyatta 또는 클러스터에서 실행되는 Strongswan VPN 서비스 간의 VPN 연결이 있는지 확인하십시오. Vyatta를 사용하려면, 이 [블로그 게시물 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/)]을 참조하십시오. Strongswan을 사용하려면, [Strongswan IPSec VPN 서비스와 VPN 연결 설정](cs_vpn.html)을 참조하십시오. 
+- 외부 서브넷에 들어오고 나가는 네트워크 트래픽의 라우팅을 구성하십시오.
+- 온프레미스 데이터센터 게이트웨이 디바이스와 IBM Cloud 인프라(SoftLayer) 포트폴리오의 사설 네트워크 Vyatta 또는 클러스터에서 실행되는 Strongswan VPN 서비스 간의 VPN 연결이 있는지 확인하십시오. Vyatta를 사용하려면, 이 [블로그 게시물 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/)을 참조하십시오. Strongswan을 사용하려면, [Strongswan IPSec VPN 서비스와 VPN 연결 설정](cs_vpn.html)을 참조하십시오.
 
 1. 클러스터 프라이빗 VLAN의 ID를 보십시오. **VLAN** 섹션을 찾으십시오. **사용자 관리** 필드에서 _false_인 VLAN ID를 식별하십시오.
 

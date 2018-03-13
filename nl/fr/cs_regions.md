@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-05"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-01-05"
 
 [Les régions {{site.data.keyword.Bluemix_notm}}](#bluemix_regions) sont différentes des régions [{{site.data.keyword.containershort_notm}}](#container_regions).
 
-![{{site.data.keyword.containershort_notm}} régions et centres de données](/images/regions.png)
+![{{site.data.keyword.containershort_notm}} : régions et centres de données](images/regions.png)
 
 Figure 1. Régions et centres de données {{site.data.keyword.containershort_notm}}
 
@@ -46,7 +46,7 @@ Pour vérifier dans quelle région {{site.data.keyword.Bluemix_notm}} vous vous 
 
 Vous pouvez accéder aux régions {{site.data.keyword.Bluemix_notm}} en spécifiant le noeud final d'API utilisé lorsque vous vous êtes connecté. Si vous ne spécifiez pas de région, vous êtes automatiquement connecté à la région la plus proche de vous.
 
-Noeuds finaux d'API des régions {{site.data.keyword.Bluemix_notm}} avec des exemples de commandes de connexion :
+{{site.data.keyword.Bluemix_notm}} Noeuds finaux d'API de région avec exemples de commandes de connexion :
 
   * Sud et Est des Etats-Unis
       ```
@@ -108,14 +108,14 @@ Les emplacements sont des centres de données disponibles dans une région.
 
   | Région | Emplacement | Ville |
   |--------|----------|------|
-  | Asie-Pacifique nord | hkg02, sng01, tok02 | Hong Kong, Singapour, Tokyo |
+  | Asie-Pacifique nord | hkg02, seo01, sng01, tok02 | Hong Kong, Séoul, Singapour, Tokyo |
   | Asie-Pacifique sud     | mel01, syd01, syd04        | Melbourne, Sydney |
   | Europe centrale     | ams03, fra02, mil01, par01        | Amsterdam, Frankfurt, Milan, Paris |
   | Sud du Royaume-Uni      | lon02, lon04         | Londres |
-  | Est des Etats-Unis      | <ph class="mon">mon01, </ph>tor01, wdc06, wdc07        | <ph class="mon">Montréal, </ph>Toronto, Washington, DC |
-  | Sud des Etats-Unis     | dal10, dal12, dal13       | Dallas |
+  | Est des Etats-Unis      | mon01, tor01, wdc06, wdc07        | Montréal, Toronto, Washington DC |
+  | Sud des Etats-Unis     | dal10, dal12, dal13, sao01       | Dallas, São Paolo |
 
-**Remarque **: Milan (mil01) n'est disponible que pour les clusters légers.
+**Remarque **: la région Milan (mil01) n'est disponible que pour les clusters gratuits.
 
 ### Utilisation des commandes d'API du service de conteneur
 {: #container_api}
@@ -130,8 +130,7 @@ Exemple d'API `GET /clusters` :
 
 </br>
 
-Pour utiliser l'API avec le noeud final global, dans toutes vos demandes, transmettez le nom de région dans un en-tête `X-Region`.
-Pour afficher la liste des régions disponibles, exécutez la commande `bx cs regions`.
+Pour utiliser l'API avec le noeud final global, dans toutes vos demandes, transmettez le nom de région dans un en-tête `X-Region`. Pour afficher la liste des régions disponibles, exécutez la commande `bx cs regions`.
 {: tip}
 
 Pour afficher la documentation sur les commandes d'API, accédez à [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/).

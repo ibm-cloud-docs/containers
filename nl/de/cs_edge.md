@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-07"
 
 ---
 
@@ -20,6 +20,8 @@ lastupdated: "2018-01-12"
 
 Mit Edge-Workerknoten kann die Sicherheit des Clusters verbessert werden, indem der externe Zugriff auf Workerknoten beschränkt und die Netzarbeitslast isoliert wird. Wenn diese Workerknoten nur für den Netzbetrieb markiert sind, können andere Arbeitslasten nicht die CPU oder den Speicher des entsprechenden Workerknotens nutzen und somit Auswirkungen auf den Netzbetrieb haben.
 {:shortdesc}
+
+
 
 ## Bezeichnung für Edge-Knoten zu Workerknoten hinzufügen
 {: #edge_nodes}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -25,7 +25,7 @@ lastupdated: "2018-01-12"
 ## 使用 NodePort 服務類型來配置應用程式的公用存取
 {: #config}
 
-對於精簡或標準叢集，您可以將應用程式公開為 Kubernetes NodePort 服務。
+對於免費或標準叢集，您可以將應用程式公開為 Kubernetes NodePort 服務。
 {:shortdesc}
 
 **附註：**工作者節點的公用 IP 位址不是永久性的。如果必須重建工作者節點，則會將新的公用 IP 位址指派給工作者節點。如果您需要服務的穩定公用 IP 位址及更高可用性，請使用 [LoadBalancer 服務](cs_loadbalancer.html)或 [Ingress](cs_ingress.html) 來公開應用程式。

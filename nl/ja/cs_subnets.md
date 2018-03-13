@@ -58,15 +58,15 @@ IBM Cloud インフラストラクチャー (SoftLayer) アカウントでサブ
     </tr>
     <tr>
     <td><code><em>&lt;cluster_name_or_id&gt;</em></code></td>
-    <td><code>&gt;cluster_name_or_id&lt;</code> をクラスターの名前または ID に置き換えます。</td>
+    <td><code>&lt;cluster_name_or_id&gt;</code> をクラスターの名前または ID に置き換えます。</td>
     </tr>
     <tr>
     <td><code><em>&lt;subnet_size&gt;</em></code></td>
-    <td><code>&gt;subnet_size&lt;</code> を、ポータブル・サブネットから追加する IP アドレスの数に置き換えます。 受け入れられる値は 8、16、32、64 です。 <p>**注:** サブネットのポータブル IP アドレスを追加する場合、3 つの IP アドレスはクラスター内ネットワークの確立のために使用されるため、これらのアドレスは、アプリケーション・ロード・バランサーでは、あるいはロード・バランサー・サービスの作成には使用できません。 例えば、8 個のポータブル・パブリック IP アドレスを要求する場合は、そのうちの 5 個を、アプリをパブリックに公開するために使用できます。</p> </td>
+    <td><code>&lt;subnet_size&gt;</code> を、ポータブル・サブネットから追加する IP アドレスの数に置き換えます。 受け入れられる値は 8、16、32、64 です。 <p>**注:** サブネットのポータブル IP アドレスを追加する場合、3 つの IP アドレスはクラスター内ネットワークの確立のために使用されるため、これらのアドレスは、アプリケーション・ロード・バランサーでは、あるいはロード・バランサー・サービスの作成には使用できません。 例えば、8 個のポータブル・パブリック IP アドレスを要求する場合は、そのうちの 5 個を、アプリをパブリックに公開するために使用できます。</p> </td>
     </tr>
     <tr>
     <td><code><em>&lt;VLAN_ID&gt;</em></code></td>
-    <td><code>&gt;VLAN_ID&lt;</code> を、ポータブル・パブリック IP アドレスまたはポータブル・プライベート IP アドレスの割り振り先となるパブリック VLAN またはプライベート VLAN の ID に置き換えます。 既存のワーカー・ノードが接続されているパブリック VLAN またはプライベート VLAN を選択する必要があります。 ワーカー・ノードのパブリック VLAN またはプライベート VLAN を確認するには、<code>bx cs worker-get &gt;worker_id&lt;</code> コマンドを実行します。</td>
+    <td><code>&lt;VLAN_ID&gt;</code> を、ポータブル・パブリック IP アドレスまたはポータブル・プライベート IP アドレスの割り振り先となるパブリック VLAN またはプライベート VLAN の ID に置き換えます。 既存のワーカー・ノードが接続されているパブリック VLAN またはプライベート VLAN を選択する必要があります。 ワーカー・ノードのパブリック VLAN またはプライベート VLAN を確認するには、<code>bx cs worker-get &lt;worker_id&gt;</code> コマンドを実行します。 </td>
     </tr>
     </tbody></table>
 
@@ -89,7 +89,7 @@ IBM Cloud インフラストラクチャー (SoftLayer) アカウントでサブ
 
 IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにある、カスタム・ファイアウォール・ルールまたは使用可能な IP アドレスが設定された既存のサブネットを使用する場合は、サブネットなしでクラスターを作成し、クラスターをプロビジョンするときに既存のサブネットをクラスターで使用できるようにします。
 
-1.  使用するサブネットを確認します。 サブネットの ID と VLAN ID をメモしてください。この例では、サブネット ID は 807861、VLAN ID は 1901230 です。
+1.  使用するサブネットを確認します。 サブネットの ID と VLAN ID をメモしてください。 この例では、サブネット ID は 807861、VLAN ID は 1901230 です。
 
     ```
     bx cs subnets
@@ -183,7 +183,7 @@ IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオに
 
 開始前に、以下のことを行います。
 - 外部サブネットとのネットワーク・トラフィックの出入りのルーティングを構成します。
-- IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオ内のプライベート・ネットワーク Vyatta またはクラスター内で実行されている Strongswan VPN サービスと、オンプレミス・データ・センター・ゲートウェイ・デバイスとの間に VPN 接続があることを確認してください。Vyatta の使用方法については、この[ブログ投稿 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/) を参照してください。Strongswan の使用方法については、[Strongswan IPSec VPN サービスを使用した VPN 接続のセットアップ](cs_vpn.html)を参照してください。
+- IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオ内のプライベート・ネットワーク Vyatta またはクラスター内で実行されている Strongswan VPN サービスと、オンプレミス・データ・センター・ゲートウェイ・デバイスとの間に VPN 接続があることを確認してください。 Vyatta の使用方法については、この[ブログ投稿 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/) を参照してください。 Strongswan の使用方法については、[Strongswan IPSec VPN サービスを使用した VPN 接続のセットアップ](cs_vpn.html)を参照してください。
 
 1. クラスターのプライベート VLAN の ID を表示します。 **VLANs** セクションを見つけます。 **User-managed** フィールドで、_false_ となっている VLAN ID を見つけます。
 

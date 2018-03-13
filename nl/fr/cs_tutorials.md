@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-13"
+lastupdated: "2017-01-29"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -52,17 +52,16 @@ Ce tutoriel est destiné aux développeurs de logiciel et aux administrateurs r�
 -  Compte de type Paiement à la carte ou Abonnement [{{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://console.bluemix.net/registration/)
 
 
-
-
 ## Leçon 1 : Création d'un cluster et configuration de l'interface CLI
 {: #cs_cluster_tutorial_lesson1}
 
-Créez votre cluster dans l'interface graphique et installez les interfaces CLI requises. Dans le cadre de ce tutoriel, créez votre cluster dans la région Sud du Royaume-Uni.
+Créez votre cluster dans l'interface graphique et installez les interfaces CLI requises.
+{: shortdesc}
 
 
 Pour créer votre cluster :
 
-1. La mise à disposition de votre cluster peut prendre quelques minutes. Pour gagner du temps, [créez votre cluster ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://console.bluemix.net/containers-kubernetes/launch?env_id=ibm:yp:united-kingdom) avant d'installer les interfaces CLI. Un cluster léger est accompagné d'un noeud worker sur lequel déployer des pods de conteneurs. Un noeud worker est l'hôte de calcul, en principe une machine virtuelle, sur lequel s'exécutent vos applications.
+1. La mise à disposition de votre cluster peut prendre quelques minutes. Pour gagner du temps, [créez votre depuis l'interface graphique (GUI) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/launch?env_id=ibm:yp:united-kingdom) avant d'installer les interfaces de ligne de commande (CLI). Dans le cadre de ce tutoriel, créez votre cluster dans la région Est des Etats-Unis.
 
 
 Les interfaces CLI suivantes et leurs prérequis sont utilisés pour gérer les clusters via l'interface de ligne de commande :
@@ -73,7 +72,7 @@ Les interfaces CLI suivantes et leurs prérequis sont utilisés pour gérer les 
 -   Interface CLI de Docker
 
 </br>
-Pour installer les interfaces CLI, procédez comme suit :
+Pour installer les interfaces CLI et leur prérequis :
 
 1.  Comme condition prérequise pour le plug-in {{site.data.keyword.containershort_notm}}, installez l'[interface CLI de {{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://clis.ng.bluemix.net/ui/home.html). Pour exécuter des commandes CLI {{site.data.keyword.Bluemix_notm}}, utilisez le préfixe `bx`.
 2.  Suivez les invites pour sélectionner un compte et une organisation {{site.data.keyword.Bluemix_notm}}. Les clusters sont associés à un compte, mais sont indépendants de l'organisation ou d'un espace {{site.data.keyword.Bluemix_notm}}.
@@ -86,7 +85,7 @@ Pour installer les interfaces CLI, procédez comme suit :
     {: pre}
 
 5.  Pour afficher une version locale du tableau de bord Kubernetes et déployer des applications dans vos clusters, [installez l'interface CLI de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Pour exécuter des commandes à l'aide de l'interface CLI de Kubernetes, utilisez le préfixe `kubectl`.
-    1.  Pour obtenir la compatibilité fonctionnelle complète, téléchargez la version de l'interface CLI de Kubernetes qui correspond à la version du cluster Kubernetes que vous envisagez d'utiliser. La version de Kubernetes par défaut d'{{site.data.keyword.containershort_notm}} actuelle est 1.7.4.
+    1.  Pour obtenir la compatibilité fonctionnelle complète, téléchargez la version de l'interface CLI de Kubernetes qui correspond à la version du cluster Kubernetes que vous envisagez d'utiliser. Version {{site.data.keyword.containershort_notm}} Kubernetes actuelle par défaut : 1.8.6.
 
         OS X :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
 
@@ -139,12 +138,11 @@ Pour installer les interfaces CLI, procédez comme suit :
     ```
     {: pre}
 
-7. Pour générer des images locales et les envoyer par commande push vers votre référentiel d'images privé, [installez l'interface CLI de Docker CE ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.docker.com/community-edition#/download). Si vous utilisez Windows 8 ou version antérieure, vous pouvez installer à la place la trousse [Docker Toolbox ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.docker.com/products/docker-toolbox).
+7. Pour générer des images locales et les envoyer par commande push vers votre référentiel d'images privé, [installez l'interface CLI de Docker CE ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.docker.com/community-edition#/download). Si vous utilisez Windows 8 ou version antérieure, vous pouvez installer à la place la trousse [Docker Toolbox ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.docker.com/toolbox/toolbox_install_windows/).
 
 Félicitations ! Vous avez installé les interfaces CLI utilisées dans les prochaines leçons et tutoriels. Configurez ensuite votre environnement de cluster et ajoutez le service {{site.data.keyword.toneanalyzershort}}.
 
-
-## Leçon 2 : Configuration de votre environnement de cluster
+## Leçon 2 : Configuration de votre registre privé
 {: #cs_cluster_tutorial_lesson2}
 
 Configurez un référentiel d'images privé dans {{site.data.keyword.registryshort_notm}} et ajoutez des valeurs confidentielles à votre cluster de sorte que l'application puisse accéder au service {{site.data.keyword.toneanalyzershort}}.
@@ -161,9 +159,7 @@ Configurez un référentiel d'images privé dans {{site.data.keyword.registrysho
 2.  Configurez votre référentiel d'images privé dans {{site.data.keyword.registryshort_notm}}
 pour stocker de manière sécurisée et partager vos images Docker avec tous les utilisateurs du cluster. Un référentiel d'images privé dans {{site.data.keyword.Bluemix_notm}} est identifié par un espace de nom. L'espace de nom est utilisé pour créer une URL unique vers votre référentiel d'images que vos développeurs peuvent utiliser pour accéder aux images Docker privées.
 
-    Dans cet exemple, l'entreprise PR désire créer un seul registre d'images dans {{site.data.keyword.registryshort_notm}} et spécifie donc _pr_firm_ comme nom d'espace dans lequel regrouper toutes les images de leur compte. Remplacez
-_&lt;your_namespace&gt;_ par l'espace de nom de votre choix, sans rapport
-avec ce tutoriel.
+    Dans cet exemple, l'entreprise PR désire créer un seul registre d'images dans {{site.data.keyword.registryshort_notm}} et spécifie donc _pr_firm_ comme nom d'espace dans lequel regrouper toutes les images de leur compte. Remplacez _&lt;your_namespace&gt;_ par un espace nom de votre choix sans rapport avec ce tutoriel.
 
     ```
     bx cr namespace-add <your_namespace>
@@ -177,7 +173,7 @@ avec ce tutoriel.
     ```
      {: pre}
 
-    Lorsque l'allocation de votre noeud worker a abouti, son statut passe à **Ready** et vous pouvez alors commencer à lier des services {{site.data.keyword.Bluemix_notm}} en vue de leur utilisation dans un tutoriel ultérieur.
+    Lorsque l'allocation de votre noeud worker a abouti, son statut passe à **Ready** et vous pouvez alors commencer à lier des services {{site.data.keyword.Bluemix_notm}}.
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status
@@ -185,86 +181,93 @@ avec ce tutoriel.
     ```
     {: screen}
 
-4.  Définissez le contexte de votre cluster dans l'interface CLI. Chaque fois que vous vous connectez à l'interface CLI du conteneur pour gérer vos clusters, vous devez lancer ces commandes pour définir le chemin d'accès au fichier de configuration du cluster par le biais d'une variable de session. L'interface CLI de Kubernetes utilise cette variable pour localiser un fichier de configuration local et les certificats requis pour connexion au cluster dans {{site.data.keyword.Bluemix_notm}}.
+## Leçon 3 : Configuration de votre environnement de cluster
+{: #cs_cluster_tutorial_lesson3}
 
-    1.  Obtenez la commande permettant de définir la variable d'environnement et téléchargez les fichiers de configuration Kubernetes.
+Définissez le contexte de votre cluster dans l'interface CLI. Chaque fois que vous vous connectez à l'interface CLI du conteneur pour gérer vos clusters, vous devez lancer ces commandes pour définir le chemin d'accès au fichier de configuration du cluster par le biais d'une variable de session. L'interface CLI de Kubernetes utilise cette variable pour localiser un fichier de configuration local et les certificats requis pour connexion au cluster dans {{site.data.keyword.Bluemix_notm}}.
 
-        ```
-        bx cs cluster-config <cluster_name>
-        ```
-        {: pre}
+1.  Obtenez la commande permettant de définir la variable d'environnement et téléchargez les fichiers de configuration Kubernetes.
 
-        Une fois les fichiers de configuration téléchargés, une commande s'affiche ; elle vous permet de définir le chemin vers le fichier de configuration Kubernetes local en tant que variable d'environnement.
+    ```
+    bx cs cluster-config <cluster_name>
+    ```
+    {: pre}
 
-        Exemple pour OS X :
+    Une fois les fichiers de configuration téléchargés, une commande s'affiche ; elle vous permet de définir le chemin vers le fichier de configuration Kubernetes local en tant que variable d'environnement.
 
-        ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
-        ```
-        {: screen}
+    Exemple pour OS X :
 
-    2.  Copiez et collez la commande qui s'affiche sur votre terminal pour définir la variable d'environnement `KUBECONFIG`.
+    ```
+    export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
+    ```
+    {: screen}
 
-    3.  Vérifiez que la variable d'environnement `KUBECONFIG` est correctement définie.
+2.  Copiez et collez la commande qui s'affiche sur votre terminal pour définir la variable d'environnement `KUBECONFIG`.
 
-        Exemple pour OS X :
+3.  Vérifiez que la variable d'environnement `KUBECONFIG` est correctement définie.
 
-        ```
-        echo $KUBECONFIG
-        ```
-        {: pre}
+    Exemple pour OS X :
 
-        Sortie :
+    ```
+    echo $KUBECONFIG
+    ```
+    {: pre}
 
-        ```
-        /Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
-        ```
-        {: screen}
+    Sortie :
 
-    4.  Vérifiez que les commandes `kubectl` fonctionnent correctement avec votre cluster en vérifiant la version du serveur CLI de Kubernetes.
+    ```
+    /Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
+    ```
+    {: screen}
 
-        ```
-        kubectl version  --short
-        ```
-        {: pre}
+4.  Vérifiez que les commandes `kubectl` fonctionnent correctement avec votre cluster en vérifiant la version du serveur CLI de Kubernetes.
 
-        Exemple de sortie :
+    ```
+    kubectl version  --short
+    ```
+    {: pre}
 
-        ```
-        Client Version: v1.7.4
-        Server Version: v1.7.4
-        ```
-        {: screen}
+    Exemple de sortie :
 
-5.  Ajoutez le service {{site.data.keyword.toneanalyzershort}} au cluster. Via les services {{site.data.keyword.Bluemix_notm}}, vous pouvez tirer parti dans vos applications des fonctionnalités que vous avez déjà développées. Tout service {{site.data.keyword.Bluemix_notm}} lié au cluster peut être utilisé par une application quelconque déployée dans ce cluster. Répétez les étapes ci-après pour chaque service {{site.data.keyword.Bluemix_notm}} que vous désirez utiliser avec vos applications.
-    1.  Ajoutez le service {{site.data.keyword.toneanalyzershort}} à votre compte {{site.data.keyword.Bluemix_notm}}.
+    ```
+    Client Version: v1.8.6
+    Server Version: v1.8.6
+    ```
+    {: screen}
 
-        **Remarque :** lorsque vous ajoutez le service {{site.data.keyword.toneanalyzershort}} à votre compte, un message s'affiche pour indiquer que ce service n'est pas gratuit. Si vous modérez votre appel d'API, ce tutoriel n'est pas assujetti à des frais pour le service {{site.data.keyword.watson}}. [Consultez les informations de tarification du service {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/watson/developercloud/tone-analyzer.html#pricing-block).
+## Leçon 4 : ajout d'un service à votre cluster
+{: #cs_cluster_tutorial_lesson4}
 
-        ```
-        bx service create tone_analyzer standard <mytoneanalyzer>
-        ```
-        {: pre}
+Via les services {{site.data.keyword.Bluemix_notm}}, vous pouvez tirer parti dans vos applications des fonctionnalités que vous avez déjà développées. Tout service {{site.data.keyword.Bluemix_notm}} lié au cluster peut être utilisé par une application quelconque déployée dans ce cluster. Répétez les étapes ci-après pour chaque service {{site.data.keyword.Bluemix_notm}} que vous désirez utiliser avec vos applications.
 
-    2.  Associez l'instance {{site.data.keyword.toneanalyzershort}} à l'espace de nom Kubernetes `default` pour le cluster. Ensuite, vous pourrez créer vos propres espaces de nom pour gérer les accès utilisateur aux ressources Kubernetes, mais dans l'immédiat, utilisez l'espace de nom`default`. Les espaces de nom Kubernetes sont différents de l'espace de nom du registre que vous avez créé auparavant.
+1.  Ajoutez le service {{site.data.keyword.toneanalyzershort}} à votre compte {{site.data.keyword.Bluemix_notm}}.
 
-        ```
-        bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
-        ```
-        {: pre}
+    **Remarque :** lorsque vous ajoutez le service {{site.data.keyword.toneanalyzershort}} à votre compte, un message s'affiche pour indiquer que ce service n'est pas gratuit. Si vous modérez votre appel d'API, ce tutoriel n'est pas assujetti à des frais pour le service {{site.data.keyword.watson}}. [Consultez les informations de tarification du service {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/watson/developercloud/tone-analyzer.html#pricing-block).
 
-        Sortie :
+    ```
+    bx service create tone_analyzer standard <mytoneanalyzer>
+    ```
+    {: pre}
 
-        ```
-        bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
+2.  Associez l'instance {{site.data.keyword.toneanalyzershort}} à l'espace de nom Kubernetes `default` pour le cluster. Ensuite, vous pourrez créer vos propres espaces de nom pour gérer les accès utilisateur aux ressources Kubernetes, mais dans l'immédiat, utilisez l'espace de nom`default`. Les espaces de nom Kubernetes sont différents de l'espace de nom du registre que vous avez créé auparavant.
+
+    ```
+    bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
+    ```
+    {: pre}
+
+    Sortie :
+
+    ```
+    bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
         Binding service instance to namespace...
         OK
         Namespace:	default
         Secret name:	binding-mytoneanalyzer
-        ```
-        {: screen}
+    ```
+    {: screen}
 
-6.  Vérifiez que la valeur confidentielle Kubernetes a bien été créée dans votre espace de nom de cluster. Chaque service {{site.data.keyword.Bluemix_notm}} est défini par un fichier JSON qui inclut des informations confidentielles sur le service, comme le nom de l'utilisateur, son mot de passe et l'URL qu'utilise le conteneur pour accéder au service. Des valeurs confidentielles Kubernetes sont utilisées pour un stockage sécurisé de ces informations. Dans cet exemple, les valeurs confidentielles incluent les données d'identification permettant d'accéder à l'instance du service {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} allouée à votre compte.
+3.  Vérifiez que la valeur confidentielle Kubernetes a bien été créée dans votre espace de nom de cluster. Chaque service {{site.data.keyword.Bluemix_notm}} est défini par un fichier JSON qui inclut des informations confidentielles sur le service, comme le nom de l'utilisateur, son mot de passe et l'URL qu'utilise le conteneur pour accéder au service. Des valeurs confidentielles Kubernetes sont utilisées pour un stockage sécurisé de ces informations. Dans cet exemple, les valeurs confidentielles incluent les données d'identification permettant d'accéder à l'instance du service {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} allouée à votre compte.
 
     ```
     kubectl get secrets --namespace=default

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-06"
 
 ---
 
@@ -22,60 +22,49 @@ lastupdated: "2018-01-12"
 ## 使用 Ingress 来配置对应用程序的访问权
 {: #config}
 
-通过创建由 IBM 提供的 Ingress 控制器管理的 Ingress 资源，公开集群中的多个应用程序。Ingress 控制器创建使用应用程序负载均衡器所需的资源。应用程序负载均衡器是一个外部 HTTP 或 HTTPS 负载均衡器，使用安全的唯一公共或专用入口点将入局请求路由到集群内部或外部的应用程序。
+通过创建由 IBM 提供的应用程序负载均衡器管理的 Ingress 资源，公开集群中的多个应用程序。应用程序负载均衡器是一个外部 HTTP 或 HTTPS 负载均衡器，使用安全的唯一公共或专用入口点将入局请求路由到集群内部或外部的应用程序。通过 Ingress，可以为向公众或向专用网络公开的每个应用程序定义单独的路由规则。有关 Ingress 服务的常规信息，请参阅[使用 Ingress 规划外部联网](cs_network_planning.html#ingress)。
 
 **注**：Ingress 仅可用于标准集群，并要求集群中至少有两个工作程序节点以确保高可用性，同时要求定期进行更新。设置 Ingress 需要[管理员访问策略](cs_users.html#access_policies)。验证您当前的[访问策略](cs_users.html#infra_access)。
 
-创建标准集群时，Ingress 控制器会自动创建并启用分配有可移植公共 IP 地址和公共路径的应用程序负载均衡器。另外，还会自动创建分配有可移植专用 IP 地址和专用路径的应用程序负载均衡器，但不会自动将其启用。可以配置这两种应用程序负载均衡器，并为向公众或向专用网络公开的每个应用程序定义单独的路由规则。通过 Ingress 向公众公开的每个应用程序都会分配有唯一路径，此路径会附加到公共路径，以便您可以使用唯一 URL 在集群中公共访问应用程序。
+要为 Ingress 选择最佳配置，可以遵循以下决策树：
 
-要向公众公开应用程序，可以针对以下场景配置公共应用程序负载均衡器。
+<img usemap="#ingress_map" border="0" class="image" src="images/networkingdt-ingress.png" width="750px" alt="此图像指导您选择 Ingress 应用程序负载均衡器的最佳配置。如果此图像未显示，仍可在文档这找到这些信息。" style="width:750px;" />
+<map name="ingress_map" id="ingress_map">
+<area href="/docs/containers/cs_ingress.html#private_ingress_no_tls" alt="使用定制域（不带 TLS）以专用方式公开应用程序" shape="rect" coords="25, 246, 187, 294"/>
+<area href="/docs/containers/cs_ingress.html#private_ingress_tls" alt="使用定制域（带 TLS）以专用方式公开应用程序" shape="rect" coords="161, 337, 309, 385"/>
+<area href="/docs/containers/cs_ingress.html#external_endpoint" alt="使用 IBM 提供的域或定制域（带 TLS）以公共方式公开集群外部的应用程序" shape="rect" coords="313, 229, 466, 282"/>
+<area href="/docs/containers/cs_ingress.html#custom_domain_cert" alt="使用定制域（带 TLS）以公共方式公开应用程序" shape="rect" coords="365, 415, 518, 468"/>
+<area href="/docs/containers/cs_ingress.html#ibm_domain" alt="使用 IBM 提供的域（不带 TLS）以公共方式公开应用程序" shape="rect" coords="414, 629, 569, 679"/>
+<area href="/docs/containers/cs_ingress.html#ibm_domain_cert" alt="使用 IBM 提供的域（带 TLS）以公共方式公开应用程序" shape="rect" coords="563, 711, 716, 764"/>
+</map>
+
+<br />
+
+
+## 向公众公开应用程序
+{: #ingress_expose_public}
+
+创建标准集群时，会自动启用 IBM 提供的应用程序负载均衡器并为其分配可移植公共 IP 地址和公共路径。通过 Ingress 向公众公开的每个应用程序都会分配有唯一路径，此路径会附加到公共路径，以便您可以使用唯一 URL 在集群中公共访问应用程序。要向公众公开应用程序，可以针对以下场景配置 Ingress。
 
 -   [使用 IBM 提供的域（不带 TLS）以公共方式公开应用程序](#ibm_domain)
 -   [使用 IBM 提供的域（带 TLS）以公共方式公开应用程序](#ibm_domain_cert)
 -   [使用定制域（带 TLS）以公共方式公开应用程序](#custom_domain_cert)
 -   [使用 IBM 提供的域或定制域（带 TLS）以公共方式公开集群外部的应用程序](#external_endpoint)
 
-要向专用网络公开应用程序，请首先[启用专用应用程序负载均衡器](#private_ingress)。然后，可以针对以下场景配置专用应用程序负载均衡器。
-
--   [使用定制域（不带 TLS）以专用方式公开应用程序](#private_ingress_no_tls)
--   [使用定制域（带 TLS）以专用方式公开应用程序](#private_ingress_tls)
-
-以公共方式或专用方式公开应用程序后，可以使用以下选项进一步配置应用程序负载均衡器。
-
--   [在 Ingress 应用程序负载均衡器中打开端口](#opening_ingress_ports)
--   [在 HTTP 级别配置 SSL 协议和 SSL 密码](#ssl_protocols_ciphers)
--   [使用注释定制应用程序负载均衡器](cs_annotations.html)
-{: #ingress_annotation}
-
-要为 Ingress 选择最佳配置，可以遵循以下决策树：
-
-<img usemap="#ingress_map" border="0" class="image" src="images/networkingdt-ingress.png" width="750px" alt="此图像指导您选择 Ingress 控制器的最佳配置。如果此图像未显示，仍可在文档这找到此信息。" style="width:750px;" />
-<map name="ingress_map" id="ingress_map">
-<area href="/docs/containers/cs_ingress.html#private_ingress_no_tls" alt="使用定制域（不带 TLS）以专用方式公开应用程序" shape="rect" coords="25, 246, 187, 294"/>
-<area href="/docs/containers/cs_ingress.html#private_ingress_tls" alt="使用定制域（带 TLS）以专用方式公开应用程序" shape="rect" coords="161, 337, 309, 385"/>
-<area href="/docs/containers/cs_ingress.html#external_endpoint" alt="使用 IBM 提供的域或定制域（带 TLS）以公共方式公开集群外部的应用程序" shape="rect" coords="313, 229, 466, 282"/>
-<area href="/docs/containers/cs_ingress.html#custom_domain_cert" alt="使用定制域（带 TLS）以公共方式公开应用程序" shape="rect" coords="365, 415, 518, 468"/>
-<area href="/docs/containers/cs_ingress.html#ibm_domain" alt="使用 IBM 提供的域（不带 TLS）以公共方式公开应用程序" shape="rect" coords="414, 609, 569, 659"/>
-<area href="/docs/containers/cs_ingress.html#ibm_domain_cert" alt="使用 IBM 提供的域（带 TLS）以公共方式公开应用程序" shape="rect" coords="563, 681, 716, 734"/>
-</map>
-
-<br />
-
-
-## 使用 IBM 提供的域（不带 TLS）以公共方式公开应用程序
+### 使用 IBM 提供的域（不带 TLS）以公共方式公开应用程序
 {: #ibm_domain}
 
-可以配置应用程序负载均衡器作为集群中应用程序的 HTTP 负载均衡器，并使用 IBM 提供的域从因特网访问应用程序。
+可以配置应用程序负载均衡器对集群中应用程序的入局 HTTP 网络流量进行负载均衡，并使用 IBM 提供的域从因特网访问应用程序。
 
 开始之前：
 
 -   如果还没有标准集群，请[创建标准集群](cs_clusters.html#clusters_ui)。
 -   [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群以运行 `kubectl` 命令。
 
-要配置应用程序负载均衡器，请执行以下操作：
+要使用 IBM 提供的域来公开应用程序，请执行以下操作：
 
 1.  [将应用程序部署到集群](cs_app.html#app_cli)。将应用程序部署到集群时，将创建一个或多个 pod 以用于在容器中运行应用程序。确保在配置文件的 metadata 部分中添加针对您的部署的标签。需要此标签才能识别运行应用程序的所有 pod，以便可以将这些 pod 包含在 Ingress 负载均衡中。
-2.  针对要公开的应用程序创建 Kubernetes 服务。仅当通过集群内部的 Kubernetes 服务公开应用程序时，Ingress 控制器才能将该应用程序包含到 Ingress 负载均衡中。
+2.  针对要公开的应用程序创建 Kubernetes 服务。仅当通过集群内部的 Kubernetes 服务公开应用程序时，应用程序负载均衡器才能将该应用程序包含到 Ingress 负载均衡中。
     1.  打开首选编辑器，并创建服务配置文件，例如名为 `myservice.yaml`。
     2.  针对要向公众公开的应用程序定义应用程序负载均衡器服务。
 
@@ -235,17 +224,17 @@ lastupdated: "2018-01-12"
 <br />
 
 
-## 使用 IBM 提供的域（带 TLS）以公共方式公开应用程序
+### 使用 IBM 提供的域（带 TLS）以公共方式公开应用程序
 {: #ibm_domain_cert}
 
-可以配置应用程序负载均衡器来管理应用程序的入局 TLS 连接，使用 IBM 提供的 TLS 证书解密网络流量，然后将未加密的请求转发到集群中公开的应用程序。
+可以配置 Ingress 控件来管理应用程序的入局 TLS 连接，使用 IBM 提供的 TLS 证书解密网络流量，然后将未加密的请求转发到集群中公开的应用程序。
 
 开始之前：
 
 -   如果还没有标准集群，请[创建标准集群](cs_clusters.html#clusters_ui)。
 -   [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群以运行 `kubectl` 命令。
 
-要配置应用程序负载均衡器，请执行以下操作：
+要使用 IBM 提供的域（带 TLS）来公开应用程序，请执行以下操作：
 
 1.  [将应用程序部署到集群](cs_app.html#app_cli)。确保在配置文件的 metadata 部分中添加针对您的部署的标签。此标签用于识别运行应用程序的所有 pod，以便可以将这些 pod 包含在 Ingress 负载均衡中。
 2.  针对要公开的应用程序创建 Kubernetes 服务。仅当通过集群内部的 Kubernetes 服务公开应用程序时，应用程序负载均衡器才能将该应用程序包含到 Ingress 负载均衡中。
@@ -429,7 +418,7 @@ lastupdated: "2018-01-12"
 <br />
 
 
-## 使用定制域（带 TLS）以公共方式公开应用程序
+### 使用定制域（带 TLS）以公共方式公开应用程序
 {: #custom_domain_cert}
 
 使用定制域而不是 IBM 提供的域时，可以配置应用程序负载均衡器以将入局网络流量路由到集群中的应用程序，并使用您自己的 TLS 证书来管理 TLS 终止。
@@ -440,19 +429,20 @@ lastupdated: "2018-01-12"
 -   如果还没有标准集群，请[创建标准集群](cs_clusters.html#clusters_ui)。
 -   [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群以运行 `kubectl` 命令。
 
-要配置应用程序负载均衡器，请执行以下操作：
+要使用定制域（带 TLS）来公开应用程序，请执行以下操作：
 
 1.  创建定制域。要创建定制域，请使用域名服务 (DNS) 提供程序来注册定制域。
 2.  配置域以将入局网络流量路由到 IBM 提供的应用程序负载均衡器。在以下选项之间进行选择：
     -   通过将 IBM 提供的域指定为规范名称记录 (CNAME)，定义定制域的别名。要找到 IBM 提供的 Ingress 域，请运行 `bx cs cluster-get <mycluster>` 并查找 **Ingress subdomain** 字段。
-    -   通过将 IBM 提供的应用程序负载均衡器的可移植公共 IP 地址添加为记录，将定制域映射到该 IP 地址。要查找应用程序负载均衡器的可移植公共 IP 地址，请运行 `bx cs alb-get <public_alb_ID>`。
+    -   通过将 IBM 提供的应用程序负载均衡器的可移植公共 IP 地址添加为记录，将定制域映射到该 IP 地址。要查找应用程序负载均衡器的可移植公共 IP 地址，请运行 `bx cs alb-get <public_alb_ID>`.
 3.  导入或创建 TLS 证书和私钥：
     * 如果您已经具有存储在 {{site.data.keyword.cloudcerts_long_notm}} 中要使用的 TLS 证书，那么可以通过运行以下命令，将其关联的私钥导入到集群：
 
-          ```
+      ```
           bx cs alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
           ```
-          {: pre}
+      {: pre}
+
     * 如果还没有 TLS 证书，请执行以下步骤：
         1. 为域创建以 PEM 格式编码的 TLS 证书和密钥。
         2.  打开首选编辑器，并创建 Kubernetes 私钥配置文件，例如名为 `mysecret.yaml`。
@@ -632,10 +622,10 @@ lastupdated: "2018-01-12"
 <br />
 
 
-## 使用 IBM 提供的域或定制域（带 TLS）以公共方式公开集群外部的应用程序
+### 使用 IBM 提供的域或定制域（带 TLS）以公共方式公开集群外部的应用程序
 {: #external_endpoint}
 
-可以针对要包含在集群负载均衡中的集群外部应用程序配置应用程序负载均衡器。IBM 提供的域或定制域上的入局请求会自动转发到外部应用程序。
+您可以配置应用程序负载均衡器，以将位于集群外部的应用程序包含到集群负载均衡中。IBM 提供的域或定制域上的入局请求会自动转发到外部应用程序。
 
 开始之前：
 
@@ -643,7 +633,7 @@ lastupdated: "2018-01-12"
 -   [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群以运行 `kubectl` 命令。
 -   确保要包含在集群负载均衡中的外部应用程序可以使用公共 IP 地址进行访问。
 
-您可以配置应用程序负载均衡器，以将 IBM 提供的域上的入局网络流量路由到位于集群外部的应用程序。如果要改为使用定制域和 TLS 证书，请将 IBM 提供的域和 TLS 证书替换为[定制域和 TLS 证书](#custom_domain_cert)。
+您可以将 IBM 提供的域上的入局网络流量路由到位于集群外部的应用程序。如果要改为使用定制域和 TLS 证书，请将 IBM 提供的域和 TLS 证书替换为[定制域和 TLS 证书](#custom_domain_cert)。
 
 1.  配置 Kubernetes 端点以定义要包含在集群负载均衡中的应用程序的外部位置。
     1.  打开首选编辑器，并创建端点配置文件，例如名为 `myexternalendpoint.yaml`。
@@ -872,10 +862,18 @@ lastupdated: "2018-01-12"
 <br />
 
 
-## 启用专用应用程序负载均衡器
+## 向专用网络公开应用程序
+{: #ingress_expose_private}
+
+创建标准集群时，会自动创建 IBM 提供的应用程序负载均衡器并为其分配可移植专用 IP 地址和专用路径。但是，不会自动启用缺省专用应用程序负载均衡器。要向专用网络公开应用程序，请首先[启用缺省专用应用程序负载均衡器](#private_ingress)。然后，可以针对以下场景配置 Ingress。
+
+-   [使用定制域（不带 TLS）以专用方式公开应用程序](#private_ingress_no_tls)
+-   [使用定制域（带 TLS）以专用方式公开应用程序](#private_ingress_tls)
+
+### 启用缺省专用应用程序负载均衡器
 {: #private_ingress}
 
-创建标准集群时，Ingress 控制器会自动创建专用应用程序负载均衡器，但不会自动将其启用。要能够使用专用应用程序负载均衡器，必须先使用预先分配的由 IBM 提供的可移植专用 IP 地址或您自己的可移植专用 IP 地址来启用此控制器。**注**：如果在创建集群时使用了 `--no-subnet` 标志，那么必须先添加可移植专用子网或用户管理的子网，然后才能启用专用应用程序负载均衡器。有关更多信息，请参阅[为集群请求其他子网](cs_subnets.html#request)。
+要能够使用缺省专用应用程序负载均衡器，必须先使用 IBM 提供的可移植专用 IP 地址或您自己的可移植专用 IP 地址来启用此负载均衡器。**注**：如果在创建集群时使用了 `--no-subnet` 标志，那么必须先添加可移植专用子网或用户管理的子网，然后才能启用专用应用程序负载均衡器。有关更多信息，请参阅[为集群请求其他子网](cs_subnets.html#request)。
 
 开始之前：
 
@@ -941,7 +939,7 @@ lastupdated: "2018-01-12"
 <br />
 
 
-## 使用定制域（不带 TLS）以专用方式公开应用程序
+### 使用定制域（不带 TLS）以专用方式公开应用程序
 {: #private_ingress_no_tls}
 
 可以配置专用应用程序负载均衡器以使用定制域将入局网络流量路由到集群中的应用程序。
@@ -949,11 +947,11 @@ lastupdated: "2018-01-12"
 
 开始之前，请先[启用专用应用程序负载均衡器](#private_ingress)。
 
-要配置专用应用程序负载均衡器，请执行以下操作：
+要使用定制域（不带 TLS）以专用方式公开应用程序，请执行以下操作：
 
 1.  创建定制域。要创建定制域，请使用域名服务 (DNS) 提供程序来注册定制域。
 
-2.  通过将 IBM 提供的专用应用程序负载均衡器的可移植专用 IP 地址添加为记录，将定制域映射到该 IP 地址。要查找专用应用程序负载均衡器的可移植专用 IP 地址，请运行 `bx cs albs --cluster <cluster_name>`。
+2.  通过将 IBM 提供的专用应用程序负载均衡器的可移植专用 IP 地址添加为记录，将定制域映射到该 IP 地址。要查找专用应用程序负载均衡器的可移植专用 IP 地址，请运行 `bx cs albs --cluster <cluster_name>`.
 
 3.  [将应用程序部署到集群](cs_app.html#app_cli)。将应用程序部署到集群时，将创建一个或多个 pod 以用于在容器中运行应用程序。确保在配置文件的 metadata 部分中添加针对您的部署的标签。需要此标签才能识别运行应用程序的所有 pod，以便可以将这些 pod 包含在 Ingress 负载均衡中。
 
@@ -1044,7 +1042,7 @@ lastupdated: "2018-01-12"
         </tr>
         <tr>
         <td><code>ingress.bluemix.net/ALB-ID</code></td>
-        <td>将 <em>&lt;private_ALB_ID&gt;</em> 替换为专用 Ingress 控制器的 ALB 标识。运行 <code>bx cs albs --cluster <my_cluster></code> 以查找 ALB 标识。有关此 Ingress 注释的更多信息，请参阅[专用应用程序负载均衡器路由](cs_annotations.html#alb-id)。</td>
+        <td>将 <em>&lt;private_ALB_ID&gt;</em> 替换为专用应用程序负载均衡器的标识。运行 <code>bx cs albs --cluster <my_cluster></code> 以查找应用程序负载均衡器标识。有关此 Ingress 注释的更多信息，请参阅[专用应用程序负载均衡器路由](cs_annotations.html#alb-id)。</td>
         </tr>
         <td><code>host</code></td>
         <td>将 <em>&lt;mycustomdomain&gt;</em> 替换为定制域。
@@ -1105,22 +1103,22 @@ lastupdated: "2018-01-12"
 <br />
 
 
-## 使用定制域（带 TLS）以专用方式公开应用程序
+### 使用定制域（带 TLS）以专用方式公开应用程序
 {: #private_ingress_tls}
 
-使用定制域时，可以配置专用应用程序负载均衡器以将入局网络流量路由到集群中的应用程序，并使用您自己的 TLS 证书来管理 TLS 终止。
+使用定制域时，可以使用专用应用程序负载均衡器将入局网络流量路由到集群中的应用程序，并使用您自己的 TLS 证书来管理 TLS 终止。
 {:shortdesc}
 
-开始之前，请先[启用专用应用程序负载均衡器](#private_ingress)。
+开始之前，请先[启用缺省专用应用程序负载均衡器](#private_ingress)。
 
-要配置应用程序负载均衡器，请执行以下操作：
+要使用定制域（带 TLS）以专用方式公开应用程序，请执行以下操作：
 
 1.  创建定制域。要创建定制域，请使用域名服务 (DNS) 提供程序来注册定制域。
 
-2.  通过将 IBM 提供的专用应用程序负载均衡器的可移植专用 IP 地址添加为记录，将定制域映射到该 IP 地址。要查找专用应用程序负载均衡器的可移植专用 IP 地址，请运行 `bx cs albs --cluster <cluster_name>`。
+2.  通过将 IBM 提供的专用应用程序负载均衡器的可移植专用 IP 地址添加为记录，将定制域映射到该 IP 地址。要查找专用应用程序负载均衡器的可移植专用 IP 地址，请运行 `bx cs albs --cluster <cluster_name>`.
 
 3.  导入或创建 TLS 证书和私钥：
-    * 如果您已经具有存储在 {{site.data.keyword.cloudcerts_long_notm}} 中要使用的 TLS 证书，那么可以通过运行 `bx cs alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>`，将其关联的私钥导入到集群。
+    * 如果您已经具有存储在 {{site.data.keyword.cloudcerts_long_notm}} 中要使用的 TLS 证书，那么可以通过运行 `bx cs alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>`.
     * 如果还没有 TLS 证书，请执行以下步骤：
         1. 为域创建以 PEM 格式编码的 TLS 证书和密钥。
         2.  打开首选编辑器，并创建 Kubernetes 私钥配置文件，例如名为 `mysecret.yaml`。
@@ -1191,10 +1189,7 @@ lastupdated: "2018-01-12"
     1.  打开首选编辑器，并创建 Ingress 配置文件，例如名为 `myingress.yaml`。
     2.  在配置文件中定义 Ingress 资源，该资源使用定制域将入局网络流量路由到服务，并使用定制证书来管理 TLS 终止。对于每个服务，可以定义附加到定制域的单独路径，以创建应用程序的唯一路径，例如 `https://mydomain/myapp`。在 Web 浏览器中输入此路径时，网络流量会路由到应用程序负载均衡器。应用程序负载均衡器会查找关联的服务，并将网络流量发送到该服务，然后进一步发送到运行应用程序的 pod。
 
-        **注**：务必确保应用程序侦听的是 Ingress 资源中定义的路径。否则，网络流量
-
-
-        无法转发到该应用程序。大多数应用程序不会侦听特定路径，而是使用根路径和特定端口。在这种情况下，请将根路径定义为 `/`，并且不要为应用程序指定单独的路径。
+        **注**：务必确保应用程序侦听的是 Ingress 资源中定义的路径。否则，网络流量无法转发到该应用程序。大多数应用程序不会侦听特定路径，而是使用根路径和特定端口。在这种情况下，请将根路径定义为 `/`，并且不要为应用程序指定单独的路径。
 
         ```
         apiVersion: extensions/v1beta1
@@ -1308,7 +1303,20 @@ lastupdated: "2018-01-12"
 <br />
 
 
-## 在 Ingress 应用程序负载均衡器中打开端口
+
+
+## 可选：配置应用程序负载均衡器
+{: #configure_alb}
+
+您可以使用以下选项进一步配置应用程序负载均衡器。
+
+-   [在 Ingress 应用程序负载均衡器中打开端口](#opening_ingress_ports)
+-   [在 HTTP 级别配置 SSL 协议和 SSL 密码](#ssl_protocols_ciphers)
+-   [使用注释定制应用程序负载均衡器](cs_annotations.html)
+{: #ingress_annotation}
+
+
+### 在 Ingress 应用程序负载均衡器中打开端口
 {: #opening_ingress_ports}
 
 缺省情况下，Ingress 应用程序负载均衡器中仅公开端口 80 和 443。要公开其他端口，可以编辑 `ibm-cloud-provider-ingress-cm` 配置映射资源。
@@ -1369,10 +1377,7 @@ lastupdated: "2018-01-12"
 
 有关配置映射资源的更多信息，请参阅 [Kubernetes 文档](https://kubernetes-v1-4.github.io/docs/user-guide/configmap/)。
 
-<br />
-
-
-## 在 HTTP 级别配置 SSL 协议和 SSL 密码
+### 在 HTTP 级别配置 SSL 协议和 SSL 密码
 {: #ssl_protocols_ciphers}
 
 通过编辑 `ibm-cloud-provider-ingress-cm` 配置映射，在全局 HTTP 级别启用 SSL 协议和密码。

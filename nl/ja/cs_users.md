@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-31"
 
 ---
 
@@ -23,8 +23,6 @@ lastupdated: "2018-01-12"
 {:shortdesc}
 
 
-
-
 ## クラスター・アクセス権限の管理
 {: #managing}
 
@@ -37,11 +35,11 @@ lastupdated: "2018-01-12"
 <dt>インフラストラクチャー・アクセス・ポリシー</dt>
 <dd>ID およびアクセス管理において、インフラストラクチャー・アクセス・ポリシーにより、{{site.data.keyword.containershort_notm}} ユーザー・インターフェースまたは CLI から要求されたアクションが IBM Cloud インフラストラクチャー (SoftLayer) 内で完了できるようになります。 これらのポリシーは、{{site.data.keyword.containershort_notm}} アクセス・ポリシーとともに設定する必要があります。 [インフラストラクチャーで選択可能な役割について詳しくは、こちらをご覧ください](/docs/iam/infrastructureaccess.html#infrapermission)。</dd>
 <dt>リソース・グループ</dt>
-<dd>リソース・グループは、各 {{site.data.keyword.Bluemix_notm}} サービスをいくつかのグループに編成したもので、これを使用すると、複数のリソースへのアクセス権限を各ユーザーに一度に素早く割り当てることができます。 [リソース・グループを使用してユーザーを管理する方法を参照してください](/docs/admin/resourcegroups.html#rgs)。</dd>
+<dd>リソース・グループは、各 {{site.data.keyword.Bluemix_notm}} サービスをいくつかのグループに編成したもので、これを使用すると、複数のリソースへのアクセス権限を各ユーザーに一度に素早く割り当てることができます。 [リソース・グループを使用してユーザーを管理する方法を参照してください](/docs/account/resourcegroups.html#rgs)。</dd>
 <dt>Cloud Foundry の役割</dt>
 <dd>Identity and Access Management では、すべてのユーザーに、Cloud Foundry ユーザー役割を割り当てる必要があります。 この役割は、ユーザーが {{site.data.keyword.Bluemix_notm}} アカウントで実行できるアクション (他のユーザーの招待や割り当て分の使用率の表示など) を決定します。 [Cloud Foundry で選択可能な役割について詳しくは、こちらをご覧ください](/docs/iam/cfaccess.html#cfaccess)。</dd>
 <dt>Kubernetes RBAC の役割</dt>
-<dd>{{site.data.keyword.containershort_notm}} アクセス・ポリシーが割り当てられているすべてのユーザーには、Kubernetes RBAC 役割が自動的に割り当てられます。 Kubernetes では、RBAC 役割によって、クラスター内の Kubernetes リソースに対して実行できるアクションが決まります。 RBAC 役割は、デフォルトの名前空間に関してのみセットアップされます。クラスター管理者は、クラスター内の他の名前空間の RBAC 役割を追加できます。 詳しくは、Kubernetes 資料の [Using RBAC Authorization ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) を参照してください。</dd>
+<dd>{{site.data.keyword.containershort_notm}} アクセス・ポリシーが割り当てられているすべてのユーザーには、Kubernetes RBAC 役割が自動的に割り当てられます。 Kubernetes では、RBAC 役割によって、クラスター内の Kubernetes リソースに対して実行できるアクションが決まります。 RBAC 役割は、デフォルトの名前空間に関してのみセットアップされます。 クラスター管理者は、クラスター内の他の名前空間の RBAC 役割を追加できます。 詳しくは、Kubernetes 資料の [Using RBAC Authorization ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) を参照してください。</dd>
 </dl>
 
 <br />
@@ -50,11 +48,11 @@ lastupdated: "2018-01-12"
 ## アクセス・ポリシーと許可
 {: #access_policies}
 
-{{site.data.keyword.Bluemix_notm}} アカウント内のユーザーに付与できるアクセス・ポリシーと許可について説明します。 オペレーターの役割とエディターの役割は別個のアクセス権です。 例えば、ワーカー・ノードを追加してサービスをバインドする操作をユーザーに実行させるには、そのユーザーにオペレーターとエディターの両方の役割を割り当てる必要があります。
+{{site.data.keyword.Bluemix_notm}} アカウント内のユーザーに付与できるアクセス・ポリシーと許可について説明します。 オペレーターの役割とエディターの役割は別個のアクセス権です。 例えば、ワーカー・ノードを追加してサービスをバインドする操作をユーザーに実行させるには、そのユーザーにオペレーターとエディターの両方の役割を割り当てる必要があります。 ユーザーのアクセス・ポリシーを変更すると、クラスター内の変更に関連付けられている RBAC ポリシーが {{site.data.keyword.containershort_notm}} によって自動的にクリーンアップされます。
 
 |{{site.data.keyword.containershort_notm}} アクセス・ポリシー|クラスター管理許可|Kubernetes リソース許可|
 |-------------|------------------------------|-------------------------------|
-|管理者|この役割は、対象アカウントのすべてのクラスターのエディター、オペレーター、およびビューアーの役割から許可を継承します。 <br/><br/>すべての現行サービス・インスタンスに設定された場合:<ul><li>ライト・クラスターまたは標準クラスターを作成する</li><li>IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするための {{site.data.keyword.Bluemix_notm}} アカウントの資格情報を設定する</li><li>クラスターを削除する</li><li>対象アカウント内の他の既存ユーザーの {{site.data.keyword.containershort_notm}} アクセス・ポリシーの割り当てと変更。</li></ul><p>特定のクラスター ID に設定された場合:<ul><li>特定のクラスターを削除する</li></ul></p>対応するインフラストラクチャー・アクセス・ポリシー: スーパーユーザー<br/><br/><b>注</b>: マシン、VLAN、サブネットなどのリソースを作成するには、ユーザーにインフラストラクチャーの**スーパーユーザー**役割が必要です。|<ul><li>RBAC 役割: クラスター管理</li><li>すべての名前空間内にあるリソースに対する読み取り/書き込みアクセス</li><li>名前空間内で役割を作成する</li><li>Kubernetes ダッシュボードにアクセスする</li><li>アプリをだれでも利用できるようにする Ingress リソースを作成する</li></ul>|
+|管理者|この役割は、対象アカウントのすべてのクラスターのエディター、オペレーター、およびビューアーの役割から許可を継承します。 <br/><br/>すべての現行サービス・インスタンスに設定された場合:<ul><li>フリー・クラスターまたは標準クラスターを作成する</li><li>IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするための {{site.data.keyword.Bluemix_notm}} アカウントの資格情報を設定する</li><li>クラスターを削除する</li><li>対象アカウント内の他の既存ユーザーの {{site.data.keyword.containershort_notm}} アクセス・ポリシーの割り当てと変更。</li></ul><p>特定のクラスター ID に設定された場合:<ul><li>特定のクラスターを削除する</li></ul></p>対応するインフラストラクチャー・アクセス・ポリシー: スーパーユーザー<br/><br/><b>注</b>: マシン、VLAN、サブネットなどのリソースを作成するには、ユーザーにインフラストラクチャーの**スーパーユーザー**役割が必要です。|<ul><li>RBAC 役割: クラスター管理</li><li>すべての名前空間内にあるリソースに対する読み取り/書き込みアクセス</li><li>名前空間内で役割を作成する</li><li>Kubernetes ダッシュボードにアクセスする</li><li>アプリをだれでも利用できるようにする Ingress リソースを作成する</li></ul>|
 |オペレーター|<ul><li>クラスターにワーカー・ノードを追加する</li><li>クラスターからワーカー・ノードを削除する</li><li>ワーカー・ノードをリブートする</li><li>ワーカー・ノードを再ロードする</li><li>クラスターにサブネットを追加する</li></ul><p>対応するインフラストラクチャー・アクセス・ポリシー: 基本ユーザー</p>|<ul><li>RBAC 役割: 管理者</li><li>名前空間自体ではなく、デフォルトの名前空間内にあるリソースに対する読み取り/書き込みアクセス</li><li>名前空間内で役割を作成する</li></ul>|
 |エディター <br/><br/><b>ヒント</b>: アプリ開発者には、この役割を使用してください。|<ul><li>{{site.data.keyword.Bluemix_notm}} サービスをクラスターにバインドします。</li><li>{{site.data.keyword.Bluemix_notm}} サービスをクラスターにアンバインドします。</li><li>Web フックを作成します。</li></ul><p>対応するインフラストラクチャー・アクセス・ポリシー: 基本ユーザー|<ul><li>RBAC 役割: 編集</li><li>デフォルトの名前空間内にあるリソースに対する読み取り/書き込みアクセス</li></ul></p>|
 |ビューアー|<ul><li>クラスターをリスト表示する</li><li>クラスターの詳細を表示する</li></ul><p>対応するインフラストラクチャー・アクセス・ポリシー: 表示のみ</p>|<ul><li>RBAC 役割: 表示</li><li>デフォルトの名前空間内にあるリソースに対する読み取りアクセス</li><li>Kubernetes シークレットに対する読み取りアクセス権限はなし</li></ul>|

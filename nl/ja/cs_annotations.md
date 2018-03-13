@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-16"
 
 ---
 
@@ -29,7 +29,9 @@ Ingress サービスとその使用開始方法に関する一般情報につい
 <col width="20%">
 <col width="60%">
  <thead>
- <th colspan=3>一般的なアノテーション</th>
+ <th>一般的なアノテーション</th>
+ <th>名前</th>
+ <th>説明</th>
  </thead>
  <tbody>
  <tr>
@@ -65,7 +67,9 @@ Ingress サービスとその使用開始方法に関する一般情報につい
 <col width="20%">
 <col width="60%">
  <thead>
-  <th colspan=3>接続アノテーション</th>
+ <th>接続アノテーション</th>
+ <th>名前</th>
+ <th>説明</th>
   </thead>
   <tbody>
   <tr>
@@ -96,7 +100,9 @@ Ingress サービスとその使用開始方法に関する一般情報につい
 <col width="20%">
 <col width="60%">
  <thead>
- <th colspan=3>プロキシー・バッファー・アノテーション</th>
+ <th>プロキシー・バッファー・アノテーション</th>
+ <th>名前</th>
+ <th>説明</th>
  </thead>
  <tbody>
  <tr>
@@ -127,7 +133,9 @@ Ingress サービスとその使用開始方法に関する一般情報につい
 <col width="20%">
 <col width="60%">
 <thead>
-<th colspan=3>要求/応答アノテーション</th>
+<th>要求/応答アノテーション</th>
+<th>名前</th>
+<th>説明</th>
 </thead>
 <tbody>
 <tr>
@@ -152,7 +160,9 @@ Ingress サービスとその使用開始方法に関する一般情報につい
 <col width="20%">
 <col width="60%">
 <thead>
-<th colspan=3>サービス制限アノテーション</th>
+<th>サービス制限アノテーション</th>
+<th>名前</th>
+<th>説明</th>
 </thead>
 <tbody>
 <tr>
@@ -172,7 +182,9 @@ Ingress サービスとその使用開始方法に関する一般情報につい
 <col width="20%">
 <col width="60%">
 <thead>
-<th colspan=3>HTTPS および TLS/SSL 認証アノテーション</th>
+<th>HTTPS および TLS/SSL 認証アノテーション</th>
+<th>名前</th>
+<th>説明</th>
 </thead>
 <tbody>
 <tr>
@@ -210,7 +222,7 @@ Ingress サービスとその使用開始方法に関する一般情報につい
 
 <dl>
 <dt>説明</dt>
-<dd>外部サービスへのパス定義を追加します。 このアノテーションは、バックエンド・サービスの代わりに外部サービスでアプリを実行する場合にのみ使用します。このアノテーションを使用して外部サービス経路を作成する場合、併用できるのは、`client-max-body-size`、`proxy-read-timeout`、`proxy-connect-timeout`、`proxy-buffering` の各アノテーションのみです。その他のアノテーションは、`proxy-external-service` と併用できません。
+<dd>外部サービスへのパス定義を追加します。 このアノテーションは、バックエンド・サービスの代わりに外部サービスでアプリを実行する場合にのみ使用します。 このアノテーションを使用して外部サービス経路を作成する場合、併用できるのは、`client-max-body-size`、`proxy-read-timeout`、`proxy-connect-timeout`、`proxy-buffering` の各アノテーションのみです。 その他のアノテーションは、`proxy-external-service` と併用できません。
 </dd>
 <dt>サンプル Ingress リソース YAML</dt>
 <dd>
@@ -361,7 +373,7 @@ spec:
 </tr>
 <tr>
 <td><code>rewrite</code></td>
-<td><code>&lt;<em>target_path</em>&gt;</code> を、アプリが listen するパスに置き換えます。アプリケーション・ロード・バランサー・ドメイン上の着信ネットワーク・トラフィックは、このパスを使用して Kubernetes サービスに転送されます。 大多数のアプリは特定のパスで listen するのではなく、ルート・パスと特定のポートを使用します。 上記の例では、rewrite パスは <code>/coffee</code> として定義されました。</td>
+<td><code>&lt;<em>target_path</em>&gt;</code> を、アプリが listen するパスに置き換えます。 アプリケーション・ロード・バランサー・ドメイン上の着信ネットワーク・トラフィックは、このパスを使用して Kubernetes サービスに転送されます。 大多数のアプリは特定のパスで listen するのではなく、ルート・パスと特定のポートを使用します。 上記の例では、再書き込みパスは <code>/coffee</code> として定義されました。</td>
 </tr>
 </tbody></table>
 
@@ -429,11 +441,11 @@ spec:
   </tr>
   <tr>
   <td><code>expires</code></td>
-  <td><code>&lt;<em>expiration_time</em>&gt;</code> を、スティッキー Cookie が期限切れになるまでの時間 (単位は秒 (s)、分 (m)、または時間 (h)) に置き換えます。この時間は、ユーザー・アクティビティーとは無関係です。 期限が切れた Cookie は、クライアント Web ブラウザーによって削除され、アプリケーション・ロード・バランサーに送信されなくなります。 例えば、有効期間を 1 秒、1 分、または 1 時間に設定するには、<code>1s</code>、<code>1m</code>、または <code>1h</code> と入力します。</td>
+  <td><code>&lt;<em>expiration_time</em>&gt;</code> を、スティッキー Cookie が期限切れになるまでの時間 (単位は秒 (s)、分 (m)、または時間 (h)) に置き換えます。 この時間は、ユーザー・アクティビティーとは無関係です。 期限が切れた Cookie は、クライアント Web ブラウザーによって削除され、アプリケーション・ロード・バランサーに送信されなくなります。 例えば、有効期間を 1 秒、1 分、または 1 時間に設定するには、<code>1s</code>、<code>1m</code>、または <code>1h</code> と入力します。</td>
   </tr>
   <tr>
   <td><code>path</code></td>
-  <td><code>&lt;<em>cookie_path</em>&gt;</code> を、Ingress サブドメインに付加されるパスに置き換えます。このパスは、Cookie をアプリケーション・ロード・バランサーに送信する対象となるドメインとサブドメインを示すものです。例えば、Ingress ドメインが <code>www.myingress.com</code> である場合に、すべてのクライアント要求で Cookie を送信するには、<code>path=/</code> を設定する必要があります。 <code>www.myingress.com/myapp</code> とそのすべてのサブドメインについてにのみ Cookie を送信するには、<code>path=/myapp</code> を設定する必要があります。</td>
+  <td><code>&lt;<em>cookie_path</em>&gt;</code> を、Ingress サブドメインに付加されるパスに置き換えます。このパスは、Cookie をアプリケーション・ロード・バランサーに送信する対象となるドメインとサブドメインを示すものです。 例えば、Ingress ドメインが <code>www.myingress.com</code> である場合に、すべてのクライアント要求で Cookie を送信するには、<code>path=/</code> を設定する必要があります。 <code>www.myingress.com/myapp</code> とそのすべてのサブドメインについてにのみ Cookie を送信するには、<code>path=/myapp</code> を設定する必要があります。</td>
   </tr>
   <tr>
   <td><code>hash</code></td>
@@ -501,7 +513,7 @@ spec:
   </tr>
   <tr>
   <td><code>servicePort</code></td>
-  <td><code>&lt;<em>service_port</em>&gt;</code> をこのパラメーターに置き換えるのはオプションです。指定した場合、トラフィックがバックエンド・アプリに送信される前に、ポートはこの値に置き換えられます。 指定しない場合、ポートは Ingress ポートと同じままです。</td>
+  <td>このパラメーターはオプションです。 指定した場合、トラフィックがバックエンド・アプリに送信される前に、ポートはこの値に置き換えられます。 指定しない場合、ポートは Ingress ポートと同じままです。</td>
   </tr>
   </tbody></table>
   </dd>
@@ -568,7 +580,7 @@ spec:
  </tr>
  <tr>
  <td><code>&lt;read_timeout&gt;</code></td>
- <td>バックエンド・アプリから読み取る前に待機する秒数 (例: <code>65s</code>)。</td>
+ <td>バックエンド・アプリから読み取る前に待機する秒数 (例: <code>65s</code>)。 <strong>注:</strong> 読み取りタイムアウトは、120 秒より長くできません。</td>
  </tr>
  </tbody></table>
 
@@ -622,7 +634,7 @@ rules:
 <tbody>
 <tr>
 <td><code>serviceName</code></td>
-<td><code>&lt;<em>myservice</em>&gt;</code> を、アプリ用に作成した Kubernetes サービスの名前に置き換えます。このパラメーターはオプションです。 特定のサービスが指定されていなければ、Ingress ホスト内のすべてのサービスにこの構成が適用されます。 このパラメーターを指定した場合は、所定のサービスに対してキープアライブ要求が設定されます。 パラメーターを指定しない場合は、キープアライブ要求が構成されていないすべてのサービスに対して、サーバー・レベルの <code>nginx.conf</code> でキープアライブ要求が設定されます。</td>
+<td><code>&lt;<em>myservice</em>&gt;</code> を、アプリ用に作成した Kubernetes サービスの名前に置き換えます。 このパラメーターはオプションです。 特定のサービスが指定されていなければ、Ingress ホスト内のすべてのサービスにこの構成が適用されます。 このパラメーターを指定した場合は、所定のサービスに対してキープアライブ要求が設定されます。 パラメーターを指定しない場合は、キープアライブ要求が構成されていないすべてのサービスに対して、サーバー・レベルの <code>nginx.conf</code> でキープアライブ要求が設定されます。</td>
 </tr>
 <tr>
 <td><code>requests</code></td>
@@ -681,7 +693,7 @@ spec:
  <tbody>
  <tr>
  <td><code>serviceName</code></td>
- <td><code>&lt;<em>myservice</em>&gt;</code> を、アプリ用に作成した Kubernetes サービスの名前に置き換えます。このパラメーターはオプションです。 このパラメーターを指定した場合は、所定のサービスに対してキープアライブ・タイムアウトが設定されます。 パラメーターを指定しない場合は、キープアライブ・タイムアウトが構成されていないすべてのサービスに対して、サーバー・レベルの <code>nginx.conf</code> でキープアライブ・タイムアウトが設定されます。</td>
+ <td><code>&lt;<em>myservice</em>&gt;</code> を、アプリ用に作成した Kubernetes サービスの名前に置き換えます。 このパラメーターはオプションです。 このパラメーターを指定した場合は、所定のサービスに対してキープアライブ・タイムアウトが設定されます。 パラメーターを指定しない場合は、キープアライブ・タイムアウトが構成されていないすべてのサービスに対して、サーバー・レベルの <code>nginx.conf</code> でキープアライブ・タイムアウトが設定されます。</td>
  </tr>
  <tr>
  <td><code>timeout</code></td>
@@ -810,7 +822,7 @@ spec:
 <dl>
 <dt>説明</dt>
 <dd>
-プロキシー・サーバーからの単一の接続に対して、応答を読み取るバッファーの数とサイズを設定します。特定のサービスが指定されていなければ、Ingress ホスト内のすべてのサービスにこの構成が適用されます。 例えば、<code>serviceName=SERVICE number=2 size=1k</code> という構成を指定した場合は、サービスに 1k が適用されます。 <code>number=2 size=1k</code> という構成を指定した場合は、Ingress ホスト内のすべてのサービスに 1k が適用されます。
+プロキシー・サーバーからの単一の接続に対して、応答を読み取るバッファーの数とサイズを設定します。 特定のサービスが指定されていなければ、Ingress ホスト内のすべてのサービスにこの構成が適用されます。 例えば、<code>serviceName=SERVICE number=2 size=1k</code> という構成を指定した場合は、サービスに 1k が適用されます。 <code>number=2 size=1k</code> という構成を指定した場合は、Ingress ホスト内のすべてのサービスに 1k が適用されます。
 </dd>
 <dt>サンプル Ingress リソース YAML</dt>
 <dd>
@@ -868,7 +880,7 @@ spec:
 <dl>
 <dt>説明</dt>
 <dd>
-プロキシー・サーバーから受け取る応答の、最初の部分を読み取るバッファーのサイズを設定します。応答のこの部分には通常、短い応答ヘッダーが含まれています。 特定のサービスが指定されていなければ、Ingress ホスト内のすべてのサービスにこの構成が適用されます。 例えば、<code>serviceName=SERVICE size=1k</code> という構成を指定した場合は、サービスに 1k が適用されます。 <code>size=1k</code> という構成を指定した場合は、Ingress ホスト内のすべてのサービスに 1k が適用されます。
+プロキシー・サーバーから受け取る応答の、最初の部分を読み取るバッファーのサイズを設定します。 応答のこの部分には通常、短い応答ヘッダーが含まれています。 特定のサービスが指定されていなければ、Ingress ホスト内のすべてのサービスにこの構成が適用されます。 例えば、<code>serviceName=SERVICE size=1k</code> という構成を指定した場合は、サービスに 1k が適用されます。 <code>size=1k</code> という構成を指定した場合は、Ingress ホスト内のすべてのサービスに 1k が適用されます。
 </dd>
 
 
@@ -928,7 +940,7 @@ spec:
 <dl>
 <dt>説明</dt>
 <dd>
-クライアントへの応答がまだ全部読み取られていない間、その応答を送信中のバッファー群のサイズを制限します。その間、残りのバッファーでは応答を読み取ることができます。さらに必要に応じて、応答の一部を一時ファイルにバッファリングできます。特定のサービスが指定されていなければ、Ingress ホスト内のすべてのサービスにこの構成が適用されます。 例えば、<code>serviceName=SERVICE size=1k</code> という構成を指定した場合は、サービスに 1k が適用されます。 <code>size=1k</code> という構成を指定した場合は、Ingress ホスト内のすべてのサービスに 1k が適用されます。
+クライアントへの応答がまだ全部読み取られていない間、その応答を送信中のバッファー群のサイズを制限します。 その間、残りのバッファーでは応答を読み取ることができます。さらに必要に応じて、応答の一部を一時ファイルにバッファリングできます。 特定のサービスが指定されていなければ、Ingress ホスト内のすべてのサービスにこの構成が適用されます。 例えば、<code>serviceName=SERVICE size=1k</code> という構成を指定した場合は、サービスに 1k が適用されます。 <code>size=1k</code> という構成を指定した場合は、Ingress ホスト内のすべてのサービスに 1k が適用されます。
 </dd>
 
 
@@ -1168,7 +1180,7 @@ spec:
  <tbody>
  <tr>
  <td><code>&lt;size&gt;</code></td>
- <td>クライアント応答本体の最大サイズ。例えば、200 M バイトに設定するには、<code>200m</code> と定義します。<strong>注:</strong> サイズを 0 に設定すると、クライアント要求の本体サイズの検査を無効にすることができます。</td>
+ <td>クライアント応答本体の最大サイズ。 例えば、200 M バイトに設定するには、<code>200m</code> と定義します。  <strong>注:</strong> サイズを 0 に設定すると、クライアント要求の本体サイズの検査を無効にすることができます。</td>
  </tr>
  </tbody></table>
 
@@ -1230,7 +1242,7 @@ spec:
   </tr>
   <tr>
   <td><code>rate</code></td>
-  <td><code>&lt;<em>rate</em>&gt;</code> を処理速度に置き換えます。毎秒 (r/s) または毎分 (r/m) の速度として値を入力します。例: <code>50r/m</code>。</td>
+  <td><code>&lt;<em>rate</em>&gt;</code> を処理速度に置き換えます。 毎秒 (r/s) または毎分 (r/m) の速度として値を入力します。 例: <code>50r/m</code>。</td>
   </tr>
   <tr>
   <td><code>number-of_connections</code></td>
@@ -1296,7 +1308,7 @@ spec:
   </tr>
   <tr>
   <td><code>rate</code></td>
-  <td><code>&lt;<em>rate</em>&gt;</code> を処理速度に置き換えます。毎秒の速度を定義するには、r/s を使用して <code>10r/s</code> のようにします。毎分の速度を定義するには、r/m を使用して <code>50r/m</code> のようにします。</td>
+  <td><code>&lt;<em>rate</em>&gt;</code> を処理速度に置き換えます。 毎秒の速度を定義するには、r/s を使用して <code>10r/s</code> のようにします。 毎分の速度を定義するには、r/m を使用して <code>50r/m</code> のようにします。</td>
   </tr>
   <tr>
   <td><code>number-of_connections</code></td>

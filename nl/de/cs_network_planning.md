@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-06"
 
 ---
 
@@ -22,15 +22,15 @@ lastupdated: "2018-01-12"
 Wenn Sie einen Cluster erstellen, muss jeder Cluster mit einem öffentlichen VLAN verbunden sein. Das öffentliche VLAN bestimmt, welche öffentliche IP-Adresse einem Workerknoten während der Clustererstellung zugewiesen wird.
 {:shortdesc}
 
-Die öffentliche Netzschnittstelle für Workerknoten in Lite-Clustern und Standardclustern wird anhand der Calico-Netzrichtlinien geschützt. Diese Richtlinien blockieren standardmäßig den Großteil des eingehenden Datenverkehrs. Allerdings wird der eingehende Datenverkehr, der zur ordnungsgemäßen Funktion von Kubernetes erforderlich ist, zugelassen. Dies gilt auch für die Verbindungen zu NodePort-, Loadbalancer- und Ingress-Services. Weitere Informationen zu diesen Richtlinien und zur Vorgehensweise bei der Änderung dieser Richtlinien finden Sie in [Netzrichtlinien](cs_network_policy.html#network_policies).
+Die öffentliche Netzschnittstelle für die Workerknoten in kostenlosen Clustern und in Standardclustern wird durch Calico-Netzrichtlinien geschützt. Diese Richtlinien blockieren standardmäßig den Großteil des eingehenden Datenverkehrs. Allerdings wird der eingehende Datenverkehr, der zur ordnungsgemäßen Funktion von Kubernetes erforderlich ist, zugelassen. Dies gilt auch für die Verbindungen zu NodePort-, Loadbalancer- und Ingress-Services. Weitere Informationen zu diesen Richtlinien und zur Vorgehensweise bei der Änderung dieser Richtlinien finden Sie in [Netzrichtlinien](cs_network_policy.html#network_policies).
 
 |Clustertyp|Manager des öffentlichen VLANs für den Cluster|
 |------------|------------------------------------------|
-|Lite-Cluster in {{site.data.keyword.Bluemix_notm}}|{{site.data.keyword.IBM_notm}}|
+|Kostenlose Cluster in {{site.data.keyword.Bluemix_notm}}|{{site.data.keyword.IBM_notm}}|
 |Standardcluster in {{site.data.keyword.Bluemix_notm}}|Sie bei Ihrem Konto von IBM Cloud Infrastructure (SoftLayer)|
 {: caption="Zuständigkeiten beim Management von VLANs" caption-side="top"}
 
-
+Informationen zur clusterinternen Netzkommunikation zwischen Workerknoten und Pods finden Sie in [Netzbetrieb in Clustern](cs_secure.html#in_cluster_network). Informationen zu sicheren Verbindungen von Apps, die in einem Kubernetes-Cluster ausgeführt werden, zu einem lokalen Netz oder zu Apps außerhalb Ihres Clusters finden Sie in [VPN-Konnektivität einrichten](cs_vpn.html).
 
 ## Öffentlichen Zugriff auf Apps zulassen
 {: #public_access}
@@ -42,10 +42,10 @@ Um eine App öffentlich für das Internet zugänglich zu machen, müssen Sie vor
 
 ![{{site.data.keyword.containerlong_notm}} Kubernetes-Architektur](images/networking.png)
 
-Das Diagramm zeigt, wie Kubernetes Benutzernetzverkehr in {{site.data.keyword.containershort_notm}} überträgt. Je nachdem, ob Sie einen Lite-Cluster oder einen Standardcluster erstellt haben, gibt es verschiedene Möglichkeiten, den Zugriff auf Ihre App vom Internet aus zu ermöglichen.
+Das Diagramm zeigt, wie Kubernetes Benutzernetzverkehr in {{site.data.keyword.containershort_notm}} überträgt. Je nachdem, ob Sie einen kostenlosen Cluster oder einen Standardcluster erstellt haben, gibt es verschiedene Möglichkeiten, Ihre App im Internet zugänglich zu machen.
 
 <dl>
-<dt><a href="#nodeport" target="_blank">NodePort-Service</a> (Lite-Cluster und Standardcluster)</dt>
+<dt><a href="#nodeport" target="_blank">NodePort-Service</a> (kostenlose Cluster und Standardcluster)</dt>
 <dd>
  <ul>
   <li>Machen Sie auf jedem Workerknoten einen öffentlichen Port zugänglich und verwenden Sie die öffentliche IP-Adresse der einzelnen Workerknoten, um öffentlich auf Ihren Service im Cluster zuzugreifen.</li>
@@ -67,13 +67,12 @@ Das Diagramm zeigt, wie Kubernetes Benutzernetzverkehr in {{site.data.keyword.co
  <ul>
   <li>Sie können mehrere Apps in ihrem Cluster öffentlich zugänglich machen, indem Sie eine einzelne externe HTTP- oder HTTPS-Lastausgleichsfunktion (Load Balancer) erstellen, die einen geschützten und eindeutigen Einstiegspunkt für die Weiterleitung eingehender Anforderungen an Ihre Apps verwendet.</li>
   <li>Sie können eine öffentliche Route verwenden, um mehrere Apps in Ihrem Cluster als Services zugänglich zu machen.</li>
-  <li>Ingress besteht aus drei Hauptkomponenten: der Ingress-Ressource, dem Ingress-Controller und der Lastausgleichsfunktion für Anwendungen.
+  <li>Ingress besteht aus zwei Hauptkomponenten: der Ingress-Ressource und der Lastausgleichsfunktion für Anwendungen.
    <ul>
     <li>Die Ingress-Ressource definiert die Regeln, die festlegen, wie die Weiterleitung der eingehenden Anforderungen für eine App und deren Lastausgleich erfolgen soll.</li>
-    <li>Der Ingress-Controller aktiviert die Lastausgleichsfunktion für Anwendungen, die für eingehende HTTP- oder HTTPS-Serviceanforderungen empfangsbereit ist und Anforderungen basierend auf den für jede Ingress-Ressource definierten Regeln festlegt.</li>
-    <li>Die Lastausgleichsfunktion für Anwendungen gleicht die Last von Anforderungen in allen Pods der App aus.
+    <li>Die Lastausgleichsfunktion für Anwendungen ist für eingehende HTTP- oder HTTPS-Serviceanforderungen empfangsbereit und leitet Anforderungen über die Pods der App in Übereinstimmung mit den für jede Ingress-Ressource definierten Regeln weiter.</li>
    </ul>
-  <li>Verwenden Sie Ingress, wenn Sie ihre eigene Lastausgleichsfunktion mit angepassten Regeln für die Weiterleitung implementieren möchten und wenn Sie SSL-Terminierung für Ihre Apps benötigen.</li>
+  <li>Verwenden Sie Ingress, wenn Sie eine eigene Lastausgleichsfunktion für Anwendungen mit angepassten Weiterleitungsregeln implementieren möchten und wenn Sie SSL-Terminierung für Ihre Apps benötigen.</li>
  </ul>
 </dd></dl>
 
@@ -137,6 +136,8 @@ Ihre Optionen für IP-Adressen bei Erstellung eines LoadBalancer-Service lauten 
 - Wenn Ihr Cluster ausschließlich in einem privaten VLAN verfügbar ist, wird eine portierbare private IP-Adresse verwendet.
 - Sie können eine portierbare öffentliche oder private IP-Adresse für einen LoadBalancer-Service anfordern, indem Sie eine Annotation zur Konfigurationsdatei hinzufügen: `service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>`.
 
+
+
 Anweisungen zum Erstellen eines LoadBalancer-Service mit {{site.data.keyword.containershort_notm}} finden Sie unter [Öffentlichen Zugriff auf eine App durch Verwenden des Servicetyps 'LoadBalancer' konfigurieren](cs_loadbalancer.html#config).
 
 
@@ -152,17 +153,19 @@ Ingress ermöglicht es Ihnen, mehrere Services in Ihrem Cluster zugänglich zu m
 
 Anstatt für jede App, die öffentlich zugänglich gemacht werden soll, einen Lastausgleichsservice zu erstellen,
 bietet Ingress eine eindeutige öffentliche Route, mit der Sie öffentliche Anforderungen a Apps basierend auf ihren individuellen Pfaden innerhalb Ihres Clusters weiterleiten können. Ingress besteht aus zwei Hauptkomponenten. Die Ingress-Ressource definiert die Regeln, die festlegen,
-wie die Weiterleitung der eingehenden Anforderungen für eine App erfolgen soll. Alle Ingress-Ressourcen müssen bei dem Ingress-Controller registriert sein, der für eingehende HTTP- oder HTTPS-Serviceanforderungen empfangsbereit ist und die Weiterleitung auf der Grundlage der für jede Ingress-Ressource definierten Regeln durchführt.
+wie die Weiterleitung der eingehenden Anforderungen für eine App erfolgen soll. Alle Ingress-Ressourcen müssen bei der Ingress-Lastausgleichsfunktion für Anwendungen registriert sein, die für eingehende HTTP- oder HTTPS-Serviceanforderungen empfangsbereit ist und die Weiterleitung der Anforderungen basierend auf den für jede Ingress-Ressource definierten Regeln durchführt.
 
-Wenn Sie einen Standardcluster erstellen, erstellt {{site.data.keyword.containershort_notm}} automatisch einen hoch verfügbaren Ingress-Controller für Ihren Cluster und weist diesem eine eindeutige öffentliche Route im Format `<cluster_name>.<region>.containers.mybluemix.net` zu. Die öffentliche Route ist mit einer portierbaren öffentlichen IP-Adresse verknüpft, die bei der Erstellung des Clusters in Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) eingerichtet wird.
+Wenn Sie einen Standardcluster erstellen, erstellt {{site.data.keyword.containershort_notm}} automatisch eine hoch verfügbare Lastausgleichsfunktion für Anwendungen in Ihrem Cluster und weist dieser eine eindeutige öffentliche Route im Format `<cluster_name>.<region>.containers.mybluemix.net` zu. Die öffentliche Route ist mit einer portierbaren öffentlichen IP-Adresse verknüpft, die bei der Erstellung des Clusters in Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) eingerichtet wird. Es wird zwar auch eine private Lastausgleichsfunktion für Anwendungen erstellt, diese wird jedoch nicht automatisch aktiviert.
 
 Das folgende Diagramm veranschaulicht, wie Ingress die Kommunikation vom Internet an eine App leitet:
 
 ![Service unter Verwendung der Unterstützung für Ingress von {{site.data.keyword.containershort_notm}} zugänglich machen](images/cs_ingress.png)
 
-Um eine App über Ingress zugänglich machen, müssen Sie einen Kubernetes-Service für Ihre App erstellen und diesen Service beim Ingress-Controller registrieren, indem Sie eine Ingress-Ressource definieren. Die Ingress-Ressource gibt den Pfad an, den Sie an die öffentliche Route anfügen möchten, um eine eindeutige URL für Ihre zugänglich gemachte App zu bilden, z. B. `mein_cluster.us-süden.container.mein_bluemix.net/meine_app`. Wenn Sie diese Route in Ihren Web-Browser eingeben, wird die Anforderung, wie im Diagramm dargestellt, an die verknüpfte, portierbare, öffentliche IP-Adresse des Ingress-Controllers gesendet. Der Ingress-Controller prüft, ob für den Pfad `meine_app` im Cluster `mein_cluster` eine Routing-Regel vorhanden ist. Wird eine übereinstimmende Regel gefunden, so wird die Anforderung einschließlich dem einzelnen Pfad an den Pod weitergeleitet, über den die App bereitgestellt wird. Diese Weiterleitung erfolgt unter Berücksichtigung der Regeln, die im ursprünglichen Ingress-Ressourcenobjekt definiert waren. Damit die App eingehende Anforderungen verarbeitet, müssen Sie sicherstellen, dass Ihre App unter dem jeweiligen Pfad empfangsbereit ist, den Sie in der Ingress-Ressource definiert haben.
+Um eine App über Ingress zugänglich zu machen, müssen Sie einen Kubernetes-Service für Ihre App erstellen und diesen Service bei der Lastausgleichsfunktion für Anwendungen registrieren, indem Sie eine Ingress-Ressource definieren. Die Ingress-Ressource gibt den Pfad an, den Sie an die öffentliche Route anfügen möchten, um eine eindeutige URL für Ihre zugänglich gemachte App zu bilden (z. B. `mein_cluster.us-süden.container.mein_bluemix.net/meine_app`). Wenn Sie diese Route in Ihren Web-Browser eingeben, wird die Anforderung (wie im Diagramm dargestellt) an die verknüpfte, portierbare öffentliche IP-Adresse der Lastausgleichsfunktion für Anwendungen gesendet. Die Lastausgleichsfunktion für Anwendungen prüft, ob für den Pfad `meine_app` im Cluster `mein_cluster` eine Routing-Regel vorhanden ist. Wird eine übereinstimmende Regel gefunden, so wird die Anforderung einschließlich dem einzelnen Pfad an den Pod weitergeleitet, über den die App bereitgestellt wird. Diese Weiterleitung erfolgt unter Berücksichtigung der Regeln, die im ursprünglichen Ingress-Ressourcenobjekt definiert waren. Damit die App eingehende Anforderungen verarbeitet, müssen Sie sicherstellen, dass Ihre App unter dem jeweiligen Pfad empfangsbereit ist, den Sie in der Ingress-Ressource definiert haben.
 
-Sie können den Ingress-Controller so konfigurieren, dass eingehender Netzverkehr für Ihre Apps in den folgenden Szenarios verwaltet wird:
+
+
+Sie können die Lastausgleichsfunktion für Anwendungen so konfigurieren, dass eingehender Netzverkehr für Ihre Apps in den folgenden Szenarios verwaltet wird:
 
 -   Von IBM bereitgestellte Domäne ohne TLS-Terminierung verwenden
 -   Von IBM bereitgestellte Domäne mit TLS-Terminierung verwenden

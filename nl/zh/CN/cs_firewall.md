@@ -169,7 +169,7 @@ lastupdated: "2018-01-11"
 ## 允许集群访问基础架构资源和其他服务
 {: #firewall_outbound}
 
-支持集群从防火墙后访问基础架构资源和服务，例如 {{.site.data.keyword.containershort_notm}} 区域、{{site.data.keyword.registrylong_notm}}、{{site.data.keyword.monitoringlong_notm}}、{{site.data.keyword.loganalysislong_notm}}、IBM Cloud Infrastructure (SoftLayer) 专用 IP 以及用于持久性卷申领的 Egress。
+支持集群从防火墙后访问基础架构资源和服务，例如 {{site.data.keyword.containershort_notm}} 区域、{{site.data.keyword.registrylong_notm}}、{{site.data.keyword.monitoringlong_notm}}、{{site.data.keyword.loganalysislong_notm}}、IBM Cloud Infrastructure (SoftLayer) 专用 IP 以及用于持久性卷申领的 Egress。
 {:shortdesc}
 
   1.  记下用于集群中所有工作程序节点的公共 IP 地址。
@@ -191,8 +191,8 @@ lastupdated: "2018-01-11"
     <tbody>
       <tr>
         <td>亚太地区北部</td>
-        <td>hkg02<br>sng01<br>tok02</td>
-        <td><code>169.56.132.234</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
+        <td>hkg02<br>seo01<br>sng01<br>tok02</td>
+        <td><code>169.56.132.234</code><br><code>161.202.126.210</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
        </tr>
       <tr>
          <td>亚太地区南部</td>
@@ -211,13 +211,13 @@ lastupdated: "2018-01-11"
       </tr>
       <tr>
         <td>美国东部</td>
-         <td><ph class="mon">mon01<br></ph>tor01<br>wdc06<br>wdc07</td>
-         <td><ph class ="mon"><code>169.54.126.219</code><br></ph><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+         <td>mon01<br>tor01<br>wdc06<br>wdc07</td>
+         <td><code>169.54.126.219</code><br><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
       </tr>
       <tr>
         <td>美国南部</td>
-        <td>dal10<br>dal12<br>dal13</td>
-        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
+        <td>dal10<br>dal12<br>dal13<br>sao01</td>
+        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>169.57.151.10</code></td>
       </tr>
       </tbody>
     </table>
@@ -225,7 +225,8 @@ lastupdated: "2018-01-11"
 
   3.  允许出站网络流量从工作程序节点流至 [{{site.data.keyword.registrylong_notm}} 区域](/docs/services/Registry/registry_overview.html#registry_regions)：
       - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
-      - 将 <em>&lt;registry_publicIP&gt;</em> 替换为要允许流量流至的注册表 IP 地址。国际注册表存储 IBM 提供的公共映像，区域注册表存储您自己的专用或公共映像。<p>
+      - 将 <em>&lt;registry_publicIP&gt;</em> 替换为要允许流量流至的注册表 IP 地址。全局注册表存储 IBM 提供的公共映像，区域注册表存储您自己的专用或公共映像。
+        <p>
 <table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
   <thead>
         <th>{{site.data.keyword.containershort_notm}} 区域</th>
@@ -234,7 +235,7 @@ lastupdated: "2018-01-11"
       </thead>
       <tbody>
         <tr>
-          <td>跨容器区域的国际注册表</td>
+          <td>跨容器区域的全局注册表</td>
           <td>registry.bluemix.net</td>
           <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
         </tr>
@@ -304,7 +305,12 @@ lastupdated: "2018-01-11"
             <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
            </tr>
           <tr>
-           <td>欧洲中部、英国南部</td>
+           <td>英国南部</td>
+           <td>ingest.logging.eu-gb.bluemix.net</td>
+           <td><code>169.50.115.113</code></td>
+          </tr>
+          <tr>
+           <td>欧洲中部</td>
            <td>ingest-eu-fra.logging.bluemix.net</td>
            <td><code>158.177.88.43</code><br><code>159.122.87.107</code></td>
           </tr>

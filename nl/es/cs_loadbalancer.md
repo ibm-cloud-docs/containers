@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-06"
 
 ---
 
@@ -22,6 +22,8 @@ lastupdated: "2018-01-12"
 Exponga un puerto y utilice la dirección IP portátil para que el equilibrador de carga acceda a la app. Utilice una dirección IP pública para hacer una app accesible en Internet o una dirección IP privada para hacer una app accesible en la red de infraestructura privada.
 {:shortdesc}
 
+
+
 ## Configuración del acceso a una app utilizando el tipo de servicio LoadBalancer
 {: #config}
 
@@ -30,7 +32,7 @@ A diferencia del servicio NodePort, la dirección IP portátil del servicio equi
 
 La dirección IP portátil del equilibrador de carga se asigna automáticamente y no cambia cuando se añaden o eliminan nodos trabajadores. Por lo tanto, los servicios del equilibrador de carga están más disponibles que los servicios NodePort. Los usuarios pueden seleccionar cualquier puerto para el equilibrador de carga y no están limitados al rango de puertos de NodePort. Puede utilizar los servicios equilibradores de carga para los protocolos TCP y UDP.
 
-**Nota:** Los servicios equilibradores de carga no soportan la terminación TLS. Si la app necesita terminación TLS, puede exponer la app mediante [Ingress](cs_ingress.html) o configurar la app de modo que gestione la terminación TLS.
+**Nota:** Los servicios LoadBalancer no dan soporte a la terminación TLS. Si la app necesita terminación TLS, puede exponer la app mediante [Ingress](cs_ingress.html) o configurar la app de modo que gestione la terminación TLS.
 
 Antes de empezar:
 
@@ -43,6 +45,7 @@ Para crear un servicio equilibrador de carga:
 1.  [Despliegue la app en el clúster](cs_app.html#app_cli). Cuando despliegue la app en el clúster, se crean uno o más pods que ejecutan la app en un contenedor. Asegúrese de añadir una etiqueta a su despliegue en la sección de metadatos del archivo de configuración. Esta etiqueta es necesaria para identificar todos los pods en los que se está ejecutando la app, de modo que puedan incluirse en el equilibrio de carga.
 2.  Cree un servicio equilibrador de carga para la app que desee exponer. Para hacer que la app esté disponible en Internet público o en una red privada, debe crear un servicio Kubernetes para la app. Configure el servicio para que incluya todos los pods que forman la app en el equilibrio de carga.
     1.  Cree un archivo de configuración de servicio llamado, por ejemplo, `myloadbalancer.yaml`.
+
     2.  Defina un servicio equilibrador de carga para la app que desee exponer.
         - Si el clúster está en una VLAN pública, se utiliza una dirección IP pública portátil. La mayoría de los clústeres están en una VLAN pública.
         - Si el clúster solo está disponible en una VLAN privada, se utiliza dirección IP privada portátil.
@@ -141,6 +144,7 @@ Para crear un servicio equilibrador de carga:
     Labels:                 <none>
     Selector:               <selectorkey>=<selectorvalue>
     Type:                   LoadBalancer
+    Location:               dal10
     IP:                     10.10.10.90
     LoadBalancer Ingress:   192.168.10.38
     Port:                   <unset> 8080/TCP
@@ -148,14 +152,15 @@ Para crear un servicio equilibrador de carga:
     Endpoints:              172.30.171.87:8080
     Session Affinity:       None
     Events:
-    FirstSeen LastSeen Count From   SubObjectPath Type  Reason   Message
-      --------- -------- ----- ----   ------------- -------- ------   -------
-      10s  10s  1 {service-controller }   Normal  CreatingLoadBalancer Creating load balancer
-      10s  10s  1 {service-controller }   Normal  CreatedLoadBalancer Created load balancer
+    FirstSeen	LastSeen	Count	From			SubObjectPath	Type		Reason			Message
+      ---------	--------	-----	----			-------------	--------	------			-------
+      10s		10s		1	{service-controller }			Normal		CreatingLoadBalancer	Creating load balancer
+      10s		10s		1	{service-controller }			Normal		CreatedLoadBalancer	Created load balancer
     ```
     {: screen}
 
     La dirección IP de **LoadBalancer Ingress** es la dirección IP portátil que asignada al servicio equilibrador de carga.
+
 4.  Si ha creado un equilibrador de carga público, acceda a la app desde Internet.
     1.  Abra el navegador web preferido.
     2.  Especifique la dirección IP pública portátil del equilibrador de carga y el puerto. En el ejemplo anterior, se ha asignado la dirección IP pública portátil `192.168.10.38` al servicio equilibrador de carga.

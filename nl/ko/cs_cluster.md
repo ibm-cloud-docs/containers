@@ -17,9 +17,9 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# 이 페이지는 이동했습니다! 
+# 찾고 있는 컨텐츠가 이동되었습니다.
 
-주제는 다음과 같습니다. 
+새 위치에서 최신 정보를 확인하십시오.
 - [GUI에서 클러스터 작성](cs_clusters.html#clusters_ui)
 - [CLI에서 클러스터 작성](cs_clusters.html#clusters_cli)
 - [개인용 및 공용 이미지 레지스트리 사용](cs_images.html#images)

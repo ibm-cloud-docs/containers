@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-18"
+lastupdated: "2018-02-05"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -116,7 +116,7 @@ lastupdated: "2017-12-18"
    {: screen}
 
 
-これで完了です。 クラスターに Istio を正常にインストールできました。 次に、BookInfo サンプル・アプリをクラスター内にデプロイします。
+これで完了です。 クラスターに Istio を正常にインストールしました。次に、BookInfo サンプル・アプリをクラスター内にデプロイします。
 
 
 ## レッスン 2: BookInfo アプリをデプロイする
@@ -190,7 +190,7 @@ BookInfo をデプロイする際には、Envoy サイドカー・プロキシ�
        ```
        {: pre}
 
-    * ライト・クラスターで作業している場合は、ワーカー・ノードのパブリック IP と NodePort を使用する必要があります。 以下のコマンドを実行して、ワーカー・ノードのパブリック IP を取得します。
+    * フリー・クラスターで作業している場合は、ワーカー・ノードのパブリック IP と NodePort を使用する必要があります。 以下のコマンドを実行して、ワーカー・ノードのパブリック IP を取得します。
 
        ```
        bx cs workers <cluster_name_or_ID>
@@ -215,7 +215,7 @@ BookInfo をデプロイする際には、Envoy サイドカー・プロキシ�
 
 6. ページの最新表示を複数回試行します。 さまざまなバージョンのレビュー・セクションが、赤い星形、黒い星形、星形なしの間でラウンドロビンします。
 
-これで完了です。 BookInfo サンプル・アプリと Istio Envoy サイドカーが正常にデプロイされました。 次に、リソースをクリーンアップするか、引き続き追加のチュートリアルを試して、さらに Istio 機能を探索することができます。
+これで完了です。 BookInfo サンプル・アプリと Istio Envoy サイドカーを正常にデプロイしました。次に、リソースをクリーンアップするか、引き続き追加のチュートリアルを試して、さらに Istio 機能を探索することができます。
 
 ## クリーンアップ
 {: #istio_tutorial_cleanup}
@@ -241,6 +241,6 @@ BookInfo をデプロイする際には、Envoy サイドカー・プロキシ�
 
 Istio 機能をさらに探索するには、[Istio の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/) にさらにガイドがあります。
 
-* [Intelligent Routing ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/guides/intelligent-routing.html): この例では、Istio のさまざまなトラフィック管理機能と BookInfo を使用して、特定のバージョンのレビューと評価のマイクロサービスにトラフィックをルーティングする方法を示しています。
+* [Intelligent Routing ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/guides/intelligent-routing.html): この例では、Istio のトラフィック管理機能を使用して、特定のバージョンの BookInfo のレビューと評価のマイクロサービスにトラフィックをルーティングする方法を示しています。
 
-* [In-Depth Telemetry ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/guides/telemetry.html): この例では、Istio Mixer と Envoy プロキシーを使用して、BookInfo のマイクロサービス間で統一されたメトリック、ログ、トレースを取得する方法を例示しています。
+* [In-Depth Telemetry ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/guides/telemetry.html): この例では、Istio Mixer と Envoy プロキシーを使用して、BookInfo のマイクロサービス間で統一されたメトリック、ログ、トレースを取得する方法を示しています。

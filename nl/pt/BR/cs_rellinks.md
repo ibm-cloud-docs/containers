@@ -25,7 +25,7 @@ lastupdated: "2017-12-01"
 - [API de REST para clusters
 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://containers.bluemix.net/swagger)
 - [API de REST para criação de log de cluster![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://us-south.containers.bluemix.net/swagger-logging/)
-- [API de REST para o balanceador de carga de aplicativo de cluster![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://us-south.containers.bluemix.net/swagger-alb-api/)
+- [API REST para balanceamento de carga de aplicativo de Ingresso do cluster ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://us-south.containers.bluemix.net/swagger-alb-api/)
 - [Jornadas de orquestração de contêiner do developerWorks ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/code/journey/category/container-orchestration/)
 - [Documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/)
 - [Documentação do Docker ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.docker.com/engine/)

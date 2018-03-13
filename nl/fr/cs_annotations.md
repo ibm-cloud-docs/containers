@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-16"
 
 ---
 
@@ -29,7 +29,9 @@ Pour des informations générales sur les services Ingress et comment les utilis
 <col width="20%">
 <col width="60%">
  <thead>
- <th colspan=3>Annotations générales</th>
+ <th>Annotations générales</th>
+ <th>Nom</th>
+ <th>Description</th>
  </thead>
  <tbody>
  <tr>
@@ -65,7 +67,9 @@ Pour des informations générales sur les services Ingress et comment les utilis
 <col width="20%">
 <col width="60%">
  <thead>
-  <th colspan=3>Annotations de connexion</th>
+ <th>Annotations de connexion</th>
+ <th>Nom</th>
+ <th>Description</th>
   </thead>
   <tbody>
   <tr>
@@ -96,7 +100,9 @@ Pour des informations générales sur les services Ingress et comment les utilis
 <col width="20%">
 <col width="60%">
  <thead>
- <th colspan=3>Annotations de tampons de proxy</th>
+ <th>Annotations de tampons de proxy</th>
+ <th>Nom</th>
+ <th>Description</th>
  </thead>
  <tbody>
  <tr>
@@ -127,7 +133,9 @@ Pour des informations générales sur les services Ingress et comment les utilis
 <col width="20%">
 <col width="60%">
 <thead>
-<th colspan=3>Annotations de demande et de réponse</th>
+<th>Annotations de demande et de réponse</th>
+<th>Nom</th>
+<th>Description</th>
 </thead>
 <tbody>
 <tr>
@@ -152,7 +160,9 @@ Pour des informations générales sur les services Ingress et comment les utilis
 <col width="20%">
 <col width="60%">
 <thead>
-<th colspan=3>Annotations de limite de service</th>
+<th>Annotations de limite de service</th>
+<th>Nom</th>
+<th>Description</th>
 </thead>
 <tbody>
 <tr>
@@ -172,7 +182,9 @@ Pour des informations générales sur les services Ingress et comment les utilis
 <col width="20%">
 <col width="60%">
 <thead>
-<th colspan=3>Annotations d'authentification HTTPS et TLS/SSL</th>
+<th>Annotations d'authentification HTTPS et TLS/SSL</th>
+<th>Nom</th>
+<th>Description</th>
 </thead>
 <tbody>
 <tr>
@@ -381,7 +393,7 @@ Utilisez l'annotation sticky cookie pour ajouter une affinité de session à vot
 <dd>Pour la haute disponibilité, certaines configurations d'application nécessitent de déployer plusieurs serveurs en amont qui prennent en charge les demandes client entrantes. Lorsqu'un client se connecte à votre application de back end, vous pouvez utiliser l'affinité de session pour qu'un client soit servi par le même serveur en amont pendant toute la durée d'une session ou pendant la durée d'exécution d'une tâche. Vous pouvez configurer votre équilibreur de charge d'application pour assurer une affinité de session en acheminant toujours le trafic réseau entrant au même serveur en amont.
 
 </br></br>
-Chaque client qui se connecte à votre application de back end est affecté par l'équilibreur de charge d'application à l'un des serveurs n amont disponibles. L'équilibreur de charge d'application crée un cookie de session stocké dans l'application du client et inclus dans les informations d'en-tête de chaque demande entre l'équilibreur de charge d'application et le client. Les informations contenues dans le cookie garantissent la prise en charge de toutes les demandes par le même serveur en amont pendant toute la session.
+Chaque client qui se connecte à votre application de back end est affecté par l'équilibreur de charge d'application à l'un des serveurs en amont disponibles. L'équilibreur de charge d'application crée un cookie de session stocké dans l'application du client et inclus dans les informations d'en-tête de chaque demande entre l'équilibreur de charge d'application et le client. Les informations contenues dans le cookie garantissent la prise en charge de toutes les demandes par le même serveur en amont pendant toute la session.
 
 </br></br>
 Lorsque vous incluez plusieurs services, utilisez un point-virgule (;) pour les séparer.</dd>
@@ -501,7 +513,7 @@ spec:
   </tr>
   <tr>
   <td><code>servicePort</code></td>
-  <td>Remplacez <code>&lt;<em>service_port</em>&gt;</code> par ce paramètre (facultatif). Lorsqu'il est fourni, le port est remplacé par cette valeur avant l'envoi du trafic à l'application de back end. Sinon, le port est identique au port Ingress.</td>
+  <td>Ce paramètre est facultatif. Lorsqu'il est fourni, le port est remplacé par cette valeur avant l'envoi du trafic à l'application de back end. Sinon, le port est identique au port Ingress.</td>
   </tr>
   </tbody></table>
   </dd>
@@ -568,7 +580,7 @@ spec:
  </tr>
  <tr>
  <td><code>&lt;read_timeout&gt;</code></td>
- <td>Délai d'attente pour lecture depuis l'application de back-end. Par exemple, <code>65s</code>.</td>
+ <td>Délai d'attente pour lecture depuis l'application de back-end. Par exemple, <code>65s</code>. <strong>Remarque :</strong> un délai d'attente en lecture ne peut pas dépasser 120 secondes.</td>
  </tr>
  </tbody></table>
 
@@ -622,7 +634,7 @@ tls:
 <tbody>
 <tr>
 <td><code>serviceName</code></td>
-<td>Remplacez <code>&lt;<em>myservice</em>&gt;</code> par le nom du service Kubernetes que vous avez créé pour votre application.Ce paramètre est facultatif. Si aucun service n'est spécifié, la configuration est appliquée à tous les services de l'hôte Ingress. Si le paramètre est fourni, les demandes de signal de présence sont définies pour le service indiqué. Si le paramètre n'est pas fourni, les demandes de signal de présence sont définies au niveau serveur de <code>nginx.conf</code> pour tous les services pour lesquels aucune demande de signal de présence n'est configurée.</td>
+<td>Remplacez <code>&lt;<em>myservice</em>&gt;</code> par le nom du service Kubernetes que vous avez créé pour votre application. Ce paramètre est facultatif. Si aucun service n'est spécifié, la configuration est appliquée à tous les services de l'hôte Ingress. Si le paramètre est fourni, les demandes de signal de présence sont définies pour le service indiqué. Si le paramètre n'est pas fourni, les demandes de signal de présence sont définies au niveau serveur de <code>nginx.conf</code> pour tous les services pour lesquels aucune demande de signal de présence n'est configurée.</td>
 </tr>
 <tr>
 <td><code>requests</code></td>
@@ -681,7 +693,7 @@ spec:
  <tbody>
  <tr>
  <td><code>serviceName</code></td>
- <td>Remplacez <code>&lt;<em>myservice</em>&gt;</code> par le nom du service Kubernetes que vous avez créé pour votre application.Ce paramètre est facultatif. Si le paramètre est fourni, le délai d'expiration de signal de présence est défini pour le service indiqué. Si le paramètre n'est pas fourni, le délai d'expiration de signal de présence est défini au niveau serveur de <code>nginx.conf</code> pour tous les services pour lesquels aucun délai d'expiration de signal de présence n'est configuré.</td>
+ <td>Remplacez <code>&lt;<em>myservice</em>&gt;</code> par le nom du service Kubernetes que vous avez créé pour votre application. Ce paramètre est facultatif. Si le paramètre est fourni, le délai d'expiration de signal de présence est défini pour le service indiqué. Si le paramètre n'est pas fourni, le délai d'expiration de signal de présence est défini au niveau serveur de <code>nginx.conf</code> pour tous les services pour lesquels aucun délai d'expiration de signal de présence n'est configuré.</td>
  </tr>
  <tr>
  <td><code>timeout</code></td>
@@ -862,7 +874,8 @@ spec:
 ### Taille de tampon de proxy (proxy-buffer-size)
 {: #proxy-buffer-size}
 
-Permet de définir la taille du tampon de proxy qui lit la première partie de la réponse.{:shortdesc}
+Permet de définir la taille du tampon de proxy qui lit la première partie de la réponse.
+{:shortdesc}
 
 <dl>
 <dt>Description</dt>
@@ -921,7 +934,8 @@ spec:
 ### Taille des tampons occupés de proxy (proxy-busy-buffers-size)
 {: #proxy-busy-buffers-size}
 
-Permet de configurer la taille des tampons de proxy pouvant être occupés.{:shortdesc}
+Permet de configurer la taille des tampons de proxy pouvant être occupés.
+{:shortdesc}
 
 <dl>
 <dt>Description</dt>
@@ -1081,7 +1095,7 @@ Retirez de l'application de back end les informations d'en-tête incluses dans l
        "&lt;header1&gt;";
        "&lt;header2&gt;";
        }
-      serviceName=&lt;myservice2&gt; {
+       serviceName=&lt;myservice2&gt; {
        "&lt;header3&gt;";
        }
  spec:
@@ -1183,7 +1197,8 @@ spec:
 ### Limites de débit globales (global-rate-limit)
 {: #global-rate-limit}
 
-Limite le débit de traitement des demandes et le nombre de connexions compte tenu d'une clé définie pour tous les services.{:shortdesc}
+Limite le débit de traitement des demandes et le nombre de connexions compte tenu d'une clé définie pour tous les services.
+{:shortdesc}
 
 <dl>
 <dt>Description</dt>
@@ -1358,7 +1373,7 @@ spec:
  </tr>
  <tr>
  <td><code>&lt;port&gt;</code></td>
- <td>Entrez le numéro de port que vous désirez utiliser pour le trafic réseau HTTP ou HTTPS entrant. <p><strong>Remarque :</strong> lorsqu'un port personnalisé est indiqué pour HTTP ou HTTPS, les ports par défaut ne sont plus valides à la fois pour HTTP et HTTPS. Par exemple, pour remplacer le port par défaut pour HTTPS par 8443, mais utiliser le port par défaut pour HTTP, vous devez définir des ports personnalisés pour les deux ports : <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p></td>
+ <td>Entrez le numéro de port que vous désirez utiliser pour le trafic réseau HTTP ou HTTPS entrant.  <p><strong>Remarque :</strong> lorsqu'un port personnalisé est indiqué pour HTTP ou HTTPS, les ports par défaut ne sont plus valides à la fois pour HTTP et HTTPS. Par exemple, pour remplacer le port par défaut pour HTTPS par 8443, mais utiliser le port par défaut pour HTTP, vous devez définir des ports personnalisés pour les deux ports : <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p></td>
  </tr>
  </tbody></table>
 
@@ -1415,7 +1430,7 @@ Convertissez les demandes HTTP non sécurisées en demandes HTTPS.
 <dt>Description</dt>
 <dd>Configurez votre équilibreur de charge d'application Ingress pour sécuriser votre domaine avec le certificat TLS fourni par IBM ou votre certificat TLS personnalisé. Certains utilisateurs peuvent tenter d'accéder à vos applications en utilisant une demande HTTP non sécurisée vers le domaine d'équilibreur de charge de votre application (par exemple, <code>http://www.myingress.com</code> au lieu de d'utiliser <code>https</code>). Vous pouvez utiliser l'annotation redirect pour convertir systématiquement en HTTPS les demandes HTTP non sécurisées. Si vous n'utilisez pas cette annotation, les demandes HTTP non sécurisées ne sont pas converties par défaut en demandes HTTPS et peuvent exposer au public des informations confidentielles non chiffrées.
 
- </br></br>
+</br></br>
 La redirection de demandes HTTP en demandes HTTPS est désactivée par défaut.</dd>
 
 <dt>Exemple de fichier YAML de ressource Ingress</dt>

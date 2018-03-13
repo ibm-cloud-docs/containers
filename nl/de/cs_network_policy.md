@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -102,7 +102,7 @@ In den meisten Fällen müssen die Standardrichtlinien nicht geändert werden. N
 Vorbemerkungen:
 
 1.  [Installieren Sie die {{site.data.keyword.containershort_notm}}- und Kubernetes-CLIs.](cs_cli_install.html#cs_cli_install)
-2.  [Erstellen Sie einen Lite-Cluster oder Standardcluster.](cs_clusters.html#clusters_ui)
+2.  [Erstellen Sie einen kostenlosen Cluster oder Standardcluster.](cs_clusters.html#clusters_ui)
 3.  [Richten Sie die Kubernetes-CLI auf den Cluster aus](cs_cli_install.html#cs_cli_configure). Schließen Sie die Option `--admin` mit dem Befehl `bx cs cluster-config` ein, der zum Herunterladen der Zertifikate und Berechtigungsdateien verwendet wird. In diesem Download sind auch die Schlüssel für die Rolle 'Superuser' enthalten, die Sie zum Ausführen von Calico-Befehlen benötigen.
 
   ```
@@ -148,6 +148,8 @@ X:
         calicoctl version
         ```
         {: pre}
+
+    4.  Falls Unternehmensnetzrichtlinien den Zugriff von Ihrem lokalen System auf öffentliche Endpunkte über Proxys oder Firewalls verhindern, müssen Sie TCP-Zugriff für die Calico-Befehle zulassen. Weitere Informationen hierzu finden Sie unter [`calicoctl`-Befehle hinter einer Firewall ausführen](cs_firewall.html#firewall).
 
 2.  Konfigurieren Sie die Calico-CLI.
 

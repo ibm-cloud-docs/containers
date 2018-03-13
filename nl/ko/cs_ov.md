@@ -16,9 +16,9 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# 이 페이지는 이동했습니다! 
+# 찾고 있는 컨텐츠가 이동되었습니다.
 
-주제는 다음과 같습니다. 
+새 위치에서 최신 정보를 확인하십시오.
  - [Docker 컨테이너](cs_tech.html#docker_containers)
  - [Kubernetes 기본](cs_tech.html#kubernetes_basics)
  - [클러스터 사용의 이점](cs_why.html#benefits)

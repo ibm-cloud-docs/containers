@@ -16,9 +16,9 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# 此页面已移动！
+# 您查找的内容已移动。
 
-请在此查找相关主题：
+请在其新位置查看最新信息：
 - [启动 Kubernetes 仪表板](cs_app.html#cli_dashboard)
 - [创建私钥](cs_app.html#secrets)
 - [允许对应用程序进行公共访问](cs_network_planning.html#planning)

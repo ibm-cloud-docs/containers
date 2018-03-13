@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-01-30"
 
 ---
 
@@ -21,35 +21,33 @@ lastupdated: "2018-01-11"
 {{site.data.keyword.containershort}} は、Docker と Kubernetes テクノロジーを結合させた強力なツール、直観的なユーザー・エクスペリエンス、標準装備のセキュリティーと分離機能を提供します。これらの機能を使用することで、コンピュート・ホストから成るクラスター内でコンテナー化アプリのデプロイメント、操作、スケーリング、モニタリングを自動化することができます。
 {:shortdesc}
 
-## クラスターを使用する利点
+## サービスを使用する利点
 {: #benefits}
 
-クラスターは、ネイティブの Kubernetes と {{site.data.keyword.IBM_notm}} が追加した機能を提供するコンピュート・ホストにデプロイされます。
+クラスターは、ネイティブの Kubernetes と {{site.data.keyword.IBM_notm}} に固有の機能を提供するコンピュート・ホストにデプロイされます。
 {:shortdesc}
 
 |利点|説明|
 |-------|-----------|
-|コンピュート、ネットワーク、およびストレージそれぞれのインフラストラクチャーを分離する、単一テナントの Kubernetes クラスター|<ul><li>組織の要件に適合する、カスタマイズされた独自のインフラストラクチャーを作成できる。</li><li>IBM Cloud インフラストラクチャー (SoftLayer) によって提供されるリソースを使用して、機密保護機能のある専用の Kubernetes マスター、ワーカー・ノード、仮想ネットワーク、そしてストレージをプロビジョンできる。</li><li>統合されたセキュアなボリューム・サービスによって、永続データを保管し、Kubernetes ポッド間でデータを共有し、必要に応じてデータを復元することができる。</li><li>クラスターを使用可能にしておくために {{site.data.keyword.IBM_notm}} によって継続的にモニターされて更新される、完全に管理された Kubernetes マスターを利用できる。</li><li>すべてのネイティブ Kubernetes API をフルサポートすることによる利点。</li></ul>|
+|コンピュート、ネットワーク、およびストレージそれぞれのインフラストラクチャーを分離する、単一テナントの Kubernetes クラスター|<ul><li>組織の要件に適合する、カスタマイズされた独自のインフラストラクチャーを作成できる。</li><li>IBM Cloud インフラストラクチャー (SoftLayer) によって提供されるリソースを使用して、機密保護機能のある専用の Kubernetes マスター、ワーカー・ノード、仮想ネットワーク、そしてストレージをプロビジョンできる。</li><li>クラスターを使用可能にしておくために {{site.data.keyword.IBM_notm}} によって継続的にモニターされて更新される、完全に管理された Kubernetes マスターを利用できる。</li><li>統合されたセキュアなボリューム・サービスによって、永続データを保管し、Kubernetes ポッド間でデータを共有し、必要に応じてデータを復元することができる。</li><li>すべてのネイティブ Kubernetes API をフルサポートすることによる利点。</li></ul>|
 |Vulnerability Advisor によるイメージ・セキュリティー・コンプライアンス|<ul><li>保護された独自の Docker プライベート・イメージ・レジストリーをセットアップできる。このレジストリーにイメージが格納され、組織内のすべてのユーザーによって共有される。</li><li>プライベート {{site.data.keyword.Bluemix_notm}} レジストリー内のイメージを自動スキャンすることによる利点。</li><li>イメージ内で使用されるオペレーティング・システムに固有の推奨を確認して、潜在的な脆弱性を修正できる。</li></ul>|
-|アプリの自動スケーリング|<ul><li>CPU とメモリーの使用量に基づいてアプリのスケールアップとスケールダウンを行うためのカスタム・ポリシーを定義できる。</li></ul>|
 |クラスターの正常性に関する継続的なモニター|<ul><li>クラスター・ダッシュボードを使用して、クラスター、ワーカー・ノード、およびコンテナー・デプロイメントの正常性を素早く参照して管理できる。</li><li>{{site.data.keyword.monitoringlong}}を使用して詳細な使用量メトリックを確認し、ワークロードに合わせてクラスターを素早く拡張することができる。</li><li>{{site.data.keyword.loganalysislong}}を使用してロギング情報を参照して、クラスター・アクティビティーの詳細を確認できる。</li></ul>|
-|正常でないコンテナーの自動リカバリー|<ul><li>ワーカー・ノードにデプロイされたコンテナーの継続的なヘルス・チェック。</li><li>コンテナーに障害が発生した場合の自動再作成。</li></ul>|
-|サービス・ディスカバリーとサービス・マネジメント|<ul><li>アプリ・サービスを一元的に登録してクラスター内の他のアプリがそれらを使用できるようにしつつ、パブリックには公開しない。</li><li>変化する IP アドレスやコンテナー ID を追跡しなくても登録されたサービスを検出して、使用可能なインスタンスに自動ルーティングできる利点がある。</li></ul>|
-|サービスにパブリック・アクセスできるよう安全に公開する|<ul><li>完全なロード・バランサーと Ingress サポートを備えたプライベート・オーバーレイ・ネットワークを使用することによって、だれでもアクセスできるようにアプリを公開することが可能になり、クラスター内の変化する IP アドレスを追跡しなくても複数のワーカー・ノードの間でワークロードのバランスを保つことができる。</li><li>インターネットからクラスター内のサービスにアクセスする方法を、パブリック IP アドレス、{{site.data.keyword.IBM_notm}} 提供の経路、独自のカスタム・ドメインの中から選択できる。</li></ul>|
-|{{site.data.keyword.Bluemix_notm}} サービスの統合|<ul><li>Watson API、ブロックチェーン、データ・サービス、モノのインターネットなどの {{site.data.keyword.Bluemix_notm}} サービスを統合してアプリに付加的な機能を追加し、クラスター・ユーザーがアプリ開発とコンテナー管理のプロセスを単純化できるようにする。</li></ul>|
+|アプリにパブリック・アクセスできるよう安全に公開する|<ul><li>インターネットからクラスター内のサービスにアクセスする方法を、パブリック IP アドレス、{{site.data.keyword.IBM_notm}} 提供の経路、独自のカスタム・ドメインの中から選択できる。</li></ul>|
+|{{site.data.keyword.Bluemix_notm}} サービスの統合|<ul><li>Watson API、ブロックチェーン、データ・サービス、モノのインターネットなどの {{site.data.keyword.Bluemix_notm}} サービスを統合してアプリに付加的な機能を追加する。</li></ul>|
+
+
 
 <br />
 
 
-## ライト・クラスターと標準クラスターの比較
+## フリー・クラスターと標準クラスターの比較
 {: #cluster_types}
 
-ライト・クラスターまたは標準クラスターを作成できます。 ライト・クラスターを試して、いくつかの Kubernetes 機能の使用法を習得してテストすることもできますし、標準クラスターを作成して、Kubernetes の機能全体を使用してアプリをデプロイすることもできます。
+1 つのフリー・クラスターまたは任意の数の標準クラスターを作成できます。フリー・クラスターを試して、いくつかの Kubernetes 機能の使用法を習得してテストすることもできますし、標準クラスターを作成して、Kubernetes の機能全体を使用してアプリをデプロイすることもできます。
 {:shortdesc}
 
-|特性|ライト・クラスター|標準クラスター|
+|特性|フリー・クラスター|標準クラスター|
 |---------------|-------------|-----------------|
-|[{{site.data.keyword.Bluemix_notm}} で使用可能](cs_why.html)|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
 |[クラスター内ネットワーキング](cs_secure.html#in_cluster_network)|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
 |[NodePort サービスによるパブリック・ネットワーク・アプリ・アクセス](cs_network_planning.html#nodeport)|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
 |[ユーザー・アクセス管理](cs_users.html#managing)|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
@@ -91,8 +89,8 @@ lastupdated: "2018-01-11"
 - [クラスターのネットワーク分離のために IBM Cloud インフラストラクチャー (SoftLayer) でパブリック VLAN とプライベート VLAN を作成する ](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
 - [すべてのワーカー・ノードに、Kubernetes マスター URL へのネットワーク接続を設定する](cs_firewall.html#firewall) <p>**注**: ワーカー・ノードにパブリック VLAN とプライベート VLAN の両方が設定されている場合は、ネットワーク接続が構成されています。 ワーカー・ノードにプライベート VLAN のみがセットアップされている場合は、ネットワーク接続を確立するために Vyatta が必要です。</p>
 - [Kubernetes のメジャー・バージョンまたはマイナー・バージョンの更新が利用可能な場合に、マスター kube-apiserver ノードとワーカー・ノードを更新する](cs_cluster_update.html#master)
-- [トラブルが発生したワーカー・ノードをリカバリーするために対処する。これは、`kubectl` コマンド (`cordon` や `drain` など) を実行したり、`bx cs` コマンド (`reboot`、`reload`、`delete` など) を実行したりして行う](cs_cli_reference.html#cs_worker_reboot)
-- [IBM Cloud インフラストラクチャー (SoftLayer) 内の追加サブネットを必要に応じて追加または解除する](cs_subnets.html#subnets)
+- [トラブルが発生したワーカー・ノードをリカバリーする。これは、`kubectl` コマンド (`cordon` や `drain` など) を実行したり、`bx cs` コマンド (`reboot`、`reload`、`delete` など) を実行したりして行う](cs_cli_reference.html#cs_worker_reboot)
+- [IBM Cloud インフラストラクチャー (SoftLayer) 内のサブネットを必要に応じて追加または解除する](cs_subnets.html#subnets)
 - [IBM Cloud インフラストラクチャー (SoftLayer) で永続ストレージのデータのバックアップとリストアを実行する ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](../services/RegistryImages/ibm-backup-restore/index.html)
 
 <br />

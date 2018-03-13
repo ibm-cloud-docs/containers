@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -36,13 +36,13 @@ Découvrez les étapes générales de déploiement d'applications en cliquant su
 <br />
 
 
-## Planification du déploiement
+## Planification de déploiements à haute disponibilité
 {: #highly_available_apps}
 
 Plus votre configuration sera distribuée entre plusieurs noeuds d'agent et clusters, et moins vos utilisateurs seront susceptibles d'encourir des temps d'indisponibilité de votre application.
-{:shortdesc}
 
-Examinez ces configurations potentielles d'application, classées par ordre de disponibilité croissante :
+Examinez ces configurations potentielles d'application, classées par ordre de disponibilité croissante.
+{:shortdesc}
 
 ![Niveaux de haute disponibilité pour un cluster](images/cs_app_ha_roadmap.png)
 
@@ -66,8 +66,8 @@ Les déploiements offrent également la possibilité de déployer simultanément
 Chaque déploiement conserve un suivi des révisions qui ont été déployées. Vous pouvez utiliser cet historique des révisions pour rétablir une version antérieure si vos mises à jour ne fonctionnent pas comme prévu.</dd>
 <dt>Incluez suffisamment de répliques pour répondre à la charge de travail de votre application, plus deux répliques</dt>
 <dd>Pour rendre votre application encore plus disponible et réfractaire aux échecs, envisagez d'inclure des répliques supplémentaires au-delà du strict minimum requis pour gérer la charge de travail anticipée. Ces répliques supplémentaires pourront gérer la charge de travail en cas de panne d'un pod et avant que le jeu de répliques n'ait encore rétabli le pod défaillant. Pour une protection face à deux défaillances simultanées de pods, incluez deux répliques supplémentaires. Cette configuration correspond à un canevas N+2, où N désigne le nombre de pods destinés à traiter la charge de travail entrante et +2 indique d'ajouter deux répliques supplémentaires. Vous pouvez avoir autant de pods que vous le souhaitez dans un cluster, à condition qu'il y ait suffisamment d'espace pour les hébeger dans le cluster.</dd>
-<dt>Disséminez les nacelles entre plusieurs noeuds (anti-affinité)</dt>
-<dd>Lorsque vous créez votre déploiement, vous pouvez déployer toutes les nacelles sur le même noeud worker. Cette configuration où les pods résident sur le même noeud worker est dénommée 'affinité' ou 'collocation'. Pour protéger votre application contre une défaillance du noeud worker, vous pouvez opter lors du déploiement de disséminer les pods entre plusieurs noeuds d'agent, et ce en utilisant l'option <strong>podAntiAffinity</strong>. Cette option n'est disponible que pour les clusters standard.
+<dt>Disséminez les pods entre plusieurs noeuds (anti-affinité)</dt>
+<dd>Lorsque vous créez votre déploiement, vous pouvez déployer tous les pods sur le même noeud worker. Cette configuration où les pods résident sur le même noeud worker est dénommée 'affinité' ou 'collocation'. Pour protéger votre application contre une défaillance du noeud worker, vous pouvez opter lors du déploiement de disséminer les pods entre plusieurs noeuds d'agent, et ce en utilisant l'option <strong>podAntiAffinity</strong>. Cette option n'est disponible que pour les clusters standards.
 
 </br></br>
 <strong>Remarque :</strong> le fichier YAML suivant contrôle que chaque pod est déployé sur un noeud worker différent. Lorsque le nombre de répliques défini dépasse le nombre de noeuds d'agent disponibles dans votre cluster, le nombre de répliques déployées se limite à celui requis pour répondre à l'exigence d'anti-affinité. Les répliques excédentaires demeurent à l'état En attente jusqu'à ce que des noeuds d'agent supplémentaires soient éventuellement ajoutés au cluster.
@@ -117,7 +117,7 @@ spec:
   type: NodePort</code></pre>
 
 </dd>
-<dt>Dissémination des nacelles entre plusieurs emplacements ou régions</dt>
+<dt>Dissémination des pods entre plusieurs emplacements ou régions</dt>
 <dd>Pour protéger votre application en cas d'une défaillance d'un emplacement ou d'une région, vous pouvez créer un second cluster dans un autre emplacement ou une autre région et utiliser un fichier YAML de déploiement afin de déployer un doublon du jeu de répliques pour votre application. En ajoutant une route partagée et un équilibreur de charge devant vos clusters, vous pouvez répartir votre charge de travail entre plusieurs emplacements et régions. Pour plus d'informations sur le partage de route entre clusters, voir <a href="cs_clusters.html#clusters" target="_blank">Haute disponibilité des clusters</a>.
 
 Pour plus de détails, examinez les options pour <a href="cs_clusters.html#planning_clusters" target="_blank">les déploiements 'applications à haute disponibilité</a>.</dd>
@@ -127,7 +127,7 @@ Pour plus de détails, examinez les options pour <a href="cs_clusters.html#plann
 ### Déploiement d'application minimal
 {: #minimal_app_deployment}
 
-Le déploiement d'application le plus élémentaire dans un cluster léger ou standard peut inclure les composants suivants.
+Un déploiement élémentaire d'application dans un cluster gratuit ou standard pourrait inclure les composants suivants.
 {:shortdesc}
 
 ![Configuration de déploiement](images/cs_app_tutorial_components1.png)
@@ -496,7 +496,7 @@ Avant de commencer, créez un [déploiement](#app_cli).
         ```
         {: pre}
 
-    3.  Identifiez le nom du conteneur s'exécutant dans la nacelle.
+    3.  Identifiez le nom du conteneur s'exécutant dans le pod.
 
         ```
         kubectl describe pod <pod_name>

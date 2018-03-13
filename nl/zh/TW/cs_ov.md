@@ -16,9 +16,9 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# 此頁面已移動！
+# 您正在尋找的內容已遭移動。
 
-尋找主題：
+請參閱新位置中最新的資訊：
  - [Docker 容器](cs_tech.html#docker_containers)
  - [Kubernetes 基本](cs_tech.html#kubernetes_basics)
  - [使用叢集的優點](cs_why.html#benefits)

@@ -17,9 +17,9 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# Esta página se ha movido.
+# El contenido que está buscando se ha trasladado.
 
-Encontrará los temas aquí:
+Consulte la información más reciente en su nueva ubicación:
 - [Creación de clústeres con la GUI](cs_clusters.html#clusters_ui)
 - [Creación de clústeres con la CLI](cs_clusters.html#clusters_cli)
 - [Utilización de registros de imagen privada y pública](cs_images.html#images)
@@ -32,7 +32,7 @@ Encontrará los temas aquí:
     - [Permisos y políticas de acceso](cs_users.html#access_policies)
     - [Adición de usuarios](cs_users.html#add_users)
     - [Personalización de permisos de infraestructura para un usuario](cs_users.html#infra_access)
-- [Actualización del Kubernetes maestro](cs_cluster_update.html#master)
+- [Actualización del maestro de Kubernetes](cs_cluster_update.html#master)
 - [Actualización de nodos trabajadores](cs_cluster_update.html#worker_node)
 - [Adición de subredes a clústeres](cs_subnets.html#subnets)
     - [Solicitud de subredes adicionales para el clúster](cs_subnets.html#request)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-01-29"
 
 ---
 
@@ -88,10 +88,12 @@ lastupdated: "2018-01-11"
 {: shortdesc}
 
 <dl>
+  <dt>工作者節點所有權</dt>
+    <dd>工作者節點的所有權視您建立的叢集類型而定。<p> 免費叢集中的工作程式節點會佈建至 IBM 所擁有的 IBM Cloud 基礎架構 (SoftLayer) 帳戶。使用者可以將應用程式部署至工作者節點，但無法變更設定，或在工作程式節點上安裝其他軟體。</p> <p>標準叢集中的工作程式節點會佈建至與客戶的公用或專用 IBM Cloud 帳戶相關聯的 IBM Cloud 基礎架構 (SoftLayer) 帳戶。工作者節點由客戶擁有，但 IBM 保有對工作者節點的存取權，以將更新項目及安全修補程式部署至作業系統。客戶可選擇變更安全設定，或在 IBM Cloud Container Service 提供的工作者節點上，安裝其他軟體。</p> </dd>
   <dt>運算、網路及儲存空間基礎架構隔離</dt>
-    <dd>當您建立叢集時，會將虛擬機器佈建為客戶 IBM Cloud 基礎架構 (SoftLayer) 帳戶中的工作者節點，或由 IBM 將虛擬機器佈建為專用 IBM Cloud 基礎架構 (SoftLayer) 帳戶中的工作者節點。工作者節點專用於叢集，而且未管理其他叢集的工作負載。<p> 每個 {{site.data.keyword.Bluemix_notm}} 帳戶都已設定 IBM Cloud 基礎架構 (SoftLayer) VLAN，確保工作者節點上的優質網路效能及隔離。</p> <p>若要持續保存叢集中的資料，您可以從 IBM Cloud 基礎架構 (SoftLayer) 佈建專用 NFS 型檔案儲存空間，並運用該平台的內建資料安全特性。</p></dd>
+    <dd>當您建立叢集時，IBM 會使用 IBM Cloud 基礎架構 (SoftLayer) 組合，將工作者節點佈建為虛擬機器。工作者節點專用於叢集，而且未管理其他叢集的工作負載。<p> 每個 {{site.data.keyword.Bluemix_notm}} 帳戶都已設定 IBM Cloud 基礎架構 (SoftLayer) VLAN，確保工作者節點上的優質網路效能及隔離。您也可以只將工作者節點連接至專用 VLAN，將它們指定為專用。</p> <p>若要持續保存叢集中的資料，您可以從 IBM Cloud 基礎架構 (SoftLayer) 佈建專用 NFS 型檔案儲存空間，並運用該平台的內建資料安全特性。</p></dd>
   <dt>設定安全的工作者節點</dt>
-    <dd>每個工作者節點都設定了 Ubuntu 作業系統，且使用者無法變更。為了保護工作者節點的作業系統不會受到潛在攻擊，每個工作者節都會以 Linux iptables 規則所強制執行的專家級防火牆設定來進行配置。<p> 在 Kubernetes 上執行的所有容器都受到預先定義的 Calico 網路原則設定所保護，這些設定是在建立叢集期間，配置於每個工作者節點上。這項設定確保工作者節點與 Pod 之間的安全網路通訊。若要進一步限制容器可以在工作者節點上執行的動作，使用者可以選擇在工作者節點上配置 [AppArmor 原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tutorials/clusters/apparmor/)。</p><p> 工作者節點上會停用 SSH 存取。如果您要在工作者節點上安裝其他特性，則可以針對您要在每個工作者節點上執行的所有項目，使用 [Kubernetes 常駐程式集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset)，或是針對您必須執行的任何一次性動作，使用 [Kubernetes 工作 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/)。</p></dd>
+    <dd>每個工作者節點都設定了 Ubuntu 作業系統，且工作者節點擁有者無法變更。為了保護工作者節點的作業系統不會受到潛在攻擊，每個工作者節都會以 Linux iptables 規則所強制執行的專家級防火牆設定來進行配置。<p> 在 Kubernetes 上執行的所有容器都受到預先定義的 Calico 網路原則設定所保護，這些設定是在建立叢集期間，配置於每個工作者節點上。這項設定確保工作者節點與 Pod 之間的安全網路通訊。若要進一步限制容器可以在標準叢集中的工作者節點上執行的動作，使用者可以選擇在工作者節點上配置 [AppArmor 原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tutorials/clusters/apparmor/)。</p><p> 工作者節點上會停用 SSH 存取。如果您具有標準叢集，且想要在工作者節點上安裝其他特性，則可以針對您要在每個工作者節點上執行的所有項目，使用 [Kubernetes 常駐程式集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset)，或是針對您必須執行的任何一次性動作，使用 [Kubernetes 工作 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/)。</p></dd>
   <dt>Kubernetes 工作者節點安全相符性</dt>
     <dd>IBM 與內部及外部安全顧問團隊合作，解決潛在的安全相符性漏洞。IBM 會維護對工作者節點的存取，以將更新項目及安全修補程式部署至作業系統。<p> <b>重要事項</b>：請定期重新啟動工作者節點，以確保安裝自動部署至作業系統的更新項目及安全修補程式。IBM 不會將您的工作者節點重新開機。</p></dd>
   <dt id="encrypted_disks">已加密磁碟</dt>
@@ -99,7 +101,7 @@ lastupdated: "2018-01-11"
   <p><b>附註</b>：加密可能會影響磁碟 I/O 效能。對於需要高效能磁碟 I/O 的工作負載，請測試已啟用及停用加密的叢集，以協助您決定是否關閉加密。</p>
   </dd>
   <dt>支援 IBM Cloud 基礎架構 (SoftLayer) 網路防火牆</dt>
-    <dd>{{site.data.keyword.containershort_notm}} 與所有 [IBM Cloud 基礎架構 (SoftLayer) 防火牆供應項目 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/cloud-computing/bluemix/network-security) 相容。在「{{site.data.keyword.Bluemix_notm}} 公用」上，您可以使用自訂網路原則來設定防火牆，以提供叢集的專用網路安全，以及偵測及重新修補網路侵入。例如，您可能選擇設定 [Vyatta ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/topic/vyatta-1) 作為防火牆，並且封鎖不想要的資料流量。當您設定防火牆時，[也必須開啟必要埠及 IP 位址](cs_firewall.html#firewall)（針對每一個地區），讓主節點與工作者節點可以進行通訊。</dd>
+    <dd>{{site.data.keyword.containershort_notm}} 與所有 [IBM Cloud 基礎架構 (SoftLayer) 防火牆供應項目 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/cloud-computing/bluemix/network-security) 相容。在「{{site.data.keyword.Bluemix_notm}} 公用」上，您可以使用自訂網路原則來設定防火牆，以提供標準叢集的專用網路安全，以及偵測及重新修補網路侵入。例如，您可能選擇設定 [Vyatta ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/topic/vyatta-1) 作為防火牆，並且封鎖不想要的資料流量。當您設定防火牆時，[也必須開啟必要埠及 IP 位址](cs_firewall.html#firewall)（針對每一個地區），讓主節點與工作者節點可以進行通訊。</dd>
   <dt>將服務維持為專用狀態，或選擇性地將服務及應用程式公開給公用網際網路使用</dt>
     <dd>您可以選擇將服務及應用程式維持為專用狀態，並運用本主題所述的內建安全特性，來確保工作者節點與 Pod 之間的安全通訊。若要將服務及應用程式公開給公用網際網路使用，您可以運用 Ingress 及負載平衡器支援，安全地將服務設為可公開使用。</dd>
   <dt>將工作者節點及應用程式安全地連接至內部部署資料中心</dt>
@@ -140,7 +142,7 @@ lastupdated: "2018-01-11"
 
 |叢集類型|叢集之專用 VLAN 的管理員|
 |------------|-------------------------------------------|
-|{{site.data.keyword.Bluemix_notm}} 中的精簡叢集|{{site.data.keyword.IBM_notm}}|
+|{{site.data.keyword.Bluemix_notm}} 中的免費叢集|{{site.data.keyword.IBM_notm}}|
 |{{site.data.keyword.Bluemix_notm}}中的標準叢集|在您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶中時<p>**提示：**若要存取您帳戶中的所有 VLAN，請開啟 [VLAN 跨距 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/procedure/enable-or-disable-vlan-spanning)。</p>|
 
 所有已部署至工作者節點的 Pod 也會獲指派專用 IP 位址。Pod 會獲指派 172.30.0.0/16 專用位址範圍中的 IP，並且只在工作者節點之間進行遞送。
@@ -152,3 +154,5 @@ lastupdated: "2018-01-11"
 如果叢集中的應用程式需要存取受叢集 IP 服務保護的 Pod，則可以使用已指派給服務的專用叢集 IP 位址，或使用服務的名稱來傳送要求。當您使用服務的名稱時，會在 kube-dns 元件中查閱該名稱，並將其遞送至服務的專用叢集 IP 位址。要求到達服務時，服務確保所有要求都會平均地轉遞至 Pod，但與其專用 IP 位址及部署它們的工作者節點無關。
 
 如需如何建立叢集 IP 類型服務的相關資訊，請參閱 [Kubernetes 服務 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services---service-types)。
+
+如需將 Kubernetes 叢集中的應用程式安全地連接至內部部署網路的相關資訊，請參閱[設定 VPN 連線功能](cs_vpn.html#vpn)。如需公開應用程式進行外部網路通訊的相關資訊，請參閱[規劃外部網路](cs_network_planning.html#planning)。

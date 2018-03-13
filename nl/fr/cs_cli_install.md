@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-01"
+lastupdated: "2018-01-29"
 
 ---
 
@@ -36,7 +36,7 @@ Cette tâche inclut les informations relatives à l'installation de ces interfac
 
 -   Interface CLI de {{site.data.keyword.Bluemix_notm}} version 0.5.0 ou ultérieure
 -   Plug-in de {{site.data.keyword.containershort_notm}}
--   Interface CLI de Kubernetes version 1.7.4 ou ultérieure
+-   Interface CLI de Kubernetes, version 1.8.6 ou ultérieure
 -   Facultatif : plug-in de {{site.data.keyword.registryshort_notm}}
 -   Facultatif : Docker version 1.9 ou ultérieure
 
@@ -70,11 +70,11 @@ et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré
     ```
     {: pre}
 
-    Le plug-in de {{site.data.keyword.containershort_notm}} est affiché dans les résultats sous le nom container-service.
+    Le plug-in {{site.data.keyword.containershort_notm}} est affiché dans les résultats en tant que container-service (service de conteneur).
 
 4.  Pour afficher une version locale du tableau de bord Kubernetes et déployer des applications dans vos clusters, [installez l'interface CLI de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Le préfixe pour l'exécution de commandes via l'interface CLI de Kubernetes est `kubectl`.
 
-    1.  Pour obtenir la compatibilité fonctionnelle complète, téléchargez la version de l'interface CLI de Kubernetes qui correspond à la version du cluster Kubernetes que vous envisagez d'utiliser. La version de Kubernetes par défaut d'{{site.data.keyword.containershort_notm}} actuelle est 1.7.4.
+    1.  Pour obtenir la compatibilité fonctionnelle complète, téléchargez la version de l'interface CLI de Kubernetes qui correspond à la version du cluster Kubernetes que vous envisagez d'utiliser. La version {{site.data.keyword.containershort_notm}} actuelle par défaut de Kubernetes est la version 1.8.6.
 
         OS X :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
 
@@ -129,7 +129,7 @@ et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré
 
     Le plug-in est affiché dans les résultats sous le nom container-registry.
 
-6.  Pour générer des images locales et les envoyer par commande push vers votre espace de nom du registre, [installez Docker ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.docker.com/community-edition#/download). Si vous utilisez Windows 8 ou version antérieure, vous pouvez installer à la place la trousse [Docker Toolbox ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.docker.com/products/docker-toolbox). L'interface CLI de Docker est utilisée pour générer des images d'applications. Le préfixe pour l'exécution de commandes via l'interface CLI de Docker est `docker`.
+6.  Pour générer des images locales et les envoyer par commande push vers votre espace de nom du registre, [installez Docker ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.docker.com/community-edition#/download). Si vous utilisez Windows 8 ou version antérieure, vous pouvez installer à la place la trousse [Docker Toolbox ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.docker.com/toolbox/toolbox_install_windows/). L'interface CLI de Docker est utilisée pour générer des images d'applications. Le préfixe pour l'exécution de commandes via l'interface CLI de Docker est `docker`.
 
 Ensuite, passez à l'étape [Création de clusters Kubernetes depuis l'interface CLI d'{{site.data.keyword.containershort_notm}}](cs_clusters.html#clusters_cli).
 
@@ -147,7 +147,7 @@ reportez-vous à la documentation relative à ces outils.
 ## Configuration de l'interface CLI pour exécution de commandes `kubectl`
 {: #cs_cli_configure}
 
-Vous pouvez utiliser les commandes fournies avec l'interface de ligne de commande Kubernetes pour gérer les clusters dans {{site.data.keyword.Bluemix_notm}}. Toutes les commandes `kubectl` disponibles dans Kubernetes 1.7.4 sont prises en charge pour être utilisées avec des clusters dans {{site.data.keyword.Bluemix_notm}}. Après avoir créé un cluster, définissez le contexte de votre interface de ligne de commande locale vers ce cluster à l'aide d'une variable d'environnement. Vous pouvez ensuite exécuter les commandes Kubernetes `kubectl` pour utiliser votre cluster dans {{site.data.keyword.Bluemix_notm}}.
+Vous pouvez utiliser les commandes fournies avec l'interface de ligne de commande Kubernetes pour gérer les clusters dans {{site.data.keyword.Bluemix_notm}}. Toutes les commandes `kubectl` disponibles dans Kubernetes version 1.8.6 sont prises en charge pour leur utilisation avec des clusters dans {{site.data.keyword.Bluemix_notm}}. Après avoir créé un cluster, définissez le contexte de votre interface de ligne de commande locale vers ce cluster à l'aide d'une variable d'environnement. Vous pouvez ensuite exécuter les commandes Kubernetes `kubectl` pour utiliser votre cluster dans {{site.data.keyword.Bluemix_notm}}.
 {:shortdesc}
 
 Avant de pouvoir lancer des commandes `kubectl`, vous devez [installer les interfaces CLI requises](#cs_cli_install) et [créer un cluster](cs_clusters.html#clusters_cli).
@@ -164,7 +164,7 @@ et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré
 
   2.  Sélectionnez un compte {{site.data.keyword.Bluemix_notm}}. Si vous êtes affecté à plusieurs organisations {{site.data.keyword.Bluemix_notm}}, sélectionnez celle dans laquelle le cluster a été créé. Les clusters sont spécifiques à une organisation, mais sont indépendants d'un espace {{site.data.keyword.Bluemix_notm}}. Vous n'avez donc pas besoin de sélectionner un espace.
 
-  3.  Si vous désirez créer ou accéder à des clusters Kubernetes dans une région {{site.data.keyword.Bluemix_notm}} autre que celle que vous aviez sélectionné auparavant, exécutez la commande `bx cs region-set`.
+  3.  Si vous désirez créer ou accéder à des clusters Kubernetes dans une région {{site.data.keyword.Bluemix_notm}} autre que celle que vous aviez sélectionnée auparavant, exécutez la commande `bx cs region-set`.
 
   4.  Répertoriez tous les clusters du compte pour obtenir le nom du cluster.
 
@@ -222,8 +222,8 @@ Kubernetes.
       Exemple de sortie :
 
       ```
-      Client Version: v1.7.4
-      Server Version: v1.7.4
+      Client Version: v1.8.6
+      Server Version: v1.8.6
       ```
       {: screen}
 
@@ -248,7 +248,7 @@ CLI.
 
 -   Interface CLI de {{site.data.keyword.Bluemix_notm}} version 0.5.0 ou ultérieure
 -   Plug-in de {{site.data.keyword.containershort_notm}}
--   Interface CLI de Kubernetes version 1.7.4 ou ultérieure
+-   Interface CLI de Kubernetes, version 1.8.6 ou ultérieure
 -   Plug-in de {{site.data.keyword.registryshort_notm}}
 -   Docker version 1.9. ou ultérieure
 
@@ -284,7 +284,7 @@ plug-in installés.
         ```
         {: pre}
 
-        Le plug-in {{site.data.keyword.containershort_notm}} est affiché dans les résultats en tant que container-service.
+        Le plug-in {{site.data.keyword.containershort_notm}} est affiché dans les résultats en tant que container-service (service de conteneur).
 
     3.  Initialisez l'interface CLI.
 
@@ -294,7 +294,7 @@ plug-in installés.
         {: pre}
 
 4.  Mettez à jour l'interface de ligne de commande Kubernetes.
-    1.  Mettez à jour l'interface CLI de Kubernetes qui correspond à la version du cluster Kubernetes que vous envisagez d'utiliser. La version de Kubernetes par défaut d'{{site.data.keyword.containershort_notm}} actuelle est 1.7.4.
+    1.  Mettez à jour l'interface CLI de Kubernetes qui correspond à la version du cluster Kubernetes que vous envisagez d'utiliser. La version {{site.data.keyword.containershort_notm}} actuelle par défaut de Kubernetes est la version 1.8.6.
 
         OS X :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
 
@@ -354,7 +354,7 @@ plug-in installés.
 6.  Mettez à jour Docker.
     -   Si vous utilisez Docker Community Edition, démarrez Docker, cliquez sur l'icône
 **Docker**, puis sur **Check for updates**.
-    -   Si vous utilisez Docker Toolbox, téléchargez la [version la plus récente ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.docker.com/products/docker-toolbox) et exécutez le programme d'installation.
+    -   Si vous utilisez Docker Toolbox, téléchargez la [version la plus récente ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.docker.com/toolbox/toolbox_install_windows/) et exécutez le programme d'installation.
 
 <br />
 
@@ -369,7 +369,7 @@ Cette tâche inclut les informations relatives au retrait de ces interfaces CLI 
 
 
 -   Plug-in de {{site.data.keyword.containershort_notm}}
--   Interface CLI de Kubernetes version 1.7.4 ou ultérieure
+-   Interface CLI de Kubernetes, version 1.8.6 ou ultérieure
 -   Plug-in de {{site.data.keyword.registryshort_notm}}
 -   Docker version 1.9. ou ultérieure
 
@@ -411,7 +411,7 @@ utilisé.
 
     - [OSX ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.docker.com/docker-for-mac/#uninstall-or-reset)
     - [Linux ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#uninstall-docker-ce)
-    - [Windows ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.docker.com/toolbox/toolbox_install_mac/#how-to-uninstall-toolbox)
+    - [Windows ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.docker.com/toolbox/toolbox_install_windows/#how-to-uninstall-toolbox)
 
 <br />
 

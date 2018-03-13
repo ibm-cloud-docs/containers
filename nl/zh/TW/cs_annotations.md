@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-16"
 
 ---
 
@@ -29,7 +29,9 @@ lastupdated: "2018-01-12"
 <col width="20%">
 <col width="60%">
  <thead>
- <th colspan=3>一般註釋</th>
+ <th>一般註釋</th>
+ <th>名稱</th>
+ <th>說明</th>
  </thead>
  <tbody>
  <tr>
@@ -65,7 +67,9 @@ lastupdated: "2018-01-12"
 <col width="20%">
 <col width="60%">
  <thead>
-  <th colspan=3>連線註釋</th>
+ <th>連線註釋</th>
+ <th>名稱</th>
+ <th>說明</th>
   </thead>
   <tbody>
   <tr>
@@ -96,7 +100,9 @@ lastupdated: "2018-01-12"
 <col width="20%">
 <col width="60%">
  <thead>
- <th colspan=3>Proxy 緩衝區註釋</th>
+ <th>Proxy 緩衝區註釋</th>
+ <th>名稱</th>
+ <th>說明</th>
  </thead>
  <tbody>
  <tr>
@@ -127,7 +133,9 @@ lastupdated: "2018-01-12"
 <col width="20%">
 <col width="60%">
 <thead>
-<th colspan=3>要求及回應註釋</th>
+<th>要求及回應註釋</th>
+<th>名稱</th>
+<th>說明</th>
 </thead>
 <tbody>
 <tr>
@@ -152,7 +160,9 @@ lastupdated: "2018-01-12"
 <col width="20%">
 <col width="60%">
 <thead>
-<th colspan=3>服務限制註釋</th>
+<th>服務限制註釋</th>
+<th>名稱</th>
+<th>說明</th>
 </thead>
 <tbody>
 <tr>
@@ -172,7 +182,9 @@ lastupdated: "2018-01-12"
 <col width="20%">
 <col width="60%">
 <thead>
-<th colspan=3>HTTPS 及 TLS/SSL 鑑別註釋</th>
+<th>HTTPS 及 TLS/SSL 鑑別註釋</th>
+<th>名稱</th>
+<th>說明</th>
 </thead>
 <tbody>
 <tr>
@@ -220,11 +232,11 @@ lastupdated: "2018-01-12"
 <code>
 apiVersion: extensions/v1beta1
 kind: Ingress
-metadata:
+ metadata:
   name: cafe-ingress
   annotations:
     ingress.bluemix.net/proxy-external-service: "path=&lt;mypath&gt; external-svc=https:&lt;external_service&gt; host=&lt;mydomain&gt;"
-spec:
+ spec:
   tls:
   - hosts:
     - mydomain
@@ -282,11 +294,11 @@ spec:
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
-metadata:
+ metadata:
 name: myingress
 annotations:
   ingress.bluemix.net/ALB-ID: "&lt;private_ALB_ID&gt;"
-spec:
+ spec:
 tls:
 - hosts:
   - mydomain
@@ -332,11 +344,11 @@ rules:
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
-metadata:
+ metadata:
   name: myingress
   annotations:
     ingress.bluemix.net/rewrite-path: "serviceName=&lt;myservice1&gt; rewrite=&lt;target_path1&gt;;serviceName=&lt;myservice2&gt; rewrite=&lt;target_path2&gt;"
-spec:
+ spec:
   tls:
   - hosts:
     - mydomain
@@ -381,8 +393,12 @@ spec:
 <dt>說明</dt>
 <dd>針當用戶端連接至您的後端應用程式時，您可以使用階段作業親緣性，以在階段作業時間，或是在完成作業所需的時間內，由相同的上游伺服器服務某一用戶端。您可以配置應用程式負載平衡器，一律將送入的網路資料流量遞送至相同的上游伺服器，以確保階段作業親緣性。
 
+
+
 </br></br>
 連接至您的後端應用程式的每個用戶端，會由應用程式負載平衡器指派給其中一個可用的上游伺服器。應用程式負載平衡器會建立階段作業 Cookie，它儲存在用戶端應用程式中，而用戶端應用程式則內含在應用程式負載平衡器與用戶端之間每個要求的標頭資訊中。Cookie 中的資訊確保所有要求在整個階段作業中，都由相同的上游伺服器處理。
+
+
 
 </br></br>
 當您包含多個服務時，請使用分號 (;) 來區隔它們。</dd>
@@ -392,11 +408,11 @@ spec:
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
-metadata:
+ metadata:
   name: myingress
   annotations:
     ingress.bluemix.net/sticky-cookie-services: "serviceName=&lt;myservice1&gt; name=&lt;cookie_name1&gt; expires=&lt;expiration_time1&gt; path=&lt;cookie_path1&gt; hash=&lt;hash_algorithm1&gt;;serviceName=&lt;myservice2&gt; name=&lt;cookie_name2&gt; expires=&lt;expiration_time2&gt; path=&lt;cookie_path2&gt; hash=&lt;hash_algorithm2&gt;"
-spec:
+ spec:
   tls:
   - hosts:
     - mydomain
@@ -459,6 +475,8 @@ spec:
 <dd>
 對正在執行 TCP 串流工作負載的應用程式使用此註釋。
 
+
+
 <p>**附註**：應用程式負載平衡器係以透通模式運作，並將資料流量傳遞至後端應用程式。在此情況下，不支援 SSL 終止。</p>
 </dd>
 
@@ -469,11 +487,11 @@ spec:
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
-metadata:
+ metadata:
 name: myingress
 annotations:
   ingress.bluemix.net/tcp-ports: "serviceName=&lt;myservice&gt; ingressPort=&lt;ingress_port&gt; [servicePort=&lt;service_port&gt;]"
-spec:
+ spec:
   tls:
   - hosts:
     - mydomain
@@ -525,6 +543,8 @@ spec:
 <dt>說明</dt>
 <dd>當用戶端要求傳送至 Ingress 應用程式負載平衡器時，應用程式負載平衡器會開啟與後端應用程式的連線。依預設，應用程式負載平衡器會等待 60 秒，以便從後端應用程式收到回覆。如果後端應用程式未在 60 秒內回覆，則會中斷連線要求，且後端應用程式將被視為無法使用。
 
+
+
 </br></br>
 在應用程式負載平衡器連接至後端應用程式之後，應用程式負載平衡器會讀取來自後端應用程式的回應資料。在此讀取作業期間，應用程式負載平衡器在兩次讀取作業之間最多等待 60 秒，以接收來自後端應用程式的資料。如果後端應用程式未在 60 秒內傳送資料，則會關閉與後端應用程式的連線，且應用程式將被視為無法使用。
 </br></br>
@@ -539,20 +559,20 @@ spec:
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
-  metadata:
-  name: myingress
-  annotations:
+ metadata:
+   name: myingress
+   annotations:
     ingress.bluemix.net/proxy-connect-timeout: "&lt;connect_timeout&gt;s"
     ingress.bluemix.net/proxy-read-timeout: "&lt;read_timeout&gt;s"
-  spec:
-  tls:
+ spec:
+   tls:
  - hosts:
    - mydomain
-    secretName: mytlssecret
-  rules:
+     secretName: mytlssecret
+   rules:
  - host: mydomain
    http:
-paths:
+     paths:
      - path: /
         backend:
           serviceName: myservice
@@ -569,7 +589,7 @@ paths:
  </tr>
  <tr>
  <td><code>&lt;read_timeout&gt;</code></td>
- <td>要在讀取後端應用程式之前等待的秒數，例如 <code>65s</code>。</td>
+ <td>要在讀取後端應用程式之前等待的秒數，例如 <code>65s</code>。<strong>附註：</strong>read-timeout 不可超過 120 秒。</td>
  </tr>
  </tbody></table>
 
@@ -598,11 +618,11 @@ paths:
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
-metadata:
+ metadata:
 name: myingress
 annotations:
   ingress.bluemix.net/keepalive-requests: "serviceName=&lt;myservice&gt; requests=&lt;max_requests&gt;"
-spec:
+ spec:
 tls:
 - hosts:
   - mydomain
@@ -657,23 +677,23 @@ rules:
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
-metadata:
- name: myingress
- annotations:
+ metadata:
+   name: myingress
+   annotations:
    ingress.bluemix.net/keepalive-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;time&gt;s"
-spec:
- tls:
+ spec:
+   tls:
  - hosts:
    - mydomain
-   secretName: mytlssecret
- rules:
+     secretName: mytlssecret
+   rules:
  - host: mydomain
    http:
      paths:
      - path: /
-       backend:
-         serviceName: myservice
-         servicePort: 8080</code></pre>
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
 
 <table>
  <thead>
@@ -715,7 +735,7 @@ spec:
 
  <pre class="codeblock">
  <code>apiVersion: extensions/v1beta1
-kind: Ingress
+ kind: Ingress
  metadata:
   name: myingress
   annotations:
@@ -769,6 +789,8 @@ kind: Ingress
 <dt>說明</dt>
 <dd>Ingress 應用程式負載平衡器會充當後端應用程式與用戶端 Web 瀏覽器之間的 Proxy。當回應從後端應用程式傳送至用戶端時，依預設會將回應資料緩衝在應用程式負載平衡器上。應用程式負載平衡器會代理用戶端回應，並開始按照用戶端的速度將回應傳送至用戶端。應用程式負載平衡器收到來自後端應用程式的所有資料之後，會關閉與後端應用程式的連線。從應用程式負載平衡器到用戶端的連線會維持開啟，直到用戶端收到所有資料為止。
 
+
+
 </br></br>
 如果停用在應用程式負載平衡器上緩衝回應資料的功能，資料會立即從應用程式負載平衡器傳送至用戶端。用戶端必須能夠按照應用程式負載平衡器的速度處理送入的資料。如果用戶端太慢，資料可能會遺失。
 </br></br>
@@ -779,23 +801,23 @@ kind: Ingress
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
-metadata:
- name: myingress
- annotations:
+ metadata:
+   name: myingress
+   annotations:
    ingress.bluemix.net/proxy-buffering: "False"
-spec:
- tls:
+ spec:
+   tls:
  - hosts:
    - mydomain
-   secretName: mytlssecret
- rules:
+     secretName: mytlssecret
+   rules:
  - host: mydomain
    http:
      paths:
      - path: /
-       backend:
-         serviceName: myservice
-         servicePort: 8080</code></pre>
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
 </dd></dl>
 
 <br />
@@ -818,23 +840,23 @@ spec:
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
-metadata:
+ metadata:
  name: proxy-ingress
- annotations:
+   annotations:
    ingress.bluemix.net/proxy-buffers: "serviceName=&lt;myservice&gt; number=&lt;number_of_buffers&gt; size=&lt;size&gt;"
-spec:
- tls:
+ spec:
+   tls:
  - hosts:
    - mydomain
-   secretName: mytlssecret
- rules:
+     secretName: mytlssecret
+   rules:
  - host: mydomain
    http:
      paths:
      - path: /
-       backend:
-         serviceName: myservice
-         servicePort: 8080</code></pre>
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
 
 <table>
  <thead>
@@ -870,7 +892,7 @@ spec:
 <dt>說明</dt>
 <dd>
 設定緩衝區大小，以讀取從 Proxy 伺服器收到之回應的第一部分。此部分的回應通常包含小型回應標頭。除非已指定服務，否則配置會套用至 Ingress 主機中的所有服務。例如，如果指定 <code>serviceName=SERVICE size=1k</code> 之類的配置，則會將 1k 套用至服務。如果指定 <code>size=1k</code> 之類的配置，則會將 1k 套用至 Ingress 主機中的所有服務。
-</dd>
+ </dd>
 
 
 <dt>Ingress 資源範例 YAML</dt>
@@ -879,16 +901,16 @@ spec:
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
-metadata:
+ metadata:
  name: proxy-ingress
- annotations:
+   annotations:
    ingress.bluemix.net/proxy-buffer-size: "serviceName=&lt;myservice&gt; size=&lt;size&gt;"
-spec:
- tls:
+ spec:
+   tls:
  - hosts:
    - mydomain
-   secretName: mytlssecret
- rules:
+     secretName: mytlssecret
+   rules:
  - host: mydomain
    http:
      paths:
@@ -939,16 +961,16 @@ spec:
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
-metadata:
+ metadata:
  name: proxy-ingress
- annotations:
+   annotations:
    ingress.bluemix.net/proxy-busy-buffers-size: "serviceName=&lt;serviceName&gt; size=&lt;size&gt;"
-spec:
- tls:
+ spec:
+   tls:
  - hosts:
    - mydomain
-   secretName: mytlssecret
- rules:
+     secretName: mytlssecret
+   rules:
  - host: mydomain
    http:
      paths:
@@ -994,6 +1016,8 @@ spec:
 <dt>說明</dt>
 <dd>Ingress 應用程式負載平衡器會充當用戶端應用程式與後端應用程式之間的 Proxy。傳送至應用程式負載平衡器的用戶端要求會被處理（代理），然後放入新的要求，從應用程式負載平衡器傳送到您的後端應用程式。代理 (Proxy) 要求會移除一開始從用戶端傳送的 HTTP 標頭資訊，例如使用者名稱。如果您的後端應用程式需要此資訊，則可以使用 <strong>ingress.bluemix.net/proxy-add-headers</strong> 註釋，將標頭資訊新增至用戶端要求，之後才將要求從應用程式負載平衡器轉遞到您的後端應用程式。
 
+
+
 </br></br>
 當後端應用程式傳送回應給用戶端時，回應會由應用程式負載平衡器代理，並從回應移除 HTTP 標頭。用戶端 Web 應用程式可能需要此標頭資訊才能順利處理回應。您可以使用 <strong>ingress.bluemix.net/response-add-headers</strong> 註釋，將標頭資訊新增至用戶端回應，之後才將回應從應用程式負載平衡器轉遞到用戶端 Web 應用程式。</dd>
 <dt>Ingress 資源範例 YAML</dt>
@@ -1002,7 +1026,7 @@ spec:
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
-metadata:
+ metadata:
   name: myingress
   annotations:
     ingress.bluemix.net/proxy-add-headers: |
@@ -1021,7 +1045,7 @@ metadata:
       serviceName=&lt;myservice2&gt; {
       "&lt;header3&gt;: &lt;value3&gt;";
       }
-spec:
+ spec:
   tls:
   - hosts:
     - mydomain
@@ -1135,6 +1159,8 @@ spec:
 <dt>說明</dt>
 <dd>為了維護預期的效能，用戶端要求內文大小上限設為 1 MB。當內文大小超過限制的用戶端要求傳送至 Ingress 應用程式負載平衡器，而且用戶端不容許分割資料時，應用程式負載平衡器會傳回 413（要求的實體太大）的 HTTP 回應給用戶端。在要求內文的大小減少之前，用戶端與應用程式負載平衡器之間無法進行連線。當用戶端容許資料分割成多個片段時，資料會分成多個 1 MB 的套件，然後傳送至應用程式負載平衡器。
 
+
+
 </br></br>
 您可能會想要增加內文大小上限，因為您預期用戶端要求的內文大小會大於 1 MB。例如，您要讓用戶端能上傳大型檔案。增加要求內文大小上限可能會影響應用程式負載平衡器的效能，因為與用戶端的連線必須維持開啟，直到收到要求為止。
 </br></br>
@@ -1145,23 +1171,23 @@ spec:
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
-metadata:
- name: myingress
- annotations:
+ metadata:
+   name: myingress
+   annotations:
    ingress.bluemix.net/client-max-body-size: "size=&lt;size&gt;"
-spec:
- tls:
+ spec:
+   tls:
  - hosts:
    - mydomain
-   secretName: mytlssecret
- rules:
+     secretName: mytlssecret
+   rules:
  - host: mydomain
    http:
      paths:
      - path: /
-       backend:
-         serviceName: myservice
-         servicePort: 8080</code></pre>
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
 
 <table>
  <thead>
@@ -1333,19 +1359,19 @@ spec:
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
-  metadata:
-  name: myingress
-  annotations:
+ metadata:
+   name: myingress
+   annotations:
     ingress.bluemix.net/custom-port: "protocol=&lt;protocol1&gt; port=&lt;port1&gt;;protocol=&lt;protocol2&gt;port=&lt;port2&gt;"
-  spec:
-  tls:
+ spec:
+   tls:
  - hosts:
    - mydomain
-    secretName: mytlssecret
-  rules:
+     secretName: mytlssecret
+   rules:
  - host: mydomain
    http:
-paths:
+     paths:
      - path: /
         backend:
           serviceName: myservice
@@ -1384,7 +1410,7 @@ public-ingress-ctl-svc   10.10.10.149   169.60.16.246   80:30776/TCP,443:30412/T
 kind: ConfigMap
 data:
   public-ports: &lt;port1&gt;;&lt;port2&gt;
-  metadata:
+ metadata:
   creationTimestamp: 2017-08-22T19:06:51Z
   name: ibm-cloud-provider-ingress-cm
   namespace: kube-system
@@ -1419,6 +1445,8 @@ public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,
 <dt>說明</dt>
 <dd>請設定 Ingress 應用程式負載平衡器，以 IBM 提供的 TLS 憑證或您的自訂 TLS 憑證來保護網域。有些使用者可能會嘗試對應用程式負載平衡器網域使用不安全的 HTTP 要求（例如 <code>http://www.myingress.com</code>）來存取您的應用程式，而不是使用 <code>https</code>。您可以使用重新導向註釋，一律將不安全的 HTTP 用戶端要求重新導向至 HTTPS。如果您未使用此註釋，依預設，不安全的 HTTP 要求不會轉換成 HTTPS 要求，且可能會將未加密的機密資訊公開給大眾。
 
+
+
 </br></br>
 依預設，會停用將 HTTP 要求重新導向至 HTTPS。</dd>
 
@@ -1427,23 +1455,23 @@ public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
-metadata:
- name: myingress
- annotations:
+ metadata:
+   name: myingress
+   annotations:
    ingress.bluemix.net/redirect-to-https: "True"
-spec:
- tls:
+ spec:
+   tls:
  - hosts:
    - mydomain
-   secretName: mytlssecret
- rules:
+     secretName: mytlssecret
+   rules:
  - host: mydomain
    http:
      paths:
      - path: /
-       backend:
-         serviceName: myservice
-         servicePort: 8080</code></pre>
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
 </dd></dl>
 
 <br />
@@ -1477,11 +1505,11 @@ spec:
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
-metadata:
+ metadata:
 name: myingress
 annotations:
   ingress.bluemix.net/mutual-auth: "secretName=&lt;mysecret&gt; port=&lt;port&gt; serviceName=&lt;servicename1&gt;,&lt;servicename2&gt;"
-spec:
+ spec:
   tls:
   - hosts:
     - mydomain
@@ -1533,6 +1561,8 @@ spec:
 <dd>
 使用應用程式負載平衡器加密要送至需要 HTTPS 之上游應用程式的資料流量。
 
+
+
 **選用**：您可以將[單向鑑別或交互鑑別](#ssl-services-auth)新增至此註釋。
 </dd>
 
@@ -1543,11 +1573,11 @@ spec:
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
-metadata:
+ metadata:
   name: &lt;myingressname&gt;
   annotations:
     ingress.bluemix.net/ssl-services: "ssl-service=&lt;myservice1&gt; [ssl-secret=&lt;service1-ssl-secret&gt;];ssl-service=&lt;myservice2&gt; [ssl-secret=&lt;service2-ssl-secret&gt;]
-spec:
+ spec:
   rules:
   - host: mydomain
     http:
@@ -1593,6 +1623,8 @@ spec:
 <dd>
 使用 Ingress 控制器，針對需要 HTTPS 的負載平衡應用程式配置交互鑑別。
 
+
+
 **附註**：開始之前，請[將憑證及金鑰轉換為 base-64 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.base64encode.org/)。
 
 </dd>
@@ -1604,13 +1636,13 @@ spec:
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
-metadata:
+ metadata:
   name: &lt;myingressname&gt;
   annotations:
     ingress.bluemix.net/ssl-services: |
       ssl-service=&lt;myservice1&gt; ssl-secret=&lt;service1-ssl-secret&gt;;
       ssl-service=&lt;myservice2&gt; ssl-secret=&lt;service2-ssl-secret&gt;
-spec:
+ spec:
   tls:
   - hosts:
     - mydomain

@@ -24,7 +24,7 @@ Revise estas situaciones en las que puede tener que abrir puertos específicos y
 * [Para ejecutar mandatos `bx` ](#firewall_bx)desde el sistema local cuando las políticas de red corporativas impiden el acceso a los puntos finales de internet pública mediante proxies o cortafuegos.
 * [Para ejecutar mandatos `kubectl` ](#firewall_kubectl)desde el sistema local cuando las políticas de red corporativas impiden el acceso a los puntos finales de internet pública mediante proxies o cortafuegos.
 * [Para ejecutar mandatos `calicoctl` ](#firewall_calicoctl)desde el sistema local cuando las políticas de red corporativas impiden el acceso a los puntos finales de internet pública mediante proxies o cortafuegos.
-* [Para permitir la comunicación entre el Kubernetes maestro y los nodos trabajadores](#firewall_outbound) cuando hay un cortafuegos configurado para los nodos trabajadores o los valores del cortafuegos están personalizados en su cuenta de infraestructura de IBM Cloud (SoftLayer).
+* [Para permitir la comunicación entre el maestro de Kubernetes y los nodos trabajadores](#firewall_outbound) cuando hay un cortafuegos configurado para los nodos trabajadores o los valores del cortafuegos están personalizados en su cuenta de infraestructura de IBM Cloud (SoftLayer).
 * [Para acceder al servicio NodePort, LoadBalancer o Ingress desde fuera del clúster](#firewall_inbound).
 
 <br />
@@ -170,7 +170,7 @@ Antes de empezar, permita el acceso para ejecutar mandatos [`bx`](#firewall_bx) 
 ## Cómo permitir al clúster acceder a recursos de infraestructura y otros servicios
 {: #firewall_outbound}
 
-Permita que el clúster acceda a servicios y recursos de infraestructura desde detrás de un cortafuegos, como para las regiones de {{.site.data.keyword.containershort_notm}}, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IP privadas de infraestructura de IBM Cloud (SoftLayer) y de salida para reclamaciones de volumen permanente.
+Permita que el clúster acceda a servicios y recursos de infraestructura desde detrás de un cortafuegos, como para las regiones de {{site.data.keyword.containershort_notm}}, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IP privadas de infraestructura de IBM Cloud (SoftLayer) y de salida para reclamaciones de volumen permanente.
 {:shortdesc}
 
   1.  Anote la dirección IP pública de todos los nodos trabajadores del clúster.
@@ -180,7 +180,7 @@ Permita que el clúster acceda a servicios y recursos de infraestructura desde d
       ```
       {: pre}
 
-  2.  Permita el tráfico de red de salida del origen _<each_worker_node_publicIP>_ al rango de puertos TCP/UDP de destino 20000-32767 y al puerto 443, y a las siguientes direcciones IP y grupos de red. Si tiene un cortafuegos corporativo que impide a la máquina local acceder a puntos finales de Internet pública, realice este paso para los nodos de trabajador de origen y para la máquina local.
+  2.  Permita el tráfico de red de salida del origen _<each_worker_node_publicIP>_ al rango de puertos TCP/UDP de destino 20000-32767 y al puerto 443, y a las siguientes direcciones IP y grupos de red. Si tiene un cortafuegos corporativo que impide a la máquina local acceder a puntos finales de Internet pública, realice este paso para los nodos trabajadores de origen y para la máquina local.
       - **Importante**: También debe permitir el tráfico de salida al puerto 443 y a todas las ubicaciones entre una región y otra para equilibrar la carga durante el proceso de arranque. Por ejemplo, si el clúster está en EE.UU. sur, debe permitir el tráfico procedente desde el puerto 443 a las direcciones IP para todas las ubicaciones (dal10, dal12 y dal13).
       <p>
   <table summary="La primera fila de la tabla abarca ambas columnas. El resto de las filas se deben leer de izquierda a derecha; la ubicación del servidor está en la columna uno y las direcciones IP correspondientes en la columna dos. ">
@@ -192,8 +192,8 @@ Permita que el clúster acceda a servicios y recursos de infraestructura desde d
     <tbody>
       <tr>
         <td>AP Norte</td>
-        <td>hkg02<br>sng01<br>tok02</td>
-        <td><code>169.56.132.234</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
+        <td>hkg02<br>seo01<br>sng01<br>tok02</td>
+        <td><code>169.56.132.234</code><br><code>161.202.126.210</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
        </tr>
       <tr>
          <td>AP Sur</td>
@@ -212,13 +212,13 @@ Permita que el clúster acceda a servicios y recursos de infraestructura desde d
       </tr>
       <tr>
         <td>EE.UU. este</td>
-         <td><ph class="mon">mon01<br></ph>tor01<br>wdc06<br>wdc07</td>
-         <td><ph class ="mon"><code>169.54.126.219</code><br></ph><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+         <td>mon01<br>tor01<br>wdc06<br>wdc07</td>
+         <td><code>169.54.126.219</code><br><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
       </tr>
       <tr>
         <td>EE.UU. Sur</td>
-        <td>dal10<br>dal12<br>dal13</td>
-        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
+        <td>dal10<br>dal12<br>dal13<br>sao01</td>
+        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>169.57.151.10</code></td>
       </tr>
       </tbody>
     </table>
@@ -226,7 +226,7 @@ Permita que el clúster acceda a servicios y recursos de infraestructura desde d
 
   3.  Permita el tráfico de red de salida de los nodos trabajadores a regiones de [{{site.data.keyword.registrylong_notm}}](/docs/services/Registry/registry_overview.html#registry_regions):
       - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
-      - Sustituya <em>&lt;registry_publicIP&gt;</em> por las direcciones IP de registro a las que desea permitir el tráfico. El registro internacional almacena imágenes públicas proporcionadas por IBM y los registros regionales almacenan sus propias imágenes privadas o públicas. <p>
+      - Sustituya <em>&lt;registry_publicIP&gt;</em> por las direcciones IP de registro a las que desea permitir el tráfico. El registro global almacena imágenes públicas proporcionadas por IBM y los registros regionales almacenan sus propias imágenes privadas o públicas. <p>
 <table summary="La primera fila de la tabla abarca ambas columnas. El resto de las filas se deben leer de izquierda a derecha; la ubicación del servidor está en la columna uno y las direcciones IP correspondientes en la columna dos. ">
       <thead>
         <th>Región de {{site.data.keyword.containershort_notm}}</th>
@@ -235,7 +235,7 @@ Permita que el clúster acceda a servicios y recursos de infraestructura desde d
       </thead>
       <tbody>
         <tr>
-          <td>Registro internacional en regiones de contenedor</td>
+          <td>Registro global en regiones de contenedor</td>
           <td>registry.bluemix.net</td>
           <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
         </tr>
@@ -307,7 +307,12 @@ Permita que el clúster acceda a servicios y recursos de infraestructura desde d
             <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
            </tr>
           <tr>
-           <td>UE Central, UK Sur</td>
+           <td>UK Sur</td>
+           <td>ingest.logging.eu-gb.bluemix.net</td>
+           <td><code>169.50.115.113</code></td>
+          </tr>
+          <tr>
+           <td>UE Central</td>
            <td>ingest-eu-fra.logging.bluemix.net</td>
            <td><code>158.177.88.43</code><br><code>159.122.87.107</code></td>
           </tr>
@@ -341,7 +346,7 @@ Puede permitir el acceso a servicios NodePort, de equilibrador de carga e Ingres
 
 <dl>
   <dt>Servicio NodePort</dt>
-  <dd>Abra el puerto que ha configurado cuando ha desplegado el servicio a las direcciones IP públicas para permitir el tráfico a todos los nodos de trabajador. Para encontrar el puerto, ejecute `kubectl get svc`. El puerto está en el rango 20000-32000.<dd>
+  <dd>Abra el puerto que ha configurado cuando ha desplegado el servicio a las direcciones IP públicas para permitir el tráfico a todos los nodos trabajadores. Para encontrar el puerto, ejecute `kubectl get svc`. El puerto está en el rango 20000-32000.<dd>
   <dt>Servicio LoadBalancer</dt>
   <dd>Abra el puerto que ha configurado cuando ha desplegado el servicio a la dirección IP pública del servicio de equilibrador de carga.</dd>
   <dt>Ingress</dt>

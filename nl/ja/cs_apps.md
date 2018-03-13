@@ -16,9 +16,9 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# このページは移動されました。
+# お探しのコンテンツは移動しました。
 
-以下のトピックを確認してください。
+新しい場所にある最新の情報をご確認ください。
 - [Kubernetes ダッシュボードの起動](cs_app.html#cli_dashboard)
 - [シークレットの作成](cs_app.html#secrets)
 - [アプリへのパブリック・アクセスを許可する方法](cs_network_planning.html#planning)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-02"
 
 ---
 
@@ -33,7 +33,7 @@ Das folgende Diagramm zeigt den Prozess, den Sie zum Aktualisieren des Masters d
 
 Abbildung 1. Prozessdiagramm für die Aktualisierung des Kubernetes-Masters
 
-**Achtung**: Nach Durchführung des Aktualisierungsprozesses kann für einen Cluster kein Rollback auf eine Vorgängerversion durchgeführt werden. Achten Sie darauf, zunächst einen Testcluster zu verwenden und die Anweisungen für den Umgang mit potenziellen Problemen zu befolgen, bevor Sie Ihren Produktionsmaster aktualisieren.
+**Achtung**: Nach der Durchführung des Aktualisierungsprozesses kann für einen Cluster kein Rollback auf eine Vorgängerversion durchgeführt werden. Achten Sie darauf, zunächst einen Testcluster zu verwenden und die Anweisungen für den Umgang mit potenziellen Problemen zu befolgen, bevor Sie Ihren Produktionsmaster aktualisieren.
 
 Bei der Durchführung einer Aktualisierung für eine _Hauptversion_ oder _Nebenversion_ müssen Sie die folgenden Schritte ausführen:
 
@@ -63,11 +63,11 @@ Während des Aktualisierungsprozesses werden bestimmte Knoten für eine gewisse 
 
 Wie werden die Schlüssel definiert?
 
-In der Konfigurationszuordnung befindet sich ein Datenabschnitt. Sie können bis zu 10 einzelne Regeln definieren, die jederzeit ausgeführt werden können. Damit ein Workerknoten aktualisiert werden kann, muss er jede in der Zuordnung definierte Regel erfüllen.
+Im Abschnitt für Dateninformationen der Konfigurationszuordnung können Sie bis zu 10 einzelne Regeln definieren, die an jedem angegebenen Zeitpunkt ausgeführt werden können. Damit die Aktualisierung durchgeführt werden kann, müssen die betreffenden Workerknoten jede der definierten Regeln erfüllen.
 
 Die Schlüssel sind definiert. Was kommt als Nächstes?
 
-Nachdem die gewünschten Regeln definiert worden sind, führen Sie den Befehl 'worker-upgrade' aus. Bei erfolgreicher Ausführung und Rückgabe einer entsprechenden Antwort werden die Workerknoten in eine Warteschlange zwecks Aktualisierung eingereiht. Die Knoten durchlaufen den Aktualisierungsprozess jedoch erst dann, wenn sämtliche Regeln erfüllt sind. Während sich die Knoten in der Warteschlange befinden, werden die Regeln in Intervallen überprüft, um festzustellen, ob die Knoten aktualisiert werden können.
+Nachdem die gewünschten Regeln definiert worden sind, führen Sie den Befehl `worker-upgrade` aus. Bei erfolgreicher Ausführung und Rückgabe einer entsprechenden Antwort werden die Workerknoten in eine Warteschlange zwecks Aktualisierung eingereiht. Die Knoten durchlaufen den Aktualisierungsprozess jedoch erst dann, wenn sämtliche Regeln erfüllt sind. Während sich die Knoten in der Warteschlange befinden, werden die Regeln in Intervallen überprüft, um festzustellen, ob die Knoten aktualisiert werden können.
 
 Wie sieht es aus, wenn keine Konfigurationszuordnung definiert wurde?
 
@@ -115,11 +115,11 @@ Gehen Sie wie folgt vor, um Ihre Workerknoten zu aktualisieren:
     <tbody>
       <tr>
         <td><code>defaultcheck.json</code></td>
-        <td> Wenn keine gültige Definition der Zuordnung 'ibm-cluster-update-configuration' vorhanden ist, dann können standardmäßig immer nur maximal 20% Ihrer Cluster gleichzeitig nicht verfügbar sein. Wird mindestens eine gültige Regel ohne globalen Standardwert (default) definiert, dann sieht der neue Standardwert vor, dass 100% der Worker gleichzeitig nicht verfügbar sein dürfen. Dies lässt sich entsprechend steuern, indem Sie einen Eintrag mit einem Standardprozentsatz erstellen. </td>
+        <td> Wenn keine gültige Definition der Zuordnung 'ibm-cluster-update-configuration' vorhanden ist, dann können standardmäßig immer nur maximal 20% Ihrer Cluster gleichzeitig nicht verfügbar sein. Wird mindestens eine gültige Regel ohne globalen Standardwert definiert, dann sieht der neue Standardwert vor, dass 100 % der Worker gleichzeitig nicht verfügbar sein dürfen. Dies lässt sich entsprechend steuern, indem Sie einen Eintrag mit einem Standardprozentsatz erstellen. </td>
       </tr>
       <tr>
         <td><code>zonecheck.json</code></br><code>regioncheck.json</code></td>
-        <td> Dies sind Beispiele für eindeutige Schlüssel, für die Regeln festgelegt werden sollen. Die Namen der Schlüssel können beliebig gewählt werden; die Informationen werden von den festgelegten Konfigurationen im Schlüssel geparst. Für jeden definierten Schlüssel kann jeweils nur ein einziger Wert für <code>NodeSelectorKey</code> und <code>NodeSelectorValue</code> festgelegt werden. Wenn Sie Regeln für mehr als eine Region oder mehr als einen Standort (Rechenzentrum) festlegen wollen, müssen Sie jeweils einen neuen Schlüsseleintrag erstellen. </td>
+        <td> Dies sind Beispiele für eindeutige Schlüssel, für die Regeln festgelegt werden sollen. Die Namen der Schlüssel können beliebig gewählt werden; die Informationen werden von den festgelegten Konfigurationen im Schlüssel geparst. Für jeden definierten Schlüssel kann jeweils nur ein einziger Wert für <code>NodeSelectorKey</code> und <code>NodeSelectorValue</code> festgelegt werden. Wenn Sie Regeln für mehr als eine Region oder mehr als einen Standort (Rechenzentrum) festlegen möchten, müssen Sie jeweils einen neuen Schlüsseleintrag erstellen. </td>
       </tr>
       <tr>
         <td><code>MaxUnavailablePercentage</code></td>

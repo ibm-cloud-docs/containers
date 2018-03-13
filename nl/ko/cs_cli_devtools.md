@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-01-02"
+lastupdated: "2017-01-24"
 
 ---
 
@@ -25,7 +25,7 @@ lastupdated: "2017-01-02"
 **팁:** `bx cr` 명령을 찾고 계십니까? [{{site.data.keyword.registryshort_notm}} CLI 참조](/docs/cli/plugins/registry/index.html)를 확인하십시오. `kubectl` 명령을 찾고 계십니까? [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)를 참조하십시오.
 
 
-<!--[https://github.ibm.com/alchemy-containers/armada-cli ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.ibm.com/alchemy-containers/armada-cli)-->
+
 
 <table summary="{{site.data.keyword.Bluemix_notm}}에서 클러스터를 작성하기 위한 명령">
  <thead>
@@ -176,7 +176,7 @@ bx plugin list
 ### bx cs alb-get --albID ALB_ID
 {: #cs_alb_get}
 
-애플리케이션 로드 밸런서의 세부사항을 보십시오.
+애플리케이션 로드 밸런서의 세부사항을 봅니다.
 
 <strong>명령 옵션</strong>:
 
@@ -212,12 +212,12 @@ bx plugin list
 ### bx cs apiserver-config-set
 {: #cs_apiserver_config_set}
 
-클러스터의 Kubernetes API 서버 구성에 대한 한 옵션을 설정하십시오. 이 명령은 설정할 구성 옵션에 대한 다음 부속 명령 중 하나와 결합되어야 합니다.
+클러스터의 Kubernetes API 서버 구성에 대한 한 옵션을 설정합니다. 이 명령은 설정할 구성 옵션에 대한 다음 하위 명령 중 하나와 결합되어야 합니다.
 
 #### bx cs apiserver-config-get audit-webhook CLUSTER
 {: #cs_apiserver_api_webhook_get}
 
-API 서버 감사 로그를 전송 중인 원격 로깅 서비스의 URL을 보십시오. API 서버 구성을 위한 웹후크 백엔드를 작성할 때 URL이 지정되었습니다.
+API 서버 감사 로그를 전송 중인 원격 로깅 서비스의 URL을 봅니다. URL은 API 서버 구성을 위한 웹후크 백엔드를 작성할 때 지정되었습니다.
 
 <strong>명령 옵션</strong>:
 
@@ -236,7 +236,7 @@ API 서버 감사 로그를 전송 중인 원격 로깅 서비스의 URL을 보�
 #### bx cs apiserver-config-set audit-webhook CLUSTER [--remoteServer SERVER_URL_OR_IP][--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH][--clientKey CLIENT_KEY_PATH]
 {: #cs_apiserver_api_webhook_set}
 
-API 서버 구성을 위한 웹후크 백엔드를 설정하십시오. 웹후크 백엔드는 API 서버 감사 로그를 원격 서버로 전달합니다. 웹후크 구성은 사용자가 이 명령의 플래그에 제공하는 정보를 기반으로 작성됩니다. 이 플래그에 정보를 제공하지 않은 경우에는 기본 웹후크 구성이 사용됩니다.
+API 서버 구성을 위한 웹후크 백엔드를 설정합니다. 웹후크 백엔드는 API 서버 감사 로그를 원격 서버로 전달합니다. 웹후크 구성은 사용자가 이 명령의 플래그에 제공하는 정보를 기반으로 작성됩니다. 이 플래그에 정보를 제공하지 않은 경우에는 기본 웹후크 구성이 사용됩니다.
 
 <strong>명령 옵션</strong>:
 
@@ -267,7 +267,7 @@ API 서버 구성을 위한 웹후크 백엔드를 설정하십시오. 웹후크
 #### bx cs apiserver-config-unset audit-webhook CLUSTER
 {: #cs_apiserver_api_webhook_unset}
 
-클러스터의 API 서버를 위한 웹후크 백엔드 구성을 사용 안함으로 설정하십시오. 웹후크 백엔드를 사용 안함으로 설정하면 원격 서버로의 API 서버 감사 로그 전달이 중지됩니다.
+클러스터의 API 서버를 위한 웹후크 백엔드 구성을 사용 안함으로 설정합니다. 웹후크 백엔드를 사용 안함으로 설정하면 원격 서버로의 API 서버 감사 로그 전달이 중지됩니다.
 
 <strong>명령 옵션</strong>:
 
@@ -306,7 +306,7 @@ API 서버 구성을 위한 웹후크 백엔드를 설정하십시오. 웹후크
 ### bx cs cluster-config CLUSTER [--admin][--export]
 {: #cs_cluster_config}
 
-로그인한 다음 클러스터에 연결할 Kubernetes 구성 데이터 및 인증서를 다운로드하고 `kubectl` 명령을 실행하십시오. 파일은 `user_home_directory/.bluemix/plugins/container-service/clusters/<cluster_name>`에 다운로드됩니다.
+로그인한 다음 클러스터에 연결할 Kubernetes 구성 데이터 및 인증서를 다운로드하고 `kubectl` 명령을 실행합니다. 파일은 `user_home_directory/.bluemix/plugins/container-service/clusters/<cluster_name>`에 다운로드됩니다.
 
 **명령 옵션**:
 
@@ -340,7 +340,7 @@ bx cs cluster-config my_cluster
 <dl>
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
 
-<dd>표준 클러스터를 작성하기 위한 YAML 파일의 경로입니다. 이 명령에 제공된 옵션을 사용하여 클러스터의 특징을 정의하지 않고 YAML 파일을 사용할 수 있습니다.  이 값은 표준 클러스터의 경우 선택사항이며 라이트 클러스터에는 사용할 수 없습니다.
+<dd>표준 클러스터를 작성하기 위한 YAML 파일의 경로입니다. 이 명령에 제공된 옵션을 사용하여 클러스터의 특징을 정의하지 않고 YAML 파일을 사용할 수 있습니다.  이 값은 표준 클러스터의 경우 선택사항이며 무료 클러스터에는 사용할 수 없습니다.
 
 <p><strong>참고:</strong> 명령에서 YAML 파일의 매개변수와 동일한 옵션을 제공하면 명령의 값이 YAML의 값보다 우선합니다. 예를 들어, YAML 파일의 위치를 정의하고 명령에서 <code>--location</code> 옵션을 사용하십시오. 그러면 명령 옵션에 입력한 값이 YAML 파일의 값을 대체합니다.
 
@@ -406,11 +406,11 @@ kube-version: <em>&lt;kube-version&gt;</em>
     </p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
-<dd>작업자 노드에 대한 하드웨어 격리의 레벨입니다. 사용자 전용으로만 실제 리소스를 사용 가능하게 하려면 dedicated를 사용하고, 실제 리소스를 다른 IBM 고객과 공유하도록 허용하려면 shared를 사용하십시오. 기본값은 shared입니다.   이 값은 표준 클러스터의 경우 선택사항이며 라이트 클러스터에는 사용할 수 없습니다.</dd>
+<dd>작업자 노드에 대한 하드웨어 격리의 레벨입니다. 사용자 전용으로만 실제 리소스를 사용 가능하게 하려면 dedicated를 사용하고, 실제 리소스를 다른 IBM 고객과 공유하도록 허용하려면 shared를 사용하십시오. 기본값은 shared입니다.  이 값은 표준 클러스터의 경우 선택사항이며 무료 클러스터에는 사용할 수 없습니다.</dd>
 
 <dt><code>--location <em>LOCATION</em></code></dt>
 <dd>클러스터를 작성하려는 위치입니다. 사용 가능한 위치는 사용자가 로그인한 {{site.data.keyword.Bluemix_notm}} 지역에 따라 다릅니다. 
-최고의 성능을 위해서는 실제로 사용자와 가장 가까운 지역을 선택하십시오.  이 값은 표준 클러스터의 경우 필수이며 라이트 클러스터의 경우 선택사항입니다.
+최고의 성능을 위해서는 실제로 사용자와 가장 가까운 지역을 선택하십시오.  이 값은 표준 클러스터의 경우 필수이며 무료 클러스터의 경우 선택사항입니다.
 
 <p>[사용 가능한 위치](cs_regions.html#locations)를 검토하십시오.
 </p>
@@ -419,7 +419,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 </dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>선택하는 시스템 유형은 작업자 노드에 배치된 컨테이너가 사용할 수 있는 메모리와 디스크 공간의 양에 영향을 줍니다. 사용 가능한 시스템 유형을 나열하려면 [bx cs machine-types <em>LOCATION</em>](#cs_machine_types)을 참조하십시오.   이 값은 표준 클러스터의 경우 필수이며 라이트 클러스터에는 사용할 수 없습니다.</dd>
+<dd>선택하는 시스템 유형은 작업자 노드에 배치된 컨테이너가 사용할 수 있는 메모리와 디스크 공간의 양에 영향을 줍니다. 사용 가능한 시스템 유형을 나열하려면 [bx cs machine-types <em>LOCATION</em>](#cs_machine_types)을 참조하십시오.  이 값은 표준 클러스터의 경우 필수이며 무료 클러스터에는 사용할 수 없습니다.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
 <dd>클러스터의 이름입니다.  이 값은 필수입니다.</dd>
@@ -434,7 +434,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <dd>
 
 <ul>
-<li>라이트 클러스터에는 이 매개변수를 사용할 수 없습니다.</li>
+<li>무료 클러스터에는 이 매개변수를 사용할 수 없습니다.</li>
 <li>이 표준 클러스터가 이 위치에서 작성하는 첫 번째 표준 클러스터인 경우 이 플래그를 포함하지 마십시오. 클러스터가 작성되면 프라이빗 VLAN이 작성됩니다.</li>
 <li>이 위치에서 이전에 표준 클러스터를 작성했거나 IBM Cloud 인프라(SoftLayer)에서 이전에 프라이빗 VLAN을 작성한 경우 이 프라이빗 VLAN을 지정해야 합니다.
 
@@ -448,7 +448,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
 <dd>
 <ul>
-<li>라이트 클러스터에는 이 매개변수를 사용할 수 없습니다.</li>
+<li>무료 클러스터에는 이 매개변수를 사용할 수 없습니다.</li>
 <li>이 표준 클러스터가 이 위치에서 작성하는 첫 번째 표준 클러스터인 경우 이 플래그를 사용하지 마십시오. 클러스터가 작성되면 퍼블릭 VLAN이 작성됩니다.</li>
 <li>이 위치에서 이전에 표준 클러스터를 작성했거나 IBM Cloud 인프라(SoftLayer)에서 이전에 퍼블릭 VLAN을 작성한 경우 해당 퍼블릭 VLAN을 지정해야 합니다.
 
@@ -460,7 +460,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <p>특정 위치에 대한 퍼블릭 VLAN이 이미 있는지 찾거나 기존 퍼블릭 VLAN의 이름을 찾으려면 <code>bx cs vlans <em>&lt;location&gt;</em></code>을 실행하십시오.</p></dd>
 
 <dt><code>--workers WORKER</code></dt>
-<dd>클러스터에 배치하려는 작업자 노드의 수입니다. 이 옵션을 지정하지 않으면 1개의 작업자 노드가 있는 클러스터가 작성됩니다. 이 값은 표준 클러스터의 경우 선택사항이며 라이트 클러스터에는 사용할 수 없습니다.
+<dd>클러스터에 배치하려는 작업자 노드의 수입니다. 이 옵션을 지정하지 않으면 1개의 작업자 노드가 있는 클러스터가 작성됩니다. 이 값은 표준 클러스터의 경우 선택사항이며 무료 클러스터에는 사용할 수 없습니다.
 
 <p><strong>참고:</strong> 모든 작업자 노드에는 클러스터가 작성된 이후 수동으로 변경될 수 없는 고유 작업자 노드 ID 및 도메인 이름이 지정됩니다. ID 또는 도메인 이름을 변경하면 Kubernetes 마스터가 클러스터를 관리할 수 없습니다.</p></dd>
 
@@ -480,7 +480,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
   ```
   {: pre}
 
-  라이트 클러스터의 예:
+  무료 클러스터의 예:
 
   ```
   bx cs cluster-create --name my_cluster
@@ -599,7 +599,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 ### bx cs cluster-services CLUSTER [--namespace KUBERNETES_NAMESPACE][--all-namespaces]
 {: #cs_cluster_services}
 
-클러스터에서 한 개 또는 모든 Kubernetes 네임스페이스에 바인드된 서비스를 나열하십시오. 옵션이 지정되지 않은 경우 기본 네임스페이스를 위한 서비스가 표시됩니다.
+클러스터에서 한 개 또는 모든 Kubernetes 네임스페이스에 바인드된 서비스를 나열합니다. 옵션이 지정되지 않은 경우 기본 네임스페이스를 위한 서비스가 표시됩니다.
 
 <strong>명령 옵션</strong>:
 
@@ -871,13 +871,13 @@ API 키를 생성하려면 다음을 수행하십시오.
 ### bx cs init [--host HOST]
 {: #cs_init}
 
-{{site.data.keyword.containershort_notm}} 플러그인을 초기화하거나 Kubernetes 클러스터를 작성 또는 액세스할 지역을 지정하십시오.
+{{site.data.keyword.containershort_notm}} 플러그인을 초기화하거나 Kubernetes 클러스터를 작성 또는 액세스할 지역을 지정합니다.
 
 <strong>명령 옵션</strong>:
 
    <dl>
    <dt><code>--host <em>HOST</em></code></dt>
-   <dd>사용할 {{site.data.keyword.containershort_notm}} API 엔드포인트입니다.  이 값은 선택사항입니다. [사용 가능한 API 엔드포인트 값을 보십시오. ](cs_regions.html#container_regions)</dd>
+   <dd>사용할 {{site.data.keyword.containershort_notm}} API 엔드포인트입니다. 이 값은 선택사항입니다. [사용 가능한 API 엔드포인트 값을 보십시오.](cs_regions.html#container_regions)</dd>
    </dl>
 
 
@@ -906,7 +906,7 @@ API 키를 생성하려면 다음을 수행하십시오.
 ###   bx cs locations
 {: #cs_datacenters}
 
-사용자가 클러스터를 작성하기 위해 사용할 수 있는 위치의 목록을 보십시오.
+사용자가 클러스터를 작성하기 위해 사용할 수 있는 위치의 목록을 봅니다.
 
 <strong>명령 옵션</strong>:
 
@@ -1019,7 +1019,7 @@ API 키를 생성하려면 다음을 수행하십시오.
 ### bx cs logging-config-update CLUSTER LOG_CONFIG_ID [--hostname LOG_SERVER_HOSTNAME_OR_IP][--port LOG_SERVER_PORT] [--space CLUSTER_SPACE][--org CLUSTER_ORG] --type LOG_TYPE [--json]
 {: #cs_logging_update}
 
-로그 전달 구성의 세부사항을 업데이트하십시오.
+로그 전달 구성의 세부사항을 업데이트합니다.
 
 <strong>명령 옵션</strong>:
 
@@ -1233,7 +1233,7 @@ IBM Cloud 인프라(SoftLayer) 계정의 위치에 사용 가능한 퍼블릭 �
 ### bx cs worker-add --cluster CLUSTER [--file FILE_LOCATION][--hardware HARDWARE] --machine-type MACHINE_TYPE --number NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt]
 {: #cs_worker_add}
 
-표준 클러스터에 작업자 노드를 추가하십시오.
+표준 클러스터에 작업자 노드를 추가합니다.
 
 <strong>명령 옵션</strong>:
 
@@ -1340,7 +1340,7 @@ workerNum: <em>&lt;number_workers&gt;</em>
 ### bx cs worker-get [CLUSTER_NAME_OR_ID] WORKER_NODE_ID
 {: #cs_worker_get}
 
-작업자 노드의 세부사항을 보십시오.
+작업자 노드의 세부사항을 봅니다.
 
 <strong>명령 옵션</strong>:
 

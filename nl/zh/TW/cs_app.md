@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -36,13 +36,14 @@ lastupdated: "2018-01-11"
 <br />
 
 
-## 部署規劃
+## 規劃高可用性部署
 {: #highly_available_apps}
 
 將設定分佈到越多個工作者節點及叢集，使用者遇到應用程式關閉的可能性越低。
-{:shortdesc}
 
-檢閱這些可能的應用程式設定，它們依遞增的可用性程度進行排序：
+
+檢閱下列潛在的應用程式設定，它們依遞增的可用性程度進行排序：
+{:shortdesc}
 
 ![應用程式高可用性階段](images/cs_app_ha_roadmap.png)
 
@@ -63,8 +64,12 @@ lastupdated: "2018-01-11"
 <dt>為應用程式的工作負載包含足夠的抄本，然後加兩個</dt>
 <dd>為了讓應用程式具備高可用性以及更大的失敗復原力，請考慮包含多於最小值的額外抄本來處理預期工作負載。額外的抄本可以在 Pod 當機，而抄本集尚未回復當機的 Pod 時，處理工作負載。為了預防兩者同時失敗，請包含兩個額外的抄本。此設定是 N+2 型樣，其中 N 是處理送入工作負載的抄本數，而 +2 是額外的兩個抄本。您可以在叢集中有任意數量的 Pod，只要叢集有足夠的空間容納它們即可。</dd>
 <dt>將 Pod 分散於多個節點（反親緣性）</dt>
-<dd>當您建立部署時，可以將每一個 Pod 部署至相同的工作者節點。這種 Pod 存在於相同工作者節點的設定，稱為親緣性或共置。為了保護應用程式不受工作者節點故障影響，您可以使用 <strong>podAntiAffinity</strong> 選項，強制部署將 Pod 分散至多個工作者節點。此選項僅適用於標準叢集。</br></br>
-<strong>附註：</strong>下列 YAML 檔案會強制將每個 Pod 部署至不同的工作者節點。當您定義的抄本多於叢集中可用的工作者節點時，只有已部署的抄本數可以滿足反親緣性需求。任何其他抄本都會維持在擱置狀態，直到有其他工作者節點新增至叢集為止。<pre class="codeblock">
+<dd>當您建立部署時，可以將每一個 Pod 部署至相同的工作者節點。這種 Pod 存在於相同工作者節點的設定，稱為親緣性或共置。為了保護應用程式不受工作者節點故障影響，您可以使用 <strong>podAntiAffinity</strong> 選項，強制部署將 Pod 分散至多個工作者節點。此選項僅適用於標準叢集。
+
+</br></br>
+<strong>附註：</strong>下列 YAML 檔案會強制將每個 Pod 部署至不同的工作者節點。當您定義的抄本多於叢集中可用的工作者節點時，只有已部署的抄本數可以滿足反親緣性需求。任何其他抄本都會維持在擱置狀態，直到有其他工作者節點新增至叢集為止。
+
+<pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Deployment
     metadata:
@@ -110,14 +115,16 @@ spec:
 
 </dd>
 <dt>將 Pod 分散在多個位置或地區</dt>
-<dd>為了保護應用程式不受位置或地區故障的影響，您可以在另一個位置或地區建立第二個叢集，並使用部署 YAML 來為應用程式部署複製的抄本集。透過在叢集前面新增共用路徑及負載平衡器，您可以將工作負載分散至各位置及地區。如需在叢集之間共用路徑的相關資訊，請參閱<a href="cs_clusters.html#clusters" target="_blank">叢集的高可用性</a>。如需詳細資料，請檢閱<a href="cs_clusters.html#planning_clusters" target="_blank">高可用性部署</a>的選項。</dd>
+<dd>為了保護應用程式不受位置或地區故障的影響，您可以在另一個位置或地區建立第二個叢集，並使用部署 YAML 來為應用程式部署複製的抄本集。透過在叢集前面新增共用路徑及負載平衡器，您可以將工作負載分散至各位置及地區。如需在叢集之間共用路徑的相關資訊，請參閱<a href="cs_clusters.html#clusters" target="_blank">叢集的高可用性</a>。
+
+如需詳細資料，請檢閱<a href="cs_clusters.html#planning_clusters" target="_blank">高可用性部署</a>的選項。</dd>
 </dl>
 
 
 ### 最小應用程式部署
 {: #minimal_app_deployment}
 
-精簡或標準叢集中的基本應用程式部署可能包括下列元件。
+免費或標準叢集中的基本應用程式部署可能包括下列元件。
 {:shortdesc}
 
 ![部署設定](images/cs_app_tutorial_components1.png)
@@ -263,6 +270,8 @@ Kubernetes Secret 是一種儲存機密資訊（例如使用者名稱、密碼�
 </tr>
 <tr>
 <td>選用項目：如果不是使用 ingress-secret，請配置 Ingress 服務與 TLS 搭配。<p><b>附註</b>：依預設，TLS 已啟用，且已針對「TLS 連線」建立 Secret。
+
+
 
 若要檢視預設 TLS Secret，請執行下列指令：
 <pre>
@@ -520,7 +529,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
         ```
         {: pre}
 
-    2.  回復為前一個版本，或指定修訂版。若要回復為前一個版本，請使用下列指令。
+    2.  回復至舊版，或指定修訂版。若要回復至舊版，請使用下列指令。
 
         ```
         kubectl rollout undo deployment/<depoyment_name> --to-revision=<number>

@@ -16,9 +16,9 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# Essa página foi movida!
+# O conteúdo que você está procurando foi movido.
 
-Localize os tópicos aqui:
+Verifique as informações mais recentes em seu novo local:
 - [Ativando o painel do Kubernetes](cs_app.html#cli_dashboard)
 - [Criando segredos](cs_app.html#secrets)
 - [Permitindo o acesso público a apps](cs_network_planning.html#planning)

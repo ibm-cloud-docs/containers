@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-06"
 
 ---
 
@@ -22,6 +22,8 @@ lastupdated: "2018-01-12"
 公開埠並使用可攜式 IP 位址，讓負載平衡器可以存取應用程式。使用公用 IP 位址，將應用程式設為可在網際網路上進行存取，或使用專用 IP 位址，將應用程式設為可在專用基礎架構網路上進行存取。
 {:shortdesc}
 
+
+
 ## 使用負載平衡器服務類型來配置應用程式的存取
 {: #config}
 
@@ -30,7 +32,7 @@ lastupdated: "2018-01-12"
 
 負載平衡器的可攜式 IP 位址會自動進行指派，而且不會在您新增或移除工作者節點時變更。因此，負載平衡器服務的高可用性高於 NodePort 服務。使用者可以選取負載平衡器的任何埠，而不只限於 NodePort 埠範圍。您可以針對 TCP 及 UDP 通訊協定使用負載平衡器服務。
 
-**附註：**負載平衡器服務不支援 TLS 終止。如果您的應用程式需要 TLS 終止，您可以使用 [Ingress](cs_ingress.html) 來公開應用程式，或配置應用程式來管理 TLS 終止。
+**附註**：LoadBalancer 服務不支援 TLS 終止。如果您的應用程式需要 TLS 終止，您可以使用 [Ingress](cs_ingress.html) 來公開應用程式，或配置應用程式來管理 TLS 終止。
 
 開始之前：
 
@@ -43,6 +45,7 @@ lastupdated: "2018-01-12"
 1.  [將應用程式部署至叢集](cs_app.html#app_cli)。將應用程式部署至叢集時，會自動建立一個以上的 Pod，以在容器中執行您的應用程式。請確定您已將標籤新增至您部署中配置檔的 meta 資料區段。此標籤是識別您應用程式執行所在之所有 Pod 的必要項目，如此才能將 Pod 包含在負載平衡中。
 2.  為您要公開的應用程式建立負載平衡器服務。若要讓您的應用程式可在公用網際網路或專用網路上使用，請建立應用程式的 Kubernetes 服務。請配置服務，以將所有構成應用程式的 Pod 包含在負載平衡中。
     1.  例如，建立名稱為 `myloadbalancer.yaml` 的服務配置檔。
+
     2.  為您要公開的應用程式定義負載平衡器服務。
         - 如果叢集是在公用 VLAN 上，則會使用可攜式公用 IP 位址。大部分叢集都在公用 VLAN 上。
         - 如果您的叢集只能在專用 VLAN 上使用，則會使用可攜式專用 IP 位址。
@@ -143,6 +146,7 @@ lastupdated: "2018-01-12"
     Labels:                 <none>
     Selector:               <selectorkey>=<selectorvalue>
     Type:                   LoadBalancer
+    Location:               dal10
     IP:                     10.10.10.90
     LoadBalancer Ingress:   192.168.10.38
     Port:                   <unset> 8080/TCP
@@ -150,14 +154,16 @@ lastupdated: "2018-01-12"
     Endpoints:              172.30.171.87:8080
     Session Affinity:       None
     Events:
-    FirstSeen LastSeen Count From   SubObjectPath Type  Reason   Message
-      --------- -------- ----- ----   ------------- -------- ------   -------
-      10s  10s  1 {service-controller }   Normal  CreatingLoadBalancer Creating load balancer
-      10s  10s  1 {service-controller }   Normal  CreatedLoadBalancer Created load balancer
+    FirstSeen	LastSeen	Count	From			SubObjectPath	Type		Reason			Message
+      ---------	--------	-----	----			-------------	--------	------			-------
+      10s		10s		1	{service-controller }			Normal		CreatingLoadBalancer	Creating load balancer
+      10s		10s		1	{service-controller }			Normal		CreatedLoadBalancer	Created load balancer
     ```
     {: screen}
 
-    **LoadBalancer Ingress** IP 位址是已指派給負載平衡器服務的可攜式 IP 位址。
+        **LoadBalancer Ingress** IP 位址是已指派給負載平衡器服務的可攜式 IP 位址。
+
+
 4.  如果您已建立公用負載平衡器，請從網際網路存取您的應用程式。
     1.  開啟偏好的 Web 瀏覽器。
     2.  輸入負載平衡器的可攜式公用 IP 位址及埠。在上述範例中，`192.168.10.38` 可攜式公用 IP 位址已指派給負載平衡器服務。

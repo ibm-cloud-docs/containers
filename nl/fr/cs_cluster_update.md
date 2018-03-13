@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-02"
 
 ---
 
@@ -33,7 +33,7 @@ Le diagramme suivant illustre la procédure que vous pourriez suivre pour mettre
 
 Figure 1. Diagramme de la procédure de mise à jour du maître Kubernetes
 
-**Attention** : Vous ne pouvez pas revenir à une version antérieure une fois réalisée la procédure de mise à jour. Prenez soin d'utiliser un cluster de test et de suivre les instructions afin d'éviter des problèmes potentiels avant de mettre à jour votre maître de production.
+**Attention** : Vous ne pouvez pas revenir à une version antérieure du cluster une fois réalisée la procédure de mise à jour. Prenez soin d'utiliser un cluster de test et de suivre les instructions afin d'éviter des problèmes potentiels avant de mettre à jour votre maître de production.
 
 Pour des mises à jour _majeures_ ou _mineures_, procédez comme suit :
 
@@ -63,11 +63,11 @@ Dans le cadre de la procédure de mise à jour, des noeuds spécifiques deviendr
 
 Comment sont définies les clés ?
 
-Dans la mappe de configuration, une section contient les informations sur les données. Vous pouvez définir jusqu'à 10 règles distinctes s'exécutant à tout moment. Pour pouvoir mettre à niveau un noeud worker, les noeuds doivent passer chaque règle définie dans la mappe.
+Dans la section des informations sur les données de la mappe de configuration, vous pouvez définir jusqu'à 10 règles distinctes en vigueur simultanément. Pour pouvoir être mis à niveau, les noeuds worker doivent satisfaire chaque règle définie.
 
 Les clés ont été définies. Que faire maintenant ?
 
-Une fois que vous avez défini vos règles, vous devez exécuter la commande worker-upgrade. Si une réponse positive est renvoyée, les noeuds worker sont placés en file d'attente pour leur mise à niveau. Cependant, la procédure de mise à jour des noeuds n'est pas engagée tant que toutes les règles ne sont pas satisfaites. Une fois les noeuds placés en file d'attente, les règles sont vérifiées périodiquement pour déterminer si l'un des noeuds peut être mis à niveau.
+Après avoir défini vos règles, exécutez la commande `worker-upgrade`. Si une réponse positive est renvoyée, les noeuds worker sont placés en file d'attente pour leur mise à niveau. Cependant, la procédure de mise à jour des noeuds n'est pas engagée tant que toutes les règles ne sont pas satisfaites. Une fois les noeuds placés en file d'attente, les règles sont vérifiées périodiquement pour déterminer si l'un des noeuds peut être mis à niveau.
 
 Que se passe-t-il si je choisis de ne pas définir de mappe de configuration ?
 
@@ -110,20 +110,20 @@ Pour mettre à jour vos noeuds worker, procédez comme suit :
     {:pre}
   <table summary="La première ligne du tableau couvre les deux colonnes. Le reste des lignes doit être lu de gauche à droite, le paramètre figurant dans la première colonne et les descriptions correspondantes dans la seconde colonne.">
     <thead>
-      <th colspan=2><img src="images/idea.png"/> Description des composants</th>
+      <th colspan=2><img src="images/idea.png"/> Description des composants </th>
     </thead>
     <tbody>
       <tr>
         <td><code>defaultcheck.json</code></td>
-        <td> Par défaut, si une mappe de configuration ibm-cluster-update-configuration valide n'est pas définie, seuls 20 % de vos clusters peuvent être indisponibles à un moment donné. Si une ou plusieurs règles valides sont définies sans mappe de configuration par défaut, celle utilisée par défaut autorise 100 % des noeuds worker à être indisponibles à un moment donné. Vous pouvez contrôler ce comportement en créant un pourcentage par défaut. </td>
+        <td> Par défaut, si une mappe de configuration ibm-cluster-update-configuration valide n'est pas définie, seuls 20 % de vos clusters peuvent être indisponibles à un moment donné. Si une ou plusieurs règles valides sont définies sans mappe de configuration globale par défaut celle utilisée par défaut autorise 100 % des noeuds worker à être indisponibles à un moment donné. Vous pouvez contrôler ce comportement en créant un pourcentage par défaut. </td>
       </tr>
       <tr>
         <td><code>zonecheck.json</code></br><code>regioncheck.json</code></td>
-        <td> Exemple de clés uniques pour lesquelles vous désirez définir des règles. Vous pouvez nommer les clés à votre gré ; les informations sont analysées par les configurations définies dans la clé. Pour chaque clé que vous définissez, vous ne pouvez affecter qu'une seule valeur à <code>NodeSelectorKey</code> et <code>NodeSelectorValue</code>. Si vous désirez définir des règles pour plusieurs régions ou emplacements (datacenter), créez une nouvelle entrée de clé. </td>
+        <td> Exemple de clés uniques pour lesquelles vous désirez définir des règles. Vous pouvez nommer les clés à votre gré ; les informations sont analysées par les configurations définies dans la clé. Pour chaque clé que vous définissez, vous ne pouvez affecter qu'une seule valeur à <code>NodeSelectorKey</code> et <code>NodeSelectorValue</code>. Si vous désirez définir des règles pour plusieurs régions ou emplacements (centres de données), créez une nouvelle entrée de clé. </td>
       </tr>
       <tr>
         <td><code>MaxUnavailablePercentage</code></td>
-        <td> Nombre maximal de noeuds autorisés à être indisponibles pour la clé spécifiée, sous forme de pourcentage. Un noeud est indisponible lorsqu'il est en cours de déploiement, de rechargement ou de provisionnement. La mise à niveau des noeuds worker placés en file d'attente est bloquée si les pourcentages maximum disponibles définis sont enfreints. </td>
+        <td> Nombre maximal de noeuds autorisés à être indisponibles pour la clé spécifiée, sous forme de pourcentage. Un noeud est indisponible lorsqu'il est en cours de déploiement, de rechargement ou de provisionnement. La mise à jour des noeuds worker placés en file d'attente est bloquée si les pourcentages maximum définis pour les noeuds indisponibles sont dépassés. </td>
       </tr>
       <tr>
         <td><code>NodeSelectorKey</code></td>
@@ -140,7 +140,7 @@ Pour mettre à jour vos noeuds worker, procédez comme suit :
 
 3. Mettez à jour vos noeuds worker depuis l'interface graphique ou la ligne de commande (CLI).
   * Pour effectuer la mise à jour à partir du tableau de bord {{site.data.keyword.Bluemix_notm}}, accédez à la section `Worker nodes` de votre cluster, et cliquez sur `Update Worker`.
-  * Pour obtenir les ID des noeuds d'agent, exécutez la commande `bx cs workers <cluster_name_or_id>`. Si vous sélectionnez plusieurs noeuds worker, ceux-ci sont placés en file d'attente pour évaluation de la mise à jour. S'ils sont considérés comme prêts au terme de l'évaluation, ils seront mis à jour d'après les règles définies dans les configurations. 
+  * Pour obtenir les ID des noeuds d'agent, exécutez la commande `bx cs workers <cluster_name_or_id>`. Si vous sélectionnez plusieurs noeuds worker, ceux-ci sont placés en file d'attente pour évaluation de la mise à jour. S'ils sont considérés comme prêts au terme de l'évaluation, ils seront mis à jour d'après les règles définies dans les configurations.
 
     ```
     bx cs worker-update <cluster_name_or_id> <worker_node_id1> <worker_node_id2>

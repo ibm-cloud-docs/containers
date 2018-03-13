@@ -24,8 +24,8 @@ lastupdated: "2018-01-11"
 * 회사 네트워크 정책으로 인해 프록시 또는 방화벽을 통해 공용 인터넷 엔드포인트에 액세스하지 못할 때 로컬 시스템에서 [`bx` 명령을 실행](#firewall_bx)하려는 경우
 * 회사 네트워크 정책으로 인해 프록시 또는 방화벽을 통해 공용 인터넷 엔드포인트에 액세스하지 못할 때 로컬 시스템에서 [`kubectl` 명령을 실행](#firewall_kubectl)하려는 경우
 * 회사 네트워크 정책으로 인해 프록시 또는 방화벽을 통해 공용 인터넷 엔드포인트에 액세스하지 못할 때 로컬 시스템에서 [`calicoctl` 명령을 실행](#firewall_calicoctl)하려는 경우
-* 작업자 노드에 대한 방화벽이 설정되었거나 IBM Cloud 인프라(SoftLayer) 계정에서 방화벽 설정이 사용자 정의되었을 때 [Kubernetes 마스터와 작업자 노드 간의 통신을 허용하려는 경우](#firewall_outbound)
-* [클러스터의 외부에서 NodePort 서비스, LoadBalancer 서비스 또는 Ingress에 액세스하려는 경우](#firewall_inbound)
+* 작업자 노드에 대한 방화벽이 설정되었거나 IBM Cloud 인프라(SoftLayer) 계정에서 방화벽 설정이 사용자 정의되었을 때 [Kubernetes 마스터와 작업자 노드 간의 통신을 허용](#firewall_outbound)하려는 경우
+* [클러스터의 외부에서 NodePort 서비스, LoadBalancer 서비스 또는 Ingress에 액세스](#firewall_inbound)하려는 경우
 
 <br />
 
@@ -170,7 +170,8 @@ lastupdated: "2018-01-11"
 ## 클러스터가 인프라 리소스 및 기타 서비스에 액세스하도록 허용
 {: #firewall_outbound}
 
-클러스터가 방화벽 뒤에서 인프라 리소스와 서비스(예: {{.site.data.keyword.containershort_notm}} 지역, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IBM Cloud 인프라(SoftLayer) 사설 IP 및 지속적 볼륨 클레임을 위한 egress)에 액세스할 수 있게 하십시오. {:shortdesc}
+클러스터가 방화벽 뒤에서 인프라 리소스와 서비스(예: {{site.data.keyword.containershort_notm}} 지역, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IBM Cloud 인프라(SoftLayer) 사설 IP 및 지속적 볼륨 클레임을 위한 egress)에 액세스할 수 있게 하십시오.
+{:shortdesc}
 
   1.  클러스터에서 모든 작업자 노드에 대한 공인 IP 주소를 기록해 놓으십시오.
 
@@ -191,8 +192,8 @@ lastupdated: "2018-01-11"
     <tbody>
       <tr>
         <td>AP 북부</td>
-        <td>hkg02<br>sng01<br>tok02</td>
-        <td><code>169.56.132.234</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
+        <td>hkg02<br>seo01<br>sng01<br>tok02</td>
+        <td><code>169.56.132.234</code><br><code>161.202.126.210</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
        </tr>
       <tr>
          <td>AP 남부</td>
@@ -211,21 +212,21 @@ lastupdated: "2018-01-11"
       </tr>
       <tr>
         <td>미국 동부</td>
-         <td><ph class="mon">mon01<br></ph>tor01<br>wdc06<br>wdc07</td>
-         <td><ph class ="mon"><code>169.54.126.219</code><br></ph><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+         <td>mon01<br>tor01<br>wdc06<br>wdc07</td>
+         <td><code>169.54.126.219</code><br><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
       </tr>
       <tr>
         <td>미국 남부</td>
-        <td>dal10<br>dal12<br>dal13</td>
-        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
+        <td>dal10<br>dal12<br>dal13<br>sao01</td>
+        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>169.57.151.10</code></td>
       </tr>
       </tbody>
     </table>
 </p>
 
-  3.  작업자 노드에서 [{{site.data.keyword.registrylong_notm}} 지역](/docs/services/Registry/registry_overview.html#registry_regions)으로의 발신 네트워크 트래픽을 허용하십시오. 
+  3.  작업자 노드에서 [{{site.data.keyword.registrylong_notm}} 지역](/docs/services/Registry/registry_overview.html#registry_regions)으로의 발신 네트워크 트래픽을 허용하십시오.
       - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
-      - <em>&lt;registry_publicIP&gt;</em>를 트래픽을 허용하려는 레지스트리 IP 주소로 대체하십시오. 국제 레지스트리는 IBM 제공 공용 이미지를 저장하고 지역 레지스트리는 사용자의 개인용 이미지 또는 공용 이미지를 저장합니다.
+      - <em>&lt;registry_publicIP&gt;</em>를 트래픽을 허용하려는 레지스트리 IP 주소로 대체하십시오. 글로벌 레지스트리는 IBM 제공 공용 이미지를 저장하고 지역 레지스트리는 사용자의 개인용 이미지 또는 공용 이미지를 저장합니다.
         <p>
 <table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
       <thead>
@@ -235,7 +236,7 @@ lastupdated: "2018-01-11"
       </thead>
       <tbody>
         <tr>
-          <td>컨테이너 지역 전체의 국제 레지스트리</td>
+          <td>컨테이너 지역 전체의 글로벌 레지스트리</td>
           <td>registry.bluemix.net</td>
           <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
         </tr>
@@ -307,7 +308,12 @@ lastupdated: "2018-01-11"
             <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
            </tr>
           <tr>
-           <td>EU 중심부, UK 남부</td>
+           <td>영국 남부</td>
+           <td>ingest.logging.eu-gb.bluemix.net</td>
+           <td><code>169.50.115.113</code></td>
+          </tr>
+          <tr>
+           <td>중앙 유럽</td>
            <td>ingest-eu-fra.logging.bluemix.net</td>
            <td><code>158.177.88.43</code><br><code>159.122.87.107</code></td>
           </tr>
@@ -322,13 +328,13 @@ lastupdated: "2018-01-11"
 
   5. 사설 방화벽의 경우 적절한 IBM Cloud 인프라(SoftLayer) 사설 IP 범위를 허용하십시오. [이 링크](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)의 **백엔드(사설) 네트워크** 섹션부터 참조하십시오.
       - 사용 중인 [지역 내의 위치](cs_regions.html#locations)를 모두 추가하십시오.
-      - dal01 위치(데이터 센터)를 추가해야 합니다.
+      - dal01 위치(데이터센터)를 추가해야 합니다.
       - 클러스터 부트스트랩 프로세스를 허용하려면 포트 80 및 443을 여십시오.
 
-  6. {: #pvc}데이터 스토리지에 대한 지속적 볼륨 클레임을 작성하려면 클러스터가 있는 위치(데이터 센터)의 [IBM Cloud 인프라(SoftLayer) IP 주소](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)에 대해 방화벽을 통한 egress 액세스를 허용하십시오.
-      - 클러스터의 위치(데이터 센터)를 찾으려면 `bx cs clusters`를 실행하십시오.
+  6. {: #pvc}데이터 스토리지에 대한 지속적 볼륨 클레임을 작성하려면 클러스터가 있는 위치(데이터센터)의 [IBM Cloud 인프라(SoftLayer) IP 주소](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)에 대해 방화벽을 통한 egress 액세스를 허용하십시오.
+      - 클러스터의 위치(데이터센터)를 찾으려면 `bx cs clusters`를 실행하십시오.
       - **프론트 엔드(공용) 네트워크**와 **백엔드(사설) 네트워크** 둘 다에 대해 IP 범위에 대한 액세스를 허용하십시오.
-      - **백엔드(사설) 네트워크**를 위해 dal01 위치(데이터 센터)를 추가해야 합니다.
+      - **백엔드(사설) 네트워크**를 위해 dal01 위치(데이터센터)를 추가해야 합니다.
 
 <br />
 

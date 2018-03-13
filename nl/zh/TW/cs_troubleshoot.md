@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-09"
+lastupdated: "2018-01-31"
 
 ---
 
@@ -55,30 +55,34 @@ lastupdated: "2018-01-09"
     <th>說明</th>
     </thead>
     <tbody>
+  
+  <tr>
+      <td>Critical</td>
+      <td>無法呼叫到 Kubernetes 主節點，或叢集中的所有工作者節點都已關閉。</td>
+     </tr>
+  
       <tr>
         <td>Deploying</td>
         <td>Kubernetes 主節點尚未完整部署。您無法存取叢集。</td>
        </tr>
        <tr>
-        <td>Pending</td>
-        <td>已部署 Kubernetes 主節點。正在佈建工作者節點，因此還無法在叢集中使用。您可以存取叢集，但無法將應用程式部署至叢集。</td>
-      </tr>
-      <tr>
         <td>Normal</td>
         <td>叢集中的所有工作者節點都已開始執行。您可以存取叢集，並將應用程式部署至叢集。</td>
      </tr>
+       <tr>
+        <td>Pending</td>
+        <td>已部署 Kubernetes 主節點。正在佈建工作者節點，因此還無法在叢集中使用。您可以存取叢集，但無法將應用程式部署至叢集。</td>
+      </tr>
+  
      <tr>
         <td>Warning</td>
         <td>叢集中至少有一個工作者節點無法使用，但有其他工作者節點可用，並且可以接管工作負載。</td>
-     </tr>
-     <tr>
-      <td>Critical</td>
-      <td>無法聯繫 Kubernetes 主節點，或叢集中的所有工作者節點都已關閉。</td>
-     </tr>
+     </tr>  
     </tbody>
   </table>
 
-3.  如果叢集處於 **Warning** 或 **Critical** 狀態，或停留在 **Pending** 狀態很長一段時間，請檢閱工作者節點的狀態。如果叢集處於 **Deploying** 狀態，請等待叢集完整部署，以檢閱叢集的性能。處於 **Normal** 狀態的叢集都會被視為性能良好，因此目前不需要採取動作。
+3.  如果叢集處於 **Warning**、**Critical** 或 **Delete failed** 狀態，或停留在 **Pending** 狀態很長一段時間，請檢閱工作者節點的狀態。如果叢集處於 **Deploying** 狀態，請等待叢集完整部署，以檢閱叢集的性能。處於 **Normal** 狀態的叢集目前不需要採取動作。 
+<p>若要檢閱工作者節點的狀態，請執行下列動作：</p>
 
   ```
   bx cs workers <cluster_name_or_id>
@@ -93,7 +97,7 @@ lastupdated: "2018-01-09"
     <tbody>
       <tr>
        <td>Unknown</td>
-       <td>因下列其中一個原因而無法聯繫 Kubernetes 主節點：<ul><li>您已要求更新 Kubernetes 主節點。在更新期間，無法擷取工作者節點的狀態。</li><li>您可能有額外的防火牆保護工作者節點，或最近變更過防火牆設定。{{site.data.keyword.containershort_notm}} 需要開啟特定 IP 位址及埠，以容許從工作者節點到 Kubernetes 主節點的通訊，反之亦然。如需相關資訊，請參閱[防火牆阻止工作者節點連接](#cs_firewall)。</li><li>Kubernetes 主節點已關閉。請開立 [{{site.data.keyword.Bluemix_notm}} 支援問題單](/docs/support/index.html#contacting-support)，以與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡。</li></ul></td>
+       <td>因下列其中一個原因而無法呼叫到 Kubernetes 主節點：<ul><li>您已要求更新 Kubernetes 主節點。在更新期間，無法擷取工作者節點的狀態。</li><li>您可能有額外的防火牆保護工作者節點，或最近變更過防火牆設定。{{site.data.keyword.containershort_notm}} 需要開啟特定 IP 位址及埠，以容許從工作者節點到 Kubernetes 主節點的通訊，反之亦然。如需相關資訊，請參閱[防火牆阻止工作者節點連接](#cs_firewall)。</li><li>Kubernetes 主節點已關閉。請開立 [{{site.data.keyword.Bluemix_notm}} 支援問題單](/docs/get-support/howtogetsupport.html#getting-customer-support)，以與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡。</li></ul></td>
       </tr>
       <tr>
         <td>Provisioning</td>
@@ -143,11 +147,11 @@ lastupdated: "2018-01-09"
     <tbody>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} 基礎架構異常狀況：您的帳戶目前被禁止訂購「運算實例」。</td>
-        <td>您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶可能無法訂購運算資源。請開立 [{{site.data.keyword.Bluemix_notm}} 支援問題單](/docs/support/index.html#contacting-support)，以與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡。</td>
+        <td>您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶可能無法訂購運算資源。請開立 [{{site.data.keyword.Bluemix_notm}} 支援問題單](/docs/get-support/howtogetsupport.html#getting-customer-support)，以與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡。</td>
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} 基礎架構異常狀況：無法下單。路由器 'router_name' 的資源不足，無法滿足下列來賓的要求：'worker_id'。</td>
-        <td>您選取的 VLAN 與空間不足無法佈建工作者節點之資料中心內的 Pod 相關聯。您可以選擇下列選項：<ul><li>使用不同的資料中心來佈建工作者節點。執行 <code>bx cs locations</code> 來列出可用的資料中心。<li>如果您的現有公用及專用 VLAN 配對與資料中心內的另一個 Pod 相關聯，請改用此 VLAN 配對。<li>請開立 [{{site.data.keyword.Bluemix_notm}} 支援問題單](/docs/support/index.html#contacting-support)，以與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡。</ul></td>
+        <td>您選取的 VLAN 與空間不足無法佈建工作者節點之資料中心內的 Pod 相關聯。您可以選擇下列選項：<ul><li>使用不同的資料中心來佈建工作者節點。執行 <code>bx cs locations</code> 來列出可用的資料中心。<li>如果您的現有公用及專用 VLAN 配對與資料中心內的另一個 Pod 相關聯，請改用此 VLAN 配對。<li>請開立 [{{site.data.keyword.Bluemix_notm}} 支援問題單](/docs/get-support/howtogetsupport.html#getting-customer-support)，以與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡。</ul></td>
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} 基礎架構異常狀況：無法取得 ID 為 &lt;vlan id&gt; 的網路 VLAN。</td>
@@ -155,11 +159,13 @@ lastupdated: "2018-01-09"
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation：針對此訂單提供的位置無效。(HTTP 500)</td>
-        <td>您的 IBM Cloud 基礎架構 (SoftLayer) 未設定成訂購所選取資料中心內的運算資源。請與 [{{site.data.keyword.Bluemix_notm}} 支援中心](/docs/support/index.html#contacting-support)聯絡，驗證已正確設定帳戶。</td>
+        <td>您的 IBM Cloud 基礎架構 (SoftLayer) 未設定成訂購所選取資料中心內的運算資源。請與 [{{site.data.keyword.Bluemix_notm}} 支援中心](/docs/get-support/howtogetsupport.html#getting-customer-support)聯絡，驗證已正確設定帳戶。</td>
        </tr>
        <tr>
         <td>{{site.data.keyword.Bluemix_notm}} 基礎架構異常狀況：使用者沒有新增伺服器的必要 {{site.data.keyword.Bluemix_notm}} 基礎架構許可權
-</br></br>
+
+
+        </br></br>
         {{site.data.keyword.Bluemix_notm}} 基礎架構異常狀況：必須要有許可權才能訂購「項目」。</td>
         <td>您可能沒有從 IBM Cloud 基礎架構 (SoftLayer) 組合佈建工作者節點的必要許可權。請參閱[配置對 IBM Cloud 基礎架構 (SoftLayer) 組合的存取權以建立標準 Kubernetes 叢集](cs_infrastructure.html#unify_accounts)。</td>
       </tr>
@@ -570,11 +576,11 @@ Pod 順利部署至叢集，但容器未啟動。
  </tr>
  <tr>
  <td>已達到日誌儲存空間配額。</td>
- <td>若要增加日誌儲存空間限制，請參閱 <a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs">{{site.data.keyword.loganalysislong_notm}} 文件</a>。</td>
+ <td>若要增加日誌儲存空間限制，請參閱 <a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html">{{site.data.keyword.loganalysislong_notm}} 文件</a>。</td>
  </tr>
  <tr>
  <td>如果您在建立叢集時指定了空間，則帳戶擁有者對該空間沒有「管理員」、「開發人員」或「審核員」許可權。</td>
- <td>若要變更帳戶擁有者的存取權，請執行下列動作：<ol><li>若要找出叢集的帳戶擁有者是誰，請執行 <code>bx cs api-key-info &lt;cluster_name_or_id&gt;</code>。</li><li>若要授與該帳戶擁有者對空間的「管理員」、「開發人員」或「審核員」等 {{site.data.keyword.containershort_notm}} 存取許可權，請參閱<a href="cs_users.html#managing">管理叢集存取</a>。</li><li>若要在許可權變更之後重新整理記載記號，請執行 <code>bx cs logging-config-refresh &lt;cluster_name_or_id&gt;</code>。</li></ol></td>
+ <td>若要變更帳戶擁有者的存取權，請執行下列動作：<ol><li>若要找出叢集的帳戶擁有者是誰，請執行 <code>bx cs api-key-info &lt;cluster_name_or_ID&gt;</code>。</li><li>若要授與該帳戶擁有者對空間的「管理員」、「開發人員」或「審核員」等 {{site.data.keyword.containershort_notm}} 存取許可權，請參閱<a href="cs_users.html#managing">管理叢集存取</a>。</li><li>若要在許可權變更之後重新整理記載記號，請執行 <code>bx cs logging-config-refresh &lt;cluster_name_or_ID&gt;</code>。</li></ol></td>
  </tr>
  </tbody></table>
 
@@ -607,9 +613,10 @@ Pod 順利部署至叢集，但容器未啟動。
         {:pre}
 
   4. 幾分鐘之後，您可以在 Kibana 儀表板中檢視日誌。若要存取 Kibana 儀表板，請移至下列其中一個 URL，然後選取您建立叢集所在的 {{site.data.keyword.Bluemix_notm}} 帳戶。如果您在建立叢集時指定了空間，請改為移至該空間。
-        - 美國南部及美國東部：https://logging.ng.bluemix.net
-        - 英國南部或歐盟中部：https://logging.eu-fra.bluemix.net
-        - 亞太地區南部：https://logging.au-syd.bluemix.net
+      - 美國南部及美國東部：https://logging.ng.bluemix.net
+      - 英國南部：https://logging.eu-gb.bluemix.net
+      - 歐盟中部：https://logging.eu-fra.bluemix.net
+      - 亞太地區南部：https://logging.au-syd.bluemix.net
 
 <br />
 
@@ -645,7 +652,7 @@ Pod 順利部署至叢集，但容器未啟動。
 {: tsCauses}
 負載平衡器服務可能因下列其中一個原因而未正常運作：
 
--   叢集是精簡叢集或只有一個工作者節點的標準叢集。
+-   叢集是免費叢集或只有一個工作者節點的標準叢集。
 -   尚未完整部署叢集。
 -   負載平衡器服務的配置 Script 包含錯誤。
 
@@ -721,20 +728,20 @@ Pod 順利部署至叢集，但容器未啟動。
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
-您已透過在叢集中建立應用程式的 Ingress 資源，來公開應用程式。當您嘗試透過 Ingress 控制器的公用 IP 位址或子網域連接至應用程式時，連線失敗或逾時。
+您已透過在叢集中建立應用程式的 Ingress 資源，來公開應用程式。當您嘗試透過 Ingress 應用程式負載平衡器的公用 IP 位址或子網域連接至應用程式時，連線失敗或逾時。
 
 {: tsCauses}
 Ingress 可能未正常運作，原因如下：
 <ul><ul>
 <li>尚未完整部署叢集。
-<li>叢集已設定為精簡叢集或只有一個工作者節點的標準叢集。
+<li>叢集已設定為免費叢集或只有一個工作者節點的標準叢集。
 <li>Ingress 配置 Script 包含錯誤。
 </ul></ul>
 
 {: tsResolve}
 若要對 Ingress 進行疑難排解，請執行下列動作：
 
-1.  確認您所設定的標準叢集已完整部署並且至少有兩個工作者節點，以確保 Ingress 控制器的高可用性。
+1.  確認您所設定的標準叢集已完整部署並且至少有兩個工作者節點，以確保 Ingress 應用程式負載平衡器的高可用性。
 
   ```
   bx cs workers <cluster_name_or_id>
@@ -743,7 +750,7 @@ Ingress 可能未正常運作，原因如下：
 
     在 CLI 輸出中，確定工作者節點的 **Status** 顯示 **Ready**，而且 **Machine Type** 顯示 **free** 以外的機型。
 
-2.  擷取 Ingress 控制器子網域及公用 IP 位址，然後對其進行連線測試。
+2.  擷取 Ingress 應用程式負載平衡器子網域及公用 IP 位址，然後對其進行連線測試。
 
     1.  擷取 Ingress 控制器子網域。
 
@@ -752,33 +759,33 @@ Ingress 可能未正常運作，原因如下：
       ```
       {: pre}
 
-    2.  對 Ingress 控制器子網域進行連線測試。
+    2.  對 Ingress 應用程式負載平衡器子網域進行連線測試。
 
       ```
       ping <ingress_controller_subdomain>
       ```
       {: pre}
 
-    3.  擷取 Ingress 控制器的公用 IP 位址。
+    3.  擷取 Ingress 應用程式負載平衡器的公用 IP 位址。
 
       ```
       nslookup <ingress_controller_subdomain>
       ```
       {: pre}
 
-    4.  對 Ingress 控制器公用 IP 位址進行連線測試。
+    4.  對 Ingress 應用程式負載平衡器公用 IP 位址進行連線測試。
 
       ```
       ping <ingress_controller_ip>
       ```
       {: pre}
 
-    如果 CLI 傳回 Ingress 控制器公用 IP 位址或子網域的逾時，並且已設定保護工作者節點的自訂防火牆，您可能需要開啟[防火牆](#cs_firewall)中的其他埠及網路群組。
+    如果 CLI 傳回 Ingress 應用程式負載平衡器公用 IP 位址或子網域的逾時，並且已設定保護工作者節點的自訂防火牆，您可能需要開啟[防火牆](#cs_firewall)中的其他埠及網路群組。
 
-3.  如果您要使用自訂網域，請確定使用「網域名稱服務 (DNS)」提供者將自訂網域對映至 IBM 所提供 Ingress 控制器的公用 IP 位址或子網域。
-    1.  如果您已使用 Ingress 控制器子網域，請檢查「標準名稱記錄 (CNAME)」。
-    2.  如果您已使用 Ingress 控制器公用 IP 位址，請確認已在「指標記錄 (PTR)」中將自訂網域對映至可攜式公用 IP 位址。
-4.  檢查 Ingress 配置檔。
+3.  如果您要使用自訂網域，請確定使用「網域名稱服務 (DNS)」提供者將自訂網域對映至 IBM 所提供 Ingress 應用程式負載平衡器的公用 IP 位址或子網域。
+    1.  如果您已使用 Ingress 應用程式負載平衡器子網域，請檢查「標準名稱記錄 (CNAME)」。
+    2.  如果您已使用 Ingress 應用程式負載平衡器公用 IP 位址，請確認已在「指標記錄 (PTR)」中將自訂網域對映至可攜式公用 IP 位址。
+4.  檢查 Ingress 資源配置檔。
 
     ```
     apiVersion: extensions/v1beta1
@@ -801,7 +808,7 @@ Ingress 可能未正常運作，原因如下：
     ```
     {: codeblock}
 
-    1.  確認 Ingress 控制器子網域及 TLS 憑證正確無誤。若要尋找 IBM 提供的子網域及 TLS 憑證，請執行 bx cs cluster-get <cluster_name_or_id>。
+    1.  確認 Ingress 應用程式負載平衡器子網域及 TLS 憑證正確無誤。若要尋找 IBM 提供的子網域及 TLS 憑證，請執行 bx cs cluster-get <cluster_name_or_id>。
     2.  確定應用程式接聽與 Ingress 之 **path** 區段中配置相同的路徑。如果您的應用程式設定成接聽根路徑，請包含 **/** 作為路徑。
 5.  檢查 Ingress 部署，並尋找可能的錯誤訊息。
 
@@ -821,7 +828,7 @@ Ingress 可能未正常運作，原因如下：
     2.  擷取每一個 Ingress Pod 的日誌。
 
       ```
-      kubectl logs <ingress_pod_id> -n kube-system
+      kubectl logs <ingress_pod_id> nginx-ingress -n kube-system
       ```
       {: pre}
 
@@ -919,7 +926,10 @@ Ingress 可能未正常運作，原因如下：
 -   將問題張貼到 [{{site.data.keyword.containershort_notm}} Slack ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-container-service.slack.com)。提示：如果您的 {{site.data.keyword.Bluemix_notm}} 帳戶未使用 IBM ID，請[要求邀請](https://bxcs-slack-invite.mybluemix.net/)以加入此 Slack。
 -   檢閱討論區，以查看其他使用者是否發生過相同的問題。使用討論區詢問問題時，請標記您的問題，讓 {{site.data.keyword.Bluemix_notm}} 開發團隊可以看到它。
 
-    -   如果您在使用 {{site.data.keyword.containershort_notm}} 開發或部署叢集或應用程式時有技術方面的問題，請將問題張貼到 [Stack Overflow ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](http://stackoverflow.com/search?q=bluemix+containers)，並使用 `ibm-bluemix`、`kubernetes` 及 `containers` 來標記問題。
-    -   若為服務及開始使用指示的相關問題，請使用 [IBM developerWorks dW Answers ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 討論區。請包含 `bluemix` 及 `containers` 標籤。如需使用討論區的詳細資料，請參閱[取得協助](/docs/support/index.html#getting-help)。
+    -   如果您在使用 {{site.data.keyword.containershort_notm}} 開發或部署叢集或應用程式時有技術方面的問題，請將問題張貼到 [Stack Overflow ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)，並使用 `ibm-cloud`、`kubernetes` 及 `containers` 來標記問題。
+    -   若為服務及開始使用指示的相關問題，請使用 [IBM developerWorks dW Answers ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 討論區。請包含 `ibm-cloud` 及 `containers` 標籤。如需使用討論區的詳細資料，請參閱[取得協助](/docs/get-support/howtogetsupport.html#using-avatar)。
 
--   與「IBM 支援中心」聯絡。如需開立 IBM 支援問題單或是支援層次與問題單嚴重性的相關資訊，請參閱[與支援中心聯絡](/docs/support/index.html#contacting-support)。
+-   與「IBM 支援中心」聯絡。如需開立 IBM 支援問題單或是支援層次與問題單嚴重性的相關資訊，請參閱[與支援中心聯絡](/docs/get-support/howtogetsupport.html#getting-customer-support)。
+
+{:tip}
+報告問題時，請包含您的叢集 ID。若要取得叢集 ID，請執行 `bx cs clusters`。

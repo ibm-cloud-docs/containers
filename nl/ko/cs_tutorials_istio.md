@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-18"
+lastupdated: "2018-02-05"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -116,7 +116,7 @@ Istio를 클러스터에 다운로드하고 설치하십시오.
    {: screen}
 
 
-축하합니다! 클러스터에 Istio를 정상적으로 설치했습니다. 다음, BookInfo 샘플 앱을 클러스터에 배치하십시오.
+축하합니다! Istio를 클러스터에 설치했습니다. 다음, BookInfo 샘플 앱을 클러스터에 배치하십시오.
 
 
 ## 학습 2: BookInfo 앱 배치
@@ -190,7 +190,7 @@ BookInfo를 배치하는 경우 마이크로서비스 포드가 배치되기 전
        ```
        {: pre}
 
-    * 라이트 클러스터에 대해 작업 중인 경우, 작업자 노드와 NodePort의 공인 IP를 사용해야 합니다. 작업자 노드의 공인 IP를 얻으려면 다음 명령을 실행하십시오.
+    * 무료 클러스터에 대해 작업 중인 경우 작업자 노드와 NodePort의 공인 IP를 사용해야 합니다. 작업자 노드의 공인 IP를 얻으려면 다음 명령을 실행하십시오.
 
        ```
        bx cs workers <cluster_name_or_ID>
@@ -215,12 +215,12 @@ BookInfo를 배치하는 경우 마이크로서비스 포드가 배치되기 전
 
 6. 페이지를 여러 번 새로 고쳐보십시오. 검토 섹션의 다른 버전은 빨간색 별, 검은색 별, 별 없음을 통해 라운드 로빈됩니다.
 
-축하합니다! Istio Envoy 사이드카로 BookInfo 샘플 앱을 배치했습니다. 다음, 리소스를 정리할 수도 있고 더 많은 튜토리얼을 학습하여 더 많은 Istio 기능을 탐색할 수도 있습니다.
+축하합니다! Istio Envoy 사이드카로 BookInfo 샘플 앱을 배치했습니다. 다음으로 리소스를 정리하거나 더 많은 튜토리얼을 학습하여 더 많은 Istio 기능을 탐색할 수도 있습니다.
 
 ## 정리
 {: #istio_tutorial_cleanup}
 
-[다음 내용:](#istio_tutorial_whatsnext)에서 제공되는 더 많은 Istio 기능을 탐색하지 않으려면 클러스터에서 Istio 리소스를 정리할 수 있습니다.
+[다음 단계](#istio_tutorial_whatsnext)에서 제공되는 더 많은 Istio 기능을 탐색하지 않으려는 경우 클러스터에서 Istio 리소스를 정리할 수 있습니다.
 
 1. 클러스터에서 모든 BookInfo 서비스, 포드 및 배치를 삭제하십시오.
 
@@ -241,6 +241,6 @@ BookInfo를 배치하는 경우 마이크로서비스 포드가 배치되기 전
 
 Istio 기능을 계속 탐색하려면 [Istio 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://istio.io/)에서 더 많은 안내서를 찾을 수 있습니다.
 
-* [Intelligent Routing ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://istio.io/docs/guides/intelligent-routing.html): 이 예제는 BookInfo에 대해 Istio의 다양한 트래픽 관리 기능을 사용하여 트래픽을 특정 버전의 검토 및 평가 마이크로서비스로 라우트하는 방법을 보여줍니다.
+* [Intelligent Routing ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://istio.io/docs/guides/intelligent-routing.html): 이 예제는 Istio의 트래픽 관리 기능을 사용하여 특정 BookInfo 버전의 검토 및 등급 마이크로서비스로 트래픽을 라우팅하는 방법을 보여줍니다.
 
-* [In-Depth Telemetry ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://istio.io/docs/guides/telemetry.html): 이 예제는 Istio Mixer와 Envoy 프록시를 사용하여 BookInfo의 전체 마이크로서비스에서 균일한 메트릭, 로그 및 추적을 얻는 방법을 설명합니다.
+* [In-Depth Telemetry ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://istio.io/docs/guides/telemetry.html): 이 예제는 Istio Mixer와 Envoy 프록시를 사용하여 BookInfo의 전체 마이크로서비스에서 균일한 메트릭, 로그 및 추적을 얻는 방법을 보여줍니다.

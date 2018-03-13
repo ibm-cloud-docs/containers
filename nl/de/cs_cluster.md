@@ -17,9 +17,9 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# Diese Seite wurde verschoben!
+# Der gesuchte Inhalt wurde verschoben.
 
-Die Themen finden Sie hier:
+Aktuelle Informationen finden Sie an der neuen Position:
 - [Cluster über die GUI erstellen](cs_clusters.html#clusters_ui)
 - [Cluster über die CLI erstellen](cs_clusters.html#clusters_cli)
 - [Private und öffentliche Image-Registrys verwenden](cs_images.html#images)

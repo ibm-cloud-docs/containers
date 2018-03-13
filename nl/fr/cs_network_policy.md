@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -44,7 +44,7 @@ Kubernetes converties en règles Calico, en configurant des règles Linux iptabl
 ## Configuration de règles par défaut
 {: #default_policy}
 
-Lorsqu'un cluster est créé, des règles réseau par défaut sont automatiquement configurées pour l'interface réseau publique de chaque noeud public afin de limiter le trafic entrant d'un noeud worker depuis l'Internet public. Ces règles n'affectent pas le trafic entre les nacelles et son mises en place pour permettre l'accès au port de noeud Kubernetes, à l'équilibreur de charge et aux services Ingress.
+Lorsqu'un cluster est créé, des règles réseau par défaut sont automatiquement configurées pour l'interface réseau publique de chaque noeud public afin de limiter le trafic entrant d'un noeud worker depuis l'Internet public. Ces règles n'affectent pas le trafic entre les pods et son mises en place pour permettre l'accès au port de noeud Kubernetes, à l'équilibreur de charge et aux services Ingress.
 {:shortdesc}
 
 Des règles par défaut ne sont pas appliquées aux pods directement, mais à l'interface réseau publique d'un noeud worker à l'aide d'un noeud final d'hôte Calico. Quand un noeud final d'hôte est créé dans Calico, tout le trafic vers et depuis l'interface réseau publique de ce noeud worker est bloqué, sauf s'il est autorisé par une règle.
@@ -98,7 +98,7 @@ Dans la plupart des cas, les règles par défaut n'ont pas besoin d'être modifi
 Avant de commencer :
 
 1.  [Installez les interfaces CLI de {{site.data.keyword.containershort_notm}} et de Kubernetes.](cs_cli_install.html#cs_cli_install)
-2.  [Créez un cluster léger ou standard.](cs_clusters.html#clusters_ui)
+2.  [Créez un cluster gratuit ou standard.](cs_clusters.html#clusters_ui)
 3.  [Ciblez l'interface CLI de Kubernetes sur le cluster](cs_cli_install.html#cs_cli_configure). Incluez l'option `--admin` avec la commande `bx cs
 cluster-config`, laquelle est utilisée pour télécharger les fichiers de certificat et d'autorisations. Ce téléchargement inclut également les clés pour le rôle Superutilisateur, dont vous aurez besoin pour exécuter des commandes Calico.
 
@@ -145,6 +145,8 @@ X :
         calicoctl version
         ```
         {: pre}
+
+    4.  Si les règles réseau de l'entreprise empêchent l'accès depuis votre système à des noeuds finaux publics via des proxies ou des pare-feux, voir [Exécution de commandes `calicoctl` derrière un pare-feu](cs_firewall.html#firewall) pour les instructions d'autorisation d'accès TCP pour les commandes Calico.
 
 2.  Configurez l'interface CLI de Calico.
 
@@ -281,7 +283,7 @@ X :
       ```
       {: pre}
 
-    -   Examinez toutes les règles réseau Calico et Kubernetes créées pour le cluster. Cette liste inclut des règles qui n'ont peut-être pas encore été appliquées à des nacelles ou à des hôtes. Pour qu'une règle réseau soit mise en pratique, elle doit identifier une ressource Kubernetes correspondant au sélecteur défini dans la règle réseau
+    -   Examinez toutes les règles réseau Calico et Kubernetes créées pour le cluster. Cette liste inclut des règles qui n'ont peut-être pas encore été appliquées à des pods ou à des hôtes. Pour qu'une règle réseau soit mise en pratique, elle doit identifier une ressource Kubernetes correspondant au sélecteur défini dans la règle réseau
 Calico.
 
       ```

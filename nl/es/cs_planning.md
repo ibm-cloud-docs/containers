@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-10"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -15,10 +15,10 @@ lastupdated: "2018-01-10"
 {:tip: .tip}
 {:download: .download}
 
-# Esta página se ha movido.
+# El contenido que está buscando se ha trasladado.
 
-Encontrará los temas de planificación aquí:
- - [Comparación entre clústeres de tipo lite y estándar](cs_why.html#cluster_types)
+Consulte la información más reciente en su nueva ubicación:
+ - [Comparación entre clústeres gratuitos y estándares](cs_why.html#cluster_types)
  - [Configuración de un clúster](cs_clusters.html#planning_clusters)
  - [Configuración de nodos trabajadores](cs_clusters.html#planning_worker_nodes)
  - [Responsabilidades de la gestión de clústeres](cs_why.html#responsibilities)

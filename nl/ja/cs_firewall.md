@@ -169,7 +169,7 @@ lastupdated: "2018-01-11"
 ## クラスターからインフラストラクチャー・リソースや他のサービスへのアクセスの許可
 {: #firewall_outbound}
 
-{{.site.data.keyword.containershort_notm}} 地域、{{site.data.keyword.registrylong_notm}}、{{site.data.keyword.monitoringlong_notm}}、{{site.data.keyword.loganalysislong_notm}}、IBM Cloud インフラストラクチャー (SoftLayer) プライベート IP、永続ボリューム請求の発信 (egress) などのために、クラスターがインフラストラクチャーのリソースとサービスにファイアウォールの背後からアクセスできるようにします。
+{{site.data.keyword.containershort_notm}} 地域、{{site.data.keyword.registrylong_notm}}、{{site.data.keyword.monitoringlong_notm}}、{{site.data.keyword.loganalysislong_notm}}、IBM Cloud インフラストラクチャー (SoftLayer) プライベート IP、永続ボリューム請求の発信 (egress) などのために、クラスターがインフラストラクチャーのリソースとサービスにファイアウォールの背後からアクセスできるようにします。
 {:shortdesc}
 
   1.  以下を実行して、クラスター内のすべてのワーカー・ノードのパブリック IP アドレスをメモします。
@@ -191,8 +191,8 @@ lastupdated: "2018-01-11"
     <tbody>
       <tr>
         <td>北アジア太平洋地域</td>
-        <td>hkg02<br>sng01<br>tok02</td>
-        <td><code>169.56.132.234</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
+        <td>hkg02<br>seo01<br>sng01<br>tok02</td>
+        <td><code>169.56.132.234</code><br><code>161.202.126.210</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
        </tr>
       <tr>
          <td>南アジア太平洋地域</td>
@@ -211,13 +211,13 @@ lastupdated: "2018-01-11"
       </tr>
       <tr>
         <td>米国東部</td>
-         <td><ph class="mon">mon01<br></ph>tor01<br>wdc06<br>wdc07</td>
-         <td><ph class ="mon"><code>169.54.126.219</code><br></ph><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+         <td>mon01<br>tor01<br>wdc06<br>wdc07</td>
+         <td><code>169.54.126.219</code><br><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
       </tr>
       <tr>
         <td>米国南部</td>
-        <td>dal10<br>dal12<br>dal13</td>
-        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
+        <td>dal10<br>dal12<br>dal13<br>sao01</td>
+        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>169.57.151.10</code></td>
       </tr>
       </tbody>
     </table>
@@ -225,7 +225,7 @@ lastupdated: "2018-01-11"
 
   3.  ワーカー・ノードから [{{site.data.keyword.registrylong_notm}} 地域](/docs/services/Registry/registry_overview.html#registry_regions)への発信ネットワーク・トラフィックを許可します。
       - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
-      - <em>&lt;registry_publicIP&gt;</em> を、トラフィックを許可するレジストリー IP アドレスに置き換えます。国際レジストリーには IBM 提供のパブリック・イメージが保管され、地域レジストリーにはユーザー独自のプライベートまたはパブリック・イメージが保管されます。
+      - <em>&lt;registry_publicIP&gt;</em> を、トラフィックを許可するレジストリー IP アドレスに置き換えます。 グローバル・レジストリーには IBM 提供のパブリック・イメージが保管され、地域レジストリーにはユーザー独自のプライベートまたはパブリック・イメージが保管されます。
         <p>
 <table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
       <thead>
@@ -235,7 +235,7 @@ lastupdated: "2018-01-11"
       </thead>
       <tbody>
         <tr>
-          <td>コンテナー地域間の国際レジストリー</td>
+          <td>コンテナー地域間のグローバル・レジストリー</td>
           <td>registry.bluemix.net</td>
           <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
         </tr>
@@ -307,7 +307,12 @@ lastupdated: "2018-01-11"
             <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
            </tr>
           <tr>
-           <td>中欧、英国南部</td>
+           <td>英国南部</td>
+           <td>ingest.logging.eu-gb.bluemix.net</td>
+           <td><code>169.50.115.113</code></td>
+          </tr>
+          <tr>
+           <td>中欧</td>
            <td>ingest-eu-fra.logging.bluemix.net</td>
            <td><code>158.177.88.43</code><br><code>159.122.87.107</code></td>
           </tr>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-06"
 
 ---
 
@@ -22,6 +22,8 @@ lastupdated: "2018-01-12"
 Exponha uma porta e use um endereço IP móvel para o balanceador de carga para acessar o app. Use um endereço IP público para tornar um app acessível na internet ou um endereço IP privado para tornar um app acessível na sua infraestrutura de rede privada.
 {:shortdesc}
 
+
+
 ## Configurando o acesso a um app usando o tipo de serviço do balanceador de carga
 {: #config}
 
@@ -30,7 +32,7 @@ Diferente de um serviço NodePort, o endereço IP móvel do serviço de balancea
 
 O endereço IP móvel do balanceador de carga é designado para você e não muda quando você inclui ou remove nós do trabalhador. Portanto, os serviços do balanceador de carga são mais altamente disponíveis do que os serviços NodePort. Os usuários podem selecionar qualquer porta para o balanceador de carga e não são limitados ao intervalo de portas NodePort. É possível usar serviços de balanceador de carga para os protocolos TCP e UDP.
 
-**Nota:** os serviços do balanceador de carga não suportam finalização do TLS. Se seu app requerer a finalização do TLS, será possível expor seu app usando [Ingresso](cs_ingress.html) ou configurar seu app para gerenciar a finalização do TLS.
+**Nota**: os serviços LoadBalancer não suportam finalização do TLS. Se seu app requerer a finalização do TLS, será possível expor seu app usando [Ingresso](cs_ingress.html) ou configurar seu app para gerenciar a finalização do TLS.
 
 Antes de iniciar:
 
@@ -43,6 +45,7 @@ Para criar um serviço de balanceador de carga:
 1.  [Implemente o seu app no cluster](cs_app.html#app_cli). Quando você implementa o seu app no cluster, são criados para você um ou mais pods que executam o seu app em um contêiner. Certifique-se de incluir um rótulo à sua implementação na seção de metadados de seu arquivo de configuração. Esse rótulo é necessário para identificar todos os pods nos quais o seu app está em execução para que eles possam ser incluídos no balanceamento de carga.
 2.  Crie um serviço de balanceador de carga para o app que você deseja expor. Para tornar seu app disponível na Internet pública ou em uma rede privada, crie um serviço do Kubernetes para seu app. Configure seu serviço para incluir todos os pods que compõem o seu app no balanceamento de carga.
     1.  Crie um arquivo de configuração de serviço que seja chamado, por exemplo, de `myloadbalancer.yaml`.
+
     2.  Defina um serviço de balanceador de carga para o app que você deseja expor.
         - Se o seu cluster estiver em uma VLAN pública, um endereço IP móvel público será usado. A maioria dos clusters está em uma VLAN pública.
         - Se o seu cluster estiver disponível apenas em uma VLAN privada, então, um endereço IP móvel privado será usado.
@@ -141,6 +144,7 @@ Para criar um serviço de balanceador de carga:
     Labels:                 <none>
     Selector:               <selectorkey>=<selectorvalue>
     Type:                   LoadBalancer
+    Location:               dal10
     IP:                     10.10.10.90
     LoadBalancer Ingress:   192.168.10.38
     Port:                   <unset> 8080/TCP
@@ -148,14 +152,15 @@ Para criar um serviço de balanceador de carga:
     Endpoints:              172.30.171.87:8080
     Session Affinity:       None
     Events:
-    FirstSeen LastSeen Count From   SubObjectPath Type  Reason   Message
-      --------- -------- ----- ----   ------------- -------- ------   -------
-      10s  10s  1 {service-controller }   Normal  CreatingLoadBalancer Creating load balancer
-      10s  10s  1 {service-controller }   Normal  CreatedLoadBalancer Created load balancer
+    FirstSeen	LastSeen	Count	From			SubObjectPath	Type		Reason			Message
+      ---------	--------	-----	----			-------------	--------	------			-------
+      10s		10s		1	{service-controller }			Normal		CreatingLoadBalancer	Creating load balancer
+      10s		10s		1	{service-controller }			Normal		CreatedLoadBalancer	Created load balancer
     ```
     {: screen}
 
     O endereço IP do **Ingresso de LoadBalancer** é o endereço IP móvel que foi designado ao seu serviço de balanceador de carga.
+
 4.  Se você tiver criado um balanceador de carga público, acesse seu app pela Internet.
     1.  Abra seu navegador da web preferencial.
     2.  Insira o endereço IP público móvel do balanceador de carga e a porta. No exemplo acima, o endereço IP público móvel `192.168.10.38` foi designado ao serviço de balanceador de carga.

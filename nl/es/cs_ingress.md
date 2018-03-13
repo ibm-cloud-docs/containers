@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-06"
 
 ---
 
@@ -22,60 +22,49 @@ lastupdated: "2018-01-12"
 ## Configuración del acceso a una app utilizando Ingress
 {: #config}
 
-Exponga varias apps en el clúster creando recursos Ingress gestionados por el controlador de Ingress proporcionado por IBM. El controlador de Ingress crea los recursos necesarios para utilizar un equilibrador de carga de aplicación. Un equilibrador de carga de aplicación es un equilibrador de carga HTTP o HTTPS externo que utiliza un punto de entrada público o probado seguro y exclusivo para direccionar las solicitudes entrantes a las apps dentro o fuera del clúster.
+Exponga varias apps en el clúster creando recursos Ingress gestionados por el equilibrador de carga de aplicación proporcionado por IBM. Un equilibrador de carga de aplicación es un equilibrador de carga HTTP o HTTPS externo que utiliza un punto de entrada público o probado seguro y exclusivo para direccionar las solicitudes entrantes a las apps dentro o fuera del clúster. Con Ingress, puede definir reglas de direccionamiento individuales para cada app que exponga a las redes públicas o privadas. Para obtener información general sobre los servicios de Ingress, consulte [Planificación de redes externas con Ingress](cs_network_planning.html#ingress).
 
 **Nota:** Ingress únicamente está disponible para los clústeres estándares y necesita de al menos dos nodos trabajadores en el clúster para asegurar la alta disponibilidad. Para configurar un servicio Ingress se necesita una [política de acceso de administrador](cs_users.html#access_policies). Verifique su [política de acceso](cs_users.html#infra_access) actual.
 
-Cuando se crea un clúster estándar, el controlador de Ingress crea y habilita automáticamente un equilibrador de carga de aplicación al que se le asigna una dirección IP pública portátil y una ruta pública. Además se crea un equilibrador de carga de aplicación con una dirección IP privada portátil asignada y una ruta privada, pero no se habilita de forma automática. Puede configurar los equilibradores de carga de aplicación y definir reglas de direccionamiento individuales para cada app que exponga a las redes públicas o privadas. A cada app que se expone al público por medio de Ingress que se le asigna una vía de acceso exclusiva que se añade a la ruta pública, para que pueda utilizar un URL exclusivo para acceder a una app de forma pública en el clúster.
+Para seleccionar la mejor configuración de Ingress, puede seguir este árbol de decisiones:
 
-Para exponer la app al público, puede configurar el equilibrador de carga de aplicación para los siguientes casos.
+<img usemap="#ingress_map" border="0" class="image" src="images/networkingdt-ingress.png" width="750px" alt="Esta imagen le ayuda a elegir la mejor configuración para el equilibrador de carga de aplicación de Ingress. Si esta imagen no se muestra, la información puede encontrarse en la documentación." style="width:750px;" />
+<map name="ingress_map" id="ingress_map">
+<area href="/docs/containers/cs_ingress.html#private_ingress_no_tls" alt="Exposición privada de apps utilizando un dominio personalizado sin TLS" shape="rect" coords="25, 246, 187, 294"/>
+<area href="/docs/containers/cs_ingress.html#private_ingress_tls" alt="Exposición privada de apps utilizando un dominio personalizado con TLS" shape="rect" coords="161, 337, 309, 385"/>
+<area href="/docs/containers/cs_ingress.html#external_endpoint" alt="Exposición pública de apps que están fuera de su clúster utilizando el dominio proporcionado por IBM o uno personalizado con TLS" shape="rect" coords="313, 229, 466, 282"/>
+<area href="/docs/containers/cs_ingress.html#custom_domain_cert" alt="Exposición pública de apps utilizando un dominio personalizado con TLS" shape="rect" coords="365, 415, 518, 468"/>
+<area href="/docs/containers/cs_ingress.html#ibm_domain" alt="Exposición pública de apps utilizando el dominio proporcionado por IBM sin TLS" shape="rect" coords="414, 629, 569, 679"/>
+<area href="/docs/containers/cs_ingress.html#ibm_domain_cert" alt="Exposición pública de apps utilizando el dominio proporcionado por IBM con TLS" shape="rect" coords="563, 711, 716, 764"/>
+</map>
+
+<br />
+
+
+## Exposición de apps al público
+{: #ingress_expose_public}
+
+Cuando se crea un clúster estándar, se habilita automáticamente un equilibrador de carga de aplicación proporcionado por IBM y se le asigna una dirección IP pública portátil y una ruta pública. A cada app que se expone al público por medio de Ingress que se le asigna una vía de acceso exclusiva que se añade a la ruta pública, para que pueda utilizar un URL exclusivo para acceder a una app de forma pública en el clúster. Para exponer la app al público, puede configurar Ingress para los siguientes casos.
 
 -   [Exponer públicamente apps utilizando el dominio proporcionado por IBM sin TLS](#ibm_domain)
 -   [Exponer públicamente apps utilizando el dominio proporcionado por IBM con TLS](#ibm_domain_cert)
 -   [Exponer públicamente apps utilizando un dominio personalizado con TLS](#custom_domain_cert)
 -   [Exponer públicamente apps que están fuera de su clúster utilizando el dominio proporcionado por IBM o uno personalizado con TLS](#external_endpoint)
 
-Para exponer la app a redes privadas, primero [habilite el equilibrador de carga de aplicación privado](#private_ingress). A continuación, puede configurar el equilibrador de carga de aplicación privado para los siguientes casos.
-
--   [Exponer privadamente apps utilizando un dominio personalizado sin TLS](#private_ingress_no_tls)
--   [Exponer privadamente apps utilizando un dominio personalizado con TLS](#private_ingress_tls)
-
-Después de haber expuesto la app de forma pública o privada, puede seguir configurando el equilibrador de carga de aplicación con las siguientes opciones.
-
--   [Apertura de puertos en el equilibrador de carga de aplicación de Ingress](#opening_ingress_ports)
--   [Configuración de protocolos SSL y cifrados SSL a nivel HTTP](#ssl_protocols_ciphers)
--   [Personalización de su equilibrador de carga de aplicación con anotaciones](cs_annotations.html)
-{: #ingress_annotation}
-
-Para seleccionar la mejor configuración de Ingress, puede seguir este árbol de decisiones:
-
-<img usemap="#ingress_map" border="0" class="image" src="images/networkingdt-ingress.png" width="750px" alt="Esta imagen le guía para elegir la mejor configuración para el controlador de Ingress. Si esta imagen no se muestra, la información puede encontrarse en la documentación." style="width:750px;" />
-<map name="ingress_map" id="ingress_map">
-<area href="/docs/containers/cs_ingress.html#private_ingress_no_tls" alt="Exposición privada de apps utilizando un dominio personalizado sin TLS" shape="rect" coords="25, 246, 187, 294"/>
-<area href="/docs/containers/cs_ingress.html#private_ingress_tls" alt="Exposición privada de apps utilizando un dominio personalizado con TLS" shape="rect" coords="161, 337, 309, 385"/>
-<area href="/docs/containers/cs_ingress.html#external_endpoint" alt="Exposición pública de apps que están fuera de su clúster utilizando el dominio proporcionado por IBM o uno personalizado con TLS" shape="rect" coords="313, 229, 466, 282"/>
-<area href="/docs/containers/cs_ingress.html#custom_domain_cert" alt="Exposición pública de apps utilizando un dominio personalizado con TLS" shape="rect" coords="365, 415, 518, 468"/>
-<area href="/docs/containers/cs_ingress.html#ibm_domain" alt="Exposición pública de apps utilizando el dominio proporcionado por IBM sin TLS" shape="rect" coords="414, 609, 569, 659"/>
-<area href="/docs/containers/cs_ingress.html#ibm_domain_cert" alt="Exposición pública de apps utilizando el dominio proporcionado por IBM con TLS" shape="rect" coords="563, 681, 716, 734"/>
-</map>
-
-<br />
-
-
-## Exponer públicamente apps utilizando el dominio proporcionado por IBM sin TLS
+### Exponer públicamente apps utilizando el dominio proporcionado por IBM sin TLS
 {: #ibm_domain}
 
-Puede configurar el equilibrador de carga de aplicación como un equilibrador de carga HTTP para las apps del clúster y utilizar el dominio proporcionado por IBM para acceder a las apps desde Internet.
+Puede configurar el equilibrador de carga de aplicación para equilibrar la carga del tráfico de red HTTP entrante a las apps del clúster y utilizar el dominio proporcionado por IBM para acceder a las apps desde Internet.
 
 Antes de empezar:
 
 -   Si aún no tiene uno, [cree un clúster estándar](cs_clusters.html#clusters_ui).
 -   [Defina su clúster como destino de la CLI](cs_cli_install.html#cs_cli_configure) para ejecutar mandatos `kubectl`.
 
-Para configurar el equilibrador de carga de aplicación:
+Para exponer una app mediante el dominio proporcionado por IBM:
 
 1.  [Despliegue la app en el clúster](cs_app.html#app_cli). Cuando despliegue la app en el clúster, se crean uno o más pods que ejecutan la app en un contenedor. Asegúrese de añadir una etiqueta a su despliegue en la sección de metadatos del archivo de configuración. Esta etiqueta es necesaria para identificar todos los pods en los que se está ejecutando la app, de modo que puedan incluirse en el equilibrio de carga de Ingress.
-2.  Cree un servicio Kubernetes para poder exponer la app. El controlador de Ingress puede incluir la app en el equilibrio de carga de Ingress sólo si la app se expone mediante un servicio Kubernetes dentro del clúster.
+2.  Cree un servicio Kubernetes para poder exponer la app. El equilibrador de carga de aplicación puede incluir la app en el equilibrio de carga de Ingress sólo si la app se expone mediante un servicio Kubernetes dentro del clúster.
     1.  Abra el editor que prefiera y cree un archivo de configuración de servicio llamado, por ejemplo, `myservice.yaml`.
     2.  Defina un servicio equilibrador de carga de aplicación para la app que desea exponer al público.
 
@@ -235,17 +224,17 @@ Para configurar el equilibrador de carga de aplicación:
 <br />
 
 
-## Exponer públicamente apps utilizando el dominio proporcionado por IBM con TLS
+### Exponer públicamente apps utilizando el dominio proporcionado por IBM con TLS
 {: #ibm_domain_cert}
 
-Puede configurar el equilibrador de carga de aplicación de modo que gestione las conexiones TLS de entrada para las apps, descifre el tráfico de red utilizando el certificado TLS proporcionado por IBM y reenvíe la solicitud descifrada a las apps expuestas en el clúster.
+Puede configurar el controlador de Ingress de modo que gestione las conexiones TLS de entrada para las apps, descifre el tráfico de red utilizando el certificado TLS proporcionado por IBM y reenvíe la solicitud descifrada a las apps expuestas en el clúster. 
 
 Antes de empezar:
 
 -   Si aún no tiene uno, [cree un clúster estándar](cs_clusters.html#clusters_ui).
 -   [Defina su clúster como destino de la CLI](cs_cli_install.html#cs_cli_configure) para ejecutar mandatos `kubectl`.
 
-Para configurar el equilibrador de carga de aplicación:
+Para exponer una app mediante el dominio proporcionado por IBM con TLS:
 
 1.  [Despliegue la app en el clúster](cs_app.html#app_cli). Asegúrese de añadir una etiqueta a su despliegue en la sección de metadatos del archivo de configuración. Esta etiqueta identifica todos los pods en los que se está ejecutando la app, de modo que puedan incluirse en el equilibrio de carga de Ingress.
 2.  Cree un servicio Kubernetes para poder exponer la app. El equilibrador de carga de aplicación puede incluir la app en el equilibrio de carga de Ingress sólo si la app se expone mediante un servicio Kubernetes dentro del clúster.
@@ -430,7 +419,7 @@ Para configurar el equilibrador de carga de aplicación:
 <br />
 
 
-## Exponer públicamente apps utilizando un dominio personalizado con TLS
+### Exponer públicamente apps utilizando un dominio personalizado con TLS
 {: #custom_domain_cert}
 
 Puede configurar el equilibrador de carga de aplicación para que direccione el tráfico de red de entrada a las apps del clúster y utilice su propio certificado TLS para gestionar la terminación de TLS, utilizando el dominio personalizado en lugar del proporcionado por IBM.
@@ -441,7 +430,7 @@ Antes de empezar:
 -   Si aún no tiene uno, [cree un clúster estándar](cs_clusters.html#clusters_ui).
 -   [Defina su clúster como destino de la CLI](cs_cli_install.html#cs_cli_configure) para ejecutar mandatos `kubectl`.
 
-Para configurar el equilibrador de carga de aplicación:
+Para exponer una app mediante un dominio personalizado con TLS:
 
 1.  Cree un dominio personalizado. Para crear un dominio personalizado, póngase en contacto con el proveedor de DNS (Domain Name Service) y para que registre su dominio personalizado.
 2.  Configure el dominio de modo que direccione el tráfico de red de entrada al equilibrador de carga de aplicación proporcionado por IBM. Puede elegir entre las siguientes opciones:
@@ -450,10 +439,11 @@ Para configurar el equilibrador de carga de aplicación:
 3.  Importe o cree un certificado TLS y un secreto de clave:
     * Si ya tiene un certificado TLS almacenado en {{site.data.keyword.cloudcerts_long_notm}} que desea utilizar, puede importar su secreto asociado a su clúster ejecutando el siguiente mandato:
 
-          ```
-          bx cs alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
-          ```
-          {: pre}
+      ```
+      bx cs alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
+      ```
+      {: pre}
+
     * Si no tiene un certificado TLS listo, siga estos pasos:
         1. Cree un certificado TLS y una clave para el dominio que estén codificados en formato PEM.
         2.  Abra el editor que prefiera y cree un archivo de configuración de secreto de Kubernetes llamado, por ejemplo, `mysecret.yaml`.
@@ -634,10 +624,10 @@ Para configurar el equilibrador de carga de aplicación:
 <br />
 
 
-## Exponer públicamente apps que están fuera de su clúster utilizando el dominio proporcionado por IBM o uno personalizado con TLS
+### Exponer públicamente apps que están fuera de su clúster utilizando el dominio proporcionado por IBM o uno personalizado con TLS
 {: #external_endpoint}
 
-Puede configurar el equilibrador de carga de aplicación para que se incluyan en el equilibrio de la carga del clúster apps situadas fuera del clúster. Las solicitudes entrantes en el dominio personalizado o proporcionado por IBM se reenvían automáticamente a la app externa.
+Puede configurar el equilibrador de carga de aplicación para incluir las apps en el equilibrio de carga del clúster que se encuentran fuera del clúster. Las solicitudes entrantes en el dominio personalizado o proporcionado por IBM se reenvían automáticamente a la app externa.
 
 Antes de empezar:
 
@@ -645,7 +635,7 @@ Antes de empezar:
 -   [Defina su clúster como destino de la CLI](cs_cli_install.html#cs_cli_configure) para ejecutar mandatos `kubectl`.
 -   Asegúrese de que se pueda acceder a la app externa que desea incluir en el equilibrio de la carga del clúster mediante una dirección IP pública.
 
-Puede configurar el equilibrador de carga de aplicación para que direccione el tráfico de red de entrada del dominio proporcionado por IBM a apps situadas fuera del clúster. Si desea utilizar en su lugar un dominio personalizado y terminación de TLS, sustituya el dominio proporcionado por IBM y el certificado de TLS por su [dominio personalizado y certificado TLS](#custom_domain_cert)dominio personalizado y certificado TLS.
+Puede direccionar el tráfico de red de entrada del dominio proporcionado por IBM a apps situadas fuera del clúster. Si desea utilizar en su lugar un dominio personalizado y terminación de TLS, sustituya el dominio proporcionado por IBM y el certificado de TLS por su [dominio personalizado y certificado TLS](#custom_domain_cert)dominio personalizado y certificado TLS.
 
 1.  Configure un punto final de Kubernetes que defina la ubicación externa de la app que desea incluir en el equilibrio de la carga del clúster.
     1.  Abra el editor que prefiera y cree un archivo de configuración de punto final llamado, por ejemplo, `myexternalendpoint.yaml`.
@@ -692,7 +682,7 @@ Puede configurar el equilibrador de carga de aplicación para que direccione el 
 
 2.  Cree un servicio de Kubernetes para el clúster y configúrelo de modo que reenvíe las solicitudes entrantes al punto final externo que ha creado anteriormente.
     1.  Abra el editor que prefiera y cree un archivo de configuración de servicio llamado, por ejemplo, `myexternalservice.yaml`.
-    2.  Defina el servicio de equilibrador de carga de aplicación. 
+    2.  Defina el servicio de equilibrador de carga de aplicación.
 
         ```
         apiVersion: v1
@@ -871,10 +861,18 @@ Puede configurar el equilibrador de carga de aplicación para que direccione el 
 <br />
 
 
-## Habilitación del equilibrador de carga de aplicación privado
+## Exposición de apps a una red privada
+{: #ingress_expose_private}
+
+Cuando se crea un clúster estándar, se crea automáticamente un equilibrador de carga de aplicación proporcionado por IBM y se le asigna una dirección IP privada portátil y una ruta privada. Sin embargo, el equilibrador de carga de aplicación privado predeterminado no se habilita automáticamente. Para exponer la app a redes privadas, primero [habilite el equilibrador de carga de aplicación privado predeterminado](#private_ingress). A continuación, puede configurar Ingress para los siguientes casos.
+
+-   [Exponer privadamente apps utilizando un dominio personalizado sin TLS](#private_ingress_no_tls)
+-   [Exponer privadamente apps utilizando un dominio personalizado con TLS](#private_ingress_tls)
+
+### Habilitación del equilibrador de carga de aplicación privado predeterminado
 {: #private_ingress}
 
-Cuando se crea un clúster estándar, el controlador de Ingress crea automáticamente un equilibrador de carga de aplicación privado pero no lo habilita automáticamente. Para poder utilizar el equilibrador de carga de aplicación privado, se debe habilitar con la dirección IP privada portátil asignada previamente y proporcionada por IBM o con su propia dirección IP privada portátil. **Nota**: si ha utilizado el distintivo `--no-subnet` al crear el clúster, debe añadir una subred privada portátil o una subred gestionada por el usuario para poder habilitar el equilibrador de carga de aplicación privado. Para obtener más información, consulte [Solicitud de subredes adicionales para el clúster](cs_subnets.html#request).
+Para poder utilizar el equilibrador de carga de aplicación privado predeterminado, se debe habilitar con la dirección IP privada portátil proporcionada por IBM o con su propia dirección IP privada portátil. **Nota**: si ha utilizado el distintivo `--no-subnet` al crear el clúster, debe añadir una subred privada portátil o una subred gestionada por el usuario para poder habilitar el equilibrador de carga de aplicación privado. Para obtener más información, consulte [Solicitud de subredes adicionales para el clúster](cs_subnets.html#request).
 
 Antes de empezar:
 
@@ -940,7 +938,7 @@ Para habilitar el equilibrador de carga de aplicación privado utilizando la dir
 <br />
 
 
-## Exponer privadamente apps utilizando un dominio personalizado sin TLS
+### Exponer privadamente apps utilizando un dominio personalizado sin TLS
 {: #private_ingress_no_tls}
 
 Puede configurar el equilibrador de carga de aplicación privado para que direccione el tráfico de red entrante a las apps del clúster utilizando un dominio personalizado.
@@ -948,7 +946,7 @@ Puede configurar el equilibrador de carga de aplicación privado para que direcc
 
 Antes de empezar, [habilite el equilibrador de carga de aplicación privado](#private_ingress).
 
-Para configurar el equilibrador de carga de aplicación privado:
+Para exponer una app de forma privada utilizando un dominio personalizado sin TLS:
 
 1.  Cree un dominio personalizado. Para crear un dominio personalizado, póngase en contacto con el proveedor de DNS (Domain Name Service) y para que registre su dominio personalizado.
 
@@ -1043,7 +1041,7 @@ Para configurar el equilibrador de carga de aplicación privado:
         </tr>
         <tr>
         <td><code>ingress.bluemix.net/ALB-ID</code></td>
-        <td>Sustituya <em>&lt;private_ALB_ID&gt;</em> por el ID de ALB del controlador de Ingress privado. Ejecute <code>bx cs albs --cluster <my_cluster></code> para buscar el ID de ALB. Para obtener más información sobre esta anotación de Ingress, consulte [Direccionamiento del equilibrador de carga de aplicación privado](cs_annotations.html#alb-id).</td>
+        <td>Sustituya <em>&lt;private_ALB_ID&gt;</em> por el ID del equilibrador de carga de aplicación privado. Ejecute <code>bx cs albs --cluster <my_cluster></code> para buscar el ID del equilibrador de carga de aplicación. Para obtener más información sobre esta anotación de Ingress, consulte [Direccionamiento del equilibrador de carga de aplicación privado](cs_annotations.html#alb-id).</td>
         </tr>
         <td><code>host</code></td>
         <td>Sustituya <em>&lt;mycustomdomain&gt;</em> por dominio personalizado.
@@ -1106,15 +1104,15 @@ Para configurar el equilibrador de carga de aplicación privado:
 <br />
 
 
-## Exponer privadamente apps utilizando un dominio personalizado con TLS
+### Exponer privadamente apps utilizando un dominio personalizado con TLS
 {: #private_ingress_tls}
 
-Puede configurar el equilibrador de carga de aplicación privado para que direccione el tráfico de red de entrada a las apps del clúster y utilice su propio certificado TLS para gestionar la terminación de TLS, utilizando el dominio personalizado.
+Puede utilizar equilibradores de carga de aplicación privados para que direccione el tráfico de red de entrada a las apps del clúster y utilice su propio certificado TLS para gestionar la terminación de TLS, utilizando el dominio personalizado.
 {:shortdesc}
 
-Antes de empezar, [habilite el equilibrador de carga de aplicación privado](#private_ingress).
+Antes de empezar, [habilite el equilibrador de carga de aplicación privado predeterminado](#private_ingress).
 
-Para configurar el equilibrador de carga de aplicación:
+Para exponer una app de forma privada utilizando un dominio personalizado con TLS:
 
 1.  Cree un dominio personalizado. Para crear un dominio personalizado, póngase en contacto con el proveedor de DNS (Domain Name Service) y para que registre su dominio personalizado.
 
@@ -1192,10 +1190,7 @@ Para configurar el equilibrador de carga de aplicación:
     1.  Abra el editor que prefiera y cree un archivo de configuración de Ingress llamado, por ejemplo, `myingress.yaml`.
     2.  Defina un recurso de Ingress en el archivo de configuración que utilice el dominio personalizado para direccionar el tráfico de entrada de red a los servicios y el certificado personalizado para gestionar la terminación TLS. Por cada servicio puede definir una vía de acceso individual que se añade a su dominio personalizado para crear una vía de acceso exclusiva para la app, como por ejemplo `https://mydomain/myapp`. Cuando especifica esta ruta en un navegador web, el tráfico de la red se direcciona al equilibrador de carga de aplicación. El equilibrador de carga de aplicación consulta el servicio asociado y envía el tráfico de red de entrada al servicio, y luego a los pods en los que se ejecuta la app.
 
-        **Nota:** Es importante que la app esté a la escucha en la vía de acceso que ha definido en el recurso de Ingress. De lo contrario, el tráfico de red
-
-
-        no se puede reenviar a la app. La mayoría de las apps no escuchan en una vía de acceso específica, sino que utilizan la vía de acceso raíz y un puerto específico. En este caso, defina la vía de acceso raíz como `/` y no especifique una vía de acceso individual para la app.
+        **Nota:** Es importante que la app esté a la escucha en la vía de acceso que ha definido en el recurso de Ingress. De lo contrario, el tráfico de red no se puede reenviar a la app. La mayoría de las apps no escuchan en una vía de acceso específica, sino que utilizan la vía de acceso raíz y un puerto específico. En este caso, defina la vía de acceso raíz como `/` y no especifique una vía de acceso individual para la app.
 
         ```
         apiVersion: extensions/v1beta1
@@ -1311,10 +1306,23 @@ Para configurar el equilibrador de carga de aplicación:
 <br />
 
 
-## Apertura de puertos en el equilibrador de carga de aplicación de Ingress
+
+
+## Opcional: Configuración de un equilibrador de carga de aplicación
+{: #configure_alb}
+
+También puede configurar un equilibrador de carga de aplicación con las opciones siguientes.
+
+-   [Apertura de puertos en el equilibrador de carga de aplicación de Ingress](#opening_ingress_ports)
+-   [Configuración de protocolos SSL y cifrados SSL a nivel HTTP](#ssl_protocols_ciphers)
+-   [Personalización de su equilibrador de carga de aplicación con anotaciones](cs_annotations.html)
+{: #ingress_annotation}
+
+
+### Apertura de puertos en el equilibrador de carga de aplicación de Ingress
 {: #opening_ingress_ports}
 
-De forma predeterminada, sólo los puertos 80 y 443 están expuestos en el equilibrador de carga de aplicación de Ingress. Para exponer otros puertos, puede editar el recurso del mapa de configuración `ibm-cloud-provider-ingress-cm`. 
+De forma predeterminada, sólo los puertos 80 y 443 están expuestos en el equilibrador de carga de aplicación de Ingress. Para exponer otros puertos, puede editar el recurso del mapa de configuración `ibm-cloud-provider-ingress-cm`.
 
 1.  Cree una versión local del archivo de configuración del recurso del mapa de configuración `ibm-cloud-provider-ingress-cm`. Añada una sección <code>data</code> y especifique los puertos públicos 80, 443 y otros puertos que desee añadir al archivo del mapa de configuración separados por punto y coma (;).
 
@@ -1372,10 +1380,7 @@ De forma predeterminada, sólo los puertos 80 y 443 están expuestos en el equil
 
 Para obtener más información sobre los recursos del mapa de configuración, consulte la [documentación de Kubernetes](https://kubernetes-v1-4.github.io/docs/user-guide/configmap/).
 
-<br />
-
-
-## Configuración de protocolos SSL y cifrados SSL a nivel HTTP
+### Configuración de protocolos SSL y cifrados SSL a nivel HTTP
 {: #ssl_protocols_ciphers}
 
 Habilite los protocolos SSL y cifrados a nivel HTTP global editando el mapa de configuración `ibm-cloud-provider-ingress-cm`.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -25,7 +25,7 @@ Torne seu app disponível para acesso à Internet usando o endereço IP público
 ## Configurando o acesso público para um app usando o tipo de serviço NodePort
 {: #config}
 
-É possível expor seu app como um serviço do Kubernetes NodePort para clusters lite ou padrão.
+É possível expor seu app como um serviço NodePort do Kubernetes para clusters grátis ou padrão.
 {:shortdesc}
 
 **Nota:** o endereço IP público de um nó do trabalhador não é permanente. Se o nó do trabalhador precisar ser recriado, um novo endereço IP público será designado ao nó do trabalhador. Se você precisar de um endereço IP público estável e mais disponibilidade para seu serviço, exponha seu app usando um [serviço LoadBalancer](cs_loadbalancer.html) ou [Ingresso](cs_ingress.html).

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-05"
+lastupdated: "2018-02-08"
 
 ---
 
@@ -18,27 +18,26 @@ lastupdated: "2018-01-05"
 # {{site.data.keyword.containerlong_notm}} 的 Kubernetes 版本
 {: #cs_versions}
 
-請檢閱提供於 {{site.data.keyword.containerlong}} 的 Kubernetes 版本。
+{{site.data.keyword.containerlong}}同時支援多種版本的 Kubernetes：最新版本、預設版本，以及支援版本（一般是落後最新版本的兩個版本）。預設版本可能與最新版本相同，除非指定不同的版本，否則，建立或更新叢集時都會使用預設版本。
 {:shortdesc}
 
-{{site.data.keyword.containershort_notm}} 支援數個 Kubernetes 版本。除非指定不同的版本，否則，建立或更新叢集時都會使用預設版本。可用的 Kubernetes 版本如下：
-- 1.8.6
-- 1.7.4（預設版本）
-- 1.5.6
+現行支援的 Kubernetes 版本如下：
 
-若要檢查本端執行的 Kubernetes CLI 版本或您的叢集所執行的 Kubernetes CLI 版本，請執行下列指令並檢查版本。
+- 最新：1.9.2
+- 預設：1.8.6
+- 支援：1.7.4
 
+如果您是在目前不支援的 Kubernetes  版本上執行叢集，請[檢閱潛在影響](#version_types)以取得更新項目，然後立即[更新您的叢集](cs_cluster_update.html#update)，以繼續接收重要的安全更新項目及支援。若要檢查伺服器版本，請執行下列指令。
 
 ```
-kubectl version  --short
+kubectl version  --short | grep -i server
 ```
 {: pre}
 
 輸出範例：
 
 ```
-Client Version: 1.7.4
-Server Version: 1.7.4
+Server Version: 1.8.6
 ```
 {: screen}
 
@@ -58,16 +57,89 @@ Kubernetes 提供下列版本更新類型：
 依預設，Kibernetes 主節點無法更新超過兩個次要版本。例如，如果現行主節點是 1.5 版，而您要更新至 1.8，則必須先更新至 1.7。您可以強制更新繼續進行，但更新超過兩個次要版本可能會造成非預期的結果。
 {: tip}
 
-下列資訊彙總當您將叢集更新為新版本時，可能會對已部署的應用程式造成影響的更新。請檢閱 [Kubernetes 變更日誌 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md)，以取得 Kubernetes 版本變更的完整清單。
+下列資訊彙總當您將叢集從舊版更新為新版本時，可能會對已部署的應用程式造成影響的更新。請檢閱 [Kubernetes 變更日誌 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md)，以取得 Kubernetes 版本變更的完整清單。
 
 如需更新程序的相關資訊，請參閱[更新叢集](cs_cluster_update.html#master)及[更新工作者節點](cs_cluster_update.html#worker_node)。
+
+## 1.9 版
+{: #cs_v19}
+
+
+
+從 Kubernets 舊版更新至 1.9 版時，請檢閱您可能需要進行的變更。
+
+<br/>
+
+### 在主節點之前更新
+{: #19_before}
+
+<table summary="1.9 版的 Kubernetes 更新項目">
+<caption>在將主節點更新至 Kubernetes 1.9 之前要進行的變更</caption>
+<thead>
+<tr>
+<th>類型</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Webhook 許可 API</td>
+<td>在 API 伺服器呼叫許可控制 Webhook 時使用的許可 API，是從 <code>admission.v1alpha1</code> 移至 <code>admission.v1beta1</code>。<em>在升級叢集之前您必須刪除任何現有的 Webhook</em>，並更新 Webhook 配置檔來使用最新 API。此變更與舊版不相容。</td>
+</tr>
+</tbody>
+</table>
+
+### 在主節點之後更新
+{: #19_after}
+
+<table summary="1.9 版的 Kubernetes 更新項目">
+<caption>在將主節點更新至 Kubernetes 1.9 之後要進行的變更</caption>
+<thead>
+<tr>
+<th>類型</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`kubectl` 輸出</td>
+<td>現在，當您使用 `kubectl` 指令來指定 `-o custom-columns`，但在物件中找不到直欄時，您會看到輸出 `<none>`。<br>
+之前，作業失敗，且您看到 `xxx is not found` 錯誤訊息。如果您的 Script 依賴先前的行為，請更新它們。</td>
+</tr>
+<tr>
+<td>`kubectl patch`</td>
+<td>現在，當未對修補的資源進行任何變更時，`kubectl patch` 指令會失敗，並出現 `exit code 1`。如果您的 Script 依賴先前的行為，請更新它們。</td>
+</tr>
+<tr>
+<td>Kubernetes 儀表板許可權</td>
+<td>現在，使用者必須使用其認證來登入 Kubernetes 儀表板，以檢視叢集資源。已移除預設的 Kubernetes 儀表板 `ClusterRoleBinding` RBAC 授權。如需指示，請參閱[啟動 Kubernetes 儀表板](cs_app.html#cli_dashboard)。</td>
+</tr>
+<tr>
+<td>`default` `ServiceAccount` 的 RBAC</td>
+<td>會移除 `default` 名稱空間中 `default` `ServiceAccount` 的管理者 `ClusterRoleBinding`。如果您的應用程式依賴此 RBAC 原則來存取 Kubernetes API，請[更新您的 RBAC 原則](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview)。</td>
+</tr>
+<tr>
+<td>污染及容錯</td>
+<td>`node.alpha.kubernetes.io/notReady` 及 `node.alpha.kubernetes.io/unreachable` 污染已分別變更為 `node.kubernetes.io/not-ready` 和`node.kubernetes.io/unreachable`。<br>
+雖然會自動更新污染，但您必須手動更新這些污染的容錯。針對 `ibm-system` 及 `kube-system` 以外的每一個名稱空間，判斷您是否需要變更容錯：<br>
+<ul><li><code>kubectl get pods -n &lt;namespace&gt; -o yaml | grep "node.alpha.kubernetes.io/notReady" && echo "Action required"</code></li><li>
+<code>kubectl get pods -n &lt;namespace&gt; -o yaml | grep "node.alpha.kubernetes.io/unreachable" && echo "Action required"</code></li></ul><br>
+如果傳回 `Action required`，請相應地修改 Pod 容錯。</td>
+</tr>
+<tr>
+<td>Webhook 許可 API</td>
+<td>如果您已在更新叢集之前刪除現有 Webhook，請建立新的 Webhook。</td>
+</tr>
+</tbody>
+</table>
+
 
 ## 1.8 版
 {: #cs_v18}
 
 <p><img src="images/certified_kubernetes_1x8.png" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" height="100" width="62.5" align="left" alt="此徽章指出 IBM Cloud Container Service 的 Kubernetes 1.8 版憑證。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 計畫下 1.8 版的認證 Kubernetes 產品。_Kubernetes® 是 The Linux Foundation 在美國及其他國家或地區的註冊商標，並且根據 The Linux Foundation 的授權予以使用。_</p>
 
-更新至 Kubernets 1.8 版時，請檢閱您可能需要進行的變更。
+從 Kubernets 舊版更新至 1.8 版時，請檢閱您可能需要進行的變更。
 
 <br/>
 
@@ -130,7 +202,7 @@ Kubernetes 提供下列版本更新類型：
 
 <p><img src="images/certified_kubernetes_1x7.png" height="100" width="62.5" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" align="left" alt="此徽章指出 IBM Cloud Container Service 的 Kubernetes 1.7 版憑證。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 計畫下 1.7 版的認證 Kubernetes 產品。</p>
 
-更新至 Kubernets 1.7 版時，請檢閱您可能需要進行的變更。
+從 Kubernets 舊版更新至 1.7 版時，請檢閱您可能需要進行的變更。
 
 <br/>
 
@@ -241,16 +313,16 @@ Kubernetes 提供下列版本更新類型：
 </ol>
 </tr>
 <tr>
-<td>污點</td>
+<td>污染</td>
 <td>`scheduler.alpha.kubernetes.io/taints` 註釋無法再使用。
 <ol>
-  <li>判斷是否需要變更污點：</br>
+  <li>判斷是否需要變更污染：</br>
   ```
   kubectl get nodes -o yaml | grep "scheduler.alpha.kubernetes.io/taints" && echo "Action required"
   ```
   <li>如果傳回 `"Action required"`，請移除每一個節點的 `scheduler.alpha.kubernetes.io/taints` 註釋。</br>
   `kubectl annotate nodes <node> scheduler.alpha.kubernetes.io/taints-`
-  <li>將污點新增至每一個節點：</br>
+  <li>將污染新增至每一個節點：</br>
   `kubectl taint node <node> <taint>`
   </li></ol>
 </tr>

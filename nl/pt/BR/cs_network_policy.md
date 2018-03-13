@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -94,7 +94,7 @@ Na maioria dos casos, as políticas padrão não precisam ser mudadas. Somente c
 Antes de iniciar:
 
 1.  [Instale as CLIs do {{site.data.keyword.containershort_notm}} e do Kubernetes.](cs_cli_install.html#cs_cli_install)
-2.  [Crie um cluster lite ou padrão.](cs_clusters.html#clusters_ui)
+2.  [Crie um cluster grátis ou padrão.](cs_clusters.html#clusters_ui)
 3.  [Destine a CLI do Kubernetes para o cluster](cs_cli_install.html#cs_cli_configure). Inclua a opção `--admin` com o comando `bx cs cluster-config`, que é usado para fazer download dos certificados e arquivos de permissão. Este download também inclui as chaves para a função de Super Usuário, que você precisa para executar comandos do Calico.
 
   ```
@@ -141,6 +141,8 @@ X:
         calicoctl version
         ```
         {: pre}
+
+    4.  Se as políticas de rede corporativa impedirem o acesso de seu sistema local a terminais públicos por proxies ou firewalls, veja [Executando comandos `calicoctl` por trás de um firewall](cs_firewall.html#firewall) para obter instruções sobre como permitir o acesso TCP para comandos do Calico.
 
 2.  Configure a CLI do Calico.
 

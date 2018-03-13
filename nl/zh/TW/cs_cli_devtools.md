@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-01-02"
+lastupdated: "2017-01-24"
 
 ---
 
@@ -25,7 +25,7 @@ lastupdated: "2017-01-02"
 **提示：**要尋找 `bx cr` 指令嗎？請參閱 [{{site.data.keyword.registryshort_notm}} CLI 參考資料](/docs/cli/plugins/registry/index.html)。要尋找 `kubectl` 指令嗎？請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)。
 
 
-<!--[https://github.ibm.com/alchemy-containers/armada-cli ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.ibm.com/alchemy-containers/armada-cli)-->
+
 
 <table summary="在 {{site.data.keyword.Bluemix_notm}} 上用來建立叢集的指令">
  <thead>
@@ -339,9 +339,11 @@ bx cs cluster-config my_cluster
 
 <dd>建立標準叢集之 YAML 檔案的路徑。您可以使用 YAML 檔案，而不是使用此指令中所提供的選項來定義叢集的特徵。
 
-此值對於標準叢集是選用的，不適用於精簡叢集。
+此值對於標準叢集是選用的，不適用於免費叢集。
 
-<p><strong>附註：</strong>如果您在指令中提供與 YAML 檔案中的參數相同的選項，則指令中的值優先順序會高於 YAML 中的值。例如，您在 YAML 檔案中定義了位置，並在指令中使用 <code>--location</code> 選項，則您在指令選項中輸入的值會置換 YAML 檔案中的值。<pre class="codeblock">
+<p><strong>附註：</strong>如果您在指令中提供與 YAML 檔案中的參數相同的選項，則指令中的值優先順序會高於 YAML 中的值。例如，您在 YAML 檔案中定義了位置，並在指令中使用 <code>--location</code> 選項，則您在指令選項中輸入的值會置換 YAML 檔案中的值。
+
+<pre class="codeblock">
 <code>name: <em>&lt;cluster_name&gt;</em>
 location: <em>&lt;location&gt;</em>
 no-subnet: <em>&lt;no-subnet&gt;</em>
@@ -403,10 +405,10 @@ kube-version: <em>&lt;kube-version&gt;</em>
     </p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
-<dd>工作者節點的硬體隔離層次。若要讓可用的實體資源只供您專用，請使用 dedicated，或者，若要容許與其他 IBM 客戶共用實體資源，請使用 shared。預設值為 shared。此值對於標準叢集是選用的，不適用於精簡叢集。</dd>
+<dd>工作者節點的硬體隔離層次。若要讓可用的實體資源只供您專用，請使用 dedicated，或者，若要容許與其他 IBM 客戶共用實體資源，請使用 shared。預設值為 shared。此值對於標準叢集是選用的，不適用於免費叢集。</dd>
 
 <dt><code>--location <em>LOCATION</em></code></dt>
-<dd>您要建立叢集的位置。可用的位置取決於您所登入的 {{site.data.keyword.Bluemix_notm}} 地區。選取實際上與您最接近的地區以獲得最佳效能。此值對於標準叢集是必要的，對於精簡叢集則是選用性。
+<dd>您要建立叢集的位置。可用的位置取決於您所登入的 {{site.data.keyword.Bluemix_notm}} 地區。選取實際上與您最接近的地區以獲得最佳效能。此值對於標準叢集是必要的，對於免費叢集則是選用性。
 
 <p>檢閱[可用位置](cs_regions.html#locations)。</p>
 
@@ -414,7 +416,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 </dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>您選擇的機型會影響工作者節點中所部署的容器可使用的記憶體及磁碟空間量。若要列出可用的機型，請參閱 [bx cs machine-types <em>LOCATION</em>](#cs_machine_types)。此值對於標準叢集是必要的，不適用於精簡叢集。</dd>
+<dd>您選擇的機型會影響工作者節點中所部署的容器可使用的記憶體及磁碟空間量。若要列出可用的機型，請參閱 [bx cs machine-types <em>LOCATION</em>](#cs_machine_types)。此值對於標準叢集是必要的，不適用於免費叢集。</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
 <dd>叢集的名稱。這是必要值。</dd>
@@ -429,9 +431,11 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <dd>
 
 <ul>
-<li>此參數不適用於精簡叢集。</li>
+<li>此參數不適用於免費叢集。</li>
 <li>如果此標準叢集是您在這個位置所建立的第一個標準叢集，請不要包括此旗標。建立叢集時，會自動建立一個專用 VLAN。</li>
 <li>如果您之前已在此位置中建立標準叢集，或之前已在 IBM Cloud 基礎架構 (SoftLayer) 中建立專用 VLAN，則必須指定該專用 VLAN。
+
+
 
 <p><strong>附註：</strong>您使用 create 指令所指定的公用及專用 VLAN 必須相符。專用 VLAN 路由器的開頭一律為 <code>bcr</code>（後端路由器），而公用 VLAN 路由器的開頭一律為 <code>fcr</code>（前端路由器）。這些字首後面的數字與字母組合必須相符，才能在建立叢集時使用這些 VLAN。請不要使用不相符的公用及專用 VLAN 來建立叢集。</p></li>
 </ul>
@@ -441,9 +445,11 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
 <dd>
 <ul>
-<li>此參數不適用於精簡叢集。</li>
+<li>此參數不適用於免費叢集。</li>
 <li>如果此標準叢集是您在這個位置所建立的第一個標準叢集，請不要使用此旗標。建立叢集時，會自動建立一個公用 VLAN。</li>
 <li>如果您之前已在此位置中建立標準叢集，或之前已在 IBM Cloud 基礎架構 (SoftLayer) 中建立公用 VLAN，則必須指定該公用 VLAN。
+
+
 
 <p><strong>附註：</strong>您使用 create 指令所指定的公用及專用 VLAN 必須相符。專用 VLAN 路由器的開頭一律為 <code>bcr</code>（後端路由器），而公用 VLAN 路由器的開頭一律為 <code>fcr</code>（前端路由器）。這些字首後面的數字與字母組合必須相符，才能在建立叢集時使用這些 VLAN。請不要使用不相符的公用及專用 VLAN 來建立叢集。</p></li>
 </ul>
@@ -451,7 +457,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <p>若要找出您是否已有特定位置的公用 VLAN，或尋找現有公用 VLAN 的名稱，請執行 <code>bx cs vlans <em>&lt;location&gt;</em></code>。</p></dd>
 
 <dt><code>--workers WORKER</code></dt>
-<dd>您要在叢集中部署的工作者節點數目。如果您未指定此選項，則會建立具有 1 個工作者節點的叢集。此值對於標準叢集是選用的，不適用於精簡叢集。
+<dd>您要在叢集中部署的工作者節點數目。如果您未指定此選項，則會建立具有 1 個工作者節點的叢集。此值對於標準叢集是選用的，不適用於免費叢集。
 
 <p><strong>附註：</strong>每個工作者節點都會獲指派唯一的工作者節點 ID 及網域名稱，在叢集建立之後即不得手動予以變更。變更 ID 或網域名稱會讓 Kubernetes 主節點無法管理叢集。</p></dd>
 
@@ -471,7 +477,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
   ```
   {: pre}
 
-  精簡叢集的範例：
+  免費叢集的範例：
 
   ```
   bx cs cluster-create --name my_cluster
@@ -682,6 +688,8 @@ kube-version: <em>&lt;kube-version&gt;</em>
    <dt><code><em>SUBNET_CIDR</em></code></dt>
    <dd>子網路無類別跨網域遞送 (CIDR)。這是必要值，且不得與 IBM Cloud 基礎架構 (SoftLayer) 所使用的任何子網路衝突。
 
+
+
    支援的字首範圍從 `/30`（1 個 IP 位址）一直到 `/24`（253 個 IP 位址）。如果您將 CIDR 設在一個字首長度，之後又需要變更它，則請先新增新的 CIDR，然後[移除舊的 CIDR](#cs_cluster_user_subnet_rm)。</dd>
 
    <dt><code><em>PRIVATE_VLAN</em></code></dt>
@@ -790,6 +798,8 @@ kube-version: <em>&lt;kube-version&gt;</em>
 
  <p>
   若要產生 API 金鑰，請執行下列動作：
+
+  
 
   <ol>
   <li>登入 [IBM Cloud 基礎架構 (SoftLayer) 入口網站 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://control.softlayer.com/)。</li>
@@ -1044,7 +1054,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 {: #cs_machine_types}
 
 檢視工作者節點的可用機型清單。每一個機型都包括叢集中每一個工作者節點的虛擬 CPU、記憶體及磁碟空間量。
-- 名稱中具有 `u2c` 或 `b2c` 的機型會使用本端磁碟，而非儲存區網路 (SAN) 來取得可靠性。可靠性優點包括將位元組序列化到本端磁碟時的更高傳輸量，以及減少檔案系統由於網路故障而造成的退化。這些機型包含 25GB 本端磁碟儲存空間，供 OS 檔案系統使用，以及包含 100GB 本端磁碟儲存空間，供 `/var/lib/docker` 使用，而所有容器資料都會寫入至這個目錄中。
+- 名稱中具有 `u2c` 或 `b2c` 的機型，會使用本端磁碟而非儲存區網路 (SAN) 來提供可靠性。可靠性優點包括將位元組序列化到本端磁碟時的更高傳輸量，以及減少檔案系統由於網路故障而造成的退化。這些機型包含 25GB 本端磁碟儲存空間，供 OS 檔案系統使用，以及包含 100GB 本端磁碟儲存空間，供 `/var/lib/docker` 使用，而所有容器資料都會寫入至這個目錄中。
 - 名稱中包含 `encrypted` 的機型會加密主機的 Docker 資料。儲存所有容器資料的 `/var/lib/docker` 目錄是使用 LUKS 加密來進行加密。
 - 名稱中具有 `u1c` 或 `b1c` 的機型已被淘汰，例如 `u1c.2x4`。若要開始使用 `u2c` 及 `b2c` 機型，請使用 `bx cs worker-add` 指令，利用更新的機型新增工作者節點。然後，使用 `bx cs worker-rm` 指令，移除正在使用已淘汰機型的工作者節點。
 </p>
@@ -1093,6 +1103,8 @@ Region: us-south
 <dl>
 <dt><code><em>REGION</em></code></dt>
 <dd>輸入您要設為目標的地區。這是選用值。如果您未提供地區，則可以從輸出的清單中選取該地區。
+
+
 
 如需可用地區清單，請檢閱[地區及位置](cs_regions.html)，或使用 `bx cs regions` [指令](#cs_regions)。</dd></dl>
 
@@ -1227,6 +1239,8 @@ us-south      us-south
 <dd>將工作者節點新增至叢集之 YAML 檔案的路徑。您可以使用 YAML 檔案，而不是使用此指令中所提供的選項來定義其他工作者節點。這是選用值。
 
 <p><strong>附註：</strong>如果您在指令中提供與 YAML 檔案中的參數相同的選項，則指令中的值優先順序會高於 YAML 中的值。例如，您在 YAML 檔案中定義了機型，並在指令中使用 --machine-type 選項，則您在指令選項中輸入的值會置換 YAML 檔案中的值。
+
+
 
 <pre class="codeblock">
 <code>name: <em>&lt;cluster_name_or_id&gt;</em>

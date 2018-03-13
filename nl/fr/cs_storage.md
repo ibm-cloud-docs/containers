@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-07"
 
 ---
 
@@ -16,21 +16,91 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# Sauvegarde des données avec stockage sur volume persistant
+# Sauvegarde des données dans votre cluster
+{: #storage}
+Vous pouvez rendre des données persistantes en cas d'échec d'un composant dans votre cluster et pour partager des données entre les instances d'application.
+
+## Planification de stockage hautement disponible
 {: #planning}
 
-De par sa conception, la durée de vie d'un conteneur est brève. Toutefois, comme illustré dans le digramme suivant, vous disposez de plusieurs options pour rendre persistantes les données en cas de reprise en ligne d'un conteneur et pour partager les données entre les conteneurs.
-{:shortdesc}
+Dans {{site.data.keyword.containerlong_notm}}, vous disposez de plusieurs options pour stocker des données d'application et partager des données entre les pods dan votre cluster. Toutefois, les options de stockage n'offrent pas toutes le même niveau de persistance et de disponibilité au cas où un composant de votre cluster ou un site complet connaisse une défaillance.
+{: shortdesc}
 
-**Remarque **: si vous utilisez un pare-feu, [autorisez l'accès sortant](cs_firewall.html#pvc) pour les plages IP de l'infrastructure IBM Cloud (SoftLayer) des emplacements (centres de données) où sont situés vos clusters, de manière à pouvoir créer des réservations de volumes persistants.
+### Options de stockage de données non persistant
+{: #non_persistent}
 
-![Options de stockage persistant pour les déploiements dans des clusters Kubernetes](images/cs_planning_apps_storage.png)
+Vous pouvez utiliser des options de stockage non persistant si vos données n'ont pas besoin d'être stockées de manière permanente, de sorte à pouvoir les récupérer en cas de défaillance d'un composant de votre cluster, ou si elles n'ont pas besoin d'être partagées entre les instances d'application. Ces options peuvent également être utilisées afin d'effectuer un test d'unité sur vos composants d'application ou d'essayer de nouvelles fonctions.
+{: shortdesc}
 
-|Option|Description|
-|------|-----------|
-|Option 1 : Utiliser `/emptyDir` pour rendre persistantes les données à l'aide de l'espace disque disponible sur le noeud worker<p>Cette fonction est disponible pour les clusters léger et standard.</p>|Avec cette option, vous pouvez créer un volume vide sur l'espace disque du noeud worker affecté à un pod. Le conteneur dans cette nacelle peut lire et écrire sur ce volume. Comme le volume est affecté à un pod spécifique, les données ne peuvent pas être partagées avec d'autres pods dans un jeu de répliques.<p>Un volume `/emptyDir` et ses données sont supprimés lorsque le pod affecté est supprimé définitivement du noeud worker.</p><p>**Remarque :** si le conteneur à l'intérieur du pod tombe en panne, les données du volume restent disponibles sur le noeud worker.</p><p>Pour plus d'informations, voir [Volumes Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/storage/volumes/).</p>|
-|Option 2 : Créer une réservation de volume persistant pour provisionner un stockage persistant basé NFS pour votre déploiement<p>Cette fonction n'est disponible que pour les clusters standard.</p>|<p>Avec cette option, vous pouvez disposer d'un stockage persistant des données d'application et de conteneurs via des volumes persistants. Les volumes sont hébergés sur un [stockage de fichiers Endurance and Performance basé NFS ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud/file-storage/details). Le stockage de fichiers est chiffré au repos et vous pouvez créer des répliques des données stockées.</p> <p>Vous devez créer une [réservation de volume persistant](cs_storage.html) pour déclencher un demande de stockage basé NFS. {{site.data.keyword.containershort_notm}} fournit des classes de stockage prédéfinies qui définissent les plages de taille de stockage, les opérations IOPS, la règle de suppression et les autorisations d'accès en écriture au volume. Vous pouvez choisir entre ces classes de stockage lorsque vous créez votre réservation de volume persistant. Après que vous ayez soumis une demande de volume persistant, {{site.data.keyword.containershort_notm}} provisionne dynamiquement un volume persistant hébergé sur le stockage de fichiers NFS. [Vous pouvez monter la réservation de volume persistant](cs_storage.html#create) en tant que volume sur votre déploiement pour permettre aux conteneurs d'accéder en lecture et écriture au volume. Les volumes persistant peuvent être partagés à travers le même jeu de répliques ou avec d'autres déploiements dans le même cluster.</p><p>Lorsqu'un conteneur tombe en panne ou qu'un pod est retiré d'un noeud worker, les données ne sont pas supprimées et sont toujours accessibles par d'autres déploiements qui montent le volume. Les réservations de volume persistant sont hébergées sur un stockage permanent, mais il n'existe aucune sauvegarde correspondante. Si vous avez besoin d'une sauvegarde de vos données, créez manuellement une copie de sauvegarde.</p><p>**Remarque :** le stockage de partages de fichiers NFS persistants est facturé sur une base mensuelle. Si vous provisionnez un stockage persistant pour votre cluster et le retirez immédiatement, vous devrez néanmoins payer la redevance mensuelle pour le stockage persistant, même si vous ne l'avez utilisé que très brièvement.</p>|
-|Option 3 : Lier un service de base de données {{site.data.keyword.Bluemix_notm}} à votre pod<p>Cette fonction est disponible pour les clusters léger et standard.</p>|Avec cette option, vous pouvez rendre persistantes les données et y accéder à l'aide d'un service cloud de base de données {{site.data.keyword.Bluemix_notm}}. Lorsque vous liez le service {{site.data.keyword.Bluemix_notm}} à un espace de nom dans votre cluster, une valeur confidentielle Kubernetes est créée. Cette valeur contient des informations confidentielles sur le service, comme son URL, votre nom d'utilisateur et mot de passe. Vous pouvez monter le volume en tant que volume secret sur votre pod et accéder au service en utilisant les données d'identification dans la valeur confidentielle. En montant le volume sur sur d'autres pods, vous pouvez également partager les données entre les pods.<p>Lorsqu'un conteneur tombe en panne ou qu'un pod est retiré d'un noeud worker, les données ne sont pas perdues et restent accessibles aux autres pods qui montent le volume secret.</p><p>La plupart des services de base de données {{site.data.keyword.Bluemix_notm}} proposent un espace disque gratuit pour une petite quantité de données, de sorte que vous pouvez tester ses caractéristiques.</p><p>Pour plus d'informations sur la liaison d'un service {{site.data.keyword.Bluemix_notm}} à un pod, voir [Ajout de services {{site.data.keyword.Bluemix_notm}} à des applications dans {{site.data.keyword.containershort_notm}}](cs_integrations.html#adding_app).</p>|
+L'illustration suivante présente les options de stockage non persistant disponibles dans {{site.data.keyword.containerlong_notm}}. Ces options sont disponibles pour les clusters de l'édition gratuite et standard.
+<p>
+<img src="images/cs_storage_nonpersistent.png" alt="Options de stockage non persistant de données" width="450" style="width: 450px; border-style: none"/></p>
+
+<table summary="Le tableau présente les options de stockage non persistant. La lecture des lignes s'effectue de gauche à droite, le numéro de l'option figurant dans la première colonne, son titre dans la seconde et une description dans la troisième." style="width: 100%">
+<colgroup>
+       <col span="1" style="width: 5%;"/>
+       <col span="1" style="width: 20%;"/>
+       <col span="1" style="width: 75%;"/>
+    </colgroup>
+  <thead>
+  <th>#</th>
+  <th>Option</th>
+  <th>Description</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Dans le conteneur ou le pod</td>
+      <td>De par leur conception, les conteneurs ont une durée de vie brève et sont susceptibles à des défaillances inattendues. Toutefois, vous pouvez consigner des données sur le système de fichiers local afin de stocker des données tout au long du cycle de vie du conteneur. Les données hébergées au sein d'un conteneur ne peuvent pas être partagées avec d'autres conteneurs ou pods et sont perdues en cas de panne ou de suppression du conteneur. Pour plus d'informations, voir [Stockage de données dans un conteneur](https://docs.docker.com/storage/).</td>
+    </tr>
+  <tr>
+    <td>2</td>
+    <td>Sur le noeud worker</td>
+    <td>Chaque noeud worker est configuré avec un stockage principal et un stockage secondaire déterminés par le type de machine que vous sélectionnez pour ce noeud. Le stockage principal est utilisé pour stocker les données du système d'exploitation et n'est pas accessible à l'utilisateur. Le stockage secondaire est utilisé pour stocker des données dans <code>/var/lib/docker</code>, à savoir, le répertoire dans lequel toutes les données de conteneur sont consignées. <br/><br/>Pour accéder au stockage secondaire de votre noeud of worker, vous pouvez créer un volume <code>/emptyDir</code>. Ce volume vide est affecté à un pod dans votre cluster, de sorte à ce que les conteneurs du pod puissent accéder en lecture et écriture à ce volume. Comme le volume est affecté à un pod spécifique, les données ne peuvent pas être partagées avec d'autres pods dans un jeu de répliques.<br/><p>Un volume <code>/emptyDir</code> et ses données sont supprimés quand : <ul><li>Le pod auquel il est affecté est supprimé définitivement du noeud worker.</li><li>Le pod auquel il est affecté est planifié pour opérer sur un autre noeud worker.</li><li>Le noeud worker est rechargé ou mis à jour.</li><li>Le noeud worker est supprimé.</li><li>Le cluster est supprimé.</li><li>Le compte {{site.data.keyword.Bluemix_notm}} passe à un état 'suspendu'. </li></ul></p><p><strong>Remarque :</strong> si le conteneur à l'intérieur du pod tombe en panne, les données du volume restent disponibles sur le noeud worker.</p><p>Pour plus d'informations, voir [Volumes Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/storage/volumes/).</p></td>
+    </tr>
+    </tbody>
+    </table>
+
+### Options de stockage de données persistant pour haute disponibilité
+{: persistent}
+
+La principale difficulté lorsque vous créez des applications avec état de haute disponibilité consiste à rendre les données persistantes entre instances d'application et emplacements multiples, et de les maintenir synchronisées en tout temps. Pour les données à haute disponibilité, vous voudrez vous assurer de disposer d'une base de données maître dispersée entre plusieurs centres de données, ou même plusieurs régions, et que les données dans cette base de données maître sont répliquées en permanence. Toutes les instances dans votre cluster doivent pouvoir lire et écrire dans cette base de données maître. En cas de défaillance d'une instance de la base de données maître, les autres instances doivent assumer la charge de travail afin que vos applications ne connaissent pas de temps d'indisponibilité.
+{: shortdesc}
+
+L'illustration suivante présente les options disponibles dans {{site.data.keyword.containerlong_notm}} pour assurer une haute disponibilité de vos données dans un cluster standard. L'option pertinente dépend des facteurs suivants :
+  * **Le type de votre application :** vous pourriez, par exemple, utiliser une application nécessitant le stockage des données dans un fichier et non pas dans une base de données.
+  * **Les exigences légales quant au stockage et au routage des données :** vous pourriez, par exemple, être obligé de stocker et de router vos données aux Etats-Unis, sans pouvoir utiliser un service situé en Europe.
+  * **Options de sauvegarde et de restauration :** toutes les options de stockage disposent de capacités de sauvegarde et de restauration des données. Vérifiez que les options disponibles répondent aux exigences de votre plan de reprise après incident, telles que la fréquence des sauvegardes ou la possibilité de stocker vos données hors de votre centre de données principal.
+  * **Réplication globale :** pour haute disponibilité, vous souhaiterez éventuellement configurer plusieurs instances de stockage, lesquelles seront distribuées et répliquées entre vos centres de données à travers le monde.
+
+<br/>
+<img src="images/cs_storage_ha.png" alt="Options de haute disponibilité pour stockage persistant"/>
+
+<table summary="Ce tableau présente les options de stockage persistant. La lecture des lignes s'effectue de gauche à droite, le numéro de l'option figurant dans la première colonne, son titre dans la seconde et une description dans la troisième.">
+  <thead>
+  <th>#</th>
+  <th>Option</th>
+  <th>Description</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td width="5%">1</td>
+  <td width="20%">Stockage de fichiers NFS</td>
+  <td width="75%">Cette option vous permet de rendre persistantes les données d'application et de conteneur via des volumes Kubernetes persistants. Les volumes sont hébergés sur [stockage de fichiers Endurance and Performance basé NFS![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/details) qui peut être utilisé pour les applications qui stockent les données sur fichier, et non pas dans une base de données. Le stockage de fichiers est chiffré sous REST et mis en cluster par IBM pour permettre une haute disponibilité.<p>{{site.data.keyword.containershort_notm}} fournit des classes de stockage prédéfinies qui définissent les plages de taille de stockage, les opérations IOPS, la règle de suppression et les autorisations d'accès en écriture au volume. Pour lancer une demande de stockage de fichier basée NFS, vous devez créer une [réservation de volume persistant](cs_storage.html#create). Après que vous ayez soumis une demande de volume persistant, {{site.data.keyword.containershort_notm}} provisionne dynamiquement un volume persistant hébergé sur le stockage de fichiers NFS. [Vous pouvez monter la réservation de volume persistant](cs_storage.html#app_volume_mount) en tant que volume sur votre déploiement pour permettre aux conteneurs d'accéder en lecture et écriture au volume. </p><p>Les volumes persistants sont provisionnés dans le centre de données où est situé le noeud worker. Vous pouvez partager les données avec la même réplique et/ou d'autres déploiements dans le même cluster. Vous ne pouvez pas partager les données lorsqu'elles sont situées dans des centres de données ou des régions différents. </p><p>Par défaut, le stockage NFS n'est pas sauvegardé automatiquement. Vous pouvez configurer une sauvegarde périodique pour votre cluster en exploitant les mécanismes de sauvegarde et restauration fournis. Lorsqu'un conteneur tombe en panne ou qu'un pod est retiré d'un noeud worker, les données ne sont pas supprimées et sont toujours accessibles par d'autres déploiements qui montent le volume. </p><p><strong>Remarque :</strong> le stockage de partages de fichiers NFS persistants est facturé sur une base mensuelle. Si vous provisionnez un stockage persistant pour votre cluster et le retirez immédiatement, vous devrez néanmoins payer la redevance mensuelle pour le stockage persistant, même si vous ne l'avez utilisé que très brièvement.</p></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Service de base de données Cloud</td>
+    <td>Cette option vous permet de rendre persistantes les données via un service de base de données cloud {{site.data.keyword.Bluemix_notm}}, tel qu'[IBM Cloudant NoSQL DB](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant). Les données stockées via cette option sont accessibles entre les clusters, les emplacements et les régions. <p> Vous pouvez vous contenter de configurer une seule instance base de données à laquelle accéderont toutes vos applications ou bien [configurer plusieurs instances entre les centres de données, et une réplication](/docs/services/Cloudant/guides/active-active.html#configuring-cloudant-nosql-db-for-cross-region-disaster-recovery) entre les instances pour une plus haute disponibilité. Dans la base de données IBM Cloudant NoSQL, les données ne sont pas sauvegardées automatiquement. Vous pouvez utiliser les [mécanismes de sauvegarde et de restauration](/docs/services/Cloudant/guides/backup-cookbook.html#cloudant-nosql-db-backup-and-recovery) fournis afin de protéger vos données en cas de panne du site.</p> <p> Pour utiliser un service dans votre cluster, vous devez [lier le {{site.data.keyword.Bluemix_notm}} service ](cs_integrations.html#adding_app) à un espace de nom dans votre cluster. Lorsque vous liez le service au cluster, une valeur confidentielle Kubernetes est créée. Celle-ci héberge des informations confidentielles relatives au service, comme son URL, votre nom d'utilisateur et votre mot de passe. Vous pouvez monter le volume en tant que volume secret sur votre pod et accéder au service en utilisant les données d'identification dans la valeur confidentielle. En montant le volume sur sur d'autres pods, vous pouvez également partager les données entre les pods. Lorsqu'un conteneur tombe en panne ou qu'un pod est retiré d'un noeud worker, les données ne sont pas perdues et restent accessibles aux autres pods qui montent le volume secret. <p>La plupart des services de base de données {{site.data.keyword.Bluemix_notm}} proposent un espace disque gratuit pour une petite quantité de données, de sorte que vous pouvez tester ses caractéristiques.</p></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>Base de données sur site</td>
+    <td>Si vos données doivent être stockées sur site en raison de contraintes légales, vous pouvez [mettre en place une connexion VPN (réseau privé virtuel)](cs_vpn.html#vpn) vers votre base de données locale et utiliser les mécanismes de stockage, de sauvegarde et de réplications existants face à votre centre de données.</td>
+  </tr>
+  </tbody>
+  </table>
+
 {: caption="Table. Options de stockage persistant pour les déploiements dans des clusters Kubernetes" caption-side="top"}
 
 <br />
@@ -66,7 +136,7 @@ Pour créer un volume persistant et une réservation correspondante, procédez c
     5.  Sélectionnez dans le menu le sous-réseau du VLAN public de votre cluster et cliquez sur **Soumettre**. Si vous devez identifier le sous-réseau, exécutez la commande `bx cs cluster-get <cluster_name> --showResources`.
     6.  Cliquez sur le nom du stockage de fichiers.
     7.  Notez la valeur de la zone **Point de montage**. Cette zone est affichée sous la forme `<server>:/<path>`.
-2.  Créez un fichier de configuration de stockage pour votre volume persistant. Incluez le serveur et le chemin de la zone**Point de montage** du système de fichiers.
+2.  Créez un fichier de configuration de stockage pour votre volume persistant. Incluez le serveur et le chemin de la zone **Point de montage** du système de fichiers.
 
     ```
     apiVersion: v1
@@ -198,7 +268,9 @@ persistant. Les utilisateurs du cluster peuvent à présent [monter la réservat
 Créez une réservation de volume persistant (pvc) pour mettre à disposition un stockage de fichiers NFS pour votre cluster. Montez ensuite cette réservation sur un déploiement afin de garantir la disponibilité des données même en cas de panne ou d'arrêt des pods.
 {:shortdesc}
 
-Le stockage de fichiers NFS où est sauvegardé le volume persistant est mis en cluster par IBM pour une haute disponibilité de vos données.
+Le stockage de fichiers NFS où est sauvegardé le volume persistant est mis en cluster par IBM pour une haute disponibilité de vos données. Les classes de stockage décrivent les types de stockage disponibles et défissent des caractéristiques telles que la politique de rétention des données, leur taille en gigaoctets et le nombre d'IOPS lorsque vous créez votre volume persistant.
+
+**Remarque **: si vous utilisez un pare-feu, [autorisez l'accès sortant](cs_firewall.html#pvc) pour les plages IP de l'infrastructure IBM Cloud (SoftLayer) des emplacements (centres de données) où sont situés vos clusters, de manière à pouvoir créer des réservations de volumes persistants.
 
 1.  Examinez les classes de stockage disponibles. {{site.data.keyword.containerlong}} fournit huit classes de stockage prédéfinies afin que l'administrateur du cluster n'ait pas besoin d'en créer. La classe de stockage `ibmc-file-bronze` est identique à la classe de stockage `default`.
 
@@ -222,108 +294,104 @@ Le stockage de fichiers NFS où est sauvegardé le volume persistant est mis en 
     ```
     {: screen}
 
-2.  Déterminez si vous souhaitez sauvegarder vos données et le partage de fichiers NFS après avoir supprimé la réservation de volume persistant (pvc). Pour conserver vos données, choisissez une classe de stockage `retain`. Si vous souhaitez que les données et votre partage de fichiers soient supprimés en même temps que la réservation pvc, choisissez une classe de stockage sans `retain`.
+2.  Déterminez si vous souhaitez sauvegarder vos données et le partage de fichiers NFS après avoir supprimé la réservation de volume persistant (dénommée règle de réservation). Pour conserver vos données, choisissez une classe de stockage `retain`. Si vous souhaitez que les données et votre partage de fichiers soient supprimés en même temps que la réservation pvc, choisissez une classe de stockage sans `retain`.
 
-3.  Examinez les opérations d'entrée-sortie par seconde (IOPS) d'une classe de stockage et les tailles de stockage disponibles.
+3.  Extrayez les informations détaillées d'une classe de stockage. Examinez le nombre d'IOPS par gigaoctet et sa plage de dimension dans la zone **paramters** de votre sortie CLI. 
 
-    - Les classes de stockage de bronze, argent et or utilisent un stockage [Endurance ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://knowledgelayer.softlayer.com/topic/endurance-storage) avec 1 IOPS définie par Go pour chaque classe. Le nombre total d'opérations IOPS dépend de la taille du stockage. Par exemple, 1000Gi pvc à 4 IOPS par Go donne un total de 4000 IOPS.
+    <ul>
+      <li>Les classes de stockage bronze, argent ou or utilisent un stockage [Endurance![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage) qui définit le nombre d'IOPS par Go pour chaque classe. Vous pouvez toutefois déterminer le nombre total d'IOPS en sélectionnant une taille sur la plage disponible. Par exemple, si vous sélectionnez une taille de partage de fichiers de 1000Gi dans la classe de stockage argent de 4 IOPS per GB, votre volume dispose d'un total de 4000 IOPS. Plus votre volume persistant dispose d'IOPS, et plus vite peut-il traiter les opérations d'entrée et de sortie. <p>**Exemple de commande dérivant la classe de stockage**:</p>
 
-      ```
-      kubectl describe storageclasses ibmc-file-silver
-      ```
-      {: pre}
+       <pre class="pre">kubectl describe storageclasses ibmc-file-silver</pre>
 
-      La zone **parameters** indique le nombre d'IOPS per Go associé à la classe de stockage et les tailles disponibles (en Go).
+       La zone **parameters** indique le nombre d'IOPS per Go associé à la classe de stockage et les tailles disponibles (en Go).
+       <pre class="pre">Parameters:	iopsPerGB=4,sizeRange=20Gi,40Gi,80Gi,100Gi,250Gi,500Gi,1000Gi,2000Gi,4000Gi,8000Gi,12000Gi</pre>
+       
+       </li>
+      <li>En utilisant des classes de stockage personnalisées, vous obtenez un [stockage Performance ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/performance-storage) vous offrant un contrôle plus étroit quant à la combinaison du nombre IOPS et de sa taille. <p>**Exemple de commande décrivant une classe de stockage personnalisée**:</p>
 
-      ```
-      Parameters:	iopsPerGB=4,sizeRange=20Gi,40Gi,80Gi,100Gi,250Gi,500Gi,1000Gi,2000Gi,4000Gi,8000Gi,12000Gi
-      ```
-      {: screen}
+       <pre class="pre">kubectl describe storageclasses ibmc-file-retain-custom</pre>
 
-    - Les classes de stockage personnalisées utilisent du [stockage de type Performance ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://knowledgelayer.softlayer.com/topic/performance-storage) et disposent d'options discrètes pour la taille et le nombre total d'IOPS.
+       La zone **parameters** indique le nombre d'IOPS associé à la classe de stockage et les tailles disponibles en gigaoctets. Par exemple, 40Gi pvc peut sélectionner un nombre d'IOPS multiple de 100 compris entre 100 et 2000 IOPS.
 
-      ```
-      kubectl describe storageclasses ibmc-file-retain-custom
-      ```
-      {: pre}
+       ```
+       Parameters:	Note=IOPS value must be a multiple of 100,reclaimPolicy=Retain,sizeIOPSRange=20Gi:[100-1000],40Gi:[100-2000],80Gi:[100-4000],100Gi:[100-6000],1000Gi[100-6000],2000Gi:[200-6000],4000Gi:[300-6000],8000Gi:[500-6000],12000Gi:[1000-6000]
+       ```
+       {: screen}
+       </li></ul>
+4. Créez un fichier de configuration pour définir votre réservation de volume persistant et enregistrer la configuration dans un fichier `.yaml`.
 
-      La zone **parameters** indique le nombre d'IOPS associé à la classe de stockage et les tailles disponibles en gigaoctets. Par exemple, 40Gi pvc peut sélectionner un nombre d'IOPS multiple de 100 compris entre 100 et 2000 IOPS.
+    -  **Exemples pour les classes de stockage bronze, argent et or** :
+       
 
-      ```
-      Parameters:	Note=IOPS value must be a multiple of 100,reclaimPolicy=Retain,sizeIOPSRange=20Gi:[100-1000],40Gi:[100-2000],80Gi:[100-4000],100Gi:[100-6000],1000Gi[100-6000],2000Gi:[200-6000],4000Gi:[300-6000],8000Gi:[500-6000],12000Gi:[1000-6000]
-      ```
-      {: screen}
+       ```
+       apiVersion: v1
+       kind: PersistentVolumeClaim
+       metadata:
+        name: mypvc
+        annotations:
+          volume.beta.kubernetes.io/storage-class: "ibmc-file-silver"
 
-4.  Créez un fichier de configuration pour définir votre réservation de volume persistant et enregistrer la configuration dans un fichier `.yaml`.
+       spec:
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: 20Gi
+        ```
+        {: codeblock}
 
-    Exemple pour les classes de type bronze, silver et gold :
+    -  **Exemple pour classes de stockage personnalisées**:
+       
 
-    ```
-    apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: <pvc_name>
-      annotations:
-        volume.beta.kubernetes.io/storage-class: "ibmc-file-silver"
-    spec:
-      accessModes:
-        - ReadWriteMany
-      resources:
-        requests:
-          storage: 20Gi
-    ```
-    {: codeblock}
+       ```
+       apiVersion: v1
+       kind: PersistentVolumeClaim
+       metadata:
+         name: mypvc
+         annotations:
+           volume.beta.kubernetes.io/storage-class: "ibmc-file-retain-custom"
 
-    Exemple pour les classes personnalisées :
+       spec:
+         accessModes:
+           - ReadWriteMany
+         resources:
+           requests:
+             storage: 40Gi
+             iops: "500"
+        ```
+        {: codeblock}
 
-    ```
-    apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: <pvc_name>
-      annotations:
-        volume.beta.kubernetes.io/storage-class: "ibmc-file-retain-custom"
-    spec:
-      accessModes:
-        - ReadWriteMany
-      resources:
-        requests:
-          storage: 40Gi
-          iops: "500"
-    ```
-    {: codeblock}
-
-    <table>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>metadata/name</code></td>
-    <td>Entrez le nom de la réservation de volume persistant.</td>
-    </tr>
-    <tr>
-    <td><code>metadata/annotations</code></td>
-    <td>Indiquez la classe de stockage pour le volume persistant :
-      <ul>
-      <li>ibmc-file-bronze / ibmc-file-retain-bronze : 2 IOPS par Go.</li>
-      <li>ibmc-file-silver / ibmc-file-retain-silver : 4 IOPS par Go.</li>
-      <li>ibmc-file-gold / ibmc-file-retain-gold : 10 IOPS par Go.</li>
-      <li>ibmc-file-custom / ibmc-file-retain-custom : Plusieurs valeurs d'IOPS disponibles.
-
-    </li> Si vous ne spécifiez pas de classe de stockage, le volume persistant est créé avec la classe de stockage bronze.</td>
-    </tr>
-    <tr>
-    <td><code>spec/accessModes</code>
+        <table>
+        <thead>
+        <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
+        </thead>
+        <tbody>
+        <tr>
+        <td><code>metadata/name</code></td>
+        <td>Entrez le nom de la réservation de volume persistant.</td>
+        </tr>
+        <tr>
+        <td><code>metadata/annotations</code></td>
+        <td>Indiquez la classe de stockage pour le volume persistant :
+          <ul>
+          <li>ibmc-file-bronze / ibmc-file-retain-bronze : 2 IOPS par Go.</li>
+          <li>ibmc-file-silver / ibmc-file-retain-silver : 4 IOPS par Go.</li>
+          <li>ibmc-file-gold / ibmc-file-retain-gold : 10 IOPS par Go.</li>
+          <li>ibmc-file-custom / ibmc-file-retain-custom : Plusieurs valeurs d'IOPS disponibles.</li>
+          <p>Si vous ne spécifiez pas de classe de stockage, le volume persistant est créé avec la classe de stockage bronze.</p></td>
+        </tr>
+        
+        <tr>
+        <td><code>spec/accessModes</code>
     <code>resources/requests/storage</code></td>
-    <td>Si vous choisissez une taille autre que celle qui est répertoriée, cette taille est arrondie vers le haut. Si vous choisissez une taille supérieure à la taille maximale, cette taille est arrondie au-dessous.</td>
-    </tr>
-    <tr>
-    <td><code>spec/accessModes</code>
+        <td>Si vous choisissez une taille autre que celle qui est répertoriée, cette taille est arrondie vers le haut. Si vous choisissez une taille supérieure à la taille maximale, cette taille est arrondie au-dessous.</td>
+        </tr>
+        <tr>
+        <td><code>spec/accessModes</code>
     <code>resources/requests/iops</code></td>
-    <td>Cette option est applicable uniquement à ibmc-file-custom / ibmc-file-retain-custom. Indiquez le nombre total d'IOPS pour le stockage. Exécutez la commande `kubectl describe storageclasses ibmc-file-custom` pour voir toutes les options. Si vous choisissez une valeur IOPS autre que celle répertoriée, la valeur IOPS est arrondie à la valeur supérieure.</td>
-    </tr>
-    </tbody></table>
+        <td>Cette option ne concerne que les classe de stockage client (`ibmc-file-custom / ibmc-file-retain-custom`). Indiquez le nombre total d'IOPS pour le stockage. Pour examiner toutes les options, exécutez la commande `kubectl describe storageclasses ibmc-file-custom`. Si vous choisissez une valeur IOPS autre que celle répertoriée, la valeur IOPS est arrondie à la valeur supérieure.</td>
+        </tr>
+        </tbody></table>
 
 5.  Créez la réservation de volume persistant.
 
@@ -335,14 +403,14 @@ Le stockage de fichiers NFS où est sauvegardé le volume persistant est mis en 
 6.  Vérifiez que votre réservation de volume persistant a été créée et liée au volume persistant. Ce processus peut prendre quelques minutes.
 
     ```
-    kubectl describe pvc <pvc_name>
+    kubectl describe pvc mypvc
     ```
     {: pre}
 
-    Votre sortie sera similaire à ceci.
+    Exemple de sortie :
 
     ```
-    Name:  <pvc_name>
+    Name: mypvc
     Namespace: default
     StorageClass: ""
     Status:  Bound
@@ -400,20 +468,28 @@ Le stockage de fichiers NFS où est sauvegardé le volume persistant est mis en 
     <td>Libellé du déploiement.</td>
     </tr>
     <tr>
-    <td><code>volumeMounts/mountPath</code></td>
-    <td>Chemin absolu du répertoire où est monté le volume dans le déploiement.</td>
+    <td><code>spec/containers/image</code></td>
+    <td>Nom de l'image que vous désirez utiliser. Pour répertorier les images disponibles dans un votre compte {{site.data.keyword.registryshort_notm}}, exécutez la commande `bx cr image-list`.</td>
     </tr>
     <tr>
-    <td><code>volumeMounts/name</code></td>
-    <td>Nom du volume à monter sur votre déploiement.</td>
+    <td><code>spec/containers/name</code></td>
+    <td>Nom du conteneur que vous désirez déployer dans votre cluster.</td>
+    </tr>
+    <tr>
+    <td><code>spec/containers/volumeMounts/mountPath</code></td>
+    <td>Chemin absolu du répertoire où est monté le volume dans le conteneur.</td>
+    </tr>
+    <tr>
+    <td><code>spec/containers/volumeMounts/name</code></td>
+    <td>Nom du volume où monter sur votre pod. </td>
     </tr>
     <tr>
     <td><code>volumes/name</code></td>
-    <td>Nom du volume à monter sur votre déploiement. Généralement, ce nom est identique à <code>volumeMounts/name</code>.</td>
+    <td>Nom du volume où monter sur votre pod. Généralement, ce nom est identique à <code>volumeMounts/name</code>.</td>
     </tr>
     <tr>
-    <td><code>volumes/name/persistentVolumeClaim</code></td>
-    <td>Nom de la réservation de volume persistant que vous souhaitez utiliser pour votre volume. Lorsque vous montez le volume sur le déploiement, Kubernetes identifie le volume persistant lié à la réservation de volume persistant et permet à l'utilisateur d'accéder en lecture et écriture au volume persistant.</td>
+    <td><code>volumes/persistentVolumeClaim/claimName</code></td>
+    <td>Nom de la réservation de volume persistant que vous souhaitez utiliser pour votre volume. Lorsque vous montez le volume sur le pod, Kubernetes identifie le volume persistant lié à a réservation de volume persistant et autorise l'utilisateur à accéder à celui-ci en lecture et écriture.</td>
     </tr>
     </tbody></table>
 
@@ -451,7 +527,6 @@ Le stockage de fichiers NFS où est sauvegardé le volume persistant est mis en 
 
 
 
-
 ## Ajout d'un accès d'utilisateur non root au stockage persistant
 {: #nonroot}
 
@@ -469,13 +544,13 @@ volume, vous devez ajouter les processus suivants à votre Dockerfile et un scri
 -   Créez sur le chemin de montage du volume un répertoire avec les droits d'accès utilisateur appropriés.
 
 Pour {{site.data.keyword.containershort_notm}}, le propriétaire par défaut du chemin de montage du volume est le propriétaire `nobody`. Avec le stockage NFS, si le propriétaire n'existe pas localement dans le pod, l'utilisateur `nobody` est créé. Les volumes sont configurés pour
-reconnaître l'utilisateur root dans le conteneur, or, pour certaines applications, il s'agit du seul utilisateur au sein d'un conteneur. Cependant, certaines applications spécifient un utilisateur non root autre que `nobody` qui écrit des données sur le chemin de montage du conteneur. Certaines applications spécifient que le volume doit appartenir à l'utilisateur root. En général, les applications n'utilisent pas l'utilisation root pour des raisons de sécurité. Toutefois, si votre application nécessite un utilisateur root, vous pouvez contacter le [support {{site.data.keyword.Bluemix_notm}} ](/docs/support/index.html#contacting-support) pour une assistance.
+reconnaître l'utilisateur root dans le conteneur, or, pour certaines applications, il s'agit du seul utilisateur au sein d'un conteneur. Cependant, certaines applications spécifient un utilisateur non root autre que `nobody` qui écrit des données sur le chemin de montage du conteneur. Certaines applications spécifient que le volume doit appartenir à l'utilisateur root. En général, les applications n'utilisent pas l'utilisation root pour des raisons de sécurité. Toutefois, si votre application exige un utilisateur racine, contactez l'[{{site.data.keyword.Bluemix_notm}} support](/docs/get-support/howtogetsupport.html#getting-customer-support) pour assistance.
 
 
 1.  Créez un fichier Dockerfile sous un répertoire local. L'exemple Dockerfile suivant crée un utilisateur non root nommé `myguest`.
 
     ```
-    FROM registry.<region>.bluemix.net/ibmnode:latest
+    FROM registry.<region>.bluemix.net/ibmliberty:latest
 
     # Create group and user with GID & UID 1010.
     # In this case your are creating a group and user named myguest.
@@ -602,14 +677,14 @@ reconnaître l'utilisateur root dans le conteneur, or, pour certaines applicatio
     ```
     {: codeblock}
 
-9.  Créez la nacelle et montez la réservation de volume persistant sur la nacelle.
+9.  Créez le pod et montez la réservation de volume persistant sur le pod.
 
     ```
     kubectl apply -f <local_yaml_path>
     ```
     {: pre}
 
-10. Vérifiez que le montage du volume sur votre nacelle a abouti.
+10. Vérifiez que le montage du volume sur votre pod a abouti.
 
     ```
     kubectl describe pod mypod

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-01-30"
 
 ---
 
@@ -21,35 +21,33 @@ lastupdated: "2018-01-11"
 {{site.data.keyword.containershort}} propose des outils puissants en combinant les technologies Docker et Kubernetes, une expérience utilisateur intuitive et une sécurité et un isolement intégrés pour automatiser le déploiement, l'opération, la mise à l'échelle et la surveillance d'applications conteneurisées dans un cluster d'hôtes de traitement.
 {:shortdesc}
 
-## Avantages de l'utilisation de clusters
+## Avantages de l'utilisation du service
 {: #benefits}
 
-Les clusters sont déployés sur des hôtes de calcul qui fournissent des capacités Kubernetes natives et des capacités ajoutées par {{site.data.keyword.IBM_notm}}.
+Les clusters sont déployés sur des hôtes de calcul qui fournissent des capacités Kubernetes natives et des capacités spécifiques à {{site.data.keyword.IBM_notm}}.
 {:shortdesc}
 
 |Avantage|Description|
 |-------|-----------|
-|Clusters Kubernetes à service exclusif avec isolement de l'infrastructure de traitement, de réseau et de stockage|<ul><li>Créez votre propre infrastructure personnalisée afin de répondre aux besoins de votre organisation.</li><li>Allouez à un maître Kubernetes dédié et sécurisé, des noeuds d'agent, des réseaux virtuels et un espace de stockage en utilisant les ressources fournies par l'infrastructure IBM Cloud (SoftLayer).</li><li>Stockez les données persistantes, partagez les données entre les pods Kubernetes et restaurez les données en cas de besoin avec le service de volumes intégré et sécurisé.</li><li>Le maître Kubernetes entièrement géré est constamment surveillé et mis à jour par {{site.data.keyword.IBM_notm}} pour que votre cluster soit toujours disponible.</li><li>Tirez parti de la prise en charge complète de toutes les API Kubernetes natives.</li></ul>|
+|Clusters Kubernetes à service exclusif avec isolement de l'infrastructure de traitement, de réseau et de stockage|<ul><li>Créez votre propre infrastructure personnalisée afin de répondre aux besoins de votre organisation.</li><li>Allouez à un maître Kubernetes dédié et sécurisé, des noeuds d'agent, des réseaux virtuels et un espace de stockage en utilisant les ressources fournies par l'infrastructure IBM Cloud (SoftLayer).</li><li>Le maître Kubernetes entièrement géré est constamment surveillé et mis à jour par {{site.data.keyword.IBM_notm}} pour que votre cluster soit toujours disponible.</li><li>Stockez les données persistantes, partagez les données entre les pods Kubernetes et restaurez les données en cas de besoin avec le service de volumes intégré et sécurisé.</li><li>Tirez parti de la prise en charge complète de toutes les API Kubernetes natives.</li></ul>|
 |Conformité en matière de sécurité d'image avec Vulnerability Advisor|<ul><li>Configurez votre propre registre d'images Docker privé et sécurisée où les images sont stockées et partagés par tous les utilisateurs dans l'organisation.</li><li>Tirez parti de l'analyse automatique des images dans votre registre {{site.data.keyword.Bluemix_notm}} privé.</li><li>Examinez les recommandations spécifiques au système d'exploitation utilisé dans l'image afin de corriger les vulnérabilités potentielles.</li></ul>|
-|Mise à l'échelle automatique des applications|<ul><li>Définissez des règles personnalisées afin d'élargir ou de contracter vos applications en fonction de la consommation d'UC et de mémoire.</li></ul>|
 |Surveillance continue de l'état de santé du cluster|<ul><li>Utilisez le tableau de bord du cluster pour déterminer rapidement et gérer l'état de santé de votre cluster, des noeuds d'agent et des déploiements de conteneurs.</li><li>Accédez à des métriques de consommation détaillées en utilisant {{site.data.keyword.monitoringlong}} et élargissez rapidement votre cluster pour répondre aux charges de travail.</li><li>Examinez les informations de journalisation à l'aide d'{{site.data.keyword.loganalysislong}} pour voir les activités détaillées du cluster.</li></ul>|
-|Reprise en ligne automatique des conteneurs défectueux|<ul><li>Vérifications en continu de l'état de santé des conteneurs déployés sur un noeud worker.</li><li>Recréation automatique des conteneurs en cas de défaillances.</li></ul>|
-|Reconnaissance et gestion de services|<ul><li>Enregistrement centralisé des services d'application pour les rendre disponibles à d'autres applications dans votre cluster sans les exposer publiquement.</li><li>Reconnaissance des services enregistrés sans avoir à suivre le fil des modifications de leurs adresses IP ou des ID de conteneurs et exploitation du routage automatique vers les instances disponibles.</li></ul>|
-|Exposition sécurisée des services au public|<ul><li>Réseaux privés superposés avec prise en charge complète d'équilibreur de charge et d'Ingress pour rendre vos applications accessibles au public et équilibrer les charges de travail entre plusieurs noeuds d'agent sans avoir à suivre le fil des changements d'adresse IP dans votre cluster.</li><li>Possibilité de sélection d'une adresse IP publique, d'une route fournie par {{site.data.keyword.IBM_notm}} ou de votre propre domaine personnalisé pour accéder à des services dans votre cluster depuis Internet.</li></ul>|
-|Intégration de services {{site.data.keyword.Bluemix_notm}}|<ul><li>Ajoutez des fonctionnalités supplémentaires à votre application via l'intégration de services {{site.data.keyword.Bluemix_notm}}, tels que les API Watson, Blockchain, services de données, Internet of Things, et facilitation de la simplification du processus de développement d'application et de gestion des conteneurs.</li></ul>|
+|Exposition sécurisée des applications au public|<ul><li>Possibilité de sélection d'une adresse IP publique, d'une route fournie par {{site.data.keyword.IBM_notm}} ou de votre propre domaine personnalisé pour accéder à des services dans votre cluster depuis Internet.</li></ul>|
+|Intégration de services {{site.data.keyword.Bluemix_notm}}|<ul><li>Vous pouvez ajouter des fonctionnalités supplémentaires à votre application via l'intégration de services {{site.data.keyword.Bluemix_notm}}, tels que les API Watson, Blockchain, services de données ou Internet of Things.</li></ul>|
+
+
 
 <br />
 
 
-## Comparaison des clusters léger et standard
+## Comparaison des clusters gratuits et standards
 {: #cluster_types}
 
-Vous pouvez créer des clusters légers ou standard. Essayez les clusters léger pour vous familiarise et tester quelques capacités Kubernetes, ou pour créer des clusters standard utilisant les pleines capacités de Kubernetes pour déployer des applications.
+Vous pouvez créer un cluster gratuit ou n'importe quel nombre de clusters standards. Faites-vous la main avec les clusters gratuits pour vous familiariser et tester diverses fonctionnalités Kubernetes ou créez des clusters standards pour exploiter les pleines capacités Kubernetes pour déployer des applications.
 {:shortdesc}
 
-|Caractéristiques|Clusters légers|Clusters standard|
+|Caractéristiques|Clusters gratuits|Clusters standard|
 |---------------|-------------|-----------------|
-|[Disponible dans {{site.data.keyword.Bluemix_notm}}](cs_why.html)|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
 |[Mise en réseau au sein d'un cluster](cs_secure.html#in_cluster_network)|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
 |[Accès à des applications réseau publiques par un service NodePort](cs_network_planning.html#nodeport)|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
 |[Gestion de l'accès utilisateur](cs_users.html#managing)|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
@@ -91,8 +89,8 @@ Passez en revue les responsabilités que vous partagez avec IBM pour gérer vos 
 - [Création de réseaux locaux virtuels (VLAN) publics et privés dans l'infrastructure IBM Cloud (SoftLayer) pour isolement de votre cluster dans le réseau](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
 - [Assurer que tous les noeuds d'agent ont une connectivité réseau avec l'URL du maître Kubernetes](cs_firewall.html#firewall) <p>**Remarque** : si un noeud worker comporte à la fois des VLAN public et privé, la connectivité réseau est configurée. Si le noeud worker est configuré uniquement avec un VLAN privé, un Vyatta est requis pour fournir la connectivité réseau.</p>
 - [Mettre à jour le kube-apiserver maître et les noeuds d'agent lorsque des mises à jour principales ou secondaires de Kubernetes sont disponibles](cs_cluster_update.html#master)
-- [Prendre les mesures nécessaires pour effectuer la reprise de noeuds d'agent à problème en exécutant des commandes `kubectl`, telles que `cordon` ou `drain` et en exécutant des commandes `bx cs`, telles que `reboot`, `reload` ou `delete`](cs_cli_reference.html#cs_worker_reboot)
-- [Ajouter ou retirer des sous-réseaux supplémentaires dans l'infrastructure IBM Cloud (SoftLayer) selon les besoins](cs_subnets.html#subnets)
+- [Récupération de noeuds worker problématiques en exécutant des commandes `kubectl`, comme `cordon` ou `drain`, et des commandes `bx cs`, comme `reboot`, `reload` ou `delete`](cs_cli_reference.html#cs_worker_reboot)
+- [Ajout ou suppression de sous-réseaux dans IBM Cloud infrastructure (SoftLayer) selon les besoins](cs_subnets.html#subnets)
 - [Sauvegarder et restaurer des données dans du stockage persistant dans l'infrastructure IBM Cloud (SoftLayer) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](../services/RegistryImages/ibm-backup-restore/index.html)
 
 <br />

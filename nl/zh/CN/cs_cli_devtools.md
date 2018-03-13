@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-01-02"
+lastupdated: "2017-01-24"
 
 ---
 
@@ -25,7 +25,7 @@ lastupdated: "2017-01-02"
 **提示：**在查找 `bx cr` 命令吗？请参阅 [{{site.data.keyword.registryshort_notm}} CLI 参考](/docs/cli/plugins/registry/index.html)。在查找 `kubectl` 命令吗？请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)。
 
 
-<!--[https://github.ibm.com/alchemy-containers/armada-cli ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.ibm.com/alchemy-containers/armada-cli)-->
+
 
 <table summary="用于在 {{site.data.keyword.Bluemix_notm}} 上创建集群的命令">
  <thead>
@@ -338,9 +338,11 @@ bx cs cluster-config my_cluster
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
 
 <dd>用于创建标准集群的 YAML 文件的路径。您可以使用 YAML 文件，而不使用此命令中提供的选项来定义集群的特征。
-此值对于标准集群是可选的，且不可用于 Lite 集群。
+此值对于标准集群是可选的，且不可用于免费集群。
 
-<p><strong>注</strong>：如果在命令中提供的选项与 YAML 文件中的参数相同，那么命令中的值将优先于 YAML 中的值。例如，您在 YAML 文件中定义了位置，并在命令中使用了 <code>--location</code> 选项，那么在该命令选项中输入的值会覆盖 YAML 文件中的相应值。<pre class="codeblock">
+<p><strong>注</strong>：如果在命令中提供的选项与 YAML 文件中的参数相同，那么命令中的值将优先于 YAML 中的值。例如，您在 YAML 文件中定义了位置，并在命令中使用了 <code>--location</code> 选项，那么在该命令选项中输入的值会覆盖 YAML 文件中的相应值。
+
+<pre class="codeblock">
 <code>name: <em>&lt;cluster_name&gt;</em>
 location: <em>&lt;location&gt;</em>
 no-subnet: <em>&lt;no-subnet&gt;</em>
@@ -402,11 +404,11 @@ kube-version: <em>&lt;kube-version&gt;</em>
     </p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
-<dd>工作程序节点的硬件隔离级别。如果希望可用的物理资源仅供您专用，请使用 dedicated，或者要允许物理资源与其他 IBM 客户共享，请使用 shared。缺省值为 shared。此值对于标准集群是可选的，且不可用于 Lite 集群。</dd>
+<dd>工作程序节点的硬件隔离级别。如果希望可用的物理资源仅供您专用，请使用 dedicated，或者要允许物理资源与其他 IBM 客户共享，请使用 shared。缺省值为 shared。此值对于标准集群是可选的，且不可用于免费集群。</dd>
 
 <dt><code>--location <em>LOCATION</em></code></dt>
 <dd>要在其中创建集群的位置。可用的位置取决于您登录到的 {{site.data.keyword.Bluemix_notm}} 区域。请选择实际离您最近的区域，以获得最佳性能。
-此值对于标准集群是必需的，对于 Lite 集群是可选的。
+此值对于标准集群是必需的，对于免费集群是可选的。
 
 <p>复查[可用位置](cs_regions.html#locations)。
 </p>
@@ -415,7 +417,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 </dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>所选择的机器类型会影响部署到工作程序节点的容器可用的内存量和磁盘空间量。要列出可用的机器类型，请参阅 [bx cs machine-types <em>LOCATION</em>](#cs_machine_types)。此值对于标准集群是必需的，且不可用于 Lite 集群。</dd>
+<dd>所选择的机器类型会影响部署到工作程序节点的容器可用的内存量和磁盘空间量。要列出可用的机器类型，请参阅 [bx cs machine-types <em>LOCATION</em>](#cs_machine_types)。此值对于标准集群是必需的，且不可用于免费集群。</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
 <dd>集群的名称。此值是必需的。</dd>
@@ -430,9 +432,11 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <dd>
 
 <ul>
-<li>此参数不可用于 Lite 集群。</li>
+<li>此参数不可用于免费集群。</li>
 <li>如果此标准集群是您在此位置中创建的第一个标准集群，请勿包含此标志。创建集群时，将为您创建专用 VLAN。</li>
 <li>如果之前在此位置中已创建标准集群，或者之前在 IBM Cloud infrastructure (SoftLayer) 中已创建专用 VLAN，那么必须指定该专用 VLAN。
+
+
 
 <p><strong>注</strong>：使用 create 命令指定的公用和专用 VLAN 必须匹配。专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。这两个前缀后面的数字和字母组合必须匹配，才可在创建集群时使用这些 VLAN。不要使用不匹配的公用和专用 VLAN 来创建集群。</p></li>
 </ul>
@@ -442,9 +446,11 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
 <dd>
 <ul>
-<li>此参数不可用于 Lite 集群。</li>
+<li>此参数不可用于免费集群。</li>
 <li>如果此标准集群是您在此位置中创建的第一个标准集群，请勿使用此标志。创建集群时，将为您创建公用 VLAN。</li>
 <li>如果之前在此位置中已创建标准集群，或者之前在 IBM Cloud infrastructure (SoftLayer) 中已创建公用 VLAN，那么必须指定该公用 VLAN。
+
+
 
 <p><strong>注</strong>：使用 create 命令指定的公用和专用 VLAN 必须匹配。专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。这两个前缀后面的数字和字母组合必须匹配，才可在创建集群时使用这些 VLAN。不要使用不匹配的公用和专用 VLAN 来创建集群。</p></li>
 </ul>
@@ -452,7 +458,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <p>要了解您是否已具有用于特定位置的公用 VLAN，或要找到现有公用 VLAN 的名称，请运行 <code>bx cs vlans <em>&lt;location&gt;</em></code>。</p></dd>
 
 <dt><code>--workers WORKER</code></dt>
-<dd>要在集群中部署的工作程序节点数。如果未指定此选项，将创建具有 1 个工作程序节点的集群。此值对于标准集群是可选的，且不可用于 Lite 集群。
+<dd>要在集群中部署的工作程序节点数。如果未指定此选项，将创建具有 1 个工作程序节点的集群。此值对于标准集群是可选的，且不可用于免费集群。
 
 <p><strong>注</strong>：为每个工作程序节点分配了唯一的工作程序节点标识和域名，在创建集群后，不得手动更改该标识和域名。更改标识或域名会阻止 Kubernetes 主节点管理集群。</p></dd>
 
@@ -472,7 +478,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
   ```
   {: pre}
 
-  Lite 集群的示例：
+  免费集群的示例：
 
   ```
   bx cs cluster-create --name my_cluster
@@ -683,6 +689,8 @@ kube-version: <em>&lt;kube-version&gt;</em>
    <dt><code><em>SUBNET_CIDR</em></code></dt>
    <dd>子网无类域间路由 (CIDR)。此值是必需的，且不得与 IBM Cloud infrastructure (SoftLayer) 使用的任何子网相冲突。
 
+
+
    支持的前缀范围从 `/30`（1 个 IP 地址）到 `/24`（253 个 IP 地址）。如果将 CIDR 设置为一个前缀长度，而稍后需要对其进行更改，请先添加新的 CIDR，然后[除去旧 CIDR](#cs_cluster_user_subnet_rm)。</dd>
 
    <dt><code><em>PRIVATE_VLAN</em></code></dt>
@@ -789,8 +797,10 @@ kube-version: <em>&lt;kube-version&gt;</em>
    <dt><code>--infrastructure-api-key <em>API_KEY</em></code></dt>
    <dd>IBM Cloud infrastructure (SoftLayer) 帐户 API 密钥。此值是必需的。
 
-<p>
-要生成 API 密钥：<ol>
+ <p>
+要生成 API 密钥：
+
+  <ol>
   <li>登录到 [IBM Cloud infrastructure (SoftLayer) 门户网站 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://control.softlayer.com/)。</li>
   <li>选择<strong>帐户</strong>，然后选择<strong>用户</strong>。</li>
   <li>单击<strong>生成</strong>，为帐户生成 IBM Cloud infrastructure (SoftLayer) API 密钥。</li>
@@ -1043,7 +1053,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 {: #cs_machine_types}
 
 查看可用于工作程序节点的机器类型的列表。每种机器类型都包含集群中每个工作程序节点的虚拟 CPU 量、内存量和磁盘空间量。
-- 名称中具有 `u2c` 或 `b2c` 的机器类型使用本地磁盘，而不是存储区联网 (SAN)，从而实现可靠性。可靠性优势包括在将字节序列化到本地磁盘时可提高吞吐量，以及减少因网络故障而导致的文件系统降级。这些机器类型包含用于操作系统文件系统的 25 GB 本地磁盘存储和用于 `/var/lib/docker`（这是写入所有容器数据的目录）的 100 GB 本地磁盘存储。
+- 名称中具有 `u2c` 或 `b2c` 的机器类型使用本地磁盘，而不是存储区联网 (SAN)，从而实现可靠性。可靠性优势包括在将字节序列化到本地磁盘时可提高吞吐量，以及减少因网络故障而导致的文件系统降级。这些机器类型包含用于操作系统文件系统的 25 GB 本地磁盘存储和用于 `/var/lib/docker`（这是所有容器数据写入的目录）的 100 GB 本地磁盘存储。
 - 名称中包含 `encrypted` 的机器类型将加密主机的 Docker 数据。存储所有容器数据的 `/var/lib/docker` 目录将使用 LUKS 加密进行加密。
 - 不推荐使用名称中具有 `u1c` 或 `b1c` 的机器类型，例如 `u1c.2x4`。要开始使用 `u2c` 和 `b2c` 机器类型，请使用 `bx cs worker-add` 命令来添加使用已更新机器类型的工作程序节点。然后，使用 `bx cs worker-rm` 命令除去使用不推荐机器类型的工作程序节点。
 </p>
@@ -1093,6 +1103,8 @@ Region: us-south
 <dl>
 <dt><code><em>REGION</em></code></dt>
 <dd>输入要作为目标的区域。此值是可选的。如果您未提供区域，那么可以从输出中的列表中选择区域。
+
+
 
 要获取可用区域的列表，请查看[区域和位置](cs_regions.html)或使用 `bx cs regions` [命令](#cs_regions)。</dd></dl>
 
@@ -1231,7 +1243,9 @@ us-south      us-south
 
 <p><strong>注</strong>：如果在命令中提供的选项与 YAML 文件中的参数相同，那么命令中的值将优先于 YAML 中的值。例如，您在 YAML 文件中定义了机器类型，并在命令中使用了 --machine-type 选项，那么在该命令选项中输入的值会覆盖 YAML 文件中的相应值。
 
-      <pre class="codeblock">
+      
+
+<pre class="codeblock">
 <code>name: <em>&lt;cluster_name_or_id&gt;</em>
 location: <em>&lt;location&gt;</em>
 machine-type: <em>&lt;machine_type&gt;</em>

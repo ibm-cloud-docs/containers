@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -100,9 +100,9 @@ Kubernetes 노드 포트, 로드 밸런서 및 Ingress 서비스에 대한 액�
 
 시작하기 전에:
 
-1.  [{{site.data.keyword.containershort_notm}} 및 Kubernetes CLI를 설치하십시오.](cs_cli_install.html#cs_cli_install)
-2.  [라이트 또는 표준 클러스터를 작성하십시오.](cs_clusters.html#clusters_ui)
-3.  [Kubernetes CLI를 클러스터에 대상으로 지정하십시오](cs_cli_install.html#cs_cli_configure). 
+1.  [{{site.data.keyword.containershort_notm}} 및 Kubernetes CLI를 설치](cs_cli_install.html#cs_cli_install)하십시오.
+2.  [무료 또는 표준 클러스터를 작성](cs_clusters.html#clusters_ui)하십시오.
+3.  [Kubernetes CLI를 클러스터에 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오. 
 `--admin` 옵션을 `bx cs cluster-config` 명령에 포함하십시오. 이는 인증서 및 권한 파일을 다운로드하는 데 사용됩니다. 이 다운로드에는 Calico 명령을 실행하는 데 필요한 수퍼유저 역할에 대한 키도 포함됩니다.
 
   ```
@@ -147,6 +147,8 @@ Kubernetes 노드 포트, 로드 밸런서 및 Ingress 서비스에 대한 액�
         calicoctl version
         ```
         {: pre}
+
+    4.  회사 네트워크 정책으로 인해 로컬 시스템에서 프록시 또는 방화벽을 통해 공용 엔드포인트에 액세스하지 못하는 경우 Calico 명령에 대한 TCP 액세스를 허용하는 방법에 대한 지시사항은 [방화벽 뒤에서 `calicoctl` 명령 실행](cs_firewall.html#firewall)을 참조하십시오.
 
 2.  Calico CLI를 구성하십시오.
 
@@ -326,7 +328,7 @@ Kubernetes 노드 포트, 로드 밸런서 및 Ingress 서비스에 대한 액�
 <br />
 
 
-## LoadBalancer 또는 NodePort 서비스에 대한 수신 트래픽 차단.
+## LoadBalancer 또는 NodePort 서비스에 대한 수신 트래픽 차단
 {: #block_ingress}
 
 기본적으로 Kubernetes `NodePort` 및 `LoadBalancer` 서비스는 앱을 모든 퍼블릭 및 프라이빗 클러스터 인터페이스에서 사용 가능하게 하도록 설계되었습니다. 그러나 트래픽 소스 또는 대상을 기반으로 서비스에 대한 수신 트래픽을 차단할 수 있습니다. 트래픽을 차단하려면 Calico `preDNAT` 네트워크 정책을 작성하십시오.
@@ -347,7 +349,7 @@ Calico `preDNAT` 네트워크 정책에 대한 몇 가지 일반적 사용:
 Kubernetes NodePort 및 LoadBalancer 서비스에 대해 생성된 DNAT iptables 규칙으로 인해 기본 Kubernetes 및 Calico 정책을 이러한 서비스의 보호에 적용하기 어렵기 때문에 `preDNAT` 네트워크 정책이 유용합니다.
 
 Calico `preDNAT` 네트워크 정책은 [Calico 네트워크 정책 리소스
-![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy)를 기반으로 iptables 규칙을 생성합니다. 
+![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy)를 기반으로 iptables 규칙을 생성합니다.
 
 1. Kubernetes 서비스에 대한 Ingress 액세스를 위한 Calico `preDNAT` 네트워크 정책을 정의하십시오.
 

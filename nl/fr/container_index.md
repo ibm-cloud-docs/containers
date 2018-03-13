@@ -41,20 +41,20 @@ Vous voulez déployer une application dans un conteneur ? Ne quittez pas. Commen
 
 Qu'est-ce qu'un cluster ? Un cluster est un ensemble de ressources, de noeuds d'agents, de réseaux et de périphériques de stockage permettant d'assurer une haute disponibilité des applications. Une fois que vous disposez d'un cluster, vous pouvez déployer vos applications dans des conteneurs.
 
-[Avant de commencer : vous devez disposer d'un compte {{site.data.keyword.Bluemix_notm}} de type Pay-As-You-Go (Paiement à la carte) ou Subscription (Abonnement) pour créer un cluster léger.](https://console.bluemix.net/registration/)
+[Avant de commencer : vous devez disposer {{site.data.keyword.Bluemix_notm}} d'un compte de type Pay-As-You-Go (Paiement à la carte) ou Subscription (Abonnement) pour pouvoir créer un cluster gratuit.](https://console.bluemix.net/registration/)
 
 
-Pour créer un cluster léger :
+Pour créer un cluster gratuit :
 
 1.  Dans le [**catalogue** ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://console.bluemix.net/catalog/?category=containers), dans la catégorie **Conteneurs**, cliquez sur **Cluster Kubernetes**.
 
-2.  Entrez un **nom de cluster**. Par défaut, il s'agit d'un type de cluster léger. La prochaine fois, vous pourrez créer un cluster standard et définir des personnalisations supplémentaires (par exemple, le nombre de noeuds d'agent dans le cluster).
+2.  Entrez un **nom de cluster**. Type de cluster par défaut : gratuit. La prochaine fois, vous pourrez créer un cluster standard et définir des personnalisations supplémentaires (par exemple, le nombre de noeuds d'agent dans le cluster).
 
 3.  Cliquez sur **Créer un cluster**. Les détails du cluster s'affichent, mais l'allocation du noeud worker dans le cluster prend quelques minutes. Vous pouvez examiner le statut du noeud worker dans l'onglet **Noeuds d'agent**. Lorsque son statut indique `Ready`, votre noeud worker est prêt à être utilisé.
 
 Bien joué ! Vous venez de créer votre premier cluster !
 
-*   Le cluster léger dispose d'un noeud worker avec 2 UC et 4 Go de mémoire disponibles pour leur utilisation par vos applications.
+*   Le cluster gratuit dispose d'un noeud worker avec 2 UC et 4 Go de mémoire disponibles pour leur utilisation par vos applications.
 *   Le noeud worker est surveillé et géré de manière centralisée par un maître Kubernetes dédié et à haute disponibilité dont {{site.data.keyword.IBM_notm}} est le propriétaire et qui contrôle et surveille toutes les ressources Kubernetes dans le cluster. Vous pouvez vous concentrer sur votre noeud worker et sur les applications qui y sont déployées sans avoir aussi à gérer ce maître.
 *   Les ressources requises pour l'exécution du cluster, comme les réseaux locaux virtuels (VLAN) et les adresses IP, sont gérées dans un compte d'infrastructure IBM Cloud (SoftLayer) dont {{site.data.keyword.IBM_notm}} est propriétaire. Lorsque vous créez un cluster standard, vous gérez ces ressources dans votre propre compte d'infrastructure IBM Cloud (SoftLayer). Vous pouvez en apprendre plus sur ces ressources lorsque vous créez un cluster standard.
 

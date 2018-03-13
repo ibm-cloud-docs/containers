@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-18"
+lastupdated: "2018-02-05"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -190,7 +190,7 @@ lastupdated: "2017-12-18"
        ```
        {: pre}
 
-    * 如果您要使用精簡叢集，則必須使用工作者節點的公用 IP 及 NodePort。執行下列指令，以取得工作者節點的公用 IP：
+    * 如果您要使用免費叢集，則必須使用工作者節點的公用 IP 及 NodePort。執行下列指令，以取得工作者節點的公用 IP：
 
        ```
        bx cs workers <cluster_name_or_ID>
@@ -241,6 +241,6 @@ lastupdated: "2017-12-18"
 
 若要進一步探索 Istio 功能，您可以在 [Istio 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/) 中找到更多手冊。
 
-* [智慧型遞送 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/guides/intelligent-routing.html)：此範例顯示如何搭配使用 Istio 的各種資料流量管理功能與 BookInfo，以將資料流量遞送至特定版本的檢閱及評等微服務。
+* [智慧型遞送 ![外部鏈結圖示 ](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/guides/intelligent-routing.html)：此範例顯示如何使用 Istio 的資料流量管理功能，將資料流量遞送至特定版本之 BookInfo 的檢閱及評等微服務。
 
-* [深度遙測 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/guides/telemetry.html)：此範例示範如何使用 Istio Mixer 及 Envoy Proxy 來取得 BookInfo 微服務的統一度量值、日誌及追蹤。
+* [深度遙測 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/guides/telemetry.html)：此範例顯示如何使用 Istio Mixer 及 Envoy Proxy 來取得 BookInfo 微服務的統一度量值、日誌及追蹤。

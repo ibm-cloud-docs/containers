@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-18"
+lastupdated: "2018-02-05"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -23,7 +23,7 @@ lastupdated: "2017-12-18"
 
 {:shortdesc}
 
-Neste tutorial, será possível ver como instalar o Istio com quatro microsserviços para um app mock simples de livraria chamado BookInfo. Os microsserviços incluem uma página da web do produto, detalhes do livro, revisões e classificações. Quando você implementa microsserviços de BookInfo em um cluster do {{site.data.keyword.containershort}} no qual o Istio está instalado, você injeta os proxies do sidecar Istio Envoy no pods de cada microsserviço.
+Neste tutorial, será possível ver como instalar o Istio com quatro microsserviços para um app mock simples de livraria chamado BookInfo. Os microsserviços incluem uma página da web do produto, detalhes do livro, revisões e classificações. Ao implementar microsserviços de BookInfo em um cluster do {{site.data.keyword.containershort}} no qual o Istio está instalado, você injeta os proxies de sidecar Istio Envoy nos pods de cada microsserviço.
 
 **Observação**: algumas configurações e recursos da plataforma Istio ainda estão em desenvolvimento e estão sujeitas a mudanças com base no feedback do usuário. Permita alguns meses para estabilização antes de usar o Istio em produção. 
 
@@ -86,7 +86,7 @@ Faça download e instale o Istio em seu cluster.
 
    **Observação**: se você precisar permitir a autenticação TLS mútua entre sidecars, será possível instalar o arquivo `istio-auth` em vez disso: `kubectl apply -f install/kubernetes/istio-auth.yaml`
 
-6. Assegure-se de que os serviços Kubernetes `istio-pilot`, `istio-mixer` e `istio-ingress` estejam totalmente implementados antes de continuar.
+6. Assegure-se de que os serviços do Kubernetes `istio-pilot`, `istio-mixer` e `istio-ingress` estejam totalmente implementados antes de continuar.
 
    ```
    kubectl get svc -n istio-system
@@ -101,7 +101,7 @@ Faça download e instale o Istio em seu cluster.
    ```
    {: screen}
 
-7. Assegure-se de que os pods correspondentes `istio-pilot-*`, `istio-mixer-*`, `istio-ingress-*` e `istio-ca-*` sejam também totalmente implementados antes de continuar.
+7. Assegure-se de que os pods correspondentes `istio-pilot-*`, `istio-mixer-*`, `istio-ingress-*` e `istio-ca-*` também estejam totalmente implementados antes de continuar.
 
    ```
    kubectl get pods -n istio-system
@@ -117,7 +117,7 @@ Faça download e instale o Istio em seu cluster.
    {: screen}
 
 
-Parabéns! Você instalou com sucesso o Istio em seu cluster. Em seguida, implemente o aplicativo de amostra BookInfo em seu cluster.
+Parabéns! Você instalou com êxito o Istio em seu cluster. Em seguida, implemente o aplicativo de amostra BookInfo em seu cluster.
 
 
 ## Lição 2: Implementar o app BookInfo
@@ -191,7 +191,7 @@ Quando você implementa o BookInfo, os proxies sidecar do Envoy são injetados c
        ```
        {: pre}
 
-    * Se você está trabalhando com um cluster lite, deve-se usar o IP público do nó do trabalhador e o NodePort. Execute o comando a seguir para obter o IP público do nó do trabalhador:
+    * Se você está trabalhando com um cluster grátis, deve-se usar o IP público do nó do trabalhador e o NodePort. Execute o comando a seguir para obter o IP público do nó do trabalhador:
 
        ```
        bx cs workers <cluster_name_or_ID>
@@ -216,12 +216,12 @@ Quando você implementa o BookInfo, os proxies sidecar do Envoy são injetados c
 
 6. Tente atualizar a página várias vezes. Versões diferentes da seção de revisões executam round robin entre estrelas vermelhas, estrelas pretas e nenhuma estrela.
 
-Parabéns! Você implementou com sucesso o aplicativo de amostra BookInfo com sidecars do Istio Envoy. Em seguida, é possível limpar seus recursos ou continuar com mais tutoriais para explorar ainda mais a funcionalidade do Istio.
+Parabéns! Você implementou com êxito o aplicativo de amostra BookInfo com sidecars do Istio Envoy. Em seguida, é possível limpar seus recursos ou continuar com mais tutoriais para explorar ainda mais a funcionalidade do Istio.
 
 ## Limpeza
 {: #istio_tutorial_cleanup}
 
-Se você não quiser explorar ainda mais a funcionalidade do Istio fornecida em [O que vem a seguir?](#istio_tutorial_whatsnext), será possível limpar os recursos do Istio do seu cluster.
+Se você não desejar explorar mais a funcionalidade do Istio que é fornecida em [O que vem a seguir?](#istio_tutorial_whatsnext), é possível limpar seus recursos do Istio no cluster.
 
 1. Exclua todos os serviços, pods e implementações do BookInfo no cluster.
 
@@ -242,6 +242,6 @@ Se você não quiser explorar ainda mais a funcionalidade do Istio fornecida em 
 
 Para explorar ainda mais a funcionalidade do Istio, é possível localizar mais guias na [documentação do Istio ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://istio.io/).
 
-* [Intelligent Routing ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://istio.io/docs/guides/intelligent-routing.html): este exemplo mostra como usar os vários recursos de gerenciamento de tráfego do Istio com o BookInfo para rotear o tráfego para versão específica dos microsserviços de revisões e de classificações.
+* [Roteamento inteligente ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://istio.io/docs/guides/intelligent-routing.html): este exemplo mostra como rotear o tráfego para uma versão específica de microsserviços de revisões e classificações do BookInfo usando recursos de gerenciamento de tráfego do Istio.
 
-* [Telemetria detalhada ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://istio.io/docs/guides/telemetry.html): este exemplo demonstra como obter métricas uniformes, logs e rastreios entre os microsserviços do BookInfo usando o Istio Mixer e o proxy do Envoy.
+* [Telemetria detalhada ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://istio.io/docs/guides/telemetry.html): este exemplo mostra como obter métricas, logs e rastreios uniformes entre microsserviços de BookInfo usando o Istio Mixer e o proxy do Envoy.

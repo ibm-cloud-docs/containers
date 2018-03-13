@@ -17,9 +17,9 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# このページは移動されました。
+# お探しのコンテンツは移動しました。
 
-以下のトピックを確認してください。
+新しい場所にある最新の情報をご確認ください。
 - [GUI でのクラスターの作成](cs_clusters.html#clusters_ui)
 - [CLI でのクラスターの作成](cs_clusters.html#clusters_cli)
 - [プライベートとパブリックのイメージ・レジストリーの使用](cs_images.html#images)

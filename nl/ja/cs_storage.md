@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-07"
 
 ---
 
@@ -16,21 +16,91 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# 永続ボリューム・ストレージによるデータの保存
+# クラスター内でのデータの保存
+{: #storage}
+クラスター内のコンポーネントの障害に備えるため、また、アプリ・インスタンス間でデータを共有するために、データを保持できます。
+
+## 可用性の高いストレージの計画
 {: #planning}
 
-コンテナーは、設計上、存続時間が短期です。しかし、図に示すように、コンテナーにフェイルオーバーが発生した場合でもデータが永続するように、そしてコンテナー間でデータを共有するために、複数のオプションから選択することができます。
-{:shortdesc}
+{{site.data.keyword.containerlong_notm}} では、アプリ・データを保管してクラスター内のポッド間でデータを共有する方法として、複数の選択肢 (オプション) の中から選択することができます。ただし、どのストレージ・オプションでも、クラスター内のコンポーネントの障害またはサイト全体の障害に対して同じレベルの永続性と可用性が得られるというわけではありません。
+{: shortdesc}
 
-**注**: ファイアウォールがある場合は、クラスターのあるロケーション (データ・センター) の IBM Cloud インフラストラクチャー (SoftLayer) の IP 範囲における[発信 (egress) アクセスを許可](cs_firewall.html#pvc)し、永続ボリューム請求を作成できるようにします。
+### 非永続のデータ・ストレージ・オプション
+{: #non_persistent}
 
-![Kubernetes クラスターでのデプロイメントのための永続ストレージ・オプション](images/cs_planning_apps_storage.png)
+クラスター内のコンポーネントの障害時にデータをリカバリーするためにデータを永続的に保管する必要がない場合、または、アプリ・インスタンス間でデータを共有する必要がない場合は、非永続ストレージ・オプションを使用できます。アプリ・コンポーネントの単体テストを行う場合や新機能を試す場合にも非永続ストレージ・オプションを使用できます。
+{: shortdesc}
 
-|オプション|説明|
-|------|-----------|
-|オプション 1: `/emptyDir` を使用して、ワーカー・ノード上の使用可能なディスク・スペースを使用してデータを永続させる<p>この機能は、ライト・クラスターと標準クラスターで使用可能です。</p>|このオプションでは、ポッドに割り当てられたワーカー・ノードのディスク・スペースに空のボリュームを作成できます。 そのポッド内のコンテナーは、そのボリュームに関する読み取りと書き込みを行うことができます。ボリュームが特定の 1 つのポッドに割り当てられているので、レプリカ・セット内の他のポッドとデータを共有することはできません。<p>`/emptyDir` ボリュームとそのデータは、割り当てられたポッドがワーカー・ノードから永久に削除されるときに削除されます。</p><p>**注:** ポッド内のコンテナーがクラッシュした場合でも、ボリューム内のデータはワーカー・ノードで引き続き使用できます。</p><p>詳しくは、[Kubernetes ボリューム ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/storage/volumes/) を参照してください。</p>|
-|オプション 2: 使用するデプロイメント用に NFS ベースの永続ストレージをプロビジョンするための永続ボリューム請求を行う<p>このフィーチャーを使用できるのは、標準クラスターの場合に限られます。</p>|<p>このオプションにより、永続ボリュームで構成される、アプリとコンテナー・データのための永続ストレージを用意できます。 このボリュームは、[NFS ベースのエンデュランスとパフォーマンスのファイル・ストレージ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/file-storage/details) でホストされます。 ファイル・ストレージは保存時に暗号化され、保管データのレプリカを作成できます。</p> <p>NFS ベースのファイル・ストレージの要求を出すには、[永続ボリューム請求](cs_storage.html)を作成します。 {{site.data.keyword.containershort_notm}} には、ストレージのサイズ範囲、IOPS、削除ポリシー、ボリュームに対する読み取りと書き込みの許可を定義する、事前定義されたストレージ・クラスが用意されています。 永続ボリューム請求を行う際に、これらのストレージ・クラスの中から選択できます。 永続ボリューム請求をサブミットすると、NFS ベースのファイル・ストレージでホストされる永続ボリュームが {{site.data.keyword.containershort_notm}} によって動的にプロビジョンされます。 [永続ボリューム請求をデプロイメントのボリュームの 1 つとしてマウント](cs_storage.html#create)すると、コンテナーがそのボリュームに対する読み書きを行えるようになります。 永続ボリュームは、同じレプリカ・セットの間で、または同じクラスター内の他のデプロイメントと共有することができます。</p><p>コンテナーがクラッシュしたとき、またはポッドがワーカー・ノードから削除されたときでも、データは削除されないので、ボリュームをマウントした他のデプロイメントから引き続きアクセスできます。 永続ボリューム請求は永続ストレージでホストされますが、バックアップはありません。 データのバックアップが必要な場合は、手動バックアップを作成してください。</p><p>**注:** 永続 NFS ファイル共有ストレージは、月単位で課金されます。 クラスター用に永続ストレージをプロビジョンして即時にそれを削除したときは、短時間しか使用しない場合でも、永続ストレージの月額課金を支払います。</p>|
-|オプション 3: {{site.data.keyword.Bluemix_notm}} データベース・サービスをポッドにバインドする<p>この機能は、ライト・クラスターと標準クラスターで使用可能です。</p>|このオプションの場合、{{site.data.keyword.Bluemix_notm}} データベース・クラウド・サービスを使用して、データを永続させ、アクセスすることができます。 {{site.data.keyword.Bluemix_notm}} サービスをクラスター内の名前空間にバインドすると、Kubernetes シークレットが作成されます。 Kubernetes シークレットは、サービスへの URL、ユーザー名、パスワードなど、サービスに関する機密情報を保持します。 シークレットをシークレット・ボリュームとしてポッドにマウントして、シークレット内の資格情報を使用することによりサービスにアクセスできます。 シークレット・ボリュームを他のポッドにマウントすることにより、ポッド間でデータを共有することもできます。<p>コンテナーがクラッシュしたとき、またはポッドがワーカー・ノードから削除されたときでも、データは削除されないので、シークレット・ボリュームをマウントした他のポッドから引き続きアクセスできます。</p><p>{{site.data.keyword.Bluemix_notm}} のデータベース・サービスのほとんどは、少量のデータ用のディスク・スペースを無料で提供しているため、機能をテストすることができます。</p><p>{{site.data.keyword.Bluemix_notm}} サービスをポッドにバインドする方法について詳しくは、[{{site.data.keyword.containershort_notm}} でのアプリ用 {{site.data.keyword.Bluemix_notm}} サービスの追加](cs_integrations.html#adding_app)を参照してください。</p>|
+以下のイメージは、{{site.data.keyword.containerlong_notm}} で使用可能な非永続データ・ストレージ・オプションを示しています。これらの方法は、フリー・クラスターと標準クラスターで使用可能です。
+<p>
+<img src="images/cs_storage_nonpersistent.png" alt="非永続データ・ストレージ・オプション" width="450" style="width: 450px; border-style: none"/></p>
+
+<table summary="この表は非永続ストレージ・オプションを示しています。行は左から右に読みます。1 列目はオプションの番号、2 列目はオプションの名称、3 列目は説明です。" style="width: 100%">
+<colgroup>
+       <col span="1" style="width: 5%;"/>
+       <col span="1" style="width: 20%;"/>
+       <col span="1" style="width: 75%;"/>
+    </colgroup>
+  <thead>
+  <th>#</th>
+  <th>オプション</th>
+  <th>説明</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>コンテナーまたはポッドの内部</td>
+      <td>設計上、コンテナーやポッドの存続期間は短く、予期せぬ障害が起こることがあります。ただし、コンテナーのローカル・ファイル・システムにデータを書き込み、コンテナーのライフサイクルにわたってデータを保管することはできます。コンテナー内部のデータは、他のコンテナーやポッドと共有できず、コンテナーがクラッシュしたり削除されたりすると失われます。詳しくは、[Storing data in a container](https://docs.docker.com/storage/) を参照してください。</td>
+    </tr>
+  <tr>
+    <td>2</td>
+    <td>ワーカー・ノード上</td>
+    <td>すべてのワーカー・ノードのセットアップには 1 次ストレージと 2 次ストレージがあり、これはワーカー・ノードとして選択したマシン・タイプによって決まります。1 次ストレージは、オペレーティング・システムのデータの保管に使用され、ユーザーはアクセスできません。2 次ストレージは、すべてのコンテナー・データが書き込まれる <code>/var/lib/docker</code> ディレクトリー内のデータの保管に使用されます。<br/><br/>ワーカー・ノードの 2 次ストレージにアクセスするには、<code>/emptyDir</code> ボリュームを作成します。この空のボリュームはクラスター内のポッドに割り当てられるので、そのポッド内のコンテナーはこのボリュームに対して読み取りと書き込みを行うことができます。ボリュームは特定の 1 つのポッドに割り当てられるので、レプリカ・セット内の他のポッドとデータを共有することはできません。<br/><p><code>/emptyDir</code> ボリュームとそのデータは、以下の場合に削除されます。<ul><li>割り当てられたポッドはワーカー・ノードから永久に削除されます。</li><li>割り当てられたポッドが別のワーカー・ノード上にスケジュールされた場合。</li><li>ワーカー・ノードが再ロードされた、または更新された場合。</li><li>ワーカー・ノードが削除された場合。</li><li>クラスターが削除された場合。</li><li>{{site.data.keyword.Bluemix_notm}} アカウントが一時停止状態になった場合。</li></ul></p><p><strong>注:</strong> ポッド内のコンテナーがクラッシュした場合でも、ボリューム内のデータはワーカー・ノードで引き続き使用できます。</p><p>詳しくは、[Kubernetes ボリューム ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/storage/volumes/) を参照してください。</p></td>
+    </tr>
+    </tbody>
+    </table>
+
+### 高可用性のための永続データ・ストレージ・オプション
+{: persistent}
+
+可用性の高いステートフル・アプリを作成するための主要な課題は、複数の場所にある複数のアプリ・インスタンスの間でデータを保持し、常にデータの同期を保つことです。高可用性データのために、マスター・データベースの複数のインスタンスを複数のデータ・センターあるいは複数の地域に分散させ、そのマスターのデータを継続的に複製することができます。クラスター内のすべてのインスタンスが、このマスター・データベースに対して読み取りと書き込みを行う必要があります。マスターのいずれかのインスタンスがダウンした場合は、その他のインスタンスがワークロードを引き継げるので、アプリのダウン時間は発生しません。
+{: shortdesc}
+
+以下のイメージは、標準クラスター内のデータの可用性を高めるために {{site.data.keyword.containerlong_notm}} で選択できるオプションを示しています。どのオプションが適切かは、以下の要因に応じて決まります。
+  * **所有しているアプリのタイプ:** 例えば、データをデータベース内ではなくファイル・ベースで保管しなければならないアプリがある場合があります。
+  * **データの保管と転送の場所に関する法的要件:** 例えば、法律によってデータの保管と転送が米国内だけに制限されているために、欧州にあるサービスを使用できない場合があります。
+  * **バックアップとリストアのオプション:** すべてのストレージ・オプションに、データをバックアップ/リストアするための機能が用意されています。利用可能なバックアップとリストアのオプションが、バックアップの頻度や、1 次データ・センター外にデータを保管できるかどうかなどの、お客様の災害復旧計画の要件を満たしていることを確認してください。
+  * **グローバルな複製:** 高可用性のために、ストレージの複数のインスタンスを、世界中のデータ・センターの間に分散させ、複製するようにセットアップすることもできます。
+
+<br/>
+<img src="images/cs_storage_ha.png" alt="永続ストレージに関する高可用性オプション"/>
+
+<table summary="この表は永続ストレージ・オプションを示しています。行は左から右に読みます。1 列目はオプションの番号、2 列目はオプションの名称、3 列目は説明です。">
+  <thead>
+  <th>#</th>
+  <th>オプション</th>
+  <th>説明</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td width="5%">1</td>
+  <td width="20%">NFS ファイル・ストレージ</td>
+  <td width="75%">このオプションでは、Kubernetes 永続ボリュームを使用して、アプリやコンテナーのデータを保持できます。ボリュームは、[NFS ベースのエンデュランスとパフォーマンスのファイル・ストレージ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/file-storage/details) でホストされます。このファイル・ストレージは、データをデータベース内ではなくファイル・ベースで保管するアプリの場合に使用できます。可用性を高めるために、ファイル・ストレージは REST で暗号化されて IBM でクラスター化されています。<p>{{site.data.keyword.containershort_notm}} には、ストレージのサイズ範囲、IOPS、削除ポリシー、ボリュームに対する読み取りと書き込みの許可を定義する、事前定義されたストレージ・クラスが用意されています。 NFS ベースのファイル・ストレージに関する要求を開始するには、[永続ボリューム請求](cs_storage.html#create)を作成する必要があります。永続ボリューム請求をサブミットすると、NFS ベースのファイル・ストレージでホストされる永続ボリュームが {{site.data.keyword.containershort_notm}} によって動的にプロビジョンされます。 [永続ボリューム請求をデプロイメントのボリュームとしてマウント](cs_storage.html#app_volume_mount)すると、コンテナーがそのボリュームに対して読み取りと書き込みを行えるようになります。</p><p>永続ボリュームは、ワーカー・ノードがあるデータ・センター内でプロビジョンされます。同じレプリカ・セットと、または同じクラスター内の他のデプロイメントとデータを共有できます。別のデータ・センターまたは地域にあるクラスターとデータを共有することはできません。</p><p>デフォルトでは、NFS ストレージは自動的にバックアップされません。用意されているバックアップとリストアのメカニズムを使用して、クラスターの定期的なバックアップをセットアップできます。コンテナーがクラッシュしたとき、またはポッドがワーカー・ノードから削除されたときでも、データは削除されないので、ボリュームをマウントした他のデプロイメントから引き続きアクセスできます。 </p><p><strong>注:</strong> 永続 NFS ファイル共有ストレージは、月単位で課金されます。 クラスター用に永続ストレージをプロビジョンして即時にそれを削除したときは、短時間しか使用しない場合でも、永続ストレージの月額課金を支払います。</p></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Cloud データベース・サービス</td>
+    <td>このオプションでは、[IBM Cloudant NoSQL DB](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant) などの {{site.data.keyword.Bluemix_notm}} データベース・クラウド・サービスを使用して、データを保持できます。このオプションを使用して保管されたデータには、すべてのクラスター、場所、地域からアクセスできます。<p> すべてのアプリから単一のデータベース・インスタンスにアクセスするように構成するか、[複数のインスタンスを複数のデータ・センターに分散させ、インスタンス間の複製をセットアップ](/docs/services/Cloudant/guides/active-active.html#configuring-cloudant-nosql-db-for-cross-region-disaster-recovery)して可用性を高めるかを選択できます。IBM Cloudant NoSQL データベースでは、データは自動的にバックアップされません。用意されている[バックアップとリストアのメカニズム](/docs/services/Cloudant/guides/backup-cookbook.html#cloudant-nosql-db-backup-and-recovery)を使用して、サイトの障害からデータを保護できます。</p> <p> クラスター内のサービスを使用するには、クラスター内の名前空間に [{{site.data.keyword.Bluemix_notm}} サービスをバインド](cs_integrations.html#adding_app)する必要があります。サービスをクラスターにバインドすると、Kubernetes シークレットが作成されます。 Kubernetes シークレットは、サービスへの URL、ユーザー名、およびパスワードなど、サービスに関する機密情報を保持します。 シークレットをシークレット・ボリュームとしてポッドにマウントして、シークレット内の資格情報を使用することによりサービスにアクセスできます。 シークレット・ボリュームを他のポッドにマウントすることにより、ポッド間でデータを共有することもできます。 コンテナーがクラッシュしたとき、またはポッドがワーカー・ノードから削除されたときでも、データは削除されないので、シークレット・ボリュームをマウントした他のポッドから引き続きアクセスできます。 <p>{{site.data.keyword.Bluemix_notm}} のデータベース・サービスのほとんどは、少量のデータ用のディスク・スペースを無料で提供しているため、機能をテストすることができます。</p></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>オンプレミスのデータベース</td>
+    <td>法的な理由でデータをオンサイトに保管しなければならない場合は、オンプレミス・データベースへの [VPN 接続をセットアップ](cs_vpn.html#vpn)し、データ・センター内の既存のストレージ、バックアップと複製のメカニズムを使用できます。</td>
+  </tr>
+  </tbody>
+  </table>
+
 {: caption="表。 Kubernetes クラスターでのデプロイメントのための永続データ・ストレージのオプション" caption-side="top"}
 
 <br />
@@ -195,7 +265,9 @@ Kubernetes は永続ボリューム (実際のハードウェアを表す) と�
 NFS ファイル・ストレージをクラスターにプロビジョンするために、永続ボリューム請求 (pvc) を作成します。 その後、この請求をデプロイメントにマウントすることで、ポッドがクラッシュしたりシャットダウンしたりしてもデータを利用できるようにします。
 {:shortdesc}
 
-永続ボリュームの基礎の NFS ファイル・ストレージは、データの高可用性を実現するために IBM がクラスター化しています。
+永続ボリュームの基礎の NFS ファイル・ストレージは、データの高可用性を実現するために IBM がクラスター化しています。ストレージ・クラスとは、提供されているストレージ・オファリングのタイプを表し、永続ボリュームの作成時にデータ保存ポリシー、サイズ (GB)、IOPS などの特性を定義するものです。
+
+**注**: ファイアウォールがある場合は、クラスターのあるロケーション (データ・センター) の IBM Cloud インフラストラクチャー (SoftLayer) の IP 範囲における[発信 (egress) アクセスを許可](cs_firewall.html#pvc)し、永続ボリューム請求を作成できるようにします。
 
 1.  使用可能なストレージ・クラスを確認します。 {{site.data.keyword.containerlong}} には事前定義のストレージ・クラスが 8 つ用意されているので、クラスター管理者がストレージ・クラスを作成する必要はありません。 `ibmc-file-bronze` ストレージ・クラスは `default` ストレージ・クラスと同じです。
 
@@ -219,108 +291,104 @@ NFS ファイル・ストレージをクラスターにプロビジョンする�
     ```
     {: screen}
 
-2.  pvc を削除した後にデータと NFS ファイル共有を保存するかどうかを決めます。 データを保持する場合、`retain` ストレージ・クラスを選択します。 pvc を削除するときにデータとファイル共有も削除する場合、`retain` のないストレージ・クラスを選択します。
+2.  pvcを削除した後にデータと NFS ファイル共有を保存するかどうか (再請求ポリシー) を決めます。データを保持する場合、`retain` ストレージ・クラスを選択します。 pvc を削除するときにデータとファイル共有も削除する場合、`retain` のないストレージ・クラスを選択します。
 
-3.  ストレージ・クラスの IOPS と使用可能なストレージ・サイズを確認します。
+3.  ストレージ・クラスの詳細を取得します。 CLI 出力内の **「paramters」**フィールドで、IOPS/GB とサイズの範囲を確認します。 
 
-    - bronze、silver、gold の各ストレージ・クラスは[エンデュランス・ストレージ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://knowledgelayer.softlayer.com/topic/endurance-storage) を使用し、各クラスには、定義された IOPS/GB が 1 つあります。 合計 IOPS は、ストレージのサイズに依存します。 例えば、4 IOPS/GB を 1000Gi pvc 使用すると、合計 4000 IOPS となります。
+    <ul>
+      <li>ブロンズ、シルバー、ゴールドのストレージ・クラスを使用する場合は、クラスごとに IOPS/GB が定義された[エンデュランス・ストレージ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://knowledgelayer.softlayer.com/topic/endurance-storage) が割り当てられます。しかし、使用可能な範囲内のサイズを選択して、合計 IOPS を決めることができます。例えば、4 IOPS/GB のシルバー・ストレージ・クラスで 1000Gi のファイル共有サイズを選択すると、ボリュームの合計 IOPS は 4000 になります。 永続ボリュームの IOPS が多いほど、入出力操作の処理が高速になります。<p>**ストレージ・クラスの詳細を表示するコマンドの例**:</p>
 
-      ```
-      kubectl describe storageclasses ibmc-file-silver
-      ```
-      {: pre}
+       <pre class="pre">kubectl describe storageclasses ibmc-file-silver</pre>
 
-      **「Parameters」**フィールドで、ストレージ・クラスに関連した 1 GB あたりの IOPS と使用可能なサイズ (ギガバイト単位) を確認できます。
+       **「Parameters」**フィールドに、このストレージ・クラスに関連付けられている IOPS/GB と使用可能なサイズ (GB 単位) が示されます。
+       <pre class="pre">Parameters:	iopsPerGB=4,sizeRange=20Gi,40Gi,80Gi,100Gi,250Gi,500Gi,1000Gi,2000Gi,4000Gi,8000Gi,12000Gi</pre>
+       
+       </li>
+      <li>カスタム・ストレージ・クラスでは、[パフォーマンス・ストレージ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://knowledgelayer.softlayer.com/topic/performance-storage) が割り当てられるので、IOPS とサイズの組み合わせを、より細かく選択できます。<p>**カスタム・ストレージ・クラスの詳細を表示するコマンドの例**:</p>
 
-      ```
-      Parameters:	iopsPerGB=4,sizeRange=20Gi,40Gi,80Gi,100Gi,250Gi,500Gi,1000Gi,2000Gi,4000Gi,8000Gi,12000Gi
-      ```
-      {: screen}
+       <pre class="pre">kubectl describe storageclasses ibmc-file-retain-custom</pre>
 
-    - カスタム・ストレージ・クラスは、[パフォーマンス・ストレージ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://knowledgelayer.softlayer.com/topic/performance-storage) を使用し、合計 IOPS とサイズが個別に設定されたオプションがあります。
+       **「Parameters」**フィールドで、ストレージ・クラスに関連した IOPS と使用可能なサイズ (ギガバイト単位) を指定します。 例えば、40Gi pvc では、IOPS として 100 から 2000 IOPS の範囲の 100 の倍数を選択できます。
 
-      ```
-      kubectl describe storageclasses ibmc-file-retain-custom
-      ```
-      {: pre}
+       ```
+       Parameters:	Note=IOPS value must be a multiple of 100,reclaimPolicy=Retain,sizeIOPSRange=20Gi:[100-1000],40Gi:[100-2000],80Gi:[100-4000],100Gi:[100-6000],1000Gi[100-6000],2000Gi:[200-6000],4000Gi:[300-6000],8000Gi:[500-6000],12000Gi:[1000-6000]
+       ```
+       {: screen}
+       </li></ul>
+4. 永続ボリューム請求を定義した構成ファイルを作成し、`.yaml` ファイルとして構成を保存します。
 
-      **「Parameters」**フィールドで、ストレージ・クラスに関連した IOPS と使用可能なサイズ (ギガバイト単位) を指定します。 例えば、40Gi pvc では、IOPS として 100 から 2000 IOPS の範囲の 100 の倍数を選択できます。
+    -  **ブロンズ、シルバー、ゴールドのストレージ・クラスの例**:
+       
 
-      ```
-      Parameters:	Note=IOPS value must be a multiple of 100,reclaimPolicy=Retain,sizeIOPSRange=20Gi:[100-1000],40Gi:[100-2000],80Gi:[100-4000],100Gi:[100-6000],1000Gi[100-6000],2000Gi:[200-6000],4000Gi:[300-6000],8000Gi:[500-6000],12000Gi:[1000-6000]
-      ```
-      {: screen}
+       ```
+       apiVersion: v1
+       kind: PersistentVolumeClaim
+       metadata:
+        name: mypvc
+        annotations:
+          volume.beta.kubernetes.io/storage-class: "ibmc-file-silver"
+          
+       spec:
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: 20Gi
+        ```
+        {: codeblock}
 
-4.  永続ボリューム請求を定義した構成ファイルを作成し、`.yaml` ファイルとして構成を保存します。
+    -  **カスタム・ストレージ・クラスの例**:
+       
 
-    bronze、silver、gold の各クラスの場合の例は次のようになります。
+       ```
+       apiVersion: v1
+       kind: PersistentVolumeClaim
+       metadata:
+         name: mypvc
+         annotations:
+           volume.beta.kubernetes.io/storage-class: "ibmc-file-retain-custom"
+         
+       spec:
+         accessModes:
+           - ReadWriteMany
+         resources:
+           requests:
+             storage: 40Gi
+             iops: "500"
+        ```
+        {: codeblock}
 
-    ```
-    apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: <pvc_name>
-      annotations:
-        volume.beta.kubernetes.io/storage-class: "ibmc-file-silver"
-    spec:
-      accessModes:
-        - ReadWriteMany
-      resources:
-        requests:
-          storage: 20Gi
-    ```
-    {: codeblock}
-
-    カスタム・クラスの場合の例は次のようになります。
-
-    ```
-    apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: <pvc_name>
-      annotations:
-        volume.beta.kubernetes.io/storage-class: "ibmc-file-retain-custom"
-    spec:
-      accessModes:
-        - ReadWriteMany
-      resources:
-        requests:
-          storage: 40Gi
-          iops: "500"
-    ```
-    {: codeblock}
-
-    <table>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>metadata/name</code></td>
-    <td>永続ボリューム請求の名前を入力します。</td>
-    </tr>
-    <tr>
-    <td><code>metadata/annotations</code></td>
-    <td>永続ボリュームのためのストレージ・クラスを指定します。
-      <ul>
-      <li>ibmc-file-bronze / ibmc-file-retain-bronze: 2 IOPS/GB。</li>
-      <li>ibmc-file-silver / ibmc-file-retain-silver: 4 IOPS/GB。</li>
-      <li>ibmc-file-gold / ibmc-file-retain-gold: 10 IOPS/GB。</li>
-      <li>ibmc-file-custom / ibmc-file-retain-custom: 複数の IOPS の値を使用できます。
-
-    </li> ストレージ・クラスを指定しなかった場合は、ブロンズ・ストレージ・クラスを使用して永続ボリュームが作成されます。</td>
-    </tr>
-    <tr>
-    <td><code>spec/accessModes</code>
+        <table>
+        <thead>
+        <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+        </thead>
+        <tbody>
+        <tr>
+        <td><code>metadata/name</code></td>
+        <td>永続ボリューム請求の名前を入力します。</td>
+        </tr>
+        <tr>
+        <td><code>metadata/annotations</code></td>
+        <td>永続ボリュームのためのストレージ・クラスを指定します。
+          <ul>
+          <li>ibmc-file-bronze / ibmc-file-retain-bronze: 2 IOPS/GB。</li>
+          <li>ibmc-file-silver / ibmc-file-retain-silver: 4 IOPS/GB。</li>
+          <li>ibmc-file-gold / ibmc-file-retain-gold: 10 IOPS/GB。</li>
+          <li>ibmc-file-custom / ibmc-file-retain-custom: 複数の IOPS の値を使用できます。</li>
+          <p>ストレージ・クラスを指定しなかった場合は、ブロンズ・ストレージ・クラスを使用して永続ボリュームが作成されます。</p></td>
+        </tr>
+        
+        <tr>
+        <td><code>spec/accessModes</code>
     <code>resources/requests/storage</code></td>
-    <td>リストされているもの以外のサイズを選択した場合、サイズは切り上げられます。 最大サイズより大きいサイズを選択した場合、サイズは切り下げられます。</td>
-    </tr>
-    <tr>
-    <td><code>spec/accessModes</code>
+        <td>リストされているもの以外のサイズを選択した場合、サイズは切り上げられます。 最大サイズより大きいサイズを選択した場合、サイズは切り下げられます。</td>
+        </tr>
+        <tr>
+        <td><code>spec/accessModes</code>
     <code>resources/requests/iops</code></td>
-    <td>このオプションは、ibmc-file-custom / ibmc-file-retain-custom だけのためのものです。 ストレージのための合計 IOPS を指定します。 すべてのオプションを表示するには、`kubectl describe storageclasses ibmc-file-custom` を実行します。 リストされているもの以外の IOPS を選択した場合、その IOPS は切り上げられます。</td>
-    </tr>
-    </tbody></table>
+        <td>このオプションは、カスタマー・ストレージ・クラス (`ibmc-file-custom / ibmc-file-retain-custom`) でのみ使用できます。ストレージのための合計 IOPS を指定します。 すべてのオプションを表示するには、`kubectl describe storageclasses ibmc-file-custom` を実行します。 リストされているもの以外の IOPS を選択した場合、その IOPS は切り上げられます。</td>
+        </tr>
+        </tbody></table>
 
 5.  永続ボリューム請求を作成します。
 
@@ -332,16 +400,16 @@ NFS ファイル・ストレージをクラスターにプロビジョンする�
 6.  永続ボリューム請求が作成され、永続ボリュームにバインドされたことを確認します。 この処理には数分かかる場合があります。
 
     ```
-    kubectl describe pvc <pvc_name>
+    kubectl describe pvc mypvc
     ```
     {: pre}
 
-    出力は、以下のようになります。
+    出力例:
 
     ```
-    Name:  <pvc_name>
-    Namespace: default
-    StorageClass: ""
+    Name:		mypvc
+    Namespace:	default
+    StorageClass:	""
     Status: Bound
     Volume: pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2
     Labels: <none>
@@ -397,20 +465,28 @@ NFS ファイル・ストレージをクラスターにプロビジョンする�
     <td>デプロイメントのラベル。</td>
     </tr>
     <tr>
-    <td><code>volumeMounts/mountPath</code></td>
-    <td>デプロイメント内でボリュームがマウントされるディレクトリーの絶対パス。</td>
+    <td><code>spec/containers/image</code></td>
+    <td>使用するイメージの名前。{{site.data.keyword.registryshort_notm}} アカウント内の使用可能なイメージをリストするには、`bx cr image-list` を実行します。</td>
     </tr>
     <tr>
-    <td><code>volumeMounts/name</code></td>
-    <td>デプロイメントにマウントするボリュームの名前。</td>
+    <td><code>spec/containers/name</code></td>
+    <td>クラスターにデプロイするコンテナーの名前。</td>
+    </tr>
+    <tr>
+    <td><code>spec/containers/volumeMounts/mountPath</code></td>
+    <td>コンテナー内でボリュームがマウントされるディレクトリーの絶対パス。</td>
+    </tr>
+    <tr>
+    <td><code>spec/containers/volumeMounts/name</code></td>
+    <td>ポッドにマウントするボリュームの名前。</td>
     </tr>
     <tr>
     <td><code>volumes/name</code></td>
-    <td>デプロイメントにマウントするボリュームの名前。 通常、この名前は <code>volumeMounts/name</code> と同じです。</td>
+    <td>ポッドにマウントするボリュームの名前。通常、この名前は <code>volumeMounts/name</code> と同じです。</td>
     </tr>
     <tr>
-    <td><code>volumes/name/persistentVolumeClaim</code></td>
-    <td>ボリュームとして使用する永続ボリューム請求の名前。 ボリュームをデプロイメントにマウントすると、Kubernetes は永続ボリューム請求にバインドされた永続ボリュームを識別して、その永続ボリュームでユーザーが読み取り/書き込みを行えるようにします。</td>
+    <td><code>volumes/persistentVolumeClaim/claimName</code></td>
+    <td>ボリュームとして使用する永続ボリューム請求の名前。 ボリュームをポッドにマウントすると、Kubernetes は永続ボリューム請求にバインドされた永続ボリュームを識別して、その永続ボリュームでユーザーが読み取り/書き込みを行えるようにします。</td>
     </tr>
     </tbody></table>
 
@@ -448,7 +524,6 @@ NFS ファイル・ストレージをクラスターにプロビジョンする�
 
 
 
-
 ## 永続ストレージに対する非 root ユーザーのアクセス権限の追加
 {: #nonroot}
 
@@ -463,13 +538,13 @@ NFS ファイル・ストレージをクラスターにプロビジョンする�
 -   そのユーザーを一時的に root グループに追加する。
 -   ボリューム・マウント・パスにディレクトリーを作成して、適切なユーザー権限を設定する。
 
-{{site.data.keyword.containershort_notm}} の場合、ボリューム・マウント・パスのデフォルト所有者は、所有者 `nobody` です。 NFS ストレージを使用する場合は、所有者がポッドのローカルに存在しなければ、`nobody` ユーザーが作成されます。 ボリュームは、コンテナー内の root ユーザーを認識するようにセットアップされます。一部のアプリでは、このユーザーがコンテナー内の唯一のユーザーです。 しかし、多くのアプリでは、コンテナー・マウント・パスへの書き込みを行う `nobody` 以外の非 root ユーザーを指定します。 ボリュームは root ユーザーが所有しなければならないということを指定するアプリもあります。 アプリは通常、セキュリティー上の懸念から root ユーザーを使用しません。 それでもアプリが root ユーザーを必要とする場合は、[{{site.data.keyword.Bluemix_notm}} サポート](/docs/support/index.html#contacting-support)に連絡を取ることができます。
+{{site.data.keyword.containershort_notm}} の場合、ボリューム・マウント・パスのデフォルト所有者は、所有者 `nobody` です。 NFS ストレージを使用する場合は、所有者がポッドのローカルに存在しなければ、`nobody` ユーザーが作成されます。 ボリュームは、コンテナー内の root ユーザーを認識するようにセットアップされます。一部のアプリでは、このユーザーがコンテナー内の唯一のユーザーです。 しかし、多くのアプリでは、コンテナー・マウント・パスへの書き込みを行う `nobody` 以外の非 root ユーザーを指定します。 ボリュームは root ユーザーが所有しなければならないということを指定するアプリもあります。 アプリは通常、セキュリティー上の懸念から root ユーザーを使用しません。 それでもアプリが root ユーザーを必要とする場合は、[{{site.data.keyword.Bluemix_notm}} サポート](/docs/get-support/howtogetsupport.html#getting-customer-support)に連絡を取ることができます。
 
 
 1.  ローカル・ディレクトリーに Dockerfile を作成します。 この Dockerfile 例では、`myguest` という非 root ユーザーを作成します。
 
     ```
-    FROM registry.<region>.bluemix.net/ibmnode:latest
+    FROM registry.<region>.bluemix.net/ibmliberty:latest
 
     # Create group and user with GID & UID 1010.
     # In this case your are creating a group and user named myguest.

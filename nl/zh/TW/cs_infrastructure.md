@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -34,10 +34,10 @@ lastupdated: "2018-01-12"
 
 |帳戶類型|說明|建立標準叢集的可用選項|
 |------------|-----------|----------------------------------------------|
-|精簡帳戶|精簡帳戶無法佈建叢集。|[將精簡帳戶升級至 {{site.data.keyword.Bluemix_notm}} 隨收隨付制帳戶](/docs/pricing/billable.html#upgradetopayg)，其已設定 IBM Cloud 基礎架構 (SoftLayer) 組合存取權。|
-|舊隨收隨付制帳戶|在自動帳戶鏈結可供使用之前所建立的「隨收隨付制」帳戶，沒有 IBM Cloud 基礎架構 (SoftLayer) 組合的存取權。<p>如果您有現有 IBM Cloud 基礎架構 (SoftLayer) 帳戶，則無法將此帳戶鏈結至舊的「隨收隨付制」帳戶。</p>|選項 1：[建立新的隨收隨付制帳戶](/docs/pricing/billable.html#billable)，其已設定 IBM Cloud 基礎架構 (SoftLayer) 組合存取權。當您選擇此選項時，會有兩個不同的 {{site.data.keyword.Bluemix_notm}} 帳戶及計費。<p>如果您要繼續使用舊的「隨收隨付制」帳戶來建立標準叢集，則可以使用新的「隨收隨付制」帳戶來產生可存取 IBM Cloud 基礎架構 (SoftLayer) 組合的 API 金鑰。然後，您必須設定舊「隨收隨付制」帳戶的 API 金鑰。如需相關資訊，請參閱[產生舊隨收隨付制及訂閱帳戶的 API 金鑰](#old_account)。請記住，IBM Cloud 基礎架構 (SoftLayer) 資源是透過新的「隨收隨付制」帳戶計費。</p></br><p>選項 2：如果您已有想要使用的現有 IBM Cloud 基礎架構 (SoftLayer) 帳戶，則可以針對 {{site.data.keyword.Bluemix_notm}} 帳戶[設定認證](cs_cli_reference.html#cs_credentials_set)。</p><p>**附註：**與 {{site.data.keyword.Bluemix_notm}} 帳戶搭配使用的 IBM Cloud 基礎架構 (SoftLayer) 帳戶必須已設定「超級使用者」許可權。</p>|
-|訂閱帳戶|訂閱帳戶未設定 IBM Cloud 基礎架構 (SoftLayer) 組合存取權。|選項 1：[建立新的隨收隨付制帳戶](/docs/pricing/billable.html#billable)，其已設定 IBM Cloud 基礎架構 (SoftLayer) 組合存取權。當您選擇此選項時，會有兩個不同的 {{site.data.keyword.Bluemix_notm}} 帳戶及計費。<p>如果您要繼續使用「訂閱」帳戶來建立標準叢集，則可以使用新的「隨收隨付制」帳戶來產生可存取 IBM Cloud 基礎架構 (SoftLayer) 組合的 API 金鑰。然後，您必須設定「訂閱」帳戶的 API 金鑰。如需相關資訊，請參閱[產生舊隨收隨付制及訂閱帳戶的 API 金鑰](#old_account)。請記住，IBM Cloud 基礎架構 (SoftLayer) 資源是透過新的「隨收隨付制」帳戶計費。</p></br><p>選項 2：如果您已有想要使用的現有 IBM Cloud 基礎架構 (SoftLayer) 帳戶，則可以針對 {{site.data.keyword.Bluemix_notm}} 帳戶[設定認證](cs_cli_reference.html#cs_credentials_set)。<p>**附註：**與 {{site.data.keyword.Bluemix_notm}} 帳戶搭配使用的 IBM Cloud 基礎架構 (SoftLayer) 帳戶必須已設定「超級使用者」許可權。</p>|
-|IBM Cloud 基礎架構 (SoftLayer)，無 {{site.data.keyword.Bluemix_notm}} 帳戶|若要建立標準叢集，您必須有 {{site.data.keyword.Bluemix_notm}} 帳戶。|<p>[建立新的隨收隨付制帳戶](/docs/pricing/billable.html#billable)，其已設定 IBM Cloud 基礎架構 (SoftLayer) 組合存取權。當選擇此選項時，會為您建立 IBM Cloud 基礎架構 (SoftLayer)。您有兩個不同的 IBM Cloud 基礎架構 (SoftLayer) 帳戶和帳單。</p>|
+|精簡帳戶|精簡帳戶無法佈建叢集。|[將「精簡」帳戶升級至 {{site.data.keyword.Bluemix_notm}} 隨收隨付制帳戶](/docs/account/index.html#billableacts)，其已設定為具有 IBM Cloud 基礎架構 (SoftLayer) 組合存取權。|
+|舊隨收隨付制帳戶|在自動帳戶鏈結可供使用之前所建立的「隨收隨付制」帳戶，沒有 IBM Cloud 基礎架構 (SoftLayer) 組合的存取權。<p>如果您有現有 IBM Cloud 基礎架構 (SoftLayer) 帳戶，則無法將此帳戶鏈結至舊的「隨收隨付制」帳戶。</p>|選項 1：[建立新的隨收隨付制帳戶](/docs/account/index.html#billableacts)，其已設定為具有 IBM Cloud 基礎架構 (SoftLayer) 組合存取權。當您選擇此選項時，會有兩個不同的 {{site.data.keyword.Bluemix_notm}} 帳戶及計費。<p>如果您要繼續使用舊的「隨收隨付制」帳戶來建立標準叢集，則可以使用新的「隨收隨付制」帳戶來產生可存取 IBM Cloud 基礎架構 (SoftLayer) 組合的 API 金鑰。然後，您必須設定舊「隨收隨付制」帳戶的 API 金鑰。如需相關資訊，請參閱[產生舊隨收隨付制及訂閱帳戶的 API 金鑰](#old_account)。請記住，IBM Cloud 基礎架構 (SoftLayer) 資源是透過新的「隨收隨付制」帳戶計費。</p></br><p>選項 2：如果您已有想要使用的現有 IBM Cloud 基礎架構 (SoftLayer) 帳戶，則可以針對 {{site.data.keyword.Bluemix_notm}} 帳戶[設定認證](cs_cli_reference.html#cs_credentials_set)。</p><p>**附註：**與 {{site.data.keyword.Bluemix_notm}} 帳戶搭配使用的 IBM Cloud 基礎架構 (SoftLayer) 帳戶必須已設定「超級使用者」許可權。</p>|
+|訂閱帳戶|訂閱帳戶未設定 IBM Cloud 基礎架構 (SoftLayer) 組合存取權。|選項 1：[建立新的隨收隨付制帳戶](/docs/account/index.html#billableacts)，其已設定為具有 IBM Cloud 基礎架構 (SoftLayer) 組合存取權。當您選擇此選項時，會有兩個不同的 {{site.data.keyword.Bluemix_notm}} 帳戶及計費。<p>如果您要繼續使用「訂閱」帳戶來建立標準叢集，則可以使用新的「隨收隨付制」帳戶來產生可存取 IBM Cloud 基礎架構 (SoftLayer) 組合的 API 金鑰。然後，您必須設定「訂閱」帳戶的 API 金鑰。如需相關資訊，請參閱[產生舊隨收隨付制及訂閱帳戶的 API 金鑰](#old_account)。請記住，IBM Cloud 基礎架構 (SoftLayer) 資源是透過新的「隨收隨付制」帳戶計費。</p></br><p>選項 2：如果您已有想要使用的現有 IBM Cloud 基礎架構 (SoftLayer) 帳戶，則可以針對 {{site.data.keyword.Bluemix_notm}} 帳戶[設定認證](cs_cli_reference.html#cs_credentials_set)。<p>**附註：**與 {{site.data.keyword.Bluemix_notm}} 帳戶搭配使用的 IBM Cloud 基礎架構 (SoftLayer) 帳戶必須已設定「超級使用者」許可權。</p>|
+|IBM Cloud 基礎架構 (SoftLayer)，無 {{site.data.keyword.Bluemix_notm}} 帳戶|若要建立標準叢集，您必須有 {{site.data.keyword.Bluemix_notm}} 帳戶。|<p>[建立新的隨收隨付制帳戶](/docs/account/index.html#billableacts)，其已設定為具有 IBM Cloud 基礎架構 (SoftLayer) 組合存取權。當選擇此選項時，會為您建立 IBM Cloud 基礎架構 (SoftLayer)。您有兩個不同的 IBM Cloud 基礎架構 (SoftLayer) 帳戶和帳單。</p>|
 
 <br />
 

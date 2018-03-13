@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-07"
 
 ---
 
@@ -21,6 +21,8 @@ lastupdated: "2018-01-12"
 에지 작업자 노드는 외부에서 적은 수의 작업자 노드에 액세스할 수 있게 하고 네트워크 워크로드를 격리함으로써 클러스터의 보안을 향상시킬 수 있습니다. 이러한 작업자 노드가 네트워킹 전용으로 표시되는 경우 다른 워크로드는 작업자 노드의 CPU 또는 메모리를 이용할 수 없고 네트워킹을 방해할 수도 없습니다.
 {:shortdesc}
 
+
+
 ## 에지 노드로 작업자 노드에 레이블 지정
 {: #edge_nodes}
 
@@ -28,10 +30,9 @@ lastupdated: "2018-01-12"
 
 시작하기 전에:
 
-- [표준 클러스터를 작성하십시오.
-](cs_clusters.html#clusters_cli)
+- [표준 클러스터를 작성](cs_clusters.html#clusters_cli)하십시오.
 - 클러스터에 하나 이상의 퍼블릭 VLAN을 가지고 있는지 확인하십시오. 에지 작업자 노드는 프라이빗 VLAN만 있는 클러스터에서는 사용할 수 없습니다.
-- [Kubernetes CLI를 클러스터에 대상으로 지정하십시오](cs_cli_install.html#cs_cli_configure).
+- [Kubernetes CLI를 클러스터에 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
 
 단계:
 
@@ -63,7 +64,7 @@ lastupdated: "2018-01-12"
   ```
   {: screen}
 
-4. 이전 단계의 출력을 사용하여 각 `kubectl get service` 행을 복사하고 붙여넣으십시오. 이 명령은 에지 작업자 노드에 로드 밸런서를 다시 배치합니다. 공용 로드 밸런서만 다시 배치해야 합니다.
+4. 이전 단계의 출력을 사용하여 각 `kubectl get service` 행을 복사하여 붙여넣으십시오. 이 명령은 에지 작업자 노드에 로드 밸런서를 다시 배치합니다. 공용 로드 밸런서만 다시 배치해야 합니다.
 
   출력:
 

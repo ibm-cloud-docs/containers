@@ -169,7 +169,7 @@ Vorab müssen Sie zulassen, dass [`bx`-Befehle](#firewall_bx) und [`kubectl`-Bef
 ## Zugriff des Clusters auf Infrastrukturressourcen und andere Services ermöglichen
 {: #firewall_outbound}
 
-Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von hinter einer Firewall zuzugreifen, wie beispielsweise für {{.site.data.keyword.containershort_notm}}-Regionen, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, private IPs von IBM Cloud Infrastructure (SoftLayer) und Egress für Persistent Volume Claims (PVCs).
+Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von hinter einer Firewall zuzugreifen, wie beispielsweise für {{site.data.keyword.containershort_notm}}-Regionen, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, private IPs von IBM Cloud Infrastructure (SoftLayer) und Egress für Persistent Volume Claims (PVCs).
 {:shortdesc}
 
   1.  Notieren Sie die öffentlichen IP-Adressen für alle Workerknoten im Cluster.
@@ -191,8 +191,8 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
     <tbody>
       <tr>
         <td>Asien-Pazifik (Norden)</td>
-        <td>hkg02<br>sng01<br>tok02</td>
-        <td><code>169.56.132.234</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
+        <td>hkg02<br>seo01<br>sng01<br>tok02</td>
+        <td><code>169.56.132.234</code><br><code>161.202.126.210</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
        </tr>
       <tr>
          <td>Asien-Pazifik (Süden)</td>
@@ -211,13 +211,13 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
       </tr>
       <tr>
         <td>Vereinigte Staaten (Osten)</td>
-         <td><ph class="mon">mon01<br></ph>tor01<br>wdc06<br>wdc07</td>
-         <td><ph class ="mon"><code>169.54.126.219</code><br></ph><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+         <td>mon01<br>tor01<br>wdc06<br>wdc07</td>
+         <td><code>169.54.126.219</code><br><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
       </tr>
       <tr>
         <td>Vereinigte Staaten (Süden)</td>
-        <td>dal10<br>dal12<br>dal13<ph class="sao-paolo"><br>sao01</ph></td>
-        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><ph class="sao-paolo"><br><code>169.57.151.10</code></ph></td>
+        <td>dal10<br>dal12<br>dal13<br>sao01</td>
+        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>169.57.151.10</code></td>
       </tr>
       </tbody>
     </table>
@@ -225,8 +225,7 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
 
   3.  Erlauben Sie ausgehenden Netzverkehr von den Workerknoten an [{{site.data.keyword.registrylong_notm}}-Regionen](/docs/services/Registry/registry_overview.html#registry_regions):
       - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
-      - Ersetzen Sie <em>&lt;registry_publicIP&gt;</em> durch die Registry-IP-Adressen, zu denen Sie Datenverkehr erlauben wollen. In der internationalen Registry werden von IBM bereitgestellte öffentliche Images gespeichert, während Ihre eigenen privaten oder öffentlichen Images in regionalen Registrys gespeichert werden.
-        <p>
+      - Ersetzen Sie <em>&lt;registry_publicIP&gt;</em> durch die Registry-IP-Adressen, zu denen Sie Datenverkehr erlauben wollen. In der globalen Registry werden von IBM bereitgestellte öffentliche Images gespeichert. Ihre eigenen privaten oder öffentlichen Images werden in regionalen Registrys gespeichert.<p>
 <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
       <thead>
         <th>{{site.data.keyword.containershort_notm}}-Region</th>
@@ -235,7 +234,7 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
       </thead>
       <tbody>
         <tr>
-          <td>Internationale Registry (containerregionsübergreifend)</td>
+          <td>Globale Registry (containerregionsübergreifend)</td>
           <td>registry.bluemix.net</td>
           <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
         </tr>
@@ -307,7 +306,12 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
             <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
            </tr>
           <tr>
-           <td>Zentraleuropa, Großbritannien (Süden)</td>
+           <td>Großbritannien (Süden)</td>
+           <td>ingest.logging.eu-gb.bluemix.net</td>
+           <td><code>169.50.115.113</code></td>
+          </tr>
+          <tr>
+           <td>Zentraleuropa</td>
            <td>ingest-eu-fra.logging.bluemix.net</td>
            <td><code>158.177.88.43</code><br><code>159.122.87.107</code></td>
           </tr>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-01-02"
+lastupdated: "2017-01-24"
 
 ---
 
@@ -25,7 +25,7 @@ Reportez-vous à ces commandes pour créer et gérer des clusters.
 **Astuce :** vous recherchez des commandes `bx cr` ? Consultez la [référence de l'interface CLI {{site.data.keyword.registryshort_notm}}](/docs/cli/plugins/registry/index.html). Vous recherchez des commandes `kubectl` ? Consultez la [documentation Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).
 
 
-<!--[https://github.ibm.com/alchemy-containers/armada-cli ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.ibm.com/alchemy-containers/armada-cli)-->
+
 
 <table summary="Commandes de création de clusters sur {{site.data.keyword.Bluemix_notm}}">
  <thead>
@@ -338,7 +338,7 @@ Créez un cluster dans votre organisation.
 <dl>
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
 
-<dd>Chemin d'accès au fichier YAML pour créer votre cluster standard. Au lieu de définir les caractéristiques de votre cluster à l'aide des options fournies dans cette commande, vous pouvez utiliser un fichier YAML.  Cette valeur est facultative pour les clusters standard et n'est pas disponible pour les clusters légers.
+<dd>Chemin d'accès au fichier YAML pour créer votre cluster standard. Au lieu de définir les caractéristiques de votre cluster à l'aide des options fournies dans cette commande, vous pouvez utiliser un fichier YAML.  Cette valeur est facultative pour les clusters standards et n'est pas disponible pour les clusters gratuits.
 
 <p><strong>Remarque :</strong> si vous indiquez la même option dans la commande comme paramètre dans le fichier YAML, la valeur de l'option de la commande est prioritaire sur la valeur définie dans le fichier YAML. Par exemple, si vous indiquez un emplacement dans votre fichier YAML et utilisez l'option <code>--location</code> dans la commande, la valeur que vous avez entrée dans l'option de commande se substitue à la valeur définie dans le fichier YAML.
 
@@ -404,11 +404,11 @@ kube-version: <em>&lt;kube-version&gt;</em>
     </p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
-<dd>Niveau d'isolation du matériel pour votre noeud worker. Utilisez dedicated pour que toutes les ressources physiques vous soient dédiées exclusivement ou shared pour permettre leur partage avec d'autres clients IBM. La valeur par défaut est shared.  Cette valeur est facultative pour les clusters standard et n'est pas disponible pour les clusters légers.</dd>
+<dd>Niveau d'isolation du matériel pour votre noeud worker. Utilisez dedicated pour que toutes les ressources physiques vous soient dédiées exclusivement ou shared pour permettre leur partage avec d'autres clients IBM. La valeur par défaut est shared.  Cette valeur est facultative pour les clusters standards et n'est pas disponible pour les clusters gratuits.</dd>
 
 <dt><code>--location <em>LOCATION</em></code></dt>
 <dd>Emplacement sous lequel vous désirez créer le cluster. Les emplacements disponibles dépendent de la région
-{{site.data.keyword.Bluemix_notm}} à laquelle vous vous êtes connecté. Pour des performances optimales, sélectionnez la région physiquement la plus proche.  Cette valeur est obligatoire pour les clusters standard et facultative pour les clusters légers.
+{{site.data.keyword.Bluemix_notm}} à laquelle vous vous êtes connecté. Pour des performances optimales, sélectionnez la région physiquement la plus proche.  Cette valeur est obligatoire pour les clusters standards et facultative pour les clusters gratuits.
 
 <p>Passez en revue les [emplacements disponibles](cs_regions.html#locations).
 </p>
@@ -417,7 +417,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 </dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>Le type de machine choisi a une incidence sur la quantité de mémoire et l'espace disque disponible pour les conteneurs déployés sur votre noeud worker. Pour afficher la liste des types de machine disponibles, exécutez la commande [bx cs machine-types <em>LOCATION</em>](#cs_machine_types).  Cette valeur est obligatoire pour les clusters standard et n'est pas disponible pour les clusters légers.</dd>
+<dd>Le type de machine choisi a une incidence sur la quantité de mémoire et l'espace disque disponible pour les conteneurs déployés sur votre noeud worker. Pour afficher la liste des types de machine disponibles, exécutez la commande [bx cs machine-types <em>LOCATION</em>](#cs_machine_types).  Cette valeur est obligatoire pour les clusters standards et n'est pas disponible pour les clusters gratuits.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
 <dd>Nom du cluster.  Cette valeur est obligatoire.</dd>
@@ -432,7 +432,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <dd>
 
 <ul>
-<li>Ce paramètre n'est pas disponible pour les clusters légers.</li>
+<li>Ce paramètre n'est pas disponible pour les clusters gratuits.</li>
 <li>S'il s'agit du premier cluster standard que vous créez à cet emplacement, n'incluez pas cet indicateur. Un VLAN privé est créé pour vous lorsque le cluster est créé.</li>
 <li>Si vous avez créé un cluster standard auparavant dans cet emplacement ou créé un VLAN privé dans l'infrastructure IBM Cloud (SoftLayer), vous devez spécifier ce VLAN privé.
 
@@ -444,7 +444,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
 <dd>
 <ul>
-<li>Ce paramètre n'est pas disponible pour les clusters légers.</li>
+<li>Ce paramètre n'est pas disponible pour les clusters gratuits.</li>
 <li>S'il s'agit du premier cluster standard que vous créez à cet emplacement, n'utilisez pas cet indicateur. Un VLAN public est créé pour vous lorsque le cluster est créé.</li>
 <li>Si vous avez créé un cluster standard auparavant dans cet emplacement ou créé un VLAN public dans l'infrastructure IBM Cloud (SoftLayer), vous devez spécifier ce VLAN public.
 
@@ -455,7 +455,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 
 <dt><code>--workers WORKER</code></dt>
 <dd>Nombre de noeuds d'agent que vous désirez déployer dans votre cluster. Si vous ne spécifiez pas cette
-option, un cluster avec 1 noeud worker est créé. Cette valeur est facultative pour les clusters standard et n'est pas disponible pour les clusters légers.
+option, un cluster avec 1 noeud worker est créé. Cette valeur est facultative pour les clusters standards et n'est pas disponible pour les clusters gratuits.
 
 <p><strong>Remarque :</strong> A chaque noeud worker sont affectés un ID de noeud worker unique et un nom de domaine qui ne doivent pas être modifiés manuellement après la création du cluster. La modification de l'ID ou du domaine empêcherait le maître
 Kubernetes de gérer votre cluster.</p></dd>
@@ -476,7 +476,7 @@ Kubernetes de gérer votre cluster.</p></dd>
   ```
   {: pre}
 
-  Exemple pour un cluster léger :
+  Exemple pour un cluster gratuit :
 
   ```
   bx cs cluster-create --name my_cluster
@@ -925,7 +925,7 @@ Créez une configuration de journalisation. Vous pouvez utiliser cette commande 
 <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
 <dd>Port du serveur collecteur de journal. Cette valeur est facultative. Si vous ne spécifiez pas de port, le port standard <code>514</code> est utilisé pour <code>syslog</code> et le port standard <code>9091</code> pour <code>ibm</code>.</dd>
 <dt><code>--space <em>CLUSTER_SPACE</em></code></dt>
-<dd>Nom de l'espace auquel vous désirez envoyer les journaux. Cette valeur est facultative et n'est valide que pour le type de journal <code>ibm</code>. Si vous n'en spécifiez pas un, les journaux sont envoyés au niveau du compte.</dd>
+<dd>Nom de l'espace auquel vous désirez envoyer les journaux. Cette valeur est facultative et n'est valide que pour le type de journal <code>ibm</code>. Si vous n'en indiquez aucun, les journaux sont envoyés au niveau du compte.</dd>
 <dt><code>--org <em>CLUSTER_ORG</em></code></dt>
 <dd>Nom de l'organisation où réside l'espace. Cette valeur n'est valide que pour le type de journal <code>ibm</code> et est obligatoire si vous avez spécifié un espace.</dd>
 <dt><code>--type <em>LOG_TYPE</em></code></dt>
@@ -1020,7 +1020,7 @@ Mettez à jour les détails d'une configuration d'acheminement de journaux.
    <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
    <dd>Port du serveur collecteur de journal. Cette valeur est facultative lorsque le type de journalisation est <code>syslog</code>. Si vous ne spécifiez pas de port, le port standard <code>514</code> est utilisé pour <code>syslog</code> et le port <code>9091</code> pour <code>ibm</code>.</dd>
    <dt><code>--space <em>CLUSTER_SPACE</em></code></dt>
-   <dd>Nom de l'espace auquel vous désirez envoyer les journaux. Cette valeur est facultative et n'est valide que pour le type de journal <code>ibm</code>. Si vous n'en spécifiez pas un, les journaux sont envoyés au niveau du compte.</dd>
+   <dd>Nom de l'espace auquel vous désirez envoyer les journaux. Cette valeur est facultative et n'est valide que pour le type de journal <code>ibm</code>. Si vous n'en indiquez aucun, les journaux sont envoyés au niveau du compte.</dd>
    <dt><code>--org <em>CLUSTER_ORG</em></code></dt>
    <dd>Nom de l'organisation où réside l'espace. Cette valeur n'est valide que pour le type de journal <code>ibm</code> et est obligatoire si vous avez spécifié un espace.</dd>
    <dt><code>--type <em>LOG_TYPE</em></code></dt>
@@ -1048,7 +1048,7 @@ Mettez à jour les détails d'une configuration d'acheminement de journaux.
 {: #cs_machine_types}
 
 Affichez la liste des types de machine disponibles pour vos noeuds d'agent. Chaque type de machine inclut la quantité d'UC virtuelles, de mémoire et d'espace disque pour chaque noeud worker dans le cluster.
-- Les types de machine dont le nom inclut `u2c` ou `b2c` utilisent un disque local au lieu du réseau de stockage SAN pour plus de fiabilité. Un SAN procure, entre autres, une capacité de traitement plus élevée lors de la sérialisation des octets sur le disque local et réduit les risques de dégradation du système de fichiers en cas de défaillance du réseau. Ces types de machine contiennent un stockage sur disque local de 25 Go pour le système de fichiers du système d'exploitation et 100 Go de stockage sur disque local pour `/var/lib/docker`, répertoire dans lequel sont écrites toutes les données des conteneurs.
+- Les types de machine dont le nom inclut `u2c` ou `b2c` utilisent le disque local au lieu du réseau de stockage SAN pour plus de fiabilité. Un SAN procure, entre autres, une capacité de traitement plus élevée lors de la sérialisation des octets sur le disque local et réduit les risques de dégradation du système de fichiers en cas de défaillance du réseau. Ces types de machine contiennent un stockage sur disque local de 25 Go pour le système de fichiers du système d'exploitation et 100 Go de stockage sur disque local pour `/var/lib/docker`, répertoire dans lequel sont écrites toutes les données des conteneurs.
 - Les types de machine dont le nom inclut `encrypted` chiffrent les données Docker de l'hôte. Le répertoire `/var/lib/docker`, dans lequel sont stockées toutes les données des conteneurs, est chiffré avec le chiffrement LUKS.
 - Les types de machine dont le nom inclut `u1c` ou `b1c` sont obsolètes. Par exemple, `u1c.2x4`. Pour démarrer des machines de type `u2c` et`b2c`, utilisez la commande `bx cs worker-add` afin d'ajouter des noeuds d'agent avec les types de machine mis à jour. Ensuite, supprimez les noeuds d'agent qui utilisent les types de machine obsolètes à l'aide de la commande `bx cs worker-rm`.
 </p>

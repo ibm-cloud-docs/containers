@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-16"
 
 ---
 
@@ -29,7 +29,9 @@ Para obter informações gerais sobre os serviços do Ingress e como começar a 
 <col width="20%">
 <col width="60%">
  <thead>
- <th colspan=3>Anotações gerais</th>
+ <th>Anotações gerais</th>
+ <th>Nome</th>
+ <th>Descrição</th>
  </thead>
  <tbody>
  <tr>
@@ -65,7 +67,9 @@ Para obter informações gerais sobre os serviços do Ingress e como começar a 
 <col width="20%">
 <col width="60%">
  <thead>
-  <th colspan=3>Anotações da conexão</th>
+ <th>Anotações da conexão</th>
+ <th>Nome</th>
+ <th>Descrição</th>
   </thead>
   <tbody>
   <tr>
@@ -96,7 +100,9 @@ Para obter informações gerais sobre os serviços do Ingress e como começar a 
 <col width="20%">
 <col width="60%">
  <thead>
- <th colspan=3>Anotações de buffer de proxy</th>
+ <th>Anotações de buffer de proxy</th>
+ <th>Nome</th>
+ <th>Descrição</th>
  </thead>
  <tbody>
  <tr>
@@ -127,7 +133,9 @@ Para obter informações gerais sobre os serviços do Ingress e como começar a 
 <col width="20%">
 <col width="60%">
 <thead>
-<th colspan=3>Anotações de solicitação e de resposta</th>
+<th>Anotações de solicitação e de resposta</th>
+<th>Nome</th>
+<th>Descrição</th>
 </thead>
 <tbody>
 <tr>
@@ -152,7 +160,9 @@ Para obter informações gerais sobre os serviços do Ingress e como começar a 
 <col width="20%">
 <col width="60%">
 <thead>
-<th colspan=3>Anotações de limite de serviço</th>
+<th>Anotações de limite de serviço</th>
+<th>Nome</th>
+<th>Descrição</th>
 </thead>
 <tbody>
 <tr>
@@ -172,7 +182,9 @@ Para obter informações gerais sobre os serviços do Ingress e como começar a 
 <col width="20%">
 <col width="60%">
 <thead>
-<th colspan=3>Anotações de autenticação HTTPS e TLS/SSL</th>
+<th>Anotações de autenticação HTTPS e TLS/SSL</th>
+<th>Nome</th>
+<th>Descrição</th>
 </thead>
 <tbody>
 <tr>
@@ -490,7 +502,7 @@ spec:
   </tr>
   <tr>
   <td><code>servicePort</code></td>
-  <td>A substituição de <code>&lt;<em>service_port</em>&gt;</code> por este parâmetro é opcional. Quando fornecido, a porta é substituída para este valor antes que o tráfego seja enviado para o app backend. Caso contrário, a porta permanece igual à porta de Ingresso.</td>
+  <td>Este parâmetro é opcional. Quando fornecido, a porta é substituída para este valor antes que o tráfego seja enviado para o app backend. Caso contrário, a porta permanece igual à porta de Ingresso.</td>
   </tr>
   </tbody></table>
   </dd>
@@ -557,7 +569,7 @@ spec:
  </tr>
  <tr>
  <td><code>&lt;read_timeout&gt;</code></td>
- <td>O número de segundos de espera antes que o app de backend seja lido, por exemplo <code>65s</code>.</td>
+ <td>O número de segundos de espera antes que o app de backend seja lido, por exemplo <code>65s</code>. <strong>Nota:</strong> um tempo limite de leitura não pode exceder 120 segundos.</td>
  </tr>
  </tbody></table>
 
@@ -1340,7 +1352,7 @@ spec:
  </tr>
  <tr>
  <td><code>&lt;port&gt;</code></td>
- <td>Insira o número da porta que você deseja usar para o tráfego de rede recebido HTTP ou HTTPS. <p><strong>Nota:</strong> quando uma porta customizada é especificada para HTTP ou HTTPS, as portas padrão não são mais válidas para HTTP e HTTPS. Por exemplo, para mudar a porta padrão para HTTPS para 8443, mas usar a porta padrão para HTTP, deve-se configurar portas customizadas para ambos: <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p></td>
+ <td>Insira o número da porta que você deseja usar para o tráfego de rede recebido HTTP ou HTTPS.  <p><strong>Nota:</strong> quando uma porta customizada é especificada para HTTP ou HTTPS, as portas padrão não são mais válidas para HTTP e HTTPS. Por exemplo, para mudar a porta padrão para HTTPS para 8443, mas usar a porta padrão para HTTP, deve-se configurar portas customizadas para ambos: <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p></td>
  </tr>
  </tbody></table>
 

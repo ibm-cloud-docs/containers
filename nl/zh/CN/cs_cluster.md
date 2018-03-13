@@ -17,9 +17,9 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# 此页面已移动！
+# 您查找的内容已移动。
 
-请在此查找相关主题：
+请在其新位置查看最新信息：
 - [使用 GUI 创建集群](cs_clusters.html#clusters_ui)
 - [使用 CLI 创建集群](cs_clusters.html#clusters_cli)
 - [使用专用和公共映像注册表](cs_images.html#images)

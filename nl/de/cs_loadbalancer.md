@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-06"
 
 ---
 
@@ -22,6 +22,8 @@ lastupdated: "2018-01-12"
 Machen Sie einen Port zugänglich und verwenden Sie eine portierbare IP-Adresse für die Lastausgleichsfunktion (Load Balancer), um auf die App zuzugreifen. Verwenden Sie eine öffentliche IP-Adresse, um eine App für das Internet zugänglich zu machen, oder eine private IP-Adresse, um eine App in Ihrem privaten Infrastrukturnetz verfügbar zu machen.
 {:shortdesc}
 
+
+
 ## Zugriff auf eine App durch Verwenden des Servicetyps 'LoadBalancer' konfigurieren
 {: #config}
 
@@ -30,7 +32,7 @@ Anders als beim NodePort-Service hängt die portierbare IP-Adresse des Service f
 
 Die portierbare IP-Adresse der Lastausgleichsfunktion (Load Balancer) wird Ihnen zugewiesen und bleibt unverändert erhalten, wenn Sie Workerknoten hinzufügen oder entfernen. Das bedeutet, dass Services für die Lastausgleichsfunktion eine höhere Verfügbarkeit aufweisen als NodePort-Services. Benutzer können für die Lastausgleichsfunktion jeden beliebigen Port auswählen und sind nicht auf den Portbereich für 'NodePort' beschränkt. LoadBalancer-Services können für TCP- und UDP-Protokolle verwendet werden.
 
-**Hinweis:** Von den Services für die Lastausgleichsfunktion wird die TLS-Terminierung nicht unterstützt. Falls für Ihre App die TLS-Terminierung erforderlich ist, können Sie Ihre App über [Ingress](cs_ingress.html) verfügbar machen oder die App für die TLS-Terminierung konfigurieren.
+**Anmerkung**: Services für die Lastausgleichsfunktion unterstützen nicht die TLS-Terminierung. Falls für Ihre App die TLS-Terminierung erforderlich ist, können Sie Ihre App über [Ingress](cs_ingress.html) verfügbar machen oder die App für die TLS-Terminierung konfigurieren.
 
 Vorbemerkungen:
 
@@ -43,6 +45,7 @@ Gehen Sie wie folgt vor, um einen Service für die Lastausgleichsfunktion zu ers
 1.  [Stellen Sie die App für den Cluster bereit](cs_app.html#app_cli). Wenn Sie dem Cluster die App bereitstellen, wird mindestens ein Pod für Sie erstellt, von dem die App im Container ausgeführt wird. Stellen Sie sicher, dass Sie zur Bereitstellung im Metadatenabschnitt der Konfigurationsdatei eine Bezeichnung hinzufügen. Diese Bezeichnung ist zur Identifizierung aller Pods erforderlich, in denen Ihre App ausgeführt wird, damit sie in den Lastenausgleich aufgenommen werden können.
 2.  Erstellen Sie einen Service für die App, den Sie öffentlich zugänglich machen möchten. Damit Ihre App im öffentlichen Internet oder in einem privaten Netz verfügbar wird, müssen Sie einen Kubernetes-Service für die App erstellen. Sie müssen den Service so konfigurieren, dass alle Pods, aus denen die App besteht, in den Lastenausgleich eingeschlossen sind.
     1.  Erstellen Sie eine Servicekonfigurationsdatei namens `myloadbalancer.yaml` (Beispiel).
+
     2.  Definieren Sie einen Lastenausgleichsservice für die App, die Sie zugänglich machen möchten.
         - Wenn sich Ihr Cluster in einem öffentlichen VLAN befindet, dann wird eine portierbare öffentliche IP-Adresse verwendet. Die meisten Cluster befinden sich in einem öffentlichen VLAN.
         - Wenn Ihr Cluster ausschließlich in einem privaten VLAN verfügbar ist, wird eine portierbare private IP-Adresse verwendet.
@@ -139,8 +142,9 @@ Gehen Sie wie folgt vor, um einen Service für die Lastausgleichsfunktion zu ers
     Name:                   <mein_service>
     Namespace:              default
     Labels:                 <keine>
-    Selector:               <selektorschlüssel>=<selektorwert>
+    Selector:               <selectorschlüssel>=<selektorwert>
     Type:                   LoadBalancer
+    Location:               dal10
     IP:                     10.10.10.90
     LoadBalancer Ingress:   192.168.10.38
     Port:                   <unset> 8080/TCP
@@ -148,14 +152,15 @@ Gehen Sie wie folgt vor, um einen Service für die Lastausgleichsfunktion zu ers
     Endpoints:              172.30.171.87:8080
     Session Affinity:       None
     Events:
-    FirstSeen LastSeen Count From   SubObjectPath Type  Reason   Message
-      --------- -------- ----- ----   ------------- -------- ------   -------
-      10s  10s  1 {service-controller }   Normal  CreatingLoadBalancer Creating load balancer
-      10s  10s  1 {service-controller }   Normal  CreatedLoadBalancer Created load balancer
+    FirstSeen	LastSeen	Count	From			SubObjectPath	Type		Reason			Message
+      ---------	--------	-----	----			-------------	--------	------			-------
+      10s		10s		1	{service-controller }			Normal		CreatingLoadBalancer	Creating load balancer
+      10s		10s		1	{service-controller }			Normal		CreatedLoadBalancer	Created load balancer
     ```
     {: screen}
 
     Die IP-Adresse für **LoadBalancer Ingress** ist die portierbare IP-Adresse, die dem Lastenausgleichsservice zugeordnet wurde.
+
 4.  Wenn Sie eine öffentliche Lastausgleichsfunktion erstellt haben, dann greifen Sie über das Internet auf Ihre App zu.
     1.  Öffnen Sie Ihren bevorzugten Web-Browser.
     2.  Geben Sie die portierbare öffentliche IP-Adresse der Lastausgleichsfunktion und des Ports ein. Im obigen Beispiel wurde dem Service für die Lastausgleichsfunktion die portierbare öffentliche IP-Adresse `192.168.10.38` zugeordnet.

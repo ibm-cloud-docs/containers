@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-09"
+lastupdated: "2018-01-31"
 
 ---
 
@@ -55,30 +55,34 @@ lastupdated: "2018-01-09"
     <th>描述</th>
     </thead>
     <tbody>
+  
+  <tr>
+      <td>Critical</td>
+      <td>无法访问 Kubernetes 主节点，或者集群中的所有工作程序节点都已停止运行。</td>
+     </tr>
+  
       <tr>
         <td>Deploying</td>
         <td>Kubernetes 主节点尚未完全部署。无法访问集群。</td>
        </tr>
        <tr>
-        <td>Pending</td>
-        <td>Kubernetes 主节点已部署。正在供应工作程序节点，这些节点在集群中尚不可用。您可以访问集群，但无法将应用程序部署到集群。</td>
-      </tr>
-      <tr>
         <td>Normal</td>
         <td>集群中的所有工作程序节点都已启动并正在运行。您可以访问集群，并将应用程序部署到集群。</td>
      </tr>
+       <tr>
+        <td>Pending</td>
+        <td>Kubernetes 主节点已部署。正在供应工作程序节点，这些节点在集群中尚不可用。您可以访问集群，但无法将应用程序部署到集群。</td>
+      </tr>
+  
      <tr>
         <td>Warning</td>
         <td>集群中至少有一个工作程序节点不可用，但其他工作程序节点可用，并且可以接管工作负载。</td>
-     </tr>
-     <tr>
-      <td>Critical</td>
-      <td>无法访问 Kubernetes 主节点，或者集群中的所有工作程序节点都已停止运行。</td>
-     </tr>
+     </tr>  
     </tbody>
   </table>
 
-3.  如果集群处于 **Warning** 或 **Critical** 状态，或者长时间卡在 **Pending** 状态，请复查工作程序节点的状态。如果集群处于 **Deploying** 状态，请等待集群完全部署后，再复查集群的运行状况。集群处于 **Normal** 状态时，被视为正常运行，此时不需要执行操作。
+3.  如果集群处于 **Warning**、**Critical** 或 **Delete failed** 状态，或者长时间卡在 **Pending** 状态，请复查工作程序节点的状态。如果集群处于 **Deploying** 状态，请等待集群完全部署后，再复查集群的运行状况。此时处于 **Normal** 状态的集群不需要执行操作。 
+<p>要复查工作程序节点的状态，请执行以下操作：</p>
 
   ```
   bx cs workers <cluster_name_or_id>
@@ -93,7 +97,7 @@ lastupdated: "2018-01-09"
     <tbody>
       <tr>
        <td>Unknown</td>
-       <td>由于以下某种原因，Kubernetes 主节点不可访问：<ul><li>您请求了更新 Kubernetes 主节点。在更新期间无法检索到工作程序节点的状态。</li><li>您可能有其他防火墙在保护工作程序节点，或者最近更改了防火墙设置。{{site.data.keyword.containershort_notm}} 需要打开特定 IP 地址和端口，以允许工作程序节点与 Kubernetes 主节点之间进行通信。有关更多信息，请参阅[防火墙阻止工作程序节点进行连接](#cs_firewall)。</li><li>Kubernetes 主节点已停止运行。请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](/docs/support/index.html#contacting-support)来联系 {{site.data.keyword.Bluemix_notm}} 支持。</li></ul></td>
+       <td>由于以下某种原因，Kubernetes 主节点不可访问：<ul><li>您请求了更新 Kubernetes 主节点。在更新期间无法检索到工作程序节点的状态。</li><li>您可能有其他防火墙在保护工作程序节点，或者最近更改了防火墙设置。{{site.data.keyword.containershort_notm}} 需要打开特定 IP 地址和端口，以允许工作程序节点与 Kubernetes 主节点之间进行通信。有关更多信息，请参阅[防火墙阻止工作程序节点进行连接](#cs_firewall)。</li><li>Kubernetes 主节点已停止运行。请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](/docs/get-support/howtogetsupport.html#getting-customer-support)来联系 {{site.data.keyword.Bluemix_notm}} 支持。</li></ul></td>
       </tr>
       <tr>
         <td>Provisioning</td>
@@ -143,11 +147,11 @@ lastupdated: "2018-01-09"
     <tbody>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure 异常：当前禁止您的帐户订购“计算实例”。</td>
-        <td>您的 IBM Cloud infrastructure (SoftLayer) 帐户可能受到限制，无法订购计算资源。请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](/docs/support/index.html#contacting-support)来联系 {{site.data.keyword.Bluemix_notm}} 支持。</td>
+        <td>您的 IBM Cloud infrastructure (SoftLayer) 帐户可能受到限制，无法订购计算资源。请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](/docs/get-support/howtogetsupport.html#getting-customer-support)来联系 {{site.data.keyword.Bluemix_notm}} 支持。</td>
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure 异常：无法下单。路由器“router_name”后的资源不足，无法实现以下访客的请求：“worker_id”。</td>
-        <td>所选的 VLAN 与数据中心内没有足够空间来供应工作程序节点的 pod 相关联。有以下选项可供选择：<ul><li>使用其他数据中心来供应工作程序节点。运行 <code>bx cs locations</code> 以列出可用的数据中心。<li>如果您有与数据中心内另一个 pod 相关联的现有公用和专用 VLAN 对，请改为使用此 VLAN 对。<li>请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](/docs/support/index.html#contacting-support)来联系 {{site.data.keyword.Bluemix_notm}} 支持。</ul></td>
+        <td>所选的 VLAN 与数据中心内没有足够空间来供应工作程序节点的 pod 相关联。有以下选项可供选择：<ul><li>使用其他数据中心来供应工作程序节点。运行 <code>bx cs locations</code> 以列出可用的数据中心。<li>如果您有与数据中心内另一个 pod 相关联的现有公用和专用 VLAN 对，请改为使用此 VLAN 对。<li>请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](/docs/get-support/howtogetsupport.html#getting-customer-support)来联系 {{site.data.keyword.Bluemix_notm}} 支持。</ul></td>
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure 异常：无法获取标识为 &lt;vlan id&gt; 的网络 VLAN。</td>
@@ -155,11 +159,13 @@ lastupdated: "2018-01-09"
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation：为此订单提供的位置无效。(HTTP 500)</td>
-        <td>IBM Cloud infrastructure (SoftLayer) 未设置为订购所选数据中心内的计算资源。请联系 [{{site.data.keyword.Bluemix_notm}} 支持](/docs/support/index.html#contacting-support)，以验证您的帐户是否正确设置。</td>
+        <td>IBM Cloud infrastructure (SoftLayer) 未设置为订购所选数据中心内的计算资源。请联系 [{{site.data.keyword.Bluemix_notm}} 支持](/docs/get-support/howtogetsupport.html#getting-customer-support)，以验证您的帐户是否正确设置。</td>
        </tr>
        <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure 异常：用户没有必需的 {{site.data.keyword.Bluemix_notm}} Infrastructure 许可权来添加服务器
-</br></br>
+
+
+        </br></br>
         {{site.data.keyword.Bluemix_notm}} Infrastructure 异常：必须具有许可权才能订购“项”。</td>
         <td>您可能没有必需的许可权来从 IBM Cloud infrastructure (SoftLayer) 产品服务组合供应工作程序节点。请参阅[配置对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权以创建标准 Kubernete 集群](cs_infrastructure.html#unify_accounts)。</td>
       </tr>
@@ -570,11 +576,11 @@ pod 会成功部署到集群，但容器不启动。
  </tr>
  <tr>
  <td>已达到日志存储配额。</td>
- <td>要提高日志存储限制，请参阅 <a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs">{{site.data.keyword.loganalysislong_notm}} 文档</a>。</td>
+ <td>要提高日志存储限制，请参阅 <a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html">{{site.data.keyword.loganalysislong_notm}} 文档</a>。</td>
  </tr>
  <tr>
  <td>如果您在创建集群时指定了空间，帐户所有者没有对该空间的“管理员”、“开发者”或“审计员”许可权。</td>
- <td>要更改帐户所有者的访问许可权，请执行以下操作：<ol><li>要找出集群的帐户所有者，请运行 <code>bx cs api-key-info &lt;cluster_name_or_id&gt;</code>。</li><li>要授予帐户所有者对空间的 {{site.data.keyword.containershort_notm}}“管理员”、“开发者”或“审计员”访问许可权，请参阅<a href="cs_users.html#managing">管理集群访问权</a>。</li><li>要在更改许可权后刷新日志记录令牌，请运行 <code>bx cs logging-config-refresh &lt;cluster_name_or_id&gt;</code>。</li></ol></td>
+ <td>要更改帐户所有者的访问许可权，请执行以下操作：<ol><li>要找出集群的帐户所有者，请运行 <code>bx cs api-key-info &lt;cluster_name_or_ID&gt;</code>。</li><li>要授予帐户所有者对空间的 {{site.data.keyword.containershort_notm}}“管理员”、“开发者”或“审计员”访问许可权，请参阅<a href="cs_users.html#managing">管理集群访问权</a>。</li><li>要在更改许可权后刷新日志记录令牌，请运行 <code>bx cs logging-config-refresh &lt;cluster_name_or_ID&gt;</code>。</li></ol></td>
  </tr>
  </tbody></table>
 
@@ -607,9 +613,10 @@ pod 会成功部署到集群，但容器不启动。
         {:pre}
 
   4. 几分钟后，可以在 Kibana 仪表板中查看日志。要访问 Kibana 仪表板，请转至以下某个 URL，然后选择在其中创建了集群的 {{site.data.keyword.Bluemix_notm}} 帐户。如果在创建集群时指定了空间，请改为转至该空间。
-        - 美国南部和美国东部：https://logging.ng.bluemix.net
-        - 英国南部和欧洲中部：https://logging.eu-fra.bluemix.net
-        - 亚太南部：https://logging.au-syd.bluemix.net
+      - 美国南部和美国东部：https://logging.ng.bluemix.net
+      - 英国南部：https://logging.eu-gb.bluemix.net
+      - 欧洲中部：https://logging.eu-fra.bluemix.net
+      - 亚太南部：https://logging.au-syd.bluemix.net
 
 <br />
 
@@ -645,7 +652,7 @@ pod 会成功部署到集群，但容器不启动。
 {: tsCauses}
 由于以下某种原因，LoadBalancer 服务可能未正常运行：
 
--   集群为 Lite 集群，或者为仅具有一个工作程序节点的标准集群。
+-   集群为免费集群，或者为仅具有一个工作程序节点的标准集群。
 -   集群尚未完全部署。
 -   LoadBalancer 服务的配置脚本包含错误。
 
@@ -721,20 +728,20 @@ pod 会成功部署到集群，但容器不启动。
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
-您已通过为集群中的应用程序创建 Ingress 资源来向公众公开应用程序。但尝试通过 Ingress 控制器的公共 IP 地址或子域连接到应用程序时，连接失败或超时。
+您已通过为集群中的应用程序创建 Ingress 资源来向公众公开应用程序。但尝试通过 Ingress 应用程序负载均衡器的公共 IP 地址或子域连接到应用程序时，连接失败或超时。
 
 {: tsCauses}
 由于以下原因，Ingress 可能未正常运行：
 <ul><ul>
 <li>集群尚未完全部署。
-<li>集群设置为 Lite 集群，或设置为仅具有一个工作程序节点的标准集群。
+<li>集群设置为免费集群，或设置为仅具有一个工作程序节点的标准集群。
 <li>Ingress 配置脚本包含错误。
 </ul></ul>
 
 {: tsResolve}
 要对 Ingress 进行故障诊断，请执行以下操作：
 
-1.  检查是否设置了完全部署的标准集群，以及该集群是否至少有两个工作程序节点，以确保 Ingress 控制器具有高可用性。
+1.  检查是否设置了完全部署的标准集群，以及该集群是否至少有两个工作程序节点，以确保 Ingress 应用程序负载均衡器具有高可用性。
 
   ```
   bx cs workers <cluster_name_or_id>
@@ -743,7 +750,7 @@ pod 会成功部署到集群，但容器不启动。
 
     在 CLI 输出中，确保工作程序节点的 **Status** 显示 **Ready**，并且 **Machine Type** 显示除了 **free** 之外的机器类型。
 
-2.  检索 Ingress 控制器子域和公共 IP 地址，然后对每一项执行 ping 操作。
+2.  检索 Ingress 应用程序负载均衡器子域和公共 IP 地址，然后对每一项执行 ping 操作。
 
     1.  检索 Ingress 控制器子域。
 
@@ -752,33 +759,33 @@ pod 会成功部署到集群，但容器不启动。
       ```
       {: pre}
 
-    2.  对 Ingress 控制器子域执行 ping 操作。
+    2.  对 Ingress 应用程序负载均衡器子域执行 ping 操作。
 
       ```
       ping <ingress_controller_subdomain>
       ```
       {: pre}
 
-    3.  检索 Ingress 控制器的公共 IP 地址。
+    3.  检索 Ingress 应用程序负载均衡器的公共 IP 地址。
 
       ```
       nslookup <ingress_controller_subdomain>
       ```
       {: pre}
 
-    4.  对 Ingress 控制器公共 IP 地址执行 ping 操作。
+    4.  对 Ingress 应用程序负载均衡器公共 IP 地址执行 ping 操作。
 
       ```
       ping <ingress_controller_ip>
       ```
       {: pre}
 
-    如果对于 Ingress 控制器的公用 IP 地址或子域，CLI 返回超时，并且您已设置定制防火墙来保护工作程序节点，那么可能需要在[防火墙](#cs_firewall)中打开其他端口和联网组。
+    如果对于 Ingress 应用程序负载均衡器的公共 IP 地址或子域，CLI 返回超时，并且您已设置定制防火墙来保护工作程序节点，那么可能需要在[防火墙](#cs_firewall)中打开其他端口和联网组。
 
-3.  如果使用的是定制域，请确保定制域已通过域名服务 (DNS) 提供程序映射到 IBM 提供的 Ingress 控制器的公共 IP 地址或子域。
-    1.  如果使用的是 Ingress 控制器子域，请检查规范名称记录 (CNAME)。
-    2.  如果使用的是 Ingress 控制器公共 IP 地址，请检查定制域是否已映射到指针记录 (PTR) 中的可移植公共 IP 地址。
-4.  检查 Ingress 配置文件。
+3.  如果使用的是定制域，请确保定制域已通过域名服务 (DNS) 提供程序映射到 IBM 提供的 Ingress 应用程序负载均衡器的公共 IP 地址或子域。
+    1.  如果使用的是 Ingress 应用程序负载均衡器子域，请检查规范名称记录 (CNAME)。
+    2.  如果使用的是 Ingress 应用程序负载均衡器公共 IP 地址，请检查定制域是否已映射到指针记录 (PTR) 中的可移植公共 IP 地址。
+4.  检查 Ingress 资源配置文件。
 
     ```
     apiVersion: extensions/v1beta1
@@ -801,7 +808,7 @@ pod 会成功部署到集群，但容器不启动。
     ```
     {: codeblock}
 
-    1.  检查 Ingress 控制器子域和 TLS 证书是否正确。要找到 IBM 提供的子域和 TLS 证书，请运行 bx cs cluster-get <cluster_name_or_id>。
+    1.  检查 Ingress 应用程序负载均衡器子域和 TLS 证书是否正确。要找到 IBM 提供的子域和 TLS 证书，请运行 bx cs cluster-get <cluster_name_or_id>。
     2.  确保应用程序侦听的是在 Ingress 的 **path** 部分中配置的路径。如果应用程序设置为侦听根路径，请包含 **/** 以作为路径。
 5.  检查 Ingress 部署，并查找潜在的错误消息。
 
@@ -821,7 +828,7 @@ pod 会成功部署到集群，但容器不启动。
     2.  检索每个 Ingress pod 的日志。
 
       ```
-      kubectl logs <ingress_pod_id> -n kube-system
+      kubectl logs <ingress_pod_id> nginx-ingress -n kube-system
       ```
       {: pre}
 
@@ -886,7 +893,7 @@ pod 会成功部署到集群，但容器不启动。
 集群不是 [Kubernetes V1.7](cs_versions.html) 或更高版本。
 
 {: tsResolve}
-[更新集群](cs_cluster_update.html#master)或使用与较早版本 Kubernetes 兼容的命令检索 `<ETCD_URL>`。
+使用与较早版本 Kubernetes 兼容的命令来[更新集群](cs_cluster_update.html#master)或检索 `<ETCD_URL>`。
 
 要检索 `<ETCD_URL>`，请运行以下某个命令：
 
@@ -918,8 +925,11 @@ pod 会成功部署到集群，但容器不启动。
 -   在 [{{site.data.keyword.containershort_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 中发布问题。提示：如果未将 IBM 标识用于 {{site.data.keyword.Bluemix_notm}} 帐户，请针对此 Slack [请求邀请](https://bxcs-slack-invite.mybluemix.net/)。
 -   请复查论坛，以查看是否有其他用户遇到相同的问题。使用论坛进行提问时，请使用适当的标记来标注您的问题，以方便 {{site.data.keyword.Bluemix_notm}} 开发团队识别。
 
-    -   如果您有关于使用 {{site.data.keyword.containershort_notm}} 开发或部署集群或应用程序的技术问题，请在 [Stack Overflow ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://stackoverflow.com/search?q=bluemix+containers) 上发布您的问题，并使用 `ibm-bluemix`、`kubernetes` 和 `containers` 标记您的问题。
-    -   有关服务的问题和入门指示信息，请使用 [IBM developerWorks dW Answers ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 论坛。请加上 `bluemix` 和 `containers` 标记。
-    有关使用论坛的更多详细信息，请参阅[获取帮助](/docs/support/index.html#getting-help)。
+    -   如果您有关于使用 {{site.data.keyword.containershort_notm}} 开发或部署集群或应用程序的技术问题，请在 [Stack Overflow ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) 上发布您的问题，并使用 `ibm-cloud`、`kubernetes` 和 `containers` 标记您的问题。
+    -   有关服务的问题和入门指示信息，请使用 [IBM developerWorks dW Answers ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 论坛。请加上 `ibm-cloud` 和 `containers` 标记。
+    有关使用论坛的更多详细信息，请参阅[获取帮助](/docs/get-support/howtogetsupport.html#using-avatar)。
 
--   联系 IBM 支持。有关提交 IBM 支持凭单或支持级别和凭单严重性的信息，请参阅[联系支持人员](/docs/support/index.html#contacting-support)。
+-   联系 IBM 支持。有关提交 IBM 支持凭单或支持级别和凭单严重性的信息，请参阅[联系支持人员](/docs/get-support/howtogetsupport.html#getting-customer-support)。
+
+{:tip}
+报告问题时，请包含集群标识。要获取集群标识，请运行 `bx cs clusters`。

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-05"
+lastupdated: "2018-02-08"
 
 ---
 
@@ -18,26 +18,26 @@ lastupdated: "2018-01-05"
 # Versions de Kubernetes pour {{site.data.keyword.containerlong_notm}}
 {: #cs_versions}
 
-Passez en revue les versions de Kubernetes disponibles sur {{site.data.keyword.containerlong}}.
+{{site.data.keyword.containerlong}} gère la coexistence de plusieurs versions de Kubernetes : une version la plus récente, une version par défaut et une version prise en charge, généralement deux versions derrière la plus récente. La version par défaut peut être identique à la plus récente et elle est utilisée lorsque vous créez un cluster, à moins que vous n'en spécifiez une autre.
 {:shortdesc}
 
-{{site.data.keyword.containershort_notm}} prend en charge plusieurs versions de Kubernetes. La version par défaut est utilisée lorsque vous créez ou mettez à jour un cluster, sauf si vous spécifiez une autre version. Les versions disponibles de Kubernetes sont les suivantes :
-- 1.8.6
-- 1.7.4 (version par défaut)
-- 1.5.6
+Versions Kubernetes actuellement prises en charge :
 
-Pour vérifier quelle version de l'interface CLI de Kubernetes vous utilisez en local ou que votre cluster exécute, lancez la commande suivante et vérifiez la version renvoyée.
+- Version la plus récente : 1.9.2
+- Version par défaut : 1.8.6
+- Version prise en charge : 1.7.4
+
+Si vous utilisez des clusters sur une version Kubernetes non prise en charge actuellement, [examinez les informations sur les impacts potentiels](#version_types) pour identifier les mises à jour, puis [mettez à jour votre cluster](cs_cluster_update.html#update) immédiatement pour continuer à recevoir des mises à jour de sécurité importantes et bénéficier du support. Pour identifier la version la plus récente, exécutez la commande suivante.
 
 ```
-kubectl version  --short
+kubectl version  --short | grep -i server
 ```
 {: pre}
 
 Exemple de sortie :
 
 ```
-Version client : 1.7.4
-Version serveur : 1.7.4
+Server Version: 1.8.6
 ```
 {: screen}
 
@@ -61,12 +61,85 @@ Les informations qui suivent récapitulent les mises à jour susceptibles d'avoi
 
 Pour plus d'informations sur le processus de mise à jour, voir [Mise à jour des clusters](cs_cluster_update.html#master) et [Mise à jour des noeuds d'agent](cs_cluster_update.html#worker_node).
 
+## Version 1.9
+{: #cs_v19}
+
+
+
+Passez en revue les modifications que vous devrez peut-être apporter lors d'une mise à jour depuis la version Kubernetes antérieure vers la version 1.9.
+
+<br/>
+
+### Mise à jour avant le maître
+{: #19_before}
+
+<table summary="Mises à jour Kubernetes pour la version 1.9">
+<caption>Modifications à apporter lors de la mise à jour du maître vers la version Kubernetes 1.9</caption>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API d'admission webhook</td>
+<td>L'API d'admission, qui est utilisée lorsque le serveur d'API appelle des webhooks de contrôle d'admission, a été transférée de <code>admission.v1alpha1</code> à <code>admission.v1beta1</code>. <em>Vous devez supprimer les éventuels webhooks existants avant de mettre à niveau votre cluster</em> et mettre à jour les fichiers de configuration webhook afin d'utiliser l'API la plus récente. Cette modification n'est pas compatible en amont.</td>
+</tr>
+</tbody>
+</table>
+
+### Mise à jour après le maître
+{: #19_after}
+
+<table summary="Mises à jour Kubernetes pour la version 1.9">
+<caption>Modifications à apporter après la mise à jour du maître vers la version Kubernetes 1.9</caption>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sortie `kubectl`</td>
+<td>A présent, lorsque vous utilisez la commande `kubectl` en spécifiant `-o custom-columns` et que la colonne est introuvable dans l'objet, la sortie indique `<none>`.<br>
+Auparavant, l'opération échouait et un message d'erreur `xxx is not found` (xxx introuvable) était affiché. Si vos scripts reposent sur le comportement antérieur, mettez-les à jour.</td>
+</tr>
+<tr>
+<td>`kubectl patch`</td>
+<td>Maintenant, lorsqu'aucune modification n'est apportée à la ressource concernée, la commande the `kubectl patch` échoue avec un `exit code 1`. Si vos scripts reposent sur le comportement antérieur, mettez-les à jour.</td>
+</tr>
+<tr>
+<td>Droits sur le tableau de bord Kubernetes</td>
+<td>Les utilisateurs doivent à présent se connecter au tableau de bord Kubernetes avec leurs données d'identification pour afficher les ressources du cluster. L'autorisation RBAC `ClusterRoleBinding` du tableau de bord Kubernetes par défaut a été supprimée. Pour les instructions correspondantes, voir [Lancement du tableau de bord Kubernetes](cs_app.html#cli_dashboard).</td>
+</tr>
+<tr>
+<td>RBAC pour `ServiceAccount` `default` </td>
+<td>L'administrateur `ClusterRoleBinding` pour le `ServiceAccount` `default` dans l'espace nom `default` a été supprimé. Si vos applications s'appuient sur cette règle RBAC pour accéder à l'API Kubernetes, [mettez à jour vos règles RBAC](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview).</td>
+</tr>
+<tr>
+<td>Annotations Taints et tolerations</td>
+<td>Les annotations taint `node.alpha.kubernetes.io/notReady` et `node.alpha.kubernetes.io/unreachable` en été changées respectivement en `node.kubernetes.io/not-ready` et `node.kubernetes.io/unreachable`.<br>
+Bien que ces annotations taint soient mises à jour automatiquement, vous devez mettre à jour manuellement leurs annotations tolerations. Pour chaque espace nom, hormis `ibm-system` et `kube-system`, déterminez si vous avez besoin de modifier les annotations tolerations :<br>
+<ul><li><code>kubectl get pods -n &lt;namespace&gt; -o yaml | grep "node.alpha.kubernetes.io/notReady" && echo "Action required"</code></li><li>
+<code>kubectl get pods -n &lt;namespace&gt; -o yaml | grep "node.alpha.kubernetes.io/unreachable" && echo "Action required"</code></li></ul><br>
+Si `Action required` est renvoyé, modifiez les annotations tolerations de pod en conséquence.</td>
+</tr>
+<tr>
+<td>API d'admission webhook</td>
+<td>Si vous avez supprimé des webhooks existants avant de mettre à jour le cluster, créez de nouveaux webhooks.</td>
+</tr>
+</tbody>
+</table>
+
+
 ## Version 1.8
 {: #cs_v18}
 
 <p><img src="images/certified_kubernetes_1x8.png" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" height="100" width="62.5" align="left" alt="Ce badge indique la certification Kubernetes version 1.8 pour IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} est un produit certifié par Kubernetes pour la version 1.8 sous le programme CNCF de certification de conformité de logiciels Kubernetes. _Kubernetes® est une marque de la Fondation Linux aux Etats-Unis et dans d'autres pays et est utilisé dans le cadre d'une licence de la Fondation Linux._</p>
 
-Passez en revue les modifications éventuellement nécessaires si vous procédez à une mise à jour vers Kubernetes version 1.8.
+Passez en revue les modifications que vous devrez peut-être apporter lors d'une mise à jour depuis la version Kubernetes antérieure vers la version 1.8.
 
 <br/>
 
@@ -129,7 +202,7 @@ Passez en revue les modifications éventuellement nécessaires si vous procédez
 
 <p><img src="images/certified_kubernetes_1x7.png" height="100" width="62.5" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" align="left" alt="Ce badge indique une certification Kubernetes version 1.7 pour IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} est un produit certifié Kubernetes pour la version 1.7 sous le programme de certification de conformité de logiciel Kubernetes.</p>
 
-Passez en revue les modifications éventuellement nécessaires si vous procédez à une mise à jour vers Kubernetes version 1.7.
+Passez en revue les modifications que vous devrez peut-être apporter lors d'une mise à jour depuis la version Kubernetes antérieure vers la version 1.7.
 
 <br/>
 

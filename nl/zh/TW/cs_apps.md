@@ -16,9 +16,9 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# 此頁面已移動！
+# 您正在尋找的內容已遭移動。
 
-尋找主題：
+請參閱新位置中最新的資訊：
 - [啟動 Kubernetes 儀表板](cs_app.html#cli_dashboard)
 - [建立 Secret](cs_app.html#secrets)
 - [容許對應用程式的公用存取](cs_network_planning.html#planning)

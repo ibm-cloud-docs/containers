@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -25,7 +25,7 @@ Sie können Ihre App für den Internetzugriff verfügbar machen, indem Sie die �
 ## Öffentlichen Zugriff auf eine App durch Verwenden des Servicetyps 'NodePort' konfigurieren
 {: #config}
 
-Sie können Ihre App für Lite-Cluster oder Standardcluster als Kubernetes-NodePort-Service verfügbar machen.
+Sie können Ihre App als einen Kubernetes-NodePort-Service für kostenlose Cluster oder Standardcluster zugänglich machen.
 {:shortdesc}
 
 **Hinweis:** Die öffentliche IP-Adresse eines Workerknotens ist nicht permanent. Muss ein Workerknoten neu erstellt werden, so wird ihm eine neue öffentliche IP-Adresse zugewiesen. Wenn Sie eine stabile öffentliche IP-Adresse und ein höheres Maß an Verfügbarkeit für Ihren Service benötigen, sollten Sie Ihre App über einen [LoadBalancer-Service](cs_loadbalancer.html) oder über [Ingress](cs_ingress.html) verfügbar machen.
@@ -50,8 +50,7 @@ Wenn bisher keine App bereitsteht, können Sie eine Kubernetes-Beispielapp namen
       ports:
        - port: <8081>
          # nodePort: <31514>
-
-    ```
+     ```
     {: codeblock}
 
     <table>
@@ -77,7 +76,8 @@ Wenn bisher keine App bereitsteht, können Sie eine Kubernetes-Beispielapp namen
      <td>Optional: Ersetzen Sie <code><em>&lt;31514&gt;</em></code> durch eine Knotenportnummer aus dem Bereich 30000 bis 32767. Geben Sie für 'NodePort' keine Portnummer an, die bereits von einem anderen Service verwendet wird. Wenn manuell keine Knotenportnummer festgelegt wird, so erfolgt die Zuweisung automatisch nach dem Zufallsprinzip.<br><br>Wenn Sie für 'NodePort' eine Portnummer festlegen wollen und ermitteln wollen, welche Knotenportnummern bereits belegt sind, führen Sie den folgenden Befehl aus: <pre class="pre"><code>   kubectl get svc
    </code></pre>Alle bereits belegten Knotenportnummern werden unter dem Feld **Ports** angezeigt.</td>
      </tr>
-     </tbody></table>
+     </tbody>
+     </table>
 
 
     Für das Beispiel 'Guestbook' ist in der Konfigurationsdatei bereits ein Front-End-Serviceabschnitt vorhanden. Um die App 'Guestbook' extern verfügbar zu machen, müssen Sie dem Front-End-Serviceabschnitt den Typ 'NodePort' und für 'nodePort' eine Portnummer aus dem Bereich 30000 bis 32767 hinzufügen.

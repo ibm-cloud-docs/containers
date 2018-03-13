@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-09"
+lastupdated: "2018-02-06"
 
 ---
 
@@ -19,93 +19,13 @@ lastupdated: "2018-01-09"
 # 用于管理集群的 CLI 参考
 {: #cs_cli_reference}
 
-请参阅以下命令来创建和管理集群。
+请参阅以下命令以在 {{site.data.keyword.Bluemix_notm}} 上创建和管理集群。
 {:shortdesc}
 
 ## bx cs 命令
 {: #cs_commands}
 
 **提示：**在查找 `bx cr` 命令吗？请参阅 [{{site.data.keyword.registryshort_notm}} CLI 参考](/docs/cli/plugins/registry/index.html)。在查找 `kubectl` 命令吗？请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)。
-
-
-<!--[https://github.ibm.com/alchemy-containers/armada-cli ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.ibm.com/alchemy-containers/armada-cli)-->
-
-<table summary="用于在 {{site.data.keyword.Bluemix_notm}} 上创建集群的命令">
- <thead>
-    <th colspan=5>用于在 {{site.data.keyword.Bluemix_notm}} 上创建集群的命令</th>
- </thead>
- <tbody>
-  <tr>
-    <td>[bx cs alb-cert-deploy](#cs_alb_cert_deploy)</td>
-    <td>[bx cs alb-cert-get](#cs_alb_cert_get)</td>
-    <td>[bx cs alb-cert-rm](#cs_alb_cert_rm)</td>
-    <td>[bx cs alb-certs](#cs_alb_certs)</td>
-    <td>[bx cs alb-configure](#cs_alb_configure)</td>
- </tr>
- <tr>
-    <td>[bx cs alb-get](#cs_alb_get)</td>
-    <td>[bx cs alb-types](#cs_alb_types)</td>
-    <td>[bx cs albs](#cs_albs)</td>
-    <td>[bx cs api-key-info](#cs_api_key_info)</td>
-    <td>[bx cs apiserver-config-set](#cs_apiserver_config_set)</td>
- </tr>
- <tr>
-    <td>[bx cs apiserver-refresh](#cs_apiserver_refresh)</td>
-    <td>[bx cs cluster-config](#cs_cluster_config)</td>
-    <td>[bx cs cluster-create](#cs_cluster_create)</td>
-    <td>[bx cs cluster-get](#cs_cluster_get)</td>
-    <td>[bx cs cluster-rm](#cs_cluster_rm)</td>
- </tr>
- <tr>
-    <td>[bx cs cluster-service-bind](#cs_cluster_service_bind)</td>
-    <td>[bx cs cluster-service-unbind](#cs_cluster_service_unbind)</td>
-    <td>[bx cs cluster-services](#cs_cluster_services)</td>
-    <td>[bx cs cluster-subnet-add](#cs_cluster_subnet_add)</td>
-    <td>[bx cs cluster-subnet-create](#cs_cluster_subnet_create)</td>
- </tr>
- <tr>
-    <td>[bx cs cluster-user-subnet-add](#cs_cluster_user_subnet_add)</td>
-    <td>[bx cs cluster-user-subnet-rm](#cs_cluster_user_subnet_rm)</td>
-    <td>[bx cs cluster-update](#cs_cluster_update)</td>
-    <td>[bx cs clusters](#cs_clusters)</td>
-    <td>[bx cs credentials-set](#cs_credentials_set)</td>
- </tr>
- <tr>
-    <td>[bx cs credentials-unset](#cs_credentials_unset)</td>
-    <td>[bx cs help](#cs_help)</td>
-    <td>[bx cs init](#cs_init)</td>
-    <td>[bx cs kube-versions](#cs_kube_versions)</td>
-    <td>[bx cs locations](#cs_datacenters)</td>
- </tr>
- <tr>
-    <td>[bx cs logging-config-create](#cs_logging_create)</td>
-    <td>[bx cs logging-config-get](#cs_logging_get)</td>
-    <td>[bx cs logging-config-refresh](#cs_logging_refresh)</td>
-    <td>[bx cs logging-config-rm](#cs_logging_rm)</td>
-    <td>[bx cs logging-config-update](#cs_logging_update)</td>
- </tr>
- <tr>
-    <td>[bx cs machine-types](#cs_machine_types)</td>
-    <td>[bx cs region](#cs_region)</td>
-    <td>[bx cs region-set](#cs_region-set)</td>
-    <td>[bx cs regions](#cs_regions)</td>
-    <td>[bx cs subnets](#cs_subnets)</td>
- </tr>
- <tr>
-    <td>[bx cs vlans](#cs_vlans)</td>
-    <td>[bx cs webhook-create](#cs_webhook_create)</td>
-    <td>[bx cs worker-add](#cs_worker_add)</td>
-    <td>[bx cs worker-get](#cs_worker_get)</td>
-    <td>[bx cs worker-reboot](#cs_worker_reboot)</td>
- </tr>
- <tr>
-    <td>[bx cs worker-reload](#cs_worker_reload)</td>
-    <td>[bx cs worker-rm](#cs_worker_rm)</td>
-    <td>[bx cs worker-update](#cs_worker_update)</td>
-    <td>[bx cs workers](#cs_workers)</td>
- </tr>
- </tbody>
- </table>
 
 **提示：**要查看 {{site.data.keyword.containershort_notm}} 插件的版本，请运行以下命令。
 
@@ -114,7 +34,234 @@ bx plugin list
 ```
 {: pre}
 
+
+
+<table summary="应用程序负载均衡器命令">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>应用程序负载均衡器命令</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs alb-cert-deploy](#cs_alb_cert_deploy)</td>
+    <td>[bx cs alb-cert-get](#cs_alb_cert_get)</td>
+    <td>[bx cs alb-cert-rm](#cs_alb_cert_rm)</td>
+    <td>[bx cs alb-certs](#cs_alb_certs)</td>
+  </tr>
+  <tr>
+    <td>[bx cs alb-configure](#cs_alb_configure)</td>
+    <td>[bx cs alb-get](#cs_alb_get)</td>
+    <td>[bx cs alb-types](#cs_alb_types)</td>
+    <td>[bx cs albs](#cs_albs)</td>
+ </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="API 命令">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>API 命令</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs api-key-info](#cs_api_key_info)</td>
+    <td>[bx cs api-key-reset](#cs_api_key_reset)</td>
+    <td>[bx cs apiserver-config-get](#cs_apiserver_config_get)</td>
+    <td>[bx cs apiserver-config-set](#cs_apiserver_config_set)</td>
+  </tr>
+  <tr>
+    <td>[bx cs apiserver-config-unset](#cs_apiserver_config_unset)</td>
+    <td>[bx cs apiserver-refresh](#cs_apiserver_refresh)</td>
+    <td></td>
+    <td></td>
+ </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="CLI 插件用法命令">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>CLI 插件用法命令</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs help](#cs_help)</td>
+    <td>[bx cs init](#cs_init)</td>
+    <td>[bx cs messages](#cs_messages)</td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="集群命令：管理">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>集群命令：管理</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs cluster-config](#cs_cluster_config)</td>
+    <td>[bx cs cluster-create](#cs_cluster_create)</td>
+    <td>[bx cs cluster-get](#cs_cluster_get)</td>
+    <td>[bx cs cluster-rm](#cs_cluster_rm)</td>
+  </tr>
+  <tr>
+    <td>[bx cs cluster-update](#cs_cluster_update)</td>
+    <td>[bx cs clusters](#cs_clusters)</td>
+    <td>[bx cs kube-versions](#cs_kube_versions)</td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="集群命令：服务和集成">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>集群命令：服务和集成</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs cluster-service-bind](#cs_cluster_service_bind)</td>
+    <td>[bx cs cluster-service-unbind](#cs_cluster_service_unbind)</td>
+    <td>[bx cs cluster-services](#cs_cluster_services)</td>
+    <td>[bx cs webhook-create](#cs_webhook_create)</td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="集群命令：子网">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>集群命令：子网</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs cluster-subnet-add](#cs_cluster_subnet_add)</td>
+    <td>[bx cs cluster-subnet-create](#cs_cluster_subnet_create)</td>
+    <td>[bx cs cluster-user-subnet-add](#cs_cluster_user_subnet_add)</td>
+    <td>[bx cs cluster-user-subnet-rm](#cs_cluster_user_subnet_rm)</td>
+  </tr>
+  <tr>
+    <td>[bx cs subnets](#cs_subnets)</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="基础架构命令">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>基础架构命令</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs credentials-set](#cs_credentials_set)</td>
+    <td>[bx cs credentials-unset](#cs_credentials_unset)</td>
+    <td>[bx cs machine-types](#cs_machine_types)</td>
+    <td>[bx cs vlans](#cs_vlans)</td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="日志记录命令">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>日志记录命令</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs logging-config-create](#cs_logging_create)</td>
+    <td>[bx cs logging-config-get](#cs_logging_get)</td>
+    <td>[bx cs logging-config-refresh](#cs_logging_refresh)</td>
+    <td>[bx cs logging-config-rm](#cs_logging_rm)</td>
+  </tr>
+  <tr>
+    <td>[bx cs logging-config-update](#cs_logging_update)</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="区域命令">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>区域命令</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs locations](#cs_datacenters)</td>
+    <td>[bx cs region](#cs_region)</td>
+    <td>[bx cs region-set](#cs_region-set)</td>
+    <td>[bx cs regions](#cs_regions)</td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="工作程序节点命令">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>工作程序节点命令</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs worker-add](#cs_worker_add)</td>
+    <td>[bx cs worker-get](#cs_worker_get)</td>
+    <td>[bx cs worker-reboot](#cs_worker_reboot)</td>
+    <td>[bx cs worker-reload](#cs_worker_reload)</td>
+  </tr>
+  <tr>
+    <td>[bx cs worker-rm](#cs_worker_rm)</td>
+    <td>[bx cs worker-update](#cs_worker_update)</td>
+    <td>[bx cs workers](#cs_workers)</td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+
 ## 应用程序负载均衡器命令
+{: #alb_commands}
 
 ### bx cs alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NAME --cert-crn CERTIFICATE_CRN
 {: #cs_alb_cert_deploy}
@@ -148,7 +295,7 @@ bx plugin list
    ```
    bx cs alb-cert-deploy --secret-name my_alb_secret_name --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
    ```
- {: pre}
+   {: pre}
 
 更新现有应用程序负载均衡器私钥的示例：
 
@@ -254,6 +401,8 @@ bx plugin list
  {: pre}
 
 
+
+
 ### bx cs alb-configure --albID ALB_ID [--enable][--disable][--user-ip USERIP]
 {: #cs_alb_configure}
 
@@ -303,6 +452,8 @@ bx plugin list
   bx cs alb-configure --albID my_private_alb_id --enable --user-ip user_ip
   ```
   {: pre}
+
+
 
 ### bx cs alb-get --albID ALB_ID
 {: #cs_alb_get}
@@ -360,7 +511,13 @@ bx plugin list
   {: pre}
 
 
-## bx cs api-key-info CLUSTER
+<br />
+
+
+## API 命令
+{: #api_commands}
+
+### bx cs api-key-info CLUSTER
 {: #cs_api_key_info}
 
 查看集群的 IAM API 密钥所有者的名称和电子邮件地址。
@@ -380,12 +537,25 @@ bx plugin list
   {: pre}
 
 
-## bx cs apiserver-config-set
-{: #cs_apiserver_config_set}
+### bx cs api-key-reset
+{: #cs_api_key_reset}
 
-为集群的 Kubernetes API 服务器配置设置选项。对于要设置的配置选项，此命令必须与下列其中一个子命令组合在一起。
+替换 API 密钥。管理集群需要 API 密钥。为避免服务中断，除非现有密钥已泄露，否则不要替换 API 密钥。
 
-### bx cs apiserver-config-get audit-webhook CLUSTER
+**示例**：
+
+  ```
+  bx cs api-key-reset
+  ```
+  {: pre}
+
+
+### bx cs apiserver-config-get
+{: #cs_apiserver_config_get}
+
+获取有关集群的 Kubernetes API 服务器配置选项的信息。对于要获取其信息的配置选项，此命令必须与下列其中一个子命令组合在一起。
+
+#### bx cs apiserver-config-get audit-webhook CLUSTER
 {: #cs_apiserver_api_webhook_get}
 
 查看要向其发送 API 服务器审计日志的远程日志记录服务的 URL。URL 是在您为 API 服务器配置创建 Webhook 后端时指定的。
@@ -404,7 +574,12 @@ bx plugin list
   ```
   {: pre}
 
-### bx cs apiserver-config-set audit-webhook CLUSTER [--remoteServer SERVER_URL_OR_IP][--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH][--clientKey CLIENT_KEY_PATH]
+### bx cs apiserver-config-set
+{: #cs_apiserver_config_set}
+
+为集群的 Kubernetes API 服务器配置设置选项。对于要设置的配置选项，此命令必须与下列其中一个子命令组合在一起。
+
+#### bx cs apiserver-config-set audit-webhook CLUSTER [--remoteServer SERVER_URL_OR_IP][--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH][--clientKey CLIENT_KEY_PATH]
 {: #cs_apiserver_api_webhook_set}
 
 设置 API 服务器配置的 Webhook 后端。Webhook 后端将 API 服务器审计日志转发到远程服务器。根据您在此命令标志中提供的信息来创建 Webhook 配置。如果未在标志中提供任何信息，那么将使用缺省的 Webhook 配置。
@@ -435,7 +610,13 @@ bx plugin list
   ```
   {: pre}
 
-### bx cs apiserver-config-unset audit-webhook CLUSTER
+
+### bx cs apiserver-config-unset
+{: #cs_apiserver_config_unset}
+
+禁用集群的 Kubernetes API 服务器配置的选项。对于要取消设置的配置选项，此命令必须与下列其中一个子命令组合在一起。
+
+#### bx cs apiserver-config-unset audit-webhook CLUSTER
 {: #cs_apiserver_api_webhook_unset}
 
 禁用集群 API 服务器的 Webhook 后端配置。对 Webhook 后端进行拨号将停止将 API 服务器审计日志转发到远程服务器。
@@ -454,7 +635,7 @@ bx plugin list
   ```
   {: pre}
 
-## bx cs apiserver-refresh CLUSTER
+### bx cs apiserver-refresh CLUSTER
 {: #cs_apiserver_refresh}
 
 在集群中重新启动 Kubernetes 主节点以将更改应用于 API 服务器配置。
@@ -473,7 +654,70 @@ bx plugin list
   ```
   {: pre}
 
-## 集群命令
+
+<br />
+
+
+## CLI 插件用法命令
+{: #cli_plug-in_commands}
+
+### bx cs help
+{: #cs_help}
+
+查看支持的命令和参数的列表。
+
+<strong>命令选项</strong>：
+
+   无
+
+**示例**：
+
+  ```
+  bx cs help
+  ```
+  {: pre}
+
+
+### bx cs init [--host HOST]
+{: #cs_init}
+
+初始化 {{site.data.keyword.containershort_notm}} 插件或指定要在其中创建或访问 Kubernetes 集群的区域。
+
+<strong>命令选项</strong>：
+
+   <dl>
+   <dt><code>--host <em>HOST</em></code></dt>
+   <dd>要使用的 {{site.data.keyword.containershort_notm}} API 端点。此值是可选的。[查看可用的 API 端点值。](cs_regions.html#container_regions)</dd>
+   </dl>
+
+**示例**：
+
+
+```
+          bx cs init --host https://uk-south.containers.bluemix.net
+          ```
+{: pre}
+
+
+### bx cs messages
+{: #cs_messages}
+
+查看 IBM 标识用户的当前消息。
+
+**示例**：
+
+```
+bx cs messages
+```
+{: pre}
+
+
+<br />
+
+
+## 集群命令：管理
+{: #cluster_mgmt_commands}
+
 
 ### bx cs cluster-config CLUSTER [--admin][--export]
 {: #cs_cluster_config}
@@ -501,7 +745,6 @@ bx cs cluster-config my_cluster
 {: pre}
 
 
-
 ### bx cs cluster-create [--file FILE_LOCATION][--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH][--no-subnet] [--private-vlan PRIVATE_VLAN][--public-vlan PUBLIC_VLAN] [--workers WORKER][--disable-disk-encrypt]
 {: #cs_cluster_create}
 
@@ -513,9 +756,11 @@ bx cs cluster-config my_cluster
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
 
 <dd>用于创建标准集群的 YAML 文件的路径。您可以使用 YAML 文件，而不使用此命令中提供的选项来定义集群的特征。
-此值对于标准集群是可选的，且不可用于 Lite 集群。
+此值对于标准集群是可选的，且不可用于免费集群。
 
-<p><strong>注</strong>：如果在命令中提供的选项与 YAML 文件中的参数相同，那么命令中的值将优先于 YAML 中的值。例如，您在 YAML 文件中定义了位置，并在命令中使用了 <code>--location</code> 选项，那么在该命令选项中输入的值会覆盖 YAML 文件中的相应值。<pre class="codeblock">
+<p><strong>注</strong>：如果在命令中提供的选项与 YAML 文件中的参数相同，那么命令中的值将优先于 YAML 中的值。例如，您在 YAML 文件中定义了位置，并在命令中使用了 <code>--location</code> 选项，那么在该命令选项中输入的值会覆盖 YAML 文件中的相应值。
+
+<pre class="codeblock">
 <code>name: <em>&lt;cluster_name&gt;</em>
 location: <em>&lt;location&gt;</em>
 no-subnet: <em>&lt;no-subnet&gt;</em>
@@ -577,11 +822,11 @@ kube-version: <em>&lt;kube-version&gt;</em>
     </p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
-<dd>工作程序节点的硬件隔离级别。如果希望可用的物理资源仅供您专用，请使用 dedicated，或者要允许物理资源与其他 IBM 客户共享，请使用 shared。缺省值为 shared。此值对于标准集群是可选的，且不可用于 Lite 集群。</dd>
+<dd>工作程序节点的硬件隔离级别。如果希望可用的物理资源仅供您专用，请使用 dedicated，或者要允许物理资源与其他 IBM 客户共享，请使用 shared。缺省值为 shared。此值对于标准集群是可选的，且不可用于免费集群。</dd>
 
 <dt><code>--location <em>LOCATION</em></code></dt>
 <dd>要在其中创建集群的位置。可用的位置取决于您登录到的 {{site.data.keyword.Bluemix_notm}} 区域。请选择实际离您最近的区域，以获得最佳性能。
-此值对于标准集群是必需的，对于 Lite 集群是可选的。
+此值对于标准集群是必需的，对于免费集群是可选的。
 
 <p>复查[可用位置](cs_regions.html#locations)。
 </p>
@@ -590,7 +835,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 </dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>所选择的机器类型会影响部署到工作程序节点的容器可用的内存量和磁盘空间量。要列出可用的机器类型，请参阅 [bx cs machine-types <em>LOCATION</em>](#cs_machine_types)。此值对于标准集群是必需的，且不可用于 Lite 集群。</dd>
+<dd>所选择的机器类型会影响部署到工作程序节点的容器可用的内存量和磁盘空间量。要列出可用的机器类型，请参阅 [bx cs machine-types <em>LOCATION</em>](#cs_machine_types)。此值对于标准集群是必需的，且不可用于免费集群。</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
 <dd>集群的名称。此值是必需的。</dd>
@@ -605,9 +850,11 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <dd>
 
 <ul>
-<li>此参数不可用于 Lite 集群。</li>
+<li>此参数不可用于免费集群。</li>
 <li>如果此标准集群是您在此位置中创建的第一个标准集群，请勿包含此标志。创建集群时，将为您创建专用 VLAN。</li>
 <li>如果之前在此位置中已创建标准集群，或者之前在 IBM Cloud infrastructure (SoftLayer) 中已创建专用 VLAN，那么必须指定该专用 VLAN。
+
+
 
 <p><strong>注</strong>：使用 create 命令指定的公用和专用 VLAN 必须匹配。专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。这两个前缀后面的数字和字母组合必须匹配，才可在创建集群时使用这些 VLAN。不要使用不匹配的公用和专用 VLAN 来创建集群。</p></li>
 </ul>
@@ -617,9 +864,11 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
 <dd>
 <ul>
-<li>此参数不可用于 Lite 集群。</li>
+<li>此参数不可用于免费集群。</li>
 <li>如果此标准集群是您在此位置中创建的第一个标准集群，请勿使用此标志。创建集群时，将为您创建公用 VLAN。</li>
 <li>如果之前在此位置中已创建标准集群，或者之前在 IBM Cloud infrastructure (SoftLayer) 中已创建公用 VLAN，那么必须指定该公用 VLAN。
+
+
 
 <p><strong>注</strong>：使用 create 命令指定的公用和专用 VLAN 必须匹配。专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。这两个前缀后面的数字和字母组合必须匹配，才可在创建集群时使用这些 VLAN。不要使用不匹配的公用和专用 VLAN 来创建集群。</p></li>
 </ul>
@@ -627,7 +876,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 <p>要了解您是否已具有用于特定位置的公用 VLAN，或要找到现有公用 VLAN 的名称，请运行 <code>bx cs vlans <em>&lt;location&gt;</em></code>。</p></dd>
 
 <dt><code>--workers WORKER</code></dt>
-<dd>要在集群中部署的工作程序节点数。如果未指定此选项，将创建具有 1 个工作程序节点的集群。此值对于标准集群是可选的，且不可用于 Lite 集群。
+<dd>要在集群中部署的工作程序节点数。如果未指定此选项，将创建具有 1 个工作程序节点的集群。此值对于标准集群是可选的，且不可用于免费集群。
 
 <p><strong>注</strong>：为每个工作程序节点分配了唯一的工作程序节点标识和域名，在创建集群后，不得手动更改该标识和域名。更改标识或域名会阻止 Kubernetes 主节点管理集群。</p></dd>
 
@@ -647,7 +896,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
   ```
   {: pre}
 
-  Lite 集群的示例：
+  免费集群的示例：
 
   ```
   bx cs cluster-create --name my_cluster
@@ -708,10 +957,81 @@ kube-version: <em>&lt;kube-version&gt;</em>
   {: pre}
 
 
+### bx cs cluster-update [-f] CLUSTER [--kube-version MAJOR.MINOR.PATCH][--force-update]
+{: #cs_cluster_update}
+
+将 Kubernetes 主节点更新到缺省 API 版本。在更新期间，您无法访问或更改集群。用户已部署的工作程序节点、应用程序和资源不会被修改，并且将继续运行。
+
+您可能需要更改 YAML 文件以供未来部署。请查看此[发行说明](cs_versions.html)以了解详细信息。
+
+<strong>命令选项</strong>：
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>集群的名称或标识。此值是必需的。</dd>
+
+   <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
+   <dd>集群的 Kubernetes 版本。如果未指定版本，那么 Kubernetes 主节点将更新到缺省 API 版本。要查看可用版本，请运行 [bx cs kube-versions](#cs_kube_versions)。此值是可选的。</dd>
+
+   <dt><code>-f</code></dt>
+   <dd>使用此选项可强制更新主节点，而不显示用户提示。此值是可选的。</dd>
+
+   <dt><code>--force-update</code></dt>
+   <dd>即便更改是跨 2 个以上的次版本，也仍尝试更新。此值是可选的。</dd>
+   </dl>
+
+**示例**：
+
+  ```
+  bx cs cluster-update my_cluster
+  ```
+  {: pre}
+
+
+### bx cs clusters
+{: #cs_clusters}
+
+查看组织中集群的列表。
+
+<strong>命令选项</strong>：
+
+  无
+
+**示例**：
+
+  ```
+  bx cs clusters
+  ```
+  {: pre}
+
+
+### bx cs kube-versions
+{: #cs_kube_versions}
+
+查看 {{site.data.keyword.containershort_notm}} 中支持的 Kubernetes 版本列表。将[集群主节点](#cs_cluster_update)和[工作程序节点](#cs_worker_update)更新到缺省版本以获取最新的稳定功能。
+
+**命令选项**：
+
+  无
+
+**示例**：
+
+  ```
+  bx cs kube-versions
+  ```
+  {: pre}
+
+
+<br />
+
+
+## 集群命令：服务和集成
+{: #cluster_services_commands}
+
 ### bx cs cluster-service-bind CLUSTER KUBERNETES_NAMESPACE SERVICE_INSTANCE_GUID
 {: #cs_cluster_service_bind}
 
-向集群添加 {{site.data.keyword.Bluemix_notm}} 服务。
+向集群添加 {{site.data.keyword.Bluemix_notm}} 服务。要查看 {{site.data.keyword.Bluemix_notm}}“目录”中的可用 {{site.data.keyword.Bluemix_notm}} 服务，请运行 `bx service offerings`。如果已在 IBM Cloud 空间中供应 {{site.data.keyword.Bluemix_notm}} 服务实例，那么可以通过运行 `bx service list` 来列出这些实例。**注**：只能添加支持服务密钥的 {{site.data.keyword.Bluemix_notm}} 服务。
 
 <strong>命令选项</strong>：
 
@@ -723,7 +1043,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
    <dd>Kubernetes 名称空间的名称。此值是必需的。</dd>
 
    <dt><code><em>SERVICE_INSTANCE_GUID</em></code></dt>
-   <dd>要绑定的 {{site.data.keyword.Bluemix_notm}} 服务实例的标识。此值是必需的。</dd>
+   <dd>要绑定的 {{site.data.keyword.Bluemix_notm}} 服务实例的标识。要找到服务实例的标识，请运行 `bx cs cluster-services <cluster_name_or_ID>`。此值是必需的。</dd>
    </dl>
 
 **示例**：
@@ -751,7 +1071,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
    <dd>Kubernetes 名称空间的名称。此值是必需的。</dd>
 
    <dt><code><em>SERVICE_INSTANCE_GUID</em></code></dt>
-   <dd>要除去的 {{site.data.keyword.Bluemix_notm}} 服务实例的标识。此值是必需的。</dd>
+   <dd>要除去的 {{site.data.keyword.Bluemix_notm}} 服务实例的标识。要找到服务实例的标识，请运行 `bx cs cluster-services <cluster_name_or_ID>`。此值是必需的。</dd>
    </dl>
 
 **示例**：
@@ -789,6 +1109,41 @@ kube-version: <em>&lt;kube-version&gt;</em>
   {: pre}
 
 
+### bx cs webhook-create --cluster CLUSTER --level LEVEL --type slack --URL URL
+{: #cs_webhook_create}
+
+注册 Webhook。
+
+<strong>命令选项</strong>：
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>集群的名称或标识。此值是必需的。</dd>
+
+   <dt><code>--level <em>LEVEL</em></code></dt>
+   <dd>通知级别，例如 <code>Normal</code> 或 <code>Warning</code>。<code>Warning</code> 是缺省值。此值是可选的。</dd>
+
+   <dt><code>--type <em>slack</em></code></dt>
+   <dd>Webhook 类型。当前支持 slack。此值是必需的。</dd>
+
+   <dt><code>--URL <em>URL</em></code></dt>
+   <dd>Webhook 的 URL。此值是必需的。</dd>
+   </dl>
+
+**示例**：
+
+  ```
+  bx cs webhook-create --cluster my_cluster --level Normal --type slack --URL http://github.com/<mywebhook>
+  ```
+  {: pre}
+
+
+<br />
+
+
+## 集群命令：子网
+{: #cluster_subnets_commands}
+
 ### bx cs cluster-subnet-add CLUSTER SUBNET
 {: #cs_cluster_subnet_add}
 
@@ -812,6 +1167,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
   bx cs cluster-subnet-add my_cluster subnet
   ```
   {: pre}
+
 
 ### bx cs cluster-subnet-create CLUSTER SIZE VLAN_ID
 {: #cs_cluster_subnet_create}
@@ -840,6 +1196,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
   ```
   {: pre}
 
+
 ### bx cs cluster-user-subnet-add CLUSTER SUBNET_CIDR PRIVATE_VLAN
 {: #cs_cluster_user_subnet_add}
 
@@ -857,6 +1214,8 @@ kube-version: <em>&lt;kube-version&gt;</em>
 
    <dt><code><em>SUBNET_CIDR</em></code></dt>
    <dd>子网无类域间路由 (CIDR)。此值是必需的，且不得与 IBM Cloud infrastructure (SoftLayer) 使用的任何子网相冲突。
+
+
 
    支持的前缀范围从 `/30`（1 个 IP 地址）到 `/24`（253 个 IP 地址）。如果将 CIDR 设置为一个前缀长度，而稍后需要对其进行更改，请先添加新的 CIDR，然后[除去旧 CIDR](#cs_cluster_user_subnet_rm)。</dd>
 
@@ -899,54 +1258,28 @@ kube-version: <em>&lt;kube-version&gt;</em>
   ```
   {: pre}
 
+### bx cs subnets
+{: #cs_subnets}
 
-### bx cs cluster-update [-f] CLUSTER [--kube-version MAJOR.MINOR.PATCH][--force-update]
-{: #cs_cluster_update}
-
-将 Kubernetes 主节点更新到缺省 API 版本。在更新期间，您无法访问或更改集群。用户已部署的工作程序节点、应用程序和资源不会被修改，并且将继续运行。
-
-您可能需要更改 YAML 文件以供未来部署。请查看此[发行说明](cs_versions.html)以了解详细信息。
+查看 IBM Cloud infrastructure (SoftLayer) 帐户中可用的子网列表。
 
 <strong>命令选项</strong>：
 
-   <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
-   <dd>集群的名称或标识。此值是必需的。</dd>
-
-   <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
-   <dd>集群的 Kubernetes 版本。如果未指定此标志，那么 Kubernetes 主节点将更新到缺省 API 版本。要查看可用版本，请运行 [bx cs kube-versions](#cs_kube_versions)。此值是可选的。</dd>
-
-   <dt><code>-f</code></dt>
-   <dd>使用此选项可强制更新主节点，而不显示用户提示。此值是可选的。</dd>
-
-   <dt><code>--force-update</code></dt>
-   <dd>即便更改是跨 2 个以上的次版本，也仍尝试更新。此值是可选的。</dd>
-   </dl>
+   无
 
 **示例**：
 
   ```
-  bx cs cluster-update my_cluster
+  bx cs subnets
   ```
   {: pre}
 
-### bx cs clusters
-{: #cs_clusters}
 
-查看组织中集群的列表。
+<br />
 
-<strong>命令选项</strong>：
 
-  无
-
-**示例**：
-
-  ```
-  bx cs clusters
-  ```
-  {: pre}
-
-## 凭证命令
+## 基础架构命令
+{: #infrastructure_commands}
 
 ### bx cs credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME
 {: #cs_credentials_set}
@@ -966,7 +1299,9 @@ kube-version: <em>&lt;kube-version&gt;</em>
    <dd>IBM Cloud infrastructure (SoftLayer) 帐户 API 密钥。此值是必需的。
 
  <p>
-要生成 API 密钥：<ol>
+要生成 API 密钥：
+
+  <ol>
   <li>登录到 [IBM Cloud infrastructure (SoftLayer) 门户网站 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://control.softlayer.com/)。</li>
   <li>选择<strong>帐户</strong>，然后选择<strong>用户</strong>。</li>
   <li>单击<strong>生成</strong>，为帐户生成 IBM Cloud infrastructure (SoftLayer) API 密钥。</li>
@@ -1008,76 +1343,57 @@ kube-version: <em>&lt;kube-version&gt;</em>
   {: pre}
 
 
+### bx cs machine-types LOCATION
+{: #cs_machine_types}
 
-## bx cs help
-{: #cs_help}
+查看可用于工作程序节点的机器类型的列表。每种机器类型都包含集群中每个工作程序节点的虚拟 CPU 量、内存量和磁盘空间量。
+- 缺省情况下，主机的 Docker 数据已根据机器类型加密。存储所有容器数据的 `/var/lib/docker` 目录将使用 LUKS 加密进行加密。如果在创建集群期间包含了 `disable-disk-encrypt` 选项，那么不会加密主机的 Docker 数据。[了解有关加密的更多信息](cs_secure.html#encrypted_disks)。
+- 名称中具有 `u2c` 或 `b2c` 的机器类型使用本地磁盘，而不是存储区联网 (SAN)，从而实现可靠性。可靠性优势包括在将字节序列化到本地磁盘时可提高吞吐量，以及减少因网络故障而导致的文件系统降级。这些机器类型包含用于用户无法访问的操作系统文件系统的 25 GB 主本地磁盘存储和用于 `/var/lib/docker`（这是所有容器数据写入的目录）的 100 GB 辅助本地磁盘存储。
+- 不推荐使用名称中具有 `u1c` 或 `b1c` 的机器类型，例如 `u1c.2x4`。要开始使用 `u2c` 和 `b2c` 机器类型，请使用 `bx cs worker-add` 命令来添加使用已更新机器类型的工作程序节点。然后，使用 `bx cs worker-rm` 命令除去使用不推荐机器类型的工作程序节点。
+</p>
 
-查看支持的命令和参数的列表。
-
-<strong>命令选项</strong>：
-
-   无
-
-**示例**：
-
-  ```
-  bx cs help
-  ```
-  {: pre}
-
-
-## bx cs init [--host HOST]
-{: #cs_init}
-
-初始化 {{site.data.keyword.containershort_notm}} 插件或指定要在其中创建或访问 Kubernetes 集群的区域。
 
 <strong>命令选项</strong>：
 
    <dl>
-   <dt><code>--host <em>HOST</em></code></dt>
-   <dd>要使用的 {{site.data.keyword.containershort_notm}} API 端点。此值是可选的。[查看可用的 API 端点值。](cs_regions.html#container_regions)</dd>
-   </dl>
-
-
-
-```
-          bx cs init --host https://uk-south.containers.bluemix.net
-          ```
-{: pre}
-
-## bx cs kube-versions
-{: #cs_kube_versions}
-
-查看 {{site.data.keyword.containershort_notm}} 中支持的 Kubernetes 版本列表。将[集群主节点](#cs_cluster_update)和[工作程序节点](#cs_worker_update)更新到缺省版本以获取最新的稳定功能。
-
-**命令选项**：
-
-  无
+   <dt><code><em>LOCATION</em></code></dt>
+   <dd>输入要列出其中可用机器类型的位置。此值是必需的。复查[可用位置](cs_regions.html#locations)。
+</dd></dl>
 
 **示例**：
 
   ```
-  bx cs kube-versions
+  bx cs machine-types dal10
   ```
   {: pre}
 
-## bx cs locations
-{: #cs_datacenters}
+### bx cs vlans LOCATION 
+{: #cs_vlans}
 
-查看可用于在其中创建集群的位置的列表。
+列出可用于 IBM Cloud infrastructure (SoftLayer) 帐户中位置的公用和专用 VLAN。要列出可用 VLAN，您必须具有付费帐户。
 
 <strong>命令选项</strong>：
 
-   无
+   <dl>
+   <dt><code><em>LOCATION</em></code></dt>
+   <dd>输入要列出其中专用和公用 VLAN 的位置。此值是必需的。复查[可用位置](cs_regions.html#locations)。
+</dd>
+   
+   </dl>
 
 **示例**：
 
   ```
-  bx cs locations
+  bx cs vlans dal10
   ```
   {: pre}
 
+
+<br />
+
+
 ## 日志记录命令
+{: #logging_commands}
 
 ### bx cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT][--space CLUSTER_SPACE] [--org CLUSTER_ORG] --type LOG_TYPE [--json]
 {: #cs_logging_create}
@@ -1237,31 +1553,28 @@ kube-version: <em>&lt;kube-version&gt;</em>
   {: pre}
 
 
-## bx cs machine-types LOCATION
-{: #cs_machine_types}
+<br />
 
-查看可用于工作程序节点的机器类型的列表。每种机器类型都包含集群中每个工作程序节点的虚拟 CPU 量、内存量和磁盘空间量。
-- 缺省情况下，主机的 Docker 数据已根据机器类型加密。存储所有容器数据的 `/var/lib/docker` 目录将使用 LUKS 加密进行加密。如果在创建集群期间包含了 `disable-disk-encrypt` 选项，那么不会加密主机的 Docker 数据。[了解有关加密的更多信息](cs_secure.html#encrypted_disks)。
-- 名称中具有 `u2c` 或 `b2c` 的机器类型使用本地磁盘，而不是存储区联网 (SAN)，从而实现可靠性。可靠性优势包括在将字节序列化到本地磁盘时可提高吞吐量，以及减少因网络故障而导致的文件系统降级。这些机器类型包含用于操作系统文件系统的 25 GB 本地磁盘存储和用于 `/var/lib/docker`（这是写入所有容器数据的目录）的 100 GB 本地磁盘存储。
-- 不推荐使用名称中具有 `u1c` 或 `b1c` 的机器类型，例如 `u1c.2x4`。要开始使用 `u2c` 和 `b2c` 机器类型，请使用 `bx cs worker-add` 命令来添加使用已更新机器类型的工作程序节点。然后，使用 `bx cs worker-rm` 命令除去使用不推荐机器类型的工作程序节点。
-</p>
 
+## 区域命令
+{: #region_commands}
+
+### bx cs locations
+{: #cs_datacenters}
+
+查看可用于在其中创建集群的位置的列表。
 
 <strong>命令选项</strong>：
 
-   <dl>
-   <dt><code><em>LOCATION</em></code></dt>
-   <dd>输入要列出其中可用机器类型的位置。此值是必需的。复查[可用位置](cs_regions.html#locations)。
-</dd></dl>
+   无
 
 **示例**：
 
   ```
-  bx cs machine-types dal10
+  bx cs locations
   ```
   {: pre}
 
-## 区域命令
 
 ### bx cs region
 {: #cs_region}
@@ -1293,6 +1606,8 @@ Region: us-south
 <dl>
 <dt><code><em>REGION</em></code></dt>
 <dd>输入要作为目标的区域。此值是可选的。如果您未提供区域，那么可以从输出中的列表中选择区域。
+
+
 
 要获取可用区域的列表，请查看[区域和位置](cs_regions.html)或使用 `bx cs regions` [命令](#cs_regions)。</dd></dl>
 
@@ -1346,73 +1661,12 @@ us-south      us-south
 ```
 {: screen}
 
-## bx cs subnets
-{: #cs_subnets}
 
-查看 IBM Cloud infrastructure (SoftLayer) 帐户中可用的子网列表。
-
-<strong>命令选项</strong>：
-
-   无
-
-**示例**：
-
-  ```
-  bx cs subnets
-  ```
-  {: pre}
+<br />
 
 
-## bx cs vlans LOCATION
-{: #cs_vlans}
-
-列出可用于 IBM Cloud infrastructure (SoftLayer) 帐户中位置的公用和专用 VLAN。要列出可用 VLAN，您必须具有付费帐户。
-
-<strong>命令选项</strong>：
-
-   <dl>
-   <dt><code><em>LOCATION</em></code></dt>
-   <dd>输入要列出其中专用和公用 VLAN 的位置。此值是必需的。复查[可用位置](cs_regions.html#locations)。
-</dd>
-   </dl>
-
-**示例**：
-
-  ```
-  bx cs vlans dal10
-  ```
-  {: pre}
-
-
-## bx cs webhook-create --cluster CLUSTER --level LEVEL --type slack --URL URL
-{: #cs_webhook_create}
-
-创建 Webhook。
-
-<strong>命令选项</strong>：
-
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>集群的名称或标识。此值是必需的。</dd>
-
-   <dt><code>--level <em>LEVEL</em></code></dt>
-   <dd>通知级别，例如 <code>Normal</code> 或 <code>Warning</code>。<code>Warning</code> 是缺省值。此值是可选的。</dd>
-
-   <dt><code>--type <em>slack</em></code></dt>
-   <dd>Webhook 类型，如 slack。仅支持 slack。此值是必需的。</dd>
-
-   <dt><code>--URL <em>URL</em></code></dt>
-   <dd>Webhook 的 URL。此值是必需的。</dd>
-   </dl>
-
-**示例**：
-
-  ```
-  bx cs webhook-create --cluster my_cluster --level Normal --type slack --URL http://github.com/<mywebhook>
-  ```
-  {: pre}
-
-## 工作程序命令
+## 工作程序节点命令
+{: worker_node_commands}
 
 ### bx cs worker-add --cluster CLUSTER [--file FILE_LOCATION][--hardware HARDWARE] --machine-type MACHINE_TYPE --number NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt]
 {: #cs_worker_add}
@@ -1431,7 +1685,9 @@ us-south      us-south
 
 <p><strong>注</strong>：如果在命令中提供的选项与 YAML 文件中的参数相同，那么命令中的值将优先于 YAML 中的值。例如，您在 YAML 文件中定义了机器类型，并在命令中使用了 --machine-type 选项，那么在该命令选项中输入的值会覆盖 YAML 文件中的相应值。
 
-      <pre class="codeblock">
+      
+
+<pre class="codeblock">
 <code>name: <em>&lt;cluster_name_or_id&gt;</em>
 location: <em>&lt;location&gt;</em>
 machine-type: <em>&lt;machine_type&gt;</em>
@@ -1465,7 +1721,7 @@ workerNum: <em>&lt;number_workers&gt;</em>
 </tr>
 <tr>
 <td><code>public-vlan</code></td>
-<td>将 <code>&lt;public_vlan&gt;</code> 替换为要用于工作程序节点的公用 VLAN 的标识。要列出可用的 VLAN，请运行 <code>bx cs vlans &lt;location&gt;</code> 并查找以 <code>fcr</code>（前端路由器）开头的 VLAN 路由器。</td>
+<td>将 <code>&lt;public_vlan&gt;</code> 替换为要用于工作程序节点的公用 VLAN 的标识。要列出可用的 VLAN，请运行 <code>bx cs vlans &lt;location&gt;</code> 并查找以 <code>fcr</code>（前端路由器）开头的 VLAN 路由器。<br><strong>注</strong>：如果因为希望工作程序节点仅连接到专用 VLAN 而选择不选公用 VLAN，那么必须配置备用解决方案。有关更多信息，请参阅[工作程序节点的 VLAN 连接](cs_clusters.html#worker_vlan_connection)。</td>
 </tr>
 <tr>
 <td><code>hardware</code></td>
@@ -1495,7 +1751,7 @@ workerNum: <em>&lt;number_workers&gt;</em>
 <p><strong>注：</strong>您指定的公用和专用 VLAN 必须匹配。专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。这两个前缀后面的数字和字母组合必须匹配，才可在创建集群时使用这些 VLAN。不要使用不匹配的公用和专用 VLAN 来创建集群。</p></dd>
 
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
-<dd>创建集群时指定的公用 VLAN。此值是可选的。
+<dd>创建集群时指定的公用 VLAN。此值是可选的。如果希望工作程序节点仅存在于专用 VLAN 上，请不要提供公用 VLAN 标识。<strong>注</strong>：如果选择不选择公用 VLAN，那么必须配置备用解决方案。有关更多信息，请参阅[工作程序节点的 VLAN 连接](cs_clusters.html#worker_vlan_connection)。
 
 <p><strong>注：</strong>您指定的公用和专用 VLAN 必须匹配。专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。这两个前缀后面的数字和字母组合必须匹配，才可在创建集群时使用这些 VLAN。不要使用不匹配的公用和专用 VLAN 来创建集群。</p></dd>
 
@@ -1622,7 +1878,7 @@ workerNum: <em>&lt;number_workers&gt;</em>
 ### bx cs worker-update [-f] CLUSTER WORKER [WORKER][--kube-version MAJOR.MINOR.PATCH] [--force-update]
 {: #cs_worker_update}
 
-将工作程序节点更新到最新的 Kubernetes 版本。运行 `bx cs worker-update` 可能会导致应用程序和服务的停机时间。更新期间，所有 pod 都将重新安排到其他工作程序节点，如果数据未存储在 pod 外部，那么将删除数据。为避免停机时间，请确保在选定的工作程序节点更新时有足够的工作程序节点来处理工作负载。
+将工作程序节点更新到最新的 Kubernetes 版本。运行 `bx cs worker-update` 可能会导致应用程序和服务的停机时间。更新期间，所有 pod 都将重新安排到其他工作程序节点，如果数据未存储在 pod 外部，那么将删除数据。为避免停机时间，请[确保在所选工作程序节点更新时有足够的工作程序节点来处理工作负载](cs_cluster_update.html#worker_node)。
 
 在更新前，您可能需要更改 YAML 文件以进行部署。请查看此[发行说明](cs_versions.html)以了解详细信息。
 
@@ -1671,6 +1927,3 @@ workerNum: <em>&lt;number_workers&gt;</em>
   bx cs workers mycluster
   ```
   {: pre}
-
-<br />
-

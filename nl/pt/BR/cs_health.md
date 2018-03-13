@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-02"
 
 ---
 
@@ -36,7 +36,7 @@ Configure a criação de log e o monitoramento de clusters para ajudá-lo a solu
 |`aplicação`|Logs para o seu próprio aplicativo que é executado em um cluster do Kubernetes.|`/var/log/apps/**/*.log`, `/var/log/apps/**/*.err`|
 |`worker`|Logs para os nós do trabalhador da máquina virtual em um cluster do Kubernetes.|`/var/log/syslog`, `/var/log/auth.log`|
 |`kubernetes`|Logs para o componente do sistema Kubernetes.|`/var/log/kubelet.log`, `/var/log/kube-proxy.log`|
-|`ingress`|Logs para um balanceador de carga de aplicativo, gerenciado pelo controlador do Ingress, que gerencia o tráfego de rede que entra em um cluster do Kubernetes.|`/var/log/alb/ids/*.log`, `/var/log/alb/ids/*.err`, `/var/log/alb/customerlogs/*.log`, `/var/log/alb/customerlogs/*.err`|
+|`ingress`|Logs para um balanceador de carga de aplicativo de Ingresso que gerencia o tráfego de rede que entra em um cluster do Kubernetes.|`/var/log/alb/ids/*.log`, `/var/log/alb/ids/*.err`, `/var/log/alb/customerlogs/*.log`, `/var/log/alb/customerlogs/*.err`|
 {: caption="Características da origem de log" caption-side="top"}
 
 ## Ativando o encaminhamento de log
@@ -477,7 +477,8 @@ Para clusters padrão, os logs estão localizados na conta do {{site.data.keywor
 
 Para acessar o painel do Kibana, acesse uma das URLs a seguir e selecione a conta ou o espaço do {{site.data.keyword.Bluemix_notm}} em que você criou o cluster.
 - Sul e Leste dos EUA: https://logging.ng.bluemix.net
-- Sul do Reino Unido e UE Central: https://logging.eu-fra.bluemix.net
+- Sul do Reino Unido: https://logging.eu-gb.bluemix.net
+- UE Central: https://logging.eu-fra.bluemix.net
 - AP-South: https://logging.au-syd.bluemix.net
 
 Para obter mais informações sobre como visualizar logs, veja [Navegando para o Kibana por meio de um navegador da web](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser).
@@ -579,96 +580,96 @@ Antes de iniciar, [direcione sua CLI](cs_cli_install.html#cs_cli_configure) para
     {:codeblock}
 
 
-    <table summary="Entendendo os componentes de mapa de configuração">
-    <caption>Entendendo os componentes de mapa de configuração</caption>
-      <thead>
-        <th colspan=2><img src="images/idea.png"/>Entendendo os componentes de mapa de configuração</th>
-      </thead>
-      <tbody>
-       <tr>
-          <td><code>name</code></td>
-          <td>O nome de configuração <code>ibm-worker-recovery-checks</code> é uma constante e não pode ser mudado.</td>
-       </tr>
-       <tr>
-          <td><code> namespace</code></td>
-          <td>O namespace <code>kube-system</code> é uma constante e não pode ser mudado.</td>
-       </tr>
-      <tr>
-          <td><code>checkhttp.json</code></td>
-          <td>Define uma verificação de HTTP que verifica se um servidor HTTP está em execução em cada endereço IP do nó na porta 80 e retorna uma resposta 200 no caminho <code>/myhealth</code>. É possível localizar o endereço IP para um nó executando <code>kubectl get nodes</code>.
-               Por exemplo, considere dois nós em um cluster que têm os endereços IP 10.10.10.1 e 10.10.10.2. Neste exemplo, duas rotas são verificadas para respostas 200 OK: <code>http://10.10.10.1:80/myhealth</code> e <code>http://10.10.10.2:80/myhealth</code>.
-               O check-in no YAML do exemplo acima é executado a cada três minutos. Se ele falha 3 vezes consecutivas, o nó é reinicializado. Essa ação é equivalente a executar <code>bx cs worker-reboot</code>. A verificação de HTTP é desativada até que você configure o campo <b>Ativado</b> para <code>true</code>.</td>
-        </tr>
-        <tr>
-          <td><code>checknode.json</code></td>
-          <td>Define uma verificação de nó da API do Kubernetes que verifica se cada nó está no estado <code>Ready</code>. A verificação de um nó específico conta como uma falha se o nó não está no estado <code>Ready</code>.
-               O check-in no YAML do exemplo acima é executado a cada três minutos. Se ele falhar 3 vezes consecutivas, o nó será recarregado. Essa ação é equivalente a executar o <code>bx cs worker-reload</code>. A verificação de nó é ativada até que você configure o campo <b>Ativado</b> como <code>false</code> ou remova a verificação.</td>
-        </tr>
-        <tr>
-          <td><code>checkpod.json</code></td>
-          <td>Define uma verificação de pod da API do Kubernetes que verifica a porcentagem total de pods <code>NotReady</code> em um nó com base no total de pods designados a esse nó. A verificação de um nó específico conta como uma falha se a porcentagem total de pods <code>NotReady</code> é maior que o <code>PodFailureThresholdPercent</code> definido.
-               O check-in no YAML do exemplo acima é executado a cada três minutos. Se ele falhar 3 vezes consecutivas, o nó será recarregado. Essa ação é equivalente a executar o <code>bx cs worker-reload</code>. A verificação de pod é ativada até que você configure o campo <b>Ativado</b> para <code>false</code> ou remova a verificação.</td>
-        </tr>
-      </tbody>
-    </table>
+<table summary="Entendendo os componentes de mapa de configuração">
+<caption>Entendendo os componentes de mapa de configuração</caption>
+<thead>
+<th colspan=2><img src="images/idea.png"/>Entendendo os componentes de mapa de configuração</th>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>O nome de configuração <code>ibm-worker-recovery-checks</code> é uma constante e não pode ser mudado.</td>
+</tr>
+<tr>
+<td><code> namespace</code></td>
+<td>O namespace <code>kube-system</code> é uma constante e não pode ser mudado.</td>
+</tr>
+<tr>
+<td><code>checkhttp.json</code></td>
+<td>Define uma verificação de HTTP que verifica se um servidor HTTP está em execução em cada endereço IP do nó na porta 80 e retorna uma resposta 200 no caminho <code>/myhealth</code>. É possível localizar o endereço IP para um nó executando <code>kubectl get nodes</code>.
+Por exemplo, considere dois nós em um cluster que têm os endereços IP 10.10.10.1 e 10.10.10.2. Neste exemplo, duas rotas são verificadas para respostas 200 OK: <code>http://10.10.10.1:80/myhealth</code> e <code>http://10.10.10.2:80/myhealth</code>.
+O check-in no YAML do exemplo acima é executado a cada três minutos. Se ele falha 3 vezes consecutivas, o nó é reinicializado. Essa ação é equivalente a executar <code>bx cs worker-reboot</code>. A verificação de HTTP é desativada até que você configure o campo <b>Ativado</b> para <code>true</code>.</td>
+</tr>
+<tr>
+<td><code>checknode.json</code></td>
+<td>Define uma verificação de nó da API do Kubernetes que verifica se cada nó está no estado <code>Ready</code>. A verificação de um nó específico conta como uma falha se o nó não está no estado <code>Ready</code>.
+O check-in no YAML do exemplo acima é executado a cada três minutos. Se ele falhar 3 vezes consecutivas, o nó será recarregado. Essa ação é equivalente a executar o <code>bx cs worker-reload</code>. A verificação de nó é ativada até que você configure o campo <b>Ativado</b> como <code>false</code> ou remova a verificação.</td>
+</tr>
+<tr>
+<td><code>checkpod.json</code></td>
+<td>Define uma verificação de pod da API do Kubernetes que verifica a porcentagem total de pods <code>NotReady</code> em um nó com base no total de pods designados a esse nó. A verificação de um nó específico conta como uma falha se a porcentagem total de pods <code>NotReady</code> é maior que o <code>PodFailureThresholdPercent</code> definido.
+O check-in no YAML do exemplo acima é executado a cada três minutos. Se ele falhar 3 vezes consecutivas, o nó será recarregado. Essa ação é equivalente a executar o <code>bx cs worker-reload</code>. A verificação de pod é ativada até que você configure o campo <b>Ativado</b> para <code>false</code> ou remova a verificação.</td>
+</tr>
+</tbody>
+</table>
 
 
-    <table summary="Entendendo os componentes de regras individuais">
-    <caption>Entendendo os componentes de regras individuais</caption>
-      <thead>
-        <th colspan=2><img src="images/idea.png"/>Entendendo os componentes de regras individuais </th>
-      </thead>
-      <tbody>
-       <tr>
-           <td><code>Check</code></td>
-           <td>Insira o tipo de verificação que você deseja que a Recuperação automática use. <ul><li><code>HTTP</code>: a Recuperação automática chama os servidores HTTP que são executados em cada nó para determinar se os nós estão sendo executados de forma adequada.</li><li><code>KUBEAPI</code>: a Recuperação automática chama o servidor da API do Kubernetes e lê os dados de status de funcionamento relatados pelos nós do trabalhador.</li></ul></td>
-           </tr>
-       <tr>
-           <td><code>Recurso</code></td>
-           <td>Quando o tipo de verificação é <code>KUBEAPI</code>, insira o tipo de recurso que você deseja que a Recuperação automática verifique. Os valores aceitos são <code>NODE</code> ou <code>PODS</code>.</td>
-           </tr>
-       <tr>
-           <td><code>FailureThreshold</code></td>
-           <td>Insira o limite para o número de verificações de falhas consecutivas. Quando esse limite é atendido, a Recuperação automática aciona a ação corretiva especificada. Por exemplo, se o valor é 3 e a Recuperação automática falha uma verificação configurada três vezes consecutivas, a Recuperação automática aciona a ação corretiva que está associada à verificação.</td>
-       </tr>
-       <tr>
-           <td><code>PodFailureThresholdPercent</code></td>
-           <td>Quando o tipo de recurso é <code>PODS</code>, insira o limite para a porcentagem de pods em um nó do trabalhador que pode estar em um estado [NotReady ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes). Essa porcentagem é baseada no número total de pods que estão planejados para um nó do trabalhador. Quando uma verificação determina que a porcentagem de pods não saudáveis é maior que o limite, a verificação conta como uma falha.</td>
-           </tr>
-        <tr>
-            <td><code>CorrectiveAction</code></td>
-            <td>Insira a ação a ser executada quando o limite de falha for atendido. Uma ação corretiva é executada somente enquanto nenhum outro trabalhador está sendo reparado e quando esse nó do trabalhador não está em um período de bloqueio de uma ação anterior. <ul><li><code>REBOOT</code>: reinicializa o nó do trabalhador.</li><li><code>RELOAD</code>: recarrega todas as configurações necessárias para o nó do trabalhador de um S.O. limpo.</li></ul></td>
-            </tr>
-        <tr>
-            <td><code>CooloffSeconds</code></td>
-            <td>Insira o número de segundos que a Recuperação automática deve esperar para emitir outra ação corretiva para um nó em que uma ação corretiva já foi emitida. O período de bloqueio se inicia no momento em que uma ação corretiva é emitida.</td>
-            </tr>
-        <tr>
-            <td><code>IntervalSeconds</code></td>
-            <td>Insira o número de segundos entre verificações consecutivas. Por exemplo, se o valor é 180, a Recuperação automática executa a verificação em cada nó a cada 3 minutos.</td>
-            </tr>
-        <tr>
-            <td><code>TimeoutSeconds</code></td>
-            <td>Insira o número máximo de segundos que leva uma chamada de verificação para o banco de dados antes de a Recuperação automática terminar a operação de chamada. O valor para <code>TimeoutSeconds</code> deve ser menor que o valor para <code>IntervalSeconds</code>.</td>
-            </tr>
-        <tr>
-            <td><code>Porta</code></td>
-            <td>Quando o tipo de verificação é <code>HTTP</code>, insira a porta à qual o servidor HTTP deve ser ligado em nós do trabalhador. Essa porta deve ser exposta no IP de cada nó do trabalhador no cluster. A Recuperação automática requer um número de porta constante em todos os nós para verificar servidores. Use [DaemonSets ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) ao implementar um servidor customizado em um cluster.</td>
-            </tr>
-        <tr>
-            <td><code>ExpectedStatus</code></td>
-            <td>Quando o tipo de verificação for <code>HTTP</code>, insira o status de servidor HTTP que você espera que seja retornado da verificação. Por exemplo, um valor de 200 indica que você espera uma resposta <code>OK</code> do servidor.</td>
-            </tr>
-        <tr>
-            <td><code>Rota</code></td>
-            <td>Quando o tipo de verificação é <code>HTTP</code>, insira o caminho que é solicitado do servidor HTTP. Esse valor é geralmente o caminho de métricas para o servidor que está em execução em todos os nós do trabalhador.</td>
-            </tr>
-        <tr>
-            <td><code>Ativado</code></td>
-            <td>Insira <code>true</code> para ativar a verificação ou <code>false</code> para desativar a verificação.</td>
-            </tr>
-      </tbody>
-    </table>
+<table summary="Entendendo os componentes de regras individuais">
+<caption>Entendendo os componentes de regras individuais</caption>
+<thead>
+<th colspan=2><img src="images/idea.png"/>Entendendo os componentes de regras individuais </th>
+</thead>
+<tbody>
+<tr>
+<td><code>Check</code></td>
+<td>Insira o tipo de verificação que você deseja que a Recuperação automática use. <ul><li><code>HTTP</code>: a Recuperação automática chama os servidores HTTP que são executados em cada nó para determinar se os nós estão sendo executados de forma adequada.</li><li><code>KUBEAPI</code>: a Recuperação automática chama o servidor da API do Kubernetes e lê os dados de status de funcionamento relatados pelos nós do trabalhador.</li></ul></td>
+</tr>
+<tr>
+<td><code>Recurso</code></td>
+<td>Quando o tipo de verificação é <code>KUBEAPI</code>, insira o tipo de recurso que você deseja que a Recuperação automática verifique. Os valores aceitos são <code>NODE</code> ou <code>PODS</code>.</td>
+</tr>
+<tr>
+<td><code>FailureThreshold</code></td>
+<td>Insira o limite para o número de verificações de falhas consecutivas. Quando esse limite é atendido, a Recuperação automática aciona a ação corretiva especificada. Por exemplo, se o valor é 3 e a Recuperação automática falha uma verificação configurada três vezes consecutivas, a Recuperação automática aciona a ação corretiva que está associada à verificação.</td>
+</tr>
+<tr>
+<td><code>PodFailureThresholdPercent</code></td>
+<td>Quando o tipo de recurso é <code>PODS</code>, insira o limite para a porcentagem de pods em um nó do trabalhador que pode estar em um estado [NotReady ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes). Essa porcentagem é baseada no número total de pods que estão planejados para um nó do trabalhador. Quando uma verificação determina que a porcentagem de pods não saudáveis é maior que o limite, a verificação conta como uma falha.</td>
+</tr>
+<tr>
+<td><code>CorrectiveAction</code></td>
+<td>Insira a ação a ser executada quando o limite de falha for atendido. Uma ação corretiva é executada somente enquanto nenhum outro trabalhador está sendo reparado e quando esse nó do trabalhador não está em um período de bloqueio de uma ação anterior. <ul><li><code>REBOOT</code>: reinicializa o nó do trabalhador.</li><li><code>RELOAD</code>: recarrega todas as configurações necessárias para o nó do trabalhador de um S.O. limpo.</li></ul></td>
+</tr>
+<tr>
+<td><code>CooloffSeconds</code></td>
+<td>Insira o número de segundos que a Recuperação automática deve esperar para emitir outra ação corretiva para um nó em que uma ação corretiva já foi emitida. O período de bloqueio se inicia no momento em que uma ação corretiva é emitida.</td>
+</tr>
+<tr>
+<td><code>IntervalSeconds</code></td>
+<td>Insira o número de segundos entre verificações consecutivas. Por exemplo, se o valor é 180, a Recuperação automática executa a verificação em cada nó a cada 3 minutos.</td>
+</tr>
+<tr>
+<td><code>TimeoutSeconds</code></td>
+<td>Insira o número máximo de segundos que leva uma chamada de verificação para o banco de dados antes de a Recuperação automática terminar a operação de chamada. O valor para <code>TimeoutSeconds</code> deve ser menor que o valor para <code>IntervalSeconds</code>.</td>
+</tr>
+<tr>
+<td><code>Porta</code></td>
+<td>Quando o tipo de verificação é <code>HTTP</code>, insira a porta à qual o servidor HTTP deve ser ligado em nós do trabalhador. Essa porta deve ser exposta no IP de cada nó do trabalhador no cluster. A Recuperação automática requer um número de porta constante em todos os nós para verificar servidores. Use [DaemonSets ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) ao implementar um servidor customizado em um cluster.</td>
+</tr>
+<tr>
+<td><code>ExpectedStatus</code></td>
+<td>Quando o tipo de verificação for <code>HTTP</code>, insira o status de servidor HTTP que você espera que seja retornado da verificação. Por exemplo, um valor de 200 indica que você espera uma resposta <code>OK</code> do servidor.</td>
+</tr>
+<tr>
+<td><code>Rota</code></td>
+<td>Quando o tipo de verificação é <code>HTTP</code>, insira o caminho que é solicitado do servidor HTTP. Esse valor é geralmente o caminho de métricas para o servidor que está em execução em todos os nós do trabalhador.</td>
+</tr>
+<tr>
+<td><code>Ativado</code></td>
+<td>Insira <code>true</code> para ativar a verificação ou <code>false</code> para desativar a verificação.</td>
+</tr>
+</tbody>
+</table>
 
 2. Crie o mapa de configuração em seu cluster.
 
@@ -684,58 +685,15 @@ Antes de iniciar, [direcione sua CLI](cs_cli_install.html#cs_cli_configure) para
     ```
     {: pre}
 
-4. Assegure-se de que você tenha criado um segredo de pull do Docker com o nome `international-registry-docker-secret` no namespace `kube-system`. A Recuperação automática é hospedada no registro internacional do Docker do {{site.data.keyword.registryshort_notm}}. Se você não tiver criado um segredo de registro do Docker que contenha credenciais válidas para o registro internacional, crie um para executar o sistema de Recuperação automática.
 
-    1. Instale o plug-in do {{site.data.keyword.registryshort_notm}}.
-
-        ```
-        bx plugin install container-registry -r Bluemix
-        ```
-        {: pre}
-
-    2. Direcione o registro internacional.
-
-        ```
-        bx cr region-set international
-        ```
-        {: pre}
-
-    3. Crie um token de registro internacional.
-
-        ```
-        bx cr token-add --non-expiring --description internationalRegistryToken
-        ```
-        {: pre}
-
-    4. Configure a variável de ambiente `INTERNATIONAL_REGISTRY_TOKEN` para o token que você criou.
-
-        ```
-        INTERNATIONAL_REGISTRY_TOKEN=$(bx cr token-get $(bx cr tokens | grep internationalRegistryToken | awk '{print $1}') -q)
-        ```
-        {: pre}
-
-    5. Configure a variável de ambiente `DOCKER_EMAIL` para o usuário atual. Seu endereço de e-mail é necessário somente para executar o comando `kubectl` na próxima etapa.
-
-        ```
-        DOCKER_EMAIL=$(bx target | grep "User" | awk '{print $2}')
-        ```
-        {: pre}
-
-    6. Crie o segredo de pull do Docker.
-
-        ```
-        kubectl -n kube-system create secret docker-registry international-registry-docker-secret --docker-username=token --docker-password="$INTERNATIONAL_REGISTRY_TOKEN" --docker-server=registry.bluemix.net --docker-email="$DOCKER_EMAIL"
-        ```
-        {: pre}
-
-5. Implemente a Recuperação automática em seu cluster aplicando esse arquivo YAML.
+4. Implemente a Recuperação automática em seu cluster aplicando esse arquivo YAML.
 
    ```
    kubectl apply -f https://raw.githubusercontent.com/IBM-Bluemix/kube-samples/master/ibm-worker-recovery/ibm-worker-recovery.yml
    ```
    {: pre}
 
-6. Após alguns minutos, é possível verificar a seção `Events` na saída do comando a seguir para ver a atividade na implementação de Recuperação automática.
+5. Após alguns minutos, é possível verificar a seção `Events` na saída do comando a seguir para ver a atividade na implementação de Recuperação automática.
 
     ```
     kubectl -n kube-system describe deployment ibm-worker-recovery

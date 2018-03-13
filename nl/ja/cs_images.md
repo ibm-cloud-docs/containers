@@ -19,7 +19,7 @@ lastupdated: "2018-01-11"
 # イメージからのコンテナーのビルド
 {: #images}
 
-Docker イメージは、作成するすべてのコンテナーの基礎となるものです。イメージは、Dockerfile (イメージをビルドするための指示が入ったファイル) から作成されます。 Dockerfile の別個に保管されている指示の中で、ビルド成果物 (アプリ、アプリの構成、その従属関係) が参照されることもあります。
+Docker イメージは、作成するすべてのコンテナーの基礎となるものです。 イメージは、Dockerfile (イメージをビルドするための指示が入ったファイル) から作成されます。 Dockerfile の別個に保管されている指示の中で、ビルド成果物 (アプリ、アプリの構成、その従属関係) が参照されることもあります。
 {:shortdesc}
 
 
@@ -57,9 +57,9 @@ Docker イメージは、作成するすべてのコンテナーの基礎とな�
 2. [クラスターを作成します](cs_clusters.html#clusters_cli)。
 3. [CLI のターゲットを自分のクラスターに設定します](cs_cli_install.html#cs_cli_configure)。
 
-クラスターを作成すると、有効期限のないレジストリー・トークンおよびシークレットが、[最も近い地域レジストリーと国際レジストリー](/docs/services/Registry/registry_overview.html#registry_regions)の両方に対して自動的に作成されます。国際レジストリーには、ユーザーが各地域レジストリーに保管されたイメージを別個に参照する代わりにデプロイメント全体で参照することのできる、IBM 提供のパブリック・イメージが安全に保管されます。地域レジストリーには、国際レジストリーに保管されるパブリック・イメージと同じイメージに加えて、独自のプライベート Docker イメージが安全に保管されます。トークンは、{{site.data.keyword.registryshort_notm}} 内にセットアップした名前空間への読み取り専用アクセスを許可するために使用されるもので、これにより、パブリック (国際レジストリー) およびプライベート (地域レジストリー) のイメージの処理が可能になります。
+クラスターを作成すると、有効期限のないレジストリー・トークンおよびシークレットが、[最も近い地域レジストリーとグローバル・レジストリー](/docs/services/Registry/registry_overview.html#registry_regions)の両方に対して自動的に作成されます。 グローバル・レジストリーには、ユーザーが各地域レジストリーに保管されたイメージを別個に参照する代わりにデプロイメント全体で参照することのできる、IBM 提供のパブリック・イメージが安全に保管されます。 地域レジストリーには、グローバル・レジストリーに保管されるパブリック・イメージと同じイメージに加えて、独自のプライベート Docker イメージが安全に保管されます。 トークンは、{{site.data.keyword.registryshort_notm}} 内にセットアップした名前空間への読み取り専用アクセスを許可するために使用されるもので、これにより、パブリック (グローバル・レジストリー) およびプライベート (地域レジストリー) のイメージの処理が可能になります。
 
-コンテナー化アプリのデプロイ時に Kubernetes クラスターがトークンにアクセスできるように、各トークンは Kubernetes の `imagePullSecret` 内に保管されている必要があります。クラスターが作成されると、{{site.data.keyword.containershort_notm}} により、国際 (IBM 提供のパブリック・イメージ) および地域レジストリーのトークンが Kubernetes イメージ・プル・シークレット内に自動的に保管されます。イメージ・プル・シークレットは、`default` Kubernetes 名前空間、その名前空間の `ServiceAccount` 内のデフォルト・リスト、`kube-system` 名前空間に追加されます。
+コンテナー化アプリのデプロイ時に Kubernetes クラスターがトークンにアクセスできるように、各トークンは Kubernetes の `imagePullSecret` 内に保管されている必要があります。 クラスターが作成されると、{{site.data.keyword.containershort_notm}} により、グローバル・レジストリー (IBM 提供のパブリック・イメージ) および地域レジストリーのトークンが Kubernetes イメージ・プル・シークレット内に自動的に保管されます。 イメージ・プル・シークレットは、`default` Kubernetes 名前空間、その名前空間の `ServiceAccount` 内のデフォルトのシークレット・リスト、`kube-system` 名前空間に追加されます。
 
 **注:** この初期セットアップを使用すると、{{site.data.keyword.Bluemix_notm}} アカウントの名前空間にある任意のイメージのコンテナーを、クラスターの **default** 名前空間にデプロイできます。 クラスター内のその他の名前空間内にコンテナーをデプロイする場合や、別の {{site.data.keyword.Bluemix_notm}} 地域か別の {{site.data.keyword.Bluemix_notm}} アカウントに保管されているイメージを使用する場合は、その[クラスター用に独自の imagePullSecret を作成](#other)しなければなりません。
 
@@ -134,7 +134,7 @@ Docker イメージは、作成するすべてのコンテナーの基礎とな�
     {: pre}
 
 3.  使用するトークン ID をメモします。
-4.  トークンの値を取得します。<em>&lt;token_id&gt;</em> を、前のステップで取得したトークンの ID に置き換えます。
+4.  トークンの値を取得します。 <em>&lt;token_id&gt;</em> を、前のステップで取得したトークンの ID に置き換えます。
 
     ```
     bx cr token-get <token_id>
@@ -170,7 +170,7 @@ Docker イメージは、作成するすべてのコンテナーの基礎とな�
     </tr>
     <tr>
     <td><code>--docker-username <em>&lt;docker_username&gt;</em></code></td>
-    <td>必須。 プライベート・レジストリーにログインするためのユーザー名。{{site.data.keyword.registryshort_notm}} の場合、ユーザー名は <code>token</code> に設定されます。</td>
+    <td>必須。 プライベート・レジストリーにログインするためのユーザー名。 {{site.data.keyword.registryshort_notm}} の場合、ユーザー名は <code>token</code> に設定されます。</td>
     </tr>
     <tr>
     <td><code>--docker-password <em>&lt;token_value&gt;</em></code></td>
@@ -178,11 +178,11 @@ Docker イメージは、作成するすべてのコンテナーの基礎とな�
     </tr>
     <tr>
     <td><code>--docker-email <em>&lt;docker-email&gt;</em></code></td>
-    <td>必須。 Docker E メール・アドレスがある場合は、その値を入力します。ない場合は、例えば a@b.c のような架空の E メール・アドレスを入力します。 この E メールは、Kubernetes シークレットを作成する際には必須ですが、作成後は使用されません。</td>
+    <td>必須。 Docker E メール・アドレスがある場合は、その値を入力します。 ない場合は、例えば a@b.c のような架空の E メール・アドレスを入力します。 この E メールは、Kubernetes シークレットを作成する際には必須ですが、作成後は使用されません。</td>
     </tr>
     </tbody></table>
 
-6.  シークレットが正常に作成されたことを確認します。<em>&lt;kubernetes_namespace&gt;</em> を、imagePullSecret を作成した名前空間の名前に置き換えます。
+6.  シークレットが正常に作成されたことを確認します。 <em>&lt;kubernetes_namespace&gt;</em> を、imagePullSecret を作成した名前空間の名前に置き換えます。
 
     ```
     kubectl get secrets --namespace <kubernetes_namespace>
@@ -238,15 +238,15 @@ Docker イメージは、作成するすべてのコンテナーの基礎とな�
         </tr>
         <tr>
         <td><code><em>&lt;my_namespace&gt;</em></code></td>
-        <td>イメージが保管されている名前空間。使用可能な名前空間をリストするには、`bx cr namespace-list` を実行します。</td>
+        <td>イメージが保管されている名前空間。 使用可能な名前空間をリストするには、`bx cr namespace-list` を実行します。</td>
         </tr>
         <tr>
         <td><code><em>&lt;my_image&gt;</em></code></td>
-        <td>使用するイメージの名前。{{site.data.keyword.Bluemix_notm}} アカウント内の使用可能なイメージをリストするには、`bx cr image-list` を実行します。</td>
+        <td>使用するイメージの名前。 {{site.data.keyword.Bluemix_notm}} アカウント内の使用可能なイメージをリストするには、`bx cr image-list` を実行します。</td>
         </tr>
         <tr>
         <td><code><em>&lt;tag&gt;</em></code></td>
-        <td>使用するイメージのバージョン。タグを指定しないと、デフォルトでは <strong>latest</strong> のタグが付いたイメージが使用されます。</td>
+        <td>使用するイメージのバージョン。 タグを指定しないと、デフォルトでは <strong>latest</strong> のタグが付いたイメージが使用されます。</td>
         </tr>
         <tr>
         <td><code><em>&lt;secret_name&gt;</em></code></td>
@@ -369,11 +369,11 @@ imagePullSecret を作成するには、以下のようにします。
     </tr>
     <tr>
     <td><code>--docker-email <em>&lt;docker-email&gt;</em></code></td>
-    <td>必須。 Docker E メール・アドレスがある場合は、その値を入力します。ない場合は、例えば a@b.c のような架空の E メール・アドレスを入力します。 この E メールは、Kubernetes シークレットを作成する際には必須ですが、作成後は使用されません。</td>
+    <td>必須。 Docker E メール・アドレスがある場合は、その値を入力します。 ない場合は、例えば a@b.c のような架空の E メール・アドレスを入力します。 この E メールは、Kubernetes シークレットを作成する際には必須ですが、作成後は使用されません。</td>
     </tr>
     </tbody></table>
 
-2.  シークレットが正常に作成されたことを確認します。<em>&lt;kubernetes_namespace&gt;</em> を、imagePullSecret を作成した名前空間の名前に置き換えます。
+2.  シークレットが正常に作成されたことを確認します。 <em>&lt;kubernetes_namespace&gt;</em> を、imagePullSecret を作成した名前空間の名前に置き換えます。
 
     ```
     kubectl get secrets --namespace <kubernetes_namespace>
@@ -419,7 +419,7 @@ imagePullSecret を作成するには、以下のようにします。
         </tr>
         <tr>
         <td><code><em>&lt;tag&gt;</em></code></td>
-        <td>使用するイメージのバージョン。タグを指定しないと、デフォルトでは <strong>latest</strong> のタグが付いたイメージが使用されます。</td>
+        <td>使用するイメージのバージョン。 タグを指定しないと、デフォルトでは <strong>latest</strong> のタグが付いたイメージが使用されます。</td>
         </tr>
         <tr>
         <td><code><em>&lt;secret_name&gt;</em></code></td>

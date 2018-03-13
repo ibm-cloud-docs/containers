@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-09"
+lastupdated: "2018-01-29"
 
 ---
 
@@ -15,11 +15,11 @@ lastupdated: "2018-01-09"
 {:tip: .tip}
 {:download: .download}
 
-# Esta página se ha movido.
+# El contenido que está buscando se ha trasladado.
 
-Encontrará los temas de seguridad aquí:
+Consulte la información más reciente en su nueva ubicación:
  - [Seguridad por componente de clúster](cs_secure.html#cluster)
-   - [Kubernetes maestro](cs_secure.html#master)
+   - [Maestro de Kubernetes](cs_secure.html#master)
    - [Nodos trabajadores](cs_secure.html#worker)
    - [Imágenes](cs_secure.html#images)
  - [Apertura de los puertos y direcciones IP necesarios en el cortafuegos](cs_firewall.html#firewall)
@@ -31,3 +31,5 @@ Encontrará los temas de seguridad aquí:
  - [Configuración de la conectividad de VPN con los diagramas de Helm del servicio VPN IPSec de Strongswan](cs_vpn.html#vpn)
  - [Políticas de red](cs_network_policy.html#network_policies)
  - [Restricción del tráfico de red para los nodos trabajadores de extremo](cs_edge.html#edge)
+
+

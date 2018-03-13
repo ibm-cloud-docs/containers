@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-05"
 
 ---
 
@@ -32,14 +32,34 @@ Puede utilizar diversos servicios externos y servicios del catálogo de {{site.d
 </thead>
 <tbody>
 <tr>
+<td>Aqua Security</td>
+  <td>Como suplemento a <a href="/docs/services/va/va_index.html" target="_blank">Vulnerability Advisor</a>, puede utilizar <a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> para mejorar la seguridad de los despliegues de contenedores reduciendo las acciones que su app puede realizar. Para obtener más información, consulte <a href="https://www.ibm.com/blogs/bluemix/2017/06/protecting-container-deployments-bluemix-aqua-security/" target="_blank">Protección de despliegues de contenedores con {{site.data.keyword.Bluemix_notm}} Aqua Security <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. </td>
+</tr>
+<tr>
 <td>Blockchain</td>
 <td>Despliegue un entorno de desarrollo disponible a nivel público para IBM Blockchain en un clúster de Kubernetes en {{site.data.keyword.containerlong_notm}}. Utilice este entorno para desarrollar y personalizar su propia red de encadenamiento de bloques (blockchain) para desplegar apps que comparten un libro mayor inalterable para registrar el historial de las transacciones. Para obtener más información, consulte <a href="https://ibm-blockchain.github.io" target="_blank">Desarrollo en una plataforma
 IBM Blockchain de recinto de pruebas de nube <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. </td>
 </tr>
 <tr>
-<td>Entrega continua</td>
+<td>{{site.data.keyword.cloudcerts_short}}</td>
+<td>Puede utilizar <a href="../services/certificate-manager/index.html" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> para almacenar y gestionar certificados SSL para sus apps. Para obtener más información, consulte <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Uso de {{site.data.keyword.cloudcerts_long_notm}} con {{site.data.keyword.containershort_notm}} para desplegar certificados TLS de dominio personalizados <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. </td>
+</tr>
+<tr>
+<td>Codeship</td>
+<td>Puede utilizar <a href="https://codeship.com" target="_blank">Codeship <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> para la integración y entrega continua de contenedores. Para obtener más información, consulte <a href="https://www.ibm.com/blogs/bluemix/2017/10/using-codeship-pro-deploy-workloads-ibm-container-service/" target="_blank">Utilización de Codeship Pro para desplegar cargas de trabajo en {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.contdelivery_short}}</td>
 <td>Automatice las compilaciones de las apps y los despliegues de los contenedores en clústeres de Kubernetes
 utilizando a cadena de herramientas. Para obtener información sobre la configuración, consulte el blog sobre <a href="https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines/" target="_blank">Despliegue de pods de Kubernetes en {{site.data.keyword.containerlong_notm}} mediante conductos DevOps <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. </td>
+</tr>
+<tr>
+<td>CoScale</td>
+<td>Supervise los nodos trabajadores, contenedores, conjuntos de réplicas, controladores de réplicas y servicios con <a href="https://www.coscale.com/" target="_blank">CoScale <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. Para obtener más información, consulte <a href="https://www.ibm.com/blogs/bluemix/2017/06/monitoring-ibm-bluemix-container-service-coscale/" target="_blank">Supervisión de {{site.data.keyword.containershort_notm}} con CoScale <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. </td>
+</tr>
+<tr>
+<td>Datadog</td>
+<td>Supervise el clúster y visualice las métricas de rendimiento de las aplicaciones y la infraestructura con <a href="https://www.datadoghq.com/" target="_blank">Datadog <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. Para obtener más información, consulte <a href="https://www.ibm.com/blogs/bluemix/2017/07/monitoring-ibm-bluemix-container-service-datadog/" target="_blank">Supervisión de {{site.data.keyword.containershort_notm}} con Datadog <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. </td>
 </tr>
 <tr>
 <td>Helm</td>
@@ -47,30 +67,39 @@ utilizando a cadena de herramientas. Para obtener información sobre la configur
 </tr>
 <tr>
 <td>Instana</td>
-<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="Icono de enlac eexterno"></a> proporciona la infraestructura y la supervisión de rendimiento de app con una GUI que detecta y correlaciona automáticamente las apps. Además, Istana captura las solicitudes de las apps, permitiéndole resolver problemas y realizar el análisis de la causa raíz para evitar que se repitan los problemas. Consulte la publicación sobre <a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">despliegue de Istana en {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> para obtener más información.</td>
+<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> proporciona la infraestructura y la supervisión de rendimiento de app con una GUI que detecta y correlaciona automáticamente las apps. Instana captura las solicitudes de las apps, permitiéndole resolver problemas y realizar el análisis de la causa raíz para evitar que se repitan los problemas. Consulte la publicación sobre <a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">despliegue de Instana en {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> para obtener más información.</td>
 </tr>
 <tr>
 <td>Istio</td>
 <td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio<img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> es un servicio de código fuente abierto que ofrece a los desarrolladores una forma de conectarse, proteger, gestionar y supervisar una red de microservicios, también conocida como malla de servicios, en plataformas de orquestación de nube como Kubernetes. Consulte la publicación sobre <a href="https://developer.ibm.com/dwblog/2017/istio/" target="_blank">cómo IBM cofundó y lanzó Istio<img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> para obtener más información sobre el proyecto de código abierto. Para instalar Istio en el clúster de Kubernetes en {{site.data.keyword.containershort_notm}} y empezar con una app de muestra, consulte la [Guía de aprendizaje: Gestión de microservicios con Istio](cs_tutorials_istio.html#istio_tutorial).</td>
 </tr>
 <tr>
+<td>NeuVector</td>
+<td>Proteja los contenedores con un cortafuegos nativo en la nube utilizando <a href="https://neuvector.com/" target="_blank">NeuVector <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. Para obtener más información, consulte <a href="https://www.ibm.com/us-en/marketplace/neuvector-container-security" target="_blank">NeuVector Container Security <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. </td>
+</tr>
+<tr>
 <td>Prometheus</td>
 <td>Prometheus es una herramienta de supervisión, registro y generación de alertas de código abierto específicamente diseñada para Kubernetes para recuperar información detallada acerca del clúster, los nodos trabajadores y el estado de despliegue basado en la información de registro de Kubernetes. Se recopila información sobre CPU, memoria, E/S y actividad de red
 de todos los contenedores en ejecución de un clúster, que se puede utilizar en consultas personalizadas o en alertas para supervisar el rendimiento y las cargas de trabajo del clúster.
-<p>Para utilizar Prometheus:</p>
-<ol>
-<li>Para instalar Prometheus, siga <a href="https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus" target="_blank">las instrucciones de CoreOS <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>.
-<ol>
-<li>Cuando ejecute el mandato de exportación, utilice el espacio de nombres kube-system. <p><code>export NAMESPACE=kube-system hack/cluster-monitoring/deploy</code></p></li>
-</ol>
-</li>
-<li>Después de desplegar Prometheus en el clúster, edite el código fuente de datos de Prometheus en Grafana para que haga referencia a <code>prometheus.kube-system:30900</code>.</li>
-</ol>
+
+<p>Para utilizar Prometheus, siga las <a href="https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus" target="_blank">instrucciones de CoreOS <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>.</p>
 </td>
 </tr>
 <tr>
 <td>{{site.data.keyword.bpshort}}</td>
 <td>{{site.data.keyword.bplong}} es una herramienta de automatización que utiliza Terraform para desplegar la infraestructura como código. Al desplegar su infraestructura como una única unidad, puede reutilizar esas definiciones de recursos en la nube en cualquier número de entornos. Para definir un clúster de Kubernetes como un recurso con {{site.data.keyword.bpshort}}, intente crear un entorno con la [plantilla de contenedor-clúster](https://console.bluemix.net/schematics/templates/details/Cloud-Schematics%2Fcontainer-cluster). Para obtener más información sobre Schematics, consulte [Acerca de {{site.data.keyword.bplong_notm}}](/docs/services/schematics/schematics_overview.html#about).</td>
+</tr>
+<tr>
+<td>Sematext</td>
+<td>Visualice métricas y registros para sus aplicaciones contenerizadas utilizando <a href="https://sematext.com/" target="_blank">Sematext <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. Para obtener más información, consulte <a href="https://www.ibm.com/blogs/bluemix/2017/09/monitoring-logging-ibm-bluemix-container-service-sematext/" target="_blank">Supervisión y registro de contenedores con Sematext <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. </td>
+</tr>
+<tr>
+<td>Sysdig</td>
+<td>Capture métricas de host, statsd, contenedor y app con un único punto de instrumentación utilizando <a href="https://sysdig.com/" target="_blank">Sysdig <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. Para obtener más información, consulte <a href="https://www.ibm.com/blogs/bluemix/2017/08/monitoring-ibm-bluemix-container-service-sysdig-container-intelligence/" target="_blank">Supervisión de {{site.data.keyword.containershort_notm}} con Sysdig Container Intelligence <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. </td>
+</tr>
+<tr>
+<td>Twistlock</td>
+<td>Como suplemento a <a href="/docs/services/va/va_index.html" target="_blank">Vulnerability Advisor</a>, puede utilizar <a href="https://www.twistlock.com/" target="_blank">Twistlock <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> para gestionar cortafuegos, la protección ante amenazas y la respuesta a incidentes. Para obtener más información, consulte <a href="https://www.ibm.com/blogs/bluemix/2017/07/twistlock-ibm-bluemix-container-service/" target="_blank">Twistlock en {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. </td>
 </tr>
 <tr>
 <td>Weave Scope</td>
@@ -93,12 +122,12 @@ Añada una instancia de servicio de {{site.data.keyword.Bluemix_notm}} existente
 Antes de empezar:
 
 1. Defina su clúster como [destino de la CLI](cs_cli_install.html#cs_cli_configure).
-2. [Solicite una instancia del servicio {{site.data.keyword.Bluemix_notm}}](/docs/manageapps/reqnsi.html#req_instance).
+2. [Solicite una instancia del servicio {{site.data.keyword.Bluemix_notm}}](/docs/apps/reqnsi.html#req_instance).
    **Nota:** Para crear una instancia de un servicio en la ubicación de Washington DC, debe utilizar la CLI.
 
 **Nota:**
 <ul><ul>
-<li>Sólo puede añadir servicios de {{site.data.keyword.Bluemix_notm}} que den soporte a claves de servicio. Si el servicio no soporta a las claves del servicio, consulte [Habilitación de apps externas para utilizar servicios de {{site.data.keyword.Bluemix_notm}}](/docs/manageapps/reqnsi.html#accser_external).</li>
+<li>Sólo puede añadir servicios de {{site.data.keyword.Bluemix_notm}} que den soporte a claves de servicio. Si el servicio no soporta a las claves del servicio, consulte [Habilitación de apps externas para utilizar servicios de {{site.data.keyword.Bluemix_notm}}](/docs/apps/reqnsi.html#accser_external).</li>
 <li>El clúster y los nodos trabajadores deben desplegarse por completo para poder añadir un servicio.</li>
 </ul></ul>
 
@@ -199,7 +228,7 @@ Cuando monta un volumen secreto en un pod, se almacena un archivo denominado bin
 
 3.  Abra el editor de texto que desee.
 
-4.  Cree un archivo YAML para configurar un pod que pueda acceder a los detalles del servicio a través de un volumen secreto.
+4.  Cree un archivo YAML para configurar un pod que pueda acceder a los detalles del servicio a través de un volumen secreto. Si enlaza más de un servicio, verifique que cada secreto esté asociado al servicio correcto.
 
     ```
     apiVersion: extensions/v1beta1
@@ -316,7 +345,7 @@ Weave Scope proporciona un diagrama visual de los recursos de un clúster de Kub
 Antes de empezar:
 
 -   Recuerde no exponer la información del clúster en Internet público. Siga estos pasos para desplegar de forma segura Weave Scope y para acceder al mismo localmente desde un navegador web.
--   Si aún no tiene uno, [cree un clúster estándar](cs_clusters.html#clusters_ui). Weave Scope puede consumir mucha CPU, especialmente la app. Ejecute Weave Scope con clústeres de pago grandes, no con clústeres de tipo lite.
+-   Si aún no tiene uno, [cree un clúster estándar](cs_clusters.html#clusters_ui). Weave Scope puede consumir mucha CPU, especialmente la app. Ejecute Weave Scope con clústeres de pago grandes, no con clústeres gratuitos.
 -   [Defina su clúster como destino de la CLI](cs_cli_install.html#cs_cli_configure) para ejecutar mandatos `kubectl`.
 
 
@@ -333,7 +362,7 @@ Para utilizar Weave Scope con una clúster:
     Para habilitar los permisos de solo lectura:
 
     ```
-    kubectl apply -f "https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/weave-scope/weave-scope-rbac-readonly.yaml"
+    kubectl apply --namespace weave -f "https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/weave-scope/weave-scope-rbac-readonly.yaml"
     ```
     {: pre}
 
@@ -348,7 +377,7 @@ Para utilizar Weave Scope con una clúster:
 3.  Despliegue el servicio Weave Acope, al que puede acceder de forma privada con la dirección IP del clúster.
 
     <pre class="pre">
-    <code>kubectl apply --namespace kube-system -f "https://cloud.weave.works/k8s/scope.yaml?k8s-version=$(kubectl version | base64 | tr -d '&bsol;n')"</code>
+    <code>kubectl apply --namespace weave -f "https://cloud.weave.works/k8s/scope.yaml?k8s-version=$(kubectl version | base64 | tr -d '&bsol;n')"</code>
     </pre>
 
     Salida:
@@ -364,7 +393,7 @@ Para utilizar Weave Scope con una clúster:
 4.  Ejecute un mandato de reenvío de puerto para que aparezca el servicio en el sistema. Ahora que Weave Scope se ha configurado con el clúster, para acceder a él la próxima vez puede ejecutar este mandato de reenvío de puerto sin realizar de nuevo los pasos de configuración anteriores.
 
     ```
-    kubectl port-forward -n kube-system "$(kubectl get -n kube-system pod --selector=weave-scope-component=app -o jsonpath='{.items..metadata.name}')" 4040
+    kubectl port-forward -n weave "$(kubectl get -n weave pod --selector=weave-scope-component=app -o jsonpath='{.items..metadata.name}')" 4040
     ```
     {: pre}
 

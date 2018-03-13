@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-08"
+lastupdated: "2017-02-05"
 
 ---
 
@@ -19,16 +19,16 @@ lastupdated: "2017-12-08"
 # 튜토리얼: 클러스터에 앱 배치
 {: #cs_apps_tutorial}
 
-이 두 번째 튜토리얼에서는 Kubernetes를 사용하여 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} {{site.data.keyword.Bluemix_notm}} 서비스를 활용하는 컨테이너화된 앱을 배치하는 방법에 대해 계속 진행합니다. 가상의 PR 회사는 {{site.data.keyword.watson}}을 사용하여 보도 자료를 분석하고 메시지의 논조에 대한 피드백을 받습니다.
-{:shortdesc}
+{{site.data.keyword.containershort_notm}}를 사용하여 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}를 활용하는 컨테이너화된 앱을 배치하는 방법을 학습할 수 있습니다.
+{: shortdesc}
 
-이 시나리오에서 PR 회사의 앱 개발자는 앱의 Hello World 버전을 네트워크 관리자가 [첫 번째 튜토리얼](cs_tutorials.html#cs_cluster_tutorial)에서 작성한 Kubernetes 클러스터에 배치합니다.
+이 시나리오에서는 가상의 PR 회사가 {{site.data.keyword.Bluemix_notm}} 서비스를 사용하여 보도 자료를 분석하고 메시지의 논조에 대한 피드백을 받습니다.
 
-각 학습에서는 동일한 앱의 복잡한 버전을 점진적으로 배치하는 방법을 사용자에게 알려줍니다. 네 번째 파트는 예외로 하고, 다음 다이어그램은 튜토리얼의 앱 배치 컴포넌트를 보여줍니다.
+PR 회사의 앱 개발자가 지난 튜토리얼에서 작성한 Kubernetes 클러스터를 사용하여 앱의 Hello World 버전을 배치합니다. 앱 개발자는 이 튜토리얼의 각 학습을 기반으로 동일한 앱의 더 복잡한 버전을 점진적으로 배치합니다. 다음 다이어그램은 학습별 각 배치의 컴포넌트를 보여줍니다.
 
 ![학습 컴포넌트](images/cs_app_tutorial_roadmap.png)
 
-다이어그램에 표시된 것처럼 Kubernetes는 여러 다양한 유형의 리소스를 사용하여 클러스터에서 앱을 시작하고 실행합니다. Kubernetes에서는 배치와 서비스가 함께 작동합니다. 배치에는 앱에 대한 정의가 포함됩니다(예: 컨테이너에 사용할 이미지 및 앱용으로 노출해야 하는 포트). 배치를 작성하면 배치에 정의된 각 컨테이너마다 Kubernetes 포드가 작성됩니다. 앱의 복원성을 높이기 위해, 배치에서 동일 앱의 다중 인스턴스를 정의하고 Kubernetes가 사용자를 위해 복제본 세트를 자동 작성하도록 허용할 수 있습니다. 복제본 세트는 포드를 모니터하며, 항상 원하는 수의 포드가 시작되어 실행되도록 보장합니다. 포드 중 하나가 응답하지 않으면 포드가 자동으로 다시 작성됩니다.
+다이어그램에 표시된 것처럼 Kubernetes는 여러 다양한 유형의 리소스를 사용하여 클러스터에서 앱을 시작하고 실행합니다. Kubernetes에서는 배치와 서비스가 함께 작동합니다. 배치에는 앱에 대한 정의가 포함됩니다(예: 컨테이너에 사용할 이미지 및 앱용으로 노출해야 하는 포트). 배치를 작성할 때 배치에서 정의한 각 컨테이너마다 Kubernetes 포드가 작성됩니다. 앱의 복원성을 높이기 위해, 배치에서 동일 앱의 다중 인스턴스를 정의하고 Kubernetes가 사용자를 위해 복제본 세트를 자동 작성하도록 허용할 수 있습니다. 복제본 세트는 포드를 모니터하며, 항상 원하는 수의 포드가 시작되어 실행되도록 보장합니다. 포드 중 하나가 응답하지 않으면 포드가 자동으로 다시 작성됩니다.
 
 서비스는 포드 세트를 그룹화하며, 각 포드의 실제 사설 IP 주소를 노출함이 없이 클러스터의 기타 서비스에 대해 이러한 포드로의 네트워크 연결을 제공합니다. Kubernetes 서비스를 사용하면 클러스터 내의 기타 포드가 앱을 사용할 수 있도록 하거나 인터넷에 앱을 노출할 수 있습니다. 이 튜토리얼에서는 Kubernetes 서비스를 사용함으로써 공용 포트 및 작업자 노드에 자동 지정된 공인 IP 주소를 사용하여 인터넷에서 실행 중인 앱에 액세스할 수 있습니다.
 
@@ -55,31 +55,46 @@ lastupdated: "2017-12-08"
 
 ## 전제조건
 
-[튜토리얼: {{site.data.keyword.containershort_notm}}](cs_tutorials.html#cs_cluster_tutorial)에 Kubernetes 클러스터 작성.
+* [튜토리얼: {{site.data.keyword.containershort_notm}}](cs_tutorials.html#cs_cluster_tutorial)에 Kubernetes 클러스터 작성.
 
 ## 학습 1: Kubernetes 클러스터에 단일 인스턴스 앱 배치
 {: #cs_apps_tutorial_lesson1}
 
-이 학습에서는 Hello World 앱의 단일 인스턴스를 클러스터에 배치합니다. 다음 다이어그램에는 이 학습을 완료하여 배치한 컴포넌트가 포함됩니다.
+이전 튜토리얼에서는 하나의 작업자 노드가 있는 클러스터를 작성했습니다. 이 학습에서는 배치를 구성하고 작업자 노드 내의 Kubernetes 포드에 단일 앱 인스턴스를 배치합니다. 이 학습을 완료하여 배치하는 컴포넌트가 다음 다이어그램에 표시됩니다.
 {:shortdesc}
 
 ![배치 설정](images/cs_app_tutorial_components1.png)
 
-이전 학습서에서 사용한 계정 및 하나의 작업자 노드가 있는 클러스터가 이미 있습니다. 이 학습에서는 배치를 구성하고 작업자 노드의 Kubernetes 포드에 Hello World 앱을 배치합니다. 공용으로 사용 가능하게 하려면 Kubernetes 서비스를 작성합니다.
+앱을 배치하려면 다음을 수행하십시오.
 
-
-1.  {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 프롬프트가 표시되면
-{{site.data.keyword.Bluemix_notm}} 신임 정보를 입력하십시오. {{site.data.keyword.Bluemix_notm}} 지역을 지정하려면 [API 엔드포인트를 포함](cs_regions.html#bluemix_regions)하십시오.
+1.  [Hello world 앱 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/IBM/container-service-getting-started-wt)의 소스 코드를 사용자 홈 디렉토리에 복제하십시오. 저장소에는 각각 `Lab`으로 시작하는 유사한 앱의 여러 버전이 폴더에 포함되어 있습니다. 각 버전에는 다음 파일이 포함되어 있습니다.
+    * `Dockerfile`: 이미지의 빌드 정의
+    * `app.js`: Hello world 앱
+    * `package.json`: 앱에 대한 메타데이터
 
     ```
-           bx login
+git clone https://github.com/IBM/container-service-getting-started-wt.git
     ```
     {: pre}
 
-    **참고:** 연합 ID가 있는 경우 `bx login --sso`를 사용하여 {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 사용자 이름을 입력하고 CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색하십시오. `--sso`가 없으면 로그인에 실패하고 `--sso` 옵션을 사용하면 성공하는 경우에는 연합 ID를 보유 중임을 알 수 있습니다.
+2.  `Lab 1` 디렉토리로 이동하십시오.
 
-2.  CLI에서 클러스터의 컨텍스트를 설정하십시오.
-    1.  환경 변수를 설정하기 위한 명령을 가져오고 Kubernetes 구성 파일을 다운로드하십시오.
+    ```
+    cd 'container-service-getting-started-wt/Lab 1'
+    ```
+    {: pre}
+
+3. {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 프롬프트가 표시되면
+{{site.data.keyword.Bluemix_notm}} 신임 정보를 입력하십시오. {{site.data.keyword.Bluemix_notm}} 지역을 지정하려면 [API 엔드포인트를 포함](cs_regions.html#bluemix_regions)하십시오.
+  ```
+    bx login [--sso]
+  ```
+  {: pre}
+
+  **참고**: 로그인 명령이 실패하는 경우 연합 ID가 있을 수 있습니다. 명령에 `--sso` 플래그를 추가하십시오. CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색하십시오.
+
+4. CLI에서 클러스터의 컨텍스트를 설정하십시오.
+    1. 환경 변수를 설정하기 위한 명령을 가져오고 Kubernetes 구성 파일을 다운로드하십시오.
 
         ```
         bx cs cluster-config <pr_firm_cluster>
@@ -87,6 +102,7 @@ lastupdated: "2017-12-08"
         {: pre}
 
         구성 파일 다운로드가 완료되면 환경 변수로서 경로를 로컬 Kubernetes 구성 파일로 설정하는 데 사용할 수 있는 명령이 표시됩니다.
+    2.  `KUBECONFIG` 환경 변수를 설정하려면 출력을 복사하여 붙여넣기하십시오.
 
         OS X에 대한 예:
 
@@ -95,56 +111,12 @@ lastupdated: "2017-12-08"
         ```
         {: screen}
 
-    2.  `KUBECONFIG` 환경 변수를 설정하려면 터미널에 표시되는 명령을 복사하고 붙여넣기하십시오.
-    3.  `KUBECONFIG` 환경 변수가 올바르게 설정되었는지 확인하십시오.
-
-        OS X에 대한 예:
-
-        ```
-        echo $KUBECONFIG
-        ```
-        {: pre}
-
-        출력:
-
-        ```
-        /Users/<user_name>/.bluemix/plugins/container-service/clusters/<pr_firm_cluster>/kube-config-prod-dal10-pr_firm_cluster.yml
-        ```
-        {: screen}
-
-    4.  Kubernetes CLI 서버 버전을 확인하여 `kubectl` 명령이 올바르게 실행되는지 확인하십시오.
-
-        ```
-        kubectl version  --short
-        ```
-        {: pre}
-
-        출력 예:
-
-        ```
-        Client Version: v1.7.4
-        Server Version: v1.7.4
-        ```
-        {: screen}
-
-3.  Docker를 시작하십시오.
-    * Docker CE를 사용 중인 경우에는 조치가 필요하지 않습니다.
-    * Linux를 사용 중인 경우에는 [Docker 문서![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.docker.com/engine/admin/)를 따라 사용하는 Linux 배포판에 따라 Docker를 시작하는 방법에 대한 지시사항을 찾으십시오.
-    * Windows 또는 OSX에서 Docker Toolbox를 사용 중인 경우에는 사용자를 위해 Docker를 시작하는 Docker Quickstart Terminal을 사용할 수 있습니다. 다음의 일부 단계에 대해 Docker Quickstart Terminal을 사용하여 Docker 명령을 실행한 후에 사용자가 `KUBECONFIG` 세션 변수를 설정하는 CLI로 다시 전환하십시오.
-        * Docker QuickStart Terminal을 사용 중인 경우에는 {{site.data.keyword.Bluemix_notm}} CLI 로그인 명령을 다시 실행하십시오.
-
-          ```
-           bx login
-          ```
-          {: pre}
-
-4.  {{site.data.keyword.registryshort_notm}} CLI에 로그인하십시오.  **참고:** 컨테이너 레지스트리 플러그인이 [설치](/docs/services/Registry/index.html#registry_cli_install)되어 있는지 확인하십시오.
+5.  {{site.data.keyword.registryshort_notm}} CLI에 로그인하십시오.  **참고:** 컨테이너 레지스트리 플러그인이 [설치](/docs/services/Registry/index.html#registry_cli_install)되어 있는지 확인하십시오.
 
     ```
     bx cr login
     ```
     {: pre}
-
     -   {{site.data.keyword.registryshort_notm}}의 네임스페이스를 잊은 경우에는 다음 명령을 실행하십시오.
 
         ```
@@ -152,45 +124,24 @@ lastupdated: "2017-12-08"
         ```
         {: pre}
 
-5.  [Hello world 앱 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/Osthanes/container-service-getting-started-wt)의 소스 코드를 사용자 홈 디렉토리에 복제하거나 다운로드하십시오.
+6. Docker를 시작하십시오.
+    * Docker CE를 사용 중인 경우에는 조치가 필요하지 않습니다.
+    * Linux를 사용 중인 경우에는 [Docker 문서![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.docker.com/engine/admin/)를 따라 사용하는 Linux 배포판에 따라 Docker를 시작하는 방법에 대한 지시사항을 찾으십시오.
+    * Windows 또는 OSX에서 Docker Toolbox를 사용 중인 경우에는 사용자를 위해 Docker를 시작하는 Docker Quickstart Terminal을 사용할 수 있습니다. 다음의 일부 단계에 대해 Docker Quickstart Terminal을 사용하여 Docker 명령을 실행한 후에 사용자가 `KUBECONFIG` 세션 변수를 설정하는 CLI로 다시 전환하십시오.
 
-    ```
-    git clone https://github.com/Osthanes/container-service-getting-started-wt.git
-    ```
-    {: pre}
+7.  `Lab 1` 디렉토리의 앱 파일을 포함하는 Docker 이미지를 빌드하십시오. 향후 앱을 변경해야 하는 경우에는 다음 단계를 반복하여 이미지의 다른 버전을 작성하십시오.
 
-    저장소를 다운로드한 경우에는 압축된 파일의 압축을 푸십시오.
-
-    예:
-
-    * Windows: `C:Users\<my_username>\container-service-getting-started-wt`
-    * OS X: `/Users/<my_username>/container-service-getting-started-wt`
-
-    저장소에는 이름이 `Stage1`, `Stage2` 및 `Stage3`인 폴더에 유사한 앱의 세 버전이 포함되어 있습니다. 각 버전에는 다음 파일이 포함되어 있습니다.
-    * `Dockerfile`: 이미지의 빌드 정의
-    * `app.js`: Hello world 앱
-    * `package.json`: 앱에 대한 메타데이터
-
-6.  첫 번째 앱 디렉토리인 `Stage1`로 이동하십시오.
-
-    ```
-     cd <username_home_directory>/container-service-getting-started-wt/Stage1
-    ```
-    {: pre}
-
-7.  `Stage1` 디렉토리의 앱 파일을 포함하는 Docker 이미지를 빌드하십시오. 향후 앱을 변경해야 하는 경우에는 다음 단계를 반복하여 이미지의 다른 버전을 작성하십시오.
-
-    1.  로컬로 이미지를 빌드한 후에 사용하고자 하는 이름과 태그 및 이전 튜토리얼의 {{site.data.keyword.registryshort_notm}}에서 작성된 네임스페이스로 해당 태그를 지정하십시오. 네임스페이스 정보로 이미지의 태그를 지정하면 나중 단계에서 이미지를 푸시할 위치를 Docker에게 알려줍니다. 이미지 이름에서는 소문자 영숫자 문자나 밑줄(`_`)만 사용하십시오. 명령의 끝에는 반드시 마침표(`.`)를 사용하십시오. 마침표는 이미지를 빌드하기 위한 빌드 아티팩트 및 Dockerfile을 현재 디렉토리 내에서 찾도록 Docker에 지시합니다.
+    1.  로컬에서 이미지를 빌드하십시오. 사용할 이름 및 태그를 지정하십시오. 이전 튜토리얼에서 {{site.data.keyword.registryshort_notm}}에 작성한 네임스페이스를 사용해야 합니다. 네임스페이스 정보로 이미지의 태그를 지정하면 나중 단계에서 이미지를 푸시할 위치를 Docker에게 알려줍니다. 이미지 이름에서는 소문자 영숫자 문자나 밑줄(`_`)만 사용하십시오. 명령의 끝에는 반드시 마침표(`.`)를 사용하십시오. 마침표는 이미지를 빌드하기 위한 빌드 아티팩트 및 Dockerfile을 현재 디렉토리 내에서 찾도록 Docker에 지시합니다.
 
         ```
         docker build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
         ```
         {: pre}
 
-        빌드가 완료되면 성공 메시지가 나타나는지 확인하십시오.
-
+        빌드가 완료되면 다음과 같은 성공 메시지가 표시되는지 확인하십시오.
         ```
         Successfully built <image_id>
+        Successfully tagged <image_tag>
         ```
         {: screen}
 
@@ -220,28 +171,7 @@ lastupdated: "2017-12-08"
         ```
         {: screen}
 
-        다음 단계를 계속하기 전에 이미지가 푸시되기를 기다리십시오.
-
-    3.  Docker Quickstart Terminal을 사용 중인 경우에는 `KUBECONFIG` 세션 변수의 설정에 사용된 CLI로 다시 전환하십시오.
-
-    4.  이미지가 네임스페이스에 정상적으로 추가되었는지 확인하십시오.
-
-        ```
-        bx cr images
-        ```
-        {: pre}
-
-        출력:
-
-        ```
-        Listing images...
-
-        REPOSITORY                                  NAMESPACE   TAG       DIGEST         CREATED        SIZE     VULNERABILITY STATUS
-        registry.<region>.bluemix.net/<namespace>/hello-world   <namespace>   1   0d90cb732881   1 minute ago   264 MB   OK
-        ```
-        {: screen}
-
-8.  클러스터의 포드에 앱을 배치할 수 있도록 이름이 _hello-world-deployment_인 Kubernetes 배치를 작성하십시오. 배치는 포드를 관리하는 데 사용되며, 여기에는 컨테이너화된 앱의 인스턴스가 포함됩니다. 다음 배치에서는 단일 포드에서 앱을 배치합니다.
+8.  배치는 포드를 관리하는 데 사용되며, 여기에는 컨테이너화된 앱의 인스턴스가 포함됩니다. 다음 명령은 단일 포드에 앱을 배치합니다. 이 학습서를 위해 배치의 이름이 hello-world-deployment로 지정되었지만 원하는 이름을 제공할 수 있습니다. Docker Quickstart Terminal을 사용하여 Docker 명령을 실행한 경우에는 `KUBECONFIG` 세션 변수를 설정하는 데 사용된 CLI로 전환해야 합니다.
 
     ```
     kubectl run hello-world-deployment --image=registry.<region>.bluemix.net/<namespace>/hello-world:1
@@ -255,9 +185,7 @@ lastupdated: "2017-12-08"
     ```
     {: screen}
 
-    이 배치에서 앱의 단일 인스턴스만 작성하므로, 앱의 둘 이상의 인스턴스가 작성되는 나중 학습에서 수행하는 것보다는 배치가 더 빠르게 작성됩니다.
-
-9.  NodePort 서비스로서 배치를 노출하여 외부에서 앱에 액세스할 수 있도록 하십시오. 서비스는 앱에 대한 네트워킹을 적용합니다. 클러스터에 여럿이 아닌 하나의 작업자 노드만 있으므로, 작업자 노드 간의 로드 밸런싱은 필요하지 않습니다. 따라서 NodePort를 사용하여 사용자에게 앱에 대한 외부 액세스를 제공할 수 있습니다. Cloud Foundry 앱에 대한 포트의 노출과 마찬가지로, 노출되는 NodePort는 작업자 노드가 트래픽을 청취하는 포트입니다. 나중 단계에서 사용자는 서비스에 랜덤하게 지정된 NodePort를 보게 됩니다.
+9.  NodePort 서비스로서 배치를 노출하여 외부에서 앱에 액세스할 수 있도록 하십시오. Cloud Foundry 앱에 대한 포트를 노출하는 것과 같이 노출하는 NodePort는 작업자 노드가 트래픽을 청취하는 포트입니다. 
 
     ```
     kubectl expose deployment/hello-world-deployment --type=NodePort --port=8080 --name=hello-world-service --target-port=8080
@@ -304,9 +232,7 @@ lastupdated: "2017-12-08"
     </tr>
     </tbody></table>
 
-    이제 모든 배치 작업이 완료되었으므로, 모든 결과를 보고 확인할 수 있습니다.
-
-10. 브라우저에서 앱을 테스트하려면 URL 구성을 위한 세부사항을 가져오십시오.
+10. 이제 모든 배치 작업이 완료되었으므로 브라우저에서 앱을 테스트할 수 있습니다. URL을 형성하기 위한 세부사항을 가져오십시오.
     1.  서비스에 대한 정보를 가져와서 지정된 NodePort를 확인하십시오.
 
         ```
@@ -359,25 +285,7 @@ lastupdated: "2017-12-08"
 
     Hello World 앱이 실제로 공용으로 사용 가능한지 확인하려면 동료에게 이 URL에 접속해 보도록 요청하거나 자신의 휴대전화 브라우저를 통해 이 주소에 접속해 볼 수 있습니다.
 
-12. 기본 포트 8001로 Kubernetes 대시보드를 실행하십시오.
-    1.  기본 포트 번호로 프록시를 설정하십시오.
-
-        ```
-        kubectl proxy
-        ```
-         {: pre}
-
-        ```
-        Starting to serve on 127.0.0.1:8001
-        ```
-        {: screen}
-
-    2.  웹 브라우저에서 다음 URL을 열어서 Kubernetes 대시보드를 보십시오.
-
-        ```
-        http://localhost:8001/ui
-        ```
-         {: pre}
+12. [Kubernetes 대시보드를 실행](cs_app.html#cli_dashboard)하십시오. 사용 중인 Kubernetes 버전에 따라 단계가 다릅니다.
 
 13. **워크로드** 탭에서, 작성된 리소스를 볼 수 있습니다. Kubernetes 대시보드의 탐색이 완료되면 CTRL+C를 사용하여 `proxy` 명령을 종료하십시오.
 
@@ -385,6 +293,7 @@ lastupdated: "2017-12-08"
 
 이 학습에서 너무 많은 명령이 사용되었다고 생각하십니까? 맞습니다. 사용자를 대신하여 일부 작업을 수행하도록 구성 스크립트를 사용해 보시는 건 어떻습니까? 앱의 두 번째 버전에 대한 구성 스크립트를 사용하고 해당 앱의 다중 인스턴스를 배치하여 보다 높은 가용성을 만들려면 다음 학습을 계속하십시오.
 
+<br />
 
 
 ## 학습 2: 보다 높은 가용성의 앱 배치 및 업데이트
@@ -397,18 +306,20 @@ lastupdated: "2017-12-08"
 
 ![배치 설정](images/cs_app_tutorial_components2.png)
 
-이전 학습서에서 사용한 계정 및 하나의 작업자 노드가 있는 클러스터가 있습니다. 이 학습에서는 배치를 구성하고 Hello World 앱의 세 개의 인스턴스를 배치합니다. 각 인스턴스는 작업자 노드의 복제본 세트의 파트로 Kubernetes 포드에 배치됩니다. 또한 공용으로 사용 가능하게 하려면 Kubernetes 서비스를 작성합니다.
+이전 튜토리얼에서 사용자 계정 및 하나의 작업자 노드가 있는 클러스터를 작성했습니다. 이 학습에서는 배치를 구성하고 Hello World 앱의 세 개의 인스턴스를 배치합니다. 각 인스턴스는 작업자 노드의 복제본 세트의 파트로 Kubernetes 포드에 배치됩니다. 또한 공용으로 사용 가능하게 하려면 Kubernetes 서비스를 작성합니다.
 
-구성 스크립트에 정의된 대로, Kubernetes는 가용성 검사를 사용하여 포드의 컨테이너가 실행 중인지 여부를 확인할 수 있습니다. 예를 들어, 이러한 검사를 통해 교착 상태(앱이 실행 중이지만 더 이상 진행할 수 없는 상태)를 발견할 수 있습니다. 이 상태에 있는 컨테이너를 다시 시작하면 버그에도 불구하고 앱의 가용성을 높이는 데 도움이 됩니다. 그리고 Kubernetes는 준비성 검사를 사용하여 컨테이너가 트래픽 재승인을 시작할 준비가 된 시점을 알 수 있습니다. 해당 컨테이너가 준비되면 포드가 준비된 것으로 간주됩니다. 포드가 준비되면 이는 다시 시작됩니다. Stage2 앱에서는 매 15초마다 앱의 제한시간이 초과됩니다. 구성 스크립트에서 상태 검사가 구성된 경우, 컨테이너는 상태 검사에서 앱의 문제를 발견할 때 재작성됩니다.
+구성 스크립트에 정의된 대로, Kubernetes는 가용성 검사를 사용하여 포드의 컨테이너가 실행 중인지 여부를 확인할 수 있습니다. 예를 들어, 이러한 검사를 통해 교착 상태(앱이 실행 중이지만 더 이상 진행할 수 없는 상태)를 발견할 수 있습니다. 이 상태에 있는 컨테이너를 다시 시작하면 버그에도 불구하고 앱의 가용성을 높이는 데 도움이 됩니다. 그리고 Kubernetes는 준비성 검사를 사용하여 컨테이너가 트래픽 재승인을 시작할 준비가 된 시점을 알 수 있습니다. 해당 컨테이너가 준비되면 포드가 준비된 것으로 간주됩니다. 포드가 준비되면 이는 다시 시작됩니다. 이 버전의 앱에서는 매 15초마다 제한시간이 초과됩니다. 구성 스크립트에서 상태 검사가 구성된 경우, 컨테이너는 상태 검사에서 앱의 문제를 발견할 때 재작성됩니다.
 
-1.  CLI에서, 두 번째 앱 디렉토리인 `Stage2`로 이동하십시오. Windows 또는 OS X용 Docker Toolbox를 사용 중인 경우에는 Docker Quickstart Terminal을 사용하십시오.
+1.  CLI에서 `Lab 2` 디렉토리로 이동하십시오.
 
   ```
-  cd <username_home_directory>/container-service-getting-started-wt/Stage2
+  cd 'container-service-getting-started-wt/Lab 2'
   ```
   {: pre}
 
-2.  이미지로서 로컬로 앱의 두 번째 버전을 빌드하고 태그를 지정하십시오. 역시 명령의 끝에는 반드시 마침표(`.`)를 사용하십시오.
+2.  새 CLI 세션을 시작한 경우 로그인하여 클러스터 컨텍스트를 설정하십시오.
+
+3.  이미지로서 로컬로 앱의 두 번째 버전을 빌드하고 태그를 지정하십시오. 역시 명령의 끝에는 반드시 마침표(`.`)를 사용하십시오.
 
   ```
   docker build -t registry.<region>.bluemix.net/<namespace>/hello-world:2 .
@@ -422,7 +333,7 @@ lastupdated: "2017-12-08"
   ```
   {: screen}
 
-3.  레지스트리 네임스페이스에서 이미지의 두 번째 버전을 푸시하십시오. 다음 단계를 계속하기 전에 이미지가 푸시되기를 기다리십시오.
+4.  레지스트리 네임스페이스에서 이미지의 두 번째 버전을 푸시하십시오. 다음 단계를 계속하기 전에 이미지가 푸시되기를 기다리십시오.
 
   ```
   docker push registry.<region>.bluemix.net/<namespace>/hello-world:2
@@ -448,38 +359,18 @@ lastupdated: "2017-12-08"
   ```
   {: screen}
 
-4.  Docker Quickstart Terminal을 사용 중인 경우에는 `KUBECONFIG` 세션 변수의 설정에 사용된 CLI로 다시 전환하십시오.
-5.  이미지가 레지스트리 네임스페이스에 정상적으로 추가되었는지 확인하십시오.
-
-    ```
-    bx cr images
-    ```
-     {: pre}
-
-    출력:
-
-    ```
-    Listing images...
-
-    REPOSITORY                                 NAMESPACE  TAG  DIGEST        CREATED        SIZE     VULNERABILITY STATUS
-    registry.<region>.bluemix.net/<namespace>/hello-world  <namespace>  1    0d90cb732881  30 minutes ago 264 MB   OK
-    registry.<region>.bluemix.net/<namespace>/hello-world  <namespace>  2    c3b506bdf33e  1 minute ago   264 MB   OK
-    ```
-    {: screen}
-
-6.  텍스트 편집기로 `<username_home_directory>/container-service-getting-started-wt/Stage2/healthcheck.yml` 파일을 여십시오. 이 구성 스크립트는 이전 학습의 일부 단계를 결합하여 배치와 서비스를 동시에 작성합니다. PR 회사의 앱 개발자는 포드를 재작성하여 문제를 해결하기 위해 또는 업데이트가 작성될 때 이러한 스크립트를 사용할 수 있습니다.
-
-    1.  **배치** 섹션에서 `replicas`에 주목하십시오. 복제본은 앱의 숫자 인스턴스입니다. 3개의 인스턴스를 실행하면 단지 하나의 인스턴스보다는 앱의 가용성이 더 높아집니다.
-
-        ```
-        replicas: 3
-        ```
-        {: pre}
-
-    2.  개인용 레지스트리 네임스페이스에서 이미지에 대한 세부사항을 업데이트하십시오.
+5.  텍스트 편집기를 사용하여 `Lab 2` 디렉토리에서 `healthcheck.yml` 파일을 여십시오. 이 구성 스크립트는 이전 학습의 일부 단계를 결합하여 배치와 서비스를 동시에 작성합니다. PR 회사의 앱 개발자는 포드를 재작성하여 문제를 해결하기 위해 또는 업데이트가 작성될 때 이러한 스크립트를 사용할 수 있습니다.
+    1. 개인용 레지스트리 네임스페이스에서 이미지에 대한 세부사항을 업데이트하십시오.
 
         ```
         image: "registry.<region>.bluemix.net/<namespace>/hello-world:2"
+        ```
+        {: pre}
+
+    2.  **배치** 섹션에서 `replicas`에 주목하십시오. 복제본은 앱의 숫자 인스턴스입니다. 3개의 인스턴스를 실행하면 단지 하나의 인스턴스보다는 앱의 가용성이 더 높아집니다.
+
+        ```
+        replicas: 3
         ```
         {: pre}
 
@@ -497,10 +388,10 @@ lastupdated: "2017-12-08"
 
     4.  **서비스** 섹션에서 `NodePort`에 주목하십시오. 이전 학습처럼 랜덤 NodePort를 생성하는 대신, 30000 - 32767 범위의 포트를 지정할 수 있습니다. 이 예에서는 30072를 사용합니다.
 
-7.  클러스터에서 구성 스크립트를 실행하십시오. 배치와 서비스가 작성되면, PR 회사의 사용자가 볼 수 있도록 앱이 사용 가능합니다.
+6.  클러스터 컨텍스트를 설정하는 데 사용한 CLI로 전환하여 구성 스크립트를 실행하십시오. 배치와 서비스가 작성되면, PR 회사의 사용자가 볼 수 있도록 앱이 사용 가능합니다.
 
   ```
-  kubectl apply -f <username_home_directory>/container-service-getting-started-wt/Stage2/healthcheck.yml
+  kubectl apply -f healthcheck.yml
   ```
   {: pre}
 
@@ -512,9 +403,7 @@ lastupdated: "2017-12-08"
   ```
   {: screen}
 
-  이제 모든 배치가 완료되었으므로, 모든 결과를 확인하십시오. 추가 인스턴스가 실행 중이므로 사용자는 속도가 다소 느려짐을 감지할 수 있습니다.
-
-8.  브라우저를 열고 앱을 확인하십시오. URL을 구성하려면, 작업자 노드에 대해 이전 학습에서 사용한 것과 동일한 공인 IP 주소를 가져와서 이를 구성 스크립트에 지정된 NodePort와 결합하십시오. 작업자 노드의 공인 IP 주소를 가져오려면 다음을 수행하십시오.
+7.  이제 배치 작업이 완료되었으므로 브라우저를 열고 앱을 체크아웃할 수 있습니다. URL을 형성하려면 이전 학습에서 작업자 노드에 대해 사용한 것과 동일한 공인 IP 주소를 가져와서 구성 스크립트에 지정된 NodePort와 결합하십시오. 작업자 노드의 공인 IP 주소를 가져오려면 다음을 수행하십시오.
 
   ```
   bx cs workers <pr_firm_cluster>
@@ -530,7 +419,7 @@ lastupdated: "2017-12-08"
 
   `http://169.47.227.138:30072/healthz`에서 상태도 확인할 수 있습니다.
 
-  처음 10 - 15초 동안 200개의 메시지가 리턴됩니다. 따라서 앱이 정상적으로 실행 중임을 알 수 있습니다. 이 15초 이후에는 앱에서 설계된 대로 제한시간 초과 메시지가 표시됩니다.
+  처음 10 - 15초 동안 200개의 메시지가 리턴됩니다. 따라서 앱이 정상적으로 실행 중임을 알 수 있습니다. 이 15초 이후에는 제한시간 초과 메시지가 표시됩니다. 이는 예상 동작입니다. 
 
   ```
   {
@@ -539,29 +428,9 @@ lastupdated: "2017-12-08"
   ```
   {: screen}
 
-9.  기본 포트 8001로 Kubernetes 대시보드를 실행하십시오.
-    1.  기본 포트 번호로 프록시를 설정하십시오.
+8.  [Kubernetes 대시보드를 실행](cs_app.html#cli_dashboard)하십시오. 사용 중인 Kubernetes 버전에 따라 단계가 다릅니다.
 
-        ```
-        kubectl proxy
-        ```
-        {: pre}
-
-        출력:
-
-        ```
-        Starting to serve on 127.0.0.1:8001
-        ```
-        {: screen}
-
-    2.  웹 브라우저에서 다음 URL을 열어서 Kubernetes 대시보드를 보십시오.
-
-        ```
-        http://localhost:8001/ui
-        ```
-        {: codeblock}
-
-10. **워크로드** 탭에서, 작성된 리소스를 볼 수 있습니다. 이 탭에서 새로 고치기를 계속 수행하여 상태 검사가 작동 중인지 볼 수 있습니다. **y포드** 섹션에서는 내부의 컨테이너가 재작성될 때 포드가 다시 시작되는 횟수를 볼 수 있습니다. 대시보드에서 다음 오류를 발견하는 경우, 이 메시지는 상태 검사에서 문제점을 발견했음을 표시합니다. 잠시 기다린 후에 새로 고치기를 다시 수행하십시오. 각 포드마다 재시작 횟수가 변경됨을 볼 수 있습니다.
+9. **워크로드** 탭에서, 작성된 리소스를 볼 수 있습니다. 이 탭에서 새로 고치기를 계속 수행하여 상태 검사가 작동 중인지 볼 수 있습니다. **y포드** 섹션에서는 내부의 컨테이너가 재작성될 때 포드가 다시 시작되는 횟수를 볼 수 있습니다. 대시보드에서 다음 오류를 발견하는 경우, 이 메시지는 상태 검사에서 문제점을 발견했음을 표시합니다. 잠시 기다린 후에 새로 고치기를 다시 수행하십시오. 각 포드마다 재시작 횟수가 변경됨을 볼 수 있습니다.
 
     ```
     Liveness probe failed: HTTP probe failed with statuscode: 500
@@ -575,45 +444,50 @@ lastupdated: "2017-12-08"
 
 축하합니다! 앱의 두 번째 버전을 배치했습니다. 보다 적은 명령을 사용해야 했고, 상태 검사의 작동 방법을 알았으며, 배치를 편집했습니다. 대단합니다! Hello world 앱이 PR 회사의 테스트를 통과했습니다. 이제 PR 회사가 보도 자료의 분석을 시작하도록 보다 유용한 앱을 배치할 수 있습니다.
 
-계속하기 전에 작성한 내용을 삭제할 준비가 되었습니까? 지금은 동일한 구성 스크립트를 사용하여 작성된 두 리소스를 모두 삭제할 수 있습니다.
+계속하기 전에 작성한 내용을 삭제할 준비가 되었습니까? 지금 동일한 구성 스크립트를 사용하여 작성된 두 리소스를 모두 삭제할 수 있습니다.
 
-```
-kubectl delete -f <username_home_directory>/container-service-getting-started-wt/Stage2/healthcheck.yml
-```
-{: pre}
+  ```
+  kubectl delete -f healthcheck.yml
+  ```
+  {: pre}
 
-출력:
+  출력:
 
-```
+  ```
 deployment "hw-demo-deployment" deleted
 service "hw-demo-service" deleted
-```
-{: screen}
+  ```
+  {: screen}
+
+<br />
+
 
 ## 학습 3: Watson Tone Analyzer 앱의 배치 및 업데이트
 {: #cs_apps_tutorial_lesson3}
 
-이전 학습에서 앱은 단일 작업자 노드의 단일 컴포넌트로서 배치되었습니다. 이 학습에서는 이전 튜토리얼에서 클러스터에 추가한 Watson Tone Analyzer 서비스를 사용하는 클러스터에 앱의 2개 컴포넌트를 배치합니다. 컴포넌트를 서로 다른 컨테이너로 분리하면 다른 쪽에 영향을 주지 않고 하나를 업데이트할 수 있습니다. 그리고 사용자는 보다 높은 가용성을 구축하기 위해 추가 복제본으로 확장되도록 앱을 업데이트합니다.
+이전 학습에서 앱은 단일 작업자 노드의 단일 컴포넌트로서 배치되었습니다. 이 학습에서는{{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 서비스를 사용하는 두 개의 앱 컴포넌트를 클러스터에 배치할 수 있습니다. 컴포넌트를 서로 다른 컨테이너로 분리하면 다른 쪽에 영향을 주지 않고 하나를 업데이트할 수 있습니다. 그리고 사용자는 보다 높은 가용성을 구축하기 위해 추가 복제본으로 확장되도록 앱을 업데이트합니다.
 {:shortdesc}
 
 다음 다이어그램에는 이 학습을 완료하여 배치한 컴포넌트가 포함됩니다.
 
 ![배치 설정](images/cs_app_tutorial_components3.png)
 
-이전 학습서에서 사용한 계정 및 하나의 작업자 노드가 있는 클러스터가 있습니다. 이 학습서에서는 {{site.data.keyword.Bluemix_notm}} 계정에서 Watson Tone Analyzer 서비스의 인스턴스를 작성하고 두 개의 배치(앱의 각 컴포넌트에 대해 하나씩)를 구성합니다. 각 컴포넌트는 작업자 노드의 Kubernetes 포드에 배치됩니다. 또한 해당 컴포넌트를 둘 다 공용으로 사용 가능하게 하려면 각 컴포넌트에 대해 하나의 Kubernetes 서비스를 작성합니다.
+이전 학습서에서 사용한 계정 및 하나의 작업자 노드가 있는 클러스터가 있습니다. 이 학습에서는 {{site.data.keyword.Bluemix_notm}} 계정에서 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 서비스의 인스턴스를 작성하고 두 개의 배치(앱의 각 컴포넌트마다 하나씩)를 구성합니다. 각 컴포넌트는 작업자 노드의 Kubernetes 포드에 배치됩니다. 또한 해당 컴포넌트를 둘 다 공용으로 사용 가능하게 하려면 각 컴포넌트에 대해 하나의 Kubernetes 서비스를 작성합니다.
 
 
-### 학습 3a: Watson Tone Analyzer 앱 배치
+### 학습 3a: {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 앱 배치
 {: #lesson3a}
 
-1.  CLI에서, 세 번째 앱 디렉토리인 `Stage3`으로 이동하십시오. Windows 또는 OS X용 Docker Toolbox를 사용 중인 경우에는 Docker Quickstart Terminal을 사용하십시오.
+1.  CLI에서 `Lab 3` 디렉토리로 이동하십시오.
 
   ```
-  cd <username_home_directory>/container-service-getting-started-wt/Stage3
+  cd 'container-service-getting-started-wt/Lab 3'
   ```
   {: pre}
 
-2.  첫 번째 {{site.data.keyword.watson}} 이미지를 빌드하십시오.
+2.  새 CLI 세션을 시작한 경우 로그인하여 클러스터 컨텍스트를 설정하십시오.
+
+3.  첫 번째 {{site.data.keyword.watson}} 이미지를 빌드하십시오.
 
     1.  `watson` 디렉토리로 이동하십시오.
 
@@ -622,7 +496,7 @@ service "hw-demo-service" deleted
         ```
         {: pre}
 
-    2.  이미지로서 로컬로 앱의 첫 번째 버전을 빌드하고 태그를 지정하십시오. 역시 명령의 끝에는 반드시 마침표(`.`)를 사용하십시오.
+    2.  이미지로서 로컬로 앱의 첫 번째 버전을 빌드하고 태그를 지정하십시오. 역시 명령의 끝에는 반드시 마침표(`.`)를 사용하십시오. Docker Quickstart Terminal을 사용하여 Docker 명령을 실행 중인 경우 CLI를 전환해야 합니다.
 
         ```
         docker build -t registry.<region>.bluemix.net/<namespace>/watson .
@@ -643,12 +517,12 @@ service "hw-demo-service" deleted
         ```
         {: pre}
 
-3.  두 번째 {{site.data.keyword.watson}}-talk 이미지를 빌드하십시오.
+3.  {{site.data.keyword.watson}}-talk 이미지를 빌드하십시오.
 
     1.  `watson-talk` 디렉토리로 이동하십시오.
 
         ```
-        cd <username_home_directory>/container-service-getting-started-wt/Stage3/watson-talk
+        cd 'container-service-getting-started-wt/Lab 3/watson-talk'
         ```
         {: pre}
 
@@ -673,9 +547,7 @@ service "hw-demo-service" deleted
         ```
         {: pre}
 
-4.  Docker Quickstart Terminal을 사용 중인 경우에는 `KUBECONFIG` 세션 변수의 설정에 사용된 CLI로 다시 전환하십시오.
-
-5.  이미지가 레지스트리 네임스페이스에 정상적으로 추가되었는지 확인하십시오.
+4.  이미지가 레지스트리 네임스페이스에 정상적으로 추가되었는지 확인하십시오. Docker Quickstart Terminal을 사용하여 Docker 명령을 실행한 경우에는 `KUBECONFIG` 세션 변수를 설정하는 데 사용된 CLI로 전환해야 합니다.
 
     ```
     bx cr images
@@ -695,7 +567,7 @@ service "hw-demo-service" deleted
     ```
     {: screen}
 
-6.  텍스트 편집기로 `<username_home_directory>/container-service-getting-started-wt/Stage3/watson-deployment.yml` 파일을 여십시오. 이 구성 스크립트에는 앱의 watson 및 watson-talk 컴포넌트 둘 다에 대한 배치와 서비스가 포함되어 있습니다.
+5.  텍스트 편집기를 사용하여 `Lab 3` 디렉토리에서 `watson-deployment.yml` 파일을 여십시오. 이 구성 스크립트에는 앱의 watson 및 watson-talk 컴포넌트 둘 다에 대한 배치와 서비스가 포함되어 있습니다.
 
     1.  두 배치 모두에 대해 레지스트리 네임스페이스의 이미지에 대한 세부사항을 업데이트하십시오.
 
@@ -733,14 +605,14 @@ service "hw-demo-service" deleted
 
     3.  watson-talk 서비스 섹션에서, `NodePort`에 대해 설정된 값에 주목하십시오. 이 예에서는 30080을 사용합니다.
 
-7.  구성 스크립트를 실행하십시오.
+6.  구성 스크립트를 실행하십시오.
 
   ```
-  kubectl apply -f <username_home_directory>/container-service-getting-started-wt/Stage3/watson-deployment.yml
+  kubectl apply -f watson-deployment.yml
   ```
   {: pre}
 
-8.  선택사항: {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 시크릿이 포드에 대한 볼륨으로 마운트되었는지 확인하십시오.
+7.  선택사항: {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 시크릿이 포드에 대한 볼륨으로 마운트되었는지 확인하십시오.
 
     1.  Watson 포드의 이름을 가져오려면 다음 명령을 실행하십시오.
 
@@ -778,37 +650,20 @@ service "hw-demo-service" deleted
         ```
         {: codeblock}
 
-9.  브라우저를 열고 일부 텍스트를 분석하십시오. IP 주소의 예에서 URL의 형식은 `http://<worker_node_IP_address>:<watson-talk-nodeport>/analyze/"<text_to_analyze>"`입니다. 예:
+8.  브라우저를 열고 일부 텍스트를 분석하십시오. URL의 형식은 `http://<worker_node_IP_address>:<watson-talk-nodeport>/analyze/"<text_to_analyze>"`입니다.
+
+    예:
 
     ```
     http://169.47.227.138:30080/analyze/"Today is a beautiful day"
     ```
-    {: codeblock}
+    {: screen}
 
     브라우저에서 사용자는 입력한 텍스트의 JSON 응답을 볼 수 있습니다.
 
-10. 기본 포트 8001로 Kubernetes 대시보드를 실행하십시오.
+9.  [Kubernetes 대시보드를 실행](cs_app.html#cli_dashboard)하십시오. 사용 중인 Kubernetes 버전에 따라 단계가 다릅니다.
 
-    1.  기본 포트 번호로 프록시를 설정하십시오.
-
-        ```
-        kubectl proxy
-        ```
-        {: pre}
-
-        ```
-        Starting to serve on 127.0.0.1:8001
-        ```
-        {: screen}
-
-    2.  웹 브라우저에서 다음 URL을 열어서 Kubernetes 대시보드를 보십시오.
-
-        ```
-        http://localhost:8001/ui
-        ```
-        {: codeblock}
-
-11. **워크로드** 탭에서, 작성된 리소스를 볼 수 있습니다. Kubernetes 대시보드의 탐색이 완료되면 CTRL+C를 사용하여 `proxy` 명령을 종료하십시오.
+10. **워크로드** 탭에서, 작성된 리소스를 볼 수 있습니다. Kubernetes 대시보드의 탐색이 완료되면 CTRL+C를 사용하여 `proxy` 명령을 종료하십시오.
 
 ### 학습 3b. 실행 중인 Watson Tone Analyzer 배치 업데이트
 {: #lesson3b}
@@ -855,33 +710,37 @@ service "hw-demo-service" deleted
 
 [배운 내용을 테스트하고 퀴즈를 풀어보십시오! ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php)
 
-축하합니다! Watson Tone Analyzer 앱이 배치되었습니다. PR 회사가 확실히 해당 보도 자료의 분석을 시작하기 위해 앱의 이 배치를 사용하기 시작할 수 있습니다.
+축하합니다! {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 앱을 배치했습니다. PR 회사가 확실히 앱의 이 배치를 사용하여 해당 보도 자료의 분석을 시작할 수 있습니다.
 
 작성한 내용을 삭제할 준비가 되었습니까? 구성 스크립트를 사용하여 작성한 리소스를 삭제할 수 있습니다.
 
-```
-kubectl delete -f <username_home_directory>/container-service-getting-started-wt/Stage3/watson-deployment.yml
-```
-{: pre}
+  ```
+  kubectl delete -f watson-deployment.yml
+  ```
+  {: pre}
 
-출력:
+  출력:
 
-```
+  ```
 deployment "watson-pod" deleted
 deployment "watson-talk-pod" deleted
 service "watson-service" deleted
 service "watson-talk-service" deleted
-```
-{: screen}
+  ```
+  {: screen}
 
-클러스터를 유지하기를 원하지 않으면 삭제할 수도 있습니다.
+  클러스터를 유지하기를 원하지 않으면 삭제할 수도 있습니다.
 
-```
+  ```
 bx cs cluster-rm <pr_firm_cluster>
-```
-{: pre}
+  ```
+  {: pre}
 
 ## 다음 단계
 {: #next}
 
-[developerWorks ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/code/journey/category/container-orchestration/)에서 컨테이너 오케스트레이션 과정을 알아보십시오.
+이제 기본사항을 습득했으므로 고급 활동으로 이동할 수 있습니다. 다음 중 하나를 시도해 보십시오.
+
+- 저장소에서 더 복잡한 실험 완료
+- {{site.data.keyword.containershort_notm}}](cs_app.html#app_scaling)를 사용하여 자동으로 앱 스케일링
+- [developerWorks ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")에서 컨테이너 오케스트레이션 과정 탐색](https://developer.ibm.com/code/journey/category/container-orchestration/)

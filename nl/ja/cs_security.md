@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-09"
+lastupdated: "2018-01-29"
 
 ---
 
@@ -15,9 +15,9 @@ lastupdated: "2018-01-09"
 {:tip: .tip}
 {:download: .download}
 
-# このページは移動されました。
+# お探しのコンテンツは移動しました。
 
-以下からセキュリティーに関するトピックを確認してください。
+新しい場所にある最新の情報をご確認ください。
  - [クラスター・コンポーネントによるセキュリティー](cs_secure.html#cluster)
    - [Kubernetes マスター](cs_secure.html#master)
    - [ワーカー・ノード](cs_secure.html#worker)
@@ -31,3 +31,5 @@ lastupdated: "2018-01-09"
  - [Strongswan IPSec VPN サービスの Helm Chart を使用した VPN 接続のセットアップ](cs_vpn.html#vpn)
  - [ネットワーク・ポリシー](cs_network_policy.html#network_policies)
  - [ネットワーク・トラフィックをエッジ・ワーカー・ノードに制限する](cs_edge.html#edge)
+
+

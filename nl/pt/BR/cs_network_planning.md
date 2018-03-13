@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-06"
 
 ---
 
@@ -23,15 +23,15 @@ Ao criar um cluster, cada cluster deve ser conectado a uma VLAN pública. A VLAN
 determina o endereço IP público que é designado a um nó do trabalhador durante a criação de cluster.
 {:shortdesc}
 
-A interface de rede pública para os nós do trabalhador em ambos os clusters lite e padrão é protegida por políticas de rede do Calico. Essas políticas bloqueiam a maior parte do tráfego de entrada por padrão. No entanto, o tráfego de entrada que é necessário para o Kubernetes funcionar é permitida, assim como conexões NodePort, Loadbalancer e os serviços do Ingresso. Para obter mais informações sobre essas políticas, incluindo como modificá-las, consulte [Políticas de rede](cs_network_policy.html#network_policies).
+A interface de rede pública para os nós do trabalhador nos clusters grátis e padrão é protegida por políticas de rede do Calico. Essas políticas bloqueiam a maior parte do tráfego de entrada por padrão. No entanto, o tráfego de entrada que é necessário para o Kubernetes funcionar é permitida, assim como conexões NodePort, Loadbalancer e os serviços do Ingresso. Para obter mais informações sobre essas políticas, incluindo como modificá-las, consulte [Políticas de rede](cs_network_policy.html#network_policies).
 
 |Tipo de cluster|Gerenciador da VLAN pública para o cluster|
 |------------|------------------------------------------|
-|Clusters Lite em {{site.data.keyword.Bluemix_notm}}|{{site.data.keyword.IBM_notm}}|
+|Clusters livres no {{site.data.keyword.Bluemix_notm}}|{{site.data.keyword.IBM_notm}}|
 |Clusters padrão no {{site.data.keyword.Bluemix_notm}}|Você em sua conta de infraestrutura do IBM Cloud (SoftLayer)|
 {: caption="Responsabilidades de gerenciamento da VLAN" caption-side="top"}
 
-
+Para obter informações sobre a comunicação de rede de cluster entre os nós do trabalhador e os pods, veja [Rede de cluster](cs_secure.html#in_cluster_network). Para obter informações sobre como conectar com segurança apps em execução em um cluster do Kubernetes a uma rede no local ou a apps externos para o cluster, veja [Configurando a conectividade de VPN](cs_vpn.html).
 
 ## Permitindo o acesso público a apps
 {: #public_access}
@@ -43,10 +43,10 @@ Para tornar um app publicamente disponível na Internet, deve-se atualizar seu a
 
 ![{{site.data.keyword.containerlong_notm}} Arquitetura do Kubernetes](images/networking.png)
 
-O diagrama mostra como o Kubernetes transporta o tráfego de rede do usuário em {{site.data.keyword.containershort_notm}}. Dependendo de você ter criado um cluster lite ou padrão, existem maneiras diferentes de tornar seu app acessível na Internet.
+O diagrama mostra como o Kubernetes transporta o tráfego de rede do usuário em {{site.data.keyword.containershort_notm}}. Dependendo se você criou um cluster grátis ou padrão, existem diferentes maneiras de tornar seu app acessível na Internet.
 
 <dl>
-<dt><a href="#nodeport" target="_blank">Serviço NodePort</a> (clusters lite e padrão)</dt>
+<dt><a href="#nodeport" target="_blank">Serviço NodePort</a> (clusters grátis e padrão)</dt>
 <dd>
  <ul>
   <li>Exponha uma porta pública em cada nó do trabalhador e use o endereço IP público de qualquer nó do trabalhador para acessar publicamente seu serviço no cluster.</li>
@@ -71,13 +71,12 @@ roteamento de rede de alto desempenho e controle de acesso de rede.</li>
  <ul>
   <li>Exponha múltiplos apps no cluster criando um balanceador de carga HTTP ou HTTPS externo que use um ponto de entrada público assegurado e exclusivo para rotear solicitações recebidas para seus apps.</li>
   <li>É possível usar uma rota pública para expor múltiplos apps em seu cluster como serviços.</li>
-  <li>O Ingresso consiste em três componentes principais: o recurso de Ingresso, o controlador de Ingresso e o balanceador de carga de aplicativo.
+  <li>O Ingresso consiste em dois componentes principais: o recurso de Ingresso e o balanceador de carga de aplicativo.
    <ul>
     <li>O recurso de Ingresso define as regras de como rotear e balancear a carga de solicitações recebidas para um app.</li>
-    <li>O controlador do Ingress permite que o balanceador de carga de aplicativo, que atende o serviço HTTP ou HTTPS, solicite e encaminhe solicitações com base nas regras definidas para cada recurso do Ingress.</li>
-    <li>O carregador do balanceador de carga do aplicativo balanceia solicitações em todos os pods dos apps.
+    <li>O balanceador de carga de aplicativo atende às solicitações de serviço HTTP ou HTTPS recebidas e encaminha as solicitações em pods dos apps com base nas regras definidas para cada recurso de Ingresso.</li>
    </ul>
-  <li>Use Ingresso se desejar implementar seu próprio balanceador de carga com regras de roteamento customizadas e se precisar de finalização SSL para seus apps.</li>
+  <li>Use Ingresso se desejar implementar seu próprio balanceador de carga de aplicativo com regras de roteamento customizado e se precisar de finalização SSL para seus apps.</li>
  </ul>
 </dd></dl>
 
@@ -145,6 +144,8 @@ Suas opções para endereços IP quando você cria um serviço LoadBalancer são
 - Se o seu cluster estiver disponível apenas em uma VLAN privada, então, um endereço IP móvel privado será usado.
 - É possível solicitar um endereço IP público ou privado móvel para um serviço LoadBalancer, incluindo uma anotação no arquivo de configuração: `service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>`.
 
+
+
 Para obter instruções sobre como criar um serviço LoadBalancer com o {{site.data.keyword.containershort_notm}}, veja [Configurando o acesso público a um app usando o tipo de serviço de balanceador de carga](cs_loadbalancer.html#config).
 
 
@@ -159,24 +160,23 @@ O Ingresso permite expor múltiplos serviços em seu cluster e torná-los public
 {:shortdesc}
 
 Em vez de criar um serviço de balanceador de carga para cada app que você desejar expor ao público, o Ingresso fornece uma rota pública exclusiva que permite encaminhar solicitações públicas para apps dentro e fora do seu cluster com base em seus caminhos individuais. O ingresso consiste em dois componentes principais. O
-recurso de Ingresso define as regras de como rotear solicitações recebidas para um app. Todos os recursos de Ingresso devem ser registrados com o controlador de Ingresso que atende a solicitações de serviço HTTP ou HTTPS recebidas e encaminha solicitações com base nas regras definidas para cada recurso de Ingresso.
+recurso de Ingresso define as regras de como rotear solicitações recebidas para um app. Todos os recursos de Ingresso devem ser registrados com o balanceador de carga de aplicativo de Ingresso que atende solicitações de serviço HTTP ou HTTPS recebidas e encaminha as solicitações com base nas regras definidas para cada recurso de Ingresso.
 
-Quando você cria um cluster padrão, o {{site.data.keyword.containershort_notm}} cria automaticamente um controlador do Ingresso altamente disponível para seu cluster e designa uma rota pública exclusiva com o formato `<cluster_name>.<region>.containers.mybluemix.net` a ele. A rota pública está vinculada a um endereço IP público móvel que é provisionado em sua conta de infraestrutura do IBM Cloud (SoftLayer) durante a criação do cluster.
+Ao criar um cluster padrão, o {{site.data.keyword.containershort_notm}} cria automaticamente um balanceador de carga de aplicativo altamente disponível para seu cluster e designa uma rota pública exclusiva com o formato `<cluster_name>.<region>.containers.mybluemix.net` a ele. A rota pública está vinculada a um endereço IP público móvel que é provisionado em sua conta de infraestrutura do IBM Cloud (SoftLayer) durante a criação do cluster. Um balanceador de carga de aplicativo privado também é criado automaticamente, mas não é ativado automaticamente.
 
 O diagrama a seguir mostra como o Ingresso direciona a comunicação da internet para um app:
 
 ![Expor um serviço usando o suporte de ingresso do {{site.data.keyword.containershort_notm}}](images/cs_ingress.png)
 
-Para expor um app por meio de Ingresso, deve-se criar um serviço Kubernetes para seu app e registrá-lo
-com o controlador de Ingresso definindo um recurso de Ingresso. O recurso de Ingresso especifica o caminho que você deseja anexar à rota pública para formar uma URL exclusiva para seu app exposto, como por exemplo: `mycluster.us-south.containers.mybluemix.net/myapp`. Quando você insere essa rota em seu navegador da web, conforme descrito no diagrama, a solicitação é enviada ao endereço IP público móvel vinculado do controlador de Ingresso. O controlador de Ingresso verifica se existe uma regra de roteamento para o caminho `myapp` no
-cluster `mycluster`. Se uma regra de correspondência for localizada, a solicitação incluindo
+Para expor um app por meio de Ingresso, deve-se criar um serviço do Kubernetes para seu app e registrar esse serviço com o balanceador de carga de aplicativo definindo um recurso de Ingresso. O recurso de Ingresso especifica o caminho que você deseja anexar à rota pública para formar uma URL exclusiva para seu app exposto, como `mycluster.us-south.containers.mybluemix.net/myapp`. Quando você insere essa rota em seu navegador da web, conforme descrito no diagrama, a solicitação é enviada ao endereço IP público móvel vinculado do balanceador de carga de aplicativo. O balanceador de carga de aplicativo verifica se uma regra de roteamento para o caminho `myapp` no cluster `mycluster` existe. Se uma regra de correspondência for localizada, a solicitação incluindo
 o caminho individual será encaminhada para o pod no qual o app está implementado, considerando as regras que
 foram definidas no objeto de recurso de Ingresso original. Para que o app processe solicitações
 recebidas, certifique-se de que seu app atenda no caminho individual que você definiu no recurso de
 Ingresso.
 
-É possível configurar o controlador de Ingresso para gerenciar o tráfego de rede recebido para seus apps para os
-cenários a seguir:
+
+
+É possível configurar o balanceador de carga de aplicativo para gerenciar o tráfego de rede recebido para seus apps para os cenários a seguir:
 
 -   Usar o domínio fornecido pela IBM sem finalização TLS
 -   Usar o domínio fornecido pela IBM com finalização TLS

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -26,14 +26,14 @@ lastupdated: "2018-01-12"
 ## NodePort 서비스 유형을 사용하여 앱에 대한 공용 액세스 구성
 {: #config}
 
-라이트 또는 표준 클러스터에 대해 Kubernetes NodePort 서비스로 앱을 노출할 수 있습니다.
+무료 또는 표준 클러스터에 대해 Kubernetes NodePort 서비스로서 앱을 노출할 수 있습니다.
 {:shortdesc}
 
 **참고:** 작업자 노드의 공인 IP 주소는 영구적이지 않습니다. 작업자 노드를 다시 작성해야 하는 경우에는 새 공인 IP 주소가 작업자 노드에 지정됩니다. 서비스에 대한 추가 가용성과 안정적인 공인 IP 주소가 필요한 경우에는 [LoadBalancer 서비스](cs_loadbalancer.html) 또는 [Ingress](cs_ingress.html)를 사용하여 앱을 노출하십시오.
 
-앱이 아직 없는 경우, [Guestbook ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/blob/master/examples/guestbook/all-in-one/guestbook-all-in-one.yaml)이라는 Kubernetes 예제 앱을 사용할 수 있습니다. 
+앱이 아직 없는 경우, [Guestbook ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/blob/master/examples/guestbook/all-in-one/guestbook-all-in-one.yaml)이라는 Kubernetes 예제 앱을 사용할 수 있습니다.
 
-1.  앱의 구성 파일에서 [서비스 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/services-networking/service/) 섹션을 정의하십시오. 
+1.  앱의 구성 파일에서 [서비스 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/services-networking/service/) 섹션을 정의하십시오.
 
     예:
 
@@ -63,11 +63,11 @@ lastupdated: "2018-01-12"
     <tbody>
     <tr>
     <td><code>name</code></td>
-    <td><code><em>&lt;my-nodeport-service&gt;</em></code>를 NodePort 서비스 이름으로 대체합니다. </td>
+    <td><code><em>&lt;my-nodeport-service&gt;</em></code>를 NodePort 서비스 이름으로 대체합니다.</td>
     </tr>
     <tr>
     <td><code> run</code></td>
-    <td><code><em>&lt;my-demo&gt;</em></code>를 배치 이름으로 대체합니다. </td>
+    <td><code><em>&lt;my-demo&gt;</em></code>를 배치 이름으로 대체합니다.</td>
     </tr>
     <tr>
     <td><code>port</code></td>
@@ -75,12 +75,12 @@ lastupdated: "2018-01-12"
      </tr>
      <tr>
      <td><code>nodePort</code></td>
-     <td>선택사항: <code><em>&lt;31514&gt;</em></code>를 30000 - 32767 범위의 NodePort로 대체합니다. 다른 서비스에서 이미 사용 중인 NodePort는 지정하지 마십시오. NodePort가 지정되지 않으면 사용자를 위해 임의로 지정됩니다.<br><br>NodePort를 지정하며 이미 사용 중인 NodePort를 보려는 경우에는 다음 명령을 실행할 수 있습니다. <pre class="pre"><code>kubectl get svc</code></pre>사용 중인 모든 NodePort가 **Ports** 필드 아래에 표시됩니다. </td>
+     <td>선택사항: <code><em>&lt;31514&gt;</em></code>를 30000 - 32767 범위의 NodePort로 대체합니다. 다른 서비스에서 이미 사용 중인 NodePort는 지정하지 마십시오. NodePort가 지정되지 않으면 사용자를 위해 임의로 지정됩니다.<br><br>NodePort를 지정하며 이미 사용 중인 NodePort를 보려는 경우에는 다음 명령을 실행할 수 있습니다. <pre class="pre"><code>kubectl get svc</code></pre>사용 중인 모든 NodePort가 **Ports** 필드 아래에 표시됩니다.</td>
      </tr>
      </tbody></table>
 
 
-    Guestbook 예제의 경우, 구성 파일에 프론트 엔드 서비스 섹션이 이미 있습니다. Guestbook 앱을 외부에서 사용하려면 NodePort 유형과 30000 - 32767 범위의 NodePort를 프론트 엔드 서비스 섹션에 추가하십시오. 
+    Guestbook 예제의 경우, 구성 파일에 프론트 엔드 서비스 섹션이 이미 있습니다. Guestbook 앱을 외부에서 사용하려면 NodePort 유형과 30000 - 32767 범위의 NodePort를 프론트 엔드 서비스 섹션에 추가하십시오.
 
     ```
     apiVersion: v1
@@ -101,9 +101,9 @@ lastupdated: "2018-01-12"
     ```
     {: codeblock}
 
-2.  업데이트된 구성 파일을 저장하십시오. 
+2.  업데이트된 구성 파일을 저장하십시오.
 
-3.  이러한 단계를 반복하여 인터넷에 노출할 개별 앱의 NodePort 서비스를 작성하십시오. 
+3.  이러한 단계를 반복하여 인터넷에 노출할 개별 앱의 NodePort 서비스를 작성하십시오.
 
 **다음 단계:**
 

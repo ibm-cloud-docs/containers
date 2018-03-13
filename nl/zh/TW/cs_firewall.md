@@ -169,7 +169,7 @@ lastupdated: "2018-01-11"
 ## 容許叢集存取基礎架構資源及其他服務
 {: #firewall_outbound}
 
-讓您的叢集從防火牆之後存取基礎架構資源及服務，例如 {{.site.data.keyword.containershort_notm}} 地區、{{site.data.keyword.registrylong_notm}}、{{site.data.keyword.monitoringlong_notm}}、{{site.data.keyword.loganalysislong_notm}}、IBM Cloud 基礎架構 (SoftLayer) 專用 IP，以及持續性磁區要求的出口。
+讓您的叢集從防火牆之後存取基礎架構資源及服務，例如 {{site.data.keyword.containershort_notm}} 地區、{{site.data.keyword.registrylong_notm}}、{{site.data.keyword.monitoringlong_notm}}、{{site.data.keyword.loganalysislong_notm}}、IBM Cloud 基礎架構 (SoftLayer) 專用 IP，以及持續性磁區要求的出口。
 {:shortdesc}
 
   1.  記下叢集中所有工作者節點的公用 IP 位址。
@@ -191,8 +191,8 @@ lastupdated: "2018-01-11"
     <tbody>
       <tr>
         <td>亞太地區北部</td>
-        <td>hkg02<br>sng01<br>tok02</td>
-        <td><code>169.56.132.234</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
+        <td>hkg02<br>seo01<br>sng01<br>tok02</td>
+        <td><code>169.56.132.234</code><br><code>161.202.126.210</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
        </tr>
       <tr>
          <td>亞太地區南部</td>
@@ -211,13 +211,13 @@ lastupdated: "2018-01-11"
       </tr>
       <tr>
         <td>美國東部</td>
-         <td><ph class="mon">mon01<br></ph>tor01<br>wdc06<br>wdc07</td>
-         <td><ph class ="mon"><code>169.54.126.219</code><br></ph><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+         <td>mon01<br>tor01<br>wdc06<br>wdc07</td>
+         <td><code>169.54.126.219</code><br><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
       </tr>
       <tr>
         <td>美國南部</td>
-        <td>dal10<br>dal12<br>dal13</td>
-        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
+        <td>dal10<br>dal12<br>dal13<br>sao01</td>
+        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>169.57.151.10</code></td>
       </tr>
       </tbody>
     </table>
@@ -225,7 +225,7 @@ lastupdated: "2018-01-11"
 
   3.  容許從工作者節點到 [{{site.data.keyword.registrylong_notm}} 地區](/docs/services/Registry/registry_overview.html#registry_regions)的送出網路資料流量：
       - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
-      - 將 <em>&lt;registry_publicIP&gt;</em> 取代為您要容許資料流量的登錄 IP 位址。國際登錄會儲存 IBM 提供的公用映像檔，地區登錄會儲存您自己的專用或公用映像檔。
+      - 將 <em>&lt;registry_publicIP&gt;</em> 取代為您要容許資料流量的登錄 IP 位址。全球登錄會儲存 IBM 提供的公用映像檔，地區登錄會儲存您自己的專用或公用映像檔。
         <p>
 <table summary="表格中的第一列跨這兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器位置，第二欄則為要符合的 IP 位址。">
   <thead>
@@ -235,7 +235,7 @@ lastupdated: "2018-01-11"
       </thead>
       <tbody>
         <tr>
-          <td>跨容器地區的國際登錄</td>
+          <td>跨容器地區的全球登錄</td>
           <td>registry.bluemix.net</td>
           <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
         </tr>
@@ -307,7 +307,12 @@ lastupdated: "2018-01-11"
             <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
            </tr>
           <tr>
-           <td>歐盟中部、英國南部</td>
+           <td>英國南部</td>
+           <td>ingest.logging.eu-gb.bluemix.net</td>
+           <td><code>169.50.115.113</code></td>
+          </tr>
+          <tr>
+           <td>歐盟中部</td>
            <td>ingest-eu-fra.logging.bluemix.net</td>
            <td><code>158.177.88.43</code><br><code>159.122.87.107</code></td>
           </tr>

@@ -16,9 +16,9 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# 이 페이지는 이동했습니다! 
+# 찾고 있는 컨텐츠가 이동되었습니다.
 
-주제는 다음과 같습니다. 
+새 위치에서 최신 정보를 확인하십시오.
 - [Kubernetes 대시보드 실행](cs_app.html#cli_dashboard)
 - [시크릿 작성](cs_app.html#secrets)
 - [앱에 대한 공용 액세스 허용](cs_network_planning.html#planning)

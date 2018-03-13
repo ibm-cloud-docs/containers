@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -36,14 +36,14 @@ Aprenda as etapas gerais para implementar apps clicando em uma área da imagem a
 <br />
 
 
-## Planejamento de implementação
+## Planejando implementações altamente disponíveis
 {: #highly_available_apps}
 
 Quanto mais amplamente você distribui a configuração entre múltiplos nós do trabalhador e clusters,
 menos provável que os usuários tenham que experimentar tempo de inatividade com seu app.
-{:shortdesc}
 
-Revise estas configurações de app em potencial que são ordenadas com graus crescentes de disponibilidade:
+Revise as potenciais configurações de app a seguir que são ordenadas com graus crescentes de disponibilidade.
+{:shortdesc}
 
 ![Estágios de alta disponibilidade para um app](images/cs_app_ha_roadmap.png)
 
@@ -156,7 +156,7 @@ Para obter mais detalhes, revise as opções para <a href="cs_clusters.html#plan
 ### Implementação de app mínimo
 {: #minimal_app_deployment}
 
-Uma implementação básica do app em um cluster lite ou padrão pode incluir os componentes a seguir.
+Uma implementação básica de app em um cluster grátis ou padrão pode incluir os componentes a seguir.
 {:shortdesc}
 
 ![Configuração de implementação](images/cs_app_tutorial_components1.png)

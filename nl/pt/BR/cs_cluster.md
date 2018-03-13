@@ -17,9 +17,9 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# Essa página foi movida!
+# O conteúdo que você está procurando foi movido.
 
-Localize os tópicos aqui:
+Verifique as informações mais recentes em seu novo local:
 - [Criando clusters com a GUI](cs_clusters.html#clusters_ui)
 - [Criando clusters com a CLI](cs_clusters.html#clusters_cli)
 - [Usando registros de imagem privada e pública](cs_images.html#images)

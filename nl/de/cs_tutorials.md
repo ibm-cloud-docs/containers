@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-13"
+lastupdated: "2017-01-29"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -52,17 +52,16 @@ Dieses Lernprogramm ist für Softwareentwickler und Netzadministratoren konzipie
 -  Ein nutzungsabhängiges [{{site.data.keyword.Bluemix_notm}}-Konto oder ein Abonnementkonto ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/registration/)
 
 
-
-
 ## Lerneinheit 1: Cluster erstellen und CLI einrichten
 {: #cs_cluster_tutorial_lesson1}
 
-Erstellen Sie Ihren Cluster in der GUI und installieren Sie die erforderlichen CLIs. Für das vorliegende Lernprogramm müssen Sie Ihren Cluster in der Region 'Großbritannien (Süden)' erstellen.
+Erstellen Sie Ihren Cluster in der GUI und installieren Sie die erforderlichen CLIs.
+{: shortdesc}
 
 
 Gehen Sie wie folgt vor, um Ihren Cluster zu erstellen:
 
-1. Die Bereitstellung Ihres Clusters kann einige Minuten dauern. Um diese Zeit optimal zu nutzen, sollten Sie [Ihren Cluster erstellen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/containers-kubernetes/launch?env_id=ibm:yp:united-kingdom), bevor Sie die CLIs installieren. Ein Lite-Cluster ist mit einem Workerknoten ausgestattet, in dem Container-Pods bereitgestellt werden können. Ein Workerknoten ist der Rechenhost (normalerweise eine virtuelle Maschine), auf dem Ihre Apps ausgeführt werden.
+1. Die Bereitstellung Ihres Clusters kann einige Minuten dauern. Um diese Zeit optimal zu nutzen, sollten Sie [Ihren Cluster in der GUI erstellen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/containers-kubernetes/launch?env_id=ibm:yp:united-kingdom), bevor Sie die CLIs installieren. Für das vorliegende Lernprogramm erstellen Sie Ihren Cluster in der Region 'Vereinigte Staaten (Osten)'.
 
 
 Die folgenden CLIs und die zugehörigen Voraussetzungen werden verwendet, um Cluster über die CLI zu verwalten:
@@ -73,7 +72,7 @@ Die folgenden CLIs und die zugehörigen Voraussetzungen werden verwendet, um Clu
 -   Docker-CLI
 
 </br>
-Gehen Sie wie folgt vor, um die Befehlszeilenschnittstellen (CLIs) zu installieren:
+Gehen Sie wie folgt vor, um die CLIs (Befehlszeilenschnittstellen) und die zugehörigen Voraussetzungen zu installieren:
 
 1.  Als Voraussetzung für das {{site.data.keyword.containershort_notm}}-Plug-in müssen Sie die [{{site.data.keyword.Bluemix_notm}}-CLI ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://clis.ng.bluemix.net/ui/home.html) installieren. Verwenden Sie zur Ausführung von {{site.data.keyword.Bluemix_notm}}-CLI-Befehlen das Präfix `bx`.
 2.  Folgen Sie den Eingabeaufforderungen, um ein Konto und eine {{site.data.keyword.Bluemix_notm}}-Organisation auszuwählen. Cluster sind zwar kontospezifisch, besitzen jedoch keine Abhängigkeit zu einer {{site.data.keyword.Bluemix_notm}}-Organisation oder einem Bluemix-Bereich.
@@ -86,7 +85,7 @@ Gehen Sie wie folgt vor, um die Befehlszeilenschnittstellen (CLIs) zu installier
     {: pre}
 
 5.  Um eine lokale Version des Kubernetes-Dashboards anzuzeigen und Apps in Ihren Clustern bereitzustellen, müssen Sie die [Kubernetes-CLI installieren ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Um Befehle über die Kubernetes-CLI auszuführen, müssen Sie das Präfix `kubectl` verwenden.
-    1.  Zur Erreichung der vollständigen funktionalen Kompatibilität müssen Sie die Kubernetes-CLI-Version herunterladen, die mit der Version des Kubernetes-Clusters übereinstimmt, die verwendet werden soll. Die aktuelle standardmäßige Kubernetes-Version für {{site.data.keyword.containershort_notm}} lautet 1.7.4.
+    1.  Zur Erreichung der vollständigen funktionalen Kompatibilität müssen Sie die Kubernetes-CLI-Version herunterladen, die mit der Version des Kubernetes-Clusters übereinstimmt, die verwendet werden soll. Die aktuelle standardmäßige Kubernetes-Version für {{site.data.keyword.containershort_notm}} ist die Version 1.8.6.
 
         OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
 
@@ -139,12 +138,11 @@ Gehen Sie wie folgt vor, um die Befehlszeilenschnittstellen (CLIs) zu installier
     ```
     {: pre}
 
-7. Um Images lokal zu erstellen und per Push-Operation an das private Image-Repository zu übertragen, müssen Sie die [Docker CE-CLI installieren ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.docker.com/community-edition#/download). Wenn Sie Windows 8 oder älter verwenden, können Sie stattdessen [Docker Toolbox ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.docker.com/products/docker-toolbox) installieren.
+7. Um Images lokal zu erstellen und per Push-Operation an das private Image-Repository zu übertragen, müssen Sie die [Docker CE-CLI installieren ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.docker.com/community-edition#/download). Wenn Sie Windows 8 oder älter verwenden, können Sie stattdessen [Docker Toolbox ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.docker.com/toolbox/toolbox_install_windows/) installieren.
 
 Glückwunsch! Sie haben die CLIs für die folgenden Lerneinheiten und Lernprogramme erfolgreich installiert. Als Nächstes werden Sie die Clusterumgebung einrichten und den {{site.data.keyword.toneanalyzershort}}-Service hinzufügen.
 
-
-## Lerneinheit 2: Clusterumgebung einrichten
+## Lerneinheit 2: Private Registry einrichten
 {: #cs_cluster_tutorial_lesson2}
 
 Richten Sie ein privates Image-Repository in {{site.data.keyword.registryshort_notm}} ein und fügen Sie geheime Schlüssel zu Ihrem Cluster hinzu, sodass die App auf den {{site.data.keyword.toneanalyzershort}}-Service zugreifen kann.
@@ -160,8 +158,7 @@ Richten Sie ein privates Image-Repository in {{site.data.keyword.registryshort_n
 
 2.  Richten Sie Ihr eigenes privates Image-Repository in {{site.data.keyword.registryshort_notm}} ein, um Docker-Images sicher zu speichern und mit allen Benutzern des Clusters gemeinsam nutzen zu können. In {{site.data.keyword.Bluemix_notm}} ist ein privates Image-Repository durch einen Namensbereich gekennzeichnet. Der Namensbereich dient der Erstellung einer eindeutigen URL zu Ihrem Image-Repository, das Entwickler für den Zugriff auf private Docker-Images verwenden können.
 
-    Im vorliegenden Beispiel will das PR-Unternehmen lediglich ein Image-Repository in {{site.data.keyword.registryshort_notm}} erstellen und wählt daher _pr-unternehmen_ als Namensbereich aus, um alle Images im Konto zu gruppieren. Ersetzen Sie den Platzhalter _&lt;ihr_namensbereich&gt;_ durch einen Namensbereich Ihrer Wahl
-und nicht durch eine Angabe, die sich auf das Lernprogramm bezieht.
+    Im vorliegenden Beispiel will das PR-Unternehmen lediglich ein Image-Repository in {{site.data.keyword.registryshort_notm}} erstellen und wählt daher _pr-unternehmen_ als Namensbereich aus, um alle Images im Konto zu gruppieren. Ersetzen Sie _&lt;ihr_namensbereich&gt;_ durch einen Namensbereich Ihrer Wahl, der sich nicht auf das Lernprogramm bezieht.
 
     ```
     bx cr namespace-add <ihr_namensbereich>
@@ -175,7 +172,7 @@ und nicht durch eine Angabe, die sich auf das Lernprogramm bezieht.
     ```
      {: pre}
 
-    Wenn die Bereitstellung Ihres Workerknoten abgeschlossen ist, wechselt der Status zu **Bereit**. Sie können nun mit dem Binden von {{site.data.keyword.Bluemix_notm}}-Services zur Verwendung in einem späteren Lernprogramm beginnen.
+    Wenn die Bereitstellung Ihres Workerknotens abgeschlossen ist, wechselt der Status zu **Bereit**. Sie können nun mit dem Binden von {{site.data.keyword.Bluemix_notm}}-Services beginnen.
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status
@@ -183,88 +180,95 @@ und nicht durch eine Angabe, die sich auf das Lernprogramm bezieht.
     ```
     {: screen}
 
-4.  Legen Sie in Ihrer CLI (Befehlszeilenschnittstelle) den Kontext für Ihren Cluster fest. Jedes Mal, wenn Sie sich an der Container-CLI anmelden, um mit Clustern zu arbeiten, müssen Sie diese Befehle ausführen, um den Pfad zu der Konfigurationsdatei des Clusters als Sitzungsvariable festzulegen. Anhand dieser Variablen sucht die Kubernetes-CLI eine lokale Konfigurationsdatei und Zertifikate, die zum Herstellen der Verbindung zum Cluster in {{site.data.keyword.Bluemix_notm}} erforderlich sind.
+## Lerneinheit 3: Clusterumgebung einrichten
+{: #cs_cluster_tutorial_lesson3}
 
-    1.  Ermitteln Sie den Befehl zum Festlegen der Umgebungsvariablen und laden Sie die Kubernetes-Konfigurationsdateien herunter.
+Legen Sie in Ihrer CLI (Befehlszeilenschnittstelle) den Kontext für Ihren Cluster fest. Jedes Mal, wenn Sie sich an der Container-CLI anmelden, um mit Clustern zu arbeiten, müssen Sie diese Befehle ausführen, um den Pfad zu der Konfigurationsdatei des Clusters als Sitzungsvariable festzulegen. Anhand dieser Variablen sucht die Kubernetes-CLI eine lokale Konfigurationsdatei und Zertifikate, die zum Herstellen der Verbindung zum Cluster in {{site.data.keyword.Bluemix_notm}} erforderlich sind.
 
-        ```
-        bx cs cluster-config <clustername>
-        ```
-        {: pre}
+1.  Ermitteln Sie den Befehl zum Festlegen der Umgebungsvariablen und laden Sie die Kubernetes-Konfigurationsdateien herunter.
 
-        Wenn
+    ```
+    bx cs cluster-config <clustername>
+    ```
+    {: pre}
+
+    Wenn
 der Download der Konfigurationsdateien abgeschlossen ist, wird ein Befehl angezeigt, den Sie verwenden können,
 um den Pfad zu der lokalen Kubernetes-Konfigurationsdatei als Umgebungsvariable festzulegen.
 
-        Beispiel für OS X:
+    Beispiel für OS X:
 
-        ```
-        export KUBECONFIG=/Users/<benutzername>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
-        ```
-        {: screen}
+    ```
+    export KUBECONFIG=/Users/<benutzername>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
+    ```
+    {: screen}
 
-    2.  Kopieren Sie den Befehl, der in Ihrem Terminal angezeigt wird, um die Umgebungsvariable `KUBECONFIG` festzulegen.
+2.  Kopieren Sie den Befehl, der in Ihrem Terminal angezeigt wird, um die Umgebungsvariable `KUBECONFIG` festzulegen.
 
-    3.  Stellen Sie sicher, dass die Umgebungsvariable `KUBECONFIG` richtig eingestellt ist.
+3.  Stellen Sie sicher, dass die Umgebungsvariable `KUBECONFIG` richtig eingestellt ist.
 
-        Beispiel für OS X:
+    Beispiel für OS X:
 
-        ```
-        echo $KUBECONFIG
-        ```
-        {: pre}
+    ```
+    echo $KUBECONFIG
+    ```
+    {: pre}
 
-        Ausgabe:
+    Ausgabe:
 
-        ```
-        /Users/<benutzername>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
-        ```
-        {: screen}
+    ```
+    /Users/<benutzername>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
+    ```
+    {: screen}
 
-    4.  Stellen Sie sicher, dass die `kubectl`-Befehle mit Ihrem Cluster ordnungsgemäß ausgeführt werden. Überprüfen Sie dazu die Serverversion der Kubernetes-CLI wie folgt.
+4.  Stellen Sie sicher, dass die `kubectl`-Befehle mit Ihrem Cluster ordnungsgemäß ausgeführt werden. Überprüfen Sie dazu die Serverversion der Kubernetes-CLI wie folgt.
 
-        ```
-        kubectl version  --short
-        ```
-        {: pre}
+    ```
+    kubectl version  --short
+    ```
+    {: pre}
 
-        Beispielausgabe:
+    Beispielausgabe:
 
-        ```
-        Client Version: v1.7.4
-        Server Version: v1.7.4
-        ```
-        {: screen}
+    ```
+    Client Version: v1.8.6
+    Server Version: v1.8.6
+    ```
+    {: screen}
 
-5.  Fügen Sie den {{site.data.keyword.toneanalyzershort}}-Service zum Cluster hinzu. Mit den {{site.data.keyword.Bluemix_notm}}-Services können Sie bereits entwickelte Funktionen in Ihren Apps nutzen. Jeder an den Cluster gebundene {{site.data.keyword.Bluemix_notm}}-Service kann von jeder App genutzt werden, die in diesem Cluster bereitgestellt ist. Wiederholen Sie die folgenden Schritte für jeden {{site.data.keyword.Bluemix_notm}}-Service, den Sie in Verbindung mit Ihren Apps verwenden wollen.
-    1.  Fügen Sie den {{site.data.keyword.toneanalyzershort}}-Service zu Ihrem {{site.data.keyword.Bluemix_notm}}-Konto hinzu.
+## Lerneinheit 4: Einen Service zum Cluster hinzufügen
+{: #cs_cluster_tutorial_lesson4}
 
-        **Hinweis:** Wenn Sie den {{site.data.keyword.toneanalyzershort}}-Service zu Ihrem Konto hinzufügen, wird eine Nachricht mit dem Inhalt angezeigt, dass der Service nicht kostenlos ist. Wenn Sie Ihren API-Aufruf einschränken, entstehen im Rahmen dieses Lernprogramms keine Kosten durch den {{site.data.keyword.watson}}-Service. [Informieren Sie sich über die Preisinformationen für den {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}-Service ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/watson/developercloud/tone-analyzer.html#pricing-block).
+Mit den {{site.data.keyword.Bluemix_notm}}-Services können Sie bereits entwickelte Funktionen in Ihren Apps nutzen. Jeder an den Cluster gebundene {{site.data.keyword.Bluemix_notm}}-Service kann von jeder App genutzt werden, die in diesem Cluster bereitgestellt ist. Wiederholen Sie die folgenden Schritte für jeden {{site.data.keyword.Bluemix_notm}}-Service, den Sie in Verbindung mit Ihren Apps verwenden wollen.
 
-        ```
-        bx service create tone_analyzer standard <mein_tone_analyzer>
-        ```
-        {: pre}
+1.  Fügen Sie den {{site.data.keyword.toneanalyzershort}}-Service zu Ihrem {{site.data.keyword.Bluemix_notm}}-Konto hinzu.
 
-    2.  Binden Sie die {{site.data.keyword.toneanalyzershort}}-Instanz an den Kubernetes-Standardnamensbereich (`default`) für den Cluster. Später können Sie Ihren eigenen Namensbereich erstellen, um Benutzerzugriff auf Kubernetes-Ressourcen zu verwalten. Aber für den Moment müssen Sie den Namensbereich `default` verwenden. Kubernetes-Namensbereiche unterscheiden sich von dem Registry-Namensbereich, den Sie davor erstellt haben.
+    **Hinweis:** Wenn Sie den {{site.data.keyword.toneanalyzershort}}-Service zu Ihrem Konto hinzufügen, wird eine Nachricht mit dem Inhalt angezeigt, dass der Service nicht kostenlos ist. Wenn Sie Ihren API-Aufruf einschränken, entstehen im Rahmen dieses Lernprogramms keine Kosten durch den {{site.data.keyword.watson}}-Service. [Informieren Sie sich über die Preisinformationen für den {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}-Service ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/watson/developercloud/tone-analyzer.html#pricing-block).
 
-        ```
-        bx cs cluster-service-bind <clustername> default <mein_tone_analyzer>
-        ```
-        {: pre}
+    ```
+    bx service create tone_analyzer standard <mein_tone_analyzer>
+    ```
+    {: pre}
 
-        Ausgabe:
+2.  Binden Sie die {{site.data.keyword.toneanalyzershort}}-Instanz an den Kubernetes-Standardnamensbereich (`default`) für den Cluster. Später können Sie Ihren eigenen Namensbereich erstellen, um Benutzerzugriff auf Kubernetes-Ressourcen zu verwalten. Aber für den Moment müssen Sie den Namensbereich `default` verwenden. Kubernetes-Namensbereiche unterscheiden sich von dem Registry-Namensbereich, den Sie davor erstellt haben.
 
-        ```
-        bx cs cluster-service-bind <clustername> default <mein_tone_analyzer>
+    ```
+    bx cs cluster-service-bind <clustername> default <mein_tone_analyzer>
+    ```
+    {: pre}
+
+    Ausgabe:
+
+    ```
+    bx cs cluster-service-bind <clustername> default <mein_tone_analyzer>
         Binding service instance to namespace...
         OK
         Namespace:	default
         Secret name:	binding-mytoneanalyzer
-        ```
-        {: screen}
+    ```
+    {: screen}
 
-6.  Stellen Sie sicher, dass der geheime Kubernetes-Schlüssel im Namensbereich Ihres Clusters erstellt wurde. Jeder {{site.data.keyword.Bluemix_notm}}-Service ist durch eine JSON-Datei definiert, die vertrauliche Informationen zu diesem Service wie zum Beispiel den Benutzernamen, das Kennwort und die URL enthält, über die der Container auf den Service zugreift. Kubernetes verwendet geheime Schlüssel, um diese Informationen sicher zu speichern. Im vorliegenden Beispiel enthält der geheime Schlüssel die Berechtigungsnachweise für den Zugriff auf die {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}-Instanz, die in Ihrem Konto bereitgestellt wird.
+3.  Stellen Sie sicher, dass der geheime Kubernetes-Schlüssel im Namensbereich Ihres Clusters erstellt wurde. Jeder {{site.data.keyword.Bluemix_notm}}-Service ist durch eine JSON-Datei definiert, die vertrauliche Informationen zu diesem Service wie zum Beispiel den Benutzernamen, das Kennwort und die URL enthält, über die der Container auf den Service zugreift. Kubernetes verwendet geheime Schlüssel, um diese Informationen sicher zu speichern. Im vorliegenden Beispiel enthält der geheime Schlüssel die Berechtigungsnachweise für den Zugriff auf die {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}-Instanz, die in Ihrem Konto bereitgestellt wird.
 
     ```
     kubectl get secrets --namespace=default

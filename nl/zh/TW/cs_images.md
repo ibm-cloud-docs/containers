@@ -57,9 +57,9 @@ Docker 映像檔是您建立的每個容器的基礎。映像檔是從 Dockerfil
 2. [建立叢集](cs_clusters.html#clusters_cli)。
 3. [將 CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。
 
-當您建立叢集時，會自動為[最近的地區登錄和國際登錄](/docs/services/Registry/registry_overview.html#registry_regions)建立不會過期的登錄記號與 Secret。國際登錄會安全地儲存公用、IBM 提供的映像檔，您可以在各部署之間參照它們，而不必針對每個地區登錄中儲存的映像檔有不同的參照。地區登錄會安全地儲存您自己的專用 Docker 映像檔，以及國際登錄中儲存的相同公用映像檔。記號用來授權 {{site.data.keyword.registryshort_notm}} 中所設定的任何名稱空間的唯讀存取，因此您可以使用這些公用（國際登錄）及專用（地區登錄）映像檔。
+當您建立叢集時，會自動為[最近的地區登錄和全球登錄](/docs/services/Registry/registry_overview.html#registry_regions)建立不會過期的登錄記號與 Secret。全球登錄會安全地儲存公用、IBM 提供的映像檔，您可以在各部署之間參照它們，而不必針對每個地區登錄中儲存的映像檔有不同的參照。地區登錄會安全地儲存您自己的專用 Docker 映像檔，以及全球登錄中儲存的相同公用映像檔。記號用來授權 {{site.data.keyword.registryshort_notm}} 中所設定的任何名稱空間的唯讀存取，因此您可以使用這些公用（全球登錄）及專用（地區登錄）映像檔。
 
-當您部署容器化應用程式時，每個記號必須儲存在 Kubernetes `imagePullSecret` 中，才能供 Kubernetes 叢集存取。建立叢集時，{{site.data.keyword.containershort_notm}} 會自動將國際（IBM 提供之公用映像檔）與地區登錄的記號儲存在 Kubernetes 映像檔取回 Secret 中。映像檔取回 Secret 會新增至 `default` Kubernetes 名稱空間、該名稱空間的 `ServiceAccount` 中的預設 Secret 清單，以及 `kube-system` 名稱空間。
+當您部署容器化應用程式時，每個記號必須儲存在 Kubernetes `imagePullSecret` 中，才能供 Kubernetes 叢集存取。建立叢集時，{{site.data.keyword.containershort_notm}} 會自動將全球（IBM 提供之公用映像檔）與地區登錄的記號儲存在 Kubernetes 映像檔取回 Secret 中。映像檔取回 Secret 會新增至 `default` Kubernetes 名稱空間、該名稱空間的 `ServiceAccount` 中的預設 Secret 清單，以及 `kube-system` 名稱空間。
 
 **附註：**使用此起始設定，即可將容器從 {{site.data.keyword.Bluemix_notm}} 帳戶之名稱空間中可用的任何映像檔，部署至叢集的 **default** 名稱空間。如果您要將容器部署至叢集的其他名稱空間，或者要使用儲存在另一個 {{site.data.keyword.Bluemix_notm}} 地區或另一個 {{site.data.keyword.Bluemix_notm}} 帳戶中的映像檔，則必須[為叢集建立您自己的 imagePullSecret](#other)。
 
@@ -158,27 +158,27 @@ Docker 映像檔是您建立的每個容器的基礎。映像檔是從 Dockerfil
     <tbody>
     <tr>
     <td><code>--namespace <em>&lt;kubernetes_namespace&gt;</em></code></td>
-    <td>必要項目。您要使用 Secret 並在其中部署容器的叢集的 Kubernetes 名稱空間。執行 <code>kubectl get namespaces</code>，以列出叢集中的所有名稱空間。</td>
+    <td>必要。您要使用 Secret 並在其中部署容器的叢集的 Kubernetes 名稱空間。執行 <code>kubectl get namespaces</code>，以列出叢集中的所有名稱空間。</td>
     </tr>
     <tr>
     <td><code><em>&lt;secret_name&gt;</em></code></td>
-    <td>必要項目。您要用於 imagePullSecret 的名稱。</td>
+    <td>必要。您要用於 imagePullSecret 的名稱。</td>
     </tr>
     <tr>
     <td><code>--docker-server <em>&lt;registry_url&gt;</em></code></td>
-    <td>必要項目。已設定名稱空間的映像檔登錄的 URL。<ul><li>對於美國南部及美國東部所設定的名稱空間：registry.ng.bluemix.net</li><li>對於英國南部所設定的名稱空間：registry.eu-gb.bluemix.net</li><li>對於歐盟中部（法蘭克福）所設定的名稱空間：registry.eu-de.bluemix.net</li><li>對於澳洲（雪梨）所設定的名稱空間：registry.au-syd.bluemix.net</li><li>對於 {{site.data.keyword.Bluemix_dedicated_notm}} 所設定的名稱空間：registry.<em>&lt;dedicated_domain&gt;</em></li></ul></td>
+    <td>必要。已設定名稱空間的映像檔登錄的 URL。<ul><li>對於美國南部及美國東部所設定的名稱空間：registry.ng.bluemix.net</li><li>對於英國南部所設定的名稱空間：registry.eu-gb.bluemix.net</li><li>對於歐盟中部（法蘭克福）所設定的名稱空間：registry.eu-de.bluemix.net</li><li>對於澳洲（雪梨）所設定的名稱空間：registry.au-syd.bluemix.net</li><li>對於 {{site.data.keyword.Bluemix_dedicated_notm}} 所設定的名稱空間：registry.<em>&lt;dedicated_domain&gt;</em></li></ul></td>
     </tr>
     <tr>
     <td><code>--docker-username <em>&lt;docker_username&gt;</em></code></td>
-    <td>必要項目。登入專用登錄的使用者名稱。對於 {{site.data.keyword.registryshort_notm}}，使用者名稱會設為 <code>token</code>。</td>
+    <td>必要。登入專用登錄的使用者名稱。對於 {{site.data.keyword.registryshort_notm}}，使用者名稱會設為 <code>token</code>。</td>
     </tr>
     <tr>
     <td><code>--docker-password <em>&lt;token_value&gt;</em></code></td>
-    <td>必要項目。先前所擷取的登錄記號值。</td>
+    <td>必要。先前所擷取的登錄記號值。</td>
     </tr>
     <tr>
     <td><code>--docker-email <em>&lt;docker-email&gt;</em></code></td>
-    <td>必要項目。如果您有 Docker 電子郵件位址，請輸入它。否則，請輸入虛構的電子郵件位址，例如 a@b.c。此電子郵件是建立 Kubernetes Secret 的必要項目，但在建立之後就不再使用。</td>
+    <td>必要。如果您有 Docker 電子郵件位址，請輸入它。否則，請輸入虛構的電子郵件位址，例如 a@b.c。此電子郵件是建立 Kubernetes Secret 的必要項目，但在建立之後就不再使用。</td>
     </tr>
     </tbody></table>
 
@@ -348,27 +348,27 @@ Docker 映像檔是您建立的每個容器的基礎。映像檔是從 Dockerfil
     <tbody>
     <tr>
     <td><code>--namespace <em>&lt;kubernetes_namespace&gt;</em></code></td>
-    <td>必要項目。您要使用 Secret 並在其中部署容器的叢集的 Kubernetes 名稱空間。執行 <code>kubectl get namespaces</code>，以列出叢集中的所有名稱空間。</td>
+    <td>必要。您要使用 Secret 並在其中部署容器的叢集的 Kubernetes 名稱空間。執行 <code>kubectl get namespaces</code>，以列出叢集中的所有名稱空間。</td>
     </tr>
     <tr>
     <td><code><em>&lt;secret_name&gt;</em></code></td>
-    <td>必要項目。您要用於 imagePullSecret 的名稱。</td>
+    <td>必要。您要用於 imagePullSecret 的名稱。</td>
     </tr>
     <tr>
     <td><code>--docker-server <em>&lt;registry_url&gt;</em></code></td>
-    <td>必要項目。儲存專用映像檔的登錄的 URL。</td>
+    <td>必要。儲存專用映像檔的登錄的 URL。</td>
     </tr>
     <tr>
     <td><code>--docker-username <em>&lt;docker_username&gt;</em></code></td>
-    <td>必要項目。登入專用登錄的使用者名稱。</td>
+    <td>必要。登入專用登錄的使用者名稱。</td>
     </tr>
     <tr>
     <td><code>--docker-password <em>&lt;token_value&gt;</em></code></td>
-    <td>必要項目。先前所擷取的登錄記號值。</td>
+    <td>必要。先前所擷取的登錄記號值。</td>
     </tr>
     <tr>
     <td><code>--docker-email <em>&lt;docker-email&gt;</em></code></td>
-    <td>必要項目。如果您有 Docker 電子郵件位址，請輸入它。否則，請輸入虛構的電子郵件位址，例如 a@b.c。此電子郵件是建立 Kubernetes Secret 的必要項目，但在建立之後就不再使用。</td>
+    <td>必要。如果您有 Docker 電子郵件位址，請輸入它。否則，請輸入虛構的電子郵件位址，例如 a@b.c。此電子郵件是建立 Kubernetes Secret 的必要項目，但在建立之後就不再使用。</td>
     </tr>
     </tbody></table>
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-07"
 
 ---
 
@@ -20,6 +20,8 @@ lastupdated: "2018-01-12"
 
 Les noeuds d'agent de périphérie peuvent améliorer la sécurité de votre cluster en limitant les accès aux noeuds d'agent depuis l'extérieur et en isolant la charge de travail du réseau. Lorsque ces noeuds d'agent sont marqués pour mise en réseau uniquement, les autres charges de travail ne peuvent pas consommer d'unité centrale ou de mémoire ni interférer avec le réseau.
 {:shortdesc}
+
+
 
 ## Etiquettage de noeuds worker en tant que noeuds de périphérie
 {: #edge_nodes}

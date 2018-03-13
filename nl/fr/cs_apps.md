@@ -16,9 +16,9 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# Cette page a été déplacée
+# Le contenu que vous cherchez a été déplacé.
 
-Accédez aux rubriques correspondantes ici :
+Consultez les informations les plus récentes dans son nouvel emplacement :
 - [Lancement du tableau de bord Kubernetes](cs_app.html#cli_dashboard)
 - [Création de valeurs confidentielles](cs_app.html#secrets)
 - [Autorisation d'accès public aux applications](cs_network_planning.html#planning)

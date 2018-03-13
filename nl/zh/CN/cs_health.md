@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-02"
 
 ---
 
@@ -37,7 +37,7 @@ lastupdated: "2018-01-12"
 |`application`|在 Kubernetes 集群中运行的自己应用程序的日志。|`/var/log/apps/**/*.log`、`/var/log/apps/**/*.err`|
 |`worker`|Kubernetes 集群中虚拟机工作程序节点的日志。|`/var/log/syslog`、`/var/log/auth.log`|
 |`Kubernetes`|Kubernetes 系统组件的日志。|`/var/log/kubelet.log`、`/var/log/kube-proxy.log`|
-|`ingress`|由 Ingress 控制器管理的应用程序负载均衡器的日志，用于管理进入 Kubernetes 集群的网络流量。|`/var/log/alb/ids/*.log`、`/var/log/alb/ids/*.err`、`/var/log/alb/customerlogs/*.log`、`/var/log/alb/customerlogs/*.err`|
+|`ingress`|Ingress 应用程序负载均衡器的日志，用于管理进入 Kubernetes 集群的网络流量。|`/var/log/alb/ids/*.log`、`/var/log/alb/ids/*.err`、`/var/log/alb/customerlogs/*.log`、`/var/log/alb/customerlogs/*.err`|
 {: caption="日志源特征" caption-side="top"}
 
 ## 启用日志转发
@@ -358,6 +358,8 @@ lastupdated: "2018-01-12"
 将 <em>&lt;my_cluster&gt;</em> 替换为日志记录配置所在集群的名称，并将 <em>&lt;log_config_id&gt;</em> 替换为日志源配置的标识。
 
 
+
+
 <br />
 
 
@@ -484,7 +486,8 @@ Kubernetes API 审计日志从集群中捕获对 Kubernetes API 服务器的任�
 
 要访问 Kibana 仪表板，请转至以下某个 URL，然后选择在其中创建了集群的 {{site.data.keyword.Bluemix_notm}} 帐户或空间。
 - 美国南部和美国东部：https://logging.ng.bluemix.net
-- 英国南部和欧洲中部：https://logging.eu-fra.bluemix.net
+- 英国南部：https://logging.eu-gb.bluemix.net
+- 欧洲中部：https://logging.eu-fra.bluemix.net
 - 亚太南部：https://logging.au-syd.bluemix.net
 
 有关查看日志的更多信息，请参阅[通过 Web 浏览器导航至 Kibana](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser)。
@@ -587,96 +590,96 @@ Kubernetes API 审计日志从集群中捕获对 Kubernetes API 服务器的任�
     {:codeblock}
 
 
-    <table summary="了解配置映射的组成部分">
+<table summary="了解配置映射的组成部分">
     <caption>了解配置映射的组成部分</caption>
-      <thead>
-        <th colspan=2><img src="images/idea.png"/> 了解配置映射的组成部分</th>
-      </thead>
-      <tbody>
-       <tr>
-          <td><code>name</code></td>
-          <td>配置名称 <code>ibm-worker-recovery-checks</code> 是常量，无法更改。</td>
-       </tr>
-       <tr>
-          <td><code>namespace</code></td>
-          <td><code>kube-system</code> 名称空间是常量，无法更改。</td>
-       </tr>
-      <tr>
-          <td><code>checkhttp.json</code></td>
-          <td>定义 HTTP 检查，用于检查 HTTP 服务器是否在每个节点的 IP 地址的端口 80 上运行，并在路径 <code>/myhealth</code> 处返回 200 响应。可以通过运行 <code>kubectl get nodes</code> 来查找节点的 IP 地址。
+<thead>
+<th colspan=2><img src="images/idea.png"/> 了解配置映射的组成部分</th>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>配置名称 <code>ibm-worker-recovery-checks</code> 是常量，无法更改。</td>
+</tr>
+<tr>
+<td><code>namespace</code></td>
+<td><code>kube-system</code> 名称空间是常量，无法更改。</td>
+</tr>
+<tr>
+<td><code>checkhttp.json</code></td>
+<td>定义 HTTP 检查，用于检查 HTTP 服务器是否在每个节点的 IP 地址的端口 80 上运行，并在路径 <code>/myhealth</code> 处返回 200 响应。可以通过运行 <code>kubectl get nodes</code> 来查找节点的 IP 地址。
                 例如，假设集群中有两个节点，其 IP 地址分别为 10.10.10.1 和 10.10.10.2。在此示例中，会对下面两个路径检查是否返回“200 正常”响应：<code>http://10.10.10.1:80/myhealth</code> 和 <code>http://10.10.10.2:80/myhealth</code>。
                上例 YAML 中的检查每 3 分钟运行一次。如果连续失败 3 次，将重新引导节点。此操作相当于运行 <code>bx cs worker-reboot</code>。HTTP 检查会一直处于禁用状态，直到您将 <b>Enabled</b> 字段设置为 <code>true</code>。</td>
-        </tr>
-        <tr>
-          <td><code>checknode.json</code></td>
-          <td>定义 Kubernetes API 节点检查，用于检查是否每个节点都处于 <code>Ready</code> 状态。如果特定节点不处于 <code>Ready</code> 状态，那么对该节点的检查计为一次失败。
+</tr>
+<tr>
+<td><code>checknode.json</code></td>
+<td>定义 Kubernetes API 节点检查，用于检查是否每个节点都处于 <code>Ready</code> 状态。如果特定节点不处于 <code>Ready</code> 状态，那么对该节点的检查计为一次失败。
                上例 YAML 中的检查每 3 分钟运行一次。如果连续失败 3 次，将重新装入节点。此操作相当于运行 <code>bx cs worker-reload</code>。节点检查会一直处于启用状态，直到您将 <b>Enabled</b> 字段设置为 <code>false</code> 或除去检查。</td>
-        </tr>
-        <tr>
-          <td><code>checkpod.json</code></td>
-          <td>定义 Kubernetes API pod 检查，用于根据分配给节点的 pod 总数来检查该节点上 <code>NotReady</code> pod 的总百分比。如果特定节点的 <code>NotReady</code> pod 的总百分比大于定义的 <code>PodFailureThresholdPercent</code>，那么对该节点的检查计为一次失败。
+</tr>
+<tr>
+<td><code>checkpod.json</code></td>
+<td>定义 Kubernetes API pod 检查，用于根据分配给节点的 pod 总数来检查该节点上 <code>NotReady</code> pod 的总百分比。如果特定节点的 <code>NotReady</code> pod 的总百分比大于定义的 <code>PodFailureThresholdPercent</code>，那么对该节点的检查计为一次失败。
                上例 YAML 中的检查每 3 分钟运行一次。如果连续失败 3 次，将重新装入节点。此操作相当于运行 <code>bx cs worker-reload</code>。pod 检查会一直处于启用状态，直到您将 <b>Enabled</b> 字段设置为 <code>false</code> 或除去检查。</td>
-        </tr>
-      </tbody>
-    </table>
+</tr>
+</tbody>
+</table>
 
 
-    <table summary="了解单个规则的组成部分">
+<table summary="了解单个规则的组成部分">
     <caption>了解单个规则的组成部分</caption>
-      <thead>
-        <th colspan=2><img src="images/idea.png"/> 了解单个规则的组成部分</th>
-      </thead>
-      <tbody>
-       <tr>
-           <td><code>Check</code></td>
-           <td>输入希望自动恢复使用的检查类型。<ul><li><code>HTTP</code>：自动恢复调用在每个节点上运行的 HTTP 服务器，以确定节点是否在正常运行。</li><li><code>KUBEAPI</code>：自动恢复调用 Kubernetes API 服务器并读取工作程序节点报告的运行状态数据。</li></ul></td>
-           </tr>
-       <tr>
-           <td><code>资源</code></td>
-           <td>检查类型为 <code>KUBEAPI</code> 时，输入希望自动恢复检查的资源类型。接受的值为 <code>NODE</code> 或 <code>PODS</code>。</td>
-           </tr>
-       <tr>
-           <td><code>FailureThreshold</code></td>
-           <td>输入检查连续失败次数的阈值。达到此阈值时，自动恢复会触发指定的更正操作。例如，如果值为 3 且自动恢复连续三次执行配置的检查失败，那么自动恢复会触发与检查关联的更正操作。</td>
-       </tr>
-       <tr>
-           <td><code>PodFailureThresholdPercent</code></td>
-           <td>资源类型为 <code>PODS</code> 时，请输入工作程序节点上可以处于 [NotReady ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes) 状态的 pod 的百分比阈值。此百分比基于安排到一个工作程序节点的 pod 总数。检查确定运行状况欠佳的 pod 百分比大于阈值时，该检查计为一次失败。</td>
-           </tr>
-        <tr>
-            <td><code>CorrectiveAction</code></td>
-            <td>输入在达到失败阈值时要运行的操作。仅当没有其他工作程序在进行修复，并且此工作程序节点距离执行上一个更正操作的时间已超过等待期时，才会运行更正操作。<ul><li><code>REBOOT</code>：重新引导工作程序节点。</li><li><code>RELOAD</code>：从干净的操作系统重新装入工作程序节点的所有必需配置。</li></ul></td>
-            </tr>
-        <tr>
-            <td><code>CooloffSeconds</code></td>
-            <td>输入自动恢复在对节点发出更正操作后，必须等待多长时间才能再次向该节点发出其他更正操作（以秒为单位）。等待期自发出更正操作时开始计算。</td>
-            </tr>
-        <tr>
-            <td><code>IntervalSeconds</code></td>
-            <td>输入连续检查的间隔秒数。例如，如果值为 180，那么自动恢复会每 3 分钟对每个节点运行一次检查。</td>
-            </tr>
-        <tr>
-            <td><code>TimeoutSeconds</code></td>
-            <td>输入在自动恢复终止调用操作之前，对数据库执行检查调用所用的最长时间（以秒为单位）。<code>TimeoutSeconds</code> 的值必须小于 <code>IntervalSeconds</code> 的值。</td>
-            </tr>
-        <tr>
-            <td><code>端口</code></td>
-            <td>检查类型为 <code>HTTP</code> 时，请输入工作程序节点上 HTTP 服务器必须绑定到的端口。此端口必须在集群中每个工作程序节点的 IP 上公开。自动恢复需要一个跨所有节点的常量端口号以用于检查服务器。将定制服务器部署到集群中时，请使用 [DaemonSets ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)。</td>
-            </tr>
-        <tr>
-            <td><code>ExpectedStatus</code></td>
-            <td>检查类型为 <code>HTTP</code> 时，请输入期望从检查返回的 HTTP 服务器状态。例如，值为 200 表示期望服务器返回 <code>OK</code> 响应。</td>
-            </tr>
-        <tr>
-            <td><code>Route</code></td>
-            <td>检查类型为 <code>HTTP</code> 时，请输入从 HTTP 服务器请求的路径。此值通常是在所有工作程序节点上运行的服务器的度量值路径。</td>
-            </tr>
-        <tr>
-            <td><code>Enabled</code></td>
-            <td>输入 <code>true</code> 以启用检查，或输入 <code>false</code> 以禁用检查。</td>
-            </tr>
-      </tbody>
-    </table>
+<thead>
+<th colspan=2><img src="images/idea.png"/> 了解单个规则的组成部分</th>
+</thead>
+<tbody>
+<tr>
+<td><code>Check</code></td>
+<td>输入希望自动恢复使用的检查类型。<ul><li><code>HTTP</code>：自动恢复调用在每个节点上运行的 HTTP 服务器，以确定节点是否在正常运行。</li><li><code>KUBEAPI</code>：自动恢复调用 Kubernetes API 服务器并读取工作程序节点报告的运行状态数据。</li></ul></td>
+</tr>
+<tr>
+<td><code>资源</code></td>
+<td>检查类型为 <code>KUBEAPI</code> 时，输入希望自动恢复检查的资源类型。接受的值为 <code>NODE</code> 或 <code>PODS</code>。</td>
+</tr>
+<tr>
+<td><code>FailureThreshold</code></td>
+<td>输入检查连续失败次数的阈值。达到此阈值时，自动恢复会触发指定的更正操作。例如，如果值为 3 且自动恢复连续三次执行配置的检查失败，那么自动恢复会触发与检查关联的更正操作。</td>
+</tr>
+<tr>
+<td><code>PodFailureThresholdPercent</code></td>
+<td>资源类型为 <code>PODS</code> 时，请输入工作程序节点上可以处于 [NotReady ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes) 状态的 pod 的百分比阈值。此百分比基于安排到一个工作程序节点的 pod 总数。检查确定运行状况欠佳的 pod 百分比大于阈值时，该检查计为一次失败。</td>
+</tr>
+<tr>
+<td><code>CorrectiveAction</code></td>
+<td>输入在达到失败阈值时要运行的操作。仅当没有其他工作程序在进行修复，并且此工作程序节点距离执行上一个更正操作的时间已超过等待期时，才会运行更正操作。<ul><li><code>REBOOT</code>：重新引导工作程序节点。</li><li><code>RELOAD</code>：从干净的操作系统重新装入工作程序节点的所有必需配置。</li></ul></td>
+</tr>
+<tr>
+<td><code>CooloffSeconds</code></td>
+<td>输入自动恢复在对节点发出更正操作后，必须等待多长时间才能再次向该节点发出其他更正操作（以秒为单位）。等待期自发出更正操作时开始计算。</td>
+</tr>
+<tr>
+<td><code>IntervalSeconds</code></td>
+<td>输入连续检查的间隔秒数。例如，如果值为 180，那么自动恢复会每 3 分钟对每个节点运行一次检查。</td>
+</tr>
+<tr>
+<td><code>TimeoutSeconds</code></td>
+<td>输入在自动恢复终止调用操作之前，对数据库执行检查调用所用的最长时间（以秒为单位）。<code>TimeoutSeconds</code> 的值必须小于 <code>IntervalSeconds</code> 的值。</td>
+</tr>
+<tr>
+<td><code>端口</code></td>
+<td>检查类型为 <code>HTTP</code> 时，请输入工作程序节点上 HTTP 服务器必须绑定到的端口。此端口必须在集群中每个工作程序节点的 IP 上公开。自动恢复需要一个跨所有节点的常量端口号以用于检查服务器。将定制服务器部署到集群中时，请使用 [DaemonSets ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)。</td>
+</tr>
+<tr>
+<td><code>ExpectedStatus</code></td>
+<td>检查类型为 <code>HTTP</code> 时，请输入期望从检查返回的 HTTP 服务器状态。例如，值为 200 表示期望服务器返回 <code>OK</code> 响应。</td>
+</tr>
+<tr>
+<td><code>Route</code></td>
+<td>检查类型为 <code>HTTP</code> 时，请输入从 HTTP 服务器请求的路径。此值通常是在所有工作程序节点上运行的服务器的度量值路径。</td>
+</tr>
+<tr>
+<td><code>Enabled</code></td>
+<td>输入 <code>true</code> 以启用检查，或输入 <code>false</code> 以禁用检查。</td>
+</tr>
+</tbody>
+</table>
 
 2. 在集群中创建配置映射。
 
@@ -692,58 +695,15 @@ Kubernetes API 审计日志从集群中捕获对 Kubernetes API 服务器的任�
     ```
     {: pre}
 
-4. 确保已在 `kube-system` 名称空间中创建名称为 `international-registry-docker-secret`的 Docker 拉取私钥。自动恢复会在 {{site.data.keyword.registryshort_notm}} 的国际 Docker 注册表中进行托管。如果尚未创建包含国际注册表的有效凭证的 Docker 注册表私钥，请创建 Docker 注册表私钥以运行自动恢复系统。
 
-    1. 安装 {{site.data.keyword.registryshort_notm}} 插件。
-
-        ```
-        bx plugin install container-registry -r Bluemix
-        ```
-        {: pre}
-
-    2. 将国际注册表设定为目标。
-
-        ```
-        bx cr region-set international
-        ```
-        {: pre}
-
-    3. 创建国际注册表令牌。
-
-        ```
-        bx cr token-add --non-expiring --description internationalRegistryToken
-        ```
-        {: pre}
-
-    4. 将 `INTERNATIONAL_REGISTRY_TOKEN` 环境变量设置为已创建的令牌。
-
-        ```
-        INTERNATIONAL_REGISTRY_TOKEN=$(bx cr token-get $(bx cr tokens | grep internationalRegistryToken | awk '{print $1}') -q)
-        ```
-        {: pre}
-
-    5. 将 `DOCKER_EMAIL` 环境变量设置为当前用户。仅在下一步中运行 `kubectl` 命令时才需要您的电子邮件地址。
-
-        ```
-        DOCKER_EMAIL=$(bx target | grep "User" | awk '{print $2}')
-        ```
-        {: pre}
-
-    6. 创建 Docker 拉取私钥。
-
-        ```
-        kubectl -n kube-system create secret docker-registry international-registry-docker-secret --docker-username=token --docker-password="$INTERNATIONAL_REGISTRY_TOKEN" --docker-server=registry.bluemix.net --docker-email="$DOCKER_EMAIL"
-        ```
-        {: pre}
-
-5. 通过应用此 YAML 文件，将自动恢复部署到集群中。
+4. 通过应用此 YAML 文件，将自动恢复部署到集群中。
 
    ```
    kubectl apply -f https://raw.githubusercontent.com/IBM-Bluemix/kube-samples/master/ibm-worker-recovery/ibm-worker-recovery.yml
    ```
    {: pre}
 
-6. 过几分钟后，可以检查以下命令的输出中的 `Events` 部分，以查看自动恢复部署上的活动。
+5. 过几分钟后，可以检查以下命令的输出中的 `Events` 部分，以查看自动恢复部署上的活动。
 
     ```
     kubectl -n kube-system describe deployment ibm-worker-recovery

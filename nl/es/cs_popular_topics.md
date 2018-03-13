@@ -47,7 +47,7 @@ ofrecen funciones integradas de seguridad y detección y permiten automatizar el
 </tr>
 <tr>
 <td>[Apertura de los puertos y direcciones IP necesarios en el cortafuegos](cs_firewall.html#firewall)</td>
-<td>Puede que tenga que abrir puertos específicos y direcciones IP en el cortafuegos para ejecutar mandatos de CLI o para permitir la comunicación entre el nodo Kubernetes maestro y los nodos de trabajador.</td>
+<td>Puede que tenga que abrir puertos específicos y direcciones IP en el cortafuegos para ejecutar mandatos de CLI o para permitir la comunicación entre el maestro de Kubernetes y los nodos trabajadores.</td>
 </tr>
 <tr>
 <td>[Actualizar Kubernetes](cs_versions.html)</td>

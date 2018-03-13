@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-18"
+lastupdated: "2018-02-05"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -19,19 +19,19 @@ lastupdated: "2017-12-18"
 # Lernprogramm: Istio in einer {{site.data.keyword.containerlong_notm}} bereitstellen
 {: #istio_tutorial}
 
-[Istio](https://www.ibm.com/cloud/info/istio) ist eine offene Plattform, die Entwicklern eine einheitliche Methode zum Verbinden, Sichern und Verwalten eines Netzes von Microservices, auch als Servicenetz bezeichnet, auf Cloudplattformen wie Kubernetes bietet. Istio bietet die Funktionalität zum Verwalten von Netzverkehr, für einen Lastausgleich zwischen mehreren Microservices, zum Durchsetzen von Zugriffsrichtlinien, zum Überprüfen von Serviceidentitäten im Servicenetz und vieles mehr.
+[Istio](https://www.ibm.com/cloud/info/istio) ist eine offene Plattform, die Entwicklern eine einheitliche Methode zum Verbinden, Sichern und Verwalten eines Netzes von Mikroservices (auch als Servicenetz bezeichnet) auf Cloudplattformen wie Kubernetes bietet. Istio bietet die Funktionalität zum Verwalten von Netzverkehr, für einen Lastausgleich zwischen mehreren Mikroservices, zum Durchsetzen von Zugriffsrichtlinien, zum Überprüfen von Serviceidentitäten im Servicenetz und vieles mehr.
 
 {:shortdesc}
 
-In diesem Lernprogramm sehen Sie, wie Istio zusammen mit vier Microservices für eine einfache Beispiel-App für Buchhandlungen namens BookInfo installiert wird. Die Microservices umfassen eine Produktwebseite, Buchdetails, Rezensionen und Bewertungen. Wenn Sie die Microservices von BookInfo in einem {{site.data.keyword.containershort}}-Cluster bereitstellen, in dem Istio installiert wird, fügen Sie die Istio Envoy Sidecar Proxys in die Pods jedes Microservice ein.
+In diesem Lernprogramm sehen Sie, wie Istio zusammen mit vier Mikroservices für eine einfache Beispiel-App für Buchhandlungen namens BookInfo installiert wird. Die Mikroservices umfassen eine Produktwebseite, Buchdetails, Rezensionen und Bewertungen. Wenn Sie die Mikroservices von BookInfo in einem {{site.data.keyword.containershort}}-Cluster bereitstellen, in dem Istio installiert ist, fügen Sie Istio Envoy-Sidecar-Proxys in die Pods für jeden Mikroservice ein.
 
-**Hinweis**: Manche Konfigurationen und Features der Istio-Plattform sind noch in Entwicklung begriffen und ändern sich basierend auf dem Feedback von Benutzern. Warten Sie noch ein paar Monate, bis sich die Lage stabilisiert habt, bevor Sie Istio in der Produktion einsetzen. 
+**Hinweis**: Manche Konfigurationen und Features der Istio-Plattform sind noch in Entwicklung begriffen und ändern sich basierend auf dem Feedback von Benutzern. Warten Sie noch ein paar Monate, bis sich die Lage stabilisiert hat, bevor Sie Istio in der Produktion einsetzen. 
 
 ## Ziele
 
 -   Istio herunterladen und in Ihrem Cluster installieren
 -   Beispiel-App BookInfo implementieren
--   Envoy Sidecar Proxys in die Pods der vier Microservices der App einfügen, um die Microservices mit und im Servicenetz zu verbinden
+-   Envoy Sidecar Proxys in die Pods der vier Mikroservices der App einfügen, um die Mikroservices mit und im Servicenetz zu verbinden
 -   Implementierung der App BookInfo überprüfen und einen Blick auf die drei Versionen der Bewertungsservices werfen
 
 ## Erforderlicher Zeitaufwand
@@ -122,18 +122,18 @@ Glückwunsch! Sie haben Istio erfolgreich in Ihrem Cluster installiert. Stellen 
 ## Lerneinheit 2: App BookInfo bereitstellen
 {: #istio_tutorial2}
 
-Stellen Sie die Microservices der Beispiel-App BookInfo in Ihrem Kubernetes-Cluster bereit. Diese vier Microservices umfassen eine Produktwebseite, Buchdetails, Rezensionen (mit verschiedenen Versionen des Rezensionsmicroservice) sowie Bewertungen. Sie finden alle in diesem Beispiel verwendeten Dateien im Verzeichnis `samples/bookinfo` Ihrer Istio-Installation.
+Stellen Sie die Mikroservices der Beispiel-App BookInfo in Ihrem Kubernetes-Cluster bereit. Diese vier Mikroservices umfassen eine Produktwebseite, Buchdetails, Rezensionen (mit verschiedenen Versionen des Rezensionsmikroservice) sowie Bewertungen. Sie finden alle in diesem Beispiel verwendeten Dateien im Verzeichnis `samples/bookinfo` Ihrer Istio-Installation.
 
-Wenn Sie BookInfo bereitstellen, werden Envoy Sidecar Proxys als Container in die Pods der Microservices Ihrer App eingefügt, bevor die Microservice-Pods bereitgestellt werden. Istio verwendet eine erweiterte Version des Envoy-Proxys, um den gesamten eingehenden und ausgehenden Datenverkehr für alle Microservices im Servicenetz auszugleichen. Weitere Informationen zu Envoy finden Sie in der [Istio-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://istio.io/docs/concepts/what-is-istio/overview.html#envoy).
+Wenn Sie BookInfo bereitstellen, werden Envoy Sidecar Proxys als Container in die Pods der Mikroservices Ihrer App eingefügt, bevor die Mikroservice-Pods bereitgestellt werden. Istio verwendet eine erweiterte Version des Envoy-Proxys, um den gesamten eingehenden und ausgehenden Datenverkehr für alle Mikroservices im Servicenetz auszugleichen. Weitere Informationen zu Envoy finden Sie in der [Istio-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://istio.io/docs/concepts/what-is-istio/overview.html#envoy).
 
-1. Stellen Sie die App BookInfo bereit. Der Befehl `kube-inject` fügt Envoy zur Datei `bookinfo.yaml` hinzu und verwendet diese aktualisierte Datei, um die App zu implementieren. Wenn die Microservices der App bereitgestellt werden, wird auch der Envoy Sidecar in den einzelnen Microservice-Pods bereitgestellt.
+1. Stellen Sie die App BookInfo bereit. Der Befehl `kube-inject` fügt Envoy zur Datei `bookinfo.yaml` hinzu und verwendet diese aktualisierte Datei, um die App zu implementieren. Wenn die Mikroservices der App bereitgestellt werden, wird auch der Envoy Sidecar in den einzelnen Mikroservice-Pods bereitgestellt.
 
    ```
    kubectl apply -f <(istioctl kube-inject -f samples/bookinfo/kube/bookinfo.yaml)
    ```
    {: pre}
 
-2. Stellen Sie sicher, dass die Microservices und ihre zugehörigen Pods bereitgestellt werden:
+2. Stellen Sie sicher, dass die Mikroservices und ihre zugehörigen Pods bereitgestellt werden:
 
    ```
    kubectl get svc
@@ -190,7 +190,7 @@ Wenn Sie BookInfo bereitstellen, werden Envoy Sidecar Proxys als Container in di
        ```
        {: pre}
 
-    * Wenn Sie mit einem Lite-Cluster arbeiten, müssen Sie die öffentliche IP-Adresse des Workerknotens und des Knotenports verwenden. Führen Sie den folgenden Befehl aus, um die öffentliche IP-Adresse des Workerknotens abzurufen:
+    * Wenn Sie mit einem kostenlosen Cluster arbeiten, müssen sie die öffentliche IP-Adresse des Workerknotens und des Knotenports (NodePort) verwenden. Führen Sie den folgenden Befehl aus, um die öffentliche IP-Adresse des Workerknotens abzurufen:
 
        ```
        bx cs workers <clustername_oder_-id>
@@ -215,12 +215,12 @@ Wenn Sie BookInfo bereitstellen, werden Envoy Sidecar Proxys als Container in di
 
 6. Versuchen Sie mehrfach, die Seite zu aktualisieren. Verschiedene Versionen des Abschnitts mit den Rezensionen zeigen abwechselnd rote, schwarze oder gar keine Sterne an.
 
-Glückwunsch! Sie haben die Beispiel-App BookInfo erfolgreich mit Istio Envoy-Sidecars bereitgestellt. In einem nächsten Schritt können Sie Ihre Ressourcen bereinigen oder weitere Lernprogramme durchführen, um die Funktionalität von Istio gründlicher zu erkunden.
+Glückwunsch! Sie haben die Beispiel-App BookInfo erfolgreich  mit Istio Envoy-Sidecars bereitgestellt. Im nächsten Schritt können Sie Ihre Ressourcen bereinigen oder weitere Lernprogramme durchführen, um die Funktionalität von Istio gründlicher zu erkunden.
 
 ## Bereinigen
 {: #istio_tutorial_cleanup}
 
-Wenn Sie die weiteren Funktionen von Istio, die unter [Womit möchten Sie fortfahren?](#istio_tutorial_whatsnext) aufgeführt sind, nicht erkunden möchten, können Sie Ihre Istio-Ressourcen in Ihrem Cluster bereinigen.
+Wenn Sie darauf verzichten möchten, weitere Funktionen von Istio zu erkunden, die unter [Womit möchten Sie fortfahren?](#istio_tutorial_whatsnext) aufgeführt sind, können Sie Ihre Istio-Ressourcen in Ihrem Cluster bereinigen.
 
 1. Löschen Sie alle BookInfo-Services, -Pods und -Bereitstellungen im Cluster.
 
@@ -241,6 +241,6 @@ Wenn Sie die weiteren Funktionen von Istio, die unter [Womit möchten Sie fortfa
 
 Anleitungen zu weiteren Istio-Funktionen finden Sie in der [Istio-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://istio.io/).
 
-* [Intelligentes Routing ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://istio.io/docs/guides/intelligent-routing.html): In diesem Beispiel wird die Verwendung der verschiedenen Funktionen zur Verwaltung des Datenverkehrs in Istio aufgezeigt, um in BookInfo Datenverkehr an eine bestimmte Version der Microservices für Rezensionen und Bewertungen weiterzuleiten.
+* [Intelligentes Routing ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://istio.io/docs/guides/intelligent-routing.html): In diesem Beispiel wird die Verwendung der verschiedenen Funktionen zur Verwaltung des Datenverkehrs in Istio aufgezeigt, um in BookInfo Datenverkehr an eine bestimmte Version der Mikroservices für Rezensionen und Bewertungen weiterzuleiten.
 
-* [Detaillierte Telemetrie ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://istio.io/docs/guides/telemetry.html): In diesem Beispiel wird gezeigt, wie Sie einheitliche Metriken, Protokolle und Traces in den verschiedenen Microservices von BookInfo mithilfe von Istio Mixer und dem Envoy Proxy realisieren können.
+* [Detaillierte Telemetrie ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://istio.io/docs/guides/telemetry.html): In diesem Beispiel wird gezeigt, wie Sie einheitliche Metriken, Protokolle und Traces in den verschiedenen Mikroservices von BookInfo mithilfe von Istio Mixer und dem Envoy-Proxy realisieren können.

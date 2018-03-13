@@ -60,15 +60,15 @@ Para criar uma sub-rede em uma conta de infraestrutura do IBM Cloud (SoftLayer) 
     </tr>
     <tr>
     <td><code><em>&lt;cluster_name_or_id&gt;</em></code></td>
-    <td>Substitua <code>&gt;cluster_name_or_id &lt;</code> pelo nome ou o ID do cluster.</td>
+    <td>Substitua <code>&lt;cluster_name_or_id&gt;</code> pelo nome ou ID do cluster.</td>
     </tr>
     <tr>
     <td><code><em>&lt;subnet_size&gt;</em></code></td>
-    <td>Substitua <code>&gt;subnet_size&lt;</code> pelo número de endereços IP que você deseja incluir de sua sub-rede móvel. Os valores aceitos são 8, 16, 32 ou 64. <p>**Observação:** quando você inclui endereços IP móveis em sua sub-rede, três endereços IP são usados para estabelecer redes internas de cluster, de forma que não é possível usá-los para seu balanceador de carga do aplicativo ou para criar um serviço do balanceador de carga. Por exemplo, se você solicitar oito endereços IP públicos móveis, será possível usar cinco deles para expor os seus apps ao público.</p> </td>
+    <td>Substitua <code>&lt;subnet_size&gt;</code> pelo número de endereços IP que você deseja incluir de sua sub-rede móvel. Os valores aceitos são 8, 16, 32 ou 64. <p>**Observação:** quando você inclui endereços IP móveis em sua sub-rede, três endereços IP são usados para estabelecer redes internas de cluster, de forma que não é possível usá-los para seu balanceador de carga do aplicativo ou para criar um serviço do balanceador de carga. Por exemplo, se você solicitar oito endereços IP públicos móveis, será possível usar cinco deles para expor os seus apps ao público.</p> </td>
     </tr>
     <tr>
     <td><code><em>&lt;VLAN_ID&gt;</em></code></td>
-    <td>Substitua <code>&gt;&lt;VLAN_ID</code> pelo ID da VLAN pública ou privada na qual você deseja alocar os endereços IP móveis públicos ou privados. Deve-se selecionar a VLAN pública ou privada à qual um nó do trabalhador existente está conectado. Para revisar a VLAN pública ou a VLAN privada para um nó do trabalhador, execute o comando <code>bx cs worker-get &gt;worker_id&lt;</code>.</td>
+    <td>Substitua <code>&lt;VLAN_ID&gt;</code> pelo ID da VLAN pública ou privada na qual você deseja alocar os endereços IP móveis públicos ou privados. Deve-se selecionar a VLAN pública ou privada à qual um nó do trabalhador existente está conectado. Para revisar a VLAN pública ou a VLAN privada para um nó do trabalhador, execute o comando <code>bx cs worker-get &lt;worker_id&gt;</code>. </td>
     </tr>
     </tbody></table>
 

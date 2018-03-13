@@ -38,7 +38,7 @@ Docker 이미지는 작성하는 모든 컨테이너의 기초가 됩니다. 이
 |[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry/index.html)|이 옵션을 사용하면 이미지를 안전하게 저장하고 이를 클러스터 사용자 간에 공유할 수 있는 {{site.data.keyword.registryshort_notm}}의 사용자 고유의 보안 Docker 이미지 저장소를 설정할 수 있습니다.|<ul><li>계정에서 이미지에 대한 액세스 권한을 관리합니다.</li><li>{{site.data.keyword.IBM_notm}}이 제공하는 이미지와 샘플 앱 {{site.data.keyword.IBM_notm}} Liberty를 상위 이미지로서 사용하고 이에 자체 앱 코드를 추가합니다.</li><li>Vulnerability Advisor에 의해 잠재적 취약점에 대한 이미지의 자동 스캐닝(이를 해결하기 위한 OS 특정 권장사항 포함).</li></ul>|
 |기타 개인용 레지스트리|[imagePullSecret ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/containers/images/)을 작성하여 기존 개인용 레지스트리를 클러스터에 연결합니다. 시크릿은 Kubernetes 시크릿에 레지스트리 URL과 신임 정보를 안전하게 저장하는 데 사용됩니다.|<ul><li>자체 소스(Docker Hub, 조직이 소유하는 레지스트리 또는 기타 프라이빗 클라우드 레지스트리)와는 무관하게 기존 개인용 레지스트리를 사용합니다.</li></ul>|
 |공용 Docker Hub|Dockerfile 변경사항이 필요 없을 때 Docker Hub에서 기존 공용 이미지를 직접 사용하려면 이 옵션을 사용합니다. <p>**참고:** 이 옵션이 조직의 보안 요구사항을 충족하지 않을 수 있음을 유념하십시오(예: 액세스 관리, 취약성 스캐닝 또는 앱 개인정보 보호정책).</p>|<ul><li>클러스터에 대해 추가 설정이 필요하지 않습니다.</li><li>다양한 오픈 소스 애플리케이션이 포함됩니다.</li></ul>|
-{: caption="테이블. 공용 및 개인용 이미지 레지스트리 옵션" caption-side="top"}
+{: caption="표. 공용 및 개인용 이미지 레지스트리 옵션" caption-side="top"}
 
 이미지 레지스트리를 설정한 후에 클러스터 사용자는 클러스터에 자신의 앱 배치를 위한 이미지를 사용할 수 있습니다.
 
@@ -55,13 +55,13 @@ Docker 이미지는 작성하는 모든 컨테이너의 기초가 됩니다. 이
 
 시작하기 전에:
 
-1. [{{site.data.keyword.Bluemix_notm}} 퍼블릭 또는 {{site.data.keyword.Bluemix_dedicated_notm}}의 {{site.data.keyword.registryshort_notm}}에 네임스페이스를 설정하고 이 네임스페이스에 이미지를 푸시하십시오](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add).
-2. [클러스터를 작성하십시오](cs_clusters.html#clusters_cli).
-3. [클러스터에 CLI를 대상으로 지정하십시오](cs_cli_install.html#cs_cli_configure).
+1. [{{site.data.keyword.Bluemix_notm}} 퍼블릭 또는 {{site.data.keyword.Bluemix_dedicated_notm}}의 {{site.data.keyword.registryshort_notm}}에 네임스페이스를 설정하고 이 네임스페이스에 이미지를 푸시](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add)하십시오.
+2. [클러스터를 작성](cs_clusters.html#clusters_cli)하십시오.
+3. [클러스터에 CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
 
-클러스터를 작성할 때 만료되지 않는 레지스트리 토큰과 시크릿이 [가장 근접한 지역 레지스트리와 국제 레지스트리](/docs/services/Registry/registry_overview.html#registry_regions) 둘 다에 대해 자동으로 작성됩니다. 국제 레지스트리는 개별 지역 레지스트리에 저장된 이미지에 대한 다른 참조를 가지는 대신 배치 전반에서 참조할 수 있는 공용 IBM 제공 이미지를 저장합니다. 지역 레지스트리는 국제 레지스트리에 저장된 동일한 공용 이미지 외에도 사용자의 개인용 Docker 이미지를 안전하게 저장합니다. 토큰을 사용하여 이러한 공용(국제 레지스트리) 및 개인용(지역 레지스트리) 이미지로 작업할 수 있도록 {{site.data.keyword.registryshort_notm}}에서 사용자가 설정한 임의의 네임스페이스에 대한 읽기 전용 액세스 권한을 부여합니다. 
+클러스터를 작성할 때 만료되지 않는 레지스트리 토큰과 시크릿이 [가장 근접한 지역 레지스트리와 글로벌 레지스트리](/docs/services/Registry/registry_overview.html#registry_regions) 둘 다에 대해 자동으로 작성됩니다. 글로벌 레지스트리는 개별 지역 레지스트리에 저장된 이미지에 대한 서로 다른 참조를 가지는 대신 배치 전반에서 참조할 수 있는 공용 IBM 제공 이미지를 저장합니다. 지역 레지스트리는 글로벌 레지스트리에 저장된 동일한 공용 이미지 외에도 사용자의 개인용 Docker 이미지를 안전하게 저장합니다. 토큰을 사용하여 이러한 공용(글로벌 레지스트리) 및 개인용(지역 레지스트리) 이미지로 작업할 수 있도록 {{site.data.keyword.registryshort_notm}}에서 사용자가 설정한 임의의 네임스페이스에 대한 읽기 전용 액세스 권한을 부여합니다. 
 
-개별 토큰은 컨테이너화된 앱을 배치할 때 Kubernetes 클러스터에 액세스할 수 있도록 Kubernetes `imagePullSecret`에 저장되어야 합니다. 클러스터가 작성되면 {{site.data.keyword.containershort_notm}}에서 Kubernetes 이미지 풀 시크릿의 국제(IBM 제공 공용 이미지) 및 지역 레지스트리에 대한 토큰을 자동으로 저장합니다. 이미지 풀 시크릿은 `기본` Kubernetes 네임스페이스, 해당 네임스페이스의 `ServiceAccount`에 있는 기본 시크릿 목록 및 `kube-system` 네임스페이스에 추가됩니다. 
+개별 토큰은 컨테이너화된 앱을 배치할 때 Kubernetes 클러스터에 액세스할 수 있도록 Kubernetes `imagePullSecret`에 저장되어야 합니다. 클러스터가 작성되면 {{site.data.keyword.containershort_notm}}에서 Kubernetes 이미지 풀 시크릿의 글로벌(IBM 제공 공용 이미지) 및 지역 레지스트리에 대한 토큰을 자동으로 저장합니다. 이미지 풀 시크릿은 `기본` Kubernetes 네임스페이스, 해당 네임스페이스의 `ServiceAccount`에 있는 기본 시크릿 목록 및 `kube-system` 네임스페이스에 추가됩니다.
 
 **참고:** 이 초기 설정을 사용하면 {{site.data.keyword.Bluemix_notm}} 계정의 네임스페이스에서 사용할 수 있는 이미지에서 클러스터의 **기본** 네임스페이스로 컨테이너를 배치할 수 있습니다. 클러스터의 다른 네임스페이스로 컨테이너를 배치하려는 경우 또는 다른 {{site.data.keyword.Bluemix_notm}} 지역 또는 다른 {{site.data.keyword.Bluemix_notm}} 계정에 저장된 이미지를 사용하려는 경우, [클러스터에 대해 사용자 고유의 imagePullSecret을 작성](#other)해야 합니다.
 
@@ -119,9 +119,9 @@ Docker 이미지는 작성하는 모든 컨테이너의 기초가 됩니다. 이
 
 시작하기 전에:
 
-1.  [{{site.data.keyword.Bluemix_notm}} 퍼블릭 또는 {{site.data.keyword.Bluemix_dedicated_notm}}의 {{site.data.keyword.registryshort_notm}}에 네임스페이스를 설정하고 이 네임스페이스에 이미지를 푸시하십시오](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add).
-2.  [클러스터를 작성하십시오](cs_clusters.html#clusters_cli).
-3.  [클러스터에 CLI를 대상으로 지정하십시오](cs_cli_install.html#cs_cli_configure).
+1.  [{{site.data.keyword.Bluemix_notm}} 퍼블릭 또는 {{site.data.keyword.Bluemix_dedicated_notm}}의 {{site.data.keyword.registryshort_notm}}에 네임스페이스를 설정하고 이 네임스페이스에 이미지를 푸시](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add)하십시오.
+2.  [클러스터를 작성](cs_clusters.html#clusters_cli)하십시오.
+3.  [클러스터에 CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
 
 고유 imagePullSecret을 작성하려면 다음을 수행하십시오.
 
@@ -153,7 +153,7 @@ Docker 이미지는 작성하는 모든 컨테이너의 기초가 됩니다. 이
     {: pre}
 
     <table>
-    <caption>테이블. 이 명령의 컴포넌트 이해</caption>
+    <caption>표. 이 명령의 컴포넌트 이해</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 이 명령의 컴포넌트 이해</th>
     </thead>
@@ -228,7 +228,7 @@ Docker 이미지는 작성하는 모든 컨테이너의 기초가 됩니다. 이
         {: codeblock}
 
         <table>
-        <caption>테이블. YAML 파일 컴포넌트 이해</caption>
+        <caption>표. YAML 파일 컴포넌트 이해</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
         </thead>
@@ -276,8 +276,8 @@ Docker Hub에 저장된 공용 이미지를 사용하여 추가 구성 없이 �
 
 시작하기 전에:
 
-1.  [클러스터를 작성하십시오](cs_clusters.html#clusters_cli).
-2.  [클러스터에 CLI를 대상으로 지정하십시오](cs_cli_install.html#cs_cli_configure).
+1.  [클러스터를 작성](cs_clusters.html#clusters_cli)하십시오.
+2.  [클러스터에 CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
 
 배치 구성 파일을 작성하십시오.
 
@@ -328,8 +328,8 @@ Docker Hub에 저장된 공용 이미지를 사용하여 추가 구성 없이 �
 
 시작하기 전에:
 
-1.  [클러스터를 작성하십시오](cs_clusters.html#clusters_cli).
-2.  [클러스터에 CLI를 대상으로 지정하십시오](cs_cli_install.html#cs_cli_configure).
+1.  [클러스터를 작성](cs_clusters.html#clusters_cli)하십시오.
+2.  [클러스터에 CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
 
 imagePullSecret을 작성하려면 다음을 수행하십시오.
 
@@ -343,7 +343,7 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
     {: pre}
 
     <table>
-    <caption>테이블. 이 명령의 컴포넌트 이해</caption>
+    <caption>표. 이 명령의 컴포넌트 이해</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 이 명령의 컴포넌트 이해</th>
     </thead>
@@ -400,7 +400,7 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
         {: codeblock}
 
         <table>
-        <caption>테이블. YAML 파일 컴포넌트 이해</caption>
+        <caption>표. YAML 파일 컴포넌트 이해</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
         </thead>

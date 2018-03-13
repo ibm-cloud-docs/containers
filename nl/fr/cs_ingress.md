@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-06"
 
 ---
 
@@ -22,63 +22,51 @@ lastupdated: "2018-01-12"
 ## Configuration de l'accès à une application à l'aide d'Ingress
 {: #config}
 
-Vous pouvez exposer plusieurs applications dans votre cluster en créant des ressources Ingress gérées par le contrôleur
-Ingress fourni par IBM. Le contrôleur Ingress crée les ressources nécessaires pour utiliser un équilibreur de charge d'application. Un équilibreur de charge d'application est un équilibreur de charge d'application HTTP ou HTTPS externe qui utilise un point d'entrée public ou privé unique et sécurisé pour acheminer les demandes entrantes à vos applications dans ou en dehors de votre cluster.
+Vous pouvez exposer plusieurs applications dans votre cluster en créant des ressources Ingress gérées par l'équilibreur de charge d'application fourni par IBM. Un équilibreur de charge d'application est un équilibreur de charge d'application HTTP ou HTTPS externe qui utilise un point d'entrée public ou privé unique et sécurisé pour acheminer les demandes entrantes à vos applications dans ou en dehors de votre cluster. Avec Ingress, vous pouvez définir des règles de routage individuelles pour chaque application que vous exposez aux réseaux publics ou privés. Pour des informations générales sur les services Ingress, voir [Planification de réseau externe avec Ingress](cs_network_planning.html#ingress).
 
-**Remarque :** Ingress n'est disponible que pour les clusters standard et nécessite au moins deux noeuds d'agent dans le cluster pour garantir une haute disponibilité et l'application régulière de mises à jour. La configuration d'Ingress nécessite une [règle d'accès administrateur](cs_users.html#access_policies). Vérifiez votre [règle d'accès actuelle](cs_users.html#infra_access).
+**Remarque :** Ingress n'est disponible que pour les clusters standards et nécessite au moins deux noeuds d'agent dans le cluster pour garantir une haute disponibilité et l'application régulière de mises à jour. La configuration d'Ingress nécessite une [règle d'accès administrateur](cs_users.html#access_policies). Vérifiez votre [règle d'accès actuelle](cs_users.html#infra_access).
 
-Lorsque vous créez un cluster, standard, le contrôleur Ingress crée et active automatiquement un équilibreur de charge d'application auquel est affectée une adresse IP publique et une route publique. Un équilibreur de charge d'application auquel est affectée une adresse IP privée portable et une route privée est également créé automatiquement, mais n'est pas activé automatiquement. Vous pouvez configurer ces équilibreurs de charge d'application et définir des règles de routage individuelles pour chaque application que vous exposez aux réseaux publics ou privés. Chaque application exposée au public via Ingress se voit affecter un chemin unique, lequel est rajouté à la route publique, de sorte que vous pouvez utiliser une URL unique pour accès public à votre application dans le cluster.
+Pour sélectionner la configuration optimale pour Ingress, vous pouvez suivre l'arbre de décision suivant :
 
-Pour exposer votre application au public, vous pouvez configurer votre équilibreur de charge d'application public pour les scénarios suivants.
+<img usemap="#ingress_map" border="0" class="image" src="images/networkingdt-ingress.png" width="750px" alt="Cette image vous guide pour sélectionner la configuration optimale pour votre équilibreur de charge Ingress. Si elle ne s'affiche pas, ces informations sont cependant disponibles dans la documentation." style="width:750px;" />
+<map name="ingress_map" id="ingress_map">
+<area href="/docs/containers/cs_ingress.html#private_ingress_no_tls" alt="Exposition privée d'applications à l'aide d'un domaine personnalisé sans utiliser TLS" shape="rect" coords="25, 246, 187, 294"/>
+<area href="/docs/containers/cs_ingress.html#private_ingress_tls" alt="Exposition privée d'applications à l'aide d'un domaine personnalisé en utilisant TLS" shape="rect" coords="161, 337, 309, 385"/>
+<area href="/docs/containers/cs_ingress.html#external_endpoint" alt="Exposition publique d'applications résidant hors de votre cluster à l'aide du domaine fourni par IBM en utilisant TLS" shape="rect" coords="313, 229, 466, 282"/>
+<area href="/docs/containers/cs_ingress.html#custom_domain_cert" alt="Exposition publique d'applications à l'aide d'un domaine personnalisé avec TLS" shape="rect" coords="365, 415, 518, 468"/>
+<area href="/docs/containers/cs_ingress.html#ibm_domain" alt="Exposition publique d'applications à l'aide du domaine fourni par IBM sans utiliser TLS" shape="rect" coords="414, 629, 569, 679"/>
+<area href="/docs/containers/cs_ingress.html#ibm_domain_cert" alt="Exposition publique d'applications à l'aide du domaine fourni par IBM en utilisant TLS" shape="rect" coords="563, 711, 716, 764"/>
+</map>
+
+<br />
+
+
+## Exposition d'applications au public
+{: #ingress_expose_public}
+
+Lorsque vous créez un cluster standard, un équilibreur de charge d'application fourni par IBM est automatiquement activé et une adresse IP publique portable et une route publique lui sont affectées. Chaque application exposée au public via Ingress se voit affecter un chemin unique, lequel est rajouté à la route publique, de sorte que vous pouvez utiliser une URL unique pour accès public à votre application dans le cluster. Pour exposer votre application au public, vous pouvez configurer Ingress pour les scénarios suivants.
 
 -   [Exposition d'applications au public à l'aide du domaine fourni par IBM sans utiliser TLS](#ibm_domain)
 -   [Exposition d'applications au public à l'aide du domaine fourni par IBM en utilisant TLS](#ibm_domain_cert)
 -   [Exposition d'applications au public à l'aide d'un domaine personnalisé en utilisant TLS](#custom_domain_cert)
 -   [Exposition au public d'applications résidant hors de votre cluster à l'aide du domaine fourni par IBM ou d'un domaine personnalisé et en utilisant TLS](#external_endpoint)
 
-Pour exposer votre application à des réseaux privés, [activez d'abord l'équilibreur de charge d'application privé](#private_ingress). Vous pouvez ensuite configurer l'équilibreur de charge d'application privé pour les scénarios suivants.
-
--   [Exposition privée d'applications à l'aide d'un domaine personnalisé sans utiliser TLS](#private_ingress_no_tls)
--   [Exposition privée d'applications à l'aide d'un domaine personnalisé en utilisant TLS](#private_ingress_tls)
-
-Après l'exposition publique ou privée de votre application, vous pouvez configurer plus encore votre équilibreur de charge d'application à l'aide des options suivantes.
-
--   [Ouverture de ports dans l'équilibreur de charge d'application Ingress](#opening_ingress_ports)
--   [Configuration de protocoles et de chiffrements SSL au niveau HTTP](#ssl_protocols_ciphers)
--   [Personnalisation de votre équilibreur de charge d'application à l'aide d'annotations](cs_annotations.html)
-{: #ingress_annotation}
-
-Pour sélectionner la configuration optimale pour Ingress, vous pouvez suivre l'arbre de décision suivant :
-
-<img usemap="#ingress_map" border="0" class="image" src="images/networkingdt-ingress.png" width="750px" alt="Cette image vous aide à sélectionner la configuration optimale pour votre contrôleur Ingress. Si l'image ne s'affiche pas, elle est néanmoins disponible dans la documentation." style="width:750px;" />
-<map name="ingress_map" id="ingress_map">
-<area href="/docs/containers/cs_ingress.html#private_ingress_no_tls" alt="Exposition privée d'applications à l'aide d'un domaine personnalisé sans utiliser TLS" shape="rect" coords="25, 246, 187, 294"/>
-<area href="/docs/containers/cs_ingress.html#private_ingress_tls" alt="Exposition privée d'applications à l'aide d'un domaine personnalisé en utilisant TLS" shape="rect" coords="161, 337, 309, 385"/>
-<area href="/docs/containers/cs_ingress.html#external_endpoint" alt="Exposition publique d'applications résidant hors de votre cluster à l'aide du domaine fourni par IBM en utilisant TLS" shape="rect" coords="313, 229, 466, 282"/>
-<area href="/docs/containers/cs_ingress.html#custom_domain_cert" alt="Exposition publique d'applications à l'aide d'un domaine personnalisé avec TLS" shape="rect" coords="365, 415, 518, 468"/>
-<area href="/docs/containers/cs_ingress.html#ibm_domain" alt="Exposition publique d'applications à l'aide du domaine fourni par IBM sans utiliser TLS" shape="rect" coords="414, 609, 569, 659"/>
-<area href="/docs/containers/cs_ingress.html#ibm_domain_cert" alt="Exposition publique d'applications à l'aide du domaine fourni par IBM en utilisant TLS" shape="rect" coords="563, 681, 716, 734"/>
-</map>
-
-<br />
-
-
-## Expositions d'applications au public à l'aide du domaine fourni par IBM sans TLS
+### Expositions d'applications au public à l'aide du domaine fourni par IBM sans TLS
 {: #ibm_domain}
 
-Vous pouvez configurer l'équilibreur de charge d'application n tant qu'équilibreur de charge HTTP pour les applications dans votre cluster et utiliser le domaine fourni par IBM pour accéder à vos applications depuis Internet.
+Vous pouvez configurer l'équilibreur de charge d'application pour opérer sur le trafic réseau HTTP entrant vers les applications dans votre cluster et utiliser le domaine fourni par IBM pour accéder à vos applications depuis Internet.
 
 Avant de commencer :
 
 -   Si ne n'est déjà fait, [créez un cluster standard](cs_clusters.html#clusters_ui).
 -   [Ciblez avec votre interface CLI](cs_cli_install.html#cs_cli_configure) votre cluster pour exécuter des commandes `kubectl`.
 
-Pour configurer l'équilibreur de charge d'application :
+Pour exposer une application à l'aide du domaine fourni par IBM :
 
 1.  [Déployez votre application sur le cluster](cs_app.html#app_cli). Lorsque vous déployez l'application sur le cluster, un ou plusieurs pods sont créés pour vous et exécutent votre application dans un conteneur. Prenez soin d'ajouter un libellé à votre déploiement dans la section "metadata" de votre fichier de configuration. Ce libellé est nécessaire pour identifier tous les pods où s'exécute votre application afin de pouvoir les inclure dans l'équilibrage de charge Ingress.
-2.  Créez un service Kubernetes pour l'application à exposer. Le contrôleur Ingress ne peut inclure votre application dans l'équilibrage de charge Ingress que si l'application est exposée via un service Kubernetes dans le cluster.
+2.  Créez un service Kubernetes pour l'application à exposer. L'équilibreur de charge d'application ne peut inclure votre application dans l'équilibrage de charge Ingress que si votre application est exposée via un service Kubernetes dans le cluster.
     1.  Ouvrez l'éditeur de votre choix et créez un fichier de configuration de service nommé, par exemple, `myservice.yaml`.
-    2.  Définissez un service d'équilibreur de charge pour l'application que vous désirez exposer au public. 
+    2.  Définissez un service d'équilibreur de charge pour l'application que vous désirez exposer au public.
 
         ```
         apiVersion: v1
@@ -237,22 +225,22 @@ _&lt;mycluster&gt;_ par le nom du cluster sur lequel l'application que vous dés
 <br />
 
 
-## Exposition d'applications au public à l'aide du domaine fourni par IBM en utilisant TLS
+### Exposition d'applications au public à l'aide du domaine fourni par IBM en utilisant TLS
 {: #ibm_domain_cert}
 
-Vous pouvez configurer l'équilibreur de charge d'application pour gérer les connexions TLS entrantes pour vos applications, déchiffrer le trafic réseau en utilisant le certificat TLS fourni par IBM et acheminer la demande non chiffrée aux applications exposées dans votre cluster.
+Vous pouvez configurer le contrôle Ingress pour gérer les connexions TLS entrantes vers vos applications, déchiffrer le trafic réseau en utilisant le certificat TLS fourni par IBM et acheminer la demande non chiffrée aux applications exposées dans votre cluster.
 
 Avant de commencer :
 
 -   Si ne n'est déjà fait, [créez un cluster standard](cs_clusters.html#clusters_ui).
 -   [Ciblez avec votre interface CLI](cs_cli_install.html#cs_cli_configure) votre cluster pour exécuter des commandes `kubectl`.
 
-Pour configurer l'équilibreur de charge d'application :
+Pour exposer une application à l'aide du domaine fourni par IBM avec TLS :
 
 1.  [Déployez votre application sur le cluster](cs_app.html#app_cli). Prenez soin d'ajouter un libellé à votre déploiement dans la section "metadata" de votre fichier de configuration. Ce libellé identifie tous les pods où s'exécute votre application afin de pouvoir les inclure dans l'équilibrage de charge Ingress.
 2.  Créez un service Kubernetes pour l'application à exposer. L'équilibreur de charge d'application ne peut inclure votre application dans l'équilibrage de charge Ingress que si votre application est exposée via un service Kubernetes dans le cluster.
     1.  Ouvrez l'éditeur de votre choix et créez un fichier de configuration de service nommé, par exemple, `myservice.yaml`.
-    2.  Définissez un service d'équilibreur de charge pour l'application que vous désirez exposer au public. 
+    2.  Définissez un service d'équilibreur de charge pour l'application que vous désirez exposer au public.
 
         ```
         apiVersion: v1
@@ -433,7 +421,7 @@ Pour configurer l'équilibreur de charge d'application :
 <br />
 
 
-## Exposition d'applications au public à l'aide d'un domaine personnalisé en utilisant TLS
+### Exposition d'applications au public à l'aide d'un domaine personnalisé en utilisant TLS
 {: #custom_domain_cert}
 
 Vous pouvez configurer l'équilibreur de charge d'application privé afin d'acheminer le trafic réseau entrant aux applications dans votre cluster et d'utiliser votre propre certificat TLS pour gérer la terminaison TLS, tout en utilisant votre domaine personnalisé au lieu du domaine fourni par IBM.
@@ -444,7 +432,7 @@ Avant de commencer :
 -   Si ne n'est déjà fait, [créez un cluster standard](cs_clusters.html#clusters_ui).
 -   [Ciblez avec votre interface CLI](cs_cli_install.html#cs_cli_configure) votre cluster pour exécuter des commandes `kubectl`.
 
-Pour configurer l'équilibreur de charge d'application :
+Pour exposer une application à l'aide d'un domaine personnalisé avec TLS :
 
 1.  Créez un domaine personnalisé. Pour créer un domaine personnalisé, gérez votre fournisseur DNS (Domain Name Service) afin d'enregistrer votre domaine personnalisé.
 2.  Configurez votre domaine pour acheminer le trafic réseau entrant à l'équilibreur de charge d'application fourni par IBM. Sélectionnez l'une des options suivantes :
@@ -453,10 +441,11 @@ Pour configurer l'équilibreur de charge d'application :
 3.  Importez ou créez un certificat TLS et une valeur confidentielle de clé :
     * Si vous disposez déjà d'un certificat TLS stocké dans {{site.data.keyword.cloudcerts_long_notm}} que vous désirez utiliser, vous pouvez importer sa valeur confidentielle associée dans votre cluster en exécutant la commande suivante :
 
-          ```
-          bx cs alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
-          ```
-          {: pre}
+      ```
+      bx cs alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
+      ```
+      {: pre}
+
     * Si vous ne disposez pas de certificat TLS, procédez comme suit :
         1. Créez un certificat TLS et une clé pour votre domaine codés au format PEM.
         2.  Ouvrez l'éditeur de votre choix et créez un fichier de configuration de valeur confidentielle Kubernetes nommé, par exemple, `mysecret.yaml`.
@@ -480,7 +469,7 @@ Pour configurer l'équilibreur de charge d'application :
 5.  Créez un service Kubernetes pour l'application à exposer. L'équilibreur de charge d'application ne peut inclure votre application dans l'équilibrage de charge Ingress que si votre application est exposée via un service Kubernetes dans le cluster.
 
     1.  Ouvrez l'éditeur de votre choix et créez un fichier de configuration de service nommé, par exemple, `myservice.yaml`.
-    2.  Définissez un service d'équilibreur de charge pour l'application que vous désirez exposer au public. 
+    2.  Définissez un service d'équilibreur de charge pour l'application que vous désirez exposer au public.
 
         ```
         apiVersion: v1
@@ -638,10 +627,10 @@ Pour configurer l'équilibreur de charge d'application :
 <br />
 
 
-## Exposition au public d'applications résidant hors de votre cluster à l'aide du domaine fourni par IBM ou d'un domaine personnalisé et en utilisant TLS
+### Exposition au public d'applications résidant hors de votre cluster à l'aide du domaine fourni par IBM ou d'un domaine personnalisé et en utilisant TLS
 {: #external_endpoint}
 
-Vous pouvez configurer l'équilibreur de charge d'application pour des applications situées en dehors du cluster et à inclure dans l'équilibrage de charge du cluster. Les requêtes entrantes sur le domaine fourni par IBM, ou sur votre domaine personnalisé, sont acheminées automatiquement à l'application externe.
+Vous pouvez configurer l'équilibreur de charge d'application pour inclure dans son opération des applications situées hors de votre cluster. Les requêtes entrantes sur le domaine fourni par IBM, ou sur votre domaine personnalisé, sont acheminées automatiquement à l'application externe.
 
 Avant de commencer :
 
@@ -649,7 +638,7 @@ Avant de commencer :
 -   [Ciblez avec votre interface CLI](cs_cli_install.html#cs_cli_configure) votre cluster pour exécuter des commandes `kubectl`.
 -   Vérifiez que l'application externe que vous désirez englober dans l'équilibrage de charge du cluster est accessible via une adresse IP publique.
 
-Vous pouvez configurer l'équilibreur de charge d'application pour acheminer le trafic réseau entrant sur le domaine fourni par IBM à des applications situées en dehors de votre cluster. Si vous désirez utiliser à la place un domaine personnalisé et un certificat TLS, remplacez le domaine fourni par IBM et le certificat TLS par vos [domaine personnalisé et certificat TLS](#custom_domain_cert).
+Vous pouvez acheminer le trafic réseau entrant sur le domaine fourni par IBM vers des applications situées hors de votre cluster. Si vous désirez utiliser à la place un domaine personnalisé et un certificat TLS, remplacez le domaine fourni par IBM et le certificat TLS par vos [domaine personnalisé et certificat TLS](#custom_domain_cert).
 
 1.  Configurez un noeud final Kubernetes définissant l'emplacement externe de l'application que vous désirez inclure dans l'équilibrage de charge du cluster.
     1.  Ouvrez l'éditeur de votre choix et créez un fichier de configuration de noeud final nommé, par exemple, `myexternalendpoint.yaml`.
@@ -877,10 +866,18 @@ requêtes entrantes au noeud final externe créé auparavant.
 <br />
 
 
-## Activation de l'équilibreur de charge d'application privé
+## Exposition d'applications à un réseau privé
+{: #ingress_expose_private}
+
+Lorsque vous créez un cluster standard, un équilibreur de charge d'application fourni par IBM est automatiquement créé et une adresse IP privée portable et une route privée lui sont affectées. Toutefois, l'équilibreur de charge d'application privé par défaut n'est pas automatiquement activé. Pour exposer votre application à des réseaux privés, [activez l'équilibreur de charge d'application privé par défaut](#private_ingress) tout d'abord. Vous pouvez ensuite configurer Ingress pour les scénarios suivants.
+
+-   [Exposition privée d'applications à l'aide d'un domaine personnalisé sans utiliser TLS](#private_ingress_no_tls)
+-   [Exposition privée d'applications à l'aide d'un domaine personnalisé en utilisant TLS](#private_ingress_tls)
+
+### Activation de l'équilibreur de charge d'application privé par défaut
 {: #private_ingress}
 
-Lorsque vous créez un cluster standard, le contrôleur Ingress crée automatiquement un équilibreur de charge d'application privé, mais sans l'activer automatiquement. Pour pouvoir utiliser l'équilibreur de charge d'application, vous devez l'activer avec l'adresse IP privée portable pré-affectée fournie par IBM, ou votre propre adresse IP privée portable. **Remarque **: si vous avez utilisé l'indicateur `--no-subnet` lors de la création du cluster, vous devez ajouter un sous-réseau privé portable ou un sous-réseau géré par l'utilisateur avant de pouvoir activer l'équilibreur de charge d'application privé. Pour plus d'informations, voir [Demande de sous-réseaux supplémentaires pour votre cluster](cs_subnets.html#request).
+Avant d'utiliser l'équilibreur de charge d'application privé par défaut, vous devez l'activer avec l'adresse IP privée portable fournie par IBM, ou votre propre adresse IP privée portable. **Remarque **: si vous avez utilisé l'indicateur `--no-subnet` lors de la création du cluster, vous devez ajouter un sous-réseau privé portable ou un sous-réseau géré par l'utilisateur avant de pouvoir activer l'équilibreur de charge d'application privé. Pour plus d'informations, voir [Demande de sous-réseaux supplémentaires pour votre cluster](cs_subnets.html#request).
 
 Avant de commencer :
 
@@ -946,7 +943,7 @@ Pour activer l'équilibreur de charge d'application privé à l'aide de votre pr
 <br />
 
 
-## Exposition privée d'applications à l'aide d'un domaine personnalisé sans utiliser TLS
+### Exposition privée d'applications à l'aide d'un domaine personnalisé sans utiliser TLS
 {: #private_ingress_no_tls}
 
 Vous pouvez configurer l'équilibreur de charge d'application privé afin d'acheminer le trafic réseau entrant aux applications dans votre cluster en utilisant un domaine personnalisé.
@@ -954,18 +951,18 @@ Vous pouvez configurer l'équilibreur de charge d'application privé afin d'ache
 
 Avant de commencer, [activez l'équilibreur de charge d'application privé](#private_ingress).
 
-Pour configurer l'équilibreur de charge d'application privé :
+Pour exposition privée d'une application à l'aide d'un domaine personnalisé en utilisant TLS :
 
 1.  Créez un domaine personnalisé. Pour créer un domaine personnalisé, gérez votre fournisseur DNS (Domain Name Service) afin d'enregistrer votre domaine personnalisé.
 
-2.  Mappez votre domaine personnalisé à l'adresse IP privée portable de 'équilibreur de charge d'application  privé fourni par IBM en ajoutant l'adresse IP en tant qu'enregistrement. Pour identifier l'adresse To IP privée portable de l'équilibreur de charge d'application privé, lancez la commande `bx cs albs --cluster <cluster_name>`.
+2.  Mappez votre domaine personnalisé à l'adresse IP privée portable de l'équilibreur de charge d'application  privé fourni par IBM en ajoutant l'adresse IP en tant qu'enregistrement. Pour identifier l'adresse IP privée portable de l'équilibreur de charge d'application privé, lancez la commande `bx cs albs --cluster <cluster_name>`.
 
 3.  [Déployez votre application sur le cluster](cs_app.html#app_cli). Lorsque vous déployez l'application sur le cluster, un ou plusieurs pods sont créés pour vous et exécutent votre application dans un conteneur. Prenez soin d'ajouter un libellé à votre déploiement dans la section "metadata" de votre fichier de configuration. Ce libellé est nécessaire pour identifier tous les pods où s'exécute votre application afin de pouvoir les inclure dans l'équilibrage de charge Ingress.
 
 4.  Créez un service Kubernetes pour l'application à exposer. L'équilibreur de charge d'application privé ne peut inclure votre application dans l'équilibrage de charge Ingress que si votre application est exposée via un service Kubernetes dans le cluster.
 
     1.  Ouvrez l'éditeur de votre choix et créez un fichier de configuration de service nommé, par exemple, `myservice.yaml`.
-    2.  Définissez un service d'équilibreur de charge pour l'application que vous désirez exposer au public. 
+    2.  Définissez un service d'équilibreur de charge pour l'application que vous désirez exposer au public.
 
         ```
         apiVersion: v1
@@ -1049,7 +1046,7 @@ Pour configurer l'équilibreur de charge d'application privé :
         </tr>
         <tr>
         <td><code>ingress.bluemix.net/ALB-ID</code></td>
-        <td>Remplacez <em>&lt;private_ALB_ID&gt;</em> par l'ID ALB de votre contrôleur Ingress privé. Exécutez <code>bx cs albs --cluster <my_cluster></code> pour obtenir cet ID ALB. Pour plus d'informations sur cette annotation Ingress, voir [Routage de l'équilibreur de charge d'application privé](cs_annotations.html#alb-id).</td>
+        <td>Remplacez <em>&lt;private_ALB_ID&gt;</em> par l'ID de votre équilibreur de charge d'application privé. Exécutez <code>bx cs albs --cluster <my_cluster></code> pour identifier l'ID de l'équilibreur de charge d'application. Pour plus d'informations sur cette annotation Ingress, voir [Routage de l'équilibreur de charge d'application privé](cs_annotations.html#alb-id).</td>
         </tr>
         <td><code>host</code></td>
         <td>Remplacez <em>&lt;mycustomdomain&gt;</em> par votre domaine personnalisé.
@@ -1113,19 +1110,19 @@ Pour configurer l'équilibreur de charge d'application privé :
 <br />
 
 
-## Exposition privée d'applications à l'aide d'un domaine personnalisé en utilisant TLS
+### Exposition privée d'applications à l'aide d'un domaine personnalisé en utilisant TLS
 {: #private_ingress_tls}
 
-Vous pouvez configurer l'équilibreur de charge d'application privé afin d'acheminer le trafic réseau entrant aux applications dans votre cluster et d'utiliser votre propre certificat TLS pour gérer la terminaison TLS, tout en utilisant votre domaine personnalisé.
+Vous pouvez utiliser des équilibreurs de charge d'application privés pour acheminer le trafic réseau entrant vers les applications dans votre cluster et utiliser votre propre certificat TLS pour gérer la terminaison TLS, tout en utilisant votre domaine personnalisé.
 {:shortdesc}
 
-Avant de commencer, [activez l'équilibreur de charge d'application privé](#private_ingress).
+Avant de commencer, [activez l'équilibreur de charge d'application privé par défaut](#private_ingress).
 
-Pour configurer l'équilibreur de charge d'application :
+Pour exposition privée d'une application à l'aide d'un domaine personnalisé en utilisant TLS :
 
 1.  Créez un domaine personnalisé. Pour créer un domaine personnalisé, gérez votre fournisseur DNS (Domain Name Service) afin d'enregistrer votre domaine personnalisé.
 
-2.  Mappez votre domaine personnalisé à l'adresse IP privée portable de 'équilibreur de charge d'application  privé fourni par IBM en ajoutant l'adresse IP en tant qu'enregistrement. Pour identifier l'adresse To IP privée portable de l'équilibreur de charge d'application privé, lancez la commande `bx cs albs --cluster <cluster_name>`.
+2.  Mappez votre domaine personnalisé à l'adresse IP privée portable de l'équilibreur de charge d'application  privé fourni par IBM en ajoutant l'adresse IP en tant qu'enregistrement. Pour identifier l'adresse IP privée portable de l'équilibreur de charge d'application privé, lancez la commande `bx cs albs --cluster <cluster_name>`.
 
 3.  Importez ou créez un certificat TLS et une valeur confidentielle de clé :
     * Si vous disposez déjà d'un certificat TLS stocké dans {{site.data.keyword.cloudcerts_long_notm}} que vous désirez utiliser, vous pouvez importer sa valeur confidentielle associée dans votre cluster en exécutant la commande `bx cs alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>`.
@@ -1152,7 +1149,7 @@ Pour configurer l'équilibreur de charge d'application :
 5.  Créez un service Kubernetes pour l'application à exposer. L'équilibreur de charge d'application privé ne peut inclure votre application dans l'équilibrage de charge Ingress que si votre application est exposée via un service Kubernetes dans le cluster.
 
     1.  Ouvrez l'éditeur de votre choix et créez un fichier de configuration de service nommé, par exemple, `myservice.yaml`.
-    2.  Définissez un service d'équilibreur de charge pour l'application que vous désirez exposer au public. 
+    2.  Définissez un service d'équilibreur de charge pour l'application que vous désirez exposer au public.
 
         ```
         apiVersion: v1
@@ -1199,10 +1196,7 @@ Pour configurer l'équilibreur de charge d'application :
     1.  Ouvrez l'éditeur de votre choix et créez un fichier de configuration Ingress nommé, par exemple, `myingress.yaml`.
     2.  Définissez dans votre fichier de configuration une ressource Ingress utilisant votre domaine personnalisé pour acheminer le trafic réseau entrant à vos services et votre certificat personnalisé pour gérer la terminaison TLS. Vous pouvez définir pour chaque service un chemin d'accès individuel en l'ajoutant à votre domaine personnalisé de manière à créer un chemin unique vers votre application. Par exemple, `https://mydomain/myapp`. Lorsque vous indiquez cette route dans un navigateur Web, le trafic réseau est acheminé à l'équilibreur de charge d'application. L'équilibreur de charge d'application recherche le service associé et envoie le trafic réseau au service, ainsi qu'aux pods où l'application s'exécute.
 
-        **Remarque :** il est important que l'application soit à l'écoute sur le chemin que vous avez défini dans la ressource Ingress. Si ce n'est pas le cas, le trafic réseau 
-
-
-        ne peut pas être acheminé à l'application. La plupart des applications ne sont pas à l'écoute sur un chemin spécifique, mais utilisent le chemin racine et un port spécifique. Dans ce cas, définissez le chemin racine sous la forme `/`, sans spécifier de chemin individuel pour votre application.
+        **Remarque :** il est important que l'application soit à l'écoute sur le chemin que vous avez défini dans la ressource Ingress. Dans la négative, le trafic réseau ne peut pas être acheminé à l'application. La plupart des applications ne sont pas à l'écoute sur un chemin spécifique, mais utilisent le chemin racine et un port spécifique. Dans ce cas, définissez le chemin racine sous la forme `/`, sans spécifier de chemin individuel pour votre application.
 
         ```
         apiVersion: extensions/v1beta1
@@ -1319,7 +1313,20 @@ Pour configurer l'équilibreur de charge d'application :
 <br />
 
 
-## Ouverture de ports dans l'équilibreur de charge d'application Ingress
+
+
+## Facultatif : Configuration d'un équilibreur de charge d'application
+{: #configure_alb}
+
+Vous pouvez configurer plus encore un équilibreur de charge d'application à l'aide des options suivantes.
+
+-   [Ouverture de ports dans l'équilibreur de charge d'application Ingress](#opening_ingress_ports)
+-   [Configuration de protocoles et de chiffrements SSL au niveau HTTP](#ssl_protocols_ciphers)
+-   [Personnalisation de votre équilibreur de charge d'application à l'aide d'annotations](cs_annotations.html)
+{: #ingress_annotation}
+
+
+### Ouverture de ports dans l'équilibreur de charge d'application Ingress
 {: #opening_ingress_ports}
 
 Par défaut, seuls les ports 80 et 443 sont exposés dans l'équilibreur de charge d'application Ingress. Pour exposer d'autres ports, vous pouvez éditer la ressource de mappe de configuration `ibm-cloud-provider-ingress-cm`.
@@ -1380,10 +1387,7 @@ Par défaut, seuls les ports 80 et 443 sont exposés dans l'équilibreur de char
 
 Pour plus d'informations sur les ressources de mappe de configuration, voir la [documentation Kubernetes](https://kubernetes-v1-4.github.io/docs/user-guide/configmap/).
 
-<br />
-
-
-## Configuration de protocoles et de chiffrements SSL au niveau HTTP
+### Configuration de protocoles et de chiffrements SSL au niveau HTTP
 {: #ssl_protocols_ciphers}
 
 Activez les protocoles et chiffrements SSL au niveau HTTP global en éditant la mappe de configuration `ibm-cloud-provider-ingress-cm`.

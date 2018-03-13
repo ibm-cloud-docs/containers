@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-29"
 
 ---
 
@@ -118,7 +118,7 @@ Pour configurer une connectivité VPN avec Strongswan :
     </tr>
     <tr>
     <td><code>local.subnet</code></td>
-    <td>Remplacez cette valeur par la liste des CIDR de sous-réseau de cluster à exposer sur la connexion VPN avec le réseau local. Cette liste peut inclure les sous-réseaux suivants : <ul><li>CIDR de sous-réseau du pod Kubernetes : <code>172.30.0.0/16</code></li><li>CIDR de sous-réseau du service Kubernetes : <code>172.21.0.0/16</code></li><li>Si vous disposez d'applications exposées par un service NodePort sur le réseau privé, le CIDR de sous-réseau privé du noeud worker. Pour identifier cette valeur, exécutez la commande <code>bx cs subnets | grep <xxx.yyy.zzz></code>, où &lt;xxx.yyy.zzz&gt; correspond aux trois premiers octets de l'adresse IP privée du noeud worker.</li><li>Si vous disposez d'applications exposées par des services LoadBalancer sur le réseau privé, CIDR de sous-réseau privé ou géré par l'utilisateur du cluster. Pour identifier cs valeurs, exécutez la commande <code>bx cs cluster-get <cluster name> --showResources</code>. Dans la section <b>VLANS</b>, recherchez des CIDR indiquant <code>false</code> pour <b>Public</b>.</li></ul></td>
+    <td>Remplacez cette valeur par la liste des CIDR de sous-réseau de cluster à exposer sur la connexion VPN avec le réseau local. Cette liste peut inclure les sous-réseaux suivants : <ul><li>CIDR de sous-réseau du pod Kubernetes : <code>172.30.0.0/16</code></li><li>CIDR de sous-réseau du service Kubernetes : <code>172.21.0.0/16</code></li><li>Si vos applications sont exposées par un service NodePort sur le réseau privé, CIDR de sous-réseau privé du noeud worker. Pour identifier cette valeur, exécutez la commande <code>bx cs subnets | grep <xxx.yyy.zzz></code>, où <code>&lt;xxx.yyy.zzz&gt;</code> correspond aux trois premiers octets de l'adresse IP privée du noeud worker.</li><li>Si vous disposez d'applications exposées par des services LoadBalancer sur le réseau privé, CIDR de sous-réseau privé ou géré par l'utilisateur du cluster. Pour identifier cs valeurs, exécutez la commande <code>bx cs cluster-get <cluster name> --showResources</code>. Dans la section <b>VLANS</b>, recherchez des CIDR indiquant <code>false</code> pour <b>Public</b>.</li></ul></td>
     </tr>
     <tr>
     <td><code>local.id</code></td>
@@ -129,7 +129,7 @@ Pour configurer une connectivité VPN avec Strongswan :
     <td>Remplacez cette valeur par l'adresse IP publique de la passerelle VPN sur site.</td>
     </tr>
     <td><code>remote.subnet</code></td>
-    <td>Remplacez cette valeur par la liste des CIDR de sous-réseau privé sur site auxquels le cluster Kubernetes est autorisé à accéder.</td>
+    <td>Remplacez cette valeur par la liste des CIDR de sous-réseau privé sur site auxquels les clusters Kubernetes sont autorisés à accéder.</td>
     </tr>
     <tr>
     <td><code>remote.id</code></td>
@@ -190,9 +190,9 @@ Pour configurer une connectivité VPN avec Strongswan :
         ```
         {: screen}
 
-        **Remarque **:
-          - Il est fort probable que le statut du VPN n'indique pas `Etabli` la première fois que vous utilisez ce diagramme Helm. Vous aurez peut-être besoin de vérifier les paramètres de noeud final VPN sur site et de revenir plusieurs fois à l'étape 3 pour modifier le fichier `config.yaml` avant que la connexion n'aboutisse.
-          - Si le pod VPN indique l'état `Erreur` ou continue à tomber en panne et à redémarrer, ceci peut être dû à une validation de paramètres dans le section `ipsec.conf` de la mappe de configuration du diagramme. Pour savoir si tel est le cas, recherchez la présence d'erreurs de validation dans les journaux du pod Strongswan en exécutant la commande `kubectl logs -n kube-system $STRONGSWAN_POD`. En cas d'erreurs de validation, exécutez la commande `helm delete --purge vpn`, revenez à l'étape 3 pour corriger les valeurs incorrectes dans le fichier `config.yaml`, et répétez les étapes 4 à 8. Si votre cluster comporte un grand nombre de noeuds worker, vous pouvez également utiliser la commande `helm upgrade` pour appliquer rapidement vos modifications au lieu d'exécuter les commandes `helm delete` et `helm install`.
+      **Remarque **:
+          - Il est probable que le statut du VPN n'indique pas `ESTABLISHED` la première fois que vous utilisez ce diagramme Helm. Vous aurez peut-être besoin de vérifier les paramètres de noeud final VPN sur site et de revenir plusieurs fois à l'étape 3 pour modifier le fichier `config.yaml` avant que la connexion n'aboutisse.
+          - Si le pod VPN indique l'état `Erreur` ou continue à tomber en panne et à redémarrer, ceci peut être dû à une validation de paramètres dans le section `ipsec.conf` de la mappe de configuration du diagramme. Recherchez la présence d'erreurs de validation dans les journaux du pod Strongswan en exécutant la commande `kubectl logs -n kube-system $STRONGSWAN_POD`. S'il en existe, exécutez la commande `helm delete --purge vpn`, revenez à l'étape 3 pour corriger les valeurs incorrectes dans le fichier `config.yaml`, puis répétez les étapes 4 à 8. Si votre cluster comporte un grand nombre de noeuds worker, vous pouvez également utiliser la commande `helm upgrade` pour appliquer plus rapidement vos modifications au lieu d'exécuter les commandes `helm delete` et `helm install`.
 
     4. Une fois que le statut du VPN indique `Etabli`, testez la connexion avec une commande `ping`. L'exemple suivant envoie une sonde png depuis le pod VPN dans le cluster Kubernetes à l'adresse IP privée de la passerelle VPN sur site. Vérifiez que les valeurs correctes ont été spécifiées pour `remote.subnet` et `local.subnet` dans le fichier de configuration et que la liste de sous-réseaux locaux inclut l'adresse IP source depuis laquelle vous envoyez l'instruction.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -25,7 +25,7 @@ lastupdated: "2018-01-12"
 ## 使用 NodePort 服务类型来配置对应用程序的公共访问权
 {: #config}
 
-对于 Lite 或标准集群，可以将应用程序公开为 Kubernetes NodePort 服务。
+对于免费或标准集群，可以将应用程序公开为 Kubernetes NodePort 服务。
 {:shortdesc}
 
 **注**：工作程序节点的公共 IP 地址不是永久固定的。如果必须重新创建工作程序节点，那么将为该工作程序节点分配新的公共 IP 地址。如果需要服务具有稳定的公共 IP 地址和更高可用性，请使用 [LoadBalancer 服务](cs_loadbalancer.html)或 [Ingress](cs_ingress.html) 来公开应用程序。

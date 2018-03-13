@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-09"
+lastupdated: "2018-01-29"
 
 ---
 
@@ -15,9 +15,9 @@ lastupdated: "2018-01-09"
 {:tip: .tip}
 {:download: .download}
 
-# 이 페이지는 이동했습니다! 
+# 찾고 있는 컨텐츠가 이동되었습니다.
 
-보안 주제는 다음과 같습니다. 
+새 위치에서 최신 정보를 확인하십시오.
  - [클러스터 컴포넌트에 의한 보안](cs_secure.html#cluster)
    - [Kubernetes 마스터](cs_secure.html#master)
    - [작업자 노드](cs_secure.html#worker)
@@ -31,3 +31,5 @@ lastupdated: "2018-01-09"
  - [Strongswan IPSec VPN 서비스 Helm 차트로 VPN 연결 설정](cs_vpn.html#vpn)
  - [네트워크 정책](cs_network_policy.html#network_policies)
  - [네트워크 트래픽을 에지 작업자 노드로 제한](cs_edge.html#edge)
+
+

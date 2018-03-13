@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-06"
 
 ---
 
@@ -21,6 +21,8 @@ lastupdated: "2018-01-12"
 
 公开一个端口，并使用负载均衡器的可移植 IP 地址来访问应用程序。使用公共 IP 地址使应用程序可在因特网上进行访问，或使用专用 IP 地址使应用程序可在专用基础架构网络上进行访问。
 {:shortdesc}
+
+
 
 ## 使用 LoadBalancer 服务类型来配置对应用程序的访问权
 {: #config}
@@ -43,6 +45,7 @@ lastupdated: "2018-01-12"
 1.  [将应用程序部署到集群](cs_app.html#app_cli)。将应用程序部署到集群时，将创建一个或多个 pod 以用于在容器中运行应用程序。确保在配置文件的 metadata 部分中添加针对您的部署的标签。需要此标签才能识别运行应用程序的所有 pod，以便可以将这些 pod 包含在负载均衡中。
 2.  针对要公开的应用程序创建 LoadBalancer 服务。要使应用程序在公共因特网或专用网络上可用，请为您的应用程序创建 Kubernetes 服务。配置该服务以在负载均衡中包含构成该应用程序的所有 pod。
     1.  创建名为 `myloadbalancer.yaml`（举例来说）的服务配置文件。
+
     2.  针对要公开的应用程序定义 LoadBalancer 服务。
         - 如果集群位于公用 VLAN 上，那么将使用可移植的公共 IP 地址。大多数集群都位于公用 VLAN 上。
         - 如果集群仅在专用 VLAN 上可用，那么将使用可移植的专用 IP 地址。
@@ -142,6 +145,7 @@ lastupdated: "2018-01-12"
     Labels:                 <none>
     Selector:               <selectorkey>=<selectorvalue>
     Type:                   LoadBalancer
+    Location:               dal10
     IP:                     10.10.10.90
     LoadBalancer Ingress:   192.168.10.38
     Port:                   <unset> 8080/TCP
@@ -149,14 +153,16 @@ lastupdated: "2018-01-12"
     Endpoints:              172.30.171.87:8080
     Session Affinity:       None
     Events:
-    FirstSeen LastSeen Count From   SubObjectPath Type  Reason   Message
-      --------- -------- ----- ----   ------------- -------- ------   -------
-      10s  10s  1 {service-controller }   Normal  CreatingLoadBalancer Creating load balancer
-      10s  10s  1 {service-controller }   Normal  CreatedLoadBalancer Created load balancer
+    FirstSeen	LastSeen	Count	From			SubObjectPath	Type		Reason			Message
+      ---------	--------	-----	----			-------------	--------	------			-------
+      10s		10s		1	{service-controller }			Normal		CreatingLoadBalancer	Creating load balancer
+      10s		10s		1	{service-controller }			Normal		CreatedLoadBalancer	Created load balancer
     ```
     {: screen}
 
-**LoadBalancer Ingress** IP 地址是分配给 LoadBalancer 服务的可移植 IP 地址。
+    **LoadBalancer Ingress** IP 地址是分配给 LoadBalancer 服务的可移植 IP 地址。
+
+
 4.  如果创建了公共负载均衡器，请从因特网访问该应用程序。
     1.  打开首选的 Web 浏览器。
     2.  输入负载均衡器的可移植公共 IP 地址和端口。在上述示例中，可移植公共 IP 地址 `192.168.10.38` 已分配给 LoadBalancer 服务。

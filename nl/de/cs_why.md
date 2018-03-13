@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-01-30"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-01-11"
 {{site.data.keyword.containershort}} bietet durch die Kombination von Docker- und Kubernetes-Technologien leistungsstarke Tools, ein intuitives Benutzererlebnis sowie integrierte Sicherheit und Isolation, um die Bereitstellung, den Betrieb, die Skalierung und die Überwachung von containerisierten Apps über einen Cluster von Berechnungshosts zu automatisieren.
 {:shortdesc}
 
-## Vorteile durch die Verwendung von Clustern
+## Vorteile durch die Verwendung des Service
 {: #benefits}
 
 Cluster werden auf Rechenhosts bereitgestellt, die native Kubernetes-Funktionalität und durch {{site.data.keyword.IBM_notm}} hinzugefügte Funktionen zur Verfügung stellen.
@@ -29,27 +29,25 @@ Cluster werden auf Rechenhosts bereitgestellt, die native Kubernetes-Funktionali
 
 |Vorteil|Beschreibung|
 |-------|-----------|
-|Single-Tenant-Kubernetes-Cluster mit Isolation der Berechnungs-, Netz- und Speicherinfrastruktur|<ul><li>Erstellen Sie Ihre eigene angepasste Infrastruktur, die den Anforderungen Ihrer Organisation entspricht.</li><li>Ermöglicht die Einrichtung eines dedizierten und geschützten Kubernetes-Masters sowie von Workerknoten, virtuellen Netzen und Speicher unter Nutzung der von IBM Cloud Infrastructure (SoftLayer) bereitgestellten Ressourcen.</li><li>Ermöglicht das Speichern persistenter Daten, die gemeinsame Nutzung von Daten durch Kubernetes-Pods und bei Bedarf die Wiederherstellung von Daten mit dem integrierten und sicheren Datenträgerservice.</li><li>Der komplett verwaltete Kubernetes-Master, der kontinuierlich von {{site.data.keyword.IBM_notm}} überwacht und aktualisiert wird, um Ihren Cluster verfügbar zu halten.</li><li>Bietet volle Unterstützung für alle nativen Kubernetes-APIs.</li></ul>|
+|Single-Tenant-Kubernetes-Cluster mit Isolation der Berechnungs-, Netz- und Speicherinfrastruktur|<ul><li>Erstellen Sie Ihre eigene angepasste Infrastruktur, die den Anforderungen Ihrer Organisation entspricht.</li><li>Ermöglicht die Einrichtung eines dedizierten und geschützten Kubernetes-Masters sowie von Workerknoten, virtuellen Netzen und Speicher unter Nutzung der von IBM Cloud Infrastructure (SoftLayer) bereitgestellten Ressourcen.</li><li>Der komplett verwaltete Kubernetes-Master, der kontinuierlich von {{site.data.keyword.IBM_notm}} überwacht und aktualisiert wird, um Ihren Cluster verfügbar zu halten.</li><li>Ermöglicht das Speichern persistenter Daten, die gemeinsame Nutzung von Daten durch Kubernetes-Pods und bei Bedarf die Wiederherstellung von Daten mit dem integrierten und sicheren Datenträgerservice.</li><li>Bietet volle Unterstützung für alle nativen Kubernetes-APIs.</li></ul>|
 |Einhaltung von Sicherheitsbestimmungen für Images mit Vulnerability Advisor|<ul><li>Ermöglicht die Einrichtung einer eigenen geschützten privaten Docker-Image-Registry, in der Images gespeichert und von allen Benutzern der Organisation gemeinsam genutzt werden können.</li><li>Bietet den Vorteil des automatischen Scannens von Images in Ihrer privaten {{site.data.keyword.Bluemix_notm}}-Registry.</li><li>Ermöglicht die Überprüfung von Empfehlungen für das im Image verwendete Betriebssystem, um potenzielle Schwachstellen zu beheben.</li></ul>|
-|Automatische Skalierung von Apps|<ul><li>Ermöglicht das Definieren angepasster Richtlinien, um Apps auf der Grundlage der CPU-Auslastung und des Speicherbedarfs vertikal nach oben oder nach unten zu skalieren.</li></ul>|
 |Kontinuierliche Überwachung des Clusterzustands|<ul><li>Über das Cluster-Dashboard können Sie den Zustand Ihrer Cluster, Workerknoten und Containerbereitstellungen rasch anzeigen und verwalten.</li><li>Ermöglicht die Feststellung detaillierter Metriken zur Auslastung mit {{site.data.keyword.monitoringlong}} und die rasche Erweiterung des Clusters als Reaktion auf die Arbeitslast.</li><li>Stellt detaillierte Protokollinformationen zu Clusteraktivitäten über den {{site.data.keyword.loganalysislong}} bereit.</li></ul>|
-|Automatische Wiederherstellung von nicht ordnungsgemäß funktionierenden Containern|<ul><li>Führt kontinuierlich Statusprüfungen für Container aus, die auf einem Workerknoten bereitgestellt sind.</li><li>Bewirkt bei Ausfällen die automatische Neuerstellung von Containern.</li></ul>|
-|Serviceerkennung und Service-Management|<ul><li>Ermöglicht das zentrale Registrieren von App-Services, um diese für andere Apps in Ihrem Cluster verfügbar zu machen, jedoch ohne sie öffentlich zugänglich zu machen.</li><li>Ermöglicht das Erkennen registrierter Services, ohne dass Sie den Überblick über wechselnde IP-Adressen oder Container-IDs behalten müssen, und versetzt Sie in die Lage, die Vorteile des automatischen Routing zu verfügbaren Instanzen auszuschöpfen.</li></ul>|
-|Sichere Offenlegung von Services gegenüber der Allgemeinheit|<ul><li>Ermöglicht das Einrichten privater Overlay-Netze mit voller Unterstützung der Lastausgleichsfunktion (Load Balancer) und voller Ingress-Unterstützung, um Ihre Apps öffentlich zugänglich zu machen und Arbeitslasten über mehrere Workerknoten gleichmäßig zu verteilen, ohne den Überblick über die wechselnden IP-Adressen in Ihrem Cluster behalten zu müssen.</li><li>Sie haben die Auswahl zwischen einer öffentlichen IP-Adresse, einer von {{site.data.keyword.IBM_notm}} bereitgestellten Route oder Ihrer eigenen angepassten Domäne, um aus dem Internet auf Services in Ihrem Cluster zuzugreifen.</li></ul>|
-|Integration des {{site.data.keyword.Bluemix_notm}}-Service|<ul><li>Ermöglicht das Hinzufügen zusätzlicher Funktionalität zu Ihrer App durch die Integration von {{site.data.keyword.Bluemix_notm}}-Services wie zum Beispiel Watson-APIs, Blockchain, Datenservices oder Internet of Things und hilft den Benutzern des Clusters, den Prozess der Entwicklung von Apps und Verwaltung von Containern zu vereinfachen.</li></ul>|
+|Sichere Offenlegung von Apps gegenüber der Allgemeinheit|<ul><li>Sie haben die Auswahl zwischen einer öffentlichen IP-Adresse, einer von {{site.data.keyword.IBM_notm}} bereitgestellten Route oder Ihrer eigenen angepassten Domäne, um aus dem Internet auf Services in Ihrem Cluster zuzugreifen.</li></ul>|
+|Integration des {{site.data.keyword.Bluemix_notm}}-Service|<ul><li>Ermöglicht das Hinzufügen zusätzlicher Funktionalität zu Ihrer App durch die Integration von {{site.data.keyword.Bluemix_notm}}-Services wie zum Beispiel Watson-APIs, Blockchain, Datenservices oder Internet of Things.</li></ul>|
+
+
 
 <br />
 
 
-## Vergleich von Lite-Clustern und Standardclustern
+## Vergleich von kostenlosen Clustern und Standardclustern
 {: #cluster_types}
 
-Sie können Lite- oder Standardcluster erstellen. Testen Sie Lite-Cluster, um sich mit einigen Kubernetes-Leistungsmerkmalen vertraut zu machen. Oder erstellen Sie Standardcluster, um das vollständige Leistungsspektrum von Kubernetes zum Bereitstellen von Apps zu nutzen.
+Sie können einen kostenlosen Cluster oder beliebig viele Standardcluster erstellen. Testen Sie kostenlose Cluster, um sich mit einigen Kubernetes-Leistungsmerkmalen vertraut zu machen. Oder erstellen Sie Standardcluster, um das vollständige Leistungsspektrum von Kubernetes zum Bereitstellen von Apps zu nutzen.
 {:shortdesc}
 
-|Merkmale|Lite-Cluster|Standardcluster|
+|Merkmale|Kostenlose Cluster|Standardcluster|
 |---------------|-------------|-----------------|
-|[Verfügbar in {{site.data.keyword.Bluemix_notm}}](cs_why.html)|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
 |[Netzbetrieb in Clustern](cs_secure.html#in_cluster_network)|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
 |[Öffentlicher App-Zugriff durch einen NodePort-Service](cs_network_planning.html#nodeport)|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
 |[Benutzerzugriffsverwaltung](cs_users.html#managing)|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
@@ -91,8 +89,8 @@ Informieren Sie sich über die Zuständigkeiten, die Sie gemeinsam mit IBM bei d
 - [Erstellen öffentlicher und privater VLANs in IBM Cloud Infrastructure (SoftLayer) zur Netzisolation Ihres Clusters](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
 - [Sicherstellen der Netzkonnektivität zur Kubernetes-Master-URL für alle Workerknoten](cs_firewall.html#firewall) <p>**Hinweis**: Wenn ein Workerknoten sowohl über öffentliche als auch private VLANs verfügt, dann ist die Netzkonnektivität konfiguriert. Wenn für den Workerknoten ausschließlich ein privates VLAN konfiguriert wurde, dann ist eine Vyatta-Einheit erforderlich, um die Netzkonnektivität bereitzustellen.</p>
 - [Aktualisieren der Master-Komponente 'kube-apiserver' und der Workerknoten, wenn Aktualisierungen für Haupt- und Nebenversionen von Kubernetes verfügbar sind](cs_cluster_update.html#master)
-- [Ausführen von Aktionen zur Wiederherstellung von fehlerhaften Workerknoten durch Ausführung der geeigneten `kubectl`-Befehle (z. B. `cordon` oder `drain`) und durch Ausführen der geeigneten `bx cs`-Befehle (z. B. `reboot`, `reload` oder `delete`)](cs_cli_reference.html#cs_worker_reboot)
-- [Hinzufügen oder Entfernen zusätzlicher Teilnetze in IBM Cloud Infrastructure (SoftLayer) nach Bedarf](cs_subnets.html#subnets)
+- [Wiederherstellen von fehlerhaften Workerknoten durch Ausführen der geeigneten `kubectl`-Befehle (z. B. `cordon` oder `drain`) und durch Ausführen der geeigneten `bx cs`-Befehle (z. B. `reboot`, `reload` oder `delete`](cs_cli_reference.html#cs_worker_reboot))
+- [Hinzufügen oder Entfernen von Teilnetzen in der IBM Cloud-Infrastruktur (SoftLayer) nach Bedarf](cs_subnets.html#subnets)
 - [Sichern und Wiederherstellen von Daten im persistenten Speicher in IBM Cloud Infrastructure (SoftLayer) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](../services/RegistryImages/ibm-backup-restore/index.html)
 
 <br />

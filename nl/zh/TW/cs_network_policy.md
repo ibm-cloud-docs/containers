@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -93,7 +93,7 @@ lastupdated: "2018-01-11"
 開始之前：
 
 1.  [安裝 {{site.data.keyword.containershort_notm}} 及 Kubernetes CLI。](cs_cli_install.html#cs_cli_install)
-2.  [建立精簡或標準叢集。](cs_clusters.html#clusters_ui)
+2.  [建立免費或標準叢集。](cs_clusters.html#clusters_ui)
 3.  [將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。請在 `bx cs cluster-config` 指令包含 `--admin` 選項，這用來下載憑證及許可權檔案。此下載還包括「超級使用者」角色的金鑰，您需要此金鑰才能執行 Calico 指令。
 
   ```
@@ -138,6 +138,8 @@ lastupdated: "2018-01-11"
         calicoctl version
         ```
         {: pre}
+
+    4.  如果公司網路原則阻止透過 Proxy 或防火牆從本端系統存取公用端點，請參閱[從防火牆後面執行 `calicoctl` 指令](cs_firewall.html#firewall)，以取得如何容許對 Calico 指令進行 TCP 存取權的指示。
 
 2.  配置 Calico CLI。
 

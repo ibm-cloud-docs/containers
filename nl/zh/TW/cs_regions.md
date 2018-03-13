@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-05"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-01-05"
 
 [{{site.data.keyword.Bluemix_notm}} 地區](#bluemix_regions)與 [{{site.data.keyword.containershort_notm}} 地區](#container_regions)不同。
 
-![{{site.data.keyword.containershort_notm}} 地區與資料中心](/images/regions.png)
+![{{site.data.keyword.containershort_notm}} 地區與資料中心](images/regions.png)
 
 圖 1. {{site.data.keyword.containershort_notm}} 地區與資料中心
 
@@ -108,14 +108,14 @@ lastupdated: "2018-01-05"
 
   | 地區| 位置| 城市|
   |--------|----------|------|
-  | 亞太地區北部| hkg02、sng01、tok02 | 香港、新加坡、東京|
+  | 亞太地區北部| hkg02、seo01、sng01、tok02 | 香港、首爾、新加坡、東京|
   | 亞太地區南部| mel01、syd01、syd04| 墨爾本、雪梨|
   | 歐盟中部| ams03、fra02、mil01、par01| 阿姆斯特丹、法蘭克福、米蘭、巴黎|
   | 英國南部| lon02、lon04| 倫敦|
-  | 美國東部| <ph class="mon">mon01、</ph>tor01、wdc06、wdc07| <ph class="mon">蒙特婁、</ph>多倫多、華盛頓特區|
-  | 美國南部| dal10、dal12、dal13       | 達拉斯 |
+  | 美國東部| mon01、tor01、wdc06、wdc07| 蒙特利爾、多倫多、華盛頓特區|
+  | 美國南部| dal10、dal12、dal13、sao01| 達拉斯、聖保羅|
 
-**附註**：米蘭 (mil01) 僅適用於精簡叢集。
+**附註**：米蘭 (mil01) 僅適用於免費叢集。
 
 ### 使用容器服務 API 指令
 {: #container_api}

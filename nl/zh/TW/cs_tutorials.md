@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-13"
+lastupdated: "2017-01-29"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -52,17 +52,16 @@ lastupdated: "2017-12-13"
 -  隨收隨付制或訂閱 [{{site.data.keyword.Bluemix_notm}} 帳戶 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/registration/)
 
 
-
-
 ## 課程 1：建立叢集並設定 CLI
 {: #cs_cluster_tutorial_lesson1}
 
-在 GUI 中建立叢集，並安裝必要的 CLI。針對本指導教學，請在英國南部地區建立您的叢集。
+在 GUI 中建立叢集，並安裝必要的 CLI。
+{: shortdesc}
 
 
 建立叢集：
 
-1. 佈建叢集可能需要幾分鐘的時間。為了充分利用時間，請先[建立叢集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/containers-kubernetes/launch?env_id=ibm:yp:united-kingdom)，然後才安裝 CLI。精簡叢集附有一個要在其中部署容器 Pod 的工作者節點。工作者節點是應用程式在其上執行的運算主機（一般為虛擬機器）。
+1. 佈建叢集可能需要幾分鐘的時間。為了充分利用時間，請先[在 GUI 中建立叢集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/containers-kubernetes/launch?env_id=ibm:yp:united-kingdom)，然後才安裝 CLI。針對本指導教學，請在美國東部地區建立您的叢集。
 
 
 透過 CLI 管理叢集會使用下列 CLI 及其必要條件：
@@ -73,7 +72,7 @@ lastupdated: "2017-12-13"
 -   Docker CLI
 
 </br>
-若要安裝 CLI，請執行下列動作：
+若要安裝 CLI 及其必備項目，請執行下列動作：
 
 1.  安裝 [{{site.data.keyword.Bluemix_notm}} CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://clis.ng.bluemix.net/ui/home.html)，它是 {{site.data.keyword.containershort_notm}} 外掛程式的必要條件。若要執行 {{site.data.keyword.Bluemix_notm}} CLI 指令，請使用字首 `bx`。
 2.  遵循提示來選取帳戶及 {{site.data.keyword.Bluemix_notm}} 組織。叢集是帳戶特有的，但與 {{site.data.keyword.Bluemix_notm}} 組織或空間無關。
@@ -86,7 +85,7 @@ lastupdated: "2017-12-13"
     {: pre}
 
 5.  若要檢視本端版本的 Kubernetes 儀表板，以及將應用程式部署至叢集，請[安裝 Kubernetes CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。若要使用 Kubernetes CLI 來執行指令，請使用字首 `kubectl`。
-    1.  如需完整的功能相容性，請下載與您計劃使用之 Kubernetes 叢集版本相符的 Kubernetes CLI 版本。現行 {{site.data.keyword.containershort_notm}} 預設 Kubernetes 版本為 1.7.4。
+    1.  如需完整的功能相容性，請下載與您計劃使用之 Kubernetes 叢集版本相符的 Kubernetes CLI 版本。現行 {{site.data.keyword.containershort_notm}} 預設 Kubernetes 版本為 1.8.6。
 
         OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
 
@@ -139,12 +138,11 @@ lastupdated: "2017-12-13"
     ```
     {: pre}
 
-7. 若要在本端建置映像檔，並將它們推送至專用映像檔登錄，請[安裝 Docker CE CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.docker.com/community-edition#/download)。如果您使用的是 Windows 8 或更早版本，則可以改為安裝 [Docker Toolbox ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.docker.com/products/docker-toolbox)。
+7. 若要在本端建置映像檔，並將它們推送至專用映像檔登錄，請[安裝 Docker CE CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.docker.com/community-edition#/download)。如果您使用的是 Windows 8 或更早版本，則可以改為安裝 [Docker Toolbox ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.docker.com/toolbox/toolbox_install_windows/)。
 
 恭喜！您已順利安裝用於下列課程及指導教學的 CLI。接下來，請設定叢集環境並新增 {{site.data.keyword.toneanalyzershort}} 服務。
 
-
-## 課程 2：設定叢集環境
+## 課程 2：設定您的專用登錄
 {: #cs_cluster_tutorial_lesson2}
 
 在 {{site.data.keyword.registryshort_notm}} 中設定專用映像檔儲存庫，以及將密碼新增至叢集，讓應用程式可以存取 {{site.data.keyword.toneanalyzershort}} 服務。
@@ -160,7 +158,7 @@ lastupdated: "2017-12-13"
 
 2.  在 {{site.data.keyword.registryshort_notm}} 中設定您自己的專用映像檔儲存庫，以安全地儲存 Docker 映像檔，並將其與所有叢集使用者共用。{{site.data.keyword.Bluemix_notm}} 中的專用映像檔儲存庫是透過名稱空間識別。名稱空間是用來建立映像檔儲存庫的唯一 URL，而開發人員可以使用映像檔儲存庫來存取專用 Docker 映像檔。
 
-    在此範例中，公關公司只要在 {{site.data.keyword.registryshort_notm}} 中建立一個映像檔儲存庫，因此選擇 _pr_firm_ 作為名稱空間來分組其帳戶中的所有映像檔。請將 _&lt;your_namespace&gt;_ 取代為您所選擇的名稱空間，而不要是與指導教學相關的項目。
+    在此範例中，公關公司只要在 {{site.data.keyword.registryshort_notm}} 中建立一個映像檔儲存庫，因此選擇 _pr_firm_ 作為名稱空間來分組其帳戶中的所有映像檔。請將 _&lt;your_namespace&gt;_ 取代為您所選擇的名稱空間，其與指導教學不相關。
 
     ```
     bx cr namespace-add <your_namespace>
@@ -174,7 +172,7 @@ lastupdated: "2017-12-13"
     ```
      {: pre}
 
-    佈建工作者節點完成時，狀態會變更為 **Ready**，而且您可以開始連結要在未來指導教學中使用的 {{site.data.keyword.Bluemix_notm}} 服務。
+    當您的工作者節點完成佈建時，狀態會變更為 **Ready**，且您可以開始連結 {{site.data.keyword.Bluemix_notm}} 服務。
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status
@@ -182,86 +180,93 @@ lastupdated: "2017-12-13"
     ```
     {: screen}
 
-4.  在 CLI 中，設定叢集的環境定義。每次登入容器 CLI 以使用叢集時，您都必須執行這些指令，以將叢集配置檔的路徑設為階段作業變數。Kubernetes CLI 會使用此變數來尋找與 {{site.data.keyword.Bluemix_notm}} 中的叢集連接所需的本端配置檔及憑證。
+## 課程 3：設定您的叢集環境
+{: #cs_cluster_tutorial_lesson3}
 
-    1.  取得指令來設定環境變數，並下載 Kubernetes 配置檔。
+在 CLI 中，設定叢集的環境定義。每次登入容器 CLI 以使用叢集時，您都必須執行這些指令，以將叢集配置檔的路徑設為階段作業變數。Kubernetes CLI 會使用此變數來尋找與 {{site.data.keyword.Bluemix_notm}} 中的叢集連接所需的本端配置檔及憑證。
 
-        ```
+1.  取得指令來設定環境變數，並下載 Kubernetes 配置檔。
+
+    ```
         bx cs cluster-config <cluster_name>
         ```
-        {: pre}
+    {: pre}
 
-        配置檔下載完成之後，會顯示一個指令，可讓您用來將本端 Kubernetes 配置檔的路徑設定為環境變數。
+    配置檔下載完成之後，會顯示一個指令，可讓您用來將本端 Kubernetes 配置檔的路徑設定為環境變數。
 
-        OS X 的範例：
+    OS X 的範例：
 
-        ```
+    ```
         export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
         ```
-        {: screen}
+    {: screen}
 
-    2.  複製並貼上終端機中顯示的指令，以設定 `KUBECONFIG` 環境變數。
+2.  複製並貼上終端機中顯示的指令，以設定 `KUBECONFIG` 環境變數。
 
-    3.  驗證 `KUBECONFIG` 環境變數已適當設定。
+3.  驗證 `KUBECONFIG` 環境變數已適當設定。
 
-        OS X 的範例：
+    OS X 的範例：
 
-        ```
+    ```
         echo $KUBECONFIG
         ```
-        {: pre}
+    {: pre}
 
-        輸出：
+    輸出：
 
-        ```
+    ```
         /Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
         ```
-        {: screen}
+    {: screen}
 
-    4.  檢查 Kubernetes CLI 伺服器版本，驗證叢集已適當地執行 `kubectl` 指令。
+4.  檢查 Kubernetes CLI 伺服器版本，驗證叢集已適當地執行 `kubectl` 指令。
 
-        ```
+    ```
         kubectl version  --short
         ```
-        {: pre}
+    {: pre}
 
-        輸出範例：
+    輸出範例：
 
-        ```
-        Client Version: v1.7.4
-        Server Version: v1.7.4
-        ```
-        {: screen}
+    ```
+    Client Version: v1.8.6
+    Server Version: v1.8.6
+    ```
+    {: screen}
 
-5.  將 {{site.data.keyword.toneanalyzershort}} 服務新增至叢集。使用 {{site.data.keyword.Bluemix_notm}} 服務，您可以在應用程式中利用已經開發的功能。任何在該叢集中部署的應用程式都可以使用任何已連結至叢集的 {{site.data.keyword.Bluemix_notm}} 服務。請針對每個您要與應用程式搭配使用的 {{site.data.keyword.Bluemix_notm}} 服務，重複下列步驟。
-    1.  將 {{site.data.keyword.toneanalyzershort}} 服務新增至 {{site.data.keyword.Bluemix_notm}} 帳戶。
+## 課程 4：將服務新增至您的叢集
+{: #cs_cluster_tutorial_lesson4}
 
-        **附註：**當您將 {{site.data.keyword.toneanalyzershort}} 服務新增至帳戶時，會顯示一則訊息指出該服務並非免費。如果您限制 API 呼叫，則此指導教學不會有 {{site.data.keyword.watson}} 服務所引起的費用。[請檢閱 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 服務的定價資訊 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/watson/developercloud/tone-analyzer.html#pricing-block)。
+使用 {{site.data.keyword.Bluemix_notm}} 服務，您可以在應用程式中利用已經開發的功能。任何在該叢集中部署的應用程式都可以使用任何已連結至叢集的 {{site.data.keyword.Bluemix_notm}} 服務。請針對每個您要與應用程式搭配使用的 {{site.data.keyword.Bluemix_notm}} 服務，重複下列步驟。
 
-        ```
+1.  將 {{site.data.keyword.toneanalyzershort}} 服務新增至 {{site.data.keyword.Bluemix_notm}} 帳戶。
+
+    **附註：**當您將 {{site.data.keyword.toneanalyzershort}} 服務新增至帳戶時，會顯示一則訊息指出該服務並非免費。如果您限制 API 呼叫，則此指導教學不會有 {{site.data.keyword.watson}} 服務所引起的費用。[請檢閱 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 服務的定價資訊 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/watson/developercloud/tone-analyzer.html#pricing-block)。
+
+    ```
         bx service create tone_analyzer standard <mytoneanalyzer>
         ```
-        {: pre}
+    {: pre}
 
-    2.  將 {{site.data.keyword.toneanalyzershort}} 實例連結至叢集的 `default` Kubernetes 名稱空間。稍後，您可以建立自己的名稱空間來管理使用者對 Kubernetes 資源的存取權，但現在請使用 `default` 名稱空間。Kubernetes 名稱空間與您稍早所建立的登錄名稱空間不同。
+2.  將 {{site.data.keyword.toneanalyzershort}} 實例連結至叢集的 `default` Kubernetes 名稱空間。稍後，您可以建立自己的名稱空間來管理使用者對 Kubernetes 資源的存取權，但現在請使用 `default` 名稱空間。Kubernetes 名稱空間與您稍早所建立的登錄名稱空間不同。
 
-        ```
+    ```
         bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
         ```
-        {: pre}
+    {: pre}
 
-        輸出：
+    輸出：
 
-        ```
+    ```
         bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
         Binding service instance to namespace...
         OK
         Namespace:	default
         Secret name:	binding-mytoneanalyzer
         ```
-        {: screen}
+    {: screen}
 
-6.  驗證已在叢集名稱空間中建立 Kubernetes Secret。包括服務的機密資訊（例如，容器用來存取服務的使用者名稱、密碼及 URL）的 JSON 檔案會定義每個 {{site.data.keyword.Bluemix_notm}} 服務。若要安全地儲存此資訊，則會使用 Kubernetes Secret。在此範例中，密碼包括認證，可用來存取帳戶中佈建的 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 實例。
+3.  驗證已在叢集名稱空間中建立 Kubernetes Secret。包括服務的機密資訊（例如，容器用來存取服務的使用者名稱、密碼及 URL）的 JSON 檔案會定義每個 {{site.data.keyword.Bluemix_notm}} 服務。若要安全地儲存此資訊，則會使用 Kubernetes Secret。在此範例中，密碼包括認證，可用來存取帳戶中佈建的 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 實例。
 
     ```
     kubectl get secrets --namespace=default
@@ -280,6 +285,8 @@ lastupdated: "2017-12-13"
 
 </br>
 做得好！您已配置叢集，且您的本端環境已備妥，可開始將應用程式部署到叢集。
+
+
 
 ## 下一步為何？
 {: #next}

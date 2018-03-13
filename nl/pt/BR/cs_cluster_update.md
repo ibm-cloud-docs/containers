@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-02"
 
 ---
 
@@ -33,7 +33,7 @@ O diagrama a seguir mostra o processo que você pode usar para atualizar seu mes
 
 Figura 1. Atualizando o diagrama do processo de mestre do Kubernetes
 
-**Atenção**: não é possível recuperar um cluster para uma versão anterior quando o processo de atualização ocorre. Certifique-se de usar um cluster de teste e siga as instruções para direcionar problemas potenciais antes de atualizar o mestre de produção.
+**Atenção**: não é possível recuperar um cluster para uma versão anterior depois que o processo de atualização ocorre. Certifique-se de usar um cluster de teste e siga as instruções para direcionar problemas potenciais antes de atualizar o mestre de produção.
 
 Para atualizações _principal_ ou _menor_, conclua as etapas a seguir:
 
@@ -63,11 +63,11 @@ Como parte do processo de atualização, nós específicos vão ficar inativos p
 
 Como as chaves são definidas?
 
-No mapa de configuração, há uma seção que contém informações de dados. É possível definir até 10 regras separadas para executar a qualquer momento. Para que um nó do trabalhador seja submetido a upgrade, os nós devem passar em todas as regras definidas no mapa.
+Na seção de informações de dados do mapa de configuração, é possível definir até 10 regras separadas para executar a qualquer momento. Para serem submetidos a upgrade, os nós do trabalhador devem passar por todas as regras definidas.
 
 As chaves estão definidas. E agora?
 
-Depois de definir suas regras, você executa o comando worker-upgrade. Se uma resposta de êxito é retornada, os nós do trabalhador são enfileirados para serem submetidos a upgrade. No entanto, os nós não são submetidos ao processo de upgrade até que todas as regras estejam satisfeitas. Enquanto são enfileiradas, as regras são verificadas em um intervalo para ver se qualquer um dos nós pode ser submetido a upgrade.
+Depois de definir suas regras, você executa o comando `worker-upgrade`. Se uma resposta de êxito é retornada, os nós do trabalhador são enfileirados para serem submetidos a upgrade. No entanto, os nós não são submetidos ao processo de upgrade até que todas as regras estejam satisfeitas. Enquanto são enfileiradas, as regras são verificadas em um intervalo para ver se qualquer um dos nós pode ser submetido a upgrade.
 
 E se eu escolher não definir um mapa de configuração?
 
@@ -119,11 +119,11 @@ Para atualizar seus nós do trabalhador:
       </tr>
       <tr>
         <td><code>zonecheck.json</code></br><code>regioncheck.json</code></td>
-        <td> Exemplos de chaves exclusivas para as quais você deseja configurar regras. Os nomes das chaves pode ser qualquer coisa que você desejar; as informações são analisadas pelas configurações definidas na chave. Para cada chave definida, é possível configurar somente um valor para <code>NodeSelectorKey</code> e <code>NodeSelectorValue</code>. Se você deseja configurar regras para mais de uma região ou local (data center), crie uma nova entrada de chave. </td>
+        <td> Exemplos de chaves exclusivas para as quais você deseja configurar regras. Os nomes das chaves pode ser qualquer coisa que você desejar; as informações são analisadas pelas configurações definidas na chave. Para cada chave definida, é possível configurar somente um valor para <code>NodeSelectorKey</code> e <code>NodeSelectorValue</code>. Se desejar configurar regras para mais de uma região ou local (data center), crie uma nova entrada de chave. </td>
       </tr>
       <tr>
         <td><code>MaxUnavailablePercentage</code></td>
-        <td> A quantia máxima, especificada em porcentagem, de nós que são permitidos estar indisponíveis para uma chave especificada. Um nó está indisponível quando no processo de implementação, recarregamento ou fornecimento. O upgrade dos nós do trabalhador enfileirados é bloqueado se eles excedem quaisquer percentagens máximas definidas disponíveis. </td>
+        <td> A quantia máxima, especificada em porcentagem, de nós que são permitidos estar indisponíveis para uma chave especificada. Um nó está indisponível quando no processo de implementação, recarregamento ou fornecimento. O upgrade dos nós do trabalhador enfileirados é bloqueado se isso excede quaisquer porcentagens máximas definidas indisponíveis. </td>
       </tr>
       <tr>
         <td><code>NodeSelectorKey</code></td>

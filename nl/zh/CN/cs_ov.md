@@ -16,9 +16,9 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# 此页面已移动！
+# 您查找的内容已移动。
 
-请在此查找相关主题：
+请在其新位置查看最新信息：
  - [Docker 容器](cs_tech.html#docker_containers)
  - [Kubernetes 基础知识](cs_tech.html#kubernetes_basics)
  - [使用集群的优点](cs_why.html#benefits)

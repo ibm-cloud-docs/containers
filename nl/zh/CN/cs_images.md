@@ -57,9 +57,9 @@ Docker 映像是所创建的每一个容器的基础。映像通过 Dockerfile �
 2. [创建集群](cs_clusters.html#clusters_cli)。
 3. [设定 CLI 的目标为集群](cs_cli_install.html#cs_cli_configure)。
 
-创建集群时，会自动为[离得最近的区域注册表和国际注册表](/docs/services/Registry/registry_overview.html#registry_regions)创建不到期的注册表令牌和私钥。国际注册表用于安全地存储 IBM 提供的公共映像，您可以在不同部署中引用这些映像，而不用分别引用存储在各个区域注册表中的映像。区域注册表用于安全地存储您自己的专用 Docker 映像以及国际注册表中所存储的相同公共映像。令牌用于授予对 {{site.data.keyword.registryshort_notm}} 中设置的任一名称空间的只读访问权，以便您可以使用这些公共（国际注册表）映像和专用（区域注册表）映像。
+创建集群时，会自动为[离得最近的区域注册表和全局注册表](/docs/services/Registry/registry_overview.html#registry_regions)创建不到期的注册表令牌和私钥。全局注册表用于安全地存储 IBM 提供的公共映像，您可以在不同部署中引用这些映像，而不用分别引用存储在各个区域注册表中的映像。区域注册表用于安全地存储您自己的专用 Docker 映像以及全局注册表中所存储的相同公共映像。令牌用于授予对 {{site.data.keyword.registryshort_notm}} 中设置的任一名称空间的只读访问权，以便您可以使用这些公共（全局注册表）映像和专用（区域注册表）映像。
 
-每个令牌必须存储在 Kubernetes `imagePullSecret` 中，才能在部署容器化应用程序时供 Kubernetes 集群访问。创建集群时，{{site.data.keyword.containershort_notm}} 会自动将国际（IBM 提供的公共映像）和区域注册表的令牌存储在 Kubernetes 映像拉取私钥中。映像拉取私钥会添加到 `default` Kubernetes 名称空间、该名称空间的 `ServiceAccount` 中的缺省私钥列表以及 `kube-system` 名称空间。
+每个令牌必须存储在 Kubernetes `imagePullSecret` 中，才能在部署容器化应用程序时供 Kubernetes 集群访问。创建集群时，{{site.data.keyword.containershort_notm}} 会自动将全局（IBM 提供的公共映像）和区域注册表的令牌存储在 Kubernetes 映像拉取私钥中。映像拉取私钥会添加到 `default` Kubernetes 名称空间、该名称空间的 `ServiceAccount` 中的缺省私钥列表以及 `kube-system` 名称空间。
 
 **注**：使用此初始设置时，可以通过 {{site.data.keyword.Bluemix_notm}} 帐户的名称空间中可用的任何映像，将容器部署到集群的**缺省**名称空间。如果要将容器部署到集群的其他名称空间，或者如果要使用存储在其他 {{site.data.keyword.Bluemix_notm}} 区域或其他 {{site.data.keyword.Bluemix_notm}} 帐户中的映像，您必须[为集群创建自己的 imagePullSecret](#other)。
 

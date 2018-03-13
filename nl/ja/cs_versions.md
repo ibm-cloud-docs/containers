@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-05"
+lastupdated: "2018-02-08"
 
 ---
 
@@ -18,26 +18,25 @@ lastupdated: "2018-01-05"
 # {{site.data.keyword.containerlong_notm}} に対応した Kubernetes バージョン
 {: #cs_versions}
 
-{{site.data.keyword.containerlong}} で使用可能な Kubernetes バージョンを確認します。
-{:shortdesc}
+{{site.data.keyword.containerlong}} は現在、最新バージョン、デフォルト・バージョン、サポート対象バージョン (通常は最新バージョンより 2 つ前のバージョン) という複数のバージョンの Kubernetes をサポートしています。一般にはデフォルト・バージョンは最新バージョンと同じです。クラスターの作成時または更新時には、別のバージョンを指定しない限り、デフォルト・バージョンが使用されます。{:shortdesc}
 
-{{site.data.keyword.containershort_notm}} は、Kubernetes のさまざまなバージョンをサポートします。 クラスターを作成または更新するときには、異なるバージョンを指定しない限り、デフォルトのバージョンが使用されます。 使用可能な Kubernetes のバージョンは以下のとおりです。
-- 1.8.6
-- 1.7.4 (デフォルト・バージョン)
-- 1.5.6
+現在サポートされている Kubernetes のバージョンは以下のとおりです。
 
-ローカルまたはクラスターで実行されている Kubernetes CLI のバージョンを調べるには、以下のコマンドを実行して、バージョンを確認します。
+- 最新: 1.9.2
+- デフォルト: 1.8.6
+- サポート対象: 1.7.4
+
+現在サポートされていないバージョンの Kubernetes でクラスターを実行している場合は、更新について[想定される影響を確認してから](#version_types)、ただちに[クラスターを更新し](cs_cluster_update.html#update)、重要なセキュリティー更新とサポートを継続して受けられるようにしてください。サーバーのバージョンを確認するには、以下のコマンドを実行します。
 
 ```
-kubectl version  --short
+kubectl version  --short | grep -i server
 ```
 {: pre}
 
 出力例:
 
 ```
-Client Version: 1.7.4
-Server Version: 1.7.4
+Server Version: 1.8.6
 ```
 {: screen}
 
@@ -57,16 +56,89 @@ Kubernetes には以下のようなバージョン更新のタイプがありま
 デフォルトでは、Kubernetes マスターを更新できるのは 2 つ先のマイナー・バージョンまでです。 例えば、現在のマスターがバージョン 1.5 であり 1.8 に更新する計画の場合、まず 1.7 に更新する必要があります。 続けて更新を強制実行することは可能ですが、2 つのマイナー・バージョンを超える更新は予期しない結果を生じることがあります。
 {: tip}
 
-以下の情報は、クラスターを新しいバージョンに更新するときに、デプロイされたアプリに影響を与える可能性が高い更新を要約しています。 Kubernetes の各バージョンでの変更内容を示す完全なリストについては、[Kubernetes changelog ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md) を参照してください。
+以下の情報は、クラスターを前のバージョンから新しいバージョンに更新した場合に、デプロイされているアプリに影響を与える可能性がある更新についてまとめたものです。Kubernetes の各バージョンでの変更内容を示す完全なリストについては、[Kubernetes changelog ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md) を参照してください。
 
 更新処理について詳しくは、[クラスターの更新](cs_cluster_update.html#master)と[ワーカー・ノードの更新](cs_cluster_update.html#worker_node)を参照してください。
+
+## バージョン 1.9
+{: #cs_v19}
+
+
+
+Kubernetes を前のバージョンから 1.9 に更新する場合に必要な可能性がある変更作業について説明します。
+
+<br/>
+
+### マスターの前に行う更新
+{: #19_before}
+
+<table summary="バージョン 1.9 の Kubernetes の更新">
+<caption>マスターを Kubernetes 1.9 に更新する前に行う変更</caption>
+<thead>
+<tr>
+<th>タイプ</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Web フックのアドミッション API</td>
+<td>API サーバーがアドミッション制御 Web フックを呼び出すときに使用されるアドミッション API が、<code>admission.v1alpha1</code> から <code>admission.v1beta1</code> に変更されました。<em>クラスターをアップグレードする前に既存の Web フックを削除し</em>、最新の API を使用するように Web フック構成ファイルを更新する必要があります。この変更には後方互換性がありません。</td>
+</tr>
+</tbody>
+</table>
+
+### マスターの後に行う更新
+{: #19_after}
+
+<table summary="バージョン 1.9 の Kubernetes の更新">
+<caption>マスターを Kubernetes 1.9 に更新した後に行う変更</caption>
+<thead>
+<tr>
+<th>タイプ</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`kubectl` 出力</td>
+<td>`-o custom-columns` を指定した `kubectl` コマンドで、列がオブジェクト内に見つからなかった場合に、`<none>` という出力が表示されるようになりました。<br>
+以前は、このような操作は失敗し、エラー・メッセージ `xxx is not found` が表示されていました。以前の動作に依存したスクリプトがある場合は更新してください。</td>
+</tr>
+<tr>
+<td>`kubectl patch`</td>
+<td>パッチを適用したリソースに変更が行われない場合に、`kubectl patch` コマンドが`終了コード 1` で失敗するようになりました。以前の動作に依存したスクリプトがある場合は更新してください。</td>
+</tr>
+<tr>
+<td>Kubernetes ダッシュボードの権限</td>
+<td>ユーザーは、クラスター・リソースを参照するために、資格情報を使用して Kubernetes ダッシュボードにログインしなければならなくなりました。デフォルトの Kubernetes ダッシュボード `ClusterRoleBinding` RBAC 許可は削除されました。手順については、[Kubernetes ダッシュボードの起動](cs_app.html#cli_dashboard)を参照してください。</td>
+</tr>
+<tr>
+<td>`default` `ServiceAccount` の RBAC</td>
+<td>`default` 名前空間内の `default` `ServiceAccount` の管理者 `ClusterRoleBinding` は削除されました。アプリケーションが Kubernetes API にアクセスするためにこの RBAC ポリシーに依存している場合、[RBAC ポリシーを更新してください](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview)。</td>
+</tr>
+<tr>
+<td>テイントと耐障害性</td>
+<td>`node.alpha.kubernetes.io/notReady` と `node.alpha.kubernetes.io/unreachable` テイントは、それぞれ `node.kubernetes.io/not-ready` と `node.kubernetes.io/unreachable` に変更されました。<br>
+テイントは自動的に更新されますが、これらのテイントの耐障害性は手動で更新する必要があります。`ibm-system` と `kube-system` 以外の名前空間ごとに、耐障害性を変更する必要があるかどうかを判別します。<br>
+<ul><li><code>kubectl get pods -n &lt;namespace&gt; -o yaml | grep "node.alpha.kubernetes.io/notReady" && echo "Action required"</code></li><li>
+<code>kubectl get pods -n &lt;namespace&gt; -o yaml | grep "node.alpha.kubernetes.io/unreachable" && echo "Action required"</code></li></ul><br>
+`Action required` が戻された場合は、適宜、ポッドの耐障害性を変更してください。</td>
+</tr>
+<tr>
+<td>Web フックのアドミッション API</td>
+<td>クラスターを更新する前に既存の Web フックを削除した場合は、新しい Web フックを作成してください。</td>
+</tr>
+</tbody>
+</table>
+
 
 ## バージョン 1.8
 {: #cs_v18}
 
 <p><img src="images/certified_kubernetes_1x8.png" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" height="100" width="62.5" align="left" alt="このバッジは、IBM Cloud Container Service に関する Kubernetes バージョン 1.8 証明書を示しています。"/> {{site.data.keyword.containerlong_notm}} は、CNCF Kubernetes Software Conformance Certification プログラムにおけるバージョン 1.8 の認定 Kubernetes 製品です。</p>
 
-Kubernetes バージョン 1.8 に更新する際に、行うことが必要となる可能性がある変更を検討します。
+Kubernetes を前のバージョンから 1.8 に更新する場合に必要な可能性がある変更作業について説明します。
 
 <br/>
 
@@ -129,7 +201,7 @@ Kubernetes バージョン 1.8 に更新する際に、行うことが必要と�
 
 <p><img src="images/certified_kubernetes_1x7.png" height="100" width="62.5" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" align="left" alt="このバッジは、IBM Cloud Container Service に関する Kubernetes バージョン 1.7 証明書を示しています。"/> {{site.data.keyword.containerlong_notm}} は、CNCF Kubernetes Software Conformance Certification プログラムにおけるバージョン 1.7 の認定 Kubernetes 製品です。</p>
 
-Kubernetes バージョン 1.7 に更新する際に、行うことが必要となる可能性がある変更を検討します。
+Kubernetes を前のバージョンから 1.7 に更新する場合に必要な可能性がある変更作業について説明します。
 
 <br/>
 

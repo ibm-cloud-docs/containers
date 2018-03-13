@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-05"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-01-05"
 
 Regiões do [{{site.data.keyword.Bluemix_notm}} ](#bluemix_regions) diferem de regiões do [{{site.data.keyword.containershort_notm}} ](#container_regions).
 
-![{{site.data.keyword.containershort_notm}} regiões e data centers](/images/regions.png)
+![{{site.data.keyword.containershort_notm}} Regiões e data centers](images/regions.png)
 
 Figura 1. Regiões e data centers do {{site.data.keyword.containershort_notm}}
 
@@ -46,7 +46,7 @@ Para verificar qual região do {{site.data.keyword.Bluemix_notm}} em que você e
 
 As regiões do {{site.data.keyword.Bluemix_notm}} podem ser acessadas especificando o terminal de API ao efetuar login. Se não especificar uma região, você será conectado automaticamente à região mais próxima de você.
 
-Os terminais de API de região do {{site.data.keyword.Bluemix_notm}} com log de exemplo em comandos:
+Terminais de API de região do {{site.data.keyword.Bluemix_notm}} com comandos de login de exemplo:
 
   * Sul dos EUA e Leste dos EUA
       ```
@@ -108,14 +108,14 @@ Os locais são data centers que estão disponíveis em uma região.
 
   | Região | Localização | Cidade |
   |--------|----------|------|
-  | AP Norte | hkg02, sng01, tok02 | Hong Kong, Singapura, Tóquio |
+  | AP Norte | hkg02, seo01, sng01, tok02 | Hong Kong, Seul, Singapura, Tóquio |
   | AP Sul     | mel01, syd01, syd04        | Melbourne, Sydney |
   | União Europeia Central     | ams03, fra02, mil01, par01        | Amsterdam, Frankfurt, Milan, Paris |
   | Sul do Reino Unido      | lon02, lon04         | Londres |
-  | Leste dos EUA      | <ph class="mon">mon01, </ph>tor01, wdc06, wdc07        | <ph class="mon">Montreal, </ph>Toronto, Washington, DC |
-  | SUL dos EUA     | dal10, dal12, dal13      | Dallas |
+  | Leste dos EUA      | mon01, tor01, wdc06, wdc07        | Montreal, Toronto, Washington DC |
+  | SUL dos EUA     | dal10, dal12, dal13, sao01       | Dallas, São Paulo |
 
-**Observação**: Milan (mil01) está disponível somente para clusters Lite.
+**Nota**: Milão (mil01) está disponível somente para clusters grátis.
 
 ### Usando comandos da API do serviço de contêiner
 {: #container_api}

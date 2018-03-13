@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-07"
 
 ---
 
@@ -16,23 +16,92 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# 지속적 볼륨 스토리지로 데이터 저장
+# 클러스터에 데이터 저장
+{: #storage}
+클러스터의 컴포넌트가 실패한 경우와 앱 인스턴스 간에 데이터를 공유하기 위해 데이터를 지속할 수 있습니다.
+
+## 고가용성 스토리지 계획
 {: #planning}
 
-컨테이너는 설계 상으로 수명이 짧습니다. 하지만 다음 다이어그램에 표시된 대로 컨테이너 장애 복구 시에 데이터의 지속성을 유지하고 컨테이너 간에 데이터를 공유하기 위한 다수의 옵션 중에서 선택할 수 있습니다.
-{:shortdesc}
+{{site.data.keyword.containerlong_notm}}에서는 클러스터에서 앱 데이터를 저장하고 포드 간에 데이터를 공유하기 위한 여러 옵션 중에서 선택할 수 있습니다. 그러나 클러스터의 컴포넌트 또는 전체 사이트가 실패한 경우 모든 스토리지 옵션이 동일한 레벨의 지속성 및 가용성을 제공하는 것은 아닙니다.
+{: shortdesc}
 
-**참고**: 방화벽이 있는 경우, 지속적 볼륨 클레임을 작성할 수 있도록 클러스터가 있는 위치(데이터 센터)의 IBM Cloud 인프라(SoftLayer) IP 범위에 대해 [egress 액세스를 허용](cs_firewall.html#pvc)하십시오.
+### 비지속적 데이터 스토리지 옵션
+{: #non_persistent}
 
-![Kubernetes 클러스터의 배포를 위한 지속적 스토리지 옵션](images/cs_planning_apps_storage.png)
+데이터가 지속적으로 저장될 필요가 없는 경우 클러스터의 컴포넌트가 실패한 후 복구할 수 있도록 또는 앱 인스턴스 간에 데이터를 공유할 필요가 없는 경우에 비지속적 스토리지 옵션을 사용할 수 있습니다. 비지속적 스토리지 옵션을 사용하여 앱 컴포넌트를 단위 테스트하거나 새 기능을 사용해 볼 수도 있습니다.
+{: shortdesc}
 
-|옵션|설명|
-|------|-----------|
-|옵션 1: 작업자 노드에서 사용 가능한 디스크 공간을 사용하여 데이터의 지속성을 유지하도록 `/emptyDir` 사용<p>이 기능은 라이트 및 표준 클러스터에서 사용할 수 있습니다.</p>|이 옵션을 사용하면 포드에 지정된 작업자 노드의 디스크 공간에서 비어 있는 볼륨을 작성할 수 있습니다. 
-해당 포드의 컨테이너는 해당 볼륨에서 읽고 쓰기가 가능합니다. 볼륨이 하나의 특정 포드에 지정되므로, 데이터는 복제본 세트의 기타 포드와 공유될 수 없습니다.<p>`/emptyDir` 볼륨과 해당 데이터는 지정된 포드가 작업자 노드에서 영구 삭제될 때 제거됩니다.</p><p>**참고:** 포드 내의 컨테이너에 장애가 발생하는 경우, 볼륨의 데이터는 작업자 노드에서 계속 사용 가능합니다.</p><p>자세한 정보는 [Kubernetes 볼륨 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/storage/volumes/)을 참조하십시오.</p>|
-|옵션 2: 배치를 위한 NFS 기반 지속적 스토리지를 프로비저닝하는 지속적 볼륨 클레임 작성<p>이 기능은 표준 클러스터에 대해서만 사용 가능합니다.</p>|<p>이 옵션을 사용하면 지속적 볼륨을 통해 컨테이너 데이터와 앱의 지속적 스토리지를 보유할 수 있습니다. 볼륨은 [내구력 및 성능 NFS 기반 파일 스토리지 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/cloud/file-storage/details)에서 호스팅됩니다. 파일 스토리지는 저장 시 암호화되며, 저장된 데이터의 복제본을 작성할 수 있습니다.</p> <p>NFS 기반 파일 스토리지의 요청을 시작하기 위해 [지속적 볼륨 클레임](cs_storage.html)을 작성합니다. {{site.data.keyword.containershort_notm}}는 스토리지 크기의 범위, IOPS, 삭제 정책 및 볼륨에 대한 읽기/쓰기 권한을 정의하는 사전 정의된 스토리지 클래스를 제공합니다. 지속적 볼륨 클레임을 작성할 때 이러한 스토리지 클래스 간에 선택할 수 있습니다. 지속적 볼륨 클레임을 제출한 후 {{site.data.keyword.containershort_notm}}는 NFS 기반 파일 스토리지에서 호스팅되는 지속적 볼륨을 동적으로 프로비저닝합니다. [지속적 볼륨 클레임을 배치에 대한 볼륨으로 마운트](cs_storage.html#create)하여 컨테이너가 볼륨에서 읽고 쓸 수 있도록 허용할 수 있습니다. 지속적 볼륨은 동일한 복제본 세트 간에 또는 동일한 클러스터 내의 다른 배치와 공유될 수 있습니다.</p><p>컨테이너에 장애가 발생하거나 포드가 작업자 노드에서 제거되는 경우, 데이터는 제거되지 않으며 볼륨을 마운트하는 기타 배치에 의해 계속해서 액세스될 수 있습니다. 지속적 볼륨 클레임은 지속적 스토리지에서 호스팅되지만 백업은 없습니다. 데이터를 백업해야 하는 경우 수동 백업을 작성하십시오.</p><p>**참고:** 지속적 NFS 파일 공유 스토리지는 월별 기반으로 비용이 부과됩니다. 클러스터에 대한 지속적 스토리지를 프로비저닝하고 이를 즉시 제거하는 경우, 짧은 시간 동안만 사용했어도 지속적 스토리지에 대한 월별 비용을 계속 지불해야 합니다.</p>|
-|옵션 3: 포드에 {{site.data.keyword.Bluemix_notm}} 데이터베이스 서비스 바인드<p>이 기능은 라이트 및 표준 클러스터에서 사용할 수 있습니다.</p>|이 옵션을 사용하면 {{site.data.keyword.Bluemix_notm}} 데이터베이스 클라우드 서비스를 사용하여 데이터의 지속성을 유지하고 이에 액세스할 수 있습니다. {{site.data.keyword.Bluemix_notm}} 서비스를 클러스터의 네임스페이스에 바인드하면, Kubernetes 시크릿이 작성됩니다. Kubernetes 시크릿은 서비스에 대한 기밀 정보를 유지합니다(예: 서비스에 대한 URL, 사용자 이름 및 비밀번호). 시크릿을 시크릿 볼륨으로서 포드에 마운트하고, 시크릿의 신임 정보를 사용하여 서비스에 액세스할 수 있습니다. 시크릿 볼륨을 기타 포드에 마운트하여 포드 간의 데이터를 공유할 수도 있습니다.<p>컨테이너에 장애가 발생하거나 포드가 작업자 노드에서 제거되는 경우, 데이터는 제거되지 않으며 시크릿 볼륨을 마운트하는 기타 포드에 의해 계속해서 액세스될 수 있습니다.</p><p>대부분의 {{site.data.keyword.Bluemix_notm}} 데이터베이스 서비스에서는 적은 양의 데이터를 위한 디스크 공간을 무료로 제공하므로 해당 기능을 테스트할 수 있습니다.</p><p>{{site.data.keyword.Bluemix_notm}} 서비스를 포드에 바인드하는 방법에 대한 자세한 정보는 [{{site.data.keyword.containershort_notm}}에서 앱의 {{site.data.keyword.Bluemix_notm}} 서비스 추가](cs_integrations.html#adding_app)를 참조하십시오. </p>|
-{: caption="테이블. Kubernetes 클러스터에서의 배치를 위한 지속적 데이터 스토리지 옵션" caption-side="top"}
+다음 이미지는 {{site.data.keyword.containerlong_notm}}에서 사용 가능한 비지속적 데이터 스토리지 옵션을 보여줍니다. 이러한 옵션은 무료 및 표준 클러스터에 사용할 수 있습니다.
+<p>
+<img src="images/cs_storage_nonpersistent.png" alt="비지속적 데이터 스토리지 옵션" width="450" style="width: 450px; border-style: none"/></p>
+
+<table summary="이 표는 비지속적 스토리지 옵션을 보여줍니다. 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며 1열에는 옵션 번호, 2열에는 옵션 제목, 3열에는 설명이 있습니다." style="width: 100%">
+<colgroup>
+       <col span="1" style="width: 5%;"/>
+       <col span="1" style="width: 20%;"/>
+       <col span="1" style="width: 75%;"/>
+    </colgroup>
+  <thead>
+  <th>#</th>
+  <th>옵션</th>
+  <th>설명</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>컨테이너 또는 포드 내부에</td>
+      <td>컨테이너 및 포드는 단기적으로만 지속되도록 디자인되었으며 예기치 않게 실패할 수 있습니다. 그러나 컨테이너의 라이프사이클 전체에서 컨테이너의 로컬 파일 시스템에 데이터를 기록하여 데이터를 저장할 수 있습니다. 컨테이너 내부의 데이터는 다른 컨테이너 또는 포드와 공유될 수 없으며 컨테이너가 충돌하거나 제거된 경우 유실됩니다. 자세한 정보는 [컨테이너에 데이터 저장](https://docs.docker.com/storage/)을 참조하십시오.</td>
+    </tr>
+  <tr>
+    <td>2</td>
+    <td>작업자 노드에</td>
+    <td>모든 작업자 노드는 사용자가 작업자 노드에 대해 선택한 시스템 유형에 따라 판별되는 기본 및 보조 스토리지로 설정됩니다. 기본 스토리지는 운영 체제의 데이터를 저장하는 데 사용되며 사용자가 액세스할 수 없습니다. 보조 스토리지는 모든 컨테이너 데이터가 기록되는 디렉토리인 <code>/var/lib/docker</code>의 데이터를 저장하는 데 사용됩니다. <br/><br/>작업자 노드의 보조 스토리지에 액세스하기 위해 <code>/emptyDir</code> 볼륨을 작성할 수 있습니다. 해당 포드의 컨테이너가 해당 볼륨에서 읽고 쓰기가 가능하도록 이 비어 있는 볼륨이 클러스터의 포드에 지정됩니다. 볼륨이 하나의 특정 포드에 지정되므로, 데이터는 복제본 세트의 기타 포드와 공유될 수 없습니다.<br/><p>다음과 같은 경우에 <code>/emptyDir</code> 볼륨과 해당 데이터가 제거됩니다. <ul><li>지정된 포드가 작업자 노드에서 영구적으로 삭제되었습니다.</li><li>지정된 포드가 다른 작업자 노드에서 스케줄되었습니다.</li><li>작업자 노드가 다시 로드되거나 업데이트되었습니다.</li><li>작업자 노드가 삭제되었습니다.</li><li>클러스터가 삭제되었습니다.</li><li>{{site.data.keyword.Bluemix_notm}} 계정이 일시중단된 상태에 도달했습니다.</li></ul></p><p><strong>참고:</strong> 포드 내의 컨테이너에 장애가 발생하는 경우, 볼륨의 데이터는 작업자 노드에서 계속 사용 가능합니다.</p><p>자세한 정보는 [Kubernetes 볼륨 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/storage/volumes/)을 참조하십시오.</p></td>
+    </tr>
+    </tbody>
+    </table>
+
+### 고가용성을 위한 지속적 데이터 스토리지 옵션
+{: persistent}
+
+고가용성 Stateful 앱을 작성할 때 주요 과제는 여러 위치에 있는 여러 앱 인스턴스 간에 데이터를 지속하고 데이터를 항상 동기화된 상태로 유지하는 것입니다. 고가용성 데이터를 위해 여러 데이터센터 또는 여러 지역에 분산된 여러 인스턴스를 포함하는 마스터 데이터베이스가 있고 이 마스터의 데이터가 지속적으로 복제되는지 확인합니다. 클러스터의 모든 인스턴스가 이 마스터 데이터베이스에서 읽고 써야 합니다. 하나의 마스터 인스턴스가 작동 중지된 경우 앱의 가동이 중단되지 않도록 다른 인스턴스가 워크로드를 인계받을 수 있습니다.
+{: shortdesc}
+
+다음 이미지는 표준 클러스터에서 데이터의 가용성을 높이기 위한 {{site.data.keyword.containerlong_notm}}의 옵션을 보여줍니다. 사용자에게 맞는 옵션은 다음 요인에 따라 달라집니다.
+  * **보유하고 있는 앱의 유형:** 예를 들어, 데이터베이스의 내부가 아닌 파일 기반으로 데이터를 저장해야 하는 앱이 있을 수 있습니다.
+  * **데이터를 저장하고 라우팅할 위치에 대한 법적 요구사항:** 예를 들어, 미국에서만 데이터를 저장하고 라우팅해야 할 수 있으며 이 경우 유럽에 있는 서비스를 사용할 수 없습니다.
+  * **백업 및 복원 옵션:** 모든 스토리지 옵션은 데이터를 백업하고 복원하는 기능과 함께 제공됩니다. 사용 가능한 백업 및 복원 옵션이 재해 복구 플랜의 요구사항(예: 백업 빈도 또는 기본 데이터센터 외부에 데이터를 저장하는 기능)을 충족하는지 확인하십시오.
+  * **글로벌 복제:** 고가용성을 위해 전세계의 데이터센터에 분산되어 복제되는 여러 스토리지 인스턴스를 설정할 수 있습니다.
+
+<br/>
+<img src="images/cs_storage_ha.png" alt="지속적 스토리지에 대한 고가용성 옵션"/>
+
+<table summary="이 표는 지속적 스토리지 옵션을 보여줍니다. 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며 1열에는 옵션 번호, 2열에는 옵션 제목, 3열에는 설명이 있습니다.">
+  <thead>
+  <th>#</th>
+  <th>옵션</th>
+  <th>설명</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td width="5%">1</td>
+  <td width="20%">NFS 파일 스토리지</td>
+  <td width="75%">이 옵션을 사용하면 Kubernetes 지속적 볼륨을 통해 앱 및 컨테이너 데이터를 지속할 수 있습니다. 볼륨은 데이터베이스가 아니라 파일 기반으로 데이터를 저장하는 앱에 사용될 수 있는 [Endurance 및 Performance NFS 기반 파일 스토리지![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/cloud/file-storage/details)에서 호스팅됩니다. 파일 스토리지는 REST에서 암호화되고 IBM에서 고가용성을 제공하기 위해 클러스터링됩니다.<p>{{site.data.keyword.containershort_notm}}는 스토리지 크기의 범위, IOPS, 삭제 정책 및 볼륨에 대한 읽기/쓰기 권한을 정의하는 사전 정의된 스토리지 클래스를 제공합니다. NFS 기반 파일 스토리지에 대한 요청을 시작하려면 [지속적 볼륨 클레임](cs_storage.html#create)을 작성해야 합니다. 지속적 볼륨 클레임을 제출한 후 {{site.data.keyword.containershort_notm}}는 NFS 기반 파일 스토리지에서 호스팅되는 지속적 볼륨을 동적으로 프로비저닝합니다. [지속적 볼륨 클레임을 배치에 대한 볼륨으로 마운트](cs_storage.html#app_volume_mount)하여 컨테이너가 볼륨에서 읽고 쓸 수 있도록 허용할 수 있습니다. </p><p>지속적 볼륨은 작업자 노드가 있는 데이터센터에서 프로비저닝됩니다. 동일한 복제본 세트 간에 또는 동일한 클러스터 내의 다른 배치와 데이터를 공유할 수 있습니다. 클러스터가 다른 데이터센터 또는 지역에 있는 경우 클러스터 간에 데이터를 공유할 수 없습니다. </p><p>기본적으로 NFS 스토리지는 자동으로 백업되지 않습니다. 제공된 백업 및 복원 메커니즘을 사용하여 클러스터에 대한 주기적 백업을 설정할 수 있습니다. 컨테이너에 장애가 발생하거나 포드가 작업자 노드에서 제거되는 경우, 데이터는 제거되지 않으며 볼륨을 마운트하는 기타 배치에 의해 계속해서 액세스될 수 있습니다. </p><p><strong>참고:</strong> 지속적 NFS 파일 공유 스토리지는 월별 기반으로 비용이 부과됩니다. 클러스터에 대한 지속적 스토리지를 프로비저닝하고 이를 즉시 제거하는 경우, 짧은 시간 동안만 사용했어도 지속적 스토리지에 대한 월별 비용을 계속 지불해야 합니다.</p></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>클라우드 데이터베이스 서비스</td>
+    <td>이 옵션을 사용하면 {{site.data.keyword.Bluemix_notm}} 데이터베이스 클라우드 서비스(예: [IBM Cloudant NoSQL DB](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant))를 사용하여 데이터를 지속할 수 있습니다. 여러 클러스터, 위치 및 지역에서 이 옵션을 사용하여 저장된 데이터에 액세스할 수 있습니다. <p> 모든 앱에서 액세스하는 단일 데이터베이스 인스턴스를 구성하거나 고가용성을 위해 [데이터센터에 걸쳐 여러 인스턴스를 설정하고 인스턴스 간의 복제를 설정](/docs/services/Cloudant/guides/active-active.html#configuring-cloudant-nosql-db-for-cross-region-disaster-recovery)하도록 선택할 수 있습니다. IBM Cloudant NoSQL 데이터베이스에서는 데이터가 자동으로 백업되지 않습니다. 제공된 [백업 및 복원 메커니즘](/docs/services/Cloudant/guides/backup-cookbook.html#cloudant-nosql-db-backup-and-recovery)을 사용하여 사이트 실패로부터 데이터를 보호할 수 있습니다.</p> <p> 클러스터에서 서비스를 사용하려면 클러스터의 네임스페이스에 [{{site.data.keyword.Bluemix_notm}} 서비스를 바인드](cs_integrations.html#adding_app)해야 합니다. 서비스를 클러스터에 바인드하면 Kubernetes 시크릿이 작성됩니다. Kubernetes 시크릿은 서비스에 대한 기밀 정보를 유지합니다(예: 서비스에 대한 URL, 사용자 이름 및 비밀번호). 시크릿을 시크릿 볼륨으로서 포드에 마운트하고, 시크릿의 신임 정보를 사용하여 서비스에 액세스할 수 있습니다. 시크릿 볼륨을 기타 포드에 마운트하여 포드 간의 데이터를 공유할 수도 있습니다. 컨테이너에 장애가 발생하거나 포드가 작업자 노드에서 제거되는 경우, 데이터는 제거되지 않으며 시크릿 볼륨을 마운트하는 기타 포드에 의해 계속해서 액세스될 수 있습니다. <p>대부분의 {{site.data.keyword.Bluemix_notm}} 데이터베이스 서비스에서는 적은 양의 데이터를 위한 디스크 공간을 무료로 제공하므로 해당 기능을 테스트할 수 있습니다.</p></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>온프레미스 데이터베이스</td>
+    <td>법적인 이유로 데이터를 현장에 저장해야 하는 경우 온프레미스 데이터베이스에 대한 [VPN 연결을 설정](cs_vpn.html#vpn)하고 데이터센터에서 기존 스토리지, 백업 및 복제 메커니즘을 사용할 수 있습니다.</td>
+  </tr>
+  </tbody>
+  </table>
+
+{: caption="표. Kubernetes 클러스터에서의 배치를 위한 지속적 데이터 스토리지 옵션" caption-side="top"}
 
 <br />
 
@@ -83,7 +152,7 @@ Kubernetes는 실제 하드웨어를 나타내는 지속적 볼륨과 일반적�
     {: codeblock}
 
     <table>
-    <caption>테이블. YAML 파일 컴포넌트 이해</caption>
+    <caption>표. YAML 파일 컴포넌트 이해</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
     </thead>
@@ -93,7 +162,7 @@ Kubernetes는 실제 하드웨어를 나타내는 지속적 볼륨과 일반적�
     <td>작성하려는 지속적 볼륨 오브젝트의 이름을 입력하십시오.</td>
     </tr>
     <tr>
-    <td><code>스토리지</code></td>
+    <td><code>storage</code></td>
     <td>기존 NFS 파일 공유의 스토리지 크기를 입력하십시오. 스토리지 크기는 기가바이트(예: 20Gi(20GB) 또는 1000Gi(1TB))로 기록되어야 하며 그 크기는 기존 파일 공유의 크기와 일치해야 합니다.</td>
     </tr>
     <tr>
@@ -195,7 +264,9 @@ Kubernetes는 실제 하드웨어를 나타내는 지속적 볼륨과 일반적�
 클러스터의 NFS 파일 스토리지를 프로비저닝하는 PVC(persistent volume claim)를 작성합니다. 그런 다음, 포드가 충돌하거나 종료된 경우에도 데이터를 사용할 수 있도록 이 클레임을 배치에 마운트합니다.
 {:shortdesc}
 
- 지속적 볼륨을 지원하는 NFS 파일 스토리지는 데이터에 대한 고가용성을 제공할 수 있도록 IBM에서 클러스터링합니다.
+ 지속적 볼륨을 지원하는 NFS 파일 스토리지는 데이터에 대한 고가용성을 제공할 수 있도록 IBM에서 클러스터링합니다. 스토리지 클래스는 사용 가능한 스토리지 오퍼링의 유형을 설명하고 지속적 볼륨을 작성하는 경우 데이터 보존 정책, 크기(GB) 및 IOPS와 같은 측면을 정의합니다.
+
+**참고**: 방화벽이 있는 경우, 지속적 볼륨 클레임을 작성할 수 있도록 클러스터가 있는 위치(데이터센터)의 IBM Cloud 인프라(SoftLayer) IP 범위에 대해 [egress 액세스를 허용](cs_firewall.html#pvc)하십시오.
 
 1.  사용 가능한 스토리지 클래스를 검토하십시오. {{site.data.keyword.containerlong}}는 클러스터 관리자가 스토리지 클래스를 작성할 필요가 없도록 8개의 사전 정의된 스토리지 클래스를 제공합니다. `ibmc-file-bronze` 스토리지 클래스는 `default` 스토리지 클래스와 동일합니다.
 
@@ -219,108 +290,104 @@ Kubernetes는 실제 하드웨어를 나타내는 지속적 볼륨과 일반적�
     ```
     {: screen}
 
-2.  pvc를 삭제한 후 데이터 및 NFS 파일 공유를 저장할지 여부를 결정하십시오. 데이터를 보존하려면 `retain` 스토리지 클래스를 선택하십시오. pvc를 삭제할 때 데이터 및 파일 공유가 삭제되도록 하려면 `retain`이 없는 스토리지 클래스를 선택하십시오.
+2.  pvc를 삭제한 후 데이터 및 NFS 파일 공유를 저장할지 여부(재확보 정책)를 결정하십시오. 데이터를 보존하려면 `retain` 스토리지 클래스를 선택하십시오. pvc를 삭제할 때 데이터 및 파일 공유가 삭제되도록 하려면 `retain`이 없는 스토리지 클래스를 선택하십시오.
 
-3.  사용 가능한 스토리지 크기 및 스토리지 클래스의 IOPS를 검토하십시오.
+3.  스토리지 클래스의 세부사항을 가져오십시오. CLI 출력의 **paramters** 필드에서 GB당 IOPS 및 크기 범위를 검토하십시오. 
 
-    - 브론즈, 실버 및 골드 스토리지 클래스는 [Endurance 스토리지![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://knowledgelayer.softlayer.com/topic/endurance-storage)를 사용하며 각 클래스에 대해 GB당 하나의 IOPS가 정의되어 있습니다. 총 IOPS는 스토리지의 크기에 따라 다릅니다. 예를 들어, GB당 4IOPS의 1000Gi pvc에는 총 4000IOPS가 있습니다.
+    <ul>
+      <li>브론즈, 실버 또는 골드 스토리지 클래스를 사용하는 경우 각 클래스에 대한 GB당 IOPS를 정의하는 [Endurance 스토리지![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://knowledgelayer.softlayer.com/topic/endurance-storage)를 가져옵니다. 그러나 사용 가능한 범위 내에서 크기를 선택하여 총 IOPS를 판별할 수 있습니다. 예를 들어, GB당 4IOPS의 실버 스토리지 클래스에서 1000Gi 파일 공유 크기를 선택하는 경우 볼륨에 총 4000IOPS가 있습니다. 지속적 볼륨에 더 많은 IOPS가 있을수록 입력 및 출력 오퍼레이션을 더 빠르게 처리합니다.<p>**스토리지 클래스에 대해 설명하는 명령 예**:</p>
 
-      ```
-     kubectl describe storageclasses ibmc-file-silver
-      ```
-      {: pre}
+       <pre class="pre">kubectl describe storageclasses ibmc-file-silver</pre>
 
-      **매개변수** 필드는 스토리지 클래스와 연관된 GB당 IOPS 및 사용 가능한 크기(기가바이트 단위)를 제공합니다.
+       **매개변수** 필드는 스토리지 클래스와 연관된 GB당 IOPS 및 사용 가능한 크기(기가바이트 단위)를 제공합니다.
+       <pre class="pre">Parameters:	iopsPerGB=4,sizeRange=20Gi,40Gi,80Gi,100Gi,250Gi,500Gi,1000Gi,2000Gi,4000Gi,8000Gi,12000Gi</pre>
+       
+       </li>
+      <li>사용자 정의 스토리지 클래스를 사용하면 [Performance 스토리지 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://knowledgelayer.softlayer.com/topic/performance-storage)를 가져오며 IOPS 및 크기의 조합을 선택하여 더 강력하게 제어할 수 있습니다. <p>**사용자 정의 스토리지 클래스에 대해 설명하는 명령 예**:</p>
 
-      ```
-     Parameters:	iopsPerGB=4,sizeRange=20Gi,40Gi,80Gi,100Gi,250Gi,500Gi,1000Gi,2000Gi,4000Gi,8000Gi,12000Gi
-      ```
-      {: screen}
+       <pre class="pre">    kubectl describe storageclasses ibmc-file-retain-custom</pre>
 
-    - 사용자 정의 스토리지 클래스는 [Performance 스토리지 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://knowledgelayer.softlayer.com/topic/performance-storage)를 사용하며 총 IOPS 및 크기에 대한 별도의 옵션을 가집니다.
+       **매개변수** 필드는 스토리지 클래스와 연관된 IOPS 및 사용 가능한 크기(기가바이트 단위)를 제공합니다. 예를 들어, 40Gi pvc는 100 - 2000IOPS 범위에 있는 100의 배수인 IOPS를 선택할 수 있습니다.
 
-      ```
-    kubectl describe storageclasses ibmc-file-retain-custom
-      ```
-      {: pre}
-
-      **매개변수** 필드는 스토리지 클래스와 연관된 IOPS 및 사용 가능한 크기(기가바이트 단위)를 제공합니다. 예를 들어, 40Gi pvc는 100 - 2000IOPS 범위에 있는 100의 배수인 IOPS를 선택할 수 있습니다.
-
-      ```
+       ```
     Parameters:	Note=IOPS value must be a multiple of 100,reclaimPolicy=Retain,sizeIOPSRange=20Gi:[100-1000],40Gi:[100-2000],80Gi:[100-4000],100Gi:[100-6000],1000Gi[100-6000],2000Gi:[200-6000],4000Gi:[300-6000],8000Gi:[500-6000],12000Gi:[1000-6000]
-      ```
-      {: screen}
+       ```
+       {: screen}
+       </li></ul>
+4. 지속적 볼륨 클레임을 정의하는 구성 파일을 작성하고 해당 구성을 `.yaml` 파일로 저장하십시오.
 
-4.  지속적 볼륨 클레임을 정의하는 구성 파일을 작성하고 해당 구성을 `.yaml` 파일로 저장하십시오.
+    -  **브론즈, 실버, 골드 스토리지 클래스에 대한 예**:
+       
 
-    브론즈, 실버, 골드 클래스에 대한 예제:
+       ```
+       apiVersion: v1
+       kind: PersistentVolumeClaim
+       metadata:
+        name: mypvc
+        annotations:
+          volume.beta.kubernetes.io/storage-class: "ibmc-file-silver"
+          
+       spec:
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: 20Gi
+        ```
+        {: codeblock}
 
-    ```
-    apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: <pvc_name>
-      annotations:
-        volume.beta.kubernetes.io/storage-class: "ibmc-file-silver"
-    spec:
-      accessModes:
-        - ReadWriteMany
-      resources:
-        requests:
-          storage: 20Gi
-    ```
-    {: codeblock}
+    -  **사용자 정의 스토리지 클래스에 대한 예**:
+       
 
-    사용자 정의 클래스에 대한 예제:
+       ```
+       apiVersion: v1
+       kind: PersistentVolumeClaim
+       metadata:
+         name: mypvc
+         annotations:
+           volume.beta.kubernetes.io/storage-class: "ibmc-file-retain-custom"
+         
+       spec:
+         accessModes:
+           - ReadWriteMany
+         resources:
+           requests:
+             storage: 40Gi
+             iops: "500"
+        ```
+        {: codeblock}
 
-    ```
-    apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: <pvc_name>
-      annotations:
-        volume.beta.kubernetes.io/storage-class: "ibmc-file-retain-custom"
-    spec:
-      accessModes:
-        - ReadWriteMany
-      resources:
-        requests:
-          storage: 40Gi
-          iops: "500"
-    ```
-    {: codeblock}
-
-    <table>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>metadata/name</code></td>
-    <td>지속적 볼륨 클레임의 이름을 입력하십시오.</td>
-    </tr>
-    <tr>
-    <td><code>metadata/annotations</code></td>
-    <td>지속적 볼륨에 대한 스토리지 클래스를 정의하십시오.
-      <ul>
-      <li>ibmc-file-bronze/ibmc-file-retain-bronze: GB당 2IOPS</li>
-      <li>ibmc-file-silver/ibmc-file-retain-silver: GB당 4IOPS</li>
-      <li>ibmc-file-gold/ibmc-file-retain-gold: GB당 10IOPS</li>
-      <li>ibmc-file-custom/ibmc-file-retain-custom: 다중 IOPS 값이 사용 가능합니다.
-
-    </li> 스토리지 클래스를 지정하지 않으면 브론즈 스토리지 클래스로 지속적 볼륨이 작성됩니다.</td>
-    </tr>
-    <tr>
-    <td><code>spec/accessModes</code>
+        <table>
+        <thead>
+        <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+        </thead>
+        <tbody>
+        <tr>
+        <td><code>metadata/name</code></td>
+        <td>지속적 볼륨 클레임의 이름을 입력하십시오.</td>
+        </tr>
+        <tr>
+        <td><code>metadata/annotations</code></td>
+        <td>지속적 볼륨에 대한 스토리지 클래스를 정의하십시오.
+          <ul>
+          <li>ibmc-file-bronze/ibmc-file-retain-bronze: GB당 2IOPS</li>
+          <li>ibmc-file-silver/ibmc-file-retain-silver: GB당 4IOPS</li>
+          <li>ibmc-file-gold/ibmc-file-retain-gold: GB당 10IOPS</li>
+          <li>ibmc-file-custom/ibmc-file-retain-custom: 다중 IOPS 값이 사용 가능합니다.</li>
+          <p>스토리지 클래스를 지정하지 않으면 브론즈 스토리지 클래스로 지속적 볼륨이 작성됩니다.</p></td>
+        </tr>
+        
+        <tr>
+        <td><code>spec/accessModes</code>
     <code>resources/requests/storage</code></td>
-    <td> 나열된 크기 이외의 크기를 선택하면 해당 크기가 올림됩니다. 최대 크기보다 더 큰 크기를 선택하는 경우에는 내림됩니다.</td>
-    </tr>
-    <tr>
-    <td><code>spec/accessModes</code>
+        <td> 나열된 크기 이외의 크기를 선택하면 해당 크기가 올림됩니다. 최대 크기보다 더 큰 크기를 선택하는 경우에는 내림됩니다.</td>
+        </tr>
+        <tr>
+        <td><code>spec/accessModes</code>
     <code>resources/requests/iops</code></td>
-    <td>이 옵션은 ibmc-file-custom/ibmc-file-retain-custom에만 해당됩니다. 스토리지에 대한 총 IOPS를 지정하십시오. 모든 옵션을 보려면 `kubectl describe storageclasses ibmc-file-custom`을 실행하십시오. 나열된 것과 이외의 IOPS를 선택하면 IOPS가 올림됩니다.</td>
-    </tr>
-    </tbody></table>
+        <td>이 옵션은 고객 스토리지 클래스(`ibmc-file-custom/ibmc-file-retain-custom`)에만 해당됩니다. 스토리지에 대한 총 IOPS를 지정하십시오. 모든 옵션을 보려면 `kubectl describe storageclasses ibmc-file-custom`을 실행하십시오. 나열된 것과 이외의 IOPS를 선택하면 IOPS가 올림됩니다.</td>
+        </tr>
+        </tbody></table>
 
 5.  지속적 볼륨 클레임을 작성하십시오.
 
@@ -332,14 +399,14 @@ Kubernetes는 실제 하드웨어를 나타내는 지속적 볼륨과 일반적�
 6.  지속적 볼륨 클레임이 작성되고 지속적 볼륨에 바인드되었는지 확인하십시오. 이 프로세스는 몇 분 정도 소요됩니다.
 
     ```
-    kubectl describe pvc <pvc_name>
+    kubectl describe pvc mypvc
     ```
     {: pre}
 
-    출력은 다음과 같이 표시됩니다.
+    출력 예:
 
     ```
-    Name:  <pvc_name>
+    Name: mypvc
     Namespace: default
     StorageClass: ""
     Status:  Bound
@@ -397,20 +464,28 @@ Kubernetes는 실제 하드웨어를 나타내는 지속적 볼륨과 일반적�
     <td>배치의 레이블입니다.</td>
     </tr>
     <tr>
-    <td><code>volumeMounts/mountPath</code></td>
-    <td>배치 내에서 볼륨이 마운트되는 디렉토리의 절대 경로입니다.</td>
+    <td><code>spec/containers/image</code></td>
+    <td>사용하려는 이미지의 이름입니다. {{site.data.keyword.registryshort_notm}} 계정에서 사용 가능한 이미지를 나열하려면 `bx cr image-list`를 실행하십시오.</td>
     </tr>
     <tr>
-    <td><code>volumeMounts/name</code></td>
-    <td>배치에 마운트할 볼륨의 이름입니다.</td>
+    <td><code>spec/containers/name</code></td>
+    <td>클러스터에 배치하려는 컨테이너의 이름입니다.</td>
+    </tr>
+    <tr>
+    <td><code>spec/containers/volumeMounts/mountPath</code></td>
+    <td>컨테이너 내에서 볼륨이 마운트되는 디렉토리의 절대 경로입니다.</td>
+    </tr>
+    <tr>
+    <td><code>spec/containers/volumeMounts/name</code></td>
+    <td>포드에 마운트할 볼륨의 이름입니다.</td>
     </tr>
     <tr>
     <td><code>volumes/name</code></td>
-    <td>배치에 마운트할 볼륨의 이름입니다. 일반적으로 이 이름은 <code>volumeMounts/name</code>과 동일합니다.</td>
+    <td>포드에 마운트할 볼륨의 이름입니다. 일반적으로 이 이름은 <code>volumeMounts/name</code>과 동일합니다.</td>
     </tr>
     <tr>
-    <td><code>volumes/name/persistentVolumeClaim</code></td>
-    <td>볼륨으로 사용할 지속적 볼륨 클레임의 이름입니다. 볼륨을 배치에 마운트하는 경우, Kubernetes는 지속적 볼륨 클레임에 바인드된 지속적 볼륨을 식별하며 사용자가 지속적 볼륨에서 읽고 쓸 수 있도록 합니다.</td>
+    <td><code>volumes/persistentVolumeClaim/claimName</code></td>
+    <td>볼륨으로 사용할 지속적 볼륨 클레임의 이름입니다. 볼륨을 포드에 마운트하는 경우, Kubernetes는 지속적 볼륨 클레임에 바인드된 지속적 볼륨을 식별하며 사용자가 지속적 볼륨에서 읽고 쓸 수 있도록 합니다.</td>
     </tr>
     </tbody></table>
 
@@ -448,7 +523,6 @@ Kubernetes는 실제 하드웨어를 나타내는 지속적 볼륨과 일반적�
 
 
 
-
 ## 지속적 스토리지에 루트가 아닌 사용자 액세스 추가
 {: #nonroot}
 
@@ -463,13 +537,13 @@ Kubernetes는 실제 하드웨어를 나타내는 지속적 볼륨과 일반적�
 -   임시로 사용자를 루트 그룹에 추가하십시오.
 -   올바른 사용자 권한으로 볼륨 마운트 경로에서 디렉토리를 작성하십시오.
 
-{{site.data.keyword.containershort_notm}}의 경우 볼륨 마운트 경로의 기본 소유자는 `nobody` 소유자입니다. NFS 스토리지에서 소유자가 포드의 로컬에 없으면 `nobody` 사용자가 작성됩니다. 볼륨은 컨테이너의 루트 사용자를 인식하도록 설정됩니다. 일부 앱에서는 이 사용자가 컨테이너의 유일한 사용자입니다. 그러나 다수의 앱에서는 `nobody`가 아니라 컨테이너 마운트 경로에 쓰는 루트가 아닌 사용자를 지정합니다. 일부 앱은 루트 사용자가 볼륨을 소유하도록 지정합니다. 일반적으로 앱은 보안 문제로 인해 루트 사용자를 사용하지 않습니다. 하지만 앱에 루트 사용자가 필요한 경우 도움을 받기 위해 [{{site.data.keyword.Bluemix_notm}} 지원](/docs/support/index.html#contacting-support)에 문의할 수 있습니다.
+{{site.data.keyword.containershort_notm}}의 경우 볼륨 마운트 경로의 기본 소유자는 `nobody` 소유자입니다. NFS 스토리지에서 소유자가 포드의 로컬에 없으면 `nobody` 사용자가 작성됩니다. 볼륨은 컨테이너의 루트 사용자를 인식하도록 설정됩니다. 일부 앱에서는 이 사용자가 컨테이너의 유일한 사용자입니다. 그러나 다수의 앱에서는 `nobody`가 아니라 컨테이너 마운트 경로에 쓰는 루트가 아닌 사용자를 지정합니다. 일부 앱은 루트 사용자가 볼륨을 소유하도록 지정합니다. 일반적으로 앱은 보안 문제로 인해 루트 사용자를 사용하지 않습니다. 하지만 앱에 루트 사용자가 필요한 경우 도움을 받기 위해 [{{site.data.keyword.Bluemix_notm}} 지원](/docs/get-support/howtogetsupport.html#getting-customer-support)에 문의할 수 있습니다.
 
 
 1.  로컬 디렉토리에서 Dockerfile을 작성하십시오. 이 예제 Dockerfile은 이름이 `myguest`인 비루트 사용자를 작성합니다.
 
     ```
-    FROM registry.<region>.bluemix.net/ibmnode:latest
+    FROM registry.<region>.bluemix.net/ibmliberty:latest
 
     # Create group and user with GID & UID 1010.
     # In this case your are creating a group and user named myguest.

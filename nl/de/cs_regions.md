@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-05"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-01-05"
 
 [{{site.data.keyword.Bluemix_notm}}-Regionen](#bluemix_regions) unterscheiden sich von [{{site.data.keyword.containershort_notm}}-Regionen](#container_regions).
 
-![{{site.data.keyword.containershort_notm}}-Regionen und -Rechenzentren](/images/regions.png)
+![{{site.data.keyword.containershort_notm}}-Regionen und -Rechenzentren](images/regions.png)
 
 Abbildung 1. {{site.data.keyword.containershort_notm}}-Regionen und -Rechenzentren
 
@@ -46,7 +46,7 @@ Um zu überprüfen, in welcher {{site.data.keyword.Bluemix_notm}}-Region Sie sic
 
 Auf {{site.data.keyword.Bluemix_notm}}-Regionen kann zugegriffen werden, indem bei der Anmeldung der API-Endpunkt angegeben wird. Wenn Sie keine Region angeben, werden Sie automatisch bei der nächstgelegenen Region angemeldet.
 
-API-Endpunkte für {{site.data.keyword.Bluemix_notm}}-Regionen mit Beispiel für Anmeldebefehle:
+API-Endpunkte für {{site.data.keyword.Bluemix_notm}}-Regionen mit Beispielen für Anmeldebefehle:
 
   * Vereinigte Staaten (Süden) und Vereinigte Staaten (Osten)
       ```
@@ -108,14 +108,14 @@ Bei Standorten handelt es sich um Rechenzentren, die in einer Region verfügbar 
 
   | Region | Standort | Ort |
   |--------|----------|------|
-  | Asien-Pazifik (Norden) | hkg02, sng01, tok02 | Hongkong, Singapur, Tokio |
+  | Asien-Pazifik (Norden) | hkg02, seo01, sng01, tok02 | Hongkong, Seoul, Singapur, Tokio |
   | Asien-Pazifik (Süden)     | mel01, syd01, syd04        | Melbourne, Sydney |
   | Zentraleuropa     | ams03, fra02, mil01, par01        | Amsterdam, Frankfurt, Mailand, Paris |
   | Großbritannien (Süden)      | lon02, lon04         | London |
-  | Vereinigte Staaten (Osten)      | <ph class="mon">mon01, </ph>tor01, wdc06, wdc07        | <ph class="mon">Montreal, </ph>Toronto, Washington, DC |
-  | Vereinigte Staaten (Süden)     | dal10, dal12, dal13       | Dallas |
+  | Vereinigte Staaten (Osten)      | mon01, tor01, wdc06, wdc07        | Montreal, Toronto, Washington DC |
+  | Vereinigte Staaten (Süden)     | dal10, dal12, dal13, sao01       | Dallas, São Paolo |
 
-**Hinweis**: Mailand (mil01) ist nur für Lite-Cluster verfügbar.
+**Anmerkung**: Mailand (mil01) ist nur für kostenlose Cluster verfügbar.
 
 ### Container-Service-API-Befehle verwenden
 {: #container_api}

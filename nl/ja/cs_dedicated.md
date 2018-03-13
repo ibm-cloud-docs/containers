@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-01"
 
 ---
 
@@ -40,11 +40,11 @@ lastupdated: "2018-01-12"
 
 |Area|{{site.data.keyword.Bluemix_notm}} Public|{{site.data.keyword.Bluemix_dedicated_notm}}|
 |--|--------------|--------------------------------|
-|クラスター作成|ライト・クラスターを作成したり、標準クラスターに関する以下の詳細を指定したりします。<ul><li>クラスター・タイプ</li><li>名前</li><li>ロケーション</li><li>マシン・タイプ</li><li>ワーカー・ノードの数</li><li>パブリック VLAN</li><li>プライベート VLAN</li><li>ハードウェア</li></ul>|標準クラスターに関する以下の詳細を指定します。<ul><li>名前</li><li>Kubernetes バージョン</li><li>マシン・タイプ</li><li>ワーカー・ノードの数</li></ul><p>**注:** VLAN とハードウェアの設定は、{{site.data.keyword.Bluemix_notm}} 環境の作成時に事前定義されます。</p>|
+|クラスター作成|フリー・クラスターを作成したり、標準クラスターに関する以下の詳細を指定したりします。<ul><li>クラスター・タイプ</li><li>名前</li><li>ロケーション</li><li>マシン・タイプ</li><li>ワーカー・ノードの数</li><li>パブリック VLAN</li><li>プライベート VLAN</li><li>ハードウェア</li></ul>|標準クラスターに関する以下の詳細を指定します。<ul><li>名前</li><li>Kubernetes バージョン</li><li>マシン・タイプ</li><li>ワーカー・ノードの数</li></ul><p>**注:** VLAN とハードウェアの設定は、{{site.data.keyword.Bluemix_notm}} 環境の作成時に事前定義されます。</p>|
 |クラスターのハードウェアと所有権|標準クラスターでは、ハードウェアは {{site.data.keyword.IBM_notm}} の他のお客様と共有することも、お客様専用にすることもできます。 パブリック VLAN とプライベート VLAN は、お客様の IBM Cloud インフラストラクチャー (SoftLayer) アカウントでお客様が所有して管理します。|{{site.data.keyword.Bluemix_dedicated_notm}} のクラスターでは、ハードウェアは常に専用です。 パブリック VLAN とプライベート VLAN は、お客様の代わりに IBM が所有して管理します。 {{site.data.keyword.Bluemix_notm}} 環境のロケーションは事前定義されます。|
 |ロード・バランサーと Ingress ネットワーキング|標準クラスターのプロビジョニング時には、以下のアクションが自動的に行われます。<ul><li>1 つのポータブル・パブリック・サブネットと 1 つのポータブル・プライベート・サブネットがクラスターにバインドされて、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに割り当てられます。</li><li>1 つのポータブル・パブリック IP アドレスが可用性の高いアプリケーション・ロード・バランサー用に使用され、固有のパブリック経路が &lt;cluster_name&gt;.containers.mybluemix.net の形式で割り当てられます。 この経路を使用して、複数のアプリをパブリックに公開できます。 1 つのポータブル・プライベート IP アドレスが専用アプリケーション・ロード・バランサーのために使用されます。</li><li>ロード・バランサー・サービスを介してアプリを公開するために使用できる、4 つのポータブル・パブリック IP アドレスと 4 つのポータブル・プライベート IP アドレスがクラスターに割り当てられます。 IBM Cloud インフラストラクチャー (SoftLayer) アカウントを介して追加のサブネットを要求できます。</li></ul>|Dedicated アカウントを作成するときには、クラスター・サービスの公開方法とアクセス方法に関する接続の決定を行います。 独自のエンタープライズ IP 範囲 (ユーザー管理の IP) を使用する場合は、それらを [{{site.data.keyword.Bluemix_dedicated_notm}} 環境のセットアップ](/docs/dedicated/index.html#setupdedicated)時に指定する必要があります。 <ul><li>デフォルトでは、ポータブル・パブリック・サブネットは Dedicated アカウントに作成したクラスターにバインドされません。 代わりに、エンタープライズに最適な接続モデルを柔軟に選択できます。</li><li>クラスターを作成した後に、バインドするサブネットのタイプを選択して、ロード・バランサーまたは Ingress 接続のためにクラスターで使用します。<ul><li>パブリック・ポータブル・サブネットまたはプライベート・ポータブル・サブネットでは、[サブネットをクラスターに追加](cs_subnets.html#subnets)できます</li><li>Dedicated での開発時に IBM に提供したユーザー管理の IP アドレスでは、[ユーザー管理のサブネットをクラスターに追加](#dedicated_byoip_subnets)することができます。</li></ul></li><li>サブネットをクラスターにバインドした後に、Ingress コントローラーが作成されます。 ポータブル・パブリック・サブネットを使用した場合にのみパブリック Ingress ルートが作成されます。</li></ul>|
 |NodePort ネットワーキング|ワーカー・ノードのパブリック・ポートを公開し、ワーカー・ノードのパブリック IP アドレスを使用して、クラスター内のサービスにパブリック・アクセスを行います。|ワーカー・ノードのすべてのパブリック IP アドレスがファイアウォールによってブロックされます。 ただし、クラスターに追加された {{site.data.keyword.Bluemix_notm}} サービスでは、パブリック IP アドレスまたはプライベート IP アドレスを使用してノード・ポートにアクセスできます。|
-|永続ストレージ|ボリュームの[動的プロビジョニング](cs_storage.html#create)または[静的プロビジョニング](cs_storage.html#existing)を使用します。|ボリュームの[動的プロビジョニング](cs_storage.html#create)を使用します。 ボリュームのバックアップの要求、ボリュームからのリストアの要求、その他のストレージ機能の実行のためには、[サポート・チケットを開きます](/docs/support/index.html#contacting-support)。</li></ul>|
+|永続ストレージ|ボリュームの[動的プロビジョニング](cs_storage.html#create)または[静的プロビジョニング](cs_storage.html#existing)を使用します。|ボリュームの[動的プロビジョニング](cs_storage.html#create)を使用します。 ボリュームのバックアップの要求、ボリュームからのリストアの要求、その他のストレージ機能の実行のためには、[サポート・チケットを開きます](/docs/get-support/howtogetsupport.html#getting-customer-support)。</li></ul>|
 |{{site.data.keyword.registryshort_notm}} のイメージ・レジストリー URL|<ul><li>米国南部と米国東部: <code>registry.ng bluemix.net</code></li><li>英国南部: <code>registry.eu-gb.bluemix.net</code></li><li>中欧 (フランクフルト): <code>registry.eu-de.bluemix.net</code></li><li>オーストラリア (シドニー): <code>registry.au-syd.bluemix.net</code></li></ul>|<ul><li>新しい名前空間には、{{site.data.keyword.Bluemix_notm}} パブリックに対して定義されたものと同じ地域をベースとするレジストリーを使用してください。</li><li>{{site.data.keyword.Bluemix_dedicated_notm}} で単一コンテナーとスケーラブル・コンテナー用にセットアップされた名前空間の場合は、<code>registry.&lt;dedicated_domain&gt;</code> を使用します。</li></ul>|
 |レジストリーへのアクセス|[{{site.data.keyword.containershort_notm}} でのプライベートとパブリックのイメージ・レジストリーの使用](cs_images.html)にあるオプションを参照してください。|<ul><li>新しい名前空間の場合は、[{{site.data.keyword.containershort_notm}} でのプライベートとパブリックのイメージ・レジストリーの使用](cs_images.html)にあるオプションを参照してください。</li><li>単一グループとスケーラブル・グループ用にセットアップされた名前空間の場合は、[トークンを使用し、Kubernetes シークレットを作成](cs_dedicated_tokens.html#cs_dedicated_tokens)して認証を受けます。</li></ul>|
 {: caption="{{site.data.keyword.Bluemix_notm}} パブリックと {{site.data.keyword.Bluemix_dedicated_notm}} のフィーチャーの相違点" caption-side="top"}
@@ -119,7 +119,7 @@ lastupdated: "2018-01-12"
             ```
             {: pre}
 
-            <em>&lt;user_IBMid&gt;</em> を招待するユーザーの E メールに、<em>&lt;public_api_key&gt;</em> を直前のステップで生成した API キーに、<em>&lt;public_org_id&gt;</em> を Public アカウント組織の GUID に置き換えます。このコマンドについて詳しくは、[IBM Cloud Dedicated からのユーザーの招待](/docs/cli/plugins/bluemix_admin/index.html#admin_dedicated_invite_public)を参照してください。
+            <em>&lt;user_IBMid&gt;</em> を招待するユーザーの E メールに、<em>&lt;public_api_key&gt;</em> を直前のステップで生成した API キーに、<em>&lt;public_org_id&gt;</em> を Public アカウント組織の GUID に置き換えます。 このコマンドについて詳しくは、[IBM Cloud Dedicated からのユーザーの招待](/docs/cli/plugins/bluemix_admin/index.html#admin_dedicated_invite_public)を参照してください。
 
         * 現在 Dedicated アカウント組織に含まれているすべてのユーザーを招待するには、以下のようにします。
 
@@ -127,7 +127,7 @@ lastupdated: "2018-01-12"
             bx cf bluemix-admin invite-users-to-public -organization=<dedicated_org_id> -apikey=<public_api_key> -public_org_id=<public_org_id>
             ```
 
-            <em>&lt;dedicated_org_id&gt;</em> を Dedicated アカウント組織の ID に、<em>&lt;public_api_key&gt;</em> を直前のステップで生成した API キーに、<em>&lt;public_org_id&gt;</em> を Public アカウント組織の GUID に置き換えます。このコマンドについて詳しくは、[IBM Cloud Dedicated からのユーザーの招待](/docs/cli/plugins/bluemix_admin/index.html#admin_dedicated_invite_public)を参照してください。
+            <em>&lt;dedicated_org_id&gt;</em> を Dedicated アカウント組織の ID に、<em>&lt;public_api_key&gt;</em> を直前のステップで生成した API キーに、<em>&lt;public_org_id&gt;</em> を Public アカウント組織の GUID に置き換えます。 このコマンドについて詳しくは、[IBM Cloud Dedicated からのユーザーの招待](/docs/cli/plugins/bluemix_admin/index.html#admin_dedicated_invite_public)を参照してください。
 
     3.  ユーザーに IBM ID がある場合、そのユーザーは Public アカウント内の指定された組織に自動的に追加されます。 ユーザーに IBM ID がまだ存在しない場合、ユーザーの E メール・アドレスに招待が送信されます。 ユーザーが招待を受け入れると、そのユーザーの IBM ID が作成されて、そのユーザーは Public アカウント内の指定された組織に追加されます。
 
@@ -167,11 +167,18 @@ lastupdated: "2018-01-12"
 
         **注:** フェデレーテッド ID がある場合は、`bx login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` を使用して、{{site.data.keyword.Bluemix_notm}} CLI にログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。 `--sso` なしではログインに失敗し、`--sso` オプションを指定すると成功する場合、フェデレーテッド ID があることがわかります。
 
-    2.  初めてログインする場合は、プロンプトが出されたら Dedicated ユーザー ID とパスワードを入力します。 これにより Dedicated アカウントが認証され、Dedicated アカウントと Public アカウントが共にリンクされます。 この初回のログインの後は、毎回のログインで IBM ID だけを使用します。詳しくは、[専用 ID とパブリック IBM ID との接続](/docs/cli/connect_dedicated_id.html#connect_dedicated_id)を参照してください。
+    2.  初めてログインする場合は、プロンプトが出されたら Dedicated ユーザー ID とパスワードを入力します。 これにより Dedicated アカウントが認証され、Dedicated アカウントと Public アカウントが共にリンクされます。 この初回のログインの後は、毎回のログインで IBM ID だけを使用します。 詳しくは、[専用 ID とパブリック IBM ID との接続](/docs/cli/connect_dedicated_id.html#connect_dedicated_id)を参照してください。
 
         **注**: クラスターを作成するには、Dedicated アカウントと Public アカウントの両方にログインする必要があります。 Dedicated アカウントにログインするだけの場合は、Dedicated エンドポイントにログインする際に `--no-iam` フラグを使用します。
 
-5.  アカウントをリンク解除する場合、IBM ID を Dedicated ユーザー ID から切断することができます。詳しくは、[専用 ID のパブリック IBM ID からの切断](/docs/cli/connect_dedicated_id.html#disconnect-your-dedicated-id-from-the-public-ibmid)を参照してください。
+    3.  専用環境でクラスターを作成したりクラスターにアクセスしたりするためには、その環境に関連付ける地域を設定する必要があります。
+
+        ```
+        bx cs region-set
+        ```
+        {: pre}
+
+5.  アカウントをリンク解除する場合、IBM ID を Dedicated ユーザー ID から切断することができます。 詳しくは、[専用 ID のパブリック IBM ID からの切断](/docs/cli/connect_dedicated_id.html#disconnect-your-dedicated-id-from-the-public-ibmid)を参照してください。
 
     ```
     bx iam dedicated-id-disconnect
@@ -241,7 +248,7 @@ lastupdated: "2018-01-12"
     </tr>
     <tr>
     <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
-    <td>標準クラスターを作成する場合、マシン・タイプを選択します。 マシン・タイプの指定によって、各ワーカー・ノードで使用可能な仮想コンピュート・リソースが決まります。 詳しくは、[{{site.data.keyword.containershort_notm}} のライト・クラスターと標準クラスターの比較](cs_why.html#cluster_types)を参照してください。 ライト・クラスターの場合、マシン・タイプを定義する必要はありません。</td>
+    <td>標準クラスターを作成する場合、マシン・タイプを選択します。 マシン・タイプの指定によって、各ワーカー・ノードで使用可能な仮想コンピュート・リソースが決まります。 詳しくは、[{{site.data.keyword.containershort_notm}} のフリー・クラスターと標準クラスターの比較](cs_why.html#cluster_types)を参照してください。 フリー・クラスターの場合、マシン・タイプを定義する必要はありません。</td>
     </tr>
     <tr>
     <td><code>--name <em>&lt;name&gt;</em></code></td>
@@ -363,7 +370,7 @@ lastupdated: "2018-01-12"
 
 始める前に、ユーザー管理のサブネットを使用する {{site.data.keyword.Bluemix_dedicated_notm}} ネットワークとエンタープライズ・ネットワークとの間のネットワーク・トラフィックの出入りのルーティングを構成します。
 
-1. 独自のサブネットを使用するには、[サポート・チケットを開き](/docs/support/index.html#contacting-support)、使用するサブネット CIDR のリストを指定します。
+1. 独自のサブネットを使用するには、[サポート・チケットを開き](/docs/get-support/howtogetsupport.html#getting-customer-support)、使用するサブネット CIDR のリストを指定します。
     **注**: オンプレミスと内部アカウント接続のために ALB とロード・バランサーを管理する方法は、サブネット CIDR のフォーマットによって異なります。 構成の違いについては、最後のステップを参照してください。
 
 2. {{site.data.keyword.IBM_notm}} がユーザー管理のサブネットをプロビジョンした後に、Kubernetes クラスターでそのサブネットを使用できるようにします。
@@ -372,7 +379,7 @@ lastupdated: "2018-01-12"
     bx cs cluster-user-subnet-add <cluster_name> <subnet_CIDR> <private_VLAN>
     ```
     {: pre}
-    <em>&lt;cluster_name&gt;</em> をクラスターの名前または ID に置き換え、<em>&lt;subnet_CIDR&&gt;</em> を、サポート・チケットに指定したいずれかのサブネット CIDR に置き換え、<em>&lt;private_VLAN&gt;</em> を使用可能なプライベート VLAN ID に置き換えます。 使用可能なプライベート VLAN の ID は、`bx cs vlans` を実行することによって見つけることができます。
+    <em>&lt;cluster_name&gt;</em> をクラスターの名前または ID に置き換え、<em>&lt;subnet_CIDR&gt;</em> を、サポート・チケットに指定したいずれかのサブネット CIDR に置き換え、<em>&lt;private_VLAN&gt;</em> を使用可能なプライベート VLAN ID に置き換えます。 使用可能なプライベート VLAN の ID は、`bx cs vlans` を実行することによって見つけることができます。
 
 3. サブネットがクラスターに追加されたことを確認します。 ユーザー提供のサブネットの **User-managed** フィールドは _true_ です。
 
@@ -426,14 +433,14 @@ Kubernetes の技法を利用して、アプリを {{site.data.keyword.Bluemix_d
 #### ロード・バランサー・タイプのサービスを使用してアプリへのアクセスを構成する方法
 {: #dedicated_apps_public_load_balancer}
 
-ロード・バランサーにパブリック IP アドレスを使用する場合、企業ファイアウォール・ホワイトリストが IBM に提出されていることを確認するか、[サポート・チケットを開いて](/docs/support/index.html#contacting-support)ファイアウォール・ホワイトリストを構成します。 その後、[ロード・バランサー・タイプのサービスを使用してアプリへのアクセスを構成する方法](cs_loadbalancer.html#config)の手順に従います。
+ロード・バランサーにパブリック IP アドレスを使用する場合、企業ファイアウォール・ホワイトリストが IBM に提出されていることを確認するか、[サポート・チケットを開いて](/docs/get-support/howtogetsupport.html#getting-customer-support)ファイアウォール・ホワイトリストを構成します。 その後、[ロード・バランサー・タイプのサービスを使用してアプリへのアクセスを構成する方法](cs_loadbalancer.html#config)の手順に従います。
 
 #### Ingress を使用してアプリへのパブリック・アクセスを構成する方法
 {: #dedicated_apps_public_ingress}
 
-アプリケーション・ロード・バランサーにパブリック IP アドレスを使用する場合、企業ファイアウォール・ホワイトリストが IBM に提出されていることを確認するか、[サポート・チケットを開いて](/docs/support/index.html#contacting-support)ファイアウォール・ホワイトリストを構成します。 その後、[Ingress を使用してアプリへのアクセスを構成する方法](cs_ingress.html#config)の手順に従います。
+アプリケーション・ロード・バランサーにパブリック IP アドレスを使用する場合、企業ファイアウォール・ホワイトリストが IBM に提出されていることを確認するか、[サポート・チケットを開いて](/docs/get-support/howtogetsupport.html#getting-customer-support)ファイアウォール・ホワイトリストを構成します。 その後、[Ingress を使用してアプリへのアクセスを構成する方法](cs_ingress.html#config)の手順に従います。
 
 ### 永続ストレージの作成
 {: #dedicated_apps_volume_claim}
 
-永続ストレージを作成するためのオプションを確認するには、[永続データ・ストレージ](cs_storage.html#planning)を参照してください。 ボリュームのバックアップ、ボリュームからのリストア、その他のストレージ機能を要求するには、[サポート・チケットを開く](/docs/support/index.html#contacting-support)必要があります。
+永続ストレージを作成するためのオプションを確認するには、[永続データ・ストレージ](cs_storage.html#planning)を参照してください。 ボリュームのバックアップ、ボリュームからのリストア、その他のストレージ機能を要求するには、[サポート・チケットを開く](/docs/get-support/howtogetsupport.html#getting-customer-support)必要があります。

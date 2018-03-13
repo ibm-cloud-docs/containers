@@ -16,9 +16,9 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# Esta página se ha movido.
+# El contenido que está buscando se ha trasladado.
 
-Encontrará los temas aquí:
+Consulte la información más reciente en su nueva ubicación:
 - [Inicio del panel de control de Kubernetes](cs_app.html#cli_dashboard)
 - [Creación de secretos](cs_app.html#secrets)
 - [Cómo permitir el acceso público a apps](cs_network_planning.html#planning)

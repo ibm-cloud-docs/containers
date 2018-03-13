@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-29"
 
 ---
 
@@ -29,17 +29,16 @@ VPN 연결을 설정하려면 Helm 차트를 사용하여 Kubernetes 포드 내�
 
 시작하기 전에:
 
-- [표준 클러스터를 작성하십시오.
-](cs_clusters.html#clusters_cli)
-- [기존 클러스터를 사용 중인 경우 버전 1.7.4 이상으로 업데이트하십시오. ](cs_cluster_update.html#master)
+- [표준 클러스터를 작성](cs_clusters.html#clusters_cli)하십시오.
+- [기존 클러스터를 사용 중인 경우 버전 1.7.4 이상으로 업데이트](cs_cluster_update.html#master)하십시오.
 - 클러스터에는 하나 이상의 사용 가능한 공인 로드 밸런서 IP 주소가 있어야 합니다.
-- [Kubernetes CLI를 클러스터에 대상으로 지정하십시오](cs_cli_install.html#cs_cli_configure).
+- [Kubernetes CLI를 클러스터에 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
 
 Strongswan으로 VPN 연결을 설정하려면 다음을 수행하십시오.
 
 1. 아직 사용되지 않은 경우, 클러스터를 위해 Helm을 설치하고 초기화하십시오.
 
-    1. <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 설치하십시오. 
+    1. <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 설치하십시오.
 
     2. Helm을 초기화하고 `tiller`를 설치하십시오.
 
@@ -118,7 +117,7 @@ Strongswan으로 VPN 연결을 설정하려면 다음을 수행하십시오.
     </tr>
     <tr>
     <td><code>local.subnet</code></td>
-    <td>VPN 연결을 통해 온프레미스 네트워크에 노출되어야 하는 클러스터 서브넷 CIDR의 목록으로 이 값을 변경하십시오. 이 목록은 다음 서브넷을 포함할 수 있습니다. <ul><li>Kubernetes 포드 서브넷 CIDR: <code>172.30.0.0/16</code></li><li>Kubernetes 서비스 서브넷 CIDR: <code>172.21.0.0/16</code></li><li>사설 네트워크에서 NodePort 서비스가 노출한 애플리케이션이 있는 경우, 작업자 노드의 사설 서브넷 CIDR입니다. 이 값을 찾으려면 <code>bx cs subnets | grep <xxx.yyy.zzz></code>를 실행하십시오. 여기서 &lt;xxx.yyy.zzz&gt;는 작업자 노드 사설 IP 주소의 처음 세 옥텟입니다.</li><li>사설 네트워크에서 LoadBalancer 서비스가 노출한 애플리케이션이 있는 경우, 클러스터의 사설 또는 사용자 관리 서브넷 CIDR입니다. 이러한 값을 찾으려면 <code>bx cs cluster-get <cluster name> --showResources</code>를 실행하십시오. <b>VLANS</b> 섹션에서 <b>Public</b> 값이 <code>false</code>인 CIDR을 찾으십시오.</li></ul></td>
+    <td>VPN 연결을 통해 온프레미스 네트워크에 노출할 클러스터 서브넷 CIDR의 목록으로 이 값을 변경하십시오. 이 목록은 다음 서브넷을 포함할 수 있습니다. <ul><li>Kubernetes 포드 서브넷 CIDR: <code>172.30.0.0/16</code></li><li>Kubernetes 서비스 서브넷 CIDR: <code>172.21.0.0/16</code></li><li>사설 네트워크의 NodePort 서비스에서 애플리케이션을 노출한 경우 작업자 노드의 사설 서브넷 CIDR입니다. 이 값을 찾으려면 <code>bx cs subnets | grep <xxx.yyy.zzz></code>를 실행하십시오. 여기서 <code>&lt;xxx.yyy.zzz&gt;</code>는 작업자 노드 사설 IP 주소의 처음 세 옥텟입니다.</li><li>사설 네트워크에서 LoadBalancer 서비스가 노출한 애플리케이션이 있는 경우, 클러스터의 사설 또는 사용자 관리 서브넷 CIDR입니다. 이러한 값을 찾으려면 <code>bx cs cluster-get <cluster name> --showResources</code>를 실행하십시오. <b>VLANS</b> 섹션에서 <b>Public</b> 값이 <code>false</code>인 CIDR을 찾으십시오.</li></ul></td>
     </tr>
     <tr>
     <td><code>local.id</code></td>
@@ -190,9 +189,9 @@ Strongswan으로 VPN 연결을 설정하려면 다음을 수행하십시오.
         ```
         {: screen}
 
-        **참고**:
-          - 이 Helm 차트를 처음 사용하는 경우 VPN의 상태는 `ESTABLISHED`가 아닐 가능성이 높습니다. 연결이 성공하기 전에 온프레미스 VPN 엔드포인트 설정을 확인하고 3단계로 돌아가서 `config.yaml` 파일을 여러 번 변경해야 할 수도 있습니다.
-          - VPN 포드가 `ERROR` 상태이거나 계속 충돌하고 다시 시작되는 경우, 차트 구성 맵에 있는 `ipsec.conf` 설정의 매개변수 유효성 검증 때문일 수 있습니다. 이 경우에 해당하는지 확인하려면 `kubectl logs -n kube-system $STRONGSWAN_POD`를 실행하여 Strongswan 포드 로그에서 유효성 검증 오류가 있는지 확인하십시오. 유효성 검증 오류가 있는 경우, `helm delete --purge vpn`을 실행하고 3단계로 돌아가서 `config.yaml` 파일에서 잘못된 값을 수정한 후 4 - 8단계를 반복하십시오. 클러스터에 많은 수의 작업자 로드가 있는 경우에는 `helm delete` 및 `helm install`을 실행하는 대신 `helm upgrade`를 사용하여 변경사항을 더 빠르게 적용할 수도 있습니다.
+      **참고**:
+          - 이 Helm 차트를 처음 사용하는 경우 VPN 상태는 `ESTABLISHED`가 아닐 수 있습니다. 연결이 성공하기 전에 온프레미스 VPN 엔드포인트 설정을 확인하고 3단계로 돌아가서 `config.yaml` 파일을 여러 번 변경해야 할 수도 있습니다.
+          - VPN 포드가 `ERROR` 상태이거나 계속 충돌하고 다시 시작되는 경우, 차트 구성 맵에 있는 `ipsec.conf` 설정의 매개변수 유효성 검증 때문일 수 있습니다. `kubectl logs -n kube-system $STRONGSWAN_POD`를 실행하여 Strongswan 포드 로그에서 유효성 검증 오류가 있는지 확인하십시오. 유효성 검증 오류가 있는 경우, `helm delete --purge vpn`을 실행하고 3단계로 돌아가서 `config.yaml` 파일에서 잘못된 값을 수정한 후 4 - 8단계를 반복하십시오. 클러스터에 많은 수의 작업자 로드가 있는 경우에는 `helm delete` 및 `helm install`을 실행하는 대신 `helm upgrade`를 사용하여 변경사항을 더 빠르게 적용할 수도 있습니다.
 
     4. VPN이 `ESTABLISHED` 상태가 된 후 `ping`으로 연결을 테스트하십시오. 다음 예제는 Kubernetes 클러스터의 VPN 포드에서 온프레미스 VPN 게이트웨이의 사설 IP 주소로 Ping을 전송합니다. 구성 파일에 올바른 `remote.subnet` 및 `local.subnet`이 지정되었는지 확인하고 로컬 서브넷 목록에 Ping을 전송 중인 소스 IP 주소가 포함되었는지 확인하십시오.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-10"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -15,10 +15,10 @@ lastupdated: "2018-01-10"
 {:tip: .tip}
 {:download: .download}
 
-# Diese Seite wurde verschoben!
+# Der gesuchte Inhalt wurde verschoben
 
-Die Planungsthemen finden Sie hier:
- - [Vergleich von Lite-Clustern und Standardclustern](cs_why.html#cluster_types)
+Aktuelle Informationen finden Sie an der neuen Position:
+ - [Vergleich von kostenlosen Clustern und Standardclustern](cs_why.html#cluster_types)
  - [Clusterkonfiguration](cs_clusters.html#planning_clusters)
  - [Konfiguration von Workerknoten](cs_clusters.html#planning_worker_nodes)
  - [Zuständigkeiten beim Cluster-Management](cs_why.html#responsibilities)

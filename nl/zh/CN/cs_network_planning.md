@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-06"
 
 ---
 
@@ -22,15 +22,15 @@ lastupdated: "2018-01-12"
 创建集群时，每个集群都必须连接到一个公共 VLAN。公共 VLAN 用于确定在集群创建期间分配给工作程序节点的公共 IP 地址。
 {:shortdesc}
 
-Lite 集群和标准集群中的工作程序节点的公用网络接口受 Calico 网络策略的保护。缺省情况下，这些策略将阻止大多数入站流量。但是，在与 NodePort、Loadbalancer 和 Ingress 服务连接时，允许 Kubernetes 运作所需的入站流量。有关这些策略的更多信息，包括如何修改这些策略，请参阅[网络策略](cs_network_policy.html#network_policies)。
+免费集群和标准集群中的工作程序节点的公用网络接口受 Calico 网络策略保护。缺省情况下，这些策略将阻止大多数入站流量。但是，在与 NodePort、Loadbalancer 和 Ingress 服务连接时，允许 Kubernetes 运作所需的入站流量。有关这些策略的更多信息，包括如何修改这些策略，请参阅[网络策略](cs_network_policy.html#network_policies)。
 
 |集群类型|集群的公共 VLAN 的管理方|
 |------------|------------------------------------------|
-|{{site.data.keyword.Bluemix_notm}} 中的 Lite 集群|{{site.data.keyword.IBM_notm}}|
+|{{site.data.keyword.Bluemix_notm}} 中的免费集群|{{site.data.keyword.IBM_notm}}|
 |{{site.data.keyword.Bluemix_notm}} 中的标准集群|您通过您的 IBM Cloud infrastructure (SoftLayer) 帐户|
 {: caption="VLAN 管理责任" caption-side="top"}
 
-
+有关工作程序节点与 pod 之间的集群内网络通信的信息，请参阅[集群内联网](cs_secure.html#in_cluster_network)。有关将 Kubernetes 集群中运行的应用程序安全连接到内部部署网络或连接到集群外部的应用程序的信息，请参阅[设置 VPN 连接](cs_vpn.html)。
 
 ## 允许对应用程序进行公共访问
 {: #public_access}
@@ -42,10 +42,10 @@ Lite 集群和标准集群中的工作程序节点的公用网络接口受 Calic
 
 ![{{site.data.keyword.containerlong_notm}} Kubernetes 体系结构](images/networking.png)
 
-此图显示了 {{site.data.keyword.containershort_notm}} 中 Kubernetes 如何携带用户网络流量。根据创建的是 Lite 集群还是标准集群，有不同的方式使应用程序可从因特网进行访问。
+此图显示了 {{site.data.keyword.containershort_notm}} 中 Kubernetes 如何携带用户网络流量。根据创建的是免费集群还是标准集群，有不同的方式使应用程序可从因特网进行访问。
 
 <dl>
-<dt><a href="#nodeport" target="_blank">NodePort 服务</a>（Lite 和标准集群）</dt>
+<dt><a href="#nodeport" target="_blank">NodePort 服务</a>（免费和标准集群）</dt>
 <dd>
  <ul>
   <li>在每个工作程序节点上公开一个公共端口，并使用任一工作程序节点的公共 IP 地址来公共访问集群中的服务。</li>
@@ -67,12 +67,12 @@ Lite 集群和标准集群中的工作程序节点的公用网络接口受 Calic
  <ul>
   <li>通过创建一个外部 HTTP 或 HTTPS 负载均衡器来使用安全的唯一公共入口点将入局请求路由到集群中的多个应用程序，从而公开这些应用程序。</li>
   <li>您可以使用一个公用路径，将集群中的多个应用程序显示为服务。</li>
-  <li>Ingress 由三个主要组件组成：Ingress 资源、Ingress 控制器和应用程序负载均衡器。
+  <li>Ingress 由两个主要组件组成：Ingress 资源和应用程序负载均衡器。
    <ul>
     <li>Ingress 资源用于定义如何对应用程序的入局请求进行路由和负载均衡的规则。</li>
-    <li>Ingress 控制器会启用应用程序负载均衡器，其侦听入局 HTTP 或 HTTPS 服务请求，并根据为每个 Ingress 资源定义的规则转发请求。</li>
-    <li>应用程序负载均衡器在应用程序 pod 之间对请求进行负载均衡。</ul>
-  <li>如果要使用定制路由规则实施自己的负载均衡器，并且需要对应用程序进行 SSL 终止，请使用 Ingress。</li>
+    <li>应用程序负载均衡器侦听入局 HTTP 或 HTTPS 服务请求，并根据为每个 Ingress 资源定义的规则在各个应用程序 pod 中转发请求。</li>
+   </ul>
+  <li>如果要使用定制路由规则实施自己的应用程序负载均衡器，并且需要对应用程序进行 SSL 终止，请使用 Ingress。</li>
  </ul>
 </dd></dl>
 
@@ -137,6 +137,8 @@ Lite 集群和标准集群中的工作程序节点的公用网络接口受 Calic
 - 通过向配置文件添加注释，可请求用于 LoadBalancer 服务的可移植公共或专用 IP 地址：`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type
 <public_or_private>`.
 
+
+
 有关如何使用 {{site.data.keyword.containershort_notm}} 创建 LoadBalancer 的服务的指示信息，请参阅[使用 LoadBalancer 服务类型来配置对应用程序的公共访问权](cs_loadbalancer.html#config)。
 
 
@@ -150,17 +152,19 @@ Lite 集群和标准集群中的工作程序节点的公用网络接口受 Calic
 通过 Ingress，可以使用单个公共入口点来公开集群中的多个服务并使其公共可用。
 {:shortdesc}
 
-Ingress 不会为您要向公众公开的每个应用程序创建一个 LoadBalancer 服务，而是提供唯一公共路径，用于根据公共请求的各个路径，将这些请求转发到集群内部和外部的应用程序。Ingress 由两个主要组件组成。Ingress 资源定义了有关如何对应用程序的入局请求进行路由的规则。所有 Ingress 资源都必须向 Ingress 控制器进行注册；Ingress 控制器基于为每个 Ingress 资源定义的规则来侦听入局 HTTP 或 HTTPS 服务请求并转发请求。
+Ingress 不会为您要向公众公开的每个应用程序创建一个 LoadBalancer 服务，而是提供唯一公共路径，用于根据公共请求的各个路径，将这些请求转发到集群内部和外部的应用程序。Ingress 由两个主要组件组成。Ingress 资源定义了有关如何对应用程序的入局请求进行路由的规则。所有 Ingress 资源都必须向 Ingress 应用程序负载均衡器进行注册；此负载均衡器侦听入局 HTTP 或 HTTPS 服务请求，并根据为每个 Ingress 资源定义的规则转发请求。
 
-创建标准集群时，{{site.data.keyword.containershort_notm}} 会自动为集群创建高可用性 Ingress 控制器，并为该控制器分配唯一公共路径，格式为 `<cluster_name>.<region>.containers.mybluemix.net`。该公共路径链接到在集群创建期间供应到 IBM Cloud infrastructure (SoftLayer) 帐户中的可移植公共 IP 地址。
+创建标准集群时，{{site.data.keyword.containershort_notm}} 会自动为集群创建高可用性应用程序负载均衡器，并为其分配唯一公共路径，格式为 `<cluster_name>.<region>.containers.mybluemix.net`。该公共路径链接到在集群创建期间供应到 IBM Cloud infrastructure (SoftLayer) 帐户中的可移植公共 IP 地址。另外，还会自动创建专用应用程序负载均衡器，但不会自动启用该负载均衡器。
 
 下图显示 Ingress 如何将通信从因特网定向到应用程序：
 
 ![使用 {{site.data.keyword.containershort_notm}} Ingress 支持来公开服务](images/cs_ingress.png)
 
-要通过 Ingress 公开应用程序，必须为应用程序创建 Kubernetes 服务，并通过定义 Ingress 资源向 Ingress 控制器注册此服务。Ingress 资源指定要附加到公共路径的路径，以构成所公开应用程序的唯一 URL，例如：`mycluster.us-south.containers.mybluemix.net/myapp`。如图所示，在 Web 浏览器中输入此路径时，请求会发送到 Ingress 控制器的已链接可移植公共 IP 地址。Ingress 控制器会检查 `mycluster` 集群中 `myapp` 路径的路由规则是否存在。如果找到匹配的规则，那么包含单个路径的请求会转发到部署了应用程序的 pod，同时考虑在原始 Ingress 资源对象中定义的规则。为了使应用程序能够处理入局请求，请确保应用程序侦听在 Ingress 资源中定义的单个路径。
+要通过 Ingress 公开应用程序，必须为应用程序创建 Kubernetes 服务，并通过定义 Ingress 资源向应用程序负载均衡器注册此服务。Ingress 资源指定要附加到公共路径的路径，以构成所公开应用程序的唯一 URL，例如：`mycluster.us-south.containers.mybluemix.net/myapp`。如图所示，在 Web 浏览器中输入此路径时，请求会发送到应用程序负载均衡器的已链接可移植公共 IP 地址。应用程序负载均衡器会检查 `mycluster` 集群中 `myapp` 路径的路由规则是否存在。如果找到匹配的规则，那么包含单个路径的请求会转发到部署了应用程序的 pod，同时考虑在原始 Ingress 资源对象中定义的规则。为了使应用程序能够处理入局请求，请确保应用程序侦听在 Ingress 资源中定义的单个路径。
 
-可以针对以下场景配置 Ingress 控制器，以管理应用程序的入局网络流量：
+
+
+可以针对以下场景配置应用程序负载均衡器，以管理应用程序的入局网络流量：
 
 -   使用 IBM 提供的域（不带 TLS 终止）
 -   使用 IBM 提供的域（带 TLS 终止）

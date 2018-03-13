@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-01"
+lastupdated: "2018-01-29"
 
 ---
 
@@ -35,7 +35,7 @@ lastupdated: "2017-12-01"
 
 -   {{site.data.keyword.Bluemix_notm}} CLI バージョン 0.5.0 以降
 -   {{site.data.keyword.containershort_notm}} プラグイン
--   Kubernetes CLI バージョン 1.7.4 以降
+-   Kubernetes CLI バージョン 1.8.6 以降
 -   オプション: {{site.data.keyword.registryshort_notm}} プラグイン
 -   オプション: Docker バージョン 1.9 以降
 
@@ -71,7 +71,7 @@ CLI をインストールするには、以下のことを行います。
 
 4.  Kubernetes ダッシュボードのローカル・バージョンを表示して、アプリをクラスター内にデプロイするには、[Kubernetes CLI をインストールします![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。 Kubernetes CLI を使用してコマンドを実行するための接頭部は、`kubectl` です。
 
-    1.  機能の完全な互換性を確保するには、使用する予定の Kubernetes クラスター・バージョンと一致する Kubernetes CLI バージョンをダウンロードします。 現在の {{site.data.keyword.containershort_notm}} のデフォルト Kubernetes バージョンは 1.7.4 です。
+    1.  機能の完全な互換性を確保するには、使用する予定の Kubernetes クラスター・バージョンと一致する Kubernetes CLI バージョンをダウンロードします。 現在の {{site.data.keyword.containershort_notm}} のデフォルト Kubernetes バージョンは 1.8.6 です。
 
         OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
 
@@ -126,7 +126,7 @@ CLI をインストールするには、以下のことを行います。
 
     プラグインは container-registry として結果に表示されます。
 
-6.  ローカルにイメージを作成して、それらをレジストリー名前空間にプッシュするには、[Docker をインストールします![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.docker.com/community-edition#/download)。 Windows 8 以前を使用している場合、代わりに [Docker Toolbox ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.docker.com/products/docker-toolbox) をインストールしてください。 Docker CLI は、イメージ内にアプリを構築するために使用されます。 Docker CLI を使用してコマンドを実行するための接頭部は、`docker` です。
+6.  ローカルにイメージを作成して、それらをレジストリー名前空間にプッシュするには、[Docker をインストールします![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.docker.com/community-edition#/download)。 Windows 8 以前を使用している場合、代わりに [Docker Toolbox ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/toolbox/toolbox_install_windows/) をインストールしてください。 Docker CLI は、イメージ内にアプリを構築するために使用されます。 Docker CLI を使用してコマンドを実行するための接頭部は、`docker` です。
 
 次に、[{{site.data.keyword.containershort_notm}} における CLI からの Kubernetes クラスターの作成](cs_clusters.html#clusters_cli)を開始します。
 
@@ -143,7 +143,7 @@ CLI をインストールするには、以下のことを行います。
 ## `kubectl` を実行するように CLI を構成する
 {: #cs_cli_configure}
 
-Kubernetes CLI に用意されているコマンドを使用して、{{site.data.keyword.Bluemix_notm}} のクラスターを管理することができます。 Kubernetes 1.7.4 内で使用できるすべての `kubectl` コマンドは、{{site.data.keyword.Bluemix_notm}} 内のクラスターに対して使用することができます。 クラスターを作成したら、環境変数を使用してローカル CLI のコンテキストをそのクラスターに設定します。 その後、Kubernetes のさまざまな `kubectl` コマンドを実行して、{{site.data.keyword.Bluemix_notm}} のクラスターを操作することができます。
+Kubernetes CLI に用意されているコマンドを使用して、{{site.data.keyword.Bluemix_notm}} のクラスターを管理することができます。 Kubernetes 1.8.6 内で使用できるすべての `kubectl` コマンドは、{{site.data.keyword.Bluemix_notm}} 内のクラスターに対して使用することができます。 クラスターを作成したら、環境変数を使用してローカル CLI のコンテキストをそのクラスターに設定します。 その後、Kubernetes のさまざまな `kubectl` コマンドを実行して、{{site.data.keyword.Bluemix_notm}} のクラスターを操作することができます。
 {:shortdesc}
 
 `kubectl` コマンドを実行する前に、[必要な CLI をインストール](#cs_cli_install)して、[クラスターを作成](cs_clusters.html#clusters_cli)します。
@@ -211,8 +211,8 @@ Kubernetes CLI に用意されているコマンドを使用して、{{site.data
       出力例:
 
       ```
-      Client Version: v1.7.4
-      Server Version: v1.7.4
+      Client Version: v1.8.6
+      Server Version: v1.8.6
       ```
       {: screen}
 
@@ -234,7 +234,7 @@ Kubernetes CLI に用意されているコマンドを使用して、{{site.data
 
 -   {{site.data.keyword.Bluemix_notm}} CLI バージョン 0.5.0 以降
 -   {{site.data.keyword.containershort_notm}} プラグイン
--   Kubernetes CLI バージョン 1.7.4 以降
+-   Kubernetes CLI バージョン 1.8.6 以降
 -   {{site.data.keyword.registryshort_notm}} プラグイン
 -   Docker バージョン 1.9. 以降
 
@@ -277,7 +277,7 @@ CLI を更新するには、以下のようにします。
         {: pre}
 
 4.  Kubernetes CLI を更新します。
-    1.  使用する予定の Kubernetes クラスター・バージョンと一致する Kubernetes CLI バージョンに更新します。 現在の {{site.data.keyword.containershort_notm}} のデフォルト Kubernetes バージョンは 1.7.4 です。
+    1.  使用する予定の Kubernetes クラスター・バージョンと一致する Kubernetes CLI バージョンに更新します。 現在の {{site.data.keyword.containershort_notm}} のデフォルト Kubernetes バージョンは 1.8.6 です。
 
         OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
 
@@ -335,7 +335,7 @@ CLI を更新するには、以下のようにします。
 
 6.  Docker を更新します。
     -   Docker Community Edition を使用している場合は、Docker を開始し、**Docker** アイコンをクリックし、**「Check for updatess (更新のチェック)」**をクリックします。
-    -   Docker Toolbox を使用する場合は、[最新バージョン ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.docker.com/products/docker-toolbox) をダウンロードし、インストーラーを実行します。
+    -   Docker Toolbox を使用する場合は、[最新バージョン ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/toolbox/toolbox_install_windows/) をダウンロードし、インストーラーを実行します。
 
 <br />
 
@@ -350,7 +350,7 @@ CLI を更新するには、以下のようにします。
 
 
 -   {{site.data.keyword.containershort_notm}} プラグイン
--   Kubernetes CLI バージョン 1.7.4 以降
+-   Kubernetes CLI バージョン 1.8.6 以降
 -   {{site.data.keyword.registryshort_notm}} プラグイン
 -   Docker バージョン 1.9. 以降
 
@@ -388,7 +388,7 @@ CLI をアンインストールするには、以下のようにします。
 
     - [OSX ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/docker-for-mac/#uninstall-or-reset)
     - [Linux ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#uninstall-docker-ce)
-    - [Windows ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/toolbox/toolbox_install_mac/#how-to-uninstall-toolbox)
+    - [Windows ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/toolbox/toolbox_install_windows/#how-to-uninstall-toolbox)
 
 <br />
 

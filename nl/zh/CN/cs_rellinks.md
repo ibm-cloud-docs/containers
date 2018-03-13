@@ -24,7 +24,7 @@ lastupdated: "2017-12-01"
 - [用于集群的定价计算器 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/?direct=classic%2F&env_id=ibm%3Ayp%3Aus-south#/pricing/cloudOEPaneId=pricing&paneId=pricingSheet&orgGuid=83f3f6dd-e430-4955-8225-0963753d8b0f&spaceGuid=f616188f-e265-4e04-84be-1b3d2ec63db3)
 - [用于集群的 REST API ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.bluemix.net/swagger)
 - [用于集群日志记录的 REST API ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://us-south.containers.bluemix.net/swagger-logging/)
-- [用于集群应用程序负载均衡器的 REST API ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://us-south.containers.bluemix.net/swagger-alb-api/)
+- [用于集群 Ingress 应用程序负载均衡的 REST API ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://us-south.containers.bluemix.net/swagger-alb-api/)
 - [developerWorks 容器编排之旅 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/code/journey/category/container-orchestration/)
 - [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/)
 - [Docker 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/engine/)

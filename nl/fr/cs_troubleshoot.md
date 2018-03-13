@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-09"
+lastupdated: "2018-01-31"
 
 ---
 
@@ -55,30 +55,34 @@ Passez en revue les options permettant de déboguer vos clusters et d'identifier
     <th>Description</th>
     </thead>
     <tbody>
+  
+  <tr>
+      <td>Critical</td>
+      <td>Le maître Kubernetes est inaccessible ou tous les noeuds d'agent du cluster sont arrêtés.</td>
+     </tr>
+  
       <tr>
         <td>Deploying</td>
         <td>Le maître Kubernetes n'est pas encore complètement déployé. Vous ne pouvez pas accéder à votre cluster.</td>
        </tr>
        <tr>
-        <td>Pending</td>
-        <td>Le maître Kubernetes est déployé. La mise à disposition des noeuds d'agent est en cours. Ces derniers ne sont pas encore disponibles dans le cluster. Vous pouvez accéder au cluster, mais vous ne pouvez pas déployer d'applications sur le cluster.</td>
-      </tr>
-      <tr>
         <td>Normal</td>
         <td>Tous les noeuds d'agent d'un cluster sont opérationnels. Vous pouvez accéder au cluster et déployer les applications sur le cluster.</td>
      </tr>
+       <tr>
+        <td>Pending</td>
+        <td>Le maître Kubernetes est déployé. La mise à disposition des noeuds d'agent est en cours. Ces derniers ne sont pas encore disponibles dans le cluster. Vous pouvez accéder au cluster, mais vous ne pouvez pas déployer d'applications sur le cluster.</td>
+      </tr>
+  
      <tr>
         <td>Warning</td>
         <td>Au moins un noeud worker du cluster n'est pas disponible. Cela dit, les autres noeuds d'agent sont disponibles et peuvent prendre le relais pour la charge de travail.</td>
-     </tr>
-     <tr>
-      <td>Critical</td>
-      <td>Le maître Kubernetes est inaccessible ou tous les noeuds d'agent du cluster sont arrêtés.</td>
-     </tr>
+     </tr>  
     </tbody>
   </table>
 
-3.  Si votre cluster est à l'état **Warning** ou **Critical** ou s'il est bloqué à l'état **Pending** depuis un certain temps, vérifiez l'état de vos noeuds d'agent. Si votre cluster est à l'état **Deploying**, attendez la fin du déploiement pour vérifier l'état de santé de votre cluster. Les clusters à l'état **Normal** sont considérés comme sains et ne nécessitent aucune action pour le moment.
+3.  Si l'état de votre cluster indique **Warning** (avertissement), **Critical** (critique) ou **Delete failed** (échec de la suppression), ou demeure bloqué à l'état **Pending** (en attente) depuis longtemps, examinez l'état de vos noeuds worker. Si votre cluster est à l'état **Deploying**, attendez la fin du déploiement pour vérifier l'état de santé de votre cluster. Les clusters dont l'état indique **Normal** ne nécessitent aucune action pour le moment. 
+<p>Pour examiner l'état de vos noeuds worker, exécutez la commande suivante :</p>
 
   ```
   bx cs workers <cluster_name_or_id>
@@ -93,7 +97,7 @@ Passez en revue les options permettant de déboguer vos clusters et d'identifier
     <tbody>
       <tr>
        <td>Unknown</td>
-       <td>Le maître Kubernetes est inaccessible pour l'une des raisons suivantes :<ul><li>Vous avez demandé une mise à jour de votre maître Kubernetes. L'état du noeud worker ne peut pas être extrait lors de la mise à jour.</li><li>Peut-être possédez-vous un pare-feu qui protège vos noeuds d'agent ou avez-vous récemment modifié vos paramètres de pare-feu. {{site.data.keyword.containershort_notm}} requiert que certaines adresses IP et certains ports soient ouverts pour permettre la communication entre le noeud worker et le maître Kubernetes et inversement. Pour plus d'informations, voir [Pare-feu empêchant la connexion des noeuds d'agent](#cs_firewall).</li><li>Le maître Kubernetes est arrêté. Contactez le support {{site.data.keyword.Bluemix_notm}} en ouvrant un [ticket de demande de service {{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support).</li></ul></td>
+       <td>Le maître Kubernetes est inaccessible pour l'une des raisons suivantes :<ul><li>Vous avez demandé une mise à jour de votre maître Kubernetes. L'état du noeud worker ne peut pas être extrait lors de la mise à jour.</li><li>Peut-être possédez-vous un pare-feu qui protège vos noeuds d'agent ou avez-vous récemment modifié vos paramètres de pare-feu. {{site.data.keyword.containershort_notm}} requiert que certaines adresses IP et certains ports soient ouverts pour permettre la communication entre le noeud worker et le maître Kubernetes et inversement. Pour plus d'informations, voir [Pare-feu empêchant la connexion des noeuds d'agent](#cs_firewall).</li><li>Le maître Kubernetes est arrêté. Contactez le support {{site.data.keyword.Bluemix_notm}} en ouvrant un [{{site.data.keyword.Bluemix_notm}}ticket de demande de service](/docs/get-support/howtogetsupport.html#getting-customer-support).</li></ul></td>
       </tr>
       <tr>
         <td>Provisioning</td>
@@ -143,11 +147,11 @@ Passez en revue les options permettant de déboguer vos clusters et d'identifier
     <tbody>
       <tr>
         <td>Exception liée à l'infrastructure {{site.data.keyword.Bluemix_notm}} : votre compte n'est pas autorisé à réserver des instances de traitement pour l'instant.</td>
-        <td>La réservation de ressources de traitement par votre compte d'infrastructure IBM Cloud (SoftLayer) n'est peut-être pas possible. Contactez le support {{site.data.keyword.Bluemix_notm}} en ouvrant un [ticket de demande de service {{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support).</td>
+        <td>La réservation de ressources de traitement par votre compte d'infrastructure IBM Cloud (SoftLayer) n'est peut-être pas possible. Contactez le support {{site.data.keyword.Bluemix_notm}} en ouvrant un [{{site.data.keyword.Bluemix_notm}}ticket de demande de service](/docs/get-support/howtogetsupport.html#getting-customer-support).</td>
       </tr>
       <tr>
         <td>Exception liée à l'infrastructure {{site.data.keyword.Bluemix_notm}} : impossible de passer la commande. Les ressources derrière le routeur 'router_name' ne sont pas suffisantes pour satisfaire la demande pour les invités suivants : 'worker_id'.</td>
-        <td>Le réseau local virtuel que vous avez sélectionné est associé à un pod du centre de données dont l'espace n'est pas suffisant pour mettre à disposition votre noeud worker. Plusieurs possibilités s'offrent à vous :<ul><li>Utilisez un autre centre de données pour mettre à disposition votre noeud worker. Exécutez la commande <code>bx cs locations</code> pour afficher la liste des centres de données disponibles.<li>Si vous possédez déjà une paire de réseaux locaux virtuels public et privé associée à un autre pod du centre de données, utilisez-la à la place.<li>Contactez le support {{site.data.keyword.Bluemix_notm}} en ouvrant un [ticket de demande de service {{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support).</ul></td>
+        <td>Le réseau local virtuel que vous avez sélectionné est associé à un pod du centre de données dont l'espace n'est pas suffisant pour mettre à disposition votre noeud worker. Plusieurs possibilités s'offrent à vous :<ul><li>Utilisez un autre centre de données pour mettre à disposition votre noeud worker. Exécutez la commande <code>bx cs locations</code> pour afficher la liste des centres de données disponibles.<li>Si vous possédez déjà une paire de réseaux locaux virtuels public et privé associée à un autre pod du centre de données, utilisez-la à la place.<li>Contactez le support {{site.data.keyword.Bluemix_notm}} en ouvrant un [{{site.data.keyword.Bluemix_notm}}ticket de demande de service](/docs/get-support/howtogetsupport.html#getting-customer-support).</ul></td>
       </tr>
       <tr>
         <td>Exception liée à l'infrastructure {{site.data.keyword.Bluemix_notm}} : impossible d'obtenir le réseau local virtuel portant l'ID : &lt;vlan id&gt;.</td>
@@ -155,14 +159,14 @@ Passez en revue les options permettant de déboguer vos clusters et d'identifier
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation : l'emplacement fourni pour cette commande n'est pas valide. (HTTP 500)</td>
-        <td>L'infrastructure IBM Cloud (SoftLayer) n'est pas configurée pour commander des ressources de traitement dans le centre de données sélectionné. Contactez le [support {{site.data.keyword.Bluemix_notm}} ](/docs/support/index.html#contacting-support) pour vérifier que votre compte est correctement configuré.</td>
+        <td>L'infrastructure IBM Cloud (SoftLayer) n'est pas configurée pour commander des ressources de traitement dans le centre de données sélectionné. Contactez le support [{{site.data.keyword.Bluemix_notm}} ](/docs/get-support/howtogetsupport.html#getting-customer-support) pour vérifier que votre compte est correctement configuré.</td>
        </tr>
        <tr>
         <td>Exception liée à l'infrastructure {{site.data.keyword.Bluemix_notm}} : l'utilisateur ne dispose pas des droits sur l'infrastructure {{site.data.keyword.Bluemix_notm}} nécessaires pour ajouter des serveurs
 
         </br></br>
         Exception liée à l'infrastructure {{site.data.keyword.Bluemix_notm}} : des droits sont nécessaires pour réserver 'Item'.</td>
-        <td>Vous ne disposez peut-être pas des droits nécessaires pour mettre à disposition un noeud worker à partir du portefeuille d'infrastructure IBM Cloud (SoftLayer). Voir [Configuration de l'accès au portefeuille d'infrastructure IBM Cloud (SoftLayer) pour créer des clusters Kubernetes standard](cs_infrastructure.html#unify_accounts).</td>
+        <td>Vous ne disposez peut-être pas des droits nécessaires pour mettre à disposition un noeud worker à partir du portefeuille d'infrastructure IBM Cloud (SoftLayer). Voir [Configuration de l'accès au portefeuille d'infrastructure IBM Cloud (SoftLayer) pour créer des clusters Kubernetes standards](cs_infrastructure.html#unify_accounts).</td>
       </tr>
     </tbody>
   </table>
@@ -235,7 +239,7 @@ Pour ajouter des données d'identification à votre compte {{site.data.keyword.B
 
 1.  Contactez l'administrateur de l'infrastructure IBM Cloud (SoftLayer) pour obtenir votre nom d'utilisateur d'infrastructure IBM Cloud (SoftLayer) et la clé d'API.
 
-    **Remarque : ** le compte d'infrastructure IBM Cloud (SoftLayer) que vous utilisez doit être configuré avec des droits Superutilisateur pour vous permettre de créer des clusters standard.
+    **Remarque : ** le compte d'infrastructure IBM Cloud (SoftLayer) que vous utilisez doit être configuré avec des droits Superutilisateur pour vous permettre de créer des clusters standards.
 
 2.  Ajoutez les données d'identification.
 
@@ -334,7 +338,7 @@ Utilisez des [ensembles de démons ![Icône de lien externe](../icons/launch-gly
 {: #cs_duplicate_services}
 
 {: tsSymptoms}
-Lorsque vous exécutez la commande `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>`, le message suivant s'affiche. 
+Lorsque vous exécutez la commande `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>`, le message suivant s'affiche.
 
 ```
 Multiple services with the same name were found.
@@ -572,11 +576,11 @@ Ci-dessous figurent les motifs pour lesquels les journaux peuvent ne pas appara�
  </tr>
  <tr>
  <td>Le quota de stockage des journaux a été atteint.</td>
- <td>Pour augmenter vos limites de stockage de journaux, reportez-vous à la <a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs">Documentation d'{{site.data.keyword.loganalysislong_notm}}</a>.</td>
+ <td>Pour augmenter vos limites de stockage de journaux, reportez-vous à la <a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html">Documentation {{site.data.keyword.loganalysislong_notm}}</a>.</td>
  </tr>
  <tr>
  <td>Si vous avez spécifié un espace lors de la création du cluster, les droits d'accès Responsable, Développeur  ou Auditeur n'ont pas été affectées au propriétaire du compte sur cet espace.</td>
- <td>Pour modifier les droits d'accès du propriétaire du compte :<ol><li>Pour identifier le propriétaire du compte pour le cluster, exécutez la commande <code>bx cs api-key-info &lt;cluster_name_or_id&gt;</code>.</li><li>Pout attribuer au propriétaire du compte les droits d'accès Responsable, Développeur ou Auditeur dans {{site.data.keyword.containershort_notm}} sur cet espace, voir <a href="cs_users.html#managing">Gestion de l'accès au cluster</a>.</li><li>Pour actualiser le jeton d'accès après que les droits d'accès ont été modifiés, exécutez la commande <code>bx cs logging-config-refresh &lt;cluster_name_or_id&gt;</code>.</li></ol></td>
+ <td>Pour modifier les droits d'accès du propriétaire du compte :<ol><li>Pour identifier le propriétaire du compte pour le cluster, exécutez la commande <code>bx cs api-key-info &lt;cluster_name_or_ID&gt;</code>.</li><li>Pour attribuer au propriétaire du compte les droits d'accès Responsable, Développeur ou Auditeur dans {{site.data.keyword.containershort_notm}} sur cet espace, voir <a href="cs_users.html#managing">Gestion de l'accès au cluster</a>.</li><li>Pour actualiser le jeton d'accès après que les droits d'accès ont été modifiés, exécutez la commande <code>bx cs logging-config-refresh &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
  </tr>
  </tbody></table>
 
@@ -609,9 +613,10 @@ Pour tester les modifications apportées lors de la résolution des incidents, v
         {:pre}
 
   4. Au bout de quelques minutes, vos journaux s'affichent dans le tableau de bord Kibana. Pour accéder au tableau de bord Kibana, accédez à l'une des URL suivantes et sélectionnez le compte {{site.data.keyword.Bluemix_notm}} dans lequel vous avez créé le cluster. Si vous avez spécifié un espace lors de la création du cluster, accédez à la place à cet espace.
-        - Sud et Est des Etats-Unis : https://logging.ng.bluemix.net
-        - Sud du Royaume-Uni et Europe centrale : https://logging.eu-fra.bluemix.net
-        - Asie-Pacifique sud : https://logging.au-syd.bluemix.net
+      - Sud et Est des Etats-Unis : https://logging.ng.bluemix.net
+      - Sud du Royaume-Uni : https://logging.eu-gb.bluemix.net
+      - Europe centrale : https://logging.eu-fra.bluemix.net
+      - Asie-Pacifique sud : https://logging.au-syd.bluemix.net
 
 <br />
 
@@ -647,7 +652,7 @@ Vous avez exposé votre application au public en créant un service d'équilibre
 {: tsCauses}
 Il se peut que le service d'équilibreur de charge ne fonctionne pas correctement pour l'une des raisons suivantes :
 
--   Le cluster est un cluster léger ou un cluster standard avec un seul noeud worker.
+-   Le cluster est un cluster gratuit ou un cluster standard avec un seul noeud worker.
 -   Le cluster n'est pas encore complètement déployé.
 -   Le script de configuration pour votre service d'équilibreur de charge comporte des erreurs.
 
@@ -718,20 +723,20 @@ Pour identifier et résoudre les problèmes liés à votre service d'équilibreu
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
-Vous avez exposé votre application au public en créant une ressource Ingress pour votre application dans votre cluster. Lorsque vous avez essayé de vous connecter à votre application via l'adresse IP publique ou le sous-domaine du contrôleur Ingress, la connexion a échoué ou expiré.
+Vous avez exposé votre application au public en créant une ressource Ingress pour votre application dans votre cluster. Lorsque vous avez essayé de vous connecter à votre application via l'adresse IP publique ou le sous-domaine de l'équilibreur de charge d'application Ingress, la connexion a échoué ou expiré.
 
 {: tsCauses}
 Il se peut qu'Ingress ne fonctionne pas correctement pour les raisons suivantes :
 <ul><ul>
 <li>Le cluster n'est pas encore complètement déployé.
-<li>Le cluster a été configuré en tant que cluster léger ou en tant que cluster standard avec un seul noeud worker.
+<li>Le cluster a été configuré en tant que cluster gratuit ou standard avec un seul noeud worker.
 <li>Le script de configuration Ingress contient des erreurs.
 </ul></ul>
 
 {: tsResolve}
 Pour identifier et résoudre les problèmes liés à votre contrôleur Ingress :
 
-1.  Prenez soin de configurer un cluster standard qui est entièrement déployé et qui comporte au moins deux noeuds d'agent afin d'assurer la haute disponibilité de votre contrôleur Ingress.
+1.  Prenez soin de configurer un cluster standard qui est entièrement déployé et qui comporte au moins deux noeuds d'agent afin d'assurer la haute disponibilité de votre équilibreur de charge d'application Ingress.
 
   ```
   bx cs workers <cluster_name_or_id>
@@ -740,7 +745,7 @@ Pour identifier et résoudre les problèmes liés à votre contrôleur Ingress :
 
     Dans la sortie générée par votre interface de ligne de commande, vérifiez que la valeur **Ready** apparaît dans la zone **Status** pour vos noeuds d'agent et qu'une valeur autre **free** est spécifiée dans la zone **Machine Type**
 
-2.  Récupérez le sous-domaine et l'adresse IP publique du contrôleur Ingress, puis exécutez une commande PING vers chacun d'eux.
+2.  Extrayez le sous-domaine et l'adresse IP publique de l'équilibreur de charge d'application Ingress, puis exécutez une commande PING vers chacun d'eux.
 
     1.  Récupérez le sous-domaine de contrôleur Ingress.
 
@@ -749,33 +754,33 @@ Pour identifier et résoudre les problèmes liés à votre contrôleur Ingress :
       ```
       {: pre}
 
-    2.  Exécutez une commande PING vers le sous-domaine du contrôleur Ingress.
+    2.  Exécutez une commande PING vers le sous-domaine de l'équilibreur de charge d'application Ingress.
 
       ```
       ping <ingress_controller_subdomain>
       ```
       {: pre}
 
-    3.  Récupérez l'adresse IP publique de votre contrôleur Ingress.
+    3.  Identifiez l'adresse IP publique de votre d'équilibreur de charge d'application Ingress.
 
       ```
       nslookup <ingress_controller_subdomain>
       ```
       {: pre}
 
-    4.  Exécutez une commande PING vers l'adresse IP publique du contrôleur Ingress.
+    4.  Exécutez une commande PING vers l'adresse IP publique de l'équilibreur de charge d'application Ingress.
 
       ```
       ping <ingress_controller_ip>
       ```
       {: pre}
 
-    Si l'interface de ligne de commande renvoie une erreur de dépassement de délai d'attente pour l'adresse IP publique ou le sous-domaine du contrôleur Ingress et que vous avez configuré un pare-feu personnalisé afin de protéger vos noeuds d'agent, vous devrez peut-être ouvrir des ports et des groupes réseau supplémentaires dans votre [firewall](#cs_firewall).
+    Si l'interface CLI renvoie un dépassement du délai d'attente pour l'adresse IP publique ou le sous-domaine de l'équilibreur de charge d'application Ingress, et que vous avez configuré un pare-feu personnalisé pour protéger vos noeuds worker, vous aurez peut-être besoin d'ouvrir des ports et des groupes réseau supplémentaires dans votre [pare-feu](#cs_firewall).
 
-3.  Si vous utilisez un domaine personnalisé, assurez-vous que votre domaine personnalisé est mappé à l'adresse IP publique ou au sous-domaine du contrôleur Ingress fourni par IBM avec votre fournisseur DNS (Domain Name Service).
-    1.  Si vous avez utilisé le sous-domaine du contrôleur Ingress, vérifiez le nom canonique (enregistrement CNAME).
-    2.  Si vous avez utilisé l'adresse IP publique du contrôleur Ingress, assurez-vous que votre domaine personnalisé est mappé à l'adresse IP publique portable dans le pointeur (enregistrement PTR).
-4.  Vérifiez le fichier de configuration Ingress.
+3.  Si vous utilisez un domaine personnalisé, assurez-vous qu'il est mappé à l'adresse IP publique ou au sous-domaine de l'équilibreur de charge Ingress fourni par IBM avec votre fournisseur DNS (Domain Name Service).
+    1.  Si vous avez utilisé le sous-domaine de l'équilibreur de charge d'application Ingress, vérifiez le nom canonique (enregistrement CNAME).
+    2.  Si vous avez utilisé l'adresse IP publique de l'équilibreur de charge d'application Ingress, assurez-vous que votre domaine personnalisé est mappé à l'adresse IP publique portable dans le pointeur (enregistrement PTR).
+4.  Vérifiez le fichier de configuration de ressource Ingress.
 
     ```
     apiVersion: extensions/v1beta1
@@ -798,7 +803,7 @@ Pour identifier et résoudre les problèmes liés à votre contrôleur Ingress :
     ```
     {: codeblock}
 
-    1.  Assurez-vous que le sous-domaine du contrôleur Ingress et le certificat TLS sont corrects. Pour identifier le sous-domaine fourni par IBM et le certificat TLS, exécutez la commande bx cs cluster-get <cluster_name_or_id>.
+    1.  Vérifiez que le sous-domaine de l'équilibreur de charge d'application Ingress et le certificat TLS sont corrects. Pour identifier le sous-domaine fourni par IBM et le certificat TLS, exécutez la commande bx cs cluster-get <cluster_name_or_id>.
     2.  Assurez-vous que votre application est en mode écoute sur le même chemin que celui qui est configuré dans la section **path** de votre contrôleur Ingress. Si votre application est configurée pour être en mode écoute sur le chemin racine, ajoutez **/** comme chemin.
 5.  Vérifiez le déploiement du contrôleur Ingress et recherchez les éventuels messages d'erreur.
 
@@ -818,7 +823,7 @@ Pour identifier et résoudre les problèmes liés à votre contrôleur Ingress :
     2.  Récupérez les journaux pour chaque pod Ingress.
 
       ```
-      kubectl logs <ingress_pod_id> -n kube-system
+      kubectl logs <ingress_pod_id> nginx-ingress -n kube-system
       ```
       {: pre}
 
@@ -917,10 +922,12 @@ Par où commencer pour traiter les incidents liés à un conteneur ?
 -   Publiez une question sur le site [{{site.data.keyword.containershort_notm}} Slack. ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com) Conseil : si vous n'utilisez pas un ID IBM pour votre compte {{site.data.keyword.Bluemix_notm}}, [demandez une invitation à ce ](https://bxcs-slack-invite.mybluemix.net/)Slack.
 -   Consultez les forums pour établir si d'autres utilisateurs ont rencontré le même problème. Lorsque vous utilisez les forums pour poser une question, balisez votre question de sorte que les équipes de développement {{site.data.keyword.Bluemix_notm}} la voient.
 
-    -   Si vous avez des questions d'ordre technique sur le développement ou le déploiement de clusters ou d'applications à l'aide d'{{site.data.keyword.containershort_notm}}, publiez-les sur le site [Stack Overflow ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://stackoverflow.com/search?q=bluemix+containers) en leur adjoignant les balises `ibm-bluemix`, `kubernetes` et `containers`.
-    -   Pour des questions relatives au service et aux instructions de mise en route, utilisez le forum [IBM developerWorks dW Answers ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluez
-les balises `bluemix` et `containers`.
-    Voir [Comment obtenir de l'aide](/docs/support/index.html#getting-help)
+    -   Si vous avez des questions d'ordre technique sur le développement ou le déploiement de clusters ou d'applications à l'aide d'{{site.data.keyword.containershort_notm}}, publiez-les sur le site [Stack Overflow ![External link icon](../icons/launch-glyph.svg "External link icon")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) en leur adjoignant les balises `ibm-cloud`, `kubernetes` et `containers`.
+    -   Pour des questions relatives au service et aux instructions de mise en route, utilisez le forum [IBM developerWorks dW Answers ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluez les balises `ibm-cloud` et `containers`.
+    Voir [Comment obtenir de l'aide](/docs/get-support/howtogetsupport.html#using-avatar)
 pour plus d'informations sur l'utilisation des forums.
 
--   Contactez le support IBM. Pour plus d'informations sur l'ouverture d'un ticket de demande de service IBM, sur les niveaux de support disponibles ou les niveaux de gravité des tickets, voir la rubrique décrivant [comment contacter le support](/docs/support/index.html#contacting-support).
+-   Contactez le support IBM. Pour plus d'informations sur l'ouverture d'un ticket de demande de service IBM, sur les niveaux de support disponibles ou les niveaux de gravité des tickets, voir la rubrique décrivant [comment contacter le support](/docs/get-support/howtogetsupport.html#getting-customer-support).
+
+{:tip}
+Lorsque vous signalez un problème, incluez l'ID de votre cluster. Pour identifier l'ID du cluster, exécutez la commande `bx cs clusters`.

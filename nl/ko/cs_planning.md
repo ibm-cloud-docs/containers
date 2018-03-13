@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-10"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -15,10 +15,10 @@ lastupdated: "2018-01-10"
 {:tip: .tip}
 {:download: .download}
 
-# 이 페이지는 이동했습니다! 
+# 찾고 있는 컨텐츠가 이동되었습니다.
 
-계획 주제는 다음과 같습니다. 
- - [라이트 및 표준 클러스터 비교](cs_why.html#cluster_types)
+새 위치에서 최신 정보를 확인하십시오.
+ - [무료 및 표준 클러스터 비교](cs_why.html#cluster_types)
  - [클러스터 구성](cs_clusters.html#planning_clusters)
  - [작업자 노드 구성](cs_clusters.html#planning_worker_nodes)
  - [클러스터 관리 책임](cs_why.html#responsibilities)

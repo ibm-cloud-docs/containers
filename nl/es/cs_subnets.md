@@ -58,15 +58,15 @@ Para crear una subred en una cuenta de infraestructura de IBM Cloud (SoftLayer) 
     </tr>
     <tr>
     <td><code><em>&lt;cluster_name_or_id&gt;</em></code></td>
-    <td>Sustituya <code>&gt;cluster_name_or_id&lt;</code> por el nombre o el ID del clúster.</td>
+    <td>Sustituya <code>&lt;cluster_name_or_id&gt;</code> por el nombre o el ID del clúster.</td>
     </tr>
     <tr>
     <td><code><em>&lt;subnet_size&gt;</em></code></td>
-    <td>Sustituya <code>&gt;subnet_size&lt;</code> por el número de direcciones IP que desea añadir desde la subred portátil. Los valores aceptados son 8, 16, 32 o 64. <p>**Nota:** Cuando añade direcciones IP portátiles para la subred, se utilizan tres direcciones IP para establecer conexión por red clúster-interna, de modo que no puede utilizarlas para el equilibrador de carga de aplicación o para crear un servicio equilibrador de carga. Por ejemplo, si solicita ocho direcciones IP públicas portátiles, puede utilizar cinco de ellas para exponer sus apps al público.</p> </td>
+    <td>Sustituya <code>&lt;subnet_size&gt;</code> por el número de direcciones IP que desea añadir desde la subred portátil. Los valores aceptados son 8, 16, 32 o 64. <p>**Nota:** Cuando añade direcciones IP portátiles para la subred, se utilizan tres direcciones IP para establecer conexión por red clúster-interna, de modo que no puede utilizarlas para el equilibrador de carga de aplicación o para crear un servicio equilibrador de carga. Por ejemplo, si solicita ocho direcciones IP públicas portátiles, puede utilizar cinco de ellas para exponer sus apps al público.</p> </td>
     </tr>
     <tr>
     <td><code><em>&lt;VLAN_ID&gt;</em></code></td>
-    <td>Sustituya <code>&gt;VLAN_ID&lt;</code> con el ID de la VLAN pública o privada a la que desea asignar las direcciones IP públicas o privadas portátiles. Debe seleccionar la VLAN pública o privada a la que está conectado el nodo trabajador existente. Para revisar la VLAN pública o privada para los nodos trabajadores, ejecute el mandato <code>bx cs worker-get &gt;worker_id&lt;</code>.</td>
+    <td>Sustituya <code>&lt;VLAN_ID&gt;</code> con el ID de la VLAN pública o privada a la que desea asignar las direcciones IP públicas o privadas portátiles. Debe seleccionar la VLAN pública o privada a la que está conectado el nodo trabajador existente. Para revisar la VLAN pública o privada para los nodos trabajadores, ejecute el mandato <code>bx cs worker-get &lt;worker_id&gt;</code>. </td>
     </tr>
     </tbody></table>
 
@@ -183,7 +183,7 @@ Requisitos:
 - La primera dirección IP de la subred se debe utilizar como pasarela para la subred.
 
 Antes de empezar:
-- Configure el direccionamiento del tráfico de red de entrada y de salida de la subred externa. 
+- Configure el direccionamiento del tráfico de red de entrada y de salida de la subred externa.
 - Confirme que tiene conectividad VPN entre el dispositivo de pasarela del centro de datos local y Vyatta de la red privada en el portafolio de la infraestructura de IBM Cloud (SoftLayer) o bien el servicio VPN de Strongswan que se ejecuta en el clúster. Para utilizar un Vyatta, consulte esta [publicación de blog ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/)]. Para utilizar Strongswan, consulte [Configuración de la conectividad de VPN con el servicio VPN IPSec de Strongswan](cs_vpn.html).
 
 1. Consulte el ID de la VLAN privada del clúster. Localice la sección **VLAN**. En el campo **User-managed**, identifique el ID de VLAN con _false_.
@@ -287,7 +287,7 @@ Dos de las direcciones IP portátiles, una pública y una privada, se utilizan p
     ```
     {: pre}
 
-    **Nota:** La creación de este servicio falla porque el nodo Kubernetes maestro no encuentra la dirección IP del equilibrador de carga especificada en la correlación de configuración de Kubernetes. Cuando se ejecuta este mandato, puede ver el mensaje de error y la lista de direcciones IP públicas disponibles para el clúster.
+    **Nota:** La creación de este servicio falla porque el maestro de Kubernetes no encuentra la dirección IP del equilibrador de carga especificada en la correlación de configuración de Kubernetes. Cuando se ejecuta este mandato, puede ver el mensaje de error y la lista de direcciones IP públicas disponibles para el clúster.
 
     ```
     Error on cloud load balancer a8bfa26552e8511e7bee4324285f6a4a for service default/myservice with UID 8bfa2655-2e85-11e7-bee4-324285f6a4af: Requested cloud provider IP 1.1.1.1 is not available. The following cloud provider IPs are available: <list_of_IP_addresses>

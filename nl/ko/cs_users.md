@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-31"
 
 ---
 
@@ -23,8 +23,6 @@ lastupdated: "2018-01-12"
 {:shortdesc}
 
 
-
-
 ## 클러스터 액세스 관리
 {: #managing}
 
@@ -37,7 +35,7 @@ lastupdated: "2018-01-12"
 <dt>인프라 액세스 정책</dt>
 <dd>Identity and Access Management에서 인프라 액세스 정책은 {{site.data.keyword.containershort_notm}} 사용자 인터페이스 또는 CLI에서 요청되는 조치가 IBM Cloud 인프라(SoftLayer)에서 완료될 수 있도록 허용합니다. 이러한 정책은 {{site.data.keyword.containershort_notm}} 액세스 정책과 함께 설정되어야 합니다. [사용 가능한 인프라 역할에 대해 자세히 알아보십시오](/docs/iam/infrastructureaccess.html#infrapermission).</dd>
 <dt>리소스 그룹</dt>
-<dd>리소스 그룹은 한 번에 둘 이상의 리소스에 사용자 액세스를 신속하게 지정할 수 있도록 {{site.data.keyword.Bluemix_notm}} 서비스를 그룹으로 구성하는 방법입니다. [리소스 그룹을 사용하여 사용자를 관리하는 방법을 학습](/docs/admin/resourcegroups.html#rgs)하십시오.</dd>
+<dd>리소스 그룹은 한 번에 둘 이상의 리소스에 사용자 액세스를 신속하게 지정할 수 있도록 {{site.data.keyword.Bluemix_notm}} 서비스를 그룹으로 구성하는 방법입니다. [리소스 그룹을 사용하여 사용자를 관리하는 방법을 학습](/docs/account/resourcegroups.html#rgs)하십시오.</dd>
 <dt>Cloud Foundry 역할</dt>
 <dd>Identity and Access Management에서 모든 사용자에게 Cloud Foundry 사용자 역할이 지정되어야 합니다. 이 역할은 사용자가 {{site.data.keyword.Bluemix_notm}} 계정에서 수행할 수 있는 조치(예: 다른 사용자 초대 또는 할당 사용량 보기)를 판별합니다. [사용 가능한 Cloud Foundry 역할에 대해 자세히 알아보십시오](/docs/iam/cfaccess.html#cfaccess).</dd>
 <dt>Kubernetes RBAC 역할</dt>
@@ -50,13 +48,13 @@ lastupdated: "2018-01-12"
 ## 액세스 정책 및 권한
 {: #access_policies}
 
-{{site.data.keyword.Bluemix_notm}} 계정에서 사용자에게 권한을 부여할 수 있는 액세스 정책 및 권한을 검토하십시오. 운영자 및 편집자 역할에는 별도의 권한이 있습니다. 예를 들어, 사용자가 작업자 노드를 추가하고 서비스를 바인드하게 하려면 운영자와 편집자 역할 둘 다를 사용자에게 지정해야 합니다.
+{{site.data.keyword.Bluemix_notm}} 계정에서 사용자에게 권한을 부여할 수 있는 액세스 정책 및 권한을 검토하십시오. 운영자 및 편집자 역할에는 별도의 권한이 있습니다. 예를 들어, 사용자가 작업자 노드를 추가하고 서비스를 바인드하게 하려면 운영자와 편집자 역할 둘 다를 사용자에게 지정해야 합니다. 사용자의 액세스 정책을 변경하면 {{site.data.keyword.containershort_notm}}에서 클러스터의 변경사항과 연관된 RBAC 정책을 정리합니다.
 
 |{{site.data.keyword.containershort_notm}} 액세스 정책|클러스터 관리 권한|Kubernetes 리소스 권한|
 |-------------|------------------------------|-------------------------------|
-|관리자|이 역할은 이 계정의 모든 클러스터에 대한 편집자, 운영자 및 뷰어 역할에서 권한을 상속합니다. <br/><br/>모든 현재 서비스 인스턴스에 대해서 설정된 경우:<ul><li>라이트 또는 표준 클러스터 작성</li><li>IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하도록 {{site.data.keyword.Bluemix_notm}} 계정의 신임 정보 설정</li><li>클러스터 제거</li><li>이 계정의 다른 기존 사용자에 대한 {{site.data.keyword.containershort_notm}} 액세스 정책 지정 및 변경.</li></ul><p>특정 클러스터 ID에 대해 설정된 경우:<ul><li>특정 클러스터 제거</li></ul></p>해당 인프라 액세스 정책: 수퍼유저<br/><br/><b>참고</b>: 시스템, VLAN 및 서브넷과 같은 리소스를 작성하려면 사용자에게 **수퍼유저** 인프라 역할이 필요합니다.|<ul><li>RBAC 역할: cluster-admin</li><li>모든 네임스페이스의 리소스에 대한 읽기/쓰기 액세스 권한</li><li>네임스페이스 내에서 역할 작성</li><li>Kubernetes 대시보드에 액세스</li><li>앱을 공용으로 사용할 수 있도록 하는 Ingress 리소스 작성</li></ul>|
+|관리자|이 역할은 이 계정의 모든 클러스터에 대한 편집자, 운영자 및 뷰어 역할에서 권한을 상속합니다. <br/><br/>모든 현재 서비스 인스턴스에 대해서 설정된 경우:<ul><li>무료 또는 표준 클러스터 작성</li><li>IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하도록 {{site.data.keyword.Bluemix_notm}} 계정의 신임 정보 설정</li><li>클러스터 제거</li><li>이 계정의 다른 기존 사용자에 대한 {{site.data.keyword.containershort_notm}} 액세스 정책 지정 및 변경</li></ul><p>특정 클러스터 ID에 대해 설정된 경우:<ul><li>특정 클러스터 제거</li></ul></p>해당 인프라 액세스 정책: 수퍼유저<br/><br/><b>참고</b>: 시스템, VLAN 및 서브넷과 같은 리소스를 작성하려면 사용자에게 **수퍼유저** 인프라 역할이 필요합니다.|<ul><li>RBAC 역할: cluster-admin</li><li>모든 네임스페이스의 리소스에 대한 읽기/쓰기 액세스 권한</li><li>네임스페이스 내에서 역할 작성</li><li>Kubernetes 대시보드에 액세스</li><li>앱을 공용으로 사용할 수 있도록 하는 Ingress 리소스 작성</li></ul>|
 |운영자|<ul><li>추가 작업자 노드를 클러스터에 추가</li><li>작업자 노드를 클러스터에서 제거</li><li>작업자 노드를 다시 부팅</li><li>작업자 노드를 다시 로드</li><li>클러스터에 서브넷 추가</li></ul><p>해당 인프라 액세스 정책: 기본 사용자</p>|<ul><li>RBAC 역할: 관리</li><li>기본 네임스페이스 내의 리소스에 대한 읽기/쓰기 액세스 권한(네임스페이스 자체에는 해당되지 않음)</li><li>네임스페이스 내에서 역할 작성</li></ul>|
-|편집자 <br/><br/><b>팁</b>: 앱 개발자의 경우 이 역할을 사용하십시오.|<ul><li>클러스터에 {{site.data.keyword.Bluemix_notm}} 서비스 바인드.</li><li>클러스터에 대한 {{site.data.keyword.Bluemix_notm}} 서비스 바인드 해제.</li><li>웹훅을 작성합니다.</li></ul><p>해당 인프라 액세스 정책: 기본 사용자|<ul><li>RBAC 역할: 편집</li><li>기본 네임스페이스 내부의 리소스에 대한 읽기/쓰기 액세스 권한</li></ul></p>|
+|편집자 <br/><br/><b>팁</b>: 앱 개발자의 경우 이 역할을 사용하십시오.|<ul><li>클러스터에 {{site.data.keyword.Bluemix_notm}} 서비스 바인드.</li><li>클러스터에 대한 {{site.data.keyword.Bluemix_notm}} 서비스 바인드 해제.</li><li>웹훅 작성.</li></ul><p>해당 인프라 액세스 정책: 기본 사용자|<ul><li>RBAC 역할: 편집</li><li>기본 네임스페이스 내부의 리소스에 대한 읽기/쓰기 액세스 권한</li></ul></p>|
 |뷰어|<ul><li>클러스터 나열</li><li>클러스터의 세부사항 보기</li></ul><p>해당 인프라 액세스 정책: 보기 전용</p>|<ul><li>RBAC 역할: 보기</li><li>기본 네임스페이스 내부의 리소스에 대한 읽기 액세스 권한</li><li>Kubernetes 시크릿에 대한 읽기 액세스 권한 없음</li></ul>|
 
 |Cloud Foundry 액세스 정책|계정 관리 권한|

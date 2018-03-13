@@ -58,15 +58,15 @@ Pour créer un sous-réseau dans un compte d'infrastructure IBM Cloud (SoftLayer
     </tr>
     <tr>
     <td><code><em>&lt;nom_ou_ID_cluster&gt;</em></code></td>
-    <td>Remplacez <code>&gt;nom_ou_ID_cluste&lt;</code> par le nom ou l'ID du cluster.</td>
+    <td>Remplacez <code>&lt;nom_ou_ID_cluste&gt;</code> par le nom ou l'ID du cluster.</td>
     </tr>
     <tr>
     <td><code><em>&lt;taille_sous-réseau&gt;</em></code></td>
-    <td>Remplacez <code>&gt;taille_sous-réseau&lt;</code> par le nombre d'adresses IP que vous désirez ajouter depuis votre sous-réseau portable. Valeurs admises : 8, 16, 32 ou 64. <p>**Remarque :** lorsque vous ajoutez des adresses IP portables pour votre sous-réseau, trois adresses IP sont utilisées pour l'opération réseau interne au cluster, de sorte que vous ne pouvez pas les utiliser pour votre équilibreur de charge d'application ou pour créer un service d'équilibreur de charge. Par exemple, si vous demandez huit adresses IP publiques portables, vous pouvez en utiliser cinq pour exposer vos applications au public.</p> </td>
+    <td>Remplacez <code>&lt;taille_sous-réseau&gt;</code> par le nombre d'adresses IP que vous désirez ajouter depuis votre sous-réseau portable. Valeurs admises : 8, 16, 32 ou 64. <p>**Remarque :** lorsque vous ajoutez des adresses IP portables pour votre sous-réseau, trois adresses IP sont utilisées pour l'opération réseau interne au cluster, de sorte que vous ne pouvez pas les utiliser pour votre équilibreur de charge d'application ou pour créer un service d'équilibreur de charge. Par exemple, si vous demandez huit adresses IP publiques portables, vous pouvez en utiliser cinq pour exposer vos applications au public.</p> </td>
     </tr>
     <tr>
     <td><code><em>&lt;VLAN_ID&gt;</em></code></td>
-    <td>Remplacez <code>&gt;ID_VLAN&lt;</code> par l'ID du VLAN privé ou public sur lequel vous désirez allouer les adresses IP portables publiques ou privées. Vous devez sélectionner le réseau local virtuel public ou privé auquel un noeud worker existant est connecté. Pour examiner le VLAN privé ou public d'un noeud worker, exécutez la commande <code>bx cs worker-get &gt;worker_id&lt;</code>.</td>
+    <td>Remplacez <code>&lt;ID_VLAN&gt;</code> par l'ID du VLAN privé ou public sur lequel vous désirez allouer les adresses IP portables publiques ou privées. Vous devez sélectionner le réseau local virtuel public ou privé auquel un noeud worker existant est connecté. Pour examiner le VLAN privé ou public d'un noeud worker, exécutez la commande <code>bx cs worker-get &lt;worker_id&gt;</code>. </td>
     </tr>
     </tbody></table>
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-01"
+lastupdated: "2018-01-29"
 
 ---
 
@@ -35,12 +35,14 @@ lastupdated: "2017-12-01"
 
 -   {{site.data.keyword.Bluemix_notm}} CLI 0.5.0 版或更新版本
 -   {{site.data.keyword.containershort_notm}} 外掛程式
--   Kubernetes CLI 1.7.4 版或更新版本
+-   Kubernetes CLI 1.8.6 版或更新版本
 -   選用項目：{{site.data.keyword.registryshort_notm}} 外掛程式
 -   選用項目：Docker 1.9 版或更新版本
 
 <br>
 若要安裝 CLI，請執行下列動作：
+
+
 
 1.  安裝 [{{site.data.keyword.Bluemix_notm}} CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://clis.ng.bluemix.net/ui/home.html)，它是 {{site.data.keyword.containershort_notm}} 外掛程式的必要條件。使用 {{site.data.keyword.Bluemix_notm}} CLI 來執行指令的字首是 `bx`。
 
@@ -71,7 +73,7 @@ lastupdated: "2017-12-01"
 
 4.  若要檢視本端版本的 Kubernetes 儀表板，以及將應用程式部署至叢集，請[安裝 Kubernetes CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。使用 Kubernetes CLI 來執行指令的字首是 `kubectl`。
 
-    1.  如需完整的功能相容性，請下載與您計劃使用之 Kubernetes 叢集版本相符的 Kubernetes CLI 版本。現行 {{site.data.keyword.containershort_notm}} 預設 Kubernetes 版本為 1.7.4。
+    1.  如需完整的功能相容性，請下載與您計劃使用之 Kubernetes 叢集版本相符的 Kubernetes CLI 版本。現行 {{site.data.keyword.containershort_notm}} 預設 Kubernetes 版本為 1.8.6。
 
         OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
 
@@ -126,7 +128,7 @@ lastupdated: "2017-12-01"
 
     在結果中，外掛程式會顯示為 container-registry。
 
-6.  若要在本端建置映像檔，並將它們推送至您的登錄名稱空間，請[安裝 Docker ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.docker.com/community-edition#/download)。如果您使用的是 Windows 8 或更早版本，則可以改為安裝 [Docker Toolbox ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.docker.com/products/docker-toolbox)。Docker CLI 是用來將應用程式建置成映像檔。使用 Docker CLI 來執行指令的字首是 `docker`。
+6.  若要在本端建置映像檔，並將它們推送至您的登錄名稱空間，請[安裝 Docker ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.docker.com/community-edition#/download)。如果您使用的是 Windows 8 或更早版本，則可以改為安裝 [Docker Toolbox ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.docker.com/toolbox/toolbox_install_windows/)。Docker CLI 是用來將應用程式建置成映像檔。使用 Docker CLI 來執行指令的字首是 `docker`。
 
 接下來，開始[使用 {{site.data.keyword.containershort_notm}} 從 CLI 建立 Kubernetes 叢集](cs_clusters.html#clusters_cli)。
 
@@ -143,7 +145,7 @@ lastupdated: "2017-12-01"
 ## 配置 CLI 以執行 `kubectl`
 {: #cs_cli_configure}
 
-您可以使用 Kubernetes CLI 隨附的指令來管理 {{site.data.keyword.Bluemix_notm}} 中的叢集。Kubernetes 1.7.4 中可用的所有 `kubectl` 指令都支援與 {{site.data.keyword.Bluemix_notm}} 中的叢集搭配使用。建立叢集之後，使用環境變數將本端 CLI 的環境定義設定為該叢集。然後，您可以執行 Kubernetes `kubectl` 指令，在 {{site.data.keyword.Bluemix_notm}} 中使用您的叢集。
+您可以使用 Kubernetes CLI 隨附的指令來管理 {{site.data.keyword.Bluemix_notm}} 中的叢集。Kubernetes 1.8.6 中可用的所有 `kubectl` 指令，都支援與 {{site.data.keyword.Bluemix_notm}} 中的叢集搭配使用。建立叢集之後，使用環境變數將本端 CLI 的環境定義設定為該叢集。然後，您可以執行 Kubernetes `kubectl` 指令，在 {{site.data.keyword.Bluemix_notm}} 中使用您的叢集。
 {:shortdesc}
 
 您必須先[安裝必要的 CLI](#cs_cli_install) 及[建立叢集](cs_clusters.html#clusters_cli)，才能執行 `kubectl` 指令。
@@ -211,8 +213,8 @@ lastupdated: "2017-12-01"
       輸出範例：
 
       ```
-      Client Version: v1.7.4
-      Server Version: v1.7.4
+      Client Version: v1.8.6
+      Server Version: v1.8.6
       ```
       {: screen}
 
@@ -234,12 +236,14 @@ lastupdated: "2017-12-01"
 
 -   {{site.data.keyword.Bluemix_notm}} CLI 0.5.0 版或更新版本
 -   {{site.data.keyword.containershort_notm}} 外掛程式
--   Kubernetes CLI 1.7.4 版或更新版本
+-   Kubernetes CLI 1.8.6 版或更新版本
 -   {{site.data.keyword.registryshort_notm}} 外掛程式
 -   Docker 1.9 版或更新版本
 
 <br>
 若要更新 CLI，請執行下列動作：
+
+
 
 1.  更新 {{site.data.keyword.Bluemix_notm}} CLI。下載[最新版本 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://clis.ng.bluemix.net/ui/home.html)，並執行安裝程式。
 
@@ -277,7 +281,7 @@ lastupdated: "2017-12-01"
         {: pre}
 
 4.  更新 Kubernetes CLI。
-    1.  更新至與您計劃使用之 Kubernetes 叢集版本相符的 Kubernetes CLI 版本。現行 {{site.data.keyword.containershort_notm}} 預設 Kubernetes 版本為 1.7.4。
+    1.  更新至與您計劃使用之 Kubernetes 叢集版本相符的 Kubernetes CLI 版本。現行 {{site.data.keyword.containershort_notm}} 預設 Kubernetes 版本為 1.8.6。
 
         OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
 
@@ -335,7 +339,7 @@ lastupdated: "2017-12-01"
 
 6.  更新 Docker。
     -   如果您使用 Docker Community Edition，請啟動 Docker、按一下 **Docker** 圖示，然後按一下 **Check for updates**。
-    -   如果您使用 Docker Toolbox，請下載[最新版本 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.docker.com/products/docker-toolbox)，並執行安裝程式。
+    -   如果您使用 Docker Toolbox，請下載[最新版本 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.docker.com/toolbox/toolbox_install_windows/)，並執行安裝程式。
 
 <br />
 
@@ -350,12 +354,14 @@ lastupdated: "2017-12-01"
 
 
 -   {{site.data.keyword.containershort_notm}} 外掛程式
--   Kubernetes CLI 1.7.4 版或更新版本
+-   Kubernetes CLI 1.8.6 版或更新版本
 -   {{site.data.keyword.registryshort_notm}} 外掛程式
 -   Docker 1.9 版或更新版本
 
 <br>
 若要解除安裝 CLI，請執行下列動作：
+
+
 
 1.  解除安裝 {{site.data.keyword.containershort_notm}} 外掛程式。
 
@@ -388,7 +394,7 @@ lastupdated: "2017-12-01"
 
     - [OSX ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.docker.com/docker-for-mac/#uninstall-or-reset)
     - [Linux ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#uninstall-docker-ce)
-    - [Windows ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.docker.com/toolbox/toolbox_install_mac/#how-to-uninstall-toolbox)
+    - [Windows ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.docker.com/toolbox/toolbox_install_windows/#how-to-uninstall-toolbox)
 
 <br />
 

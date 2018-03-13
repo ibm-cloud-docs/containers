@@ -16,9 +16,9 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# Diese Seite wurde verschoben!
+# Der gesuchte Inhalt wurde verschoben.
 
-Die Themen finden Sie hier:
+Aktuelle Informationen finden Sie an der neuen Position:
  - [Docker-Container](cs_tech.html#docker_containers)
  - [Grundlegende Informationen zu Kubernetes](cs_tech.html#kubernetes_basics)
  - [Vorteile durch die Verwendung von Clustern](cs_why.html#benefits)

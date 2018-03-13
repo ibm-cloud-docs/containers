@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-29"
 
 ---
 
@@ -18,13 +18,13 @@ lastupdated: "2018-01-12"
 # VPN-Konnektivität einrichten
 {: #vpn}
 
-VPN-Konnektivität ermöglicht Ihnen auch das sichere Verbinden von Apps in einem Kubernetes-Cluster mit einem lokalen Netz. Sie können auch Apps, die nicht in Ihrem Cluster enthalten sind, mit Apps verbinden, die Teil Ihres Clusters sind.
+Mit der VPN-Konnektivität können Sie sichere Verbindungen von Apps in einem Kubernetes-Cluster zu einem lokalen Netz herstellen. Sie können auch Apps, die nicht in Ihrem Cluster enthalten sind, mit Apps verbinden, die Teil Ihres Clusters sind.
 {:shortdesc}
 
 ## Helm-Diagramm zur Einrichtung von VPN-Konnektivität mit dem Strongswan-IPSec-VPN-Service
 {: #vpn-setup}
 
-Bei der Konfiguration von VPN-Konnektivität können Sie ein Helm-Diagramm verwenden, um den [Strongswan-IPSec-VPN-Service ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.strongswan.org/) in einem Kubernetes-Pod einzurichten und bereitzustellen. Der gesamte VPN-Datenverkehr wird dann durch diesen Pod weitergeleitet. Weitere Informationen zu den Helm-Befehlen zum Konfigurieren des Strongswan-Diagramms finden Sie in der <a href="https://docs.helm.sh/helm/" target="_blank">Helm-Dokumentation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.
+Bei der Konfiguration von VPN-Konnektivität können Sie ein Helm-Diagramm verwenden, um den [Strongswan-IPSec-VPN-Service ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.strongswan.org/) in einem Kubernetes-Pod einzurichten und bereitzustellen. Der gesamte VPN-Datenverkehr wird dann durch diesen Pod weitergeleitet. Weitere Informationen zu diesen Helm-Befehlen zum Konfigurieren des Strongswan-Diagramms finden Sie unter <a href="https://docs.helm.sh/helm/" target="_blank">Helm documentation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.
 {:shortdesc}
 
 Vorbemerkungen:
@@ -93,7 +93,7 @@ Gehen Sie wie folgt vor, um VPN-Konnektivität mit Strongswan einzurichten:
     <tbody>
     <tr>
     <td><code>overRideIpsecConf</code></td>
-    <td>Wenn Sie über eine vorhandene <code>ipsec.conf</code>-Datei verfügen, die Sie verwenden möchten, entfernen Sie die geschweiften Klammern (<code>{}</code>) und fügen Sie die Inhalte Ihrer Datei nach dieser Eigenschaft hinzu. Die Dateiinhalte müssem eingerückt sein. **Hinweis:** Wenn Sie Ihre eigene Datei verwenden, werden die Werte für die Abschnitte <code>ipsec</code>, <code>local</code> und <code>remote</code> nicht verwendet.</td>
+    <td>Wenn Sie über eine vorhandene <code>ipsec.conf</code>-Datei verfügen, die Sie verwenden möchten, entfernen Sie die geschweiften Klammern (<code>{}</code>) und fügen Sie die Inhalte Ihrer Datei nach dieser Eigenschaft hinzu. Die Dateiinhalte müssen eingerückt sein. **Hinweis:** Wenn Sie Ihre eigene Datei verwenden, werden die Werte für die Abschnitte <code>ipsec</code>, <code>local</code> und <code>remote</code> nicht verwendet.</td>
     </tr>
     <tr>
     <td><code>overRideIpsecSecrets</code></td>
@@ -117,7 +117,7 @@ Gehen Sie wie folgt vor, um VPN-Konnektivität mit Strongswan einzurichten:
     </tr>
     <tr>
     <td><code>local.subnet</code></td>
-    <td>Ändern Sie diesen Wert in die Liste von Clusterteilnetz-CIDRs, die über die VPN-Verbindung für das lokale Netz zugänglich sein sollen. Diese Liste kann die folgenden Teilnetze enthalten: <ul><li>Die Teilnetz-CIDR des Kubernetes-Pods: <code>172.30.0.0/16</code></li><li>Die Teilnetz-CIDR des Kubernetes-Service: <code>172.21.0.0/16</code></li><li>Wenn Sie Anwendungen über einen NodePort-Service im privaten Netz zugänglich machen, die private Teilnetz-CIDR des Workerknotens. Sie finden diesen Wert, indem Sie <code>bx cs subnets | grep <xxx.yyy.zzz></code> ausführen, wobei &lt;xxx.yyy.zzz&gt; das erste von drei Oktetts der privaten IP-Adresse des Workerknotens ist.</li><li>Wenn Sie Anwendungen über LoadBalancer-Services im privaten Netz zugänglich machen, die private oder benutzerverwaltete Teilnetz-CIDR des Clusters. Sie finden diese Werte, indem Sie <code>bx cs cluster-get <clustername> --showResources</code> ausführen. Suchen Sie im Abschnitt <b>VLANS</b> nach CIDRs, deren <b>Public</b>-Wert <code>false</code> lautet.</li></ul></td>
+    <td>Ändern Sie diesen Wert in die Liste von Clusterteilnetz-CIDRs, die über die VPN-Verbindung für das lokale Netz zugänglich sein sollen. Diese Liste kann die folgenden Teilnetze enthalten: <ul><li>Die Teilnetz-CIDR des Kubernetes-Pods: <code>172.30.0.0/16</code></li><li>Die Teilnetz-CIDR des Kubernetes-Service: <code>172.21.0.0/16</code></li><li>Wenn Ihre Anwendungen über einen NodePort-Service im privaten Netz zugänglich gemacht werden, die private Teilnetz-CIDR des Workerknotens. Sie finden diesen Wert, indem Sie <code>bx cs subnets | grep <xxx.yyy.zzz></code> ausführen. Dabei gibt <code>&lt;xxx.yyy.zzz&gt;</code> die ersten drei Oktette der privaten IP-Adresse des Workerknotens an.</li><li>Wenn Sie Anwendungen über LoadBalancer-Services im privaten Netz zugänglich machen, die private oder benutzerverwaltete Teilnetz-CIDR des Clusters. Sie finden diese Werte, indem Sie <code>bx cs cluster-get <clustername> --showResources</code> ausführen. Suchen Sie im Abschnitt <b>VLANS</b> nach CIDRs, deren <b>Public</b>-Wert <code>false</code> lautet.</li></ul></td>
     </tr>
     <tr>
     <td><code>local.id</code></td>
@@ -128,7 +128,7 @@ Gehen Sie wie folgt vor, um VPN-Konnektivität mit Strongswan einzurichten:
     <td>Ändern Sie diesen Wert in die öffentliche IP-Adresse für das lokale VPN-Gateway.</td>
     </tr>
     <td><code>remote.subnet</code></td>
-    <td>Ändern Sie diesen Wert in die Liste von lokalen privaten Teilnetz-CIDRs, auf die der Kubernetes-Cluster zugreifen kann.</td>
+    <td>Ändern Sie diesen Wert in die Liste von lokalen privaten Teilnetz-CIDRs, die für die Kubernetes-Cluster zugänglich sind.</td>
     </tr>
     <tr>
     <td><code>remote.id</code></td>
@@ -189,9 +189,9 @@ Gehen Sie wie folgt vor, um VPN-Konnektivität mit Strongswan einzurichten:
         ```
         {: screen}
 
-        **Hinweis**:
-          - Es ist sehr wahrscheinlich, dass das VPN nicht den Status `ESTABLISHED` hat, wenn Sie das erste Mal dieses Helm-Diagramm verwenden. Unter Umständen müssen Sie die Einstellungen des lokalen VPN-Endpunkts prüfen und zu Schritt 3 zurückkehren, um die Datei `config.yaml` mehrfach zu ändern, bevor die Verbindung erfolgreich ist.
-          - Falls der VPN-Pod den Status `ERROR` hat oder immer wieder ausfällt und neu startet, kann dies an der Parametervalidierung der `ipsec.conf`-Einstellungen in der Konfigurationsmap des Diagramms liegen. Prüfen Sie, ob dies der Fall ist, indem Sie mithilfe des Befehls `kubectl logs -n kube-system $STRONGSWAN_POD` in den Protokollen des Strongswan-Pods nach Validierungsfehlern suchen. Falls Sie Validierungsfehler finden, führen Sie `helm delete --purge vpn` aus, kehren Sie zu Schritt 3 zurück, um die falschen Werte in der Datei `config.yaml` zu korrigieren, und wiederholen Sie dann die Schritte 4 bis 8. Wenn Ihr Cluster viele Workerknoten umfasst, können Sie mit `helm upgrade` Ihre Änderungen schneller anwenden, anstatt erst `helm delete` und dann `helm install` auszuführen.
+      **Hinweis**:
+          - Es ist wahrscheinlich, dass das VPN nicht den Status `ESTABLISHED` aufweist, wenn Sie dieses Helm-Diagramm zum ersten Mal verwenden. Unter Umständen müssen Sie die Einstellungen des lokalen VPN-Endpunkts prüfen und zu Schritt 3 zurückkehren, um die Datei `config.yaml` mehrfach zu ändern, bevor die Verbindung erfolgreich ist.
+          - Falls der VPN-Pod den Status `ERROR` hat oder immer wieder ausfällt und neu startet, kann dies an der Parametervalidierung der `ipsec.conf`-Einstellungen in der Konfigurationsmap des Diagramms liegen. Suchen Sie nach Validierungsfehlern in den Protokollen des Strongswan-Pods, indem Sie den Befehl `kubectl logs -n kube-system $STRONGSWAN_POD` ausführen. Falls Validierungsfehler gefunden werden, führen Sie `helm delete --purge vpn` aus, kehren Sie zu Schritt 3 zurück, um die falschen Werte in der Datei `config.yaml` zu korrigieren, und wiederholen Sie anschließend die Schritte 4 bis 8. Wenn Ihr Cluster viele Workerknoten umfasst, können Sie mit `helm upgrade` Ihre Änderungen schneller anwenden, anstatt erst `helm delete` und `helm install` auszuführen.
 
     4. Sobald das VPN den Status `ESTABLISHED` hat, testen Sie die Verbindung mit `ping`. Im folgenden Beispiel wird ein Ping vom VPN-Pod im Kubernetes-Cluster an die private IP-Adresse des lokalen VPN-Gateways gesendet. Stellen Sie sicher, dass `remote.subnet` und `local.subnet` in der Konfigurationsdatei richtig angegeben sind und dass die lokale Teilnetzliste die Quellen-IP-Adresse umfasst, von der aus Sie das Ping-Signal senden.
 

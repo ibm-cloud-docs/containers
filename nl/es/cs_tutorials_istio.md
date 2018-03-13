@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-18"
+lastupdated: "2018-02-05"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -23,7 +23,7 @@ lastupdated: "2017-12-18"
 
 {:shortdesc}
 
-En esta guía de aprendizaje, puede aprender cómo instalar Istio junto a cuatro microservicios para una sencilla app ficticia sobre libros denominada BookInfo. Los microservicios incluyen una página web de productos, detalles de libros, revisiones y evaluaciones. Cuando se despliegan los microservicios de BookInfo rn un clúster de {{site.data.keyword.containershort}} en el que está instalado Istio, se inyectan los proxies sidecar Envoy de Istio en los pods de cada microservicio.
+En esta guía de aprendizaje, puede aprender cómo instalar Istio junto a cuatro microservicios para una sencilla app ficticia sobre libros denominada BookInfo. Los microservicios incluyen una página web de productos, detalles de libros, revisiones y evaluaciones. Cuando se despliegan los microservicios de BookInfo en un clúster de {{site.data.keyword.containershort}} en el que está instalado Istio, se inyectan los proxies sidecar Envoy de Istio en los pods de cada microservicio.
 
 **Nota**: algunas configuraciones y características de la plataforma Istio todavía están en desarrollo y están sujetas a cambios en función de los comentarios de los usuarios. Deje pasar unos meses, como estabilización, antes de utilizar Istio en producción. 
 
@@ -191,7 +191,7 @@ Cuando despliega BookInfo, los proxies sidecar Envoy se inyectan como contenedor
        ```
        {: pre}
 
-    * Si está trabajando con un clúster lite, debe utilizar la IP pública del nodo de trabajador y NodePort. Ejecute el siguiente mandato para obtener la IP pública del nodo trabajador:
+    * Si está trabajando con un clúster gratuito, debe utilizar la IP pública del nodo trabajador y NodePort. Ejecute el siguiente mandato para obtener la IP pública del nodo trabajador:
 
        ```
        bx cs workers <cluster_name_or_ID>
@@ -242,6 +242,6 @@ Si no desea explorar más funciones de Istio indicadas en [¿Qué es lo siguient
 
 Para explorar más la funcionalidad de Istio, puede encontrar más guías en la [documentación de Istio ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://istio.io/).
 
-* [Direccionamiento inteligente ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://istio.io/docs/guides/intelligent-routing.html): este ejemplo muestra cómo utilizar las diferentes funciones de gestión de tráfico de Istio con BookInfo para direccionar el tráfico a la versión específica de los microservicios de revisiones y evaluaciones.
+* [Direccionamiento inteligente ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://istio.io/docs/guides/intelligent-routing.html): este ejemplo muestra cómo direccionar el tráfico a una versión específica de los microservicios de revisiones y evaluaciones de BookInfo utilizando las funcionalidades de gestión de tráfico de Istio.
 
 * [Telemetría detallada ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://istio.io/docs/guides/telemetry.html): este ejemplo muestra cómo obtener métricas uniformes, registros y rastreos en los microservicios de BookInfo mediante Istio Mixer y el proxy Envoy.

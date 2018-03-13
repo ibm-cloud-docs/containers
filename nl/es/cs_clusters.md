@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-02"
 
 ---
 
@@ -84,7 +84,7 @@ en función de la región en la que se encuentra el usuario. Si el clúster, el 
 Un clúster de Kubernetes está formado por nodos trabajadores y está supervisado y gestionado de forma centralizada desde el maestro de Kubernetes. Los administradores del clúster deciden cómo configurar el clúster de nodos trabajadores para garantizar que los usuarios del clúster disponen de todos los recursos para desplegar y ejecutar las apps en el clúster.
 {:shortdesc}
 
-Cuando se crea un clúster estándar, los nodos trabajadores se ordenan en la infraestructura de IBM Cloud (SoftLayer) en su nombre y se configuran en {{site.data.keyword.Bluemix_notm}}. A cada nodo trabajador se la asigna un ID exclusivo y un nombre de dominio que no se debe cambiar después de haber creado el clúster. En función del nivel de aislamiento de hardware que elija, los nodos trabajadores se puede configurar como nodos compartidos o dedicados. Cada nodo trabajador se suministra con un tipo de máquina específico que determina el número de vCPU, la memoria y el espacio en disco que están disponibles para los contenedores que se despliegan en el nodo trabajador. Kubernetes limita el número máximo de nodos trabajadores que puede tener en un clúster. Consulte el apartado sobre [nodo trabajador y cuotas de pod ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/admin/cluster-large/) para obtener más información.
+Cuando se crea un clúster estándar, los nodos trabajadores se ordenan en la infraestructura de IBM Cloud (SoftLayer) en su nombre y se configuran en {{site.data.keyword.Bluemix_notm}}. A cada nodo trabajador se la asigna un ID exclusivo y un nombre de dominio que no se debe cambiar después de haber creado el clúster. En función del nivel de aislamiento de hardware que elija, los nodos trabajadores se puede configurar como nodos compartidos o dedicados. También puede elegir si desea que los nodos trabajadores se conecten a una VLAN pública y a una VLAN privada, o sólo a una VLAN privada. Cada nodo trabajador se suministra con un tipo de máquina específico que determina el número de vCPU, la memoria y el espacio en disco que están disponibles para los contenedores que se despliegan en el nodo trabajador. Kubernetes limita el número máximo de nodos trabajadores que puede tener en un clúster. Consulte el apartado sobre [nodo trabajador y cuotas de pod ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/admin/cluster-large/) para obtener más información.
 
 
 ### Hardware de los nodos trabajadores
@@ -100,7 +100,14 @@ el hipervisor asegura que cada nodo trabajador recibe su parte compartida de los
 
 Los nodos compartidos suelen resultar más económicos que los nodos dedicados porque los costes del hardware subyacente se comparten entre varios clientes. Sin embargo, cuando decida entre nodos compartidos y dedicados, debe ponerse en contacto con el departamento legal y ver el nivel de aislamiento y de conformidad de la infraestructura que necesita el entorno de app.
 
-Cuando se crea un clúster lite, el nodo trabajador se suministra automáticamente como nodo compartido en la cuenta de infraestructura de IBM Cloud (SoftLayer).
+Cuando se crea un clúster gratuito, el nodo trabajador se suministra automáticamente como nodo compartido en la cuenta de infraestructura de IBM Cloud (SoftLayer).
+
+### Conexión VLAN para nodos trabajadores
+{: #worker_vlan_connection}
+
+Cuando crea un clúster, cada clúster se conecta automáticamente a una VLAN de su cuenta de infraestructura de IBM Cloud (SoftLayer). Una VLAN configura un grupo de nodos trabajadores y pods como si estuvieran conectadas a la misma conexión física. La VLAN privada determina la dirección IP privada que se asigna a un nodo trabajador durante la creación del clúster, y la VLAN pública determina la dirección IP pública que se asigna a un nodo trabajador durante la creación del clúster.
+
+Para los clústeres gratuitos, los nodos trabajadores del clúster se conectan de forma predeterminada a una VLAN pública y VLAN privada propiedad de IBM durante la creación del clúster. Para los clústeres estándares, puede conectar los nodos trabajadores tanto a una VLAN pública y una VLAN privada, o solo a una VLAN privada. Si desea conectar los nodos trabajadores solo a una VLAN privada, puede designar el ID de la VLAN privada existente durante la creación del clúster. Sin embargo, también debe configurar una solución alternativa para habilitar una conexión segura entre nodos trabajadores y el maestro de Kubernetes. Por ejemplo, puede configurar un Vyatta para pasar el tráfico desde los nodos trabajadores de la VLAN privada hacia el maestro de Kubernetes. Consulte "Configuración de un Vyatta personalizado para conectar sus nodos trabajadores al maestro de Kubernetes" en la [documentación de la infraestructura de IBM Cloud (SoftLayer)](https://knowledgelayer.softlayer.com/procedure/basic-configuration-vyatta) para obtener más información.
 
 ### Límites de memoria de nodos trabajadores
 {: #resource_limit_node}
@@ -120,7 +127,7 @@ Cada tipo de máquina tiene una capacidad de memoria distinta. Cuando hay menos 
 |128 GB| 4096 MB |
 |242 GB| 4096 MB |
 
-Para revisar cuánta memoria se utiliza en el nodo de trabajador, ejecute [kubectl top node ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#top).
+Para revisar cuánta memoria se utiliza en el nodo trabajador, ejecute [kubectl top node ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#top).
 
 
 
@@ -136,18 +143,17 @@ Un clúster de Kubernetes es un conjunto de nodos trabajadores organizados en un
 
 Para crear un clúster:
 1. En el catálogo, seleccione **Clúster de Kubernetes**.
-2. Seleccione un tipo de plan de clúster. Puede elegir **Lite** o **Pago según uso**. Con el plan Pago según uso, puede suministrar un clúster estándar con características como varios nodos trabajadores para obtener un entorno de alta disponibilidad.
-3. Configure los detalles del clúster.
-    1. Asigne un nombre al clúster, seleccione una versión de Kubernetes y seleccione una ubicación en la que desplegarlo. Seleccione la ubicación físicamente más cercana para obtener el mejor rendimiento. Tenga en cuenta que es posible que se requiera autorización legal para poder almacenar datos físicamente en un país extranjero si selecciona una ubicación fuera del país.
-    2. Seleccione un tipo de máquina y especifique el número de nodos trabajadores que necesita. El tipo de máquina define la cantidad de memoria y CPU virtual que se configura en cada nodo trabajador y que está disponible para todos los contenedores.
-        - El tipo de máquina micro indica la opción más pequeña.
-        - La máquina equilibradas tiene la misma cantidad de memoria asignada a cada CPU, lo que optimiza el rendimiento.
-        - De forma predeterminada, los datos de Docker del host están cifrados en los tipos de máquina. El directorio `/var/lib/docker`, donde están almacenados todos los datos de los contenedores, están cifrados mediante LUKS. Si la opción `disable-disk-encrypt` se incluye durante la creación de clústeres, los datos de Docker del host no se cifrarán. [Más información sobre el cifrado.](cs_secure.html#encrypted_disks)
-    3. Seleccione una VLAN pública y privada en la cuenta de infraestructura de IBM Cloud (SoftLayer). Ambas VLAN comunican entre nodos trabajadores, pero la VLAN pública también se comunica con el Kubernetes maestro gestionado por IBM. Puede utilizar la misma VLAN para varios clústeres.
-        **Nota**: Si elige no seleccionar una VLAN pública, debe configurar una solución alternativa.
-    4. Seleccione un tipo de hardware. El hardware compartido es una opción suficiente para la mayoría de las situaciones.
-        - **Dedicado**: Garantiza el aislamiento completo de sus recursos físicos.
-        - **Compartido**: Permite almacenar sus recursos físicos en el mismo hardware que otros clientes de IBM.
+2. Seleccione una región en la que desea desplegar el clúster.
+3. Seleccione un tipo de plan de clúster. Puede elegir **Gratuito** o **Pago según uso**. Con el plan Pago según uso, puede suministrar un clúster estándar con características como varios nodos trabajadores para obtener un entorno de alta disponibilidad.
+4. Configure los detalles del clúster.
+    1. Asigne un nombre al clúster, seleccione una versión de Kubernetes y seleccione una ubicación en la que desplegar el clúster. Para obtener el mejor rendimiento, seleccione la ubicación que esté físicamente más cercana. Tenga en cuenta que es posible que se requiera autorización legal para poder almacenar datos físicamente en un país extranjero si selecciona una ubicación que esté fuera del país.
+    2. Seleccione un tipo de máquina y especifique el número de nodos trabajadores que necesita. El tipo de máquina define la cantidad de memoria, espacio de disco y CPU virtual que se configura en cada nodo trabajador y que está disponible para todos los contenedores.
+    3. Seleccione una VLAN pública y privada en la cuenta de infraestructura de IBM Cloud (SoftLayer). Ambas VLAN comunican entre nodos trabajadores, pero la VLAN pública también se comunica con el maestro de Kubernetes gestionado por IBM. Puede utilizar la misma VLAN para varios clústeres.
+        **Nota**: Si elige no seleccionar una VLAN pública, debe configurar una solución alternativa. Consulte [Conexión VLAN para nodos trabajadores](#worker_vlan_connection) para obtener más información.
+    4. Seleccione un tipo de hardware.
+        - **Dedicado**: Los nodos trabajadores están alojados en una infraestructura que está dedicada a su cuenta. Sus recursos están completamente aislados.
+        - **Compartido**: Los recursos de infraestructura, como por ejemplo el hipervisor y hardware físico, están distribuidos entre usted y otros clientes de IBM, pero cada nodo trabajador es accesible sólo por usted. Aunque esta opción es menos costosa y suficiente en la mayoría de los casos, es posible que desee verificar los requisitos de rendimiento e infraestructura con las políticas de las empresas.
+    5. De forma predeterminada, **Cifrar disco local** está seleccionado. Si elige desmarcar el recuadro de selección, no se cifran los datos de Docker del host. [Más información sobre el cifrado](cs_secure.html#encrypted_disks).
 4. Pulse **Crear clúster**. Verá el progreso del despliegue del nodo trabajador en el separador **Nodos trabajadores**. Cuando finalice el despliegue, podrá ver que el clúster está listo en el separador **Visión general**.
     **Nota:** A cada nodo trabajador se la asigna un ID exclusivo y un nombre de dominio que no se debe cambiar de forma manual después de haber creado el clúster. Si se cambia el nombre de dominio o el ID se impide que el maestro de Kubernetes gestione el clúster.
 
@@ -236,14 +242,14 @@ la sesión en la CLI de {{site.data.keyword.Bluemix_notm}}. Especifique su nombr
 
         Si ya existe una VLAN pública y privada, anote los direccionadores correspondientes. Los direccionadores VLAN privados siempre empiezan por `bcr` (back-end router, direccionador de fondo) y los direccionadores VLAN públicos siempre empiezan por `fcr` (direccionador frontal). La combinación de números y letras que hay tras estos prefijos debe coincidir para poder utilizar dichas VLAN al crear un clúster. En la salida de ejemplo, se puede utilizar cualquier VLAN privada con cualquier VLAN pública porque todos los direccionadores incluyen `02a.dal10`.
 
-    4.  Ejecute el mandato `cluster-create`. Puede elegir entre un clúster lite, que incluye un nodo trabajador configurado con 2 vCPU y 4 GB de memoria, o un clúster estándar, que puede incluir tantos nodos trabajadores como desee en la cuenta de infraestructura de IBM Cloud (SoftLayer). Cuando se crea un clúster estándar, de forma predeterminada, los discos del nodo trabajador están cifrados, su hardware se comparte entre varios clientes de IBM y se factura por horas de uso. </br>Ejemplo para un clúster estándar:
+    4.  Ejecute el mandato `cluster-create`. Puede elegir entre un clúster gratuito, que incluye un nodo trabajador configurado con 2 vCPU y 4 GB de memoria, o un clúster estándar, que puede incluir tantos nodos trabajadores como desee en la cuenta de infraestructura de IBM Cloud (SoftLayer). Cuando se crea un clúster estándar, de forma predeterminada, los discos del nodo trabajador están cifrados, su hardware se comparte entre varios clientes de IBM y se factura por horas de uso. </br>Ejemplo para un clúster estándar:
 
         ```
-        bx cs cluster-create --location dal10 --public-vlan <public_vlan_id> --private-vlan <private_vlan_id> --machine-type u2c.2x4 --workers 3 --name <cluster_name> --kube-version <major.minor.patch> 
+        bx cs cluster-create --location dal10 --machine-type u2c.2x4 --hardware <shared_or_dedicated> --public-vlan <public_vlan_id> --private-vlan <private_vlan_id> --workers 3 --name <cluster_name> --kube-version <major.minor.patch> 
         ```
         {: pre}
 
-        Ejemplo para un clúster lite:
+        Ejemplo para un clúster gratuito:
 
         ```
         bx cs cluster-create --name my_cluster
@@ -266,19 +272,23 @@ la sesión en la CLI de {{site.data.keyword.Bluemix_notm}}. Especifique su nombr
         </tr>
         <tr>
         <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
-        <td>Si está creando un clúster estándar, elija un tipo de máquina. El tipo de máquina especifica los recursos de cálculo virtuales que están disponibles para cada nodo trabajador. Consulte el apartado sobre [Comparación entre los clústeres lite y estándar para {{site.data.keyword.containershort_notm}}](cs_why.html#cluster_types) para obtener más información. Para los clústeres de tipo lite, no tiene que definir el tipo de máquina.</td>
+        <td>Si está creando un clúster estándar, elija un tipo de máquina. El tipo de máquina especifica los recursos de cálculo virtuales que están disponibles para cada nodo trabajador. Consulte el apartado sobre [Comparación entre los clústeres gratuitos y estándares para {{site.data.keyword.containershort_notm}}](cs_why.html#cluster_types) para obtener más información. Para los clústeres gratuitos, no tiene que definir el tipo de máquina.</td>
+        </tr>
+        <tr>
+        <td><code>--hardware <em>&lt;shared_or_dedicated&gt;</em></code></td>
+        <td>El nivel de aislamiento del hardware del nodo trabajador. Utilice el valor dedicated para tener recursos físicos disponibles dedicados solo a usted, o shared para permitir que los recursos físicos se compartan con otros clientes de IBM. El valor predeterminado es shared. Este valor es opcional para clústeres estándares y no está disponible para clústeres gratuitos.</td>
         </tr>
         <tr>
         <td><code>--public-vlan <em>&lt;public_vlan_id&gt;</em></code></td>
         <td><ul>
-          <li>Para los clústeres de tipo lite, no tiene que definir una VLAN pública. El clúster lite se conecta automáticamente a una VLAN pública propiedad de IBM.</li>
+          <li>Para los clústeres gratuitos, no tiene que definir una VLAN pública. El clúster gratuito se conecta automáticamente a una VLAN pública propiedad de IBM.</li>
           <li>Para un clúster estándar, si ya tiene una VLAN pública configurada en su cuenta de infraestructura de IBM Cloud (SoftLayer) para esta ubicación, escriba el ID de la VLAN pública. Si aún no tiene una VLAN pública y privada en esta ubicación, no especifique esta opción. {{site.data.keyword.containershort_notm}} crea automáticamente una VLAN pública.<br/><br/>
           <strong>Nota</strong>: Los direccionadores VLAN privados siempre empiezan por <code>bcr</code> (back-end router, direccionador de fondo) y los direccionadores VLAN públicos siempre empiezan por <code>fcr</code> (direccionador frontal). La combinación de números y letras que hay tras estos prefijos debe coincidir para poder utilizar dichas VLAN al crear un clúster.</li>
         </ul></td>
         </tr>
         <tr>
         <td><code>--private-vlan <em>&lt;private_vlan_id&gt;</em></code></td>
-        <td><ul><li>Para los clústeres de tipo lite, no tiene que definir una VLAN privada. El clúster lite se conecta automáticamente a una VLAN privada propiedad de IBM.</li><li>Para un clúster estándar, si ya tiene una VLAN privada configurada en su cuenta de infraestructura de IBM Cloud (SoftLayer) para esta ubicación, escriba el ID de la VLAN privada. Si aún no tiene una VLAN pública y privada en esta ubicación, no especifique esta opción. {{site.data.keyword.containershort_notm}} crea automáticamente una VLAN pública.<br/><br/><strong>Nota</strong>: Los direccionadores VLAN privados siempre empiezan por <code>bcr</code> (back-end router, direccionador de fondo) y los direccionadores VLAN públicos siempre empiezan por <code>fcr</code> (direccionador frontal). La combinación de números y letras que hay tras estos prefijos debe coincidir para poder utilizar dichas VLAN al crear un clúster.</li></ul></td>
+        <td><ul><li>Para los clústeres gratuitos, no tiene que definir una VLAN privada. El clúster gratuito se conecta automáticamente a una VLAN privada propiedad de IBM.</li><li>Para un clúster estándar, si ya tiene una VLAN privada configurada en su cuenta de infraestructura de IBM Cloud (SoftLayer) para esta ubicación, escriba el ID de la VLAN privada. Si aún no tiene una VLAN pública y privada en esta ubicación, no especifique esta opción. {{site.data.keyword.containershort_notm}} crea automáticamente una VLAN pública.<br/><br/><strong>Nota</strong>: Los direccionadores VLAN privados siempre empiezan por <code>bcr</code> (back-end router, direccionador de fondo) y los direccionadores VLAN públicos siempre empiezan por <code>fcr</code> (direccionador frontal). La combinación de números y letras que hay tras estos prefijos debe coincidir para poder utilizar dichas VLAN al crear un clúster.</li></ul></td>
         </tr>
         <tr>
         <td><code>--name <em>&lt;name&gt;</em></code></td>
@@ -294,7 +304,7 @@ la sesión en la CLI de {{site.data.keyword.Bluemix_notm}}. Especifique su nombr
         </tr>
         <tr>
         <td><code>--disable-disk-encrypt</code></td>
-        <td>Los nodos de trabajador tienen cifrado de disco de forma predeterminada; [más información](cs_secure.html#encrypted_disks). Si desea inhabilitar el cifrado, incluya esta opción.</td>
+        <td>Los nodos trabajadores tienen cifrado de disco de forma predeterminada; [más información](cs_secure.html#encrypted_disks). Si desea inhabilitar el cifrado, incluya esta opción.</td>
         </tr>
         </tbody></table>
 
@@ -409,11 +419,15 @@ Puede ver el estado actual del clúster ejecutando el mandato `bx cs clusters` y
 
 |Estado del clúster|Motivo|
 |-------------|------|
-|Despliegue|El nodo Kubernetes maestro no está completamente desplegado. No puede acceder a su clúster.|
-|Pendiente|El nodo Kubernetes maestro está desplegado. Los nodos trabajadores se están suministrando y aún no están disponibles en el clúster. Puede acceder al clúster, pero no puede desplegar apps en el clúster.|
+
+|Crítico|No se puede acceder al maestro de Kubernetes o todos los nodos trabajadores del clúster están inactivos.<ol><li>Obtenga una lista de los nodos trabajadores del clúster.<pre class="pre"><code>bx cs workers &lt;cluser_name_or_id&gt;</code></pre><li>Obtener los detalles de cada nodo trabajador.<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre></li><li>Revise los campos <strong>State</strong> y <strong>Status</strong> para ver el problema raíz por el que el nodo trabajador está inactivo.<ul><li>Si el estado del nodo trabajador es <strong>Provision_failed</strong>, es posible que no tenga los permisos necesarios para suministrar un nodo trabajador desde el portafolio de infraestructura de IBM Cloud (SoftLayer). Para ver los permisos necesarios, consulte [Configuración del acceso al portafolio de infraestructura de IBM Cloud (SoftLayer) para crear clústeres de Kubernetes estándares](cs_infrastructure.html#unify_accounts).</li><li>Si el campo state del nodo trabajador es <strong>Critical</strong> y el campo status es <strong>Not Ready</strong>, significa que puede que el nodo trabajador no pueda conectarse a la infraestructura de IBM Cloud (SoftLayer). Para resolver el problema, empiece ejecutando <code>bx cs worker-reboot --hard CLUSTER WORKER</code>. Si el mandato no resuelve el problema, ejecute <code>bx cs worker reload CLUSTER WORKER</code>.</li><li>Si el campo state del nodo trabajador es <strong>Critical</strong> y el campo status es <strong>Out of disk</strong>, significa que el nodo trabajador ha agotado su capacidad. Puede reducir la carga de trabajo del nodo trabajador o añadir un nodo trabajador al clúster para ayudar a equilibrar la carga de trabajo.</li><li>Si el campo state del nodo trabajador es <strong>Critical</strong> y el campo status es <strong>Unknown</strong>, significa que el maestro de Kubernetes no está disponible. Para ponerse en contacto con el equipo de soporte de {{site.data.keyword.Bluemix_notm}}, abra una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](/docs/get-support/howtogetsupport.html#using-avatar).</li></ul></li></ol>|
+
+|Desplegando|El maestro de Kubernetes no está completamente desplegado. No puede acceder a su clúster.|
 |Normal|Todos los nodos trabajadores de un clúster están activos y en ejecución. Puede acceder al clúster y desplegar apps en el clúster.|
+|Pendiente|El maestro de Kubernetes está desplegado. Los nodos trabajadores se están suministrando y aún no están disponibles en el clúster. Puede acceder al clúster, pero no puede desplegar apps en el clúster.|
+
 |Aviso|Al menos un nodo trabajador del clúster no está disponible, pero los otros nodos trabajadores están disponibles y pueden asumir la carga de trabajo. <ol><li>Obtenga una lista de los nodos trabajadores del clúster y anote el ID de los nodos trabajadores con el estado <strong>Aviso</strong>.<pre class="pre"><code>bx cs workers &lt;cluster_name_or_id&gt;</code></pre><li>Obtenga los detalles de un nodo trabajador.<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre><li>Revise los campos <strong>State</strong>, <strong>Status</strong> y <strong>Details</strong> para ver el problema raíz por el que el nodo trabajador está inactivo.</li><li>Si el nodo trabajador casi ha alcanzado el límite de memoria o de espacio de disco, reduzca la carga de trabajo del nodo trabajador o añada un nodo trabajador al clúster para ayudar a equilibrar la carga de trabajo.</li></ol>|
-|Crítico|No se puede acceder al nodo Kubernetes maestro o todos los nodos trabajadores del clúster están inactivos. <ol><li>Obtenga una lista de los nodos trabajadores del clúster.<pre class="pre"><code>bx cs workers &lt;cluser_name_or_id&gt;</code></pre><li>Obtener los detalles de cada nodo trabajador.<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre></li><li>Revise los campos <strong>State</strong> y <strong>Status</strong> para ver el problema raíz por el que el nodo trabajador está inactivo.<ul><li>Si el estado del nodo trabajador es <strong>Provision_failed</strong>, es posible que no tenga los permisos necesarios para suministrar un nodo trabajador desde el portafolio de infraestructura de IBM Cloud (SoftLayer). Para ver los permisos necesarios, consulte [Configuración del acceso al portafolio de infraestructura de IBM Cloud (SoftLayer) para crear clústeres de Kubernetes estándares](cs_infrastructure.html#unify_accounts).</li><li>Si el campo state del nodo trabajador es <strong>Critical</strong> y el campo status es <strong>Not Ready</strong>, significa que puede que el nodo trabajador no pueda conectarse a la infraestructura de IBM Cloud (SoftLayer). Para resolver el problema, empiece ejecutando <code>bx cs worker-reboot --hard CLUSTER WORKER</code>. Si el mandato no resuelve el problema, ejecute <code>bx cs worker reload CLUSTER WORKER</code>.</li><li>Si el campo state del nodo trabajador es <strong>Critical</strong> y el campo status es <strong>Out of disk</strong>, significa que el nodo trabajador ha agotado su capacidad. Puede reducir la carga de trabajo del nodo trabajador o añadir un nodo trabajador al clúster para ayudar a equilibrar la carga de trabajo.</li><li>Si el campo state del nodo trabajador es <strong>Critical</strong> y el campo status es <strong>Unknown</strong>, significa que el nodo Kubernetes maestro no está disponible. Para ponerse en contacto con el equipo de soporte de {{site.data.keyword.Bluemix_notm}}, abra una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#getting-help).</li></ul></li></ol>|
+
 {: caption="Tabla. Estados de un clúster" caption-side="top"}
 
 <br />
@@ -425,7 +439,7 @@ Puede ver el estado actual del clúster ejecutando el mandato `bx cs clusters` y
 Cuando termine con un clúster, puede eliminarlo para que el clúster deje de consumir recursos.
 {:shortdesc}
 
-Los clústeres Lite y estándar creados con una cuenta de Pago según uso los deben eliminar los usuarios de forma manual cuando ya no sean necesarios.
+Los clústeres gratuitos y estándares creados con una cuenta de Pago según uso los deben eliminar los usuarios de forma manual cuando ya no sean necesarios.
 
 Cuando suprime un clúster, también suprime los recursos del clúster, incluidos contenedores, pods, servicios vinculados y secretos. Si no suprime su almacenamiento cuando suprima el clúster, podrá hacerlo a través del panel de control de infraestructura de IBM Cloud (SoftLayer) en la interfaz gráfica de usuario de {{site.data.keyword.Bluemix_notm}}. Debido al ciclo de facturación mensual, una reclamación de volumen permanente no se puede suprimir el último día del mes. Si suprime la reclamación de volumen permanente el último día del mes, la supresión permanece pendiente hasta el principio del siguiente mes.
 
@@ -451,6 +465,6 @@ Cuando suprime un clúster, también suprime los recursos del clúster, incluido
     3.  Siga las indicaciones y decidir si desea suprimir los recursos del clúster.
 
 Cuando se elimina un clúster, puede optar por eliminar las subredes portátiles y el almacenamiento portátil asociado con el mismo:
-- Las subredes se utilizan para asignar direcciones IP públicas portátiles a los servicios de equilibrio de carga o el controlador de Ingress. Si los conserva, puede reutilizarlos en un nuevo clúster o suprimirlos manualmente más adelante desde el portafolio de infraestructura de IBM Cloud (SoftLayer).
+- Las subredes se utilizan para asignar direcciones IP públicas portátiles a los servicios de equilibrio de carga o el equilibrador de carga de aplicación de Ingress. Si los conserva, puede reutilizarlos en un nuevo clúster o suprimirlos manualmente más adelante desde el portafolio de infraestructura de IBM Cloud (SoftLayer).
 - Si ha creado una reclamación de volumen persistente utilizando una [compartición de archivo existente](cs_storage.html#existing), no puede suprimir la compartición de archivo al suprimir el clúster. Suprima manualmente la compartición de archivo desde el portafolio de infraestructura de IBM Cloud (SoftLayer).
 - El almacenamiento persistente proporciona alta disponibilidad a los datos. Si lo suprime, no podrá recuperar los datos.

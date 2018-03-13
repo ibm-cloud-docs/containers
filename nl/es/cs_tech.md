@@ -15,7 +15,7 @@ lastupdated: "2018-01-11"
 {:tip: .tip}
 {:download: .download}
 
-# Tecnología {{site.data.keyword.containerlong_notm}} 
+# Tecnología {{site.data.keyword.containerlong_notm}}
 
 ## Contenedores de Docker
 {: #docker_containers}
@@ -69,15 +69,15 @@ Conozca algunos conceptos básicos de Kubernetes que se muestran en el diagrama 
 <dd>Su cuenta se refiere a su cuenta de {{site.data.keyword.Bluemix_notm}}.</dd>
 
 <dt>Clúster</dt>
-<dd>Un clúster de Kubernetes consta de uno o varios hosts de cálculo que se denominan nodos trabajadores. Los nodos trabajadores se gestionan mediante un Kubernetes maestro que controla y supervisa de forma centralizada todos los recursos de Kubernetes del clúster. De ese modo, cuando se despliegan los recursos de una app contenerizada,
-el Kubernetes maestro decide en qué nodo trabajador desplegar los recursos, teniendo en cuenta los requisitos del despliegue y la capacidad disponible del clúster. Los recursos de Kubernetes incluyen servicios, despliegues y pods.</dd>
+<dd>Un clúster de Kubernetes consta de uno o varios hosts de cálculo que se denominan nodos trabajadores. Los nodos trabajadores se gestionan mediante un maestro de Kubernetes que controla y supervisa de forma centralizada todos los recursos de Kubernetes del clúster. De ese modo, cuando se despliegan los recursos de una app contenerizada,
+el maestro de Kubernetes decide en qué nodo trabajador desplegar los recursos, teniendo en cuenta los requisitos del despliegue y la capacidad disponible del clúster. Los recursos de Kubernetes incluyen servicios, despliegues y pods.</dd>
 
 <dt>Servicio</dt>
 <dd>Un servicio es un recurso de Kubernetes que agrupa un conjunto de pods y proporciona conexión de red a estos pods sin exponer la dirección IP privada real de cada pod. Puede utilizar un servicio para poner la app a disponibilidad dentro de su clúster o en Internet público.
 </dd>
 
 <dt>Despliegue</dt>
-<dd>Un despliegue es un recurso de Kubernetes en el que se especifica información acerca de otros recursos o prestaciones necesarios para ejecutar la app, como por ejemplo servicios, almacenamiento permanente o anotaciones. Puede documentar un despliegue en un archivo YAML de configuración y luego aplicarlo al clúster. El Kubernetes maestro configura los recursos y despliega los contenedores en pods en los nodos trabajadores con capacidad disponible.
+<dd>Un despliegue es un recurso de Kubernetes en el que se especifica información acerca de otros recursos o prestaciones necesarios para ejecutar la app, como por ejemplo servicios, almacenamiento permanente o anotaciones. Puede documentar un despliegue en un archivo YAML de configuración y luego aplicarlo al clúster. El maestro de Kubernetes configura los recursos y despliega los contenedores en pods en los nodos trabajadores con capacidad disponible.
 </br></br>
 Defina estrategias para la app que incluyan el número de pods que desea añadir durante una actualización continuada y el número de pods que pueden no estar disponibles al mismo tiempo. Cuando lleva a cabo una actualización continuada, el despliegue comprueba si la actualización funciona y detiene la implantación cuando se detectan anomalías.</dd>
 
@@ -97,7 +97,7 @@ Para obtener más información sobre terminología de Kubernetes, <a href="cs_tu
 ## Arquitectura del servicio
 {: #architecture}
 
-Cada nodo trabajador está configurado con un motor Docker gestionado por {{site.data.keyword.IBM_notm}}, distintos recursos de cálculo, sistema de red y servicio de volúmenes, así como características integradas de seguridad que proporciona identificación, funciones de gestión de recursos y conformidad con la seguridad de los nodos trabajadores. El nodo trabajador se comunica con el nodo maestro mediante certificados TLS seguros y conexión openVPN.
+Cada nodo trabajador está configurado con un motor Docker gestionado por {{site.data.keyword.IBM_notm}}, distintos recursos de cálculo, sistema de red y servicio de volúmenes, así como características integradas de seguridad que proporciona identificación, funciones de gestión de recursos y conformidad con la seguridad de los nodos trabajadores. El nodo trabajador se comunica con el maestro mediante certificados TLS seguros y conexión openVPN.
 {:shortdesc}
 
 ![{{site.data.keyword.containerlong_notm}} Arquitectura de Kubernetes](images/cs_org_ov.png)

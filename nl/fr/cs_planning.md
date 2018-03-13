@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-10"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -15,10 +15,10 @@ lastupdated: "2018-01-10"
 {:tip: .tip}
 {:download: .download}
 
-# Cette page a été déplacée
+# Le contenu que vous cherchez a été déplacé.
 
-Accédez aux rubriques sur la planification ici :
- - [Comparaison des clusters léger et standard](cs_why.html#cluster_types)
+Consultez les informations les plus récentes dans son nouvel emplacement :
+ - [Comparaison des clusters gratuits et standards](cs_why.html#cluster_types)
  - [Configuration de cluster](cs_clusters.html#planning_clusters)
  - [Configuration du noeud worker](cs_clusters.html#planning_worker_nodes)
  - [Responsabilités de gestion de cluster](cs_why.html#responsibilities)

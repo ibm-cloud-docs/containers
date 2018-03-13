@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-02"
 
 ---
 
@@ -25,7 +25,7 @@ Configurez la journalisation et la surveillance des clusters pour faciliter la r
 ## Configuration de la journalisation de cluster
 {: #logging}
 
-Vous pouvez envoyer des journaux à un emplacement spécifique pour leur traitement ou stockage à long terme. Sur un cluster Kubernetes dans {{site.data.keyword.containershort_notm}}, vous pouvez activer le transfert de journaux pour votre cluster et choisir l'emplacement de destination de vos transferts de journaux. **Remarque** : le transfert de journaux n'est pris en charge que pour les clusters standard.
+Vous pouvez envoyer des journaux à un emplacement spécifique pour leur traitement ou stockage à long terme. Sur un cluster Kubernetes dans {{site.data.keyword.containershort_notm}}, vous pouvez activer le transfert de journaux pour votre cluster et choisir l'emplacement de destination de vos transferts de journaux. **Remarque** : le transfert de journaux n'est pris en charge que pour les clusters standards.
 {:shortdesc}
 
 Vous pouvez réacheminer les journaux de sources de journal telles que des conteneurs, des applications, des noeuds worker, des clusters Kubernetes et des contrôleurs Ingress. Examinez le tableau suivant pour plus d'information sur chaque source de journal.
@@ -36,7 +36,7 @@ Vous pouvez réacheminer les journaux de sources de journal telles que des conte
 |`application`|Journaux de votre application qui s'exécute dans un cluster Kubernetes.|`/var/log/apps/**/*.log`, `/var/log/apps/**/*.err`|
 |`agent`|Journaux des noeuds d'agent de machine virtuelle dans un cluster Kubernetes.|`/var/log/syslog`, `/var/log/auth.log`|
 |`kubernetes`|Journaux du composant système Kubernetes.|`/var/log/kubelet.log`, `/var/log/kube-proxy.log`|
-|`ingress`|Journaux pour un équilibreur de charge d'application, géré par le conteneur Ingress et qui régit le trafic réseau entrant dans un cluster Kubernetes.|`/var/log/alb/ids/*.log`, `/var/log/alb/ids/*.err`, `/var/log/alb/customerlogs/*.log`, `/var/log/alb/customerlogs/*.err`|
+|`ingress`|Journaux pour un équilibreur de charge d'application Ingress qui gère le trafic réseau entrant dans un cluster Kubernetes.|`/var/log/alb/ids/*.log`, `/var/log/alb/ids/*.err`, `/var/log/alb/customerlogs/*.log`, `/var/log/alb/customerlogs/*.err`|
 {: caption="Caractéristiques de la source de journal" caption-side="top"}
 
 ## Activation du transfert de journal
@@ -92,11 +92,11 @@ Pour activer le transfert de journal pour un conteneur, un noeud worker, un comp
     </tr>
     <tr>
     <td><code>--port <em>&lt;ingestion_port&gt;</em></code></td>
-    <td>Remplacez <em>&lt;ingestion_port&gt;</em> par le port d'ingestion. Si vous n'en spécifiez pas un, le port standard, <code>9091</code>, est utilisé.</td>
+    <td>Remplacez <em>&lt;ingestion_port&gt;</em> par le port d'ingestion. Si vous n'en indiquez aucun, le port standard, <code>9091</code>, est utilisé.</td>
     </tr>
     <tr>
     <td><code>--space <em>&lt;cluster_space&gt;</em></code></td>
-    <td>Remplacez <em>&lt;cluster_space&gt;</em> par le nom de l'espace Cloud Foundry auquel vous désirez envoyer les journaux. Si vous n'en spécifiez pas un, les journaux sont envoyés au niveau du compte.</td>
+    <td>Remplacez <em>&lt;cluster_space&gt;</em> par le nom de l'espace Cloud Foundry auquel vous désirez envoyer les journaux. Si vous n'en indiquez aucun, les journaux sont envoyés au niveau du compte.</td>
     </tr>
     <tr>
     <td><code>--org <em>&lt;cluster_org&gt;</em></code></td>
@@ -289,7 +289,7 @@ Pour modifier les détails d'une configuration de journalisation :
     </tr>
     <tr>
     <td><code>--space <em>&lt;cluster_space&gt;</em></code></td>
-    <td>Remplacez <em>&lt;cluster_space&gt;</em> par le nom de l'espace Cloud Foundry auquel vous désirez envoyer les journaux. Cette valeur est facultative et n'est valide que pour le type de journal <code>ibm</code>. Si vous n'en spécifiez pas un, les journaux sont envoyés au niveau du compte.</td>
+    <td>Remplacez <em>&lt;cluster_space&gt;</em> par le nom de l'espace Cloud Foundry auquel vous désirez envoyer les journaux. Cette valeur est facultative et n'est valide que pour le type de journal <code>ibm</code>. Si vous n'en indiquez aucun, les journaux sont envoyés au niveau du compte.</td>
     </tr>
     <tr>
     <td><code>--org <em>&lt;cluster_org&gt;</em></code></td>
@@ -361,7 +361,7 @@ Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_in
 ## Configuration du transfert de journaux pour les journaux d'audit d'API Kubernetes
 {: #app_forward}
 
-Les journaux d'audit d'API Kubernetes capturent tous les appels au serveur d'API Kubernetes depuis votre cluster. Pour commencer à collecter les journaux d'audit d'API Kubernetes, vous pouvez configurer le serveur d'API Kubernetes afin de mettre en place un backend webhook pour votre cluster. Ce backend webhook permet aux journaux d'être envoyés à un serveur distant. Pour plus d'informations sur les journaux d'audit Kubernetes, reportez-vous à la the <a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="_blank">rubrique consacrée à l'audit <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> dans la documentation Kubernetes.
+Les journaux d'audit d'API Kubernetes capturent tous les appels au serveur d'API Kubernetes depuis votre cluster. Pour commencer à collecter les journaux d'audit d'API Kubernetes, vous pouvez configurer le serveur d'API Kubernetes afin de mettre en place un backend webhook pour votre cluster. Ce backend webhook permet aux journaux d'être envoyés à un serveur distant. Pour plus d'informations sur les journaux d'audit Kubernetes, reportez-vous à la <a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="_blank">rubrique consacrée à l'audit <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> dans la documentation Kubernetes.
 
 **Remarque **:
 * L'acheminement des journaux d'audit d'API Kubernetes n'est pris en charge que pour Kubernetes version 1.7 et ultérieure.
@@ -475,13 +475,14 @@ Pour afficher les journaux des clusters et des conteneurs, vous pouvez utiliser 
 ### {{site.data.keyword.loganalysislong_notm}}
 {: #view_logs_k8s}
 
-Pour les clusters standard, les journaux se trouvent dans le compte {{site.data.keyword.Bluemix_notm}} où vous vous êtes connecté lorsque vous avez créé le cluster Kubernetes. Si vous avez spécifié un espace {{site.data.keyword.Bluemix_notm}} lorsque vous avez créé le cluster ou la configuration de journalisation, les journaux sont situés dans cet espace. Les journaux sont surveillés et réacheminés depuis l'extérieur du conteneur. Vous pouvez accéder aux journaux d'un conteneur via le tableau de bord Kibana. Pour plus d'informations sur la journalisation, voir [Journalisation pour {{site.data.keyword.containershort_notm}}](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
+Pour les clusters standards, les journaux se trouvent dans le compte {{site.data.keyword.Bluemix_notm}} où vous vous êtes connecté lorsque vous avez créé le cluster Kubernetes. Si vous avez spécifié un espace {{site.data.keyword.Bluemix_notm}} lorsque vous avez créé le cluster ou la configuration de journalisation, les journaux sont situés dans cet espace. Les journaux sont surveillés et réacheminés depuis l'extérieur du conteneur. Vous pouvez accéder aux journaux d'un conteneur via le tableau de bord Kibana. Pour plus d'informations sur la journalisation, voir [Journalisation pour {{site.data.keyword.containershort_notm}}](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
 
 **Remarque **: si vous avez spécifié un espace lors de la création du cluster ou de la configuration de journalisation, le propriétaire du compte doit disposer des droits Responsable, Développeur ou Auditeur dans cet espace pour afficher les journaux. Pour plus d'informations sur la modification des {{site.data.keyword.containershort_notm}} droits et règles d'accès, voir [Gestion de l'accès au cluster](cs_users.html#managing). Une fois les droits modifiés, il peut s'écouler jusqu'à 24 heures avant que les journaux commencent à s'afficher.
 
 Pour accéder au tableau de bord Kibana, accédez à l'une des URL suivantes et sélectionnez le compte ou l'espace {{site.data.keyword.Bluemix_notm}} dans lequel vous avez créé le cluster.
 - Sud et Est des Etats-Unis : https://logging.ng.bluemix.net
-- Sud du Royaume-Uni et Europe centrale : https://logging.eu-fra.bluemix.net
+- Sud du Royaume-Uni : https://logging.eu-gb.bluemix.net
+- Europe centrale : https://logging.eu-fra.bluemix.net
 - Asie-Pacifique sud : https://logging.au-syd.bluemix.net
 
 Pour plus d'informations sur l'affichage des journaux, voir [Accès à Kibana à partir d'un navigateur Web](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser).
@@ -498,7 +499,7 @@ STDOUT et STDERR standard. Pour plus d'informations, voir [Affichage des journau
 ## Configuration de la surveillance de cluster
 {: #monitoring}
 
-Des métriques vous aident à surveiller l'état de santé et les performances de vos clusters. Vous pouvez configurer la surveillance de l'état de santé des noeuds d'agent de manière à détecter et à rectifier automatiquement tout agent dont l'état s'est dégradé ou qui n'est plus opérationnel. **Remarque** : la surveillance n'est prise en charge que pour les clusters standard.
+Des métriques vous aident à surveiller l'état de santé et les performances de vos clusters. Vous pouvez configurer la surveillance de l'état de santé des noeuds d'agent de manière à détecter et à rectifier automatiquement tout agent dont l'état s'est dégradé ou qui n'est plus opérationnel. **Remarque** : la surveillance n'est prise en charge que pour les clusters standards.
 {:shortdesc}
 
 ## Affichage des métriques
@@ -514,7 +515,7 @@ cluster et sur l'utilisation de vos ressources de cluster. Vous pouvez utiliser 
 <dt>Tableau de bord Kubernetes</dt>
 <dd>Le tableau de bord Kubernetes est une interface Web d'administration dans laquelle vous pouvez examiner l'état de santé de vos noeuds d'agent, rechercher des ressources Kubernetes, déployer des applications conteneurisées et résoudre les incidents liés aux applications à l'aide des informations des journaux et de surveillance. Pour plus d'informations sur l'accès à votre tableau de bord Kubernetes, voir [Lancement du tableau de bord Kubernetes pour {{site.data.keyword.containershort_notm}}](cs_app.html#cli_dashboard).</dd>
 <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
-<dd>Les métriques des clusters standard se trouvent dans le compte {{site.data.keyword.Bluemix_notm}} connecté lorsque vous avez créé le cluster Kubernetes. Si vous avez spécifié un espace {{site.data.keyword.Bluemix_notm}} lorsque vous avez créé le cluster, les métriques se trouvent dans cet espace. Les métriques de conteneur sont collectées automatiquement pour tous les conteneurs déployés dans un cluster. Ces métriques sont envoyées et mises à disposition via Grafana. Pour plus d'informations sur les métriques, voir [Surveillance d'{{site.data.keyword.containershort_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov).<p>Pour accéder au tableau de bord Grafana, accédez à l'une des URL suivantes et sélectionnez le compte ou l'espace {{site.data.keyword.Bluemix_notm}} dans lequel vous avez créé le cluster.<ul><li>Sud et Est des Etats-Unis : https://metrics.ng.bluemix.net</li><li>Sud du Royaume-Uni : https://metrics.eu-gb.bluemix.net</li></ul></p></dd></dl>
+<dd>Les métriques des clusters standards se trouvent dans le compte {{site.data.keyword.Bluemix_notm}} connecté lorsque vous avez créé le cluster Kubernetes. Si vous avez spécifié un espace {{site.data.keyword.Bluemix_notm}} lorsque vous avez créé le cluster, les métriques se trouvent dans cet espace. Les métriques de conteneur sont collectées automatiquement pour tous les conteneurs déployés dans un cluster. Ces métriques sont envoyées et mises à disposition via Grafana. Pour plus d'informations sur les métriques, voir [Surveillance d'{{site.data.keyword.containershort_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov).<p>Pour accéder au tableau de bord Grafana, accédez à l'une des URL suivantes et sélectionnez le compte ou l'espace {{site.data.keyword.Bluemix_notm}} dans lequel vous avez créé le cluster.<ul><li>Sud et Est des Etats-Unis : https://metrics.ng.bluemix.net</li><li>Sud du Royaume-Uni : https://metrics.eu-gb.bluemix.net</li></ul></p></dd></dl>
 
 ### Autres outils de surveillance de l'état de santé
 {: #health_tools}
@@ -585,96 +586,96 @@ Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_in
     {:codeblock}
 
 
-    <table summary="Description des composants de la mappe de configuration">
-    <caption>Description des composants de la mappe de configuration</caption>
-      <thead>
-        <th colspan=2><img src="images/idea.png"/>Description des composants de la mappe de configuration</th>
-      </thead>
-      <tbody>
-       <tr>
-          <td><code>name</code></td>
-          <td>Le nom de configuration <code>ibm-worker-recovery-checks</code> est une constante et ne peut pas être modifié.</td>
-       </tr>
-       <tr>
-          <td><code>espace de nom</code></td>
-          <td>L'espace de nom <code>kube-system</code> est une constante et ne peut pas être modifié.</td>
-       </tr>
-      <tr>
-          <td><code>checkhttp.json</code></td>
-          <td>Définit une vérification HTTP qui s'assure qu'un serveur HTTP est en opération sur l'adresse IP de chaque noeud sur le port 80 et renvoie une réponse 200 sur le chemin <code>/myhealth</code>. Vous pouvez identifier l'adresse IP d'un noeud en exécutant la commande <code>kubectl get nodes</code>.
-               Par exemple, envisagez deux noeuds dans un cluster avec les adresses IP 10.10.10.1 et 10.10.10.2. Dans cet exemple, deux routes sont vérifiées pour renvoi de réponses 200 OK : <code>http://10.10.10.1:80/myhealth</code> et <code>http://10.10.10.2:80/myhealth</code>.
-               La vérification dans l'exemple YAML ci-dessus s'exécute toutes les 3 minutes. Si elle échoue consécutivement trois fois, le noeud est réamorcé. Cette action est équivalente à la commande <code>bx cs worker-reboot</code>. La vérification HTTP est désactivée jusqu'à ce que vous affectiez à la zone <b>Enabled</b> la valeur <code>true</code>.</td>
-        </tr>
-        <tr>
-          <td><code>checknode.json</code></td>
-          <td>Définit une vérification de noeud d'API Kubernetes pour s'assurer que l'état de chaque noeud indique <code>Ready</code> (Prêt). La vérification d'un noeud spécifique compte comme un échec si le noeud n'est pas à l'état <code>Ready</code>.
-               La vérification dans l'exemple YAML ci-dessus s'exécute toutes les 3 minutes. Si elle échoue consécutivement trois fois, le noeud est rechargé. Cette action est équivalente à la commande <code>bx cs worker-reload</code>. La vérification de noeud est activée tant que vous n'affectez pas à la zone <b>Enabled</b> la valeur <code>false</code> ou supprimez la vérification.</td>
-        </tr>
-        <tr>
-          <td><code>checkpod.json</code></td>
-          <td>Définit une vérification de pod d'API Kubernetes qui vérifie le pourcentage total de pods <code>NotReady</code> sur un noeud par rapport à tous les pods affectés à ce noeud. La vérification d'un noeud spécifique compte comme un échec si le pourcentage total de pods à l'état <code>NotReady</code> est supérieur à la valeur définie pour <code>PodFailureThresholdPercent</code>.
-               La vérification dans l'exemple YAML ci-dessus s'exécute toutes les 3 minutes. Si elle échoue consécutivement trois fois, le noeud est rechargé. Cette action est équivalente à la commande <code>bx cs worker-reload</code>. La vérification de pod est activée tant que vous n'affectez pas à la zone <b>Enabled</b> la valeur <code>false</code> ou supprimez la vérification.</td>
-        </tr>
-      </tbody>
-    </table>
+<table summary="Description des composants de la mappe de configuration">
+<caption>Description des composants de la mappe de configuration</caption>
+<thead>
+<th colspan=2><img src="images/idea.png"/>Description des composants de la mappe de configuration</th>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>Le nom de configuration <code>ibm-worker-recovery-checks</code> est une constante et ne peut pas être modifié.</td>
+</tr>
+<tr>
+<td><code>espace de nom</code></td>
+<td>L'espace de nom <code>kube-system</code> est une constante et ne peut pas être modifié.</td>
+</tr>
+<tr>
+<td><code>checkhttp.json</code></td>
+<td>Définit une vérification HTTP qui s'assure qu'un serveur HTTP est en opération sur l'adresse IP de chaque noeud sur le port 80 et renvoie une réponse 200 sur le chemin <code>/myhealth</code>. Vous pouvez identifier l'adresse IP d'un noeud en exécutant la commande <code>kubectl get nodes</code>.
+Par exemple, envisagez deux noeuds dans un cluster avec les adresses IP 10.10.10.1 et 10.10.10.2. Dans cet exemple, deux routes sont vérifiées pour renvoi de réponses 200 OK : <code>http://10.10.10.1:80/myhealth</code> et <code>http://10.10.10.2:80/myhealth</code>.
+La vérification dans l'exemple YAML ci-dessus s'exécute toutes les 3 minutes. Si elle échoue consécutivement trois fois, le noeud est réamorcé. Cette action est équivalente à la commande <code>bx cs worker-reboot</code>. La vérification HTTP est désactivée jusqu'à ce que vous affectiez à la zone <b>Enabled</b> la valeur <code>true</code>.</td>
+</tr>
+<tr>
+<td><code>checknode.json</code></td>
+<td>Définit une vérification de noeud d'API Kubernetes pour s'assurer que l'état de chaque noeud indique <code>Ready</code> (Prêt). La vérification d'un noeud spécifique compte comme un échec si le noeud n'est pas à l'état <code>Ready</code>.
+La vérification dans l'exemple YAML ci-dessus s'exécute toutes les 3 minutes. Si elle échoue consécutivement trois fois, le noeud est rechargé. Cette action est équivalente à la commande <code>bx cs worker-reload</code>. La vérification de noeud est activée tant que vous n'affectez pas à la zone <b>Enabled</b> la valeur <code>false</code> ou supprimez la vérification.</td>
+</tr>
+<tr>
+<td><code>checkpod.json</code></td>
+<td>Définit une vérification de pod d'API Kubernetes qui vérifie le pourcentage total de pods <code>NotReady</code> sur un noeud par rapport à tous les pods affectés à ce noeud. La vérification d'un noeud spécifique compte comme un échec si le pourcentage total de pods à l'état <code>NotReady</code> est supérieur à la valeur définie pour <code>PodFailureThresholdPercent</code>.
+La vérification dans l'exemple YAML ci-dessus s'exécute toutes les 3 minutes. Si elle échoue consécutivement trois fois, le noeud est rechargé. Cette action est équivalente à la commande <code>bx cs worker-reload</code>. La vérification de pod est activée tant que vous n'affectez pas à la zone <b>Enabled</b> la valeur <code>false</code> ou supprimez la vérification.</td>
+</tr>
+</tbody>
+</table>
 
 
-    <table summary="Description des composants de règles individuelles">
-    <caption>Description des composants de règles individuelles</caption>
-      <thead>
-        <th colspan=2><img src="images/idea.png"/>Description des composants de règles individuelles </th>
-      </thead>
-      <tbody>
-       <tr>
-           <td><code>Check</code></td>
-           <td>Indiquez le type de vérification que le système de reprise automatique doit effectuer. <ul><li><code>HTTP</code> : La reprise automatique appelle les serveur HTTP qui s'exécutent sur chaque noeud afin de déterminer si les noeuds s'exécutent correctement.</li><li><code>KUBEAPI</code> : La reprise automatique appelle le serveur d'API Kubernetes et lit les données d'état de santé renvoyées par les noeuds d'agent.</li></ul></td>
-           </tr>
-       <tr>
-           <td><code>Resource</code></td>
-           <td>Lorsque le type de vérification est <code>KUBEAPI</code>, entrez le type de ressource que le système de reprise automatique doit vérifier. Les valeurs admises sont <code>NODE</code> ou <code>PODS</code>.</td>
-           </tr>
-       <tr>
-           <td><code>FailureThreshold</code></td>
-           <td>Indiquez le seuil du nombre consécutif d'échec de vérification. Lorsque ce seuil est atteint, le système de reprise automatique déclenche la mesure corrective spécifiée. Par exemple, si la valeur de seuil est 3 et qu'une vérification configurée de la reprise automatique échoue trois fois consécutivement, le système de reprise automatique déclenche la mesure corrective associée à la vérification.</td>
-       </tr>
-       <tr>
-           <td><code>PodFailureThresholdPercent</code></td>
-           <td>Lorsque le type de ressource est <code>PODS</code>, indiquez le seuil du pourcentage de pods sur un noeud worker pouvant présenter l'état [NotReady ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes). Ce pourcentage se base sur le nombre total de pods planifiés d'un noeud worker. Lorsqu'une vérification détermine que le pourcentage de pods ayant un mauvais état de santé est supérieur au seuil spécifié, la vérification compte comme un échec.</td>
-           </tr>
-        <tr>
-            <td><code>CorrectiveAction</code></td>
-            <td>Indiquez l'action à exécuter lorsque le seuil d'échec est atteint. Une mesure corrective ne s'exécute que si aucun autre agent ne fait l'objet d'une réparation et si le noeud worker traité n'est pas hors fonction en raison d'une action précédente. <ul><li><code>REBOOT</code> : Réamorce le noeud worker.</li><li><code>RELOAD</code> : Recharge toutes les configurations requises pour le noeud worker à partir d'un système d'exploitation propre.</li></ul></td>
-            </tr>
-        <tr>
-            <td><code>CooloffSeconds</code></td>
-            <td>Indiquez le nombre de secondes que doit attendre la reprise automatique avant de lancer une autre mesure corrective pour un noeud qui a déjà fait l'objet d'une mesure corrective. Le délai d'attente commence au moment où la mesure corrective est émise.</td>
-            </tr>
-        <tr>
-            <td><code>IntervalSeconds</code></td>
-            <td>Indiquez l'intervalle en secondes entre chaque vérification. Par exemple, avec la valeur 180, la reprise automatique exécute une vérification sur chaque noeud toutes les 3 minutes.</td>
-            </tr>
-        <tr>
-            <td><code>TimeoutSeconds</code></td>
-            <td>Indiquez le nombre de secondes que prend un appel de vérification à la base de données avant que la reprise automatique mette fin à l'opération d'appel. La valeur de <code>TimeoutSeconds</code> doit être inférieure à la valeur de <code>IntervalSeconds</code>.</td>
-            </tr>
-        <tr>
-            <td><code>Port</code></td>
-            <td>Lorsque le type de vérification est <code>HTTP</code>, indiquez le port auquel le serveur HTTP doit se lier sur les noeuds d'agent. Ce port doit être exposé sur l'adresse IP de chaque noeud worker du cluster. La reprise automatique a besoin d'un numéro de port constant sur tous les noeuds pour vérifier les serveurs. Utilisez [DaemonSets ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)lors du déploiement d'un serveur personnalisé dans un cluster.</td>
-            </tr>
-        <tr>
-            <td><code>ExpectedStatus</code></td>
-            <td>Lorsque le type de vérification est <code>HTTP</code>, indiquez le statut du serveur HTTP que la vérification doit renvoyer. Par exemple, la valeur 200 indique que vous escomptez une réponse <code>OK</code> du serveur.</td>
-            </tr>
-        <tr>
-            <td><code>Route</code></td>
-            <td>Lorsque le type de vérification est <code>HTTP</code>, indiquez le chemin demandé au serveur HTTP. Cette valeur correspond généralement au chemin des métriques du serveur qui s'exécute sur tous les noeuds d'agent.</td>
-            </tr>
-        <tr>
-            <td><code>Enabled</code></td>
-            <td>Entrez <code>true</code> pour activer la vérification ou <code>false</code> pour la désactiver.</td>
-            </tr>
-      </tbody>
-    </table>
+<table summary="Description des composants de règles individuelles">
+<caption>Description des composants de règles individuelles</caption>
+<thead>
+<th colspan=2><img src="images/idea.png"/>Description des composants de règles individuelles </th>
+</thead>
+<tbody>
+<tr>
+<td><code>Check</code></td>
+<td>Indiquez le type de vérification que le système de reprise automatique doit effectuer. <ul><li><code>HTTP</code> : La reprise automatique appelle les serveur HTTP qui s'exécutent sur chaque noeud afin de déterminer si les noeuds s'exécutent correctement.</li><li><code>KUBEAPI</code> : La reprise automatique appelle le serveur d'API Kubernetes et lit les données d'état de santé renvoyées par les noeuds d'agent.</li></ul></td>
+</tr>
+<tr>
+<td><code>Resource</code></td>
+<td>Lorsque le type de vérification est <code>KUBEAPI</code>, entrez le type de ressource que le système de reprise automatique doit vérifier. Les valeurs admises sont <code>NODE</code> ou <code>PODS</code>.</td>
+</tr>
+<tr>
+<td><code>FailureThreshold</code></td>
+<td>Indiquez le seuil du nombre consécutif d'échec de vérification. Lorsque ce seuil est atteint, le système de reprise automatique déclenche la mesure corrective spécifiée. Par exemple, si la valeur de seuil est 3 et qu'une vérification configurée de la reprise automatique échoue trois fois consécutivement, le système de reprise automatique déclenche la mesure corrective associée à la vérification.</td>
+</tr>
+<tr>
+<td><code>PodFailureThresholdPercent</code></td>
+<td>Lorsque le type de ressource est <code>PODS</code>, indiquez le seuil du pourcentage de pods sur un noeud worker pouvant présenter l'état [NotReady ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes). Ce pourcentage se base sur le nombre total de pods planifiés d'un noeud worker. Lorsqu'une vérification détermine que le pourcentage de pods ayant un mauvais état de santé est supérieur au seuil spécifié, la vérification compte comme un échec.</td>
+</tr>
+<tr>
+<td><code>CorrectiveAction</code></td>
+<td>Indiquez l'action à exécuter lorsque le seuil d'échec est atteint. Une mesure corrective ne s'exécute que si aucun autre agent ne fait l'objet d'une réparation et si le noeud worker traité n'est pas hors fonction en raison d'une action précédente. <ul><li><code>REBOOT</code> : Réamorce le noeud worker.</li><li><code>RELOAD</code> : Recharge toutes les configurations requises pour le noeud worker à partir d'un système d'exploitation propre.</li></ul></td>
+</tr>
+<tr>
+<td><code>CooloffSeconds</code></td>
+<td>Indiquez le nombre de secondes que doit attendre la reprise automatique avant de lancer une autre mesure corrective pour un noeud qui a déjà fait l'objet d'une mesure corrective. Le délai d'attente commence au moment où la mesure corrective est émise.</td>
+</tr>
+<tr>
+<td><code>IntervalSeconds</code></td>
+<td>Indiquez l'intervalle en secondes entre chaque vérification. Par exemple, avec la valeur 180, la reprise automatique exécute une vérification sur chaque noeud toutes les 3 minutes.</td>
+</tr>
+<tr>
+<td><code>TimeoutSeconds</code></td>
+<td>Indiquez le nombre de secondes que prend un appel de vérification à la base de données avant que la reprise automatique mette fin à l'opération d'appel. La valeur de <code>TimeoutSeconds</code> doit être inférieure à la valeur de <code>IntervalSeconds</code>.</td>
+</tr>
+<tr>
+<td><code>Port</code></td>
+<td>Lorsque le type de vérification est <code>HTTP</code>, indiquez le port auquel le serveur HTTP doit se lier sur les noeuds d'agent. Ce port doit être exposé sur l'adresse IP de chaque noeud worker du cluster. La reprise automatique a besoin d'un numéro de port constant sur tous les noeuds pour vérifier les serveurs. Utilisez [DaemonSets ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)lors du déploiement d'un serveur personnalisé dans un cluster.</td>
+</tr>
+<tr>
+<td><code>ExpectedStatus</code></td>
+<td>Lorsque le type de vérification est <code>HTTP</code>, indiquez le statut du serveur HTTP que la vérification doit renvoyer. Par exemple, la valeur 200 indique que vous escomptez une réponse <code>OK</code> du serveur.</td>
+</tr>
+<tr>
+<td><code>Route</code></td>
+<td>Lorsque le type de vérification est <code>HTTP</code>, indiquez le chemin demandé au serveur HTTP. Cette valeur correspond généralement au chemin des métriques du serveur qui s'exécute sur tous les noeuds d'agent.</td>
+</tr>
+<tr>
+<td><code>Enabled</code></td>
+<td>Entrez <code>true</code> pour activer la vérification ou <code>false</code> pour la désactiver.</td>
+</tr>
+</tbody>
+</table>
 
 2. Créez la mappe de configuration dans votre cluster.
 
@@ -690,58 +691,15 @@ Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_in
     ```
     {: pre}
 
-4. Vérifiez que vous avez créé une valeur confidentielle de commande docker pull nommée `international-registry-docker-secret` dans l'espace de nom `kube-system`. La reprise automatique est hébergée dans le registre Docker international de {{site.data.keyword.registryshort_notm}}. Si vous n'avez pas créé de valeur confidentielle de registre Docker contenant des données d'identification valides pour le registre international, créez-en un pour exécuter le système de reprise automatique.
 
-    1. Installez le plug-in {{site.data.keyword.registryshort_notm}}.
-
-        ```
-        bx plugin install container-registry -r Bluemix
-        ```
-        {: pre}
-
-    2. Ciblez le registre international.
-
-        ```
-        bx cr region-set international
-        ```
-        {: pre}
-
-    3. Créez un jeton de registre international.
-
-        ```
-        bx cr token-add --non-expiring --description internationalRegistryToken
-        ```
-        {: pre}
-
-    4. Définissez la variable d'environnement `INTERNATIONAL_REGISTRY_TOKEN` avec le jeton que vous avez créé.
-
-        ```
-        INTERNATIONAL_REGISTRY_TOKEN=$(bx cr token-get $(bx cr tokens | grep internationalRegistryToken | awk '{print $1}') -q)
-        ```
-        {: pre}
-
-    5. Définissez la variable d'environnement `DOCKER_EMAIL` avec l'utilisateur en cours. Votre adresse électronique n'est requise que pour exécuter la commande `kubectl` à l'étape suivante.
-
-        ```
-        DOCKER_EMAIL=$(bx target | grep "User" | awk '{print $2}')
-        ```
-        {: pre}
-
-    6. Créez la valeur confidentielle de la commande docker pull.
-
-        ```
-        kubectl -n kube-system create secret docker-registry international-registry-docker-secret --docker-username=token --docker-password="$INTERNATIONAL_REGISTRY_TOKEN" --docker-server=registry.bluemix.net --docker-email="$DOCKER_EMAIL"
-        ```
-        {: pre}
-
-5. Déployez le système de reprise automatique dans votre cluster en appliquant ce fichier YAML.
+4. Déployez le système de reprise automatique dans votre cluster en appliquant ce fichier YAML.
 
    ```
    kubectl apply -f https://raw.githubusercontent.com/IBM-Bluemix/kube-samples/master/ibm-worker-recovery/ibm-worker-recovery.yml
    ```
    {: pre}
 
-6. A bout de quelques minutes, vous pouvez vérifier la section `Events` dans la sortie de la commande suivante pour visualiser l'activité sur le déploiement du système de reprise automatique.
+5. A bout de quelques minutes, vous pouvez vérifier la section `Events` dans la sortie de la commande suivante pour visualiser l'activité sur le déploiement du système de reprise automatique.
 
     ```
     kubectl -n kube-system describe deployment ibm-worker-recovery

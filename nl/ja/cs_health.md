@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-02"
 
 ---
 
@@ -25,7 +25,7 @@ lastupdated: "2018-01-12"
 ## クラスター・ロギングの構成
 {: #logging}
 
-処理や長期保管のためにログを特定の場所に送信することができます。{{site.data.keyword.containershort_notm}} の Kubernetes クラスターで、クラスターのログ転送を有効にしたり、ログの転送先を選択したりすることができます。 **注**: ログの転送は標準クラスターでのみサポートされています。
+処理や長期保管のためにログを特定の場所に送信することができます。 {{site.data.keyword.containershort_notm}} の Kubernetes クラスターで、クラスターのログ転送を有効にしたり、ログの転送先を選択したりすることができます。 **注**: ログの転送は標準クラスターでのみサポートされています。
 {:shortdesc}
 
 コンテナー、アプリケーション、ワーカー・ノード、Kubernetes クラスター、Ingress コントローラーなどのログ・ソースのログを転送することができます。 それぞれのログ・ソースについては、以下の表を確認してください。
@@ -36,7 +36,7 @@ lastupdated: "2018-01-12"
 |`application`|Kubernetes クラスターで実行される独自のアプリケーションのログ。|`/var/log/apps/**/*.log`、`/var/log/apps/**/*.err`|
 |`worker`|Kubernetes クラスター内の仮想マシン・ワーカー・ノードのログ。|`/var/log/syslog`、`/var/log/auth.log`|
 |`kubernetes`|Kubernetes システム構成要素のログ。|`/var/log/kubelet.log`、`/var/log/kube-proxy.log`|
-|`ingress`|Ingress コントローラーによって管理される、Kubernetes クラスターに送信されるネットワーク・トラフィックを管理するアプリケーション・ロード・バランサーのログ。|`/var/log/alb/ids/*.log`、`/var/log/alb/ids/*.err`、`/var/log/alb/customerlogs/*.log`、`/var/log/alb/customerlogs/*.err`|
+|`ingress`|Kubernetes クラスターに送信されるネットワーク・トラフィックを管理する Ingress アプリケーション・ロード・バランサーのログ。|`/var/log/alb/ids/*.log`、`/var/log/alb/ids/*.err`、`/var/log/alb/customerlogs/*.log`、`/var/log/alb/customerlogs/*.err`|
 {: caption="ログ・ソースの特性" caption-side="top"}
 
 ## ログ転送の有効化
@@ -84,7 +84,7 @@ lastupdated: "2018-01-12"
     </tr>
     <tr>
     <td><code><em>&lt;kubernetes_namespace&gt;</em></code></td>
-    <td><em>&lt;kubernetes_namespace&gt;</em> を、ログの転送元になる Kubernetes 名前空間に置き換えます。ログ転送は、Kubernetes 名前空間 <code>ibm-system</code> と <code>kube-system</code> ではサポートされていません。 この値はコンテナー・ログ・ソースについてのみ有効で、オプションです。 名前空間を指定しないと、クラスター内のすべての名前空間でこの構成が使用されます。</td>
+    <td><em>&lt;kubernetes_namespace&gt;</em> を、ログの転送元になる Kubernetes 名前空間に置き換えます。 ログ転送は、Kubernetes 名前空間 <code>ibm-system</code> と <code>kube-system</code> ではサポートされていません。 この値はコンテナー・ログ・ソースについてのみ有効で、オプションです。 名前空間を指定しないと、クラスター内のすべての名前空間でこの構成が使用されます。</td>
     </tr>
     <tr>
     <td><code>--hostname <em>&lt;ingestion_URL&gt;</em></code></td>
@@ -135,7 +135,7 @@ lastupdated: "2018-01-12"
     </tr>
     <tr>
     <td><code><em>&lt;kubernetes_namespace&gt;</em></code></td>
-    <td><em>&lt;kubernetes_namespace&gt;</em> を、ログの転送元になる Kubernetes 名前空間に置き換えます。ログ転送は、Kubernetes 名前空間 <code>ibm-system</code> と <code>kube-system</code> ではサポートされていません。 この値はコンテナー・ログ・ソースについてのみ有効で、オプションです。 名前空間を指定しないと、クラスター内のすべての名前空間でこの構成が使用されます。</td>
+    <td><em>&lt;kubernetes_namespace&gt;</em> を、ログの転送元になる Kubernetes 名前空間に置き換えます。 ログ転送は、Kubernetes 名前空間 <code>ibm-system</code> と <code>kube-system</code> ではサポートされていません。 この値はコンテナー・ログ・ソースについてのみ有効で、オプションです。 名前空間を指定しないと、クラスター内のすべての名前空間でこの構成が使用されます。</td>
     </tr>
     <tr>
     <td><code>--hostname <em>&lt;log_server_hostname_or_IP&gt;</em></code></td>
@@ -372,7 +372,7 @@ Kubernetes API 監査ログは、クラスターから Kubernetes API サーバ�
 
 開始前に、以下のことを行います。
 
-1. ログを転送できるリモート・ロギング・サーバーをセットアップします。例えば、[Logstash と Kubernetes を使用して ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/#use-logstash-to-collect-and-distribute-audit-events-from-webhook-backend)、監査イベントを収集できます。
+1. ログを転送できるリモート・ロギング・サーバーをセットアップします。 例えば、[Logstash と Kubernetes を使用して ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/#use-logstash-to-collect-and-distribute-audit-events-from-webhook-backend)、監査イベントを収集できます。
 
 2. [CLI のターゲット](cs_cli_install.html#cs_cli_configure)を、API サーバー監査ログの収集対象となるクラスターに設定します。
 
@@ -481,7 +481,8 @@ Kubernetes API 監査ログを転送するには、以下のようにします�
 
 Kibana ダッシュボードにアクセスするには、以下のいずれかの URL にアクセスし、クラスターを作成した {{site.data.keyword.Bluemix_notm}} アカウントまたはスペースを選択します。
 - 米国南部および米国東部: https://logging.ng.bluemix.net
-- 英国南部および中欧: https://logging.eu-fra.bluemix.net
+- 英国南部: https://logging.eu-gb.bluemix.net
+- EU 中央: https://logging.eu-fra.bluemix.net
 - 南アジア太平洋地域: https://logging.au-syd.bluemix.net
 
 ログの表示について詳しくは、[Web ブラウザーから Kibana へのナビゲート](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser)を参照してください。
@@ -583,96 +584,96 @@ Kubernetes と Docker の標準機能を使用して、クラスターとアプ�
     {:codeblock}
 
 
-    <table summary="構成マップの構成要素について">
-    <caption>構成マップの構成要素について</caption>
-      <thead>
-        <th colspan=2><img src="images/idea.png"/>構成マップの構成要素について</th>
-      </thead>
-      <tbody>
-       <tr>
-          <td><code>name</code></td>
-          <td>構成名 <code>ibm-worker-recovery-checks</code> は定数であり、変更することはできません。</td>
-       </tr>
-       <tr>
-          <td><code>namespace</code></td>
-          <td><code>kube-system</code> 名前空間は定数であり、変更することはできません。</td>
-       </tr>
-      <tr>
-          <td><code>checkhttp.json</code></td>
-          <td>HTTP 検査を定義します。この検査では、HTTP サーバーがポート 80 上の各ノードの IP アドレスで稼働していることを検査して、パス <code>/myhealth</code> に 200 応答を返します。<code>kubectl get nodes</code> を実行することにより、ノードの IP アドレスを検索できます。
-               例えば、IP アドレスが 10.10.10.1 および 10.10.10.2 である 2 つのノードがクラスターにあるとします。この例では、<code>http://10.10.10.1:80/myhealth</code> および <code>http://10.10.10.2:80/myhealth</code> の 2 つの経路で、200 OK の応答の検査が行われます。
-               上記のサンプル YAML では、検査が 3 分ごとに実行されます。連続して 3 回失敗すると、ノードはリブートされます。この操作は、<code>bx cs worker-reboot</code> を実行することと同等です。<b>「有効」</b>フィールドを <code>true</code> に設定するまで、HTTP 検査は無効になります。</td>
-        </tr>
-        <tr>
-          <td><code>checknode.json</code></td>
-          <td>各ノードが <code>Ready</code> 状態であるかどうかを検査する Kubernetes API ノード検査を定義します。特定のノードが <code>Ready</code> 状態でない場合、そのノードの検査結果は失敗となります。
-               上記のサンプル YAML では、検査が 3 分ごとに実行されます。連続して 3 回失敗すると、ノードは再ロードされます。この操作は、<code>bx cs worker-reload</code> を実行することと同等です。<b>「有効」</b>フィールドを <code>false</code> に設定するか、または検査を除去するまで、ノード検査は有効になります。</td>
-        </tr>
-        <tr>
-          <td><code>checkpod.json</code></td>
-          <td>ノード上の <code>NotReady</code> ポッドの合計パーセンテージを、そのノードに割り当てられた合計ポッド数に基づいて検査する、Kubernetes API ポッド検査を定義します。<code>NotReady</code> ポッドの合計パーセンテージが、定義済みの <code>PodFailureThresholdPercent</code> より大きい場合、そのノードの検査結果は失敗となります。
-               上記のサンプル YAML では、検査が 3 分ごとに実行されます。連続して 3 回失敗すると、ノードは再ロードされます。この操作は、<code>bx cs worker-reload</code> を実行することと同等です。<b>「有効」</b>フィールドを <code>false</code> に設定するか、または検査を除去するまで、ポッド検査は有効になります。</td>
-        </tr>
-      </tbody>
-    </table>
+<table summary="構成マップの構成要素について">
+<caption>構成マップの構成要素について</caption>
+<thead>
+<th colspan=2><img src="images/idea.png"/>構成マップの構成要素について</th>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>構成名 <code>ibm-worker-recovery-checks</code> は定数であり、変更することはできません。</td>
+</tr>
+<tr>
+<td><code>namespace</code></td>
+<td><code>kube-system</code> 名前空間は定数であり、変更することはできません。</td>
+</tr>
+<tr>
+<td><code>checkhttp.json</code></td>
+<td>HTTP 検査を定義します。この検査では、HTTP サーバーがポート 80 上の各ノードの IP アドレスで稼働していることを検査して、パス <code>/myhealth</code> に 200 応答を返します。 <code>kubectl get nodes</code> を実行することにより、ノードの IP アドレスを検索できます。
+例えば、IP アドレスが 10.10.10.1 および 10.10.10.2 である 2 つのノードがクラスターにあるとします。 この例では、<code>http://10.10.10.1:80/myhealth</code> および <code>http://10.10.10.2:80/myhealth</code>  の 2 つの経路で、200 OK の応答の検査が行われます。
+上記のサンプル YAML では、検査が 3 分ごとに実行されます。 連続して 3 回失敗すると、ノードはリブートされます。 この操作は、<code>bx cs worker-reboot</code> を実行することと同等です。 <b>「有効」</b>フィールドを <code>true</code> に設定するまで、HTTP 検査は無効になります。</td>
+</tr>
+<tr>
+<td><code>checknode.json</code></td>
+<td>各ノードが <code>Ready</code> 状態であるかどうかを検査する Kubernetes API ノード検査を定義します。 特定のノードが<code>Ready</code> 状態でない場合、そのノードの検査結果は失敗となります。
+上記のサンプル YAML では、検査が 3 分ごとに実行されます。 連続して 3 回失敗すると、ノードは再ロードされます。 この操作は、<code>bx cs worker-reload</code> を実行することと同等です。 <b>「有効」</b>フィールドを <code>false</code> に設定するか、または検査を除去するまで、ノード検査は有効になります。</td>
+</tr>
+<tr>
+<td><code>checkpod.json</code></td>
+<td>ノード上の <code>NotReady</code> ポッドの合計パーセンテージを、そのノードに割り当てられた合計ポッド数に基づいて検査する、Kubernetes API ポッド検査を定義します。 <code>NotReady</code> ポッドの合計パーセンテージが、定義済みの <code>PodFailureThresholdPercent</code> より大きい場合、そのノードの検査結果は失敗となります。
+上記のサンプル YAML では、検査が 3 分ごとに実行されます。 連続して 3 回失敗すると、ノードは再ロードされます。 この操作は、<code>bx cs worker-reload</code> を実行することと同等です。 <b>「有効」</b>フィールドを <code>false</code> に設定するか、または検査を除去するまで、ポッド検査は有効になります。</td>
+</tr>
+</tbody>
+</table>
 
 
-    <table summary="個別のルールの構成要素について">
-    <caption>個別のルールの構成要素について</caption>
-      <thead>
-        <th colspan=2><img src="images/idea.png"/>個別のルールの構成要素について</th>
-      </thead>
-      <tbody>
-       <tr>
-           <td><code>Check</code></td>
-           <td>Autorecovery で使用する検査のタイプを入力します。 <ul><li><code>HTTP</code>: Autorecovery は、各ノードで稼働する HTTP サーバーを呼び出して、ノードが正常に稼働しているかどうかを判別します。</li><li><code>KUBEAPI</code>: Autorecovery は、Kubernetes API サーバーを呼び出し、ワーカー・ノードによって報告された正常性状況データを読み取ります。</li></ul></td>
-           </tr>
-       <tr>
-           <td><code>リソース</code></td>
-           <td>検査タイプが <code>KUBEAPI</code> である場合は、Autorecovery で検査するリソースのタイプを入力します。 受け入れられる値は <code>NODE</code> または <code>PODS</code> です。</td>
-           </tr>
-       <tr>
-           <td><code>FailureThreshold</code></td>
-           <td>検査の連続失敗数のしきい値を入力します。 このしきい値に達すると、Autorecovery が、指定された修正アクションをトリガーします。 例えば、値が 3 である場合に、Autorecovery で構成された検査が 3 回連続して失敗すると、Autorecovery は検査に関連付けられている修正アクションをトリガーします。</td>
-       </tr>
-       <tr>
-           <td><code>PodFailureThresholdPercent</code></td>
-           <td>リソース・タイプが <code>PODS</code> である場合は、[NotReady ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes) 状態になることができるワーカー・ノード上のポッドのしきい値 (パーセンテージ) を入力します。 このパーセンテージは、ワーカー・ノードにスケジュールされているポッドの合計数に基づきます。 検査の結果、正常でないポッドのパーセンテージがしきい値を超えていることが判別されると、1 回の失敗としてカウントされます。</td>
-           </tr>
-        <tr>
-            <td><code>CorrectiveAction</code></td>
-            <td>失敗しきい値に達したときに実行するアクションを入力します。 修正アクションは、他のワーカーが修復されておらず、しかもこのワーカー・ノードが以前のアクション実行時のクールオフ期間にないときにのみ実行されます。 <ul><li><code>REBOOT</code>: ワーカー・ノードをリブートします。</li><li><code>RELOAD</code>: ワーカー・ノードに必要な構成をすべて、クリーンな OS から再ロードします。</li></ul></td>
-            </tr>
-        <tr>
-            <td><code>CooloffSeconds</code></td>
-            <td>既に修正アクションが実行されたノードに対して別の修正アクションを実行するために Autorecovery が待機する必要がある秒数を入力します。 クールオフ期間は、修正アクションが実行された時点から始まります。</td>
-            </tr>
-        <tr>
-            <td><code>IntervalSeconds</code></td>
-            <td>連続する検査の間隔の秒数を入力します。 例えば、値が 180 である場合、Autorecovery は 3 分ごとに各ノードで検査を実行します。</td>
-            </tr>
-        <tr>
-            <td><code>TimeoutSeconds</code></td>
-            <td>データベースに対する検査の呼び出しの最大秒数を入力します。この秒数が経過すると、Autorecovery は呼び出し動作を終了します。 <code>TimeoutSeconds</code> の値は、<code>IntervalSeconds</code> の値より小さくする必要があります。</td>
-            </tr>
-        <tr>
-            <td><code>ポート</code></td>
-            <td>検査タイプが <code>HTTP</code> である場合は、HTTP サーバーがワーカー・ノードにバインドする必要があるポートを入力します。 このポートは、クラスター内のすべてのワーカー・ノードの IP で公開されている必要があります。 Autorecovery がサーバーを検査するためには、すべてのノードで一定のポート番号を使用する必要があります。 カスタム・サーバーをクラスターにデプロイする場合は、[DaemonSets ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) を使用します。</td>
-            </tr>
-        <tr>
-            <td><code>ExpectedStatus</code></td>
-            <td>検査タイプが <code>HTTP</code> である場合は、検査で返されることが予期される HTTP サーバー状況を入力します。 例えば、値 200 は、サーバーからの応答として <code>OK</code> を予期していることを示します。</td>
-            </tr>
-        <tr>
-            <td><code>Route</code></td>
-            <td>検査タイプが <code>HTTP</code> である場合は、HTTP サーバーから要求されたパスを入力します。 この値は通常、すべてのワーカー・ノードで実行されているサーバーのメトリック・パスです。</td>
-            </tr>
-        <tr>
-            <td><code>Enabled</code></td>
-            <td>検査を有効にするには <code>true</code>、検査を無効にするには <code>false</code> を入力します。</td>
-            </tr>
-      </tbody>
-    </table>
+<table summary="個別のルールの構成要素について">
+<caption>個別のルールの構成要素について</caption>
+<thead>
+<th colspan=2><img src="images/idea.png"/>個別のルールの構成要素について </th>
+</thead>
+<tbody>
+<tr>
+<td><code>Check</code></td>
+<td>Autorecovery で使用する検査のタイプを入力します。 <ul><li><code>HTTP</code>: Autorecovery は、各ノードで稼働する HTTP サーバーを呼び出して、ノードが正常に稼働しているかどうかを判別します。</li><li><code>KUBEAPI</code>: Autorecovery は、Kubernetes API サーバーを呼び出し、ワーカー・ノードによって報告された正常性状況データを読み取ります。</li></ul></td>
+</tr>
+<tr>
+<td><code>リソース</code></td>
+<td>検査タイプが <code>KUBEAPI</code> である場合は、Autorecovery で検査するリソースのタイプを入力します。 受け入れられる値は <code>NODE</code> または <code>PODS</code> です。</td>
+</tr>
+<tr>
+<td><code>FailureThreshold</code></td>
+<td>検査の連続失敗数のしきい値を入力します。 このしきい値に達すると、Autorecovery が、指定された修正アクションをトリガーします。 例えば、値が 3 である場合に、Autorecovery で構成された検査が 3 回連続して失敗すると、Autorecovery は検査に関連付けられている修正アクションをトリガーします。</td>
+</tr>
+<tr>
+<td><code>PodFailureThresholdPercent</code></td>
+<td>リソース・タイプが <code>PODS</code> である場合は、[NotReady ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes) 状態になることができるワーカー・ノード上のポッドのしきい値 (パーセンテージ) を入力します。 このパーセンテージは、ワーカー・ノードにスケジュールされているポッドの合計数に基づきます。 検査の結果、正常でないポッドのパーセンテージがしきい値を超えていることが判別されると、1 回の失敗としてカウントされます。</td>
+</tr>
+<tr>
+<td><code>CorrectiveAction</code></td>
+<td>失敗しきい値に達したときに実行するアクションを入力します。 修正アクションは、他のワーカーが修復されておらず、しかもこのワーカー・ノードが以前のアクション実行時のクールオフ期間にないときにのみ実行されます。 <ul><li><code>REBOOT</code>: ワーカー・ノードをリブートします。</li><li><code>RELOAD</code>: ワーカー・ノードに必要な構成をすべて、クリーンな OS から再ロードします。</li></ul></td>
+</tr>
+<tr>
+<td><code>CooloffSeconds</code></td>
+<td>既に修正アクションが実行されたノードに対して別の修正アクションを実行するために Autorecovery が待機する必要がある秒数を入力します。 クールオフ期間は、修正アクションが実行された時点から始まります。</td>
+</tr>
+<tr>
+<td><code>IntervalSeconds</code></td>
+<td>連続する検査の間隔の秒数を入力します。 例えば、値が 180 である場合、Autorecovery は 3 分ごとに各ノードで検査を実行します。</td>
+</tr>
+<tr>
+<td><code>TimeoutSeconds</code></td>
+<td>データベースに対する検査の呼び出しの最大秒数を入力します。この秒数が経過すると、Autorecovery は呼び出し動作を終了します。 <code>TimeoutSeconds</code> の値は、<code>IntervalSeconds</code> の値より小さくする必要があります。</td>
+</tr>
+<tr>
+<td><code>ポート</code></td>
+<td>検査タイプが <code>HTTP</code> である場合は、HTTP サーバーがワーカー・ノードにバインドする必要があるポートを入力します。 このポートは、クラスター内のすべてのワーカー・ノードの IP で公開されている必要があります。 Autorecovery がサーバーを検査するためには、すべてのノードで一定のポート番号を使用する必要があります。 カスタム・サーバーをクラスターにデプロイする場合は、[DaemonSets ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) を使用します。</td>
+</tr>
+<tr>
+<td><code>ExpectedStatus</code></td>
+<td>検査タイプが <code>HTTP</code> である場合は、検査で返されることが予期される HTTP サーバー状況を入力します。 例えば、値 200 は、サーバーからの応答として <code>OK</code> を予期していることを示します。</td>
+</tr>
+<tr>
+<td><code>Route</code></td>
+<td>検査タイプが <code>HTTP</code> である場合は、HTTP サーバーから要求されたパスを入力します。 この値は通常、すべてのワーカー・ノードで実行されているサーバーのメトリック・パスです。</td>
+</tr>
+<tr>
+<td><code>Enabled</code></td>
+<td>検査を有効にするには <code>true</code>、検査を無効にするには <code>false</code> を入力します。</td>
+</tr>
+</tbody>
+</table>
 
 2. クラスター内に構成マップを作成します。
 
@@ -688,58 +689,15 @@ Kubernetes と Docker の標準機能を使用して、クラスターとアプ�
     ```
     {: pre}
 
-4. `kube-system` 名前空間内に `international-registry-docker-secret` という名前の Docker プル・シークレットが作成されていることを確認します。 Autorecovery は、{{site.data.keyword.registryshort_notm}} の Docker 国際レジストリーでホストされています。 国際レジストリーの有効な資格情報を格納する Docker レジストリー・シークレットを作成していない場合は、Autorecovery システムを実行するためにそれを作成します。
 
-    1. {{site.data.keyword.registryshort_notm}} プラグインをインストールします。
-
-        ```
-        bx plugin install container-registry -r Bluemix
-        ```
-        {: pre}
-
-    2. ターゲットとして国際レジストリーを設定します。
-
-        ```
-        bx cr region-set international
-        ```
-        {: pre}
-
-    3. 国際レジストリー・トークンを作成します。
-
-        ```
-        bx cr token-add --non-expiring --description internationalRegistryToken
-        ```
-        {: pre}
-
-    4. `INTERNATIONAL_REGISTRY_TOKEN` 環境変数を、作成したトークンに設定します。
-
-        ```
-        INTERNATIONAL_REGISTRY_TOKEN=$(bx cr token-get $(bx cr tokens | grep internationalRegistryToken | awk '{print $1}') -q)
-        ```
-        {: pre}
-
-    5. `DOCKER_EMAIL` 環境変数を現行ユーザーに設定します。 E メール・アドレスは、次のステップで `kubectl` コマンドを実行する場合にのみ必要です。
-
-        ```
-        DOCKER_EMAIL=$(bx target | grep "User" | awk '{print $2}')
-        ```
-        {: pre}
-
-    6. Docker プル・シークレットを作成します。
-
-        ```
-        kubectl -n kube-system create secret docker-registry international-registry-docker-secret --docker-username=token --docker-password="$INTERNATIONAL_REGISTRY_TOKEN" --docker-server=registry.bluemix.net --docker-email="$DOCKER_EMAIL"
-        ```
-        {: pre}
-
-5. この YAML ファイルを適用することによって、Autorecovery をクラスターにデプロイします。
+4. この YAML ファイルを適用することによって、Autorecovery をクラスターにデプロイします。
 
    ```
    kubectl apply -f https://raw.githubusercontent.com/IBM-Bluemix/kube-samples/master/ibm-worker-recovery/ibm-worker-recovery.yml
    ```
    {: pre}
 
-6. 数分後に、次のコマンドの出力にある `Events` セクションを確認して、Autorecovery のデプロイメントのアクティビティーを確認できます。
+5. 数分後に、次のコマンドの出力にある `Events` セクションを確認して、Autorecovery のデプロイメントのアクティビティーを確認できます。
 
     ```
     kubectl -n kube-system describe deployment ibm-worker-recovery

@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-18"
+lastupdated: "2018-02-05"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -23,7 +23,7 @@ lastupdated: "2017-12-18"
 
 {:shortdesc}
 
-在本教程中，您可以查看如何为简单的模拟书店应用程序“BookInfo”安装 Istio 以及四个微服务。微服务包括产品 Web 页面、书籍详细信息、评论和评级。将 BookInfo 的微服务部署到安装了 Istio 的 {{site.data.keyword.containershort}} 集群时，会在每个微服务的 pod 中注入 Istio Envoecar Sidecar。
+在本教程中，您可以查看如何为简单的模拟书店应用程序“BookInfo”安装 Istio 以及四个微服务。微服务包括产品 Web 页面、书籍详细信息、评论和评级。将 BookInfo 的微服务部署到安装了 Istio 的 {{site.data.keyword.containershort}} 集群时，会在每个微服务的 pod 中注入 Istio Envoecar sidecar 代理。
 
 **注**：Istio 平台的一些配置和功能仍在开发中，可能会根据用户反馈而更改。请等待几个月，稳定后再在生产中使用 Istio。 
 
@@ -31,7 +31,7 @@ lastupdated: "2017-12-18"
 
 -   在集群中下载并安装 Istio
 -   部署 BookInfo 样本应用程序
--   将 Envoy Sidecar 代理注入到应用程序四个微型服务的 pod 中，以连接服务网中的微服务
+-   将 Envoy sidecar 代理注入到应用程序四个微型服务的 pod 中，以连接服务网中的微服务
 -   通过评级服务的三个版本来验证 BookInfo 应用程序部署和循环
 
 ## 所需时间
@@ -83,9 +83,9 @@ lastupdated: "2017-12-18"
    ```
    {: pre}
 
-   **注**：如果需要在 Sidecar 之间启用相互 TLS 认证，那么可以改为安装 `istio-auth` 文件：`kubectl apply -f install/kubernetes/istio-auth.yaml`
+   **注**：如果需要在 sidecar 之间启用相互 TLS 认证，那么可以改为安装 `istio-auth` 文件：`kubectl apply -f install/kubernetes/istio-auth.yaml`
 
-6. 在继续执行操作之前，请确保已完全部署 Kubernetes 服务 `istio-pilot`、`istio-mixer` 和 `istio-ingress`。
+6. 在继续之前，请确保已完全部署 Kubernetes 服务 `istio-pilot`、`istio-mixer` 和 `istio-ingress`。
 
    ```
    kubectl get svc -n istio-system
@@ -124,9 +124,9 @@ lastupdated: "2017-12-18"
 
 将 BookInfo 样本应用程序的微服务部署到 Kubernetes 集群。这四个微服务包括产品 Web 页面、书籍详细信息、评论（具有多个版本的评论微服务）和评级。您可以在 Istio 安装的 `samples/bookinfo` 目录中找到本示例中使用的所有文件。
 
-部署 BookInfo 时，在部署微服务 pod 之前，Envoy Sidecar 代理会作为容器注入到应用程序微服务的 pod 中。Istio 使用 Envoy 代理的扩展版本来调解服务网中所有微服务的所有入站和出站流量。有关 Envoy 的更多信息，请参阅 [Istio 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/docs/concepts/what-is-istio/overview.html#envoy)。
+部署 BookInfo 时，在部署微服务 pod 之前，Envoy sidecar 代理会作为容器注入到应用程序微服务的 pod 中。Istio 使用 Envoy 代理的扩展版本来调解服务网中所有微服务的所有入站和出站流量。有关 Envoy 的更多信息，请参阅 [Istio 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/docs/concepts/what-is-istio/overview.html#envoy)。
 
-1. 部署 BookInfo 应用程序。`kube-inject` 命令将 Envoy 添加到 `bookinfo.yaml` 文件，并使用此更新的文件来部署应用程序。当应用程序微服务部署时，每个微服务 pod 中也会部署 Envoy Sidecar。
+1. 部署 BookInfo 应用程序。`kube-inject` 命令将 Envoy 添加到 `bookinfo.yaml` 文件，并使用此更新的文件来部署应用程序。当应用程序微服务部署时，每个微服务 pod 中也会部署 Envoy sidecar。
 
    ```
    kubectl apply -f <(istioctl kube-inject -f samples/bookinfo/kube/bookinfo.yaml)
@@ -190,7 +190,7 @@ lastupdated: "2017-12-18"
        ```
        {: pre}
 
-    * 如果您使用的是 Lite 集群，那么必须使用工作程序节点和 NodePort 的公共 IP。运行以下命令，以获取工作程序节点的公共 IP：
+    * 如果您使用的是免费集群，那么必须使用工作程序节点的公共 IP 和 NodePort。运行以下命令，以获取工作程序节点的公共 IP：
 
        ```
        bx cs workers <cluster_name_or_ID>
@@ -215,7 +215,7 @@ lastupdated: "2017-12-18"
 
 6. 尝试多次刷新该页面。不同版本的评论部分会以红色星星、黑色星星和无星星进行循环。
 
-祝贺您！您已成功部署了带有 Istio Envoy Sidecar 的 BookInfo 样本应用程序。接下来，您可以清除资源或继续使用更多教程来进一步探索 Istio 功能。
+祝贺您！您已成功部署了使用 Istio Envoy sidecar 的 BookInfo 样本应用程序。接下来，您可以清除资源或继续使用更多教程来进一步探索 Istio 功能。
 
 ## 清除
 {: #istio_tutorial_cleanup}
@@ -241,6 +241,6 @@ lastupdated: "2017-12-18"
 
 要进一步探索 Istio 功能，您可以在 [Istio 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/) 中找到更多指南。
 
-* [智能路由 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/docs/guides/intelligent-routing.html)：此示例显示如何使用 Istio 的各种交通管理功能和 BookInfo，将流量路由至特定版本的评论和评级微服务中。
+* [智能路由 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/docs/guides/intelligent-routing.html)：此示例显示如何使用 Istio 的各种流量管理功能，将流量路由到特定版本 BookInfo 的评论和评级微服务中。
 
-* [深入遥测 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/docs/guides/telemetry.html)：此示例说明如何使用 Istio Mixer 和 Envoy 代理跨 BookInfo 微服务获取统一度量值、日志和跟踪。
+* [深入遥测 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/docs/guides/telemetry.html)：此示例显示如何使用 Istio Mixer 和 Envoy 代理跨 BookInfo 微服务获取统一度量值、日志和跟踪。

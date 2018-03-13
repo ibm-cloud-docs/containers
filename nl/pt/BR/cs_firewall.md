@@ -169,7 +169,7 @@ Antes de iniciar, permita acesso aos comandos [`bx` ](#firewall_bx) e aos comand
 ## Permitindo o cluster para acessar recursos de infraestrutura e outros serviços
 {: #firewall_outbound}
 
-Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de um firewall, como para regiões do {{.site.data.keyword.containershort_notm}}, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IPs privados de infraestrutura do IBM Cloud (SoftLayer) e egresso para solicitações de volume persistente.
+Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de um firewall, como para regiões do {{site.data.keyword.containershort_notm}}, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IPs privados de infraestrutura do IBM Cloud (SoftLayer) e egresso para solicitações de volume persistente.
 {:shortdesc}
 
   1.  Observe o endereço IP público para todos os nós do trabalhador no cluster.
@@ -191,8 +191,8 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
     <tbody>
       <tr>
         <td>AP Norte</td>
-        <td>hkg02<br>sng01<br>tok02</td>
-        <td><code>169.56.132.234</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
+        <td>hkg02<br>seo01<br>sng01<br>tok02</td>
+        <td><code>169.56.132.234</code><br><code>161.202.126.210</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
        </tr>
       <tr>
          <td>AP Sul</td>
@@ -211,13 +211,13 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
       </tr>
       <tr>
         <td>Leste dos EUA</td>
-         <td><ph class="mon">mon01<br></ph>tor01<br>wdc06<br>wdc07</td>
-         <td><ph class ="mon"><code>169.54.126.219</code><br></ph><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
+         <td>mon01<br>tor01<br>wdc06<br>wdc07</td>
+         <td><code>169.54.126.219</code><br><code>169.53.167.50</code><br><code>169.60.73.142</code><br><code>169.61.83.62</code></td>
       </tr>
       <tr>
         <td>SUL dos EUA</td>
-        <td>dal10<br>dal12<br>dal13</td>
-        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code></td>
+        <td>dal10<br>dal12<br>dal13<br>sao01</td>
+        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>169.57.151.10</code></td>
       </tr>
       </tbody>
     </table>
@@ -225,7 +225,7 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
 
   3.  Permita o tráfego de rede de saída dos nós do trabalhador para [regiões do {{site.data.keyword.registrylong_notm}}](/docs/services/Registry/registry_overview.html#registry_regions):
       - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
-      - Substitua <em>&lt;registry_publicIP&gt;</em> pelos endereços IP de registro para os quais você deseja permitir o tráfego. O registro internacional armazena imagens públicas fornecidas pela IBM e os registros regionais armazenam suas próprias imagens privadas ou públicas.
+      - Substitua <em>&lt;registry_publicIP&gt;</em> pelos endereços IP de registro para os quais você deseja permitir o tráfego. O registro global armazena imagens públicas fornecidas pela IBM e os registros regionais armazenam suas próprias imagens privadas ou públicas.
         <p>
 <table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
       <thead>
@@ -235,7 +235,7 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
       </thead>
       <tbody>
         <tr>
-          <td>Registro internacional entre regiões do contêiner</td>
+          <td>Registro global em regiões do contêiner</td>
           <td>registry.bluemix.net</td>
           <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
         </tr>
@@ -307,7 +307,12 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
             <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
            </tr>
           <tr>
-           <td>UE Central, Sul do Reino Unido</td>
+           <td>Sul do Reino Unido</td>
+           <td>ingest.logging.eu-gb.bluemix.net</td>
+           <td><code>169.50.115.113</code></td>
+          </tr>
+          <tr>
+           <td>União Europeia Central</td>
            <td>ingest-eu-fra.logging.bluemix.net</td>
            <td><code>158.177.88.43</code><br><code>159.122.87.107</code></td>
           </tr>

@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-13"
+lastupdated: "2017-01-29"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -52,17 +52,16 @@ lastupdated: "2017-12-13"
 -  従量課金 (PAYG) またはサブスクリプションの [{{site.data.keyword.Bluemix_notm}} アカウント ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/registration/)
 
 
-
-
 ## レッスン 1: クラスターを作成して CLI をセットアップする
 {: #cs_cluster_tutorial_lesson1}
 
-GUI 内にクラスターを作成して必要な CLI をインストールします。 このチュートリアルでは、クラスターを英国南部地域に作成します。
+GUI 内にクラスターを作成して必要な CLI をインストールします。
+{: shortdesc}
 
 
 クラスターを作成するには、以下のようにします。
 
-1. クラスターがプロビジョンされるまで数分かかることがあります。 時間を有効に使うために、CLI をインストールする前に[クラスターを作成します ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/containers-kubernetes/launch?env_id=ibm:yp:united-kingdom)。 ライト・クラスターでは、コンテナー・ポッドをデプロイするための 1 つのワーカー・ノードが提供されます。 ワーカー・ノードは、アプリを実行するコンピュート・ホストで、通常は仮想マシンです。
+1. クラスターがプロビジョンされるまで数分かかることがあります。 時間を有効に使うために、CLI をインストールする前に [GUI でクラスターを作成 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/containers-kubernetes/launch?env_id=ibm:yp:united-kingdom) します。このチュートリアルでは、クラスターを米国東部地域に作成します。
 
 
 CLI でクラスターを管理するために、以下の CLI とその前提条件が使用されます。
@@ -73,7 +72,7 @@ CLI でクラスターを管理するために、以下の CLI とその前提�
 -   Docker CLI
 
 </br>
-CLI をインストールするには、以下のことを行います。
+CLI とその前提条件をインストールするには、以下のようにします。
 
 1.  {{site.data.keyword.containershort_notm}} プラグインの前提条件として、[{{site.data.keyword.Bluemix_notm}} CLI ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://clis.ng.bluemix.net/ui/home.html) をインストールします。 {{site.data.keyword.Bluemix_notm}} CLI コマンドを実行するには、接頭部 `bx` を使用します。
 2.  プロンプトに従ってアカウントと {{site.data.keyword.Bluemix_notm}} 組織を選択します。 クラスターはアカウントに固有のものですが、{{site.data.keyword.Bluemix_notm}} 組織またはスペースからは独立しています。
@@ -86,7 +85,7 @@ CLI をインストールするには、以下のことを行います。
     {: pre}
 
 5.  Kubernetes ダッシュボードのローカル・バージョンを表示して、アプリをクラスター内にデプロイするには、[Kubernetes CLI をインストールします![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。 Kubernetes CLI を使用してコマンドを実行するには、接頭部 `kubectl` を使用します。
-    1.  機能の完全な互換性を確保するには、使用する予定の Kubernetes クラスター・バージョンと一致する Kubernetes CLI バージョンをダウンロードします。 現在の {{site.data.keyword.containershort_notm}} のデフォルト Kubernetes バージョンは 1.7.4 です。
+    1.  機能の完全な互換性を確保するには、使用する予定の Kubernetes クラスター・バージョンと一致する Kubernetes CLI バージョンをダウンロードします。 現在の {{site.data.keyword.containershort_notm}} のデフォルト Kubernetes バージョンは 1.8.6 です。
 
         OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
 
@@ -139,12 +138,11 @@ CLI をインストールするには、以下のことを行います。
     ```
     {: pre}
 
-7. ローカルにイメージを作成して、それらをプライベート・イメージ・リポジトリーにプッシュするには、[Docker CE CLI をインストールします![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.docker.com/community-edition#/download)。 Windows 8 以前を使用している場合、代わりに [Docker Toolbox ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.docker.com/products/docker-toolbox) をインストールしてください。
+7. ローカルにイメージを作成して、それらをプライベート・イメージ・リポジトリーにプッシュするには、[Docker CE CLI をインストールします![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.docker.com/community-edition#/download)。 Windows 8 以前を使用している場合、代わりに [Docker Toolbox ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/toolbox/toolbox_install_windows/) をインストールしてください。
 
 これで完了です。 CLI のインストールを正常に行うことができたので、次のレッスンとチュートリアルに進むことができます。 次に、クラスター環境をセットアップして {{site.data.keyword.toneanalyzershort}} サービスを追加します。
 
-
-## レッスン 2: クラスター環境をセットアップする
+## レッスン 2: プライベート・レジストリーをセットアップする
 {: #cs_cluster_tutorial_lesson2}
 
 {{site.data.keyword.registryshort_notm}} でプライベート・イメージ・リポジトリーをセットアップし、シークレットをクラスターに追加して、アプリが {{site.data.keyword.toneanalyzershort}} サービスにアクセスできるようにします。
@@ -160,7 +158,7 @@ CLI をインストールするには、以下のことを行います。
 
 2.  独自のプライベート・イメージ・リポジトリーを {{site.data.keyword.registryshort_notm}} にセットアップすることによって、Docker イメージを安全に保管し、すべてのクラスター・ユーザーと共有します。 {{site.data.keyword.Bluemix_notm}} 内のプライベート・イメージ・リポジトリーは、名前空間によって識別されます。 イメージ・リポジトリーの固有の URL を作成するために名前空間が使用されます。開発者はこれを使用してプライベート Dockerイメージにアクセスできます。
 
-    この例で PR 会社はイメージ・リポジトリーを {{site.data.keyword.registryshort_notm}} に 1 つだけを作成するので、アカウント内のすべてのイメージをグループする名前空間として _pr_firm_ を選択します。 _&lt;your_namespace&gt;_ を任意の名前空間に置き換えてください。チュートリアルに関係する名前空間にする必要はありません。
+    この例で PR 会社はイメージ・リポジトリーを {{site.data.keyword.registryshort_notm}} に 1 つだけを作成するので、アカウント内のすべてのイメージをグループする名前空間として _pr_firm_ を選択します。 _&lt;your_namespace&gt;_ を、このチュートリアルに関係のない任意の名前空間に置き換えてください。
 
     ```
     bx cr namespace-add <your_namespace>
@@ -174,7 +172,7 @@ CLI をインストールするには、以下のことを行います。
     ```
      {: pre}
 
-    ワーカー・ノードのプロビジョニングが完了すると、状況が **Ready** に変わり、今後のチュートリアルで使用する {{site.data.keyword.Bluemix_notm}} サービスのバインドを開始できます。
+    ワーカー・ノードのプロビジョニングが終了すると、状況が **Ready** に変わり、{{site.data.keyword.Bluemix_notm}} サービスのバインドを開始できます。
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status
@@ -182,86 +180,93 @@ CLI をインストールするには、以下のことを行います。
     ```
     {: screen}
 
-4.  CLI でクラスターのコンテキストを設定します。 クラスターの作業を行うためにコンテナー CLI にログインするたびに、これらのコマンドを実行して、クラスターの構成ファイルのパスをセッション変数として設定する必要があります。 Kubernetes CLI はこの変数を使用して、{{site.data.keyword.Bluemix_notm}} 内のクラスターと接続するために必要なローカル構成ファイルと証明書を検索します。
+## レッスン 3: クラスター環境をセットアップする
+{: #cs_cluster_tutorial_lesson3}
 
-    1.  環境変数を設定して Kubernetes 構成ファイルをダウンロードするためのコマンドを取得します。
+CLI でクラスターのコンテキストを設定します。 クラスターの作業を行うためにコンテナー CLI にログインするたびに、これらのコマンドを実行して、クラスターの構成ファイルのパスをセッション変数として設定する必要があります。 Kubernetes CLI はこの変数を使用して、{{site.data.keyword.Bluemix_notm}} 内のクラスターと接続するために必要なローカル構成ファイルと証明書を検索します。
 
-        ```
-        bx cs cluster-config <cluster_name>
-        ```
-        {: pre}
+1.  環境変数を設定して Kubernetes 構成ファイルをダウンロードするためのコマンドを取得します。
 
-        構成ファイルのダウンロードが完了すると、そのローカルの Kubernetes 構成ファイルのパスを環境変数として設定するために使用できるコマンドが表示されます。
+    ```
+    bx cs cluster-config <cluster_name>
+    ```
+    {: pre}
 
-        OS X の場合の例:
+    構成ファイルのダウンロードが完了すると、そのローカルの Kubernetes 構成ファイルのパスを環境変数として設定するために使用できるコマンドが表示されます。
 
-        ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
-        ```
-        {: screen}
+    OS X の場合の例:
 
-    2.  `KUBECONFIG` 環境変数を設定するためのコマンドとしてターミナルに表示されたものを、コピーして貼り付けます。
+    ```
+    export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
+    ```
+    {: screen}
 
-    3.  `KUBECONFIG` 環境変数が適切に設定されたことを確認します。
+2.  `KUBECONFIG` 環境変数を設定するためのコマンドとしてターミナルに表示されたものを、コピーして貼り付けます。
 
-        OS X の場合の例:
+3.  `KUBECONFIG` 環境変数が適切に設定されたことを確認します。
 
-        ```
-        echo $KUBECONFIG
-        ```
-        {: pre}
+    OS X の場合の例:
 
-        出力:
+    ```
+    echo $KUBECONFIG
+    ```
+    {: pre}
 
-        ```
-        /Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
-        ```
-        {: screen}
+    出力:
 
-    4.  Kubernetes CLI サーバーのバージョンを調べて、ご使用のクラスターで `kubectl` コマンドが正常に実行することを確認します。
+    ```
+    /Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
+    ```
+    {: screen}
 
-        ```
-        kubectl version  --short
-        ```
-        {: pre}
+4.  Kubernetes CLI サーバーのバージョンを調べて、ご使用のクラスターで `kubectl` コマンドが正常に実行することを確認します。
 
-        出力例:
+    ```
+    kubectl version  --short
+    ```
+    {: pre}
 
-        ```
-        Client Version: v1.7.4
-      Server Version: v1.7.4
-        ```
-        {: screen}
+    出力例:
 
-5.  {{site.data.keyword.toneanalyzershort}} サービスをクラスターに追加します。 {{site.data.keyword.Bluemix_notm}} サービスを使用すると、既に開発された機能をアプリで活用できます。 クラスターにバインドされているすべての {{site.data.keyword.Bluemix_notm}} サービスは、そのクラスターにデプロイされたアプリで使用できます。 アプリで使用する {{site.data.keyword.Bluemix_notm}} サービスごとに、以下の手順を繰り返してください。
-    1.  {{site.data.keyword.toneanalyzershort}} サービスを {{site.data.keyword.Bluemix_notm}} アカウントに追加します。
+    ```
+    Client Version: v1.8.6
+      Server Version: v1.8.6
+    ```
+    {: screen}
 
-        **注:** {{site.data.keyword.toneanalyzershort}} サービスをアカウントに追加すると、そのサービスが無料ではないことを示すメッセージが表示されます。 API 呼び出しを制限している場合には、このチュートリアルによって {{site.data.keyword.watson}} サービスからの課金は発生しません。 [{{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} サービスの料金情報を確認します ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/watson/developercloud/tone-analyzer.html#pricing-block)。
+## レッスン 4: クラスターにサービスを追加する
+{: #cs_cluster_tutorial_lesson4}
 
-        ```
-        bx service create tone_analyzer standard <mytoneanalyzer>
-        ```
-        {: pre}
+{{site.data.keyword.Bluemix_notm}} サービスを使用すると、既に開発された機能をアプリで活用できます。 クラスターにバインドされているすべての {{site.data.keyword.Bluemix_notm}} サービスは、そのクラスターにデプロイされたアプリで使用できます。 アプリで使用する {{site.data.keyword.Bluemix_notm}} サービスごとに、以下の手順を繰り返してください。
 
-    2.  {{site.data.keyword.toneanalyzershort}} インスタンスをクラスターの `default` の Kubernetes 名前空間にバインドします。 あとで独自の名前空間を作成して Kubernetes リソースへのユーザー・アクセスを管理できますが、現時点では `default` 名前空間を使用します。 Kubernetes 名前空間は、以前に作成したレジストリー名前空間とは異なります。
+1.  {{site.data.keyword.toneanalyzershort}} サービスを {{site.data.keyword.Bluemix_notm}} アカウントに追加します。
 
-        ```
-        bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
-        ```
-        {: pre}
+    **注:** {{site.data.keyword.toneanalyzershort}} サービスをアカウントに追加すると、そのサービスが無料ではないことを示すメッセージが表示されます。 API 呼び出しを制限している場合には、このチュートリアルによって {{site.data.keyword.watson}} サービスからの課金は発生しません。 [{{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} サービスの料金情報を確認します ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/watson/developercloud/tone-analyzer.html#pricing-block)。
 
-        出力:
+    ```
+    bx service create tone_analyzer standard <mytoneanalyzer>
+    ```
+    {: pre}
 
-        ```
-        bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
+2.  {{site.data.keyword.toneanalyzershort}} インスタンスをクラスターの `default` の Kubernetes 名前空間にバインドします。 あとで独自の名前空間を作成して Kubernetes リソースへのユーザー・アクセスを管理できますが、現時点では `default` 名前空間を使用します。 Kubernetes 名前空間は、以前に作成したレジストリー名前空間とは異なります。
+
+    ```
+    bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
+    ```
+    {: pre}
+
+    出力:
+
+    ```
+    bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
         Binding service instance to namespace...
         OK
         Namespace:	default
         Secret name:	binding-mytoneanalyzer
-        ```
-        {: screen}
+    ```
+    {: screen}
 
-6.  クラスターの名前空間内に Kubernetes シークレットが作成されたことを確認します。 すべての {{site.data.keyword.Bluemix_notm}} サービスは、ユーザー名、パスワード、コンテナーがサービスにアクセスするために使用する URL など、サービスに関する機密情報を含んだ JSON ファイルによって定義されます。 この情報を安全に保管するために、Kubernetes シークレットが使用されます。 この例では、アカウントにプロビジョンされる、{{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} にアクセスするための資格情報がシークレットに格納されます。
+3.  クラスターの名前空間内に Kubernetes シークレットが作成されたことを確認します。 すべての {{site.data.keyword.Bluemix_notm}} サービスは、ユーザー名、パスワード、コンテナーがサービスにアクセスするために使用する URL など、サービスに関する機密情報を含んだ JSON ファイルによって定義されます。 この情報を安全に保管するために、Kubernetes シークレットが使用されます。 この例では、アカウントにプロビジョンされる、{{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} にアクセスするための資格情報がシークレットに格納されます。
 
     ```
     kubectl get secrets --namespace=default

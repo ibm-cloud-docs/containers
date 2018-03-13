@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-06"
 
 ---
 
@@ -22,60 +22,50 @@ lastupdated: "2018-01-12"
 ## Configurando o acesso a um app usando Ingress
 {: #config}
 
-Exponha múltiplos apps em seu cluster criando recursos de Ingresso que são gerenciados pelo controlador de Ingresso fornecido pela IBM. O controlador do Ingress cria os recursos necessários para usar um balanceador de carga de aplicativo. Um balanceador de carga de aplicativo é um balanceador de carga HTTP ou HTTPS externo que usa um ponto de entrada público ou privado assegurado e exclusivo para rotear solicitações recebidas para seus apps dentro ou fora do cluster.
+Exponha múltiplos apps em seu cluster criando recursos de Ingresso que são gerenciados pelo balanceador de carga de aplicativo fornecido pela IBM. Um balanceador de carga de aplicativo é um balanceador de carga HTTP ou HTTPS externo que usa um ponto de entrada público ou privado assegurado e exclusivo para rotear solicitações recebidas para seus apps dentro ou fora do cluster. Com Ingresso, é possível definir regras de roteamento individuais para cada app que você expõe ao público ou às redes privadas. Para obter informações gerais sobre serviços do Ingresso, veja [Planejando a rede externa com o Ingresso](cs_network_planning.html#ingress).
 
 **Nota:** o Ingresso está disponível somente para clusters padrão e requer pelo menos dois nós do trabalhador no cluster para assegurar alta disponibilidade e que atualizações periódicas sejam aplicadas. Configurar o Ingresso requer uma [política de acesso de Administrador](cs_users.html#access_policies). Verifique sua [política de acesso](cs_users.html#infra_access) atual.
 
-Ao criar um cluster padrão, o controlador de Ingress automaticamente cria e ativa um balanceador de carga de aplicativo que é designado um endereço IP público móvel e uma rota pública. Um balanceador de carga de aplicativo que é designado a um endereço IP privado móvel e a uma rota privada também é criado automaticamente, mas não é ativado automaticamente. É possível configurar esses balanceadores de carga de aplicativo e definir regras de roteamento individuais para cada app que você expõe ao público ou às redes privadas. Cada app que é exposto ao público por meio do Ingresso é designado a um caminho exclusivo que é anexado à rota pública, para que seja possível usar uma URL exclusiva para acessar um app de forma pública em seu cluster.
+Para escolher a melhor configuração para o Ingress, é possível seguir esta árvore de decisão:
 
-Para expor seu app ao público, é possível configurar o balanceador de carga de aplicativo público para os cenários a seguir.
+<img usemap="#ingress_map" border="0" class="image" src="images/networkingdt-ingress.png" width="750px" alt="Esta imagem orienta você na escolha da melhor configuração para seu balanceador de carga de aplicativo de Ingresso. Se esta imagem não estiver sendo exibida, as informações ainda poderão ser localizadas na documentação." style="width:750px;" />
+<map name="ingress_map" id="ingress_map">
+<area href="/docs/containers/cs_ingress.html#private_ingress_no_tls" alt="Expondo apps de forma privada usando um domínio customizado sem TLS" shape="rect" coords="25, 246, 187, 294"/>
+<area href="/docs/containers/cs_ingress.html#private_ingress_tls" alt="Expondo apps de forma privada usando um domínio customizado com TLS" shape="rect" coords="161, 337, 309, 385"/>
+<area href="/docs/containers/cs_ingress.html#external_endpoint" alt="Expondo apps de forma pública que estão fora de seu cluster usando o domínio fornecido pela IBM ou um customizado com TLS" shape="rect" coords="313, 229, 466, 282"/>
+<area href="/docs/containers/cs_ingress.html#custom_domain_cert" alt="Expondo apps de forma pública usando um domínio customizado com TLS" shape="rect" coords="365, 415, 518, 468"/>
+<area href="/docs/containers/cs_ingress.html#ibm_domain" alt="Expondo apps de forma pública usando o domínio fornecido pela IBM sem TLS" shape="rect" coords="414, 629, 569, 679"/>
+<area href="/docs/containers/cs_ingress.html#ibm_domain_cert" alt="Expondo apps de forma pública usando o domínio fornecido pela IBM com TLS" shape="rect" coords="563, 711, 716, 764"/>
+</map>
+
+<br />
+
+
+## Expondo apps ao público
+{: #ingress_expose_public}
+
+Ao criar um cluster padrão, um balanceador de carga de aplicativo fornecido pela IBM é ativado automaticamente e é designado um endereço IP público móvel e uma rota pública. Cada app que é exposto ao público por meio do Ingresso é designado a um caminho exclusivo que é anexado à rota pública, para que seja possível usar uma URL exclusiva para acessar um app publicamente em seu cluster. Para expor seu app ao público, é possível configurar o Ingresso para os cenários a seguir.
 
 -   [Expor apps de forma pública usando o domínio fornecido pela IBM sem TLS](#ibm_domain)
 -   [Expor apps de forma pública usando o domínio fornecido pela IBM com TLS](#ibm_domain_cert)
 -   [Expor apps de forma pública usando um domínio customizado com TLS](#custom_domain_cert)
 -   [Expor apps de forma pública que estão fora de seu cluster usando o domínio fornecido pela IBM ou um customizado com TLS](#external_endpoint)
 
-Para expor seu app a redes privadas, primeiro [ative o balanceador de carga do aplicativo privado](#private_ingress). É possível, em seguida, configurar o balanceador de carga de aplicativo privado para os cenários a seguir.
-
--   [Expor apps de forma privada usando um domínio customizado sem TLS](#private_ingress_no_tls)
--   [Expor apps de forma privada usando um domínio customizado com TLS](#private_ingress_tls)
-
-Depois de ter exposto seu app de forma pública ou de forma privada, é possível configurar ainda mais seu balanceador de carga de aplicativo com as opções a seguir.
-
--   [Abrindo portas no balanceador de carga de aplicativo de Ingresso](#opening_ingress_ports)
--   [Configurar protocolos SSL e cifras SSL no nível de HTTP](#ssl_protocols_ciphers)
--   [Customizando o seu balanceador de carga de aplicativo com anotações](cs_annotations.html)
-{: #ingress_annotation}
-
-Para escolher a melhor configuração para o Ingress, é possível seguir esta árvore de decisão:
-
-<img usemap="#ingress_map" border="0" class="image" src="images/networkingdt-ingress.png" width="750px" alt="Esta imagem orienta na escolha da melhor configuração para seu controlador do Ingress. Se esta imagem não estiver sendo exibida, as informações ainda poderão ser encontradas na documentação." style="width:750px;" />
-<map name="ingress_map" id="ingress_map">
-<area href="/docs/containers/cs_ingress.html#private_ingress_no_tls" alt="Expondo apps de forma privada usando um domínio customizado sem TLS" shape="rect" coords="25, 246, 187, 294"/>
-<area href="/docs/containers/cs_ingress.html#private_ingress_tls" alt="Expondo apps de forma privada usando um domínio customizado com TLS" shape="rect" coords="161, 337, 309, 385"/>
-<area href="/docs/containers/cs_ingress.html#external_endpoint" alt="Expondo apps de forma pública que estão fora de seu cluster usando o domínio fornecido pela IBM ou um customizado com TLS" shape="rect" coords="313, 229, 466, 282"/>
-<area href="/docs/containers/cs_ingress.html#custom_domain_cert" alt="Expondo apps de forma pública usando um domínio customizado com TLS" shape="rect" coords="365, 415, 518, 468"/>
-<area href="/docs/containers/cs_ingress.html#ibm_domain" alt="Expondo apps de forma pública usando o domínio fornecido pela IBM sem TLS" shape="rect" coords="414, 609, 569, 659"/>
-<area href="/docs/containers/cs_ingress.html#ibm_domain_cert" alt="Expondo apps de forma pública usando o domínio fornecido pela IBM com TLS" shape="rect" coords="563, 681, 716, 734"/>
-</map>
-
-<br />
-
-
-## Expor apps de forma pública usando o domínio fornecido pela IBM sem TLS
+### Expor apps de forma pública usando o domínio fornecido pela IBM sem TLS
 {: #ibm_domain}
 
-É possível configurar o balanceador de carga de aplicativo como um balanceador de carga de HTTP para os apps em seu cluster e usar o domínio fornecido pela IBM para acessar seus apps na Internet.
+É possível configurar o balanceador de carga de aplicativo para balancear a carga do tráfego de rede HTTP recebido para os apps no cluster e usar o domínio fornecido pela IBM para acessar seus apps na Internet.
 
 Antes de iniciar:
 
 -   Se você não tiver nenhum ainda, [crie um cluster padrão](cs_clusters.html#clusters_ui).
 -   [Destine sua CLI](cs_cli_install.html#cs_cli_configure) para seu cluster para executar comandos `kubectl`.
 
-Para configurar o balanceador de carga do aplicativo:
+Para expor um app usando o domínio fornecido pela IBM:
 
 1.  [Implemente o seu app no cluster](cs_app.html#app_cli). Quando você implementa o seu app no cluster, são criados para você um ou mais pods que executam o seu app em um contêiner. Certifique-se de incluir um rótulo à sua implementação na seção de metadados de seu arquivo de configuração. Esse rótulo é necessário para identificar todos os pods nos quais o seu app está em execução, de modo que eles possam ser incluídos no balanceamento de carga do Ingresso.
-2.  Crie um serviço do Kubernetes para o app a ser exposto. O controlador do Ingresso poderá incluir o seu app no balanceamento de carga do Ingresso somente se o seu app for exposto por meio de um serviço do Kubernetes dentro do cluster.
+2.  Crie um serviço do Kubernetes para o app a ser exposto. O balanceador de carga do aplicativo poderá incluir seu aplicativo no balanceamento de carga de Ingresso somente se o seu
+aplicativo for exposto por meio de um serviço Kubernetes dentro do cluster.
     1.  Abra o seu editor preferencial e crie um arquivo de configuração de serviço que seja denominado, por exemplo, `myservice.yaml`.
     2.  Defina um serviço de balanceador de carga de aplicativo para o app que você deseja expor para o público.
 
@@ -237,17 +227,17 @@ que o aplicativo está em execução usando o mesmo caminho. O app deve ser conf
 <br />
 
 
-## Expor apps publicamente usando o domínio fornecido pela IBM com TLS
+### Expor apps publicamente usando o domínio fornecido pela IBM com TLS
 {: #ibm_domain_cert}
 
-É possível configurar o balanceador de carga de aplicativo para gerenciar conexões TLS recebidas para seus apps, decriptografar o tráfego de rede usando o certificado TLS fornecido pela IBM e encaminhar a solicitação não criptografada para os apps expostos em seu cluster.
+É possível configurar o controle de Ingresso para gerenciar conexões TLS recebidas para seus apps, decriptografar o tráfego de rede usando o certificado TLS fornecido pela IBM e encaminhar a solicitação não criptografada para os apps expostos em seu cluster.
 
 Antes de iniciar:
 
 -   Se você não tiver nenhum ainda, [crie um cluster padrão](cs_clusters.html#clusters_ui).
 -   [Destine sua CLI](cs_cli_install.html#cs_cli_configure) para seu cluster para executar comandos `kubectl`.
 
-Para configurar o balanceador de carga do aplicativo:
+Para expor um app usando o domínio fornecido pela IBM com TLS:
 
 1.  [Implemente o seu app no cluster](cs_app.html#app_cli). Certifique-se de incluir um rótulo à sua implementação na seção de metadados de seu arquivo de configuração. Esse rótulo identifica todos os pods nos quais o app está em execução, para que sejam incluídos no balanceamento de carga do Ingresso.
 2.  Crie um serviço do Kubernetes para o app a ser exposto. O balanceador de carga do aplicativo poderá incluir seu aplicativo no balanceamento de carga de Ingresso somente se o seu
@@ -436,7 +426,7 @@ que o aplicativo está em execução usando o mesmo caminho. O app deve ser conf
 <br />
 
 
-## Expor apps de forma pública usando um domínio customizado com TLS
+### Expor apps de forma pública usando um domínio customizado com TLS
 {: #custom_domain_cert}
 
 É possível configurar o balanceador de carga de aplicativo para rotear o tráfego de rede recebido para os apps em seu cluster e usar seu próprio certificado TLS para gerenciar a finalização do TLS, enquanto usa seu domínio customizado em vez do domínio fornecido pela IBM.
@@ -447,7 +437,7 @@ Antes de iniciar:
 -   Se você não tiver nenhum ainda, [crie um cluster padrão](cs_clusters.html#clusters_ui).
 -   [Destine sua CLI](cs_cli_install.html#cs_cli_configure) para seu cluster para executar comandos `kubectl`.
 
-Para configurar o balanceador de carga do aplicativo:
+Para expor um app usando um domínio customizado com TLS:
 
 1.  Crie um domínio customizado. Para criar um domínio customizado, trabalhe com seu provedor Domain Name Service (DNS) para registrar seu domínio customizado.
 2.  Configure seu domínio para rotear o tráfego de rede recebido para o balanceador de carga de aplicativo fornecido pela IBM. Escolha entre estas opções:
@@ -456,10 +446,11 @@ Para configurar o balanceador de carga do aplicativo:
 3.  Importe ou crie um certificado TLS e a chave secreta.
     * Se você já tem um certificado TLS armazenado no {{site.data.keyword.cloudcerts_long_notm}} que deseja usar, é possível importar seu segredo associado para o cluster executando o comando a seguir:
 
-          ```
-          bx cs alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
-          ```
-          {: pre}
+      ```
+      bx cs alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
+      ```
+      {: pre}
+
     * Se você não tiver um certificado TLS pronto, siga estas etapas:
         1. Crie um certificado e chave TLS para seu domínio que é codificado no formato PEM.
         2.  Abra o seu editor preferencial e crie um arquivo de configuração de segredo do Kubernetes que seja chamado, por exemplo, de `mysecret.yaml`.
@@ -646,10 +637,10 @@ que o aplicativo está em execução usando o mesmo caminho. O app deve ser conf
 <br />
 
 
-## Expor apps de forma pública que estão fora de seu cluster usando o domínio fornecido pela IBM ou um customizado com TLS
+### Expor apps de forma pública que estão fora de seu cluster usando o domínio fornecido pela IBM ou um customizado com TLS
 {: #external_endpoint}
 
-É possível configurar o balanceador de carga de aplicativo para apps que estão localizados fora do cluster a serem incluídos no balanceamento de carga do cluster. As solicitações recebidas no domínio customizado ou fornecido pela IBM são encaminhadas automaticamente para o app externo.
+É possível configurar o balanceador de carga de aplicativo para incluir apps no balanceamento de carga do cluster que estão localizados fora do cluster. As solicitações recebidas no domínio customizado ou fornecido pela IBM são encaminhadas automaticamente para o app externo.
 
 Antes de iniciar:
 
@@ -657,7 +648,7 @@ Antes de iniciar:
 -   [Destine sua CLI](cs_cli_install.html#cs_cli_configure) para seu cluster para executar comandos `kubectl`.
 -   Assegure-se de que o app externo que você deseja incluir no balanceamento de carga do cluster possa ser acessado usando um endereço IP público.
 
-É possível configurar o balanceador de carga de aplicativo para rotear o tráfego de rede recebido no domínio fornecido pela IBM para apps que estão localizados fora do cluster. Se desejar usar um domínio customizado e um certificado TLS como alternativa, substitua o domínio fornecido pela IBM e o certificado TLS pelo seu [domínio customizado e certificado TLS](#custom_domain_cert).
+É possível rotear o tráfego de rede recebido no domínio fornecido pela IBM para apps que estão localizados fora do cluster. Se desejar usar um domínio customizado e um certificado TLS como alternativa, substitua o domínio fornecido pela IBM e o certificado TLS pelo seu [domínio customizado e certificado TLS](#custom_domain_cert).
 
 1.  Configure um terminal do Kubernetes que defina o local externo do app que você deseja incluir no balanceamento de carga do cluster.
     1.  Abra seu editor preferencial e crie um arquivo de configuração do terminal que é chamado, por exemplo, de `myexternalendpoint.yaml`.
@@ -884,10 +875,18 @@ e são usados pelo balanceador de carga do aplicativo para rotear o tráfego de 
 <br />
 
 
-## Ativando o balanceador de carga de aplicativo privado
+## Expondo apps para uma rede privada
+{: #ingress_expose_private}
+
+Ao criar um cluster padrão, um balanceador de carga de aplicativo fornecido pela IBM é criado automaticamente e designado a um endereço IP privado móvel e uma rota privada. No entanto, o balanceador de carga de aplicativo privado padrão não é ativado automaticamente. Para expor seu app a redes privadas, primeiro [ative o balanceador de carga de aplicativo privado padrão](#private_ingress). É possível então configurar o Ingresso para os cenários a seguir.
+
+-   [Expor apps de forma privada usando um domínio customizado sem TLS](#private_ingress_no_tls)
+-   [Expor apps de forma privada usando um domínio customizado com TLS](#private_ingress_tls)
+
+### Ativando o balanceador de carga de aplicativo privado padrão
 {: #private_ingress}
 
-Ao criar um cluster padrão, o controlador do Ingress cria automaticamente um balanceador de carga de aplicativo privado, mas não o ativa automaticamente. Antes de poder usar o balanceador de carga de aplicativo privado, deve-se ativá-lo com o endereço IP privado pré-designado, móvel, fornecido pela IBM ou seu próprio endereço IP privado móvel. **Observação**: se você usou a sinalização `-- no-subnet` quando criou o cluster, então deve-se incluir uma sub-rede privada móvel ou uma sub-rede gerenciada pelo usuário antes de poder ativar o balanceador de carga de aplicativo privado. Para obter mais informações, veja [Solicitando sub-redes adicionais para seu cluster](cs_subnets.html#request).
+Antes de poder usar o balanceador de carga de aplicativo privado padrão, deve-se ativá-lo com o endereço IP privado móvel fornecido pela IBM ou seu próprio endereço IP privado móvel. **Observação**: se você usou a sinalização `-- no-subnet` quando criou o cluster, então deve-se incluir uma sub-rede privada móvel ou uma sub-rede gerenciada pelo usuário antes de poder ativar o balanceador de carga de aplicativo privado. Para obter mais informações, veja [Solicitando sub-redes adicionais para seu cluster](cs_subnets.html#request).
 
 Antes de iniciar:
 
@@ -949,7 +948,7 @@ Para ativar o balanceador de carga de aplicativo privado usando seu próprio end
 <br />
 
 
-## Expor apps de forma privada usando um domínio customizado sem TLS
+### Expor apps de forma privada usando um domínio customizado sem TLS
 {: #private_ingress_no_tls}
 
 É possível configurar o balanceador de carga de aplicativo privado para rotear o tráfego de rede recebido para os apps em seu cluster usando um domínio customizado.
@@ -957,7 +956,7 @@ Para ativar o balanceador de carga de aplicativo privado usando seu próprio end
 
 Antes de iniciar, [ative o balanceador de carga do aplicativo privado](#private_ingress).
 
-Para configurar o balanceador de carga de aplicativo privado:
+Para expor um app de forma privada usando um domínio customizado sem TLS:
 
 1.  Crie um domínio customizado. Para criar um domínio customizado, trabalhe com seu provedor Domain Name Service (DNS) para registrar seu domínio customizado.
 
@@ -1056,7 +1055,7 @@ os Pods em que o aplicativo está em execução.
         </tr>
         <tr>
         <td><code>ingress.bluemix.net/ALB-ID</code></td>
-        <td>Substitua <em>&lt;private_ALB_ID&gt;</em> pelo ID do ALB para o seu controlador de Ingresso privado. Execute <code>bx cs albs --cluster <my_cluster></code> para localizar o ID do ALB. Para obter mais informações sobre essa anotação de Ingresso, veja [Roteamento do balanceador de carga de aplicativo privado](cs_annotations.html#alb-id).</td>
+        <td>Substitua <em>&lt;private_ALB_ID&gt;</em> pelo ID para o seu balanceador de carga de aplicativo privado. Execute <code>bx cs albs --cluster <my_cluster></code> para localizar o ID do balanceador de carga do aplicativo. Para obter mais informações sobre essa anotação de Ingresso, veja [Roteamento do balanceador de carga de aplicativo privado](cs_annotations.html#alb-id).</td>
         </tr>
         <td><code>host</code></td>
         <td>Substitua <em>&lt;mycustomdomain&gt;</em> pelo seu domínio customizado.
@@ -1120,15 +1119,15 @@ que o aplicativo está em execução usando o mesmo caminho. O app deve ser conf
 <br />
 
 
-## Expor apps de forma privada usando um domínio customizado com TLS
+### Expor apps de forma privada usando um domínio customizado com TLS
 {: #private_ingress_tls}
 
-É possível configurar o balanceador de carga de aplicativo privado para rotear o tráfego de rede recebido para os apps em seu cluster e usar seu próprio certificado TLS para gerenciar a finalização do TLS, enquanto usa seu domínio customizado.
+É possível usar os balanceadores de carga de aplicativo privado para rotear o tráfego de rede recebido para os apps em seu cluster e usar seu próprio certificado TLS para gerenciar a finalização do TLS, enquanto usa seu domínio customizado.
 {:shortdesc}
 
-Antes de iniciar, [ative o balanceador de carga do aplicativo privado](#private_ingress).
+Antes de iniciar, [ative o balanceador de carga de aplicativo privado padrão](#private_ingress).
 
-Para configurar o balanceador de carga do aplicativo:
+Para expor um app de forma privada usando um domínio customizado com TLS:
 
 1.  Crie um domínio customizado. Para criar um domínio customizado, trabalhe com seu provedor Domain Name Service (DNS) para registrar seu domínio customizado.
 
@@ -1212,10 +1211,7 @@ e são usados pelo balanceador de carga do aplicativo para rotear o tráfego de 
     2.  Defina um recurso do Ingresso em seu arquivo de configuração que use o domínio customizado para rotear o tráfego de rede recebido para seus serviços e o certificado customizado para gerenciar o encerramento do TLS. Para cada serviço, é possível definir um caminho individual que seja anexado ao domínio customizado para criar um caminho exclusivo para seu app, por exemplo, `https://mydomain/myapp`. Ao inserir essa rota em um navegador da web, o tráfego de rede é roteado para o balanceador de carga do aplicativo. O balanceador de carga do aplicativo consulta o serviço associado e envia o tráfego de rede para o serviço e também para
 os Pods em que o aplicativo está em execução.
 
-        **Nota:** é importante que o app atenda no caminho definido no recurso de Ingresso. Caso contrário, o tráfego de rede
-
-
-        não pode ser encaminhado para o app. A maioria dos apps não atende em um caminho específico, mas usa o caminho raiz e uma porta específica. Nesse caso, defina o caminho raiz como `/` e não especifique um caminho individual para seu app.
+        **Nota:** é importante que o app atenda no caminho definido no recurso de Ingresso. Caso contrário, o tráfego de rede não poderá ser encaminhado para o app. A maioria dos apps não atende em um caminho específico, mas usa o caminho raiz e uma porta específica. Nesse caso, defina o caminho raiz como `/` e não especifique um caminho individual para seu app.
 
         ```
         apiVersion: extensions/v1beta1
@@ -1332,7 +1328,20 @@ que o aplicativo está em execução usando o mesmo caminho. O app deve ser conf
 <br />
 
 
-## Abrindo portas no balanceador de carga de aplicativo de Ingresso
+
+
+## Opcional: configurando um balanceador de carga de aplicativo
+{: #configure_alb}
+
+É possível configurar ainda mais um balanceador de carga de aplicativo com as opções a seguir.
+
+-   [Abrindo portas no balanceador de carga de aplicativo de Ingresso](#opening_ingress_ports)
+-   [Configurar protocolos SSL e cifras SSL no nível de HTTP](#ssl_protocols_ciphers)
+-   [Customizando o seu balanceador de carga de aplicativo com anotações](cs_annotations.html)
+{: #ingress_annotation}
+
+
+### Abrindo portas no balanceador de carga de aplicativo de Ingresso
 {: #opening_ingress_ports}
 
 Por padrão, somente as portas 80 e 443 são expostas no balanceador de carga de aplicativo de Ingresso. Para expor outras portas, é possível editar o recurso de mapa de configuração `ibm-cloud-provider-ingress-cm`.
@@ -1392,10 +1401,7 @@ Por padrão, somente as portas 80 e 443 são expostas no balanceador de carga de
 
 Para obter mais informações sobre recursos de mapa de configuração, veja a [documentação do Kubernetes](https://kubernetes-v1-4.github.io/docs/user-guide/configmap/).
 
-<br />
-
-
-## Configurando protocolos SSL e cifras SSL no nível de HTTP
+### Configurando protocolos SSL e cifras SSL no nível de HTTP
 {: #ssl_protocols_ciphers}
 
 Ative os protocolos e cifras SSL no nível HTTP global editando o mapa de configuração `ibm-cloud-provider-ingress-cm`.

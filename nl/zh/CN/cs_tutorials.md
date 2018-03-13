@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-13"
+lastupdated: "2017-01-29"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -52,18 +52,16 @@ lastupdated: "2017-12-13"
 -  现买现付或预订 [{{site.data.keyword.Bluemix_notm}} 帐户 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/registration/)
 
 
-
-
 ## 第 1 课：创建集群并设置 CLI
 {: #cs_cluster_tutorial_lesson1}
 
-在 GUI 中创建集群并安装必需的 CLI。对于本教程，请在“英国南部”区域中创建集群。
+在 GUI 中创建集群并安装必需的 CLI。
+{: shortdesc}
 
 
 要创建集群，请执行以下操作：
 
-1. 供应集群可能会花费几分钟才能完成。要充分利用您的时间，请先 [创建集群 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/containers-kubernetes/launch?env_id=ibm:yp:united-kingdom)，然后再安装 CLI。Lite 集群随附一个用于部署容器 pod 的工作程序节点。工作程序节点是运行应用程序的计算主机，通常为虚拟机。
-
+1. 供应集群可能会花费几分钟才能完成。要充分利用您的时间，请先[在 GUI 中创建集群 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://console.bluemix.net/containers-kubernetes/launch?env_id=ibm:yp:united-kingdom)，然后再安装 CLI。对于本教程，请在“美国东部”区域中创建集群。
 
 
 以下 CLI 及其先决条件用于通过 CLI 管理集群：
@@ -74,7 +72,7 @@ lastupdated: "2017-12-13"
 -   Docker CLI
 
 </br>
-要安装 CLI，请执行以下操作：
+要安装 CLI 及其先决条件，请执行以下操作：
 
 1.  作为 {{site.data.keyword.containershort_notm}} 插件的必备软件，请安装 [{{site.data.keyword.Bluemix_notm}} CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://clis.ng.bluemix.net/ui/home.html)。要运行 {{site.data.keyword.Bluemix_notm}} CLI 命令，请使用前缀 `bx`。
 2.  遵循提示来选择帐户和 {{site.data.keyword.Bluemix_notm}} 组织。集群是特定于帐户的，但又独立于 {{site.data.keyword.Bluemix_notm}} 组织或空间。
@@ -87,7 +85,7 @@ lastupdated: "2017-12-13"
     {: pre}
 
 5.  要查看 Kubernetes 仪表板的本地版本以及将应用程序部署到集群，请[安装 Kubernetes CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。要使用 Kubernetes CLI 运行命令，请使用前缀 `kubectl`。
-    1.  为了实现完整的功能兼容性，请下载与您计划使用的 Kubernetes 集群版本相匹配的 Kubernetes CLI 版本。当前 {{site.data.keyword.containershort_notm}} 缺省 Kubernetes 版本是 1.7.4。
+    1.  为了实现完整的功能兼容性，请下载与您计划使用的 Kubernetes 集群版本相匹配的 Kubernetes CLI 版本。当前 {{site.data.keyword.containershort_notm}} 缺省 Kubernetes 版本是 1.8.6。
 
         OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
 
@@ -99,7 +97,6 @@ lastupdated: "2017-12-13"
 
     2.  如果使用的是 OS X 或 Linux，请完成以下步骤。
         1.  将可执行文件移至 `/usr/local/bin` 目录。
-
 
             ```
             mv /<path_to_file>/kubectl /usr/local/bin/kubectl
@@ -141,12 +138,11 @@ lastupdated: "2017-12-13"
     ```
     {: pre}
 
-7. 要在本地构建映像并将其推送到专用映像存储库，请[安装 Docker CE CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.docker.com/community-edition#/download)。如果使用的是 Windows 8 或更低版本，可以改为安装 [Docker Toolbox ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.docker.com/products/docker-toolbox)。
+7. 要在本地构建映像并将其推送到专用映像存储库，请[安装 Docker CE CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.docker.com/community-edition#/download)。如果使用的是 Windows 8 或更低版本，可以改为安装 [Docker Toolbox ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/toolbox/toolbox_install_windows/)。
 
 祝贺您！您已成功安装了以下课程和教程的 CLI。接下来，设置集群环境并添加 {{site.data.keyword.toneanalyzershort}} 服务。
 
-
-## 第 2 课：设置集群环境
+## 第 2 课：设置专用注册表
 {: #cs_cluster_tutorial_lesson2}
 
 在 {{site.data.keyword.registryshort_notm}} 中设置专用映像存储库，并向集群添加私钥，以便应用程序可以访问 {{site.data.keyword.toneanalyzershort}} 服务。
@@ -162,8 +158,7 @@ lastupdated: "2017-12-13"
 
 2.  在 {{site.data.keyword.registryshort_notm}} 中设置自己的专用映像存储库，以安全地存储 Docker 映像并与所有集群用户共享这些映像。{{site.data.keyword.Bluemix_notm}} 中的专用映像存储库由名称空间标识。名称空间用于创建映像存储库的唯一 URL，开发者可使用此 URL 来访问专用 Docker 映像。
 
-    在此示例中，公关公司希望在 {{site.data.keyword.registryshort_notm}} 中仅创建一个映像存储库，所以他们选择 _pr_firm_ 作为其名称空间，用于对其帐户中的所有映像分组。将 _&lt;your_namespace&gt;_ 替换为您所选择的名称空间而非与教程相关的其他项目。
-
+    在此示例中，公关公司希望在 {{site.data.keyword.registryshort_notm}} 中仅创建一个映像存储库，所以他们选择 _pr_firm_ 作为其名称空间，用于对其帐户中的所有映像分组。将 _&lt;your_namespace&gt;_ 替换为您所选择的与教程无关的名称空间。
 
     ```
     bx cr namespace-add <your_namespace>
@@ -177,9 +172,7 @@ lastupdated: "2017-12-13"
     ```
      {: pre}
 
-    工作程序节点供应完成时，状态会更改为 **Ready**，这时可以开始绑定 {{site.data.keyword.Bluemix_notm}} 服务，以便在未来教程中使用。
-
-
+    工作程序节点供应完成时，状态会更改为 **Ready**，这时可以开始绑定 {{site.data.keyword.Bluemix_notm}} 服务。
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status
@@ -187,88 +180,93 @@ lastupdated: "2017-12-13"
     ```
     {: screen}
 
-4.  在 CLI 中设置集群的上下文。每次登录到容器 CLI 来使用集群时，必须运行这些命令以将集群配置文件的路径设置为会话变量。Kubernetes CLI 使用此变量来查找与 {{site.data.keyword.Bluemix_notm}} 中的集群连接所必需的本地配置文件和证书。
+## 第 3 课：设置集群环境
+{: #cs_cluster_tutorial_lesson3}
 
-    1.  获取命令以设置环境变量并下载 Kubernetes 配置文件。
+在 CLI 中设置集群的上下文。每次登录到容器 CLI 来使用集群时，必须运行这些命令以将集群配置文件的路径设置为会话变量。Kubernetes CLI 使用此变量来查找与 {{site.data.keyword.Bluemix_notm}} 中的集群连接所必需的本地配置文件和证书。
 
+1.  获取命令以设置环境变量并下载 Kubernetes 配置文件。
 
-        ```
+    ```
   bx cs cluster-config <cluster_name> 
   ```
-        {: pre}
+    {: pre}
 
-        配置文件下载完成后，会显示一个命令，您可以使用该命令将本地 Kubernetes 配置文件的路径设置为环境变量。
+    配置文件下载完成后，会显示一个命令，您可以使用该命令将本地 Kubernetes 配置文件的路径设置为环境变量。
 
-        OS X 的示例：
+    OS X 的示例：
 
-        ```
+    ```
         export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
         ```
-        {: screen}
+    {: screen}
 
-    2.  复制并粘贴终端中显示的命令，以设置 `KUBECONFIG` 环境变量。
+2.  复制并粘贴终端中显示的命令，以设置 `KUBECONFIG` 环境变量。
 
-    3.  验证是否已正确设置 `KUBECONFIG` 环境变量。
+3.  验证是否已正确设置 `KUBECONFIG` 环境变量。
 
+    OS X 的示例：
 
-        OS X 的示例：
-
-        ```
+    ```
         echo $KUBECONFIG
         ```
-        {: pre}
+    {: pre}
 
-        输出：
+    输出：
 
-        ```
+    ```
         /Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
         ```
-        {: screen}
+    {: screen}
 
-    4.  通过检查 Kubernetes CLI 服务器版本，验证 `kubectl` 命令是否针对您的集群正常运行。
+4.  通过检查 Kubernetes CLI 服务器版本，验证 `kubectl` 命令是否针对您的集群正常运行。
 
-        ```
+    ```
         kubectl version  --short
         ```
-        {: pre}
+    {: pre}
 
-        输出示例：
+    输出示例：
 
-        ```
-        Client Version: v1.7.4
-        Server Version: v1.7.4
-        ```
-        {: screen}
+    ```
+    Client Version: v1.8.6
+    Server Version: v1.8.6
+    ```
+    {: screen}
 
-5.  将 {{site.data.keyword.toneanalyzershort}} 服务添加到集群。通过 {{site.data.keyword.Bluemix_notm}} 服务，您可以利用应用程序中已开发的功能。集群中部署的任何应用程序都可以使用绑定到该集群的任何 {{site.data.keyword.Bluemix_notm}} 服务。对要用于应用程序的每个 {{site.data.keyword.Bluemix_notm}} 服务，重复以下步骤。
-    1.  将 {{site.data.keyword.toneanalyzershort}} 服务添加到您的 {{site.data.keyword.Bluemix_notm}} 帐户。
+## 第 4 课：向集群添加服务
+{: #cs_cluster_tutorial_lesson4}
 
-        **注**：将 {{site.data.keyword.toneanalyzershort}} 服务添加到您的帐户时，将显示一条消息表明该服务不是免费的。如果限制 API 调用，那么本教程不会导致 {{site.data.keyword.watson}} 服务收取费用。[查看 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 服务的定价信息 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/watson/developercloud/tone-analyzer.html#pricing-block)。
+通过 {{site.data.keyword.Bluemix_notm}} 服务，您可以利用应用程序中已开发的功能。集群中部署的任何应用程序都可以使用绑定到该集群的任何 {{site.data.keyword.Bluemix_notm}} 服务。对要用于应用程序的每个 {{site.data.keyword.Bluemix_notm}} 服务，重复以下步骤。
 
-        ```
+1.  将 {{site.data.keyword.toneanalyzershort}} 服务添加到您的 {{site.data.keyword.Bluemix_notm}} 帐户。
+
+    **注**：将 {{site.data.keyword.toneanalyzershort}} 服务添加到您的帐户时，将显示一条消息表明该服务不是免费的。如果限制 API 调用，那么本教程不会导致 {{site.data.keyword.watson}} 服务收取费用。[查看 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 服务的定价信息 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/watson/developercloud/tone-analyzer.html#pricing-block)。
+
+    ```
         bx service create tone_analyzer standard <mytoneanalyzer>
         ```
-        {: pre}
+    {: pre}
 
-    2.  将 {{site.data.keyword.toneanalyzershort}} 实例绑定到集群的 `default` Kubernetes 名称空间。您可以在以后创建自己的名称空间来管理对 Kubernetes 资源的用户访问权，但现在，请使用 `default` 名称空间。Kubernetes 名称空间不同于先前创建的注册表名称空间。
+2.  将 {{site.data.keyword.toneanalyzershort}} 实例绑定到集群的 `default` Kubernetes 名称空间。您可以在以后创建自己的名称空间来管理对 Kubernetes 资源的用户访问权，但现在，请使用 `default` 名称空间。Kubernetes 名称空间不同于先前创建的注册表名称空间。
 
-        ```
+    ```
         bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
         ```
-        {: pre}
+    {: pre}
 
-        输出：
+    输出：
 
-        ```
+    ```
         bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
         Binding service instance to namespace...
         OK
         Namespace:	default
         Secret name:	binding-mytoneanalyzer
         ```
-        {: screen}
+    {: screen}
 
-6.  验证是否已在集群名称空间中创建 Kubernetes 私钥。每个 {{site.data.keyword.Bluemix_notm}} 服务都由一个 JSON 文件进行定义，此文件包含有关该服务的保密信息，例如容器用于访问该服务的用户名、密码和 URL。为了安全地存储这些信息，将使用 Kubernetes 私钥。在此示例中，私钥所包含的凭证用于访问在您帐户中供应的 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 的实例。
+3.  验证是否已在集群名称空间中创建 Kubernetes 私钥。每个 {{site.data.keyword.Bluemix_notm}} 服务都由一个 JSON 文件进行定义，此文件包含有关该服务的保密信息，例如容器用于访问该服务的用户名、密码和 URL。为了安全地存储这些信息，将使用 Kubernetes 私钥。在此示例中，私钥所包含的凭证用于访问在您帐户中供应的 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 的实例。
 
     ```
     kubectl get secrets --namespace=default
@@ -287,6 +285,8 @@ lastupdated: "2017-12-13"
 
 </br>
 非常好！您已经配置了集群，并且您的本地环境已准备就绪，可以开始将应用程序部署到集群中。
+
+
 ## 接下来要做什么？
 {: #next}
 

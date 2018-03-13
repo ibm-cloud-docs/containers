@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -25,14 +25,14 @@ Puede poner la app a disponibilidad pública en Internet utilizando la direcció
 ## Configuración del acceso público a una app utilizando el tipo de servicio NodePort
 {: #config}
 
-Puede exponer la app como servicio de Kubernetes de tipo NodePort para clústeres de tipo lite o estándares.
+Puede exponer la app como servicio de Kubernetes de tipo NodePort para clústeres gratuitos o estándares.
 {:shortdesc}
 
 **Nota:** La dirección IP pública de un nodo trabajador no es permanente. Si el nodo trabajador se debe volver a crear, se le asigna una nueva dirección IP pública. Si necesita una dirección IP pública estable y más disponibilidad para el servicio, exponga la app utilizando un [servicio LoadBalancer](cs_loadbalancer.html) o [Ingress](cs_ingress.html).
 
 Si todavía no tiene una app lista, puede utilizar una app de ejemplo de Kubernetes denominada [Guestbook ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/kubernetes/blob/master/examples/guestbook/all-in-one/guestbook-all-in-one.yaml).
 
-1.  En el archivo de configuración de la app, defina una sección de [servicio ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/services-networking/service/). 
+1.  En el archivo de configuración de la app, defina una sección de [servicio ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/services-networking/service/).
 
     Ejemplo:
 
@@ -62,7 +62,7 @@ Si todavía no tiene una app lista, puede utilizar una app de ejemplo de Kuberne
     <tbody>
     <tr>
     <td><code>name</code></td>
-    <td>Sustituya <code><em>&lt;my-nodeport-service&gt;</em></code> por el nombre del servicio NodePort. </td>
+    <td>Sustituya <code><em>&lt;my-nodeport-service&gt;</em></code> por el nombre del servicio NodePort.</td>
     </tr>
     <tr>
     <td><code> run</code></td>
@@ -79,7 +79,7 @@ Si todavía no tiene una app lista, puede utilizar una app de ejemplo de Kuberne
      </tbody></table>
 
 
-    Para el ejemplo Guestbook, ya existe una sección de servicio frontal en el archivo de configuración. Para que la app Guestbook esté disponible externamente, añada el tipo de NodePort y un NodePort comprendido entre 30000 y 32767 a la sección de servicio frontal. 
+    Para el ejemplo Guestbook, ya existe una sección de servicio frontal en el archivo de configuración. Para que la app Guestbook esté disponible externamente, añada el tipo de NodePort y un NodePort comprendido entre 30000 y 32767 a la sección de servicio frontal.
 
     ```
     apiVersion: v1

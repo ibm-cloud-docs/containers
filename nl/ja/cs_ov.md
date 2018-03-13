@@ -16,9 +16,9 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# このページは移動されました。
+# お探しのコンテンツは移動しました。
 
-以下のトピックを確認してください。
+新しい場所にある最新の情報をご確認ください。
  - [Docker コンテナー](cs_tech.html#docker_containers)
  - [Kubernetes の基本](cs_tech.html#kubernetes_basics)
  - [クラスターを使用する利点](cs_why.html#benefits)

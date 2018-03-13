@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-07"
 
 ---
 
@@ -20,6 +20,8 @@ lastupdated: "2018-01-12"
 
 Os nós do trabalhador de borda podem melhorar a segurança de seu cluster, permitindo que menos nós do trabalhador sejam acessados externamente e isolando a carga de trabalho de rede. Quando esses nós do trabalhador são marcados somente para rede, outras cargas de trabalho não podem consumir a CPU ou memória do nó do trabalhador e interferir na rede.
 {:shortdesc}
+
+
 
 ## Rotular nós do trabalhador como nós da borda
 {: #edge_nodes}

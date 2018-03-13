@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-09"
+lastupdated: "2018-01-29"
 
 ---
 
@@ -15,9 +15,9 @@ lastupdated: "2018-01-09"
 {:tip: .tip}
 {:download: .download}
 
-# Cette page a été déplacée
+# Le contenu que vous cherchez a été déplacé.
 
-Accédez aux rubriques sur la sécurité ici :
+Consultez les informations les plus récentes dans son nouvel emplacement :
  - [Sécurité par composant du cluster](cs_secure.html#cluster)
    - [Maître Kubernetes](cs_secure.html#master)
    - [Noeuds d'agent](cs_secure.html#worker)
@@ -31,3 +31,5 @@ Accédez aux rubriques sur la sécurité ici :
  - [Configuration de la connectivité VPN avec les diagrammes Helm du service VPN Strongswan IPSec](cs_vpn.html#vpn)
  - [Règles réseau](cs_network_policy.html#network_policies)
  - [Restriction du trafic réseau aux noeuds d'agent de périphérie](cs_edge.html#edge)
+
+

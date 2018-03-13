@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-09"
+lastupdated: "2018-01-31"
 
 ---
 
@@ -55,30 +55,34 @@ Revise las opciones para depurar sus clústeres y encontrar las causas raíz de 
     <th>Descripción</th>
     </thead>
     <tbody>
+  
+  <tr>
+      <td>Crítico</td>
+      <td>No se puede acceder al maestro de Kubernetes o todos los nodos trabajadores del clúster están inactivos.</td>
+     </tr>
+  
       <tr>
         <td>Despliegue</td>
-        <td>El nodo Kubernetes maestro no está completamente desplegado. No puede acceder a su clúster.</td>
+        <td>El maestro de Kubernetes no está completamente desplegado. No puede acceder a su clúster.</td>
        </tr>
        <tr>
-        <td>Pendiente</td>
-        <td>El nodo Kubernetes maestro está desplegado. Los nodos trabajadores se están suministrando y aún no están disponibles en el clúster. Puede acceder al clúster, pero no puede desplegar apps en el clúster.</td>
-      </tr>
-      <tr>
         <td>Normal</td>
         <td>Todos los nodos trabajadores de un clúster están activos y en ejecución. Puede acceder al clúster y desplegar apps en el clúster.</td>
      </tr>
+       <tr>
+        <td>Pendiente</td>
+        <td>El maestro de Kubernetes está desplegado. Los nodos trabajadores se están suministrando y aún no están disponibles en el clúster. Puede acceder al clúster, pero no puede desplegar apps en el clúster.</td>
+      </tr>
+  
      <tr>
         <td>Aviso</td>
         <td>Al menos un nodo trabajador del clúster no está disponible, pero los otros nodos trabajadores están disponibles y pueden asumir la carga de trabajo.</td>
-     </tr>
-     <tr>
-      <td>Crítico</td>
-      <td>No se puede acceder al nodo Kubernetes maestro o todos los nodos trabajadores del clúster están inactivos.</td>
-     </tr>
+     </tr>  
     </tbody>
   </table>
 
-3.  Si el clúster está en estado **Aviso** o **Crítico**, o se ha bloqueado en el estado **Pendiente** durante mucho tiempo, revise el estado de los nodos trabajadores. Si el clúster está en estado **Despliegue**, espere hasta que el clúster se haya desplegado por completo para revisar el estado del clúster. Se considera que los clústeres en estado **Normal** están en buen estado y no requieren ninguna acción en este momento.
+3.  Si el clúster está en estado **Aviso**, **Crítico** o **Error al suprimir**, o se ha bloqueado en el estado **Pendiente** durante mucho tiempo, revise el estado de los nodos trabajadores. Si el clúster está en estado **Despliegue**, espere hasta que el clúster se haya desplegado por completo para revisar el estado del clúster. Los clústeres en estado **Normal** no requieren ninguna acción en este momento. 
+<p>Para revisar el estado de los nodos trabajadores:</p>
 
   ```
   bx cs workers <cluster_name_or_id>
@@ -93,7 +97,7 @@ Revise las opciones para depurar sus clústeres y encontrar las causas raíz de 
     <tbody>
       <tr>
        <td>Desconocido</td>
-       <td>No se puede acceder al nodo Kubernetes maestro por uno de estos motivos:<ul><li>Ha solicitado una actualización del nodo Kubernetes maestro. El estado del nodo trabajador no se puede recuperar durante la actualización.</li><li>Es posible que tenga un cortafuegos adicional que está protegiendo sus nodos trabajadores o que haya modificado los valores del cortafuegos recientemente. {{site.data.keyword.containershort_notm}} requiere que determinadas direcciones IP y puertos estén abiertos para permitir la comunicación entre el nodo trabajador y el nodo Kubernetes maestro y viceversa. Para obtener más información, consulte [El cortafuegos impide que los nodos trabajadores se conecten](#cs_firewall).</li><li>El nodo Kubernetes maestro está inactivo. Para ponerse en contacto con el equipo de soporte de {{site.data.keyword.Bluemix_notm}}, abra una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support).</li></ul></td>
+       <td>No se puede acceder al maestro de Kubernetes por uno de estos motivos:<ul><li>Ha solicitado una actualización del maestro de Kubernetes. El estado del nodo trabajador no se puede recuperar durante la actualización.</li><li>Es posible que tenga un cortafuegos adicional que está protegiendo sus nodos trabajadores o que haya modificado los valores del cortafuegos recientemente. {{site.data.keyword.containershort_notm}} requiere que determinadas direcciones IP y puertos estén abiertos para permitir la comunicación entre el nodo trabajador y el maestro de Kubernetes y viceversa. Para obtener más información, consulte [El cortafuegos impide que los nodos trabajadores se conecten](#cs_firewall).</li><li>El maestro de Kubernetes está inactivo. Para ponerse en contacto con el equipo de soporte de {{site.data.keyword.Bluemix_notm}}, abra una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](/docs/get-support/howtogetsupport.html#getting-customer-support).</li></ul></td>
       </tr>
       <tr>
         <td>Suministro</td>
@@ -143,19 +147,19 @@ Revise las opciones para depurar sus clústeres y encontrar las causas raíz de 
     <tbody>
       <tr>
         <td>Excepción de infraestructura de {{site.data.keyword.Bluemix_notm}}: En este momento su cuenta no tiene permitido solicitar 'Instancias de cálculo'.</td>
-        <td>Puede que su cuenta de infraestructura de IBM Cloud (SoftLayer) tenga restringida la solicitud de recursos de cálculo. Para ponerse en contacto con el equipo de soporte de {{site.data.keyword.Bluemix_notm}}, abra una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support).</td>
+        <td>Puede que su cuenta de infraestructura de IBM Cloud (SoftLayer) tenga restringida la solicitud de recursos de cálculo. Para ponerse en contacto con el equipo de soporte de {{site.data.keyword.Bluemix_notm}}, abra una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](/docs/get-support/howtogetsupport.html#getting-customer-support).</td>
       </tr>
       <tr>
         <td>Excepción de infraestructura de {{site.data.keyword.Bluemix_notm}}: No se ha podido realizar el pedido. No hay suficientes recursos tras el direccionador 'router_name' para realizar la solicitud para los siguientes invitados: 'worker_id'.</td>
-        <td>La VLAN que ha seleccionado está asociada a un pod del centro de datos que no tiene suficiente espacio para suministrar el nodo trabajador. Puede elegir entre las opciones siguientes:<ul><li>Utilice otro centro de datos para suministrar el nodo trabajador. Ejecute <code>bx cs locations</code> para ver una lista de los centros de datos disponibles.<li>Si tiene un par existente de VLAN pública y privada asociado a otro pod del centro de datos, utilice este par de VLAN.<li>Para ponerse en contacto con el equipo de soporte de {{site.data.keyword.Bluemix_notm}}, abra una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support).</ul></td>
+        <td>La VLAN que ha seleccionado está asociada a un pod del centro de datos que no tiene suficiente espacio para suministrar el nodo trabajador. Puede elegir entre las opciones siguientes:<ul><li>Utilice otro centro de datos para suministrar el nodo trabajador. Ejecute <code>bx cs locations</code> para ver una lista de los centros de datos disponibles.<li>Si tiene un par existente de VLAN pública y privada asociado a otro pod del centro de datos, utilice este par de VLAN.<li>Para ponerse en contacto con el equipo de soporte de {{site.data.keyword.Bluemix_notm}}, abra una [incidencia de soporte de {{site.data.keyword.Bluemix_notm}}](/docs/get-support/howtogetsupport.html#getting-customer-support).</ul></td>
       </tr>
       <tr>
         <td>Excepción de infraestructura de {{site.data.keyword.Bluemix_notm}}: No se ha podido obtener la VLAN de red con el id: &lt;vlan id&gt;.</td>
-        <td>El nodo de trabajador no se ha podido suministrar porque no se ha encontrado el ID de VLAN por una de las siguientes razones:<ul><li>Puede que haya especificado el número de VLAN en lugar del ID de VLAN. El número de VLAN tiene 3 ó 4 dígitos, mientras que el ID de VLAN tiene 7 dígitos. Ejecute <code>bx cs vlans &lt;location&gt;</code> para recuperar el ID de VLAN.<li>Es posible que el ID de VLAN no esté asociado a la cuenta de infraestructura de IBM Cloud (SoftLayer) que está utilizando. Ejecute <code>bx cs vlans &lt;location&gt;</code> ver una lista de los ID de VLAN disponibles para su cuenta. Para cambiar la cuenta de infraestructura de IBM Cloud (SoftLayer), consulte [bx cs credentials-set](cs_cli_reference.html#cs_credentials_set). </ul></td>
+        <td>El nodo trabajador no se ha podido suministrar porque no se ha encontrado el ID de VLAN por una de las siguientes razones:<ul><li>Puede que haya especificado el número de VLAN en lugar del ID de VLAN. El número de VLAN tiene 3 ó 4 dígitos, mientras que el ID de VLAN tiene 7 dígitos. Ejecute <code>bx cs vlans &lt;location&gt;</code> para recuperar el ID de VLAN.<li>Es posible que el ID de VLAN no esté asociado a la cuenta de infraestructura de IBM Cloud (SoftLayer) que está utilizando. Ejecute <code>bx cs vlans &lt;location&gt;</code> ver una lista de los ID de VLAN disponibles para su cuenta. Para cambiar la cuenta de infraestructura de IBM Cloud (SoftLayer), consulte [bx cs credentials-set](cs_cli_reference.html#cs_credentials_set). </ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation: La ubicación suministrara para este pedido no es válida. (HTTP 500)</td>
-        <td>Su cuenta de infraestructura de IBM Cloud (SoftLayer) no está configurada para solicitar recursos de cálculo en el centro de datos seleccionado. Póngase en contacto con el [equipo de soporte de {{site.data.keyword.Bluemix_notm}}](/docs/support/index.html#contacting-support) para comprobar que la cuenta está correctamente configurada.</td>
+        <td>Su cuenta de infraestructura de IBM Cloud (SoftLayer) no está configurada para solicitar recursos de cálculo en el centro de datos seleccionado. Póngase en contacto con el [equipo de soporte de {{site.data.keyword.Bluemix_notm}}](/docs/get-support/howtogetsupport.html#getting-customer-support) para comprobar que la cuenta está correctamente configurada.</td>
        </tr>
        <tr>
         <td>Excepción de infraestructura de {{site.data.keyword.Bluemix_notm}}: El usuario no tiene los permisos necesarios de la infraestructura de {{site.data.keyword.Bluemix_notm}} para añadir servidores
@@ -303,7 +307,7 @@ Si el proxy kubectl se ejecuta correctamente pero el panel de control no está d
 
 
 {: tsCauses}
-Es posible que tenga un cortafuegos adicional configurado o que se hayan personalizado los valores existentes del cortafuegos en la cuenta de infraestructura de IBM Cloud (SoftLayer). {{site.data.keyword.containershort_notm}} requiere que determinadas direcciones IP y puertos estén abiertos para permitir la comunicación entre el nodo trabajador y el nodo Kubernetes maestro y viceversa. Otro motivo puede ser que los nodos trabajadores están bloqueados en un bucle de recarga.
+Es posible que tenga un cortafuegos adicional configurado o que se hayan personalizado los valores existentes del cortafuegos en la cuenta de infraestructura de IBM Cloud (SoftLayer). {{site.data.keyword.containershort_notm}} requiere que determinadas direcciones IP y puertos estén abiertos para permitir la comunicación entre el nodo trabajador y el maestro de Kubernetes y viceversa. Otro motivo puede ser que los nodos trabajadores están bloqueados en un bucle de recarga.
 
 {: tsResolve}
 [Permita que el clúster acceda a los recursos de infraestructura y a otros servicios](cs_firewall.html#firewall_outbound). Esta tarea precisa de la [política de acceso de administrador](cs_users.html#access_policies). Verifique su [política de acceso](cs_users.html#infra_access) actual.
@@ -332,10 +336,11 @@ Utilice [DaemonSets ![Icono de enlace externo](../icons/launch-glyph.svg "Icono 
 {: #cs_duplicate_services}
 
 {: tsSymptoms}
-Cuando ejecute `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>` verá el siguiente mensaje. 
+Cuando ejecute `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>` verá el siguiente mensaje.
 
 ```
-Se han encontrado varios servicios con el mismo nombre. Ejecute 'bx service list' para ver las instancias de servicio de Bluemix disponibles...
+Se han encontrado varios servicios con el mismo nombre.
+Ejecute 'bx service list' para ver las instancias de servicio de Bluemix disponibles...
 ```
 {: screen}
 
@@ -355,7 +360,7 @@ Utilice el GUID de servicio en lugar del nombre de instancia de servicio en el m
 
   Salida:
   ```
- Invocando 'cf service <service_instance_name> --guid'...
+  Invocando 'cf service <service_instance_name> --guid'...
   <service_instance_GUID>
   ```
   {: screen}
@@ -398,7 +403,7 @@ Estos duplicados no ocasionan interrupciones en el servicio, pero debe eliminar 
 Ha suprimido un nodo trabajador del clúster y luego ha añadido un nodo trabajador. Cuando se despliega un pod o un servicio de Kubernetes, el recurso no puede acceder al nodo trabajador recién creado y la conexión supera el tiempo de espera.
 
 {: tsCauses}
-Si suprime un nodo trabajador del clúster y luego añade un nodo de trabajo, es posible que el nuevo nodo trabajador se asigne a la dirección IP privada del nodo trabajador suprimido. Calico utiliza esta dirección IP privada como código y sigue intentando acceder al nodo suprimido.
+Si suprime un nodo trabajador del clúster y luego añade un nodo trabajador, es posible que el nuevo nodo trabajador se asigne a la dirección IP privada del nodo trabajador suprimido. Calico utiliza esta dirección IP privada como código y sigue intentando acceder al nodo suprimido.
 
 {: tsResolve}
 Actualice manualmente la referencia a la dirección IP privada de modo que apunte al nodo correcto.
@@ -569,11 +574,11 @@ Revise los siguientes motivos por los que no aparecen los registros y los pasos 
  </tr>
  <tr>
  <td>Se ha alcanzado el límite de almacenamiento de registro.</td>
- <td>Para aumentar los limites del almacenamiento de registros, consulte la documentación de <a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html#error_msgs">{{site.data.keyword.loganalysislong_notm}}</a>.</td>
+ <td>Para aumentar los limites del almacenamiento de registros, consulte la documentación de <a href="/docs/services/CloudLogAnalysis/troubleshooting/error_msgs.html">{{site.data.keyword.loganalysislong_notm}}</a>.</td>
  </tr>
  <tr>
  <td>Si ha especificado un espacio durante la creación del clúster, el propietario de la cuenta no tiene permisos de gestor, desarrollador o auditor para el espacio en cuestión.</td>
- <td>Para cambiar los permisos de acceso para el propietario de la cuenta:<ol><li>Para descubrir quién es el propietario de la cuenta del clúster, ejecute <code>bx cs api-key-info &lt;cluster_name_or_id&gt;</code>.</li><li>Para otorgar a dicho propietario de cuenta permisos de acceso de {{site.data.keyword.containershort_notm}} de Gestor, Desarrollador o Auditor al espacio, consulte <a href="cs_users.html#managing">Gestión de acceso a clústeres</a>.</li><li>Para renovar la señal de registro tras cambiar los permisos, ejecute <code>bx cs logging-config-refresh &lt;cluster_name_or_id&gt;</code>.</li></ol></td>
+ <td>Para cambiar los permisos de acceso para el propietario de la cuenta:<ol><li>Para descubrir quién es el propietario de la cuenta del clúster, ejecute <code>bx cs api-key-info &lt;cluster_name_or_ID&gt;</code>.</li><li>Para otorgar a dicho propietario de cuenta permisos de acceso de {{site.data.keyword.containershort_notm}} de Gestor, Desarrollador o Auditor al espacio, consulte <a href="cs_users.html#managing">Gestión de acceso a clústeres</a>.</li><li>Para renovar la señal de registro tras cambiar los permisos, ejecute <code>bx cs logging-config-refresh &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
  </tr>
  </tbody></table>
 
@@ -606,9 +611,10 @@ Para probar los cambios que ha realizado durante la resolución de problemas, pu
         {:pre}
 
   4. Después de unos minutos, verá los registros en el panel. Para acceder al panel de control de Kibana, vaya a uno de los siguientes URL y seleccione la cuenta de {{site.data.keyword.Bluemix_notm}} en la que ha creado el clúster. Si ha especificado un espacio durante la creación del clúster, vaya al espacio.
-        - EE.UU. Sur y EE.UU. este: https://logging.ng.bluemix.net
-        - UK-Sur y UE-Central: https://logging.eu-fra.bluemix.net
-        - AP Sur: https://logging.au-syd.bluemix.net
+      - EE.UU. sur y EE.UU. este: https://logging.ng.bluemix.net
+      - UK sur: https://logging.eu-gb.bluemix.net
+      - UE central: https://logging.eu-fra.bluemix.net
+      - AP Sur: https://logging.au-syd.bluemix.net
 
 <br />
 
@@ -644,7 +650,7 @@ Ha expuesto a nivel público la app creando un servicio equilibrador de carga en
 {: tsCauses}
 Posibles motivos por los que el servicio del equilibrador de carga no funciona correctamente:
 
--   El clúster es un clúster lite o un clúster estándar con un solo nodo trabajador.
+-   El clúster es un clúster gratuito o un clúster estándar con un solo nodo trabajador.
 -   El clúster todavía no se ha desplegado por completo.
 -   El script de configuración correspondiente al servicio equilibrador de carga incluye errores.
 
@@ -696,7 +702,7 @@ Para resolver el problema del servicio equilibrador de carga:
     <li><pre class="screen"><code>No hay nodos disponibles para el servicio equilibrador de carga</code></pre>No tiene suficientes nodos trabajadores para desplegar un servicio equilibrador de carga. Una razón posible es que ha desplegado un clúster estándar con más de un nodo trabajador, pero el suministro de los nodos trabajadores ha fallado.</li>
     <ol><li>Obtenga una lista de los nodos trabajadores disponibles.</br><pre class="codeblock"><code>kubectl get nodes</code></pre></li>
     <li>Si se encuentran al menos dos nodos trabajadores disponibles, obtenga una lista de los detalles de los nodos trabajadores.</br><pre class="screen"><code>bx cs worker-get [&lt;cluster_name_or_id&gt;] &lt;worker_ID&gt;</code></pre></li>
-    <li>Asegúrese de que los ID de las VLAN públicas y privadas correspondientes a los nodos trabajadores devueltos por los mandatos <code>kubectl get nodes</code> y <code>bx cs [&lt;cluster_name_or_id&gt;] worker-get</code> coinciden. </li></ol></li></ul>
+    <li>Asegúrese de que los ID de las VLAN públicas y privadas correspondientes a los nodos trabajadores devueltos por los mandatos <code>kubectl get nodes</code> y <code>bx cs [&lt;cluster_name_or_id&gt;] worker-get</code> coinciden.</li></ol></li></ul>
 
 4.  Si utiliza un dominio personalizado para conectar con el servicio equilibrador de carga, asegúrese de que el dominio personalizado está correlacionado con la dirección IP pública del servicio equilibrador de carga.
     1.  Busque la dirección IP pública del servicio equilibrador de carga.
@@ -716,20 +722,20 @@ Para resolver el problema del servicio equilibrador de carga:
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
-Ha expuesto a nivel público la app creando un recurso de Ingress para la app en el clúster. Cuando intenta conectar con la app a través de la dirección IP pública o subdominio del controlador de Ingress, la conexión falla o supera el tiempo de espera.
+Ha expuesto a nivel público la app creando un recurso de Ingress para la app en el clúster. Cuando intenta conectar con la app a través de la dirección IP pública o subdominio del equilibrador de carga de aplicación de Ingress, la conexión falla o supera el tiempo de espera.
 
 {: tsCauses}
 Posibles motivos por los que Ingress no funciona correctamente:
 <ul><ul>
 <li>El clúster todavía no se ha desplegado por completo.
-<li>El clúster se ha configurado como un clúster lite o como un clúster estándar con un solo nodo trabajador.
+<li>El clúster se ha configurado como un clúster gratuito o como un clúster estándar con un solo nodo trabajador.
 <li>El script de configuración de Ingress incluye errores.
 </ul></ul>
 
 {: tsResolve}
 Para resolver el problema de Ingress:
 
-1.  Compruebe que ha configurado un clúster estándar que se ha desplegado por completo y que tiene al menos dos nodos trabajadores para garantizar la alta disponibilidad de su controlador de Ingress.
+1.  Compruebe que ha configurado un clúster estándar que se ha desplegado por completo y que tiene al menos dos nodos trabajadores para garantizar la alta disponibilidad de su equilibrador de carga de aplicación de Ingress.
 
   ```
   bx cs workers <cluster_name_or_id>
@@ -738,7 +744,7 @@ Para resolver el problema de Ingress:
 
     En la salida de la CLI, asegúrese de que el **Estado** de los nodos trabajadores sea **Listo** y que el **Tipo de máquina** muestre un tipo de máquina que no sea **gratuito (free)**.
 
-2.  Recupere el subdominio del controlador de Ingress y la dirección IP pública y luego ejecute ping sobre cada uno.
+2.  Recupere el subdominio del equilibrador de carga de aplicación de Ingress y la dirección IP pública y luego ejecute ping sobre cada uno.
 
     1.  Recupere el subdominio del controlador de Ingress.
 
@@ -747,34 +753,34 @@ Para resolver el problema de Ingress:
       ```
       {: pre}
 
-    2.  Ejecute ping sobre el subdominio del controlador de Ingress.
+    2.  Ejecute ping sobre el subdominio del equilibrador de carga de aplicación de Ingress.
 
       ```
       ping <ingress_controller_subdomain>
       ```
       {: pre}
 
-    3.  Recupere la dirección IP pública del controlador de Ingress.
+    3.  Recupere la dirección IP pública del equilibrador de carga de aplicación de Ingress.
 
       ```
       nslookup <ingress_controller_subdomain>
       ```
       {: pre}
 
-    4.  Ejecute ping sobre la dirección IP pública del controlador de Ingress.
+    4.  Ejecute ping sobre la dirección IP pública del equilibrador de carga de aplicación de Ingress.
 
       ```
       ping <ingress_controller_ip>
       ```
       {: pre}
 
-    Si la CLI devuelve un tiempo de espera para la dirección IP pública o subdominio del controlador de Ingress y ha configurado un cortafuegos personalizado que protege los nodos trabajadores, es posible que tenga que abrir puertos adicionales y grupos de redes en el [cortafuegos](#cs_firewall).
+    Si la CLI devuelve un tiempo de espera para la dirección IP pública o subdominio del equilibrador de carga de aplicación de Ingress y ha configurado un cortafuegos personalizado que protege los nodos trabajadores, es posible que tenga que abrir puertos adicionales y grupos de redes en el [cortafuegos](#cs_firewall).
 
-3.  Si utiliza un dominio personalizado, asegúrese de que el dominio personalizado está correlacionado con la dirección IP pública o subdominio del controlador de Ingress proporcionado por IBM con el proveedor del Servicio de nombres de dominio (DNS).
-    1.  Si ha utilizado el subdominio del controlador de Ingress, compruebe el registro del nombre canónico (CNAME).
-    2.  Si ha utilizado la dirección IP pública del controlador de Ingress, compruebe que el dominio personalizado esté correlacionado con la dirección IP pública portátil del registro de puntero
+3.  Si utiliza un dominio personalizado, asegúrese de que el dominio personalizado está correlacionado con la dirección IP pública o subdominio del equilibrador de carga de aplicación de Ingress proporcionado por IBM con el proveedor del Servicio de nombres de dominio (DNS).
+    1.  Si ha utilizado el subdominio del equilibrador de carga de aplicación de Ingress, compruebe el registro del nombre canónico (CNAME).
+    2.  Si ha utilizado la dirección IP pública del equilibrador de carga de aplicación de Ingress, compruebe que el dominio personalizado esté correlacionado con la dirección IP pública portátil del registro de puntero
 (PTR).
-4.  Compruebe el archivo de configuración de Ingress.
+4.  Compruebe el archivo de configuración del recurso de Ingress.
 
     ```
     apiVersion: extensions/v1beta1
@@ -797,7 +803,7 @@ Para resolver el problema de Ingress:
     ```
     {: codeblock}
 
-    1.  Compruebe que el subdominio del controlador de Ingress y el certificado TLS sean correctos. Para encontrar el subdominio proporcionado por IBM y el certificado TLS, ejecute bx cs cluster-get <cluster_name_or_id>.
+    1.  Compruebe que el subdominio del equilibrador de carga de aplicación de Ingress y el certificado TLS sean correctos. Para encontrar el subdominio proporcionado por IBM y el certificado TLS, ejecute bx cs cluster-get <cluster_name_or_id>.
     2.  Asegúrese de que su app está a la escucha en la misma vía de acceso que está configurada en la sección **path** de Ingress. Si la app se ha configurado para que escuche en la vía de acceso raíz, incluya **/** como vía de acceso.
 5.  Compruebe el despliegue de Ingress y mire si hay algún mensaje de error.
 
@@ -817,7 +823,7 @@ Para resolver el problema de Ingress:
     2.  Recuperar los registros correspondientes a cada pod de Ingress.
 
       ```
-      kubectl logs <ingress_pod_id> -n kube-system
+      kubectl logs <ingress_pod_id> nginx-ingress -n kube-system
       ```
       {: pre}
 
@@ -851,20 +857,20 @@ Revise los motivos siguientes por los que puede fallar el secreto del equilibrad
  <td>Solicite al administrador de su cuenta que le asigne los roles de **Operador** y **Editor** para su instancia de {{site.data.keyword.cloudcerts_full_notm}}. Para obtener más detalles, consulte <a href="/docs/services/certificate-manager/about.html#identity-access-management">Identity and Access Management</a> para {{site.data.keyword.cloudcerts_short}}.</td>
  </tr>
  <tr>
- <td>El CRN de certificado proporcionado en el momento de la creación, actualización o eliminación no pertenece a la misma cuenta que el clúster. </td>
- <td>Compruebe que el CRN de certificado que ha proporcionado se haya importado a una instancia del servicio de {{site.data.keyword.cloudcerts_short}} en la misma cuenta que su clúster. </td>
+ <td>El CRN de certificado proporcionado en el momento de la creación, actualización o eliminación no pertenece a la misma cuenta que el clúster.</td>
+ <td>Compruebe que el CRN de certificado que ha proporcionado se haya importado a una instancia del servicio de {{site.data.keyword.cloudcerts_short}} en la misma cuenta que su clúster.</td>
  </tr>
  <tr>
- <td>El CRN de certificado proporcionado en el momento de la creación no es correcto. </td>
- <td><ol><li>Compruebe que la serie de CRN de certificado es correcta. </li><li>Si el CRN de certificado no es correcto, intente actualizar el secreto. <pre class="pre"><code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li><li>Si el resultado de este mandato es <code>update_failed</code>, elimine el secreto. <pre class="pre"><code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt;</code></pre></li><li>Vuelva a desplegar el secreto. <pre class="pre"><code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li></ol></td>
+ <td>El CRN de certificado proporcionado en el momento de la creación no es correcto.</td>
+ <td><ol><li>Compruebe que la serie de CRN de certificado es correcta.</li><li>Si el CRN de certificado no es correcto, intente actualizar el secreto. <pre class="pre"><code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li><li>Si el resultado de este mandato es <code>update_failed</code>, elimine el secreto. <pre class="pre"><code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt;</code></pre></li><li>Vuelva a desplegar el secreto. <pre class="pre"><code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li></ol></td>
  </tr>
  <tr>
- <td>El CRN de certificado proporcionado en el momento de la actualización no es correcto. </td>
- <td><ol><li>Compruebe que la serie de CRN de certificado es correcta. </li><li>Si el CRN de certificado no es correcto, elimine el secreto. <pre class="pre"><code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt;</code></pre></li><li>Vuelva a desplegar el secreto. <pre class="pre"><code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li><li>Intente actualizar el secreto. <pre class="pre"><code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li></ol></td>
+ <td>El CRN de certificado proporcionado en el momento de la actualización no es correcto.</td>
+ <td><ol><li>Compruebe que la serie de CRN de certificado es correcta.</li><li>Si el CRN de certificado no es correcto, elimine el secreto. <pre class="pre"><code>bx cs alb-cert-rm --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt;</code></pre></li><li>Vuelva a desplegar el secreto. <pre class="pre"><code>bx cs alb-cert-deploy --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li><li>Intente actualizar el secreto. <pre class="pre"><code>bx cs alb-cert-deploy --update --cluster &lt;cluster_name_or_id&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></pre></li></ol></td>
  </tr>
  <tr>
- <td>El servicio {{site.data.keyword.cloudcerts_long_notm}} está experimentando un tiempo de inactividad. </td>
- <td>Compruebe que el servicio {{site.data.keyword.cloudcerts_short}} esté activo y en ejecución. </td>
+ <td>El servicio {{site.data.keyword.cloudcerts_long_notm}} está experimentando un tiempo de inactividad.</td>
+ <td>Compruebe que el servicio {{site.data.keyword.cloudcerts_short}} esté activo y en ejecución.</td>
  </tr>
  </tbody></table>
 
@@ -879,7 +885,7 @@ Revise los motivos siguientes por los que puede fallar el secreto del equilibrad
 Cuando recupere el `<ETCD_URL>` para [añadir políticas de red](cs_network_policy.html#adding_network_policies), obtiene un mensaje de error `calico-config not found`.
 
 {: tsCauses}
-El clúster no está en el nivel de [Kubernetes versión 1.7](cs_versions.html) o posterior. 
+El clúster no está en el nivel de [Kubernetes versión 1.7](cs_versions.html) o posterior.
 
 {: tsResolve}
 [Actualice el clúster](cs_cluster_update.html#master) o recupere el `<ETCD_URL>` con mandatos compatibles con versiones anteriores de Kubernetes.
@@ -916,9 +922,11 @@ Cuando recupere el `<ETCD_URL>`, continúe con los pasos que figuran en (Adició
 -   Puede publicar una pregunta en [{{site.data.keyword.containershort_notm}} Slack. ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibm-container-service.slack.com) Consejo: si no utiliza un ID de IBM para la cuenta de {{site.data.keyword.Bluemix_notm}}, [solicite una invitación](https://bxcs-slack-invite.mybluemix.net/) a este Slack.
 -   Revise los foros para ver si otros usuarios se han encontrado con el mismo problema. Cuando utiliza los foros para formular una pregunta, etiquete la pregunta para que la puedan ver los equipos de desarrollo de {{site.data.keyword.Bluemix_notm}}.
 
-    -   Si tiene preguntas técnicas sobre el desarrollo o despliegue de clústeres o apps con {{site.data.keyword.containershort_notm}}, publique su pregunta en [Stack Overflow ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](http://stackoverflow.com/search?q=bluemix+containers) y etiquete su pregunta con `ibm-bluemix`, `kubernetes` y `containers`.
-    -   Para las preguntas relativas a las instrucciones de inicio y el servicio, utilice el foro [IBM developerWorks dW Answers ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluya las etiquetas `bluemix`
-y `containers`.
-    Consulte [Obtención de ayuda](/docs/support/index.html#getting-help) para obtener más detalles sobre cómo utilizar los foros.
+    -   Si tiene preguntas técnicas sobre el desarrollo o despliegue de clústeres o apps con {{site.data.keyword.containershort_notm}}, publique su pregunta en [Stack Overflow ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) y etiquete su pregunta con `ibm-cloud`, `kubernetes` y `containers`.
+    -   Para las preguntas relativas a las instrucciones de inicio y el servicio, utilice el foro [IBM developerWorks dW Answers ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluya las etiquetas `ibm-cloud` y `containers`.
+    Consulte [Obtención de ayuda](/docs/get-support/howtogetsupport.html#using-avatar) para obtener más detalles sobre cómo utilizar los foros.
 
--   Póngase en contacto con el servicio de soporte de IBM. Para obtener información sobre cómo abrir una incidencia de soporte de IBM, o sobre los niveles de soporte y las gravedades de las incidencias, consulte [Cómo contactar con el servicio de soporte](/docs/support/index.html#contacting-support).
+-   Póngase en contacto con el servicio de soporte de IBM. Para obtener información sobre cómo abrir una incidencia de soporte de IBM, o sobre los niveles de soporte y las gravedades de las incidencias, consulte [Cómo contactar con el servicio de soporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
+
+{:tip}
+Al informar de un problema, incluya el ID de clúster. Para obtener el ID de clúster, ejecute `bx cs clusters`.

@@ -17,9 +17,9 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# Cette page a été déplacée
+# Le contenu que vous cherchez a été déplacé.
 
-Accédez aux rubriques correspondantes ici :
+Consultez les informations les plus récentes dans son nouvel emplacement :
 - [Création de clusters depuis l'interface graphique](cs_clusters.html#clusters_ui)
 - [Création de clusters depuis l'interface CLI](cs_clusters.html#clusters_cli)
 - [Utilisation de registres d'images privés et publics](cs_images.html#images)

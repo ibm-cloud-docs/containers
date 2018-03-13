@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-07"
 
 ---
 
@@ -16,21 +16,91 @@ lastupdated: "2018-01-11"
 {:download: .download}
 
 
-# Daten durch Speicherung auf persistenten Datenträgern (Persistent Volumes, PV) sichern
+# Daten in Ihrem Cluster speichern
+{: #storage}
+Sie können Daten dauerhaft speichern, damit sie bei Störungen Ihres Clusters oder für die gemeinsame Nutzung durch App-Instanzen zur Verfügung stehen.
+
+## Hochverfügbarkeitsspeicher planen
 {: #planning}
 
-Ein Container ist designbedingt kurzlebig. Sie haben jedoch, wie im Diagramm dargestellt, die Wahl zwischen mehreren Optionen, um Daten für den Fall eines Container-Failovers persistent zu speichern und Daten zwischen mehreren Containern gemeinsam zu nutzen.
-{:shortdesc}
+In {{site.data.keyword.containerlong_notm}} stehen verschiedene Optionen zum Speichern Ihrer App-Daten und für die gemeinsame Datennutzung zwischen Pods in Ihrem Cluster zur Auswahl. Nicht alle Speicheroptionen bieten denselben Grad an Permanenz und Verfügbarkeit, falls eine Komponente in Ihrem Cluster oder ein ganzer Standort ausfällt.
+{: shortdesc}
 
-**Hinweis**: Wenn Sie über eine Firewall verfügen, [gewähren Sie Egress-Zugriff](cs_firewall.html#pvc) für die IBM Cloud Infrastructure (SoftLayer)-IP-Bereiche der Standorte (Rechenzentren), in denen sich Ihre Cluster befinden, damit Sie Persistent Volume Claims erstellen können.
+### Optionen für nicht persistente Datenspeicherung
+{: #non_persistent}
 
-![Optionen für persistentes Speichern bei Bereitstellungen in Kubernetes-Clustern](images/cs_planning_apps_storage.png)
+Optionen für nicht persistente Speicherung können verwendet werden, wenn die zu speichernden Daten nicht permanent verfügbar sein müssen (z. B. zum Wiederherstellen nach Clusterfehlern) oder nicht von App-Instanzen gemeinsam genutzt werden. Außerdem können diese Speicheroptionen zum Testen von App-Komponenten oder neuen Funktionen verwendet werden.
+{: shortdesc}
 
-|Option|Beschreibung|
-|------|-----------|
-|Option 1: Verwenden von `/emptyDir`, um Daten unter Verwendung des verfügbaren Plattenspeichers auf dem Workerknoten zu speichern<p>Dieses Feature ist nur für Lite-Cluster und Standardcluster verfügbar.</p>|Bei dieser Option können Sie auf dem Plattenspeicher Ihres Workerknotens einen leeren Datenträger erstellen, der einem Pod zugewiesen ist. Der Container in diesem Pod kann auf diesen Datenträger schreiben und von ihm lesen. Da der Datenträger einem ganz bestimmten Pod zugewiesen ist, können Daten nicht mit anderen Pods in einer Replikatgruppe gemeinsam genutzt werden.<p>Ein `/emptyDir`-Datenträger und die in ihm enthaltenen Daten werden entfernt, sobald der zugewiesene Pod endgültig vom Workerknoten gelöscht wird.</p><p>**Hinweis:** Wenn der Container im Pod ausfällt, sind die im Datenträger enthaltenen Daten trotzdem noch auf dem Workerknoten verfügbar.</p><p>Weitere Informationen finden Sie unter [Kubernetes-Datenträger ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/storage/volumes/).</p>|
-|Option 2: Erstellen eines Persistent Volume Claims (PVCs), um NFS-basierten persistenten Speicher für die Bereitstellung einzurichten<p>Dieses Feature ist nur für Standardcluster verfügbar.</p>|<p>Diese Option bietet persistente Speicherung von App- und Containerdaten durch Persistent Volumes (PVs). Die Volumes sind in einem [NFS-basierten Endurance- und Performance-Dateispeicher ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud/file-storage/details) gehostet. Der Dateispeicher ist im Ruhezustand verschlüsselt und Sie können Replikate der gespeicherten Daten erstellen.</p> <p>Sie erstellen einen [Persistent Volume Claim](cs_storage.html) (PVC), um eine Anforderung für NFS-basierten Dateispeicher zu stellen. {{site.data.keyword.containershort_notm}} stellt vordefinierte Speicherklassen bereit, die den Größenbereich des Speichers, die E/A-Operationen pro Sekunde, die Löschrichtlinie sowie die Lese- und Schreibberechtigungen für den Datenträger definieren. Beim Erstellen Ihres Persistent Volume Claims können Sie zwischen diesen Speicherklassen wählen. Nachdem Sie einen Persistent Volume Claim (PVC) übergeben haben, stellt {{site.data.keyword.containershort_notm}} dynamisch ein Persistent Volume (PV) bereit, das in NFS-basiertem Dateispeicher gehostet wird. [Sie hängen den Persistent Volume Claim (PVC)](cs_storage.html#create) als Datenträger an Ihre Bereitstellung an, damit die Container den Datenträger lesen und beschreiben können. Persistent Volumes (PV) können in derselben Replikatgruppe oder von mehreren Bereitstellungen in demselben Cluster gemeinsam genutzt werden.</p><p>Wenn ein Container ausfällt oder ein Pod von einem Workerknoten entfernt wird, werden die Daten selbst nicht entfernt; auf sie kann über andere Bereitstellungen zugegriffen werden, an die der Datenträger angehängt ist. Persistent Volume Claims (PVCs) werden im persistenten Speicher gehostet, Sicherungen sind jedoch keine verfügbar. Falls Sie eine Sicherung Ihrer Daten benötigen, können Sie eine manuelle Sicherung erstellen.</p><p>**Hinweis:** Die Speicherung in persistenten NFS-Dateifreigaben wird monatlich berechnet. Wenn Sie persistenten Speicher für Ihren Cluster einrichten und diesen unverzüglich nach der Einrichtung entfernen, bezahlen Sie trotzdem die monatliche Gebühr für den persistenten Speicher, auch wenn sie ihn nur über einen kurzen Zeitraum genutzt haben.</p>|
-|Option 3: Binden eines {{site.data.keyword.Bluemix_notm}}-Datenbankservice an Ihren Pod<p>Dieses Feature ist nur für Lite-Cluster und Standardcluster verfügbar.</p>|Bei dieser Option können Sie unter Verwendung eines {{site.data.keyword.Bluemix_notm}}-Cloud-Service für Datenbanken Daten persistent speichern und auf diese zugreifen. Wenn Sie den {{site.data.keyword.Bluemix_notm}}-Service an einen Namensbereich in Ihrem Cluster anhängen, wird ein geheimer Kubernetes-Schlüssel erstellt. Der geheime Kubernetes-Schlüssel beherbergt vertrauliche Informationen zum Service wie zum Beispiel die URL zum Service, Ihren Benutzernamen und das zugehörige Kennwort. Sie können den geheimen Schlüssel als Datenträger für geheime Schlüssel an Ihren Pod anhängen und unter Verwendung der im geheimen Schlüssel gespeicherten Berechtigungsnachweise auf den Service zugreifen. Durch Anhängen des Datenträgers für geheime Schlüssel an andere Pods können Sie Daten podübergreifend gemeinsam nutzen.<p>Wenn ein Container ausfällt oder ein Pod von einem Workerknoten entfernt wird, werden die Daten selbst nicht entfernt; auf sie kann über andere Pods zugegriffen werden, an die der Datenträger für geheime Schlüssel angehängt ist.</p><p>Die meisten {{site.data.keyword.Bluemix_notm}}-Datenbankservices stellen Plattenspeicher für ein geringes Datenvolumen gebührenfrei zur Verfügung, damit Sie dessen Funktionen testen können.</p><p>Weitere Informationen zum Binden eines {{site.data.keyword.Bluemix_notm}}-Service an einen Pod finden Sie unter [{{site.data.keyword.Bluemix_notm}}-Services für Apps in {{site.data.keyword.containershort_notm}} hinzufügen](cs_integrations.html#adding_app).</p>|
+Die folgende Abbildung zeigt die verfügbaren Optionen für nicht persistente Datenspeicherung in {{site.data.keyword.containerlong_notm}}. Diese Optionen stehen für kostenlose Cluster und für Standardcluster zur Verfügung.
+<p>
+<img src="images/cs_storage_nonpersistent.png" alt="Optionen für nicht persistente Datenspeicherung" width="450" style="width: 450px; border-style: none"/></p>
+
+<table summary="In der Tabelle sind die Optionen für nicht persistente Datenspeicherung aufgeführt. Die Tabellenzeilen enthalten von links nach rechts die Nummer der Option in der ersten Spalte, den Titel der Option in der zweiten Spalte und die Beschreibung in der dritten Spalte." style="width: 100%">
+<colgroup>
+       <col span="1" style="width: 5%;"/>
+       <col span="1" style="width: 20%;"/>
+       <col span="1" style="width: 75%;"/>
+    </colgroup>
+  <thead>
+  <th>#</th>
+  <th>Option</th>
+  <th>Beschreibung</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Im Container oder Pod</td>
+      <td>Container und Pods sind per Definition Komponenten mit kurzer Lebensdauer, die kurzfristig und unerwartet ausfallen können. Sie können jedoch Daten in das lokale Dateisystem eines Containers schreiben, um diese Daten für die Lebensdauer des Containers zu speichern. Daten in einem Container können nicht mit anderen Containern oder Pods gemeinsam genutzt werden und gehen verloren, wenn der Container ausfällt oder entfernt wird. Weitere Informationen finden Sie unter [Storing data in a container](https://docs.docker.com/storage/).</td>
+    </tr>
+  <tr>
+    <td>2</td>
+    <td>Auf dem Workerknoten</td>
+    <td>Für jeden Workerknoten wird primärer und sekundärer Speicher entsprechend dem Maschinentyp eingerichtet, den Sie für Ihren Workerknoten auswählen. Der primäre Speicher dient zum Speichern von Betriebssystemdaten und ist für den Benutzer nicht zugänglich. Der sekundäre Speicher dient zum Speichern von Daten in dem Verzeichnis <code>/var/lib/docker</code>, in das alle Containerdaten geschrieben werden. <br/><br/>Um auf den sekundären Speicher Ihres Workerknotens zuzugreifen, können Sie einen Datenträger <code>/emptyDir</code> erstellen. Dieser leere Datenträger wird einem Pod in Ihrem Cluster zugeordnet, damit Container in diesem Pod Daten in dem Datenträger lesen und schreiben können. Da der Datenträger einem ganz bestimmten Pod zugewiesen ist, können Daten nicht mit anderen Pods in einer Replikatgruppe gemeinsam genutzt werden.<br/><p>Ein Datenträger <code>/emptyDir</code> und die zugehörigen Daten werden entfernt, wenn die folgenden Situationen eintreten: <ul><li>Der zugeordnete Pod auf dem Workerknoten wird permanent gelöscht.</li><li>Der zugeordnete Pod wird auf einem anderen Workerknoten terminiert.</li><li>Der Workerknoten wird neu geladen oder aktualisiert.</li><li>Der Workerknoten wird gelöscht.</li><li>Der Cluster wird gelöscht.</li><li>Das {{site.data.keyword.Bluemix_notm}}-Konto wird ausgesetzt.</li></ul></p><p><strong>Hinweis:</strong> Wenn der Container im Pod ausfällt, sind die im Datenträger enthaltenen Daten trotzdem noch auf dem Workerknoten verfügbar.</p><p>Weitere Informationen finden Sie unter [Kubernetes-Datenträger ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/storage/volumes/).</p></td>
+    </tr>
+    </tbody>
+    </table>
+
+### Optionen für persistenten Datenspeicher mit hoher Verfügbarkeit
+{: persistent}
+
+Die größte Herausforderung bei der Erstellung von hoch verfügbaren, statusabhängigen Apps besteht in der Persistenz von Daten zwischen mehreren App-Instanzen an mehreren Standorten und darin, die Daten ständig synchron zu halten. Bei hoch verfügbaren Daten sollten Sie sicheerstellen, dass eine Masterdatenbank mit mehreren Instanzen vorhanden ist, die auf mehrere Rechenzentren oder Regionen verteilt ist, und dass die Daten in dieser Masterdatenbank fortlaufend repliziert werden. Alle Instanzen in Ihrem Cluster müssen aus dieser Masterdatenbank lesen und in sie schreiben. Wenn eine Instanz der Masterdatenbank nicht betriebsbereit ist, können anderen Instanzen die Arbeitslast übernehmen, damit keine Ausfallzeiten für Ihre Apps entstehen.
+{: shortdesc}
+
+Die folgende Abbildung zeigt, mit welchen Optionen Sie Ihre Daten in {{site.data.keyword.containerlong_notm}} in einem Standardcluster hoch verfügbar machen können. Welche Option für Ihr Szenario am besten geeignet ist, hängt von den folgenden Faktoren ab:
+  * **Typ der verwendeten App:** Möglicherweise muss Ihre App Daten in Dateien speichern und nicht in einer Datenbank.
+  * **Gesetzliche Anforderungen für das Speichern und Weiterleiten der Daten:** Möglicherweise sind Sie dazu verpflichtet, Daten ausschließlich in den USA zu speichern und weiterzuleiten, d. h. Sie dürfen keinen Service mit Standort in Europa verwenden.
+  * **Optionen für Sicherung und Wiederherstellung:** Jede Speicheroption bietet Funktionen zum Sichern und Wiederherstellen von Daten. Überprüfen Sie, dass die verfügbaren Optionen für Sicherung und Wiederherstellung den Anforderungen (z. B. Häufigkeit der Sicherungen oder Möglichkeiten zur Datenspeicherung außerhalb Ihres primären Rechenzentrums) Ihres Disaster-Recovery-Plans entsprechen.
+  * **Globale Replikation:** Für die Hochverfügbarkeit kann es sinnvoll sein, mehrere Speicherinstanzen einzurichten, die auf Rechenzentren in der ganzen Welt verteilt und repliziert werden.
+
+<br/>
+<img src="images/cs_storage_ha.png" alt="Hochverfügbarkeitsoptionen für persistenten Speicher"/>
+
+<table summary="In der Tabelle sind Optionen für persistenten Speicher aufgeführt. Die einzelnen Tabellenzeilen enthalten von links nach rechts die Nummer der Option in der ersten Spalte, den Titel der Option in der zweiten Spalte und die Beschreibung in der dritten Spalte.">
+  <thead>
+  <th>#</th>
+  <th>Option</th>
+  <th>Beschreibung</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td width="5%">1</td>
+  <td width="20%">NFS-Dateispeicher</td>
+  <td width="75%">Diese Option stellt persistente App- und Containerdaten mithilfe von persistenten Kubernetes-Datenträgern bereit. Die Datenträger werden in [NFS-basiertem Endurance- und Performance-Dateispeicher ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud/file-storage/details) gehostet, der für Apps verwendet werden kann, die Daten in Dateiform speichern und nicht in einer Datenbank. Der Dateispeicher wird auf REST-Ebene verschlüsselt und von IBM in Gruppen zusammengefasst, um hohe Verfügbarkeit bereitzustellen.<p>{{site.data.keyword.containershort_notm}} stellt vordefinierte Speicherklassen bereit, die den Größenbereich des Speichers, die E/A-Operationen pro Sekunde, die Löschrichtlinie sowie die Lese- und Schreibberechtigungen für den Datenträger definieren. Um eine Anforderung für NFS-basierten Dateispeicher zu stellen, müssen Sie einen [Persistent Volume Claim](cs_storage.html#create) (PVC) erstellen. Nachdem Sie einen Persistent Volume Claim (PVC) übergeben haben, stellt {{site.data.keyword.containershort_notm}} dynamisch ein Persistent Volume (PV) bereit, das in NFS-basiertem Dateispeicher gehostet wird. [Sie hängen den Persistent Volume Claim (PVC)](cs_storage.html#app_volume_mount) als Datenträger an Ihre Bereitstellung an, damit die Container den Datenträger lesen und beschreiben können. </p><p>Persistent Volumes (persistente Datenträger) werden in dem Rechenzentrum bereitgestellt, in dem sich der Workerknoten befindet. Daten können von derselben Replikatgruppe oder von verschiedenen Implementierungen im selben Cluster gemeinsam genutzt werden. Daten können nicht von Clustern gemeinsam genutzt werden, die sich in verschiedenen Rechenzentren oder Regionen befinden.</p><p>Standardmäßig wird keine automatische Sicherung des NFS-Speichers erstellt. Mit den verfügbaren Sicherungs- und Wiederherstellungsverfahren können Sie regelmäßige Sicherungen für Ihren Cluster einrichten. Wenn ein Container ausfällt oder ein Pod von einem Workerknoten entfernt wird, werden die Daten selbst nicht entfernt; auf sie kann über andere Bereitstellungen zugegriffen werden, an die der Datenträger angehängt ist. </p><p><strong>Hinweis:</strong> Die Speicherung in persistenten NFS-Dateifreigaben wird monatlich berechnet. Wenn Sie persistenten Speicher für Ihren Cluster einrichten und diesen unverzüglich nach der Einrichtung entfernen, bezahlen Sie trotzdem die monatliche Gebühr für den persistenten Speicher, auch wenn Sie ihn nur über einen kurzen Zeitraum genutzt haben.</p></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Cloud-Datenbankservice</td>
+    <td>Mit dieser Option können Sie über einen {{site.data.keyword.Bluemix_notm}}-Cloud-Service für Datenbanken (z. B. [IBM Cloudant NoSQL DB](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant)) Daten persistent speichern und auf sie zugreifen. Auf Daten, die mit dieser Option gespeichert wurden, kann in mehreren Clustern sowie an mehreren Standorten und Regionen zugegriffen werden.<p> Sie können entweder eine einzelne Datenbankinstanz konfigurieren, auf die alle Ihre Apps zugreifen, oder [mehrere Instanzen mit übergreifender Replikation in Rechenzentren einrichten](/docs/services/Cloudant/guides/active-active.html#configuring-cloudant-nosql-db-for-cross-region-disaster-recovery), um hohe Verfügbarkeit für die Daten bereitzustellen. In der IBM Cloudant NoSQL-Datenbank werden Daten nicht automatisch gesichert. Sie können die bereitgestellten [Sicherungs- und Wiederherstellungsverfahren](/docs/services/Cloudant/guides/backup-cookbook.html#cloudant-nosql-db-backup-and-recovery) verwenden, um Ihre Daten vor Siteausfällen zu schützen.</p> <p> Um einen Service in Ihrem Cluster zu verwenden, [binden Sie den {{site.data.keyword.Bluemix_notm}}-Service](cs_integrations.html#adding_app) an einen Namensbereich in Ihrem Cluster. Bei diesem Vorgang wird ein geheimer Kubernetes-Schlüssel erstellt. Der geheime Kubernetes-Schlüssel enthält vertrauliche Informationen zu dem Service (z. B. die URL für den Service, Ihren Benutzernamen und das Kennwort). Sie können den geheimen Schlüssel als Datenträger für geheime Schlüssel an Ihren Pod anhängen und unter Verwendung der im geheimen Schlüssel gespeicherten Berechtigungsnachweise auf den Service zugreifen. Durch Anhängen des Datenträgers für geheime Schlüssel an andere Pods können Sie Daten podübergreifend gemeinsam nutzen. Wenn ein Container ausfällt oder ein Pod von einem Workerknoten entfernt wird, werden die Daten selbst nicht entfernt; auf sie kann über andere Pods zugegriffen werden, an die der Datenträger für geheime Schlüssel angehängt ist. <p>Die meisten {{site.data.keyword.Bluemix_notm}}-Datenbankservices stellen Plattenspeicher für ein geringes Datenvolumen gebührenfrei zur Verfügung, damit Sie dessen Funktionen testen können.</p></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>Lokale Datenbank</td>
+    <td>Wenn Ihre Daten aus rechtlichen Gründen lokal gespeichert werden müssen, können Sie eine [VPN-Verbindung zur lokalen Datenbank einrichten](cs_vpn.html#vpn) und die in Ihrem Rechenzentrum vorhandenen Sicherungs- und Wiederherstellungsverfahren verwenden.</td>
+  </tr>
+  </tbody>
+  </table>
+
 {: caption="Tabelle. Optionen für persistentes Speichern von Daten bei Bereitstellungen in Kubernetes-Clustern" caption-side="top"}
 
 <br />
@@ -194,7 +264,9 @@ Sie haben erfolgreich ein Persistent Volume-Objekt erstellt und an einen Persist
 Zum Einrichten von NFS-Dateispeicher für Ihren Cluster erstellen Sie einen Persistent Volume Claim (PVC). Anschließend hängen Sie diesen Claim an eine Bereitstellung an, um sicherzustellen, dass Daten auch dann verfügbar sind, wenn die Pods ausfallen oder abschalten.
 {:shortdesc}
 
-Der NFS-Dateispeicher, auf den sich das Persistent Volume stützt, wird von IBM in Gruppen zusammengefasst, um hohe Verfügbarkeit für Ihre Daten bereitzustellen.
+Der NFS-Dateispeicher, auf den sich das Persistent Volume stützt, wird von IBM in Gruppen zusammengefasst, um hohe Verfügbarkeit für Ihre Daten bereitzustellen. Die Speicherklassen beschreiben die Typen der verfügbaren Speicherangebote und definieren Aspekte wie die Datenaufbewahrungsrichtlinie, die Größe in Gigabyte und die E/A-Operationen pro Sekunde (IOPS), wenn Sie Ihren persistenten Datenträger erstellen.
+
+**Hinweis**: Wenn Sie über eine Firewall verfügen, [gewähren Sie Egress-Zugriff](cs_firewall.html#pvc) für die IBM Cloud Infrastructure (SoftLayer)-IP-Bereiche der Standorte (Rechenzentren), in denen sich Ihre Cluster befinden, damit Sie Persistent Volume Claims erstellen können.
 
 1.  Überprüfen Sie die verfügbaren Speicherklassen. {{site.data.keyword.containerlong}} stellt acht vordefinierte Speicherklassen zur Verfügung, sodass der Clusteradministrator keine Speicherklassen erstellen muss. Die Speicherklasse `ibmc-file-bronze` ist identisch mit der Speicherklasse `default`.
 
@@ -218,108 +290,104 @@ Der NFS-Dateispeicher, auf den sich das Persistent Volume stützt, wird von IBM 
     ```
     {: screen}
 
-2.  Entscheiden Sie, ob die Daten und die NFS-Dateifreigabe nach der Löschung des PVC gespeichert werden sollen. Wenn Sie die Daten aufbewahren möchten, dann wählen Sie eine Speicherklasse vom Typ `retain` aus. Wenn die Daten und die Dateifreigabe bei der Löschung des PVC ebenfalls gelöscht werden sollen, dann wählen Sie eine Speicherklasse ohne `retain` aus.
+2.  Legen Sie fest, ob Ihre Daten und die NFS-Dateifreigabe nach dem Löschen der PVC gespeichert werden sollen (dies wird auch als Freigaberichtlinie bezeichnet). Wenn Sie die Daten aufbewahren möchten, dann wählen Sie eine Speicherklasse vom Typ `retain` aus. Wenn die Daten und die Dateifreigabe bei der Löschung des PVC ebenfalls gelöscht werden sollen, dann wählen Sie eine Speicherklasse ohne `retain` aus.
 
-3.  Überprüfen Sie die E/A-Operationen pro Sekunde (IOPS) für eine Speicherklasse und die verfügbaren Speichergrößen.
+3.  Rufen Sie die Details für eine Speicherklasse ab. Prüfen Sie die IOPS pro Gigabyte und den Größenbereich im Feld **Parameter** Ihrer CLI-Ausgabe. 
 
-    - Die Speicherklassen 'bronze', 'silver' und 'gold' verwenden [Endurance-Speicher ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://knowledgelayer.softlayer.com/topic/endurance-storage) und verfügen für jede Klasse über einen einzigen definierten Wert für die E/A-Operationen pro Sekunde pro GB. Der Gesamtwert der E/A-Operationen pro Sekunde hängt von der Größe des Speichers ab. Beispiel: 1000Gi pvc at 4 IOPS per GB ergibt insgesamt 4000 E/A-Operationen pro Sekunde (IOPS).
+    <ul>
+      <li>Die Speicherklassen 'bronze', 'silver' oder 'gold' verwenden [Endurance-Speicher ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://knowledgelayer.softlayer.com/topic/endurance-storage) mit einem definierten Wert für die E/A-Operationen pro Sekunde (IOPS) pro GB für jede Klasse. Sie können den Gesamtwert für IOPS festlegen, indem Sie eine Größe innerhalb des verfügbaren Bereichs auswählen. Wenn Sie beispielsweise eine Größe von 1000Gi für die Dateifreigabe in der Speicherklasse 'silver' mit 4 IOPS pro GB auswählen, verfügt Ihr Datenträger insgesamt über 4000 IOPS. Je höher der IOPS-Wert Ihres persistenten Datenträgers, umso höher die Verarbeitungsgeschwindigkeit für Ein- und Ausgabeoperationen. <p>**Beispielbefehl zum Beschreiben der Speicherklasse**:</p>
 
-      ```
-      kubectl describe storageclasses ibmc-file-silver
-      ```
-      {: pre}
+       <pre class="pre">kubectl describe storageclasses ibmc-file-silver</pre>
 
-      Das Feld **Parameters** gibt die E/A-Operationen pro Sekunde pro GB für die Speicherklasse und die verfügbaren Größen in Gigabyte an.
+       Das Feld **Parameters** gibt die E/A-Operationen pro Sekunde pro GB für die Speicherklasse und die verfügbaren Größen in Gigabyte an.
+       <pre class="pre">Parameters:	iopsPerGB=4,sizeRange=20Gi,40Gi,80Gi,100Gi,250Gi,500Gi,1000Gi,2000Gi,4000Gi,8000Gi,12000Gi</pre>
+       
+       </li>
+      <li>Die angepassten Speicherklassen verwenden [Leistungsspeicher ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://knowledgelayer.softlayer.com/topic/performance-storage) und bieten mehr Kontrolle beim Auswählen der Kombination aus IOPS und Größe. <p>**Beispielbefehl zum Beschreiben der angepassten Speicherklasse**:</p>
 
-      ```
-      Parameters:	iopsPerGB=4,sizeRange=20Gi,40Gi,80Gi,100Gi,250Gi,500Gi,1000Gi,2000Gi,4000Gi,8000Gi,12000Gi
-      ```
-      {: screen}
+       <pre class="pre">kubectl describe storageclasses ibmc-file-retain-custom</pre>
 
-    - Die angepassten Speicherklassen verwenden [Leistungsspeicher  ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://knowledgelayer.softlayer.com/topic/performance-storage) und verfügen über diskrete Optionen für die Gesamtzahl der E/A-Operationen pro Sekunde und die Größe.
+       Das Feld **Parameters** gibt die E/A-Operationen pro Sekunde für die Speicherklasse und die verfügbaren Größen in Gigabyte an. Beispiel: Mit 40Gi pvc können E/A-Operationen pro Sekunde ausgewählt werden, die ein Vielfaches von 100 sind und im Bereich zwischen 100 - 2000 E/A-Operationen pro Sekunde liegen.
 
-      ```
-      kubectl describe storageclasses ibmc-file-retain-custom
-      ```
-      {: pre}
+       ```
+       Parameters:	Note=IOPS value must be a multiple of 100,reclaimPolicy=Retain,sizeIOPSRange=20Gi:[100-1000],40Gi:[100-2000],80Gi:[100-4000],100Gi:[100-6000],1000Gi[100-6000],2000Gi:[200-6000],4000Gi:[300-6000],8000Gi:[500-6000],12000Gi:[1000-6000]
+       ```
+       {: screen}
+       </li></ul>
+4. Erstellen Sie eine Konfigurationsdatei, um Ihren Persistent Volume Claim (PVC) zu definieren, und speichern Sie die Konfiguration als Datei mit der Erweiterung `.yaml`.
 
-      Das Feld **Parameters** gibt die E/A-Operationen pro Sekunde für die Speicherklasse und die verfügbaren Größen in Gigabyte an. Beispiel: Mit 40Gi pvc können E/A-Operationen pro Sekunde ausgewählt werden, die ein Vielfaches von 100 sind und im Bereich zwischen 100 - 2000 E/A-Operationen pro Sekunde liegen.
+    -  **Beispiel für die Speicherklassen 'bronze', 'silver' und 'gold'**:
+       
 
-      ```
-      Parameters:	Note=IOPS value must be a multiple of 100,reclaimPolicy=Retain,sizeIOPSRange=20Gi:[100-1000],40Gi:[100-2000],80Gi:[100-4000],100Gi:[100-6000],1000Gi[100-6000],2000Gi:[200-6000],4000Gi:[300-6000],8000Gi:[500-6000],12000Gi:[1000-6000]
-      ```
-      {: screen}
+       ```
+       apiVersion: v1
+       kind: PersistentVolumeClaim
+       metadata:
+        name: mypvc
+        annotations:
+          volume.beta.kubernetes.io/storage-class: "ibmc-file-silver"
 
-4.  Erstellen Sie eine Konfigurationsdatei, um Ihren Persistent Volume Claim (PVC) zu definieren, und speichern Sie die Konfiguration als Datei mit der Erweiterung `.yaml`.
+       spec:
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: 20Gi
+        ```
+        {: codeblock}
 
-    Beispiel für die Klassen 'bronze', 'silver' und 'gold':
+    -  **Beispiel für angepasste Speicherklassen**:
+       
 
-    ```
-    apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: <pvc-name>
-      annotations:
-        volume.beta.kubernetes.io/storage-class: "ibmc-file-silver"
-    spec:
-      accessModes:
-        - ReadWriteMany
-      resources:
-        requests:
-          storage: 20Gi
-    ```
-    {: codeblock}
+       ```
+       apiVersion: v1
+       kind: PersistentVolumeClaim
+       metadata:
+         name: mypvc
+         annotations:
+           volume.beta.kubernetes.io/storage-class: "ibmc-file-retain-custom"
 
-    Beispiel für angepasste Klassen:
+       spec:
+         accessModes:
+           - ReadWriteMany
+         resources:
+           requests:
+             storage: 40Gi
+             iops: "500"
+        ```
+        {: codeblock}
 
-    ```
-    apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: <pvc-name>
-      annotations:
-        volume.beta.kubernetes.io/storage-class: "ibmc-file-retain-custom"
-    spec:
-      accessModes:
-        - ReadWriteMany
-      resources:
-        requests:
-          storage: 40Gi
-          iops: "500"
-    ```
-    {: codeblock}
-
-    <table>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>metadata/name</code></td>
-    <td>Geben Sie den Namen des PVCs ein.</td>
-    </tr>
-    <tr>
-    <td><code>metadata/annotations</code></td>
-    <td>Geben Sie die Speicherklasse für den persistenten Datenträger (Persistent Volume) an:
-      <ul>
-      <li>ibmc-file-bronze / ibmc-file-retain-bronze : 2 E/A-Operationen pro Sekunde pro GB.</li>
-      <li>ibmc-file-silver / ibmc-file-retain-silver: 4 E/A-Operationen pro Sekunde pro GB.</li>
-      <li>ibmc-file-gold / ibmc-file-retain-gold: 10 E/A-Operationen pro Sekunde pro GB.</li>
-      <li>ibmc-file-custom / ibmc-file-retain-custom: Mehrere Werte für E/A-Operationen pro Sekunde verfügbar.
-
-    </li> Wenn keine Speicherklasse angegeben ist, wird das Persistent Volume mit der Speicherklasse 'bronze' erstellt.</td>
-    </tr>
-    <tr>
-    <td><code>spec/accessModes</code>
+        <table>
+        <thead>
+        <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+        </thead>
+        <tbody>
+        <tr>
+        <td><code>metadata/name</code></td>
+        <td>Geben Sie den Namen des PVCs ein.</td>
+        </tr>
+        <tr>
+        <td><code>metadata/annotations</code></td>
+        <td>Geben Sie die Speicherklasse für den persistenten Datenträger (Persistent Volume) an:
+          <ul>
+          <li>ibmc-file-bronze / ibmc-file-retain-bronze : 2 E/A-Operationen pro Sekunde pro GB.</li>
+          <li>ibmc-file-silver / ibmc-file-retain-silver: 4 E/A-Operationen pro Sekunde pro GB.</li>
+          <li>ibmc-file-gold / ibmc-file-retain-gold: 10 E/A-Operationen pro Sekunde pro GB.</li>
+          <li>ibmc-file-custom / ibmc-file-retain-custom: Mehrere Werte für E/A-Operationen pro Sekunde verfügbar.</li>
+          <p>Wenn keine Speicherklasse angegeben ist, wird das Persistent Volume mit der Speicherklasse 'bronze' erstellt.</p></td>
+        </tr>
+        
+        <tr>
+        <td><code>spec/accessModes</code>
     <code>resources/requests/storage</code></td>
-    <td>Wenn Sie eine Größe angeben, die nicht aufgelistet ist, wird automatisch aufgerundet. Wenn Sie eine Größe angeben, die die maximale angegebene Größe überschreitet, wird automatisch auf die nächstkleinere Größe abgerundet.</td>
-    </tr>
-    <tr>
-    <td><code>spec/accessModes</code>
+        <td>Wenn Sie eine Größe angeben, die nicht aufgelistet ist, wird automatisch aufgerundet. Wenn Sie eine Größe angeben, die die maximale angegebene Größe überschreitet, wird automatisch auf die nächstkleinere Größe abgerundet.</td>
+        </tr>
+        <tr>
+        <td><code>spec/accessModes</code>
     <code>resources/requests/iops</code></td>
-    <td>Diese Option gilt nur für ibmc-file-custom / ibmc-file-retain-custom. Geben Sie die Gesamtzahl der E/A-Operationen pro Sekunde für den Speicher an. Führen Sie `kubectl describe storageclasses ibmc-file-custom` aus, um alle Optionen anzuzeigen. Wenn Sie einen Wert für die E/A-Operationen pro Sekunde auswählen, der nicht aufgelistet ist, wird der Wert aufgerundet.</td>
-    </tr>
-    </tbody></table>
+        <td>Diese Option gilt nur für angepasste Speicherklassen (`ibmc-file-custom / ibmc-file-retain-custom`). Geben Sie die Gesamtzahl der E/A-Operationen pro Sekunde für den Speicher an. Führen Sie `kubectl describe storageclasses ibmc-file-custom` aus, um alle Optionen anzuzeigen. Wenn Sie einen Wert für die E/A-Operationen pro Sekunde auswählen, der nicht aufgelistet ist, wird der Wert aufgerundet.</td>
+        </tr>
+        </tbody></table>
 
 5.  Erstellen Sie den Persistent Volume Claim.
 
@@ -331,14 +399,14 @@ Der NFS-Dateispeicher, auf den sich das Persistent Volume stützt, wird von IBM 
 6.  Überprüfen Sie, dass Ihr Persistent Volume Claim erstellt und an das Persistent Volume gebunden wurde. Dieser Prozess kann einige Minuten dauern.
 
     ```
-    kubectl describe pvc <pvc-name>
+    kubectl describe pvc mypvc
     ```
     {: pre}
 
-    Die Ausgabe ähnelt der folgenden:
+    Beispielausgabe:
 
     ```
-    Name:  <pvc-name>
+    Name: mypvc
     Namespace: default
     StorageClass: ""
     Status:  Bound
@@ -396,20 +464,28 @@ Der NFS-Dateispeicher, auf den sich das Persistent Volume stützt, wird von IBM 
     <td>Eine Bezeichnung für die Bereitstellung.</td>
     </tr>
     <tr>
-    <td><code>volumeMounts/mountPath</code></td>
-    <td>Der absolute Pfad des Verzeichnisses, wo der Datenträger in der Bereitstellung angehängt wird.</td>
+    <td><code>spec/containers/image</code></td>
+    <td>Der Name des Images, das Sie verwenden möchten. Um die verfügbaren Images in Ihrem {{site.data.keyword.registryshort_notm}}-Konto aufzulisten, führen Sie den Befehl `bx cr image-list` aus.</td>
     </tr>
     <tr>
-    <td><code>volumeMounts/name</code></td>
-    <td>Der Name des Datenträgers, den Sie an Ihre Bereitstellung anhängen.</td>
+    <td><code>spec/containers/name</code></td>
+    <td>Der Name des Containers, den Sie in Ihrem Cluster bereitstellen möchten.</td>
+    </tr>
+    <tr>
+    <td><code>spec/containers/volumeMounts/mountPath</code></td>
+    <td>Der absolute Pfad des Verzeichnisses, in dem der Datenträger innerhalb des Containers angehängt wird.</td>
+    </tr>
+    <tr>
+    <td><code>spec/containers/volumeMounts/name</code></td>
+    <td>Der Name des Datenträgers, der an Ihren Pod angehängt werden soll.</td>
     </tr>
     <tr>
     <td><code>volumes/name</code></td>
-    <td>Der Name des Datenträgers, den Sie an Ihre Bereitstellung anhängen. Normalerweise ist dieser Name deckungsgleich mit <code>volumeMounts/name</code>.</td>
+    <td>Der Name des Datenträgers, der an Ihren Pod angehängt werden soll. Normalerweise ist dieser Name deckungsgleich mit <code>volumeMounts/name</code>.</td>
     </tr>
     <tr>
-    <td><code>volumes/name/persistentVolumeClaim</code></td>
-    <td>Der Name des PVCs, den Sie als Ihren Datenträger verwenden wollen. Wenn Sie den Datenträger an die Bereitstellung anhängen, erkennt Kubernetes das Persistent Volume, das an den Persistent Volume Claim gebunden ist, und ermöglicht dem Benutzer das Lesen von und Schreiben auf das Persistent Volume.</td>
+    <td><code>volumes/persistentVolumeClaim/claimName</code></td>
+    <td>Der Name des PVCs, den Sie als Ihren Datenträger verwenden wollen. Wenn Sie den Datenträger an den Pod anhängen, erkennt Kubernetes den persistenten Datenträger, der an den Persistent Volume Claim (PVC) gebunden ist, und ermöglicht dem Benutzer das Lesen bzw. Schreiben in dem persistenten Datenträger.</td>
     </tr>
     </tbody></table>
 
@@ -447,7 +523,6 @@ Der NFS-Dateispeicher, auf den sich das Persistent Volume stützt, wird von IBM 
 
 
 
-
 ## Datenträgerzugriff für Benutzer ohne Rootberechtigung zu persistentem Speicher hinzufügen
 {: #nonroot}
 
@@ -462,13 +537,13 @@ Wenn Sie eine App erstellen, in der ein Benutzer ohne Rootberechtigung die Schre
 -   Den Benutzer temporär zu Rootgruppe hinzufügen
 -   Ein Verzeichnis mit den entsprechenden Benutzerberechtigungen im Datenträger-Mountpfad erstellen
 
-Für {{site.data.keyword.containershort_notm}} ist der Standardeigner des Datenträgermountpfads der Eigner `nobody`. Falls bei NFS-Speicher der Eigner nicht lokal im Pod vorhanden ist, wird der Benutzer `nobody` erstellt. Die Datenträger sind so konfiguriert, dass der Rootbenutzer im Container erkannt wird. Bei manchen Apps ist dies der einzige Benutzer in einem Container. In vielen Apps wird jedoch ein anderer Benutzer ohne Rootberechtigung als `nobody` angegeben, der in den Container-Mountpfad schreibt. Für einige Apps ist es erforderlich, dass der Datenträger dem Rootbenutzer gehören muss. Normalerweise werden Apps den Rootbenutzer aus Sicherheitsgründen nicht. Wenn für Ihre App jedoch ein Rootbenutzer erforderlich ist, können Sie sich für entsprechende Unterstützung an den [{{site.data.keyword.Bluemix_notm}}-Support](/docs/support/index.html#contacting-support) wenden.
+Für {{site.data.keyword.containershort_notm}} ist der Standardeigner des Datenträgermountpfads der Eigner `nobody`. Falls bei NFS-Speicher der Eigner nicht lokal im Pod vorhanden ist, wird der Benutzer `nobody` erstellt. Die Datenträger sind so konfiguriert, dass der Rootbenutzer im Container erkannt wird. Bei manchen Apps ist dies der einzige Benutzer in einem Container. In vielen Apps wird jedoch ein anderer Benutzer ohne Rootberechtigung als `nobody` angegeben, der in den Container-Mountpfad schreibt. Für einige Apps ist es erforderlich, dass der Datenträger dem Rootbenutzer gehören muss. Normalerweise werden Apps den Rootbenutzer aus Sicherheitsgründen nicht. Wenn für Ihre App jedoch ein Rootbenutzer erforderlich ist, können Sie sich für entsprechende Unterstützung an den [{{site.data.keyword.Bluemix_notm}}-Support](/docs/get-support/howtogetsupport.html#getting-customer-support) wenden.
 
 
 1.  Erstellen Sie eine Dockerfile in einem lokalen Verzeichnis. Die nachfolgende Beispiel-Dockerfile erstellt einen Benutzer ohne Rootberechtigung mit dem Namen `myguest`.
 
     ```
-    FROM registry.<region>.bluemix.net/ibmnode:latest
+    FROM registry.<region>.bluemix.net/ibmliberty:latest
 
     #Gruppe und Benutzer mit Gruppen-ID & Benutzer-ID 1010 erstellen.
     #In diesem Fall wird eine Gruppe und ein Benutzer mit dem Namen myguest erstellt.

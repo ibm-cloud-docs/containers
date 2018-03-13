@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -36,13 +36,13 @@ Erfahren Sie mehr zu den allgemeinen Schritten zur Bereitstellung von Apps, inde
 <br />
 
 
-## Bereitstellung planen
+## Bereitstellungen mit Hochverfügbarkeit planen
 {: #highly_available_apps}
 
 Je breiter gefächert Sie Ihre Containerkonfiguration auf mehrere Workerknoten und Cluster verteilen, umso geringer ist die Wahrscheinlichkeit, dass Ihre Benutzer Ausfallzeiten mit Ihrer App verzeichnen.
-{:shortdesc}
 
-Betrachten Sie folgenden potenziellen Appkonfigurationen, die nach zunehmendem Grad der Verfügbarkeit angeordnet sind:
+Betrachten Sie die folgenden potenziellen Appkonfigurationen, die nach zunehmendem Grad der Verfügbarkeit angeordnet sind.
+{:shortdesc}
 
 ![Stufen der Hochverfügbarkeit für eine App](images/cs_app_ha_roadmap.png)
 
@@ -131,7 +131,7 @@ Weitere Details finden Sie unter den Optionen für <a href="cs_clusters.html#pla
 ### Minimale App-Bereitstellung
 {: #minimal_app_deployment}
 
-Eine grundlegende App-Bereitstellung in einem Lite-Cluster oder Standardcluster kann die folgenden Komponenten enthalten.
+Eine grundlegende App-Bereitstellung in einem kostenlosen Cluster oder Standardcluster kann die folgenden Komponenten enthalten.
 {:shortdesc}
 
 ![Konfiguration für die Bereitstellung](images/cs_app_tutorial_components1.png)

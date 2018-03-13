@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-10"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -15,10 +15,10 @@ lastupdated: "2018-01-10"
 {:tip: .tip}
 {:download: .download}
 
-# このページは移動されました。
+# お探しのコンテンツは移動しました
 
-以下から計画に関するトピックを確認してください。
- - [ライト・クラスターと標準クラスターの比較](cs_why.html#cluster_types)
+新しい場所にある最新の情報をご確認ください。
+ - [フリー・クラスターと標準クラスターの比較](cs_why.html#cluster_types)
  - [クラスター構成](cs_clusters.html#planning_clusters)
  - [ワーカー・ノードの構成](cs_clusters.html#planning_worker_nodes)
  - [クラスター管理の責任](cs_why.html#responsibilities)

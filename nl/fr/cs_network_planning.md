@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-02-06"
 
 ---
 
@@ -22,15 +22,15 @@ lastupdated: "2018-01-12"
 Lorsque vous créez un cluster, chaque cluster doit être connecté à un VLAN public. Le réseau local virtuel public détermine l'adresse IP publique affectée à un noeud worker lors de la création du cluster.
 {:shortdesc}
 
-L'interface de réseau public des noeuds d'agent dans les clusters légers et standard est protégée par les règles réseau Calico. Ces règles bloquent par défaut la plupart du trafic entrant. Le trafic entrant nécessaire au fonctionnement de Kubernetes est toutefois autorisé, comme les connexions aux services NodePort, Loadbalancer et Ingress. Pour plus d'informations sur ces règles, notamment pour savoir comment les modifier, voir [Règles réseau](cs_network_policy.html#network_policies).
+L'interface de réseau public des noeuds worker tant dans les clusters gratuits que standards est protégée par les règles réseau Calico. Ces règles bloquent par défaut la plupart du trafic entrant. Le trafic entrant nécessaire au fonctionnement de Kubernetes est toutefois autorisé, comme les connexions aux services NodePort, Loadbalancer et Ingress. Pour plus d'informations sur ces règles, notamment pour savoir comment les modifier, voir [Règles réseau](cs_network_policy.html#network_policies).
 
 |Type de cluster|Gestionnaire du VLAN public pour le cluster|
 |------------|------------------------------------------|
-|Clusters légers dans {{site.data.keyword.Bluemix_notm}}|{{site.data.keyword.IBM_notm}}|
+|Clusters gratuits dans {{site.data.keyword.Bluemix_notm}}|{{site.data.keyword.IBM_notm}}|
 |Clusters standard dans {{site.data.keyword.Bluemix_notm}}|Vous dans votre compte d'infrastructure IBM Cloud (SoftLayer)|
 {: caption="Responsabilités quant à la gestion de réseau local virtuel" caption-side="top"}
 
-
+Pour plus d'informations sur la communication réseau en interne dans le cluster entre les noeuds worker et les pods, voir [Mise en réseau au sein d'un cluster](cs_secure.html#in_cluster_network). Pour plus d'informations sur la sécurisation des connexions d'applications s'exécutant dans un cluster Kubernetes cluster vers un réseau sur site ou vers des applications externes au cluster, voir [Configuration de la connectivité VPN](cs_vpn.html).
 
 ## Autorisation d'accès public aux applications
 {: #public_access}
@@ -42,10 +42,10 @@ Pour rendre une application accessible au public sur Internet, vous devez mettre
 
 ![{{site.data.keyword.containerlong_notm}} Architecture Kubernetes](images/networking.png)
 
-Le digramme illustre comment Kubernetes véhicule le trafic réseau dans {{site.data.keyword.containershort_notm}}. Les méthodes pour rendre votre application accessible depuis Internet diffèrent selon que vous avez créé un cluster léger ou standard.
+Le digramme illustre comment Kubernetes véhicule le trafic réseau dans {{site.data.keyword.containershort_notm}}. Selon que vous avez créé un cluster gratuit ou standard, différentes méthodes sont disponibles pour rendre votre application accessible depuis Internet.
 
 <dl>
-<dt><a href="#nodeport" target="_blank">Service NodePort</a> (clusters légers et standard)</dt>
+<dt><a href="#nodeport" target="_blank">Service NodePort</a> (clusters gratuits et standard)</dt>
 <dd>
  <ul>
   <li>Vous pouvez exposer un port public sur chaque noeud worker et utiliser l'adresse IP publique de n'importe quel noeud worker pour accès public à votre service dans le cluster.</li>
@@ -54,7 +54,7 @@ Le digramme illustre comment Kubernetes véhicule le trafic réseau dans {{site.
   <li>Le service NodePort est idéal pour tester l'accès public. Vous pouvez également l'utiliser si vous n'avez besoin de l'accès public que pendant un bref moment.</li>
  </ul>
 </dd>
-<dt><a href="#loadbalancer" target="_blank">Service LoadBalancer</a> (clusters standard uniquement)</dt>
+<dt><a href="#loadbalancer" target="_blank">Service LoadBalancer</a> (clusters standards uniquement)</dt>
 <dd>
  <ul>
   <li>Chaque cluster standard est mis à disposition avec 4 adresses IP publiques portables et 4 adresses IP privées portables que vous pouvez utiliser pour créer un équilibreur de charge TCP/ UDP externe pour votre application.</li>
@@ -62,17 +62,16 @@ Le digramme illustre comment Kubernetes véhicule le trafic réseau dans {{site.
   <li>L'adresse IP publique portable affectée à l'équilibreur de charge est permanente et ne change pas en cas de recréation d'un noeud worker dans le cluster.</li>
   <li>Vous pouvez personnaliser votre équilibreur de charge en exposant n'importe quel port dont votre application a besoin.</li></ul>
 </dd>
-<dt><a href="#ingress" target="_blank">Ingress</a> (clusters standard uniquement)</dt>
+<dt><a href="#ingress" target="_blank">Ingress</a> (clusters standards uniquement)</dt>
 <dd>
  <ul>
   <li>Exposez plusieurs applications dans votre cluster en créant un équilibreur de charge externe HTTP ou HTTPS qui utilise un point d'entrée public sécurisé et unique pour acheminer les demandes entrantes vers vos applications.</li>
   <li>Vous pouvez utiliser une seule route publique pour exposer plusieurs applications dans votre cluster en tant que services.</li>
-  <li>Ingress est constitué de trois composants principaux : la ressource Ingress, le contrôleur Ingress et l'équilibreur de charge d'application. <ul>
+  <li>Ingress est constitué de deux composants principaux : la ressource Ingress et l'équilibreur de charge d'application. <ul>
     <li>La ressource Ingress définit les règles de routage et d'équilibrage de charge des demandes entrantes pour une application.</li>
-    <li>Le contrôleur Ingress active l'équilibreur de charge d'application, lequel est à l'écoute de demandes de service HTTP ou HTTPS entrant et achemine les demandes d'après les règles définies pour chaque ressource Ingress.</li>
-    <li>L'équilibreur de charge d'application équilibre les demandes entre les pods de l'application.
+    <li>L'équilibreur de charge d'application est à l'écoute de demandes de service HTTP ou HTTPS entrantes et les achemine aux pods des applications compte tenu des règles définies pour chaque ressource Ingress.</li>
    </ul>
-  <li>Utilisez Ingress si vous désirez implémenter votre propre équilibreur de charge avec des règles de routage personnalisées et si vous avez besoin d'une terminaison SSL pour vos applications.</li>
+  <li>Utilisez Ingress si vous désirez implémenter votre propre équilibreur de charge d'application avec des règles de routage personnalisées et si vous avez besoin d'une terminaison SSL pour vos applications.</li>
  </ul>
 </dd></dl>
 
@@ -136,6 +135,8 @@ Vos options pour les adresses IP lorsque vous créez un service LoadBalancer son
 - Si votre cluster est disponible uniquement sur un VLAN privé, une adresse IP privée portable est utilisée.
 - Vous pouvez demander une adresse publique ou privée portable pour un service LoadBalancer en ajoutant une annotation dans le fichier de configuration : `service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>`.
 
+
+
 Pour les instructions de création d'un service LoadBalancer avec {{site.data.keyword.containershort_notm}}, voir [Configuration de l'accès public à une application à l'aide du type de service LoadBalancer](cs_loadbalancer.html#config).
 
 
@@ -149,17 +150,19 @@ Pour les instructions de création d'un service LoadBalancer avec {{site.data.ke
 Ingress vous permet d'exposer plusieurs services dans votre cluster et de les rendre accessibles au public via un point d'entrée public unique.
 {:shortdesc}
 
-Au lieu de créer un service d'équilibreur de charge pour chaque application que vous désirez exposer au public, Ingress fournit une route publique unique qui vous permet d'acheminer les demandes publiques vers les applications situées à l'intérieur et à l'extérieur de votre cluster d'après leurs chemins d'accès individuels. Ingress comporte deux composants principaux. La ressource Ingress définit les règles de routage pour les demandes entrantes destinées à une application. Toutes les ressources Ingress doivent être enregistrées auprès du contrôleur Ingress qui est à l'écoute de demandes de service HTTP ou HTTPS entrantes et qui les réachemine en fonction des règles définies pour chaque ressource Ingress.
+Au lieu de créer un service d'équilibreur de charge pour chaque application que vous désirez exposer au public, Ingress fournit une route publique unique qui vous permet d'acheminer les demandes publiques vers les applications situées à l'intérieur et à l'extérieur de votre cluster d'après leurs chemins d'accès individuels. Ingress comporte deux composants principaux. La ressource Ingress définit les règles de routage pour les demandes entrantes destinées à une application. Toutes les ressources Ingress doivent être enregistrées auprès de l'équilibreur de charge d'application Ingress qui est à l'écoute de demandes de service HTTP ou HTTPS entrantes et les réachemine en fonction des règles définies pour chaque ressource Ingress.
 
-Lorsque vous créez un cluster standard, {{site.data.keyword.containershort_notm}} crée automatiquement un contrôleur Ingress à haute disponibilité pour votre cluster et lui affecte une route publique unique au format `<cluster_name>.<region>.containers.mybluemix.net`. La route publique est liée à une adresse IP publique portable allouée à votre compte d'infrastructure IBM Cloud (SoftLayer) lors de la création du cluster.
+Lorsque vous créez un cluster standard, {{site.data.keyword.containershort_notm}} crée automatiquement un équilibreur de charge d'application à haute disponibilité pour votre cluster et lui affecte une route publique unique au format `<cluster_name>.<region>.containers.mybluemix.net`. La route publique est liée à une adresse IP publique portable allouée à votre compte d'infrastructure IBM Cloud (SoftLayer) lors de la création du cluster. Un équilibreur de charge d'application privé est également créé automatiquement, mais n'est pas activé automatiquement. 
 
 Le diagramme suivant montre comment Ingress achemine la communication vers une application depuis Internet :
 
 ![Exposition d'un service à l'aide de la {{site.data.keyword.containershort_notm}} prise en charge d'Ingress](images/cs_ingress.png)
 
-Pour exposer une application via Ingress, vous devez créer un service Kubernetes pour votre application et enregistrer ce service auprès du contrôleur Ingress en définissant une ressource Ingress. La ressource Ingress spécifie le chemin que vous désirez ajouter à la route publique pour former une URL unique pour l'application exposée, comme par exemple : `mycluster.us-south.containers.mybluemix.net/myapp`. Lorsque vous entrez ce chemin dans votre navigateur Web, comme illustré dans le diagramme, la demande est envoyée à l'adresse IP publique portable liée du contrôleur Ingress. Le contrôleur vérifie si une règle de routage pour le chemin `myapp` dans le cluster `mycluster` existe. Si une règle correspondante est identifiée, la demande, y compris le chemin individuel, est acheminée au pod sur lequel l'application est déployée, en fonction des règles qui ont été définies dans l'objet de ressource Ingress d'origine. Pour que l'application puisse traiter les demandes entrantes, vérifiez que celle-ci est à l'écoute sur le chemin individuel que vous avez défini dans la ressource Ingress.
+Pour exposer une application via Ingress, vous devez créer un service Kubernetes pour votre application et enregistrer ce service auprès de l'équilibreur de charge d'application en définissant une ressource Ingress. La ressource Ingress spécifie le chemin que vous désirez ajouter à la route publique pour composer une URL unique pour l'application exposée (par exemple, `mycluster.us-south.containers.mybluemix.net/myapp`). Lorsque vous entrez ce chemin dans votre navigateur Web, comme illustré dans le diagramme, la demande est envoyée à l'adresse IP publique portable liée de l'équilibreur de charge d'application. Ce dernier vérifie si une règle de routage est en vigueur pour le cluster pour le chemin `myapp` dans le cluster `mycluster`. Si une règle correspondante est identifiée, la demande, y compris le chemin individuel, est acheminée au pod sur lequel l'application est déployée, en fonction des règles qui ont été définies dans l'objet de ressource Ingress d'origine. Pour que l'application puisse traiter les demandes entrantes, vérifiez que celle-ci est à l'écoute sur le chemin individuel que vous avez défini dans la ressource Ingress.
 
-Vous pouvez configurer le contrôleur Ingress pour gérer le trafic réseau entrant pour les applications pour les scénarios suivants :
+
+
+Vous pouvez configurer l'équilibreur de charge d'application pour gérer le trafic réseau entrant pour vos applications pour les scénarios suivants :
 
 -   Utilisation du domaine fourni par IBM sans terminaison TLS
 -   Utilisation du domaine fourni par IBM avec terminaison TLS

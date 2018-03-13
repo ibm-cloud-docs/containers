@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-01"
+lastupdated: "2018-01-29"
 
 ---
 
@@ -35,12 +35,14 @@ lastupdated: "2017-12-01"
 
 -   {{site.data.keyword.Bluemix_notm}} CLI V0.5.0 或更高版本
 -   {{site.data.keyword.containershort_notm}} 插件
--   Kubernetes CLI V1.7.4 或更高版本
+-   Kubernetes CLI V1.8.6 或更高版本
 -   可选：{{site.data.keyword.registryshort_notm}} 插件
 -   可选：Docker V1.9 或更高版本
 
 <br>
 要安装 CLI，请执行以下操作：
+
+
 
 1.  作为 {{site.data.keyword.containershort_notm}} 插件的必备软件，请安装 [{{site.data.keyword.Bluemix_notm}} CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://clis.ng.bluemix.net/ui/home.html)。用于通过 {{site.data.keyword.Bluemix_notm}} CLI 运行命令的前缀是 `bx`。
 
@@ -71,7 +73,7 @@ lastupdated: "2017-12-01"
 
 4.  要查看 Kubernetes 仪表板的本地版本以及将应用程序部署到集群，请[安装 Kubernetes CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。用于通过 Kubernetes CLI 来运行命令的前缀是 `kubectl`。
 
-    1.  为了实现完整的功能兼容性，请下载与您计划使用的 Kubernetes 集群版本相匹配的 Kubernetes CLI 版本。当前 {{site.data.keyword.containershort_notm}} 缺省 Kubernetes 版本是 1.7.4。
+    1.  为了实现完整的功能兼容性，请下载与您计划使用的 Kubernetes 集群版本相匹配的 Kubernetes CLI 版本。当前 {{site.data.keyword.containershort_notm}} 缺省 Kubernetes 版本是 1.8.6。
 
         OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
 
@@ -126,7 +128,7 @@ lastupdated: "2017-12-01"
 
     该插件会在结果中显示为 container-registry。
 
-6.  要在本地构建映像并将其推送到注册表名称空间，请[安装 Docker ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.docker.com/community-edition#/download)。如果使用的是 Windows 8 或更低版本，可以改为安装 [Docker Toolbox ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.docker.com/products/docker-toolbox)。Docker CLI 用于将应用程序构建成映像。用于通过 Docker CLI 运行命令的前缀是 `docker`。
+6.  要在本地构建映像并将其推送到注册表名称空间，请[安装 Docker ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.docker.com/community-edition#/download)。如果使用的是 Windows 8 或更低版本，可以改为安装 [Docker Toolbox ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/toolbox/toolbox_install_windows/)。Docker CLI 用于将应用程序构建成映像。用于通过 Docker CLI 运行命令的前缀是 `docker`。
 
 接下来，开始[使用 {{site.data.keyword.containershort_notm}} 通过 CLI 创建 Kubernetes 集群](cs_clusters.html#clusters_cli)。
 
@@ -143,7 +145,7 @@ lastupdated: "2017-12-01"
 ## 将 CLI 配置为运行 `kubectl`
 {: #cs_cli_configure}
 
-您可以使用 Kubernetes CLI 随附的命令，在 {{site.data.keyword.Bluemix_notm}} 中管理集群。支持 Kubernetes 1.7.4 中可用的所有 `kubectl` 命令用于 {{site.data.keyword.Bluemix_notm}} 中的集群。创建集群后，使用环境变量，将本地 CLI 的上下文设置到该集群。
+您可以使用 Kubernetes CLI 随附的命令，在 {{site.data.keyword.Bluemix_notm}} 中管理集群。支持 Kubernetes 1.8.6 中可用的所有 `kubectl` 命令用于 {{site.data.keyword.Bluemix_notm}} 中的集群。创建集群后，使用环境变量，将本地 CLI 的上下文设置到该集群。
 然后，您可以运行 Kubernetes `kubectl` 命令，以在 {{site.data.keyword.Bluemix_notm}} 中使用集群。
 {:shortdesc}
 
@@ -172,7 +174,6 @@ lastupdated: "2017-12-01"
   5.  将所创建的集群设置为此会话的上下文。每次使用集群时都完成这些配置步骤。
       1.  获取命令以设置环境变量并下载 Kubernetes 配置文件。
 
-
           ```
         bx cs cluster-config <cluster_name_or_id>
         ```
@@ -189,7 +190,6 @@ lastupdated: "2017-12-01"
 
       2.  复制并粘贴终端中显示的命令，以设置 `KUBECONFIG` 环境变量。
       3.  验证是否已正确设置 `KUBECONFIG` 环境变量。
-
 
           示例：
 
@@ -214,8 +214,8 @@ lastupdated: "2017-12-01"
       输出示例：
 
       ```
-      Client Version: v1.7.4
-      Server Version: v1.7.4
+      Client Version: v1.8.6
+      Server Version: v1.8.6
       ```
       {: screen}
 
@@ -237,12 +237,14 @@ lastupdated: "2017-12-01"
 
 -   {{site.data.keyword.Bluemix_notm}} CLI V0.5.0 或更高版本
 -   {{site.data.keyword.containershort_notm}} 插件
--   Kubernetes CLI V1.7.4 或更高版本
+-   Kubernetes CLI V1.8.6 或更高版本
 -   {{site.data.keyword.registryshort_notm}} 插件
 -   Docker V1.9 或更高版本
 
 <br>
 要更新 CLI，请执行以下操作：
+
+
 1.  更新 {{site.data.keyword.Bluemix_notm}} CLI。下载[最新版本 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://clis.ng.bluemix.net/ui/home.html) 并运行安装程序。
 
 2. 登录到 {{site.data.keyword.Bluemix_notm}} CLI。根据提示，输入您的 {{site.data.keyword.Bluemix_notm}} 凭证。要指定 {{site.data.keyword.Bluemix_notm}} 区域，请[包含 API 端点](cs_regions.html#bluemix_regions)。
@@ -279,7 +281,7 @@ lastupdated: "2017-12-01"
         {: pre}
 
 4.  更新 Kubernetes CLI。
-    1.  更新与您计划使用的 Kubernetes 集群版本相匹配的 Kubernetes CLI 版本。当前 {{site.data.keyword.containershort_notm}} 缺省 Kubernetes 版本是 1.7.4。
+    1.  更新与您计划使用的 Kubernetes 集群版本相匹配的 Kubernetes CLI 版本。当前 {{site.data.keyword.containershort_notm}} 缺省 Kubernetes 版本是 1.8.6。
 
         OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
 
@@ -337,7 +339,7 @@ lastupdated: "2017-12-01"
 
 6.  更新 Docker。
     -   如果您使用 Docker Community Edition，请启动 Docker，单击 **Docker** 图标并单击**检查更新**。
-    -   如果使用的是 Docker Toolbox，请下载[最新版本 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.docker.com/products/docker-toolbox) 并运行安装程序。
+    -   如果使用的是 Docker Toolbox，请下载[最新版本 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/toolbox/toolbox_install_windows/) 并运行安装程序。
 
 <br />
 
@@ -352,12 +354,14 @@ lastupdated: "2017-12-01"
 
 
 -   {{site.data.keyword.containershort_notm}} 插件
--   Kubernetes CLI V1.7.4 或更高版本
+-   Kubernetes CLI V1.8.6 或更高版本
 -   {{site.data.keyword.registryshort_notm}} 插件
 -   Docker V1.9 或更高版本
 
 <br>
 要卸载 CLI，请执行以下操作：
+
+
 
 1.  卸载 {{site.data.keyword.containershort_notm}} 插件。
 
@@ -390,7 +394,7 @@ lastupdated: "2017-12-01"
 
     - [OSX ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/docker-for-mac/#uninstall-or-reset)
     - [Linux ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#uninstall-docker-ce)
-    - [Windows ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/toolbox/toolbox_install_mac/#how-to-uninstall-toolbox)
+    - [Windows ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.docker.com/toolbox/toolbox_install_windows/#how-to-uninstall-toolbox)
 
 <br />
 

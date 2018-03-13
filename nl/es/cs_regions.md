@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-05"
+lastupdated: "2018-01-24"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-01-05"
 
 Las [regiones de {{site.data.keyword.Bluemix_notm}}](#bluemix_regions) difieren de las [regiones de {{site.data.keyword.containershort_notm}}](#container_regions).
 
-Regiones y centros de datos de ![{{site.data.keyword.containershort_notm}} ](/images/regions.png)
+![Regiones y centros de datos de {{site.data.keyword.containershort_notm}}](images/regions.png)
 
 Figura 1. Regiones y centros de datos de {{site.data.keyword.containershort_notm}}
 
@@ -108,14 +108,14 @@ Las ubicaciones son centros de datos que están disponibles dentro de una regió
 
   | Región | Ubicación | Ciudad |
   |--------|----------|------|
-  | AP Norte | hkg02, sng01, tok02 | Hong Kong, Singapore, Tokyo |
+  | AP Norte | hkg02, seo01, sng01, tok02 | Hong Kong, Seúl, Singapur, Tokio |
   | AP Sur     | mel01, syd01, syd04        | Melbourne, Sidney |
   | UE Central     | ams03, fra02, mil01, par01        | Ámsterdam, Frankfurt, Milán, París |
   | UK Sur      | lon02, lon04         | Londres |
-  | EE.UU. este      | <ph class="mon">mon01, </ph>tor01, wdc06, wdc07        | <ph class="mon">Montreal, </ph>Toronto, Washington, DC |
-  | EE.UU. Sur     | dal10, dal12, dal13      | Dallas |
+  | EE.UU. este      | mon01, tor01, wdc06, wdc07        | Montreal, Toronto, Washington DC |
+  | EE.UU. Sur     | dal10, dal12, dal13, sao01       | Dallas, São Paulo |
 
-**Nota**: Milán (mil01) sólo está disponible para clústeres lite.
+**Nota**: Milán (mil01) sólo está disponible para clústeres gratuitos.
 
 ### Utilización de mandatos de la API del servicio de contenedor
 {: #container_api}

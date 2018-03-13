@@ -41,20 +41,20 @@ Sie möchten eine App in einem Container bereitstellen? Dann müssen Sie als Ers
 
 Und was ist ein Cluster? Ein Cluster ist eine Gruppe von Ressourcen, Knoten, Netzen und Speichereinheiten, die die Hochverfügbarkeit von Apps sicherstellen. Nachdem Sie den Cluster erstellt haben, können Sie Ihre Apps in Containern bereitstellen.
 
-[Sie müssen über ein nutzungsabhängiges {{site.data.keyword.Bluemix_notm}}-Konto oder ein Abonnementkonto verfügen, um einen Lite-Cluster zu erstellen.](https://console.bluemix.net/registration/)
+[Sie müssen über ein nutzungsabhängiges {{site.data.keyword.Bluemix_notm}}-Konto oder ein Abonnementkonto verfügen, um einen kostenlosen Cluster zu erstellen.](https://console.bluemix.net/registration/)
 
 
-Gehen Sie wie folgt vor, um einen Lite-Cluster zu erstellen:
+Gehen Sie wie folgt vor, um einen kostenlosen Cluster zu erstellen:
 
 1.  Klicken Sie im [**Katalog** ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://console.bluemix.net/catalog/?category=containers) in der Kategorie **Container** auf **Kubernetes-Cluster**.
 
-2.  Geben Sie bei **Cluster Name** einen Namen für den Cluster ein. Der Standardclustertyp ist 'Lite'. Das nächste Mal können Sie einen Standardcluster erstellen und weitere Anpassungen definieren, z. B. die Anzahl von Workerknoten im Cluster.
+2.  Geben Sie bei **Cluster Name** einen Namen für den Cluster ein. Der Standardtyp ist der kostenlose Cluster. Das nächste Mal können Sie einen Standardcluster erstellen und weitere Anpassungen definieren, z. B. die Anzahl von Workerknoten im Cluster.
 
 3.  Klicken Sie auf **Cluster erstellen**. Die Detailinformationen für den Cluster werden geöffnet; die Einrichtung des Workerknotens im Cluster kann jedoch einige Minuten in Anspruch nehmen. Auf der Registerkarte **Workerknoten** können Sie den Status des Workerknoten überprüfen. Wenn der Status `Ready` erreicht wurde, ist Ihr Workerknoten einsatzbereit.
 
 Hervorragend! Sie haben Ihren ersten Cluster erstellt!
 
-*   Der Lite-Cluster stellt Ihren Apps einen Workerknoten mit 2 CPUs und 4 GB Speicherplatz zur Verfügung.
+*   Der kostenlose Cluster stellt Ihren Apps einen Workerknoten mit 2 CPUs und 4 GB Speicherplatz zur Verfügung.
 *   Der Workerknoten wird durch einen dedizierten und hoch verfügbaren {{site.data.keyword.IBM_notm}} eigenen Kubernetes-Master zentral überwacht und verwaltet, der alle Kubernetes-Ressourcen im Cluster steuert und überwacht. Sie können sich auf Ihren Workerknoten und die darin bereitgestellten Apps konzentrieren, ohne sich Gedanken über die Verwaltung des Masters zu machen.
 *   Die für die Ausführung des Clusters erforderlichen Ressourcen, z. B. VLANs und IP-Adressen, werden in einem {{site.data.keyword.IBM_notm}} eigenen Konto von IBM Cloud Infrastructure (SoftLayer) verwaltet. Wenn Sie einen Standardcluster erstellen, verwalten Sie diese Ressourcen in Ihrem eigenen Konto von IBM Cloud Infrastructure (SoftLayer). Weitere Informationen zu diesen Ressourcen erhalten Sie, wenn Sie einen Standardcluster erstellen.
 

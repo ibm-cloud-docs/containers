@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-01-02"
+lastupdated: "2017-01-24"
 
 ---
 
@@ -26,7 +26,7 @@ Refira-se a estes comandos para criar e gerenciar clusters.
 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).
 
 
-<!--[https://github.ibm.com/alchemy-containers/armada-cli ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.ibm.com/alchemy-containers/armada-cli)-->
+
 
 <table summary="Comandos para criar clusters no {{site.data.keyword.Bluemix_notm}}">
  <thead>
@@ -344,7 +344,7 @@ Criar um cluster em sua organização.
 <dl>
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
 
-<dd>O caminho para o arquivo YAML para criar seu cluster padrão. Em vez de definir as características de seu cluster usando as opções fornecidas nesse comando, será possível usar um arquivo YAML.  Esse valor é opcional para clusters padrão e não está disponível para clusters Lite.
+<dd>O caminho para o arquivo YAML para criar seu cluster padrão. Em vez de definir as características de seu cluster usando as opções fornecidas nesse comando, será possível usar um arquivo YAML.  Esse valor é opcional para clusters padrão e não está disponível para clusters livres.
 
 <p><strong>Nota:</strong> se você fornecer a mesma opção no comando como parâmetro no arquivo YAML, o valor no comando terá precedência sobre o valor no YAML. Por exemplo, você define um local em seu arquivo YAML e usa a opção <code>--location</code> no comando, o valor inserido na opção de comando substituirá o valor no arquivo YAML.
 
@@ -410,10 +410,10 @@ mais](cs_secure.html#worker). Para desativar a criptografia, inclua essa opção
     </p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
-<dd>O nível de isolamento de hardware para seu nó do trabalhador. Use dedicado para disponibilizar recursos físicos disponíveis apenas para você ou compartilhado para permitir que os recursos físicos sejam compartilhados com outros clientes da IBM. O padrão é shared.  Esse valor é opcional para clusters padrão e não está disponível para clusters Lite.</dd>
+<dd>O nível de isolamento de hardware para seu nó do trabalhador. Use dedicado para disponibilizar recursos físicos disponíveis apenas para você ou compartilhado para permitir que os recursos físicos sejam compartilhados com outros clientes da IBM. O padrão é shared.  Esse valor é opcional para clusters padrão e não está disponível para clusters livres.</dd>
 
 <dt><code>--location <em>LOCATION</em></code></dt>
-<dd>O local no qual você deseja criar o cluster. Os locais que estão disponíveis para você dependem da região do {{site.data.keyword.Bluemix_notm}} em que o login foi efetuado. Selecione a região fisicamente mais próxima de você para melhor desempenho.  Esse valor é obrigatório para clusters padrão e é opcional para clusters Lite.
+<dd>O local no qual você deseja criar o cluster. Os locais que estão disponíveis para você dependem da região do {{site.data.keyword.Bluemix_notm}} em que o login foi efetuado. Selecione a região fisicamente mais próxima de você para melhor desempenho.  Esse valor é necessário para clusters padrão e opcional para clusters livres.
 
 <p>Revise [os locais disponíveis](cs_regions.html#locations).
 </p>
@@ -422,7 +422,7 @@ mais](cs_secure.html#worker). Para desativar a criptografia, inclua essa opção
 </dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>O tipo de máquina que você escolhe afeta a quantia de memória e espaço em disco que está disponível para os contêineres que são implementados em seu nó do trabalhador. Para listar os tipos de máquina disponíveis, veja [bx cs machine-types <em>LOCATION</em>](#cs_machine_types).  Esse valor é obrigatório para clusters padrão e não está disponível para clusters Lite.</dd>
+<dd>O tipo de máquina que você escolhe afeta a quantia de memória e espaço em disco que está disponível para os contêineres que são implementados em seu nó do trabalhador. Para listar os tipos de máquina disponíveis, veja [bx cs machine-types <em>LOCATION</em>](#cs_machine_types).  Esse valor é necessário para clusters padrão e não está disponível para clusters livres.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
 <dd>O nome para o cluster.  Este valor é obrigatório.</dd>
@@ -437,7 +437,7 @@ mais](cs_secure.html#worker). Para desativar a criptografia, inclua essa opção
 <dd>
 
 <ul>
-<li>Esse parâmetro não está disponível para clusters Lite.</li>
+<li>Esse parâmetro não está disponível para clusters livres.</li>
 <li>Se esse cluster padrão for o primeiro cluster padrão que você criar nesse local, não inclua essa sinalização. Uma VLAN privada é criada para você quando o cluster é criado.</li>
 <li>Se você criou um cluster padrão antes neste local ou criou uma VLAN privada em infraestrutura do IBM Cloud (SoftLayer) antes, deve-se especificar essa VLAN privada.
 
@@ -449,7 +449,7 @@ mais](cs_secure.html#worker). Para desativar a criptografia, inclua essa opção
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
 <dd>
 <ul>
-<li>Esse parâmetro não está disponível para clusters Lite.</li>
+<li>Esse parâmetro não está disponível para clusters livres.</li>
 <li>Se esse cluster padrão for o primeiro cluster padrão que você criar nesse local, não use essa sinalização. Uma VLAN pública é criada para você quando o cluster é criado.</li>
 <li>Se você criou um cluster padrão antes neste local ou criou uma VLAN pública em infraestrutura do IBM Cloud (SoftLayer) antes, deve-se especificar essa VLAN pública.
 
@@ -461,7 +461,7 @@ mais](cs_secure.html#worker). Para desativar a criptografia, inclua essa opção
 <dt><code>--workers WORKER</code></dt>
 <dd>O número de nós do trabalhador que
 você deseja implementar em seu cluster. Se não
-especificar essa opção, um cluster com 1 nó do trabalhador será criado. Esse valor é opcional para clusters padrão e não está disponível para clusters Lite.
+especificar essa opção, um cluster com 1 nó do trabalhador será criado. Esse valor é opcional para clusters padrão e não está disponível para clusters livres.
 
 <p><strong>Nota:</strong> a cada nó do trabalhador é designado um ID de nó do trabalhador e um nome de domínio exclusivos que não devem ser mudados manualmente após a criação do cluster. Mudar o ID ou o nome do domínio evita que o mestre do Kubernetes gerencie o cluster.</p></dd>
 
@@ -482,7 +482,7 @@ mais](cs_secure.html#worker). Para desativar a criptografia, inclua essa opção
   ```
   {: pre}
 
-  Exemplo para um cluster lite:
+  Exemplo para um cluster grátis:
 
   ```
   bx cs cluster-create --name my_cluster
@@ -804,7 +804,7 @@ Configure as credenciais de conta de infraestrutura do IBM Cloud (SoftLayer) par
 
 
    <dt><code>--infrastructure-api-key <em>API_KEY</em></code></dt>
-   <dd>Chave API de infraestrutura do IBM Cloud infrastructure (SoftLayer). Esse valor é necessário.
+   <dd>Chave API de infraestrutura do IBM Cloud infrastructure (SoftLayer). Este valor é obrigatório.
 
  <p>
   Para gerar uma chave API:
@@ -1065,7 +1065,7 @@ Atualize os detalhes de uma configuração de encaminhamento de log.
 
 Visualizar uma lista de tipos de máquina disponíveis para seus nós do trabalhador. Cada tipo de máquina inclui a
 quantia de CPU, memória e espaço em disco virtual para cada nó do trabalhador no cluster.
-- Tipos de máquina com `u2c` ou `b2c` no nome usam disco local em vez de rede de área de armazenamento (SAN) para confiabilidade. Os benefícios de confiabilidade incluem maior rendimento ao serializar bytes para o disco local e a degradação do sistema de arquivos reduzido devido a falhas de rede. Esses tipos de máquina contêm 25 GB de armazenamento em disco local para o sistema de arquivos de S.O. e 100 GB de armazenamento em disco local para `/var/lib/docker`, o diretório no qual todos os dados de contêiner são gravados.
+- Os tipos de máquina com `u2c` ou `b2c` no nome usam disco local em vez de storage area networking (SAN) para confiabilidade. Os benefícios de confiabilidade incluem maior rendimento ao serializar bytes para o disco local e a degradação do sistema de arquivos reduzido devido a falhas de rede. Esses tipos de máquina contêm 25 GB de armazenamento em disco local para o sistema de arquivos de S.O. e 100 GB de armazenamento em disco local para `/var/lib/docker`, o diretório no qual todos os dados de contêiner são gravados.
 - Tipos de máquina que incluem `encrypted` no nome criptografam os dados de Docker do host. O diretório `/var/lib/docker`, no qual todos os dados de contêiner são armazenados, é criptografado com criptografia LUKS.
 - Tipos de máquina com `u1c` ou `b1c` no nome são descontinuados, como `u1c.2x4`. Para começar a usar os tipos de máquina `u2c` e `b2c`, use o comando `bx cs worker-add` para incluir nós do trabalhador com o tipo de máquina atualizado. Em seguida, remova os nós do trabalhador que estiverem usando os tipos de máquina descontinuados usando o comando `bx cs worker-rm`.
 </p>
@@ -1310,7 +1310,7 @@ mais](cs_secure.html#worker). Para desativar a criptografia, inclua essa opção
 <dd>Um número inteiro que representa o número de nós do trabalhador a serem criados no cluster. O valor padrão é 1. Esse valor é opcional.</dd>
 
 <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
-<dd>A VLAN privada que foi especificada quando o cluster foi criado. Esse valor é necessário.
+<dd>A VLAN privada que foi especificada quando o cluster foi criado. Este valor é obrigatório.
 
 <p><strong>Nota:</strong> as VLANs públicas e privadas que você especificar deverão corresponder. Os roteadores de VLAN privada sempre iniciam com <code>bcr</code> (roteador de backend) e roteadores de VLAN pública sempre iniciam com <code>fcr</code> (roteador de front-end). A combinação de número e letra após esses prefixos deve corresponder para usar essas VLANs ao criar um cluster. Não use VLANs públicas e privadas que não correspondem para criar um cluster.</p></dd>
 
