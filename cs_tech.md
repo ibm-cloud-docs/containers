@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-03-21"
 
 ---
 
@@ -113,6 +113,9 @@ What's the difference between the Kubernetes master and a worker node? Glad you 
 
 ![{{site.data.keyword.containerlong_notm}} Kubernetes architecture](images/cs_org_ov.png)
 Figure. {{site.data.keyword.containershort_notm}} architecture
+
+Want to see how {{site.data.keyword.containerlong_notm}} can be used with other products and services? Check out some of the [integrations](cs_integrations.html#integrations).
+
 
 <br />
 
