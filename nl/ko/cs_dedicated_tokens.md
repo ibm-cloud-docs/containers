@@ -66,7 +66,7 @@ lastupdated: "2017-11-02"
     ```
     {: pre}
 
-    IBM {{site.data.keyword.Bluemix_notm}} Container Service와 함께 작업하는 데 이 시크릿을 사용할 수 있습니다.
+    IBM {{site.data.keyword.Bluemix_notm}} 컨테이너 서비스와 함께 작업하는 데 이 시크릿을 사용할 수 있습니다.
 
 6.  토큰 정보를 저장하기 위한 Kubernetes 시크릿을 작성하십시오.
 
