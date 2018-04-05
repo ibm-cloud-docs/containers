@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-04-03"
+lastupdated: "2018-04-05"
 
 ---
 
@@ -114,7 +114,7 @@ Review the following potential app setups that are ordered with increasing degre
     <p>For more information about sharing a route between clusters, see <a href="cs_clusters.html#clusters" target="_blank">High availability of clusters</a>.</p>
     <p>For more detail, review the options for <a href="cs_clusters.html#planning_clusters" target="_blank">highly available deployments</a>.</p></dd>
 <dt>Distribute pods across multiple locations or regions</dt>
-  <dd>To protect your app from a location or region failure, you can create a second cluster in another location or region and use a deployment YAML to deploy a duplicate replica set for your app. By adding a shared route and load balancer in front of your clusters, you can spread your work load across locations and regions. For more information about sharing a route between clusters, see <a href="cs_clusters.html#clusters" target="_blank">High availability of clusters</a>. 
+  <dd>To protect your app from a location or region failure, you can create a second cluster in another location or region and use a deployment YAML to deploy a duplicate replica set for your app. By adding a shared route and load balancer in front of your clusters, you can spread your work load across locations and regions. For more information about sharing a route between clusters, see <a href="cs_clusters.html#clusters" target="_blank">High availability of clusters</a>.
   <p>For more detail, review the options for <a href="cs_clusters.html#planning_clusters" target="_blank">highly available deployments</a>.</p></dd>
 </dl>
 
@@ -143,7 +143,7 @@ spec:
       containers:
       - name: ibmliberty
         image: registry.bluemix.net/ibmliberty:latest
-        ports: 
+        ports:
         - containerPort: 9080        
 ---
 apiVersion: v1
@@ -395,7 +395,7 @@ To deploy your app:
 
 
 
-## Scaling apps
+## Scaling apps 
 {: #app_scaling}
 
 With Kubernetes, you can enable [horizontal pod autoscaling ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) to automatically increase or decrease the number of instances of your apps based on CPU.
