@@ -324,7 +324,7 @@ To create a PV and matching PVC, follow these steps.
     </tr>
     <tr>
     <td><code>flexVolume/options/Lun</code></td>
-    <td>Enter the lun ID for your block storage that your retrieved in the previous step as <code>lunId</code>.</td>
+    <td>Enter the lun ID for your block storage that you retrieved in the previous step as <code>lunId</code>.</td>
     </tr>
     <tr>
     <td><code>flexVolume/options/TargetPortal</code></td>
