@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-04-12"
+lastupdated: "2018-04-17"
 
 ---
 
@@ -77,8 +77,8 @@ The following image shows the options that you have in {{site.data.keyword.conta
   </thead>
   <tbody>
   <tr>
-  <td>1. NFS file storage</td>
-  <td>With this option, you can persist app and container data by using Kubernetes persistent volumes. Volumes are hosted on [Endurance and Performance NFS-based file storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/details) which can be used for apps that store data on a file basis rather than in a database. File storage is encrypted at REST.<p>{{site.data.keyword.containershort_notm}} provides predefined storage classes that define the range of sizes of the storage, IOPS, the delete policy, and the read and write permissions for the volume. To initiate a request for NFS-based file storage, you must create a [persistent volume claim (PVC)](cs_storage.html#create). After you submit a PVC, {{site.data.keyword.containershort_notm}} dynamically provisions a persistent volume that is hosted on NFS-based file storage. [You can mount the PVC](cs_storage.html#app_volume_mount) as a volume to your deployment to allow the containers to read from and write to the volume. </p><p>Persistent volumes are provisioned in the data center where the worker node is located. You can share data across the same replica set or with other deployments in the same cluster. You cannot share data across clusters when they are located in different data centers or regions. </p><p>By default, NFS storage is not backed up automatically. You can set up a periodic backup for your cluster by using the provided [backup and restore mechanisms](cs_storage.html#backup_restore). When a container crashes or a pod is removed from a worker node, the data is not removed and can still be accessed by other deployments that mount the volume. </p><p><strong>Note:</strong> Persistent NFS file share storage is charged on a monthly basis. If you provision persistent storage for your cluster and remove it immediately, you still pay the monthly charge for the persistent storage, even if you used it only for a short amount of time.</p></td>
+  <td>1. NFS file storage or block storage</td>
+  <td>With this option, you can persist app and container data by using Kubernetes persistent volumes. Volumes are hosted on Endurance and Performance [NFS-based file storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/details) or [block storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage) which can be used for apps that store data on a file basis or as a block rather than in a database. File storage and block storage are encrypted at REST.<p>{{site.data.keyword.containershort_notm}} provides predefined storage classes that define the range of sizes of the storage, IOPS, the delete policy, and the read and write permissions for the volume. To initiate a request for file storage or block storage, you must create a [persistent volume claim (PVC)](cs_storage.html#create). After you submit a PVC, {{site.data.keyword.containershort_notm}} dynamically provisions a persistent volume that is hosted on NFS-based file storage or block storage. [You can mount the PVC](cs_storage.html#app_volume_mount) as a volume to your deployment to allow the containers to read from and write to the volume. </p><p>Persistent volumes are provisioned in the data center where the worker node is located. You can share data across the same replica set or with other deployments in the same cluster. You cannot share data across clusters when they are located in different data centers or regions. </p><p>By default, NFS storage and block storage are not backed up automatically. You can set up a periodic backup for your cluster by using the provided [backup and restore mechanisms](cs_storage.html#backup_restore). When a container crashes or a pod is removed from a worker node, the data is not removed and can still be accessed by other deployments that mount the volume. </p><p><strong>Note:</strong> Persistent NFS file share storage and block storage are charged on a monthly basis. If you provision persistent storage for your cluster and remove it immediately, you still pay the monthly charge for the persistent storage, even if you used it only for a short amount of time.</p></td>
   </tr>
   <tr id="cloud-db-service">
     <td>2. Cloud database service</td>
@@ -116,7 +116,7 @@ Before you begin, make sure that you have an existing NFS file share that you ca
 To create a PV and matching PVC, follow these steps.
 
 1.  In your IBM Cloud infrastructure (SoftLayer) account, look up the ID and path of the NFS file share where you want to create your PV object. In addition, authorize the file storage to the subnets in the cluster. This authorization gives your cluster access to the storage.
-    1.  Log in to your IBM Cloud infrastructure (SoftLayer) account.
+    1.  Log in to the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.softlayer.com/).
     2.  Click **Storage**.
     3.  Click **File Storage** and from the **Actions** menu, select **Authorize Host**.
     4.  Select **Subnets**.
@@ -248,24 +248,180 @@ You successfully created a PV object and bound it to a PVC. Cluster users can no
 
 <br />
 
+## Using existing block storage in your cluster
+{: #existing_block}
+
+Before you begin, make sure that you have an existing block storage instance that you can use to create your PV. For example, if you previously [created a PVC with a `retain` storage class policy](#create), you can use that retained data in the existing block storage for this new PVC.
+
+To create a PV and matching PVC, follow these steps.
+
+1.  Retrieve or generate an API key for your IBM Cloud infrastructure (SoftLayer) account.
+    1. Log in to the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.softlayer.com/).
+    2. Select **Account**, then **Users**, and then **User List**.
+    3. Find your user ID.
+    4. In the **API KEY** column, click **Generate** to generate an API key or **View** to view your existing API key.
+2.  Retrieve the API user name for your IBM Cloud infrastructure (SoftLayer) account.
+    1. From the **User List** menu, select your user ID.
+    2. In the **API Access Information** section, find your **API Username**.
+3.  Log in to the IBM Cloud infrastructure CLI plug-in.
+    ```
+    bx sl init
+    ```
+    {: pre}
+
+4.  Choose to authenticate by using the user name and API key for your IBM Cloud infrastructure (SoftLayer) account.
+5.  Enter the user name and API key that you retrieved in the previous steps.
+6.  List available block storage devices.
+    ```
+    bx sl block volume-list
+    ```
+    {: pre}
+
+    Your output looks similar to the following:
+    ```
+    id         username            datacenter   storage_type              capacity_gb   bytes_used   ip_addr         lunId   active_transactions
+    38642141   IBM02SEL1543159-1   dal10        endurance_block_storage   20            -            161.26.98.114   170     0
+    ```
+    {: screen}
+
+7.  Note the `id`, `ip_addr`, `capacity_gb` and `lunId` of the block storage device that you want to mount to your cluster.
+8.  Create a configuration file for your PV. Include the block storage ID, IP address, the size and lun ID that you retrieved in the previous step.
+
+    ```
+    apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: <pv_name>
+    spec:
+      capacity:
+        storage: "<storage_size>"
+      accessModes:
+        - ReadWriteOnce
+      flexVolume:
+        driver: "ibm/ibmc-block"
+        fsType: "ext4"
+        options:
+          "Lun": "<lun_id>"
+          "TargetPortal": "<ip_address>"
+          "VolumeID": "<volume_id>"
+          "volumeName": "<volume_name>"
+      ```
+      {: codeblock}
+
+    <table>
+    <caption>Table. Understanding the YAML file components</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>metadata/name</code></td>
+    <td>Enter the name of the PV that you want to create.</td>
+    </tr>
+    <tr>
+    <td><code>spec/capacity/storage</code></td>
+    <td>Enter the storage size of the existing block storage that you retrieved in the previous step as <code>capacity-gb</code>. The storage size must be written in gigabytes, for example, 20Gi (20 GB) or 1000Gi (1 TB).</td>
+    </tr>
+    <tr>
+    <td><code>flexVolume/options/Lun</code></td>
+    <td>Enter the lun ID for your block storage that your retrieved in the previous step as <code>lunId</code>.</td>
+    </tr>
+    <tr>
+    <td><code>flexVolume/options/TargetPortal</code></td>
+    <td>Enter the IP address of your block storage that you retrieved in the previous step as <code>ip_addr</code>. </td>
+    </tr>
+    <tr>
+	    <td><code>flexVolume/options/VolumeId</code></td>
+	    <td>Enter the ID of your block storage that you retrieved in the previous step as <code>id</code>.</td>
+	    </tr>
+	    <tr>
+		    <td><code>flexVolume/options/volumeName</code></td>
+		    <td>Enter a name for your volume.</td>
+	    </tr>
+    </tbody></table>
+
+9.  Create the PV in your cluster.
+    ```
+    kubectl apply -f <file_path>
+    ```
+    {: pre}
+
+10. Verify that the PV is created.
+    ```
+    kubectl get pv
+    ```
+    {: pre}
+
+11. Create another configuration file to create your PVC. In order for the PVC to match the PV that you created earlier, you must choose the same value for `storage` and `accessMode`. The `storage-class` field must be empty. If any of these fields do not match the PV, then a new PV is created automatically instead.
+
+     ```
+     kind: PersistentVolumeClaim
+     apiVersion: v1
+     metadata:
+      name: mypvc
+      annotations:
+        volume.beta.kubernetes.io/storage-class: ""
+     spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: "20Gi"
+     ```
+     {: codeblock}
+
+12.  Create your PVC.
+     ```
+     kubectl apply -f <file_path>
+     ```
+     {: pre}
+
+13.  Verify that your PVC is created and bound to the PV that you created earlier. This process can take a few minutes.
+     ```
+     kubectl describe pvc <pvc_name>
+     ```
+     {: pre}
+
+     Your output looks similar to the following.
+
+     ```
+     Name: mypvc
+     Namespace: default
+     StorageClass:	""
+     Status: Bound
+     Volume: pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2
+     Labels: <none>
+     Capacity: 20Gi
+     Access Modes: RWO
+     Events:
+       FirstSeen LastSeen Count From        SubObjectPath Type Reason Message
+       --------- -------- ----- ----        ------------- -------- ------ -------
+       3m 3m 1 {ibm.io/ibmc-block 31898035-3011-11e7-a6a4-7a08779efd33 } Normal Provisioning External provisioner is provisioning volume  for claim "default/my-persistent-volume-claim"
+       3m 1m	 10 {persistentvolume-controller } Normal ExternalProvisioning cannot find provisioner "ibm.io/ibmc-block", expecting that  a volume for the claim is provisioned either manually or via external software
+       1m 1m 1 {ibm.io/ibmc-block 31898035-3011-11e7-a6a4-7a08779efd33 } Normal ProvisioningSucceeded	Successfully provisioned volume  pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2
+     ```
+     {: screen}
+
+You successfully created a PV and bound it to a PVC. Cluster users can now [mount the PVC](#app_volume_mount) to their deployments and start reading from and writing to the PV.
+
+<br />
 
 
-
-## Adding NFS file storage to apps
+## Adding NFS file storage or block storage to apps
 {: #create}
 
-Create a persistent volume claim (PVC) to provision NFS file storage for your cluster. Then, mount this claim to a persistent volume (PV) to ensure that data is available even if the pods crash or shut down.
+Create a persistent volume claim (PVC) to provision NFS file storage or block storage for your cluster. Then, mount this claim to a persistent volume (PV) to ensure that data is available even if the pods crash or shut down.
 {:shortdesc}
 
-The NFS file storage that backs the PV is clustered by IBM in order to provide high availability for your data. The storage classes describe the types of storage offerings available and define aspects such as the data retention policy, size in gigabytes, and IOPS when you create your PV.
+The NFS file storage and block storage that backs the PV is clustered by IBM in order to provide high availability for your data. The storage classes describe the types of storage offerings available and define aspects such as the data retention policy, size in gigabytes, and IOPS when you create your PV.
 
-
-
-**Before you begin**: If you have a firewall, [allow egress access](cs_firewall.html#pvc) for the IBM Cloud infrastructure (SoftLayer) IP ranges of the locations (data centers) that your clusters are in, so that you can create PVCs.
+Before you begin:
+- If you have a firewall, [allow egress access](cs_firewall.html#pvc) for the IBM Cloud infrastructure (SoftLayer) IP ranges of the locations that your clusters are in, so that you can create PVCs.
+- If you want to mount block storage to your apps, you must install the [{{site.data.keyword.Bluemix_notm}} Storage plug-in for block storage](#install_block) first.
 
 To add persistent storage:
 
-1.  Review the available storage classes. {{site.data.keyword.containerlong}} provides pre-defined storage classes for NFS file storage so that the cluster admin does not have to create any storage classes. The `ibmc-file-bronze` storage class is the same as the `default` storage class.
+1.  Review the available storage classes. {{site.data.keyword.containerlong}} provides pre-defined storage classes for NFS file storage and block storage so that the cluster admin does not have to create any storage classes. The `ibmc-file-bronze` storage class is the same as the `default` storage class.
 
     ```
     kubectl get storageclasses
@@ -284,16 +440,24 @@ To add persistent storage:
     ibmc-file-retain-gold        ibm.io/ibmc-file
     ibmc-file-retain-silver      ibm.io/ibmc-file
     ibmc-file-silver             ibm.io/ibmc-file
+    ibmc-block-custom            ibm.io/ibmc-block
+    ibmc-block-bronze            ibm.io/ibmc-block
+    ibmc-block-gold              ibm.io/ibmc-block
+    ibmc-block-silver            ibm.io/ibmc-block
+    ibmc-block-retain-bronze     ibm.io/ibmc-block
+    ibmc-block-retain-silver     ibm.io/ibmc-block
+    ibmc-block-retain-gold       ibm.io/ibmc-block
+    ibmc-block-retain-custom     ibm.io/ibmc-block
     ```
     {: screen}
 
     **Tip:** If you want to change the default storage class, run `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` and replace `<storageclass>` with the name of the storage class.
 
-2.  Decide if you want to keep your data and the NFS file share after you delete the PVC.
-    - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, the PV is removed, but the NFS file and your data still exist in your IBM Cloud infrastructure (SoftLayer) account. Later, to access this data in your cluster, create a PVC and a matching PV that refers to your existing [NFS file](#existing).
-    - If you want the data and your NFS file share to be deleted when you delete the PVC, choose a storage class without `retain`.
+2.  Decide if you want to keep your data and the NFS file share or block storage after you delete the PVC.
+    - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, the PV is removed, but the NFS file or block storage and your data still exist in your IBM Cloud infrastructure (SoftLayer) account. Later, to access this data in your cluster, create a PVC and a matching PV that refers to your existing [NFS file](#existing) or [block](#existing_block) storage.
+    - If you want the data and your NFS file share or block storage to be deleted when you delete the PVC, choose a storage class without `retain`.
 
-3.  **If you choose a bronze, silver, or gold storage class**: You get [Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage) that defines the IOPS per GB for each class. However, you can determine the total IOPS by choosing a size within the available range. You can select any whole number of gigabyte sizes within the allowed size range (such as 20 Gi, 256 Gi, 11854 Gi). For example, if you select a 1000Gi file share size in the silver storage class of 4 IOPS per GB, your volume has a total of 4000 IOPS. The more IOPS your PV has, the faster it processes input and output operations. The following table describes the IOPS per gigabyte and size range for each storage class.
+3.  **If you choose a bronze, silver, or gold storage class**: You get [Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage) that defines the IOPS per GB for each class. However, you can determine the total IOPS by choosing a size within the available range. You can select any whole number of gigabyte sizes within the allowed size range (such as 20 Gi, 256 Gi, 11854 Gi). For example, if you select a 1000Gi file share or block storage size in the silver storage class of 4 IOPS per GB, your volume has a total of 4000 IOPS. The more IOPS your PV has, the faster it processes input and output operations. The following table describes the IOPS per gigabyte and size range for each storage class.
 
     <table>
          <caption>Table of storage class size ranges and IOPS per gigabyte</caption>
@@ -388,7 +552,7 @@ To add persistent storage:
 6.  Create a configuration file to define your PVC and save the configuration as a `.yaml` file.
 
     -  **Example for bronze, silver, gold storage classes**:
-       The following `.yaml` file creates a claim that is named `mypvc` of the `"ibmc-file-silver"` storage class, billed `"hourly"`, with a gigabyte size of `24Gi`. 
+       The following `.yaml` file creates a claim that is named `mypvc` of the `"ibmc-file-silver"` storage class, billed `"hourly"`, with a gigabyte size of `24Gi`. If you want to create a PVC to mount block storage to your cluster, make sure to enter `ReadWriteOnce` in the `accessModes` section.
 
        ```
        apiVersion: v1
@@ -409,7 +573,7 @@ To add persistent storage:
         {: codeblock}
 
     -  **Example for custom storage classes**:
-       The following `.yaml` file creates a claim that is named `mypvc` of the storage class `ibmc-file-retain-custom`, billed at the default of `"monthly"`, with a gigabyte size of `45Gi` and IOPS of `"300"`.
+       The following `.yaml` file creates a claim that is named `mypvc` of the storage class `ibmc-file-retain-custom`, billed at the default of `"monthly"`, with a gigabyte size of `45Gi` and IOPS of `"300"`. If you want to create a PVC to mount block storage to your cluster, make sure to enter `ReadWriteOnce` in the `accessModes` section.
 
        ```
        apiVersion: v1
@@ -447,7 +611,11 @@ To add persistent storage:
           <li>ibmc-file-bronze / ibmc-file-retain-bronze : 2 IOPS per GB.</li>
           <li>ibmc-file-silver / ibmc-file-retain-silver: 4 IOPS per GB.</li>
           <li>ibmc-file-gold / ibmc-file-retain-gold: 10 IOPS per GB.</li>
-          <li>ibmc-file-custom / ibmc-file-retain-custom: Multiple values of IOPS available.</li></ul>
+          <li>ibmc-file-custom / ibmc-file-retain-custom: Multiple values of IOPS available.</li>
+          <li>ibmc-block-bronze / ibmc-block-retain-bronze : 2 IOPS per GB.</li>
+          <li>ibmc-block-silver / ibmc-block-retain-silver: 4 IOPS per GB.</li>
+          <li>ibmc-block-gold / ibmc-block-retain-gold: 10 IOPS per GB.</li>
+          <li>ibmc-block-custom / ibmc-block-retain-custom: Multiple values of IOPS available.</li></ul>
           <p>If you do not specify a storage class, the PV is created with the default storage class.</p><p>**Tip:** If you want to change the default storage class, run <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> and replace <code>&lt;storageclass&gt;</code> with the name of the storage class.</p></td>
         </tr>
         <tr>
@@ -456,11 +624,11 @@ To add persistent storage:
         </tr>
         <tr>
         <td><code>spec/resources/requests/storage</code></td>
-        <td>Enter the size of the file storage, in gigabytes (Gi). Choose a whole number within the allowable size range. </br></br><strong>Note: </strong> After your storage is provisioned, you cannot change the size of your NFS file share. Make sure to specify a size that matches the amount of data that you want to store. </td>
+        <td>Enter the size of the file storage, in gigabytes (Gi). Choose a whole number within the allowable size range. </br></br><strong>Note: </strong> After your storage is provisioned, you cannot change the size of your NFS file share or block storage. Make sure to specify a size that matches the amount of data that you want to store. </td>
         </tr>
         <tr>
         <td><code>spec/resources/requests/iops</code></td>
-        <td>This option is for custom storage classes only (`ibmc-file-custom / ibmc-file-retain-custom`). Specify the total IOPS for the storage, selecting a multiple of 100 within the allowable range. To see all options, run `kubectl describe storageclasses <storageclass>`. If you choose an IOPS other than one that is listed, the IOPS is rounded up.</td>
+        <td>This option is for custom storage classes only (`ibmc-file-custom / ibmc-file-retain-custom / ibmc-block-custom / ibmc-block-retain-custom`). Specify the total IOPS for the storage, selecting a multiple of 100 within the allowable range. To see all options, run `kubectl describe storageclasses <storageclass>`. If you choose an IOPS other than one that is listed, the IOPS is rounded up.</td>
         </tr>
         </tbody></table>
 
@@ -474,7 +642,7 @@ To add persistent storage:
 8.  Verify that your PVC is created and bound to the PV. This process can take a few minutes.
 
     ```
-    kubectl describe pvc mypvc
+    kubectl describe pvc <pvc_name>
     ```
     {: pre}
 
@@ -604,32 +772,181 @@ To add persistent storage:
 
 {: #nonroot}
 {: #enabling_root_permission}
-
+<!--This section to be left in place until the link redirects are completed-->
 **NFS permissions**: Looking for documentation on enabling NFS non-root permissions? See [Adding non-root user access to NFS file storage](cs_troubleshoot_storage.html#nonroot).
 
 <br />
 
+## Installing the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in on your cluster
+{: #install_block}
 
-
-
-## Setting up backup and restore solutions for NFS file shares
-{: #backup_restore}
-
-File shares are provisioned into the same location as your cluster. The storage is hosted on clustered servers by {{site.data.keyword.IBM_notm}} to provide availability in case a server goes down. However, file shares  are not backed up automatically and might be inaccessible if the entire location fails. To protect your data from being lost or damaged, you can set up periodic backups that you can use to restore your data when needed.
+Install the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in with a Helm chart to set up pre-defined storage classes for block storage. You can use these storage classes to create a PVC to provision block storage for your apps.
 {: shortdesc}
 
-Review the following backup and restore options for your NFS file shares:
+Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster where you want to install the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in.
+
+1. Install [Helm](cs_integrations.html#helm) on the cluster where you want to use the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in.
+2. Install the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in. When you install the plug-in, pre-defined block storage classes are added to your cluster.
+   ```
+   helm install ibm/ibmcloud-block-storage-plugin
+   ```
+   {: pre} 
+      
+   Example output: 
+   ```
+   NAME:   imprecise-rottweiler
+   LAST DEPLOYED: Tue Oct 10 16:41:40 2017
+   NAMESPACE: default
+   STATUS: DEPLOYED
+
+   RESOURCES:
+   ==> v1beta1/DaemonSet
+   NAME                     DESIRED  CURRENT  READY  UP-TO-DATE  AVAILABLE  NODE-SELECTOR  AGE
+   ibm-block-plugin-driver  1        1        1      1           1          <none>         3s
+
+   ==> v1beta1/Deployment
+   NAME              DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
+   ibm-block-plugin  1        1        1           0          3s
+
+   ==> v1/StorageClass
+   NAME                      TYPE
+   ibmc-block-retain-bronze  ibm.io/ibmc-block
+   ibmc-block-custom         ibm.io/ibmc-block
+   ibmc-block-bronze         ibm.io/ibmc-block
+   ibmc-block-silver         ibm.io/ibmc-block
+   ibmc-block-retain-silver  ibm.io/ibmc-block
+   ibmc-block-retain-gold    ibm.io/ibmc-block
+   ibmc-block-retain-custom  ibm.io/ibmc-block
+   ibmc-block-gold           ibm.io/ibmc-block
+   ```
+   {: screen}
+
+3. Verify that the installation was successful.
+   ```
+   kubectl get pod -n kube-system | grep ibm-block-plugin
+   ```
+   {: pre}
+
+   Example output:
+   ```
+   ibmcloud-block-storage-plugin-2864820594-8cgx7          1/1       Running            0          3m
+   ibmcloud-block-storage-plugin-driver-9fqn9              1/1       Running            0          3m
+   ibmcloud-block-storage-plugin-driver-h103v              1/1       Running            0          3m
+   ```
+   {: screen}
+
+4. Verify that the storage classes for block storage were added to your cluster.
+   ```
+   kubectl get storageclasses | grep block
+   ```
+   {: pre}
+
+   Example output:
+   ```
+   ibmc-block-bronze            ibm.io/ibmc-block
+   ibmc-block-custom            ibm.io/ibmc-block
+   ibmc-block-gold              ibm.io/ibmc-block
+   ibmc-block-retain-bronze     ibm.io/ibmc-block
+   ibmc-block-retain-custom     ibm.io/ibmc-block
+   ibmc-block-retain-gold       ibm.io/ibmc-block
+   ibmc-block-retain-silver     ibm.io/ibmc-block
+   ibmc-block-silver            ibm.io/ibmc-block
+   ```
+   {: screen}
+
+5. Repeat these steps for every cluster where you want to provision block storage.
+
+You can now continue to [create a PVC](#create) to provision block storage for your app.
+
+<br />
+
+### Updating the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in
+You can upgrade the existing {{site.data.keyword.Bluemix_notm}} Block Storage plug-in to the latest version. 
+{: shortdesc}
+
+Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster.
+
+1. Find the name of the block storage helm chart that you installed in your cluster.
+   ```
+   helm ls | grep ibmcloud-block-storage-plugin
+   ```
+   {: pre}
+   
+   Example output: 
+   ```
+   myhelmchart 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-block-storage-plugin-0.1.0	default
+   ```
+   {: screen}
+   
+2. Upgrade the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in to the latest version.
+   ```
+   helm upgrade --force  <helm_chart_name>  ibmcloud-block-storage-plugin
+   ```
+   {: pre}
+   
+<br />
+
+### Removing the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in
+If you do not want to provision and use {{site.data.keyword.Bluemix_notm}} Block Storage for your cluster, you can uninstall the helm chart.
+{: shortdesc}
+
+**Note:** Removing the plug-in does not remove existing PVCs, PVs, or data. When you remove the plug-in, all the related pods and daemon sets are removed from your cluster. You cannot provision new block storage for your cluster or use existing block storage PVCs and PVs after you remove the plug-in. 
+
+Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster and make sure that you do not have any PVCs or PVs in your cluster that use block storage. 
+
+1. Find the name of the block storage helm chart that you installed in your cluster.
+   ```
+   helm ls | grep ibmcloud-block-storage-plugin
+   ```
+   {: pre}
+   
+   Example output: 
+   ```
+   myhelmchart 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-block-storage-plugin-0.1.0	default
+   ```
+   {: screen}
+   
+2. Delete the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in.
+   ```
+   helm delete <helm_chart_name>
+   ```
+   {: pre}
+   
+3. Verify that the block storage pods are removed. 
+   ```
+   kubectl get pod -n kube-system | grep ibm-block-plugin
+   ```
+   {: pre}
+   The removal of the pods is successful if no pods are displayed in your CLI output. 
+   
+4. Verify that the block storage storage classes are removed. 
+   ```
+   kubectl get storageclasses | grep block
+   ```
+   {: pre}
+   The removal of the storage classes is successful if no storage classes are displayed in your CLI output. 
+   
+<br />
+
+
+## Setting up backup and restore solutions for NFS file shares and block storage
+{: #backup_restore}
+
+File shares and block storage are provisioned into the same location as your cluster. The storage is hosted on clustered servers by {{site.data.keyword.IBM_notm}} to provide availability in case a server goes down. However, file shares and block storage are not backed up automatically and might be inaccessible if the entire location fails. To protect your data from being lost or damaged, you can set up periodic backups that you can use to restore your data when needed.
+{: shortdesc}
+
+Review the following backup and restore options for your NFS file shares and block storage:
 
 <dl>
   <dt>Set up periodic snapshots</dt>
-  <dd><p>You can set up [periodic snapshots](/docs/infrastructure/FileStorage/snapshots.html) for your NFS file share, which is a read-only image that captures the state of the instance at a point in time. Snapshots are stored on the same file share within the same location. You can restore data from a snapshot if a user accidentally removes important data from the volume.</p>
-  <p>For more information, see [periodic snapshots](/docs/infrastructure/FileStorage/snapshots.html) for your NFS file share.</p></dd>
+  <dd><p>You can set up [periodic snapshots](/docs/infrastructure/FileStorage/snapshots.html) for your NFS file share or block storage, which is a read-only image that captures the state of the instance at a point in time. Snapshots are stored on the same file share or block storage within the same location. You can restore data from a snapshot if a user accidentally removes important data from the volume.</p>
+  <p>For more information, see:<ul><li>[NFS periodic snapshots](/docs/infrastructure/FileStorage/snapshots.html)</li><li>[Block periodic snapshots](/docs/infrastructure/BlockStorage/snapshots.html#snapshots)</li></ul></p></dd>
   <dt>Replicate snapshots to another location</dt>
- <dd><p>To protect your data from a location failure, you can [replicate snapshots](/docs/infrastructure/FileStorage/replication.html#working-with-replication) to an NFS file share instance that is set up in another location. Data can be replicated from the primary storage to the backup storage only. You cannot mount a replicated NFS file share instance to a cluster. When your primary storage fails, you can manually set your replicated backup storage to be the primary one. Then, you can mount it to your cluster. After your primary storage is restored, you can restore the data from the backup storage.</p>
- <p>For more information, see [replicate snapshots](/docs/infrastructure/FileStorage/replication.html#working-with-replication) to an NFS file share.</p></dd>
+ <dd><p>To protect your data from a location failure, you can [replicate snapshots](/docs/infrastructure/FileStorage/replication.html#working-with-replication) to an NFS file share or block storage instance that is set up in another location. Data can be replicated from the primary storage to the backup storage only. You cannot mount a replicated NFS file share or block storage instance to a cluster. When your primary storage fails, you can manually set your replicated backup storage to be the primary one. Then, you can mount it to your cluster. After your primary storage is restored, you can restore the data from the backup storage.</p>
+ <p>For more information, see:<ul><li>[NFS replicate snapshots](/docs/infrastructure/FileStorage/replication.html#working-with-replication)</li><li>[Block replicate snapshots](/docs/infrastructure/BlockStorage/replication.html#working-with-replication)</li></ul></p></dd>
  <dt>Duplicate storage</dt>
- <dd><p>You can duplicate your NFS file share instance in the same location as the original storage instance. A duplicate has the same data as the original storage instance at the point in time that you create the duplicate. Unlike replicas, use the duplicate as a completely independent storage instance from the original. To duplicate, first set up snapshots for the volume.</p>
- <p>For more information, see [creating a duplicate NFS file storage](/docs/infrastructure/FileStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-file-storage).</p></dd>
+ <dd><p>You can duplicate your NFS file share or block storage instance in the same location as the original storage instance. A duplicate has the same data as the original storage instance at the point in time that you create the duplicate. Unlike replicas, use the duplicate as a completely independent storage instance from the original. To duplicate, first set up snapshots for the volume.</p>
+ <p>For more information, see:<ul><li>[NFS duplicate snapshots](/docs/infrastructure/FileStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-file-storage)</li><li>[Block duplicate snapshots](/docs/infrastructure/BlockStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-block-volume)</li></ul></p></dd>
   <dt>Backup data to Object Storage</dt>
   <dd><p>You can use the [**ibm-backup-restore image**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) to spin up a backup and restore pod in your cluster. This pod contains a script to run a one-time or periodic backup for any persistent volume claim (PVC) in your cluster. Data is stored in your {{site.data.keyword.objectstoragefull}} instance that you set up in a location.</p>
   <p>To make your data even more highly available and protect your app from a location failure, set up a second {{site.data.keyword.objectstoragefull}} instance and replicate data across locations. If you need to restore data from your {{site.data.keyword.objectstoragefull}} instance, use the restore script that is provided with the image.</p></dd>
@@ -644,3 +961,5 @@ Review the following backup and restore options for your NFS file shares:
 </ul>
 </dd>
   </dl>
+  
+<br />
