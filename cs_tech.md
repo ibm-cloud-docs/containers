@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-4-25"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 # {{site.data.keyword.containerlong_notm}} technology
 
@@ -57,8 +59,8 @@ Learn about some basic Docker concepts:
   </ul>
   </dd>
 
+<p>Learn more about [securing your personal information](cs_secure.html#pi) when you work with container images.</p>
 
-  
 <p>Ready to gain deeper knowledge of Docker? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Learn how Docker and {{site.data.keyword.containershort_notm}} work together by completing this course.</a></p>
 
 </dl>
@@ -98,8 +100,8 @@ Define update strategies for your app, including the number of pods that you wan
 <dt>App</dt>
 <dd>An app might refer to a complete app or a component of an app. You might deploy components of an app in separate pods or separate worker nodes.</dd>
 
+<p>Learn more about [securing your personal information](cs_secure.html#pi) when you work with Kubernetes resources.</p>
 
-  
 <p>Ready to gain deeper knowledge of Kubernetes?</p>
 <ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Expand your terminology knowledge with the Creating clusters tutorial</a>.</li>
 <li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Learn how Kubernetes and {{site.data.keyword.containershort_notm}} work together by completing this course.</a></li></ul>
@@ -126,11 +128,10 @@ What's the difference between the Kubernetes master and a worker node? Glad you 
 </dl>
 
 ![{{site.data.keyword.containerlong_notm}} Kubernetes architecture](images/cs_org_ov.png)
-Figure. {{site.data.keyword.containershort_notm}} architecture
+{{site.data.keyword.containershort_notm}} architecture
 
 Want to see how {{site.data.keyword.containerlong_notm}} can be used with other products and services? Check out some of the [integrations](cs_integrations.html#integrations).
 
 
 <br />
-
 
