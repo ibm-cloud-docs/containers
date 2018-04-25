@@ -56,7 +56,7 @@ lastupdated: "2018-4-25"
 
 
 
-**Links related to single and scalable containers**
+**Links related to single and scalable containers (deprecated)**
 
 - [REST API for single and scalable containers ![External link icon](../icons/launch-glyph.svg "External link icon")](http://ccsapi-doc.mybluemix.net/)
 
