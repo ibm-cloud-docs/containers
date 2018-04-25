@@ -358,8 +358,25 @@ Even if you deployed a container from an image that passes the vulnerability che
   </table>
   
 
-## Deployment
+## Container runtime resource isolation
 {: #deployments}
+
+<table>
+  <thead>
+    <th>Security feature</th>
+    <th>Description</th>
+  </thead>
+  <tbody>
+    <tr>
+    <td>Isolate deployments with Kubernetes namespaces</td>
+    <td></td>
+    </tr>
+    <tr>
+      <td>Limit resource </td>
+      <td></td>
+    </tr>
+  </tbody>
+  </table>
 
 - namespaces
 - privileged containers? (or should that go into networking?)
