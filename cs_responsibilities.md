@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-4-25"
 
 ---
 
@@ -15,7 +15,9 @@ lastupdated: "2018-4-20"
 {:tip: .tip}
 {:download: .download}
 
-# Your responsibilities using {{site.data.keyword.containerlong_notm}}
+
+
+# Your responsibilities by using {{site.data.keyword.containerlong_notm}}
 Learn about cluster management responsibilities and terms and conditions that you have when you use {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
@@ -44,7 +46,7 @@ Review the responsibilities that you share with IBM to manage your clusters.
 - [Creating public and private VLANs in IBM Cloud infrastructure (SoftLayer) for network isolation of your cluster](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
 - [Ensuring that all worker nodes have network connectivity to the Kubernetes master URL](cs_firewall.html#firewall) <p>**Note**: If a worker node has both public and private VLANs, then network connectivity is configured. If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [VLAN connection for worker nodes](cs_clusters.html#worker_vlan_connection). </p>
 - [Updating the master kube-apiserver when Kubernetes version updates are available](cs_cluster_update.html#master)
-- [Keeping the worker nodes up-to-date by using the `bx cs worker-update` command to apply operating system updates, security patches, and Kubernetes version updates](cs_cluster_update.html#worker_node)
+- [Keeping the worker nodes up-to-date on major, minor, and patch versions](cs_cluster_update.html#worker_node)
 - [Recovering troubled worker nodes by running `kubectl` commands, such as `cordon` or `drain`, and by running `bx cs` commands, such as `reboot`, `reload`, or `delete`](cs_cli_reference.html#cs_worker_reboot)
 - [Adding or removing subnets in IBM Cloud infrastructure (SoftLayer) as needed](cs_subnets.html#subnets)
 - [Backing up and restoring data in persistent storage in IBM Cloud infrastructure (SoftLayer) ![External link icon](../icons/launch-glyph.svg "External link icon")](../services/RegistryImages/ibm-backup-restore/index.html)
@@ -71,4 +73,3 @@ Misuse includes:
 
 
 See [Cloud Services terms](https://console.bluemix.net/docs/overview/terms-of-use/notices.html#terms) for overall terms of use.
-
