@@ -82,10 +82,12 @@ For example, consider the following scenario:
 * You have two versions of the same app, `dev` and `stage`, for testing purposes.
 * You deploy the apps in two different namespaces within the same cluster: `dev` into the development namespace, and `stage` into the staging namespace.
 * Both apps listen on a path called `/myservice`, but you want to make sure that these apps are accessible by two different URLs.
+
 To use the same ALB to manage traffic to these apps:
 1. You use a Kubernetes service to expose each app in the respective namespaces.
 2. You create an Ingress resource in the development namespace that specifies the host as `dev.mycluster.us-south.containers.mybluemix.net` and the path as `/myservice`.
 3. You create an Ingress resource in the staging namespace that specifies the host as `stage.mycluster.us-south.containers.mybluemix.net` and the path as `/myservice`.
+
 Now, both URLs resolve to the same domain and are thus both serviced by the same ALB. However, because the resource in the staging namespace is registered with the `stage` subdomain, the Ingress ALB correctly routes requests from the `stage.mycluster.us-south.containers.mybluemix.net/myservice` URL to only the `stage` version of the app.
 
 ### Choosing an Ingress configuration
