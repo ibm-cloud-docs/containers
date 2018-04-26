@@ -25,6 +25,7 @@ You can use built-in security features in {{site.data.keyword.containerlong}} fo
 {: shortdesc}
 
 
+  
 ## Security by cluster component
 {: #cluster}
 
@@ -212,6 +213,9 @@ You are responsible for ensuring the security of your personal information in Ku
   <dt>Use a Kubernetes `imagePullSecret` to store image registry credentials</dt>
   <dd>Do not store personal information in container images or registry namespaces. For proper protection and encryption, store registry credentials in <a href="cs_images.html#other">Kubernetes imagePullSecrets</a> and other personal information in <a href="cs_app.html#secrets">Kubernetes secrets</a> instead. Remember that if personal information is stored in a previous layer of an image, deleting an image might not be sufficient to delete this personal information.</dd>
   </dl>
+  
+<br />
+
   
 
 
