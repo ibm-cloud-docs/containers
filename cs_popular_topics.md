@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-25"
+lastupdated: "2018-4-26"
 
 ---
 
@@ -38,7 +38,7 @@ Check out what container developers are interested in learning about in {{site.d
 <tr>
 <td>17 April</td>
 <td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
-<td>Install the {{site.data.keyword.Bluemix_notm}} Block Storage [plug-in](cs_storage.html#install_block) to save persistent data in block storage. Then you can [create new](cs_storage.html#create) or [use existing](cs_storage.html#existing_block) block storage for your cluster.</td>
+<td>Install the {{site.data.keyword.Bluemix_notm}} Block Storage [plug-in](cs_storage.html#install_block) to save persistent data in block storage. Then, you can [create new](cs_storage.html#create) or [use existing](cs_storage.html#existing_block) block storage for your cluster.</td>
 </tr>
 <tr>
 <td>13 April</td>
@@ -48,7 +48,7 @@ Check out what container developers are interested in learning about in {{site.d
 <tr>
 <td>5 April</td>
 <td>[Filtering logs](cs_health.html#filter-logs)</td>
-<td>Filter out specfic logs from being forwarded. Logs can be filtered out for a specific namespace, container name, log level, and message string.</td>
+<td>Filter out specific logs from being forwarded. Logs can be filtered out for a specific namespace, container name, log level, and message string.</td>
 </tr>
 </tbody></table>
 
@@ -129,7 +129,7 @@ Check out what container developers are interested in learning about in {{site.d
 <tr>
 <td>8 February</td>
 <td>[Update Kubernetes 1.9](cs_versions.html#cs_v19)</td>
-<td>Review the changes to make to your clusters before updating Kubernetes 1.9.</td>
+<td>Review the changes to make to your clusters before you update to Kubernetes 1.9.</td>
 </tr>
 </tbody></table>
 
