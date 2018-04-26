@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-26"
+lastupdated: "2018-04-26"
 
 ---
 
@@ -139,6 +139,8 @@ For reference information about these CLIs, see the documentation for those tool
 -   [`bx cr` commands](/docs/cli/plugins/registry/index.html)
 
 <br />
+
+
 
 
 ## Configuring the CLI to run `kubectl`
