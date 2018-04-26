@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-26"
+lastupdated: "2018-04-26"
 
 ---
 
@@ -16,13 +16,16 @@ lastupdated: "2018-4-26"
 {:download: .download}
 
 
-
-
 # Logging and monitoring
 {: #health}
 
 Set up logging and monitoring in {{site.data.keyword.containerlong}} to help you troubleshoot issues and improve the health and performance of your Kubernetes clusters and apps.
 {: shortdesc}
+
+
+
+If you encounter any issues, try running through this [troubleshooting guide](cs_troubleshoot_health.html).
+{: tip}
 
 
 ## Configuring cluster and app log forwarding
@@ -47,8 +50,8 @@ Check out the following table for information about the different log sources.
   <tbody>
     <tr>
       <td><code>container</code></td>
-      <td>Logs for your container that runs in a Kubernetes cluster.</td>
-      <td>Anything that is logged to STDOUT or STDERR in your containers.</td>
+      <td>Logs for your container that runs in a Kubernetes cluster. Anything that is logged to STDOUT or STDERR.</td>
+      <td> </td>
     </tr>
     <tr>
       <td><code>application</code></td>
@@ -73,12 +76,29 @@ Check out the following table for information about the different log sources.
   </tbody>
 </table>
 
-To configure logging through the UI, you must specify an org and space. To enable logging at the account level, use the CLI.
+To enable logging at the account level or to configure app logging, use the CLI.
 {: tip}
 
 
-### Before you begin
-{: #before-forwarding}
+### Enabling log forwarding with the GUI
+{: #enable-forwarding-ui}
+
+You can set up a logging configuration in the {{site.data.keyword.containershort_notm}} dashboard. It can take a few minutes for the process to complete, so if you don't see logs immediately, try waiting a few minutes and then check back.
+
+1. Navigate to the **Overview** tab of the dashboard.
+2. Select the Cloud Foundry org and space from which you want to forward logs. When you configure log forwarding in the dashboard, logs are sent to the default {{site.data.keyword.loganalysisshort_notm}} endpoint for your cluster. To forward logs to an external server, or to another {{site.data.keyword.loganalysisshort_notm}} endpoint, you can use the CLI to configure logging.
+3. Select the log sources from which you want to forward logs.
+
+    To configure application logging or specific container namespaces, use the CLI to set up your logging configuration.
+    {: tip}
+4. Click **Create**.
+
+### Enabling log forwarding with the CLI
+{: #enable-forwarding}
+
+You can create a configuration for cluster logging. You can differentiate between different log sources by using flags. You can review a full list of the configuration options in the [CLI reference](cs_cli_reference.html#logging_commands).
+
+**Before you begin**
 
 1. Verify permissions. If you specified a space when you created the cluster or the logging configuration, then both the account owner and {{site.data.keyword.containershort_notm}} key owner need Manager, Developer, or Auditor permissions in that space.
   * If you don't know who the {{site.data.keyword.containershort_notm}} key owner is, run the following command.
@@ -104,10 +124,8 @@ To configure logging through the UI, you must specify an org and space. To enabl
   * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider. Your syslog server must accept UDP protocol.
   * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in a Kubernetes cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host.
 
-### Enabling log forwarding
-{: #enable-forwarding}
 
-You can create a configuration for cluster logging. You can differentiate between different log sources by using flags. You can review a full list of the configuration options in the [CLI reference](cs_cli_reference.html#logging_commands). If you encounter any issues, try running through this [troubleshooting guide](cs_troubleshoot_health.html).
+**Forwarding logs**
 
 1. Create a log forwarding configuration.
   ```
@@ -229,7 +247,7 @@ You can create a configuration for cluster logging. You can differentiate betwee
       ```
       {: screen}
 
-### Updating log forwarding
+## Updating log forwarding
 {: #enable-forwarding}
 
 1. Update a log forwarding configuration.
@@ -820,4 +838,3 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
     kubectl -n kube-system describe deployment ibm-worker-recovery
     ```
     {: pre}
-
