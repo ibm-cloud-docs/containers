@@ -1219,7 +1219,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/redirect-to-https: "True"
+   ingress.bluemix.net/redirect-to-https: ""enabled=&lt;true&gt; serviceName=&lt;myservice1&gt;""
 spec:
  tls:
  - hosts:
@@ -1233,7 +1233,23 @@ spec:
        backend:
          serviceName: myservice
          servicePort: 8080</code></pre>
-</dd></dl>
+
+<table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+  <td>To enable redirecting HTTP requests to HTTPS, set to <code>true</code>.</td>
+</tr>
+<tr>
+<td><code>serviceName</code></td>
+<td>Replace <code><em>&lt;myservice1&gt;</em></code> with the name of the Kubernetes service that you created for your app. Separate multiple services with a semi-colon (;). This field is optional. If you do not specify a service name, then all services use this annotation.</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
 
 <br />
 
@@ -1535,7 +1551,7 @@ spec:
    metadata:
     name: myingress
     annotations:
-      ingress.bluemix.net/istio-services: "enable=True serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
+      ingress.bluemix.net/istio-services: "enabled=true serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
    spec:
     tls:
     - hosts:
@@ -1560,7 +1576,7 @@ spec:
     </thead>
     <tbody>
     <tr>
-    <td><code>enable</code></td>
+    <td><code>enabled</code></td>
       <td>To enable traffic routing to Istio-manages services, set to <code>True</code>.</td>
     </tr>
     <tr>
@@ -1614,7 +1630,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/proxy-buffering: "False"
+   ingress.bluemix.net/proxy-buffering: "enabled=&lt;false&gt; serviceName=&lt;myservice1&gt;"
 spec:
  tls:
  - hosts:
@@ -1628,7 +1644,23 @@ spec:
        backend:
          serviceName: myservice
          servicePort: 8080</code></pre>
-</dd></dl>
+
+<table>
+ <thead>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>enabled</code></td>
+   <td>To disable response data buffering on the ALB, set to <code>false</code>.</td>
+ </tr>
+ <tr>
+ <td><code>serviceName</code></td>
+ <td>Replace <code><em>&lt;myservice1&gt;</em></code> with the name of the Kubernetes service that you created for your app. Separate multiple services with a semi-colon (;). This field is optional. If you do not specify a service name, then all services use this annotation.</td>
+ </tr>
+ </tbody></table>
+ </dd>
+ </dl>
 
 <br />
 
@@ -2222,7 +2254,6 @@ Limit the request processing rate and the number of connections for specific ser
   </dl>
 
   <br />
-
 
 
 
