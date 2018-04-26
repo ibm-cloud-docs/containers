@@ -30,6 +30,7 @@ You can take these general steps to ensure that your clusters are up-to-date:
 - Check on a monthly basis for available security and operating system patches to [update your worker nodes](cs_cli_reference.html#cs_worker_update).
 - [Update your cluster](cs_cli_reference.html#cs_cluster_update) to the latest default [version of Kubernetes](cs_versions.html) for {{site.data.keyword.containershort_notm}}
 
+
 ## Debugging clusters
 {: #debug_clusters}
 

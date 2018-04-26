@@ -31,7 +31,7 @@ Set up logging and monitoring in {{site.data.keyword.containerlong}} to help you
 With a standard Kubernetes cluster in {{site.data.keyword.containershort_notm}}, you can forward logs from different sources to {{site.data.keyword.loganalysislong_notm}}, to an external syslog server or to both.
 {: shortdesc}
 
-If you want to forward logs from one source to both collector servers, then you must create two logging configurations.
+To forward logs from one source to both collector servers, then you must create two logging configurations.
 {: tip}
 
 Check out the following table for information about the different log sources.

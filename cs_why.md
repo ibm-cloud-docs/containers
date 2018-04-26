@@ -23,6 +23,7 @@ lastupdated: "2018-4-26"
 {{site.data.keyword.containerlong}} delivers powerful tools by combining Docker and Kubernetes technologies, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts.
 {:shortdesc}
 
+
 ## Benefits of using the service
 {: #benefits}
 

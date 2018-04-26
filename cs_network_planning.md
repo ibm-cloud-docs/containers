@@ -72,7 +72,7 @@ The diagram shows how Kubernetes carries user network traffic in {{site.data.key
     <li>The Ingress resource defines the rules for how to route and load balance incoming requests for an app.</li>
     <li>The application load balancer (ALB) listens for incoming HTTP or HTTPS, TCP, or UDP service requests. It forwards requests across the apps' pods based on the rules that you defined in the Ingress resource.</li>
    </ul>
-  <li>Use Ingress if you want to implement your own ALB with custom routing rules and if you need SSL termination for your apps.</li>
+  <li>Use Ingress to implement your own ALB with custom routing rules and need SSL termination for your apps.</li>
  </ul>
 </dd></dl>
 

@@ -82,6 +82,7 @@ Your app code is ready to be containerized!
 <br />
 
 
+
 ## Lesson 2: Creating a Docker image with your app code
 
 Create a Dockerfile that includes your app code and the necessary configurations for your container. Then, build a Docker image from that Dockerfile and push it to your private image registry.

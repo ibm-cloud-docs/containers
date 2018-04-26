@@ -98,7 +98,7 @@ You can change locations by using the {{site.data.keyword.containershort_notm}} 
 
 You might want to log in to another {{site.data.keyword.containershort_notm}} region for the following reasons:
   * You created {{site.data.keyword.Bluemix_notm}} services or private Docker images in one region and want to use them with {{site.data.keyword.containershort_notm}} in another region.
-  * You want to access a cluster in a region that is different from the default {{site.data.keyword.Bluemix_notm}} region you are logged in to.
+  * You want to access a cluster in a region that is different from the default {{site.data.keyword.Bluemix_notm}} region that you are logged in to.
 
 </br>
 

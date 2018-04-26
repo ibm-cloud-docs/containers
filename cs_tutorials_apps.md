@@ -58,6 +58,7 @@ Software developers and network administrators who have never deployed an app in
 
 * [Tutorial: Creating Kubernetes clusters in {{site.data.keyword.containershort_notm}}](cs_tutorials.html#cs_cluster_tutorial).
 
+
 ## Lesson 1: Deploying single instance apps to Kubernetes clusters
 {: #cs_apps_tutorial_lesson1}
 

@@ -64,7 +64,7 @@ Check out what container developers are interested in learning about in {{site.d
 </thead>
 <tbody>
 <tr>
-<td> 16 March</td>
+<td>16 March</td>
 <td>[Provision a bare metal cluster with Trusted Compute](cs_clusters.html#shared_dedicated_node)</td>
 <td>Create a bare metal cluster that runs [Kubernetes version 1.9](cs_versions.html#cs_v19) or later, and enable Trusted Compute to verify your worker nodes against tampering.</td>
 </tr>

@@ -143,6 +143,7 @@ To install the CLIs and their prerequisites:
 
 Congratulations! You've successfully installed the CLIs for the following lessons and tutorials. Next, set up your cluster environment and add the {{site.data.keyword.toneanalyzershort}} service.
 
+
 ## Lesson 2: Setting up your private registry
 {: #cs_cluster_tutorial_lesson2}
 

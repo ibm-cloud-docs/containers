@@ -1131,7 +1131,7 @@ Deploy or update a certificate from your {{site.data.keyword.cloudcerts_long_not
    <dd>The name or ID of the cluster. This value is required.</dd>
 
    <dt><code>--update</code></dt>
-   <dd>Include this flag to update the certificate for an ALB secret in a cluster. This value is optional.</dd>
+   <dd>Update the certificate for an ALB secret in a cluster. This value is optional.</dd>
 
    <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
    <dd>The name of the ALB secret. This value is required.</dd>
@@ -1252,9 +1252,6 @@ View a list of ALB secrets in a cluster.
  ```
  {: pre}
 
-
-
-
 ### bx cs alb-configure --albID ALB_ID [--enable][--disable][--user-ip USERIP]
 {: #cs_alb_configure}
 
@@ -1276,7 +1273,7 @@ Enable or disable an ALB in your standard cluster. The public ALB is enabled by 
    <dd>
 
    <ul>
-    <li>This parameter is available for a private ALB only</li>
+    <li>This parameter is available for enabling a private ALB only.</li>
     <li>The private ALB is deployed with an IP address from a user-provided private subnet. If no IP address is provided, the ALB is deployed with a private IP address from the portable private subnet that was provisioned automatically when you created the cluster.</li>
    </ul>
    </dd>
@@ -1291,13 +1288,6 @@ Enable or disable an ALB in your standard cluster. The public ALB is enabled by 
   ```
   {: pre}
 
-  Example for disabling an ALB:
-
-  ```
-  bx cs alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
-  ```
-  {: pre}
-
   Example for enabling an ALB with a user-provided IP address:
 
   ```
@@ -1305,7 +1295,12 @@ Enable or disable an ALB in your standard cluster. The public ALB is enabled by 
   ```
   {: pre}
 
+  Example for disabling an ALB:
 
+  ```
+  bx cs alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
+  ```
+  {: pre}
 
 ### bx cs alb-get --albID ALB_ID
 {: #cs_alb_get}
@@ -1544,7 +1539,7 @@ Create a logging configuration. You can use this command to forward logs for con
   <dt><code><em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster.</dd>
   <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-    <dd>The log source that you want to enable log forwarding for. This argument supports a comma-separated list of log sources to apply the configuration for. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, and <code>ingress</code>. If you do not provide a log source, logging configurations are created for <code>container</code> and <code>ingress</code> log sources.</dd>
+    <dd>The log source to enable log forwarding for. This argument supports a comma-separated list of log sources to apply the configuration for. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, and <code>ingress</code>. If you do not provide a log source, logging configurations are created for <code>container</code> and <code>ingress</code> log sources.</dd>
   <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
     <dd>The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the container log source and is optional. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</dd>
   <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
@@ -1683,7 +1678,7 @@ Update the details of a log forwarding configuration.
    <dt><code>--app-paths</code></dt>
      <dd>Skip validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration does not correctly forward logs. This value is optional.</dd>
    <dt><code>--app-containers</code></dt>
-     <dd>The path on their containers that the apps are logging to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma separated list. Example: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
+     <dd>The path on the containers that the apps are logging to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma separated list. Example: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
    <dt><code>--type <em>LOG_TYPE</em></code></dt>
    <dd>The log forwarding protocol that you want to use. Currently, <code>syslog</code> and <code>ibm</code> are supported. This value is required.</dd>
    <dt><code>--json</code></dt>
@@ -1806,7 +1801,7 @@ Delete a logging filter. You can use this command to remove a logging filter tha
   <dt><code><em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster that you want to delete a filter from.</dd>
   <dt><code>--id <em>FILTER_ID</em></code></dt>
-    <dd>The ID of the log filter that you want to delete.</dd>
+    <dd>The ID of the log filter to delete.</dd>
   <dt><code>--all</code></dt>
     <dd>Optional: Delete all of your log forwarding filters.</dd>
   <dt><code>--json</code></dt>
@@ -1940,7 +1935,7 @@ Add worker nodes to your standard cluster.
 <dd>The name or ID of the cluster. This value is required.</dd>
 
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
-<dd>The path to the YAML file to add worker nodes to your cluster. Instead of defining additional worker nodes by using the options provided in this command, you can use a YAML file. This value is optional.
+<dd>The path to the YAML file to add worker nodes to the cluster. Instead of defining additional worker nodes by using the options provided in this command, you can use a YAML file. This value is optional.
 
 <p><strong>Note:</strong> If you provide the same option in the command as the parameter in the YAML file, the value in the command takes precedence over the value in the YAML. For example, you define a machine type in your YAML file and use the --machine-type option in the command, the value that you entered in the command option overrides the value in the YAML file.
 
@@ -2145,7 +2140,7 @@ Before you reboot your worker node, make sure that pods are rescheduled on other
 
 Reload all the necessary configurations for a worker node. A reload can be useful if your worker node experiences problems, such as slow performance or if your worker node is stuck in an unhealthy state.
 
-Reloading a worker node does not apply the latest updates, security patches, or [Kubernetes version](cs_versions.html#version_types). When patch and version updates are available, you are prompted in the CLI and console as you use worker-related features. To keep your workers up-to-date, regularly use the `bx cs worker-update` [command](cs_cli_reference.html#cs_worker_update).
+Reloading a worker node applies patch version updates to your worker node, but not major or minor updates. To see the changes from one patch version to the next, review the [Version changelog](cs_versions_changelog.html#changelog) documentation.
 {: tip}
 
 Before you reload your worker node, make sure that pods are rescheduled on other worker nodes to help avoid a downtime for your app or data corruption on your worker node.
@@ -2314,7 +2309,7 @@ View a list of worker nodes and the status for each in a cluster.
 
    <dl>
    <dt><em>CLUSTER</em></dt>
-   <dd>The name or ID of the cluster where you list available worker nodes. This value is required.</dd>
+   <dd>The name or ID of the cluster for the available worker nodes. This value is required.</dd>
    <dt><em>--show-deleted</em></dt>
    <dd>View worker nodes that were deleted from the cluster, including the reason for deletion. This value is optional.</dd>
    </dl>
@@ -2325,4 +2320,3 @@ View a list of worker nodes and the status for each in a cluster.
   bx cs workers my_cluster
   ```
   {: pre}
-

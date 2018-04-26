@@ -124,7 +124,7 @@ What's the difference between the Kubernetes master and a worker node? Glad you 
   <dt>Kubernetes master</dt>
     <dd>The Kubernetes master is tasked with managing all compute, network, and storage resources in the cluster. The Kubernetes master ensures that your containerized apps and services are equally deployed to the worker nodes in the cluster. Depending on how you configure your app and services the master determines the worker node that has sufficient resources to fulfill the app's requirements.</dd>
   <dt>Worker node</dt>
-    <dd>Each worker node is a physical machine (bare metal) or a virtual machine that runs on physical hardware in the cloud environment. When you provision a worker node, you determine the resources that are available to the containers hosted on that worker node. Out of the box, your worker nodes are set up with an {{site.data.keyword.IBM_notm}} managed Docker Engine, separate compute resources, networking, and a volume service. The built-in security features provide isolation, resource management capabilities, and worker node security compliance.</dd>
+    <dd>Each worker node is a physical machine (bare metal) or a virtual machine that runs on physical hardware in the cloud environment. When you provision a worker node, you determine the resources that are available to the containers that are hosted on that worker node. Out of the box, your worker nodes are set up with an {{site.data.keyword.IBM_notm}} managed Docker Engine, separate compute resources, networking, and a volume service. The built-in security features provide isolation, resource management capabilities, and worker node security compliance.</dd>
 </dl>
 
 ![{{site.data.keyword.containerlong_notm}} Kubernetes architecture](images/cs_org_ov.png)

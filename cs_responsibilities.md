@@ -38,6 +38,7 @@ Review the responsibilities that you share with IBM to manage your clusters.
 - Providing security settings on all worker nodes
 
 </br>
+
 **You are responsible for:**
 
 - [Deploying and managing Kubernetes resources, such as pods, services, and deployments, within the cluster](cs_app.html#app_cli)

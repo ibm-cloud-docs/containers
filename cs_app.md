@@ -60,7 +60,7 @@ Review the following potential app setups that are ordered with increasing degre
 
 <dl>
   <dt>Use deployments and replica sets to deploy your app and its dependencies</dt>
-    <dd><p>A deployment is a Kubernetes resource that you can use to declare all components of your app and its dependencies. With deployments, you don't have to write down all of the steps and instead can focus on your app.</p>
+    <dd><p>A deployment is a Kubernetes resource that you can use to declare all of the components of your app and its dependencies. With deployments, you don't have to write down all of the steps and instead can focus on your app.</p>
     <p>When you deploy more than one pod, a replica set is automatically created for your deployments that monitors the pods and assures that the desired number of pods is up and running at all times. When a pod goes down, the replica set replaces the unresponsive pod with a new one.</p>
     <p>You can use a deployment to define update strategies for your app including the number of pods that you want to add during a rolling update and the number of pods that can be unavailable at a time. When you perform a rolling update, the deployment checks whether or not the revision is working and stops the rollout when failures are detected.</p>
     <p>With deployments you can concurrently deploy multiple revisions with different flags. For example, you can test a deployment first before you decide to push it to production.</p>

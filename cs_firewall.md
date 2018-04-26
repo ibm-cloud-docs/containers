@@ -175,7 +175,7 @@ Before you begin, allow access to run [`bx` commands](#firewall_bx) and [`kubect
 Let your cluster access infrastructure resources and services from behind a firewall, such as for {{site.data.keyword.containershort_notm}} regions, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IBM Cloud infrastructure (SoftLayer) private IPs, and egress for persistent volume claims.
 {:shortdesc}
 
-  1.  Note the public IP address for all your worker nodes in the cluster.
+  1.  Note the public IP address for all of your worker nodes in the cluster.
 
       ```
       bx cs workers <cluster_name_or_ID>

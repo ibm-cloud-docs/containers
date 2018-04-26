@@ -80,6 +80,7 @@ Review the following changes.
 </tbody>
 </table>
 
+
 ## Version 1.7 changelog
 {: #17_changelog}
 

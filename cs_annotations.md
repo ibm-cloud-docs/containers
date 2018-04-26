@@ -136,7 +136,7 @@ For general information about Ingress services and how to get started using them
   <tr>
   <td><a href="#hsts">HTTP Strict Transport Security (HSTS)</a></td>
   <td><code>hsts</code></td>
-  <td>Set the browser to only access the domain using HTTPS.</td>
+  <td>Set the browser to access the domain only by using HTTPS.</td>
   </tr>
   <tr>
   <td><a href="#mutual-auth">Mutual authentication</a></td>

@@ -87,7 +87,7 @@ You might have corporate network policies that prevent access from your local sy
 {: #cs_firewall}
 
 {: tsSymptoms}
-When the worker nodes are not able to connect, you might see a variety of different symptoms. You might see one of the following messages when kubectl proxy fails or you try to access a service in your cluster and the connection fails.
+When the worker nodes cannot connect, you might see a variety of different symptoms. You might see one of the following messages when kubectl proxy fails or you try to access a service in your cluster and the connection fails.
 
   ```
   Connection refused

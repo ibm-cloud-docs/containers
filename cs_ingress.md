@@ -678,7 +678,7 @@ Before you begin:
 -   [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster to run `kubectl` commands.
 -   Ensure that the external app that you want to include into the cluster load balancing can be accessed by using a public IP address.
 
-You can route incoming network traffic on the IBM-provided domain to apps that are located outside your cluster. If you want to use a custom domain and TLS certificate instead, replace the IBM-provided domain and TLS certificate with your [custom domain and TLS certificate](#custom_domain_cert).
+You can route incoming network traffic on the IBM-provided domain to apps that are located outside your cluster. To use a custom domain and TLS certificate instead, replace the IBM-provided domain and TLS certificate with your [custom domain and TLS certificate](#custom_domain_cert).
 
 1.  Create a Kubernetes service for your cluster that will forward incoming requests to an external endpoint that you will created.
     1.  Open your preferred editor and create a service configuration file that is named, for example, `myexternalservice.yaml`.

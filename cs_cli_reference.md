@@ -2314,7 +2314,7 @@ View a list of worker nodes and the status for each in a cluster.
 
    <dl>
    <dt><em>CLUSTER</em></dt>
-   <dd>The name or ID of the cluster where you list available worker nodes. This value is required.</dd>
+   <dd>The name or ID of the cluster for the available worker nodes. This value is required.</dd>
    <dt><em>--show-deleted</em></dt>
    <dd>View worker nodes that were deleted from the cluster, including the reason for deletion. This value is optional.</dd>
    </dl>
