@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-26"
+lastupdated: "2018-04-26"
 
 ---
 
@@ -1219,7 +1219,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/redirect-to-https: ""enabled=&lt;true&gt; serviceName=&lt;myservice1&gt;""
+   ingress.bluemix.net/redirect-to-https: "enabled=&lt;true&gt; serviceName=&lt;myservice1&gt;"
 spec:
  tls:
  - hosts:
