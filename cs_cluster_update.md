@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-4-26"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # Updating clusters and worker nodes
@@ -77,7 +80,7 @@ The keys are defined. What now?
 
 After you define your rules, you run the `bx cs worker-update` command. If a successful response is returned, the worker nodes are queued to be updated. However, the nodes do not undergo the update process until all of the rules are satisfied. While they're queued, the rules are checked on an interval to see if any of the nodes are able to be updated.
 
-What if I chose to not define a configuration map?
+What if I chose not to define a configuration map?
 
 When the configuration map is not defined, the default is used. By default, a maximum of 20% of all of your worker nodes in each cluster are unavailable during the update process.
 

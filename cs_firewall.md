@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-4-26"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 # Opening required ports and IP addresses in your firewall
 {: #firewall}
@@ -108,7 +111,7 @@ To allow access for a specific cluster:
    ```
    {: screen}
 
-5. Allow access to the **Master URL** on the port, such as port `31142` in the previous example.
+5. Allow access to the **Master URL** on the port, such as port `31142` from the previous example.
 
 6. Verify your connection.
 

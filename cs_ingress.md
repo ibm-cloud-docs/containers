@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-25"
+lastupdated: "2018-4-26"
 
 ---
 
@@ -83,10 +83,11 @@ For example, consider the following scenario:
 * You deploy the apps in two different namespaces within the same cluster: `dev` into the development namespace, and `stage` into the staging namespace.
 * Both apps listen on a path called `/myservice`, but you want to make sure that these apps are accessible by two different URLs.
 
-To use the same ALB to manage traffic to these apps:
-1. You use a Kubernetes service to expose each app in the respective namespaces.
-2. You create an Ingress resource in the development namespace that specifies the host as `dev.mycluster.us-south.containers.mybluemix.net` and the path as `/myservice`.
-3. You create an Ingress resource in the staging namespace that specifies the host as `stage.mycluster.us-south.containers.mybluemix.net` and the path as `/myservice`.
+To use the same ALB to manage traffic to these apps, you create the following:
+* A Kubernetes service for the `dev` app to expose it in the development namespace.
+* A Kubernetes service for the `stage` app to expose it in the staging namespace.
+* An Ingress resource in the development namespace that specifies the host as `dev.mycluster.us-south.containers.mybluemix.net` and the path as `/myservice`.
+* An Ingress resource in the staging namespace that specifies the host as `stage.mycluster.us-south.containers.mybluemix.net` and the path as `/myservice`.
 
 Now, both URLs resolve to the same domain and are thus both serviced by the same ALB. However, because the resource in the staging namespace is registered with the `stage` subdomain, the Ingress ALB correctly routes requests from the `stage.mycluster.us-south.containers.mybluemix.net/myservice` URL to only the `stage` version of the app.
 

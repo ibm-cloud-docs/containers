@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-4-26"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 # Restricting network traffic to edge worker nodes
 {: #edge}
@@ -54,7 +56,7 @@ Steps:
   ```
   {: pre}
 
-3. Retrieve all existing load balancer services in your cluster.
+3. Retrieve all of the existing load balancer services in the cluster.
 
   ```
   kubectl get services --all-namespaces -o jsonpath='{range .items[*]}kubectl get service -n {.metadata.namespace} {.metadata.name} -o yaml | kubectl apply -f - :{.spec.type},{end}' | tr "," "\n" | grep "LoadBalancer" | cut -d':' -f1
@@ -68,7 +70,7 @@ Steps:
   ```
   {: screen}
 
-4. Using the output from the previous step, copy and paste each `kubectl get service` line. This command redeploys the load balancer to an edge worker node. Only public load balancers need to be redeployed.
+4. Using the output from the previous step, copy and paste each `kubectl get service` line. This command redeploys the load balancer to an edge worker node. Only public load balancers must be redeployed.
 
   Output:
 
@@ -85,13 +87,13 @@ You labeled worker nodes with `dedicated=edge` and redeployed all existing load 
 ## Prevent workloads from running on edge worker nodes
 {: #edge_workloads}
 
-One benefit of edge worker nodes is that they can be specified to run networking services only.
+A benefit of edge worker nodes is that they can be specified to run networking services only.
 {:shortdesc}
 
 Using the `dedicated=edge` toleration means that all load balancer and Ingress services are deployed to the labeled worker nodes only. However, to prevent other workloads from running on edge worker nodes and consuming worker node resources, you must use [Kubernetes taints ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
 
 
-1. List all worker nodes with the `edge` label.
+1. List all of the worker nodes with the `edge` label.
 
   ```
   kubectl get nodes -L publicVLAN,privateVLAN,dedicated -l dedicated=edge
