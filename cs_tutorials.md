@@ -175,7 +175,7 @@ Set up a private image repository in {{site.data.keyword.registryshort_notm}} an
     ```
     bx cs workers <cluster_name_or_ID>
     ```
-     {: pre}
+    {: pre}
 
     When your worker node is finished provisioning, the status changes to **Ready** and you can start binding {{site.data.keyword.Bluemix_notm}} services.
 
