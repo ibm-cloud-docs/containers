@@ -20,12 +20,12 @@ lastupdated: "2018-04-27"
 # Tutorial: Installing Istio on {{site.data.keyword.containerlong_notm}}
 {: #istio_tutorial}
 
-[Istio](https://www.ibm.com/cloud/info/istio) is an open platform to connect, secure, and manage a network of microservices, also known as a service mesh, on cloud platforms such as Kubernetes in {{site.data.keyword.containerlong}}. With Istio, manage network traffic, load balance across microservices, enforce access policies, verify service identity on the service mesh, and more.
+[Istio](https://www.ibm.com/cloud/info/istio) is an open platform to connect, secure, and manage a network of microservices, also known as a service mesh, on cloud platforms such as Kubernetes in {{site.data.keyword.containerlong}}. With Istio, you can manage network traffic, load balance across microservices, enforce access policies, verify service identity, and more.
 {:shortdesc}
 
 In this tutorial, you can see how to install Istio alongside four microservices for a simple mock bookstore app called BookInfo. The microservices include a product web page, book details, reviews, and ratings. When you deploy BookInfo's microservices into an {{site.data.keyword.containershort}} cluster where Istio is installed, you inject the Istio Envoy sidecar proxies in the pods of each microservice.
 
-**Note**: Some configurations and features of the Istio platform are still under development and are subject to change based on user feedback. Allow a few months for stablilization before you use Istio in production. 
+**Note**: Some configurations and features of the Istio platform are still under development and are subject to change based on user feedback. Allow a few months for stabilization before you use Istio in production. 
 
 ## Objectives
 
@@ -40,7 +40,7 @@ In this tutorial, you can see how to install Istio alongside four microservices 
 
 ## Audience
 
-This tutorial is intended for software developers and network administrators who have never used Istio before.
+This tutorial is intended for software developers and network administrators who are using Istio for the first time.
 
 ## Prerequisites
 
@@ -224,7 +224,7 @@ Congratulations! You successfully deployed the BookInfo sample app with Istio En
 ## Cleanup
 {: #istio_tutorial_cleanup}
 
-If you don't want to explore more Istio functionality that is provided in [What's next?](#istio_tutorial_whatsnext), then you can clean up your Istio resources in your cluster.
+If you're finished working with Istio and don't want to [continue exploring the functionality](#istio_tutorial_whatsnext), then you can clean up the Istio resources in your cluster.
 {:shortdesc}
 
 1. Delete all BookInfo services, pods, and deployments in the cluster.
@@ -249,4 +249,3 @@ To explore Istio functionality further, you can find more guides in the [Istio d
 * [Intelligent Routing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/guides/intelligent-routing.html): This example shows how to route traffic to a specific version of BookInfo's reviews and ratings microservices by using Istio's traffic management capabilities.
 
 * [In-Depth Telemetry ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/guides/telemetry.html): This example includes how to get uniform metrics, logs, and traces across BookInfo's microservices by using Istio Mixer and the Envoy proxy.
-
