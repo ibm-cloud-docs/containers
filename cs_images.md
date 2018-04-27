@@ -182,9 +182,14 @@ You can copy the imagePullSecret that is automatically created for the `default`
    ```
    {: pre}
 
-3. Copy the imagePullSecret from the `default` namespace to the namespace of your choice. The new imagePullSecret is named `bluemix-<namespace_name>-secret-regional`.
+3. Copy the imagePullSecrets from the `default` namespace to the namespace of your choice. The new imagePullSecrets are named `bluemix-<namespace_name>-secret-regional` and `bluemix-<namespace_name>-secret-international`.
    ```
    kubectl get secret bluemix-default-secret-regional -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
+   ```
+   {: pre}
+   
+   ```
+   kubectl get secret bluemix-default-secret-international -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
    ```
    {: pre}
 
