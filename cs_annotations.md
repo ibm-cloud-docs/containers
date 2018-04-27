@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-04-26"
+lastupdated: "2018-04-27"
 
 ---
 
@@ -2173,7 +2173,7 @@ For all services, limit the request processing rate and the number of connection
   <tbody>
   <tr>
   <td><code>key</code></td>
-  <td>To set a global limit for incoming requests based on the location or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key==$http_x_user_id`.</td>
+  <td>To set a global limit for incoming requests based on the location or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
   </tr>
   <tr>
   <td><code>rate</code></td>
@@ -2239,7 +2239,7 @@ Limit the request processing rate and the number of connections for specific ser
   </tr>
   <tr>
   <td><code>key</code></td>
-  <td>To set a global limit for incoming requests based on the location or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key==$http_x_user_id`.</td>
+  <td>To set a global limit for incoming requests based on the location or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
   </tr>
   <tr>
   <td><code>rate</code></td>
