@@ -112,7 +112,7 @@ You can create a configuration for cluster logging. You can differentiate betwee
       ```
       {: pre}
 
-  For more information about changing {{site.data.keyword.containershort_notm}} access policies and permissions, see [Managing cluster access](cs_users.html#managing).
+  For more information about changing {{site.data.keyword.containershort_notm}} access policies and permissions, see [Managing cluster access](cs_users.html#access_policies).
   {: tip}
 
 2. [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster where the log source is located.

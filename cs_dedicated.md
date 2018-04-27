@@ -501,7 +501,7 @@ Before you begin: Configure the routing of network traffic into and out of your 
 {: #dedicated_other}
 
 Review the following options for other cluster configurations:
-  * [Managing cluster access](cs_users.html#managing)
+  * [Managing cluster access](cs_users.html#access_policies)
   * [Updating the Kubernetes master](cs_cluster_update.html#master)
   * [Updating worker nodes](cs_cluster_update.html#worker_node)
   * [Configuring cluster logging](cs_health.html#logging)

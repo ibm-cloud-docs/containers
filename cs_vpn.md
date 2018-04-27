@@ -249,7 +249,7 @@ After you deploy your Helm chart, test the VPN connectivity.
 
     * If all of the tests pass, your strongSwan VPN connection is successfully set up.
 
-    * If any part of the test fails, continue to the next step.
+    * If any of the tests fail, continue to the next step.
 
 5. View the output of a failed test by looking at the logs of the test pod.
 
@@ -389,6 +389,8 @@ To upgrade from version 1.0.0, you must delete the 1.0.0 chart and install the l
 
 Additionally, certain `ipsec.conf` timeout settings that were hardcoded in 1.0.0 are exposed as configurable properties in later versions. The names and defaults of some of these configurable `ipsec.conf` timeout settings were also changed to be more consistent with strongSwan standards. If you are upgrading your Helm chart from 1.0.0 and want to retain the 1.0.0 version defaults for the timeout settings, add the new settings to your chart configuration file with the old default values.
 
+
+
   <table>
   <caption>ipsec.conf settings differences between version 1.0.0 and the latest version</caption>
   <thead>
@@ -400,21 +402,21 @@ Additionally, certain `ipsec.conf` timeout settings that were hardcoded in 1.0.0
   <tbody>
   <tr>
   <td><code>ikelifetime</code></td>
-  <td>60 m</td>
+  <td>60m</td>
   <td><code>ikelifetime</code></td>
-  <td>3 h</td>
+  <td>3h</td>
   </tr>
   <tr>
   <td><code>keylife</code></td>
-  <td>20 m</td>
+  <td>20m</td>
   <td><code>lifetime</code></td>
-  <td>1 h</td>
+  <td>1h</td>
   </tr>
   <tr>
   <td><code>rekeymargin</code></td>
-  <td>3 m</td>
+  <td>3m</td>
   <td><code>margintime</code></td>
-  <td>9 m</td>
+  <td>9m</td>
   </tr>
   </tbody></table>
 
@@ -429,4 +431,3 @@ You can disable the VPN connection by deleting the Helm chart.
   helm delete --purge <release_name>
   ```
   {: pre}
-
