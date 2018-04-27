@@ -34,7 +34,7 @@ If you encounter any issues, try running through this [troubleshooting guide](cs
 With a standard Kubernetes cluster in {{site.data.keyword.containershort_notm}}, you can forward logs from different sources to {{site.data.keyword.loganalysislong_notm}}, to an external syslog server or to both.
 {: shortdesc}
 
-To forward logs from one source to both collector servers, then you must create two logging configurations.
+If you want to forward logs from one source to both collector servers, then you must create two logging configurations.
 {: tip}
 
 Check out the following table for information about the different log sources.
@@ -317,7 +317,7 @@ You can choose which logs that you forward by filtering out specific logs for a 
 
 1. Create a logging filter.
   ```
-  bx cs logging-filter-create <cluster_name_or_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace> --container <container_name> --level <logging_level> --message <message>
+  bx cs logging-filter-create <cluster_name_or_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace> --container <container_name> --level <logging_level> --regex-message <message>
   ```
   {: pre}
   <table>
@@ -351,7 +351,7 @@ You can choose which logs that you forward by filtering out specific logs for a 
       </tr>
       <tr>
         <td><code>&lt;message&gt;</code></td>
-        <td>Optional: Filters out logs that contain a specified message.</td>
+        <td>Optional: Filters out logs that contain a specified message that is written as a regular expression.</td>
       </tr>
     </tbody>
   </table>
