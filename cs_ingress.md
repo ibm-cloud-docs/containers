@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-04-26"
+lastupdated: "2018-04-27"
 
 ---
 
@@ -92,7 +92,7 @@ To use the same ALB to manage traffic to these apps, you create the following:
 Now, both URLs resolve to the same domain and are thus both serviced by the same ALB. However, because the resource in the staging namespace is registered with the `stage` subdomain, the Ingress ALB correctly routes requests from the `stage.mycluster.us-south.containers.mybluemix.net/myservice` URL to only the `stage` version of the app.
 
 **Note**:
-* The Ingress subdomain wildcard, `*.<cluster_name>.<region>.containers.mybluemix.net`, is registered be default for your cluster. However, if you want to use wildcard subdomains with the Ingress subdomain, TLS is not supported.
+* The Ingress subdomain wildcard, `*.<cluster_name>.<region>.containers.mybluemix.net`, is registered by default for your cluster. However, if you want to use wildcard subdomains with the Ingress subdomain, TLS is not supported.
 * If you want to use a custom domain, you must register the custom domain as a wildcard domain such as `*.custom_domain.net`. To manage the TLS termination while using your custom domain, you must get a wildcard certificate.
 
 ### Choosing an Ingress configuration
