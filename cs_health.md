@@ -23,7 +23,6 @@ Set up logging and monitoring in {{site.data.keyword.containerlong}} to help you
 {: shortdesc}
 
 
-
 If you encounter any issues, try running through this [troubleshooting guide](cs_troubleshoot_health.html).
 {: tip}
 
@@ -534,6 +533,7 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
 * Forwarding for Kubernetes API audit logs is only supported for Kubernetes version 1.7 and later.
 * Currently, a default audit policy is used for all clusters with this logging configuration.
 * Audit logs can be forwarded only to an external server.
+* Currently, filters are not supported.
 {: tip}
 
 ### Enabling Kubernetes API audit log forwarding
@@ -547,7 +547,7 @@ Before you begin:
 
 To forward Kubernetes API audit logs:
 
-1. Configure the webhook. If you do not provide any information in the flags, a default configuration is used.
+1. Set up the webhook. If you do not provide any information in the flags, a default configuration is used.
 
     ```
     bx cs apiserver-config-set audit-webhook <cluster_name_or_ID> --remoteServer <server_URL_or_IP> --caCert <CA_cert_path> --clientCert <client_cert_path> --clientKey <client_key_path>
@@ -626,16 +626,10 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
 <br />
 
 
-## Configuring cluster monitoring
-{: #monitoring}
-
-Metrics help you monitor the health and performance of your clusters. You can configure health monitoring for worker nodes to automatically detect and correct any workers that enter a degraded or nonoperational state. **Note**: Monitoring is supported only for standard clusters.
-{:shortdesc}
-
 ## Viewing metrics
 {: #view_metrics}
 
-You can use the standard Kubernetes and Docker features to monitor the health of your clusters and apps.
+Metrics help you monitor the health and performance of your clusters. You can use the standard Kubernetes and Docker features to monitor the health of your clusters and apps. **Note**: Monitoring is supported only for standard clusters.
 {:shortdesc}
 
 <dl>
@@ -644,7 +638,13 @@ You can use the standard Kubernetes and Docker features to monitor the health of
   <dt>Kubernetes dashboard</dt>
     <dd>The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containershort_notm}}](cs_app.html#cli_dashboard).</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
-    <dd>Metrics for standard clusters are located in the {{site.data.keyword.Bluemix_notm}} account that was logged in to when the Kubernetes cluster was created. If you specified an {{site.data.keyword.Bluemix_notm}} space when you created the cluster, then metrics are located in that space. Container metrics are collected automatically for all containers that are deployed in a cluster. These metrics are sent and are made available through Grafana. For more information about metrics, see [Monitoring for the {{site.data.keyword.containershort_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov).<p>To access the Grafana dashboard, go to one of the following URLs and select the {{site.data.keyword.Bluemix_notm}} account or space where you created the cluster.<ul><li>US-South and US-East: https://metrics.ng.bluemix.net</li><li>UK-South: https://metrics.eu-gb.bluemix.net</li><li>Eu-Central: https://metrics.eu-de.bluemix.net</li></ul></p></dd>
+    <dd><p>Metrics for standard clusters are located in the {{site.data.keyword.Bluemix_notm}} account that was logged in to when the Kubernetes cluster was created. If you specified an {{site.data.keyword.Bluemix_notm}} space when you created the cluster, then metrics are located in that space. Container metrics are collected automatically for all containers that are deployed in a cluster. These metrics are sent and are made available through Grafana. For more information about metrics, see [Monitoring for the {{site.data.keyword.containershort_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov).</p>
+    <p>To access the Grafana dashboard, go to one of the following URLs and select the {{site.data.keyword.Bluemix_notm}} account or space where you created the cluster.
+      <ul>
+        <li>US-South and US-East: https://metrics.ng.bluemix.net</li>
+        <li>UK-South: https://metrics.eu-gb.bluemix.net</li>
+        <li>Eu-Central: https://metrics.eu-de.bluemix.net</li>
+      </ul></p></dd>
 </dl>
 
 ### Other health monitoring tools

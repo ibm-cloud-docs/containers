@@ -73,7 +73,10 @@ Downgrading permissions? It can take a few minutes for the action to complete.
 ### Platform roles
 {: #platform_roles}
 
-{{site.data.keyword.containershort_notm}} is configured to use {{site.data.keyword.Bluemix_notm}} platform roles. The role permissions build on each other, which means that the `Editor` role has the same permissions as the `Viewer` role, plus the permissions that are granted to an editor. The following table explains the types of actions that each role can perform. **Note**: The corresponding RBAC roles are automatically assigned when you assign a platform role. You can always change them later!
+{{site.data.keyword.containershort_notm}} is configured to use {{site.data.keyword.Bluemix_notm}} platform roles. The role permissions build on each other, which means that the `Editor` role has the same permissions as the `Viewer` role, plus the permissions that are granted to an editor. The following table explains the types of actions that each role can perform.
+
+The corresponding RBAC roles are automatically assigned to the default namespace when you assign a platform role. If you change a user's platform role, then the RBAC role is also updated.
+{: tip}
 
 <table>
   <tr>
@@ -88,7 +91,7 @@ Downgrading permissions? It can take a few minutes for the action to complete.
   </tr>
   <tr>
     <td>Editor</td>
-    <td>Can bind or unbind an IBM Cloud service to a cluster, or create a webhook.</td>
+    <td>Can bind or unbind an IBM Cloud service to a cluster, or create a webhook. <strong>Note</strong>: To bind services, you must also be assigned the Cloud Foundry role of developer.</td>
     <td>Edit</td>
   </tr>
   <tr>
@@ -98,7 +101,7 @@ Downgrading permissions? It can take a few minutes for the action to complete.
   </tr>
   <tr>
     <td>Administrator</td>
-    <td>Can create and remove clusters. Can edit access policies for others at the account level for the service and infrastructure.</td>
+    <td>Can create and remove clusters. Can edit access policies for others at the account level for the service and infrastructure. <strong>Note</strong>: Admin access can be assigned to either a specific cluster or to all instances of the service across your account. To delete clusters, you must have admin access for the cluster that you want to delete. To create clusters you must have the admin role for all instances of the service.</td>
     <td>Cluster-admin</td>
   </tr>
 </table>
@@ -110,6 +113,9 @@ For more information about assigning user roles in the UI, see [Managing IAM acc
 {: #infrastructure_roles}
 
 Infrastructure roles enable users to perform tasks on resources at the infrastructure level. The following table explains the types of actions that each role can perform. Infrastructure roles are customizable; be sure to give users only the access that they need to do their job.
+
+In addition to granting specific infrastructure roles, you must also grant device access to users that work with infrastructure.
+{: tip}
 
 <table>
   <tr>
@@ -137,6 +143,9 @@ To start assigning roles, follow the steps in [Customizing infrastructure permis
 
 Resource-based access control (RBAC) is a way of securing your resources that are inside of your cluster and deciding who can perform which Kubernetes actions. In the following table, you can see the types of RBAC roles and the types of actions that users can perform with that role. The permissions build on each other, which means that an `Admin` also has all of the policies that come with the `View` and `Edit` roles. Be sure to give users only the access that they need.
 
+RBAC roles are automatically set in conjunction with the platform role for the default namespace. [You can update the role, or assign roles for other namespaces](#rbac).
+{: tip}
+
 <table>
   <tr>
     <th>RBAC role</th>
@@ -144,7 +153,7 @@ Resource-based access control (RBAC) is a way of securing your resources that ar
   </tr>
   <tr>
     <td>View</td>
-    <td>Can view resources inside of the default namespace.</td>
+    <td>Can view resources inside of the default namespace. Viewers cannot view Kubernetes secrets. </td>
   </tr>
   <tr>
     <td>Edit</td>
@@ -192,10 +201,13 @@ To successfully provision and work with clusters in your account, you must ensur
 
 <dl>
   <dt>IAM API key</dt>
-  <dd>The Identity and Access Management (IAM) API key is automatically set for a region when the first action that requires the {{site.data.keyword.containershort_notm}} admin access policy is performed. For example, one of your admin users creates the first cluster in the <code>us-south</code> region. By doing that, the IAM API key for this user is stored in the account for this region. The API key is used to order IBM Cloud infrastructure (SoftLayer), such as new worker nodes or VLANs. </br></br>
-When a different user performs an action in this region that requires interaction with the IBM Cloud infrastructure (SoftLayer) portfolio, such as creating a new cluster or reloading a worker node, the stored API key is used to determine whether sufficient permissions exist to perform that action. To make sure that infrastructure-related actions in your cluster can be successfully performed, assign your {{site.data.keyword.containershort_notm}} admin users the <strong>Super user</strong> infrastructure access policy. </br></br>You can find the current API key owner by running [<code>bx cs api-key-info</code>](cs_cli_reference.html#cs_api_key_info). If you find that you need to update the API key that is stored for a region, you can do so by running the [<code>bx cs api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) command. This command requires the {{site.data.keyword.containershort_notm}} admin access policy and stores the API key of the user that executes this command in the account. </br></br> <strong>Note:</strong> The API key that is stored for the region might not be used if IBM Cloud infrastructure (SoftLayer) credentials were manually set by using the <code>bx cs credentials-set</code> command. </dd>
-<dt>IBM Cloud infrastructure (SoftLayer) credentials via <code>bx cs credentials-set</code></dt>
-<dd>If you have an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account, you have access to the IBM Cloud infrastructure (SoftLayer) portfolio by default. However, you might want to use a different IBM Cloud infrastructure (SoftLayer) account that you already have to order infrastructure. You can link this infrastructure account to your {{site.data.keyword.Bluemix_notm}} account by using the [<code>bx cs credentials-set</code>](cs_cli_reference.html#cs_credentials_set) command. </br></br>If IBM Cloud infrastructure (SoftLayer) credentials are manually set, these credentials are used to order infrastructure, even if an IAM API key exists for the account. If the user whose credentials are stored does not have the required permissions to order infrastructure, then infrastructure-related actions, such as creating a cluster or reloading a worker node can fail. </br></br> To remove IBM Cloud infrastructure (SoftLayer) credentials that were manually set, you can use the [<code>bx cs credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset) command. After the credentials are removed, the IAM API key is used to order infrastructure. </dd>
+    <dd><p>The Identity and Access Management (IAM) API key is automatically set for a region when the first action that requires the {{site.data.keyword.containershort_notm}} admin access policy is performed. For example, one of your admin users creates the first cluster in the <code>us-south</code> region. By doing that, the IAM API key for this user is stored in the account for this region. The API key is used to order IBM Cloud infrastructure (SoftLayer), such as new worker nodes or VLANs.</p> <p>When a different user performs an action in this region that requires interaction with the IBM Cloud infrastructure (SoftLayer) portfolio, such as creating a new cluster or reloading a worker node, the stored API key is used to determine whether sufficient permissions exist to perform that action. To make sure that infrastructure-related actions in your cluster can be successfully performed, assign your {{site.data.keyword.containershort_notm}} admin users the <strong>Super user</strong> infrastructure access policy.</p>
+    <p>You can find the current API key owner by running [<code>bx cs api-key-info</code>](cs_cli_reference.html#cs_api_key_info). If you find that you need to update the API key that is stored for a region, you can do so by running the [<code>bx cs api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) command. This command requires the {{site.data.keyword.containershort_notm}} admin access policy and stores the API key of the user that executes this command in the account.</p>
+    <p><strong>Note:</strong> The API key that is stored for the region might not be used if IBM Cloud infrastructure (SoftLayer) credentials were manually set by using the <code>bx cs credentials-set</code> command.</p></dd>
+  <dt>IBM Cloud infrastructure (SoftLayer) credentials via <code>bx cs credentials-set</code></dt>
+    <dd><p>If you have an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account, you have access to the IBM Cloud infrastructure (SoftLayer) portfolio by default. However, you might want to use a different IBM Cloud infrastructure (SoftLayer) account that you already have to order infrastructure. You can link this infrastructure account to your {{site.data.keyword.Bluemix_notm}} account by using the [<code>bx cs credentials-set</code>](cs_cli_reference.html#cs_credentials_set) command.</p>
+    <p>If IBM Cloud infrastructure (SoftLayer) credentials are manually set, these credentials are used to order infrastructure, even if an IAM API key exists for the account. If the user whose credentials are stored does not have the required permissions to order infrastructure, then infrastructure-related actions, such as creating a cluster or reloading a worker node can fail.</p>
+    <p>To remove IBM Cloud infrastructure (SoftLayer) credentials that were manually set, you can use the [<code>bx cs credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset) command. After the credentials are removed, the IAM API key is used to order infrastructure.</p></dd>
 </dl>
 
 <br />
@@ -298,39 +310,39 @@ Before you begin, [target the Kubernetes CLI to the cluster](cs_cli_install.html
         {: codeblock}
 
         <table>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this YAML components</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>kind</code></td>
-        <td>Use `Role` to grant access to resources within a single namespace, or `ClusterRole` for resources cluster-wide.</td>
-        </tr>
-        <tr>
-        <td><code>apiVersion</code></td>
-        <td><ul><li>For clusters that run Kubernetes 1.8 or later, use `rbac.authorization.k8s.io/v1`. </li><li>For earlier versions, use `apiVersion: rbac.authorization.k8s.io/v1beta1`.</li></ul></td>
-        </tr>
-        <tr>
-        <td><code>metadata/namespace</code></td>
-        <td><ul><li>For `Role` kind: Specify the Kubernetes namespace to which access is granted.</li><li>Do not use the `namespace` field if you are creating a `ClusterRole` that applies at the cluster-level.</li></ul></td>
-        </tr>
-        <tr>
-        <td><code>metadata/name</code></td>
-        <td>Name the role and use the name later when you bind the role.</td>
-        </tr>
-        <tr>
-        <td><code>rules/apiGroups</code></td>
-        <td><ul><li>Specify the Kubernetes API groups that you want users to be able to interact with, such as `"apps"`, `"batch"`, or `"extensions"`. </li><li>For access to the core API group at REST path `api/v1`, leave the group blank: `[""]`.</li><li>For more information, see [API groups![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/api-overview/#api-groups) in the Kubernetes documentation.</li></ul></td>
-        </tr>
-        <tr>
-        <td><code>rules/resources</code></td>
-        <td><ul><li>Specify the Kubernetes resources to which you want to grant access, such as `"daemonsets"`, `"deployments"`, `"events"`, or `"ingresses"`.</li><li>If you specify `"nodes"`, then the role kind must be `ClusterRole`.</li><li>For a list of resources, see the table of [Resource types![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) in the Kubernetes cheat sheet.</li></ul></td>
-        </tr>
-        <tr>
-        <td><code>rules/verbs</code></td>
-        <td><ul><li>Specify the types of actions that you want users to be able to do, such as `"get"`, `"list"`, `"describe"`, `"create"`, or `"delete"`. </li><li>For a full list of verbs, see the [`kubectl` documentation![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).</li></ul></td>
-        </tr>
-        </tbody>
+          <thead>
+            <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this YAML components</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>kind</code></td>
+              <td>Use `Role` to grant access to resources within a single namespace, or `ClusterRole` for resources cluster-wide.</td>
+            </tr>
+            <tr>
+              <td><code>apiVersion</code></td>
+              <td><ul><li>For clusters that run Kubernetes 1.8 or later, use `rbac.authorization.k8s.io/v1`. </li><li>For earlier versions, use `apiVersion: rbac.authorization.k8s.io/v1beta1`.</li></ul></td>
+            </tr>
+            <tr>
+              <td><code>metadata/namespace</code></td>
+              <td><ul><li>For `Role` kind: Specify the Kubernetes namespace to which access is granted.</li><li>Do not use the `namespace` field if you are creating a `ClusterRole` that applies at the cluster-level.</li></ul></td>
+            </tr>
+            <tr>
+              <td><code>metadata/name</code></td>
+              <td>Name the role and use the name later when you bind the role.</td>
+            </tr>
+            <tr>
+              <td><code>rules/apiGroups</code></td>
+              <td><ul><li>Specify the Kubernetes API groups that you want users to be able to interact with, such as `"apps"`, `"batch"`, or `"extensions"`. </li><li>For access to the core API group at REST path `api/v1`, leave the group blank: `[""]`.</li><li>For more information, see [API groups![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/api-overview/#api-groups) in the Kubernetes documentation.</li></ul></td>
+            </tr>
+            <tr>
+              <td><code>rules/resources</code></td>
+              <td><ul><li>Specify the Kubernetes resources to which you want to grant access, such as `"daemonsets"`, `"deployments"`, `"events"`, or `"ingresses"`.</li><li>If you specify `"nodes"`, then the role kind must be `ClusterRole`.</li><li>For a list of resources, see the table of [Resource types![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) in the Kubernetes cheat sheet.</li></ul></td>
+            </tr>
+            <tr>
+              <td><code>rules/verbs</code></td>
+              <td><ul><li>Specify the types of actions that you want users to be able to do, such as `"get"`, `"list"`, `"describe"`, `"create"`, or `"delete"`. </li><li>For a full list of verbs, see the [`kubectl` documentation![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).</li></ul></td>
+            </tr>
+          </tbody>
         </table>
 
     2.  Create the role in your cluster.
@@ -372,51 +384,51 @@ Before you begin, [target the Kubernetes CLI to the cluster](cs_cli_install.html
         {: codeblock}
 
         <table>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this YAML components</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>kind</code></td>
-        <td>Specify the `kind` as `RoleBinding` for both types of role `.yaml` files: namespace `Role` and cluster-wide `ClusterRole`.</td>
-        </tr>
-        <tr>
-        <td><code>apiVersion</code></td>
-        <td><ul><li>For clusters that run Kubernetes 1.8 or later, use `rbac.authorization.k8s.io/v1`. </li><li>For earlier versions, use `apiVersion: rbac.authorization.k8s.io/v1beta1`.</li></ul></td>
-        </tr>
-        <tr>
-        <td><code>metadata/namespace</code></td>
-        <td><ul><li>For `Role` kind: Specify the Kubernetes namespace to which access is granted.</li><li>Do not use the `namespace` field if you are creating a `ClusterRole` that applies at the cluster-level.</li></ul></td>
-        </tr>
-        <tr>
-        <td><code>metadata/name</code></td>
-        <td>Name the role binding.</td>
-        </tr>
-        <tr>
-        <td><code>subjects/kind</code></td>
-        <td>Specify the kind as `User`.</td>
-        </tr>
-        <tr>
-        <td><code>subjects/name</code></td>
-        <td><ul><li>Append the user's email address to the following URL: `https://iam.ng.bluemix.net/kubernetes#`.</li><li>For example, `https://iam.ng.bluemix.net/kubernetes#user1@example.com`</li></ul></td>
-        </tr>
-        <tr>
-        <td><code>subjects/apiGroup</code></td>
-        <td>Use `rbac.authorization.k8s.io`.</td>
-        </tr>
-        <tr>
-        <td><code>roleRef/kind</code></td>
-        <td>Enter the same value as the `kind` in the role `.yaml` file: `Role` or `ClusterRole`.</td>
-        </tr>
-        <tr>
-        <td><code>roleRef/name</code></td>
-        <td>Enter the name of the role `.yaml` file.</td>
-        </tr>
-        <tr>
-        <td><code>roleRef/apiGroup</code></td>
-        <td>Use `rbac.authorization.k8s.io`.</td>
-        </tr>
-        </tbody>
+          <thead>
+            <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this YAML components</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>kind</code></td>
+              <td>Specify the `kind` as `RoleBinding` for both types of role `.yaml` files: namespace `Role` and cluster-wide `ClusterRole`.</td>
+            </tr>
+            <tr>
+              <td><code>apiVersion</code></td>
+              <td><ul><li>For clusters that run Kubernetes 1.8 or later, use `rbac.authorization.k8s.io/v1`. </li><li>For earlier versions, use `apiVersion: rbac.authorization.k8s.io/v1beta1`.</li></ul></td>
+            </tr>
+            <tr>
+              <td><code>metadata/namespace</code></td>
+              <td><ul><li>For `Role` kind: Specify the Kubernetes namespace to which access is granted.</li><li>Do not use the `namespace` field if you are creating a `ClusterRole` that applies at the cluster-level.</li></ul></td>
+            </tr>
+            <tr>
+              <td><code>metadata/name</code></td>
+              <td>Name the role binding.</td>
+            </tr>
+            <tr>
+              <td><code>subjects/kind</code></td>
+              <td>Specify the kind as `User`.</td>
+            </tr>
+            <tr>
+              <td><code>subjects/name</code></td>
+              <td><ul><li>Append the user's email address to the following URL: `https://iam.ng.bluemix.net/kubernetes#`.</li><li>For example, `https://iam.ng.bluemix.net/kubernetes#user1@example.com`</li></ul></td>
+            </tr>
+            <tr>
+              <td><code>subjects/apiGroup</code></td>
+              <td>Use `rbac.authorization.k8s.io`.</td>
+            </tr>
+            <tr>
+              <td><code>roleRef/kind</code></td>
+              <td>Enter the same value as the `kind` in the role `.yaml` file: `Role` or `ClusterRole`.</td>
+            </tr>
+            <tr>
+              <td><code>roleRef/name</code></td>
+              <td>Enter the name of the role `.yaml` file.</td>
+            </tr>
+            <tr>
+              <td><code>roleRef/apiGroup</code></td>
+              <td>Use `rbac.authorization.k8s.io`.</td>
+            </tr>
+          </tbody>
         </table>
 
     2. Create the role binding resource in your cluster.
@@ -434,5 +446,3 @@ Before you begin, [target the Kubernetes CLI to the cluster](cs_cli_install.html
         {: pre}
 
 Now that you created and bound a custom Kubernetes RBAC role, follow up with users. Ask them to test an action that they have permission to complete due to the role, such as deleting a pod.
-
-
