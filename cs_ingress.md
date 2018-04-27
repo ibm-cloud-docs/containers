@@ -252,15 +252,9 @@ To expose an app by using the IBM-provided domain:
         </tr>
         <tr>
         <td><code>path</code></td>
-        <td>Replace <em>&lt;service1_path&gt;</em> with a slash or the unique path that your app is listening on so that network traffic can be forwarded to the app.
-
-        </br>
-        For every Kubernetes service, you can define an individual path that is appended to the IBM-provided domain to create a unique path to your app; for example <code>ibm_domain/service1_path</code>. When you enter this route into a web browser, network traffic is routed to the ALB. The ALB looks up the associated service sends network traffic to the service. The service then forwards the traffic to the pods where the app is running. The app must be set up to listen on this path to receive incoming network traffic.
-
+        <td>Replace <em>&lt;service1_path&gt;</em> with a slash or the path that your app is listening on. The path is appended to the {{site.data.keyword.Bluemix_notm}}-provided domain to create a unique route to your app. When you enter this route into a web browser, network traffic is routed to the ALB. The ALB looks up the associated service and sends network traffic to the service. The service then forwards the traffic to the pods where the app is running.
         </br></br>
-        Many apps do not listen on a specific path, but use the root path and a specific port. In this case, define the root path as <code>/</code> and do not specify an individual path for your app.
-        </br>
-        Examples: <ul><li>For <code>http://ibm_domain/</code>, enter <code>/</code> as the path.</li><li>For <code>http://ibm_domain/service1_path</code>, enter <code>/service1_path</code> as the path.</li></ul>
+        Many apps do not listen on a specific path, but use the root path and a specific port. In this case, define the root path as <code>/</code> and do not specify an individual path for your app. Examples: <ul><li>For <code>http://ibm_domain/</code>, enter <code>/</code> as the path.</li><li>For <code>http://ibm_domain/service1_path</code>, enter <code>/service1_path</code> as the path.</li></ul>
         </br>
         <strong>Tip:</strong> To configure Ingress to listen on a path that is different than the path that your app listens on, you can use the [rewrite annotation](cs_annotations.html#rewrite-path) to establish proper routing to your app.</td>
         </tr>
@@ -438,16 +432,9 @@ To expose an app by using the IBM-provided domain with TLS:
         </tr>
         <tr>
         <td><code>path</code></td>
-        <td>Replace <em>&lt;service1_path&gt;</em> with a slash or the unique path that your app is listening on so that network traffic can be forwarded to the app.
-
-        </br>
-        For every Kubernetes service, you can define an individual path that is appended to the IBM-provided domain to create a unique path to your app. When you enter this route into a web browser, network traffic is routed to the ALB. The ALB looks up the associated service and sends network traffic to the service. The service then forwards the traffic to the pods where the app is running. The app must be set up to listen on this path to receive incoming network traffic.
-
-        </br>
-        Many apps do not listen on a specific path, but use the root path and a specific port. In this case, define the root path as <code>/</code> and do not specify an individual path for your app.
-
-        </br>
-        Examples: <ul><li>For <code>http://ibm_domain/</code>, enter <code>/</code> as the path.</li><li>For <code>http://ibm_domain/service1_path</code>, enter <code>/service1_path</code> as the path.</li></ul>
+        <td>Replace <em>&lt;service1_path&gt;</em> with a slash or the path that your app is listening on. The path is appended to the {{site.data.keyword.Bluemix_notm}}-provided domain to create a unique route to your app. When you enter this route into a web browser, network traffic is routed to the ALB. The ALB looks up the associated service and sends network traffic to the service. The service then forwards the traffic to the pods where the app is running. 
+        </br></br>
+        Many apps do not listen on a specific path, but use the root path and a specific port. In this case, define the root path as <code>/</code> and do not specify an individual path for your app. Examples: <ul><li>For <code>http://ibm_domain/</code>, enter <code>/</code> as the path.</li><li>For <code>http://ibm_domain/service1_path</code>, enter <code>/service1_path</code> as the path.</li></ul>
         <strong>Tip:</strong> To configure Ingress to listen on a path that is different than the path that your app listens on, you can use the [rewrite annotation](cs_annotations.html#rewrite-path) to establish proper routing to your app.</td>
         </tr>
         <tr>
@@ -621,16 +608,9 @@ To expose an app by using a custom domain with TLS:
         </tr>
         <tr>
         <td><code>path</code></td>
-        <td>Replace <em>&lt;service1_path&gt;</em> with a slash or the unique path that your app is listening on so that network traffic can be forwarded to the app.
-
-        </br>
-        For every service, you can define an individual path that is appended to your custom domain to create a unique path to your app. When you enter this route into a web browser, network traffic is routed to the ALB. The ALB looks up the associated service and sends network traffic to the service. The service then forwards the traffic to the pods where the app is running. The app must be set up to listen on this path to receive incoming network traffic.
-
-        </br>
-        Many apps do not listen on a specific path, but use the root path and a specific port. In this case, define the root path as <code>/</code> and do not specify an individual path for your app.
-
+        <td><td>Replace <em>&lt;service1_path&gt;</em> with a slash or the path that your app is listening on. The path is appended to your custom domain to create a unique route to your app. When you enter this route into a web browser, network traffic is routed to the ALB. The ALB looks up the associated service and sends network traffic to the service. The service then forwards the traffic to the pods where the app is running.
         </br></br>
-        Examples: <ul><li>For <code>https://custom_domain/</code>, enter <code>/</code> as the path.</li><li>For <code>https://custom_domain/service1_path</code>, enter <code>/service1_path</code> as the path.</li></ul>
+        Many apps do not listen on a specific path, but use the root path and a specific port. In this case, define the root path as <code>/</code> and do not specify an individual path for your app. Examples: <ul><li>For <code>https://custom_domain/</code>, enter <code>/</code> as the path.</li><li>For <code>https://custom_domain/service1_path</code>, enter <code>/service1_path</code> as the path.</li></ul>
         <strong>Tip:</strong> To configure Ingress to listen on a path that is different than the path that your app listens on, you can use the [rewrite annotation](cs_annotations.html#rewrite-path) to establish proper routing to your app.
         </td>
         </tr>
@@ -1084,17 +1064,9 @@ To privately expose an app by using a custom domain without TLS using an externa
         </tr>
         <tr>
         <td><code>path</code></td>
-        <td>Replace <em>&lt;service1_path&gt;</em> with a slash or the unique path that your app is listening on so that network traffic can be forwarded to the app.
-
-        </br>
-
-        For every service, you can define an individual path that is appended to your custom domain to create a unique path to your app. When you enter this route into a web browser, network traffic is routed to the ALB. The ALB looks up the associated service and sends network traffic to the service. The service then forwards the traffic to the pods where the app is running. The app must be set up to listen on this path to receive incoming network traffic.
-
-        </br>
-        Many apps do not listen on a specific path, but use the root path and a specific port. In this case, define the root path as <code>/</code> and do not specify an individual path for your app.
-
+        <td>Replace <em>&lt;service1_path&gt;</em> with a slash or the path that your app is listening on. The path is appended to your custom domain to create a unique route to your app. When you enter this route into a web browser, network traffic is routed to the ALB. The ALB looks up the associated service and sends network traffic to the service. The service then forwards the traffic to the pods where the app is running.
         </br></br>
-        Examples: <ul><li>For <code>https://custom_domain/</code>, enter <code>/</code> as the path.</li><li>For <code>https://custom_domain/service1_path</code>, enter <code>/service1_path</code> as the path.</li></ul>
+        Many apps do not listen on a specific path, but use the root path and a specific port. In this case, define the root path as <code>/</code> and do not specify an individual path for your app. Examples: <ul><li>For <code>https://custom_domain/</code>, enter <code>/</code> as the path.</li><li>For <code>https://custom_domain/service1_path</code>, enter <code>/service1_path</code> as the path.</li></ul>
         <strong>Tip:</strong> To configure Ingress to listen on a path that is different than the path that your app listens on, you can use the [rewrite annotation](cs_annotations.html#rewrite-path) to establish proper routing to your app.
         </td>
         </tr>
@@ -1267,16 +1239,9 @@ To privately expose an app by using a custom domain with TLS using an external D
           </tr>
           <tr>
           <td><code>path</code></td>
-          <td>Replace <em>&lt;service1_path&gt;</em> with a slash or the unique path that your app is listening on so that network traffic can be forwarded to the app.
-
-          </br>
-          For every service, you can define an individual path that is appended to your custom domain to create a unique path to your app. When you enter this route into a web browser, network traffic is routed to the ALB. The ALB looks up the associated service, and sends network traffic to the service and to the pods where the app is running by using the same path. The app must be set up to listen on this path to receive incoming network traffic.
-
-          </br>
-          Many apps do not listen on a specific path, but use the root path and a specific port. In this case, define the root path as <code>/</code> and do not specify an individual path for your app.
-
+          <td>Replace <em>&lt;service1_path&gt;</em> with a slash or the path that your app is listening on. The path is appended to your custom domain to create a unique route to your app. When you enter this route into a web browser, network traffic is routed to the ALB. The ALB looks up the associated service and sends network traffic to the service. The service then forwards the traffic to the pods where the app is running.
           </br></br>
-          Examples: <ul><li>For <code>https://custom_domain/</code>, enter <code>/</code> as the path.</li><li>For <code>https://custom_domain/service1_path</code>, enter <code>/service1_path</code> as the path.</li></ul>
+          Many apps do not listen on a specific path, but use the root path and a specific port. In this case, define the root path as <code>/</code> and do not specify an individual path for your app. Examples: <ul><li>For <code>https://custom_domain/</code>, enter <code>/</code> as the path.</li><li>For <code>https://custom_domain/service1_path</code>, enter <code>/service1_path</code> as the path.</li></ul>
           <strong>Tip:</strong> To configure Ingress to listen on a path that is different than the path that your app listens on, you can use the [rewrite annotation](cs_annotations.html#rewrite-path) to establish proper routing to your app.
           </td>
           </tr>
@@ -1436,13 +1401,9 @@ You can configure the private ALB to route incoming network traffic to the apps 
     </tr>
     <tr>
     <td><code>path</code></td>
-    <td>Replace <em>&lt;service1_path&gt;</em> with a slash or the unique path that your app is listening on so that network traffic can be forwarded to the app.
-    </br>
-    For every service, you can define an individual path that is appended to your custom domain to create a unique path to your app. When you enter this route into a web browser, network traffic is routed to the ALB. The ALB looks up the associated service, and sends network traffic to the service and to the pods where the app is running by using the same path. The app must be set up to listen on this path to receive incoming network traffic.
-    </br>
-    Many apps do not listen on a specific path, but use the root path and a specific port. In this case, define the root path as <code>/</code> and do not specify an individual path for your app.
+    <td>Replace <em>&lt;service1_path&gt;</em> with a slash or the path that your app is listening on. The path is appended to your custom domain to create a unique route to your app. When you enter this route into a web browser, network traffic is routed to the ALB. The ALB looks up the associated service and sends network traffic to the service. The service then forwards the traffic to the pods where the app is running.
     </br></br>
-    Examples: <ul><li>For <code>https://custom_domain/</code>, enter <code>/</code> as the path.</li><li>For <code>https://custom_domain/service1_path</code>, enter <code>/service1_path</code> as the path.</li></ul>
+    Many apps do not listen on a specific path, but use the root path and a specific port. In this case, define the root path as <code>/</code> and do not specify an individual path for your app. Examples: <ul><li>For <code>https://custom_domain/</code>, enter <code>/</code> as the path.</li><li>For <code>https://custom_domain/service1_path</code>, enter <code>/service1_path</code> as the path.</li></ul>
     <strong>Tip:</strong> To configure Ingress to listen on a path that is different than the path that your app listens on, you can use the [rewrite annotation](cs_annotations.html#rewrite-path) to establish proper routing to your app.
     </td>
     </tr>
