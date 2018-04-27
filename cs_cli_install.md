@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-04-26"
+lastupdated: "2018-04-27"
 
 ---
 
@@ -140,6 +140,32 @@ For reference information about these CLIs, see the documentation for those tool
 
 <br />
 
+
+
+
+## Running the CLI in a container on your computer
+{: #cs_cli_container}
+
+Instead of installing each of the CLIs individually on your computer, you can install the CLIs into a container that runs on your computer.
+{:shortdesc}
+
+1. Create an image from the provided Dockerfile.
+
+    ```
+    docker build -t <image_name> https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/install-clis-container/Dockerfile
+    ```
+    {: pre}
+
+2. Deploy the image locally as a container and mount a volume to access local files.
+  
+    ```
+    docker run -it -v /local/path:/container/volume <image_name>
+    ```
+    {: pre}
+  
+3. Begin running `bx cs` and `kubectl` commands from the interactive shell. If you create data that you want to save, save that data to the volume that you mounted. When you exit the shell, the container stops. 
+
+<br />
 
 
 
