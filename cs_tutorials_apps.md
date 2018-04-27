@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-04-26"
+lastupdated: "2018-04-27"
 
 ---
 
@@ -88,16 +88,17 @@ To deploy the app:
     ```
     {: pre}
 
-3. Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. To specify an {{site.data.keyword.Bluemix_notm}} region, [include the API endpoint](cs_regions.html#bluemix_regions).
-  ```
-  bx login [--sso]
-  ```
-  {: pre}
+3.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. To specify an {{site.data.keyword.Bluemix_notm}} region, [include the API endpoint](cs_regions.html#bluemix_regions).
+    
+    ```
+    bx login [--sso]
+    ```
+    {: pre}
 
-  **Note**: If the login command fails, you might have a federated ID. Try appending the `--sso` flag to the command. Use the provided URL in your CLI output to retrieve a one-time passcode.
+    **Note**: If the login command fails, you might have a federated ID. Try appending the `--sso` flag to the command. Use the provided URL in your CLI output to retrieve a one-time passcode.
 
-4. Set the context for the cluster in your CLI.
-    1. Get the command to set the environment variable and download the Kubernetes configuration files.
+4.  Set the context for the cluster in your CLI.
+    1.  Get the command to set the environment variable and download the Kubernetes configuration files.
 
         ```
         bx cs cluster-config <cluster_name_or_ID>
@@ -127,7 +128,7 @@ To deploy the app:
         ```
         {: pre}
 
-6. Start Docker.
+6.  Start Docker.
     * If you are using Docker CE, no action is needed.
     * If you are using Linux, follow the [Docker documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/admin/) to find instructions about how to start Docker depending on the Linux distribution that you use.
     * If you are using Docker Toolbox on Windows or OSX, you can use the Docker Quickstart Terminal, which starts Docker for you. Use the Docker Quickstart Terminal for the next few steps to run the Docker commands and then switch back to the CLI where you set the `KUBECONFIG` session variable.
@@ -751,4 +752,3 @@ Now that you conquered the basics, you can move to more advanced activities. Con
 - Complete a more complicated lab in the repository
 - [Automatically scale your apps](cs_app.html#app_scaling) with {{site.data.keyword.containershort_notm}}
 - Explore the container orchestration journeys on [developerWorks ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/code/journey/category/container-orchestration/)
-
