@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-04-27"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 
 # Deploying apps in clusters
@@ -55,10 +57,11 @@ Review the following potential app setups that are ordered with increasing degre
 
 
 ### Increasing the availability of your app
+{: #increase_availability}
 
 <dl>
   <dt>Use deployments and replica sets to deploy your app and its dependencies</dt>
-    <dd><p>A deployment is a Kubernetes resource that you can use to declare all components of your app and its dependencies. With deployments, you don't have to write down all of the steps and instead can focus on your app.</p>
+    <dd><p>A deployment is a Kubernetes resource that you can use to declare all of the components of your app and its dependencies. With deployments, you don't have to write down all of the steps and instead can focus on your app.</p>
     <p>When you deploy more than one pod, a replica set is automatically created for your deployments that monitors the pods and assures that the desired number of pods is up and running at all times. When a pod goes down, the replica set replaces the unresponsive pod with a new one.</p>
     <p>You can use a deployment to define update strategies for your app including the number of pods that you want to add during a rolling update and the number of pods that can be unavailable at a time. When you perform a rolling update, the deployment checks whether or not the revision is working and stops the rollout when failures are detected.</p>
     <p>With deployments you can concurrently deploy multiple revisions with different flags. For example, you can test a deployment first before you decide to push it to production.</p>
@@ -310,7 +313,7 @@ To deploy your app:
   * Select **Specify app details below** and enter the details.
   * Select **Upload a YAML or JSON file** to upload your app [configuration file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/).
 
-  Need help with your configuration file? Check out this [example YAML file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml). In this example, a container is deployed from the **ibmliberty** image in the US-South region. 
+  Need help with your configuration file? Check out this [example YAML file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml). In this example, a container is deployed from the **ibmliberty** image in the US-South region. Learn more about [securing your personal information](cs_secure.html#pi) when you work with Kubernetes resources.
   {: tip}
 
 3.  Verify that you successfully deployed your app in one of the following ways.
@@ -341,7 +344,7 @@ To deploy your app:
 
     -   [Ingress ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/ingress/): Specifies a type of load balancer that provides routes to access your app publicly.
 
-    
+    Learn more about [securing your personal information](cs_secure.html#pi) when you work with Kubernetes resources.
 
 2.  Run the configuration file in a cluster's context.
 
@@ -350,9 +353,11 @@ To deploy your app:
     ```
     {: pre}
 
-3.  If you made your app publicly available by using a node port service, a load balancer service, or Ingress, verify that you can access the app.
+3.  If you made your app publicly available by using a nodeport service, a load balancer service, or Ingress, verify that you can access the app.
 
 <br />
+
+
 
 
 
@@ -372,7 +377,7 @@ Before you begin:
 
 Steps:
 
-1.  Deploy your app to your cluster from the CLI. When you deploy your app, you must request CPU.
+1.  Deploy your app to a cluster from the CLI. When you deploy your app, you must request CPU.
 
     ```
     kubectl run <app_name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
@@ -504,5 +509,4 @@ Before you begin, create a [deployment](#app_cli).
         {: pre}
 
 <br />
-
 

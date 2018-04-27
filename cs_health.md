@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-04-27"
 
 ---
 
@@ -21,6 +21,10 @@ lastupdated: "2018-4-20"
 
 Set up logging and monitoring in {{site.data.keyword.containerlong}} to help you troubleshoot issues and improve the health and performance of your Kubernetes clusters and apps.
 {: shortdesc}
+
+
+If you encounter any issues, try running through this [troubleshooting guide](cs_troubleshoot_health.html).
+{: tip}
 
 
 ## Configuring cluster and app log forwarding
@@ -45,8 +49,8 @@ Check out the following table for information about the different log sources.
   <tbody>
     <tr>
       <td><code>container</code></td>
-      <td>Logs for your container that runs in a Kubernetes cluster.</td>
-      <td>Anything that is logged to STDOUT or STDERR in your containers.</td>
+      <td>Logs for your container that runs in a Kubernetes cluster. Anything that is logged to STDOUT or STDERR.</td>
+      <td> </td>
     </tr>
     <tr>
       <td><code>application</code></td>
@@ -71,14 +75,31 @@ Check out the following table for information about the different log sources.
   </tbody>
 </table>
 
-To configure logging through the UI, you must specify an org and space. To enable logging at the account level, use the CLI.
+To enable logging at the account level or to configure app logging, use the CLI.
 {: tip}
 
 
-### Before you begin
-{: #before-forwarding}
+### Enabling log forwarding with the GUI
+{: #enable-forwarding-ui}
 
-1. Verify permissions. If you specified a space when you created the cluster or the logging configuration then both the account owner and {{site.data.keyword.containershort_notm}} key owner need Manager, Developer, or Auditor permissions in that space.
+You can set up a logging configuration in the {{site.data.keyword.containershort_notm}} dashboard. It can take a few minutes for the process to complete, so if you don't see logs immediately, try waiting a few minutes and then check back.
+
+1. Navigate to the **Overview** tab of the dashboard.
+2. Select the Cloud Foundry org and space from which you want to forward logs. When you configure log forwarding in the dashboard, logs are sent to the default {{site.data.keyword.loganalysisshort_notm}} endpoint for your cluster. To forward logs to an external server, or to another {{site.data.keyword.loganalysisshort_notm}} endpoint, you can use the CLI to configure logging.
+3. Select the log sources from which you want to forward logs.
+
+    To configure application logging or specific container namespaces, use the CLI to set up your logging configuration.
+    {: tip}
+4. Click **Create**.
+
+### Enabling log forwarding with the CLI
+{: #enable-forwarding}
+
+You can create a configuration for cluster logging. You can differentiate between different log sources by using flags. You can review a full list of the configuration options in the [CLI reference](cs_cli_reference.html#logging_commands).
+
+**Before you begin**
+
+1. Verify permissions. If you specified a space when you created the cluster or the logging configuration, then both the account owner and {{site.data.keyword.containershort_notm}} key owner need Manager, Developer, or Auditor permissions in that space.
   * If you don't know who the {{site.data.keyword.containershort_notm}} key owner is, run the following command.
       ```
       bx cs api-key-info <cluster_name>
@@ -90,7 +111,7 @@ To configure logging through the UI, you must specify an org and space. To enabl
       ```
       {: pre}
 
-  For more information about changing {{site.data.keyword.containershort_notm}} access policies and permissions, see [Managing cluster access](cs_users.html#managing).
+  For more information about changing {{site.data.keyword.containershort_notm}} access policies and permissions, see [Managing cluster access](cs_users.html#access_policies).
   {: tip}
 
 2. [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster where the log source is located.
@@ -102,10 +123,8 @@ To configure logging through the UI, you must specify an org and space. To enabl
   * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider. Your syslog server must accept UDP protocol.
   * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in a Kubernetes cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host.
 
-### Enabling log forwarding
-{: #enable-forwarding}
 
-You can create a configuration for cluster logging. You can differentiate between different log sources by using the relevant flags. You can review a full list of the configuration options in the [CLI reference](cs_cli_reference.html#logging_commands). If you encounter any issues, try running through this [troubleshooting guide](cs_troubleshoot_health.html).
+**Forwarding logs**
 
 1. Create a log forwarding configuration.
   ```
@@ -136,7 +155,7 @@ You can create a configuration for cluster logging. You can differentiate betwee
       ```
       {: screen}
 
-      If you have applications that run in your containers that can't be configured to write logs to STDOUT or STDERR, you can create a logging configuration to forward logs from application log files.
+      If you have apps that run in your containers that can't be configured to write logs to STDOUT or STDERR, you can create a logging configuration to forward logs from app log files.
       {: tip}
 
 
@@ -227,7 +246,7 @@ You can create a configuration for cluster logging. You can differentiate betwee
       ```
       {: screen}
 
-### Updating log forwarding
+## Updating log forwarding
 {: #enable-forwarding}
 
 1. Update a log forwarding configuration.
@@ -251,7 +270,7 @@ You can create a configuration for cluster logging. You can differentiate betwee
     </tr>
     <tr>
       <td><code><em>&lt;namespace&gt;</em></code></td>
-      <td>Optional: The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the <code>container</code> log source. If you do not specify a namespace, then all namespaces in the cluster use the configuration.</td>
+      <td>Optional: The Kubernetes namespace to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the <code>container</code> log source. If you do not specify a namespace, then all namespaces in the cluster use the configuration.</td>
     </tr>
     <tr>
       <td><code><em>&lt;log_type&gt;</em></code></td>
@@ -297,7 +316,7 @@ You can choose which logs that you forward by filtering out specific logs for a 
 
 1. Create a logging filter.
   ```
-  bx cs logging-filter-create <cluster_name_or_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace> --container <container_name> --level <logging_level> --message <message>
+  bx cs logging-filter-create <cluster_name_or_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace> --container <container_name> --level <logging_level> --regex-message <message>
   ```
   {: pre}
   <table>
@@ -331,7 +350,7 @@ You can choose which logs that you forward by filtering out specific logs for a 
       </tr>
       <tr>
         <td><code>&lt;message&gt;</code></td>
-        <td>Optional: Filters out logs that contain a specified message.</td>
+        <td>Optional: Filters out logs that contain a specified message that is written as a regular expression.</td>
       </tr>
     </tbody>
   </table>
@@ -514,6 +533,7 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
 * Forwarding for Kubernetes API audit logs is only supported for Kubernetes version 1.7 and later.
 * Currently, a default audit policy is used for all clusters with this logging configuration.
 * Audit logs can be forwarded only to an external server.
+* Currently, filters are not supported.
 {: tip}
 
 ### Enabling Kubernetes API audit log forwarding
@@ -527,7 +547,7 @@ Before you begin:
 
 To forward Kubernetes API audit logs:
 
-1. Configure the webhook. If you do not provide any information in the flags, a default configuration is used.
+1. Set up the webhook. If you do not provide any information in the flags, a default configuration is used.
 
     ```
     bx cs apiserver-config-set audit-webhook <cluster_name_or_ID> --remoteServer <server_URL_or_IP> --caCert <CA_cert_path> --clientCert <client_cert_path> --clientKey <client_key_path>
@@ -606,16 +626,10 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
 <br />
 
 
-## Configuring cluster monitoring
-{: #monitoring}
-
-Metrics help you monitor the health and performance of your clusters. You can configure health monitoring for worker nodes to automatically detect and correct any workers that enter a degraded or nonoperational state. **Note**: Monitoring is supported only for standard clusters.
-{:shortdesc}
-
 ## Viewing metrics
 {: #view_metrics}
 
-You can use the standard Kubernetes and Docker features to monitor the health of your clusters and apps.
+Metrics help you monitor the health and performance of your clusters. You can use the standard Kubernetes and Docker features to monitor the health of your clusters and apps. **Note**: Monitoring is supported only for standard clusters.
 {:shortdesc}
 
 <dl>
@@ -624,7 +638,13 @@ You can use the standard Kubernetes and Docker features to monitor the health of
   <dt>Kubernetes dashboard</dt>
     <dd>The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containershort_notm}}](cs_app.html#cli_dashboard).</dd>
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
-    <dd>Metrics for standard clusters are located in the {{site.data.keyword.Bluemix_notm}} account that was logged in to when the Kubernetes cluster was created. If you specified an {{site.data.keyword.Bluemix_notm}} space when you created the cluster, then metrics are located in that space. Container metrics are collected automatically for all containers that are deployed in a cluster. These metrics are sent and are made available through Grafana. For more information about metrics, see [Monitoring for the {{site.data.keyword.containershort_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov).<p>To access the Grafana dashboard, go to one of the following URLs and select the {{site.data.keyword.Bluemix_notm}} account or space where you created the cluster.<ul><li>US-South and US-East: https://metrics.ng.bluemix.net</li><li>UK-South: https://metrics.eu-gb.bluemix.net</li><li>Eu-Central: https://metrics.eu-de.bluemix.net</li></ul></p></dd>
+    <dd><p>Metrics for standard clusters are located in the {{site.data.keyword.Bluemix_notm}} account that was logged in to when the Kubernetes cluster was created. If you specified an {{site.data.keyword.Bluemix_notm}} space when you created the cluster, then metrics are located in that space. Container metrics are collected automatically for all containers that are deployed in a cluster. These metrics are sent and are made available through Grafana. For more information about metrics, see [Monitoring for the {{site.data.keyword.containershort_notm}}](/docs/services/cloud-monitoring/containers/monitoring_containers_ov.html#monitoring_bmx_containers_ov).</p>
+    <p>To access the Grafana dashboard, go to one of the following URLs and select the {{site.data.keyword.Bluemix_notm}} account or space where you created the cluster.
+      <ul>
+        <li>US-South and US-East: https://metrics.ng.bluemix.net</li>
+        <li>UK-South: https://metrics.eu-gb.bluemix.net</li>
+        <li>Eu-Central: https://metrics.eu-de.bluemix.net</li>
+      </ul></p></dd>
 </dl>
 
 ### Other health monitoring tools
@@ -818,4 +838,3 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
     kubectl -n kube-system describe deployment ibm-worker-recovery
     ```
     {: pre}
-

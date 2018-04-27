@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-04-27"
 
 ---
 
@@ -14,6 +14,7 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
 
 
 # Tutorial: Deploying apps into clusters
@@ -57,6 +58,7 @@ Software developers and network administrators who have never deployed an app in
 
 * [Tutorial: Creating Kubernetes clusters in {{site.data.keyword.containershort_notm}}](cs_tutorials.html#cs_cluster_tutorial).
 
+
 ## Lesson 1: Deploying single instance apps to Kubernetes clusters
 {: #cs_apps_tutorial_lesson1}
 
@@ -86,16 +88,17 @@ To deploy the app:
     ```
     {: pre}
 
-3. Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. To specify an {{site.data.keyword.Bluemix_notm}} region, [include the API endpoint](cs_regions.html#bluemix_regions).
-  ```
-  bx login [--sso]
-  ```
-  {: pre}
+3.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. To specify an {{site.data.keyword.Bluemix_notm}} region, [include the API endpoint](cs_regions.html#bluemix_regions).
+    
+    ```
+    bx login [--sso]
+    ```
+    {: pre}
 
-  **Note**: If the login command fails, you might have a federated ID. Try appending the `--sso` flag to the command. Use the provided URL in your CLI output to retrieve a one-time passcode.
+    **Note**: If the login command fails, you might have a federated ID. Try appending the `--sso` flag to the command. Use the provided URL in your CLI output to retrieve a one-time passcode.
 
-4. Set the context for the cluster in your CLI.
-    1. Get the command to set the environment variable and download the Kubernetes configuration files.
+4.  Set the context for the cluster in your CLI.
+    1.  Get the command to set the environment variable and download the Kubernetes configuration files.
 
         ```
         bx cs cluster-config <cluster_name_or_ID>
@@ -125,14 +128,14 @@ To deploy the app:
         ```
         {: pre}
 
-6. Start Docker.
+6.  Start Docker.
     * If you are using Docker CE, no action is needed.
     * If you are using Linux, follow the [Docker documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/admin/) to find instructions about how to start Docker depending on the Linux distribution that you use.
     * If you are using Docker Toolbox on Windows or OSX, you can use the Docker Quickstart Terminal, which starts Docker for you. Use the Docker Quickstart Terminal for the next few steps to run the Docker commands and then switch back to the CLI where you set the `KUBECONFIG` session variable.
 
 7.  Build a Docker image that includes the app files of the `Lab 1` directory. If you need to make a change to the app in the future, repeat these steps to create another version of the image.
 
-    
+    Learn more about [securing your personal information](cs_secure.html#pi) when you work with container images.
 
     1.  Build the image locally. Specify the name and tag that you want to use. Be sure to use the namespace that you created in {{site.data.keyword.registryshort_notm}} in the previous tutorial. Tagging the image with the namespace information tells Docker where to push the image in a later step. Use lowercase alphanumeric characters or underscores (`_`) only in the image name. Don't forget the period (`.`) at the end of the command. The period tells Docker to look inside the current directory for the Dockerfile and build artifacts to build the image.
 
@@ -188,7 +191,7 @@ To deploy the app:
     ```
     {: screen}
 
-    
+    Learn more about [securing your personal information](cs_secure.html#pi) when you work with Kubernetes resources.
 
 9.  Make the app accessible to the world by exposing the deployment as a NodePort service. Just as you might expose a port for a Cloud Foundry app, the NodePort you expose is the port on which the worker node listens for traffic.
 
@@ -749,4 +752,3 @@ Now that you conquered the basics, you can move to more advanced activities. Con
 - Complete a more complicated lab in the repository
 - [Automatically scale your apps](cs_app.html#app_scaling) with {{site.data.keyword.containershort_notm}}
 - Explore the container orchestration journeys on [developerWorks ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/code/journey/category/container-orchestration/)
-

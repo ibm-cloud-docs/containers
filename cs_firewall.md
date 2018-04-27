@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-04-27"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 # Opening required ports and IP addresses in your firewall
 {: #firewall}
@@ -108,7 +111,7 @@ To allow access for a specific cluster:
    ```
    {: screen}
 
-5. Allow access to the **Master URL** on the port, such as port `31142` in the previous example.
+5. Allow access to the **Master URL** on the port, such as port `31142` from the previous example.
 
 6. Verify your connection.
 
@@ -172,7 +175,7 @@ Before you begin, allow access to run [`bx` commands](#firewall_bx) and [`kubect
 Let your cluster access infrastructure resources and services from behind a firewall, such as for {{site.data.keyword.containershort_notm}} regions, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IBM Cloud infrastructure (SoftLayer) private IPs, and egress for persistent volume claims.
 {:shortdesc}
 
-  1.  Note the public IP address for all your worker nodes in the cluster.
+  1.  Note the public IP address for all of your worker nodes in the cluster.
 
       ```
       bx cs workers <cluster_name_or_ID>

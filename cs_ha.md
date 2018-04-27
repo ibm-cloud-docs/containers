@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-04-27"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 
 # High availability for {{site.data.keyword.containerlong_notm}}
@@ -75,7 +77,7 @@ The {{site.data.keyword.containerlong_notm}} architecture and infrastructure is 
   <tr>
     <td>5</td>
     <td>Region failure</td>
-    <td>Every region is set up with a highly available load balancer that is accessible from the region-specific API endpoint. The load balancer routes incoming and outgoing requests to clusters in the regional locations. The likelihood of a full regional failure is low. However, if you want to account for this failure, you can set up multiple clusters in different regions and connect them by using an external load balancer. In case an entire region fails, the cluster in the other region can take over the work load. <br/><br/><strong>Note:</strong> A multi-region cluster requires several Cloud resources, and depending on your app, can be complex and expensive. Check if you need a multi-region setup or if you can accomodate a potential service disruption. If you want to set up a multi-region cluster, make sure that your app and the data can be hosted in another region, and that your app can handle global data replication.</td>
+    <td>Every region is set up with a highly available load balancer that is accessible from the region-specific API endpoint. The load balancer routes incoming and outgoing requests to clusters in the regional locations. The likelihood of a full regional failure is low. However, to account for this failure, you can set up multiple clusters in different regions and connect them by using an external load balancer. In case an entire region fails, the cluster in the other region can take over the work load. <br/><br/><strong>Note:</strong> A multi-region cluster requires several Cloud resources, and depending on your app, can be complex and expensive. Check if you need a multi-region setup or if you can accomodate a potential service disruption. If you want to set up a multi-region cluster, make sure that your app and the data can be hosted in another region, and that your app can handle global data replication.</td>
     <td>[Setting up highly available clusters.](cs_clusters.html#planning_clusters)</td>
   </tr>
   <tr>

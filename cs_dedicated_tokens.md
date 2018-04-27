@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-04-27"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # Creating an {{site.data.keyword.registryshort_notm}} token for an {{site.data.keyword.Bluemix_dedicated_notm}} image registry
@@ -109,7 +112,7 @@ Create a non-expiring token for an image registry that you used for single and s
 
 7.  Create a pod that references the imagePullSecret.
 
-    1.  Open your preferred editor and create a pod configuration script that is named mypod.yaml.
+    1.  Open your preferred text editor and create a pod configuration script that is named mypod.yaml.
     2.  Define the pod and the imagePullSecret that you want to use to access the registry. To use a private image from a namespace:
 
         ```

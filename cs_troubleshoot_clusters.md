@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-04-27"
 
 ---
 
@@ -17,6 +17,7 @@ lastupdated: "2018-4-20"
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
+
 
 
 # Troubleshooting clusters and worker nodes
@@ -86,7 +87,7 @@ You might have corporate network policies that prevent access from your local sy
 {: #cs_firewall}
 
 {: tsSymptoms}
-When the worker nodes are not able to connect, you might see a variety of different symptoms. You might see one of the following messages when kubectl proxy fails or you try to access a service in your cluster and the connection fails.
+When the worker nodes cannot connect, you might see a variety of different symptoms. You might see one of the following messages when kubectl proxy fails or you try to access a service in your cluster and the connection fails.
 
   ```
   Connection refused
@@ -143,6 +144,31 @@ Use [DaemonSets ![External link icon](../icons/launch-glyph.svg "External link i
 
 <br />
 
+
+## `kubectl exec` and `kubectl logs` do not work
+{: #exec_logs_fail}
+
+{: tsSymptoms}
+If you run `kubectl exec` or `kubectl logs`, you see the following message.
+
+  ```
+  <workerIP>:10250: getsockopt: connection timed out
+  ```
+  {: screen}
+
+{: tsCauses}
+The OpenVPN connection between the master node and worker nodes is not functioning properly.
+
+{: tsResolve}
+1. Enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account.
+2. Restart the OpenVPN client pod.
+  ```
+  kubectl delete pod -n kube-system -l app=vpn
+  ```
+  {: pre}
+3. If you still see the same error message, then the worker node that the VPN pod is on might be unhealthy. To restart the VPN pod and reschedule it to a different worker node, [cordon, drain, and reboot the worker node](cs_cli_reference.html#cs_worker_reboot) that the VPN pod is on.
+
+<br />
 
 
 ## Binding a service to a cluster results in same name error
@@ -496,5 +522,4 @@ Still having issues with your cluster?
 
 {:tip}
 When reporting an issue, include your cluster ID. To get your cluster ID, run `bx cs clusters`.
-
 

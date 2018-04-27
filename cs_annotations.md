@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-04-27"
 
 ---
 
@@ -14,6 +14,7 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
 
 
 # Ingress annotations
@@ -135,7 +136,7 @@ For general information about Ingress services and how to get started using them
   <tr>
   <td><a href="#hsts">HTTP Strict Transport Security (HSTS)</a></td>
   <td><code>hsts</code></td>
-  <td>Set the browser to only access the domain using HTTPS.</td>
+  <td>Set the browser to access the domain only by using HTTPS.</td>
   </tr>
   <tr>
   <td><a href="#mutual-auth">Mutual authentication</a></td>
@@ -1218,7 +1219,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/redirect-to-https: "True"
+   ingress.bluemix.net/redirect-to-https: "enabled=&lt;true&gt; serviceName=&lt;myservice1&gt;"
 spec:
  tls:
  - hosts:
@@ -1232,7 +1233,23 @@ spec:
        backend:
          serviceName: myservice
          servicePort: 8080</code></pre>
-</dd></dl>
+
+<table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+  <td>To enable redirecting HTTP requests to HTTPS, set to <code>true</code>.</td>
+</tr>
+<tr>
+<td><code>serviceName</code></td>
+<td>Replace <code><em>&lt;myservice1&gt;</em></code> with the name of the Kubernetes service that you created for your app. Separate multiple services with a semi-colon (;). This field is optional. If you do not specify a service name, then all services use this annotation.</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
 
 <br />
 
@@ -1362,7 +1379,7 @@ spec:
 <td>Replace <code>&lt;<em>port</em>&gt;</code> with the ALB port number.</td>
 </tr>
 <tr>
-<td><code>serviceName/code></td>
+<td><code>serviceName</code></td>
 <td>Replace <code>&lt;<em>servicename</em>&gt;</code> with the name of one or more Ingress resources. This parameter is optional.</td>
 </tr>
 </tbody></table>
@@ -1383,7 +1400,7 @@ Allow HTTPS requests and encrypt traffic to your upstream apps.
 <dl>
 <dt>Description</dt>
 <dd>
-Encrypt traffic to your upstream apps that require HTTPS.
+Encrypt traffic to upstream apps that require HTTPS.
 
 **Optional**: You can add [one-way authentication or mutual authentication](#ssl-services-auth) to this annotation.
 </dd>
@@ -1534,7 +1551,7 @@ spec:
    metadata:
     name: myingress
     annotations:
-      ingress.bluemix.net/istio-services: "enable=True serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
+      ingress.bluemix.net/istio-services: "enabled=true serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
    spec:
     tls:
     - hosts:
@@ -1559,7 +1576,7 @@ spec:
     </thead>
     <tbody>
     <tr>
-    <td><code>enable</code></td>
+    <td><code>enabled</code></td>
       <td>To enable traffic routing to Istio-manages services, set to <code>True</code>.</td>
     </tr>
     <tr>
@@ -1613,7 +1630,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/proxy-buffering: "False"
+   ingress.bluemix.net/proxy-buffering: "enabled=&lt;false&gt; serviceName=&lt;myservice1&gt;"
 spec:
  tls:
  - hosts:
@@ -1627,7 +1644,23 @@ spec:
        backend:
          serviceName: myservice
          servicePort: 8080</code></pre>
-</dd></dl>
+
+<table>
+ <thead>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>enabled</code></td>
+   <td>To disable response data buffering on the ALB, set to <code>false</code>.</td>
+ </tr>
+ <tr>
+ <td><code>serviceName</code></td>
+ <td>Replace <code><em>&lt;myservice1&gt;</em></code> with the name of the Kubernetes service that you created for your app. Separate multiple services with a semi-colon (;). This field is optional. If you do not specify a service name, then all services use this annotation.</td>
+ </tr>
+ </tbody></table>
+ </dd>
+ </dl>
 
 <br />
 
@@ -1930,7 +1963,7 @@ Remove header information that is included in the client response from the back-
  <dl>
  <dt>Description</dt>
  <dd>The Ingress ALB acts as a proxy between your back-end app and the client web browser. Client responses from the back-end app that are sent to the ALB are processed (proxied), and put into a new response that is then sent from the ALB to the client web browser. Although proxying a response removes http header information that was initially sent from the back-end app, this process might not remove all back-end app specific headers. Remove header information from a client reponse before the response is forwarded from the ALB to the client web browser.</dd>
- <dt>Sample Infress resource YAML</dt>
+ <dt>Sample Ingress resource YAML</dt>
  <dd>
  <pre class="codeblock">
  <code>apiVersion: extensions/v1beta1
@@ -2028,7 +2061,7 @@ spec:
  <tbody>
  <tr>
  <td><code>&lt;size&gt;</code></td>
- <td>The maximum size of the client response body. For example, to set it to 200 megabyte, define <code>200m</code>.  <strong>Note:</strong> You can set the size to 0 to disable the check of the client request body size.</td>
+ <td>The maximum size of the client response body. For example, to set the maximum size to 200 megabyte, define <code>200m</code>.  <strong>Note:</strong> You can set the size to 0 to disable the check of the client request body size.</td>
  </tr>
  </tbody></table>
 
@@ -2140,7 +2173,7 @@ For all services, limit the request processing rate and the number of connection
   <tbody>
   <tr>
   <td><code>key</code></td>
-  <td>To set a global limit for incoming requests based on the location or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key==$http_x_user_id`.</td>
+  <td>To set a global limit for incoming requests based on the location or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
   </tr>
   <tr>
   <td><code>rate</code></td>
@@ -2206,7 +2239,7 @@ Limit the request processing rate and the number of connections for specific ser
   </tr>
   <tr>
   <td><code>key</code></td>
-  <td>To set a global limit for incoming requests based on the location or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key==$http_x_user_id`.</td>
+  <td>To set a global limit for incoming requests based on the location or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
   </tr>
   <tr>
   <td><code>rate</code></td>
@@ -2221,7 +2254,6 @@ Limit the request processing rate and the number of connections for specific ser
   </dl>
 
   <br />
-
 
 
 

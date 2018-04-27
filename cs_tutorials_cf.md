@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-04-27"
 
 ---
 
@@ -14,6 +14,7 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
 
 
 # Tutorial: Migrating an app from Cloud Foundry to a cluster
@@ -79,6 +80,7 @@ Your app code is ready to be containerized!
 
 
 <br />
+
 
 
 ## Lesson 2: Creating a Docker image with your app code

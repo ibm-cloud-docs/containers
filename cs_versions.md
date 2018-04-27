@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-04-27"
 
 ---
 
@@ -14,6 +14,8 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
 
 # Kubernetes versions
 {: #cs_versions}
@@ -29,7 +31,7 @@ The current supported Kubernetes versions are:
 
 **Deprecated Versions**: When clusters are running on a deprecated Kubernetes, you have 30 days to review and update to a supported Kubernetes version before the version becomes unsupported. During the deprecation period, you can run limited commands in your clusters to add workers, reload workers, and update the cluster. You cannot create new clusters in the deprecated version.
 
-**Unsupported Versions**: If you are running clusters on a Kubernetes version that is not supported, [review potential impacts](#version_types) for updates and then immediately [update your cluster](cs_cluster_update.html#update) to continue receiving important security updates and support.
+**Unsupported Versions**: If you are running clusters on a Kubernetes version that is not supported, [review potential impacts](#version_types) for updates and then immediately [update the cluster](cs_cluster_update.html#update) to continue receiving important security updates and support.
 
 To check the server version of a cluster, run the following command.
 
@@ -60,14 +62,14 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch.
 {: caption="Impacts of Kubernetes updates" caption-side="top"}
 
 As updates become available, you are notified when you view information about the worker nodes, such as with the `bx cs workers <cluster>` or `bx cs worker-get <cluster> <worker>` commands.
--  **Major and minor updates**: First [update your master node](cs_cluster_update.html#master) and then [update the worker nodes](cs_cluster_update.html#worker_node). 
+-  **Major and minor updates**: First, [update your master node](cs_cluster_update.html#master) and then [update the worker nodes](cs_cluster_update.html#worker_node). 
    - By default, you cannot update a Kubernetes master more than two minor versions ahead. For example, if your current master is version 1.5 and you want to update to 1.8, you must update to 1.7 first. You can force the update to continue, but updating more than two minor versions might cause unexpected results.
    - If you use a `kubectl` CLI version that does match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and [CLI versions](cs_cli_install.html#kubectl) up-to-date.
--  **Patch updates**: Check monthly to see if an update is available, and use the `bx cs worker-update` [command](cs_cli_reference.html#cs_worker_update) to apply these security and operating system patches. For more details, see [Version changelog](cs_versions_changelog.html).
+-  **Patch updates**: Check monthly to see whether an update is available, and use the `bx cs worker-update` [command](cs_cli_reference.html#cs_worker_update) or the `bx cs worker-reload` [command](cs_cli_reference.html#cs_worker_reload) to apply these security and operating system patches. For more information, see [Version changelog](cs_versions_changelog.html).
 
 <br/>
 
-The information on this page summarizes updates that are likely to have impact on deployed apps when you update a cluster to a new version from the previous version.
+This information summarizes updates that are likely to have impact on deployed apps when you update a cluster to a new version from the previous version.
 -  Version 1.9 [migration actions](#cs_v19).
 -  Version 1.8 [migration actions](#cs_v18).
 -  Version 1.7 [migration actions](#cs_v17).
@@ -75,9 +77,10 @@ The information on this page summarizes updates that are likely to have impact o
 
 <br/>
 
-For a more complete list of changes, review the following:
+For a complete list of changes, review the following information:
 * [Kubernetes changelog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md).
 * [IBM version changelog](cs_versions_changelog.html).
+
 
 ## Version 1.9
 {: #cs_v19}
@@ -150,6 +153,7 @@ If `Action required` is returned, modify the pod tolerations accordingly.</td>
 <br />
 
 
+
 ## Version 1.8
 {: #cs_v18}
 
@@ -192,7 +196,7 @@ Review changes that you might need to make when you are updating from the previo
 <tbody>
 <tr>
 <td>Kubernetes dashboard login</td>
-<td>The URL for accessing the Kubernetes dashboard in version 1.8 changed, and the login process includes a new authentication step. See [accessing the Kubernetes dashboard](cs_app.html#cli_dashboard) for more information.</td>
+<td>The URL for accessing the Kubernetes dashboard in version 1.8 changed, and the login process includes a new authentication step. For more information, see [accessing the Kubernetes dashboard](cs_app.html#cli_dashboard).</td>
 </tr>
 <tr>
 <td>Kubernetes dashboard permissions</td>
@@ -279,7 +283,7 @@ Review changes that you might need to make when you are updating from the previo
 <td>After you update the cluster from Kubernetes 1.5, use `apps/v1beta1` for the `apiVersion` field in new `Deployment` YAML files. Continue to use `extensions/v1beta1` for other resources, such as `Ingress`.</td>
 </tr>
 <tr>
-<td>kubectl</td>
+<td>'kubectl'</td>
 <td>After the `kubectl` CLI update, these `kubectl create` commands must use multiple flags instead of comma-separated arguments:<ul>
  <li>`role`
  <li>`clusterrole`
@@ -313,7 +317,7 @@ Review changes that you might need to make when you are updating from the previo
   </code>
   </pre>
 
-  <li> After adding the networking policy, remove the `net.beta.kubernetes.io/network-policy` annotation:
+  <li> After you add the networking policy, remove the `net.beta.kubernetes.io/network-policy` annotation:
   ```
   kubectl annotate ns <namespace> --overwrite "net.beta.kubernetes.io/network-policy-"
   ```
@@ -378,7 +382,7 @@ If your apps rely on the previous insecure behavior, modify them accordingly.</t
 </tr>
 <tr>
 <td>StatefulSet pod DNS</td>
-<td>StatefulSet pods lose their Kubernetes DNS entries after updating the master. To restore the DNS entries, delete the StatefulSet pods. Kubernetes re-creates the pods and automatically restores the DNS entries. For more information, see the [Kubernetes issue ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/48327).</td>
+<td>StatefulSet pods lose their Kubernetes DNS entries after the master is updated. To restore the DNS entries, delete the StatefulSet pods. Kubernetes re-creates the pods and automatically restores the DNS entries. For more information, see the [Kubernetes issue ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/48327).</td>
 </tr>
 <tr>
 <td>Tolerations</td>
@@ -421,5 +425,4 @@ If your apps rely on the previous insecure behavior, modify them accordingly.</t
 
 As of 4 April 2018, {{site.data.keyword.containershort_notm}} clusters that run [Kubernetes version 1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) are unsupported. Version 1.5 clusters cannot receive security updates or support unless they are updated to the next most recent version ([Kubernetes 1.7](#cs_v17)).
 
-[Review potential impact](cs_versions.html#cs_versions) of each Kubernetes version update, and then [update your clusters](cs_cluster_update.html#update) immediately. Note that you update from one version to the next most recent, such as 1.5 to 1.7 or 1.8 to 1.9.
-
+[Review potential impact](cs_versions.html#cs_versions) of each Kubernetes version update, and then [update your clusters](cs_cluster_update.html#update) immediately. You must update from one version to the next most recent, such as 1.5 to 1.7 or 1.8 to 1.9.

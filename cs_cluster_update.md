@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-4-20"
+lastupdated: "2018-04-27"
 
 ---
 
@@ -14,6 +14,9 @@ lastupdated: "2018-4-20"
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:download: .download}
+
+
+
 
 
 # Updating clusters and worker nodes
@@ -30,7 +33,7 @@ Periodically, Kubernetes releases [major, minor, or patch updates](cs_versions.h
 
 Updates can affect the Kubernetes API server version or other components in your Kubernetes master.  You are always responsible for keeping your worker nodes up to date. When making updates, the Kubernetes master is updated before the worker nodes.
 
-By default, your ability to update the Kubernetes API server is limited in your Kubernetes master more than two minor versions ahead of your current version. For example, if your current Kubernetes API server version is 1.5 and you want to update to 1.8, you must first update to 1.7. You can force the update to occur, but updating more than two minor versions might cause unexpected results. If your cluster is running an unsupported Kubernetes version, you might have to force the update.
+By default, your ability to update the Kubernetes API server is limited in your Kubernetes master more than two minor versions ahead of your current version. For example, if your current Kubernetes API server version is 1.7 and you want to update to 1.9, you must first update to 1.8. You can force the update to occur, but updating more than two minor versions might cause unexpected results. If your cluster is running an unsupported Kubernetes version, you might have to force the update.
 
 The following diagram shows the process that you can take to update your master.
 
@@ -77,7 +80,7 @@ The keys are defined. What now?
 
 After you define your rules, you run the `bx cs worker-update` command. If a successful response is returned, the worker nodes are queued to be updated. However, the nodes do not undergo the update process until all of the rules are satisfied. While they're queued, the rules are checked on an interval to see if any of the nodes are able to be updated.
 
-What if I chose to not define a configuration map?
+What if I chose not to define a configuration map?
 
 When the configuration map is not defined, the default is used. By default, a maximum of 20% of all of your worker nodes in each cluster are unavailable during the update process.
 
