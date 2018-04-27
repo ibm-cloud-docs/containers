@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-04-26"
+lastupdated: "2018-04-27"
 
 ---
 
@@ -25,7 +25,7 @@ lastupdated: "2018-04-26"
 
 ![{{site.data.keyword.containershort_notm}} regions and locations](/images/regions.png)
 
-{{site.data.keyword.containershort_notm}} regions and locations
+_{{site.data.keyword.containershort_notm}} regions and locations_
 
 Supported {{site.data.keyword.containershort_notm}} regions are as follows:
   * AP North
@@ -148,4 +148,7 @@ Your cluster's resources remain in the location (data center) in which the clust
 
 ![Understanding where your cluster resources are](/images/region-cluster-resources.png)
 
-Understanding where your cluster resources are.
+_Understanding where your cluster resources are._
+
+
+

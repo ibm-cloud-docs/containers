@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-04-26"
+lastupdated: "2018-04-27"
 
 ---
 
@@ -57,6 +57,7 @@ Review the following potential app setups that are ordered with increasing degre
 
 
 ### Increasing the availability of your app
+{: #increase_availability}
 
 <dl>
   <dt>Use deployments and replica sets to deploy your app and its dependencies</dt>
