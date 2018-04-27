@@ -77,10 +77,10 @@ To allow access for a specific cluster:
 
 1. Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. If you have a federated account, include the `--sso` option.
 
-    ```
-    bx login [--sso]
-    ```
-    {: pre}
+   ```
+   bx login [--sso]
+   ```
+   {: pre}
 
 2. Select the region that your cluster is in.
 
