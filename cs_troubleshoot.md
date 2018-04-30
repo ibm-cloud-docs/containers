@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-04-27"
+lastupdated: "2018-04-30"
 
 ---
 
@@ -27,9 +27,8 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for ge
 {: shortdesc}
 
 You can take these general steps to ensure that your clusters are up-to-date:
-- Check on a monthly basis for available security and operating system patches to [update your worker nodes](cs_cli_reference.html#cs_worker_update).
+- Check monthly for available security and operating system patches to [update your worker nodes](cs_cli_reference.html#cs_worker_update).
 - [Update your cluster](cs_cli_reference.html#cs_cluster_update) to the latest default [version of Kubernetes](cs_versions.html) for {{site.data.keyword.containershort_notm}}
-
 
 ## Debugging clusters
 {: #debug_clusters}
@@ -206,12 +205,12 @@ Review common error messages and learn how to resolve them.
         <td>The VLAN that you selected is associated with a pod in the data center that has insufficient space to provision your worker node. You can choose between the following options:<ul><li>Use a different data center to provision your worker node. Run <code>bx cs locations</code> to list available data center.<li>If you have an existing public and private VLAN pair that is associated with another pod in the data center, use this VLAN pair instead.<li>Contact {{site.data.keyword.Bluemix_notm}} support by opening an [{{site.data.keyword.Bluemix_notm}} support ticket](#ts_getting_help).</ul></td>
       </tr>
       <tr>
-        <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not obtain network VLAN with id: &lt;vlan id&gt;.</td>
+        <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not obtain network VLAN with ID: &lt;vlan id&gt;.</td>
         <td>Your worker node could not be provisioned because the selected VLAN ID could not be found for one of the following reasons:<ul><li>You might have specified the VLAN number instead of the VLAN ID. The VLAN number is 3 or 4 digits long, whereas the VLAN ID is 7 digits long. Run <code>bx cs vlans &lt;location&gt;</code> to retrieve the VLAN ID.<li>The VLAN ID might not be associated with the IBM Cloud infrastructure (SoftLayer) account that you use. Run <code>bx cs vlans &lt;location&gt;</code> to list available VLAN IDs for your account. To change the IBM Cloud infrastructure (SoftLayer) account, see [bx cs credentials-set](cs_cli_reference.html#cs_credentials_set). </ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation: The location provided for this order is invalid. (HTTP 500)</td>
-        <td>Your IBM Cloud infrastructure (SoftLayer) is not set up to order compute resources in the selected data center. Contact [{{site.data.keyword.Bluemix_notm}} support](#ts_getting_help) to verify that you account is setup correctly.</td>
+        <td>Your IBM Cloud infrastructure (SoftLayer) is not set up to order compute resources in the selected data center. Contact [{{site.data.keyword.Bluemix_notm}} support](#ts_getting_help) to verify that you account is set up correctly.</td>
        </tr>
        <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: The user does not have the necessary {{site.data.keyword.Bluemix_notm}} Infrastructure permissions to add servers
@@ -225,7 +224,7 @@ Review common error messages and learn how to resolve them.
      </tr>
       <tr>
   <td>Cannot create IMS portal token, as no IMS account is linked to the selected BSS account</br></br>Provided user not found or active</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus: User account is currently cancel_pending.</br></br>Waiting for machine to be visible to the user</td>
-  <td>The owner of the API key that is used to access the IBM Cloud infrastructure (SoftLayer) portolio does not have the required permissions to perform the action, or might be pending deletion.</br></br><strong>As the user</strong>, follow these steps: <ol><li>If you have access to multiple accounts, make sure that you are logged in to the account where you want to work with {{site.data.keyword.containerlong_notm}}. </li><li>Run <code>bx cs api-key-info</code> to view the current API key owner that is used to access the IBM Cloud infrastructure (SoftLayer) portolio. </li><li>Run <code>bx account list</code> to view the owner of the {{site.data.keyword.Bluemix_notm}} account that you currently use. </li><li>Contact the owner of the {{site.data.keyword.Bluemix_notm}} account and report that the API key owner that you retrieved earlier has insufficient permissions in IBM Cloud infrastructure (SoftLayer) or might be pending to be deleted. </li></ol></br><strong>As the account owner</strong>, follow these steps: <ol><li>Review the [required permissions in IBM Cloud infrastructure (SoftLayer)](cs_users.html#access_policies) to perform the action that previously failed. </li><li>Fix the permissions of the API key owner or create a new API key by using the [<code>bx cs api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) command. </li><li>If you or another account admin manually set IBM Cloud infrastructure (SoftLayer) credentials in your account, run [<code>bx cs credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset) to remove the credentials from your account.</li></ol></td>
+  <td>The owner of the API key that is used to access the IBM Cloud infrastructure (SoftLayer) portfolio does not have the required permissions to perform the action, or might be pending deletion.</br></br><strong>As the user</strong>, follow these steps: <ol><li>If you have access to multiple accounts, make sure that you are logged in to the account where you want to work with {{site.data.keyword.containerlong_notm}}. </li><li>Run <code>bx cs api-key-info</code> to view the current API key owner that is used to access the IBM Cloud infrastructure (SoftLayer) portfolio. </li><li>Run <code>bx account list</code> to view the owner of the {{site.data.keyword.Bluemix_notm}} account that you currently use. </li><li>Contact the owner of the {{site.data.keyword.Bluemix_notm}} account and report that the API key owner that you retrieved earlier has insufficient permissions in IBM Cloud infrastructure (SoftLayer) or might be pending to be deleted. </li></ol></br><strong>As the account owner</strong>, follow these steps: <ol><li>Review the [required permissions in IBM Cloud infrastructure (SoftLayer)](cs_users.html#managing) to perform the action that previously failed. </li><li>Fix the permissions of the API key owner or create a new API key by using the [<code>bx cs api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) command. </li><li>If you or another account admin manually set IBM Cloud infrastructure (SoftLayer) credentials in your account, run [<code>bx cs credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset) to remove the credentials from your account.</li></ol></td>
   </tr>
     </tbody>
   </table>
@@ -284,19 +283,19 @@ Review the options that you have to debug your app deployments and find the root
 Still having issues with your cluster?
 {: shortdesc}
 
--   To see whether {{site.data.keyword.Bluemix_notm}} is available, [check the {{site.data.keyword.Bluemix_notm}} status page ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/bluemix/support/#status).
--   Post a question in the [{{site.data.keyword.containershort_notm}} Slack. ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com)
+-   To see if {{site.data.keyword.Bluemix_notm}} is available, [check the {{site.data.keyword.Bluemix_notm}} status page ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/bluemix/support/#status).
+-   Post a question in the [{{site.data.keyword.containershort_notm}} Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com).
+
     If you are not using an IBM ID for your {{site.data.keyword.Bluemix_notm}} account, [request an invitation](https://bxcs-slack-invite.mybluemix.net/) to this Slack.
     {: tip}
--   Review the forums to see whether other users ran into the same issue. When you use the forums to ask a question, tag your question so that it is seen by the {{site.data.keyword.Bluemix_notm}} development teams.
+-   Review the forums to see if other users ran into the same issue. When you use the forums to ask a question, tag your question so that it is seen by the {{site.data.keyword.Bluemix_notm}} development teams.
 
     -   If you have technical questions about developing or deploying clusters or apps with {{site.data.keyword.containershort_notm}}, post your question on [Stack Overflow ![External link icon](../icons/launch-glyph.svg "External link icon")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) and tag your question with `ibm-cloud`, `kubernetes`, and `containers`.
     -   For questions about the service and getting started instructions, use the [IBM developerWorks dW Answers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) forum. Include the `ibm-cloud` and `containers` tags.
     See [Getting help](/docs/get-support/howtogetsupport.html#using-avatar) for more details about using the forums.
 
--   Contact IBM Support by opening a ticket. For information about opening an IBM support ticket, or about support levels and ticket severities, see [Contacting support](/docs/get-support/howtogetsupport.html#getting-customer-support).
+-   Contact IBM Support by opening a ticket. To learn about opening an IBM support ticket, or about support levels and ticket severities, see [Contacting support](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
-{:tip}
+{: tip}
 When reporting an issue, include your cluster ID. To get your cluster ID, run `bx cs clusters`.
-
 

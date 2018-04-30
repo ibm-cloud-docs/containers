@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-04-27"
+lastupdated: "2018-04-30"
 
 ---
 
@@ -383,7 +383,7 @@ You can choose which logs that you forward by filtering out specific logs for a 
 
 3. Update the log filter that you created.
   ```
-  bx cs logging-filter-update <cluster_name_or_ID> --id <filter_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --message <message>
+  bx cs logging-filter-update <cluster_name_or_ID> --id <filter_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
   ```
   {: pre}
   <table>
@@ -421,7 +421,7 @@ You can choose which logs that you forward by filtering out specific logs for a 
       </tr>
       <tr>
         <td><code>&lt;message&gt;</code></td>
-        <td>Optional: Filters out logs that contain a specified message.</td>
+        <td>Optional: Filters out logs that contain a specified message that is written as a regular expression.</td>
       </tr>
     </tbody>
   </table>
