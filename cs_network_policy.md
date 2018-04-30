@@ -409,8 +409,7 @@ The compatibility of Calico versions for CLI configuration and policies varies b
 * [Kubernetes version 1.10 or later clusters](#policies_1.10)
 * [Kubernetes version 1.9 or earlier clusters](#policies_1.9)
 
-Before updating your cluster from Kubernetes version 1.9 or earlier to version 1.10 or later, be sure to review [Preparing to update to Calico v3](cs_versions.html#110_calicov3).
-{: tip}
+
 
 ### Adding network policies in Kubernetes version 1.10 or later clusters
 {: #policies_1.10}
