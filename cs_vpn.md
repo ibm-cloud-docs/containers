@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-04-27"
+lastupdated: "2018-04-30"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-04-27"
 # Setting up VPN connectivity
 {: #vpn}
 
-With VPN connectivity, you can securely connect apps in a Kubernetes cluster on {{site.data.keyword.containerlong}} to an on-premises network. You can also connect apps that are external to your cluster to an app that is running inside your cluster.
+With VPN connectivity, you can securely connect apps in a Kubernetes cluster on {{site.data.keyword.containerlong}} to an on-prem network. You can also connect apps that are external to your cluster to an app that is running inside your cluster.
 {:shortdesc}
 
 To connect your worker nodes and apps to an on-premises data center, you can configure one of the following options.
@@ -182,7 +182,7 @@ To configure the Helm chart:
     **Note**: If you have multiple VPN deployments in a single cluster, you can avoid naming conflicts and differentiate between your deployments by choosing more descriptive release names than `vpn`. To avoid the truncation of the release name, limit the release name to 35 characters or less.
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=vpn ibm/strongswan
+    helm install -f config.yaml --name=vpn ibm/strongswan
     ```
     {: pre}
 
@@ -212,14 +212,14 @@ After you deploy your Helm chart, test the VPN connectivity.
 2. Set the `STRONGSWAN_POD` environment variable.
 
     ```
-    export STRONGSWAN_POD=$(kubectl get pod -n kube-system -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
+    export STRONGSWAN_POD=$(kubectl get pod -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
     ```
     {: pre}
 
 3. Check the status of the VPN. A status of `ESTABLISHED` means that the VPN connection was successful.
 
     ```
-    kubectl exec -n kube-system  $STRONGSWAN_POD -- ipsec status
+    kubectl exec $STRONGSWAN_POD -- ipsec status
     ```
     {: pre}
 
@@ -236,8 +236,8 @@ After you deploy your Helm chart, test the VPN connectivity.
     **Note**:
 
     <ul>
-    <li>When you try to establish VPN connectivity with the strongSwan Helm chart, it is likely that the VPN status is not `ESTABLISHED` the first time. You might need to check the on-premises VPN endpoint settings and change the configuration file several times before the connection is successful: <ol><li>Run `helm delete --purge <release_name>`</li><li>Fix the incorrect values in the configuration file.</li><li>Run `helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan`</li></ol>You can also run more checks in the next step.</li>
-    <li>If the VPN pod is in an `ERROR` state or continues to crash and restart, it might be due to parameter validation of the `ipsec.conf` settings in the chart's configmap.<ol><li>Check for any validation errors in the strongSwan pod logs by running `kubectl logs -n kube-system $STRONGSWAN_POD`.</li><li>If validation errors exist, run `helm delete --purge <release_name>`<li>Fix the incorrect values in the configuration file.</li><li>Run `helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan`</li></ol>If your cluster has a high number of worker nodes, you can also use `helm upgrade` to more quickly apply your changes instead of running `helm delete` and `helm install`.</li>
+    <li>When you try to establish VPN connectivity with the strongSwan Helm chart, it is likely that the VPN status is not `ESTABLISHED` the first time. You might need to check the on-premises VPN endpoint settings and change the configuration file several times before the connection is successful: <ol><li>Run `helm delete --purge <release_name>`</li><li>Fix the incorrect values in the configuration file.</li><li>Run `helm install -f config.yaml --name=<release_name> ibm/strongswan`</li></ol>You can also run more checks in the next step.</li>
+    <li>If the VPN pod is in an `ERROR` state or continues to crash and restart, it might be due to parameter validation of the `ipsec.conf` settings in the chart's configmap.<ol><li>Check for any validation errors in the strongSwan pod logs by running `kubectl logs -n $STRONGSWAN_POD`.</li><li>If validation errors exist, run `helm delete --purge <release_name>`<li>Fix the incorrect values in the configuration file.</li><li>Run `helm install -f config.yaml --name=<release_name> ibm/strongswan`</li></ol>If your cluster has a high number of worker nodes, you can also use `helm upgrade` to more quickly apply your changes instead of running `helm delete` and `helm install`.</li>
     </ul>
 
 4. You can further test the VPN connectivity by running the five Helm tests that are included in the strongSwan chart definition.
@@ -254,7 +254,7 @@ After you deploy your Helm chart, test the VPN connectivity.
 5. View the output of a failed test by looking at the logs of the test pod.
 
     ```
-    kubectl logs -n kube-system <test_program>
+    kubectl logs <test_program>
     ```
     {: pre}
 
@@ -302,7 +302,7 @@ After you deploy your Helm chart, test the VPN connectivity.
 9. Install the Helm chart to your cluster with the updated `config.yaml` file. The updated properties are stored in a configmap for your chart.
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan
+    helm install -f config.yaml --name=<release_name> ibm/strongswan
     ```
     {: pre}
 
@@ -323,12 +323,12 @@ After you deploy your Helm chart, test the VPN connectivity.
 12. Clean up the current test pods.
 
     ```
-    kubectl get pods -a -n kube-system -l app=strongswan-test
+    kubectl get pods -a -l app=strongswan-test
     ```
     {: pre}
 
     ```
-    kubectl delete pods -n kube-system -l app=strongswan-test
+    kubectl delete pods -l app=strongswan-test
     ```
     {: pre}
 
@@ -351,7 +351,7 @@ Make sure your strongSwan Helm chart is up-to-date by upgrading it.
 To upgrade your strongSwan Helm chart to the latest version:
 
   ```
-  helm upgrade -f config.yaml --namespace kube-system <release_name> ibm/strongswan
+  helm upgrade -f config.yaml <release_name> ibm/strongswan
   ```
   {: pre}
 
@@ -383,7 +383,7 @@ To upgrade from version 1.0.0, you must delete the 1.0.0 chart and install the l
 4. Install the Helm chart to your cluster with the updated `config.yaml` file.
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan
+    helm install -f config.yaml --name=<release_name> ibm/strongswan
     ```
     {: pre}
 
