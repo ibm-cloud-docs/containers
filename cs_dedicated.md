@@ -506,7 +506,7 @@ Review the following options for other cluster configurations:
   * [Updating worker nodes](cs_cluster_update.html#worker_node)
   * [Configuring cluster logging](cs_health.html#logging)
       * **Note**: Log enablement is not supported from the Dedicated endpoint. You must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
-  * [Configuring cluster monitoring](cs_health.html#monitoring)
+  * [Configuring cluster monitoring](cs_health.html#view_metrics)
       * **Note**: An `ibm-monitoring` cluster exists within each {{site.data.keyword.Bluemix_dedicated_notm}} account. This cluster continuously monitors the health of the {{site.data.keyword.containerlong_notm}} in the Dedicated environment, checking the stability and connectivity of the environment. Do not remove this cluster from the environment.
   * [Visualizing Kubernetes cluster resources](cs_integrations.html#weavescope)
   * [Removing clusters](cs_clusters.html#remove)
@@ -543,4 +543,3 @@ If you want to use public IP addresses for the application load balancer, ensure
 {: #dedicated_apps_volume_claim}
 
 To review options for creating persistent storage, see [Persistent data storage](cs_storage.html#planning). To request a backup for your volumes, a restoration from your volumes, and other storage functions, you must [open a support ticket](cs_troubleshoot_storage.html#ts_getting_help).
-

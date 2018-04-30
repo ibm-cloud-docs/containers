@@ -125,7 +125,7 @@ Review the built-in worker node security features to protect the worker node env
     <ul><li><b>strongSwan IPsec VPN Service</b>: You can set up a [strongSwan IPsec VPN service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.strongswan.org/) that securely connects your Kubernetes cluster with an on-premises network. The strongSwan IPsec VPN service provides a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPsec) protocol suite. To set up a secure connection between your cluster and an on-premises network, you must [install an IPsec VPN gateway in your on-premises data center](/docs/infrastructure/iaas-vpn/set-up-ipsec-vpn.html#setting-up-an-ipsec-connection). Then you can [configure and deploy the strongSwan IPsec VPN service](cs_vpn.html#vpn-setup) in a Kubernetes pod.</li>
     <li><b>Vyatta Gateway Appliance or Fortigate Appliance</b>: If you have a larger cluster, want to access non-Kubernetes resources over the VPN, or want to access multiple clusters over a single VPN, you might choose to set up a Vyatta Gateway Appliance or Fortigate Appliance to configure an IPsec VPN endpoint. To configure a Vyatta, see [Setting up VPN connectivity with Vyatta](cs_vpn.html#vyatta).</li></ul></dd>
   <dt>Continuous monitoring and logging of cluster activity</dt>
-    <dd>For standard clusters, all cluster-related events can be logged and sent to {{site.data.keyword.loganalysislong_notm}} and {{site.data.keyword.monitoringlong_notm}}. These events include adding a worker node, rolling update progress, or capacity usage information. You can [configure cluster logging](/docs/containers/cs_health.html#logging) and [cluster monitoring](/docs/containers/cs_health.html#monitoring) to decide on the events that you want to monitor. </dd>
+    <dd>For standard clusters, all cluster-related events can be logged and sent to {{site.data.keyword.loganalysislong_notm}} and {{site.data.keyword.monitoringlong_notm}}. These events include adding a worker node, rolling update progress, or capacity usage information. You can [configure cluster logging](/docs/containers/cs_health.html#logging) and [cluster monitoring](/docs/containers/cs_health.html#view_metrics) to decide on the events that you want to monitor. </dd>
 </dl>
 
 <br />
@@ -217,7 +217,6 @@ You are responsible for ensuring the security of your personal information in Ku
 <br />
 
   
-
 
 
 
