@@ -777,9 +777,63 @@ To add persistent storage:
 
 <br />
 
+	
+## Customizing a storage class for XFS block storage
+{: #custom_storageclass}
 
+The storage classes that are pre-defined by {{site.data.keyword.containerlong}} provision block storage with an `ext4` file system by default. You can create a customized storage class to provision block storage with an `XFS` file system. 
+{: shortdesc}
 
+Before you begin: 
+- [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure).
+- Install the [{{site.data.keyword.Bluemix_notm}} Storage plug-in for block storage](#install_block).
 
+To create a customized storage class: 
+1. Create a yaml file for your customized storage class. 
+   ```
+   apiVersion: storage.k8s.io/v1
+   kind: StorageClass
+   metadata:
+     name: ibmc-block-custom-xfs
+     labels:
+       addonmanager.kubernetes.io/mode: Reconcile
+   provisioner: ibm.io/ibmc-block
+   parameters:
+     type: "Performance"
+     sizeIOPSRange: |-
+       [20-39]Gi:[100-1000]
+       [40-79]Gi:[100-2000]
+       [80-99]Gi:[100-4000]
+       [100-499]Gi:[100-6000]
+       [500-999]Gi:[100-10000]
+       [1000-1999]Gi:[100-20000]
+       [2000-2999]Gi:[200-40000]
+       [3000-3999]Gi:[200-48000]
+       [4000-7999]Gi:[300-48000]
+       [8000-9999]Gi:[500-48000]
+       [10000-12000]Gi:[1000-48000]
+     fsType: "xfs"
+     reclaimPolicy: "Delete"
+     classVersion: "2"
+   ```
+   {: codeblock}
+   
+   If you want to keep the data after you remove block storage from your cluster, change the `reclaimPolicy` to `Retain`. 
+   {: tip}
+   
+2. Create the storage class in your cluster. 
+   ```
+   kubectl apply -f <filepath/xfs_storageclass.yaml>
+   ```
+   {: pre}
+       
+3. Verify that the customized storage class was created. 
+   ```
+   kubectl get storageclasses
+   ```
+   {: pre}
+
+4. Provision [XFS block storage](#create) with your customized storage class. 
 
 
 
