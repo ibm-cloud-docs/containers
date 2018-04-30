@@ -151,7 +151,7 @@ To create a PV and matching PVC, follow these steps.
     <tbody>
     <tr>
     <td><code>name</code></td>
-    <td>Enter the name of the PV object that you want to create.</td>
+    <td>Enter the name of the PV object to create.</td>
     </tr>
     <tr>
     <td><code>spec/capacity/storage</code></td>
