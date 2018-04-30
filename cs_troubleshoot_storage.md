@@ -52,6 +52,7 @@ For a long-term fix, [update the machine type by adding another worker node](cs_
 <br />
 
 
+
 ## App fails when a non-root user owns the NFS file storage mount path
 {: #nonroot}
 
@@ -269,6 +270,61 @@ Remove the configuration's `securityContext` fields for `fsGroup` and `runAsUser
 
 
 
+## Mounting existing block storage to a pod fails due to the wrong file system
+{: #block_filesystem}
+
+{: tsSymptoms}
+When you run `kubectl describe pod <pod_name>`, you see the following error:
+```
+failed to mount the volume as "ext4", it already contains xfs. Mount error: mount failed: exit status 32
+```
+{: screen}
+
+{: tsCauses}
+You have an existing block storage device that is set up with an `XFS` file system. To mount this device to your pod, you [created a PV](cs_storage.html#existing_block) that specified `ext4` as your file system or no file system in the `spec/flexVolume/fsType` section. If no file system is defined, the PV defaults to `ext4`.
+The PV was created successfully and was linked to your existing block storage instance. However, when you try to mount the PV to your cluster by using a matching PVC, the volume fails to mount. You cannot mount your `XFS` block storage instance with an `ext4` file system to the pod.
+
+{: tsResolve}
+Update the file system in the existing PV from `ext4` to `XFS`. 
+
+1. List the existing PVs in your cluster and note the name of the PV that you used for your existing block storage instance. 
+   ```
+   kubectl get pv
+   ```
+   {: pre}
+   
+2. Save the PV yaml on your local machine. 
+   ```
+   kubectl get pv <pv_name> -o yaml > <filepath/xfs_pv.yaml>
+   ```
+   {: pre}
+   
+3. Open the yaml file and change the `fsType` from `ext4` to `xfs`. 
+4. Replace the PV in your cluster. 
+   ```
+   kubectl replace --force -f <filepath/xfs_pv.yaml>
+   ```
+   {: pre}
+
+5. Log in to the pod where you mounted the PV. 
+   ```
+   kubectl exec -it <pod_name> sh
+   ```
+   {: pre}
+
+6. Verify that the file system changed to `XFS`. 
+   ```
+   df -Th
+   ```
+   {: pre}
+   
+   Example output: 
+   ```
+   Filesystem Type Size Used Avail Use% Mounted on /dev/mapper/3600a098031234546d5d4c9876654e35 xfs 20G 33M 20G 1% /myvolumepath
+   ```
+   {: screen}
+
+<br />
 
 
 ## Getting help and support
