@@ -24,6 +24,8 @@ lastupdated: "2018-04-30"
 Check out what container developers are interested in learning about in {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
+
+
 ## Popular topics in April 2018
 {: #apr18}
 
