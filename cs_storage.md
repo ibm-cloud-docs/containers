@@ -837,6 +837,8 @@ To create a customized storage class:
 
 
 
+
+
 ## Installing the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in on your cluster
 {: #install_block}
 
