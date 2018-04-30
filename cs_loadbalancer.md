@@ -120,7 +120,7 @@ To create a load balancer service:
         <tbody>
         <tr>
           <td><code>selector</code></td>
-          <td>Enter the label key (<em>&lt;selector_key&gt;</em>) and value (<em>&lt;selector_value&gt;</em>) pair that you want to use to target the pods where your app runs. To target your pods and include them in the service load balancing, check the <em>&lt;selector_key&gt;</em> and <em>&lt;selector_value&gt;</em> values. Make sure that they are the same as the <em>key/value</em> pair that you used in the <code>spec.template.metadata.labels</code> section of your deployment yaml.</td>
+          <td>Enter the label key (<em>&lt;selector_key&gt;</em>) and value (<em>&lt;selector_value&gt;</em>) pair to use to target the pods where your app runs. To target your pods and include them in the service load balancing, check the <em>&lt;selector_key&gt;</em> and <em>&lt;selector_value&gt;</em> values. Make sure that they are the same as the <em>key/value</em> pair that you used in the <code>spec.template.metadata.labels</code> section of your deployment yaml.</td>
         </tr>
         <tr>
           <td><code>port</code></td>
@@ -206,7 +206,7 @@ Whenever you deploy app pods, load balancer service pods are also deployed to th
 
 When a client request to your app is sent to your cluster, the request is routed to a pod for the Kubernetes load balancer service that exposes the app. If an app pod does not exist on the same worker node as the load balancer service pod, the load balancer forwards the request to a different worker node where an app pod is deployed. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running.
 
-If you want to preserve the original source IP address of the client request, you can [enable source IP ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) for load balancer services. Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies. After you enable the source IP, load balancer service pods must forward requests to app pods that are deployed to the same worker node only. To force your app to deploy to specific worker nodes that load balancer service pods can also deploy to, you must add affinity rules and tolerations to your app deployment.
+To preserve the original source IP address of the client request, you can [enable source IP ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) for load balancer services. Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies. After you enable the source IP, load balancer service pods must forward requests to app pods that are deployed to the same worker node only. To force your app to deploy to specific worker nodes that load balancer service pods can also deploy to, you must add affinity rules and tolerations to your app deployment.
 
 ### Adding edge node affinity rules and tolerations
 {: #edge_nodes}
@@ -254,7 +254,7 @@ When source IP is enabled, schedule app pods on worker nodes that are the same V
 
 Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
 
-1. Get the IP address of the load balancer service that you want to use. Look for the IP address in the **LoadBalancer Ingress** field.
+1. Get the IP address of the load balancer service. Look for the IP address in the **LoadBalancer Ingress** field.
     ```
     kubectl describe service <loadbalancer_service_name>
     ```
