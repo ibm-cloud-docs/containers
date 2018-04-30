@@ -29,10 +29,57 @@ For a summary of migration actions, see [Kubernetes versions](cs_versions.html).
 {: tip}
 
 For information about changes since the previous version, see the following changelogs.
+-  Version 1.9 [changelog](#19_changelog).
 -  Version 1.8 [changelog](#18_changelog).
 -  Version 1.7 [changelog](#17_changelog).
 
 
+
+## Version 1.9 changelog
+{: #19_changelog}
+
+Review the following changes.
+
+### Changelog for 1.9.7_1510
+{: #197_1510}
+
+<table summary="Changes since version 1.9.3_1506">
+<caption>Changes since version 1.9.3_1506</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kubernetes</td>
+<td>v1.9.3</td>
+<td>v1.9.7	</td>
+<td>See the [Kubernetes release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.7). This release addresses [CVE-2017-1002101 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) and [CVE-2017-1002102 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102) vulnerabilities.</td>
+</tr>
+<tr>
+<td>Kubernetes configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Added `admissionregistration.k8s.io/v1alpha1=true` to the `--runtime-config` option for the cluster's Kubernetes API server.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.9.3-71</td>
+<td>v1.9.7-102</td>
+<td>`NodePort` and `LoadBalancer` services now support [preserving the client source IP](cs_loadbalancer.html#node_affinity_tolerations) by setting `service.spec.externalTrafficPolicy` to `Local`.</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>Fix [edge node](cs_edge.html#edge) toleration setup for older clusters.</td>
+</tr>
+</tbody>
+</table>
 
 ## Version 1.8 changelog
 {: #18_changelog}

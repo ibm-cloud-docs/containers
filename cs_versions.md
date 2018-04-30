@@ -25,7 +25,7 @@ lastupdated: "2018-04-30"
 
 The current supported Kubernetes versions are:
 
-- Latest: 1.9.3
+- Latest: 1.9.7
 - Default: 1.8.11
 - Supported: 1.7.16
 
@@ -136,6 +136,14 @@ Previously, the operation failed and you saw the error message `xxx is not found
 <tr>
 <td>Kubernetes dashboard permissions</td>
 <td>Users are required to log in to the Kubernetes dashboard with their credentials to view cluster resources. The default Kubernetes dashboard `ClusterRoleBinding` RBAC authorization is removed. For instructions, see [Launching the Kubernetes dashboard](cs_app.html#cli_dashboard).</td>
+</tr>
+<tr>
+<td>Read-only API data volumes</td>
+<td>Now `secret`, `configMap`, `downwardAPI`, and projected volumes are mounted read-only.
+Previously, apps were allowed to write data to these volumes that might be
+reverted automatically by the system. This migration action is required to fix
+security vulnerability [CVE-2017-1002102](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102).
+If your apps rely on the previous insecure behavior, modify them accordingly.</td>
 </tr>
 <tr>
 <td>Taints and tolerations</td>
