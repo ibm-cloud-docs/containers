@@ -618,58 +618,58 @@ network policy resource. Kubernetes version 1.10 or later clusters use [network 
 
         Example resource that blocks all node ports:
 
-          ```
-          apiVersion: projectcalico.org/v3
-          kind: GlobalNetworkPolicy
-          metadata:
-            name: deny-kube-node-port-services
-          spec:
-            applyOnForward: true
-            ingress:
-            - action: Deny
-              destination:
-                ports:
-                - 30000:32767
-              protocol: TCP
-              source: {}
-            - action: Deny
-              destination:
-                ports:
-                - 30000:32767
-              protocol: UDP
-              source: {}
-            preDNAT: true
-            selector: ibm.role in { 'worker_public', 'master_public' }
-            types:
-            - Ingress
-          ```
-          {: codeblock}
+        ```
+        apiVersion: projectcalico.org/v3
+        kind: GlobalNetworkPolicy
+        metadata:
+          name: deny-kube-node-port-services
+        spec:
+          applyOnForward: true
+          ingress:
+          - action: Deny
+            destination:
+              ports:
+              - 30000:32767
+            protocol: TCP
+            source: {}
+          - action: Deny
+            destination:
+              ports:
+              - 30000:32767
+            protocol: UDP
+            source: {}
+          preDNAT: true
+          selector: ibm.role in { 'worker_public', 'master_public' }
+          types:
+          - Ingress
+        ```
+        {: codeblock}
 
     * Kubernetes version 1.9 or earlier clusters must use Calico v2 policy syntax.
 
         Example resource that blocks all node ports:
 
-          ```
-          apiVersion: v1
-          kind: policy
-          metadata:
-            name: deny-kube-node-port-services
-          spec:
-            preDNAT: true
-            selector: ibm.role in { 'worker_public', 'master_public' }
-            ingress:
-            - action: deny
-              protocol: tcp
-              destination:
-                ports:
-                - 30000:32767
-            - action: deny
-              protocol: udp
-              destination:
-                ports:
-                - 30000:32767
-          ```
-          {: codeblock}
+        ```
+        apiVersion: v1
+        kind: policy
+        metadata:
+          name: deny-kube-node-port-services
+        spec:
+          preDNAT: true
+          selector: ibm.role in { 'worker_public', 'master_public' }
+          ingress:
+          - action: deny
+            protocol: tcp
+            destination:
+              ports:
+              - 30000:32767
+          - action: deny
+            protocol: udp
+            destination:
+              ports:
+              - 30000:32767
+        ```
+        {: codeblock}
 
 
 2. Apply the Calico preDNAT network policy. It takes about 1 minute for the
