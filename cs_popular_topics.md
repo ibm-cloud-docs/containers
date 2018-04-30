@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-04-27"
+lastupdated: "2018-04-30"
 
 ---
 
@@ -23,6 +23,8 @@ lastupdated: "2018-04-27"
 
 Check out what container developers are interested in learning about in {{site.data.keyword.containerlong}}.
 {:shortdesc}
+
+
 
 ## Popular topics in April 2018
 {: #apr18}

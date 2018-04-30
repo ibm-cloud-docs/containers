@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-04-27"
+lastupdated: "2018-04-30"
 
 ---
 
@@ -32,7 +32,7 @@ You can use built-in security features in {{site.data.keyword.containerlong}} fo
 Each {{site.data.keyword.containerlong_notm}} cluster has security features that are built in to its [master](#master) and [worker](#worker) nodes.
 {: shortdesc}
 
-If you have a firewall, or want to run `kubectl` commands from your local system when corporate network policies prevent access to public internet endpoints, [open ports in your firewall](cs_firewall.html#firewall). If you want to connect apps in your cluster to an on-premises network or to other apps external to your cluster, [set up VPN connectivity](cs_vpn.html#vpn).
+If you have a firewall, or want to run `kubectl` commands from your local system when corporate network policies prevent access to public internet endpoints, [open ports in your firewall](cs_firewall.html#firewall). To connect apps in your cluster to an on-premises network or to other apps external to your cluster, [set up VPN connectivity](cs_vpn.html#vpn).
 
 In the following diagram, you can see security features that are grouped by Kubernetes master, worker nodes, and container images.
 
@@ -125,7 +125,7 @@ Review the built-in worker node security features to protect the worker node env
     <ul><li><b>strongSwan IPsec VPN Service</b>: You can set up a [strongSwan IPsec VPN service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.strongswan.org/) that securely connects your Kubernetes cluster with an on-premises network. The strongSwan IPsec VPN service provides a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPsec) protocol suite. To set up a secure connection between your cluster and an on-premises network, you must [install an IPsec VPN gateway in your on-premises data center](/docs/infrastructure/iaas-vpn/set-up-ipsec-vpn.html#setting-up-an-ipsec-connection). Then you can [configure and deploy the strongSwan IPsec VPN service](cs_vpn.html#vpn-setup) in a Kubernetes pod.</li>
     <li><b>Vyatta Gateway Appliance or Fortigate Appliance</b>: If you have a larger cluster, want to access non-Kubernetes resources over the VPN, or want to access multiple clusters over a single VPN, you might choose to set up a Vyatta Gateway Appliance or Fortigate Appliance to configure an IPsec VPN endpoint. To configure a Vyatta, see [Setting up VPN connectivity with Vyatta](cs_vpn.html#vyatta).</li></ul></dd>
   <dt>Continuous monitoring and logging of cluster activity</dt>
-    <dd>For standard clusters, all cluster-related events can be logged and sent to {{site.data.keyword.loganalysislong_notm}} and {{site.data.keyword.monitoringlong_notm}}. These events include adding a worker node, rolling update progress, or capacity usage information. You can [configure cluster logging](/docs/containers/cs_health.html#logging) and [cluster monitoring](/docs/containers/cs_health.html#monitoring) to decide on the events that you want to monitor. </dd>
+    <dd>For standard clusters, all cluster-related events can be logged and sent to {{site.data.keyword.loganalysislong_notm}} and {{site.data.keyword.monitoringlong_notm}}. These events include adding a worker node, rolling update progress, or capacity usage information. You can [configure cluster logging](/docs/containers/cs_health.html#logging) and [cluster monitoring](/docs/containers/cs_health.html#view_metrics) to decide on the events that you want to monitor. </dd>
 </dl>
 
 <br />
@@ -217,7 +217,6 @@ You are responsible for ensuring the security of your personal information in Ku
 <br />
 
   
-
 
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-04-27"
+lastupdated: "2018-04-30"
 
 ---
 
@@ -41,7 +41,8 @@ Review these potential cluster setups that are ordered with increasing degrees o
 2.  Two clusters that run in different locations in the same region, each with multiple worker nodes
 3.  Two clusters that run in different regions, each with multiple worker nodes
 
-Increase the availability of your cluster with these techniques:
+
+### Increase the availability of your cluster
 
 <dl>
 <dt>Spread apps across worker nodes</dt>

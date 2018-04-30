@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-04-27"
+lastupdated: "2018-04-30"
 
 ---
 
@@ -151,7 +151,7 @@ To create a PV and matching PVC, follow these steps.
     <tbody>
     <tr>
     <td><code>name</code></td>
-    <td>Enter the name of the PV object that you want to create.</td>
+    <td>Enter the name of the PV object to create.</td>
     </tr>
     <tr>
     <td><code>spec/capacity/storage</code></td>
@@ -295,7 +295,7 @@ To create a PV and matching PVC, follow these steps.
         - ReadWriteOnce
       flexVolume:
         driver: "ibm/ibmc-block"
-        fsType: "ext4"
+        fsType: "<fs_type>"
         options:
           "Lun": "<lun_ID>"
           "TargetPortal": "<IP_address>"
@@ -313,6 +313,9 @@ To create a PV and matching PVC, follow these steps.
     <td><code>metadata/name</code></td>
     <td>Enter the name of the PV that you want to create.</td>
     </tr>
+    <tr>
+    <td><code>spec/flexVolume/fsType</code></td> 
+    <td>Enter the file system type that is configured for your existing block storage. Choose between <code>ext4</code> or <code>xfs</code>. If you do not specify this option, the PV defaults to <code>ext4</code>. When the wrong fsType is defined, then the PV creation succeeds, but the mounting of the PV to a pod fails. </td></tr>	    
     <tr>
     <td><code>spec/capacity/storage</code></td>
     <td>Enter the storage size of the existing block storage that you retrieved in the previous step as <code>capacity-gb</code>. The storage size must be written in gigabytes, for example, 20Gi (20 GB) or 1000Gi (1 TB).</td>
@@ -417,7 +420,7 @@ Before you begin:
 
 To add persistent storage:
 
-1.  Review the available storage classes. {{site.data.keyword.containerlong}} provides pre-defined storage classes for NFS file storage and block storage so that the cluster admin does not have to create any storage classes. The `ibmc-file-bronze` storage class is the same as the `default` storage class.
+1.  Review the available storage classes. {{site.data.keyword.containerlong}} provides pre-defined storage classes for NFS file storage and block storage so that the cluster admin does not have to create any storage classes. The `ibmc-file-bronze` storage class is the same as the `default` storage class. By default, file storage is provisioned with an `nfs` file system, and block storage is provisioned with an `ext4` file system. If you want to provision block storage with an `XFS` file system, [create your own custom storage class](#custom_storageclass). 
 
     ```
     kubectl get storageclasses
@@ -626,6 +629,9 @@ To add persistent storage:
         <td>This option is for custom storage classes only (`ibmc-file-custom / ibmc-file-retain-custom / ibmc-block-custom / ibmc-block-retain-custom`). Specify the total IOPS for the storage, selecting a multiple of 100 within the allowable range. To see all options, run `kubectl describe storageclasses <storageclass>`. If you choose an IOPS other than one that is listed, the IOPS is rounded up.</td>
         </tr>
         </tbody></table>
+	
+    If you want to use a customized storage class, create your PVC with the corresponding storage class name, a valid IOPS and size.   
+    {: tip}
 
 7.  Create the PVC.
 
@@ -770,6 +776,65 @@ To add persistent storage:
 **NFS permissions**: Looking for documentation on enabling NFS non-root permissions? See [Adding non-root user access to NFS file storage](cs_troubleshoot_storage.html#nonroot).
 
 <br />
+
+	
+## Customizing a storage class for XFS block storage
+{: #custom_storageclass}
+
+The storage classes that are pre-defined by {{site.data.keyword.containerlong}} provision block storage with an `ext4` file system by default. You can create a customized storage class to provision block storage with an `XFS` file system. 
+{: shortdesc}
+
+Before you begin: 
+- [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure).
+- Install the [{{site.data.keyword.Bluemix_notm}} Storage plug-in for block storage](#install_block).
+
+To create a customized storage class: 
+1. Create a yaml file for your customized storage class. 
+   ```
+   apiVersion: storage.k8s.io/v1
+   kind: StorageClass
+   metadata:
+     name: ibmc-block-custom-xfs
+     labels:
+       addonmanager.kubernetes.io/mode: Reconcile
+   provisioner: ibm.io/ibmc-block
+   parameters:
+     type: "Performance"
+     sizeIOPSRange: |-
+       [20-39]Gi:[100-1000]
+       [40-79]Gi:[100-2000]
+       [80-99]Gi:[100-4000]
+       [100-499]Gi:[100-6000]
+       [500-999]Gi:[100-10000]
+       [1000-1999]Gi:[100-20000]
+       [2000-2999]Gi:[200-40000]
+       [3000-3999]Gi:[200-48000]
+       [4000-7999]Gi:[300-48000]
+       [8000-9999]Gi:[500-48000]
+       [10000-12000]Gi:[1000-48000]
+     fsType: "xfs"
+     reclaimPolicy: "Delete"
+     classVersion: "2"
+   ```
+   {: codeblock}
+   
+   If you want to keep the data after you remove block storage from your cluster, change the `reclaimPolicy` to `Retain`. 
+   {: tip}
+   
+2. Create the storage class in your cluster. 
+   ```
+   kubectl apply -f <filepath/xfs_storageclass.yaml>
+   ```
+   {: pre}
+       
+3. Verify that the customized storage class was created. 
+   ```
+   kubectl get storageclasses
+   ```
+   {: pre}
+
+4. Provision [XFS block storage](#create) with your customized storage class. 
+
 
 
 
