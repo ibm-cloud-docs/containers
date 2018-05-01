@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-04-30"
+lastupdated: "2018-05-1"
 
 ---
 
@@ -97,7 +97,7 @@ To troubleshoot your load balancer service:
     1.  Find the public IP address of your load balancer service.
 
         ```
-        kubectl describe service <myservice> | grep "LoadBalancer Ingress"
+        kubectl describe service <service_name> | grep "LoadBalancer Ingress"
         ```
         {: pre}
 
@@ -522,36 +522,49 @@ Update the Helm chart values to reflect the worker node changes:
 
 
 
-
-## Cannot retrieve the ETCD URL for Calico CLI configuration
+## Cannot retrieve Calico network policies
 {: #cs_calico_fails}
 
 {: tsSymptoms}
-When you retrieve the `<ETCD_URL>` to [add network policies](cs_network_policy.html#adding_network_policies), you get a `calico-config not found` error message.
+When you try to view Calico network policies in your cluster by running `calicoctl get policy`, you get one of the following unexpected results or error messages:
+- An empty list
+- Old Calico v2 policies instead of v3 policies
+- `Failed to create Calico API client: syntax error in calicoctl.cfg: invalid config file: unknown APIVersion 'projectcalico.org/v3'`
+
+When you try to view Calico network policies in your cluster by running `GlobalNetworkPolicy`, you get one of the following unexpected results or error messages:
+- An empty list
+- `Failed to create Calico API client: syntax error in calicoctl.cfg: invalid config file: unknown APIVersion 'v1'`
+- `Failed to create Calico API client: syntax error in calicoctl.cfg: invalid config file: unknown APIVersion 'projectcalico.org/v3'`
+- `Failed to get resources: Resource type 'GlobalNetworkPolicy' is not supported`
 
 {: tsCauses}
-Your cluster is not at [Kubernetes version 1.7](cs_versions.html) or later.
+To use Calico policies, four factors must all align: your cluster Kubernetes version, Calico CLI version, Calico config file syntax, and view policy commands. One or more of these factors is not at the correct version.
 
 {: tsResolve}
-[Update your cluster](cs_cluster_update.html#master) or retrieve the `<ETCD_URL>` with commands that are compatible with earlier versions of Kubernetes.
+When your cluster is at [Kubernetes version 1.10 or later](cs_versions.html), you must use Calico CLI v3.1, `calicoctl.cfg` v3 config file syntax, and the `calicoctl get GlobalNetworkPolicy` and `calicoctl get NetworkPolicy` commands.
 
-To retrieve the `<ETCD_URL>`, run one of the following commands:
+When your cluster is at [Kubernetes version 1.9 or earlier](cs_versions.html), you must use Calico CLI v1.6.3, `calicoctl.cfg` v2 config file syntax, and the `calicoctl get policy` command.
 
-- Linux and OS X:
+To ensure that all Calico factors align:
 
+1. View your cluster Kubernetes version.
     ```
-    kubectl describe pod -n kube-system `kubectl get pod -n kube-system | grep calico-policy-controller | awk '{print $1}'` | grep ETCD_ENDPOINTS | awk '{print $2}'
+    bx cs cluster-get <cluster_name>
     ```
     {: pre}
 
-- Windows:
-    <ol>
-    <li> Get a list of the pods in the kube-system namespace and locate the Calico controller pod. </br><pre class="codeblock"><code>kubectl get pod -n kube-system</code></pre></br>Example:</br><pre class="screen"><code>calico-policy-controller-1674857634-k2ckm</code></pre>
-    <li> View the details of the Calico controller pod.</br> <pre class="codeblock"><code>kubectl describe pod -n kube-system calico-policy-controller-&lt;calico_pod_ID&gt;</code></pre>
-    <li> Locate the ETCD endpoints value. Example: <code>https://169.1.1.1:30001</code>
-    </ol>
+    * If your cluster is at Kubernetes version 1.10 or later:
+        1. Ensure that you have [installed and configured the version 3.1.1 Calico CLI](cs_network_policy.html#1.10_install). This includes manually updating the `calicoctl.cfg` file to use Calico v3 syntax.
+        2. Ensure that any policies you create and want to apply to your cluster use [Calico v3 syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy). If have an existing policy .yaml or .json file in Calico v2 syntax, you can convert it to Calico v3 syntax using the [`calicoctl convert` command ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert).
+        3. To [view policies](cs_network_policy.html#1.10_examine_policies), ensure that you are using `calicoctl get GlobalNetworkPolicy` for global policies and `calicoctl get NetworkPolicy --namespace <policy_namespace>` for policies scoped to specific namespaces.
 
-When you retrieve the `<ETCD_URL>`, continue with the steps as listed in (Adding network policies)[cs_network_policy.html#adding_network_policies].
+    * If your cluster is at Kubernetes version 1.9 or earlier:
+        1. Ensure that you have [installed and configured the version 1.6.3 Calico CLI](cs_network_policy.html#1.9_install). Make sure the `calicoctl.cfg` file uses Calico v2 syntax.
+        2. Ensure that any policies you create and want to apply to your cluster use [Calico v2 syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy).
+        3. To [view policies](cs_network_policy.html#1.10_examine_policies), ensure that you are using `calicoctl get policy`.
+
+Before updating your cluster from Kubernetes version 1.9 or earlier to version 1.10 or later, be sure to review [Preparing to update to Calico v3](cs_versions.html#110_calicov3).
+{: tip}
 
 <br />
 
@@ -579,5 +592,4 @@ Still having issues with your cluster?
 
 {: tip}
 When reporting an issue, include your cluster ID. To get your cluster ID, run `bx cs clusters`.
-
 
