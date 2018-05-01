@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-04-30"
+lastupdated: "2018-05-1"
 
 ---
 
@@ -354,6 +354,8 @@ To upgrade your strongSwan Helm chart to the latest version:
   helm upgrade -f config.yaml <release_name> ibm/strongswan
   ```
   {: pre}
+
+**Important**: The strongSwan 2.0.0 Helm chart does not work with Calico v3 or Kubernetes 1.10. Before [updating your cluster to 1.10](cs_versions.html#cs_v110), update strongSwan to the 2.1.0 Helm chart, which is backward compatible with Calico 2.6, and Kubernetes 1.7, 1.8, and 1.9.
 
 
 ### Upgrading from version 1.0.0
