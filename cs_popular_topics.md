@@ -24,7 +24,23 @@ lastupdated: "2018-05-1"
 Check out what container developers are interested in learning about in {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
+## Popular topics in May 2018
+{: #may18}
 
+<table summary="The table shows popular topics. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three.">
+<caption>Popular topics for containers and Kubernetes clusters in May 2018</caption>
+<thead>
+<th>Date</th>
+<th>Title</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td>01 May</td>
+<td>[Deploy workloads on GPU bare metal](cs_app.html#gpu_app)</td>
+<td>If you have a [bare metal graphics processing unit (GPU) machine type](cs_clusters.html#shared_dedicated_node) in your cluster, you can schedule mathematically intensive apps. The GPU worker node can process your app's workload across both the CPU and GPU to increase performance.</td>
+</tr>
+</tbody></table>
 
 ## Popular topics in April 2018
 {: #apr18}
