@@ -6,7 +6,7 @@ lastupdated: "2018-05-1"
 
 ---
 
-{:new_window: target="blank"}
+{:new_window: target="_blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -542,7 +542,7 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
 
 2. [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster that you want to collect API server audit logs from. **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
 
-To forward Kubernetes API audit logs:
+**To forward Kubernetes API audit log**
 
 1. Set up the webhook. If you do not provide any information in the flags, a default configuration is used.
 
