@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-04-30"
+lastupdated: "2018-05-1"
 
 ---
 
@@ -249,6 +249,8 @@ You successfully created a PV object and bound it to a PVC. Cluster users can no
 
 Before you begin, make sure that you have an existing block storage instance that you can use to create your PV. For example, if you previously [created a PVC with a `retain` storage class policy](#create), you can use that retained data in the existing block storage for this new PVC.
 
+**Note**: Block storage is a `ReadWriteOnce` access mode device. You can be mount it to only one worker node in the cluster at a time.
+
 To create a PV and matching PVC, follow these steps.
 
 1.  Retrieve or generate an API key for your IBM Cloud infrastructure (SoftLayer) account.
@@ -413,6 +415,8 @@ Create a persistent volume claim (PVC) to provision NFS file storage or block st
 {:shortdesc}
 
 The NFS file storage and block storage that backs the PV is clustered by IBM in order to provide high availability for your data. The storage classes describe the types of storage offerings available and define aspects such as the data retention policy, size in gigabytes, and IOPS when you create your PV.
+
+**Note**: Block storage is a `ReadWriteOnce` access mode device. You can mount it to only one worker node in the cluster at a time. NFS file storage is a `ReadWriteMany` access mode, so you can mount it to multiple workers within the cluster.
 
 Before you begin:
 - If you have a firewall, [allow egress access](cs_firewall.html#pvc) for the IBM Cloud infrastructure (SoftLayer) IP ranges of the locations that your clusters are in so that you can create PVCs.
