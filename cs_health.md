@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-04-30"
+lastupdated: "2018-05-1"
 
 ---
 
@@ -22,9 +22,6 @@ lastupdated: "2018-04-30"
 Set up logging and monitoring in {{site.data.keyword.containerlong}} to help you troubleshoot issues and improve the health and performance of your Kubernetes clusters and apps.
 {: shortdesc}
 
-
-If you encounter any issues, try running through this [troubleshooting guide](cs_troubleshoot_health.html).
-{: tip}
 
 
 ## Configuring cluster and app log forwarding
@@ -158,59 +155,58 @@ You can create a configuration for cluster logging. You can differentiate betwee
       If you have apps that run in your containers that can't be configured to write logs to STDOUT or STDERR, you can create a logging configuration to forward logs from app log files.
       {: tip}
 
-
   <table>
-  <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
-      <td>The name or ID of the cluster.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;log_source&gt;</em></code></td>
-      <td>The source that you want to forward logs from. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, and <code>ingress</code>.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;kubernetes_namespace&gt;</em></code></td>
-      <td>Optional: The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the <code>container</code> log source. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;hostname_or_ingestion_URL&gt;</em></code></td>
-      <td><p>For {{site.data.keyword.loganalysisshort_notm}}, use the [ingestion URL](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region in which you created your cluster is used.</p>
-      <p>For syslog, specify the hostname or IP address of the log collector service.</p></td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;port&gt;</em></code></td>
-      <td>The ingestion port. If you do not specify a port, then the standard port <code>9091</code> is used.
-      <p>For syslog, specify the port of the log collector server. If you do not specify a port, then the standard port <code>514</code> is used.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;cluster_space&gt;</em></code></td>
-      <td>Optional: The name of the Cloud Foundry space that you want to send logs to. When forwarding logs to {{site.data.keyword.loganalysisshort_notm}}, the space and org are specified in the ingestion point. If you do not specify a space, logs are sent to the account level.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;cluster_org&gt;</em></code></td>
-      <td>The name of the Cloud Foundry org that the space is in. This value is required if you specified a space.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;type&gt;</em></code></td>
-      <td>Where you want to forward your logs. Options are <code>ibm</code>, which forwards your logs to {{site.data.keyword.loganalysisshort_notm}} and <code>syslog</code>, which forwards your logs to an external server.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;paths_to_logs&gt;</em></code></td>
-      <td>The path on a container that the apps log to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma separated list. Example: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;containers&gt;</em></code></td>
-      <td>Optional: To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma separated list. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided.</td>
-    </tr>
-    <tr>
-      <td><code><em>--skip-validation</em></code></td>
-      <td>Optional: Skip the validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration will not correctly forward logs.</td>
-    </tr>
-  </tbody>
+    <thead>
+      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
+        <td>The name or ID of the cluster.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;log_source&gt;</em></code></td>
+        <td>The source that you want to forward logs from. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, and<code>ingress</code>.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;kubernetes_namespace&gt;</em></code></td>
+        <td>Optional: The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the <code>container</code> log source. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;hostname_or_ingestion_URL&gt;</em></code></td>
+        <td><p>For {{site.data.keyword.loganalysisshort_notm}}, use the [ingestion URL](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region in which you created your cluster is used.</p>
+        <p>For syslog, specify the hostname or IP address of the log collector service.</p></td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;port&gt;</em></code></td>
+        <td>The ingestion port. If you do not specify a port, then the standard port <code>9091</code> is used.
+        <p>For syslog, specify the port of the log collector server. If you do not specify a port, then the standard port <code>514</code> is used.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;cluster_space&gt;</em></code></td>
+        <td>Optional: The name of the Cloud Foundry space that you want to send logs to. When forwarding logs to {{site.data.keyword.loganalysisshort_notm}}, the space and org are specified in the ingestion point. If you do not specify a space, logs are sent to the account level.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;cluster_org&gt;</em></code></td>
+        <td>The name of the Cloud Foundry org that the space is in. This value is required if you specified a space.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;type&gt;</em></code></td>
+        <td>Where you want to forward your logs. Options are <code>ibm</code>, which forwards your logs to {{site.data.keyword.loganalysisshort_notm}} and <code>syslog</code>, which forwards your logs to an external server.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;paths_to_logs&gt;</em></code></td>
+        <td>The path on a container that the apps log to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma separated list. Example: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;containers&gt;</em></code></td>
+        <td>Optional: To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma separated list. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided.</td>
+      </tr>
+      <tr>
+        <td><code><em>--skip-validation</em></code></td>
+        <td>Optional: Skip the validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration will not correctly forward logs.</td>
+      </tr>
+    </tbody>
   </table>
 
 2. Verify that your configuration is correct in one of two ways:
@@ -501,19 +497,19 @@ You can stop forwarding logs one or all of the logging configurations for a clus
 <li>To delete one logging configuration:</br>
   <pre><code>bx cs logging-config-rm &lt;cluster_name_or_ID&gt; --id &lt;log_config_ID&gt;</pre></code>
   <table>
-      <thead>
-        <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
-      </thead>
-        <tbody>
-        <tr>
-          <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
-          <td>The name of the cluster that the logging configuration is in.</td>
-        </tr>
-        <tr>
-          <td><code><em>&lt;log_config_ID&gt;</em></code></td>
-          <td>The ID of the log source configuration.</td>
-        </tr>
-  </tbody>
+    <thead>
+      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
+        <td>The name of the cluster that the logging configuration is in.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;log_config_ID&gt;</em></code></td>
+        <td>The ID of the log source configuration.</td>
+      </tr>
+    </tbody>
   </table></li>
 <li>To delete all of the logging configurations:</br>
   <pre><code>bx cs logging-config-rm <my_cluster> --all</pre></code></li>
@@ -528,6 +524,7 @@ You can stop forwarding logs one or all of the logging configurations for a clus
 You can configure a webhook through the Kubernetes API server to capture any calls from your cluster. With a webhook enabled, logs can be sent to a remote server.
 {: shortdesc}
 
+
 For more information about Kubernetes audit logs, see the <a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="blank">auditing topic <img src="../icons/launch-glyph.svg" alt="External link icon"></a> in the Kubernetes documentation.
 
 * Forwarding for Kubernetes API audit logs is only supported for Kubernetes version 1.7 and later.
@@ -536,16 +533,16 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
 * Currently, filters are not supported.
 {: tip}
 
-### Enabling Kubernetes API audit log forwarding
+### Sending audit logs to an external server
 {: #audit_enable}
 
-Before you begin:
+**Before you begin**
 
 1. Set up a remote logging server where you can forward the logs. For example, you can [use Logstash with Kubernetes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/#use-logstash-to-collect-and-distribute-audit-events-from-webhook-backend) to collect audit events.
 
 2. [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster that you want to collect API server audit logs from. **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
 
-To forward Kubernetes API audit logs:
+**To forward Kubernetes API audit log**
 
 1. Set up the webhook. If you do not provide any information in the flags, a default configuration is used.
 
@@ -554,32 +551,33 @@ To forward Kubernetes API audit logs:
     ```
     {: pre}
 
-    <table>
+  <table>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
+      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
     </thead>
     <tbody>
-    <tr>
-    <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
-    <td>The name or ID of the cluster.</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;server_URL&gt;</em></code></td>
-    <td>The URL or IP address for the remote logging service that you want to send logs to. Certificates are ignored if you provide an unsecure server URL.</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;CA_cert_path&gt;</em></code></td>
-    <td>The file path for the CA certificate that is used to verify the remote logging service.</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;client_cert_path&gt;</em></code></td>
-    <td>The file path for the client certificate that is used to authenticate against the remote logging service.</td>
-    </tr>
-    <tr>
-    <td><code><em>&lt;client_key_path&gt;</em></code></td>
-    <td>The file path for the corresponding client key that is used to connect to the remote logging service.</td>
-    </tr>
-    </tbody></table>
+      <tr>
+        <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
+        <td>The name or ID of the cluster.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;server_URL&gt;</em></code></td>
+        <td>The URL or IP address for the remote logging service that you want to send logs to. Certificates are ignored if you provide an unsecure server URL.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;CA_cert_path&gt;</em></code></td>
+        <td>The file path for the CA certificate that is used to verify the remote logging service.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;client_cert_path&gt;</em></code></td>
+        <td>The file path for the client certificate that is used to authenticate against the remote logging service.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;client_key_path&gt;</em></code></td>
+        <td>The file path for the corresponding client key that is used to connect to the remote logging service.</td>
+      </tr>
+    </tbody>
+  </table>
 
 2. Verify that log forwarding was enabled by viewing the URL for the remote logging service.
 
@@ -601,6 +599,9 @@ To forward Kubernetes API audit logs:
     bx cs apiserver-refresh <cluster_name_or_ID>
     ```
     {: pre}
+
+
+
 
 ### Stopping Kubernetes API audit log forwarding
 {: #audit_delete}
@@ -624,6 +625,10 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
     {: pre}
 
 <br />
+
+
+
+
 
 
 ## Viewing metrics

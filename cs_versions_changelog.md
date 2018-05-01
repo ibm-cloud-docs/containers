@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-04-30"
+lastupdated: "2018-05-1"
 
 ---
 
@@ -29,11 +29,74 @@ For a summary of migration actions, see [Kubernetes versions](cs_versions.html).
 {: tip}
 
 For information about changes since the previous version, see the following changelogs.
+-  Version 1.10 [changelog](#110_changelog).
 -  Version 1.9 [changelog](#19_changelog).
 -  Version 1.8 [changelog](#18_changelog).
 -  Version 1.7 [changelog](#17_changelog).
 
+## Version 1.10 changelog
+{: #110_changelog}
 
+Review the following changes.
+
+### Changelog for 1.10.1_1508
+{: #1101_1508}
+
+<table summary="Changes since version 1.9.7_1510">
+<caption>Changes since version 1.9.7_1510</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v2.6.5</td>
+<td>v3.1.1</td>
+<td>See the Calico [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/releases/#v311).</td>
+</tr>
+<tr>
+<td>Kubernetes Heapster</td>
+<td>v1.5.0</td>
+<td>v1.5.2</td>
+<td>See the Kubernetes Heapster [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/heapster/releases/tag/v1.5.2).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.9.7</td>
+<td>v1.10.1</td>
+<td>See the Kubernetes [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.1).</td>
+</tr>
+<tr>
+<td>Kubernetes Configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Added <code>StorageObjectInUseProtection</code> to the <code>--enable-admission-plugins</code> option for the cluster's Kubernetes API server.</td>
+</tr>
+<tr>
+<td>Kubernetes DNS</td>
+<td>1.14.8</td>
+<td>1.14.10</td>
+<td>See the Kubernetes DNS [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/releases/tag/1.14.10).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.9.7-102</td>
+<td>v1.10.1-52</td>
+<td>Updated to support Kubernetes 1.10 release.</td>
+</tr>
+<tr>
+<td>GPU support</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Support for [graphics processing unit (GPU) container workloads](cs_app.html#gpu_app) is now available for scheduling and execution. For a list of available GPU machine types, see [Hardware for worker nodes](cs_clusters.html#shared_dedicated_node). For more information, see the Kubernetes documentation to [Schedule GPUs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
+</tr>
+</tbody>
+</table>
 
 ## Version 1.9 changelog
 {: #19_changelog}

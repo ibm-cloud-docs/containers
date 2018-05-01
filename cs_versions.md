@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-04-30"
+lastupdated: "2018-05-1"
 
 ---
 
@@ -25,9 +25,9 @@ lastupdated: "2018-04-30"
 
 The current supported Kubernetes versions are:
 
-- Latest: 1.9.7
-- Default: 1.8.11
-- Supported: 1.7.16
+- Latest: 1.10.1
+- Default: 1.9.7
+- Supported: 1.8.11, 1.7.16
 
 **Deprecated Versions**: When clusters are running on a deprecated Kubernetes, you have 30 days to review and update to a supported Kubernetes version before the version becomes unsupported. During the deprecation period, you can run limited commands in your clusters to add workers, reload workers, and update the cluster. You cannot create new clusters in the deprecated version.
 
@@ -43,7 +43,7 @@ kubectl version  --short | grep -i server
 Example output:
 
 ```
-Server Version: v1.8.11+9d6e0610086578
+Server Version: v1.9.7+9d6e0610086578
 ```
 {: screen}
 
@@ -70,6 +70,7 @@ As updates become available, you are notified when you view information about th
 <br/>
 
 This information summarizes updates that are likely to have impact on deployed apps when you update a cluster to a new version from the previous version.
+-  Version 1.10 [migration actions](#cs_v110).
 -  Version 1.9 [migration actions](#cs_v19).
 -  Version 1.8 [migration actions](#cs_v18).
 -  Version 1.7 [migration actions](#cs_v17).
@@ -81,7 +82,99 @@ For a complete list of changes, review the following information:
 * [Kubernetes changelog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md).
 * [IBM version changelog](cs_versions_changelog.html).
 
+## Version 1.10
+{: #cs_v110}
 
+Review changes that you might need to make when you are updating from the previous Kubernetes version to 1.10.
+
+**Important**: Before you can successfully update to Kubernetes 1.10, you must follow the steps listed in [Preparing to update to Calico v3](#110_calicov3).
+
+<br/>
+
+### Update before master
+{: #110_before}
+
+<table summary="Kubernetes updates for version 1.10">
+<caption>Changes to make before you update the master to Kubernetes 1.10</caption>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico v3</td>
+<td>Updating to Kubernetes version 1.10 also updates Calico from v2.6.5 to v3.1.1. <strong>Important</strong>: Before you can successfully update to Kubernetes v1.10, you must follow the steps listed in [Preparing to update to Calico v3](#110_calicov3).</td>
+</tr>
+<tr>
+<td>Kubernetes Dashboard network policy</td>
+<td>In Kubernetes 1.10, the <code>kubernetes-dashboard</code> network policy in the <code>kube-system</code> namespace blocks all pods from accessing the Kubernetes dashboard. However, this does <strong>not</strong> impact the ability to access the dashboard from the {{site.data.keyword.Bluemix_notm}} console or by using <code>kubectl proxy</code>. If a pod requires access to the dashboard, you can add a <code>kubernetes-dashboard-policy: allow</code> label to a namespace and then deploy the pod to the namespace.</td>
+</tr>
+<tr>
+<td>Kubelet API access</td>
+<td>Kubelet API authorization is now delegated to the <code>Kubernetes API server</code>. Access to the Kubelet API is based on <code>ClusterRoles</code> that grant permission to access <strong>node</strong> subresources. By default, Kubernetes Heapster has <code>ClusterRole</code> and <code>ClusterRoleBinding</code>. However, if the Kubelet API is used by other users or apps, you must grant them permission to use the API. Refer to the Kubernetes documentation on [Kubelet authorization![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/kubelet-authentication-authorization/#kubelet-authorization).</td>
+</tr>
+</tbody>
+</table>
+
+### Update after master
+{: #110_after}
+
+<table summary="Kubernetes updates for version 1.10">
+<caption>Changes to make after you update the master to Kubernetes 1.10</caption>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico v3</td>
+<td>When the cluster is updated, all existing Calico data that is applied to the cluster is automatically migrated to use Calico v3 syntax. To view, add, or modify Calico resources with Calico v3 syntax, update your [Calico CLI configuration to version 3.1.1](#110_calicov3).</td>
+</tr>
+<tr>
+<td>Node <code>ExternalIP</code> address</td>
+<td>The <code>ExternalIP</code> field of a node is now set to the public IP address value of the node. Review and update any resources that depend on this value.</td>
+</tr>
+<tr>
+<td><code>kubectl port-forward</code></td>
+<td>Now when you use the <code>kubectl port-forward</code> command, it no longer supports the <code>-p</code> flag. If your scripts rely on the previous behavior, update them to replace the <code>-p</code> flag with the pod name.</td>
+</tr>
+<tr>
+<td>Read-only API data volumes</td>
+<td>Now `secret`, `configMap`, `downwardAPI`, and projected volumes are mounted read-only.
+Previously, apps were allowed to write data to these volumes that might be
+reverted automatically by the system. This migration action is required to fix
+security vulnerability [CVE-2017-1002102![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102).
+If your apps rely on the previous insecure behavior, modify them accordingly.</td>
+</tr>
+</tbody>
+</table>
+
+### Preparing to update to Calico v3
+{: #110_calicov3}
+
+Before you begin, your cluster master and all worker nodes must be running Kubernetes version 1.8 or later, and must have at least one worker node.
+
+**Important**: Prepare for the Calico v3 update before you update the master. During the master upgrade to Kubernetes v1.10, new pods and new Kubernetes or Calico network policies are not scheduled. The amount of time that the update prevents new scheduling varies. Small clusters can take a few minutes, with a few extra minutes for every 10 nodes. Existing network policies and pods continue to run.
+
+1.  Verify that your Calico pods are healthy.
+    ```
+    kubectl get pods -n kube-system -l k8s-app=calico-node -o wide
+    ```
+    {: pre}
+    
+2.  If any pod is not in a **Running** state, delete the pod and wait until it is in a **Running** state before you continue.
+
+3.  If you auto-generate Calico policies or other Calico resources, update your automation tooling to generate these resources with [Calico v3 syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/).
+
+4.  If you use [strongSwan](cs_vpn.html#vpn-setup) for VPN connectivity, the strongSwan 2.0.0 Helm chart does not work with Calico v3 or Kubernetes 1.10. [Update strongSwan](cs_vpn.html#vpn_upgrade) to the 2.1.0 Helm chart, which is backward compatible with Calico 2.6, and Kubernetes 1.7, 1.8, and 1.9.
+
+5.  [Update your cluster master to Kubernetes v1.10](cs_cluster_update.html#master).
+
+<br />
 
 
 ## Version 1.9

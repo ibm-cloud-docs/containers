@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-04-30"
+lastupdated: "2018-05-1"
 
 ---
 
@@ -108,14 +108,15 @@ When you create a standard cluster in {{site.data.keyword.Bluemix_notm}}, you ch
 <dt>Physical machines (bare metal)</dt>
 <dd>You can provision your worker node as a single-tenant physical server, also referred to as bare metal. Bare metal gives you direct access to the physical resources on the machine, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all of a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance.
 <p><strong>Monthly billing</strong>: Bare metal servers are more expensive than virtual servers, and are best suited for high-performance apps that need more resources and host control. Bare metal servers are billed monthly. If you cancel a bare metal server before the end of the month, you are charged through the end of that month. Ordering and canceling bare metal servers is a manual process through your IBM Cloud infrastructure (SoftLayer) account. It can take more than one business day to complete.</p>
-<p><strong>Option to enable Trusted Compute</strong>: Enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `bx cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containershort_notm}} with Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute is available on clusters that run Kubernetes version 1.9 or later and have certain bare metal machine types. When you run the `bx cs machine-types <location>` [command](cs_cli_reference.html#cs_machine_types), you can see which machines support trust by reviewing the `Trustable` field.</p>
+<p><strong>Option to enable Trusted Compute</strong>: Enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `bx cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containershort_notm}} with Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute is available on clusters that run Kubernetes version 1.9 or later and have certain bare metal machine types. When you run the `bx cs machine-types <location>` [command](cs_cli_reference.html#cs_machine_types), you can see which machines support trust by reviewing the `Trustable` field. For example, `mgXc` GPU flavors do not support Trusted Compute.</p>
 <p><strong>Bare metal machine type groups</strong>: Bare metal machine types come in groups that have different compute resources that you can choose from to meet your app's needs. Physical machine types have more local storage than virtual, and some have RAID to back up local data. To learn about the different types of bare metal offerings, see the `bx cs machine-type` [command](cs_cli_reference.html#cs_machine_types).
 <ul><li><strong>mb1c.4x32</strong>: If you don't need RAM-, GPU- or data-intensive resources, choose this type for a balanced configuration of physical machine resources for your worker nodes. Balanced with 4 cores, 32GB Memory, 2TB SATA Primary Disk, 2TB SATA Secondary Disk, and 10Gbps Bonded Network.</li>
 <li><strong>mb1c.16x64</strong>: If you don't need RAM-, GPU- or data-intensive resources, choose this type for a balanced configuration of physical machine resources for your worker nodes. Balanced with 16 cores, 64GB Memory, 2TB SATA Primary Disk, 960GB SSD Secondary Disk, and 10Gbps Bonded Network.</li>
 <li><strong>mr1c.28x512</strong>: Maximize the RAM available to your worker nodes. RAM intensive with 28 cores, 512GB Memory, 2TB SATA Primary Disk, 960GB SSD Secondary Disk, and 10Gbps Bonded Network.</li>
 <li><strong>md1c.16x64.4x4tb</strong>: Provision worker nodes with a significant amount of local disk storage, including RAID to back up data that is stored locally on the machine. The 2x2TB primary storage disks are configured for RAID1, and the 4x4TB secondary storage disks are configured for RAID10. Data intensive with 16 cores, 64GB Memory, 2x2TB RAID1 Primary Disk, 4x4TB SATA RAID10 Secondary Disk, and 10Gbps Bonded Network.</li>
 <li><strong>md1c.28x512.4x4tb</strong>: Provision worker nodes with a significant amount of local disk storage, including RAID to back up data that is stored locally on the machine. The 2x2TB primary storage disks are configured for RAID1, and the 4x4TB secondary storage disks are configured for RAID10. Data intensive with 28 cores, 512GB Memory, 2x2TB RAID1 Primary Disk, 4x4TB SATA RAID10 Secondary Disk, and 10Gbps Bonded Network.</li>
-
+<li><strong>mg1c.16x128</strong>: Choose this type if your worker nodes require graphics processing units (GPUs) for mathematically-intensive workloads such as 3D applications. This flavor has 1 physical card that has 2 GPUs per card for a total of 2 GPUs. The machine has 16 cores, 128GB Memory, 2TB SATA Primary Disk, 960GB SSD Secondary Disk, and 10Gbps Bonded Network.</li>
+<li><strong>mg1c.28x256</strong>: Choose this type if your worker nodes require GPUs for mathematically-intensive workloads such as 3D applications. This flavor has 2 physical cards that have 2 GPUs per card for a total of 4 GPUs. The machine has 28 cores, 256GB Memory, 2TB SATA Primary Disk, 960GB SSD Secondary Disk, and 10Gbps Bonded Network.</li>
 </ul></p></dd>
 <dt>Virtual machines</dt>
 <dd>When you create a standard virtual cluster, you must choose whether you want the underlying hardware to be shared by multiple {{site.data.keyword.IBM_notm}} customers (multi tenancy) or to be dedicated to you only (single tenancy).
@@ -279,7 +280,7 @@ To create a cluster:
         -  View the **Server Type** field to choose virtual or physical (bare metal) machines.
         -  **Virtual**: Billed hourly, virtual machines are provisioned on shared or dedicated hardware.
         -  **Physical**: Billed monthly, bare metal servers are provisioned by manual interaction with IBM Cloud infrastructure (SoftLayer), and can take more than one business day to complete. Bare metal is best suited for high-performance applications that need more resources and host control.
-        - **Physical machines with Trusted Compute**: For bare metal clusters that run Kubernetes version 1.9 or later, you can also choose to enable [Trusted Compute](cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `bx cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.
+        - **Physical machines with Trusted Compute**: For bare metal clusters that run Kubernetes version 1.9 or later, you can also choose to enable [Trusted Compute](cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. Trusted Compute is available for select bare metal machine types. For example, `mgXc` GPU flavors do not support Trusted Compute. If you don't enable trust during cluster creation but want to later, you can use the `bx cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.
         -  **Machine types**: To decide what machine type to deploy, review the core, memory, and storage combinations or consult the `bx cs machine-types` [command documentation](cs_cli_reference.html#cs_machine_types). After you create your cluster, you can add different physical or virtual machine types by using the `bx cs worker-add` [command](cs_cli_reference.html#cs_worker_add).
 
            Be sure that you want to provision a bare metal machine. Because it is billed monthly, if you cancel it immediately after an order by  mistake, you are still charged the full month.
@@ -377,7 +378,7 @@ To create a cluster:
         </tr>
         <tr>
         <td><code>--trusted</code></td>
-        <td>**Standard bare metal clusters**: Enable [Trusted Compute](cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `bx cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</td>
+        <td>**Standard bare metal clusters**: Enable [Trusted Compute](cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. Trusted Compute is available for select bare metal machine types. For example, `mgXc` GPU flavors do not support Trusted Compute. If you don't enable trust during cluster creation but want to later, you can use the `bx cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</td>
         </tr>
         </tbody></table>
 
@@ -394,7 +395,7 @@ To create a cluster:
 
     ```
     Name         ID                                   State      Created          Workers   Location   Version
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.8.11
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.9.7
     ```
     {: screen}
 
@@ -411,7 +412,7 @@ To create a cluster:
 
     ```
     ID                                                 Public IP       Private IP      Machine Type   State    Status   Location   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01      1.8.11
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01      1.9.7
     ```
     {: screen}
 
