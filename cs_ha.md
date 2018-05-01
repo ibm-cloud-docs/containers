@@ -38,6 +38,7 @@ The {{site.data.keyword.containerlong_notm}} architecture and infrastructure is 
 
 <img src="images/cs_failure_ov.png" alt="Overview of fault domains in a high availability cluster within an {{site.data.keyword.containershort_notm}} region." width="250" style="width:250px; border-style: none"/>
 
+
 <table summary="The table shows points of failure in {{site.data.keyword.containershort_notm}}. Rows are to be read from the left to right, with the number of the point of failure in column one, the title of the point of failure in column two, a description in column three, and a link to the documentation in column four.">
 <col width="3%">
 <col width="10%">
@@ -88,4 +89,6 @@ The {{site.data.keyword.containerlong_notm}} architecture and infrastructure is 
   </tr>
   </tbody>
   </table>
+
+
 

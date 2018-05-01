@@ -57,7 +57,7 @@ The following image shows available non-persistent data storage options in {{sit
     </table>
 
 ### Persistent data storage options for high availability
-{: persistent}
+{: #persistent}
 
 The main challenge when you create highly available stateful apps is to persist data across multiple app instances in multiple locations, and to keep data in sync always. For highly available data, you want to make sure that you have a master database with multiple instances that are spread across multiple data centers or even multiple regions. This master database must continuously be replicated to keep a single source of truth. All instances in your cluster must read from and write to this master database. In case one instance of the master is down, other instances take over the workload so that you do not experience downtime for your apps.
 {: shortdesc}
