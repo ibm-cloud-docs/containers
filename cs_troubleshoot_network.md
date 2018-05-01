@@ -528,10 +528,10 @@ Update the Helm chart values to reflect the worker node changes:
 {: tsSymptoms}
 When you try to view Calico network policies in your cluster by running `calicoctl get policy`, you get one of the following unexpected results or error messages:
 - An empty list
-- Old Calico v2 policies instead of v3 policies
+- A list of old Calico v2 policies instead of v3 policies
 - `Failed to create Calico API client: syntax error in calicoctl.cfg: invalid config file: unknown APIVersion 'projectcalico.org/v3'`
 
-When you try to view Calico network policies in your cluster by running `GlobalNetworkPolicy`, you get one of the following unexpected results or error messages:
+When you try to view Calico network policies in your cluster by running `calicoctl get GlobalNetworkPolicy`, you get one of the following unexpected results or error messages:
 - An empty list
 - `Failed to create Calico API client: syntax error in calicoctl.cfg: invalid config file: unknown APIVersion 'v1'`
 - `Failed to create Calico API client: syntax error in calicoctl.cfg: invalid config file: unknown APIVersion 'projectcalico.org/v3'`
