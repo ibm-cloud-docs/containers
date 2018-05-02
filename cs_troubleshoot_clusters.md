@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-2"
+lastupdated: "2018-05-02"
 
 ---
 
@@ -361,7 +361,7 @@ The deleted node is no longer listed in Calico.
 When you deploy your cluster, it remains in a pending state and doesn't start.
 
 {: tsCauses}
-If you just created the cluster, the worker nodes might still be configuring. If are waiting for awhile, you might have an invalid VLAN.
+If you just created the cluster, the worker nodes might still be configuring. If you already wait for awhile, you might have an invalid VLAN.
 
 {: tsResolve}
 
