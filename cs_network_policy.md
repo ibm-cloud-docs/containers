@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-2"
+lastupdated: "2018-05-02"
 
 ---
 
@@ -141,7 +141,7 @@ To add network policies:
 2. [Examine the existing network policies](#1.10_examine_policies).
 3. [Create new Calico network policies using v3 syntax to allow or block traffic](#1.10_create_new).
 
-#### Install and configure the version 3.1.1 Calico CLI
+#### Step 1: Install and configure the version 3.1.1 Calico CLI
 {: #1.10_install}
 
 1. [Download the Calico CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/projectcalico/calicoctl/releases/tag/v3.1.1).
@@ -306,7 +306,7 @@ To add network policies:
           ```
           {: screen}
 
-#### Examine the existing network policies
+#### Step 2: Examine the existing network policies
 {: #1.10_examine_policies}
 
 1. View the Calico host endpoint.
@@ -343,7 +343,7 @@ To add network policies:
     ```
     {: pre}
 
-#### Create new Calico network policies using v3 syntax to allow or block traffic
+#### Step 3: Create new Calico network policies using v3 syntax to allow or block traffic
 {: #1.10_create_new}
 
 1. Define your Calico [network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) or [global network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy) by creating a configuration script (`.yaml`). These configuration files include the selectors that describe what pods, namespaces, or hosts that these policies apply to. Refer to these [sample Calico policies ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) to help you create your own.
@@ -371,7 +371,7 @@ To add network policies:
 2. [Examine the existing network policies](#1.9_examine_policies).
 3. [Create new Calico network policies using v2 syntax to allow or block traffic](#1.9_create_new).
 
-#### Install and configure the version 1.6.3 Calico CLI
+#### Step 1: Install and configure the version 1.6.3 Calico CLI
 {: #1.9_install}
 
 1. [Download the Calico CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/projectcalico/calicoctl/releases/tag/v1.6.3).
@@ -535,7 +535,7 @@ To add network policies:
           ```
           {: screen}
 
-#### Examine the existing network policies
+#### Step 2: Examine the existing network policies
 {: #1.9_examine_policies}
 
 1. View the Calico host endpoint.
@@ -566,7 +566,7 @@ To add network policies:
     ```
     {: pre}
 
-#### Create new Calico network policies using v2 syntax to allow or block traffic
+#### Step 3: Create new Calico network policies using v2 syntax to allow or block traffic
 {: #1.9_create_new}
 
 1. Define your [Calico network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy) by creating a configuration script (`.yaml`). These configuration files include the selectors that describe what pods, namespaces, or hosts that these policies apply to. Refer to these [sample Calico policies ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy) to help you create your own.
