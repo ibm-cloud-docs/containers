@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-1"
+lastupdated: "2018-05-2"
 
 ---
 
@@ -34,7 +34,7 @@ If you have a more general issue, try out [cluster debugging](cs_troubleshoot.ht
 {: #cs_loadbalancer_fails}
 
 {: tsSymptoms}
-You publicly exposed your app by creating a load balancer service in your cluster. When you tried to connect to your app via the public IP address of the load balancer, the connection failed or timed out.
+You publicly exposed your app by creating a load balancer service in your cluster. When you tried to connect to your app by using the public IP address of the load balancer, the connection failed or timed out.
 
 {: tsCauses}
 Your load balancer service might not be working properly for one of the following reasons:
@@ -73,7 +73,7 @@ To troubleshoot your load balancer service:
     {: pre}
 
     1.  Check that you defined **LoadBalancer** as the type for your service.
-    2.  Make sure that the `<selector_key>` and `<selector_value>` that you use in the `spec.selector` section of the LoadBalancer service is the same as the key/ value pair that you used in the `spec.template.metadata.labels` section of your deployment yaml. If labels do not match, the **Endpoints** section in your LoadBalancer service displays **<none>** and your app is not accessible from the internet.
+    2.  In the `spec.selector` section of the LoadBalancer service, ensure that the `<selector_key>` and `<selector_value>` is the same as the key/value pair that you used in the `spec.template.metadata.labels` section of your deployment yaml. If labels do not match, the **Endpoints** section in your LoadBalancer service displays **<none>** and your app is not accessible from the internet.
     3.  Check that you used the **port** that your app listens on.
 
 3.  Check your load balancer service and review the **Events** section to find potential errors.
@@ -87,7 +87,7 @@ To troubleshoot your load balancer service:
 
     <ul><li><pre class="screen"><code>Clusters with one node must use services of type NodePort</code></pre></br>To use the load balancer service, you must have a standard cluster with at least two worker nodes.</li>
     <li><pre class="screen"><code>No cloud provider IPs are available to fulfill the load balancer service request. Add a portable subnet to the cluster and try again</code></pre></br>This error message indicates that no portable public IP addresses are left to be allocated to your load balancer service. Refer to <a href="cs_subnets.html#subnets">Adding subnets to clusters</a> to find information about how to request portable public IP addresses for your cluster. After portable public IP addresses are available to the cluster, the load balancer service is automatically created.</li>
-    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>You defined a portable public IP address for your load balancer service by using the **loadBalancerIP** section, but this portable public IP address is not available in your portable public subnet. Change your load balancer service configuration script and either choose one of the available portable public IP addresses, or remove the **loadBalancerIP** section from your script so that an available portable public IP address can be allocated automatically.</li>
+    <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>You defined a portable public IP address for your load balancer service by using the **loadBalancerIP** section, but this portable public IP address is not available in your portable public subnet. In the **loadBalancerIP** section your configuration script, remove the existing IP address and add one of the available portable public IP addresses. You can also remove the **loadBalancerIP** section from your script so that an available portable public IP address can be allocated automatically.</li>
     <li><pre class="screen"><code>No available nodes for load balancer services</code></pre>You do not have enough worker nodes to deploy a load balancer service. One reason might be that you deployed a standard cluster with more than one worker node, but the provisioning of the worker nodes failed.</li>
     <ol><li>List available worker nodes.</br><pre class="codeblock"><code>kubectl get nodes</code></pre></li>
     <li>If at least two available worker nodes are found, list the worker node details.</br><pre class="codeblock"><code>bx cs worker-get [&lt;cluster_name_or_ID&gt;] &lt;worker_ID&gt;</code></pre></li>
@@ -112,7 +112,7 @@ To troubleshoot your load balancer service:
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
-You publicly exposed your app by creating an Ingress resource for your app in your cluster. When you tried to connect to your app via the public IP address or subdomain of the Ingress application load balancer, the connection failed or timed out.
+You publicly exposed your app by creating an Ingress resource for your app in your cluster. When you tried to connect to your app by using the public IP address or subdomain of the Ingress application load balancer (ALB), the connection failed or timed out.
 
 {: tsCauses}
 Ingress might not be working properly for the following reasons:
@@ -125,7 +125,7 @@ Ingress might not be working properly for the following reasons:
 {: tsResolve}
 To troubleshoot your Ingress:
 
-1.  Check that you set up a standard cluster that is fully deployed and has at least two worker nodes to assure high availability for your Ingress application load balancer.
+1.  Check that you set up a standard cluster that is fully deployed and has at least two worker nodes to assure high availability for your ALB.
 
   ```
   bx cs workers <cluster_name_or_ID>
@@ -134,41 +134,41 @@ To troubleshoot your Ingress:
 
     In your CLI output, make sure that the **Status** of your worker nodes displays **Ready** and that the **Machine Type** shows a machine type other than **free**.
 
-2.  Retrieve the Ingress application load balancer subdomain and public IP address, and then ping each one.
+2.  Retrieve the ALB subdomain and public IP address, and then ping each one.
 
-    1.  Retrieve the application load balancer subdomain.
+    1.  Retrieve the ALB subdomain.
 
       ```
       bx cs cluster-get <cluster_name_or_ID> | grep "Ingress subdomain"
       ```
       {: pre}
 
-    2.  Ping the Ingress application load balancer subdomain.
+    2.  Ping the ALB subdomain.
 
       ```
       ping <ingress_controller_subdomain>
       ```
       {: pre}
 
-    3.  Retrieve the public IP address of your Ingress application load balancer.
+    3.  Retrieve the public IP address of your ALB.
 
       ```
       nslookup <ingress_controller_subdomain>
       ```
       {: pre}
 
-    4.  Ping the Ingress application load balancer public IP address.
+    4.  Ping the ALB public IP address.
 
       ```
       ping <ingress_controller_IP>
       ```
       {: pre}
 
-    If the CLI returns a timeout for the public IP address or subdomain of the Ingress application load balancer, and you have set up a custom firewall that is protecting your worker nodes, you might need to open additional ports and networking groups in your [firewall](cs_troubleshoot_clusters.html#cs_firewall).
+    If the CLI returns a timeout for the public IP address or subdomain of the ALB, and you have set up a custom firewall that is protecting your worker nodes, open more ports and networking groups in your [firewall](cs_troubleshoot_clusters.html#cs_firewall).
 
-3.  If you are using a custom domain, make sure that your custom domain is mapped to the public IP address or subdomain of the IBM-provided Ingress application load balancer with your Domain Name Service (DNS) provider.
-    1.  If you used the Ingress application load balancer subdomain, check your Canonical Name record (CNAME).
-    2.  If you used the Ingress application load balancer public IP address, check that your custom domain is mapped to the portable public IP address in the Pointer record (PTR).
+3.  If you are using a custom domain, make sure that your custom domain is mapped to the public IP address or subdomain of the IBM-provided ALB with your DNS provider.
+    1.  If you used the ALB subdomain, check your Canonical Name record (CNAME).
+    2.  If you used the ALB public IP address, check that your custom domain is mapped to the portable public IP address in the Pointer record (PTR).
 4.  Check your Ingress resource configuration file.
 
     ```
@@ -192,7 +192,7 @@ To troubleshoot your Ingress:
     ```
     {: codeblock}
 
-    1.  Check that the Ingress application load balancer subdomain and TLS certificate are correct. To find the IBM provided subdomain and TLS certificate, run `bx cs cluster-get <cluster_name_or_ID>`.
+    1.  Check that the ALB subdomain and TLS certificate are correct. To find the IBM provided subdomain and TLS certificate, run `bx cs cluster-get <cluster_name_or_ID>`.
     2.  Make sure that your app listens on the same path that is configured in the **path** section of your Ingress. If your app is set up to listen on the root path, include **/** as your path.
 5.  Check your Ingress deployment and look for potential warning or error messages.
 
@@ -230,7 +230,7 @@ To troubleshoot your Ingress:
     ```
     {: screen}
 
-6.  Check the logs for your application load balancer.
+6.  Check the logs for your ALB.
     1.  Retrieve the ID of the Ingress pods that are running in your cluster.
 
       ```
@@ -245,7 +245,7 @@ To troubleshoot your Ingress:
       ```
       {: pre}
 
-    3.  Look for error messages in the application load balancer logs.
+    3.  Look for error messages in the ALB logs.
 
 <br />
 
@@ -256,12 +256,12 @@ To troubleshoot your Ingress:
 {: #cs_albsecret_fails}
 
 {: tsSymptoms}
-After deploying an Ingress application load balancer secret to your cluster, the `Description` field is not updating with the secret name when you view your certificate in {{site.data.keyword.cloudcerts_full_notm}}.
+After you deploy an Ingress application load balancer (ALB) secret to your cluster, the `Description` field is not updating with the secret name when you view your certificate in {{site.data.keyword.cloudcerts_full_notm}}.
 
-When you list information about the application load balancer secret, the status says `*_failed`. For example, `create_failed`, `update_failed`, `delete_failed`.
+When you list information about the ALB secret, the status says `*_failed`. For example, `create_failed`, `update_failed`, `delete_failed`.
 
 {: tsResolve}
-Review the following reasons why the application load balancer secret might fail and the corresponding troubleshooting steps:
+Review the following reasons why the ALB secret might fail and the corresponding troubleshooting steps:
 
 <table>
  <thead>
@@ -271,7 +271,7 @@ Review the following reasons why the application load balancer secret might fail
  <tbody>
  <tr>
  <td>You do not have the required access roles to download and update certificate data.</td>
- <td>Check with your account Administrator to assign you both the **Operator** and **Editor** roles for your {{site.data.keyword.cloudcerts_full_notm}} instance. For more details, see <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">Managing service access</a> for {{site.data.keyword.cloudcerts_short}}.</td>
+ <td>Check with your account Administrator to assign you both the **Operator** and **Editor** roles for your {{site.data.keyword.cloudcerts_full_notm}} instance. For more information, see <a href="/docs/services/certificate-manager/access-management.html#managing-service-access-roles">Managing service access</a> for {{site.data.keyword.cloudcerts_short}}.</td>
  </tr>
  <tr>
  <td>The certificate CRN provided at time of create, update, or remove does not belong to the same account as the cluster.</td>
@@ -312,10 +312,10 @@ When you create a cluster, 8 public and 8 private portable subnets are requested
 
 To view how many subnets a VLAN has:
 1.  From the [IBM Cloud infrastructure (SoftLayer) console](https://control.bluemix.net/), select **Network** > **IP Management** > **VLANs**.
-2.  Click the **VLAN Number** of the VLAN that you used to create your cluster. Review the **Subnets** section to see if there are 40 or more subnets.
+2.  Click the **VLAN Number** of the VLAN that you used to create your cluster. Review the **Subnets** section to see whether 40 or more subnets exist.
 
 {: tsResolve}
-If you need a new VLAN, order one by [contacting {{site.data.keyword.Bluemix_notm}} support](/docs/get-support/howtogetsupport.html#getting-customer-support). Then [create a cluster](cs_cli_reference.html#cs_cluster_create) that uses this new VLAN.
+If you need a new VLAN, order one by [contacting {{site.data.keyword.Bluemix_notm}} support](/docs/get-support/howtogetsupport.html#getting-customer-support). Then, [create a cluster](cs_cli_reference.html#cs_cluster_create) that uses this new VLAN.
 
 If you have another VLAN that is available, you can [set up VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) in your existing cluster. After, you can add new worker nodes to the cluster that use the other VLAN with available subnets.
 
@@ -341,7 +341,7 @@ Your Helm chart configuration file has incorrect values, missing values, or synt
 {: tsResolve}
 When you try to establish VPN connectivity with the strongSwan Helm chart, it is likely that the VPN status will not be `ESTABLISHED` the first time. You might need to check for several types of issues and change your configuration file accordingly. To troubleshoot your strongSwan VPN connectivity:
 
-1. Check the on-prem VPN endpoint settings against the settings in your configuration file. If there are mismatches:
+1. Check the on-prem VPN endpoint settings against the settings in your configuration file. If the settings don't match:
 
     <ol>
     <li>Delete the existing Helm chart.</br><pre class="codeblock"><code>helm delete --purge <release_name></code></pre></li>
@@ -352,8 +352,8 @@ When you try to establish VPN connectivity with the strongSwan Helm chart, it is
 2. If the VPN pod is in an `ERROR` state or continues to crash and restart, it might be due to parameter validation of the `ipsec.conf` settings in the chart's config map.
 
     <ol>
-    <li>Check for any validation errors in the Strongswan pod logs.</br><pre class="codeblock"><code>kubectl logs -n kube-system $STRONGSWAN_POD</code></pre></li>
-    <li>If there are validation errors, delete the existing Helm chart.</br><pre class="codeblock"><code>helm delete --purge <release_name></code></pre></li>
+    <li>Check for any validation errors in the strongSwan pod logs.</br><pre class="codeblock"><code>kubectl logs -n kube-system $STRONGSWAN_POD</code></pre></li>
+    <li>If the logs contain validation errors, delete the existing Helm chart.</br><pre class="codeblock"><code>helm delete --purge <release_name></code></pre></li>
     <li>Fix the incorrect values in the `config.yaml` file and save the updated file.</li>
     <li>Install the new Helm chart.</br><pre class="codeblock"><code>helm install -f config.yaml --namespace=kube-system --name=<release_name> bluemix/strongswan</code></pre></li>
     </ol>
@@ -370,7 +370,7 @@ When you try to establish VPN connectivity with the strongSwan Helm chart, it is
     <li>To check your changes:<ol><li>Get the current test pods.</br><pre class="codeblock"><code>kubectl get pods -a -n kube-system -l app=strongswan-test</code></pre></li><li>Clean up the current test pods.</br><pre class="codeblock"><code>kubectl delete pods -n kube-system -l app=strongswan-test</code></pre></li><li>Run the tests again.</br><pre class="codeblock"><code>helm test vpn</code></pre></li>
     </ol></ol>
 
-4. Run the VPN debugging tool packaged inside of the VPN pod image.
+4. Run the VPN debugging tool that is packaged inside of the VPN pod image.
 
     1. Set the `STRONGSWAN_POD` environment variable.
 
@@ -397,20 +397,20 @@ When you try to establish VPN connectivity with the strongSwan Helm chart, it is
 {: tsSymptoms}
 You previously established a working VPN connection by using the strongSwan IPSec VPN service. However, after you added or deleted a worker node on your cluster, you experience one or more of the following symptoms:
 
-* you do not have a VPN status of `ESTABLISHED`
-* you cannot access new worker nodes from your on-prem network
-* you can not access the remote network from pods that are running on new worker nodes
+* You do not have a VPN status of `ESTABLISHED`
+* You cannot access new worker nodes from your on-prem network
+* You cannot access the remote network from pods that are running on new worker nodes
 
 {: tsCauses}
 If you added a worker node:
 
-* the worker node was provisioned on a new private subnet that is not exposed over the VPN connection by your existing `localSubnetNAT` or `local.subnet` settings
+* The worker node was provisioned on a new private subnet that is not exposed over the VPN connection by your existing `localSubnetNAT` or `local.subnet` settings
 * VPN routes cannot be added to the worker node because the worker has taints or labels that are not included in your existing `tolerations` or `nodeSelector` settings
-* the VPN pod is running on the new worker node, but the public IP address of that worker node is not allowed through the on-premises firewall
+* The VPN pod is running on the new worker node, but the public IP address of that worker node is not allowed through the on-premises firewall
 
 If you deleted a worker node:
 
-* that worker node was the only node where a VPN pod was running, due to restrictions on certain taints or labels in your existing `tolerations` or `nodeSelector` settings
+* That worker node was the only node where a VPN pod was running, due to restrictions on certain taints or labels in your existing `tolerations` or `nodeSelector` settings
 
 {: tsResolve}
 Update the Helm chart values to reflect the worker node changes:
@@ -429,7 +429,7 @@ Update the Helm chart values to reflect the worker node changes:
     ```
     {: pre}
 
-3. Check the following settings and make changes to reflect the deleted or added worker nodes as necessary.
+3. Check the following settings and change the settings to reflect the deleted or added worker nodes as necessary.
 
     If you added a worker node:
 
@@ -441,19 +441,19 @@ Update the Helm chart values to reflect the worker node changes:
      <tbody>
      <tr>
      <td><code>localSubnetNAT</code></td>
-     <td>The added worker node might be deployed on a new, different private subnet than the other existing subnets that other worker nodes are on. If you are using subnet NAT to remap your cluster's private local IP addresses and worker node was added on a new subnet, add the new subnet CIDR to this setting.</td>
+     <td>The added worker might be deployed on a new, different private subnet than the other existing subnets that other worker nodes are on. If you are using subnet NAT to remap your cluster's private local IP addresses and the worker was added on a new subnet, add the new subnet CIDR to this setting.</td>
      </tr>
      <tr>
      <td><code>nodeSelector</code></td>
-     <td>If you previously limited the VPN pod to running on any worker nodes with a specific label, and you want VPN routes to be added to the worker, make sure the added worker node has that label.</td>
+     <td>If you previously limited VPN pod deployment to workers with a specific label, ensure the added worker node also has that label.</td>
      </tr>
      <tr>
      <td><code>tolerations</code></td>
-     <td>If the added worker node is tainted, and you want VPN routes to be added to the worker, then change this setting to allow the VPN pod to run on all tainted worker nodes or worker nodes with specific taints.</td>
+     <td>If the added worker node is tainted, then change this setting to allow the VPN pod to run on all tainted workers with any taints or specific taints.</td>
      </tr>
      <tr>
      <td><code>local.subnet</code></td>
-     <td>The added worker node might be deployed on a new, different private subnet than the other existing subnets that other worker nodes are on. If your apps are exposed by NodePort or LoadBalancer services on the private network and they are on a new worker node that you added, add the new subnet CIDR to this setting. **Note**: If you add values to `local.subnet`, check the VPN settings for the on-premises subnet to see whether they also must be updated.</td>
+     <td>The added worker might be deployed on a new, different private subnet than the existing subnets that other workers are on. If your apps are exposed by NodePort or LoadBalancer services on the private network and the apps are on the added worker, add the new subnet CIDR to this setting. **Note**: If you add values to `local.subnet`, check the VPN settings for the on-premises subnet to see whether they also must be updated.</td>
      </tr>
      </tbody></table>
 
@@ -467,15 +467,15 @@ Update the Helm chart values to reflect the worker node changes:
      <tbody>
      <tr>
      <td><code>localSubnetNAT</code></td>
-     <td>If you are using subnet NAT to remap specific private local IP addresses, remove any IP addresses from this setting that are from the old worker node. If you are using subnet NAT to remap entire subnets and you have no worker nodes remaining on a subnet, remove that subnet CIDR from this setting.</td>
+     <td>If you are using subnet NAT to remap specific private local IP addresses, remove any IP addresses from this setting that are from the old worker. If you are using subnet NAT to remap entire subnets and no workers remain on a subnet, remove that subnet CIDR from this setting.</td>
      </tr>
      <tr>
      <td><code>nodeSelector</code></td>
-     <td>If you previously limited the VPN pod to running on a single worker node and that worker node was deleted, change this setting to allow the VPN pod to run on other worker nodes.</td>
+     <td>If you previously limited VPN pod deployment to a single worker and that worker was deleted, change this setting to allow the VPN pod to run on other workers.</td>
      </tr>
      <tr>
      <td><code>tolerations</code></td>
-     <td>If the worker node that you deleted was not tainted, but the only worker nodes that remain are tainted, change this setting to allow the VPN pod to run on all tainted worker nodes or worker nodes with specific taints.
+     <td>If the worker that you deleted was not tainted, but the only workers that remain are tainted, change this setting to allow the VPN pod to run on workers with any taints or specific taints.
      </td>
      </tr>
      </tbody></table>
@@ -554,16 +554,16 @@ To ensure that all Calico factors align:
     {: pre}
 
     * If your cluster is at Kubernetes version 1.10 or later:
-        1. Ensure that you have [installed and configured the version 3.1.1 Calico CLI](cs_network_policy.html#1.10_install). This includes manually updating the `calicoctl.cfg` file to use Calico v3 syntax.
-        2. Ensure that any policies you create and want to apply to your cluster use [Calico v3 syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy). If have an existing policy .yaml or .json file in Calico v2 syntax, you can convert it to Calico v3 syntax using the [`calicoctl convert` command ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert).
-        3. To [view policies](cs_network_policy.html#1.10_examine_policies), ensure that you are using `calicoctl get GlobalNetworkPolicy` for global policies and `calicoctl get NetworkPolicy --namespace <policy_namespace>` for policies scoped to specific namespaces.
+        1. [Install and configure the version 3.1.1 Calico CLI](cs_network_policy.html#1.10_install). Configuration includes manually updating the `calicoctl.cfg` file to use Calico v3 syntax.
+        2. Ensure that any policies you create and want to apply to your cluster use [Calico v3 syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy). If you have an existing policy `.yaml` or `.json` file in Calico v2 syntax, you can convert it to Calico v3 syntax by using the [`calicoctl convert` command ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/commands/convert).
+        3. To [view policies](cs_network_policy.html#1.10_examine_policies), ensure that you are using `calicoctl get GlobalNetworkPolicy` for global policies and `calicoctl get NetworkPolicy --namespace <policy_namespace>` for policies that are scoped to specific namespaces.
 
     * If your cluster is at Kubernetes version 1.9 or earlier:
-        1. Ensure that you have [installed and configured the version 1.6.3 Calico CLI](cs_network_policy.html#1.9_install). Make sure the `calicoctl.cfg` file uses Calico v2 syntax.
+        1. [Install and configure the version 1.6.3 Calico CLI](cs_network_policy.html#1.9_install). Ensure that the `calicoctl.cfg` file uses Calico v2 syntax.
         2. Ensure that any policies you create and want to apply to your cluster use [Calico v2 syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy).
         3. To [view policies](cs_network_policy.html#1.10_examine_policies), ensure that you are using `calicoctl get policy`.
 
-Before updating your cluster from Kubernetes version 1.9 or earlier to version 1.10 or later, be sure to review [Preparing to update to Calico v3](cs_versions.html#110_calicov3).
+Before you update your cluster from Kubernetes version 1.9 or earlier to version 1.10 or later, review [Preparing to update to Calico v3](cs_versions.html#110_calicov3).
 {: tip}
 
 <br />
@@ -577,12 +577,12 @@ Before updating your cluster from Kubernetes version 1.9 or earlier to version 1
 Still having issues with your cluster?
 {: shortdesc}
 
--   To see if {{site.data.keyword.Bluemix_notm}} is available, [check the {{site.data.keyword.Bluemix_notm}} status page ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/bluemix/support/#status).
+-   To see whether {{site.data.keyword.Bluemix_notm}} is available, [check the {{site.data.keyword.Bluemix_notm}} status page ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/bluemix/support/#status).
 -   Post a question in the [{{site.data.keyword.containershort_notm}} Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com).
 
     If you are not using an IBM ID for your {{site.data.keyword.Bluemix_notm}} account, [request an invitation](https://bxcs-slack-invite.mybluemix.net/) to this Slack.
     {: tip}
--   Review the forums to see if other users ran into the same issue. When you use the forums to ask a question, tag your question so that it is seen by the {{site.data.keyword.Bluemix_notm}} development teams.
+-   Review the forums to see whether other users ran into the same issue. When you use the forums to ask a question, tag your question so that it is seen by the {{site.data.keyword.Bluemix_notm}} development teams.
 
     -   If you have technical questions about developing or deploying clusters or apps with {{site.data.keyword.containershort_notm}}, post your question on [Stack Overflow ![External link icon](../icons/launch-glyph.svg "External link icon")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) and tag your question with `ibm-cloud`, `kubernetes`, and `containers`.
     -   For questions about the service and getting started instructions, use the [IBM developerWorks dW Answers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) forum. Include the `ibm-cloud` and `containers` tags.
@@ -591,5 +591,5 @@ Still having issues with your cluster?
 -   Contact IBM Support by opening a ticket. To learn about opening an IBM support ticket, or about support levels and ticket severities, see [Contacting support](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-When reporting an issue, include your cluster ID. To get your cluster ID, run `bx cs clusters`.
+When you report an issue, include your cluster ID. To get your cluster ID, run `bx cs clusters`.
 

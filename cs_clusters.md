@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-1"
+lastupdated: "2018-05-2"
 
 ---
 
@@ -546,7 +546,7 @@ You can view the current cluster state by running the `bx cs clusters` command a
    </tr>
    <tr>
      <td>Updating</td>
-     <td>The Kubernetes API server that runs in your Kubernetes master is being updated to a new Kubernetes API version. During the update you cannot access or change the cluster. Worker nodes, apps, and resources that have been deployed by the user are not modified and continue to run. Wait for the update to complete to review the health of your cluster. </td>
+     <td>The Kubernetes API server that runs in your Kubernetes master is being updated to a new Kubernetes API version. During the update, you cannot access or change the cluster. Worker nodes, apps, and resources that the user deployed are not modified and continue to run. Wait for the update to complete to review the health of your cluster. </td>
    </tr>
     <tr>
        <td>Warning</td>

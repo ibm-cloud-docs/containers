@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-1"
+lastupdated: "2018-05-2"
 
 ---
 
@@ -92,7 +92,7 @@ Review the options to debug your clusters and find the root causes for failures.
    </tr>
    <tr>
      <td>Updating</td>
-     <td>The Kubernetes API server that runs in your Kubernetes master is being updated to a new Kubernetes API version. During the update you cannot access or change the cluster. Worker nodes, apps, and resources that have been deployed by the user are not modified and continue to run. Wait for the update to complete to review the health of your cluster. </td>
+     <td>The Kubernetes API server that runs in your Kubernetes master is being updated to a new Kubernetes API version. During the update, you cannot access or change the cluster. Worker nodes, apps, and resources that the user deployed are not modified and continue to run. Wait for the update to complete to review the health of your cluster. </td>
    </tr>
     <tr>
        <td>Warning</td>
@@ -128,12 +128,12 @@ Review the options to debug your worker nodes and find the root causes for failu
     <tbody>
   <tr>
       <td>Critical</td>
-      <td>A worker node can go into a Critical state for many reasons. The most common reasons are the following: <ul><li>You initiated a reboot for your worker node without cordoning and draining your worker node. Rebooting a worker node can cause data corruption in <code>docker</code>, <code>kubelet</code>, <code>kube-proxy</code>, and <code>calico</code>. </li><li>The pods that are deployed to your worker node do not use resource limits for [memory ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/) and [CPU ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/). Without resource limits, pods can consume all available resources, leaving no resources for other pods to run on this worker node. This overcommitment of workload causes the worker node to fail. </li><li><code>Docker</code>, <code>kubelet</code> or <code>calico</code> went into an unrecoverable state after running hundreds or thousands of containers over time. </li><li>You set up a Vyatta for your worker node that went down and cut off the communication between your worker node and the Kubernetes master. </li><li> Current networking issues in {{site.data.keyword.containershort_notm}} or IBM Cloud infrastructure (SoftLayer) that causes the communication between your worker node and the Kubernetes master to fail.</li><li>Your worker node ran out of capacity. Check the <strong>Status</strong> of the worker node to see if it shows <strong>Out of disk</strong> or <strong>Out of memory</strong>. If your worker node is out of capacity, consider to either reduce the workload on your worker node or add a worker node to your cluster to help load balance the workload.</li></ul> In many cases, [reloading](cs_cli_reference.html#cs_worker_reload) your worker node can solve the problem. When you reload your worker node, the latest [patch version](cs_versions.html#version_types) is applied to your worker node. The major and minor version is not changed. Before you reload your worker node, make sure to cordon and drain your worker node to ensure that the existing pods are terminated gracefully and rescheduled onto remaining worker nodes. </br></br> If reloading the worker node does not resolve the issue, go to the next step to continue troubleshooting your worker node. </br></br><strong>Tip:</strong> You can [configure health checks for your worker node and enable Autorecovery](cs_health.html#autorecovery). If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. For more information about how Autorecovery works, see the [Autorecovery blog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
+      <td>A worker node can go into a Critical state for many reasons: <ul><li>You initiated a reboot for your worker node without cordoning and draining your worker node. Rebooting a worker node can cause data corruption in <code>docker</code>, <code>kubelet</code>, <code>kube-proxy</code>, and <code>calico</code>. </li><li>The pods that are deployed to your worker node do not use resource limits for [memory ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/) and [CPU ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/). Without resource limits, pods can consume all available resources, leaving no resources for other pods to run on this worker node. This overcommitment of workload causes the worker node to fail. </li><li><code>Docker</code>, <code>kubelet</code>, or <code>calico</code> went into an unrecoverable state after it ran hundreds or thousands of containers over time. </li><li>You set up a Vyatta for your worker node that went down and cut off the communication between your worker node and the Kubernetes master. </li><li> Current networking issues in {{site.data.keyword.containershort_notm}} or IBM Cloud infrastructure (SoftLayer) that causes the communication between your worker node and the Kubernetes master to fail.</li><li>Your worker node ran out of capacity. Check the <strong>Status</strong> of the worker node to see whether it shows <strong>Out of disk</strong> or <strong>Out of memory</strong>. If your worker node is out of capacity, consider to either reduce the workload on your worker node or add a worker node to your cluster to help load balance the workload.</li></ul> In many cases, [reloading](cs_cli_reference.html#cs_worker_reload) your worker node can solve the problem. When you reload your worker node, the latest [patch version](cs_versions.html#version_types) is applied to your worker node. The major and minor version is not changed. Before you reload your worker node, make sure to cordon and drain your worker node to ensure that the existing pods are terminated gracefully and rescheduled onto remaining worker nodes. </br></br> If reloading the worker node does not resolve the issue, go to the next step to continue troubleshooting your worker node. </br></br><strong>Tip:</strong> You can [configure health checks for your worker node and enable Autorecovery](cs_health.html#autorecovery). If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. For more information about how Autorecovery works, see the [Autorecovery blog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
       </td>
      </tr>
       <tr>
         <td>Deploying</td>
-        <td>When you update the Kubernetes version of your worker node, your worker node is redeployed to install the updates. If your worker node is stuck in this state for a long time, continue with the next step to see if a problem occurred during the deployment. </td>
+        <td>When you update the Kubernetes version of your worker node, your worker node is redeployed to install the updates. If your worker node is stuck in this state for a long time, continue with the next step to see whether a problem occurred during the deployment. </td>
      </tr>
         <tr>
         <td>Normal</td>
@@ -141,7 +141,7 @@ Review the options to debug your worker nodes and find the root causes for failu
      </tr>
    <tr>
         <td>Provisioning</td>
-        <td>Your worker node is being provisioned and is not available in the cluster yet. You can monitor the provisioning process in the <strong>Status</strong> column of your CLI output. If your worker node is stuck in this state for a long time, and you cannot see any progress in the <strong>Status</strong> column, continue with the next step to see if a problem occurred during the provisioning.</td>
+        <td>Your worker node is being provisioned and is not available in the cluster yet. You can monitor the provisioning process in the <strong>Status</strong> column of your CLI output. If your worker node is stuck in this state for a long time, continue with the next step to see whether a problem occurred during the provisioning.</td>
       </tr>
       <tr>
         <td>Provision_failed</td>
@@ -149,7 +149,7 @@ Review the options to debug your worker nodes and find the root causes for failu
       </tr>
    <tr>
         <td>Reloading</td>
-        <td>Your worker node is being reloaded and is not available in the cluster. You can monitor the reloading process in the <strong>Status</strong> column of your CLI output. If your worker node is stuck in this state for a long time, and you cannot see any progress in the <strong>Status</strong> column, continue with the next step to see if a problem occurred during the reloading.</td>
+        <td>Your worker node is being reloaded and is not available in the cluster. You can monitor the reloading process in the <strong>Status</strong> column of your CLI output. If your worker node is stuck in this state for a long time, continue with the next step to see whether a problem occurred during the reloading.</td>
        </tr>
        <tr>
         <td>Reloading_failed </td>
@@ -161,7 +161,7 @@ Review the options to debug your worker nodes and find the root causes for failu
       </tr>
       <tr>
        <td>Unknown</td>
-       <td>The Kubernetes master is not reachable for one of the following reasons:<ul><li>You requested an update of your Kubernetes master. The state of the worker node cannot be retrieved during the update.</li><li>You might have an additional firewall that is protecting your worker nodes, or changed firewall settings recently. {{site.data.keyword.containershort_notm}} requires certain IP addresses and ports to be opened to allow communication from the worker node to the Kubernetes master and vice versa. For more information, see [Firewall prevents worker nodes from connecting](cs_troubleshoot_clusters.html#cs_firewall).</li><li>The Kubernetes master is down. Contact {{site.data.keyword.Bluemix_notm}} support by opening an [{{site.data.keyword.Bluemix_notm}} support ticket](#ts_getting_help).</li></ul></td>
+       <td>The Kubernetes master is not reachable for one of the following reasons:<ul><li>You requested an update of your Kubernetes master. The state of the worker node cannot be retrieved during the update.</li><li>You might have another firewall that is protecting your worker nodes, or changed firewall settings recently. {{site.data.keyword.containershort_notm}} requires certain IP addresses and ports to be opened to allow communication from the worker node to the Kubernetes master and vice versa. For more information, see [Firewall prevents worker nodes from connecting](cs_troubleshoot_clusters.html#cs_firewall).</li><li>The Kubernetes master is down. Contact {{site.data.keyword.Bluemix_notm}} support by opening an [{{site.data.keyword.Bluemix_notm}} support ticket](#ts_getting_help).</li></ul></td>
   </tr>
      <tr>
         <td>Warning</td>
@@ -206,7 +206,7 @@ Review common error messages and learn how to resolve them.
       </tr>
       <tr>
         <td>{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not obtain network VLAN with ID: &lt;vlan id&gt;.</td>
-        <td>Your worker node could not be provisioned because the selected VLAN ID could not be found for one of the following reasons:<ul><li>You might have specified the VLAN number instead of the VLAN ID. The VLAN number is 3 or 4 digits long, whereas the VLAN ID is 7 digits long. Run <code>bx cs vlans &lt;location&gt;</code> to retrieve the VLAN ID.<li>The VLAN ID might not be associated with the IBM Cloud infrastructure (SoftLayer) account that you use. Run <code>bx cs vlans &lt;location&gt;</code> to list available VLAN IDs for your account. To change the IBM Cloud infrastructure (SoftLayer) account, see [bx cs credentials-set](cs_cli_reference.html#cs_credentials_set). </ul></td>
+        <td>Your worker node could not be provisioned because the selected VLAN ID could not be found for one of the following reasons:<ul><li>You might have specified the VLAN number instead of the VLAN ID. The VLAN number is 3 or 4 digits long, whereas the VLAN ID is 7 digits long. Run <code>bx cs vlans &lt;location&gt;</code> to retrieve the VLAN ID.<li>The VLAN ID might not be associated with the IBM Cloud infrastructure (SoftLayer) account that you use. Run <code>bx cs vlans &lt;location&gt;</code> to list available VLAN IDs for your account. To change the IBM Cloud infrastructure (SoftLayer) account, see [`bx cs credentials-set`](cs_cli_reference.html#cs_credentials_set). </ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation: The location provided for this order is invalid. (HTTP 500)</td>
@@ -220,11 +220,11 @@ Review common error messages and learn how to resolve them.
       </tr>
       <tr>
        <td>Worker unable to talk to {{site.data.keyword.containershort_notm}} servers. Please verify your firewall setup is allowing traffic from this worker.
-       <td><ul><li>If you have a firewall, [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](cs_firewall.html#firewall_outbound).</li><li>Check if your cluster does not have a public IP by running `bx cs workers <mycluster>`. If there is no public IP listed, then your cluster only has private VLANs.<ul><li>If you want the cluster to have only private VLANs, make sure that you have set up your [VLAN connection](cs_clusters.html#worker_vlan_connection) and your [firewall](cs_firewall.html#firewall_outbound).</li><li>If you want the cluster to have a public IP, [add new worker nodes](cs_cli_reference.html#cs_worker_add) with both public and private VLANs.</li></ul></li></ul></td>
+       <td><ul><li>If you have a firewall, [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](cs_firewall.html#firewall_outbound).</li><li>Check whether your cluster does not have a public IP by running `bx cs workers <mycluster>`. If no public IP is listed, then your cluster has only private VLANs.<ul><li>If you want the cluster to have only private VLANs, set up your [VLAN connection](cs_clusters.html#worker_vlan_connection) and your [firewall](cs_firewall.html#firewall_outbound).</li><li>If you want the cluster to have a public IP, [add new worker nodes](cs_cli_reference.html#cs_worker_add) with both public and private VLANs.</li></ul></li></ul></td>
      </tr>
       <tr>
   <td>Cannot create IMS portal token, as no IMS account is linked to the selected BSS account</br></br>Provided user not found or active</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus: User account is currently cancel_pending.</br></br>Waiting for machine to be visible to the user</td>
-  <td>The owner of the API key that is used to access the IBM Cloud infrastructure (SoftLayer) portfolio does not have the required permissions to perform the action, or might be pending deletion.</br></br><strong>As the user</strong>, follow these steps: <ol><li>If you have access to multiple accounts, make sure that you are logged in to the account where you want to work with {{site.data.keyword.containerlong_notm}}. </li><li>Run <code>bx cs api-key-info</code> to view the current API key owner that is used to access the IBM Cloud infrastructure (SoftLayer) portfolio. </li><li>Run <code>bx account list</code> to view the owner of the {{site.data.keyword.Bluemix_notm}} account that you currently use. </li><li>Contact the owner of the {{site.data.keyword.Bluemix_notm}} account and report that the API key owner that you retrieved earlier has insufficient permissions in IBM Cloud infrastructure (SoftLayer) or might be pending to be deleted. </li></ol></br><strong>As the account owner</strong>, follow these steps: <ol><li>Review the [required permissions in IBM Cloud infrastructure (SoftLayer)](cs_users.html#infra_access) to perform the action that previously failed. </li><li>Fix the permissions of the API key owner or create a new API key by using the [<code>bx cs api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) command. </li><li>If you or another account admin manually set IBM Cloud infrastructure (SoftLayer) credentials in your account, run [<code>bx cs credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset) to remove the credentials from your account.</li></ol></td>
+  <td>The owner of the API key that is used to access the IBM Cloud infrastructure (SoftLayer) portfolio does not have the required permissions to perform the action, or might be pending deletion.</br></br><strong>As the user</strong>, follow these steps: <ol><li>If you have access to multiple accounts, make sure that you are logged in to the account where you want to work with {{site.data.keyword.containerlong_notm}}. </li><li>Run <code>bx cs api-key-info</code> to view the current API key owner that is used to access the IBM Cloud infrastructure (SoftLayer) portfolio. </li><li>Run <code>bx account list</code> to view the owner of the {{site.data.keyword.Bluemix_notm}} account that you currently use. </li><li>Contact the owner of the {{site.data.keyword.Bluemix_notm}} account and report that the API key owner has insufficient permissions in IBM Cloud infrastructure (SoftLayer) or might be pending to be deleted. </li></ol></br><strong>As the account owner</strong>, follow these steps: <ol><li>Review the [required permissions in IBM Cloud infrastructure (SoftLayer)](cs_users.html#infra_access) to perform the action that previously failed. </li><li>Fix the permissions of the API key owner or create a new API key by using the [<code>bx cs api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) command. </li><li>If you or another account admin manually set IBM Cloud infrastructure (SoftLayer) credentials in your account, run [<code>bx cs credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset) to remove the credentials from your account.</li></ol></td>
   </tr>
     </tbody>
   </table>
@@ -246,9 +246,9 @@ Review the options that you have to debug your app deployments and find the root
  Example:
  <pre class="pre"><code>kubectl describe service &lt;service_name&gt; </code></pre>
 
-2. [Check if the containers are stuck in the ContainerCreating state](cs_troubleshoot_storage.html#stuck_creating_state).
+2. [Check whether the containers are stuck in the ContainerCreating state](cs_troubleshoot_storage.html#stuck_creating_state).
 
-3. Check if the cluster is in the `Critical` state. If the cluster is in a `Critical` state, check the firewall rules and verify that the master can communicate with the worker nodes.
+3. Check whether the cluster is in the `Critical` state. If the cluster is in a `Critical` state, check the firewall rules and verify that the master can communicate with the worker nodes.
 
 4. Verify that the service is listening on the correct port.
    1. Get the name of a pod.
@@ -263,7 +263,7 @@ Review the options that you have to debug your app deployments and find the root
      <pre class="pre"><code>kubectl get pods</code></pre>
    2. Log in to a container.
      <pre class="pre"><code>kubectl exec -it &lt;pod_name&gt; -- /bin/bash</code></pre>
-   3. Curl the cluster IP address and port of the service. If the IP address and port are not accessible, look at the endpoints for the service. If there are no endpoints, then the selector for the service does not match the pods. If there are endpoints, then look at the target port field on the service and make sure that the target port is the same as what is being used for the pods.
+   3. Curl the cluster IP address and port of the service. If the IP address and port are not accessible, look at the endpoints for the service. If no endpoints are listed, then the selector for the service does not match the pods. If endpoints are listed, then look at the target port field on the service and make sure that the target port is the same as what is being used for the pods.
      <pre class="pre"><code>curl &lt;cluster_IP&gt;:&lt;port&gt;</code></pre>
 
 6. For Ingress services, verify that the service is accessible from within the cluster.
@@ -283,12 +283,12 @@ Review the options that you have to debug your app deployments and find the root
 Still having issues with your cluster?
 {: shortdesc}
 
--   To see if {{site.data.keyword.Bluemix_notm}} is available, [check the {{site.data.keyword.Bluemix_notm}} status page ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/bluemix/support/#status).
+-   To see whether {{site.data.keyword.Bluemix_notm}} is available, [check the {{site.data.keyword.Bluemix_notm}} status page ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/bluemix/support/#status).
 -   Post a question in the [{{site.data.keyword.containershort_notm}} Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com).
 
     If you are not using an IBM ID for your {{site.data.keyword.Bluemix_notm}} account, [request an invitation](https://bxcs-slack-invite.mybluemix.net/) to this Slack.
     {: tip}
--   Review the forums to see if other users ran into the same issue. When you use the forums to ask a question, tag your question so that it is seen by the {{site.data.keyword.Bluemix_notm}} development teams.
+-   Review the forums to see whether other users ran into the same issue. When you use the forums to ask a question, tag your question so that it is seen by the {{site.data.keyword.Bluemix_notm}} development teams.
 
     -   If you have technical questions about developing or deploying clusters or apps with {{site.data.keyword.containershort_notm}}, post your question on [Stack Overflow ![External link icon](../icons/launch-glyph.svg "External link icon")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) and tag your question with `ibm-cloud`, `kubernetes`, and `containers`.
     -   For questions about the service and getting started instructions, use the [IBM developerWorks dW Answers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) forum. Include the `ibm-cloud` and `containers` tags.
@@ -297,5 +297,5 @@ Still having issues with your cluster?
 -   Contact IBM Support by opening a ticket. To learn about opening an IBM support ticket, or about support levels and ticket severities, see [Contacting support](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-When reporting an issue, include your cluster ID. To get your cluster ID, run `bx cs clusters`.
+When you report an issue, include your cluster ID. To get your cluster ID, run `bx cs clusters`.
 

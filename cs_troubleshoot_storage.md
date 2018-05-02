@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-1"
+lastupdated: "2018-05-2"
 
 ---
 
@@ -37,7 +37,7 @@ If you have a more general issue, try out [cluster debugging](cs_troubleshoot.ht
 {: #stuck_creating_state}
 You might see one of the following symptoms:
 - When you run `kubectl get pods -o wide`, you see that multiple pods that are running on the same worker node are stuck in the `ContainerCreating` state.
-- When you run a `kubectl describe` command, you see the following error in the events section: `MountVolume.SetUp failed for volume ... read-only file system`.
+- When you run a `kubectl describe` command, you see the following error in the **Events** section: `MountVolume.SetUp failed for volume ... read-only file system`.
 
 {: tsCauses}
 The file system on the worker node is read-only.
@@ -57,18 +57,18 @@ For a long-term fix, [update the machine type by adding another worker node](cs_
 {: #nonroot}
 
 {: tsSymptoms}
-After [adding NFS storage](cs_storage.html#app_volume_mount) to your deployment, the deployment of your container fails. When you retrieve the logs for your container, you might see errors such as "write-permission" or "do not have required permission". The pod fails and is stuck in a reload cycle.
+After you [add NFS storage](cs_storage.html#app_volume_mount) to your deployment, the deployment of your container fails. When you retrieve the logs for your container, you might see errors such as "write-permission" or "do not have required permission". The pod fails and is stuck in a reload cycle.
 
 {: tsCauses}
-By default, non-root users do not have write permission on the volume mount path for NFS-backed storage. Some common app images, such as Jenkins and Nexus3, specify a non-root user that owns the mount path in the Dockerfile. When you create a container from this Dockerfile, the creation of the container fails due to insufficient permissions of the non-root user on the mount path. To grant write permission, you can modify the Dockerfile to temporarily add the non-root user to the root user group before changing the mount path permissions, or use an init container.
+By default, non-root users do not have write permission on the volume mount path for NFS-backed storage. Some common app images, such as Jenkins and Nexus3, specify a non-root user that owns the mount path in the Dockerfile. When you create a container from this Dockerfile, the creation of the container fails due to insufficient permissions of the non-root user on the mount path. To grant write permission, you can modify the Dockerfile to temporarily add the non-root user to the root user group before it changes the mount path permissions, or use an init container.
 
-If you are using a Helm chart to deploy an image with a non-root user that you want to have write permissions on the NFS file share, first edit the Helm deployment to use an init container.
+If you use a Helm chart to deploy an image, edit the Helm deployment to use an init container.
 {:tip}
 
 
 
 {: tsResolve}
-When you include an [init container![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) in your deployment, you can give a non-root user that is specified in your Dockerfile write permissions to the volume mount path inside the container that points to your NFS file share. The init container starts before your app container starts. The init container creates the volume mount path inside the container, changes the mount path to be owned by the correct (non-root) user, and closes. Then, your app container starts, which includes the non-root user that must write to the mount path. Because the path is already owned by the non-root user, writing to the mount path is successful. If you do not want to use an init container, you can modify the Dockerfile to add non-root user access to NFS file storage.
+When you include an [init container![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) in your deployment, you can give a non-root user that is specified in your Dockerfile write permissions. The user has write permissions the volume mount path inside the container that points to your NFS file share. The init container starts before your app container starts. The init container creates the volume mount path inside the container, changes the mount path to be owned by the correct (non-root) user, and closes. Then, your app container starts, which includes the non-root user that must write to the mount path. Because the path is already owned by the non-root user, writing to the mount path is successful. If you do not want to use an init container, you can modify the Dockerfile to add non-root user access to NFS file storage.
 
 
 Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
@@ -257,13 +257,13 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
 {: #cs_storage_nonroot}
 
 {: tsSymptoms}
-After [adding non-root user access to persistent storage](#nonroot) or deploying a Helm chart with a non-root user ID specified, the user cannot write to the mounted storage.
+After you [add non-root user access to persistent storage](#nonroot) or deploying a Helm chart with a non-root user ID specified, the user cannot write to the mounted storage.
 
 {: tsCauses}
-The deployment or Helm chart configuration specifies the [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) for the pod's `fsGroup` (group ID) and `runAsUser` (user ID). Currently, {{site.data.keyword.containershort_notm}} does not support the `fsGroup` specification, and only supports `runAsUser` set as `0` (root permissions).
+The deployment or Helm chart configuration specifies the [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) for the pod's `fsGroup` (group ID) and `runAsUser` (user ID). Currently, {{site.data.keyword.containershort_notm}} does not support the `fsGroup` specification, and supports only `runAsUser` set as `0` (root permissions).
 
 {: tsResolve}
-Remove the configuration's `securityContext` fields for `fsGroup` and `runAsUser` from the image, deployment or Helm chart configuration file and redeploy. If you need to change the ownership of the mount path from `nobody`, [add non-root user access](#nonroot). After adding the [non-root initContainer](#nonroot), set `runAsUser` at the container level, not the pod level.
+Remove the configuration's `securityContext` fields for `fsGroup` and `runAsUser` from the image, deployment, or Helm chart configuration file and redeploy. If you need to change the ownership of the mount path from `nobody`, [add non-root user access](#nonroot). After you add the [non-root initContainer](#nonroot), set `runAsUser` at the container level, not the pod level.
 
 <br />
 
@@ -285,40 +285,40 @@ You have an existing block storage device that is set up with an `XFS` file syst
 The PV was created successfully and was linked to your existing block storage instance. However, when you try to mount the PV to your cluster by using a matching PVC, the volume fails to mount. You cannot mount your `XFS` block storage instance with an `ext4` file system to the pod.
 
 {: tsResolve}
-Update the file system in the existing PV from `ext4` to `XFS`. 
+Update the file system in the existing PV from `ext4` to `XFS`.
 
-1. List the existing PVs in your cluster and note the name of the PV that you used for your existing block storage instance. 
+1. List the existing PVs in your cluster and note the name of the PV that you used for your existing block storage instance.
    ```
    kubectl get pv
    ```
    {: pre}
-   
-2. Save the PV yaml on your local machine. 
+
+2. Save the PV yaml on your local machine.
    ```
    kubectl get pv <pv_name> -o yaml > <filepath/xfs_pv.yaml>
    ```
    {: pre}
-   
-3. Open the yaml file and change the `fsType` from `ext4` to `xfs`. 
-4. Replace the PV in your cluster. 
+
+3. Open the yaml file and change the `fsType` from `ext4` to `xfs`.
+4. Replace the PV in your cluster.
    ```
    kubectl replace --force -f <filepath/xfs_pv.yaml>
    ```
    {: pre}
 
-5. Log in to the pod where you mounted the PV. 
+5. Log in to the pod where you mounted the PV.
    ```
    kubectl exec -it <pod_name> sh
    ```
    {: pre}
 
-6. Verify that the file system changed to `XFS`. 
+6. Verify that the file system changed to `XFS`.
    ```
    df -Th
    ```
    {: pre}
-   
-   Example output: 
+
+   Example output:
    ```
    Filesystem Type Size Used Avail Use% Mounted on /dev/mapper/3600a098031234546d5d4c9876654e35 xfs 20G 33M 20G 1% /myvolumepath
    ```
@@ -333,12 +333,12 @@ Update the file system in the existing PV from `ext4` to `XFS`.
 Still having issues with your cluster?
 {: shortdesc}
 
--   To see if {{site.data.keyword.Bluemix_notm}} is available, [check the {{site.data.keyword.Bluemix_notm}} status page ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/bluemix/support/#status).
+-   To see whether {{site.data.keyword.Bluemix_notm}} is available, [check the {{site.data.keyword.Bluemix_notm}} status page ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/bluemix/support/#status).
 -   Post a question in the [{{site.data.keyword.containershort_notm}} Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com).
 
     If you are not using an IBM ID for your {{site.data.keyword.Bluemix_notm}} account, [request an invitation](https://bxcs-slack-invite.mybluemix.net/) to this Slack.
     {: tip}
--   Review the forums to see if other users ran into the same issue. When you use the forums to ask a question, tag your question so that it is seen by the {{site.data.keyword.Bluemix_notm}} development teams.
+-   Review the forums to see whether other users ran into the same issue. When you use the forums to ask a question, tag your question so that it is seen by the {{site.data.keyword.Bluemix_notm}} development teams.
 
     -   If you have technical questions about developing or deploying clusters or apps with {{site.data.keyword.containershort_notm}}, post your question on [Stack Overflow ![External link icon](../icons/launch-glyph.svg "External link icon")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) and tag your question with `ibm-cloud`, `kubernetes`, and `containers`.
     -   For questions about the service and getting started instructions, use the [IBM developerWorks dW Answers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) forum. Include the `ibm-cloud` and `containers` tags.
@@ -347,6 +347,5 @@ Still having issues with your cluster?
 -   Contact IBM Support by opening a ticket. To learn about opening an IBM support ticket, or about support levels and ticket severities, see [Contacting support](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-When reporting an issue, include your cluster ID. To get your cluster ID, run `bx cs clusters`.
-
+When you report an issue, include your cluster ID. To get your cluster ID, run `bx cs clusters`.
 
