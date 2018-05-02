@@ -569,8 +569,6 @@ Before you update your cluster from Kubernetes version 1.9 or earlier to version
 <br />
 
 
-
-
 ## Getting help and support
 {: #ts_getting_help}
 

@@ -128,7 +128,6 @@ Delete the `kube-dashboard` pod to force a restart. The pod is re-created with R
 <br />
 
 
-
 ## Getting help and support
 {: #ts_getting_help}
 
