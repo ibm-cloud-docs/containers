@@ -138,6 +138,8 @@ To learn more about each component, review the [Kubernetes basics](cs_tech.html#
 Open a Kubernetes dashboard on your local system to view information about a cluster and its worker nodes.
 {:shortdesc}
 
+
+
 Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster. This task requires the [Administrator access policy](cs_users.html#access_policies). Verify your current [access policy](cs_users.html#infra_access).
 
 You can use the default port or set your own port to launch the Kubernetes dashboard for a cluster.
