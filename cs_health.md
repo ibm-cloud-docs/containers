@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-1"
+lastupdated: "2018-05-2"
 
 ---
 
@@ -21,7 +21,6 @@ lastupdated: "2018-05-1"
 
 Set up logging and monitoring in {{site.data.keyword.containerlong}} to help you troubleshoot issues and improve the health and performance of your Kubernetes clusters and apps.
 {: shortdesc}
-
 
 
 ## Configuring cluster and app log forwarding
@@ -72,7 +71,7 @@ Check out the following table for information about the different log sources.
   </tbody>
 </table>
 
-To enable logging at the account level or to configure app logging, use the CLI.
+To enable logging at the account level or to configure application logging, use the CLI.
 {: tip}
 
 
@@ -196,11 +195,11 @@ You can create a configuration for cluster logging. You can differentiate betwee
       </tr>
       <tr>
         <td><code><em>&lt;paths_to_logs&gt;</em></code></td>
-        <td>The path on a container that the apps log to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma separated list. Example: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
+        <td>The path on a container that the apps log to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma-separated list. Example: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
       </tr>
       <tr>
         <td><code><em>&lt;containers&gt;</em></code></td>
-        <td>Optional: To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma separated list. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided.</td>
+        <td>Optional: To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma-separated list. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided.</td>
       </tr>
       <tr>
         <td><code><em>--skip-validation</em></code></td>
@@ -292,11 +291,11 @@ You can create a configuration for cluster logging. You can differentiate betwee
     </tr>
     <tr>
       <td><code><em>&lt;paths_to_logs&gt;</em></code></td>
-      <td>The path on a container or containers that the apps are logging to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma separated list. Example: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
+      <td>The path on a container or containers that the apps are logging to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma-separated list. Example: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
     </tr>
     <tr>
       <td><code><em>&lt;containers&gt;</em></code></td>
-      <td>Optional: To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma separated list. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided.</td>
+      <td>Optional: To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma-separated list. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided.</td>
     </tr>
   </tbody>
   </table>
@@ -330,7 +329,7 @@ You can choose which logs that you forward by filtering out specific logs for a 
       </tr>
       <tr>
         <td><code>&lt;configs&gt;</code></td>
-        <td>Optional: A comma separated list of your logging configuration IDs. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the <code>--show-matching-configs</code> flag with the command.</td>
+        <td>Optional: A comma-separated list of your logging configuration IDs. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the <code>--show-matching-configs</code> flag with the command.</td>
       </tr>
       <tr>
         <td><code>&lt;kubernetes_namespace&gt;</code></td>
@@ -401,7 +400,7 @@ You can choose which logs that you forward by filtering out specific logs for a 
       </tr>
       <tr>
         <td><code>&lt;configs&gt;</code></td>
-        <td>Optional: A comma separated list of all of the logging configuration IDs that you want to apply the filter to. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the <code>--show-matching-configs</code> flag with the <code>bx cs logging-filter-get</code> command.</td>
+        <td>Optional: A comma-separated list of all of the logging configuration IDs that you want to apply the filter to. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the <code>--show-matching-configs</code> flag with the <code>bx cs logging-filter-get</code> command.</td>
       </tr>
       <tr>
         <td><code>&lt;kubernetes_namespace&gt;</code></td>
@@ -518,11 +517,13 @@ You can stop forwarding logs one or all of the logging configurations for a clus
 <br />
 
 
+
 ## Configuring log forwarding for Kubernetes API audit logs
-{: #app_forward}
+{: #api_forward}
 
 You can configure a webhook through the Kubernetes API server to capture any calls from your cluster. With a webhook enabled, logs can be sent to a remote server.
 {: shortdesc}
+
 
 
 For more information about Kubernetes audit logs, see the <a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="blank">auditing topic <img src="../icons/launch-glyph.svg" alt="External link icon"></a> in the Kubernetes documentation.
@@ -533,6 +534,8 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
 * Currently, filters are not supported.
 {: tip}
 
+
+
 ### Sending audit logs to an external server
 {: #audit_enable}
 
@@ -542,7 +545,7 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
 
 2. [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster that you want to collect API server audit logs from. **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
 
-**To forward Kubernetes API audit log**
+To forward Kubernetes API audit logs:
 
 1. Set up the webhook. If you do not provide any information in the flags, a default configuration is used.
 

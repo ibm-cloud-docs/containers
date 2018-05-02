@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-1"
+lastupdated: "2018-05-02"
 
 ---
 
@@ -44,7 +44,7 @@ Container Service CLI to set your {{site.data.keyword.Bluemix_notm}} Infrastruct
 {: screen}
 
 {: tsCauses}
-Users with an unlinked {{site.data.keyword.Bluemix_notm}} account must create a new Pay-As-You-Go account or manually add IBM Cloud infrastructure (SoftLayer) API keys using the {{site.data.keyword.Bluemix_notm}} CLI.
+Users with an unlinked {{site.data.keyword.Bluemix_notm}} account must create a new Pay-As-You-Go account or manually add IBM Cloud infrastructure (SoftLayer) API keys by using the {{site.data.keyword.Bluemix_notm}} CLI.
 
 {: tsResolve}
 To add credentials your {{site.data.keyword.Bluemix_notm}} account:
@@ -87,7 +87,7 @@ You might have corporate network policies that prevent access from your local sy
 {: #cs_firewall}
 
 {: tsSymptoms}
-When the worker nodes cannot connect, you might see a variety of different symptoms. You might see one of the following messages when kubectl proxy fails or you try to access a service in your cluster and the connection fails.
+When the worker nodes cannot connect, you might see various different symptoms. You might see one of the following messages when kubectl proxy fails or you try to access a service in your cluster and the connection fails.
 
   ```
   Connection refused
@@ -121,7 +121,7 @@ If kubectl proxy succeeds, but the dashboard is not available, you might see the
 
 
 {: tsCauses}
-You might have an additional firewall set up or customized your existing firewall settings in your IBM Cloud infrastructure (SoftLayer) account. {{site.data.keyword.containershort_notm}} requires certain IP addresses and ports to be opened to allow communication from the worker node to the Kubernetes master and vice versa. Another reason might be that the worker nodes are stuck in a reloading loop.
+You might have another firewall set up or customized your existing firewall settings in your IBM Cloud infrastructure (SoftLayer) account. {{site.data.keyword.containershort_notm}} requires certain IP addresses and ports to be opened to allow communication from the worker node to the Kubernetes master and vice versa. Another reason might be that the worker nodes are stuck in a reloading loop.
 
 {: tsResolve}
 [Allow the cluster to access infrastructure resources and other services](cs_firewall.html#firewall_outbound). This task requires an [Administrator access policy](cs_users.html#access_policies). Verify your current [access policy](cs_users.html#infra_access).
@@ -134,7 +134,7 @@ You might have an additional firewall set up or customized your existing firewal
 {: #cs_ssh_worker}
 
 {: tsSymptoms}
-You cannot access your worker node by using a SSH connection.
+You cannot access your worker node by using an SSH connection.
 
 {: tsCauses}
 SSH via password is disabled on the worker nodes.
@@ -175,7 +175,7 @@ The OpenVPN connection between the master node and worker nodes is not functioni
 {: #cs_duplicate_services}
 
 {: tsSymptoms}
-When you run `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>` you see the following message.
+When you run `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>`, you see the following message.
 
 ```
 Multiple services with the same name were found.
@@ -213,17 +213,17 @@ Use the service GUID instead of the service instance name in the `bx cs cluster-
 
 
 
-## After updating or reloading a worker node, duplicate nodes and pods appear
+## After a worker node updates or reloads, duplicate nodes and pods appear
 {: #cs_duplicate_nodes}
 
 {: tsSymptoms}
-When you run `kubectl get nodes` you see duplicate worker nodes with the status **NotReady**. The worker nodes with **NotReady** have public IP addresses, while the worker nodes with **Ready** have private IP addresses.
+When you run `kubectl get nodes`, you see duplicate worker nodes with the status **NotReady**. The worker nodes with **NotReady** have public IP addresses, while the worker nodes with **Ready** have private IP addresses.
 
 {: tsCauses}
-Older clusters had worker nodes listed by the cluster's public IP address. Now, worker nodes are listed by the cluster's private IP address. When you reload or update a node, the IP address is changed, but the reference to the public IP address remains.
+Older clusters listed worker nodes by the cluster's public IP address. Now, worker nodes are listed by the cluster's private IP address. When you reload or update a node, the IP address is changed, but the reference to the public IP address remains.
 
 {: tsResolve}
-There are no service disruptions due to these duplicates, but you should remove the old worker node references from the API server.
+Service is not disrupted due to these duplicates, but you can remove the old worker node references from the API server.
 
   ```
   kubectl delete node <node_name1> <node_name2>
@@ -233,11 +233,11 @@ There are no service disruptions due to these duplicates, but you should remove 
 <br />
 
 
-## After updating or reloading a worker node, applications receive RBAC DENY errors
+## After a worker node updates or reloads, applications receive RBAC DENY errors
 {: #cs_rbac_deny}
 
 {: tsSymptoms}
-After updating to Kubernetes version 1.7, applications receive `RBAC DENY` errors.
+After you update to Kubernetes version 1.7, applications receive `RBAC DENY` errors.
 
 {: tsCauses}
 As of [Kubernetes version 1.7](cs_versions.html#cs_v17), applications that run in the `default` namespace no longer have cluster administrator privileges to the Kubernetes API for enhanced security.
@@ -300,7 +300,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
 You deleted a worker node in your cluster and then added a worker node. When you deployed a pod or Kubernetes service, the resource cannot access the newly created worker node, and the connection times out.
 
 {: tsCauses}
-If you delete a worker node from your cluster and then add a worker node, it is possible for the new worker node to be assigned the private IP address of the deleted worker node. Calico uses this private IP address as a tag and continues to try to reach the deleted node.
+If you delete a worker node from your cluster and then add a worker node, the new worker node might be assigned the private IP address of the deleted worker node. Calico uses this private IP address as a tag and continues to try to reach the deleted node.
 
 {: tsResolve}
 Manually update the reference of the private IP address to point to the correct node.
@@ -361,13 +361,13 @@ The deleted node is no longer listed in Calico.
 When you deploy your cluster, it remains in a pending state and doesn't start.
 
 {: tsCauses}
-If you just created the cluster, the worker nodes might still be configuring. If you have been waiting for awhile, you may have an invalid VLAN.
+If you just created the cluster, the worker nodes might still be configuring. If you already wait for a while, you might have an invalid VLAN.
 
 {: tsResolve}
 
 You can try one of the following solutions:
-  - Check the status of your cluster by running `bx cs clusters`. Then check to be sure that your worker nodes are deployed by running `bx cs workers <cluster_name>`.
-  - Check to see if your VLAN is valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage. You can [list your VLANs](/docs/containers/cs_cli_reference.html#cs_vlans) by running `bx cs vlans LOCATION` if the VLAN does not show in the list, then it is not valid. Choose a different VLAN.
+  - Check the status of your cluster by running `bx cs clusters`. Then, check to be sure that your worker nodes are deployed by running `bx cs workers <cluster_name>`.
+  - Check to see whether your VLAN is valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage. You can [list your VLANs](/docs/containers/cs_cli_reference.html#cs_vlans) by running `bx cs vlans LOCATION` if the VLAN does not show in the list, then it is not valid. Choose a different VLAN.
 
 <br />
 
@@ -498,7 +498,6 @@ To troubleshoot your Helm chart:
     ```
     {: pre}
 
-
 <br />
 
 
@@ -508,12 +507,12 @@ To troubleshoot your Helm chart:
 Still having issues with your cluster?
 {: shortdesc}
 
--   To see if {{site.data.keyword.Bluemix_notm}} is available, [check the {{site.data.keyword.Bluemix_notm}} status page ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/bluemix/support/#status).
+-   To see whether {{site.data.keyword.Bluemix_notm}} is available, [check the {{site.data.keyword.Bluemix_notm}} status page ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/bluemix/support/#status).
 -   Post a question in the [{{site.data.keyword.containershort_notm}} Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com).
 
     If you are not using an IBM ID for your {{site.data.keyword.Bluemix_notm}} account, [request an invitation](https://bxcs-slack-invite.mybluemix.net/) to this Slack.
     {: tip}
--   Review the forums to see if other users ran into the same issue. When you use the forums to ask a question, tag your question so that it is seen by the {{site.data.keyword.Bluemix_notm}} development teams.
+-   Review the forums to see whether other users ran into the same issue. When you use the forums to ask a question, tag your question so that it is seen by the {{site.data.keyword.Bluemix_notm}} development teams.
 
     -   If you have technical questions about developing or deploying clusters or apps with {{site.data.keyword.containershort_notm}}, post your question on [Stack Overflow ![External link icon](../icons/launch-glyph.svg "External link icon")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) and tag your question with `ibm-cloud`, `kubernetes`, and `containers`.
     -   For questions about the service and getting started instructions, use the [IBM developerWorks dW Answers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) forum. Include the `ibm-cloud` and `containers` tags.
@@ -522,5 +521,5 @@ Still having issues with your cluster?
 -   Contact IBM Support by opening a ticket. To learn about opening an IBM support ticket, or about support levels and ticket severities, see [Contacting support](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 {: tip}
-When reporting an issue, include your cluster ID. To get your cluster ID, run `bx cs clusters`.
+When you report an issue, include your cluster ID. To get your cluster ID, run `bx cs clusters`.
 

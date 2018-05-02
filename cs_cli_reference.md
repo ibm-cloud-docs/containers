@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-1"
+lastupdated: "2018-05-2"
 
 ---
 
@@ -297,7 +297,7 @@ If you find that you need to update the API key that is stored for a region, you
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
-   
+
    <dt><code>--json</code></dt>
    <dd>Prints the command output in JSON format. This value is optional.</dd>
 
@@ -329,7 +329,7 @@ This command requires the {{site.data.keyword.containershort_notm}} admin access
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
    </dl>
-   
+
 
 **Example**:
 
@@ -434,10 +434,10 @@ Restart the Kubernetes master in the cluster to apply changes to the API server 
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
-   
+
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-   
+
    </dl>
 
 **Example**:
@@ -471,7 +471,7 @@ View a list of supported commands and parameters.
   {: pre}
 
 
-### bx cs init [--host HOST] [--insecure] [-p] [-u] [-s] 
+### bx cs init [--host HOST] [--insecure] [-p] [-u] [-s]
 {: #cs_init}
 
 Initialize the {{site.data.keyword.containershort_notm}} plug-in or specify the region where you want to create or access Kubernetes clusters.
@@ -481,19 +481,19 @@ Initialize the {{site.data.keyword.containershort_notm}} plug-in or specify the 
    <dl>
    <dt><code>--host <em>HOST</em></code></dt>
    <dd>The {{site.data.keyword.containershort_notm}} API endpoint to use.  This value is optional. [View the available API endpoint values.](cs_regions.html#container_regions)</dd>
-   
+
    <dt><code>--insecure</code></dt>
    <dd>Allow an insecure HTTP connection.</dd>
-   
+
    <dt><code>-p</code></dt>
    <dd>Your IBM Cloud password.</dd>
-   
+
    <dt><code>-u</code></dt>
    <dd>Your IBM Cloud username.</dd>
-   
+
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-   
+
    </dl>
 
 **Example**:
@@ -541,10 +541,10 @@ After logging in, download Kubernetes configuration data and certificates to con
 
    <dt><code>--export</code></dt>
    <dd>Download Kubernetes configuration data and certificates without any messages other than the export command. Because no messages are displayed, you can use this flag when you create automated scripts. This value is optional.</dd>
-   
+
   <dt><code>-s</code></dt>
   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-  
+
   <dt><code>--yaml</code></dt>
   <dd>Prints the command output in YAML format. This value is optional.</dd>
 
@@ -558,7 +558,7 @@ bx cs cluster-config my_cluster
 {: pre}
 
 
-### bx cs cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s] 
+### bx cs cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
 {: #cs_cluster_create}
 
 Create a cluster in your organization. For free clusters, you specify the cluster name; everything else is set to a default value. A free cluster is automatically deleted after 21 days. You can have one free cluster at a time. To take advantage of the full capabilities of Kubernetes, create a standard cluster.
@@ -742,7 +742,7 @@ Enable a feature on an existing cluster.
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
-   
+
    <dt><code>-f</code></dt>
    <dd>Use this option to force the <code>--trusted</code> option with no user prompts. This value is optional.</dd>
 
@@ -750,11 +750,11 @@ Enable a feature on an existing cluster.
    <dd><p>Include the flag to enable [Trusted Compute](cs_secure.html#trusted_compute) for all supported bare metal worker nodes that are in the cluster. After you enable trust, you cannot later disable it for the cluster.</p>
    <p>To check whether the bare metal machine type supports trust, check the **Trustable** field in the output of the `bx cs machine-types <location>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `bx cs cluster-get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `bx cs worker-get` [command](#cs_worker_get).</p></dd>
    </dl>
-   
+
   <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 
-   
+
 
 **Example command**:
 
@@ -763,7 +763,7 @@ Enable a feature on an existing cluster.
   ```
   {: pre}
 
-### bx cs cluster-get CLUSTER [--json] [--showResources] [-s] 
+### bx cs cluster-get CLUSTER [--json] [--showResources] [-s]
 {: #cs_cluster_get}
 
 View information about a cluster in your organization.
@@ -773,10 +773,10 @@ View information about a cluster in your organization.
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
-   
+
    <dt><code>--json</code></dt>
    <dd>Prints the command output in JSON format. This value is optional.</dd>
-   
+
    <dt><code><em>--showResources</em></code></dt>
    <dd>Show more cluster resources such as add-ons, VLANs, subnets, and storage.</dd>
    </dl>
@@ -784,7 +784,7 @@ View information about a cluster in your organization.
   <dt><code>-s</code></dt>
   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 
-   
+
 
 **Example command**:
 
@@ -824,7 +824,7 @@ View information about a cluster in your organization.
   ```
   {: screen}
 
-### bx cs cluster-rm [-f] CLUSTER [-s] 
+### bx cs cluster-rm [-f] CLUSTER [-s]
 {: #cs_cluster_rm}
 
 Remove a cluster from your organization.
@@ -837,7 +837,7 @@ Remove a cluster from your organization.
 
    <dt><code>-f</code></dt>
    <dd>Use this option to force the removal of a cluster with no user prompts. This value is optional.</dd>
-   
+
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 
@@ -872,7 +872,7 @@ You might need to change your YAML files for future deployments. Review this [re
 
    <dt><code>--force-update</code></dt>
    <dd>Attempt the update even if the change is greater than two minor versions. This value is optional.</dd>
-   
+
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
    </dl>
@@ -940,7 +940,7 @@ View a list of Kubernetes versions supported in {{site.data.keyword.containersho
 {: #cluster_services_commands}
 
 
-### bx cs cluster-service-bind CLUSTER KUBERNETES_NAMESPACE SERVICE_INSTANCE_NAME [-s] 
+### bx cs cluster-service-bind CLUSTER KUBERNETES_NAMESPACE SERVICE_INSTANCE_NAME [-s]
 {: #cs_cluster_service_bind}
 
 Add an {{site.data.keyword.Bluemix_notm}} service to a cluster. To view available {{site.data.keyword.Bluemix_notm}} services from the {{site.data.keyword.Bluemix_notm}} catalog, run `bx service offerings`. **Note**: You can only add {{site.data.keyword.Bluemix_notm}} services that support service keys.
@@ -956,7 +956,7 @@ Add an {{site.data.keyword.Bluemix_notm}} service to a cluster. To view availabl
 
    <dt><code><em>SERVICE_INSTANCE_NAME</em></code></dt>
    <dd>The name of the {{site.data.keyword.Bluemix_notm}} service instance that you want to bind. To find the name of your service instance, run <code>bx service list</code>. If more than one instance has the same name in the account, use the service instance ID instead of the name. To find the ID, run <code>bx service show <service instance name> --guid</code>. One of these values is required.</dd>
-   
+
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 
@@ -988,7 +988,7 @@ Remove an {{site.data.keyword.Bluemix_notm}} service from a cluster.
 
    <dt><code><em>SERVICE_INSTANCE_GUID</em></code></dt>
    <dd>The ID of the {{site.data.keyword.Bluemix_notm}} service instance that you want to remove. To find the ID of the service instance, run `bx cs cluster-services <cluster_name_or_ID>`.This value is required.</dd>
-   
+
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 
@@ -1018,7 +1018,7 @@ List the services that are bound to one or all of the Kubernetes namespace in a 
 
    <dt><code>--all-namespaces</code></dt>
     <dd>Include the services that are bound to all of the namespaces in a cluster. This value is optional.</dd>
-    
+
     <dt><code>--json</code></dt>
     <dd>Prints the command output in JSON format. This value is optional.</dd>
 
@@ -1055,7 +1055,7 @@ Register a webhook.
 
    <dt><code>--url <em>URL</em></code></dt>
    <dd>The URL for the webhook. This value is required.</dd>
-   
+
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
    </dl>
@@ -1091,7 +1091,7 @@ Make a subnet in an IBM Cloud infrastructure (SoftLayer) account available to a 
 
    <dt><code><em>SUBNET</em></code></dt>
    <dd>The ID of the subnet. This value is required.</dd>
-   
+
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 
@@ -1125,7 +1125,7 @@ Create a subnet in an IBM Cloud infrastructure (SoftLayer) account and make it a
 
    <dt><code><em>VLAN_ID</em></code></dt>
    <dd>The VLAN in which to create the subnet. This value is required. To list available VLANS, use the `bx cs vlans <location>` [command](#cs_vlans). </dd>
-   
+
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 
@@ -1252,7 +1252,7 @@ Deploy or update a certificate from your {{site.data.keyword.cloudcerts_long_not
 
    <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
    <dd>The certificate CRN. This value is required.</dd>
-   
+
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
    </dl>
@@ -1292,10 +1292,10 @@ View information about an ALB secret in a cluster.
 
   <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
   <dd>The certificate CRN. This value is required to get information on all ALB secrets matching a specific certificate CRN in the cluster.</dd>
-  
+
   <dt><code>--json</code></dt>
   <dd>Prints the command output in JSON format. This value is optional.</dd>
-  
+
   <dt><code>-s</code></dt>
   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
   </dl>
@@ -1335,7 +1335,7 @@ Remove an ALB secret in a cluster.
 
   <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
   <dd>The certificate CRN. This value is required to remove all ALB secrets matching a specific certificate CRN in the cluster.</dd>
-  
+
   <dt><code>-s</code></dt>
   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 
@@ -1408,7 +1408,7 @@ Enable or disable an ALB in your standard cluster. The public ALB is enabled by 
     <li>The private ALB is deployed with an IP address from a user-provided private subnet. If no IP address is provided, the ALB is deployed with a private IP address from the portable private subnet that was provisioned automatically when you created the cluster.</li>
    </ul>
    </dd>
-   
+
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 
@@ -1447,7 +1447,7 @@ View the details of an ALB.
    <dl>
    <dt><code><em>--albID </em>ALB_ID</code></dt>
    <dd>The ID for an ALB. Run <code>bx cs albs --cluster <em>CLUSTER</em></code> to view the IDs for the ALBs in a cluster. This value is required.</dd>
-   
+
    <dt><code>--json</code></dt>
    <dd>Prints the command output in JSON format. This value is optional.</dd>
 
@@ -1473,7 +1473,7 @@ View the ALB types that are supported in the region.
   <dl>
   <dt><code>--json</code></dt>
   <dd>Prints the command output in JSON format. This value is optional.</dd>
-  
+
   <dt><code>-s</code></dt>
   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
   </dl>
@@ -1496,13 +1496,13 @@ View the status of all ALBs in a cluster. If no ALB IDs are returned, then the c
    <dl>
    <dt><code><em>--cluster </em>CLUSTER</code></dt>
    <dd>The name or ID of the cluster where you list available ALBs. This value is required.</dd>
-   
+
    <dt><code>--json</code></dt>
    <dd>Prints the command output in JSON format. This value is optional.</dd>
 
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-   
+
    </dl>
 
 **Example**:
@@ -1560,7 +1560,7 @@ You cannot set multiple credentials for one {{site.data.keyword.containershort_n
   <li>Copy the API key to use in this command.</li>
   </ol>
   </p></dd>
-  
+
   <dt><code>-s</code></dt>
   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 
@@ -1633,7 +1633,7 @@ You can provision your worker node as a virtual machine on shared or dedicated h
    <dl>
    <dt><code><em>LOCATION</em></code></dt>
    <dd>Enter the location where you want to list available machine types. This value is required. Review [available locations](cs_regions.html#locations).</dd>
-   
+
    <dt><code>--json</code></dt>
   <dd>Prints the command output in JSON format. This value is optional.</dd>
 
@@ -1680,10 +1680,10 @@ List the public and private VLANs that are available for a location in your IBM 
    <dl>
    <dt><code><em>LOCATION</em></code></dt>
    <dd>Enter the location where you want to list your private and public VLANs. This value is required. Review [available locations](cs_regions.html#locations).</dd>
-   
+
    <dt><code>--all</code></dt>
    <dd>Lists all available VLANs. By default VLANs are filtered to show only those VLANS that are valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage.</dd>
-   
+
    <dt><code>--json</code></dt>
   <dd>Prints the command output in JSON format. This value is optional.</dd>
 
@@ -2225,10 +2225,10 @@ View the details of a worker node.
    <dl>
    <dt><code><em>CLUSTER_NAME_OR_ID</em></code></dt>
    <dd>The name or ID of the worker node's cluster. This value is optional.</dd>
-   
+
    <dt><code><em>WORKER_NODE_ID</em></code></dt>
    <dd>The name of your worker node. Run <code>bx cs workers <em>CLUSTER</em></code> to view the IDs for the worker nodes in a cluster. This value is required.</dd>
-   
+
    <dt><code>--json</code></dt>
    <dd>Prints the command output in JSON format. This value is optional.</dd>
 
@@ -2319,7 +2319,7 @@ Before you reboot your worker node, make sure that pods are rescheduled on other
 
    <dt><code><em>WORKER</em></code></dt>
    <dd>The name or ID of one or more worker nodes. Use a space to list multiple worker nodes. This value is required.</dd>
-   
+
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
    </dl>
@@ -2387,7 +2387,7 @@ Before you reload your worker node, make sure that pods are rescheduled on other
 
    <dt><code><em>WORKER</em></code></dt>
    <dd>The name or ID of one or more worker nodes. Use a space to list multiple worker nodes. This value is required.</dd>
-   
+
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
    </dl>
@@ -2453,7 +2453,7 @@ Before you remove your worker node, make sure that pods are rescheduled on other
 
    <dt><code><em>WORKER</em></code></dt>
    <dd>The name or ID of one or more worker nodes. Use a space to list multiple worker nodes. This value is required.</dd>
-   
+
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
    </dl>
@@ -2489,13 +2489,13 @@ You might need to change your YAML files for deployments before updating. Review
 
    <dt><code>--force-update</code></dt>
    <dd>Attempt the update even if the change is greater than two minor versions. This value is optional.</dd>
-   
+
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
      <dd>The version of Kubernetes that you want your worker nodes to be updated with. The default version is used if this value is not specified.</dd>
 
    <dt><code><em>WORKER</em></code></dt>
    <dd>The ID of one or more worker nodes. Use a space to list multiple worker nodes. This value is required.</dd>
-   
+
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 
@@ -2520,10 +2520,10 @@ View a list of worker nodes and the status for each in a cluster.
    <dl>
    <dt><em>CLUSTER</em></dt>
    <dd>The name or ID of the cluster for the available worker nodes. This value is required.</dd>
-   
+
    <dt><em>--show-deleted</em></dt>
    <dd>View worker nodes that were deleted from the cluster, including the reason for deletion. This value is optional.</dd>
-   
+
    <dt><code>--json</code></dt>
    <dd>Prints the command output in JSON format. This value is optional.</dd>
 
