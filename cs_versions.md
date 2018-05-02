@@ -119,7 +119,7 @@ Review changes that you might need to make when you are updating from the previo
 </tr>
 <tr>
 <td>Cipher suites</td>
-<td>The supported cipher suites to the <code>Kubernetes API server</code> and Kubelet API has been restricted to a subset that has high strength encryption (128 bits or more). If you have any existing automation or resources that rely on communicating with the <code>Kubernetes API server</code> or Kubelet API that uses weaker ciphers, you will need to enable stronger cipher support prior to the master update.</td>
+<td>The supported cipher suites to the <code>Kubernetes API server</code> and Kubelet API are now restricted to a subset with high strength encryption (128 bits or more). If you have existing automation or resources that use weaker ciphers and rely on communicating with the <code>Kubernetes API server</code> or Kubelet API, enable stronger cipher support before you update the master.</td>
 </tr>
 </tbody>
 </table>
