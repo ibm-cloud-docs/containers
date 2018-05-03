@@ -1897,10 +1897,10 @@ Update the details of a log forwarding configuration.
    
    <dt><code>--skipValidation</code></dt>
    <dd>Skip validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration does not correctly forward logs. This value is optional.</dd>
-   </dl>
    
    <dt><code>-s</code></dt>
      <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+     </dl>
 
 **Example for log type `ibm`**:
 
