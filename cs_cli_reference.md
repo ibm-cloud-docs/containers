@@ -749,12 +749,10 @@ Enable a feature on an existing cluster.
    <dt><code><em>--trusted</em></code></dt>
    <dd><p>Include the flag to enable [Trusted Compute](cs_secure.html#trusted_compute) for all supported bare metal worker nodes that are in the cluster. After you enable trust, you cannot later disable it for the cluster.</p>
    <p>To check whether the bare metal machine type supports trust, check the **Trustable** field in the output of the `bx cs machine-types <location>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `bx cs cluster-get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `bx cs worker-get` [command](#cs_worker_get).</p></dd>
-   </dl>
-
+   
   <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-
-
+</dl>
 
 **Example command**:
 
