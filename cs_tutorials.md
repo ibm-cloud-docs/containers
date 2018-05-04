@@ -32,10 +32,10 @@ In this first tutorial, you act as the PR firm's networking administrator. You c
 
 To set up the infrastructure:
 
--   Create a Kubernetes cluster with one worker node
--   Install the CLIs for running Kubernetes commands and managing Docker images
--   Create a private image repository in {{site.data.keyword.registrylong_notm}} to store your images
--   Add the {{site.data.keyword.toneanalyzershort}} service to the cluster so that any app in the cluster can use that service
+-   Create a Kubernetes cluster with one worker node.
+-   Install the CLIs for running Kubernetes commands and managing Docker images.
+-   Create a private image repository in {{site.data.keyword.registrylong_notm}} to store your images.
+-   Add the {{site.data.keyword.toneanalyzershort}} service to the cluster so that any app in the cluster can use that service.
 
 
 ## Time required
