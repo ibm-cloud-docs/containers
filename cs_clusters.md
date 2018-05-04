@@ -161,7 +161,7 @@ You can [configure health checks for your worker node and enable Autorecovery](c
 The purpose of the Kubernetes cluster is to define a set of resources, nodes, networks, and storage devices that keep apps highly available. Before you can deploy an app, you must create a cluster and set the definitions for the worker nodes in that cluster.
 {:shortdesc}
 
-Before you begin, you must have a Pay-As-You-Go or Subscription [{{site.data.keyword.Bluemix_notm}} account](https://console.bluemix.net/registration/). To try out some of the capabilities you can create a free cluster that expires after 21 days. You are able to have 1 free cluster at a time.
+Before you begin, you must have a Pay-As-You-Go or Subscription [{{site.data.keyword.Bluemix_notm}} account](https://console.bluemix.net/registration/) that is configured to [access the IBM Cloud infrastructure (SoftLayer) portfolio](cs_troubleshoot_clusters.html#cs_credentials). To try out some of the capabilities you can create a free cluster that expires after 21 days. You are able to have 1 free cluster at a time.
 
 You can remove your free cluster at any time, but after 21 days a free cluster and its data are deleted and cannot be restored. Be sure to back up your data.
 {: tip}
@@ -228,7 +228,7 @@ The purpose of the Kubernetes cluster is to define a set of resources, nodes, ne
 {:shortdesc}
 
 Before you begin:
-- You must have a Pay-As-You-Go or Subscription [{{site.data.keyword.Bluemix_notm}} account](https://console.bluemix.net/registration/). You can create 1 free cluster to try out some of the capabilities for 21 days, or create fully-customizable standard clusters with your choice of hardware isolation.
+- You must have a Pay-As-You-Go or Subscription [{{site.data.keyword.Bluemix_notm}} account](https://console.bluemix.net/registration/) that is configured to [access the IBM Cloud infrastructure (SoftLayer) portfolio](cs_troubleshoot_clusters.html#cs_credentials). You can create 1 free cluster to try out some of the capabilities for 21 days, or create fully-customizable standard clusters with your choice of hardware isolation.
 - [Make sure you have the minimum required permissions in IBM Cloud infrastructure (SoftLayer) to provision a standard cluster](cs_users.html#infra_access).
 
 To create a cluster:

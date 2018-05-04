@@ -45,33 +45,3 @@ Review the table to find available options for each account type.
 <br />
 
 
-
-## Generating an IBM Cloud infrastructure (SoftLayer) API key to use with {{site.data.keyword.Bluemix_notm}} accounts
-{: #old_account}
-
-To continue using your old Pay-As-You-Go or Subscription account to create standard clusters, generate an API key with your new Pay-As-You-Go account and set the API key for your old account.
-{:shortdesc}
-
-Before you begin, create an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account that is automatically set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio.
-
-1.  Log in to the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.softlayer.com/) by using the {{site.data.keyword.ibmid}} and password that you created for your new Pay-As-You-Go account.
-2.  Select **Account**, and then **Users**.
-3.  Click **Generate** to generate an IBM Cloud infrastructure (SoftLayer) API key for your new Pay-As-You-Go account.
-4.  Copy the API key.
-5.  From the CLI, log in to {{site.data.keyword.Bluemix_notm}} by using the {{site.data.keyword.ibmid}} and password of your old Pay-As-You-Go or Subscription account.
-
-  ```
-  bx login
-  ```
-  {: pre}
-
-6.  Set the API key that you generated earlier to access the IBM Cloud infrastructure (SoftLayer) portfolio. Replace `<API_key>` with the API key and `<username>` with the {{site.data.keyword.ibmid}} of your new Pay-As-You-Go account.
-
-  ```
-  bx cs credentials-set --infrastructure-api-key <API_key> --infrastructure-username <username>
-  ```
-  {: pre}
-
-7.  Start [creating standard clusters](cs_clusters.html#clusters_cli).
-
-**Note:** To review your API key after you generated it, follow steps 1 and 2, and then in the **API key** section, click on **View** to see the API key for your user ID.
