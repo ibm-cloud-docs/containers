@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-2"
+lastupdated: "2018-05-04"
 
 
 ---
@@ -257,12 +257,12 @@ For example, **Basic Users** can reboot a worker node, but they cannot reload a 
        </tr>
        <tr>
          <td><strong>Private Networking</strong>: <ul><li>Manage private VLANs for in-cluster networking.</li><li>Set up VPN connectivity to private networks.</li></ul></td>
-         <td><strong>Network</strong>:<ul><li>Manage Network Subnet Routes</li><li>Manage Network VLAN Spanning</li><li>Manage IPSEC Network Tunnels</li><li>Manage Network Gateways</li><li>VPN Administration</li></ul></td>
+         <td><strong>Network</strong>:<ul><li>Manage Network Subnet Routes</li><li>Manage IPSEC Network Tunnels</li><li>Manage Network Gateways</li><li>VPN Administration</li></ul></td>
        </tr>
        <tr>
          <td><strong>Public Networking</strong>:<ul><li>Set up public load balancer or Ingress networking to expose apps.</li></ul></td>
          <td><strong>Devices</strong>:<ul><li>Manage Load Balancers</li><li>Edit Hostname/Domain</li><li>Manage Port Control</li></ul>
-         <strong>Network</strong>:<ul><li>Add Compute with Public Network Port</li><li>Manage Network Subnet Routes</li><li>Manage Network VLAN Spanning</li><li>Add IP Addresses</li></ul>
+         <strong>Network</strong>:<ul><li>Add Compute with Public Network Port</li><li>Manage Network Subnet Routes</li><li>Add IP Addresses</li></ul>
          <strong>Services</strong>:<ul><li>Manage DNS, Reverse DNS, and WHOIS</li><li>View Certificates (SSL)</li><li>Manage Certificates (SSL)</li></ul></td>
        </tr>
      </tbody>
