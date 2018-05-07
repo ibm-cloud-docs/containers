@@ -62,8 +62,10 @@ Create your cluster in the GUI and install the required CLIs.
 
 To create your cluster:
 
-1. It can take a few minutes to provision your cluster. To make the most of your time, [create your cluster in the GUI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/launch?env_id=ibm:yp:united-kingdom) before installing the CLIs. For this tutorial, create your cluster in the US East region.
+1. It can take a few minutes to provision your cluster. To make the most of your time, [create your cluster in the GUI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/launch?env_id=ibm:yp:united-kingdom) before installing the CLIs.
 
+You can also create a [cluster in the CLI](cs_clusters.html#clusters_cli).
+{: tip}
 
 The following CLIs and their prerequisites are used to manage clusters through the CLI:
 -   {{site.data.keyword.Bluemix_notm}} CLI
