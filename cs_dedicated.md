@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-04"
+lastupdated: "2018-05-07"
 
 ---
 
@@ -73,7 +73,7 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
  <tr>
  <td>Persistent storage</td>
  <td>Use [dynamic provisioning](cs_storage.html#create) or [static provisioning](cs_storage.html#existing) of volumes.</td>
- <td>Use [dynamic provisioning](cs_storage.html#create) of volumes. [Open a support ticket](cs_troubleshoot_storage.html#ts_getting_help) to request a backup for your volumes, request a restoration from your volumes, and perform other storage functions.</li></ul></td>
+ <td>Use [dynamic provisioning](cs_storage.html#create) of volumes. [Open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support) to request a backup for your volumes, request a restoration from your volumes, and perform other storage functions.</li></ul></td>
  </tr>
  <tr>
  <td>Image registry URL in {{site.data.keyword.registryshort_notm}}</td>
@@ -357,7 +357,9 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     ```
     {: pre}
 
-    **Note:** For virtual machines, it can take a few minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account. Bare metal physical machines are provisioned by manual interaction with IBM Cloud infrastructure (SoftLayer), and can take more than one business day to complete.
+    **Note:**
+    * For virtual machines, it can take a few minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account. Bare metal physical machines are provisioned by manual interaction with IBM Cloud infrastructure (SoftLayer), and can take more than one business day to complete.
+    * If you see an error message `{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not place order. There are insufficient resources behind router 'router_name' to fulfill the request for the following guests: 'worker_id'.`, [open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
     When the provisioning of your cluster is completed, the status of your cluster changes to **deployed**.
 
@@ -464,7 +466,7 @@ Requirements:
 
 Before you begin: Configure the routing of network traffic into and out of your enterprise network to the {{site.data.keyword.Bluemix_dedicated_notm}} network that will use the user-managed subnet.
 
-1. To use your own subnet, [open a support ticket](cs_troubleshoot_network.html#ts_getting_help) and provide the list of subnet CIDRs that you want to use.
+1. To use your own subnet, [open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support) and provide the list of subnet CIDRs that you want to use.
     **Note**: The way that the ALB and load balancers are managed for on-premises and internal account connectivity differs depending on the format of the subnet CIDR. See the final step for configuration differences.
 
 2. After {{site.data.keyword.IBM_notm}} provisions the user-managed subnets, make the subnet available to your Kubernetes cluster.
@@ -532,14 +534,14 @@ For {{site.data.keyword.Bluemix_dedicated_notm}} environments, public primary IP
 #### Configuring access to an app by using the load balancer service type
 {: #dedicated_apps_public_load_balancer}
 
-If you want to use public IP addresses for the load balancer, ensure that an enterprise firewall whitelist was provided to IBM or [open a support ticket](cs_troubleshoot_network.html#ts_getting_help) to configure the firewall whitelist. Then follow the steps in [Exposing apps with LoadBalancers](cs_loadbalancer.html).
+If you want to use public IP addresses for the load balancer, ensure that an enterprise firewall whitelist was provided to IBM or [open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support) to configure the firewall whitelist. Then follow the steps in [Exposing apps with LoadBalancers](cs_loadbalancer.html).
 
 #### Configuring public access to an app by using Ingress
 {: #dedicated_apps_public_ingress}
 
-If you want to use public IP addresses for the application load balancer, ensure that an enterprise firewall whitelist was provided to IBM or [open a support ticket](cs_troubleshoot_network.html#ts_getting_help) to configure the firewall whitelist. Then follow the steps in [Exposing apps to the public](cs_ingress.html#ingress_expose_public).
+If you want to use public IP addresses for the application load balancer, ensure that an enterprise firewall whitelist was provided to IBM or [open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support) to configure the firewall whitelist. Then follow the steps in [Exposing apps to the public](cs_ingress.html#ingress_expose_public).
 
 ### Creating persistent storage
 {: #dedicated_apps_volume_claim}
 
-To review options for creating persistent storage, see [Persistent data storage](cs_storage.html#planning). To request a backup for your volumes, a restoration from your volumes, and other storage functions, you must [open a support ticket](cs_troubleshoot_storage.html#ts_getting_help).
+To review options for creating persistent storage, see [Persistent data storage](cs_storage.html#planning). To request a backup for your volumes, a restoration from your volumes, and other storage functions, you must [open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support).

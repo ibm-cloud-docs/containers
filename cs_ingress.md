@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-04"
+lastupdated: "2018-05-07"
 
 ---
 
@@ -1471,7 +1471,7 @@ By default, only ports 80 and 443 are exposed in the Ingress ALB. To expose othe
 
 2. Add a <code>data</code> section and specify public ports `80`, `443`, and any other ports you want to expose separated by a semi-colon (;).
 
-    **Note**: When specifying the ports, 80 and 443 must also be included to keep those ports open. Any port that is not specified is closed.
+    **Important**: By default, ports `80` and `443` are open. If you want to keep 80 and 443 open, you must also include them in addition to any other ports you specify in the `public-ports` field. Any port that is not specified is closed.
 
     ```
     apiVersion: v1
@@ -1484,7 +1484,7 @@ By default, only ports 80 and 443 are exposed in the Ingress ALB. To expose othe
     ```
     {: codeblock}
 
-    Example:
+    Example that keeps ports `80`, `443`, and `9443` open:
     ```
     apiVersion: v1
     data:
@@ -1527,7 +1527,7 @@ For more information about configmap resources, see the [Kubernetes documentatio
 Enable SSL protocols and ciphers at the global HTTP level by editing the `ibm-cloud-provider-ingress-cm` configmap.
 {:shortdesc}
 
-
+By default, the TLS 1.2 protocol is used for all Ingress configurations that use the IBM-provided domain. You can override the default to instead use TLS 1.1 or 1.0 protocols by following these steps.
 
 **Note**: When you specify the enabled protocols for all hosts, the TLSv1.1 and TLSv1.2 parameters (1.1.13, 1.0.12) work only when OpenSSL 1.0.1 or higher is used. The TLSv1.3 parameter (1.13.0) works only when OpenSSL 1.1.1 built with TLSv1.3 support is used.
 

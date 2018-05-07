@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-04"
+lastupdated: "2018-05-07"
 
 ---
 
@@ -1613,8 +1613,8 @@ You can provision your worker node as a virtual machine on shared or dedicated h
 <li><strong>mr1c.28x512</strong>: Maximize the RAM available to your worker nodes. RAM intensive with 28 cores, 512GB Memory, 2TB SATA Primary Disk, 960GB SSD Secondary Disk, and 10Gbps Bonded Network.</li>
 <li><strong>md1c.16x64.4x4tb</strong>: Provision worker nodes with a significant amount of local disk storage, including RAID to back up data that is stored locally on the machine. The 2x2TB primary storage disks are configured for RAID1, and the 4x4TB secondary storage disks are configured for RAID10. Data intensive with 16 cores, 64GB Memory, 2x2TB RAID1 Primary Disk, 4x4TB SATA RAID10 Secondary Disk, and 10Gbps Bonded Network.</li>
 <li><strong>md1c.28x512.4x4tb</strong>: Provision worker nodes with a significant amount of local disk storage, including RAID to back up data that is stored locally on the machine. The 2x2TB primary storage disks are configured for RAID1, and the 4x4TB secondary storage disks are configured for RAID10. Data intensive with 28 cores, 512GB Memory, 2x2TB RAID1 Primary Disk, 4x4TB SATA RAID10 Secondary Disk, and 10Gbps Bonded Network.</li>
-<li><strong>mg1c.16x128</strong>: Choose this type if your worker nodes require graphics processing units (GPUs) for mathematically-intensive workloads such as 3D applications. This flavor has 1 physical card that has 2 GPUs per card for a total of 2 GPUs. The machine has 16 cores, 128GB Memory, 2TB SATA Primary Disk, 960GB SSD Secondary Disk, and 10Gbps Bonded Network.</li>
-<li><strong>mg1c.28x256</strong>: Choose this type if your worker nodes require GPUs for mathematically-intensive workloads such as 3D applications. This flavor has 2 physical cards that have 2 GPUs per card for a total of 4 GPUs. The machine has 28 cores, 256GB Memory, 2TB SATA Primary Disk, 960GB SSD Secondary Disk, and 10Gbps Bonded Network.</li>
+<li><strong>mg1c.16x128 (available in AP North only)</strong>: Choose this type if your worker nodes require graphics processing units (GPUs) for mathematically-intensive workloads such as 3D applications. This flavor has 1 physical card that has 2 GPUs per card for a total of 2 GPUs. The machine has 16 cores, 128GB Memory, 2TB SATA Primary Disk, 960GB SSD Secondary Disk, and 10Gbps Bonded Network.</li>
+<li><strong>mg1c.28x256 (available in AP North only)</strong>: Choose this type if your worker nodes require GPUs for mathematically-intensive workloads such as 3D applications. This flavor has 2 physical cards that have 2 GPUs per card for a total of 4 GPUs. The machine has 28 cores, 256GB Memory, 2TB SATA Primary Disk, 960GB SSD Secondary Disk, and 10Gbps Bonded Network.</li>
 </ul></p></dd>
 <dt>Virtual machines</dt>
 <dd>When you create a standard virtual cluster, you must choose whether you want the underlying hardware to be shared by multiple {{site.data.keyword.IBM_notm}} customers (multi tenancy) or to be dedicated to you only (single tenancy).
