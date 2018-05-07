@@ -371,7 +371,7 @@ If you have a [bare metal graphics processing unit (GPU) machine type](cs_cluste
 In the following steps, you learn how to deploy workloads that require the GPU. You can also [deploy apps](#app_ui) that don't need to process their workloads across both the GPU and CPU. After, you might find it useful to play around with mathematically intensive workloads such as the [TensorFlow ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.tensorflow.org/) machine learning framework with [this Kubernetes demo ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/pachyderm/pachyderm/tree/master/doc/examples/ml/tensorflow).
 
 Before you begin:
-* [Create a bare metal GPU machine type](cs_clusters.html#clusters_cli). Note that this process can take more than 1 business day to complete.
+* [Create a bare metal GPU machine type](cs_clusters.html#clusters_cli). Note that this process can take more than 1 business day to complete. GPU bare metal is available in AP North only.
 * Your cluster master and GPU worker node must run Kubernetes version 1.10 or later.
 
 To execute a workload on a GPU machine:
