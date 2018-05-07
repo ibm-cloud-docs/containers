@@ -359,7 +359,10 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 
     **Note:**
     * For virtual machines, it can take a few minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account. Bare metal physical machines are provisioned by manual interaction with IBM Cloud infrastructure (SoftLayer), and can take more than one business day to complete.
-    * If you see an error message `{{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not place order. There are insufficient resources behind router 'router_name' to fulfill the request for the following guests: 'worker_id'.`, [open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support).
+    * If you see the following error message, [open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support).
+        ```
+        {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not place order. There are insufficient resources behind router 'router_name' to fulfill the request for the following guests: 'worker_id'.
+        ```
 
     When the provisioning of your cluster is completed, the status of your cluster changes to **deployed**.
 
