@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-07"
+lastupdated: "2018-05-08"
 
 ---
 
@@ -104,45 +104,29 @@ In Kubernetes version 1.10 and newer clusters, a default Kubernetes policy which
 <br />
 
 
-## Adding network policies
-{: #adding_network_policies}
+## Install and configure the Calico CLI
+{: #cli_install}
 
-In most cases, the default policies do not need to be changed. Only advanced scenarios might require changes. If you find that you must make changes, you can create your own network policies.
+To view, manage, and add Calico policies, install and configure the Calico CLI.
 {:shortdesc}
 
-To create Kubernetes network policies, see the [Kubernetes network policy documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
+The compatibility of Calico versions for CLI configuration and policies varies based on the Kubernetes version of your cluster. To install and configure the Calico CLI, click one of the following links based on your cluster version:
 
-If you need the added features provided by Calico policies, follow the below steps to install and configure the Calico CLI and create policies.
+* [Kubernetes version 1.10 or later clusters](#1.10_cli_install)
+* [Kubernetes version 1.9 or earlier clusters](#1.9_cli_install)
 
-Before you begin:
+Before you update your cluster from Kubernetes version 1.9 or earlier to version 1.10 or later, review [Preparing to update to Calico v3](cs_versions.html#110_calicov3).
+{: tip}
 
-1.  [Install the {{site.data.keyword.containershort_notm}} and Kubernetes CLIs.](cs_cli_install.html#cs_cli_install)
-2.  [Create a free or standard cluster.](cs_clusters.html#clusters_ui)
-3.  [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `bx cs cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys for the Super User role, which you need to run Calico commands.
+### Install and configure the version 3.1.1 Calico CLI for Kubernetes version 1.10 or later clusters
+{: #1.10_cli_install}
+
+Before you begin, [target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `bx cs cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys for the Super User role, which you need to run Calico commands.
 
   ```
   bx cs cluster-config <cluster_name> --admin
   ```
   {: pre}
-
-The compatibility of Calico versions for CLI configuration and policies varies based on the Kubernetes version of your cluster. To add network policies, click one of the following links based on your cluster version:
-
-* [Kubernetes version 1.10 or later clusters](#policies_1.10)
-* [Kubernetes version 1.9 or earlier clusters](#policies_1.9)
-
-Before you update your cluster from Kubernetes version 1.9 or earlier to version 1.10 or later, review [Preparing to update to Calico v3](cs_versions.html#110_calicov3).
-{: tip}
-
-### Adding network policies in Kubernetes version 1.10 or later clusters
-{: #policies_1.10}
-
-To add network policies:
-1. [Install and configure the version 3.1.1 Calico CLI](#1.10_install).
-2. [Examine the existing network policies](#1.10_examine_policies).
-3. [Create new Calico network policies using v3 syntax to allow or block traffic](#1.10_create_new).
-
-#### Step 1: Install and configure the version 3.1.1 Calico CLI
-{: #1.10_install}
 
 1. [Download the Calico CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/projectcalico/calicoctl/releases/tag/v3.1.1).
 
@@ -306,73 +290,17 @@ To add network policies:
           ```
           {: screen}
 
-#### Step 2: Examine the existing network policies
-{: #1.10_examine_policies}
 
-1. View the Calico host endpoint.
+### Install and configure the version 1.6.3 Calico CLI for Kubernetes version 1.9 or earlier clusters
+{: #1.9_cli_install}
 
-    ```
-    calicoctl get hostendpoint -o yaml
-    ```
-    {: pre}
+Before you begin, [target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `bx cs cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys for the Super User role, which you need to run Calico commands.
 
-2. View all of the Calico and Kubernetes network policies that were created for the cluster. This list includes policies that might not be applied to any pods or hosts yet. For a network policy to be enforced, a Kubernetes resource must be found that matches the selector that was defined in the Calico network policy.
+  ```
+  bx cs cluster-config <cluster_name> --admin
+  ```
+  {: pre}
 
-    [Network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) are scoped to specific namespaces:
-    ```
-    calicoctl get NetworkPolicy --all-namespaces -o wide
-    ```
-
-    [Global network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy) are not scoped to specific namespaces:
-    ```
-    calicoctl get GlobalNetworkPolicy -o wide
-    ```
-    {: pre}
-
-3. View details for a network policy.
-
-    ```
-    calicoctl get NetworkPolicy -o yaml <policy_name> --namespace <policy_namespace>
-    ```
-    {: pre}
-
-4. View the details of all global network policies for the cluster.
-
-    ```
-    calicoctl get GlobalNetworkPolicy -o yaml
-    ```
-    {: pre}
-
-#### Step 3: Create new Calico network policies using v3 syntax to allow or block traffic
-{: #1.10_create_new}
-
-1. Define your Calico [network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) or [global network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy) by creating a configuration script (`.yaml`). These configuration files include the selectors that describe what pods, namespaces, or hosts that these policies apply to. Refer to these [sample Calico policies ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) to help you create your own.
-
-2. Apply the policies to the cluster.
-    - Linux and OS X:
-
-      ```
-      calicoctl apply -f policy.yaml
-      ```
-      {: pre}
-
-    - Windows:
-
-      ```
-      calicoctl apply -f filepath/policy.yaml --config=filepath/calicoctl.cfg
-      ```
-      {: pre}
-
-### Adding network policies in Kubernetes version 1.9 or earlier clusters
-{: #policies_1.9}
-
-To add network policies:
-1. [Install and configure the version 1.6.3 Calico CLI](#1.9_install).
-2. [Examine the existing network policies](#1.9_examine_policies).
-3. [Create new Calico network policies using v2 syntax to allow or block traffic](#1.9_create_new).
-
-#### Step 1: Install and configure the version 1.6.3 Calico CLI
-{: #1.9_install}
 
 1. [Download the Calico CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/projectcalico/calicoctl/releases/tag/v1.6.3).
 
@@ -412,11 +340,10 @@ To add network policies:
 4. **If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls**: See [Running `calicoctl` commands from behind a firewall](cs_firewall.html#firewall) for instructions on how to allow TCP access for Calico commands.
 
 5. For Linux and OS X, create the `/etc/calico` directory. For Windows, any directory can be used.
-
-  ```
-  sudo mkdir -p /etc/calico/
-  ```
-  {: pre}
+    ```
+    sudo mkdir -p /etc/calico/
+    ```
+    {: pre}
 
 6. Create a `calicoctl.cfg` file.
     - Linux and OS X:
@@ -535,8 +462,67 @@ To add network policies:
           ```
           {: screen}
 
-#### Step 2: Examine the existing network policies
-{: #1.9_examine_policies}
+<br />
+
+
+## View network policies
+{: #view_policies}
+
+Before you begin:
+1. [Install and configure the Calico CLI.](#cli_install)
+2. [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `bx cs cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys for the Super User role, which you need to run Calico commands.
+    ```
+    bx cs cluster-config <cluster_name> --admin
+    ```
+    {: pre}
+
+The compatibility of Calico versions for CLI configuration and policies varies based on the Kubernetes version of your cluster. To install and configure the Calico CLI, click one of the following links based on your cluster version:
+
+* [Kubernetes version 1.10 or later clusters](#1.10_view_policies)
+* [Kubernetes version 1.9 or earlier clusters](#1.9_view_policies)
+
+Before you update your cluster from Kubernetes version 1.9 or earlier to version 1.10 or later, review [Preparing to update to Calico v3](cs_versions.html#110_calicov3).
+{: tip}
+
+### View network policies in Kubernetes version 1.10 or later clusters
+{: #1.10_view_policies}
+
+1. View the Calico host endpoint.
+
+    ```
+    calicoctl get hostendpoint -o yaml
+    ```
+    {: pre}
+
+2. View all of the Calico and Kubernetes network policies that were created for the cluster. This list includes policies that might not be applied to any pods or hosts yet. For a network policy to be enforced, a Kubernetes resource must be found that matches the selector that was defined in the Calico network policy.
+
+    [Network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) are scoped to specific namespaces:
+    ```
+    calicoctl get NetworkPolicy --all-namespaces -o wide
+    ```
+
+    [Global network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy) are not scoped to specific namespaces:
+    ```
+    calicoctl get GlobalNetworkPolicy -o wide
+    ```
+    {: pre}
+
+3. View details for a network policy.
+
+    ```
+    calicoctl get NetworkPolicy -o yaml <policy_name> --namespace <policy_namespace>
+    ```
+    {: pre}
+
+4. View the details of all global network policies for the cluster.
+
+    ```
+    calicoctl get GlobalNetworkPolicy -o yaml
+    ```
+    {: pre}
+
+### View network policies in Kubernetes version 1.9 or earlier clusters
+{: #1.9_view_policies}
 
 1. View the Calico host endpoint.
 
@@ -566,10 +552,62 @@ To add network policies:
     ```
     {: pre}
 
-#### Step 3: Create new Calico network policies using v2 syntax to allow or block traffic
-{: #1.9_create_new}
+<br />
+
+
+## Adding network policies
+{: #add_policies}
+
+In most cases, the default policies do not need to be changed. Only advanced scenarios might require changes. If you find that you must make changes, you can create your own network policies.
+{:shortdesc}
+
+To create Kubernetes network policies, see the [Kubernetes network policy documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
+
+To create Calico policies, follow the steps below.
+
+Before you begin:
+1. [Install and configure the Calico CLI.](#cli_install)
+2. [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `bx cs cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys for the Super User role, which you need to run Calico commands.
+    ```
+    bx cs cluster-config <cluster_name> --admin
+    ```
+    {: pre}
+
+The compatibility of Calico versions for CLI configuration and policies varies based on the Kubernetes version of your cluster. Click one of the following links based on your cluster version:
+
+* [Kubernetes version 1.10 or later clusters](#1.10_add_policies)
+* [Kubernetes version 1.9 or earlier clusters](#1.9_add_policies)
+
+Before you update your cluster from Kubernetes version 1.9 or earlier to version 1.10 or later, review [Preparing to update to Calico v3](cs_versions.html#110_calicov3).
+{: tip}
+
+### Adding Calico policies in Kubernetes version 1.10 or later clusters
+{: #1.10_add_policies}
+
+1. Define your Calico [network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) or [global network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy) by creating a configuration script (`.yaml`). These configuration files include the selectors that describe what pods, namespaces, or hosts that these policies apply to. Refer to these [sample Calico policies ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) to help you create your own.
+    **Note**: Kubernetes version 1.10 or later clusters must use Calico v3 policy syntax.
+
+2. Apply the policies to the cluster.
+    - Linux and OS X:
+
+      ```
+      calicoctl apply -f policy.yaml
+      ```
+      {: pre}
+
+    - Windows:
+
+      ```
+      calicoctl apply -f filepath/policy.yaml --config=filepath/calicoctl.cfg
+      ```
+      {: pre}
+
+### Adding Calico policies in Kubernetes version 1.9 or earlier clusters
+{: #1.9_add_policies}
 
 1. Define your [Calico network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy) by creating a configuration script (`.yaml`). These configuration files include the selectors that describe what pods, namespaces, or hosts that these policies apply to. Refer to these [sample Calico policies ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy) to help you create your own.
+    **Note**: Kubernetes version 1.9 or earlier clusters must use Calico v2 policy syntax.
+
 
 2. Apply the policies to the cluster.
     - Linux and OS X:
