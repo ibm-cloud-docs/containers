@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-07"
+lastupdated: "2018-05-08"
 
 ---
 
@@ -58,13 +58,14 @@ When the Kubernetes API server update is complete, you can update your worker no
 ## Updating worker nodes
 {: #worker_node}
 
+
 You received a notification to update your worker nodes. What does that mean? As security updates and patches are put in place for the Kubernetes API server and other Kubernetes master components, you must be sure that your worker nodes remain in sync.
 {: shortdesc}
 
 The worker node Kubernetes version cannot be higher than the Kubernetes API server version that runs in your Kubernetes master. Before you begin, [update the Kubernetes master](#master).
 
-<ul>**Attention**:</br>
-<li>Updates to worker nodes can cause downtime for your apps and services.</li>
+**Attention**:
+<ul><li>Updates to worker nodes can cause downtime for your apps and services.</li>
 <li>Data is deleted if not stored outside the pod.</li>
 <li>Use [replicas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#replicas) in your deployments to reschedule pods on available nodes.</li></ul>
 
@@ -175,6 +176,10 @@ Next steps:
   - Repeat the update process with other clusters.
   - Inform developers who work in the cluster to update their `kubectl` CLI to the version of the Kubernetes master.
   - If the Kubernetes dashboard does not display utilization graphs, [delete the `kube-dashboard` pod](cs_troubleshoot_health.html#cs_dashboard_graphs).
+  
+
+
+
 
 
 <br />
