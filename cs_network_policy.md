@@ -112,14 +112,14 @@ To view, manage, and add Calico policies, install and configure the Calico CLI.
 
 The compatibility of Calico versions for CLI configuration and policies varies based on the Kubernetes version of your cluster. To install and configure the Calico CLI, click one of the following links based on your cluster version:
 
-* [Kubernetes version 1.10 or later clusters](#1.10_cli_install)
-* [Kubernetes version 1.9 or earlier clusters](#1.9_cli_install)
+* [Kubernetes version 1.10 or later clusters](#1.10_install)
+* [Kubernetes version 1.9 or earlier clusters](#1.9_install)
 
 Before you update your cluster from Kubernetes version 1.9 or earlier to version 1.10 or later, review [Preparing to update to Calico v3](cs_versions.html#110_calicov3).
 {: tip}
 
 ### Install and configure the version 3.1.1 Calico CLI for Kubernetes version 1.10 or later clusters
-{: #1.10_cli_install}
+{: #1.10_install}
 
 Before you begin, [target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `bx cs cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys for the Super User role, which you need to run Calico commands.
 
@@ -292,7 +292,7 @@ Before you begin, [target the Kubernetes CLI to the cluster](cs_cli_install.html
 
 
 ### Install and configure the version 1.6.3 Calico CLI for Kubernetes version 1.9 or earlier clusters
-{: #1.9_cli_install}
+{: #1.9_install}
 
 Before you begin, [target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `bx cs cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys for the Super User role, which you need to run Calico commands.
 
@@ -465,7 +465,7 @@ Before you begin, [target the Kubernetes CLI to the cluster](cs_cli_install.html
 <br />
 
 
-## View network policies
+## Viewing network policies
 {: #view_policies}
 
 Before you begin:
@@ -478,14 +478,14 @@ Before you begin:
 
 The compatibility of Calico versions for CLI configuration and policies varies based on the Kubernetes version of your cluster. To install and configure the Calico CLI, click one of the following links based on your cluster version:
 
-* [Kubernetes version 1.10 or later clusters](#1.10_view_policies)
-* [Kubernetes version 1.9 or earlier clusters](#1.9_view_policies)
+* [Kubernetes version 1.10 or later clusters](#1.10_examine_policies)
+* [Kubernetes version 1.9 or earlier clusters](#1.9_examine_policies)
 
 Before you update your cluster from Kubernetes version 1.9 or earlier to version 1.10 or later, review [Preparing to update to Calico v3](cs_versions.html#110_calicov3).
 {: tip}
 
 ### View network policies in Kubernetes version 1.10 or later clusters
-{: #1.10_view_policies}
+{: #1.10_examine_policies}
 
 1. View the Calico host endpoint.
 
@@ -522,7 +522,7 @@ Before you update your cluster from Kubernetes version 1.9 or earlier to version
     {: pre}
 
 ### View network policies in Kubernetes version 1.9 or earlier clusters
-{: #1.9_view_policies}
+{: #1.9_examine_policies}
 
 1. View the Calico host endpoint.
 
@@ -556,7 +556,7 @@ Before you update your cluster from Kubernetes version 1.9 or earlier to version
 
 
 ## Adding network policies
-{: #add_policies}
+{: #adding_network_policies}
 
 In most cases, the default policies do not need to be changed. Only advanced scenarios might require changes. If you find that you must make changes, you can create your own network policies.
 {:shortdesc}
@@ -575,14 +575,14 @@ Before you begin:
 
 The compatibility of Calico versions for CLI configuration and policies varies based on the Kubernetes version of your cluster. Click one of the following links based on your cluster version:
 
-* [Kubernetes version 1.10 or later clusters](#1.10_add_policies)
-* [Kubernetes version 1.9 or earlier clusters](#1.9_add_policies)
+* [Kubernetes version 1.10 or later clusters](#1.10_create_new)
+* [Kubernetes version 1.9 or earlier clusters](#1.9_create_new)
 
 Before you update your cluster from Kubernetes version 1.9 or earlier to version 1.10 or later, review [Preparing to update to Calico v3](cs_versions.html#110_calicov3).
 {: tip}
 
 ### Adding Calico policies in Kubernetes version 1.10 or later clusters
-{: #1.10_add_policies}
+{: #1.10_create_new}
 
 1. Define your Calico [network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy) or [global network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/globalnetworkpolicy) by creating a configuration script (`.yaml`). These configuration files include the selectors that describe what pods, namespaces, or hosts that these policies apply to. Refer to these [sample Calico policies ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy) to help you create your own.
     **Note**: Kubernetes version 1.10 or later clusters must use Calico v3 policy syntax.
@@ -603,7 +603,7 @@ Before you update your cluster from Kubernetes version 1.9 or earlier to version
       {: pre}
 
 ### Adding Calico policies in Kubernetes version 1.9 or earlier clusters
-{: #1.9_add_policies}
+{: #1.9_create_new}
 
 1. Define your [Calico network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy) by creating a configuration script (`.yaml`). These configuration files include the selectors that describe what pods, namespaces, or hosts that these policies apply to. Refer to these [sample Calico policies ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy) to help you create your own.
     **Note**: Kubernetes version 1.9 or earlier clusters must use Calico v2 policy syntax.
@@ -627,7 +627,7 @@ Before you update your cluster from Kubernetes version 1.9 or earlier to version
 <br />
 
 
-## Block incoming traffic to LoadBalancer or NodePort services
+## Blocking incoming traffic to LoadBalancer or NodePort services
 {: #block_ingress}
 
 By default, Kubernetes `NodePort` and `LoadBalancer` services are designed to make your app available on all public and private cluster interfaces. However, you can block incoming traffic to your services based on traffic source or destination.
