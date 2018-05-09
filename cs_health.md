@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-07"
+lastupdated: "2018-05-09"
 
 ---
 
@@ -242,7 +242,7 @@ You can create a configuration for cluster logging. You can differentiate betwee
       {: screen}
 
 ## Updating log forwarding
-{: #enable-forwarding}
+{: #updating-forwarding}
 
 1. Update a log forwarding configuration.
     ```
