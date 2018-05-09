@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="-121 152 716.6 257" style="enable-background:new -121 152 716.6 257;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:none;stroke:#000000;stroke-miterlimit:10;}
@@ -34,14 +34,13 @@
 	.st28{fill:#87C3EB;stroke:#394B54;stroke-miterlimit:10;}
 	.st29{fill:#4278BD;}
 	.st30{fill:#FFFFFF;stroke:#1C3649;stroke-miterlimit:10;}
-	.st31{font-family:'HelvNeueRomanforIBM';}
+	.st31{font-family:'HelveticaNeueforIBM-Roman';}
 	.st32{font-size:12px;}
-	.st33{enable-background:new    ;}
-	.st34{font-size:14px;}
+	.st33{font-size:14px;}
+	.st34{enable-background:new    ;}
 	.st35{font-size:10px;}
-	.st36{fill:#231F20;}
 </style>
-<g id="Layer_1">
+<g>
 	<g id="XMLID_86_">
 		<g id="XMLID_259_">
 			<path id="XMLID_278_" class="st0" d="M447.8,356.9v6h-6"/>
@@ -380,27 +379,27 @@
 	<path id="XMLID_38_" class="st30" d="M25.8,296.7h-47.2c-1.8,0-3.3-1.5-3.3-3.3v-16.5c0-1.8,1.5-3.3,3.3-3.3h47.2
 		c1.8,0,3.3,1.5,3.3,3.3v16.5C29.1,295.2,27.6,296.7,25.8,296.7z"/>
 	<path id="XMLID_58_" class="st3" d="M-101.8,222h94.1v34.9h-94.1V222z"/>
-	<text id="XMLID_309_" transform="matrix(1 0 0 1 -92.46 327.261)" class="st31 st32">Container</text>
-	<text transform="matrix(1 0 0 1 87.081 325.604)" class="st31 st32">Lumberjack/</text>
-	<text transform="matrix(1 0 0 1 95.681 340.004)" class="st31 st32">Logstash</text>
-	<text id="XMLID_307_" transform="matrix(1 0 0 1 169.102 325.604)" class="st31 st32">Kafka-Bus</text>
-	<text id="XMLID_306_" transform="matrix(1 0 0 1 244.389 325.604)" class="st31 st32">LogStash</text>
-	<text id="XMLID_305_" transform="matrix(1 0 0 1 305.438 325.604)" class="st31 st32">ElasticSearch</text>
-	<text id="XMLID_304_" transform="matrix(1 0 0 1 482.278 325.466)" class="st31 st32">Grafana</text>
-	<text id="XMLID_303_" transform="matrix(1 0 0 1 535.463 325.465)" class="st31 st32">Kibana</text>
-	<text id="XMLID_273_" transform="matrix(1 0 0 1 498.8164 235.442)" class="st33"><tspan x="0" y="0" class="st31 st32">Benutzer-</tspan><tspan x="-5.2" y="14.4" class="st31 st32">schnittstelle</tspan></text>
-	<text transform="matrix(1 0 0 1 400.0024 323.604)" class="st33"><tspan x="0" y="0" class="st31 st32">Multi-</tspan><tspan x="-5.9" y="14.4" class="st31 st32">Tenant-</tspan></text>
-	<text transform="matrix(1 0 0 1 399.852 352.004)" class="st31 st32">Proxy</text>
-	<text id="XMLID_36_" transform="matrix(1 0 0 1 468.949 195.927)" class="st31 st34">IBM Cloud</text>
-	<text transform="matrix(1 0 0 1 240.097 236.528)" class="st31 st32">Protokollierung </text>
-	<text transform="matrix(1 0 0 1 243.597 250.928)" class="st31 st32">Privates Netz</text>
-	<text id="XMLID_300_" transform="matrix(1 0 0 1 75.16 195.927)" class="st31 st32">     Protokollierung</text>
-	<text id="XMLID_269_" transform="matrix(1 0 0 1 32.7335 303.554)" class="st33"><tspan x="0" y="0" class="st31 st35">über SSL </tspan><tspan x="-6.9" y="12" class="st31 st35">verschlüsselt</tspan></text>
-	<text transform="matrix(1 0 0 1 -85.502 234.786)" class="st31 st32">Container</text>
-	<text transform="matrix(1 0 0 1 -94.902 249.186)" class="st31 st32">Privates Netz</text>
-	<text id="XMLID_153_" transform="matrix(1 0 0 1 -17.46 289.081)" class="st31 st32">Crawler</text>
-</g>
-<g id="Layer_2">
-	<text id="XMLID_301_" transform="matrix(1 0 0 1 -111.616 195.927)" class="st36 st31 st34">IBM Cloud Container Service</text>
+	<g id="Text">
+		<text id="XMLID_309_" transform="matrix(1 0 0 1 -92.46 327.261)" class="st31 st32">Container</text>
+		<text transform="matrix(1 0 0 1 87.081 325.604)" class="st31 st32">Lumberjack/</text>
+		<text transform="matrix(1 0 0 1 95.681 340.004)" class="st31 st32">Logstash</text>
+		<text id="XMLID_307_" transform="matrix(1 0 0 1 169.102 325.604)" class="st31 st32">Kafka-Bus</text>
+		<text id="XMLID_306_" transform="matrix(1 0 0 1 244.389 325.604)" class="st31 st32">LogStash</text>
+		<text id="XMLID_305_" transform="matrix(1 0 0 1 305.438 325.604)" class="st31 st32">ElasticSearch</text>
+		<text id="XMLID_304_" transform="matrix(1 0 0 1 482.278 325.466)" class="st31 st32">Grafana</text>
+		<text id="XMLID_303_" transform="matrix(1 0 0 1 535.463 325.465)" class="st31 st32">Kibana</text>
+		<text id="XMLID_273_" transform="matrix(1 0 0 1 490.646 243.442)" class="st31 st32">Benutzerschnittstelle</text>
+		<text transform="matrix(1 0 0 1 386.852 325.604)" class="st31 st32">Multi-Tenant-</text>
+		<text transform="matrix(1 0 0 1 400.852 340.004)" class="st31 st32">Proxy</text>
+		<text id="XMLID_36_" transform="matrix(1 0 0 1 468.949 195.927)" class="st31 st33">IBM Bluemix</text>
+		<text transform="matrix(1 0 0 1 261.097 236.528)" class="st31 st32">Protokollierung </text>
+		<text transform="matrix(1 0 0 1 243.597 250.928)" class="st31 st32">Privates Netz</text>
+		<text id="XMLID_301_" transform="matrix(1 0 0 1 -111.616 195.927)" class="st31 st33">IBM Bluemix Container Service</text>
+		<text id="XMLID_300_" transform="matrix(1 0 0 1 75.16 195.927)" class="st34"><tspan x="0" y="0" class="st31 st32">     </tspan><tspan x="14.3" y="0" class="st31 st33">Protokollierung</tspan></text>
+		<text id="XMLID_269_" transform="matrix(1 0 0 1 32.108 303.554)" class="st31 st35">über SSL verschlüsselt</text>
+		<text transform="matrix(1 0 0 1 -84.502 234.786)" class="st31 st32">Privates </text>
+		<text transform="matrix(1 0 0 1 -94.902 249.186)" class="st31 st32">Netz zwischen Containern</text>
+		<text id="XMLID_153_" transform="matrix(1 0 0 1 -17.46 289.081)" class="st31 st32">Crawler</text>
+	</g>
 </g>
 </svg>

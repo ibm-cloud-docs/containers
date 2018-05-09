@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-14"
 
 ---
 
@@ -18,8 +18,7 @@ lastupdated: "2018-01-11"
 # Erforderliche Ports und IP-Adressen in Ihrer Firewall öffnen
 {: #firewall}
 
-Überprüfen Sie die hier aufgeführten Situationen, in denen Sie möglicherweise bestimmte Ports und IP-Adressen in Ihren Firewalls öffnen müssen, um folgende Aktionen zu ermöglichen:
-{:shortdesc}
+Überprüfen Sie die hier aufgeführten Situationen, in denen Sie möglicherweise bestimmte Ports und IP-Adressen in Ihren Firewalls öffnen müssen, um folgende Aktionen zu ermöglichen:{:shortdesc}
 
 * [Ausführen von `bx`-Befehlen](#firewall_bx) aus Ihrem lokalen System, wenn die Netzrichtlinien eines Unternehmens den Zugriff auf öffentliche Internetendpunkte über Proxys oder Firewalls verhindern.
 * [Ausführen von `kubectl`-Befehlen](#firewall_kubectl) aus Ihrem lokalen System, wenn die Netzrichtlinien eines Unternehmens den Zugriff auf öffentliche Internetendpunkte über Proxys oder Firewalls verhindern.
@@ -192,7 +191,7 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
       <tr>
         <td>Asien-Pazifik (Norden)</td>
         <td>hkg02<br>seo01<br>sng01<br>tok02</td>
-        <td><code>169.56.132.234</code><br><code>161.202.126.210</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
+        <td><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
        </tr>
       <tr>
          <td>Asien-Pazifik (Süden)</td>
@@ -202,7 +201,7 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
       <tr>
          <td>Zentraleuropa</td>
          <td>ams03<br>fra02<br>mil01<br>par01</td>
-         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.170</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
         </tr>
       <tr>
         <td>Großbritannien (Süden)</td>
@@ -216,8 +215,8 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
       </tr>
       <tr>
         <td>Vereinigte Staaten (Süden)</td>
-        <td>dal10<br>dal12<br>dal13<br>sao01</td>
-        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>169.57.151.10</code></td>
+        <td>dal10<br>dal12<br>dal13<br>hou02<br>sao01</td>
+        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>184.173.44.62</code><br><code>169.57.151.10</code></td>
       </tr>
       </tbody>
     </table>
@@ -225,7 +224,8 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
 
   3.  Erlauben Sie ausgehenden Netzverkehr von den Workerknoten an [{{site.data.keyword.registrylong_notm}}-Regionen](/docs/services/Registry/registry_overview.html#registry_regions):
       - `TCP port 443 FROM <each_worker_node_publicIP> TO <registry_publicIP>`
-      - Ersetzen Sie <em>&lt;registry_publicIP&gt;</em> durch die Registry-IP-Adressen, zu denen Sie Datenverkehr erlauben wollen. In der globalen Registry werden von IBM bereitgestellte öffentliche Images gespeichert. Ihre eigenen privaten oder öffentlichen Images werden in regionalen Registrys gespeichert.<p>
+      - Ersetzen Sie <em>&lt;registry_publicIP&gt;</em> durch die Registry-IP-Adressen, zu denen Sie Datenverkehr erlauben wollen. In der globalen Registry werden von IBM bereitgestellte öffentliche Images gespeichert. Ihre eigenen privaten oder öffentlichen Images werden in regionalen Registrys gespeichert.
+        <p>
 <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
       <thead>
         <th>{{site.data.keyword.containershort_notm}}-Region</th>

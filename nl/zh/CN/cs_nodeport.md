@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -19,8 +19,33 @@ lastupdated: "2018-01-24"
 # 设置 NodePort 服务
 {: #nodeport}
 
-通过使用集群中任何工作程序节点的公共 IP 地址并公开节点端口，使应用程序可通过因特网访问。此选项可用于测试公共访问权和短期使用公共访问权。
+通过使用 Kubernetes 集群中任何工作程序节点的公共 IP 地址并公开节点端口，使容器化应用程序可通过因特网访问。此选项可用于测试 {{site.data.keyword.containerlong}} 和短期公共访问权。
 {:shortdesc}
+
+## 使用 NodePort 服务规划外部联网
+{: #planning}
+
+在工作程序节点上公开一个公共端口，并使用该工作程序节点的公共 IP 地址通过因特网来公共访问集群中的服务。
+{:shortdesc}
+
+通过创建类型为 NodePort 的 Kubernetes 服务来公开应用程序时，将为该服务分配 30000-32767 范围内的 NodePort 以及内部集群 IP 地址。NodePort 服务充当应用程序入局请求的外部入口点。分配的 NodePort 在集群中每个工作程序节点的 kubeproxy 设置中公共公开。每个工作程序节点都会在分配的 NodePort 上开始侦听该服务的入局请求。要从因特网访问该服务，可以使用在集群创建期间分配的任何工作程序节点的公共 IP 地址以及 NodePort，格式为 `<ip_address>:<nodeport>`. 除了公共 IP 地址外，NodePort 服务还可用于工作程序节点的专用 IP 地址。
+
+下图显示配置 NodePort 服务后，如何将通信从因特网定向到应用程序：
+
+<img src="images/cs_nodeport_planning.png" width="550" alt="使用 NodePort 公开 {{site.data.keyword.containershort_notm}} 中的应用程序" style="width:550px; border-style: none"/>
+
+1. 使用工作程序节点的公共 IP 地址和工作程序节点上的 NodePort，将请求发送到应用程序。
+
+2. 请求会自动转发到 NodePort 服务的内部集群 IP 地址和端口。该内部集群 IP 地址只能在集群内部访问。
+
+3. `kube-proxy` 将请求路由到应用程序的 Kubernetes NodePort 服务。
+
+4. 该请求会转发到部署了应用程序的 pod 的专用 IP 地址。如果集群中部署了多个应用程序实例，那么 NodePort 服务会在应用程序 pod 之间路由请求。
+
+**注**：工作程序节点的公共 IP 地址不是永久固定的。除去或重新创建工作程序节点时，将为该工作程序节点分配新的公共 IP 地址。在测试应用程序的公共访问权时，或者仅在短时间内需要公共访问权时，可以使用 NodePort 服务。如果需要服务具有稳定的公共 IP 地址和更高可用性，请使用 [LoadBalancer 服务](cs_loadbalancer.html#planning)或 [Ingress](cs_ingress.html#planning) 来公开应用程序。
+
+<br />
+
 
 ## 使用 NodePort 服务类型来配置对应用程序的公共访问权
 {: #config}
@@ -28,11 +53,9 @@ lastupdated: "2018-01-24"
 对于免费或标准集群，可以将应用程序公开为 Kubernetes NodePort 服务。
 {:shortdesc}
 
-**注**：工作程序节点的公共 IP 地址不是永久固定的。如果必须重新创建工作程序节点，那么将为该工作程序节点分配新的公共 IP 地址。如果需要服务具有稳定的公共 IP 地址和更高可用性，请使用 [LoadBalancer 服务](cs_loadbalancer.html)或 [Ingress](cs_ingress.html) 来公开应用程序。
-
 如果还没有应用程序准备就绪，可以使用名为 [Guestbook ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/blob/master/examples/guestbook/all-in-one/guestbook-all-in-one.yaml) 的 Kubernetes 示例应用程序。
 
-1.  在应用程序的配置文件中，定义 [service ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/services-networking/service/) 部分。
+1.  在应用程序的配置文件中，定义 [service ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/services-networking/service/) 部分。**注**：对于 Guestbook 示例，配置文件中已经存在前端服务部分。要使 Guestbook 应用程序在外部可用，请向前端服务部分添加 NodePort 类型以及范围为 30000-32767 的 NodePort。
 
     示例：
 
@@ -78,28 +101,6 @@ lastupdated: "2018-01-24"
     </code></pre>所有已在使用的 NodePort 都会显示在**端口**字段下。</td>
      </tr>
      </tbody></table>
-
-
-    对于 Guestbook 示例，配置文件中已经存在前端服务部分。要使 Guestbook 应用程序在外部可用，请向前端服务部分添加 NodePort 类型以及范围为 30000-32767 的 NodePort。
-
-    ```
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: frontend
-      labels:
-        app: guestbook
-        tier: frontend
-    spec:
-      type: NodePort
-      ports:
-      - port: 80
-        nodePort: 31513
-      selector:
-        app: guestbook
-        tier: frontend
-    ```
-    {: codeblock}
 
 2.  保存已更新的配置文件。
 

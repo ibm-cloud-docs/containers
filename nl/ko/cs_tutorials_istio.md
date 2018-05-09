@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-05"
+lastupdated: "2018-02-27"
 
 ---
 
@@ -19,8 +19,7 @@ lastupdated: "2018-02-05"
 # 튜토리얼: {{site.data.keyword.containerlong_notm}}에 Istio 설치
 {: #istio_tutorial}
 
-[Istio](https://www.ibm.com/cloud/info/istio)는 Kubernetes와 같은 클라우드 플랫폼에서 서비스 메시(service mesh)로도 알려진 마이크로서비스의 네트워크에 연결하고, 보안, 관리 및 모니터하기 위한 균일한 방법을 개발자에게 제공하는 오픈 플랫폼입니다. Istio는 네트워크 트래픽 관리, 마이크로서비스에서 로드 밸런스, 액세스 정책 적용 및 서비스 메시에서 서비스 ID 식별 등의 기능을 제공합니다.
-
+[Istio](https://www.ibm.com/cloud/info/istio)는 {{site.data.keyword.containerlong}}에서 Kubernetes와 같은 클라우드 플랫폼에서 서비스 메시(service mesh)로도 알려진 마이크로서비스의 네트워크에 연결하고, 보안, 관리 및 모니터하기 위한 오픈 플랫폼입니다. Istio를 사용하여 네트워크 트래픽 관리하고 마이크로서비스에서 로드 밸런싱하고 액세스 정책을 적용하며 서비스 메시에서 서비스 ID를 확인합니다.
 {:shortdesc}
 
 이 튜토리얼에서는 BookInfo라는 간단한 모의 서점 앱을 위해 네 개의 마이크로서비스에 나란히 Istio를 설치하는 방법을 살펴봅니다. 마이크로서비스는 제품 웹 페이지, 책 세부사항, 검토 및 평가를 포함합니다. Istio가 설치된 {{site.data.keyword.containershort}} 클러스터에 BookInfo의 마이크로서비스를 배치하는 경우, 각 마이크로서비스의 포드에 Istio Envoy 사이드카 프록시를 삽입합니다.
@@ -52,6 +51,7 @@ lastupdated: "2018-02-05"
 {: #istio_tutorial1}
 
 Istio를 클러스터에 다운로드하고 설치하십시오.
+{:shortdesc}
 
 1. [https://github.com/istio/istio/releases ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/istio/istio/releases)에서 Istio를 직접 다운로드할 수도 있고 curl을 사용하여 최신 버전을 가져올 수도 있습니다.
 
@@ -122,7 +122,10 @@ Istio를 클러스터에 다운로드하고 설치하십시오.
 ## 학습 2: BookInfo 앱 배치
 {: #istio_tutorial2}
 
-BookInfo 샘플 앱의 마이크로서비스를 Kubernetes 클러스터에 배치하십시오. 이러한 네 개의 마이크로서비스는 제품 웹 페이지, 책 세부사항, 검토(검토 마이크로서비스의 여러 버전으로) 및 평가를 포함합니다. 이 예제에서 사용된 모든 파일은 Istio 설치의 `samples/bookinfo` 디렉토리에서 찾을 수 있습니다.
+BookInfo 샘플 앱의 마이크로서비스를 Kubernetes 클러스터에 배치하십시오.
+{:shortdesc}
+
+이러한 네 개의 마이크로서비스는 제품 웹 페이지, 책 세부사항, 검토(검토 마이크로서비스의 여러 버전으로) 및 평가를 포함합니다. 이 예제에서 사용된 모든 파일은 Istio 설치의 `samples/bookinfo` 디렉토리에서 찾을 수 있습니다.
 
 BookInfo를 배치하는 경우 마이크로서비스 포드가 배치되기 전에 Envoy 사이드카 프록시가 컨테이너로서 앱 마이크로서비스의 포드에 삽입됩니다. Istio는 Envoy 프록시의 확장 버전을 사용하여 서비스 메쉬에서 모든 마이크로서비스에 대한 모든 인바운드 및 아웃바운드 트래픽을 중개합니다. Envoy에 대한 자세한 정보는 [Istio 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://istio.io/docs/concepts/what-is-istio/overview.html#envoy)를 참조하십시오.
 
@@ -221,6 +224,7 @@ BookInfo를 배치하는 경우 마이크로서비스 포드가 배치되기 전
 {: #istio_tutorial_cleanup}
 
 [다음 단계](#istio_tutorial_whatsnext)에서 제공되는 더 많은 Istio 기능을 탐색하지 않으려는 경우 클러스터에서 Istio 리소스를 정리할 수 있습니다.
+{:shortdesc}
 
 1. 클러스터에서 모든 BookInfo 서비스, 포드 및 배치를 삭제하십시오.
 

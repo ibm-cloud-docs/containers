@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-14"
 
 ---
 
@@ -19,24 +19,30 @@ lastupdated: "2018-01-11"
 # Construindo contêineres de imagens
 {: #images}
 
-Uma imagem do Docker é a base para cada contêiner que você cria. Uma imagem é criada por meio de um Dockerfile, que é um arquivo que contém instruções para construir a imagem. Um Dockerfile pode
+Uma imagem do Docker é a base para cada contêiner que você cria com o {{site.data.keyword.containerlong}}.
+{:shortdesc}
+
+Uma imagem é criada por meio de um Dockerfile, que é um arquivo que contém instruções para construir a imagem. Um Dockerfile pode
 referenciar os artefatos de construção em suas instruções que são armazenadas separadamente, como um app, a configuração
 do app e suas dependências.
-{:shortdesc}
+
 
 
 ## Planejando registros de imagem
 {: #planning}
 
 As imagens geralmente são armazenadas em um registro que pode ser acessado pelo público (registro público) ou configurado com acesso
-limitado para um pequeno grupo de usuários (registro privado). Os registros
+limitado para um pequeno grupo de usuários (registro privado). 
+{:shortdesc}
+
+Os registros
 públicos, como Docker Hub, podem ser usados na introdução ao Docker e Kubernetes para criar seu
 primeiro app conteinerizado em um cluster. Mas quando se trata de aplicativos corporativos, use um registro
 privado como aquele fornecido no {{site.data.keyword.registryshort_notm}} para proteger suas imagens de serem usadas
 e mudadas por usuários não autorizados. Os registros
 privados devem ser configurados pelo administrador de cluster para assegurar que as credenciais para acessar o registro
 privado estejam disponíveis para os usuários do cluster.
-{:shortdesc}
+
 
 É possível usar múltiplos registros com o {{site.data.keyword.containershort_notm}} para implementar apps em seu cluster.
 
@@ -86,7 +92,7 @@ Para implementar um contêiner no namespace **padrão** de seu cluster, crie um 
     Para usar uma imagem privada de um namespace no {{site.data.keyword.registryshort_notm}}:
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1beta1
     kind: Deployment
     metadata:
       name: ibmliberty-deployment
@@ -300,7 +306,7 @@ Crie um arquivo de configuração de implementação.
 2.  Defina a implementação e a imagem pública do Docker Hub que você deseja usar. O arquivo de configuração a seguir usa a imagem pública NGINX disponível no Docker Hub.
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1beta1
     kind: Deployment
     metadata:
       name: nginx-deployment
@@ -338,7 +344,7 @@ Crie um arquivo de configuração de implementação.
 ## Acessando imagens que são armazenadas em outros registros privados
 {: #private_images}
 
-Se você já tiver um registro privado que você deseje usar, deverá armazenar as credenciais de registro em um imagePullSecret do Kubernetes e referenciar esse segredo em seu arquivo de configuração.
+Se você já tem um registro privado para uso, deve-se armazenar as credenciais de registro em um imagePullSecret do Kubernetes e referenciar esse segredo em seu arquivo de configuração.
 {:shortdesc}
 
 Antes de iniciar:
@@ -449,4 +455,3 @@ Para criar um imagePullSecret:
         kubectl apply -f mypod.yaml
         ```
         {: pre}
-

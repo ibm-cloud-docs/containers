@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-02"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -19,17 +19,18 @@ lastupdated: "2018-02-02"
 # Configurazione dei cluster
 {: #clusters}
 
-Progetta la configurazione del tuo cluster per la massima capacità e disponibilità.
+Progetta la configurazione del tuo cluster Kubernetes per la massima capacità e disponibilità dei contenitori con {{site.data.keyword.containerlong}}.
 {:shortdesc}
-
 
 ## Pianificazione configurazione cluster
 {: #planning_clusters}
 
-Utilizza i cluster standard per aumentare la disponibilità dell'applicazione. I tuoi utenti hanno meno probabilità di
+Utilizza i cluster standard per aumentare la disponibilità dell'applicazione.
+{:shortdesc}
+
+I tuoi utenti hanno meno probabilità di
 riscontrare tempi di inattività quando distribuisci la configurazione su più nodi di lavoro e cluster. Le funzionalità integrate, come il bilanciamento del carico e l'isolamento, aumentano la resilienza nei confronti di
 potenziali errori con host, reti o applicazioni.
-{:shortdesc}
 
 Rivedi la configurazione di questi cluster potenziali ordinati per gradi di disponibilità:
 
@@ -43,7 +44,7 @@ più nodi di lavoro
 Aumenta la disponibilità del tuo cluster con queste tecniche:
 
 <dl>
-<dt>Espandi le applicazioni tra i nodi di lavoro </dt>
+<dt>Espandi le applicazioni tra i nodi di lavoro</dt>
 <dd>Consenti agli sviluppatori di estendere le loro applicazioni nei contenitori tra più nodi di lavoro per cluster. Un'istanza dell'applicazione in ognuno dei tre nodi di lavoro permette il tempo di inattività di un nodo di lavoro senza interrompere l'utilizzo dell'applicazione. Puoi specificare quanti nodi di lavoro da includere quando crei un cluster dalla GUI [{{site.data.keyword.Bluemix_notm}}](cs_clusters.html#clusters_ui) o dalla CLI [](cs_clusters.html#clusters_cli). Kubernetes limita il numero massimo di nodi di lavoro che puoi avere in un cluster, per cui tieni a mente [il nodo di lavoro e le quote pod ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/admin/cluster-large/).
 <pre class="codeblock">
 <code>bx cs cluster-create --location &lt;dal10&gt; --workers 3 --public-vlan &lt;my_public_vlan_id&gt; --private-vlan &lt;my_private_vlan_id&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;my_cluster&gt;</code>
@@ -65,7 +66,7 @@ gli utenti possono ancora accedere a un'applicazione che viene distribuita anche
 </dd>
 <dt>Espandi le applicazioni tra i cluster in regioni differenti</dt>
 <dd>Quando espandi le applicazioni tra i cluster in regioni differenti puoi permettere il bilanciamento del carico basato sulla regione in cui è l'utente. Se il cluster, l'hardware o anche un'intera ubicazione in una regione vengono disattivati, il traffico viene instradato al contenitore distribuito in un'altra ubicazione.
-<p><strong>Importante:</strong> dopo aver configurato il dominio personalizzato, puoi utilizzare questi comandi per creare i cluster. </p>
+<p><strong>Importante:</strong> dopo aver configurato il dominio personalizzato, puoi utilizzare questi comandi per creare i cluster.</p>
 <p>Ubicazione
 1:</p>
 <pre class="codeblock">
@@ -82,50 +83,76 @@ gli utenti possono ancora accedere a un'applicazione che viene distribuita anche
 <br />
 
 
-## Pianificazione configurazione del nodo di lavoro 
+
+
+
+## Pianificazione configurazione del nodo di lavoro
 {: #planning_worker_nodes}
 
 Un cluster Kubernetes è costituito da nodi di lavoro ed è monitorato e gestito centralmente dal master Kubernetes. Gli amministratori del cluster decidono come configurare il cluster dei nodi di lavoro per garantire che gli utenti del cluster abbiano tutte le risorse per distribuire ed eseguire le applicazioni nel cluster.
 {:shortdesc}
 
-Quando crei un cluster standard, i nodi di lavoro vengono ordinati nell'infrastruttura IBM Cloud (SoftLayer) e configurati in {{site.data.keyword.Bluemix_notm}}. A ogni nodo di lavoro viene
-assegnato un ID e nome dominio univoco che non deve essere modificato dopo la creazione del cluster. A seconda del livello di isolamento hardware che hai scelto,
-i nodi di lavoro possono essere configurati come nodi condivisi o dedicati. Puoi anche scegliere se vuoi che i nodi di lavoro si colleghino a una VLAN pubblica e privata o solo a una VLAN privata. Viene eseguito il provisioning di ogni nodo di lavoro
+Quando crei un cluster standard, i nodi di lavoro vengono ordinati nell'infrastruttura IBM Cloud (SoftLayer) per te e aggiunti al pool di nodi di lavoro predefinito nel tuo cluster. A ogni nodo di lavoro viene
+assegnato un ID e nome dominio univoco che non deve essere modificato dopo la creazione del cluster.
+
+Puoi scegliere tra server virtuali o fisici (bare metal). A seconda del livello di isolamento hardware che scegli, i nodi di lavoro virtuali possono essere configurati come nodi condivisi o dedicati. Puoi anche scegliere se vuoi che i nodi di lavoro si colleghino a una VLAN pubblica e privata o solo a una VLAN privata. Viene eseguito il provisioning di ogni nodo di lavoro
 con un tipo di macchina specifico che determina il numero di vCPU, memoria
 e spazio su disco disponibili per i contenitori distribuiti al nodo di lavoro. Kubernetes limita il numero massimo di nodi di lavoro che puoi avere in un cluster. Controlla [nodo di lavoro e quote pod ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/admin/cluster-large/) per ulteriori informazioni.
+
+
+
 
 
 ### Hardware per i nodi di lavoro
 {: #shared_dedicated_node}
 
-Ogni nodo di lavoro è configurato come una macchina virtuale su un hardware fisico. Quando crei un cluster standard in {{site.data.keyword.Bluemix_notm}}, devi scegliere se desideri che l'hardware sottostante sia condiviso tra più clienti {{site.data.keyword.IBM_notm}} (più tenant) o che sia dedicato solo a te (tenant singolo).
+Quando crei un cluster standard in {{site.data.keyword.Bluemix_notm}}, puoi scegliere di eseguire il provisioning dei tuoi nodi di lavoro come macchine fisiche (bare metal) o come macchine virtuali eseguite su hardware fisico. Quando crei un cluster gratuito, viene eseguito automaticamente il provisioning del tuo nodo di lavoro come nodo virtuale condiviso nell'account dell'infrastruttura IBM Cloud (SoftLayer).
 {:shortdesc}
 
-In una configurazione a più tenant, le risorse fisiche, come ad esempio la CPU e la memoria, vengono condivise tra tutte le
+![Opzioni hardware per i nodi di lavoro in un cluster standard](images/cs_clusters_hardware.png)
+
+<dl>
+<dt>Macchine fisiche (bare metal)</dt>
+<dd>Puoi eseguire il provisioning del tuo nodo di lavoro come server fisico a singolo tenant, indicato anche come bare metal. Bare metal ti dà accesso diretto alle risorse fisiche sulla macchina, come la memoria o la CPU. Questa configurazione elimina l'hypervisor della macchina virtuale che assegna risorse fisiche alle macchine virtuali eseguite sull'host. Invece, tutte le risorse di una macchina bare metal sono dedicate esclusivamente al nodo di lavoro, quindi non devi preoccuparti dei "vicini rumorosi" che condividono risorse o rallentano le prestazioni.
+<p><strong>Fatturazione mensile</strong>: i server bare metal sono più costosi di quelli virtuali e sono più adatti per le applicazioni ad alte prestazioni che richiedono più risorse e controllo host. I server bare metal vengono fatturati mensilmente. Se annulli un server bare metal prima della fine del mese, ti viene addebitato il costo fino alla fine di quel mese. Quando esegui il provisioning dei server bare metal, interagisci direttamente con l'infrastruttura IBM Cloud (SoftLayer) e, pertanto, il completamento di questo processo manuale può richiedere più di un giorno lavorativo.</p>
+<p><strong>Opzione per abilitare Trusted Compute</strong>: solo su selezionati nodi di lavoro bare metal che eseguono Kubernetes versione 1.9 o successiva, puoi abilitare Trusted Compute per verificare possibili tentativi di intrusione nei tuoi nodi di lavoro. Se non abiliti l'attendibilità durante la creazione del cluster ma vuoi farlo in seguito, puoi usare il [comando](cs_cli_reference.html#cs_cluster_feature_enable) `bx cs feature-enable`. Dopo aver abilitato l'attendibilità, non puoi disabilitarla successivamente. Per ulteriori informazioni su come funziona l'attendibilità durante il processo di avvio del nodo, vedi [{{site.data.keyword.containershort_notm}} con Trusted Compute](cs_secure.html#trusted_compute). Quando esegui il [comando](cs_cli_reference.html#cs_machine_types) `bx cs machine-types <location>`, puoi vedere quali macchine supportano l'attendibilità controllando il campo `Trustable`.</p>
+<p><strong>Gruppi di tipi di macchine bare metal</strong>: i tipi di macchine bare metal sono forniti in gruppi che hanno diverse risorse di calcolo tra cui puoi scegliere per soddisfare le esigenze della tua applicazione. I tipi di macchine fisiche hanno un'archiviazione locale superiore a quelle virtuali e alcune dispongono di RAID per il backup dei dati locali. Per conoscere i diversi tipi di offerte bare metal, vedi il [comando](cs_cli_reference.html#cs_machine_types) `bx cs machine-type`.
+<ul><li>`mb1c`: scegli questo tipo per una configurazione bilanciata delle risorse della macchina fisica per i tuoi nodi di lavoro. Questo tipo include l'accesso alle reti a doppia ridondanza da 10 GB e una configurazione HDD SSD doppia. In genere dispone di un disco di archiviazione principale da 1 TB e un disco secondario da 1,7 o 2 TB.</li>
+<li>`mr1c`: scegli questo tipo per massimizzare la RAM disponibile per i tuoi nodi di lavoro.</li>
+<li>`md1c`: scegli questo tipo se i tuoi nodi di lavoro richiedono una quantità significativa di archiviazione su disco locale, incluso RAID per eseguire il backup dei dati memorizzati localmente sulla macchina. I dischi di archiviazione primaria da 1 TB sono configurati per RAID1 e i dischi di archiviazione secondaria da 4 TB sono configurati per RAID10.</li>
+
+</ul></p></dd>
+<dt>Macchine virtuali</dt>
+<dd>Quando crei un cluster virtuale standard, devi scegliere se desideri che l'hardware sottostante sia condiviso tra più clienti {{site.data.keyword.IBM_notm}} (più tenant) o che sia dedicato solo a te (tenant singolo).
+<p>In una configurazione a più tenant, le risorse fisiche, come ad esempio la CPU e la memoria, vengono condivise tra tutte le
 macchine virtuali distribuite allo stesso hardware fisico. Per assicurare che ogni macchina virtuale
 possa essere eseguita indipendentemente, un monitoraggio della macchina virtuale, conosciuto anche come hypervisor,
 divide le risorse fisiche in entità isolate e le alloca come risorse dedicate
-a una macchina virtuale (isolamento hypervisor).
-
-In una configurazione a tenant singolo, tutte le risorse fisiche sono dedicate soltanto a te. Puoi distribuire
+a una macchina virtuale (isolamento hypervisor).</p>
+<p>In una configurazione a tenant singolo, tutte le risorse fisiche sono dedicate soltanto a te. Puoi distribuire
 più nodi di lavoro come macchine virtuali allo stesso host fisico. In modo simile alla configurazione a più tenant,
 l'hypervisor assicura che ogni nodo ottenga la propria condivisione di risorse
-fisiche disponibili.
-
-I nodi condivisi sono generalmente più economici dei nodi dedicati perché i costi dell'hardware sottostante
+fisiche disponibili.</p>
+<p>I nodi condivisi sono generalmente più economici dei nodi dedicati perché i costi dell'hardware sottostante
 sono condivisi tra più clienti. Tuttavia, quando decidi tra nodi condivisi e dedicati,
 potresti voler verificare con il tuo dipartimento legale e discutere sul livello di conformità e isolamento dell'infrastruttura
-che il tuo ambiente dell'applicazione necessita.
+che il tuo ambiente dell'applicazione necessita.</p></dd>
+</dl>
 
-Quando crei un cluster gratuito, viene automaticamente eseguito il provisioning del tuo nodo di lavoro come nodo condiviso nell'account dell'infrastruttura IBM Cloud (SoftLayer). 
+I tipi di macchine fisiche e virtuali disponibili variano in base all'ubicazione in cui viene distribuito il cluster. Per ulteriori informazioni, vedi il [comando](cs_cli_reference.html#cs_machine_types) `bx cs machine-type`. Puoi distribuire i cluster utilizzando l'[IU della console](#clusters_ui) o la [CLI](#clusters_cli).
 
 ### Connessione VLAN per i nodi di lavoro
 {: #worker_vlan_connection}
 
-Quando crei un cluster, ogni cluster viene automaticamente collegato a una VLAN dal tuo account dell'infrastruttura IBM Cloud (SoftLayer). Una VLAN configura un gruppo di
+Quando crei un cluster, ogni cluster viene automaticamente collegato a una VLAN dal tuo account dell'infrastruttura IBM Cloud (SoftLayer).
+{:shortdesc}
+
+Una VLAN configura un gruppo di
 nodi di lavoro come se fossero collegati con lo stesso cavo fisico. La VLAN privata determina l'indirizzo IP privato assegnato a un nodo di lavoro durante la creazione del cluster e la VLAN pubblica determina l'indirizzo IP pubblico assegnato a un nodo di lavoro durante la creazione del cluster.
 
-Per i cluster gratuiti, i nodi di lavoro del cluster vengono collegati a una VLAN privata e a una VLAN pubblica di proprietà di IBM per impostazione predefinita durante la creazione del cluster. Per i cluster standard, puoi collegare i tuoi nodi di lavoro sia a una VLAN pubblica che privata o soltanto a una VLAN privata. Se vuoi collegare i tuoi nodi di lavoro solo a una VLAN privata, puoi designare l'ID di una VLAN privata esistente durante la creazione del cluster. Tuttavia, devi anche configurare una soluzione alternativa per abilitare una connessione sicura tra i nodi di lavoro e il master Kubernetes. Ad esempio, puoi configurare un Vyatta per passare il traffico dai nodi di lavoro della VLAN privata al master Kubernetes. Consulta "Set up a custom Vyatta to securely connect your worker nodes to the Kubernetes master" nella [documentazione dell'infrastruttura IBM Cloud (SoftLayer)](https://knowledgelayer.softlayer.com/procedure/basic-configuration-vyatta) per ulteriori informazioni.
+Per i cluster gratuiti, i nodi di lavoro del cluster vengono collegati a una VLAN privata e a una VLAN pubblica di proprietà di IBM per impostazione predefinita durante la creazione del cluster. Per i cluster standard, devi collegare i tuoi nodi di lavoro a una VLAN privata. Puoi collegare i tuoi nodi di lavoro a una VLAN pubblica e alla VLAN privata o solo alla VLAN privata. Se vuoi collegare i tuoi nodi di lavoro solo a una VLAN privata, puoi designare l'ID di una VLAN privata esistente durante la creazione del cluster o [creare una nuova VLAN privata](/docs/cli/reference/softlayer/index.html#sl_vlan_create). Tuttavia, devi anche configurare una soluzione alternativa per abilitare una connessione sicura tra i nodi di lavoro e il master Kubernetes. Ad esempio, puoi configurare un Vyatta per passare il traffico dai nodi di lavoro della VLAN privata al master Kubernetes. Consulta "Set up a custom Vyatta to securely connect your worker nodes to the Kubernetes master" nella [documentazione dell'infrastruttura IBM Cloud (SoftLayer)](https://knowledgelayer.softlayer.com/procedure/basic-configuration-vyatta) per ulteriori informazioni.
+
+**Nota**: se hai più VLAN per un cluster o più sottoreti sulla stessa VLAN, devi attivare lo spanning della VLAN in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per istruzioni, vedi [Abilita o disabilita lo spanning della VLAN](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
 
 ### Limiti di memoria dei nodi di lavoro
 {: #resource_limit_node}
@@ -147,7 +174,10 @@ Ogni tipo di macchina ha una diversa capacità di memoria. Quando sul nodo di la
 
 Per verificare la quantità di memoria utilizzata sul tuo nodo di lavoro, esegui [kubectl top node ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#top).
 
+### Autorecovery per i tuoi nodi di lavoro
+`Docker`, `kubelet`, `kube-proxy` e `calico` sono componenti critici che devono essere funzionali per avere un nodo di lavoro Kubernetes integro. Con il passare del tempo questi componenti possono rompersi e lasciare il tuo nodo di lavoro in uno stato non funzionale. I nodi di lavoro non funzionali riducono la capacità totale del cluster e possono causare tempi di inattività per la tua applicazione.
 
+Puoi [configurare i controlli di integrità per il nodo di lavoro e abilitare l'Autorecovery](cs_health.html#autorecovery). Se Autorecovery rileva un nodo di lavoro non integro in base ai controlli configurati, attiva un'azione correttiva come un ricaricamento del sistema operativo sul nodo di lavoro. Per ulteriori informazioni su come funziona Autorecovery, vedi il [blog Autorecovery ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
 
 <br />
 
@@ -156,31 +186,49 @@ Per verificare la quantità di memoria utilizzata sul tuo nodo di lavoro, esegui
 ## Creazione dei cluster con la GUI
 {: #clusters_ui}
 
-Un cluster Kubernetes  è una serie di nodi di lavoro organizzati in una
-rete. Lo scopo del cluster è di definire una serie di risorse, nodi, reti e dispositivi di archiviazione
-che mantengono le applicazioni altamente disponibili. Prima di poter distribuire un'applicazione,
+Lo scopo del cluster Kubernetes è quello di definire un insieme di risorse, nodi, reti e dispositivi di archiviazione che mantengano le applicazioni altamente disponibili. Prima di poter distribuire un'applicazione,
 devi creare un cluster e configurare le definizioni per i nodi di lavoro in tale cluster.
 {:shortdesc}
 
+Prima di iniziare, devi disporre di un [account {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/) Pagamento a consumo o Sottoscrizione. Puoi creare 1 cluster gratuito per provare alcune delle funzionalità o creare cluster standard per cluster completamente personalizzabili con la scelta dell'isolamento hardware.
+
 Per creare un cluster:
+
 1. Nel catalogo, seleziona **Cluster Kubernetes**.
+
 2. Seleziona una regione in cui distribuire il tuo cluster.
-3. Seleziona un tipo di piano del cluster. Puoi scegliere tra **Gratuito** o **Pagamento a consumo**. Con il piano Pagamento a consumo, puoi eseguire il provisioning di un cluster standard con le funzioni come più nodi di lavoro per un ambiente ad elevata disponibilità.
+
+3. Seleziona un tipo di piano del cluster. Puoi scegliere tra **Gratuito** o **Standard**. Con un cluster standard hai accesso a funzioni come più nodi di lavoro per un ambiente altamente disponibile.
+
 4. Configura i tuoi dettagli del cluster.
-    1. Fornisci al tuo cluster un nome, scegli una versione di Kubernetes e seleziona un'ubicazione in cui eseguire la distribuzione. Per prestazioni ottimali, seleziona l'ubicazione fisicamente più vicina a te. Tieni presente che potresti aver bisogno di un'autorizzazione legale prima di poter fisicamente archiviare i dati in un paese straniero se selezioni un'ubicazione al di fuori del tuo paese. 
-    2. Seleziona un tipo di macchina e specifica il numero di nodi di lavoro di cui hai bisogno. Il tipo di macchina definisce la quantità di CPU virtuale, di memoria e di spazio disco configurata in ogni nodo di lavoro e resa disponibile ai contenitori. 
-    3. Seleziona una VLAN pubblica e privata dal tuo account dell'infrastruttura IBM Cloud (SoftLayer). Entrambe le VLAN comunicano con i nodi di lavoro ma la VLAN pubblica anche con il master Kubernetes gestito da IBM. Puoi utilizzare la stessa VLAN per più cluster.
+
+    1. **Gratuito e Standard**: dai un nome al tuo cluster. Il nome deve iniziare con una lettera, può contenere lettere, numeri e - e non può contenere più di 35 caratteri. Nota che il dominio secondario Ingress assegnato da {{site.data.keyword.IBM_notm}} viene derivato dal nome del cluster. Il nome del cluster e il dominio secondario Ingress formano insieme il nome di dominio completo, che deve essere univoco all'interno di una regione e contenere 63 caratteri o meno. Per soddisfare questi requisiti, il nome del cluster potrebbe essere troncato o al dominio secondario potrebbero essere assegnati valori carattere casuali.
+
+    2. **Standard**: scegli una versione di Kubernetes e seleziona un'ubicazione in cui distribuire il tuo cluster. Per prestazioni ottimali, seleziona l'ubicazione fisicamente più vicina a te. Tieni presente che potresti aver bisogno di un'autorizzazione legale prima di poter fisicamente archiviare i dati in un paese straniero se selezioni un'ubicazione al di fuori del tuo paese.
+
+    3. **Standard**: seleziona un tipo di isolamento hardware. Il tipo virtuale ha una fatturazione oraria e il tipo bare metal ha una fatturazione mensile.
+
+        - **Virtuale - Dedicato**: i tuoi nodi di lavoro sono ospitati sull'infrastruttura dedicata al tuo account. Le tue risorse fisiche sono completamente isolate.
+
+        - **Virtuale - Condiviso**: le risorse dell'infrastruttura, come l'hypervisor e l'hardware fisico, sono condivise tra te e altri clienti IBM, ma ciascun nodo di lavoro è accessibile solo a te. Sebbene questa opzione sia meno costosa e sufficiente nella maggior parte dei casi, potresti voler verificare i requisiti di prestazioni e infrastruttura con le politiche aziendali.
+
+        - **Bare Metal**: il provisioning dei server bare metal, con fatturazione mensile, viene eseguito tramite l'interazione manuale con l'infrastruttura Cloud IBM (SoftLayer) e il completamento di questo processo può richiedere più di un giorno lavorativo. Bare metal è più adatto per le applicazioni ad alte prestazioni che richiedono più risorse e controllo host. Per i cluster che eseguono Kubernetes versione 1.9 o successiva, puoi anche scegliere di abilitare [Trusted Compute](cs_secure.html#trusted_compute) per verificare possibili tentativi di intrusione nei tuoi nodi di lavoro. Se non abiliti l'attendibilità durante la creazione del cluster ma vuoi farlo in seguito, puoi usare il [comando](cs_cli_reference.html#cs_cluster_feature_enable) `bx cs feature-enable`. Dopo aver abilitato l'attendibilità, non puoi disabilitarla successivamente.
+
+        Assicurati di voler eseguire il provisioning di una macchina bare metal. Poiché viene fatturata mensilmente, se la annulli immediatamente dopo un ordine effettuato per errore, ti viene comunque addebitato l'intero mese.
+        {:tip}
+
+    4.  **Standard**: seleziona un tipo di macchina e specifica il numero di nodi di lavoro di cui hai bisogno. Il tipo di macchina definisce la quantità di CPU virtuale, di memoria e di spazio disco configurata in ogni nodo di lavoro e resa disponibile ai contenitori. I tipi di macchine bare metal e virtuali disponibili variano in base all'ubicazione in cui viene distribuito il cluster. Per ulteriori informazioni, consulta la documentazione per il [comando](cs_cli_reference.html#cs_machine_types) `bx cs machine-type`. Dopo aver creato il cluster, puoi aggiungere diversi tipi di macchine aggiungendo un nuovo nodo di lavoro al cluster.
+
+    5. **Standard**: seleziona una VLAN pubblica (facoltativo) e una VLAN privata (obbligatorio) dal tuo account dell'infrastruttura IBM Cloud (SoftLayer). Entrambe le VLAN comunicano con i nodi di lavoro ma la VLAN pubblica anche con il master Kubernetes gestito da IBM. Puoi utilizzare la stessa VLAN per più cluster.
         **Nota**: se scegli di non selezionare una VLAN pubblica, devi configurare una soluzione alternativa. Consulta [Connessione VLAN per i nodi di lavoro](#worker_vlan_connection) per ulteriori informazioni.
-    4. Seleziona un tipo di hardware.
-        - **Dedicato**: i tuoi nodi di lavoro sono ospitati sull'infrastruttura che è dedicata al tuo account. Le tue risorse sono completamente isolate.
-        - **Condiviso**: le risorse dell'infrastruttura, come l'hypervisor e l'hardware fisico, vengono distribuite tra te e altri clienti IBM, ma ogni nodo di lavoro è accessibile solo a te. Sebbene questa opzione sia meno costosa e sufficiente nella maggior parte dei casi, potresti voler verificare le tue prestazioni e i requisiti dell'infrastruttura con le tue politiche aziendali.
-    5. Per impostazione predefinita, **Codifica disco locale** è selezionato. Se scegli di deselezionare la casella di spunta, i dati Docker dell'host non vengono codificati.[Ulteriori informazioni sulla codifica](cs_secure.html#encrypted_disks).
+
+    6. Per impostazione predefinita, **Codifica disco locale** è selezionato. Se scegli di deselezionare la casella di spunta, i dati Docker dell'host non vengono codificati.[Ulteriori informazioni sulla codifica](cs_secure.html#encrypted_disks).
+
 4. Fai clic su **Crea cluster**. Puoi vedere lo stato di avanzamento della distribuzione del nodo di lavoro nella scheda **Nodi di lavoro**. Quando la distribuzione è terminata, puoi vedere se il tuo cluster è pronto nella scheda **Panoramica**.
     **Nota:** a ogni nodo di lavoro viene assegnato
 un ID e nome dominio univoco che non deve essere modificato manualmente dopo la creazione del
 cluster. La modifica dell'ID o del nome dominio impedisce al master Kubernetes di gestire il tuo
 cluster.
-
 
 **Operazioni successive**
 
@@ -190,6 +238,7 @@ Quando il cluster è attivo e in esecuzione, puoi controllare le seguenti attivi
 il tuo cluster.](cs_cli_install.html#cs_cli_install)
 -   [Distribuisci un'applicazione nel tuo cluster.](cs_app.html#app_cli)
 -   [Configura il tuo registro privato in {{site.data.keyword.Bluemix_notm}} per memorizzare e condividere le immagini Docker con altri utenti.](/docs/services/Registry/index.html)
+- Se hai più VLAN per un cluster o più sottoreti sulla stessa VLAN, devi [attivare lo spanning della VLAN](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata.
 - Se hai un firewall, potresti dover [aprire le porte richieste](cs_firewall.html#firewall) per utilizzare i comandi `bx`, `kubectl` o `calicotl`, per consentire il traffico in uscita dal tuo cluster o per consentire il traffico in entrata per i servizi di rete.
 
 <br />
@@ -198,15 +247,19 @@ il tuo cluster.](cs_cli_install.html#cs_cli_install)
 ## Creazione dei cluster con la CLI
 {: #clusters_cli}
 
-Un cluster è una serie di nodi di lavoro organizzati in una
-rete. Lo scopo del cluster è di definire una serie di risorse, nodi, reti e dispositivi di archiviazione
-che mantengono le applicazioni altamente disponibili. Prima di poter distribuire un'applicazione,
+Lo scopo del cluster Kubernetes è quello di definire un insieme di risorse, nodi, reti e dispositivi di archiviazione che mantengano le applicazioni altamente disponibili. Prima di poter distribuire un'applicazione,
 devi creare un cluster e configurare le definizioni per i nodi di lavoro in tale cluster.
 {:shortdesc}
 
+Prima di iniziare:
+- Devi disporre di un [account {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/) Pagamento a consumo o Sottoscrizione. Puoi creare 1 cluster gratuito per provare alcune delle funzionalità o creare cluster standard per cluster completamente personalizzabili con la scelta dell'isolamento hardware.
+- [Assicurati di disporre delle autorizzazioni minime richieste nell'infrastruttura IBM Cloud (SoftLayer) per eseguire il provisioning di un cluster standard](cs_users.html#infra_access).
+
 Per creare un cluster:
+
 1.  Installa la CLI {{site.data.keyword.Bluemix_notm}} e il plugin
 [{{site.data.keyword.containershort_notm}}](cs_cli_install.html#cs_cli_install).
+
 2.  Accedi alla CLI {{site.data.keyword.Bluemix_notm}}. Immetti le tue credenziali
 {{site.data.keyword.Bluemix_notm}} quando richiesto.
 
@@ -223,7 +276,8 @@ Per creare un cluster:
 4.  Se vuoi creare o accedere ai cluster Kubernetes in un'altra regione rispetto alla regione {{site.data.keyword.Bluemix_notm}} che hai selezionato precedentemente, esegui `bx cs region-set`.
 
 6.  Crea un cluster.
-    1.  Esamina le ubicazioni disponibili. Le ubicazioni che vengono mostrate dipendono dalla regione {{site.data.keyword.containershort_notm}} a cui hai eseguito l'accesso.
+
+    1.  **Cluster standard**: esamina le ubicazioni disponibili. Le ubicazioni che vengono mostrate dipendono dalla regione {{site.data.keyword.containershort_notm}} a cui hai eseguito l'accesso.
 
         ```
         bx cs locations
@@ -232,28 +286,20 @@ Per creare un cluster:
 
         Il tuo output della CLI corrisponde alle [ubicazioni di alcune regioni del contenitore](cs_regions.html#locations).
 
-    2.  Scegli un'ubicazione ed esamina i tipi di macchina disponibili in tale ubicazione. Il tipo di macchina specifica le risorse di calcolo virtuali che sono disponibili per ogni nodo
-di lavoro.
+    2.  **Cluster standard**: scegli un'ubicazione ed esamina i tipi di macchina disponibili in tale ubicazione. Il tipo di macchina specifica gli host di calcolo virtuali o fisici disponibili per ciascun nodo di lavoro.
 
-        ```
-        bx cs machine-types <location>
-        ```
-        {: pre}
+        -  Visualizza il campo **Tipo di server** per scegliere macchine virtuali o fisiche (bare metal).
+        -  **Virtuale**: il provisioning delle macchine virtuali, con fatturazione oraria, viene eseguito su hardware condiviso o dedicato.
+        -  **Fisico**: il provisioning dei server bare metal, con fatturazione mensile, viene eseguito tramite l'interazione manuale con l'infrastruttura Cloud IBM (SoftLayer) e il completamento di questo processo può richiedere più di un giorno lavorativo. Bare metal è più adatto per le applicazioni ad alte prestazioni che richiedono più risorse e controllo host.
+        - **Macchine fisiche con Trusted Compute**: per i cluster bare metal che eseguono Kubernetes versione 1.9 o successiva, puoi anche scegliere di abilitare [Trusted Compute](cs_secure.html#trusted_compute) per verificare possibili tentativi di intrusione nei tuoi nodi di lavoro bare metal. Se non abiliti l'attendibilità durante la creazione del cluster ma vuoi farlo in seguito, puoi usare il [comando](cs_cli_reference.html#cs_cluster_feature_enable) `bx cs feature-enable`. Dopo aver abilitato l'attendibilità, non puoi disabilitarla successivamente.
+        -  **Tipi di macchina**: per decidere quale tipo di macchina distribuire, riesamina le combinazioni di core, memoria e archiviazione o consulta la [documentazione del comando](cs_cli_reference.html#cs_machine_types) `bx cs machine-type`. Dopo aver creato il tuo cluster, puoi aggiungere diversi tipi di macchine fisiche o virtuali utilizzando il [comando](cs_cli_reference.html#cs_worker_add) `bx cs worker-add`.
 
-        ```
-        Getting machine types list...
-        OK
-        Machine Types
-        Name         Cores   Memory   Network Speed   OS             Storage   Server Type
-        u2c.2x4      2       4GB      1000Mbps        UBUNTU_16_64   100GB     virtual
-        b2c.4x16     4       16GB     1000Mbps        UBUNTU_16_64   100GB     virtual
-        b2c.16x64    16      64GB     1000Mbps        UBUNTU_16_64   100GB     virtual
-        b2c.32x128   32      128GB    1000Mbps        UBUNTU_16_64   100GB     virtual
-        b2c.56x242   56      242GB    1000Mbps        UBUNTU_16_64   100GB     virtual
-        ```
-        {: screen}
+           Assicurati di voler eseguire il provisioning di una macchina bare metal. Poiché viene fatturata mensilmente, se la annulli immediatamente dopo un ordine effettuato per errore, ti viene comunque addebitato l'intero mese.
+           {:tip}
 
-    3.  Controlla se esiste già una VLAN pubblica e privata nell'infrastruttura IBM Cloud (SoftLayer) per questo account.
+        <pre class="pre">bx cs machine-types &lt;location&gt;</pre>
+
+    3.  **Cluster standard**: controlla se esiste già una VLAN pubblica e privata nell'infrastruttura IBM Cloud (SoftLayer) per questo account.
 
         ```
         bx cs vlans <location>
@@ -269,20 +315,22 @@ di lavoro.
         ```
         {: screen}
 
-        Se esiste già una VLAN pubblica e privata, nota i router corrispondenti. I router della VLAN privata iniziano sempre con `bcr` (router back-end) e i router
+        Se esiste già una VLAN pubblica e privata, annota i router corrispondenti. I router della VLAN privata iniziano sempre con `bcr` (router back-end) e i router
 della VLAN pubblica iniziano sempre con `fcr` (router front-end). La combinazione di numeri e lettere
 dopo questi prefissi devono corrispondere per utilizzare tali VLAN durante la creazione di un cluster. Nell'output di esempio, le VLAN private
 possono essere utilizzate con una qualsiasi VLAN pubblica perché i router includono tutti
 `02a.dal10`.
 
-    4.  Esegui il comando `cluster-create`. Puoi scegliere tra un cluster gratuito, che include un nodo di lavoro configurato con 2vCPU e 4 GB di memoria, o un cluster standard, che può includere quanti nodi di lavoro desideri nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). Quando crei un cluster standard, per impostazione predefinita, i dischi del nodo di lavoro vengono codificati, il relativo hardware condiviso tra più clienti IBM e viene effettuato un addebito per ora di utilizzo. </br>Esempio per un cluster standard:
+        Devi collegare i tuoi nodi di lavoro a una VLAN privata e puoi, facoltativamente, collegarli anche a una VLAN pubblica. **Nota**: se scegli di non selezionare una VLAN pubblica, devi configurare una soluzione alternativa. Consulta [Connessione VLAN per i nodi di lavoro](#worker_vlan_connection) per ulteriori informazioni.
+
+    4.  **Cluster gratuiti e standard**: esegui il comando `cluster-create`. Puoi scegliere tra un cluster gratuito, che include un nodo di lavoro configurato con 2vCPU e 4 GB di memoria, o un cluster standard, che può includere quanti nodi di lavoro desideri nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). Quando crei un cluster standard, per impostazione predefinita, i dischi del nodo di lavoro vengono codificati, il relativo hardware condiviso tra più clienti IBM e viene effettuato un addebito per ora di utilizzo. </br>Esempio per un cluster standard. Specifica le opzioni del cluster:
 
         ```
-        bx cs cluster-create --location dal10 --machine-type u2c.2x4 --hardware <shared_or_dedicated> --public-vlan <public_vlan_id> --private-vlan <private_vlan_id> --workers 3 --name <cluster_name> --kube-version <major.minor.patch> 
+        bx cs cluster-create --location dal10 --machine-type u2c.2x4 --hardware <shared_or_dedicated> --public-vlan <public_vlan_id> --private-vlan <private_vlan_id> --workers 3 --name <cluster_name> --kube-version <major.minor.patch> [--disable-disk-encrypt] [--trusted]
         ```
         {: pre}
 
-        Esempio per un cluster gratuito:
+        Esempio per un cluster gratuito. Specifica il nome del cluster:
 
         ```
         bx cs cluster-create --name my_cluster
@@ -290,7 +338,7 @@ possono essere utilizzate con una qualsiasi VLAN pubblica perché i router inclu
         {: pre}
 
         <table>
-        <caption>Tabella. Descrizione dei componenti del comando <code>bx cs cluster-create</code> </caption>
+        <caption>Tabella. Descrizione dei componenti del comando <code>bx cs cluster-create</code></caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti di questo comando</th>
         </thead>
@@ -301,53 +349,47 @@ possono essere utilizzate con una qualsiasi VLAN pubblica perché i router inclu
         </tr>
         <tr>
         <td><code>--location <em>&lt;location&gt;</em></code></td>
-        <td>Sostituisci <em>&lt;location&gt;</em> con l'ID ubicazione {{site.data.keyword.Bluemix_notm}} in cui vuoi creare
-il tuo cluster. [Le ubicazioni disponibili](cs_regions.html#locations) dipendono dalla regione {{site.data.keyword.containershort_notm}} in cui hai
-eseguito l'accesso.</td>
+        <td>**Cluster standard**: sostituisci <em>&lt;location&gt;</em> con l'ID ubicazione {{site.data.keyword.Bluemix_notm}} in cui vuoi creare il tuo cluster. [Le ubicazioni disponibili](cs_regions.html#locations) dipendono dalla regione {{site.data.keyword.containershort_notm}} in cui hai eseguito l'accesso.</td>
         </tr>
         <tr>
         <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
-        <td>Se stai creando un cluster standard, scegli un tipo di macchina. Il tipo di macchina specifica le risorse di calcolo virtuali che sono disponibili per ogni nodo
-di lavoro. Controlla [Confronto tra i cluster standard e gratuito per {{site.data.keyword.containershort_notm}}](cs_why.html#cluster_types) per ulteriori informazioni. Per i cluster gratuiti, non devi definire il tipo di macchina. </td>
+        <td>**Cluster standard**: scegli un tipo di macchina. Puoi distribuire i tuoi nodi di lavoro come macchine virtuali su hardware condiviso o dedicato o come macchine fisiche su bare metal. I tipi di macchine fisiche e virtuali disponibili variano in base all'ubicazione in cui viene distribuito il cluster. Per ulteriori informazioni, consulta la documentazione per il [comando](cs_cli_reference.html#cs_machine_types) `bx cs machine-type`. Per i cluster gratuiti, non devi definire il tipo di macchina.</td>
         </tr>
         <tr>
         <td><code>--hardware <em>&lt;shared_or_dedicated&gt;</em></code></td>
-        <td>Il livello di isolamento hardware per il nodo di lavoro. Utilizza dedicato per avere risorse fisiche dedicate disponibili solo per te o condiviso per consentire la condivisione delle risorse fisiche con altri clienti IBM. L'impostazione predefinita è condiviso. Questo valore è facoltativo per i cluster standard e non è disponibile per i cluster gratuiti.</td>
+        <td>**Cluster standard, solo virtuali**: il livello di isolamento hardware per il tuo nodo di lavoro. Utilizza dedicato per avere risorse fisiche dedicate disponibili solo per te o condiviso per consentire la condivisione delle risorse fisiche con altri clienti IBM. L'impostazione predefinita è condiviso. Questo valore è facoltativo per i cluster standard e non è disponibile per i cluster gratuiti.</td>
         </tr>
         <tr>
         <td><code>--public-vlan <em>&lt;public_vlan_id&gt;</em></code></td>
         <td><ul>
-          <li>Per i cluster gratuiti, non devi definire una VLAN pubblica. Il tuo cluster gratuito viene automaticamente collegato alla VLAN pubblica di proprietà di IBM. </li>
-          <li>Per un cluster standard, se hai già una VLAN pubblica configurata nel tuo account dell'infrastruttura IBM Cloud (SoftLayer) per quella ubicazione, immetti l'ID della VLAN pubblica. Se non hai ancora una VLAN privata e pubblica nel tuo account, non
-specificare questa opzione. {{site.data.keyword.containershort_notm}} crea automaticamente una VLAN pubblica per tuo conto.<br/><br/>
-          <strong>Nota</strong>: i router della VLAN privata iniziano sempre con <code>bcr</code> (router back-end) e i router
-della VLAN pubblica iniziano sempre con <code>fcr</code> (router front-end). La combinazione di numeri e lettere
-dopo questi prefissi devono corrispondere per utilizzare tali VLAN durante la creazione di un cluster.</li>
+          <li>**Cluster gratuiti**: non è necessario definire una VLAN pubblica. Il tuo cluster gratuito viene automaticamente collegato alla VLAN pubblica di proprietà di IBM.</li>
+          <li>**Cluster standard**: se hai già una VLAN pubblica configurata nel tuo account dell'infrastruttura IBM Cloud (SoftLayer) per quella ubicazione, immetti l'ID della VLAN pubblica. Se vuoi collegare i tuoi nodi di lavoro solo a una VLAN privata, non specificare questa opzione. **Nota**: se scegli di non selezionare una VLAN pubblica, devi configurare una soluzione alternativa. Consulta [Connessione VLAN per i nodi di lavoro](#worker_vlan_connection) per ulteriori informazioni.<br/><br/>
+          <strong>Nota</strong>: i router della VLAN privata iniziano sempre con <code>bcr</code> (router back-end) e i router della VLAN pubblica iniziano sempre con <code>fcr</code> (router front-end). La combinazione di numeri e lettere dopo questi prefissi devono corrispondere per utilizzare tali VLAN durante la creazione di un cluster.</li>
         </ul></td>
         </tr>
         <tr>
         <td><code>--private-vlan <em>&lt;private_vlan_id&gt;</em></code></td>
-        <td><ul><li>Per i cluster gratuiti, non devi definire una VLAN privata. Il tuo cluster gratuito viene automaticamente collegato alla VLAN privata di proprietà di IBM. </li><li>Per un cluster standard, se hai già una VLAN privata configurata nel tuo account dell'infrastruttura IBM Cloud (SoftLayer) per quella ubicazione, immetti l'ID della VLAN privata. Se non hai ancora una VLAN privata e pubblica nel tuo account, non
-specificare questa opzione. {{site.data.keyword.containershort_notm}} crea automaticamente una VLAN pubblica per tuo conto.<br/><br/><strong>Nota</strong>: i router della VLAN privata iniziano sempre con <code>bcr</code> (router back-end) e i router
-della VLAN pubblica iniziano sempre con <code>fcr</code> (router front-end). La combinazione di numeri e lettere
-dopo questi prefissi devono corrispondere per utilizzare tali VLAN durante la creazione di un cluster.</li></ul></td>
+        <td><ul><li>**Cluster gratuiti**: non è necessario definire una VLAN privata. Il tuo cluster gratuito viene automaticamente collegato alla VLAN privata di proprietà di IBM.</li><li>**Cluster standard**: se hai già una VLAN privata configurata nel tuo account dell'infrastruttura IBM Cloud (SoftLayer) per quella ubicazione, immetti l'ID della VLAN privata. Se non hai una VLAN privata nel tuo account, non specificare questa opzione. {{site.data.keyword.containershort_notm}} crea automaticamente una VLAN privata per te.<br/><br/><strong>Nota</strong>: i router della VLAN privata iniziano sempre con <code>bcr</code> (router back-end) e i router della VLAN pubblica iniziano sempre con <code>fcr</code> (router front-end). La combinazione di numeri e lettere dopo questi prefissi devono corrispondere per utilizzare tali VLAN durante la creazione di un cluster.</li></ul></td>
         </tr>
         <tr>
         <td><code>--name <em>&lt;name&gt;</em></code></td>
-        <td>Sostituisci <em>&lt;name&gt;</em> con un nome per il tuo cluster.</td>
+        <td>**Cluster gratuiti e standard**: sostituisci <em>&lt;name&gt;</em> con un nome per il tuo cluster. Il nome deve iniziare con una lettera, può contenere lettere, numeri e - e non può contenere più di 35 caratteri. Nota che il dominio secondario Ingress assegnato da {{site.data.keyword.IBM_notm}} viene derivato dal nome del cluster. Il nome del cluster e il dominio secondario Ingress formano insieme il nome di dominio completo, che deve essere univoco all'interno di una regione e contenere 63 caratteri o meno. Per soddisfare questi requisiti, il nome del cluster potrebbe essere troncato o al dominio secondario potrebbero essere assegnati valori carattere casuali.</td>
         </tr>
         <tr>
         <td><code>--workers <em>&lt;number&gt;</em></code></td>
-        <td>Il numero di nodi di lavoro da includere nel cluster. Se non viene specificata l'opzione <code>--workers</code>,
-viene creato 1 nodo di lavoro.</td>
+        <td>**Cluster standard**: il numero di nodi di lavoro da includere nel cluster. Se non viene specificata l'opzione <code>--workers</code>, viene creato 1 nodo di lavoro.</td>
         </tr>
         <tr>
           <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
-          <td>La versione di Kubernetes per il nodo master del cluster. Questo valore è facoltativo. Se non specificato, il cluster viene creato con l'impostazione predefinita delle versioni di Kubernetes supportate. Per visualizzare le versioni disponibili. esegui <code>bx cs kube-versions</code>.</td>
+          <td>**Cluster standard**: la versione di Kubernetes per il nodo master del cluster. Questo valore è facoltativo. Se non specificato, il cluster viene creato con l'impostazione predefinita delle versioni di Kubernetes supportate. Per visualizzare le versioni disponibili. esegui <code>bx cs kube-versions</code>.</td>
         </tr>
         <tr>
         <td><code>--disable-disk-encrypt</code></td>
-        <td>Codifica del disco della funzione dei nodi di lavoro predefinita; [ulteriori informazioni](cs_secure.html#encrypted_disks). Se vuoi disabilitare la codifica, includi questa opzione. </td>
+        <td>**Cluster gratuiti e standard**: i nodi di lavoro dispongono della codifica del disco per impostazione predefinita; [ulteriori informazioni](cs_secure.html#encrypted_disks). Se vuoi disabilitare la codifica, includi questa opzione.</td>
+        </tr>
+        <tr>
+        <td><code>--trusted</code></td>
+        <td>**Cluster bare metal standard**: abilita [Trusted Compute](cs_secure.html#trusted_compute) per verificare i tentativi di intrusione nei tuoi nodi di lavoro bare metal. Se non abiliti l'attendibilità durante la creazione del cluster ma vuoi farlo in seguito, puoi usare il [comando](cs_cli_reference.html#cs_cluster_feature_enable) `bx cs feature-enable`. Dopo aver abilitato l'attendibilità, non puoi disabilitarla successivamente.</td>
         </tr>
         </tbody></table>
 
@@ -358,15 +400,13 @@ viene creato 1 nodo di lavoro.</td>
     ```
     {: pre}
 
-    **Nota:** servono fino a 15 minuti perché le macchine del nodo di lavoro siano ordinate e che il cluster
-sia configurato e ne sia stato eseguito il provisioning al tuo account.
+    **Nota:** per le macchine virtuali, possono essere necessari alcuni minuti per l'ordine delle macchine del nodo di lavoro e per la configurazione e il provisioning del cluster nel tuo account. Il provisioning delle macchine fisiche bare metal viene eseguito tramite l'interazione manuale con l'infrastruttura Cloud IBM (SoftLayer) e il completamento di questo processo può richiedere più di un giorno lavorativo.
 
-    Quando è stato terminato il provisioning del tuo cluster,
-lo stato del tuo cluster viene modificato in **distribuito**.
+    Quando è stato terminato il provisioning del tuo cluster, lo stato del tuo cluster viene modificato in **distribuito**.
 
     ```
-    Name         ID                                   State      Created          Workers   
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1
+    Name         ID                                   State      Created          Workers   Location   Version
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.8.8
     ```
     {: screen}
 
@@ -377,19 +417,13 @@ lo stato del tuo cluster viene modificato in **distribuito**.
     ```
     {: pre}
 
-    Quando i nodi di lavoro sono pronti, la condizione
-passa a **normale** e lo stato è **Pronto**. Quando lo stato del nodo è **Pronto**,
-puoi accedere al
-cluster.
+    Quando i nodi di lavoro sono pronti, la condizione passa a **normale** e lo stato è **Pronto**. Quando lo stato del nodo è **Pronto**, puoi accedere al cluster.
 
-    **Nota:** a ogni nodo di lavoro viene assegnato
-un ID e nome dominio univoco che non deve essere modificato manualmente dopo la creazione del
-cluster. La modifica dell'ID o del nome dominio impedisce al master Kubernetes di gestire il tuo
-cluster.
+    **Nota:** a ogni nodo di lavoro viene assegnato un ID e nome dominio univoco che non deve essere modificato manualmente dopo la creazione del cluster. La modifica dell'ID o del nome dominio impedisce al master Kubernetes di gestire il tuo cluster.
 
     ```
-    ID                                                  Public IP        Private IP     Machine Type   State      Status  
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1   169.47.223.113   10.171.42.93   free           normal    Ready
+    ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.47.223.113  10.171.42.93    free           normal   Ready    mil01      1.8.8
     ```
     {: screen}
 
@@ -454,30 +488,80 @@ cluster.
 -   [Distribuisci un'applicazione nel tuo cluster.](cs_app.html#app_cli)
 -   [Gestisci il tuo cluster con la riga di comando `kubectl`. ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/user-guide/kubectl/)
 -   [Configura il tuo registro privato in {{site.data.keyword.Bluemix_notm}} per memorizzare e condividere le immagini Docker con altri utenti.](/docs/services/Registry/index.html)
+- Se hai più VLAN per un cluster o più sottoreti sulla stessa VLAN, devi [attivare lo spanning della VLAN](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata.
 - Se hai un firewall, potresti dover [aprire le porte richieste](cs_firewall.html#firewall) per utilizzare i comandi `bx`, `kubectl` o `calicotl`, per consentire il traffico in uscita dal tuo cluster o per consentire il traffico in entrata per i servizi di rete.
 
 <br />
 
 
-## Stati cluster
+
+
+## Visualizzazione degli stati del cluster
 {: #states}
 
-Puoi visualizzare lo stato del cluster corrente eseguendo il comando `bx cs clusters` e individuando il campo **Stato**. Lo stato del cluster ti fornisce le informazioni sulla disponibilità e sulla capacità del cluster e i problemi potenziali che possono venire riscontrati.
+Esamina lo stato di un cluster Kubernetes per ottenere informazioni sulla disponibilità e capacità del cluster e sui potenziali problemi che potrebbero essersi verificati.
 {:shortdesc}
 
-|Stato cluster|Motivo|
-|-------------|------|
+Per visualizzare le informazioni su un cluster specifico, come ubicazione, URL master, dominio secondario Ingress, versione, nodi di lavoro, proprietario e dashboard di monitoraggio, utilizza il [comando](cs_cli_reference.html#cs_cluster_get) `bx cs cluster-get <mycluster>`. Includi l'indicatore `--showResources` per visualizzare più risorse del cluster come i componenti aggiuntivi per i pod di archiviazione o le VLAN di sottorete per IP pubblici e privati.
 
-|Critico|Il master Kubernetes non può essere raggiunto o tutti i nodi di lavoro nel cluster sono inattivi. <ol><li>Elenca i nodi di lavoro nel tuo cluster.<pre class="pre"><code>bx cs workers &lt;cluser_name_or_id&gt;</code></pre><li>Ottieni i dettagli di ogni nodo di lavoro.<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre></li><li>Controlla i campi <strong>Condizione</strong> e <strong>Stato</strong> per trovare il problema principale per cui il nodo di lavoro è inattivo.<ul><li>Se lo stato del nodo di lavoro mostra <strong>Provision_failed</strong>, potresti non disporre delle autorizzazioni necessarie per eseguire il provisioning di un nodo di lavoro dal portfolio dell'infrastruttura IBM Cloud (SoftLayer). Per trovare le autorizzazioni necessarie, consulta [Configurazione dell'accesso al portfolio dell'infrastruttura IBM Cloud (SoftLayer) per creare cluster Kubernetes standard](cs_infrastructure.html#unify_accounts).</li><li>Se la condizione del nodo di lavoro visualizza <strong>Critico</strong> e lo stato visualizza <strong>Non pronto</strong>, il tuo nodo di lavoro non può collegarsi all'infrastruttura IBM Cloud (SoftLayer). Avvia la risoluzione dei problemi eseguendo prima <code>bx cs worker-reboot --hard CLUSTER WORKER</code>. Se quel comando non ha esito positivo, esegui <code>bx cs worker reload CLUSTER WORKER</code>.</li><li>Se la condizione del nodo di lavoro visualizza <strong>Critico</strong> e lo stato visualizza <strong>Spazio su disco esaurito
-</strong>, il tuo nodo di lavoro ha esaurito la capacità. Puoi ridurre il carico di lavoro nel tuo nodo di lavoro o aggiungere un nodo di lavoro al tuo cluster per bilanciare il carico del carico di lavoro.</li><li>Se la condizione del nodo di lavoro visualizza <strong>Critico</strong> e lo stato visualizza <strong>Sconosciuto</strong>, il master Kubernetes non è disponibile. Contatta il supporto {{site.data.keyword.Bluemix_notm}} aprendo un [ticket di supporto {{site.data.keyword.Bluemix_notm}}](/docs/get-support/howtogetsupport.html#using-avatar).</li></ul></li></ol>|
+Puoi visualizzare lo stato del cluster corrente eseguendo il comando `bx cs clusters` e individuando il campo **Stato**. Per risolvere i problemi relativi al cluster e ai nodi di lavoro, vedi [Risoluzione dei problemi dei cluster](cs_troubleshoot.html#debug_clusters).
 
-|In distribuzione|Il master Kubernetes non è ancora stato completamente distribuito. Non puoi accedere al tuo cluster.|
-|Normale|Tutti i nodi di lavoro in un cluster sono attivi e in esecuzione. Puoi accedere al cluster e distribuire le applicazioni al cluster.|
-|In sospeso|Il master Kubernetes è stato distribuito. Sta venendo eseguito il provisioning dei nodi di lavoro e non sono ancora disponibili nel cluster. Puoi accedere al cluster, ma non puoi distribuire le applicazioni al cluster.|
-
-|Avvertenza|Almeno un nodo di lavoro nel cluster non è disponibile, ma altri lo sono e possono subentrare nel carico di lavoro. <ol><li>Elenca i nodi di lavoro nel tuo cluster e prendi nota dell'ID dei nodi di lavoro che visualizzano lo stato <strong>Avvertenza</strong>.<pre class="pre"><code>bx cs workers &lt;cluster_name_or_id&gt;</code></pre><li>Ottieni i dettagli per un nodo di lavoro.<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre><li>Controlla i campi <strong>Condizione</strong>, <strong>Stato</strong> e <strong>Dettagli</strong> per trovare il problema principale per cui il nodo di lavoro è inattivo.</li><li>Se il nodo di lavoro ha quasi raggiunto il limite di spazio disco o di memoria, riduci il carico di lavoro per il tuo nodo di lavoro o aggiungi una nodo di lavoro al tuo cluster per bilanciare il carico del carico di lavoro.</li></ol>|
-
-{: caption="Tabella. Stati cluster" caption-side="top"}
+<table summary="Ogni riga della tabella deve essere letta da sinistra verso destra, con lo stato del cluster nella prima colonna e un descrizione nella seconda colonna.">
+   <thead>
+   <th>Stato cluster</th>
+   <th>Descrizione</th>
+   </thead>
+   <tbody>
+<tr>
+   <td>Interrotto</td>
+   <td>L'eliminazione del cluster viene richiesta dall'utente prima che il master Kubernetes venga distribuito. Al termine dell'eliminazione del cluster, questo viene rimosso dal tuo dashboard. Se il tuo cluster rimane bloccato in questo stato per un lungo periodo, apri un [ticket di supporto {{site.data.keyword.Bluemix_notm}}](/docs/get-support/howtogetsupport.html#using-avatar).</td>
+   </tr>
+ <tr>
+     <td>Critico</td>
+     <td>Il master Kubernetes non può essere raggiunto o tutti i nodi di lavoro nel cluster sono inattivi. </td>
+    </tr>
+   <tr>
+     <td>Eliminazione non riuscita</td>
+     <td>Non è possibile eliminare il master Kubernetes o almeno uno dei nodi di lavoro.  </td>
+   </tr>
+   <tr>
+     <td>Eliminato</td>
+     <td>Il cluster viene eliminato ma non ancora rimosso dal tuo dashboard. Se il tuo cluster rimane bloccato in questo stato per un lungo periodo, apri un [ticket di supporto {{site.data.keyword.Bluemix_notm}}](/docs/get-support/howtogetsupport.html#using-avatar).</td>
+   </tr>
+   <tr>
+   <td>Eliminazione</td>
+   <td>Il cluster viene eliminato e la relativa infrastruttura viene smantellata. Non puoi accedere al cluster. </td>
+   </tr>
+   <tr>
+     <td>Distribuzione non riuscita</td>
+     <td>Non è stato possibile completare la distribuzione del master Kubernetes. Non puoi risolvere questo stato. Contatta il supporto IBM Cloud aprendo un [ticket di supporto {{site.data.keyword.Bluemix_notm}}](/docs/get-support/howtogetsupport.html#using-avatar).</td>
+   </tr>
+     <tr>
+       <td>Distribuzione</td>
+       <td>Il master Kubernetes non è ancora stato completamente distribuito. Non puoi accedere al tuo cluster. Attendi fino alla completa distribuzione del cluster per verificarne l'integrità.</td>
+      </tr>
+      <tr>
+       <td>Normale</td>
+       <td>Tutti i nodi di lavoro in un cluster sono attivi e in esecuzione. Puoi accedere al cluster e distribuire le applicazioni al cluster. Questo stato è considerato come integro e non richiede un'azione da parte tua.</td>
+    </tr>
+      <tr>
+       <td>In sospeso</td>
+       <td>Il master Kubernetes è stato distribuito. Sta venendo eseguito il provisioning dei nodi di lavoro e non sono ancora disponibili nel cluster. Puoi accedere al cluster, ma non puoi distribuire le applicazioni al cluster.  </td>
+     </tr>
+   <tr>
+     <td>Richiesto</td>
+     <td>Viene inviata una richiesta per creare il cluster e ordinare l'infrastruttura per il master Kubernetes e i nodi di lavoro. Quando viene avviata la distribuzione del cluster, lo stato del cluster cambia in <code>Distribuzione</code>. Se il tuo cluster rimane bloccato nello stato <code>Richiesto</code> per molto tempo, apri un [ticket di supporto {{site.data.keyword.Bluemix_notm}}](/docs/get-support/howtogetsupport.html#using-avatar). </td>
+   </tr>
+   <tr>
+     <td>Aggiornamento in corso</td>
+     <td>Il server API Kubernetes eseguito nel master Kubernetes viene aggiornato a una nuova versione dell'API Kubernetes. Durante l'aggiornamento non puoi accedere o modificare il cluster. I nodi di lavoro, le applicazioni e le risorse che sono state distribuiti dall'utente non vengono modificati e continuano a essere eseguiti. Attendi il completamento dell'aggiornamento per verificare l'integrità del tuo cluster. </td>
+   </tr>
+    <tr>
+       <td>Avvertenza</td>
+       <td>Almeno un nodo di lavoro nel cluster non è disponibile, ma altri lo sono e possono subentrare nel carico di lavoro. </td>
+    </tr>
+   </tbody>
+ </table>
 
 <br />
 
@@ -491,15 +575,12 @@ più risorse.
 
 I cluster gratuiti e standard creati con un account a Pagamento a consumo devono essere rimossi manualmente dall'utente quando non sono più necessari.
 
-Quando elimini un cluster, stai anche eliminando le risorse nel cluster,
-inclusi i contenitori, i pod, i servizi associati e i segreti. Se quando elimini il tuo cluster non elimini l'archiviazione, puoi eliminarla attraverso il dashboard dell'infrastruttura IBM Cloud (SoftLayer) nella GUI {{site.data.keyword.Bluemix_notm}}. A causa del ciclo di fatturazione mensile, non è possibile eliminare un'attestazione del volume persistente durante l'ultimo
-giorno del mese. Se elimini l'attestazione del volume persistente l'ultimo giorno del mese, l'eliminazione rimane in sospeso fino all'inizio del mese successivo.
+Quando elimini un cluster, stai anche eliminando le risorse nel cluster, inclusi i contenitori, i pod, i servizi associati e i segreti. Se quando elimini il tuo cluster non elimini l'archiviazione, puoi eliminarla attraverso il dashboard dell'infrastruttura IBM Cloud (SoftLayer) nella GUI {{site.data.keyword.Bluemix_notm}}. A causa del ciclo di fatturazione mensile, non è possibile eliminare un'attestazione del volume persistente durante l'ultimo giorno del mese. Se elimini l'attestazione del volume persistente l'ultimo giorno del mese, l'eliminazione rimane in sospeso fino all'inizio del mese successivo.
 
-**Avvertenza:** non è stato creato alcun backup del tuo cluster o dei tuoi dati nella tua memoria persistente. L'eliminazione di un cluster è permanente e non può essere annullata.
+**Avvertenza:** non è stato creato alcun backup del tuo cluster o dei tuoi dati nella tua archiviazione persistente. L'eliminazione di un cluster è permanente e non può essere annullata.
 
 -   Dalla GUI {{site.data.keyword.Bluemix_notm}}
-    1.  Seleziona il tuo cluster
-e fai clic su **Elimina** dal gruppo **Ulteriori azioni...**.
+    1.  Seleziona il tuo cluster e fai clic su **Elimina** dal menu **Ulteriori azioni...**.
 -   Dalla CLI {{site.data.keyword.Bluemix_notm}}
     1.  Elenca i cluster disponibili.
 

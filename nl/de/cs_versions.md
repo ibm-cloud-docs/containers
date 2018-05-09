@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-08"
+lastupdated: "2018-03-13"
 
 ---
 
@@ -18,16 +18,21 @@ lastupdated: "2018-02-08"
 # Kubernetes-Versionen für {{site.data.keyword.containerlong_notm}}
 {: #cs_versions}
 
-{{site.data.keyword.containerlong}} unterstützt mehrere gleichzeitig ausgeführte Kubernetes-Versionen: eine aktuelle Version, eine Standardversion und eine unterstützte Version (in der Regel zwei Versionsstufen niedriger als die aktuellen Version). Die Standardversion kann mit der aktuellen Version identisch sein. Sie wird verwendet, wenn Sie einen Cluster erstellen oder aktualisieren, sofern Sie keine andere Version angeben.
+{{site.data.keyword.containerlong}} unterstützt momentan mehrere Versionen von Kubernetes. Wenn die aktuelleste Veresion (n) freigegeben wird, werden bis zu 2 Versionen davor (n-2) unterstützt. Versionen, die mehr als zwei Versionen älter sind, als die aktuellsten Version (n-3) werden zuerst nicht mehr verwendet und dann nicht weiter unterstützt.
 {:shortdesc}
 
 Die folgenden Kubernetes-Version werden gegenwärtig unterstützt:
 
-- Aktuell: 1.9.2
-- Standard: 1.8.6
+- Aktuellste: 1.9.3
+- Standard: 1.8.8
 - Unterstützt: 1.7.4
+- Veraltet: 1.5.x, nicht mehr unterstützt seit 4. April 2018
 
-Wenn Sie Cluster unter einer Kubernetes-Version ausführen, die gegenwärtig nicht unterstützt wird, [überprüfen Sie potenzielle Auswirkungen](#version_types) für Aktualisierungen und [aktualisieren Sie den Cluster](cs_cluster_update.html#update) sofort, damit Sie weiterhin wichtige Sicherheitsaktualisierungen und Support erhalten. Führen Sie den folgenden Befehl aus, um die Serverversion zu überprüfen.
+**Veraltete Versionen**: Wenn Cluster auf einem veralteten Kubernetes ausgeführt werden, haben Sie 30 Tage Zeit, um eine unterstützte Kubernetes-Version zu überprüfen und auf diese neuere Version zu aktualisieren, bevor die veraltete Version nicht mehr unterstützt wird. Während des Zeitraums der Einstellung der Unterstützung können Sie eingeschränkte Befehle in Ihren Clustern ausführen, um Worker hinzuzufügen, erneut zu laden und um das Cluster zu aktualisieren. In der veralteten Version können Sie keine neuen Cluster erstellen. 
+
+**Nicht unterstützte Versionen**: Wenn Sie Cluster unter einer Kubernetes-Version ausführen, die nicht unterstützt wird, [überprüfen Sie potenzielle Auswirkungen](#version_types) auf Aktualisierungen und [aktualisieren Sie den Cluster](cs_cluster_update.html#update) sofort, damit Sie weiterhin wichtige Sicherheitsaktualisierungen und Support erhalten. 
+
+Führen Sie den folgenden Befehl aus, um die Serverversion zu überprüfen.
 
 ```
 kubectl version  --short | grep -i server
@@ -37,9 +42,10 @@ kubectl version  --short | grep -i server
 Beispielausgabe:
 
 ```
-Server Version: 1.8.6
+Serverversion: 1.8.8
 ```
 {: screen}
+
 
 ## Aktualisierungstypen
 {: #version_types}
@@ -61,10 +67,13 @@ Nachfolgend finden Sie eine Zusammenfassung der Aktualisierungen, die sich vorau
 
 Weitere Informationen zum Aktualisierungsprozess finden Sie in [Cluster aktualisieren](cs_cluster_update.html#master) und [Workerknoten aktualisieren](cs_cluster_update.html#worker_node).
 
+Wenn Sie eine `kubectl`-CLI-Version verwenden, die nicht wenigstens mit der Version `major.minor` Ihrer Cluster übereinstimmt, kann dies zu unerwarteten Ergebnissen führen. Stellen Sie sicher, dass Ihr Kubernetes-Cluster und die [CLI-Versionen](cs_cli_install.html#kubectl) immer auf dem neuesten Stand sind.
+{:tip}
+
 ## Version 1.9
 {: #cs_v19}
 
-
+<p><img src="images/certified_kubernetes_1x9.png" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" height="100" width="63" align="left" alt="Diese Markierung zeigt die Kubernetes Version 1.9-Zertifizierung für IBM Cloud Container Service an. "/> {{site.data.keyword.containerlong_notm}} ist ein zertifiziertes Kubernetes-Produkt für Version 1.9 unter dem CNCF Kubernetes Software Conformance Certification Program. _Kubernetes® ist eine eingetragene Marke von The Linux Foundation in den USA und anderen Ländern und wird entsprechend einer Lizenz von The Linux Foundation verwendet._</p>
 
 Überprüfen Sie Änderungen, die Sie möglicherweise bei einer Aktualisierung von der vorherigen Version auf die Kubernetes-Version 1.9 vornehmen müssen.
 
@@ -103,7 +112,7 @@ Weitere Informationen zum Aktualisierungsprozess finden Sie in [Cluster aktualis
 <tbody>
 <tr>
 <td>`kubectl` - Ausgabe</td>
-<td>Wenn Sie im Befehl `kubectl` die Option `-o custom-columns` angeben und die Spalte in dem Objekt nicht gefunden wird, wird jetzt die Ausgabe `<none>` angezeigt.<br>
+<td>Wenn Sie im Befehl `kubectl` die Option `-o custom-columns` angeben und die Spalte in dem Objekt nicht gefunden wird, wird jetzt die Ausgabe `<none>`.<br>
 Bisher schlug die Operation fehl und die Fehlernachricht `xxx wurde nicht gefunden` wurde angezeigt. Wenn Ihre Scripts das bisherige Verhalten erwarten, aktualisieren Sie die Scripts.</td>
 </tr>
 <tr>
@@ -112,11 +121,7 @@ Bisher schlug die Operation fehl und die Fehlernachricht `xxx wurde nicht gefund
 </tr>
 <tr>
 <td>Berechtigungen für das Kubernetes-Dashboard</td>
-<td>Benutzer müssen sich jetzt mit Ihren Berechtigungsnachweisen beim Kubernetes-Dashboard anmelden, um Clusterressourcen anzuzeigen. Die RBAC-Standardberechtigung `ClusterRoleBinding` für das Kubernetes-Dashboard wurde entfernt. Entsprechende Anweisungen finden Sie unter [Kubernetes-Dashboard starten](cs_app.html#cli_dashboard).</td>
-</tr>
-<tr>
-<td>RBAC für `default` `ServiceAccount`</td>
-<td>Die Administratorberechtigung `ClusterRoleBinding` für `default` `ServiceAccount` im Standardnamensbereich `default` wurde entfernt. Wenn Ihre Anwendungen diese RBAC-Richtlinie für den Zugriff auf die Kubernetes-API benötigen, [aktualisieren Sie Ihre RBAC-Richtlinien](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview).</td>
+<td>Benutzer müssen sich mit Ihren Berechtigungsnachweisen beim Kubernetes-Dashboard anmelden, um Clusterressourcen anzuzeigen. Die RBAC-Standardberechtigung `ClusterRoleBinding` für das Kubernetes-Dashboard wurde entfernt. Entsprechende Anweisungen finden Sie unter [Kubernetes-Dashboard starten](cs_app.html#cli_dashboard).</td>
 </tr>
 <tr>
 <td>Taints und Tolerierungen</td>
@@ -156,7 +161,8 @@ Wenn `Action required` zurückgegeben wird, ändern Sie die Pod-Tolerierungen en
 </thead>
 <tbody>
 <tr>
-<td colspan='2'>Keine Änderungen vor der Aktualisierung des Masters erforderlich</td>
+<td>Keine</td>
+<td>Keine Änderungen vor der Aktualisierung des Masters erforderlich</td>
 </tr>
 </tbody>
 </table>
@@ -183,7 +189,7 @@ Wenn `Action required` zurückgegeben wird, ändern Sie die Pod-Tolerierungen en
 </tr>
 <tr>
 <td>`kubectl delete`</td>
-<td>Mit dem Befehl `kubectl delete` werden nicht länger API-Objekte für Arbeitslasten, wie Pods, vor dem Löschen des Objekts nach unten skaliert. Wenn das Objekt nach unten skaliert werden soll, verwenden Sie den Befehl [kubectl scale ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale), bevor Sie das Objekt löschen.</td>
+<td>Mit dem Befehl `kubectl delete` werden nicht länger API-Objekte für Arbeitslasten, wie Pods, vor dem Löschen des Objekts nach unten skaliert. Wenn das Objekt nach unten skaliert werden soll, verwenden Sie den Befehl [`kubectl scale ` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale), bevor Sie das Objekt löschen.</td>
 </tr>
 <tr>
 <td>`kubectl run`</td>
@@ -248,6 +254,10 @@ Wenn `Action required` zurückgegeben wird, ändern Sie die Pod-Tolerierungen en
 </thead>
 <tbody>
 <tr>
+<td>Bereitstellung von `apiVersion`</td>
+<td>Nachdem Sie die Cluster von Kubernetes 1.5 aktualisiert haben, verwenden Sie `apps/v1beta1` für das Feld `apiVersion` in neuen `Deployment`-YAML-Dateien. Verwenden Sie weiterhin `extensions/v1beta1` für andere Ressourcen, wie z. B. `Ingress`.</td>
+</tr>
+<tr>
 <td>kubectl</td>
 <td>Nach der Aktualisierung der `kubectl`-Benutzerschnittstelle müssen in den folgenden `kubectl create`-Befehlen anstelle von durch Kommas getrennten Argumenten mehrere Flags verwendet werden:<ul>
  <li>`role`
@@ -257,18 +267,6 @@ Wenn `Action required` zurückgegeben wird, ändern Sie die Pod-Tolerierungen en
  <li>`secret`
  </ul>
 </br>  Führen Sie z. B. `kubectl create role --resource-name <x> --resource-name <y>` und nicht `kubectl create role --resource-name <x>,<y>` aus.</td>
-</tr>
-<tr>
-<td>Affinitätsplanung für Pod</td>
-<td> Die Annotation `scheduler.alpha.kubernetes.io/affinity` wird nicht mehr verwendet.
-<ol>
-  <li>Stellen Sie für jeden Namensbereich mit Ausnahme von `ibm-system` und `kube-system` fest, ob die Affinitätsplanung für den Pod aktualisiert werden muss:</br>
-  ```
-  kubectl get pods -n <namensbereich> -o yaml | grep "scheduler.alpha.kubernetes.io/affinity" && echo "Action required"
-  ```
-  </br></li>
-  <li>Wenn das System die Meldung `"Action required"` (Aktion erforderlich) zurückgibt, verwenden Sie anstelle der Annotation `scheduler.alpha.kubernetes.io/affinity` das Feld _affinity_ der [_PodSpec_ ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core).</li>
-</ol>
 </tr>
 <tr>
 <td>Netzrichtlinie</td>
@@ -299,6 +297,58 @@ Wenn `Action required` zurückgegeben wird, ändern Sie die Pod-Tolerierungen en
   kubectl annotate ns <namensbereich> --overwrite "net.beta.kubernetes.io/network-policy-"
   ```
   </li></ol>
+</td></tr>
+<tr>
+<td>Affinitätsplanung für Pod</td>
+<td> Die Annotation `scheduler.alpha.kubernetes.io/affinity` wird nicht mehr verwendet.
+<ol>
+  <li>Stellen Sie für jeden Namensbereich mit Ausnahme von `ibm-system` und `kube-system` fest, ob die Affinitätsplanung für den Pod aktualisiert werden muss:</br>
+  ```
+  kubectl get pods -n <namensbereich> -o yaml | grep "scheduler.alpha.kubernetes.io/affinity" && echo "Action required"
+  ```
+  </br></li>
+  <li>Wenn das System die Meldung `"Action required"` (Aktion erforderlich) zurückgibt, verwenden Sie anstelle der Annotation `scheduler.alpha.kubernetes.io/affinity` das Feld _affinity_ der [_PodSpec_ ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core).</li>
+</ol>
+</td></tr>
+<tr>
+<td>RBAC für `default` `ServiceAccount`</td>
+<td><p>Die Administratorberechtigung `ClusterRoleBinding` für den `default` `ServiceAccount` im Standardnamensbereich `default` wurde für eine verbesserte Clustersicherheit entfernt. Anwendungen, die im Standardnamensbereich `default` ausgeführt werden, verfügen nicht mehr über Clusteradministratorberechtigungen für die Kubernetes-API und es kann bei Ihnen zu RBAC-DENY-Berechtigungsfehlern kommen. Wenn Ihre Anwendungen auf diese Berechtigungen angewiesen sind, [erstellen Sie RBAC-Berechtigungsressourcen](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) für Ihre Apps.</p>
+  <p>Wenn Sie die RBAC-Richtlinien für Ihre App aktualisieren, möchten Sie möglicherweise temporär zum vorherigen Standard `default` zurückkehren. Mit dem Befehl `kubectl apply -f FILENAME` können Sie die folgenden Dateien kopieren, speichern und anwenden. <strong>Hinweis</strong>: Nutzen Sie das Zurücksetzen, damit Sie Zeit zum Aktualisieren aller Anwendungsressourcen haben. Dies ist jedoch keine langfristige Lösung. </p>
+
+  <p><pre class="codeblock">
+  <code>
+  kind: ClusterRoleBinding
+  apiVersion: rbac.authorization.k8s.io/v1
+  metadata:
+   name: admin-binding-nonResourceURLSs-default
+  subjects:
+    - kind: ServiceAccount
+      name: default
+      namespace: default
+  roleRef:
+   kind: ClusterRole
+   name: admin-role-nonResourceURLSs
+   apiGroup: rbac.authorization.k8s.io
+  ---
+  kind: ClusterRoleBinding
+  apiVersion: rbac.authorization.k8s.io/v1
+  metadata:
+   name: admin-binding-resourceURLSs-default
+  subjects:
+    - kind: ServiceAccount
+      name: default
+      namespace: default
+  roleRef:
+   kind: ClusterRole
+   name: admin-role-resourceURLSs
+   apiGroup: rbac.authorization.k8s.io
+  </code>
+  </pre></p>
+  </td>
+</tr>
+<tr>
+<td>StatefulSet pod DNS</td>
+<td>Pods des Typs 'StatefulSet' verlieren nach der Aktualisierung des Masters ihre Kubernetes-DNS-Einträge. Um die DNS-Einträge wiederherzustellen, löschen Sie diese Pods. Kubernetes erstellt die Pods erneut und stellt die DNS-Einträge automatisch wieder her. Weitere Informationen finden Sie im Abschnitt zu dem entsprechenden [Problem in Kubernetes ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/issues/48327).</td>
 </tr>
 <tr>
 <td>Tolerierungen</td>
@@ -312,7 +362,7 @@ Wenn `Action required` zurückgegeben wird, ändern Sie die Pod-Tolerierungen en
 
   <li>Wenn das System die Meldung `"Action required"` (Aktion erforderlich) zurückgibt, verwenden Sie anstelle der Annotation `scheduler.alpha.kubernetes.io/tolerations` das Feld _tolerations_ der [_PodSpec_ ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core).
 </ol>
-</tr>
+</td></tr>
 <tr>
 <td>Taints</td>
 <td>Die Annotation `scheduler.alpha.kubernetes.io/taints` ist nicht mehr verfügbar.
@@ -326,10 +376,16 @@ Wenn `Action required` zurückgegeben wird, ändern Sie die Pod-Tolerierungen en
   <li>Fügen Sie zu jedem Knoten einen Taint hinzu:</br>
   `kubectl taint node <node> <taint>`
   </li></ol>
-</tr>
-<tr>
-<td>StatefulSet pod DNS</td>
-<td>Pods des Typs 'StatefulSet' verlieren nach der Aktualisierung des Masters ihre Kubernetes-DNS-Einträge. Um die DNS-Einträge wiederherzustellen, löschen Sie diese Pods. Kubernetes erstellt die Pods erneut und stellt die DNS-Einträge automatisch wieder her. Weitere Informationen finden Sie im Abschnitt zu dem entsprechenden [Problem in Kubernetes ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/issues/48327).
-</tr>
+</td></tr>
 </tbody>
 </table>
+
+## Archiv
+{: #k8s_version_archive}
+
+### Version 1.5 (veraltet)
+{: #cs_v1-5}
+
+Seit dem 5. März 2018 sind {{site.data.keyword.containershort_notm}}-Cluster, die auf [Kubernetes Version 1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) ausgeführt werden, veraltet. Seit dem 4. April 2018 können Cluster der Version 1.5 keine Sicherheitsupdates oder Unterstützung mehr erhalten, bis sie auf die nächste, aktuellste Version ([Kubernetes 1.7](#cs_v17)) aktualisiert wurden.
+
+[Überprüfen Sie mögliche Auswirkungen](cs_versions.html#cs_versions) jeder Aktualisierung einer Kubernetes-Version und [aktualisieren Sie Ihre Cluster](cs_cluster_update.html#update) dann sofort. Beachten Sie, dass Ihre Aktualisierung von einer Version auf die nächste aktuellste Version ausgeführt wird, wie zum Beispiel von Version 1.5 auf 1.7 oder von Version 1.8 auf 1.9.

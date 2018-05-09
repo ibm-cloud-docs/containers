@@ -24,7 +24,7 @@ Controlla le ultime informazioni nella nuova ubicazione:
 - [Consentire l'accesso pubblico alle applicazioni](cs_network_planning.html#planning)
   - [Configurazione dell'accesso pubblico a un'applicazione utilizzando il tipo di servizio NodePort](cs_nodeport.html#config)
   - [Configurazione dell'accesso a un'applicazione utilizzando il tipo di servizio LoadBalancer](cs_loadbalancer.html#config)
-  - [Configurazione dell'accesso a un'applicazione utilizzando Ingress](cs_ingress.html#config)
+  - [Configurazione dell'accesso a un'applicazione utilizzando Ingress ](cs_ingress.html#configure_alb)
     - [Utilizzo del dominio fornito da IBM senza la terminazione TLS](cs_ingress.html#ibm_domain)
     - [Utilizzo del dominio fornito da IBM con la terminazione TLS](cs_ingress.html#ibm_domain_cert)
     - [Utilizzo di un dominio personalizzato e un certificato TLS per fornire la terminazione TLS](cs_ingress.html#custom_domain_cert)
@@ -41,5 +41,5 @@ Controlla le ultime informazioni nella nuova ubicazione:
 - [Gestione delle distribuzioni graduali](cs_app.html#app_rolling)
 - [Aggiunta dei servizi di IBM Cloud](cs_integrations.html#adding_app)
 - [Creazione di archiviazione persistente](cs_storage.html#create)
-- [Aggiunta di accesso utente non root alla archiviazione persistente](cs_storage.html#nonroot)
+- [Aggiunta di accesso utente non root all'archiviazione persistente](cs_storage.html#nonroot)
 

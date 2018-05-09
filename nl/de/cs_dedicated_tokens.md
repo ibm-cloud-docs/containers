@@ -19,7 +19,7 @@ lastupdated: "2017-11-02"
 # {{site.data.keyword.registryshort_notm}}-Token für eine {{site.data.keyword.Bluemix_dedicated_notm}}-Image-Registry erstellen
 {: #cs_dedicated_tokens}
 
-Erstellen Sie ein nicht ablaufbares Token, um eine Image-Registry zu verwenden, die Sie für einzelne und skalierbare Gruppen mit Clustern verwendet haben.
+Erstellen Sie ein Token ohne Ablaufdatum für eine Image-Registry, die Sie für einzelne und skalierbare Gruppen mit Clustern in {{site.data.keyword.containerlong}} verwendet haben.
 {:shortdesc}
 
 1.  Melden Sie sich bei der {{site.data.keyword.Bluemix_dedicated_notm}}-Umgebung an.

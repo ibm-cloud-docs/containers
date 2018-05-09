@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-06"
+lastupdated: "2018-03-13"
 
 ---
 
@@ -19,20 +19,43 @@ lastupdated: "2018-02-06"
 # LoadBalancer-Services einrichten
 {: #loadbalancer}
 
-Machen Sie einen Port zugänglich und verwenden Sie eine portierbare IP-Adresse für die Lastausgleichsfunktion (Load Balancer), um auf die App zuzugreifen. Verwenden Sie eine öffentliche IP-Adresse, um eine App für das Internet zugänglich zu machen, oder eine private IP-Adresse, um eine App in Ihrem privaten Infrastrukturnetz verfügbar zu machen.
-{:shortdesc}
+Machen Sie einen Port zugänglich und verwenden Sie eine portierbare IP-Adresse für die Lastausgleichsfunktion (Load Balancer), um auf eine containerisierte App zuzugreifen. {:shortdesc}
+
+## Externen Netzbetrieb mit LoadBalancer-Services planen
+{: #planning}
+
+Wenn Sie einen Standardcluster erstellen, fordert {{site.data.keyword.containershort_notm}} automatisch fünf portierbare öffentliche IP-Adressen und fünf portierbare private IP-Adressen an und richtet diese bei der Erstellung des Clusters in Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) ein. Zwei der portierbaren IP-Adressen (eine öffentliche und eine private) werden für [Ingress-Lastausgleichsfunktionen für Anwendungen](cs_ingress.html#planning) verwendet. Vier portierbare öffentliche und vier portierbare private IP-Adressen können verwendet werden, um Apps verfügbar zu machen, indem Sie einen LoadBalancer-Service erstellen.
+
+Wenn Sie einen Kubernetes-LoadBalancer-Service in einem Cluster in einem öffentlichen VLAN erstellen, wird eine externe Lastausgleichsfunktion erstellt. Ihre Optionen für IP-Adressen bei Erstellung eines LoadBalancer-Service lauten wie folgt:
+
+- Wenn sich Ihr Cluster in einem öffentlichen VLAN befindet, dann wird eine der vier verfügbaren, portierbaren, öffentlichen IP-Adressen verwendet.
+- Wenn Ihr Cluster ausschließlich in einem privaten VLAN verfügbar ist, wird eine der vier verfügbaren, portierbaren, privaten IP-Adressen verwendet.
+- Sie können eine portierbare öffentliche oder private IP-Adresse für einen LoadBalancer-Service anfordern, indem Sie eine Annotation zur Konfigurationsdatei hinzufügen: `service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>`.
+
+Die dem LoadBalancer-Service zugewiesene portierbare öffentliche IP-Adresse ist dauerhaft und ändert sich nicht, wenn ein Workerknoten entfernt oder neu erstellt wird. Dadurch bietet der LoadBalancer-Service eine höhere Verfügbarkeit als der NodePort-Service. Anders als bei NodePort-Services können Sie Ihrer Lastausgleichsfunktion jeden beliebigen Port zuweisen und sind dabei nicht an einen bestimmten Portnummernbereich gebunden. Wenn Sie einen LoadBalancer-Service verwenden, steht für jede IP-Adresse aller Workerknoten auch ein Knotenport zur Verfügung. Informationen zum Blockieren des Zugriffs auf den Knotenport während der Nutzung eines LoadBalancer-Service finden Sie in [Eingehenden Datenverkehr blockieren](cs_network_policy.html#block_ingress).
+
+Der LoadBalancer-Service fungiert als externer Einstiegspunkt für eingehende Anforderungen an die App. Um vom Internet aus auf den LoadBalancer-Service zuzugreifen, können Sie die öffentliche IP-Adresse Ihrer Lastausgleichsfunktion in Verbindung mit der zugewiesenen Portnummer im Format `<ip_address>:<port>`. Das folgende Diagramm veranschaulicht, wie eine Lastausgleichsfunktion die Kommunikation vom Internet an eine App leitet:
+
+<img src="images/cs_loadbalancer_planning.png" width="550" alt="Stellen Sie ein App in {{site.data.keyword.containershort_notm}} bereit, indem Sie eine Lastausgleichsfunktion verwenden" style="width:550px; border-style: none"/>
+
+1. Eine Anforderung wird an Ihre App gesendet, indem die öffentliche IP-Adresse Ihrer Lastausgleichsfunktion und der zugeordnete Port auf dem Workerknoten verwendet wird.
+
+2. Die Anforderung wird automatisch an die interne Cluster-IP-Adresse und den internen Port des Service für die Lastausgleichsfunktion weitergeleitet. Auf die interne Cluster-IP-Adresse kann nur aus dem Cluster selbst heraus zugegriffen werden. 
+
+3. `kube-proxy` leitet die Anforderung an den Kubernetes-Service für die Lastausgleichsfunktion für die App weiter. 
+
+4. Die Anforderung wird an die private IP-Adresse des Pods weitergeleitet, auf dem die App bereitgestellt wird. Wenn mehrere App-Instanzen im Cluster bereitgestellt werden, leitet die Lastausgleichsfunktion die Anforderungen zwischen den App-Pods weiter.
 
 
 
-## Zugriff auf eine App durch Verwenden des Servicetyps 'LoadBalancer' konfigurieren
+
+<br />
+
+
+
+
+## Zugriff auf eine App mit einer Lastausgleichsfunktion konfigurieren
 {: #config}
-
-Anders als beim NodePort-Service hängt die portierbare IP-Adresse des Service für den Lastausgleich nicht von dem Workerknoten ab, auf dem die App bereitgestellt wird. Allerdings stellt ein Kubernetes-LoadBalancer-Service auch einen NodePort-Service dar. Ein LoadBalancer-Service stellt Ihre App über die IP-Adresse der Lastausgleichsfunktion und den zugehörigen Port zur Verfügung und macht sie über die Knotenports des Service verfügbar.
-{:shortdesc}
-
-Die portierbare IP-Adresse der Lastausgleichsfunktion (Load Balancer) wird Ihnen zugewiesen und bleibt unverändert erhalten, wenn Sie Workerknoten hinzufügen oder entfernen. Das bedeutet, dass Services für die Lastausgleichsfunktion eine höhere Verfügbarkeit aufweisen als NodePort-Services. Benutzer können für die Lastausgleichsfunktion jeden beliebigen Port auswählen und sind nicht auf den Portbereich für 'NodePort' beschränkt. LoadBalancer-Services können für TCP- und UDP-Protokolle verwendet werden.
-
-**Anmerkung**: Services für die Lastausgleichsfunktion unterstützen nicht die TLS-Terminierung. Falls für Ihre App die TLS-Terminierung erforderlich ist, können Sie Ihre App über [Ingress](cs_ingress.html) verfügbar machen oder die App für die TLS-Terminierung konfigurieren.
 
 Vorbemerkungen:
 
@@ -112,7 +135,7 @@ Gehen Sie wie folgt vor, um einen Service für die Lastausgleichsfunktion zu ers
         </tr>
         <tr>
           <td><code>loadBalancerIP</code></td>
-          <td>Wenn Sie eine private Lastausgleichsfunktion erstellen oder wenn Sie eine bestimmte portierbare IP-Adresse für eine öffentliche Lastausgleichsfunktion verwenden wollen, ersetzen Sie <em>&lt;loadBalancerIP&gt;</em> durch die IP-Adresse, die Sie verwenden wollen. Weitere Informationen enthält die [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer).</td>
+          <td>Um eine private Lastausgleichsfunktion zu erstellen oder um eine bestimmte portierbare IP-Adresse für eine öffentliche Lastausgleichsfunktion zu verwenden, ersetzen Sie <em>&lt;loadBalancerIP&gt;</em> durch die IP-Adresse, die Sie verwenden wollen. Weitere Informationen enthält die [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer).</td>
         </tr>
         </tbody></table>
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-01"
+lastupdated: "2018-03-15"
 
 ---
 
@@ -18,7 +18,7 @@ lastupdated: "2018-02-01"
 # Introdução aos clusters no {{site.data.keyword.Bluemix_dedicated_notm}}
 {: #dedicated}
 
-Se você tiver uma conta do {{site.data.keyword.Bluemix_dedicated}}, será possível implementar clusters em um ambiente de nuvem dedicada (`https://<my-dedicated-cloud-instance>.bluemix.net`) e conecte-se aos serviços pré-selecionados do {{site.data.keyword.Bluemix}} que também estão em execução aí.
+Se você tem uma conta do {{site.data.keyword.Bluemix_dedicated}} para usar o {{site.data.keyword.containerlong}}, é possível implementar clusters do Kubernetes em um ambiente de nuvem dedicada (`https://<my-dedicated-cloud-instance>.bluemix.net`) e conectar-se aos serviços pré-selecionados do {{site.data.keyword.Bluemix}} que também estão em execução aí.
 {:shortdesc}
 
 Se você não tiver uma conta do {{site.data.keyword.Bluemix_dedicated_notm}}, será possível [iniciar com {{site.data.keyword.containershort_notm}}](container_index.html#container_index) em uma conta pública do {{site.data.keyword.Bluemix_notm}}.
@@ -26,14 +26,14 @@ Se você não tiver uma conta do {{site.data.keyword.Bluemix_dedicated_notm}}, s
 ## Sobre o ambiente de nuvem dedicada
 {: #dedicated_environment}
 
-Com uma conta do {{site.data.keyword.Bluemix_dedicated_notm}}, os recursos físicos disponíveis são dedicados somente ao seu cluster e não são compartilhados com clusters de outros clientes da {{site.data.keyword.IBM_notm}}. Você pode escolher configurar um ambiente {{site.data.keyword.Bluemix_dedicated_notm}} quando deseja isolamento para seu cluster e também requer esse isolamento para os outros serviços do {{site.data.keyword.Bluemix_notm}} que são usados. Se você não tiver uma conta dedicada, será possível criar clusters com hardware dedicado no {{site.data.keyword.Bluemix_notm}} público.
+Com uma conta do {{site.data.keyword.Bluemix_dedicated_notm}}, os recursos físicos disponíveis são dedicados somente ao seu cluster e não são compartilhados com clusters de outros clientes da {{site.data.keyword.IBM_notm}}. Você pode escolher configurar um ambiente {{site.data.keyword.Bluemix_dedicated_notm}} quando deseja isolamento para seu cluster e também requer esse isolamento para os outros serviços do {{site.data.keyword.Bluemix_notm}} que são usados. Se você não tem uma conta dedicada, é possível [criar clusters com hardware dedicado no {{site.data.keyword.Bluemix_notm}} público](cs_clusters.html#clusters_ui).
 
 Com o {{site.data.keyword.Bluemix_dedicated_notm}}, é possível criar clusters usando o catálogo no console dedicado ou usando a CLI do {{site.data.keyword.containershort_notm}}. Quando você usa o console dedicado, você efetua login nas contas dedicadas e públicas simultaneamente usando seu IBMid. Esse login duplo permite acessar seus clusters públicos usando seu console dedicado. Quando você usa a CLI, você efetua login usando seu terminal dedicado (`api.<my-dedicated-cloud-instance>.bluemix.net.`) e destine o terminal da API do {{site.data.keyword.containershort_notm}} da região pública que está associada ao ambiente dedicado.
 
 As diferenças mais significativas entre o {{site.data.keyword.Bluemix_notm}} público e dedicado são as seguintes.
 
-*   O {{site.data.keyword.IBM_notm}} possui e gerencia a conta de infraestrutura do IBM Cloud (SoftLayer) que os nós do trabalhador, VLANs e sub-redes são implementados, em vez de em uma conta pertencente a você.
-*   As especificações para essas VLANs e sub-redes são determinadas quando o ambiente dedicado é ativado, não quando o cluster é criado.
+*   No {{site.data.keyword.Bluemix_dedicated_notm}}, o {{site.data.keyword.IBM_notm}} possui e gerencia a conta de infraestrutura do IBM Cloud (SoftLayer) nos quais os nós do trabalhador, VLANs e sub-redes são implementados. No {{site.data.keyword.Bluemix_notm}} público, você possui a conta de infraestrutura do IBM Cloud (SoftLayer).
+*   No {{site.data.keyword.Bluemix_dedicated_notm}}, as especificações para as VLANs e sub-redes na conta de infraestrutura do IBM Cloud (SoftLayer) gerenciada pelo {{site.data.keyword.IBM_notm}} são determinadas quando o ambiente Dedicado é ativado. No {{site.data.keyword.Bluemix_notm}} público, as especificações para as VLANs e sub-redes são determinadas quando o cluster é criado.
 
 ### Diferenças no gerenciamento de cluster entre os ambientes de nuvem
 {: #dedicated_env_differences}
@@ -42,7 +42,7 @@ As diferenças mais significativas entre o {{site.data.keyword.Bluemix_notm}} p�
 |--|--------------|--------------------------------|
 |Criação do cluster|Crie um cluster grátis ou especifique os detalhes a seguir para um cluster padrão:<ul><li>Tipo de cluster</li><li>Nome</li><li>Localização</li><li>Machine type</li><li>Número de nós do trabalhador</li><li>VLAN pública</li><li>VLAN privada</li><li>Hardware</li></ul>|Especifique os detalhes a seguir para um cluster padrão:<ul><li>Nome</li><li>Versão do Kubernetes</li><li>Machine type</li><li>Número de nós do trabalhador</li></ul><p>**Nota:** as configurações de VLANs e de Hardware são predefinidas durante a criação do ambiente do {{site.data.keyword.Bluemix_notm}}.</p>|
 |Hardware de cluster e propriedade|Em clusters padrão, o hardware pode ser compartilhado por outros clientes {{site.data.keyword.IBM_notm}} ou dedicado somente a você. As VLANs públicas e privadas são pertencentes e gerenciadas por você em sua conta de infraestrutura do IBM Cloud (SoftLayer).|Em clusters no {{site.data.keyword.Bluemix_dedicated_notm}}, o hardware é sempre dedicado. As VLANs públicas e privadas pertencem e são gerenciadas pela IBM para você. O local é predefinido para o ambiente do {{site.data.keyword.Bluemix_notm}}.|
-|Balanceador de carga e rede de Ingresso|Durante o fornecimento de clusters padrão, as ações a seguir ocorrem automaticamente.<ul><li>Uma sub-rede pública móvel e uma sub-rede privada móvel são ligadas ao seu cluster e designadas à sua conta do IBM Cloud infrastructure (SoftLayer).</li><li>Um endereço IP público portátil é usado para um balanceador de carga de aplicativos altamente disponível e uma rota pública exclusiva é atribuída no formato &lt;cluster_name&gt;.containers.mybluemix.net. É possível usar essa rota para expor múltiplos apps ao público. Um endereço IP privado móvel será usado para um balanceador de carga de aplicativo privado.</li><li>Quatro endereços IP públicos móveis e quatro endereços IP privados móveis são designados ao cluster e podem ser usados para expor apps por meio de serviços do balanceador de carga. Sub-redes adicionais podem ser solicitadas por meio de sua conta de infraestrutura do IBM Cloud (SoftLayer).</li></ul>|Quando você cria sua conta dedicada, você toma uma decisão de conectividade sobre como deseja expor e acessar seus serviços de cluster. Se você quer usar seus próprios intervalos de IP corporativos (IPs gerenciados pelo usuário), deve-se fornecê-los quando você [configura um ambiente de {{site.data.keyword.Bluemix_dedicated_notm}}](/docs/dedicated/index.html#setupdedicated). <ul><li>Por padrão, nenhuma sub-rede pública é ligada aos clusters que você cria em sua conta dedicada. Em vez disso, você tem a flexibilidade de escolher o modelo de conectividade que melhor combina com sua empresa.</li><li>Depois de criar o cluster, você escolhe o tipo de sub-rede que você deseja ligar e usar com seu cluster para a conectividade do balanceador de carga ou do Ingress.<ul><li>Para sub-redes móveis públicas ou privadas, é possível [incluir sub-redes nos clusters](cs_subnets.html#subnets)</li><li>Para endereços IP gerenciados pelo usuário que você forneceu à IBM na migração do dedicado, é possível [incluir sub-redes gerenciadas por usuário nos clusters](#dedicated_byoip_subnets).</li></ul></li><li>Depois de ligar uma sub-rede em seu cluster, o controlador do Ingress é criado. Uma rota pública do Ingress será criada somente se você usar uma sub-rede pública móvel.</li></ul>|
+|Balanceador de carga e rede de Ingresso|Durante o fornecimento de clusters padrão, as ações a seguir ocorrem automaticamente.<ul><li>Uma sub-rede pública móvel e uma sub-rede privada móvel são ligadas ao seu cluster e designadas à sua conta do IBM Cloud infrastructure (SoftLayer).</li><li>Um endereço IP público portátil é usado para um balanceador de carga de aplicativos altamente disponível e uma rota pública exclusiva é atribuída no formato &lt;cluster_name&gt;.containers.mybluemix.net. É possível usar essa rota para expor múltiplos apps ao público. Um endereço IP privado móvel será usado para um balanceador de carga de aplicativo privado.</li><li>Quatro endereços IP públicos móveis e quatro endereços IP privados móveis são designados ao cluster e podem ser usados para expor apps por meio de serviços do balanceador de carga. Sub-redes adicionais podem ser solicitadas por meio de sua conta de infraestrutura do IBM Cloud (SoftLayer).</li></ul>|Quando você cria sua conta dedicada, você toma uma decisão de conectividade sobre como deseja expor e acessar seus serviços de cluster. Se você quer usar seus próprios intervalos de IP corporativos (IPs gerenciados pelo usuário), deve-se fornecê-los quando você [configura um ambiente de {{site.data.keyword.Bluemix_dedicated_notm}}](/docs/dedicated/index.html#setupdedicated). <ul><li>Por padrão, nenhuma sub-rede pública é ligada aos clusters que você cria em sua conta dedicada. Em vez disso, você tem a flexibilidade de escolher o modelo de conectividade que melhor combina com sua empresa.</li><li>Depois de criar o cluster, você escolhe o tipo de sub-rede que você deseja ligar e usar com seu cluster para a conectividade do balanceador de carga ou do Ingress.<ul><li>Para sub-redes móveis públicas ou privadas, é possível [incluir sub-redes nos clusters](cs_subnets.html#subnets)</li><li>Para endereços IP gerenciados pelo usuário que você forneceu à IBM na migração do dedicado, é possível [incluir sub-redes gerenciadas por usuário nos clusters](#dedicated_byoip_subnets).</li></ul></li><li>Depois de ligar uma sub-rede a seu cluster, o balanceador de carga do aplicativo de Ingresso é criado. Uma rota pública do Ingress será criada somente se você usar uma sub-rede pública móvel.</li></ul>|
 |Rede de NodePort|Exponha uma porta pública em seu nó do trabalhador e use o endereço IP público do nó do trabalhador
 para acessar publicamente seu serviço no cluster.|Todos os endereços IP públicos dos nós do trabalhador são bloqueados por um firewall. No entanto, para serviços do {{site.data.keyword.Bluemix_notm}} incluídos no cluster, a porta de nó pode ser acessada por meio de um endereço IP público ou de um endereço IP privado.|
 |Armazenamento persistente|Use o [fornecimento
@@ -59,8 +59,11 @@ Kubernetes](cs_dedicated_tokens.html#cs_dedicated_tokens) para autenticação.</
 ### Arquitetura de serviço
 {: #dedicated_ov_architecture}
 
-Cada nó do trabalhador é configurado com um mecanismo de Docker gerenciado pelo {{site.data.keyword.IBM_notm}}, recursos de cálculo separados, rede e serviço de volume. Recursos de segurança integrados fornecem isolamento, capacidades de gerenciamento de recurso e conformidade de segurança do nó do trabalhador. O nó do trabalhador comunica-se com o mestre usando certificados TLS seguros e conexão openVPN.
+Cada nó do trabalhador é configurado com um mecanismo de Docker gerenciado pelo {{site.data.keyword.IBM_notm}}, recursos de cálculo separados, rede e serviço de volume.
 {:shortdesc}
+
+Recursos de segurança integrados fornecem isolamento, capacidades de gerenciamento de recurso e conformidade de segurança do nó do trabalhador. O nó do trabalhador comunica-se com o mestre usando certificados TLS seguros e conexão openVPN.
+
 
 *Arquitetura e rede do Kubernetes no {{site.data.keyword.Bluemix_dedicated_notm}}*
 
@@ -72,7 +75,8 @@ Cada nó do trabalhador é configurado com um mecanismo de Docker gerenciado pel
 ## Configurando o {{site.data.keyword.containershort_notm}} no dedicado
 {: #dedicated_setup}
 
-Cada ambiente do {{site.data.keyword.Bluemix_dedicated_notm}} tem uma conta corporativa pública, de propriedade do cliente, no {{site.data.keyword.Bluemix_notm}}. Para que os usuários no ambiente dedicado criem clusters, o administrador deve incluí-los nesta conta corporativa pública para o ambiente dedicado.
+Cada ambiente do {{site.data.keyword.Bluemix_dedicated_notm}} tem uma conta corporativa pública, de propriedade do cliente, no {{site.data.keyword.Bluemix_notm}}. Para que os usuários no ambiente Dedicado criem clusters, o administrador deve incluir os usuários em uma conta corporativa pública.
+{:shortdesc}
 
 Antes de iniciar:
   * [Configure um ambiente do {{site.data.keyword.Bluemix_dedicated_notm}}](/docs/dedicated/index.html#setupdedicated).
@@ -205,7 +209,7 @@ Projete sua configuração de cluster do {{site.data.keyword.Bluemix_dedicated_n
 2. Marque a caixa de seleção **Efetuar login também no {{site.data.keyword.Bluemix_notm}} Público** e clique em **Efetuar login**.
 3. Siga os prompts para efetuar login com seu IBMid. Se esta for a primeira vez que você efetua login em sua conta dedicada, siga os prompts para efetuar login no {{site.data.keyword.Bluemix_dedicated_notm}}.
 4.  No catálogo, selecione **Contêineres** e clique em **Cluster do Kubernetes**.
-5.  Insira um **Nome do cluster**.
+5.  Insira um **Nome do cluster**. O nome deve iniciar com uma letra, pode conter letras, números e - e deve ter 35 caracteres ou menos. Observe que o subdomínio do Ingresso designado à {{site.data.keyword.IBM_notm}} é derivado do nome do cluster. O nome do cluster e o subdomínio do Ingresso juntos formam o nome completo do domínio, que deve ser exclusivo dentro de uma região e ter 63 caracteres ou menos. Para atender a esses requisitos, o nome do cluster pode ser truncado ou o subdomínio pode ser designado a valores de caractere aleatórios.
 6.  Selecione um **Tipo de máquina**. O tipo de máquina define a quantia de CPU e de memória virtual que é configurada em cada nó do trabalhador. Essa CPU e memória virtual está disponível para todos os contêineres que você implementa em seus nós.
     -   O tipo de máquina micro indica a menor opção.
     -   Um tipo de máquina balanceada tem uma quantia igual de memória designada a cada CPU, que otimiza o desempenho.
@@ -256,7 +260,7 @@ Projete sua configuração de cluster do {{site.data.keyword.Bluemix_dedicated_n
     </tr>
     <tr>
     <td><code>--name <em>&lt;name&gt;</em></code></td>
-    <td>Substitua <em>&lt;name&gt;</em> por um nome para seu cluster.</td>
+    <td>Substitua <em>&lt;name&gt;</em> por um nome para seu cluster. O nome deve iniciar com uma letra, pode conter letras, números e - e deve ter 35 caracteres ou menos. Observe que o subdomínio do Ingresso designado à {{site.data.keyword.IBM_notm}} é derivado do nome do cluster. O nome do cluster e o subdomínio do Ingresso juntos formam o nome completo do domínio, que deve ser exclusivo dentro de uma região e ter 63 caracteres ou menos. Para atender a esses requisitos, o nome do cluster pode ser truncado ou o subdomínio pode ser designado a valores de caractere aleatórios.</td>
     </tr>
     <tr>
     <td><code>--workers <em>&lt;number&gt;</em></code></td>
@@ -276,8 +280,8 @@ Projete sua configuração de cluster do {{site.data.keyword.Bluemix_dedicated_n
     Quando o fornecimento do cluster é concluído, o estado do cluster muda para **implementado**.
 
     ```
-    Name         ID                                   State      Created          Workers
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1
+    Name         ID                                   State      Created          Workers   Location   Version
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         dal10      1.8.8
     ```
     {: screen}
 
@@ -291,8 +295,7 @@ Projete sua configuração de cluster do {{site.data.keyword.Bluemix_dedicated_n
     Quando os nós do trabalhador estiverem prontos, o estado mudará para **normal** e o status será **Pronto**. Quando o status do nó for **Pronto**, será possível, então, acessar o cluster.
 
     ```
-    ID                                                  Public IP        Private IP     Machine Type   State      Status  
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1   169.47.223.113   10.171.42.93   free           normal    Ready
+    ID Public IP Private IP Machine Type State Status Location Version prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1 169.47.223.113 10.171.42.93 free normal Ready dal10 1.8.8
     ```
     {: screen}
 
@@ -402,7 +405,9 @@ Antes de iniciar: configure o roteamento de tráfego de rede dentro e fora de su
     ```
     {: screen}
 
-4. Para configurar a conectividade de conta local e interna, escolha entre estas opções:
+4. Opcional: [Ative o roteamento entre as sub-redes na mesma VLAN](cs_subnets.html#vlan-spanning).
+
+5. Para configurar a conectividade de conta local e interna, escolha entre estas opções:
   - Se você usou um intervalo de endereços IP privados 10.x.x.x para a sub-rede, use os IPs válidos desse intervalo para configurar a conectividade de conta local e interna com o Ingress e um balanceador de carga. Para obter mais informações, consulte [Configurando acesso para um aplicativo](cs_network_planning.html#planning).
   - Se você não usou um intervalo de endereços IP privados 10.x.x.x para a sub-rede, use os IPs válidos desse intervalo para configurar a conectividade local com o Ingress e um balanceador de carga. Para obter mais informações, consulte [Configurando acesso para um aplicativo](cs_network_planning.html#planning). No entanto, deve-se usar uma sub-rede privada móvel de infraestrutura do IBM Cloud (SoftLayer) para configurar a conectividade de conta interna entre o seu cluster e outros serviços baseados no Cloud Foundry. É possível criar uma sub-rede privada móvel com o comando [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add). Para este cenário, seu cluster tem tanto uma sub-rede gerenciada pelo usuário para conectividade local quanto uma sub-rede privada móvel de infraestrutura do IBM Cloud (SoftLayer) para conectividade de conta interna.
 
@@ -414,6 +419,7 @@ Revise as opções a seguir para outras configurações de cluster:
   * [Atualizando o mestre do Kubernetes](cs_cluster_update.html#master)
   * [Atualizando nós do trabalhador](cs_cluster_update.html#worker_node)
   * [Configurando a criação de log de cluster](cs_health.html#logging)
+      * **Nota**: a ativação de log não é suportada no terminal Dedicado. Deve-se efetuar login no terminal do {{site.data.keyword.cloud_notm}} público e destinar sua organização e espaço público para ativar o encaminhamento de log.
   * [Configurando o monitoramento de cluster](cs_health.html#monitoring)
       * **Observação**: um cluster `ibm-monitoring` existe dentro de cada conta do {{site.data.keyword.Bluemix_dedicated_notm}}. Esse cluster monitora continuamente o funcionamento do {{site.data.keyword.containerlong_notm}} no ambiente dedicado, verificando a estabilidade e a conectividade do ambiente. Não remova esse cluster do ambiente.
   * [Visualizando recursos de cluster do Kubernetes](cs_integrations.html#weavescope)
@@ -443,7 +449,7 @@ Se você quiser usar endereços IP públicos para o balanceador de carga, assegu
 #### Configurando o acesso público a um app usando o Ingress
 {: #dedicated_apps_public_ingress}
 
-Se você quiser usar endereços IP públicos para o balanceador de carga de aplicativo, assegure-se de que uma lista de desbloqueio firewall corporativo foi fornecido para a IBM ou [abra um chamado de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support) para configurar o desbloqueio de firewall. Depois, siga as etapas em [Configurando o acesso a um app usando Ingresso](cs_ingress.html#config).
+Se você quiser usar endereços IP públicos para o balanceador de carga de aplicativo, assegure-se de que uma lista de desbloqueio firewall corporativo foi fornecido para a IBM ou [abra um chamado de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support) para configurar o desbloqueio de firewall. Em seguida, siga as etapas em [Configurando acesso a um app usando Ingresso](cs_ingress.html#configure_alb).
 
 ### Criando armazenamento persistente
 {: #dedicated_apps_volume_claim}

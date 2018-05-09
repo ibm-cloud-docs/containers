@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-06"
+lastupdated: "2018-03-13"
 
 ---
 
@@ -19,20 +19,44 @@ lastupdated: "2018-02-06"
 # ロード・バランサーのサービスのセットアップ
 {: #loadbalancer}
 
-ポートを公開し、ロード・バランサーのポータブル IP アドレスを使用してアプリにアクセスします。 パブリック IP アドレスを使用してアプリをインターネットでアクセスできるようにするか、プライベート IP アドレスを使用して、アプリをプライベート・インフラストラクチャー・ネットワークでアクセスできるようにします。
+ポートを公開し、ロード・バランサーのポータブル IP アドレスを使用してコンテナー化アプリにアクセスします。
 {:shortdesc}
 
+## LoadBalancer サービスを使用した外部ネットワーキングの計画
+{: #planning}
+
+標準クラスターを作成する時、{{site.data.keyword.containershort_notm}} は自動的に 5 つのポータブル・パブリック IP アドレスと 5 つのポータブル・プライベート IP アドレスを要求し、クラスター作成時にそれらをお客様の IBM Cloud インフラストラクチャー (SoftLayer) アカウントにプロビジョンします。 ポータブル IP アドレスのうちの 2 つ (パブリック 1 つとプライベート 1 つ) は、[Ingress アプリケーション・ロード・バランサー](cs_ingress.html#planning)用として使用されます。 4 つのポータブル・パブリック IP アドレスと 4 つのポータブル・プライベート IP アドレスは、LoadBalancer サービスを作成してアプリを公開するために使用できます。
+
+パブリック VLAN のクラスター内に Kubernetes LoadBalancer サービスを作成する時、外部ロード・バランサーが 1 つ作成されます。 LoadBalancer サービスを作成するときには、IP アドレスに関して以下のオプションがあります。
+
+- クラスターがパブリック VLAN 上にある場合、使用可能な 4 つのポータブル・パブリック IP アドレスのいずれかが使用されます。
+- クラスターがプライベート VLAN 上にしかない場合、使用可能な 4 つのポータブル・プライベート IP アドレスのいずれかが使用されます。
+- 構成ファイルに次のアノテーションを追加することにより、LoadBalancer サービス用にポータブル・パブリック IP アドレスまたはポータブル・プライベート IP アドレスを要求できます: `service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>`.
+
+LoadBalancer サービスに割り当てられるポータブル・パブリック IP アドレスは永続的なものであり、ワーカー・ノードが削除されたり再作成されたりしても変更されません。 したがって、LoadBalancer サービスの可用性は NodePort サービスより高くなります。 NodePort サービスの場合と異なり、任意のポートをロード・バランサーに割り当て可能で、特定のポート範囲に縛られません。 LoadBalancer サービスを使用する場合、あらゆるワーカー・ノードの各 IP アドレスでノード・ポートを使用することもできます。 LoadBalancer サービスを使用しているときにノード・ポートへのアクセスをブロックするには、[着信トラフィックのブロック](cs_network_policy.html#block_ingress)を参照してください。
+
+LoadBalancer サービスは、アプリに対する着信要求のための外部エントリー・ポイントとして機能します。 インターネットから LoadBalancer サービスにアクセスするには、ロード・バランサーのパブリック IP アドレスと割り当てられたポートを、`<ip_address>:<port>` という形式で使用します。 次の図は、ロード・バランサーがインターネットからアプリへの通信をどのように誘導するかを示しています。
+
+<img src="images/cs_loadbalancer_planning.png" width="550" alt="ロード・バランサーを使用した {{site.data.keyword.containershort_notm}} でのアプリの公開" style="width:550px; border-style: none"/>
+
+1. ロード・バランサーのパブリック IP アドレスとワーカー・ノード上の割り当てられたポートを使用して、要求がアプリに送信されます。
+
+2. 要求が、ロード・バランサー・サービスの内部クラスター IP アドレスとポートに自動的に転送されます。内部クラスター IP アドレスはクラスター内でのみアクセス可能です。
+
+3. `kube-proxy` が、要求をアプリの Kubernetes ロード・バランサー・サービスにルーティングします。
+
+4. 要求が、アプリがデプロイされたポッドのプライベート IP アドレスに転送されます。複数のアプリ・インスタンスがクラスターにデプロイされている場合、ロード・バランサーは、アプリ・ポッド間で要求をルーティングします。
 
 
-## ロード・バランサー・タイプのサービスを使用してアプリへのアクセスを構成する方法
+
+
+<br />
+
+
+
+
+## ロード・バランサーを使用したアプリへのアクセスの構成
 {: #config}
-
-NodePort サービスの場合とは異なり、ロード・バランサー・サービスのポータブル IP アドレスは、アプリのデプロイ先のワーカー・ノードに依存していません。 ただし、Kubernetes LoadBalancer サービスは NodePort サービスでもあります。 LoadBalancer サービスにより、ロード・バランサーの IP アドレスとポート上でアプリが利用可能になり、サービスのノード・ポート上でアプリが利用可能になります。
-{:shortdesc}
-
-ロード・バランサーのポータブル・パブリック IP アドレスは自動的に割り当てられ、ワーカー・ノードを追加または削除しても変わりません。 そのため、NodePort サービスよりロード・バランサー・サービスのほうが可用性が高くなります。 ユーザーは、ロード・バランサーのポートとしてどのポートでも選択できます。NodePort の場合のポート範囲には限定されません。 ロード・バランサー・サービスは、TCP プロトコルと UDP プロトコルの場合に使用できます。
-
-**注:** LoadBalancer サービスは TLS 終端をサポートしていません。アプリで TLS 終端が必要な場合は、[Ingress](cs_ingress.html) を使用してアプリを公開するか、または TLS 終端を管理するようにアプリを構成することができます。
 
 開始前に、以下のことを行います。
 
@@ -108,11 +132,11 @@ NodePort サービスの場合とは異なり、ロード・バランサー・�
         </tr>
         <tr>
           <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:`
-          <td>LoadBalancer のタイプを指定するアノテーション。 値は `private` と `public` です。 パブリック VLAN 上のクラスターにパブリック LoadBalancer を作成するときには、このアノテーションは必要ありません。</td>
+          <td>LoadBalancer のタイプを指定するアノテーション。 値は `private` と `public` です。 パブリック VLAN 上のクラスターにパブリック LoadBalancer を作成する場合には、このアノテーションは必要ありません。</td>
         </tr>
         <tr>
           <td><code>loadBalancerIP</code></td>
-          <td>プライベート LoadBalancer を作成するとき、またはパブリック LoadBalancer 用に特定のポータブル IP アドレスを使用するときには、<em>&lt;loadBalancerIP&gt;</em> を、使用する IP アドレスに置き換えます。 詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer) を参照してください。</td>
+          <td>プライベート LoadBalancer を作成するには、またはパブリック LoadBalancer 用に特定のポータブル IP アドレスを使用するには、<em>&lt;loadBalancerIP&gt;</em> を、使用する IP アドレスに置き換えます。 詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer) を参照してください。</td>
         </tr>
         </tbody></table>
 

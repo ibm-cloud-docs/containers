@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-01-29"
+lastupdated: "2017-02-27"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2017-01-29"
 # Tutoriel : Création de clusters
 {: #cs_cluster_tutorial}
 
-Déployez et gérez votre propre cluster Kubernetes dans {{site.data.keyword.Bluemix_short}}. Vous pouvez automatiser le déploiement, l'exploitation, la mise à l'échelle et la surveillance d'applications conteneurisées dans un cluster d'hôtes de calcul indépendants nommés noeuds d'agent.
+Déployez et gérez un cluster Kubernetes dans {{site.data.keyword.containerlong}}. Vous pouvez automatiser le déploiement, l'exploitation, la mise à l'échelle et la surveillance des applications conteneurisées dans un cluster.
 {:shortdesc}
 
 Dans cette série de tutoriels, vous découvrirez comment une entreprise de relations publiques fictive utilise des fonctionnalités Kubernetes pur déployer une application conteneurisée dans {{site.data.keyword.Bluemix_notm}}. En tirant parti d'{{site.data.keyword.toneanalyzerfull}}, l'entreprise de RP analyse ses communiqués de presse et reçoit des commentaires en retour.
@@ -61,7 +61,7 @@ Créez votre cluster dans l'interface graphique et installez les interfaces CLI 
 
 Pour créer votre cluster :
 
-1. La mise à disposition de votre cluster peut prendre quelques minutes. Pour gagner du temps, [créez votre depuis l'interface graphique (GUI) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/launch?env_id=ibm:yp:united-kingdom) avant d'installer les interfaces de ligne de commande (CLI). Dans le cadre de ce tutoriel, créez votre cluster dans la région Est des Etats-Unis.
+1. La mise à disposition de votre cluster peut prendre quelques minutes. Pour gagner du temps, [créez votre depuis l'interface graphique (GUI) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://console.bluemix.net/containers-kubernetes/launch?env_id=ibm:yp:united-kingdom) avant d'installer les interfaces de ligne de commande (CLI). Dans le cadre de ce tutoriel, créez votre cluster dans la région Est des Etats-Unis.
 
 
 Les interfaces CLI suivantes et leurs prérequis sont utilisés pour gérer les clusters via l'interface de ligne de commande :
@@ -77,7 +77,7 @@ Pour installer les interfaces CLI et leur prérequis :
 1.  Comme condition prérequise pour le plug-in {{site.data.keyword.containershort_notm}}, installez l'[interface CLI de {{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://clis.ng.bluemix.net/ui/home.html). Pour exécuter des commandes CLI {{site.data.keyword.Bluemix_notm}}, utilisez le préfixe `bx`.
 2.  Suivez les invites pour sélectionner un compte et une organisation {{site.data.keyword.Bluemix_notm}}. Les clusters sont associés à un compte, mais sont indépendants de l'organisation ou d'un espace {{site.data.keyword.Bluemix_notm}}.
 
-4.  Installez le plug-in {{site.data.keyword.containershort_notm}} pour créer des clusters Kubernetes et gérer les noeuds d'agent. Pour exécuter des commandes du plug-in {{site.data.keyword.containershort_notm}}, utilisez le préfixe `bx cs`.
+4.  Installez le plug-in {{site.data.keyword.containershort_notm}} pour créer des clusters Kubernetes et gérer les noeuds worker. Pour exécuter des commandes du plug-in {{site.data.keyword.containershort_notm}}, utilisez le préfixe `bx cs`.
 
     ```
     bx plugin install container-service -r Bluemix
@@ -85,13 +85,13 @@ Pour installer les interfaces CLI et leur prérequis :
     {: pre}
 
 5.  Pour afficher une version locale du tableau de bord Kubernetes et déployer des applications dans vos clusters, [installez l'interface CLI de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Pour exécuter des commandes à l'aide de l'interface CLI de Kubernetes, utilisez le préfixe `kubectl`.
-    1.  Pour obtenir la compatibilité fonctionnelle complète, téléchargez la version de l'interface CLI de Kubernetes qui correspond à la version du cluster Kubernetes que vous envisagez d'utiliser. Version {{site.data.keyword.containershort_notm}} Kubernetes actuelle par défaut : 1.8.6.
+    1.  Pour obtenir la compatibilité fonctionnelle complète, téléchargez la version de l'interface CLI de Kubernetes qui correspond à la version du cluster Kubernetes que vous envisagez d'utiliser. La version {{site.data.keyword.containershort_notm}} actuelle par défaut de Kubernetes est la version 1.8.8. 
 
-        OS X :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
+        OS X :   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl)
 
-        Linux :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
+        Linux :   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl)
 
-        Windows :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
+        Windows :   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe)
 
           **Astuce :** si vous utilisez Windows, installez l'interface CLI de Kubernetes dans le même répertoire que l'interface CLI de {{site.data.keyword.Bluemix_notm}}. Cette configuration vous évite diverses modifications de chemin de fichier lorsque vous exécuterez des commandes plus tard.
 
@@ -146,6 +146,7 @@ Félicitations ! Vous avez installé les interfaces CLI utilisées dans les proc
 {: #cs_cluster_tutorial_lesson2}
 
 Configurez un référentiel d'images privé dans {{site.data.keyword.registryshort_notm}} et ajoutez des valeurs confidentielles à votre cluster de sorte que l'application puisse accéder au service {{site.data.keyword.toneanalyzershort}}.
+{: shortdesc}
 
 1.  A l'invite, connectez-vous à l'interface CLI de {{site.data.keyword.Bluemix_notm}} en utilisant vos données d'identification {{site.data.keyword.Bluemix_notm}}.
 
@@ -176,15 +177,18 @@ pour stocker de manière sécurisée et partager vos images Docker avec tous les
     Lorsque l'allocation de votre noeud worker a abouti, son statut passe à **Ready** et vous pouvez alors commencer à lier des services {{site.data.keyword.Bluemix_notm}}.
 
     ```
-    ID                                                 Public IP       Private IP       Machine Type   State    Status
-    kube-par02-pafe24f557f070463caf9e31ecf2d96625-w1   169.48.131.37   10.177.161.132   free           normal    Ready
+    ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.48.131.37   10.177.161.132   free           normal   Ready    mil01      1.8.8
     ```
     {: screen}
 
 ## Leçon 3 : Configuration de votre environnement de cluster
 {: #cs_cluster_tutorial_lesson3}
 
-Définissez le contexte de votre cluster dans l'interface CLI. Chaque fois que vous vous connectez à l'interface CLI du conteneur pour gérer vos clusters, vous devez lancer ces commandes pour définir le chemin d'accès au fichier de configuration du cluster par le biais d'une variable de session. L'interface CLI de Kubernetes utilise cette variable pour localiser un fichier de configuration local et les certificats requis pour connexion au cluster dans {{site.data.keyword.Bluemix_notm}}.
+Définissez le contexte de votre cluster dans l'interface CLI.
+{: shortdesc}
+
+Chaque fois que vous vous connectez à l'interface CLI du conteneur pour gérer vos clusters, vous devez lancer ces commandes pour définir le chemin d'accès au fichier de configuration du cluster par le biais d'une variable de session. L'interface CLI de Kubernetes utilise cette variable pour localiser un fichier de configuration local et les certificats requis pour connexion au cluster dans {{site.data.keyword.Bluemix_notm}}.
 
 1.  Obtenez la commande permettant de définir la variable d'environnement et téléchargez les fichiers de configuration Kubernetes.
 
@@ -230,8 +234,8 @@ Définissez le contexte de votre cluster dans l'interface CLI. Chaque fois que v
     Exemple de sortie :
 
     ```
-    Client Version: v1.8.6
-    Server Version: v1.8.6
+    Client Version: v1.8.8
+    Server Version: v1.8.8
     ```
     {: screen}
 

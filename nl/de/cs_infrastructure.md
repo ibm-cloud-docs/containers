@@ -20,13 +20,14 @@ lastupdated: "2018-01-24"
 {: #infrastructure}
 
 Um einen Kubernetes-Standardcluster zu erstellen, benötigen Sie Zugriff auf das Portfolio von IBM Cloud Infrastructure (SoftLayer). Dieser Zugriff wird benötigt, um bezahlte Infrastrukturressourcen, wie z. B. Workerknoten, portierbare öffentliche
-IP-Adressen oder permanenten Speicher für Ihren Cluster anzufordern.
+IP-Adressen oder permanenten Speicher für Ihren Kubernetes-Cluster in {{site.data.keyword.containerlong}} anzufordern.
 {:shortdesc}
 
 ## Auf das Portfolio von IBM Cloud Infrastructure (SoftLayer) zugreifen
 {: #unify_accounts}
 
 Nutzungsabhängige {{site.data.keyword.Bluemix_notm}}-Konten, die erstellt wurden, nachdem die automatische Kontoverknüpfung aktiviert wurde, haben bereits Zugriff auf das Portfolio von IBM Cloud Infrastructure (SoftLayer). Somit können Sie Infrastrukturressourcen für Ihren Cluster ohne weitere Konfiguration kaufen.
+{:shortdesc}
 
 Benutzer mit anderen {{site.data.keyword.Bluemix_notm}}-Kontotypen oder Benutzer, die bereits ein Konto von IBM Cloud Infrastructure (SoftLayer) haben, das mit dem {{site.data.keyword.Bluemix_notm}}-Konto noch nicht verknüpft ist, müssen ihre Konten konfigurieren, um Standardcluster zu erstellen.
 {:shortdesc}
@@ -48,9 +49,8 @@ Sehen Sie sich die folgende Tabelle an, um die verfügbaren Optionen für die ei
 ## API-Schlüssel für IBM Cloud Infrastructure (SoftLayer) zur Verwendung mit {{site.data.keyword.Bluemix_notm}}-Konten generieren
 {: #old_account}
 
-Wenn Sie Ihr altes nutzungsabhängiges Konto oder Ihr Abonnementkonto weiterhin verwenden möchten, um Standardcluster zu erstellen, müssen Sie
-einen API-Schlüssel für Ihr neues nutzungsabhängiges Konto erstellen. Legen Sie dann den API-Schlüssel für Ihr altes Konto fest.
-{:shortdesc}
+Um Ihr altes nutzungsabhängiges Konto oder Ihr Abonnementkonto weiterhin zu verwenden, um Standardcluster zu erstellen, generieren Sie
+einen API-Schlüssel für Ihr neues nutzungsabhängiges Konto. Legen Sie dann den API-Schlüssel für Ihr altes Konto fest. {:shortdesc}
 
 Erstellen Sie zunächst ein nutzungsabhängiges {{site.data.keyword.Bluemix_notm}}-Konto, das automatisch mit Zugriff auf das Portfolio vom IBM Cloud Infrastructure (SoftLayer) eingerichtet wird.
 

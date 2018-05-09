@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-01-29"
+lastupdated: "2017-02-27"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2017-01-29"
 # Lernprogramm: Cluster erstellen
 {: #cs_cluster_tutorial}
 
-Stellen Sie einen eigenen Kubernetes-Cluster in {{site.data.keyword.Bluemix_short}} bereit und verwalten Sie ihn darin. Sie können die Bereitstellung, den Betrieb, die Skalierung und Überwachung containerisierter Apps in einem Cluster unabhängiger Rechenhosts (sog. Workerknoten) automatisieren.
+Stellen Sie einen Kubernetes-Cluster in {{site.data.keyword.containerlong}} bereit und verwalten Sie ihn darin. Sie können die Bereitstellung, den Betrieb, die Skalierung und Überwachung containerisierter Apps in einem Cluster automatisieren.
 {:shortdesc}
 
 In der vorliegenden Reihe von Lernprogrammen werden Sie erfahren, wie eine fiktive Public-Relations-Firma Kubernetes-Funktionalität verwendet, um eine containerisierte App in {{site.data.keyword.Bluemix_notm}} bereitzustellen. Diese PR-Firma nutzt {{site.data.keyword.toneanalyzerfull}} zur Analyse ihrer Pressemitteilungen und zum Empfang von Feedback.
@@ -85,13 +85,13 @@ Gehen Sie wie folgt vor, um die CLIs (Befehlszeilenschnittstellen) und die zugeh
     {: pre}
 
 5.  Um eine lokale Version des Kubernetes-Dashboards anzuzeigen und Apps in Ihren Clustern bereitzustellen, müssen Sie die [Kubernetes-CLI installieren ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Um Befehle über die Kubernetes-CLI auszuführen, müssen Sie das Präfix `kubectl` verwenden.
-    1.  Zur Erreichung der vollständigen funktionalen Kompatibilität müssen Sie die Kubernetes-CLI-Version herunterladen, die mit der Version des Kubernetes-Clusters übereinstimmt, die verwendet werden soll. Die aktuelle standardmäßige Kubernetes-Version für {{site.data.keyword.containershort_notm}} ist die Version 1.8.6.
+    1.  Zur Erreichung der vollständigen funktionalen Kompatibilität müssen Sie die Kubernetes-CLI-Version herunterladen, die mit der Version des Kubernetes-Clusters übereinstimmt, die verwendet werden soll. Die aktuelle standardmäßige Kubernetes-Version für {{site.data.keyword.containershort_notm}} ist die Version 1.8.8.
 
-        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
+        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl)
 
-        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
+        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl)
 
-        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
+        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe)
 
           **Tipp:** Wenn Sie Windows verwenden, installieren Sie die Kubernetes-CLI in demselben Verzeichnis wie die {{site.data.keyword.Bluemix_notm}}-CLI. Diese Konstellation erspart Ihnen einige Dateipfadänderungen, wenn Sie spätere Befehle ausführen.
 
@@ -146,6 +146,7 @@ Glückwunsch! Sie haben die CLIs für die folgenden Lerneinheiten und Lernprogra
 {: #cs_cluster_tutorial_lesson2}
 
 Richten Sie ein privates Image-Repository in {{site.data.keyword.registryshort_notm}} ein und fügen Sie geheime Schlüssel zu Ihrem Cluster hinzu, sodass die App auf den {{site.data.keyword.toneanalyzershort}}-Service zugreifen kann.
+{: shortdesc}
 
 1.  Melden Sie sich bei der {{site.data.keyword.Bluemix_notm}}-CLI mithilfe Ihrer {{site.data.keyword.Bluemix_notm}}-Berechtigungsnachweise an, wenn Sie dazu aufgefordert werden.
 
@@ -175,15 +176,18 @@ Richten Sie ein privates Image-Repository in {{site.data.keyword.registryshort_n
     Wenn die Bereitstellung Ihres Workerknotens abgeschlossen ist, wechselt der Status zu **Bereit**. Sie können nun mit dem Binden von {{site.data.keyword.Bluemix_notm}}-Services beginnen.
 
     ```
-    ID                                                 Public IP       Private IP       Machine Type   State    Status
-    kube-par02-pafe24f557f070463caf9e31ecf2d96625-w1   169.48.131.37   10.177.161.132   free           normal    Ready
+    ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.48.131.37   10.177.161.132   free           normal   Ready    mil01      1.8.8
     ```
     {: screen}
 
 ## Lerneinheit 3: Clusterumgebung einrichten
 {: #cs_cluster_tutorial_lesson3}
 
-Legen Sie in Ihrer CLI (Befehlszeilenschnittstelle) den Kontext für Ihren Cluster fest. Jedes Mal, wenn Sie sich an der Container-CLI anmelden, um mit Clustern zu arbeiten, müssen Sie diese Befehle ausführen, um den Pfad zu der Konfigurationsdatei des Clusters als Sitzungsvariable festzulegen. Anhand dieser Variablen sucht die Kubernetes-CLI eine lokale Konfigurationsdatei und Zertifikate, die zum Herstellen der Verbindung zum Cluster in {{site.data.keyword.Bluemix_notm}} erforderlich sind.
+Legen Sie in Ihrer CLI (Befehlszeilenschnittstelle) den Kontext für Ihren Cluster fest.
+{: shortdesc}
+
+Jedes Mal, wenn Sie sich an der Container-CLI anmelden, um mit Clustern zu arbeiten, müssen Sie diese Befehle ausführen, um den Pfad zu der Konfigurationsdatei des Clusters als Sitzungsvariable festzulegen. Anhand dieser Variablen sucht die Kubernetes-CLI eine lokale Konfigurationsdatei und Zertifikate, die zum Herstellen der Verbindung zum Cluster in {{site.data.keyword.Bluemix_notm}} erforderlich sind.
 
 1.  Ermitteln Sie den Befehl zum Festlegen der Umgebungsvariablen und laden Sie die Kubernetes-Konfigurationsdateien herunter.
 
@@ -231,8 +235,8 @@ um den Pfad zu der lokalen Kubernetes-Konfigurationsdatei als Umgebungsvariable 
     Beispielausgabe:
 
     ```
-    Client Version: v1.8.6
-    Server Version: v1.8.6
+    Client Version: v1.8.8
+    Server Version: v1.8.8
     ```
     {: screen}
 

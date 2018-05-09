@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-03-08"
 
 ---
 
@@ -40,9 +40,8 @@ lastupdated: "2018-01-11"
     - [將使用者管理的子網路及 IP 位址新增至 Kubernetes 叢集](cs_subnets.html#user_managed)
 - [使用叢集中的現有 NFS 檔案共用](cs_storage.html#existing)
 - [配置叢集記載](cs_health.html#logging)
-    - [啟用日誌轉遞](cs_health.html#log_sources_enable)
-    - [啟用應用程式的日誌轉遞](cs_health.html#apps_enable)
-    - [更新日誌轉遞配置](cs_health.html#log_sources_update)
+    - [啟用日誌轉遞](cs_health.html#logging)
+    - [更新日誌轉遞配置](cs_health.html#logging)
     - [停止日誌轉遞](cs_health.html#log_sources_delete)
     - [針對 Kubernetes API 審核日誌配置日誌轉遞](cs_health.html#app_forward)
     - [啟用 Kubernetes API 審核日誌轉遞](cs_health.html#audit_enable)

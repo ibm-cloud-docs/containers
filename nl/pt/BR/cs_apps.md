@@ -24,7 +24,7 @@ Verifique as informações mais recentes em seu novo local:
 - [Permitindo o acesso público a apps](cs_network_planning.html#planning)
   - [Configurando o acesso público para um app usando o tipo de serviço NodePort](cs_nodeport.html#config)
   - [Configurando o acesso a um app usando o tipo de serviço do balanceador de carga](cs_loadbalancer.html#config)
-  - [Configurando o acesso a um app usando Ingress](cs_ingress.html#config)
+  - [Configurando o acesso a um app usando Ingress](cs_ingress.html#configure_alb)
     - [Usando o domínio fornecido pela IBM sem finalização TLS](cs_ingress.html#ibm_domain)
     - [Usando o domínio fornecido pela IBM com finalização TLS](cs_ingress.html#ibm_domain_cert)
     - [Usando um domínio customizado e certificado TLS para executar a finalização TLS](cs_ingress.html#custom_domain_cert)

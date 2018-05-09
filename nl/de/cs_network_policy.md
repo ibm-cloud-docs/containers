@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-02-27"
 
 ---
 
@@ -18,12 +18,12 @@ lastupdated: "2018-01-24"
 # Datenverkehr anhand von Netzrichtlinien steuern
 {: #network_policies}
 
-Jeder Kubernetes-Cluster wird mit einem Netz-Plug-in namens Calico eingerichtet. Standardnetzrichtlinien werden zum Schutz der öffentlichen Netzschnittstelle der einzelnen Workerknoten eingerichtet. Sie können Calico und native
-Kubernetes-Funktionen verwenden, um weitere Netzrichtlinien für einen Cluster zu konfigurieren, wenn Sie eindeutige Sicherheitsanforderungen haben. Diese Netzrichtlinien geben Sie den Netzverkehr an, den Sie zu und von einem Pod in einem Cluster zulassen oder blockieren
-möchten.
+Jeder Kubernetes-Cluster wird mit einem Netz-Plug-in namens Calico eingerichtet. Standardnetzrichtlinien werden zum Schutz der öffentlichen Netzschnittstelle der einzelnen Workerknoten in {{site.data.keyword.containerlong}} eingerichtet.
 {: shortdesc}
 
-Sie können zwischen Calico und nativen Kubernetes-Funktionen wählen, um Netzrichtlinien für Ihren Cluster zu erstellen. Für den Anfang reichen Kubernetes-Netzrichtlinien aus, aber für stabilere Funktionen sollten Sie
+Sie können Calico und native
+Kubernetes-Funktionen verwenden, um weitere Netzrichtlinien für einen Cluster zu konfigurieren, wenn Sie eindeutige Sicherheitsanforderungen haben. Diese Netzrichtlinien geben Sie den Netzverkehr an, den Sie zu und von einem Pod in einem Cluster zulassen oder blockieren
+möchten. Für den Anfang reichen Kubernetes-Netzrichtlinien aus, aber für stabilere Funktionen sollten Sie
 die Calico-Netzrichtlinien verwenden.
 
 <ul>
@@ -46,8 +46,7 @@ Firewall für den Workerknoten, um die Merkmale zu definieren, die der Netzverke
 ## Standardrichtlinienkonfiguration
 {: #default_policy}
 
-Wenn ein Cluster erstellt wird, werden Standardnetzrichtlinien automatisch für die öffentliche Netzschnittstelle
-jedes Workerknotens konfiguriert, um eingehenden Datenverkehr für einen Workerknoten aus dem öffentlichen Internet zu begrenzen. Diese Richtlinien wirken sich nicht auf Datenverkehr zwischen Pods aus
+Wenn ein Cluster erstellt wird, werden Standardnetzrichtlinien für die öffentliche Netzschnittstelle jedes Workerknotens festgelegt, um den eingehenden Datenverkehr aus dem öffentlichen Internet zu begrenzen. Diese Richtlinien wirken sich nicht auf Datenverkehr zwischen Pods aus
 und werden konfiguriert, um Zugriff auf den Kubernetes-Knotenport, die Lastausgleichsfunktion und die Ingress-Services zu ermöglichen.
 {:shortdesc}
 
@@ -333,7 +332,7 @@ erzwungen wird, muss sie eine Kubernetes-Ressource finden, die mit dem Selektor 
 ## Eingehenden Datenverkehr zu LoadBalancer- oder NodePort-Services blockieren
 {: #block_ingress}
 
-Standardmäßig sind die Kubernetes-Services `NodePort` und `LoadBalancer` so konzipiert, dass Ihre App in allen öffentlichen und privaten Clusterschnittstellen verfügbar ist. Allerdings können Sie den eingehenden Datenverkehr zu Ihren Services auf Basis der Datenverkehrsquelle oder des Ziels blockieren. Zum Blockieren von Datenverkehr müssen Sie Calico-Netzrichtlinien vom Typ `preDNAT` erstellen.
+Standardmäßig sind die Kubernetes-Services `NodePort` und `LoadBalancer` so konzipiert, dass Ihre App in allen öffentlichen und privaten Clusterschnittstellen verfügbar ist. Allerdings können Sie den eingehenden Datenverkehr zu Ihren Services auf Basis der Datenverkehrsquelle oder des Ziels blockieren.
 {:shortdesc}
 
 Ein Kubernetes-LoadBalancer-Service stellt auch einen NodePort-Service dar. Ein LoadBalancer-Service stellt Ihre App über die IP-Adresse der Lastausgleichsfunktion und den zugehörigen Port zur Verfügung und macht sie über die Knotenports des Service verfügbar. Auf Knotenports kann über jede IP-Adresse (öffentlich und privat) für jeden Knoten innerhalb des Clusters zugegriffen werden.

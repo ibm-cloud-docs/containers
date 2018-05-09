@@ -19,13 +19,14 @@ lastupdated: "2018-01-24"
 # IBM Cloud 인프라(SoftLayer) 포트폴리오 액세스
 {: #infrastructure}
 
-표준 Kubernetes 클러스터를 작성하려면 IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한이 있어야 합니다. 이러한 액세스 권한은 작업자 노드, 포터블 공인 IP 주소 또는 클러스터에 대한 지속적 스토리지 등과 같은 유료 인프라 리소스를 요청하는 데 필요합니다.
+표준 Kubernetes 클러스터를 작성하려면 IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한이 있어야 합니다. {{site.data.keyword.containerlong}}에서 이러한 액세스 권한은 작업자 노드, 포터블 공인 IP 주소 또는 Kubernetes 클러스터에 대한 지속적 스토리지 등과 같은 유료 인프라 리소스를 요청하는 데 필요합니다.
 {:shortdesc}
 
 ## IBM Cloud 인프라(SoftLayer) 포트폴리오 액세스
 {: #unify_accounts}
 
-자동 계정 링크가 사용 가능해진 후에 작성된 {{site.data.keyword.Bluemix_notm}} 종량과금제 계정은 IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한으로 이미 설정되어 있으므로, 사용자는 추가 구성 없이 클러스터에 대한 인프라 리소스를 구매할 수 있습니다.
+자동 계정 링크가 사용 가능해진 후에 작성된 {{site.data.keyword.Bluemix_notm}} 종량과금제 계정은 IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한으로 이미 설정되어 있습니다. 추가 구성 없이 클러스터의 인프라 리소스를 구매할 수 있습니다.
+{:shortdesc}
 
 기타 {{site.data.keyword.Bluemix_notm}} 계정 유형의 사용자나 자체 {{site.data.keyword.Bluemix_notm}} 계정에 연결되지 않은 기존 IBM Cloud 인프라(SoftLayer) 계정을 보유한 사용자는 표준 클러스터를 작성하기 위한 자체 계정을 구성해야 합니다.
 {:shortdesc}
@@ -45,7 +46,7 @@ lastupdated: "2018-01-24"
 ## {{site.data.keyword.Bluemix_notm}} 계정에서 사용할 IBM Cloud 인프라(SoftLayer) API 키 생성
 {: #old_account}
 
-계속해서 이전 종량과금제 또는 구독 계정을 사용하여 표준 클러스터를 작성하려면 새 종량과금제 계정으로 API 키를 생성하고 이전 계정에 대해 API 키를 설정해야 합니다.
+계속해서 이전 종량과금제 또는 구독 계정을 사용하여 표준 클러스터를 계속 작성하려면 새 종량과금제 계정으로 API 키를 생성하고 이전 계정에 대해 API 키를 설정하십시오.
 {:shortdesc}
 
 시작하기 전에 IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한으로 자동 설정된 {{site.data.keyword.Bluemix_notm}} 종량과금제 계정을 작성하십시오.

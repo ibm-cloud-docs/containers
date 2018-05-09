@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-14"
 
 ---
 
@@ -18,7 +18,7 @@ lastupdated: "2018-01-11"
 # 방화벽에서 필수 포트와 IP 주소 열기
 {: #firewall}
 
-방화벽에서 특정 포트 및 IP 주소을 열어야 할 수 있는 다음 상황을 검토하십시오.
+{{site.data.keyword.containerlong}}를 위해 방화벽에서 특정 포트 및 IP 주소를 열어야 할 수 있는 다음 상황을 검토하십시오.
 {:shortdesc}
 
 * 회사 네트워크 정책으로 인해 프록시 또는 방화벽을 통해 공용 인터넷 엔드포인트에 액세스하지 못할 때 로컬 시스템에서 [`bx` 명령을 실행](#firewall_bx)하려는 경우
@@ -94,7 +94,7 @@ lastupdated: "2018-01-11"
    ```
    {: pre}
 
-4. 클러스터의 **마스터 URL**을 검색하십시오.
+4. 클러스터의 **Master URL**을 검색하십시오.
 
    ```
    bx cs cluster-get <cluster_name_or_id>
@@ -173,14 +173,14 @@ lastupdated: "2018-01-11"
 클러스터가 방화벽 뒤에서 인프라 리소스와 서비스(예: {{site.data.keyword.containershort_notm}} 지역, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IBM Cloud 인프라(SoftLayer) 사설 IP 및 지속적 볼륨 클레임을 위한 egress)에 액세스할 수 있게 하십시오.
 {:shortdesc}
 
-  1.  클러스터에서 모든 작업자 노드에 대한 공인 IP 주소를 기록해 놓으십시오.
+  1.  클러스터에서 모든 작업자 노드에 대한 공인 IP 주소를 기록해 두십시오.
 
       ```
     bx cs workers <cluster_name_or_id>
       ```
       {: pre}
 
-  2.  소스 _<each_worker_node_publicIP>_에서 대상 TCP/UDP 포트 범위 20000-32767 및 포트 443으로의 발신 네트워크 트래픽과 다음 IP 주소 및 네트워크 그룹을 허용하십시오. 로컬 시스템이 공용 인터넷 엔드포인트에 액세스하지 못하도록 방지하는 회사 방화벽이 있는 경우, 소스 작업자 노드와 로컬 시스템 둘 다에 대해 이 단계를 수행하십시오.
+  2.  소스 _<each_worker_node_publicIP>_에서 대상 TCP/UDP 포트 범위 20000-32767 및 포트 443으로의 발신 네트워크 트래픽과 다음 IP 주소 및 네트워크 그룹을 허용하십시오. 로컬 머신이 공용 인터넷 엔드포인트에 액세스하지 못하도록 방지하는 회사 방화벽이 있는 경우, 소스 작업자 노드와 로컬 머신 둘 다에 대해 이 단계를 수행하십시오.
       - **중요**: 부트스트랩 프로세스 중에 로드를 밸런싱하려면 지역 내 모든 위치에 대해 포트 443으로의 발신 트래픽을 허용해야 합니다. 예를 들어, 클러스터가 미국 남부에 있는 경우 포트 443에서 모든 위치(dal10, dal12 및 dal13)의 IP 주소로의 트래픽을 허용해야 합니다.
       <p>
   <table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
@@ -193,7 +193,7 @@ lastupdated: "2018-01-11"
       <tr>
         <td>AP 북부</td>
         <td>hkg02<br>seo01<br>sng01<br>tok02</td>
-        <td><code>169.56.132.234</code><br><code>161.202.126.210</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
+        <td><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
        </tr>
       <tr>
          <td>AP 남부</td>
@@ -203,7 +203,7 @@ lastupdated: "2018-01-11"
       <tr>
          <td>중앙 유럽</td>
          <td>ams03<br>fra02<br>mil01<br>par01</td>
-         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.170</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
         </tr>
       <tr>
         <td>영국 남부</td>
@@ -217,8 +217,8 @@ lastupdated: "2018-01-11"
       </tr>
       <tr>
         <td>미국 남부</td>
-        <td>dal10<br>dal12<br>dal13<br>sao01</td>
-        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>169.57.151.10</code></td>
+        <td>dal10<br>dal12<br>dal13<br>hou02<br>sao01</td>
+        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>184.173.44.62</code><br><code>169.57.151.10</code></td>
       </tr>
       </tbody>
     </table>

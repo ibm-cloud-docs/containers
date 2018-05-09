@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-14"
 
 ---
 
@@ -19,24 +19,30 @@ lastupdated: "2018-01-11"
 # Creazione dei contenitori dalle immagini
 {: #images}
 
-Un'immagine Docker è la base per ogni contenitore che crei. Un'immagine viene creata da un
+Un'immagine Docker è la base per ogni contenitore che crei con {{site.data.keyword.containerlong}}.
+{:shortdesc}
+
+Un'immagine viene creata da un
 Dockerfile, che è un file che contiene le istruzioni per creare l'immagine. Nelle sue istruzioni, un Dockerfile potrebbe
 fare riferimento alle risorse di build che vengono memorizzate separatamente, quali ad esempio un'applicazione, la configurazione
 dell'applicazione e le relative dipendenze.
-{:shortdesc}
 
 
-## Pianificazione dei registri di immagini 
+
+## Pianificazione dei registri di immagini
 {: #planning}
 
 Le immagini normalmente vengono archiviate in un registro ed è possibile accedervi pubblicamente (registro pubblico)
-o configurarle con un accesso limitato a un piccolo gruppo di utenti (registro privato). I registri pubblici,
+o configurarle con un accesso limitato a un piccolo gruppo di utenti (registro privato). 
+{:shortdesc}
+
+I registri pubblici,
 come Docker Hub possono essere utilizzati come un'introduzione di Docker e Kubernetes per creare la tua prima
 applicazione inserita in un contenitore in un cluster. Nel caso però di applicazioni aziendali, utilizza un registro privato,
 come quello fornito in {{site.data.keyword.registryshort_notm}}, per proteggere le tue immagini dall'essere utilizzate e modificate da utenti non autorizzati. I registri privati
 devono essere configurati dall'amministratore del cluster per assicurare che le credenziali di accesso al registro privato
 siano disponibili agli utenti del cluster.
-{:shortdesc}
+
 
 Puoi utilizzare più registri con {{site.data.keyword.containershort_notm}} per distribuire le applicazioni al tuo cluster.
 
@@ -53,7 +59,7 @@ o altri registri cloud privati).</li></ul>|
 |Docker Hub pubblico|Utilizza questa opzione per utilizzare direttamente le immagini pubbliche esistenti da Docker Hub quando non è necessaria alcuna
 modifica al Dockerfile. <p>**Nota:** tieni presente che questa opzione non rispetta i requisiti di sicurezza della tua organizzazione,
 come la gestione dell'accesso, la scansione di vulnerabilità o la privacy dell'applicazione.</p>|<ul><li>Non è necessaria alcuna ulteriore configurazione per il tuo cluster.</li><li>Include varie applicazioni open source.</li></ul>|
-{: caption="Tabella. Opzioni del registro delle immagini privato e pubblico " caption-side="top"}
+{: caption="Tabella. Opzioni del registro delle immagini privato e pubblico" caption-side="top"}
 
 Dopo che hai configurato un registro immagini, gli utenti del cluster possono utilizzare le immagini per le loro distribuzioni dell'applicazione al cluster.
 
@@ -96,7 +102,7 @@ cluster, crea un file di configurazione.
 utilizzare un'immagine privata da uno spazio dei nomi in {{site.data.keyword.registryshort_notm}}:
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1beta1
     kind: Deployment
     metadata:
       name: ibmliberty-deployment
@@ -187,9 +193,7 @@ nel campo **Token** dell'output della tua CLI.
     <tbody>
     <tr>
     <td><code>--namespace <em>&lt;kubernetes_namespace&gt;</em></code></td>
-    <td>Obbligatoria. Lo spazio dei nomi Kubernetes del cluster in cui vuoi utilizzare il segreto e a cui
-distribuire i contenitori. Esegui <code>kubectl get namespaces</code> per elencare tutti gli spazi dei nomi nel tuo
-cluster.</td>
+    <td>Obbligatoria. Lo spazio dei nomi Kubernetes del cluster in cui vuoi utilizzare il segreto e a cui distribuire i contenitori. Esegui <code>kubectl get namespaces</code> per elencare tutti gli spazi dei nomi nel tuo cluster.</td>
     </tr>
     <tr>
     <td><code><em>&lt;secret_name&gt;</em></code></td>
@@ -209,15 +213,11 @@ cluster.</td>
     </tr>
     <tr>
     <td><code>--docker-email <em>&lt;docker-email&gt;</em></code></td>
-    <td>Obbligatoria. Se ne hai uno, immetti il tuo indirizzo e-mail Docker. Se non hai uno, immetti
-un indirizzo e-mail fittizio, come ad esempio a@b.c. Questa e-mail è obbligatoria per creare un segreto Kubernetes,
-ma non viene utilizzata dopo la creazione.</td>
+    <td>Obbligatoria. Se ne hai uno, immetti il tuo indirizzo e-mail Docker. Se non hai uno, immetti un indirizzo e-mail fittizio, come ad esempio a@b.c. Questa e-mail è obbligatoria per creare un segreto Kubernetes, ma non viene utilizzata dopo la creazione.</td>
     </tr>
     </tbody></table>
 
-6.  Verifica che il segreto sia stato creato correttamente. Sostituisci
-<em>&lt;kubernetes_namespace&gt;</em> con il nome dello spazio in cui hai creato
-imagePullSecret.
+6.  Verifica che il segreto sia stato creato correttamente. Sostituisci <em>&lt;kubernetes_namespace&gt;</em> con il nome dello spazio in cui hai creato imagePullSecret.
 
     ```
     kubectl get secrets --namespace <kubernetes_namespace>
@@ -273,8 +273,7 @@ imagePullSecret.
         </tr>
         <tr>
         <td><code><em>&lt;my_namespace&gt;</em></code></td>
-        <td>Lo spazio dei nomi in cui è memorizzata la tua immagine. Per elencare gli spazi dei nomi disponibili, esegui `bx cr
-namespace-list`.</td>
+        <td>Lo spazio dei nomi in cui è memorizzata la tua immagine. Per elencare gli spazi dei nomi disponibili, esegui `bx cr namespace-list`.</td>
         </tr>
         <tr>
         <td><code><em>&lt;my_image&gt;</em></code></td>
@@ -282,8 +281,7 @@ namespace-list`.</td>
         </tr>
         <tr>
         <td><code><em>&lt;tag&gt;</em></code></td>
-        <td>La versione dell'immagine che vuoi utilizzare. Se non si specifica una tag, viene utilizzata l'immagine contrassegnata con
-<strong>latest</strong> per impostazione predefinita.</td>
+        <td>La versione dell'immagine che vuoi utilizzare. Se non si specifica una tag, viene utilizzata l'immagine contrassegnata con <strong>latest</strong> per impostazione predefinita.</td>
         </tr>
         <tr>
         <td><code><em>&lt;secret_name&gt;</em></code></td>
@@ -307,8 +305,7 @@ namespace-list`.</td>
 ## Accesso alle immagini pubbliche da Docker Hub
 {: #dockerhub}
 
-Puoi utilizzare qualsiasi immagine pubblica memorizzata in Docker Hub per distribuire un contenitore al tuo
-cluster senza alcuna configurazione aggiuntiva.
+Puoi utilizzare qualsiasi immagine pubblica memorizzata in Docker Hub per distribuire un contenitore al tuo cluster senza alcuna configurazione aggiuntiva.
 {:shortdesc}
 
 Prima di iniziare:
@@ -323,7 +320,7 @@ Crea un file di configurazione di distribuzione.
 2.  Definisci la distribuzione e l'immagine pubblica dal Docker Hub che vuoi utilizzare. Il seguente file di configurazione utilizza l'immagine pubblica NGINX disponibile su Docker Hub.
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1beta1
     kind: Deployment
     metadata:
       name: nginx-deployment
@@ -358,23 +355,20 @@ Crea un file di configurazione di distribuzione.
 
 
 
-## Accesso alle immagini memorizzate in altri registri privati 
+## Accesso alle immagini memorizzate in altri registri privati
 {: #private_images}
 
-Se hai già un registro privato che vuoi utilizzare, devi memorizzare le credenziali del
-registro in un imagePullSecret Kubernetes e fare riferimento a questo segreto nel tuo file di configurazione.
+Se hai già un registro privato da utilizzare, devi memorizzare le credenziali del registro in un imagePullSecret Kubernetes e fare riferimento a questo segreto nel tuo file di configurazione.
 {:shortdesc}
 
 Prima di iniziare:
 
-1.  [Crea un
-cluster](cs_clusters.html#clusters_cli).
+1.  [Crea un cluster](cs_clusters.html#clusters_cli).
 2.  [Indirizza la tua CLI al tuo cluster](cs_cli_install.html#cs_cli_configure).
 
 Per creare un imagePullSecret:
 
-**Nota:** i segreti imagePullSecret sono validi per gli spazi dei nomi per i quali sono stati creati. Ripeti questa procedura
-per ogni spazio dei nomi in cui vuoi distribuire i contenitori da un'immagine memorizzata in un registro {{site.data.keyword.Bluemix_notm}} privato.
+**Nota:** i segreti imagePullSecret sono validi per gli spazi dei nomi per i quali sono stati creati. Ripeti questa procedura per ogni spazio dei nomi in cui vuoi distribuire i contenitori da un'immagine memorizzata in un registro {{site.data.keyword.Bluemix_notm}} privato.
 
 1.  Crea il segreto Kubernetes per memorizzare le credenziali del tuo registro privato.
 
@@ -391,9 +385,7 @@ per ogni spazio dei nomi in cui vuoi distribuire i contenitori da un'immagine me
     <tbody>
     <tr>
     <td><code>--namespace <em>&lt;kubernetes_namespace&gt;</em></code></td>
-    <td>Obbligatoria. Lo spazio dei nomi Kubernetes del cluster in cui vuoi utilizzare il segreto e a cui
-distribuire i contenitori. Esegui <code>kubectl get namespaces</code> per elencare tutti gli spazi dei nomi nel tuo
-cluster.</td>
+    <td>Obbligatoria. Lo spazio dei nomi Kubernetes del cluster in cui vuoi utilizzare il segreto e a cui distribuire i contenitori. Esegui <code>kubectl get namespaces</code> per elencare tutti gli spazi dei nomi nel tuo cluster.</td>
     </tr>
     <tr>
     <td><code><em>&lt;secret_name&gt;</em></code></td>
@@ -413,15 +405,11 @@ cluster.</td>
     </tr>
     <tr>
     <td><code>--docker-email <em>&lt;docker-email&gt;</em></code></td>
-    <td>Obbligatoria. Se ne hai uno, immetti il tuo indirizzo e-mail Docker. Se non hai uno, immetti
-un indirizzo e-mail fittizio, come ad esempio a@b.c. Questa e-mail è obbligatoria per creare un segreto Kubernetes,
-ma non viene utilizzata dopo la creazione.</td>
+    <td>Obbligatoria. Se ne hai uno, immetti il tuo indirizzo e-mail Docker. Se non hai uno, immetti un indirizzo e-mail fittizio, come ad esempio a@b.c. Questa e-mail è obbligatoria per creare un segreto Kubernetes, ma non viene utilizzata dopo la creazione.</td>
     </tr>
     </tbody></table>
 
-2.  Verifica che il segreto sia stato creato correttamente. Sostituisci
-<em>&lt;kubernetes_namespace&gt;</em> con il nome dello spazio in cui hai creato
-imagePullSecret.
+2.  Verifica che il segreto sia stato creato correttamente. Sostituisci <em>&lt;kubernetes_namespace&gt;</em> con il nome dello spazio in cui hai creato imagePullSecret.
 
     ```
     kubectl get secrets --namespace <kubernetes_namespace>
@@ -430,9 +418,7 @@ imagePullSecret.
 
 3.  Crea un a pod che fa riferimento all'imagePullSecret.
     1.  Crea un file di configurazione del pod denominato `mypod.yaml`.
-    2.  Definisci il pod e l'imagePullSecret che vuoi utilizzare per accedere al tuo registro
-{{site.data.keyword.Bluemix_notm}} privato. Per utilizzare un'immagine
-privata dal tuo registro privato:
+    2.  Definisci il pod e l'imagePullSecret che vuoi utilizzare per accedere al tuo registro {{site.data.keyword.Bluemix_notm}} privato. Per utilizzare un'immagine privata dal tuo registro privato:
 
         ```
         apiVersion: v1
@@ -468,8 +454,7 @@ privata dal tuo registro privato:
         </tr>
         <tr>
         <td><code><em>&lt;tag&gt;</em></code></td>
-        <td>La versione dell'immagine che vuoi utilizzare. Se non si specifica una tag, viene utilizzata l'immagine contrassegnata con
-<strong>latest</strong> per impostazione predefinita.</td>
+        <td>La versione dell'immagine che vuoi utilizzare. Se non si specifica una tag, viene utilizzata l'immagine contrassegnata con <strong>latest</strong> per impostazione predefinita.</td>
         </tr>
         <tr>
         <td><code><em>&lt;secret_name&gt;</em></code></td>
@@ -484,4 +469,3 @@ privata dal tuo registro privato:
         kubectl apply -f mypod.yaml
         ```
         {: pre}
-

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-02-27"
 
 ---
 
@@ -18,10 +18,10 @@ lastupdated: "2018-01-24"
 # 네트워크 정책 관련 트래픽 제어
 {: #network_policies}
 
-모든 Kubernetes 클러스터는 Calico라는 네트워크 플러그인으로 설정됩니다. 모든 작업자 노드의 공용 네트워크 인터페이스 보안을 위해 기본 네트워크 정책이 설정됩니다. 고유 보안 요구사항이 있을 때 Calico 및 기본 Kubernetes 기능을 사용하여 클러스터에 대한 네트워크 정책을 더 구성할 수 있습니다. 이러한 네트워크 정책은 클러스터에서 포드에 허용하거나 차단하고자 하는 네트워크 트래픽을 지정합니다.
+모든 Kubernetes 클러스터는 Calico라는 네트워크 플러그인으로 설정됩니다. {{site.data.keyword.containerlong}}에서 모든 작업자 노드의 공용 네트워크 인터페이스 보안을 위해 기본 네트워크 정책이 설정됩니다.
 {: shortdesc}
 
-클러스터에 대한 네트워크 정책을 작성하기 위해 Calico 및 기본 Kubernetes 기능 중에서 선택할 수 있습니다. Kubernetes 네트워크 정책을 사용하여 시작할 수 있지만, 더 강력한 기능을 위해서는 Calico 네트워크 정책을 사용하십시오.
+고유 보안 요구사항이 있을 때 Calico 및 기본 Kubernetes 기능을 사용하여 클러스터에 대한 네트워크 정책을 더 구성할 수 있습니다. 이러한 네트워크 정책은 클러스터에서 포드에 허용하거나 차단하고자 하는 네트워크 트래픽을 지정합니다. Kubernetes 네트워크 정책을 사용하여 시작할 수 있지만, 더 강력한 기능을 위해서는 Calico 네트워크 정책을 사용하십시오.
 
 <ul>
   <li>[Kubernetes 네트워크 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/services-networking/network-policies/): 포드가 서로 통신할 수 있는지 지정하는 등의 일부 기본 옵션이 제공됩니다. 프로토콜 및 포트에 대한 수신 네트워크 트래픽을 허용하거나 차단할 수 있습니다. 다른 포드에 연결하려고 시도하는 포드의 Kubernetes 네임스페이스 및 레이블을 기반으로 이 트래픽을 필터링할 수 있습니다.</br>이러한 정책은
@@ -44,9 +44,7 @@ Kubernetes 작업자 노드에서 Linux iptables 규칙을 설정하여 Calico �
 ## 기본 정책 구성
 {: #default_policy}
 
-클러스터가 작성되면 공용 인터넷에서 작업자 노드에 대한 수신 트래픽을 제한하기 위해 기본 네트워크 정책이 각 작업자 노드의 공용 네트워크 인터페이스에
-대해 자동으로 설정됩니다. 이러한 정책은 포드에서 포드 트래픽에 영향을 미치지 않으며
-Kubernetes 노드 포트, 로드 밸런서 및 Ingress 서비스에 대한 액세스를 허용하도록 설정됩니다.
+클러스터가 작성되면 공용 인터넷에서 수신 트래픽을 제한하기 위해 기본 네트워크 정책이 각 작업자 노드의 공용 네트워크 인터페이스에 대해 설정됩니다. 이러한 정책은 포드에서 포드 트래픽에 영향을 미치지 않으며 Kubernetes 노드 포트, 로드 밸런서 및 Ingress 서비스에 대한 액세스를 허용합니다.
 {:shortdesc}
 
 기본 정책은 포드에 직접 적용되지 않습니다. Calico 호스트 엔드포인트를 사용하여 작업자 노드의 공용 네트워크 인터페이스에 적용됩니다. 호스트 엔드포인트가 Calico에서 작성되면
@@ -84,7 +82,7 @@ Kubernetes 노드 포트, 로드 밸런서 및 Ingress 서비스에 대한 액�
    </tr>
    <tr>
     <td><code>allow-vrrp</code></td>
-    <td>작업자 노드 사이에서 가상 IP 주소를 모니터링하고 이동하는 데 사용되는 vrrp 패킷을 허용합니다.</td>
+    <td>작업자 노드 사이에서 가상 IP 주소를 모니터하고 이동하는 데 사용되는 vrrp 패킷을 허용합니다.</td>
    </tr>
   </tbody>
 </table>
@@ -114,7 +112,7 @@ Kubernetes 노드 포트, 로드 밸런서 및 Ingress 서비스에 대한 액�
 
 네트워크 정책을 추가하려면 다음을 수행하십시오.
 1.  Calico CLI를 설치하십시오.
-    1.  [Calico CLI 다운로드 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/projectcalico/calicoctl/releases/tag/v1.6.1).
+    1.  [Calico CLI를 다운로드 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/projectcalico/calicoctl/releases/tag/v1.6.1)하십시오.
 
         **팁:** Windows를 사용하는 경우, {{site.data.keyword.Bluemix_notm}} CLI와 동일한 디렉토리에 Calico CLI를 설치하십시오. 이 설정을 사용하면 나중에 명령을 실행할 때 일부 파일 경로 변경이 필요하지 않습니다.
 
@@ -331,7 +329,7 @@ Kubernetes 노드 포트, 로드 밸런서 및 Ingress 서비스에 대한 액�
 ## LoadBalancer 또는 NodePort 서비스에 대한 수신 트래픽 차단
 {: #block_ingress}
 
-기본적으로 Kubernetes `NodePort` 및 `LoadBalancer` 서비스는 앱을 모든 퍼블릭 및 프라이빗 클러스터 인터페이스에서 사용 가능하게 하도록 설계되었습니다. 그러나 트래픽 소스 또는 대상을 기반으로 서비스에 대한 수신 트래픽을 차단할 수 있습니다. 트래픽을 차단하려면 Calico `preDNAT` 네트워크 정책을 작성하십시오.
+기본적으로 Kubernetes `NodePort` 및 `LoadBalancer` 서비스는 앱을 모든 퍼블릭 및 프라이빗 클러스터 인터페이스에서 사용 가능하게 하도록 설계되었습니다. 그러나 트래픽 소스 또는 대상을 기반으로 서비스에 대한 수신 트래픽을 차단할 수 있습니다.
 {:shortdesc}
 
 Kubernetes LoadBalancer 서비스는 NodePort 서비스이기도 합니다. LoadBalancer 서비스는 로드 밸런서 IP 주소 및 포트를 통해 앱을 사용할 수 있도록 하고 서비스의 노드 포트를 통해 앱을 사용할 수 있도록 합니다. 클러스터 내의 모든 노드에 대한 모든 IP 주소(공인 및 사설)에서 노드 포트에 액세스할 수 있습니다.

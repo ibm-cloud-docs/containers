@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-14"
 
 ---
 
@@ -19,17 +19,21 @@ lastupdated: "2018-01-11"
 # Génération de conteneurs à partir d'images
 {: #images}
 
-Une image Docker est la base de chaque conteneur que vous créez. L'image est créée depuis un Dockerfile, lequel est un fichier contenant des instructions pour générer l'image. Un Dockerfile peut référencer dans ses instructions des artefacts de génération stockés séparément, comme une application, sa configuration, et ses dépendances.
+Une image Docker est la base de chaque conteneur que vous créez avec {{site.data.keyword.containerlong}}.
 {:shortdesc}
+
+L'image est créée depuis un Dockerfile, lequel est un fichier contenant des instructions pour générer l'image. Un Dockerfile peut référencer dans ses instructions des artefacts de génération stockés séparément, comme une application, sa configuration, et ses dépendances.
+
 
 
 ## Planification de registres d'images
 {: #planning}
 
-Les images sont généralement stockées dans un registre d'images pouvant être accessible au public (registre public)  ou, au contraire, dont l'accès est limité à un petit groupe d'utilisateurs (registre privé). Des registres publics, tel que Docker Hub, peuvent être utilisés pour vous familiariser avec Docker et Kubernetes en créant créer votre première application conteneurisée dans un cluster. Dans le cas d'applications d'entreprise, utilisez un registre privé, tel que celui fourni dans {{site.data.keyword.registryshort_notm}}, pour empêcher l'utilisation et la modification de vos images par des utilisateurs non habilités. Les registres privés sont mis en place par l'administrateur du
-cluster pour garantir que les données d'identification pour accès au registre privé sont disponibles aux utilisateurs du
-cluster.
+Les images sont généralement stockées dans un registre d'images pouvant être accessible au public (registre public)  ou, au contraire, dont l'accès est limité à un petit groupe d'utilisateurs (registre privé). 
 {:shortdesc}
+
+Des registres publics, tel que Docker Hub, peuvent être utilisés pour vous familiariser avec Docker et Kubernetes en créant créer votre première application conteneurisée dans un cluster. Dans le cas d'applications d'entreprise, utilisez un registre privé, tel que celui fourni dans {{site.data.keyword.registryshort_notm}}, pour empêcher l'utilisation et la modification de vos images par des utilisateurs non habilités. Les registres privés sont mis en place par l'administrateur du cluster pour garantir que les données d'identification pour accès au registre privé sont disponibles aux utilisateurs du cluster.
+
 
 Vous pouvez utiliser plusieurs registres avec {{site.data.keyword.containershort_notm}} pour déployer des applications dans votre cluster.
 
@@ -37,8 +41,8 @@ Vous pouvez utiliser plusieurs registres avec {{site.data.keyword.containershort
 |--------|-----------|-------|
 |[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry/index.html)|Cette option vous permet de mettre en place votre propre référentiel d'images Docker sécurisé dans {{site.data.keyword.registryshort_notm}} où vous pourrez stocker en sécurité vos images et les partager avec les autres utilisateurs du cluster.|<ul><li>Gestion de l'accès aux images dans votre compte.</li><li>Utilisation d'images et d'exemples d'application fournis par {{site.data.keyword.IBM_notm}}, comme {{site.data.keyword.IBM_notm}} Liberty,  en tant qu'image parent à laquelle vous ajouterez votre propre code d'application.</li><li>Analyse automatique des images pour détection de vulnérabilités potentielles par Vulnerability Advisor et soumission de recommandations spécifiques au système d'exploitation pour les corriger.</li></ul>|
 |Tout autre registre privé|Connexion de n'importe quel registre privé existant à votre cluster en créant un élément [imagePullSecret ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/containers/images/). Cette valeur est utilisée pour enregistrer de manière sécurisée l'URL de votre registre URL et ses données d'identification dans une valeur confidentielle Kubernetes.|<ul><li>Utilisation de registres privés existants indépendants de leur source (Docker Hub, registres dont l'organisation est propriétaire, autres registres Cloud privés).</li></ul>|
-|Public Docker Hub|Cette option permet d'utiliser directement des images publiques existantes de Docker Hub quand vous n'avez pas besoin de modifier le fichier Dockerfile. <p>**Remarque :** Gardez à l'esprit que cette option peut ne pas satisfaire les exigences de sécurité de votre organisation (par exemple, en matière de gestion des accès, d'analyse des vulnérabilités ou de protection des données confidentielles de l'application).</p>|<ul><li>Aucune configuration supplémentaire du cluster n'est nécessaire.</li><li>Inclut un certain nombre d'applications en code source ouvert.</li></ul>|
-{: caption="Table. Options de registre d'images public et privé" caption-side="top"}
+|Public Docker Hub|Cette option permet d'utiliser directement des images publiques existantes de Docker Hub quand vous n'avez pas besoin de modifier le fichier Dockerfile. <p>**Remarque :** gardez à l'esprit que cette option peut ne pas satisfaire les exigences de sécurité de votre organisation (par exemple, en matière de gestion des accès, d'analyse des vulnérabilités ou de protection des données confidentielles de l'application).</p>|<ul><li>Aucune configuration supplémentaire du cluster n'est nécessaire.</li><li>Inclut un certain nombre d'applications en code source ouvert.</li></ul>|
+{: caption="Tableau. Options de registre d'images public et privé" caption-side="top"}
 
 Une fois que vous avez configuré un registre d'images, les utilisateurs du cluster peuvent utiliser les images pour le déploiement de leurs applications dans le cluster.
 
@@ -73,7 +77,7 @@ Pour déployer un conteneur dans l'espace de nom **default** de votre cluster, c
     Pour utiliser une image privée d'un espace de nom dans {{site.data.keyword.registryshort_notm}} :
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1beta1
     kind: Deployment
     metadata:
       name: ibmliberty-deployment
@@ -153,7 +157,7 @@ Pour créer votre propre élément imagePullSecret :
     {: pre}
 
     <table>
-    <caption>Table. Description des composantes de cette commande</caption>
+    <caption>Tableau. Description des composantes de cette commande</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composantes de cette commande</th>
     </thead>
@@ -228,7 +232,7 @@ Pour créer votre propre élément imagePullSecret :
         {: codeblock}
 
         <table>
-        <caption>Table. Description des composants du fichier YAML</caption>
+        <caption>Tableau. Description des composants du fichier YAML</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
         </thead>
@@ -285,7 +289,7 @@ Créez un fichier de configuration de déploiement.
 2.  Définissez le déploiement et l'image Docker Hub publique que vous désirez utiliser. Le fichier de configuration suivant utilise l'image NGINX publique disponible dans Docker Hub.
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1beta1
     kind: Deployment
     metadata:
       name: nginx-deployment
@@ -323,7 +327,7 @@ Créez un fichier de configuration de déploiement.
 ## Accès aux images stockées dans d'autres registres privés
 {: #private_images}
 
-Si vous disposez déjà d'un registre privé que vous désirez utiliser, vous devez stocker les données d'identification du registre dans un élément Kubernetes imagePullSecret et référencer cette valeur confidentielle dans votre fichier de configuration.
+Si vous disposez déjà d'un registre privé à utiliser, vous devez stocker les données d'identification du registre dans un élément Kubernetes imagePullSecret et référencer cette valeur confidentielle dans votre fichier de configuration.
 {:shortdesc}
 
 Avant de commencer :
@@ -343,7 +347,7 @@ Pour créer un élément imagePullSecret :
     {: pre}
 
     <table>
-    <caption>Table. Description des composantes de cette commande</caption>
+    <caption>Tableau. Description des composantes de cette commande</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composantes de cette commande</th>
     </thead>
@@ -400,7 +404,7 @@ Pour créer un élément imagePullSecret :
         {: codeblock}
 
         <table>
-        <caption>Table. Description des composants du fichier YAML</caption>
+        <caption>Tableau. Description des composants du fichier YAML</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
         </thead>
@@ -434,4 +438,3 @@ Pour créer un élément imagePullSecret :
         kubectl apply -f mypod.yaml
         ```
         {: pre}
-

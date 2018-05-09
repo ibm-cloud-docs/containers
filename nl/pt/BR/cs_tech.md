@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -17,10 +17,13 @@ lastupdated: "2018-01-11"
 
 # Tecnologia do {{site.data.keyword.containerlong_notm}}
 
+Saiba mais sobre a tecnologia por trás do {{site.data.keyword.containerlong}}.
+{:shortdesc}
+
 ## Contêineres do Docker
 {: #docker_containers}
 
-Docker é um projeto de software livre que foi liberado pelo dotCloud em 2013. Construído sobre os recursos da tecnologia de contêiner do Linux (LXC) existente, o Docker se tornou uma plataforma de software para construir, testar, implementar e escalar apps rapidamente. O Docker empacota o software em unidades padronizadas, chamadas de contêineres, que incluem todos os elementos que um app precisa para ser executado.
+Construído na tecnologia de contêiner Linux (LXC), o projeto de software livre chamado Docker se tornou uma plataforma de software para construir, testar, implementar e escalar apps rapidamente. O Docker empacota o software em unidades padronizadas, chamadas de contêineres, que incluem todos os elementos que um app precisa para ser executado.
 {:shortdesc}
 
 Aprenda alguns conceitos básicos do Docker:
@@ -33,7 +36,7 @@ Aprenda alguns conceitos básicos do Docker:
 </dd>
 <dt>Contêiner</dt>
 <dd>Cada contêiner é criado de uma imagem. Um contêiner é um app empacotado com todas as suas dependências, para que o app possa ser movido entre ambientes e ser executado sem mudanças. Ao contrário de máquinas virtuais, os contêineres não virtualizam um dispositivo, seu sistema operacional e o hardware subjacente. Somente o código de app, o tempo de execução,
-as ferramentas de sistema, as bibliotecas e as configurações são empacotadas dentro do contêiner. Os contêineres são executados como processos isolados em hosts de cálculo e compartilham o sistema operacional do host e seus recursos de hardware. Essa abordagem torna um contêiner mais leve, móvel e eficiente do que
+as ferramentas de sistema, as bibliotecas e as configurações são empacotadas dentro do contêiner. Os contêineres são executados como processos isolados em hosts de cálculo do Ubuntu e compartilham o sistema operacional do host e seus recursos de hardware. Essa abordagem torna um contêiner mais leve, móvel e eficiente do que
 uma máquina virtual.</dd>
 </dl>
 
@@ -59,8 +62,7 @@ uma máquina virtual.</dd>
 ## Conceitos básicos do Kubernetes
 {: #kubernetes_basics}
 
-O Kubernetes foi desenvolvido pelo Google como parte do projeto Borg e entregue à comunidade de software livre
-em 2014. O Kubernetes combina mais de 15 anos de pesquisa do Google na execução de uma infraestrutura conteinerizada com cargas de trabalho de produção, contribuições de software livre e ferramentas de gerenciamento de contêiner do Docker, para fornecer uma plataforma de app isolada e segura para gerenciamento de contêineres móveis, extensíveis e com capacidade de recuperação automática em caso de failovers.
+O projeto de software livre chamado Kubernetes combina a execução de uma infraestrutura conteinerizada com cargas de trabalho de produção, contribuições de software livre e ferramentas de gerenciamento de contêiner do Docker. A infraestrutura do Kubernetes fornece uma plataforma de app isolado e seguro para gerenciar contêineres que são móveis, extensíveis e com capacidade de recuperação automática em caso de failovers.
 {:shortdesc}
 
 Aprenda alguns conceitos básicos do Kubernetes conforme mostrado no diagrama a seguir.
@@ -101,12 +103,20 @@ Para aprender mais sobre a terminologia do Kubernetes, <a href="cs_tutorials.htm
 ## Arquitetura de serviço
 {: #architecture}
 
-Cada nó do trabalhador é configurado com um mecanismo de Docker gerenciado pela {{site.data.keyword.IBM_notm}}, recursos de cálculo separados, rede e serviço de volume, bem como recursos de segurança integrados que fornecem isolamento, capacidades de gerenciamento de recurso e conformidade de segurança do nó do trabalhador. O nó do trabalhador comunica-se com o mestre usando certificados TLS seguros e conexão openVPN.
-{:shortdesc}
+Em um cluster do Kubernetes que é executado no {{site.data.keyword.containershort_notm}}, seus apps conteinerizados são hospedados em hosts de cálculo que são chamados de nós do trabalhador. Para ser mais específico, eles são executados em pods e os pods são hospedados em nós do trabalhador. Os nós do trabalhador são gerenciados pelo mestre do Kubernetes. O mestre do Kubernetes e os nós do trabalhador se comunicam entre si por meio de certificados TLS seguros e uma conexão openVPN para orquestrar suas configurações de cluster.
+{: shortdesc}
+
+Qual é a diferença entre o mestre do Kubernetes e um nó do trabalhador? Feliz por perguntar.
+
+<dl>
+  <dt>Mestre do Kubernetes</dt>
+    <dd>O mestre do Kubernetes é encarregado de gerenciar todos os recursos de cálculo, rede e armazenamento no cluster. O mestre do Kubernetes assegura que seus apps e serviços conteinerizados sejam igualmente implementados nos nós do trabalhador no cluster. Dependendo de como você configura seu app e serviços, o mestre determina o nó do trabalhador que tem recursos suficientes para preencher os requisitos do app.</dd>
+  <dt>Nó do trabalhador</dt>
+    <dd>Cada nó do trabalhador é uma máquina física (bare metal) ou uma máquina virtual que é executada em hardware físico, que é gerenciado em um ambiente de nuvem. Ao provisionar um nó do trabalhador, você determina os recursos que estão disponíveis para os contêineres hospedados nesse nó do trabalhador. Prontos para utilização, os nós do trabalhador são configurados com um mecanismo de Docker gerenciado pela {{site.data.keyword.IBM_notm}}, recursos de cálculo separados, rede e um serviço de volume. Os recursos de segurança integrada fornecem isolamento, capacidades de gerenciamento de recurso e conformidade de segurança do nó do trabalhador.</dd>
+</dl>
 
 ![{{site.data.keyword.containerlong_notm}} Arquitetura do Kubernetes](images/cs_org_ov.png)
-
-O diagrama descreve o que você mantém e o que a IBM mantém em um cluster. Para obter mais detalhes sobre essas tarefas de manutenção, veja [Responsabilidades de gerenciamento de cluster](cs_why.html#responsibilities).
+Figura. Arquitetura do {{site.data.keyword.containershort_notm}}
 
 <br />
 

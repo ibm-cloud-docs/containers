@@ -20,7 +20,7 @@ lastupdated: "2018-01-29"
 Consultez les informations les plus récentes dans son nouvel emplacement :
  - [Sécurité par composant du cluster](cs_secure.html#cluster)
    - [Maître Kubernetes](cs_secure.html#master)
-   - [Noeuds d'agent](cs_secure.html#worker)
+   - [Noeuds worker](cs_secure.html#worker)
    - [Images ](cs_secure.html#images)
  - [Ouverture des ports et adresses IP requis dans votre pare-feu](cs_firewall.html#firewall)
    - [Exécution de commandes bx cs de derrière un pare-feu](cs_firewall.html#firewall_bx)
@@ -28,8 +28,8 @@ Consultez les informations les plus récentes dans son nouvel emplacement :
    - [Exécution de commandes calicoctl de derrière un pare-feu](cs_firewall.html#firewall_calicoctl)
    - [Autorisation au cluster d'accéder aux ressources de l'infrastructure et à d'autres services](cs_firewall.html#firewall_outbound)
    - [Accès à NodePort, à l'équilibreur de charge et aux services Ingress de l'extérieur du cluster](cs_firewall.html#firewall_inbound)
- - [Configuration de la connectivité VPN avec les diagrammes Helm du service VPN Strongswan IPSec](cs_vpn.html#vpn)
+ - [Configuration de la connectivité VPN avec les chartes Helm du service VPN IPSec Strongswan](cs_vpn.html#vpn)
  - [Règles réseau](cs_network_policy.html#network_policies)
- - [Restriction du trafic réseau aux noeuds d'agent de périphérie](cs_edge.html#edge)
+ - [Restriction du trafic réseau aux noeuds worker de périphérie](cs_edge.html#edge)
 
 

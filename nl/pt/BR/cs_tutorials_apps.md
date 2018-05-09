@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-02-05"
+lastupdated: "2017-02-27"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2017-02-05"
 # Tutorial: implementando apps em clusters
 {: #cs_apps_tutorial}
 
-É possível aprender como usar o {{site.data.keyword.containershort_notm}} para implementar um app conteinerizado que alavanca o {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}.
+É possível aprender como usar o {{site.data.keyword.containerlong}} para implementar um app conteinerizado que alavanca o {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}.
 {: shortdesc}
 
 Neste cenário, uma firma PR fictícia usa o serviço {{site.data.keyword.Bluemix_notm}} para analisar seus press releases e receber feedback no sinal de suas mensagens.
@@ -61,8 +61,10 @@ Desenvolvedores de software e administradores da rede que nunca implementaram um
 ## Lição 1: implementando apps de instância única em clusters do Kubernetes
 {: #cs_apps_tutorial_lesson1}
 
-No tutorial anterior, você criou um cluster com um nó do trabalhador. Nesta lição, você configura uma implementação e implementa uma instância única do app em um pod do Kubernetes no nó do trabalhador. Os componentes que você implementa concluindo esta lição são mostrados no diagrama a seguir.
+No tutorial anterior, você criou um cluster com um nó do trabalhador. Nesta lição, você configura uma implementação e implementa uma instância única do app em um pod do Kubernetes no nó do trabalhador.
 {:shortdesc}
+
+Os componentes que você implementa concluindo esta lição são mostrados no diagrama a seguir.
 
 ![Configuração de implementação](images/cs_app_tutorial_components1.png)
 
@@ -271,8 +273,8 @@ Para implementar o app:
         ```
         Listing cluster workers...
         OK
-        ID                                            Public IP        Private IP      Machine Type   State      Status
-        dal10-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.47.227.138   10.171.53.188   free           normal    Ready
+        ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.47.227.138  10.171.53.188    free           normal   Ready    mil01      1.8.8
         ```
         {: screen}
 
@@ -299,11 +301,11 @@ Muitos comandos nesta lição? Acordado. Que tal usar um script de configuraçã
 ## Lição 2: implementando e atualizando apps com disponibilidade mais alta
 {: #cs_apps_tutorial_lesson2}
 
-Nessa lição, você implementa três instâncias do app Hello World em um cluster para obter maior disponibilidade que a primeira versão do app. Disponibilidade mais alta significa que o acesso de usuário é dividido entre as três instâncias. Quando muitos usuários estão tentando acessar a mesma instância do app, eles podem observar tempos de resposta lentos. Múltiplas instâncias podem significar tempos de resposta mais rápidos para seus usuários. Nesta lição, você também aprenderá como as verificações de funcionamento e atualizações de implementação podem trabalhar com
-o Kubernetes.
+Nessa lição, você implementa três instâncias do app Hello World em um cluster para obter maior disponibilidade que a primeira versão do app.
 {:shortdesc}
 
-O diagrama a seguir inclui os componentes que você implementa concluindo esta lição.
+Disponibilidade mais alta significa que o acesso de usuário é dividido entre as três instâncias. Quando muitos usuários estão tentando acessar a mesma instância do app, eles podem observar tempos de resposta lentos. Múltiplas instâncias podem significar tempos de resposta mais rápidos para seus usuários. Nesta lição, você também aprenderá como as verificações de funcionamento e atualizações de implementação podem trabalhar com
+o Kubernetes. O diagrama a seguir inclui os componentes que você implementa concluindo esta lição.
 
 ![Configuração de implementação](images/cs_app_tutorial_components2.png)
 
@@ -469,11 +471,11 @@ service "hw-demo-service" deleted
 ## Lição 3: implementando e atualizando o app Watson Tone Analyzer
 {: #cs_apps_tutorial_lesson3}
 
-Nas lições anteriores, os apps foram implementados como componentes únicos em um nó do trabalhador. Nesta lição, é possível implementar dois componentes de um app em um cluster que usam o serviço {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}. Separar os componentes em diferentes contêineres assegura que seja possível atualizar um sem afetar os outros. Em seguida, você atualizará o app para escalá-lo para cima com mais réplicas para torná-lo
-mais altamente disponível.
+Nas lições anteriores, os apps foram implementados como componentes únicos em um nó do trabalhador. Nesta lição, é possível implementar dois componentes de um app em um cluster que usam o serviço {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}.
 {:shortdesc}
 
-O diagrama a seguir inclui os componentes que você implementa concluindo esta lição.
+Separar os componentes em diferentes contêineres assegura que seja possível atualizar um sem afetar os outros. Em seguida, você atualizará o app para escalá-lo para cima com mais réplicas para torná-lo
+mais altamente disponível. O diagrama a seguir inclui os componentes que você implementa concluindo esta lição.
 
 ![Configuração de implementação](images/cs_app_tutorial_components3.png)
 
@@ -746,6 +748,6 @@ service "watson-talk-service" deleted
 
 Agora que você conquistou o básico, é possível mover para atividades mais avançadas. Considere experimentar um dos seguintes:
 
-- Conclua um laboratório mais complicado no repositório
-- Escale automaticamente seus apps com {{site.data.keyword.containershort_notm}}] (cs_app.html#app_scaling)
-- Explore as jornadas de orquestração de contêiner no [developerWorks ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/code/journey/category/container-orchestration/)
+- Concluir um laboratório mais complicado no repositório
+- [Escalar automaticamente seus apps](cs_app.html#app_scaling) com o {{site.data.keyword.containershort_notm}}
+- Explorar as jornadas de orquestração de contêiner no [developerWorks ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/code/journey/category/container-orchestration/)

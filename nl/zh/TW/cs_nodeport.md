@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -19,20 +19,43 @@ lastupdated: "2018-01-24"
 # 設定 NodePort 服務
 {: #nodeport}
 
-使用叢集中任何工作者節點的公用 IP 位址，並公開節點埠，將應用程式設為可在網際網路上進行存取。請使用此選項來進行測試及短期公用存取。
+使用 Kubernetes 叢集中任何工作者節點的公用 IP 位址，並公開節點埠，將容器化應用程式設為可在網際網路上進行存取。使用此選項來測試 {{site.data.keyword.containerlong}} 及短期公用存取。
 {:shortdesc}
 
-## 使用 NodePort 服務類型來配置應用程式的公用存取
+## 使用 NodePort 服務規劃外部網路
+{: #planning}
+
+公開工作者節點上的公用埠，並使用工作者節點的公用 IP 位址，從網際網路中公開存取您在叢集中的服務。
+{:shortdesc}
+
+當您建立 Kubernetes NodePort 類型服務來公開應用程式時，會將 30000 到 32767 範圍內的 NodePort 及內部叢集 IP 位址指派給服務。NodePort 服務是作為應用程式送入要求的外部進入點。所指派的 NodePort 會公開於叢集中每一個工作者節點的 kubeproxy 設定。每個工作者節點都會開始接聽所指派的 NodePort，來取得服務的送入要求。若要從網際網路存取服務，您可以使用在建立叢集期間所指派的任何工作者節點的公用 IP 位址，以及 `<ip_address>:<nodeport>` 格式的 NodePort。除了公用 IP 位址之外，在工作者節點的專用 IP 位址上，也可以使用 NodePort 服務。
+
+下圖顯示配置 NodePort 服務時，通訊如何從網際網路導向應用程式：
+
+<img src="images/cs_nodeport_planning.png" width="550" alt="使用 NodePort 在 {{site.data.keyword.containershort_notm}} 中公開應用程式" style="width:550px; border-style: none"/>
+
+1. 使用工作者節點的公用 IP 位址以及工作者節點上的 NodePort，將要求傳送至應用程式。
+
+2. 要求會自動轉遞至 NodePort 服務的內部叢集 IP 位址及埠。內部叢集 IP 位址只能在叢集內部存取。
+
+3. `kube-proxy` 會將要求遞送至應用程式的 Kubernetes NodePort 服務。
+
+4. 要求會轉遞至應用程式部署所在 Pod 的專用 IP 位址。如果叢集中已部署多個應用程式實例，則 NodePort 服務會在應用程式 Pod 之間遞送要求。
+
+**附註：**工作者節點的公用 IP 位址不是永久性的。移除或重建工作者節點時，會將新的公用 IP 位址指派給工作者節點。NodePort 服務可以用於測試應用程式的公用存取，也可以用於僅短時間需要公用存取時。當您需要服務有穩定的公用 IP 位址及更高可用性時，請使用 [LoadBalancer 服務](cs_loadbalancer.html#planning)或 [Ingress](cs_ingress.html#planning) 來公開應用程式。
+
+<br />
+
+
+## 使用 NodePort 服務來配置應用程式的公用存取
 {: #config}
 
 對於免費或標準叢集，您可以將應用程式公開為 Kubernetes NodePort 服務。
 {:shortdesc}
 
-**附註：**工作者節點的公用 IP 位址不是永久性的。如果必須重建工作者節點，則會將新的公用 IP 位址指派給工作者節點。如果您需要服務的穩定公用 IP 位址及更高可用性，請使用 [LoadBalancer 服務](cs_loadbalancer.html)或 [Ingress](cs_ingress.html) 來公開應用程式。
-
 如果您還沒有應用程式，您可以使用稱為 [Guestbook ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/kubernetes/blob/master/examples/guestbook/all-in-one/guestbook-all-in-one.yaml) 的 Kubernetes 範例應用程式。
 
-1.  在您應用程式的配置檔中，定義 [service ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/service/) 區段。
+1.  在應用程式的配置檔中，定義 [service ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/service/) 區段。**附註**：就 Guestbook 範例而言，配置檔中已存在前端服務區段。若要讓 Guestbook 應用程式可在外部使用，請新增 NodePort 類型及範圍 30000 - 32767 內的 NodePort 至前端服務區段。
 
     範例：
 
@@ -77,28 +100,6 @@ lastupdated: "2018-01-24"
      <td>選用項目：將 <code><em>&lt;31514&gt;</em></code> 取代為 30000 到 32767 範圍內的 NodePort。請不要指定另一個服務已在使用中的 NodePort。如果未指派 NodePort，則會自動指派一個隨機 NodePort。<br><br>如果您要指定 NodePort，並且要查看哪些 NodePort 已在使用中，則可以執行下列指令：<pre class="pre"><code>kubectl get svc</code></pre>使用中的任何 NodePort 會出現在**埠**欄位下。</td>
      </tr>
      </tbody></table>
-
-
-    對於 Guestbook 範例，在配置檔中已有前端服務區段存在。若要讓 Guestbook 應用程式可在外部使用，請新增 NodePort 類型及範圍 30000 - 32767 內的 NodePort 至前端服務區段。
-
-    ```
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: frontend
-      labels:
-        app: guestbook
-        tier: frontend
-    spec:
-      type: NodePort
-      ports:
-      - port: 80
-        nodePort: 31513
-      selector:
-        app: guestbook
-        tier: frontend
-    ```
-    {: codeblock}
 
 2.  儲存已更新的配置檔。
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-03-08"
 
 ---
 
@@ -40,9 +40,8 @@ lastupdated: "2018-01-11"
     - [将用户管理的子网和 IP 地址添加到 Kubernetes 集群](cs_subnets.html#user_managed)
 - [在集群中使用 NFS 文件共享](cs_storage.html#existing)
 - [配置集群日志记录](cs_health.html#logging)
-    - [启用日志转发](cs_health.html#log_sources_enable)
-    - [为应用程序启用日志转发](cs_health.html#apps_enable)
-    - [更新日志转发配置](cs_health.html#log_sources_update)
+    - [启用日志转发](cs_health.html#logging)
+    - [更新日志转发配置](cs_health.html#logging)
     - [停止日志转发](cs_health.html#log_sources_delete)
     - [为 Kubernetes API 审计日志配置日志转发](cs_health.html#app_forward)
     - [启用 Kubernetes API 审计日志转发](cs_health.html#audit_enable)

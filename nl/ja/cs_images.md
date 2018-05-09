@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-14"
 
 ---
 
@@ -19,15 +19,21 @@ lastupdated: "2018-01-11"
 # イメージからのコンテナーのビルド
 {: #images}
 
-Docker イメージは、作成するすべてのコンテナーの基礎となるものです。 イメージは、Dockerfile (イメージをビルドするための指示が入ったファイル) から作成されます。 Dockerfile の別個に保管されている指示の中で、ビルド成果物 (アプリ、アプリの構成、その従属関係) が参照されることもあります。
+Docker イメージが、{{site.data.keyword.containerlong}} で作成するすべてのコンテナーの基礎です。
 {:shortdesc}
+
+イメージは、Dockerfile (イメージをビルドするための指示が入ったファイル) から作成されます。 Dockerfile の別個に保管されている指示の中で、ビルド成果物 (アプリ、アプリの構成、その従属関係) が参照されることもあります。
+
 
 
 ## イメージ・レジストリーの計画
 {: #planning}
 
-イメージは通常、レジストリーに保管されます。だれでもアクセスできるレジストリー (パブリック・レジストリー) を使用することも、小さなグループのユーザーだけにアクセスを限定したレジストリー (プライベート・レジストリー) をセットアップすることもできます。 Docker Hub などのパブリック・レジストリーは、Docker および Kubernetes の入門として最初のコンテナー化アプリをクラスター内に作成する時に使用できます。 しかしエンタープライズ・アプリケーションを作成する場合は、許可されていないユーザーが勝手にイメージを使用したり変更したりすることがないように、 {{site.data.keyword.registryshort_notm}} で提供されているようなプライベート・レジストリーを使用してください。 プライベート・レジストリーはクラスター管理者がセットアップする必要があります。プライベート・レジストリーにアクセスするための資格情報をクラスター・ユーザーに提供する必要があるためです。
+イメージは通常、レジストリーに保管されます。だれでもアクセスできるレジストリー (パブリック・レジストリー) を使用することも、小さなグループのユーザーだけにアクセスを限定したレジストリー (プライベート・レジストリー) をセットアップすることもできます。 
 {:shortdesc}
+
+Docker Hub などのパブリック・レジストリーは、Docker および Kubernetes の入門として最初のコンテナー化アプリをクラスター内に作成する時に使用できます。 しかしエンタープライズ・アプリケーションを作成する場合は、許可されていないユーザーが勝手にイメージを使用したり変更したりすることがないように、 {{site.data.keyword.registryshort_notm}} で提供されているようなプライベート・レジストリーを使用してください。 プライベート・レジストリーはクラスター管理者がセットアップする必要があります。プライベート・レジストリーにアクセスするための資格情報をクラスター・ユーザーに提供する必要があるためです。
+
 
 {{site.data.keyword.containershort_notm}} では、複数のレジストリーを使用してアプリをクラスターにデプロイできます。
 
@@ -71,7 +77,7 @@ Docker イメージは、作成するすべてのコンテナーの基礎とな�
     {{site.data.keyword.registryshort_notm}}内の名前空間にあるプライベート・イメージを使用するには、次のようにします。
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1beta1
     kind: Deployment
     metadata:
       name: ibmliberty-deployment
@@ -191,8 +197,7 @@ Docker イメージは、作成するすべてのコンテナーの基礎とな�
 
 7.  imagePullSecret を参照するポッドを作成します。
     1.  `mypod.yaml` という名前のポッド構成ファイルを作成します。
-    2.  ポッドと、プライベート
-{{site.data.keyword.Bluemix_notm}} レジストリーへのアクセスに使用する imagePullSecret を定義します。
+    2.  ポッドと、プライベート {{site.data.keyword.Bluemix_notm}} レジストリーへのアクセスに使用する imagePullSecret を定義します。
 
         名前空間のプライベート・イメージ:
 
@@ -284,7 +289,7 @@ Docker Hub 内に保管されているパブリック・イメージを使用す
 2.  デプロイメントと、Docker Hub 内の使用するパブリック・イメージを定義します。 以下の構成ファイルでは、Docker Hub にある使用可能パブリック・イメージ NGINX が使用されています。
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1beta1
     kind: Deployment
     metadata:
       name: nginx-deployment
@@ -382,8 +387,7 @@ imagePullSecret を作成するには、以下のようにします。
 
 3.  imagePullSecret を参照するポッドを作成します。
     1.  `mypod.yaml` という名前のポッド構成ファイルを作成します。
-    2.  ポッドと、プライベート
-{{site.data.keyword.Bluemix_notm}} レジストリーへのアクセスに使用する imagePullSecret を定義します。 プライベート・レジストリー内のプライベート・イメージを使用するには、次のようにします。
+    2.  ポッドと、プライベート {{site.data.keyword.Bluemix_notm}} レジストリーへのアクセスに使用する imagePullSecret を定義します。プライベート・レジストリー内のプライベート・イメージを使用するには、次のようにします。
 
         ```
         apiVersion: v1
@@ -434,4 +438,3 @@ imagePullSecret を作成するには、以下のようにします。
         kubectl apply -f mypod.yaml
         ```
         {: pre}
-

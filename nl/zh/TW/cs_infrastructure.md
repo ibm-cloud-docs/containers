@@ -19,13 +19,14 @@ lastupdated: "2018-01-24"
 # 存取 IBM Cloud 基礎架構 (SoftLayer) 組合
 {: #infrastructure}
 
-若要建立標準 Kubernetes 叢集，您必須具有 IBM Cloud 基礎架構 (SoftLayer) 組合的存取權。需要有這個存取權，才能要求付費基礎架構資源（例如，叢集的工作者節點、可攜式公用 IP 位址或持續性儲存空間）。
+若要建立標準 Kubernetes 叢集，您必須具有 IBM Cloud 基礎架構 (SoftLayer) 組合的存取權。需要有這個存取權，才能要求付費基礎架構資源，例如，{{site.data.keyword.containerlong}} 中的 Kubernetes 叢集的工作者節點、可攜式公用 IP 位址或持續性儲存空間。
 {:shortdesc}
 
 ## 存取 IBM Cloud 基礎架構 (SoftLayer) 組合
 {: #unify_accounts}
 
-啟用自動帳戶鏈結之後所建立的「{{site.data.keyword.Bluemix_notm}} 隨收隨付制」帳戶，已設定 IBM Cloud 基礎架構 (SoftLayer) 組合的存取權，因此，您可以購買叢集的基礎架構資源，而不需要進行額外配置。
+在啟用自動帳戶鏈結之後所建立的 {{site.data.keyword.Bluemix_notm}}「隨收隨付制」帳戶已設定為具有 IBM Cloud 基礎架構 (SoftLayer) 組合的存取權。您可以購買叢集的基礎架構資源，而不需要進行額外配置。
+{:shortdesc}
 
 具有其他 {{site.data.keyword.Bluemix_notm}} 帳戶類型的使用者，或具有未鏈結至其 {{site.data.keyword.Bluemix_notm}} 帳戶之現有 IBM Cloud 基礎架構 (SoftLayer) 帳戶的使用者，必須配置其帳戶以建立標準叢集。
 {:shortdesc}
@@ -45,7 +46,7 @@ lastupdated: "2018-01-24"
 ## 產生 IBM Cloud 基礎架構 (SoftLayer) API 金鑰，以與 {{site.data.keyword.Bluemix_notm}} 帳戶搭配使用
 {: #old_account}
 
-如果您要繼續使用舊「隨收隨付制」或「訂閱」帳戶來建立標準叢集，則必須使用新「隨收隨付制」帳戶來產生 API 金鑰，並設定舊帳戶的 API 金鑰。
+若要繼續使用舊的「隨收隨付制」或「訂閱」帳戶來建立標準叢集，請使用新的「隨收隨付制」帳戶來產生 API 金鑰，並設定舊帳戶的 API 金鑰。
 {:shortdesc}
 
 開始之前，請建立已自動設定 IBM Cloud 基礎架構 (SoftLayer) 組合存取權的 {{site.data.keyword.Bluemix_notm}}「隨收隨付制」帳戶。

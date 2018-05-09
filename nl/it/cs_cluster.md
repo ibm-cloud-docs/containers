@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-03-08"
 
 ---
 
@@ -29,7 +29,7 @@ Controlla le ultime informazioni nella nuova ubicazione:
     - [Accesso alle immagini private memorizzate in altri registri privati](cs_images.html#private_images)
 - [Aggiunta dei servizi di IBM Cloud ai cluster](cs_integrations.html#adding_cluster)
 - [Gestione dell'accesso al cluster](cs_users.html)
-    - [Accesso alle politiche e alle autorizzazioni](cs_users.html#access_policies)
+    - [Autorizzazioni e politiche di accesso](cs_users.html#access_policies)
     - [Aggiunta di utenti](cs_users.html#add_users)
     - [Personalizzazione delle autorizzazioni dell'infrastruttura per un utente](cs_users.html#infra_access)
 - [Aggiornamento del master Kubernetes](cs_cluster_update.html#master)
@@ -40,9 +40,8 @@ Controlla le ultime informazioni nella nuova ubicazione:
     - [Aggiunta delle sottoreti gestite dall'utente e degli indirizzi IP ai cluster Kubernetes](cs_subnets.html#user_managed)
 - [Utilizzo di condivisioni file NFS esistenti nei cluster](cs_storage.html#existing)
 - [Configurazione della registrazione cluster](cs_health.html#logging)
-    - [Abilitazione dell'inoltro dei log](cs_health.html#log_sources_enable)
-    - [Abilitazione dell'inoltro dei log per le applicazioni](cs_health.html#apps_enable)
-    - [Aggiornamento della configurazione di inoltro dei log](cs_health.html#log_sources_update)
+    - [Abilitazione dell'inoltro dei log ](cs_health.html#logging)
+    - [Aggiornamento della configurazione di inoltro dei log ](cs_health.html#logging)
     - [Arresto dell'inoltro dei log](cs_health.html#log_sources_delete)
     - [Configurazione dell'inoltro del log per i log di controllo dell'API Kubernetes](cs_health.html#app_forward)
     - [Abilitazione dell'inoltro dei log dell'API Kubernetes](cs_health.html#audit_enable)

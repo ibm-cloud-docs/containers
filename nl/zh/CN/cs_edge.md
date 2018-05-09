@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-07"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -18,15 +18,20 @@ lastupdated: "2018-02-07"
 # 将网络流量限于边缘工作程序节点
 {: #edge}
 
-边缘工作程序节点通过减少允许外部访问的工作程序节点，并隔离联网工作负载，可以提高集群的安全性。当这些工作程序节点标记为仅用于联网时，其他工作负载无法使用工作程序节点的 CPU 或内存，也不会干扰联网。
+边缘工作程序节点通过在 {{site.data.keyword.containerlong}} 中减少允许外部访问的工作程序节点，并隔离联网工作负载，可以提高 Kubernetes 集群的安全性。
 {:shortdesc}
+
+当这些工作程序节点标记为仅用于联网时，其他工作负载无法使用工作程序节点的 CPU 或内存，也不会干扰联网。
+
+
 
 
 
 ## 将工作程序节点标记为边缘节点
 {: #edge_nodes}
 
-将 `dedicated=edge` 标签添加到集群中的两个或更多工作程序节点，以确保 Ingress 和负载均衡器仅部署到这些工作程序节点。
+将 `dedicated=edge` 标签添加到集群中每个公用 VLAN 上的两个或更多工作程序节点，以确保 Ingress 和负载均衡器仅部署到这些工作程序节点。
+{:shortdesc}
 
 开始之前：
 
@@ -36,7 +41,7 @@ lastupdated: "2018-02-07"
 
 步骤：
 
-1. 列出集群中的所有工作程序节点。使用 **NAME** 列中的专用 IP 地址来标识节点。请至少选择两个工作程序节点作为边缘工作程序节点。使用两个或更多工作程序节点可提高联网资源的可用性。
+1. 列出集群中的所有工作程序节点。使用 **NAME** 列中的专用 IP 地址来标识节点。请至少在每个公用 VLAN 上选择两个工作程序节点作为边缘工作程序节点。使用两个或更多工作程序节点可提高联网资源的可用性。
 
   ```
   kubectl get nodes -L publicVLAN,privateVLAN,dedicated
@@ -81,8 +86,12 @@ lastupdated: "2018-02-07"
 ## 阻止工作负载在边缘工作程序节点上运行
 {: #edge_workloads}
 
-边缘工作程序节点的一个优点是可以将其指定为仅运行联网服务。使用 `dedicated=edge` 容忍度意味着所有 LoadBalancer 和 Ingress 服务仅部署到已标记的工作程序节点。但是，要阻止其他工作负载在边缘工作程序节点上运行并使用工作程序节点资源，必须使用 [Kubernetes 污点 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)。
-{:shortdesc}
+边缘工作程序节点的一个优点是可以将其指定为仅运行联网服务。
+{:shortdesc} 
+
+使用 `dedicated=edge` 容忍度意味着所有 LoadBalancer 和 Ingress 服务仅部署到已标记的工作程序节点。但是，要阻止其他工作负载在边缘工作程序节点上运行并使用工作程序节点资源，必须使用 [Kubernetes 污点 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)。
+
+
 
 1. 列出具有 `edge` 标签的所有工作程序节点。
 

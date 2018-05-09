@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-05"
+lastupdated: "2018-02-27"
 
 ---
 
@@ -19,8 +19,7 @@ lastupdated: "2018-02-05"
 # Lernprogramm: Istio in einer {{site.data.keyword.containerlong_notm}} bereitstellen
 {: #istio_tutorial}
 
-[Istio](https://www.ibm.com/cloud/info/istio) ist eine offene Plattform, die Entwicklern eine einheitliche Methode zum Verbinden, Sichern und Verwalten eines Netzes von Mikroservices (auch als Servicenetz bezeichnet) auf Cloudplattformen wie Kubernetes bietet. Istio bietet die Funktionalität zum Verwalten von Netzverkehr, für einen Lastausgleich zwischen mehreren Mikroservices, zum Durchsetzen von Zugriffsrichtlinien, zum Überprüfen von Serviceidentitäten im Servicenetz und vieles mehr.
-
+[Istio](https://www.ibm.com/cloud/info/istio) ist eine offene Plattform zum Verbinden, Sichern und Verwalten eines Netzes von Mikroservices (auch als Servicenetz bezeichnet) auf Cloudplattformen wie Kubernetes in {{site.data.keyword.containerlong}}. Mit Istio verwalten Sie den Netzverkehr und den Lastausgleich zwischen Mikroservices, Sie setzen Zugriffsrichtlinien durch, überprüfen Serviceidentitäten im Servicenetz und vieles mehr.
 {:shortdesc}
 
 In diesem Lernprogramm sehen Sie, wie Istio zusammen mit vier Mikroservices für eine einfache Beispiel-App für Buchhandlungen namens BookInfo installiert wird. Die Mikroservices umfassen eine Produktwebseite, Buchdetails, Rezensionen und Bewertungen. Wenn Sie die Mikroservices von BookInfo in einem {{site.data.keyword.containershort}}-Cluster bereitstellen, in dem Istio installiert ist, fügen Sie Istio Envoy-Sidecar-Proxys in die Pods für jeden Mikroservice ein.
@@ -52,6 +51,7 @@ Dieses Lernprogramm ist für Softwareentwickler und Netzadministratoren konzipie
 {: #istio_tutorial1}
 
 Istio in Ihren Cluster herunterladen und installieren
+{:shortdesc}
 
 1. Laden Sie Istio entweder direkt von [https://github.com/istio/istio/releases ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/istio/istio/releases) herunter oder rufen Sie die aktuelle Version mithilfe von 'curl' ab:
 
@@ -122,7 +122,10 @@ Glückwunsch! Sie haben Istio erfolgreich in Ihrem Cluster installiert. Stellen 
 ## Lerneinheit 2: App BookInfo bereitstellen
 {: #istio_tutorial2}
 
-Stellen Sie die Mikroservices der Beispiel-App BookInfo in Ihrem Kubernetes-Cluster bereit. Diese vier Mikroservices umfassen eine Produktwebseite, Buchdetails, Rezensionen (mit verschiedenen Versionen des Rezensionsmikroservice) sowie Bewertungen. Sie finden alle in diesem Beispiel verwendeten Dateien im Verzeichnis `samples/bookinfo` Ihrer Istio-Installation.
+Stellen Sie die Mikroservices der Beispiel-App BookInfo in Ihrem Kubernetes-Cluster bereit.
+{:shortdesc}
+
+Diese vier Mikroservices umfassen eine Produktwebseite, Buchdetails, Rezensionen (mit verschiedenen Versionen des Rezensionsmikroservice) sowie Bewertungen. Sie finden alle in diesem Beispiel verwendeten Dateien im Verzeichnis `samples/bookinfo` Ihrer Istio-Installation.
 
 Wenn Sie BookInfo bereitstellen, werden Envoy Sidecar Proxys als Container in die Pods der Mikroservices Ihrer App eingefügt, bevor die Mikroservice-Pods bereitgestellt werden. Istio verwendet eine erweiterte Version des Envoy-Proxys, um den gesamten eingehenden und ausgehenden Datenverkehr für alle Mikroservices im Servicenetz auszugleichen. Weitere Informationen zu Envoy finden Sie in der [Istio-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://istio.io/docs/concepts/what-is-istio/overview.html#envoy).
 
@@ -221,6 +224,7 @@ Glückwunsch! Sie haben die Beispiel-App BookInfo erfolgreich  mit Istio Envoy-S
 {: #istio_tutorial_cleanup}
 
 Wenn Sie darauf verzichten möchten, weitere Funktionen von Istio zu erkunden, die unter [Womit möchten Sie fortfahren?](#istio_tutorial_whatsnext) aufgeführt sind, können Sie Ihre Istio-Ressourcen in Ihrem Cluster bereinigen.
+{:shortdesc}
 
 1. Löschen Sie alle BookInfo-Services, -Pods und -Bereitstellungen im Cluster.
 

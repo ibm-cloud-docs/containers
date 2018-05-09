@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-03-08"
 
 ---
 
@@ -40,9 +40,8 @@ lastupdated: "2018-01-11"
     - [Kubernetes クラスターへのユーザー管理のサブネットと IP アドレスの追加](cs_subnets.html#user_managed)
 - [クラスターでの既存の NFS ファイル共有の使用](cs_storage.html#existing)
 - [クラスター・ロギングの構成](cs_health.html#logging)
-    - [ログ転送の有効化](cs_health.html#log_sources_enable)
-    - [アプリケーションのログ転送の有効化](cs_health.html#apps_enable)
-    - [ログ転送構成の更新](cs_health.html#log_sources_update)
+    - [ログ転送の有効化](cs_health.html#logging)
+    - [ログ転送構成の更新](cs_health.html#logging)
     - [ログ転送の停止](cs_health.html#log_sources_delete)
     - [Kubernetes API 監査ログのログ転送の構成](cs_health.html#app_forward)
     - [Kubernetes API 監査ログの転送の有効化](cs_health.html#audit_enable)

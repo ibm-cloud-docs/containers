@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-14"
 
 ---
 
@@ -19,15 +19,23 @@ lastupdated: "2018-01-11"
 # 基于映像构建容器
 {: #images}
 
-Docker 映像是所创建的每一个容器的基础。映像通过 Dockerfile 进行创建，此文件包含用于构建映像的指令。Dockerfile 可能会在其单独存储的指令中引用构建工件，例如应用程序、应用程序配置及其依赖项。
+Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个容器的基础。
 {:shortdesc}
+
+映像通过 Dockerfile 进行创建，此文件包含用于构建映像的指令。Dockerfile 可能会在其单独存储的指令中引用构建工件，例如应用程序、应用程序配置及其依赖项。
+
+
 
 
 ## 规划映像注册表
 {: #planning}
 
-映像通常会存储在可以公共访问的注册表（公共注册表）中，或者存储在设置为仅供一小组用户访问的注册表（专用注册表）中。开始使用 Docker 和 Kubernetes 在集群中创建第一个容器化应用程序时，可以使用公共注册表（如 Docker Hub）。但是对于企业应用程序，请使用专用注册表（如在 {{site.data.keyword.registryshort_notm}} 中提供的注册表），以保护映像不被未经授权的用户使用和更改。专用注册表必须由集群管理员设置，以确保用于访问专用注册表的凭证可供集群用户使用。
+映像通常会存储在可以公共访问的注册表（公共注册表）中，或者存储在设置为仅供一小组用户访问的注册表（专用注册表）中。
 {:shortdesc}
+
+开始使用 Docker 和 Kubernetes 在集群中创建第一个容器化应用程序时，可以使用公共注册表（如 Docker Hub）。但是对于企业应用程序，请使用专用注册表（如在 {{site.data.keyword.registryshort_notm}} 中提供的注册表），以保护映像不被未经授权的用户使用和更改。专用注册表必须由集群管理员设置，以确保用于访问专用注册表的凭证可供集群用户使用。
+
+
 
 可以通过 {{site.data.keyword.containershort_notm}} 使用多个注册表将应用程序部署到集群。
 
@@ -72,7 +80,7 @@ Docker 映像是所创建的每一个容器的基础。映像通过 Dockerfile �
 
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1beta1
     kind: Deployment
     metadata:
       name: ibmliberty-deployment
@@ -286,7 +294,7 @@ Docker 映像是所创建的每一个容器的基础。映像通过 Dockerfile �
 2.  定义部署以及 Docker Hub 中要使用的公共映像。以下配置文件使用 Docker Hub 中可用的公用 NGINX 映像。
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1beta1
     kind: Deployment
     metadata:
       name: nginx-deployment
@@ -438,4 +446,3 @@ Docker 映像是所创建的每一个容器的基础。映像通过 Dockerfile �
         kubectl apply -f mypod.yaml
         ```
         {: pre}
-

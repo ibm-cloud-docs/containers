@@ -19,7 +19,7 @@ lastupdated: "2017-11-02"
 # {{site.data.keyword.Bluemix_dedicated_notm}} 이미지 레지스트리에 대한 {{site.data.keyword.registryshort_notm}} 토큰 작성
 {: #cs_dedicated_tokens}
 
-클러스터와 함께 단일 및 확장 가능 그룹에 대해 사용한 이미지 레지스트리를 사용할 수 있도록 만료되지 않는 토큰을 작성합니다.
+{{site.data.keyword.containerlong}}에서 클러스터가 있는 단일 및 확장 가능 그룹에 대해 사용한 이미지 레지스트리에 대한 만료되지 않는 토큰을 작성합니다.
 {:shortdesc}
 
 1.  {{site.data.keyword.Bluemix_dedicated_notm}} 환경에 로그인하십시오.
@@ -43,7 +43,7 @@ lastupdated: "2017-11-02"
     ```
     {: pre}
 
-4.  현재 세션에 대한 영구 레지스트리 토큰을 요청하십시오. <dedicated_domain>을 {{site.data.keyword.Bluemix_dedicated_notm}} 환경에 대한 도메인으로 대체하십시오. 이 토큰은 현재 네임스페이스의 이미지에 대한 액세스 권한을 부여합니다.
+4.  현재 세션에 대한 영구 레지스트리 토큰을 요청하십시오. `<dedicated_domain>`을 {{site.data.keyword.Bluemix_dedicated_notm}} 환경에 대한 도메인으로 대체하십시오. 이 토큰은 현재 네임스페이스의 이미지에 대한 액세스 권한을 부여합니다.
 
     ```
     curl -XPOST -H "Authorization: ${OAUTH_TOKEN}" -H "Organization: ${ORG_GUID}" https://registry.<dedicated_domain>/api/v1/tokens?permanent=true
@@ -91,7 +91,7 @@ lastupdated: "2017-11-02"
     </tr>
     <tr>
     <td><code>--docker-server &lt;registry_url&gt;</code></td>
-    <td>필수. 네임스페이스가 설정된 이미지 레지스트리에 대한 URL: registry.&lt;dedicated_domain&gt;</li></ul></td>
+    <td>필수. 네임스페이스가 설정된 이미지 레지스트리에 대한 URL: registry.&lt;dedicated_domain&gt;입니다.</li></ul></td>
     </tr>
     <tr>
     <td><code>--docker-username &lt;docker_username&gt;</code></td>

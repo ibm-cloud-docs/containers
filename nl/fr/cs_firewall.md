@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-14"
 
 ---
 
@@ -18,13 +18,13 @@ lastupdated: "2018-01-11"
 # Ouverture des ports et adresses IP requis dans votre pare-feu
 {: #firewall}
 
-Examinez ces situations pour lesquelles vous aurez peut-être à ouvrir des ports et des adresses IP spécifiques dans vos pare-feux :
+Examinez ces situations pour lesquelles vous aurez peut-être à ouvrir des ports et des adresses IP spécifiques dans vos pare-feux pour {{site.data.keyword.containerlong}} :
 {:shortdesc}
 
 * [Pour exécuter des commandes `bx` commands](#firewall_bx) depuis votre système local lorsque les règles réseau de l'entreprise empêchent l'accès à des noeuds finaux Internet publics via des proxies ou des pare-feux.
 * [Pour exécuter des commandes `kubectl`](#firewall_kubectl) depuis votre système local lorsque les règles réseau de l'entreprise empêchent l'accès à des noeuds finaux Internet publics via des proxies ou des pare-feux.
 * [Pour exécuter des commandes `calicoctl` commands](#firewall_calicoctl) depuis votre système local lorsque les règles réseau de l'entreprise empêchent l'accès à des noeuds finaux Internet publics via des proxies ou des pare-feux.
-* [Pour autoriser la communication entre le maître Kubernetes et les noeuds worker ](#firewall_outbound)lorsqu'un pare-feu a été mis en place pour les noeuds worker ou que les paramètres du pare-feu ont été personnalisés dans votre compte IBM Cloud infrastructure (SoftLayer).
+* [Pour autoriser la communication entre le maître Kubernetes et les noeuds worker ](#firewall_outbound)lorsqu'un pare-feu a été mis en place pour les noeuds worker ou que les paramètres du pare-feu ont été personnalisés dans votre compte d'infrastructure IBM Cloud (SoftLayer).
 * [Pour accéder au service NodePort, au service LoasBalancer, ou à Ingress depuis l'extérieur du cluster](#firewall_inbound).
 
 <br />
@@ -172,7 +172,7 @@ Avant de commencer, autorisez l'accès pour exécution de commandes [`bx`](#fire
 Laissez votre cluster accéder aux ressources d'infrastructure et aux services de derrière un pare-feu, comme pour les régions {{site.data.keyword.containershort_notm}}, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, les adresses IP privées de l'infrastructure IBM Cloud (SoftLayer) et l'accès sortant pour les réservations de volume persistant.
 {:shortdesc}
 
-  1.  Notez l'adresse IP publique pour tous vos noeuds d'agent dans le cluster.
+  1.  Notez l'adresse IP publique pour tous vos noeuds worker dans le cluster.
 
       ```
       bx cs workers <cluster_name_or_id>
@@ -192,7 +192,7 @@ Laissez votre cluster accéder aux ressources d'infrastructure et aux services d
       <tr>
         <td>Asie-Pacifique nord</td>
         <td>hkg02<br>seo01<br>sng01<br>tok02</td>
-        <td><code>169.56.132.234</code><br><code>161.202.126.210</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
+        <td><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
        </tr>
       <tr>
          <td>Asie-Pacifique sud</td>
@@ -202,7 +202,7 @@ Laissez votre cluster accéder aux ressources d'infrastructure et aux services d
       <tr>
          <td>Europe centrale</td>
          <td>ams03<br>fra02<br>mil01<br>par01</td>
-         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.170</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
         </tr>
       <tr>
         <td>Sud du Royaume-Uni</td>
@@ -216,8 +216,8 @@ Laissez votre cluster accéder aux ressources d'infrastructure et aux services d
       </tr>
       <tr>
         <td>Sud des Etats-Unis</td>
-        <td>dal10<br>dal12<br>dal13<br>sao01</td>
-        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>169.57.151.10</code></td>
+        <td>dal10<br>dal12<br>dal13<br>hou02<br>sao01</td>
+        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>184.173.44.62</code><br><code>169.57.151.10</code></td>
       </tr>
       </tbody>
     </table>
@@ -263,7 +263,7 @@ Laissez votre cluster accéder aux ressources d'infrastructure et aux services d
       </table>
 </p>
 
-  4.  Facultatif : autorisez le trafic réseau sortant depuis les noeuds d'agent vers les services {{site.data.keyword.monitoringlong_notm}} et {{site.data.keyword.loganalysislong_notm}} :
+  4.  Facultatif : autorisez le trafic réseau sortant depuis les noeuds worker vers les services {{site.data.keyword.monitoringlong_notm}} et {{site.data.keyword.loganalysislong_notm}} :
       - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
       - Remplacez <em>&lt;monitoring_publicIP&gt;</em> par toutes les adresses des régions de surveillance auxquelles vous voulez autoriser le trafic :
         <p><table summary="La première ligne du tableau s'étend sur deux colonnes. Les autres lignes se lisent de gauche à droite. L'emplacement du serveur figure dans la première colonne et les adresses IP pour concordance dans la seconde colonne.">
@@ -330,7 +330,7 @@ Laissez votre cluster accéder aux ressources d'infrastructure et aux services d
       - Notez que vous devez ajouter l'emplacement dal01 (centre de données).
       - Ouvrez les ports 80 et 443 pour permettre le processus d'amorçage de cluster.
 
-  6. {: #pvc}Pour créer des réservations de volume persistant pour le stockage de données, permettez un accès sortant via votre pare-feu aux [adresses IP d'IBM Cloud infrastructure (SoftLayer)](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) de l'emplacement (centre de données) où réside votre cluster.
+  6. {: #pvc}Pour créer des réservations de volume persistant pour le stockage de données, permettez un accès sortant via votre pare-feu aux [adresses IP de l'infrastructure IBM Cloud (SoftLayer)](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) de l'emplacement (centre de données) où réside votre cluster.
       - Pour déterminer l'emplacement (centre de données) de votre cluster, exécutez la commande `bx cs clusters`.
       - Autorisez l'accès à la plage d'adresses IP tant pour le réseau **Frontend (public) network** que **Backend (privé)**.
       - Notez que vous devez ajouter l'emplacement dal01 (centre de données) pour le réseau **Backend (privé)**.

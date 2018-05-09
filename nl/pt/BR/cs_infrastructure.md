@@ -19,15 +19,14 @@ lastupdated: "2018-01-24"
 # Acessando o portfólio de Infraestrutura do IBM Cloud (SoftLayer)
 {: #infrastructure}
 
-Para criar um cluster do Kubernetes padrão, deve-se ter acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer). Esse acesso é necessário para
-solicitar recursos de infraestrutura pagos, como nós do trabalhador, endereços IP públicos móveis ou
-armazenamento persistente para seu cluster.
+Para criar um cluster do Kubernetes padrão, deve-se ter acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer). Esse acesso é necessário para solicitar recursos de infraestrutura pagos, como nós do trabalhador, endereços IP públicos móveis ou armazenamento persistente para seu cluster do Kubernetes no {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
 ## Acessar o portfólio de infraestrutura do IBM Cloud (SoftLayer)
 {: #unify_accounts}
 
-As contas {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go que foram criadas depois que a vinculação de conta automática foi ativada já estão configuradas com acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer), para que seja possa comprar recursos de infraestrutura para seu cluster sem configuração adicional.
+As contas Pay-As-You-Go do {{site.data.keyword.Bluemix_notm}} que foram criadas após a vinculação de conta automática ter sido ativada já estão configuradas com acesso ao portfólio da infraestrutura do IBM Cloud (SoftLayer). É possível comprar recursos de infraestrutura para seu cluster sem configuração adicional.
+{:shortdesc}
 
 Os usuários com outros tipos de contas do {{site.data.keyword.Bluemix_notm}} ou usuários que possuem uma conta de infraestrutura do IBM Cloud existente (SoftLayer) que não está vinculada a sua conta do {{site.data.keyword.Bluemix_notm}} devem configurar suas contas para criar clusters padrão.
 {:shortdesc}
@@ -55,9 +54,7 @@ uma chave API para contas Pay-As-You-Go e de Assinatura antigas](#old_account). 
 ## Gerando uma chave API da infraestrutura do IBM Cloud (SoftLayer) para usar com contas do {{site.data.keyword.Bluemix_notm}}
 {: #old_account}
 
-Se desejar continuar usando a sua conta Pay-As-You-Go ou de Assinatura antiga para criar
-clusters padrão, deverá gerar uma chave API com sua nova conta Pay-As-You-Go e configurar a
-chave API para sua conta antiga.
+Para continuar usando a sua conta Pay-As-You-Go ou de Assinatura antiga para criar clusters padrão, gerar uma chave API com sua nova conta Pay-As-You-Go e configure a chave API para sua conta antiga.
 {:shortdesc}
 
 Antes de iniciar, crie uma conta {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go que seja configurada automaticamente com acesso ao portfólio da infraestrutura do IBM Cloud (SoftLayer).

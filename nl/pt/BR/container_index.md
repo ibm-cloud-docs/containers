@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-13"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -19,8 +19,10 @@ lastupdated: "2017-12-13"
 # Introdução ao {{site.data.keyword.containerlong_notm}}
 {: #container_index}
 
-Tenha sucesso desde o início com o {{site.data.keyword.Bluemix_notm}} implementando apps altamente disponíveis em contêineres do Docker que são executados em clusters do Kubernetes. Os contêineres são uma maneira padrão de empacotar apps e todas as suas dependências para que seja possível mover perfeitamente os apps entre ambientes. Ao contrário de máquinas virtuais, os contêineres não empacotam o sistema operacional. Somente o código de app, o tempo de execução, as ferramentas de sistema, as bibliotecas e as configurações são empacotados dentro de contêineres. Os contêineres são mais leves, móveis e eficientes do que máquinas virtuais.
+Tenha sucesso desde o início com o {{site.data.keyword.containerlong}} implementando apps altamente disponíveis em contêineres do Docker que são executados em clusters do Kubernetes.
 {:shortdesc}
+
+Os contêineres são uma maneira padrão de empacotar apps e todas as suas dependências para que seja possível mover perfeitamente os apps entre ambientes. Ao contrário de máquinas virtuais, os contêineres não empacotam o sistema operacional. Somente o código de app, o tempo de execução, as ferramentas de sistema, as bibliotecas e as configurações são empacotados dentro de contêineres. Os contêineres são mais leves, móveis e eficientes do que máquinas virtuais.
 
 
 Clique em uma opção para começar:
@@ -36,30 +38,31 @@ Clique em uma opção para começar:
 ## Introdução aos clusters
 {: #clusters}
 
-Então você deseja implementar um app em contêiner? Espere! Inicie criando um cluster do Kubernetes primeiro. Kubernetes é uma ferramenta de orquestração para contêineres. Com o Kubernetes, os desenvolvedores podem implementar apps altamente disponíveis em um flash usando o poder e a flexibilidade de clusters.
+Então você deseja implementar um app em um contêiner? Espere! Inicie criando um cluster do Kubernetes primeiro. Kubernetes é uma ferramenta de orquestração para contêineres. Com o Kubernetes, os desenvolvedores podem implementar apps altamente disponíveis em um flash usando o poder e a flexibilidade de clusters.
 {:shortdesc}
 
 E o que é um cluster? Um cluster é um conjunto de recursos, nós de trabalhador, redes e dispositivos de armazenamento que mantêm os apps altamente disponíveis. Após ter o seu cluster, é possível implementar seus apps em contêineres.
 
-[Antes de iniciar, deve-se ter uma conta Pay-As-You-Go ou da Assinatura do {{site.data.keyword.Bluemix_notm}} para criar um cluster grátis.](https://console.bluemix.net/registration/)
+Antes de iniciar, deve-se ter uma [conta do {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/) para Teste, de Pay-As-You-Go ou de Assinatura para criar um cluster grátis.
 
+**Qual tipo de conta do {{site.data.keyword.Bluemix_notm}} devo obter?** Com as contas de Pay-As-You-Go e de Assinatura, é possível provisionar os recursos de infraestrutura do IBM Cloud (SoftLayer) para seus clusters do Kubernetes e criar um cluster grátis ou clusters padrão. Com uma conta para Teste, é possível criar um cluster grátis por 21 dias, mas não clusters padrão. Após 21 dias, seu cluster grátis é excluído. Para continuar com clusters do Kubernetes, crie outro cluster grátis até que sua conta para Teste termine ou faça upgrade de sua conta para Pay-As-You-Go ou Assinatura.
+{:tip}
 
 Para criar um cluster grátis:
 
-1.  No [**catálogo** ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://console.bluemix.net/catalog/?category=containers), na categoria **Contêineres**, clique em **Cluster do Kubernetes**.
+1.  No [**Catálogo** do {{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://console.bluemix.net/catalog/?category=containers), categoria **Contêineres**, clique em **Contêineres em clusters do Kubernetes**.
 
-2.  Insira um **Nome do cluster**. O tipo de cluster padrão é grátis. Na próxima vez, será possível criar um cluster padrão e definir customizações adicionais, como quantos
-nós do trabalhador estão no cluster.
+2.  Leia sobre clusters, em seguida, clique em **Criar**. Insira um **Nome do cluster**. O tipo de cluster padrão é grátis. Da próxima vez, será possível criar um cluster padrão e definir customizações adicionais, como o número de nós do trabalhador.
 
 3.  Clique em **Criar Cluster**. Os detalhes para o cluster são abertos, mas o nó do trabalhador no cluster leva alguns minutos para
 provisão. É possível ver o status do nó do trabalhador na guia **Nós do trabalhador**. Quando o status atingir `Pronto`, seu nó do trabalhador estará pronto para ser usado.
 
-Bom Trabalho! Você criou seu primeiro cluster!
+Bom Trabalho! Você criou seu primeiro cluster do Kubernetes. Aqui estão alguns detalhes sobre seu cluster grátis:
 
-*   O cluster grátis tem um nó do trabalhador com 2 CPUs e 4 GB de memória disponível para que sejam usados por seus apps.
-*   O nó do trabalhador é monitorado e gerenciado centralmente por um mestre do Kubernetes dedicado e altamente disponível pertencente à {{site.data.keyword.IBM_notm}} que controla e monitora todos os recursos do Kubernetes no cluster. É possível concentrar-se em seu nó do trabalhador e nos apps implementados nele sem se preocupar também com o gerenciamento desse mestre.
-*   Os recursos que são necessários para executar o cluster, como VLANS e endereços IP, são gerenciados em uma conta de infraestrutura do IBM Cloud (SoftLayer) de propriedade da {{site.data.keyword.IBM_notm}}. Ao criar um cluster padrão, você gerencia esses recursos em sua própria conta de infraestrutura do IBM Cloud (SoftLayer). É possível aprender mais sobre esses
-recursos quando você cria um cluster padrão.
+*   **Tipo de máquina**: o cluster grátis tem um nó do trabalhador virtual com 2 CPUs e 4 GB de memória disponíveis para seus apps usarem. Ao criar um cluster padrão, é possível escolher entre máquinas físicas (bare metal) ou virtuais, juntamente com vários tamanhos de máquina.
+*   **Mestre gerenciado**: o nó do trabalhador é monitorado e gerenciado centralmente por um mestre do Kubernetes pertencente ao {{site.data.keyword.IBM_notm}} dedicado e altamente disponível que controla e monitora todos os recursos do Kubernetes no cluster. É possível concentrar-se em seu nó do trabalhador e nos apps implementados nele sem se preocupar também com o gerenciamento desse mestre.
+*   **Recursos de infraestrutura**: os recursos que são necessários para executar o cluster, como VLANS e endereços IP, são gerenciados em uma conta de infraestrutura do IBM Cloud (SoftLayer) pertencente à {{site.data.keyword.IBM_notm}}. Ao criar um cluster padrão, você gerencia esses recursos em sua própria conta de infraestrutura do IBM Cloud (SoftLayer). É possível aprender mais sobre esses recursos e as [permissões necessárias](cs_users.html#infra_access) ao criar um cluster padrão.
+*   **Local e outras opções**: clusters grátis são implementados dentro da região que você seleciona, mas não é possível escolher qual o local (data center). Para obter mais controle sobre local, rede e armazenamento persistente, crie um cluster padrão. [Saiba mais sobre os benefícios de clusters grátis e padrão](cs_why.html#cluster_types).
 
 
 **O que Vem a Seguir?**

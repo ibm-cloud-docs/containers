@@ -20,11 +20,11 @@ lastupdated: "2018-01-11"
 
 請參閱新位置中最新的資訊：
 - [啟動 Kubernetes 儀表板](cs_app.html#cli_dashboard)
-- [建立 Secret](cs_app.html#secrets)
+- [建立密碼](cs_app.html#secrets)
 - [容許對應用程式的公用存取](cs_network_planning.html#planning)
   - [使用 NodePort 服務類型來配置應用程式的公用存取](cs_nodeport.html#config)
   - [使用負載平衡器服務類型來配置應用程式的存取](cs_loadbalancer.html#config)
-  - [使用 Ingress 來配置應用程式的存取](cs_ingress.html#config)
+  - [使用 Ingress 來配置應用程式的存取](cs_ingress.html#configure_alb)
     - [使用 IBM 提供的網域且不搭配 TLS 終止](cs_ingress.html#ibm_domain)
     - [使用 IBM 提供的網域且搭配 TLS 終止](cs_ingress.html#ibm_domain_cert)
     - [使用自訂網域及 TLS 憑證來執行 TLS 終止](cs_ingress.html#custom_domain_cert)

@@ -29,7 +29,7 @@ lastupdated: "2017-12-01"
 - [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/)
 - [Docker 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.docker.com/engine/)
 - Kubernetes 套件管理用的 <a href="https://docs.helm.sh/helm/" target="_blank">Helm 文件 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>
-- [Istio ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/) 服務網眼 (service mesh)
+- [Istio ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/) 服務網 (service mesh)
 - [Weave Scope ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.weave.works/oss/scope/) 視覺效果
 
 <br />

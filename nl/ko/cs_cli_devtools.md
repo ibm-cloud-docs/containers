@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-01-24"
+lastupdated: "2018-02-14"
 
 ---
 
@@ -19,78 +19,13 @@ lastupdated: "2017-01-24"
 # 클러스터 관리를 위한 CLI 참조
 {: #cs_cli_reference}
 
-클러스터를 작성하고 관리하려면 다음 명령을 참조하십시오.
+{{site.data.keyword.Bluemix_notm}}에서 클러스터를 작성하고 관리하려면 다음 명령을 참조하십시오.
 {:shortdesc}
 
+## bx cs 명령
+{: #cs_commands}
+
 **팁:** `bx cr` 명령을 찾고 계십니까? [{{site.data.keyword.registryshort_notm}} CLI 참조](/docs/cli/plugins/registry/index.html)를 확인하십시오. `kubectl` 명령을 찾고 계십니까? [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)를 참조하십시오.
-
-
-
-
-<table summary="{{site.data.keyword.Bluemix_notm}}에서 클러스터를 작성하기 위한 명령">
- <thead>
-    <th colspan=5>{{site.data.keyword.Bluemix_notm}}에서 클러스터를 작성하기 위한 명령</th>
- </thead>
- <tbody>
-  <tr>
-    <td>[bx cs albs](#cs_albs)</td>
-    <td>[bx cs alb-configure](#cs_alb_configure)</td>
-    <td>[bx cs alb-get](#cs_alb_get)</td>
-    <td>[bx cs alb-types](#cs_alb_types)</td>
-    <td>[bx cs cluster-config](#cs_cluster_config)</td>
-  </tr>
- <tr>
-    <td>[bx cs cluster-create](#cs_cluster_create)</td>
-    <td>[bx cs cluster-get](#cs_cluster_get)</td>
-    <td>[bx cs cluster-rm](#cs_cluster_rm)</td>
-    <td>[bx cs cluster-service-bind](#cs_cluster_service_bind)</td>
-    <td>[bx cs cluster-service-unbind](#cs_cluster_service_unbind)</td>
- </tr>
- <tr>
-    <td>[bx cs cluster-services](#cs_cluster_services)</td>
-    <td>[bx cs cluster-subnet-add](#cs_cluster_subnet_add)</td>
-    <td>[bx cs cluster-subnet-create](#cs_cluster_subnet_create)</td>
-    <td>[bx cs cluster-user-subnet-add](#cs_cluster_user_subnet_add)</td>
-    <td>[bx cs cluster-user-subnet-rm](#cs_cluster_user_subnet_rm)</td>
- </tr>
- <tr>
-    <td>[bx cs cluster-update](#cs_cluster_update)</td>
-    <td>[     bx cs clusters
-    ](#cs_clusters)</td>
-    <td>[bx cs credentials-set](#cs_credentials_set)</td>
-    <td>[bx cs credentials-unset](#cs_credentials_unset)</td>
-    <td>[bx cs help](#cs_help)</td>
- </tr>
- <tr>
-    <td>[bx cs init](#cs_init)</td>
-    <td>[bx cs kube-versions](#cs_kube_versions)</td>
-    <td>[        bx cs locations
-        ](#cs_datacenters)</td>
-    <td>[bx cs logging-config-create](#cs_logging_create)</td>
-    <td>[bx cs logging-config-get](#cs_logging_get)</td>
- </tr>
- <tr>
-    <td>[bx cs logging-config-rm](#cs_logging_rm)</td>
-    <td>[bx cs logging-config-update](#cs_logging_update)</td>
-    <td>[bx cs machine-types](#cs_machine_types)</td>
-    <td>[     bx cs subnets
-    ](#cs_subnets)</td>
-    <td>[bx cs vlans](#cs_vlans)</td>
- </tr>
- <tr>
-    <td>[bx cs webhook-create](#cs_webhook_create)</td>
-    <td>[bx cs worker-add](#cs_worker_add)</td>
-    <td>[bx cs worker-get](#cs_worker_get)</td>
-    <td>[bx cs worker-rm](#cs_worker_rm)</td>
-    <td>[bx cs worker-update](#cs_worker_update)</td>
- </tr>
- <tr>
-    <td>[bx cs worker-reboot](#cs_worker_reboot)</td>
-    <td>[bx cs worker-reload](#cs_worker_reload)</td>
-    <td>[bx cs workers](#cs_workers)</td>
- </tr>
- </tbody>
- </table>
 
 **팁:** {{site.data.keyword.containershort_notm}} 플러그인의 버전을 보려면 다음 명령을 실행하십시오.
 
@@ -99,27 +34,375 @@ bx plugin list
 ```
 {: pre}
 
-## bx cs 명령
-{: #cs_commands}
 
-### bx cs albs --cluster CLUSTER
-{: #cs_albs}
 
-클러스터에서 모든 애플리케이션 로드 밸런서의 상태를 봅니다. 애플리케이션 로드 밸런서 ID가 리턴되지 않으면 클러스터에 포터블 서브넷이 없습니다. 서브넷을 [작성](#cs_cluster_subnet_create)하거나 클러스터에 [추가](#cs_cluster_subnet_add)할 수 있습니다.
+<table summary="애플리케이션 로드 밸런서 명령">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>애플리케이션 로드 밸런서 명령</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs alb-cert-deploy](#cs_alb_cert_deploy)</td>
+    <td>[bx cs alb-cert-get](#cs_alb_cert_get)</td>
+    <td>[bx cs alb-cert-rm](#cs_alb_cert_rm)</td>
+    <td>[bx cs alb-certs](#cs_alb_certs)</td>
+  </tr>
+  <tr>
+    <td>[bx cs alb-configure](#cs_alb_configure)</td>
+    <td>[bx cs alb-get](#cs_alb_get)</td>
+    <td>[bx cs alb-types](#cs_alb_types)</td>
+    <td>[bx cs albs](#cs_albs)</td>
+ </tr>
+</tbody>
+</table>
 
-<strong>명령 옵션</strong>:
+<br>
+
+<table summary="API 명령">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>API 명령</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs api-key-info](#cs_api_key_info)</td>
+    <td>[bx cs api-key-reset](#cs_api_key_reset)</td>
+    <td>[bx cs apiserver-config-get](#cs_apiserver_config_get)</td>
+    <td>[bx cs apiserver-config-set](#cs_apiserver_config_set)</td>
+  </tr>
+  <tr>
+    <td>[bx cs apiserver-config-unset](#cs_apiserver_config_unset)</td>
+    <td>[bx cs apiserver-refresh](#cs_apiserver_refresh)</td>
+    <td></td>
+    <td></td>
+ </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="CLI 플러그인 사용법 명령">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>CLI 플러그인 사용법 명령</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs help](#cs_help)</td>
+    <td>[bx cs init](#cs_init)</td>
+    <td>[bx cs messages](#cs_messages)</td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="클러스터 명령: 관리">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>클러스터 명령: 관리</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs cluster-config](#cs_cluster_config)</td>
+    <td>[bx cs cluster-create](#cs_cluster_create)</td>
+    <td>[bx cs cluster-get](#cs_cluster_get)</td>
+    <td>[bx cs cluster-rm](#cs_cluster_rm)</td>
+  </tr>
+  <tr>
+    <td>[bx cs cluster-update](#cs_cluster_update)</td>
+    <td>[     bx cs clusters
+    ](#cs_clusters)</td>
+    <td>[bx cs kube-versions](#cs_kube_versions)</td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="클러스터 명령: 서비스 및 통합">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>클러스터 명령: 서비스 및 통합</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs cluster-service-bind](#cs_cluster_service_bind)</td>
+    <td>[bx cs cluster-service-unbind](#cs_cluster_service_unbind)</td>
+    <td>[bx cs cluster-services](#cs_cluster_services)</td>
+    <td>[bx cs webhook-create](#cs_webhook_create)</td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="클러스터 명령: 서브넷">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>클러스터 명령: 서브넷</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs cluster-subnet-add](#cs_cluster_subnet_add)</td>
+    <td>[bx cs cluster-subnet-create](#cs_cluster_subnet_create)</td>
+    <td>[bx cs cluster-user-subnet-add](#cs_cluster_user_subnet_add)</td>
+    <td>[bx cs cluster-user-subnet-rm](#cs_cluster_user_subnet_rm)</td>
+  </tr>
+  <tr>
+    <td>[     bx cs subnets
+    ](#cs_subnets)</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="인프라 명령">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>인프라 명령</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs credentials-set](#cs_credentials_set)</td>
+    <td>[bx cs credentials-unset](#cs_credentials_unset)</td>
+    <td>[bx cs machine-types](#cs_machine_types)</td>
+    <td>[bx cs vlans](#cs_vlans)</td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="로깅 명령">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>로깅 명령</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs logging-config-create](#cs_logging_create)</td>
+    <td>[bx cs logging-config-get](#cs_logging_get)</td>
+    <td>[bx cs logging-config-refresh](#cs_logging_refresh)</td>
+    <td>[bx cs logging-config-rm](#cs_logging_rm)</td>
+  </tr>
+  <tr>
+    <td>[bx cs logging-config-update](#cs_logging_update)</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="지역 명령">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>지역 명령</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[        bx cs locations
+        ](#cs_datacenters)</td>
+    <td>[bx cs region](#cs_region)</td>
+    <td>[bx cs region-set](#cs_region-set)</td>
+    <td>[bx cs regions](#cs_regions)</td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="작업자 노드 명령">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>작업자 노드 명령</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs worker-add](#cs_worker_add)</td>
+    <td>[bx cs worker-get](#cs_worker_get)</td>
+    <td>[bx cs worker-reboot](#cs_worker_reboot)</td>
+    <td>[bx cs worker-reload](#cs_worker_reload)</td>
+  </tr>
+  <tr>
+    <td>[bx cs worker-rm](#cs_worker_rm)</td>
+    <td>[bx cs worker-update](#cs_worker_update)</td>
+    <td>[bx cs workers](#cs_workers)</td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+
+## 애플리케이션 로드 밸런서 명령
+{: #alb_commands}
+
+### bx cs alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NAME --cert-crn CERTIFICATE_CRN
+{: #cs_alb_cert_deploy}
+
+{{site.data.keyword.cloudcerts_long_notm}} 인스턴스의 인증서를 클러스터의 애플리케이션 로드 밸런서에 배치하거나 업데이트합니다.
+
+**참고:**
+* 관리자 액세스 역할이 있는 사용자만 이 명령을 실행할 수 있습니다.
+* 같은 {{site.data.keyword.cloudcerts_long_notm}} 인스턴스에서 가져온 인증서만 업데이트할 수 있습니다.
+
+<strong>명령 옵션</strong>
 
    <dl>
-   <dt><code><em>--cluster </em>CLUSTER</code></dt>
-   <dd>사용 가능한 애플리케이션 로드 밸런서를 나열하는 클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+
+   <dt><code>--update</code></dt>
+   <dd>클러스터의 애플리케이션 로드 밸런서 시크릿에 대한 인증서를 업데이트하려면 이 플래그를 포함하십시오. 이 값은 선택사항입니다.</dd>
+
+   <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
+   <dd>애플리케이션 로드 밸런서 시크릿의 이름입니다. 이 값은 필수입니다.</dd>
+
+   <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
+   <dd>인증서 CRN입니다. 이 값은 필수입니다.</dd>
    </dl>
 
 **예제**:
 
-  ```
-  bx cs albs --cluster mycluster
-  ```
-  {: pre}
+애플리케이션 로드 밸런서 시크릿 배치 예:
+
+   ```
+   bx cs alb-cert-deploy --secret-name my_alb_secret_name --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
+   ```
+   {: pre}
+
+기존 애플리케이션 로드 밸런서 시크릿 업데이트 예:
+
+ ```
+ bx cs alb-cert-deploy --update --secret-name my_alb_secret_name --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:7e21fde8ee84a96d29240327daee3eb2
+ ```
+ {: pre}
+
+
+### bx cs alb-cert-get --cluster CLUSTER [--secret-name SECRET_NAME][--cert-crn CERTIFICATE_CRN]
+{: #cs_alb_cert_get}
+
+클러스터의 애플리케이션 로드 밸런서 시크릿에 관한 정보를 봅니다.
+
+**참고:** 관리자 액세스 역할이 있는 사용자만 이 명령을 실행할 수 있습니다.
+
+<strong>명령 옵션</strong>
+
+  <dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+  <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+
+  <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
+  <dd>애플리케이션 로드 밸런서 시크릿의 이름입니다. 이 값은 클러스터의 특정 애플리케이션 로드 밸런서 시크릿에 관한 정보를 가져오는 데 필요합니다.</dd>
+
+  <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
+  <dd>인증서 CRN입니다. 이 값은 클러스터의 특정 인증서 CRN과 일치하는 모든 애플리케이션 로드 밸런서 시크릿에 관한 정보를 가져오는 데 필요합니다.</dd>
+  </dl>
+
+**예제**:
+
+ 애플리케이션 로드 밸런서 시크릿에 관한 정보 가져오기 예:
+
+ ```
+ bx cs alb-cert-get --cluster my_cluster --secret-name my_alb_secret_name
+ ```
+ {: pre}
+
+ 지정된 인증서 CRN과 일치하는 모든 애플리케이션 로드 밸런서 시크릿에 관한 정보 가져오기 예:
+
+ ```
+ bx cs alb-cert-get --cluster my_cluster --cert-crn  crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
+ ```
+ {: pre}
+
+
+### bx cs alb-cert-rm --cluster CLUSTER [--secret-name SECRET_NAME][--cert-crn CERTIFICATE_CRN]
+{: #cs_alb_cert_rm}
+
+클러스터의 애플리케이션 로드 밸런서 시크릿을 제거합니다.
+
+**참고:** 관리자 액세스 역할이 있는 사용자만 이 명령을 실행할 수 있습니다.
+
+<strong>명령 옵션</strong>
+
+  <dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+  <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+
+  <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
+  <dd>ALB 시크릿의 이름입니다. 이 값은 클러스터의 특정 애플리케이션 로드 밸런서 시크릿을 제거하는 데 필요합니다.</dd>
+
+  <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
+  <dd>인증서 CRN입니다. 이 값은 클러스터의 특정 인증서 CRN과 일치하는 모든 애플리케이션 로드 밸런서 시크릿을 제거하는 데 필요합니다.</dd>
+  </dl>
+
+**예제**:
+
+ 애플리케이션 로드 밸런서 시크릿 제거 예:
+
+ ```
+ bx cs alb-cert-rm --cluster my_cluster --secret-name my_alb_secret_name
+ ```
+ {: pre}
+
+ 지정된 인증서 CRN과 일치하는 모든 애플리케이션 로드 밸런서 시크릿 제거 예:
+
+ ```
+ bx cs alb-cert-rm --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
+ ```
+ {: pre}
+
+
+### bx cs alb-certs --cluster CLUSTER
+{: #cs_alb_certs}
+
+클러스터의 애플리케이션 로드 밸런서 시크릿 목록을 봅니다.
+
+**참고:** 관리자 액세스 역할이 있는 사용자만 이 명령을 실행할 수 있습니다.
+
+<strong>명령 옵션</strong>
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+   </dl>
+
+**예제**:
+
+ ```
+ bx cs alb-certs --cluster my_cluster
+ ```
+ {: pre}
+
 
 
 
@@ -135,10 +418,10 @@ bx plugin list
    <dd>애플리케이션 로드 밸런서의 ID입니다. 클러스터에서 애플리케이션 로드 밸런서의 ID를 보려면 <code>bx cs albs <em>--cluster </em>CLUSTER</code>를 실행하십시오. 이 값은 필수입니다.</dd>
 
    <dt><code>--enable</code></dt>
-   <dd>클러스터에서 애플리케이션 로드 밸런서를 사용으로 설정하려면 이 플래그를 포함시키십시오.</dd>
+   <dd>클러스터에서 애플리케이션 로드 밸런서를 사용으로 설정하려면 이 플래그를 포함하십시오.</dd>
 
    <dt><code>--disable</code></dt>
-   <dd>클러스터에서 애플리케이션 로드 밸런서를 사용 안함으로 설정하려면 이 플래그를 포함시키십시오.</dd>
+   <dd>클러스터에서 애플리케이션 로드 밸런서를 사용 안함으로 설정하려면 이 플래그를 포함하십시오.</dd>
 
    <dt><code>--user-ip <em>USER_IP</em></code></dt>
    <dd>
@@ -172,6 +455,8 @@ bx plugin list
   bx cs alb-configure --albID my_private_alb_id --enable --user-ip user_ip
   ```
   {: pre}
+
+
 
 ### bx cs alb-get --albID ALB_ID
 {: #cs_alb_get}
@@ -209,10 +494,69 @@ bx plugin list
   {: pre}
 
 
-### bx cs apiserver-config-set
-{: #cs_apiserver_config_set}
+### bx cs albs --cluster CLUSTER
+{: #cs_albs}
 
-클러스터의 Kubernetes API 서버 구성에 대한 한 옵션을 설정합니다. 이 명령은 설정할 구성 옵션에 대한 다음 하위 명령 중 하나와 결합되어야 합니다.
+클러스터에서 모든 애플리케이션 로드 밸런서의 상태를 봅니다. 애플리케이션 로드 밸런서 ID가 리턴되지 않으면 클러스터에 포터블 서브넷이 없습니다. 서브넷을 [작성](#cs_cluster_subnet_create)하거나 클러스터에 [추가](#cs_cluster_subnet_add)할 수 있습니다.
+
+<strong>명령 옵션</strong>:
+
+   <dl>
+   <dt><code><em>--cluster </em>CLUSTER</code></dt>
+   <dd>사용 가능한 애플리케이션 로드 밸런서를 나열하는 클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+   </dl>
+
+**예제**:
+
+  ```
+  bx cs albs --cluster mycluster
+  ```
+  {: pre}
+
+
+<br />
+
+
+## API 명령
+{: #api_commands}
+
+### bx cs api-key-info CLUSTER
+{: #cs_api_key_info}
+
+클러스터의 IAM API 키 소유자의 이름과 이메일 주소를 봅니다.
+
+<strong>명령 옵션</strong>:
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+   </dl>
+
+**예제**:
+
+  ```
+  bx cs api-key-info my_cluster
+  ```
+  {: pre}
+
+
+### bx cs api-key-reset
+{: #cs_api_key_reset}
+
+API 키를 대체합니다. API 키는 클러스터를 관리하는 데 필요합니다. 서비스 중단을 방지하려면 기존 키가 손상되지 않은 경우 API 키를 대체하지 마십시오.
+
+**예제**:
+
+  ```
+  bx cs api-key-reset
+  ```
+  {: pre}
+
+
+### bx cs apiserver-config-get
+{: #cs_apiserver_config_get}
+
+클러스터의 Kubernetes API 서버 구성 옵션에 대한 정보를 가져옵니다. 이 명령은 정보를 원하는 구성 옵션에 대한 다음 하위 명령 중 하나와 결합되어야 합니다.
 
 #### bx cs apiserver-config-get audit-webhook CLUSTER
 {: #cs_apiserver_api_webhook_get}
@@ -232,6 +576,11 @@ API 서버 감사 로그를 전송 중인 원격 로깅 서비스의 URL을 봅�
   bx cs apiserver-config-get audit-webhook my_cluster
   ```
   {: pre}
+
+### bx cs apiserver-config-set
+{: #cs_apiserver_config_set}
+
+클러스터의 Kubernetes API 서버 구성에 대한 한 옵션을 설정합니다. 이 명령은 설정할 구성 옵션에 대한 다음 하위 명령 중 하나와 결합되어야 합니다.
 
 #### bx cs apiserver-config-set audit-webhook CLUSTER [--remoteServer SERVER_URL_OR_IP][--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH][--clientKey CLIENT_KEY_PATH]
 {: #cs_apiserver_api_webhook_set}
@@ -263,6 +612,12 @@ API 서버 구성을 위한 웹후크 백엔드를 설정합니다. 웹후크 �
   bx cs apiserver-config-set audit-webhook my_cluster --remoteServer https://audit.example.com/audit --caCert /mnt/etc/kubernetes/apiserver-audit/ca.pem --clientCert /mnt/etc/kubernetes/apiserver-audit/cert.pem --clientKey /mnt/etc/kubernetes/apiserver-audit/key.pem
   ```
   {: pre}
+
+
+### bx cs apiserver-config-unset
+{: #cs_apiserver_config_unset}
+
+클러스터의 Kubernetes API 서버 구성에 대한 옵션을 사용 안함으로 설정합니다. 이 명령은 설정 해제할 구성 옵션에 대한 다음 하위 명령 중 하나와 결합되어야 합니다.
 
 #### bx cs apiserver-config-unset audit-webhook CLUSTER
 {: #cs_apiserver_api_webhook_unset}
@@ -303,6 +658,70 @@ API 서버 구성을 위한 웹후크 백엔드를 설정합니다. 웹후크 �
   {: pre}
 
 
+<br />
+
+
+## CLI 플러그인 사용법 명령
+{: #cli_plug-in_commands}
+
+###   bx cs help
+{: #cs_help}
+
+지원되는 명령 및 매개변수의 목록을 봅니다.
+
+<strong>명령 옵션</strong>:
+
+   없음
+
+**예제**:
+
+  ```
+  bx cs help
+  ```
+  {: pre}
+
+
+### bx cs init [--host HOST]
+{: #cs_init}
+
+{{site.data.keyword.containershort_notm}} 플러그인을 초기화하거나 Kubernetes 클러스터를 작성 또는 액세스할 지역을 지정합니다.
+
+<strong>명령 옵션</strong>:
+
+   <dl>
+   <dt><code>--host <em>HOST</em></code></dt>
+   <dd>사용할 {{site.data.keyword.containershort_notm}} API 엔드포인트입니다.  이 값은 선택사항입니다. [사용 가능한 API 엔드포인트 값을 보십시오.](cs_regions.html#container_regions)</dd>
+   </dl>
+
+**예제**:
+
+
+```
+        bx cs init --host https://uk-south.containers.bluemix.net
+```
+{: pre}
+
+
+### bx cs messages
+{: #cs_messages}
+
+IBM ID 사용자에 대한 현재 메시지를 봅니다.
+
+**예제**:
+
+```
+bx cs messages
+```
+{: pre}
+
+
+<br />
+
+
+## 클러스터 명령: 관리
+{: #cluster_mgmt_commands}
+
+
 ### bx cs cluster-config CLUSTER [--admin][--export]
 {: #cs_cluster_config}
 
@@ -329,11 +748,10 @@ bx cs cluster-config my_cluster
 {: pre}
 
 
-
 ### bx cs cluster-create [--file FILE_LOCATION][--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH][--no-subnet] [--private-vlan PRIVATE_VLAN][--public-vlan PUBLIC_VLAN] [--workers WORKER][--disable-disk-encrypt]
 {: #cs_cluster_create}
 
-조직에서 클러스터를 작성합니다.
+조직에 클러스터를 작성합니다. 무료 클러스터의 경우 클러스터 이름을 지정합니다. 그 외에는 모두 기본값으로 설정됩니다. 한 번에 하나의 무료 클러스터가 제공됩니다. Kubernetes의 전체 기능을 활용하려면 표준 클러스터를 작성하십시오. 
 
 <strong>명령 옵션</strong>
 
@@ -359,7 +777,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 
 
 <table>
-    <caption>표 1. YAML 파일 컴포넌트 이해</caption>
+    <caption>표. YAML 파일 컴포넌트 이해</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
     </thead>
@@ -378,7 +796,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
       </tr>
      <tr>
      <td><code><em>machine-type</em></code></td>
-     <td><code><em>&lt;machine_type&gt;</em></code>을 작업자 노드에 사용하려는 시스템 유형으로 대체합니다. 사용자의 위치에서 사용 가능한 시스템 유형을 나열하려면 <code>bx cs machine-types <em>&lt;location&gt;</em></code>을 실행하십시오.</td>
+     <td><code><em>&lt;machine_type&gt;</em></code>을 작업자 노드에 사용하려는 머신 유형으로 대체합니다. 사용자의 위치에서 사용 가능한 머신 유형을 나열하려면 <code>bx cs machine-types <em>&lt;location&gt;</em></code>을 실행하십시오.</td>
      </tr>
      <tr>
      <td><code><em>private-vlan</em></code></td>
@@ -419,7 +837,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 </dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>선택하는 시스템 유형은 작업자 노드에 배치된 컨테이너가 사용할 수 있는 메모리와 디스크 공간의 양에 영향을 줍니다. 사용 가능한 시스템 유형을 나열하려면 [bx cs machine-types <em>LOCATION</em>](#cs_machine_types)을 참조하십시오.  이 값은 표준 클러스터의 경우 필수이며 무료 클러스터에는 사용할 수 없습니다.</dd>
+<dd>선택하는 머신 유형은 작업자 노드에 배치된 컨테이너가 사용할 수 있는 메모리와 디스크 공간의 양에 영향을 줍니다. 사용 가능한 머신 유형을 나열하려면 [bx cs machine-types <em>LOCATION</em>](#cs_machine_types)을 참조하십시오.  이 값은 표준 클러스터의 경우 필수이며 무료 클러스터에는 사용할 수 없습니다.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
 <dd>클러스터의 이름입니다.  이 값은 필수입니다.</dd>
@@ -541,10 +959,82 @@ kube-version: <em>&lt;kube-version&gt;</em>
   {: pre}
 
 
-### bx cs cluster-service-bind CLUSTER KUBERNETES_NAMESPACE SERVICE_INSTANCE_GUID
+### bx cs cluster-update [-f] CLUSTER [--kube-version MAJOR.MINOR.PATCH][--force-update]
+{: #cs_cluster_update}
+
+Kubernetes 마스터를 기본 API 버전으로 업데이트합니다. 업데이트 중에는 클러스터에 액세스하거나 클러스터를 변경할 수 없습니다. 사용자가 배치한 작업자 노드, 앱 및 리소스는 수정되지 않고 계속 실행됩니다.
+
+차후 배치를 위해 YAML 파일을 변경해야 할 수도 있습니다. 세부사항은 이 [릴리스 정보](cs_versions.html)를 검토하십시오.
+
+<strong>명령 옵션</strong>:
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+
+   <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
+   <dd>클러스터의 Kubernetes 버전입니다. 버전을 지정하지 않으면 Kubernetes 마스터가 기본 API 버전으로 업데이트됩니다. 사용 가능한 버전을 보려면 [bx cs kube-versions](#cs_kube_versions)를 실행하십시오. 이 값은 선택사항입니다.</dd>
+
+   <dt><code>-f</code></dt>
+   <dd>사용자 프롬프트를 표시하지 않고 마스터 업데이트를 강제 실행하려면 이 옵션을 사용하십시오. 이 값은 선택사항입니다.</dd>
+
+   <dt><code>--force-update</code></dt>
+   <dd>변경 시 부 버전의 차이가 2보다 큰 경우에도 업데이트를 시도합니다. 이 값은 선택사항입니다.</dd>
+   </dl>
+
+**예제**:
+
+  ```
+  bx cs cluster-update my_cluster
+  ```
+  {: pre}
+
+
+### bx cs clusters
+{: #cs_clusters}
+
+조직에서 클러스터의 목록을 봅니다.
+
+<strong>명령 옵션</strong>:
+
+  없음
+
+**예제**:
+
+  ```
+   bx cs clusters
+  ```
+  {: pre}
+
+
+### bx cs kube-versions
+{: #cs_kube_versions}
+
+{{site.data.keyword.containershort_notm}}에서 지원되는 Kubernetes 버전 목록을 봅니다. [클러스터 마스터](#cs_cluster_update) 및 [작업자 노드](#cs_worker_update)를 안정적인 최신 기능을 위한 기본 버전으로 업데이트합니다.
+
+**명령 옵션**:
+
+  없음
+
+**예제**:
+
+  ```
+  bx cs kube-versions
+  ```
+  {: pre}
+
+
+<br />
+
+
+## 클러스터 명령: 서비스 및 통합
+{: #cluster_services_commands}
+
+
+### bx cs cluster-service-bind CLUSTER KUBERNETES_NAMESPACE SERVICE_INSTANCE_NAME
 {: #cs_cluster_service_bind}
 
-클러스터에 {{site.data.keyword.Bluemix_notm}} 서비스를 추가합니다.
+클러스터에 {{site.data.keyword.Bluemix_notm}} 서비스를 추가합니다. {{site.data.keyword.Bluemix_notm}} 카탈로그에서 사용 가능한 {{site.data.keyword.Bluemix_notm}} 서비스를 보려면 `bx service offerings`를 실행하십시오. **참고**: 서비스 키를 지원하는 {{site.data.keyword.Bluemix_notm}} 서비스만 추가할 수 있습니다.
 
 <strong>명령 옵션</strong>:
 
@@ -555,14 +1045,14 @@ kube-version: <em>&lt;kube-version&gt;</em>
    <dt><code><em>KUBERNETES_NAMESPACE</em></code></dt>
    <dd>Kubernetes 네임스페이스의 이름입니다. 이 값은 필수입니다.</dd>
 
-   <dt><code><em>SERVICE_INSTANCE_GUID</em></code></dt>
-   <dd>바인드하려는 {{site.data.keyword.Bluemix_notm}} 서비스 인스턴스의 ID입니다. 이 값은 필수입니다.</dd>
+   <dt><code><em>SERVICE_INSTANCE_NAME</em></code></dt>
+   <dd>바인드하려는 {{site.data.keyword.Bluemix_notm}} 서비스 인스턴스의 이름입니다. 서비스 인스턴스의 이름을 찾으려면 <code>bx service list</code>를 실행하십시오. 계정에서 두 개 이상의 인스턴스에 동일한 이름이 있는 경우 이름 대신 서비스 인스턴스 ID를 사용하십시오. ID를 찾으려면 <code>bx service show <service instance name> --guid</code>를 실행하십시오. 이러한 값 중 하나가 필수입니다. </dd>
    </dl>
 
 **예제**:
 
   ```
-  bx cs cluster-service-bind my_cluster my_namespace my_service_instance_GUID
+  bx cs cluster-service-bind my_cluster my_namespace my_service_instance
   ```
   {: pre}
 
@@ -585,7 +1075,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
    <dd>Kubernetes 네임스페이스의 이름입니다. 이 값은 필수입니다.</dd>
 
    <dt><code><em>SERVICE_INSTANCE_GUID</em></code></dt>
-   <dd>제거하려는 {{site.data.keyword.Bluemix_notm}} 서비스 인스턴스의 ID입니다. 이 값은 필수입니다.</dd>
+   <dd>제거하려는 {{site.data.keyword.Bluemix_notm}} 서비스 인스턴스의 ID입니다. 서비스 인스턴스의 ID를 찾으려면 `bx cs cluster-services <cluster_name_or_ID>`를 실행하십시오. 이 값은 필수입니다.</dd>
    </dl>
 
 **예제**:
@@ -623,6 +1113,41 @@ kube-version: <em>&lt;kube-version&gt;</em>
   {: pre}
 
 
+### bx cs webhook-create --cluster CLUSTER --level LEVEL --type slack --URL URL
+{: #cs_webhook_create}
+
+웹훅을 등록합니다.
+
+<strong>명령 옵션</strong>:
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+
+   <dt><code>--level <em>LEVEL</em></code></dt>
+   <dd>알림 레벨(예: <code>Normal</code> 또는 <code>Warning</code>)입니다. 기본값은 <code>Warning</code>입니다. 이 값은 선택사항입니다.</dd>
+
+   <dt><code>--type <em>slack</em></code></dt>
+   <dd>웹훅 유형입니다. 현재 slack이 지원됩니다. 이 값은 필수입니다.</dd>
+
+   <dt><code>--URL <em>URL</em></code></dt>
+   <dd>웹훅의 URL입니다. 이 값은 필수입니다.</dd>
+   </dl>
+
+**예제**:
+
+  ```
+  bx cs webhook-create --cluster my_cluster --level Normal --type slack --URL http://github.com/<mywebhook>
+  ```
+  {: pre}
+
+
+<br />
+
+
+## 클러스터 명령: 서브넷
+{: #cluster_subnets_commands}
+
 ### bx cs cluster-subnet-add CLUSTER SUBNET
 {: #cs_cluster_subnet_add}
 
@@ -649,6 +1174,7 @@ IBM Cloud 인프라(SoftLayer) 계정의 서브넷을 지정된 클러스터에�
   ```
   {: pre}
 
+
 ### bx cs cluster-subnet-create CLUSTER SIZE VLAN_ID
 {: #cs_cluster_subnet_create}
 
@@ -668,7 +1194,7 @@ IBM Cloud 인프라(SoftLayer) 계정에서 서브넷을 작성하고 {{site.dat
    <dd>서브넷 IP 주소의 수입니다. 이 값은 필수입니다. 가능한 값은 8, 16, 32 또는 64입니다.</dd>
 
    <dt><code><em>VLAN_ID</em></code></dt>
-   <dd>서브넷을 작성할 VLAN입니다. 이 값은 필수입니다. VLAN을 나열하려면 `bx cs vlans <location>` [명령](#cs_vlans)을 사용하십시오.</dd>
+   <dd>서브넷을 작성할 VLAN입니다. 이 값은 필수입니다. VLAN을 나열하려면 `bx cs vlans <location>` [명령](#cs_vlans)을 사용하십시오. </dd>
    </dl>
 
 **예제**:
@@ -677,6 +1203,7 @@ IBM Cloud 인프라(SoftLayer) 계정에서 서브넷을 작성하고 {{site.dat
   bx cs cluster-subnet-create my_cluster 8 1764905
   ```
   {: pre}
+
 
 ### bx cs cluster-user-subnet-add CLUSTER SUBNET_CIDR PRIVATE_VLAN
 {: #cs_cluster_user_subnet_add}
@@ -739,60 +1266,35 @@ IBM Cloud 인프라(SoftLayer) 계정에서 서브넷을 작성하고 {{site.dat
   ```
   {: pre}
 
+### bx cs subnets
+{: #cs_subnets}
 
-### bx cs cluster-update [-f] CLUSTER [--kube-version MAJOR.MINOR.PATCH][--force-update]
-{: #cs_cluster_update}
-
-Kubernetes 마스터를 기본 API 버전으로 업데이트합니다. 업데이트 중에는 클러스터에 액세스하거나 클러스터를 변경할 수 없습니다. 사용자가 배치한 작업자 노드, 앱 및 리소스는 수정되지 않고 계속 실행됩니다.
-
-차후 배치를 위해 YAML 파일을 변경해야 할 수도 있습니다. 세부사항은 이 [릴리스 정보](cs_versions.html)를 검토하십시오.
+IBM Cloud 인프라(SoftLayer) 계정에서 사용 가능한 서브넷의 목록을 봅니다.
 
 <strong>명령 옵션</strong>:
 
-   <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
-   <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
-
-   <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
-   <dd>클러스터의 Kubernetes 버전입니다. 이 플래그를 지정하지 않으면 Kubernetes 마스터가 기본 API 버전으로 업데이트됩니다. 사용 가능한 버전을 보려면 [bx cs kube-versions](#cs_kube_versions)를 실행하십시오. 이 값은 선택사항입니다.</dd>
-
-   <dt><code>-f</code></dt>
-   <dd>사용자 프롬프트를 표시하지 않고 마스터 업데이트를 강제 실행하려면 이 옵션을 사용하십시오. 이 값은 선택사항입니다.</dd>
-
-   <dt><code>--force-update</code></dt>
-   <dd>변경 시 부 버전의 차이가 2보다 큰 경우에도 업데이트를 시도합니다. 이 값은 선택사항입니다.</dd>
-   </dl>
+   없음
 
 **예제**:
 
   ```
-  bx cs cluster-update my_cluster
+   bx cs subnets
   ```
   {: pre}
 
-### bx cs clusters
-{: #cs_clusters}
 
-조직에서 클러스터의 목록을 봅니다.
+<br />
 
-<strong>명령 옵션</strong>:
 
-  없음
-
-**예제**:
-
-  ```
-   bx cs clusters
-  ```
-  {: pre}
-
+## 인프라 명령
+{: #infrastructure_commands}
 
 ### bx cs credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME
 {: #cs_credentials_set}
 
-{{site.data.keyword.Bluemix_notm}} 계정에 대한 IBM Cloud 인프라(SoftLayer) 계정 신임 정보를 설정합니다. 이러한 신임 정보를 사용하면 {{site.data.keyword.Bluemix_notm}} 계정을 통해 IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스할 수 있습니다.
+{{site.data.keyword.containershort_notm}} 계정에 대한 IBM Cloud 인프라(SoftLayer) 계정 신임 정보를 설정합니다. 이러한 신임 정보를 사용하면 {{site.data.keyword.containershort_notm}} 계정을 통해 IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스할 수 있습니다.
 
-**참고:** 하나의 {{site.data.keyword.Bluemix_notm}} 계정에 대해 여러 신임 정보를 설정하지 마십시오. 모든 {{site.data.keyword.Bluemix_notm}} 계정이 하나의 IBM Cloud 인프라(SoftLayer) 포트폴리오에만 연결됩니다.
+**참고:** 하나의 {{site.data.keyword.containershort_notm}} 계정에 대해 여러 신임 정보를 설정하지 마십시오. 모든 {{site.data.keyword.containershort_notm}} 계정이 하나의 IBM Cloud 인프라(SoftLayer) 포트폴리오에만 연결됩니다.
 
 <strong>명령 옵션</strong>:
 
@@ -836,7 +1338,7 @@ API 키를 생성하려면 다음을 수행하십시오.
 ###   bx cs credentials-unset
 {: #cs_credentials_unset}
 
-{{site.data.keyword.Bluemix_notm}} 계정에서 IBM Cloud 인프라(SoftLayer) 계정 신임 정보를 제거합니다. 신임 정보를 제거한 후에는 {{site.data.keyword.Bluemix_notm}} 계정을 통해 IBM Cloud 인프라(SoftLayer) 포트폴리오에 더 이상 액세스할 수 없습니다.
+{{site.data.keyword.containershort_notm}} 계정에서 IBM Cloud 인프라(SoftLayer) 계정 신임 정보를 제거합니다. 신임 정보를 제거한 후에는 {{site.data.keyword.containershort_notm}} 계정을 통해 IBM Cloud 인프라(SoftLayer) 포트폴리오에 더 이상 액세스할 수 없습니다.
 
 <strong>명령 옵션</strong>:
 
@@ -850,74 +1352,56 @@ API 키를 생성하려면 다음을 수행하십시오.
   {: pre}
 
 
+###   bx cs machine-types LOCATION
+{: #cs_machine_types}
 
-###   bx cs help
-{: #cs_help}
+작업자 노드에 대해 사용 가능한 머신 유형의 목록을 봅니다. 각각의 머신 유형에는
+클러스터의 각 작업자 노드에 대한 가상 CPU, 메모리 및 디스크 공간의 양이 포함됩니다.
+- 기본적으로 호스트의 Docker 데이터는 머신 유형으로 암호화됩니다. 모든 컨테이너 데이터가 저장된 `/var/lib/docker` 디렉토리는 LUKS 암호화를 통해 암호화됩니다. 클러스터 작성 중 `disable-disk-encrypt` 옵션이 포함된 경우, 호스트의 Docker 데이터가 암호화되지 않습니다. [암호화에 대해 자세히 알아보십시오.](cs_secure.html#encrypted_disks)
+- 이름에 `u2c` 또는 `b2c`가 있는 머신 유형은 신뢰성을 위해 SAN(Storage Area Networing) 대신 로컬 디스크를 사용합니다. 신뢰성을 갖게 되면 로컬 디스크에 바이트를 직렬화하는 경우 처리량이 많아지고 네트워크 장애로 인한 파일 시스템 성능 저하를 줄일 수 있습니다. 이러한 머신 유형에는 OS 파일 시스템을 위한 25GB 기본 로컬 디스크 스토리지 및 모든 컨테이너 데이터가 기록되는 디렉토리 `/var/lib/docker`를 위한 100GB 보조 로컬 디스크 스토리지가 포함됩니다.
+- 이름에 `u1c` 또는 `b1c`가 있는 머신 유형은 더 이상 사용되지 않습니다(예: `u1c.2x4`). `u2c` 및 `b2c` 머신 유형 사용을 시작하려면 `bx cs worker-add` 명령을 사용하여 업데이트된 머신 유형의 작업자 노드를 추가하십시오. 그런 다음 `bx cs worker-rm` 명령을 사용하여 더 이상 사용되지 않는 머신 유형을 사용하는 작업자 노드를 제거하십시오.
+</p>
 
-지원되는 명령 및 매개변수의 목록을 봅니다.
-
-<strong>명령 옵션</strong>:
-
-   없음
-
-**예제**:
-
-  ```
-  bx cs help
-  ```
-  {: pre}
-
-
-### bx cs init [--host HOST]
-{: #cs_init}
-
-{{site.data.keyword.containershort_notm}} 플러그인을 초기화하거나 Kubernetes 클러스터를 작성 또는 액세스할 지역을 지정합니다.
 
 <strong>명령 옵션</strong>:
 
    <dl>
-   <dt><code>--host <em>HOST</em></code></dt>
-   <dd>사용할 {{site.data.keyword.containershort_notm}} API 엔드포인트입니다. 이 값은 선택사항입니다. [사용 가능한 API 엔드포인트 값을 보십시오.](cs_regions.html#container_regions)</dd>
-   </dl>
-
-
-
-```
-        bx cs init --host https://uk-south.containers.bluemix.net
-```
-{: pre}
-
-### bx cs kube-versions
-{: #cs_kube_versions}
-
-{{site.data.keyword.containershort_notm}}에서 지원되는 Kubernetes 버전 목록을 봅니다. [클러스터 마스터](#cs_cluster_update) 및 [작업자 노드](#cs_worker_update)를 안정적인 최신 기능을 위한 기본 버전으로 업데이트합니다.
-
-**명령 옵션**:
-
-  없음
+   <dt><code><em>LOCATION</em></code></dt>
+   <dd>사용 가능한 머신 유형을 나열하려는 위치를 입력하십시오. 이 값은 필수입니다. [사용 가능한 위치](cs_regions.html#locations)를 검토하십시오.</dd></dl>
 
 **예제**:
 
   ```
-  bx cs kube-versions
+  bx cs machine-types dal10
   ```
   {: pre}
 
-###   bx cs locations
-{: #cs_datacenters}
+### bx cs vlans LOCATION 
+{: #cs_vlans}
 
-사용자가 클러스터를 작성하기 위해 사용할 수 있는 위치의 목록을 봅니다.
+IBM Cloud 인프라(SoftLayer) 계정의 위치에 사용 가능한 퍼블릭 및 프라이빗 VLAN을 나열합니다. 사용 가능한 VLAN을 나열하려면 유료 계정이 있어야 합니다.
 
 <strong>명령 옵션</strong>:
 
-   없음
+   <dl>
+   <dt><code><em>LOCATION</em></code></dt>
+   <dd>프라이빗 및 퍼블릭 VLAN을 나열하려는 위치를 입력하십시오. 이 값은 필수입니다. [사용 가능한 위치](cs_regions.html#locations)를 검토하십시오.</dd>
+   
+   </dl>
 
 **예제**:
 
   ```
-  bx cs locations
+  bx cs vlans dal10
   ```
   {: pre}
+
+
+<br />
+
+
+## 로깅 명령
+{: #logging_commands}
 
 ### bx cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT][--space CLUSTER_SPACE] [--org CLUSTER_ORG] --type LOG_TYPE [--json]
 {: #cs_logging_create}
@@ -932,15 +1416,15 @@ API 키를 생성하려면 다음을 수행하십시오.
 <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
 <dd>로그 전달을 사용할 로그 소스입니다. 허용되는 값은 <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code> 및 <code>ingress</code>입니다. 이 값은 필수입니다.</dd>
 <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
-<dd>로그를 전달할 Docker 컨테이너 네임스페이스입니다. <code>ibm-system</code> 및 <code>kube-system</code> Kubernetes 네임스페이스의 경우 로그 전달이 지원되지 않습니다. 이 값은 컨테이너 로그 소스에 대해서만 유효하며 선택사항입니다. 네임스페이스를 지정하지 않으면 컨테이너의 모든 네임스페이스가 이 구성을 사용합니다.</dd>
+<dd>로그를 전달할 Kubernetes 네임스페이스입니다. <code>ibm-system</code> 및 <code>kube-system</code> Kubernetes 네임스페이스의 경우 로그 전달이 지원되지 않습니다. 이 값은 컨테이너 로그 소스에 대해서만 유효하며 선택사항입니다. 네임스페이스를 지정하지 않으면 컨테이너의 모든 네임스페이스가 이 구성을 사용합니다.</dd>
 <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
 <dd>로깅 유형이 <code>syslog</code>인 경우 로그 콜렉터 서버의 호스트 이름 또는 IP 주소입니다. 이 값은 <code>syslog</code>에 필수입니다. 로깅 유형이 <code>ibm</code>인 경우 {{site.data.keyword.loganalysislong_notm}} 유입 URL입니다. 사용 가능한 유입 URL 목록은 [여기](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)에서 찾을 수 있습니다. 유입 URL을 지정하지 않으면 클러스터가 작성된 지역의 엔드포인트가 사용됩니다.</dd>
 <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
 <dd>로그 콜렉터 서버의 포트입니다. 이 값은 선택사항입니다. 포트를 지정하지 않으면 표준 포트 <code>514</code>가 <code>syslog</code>에 사용되고 표준 포트 <code>9091</code>이 <code>ibm</code>에 사용됩니다.</dd>
 <dt><code>--space <em>CLUSTER_SPACE</em></code></dt>
-<dd>로그를 전송할 영역의 이름입니다. 이 값은 <code>ibm</code> 로그 유형에 대해서만 유효하며 선택사항입니다. 영역을 지정하지 않으면 로그는 계정 레벨로 전송됩니다.</dd>
+<dd>로그를 전송할 Cloud Foundry 영역의 이름입니다. 이 값은 <code>ibm</code> 로그 유형에 대해서만 유효하며 선택사항입니다. 영역을 지정하지 않으면 로그는 계정 레벨로 전송됩니다.</dd>
 <dt><code>--org <em>CLUSTER_ORG</em></code></dt>
-<dd>영역이 있는 조직의 이름입니다. 이 값은 <code>ibm</code> 로그 유형에 대해서만 유효하며, 영역을 지정한 경우 필수입니다.</dd>
+<dd>영역이 있는 Cloud Foundry 조직의 이름입니다. 이 값은 <code>ibm</code> 로그 유형에 대해서만 유효하며, 영역을 지정한 경우 필수입니다.</dd>
 <dt><code>--type <em>LOG_TYPE</em></code></dt>
 <dd>사용하려는 로그 전달 프로토콜입니다. 현재 <code>syslog</code> 및 <code>ibm</code>이 지원됩니다. 이 값은 필수입니다.</dd>
 <dt><code>--json</code></dt>
@@ -963,12 +1447,12 @@ API 키를 생성하려면 다음을 수행하십시오.
   ```
   {: pre}
 
-  기본 포트가 아닌 다른 포트에서 `ingress` 소스로부터 로그를 전달하는 로그 유형 `syslog`의 예:
+기본 포트가 아닌 다른 포트에서 `ingress` 소스로부터 로그를 전달하는 로그 유형 `syslog`의 예:
 
-    ```
+  ```
     bx cs logging-config-create my_cluster --logsource container --hostname my_hostname-or-IP --port 5514 --type syslog
-    ```
-    {: pre}
+  ```
+  {: pre}
 
 ### bx cs logging-config-get CLUSTER [--logsource LOG_SOURCE][--json]
 {: #cs_logging_get}
@@ -994,29 +1478,49 @@ API 키를 생성하려면 다음을 수행하십시오.
   {: pre}
 
 
-### bx cs logging-config-rm CLUSTER LOG_CONFIG_ID
-{: #cs_logging_rm}
+### bx cs logging-config-refresh CLUSTER
+{: #cs_logging_refresh}
 
-로그 전달 구성을 삭제합니다. 그러면 syslog 서버 또는 {{site.data.keyword.loganalysisshort_notm}}로의 로그 전달이 중지됩니다.
+클러스터의 로깅 구성을 새로 고칩니다. 이렇게 하면 클러스터의 영역 레벨에 전달되는 모든 로깅 구성의 로깅 토큰이 새로 고쳐집니다.
 
 <strong>명령 옵션</strong>:
 
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
-   <dt><code><em>LOG_CONFIG_ID</em></code></dt>
+   </dl>
+
+**예제**:
+
+  ```
+  bx cs logging-config-refresh my_cluster
+  ```
+  {: pre}
+
+
+### bx cs logging-config-rm CLUSTER --id LOG_CONFIG_ID
+{: #cs_logging_rm}
+
+로그 전달 구성을 삭제합니다. 이렇게 하면 원격 syslog 서버 또는 {{site.data.keyword.loganalysisshort_notm}}로의 로그 전달이 중지됩니다.
+
+<strong>명령 옵션</strong>:
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
+   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
    <dd>로그 소스에서 제거하려는 로깅 구성 ID입니다. 이 값은 필수입니다.</dd>
    </dl>
 
 **예제**:
 
   ```
-  bx cs logging-config-rm my_cluster f4bc77c0-ee7d-422d-aabf-a4e6b977264e
+  bx cs logging-config-rm my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e
   ```
   {: pre}
 
 
-### bx cs logging-config-update CLUSTER LOG_CONFIG_ID [--hostname LOG_SERVER_HOSTNAME_OR_IP][--port LOG_SERVER_PORT] [--space CLUSTER_SPACE][--org CLUSTER_ORG] --type LOG_TYPE [--json]
+### bx cs logging-config-update CLUSTER --id LOG_CONFIG_ID [--hostname LOG_SERVER_HOSTNAME_OR_IP][--port LOG_SERVER_PORT] [--space CLUSTER_SPACE][--org CLUSTER_ORG] --type LOG_TYPE [--json]
 {: #cs_logging_update}
 
 로그 전달 구성의 세부사항을 업데이트합니다.
@@ -1026,7 +1530,7 @@ API 키를 생성하려면 다음을 수행하십시오.
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
-   <dt><code><em>LOG_CONFIG_ID</em></code></dt>
+   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
    <dd>업데이트하려는 로깅 구성 ID입니다. 이 값은 필수입니다.</dd>
    <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
    <dd>로깅 유형이 <code>syslog</code>인 경우 로그 콜렉터 서버의 호스트 이름 또는 IP 주소입니다. 이 값은 <code>syslog</code>에 필수입니다. 로깅 유형이 <code>ibm</code>인 경우 {{site.data.keyword.loganalysislong_notm}} 유입 URL입니다. 사용 가능한 유입 URL 목록은 [여기](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)에서 찾을 수 있습니다. 유입 URL을 지정하지 않으면 클러스터가 작성된 지역의 엔드포인트가 사용됩니다.</dd>
@@ -1045,41 +1549,40 @@ API 키를 생성하려면 다음을 수행하십시오.
 **로그 유형 `ibm`**에 대한 예제:
 
   ```
-  bx cs logging-config-update my_cluster f4bc77c0-ee7d-422d-aabf-a4e6b977264e --type ibm
+  bx cs logging-config-update my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e --type ibm
   ```
   {: pre}
 
 **로그 유형 `syslog`**에 대한 예제:
 
   ```
-  bx cs logging-config-update my_cluster f4bc77c0-ee7d-422d-aabf-a4e6b977264e --hostname localhost --port 5514 --type syslog
+  bx cs logging-config-update my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e --hostname localhost --port 5514 --type syslog
   ```
   {: pre}
 
 
-###   bx cs machine-types LOCATION
-{: #cs_machine_types}
+<br />
 
-작업자 노드에 대해 사용 가능한 시스템 유형의 목록을 봅니다. 각각의 시스템 유형에는
-클러스터의 각 작업자 노드에 대한 가상 CPU, 메모리 및 디스크 공간의 양이 포함됩니다.
-- 이름에 `u2c` 또는 `b2c`가 있는 시스템 유형은 신뢰성을 위해 SAN(Storage Area Networing) 대신 로컬 디스크를 사용합니다. 신뢰성을 갖게 되면 로컬 디스크에 바이트를 직렬화하는 경우 처리량이 많아지고 네트워크 장애로 인한 파일 시스템 성능 저하를 줄일 수 있습니다. 이러한 시스템 유형에는 OS 파일 시스템을 위한 25GB 로컬 디스크 스토리지 및 모든 컨테이너 데이터가 기록되는 디렉토리 `/var/lib/docker`를 위한 100GB 로컬 디스크 스토리지가 포함됩니다.
-- 이름에 `encrypted`가 있는 시스템 유형은 호스트의 Docker 데이터를 암호화합니다. 모든 컨테이너 데이터가 저장된 `/var/lib/docker` 디렉토리는 LUKS 암호화를 통해 암호화됩니다.
-- 이름에 `u1c` 또는 `b1c`가 있는 시스템 유형은 더 이상 사용되지 않습니다(예: `u1c.2x4`). `u2c` 및 `b2c` 시스템 유형 사용을 시작하려면 `bx cs worker-add` 명령을 사용하여 업데이트된 시스템 유형의 작업자 노드를 추가하십시오. 그런 다음 `bx cs worker-rm` 명령을 사용하여 더 이상 사용되지 않는 시스템 유형을 사용하는 작업자 노드를 제거하십시오.
-</p>
 
+## 지역 명령
+{: #region_commands}
+
+###   bx cs locations
+{: #cs_datacenters}
+
+사용자가 클러스터를 작성하기 위해 사용할 수 있는 위치의 목록을 봅니다.
 
 <strong>명령 옵션</strong>:
 
-   <dl>
-   <dt><code><em>LOCATION</em></code></dt>
-   <dd>사용 가능한 시스템 유형을 나열하려는 위치를 입력하십시오. 이 값은 필수입니다. [사용 가능한 위치](cs_regions.html#locations)를 검토하십시오.</dd></dl>
+   없음
 
 **예제**:
 
   ```
-  bx cs machine-types dal10
+  bx cs locations
   ```
   {: pre}
+
 
 ### bx cs region
 {: #cs_region}
@@ -1164,71 +1667,12 @@ us-south      us-south
 ```
 {: screen}
 
-### bx cs subnets
-{: #cs_subnets}
 
-IBM Cloud 인프라(SoftLayer) 계정에서 사용 가능한 서브넷의 목록을 봅니다.
-
-<strong>명령 옵션</strong>:
-
-   없음
-
-**예제**:
-
-  ```
-   bx cs subnets
-  ```
-  {: pre}
+<br />
 
 
-### bx cs vlans LOCATION
-{: #cs_vlans}
-
-IBM Cloud 인프라(SoftLayer) 계정의 위치에 사용 가능한 퍼블릭 및 프라이빗 VLAN을 나열합니다. 사용 가능한 VLAN을 나열하려면 유료 계정이 있어야 합니다.
-
-<strong>명령 옵션</strong>:
-
-   <dl>
-   <dt><code><em>LOCATION</em></code></dt>
-   <dd>프라이빗 및 퍼블릭 VLAN을 나열하려는 위치를 입력하십시오. 이 값은 필수입니다. [사용 가능한 위치](cs_regions.html#locations)를 검토하십시오.</dd>
-   </dl>
-
-**예제**:
-
-  ```
-  bx cs vlans dal10
-  ```
-  {: pre}
-
-
-### bx cs webhook-create --cluster CLUSTER --level LEVEL --type slack --URL URL
-{: #cs_webhook_create}
-
-웹훅을 작성합니다.
-
-<strong>명령 옵션</strong>:
-
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>클러스터의 이름 또는 ID입니다. 이 값은 필수입니다.</dd>
-
-   <dt><code>--level <em>LEVEL</em></code></dt>
-   <dd>알림 레벨(예: <code>Normal</code> 또는 <code>Warning</code>)입니다. 기본값은 <code>Warning</code>입니다. 이 값은 선택사항입니다.</dd>
-
-   <dt><code>--type <em>slack</em></code></dt>
-   <dd>웹훅 유형(예: slack)입니다. slack만 지원됩니다. 이 값은 필수입니다.</dd>
-
-   <dt><code>--URL <em>URL</em></code></dt>
-   <dd>웹훅의 URL입니다. 이 값은 필수입니다.</dd>
-   </dl>
-
-**예제**:
-
-  ```
-  bx cs webhook-create --cluster my_cluster --level Normal --type slack --URL http://github.com/<mywebhook>
-  ```
-  {: pre}
-
+## 작업자 노드 명령
+{: worker_node_commands}
 
 ### bx cs worker-add --cluster CLUSTER [--file FILE_LOCATION][--hardware HARDWARE] --machine-type MACHINE_TYPE --number NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt]
 {: #cs_worker_add}
@@ -1244,7 +1688,7 @@ IBM Cloud 인프라(SoftLayer) 계정의 위치에 사용 가능한 퍼블릭 �
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
 <dd>클러스터에 작업자 노드를 추가하기 위한 YAML 파일의 경로입니다. 이 명령에 제공된 옵션을 사용하여 추가 작업자 노드를 정의하지 않고 YAML 파일을 사용할 수 있습니다. 이 값은 선택사항입니다.
 
-<p><strong>참고:</strong> 명령에서 YAML 파일의 매개변수와 동일한 옵션을 제공하면 명령의 값이 YAML의 값보다 우선합니다. 예를 들어, YAML 파일에 시스템 유형을 정의하고 명령에서 --machine-type 옵션을 사용하십시오. 명령 옵션에 입력한 값이 YAML 파일의 값을 대체합니다.
+<p><strong>참고:</strong> 명령에서 YAML 파일의 매개변수와 동일한 옵션을 제공하면 명령의 값이 YAML의 값보다 우선합니다. 예를 들어, YAML 파일에 머신 유형을 정의하고 명령에서 --machine-type 옵션을 사용하십시오. 명령 옵션에 입력한 값이 YAML 파일의 값을 대체합니다.
 
 <pre class="codeblock">
 <code>name: <em>&lt;cluster_name_or_id&gt;</em>
@@ -1272,7 +1716,7 @@ workerNum: <em>&lt;number_workers&gt;</em>
 </tr>
 <tr>
 <td><code><em>machine-type</em></code></td>
-<td><code><em>&lt;machine_type&gt;</em></code>을 작업자 노드에 사용하려는 시스템 유형으로 대체합니다. 사용자의 위치에서 사용 가능한 시스템 유형을 나열하려면 <code>bx cs machine-types <em>&lt;location&gt;</em></code>을 실행하십시오.</td>
+<td><code><em>&lt;machine_type&gt;</em></code>을 작업자 노드에 사용하려는 머신 유형으로 대체합니다. 사용자의 위치에서 사용 가능한 머신 유형을 나열하려면 <code>bx cs machine-types <em>&lt;location&gt;</em></code>을 실행하십시오.</td>
 </tr>
 <tr>
 <td><code><em>private-vlan</em></code></td>
@@ -1280,7 +1724,7 @@ workerNum: <em>&lt;number_workers&gt;</em>
 </tr>
 <tr>
 <td><code>public-vlan</code></td>
-<td><code>&lt;public_vlan&gt;</code>을 작업자 노드에 사용하려는 퍼블릭 VLAN의 ID로 대체합니다. 사용 가능한 VLAN을 나열하려면 <code>bx cs vlans &lt;location&gt;</code>을 실행하고 <code>fcr</code>(프론트 엔드 라우터)로 시작하는 VLAN 라우터를 찾으십시오.</td>
+<td><code>&lt;public_vlan&gt;</code>을 작업자 노드에 사용하려는 퍼블릭 VLAN의 ID로 대체합니다. 사용 가능한 VLAN을 나열하려면 <code>bx cs vlans &lt;location&gt;</code>을 실행하고 <code>fcr</code>(프론트 엔드 라우터)로 시작하는 VLAN 라우터를 찾으십시오. <br><strong>참고</strong>: 작업자 노드를 프라이빗 VLAN에만 연결하려고 하므로 퍼블릭 VLAN을 선택하지 않도록 결정한 경우에는 대체 솔루션을 구성해야 합니다. 자세한 정보는 [작업자 노드에 대한 VLAN 연결](cs_clusters.html#worker_vlan_connection)을 참조하십시오. </td>
 </tr>
 <tr>
 <td><code>hardware</code></td>
@@ -1299,7 +1743,7 @@ workerNum: <em>&lt;number_workers&gt;</em>
 <dd>작업자 노드에 대한 하드웨어 격리의 레벨입니다. 사용자 전용으로만 실제 리소스를 사용 가능하게 하려면 dedicated를 사용하고, 실제 리소스를 다른 IBM 고객과 공유하도록 허용하려면 shared를 사용하십시오. 기본값은 shared입니다. 이 값은 선택사항입니다.</dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>선택하는 시스템 유형은 작업자 노드에 배치된 컨테이너가 사용할 수 있는 메모리와 디스크 공간의 양에 영향을 줍니다. 이 값은 필수입니다. 사용 가능한 시스템 유형을 나열하려면 [bx cs machine-types LOCATION](#cs_machine_types)을 참조하십시오.</dd>
+<dd>선택하는 머신 유형은 작업자 노드에 배치된 컨테이너가 사용할 수 있는 메모리와 디스크 공간의 양에 영향을 줍니다. 이 값은 필수입니다. 사용 가능한 머신 유형을 나열하려면 [bx cs machine-types LOCATION](#cs_machine_types)을 참조하십시오.</dd>
 
 <dt><code>--number <em>NUMBER</em></code></dt>
 <dd>클러스터에서 작성할 작업자 노드의 수를 표시하는 정수입니다. 기본값은 1입니다. 이 값은 선택사항입니다.</dd>
@@ -1312,7 +1756,7 @@ workerNum: <em>&lt;number_workers&gt;</em>
 일치해야 합니다. 클러스터를 작성하기 위해 일치하지 않는 퍼블릭 및 프라이빗 VLAN을 사용하지 마십시오.</p></dd>
 
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
-<dd>클러스터가 작성될 때 지정된 퍼블릭 VLAN입니다. 이 값은 선택사항입니다.
+<dd>클러스터가 작성될 때 지정된 퍼블릭 VLAN입니다. 이 값은 선택사항입니다. 작업자 노드가 프라이빗 VLAN에만 존재하도록 하려는 경우 퍼블릭 VLAN ID를 제공하지 마십시오. <strong>참고</strong>: 퍼블릭 VLAN을 선택하지 않도록 결정한 경우에는 대체 솔루션을 구성해야 합니다. 자세한 정보는 [작업자 노드에 대한 VLAN 연결](cs_clusters.html#worker_vlan_connection)을 참조하십시오.
 
 <p><strong>참고:</strong> 지정하는 퍼블릭 및 프라이빗 VLAN이 일치해야 합니다. 프라이빗 VLAN 라우터는 항상 <code>bcr</code>(벡엔드 라우터)로 시작하고 퍼블릭 VLAN 라우터는 항상
 <code>fcr</code>(프론트 엔드 라우터)로 시작합니다. 클러스터 작성 시 해당 VLAN을 사용하려면 해당 접두부 뒤의 숫자와 문자 조합이
@@ -1445,7 +1889,7 @@ workerNum: <em>&lt;number_workers&gt;</em>
 ### bx cs worker-update [-f] CLUSTER WORKER [WORKER][--kube-version MAJOR.MINOR.PATCH] [--force-update]
 {: #cs_worker_update}
 
-작업자 노드를 최신 Kubernetes 버전으로 업데이트합니다. `bx cs worker-update`를 실행하면 앱과 서비스의 가동이 중단될 수 있습니다. 업데이트 중에 모든 포드가 다른 작업자 노드로 재스케줄되고 포드 외부에 저장되지 않은 경우 데이터가 삭제됩니다. 가동 중단을 방지하려면 선택한 작업자 노드가 업데이트되는 동안 워크로드를 처리하기에 충분한 작업자 노드가 있는지 확인하십시오.
+작업자 노드를 최신 Kubernetes 버전으로 업데이트합니다. `bx cs worker-update`를 실행하면 앱과 서비스의 가동이 중단될 수 있습니다. 업데이트 중에 모든 포드가 다른 작업자 노드로 재스케줄되고 포드 외부에 저장되지 않은 경우 데이터가 삭제됩니다. 가동 중단을 방지하려면 [선택한 작업자 노드가 업데이트되는 동안 워크로드를 처리하기에 충분한 작업자 노드가 있는지 확인](cs_cluster_update.html#worker_node)하십시오.
 
 업데이트하기 전에 배치를 위해 YAML 파일을 변경해야 할 수도 있습니다. 세부사항은 이 [릴리스 정보](cs_versions.html)를 검토하십시오.
 
@@ -1494,6 +1938,3 @@ workerNum: <em>&lt;number_workers&gt;</em>
   bx cs workers mycluster
   ```
   {: pre}
-
-<br />
-

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-02"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -19,13 +19,18 @@ lastupdated: "2018-02-02"
 # 更新叢集和工作者節點
 {: #update}
 
+您可以安裝更新，讓 Kubernetes 叢集在 {{site.data.keyword.containerlong}} 中保持最新。
+{:shortdesc}
+
 ## 更新 Kubernetes 主節點
 {: #master}
 
-Kubernetes 會定期發表更新。這可能是[主要、次要或修補程式更新](cs_versions.html#version_types)。視更新的類型而定，您可能要負責更新您的 Kubernetes 主節點。您一律要負責將工作者節點保持為最新。在更新時，Kubernetes 主節點會比工作者節點先更新。
+Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.html#version_types)。視更新類型而定，您可能要負責更新 Kubernetes 主要元件。
 {:shortdesc}
 
-依預設，我們將您限制為不能將 Kibernetes 主節點更新超過您的現行版本兩個次要版本。例如，如果您的現行主節點是 1.5 版，而您要更新至 1.8，則必須先更新至 1.7。您可以強制發生更新，但更新超過兩個次要版本可能會造成非預期的結果。
+更新會影響 Kubernetes API 伺服器版本或 Kubernetes 主節點的其他元件。您一律要負責將工作者節點保持為最新。進行更新時，Kubernetes 主節點會在工作者節點之前先更新。
+
+依預設，Kubernetes 主節點限制了更新 Kubernetes API 伺服器的能力，其限制為不超過現行版本兩個次要版本。例如，如果現行 Kubernetes API 伺服器版本是 1.5，而您要更新至 1.8，則必須先更新至 1.7。您可以強制發生更新，但更新超過兩個次要版本可能會造成非預期的結果。如果您的叢集是執行不受支援的 Kubernetes 版本，則可能需要強制更新。
 
 下圖顯示您可以採取來更新主節點的處理程序。
 
@@ -38,10 +43,11 @@ Kubernetes 會定期發表更新。這可能是[主要、次要或修補程式�
 對於_主要_ 或_次要_ 更新，請完成下列步驟：
 
 1. 檢閱 [Kubernetes 變更](cs_versions.html)，並更新標示為_在主節點之前更新_ 的任何項目。
-2. 使用 GUI 或執行 [CLI 指令](cs_cli_reference.html#cs_cluster_update)來更新 Kubernetes 主節點。當您更新 Kubernetes 主節點時，主節點會關閉大約 5 - 10 分鐘。在更新期間，您無法存取或變更叢集。不過，叢集使用者部署的工作者節點、應用程式和資源不會修改，並將繼續執行。
-3. 確認更新已完成。在 {{site.data.keyword.Bluemix_notm}} 儀表板上檢閱 Kubernetes 版本，或執行 `bx cs clusters`。
+2. 使用 GUI 或執行 [CLI 指令](cs_cli_reference.html#cs_cluster_update)，來更新 Kubernetes API 伺服器及關聯的 Kubernetes 主節點元件。當您更新 Kubernetes API 伺服器時，API 伺服器會關閉大約 5-10 分鐘。在更新期間，您無法存取或變更叢集。不過，叢集使用者部署的工作者節點、應用程式和資源不會修改，並將繼續執行。
+3. 確認更新已完成。請檢閱 {{site.data.keyword.Bluemix_notm}} 儀表板上的 Kubernetes API 伺服器版本，或執行 `bx cs clusters`。
+4. 安裝符合在 Kubernetes 主節點中執行的 Kubernetes API 伺服器版本的 [`kibectl cli`](cs_cli_install.html#kubectl) 版本。
 
-當 Kubernetes 主節點更新完成時，您可以更新工作者節點。
+當 Kubernetes API 伺服器更新完成時，您可以更新工作者節點。
 
 <br />
 
@@ -49,8 +55,10 @@ Kubernetes 會定期發表更新。這可能是[主要、次要或修補程式�
 ## 更新工作者節點
 {: #worker_node}
 
-您收到了更新工作者節點的通知。這代表什麼意思？您的資料儲存在工作者節點內的 Pod 裡。Kubernetes 主節點的安全更新和修補程式就緒之後，您需要確定您的工作者節點保持同步。工作者節點主節點不得高過 Kubernetes 主節點。
+您收到更新工作者節點的通知。這代表什麼意思？當 Kubernetes API 伺服器及其他 Kubernetes 主節點元件的安全更新和修補程式就緒之後，您需要確定工作者節點保持同步。
 {: shortdesc}
+
+工作者節點 Kubernetes 版本不得高於在 Kubernetes 主節點中執行的 Kubernetes API 伺服器版本。開始之前，請[更新 Kubernetes 主節點](#master)。
 
 <ul>**注意**：</br>
 <li>更新工作者節點可能會導致應用程式及服務關閉。</li>
@@ -75,11 +83,9 @@ Kubernetes 會定期發表更新。這可能是[主要、次要或修補程式�
 
 若要更新您的工作者節點，請執行下列動作：
 
-1. 安裝符合 Kubernetes 主節點之 Kubernetes 版本的 [`kibectl cli` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 版本。
+1. 進行 [Kubernetes 變更](cs_versions.html)中標示為_在主節點之後更新_ 的任何變更。
 
-2. 進行 [Kubernetes 變更](cs_versions.html)中標示為_在主節點之後更新_ 的任何變更。
-
-3. 選用項目：定義您的配置對映。
+2. 選用項目：定義您的配置對映。
     範例：
 
     ```
@@ -110,7 +116,7 @@ Kubernetes 會定期發表更新。這可能是[主要、次要或修補程式�
     {:pre}
   <table summary="表格中的第一列跨這兩個直欄。其餘的列應該從左到右閱讀，第一欄為參數，第二欄則為符合的說明。">
     <thead>
-      <th colspan=2><img src="images/idea.png"/> 瞭解元件</th>
+      <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解元件</th>
     </thead>
     <tbody>
       <tr>
@@ -162,5 +168,51 @@ Kubernetes 會定期發表更新。這可能是[主要、次要或修補程式�
   - 對其他叢集重複更新程序。
   - 通知在叢集內工作的開發人員，將 `kubectl` CLI 更新至 Kubernetes 主節點的版本。
   - 如果 Kubernetes 儀表板未顯示使用率圖形，則會[刪除 `kudbe-dashboard` Pod](cs_troubleshoot.html#cs_dashboard_graphs)。
+
+
 <br />
+
+
+
+## 更新機型
+{: #machine_type}
+
+您可以藉由新增工作者節點及移除舊的工作者節點，來更新工作者節點中使用的機型。例如，假設您在專用的機型上有虛擬工作者節點，且機型的名稱中有 `u1c` 或 `b1c`，請建立使用名稱中有 `u2c` 或 `b2c` 的機型的工作者節點。
+{: shortdesc}
+
+1. 記下要更新的工作者節點的名稱及位置。
+    ```
+    bx cs workers <cluster_name>
+    ```
+    {: pre}
+
+2. 檢視可用的機型。
+    ```
+        bx cs machine-types <location>
+        ```
+    {: pre}
+
+3. 使用 [bx cs worker-add](cs_cli_reference.html#cs_worker_add) 指令新增工作者節點，並指定前一個指令的輸出中列出的其中一個機型。
+
+    ```
+    bx cs worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_vlan> --public-vlan <public_vlan>
+    ```
+    {: pre}
+
+4. 驗證已新增工作者節點。
+
+    ```
+    bx cs workers <cluster_name>
+    ```
+    {: pre}
+
+5. 當新增的工作者節點處於 `Normal` 狀態時，您可以移除過期的工作者節點。**附註**：如果您要移除按月計費的機型（例如裸機），則會向您收取整個月的費用。
+
+    ```
+    bx cs worker-rm <cluster_name> <worker_node>
+    ```
+    {: pre}
+
+6. 重複這些步驟，將其他工作者節點升級至不同機型。
+
 

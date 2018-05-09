@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-02"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -19,13 +19,18 @@ lastupdated: "2018-02-02"
 # Atualizando clusters e nós do trabalhador
 {: #update}
 
+É possível instalar atualizações para manter seus clusters do Kubernetes atualizados no {{site.data.keyword.containerlong}}.
+{:shortdesc}
+
 ## Atualizando o mestre do Kubernetes
 {: #master}
 
-Periodicamente, o Kubernetes libera atualizações. Isso pode ser uma [atualização principal, menor ou de correção](cs_versions.html#version_types). Dependendo do tipo de atualização, você pode ser responsável por atualizar seu mestre do Kubernetes. Você é sempre responsável por manter seus nós do trabalhador atualizados. Ao fazer atualizações, o mestre do Kubernetes é atualizado antes de seus nós do trabalhador.
+Periodicamente, o Kubernetes libera [atualizações principais, secundárias ou de correção](cs_versions.html#version_types). Dependendo do tipo de atualização, você pode ser responsável por atualizar os componentes do mestre do Kubernetes.
 {:shortdesc}
 
-Por padrão, limitamos a sua capacidade para atualizar um mestre do Kubernetes para mais de duas versões secundárias à frente de sua versão atual. Por exemplo, se o seu mestre atual é a versão 1.5 e você deseja atualizar para 1.8, deve-se primeiro atualizar para 1.7. É possível forçar a ocorrência da atualização, mas atualizar mais de duas versões secundárias pode causar resultados inesperados.
+As atualizações podem afetar a versão do servidor da API do Kubernetes ou outros componentes em seu mestre do Kubernetes.  Você é sempre responsável por manter seus nós do trabalhador atualizados. Ao fazer atualizações, o mestre do Kubernetes é atualizado antes dos nós do trabalhador.
+
+Por padrão, sua capacidade de atualizar o servidor da API do Kubernetes é limitada em seu mestre do Kubernetes para mais de duas versões secundárias à frente de sua versão atual. Por exemplo, se a sua versão atual do servidor da API do Kubernetes é 1.5 e você deseja atualizar para 1.8, deve-se primeiro atualizar para 1.7. É possível forçar a ocorrência da atualização, mas atualizar mais de duas versões secundárias pode causar resultados inesperados. Se o seu cluster está executando uma versão do Kubernetes não suportada, você pode ter que forçar a atualização.
 
 O diagrama a seguir mostra o processo que você pode usar para atualizar seu mestre.
 
@@ -38,10 +43,11 @@ Figura 1. Atualizando o diagrama do processo de mestre do Kubernetes
 Para atualizações _principal_ ou _menor_, conclua as etapas a seguir:
 
 1. Revise as [mudanças do Kubernetes](cs_versions.html) e faça as atualizações marcadas como _Atualizar antes do mestre_.
-2. Atualize seu mestre do Kubernetes usando a GUI ou executando o [comando da CLI](cs_cli_reference.html#cs_cluster_update). Ao atualizar o mestre do Kubernetes, o mestre estará inativo por cerca de 5 a 10 minutos. Durante a atualização, não é possível acessar nem mudar o cluster. No entanto, os nós do trabalhador, apps e recursos que os usuários do cluster implementaram não serão modificados e continuarão a executar.
-3. Confirme que a atualização foi concluída. Revise a versão do Kubernetes no Painel do {{site.data.keyword.Bluemix_notm}} ou execute `bx cs clusters`.
+2. Atualize o seu servidor da API do Kubernetes e os componentes do mestre do Kubernetes associados usando a GUI ou executando o [comando da CLI](cs_cli_reference.html#cs_cluster_update). Quando você atualiza o servidor da API do Kubernetes, o servidor da API fica inativo por cerca de 5 a 10 minutos. Durante a atualização, não é possível acessar nem mudar o cluster. No entanto, os nós do trabalhador, apps e recursos que os usuários do cluster implementaram não serão modificados e continuarão a executar.
+3. Confirme que a atualização foi concluída. Revise a versão do servidor da API do Kubernetes no Painel do {{site.data.keyword.Bluemix_notm}} ou execute `bx cs clusters`.
+4. Instale a versão do [`kubectl cli`](cs_cli_install.html#kubectl) que corresponde à versão do servidor da API do Kubernetes que é executada no mestre do Kubernetes.
 
-Quando a atualização do mestre do Kubernetes for concluída, será possível atualizar seus nós do trabalhador.
+Quando a atualização do servidor da API do Kubernetes for concluída, será possível atualizar seus nós do trabalhador.
 
 <br />
 
@@ -49,8 +55,10 @@ Quando a atualização do mestre do Kubernetes for concluída, será possível a
 ## Atualizando nós do trabalhador
 {: #worker_node}
 
-Então, você recebeu uma notificação para atualizar seus nós do trabalhador. O que isso significa? Os seus dados são armazenados dentro dos pods em seus nós do trabalhador. Conforme as atualizações de segurança e as correções são colocadas no local para o mestre do Kubernetes, você precisa ter certeza de que seus nós do trabalhador permanecem em sincronização. O mestre do nó do trabalhador não pode ser maior que o mestre do Kubernetes.
+Você recebeu uma notificação para atualizar seus nós do trabalhador. O que isso significa? Conforme as atualizações de segurança e as correções são colocadas no local para o servidor da API do Kubernetes e outros componentes do mestre do Kubernetes, deve-se ter certeza de que os nós do trabalhador permanecem em sincronização.
 {: shortdesc}
+
+A versão do Kubernetes do nó do trabalhador não pode ser maior que a versão do servidor da API do Kubernetes que é executada em seu mestre do Kubernetes. Antes de iniciar, [atualize o mestre do Kubernetes](#master).
 
 <ul>**Atenção**:</br>
 <li>As atualizações para os nós do trabalhador podem causar tempo de inatividade para seus apps e serviços.</li>
@@ -75,11 +83,9 @@ Quando o mapa de configuração não está definido, o padrão é usado. Por pad
 
 Para atualizar seus nós do trabalhador:
 
-1. Instale a versão do [`kubectl cli` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/tools/install-kubectl/) que corresponde à versão do Kubernetes do mestre do Kubernetes.
+1. Faça quaisquer mudanças que estejam marcadas como _Atualizar após o mestre_ em [Mudanças do Kubernetes](cs_versions.html).
 
-2. Faça quaisquer mudanças que estejam marcadas como _Atualizar após o mestre_ em [Mudanças do Kubernetes](cs_versions.html).
-
-3. Opcional: defina seu mapa de configuração.
+2. Opcional: defina seu mapa de configuração.
     Exemplo:
 
     ```
@@ -110,7 +116,7 @@ Para atualizar seus nós do trabalhador:
     {:pre}
   <table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o parâmetro na coluna um e a descrição que corresponde na coluna dois.">
     <thead>
-      <th colspan=2><img src="images/idea.png"/> Entendendo os componentes </th>
+      <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> Entendendo os componentes </th>
     </thead>
     <tbody>
       <tr>
@@ -162,5 +168,51 @@ Próximas etapas:
   - Repita o processo de atualização com outros clusters.
   - Informe aos desenvolvedores que trabalham no cluster para atualizar sua CLI `kubectl` para a versão do mestre do Kubernetes.
   - Se o painel do Kubernetes não exibir gráficos de utilização, [exclua o pod `kube-dashboard`](cs_troubleshoot.html#cs_dashboard_graphs).
+
+
 <br />
+
+
+
+## Atualizando tipos de máquina
+{: #machine_type}
+
+É possível atualizar os tipos de máquina que são usados em nós do trabalhador, incluindo novos nós do trabalhador e removendo os antigos. Por exemplo, se você têm nós do trabalhador virtual em tipos de máquina descontinuada com `u1c` ou `b1c` nos nomes, crie nós do trabalhador que usam tipos de máquina com `u2c` ou `b2c` nos nomes.
+{: shortdesc}
+
+1. Anote os nomes e locais dos nós do trabalhador para atualizar.
+    ```
+    bx cs workers <cluster_name>
+    ```
+    {: pre}
+
+2. Visualize os tipos de máquina disponíveis.
+    ```
+    bx cs machine-types <location>
+    ```
+    {: pre}
+
+3. Inclua um nó do trabalhador usando o comando [bx cs worker-add](cs_cli_reference.html#cs_worker_add) e especifique um dos tipos de máquina listados na saída do comando anterior.
+
+    ```
+    bx cs worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_vlan> --public-vlan <public_vlan>
+    ```
+    {: pre}
+
+4. Verifique se o nó do trabalhador foi incluído.
+
+    ```
+    bx cs workers <cluster_name>
+    ```
+    {: pre}
+
+5. Quando o nó do trabalhador incluído está no estado `Normal`, é possível remover o nó do trabalhador desatualizado. **Nota**: se estiver removendo um tipo de máquina que seja faturado mensalmente (como bare metal), você será cobrado pelo mês inteiro.
+
+    ```
+    bx cs worker-rm <cluster_name> <worker_node>
+    ```
+    {: pre}
+
+6. Repita essas etapas para atualizar outros nós do trabalhador para tipos de máquina diferentes.
+
 

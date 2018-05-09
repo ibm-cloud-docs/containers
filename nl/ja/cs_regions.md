@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-03-13"
 
 ---
 
@@ -16,14 +16,14 @@ lastupdated: "2018-01-24"
 {:download: .download}
 
 # 地域とロケーション
-{{site.data.keyword.Bluemix}} は、世界中でホストされています。 地域とは、エンドポイントによってアクセスされる地理的領域のことです。 ロケーションとは、地域内のデータ・センターのことです。 {{site.data.keyword.Bluemix_notm}} 内のサービスは、グローバルに使用できるものもありますし、特定の地域内で使用できるものもあります。
+{{site.data.keyword.Bluemix}} は、世界中でホストされています。 地域とは、エンドポイントによってアクセスされる地理的領域のことです。 ロケーションとは、地域内のデータ・センターのことです。 {{site.data.keyword.Bluemix_notm}} 内のサービスは、グローバルに使用できるものもありますし、特定の地域内で使用できるものもあります。 {{site.data.keyword.containerlong}} で Kubernetes クラスターを作成すると、そのリソースは、クラスターをデプロイした地域に残ります。
 {:shortdesc}
 
 [{{site.data.keyword.Bluemix_notm}} 地域](#bluemix_regions)は [{{site.data.keyword.containershort_notm}} 地域](#container_regions)とは異なります。
 
-![{{site.data.keyword.containershort_notm}} 地域とデータ・センター](images/regions.png)
+![{{site.data.keyword.containershort_notm}} 地域とデータ・センター](/images/regions.png)
 
-図 1. {{site.data.keyword.containershort_notm}} 地域とデータ・センター
+図. {{site.data.keyword.containershort_notm}} 地域とデータ・センター
 
 サポートされる {{site.data.keyword.containershort_notm}} 地域は次のとおりです。
   * 北アジア太平洋地域
@@ -32,7 +32,6 @@ lastupdated: "2018-01-24"
   * 英国南部
   * 米国東部
   * 米国南部
-
 
 
 
@@ -93,6 +92,9 @@ lastupdated: "2018-01-24"
 ### 別のコンテナー・サービス地域へのログイン
 {: #container_login_endpoints}
 
+{{site.data.keyword.containershort_notm}} CLI を使用して、ロケーションを変更できます。
+{:shortdesc}
+
 以下の理由で、別の {{site.data.keyword.containershort_notm}} 地域にログインしたい場合があります。
   * ある地域で作成した {{site.data.keyword.Bluemix_notm}} サービスまたはプライベート Docker イメージを、別の地域の {{site.data.keyword.containershort_notm}} で使用したい。
   * ログインしているデフォルトの {{site.data.keyword.Bluemix_notm}} 地域とは別の地域のクラスターにアクセスしたい。
@@ -101,26 +103,11 @@ lastupdated: "2018-01-24"
 
 地域をすぐに切り替えるには、`bx cs region-set` を実行します。
 
-### コンテナー・サービスを使用できるロケーション
-{: #locations}
-
-ロケーションとは、地域内で使用できるデータ・センターのことです。
-
-  | 地域 | ロケーション | 市区町村 |
-  |--------|----------|------|
-  | 北アジア太平洋地域 | hkg02、seo01、sng01、tok02 | 香港、ソウル、シンガポール、東京 |
-  | 南アジア太平洋地域     | mel01、syd01、syd04        | メルボルン、シドニー |
-  | 中欧     | ams03、fra02、mil01、par01        | アムステルダム、フランクフルト、ミラノ、パリ |
-  | 英国南部      | lon02、lon04         | London (ロンドン) |
-  | 米国東部      | mon01、tor01、wdc06、wdc07        | モントリオール、トロント、ワシントン DC |
-  | 米国南部     | dal10、dal12、dal13、sao01       | ダラス、サンパウロ |
-
-**注**: ミラノ (mil01) はフリー・クラスター専用です。
-
 ### コンテナー・サービスの API コマンドの使用
-{: #container_api}
+{: #containers_api}
 
 {{site.data.keyword.containershort_notm}} API と対話するには、コマンド・タイプを入力し、グローバルなエンドポイントに `/v1/command` を追加します。
+{:shortdesc}
 
 `GET /clusters` API の例を示します。
   ```
@@ -134,3 +121,30 @@ lastupdated: "2018-01-24"
 {: tip}
 
 API コマンドの資料を参照するには、[https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/) を表示してください。
+
+## {{site.data.keyword.containershort_notm}} で使用可能なロケーション
+{: #locations}
+
+ロケーションとは、各 {{site.data.keyword.Bluemix_notm}} 地域で使用できる物理データ・センターのことです。地域は、ロケーションを編成するための概念的なツールであり、さまざまな国のロケーション (データ・センター) を含めることができます。以下の表に、地域別に使用可能なロケーションを示します。
+{:shortdesc}
+
+| 地域 | ロケーション | 市区町村 |
+|--------|----------|------|
+| 北アジア太平洋地域 | hkg02、seo01、sng01、tok02 | 香港、ソウル、シンガポール、東京 |
+| 南アジア太平洋地域     | mel01、syd01、syd04        | メルボルン、シドニー |
+| 中欧     | ams03、fra02、par01        | アムステルダム、フランクフルト、パリ |
+| 英国南部      | lon02、lon04         | London (ロンドン) |
+| 米国東部      | mon01、tor01、wdc06、wdc07        | モントリオール、トロント、ワシントン DC |
+| 米国南部     | dal10、dal12、dal13、sao01       | ダラス、サンパウロ |
+
+クラスターのリソースは、クラスターがデプロイされたロケーション (データ・センター) に残ります。以下の図は、米国東部の地域の例におけるクラスターの関係を強調しています。
+
+1.  クラスターのリソース (マスター・ノードやワーカー・ノードなど) は、クラスターをデプロイした同じロケーションにあります。ローカル・コンテナーのオーケストレーション・アクション (`kubectl` コマンドなど) を開始すると、同じロケーション内のマスター・ノードとワーカー・ノードの間で情報が交換されます。
+
+2.  他のクラスター・リソース (ストレージ、ネットワーキング、コンピュート、ポッドで実行されているアプリなど) をセットアップした場合、リソースとそのデータは、クラスターをデプロイしたロケーションに残ります。
+
+3.  クラスターの管理アクション (`bx cs` コマンドを使用するなど) を開始すると、クラスターに関する基本情報 (名前、ID、ユーザー、コマンドなど) は、地域のエンドポイントにルーティングされます。
+
+![クラスター・リソースが存在する場所について理解する](/images/region-cluster-resources.png)
+
+図. クラスター・リソースが存在する場所について理解する。

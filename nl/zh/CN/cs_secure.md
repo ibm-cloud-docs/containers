@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-29"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -18,14 +18,17 @@ lastupdated: "2018-01-29"
 # {{site.data.keyword.containerlong_notm}}的安全性
 {: #security}
 
-您可以使用内置安全性功能来进行风险分析和安全保护。这些功能有助于保护集群基础架构和网络通信，隔离计算资源，以及确保基础架构组件和容器部署中的安全合规性。
+您可以使用 {{site.data.keyword.containerlong}} 中的内置安全功能来进行风险分析和安全保护。这些功能有助于保护 Kubernetes 集群基础架构和网络通信，隔离计算资源，以及确保基础架构组件和容器部署中的安全合规性。
 {: shortdesc}
 
 ## 集群组件的安全性
 {: #cluster}
 
-每个 {{site.data.keyword.containerlong_notm}} 集群都有内置到其[主](#master)节点和[工作程序](#worker)节点的安全功能。如果您有防火墙，需要从集群外部访问负载均衡，或者想要在企业网络策略阻止访问公用因特网端点时，从本地系统运行 `kubectl` 命令，那么可[在防火墙中打开端口](cs_firewall.html#firewall)。如果要将集群中的应用程序连接到内部部署网络或连接到集群外部的其他应用程序，请[设置 VPN 连接](cs_vpn.html#vpn)。
+每个 {{site.data.keyword.containerlong_notm}} 集群都有内置到其[主](#master)节点和[工作程序](#worker)节点的安全功能。
 {: shortdesc}
+
+如果您有防火墙，需要从集群外部访问负载均衡，或者想要在企业网络策略阻止访问公用因特网端点时，从本地系统运行 `kubectl` 命令，那么可[在防火墙中打开端口](cs_firewall.html#firewall)。如果要将集群中的应用程序连接到内部部署网络或连接到集群外部的其他应用程序，请[设置 VPN 连接](cs_vpn.html#vpn)。
+
 
 在下图中，可以看到按 Kubernetes 主节点、工作程序节点和容器映像分组的安全功能。
 
@@ -65,7 +68,7 @@ lastupdated: "2018-01-29"
 
 <dl>
   <dt>全面管理的专用 Kubernetes 主节点</dt>
-    <dd>{{site.data.keyword.containershort_notm}} 中的每个 Kubernetes 集群都由 IBM 拥有的 IBM Cloud Infrastructure(SoftLayer) 帐户中 IBM 管理的专用 Kubernetes 主节点进行控制。Kubernetes 主节点设置有以下专用组件，这些组件不与其他 IBM 客户共享。<ul><li>etcd 数据存储器：存储集群的所有 Kubernetes 资源，例如服务、部署和 pod。Kubernetes ConfigMaps 和 Secrets 是存储为键/值对的应用程序数据，可由 pod 中运行的应用程序使用。etcd 中的数据存储在加密磁盘上，该磁盘由 IBM 管理，并在发送到 pod 时通过 TLS 加密，以确保数据保护和数据完整性。</li>
+    <dd>{{site.data.keyword.containershort_notm}} 中的每个 Kubernetes 集群都由 IBM 拥有的 IBM Cloud Infrastructure(SoftLayer) 帐户中 IBM 管理的专用 Kubernetes 主节点进行控制。Kubernetes 主节点设置有以下专用组件，这些组件不与其他 IBM 客户共享。<ul><li>etcd 数据存储器：存储集群的所有 Kubernetes 资源，例如服务、部署和 pod。Kubernetes ConfigMaps 和 Secrets 是存储为键/值对的应用程序数据，可由 pod 中运行的应用程序使用。etcd 中的数据存储在由 IBM 管理并每天备份的加密磁盘上。发送到 pod 时，数据会通过 TLS 加密以确保数据保护和完整性。</li>
     <li>kube-apiserver：充当从工作程序节点到 Kubernetes 主节点的所有请求的主入口点。kube-apiserver 会验证并处理请求，并可以对 etcd 数据存储器执行读写操作。</li>
     <li>kube-scheduler：决定 pod 的部署位置，同时考虑容量和性能需求、软硬件策略约束、反亲缘关系规范和工作负载需求。如果找不到与这些需求相匹配的工作程序节点，那么不会在集群中部署 pod。</li>
     <li>kube-controller-manager：负责监视副本集，并创建相应的 pod 以实现所需状态。</li>
@@ -77,7 +80,7 @@ lastupdated: "2018-01-29"
   <dt>持续监视 Kubernetes 主节点网络</dt>
     <dd>每个 Kubernetes 主节点都由 IBM 持续监视，以控制进程级别的拒绝服务 (DOS) 攻击，并采取相应的补救措施。</dd>
   <dt>Kubernetes 主节点安全合规性</dt>
-    <dd>{{site.data.keyword.containershort_notm}} 会自动扫描部署了 Kubernetes 主节点的每个节点，以确定是否有 Kubernetes 中找到的漏洞，以及为确保保护主节点而需要应用的特定于操作系统的安全修订。如果找到了漏洞，{{site.data.keyword.containershort_notm}} 会自动代表用户应用修订并解决漏洞。</dd>
+    <dd>{{site.data.keyword.containershort_notm}} 会自动扫描部署了 Kubernetes 主节点的每个节点，以确定是否有在 Kubernetes 中找到的漏洞，以及为确保保护主节点而需要应用的特定于操作系统的安全修订。如果找到了漏洞，{{site.data.keyword.containershort_notm}} 会自动代表用户应用修订并解决漏洞。</dd>
 </dl>
 
 <br />
@@ -95,10 +98,17 @@ lastupdated: "2018-01-29"
   <dt>计算、网络和存储基础架构隔离</dt>
     <dd>创建集群时，IBM 会使用 IBM Cloud infrastructure (SoftLayer) 产品服务组合将工作程序节点作为虚拟机进行供应。工作程序节点专用于一个集群，而不托管其他集群的工作负载。<p> 每个 {{site.data.keyword.Bluemix_notm}} 帐户都设置有 IBM Cloud infrastructure (SoftLayer) VLAN，以确保工作程序节点上的高质量网络性能和隔离。您还可以通过将工作程序节点仅连接到专用 VLAN 来将其指定为专用。</p> <p>要在集群中持久存储数据，可以从 IBM Cloud infrastructure (SoftLayer) 供应基于 NFS 的专用文件存储器，并利用该平台的内置数据安全功能。</p></dd>
   <dt>安全的工作程序节点设置</dt>
-    <dd>每个工作程序节点都由 Ubuntu 操作系统进行设置，工作程序节点所有者无法对其进行更改。为保护工作程序节点的操作系统免受潜在攻击，每个工作程序节点都使用 Linux iptable 规则强制实施的专家防火墙设置进行配置。<p> 在 Kubernetes 上运行的所有容器都通过集群创建期间在每个工作程序节点上配置的预定义 Calico 网络策略设置进行保护。此设置将确保工作程序节点与 pod 之间的安全网络通信。要进一步限制容器可以在标准集群中的工作程序节点上执行的操作，用户可以选择在工作程序节点上配置 [AppArmor 策略 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tutorials/clusters/apparmor/)。</p><p> 工作程序节点上禁用了 SSH 访问权。如果您有标准集群并且要在工作程序节点上安装其他功能，那么可以对要在每个工作程序节点上运行的所有对象使用 [Kubernetes 守护程序集 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset)，或者对您必须执行的任何一次性操作使用 [Kubernetes 作业 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/)。</p></dd>
+    <dd>每个工作程序节点都由 Ubuntu 操作系统进行设置，工作程序节点所有者无法对其进行更改。由于工作程序节点的操作系统是 Ubuntu，因此部署到工作程序节点的所有容器都必须使用采用 Ubuntu 内核的 Linux 分发版。不能使用必须以其他方式与内核进行对话的 Linux 分发版。为保护工作程序节点的操作系统免受潜在攻击，每个工作程序节点都使用 Linux iptable 规则强制实施的专家防火墙设置进行配置。<p> 在 Kubernetes 上运行的所有容器都通过集群创建期间在每个工作程序节点上配置的预定义 Calico 网络策略设置进行保护。此设置将确保工作程序节点与 pod 之间的安全网络通信。要进一步限制容器可以在标准集群中的工作程序节点上执行的操作，用户可以选择在工作程序节点上配置 [AppArmor 策略 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tutorials/clusters/apparmor/)。</p><p> 工作程序节点上禁用了 SSH 访问权。如果您有标准集群并且要在工作程序节点上安装其他功能，那么可以对要在每个工作程序节点上运行的所有对象使用 [Kubernetes 守护程序集 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset)，或者对您必须执行的任何一次性操作使用 [Kubernetes 作业 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/)。</p></dd>
   <dt>Kubernetes 工作程序节点安全合规性</dt>
     <dd>IBM 与内部和外部安全咨询团队合作，应对潜在的安全合规性漏洞。IBM 会维护对工作程序节点的访问权，以将更新和安全补丁部署到操作系统。
 <p> <b>重要事项</b>：定期重新引导工作程序节点，以确保安装自动部署到操作系统的更新和安全补丁。IBM 不会重新引导您的工作程序节点。</p></dd>
+  <dt>用于在物理（裸机）服务器上部署节点的选项</dt>
+  <dd>如果选择在裸机物理服务器（而不是虚拟服务器实例）上供应工作程序节点，您将对计算主机（例如，内存或 CPU）具有更多控制权。此设置无需虚拟机系统管理程序将物理资源分配给在主机上运行的虚拟机。相反，裸机机器的所有资源都仅供工作程序专用，因此您无需担心“吵闹的邻居”共享资源或降低性能。裸机服务器专供您使用，其所有资源可供集群使用。</dd>
+  <dt id="trusted_compute">具有可信计算的 {{site.data.keyword.containershort_notm}}</dt>
+  <dd><p>[在支持可信计算的裸机上部署集群](cs_clusters.html#clusters_ui)时，可以启用信任。在集群中每个支持可信计算的裸机工作程序节点（包括未来添加到集群的节点）上，都会启用可信平台模块 (TPM) 芯片。因此，启用信任后，日后无法对集群禁用信任。信任服务器部署在主节点上，并且信任代理程序将作为 pod 部署在工作程序节点上。工作程序节点启动时，信任代理程序 pod 会监视该过程的每个阶段。</p>
+  <p>该硬件是信任的根源，使用 TPM 来发送度量。TPM 会生成加密密钥，用于保护整个过程中度量数据的传输。信任代理程序会将启动过程中每个组件的度量传递到信任服务器：从与 TPM 硬件交互的 BIOS 固件开始，一直到引导装入器和操作系统内核。然后，可信代理程序会将这些度量与可信服务器中的预期值进行比较，以证明启动是否有效。可信计算过程不会监视工作程序节点中的其他 pod，例如应用程序。</p>
+  <p>例如，如果未经授权的用户获得对系统的访问权，并使用其他逻辑来修改操作系统内核以收集数据，那么信任代理程序会检测到此情况并更改节点的可信状态，以便您知道该工作程序不再可信。通过可信计算，可以验证工作程序节点是否被篡改。</p>
+  <p><img src="images/trusted_compute.png" alt="裸机集群的可信计算" width="480" style="width:480px; border-style: none"/></p></dd>
   <dt id="encrypted_disks">加密磁盘</dt>
   <dd>缺省情况下，{{site.data.keyword.containershort_notm}} 会为所有供应的工作程序节点提供两个本地 SSD 加密数据分区。第一个分区未加密，第二个分区安装到 _/var/lib/docker_ 并使用 LUKS 加密密钥解锁。每个 Kubernetes 集群中的每个工作程序都有自己的唯一 LUKS 加密密钥，由 {{site.data.keyword.containershort_notm}} 管理。当您创建集群或将工作程序节点添加到现有集群时，将安全地拉取密钥，然后在解锁加密磁盘后废弃。<p><b>注</b>：加密可能会影响磁盘 I/O 性能。对于需要高性能磁盘 I/O 的工作负载，在启用和禁用加密的情况下测试集群以帮助您确定是否关闭加密。</p>
   </dd>
@@ -107,7 +117,7 @@ lastupdated: "2018-01-29"
   <dt>使服务保持专用，或者有选择地将服务和应用程序公开到公用因特网</dt>
     <dd>可以选择使服务和应用程序保持专用，并且利用本主题中所述的内置安全性功能来确保工作程序节点与 pod 之间的安全通信。要将服务和应用程序公开到公用因特网，可以利用 Ingress 和负载均衡器支持来安全地使服务公共可用。</dd>
   <dt>将工作程序节点和应用程序安全地连接到内部部署的数据中心</dt>
-  <dd>要将工作程序节点和应用程序连接到内部部署的数据中心，您可以使用 Strongswan 服务或通过 Vyatta 网关设备或 Fortigate 设备，来配置 VPN IPSec 端点。<br><ul><li><b>Strongswan IPSec VPN 服务</b>：您可以设置 [Strongswan IPSec VPN 服务 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.strongswan.org/)，以将 Kubernetes 集群与内部部署网络安全连接。Strongswan IPSec VPN 服务基于业界标准因特网协议安全性 (IPsec) 协议组，通过因特网，提供安全的端到端通信信道。要在集群与内部部署网络之间设置安全连接，您必须在内部部署数据中心内安装 IPsec VPN 网关或 IBM Cloud infrastructure (SoftLayer) 服务器。然后，您可以在 Kubernetes pod 中[配置并部署 Strongswan IPSec VPN 服务](cs_vpn.html#vpn)。</li><li><b>Vyatta 网关设备或 Fortigate 设备</b>：如果您具有更大的集群，那么可选择设置 Vyatta 网关设备或 Fortigate 设备来配置 IPSec VPN 端点。有关更多信息，请参阅[将集群连接到内部部署数据中心 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/) 上的这个博客帖子。</li></ul></dd>
+  <dd>要将工作程序节点和应用程序连接到内部部署的数据中心，您可以使用 strongSwan 服务或者通过 Vyatta 网关设备或 Fortigate 设备来配置 VPN IPSec 端点。<br><ul><li><b>strongSwan IPSec VPN 服务</b>：您可以设置 [strongSwan IPSec VPN 服务 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.strongswan.org/)，以将 Kubernetes 集群与内部部署网络安全连接。strongSwan IPSec VPN 服务基于业界标准因特网协议安全性 (IPsec) 协议组，通过因特网提供安全的端到端通信信道。要在集群与内部部署网络之间设置安全连接，您必须在内部部署数据中心内安装 IPsec VPN 网关。然后，可以在 Kubernetes pod 中[配置并部署 strongSwan IPSec VPN 服务](cs_vpn.html#vpn-setup)。</li><li><b>Vyatta 网关设备或 Fortigate 设备</b>：如果您具有更大的集群，希望通过 VPN 来访问非 Kubernetes 资源，或者希望通过单个 VPN 访问多个集群，那么可选择设置 Vyatta 网关设备或 Fortigate 设备来配置 IPSec VPN 端点。有关更多信息，请参阅[将集群连接到内部部署数据中心 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/) 上的这个博客帖子。</li></ul></dd>
   <dt>持续监视和记录集群活动</dt>
     <dd>对于标准集群，{{site.data.keyword.containershort_notm}} 将记录并监视所有与集群相关的事件（例如，添加工作程序节点、滚动更新进度或容量使用情况信息），然后将其发送给 {{site.data.keyword.loganalysislong_notm}} 和 {{site.data.keyword.monitoringlong_notm}}。有关设置日志记录和监视的信息，请参阅[配置集群日志记录](/docs/containers/cs_health.html#logging)和[配置集群监视](/docs/containers/cs_health.html#monitoring)。</dd>
 </dl>
@@ -145,7 +155,7 @@ lastupdated: "2018-01-29"
 |集群类型|集群的专用 VLAN 的管理方|
 |------------|-------------------------------------------|
 |{{site.data.keyword.Bluemix_notm}} 中的免费集群|{{site.data.keyword.IBM_notm}}|
-|{{site.data.keyword.Bluemix_notm}} 中的标准集群|您通过您的 IBM Cloud infrastructure (SoftLayer) 帐户<p>**提示**：要有权访问帐户中的所有 VLAN，请打开 [VLAN 生成 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://knowledgelayer.softlayer.com/procedure/enable-or-disable-vlan-spanning)。</p>|
+|{{site.data.keyword.Bluemix_notm}} 中的标准集群|您通过您的 IBM Cloud infrastructure (SoftLayer) 帐户<p>**提示**：要有权访问帐户中的所有 VLAN，请开启 [VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning)。</p>|
 
 此外，部署到一个工作程序节点的所有 pod 都会分配有一个专用 IP 地址。分配给 pod 的 IP 位于 172.30.0.0/16 专用地址范围内，并且这些 pod 仅在工作程序节点之间进行路由。为了避免冲突，请勿在将与工作程序节点通信的任何节点上使用此 IP 范围。工作程序节点和 pod 可以使用专用 IP 地址在专用网络上安全地通信。但是，当 pod 崩溃或需要重新创建工作程序节点时，会分配新的专用 IP 地址。
 

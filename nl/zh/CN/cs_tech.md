@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -17,10 +17,13 @@ lastupdated: "2018-01-11"
 
 # {{site.data.keyword.containerlong_notm}} 技术
 
+了解有关 {{site.data.keyword.containerlong}} 的支持技术的更多信息。
+{:shortdesc}
+
 ## Docker 容器
 {: #docker_containers}
 
-Docker 是 2013 年 dotCloud 发布的一个开放式源代码项目。Docker 基于现有 Linux 容器技术 (LXC) 的功能进行构建，已成为用于快速构建、测试、部署和扩展应用程序的软件平台。Docker 将软件打包成标准化单元（称为容器），其中包含应用程序运行所需的所有元素。
+名为 Docker 的开放式源代码项目基于现有 Linux 容器技术 (LXC) 进行构建，已成为用于快速构建、测试、部署和扩展应用程序的软件平台。Docker 将软件打包成标准化单元（称为容器），其中包含应用程序运行所需的所有元素。
 {:shortdesc}
 
 了解一些基本 Docker 概念：
@@ -31,7 +34,7 @@ Docker 是 2013 年 dotCloud 发布的一个开放式源代码项目。Docker �
 <dt>注册表</dt>
 <dd>映像注册表是用于存储、检索和共享 Docker 映像的位置。存储在注册表中的映像可以公共可用（公共注册表），也可以供一小组用户访问（专用注册表）。{{site.data.keyword.containershort_notm}} 提供了公共映像（如 ibmliberty），可用于创建第一个容器化应用程序。对于企业应用程序，请使用专用注册表（如在 {{site.data.keyword.Bluemix_notm}} 中提供的注册表）来保护映像不被未经授权的用户使用。</dd>
 <dt>容器</dt>
-<dd>每个容器都是通过映像创建的。容器是一个打包应用程序，其具有所有依赖项，以便可以在环境之间移动应用程序并在不进行更改的情况下运行。与虚拟机不同，容器不会对设备、其操作系统和底层硬件进行虚拟化。在容器中只打包应用程序代码、运行时、系统工具、库和设置。容器在计算主机上作为隔离进程运行，并共享主机操作系统及其硬件资源。这种方式使得容器比虚拟机更轻便、可移植性更高且更高效。</dd>
+<dd>每个容器都是通过映像创建的。容器是一个打包应用程序，其具有所有依赖项，以便可以在环境之间移动应用程序并在不进行更改的情况下运行。与虚拟机不同，容器不会对设备、其操作系统和底层硬件进行虚拟化。在容器中只打包应用程序代码、运行时、系统工具、库和设置。容器在 Ubuntu 计算主机上作为隔离进程运行，并共享主机操作系统及其硬件资源。这种方式使得容器比虚拟机更轻便、可移植性更高且更高效。</dd>
 </dl>
 
 ### 使用容器的主要优点
@@ -56,7 +59,7 @@ Docker 是 2013 年 dotCloud 发布的一个开放式源代码项目。Docker �
 ## Kubernetes 基础知识
 {: #kubernetes_basics}
 
-Kubernetes 是由 Google 作为 Borg 项目的一部分开发的，并于 2014 年转给开放式源代码社区。Kubernetes 融合了 Google 在运行容器化基础架构方面 15 年以上的研究成果；该基础架构具有生产工作负载、开放式源代码供应和 Docker 容器管理工具，能提供隔离、安全的应用程序平台，以管理可移植、可扩展，并能在发生故障转移时自我修复的容器。
+名为 Kubernetes 的开放式源代码项目将运行容器化基础架构与生产工作负载、开放式源代码供应和 Docker 容器管理工具相结合。Kubernetes 基础架构提供了隔离、安全的应用程序平台，用于管理可移植、可扩展，并能在发生故障转移时自我复原的容器。
 {:shortdesc}
 
 了解一些基本的 Kubernetes 概念，如下图所示。
@@ -92,12 +95,20 @@ Kubernetes 是由 Google 作为 Borg 项目的一部分开发的，并于 2014 �
 ## 服务体系结构
 {: #architecture}
 
-每个工作程序节点均设置有 {{site.data.keyword.IBM_notm}} 管理的 Docker Engine、独立的计算资源、联网和卷服务以及内置安全功能，这些功能用于提供隔离、资源管理功能和工作程序节点安全合规性。工作程序节点使用安全 TLS 证书和 OpenVPN 连接与主节点进行通信。
-{:shortdesc}
+在 {{site.data.keyword.containershort_notm}} 上运行的 Kubernetes 集群中，容器化应用程序在称为工作程序节点的计算主机上托管。更具体地说，容器化应用程序是在 pod 中运行，而 pod 在工作程序节点上托管。工作程序节点由 Kubernetes 主节点进行管理。Kubernetes 主节点和工作程序节点通过安全的 TLS 证书和 openVPN 连接相互通信，以编排集群配置。
+{: shortdesc}
+
+Kubernetes 主节点与工作程序节点之间有何区别？问得好。
+
+<dl>
+  <dt>Kubernetes 主节点</dt>
+    <dd>Kubernetes 主节点负责的任务是管理集群中的所有计算资源、网络资源和存储资源。Kubernetes 主节点可确保将容器化应用程序和服务同等部署到集群中的工作程序节点。根据您配置应用程序和服务的方式，主节点会确定具有足够资源来满足应用程序需求的工作程序节点。</dd>
+  <dt>工作程序节点</dt>
+    <dd>每个工作程序节点是物理机器（裸机）或是在云环境中管理的物理硬件上运行的虚拟机。供应工作程序节点时，您将确定可供该工作程序节点上托管的容器使用的资源。工作程序节点现成设置有 {{site.data.keyword.IBM_notm}} 管理的 Docker Engine 以及独立的计算资源、联网和卷服务。内置安全性功能提供了隔离、资源管理功能和工作程序节点安全合规性。</dd>
+</dl>
 
 ![{{site.data.keyword.containerlong_notm}} Kubernetes 体系结构](images/cs_org_ov.png)
-
-此图概述了您维护的内容以及 IBM 在集群中维护的内容。有关这些维护任务的更多详细信息，请参阅[集群管理责任](cs_why.html#responsibilities)。
+图. {{site.data.keyword.containershort_notm}} 体系结构
 
 <br />
 

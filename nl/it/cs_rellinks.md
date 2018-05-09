@@ -29,8 +29,8 @@ lastupdated: "2017-12-01"
 - [Kubernetes documentation ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/)
 - [Docker documentation ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.docker.com/engine/)
 - <a href="https://docs.helm.sh/helm/" target="_blank">Helm documentation <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per la gestione del pacchetto Kubernetes
-- Rete di servizi [Istio ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://istio.io/) 
-- Visualizzazione [Weave Scope ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.weave.works/oss/scope/) 
+- Rete di servizi [Istio ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://istio.io/)
+- Visualizzazione [Weave Scope ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.weave.works/oss/scope/)
 
 <br />
 

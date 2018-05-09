@@ -16,18 +16,17 @@ lastupdated: "2018-01-24"
 {:download: .download}
 
 
-# Accesso al portfolio dell'infrastruttura IBM Cloud (SoftLayer) 
+# Accesso al portfolio dell'infrastruttura IBM Cloud (SoftLayer)
 {: #infrastructure}
 
-Per creare un cluster Kubernetes standard, devi avere accesso al portfolio dell'infrastruttura IBM Cloud (SoftLayer). Questo accesso è necessario
-per richiedere le risorse di infrastruttura a pagamento, quali i nodi di lavoro, gli indirizzi IP pubblici portatili o
-l'archiviazione persistente per il tuo cluster.
+Per creare un cluster Kubernetes standard, devi avere accesso al portfolio dell'infrastruttura IBM Cloud (SoftLayer). Questo accesso è necessario per richiedere le risorse di infrastruttura a pagamento, come nodi di lavoro, indirizzi IP pubblici portatili o archiviazione persistente per il tuo cluster Kubernetes in {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
 ## Accesso al portfolio dell'infrastruttura IBM Cloud (SoftLayer)
 {: #unify_accounts}
 
-Gli account Pagamento a consumo di {{site.data.keyword.Bluemix_notm}} che sono stati creati dopo l'abilitazione del collegamento automatico degli account sono già configurati con l'accesso al portfolio dell'infrastruttura IBM Cloud (SoftLayer), pertanto puoi acquistare le risorse dell'infrastruttura per il tuo cluster senza ulteriori configurazioni.
+Gli account Pagamento a consumo di {{site.data.keyword.Bluemix_notm}} che sono stati creati dopo l'abilitazione del collegamento automatico degli account sono già configurati con l'accesso al portfolio dell'infrastruttura IBM Cloud (SoftLayer). Puoi acquistare le risorse dell'infrastruttura per il tuo cluster senza ulteriori configurazioni.
+{:shortdesc}
 
 Gli utenti con altri tipi di account {{site.data.keyword.Bluemix_notm}} o quelli che hanno un account dell'infrastruttura IBM Cloud (SoftLayer) esistente non collegato al loro account {{site.data.keyword.Bluemix_notm}}, devono configurare i propri account per creare i cluster standard.
 {:shortdesc}
@@ -55,9 +54,7 @@ una chiave API per i vecchi account Pagamento a consumo e Sottoscrizione](#old_a
 ## Generazione di una chiave API dell'infrastruttura IBM Cloud (SoftLayer) da utilizzare con gli account {{site.data.keyword.Bluemix_notm}}
 {: #old_account}
 
-Se vuoi continuare a utilizzare il tuo vecchio account Pagamento a consumo o Sottoscrizione per creare i cluster
-standard, devi generare una chiave API con il tuo nuovo account Pagamento a consumo e impostare la chiave API
-per il tuo vecchio account.
+Per continuare a utilizzare il tuo vecchio account Pagamento a consumo o Sottoscrizione per creare i cluster standard, genera una chiave API con il tuo nuovo account Pagamento a consumo e impostala per il tuo vecchio account.
 {:shortdesc}
 
 Prima di iniziare, crea un account Pagamento a consumo {{site.data.keyword.Bluemix_notm}} che viene configurato automaticamente con l'accesso al portfolio dell'infrastruttura IBM Cloud (SoftLayer).

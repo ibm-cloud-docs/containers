@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-08"
+lastupdated: "2018-03-13"
 
 ---
 
@@ -18,16 +18,21 @@ lastupdated: "2018-02-08"
 # {{site.data.keyword.containerlong_notm}} 的 Kubernetes 版本
 {: #cs_versions}
 
-{{site.data.keyword.containerlong}} 同时支持多个版本的 Kubernetes：最新版本、缺省版本以及通常比最新版本低两个版本的受支持版本。缺省版本可能与最新版本相同，并且除非您指定其他版本，否则在创建或更新集群时将使用缺省版本。
+{{site.data.keyword.containerlong}} 同时支持多个版本的 Kubernetes。发布最新版本 (n) 时，支持最多低 2 (n-2) 的版本。比最新版本低 2 以上的版本 (n-3) 将首先不推荐使用，然后不再支持。
 {:shortdesc}
 
 当前支持的 Kubernetes 版本为：
 
-- 最新版本：1.9.2
-- 缺省版本：1.8.6
+- 最新版本：1.9.3
+- 缺省版本：1.8.8
 - 受支持版本：1.7.4
+- 不推荐的版本：1.5.x，自 2018 年 4 月 4 日起不再支持
 
-如果是在当前不支持的 Kubernetes 版本上运行集群，请[查看潜在影响](#version_types)以获取更新，然后立即[更新集群](cs_cluster_update.html#update)以继续接收重要的安全性更新和支持。要检查服务器版本，请运行以下命令。
+**不推荐的版本**：集群在不推荐的 Kubernetes 版本上运行时，您有 30 天的时间来复查并更新到受支持的 Kubernetes 版本，30 天后此版本变为不受支持。在不推荐期间，可以在集群中运行有限的命令来添加工作程序，重新装入工作程序并更新集群。不能在不推荐的版本中创建新集群。
+
+**不支持的版本**：如果是在不支持的 Kubernetes 版本上运行集群，请[查看潜在影响](#version_types)以获取更新，然后立即[更新集群](cs_cluster_update.html#update)以继续接收重要的安全性更新和支持。
+
+要检查服务器版本，请运行以下命令。
 
 ```
 kubectl version  --short | grep -i server
@@ -37,9 +42,10 @@ kubectl version  --short | grep -i server
 输出示例：
 
 ```
-Server Version: 1.8.6
+Server Version: 1.8.8
 ```
 {: screen}
+
 
 ## 更新类型
 {: #version_types}
@@ -61,10 +67,13 @@ Kubernetes 提供以下版本更新类型：
 
 有关更新过程的更多信息，请参阅[更新集群](cs_cluster_update.html#master)和[更新工作程序节点](cs_cluster_update.html#worker_node)。
 
+如果您使用的 `kubectl` CLI 版本至少与集群的 `major.minor` 版本相匹配，那么可能会遇到意外的结果。确保使 Kubernetes 集群和 [CLI 版本](cs_cli_install.html#kubectl)保持最新。
+{:tip}
+
 ## V1.9
 {: #cs_v19}
 
-
+<p><img src="images/certified_kubernetes_1x9.png" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" height="100" width="63" align="left" alt="此角标指示 IBM Cloud Container Service 的 Kubernetes V1.9 证书。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 计划下经认证的 V1.9 的 Kubernetes 产品。_Kubernetes® 是 Linux Foundation 在美国和其他国家或地区的注册商标，并根据 Linux Foundation 的许可证进行使用。_</p>
 
 查看 Kubernetes 从先前版本更新到 V1.9 时可能需要进行的更改。
 
@@ -103,7 +112,7 @@ Kubernetes 提供以下版本更新类型：
 <tbody>
 <tr>
 <td>`kubectl` 输出</td>
-<td>现在，使用 `kubectl` 命令来指定 `-o custom-columns`，但在对象中找不到列时，将会看到输出为 `<none>`。<br>
+<td>现在，使用 `kubectl` 命令来指定 `-o custom-columns`，但在对象中找不到列时，将会看到输出为 `<none>`.<br>
 先前，此操作失败，并且您看到错误消息 `xxx is not found`。如果脚本依赖于先前的行为，请更新这些脚本。</td>
 </tr>
 <tr>
@@ -112,11 +121,7 @@ Kubernetes 提供以下版本更新类型：
 </tr>
 <tr>
 <td>Kubernetes 仪表板许可权</td>
-<td>现在，用户需要使用其凭证登录到 Kubernetes 仪表板，以查看集群资源。已除去缺省 Kubernetes 仪表板 `ClusterRoleBinding` RBAC 权限。有关指示信息，请参阅[启动 Kubernetes 仪表板](cs_app.html#cli_dashboard)。</td>
-</tr>
-<tr>
-<td>`default` `ServiceAccount` 的 RBAC</td>
-<td>除去了 `default` 名称空间中 `default` `ServiceAccount` 的管理员 `ClusterRoleBinding`。如果应用程序依赖于此 RBAC 策略来访问 Kubernetes API，请[更新 RBAC 策略](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview)。</td>
+<td>用户需要使用其凭证登录到 Kubernetes 仪表板，以查看集群资源。除去了缺省 Kubernetes 仪表板 `ClusterRoleBinding` RBAC 权限。有关指示信息，请参阅[启动 Kubernetes 仪表板](cs_app.html#cli_dashboard)。</td>
 </tr>
 <tr>
 <td>污点和容忍度</td>
@@ -156,7 +161,8 @@ Kubernetes 提供以下版本更新类型：
 </thead>
 <tbody>
 <tr>
-<td colspan='2'>在更新主节点之前，不需要更改</td>
+<td>无</td>
+<td>在更新主节点之前，不需要更改</td>
 </tr>
 </tbody>
 </table>
@@ -175,7 +181,7 @@ Kubernetes 提供以下版本更新类型：
 <tbody>
 <tr>
 <td>Kubernetes 仪表板登录</td>
-<td>用于访问 V1.8 中 Kubernetes 仪表板的 URL 已更改，并且登录过程包含新的认证步骤。有关更多信息，请参阅[访问 Kubernetes 仪表板](cs_app.html#cli_dashboard)。</td>
+<td>更改了用于访问 V1.8 中 Kubernetes 仪表板的 URL，并且登录过程包含新的认证步骤。有关更多信息，请参阅[访问 Kubernetes 仪表板](cs_app.html#cli_dashboard)。</td>
 </tr>
 <tr>
 <td>Kubernetes 仪表板许可权</td>
@@ -183,7 +189,7 @@ Kubernetes 提供以下版本更新类型：
 </tr>
 <tr>
 <td>`kubectl delete`</td>
-<td>`kubectl delete` 命令在删除对象之前，不再向下扩展工作负载 API 对象（例如 pod）。如果需要该对象向下扩展，请在删除对象之前使用 [kubectl scale ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale)。</td>
+<td>`kubectl delete` 命令在删除对象之前，不再向下扩展工作负载 API 对象（例如 pod）。如果需要该对象向下扩展，请在删除对象之前使用 [`kubectl scale ` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale)。</td>
 </tr>
 <tr>
 <td>`kubectl run`</td>
@@ -247,8 +253,12 @@ Kubernetes 提供以下版本更新类型：
 </thead>
 <tbody>
 <tr>
+<td>部署 `apiVersion`</td>
+<td>从 Kubernetes 1.5 更新集群后，请将 `apps/v1beta1` 用于新的`部署` YAML 文件中的 `apiVersion` 字段。继续将 `extensions/v1beta1` 用于其他资源，例如 `Ingress`。</td>
+</tr>
+<tr>
 <td>kubectl</td>
-<td>`kubectl` CLI 更新后，这些 `kubectl` 命令必须使用多个标志而不是以逗号分隔的自变量：<ul>
+<td>`kubectl` CLI 更新后，这些 `kubectl create` 命令必须使用多个标志而不是以逗号分隔的自变量：<ul>
  <li>`role`
  <li>`clusterrole`
  <li>`rolebinding`
@@ -256,17 +266,6 @@ Kubernetes 提供以下版本更新类型：
  <li>`secret`
  </ul>
 </br>  例如，运行 `kubectl create role --resource-name <x> --resource-name <y>` 而非 `kubectl create role --resource-name <x>,<y>`.</td>
-</tr>
-<tr>
-<td>Pod 亲缘关系安排</td>
-<td> 不推荐使用 `scheduler.alpha.kubernetes.io/affinity` 注释。<ol>
-  <li>对于除 `ibm-system` 和 `kube-system` 之外的每个名称空间，确定是否需要更新 pod 亲缘关系安排：</br>
-  ```
-  kubectl get pods -n <namespace> -o yaml | grep "scheduler.alpha.kubernetes.io/affinity" && echo "Action required"
-  ```
-  </br></li>
-  <li>如果返回 `"Action required"`，请使用 [_PodSpec_ ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _affinity_ 字段，而不是使用 `scheduler.alpha.kubernetes.io/affinity` 注释。</li>
-</ol>
 </tr>
 <tr>
 <td>网络策略</td>
@@ -296,6 +295,57 @@ spec:
   kubectl annotate ns <namespace> --overwrite "net.beta.kubernetes.io/network-policy-"
   ```
   </li></ol>
+</td></tr>
+<tr>
+<td>Pod 亲缘关系安排</td>
+<td> 不推荐使用 `scheduler.alpha.kubernetes.io/affinity` 注释。<ol>
+  <li>对于除 `ibm-system` 和 `kube-system` 之外的每个名称空间，确定是否需要更新 pod 亲缘关系安排：</br>
+  ```
+  kubectl get pods -n <namespace> -o yaml | grep "scheduler.alpha.kubernetes.io/affinity" && echo "Action required"
+  ```
+  </br></li>
+  <li>如果返回 `"Action required"`，请使用 [_PodSpec_ ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _affinity_ 字段，而不是使用 `scheduler.alpha.kubernetes.io/affinity` 注释。</li>
+</ol>
+</td></tr>
+<tr>
+<td>`default` `ServiceAccount` 的 RBAC</td>
+<td><p>除去了 `default` 名称空间中 `default` `ServiceAccount` 的管理员 `ClusterRoleBinding`，以提高集群安全性。在 `default` 名称空间中运行的应用程序不再具有对 Kubernetes API 的集群管理员特权，并且可能会遇到 RBAC DENY 许可权错误。如果应用程序依赖于这些特权，请为应用程序[创建 RBAC 授权资源](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview)。</p>
+  <p>更新应用程序 RBAC 策略时，您可能希望临时还原到先前的 `default`。使用 `kubectl apply -f FILENAME` 命令来复制、保存和应用以下文件。<strong>注</strong>：还原操作是为了给自己时间来更新所有应用程序资源，而不是作为长期解决方案。</p>
+
+  <p><pre class="codeblock">
+  <code>
+  kind: ClusterRoleBinding
+  apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+   name: admin-binding-nonResourceURLSs-default
+  subjects:
+    - kind: ServiceAccount
+      name: default
+      namespace: default
+  roleRef:
+   kind: ClusterRole
+   name: admin-role-nonResourceURLSs
+   apiGroup: rbac.authorization.k8s.io
+  ---
+  kind: ClusterRoleBinding
+  apiVersion: rbac.authorization.k8s.io/v1
+  metadata:
+   name: admin-binding-resourceURLSs-default
+  subjects:
+    - kind: ServiceAccount
+      name: default
+      namespace: default
+  roleRef:
+   kind: ClusterRole
+   name: admin-role-resourceURLSs
+   apiGroup: rbac.authorization.k8s.io
+  </code>
+  </pre></p>
+  </td>
+</tr>
+<tr>
+<td>StatefulSet pod DNS</td>
+<td>更新主节点后，StatefulSet pod 会丢失其 Kubernetes DNS 条目。要恢复 DNS 条目，请删除 StatefulSet pod。Kubernetes 会重新创建 pod，并自动恢复 DNS 条目。有关更多信息，请参阅 [Kubernetes 问题 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/issues/48327)。</td>
 </tr>
 <tr>
 <td>容忍度</td>
@@ -308,7 +358,7 @@ spec:
   </br>
 
   <li>如果返回 `"Action required"`，请使用 [_PodSpec_ ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _tolerations_ 字段，而不是使用 `scheduler.alpha.kubernetes.io/tolerations` 注释。</ol>
-</tr>
+</td></tr>
 <tr>
 <td>污点</td>
 <td>`scheduler.alpha.kubernetes.io/taints` 注释不再可用。
@@ -322,9 +372,16 @@ spec:
   <li>向每个节点添加污点：</br>
   `kubectl taint node <node> <taint>`
   </li></ol>
-</tr>
-<tr>
-<td>StatefulSet pod DNS</td>
-<td>更新主节点后，StatefulSet pod 会丢失其 Kubernetes DNS 条目。要恢复 DNS 条目，请删除 StatefulSet pod。Kubernetes 会重新创建 pod，并自动恢复 DNS 条目。有关更多信息，请参阅 [Kubernetes 问题 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/issues/48327)。</tr>
+</td></tr>
 </tbody>
 </table>
+
+## 归档
+{: #k8s_version_archive}
+
+### V1.5（不推荐）
+{: #cs_v1-5}
+
+自 2018 年 3 月 5 日开始，不推荐使用运行 [Kubernetes V1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) 的 {{site.data.keyword.containershort_notm}} 集群。在 2018 年 4 月 4 日后，V1.5 集群无法接收安全性更新或支持，除非更新到下一个最新版本 ([Kubernetes 1.7](#cs_v17))。
+
+对于每个 Kubernetes 版本更新，请[查看潜在影响](cs_versions.html#cs_versions)，然后立即[更新集群](cs_cluster_update.html#update)。请注意，应从一个版本更新到下一个最新版本，例如从 1.5 更新到 1.7 或者从 1.8 更新到 1.9。

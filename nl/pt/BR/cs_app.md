@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-02-28"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-01-24"
 # Implementando apps em clusters
 {: #app}
 
-É possível usar técnicas do Kubernetes para implementar apps e assegurar que seus aplicativos estejam funcionando em todos os momentos. Por exemplo, é possível executar atualizações e recuperações contínuas sem tempo de inatividade para seus usuários.
+É possível usar técnicas do Kubernetes no {{site.data.keyword.containerlong}} para implementar apps em contêineres e assegurar que os apps estejam funcionando sempre. Por exemplo, é possível executar atualizações e recuperações contínuas sem tempo de inatividade para seus usuários.
 {:shortdesc}
 
 Aprenda as etapas gerais para implementar apps clicando em uma área da imagem a seguir.
@@ -41,9 +41,9 @@ Aprenda as etapas gerais para implementar apps clicando em uma área da imagem a
 
 Quanto mais amplamente você distribui a configuração entre múltiplos nós do trabalhador e clusters,
 menos provável que os usuários tenham que experimentar tempo de inatividade com seu app.
+{:shortdesc}
 
 Revise as potenciais configurações de app a seguir que são ordenadas com graus crescentes de disponibilidade.
-{:shortdesc}
 
 ![Estágios de alta disponibilidade para um app](images/cs_app_ha_roadmap.png)
 
@@ -55,7 +55,7 @@ múltiplos nós (antiafinidade) em diferentes locais.
 4.  Uma implementação com n + 2 pods que são gerenciados por um conjunto de réplicas e difundidos em
 múltiplos nós (antiafinidade) em diferentes regiões.
 
-Saiba mais sobre as técnicas para aumentar a disponibilidade de seu app:
+### Aumentando a disponibilidade de seu app
 
 <dl>
 <dt>Usar implementações e conjuntos de réplicas para implementar seu app e suas dependências</dt>
@@ -101,7 +101,7 @@ no cluster, somente o número de réplicas que podem cumprir o requisito de anti
 incluídos no cluster.
 
 <pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+<code>apiVersion: apps/v1beta1
 kind: Deployment
 metadados:
   name: wasliberty
@@ -163,7 +163,7 @@ Uma implementação básica de app em um cluster grátis ou padrão pode incluir
 
 Para implementar os componentes para um app mínimo conforme descrito no diagrama, você usa um arquivo de configuração semelhante ao exemplo a seguir:
 ```
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: ibmliberty
@@ -368,7 +368,7 @@ Para criar um segredo com um certificado:
 ## Implementando apps com a GUI
 {: #app_ui}
 
-Ao implementar um app em seu cluster usando o painel do Kubernetes, um recurso de implementação que cria, atualiza e gerencia os pods em seu cluster, será automaticamente criado.
+Ao implementar um app em seu cluster usando o painel do Kubernetes, um recurso de implementação cria, atualiza e gerencia automaticamente os pods em seu cluster.
 {:shortdesc}
 
 Antes de iniciar:
@@ -380,7 +380,7 @@ Para implementar seu app:
 
 1.  [Abra o painel do Kubernetes](#cli_dashboard).
 2.  No painel do Kubernetes, clique em **+ Criar**.
-3.  Selecione **Especificar detalhes do app abaixo** para inserir os detalhes do app na GUI ou **Fazer upload de um arquivo YAML ou JSON** para fazer upload do [arquivo de configuração do app ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/). Use [este exemplo de arquivo YAML ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM-Bluemix/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml) para implementar um contêiner da imagem **ibmliberty** na região sul dos EUA.
+3.  Selecione **Especificar detalhes do app abaixo** para inserir os detalhes do app na GUI ou **Fazer upload de um arquivo YAML ou JSON** para fazer upload do [arquivo de configuração do app ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/). Use [este exemplo de arquivo YAML ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml) para implementar um contêiner da imagem **ibmliberty** na região sul dos EUA.
 4.  No painel do Kubernetes, clique em **Implementações** para verificar se a implementação foi criada.
 5.  Se você disponibilizou o seu aplicativo publicamente usando um serviço de porta de nó, um serviço de balanceamento de carga ou Ingresso, verifique se você pode acessar o aplicativo.
 
@@ -426,14 +426,15 @@ Para implementar seu app:
 ## Ajuste de escala de apps
 {: #app_scaling}
 
-Implemente aplicativos em nuvem que respondam a mudanças em demanda para seus aplicativos e que usem recursos somente quando necessário. O Auto-scaling aumenta ou diminui automaticamente o número de instâncias de seus apps com base na CPU.
+Com o Kubernetes, é possível ativar o [ajuste automático de escala de pod horizontal ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) para aumentar ou diminuir automaticamente o número de instâncias de seus apps com base na CPU.
 {:shortdesc}
 
-Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para seu cluster.
+Procurando informações sobre ajuste de escala de aplicativos Cloud Foundry? Confira [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html). 
+{: tip}
 
-**Nota:** você está procurando informações sobre ajuste de escala de aplicativos Cloud Foundry? Confira [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html).
-
-Com o Kubernetes, é possível ativar o [Auto-scaling do pod horizontal ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale) para escalar seus apps com base na CPU.
+Antes de iniciar:
+- [Destine sua CLI](cs_cli_install.html#cs_cli_configure) para seu cluster.
+- O monitoramento Heapster deve ser implementado no cluster em que você deseja ajustar a escala automaticamente.
 
 1.  Implemente seu app no cluster a partir da CLI. Ao implementar seu app, deve-se solicitar a CPU.
 
@@ -464,8 +465,10 @@ Com o Kubernetes, é possível ativar o [Auto-scaling do pod horizontal ![Ícone
     <td>A porta em que seu app está disponível externamente.</td>
     </tr></tbody></table>
 
-    **Nota:** para implementações mais complexas, pode ser necessário criar um [arquivo de configuração](#app_cli).
-2.  Crie um Escalador automático de ajuste de pod horizontal e defina sua política. Para obter mais informações sobre como trabalhar com o comando `kubectl autoscale`, consulte [a documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
+    Para implementações mais complexas, você pode precisar criar um [arquivo de configuração](#app_cli).
+    {: tip}
+
+2.  Crie um ajustador automático de escala e defina sua política. Para obter mais informações sobre como trabalhar com o comando `kubetcl autoscale`, veja [a documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
 
     ```
     kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
@@ -490,7 +493,6 @@ Com o Kubernetes, é possível ativar o [Auto-scaling do pod horizontal ![Ícone
     <td>O número máximo de pods implementados que são usados para manter a porcentagem de utilização da CPU especificada.</td>
     </tr>
     </tbody></table>
-
 
 
 <br />

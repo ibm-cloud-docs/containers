@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-14"
 
 ---
 
@@ -18,7 +18,7 @@ lastupdated: "2018-01-11"
 # Apertura delle porte e degli indirizzi IP necessari nel tuo firewall
 {: #firewall}
 
-Controlla le seguenti situazioni in cui potresti aver bisogno di aprire porte e indirizzi IP specifici nei tuoi firewall:
+Controlla le seguenti situazioni in cui potresti aver bisogno di aprire porte e indirizzi IP specifici nei tuoi firewall per {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
 * [Per eseguire i comandi `bx`](#firewall_bx) dal tuo sistema locale quando le politiche di rete aziendali impediscono l'accesso agli endpoint di rete pubblici tramite proxy o firewall.
@@ -111,7 +111,7 @@ Per concedere l'accesso per un cluster specifico:
 
 5. Consenti l'accesso all'**URL master** sulla porta, ad esempio `31142` nell'esempio precedente.
 
-6. Verifica la tua connessione. 
+6. Verifica la tua connessione.
 
    ```
    curl --insecure <master_URL>/version
@@ -193,7 +193,7 @@ Permetti al tuo cluster di accedere ai servizi e alle risorse dell'infrastruttur
       <tr>
         <td>Asia Pacifico Nord</td>
         <td>hkg02<br>seo01<br>sng01<br>tok02</td>
-        <td><code>169.56.132.234</code><br><code>161.202.126.210</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
+        <td><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
        </tr>
       <tr>
          <td>Asia Pacifico Sud</td>
@@ -203,7 +203,7 @@ Permetti al tuo cluster di accedere ai servizi e alle risorse dell'infrastruttur
       <tr>
          <td>Europa Centrale</td>
          <td>ams03<br>fra02<br>mil01<br>par01</td>
-         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.170</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
         </tr>
       <tr>
         <td>Regno Unito Sud</td>
@@ -217,8 +217,8 @@ Permetti al tuo cluster di accedere ai servizi e alle risorse dell'infrastruttur
       </tr>
       <tr>
         <td>Stati Uniti Sud</td>
-        <td>dal10<br>dal12<br>dal13<br>sao01</td>
-        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>169.57.151.10</code></td>
+        <td>dal10<br>dal12<br>dal13<br>hou02<br>sao01</td>
+        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>184.173.44.62</code><br><code>169.57.151.10</code></td>
       </tr>
       </tbody>
     </table>
@@ -327,9 +327,9 @@ Permetti al tuo cluster di accedere ai servizi e alle risorse dell'infrastruttur
 </p>
 
   5. Per i firewall privati, consenti gli intervalli di IP privati dell'infrastruttura IBM Cloud (SoftLayer) appropriati. Consulta [questo link](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) a iniziare dalla sezione **Backend (private) Network**.
-      - Aggiungi tutte le [ubicazioni nelle regioni](cs_regions.html#locations) che stai utilizzando. 
-      - Tieni presente che devi aggiungere l'ubicazione (data center) dal01. 
-      - Apri le porte 80 e 443 per consentire il processo di avvio del cluster. 
+      - Aggiungi tutte le [ubicazioni nelle regioni](cs_regions.html#locations) che stai utilizzando.
+      - Tieni presente che devi aggiungere l'ubicazione (data center) dal01.
+      - Apri le porte 80 e 443 per consentire il processo di avvio del cluster.
 
   6. {: #pvc}Per creare le attestazioni del volume persistente per l'archiviazione dei dati, consenti l'accesso in uscita tramite il tuo firewall per gli [Indirizzi IP dell'infrastruttura IBM Cloud (SoftLayer)](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall) dell'ubicazione (data center) in cui si trova il tuo cluster.
       - Per trovare l'ubicazione (data center) del tuo cluster, esegui `bx cs clusters`.
@@ -349,7 +349,7 @@ Puoi ora consentire l'accesso in entrata ai servizi NodePort, programma di bilan
   <dt>Servizio NodePort</dt>
   <dd>Apri la porta che hai configurato quando hai distribuito il servizio agli indirizzi IP pubblici per tutti i nodi di lavoro a cui consentire il traffico. Per trovare la porta, esegui `kubectl get svc`. La porta è compresa nell'intervallo 20000-32000.<dd>
   <dt>Servizio LoadBalancer</dt>
-  <dd>Apri la porta che hai configurato quando hai distribuito il servizio all'indirizzo IP pubblico del servizio del programma di bilanciamento del carico. </dd>
+  <dd>Apri la porta che hai configurato quando hai distribuito il servizio all'indirizzo IP pubblico del servizio del programma di bilanciamento del carico.</dd>
   <dt>Ingress</dt>
   <dd>Apri la porta 80 per HTTP o la 443 per HTTPS per l'indirizzo IP per il programma di bilanciamento del carico dell'applicazione Ingress.</dd>
 </dl>

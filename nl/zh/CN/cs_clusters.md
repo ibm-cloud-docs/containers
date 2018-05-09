@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-02"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -19,15 +19,17 @@ lastupdated: "2018-02-02"
 # 设置集群
 {: #clusters}
 
-设计集群设置以实现最高可用性和容量。
+通过 {{site.data.keyword.containerlong}} 设计 Kubernetes 集群设置以实现最大容器可用性和容量。
 {:shortdesc}
-
 
 ## 集群配置规划
 {: #planning_clusters}
 
-使用标准集群来提高应用程序可用性。在多个工作程序节点和集群之间分发设置时，用户不太可能会遇到停机时间。内置功能（例如负载均衡和隔离）可在主机、网络或应用程序发生潜在故障时更快恢复。
+使用标准集群来提高应用程序可用性。
 {:shortdesc}
+
+在多个工作程序节点和集群之间分发设置时，用户不太可能会遇到停机时间。内置功能（例如负载均衡和隔离）可在主机、网络或应用程序发生潜在故障时更快恢复。
+
 
 查看以下潜在的集群设置（按可用性程度从低到高排序）：
 
@@ -71,37 +73,63 @@ lastupdated: "2018-02-02"
 <br />
 
 
+
+
+
 ## 工作程序节点配置规划
 {: #planning_worker_nodes}
 
 Kubernetes 集群由工作程序节点组成，并由 Kubernetes 主节点机进行集中监视和管理。集群管理员决定如何设置工作程序节点的集群，以确保集群用户具备在集群中部署和运行应用程序所需的所有资源。
 {:shortdesc}
 
-创建标准集群时，会在 IBM Cloud infrastructure (SoftLayer) 中代表您订购工作程序节点，然后在 {{site.data.keyword.Bluemix_notm}} 中对其进行设置。为每个工作程序节点分配唯一的工作程序节点标识和域名，在创建集群后，不得更改该标识和域名。根据选择的硬件隔离级别，可以将工作程序节点设置为共享或专用节点。您还可以选择是希望工作程序节点连接到公用 VLAN 和专用 VLAN，还是仅连接到专用 VLAN。每个工作程序节点都供应有特定机器类型，用于确定部署到该工作程序节点的容器可用的 vCPU 数、内存量和磁盘空间量。
+创建标准集群时，会在 IBM Cloud Infrastructure (SoftLayer) 中代表您订购工作程序节点，然后将其添加到集群中的缺省工作程序节点池。为每个工作程序节点分配唯一的工作程序节点标识和域名，在创建集群后，不得更改该标识和域名。
+
+您可以选择虚拟服务器或物理（裸机）服务器。根据选择的硬件隔离级别，可以将虚拟工作程序节点设置为共享或专用节点。您还可以选择是希望工作程序节点连接到公用 VLAN 和专用 VLAN，还是仅连接到专用 VLAN。每个工作程序节点都供应有特定机器类型，用于确定部署到该工作程序节点的容器可用的 vCPU 数、内存量和磁盘空间量。
 Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数。有关更多信息，请查看[工作程序节点和 pod 配额 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/admin/cluster-large/)。
+
+
+
 
 
 ### 工作程序节点的硬件
 {: #shared_dedicated_node}
 
-每个工作程序节点都会设置为物理硬件上的虚拟机。在 {{site.data.keyword.Bluemix_notm}} 中创建标准集群时，必须选择是希望底层硬件由多个 {{site.data.keyword.IBM_notm}} 客户共享（多租户）还是仅供您专用（单租户）。
+在 {{site.data.keyword.Bluemix_notm}} 中创建标准集群时，可以选择将工作程序节点作为物理机器（裸机）进行供应，或作为在物理硬件上运行的虚拟机进行供应。创建免费集群时，工作程序节点会自动作为 IBM Cloud Infrastructure (SoftLayer) 帐户中的虚拟共享节点进行供应。
 {:shortdesc}
 
-在多租户设置中，物理资源（如 CPU 和内存）在部署到同一物理硬件的所有虚拟机之间共享。要确保每个虚拟机都能独立运行，虚拟机监视器（也称为系统管理程序）会将物理资源分段成隔离的实体，并将其作为专用资源分配给虚拟机（系统管理程序隔离）。
+![标准集群中工作程序节点的硬件选项](images/cs_clusters_hardware.png)
 
-在单租户设置中，所有物理资源都仅供您专用。您可以将多个工作程序节点作为虚拟机部署在同一物理主机上。与多租户设置类似，系统管理程序也会确保每个工作程序节点在可用物理资源中获得应有的份额。
+<dl>
+<dt>物理机器（裸机）</dt>
+<dd>可以将工作程序节点作为单租户物理服务器（也称为裸机）进行供应。通过裸机，您可以直接访问机器上的物理资源，例如内存或 CPU。此设置无需虚拟机系统管理程序将物理资源分配给在主机上运行的虚拟机。相反，裸机机器的所有资源都仅供工作程序专用，因此您无需担心“吵闹的邻居”共享资源或降低性能。<p><strong>按月计费</strong>：裸机服务器比虚拟服务器更昂贵，最适用于需要更多资源和主机控制的高性能应用程序。裸机服务器按月计费。如果您在月底之前取消裸机服务器，那么仍将收取该整月的费用。供应裸机服务器时，您是与 IBM Cloud Infrastructure (SoftLayer) 直接交互，因此该手动过程可能需要一个工作日以上的时间才能完成。</p>
+<p><strong>用于启用可信计算的选项</strong>：仅当在运行 Kubernetes V1.9 或更高版本的所选裸机工作程序节点上，才能启用“可信计算”来验证工作程序节点是否被篡改。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `bx cs feature-enable` [命令](cs_cli_reference.html#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。有关节点启动过程中的信任工作方式的更多信息，请参阅[具有可信计算的 {{site.data.keyword.containershort_notm}}](cs_secure.html#trusted_compute)。运行 `bx cs machine-types <location>` [命令](cs_cli_reference.html#cs_machine_types)后，可以通过查看 `Trustable` 字段来了解哪些机器支持信任。</p>
+<p><strong>裸机机器类型组</strong>：裸机机器类型分为多个组，每组具有不同的计算资源，您可以从中进行选择以满足应用程序的需求。物理机器类型的本地存储器大于虚拟机，并且某些类型具有用于备份本地数据的 RAID。要了解不同类型的裸机产品，请参阅 `bx cs machine-type` [命令](cs_cli_reference.html#cs_machine_types)。<ul><li>`mb1c`：选择此类型可对工作程序节点的物理机器资源进行均衡配置。此类型包括对 10 GBps 双冗余网络的访问权以及双 SSD HDD 配置。通常具有一个 1 TB 主存储磁盘以及一个 1.7 TB 或 2 TB 辅助磁盘。</li>
+<li>`mr1c`：选择此类型可最大限度提高可用于工作程序节点的 RAM。</li>
+<li>`md1c`：如果工作程序节点需要大量本地磁盘存储（包括用于备份本地存储在机器上的数据的 RAID），请选择此类型。为 RAID1 配置了 1 TB 主存储磁盘，为 RAID10 配置了 4 TB 辅助存储磁盘。</li>
 
-共享节点通常比专用节点更便宜，因为底层硬件的开销由多个客户分担。但是，在决定是使用共享还是专用节点时，可能需要咨询您的法律部门，以讨论应用程序环境所需的基础架构隔离和合规性级别。
+</ul></p></dd>
+<dt>虚拟机</dt>
+<dd>创建标准虚拟集群时，必须选择是希望底层硬件由多个 {{site.data.keyword.IBM_notm}} 客户共享（多租户）还是仅供您专用（单租户）。
+<p>在多租户设置中，物理资源（如 CPU 和内存）在部署到同一物理硬件的所有虚拟机之间共享。要确保每个虚拟机都能独立运行，虚拟机监视器（也称为系统管理程序）会将物理资源分段成隔离的实体，并将其作为专用资源分配给虚拟机（系统管理程序隔离）。</p>
+<p>在单租户设置中，所有物理资源都仅供您专用。您可以将多个工作程序节点作为虚拟机部署在同一物理主机上。与多租户设置类似，系统管理程序也会确保每个工作程序节点在可用物理资源中获得应有的份额。</p>
+<p>共享节点通常比专用节点更便宜，因为底层硬件的开销由多个客户分担。但是，在决定是使用共享还是专用节点时，可能需要咨询您的法律部门，以讨论应用程序环境所需的基础架构隔离和合规性级别。</p></dd>
+</dl>
 
-创建免费集群时，工作程序节点会自动作为 IBM Cloud infrastructure (SoftLayer) 帐户中的共享节点进行供应。
+可用的物理和虚拟机类型随集群的部署位置而变化。有关更多信息，请参阅 `bx cs machine-type` [ 命令](cs_cli_reference.html#cs_machine_types)。
+    可以使用[控制台 UI](#clusters_ui) 或 [CLI](#clusters_cli) 来部署集群。
 
 ### 工作程序节点的 VLAN 连接
 {: #worker_vlan_connection}
 
-创建集群时，每个集群都会自动通过 IBM Cloud infrastructure (SoftLayer) 帐户连接到 VLAN。VLAN 会将一组工作程序节点和 pod 视为连接到同一物理连线那样进行配置。
+创建集群时，每个集群都会自动通过 IBM Cloud infrastructure (SoftLayer) 帐户连接到 VLAN。
+{:shortdesc}
+
+VLAN 会将一组工作程序节点和 pod 视为连接到同一物理连线那样进行配置。
 专用 VLAN 用于确定在集群创建期间分配给工作程序节点的专用 IP 地址，公用 VLAN 用于确定在集群创建期间分配给工作程序节点的公共 IP 地址。
 
-对于免费集群，缺省情况下集群的工作程序节点会在集群创建期间连接到 IBM 拥有的公用 VLAN 和专用 VLAN。对于标准集群，可以将工作程序节点连接到公用 VLAN 和专用 VLAN，也可以仅连接到专用 VLAN。如果要将工作程序节点仅连接到专用 VLAN，那么可以在集群创建期间指定现有专用 VLAN 的标识。但是，您还必须配置备用解决方案，以在工作程序节点与 Kubernetes 主节点之间启用安全连接。例如，您可以配置 Vyatta 以将流量从专用 VLAN 工作程序节点传递到 Kubernetes 主节点。有关更多信息，请参阅 [IBM Cloud infrastructure (SoftLayer) 文档](https://knowledgelayer.softlayer.com/procedure/basic-configuration-vyatta)中的“设置定制 Vyatta 以安全地将工作程序节点连接到 Kubernetes 主节点”。
+对于免费集群，缺省情况下集群的工作程序节点会在集群创建期间连接到 IBM 拥有的公用 VLAN 和专用 VLAN。对于标准集群，必须将工作程序节点连接到专用 VLAN。可以将工作程序节点连接到公用 VLAN 和专用 VLAN，也可以仅连接到专用 VLAN。如果要将工作程序节点仅连接到专用 VLAN，那么可以在集群创建期间指定现有专用 VLAN 的标识，或者[创建新的专用 VLAN](/docs/cli/reference/softlayer/index.html#sl_vlan_create)。但是，您还必须配置备用解决方案，以在工作程序节点与 Kubernetes 主节点之间启用安全连接。例如，您可以配置 Vyatta 以将流量从专用 VLAN 工作程序节点传递到 Kubernetes 主节点。有关更多信息，请参阅 [IBM Cloud infrastructure (SoftLayer) 文档](https://knowledgelayer.softlayer.com/procedure/basic-configuration-vyatta)中的“设置定制 Vyatta 以安全地将工作程序节点连接到 Kubernetes 主节点”。
+
+**注**：如果有多个 VLAN 用于一个集群，或者在同一 VLAN 上有多个子网，那么必须开启 VLAN 生成，以便工作程序节点可以在专用网络上相互通信。有关指示信息，请参阅[启用或禁用 VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning)。
 
 ### 工作程序节点内存限制
 {: #resource_limit_node}
@@ -123,7 +151,10 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 
 要查看工作程序节点上使用的内存量，请运行 [kubectl top node ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#top)。
 
+### 自动恢复工作程序节点
+`Docker`、`kubelet`、`kube-proxy` 和 `calico` 是关键组件，这些组件必须正常运行才能拥有正常运行的 Kubernetes 工作程序节点。随着时间变化，这些组件可能会中断，这可能使工作程序节点处于非正常运行状态。非正常运行的工作节点会使集群总容量下降，并可能导致应用程序产生停机时间。
 
+可以[为工作程序节点配置运行状况检查并启用自动恢复](cs_health.html#autorecovery)。如果自动恢复根据配置的检查，检测到运行状况欠佳的工作程序节点，那么自动恢复会触发更正操作，例如在工作程序节点上重装操作系统。有关自动恢复的工作方式的更多信息，请参阅[自动恢复博客 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/)。
 
 <br />
 
@@ -132,24 +163,44 @@ Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数
 ## 使用 GUI 创建集群
 {: #clusters_ui}
 
-Kubernetes 集群是组织成网络的一组工作程序节点。集群的用途是定义一组资源、节点、网络和存储设备，以便使应用程序保持高可用性。要部署应用程序，必须先创建集群，并在该集群中设置工作程序节点的定义。
+Kubernetes 集群的用途是定义一组资源、节点、网络和存储设备，以便使应用程序保持高可用性。要部署应用程序，必须先创建集群，并在该集群中设置工作程序节点的定义。
 {:shortdesc}
 
-要创建集群，请执行以下操作：
-1. 在目录中，选择 **Kubernetes 集群**。
-2. 选择要在其中部署集群的区域。
-3. 选择集群套餐的类型。您可以选择**免费**或**现买现付**。使用“现买现付”套餐，可以向标准集群提供诸如多个工作程序节点等功能，以获取高可用性环境。
-4. 配置集群详细信息。
-    1. 为集群提供名称，选择 Kubernetes 版本，然后选择要在其中部署集群的位置。要获得最佳性能，请选择实际离您最近的位置。请记住，如果选择您所在国家或地区以外的位置，那么您可能需要法律授权，才能将数据实际存储到国外。
-    2. 选择机器类型并指定所需的工作程序节点数。机器类型用于定义在每个工作程序节点中设置并可供容器使用的虚拟 CPU 量、内存量和磁盘空间量。
-    3. 从 IBM Cloud infrastructure (SoftLayer) 帐户中选择公用和专用 VLAN。两个 VLAN 在工作程序节点之间进行通信，但公用 VLAN 还与 IBM 管理的 Kubernetes 主节点进行通信。可以对多个集群使用相同的 VLAN。
-**注**：如果选择不选择公用 VLAN，那么必须配置备用解决方案。有关更多信息，请参阅[工作程序节点的 VLAN 连接](#worker_vlan_connection)。
-    4. 选择硬件的类型。
-        - **专用**：工作程序节点在专用于您帐户的基础架构上托管。您的资源完全隔离。
-        - **共享**：基础架构资源（例如，系统管理程序和物理硬件）在您与其他 IBM 客户之间分发，但每个工作程序节点只能由您访问。虽然此选项更便宜，并且在大多数情况下足够了，但您可能希望使用公司策略来验证您的性能和基础架构需求。
-    5. 缺省情况下，已选择**加密本地磁盘**。如果选择清除该复选框，那么主机的 Docker 数据不会加密。请[了解有关加密的更多信息](cs_secure.html#encrypted_disks)。
-4. 单击**创建集群**。您可以在**工作程序节点**选项卡中查看工作程序节点部署的进度。完成部署后，您可以在**概述**选项卡中看到集群已就绪。**注**：为每个工作程序节点分配了唯一的工作程序节点标识和域名，在创建集群后，不得手动更改该标识和域名。更改标识或域名会阻止 Kubernetes 主节点管理集群。
+开始之前，您必须具有现买现付或预订 [{{site.data.keyword.Bluemix_notm}} 帐户](https://console.bluemix.net/registration/)。您可以创建 1 个免费集群来试用部分功能，或者创建标准集群来获得具有所选硬件隔离的可完全定制的集群。
 
+要创建集群，请执行以下操作：
+
+1. 在目录中，选择 **Kubernetes 集群**。
+
+2. 选择要在其中部署集群的区域。
+
+3. 选择集群套餐的类型。可以选择**免费**或**标准**。通过标准集群，您有权访问多种功能，如高可用性环境的多个工作程序节点。
+
+4. 配置集群详细信息。
+
+    1. **免费和标准**：为集群提供名称。名称必须以字母开头，可以包含字母、数字和 -，并且不能超过 35 个字符。请注意，{{site.data.keyword.IBM_notm}} 分配的 Ingress 子域派生自集群名称。集群名称和 Ingress 子域共同构成标准域名，该名称在区域中必须唯一，并且不超过 63 个字符。为了满足这些需求，可能会截断集群名称，或者可能会为子域分配随机字符值。
+
+    2. **标准**：选择 Kubernetes 版本，然后选择要在其中部署集群的位置。要获得最佳性能，请选择实际离您最近的位置。请记住，如果选择您所在国家或地区以外的位置，那么您可能需要法律授权，才能将数据实际存储到国外。
+
+    3. **标准**：选择硬件隔离类型。“虚拟”按小时计费，“裸机”按月计费。
+
+        - **虚拟 - 专用**：工作程序节点在帐户专用的基础架构上托管。物理资源完全隔离。
+
+        - **虚拟 - 共享**：基础架构资源（例如，系统管理程序和物理硬件）在您与其他 IBM 客户之间共享，但每个工作程序节点只能由您访问。虽然此选项更便宜，并且足以满足大多数情况，但您可能希望使用公司策略来验证性能和基础架构需求。
+
+        - **裸机**：裸机服务器按月计费，通过与 IBM Cloud Infrastructure (SoftLayer) 进行手动交互来供应，可能需要一个工作日以上的时间才能完成。裸机最适用于需要更多资源和主机控制的高性能应用程序。对于运行 Kubernetes V1.9 或更高版本的集群，还可以选择启用[可信计算](cs_secure.html#trusted_compute)来验证工作程序节点是否被篡改。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `bx cs feature-enable` [命令](cs_cli_reference.html#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。
+
+        确保要供应裸机机器。因为裸机机器是按月计费的，所以如果在错误下单后立即将其取消，也仍然会按整月向您收费。
+        {:tip}
+
+    4.  **标准**：选择机器类型并指定所需的工作程序节点数。机器类型用于定义在每个工作程序节点中设置并可供容器使用的虚拟 CPU 量、内存量和磁盘空间量。可用的裸机和虚拟机类型随集群的部署位置而变化。有关更多信息，请参阅 `bx cs machine-type` [命令](cs_cli_reference.html#cs_machine_types)的文档。创建集群后，可以通过将新工作程序节点添加到集群来添加不同机器类型。
+
+    5. **标准**：从 IBM Cloud Infrastructure (SoftLayer) 帐户中选择公用 VLAN（可选）和专用 VLAN（必需）。两个 VLAN 在工作程序节点之间进行通信，但公用 VLAN 还与 IBM 管理的 Kubernetes 主节点进行通信。可以对多个集群使用相同的 VLAN。
+**注**：如果选择不选择公用 VLAN，那么必须配置备用解决方案。有关更多信息，请参阅[工作程序节点的 VLAN 连接](#worker_vlan_connection)。
+
+    6. 缺省情况下，已选择**加密本地磁盘**。如果选择清除该复选框，那么主机的 Docker 数据不会加密。请[了解有关加密的更多信息](cs_secure.html#encrypted_disks)。
+
+4. 单击**创建集群**。您可以在**工作程序节点**选项卡中查看工作程序节点部署的进度。完成部署后，您可以在**概述**选项卡中看到集群已就绪。**注**：为每个工作程序节点分配了唯一的工作程序节点标识和域名，在创建集群后，不得手动更改该标识和域名。更改标识或域名会阻止 Kubernetes 主节点管理集群。
 
 **接下来要做什么？**
 
@@ -158,6 +209,7 @@ Kubernetes 集群是组织成网络的一组工作程序节点。集群的用途
 -   [安装 CLI 以开始使用集群。](cs_cli_install.html#cs_cli_install)
 -   [在集群中部署应用程序。](cs_app.html#app_cli)
 -   [在 {{site.data.keyword.Bluemix_notm}} 中设置自己的专用注册表，以存储 Docker 映像并与其他用户共享这些映像。](/docs/services/Registry/index.html)
+- 如果有多个 VLAN 用于一个集群，或者在同一 VLAN 上有多个子网，那么必须[开启 VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning)，以便工作程序节点可以在专用网络上相互通信。
 - 如果您有防火墙，那么可能需要[打开必要的端口](cs_firewall.html#firewall)才能使用 `bx`、`kubectl` 或 `calicotl` 命令，以允许来自集群的出站流量，或允许联网服务的入站流量。
 
 <br />
@@ -166,11 +218,17 @@ Kubernetes 集群是组织成网络的一组工作程序节点。集群的用途
 ## 使用 CLI 创建集群
 {: #clusters_cli}
 
-集群是组织成网络的一组工作程序节点。集群的用途是定义一组资源、节点、网络和存储设备，以便使应用程序保持高可用性。要部署应用程序，必须先创建集群，并在该集群中设置工作程序节点的定义。
+Kubernetes 集群的用途是定义一组资源、节点、网络和存储设备，以便使应用程序保持高可用性。要部署应用程序，必须先创建集群，并在该集群中设置工作程序节点的定义。
 {:shortdesc}
 
+开始之前：
+- 您必须具有现买现付或预订 [{{site.data.keyword.Bluemix_notm}} 帐户](https://console.bluemix.net/registration/)。您可以创建 1 个免费集群来试用部分功能，或者创建标准集群来获得具有所选硬件隔离的可完全定制的集群。
+- [确保在 IBM Cloud Infrastructure (SoftLayer) 中具有最低的必需许可权来供应标准集群](cs_users.html#infra_access)。
+
 要创建集群，请执行以下操作：
+
 1.  安装 {{site.data.keyword.Bluemix_notm}} CLI 和 [{{site.data.keyword.containershort_notm}} 插件](cs_cli_install.html#cs_cli_install)。
+
 2.  登录到 {{site.data.keyword.Bluemix_notm}} CLI。根据提示，输入您的 {{site.data.keyword.Bluemix_notm}} 凭证。
 
     ```
@@ -185,7 +243,8 @@ Kubernetes 集群是组织成网络的一组工作程序节点。集群的用途
 4.  如果要在先前选择的 {{site.data.keyword.Bluemix_notm}} 区域以外的区域中创建或访问 Kubernetes 集群，请运行 `bx cs region-set`。
 
 6.  创建集群。
-    1.  查看可用的位置。显示的位置取决于您登录到的 {{site.data.keyword.containershort_notm}} 区域。
+
+    1.  **标准集群**：查看可用的位置。显示的位置取决于您登录到的 {{site.data.keyword.containershort_notm}} 区域。
 
         ```
         bx cs locations
@@ -194,28 +253,20 @@ Kubernetes 集群是组织成网络的一组工作程序节点。集群的用途
 
         CLI 输出与[容器区域的位置](cs_regions.html#locations)相匹配。
 
-    2.  选择位置并查看该位置中可用的机器类型。机器类型指定可供每个工作程序节点使用的虚拟计算资源。
+    2.  **标准集群**：选择位置并查看该位置中可用的机器类型。机器类型指定可供每个工作程序节点使用的虚拟或物理计算主机。
 
+        -  查看**服务器类型**字段，以选择虚拟或物理（裸机）机器。
+        -  **虚拟**：虚拟机按小时计费，在共享或专用硬件上供应。
+        -  **物理**：裸机服务器按月计费，通过与 IBM Cloud Infrastructure (SoftLayer) 进行手动交互来供应，可能需要一个工作日以上的时间才能完成。裸机最适用于需要更多资源和主机控制的高性能应用程序。
+        - **具有可信计算的物理机器**：对于运行 Kubernetes V1.9 或更高版本的裸机集群，还可以选择启用[可信计算](cs_secure.html#trusted_compute)来验证裸机工作程序节点是否被篡改。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `bx cs feature-enable` [命令](cs_cli_reference.html#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。
+        -  **机器类型**：要确定需要部署的机器类型，请查看内核、内存和存储器组合，或者查阅 `bx cs machine-type` [命令文档](cs_cli_reference.html#cs_machine_types)。创建集群后，可以使用 `bx cs worker-add` [命令](cs_cli_reference.html#cs_worker_add)来添加其他物理或虚拟机类型。
 
-        ```
-        bx cs machine-types <location>
-        ```
-        {: pre}
+           确保要供应裸机机器。因为裸机机器是按月计费的，所以如果在错误下单后立即将其取消，也仍然会按整月向您收费。
+        {:tip}
 
-        ```
-        Getting machine types list...
-        OK
-        Machine Types
-        Name         Cores   Memory   Network Speed   OS             Storage   Server Type
-        u2c.2x4      2       4GB      1000Mbps        UBUNTU_16_64   100GB     virtual
-        b2c.4x16     4       16GB     1000Mbps        UBUNTU_16_64   100GB     virtual
-        b2c.16x64    16      64GB     1000Mbps        UBUNTU_16_64   100GB     virtual
-        b2c.32x128   32      128GB    1000Mbps        UBUNTU_16_64   100GB     virtual
-        b2c.56x242   56      242GB    1000Mbps        UBUNTU_16_64   100GB     virtual
-        ```
-        {: screen}
+        <pre class="pre">bx cs machine-types &lt;location&gt;</pre>
 
-    3.  检查 IBM Cloud infrastructure (SoftLayer) 中是否已存在此帐户的公用和专用 VLAN。
+    3.  **标准集群**：检查以确定 IBM Cloud Infrastructure (SoftLayer) 中是否已存在此帐户的公用和专用 VLAN。
 
         ```
         bx cs vlans <location>
@@ -233,14 +284,16 @@ Kubernetes 集群是组织成网络的一组工作程序节点。集群的用途
 
         如果公用和专用 VLAN 已经存在，请记下匹配的路由器。专用 VLAN 路由器始终以 `bcr`（后端路由器）开头，而公用 VLAN 路由器始终以 `fcr`（前端路由器）开头。这两个前缀后面的数字和字母组合必须匹配，才可在创建集群时使用这些 VLAN。在示例输出中，任一专用 VLAN 都可以与任一公用 VLAN 一起使用，因为路由器全都包含 `02a.dal10`。
 
-    4.  运行 `cluster-create` 命令。您可以选择免费集群（包含设置有 2 个 vCPU 和 4 GB 内存的一个工作程序节点）或标准集群（可以包含您在 IBM Cloud infrastructure (SoftLayer) 帐户中选择的任意数量的工作程序节点）。创建标准集群时，缺省情况下会对工作程序节点磁盘进行加密，其硬件由多个 IBM 客户共享，并且会按使用小时数对其进行计费。</br>标准集群的示例：
+        必须将工作程序节点连接到专用 VLAN，还可以选择将工作程序节点连接到公用 VLAN。**注**：如果选择不选择公用 VLAN，那么必须配置备用解决方案。有关更多信息，请参阅[工作程序节点的 VLAN 连接](#worker_vlan_connection)。
+
+    4.  **免费和标准集群**：运行 `cluster-create` 命令。您可以选择免费集群（包含设置有 2 个 vCPU 和 4 GB 内存的一个工作程序节点）或标准集群（可以包含您在 IBM Cloud infrastructure (SoftLayer) 帐户中选择的任意数量的工作程序节点）。创建标准集群时，缺省情况下会对工作程序节点磁盘进行加密，其硬件由多个 IBM 客户共享，并且会按使用小时数对其进行计费。</br>标准集群的示例。指定集群的选项：
 
         ```
-        bx cs cluster-create --location dal10 --machine-type u2c.2x4 --hardware <shared_or_dedicated> --public-vlan <public_vlan_id> --private-vlan <private_vlan_id> --workers 3 --name <cluster_name> --kube-version <major.minor.patch> 
+        bx cs cluster-create --location dal10 --machine-type u2c.2x4 --hardware <shared_or_dedicated> --public-vlan <public_vlan_id> --private-vlan <private_vlan_id> --workers 3 --name <cluster_name> --kube-version <major.minor.patch> [--disable-disk-encrypt] [--trusted]
         ```
         {: pre}
 
-        免费集群的示例：
+        免费集群的示例。指定集群名称：
 
         ```
         bx cs cluster-create --name my_cluster
@@ -259,43 +312,47 @@ Kubernetes 集群是组织成网络的一组工作程序节点。集群的用途
         </tr>
         <tr>
         <td><code>--location <em>&lt;location&gt;</em></code></td>
-        <td>将 <em>&lt;location&gt;</em> 替换为要在其中创建集群的 {{site.data.keyword.Bluemix_notm}} 位置标识。[可用位置](cs_regions.html#locations)取决于您登录到的 {{site.data.keyword.containershort_notm}} 区域。</td>
+        <td>**标准集群**：将 <em>&lt;location&gt;</em> 替换为要在其中创建集群的 {{site.data.keyword.Bluemix_notm}} 位置标识。[可用位置](cs_regions.html#locations)取决于您登录到的 {{site.data.keyword.containershort_notm}} 区域。</td>
         </tr>
         <tr>
         <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
-        <td>如果要创建标准集群，请选择机器类型。机器类型指定可供每个工作程序节点使用的虚拟计算资源。有关更多信息，请查看[比较 {{site.data.keyword.containershort_notm}} 的免费和标准集群](cs_why.html#cluster_types)。对于免费集群，无需定义机器类型。</td>
+        <td>**标准集群**：选择机器类型。可以将工作程序节点作为虚拟机部署在共享或专用硬件上，也可以作为物理机器部署在裸机上。可用的物理和虚拟机类型随集群的部署位置而变化。有关更多信息，请参阅 `bx cs machine-type` [命令](cs_cli_reference.html#cs_machine_types)的文档。对于免费集群，无需定义机器类型。</td>
         </tr>
         <tr>
         <td><code>--hardware <em>&lt;shared_or_dedicated&gt;</em></code></td>
-        <td>工作程序节点的硬件隔离级别。如果希望可用的物理资源仅供您专用，请使用 dedicated，或者要允许物理资源与其他 IBM 客户共享，请使用 shared。缺省值为 shared。此值对于标准集群是可选的，且不可用于免费集群。</td>
+        <td>**标准集群（仅虚拟）**：工作程序节点的硬件隔离级别。如果希望可用的物理资源仅供您专用，请使用 dedicated，或者要允许物理资源与其他 IBM 客户共享，请使用 shared。缺省值为 shared。此值对于标准集群是可选的，且不可用于免费集群。</td>
         </tr>
         <tr>
         <td><code>--public-vlan <em>&lt;public_vlan_id&gt;</em></code></td>
         <td><ul>
-          <li>对于免费集群，无需定义公用 VLAN。免费集群会自动连接到 IBM 拥有的公用 VLAN。</li>
-          <li>对于标准集群，如果已经在 IBM Cloud infrastructure (SoftLayer) 帐户中为该位置设置了公用 VLAN，请输入该公用 VLAN 的标识。如果您的帐户中没有公用和专用 VLAN，请勿指定此选项。{{site.data.keyword.containershort_notm}} 会自动为您创建公用 VLAN。<br/><br/>
+          <li>**免费集群**：无需定义公用 VLAN。免费集群会自动连接到 IBM 拥有的公用 VLAN。</li>
+          <li>**标准集群**：如果已经在 IBM Cloud Infrastructure (SoftLayer) 帐户中为该位置设置了公用 VLAN，请输入该公用 VLAN 的标识。如果要将工作程序节点仅连接到专用 VLAN，请不要指定此选项。**注**：如果选择不选择公用 VLAN，那么必须配置备用解决方案。有关更多信息，请参阅[工作程序节点的 VLAN 连接](#worker_vlan_connection)。<br/><br/>
           <strong>注</strong>：专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。这两个前缀后面的数字和字母组合必须匹配，才可在创建集群时使用这些 VLAN。</li>
         </ul></td>
         </tr>
         <tr>
         <td><code>--private-vlan <em>&lt;private_vlan_id&gt;</em></code></td>
-        <td><ul><li>对于免费集群，无需定义专用 VLAN。免费集群会自动连接到 IBM 拥有的专用 VLAN。</li><li>对于标准集群，如果已经在 IBM Cloud infrastructure (SoftLayer) 帐户中为该位置设置了专用 VLAN，请输入该专用 VLAN 的标识。如果您的帐户中没有公用和专用 VLAN，请勿指定此选项。{{site.data.keyword.containershort_notm}} 会自动为您创建公用 VLAN。<br/><br/><strong>注</strong>：专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。这两个前缀后面的数字和字母组合必须匹配，才可在创建集群时使用这些 VLAN。</li></ul></td>
+        <td><ul><li>**免费集群**：无需定义专用 VLAN。免费集群会自动连接到 IBM 拥有的专用 VLAN。</li><li>**标准集群**：如果已经在 IBM Cloud Infrastructure (SoftLayer) 帐户中为该位置设置了专用 VLAN，请输入该专用 VLAN 的标识。如果帐户中没有专用 VLAN，请不要指定此选项。{{site.data.keyword.containershort_notm}} 会自动为您创建专用 VLAN。<br/><br/><strong>注</strong>：专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。这两个前缀后面的数字和字母组合必须匹配，才可在创建集群时使用这些 VLAN。</li></ul></td>
         </tr>
         <tr>
         <td><code>--name <em>&lt;name&gt;</em></code></td>
-        <td>将 <em>&lt;name&gt;</em> 替换为集群的名称。</td>
+        <td>**免费和标准集群**：将 <em>&lt;name&gt;</em> 替换为集群的名称。名称必须以字母开头，可以包含字母、数字和 -，并且不能超过 35 个字符。请注意，{{site.data.keyword.IBM_notm}} 分配的 Ingress 子域派生自集群名称。集群名称和 Ingress 子域共同构成标准域名，该名称在区域中必须唯一，并且不超过 63 个字符。为了满足这些需求，可能会截断集群名称，或者可能会为子域分配随机字符值。</td>
         </tr>
         <tr>
         <td><code>--workers <em>&lt;number&gt;</em></code></td>
-        <td>要包含在集群中的工作程序节点的数目。如果未指定 <code>--workers</code> 选项，那么会创建 1 个工作程序节点。</td>
+        <td>**标准集群**：要包含在集群中的工作程序节点数。如果未指定 <code>--workers</code> 选项，那么会创建 1 个工作程序节点。</td>
         </tr>
         <tr>
           <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
-          <td>集群主节点的 Kubernetes 版本。此值是可选的。除非指定，否则会使用受支持 Kubernetes 版本的缺省值来创建集群。要查看可用版本，请运行 <code>bx cs kube-versions</code>。</td>
+          <td>**标准集群**：集群主节点的 Kubernetes 版本。此值是可选的。除非指定，否则会使用受支持 Kubernetes 版本的缺省值来创建集群。要查看可用版本，请运行 <code>bx cs kube-versions</code>。</td>
         </tr>
         <tr>
         <td><code>--disable-disk-encrypt</code></td>
-        <td>工作程序节点缺省情况下具有磁盘加密功能：[了解更多](cs_secure.html#encrypted_disks)。如果要禁用加密，请包括此选项。</td>
+        <td>**免费和标准集群**：工作程序节点缺省情况下具有磁盘加密功能；[了解更多信息](cs_secure.html#encrypted_disks)。如果要禁用加密，请包括此选项。</td>
+        </tr>
+        <tr>
+        <td><code>--trusted</code></td>
+        <td>**标准裸机集群**：启用[可信计算](cs_secure.html#trusted_compute)以验证裸机工作程序节点是否被篡改。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `bx cs feature-enable` [命令](cs_cli_reference.html#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。</td>
         </tr>
         </tbody></table>
 
@@ -306,13 +363,13 @@ Kubernetes 集群是组织成网络的一组工作程序节点。集群的用途
     ```
     {: pre}
 
-    **注**：可能需要最长 15 分钟时间，才能订购好工作程序节点计算机，并且在您的帐户中设置并供应集群。
+    **注**：对于虚拟机，可能需要若干分钟才能订购好工作程序节点机器，并且在帐户中设置并供应集群。裸机物理机器通过与 IBM Cloud Infrastructure (SoftLayer) 进行手动交互来供应，可能需要一个工作日以上的时间才能完成。
 
     当完成集群供应时，集群的状态会更改为**已部署**。
 
     ```
-    Name         ID                                   State      Created          Workers
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1
+    Name         ID                                   State      Created          Workers   Location   Version
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.8.8
     ```
     {: screen}
 
@@ -328,8 +385,8 @@ Kubernetes 集群是组织成网络的一组工作程序节点。集群的用途
     **注**：为每个工作程序节点分配了唯一的工作程序节点标识和域名，在创建集群后，不得手动更改该标识和域名。更改标识或域名会阻止 Kubernetes 主节点管理集群。
 
     ```
-    ID                                                  Public IP        Private IP     Machine Type   State      Status
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1   169.47.223.113   10.171.42.93   free           normal    Ready
+    ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.47.223.113  10.171.42.93    free           normal   Ready    mil01      1.8.8
     ```
     {: screen}
 
@@ -394,29 +451,80 @@ Kubernetes 集群是组织成网络的一组工作程序节点。集群的用途
 -   [在集群中部署应用程序。](cs_app.html#app_cli)
 -   [使用 `kubectl` 命令行管理集群。![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/user-guide/kubectl/)
 -   [在 {{site.data.keyword.Bluemix_notm}} 中设置自己的专用注册表，以存储 Docker 映像并与其他用户共享这些映像。](/docs/services/Registry/index.html)
+- 如果有多个 VLAN 用于一个集群，或者在同一 VLAN 上有多个子网，那么必须[开启 VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning)，以便工作程序节点可以在专用网络上相互通信。
 - 如果您有防火墙，那么可能需要[打开必要的端口](cs_firewall.html#firewall)才能使用 `bx`、`kubectl` 或 `calicotl` 命令，以允许来自集群的出站流量，或允许联网服务的入站流量。
 
 <br />
 
 
-## 集群状态
+
+
+## 查看集群状态
 {: #states}
 
-您可以通过运行 `bx cs clusters` 命令并找到**状态**字段，查看当前集群状态。集群状态提供了有关集群可用性和容量的信息以及可能已发生的潜在问题。
+查看 Kubernetes 集群的状态，以获取有关集群可用性和容量的信息以及可能已发生的潜在问题。
 {:shortdesc}
 
-|集群状态|原因|
-|-------------|------|
+要查看有关特定集群的信息（例如，其位置、主节点 URL、Ingress 子域、版本、工作程序、所有者和监视仪表板），请使用 `bx cs cluster-get<mycluster>` [命令](cs_cli_reference.html#cs_cluster_get)。包含 `--showResources` 标志可查看更多集群资源，例如存储 pod 的附加组件或公共和专用 IP 的子网 VLAN。
 
-|紧急|无法访问 Kubernetes 主节点，或者集群中的所有工作程序节点都已停止运行。<ol><li>列出集群中的工作程序节点。<pre class="pre"><code>bx cs workers &lt;cluser_name_or_id&gt;</code></pre><li>获取每个工作程序节点的详细信息。<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre></li><li>查看<strong>状态</strong>和<strong>阶段状态</strong>字段，以查找工作程序节点为什么会关闭的根本问题。<ul><li>如果工作程序节点状态显示 <strong>Provision_failed</strong>，说明您可能没有必需的许可权来从 IBM Cloud infrastructure (SoftLayer) 产品服务组合供应工作程序节点。要查找必需的许可权，请参阅[配置对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权以创建标准 Kubernetes 集群](cs_infrastructure.html#unify_accounts)。</li><li>如果工作程序节点状态显示<strong>紧急</strong>，并且阶段状态显示<strong>未就绪</strong>，那么您的工作程序节点可能无法连接到 IBM Cloud infrastructure (SoftLayer)。首先，通过运行 <code>bx cs worker-reboot --hard CLUSTER WORKER</code> 来启动故障诊断。如果该命令未成功，请运行 <code>bx cs worker reload CLUSTER WORKER</code>。</li><li>如果工作程序节点状态显示 <strong>Critical</strong>，并且阶段状态显示 <strong>Out of disk</strong>，说明工作程序节点的容量不足。您可以减少工作程序节点上的工作负载，或者向集群添加一个工作程序节点以帮助均衡工作负载。</li><li>如果工作程序节点状态显示 <strong>Critical</strong>，并且阶段状态显示 <strong>Unknown</strong>，说明 Kubernetes 主节点不可用。请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](/docs/get-support/howtogetsupport.html#using-avatar)来联系 {{site.data.keyword.Bluemix_notm}} 支持。</li></ul></li></ol>|
+您可以通过运行 `bx cs clusters` 命令并找到**状态**字段，查看当前集群状态。要对集群和工作程序节点进行故障诊断，请参阅[集群故障诊断](cs_troubleshoot.html#debug_clusters)。
 
-|正在部署|Kubernetes 主节点尚未完全部署。无法访问集群。|
-|正常|集群中的所有工作程序节点都已启动并正在运行。您可以访问集群，并将应用程序部署到集群。|
-|暂挂|Kubernetes 主节点已部署。正在供应工作程序节点，这些节点在集群中尚不可用。您可以访问集群，但无法将应用程序部署到集群。|
-
-|警告|集群中至少有一个工作程序节点不可用，但其他工作程序节点可用，并且可以接管工作负载。<ol><li>列出集群中的工作程序节点，并记下显示 <strong>Warning</strong> 状态的工作程序节点的标识。<pre class="pre"><code>bx cs workers &lt;cluster_name_or_id&gt;</code></pre><li>获取工作程序节点的详细信息。<pre class="pre"><code>bx cs worker-get &lt;worker_id&gt;</code></pre><li>查看<strong>状态</strong>、<strong>阶段状态</strong>和<strong>详细信息</strong>字段，以找到导致工作程序节点停止运行的根本问题。</li><li>如果工作程序节点几乎达到内存或磁盘空间限制，请减少工作程序节点上的工作负载，或者向集群添加一个工作程序节点以帮助均衡工作负载。</li></ol>|
-
-{: caption="表. 集群状态" caption-side="top"}
+<table summary="每个表行都应从左到右阅读，其中第一列是集群状态，第二列是描述。">
+  <thead>
+   <th>集群状态</th>
+   <th>描述</th>
+   </thead>
+   <tbody>
+<tr>
+   <td>Aborted</td>
+   <td>在部署 Kubernetes 主节点之前，用户请求删除集群。在集群删除完成后，将从仪表板中除去集群。如果集群长时间卡在此状态，请开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](/docs/get-support/howtogetsupport.html#using-avatar)。</td>
+   </tr>
+ <tr>
+     <td>Critical</td>
+     <td>无法访问 Kubernetes 主节点，或者集群中的所有工作程序节点都已停止运行。</td>
+    </tr>
+   <tr>
+     <td>Delete failed</td>
+     <td>Kubernetes 主节点或至少一个工作程序节点无法删除。</td>
+   </tr>
+   <tr>
+     <td>Deleted</td>
+     <td>集群已删除，但尚未从仪表板中除去。如果集群长时间卡在此状态，请开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](/docs/get-support/howtogetsupport.html#using-avatar)。</td>
+   </tr>
+   <tr>
+   <td>Deleting</td>
+   <td>正在删除集群，并且正在拆除集群基础架构。无法访问集群。</td>
+   </tr>
+   <tr>
+     <td>Deploy failed</td>
+     <td>无法完成 Kubernetes 主节点的部署。您无法解决此状态。请通过开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](/docs/get-support/howtogetsupport.html#using-avatar)来联系 IBM Cloud 支持。</td>
+   </tr>
+     <tr>
+       <td>Deploying</td>
+       <td>Kubernetes 主节点尚未完全部署。无法访问集群。请等待集群完全部署后，再复查集群的运行状况。</td>
+      </tr>
+      <tr>
+       <td>Normal</td>
+       <td>集群中的所有工作程序节点都已启动并正在运行。您可以访问集群，并将应用程序部署到集群。此状态视为正常运行，不需要您执行操作。</td>
+    </tr>
+      <tr>
+       <td>Pending</td>
+       <td>Kubernetes 主节点已部署。正在供应工作程序节点，这些节点在集群中尚不可用。您可以访问集群，但无法将应用程序部署到集群。</td>
+     </tr>
+   <tr>
+     <td>Requested</td>
+     <td>发送了用于创建集群并为 Kubernetes 主节点和工作程序节点订购基础架构的请求。集群部署启动后，集群状态将更改为 <code>Deploying</code>。如果集群长时间卡在 <code>Requested</code> 状态，请开具 [{{site.data.keyword.Bluemix_notm}} 支持凭单](/docs/get-support/howtogetsupport.html#using-avatar)。</td>
+   </tr>
+   <tr>
+     <td>Updating</td>
+     <td>在 Kubernetes 主节点中运行的 Kubernetes API 服务器正在更新到新的 Kubernetes API 版本。在更新期间，无法访问或更改集群。用户已部署的工作程序节点、应用程序和资源不会被修改，并且将继续运行。等待更新完成后，再复查集群的运行状况。</td>
+   </tr>
+    <tr>
+       <td>Warning</td>
+       <td>集群中至少有一个工作程序节点不可用，但其他工作程序节点可用，并且可以接管工作负载。</td>
+    </tr>
+   </tbody>
+ </table>
 
 <br />
 

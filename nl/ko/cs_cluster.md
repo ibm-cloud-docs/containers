@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-03-08"
 
 ---
 
@@ -40,9 +40,8 @@ lastupdated: "2018-01-11"
     - [Kubernetes 클러스터에 사용자가 관리하는 서브넷 및 IP 주소 추가](cs_subnets.html#user_managed)
 - [클러스터에서 기존 NFS 파일 공유 사용](cs_storage.html#existing)
 - [클러스터 로깅 구성](cs_health.html#logging)
-    - [로그 전달 사용](cs_health.html#log_sources_enable)
-    - [애플리케이션에 대한 로그 전달 사용](cs_health.html#apps_enable)
-    - [로그 전달 구성 업데이트](cs_health.html#log_sources_update)
+    - [로그 전달 사용](cs_health.html#logging)
+    - [로그 전달 구성 업데이트](cs_health.html#logging)
     - [로그 전달 중지](cs_health.html#log_sources_delete)
     - [Kubernetes API 감사 로그의 로그 전달 구성](cs_health.html#app_forward)
     - [Kubernetes API 감사 로그 전달 사용](cs_health.html#audit_enable)

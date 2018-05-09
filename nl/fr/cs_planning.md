@@ -18,7 +18,7 @@ lastupdated: "2018-01-24"
 # Le contenu que vous cherchez a été déplacé.
 
 Consultez les informations les plus récentes dans son nouvel emplacement :
- - [Comparaison des clusters gratuits et standards](cs_why.html#cluster_types)
+ - [Comparaison des clusters gratuits et standard](cs_why.html#cluster_types)
  - [Configuration de cluster](cs_clusters.html#planning_clusters)
  - [Configuration du noeud worker](cs_clusters.html#planning_worker_nodes)
  - [Responsabilités de gestion de cluster](cs_why.html#responsibilities)

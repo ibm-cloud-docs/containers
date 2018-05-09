@@ -24,7 +24,7 @@ Aktuelle Informationen finden Sie an der neuen Position:
 - [Öffentlichen Zugriff auf Apps zulassen](cs_network_planning.html#planning)
   - [Öffentlichen Zugriff auf eine App durch Verwenden des Servicetyps 'NodePort' konfigurieren](cs_nodeport.html#config)
   - [Zugriff auf eine App durch Verwenden des Servicetyps 'LoadBalancer' konfigurieren](cs_loadbalancer.html#config)
-  - [Zugriff auf eine App mithilfe von Ingress konfigurieren](cs_ingress.html#config)
+  - [Zugriff auf eine App mithilfe von Ingress konfigurieren](cs_ingress.html#configure_alb)
     - [Von IBM bereitgestellte Domäne ohne TLS-Terminierung verwenden](cs_ingress.html#ibm_domain)
     - [Von IBM bereitgestellte Domäne mit TLS-Terminierung verwenden](cs_ingress.html#ibm_domain_cert)
     - [Angepasste Domäne und TLS-Zertifikat für TLS-Terminierung verwenden](cs_ingress.html#custom_domain_cert)

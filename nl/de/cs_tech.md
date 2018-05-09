@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -17,10 +17,13 @@ lastupdated: "2018-01-11"
 
 # {{site.data.keyword.containerlong_notm}}-Technologie
 
+Weitere Informationen zur Technologie hinter {{site.data.keyword.containerlong}}.
+{:shortdesc}
+
 ## Docker-Container
 {: #docker_containers}
 
-Docker ist ein Open-Source-Projekt, das von dotCloud 2013 veröffentlicht wurde. Aufbauend auf Features der vorhandenen LXC (Linux Containers)-Technologie hat sich Docker zu einer Softwareplattform entwickelt, die Sie zum schnellen Testen, Bereitstellen und Skalieren von Apps einsetzen können. Docker packt Software in standardisierten Einheiten, die als Container bezeichnet werden und alle Elemente enthalten, die eine App für die Ausführung benötigt.
+Aufbauend auf der vorhandenen LXC (Linux Container)-Technologie hat sich das Open-Source-Projekt Docker zu einer Softwareplattform entwickelt, die Sie zum schnellen Testen, Bereitstellen und Skalieren von Apps einsetzen können. Docker packt Software in standardisierten Einheiten, die als Container bezeichnet werden und alle Elemente enthalten, die eine App für die Ausführung benötigt.
 {:shortdesc}
 
 Erfahren Sie mehr über einige grundlegende Docker-Konzepte:
@@ -32,7 +35,7 @@ Erfahren Sie mehr über einige grundlegende Docker-Konzepte:
 <dd>Eine Image-Registry ist ein Ort, an dem Docker-Images gespeichert, abgerufen und von gemeinsam genutzt werden können. Die in einer Registry gespeicherten Images können öffentlich verfügbar sein (öffentliche Registry) oder aber für eine kleine Gruppe von Benutzern zugänglich sein (private Registry). {{site.data.keyword.containershort_notm}} bietet öffentliches Images, z. B. 'ibmliberty', mit denen Sie Ihre erste containerisierte App erstellen können. Was Unternehmensanwendungen betrifft, so sollten Sie jedoch eine private Registry (wie z. B. die von {{site.data.keyword.Bluemix_notm}} bereitgestellte Registry) verwenden, um zu verhindern, dass Ihre Images durch nicht berechtigte Benutzer verwendet werden.
 </dd>
 <dt>Container</dt>
-<dd>Jeder Container wird auf der Grundlage eines Images erstellt. Ein Container ist eine gepackte App mit den zugehörigen Abhängigkeiten, sodass die App in eine andere Umgebungen verlagert und dort ohne Änderungen ausgeführt werden kann. Im Unterschied zu virtuellen Maschinen virtualisieren Container keine Einheiten, die zugehörigen Betriebssysteme und die zugrunde liegende Hardware. Nur App-Code, Laufzeit, Systemtools, Bibliotheken und Einstellungen werden in dem Container gepackt. Container werden als isolierte Prozesse auf Rechenhosts ausgeführt und nutzen dasselbe Hostbetriebssystem und dieselben Hardwareressourcen. Dadurch ist ein Container schlanker, leichter portierbar und effizienter als eine virtuelle Maschine.</dd>
+<dd>Jeder Container wird auf der Grundlage eines Images erstellt. Ein Container ist eine gepackte App mit den zugehörigen Abhängigkeiten, sodass die App in eine andere Umgebungen verlagert und dort ohne Änderungen ausgeführt werden kann. Im Unterschied zu virtuellen Maschinen virtualisieren Container keine Einheiten, die zugehörigen Betriebssysteme und die zugrunde liegende Hardware. Nur App-Code, Laufzeit, Systemtools, Bibliotheken und Einstellungen werden in dem Container gepackt. Container werden als isolierte Prozesse auf Ubuntu-Rechenhosts ausgeführt und nutzen dasselbe Hostbetriebssystem und dieselben Hardwareressourcen. Dadurch ist ein Container schlanker, leichter portierbar und effizienter als eine virtuelle Maschine.</dd>
 </dl>
 
 ### Die wichtigsten Vorteile der Verwendung von Containern
@@ -57,7 +60,7 @@ Erfahren Sie mehr über einige grundlegende Docker-Konzepte:
 ## Grundlegende Informationen zu Kubernetes
 {: #kubernetes_basics}
 
-Kubernetes wurde von Google als Teil des Borg-Projekts entwickelt und im Jahr 2014 an die Open-Source-Community übergeben. Kubernetes vereint über 15 Jahre Google-Forschung in der Ausführung einer containerisierten Infrastruktur mit Produktionsarbeitslasten, Open-Source-Beiträgen und Managementtools für Docker-Container und stellt nun eine isolierte und sichere App-Plattform für die Verwaltung von Containern zur Verfügung, die portierbar, erweiterbar und bei Auftreten von Failover-Situationen selbstheilend ist.
+Das Open-Source-Projekt Kubernetes vereint die Ausführung einer containerisierten Infrastruktur mit Produktionsarbeitslasten, Open-Source-Beiträgen und Managementtools für Docker-Container. Die Kubernetes-Infrastruktur bietet eine isolierte und sichere App-Plattform für die Verwaltung von Containern, die portierbar, erweiterbar und bei Auftreten von Failover-Situationen selbstheilend ist.
 {:shortdesc}
 
 Im folgenden Diagramm sind einige grundlegende Kubernetes-Konzepte veranschaulicht.
@@ -96,12 +99,19 @@ Weitere Informationen zur Kubernetes-Terminologie finden Sie im <a href="cs_tuto
 ## Servicearchitektur
 {: #architecture}
 
-Jeder Workerknoten ist mit einer von {{site.data.keyword.IBM_notm}} verwalteten Docker Engine, getrennten Berechnungsressourcen, Netzbetrieb und Datenträgerservice eingerichtet und verfügt ferner über integrierte Sicherheitsfeatures, die die Isolation, die Funktionalität für die Verwaltung von Ressourcen und die Einhaltung der Sicherheitsbestimmungen für die Workerknoten sicherstellen. Der Workerknoten kommuniziert über sichere TLS-Zertifikate und eine openVPN-Verbindung mit dem Master.
-{:shortdesc}
+In einem Kubernetes-Cluster, der auf {{site.data.keyword.containershort_notm}} ausgeführt wird, sind Ihre containerisierten Apps auf Rechenhosts gehostet, die als Workerknoten bezeichnet werden. Ganz genau genommen, werden sie auf Pods ausgeführt, die wiederum auf Workerknoten gehostet werden. Workerknoten werden vom Kubernetes-Master verwaltet. Der Kubernetes Master und die Arbeitsknoten kommunizieren über sichere TLS-Zertifikate und eine openVPN-Verbindung miteinander, um Ihre Clusterkonfigurationen zu koordinieren.{: shortdesc}
+
+Worin besteht der Unterschied zwischen dem Kubernetes-Master und einem Workerknoten? Gut, dass Sie das fragen. 
+
+<dl>
+  <dt>Kubernetes-Master</dt>
+    <dd>Der Kubernetes-Master hat die Aufgabe, alle Rechen-, Netz- und Speicherressourcen im Cluster zu verwalten. Der Kubernetes-Master stellt sicher, dass Ihre containerisierten Apps und Services auf den Workerknoten im Cluster gleichmäßig bereitgestellt werden. Abhängig davon, wie Sie Ihre App und Services konfigurieren, bestimmt der Master den Workerknoten, der über ausreichend Ressourcen verfügt, um die Anforderungen einer App zu erfüllen. </dd>
+  <dt>Workerknoten</dt>
+    <dd>Jeder Workerknoten ist eine physische Maschine (Bare-Metal) oder eine virtuelle Maschine, die auf physischer Hardware ausgeführt wird, und die in einer Cloudumgebung verwaltet wird. Wenn Sie einen Workerknoten bereitstellen, legen Sie die Ressourcen fest, die den auf diesem Workerknoten gehosteten Containern zur Verfügung stehen. Ohne Vorbereitungen sind Ihre Workerknoten mit einer von {{site.data.keyword.IBM_notm}} verwalteten Docker Engine, getrennten Rechenressourcen, Netzbetrieb und einem Datenträgerservice eingerichtet. Die integrierten Sicherheitsfeatures stellen die Isolation, die Funktionalität für die Verwaltung von Ressourcen und die Einhaltung der Sicherheitsbestimmungen für die Workerknoten sicher. </dd>
+</dl>
 
 ![{{site.data.keyword.containerlong_notm}} Kubernetes-Architektur](images/cs_org_ov.png)
-
-Das Diagramm veranschaulicht, was von Ihnen in einem Cluster und was von IBM verwaltet wird. Weitere Informationen zu diesen Verwaltungstasks finden Sie in [Zuständigkeiten beim Cluster-Management](cs_why.html#responsibilities).
+Abbildung. {{site.data.keyword.containershort_notm}}-Architektur
 
 <br />
 

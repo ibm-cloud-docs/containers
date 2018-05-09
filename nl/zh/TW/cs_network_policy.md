@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-02-27"
 
 ---
 
@@ -18,10 +18,11 @@ lastupdated: "2018-01-24"
 # 使用網路原則控制資料流量
 {: #network_policies}
 
-每個 Kubernetes 叢集都會設定稱為 Calico 的網路外掛程式。已設定預設的網路原則來保護每個工作者節點的公用網路介面。當您有獨特的安全需求時，可以使用 Calico 及原生 Kubernetes 功能來配置叢集的其他網路原則。這些網路原則指定您要容許或封鎖的與叢集中 Pod 之間往來的網路資料流量。
+每個 Kubernetes 叢集都會設定稱為 Calico 的網路外掛程式。已設定預設的網路原則來保護 {{site.data.keyword.containerlong}} 中每個工作者節點的公用網路介面。
 {: shortdesc}
 
-您可以選擇 Calico 與原生 Kubernetes 功能，以建立叢集的網路原則。您可以使用 Kubernetes 網路原則開始，但若需要更健全的功能，請使用 Calico 網路原則。
+當您有獨特的安全需求時，可以使用 Calico 及原生 Kubernetes 功能來配置叢集的其他網路原則。這些網路原則指定您要容許或封鎖的與叢集中 Pod 之間往來的網路資料流量。
+您可以使用 Kubernetes 網路原則開始，但若需要更健全的功能，請使用 Calico 網路原則。
 
 <ul>
   <li>[Kubernetes 網路原則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/network-policies/)：提供部分基本選項，例如，指定可以彼此通訊的 Pod。對於通訊協定及埠，可以容許或封鎖送入的網路資料流量。可以根據正在嘗試連接至其他 Pod 之 Pod 的標籤及 Kubernetes 名稱空間來過濾此資料流量。</br>您可以使用 `kubectl` 指令或 Kubernetes API 來套用這些原則。這些原則在套用時會轉換為 Calico 網路原則，而 Calico 會強制執行這些原則。</li>
@@ -40,7 +41,7 @@ lastupdated: "2018-01-24"
 ## 預設原則配置
 {: #default_policy}
 
-建立叢集時，會自動設定每一個工作者節點的公用網路介面的預設網路原則，以限制工作者節點來自公用網際網路的送入資料流量。這些原則不會影響 Pod 對 Pod 的資料流量，並且設定以容許存取 Kubernetes NodePort、負載平衡器及 Ingress 服務。
+建立叢集時，會設定每一個工作者節點的公用網路介面的預設網路原則，以限制來自公用網際網路的送入資料流量。這些原則不會影響 Pod 對 Pod 的資料流量，並容許存取 Kubernetes nodeport、負載平衡器及 Ingress 服務。
 {:shortdesc}
 
 預設原則不會直接套用至 Pod：它們是使用 Calico 主機端點套用至工作者節點的公用網路介面。在 Calico 中建立主機端點時，會封鎖與該工作者節點的網路介面之間往來的所有資料流量，除非原則容許該資料流量。
@@ -320,7 +321,7 @@ lastupdated: "2018-01-24"
 ## 封鎖對 LoadBalancer 或 NodePort 服務的送入資料流量
 {: #block_ingress}
 
-依預設，Kubernetes `NodePort` 及 `LoadBalancer` 服務的設計是要讓您的應用程式能夠在所有公用和專用叢集介面上使用。不過，您可以根據資料流量來源或目的地，封鎖對您服務的送入資料流量。若要封鎖資料流量，請建立 Calico `preDNAT` 網路原則。
+依預設，Kubernetes `NodePort` 及 `LoadBalancer` 服務的設計是要讓您的應用程式能夠在所有公用和專用叢集介面上使用。不過，您可以根據資料流量來源或目的地，封鎖對您服務的送入資料流量。
 {:shortdesc}
 
 Kubernetes LoadBalancer 服務也是 NodePort 服務。LoadBalancer 服務可讓您的應用程式透過負載平衡器 IP 位址及埠提供使用，並讓您的應用程式可透過服務的節點埠提供使用。叢集中每個節點的每個 IP 位址（公開和專用）上都可以存取節點埠。

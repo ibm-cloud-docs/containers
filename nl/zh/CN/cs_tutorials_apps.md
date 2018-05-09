@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-02-05"
+lastupdated: "2017-02-27"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2017-02-05"
 # 教程：将应用程序部署到集群
 {: #cs_apps_tutorial}
 
-您可以了解如何使用 {{site.data.keyword.containershort_notm}} 来部署利用 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 的容器化应用程序。
+您可以了解如何使用 {{site.data.keyword.containerlong}} 来部署利用 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 的容器化应用程序。
 {: shortdesc}
 
 在此场景中，一家虚构的公关公司使用 {{site.data.keyword.Bluemix_notm}} 服务来分析其新闻稿，并在消息中收到了关于语气的反馈。
@@ -61,8 +61,11 @@ lastupdated: "2017-02-05"
 ## 第 1 课：将单实例应用程序部署到 Kubernetes 集群
 {: #cs_apps_tutorial_lesson1}
 
-在上一个教程中，您已创建含一个工作程序节点的集群。在本课中，您将配置部署并将应用程序的单个实例部署到工作程序节点内的 Kubernetes pod 中。下图显示通过完成本课部署的各组件。
+在上一个教程中，您已创建含一个工作程序节点的集群。在本课中，您将配置部署并将应用程序的单个实例部署到工作程序节点内的 Kubernetes pod 中。
 {:shortdesc}
+
+下图显示通过完成本课部署的各组件。
+
 
 ![部署设置](images/cs_app_tutorial_components1.png)
 
@@ -272,8 +275,8 @@ lastupdated: "2017-02-05"
         ```
         Listing cluster workers...
         OK
-        ID                                            Public IP        Private IP      Machine Type   State      Status
-        dal10-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.47.227.138   10.171.53.188   free           normal    Ready
+        ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.47.227.138  10.171.53.188    free           normal   Ready    mil01      1.8.8
         ```
         {: screen}
 
@@ -301,9 +304,10 @@ lastupdated: "2017-02-05"
 ## 第 2 课：部署和更新更高可用性的应用程序
 {: #cs_apps_tutorial_lesson2}
 
-在本课中，您要将 Hello World 应用程序的三个实例部署到集群中，以实现比应用程序的第一个版本更高的可用性。更高可用性意味着用户访问会在这三个实例之间分布。如果有过多用户尝试访问同一应用程序实例，他们可能会发现响应缓慢。而多个实例可提高对用户的响应速度。在本课中，您还将学习运行状况检查和部署更新可以如何用于 Kubernetes。
+在本课中，您要将 Hello World 应用程序的三个实例部署到集群中，以实现比应用程序的第一个版本更高的可用性。
 {:shortdesc}
 
+更高可用性意味着用户访问会在这三个实例之间分布。如果有过多用户尝试访问同一应用程序实例，他们可能会发现响应缓慢。而多个实例可提高对用户的响应速度。在本课中，您还将学习运行状况检查和部署更新可以如何用于 Kubernetes。
 下图包含通过完成本课进行部署的组件。
 
 ![部署设置](images/cs_app_tutorial_components2.png)
@@ -470,9 +474,10 @@ service "hw-demo-service" deleted
 ## 第 3 课：部署和更新 Watson Tone Analyzer 应用程序
 {: #cs_apps_tutorial_lesson3}
 
-在前几课中，应用程序部署为一个工作程序节点中的单独组件。在本课中，您可以将使用 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 服务的两个应用程序组件部署到集群中。将组件分隔到不同的容器中可确保更新一个组件时不会影响其他组件。然后，您将更新应用程序以使用更多副本将其向上扩展，使其可用性更高。
+在前几课中，应用程序部署为一个工作程序节点中的单独组件。在本课中，您可以将使用 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 服务的两个应用程序组件部署到集群中。
 {:shortdesc}
 
+将组件分隔到不同的容器中可确保更新一个组件时不会影响其他组件。然后，您将更新应用程序以使用更多副本将其向上扩展，使其可用性更高。
 下图包含通过完成本课进行部署的组件。
 
 ![部署设置](images/cs_app_tutorial_components3.png)
@@ -753,5 +758,5 @@ bx cs cluster-rm <pr_firm_cluster>
 现在，您已掌握了基础知识，可以移至更高级的活动。请考虑尝试下列其中一项：
 
 - 在存储库中完成更复杂的实验
-- [使用 {{site.data.keyword.containershort_notm}} 自动扩展应用程序](cs_app.html#app_scaling)
+- 使用 {{site.data.keyword.containershort_notm}} [自动扩展应用程序](cs_app.html#app_scaling)
 - 在 [developerWorks ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/code/journey/category/container-orchestration/) 上浏览容器编排过程

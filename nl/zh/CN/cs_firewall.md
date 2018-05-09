@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-14"
 
 ---
 
@@ -18,7 +18,7 @@ lastupdated: "2018-01-11"
 # 在防火墙中打开必需的端口和 IP 地址
 {: #firewall}
 
-查看以下情况，在这些情况下，您可能需要在防火墙中打开特定端口和 IP 地址：
+查看以下情况，在这些情况下，您可能需要在防火墙中为 {{site.data.keyword.containerlong}} 打开特定端口和 IP 地址。
 {:shortdesc}
 
 * 在企业网络策略阻止通过代理或防火墙访问公用因特网端点时从本地系统[运行 `bx` 命令](#firewall_bx)。
@@ -192,7 +192,7 @@ lastupdated: "2018-01-11"
       <tr>
         <td>亚太地区北部</td>
         <td>hkg02<br>seo01<br>sng01<br>tok02</td>
-        <td><code>169.56.132.234</code><br><code>161.202.126.210</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
+        <td><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
        </tr>
       <tr>
          <td>亚太地区南部</td>
@@ -202,7 +202,7 @@ lastupdated: "2018-01-11"
       <tr>
          <td>欧洲中部</td>
          <td>ams03<br>fra02<br>mil01<br>par01</td>
-         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.170</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
         </tr>
       <tr>
         <td>英国南部</td>
@@ -216,8 +216,8 @@ lastupdated: "2018-01-11"
       </tr>
       <tr>
         <td>美国南部</td>
-        <td>dal10<br>dal12<br>dal13<br>sao01</td>
-        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>169.57.151.10</code></td>
+        <td>dal10<br>dal12<br>dal13<br>hou02<br>sao01</td>
+        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>184.173.44.62</code><br><code>169.57.151.10</code></td>
       </tr>
       </tbody>
     </table>

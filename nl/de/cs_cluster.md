@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-03-08"
 
 ---
 
@@ -40,9 +40,8 @@ Aktuelle Informationen finden Sie an der neuen Position:
     - [Vom Benutzer verwaltete Teilnetze und IP-Adressen zu Kubernetes-Clustern hinzufügen](cs_subnets.html#user_managed)
 - [Vorhandene NFS-Dateifreigaben in Clustern verwenden](cs_storage.html#existing)
 - [Clusterprotokollierung konfigurieren](cs_health.html#logging)
-    - [Protokollweiterleitung aktivieren](cs_health.html#log_sources_enable)
-    - [Protokollweiterleitung für Anwendungen aktivieren](cs_health.html#apps_enable)
-    - [Protokollweiterleitungskonfiguration aktualisieren](cs_health.html#log_sources_update)
+    - [Protokollweiterleitung aktivieren](cs_health.html#logging)
+    - [Protokollweiterleitungskonfiguration aktualisieren](cs_health.html#logging)
     - [Protokollweiterleitung stoppen](cs_health.html#log_sources_delete)
     - [Protokollweiterleitung für Kubernetes-API-Auditprotokolle konfigurieren](cs_health.html#app_forward)
     - [Kubernetes-API-Auditprotokollweiterleitung aktivieren](cs_health.html#audit_enable)

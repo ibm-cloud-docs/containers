@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-14"
 
 ---
 
@@ -18,7 +18,7 @@ lastupdated: "2018-01-11"
 # Abrindo portas e endereços IP necessários em seu firewall
 {: #firewall}
 
-Revise essas situações nas quais pode ser necessário abrir portas e endereços IP específicos em seus firewalls:
+Revise estas situações nas quais pode ser necessário abrir portas e endereços IP específicos em seus firewalls para o {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
 * [Para executar comandos `bx` ](#firewall_bx) de seu sistema local quando as políticas de rede corporativa impedem o acesso aos terminais de Internet pública por meio de proxies ou de firewalls.
@@ -192,7 +192,7 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
       <tr>
         <td>AP Norte</td>
         <td>hkg02<br>seo01<br>sng01<br>tok02</td>
-        <td><code>169.56.132.234</code><br><code>161.202.126.210</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
+        <td><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
        </tr>
       <tr>
          <td>AP Sul</td>
@@ -202,7 +202,7 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
       <tr>
          <td>União Europeia Central</td>
          <td>ams03<br>fra02<br>mil01<br>par01</td>
-         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.170</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
         </tr>
       <tr>
         <td>Sul do Reino Unido</td>
@@ -216,8 +216,8 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
       </tr>
       <tr>
         <td>SUL dos EUA</td>
-        <td>dal10<br>dal12<br>dal13<br>sao01</td>
-        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>169.57.151.10</code></td>
+        <td>dal10<br>dal12<br>dal13<br>hou02<br>sao01</td>
+        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>184.173.44.62</code><br><code>169.57.151.10</code></td>
       </tr>
       </tbody>
     </table>
