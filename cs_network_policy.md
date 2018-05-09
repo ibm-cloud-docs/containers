@@ -291,7 +291,7 @@ Before you begin, [target the Kubernetes CLI to the cluster](cs_cli_install.html
           {: screen}
 
 
-### Install and configure the version 1.6.3 Calico CLI for Kubernetes version 1.9 or earlier clusters
+### Installing and configuring the version 1.6.3 Calico CLI for Kubernetes version 1.9 or earlier clusters
 {: #1.9_install}
 
 Before you begin, [target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure). Include the `--admin` option with the `bx cs cluster-config` command, which is used to download the certificates and permission files. This download also includes the keys for the Super User role, which you need to run Calico commands.
@@ -467,6 +467,9 @@ Before you begin, [target the Kubernetes CLI to the cluster](cs_cli_install.html
 
 ## Viewing network policies
 {: #view_policies}
+
+View the details for default and any added network policies that are applied to your cluster.
+{:shortdesc}
 
 Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)
