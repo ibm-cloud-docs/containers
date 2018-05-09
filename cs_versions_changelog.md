@@ -199,7 +199,7 @@ Review the following changes.
 ### Changelog for 1.7.16_1511
 {: #1716_1511}
 
-<table summary="Changes since version 1.7.4_1509">
+<table summary="Changes that were made since version 1.7.4_1509">
 <caption>Changes since version 1.7.4_1509</caption>
 <thead>
 <tr>
