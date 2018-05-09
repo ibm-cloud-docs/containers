@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-07"
+lastupdated: "2018-05-09"
 
 ---
 
@@ -42,7 +42,7 @@ Review the following changes.
 ### Changelog for 1.10.1_1508
 {: #1101_1508}
 
-<table summary="Changes since version 1.9.7_1510">
+<table summary="Changes that were made since version 1.9.7_1510">
 <caption>Changes since version 1.9.7_1510</caption>
 <thead>
 <tr>
@@ -106,7 +106,7 @@ Review the following changes.
 ### Changelog for 1.9.7_1510
 {: #197_1510}
 
-<table summary="Changes since version 1.9.3_1506">
+<table summary="Changes that were made since version 1.9.3_1506">
 <caption>Changes since version 1.9.3_1506</caption>
 <thead>
 <tr>
@@ -152,7 +152,7 @@ Review the following changes.
 ### Changelog for 1.8.11_1509
 {: #1811_1509}
 
-<table summary="Changes since version 1.8.8_1507">
+<table summary="Changes that were made since version 1.8.8_1507">
 <caption>Changes since version 1.8.8_1507</caption>
 <thead>
 <tr>
