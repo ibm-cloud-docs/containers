@@ -51,15 +51,15 @@ bx plugin list
  </thead>
  <tbody>
   <tr>
+    <td>[bx cs api](#cs_api)</td>
     <td>[bx cs api-key-info](#cs_api_key_info)</td>
     <td>[bx cs api-key-reset](#cs_api_key_reset)</td>
     <td>[bx cs apiserver-config-get](#cs_apiserver_config_get)</td>
-    <td>[bx cs apiserver-config-set](#cs_apiserver_config_set)</td>
   </tr>
   <tr>
+    <td>[bx cs apiserver-config-set](#cs_apiserver_config_set)</td>
     <td>[bx cs apiserver-config-unset](#cs_apiserver_config_unset)</td>
     <td>[bx cs apiserver-refresh](#cs_apiserver_refresh)</td>
-    <td></td>
     <td></td>
  </tr>
 </tbody>
@@ -279,6 +279,55 @@ bx plugin list
 ## API commands
 {: #api_commands}
 
+### bx cs api ENDPOINT [--insecure] [--skip-ssl-validation] [--api-version VALUE] [-s]
+{: #cs_api}
+
+Target the API endpoint for {{site.data.keyword.containershort_notm}}. If you do not specify an endpoint, you can view information about the current endpoint that is targeted.
+
+Switching regions? Use the `bx cs region-set` [command](#cs_region-set) instead.
+{: tip}
+
+<strong>Command options</strong>:
+
+   <dl>
+   <dt><code><em>ENDPOINT</em></code></dt>
+   <dd>The {{site.data.keyword.containershort_notm}} API endpoint. Note that this endpoint is different than the {{site.data.keyword.Bluemix_notm}} endpoints. This value is required to set the API endpoint. Accepted values are:<ul>
+   <li>Global endpoint: https://containers.bluemix.net</li>
+   <li>AP North endpoint: https://ap-north.containers.bluemix.net</li>
+   <li>AP South endpoint: https://ap-south.containers.bluemix.net</li>
+   <li>EU Central endpoint: https://eu-central.containers.bluemix.net</li>
+   <li>UK South endpoint: https://uk-south.containers.bluemix.net</li>
+   <li>US East endpoint: https://us-east.containers.bluemix.net</li>
+   <li>US South endpoint: https://us-south.containers.bluemix.net</li></ul>
+   </dd>
+
+   <dt><code>--insecure</code></dt>
+   <dd>Allow an insecure HTTP connection. This flag is optional.</dd>
+   
+   <dt><code>--skip-ssl-validation</code></dt>
+   <dd>Allow insecure SSL certificates. This flag is optional.</dd>
+   
+   <dt><code>--api-version VALUE</code></dt>
+   <dd>Specify the API version of the service that you want to use. This value is optional.</dd>
+
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
+   </dl>
+
+**Example**: View information about the current API endpoint that is targeted.
+```
+bx cs api
+```
+{: pre}
+
+```
+API Endpoint:          https://containers.bluemix.net   
+API Version:           v1   
+Skip SSL Validation:   false   
+Region:                us-south 
+```
+{: screen}
 
 
 ### bx cs api-key-info CLUSTER [--json] [-s]
