@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-08"
+lastupdated: "2018-05-09"
 
 ---
 
@@ -779,10 +779,11 @@ View information about a cluster in your organization.
 
    <dt><code><em>--showResources</em></code></dt>
    <dd>Show more cluster resources such as add-ons, VLANs, subnets, and storage.</dd>
-   </dl>
+   
 
   <dt><code>-s</code></dt>
   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+  </dl>
 
 
 
