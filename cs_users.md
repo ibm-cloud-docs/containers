@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-07"
+lastupdated: "2018-05-09"
 
 
 ---
@@ -340,7 +340,7 @@ Before you begin, [target the Kubernetes CLI to the cluster](cs_cli_install.html
             </tr>
             <tr>
               <td><code>rules/verbs</code></td>
-              <td><ul><li>Specify the types of actions that you want users to be able to do, such as `"get"`, `"list"`, `"describe"`, `"create"`, or `"delete"`. </li><li>For a full list of verbs, see the [`kubectl` documentation![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).</li></ul></td>
+              <td><ul><li>Specify the types of actions that you want users to be able to do, such as `"get"`, `"list"`, `"describe"`, `"create"`, or `"delete"`. </li><li>For a full list of verbs, see the [`kubectl` documentation![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/).</li></ul></td>
             </tr>
           </tbody>
         </table>

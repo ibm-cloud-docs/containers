@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-07"
+lastupdated: "2018-05-09"
 
 ---
 
@@ -615,7 +615,7 @@ You can manage the rollout of your changes in an automated and controlled fashio
 
 Before you begin, create a [deployment](#app_cli).
 
-1.  [Roll out ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#rollout) a change. For example, you might want to change the image that you used in your initial deployment.
+1.  [Roll out ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment) a change. For example, you might want to change the image that you used in your initial deployment.
 
     1.  Get the deployment name.
 

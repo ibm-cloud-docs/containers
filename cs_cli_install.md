@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-07"
+lastupdated: "2018-05-09"
 
 ---
 
@@ -135,7 +135,7 @@ For reference information about these CLIs, see the documentation for those tool
 
 -   [`bx` commands](/docs/cli/reference/bluemix_cli/bx_cli.html)
 -   [`bx cs` commands](cs_cli_reference.html#cs_cli_reference)
--   [`kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands)
+-   [`kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/)
 -   [`bx cr` commands](/docs/cli/plugins/registry/index.html)
 
 <br />
@@ -248,7 +248,7 @@ Before you can run `kubectl` commands, [install the required CLIs](#cs_cli_insta
     ```
     {: screen}
 
-Now, you can run `kubectl` commands to manage your clusters in {{site.data.keyword.Bluemix_notm}}. For a full list of commands, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).
+Now, you can run `kubectl` commands to manage your clusters in {{site.data.keyword.Bluemix_notm}}. For a full list of commands, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/).
 
 **Tip:** If you are using Windows and the Kubernetes CLI is not installed in the same directory as the {{site.data.keyword.Bluemix_notm}} CLI, you must change directories to the path where the Kubernetes CLI is installed to run `kubectl` commands successfully.
 

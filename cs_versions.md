@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-07"
+lastupdated: "2018-05-09"
 
 ---
 
@@ -313,7 +313,7 @@ Review changes that you might need to make when you are updating from the previo
 </tr>
 <tr>
 <td>`kubectl delete`</td>
-<td>The `kubectl delete` command no longer scales down workload API objects, like pods, before the object is deleted. If you require the object to scale down, use [`kubectl scale` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale) before you delete the object.</td>
+<td>The `kubectl delete` command no longer scales down workload API objects, like pods, before the object is deleted. If you require the object to scale down, use [`kubectl scale` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/#scale) before you delete the object.</td>
 </tr>
 <tr>
 <td>`kubectl run`</td>
