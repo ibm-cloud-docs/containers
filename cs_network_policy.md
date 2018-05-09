@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-08"
+lastupdated: "2018-05-09"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-05-08"
 # Controlling traffic with network policies
 {: #network_policies}
 
-Every Kubernetes cluster is set up with a network plug-in that is called Calico. Default network policies are set up to secure the public network interface of every worker node in {{site.data.keyword.containerlong}}.
+Every Kubernetes cluster is set up with a network plug-in called Calico. Default network policies are set up to secure the public network interface of every worker node in {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
 If you have unique security requirements, you can use Calico and Kubernetes to create more network policies for a cluster. With Kubernetes network policies, you can specify the network traffic that you want to allow or block to and from a pod within a cluster. To set more advanced network policies such as blocking incoming (ingress) traffic to LoadBalancer services, use Calico.
