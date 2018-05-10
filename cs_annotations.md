@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-07"
+lastupdated: "2018-05-10"
 
 ---
 
@@ -1213,13 +1213,14 @@ Redirecting HTTP requests to HTTPS is disabled by default.</dd>
 
 <dt>Sample Ingress resource YAML</dt>
 <dd>
+
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/redirect-to-https: "enabled=&lt;true&gt; serviceName=&lt;myservice1&gt;"
+   ingress.bluemix.net/redirect-to-https: "True"
 spec:
  tls:
  - hosts:
@@ -1234,21 +1235,8 @@ spec:
          serviceName: myservice
          servicePort: 8080</code></pre>
 
-<table>
-<thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
-</thead>
-<tbody>
-<tr>
-<td><code>enabled</code></td>
-  <td>To enable redirecting HTTP requests to HTTPS, set to <code>true</code>.</td>
-</tr>
-<tr>
-<td><code>serviceName</code></td>
-<td>Replace <code><em>&lt;myservice1&gt;</em></code> with the name of the Kubernetes service that you created for your app. Separate multiple services with a semi-colon (;). This field is optional. If you do not specify a service name, then all services use this annotation.</td>
-</tr>
-</tbody></table>
 </dd>
+
 </dl>
 
 <br />

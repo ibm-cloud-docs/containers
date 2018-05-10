@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-08"
+lastupdated: "2018-05-10"
 
 ---
 
@@ -146,21 +146,21 @@ To troubleshoot your Ingress:
     2.  Ping the ALB subdomain.
 
       ```
-      ping <ingress_controller_subdomain>
+      ping <ingress_subdomain>
       ```
       {: pre}
 
     3.  Retrieve the public IP address of your ALB.
 
       ```
-      nslookup <ingress_controller_subdomain>
+      nslookup <ingress_subdomain>
       ```
       {: pre}
 
     4.  Ping the ALB public IP address.
 
       ```
-      ping <ingress_controller_IP>
+      ping <ALB_IP>
       ```
       {: pre}
 
@@ -234,7 +234,7 @@ To troubleshoot your Ingress:
     1.  Retrieve the ID of the Ingress pods that are running in your cluster.
 
       ```
-      kubectl get pods -n kube-system | grep alb1
+      kubectl get pods -n kube-system | grep alb
       ```
       {: pre}
 
