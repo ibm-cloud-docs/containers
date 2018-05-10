@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-2"
+lastupdated: "2018-05-07"
 
 ---
 
@@ -32,10 +32,10 @@ In this first tutorial, you act as the PR firm's networking administrator. You c
 
 To set up the infrastructure:
 
--   Create a Kubernetes cluster with one worker node
--   Install the CLIs for running Kubernetes commands and managing Docker images
--   Create a private image repository in {{site.data.keyword.registrylong_notm}} to store your images
--   Add the {{site.data.keyword.toneanalyzershort}} service to the cluster so that any app in the cluster can use that service
+-   Create a Kubernetes cluster with one worker node.
+-   Install the CLIs for running Kubernetes commands and managing Docker images.
+-   Create a private image repository in {{site.data.keyword.registrylong_notm}} to store your images.
+-   Add the {{site.data.keyword.toneanalyzershort}} service to the cluster so that any app in the cluster can use that service.
 
 
 ## Time required
@@ -62,8 +62,10 @@ Create your cluster in the GUI and install the required CLIs.
 
 To create your cluster:
 
-1. It can take a few minutes to provision your cluster. To make the most of your time, [create your cluster in the GUI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/launch?env_id=ibm:yp:united-kingdom) before installing the CLIs. For this tutorial, create your cluster in the US East region.
+1. It can take a few minutes to provision your cluster. To make the most of your time, [create your cluster in the GUI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/launch?env_id=ibm:yp:united-kingdom) before installing the CLIs.
 
+You can also create a [cluster in the CLI](cs_clusters.html#clusters_cli).
+{: tip}
 
 The following CLIs and their prerequisites are used to manage clusters through the CLI:
 -   {{site.data.keyword.Bluemix_notm}} CLI

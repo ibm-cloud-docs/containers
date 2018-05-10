@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-2"
+lastupdated: "2018-05-10"
 
 ---
 
@@ -44,9 +44,9 @@ This tutorial is intended for software developers and network administrators who
 
 ## Prerequisites
 
--  [Install the CLI](cs_cli_install.html#cs_cli_install_steps)
--  [Create a cluster](cs_clusters.html#clusters_cli)
--  [Target the CLI to your cluster](cs_cli_install.html#cs_cli_configure)
+-  [Install the CLIs](cs_cli_install.html#cs_cli_install_steps). Istio requires the Kubernetes version 1.9 or higher. Make sure to install the `kubectl` CLI version that matches the Kubernetes version of your cluster. 
+-  [Create a cluster](cs_clusters.html#clusters_cli) with a Kubernetes version of 1.9 or higher. 
+-  [Target the CLI to your cluster](cs_cli_install.html#cs_cli_configure). 
 
 ## Lesson 1: Download and install Istio
 {: #istio_tutorial1}

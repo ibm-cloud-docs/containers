@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-2"
+lastupdated: "2018-05-09"
 
 ---
 
@@ -245,7 +245,7 @@ spec:
 Note that both the **affinity** and **tolerations** sections have `dedicated` as the `key` and `edge` as the `value`.
 
 ### Adding affinity rules for multiple public or private VLANs
-{: #edge_nodes}
+{: #edge_nodes_multiple_vlans}
 
 When your cluster is connected to multiple public or private VLANs, your app pods might deploy to worker nodes that are connected only to one VLAN. If the load balancer IP address is connected to a different VLAN than these worker nodes, load balancer service pods won't deploy to those worker nodes.
 {:shortdesc}

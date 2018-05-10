@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-2"
+lastupdated: "2018-05-09"
 
 ---
 
@@ -138,7 +138,8 @@ To learn more about each component, review the [Kubernetes basics](cs_tech.html#
 Open a Kubernetes dashboard on your local system to view information about a cluster and its worker nodes.
 {:shortdesc}
 
-
+You can use the Kubernetes dashboard button in the GUI to launch your dashboard with one click.
+{: tip}
 
 Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster. This task requires the [Administrator access policy](cs_users.html#access_policies). Verify your current [access policy](cs_users.html#infra_access).
 
@@ -614,7 +615,7 @@ You can manage the rollout of your changes in an automated and controlled fashio
 
 Before you begin, create a [deployment](#app_cli).
 
-1.  [Roll out ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#rollout) a change. For example, you might want to change the image that you used in your initial deployment.
+1.  [Roll out ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment) a change. For example, you might want to change the image that you used in your initial deployment.
 
     1.  Get the deployment name.
 

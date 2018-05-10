@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-2"
+lastupdated: "2018-05-09"
 
 
 ---
@@ -59,7 +59,7 @@ Figure. {{site.data.keyword.containershort_notm}} access roles
 <dl>
   <dt>Identity and Access Management (IAM) policies</dt>
     <dd><p><strong>Platform</strong>: You can determine the actions that individuals can perform on an {{site.data.keyword.containershort_notm}} cluster. You can set these policies by region. Example actions are creating or removing clusters, or adding extra worker nodes. These policies must be set along with infrastructure policies.</p>
-    <p><strong>Infrastructure</strong>: You can determine the access levels for your infrastructure such as the cluster node machines, networking, or storage resources. The same policy is enforced whether the user makes the request from the {{site.data.keyword.containershort_notm}} GUI or through the CLI, even when the actions are completed in IBM Cloud infrastructure (SoftLayer). You must set this type of policy along with {{site.data.keyword.containershort_notm}} platform access policies. To learn about the available roles, check out [infrastructure permissions](/docs/iam/infrastructureaccess.html#infrapermission).</p></dd>
+    <p><strong>Infrastructure</strong>: You can determine the access levels for your infrastructure such as the cluster node machines, networking, or storage resources. The same policy is enforced whether the user makes the request from the {{site.data.keyword.containershort_notm}} GUI or through the CLI, even when the actions are completed in IBM Cloud infrastructure (SoftLayer). You must set this type of policy along with {{site.data.keyword.containershort_notm}} platform access policies. To learn about the available roles, check out [infrastructure permissions](/docs/iam/infrastructureaccess.html#infrapermission).</p> </br></br><strong>Note:</strong> Make sure that your {{site.data.keyword.Bluemix_notm}} account is [set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio](cs_troubleshoot_clusters.html#cs_credentials) so that authorized users can perform actions in the IBM Cloud infrastructure (SoftLayer) account based on the assigned permissions. </dd>
   <dt>Kubernetes Resource Based Access Control (RBAC) roles</dt>
     <dd>Every user who is assigned a platform access policy is automatically assigned a Kubernetes role. In Kubernetes, [Role Based Access Control (RBAC) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) determines the actions that a user can perform on the resources inside of a cluster. <strong>Note</strong>: RBAC roles are automatically configured for the <code>default</code> namespace, but as the cluster administrator, you can assign roles for other namespaces.</dd>
   <dt>Cloud Foundry</dt>
@@ -257,12 +257,12 @@ For example, **Basic Users** can reboot a worker node, but they cannot reload a 
        </tr>
        <tr>
          <td><strong>Private Networking</strong>: <ul><li>Manage private VLANs for in-cluster networking.</li><li>Set up VPN connectivity to private networks.</li></ul></td>
-         <td><strong>Network</strong>:<ul><li>Manage Network Subnet Routes</li><li>Manage Network VLAN Spanning</li><li>Manage IPSEC Network Tunnels</li><li>Manage Network Gateways</li><li>VPN Administration</li></ul></td>
+         <td><strong>Network</strong>:<ul><li>Manage Network Subnet Routes</li><li>Manage IPSEC Network Tunnels</li><li>Manage Network Gateways</li><li>VPN Administration</li></ul></td>
        </tr>
        <tr>
          <td><strong>Public Networking</strong>:<ul><li>Set up public load balancer or Ingress networking to expose apps.</li></ul></td>
          <td><strong>Devices</strong>:<ul><li>Manage Load Balancers</li><li>Edit Hostname/Domain</li><li>Manage Port Control</li></ul>
-         <strong>Network</strong>:<ul><li>Add Compute with Public Network Port</li><li>Manage Network Subnet Routes</li><li>Manage Network VLAN Spanning</li><li>Add IP Addresses</li></ul>
+         <strong>Network</strong>:<ul><li>Add Compute with Public Network Port</li><li>Manage Network Subnet Routes</li><li>Add IP Addresses</li></ul>
          <strong>Services</strong>:<ul><li>Manage DNS, Reverse DNS, and WHOIS</li><li>View Certificates (SSL)</li><li>Manage Certificates (SSL)</li></ul></td>
        </tr>
      </tbody>
@@ -340,7 +340,7 @@ Before you begin, [target the Kubernetes CLI to the cluster](cs_cli_install.html
             </tr>
             <tr>
               <td><code>rules/verbs</code></td>
-              <td><ul><li>Specify the types of actions that you want users to be able to do, such as `"get"`, `"list"`, `"describe"`, `"create"`, or `"delete"`. </li><li>For a full list of verbs, see the [`kubectl` documentation![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).</li></ul></td>
+              <td><ul><li>Specify the types of actions that you want users to be able to do, such as `"get"`, `"list"`, `"describe"`, `"create"`, or `"delete"`. </li><li>For a full list of verbs, see the [`kubectl` documentation![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/).</li></ul></td>
             </tr>
           </tbody>
         </table>

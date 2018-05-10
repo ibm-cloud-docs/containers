@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-2"
+lastupdated: "2018-05-10"
 
 ---
 
@@ -306,7 +306,7 @@ spec:
 
 <table>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
  </thead>
  <tbody>
  <tr>
@@ -336,7 +336,7 @@ Modify the way the ALB matches the request URI against the app path.
 
 <dl>
 <dt>Description</dt>
-<dd>By default, ALBs process the paths that apps listen on as prefixes. When an ALB receives a request to an app, the ALB checks the Ingress resource for a path (as a prefix) that matches the beginning of the request URI. If a match is found, the request is forwarded to the IP address of the pod where the app is deployed.<br><br>The `location-modifier` annotation changes the way the ALB searches for matches by modifying the location block configuration. The location block determines how requests are handled for the app path.<br><br>**Note**: To handle regular expression (regex) paths, this annotation is required.</dd>
+<dd>By default, ALBs process the paths that apps listen on as prefixes. When an ALB receives a request to an app, the ALB checks the Ingress resource for a path (as a prefix) that matches the beginning of the request URI. If a match is found, the request is forwarded to the IP address of the pod where the app is deployed.<br><br>The `location-modifier` annotation changes the way the ALB searches for matches by modifying the location block configuration. The location block determines how requests are handled for the app path.<br><br><strong>Note</strong>: To handle regular expression (regex) paths, this annotation is required.</dd>
 
 <dt>Supported modifiers</dt>
 <dd>
@@ -351,15 +351,15 @@ Modify the way the ALB matches the request URI against the app path.
  <tbody>
  <tr>
  <td><code>=</code></td>
- <td>The equal sign modifier causes the ALB to select exact matches only. When an exact match is found, the search stops and the matching path is selected.</td>
+ <td>The equal sign modifier causes the ALB to select exact matches only. When an exact match is found, the search stops and the matching path is selected.<br>For example, if you app listens on <code>/tea</code>, the ALB selects only exact <code>/tea</code> paths when matching a request to your app.</td>
  </tr>
  <tr>
  <td><code>~</code></td>
- <td>The tilde modifier causes the ALB to process paths as case-sensitive regex paths during matching.</td>
+ <td>The tilde modifier causes the ALB to process paths as case-sensitive regex paths during matching.<br>For example, if you app listens on <code>/coffee</code>, the ALB can select <code>/ab/coffee</code> or <code>/123/coffee</code> paths when matching a request to your app even though the paths are not explicitly set for your app.</td>
  </tr>
  <tr>
  <td><code>~\*</code></td>
- <td>The tilde followed by an asterisk modifier causes the ALB to process paths as case-insensitive regex paths during matching.</td>
+ <td>The tilde followed by an asterisk modifier causes the ALB to process paths as case-insensitive regex paths during matching.<br>For example, if you app listens on <code>/coffee</code>, the ALB can select <code>/ab/Coffee</code> or <code>/123/COFFEE</code> paths when matching a request to your app even though the paths are not explicitly set for your app.</td>
  </tr>
  <tr>
  <td><code>^~</code></td>
@@ -396,7 +396,7 @@ spec:
 
  <table>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
   </thead>
   <tbody>
   <tr>
@@ -452,7 +452,7 @@ rules:
 
 <table>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
 </thead>
 <tbody>
 <tr>
@@ -502,7 +502,7 @@ spec:
 
 <table>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
 </thead>
 <tbody>
 <tr>
@@ -561,7 +561,7 @@ spec:
 
  <table>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
   </thead>
   <tbody>
   <tr>
@@ -590,12 +590,12 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx   
 <li>Open the ALB config map.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>Add the TCP ports to the config map. Replace <code>&lt;port&gt;</code> with the TCP ports that you want to open.
+<li>Add the TCP ports to the config map. Replace <code>&lt;port&gt;</code> with the TCP ports that you want to open. <b>Note</b>: By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, you must also include them in addition to any other TCP ports you specify in the `public-ports` field. For more information, see <a href="cs_ingress.html#opening_ingress_ports">Opening ports in the Ingress ALB</a>.
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
 data:
- public-ports: &lt;port1&gt;;&lt;port2&gt;
+ public-ports: 80;443;&lt;port1&gt;;&lt;port2&gt;
 metadata:
  creationTimestamp: 2017-08-22T19:06:51Z
  name: ibm-cloud-provider-ingress-cm
@@ -650,8 +650,8 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/proxy-connect-timeout: "&lt;connect_timeout&gt;s"
-   ingress.bluemix.net/proxy-read-timeout: "&lt;read_timeout&gt;s"
+   ingress.bluemix.net/proxy-connect-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;connect_timeout&gt;"
+   ingress.bluemix.net/proxy-read-timeout: "serviceName=&lt;myservice&gt; timeout=&lt;read_timeout&gt;"
 spec:
  tls:
  - hosts:
@@ -668,16 +668,16 @@ spec:
 
 <table>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
  </thead>
  <tbody>
  <tr>
  <td><code>&lt;connect_timeout&gt;</code></td>
- <td>The number of seconds to wait to connect to the back-end app, for example <code>65s</code>. <strong>Note:</strong> A connect-timeout cannot exceed 75 seconds.</td>
+ <td>The number of seconds or minutes to wait to connect to the back-end app, for example <code>65s</code> or <code>2m</code>. <strong>Note:</strong> A connect-timeout cannot exceed 75 seconds.</td>
  </tr>
  <tr>
  <td><code>&lt;read_timeout&gt;</code></td>
- <td>The number of seconds to wait before the back-end app is read, for example <code>65s</code>. <strong>Note:</strong> A read-timeout cannot exceed 120 seconds.</td>
+ <td>The number of seconds or minutes to wait before the back-end app is read, for example <code>65s</code> or <code>2m</code>.
  </tr>
  </tbody></table>
 
@@ -726,7 +726,7 @@ rules:
 
 <table>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
 </thead>
 <tbody>
 <tr>
@@ -785,7 +785,7 @@ spec:
 
 <table>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
  </thead>
  <tbody>
  <tr>
@@ -841,7 +841,7 @@ spec:
 
 <table>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
 </thead>
 <tbody>
 <tr>
@@ -924,18 +924,18 @@ spec:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: &lt;myservice1&gt;
           servicePort: 8080
-      - path: /myapp
+      - path: /service2_path
         backend:
           serviceName: &lt;myservice2&gt;
           servicePort: 80</code></pre>
 
   <table>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
   </thead>
   <tbody>
   <tr>
@@ -1004,7 +1004,7 @@ Set the maximum number of idle keepalive connections to the upstream server of a
 
  <table>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
   </thead>
   <tbody>
   <tr>
@@ -1036,7 +1036,7 @@ Set the maximum number of idle keepalive connections to the upstream server of a
   <dd>
   Authenticate web or API HTTP/HTTPS requests with {{site.data.keyword.appid_short_notm}}.
 
-  <p>If you set the request type to <code>web</code>, a web request that contains an {{site.data.keyword.appid_short_notm}} access token is validated. If token validation fails, the web request is rejected. If the request does not contain an access token, then the request is redirected to the {{site.data.keyword.appid_short_notm}} login page. **Note**: For {{site.data.keyword.appid_short_notm}} web authentication to work, cookies must be enabled in the user's browser.</p>
+  <p>If you set the request type to <code>web</code>, a web request that contains an {{site.data.keyword.appid_short_notm}} access token is validated. If token validation fails, the web request is rejected. If the request does not contain an access token, then the request is redirected to the {{site.data.keyword.appid_short_notm}} login page. <strong>Note</strong>: For {{site.data.keyword.appid_short_notm}} web authentication to work, cookies must be enabled in the user's browser.</p>
 
   <p>If you set the request type to <code>api</code>, an API request that contains an {{site.data.keyword.appid_short_notm}} access token is validated. If the request does not contain an access token, a <code>401: Unauthorized</code> error message is returned to the user.</p>
 
@@ -1068,7 +1068,7 @@ Set the maximum number of idle keepalive connections to the upstream server of a
 
    <table>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
     </thead>
     <tbody>
     <tr>
@@ -1142,7 +1142,7 @@ spec:
 
 <table>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
  </thead>
  <tbody>
  <tr>
@@ -1167,7 +1167,7 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx   
 <li>Open the ALB config map.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>Add the non-default HTTP and HTTPS ports to the config map. Replace &lt;port&gt; with the HTTP or HTTPS port that you want to open.
+<li>Add the non-default HTTP and HTTPS ports to the config map. Replace &lt;port&gt; with the HTTP or HTTPS port that you want to open. <b>Note</b>: By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, you must also include them in addition to any other TCP ports you specify in the `public-ports` field. For more information, see <a href="cs_ingress.html#opening_ingress_ports">Opening ports in the Ingress ALB</a>.
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -1213,13 +1213,14 @@ Redirecting HTTP requests to HTTPS is disabled by default.</dd>
 
 <dt>Sample Ingress resource YAML</dt>
 <dd>
+
 <pre class="codeblock">
 <code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/redirect-to-https: "enabled=&lt;true&gt; serviceName=&lt;myservice1&gt;"
+   ingress.bluemix.net/redirect-to-https: "True"
 spec:
  tls:
  - hosts:
@@ -1234,21 +1235,8 @@ spec:
          serviceName: myservice
          servicePort: 8080</code></pre>
 
-<table>
-<thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
-</thead>
-<tbody>
-<tr>
-<td><code>enabled</code></td>
-  <td>To enable redirecting HTTP requests to HTTPS, set to <code>true</code>.</td>
-</tr>
-<tr>
-<td><code>serviceName</code></td>
-<td>Replace <code><em>&lt;myservice1&gt;</em></code> with the name of the Kubernetes service that you created for your app. Separate multiple services with a semi-colon (;). This field is optional. If you do not specify a service name, then all services use this annotation.</td>
-</tr>
-</tbody></table>
 </dd>
+
 </dl>
 
 <br />
@@ -1283,11 +1271,11 @@ spec:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: myservice1
           servicePort: 8443
-      - path: /
+      - path: /service2_path
         backend:
           serviceName: myservice2
           servicePort: 8444
@@ -1295,7 +1283,7 @@ spec:
 
 <table>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
   </thead>
   <tbody>
   <tr>
@@ -1367,7 +1355,7 @@ spec:
 
 <table>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
 </thead>
 <tbody>
 <tr>
@@ -1400,10 +1388,7 @@ Allow HTTPS requests and encrypt traffic to your upstream apps.
 <dl>
 <dt>Description</dt>
 <dd>
-Encrypt traffic to upstream apps that require HTTPS.
-
-**Optional**: You can add [one-way authentication or mutual authentication](#ssl-services-auth) to this annotation.
-</dd>
+Encrypt traffic to upstream apps that require HTTPS. If your upstream apps can handle TLS, you can optionally provide a certificate that is contained in a TLS secret.<br></br>**Optional**: You can add [one-way authentication or mutual authentication](#ssl-services-auth) to this annotation.</dd>
 
 
 <dt>Sample Ingress resource YAML</dt>
@@ -1421,18 +1406,18 @@ spec:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: myservice1
           servicePort: 8443
-      - path: /
+      - path: /service2_path
         backend:
           serviceName: myservice2
           servicePort: 8444</code></pre>
 
 <table>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
   </thead>
   <tbody>
   <tr>
@@ -1441,7 +1426,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the secret for the service. This parameter is optional. If the parameter is provided, the value must contain the key and the certificate that your app is expecting from the client. To create a TLS secret, see [Creating secrets](cs_app.html#secrets).</td>
+  <td>Optional: If you want to use a TLS secret and your upstream app can handle TLS, replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the secret for the service. If you provide a secret, the value must contain the <code>trusted.crt</code>, <code>client.crt</code>, and <code>client.key</code> that your app is expecting from the client. To create a TLS secret, first [convert the certs and key into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/). Then see [Creating secrets](cs_app.html#secrets).</td>
   </tr>
   </tbody></table>
 
@@ -1458,9 +1443,6 @@ spec:
 <dt>Description</dt>
 <dd>
 Allow HTTPS requests and encrypt traffic to your upstream apps with one-way or mutual authentication for additional security.
-
-**Note**: Before you begin, [convert the cert and key into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
-
 </dd>
 
 
@@ -1485,11 +1467,11 @@ spec:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: myservice1
           servicePort: 8443
-      - path: /
+      - path: /service2_path
         backend:
           serviceName: myservice2
           servicePort: 8444
@@ -1497,7 +1479,7 @@ spec:
 
 <table>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
   </thead>
   <tbody>
   <tr>
@@ -1506,7 +1488,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the secret for the service. This parameter is optional. If the parameter is provided, the value must contain the key and the certificate that your app is expecting from the client. To create a mutual authentication secret, see [Creating secrets](cs_app.html#secrets).</td>
+  <td>Replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the mutual authentication secret for the service. The value must contain the CA certificate that your app is expecting from the client. To create a mutual authentication secret, first [convert the cert and key into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/). Then see [Creating secrets](cs_app.html#secrets).</td>
   </tr>
   </tbody></table>
 
@@ -1647,7 +1629,7 @@ spec:
 
 <table>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
  </thead>
  <tbody>
  <tr>
@@ -1702,7 +1684,7 @@ spec:
 
 <table>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
  </thead>
  <tbody>
  <tr>
@@ -1764,7 +1746,7 @@ spec:
 
 <table>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
  </thead>
  <tbody>
  <tr>
@@ -1824,7 +1806,7 @@ spec:
 
 <table>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
 </thead>
 <tbody>
 <tr>
@@ -1919,18 +1901,18 @@ spec:
   - host: mydomain
     http:
       paths:
-      - path: /
+      - path: /service1_path
         backend:
           serviceName: &lt;myservice1&gt;
           servicePort: 8080
-      - path: /myapp
+      - path: /service2_path
         backend:
           serviceName: &lt;myservice2&gt;
           servicePort: 80</code></pre>
 
  <table>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
   </thead>
   <tbody>
   <tr>
@@ -1986,18 +1968,18 @@ Remove header information that is included in the client response from the back-
    - host: mydomain
      http:
        paths:
-       - path: /
+       - path: /service1_path
          backend:
            serviceName: &lt;myservice1&gt;
            servicePort: 8080
-       - path: /myapp
+       - path: /service2_path
          backend:
            serviceName: &lt;myservice2&gt;
            servicePort: 80</code></pre>
 
   <table>
    <thead>
-   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
    </thead>
    <tbody>
    <tr>
@@ -2054,7 +2036,7 @@ spec:
 
 <table>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
  </thead>
  <tbody>
  <tr>
@@ -2104,7 +2086,7 @@ spec:
 
 <table>
  <thead>
- <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+ <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
  </thead>
  <tbody>
  <tr>
@@ -2166,7 +2148,7 @@ For all services, limit the request processing rate and the number of connection
 
  <table>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
   </thead>
   <tbody>
   <tr>
@@ -2228,7 +2210,7 @@ Limit the request processing rate and the number of connections for specific ser
 
  <table>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
   </thead>
   <tbody>
   <tr>

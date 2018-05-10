@@ -196,12 +196,12 @@ values.</a><pre class="codeblock"><code>        resources:
 </dd>
 <dt class="dlterm" id="migrate_groups__group_max">--max 5</dt>
 <dd>Use the HorizontalPodAutoscaler type of configuration file instead of the deployment type that
-is used in this example. With horizontal auto-scaling, you can set a maximum number of pods. <a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale" rel="external" target="_blank" title="(Opens in a new tab or window)">Learn more about horizontal
+is used in this example. With horizontal auto-scaling, you can set a maximum number of pods. <a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/" rel="external" target="_blank" title="(Opens in a new tab or window)">Learn more about horizontal
 auto-scaling.</a><pre class="codeblock"><code>maxReplicas: 5</code></pre>
 </dd>
 <dt class="dlterm" id="migrate_groups__group_min">--min 2</dt>
 <dd>Use the HorizontalPodAutoscaler type of configuration file instead of the deployment type that
-is used in this example. With horizontal auto-scaling, you can set a minimum number of pods. <a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale" rel="external" target="_blank" title="(Opens in a new tab or window)">Learn more about horizontal
+is used in this example. With horizontal auto-scaling, you can set a minimum number of pods. <a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/" rel="external" target="_blank" title="(Opens in a new tab or window)">Learn more about horizontal
 auto-scaling.</a><pre class="codeblock"><code>minReplicas: 2</code></pre>
 </dd>
 <dt class="dlterm" id="migrate_groups__group_name">--name <var class="keyword varname">my_container_group</var></dt>
@@ -462,7 +462,7 @@ spec:
 <div class="body taskbody"><p class="shortdesc">After the configuration file is created, <a href="cs_app.html#app_cli">you can deploy it to a cluster by using the Kubernetes CLI</a>. </p></div></article>
 
     <article class="topic task nested2" role="article" aria-labelledby="d91310e630" id="migrating_autoscaling"><h3 class="topictitle3" id="d91310e630">Migrating to Kubernetes Autoscaling</h3>
-<div class="body taskbody"><p class="li stepsection"><p>With <a href="cs_why.html#cs_ov">Kubernetes</a>, you can enable <a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale" rel="external" target="_blank" title="(Opens in a new tab or window)">Horizontal Pod Autoscaling</a> to scale your apps based on CPU. </p>
+<div class="body taskbody"><p class="li stepsection"><p>With <a href="cs_why.html#cs_ov">Kubernetes</a>, you can enable <a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/" rel="external" target="_blank" title="(Opens in a new tab or window)">Horizontal Pod Autoscaling</a> to scale your apps based on CPU. </p>
 <ol class="steps"><li class="step stepexpand"><span class="cmd">Install the required <a href="cs_cli_install.html#cs_cli_install_steps">CLIs</a>.</span></li>
 <li class="step stepexpand"><span class="cmd">Create a cluster by following the steps in <a href="container_index.html#clusters">Getting started with Kubernetes clusters in IBM Cloud</a>. Be sure to
 set up your cluster to replicate your current container group, including logging, monitoring,

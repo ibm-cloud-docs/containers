@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-2"
+lastupdated: "2018-05-10"
 
 ---
 
@@ -58,13 +58,14 @@ When the Kubernetes API server update is complete, you can update your worker no
 ## Updating worker nodes
 {: #worker_node}
 
+
 You received a notification to update your worker nodes. What does that mean? As security updates and patches are put in place for the Kubernetes API server and other Kubernetes master components, you must be sure that your worker nodes remain in sync.
 {: shortdesc}
 
 The worker node Kubernetes version cannot be higher than the Kubernetes API server version that runs in your Kubernetes master. Before you begin, [update the Kubernetes master](#master).
 
-<ul>**Attention**:</br>
-<li>Updates to worker nodes can cause downtime for your apps and services.</li>
+**Attention**:
+<ul><li>Updates to worker nodes can cause downtime for your apps and services.</li>
 <li>Data is deleted if not stored outside the pod.</li>
 <li>Use [replicas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#replicas) in your deployments to reschedule pods on available nodes.</li></ul>
 
@@ -175,6 +176,10 @@ Next steps:
   - Repeat the update process with other clusters.
   - Inform developers who work in the cluster to update their `kubectl` CLI to the version of the Kubernetes master.
   - If the Kubernetes dashboard does not display utilization graphs, [delete the `kube-dashboard` pod](cs_troubleshoot_health.html#cs_dashboard_graphs).
+  
+
+
+
 
 
 <br />
@@ -184,7 +189,15 @@ Next steps:
 ## Updating machine types
 {: #machine_type}
 
-You can update the machine types that are used in worker nodes by adding new worker nodes and removing the old ones. For example, if you have virtual worker nodes on deprecated machine types with `u1c` or `b1c` in the names, create worker nodes that use machine types with `u2c` or `b2c` in the names.
+Before you begin:
+- [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+- If you store data on your worker node, the data is deleted if not [stored outside the worker node](cs_storage.html#storage).
+
+**Attention**: Updates to worker nodes can cause downtime for your apps and services.  Data is deleted if not [stored outside the pod](cs_storage.html#storage).
+
+
+
+You can update the machine types of your worker nodes by adding new worker nodes and removing the old ones. For example, if you have virtual worker nodes on deprecated machine types with `u1c` or `b1c` in the names, create worker nodes that use machine types with `u2c` or `b2c` in the names.
 {: shortdesc}
 
 1. Note the names and locations of the worker nodes to update.
@@ -221,6 +234,10 @@ You can update the machine types that are used in worker nodes by adding new wor
     {: pre}
 
 6. Repeat these steps to upgrade other worker nodes to different machine types.
+
+
+
+
 
 
 

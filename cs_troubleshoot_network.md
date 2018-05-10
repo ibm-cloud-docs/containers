@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-2"
+lastupdated: "2018-05-10"
 
 ---
 
@@ -146,21 +146,21 @@ To troubleshoot your Ingress:
     2.  Ping the ALB subdomain.
 
       ```
-      ping <ingress_controller_subdomain>
+      ping <ingress_subdomain>
       ```
       {: pre}
 
     3.  Retrieve the public IP address of your ALB.
 
       ```
-      nslookup <ingress_controller_subdomain>
+      nslookup <ingress_subdomain>
       ```
       {: pre}
 
     4.  Ping the ALB public IP address.
 
       ```
-      ping <ingress_controller_IP>
+      ping <ALB_IP>
       ```
       {: pre}
 
@@ -234,7 +234,7 @@ To troubleshoot your Ingress:
     1.  Retrieve the ID of the Ingress pods that are running in your cluster.
 
       ```
-      kubectl get pods -n kube-system | grep alb1
+      kubectl get pods -n kube-system | grep alb
       ```
       {: pre}
 
@@ -561,7 +561,7 @@ To ensure that all Calico factors align:
     * If your cluster is at Kubernetes version 1.9 or earlier:
         1. [Install and configure the version 1.6.3 Calico CLI](cs_network_policy.html#1.9_install). Ensure that the `calicoctl.cfg` file uses Calico v2 syntax.
         2. Ensure that any policies you create and want to apply to your cluster use [Calico v2 syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy).
-        3. To [view policies](cs_network_policy.html#1.10_examine_policies), ensure that you are using `calicoctl get policy`.
+        3. To [view policies](cs_network_policy.html#1.9_examine_policies), ensure that you are using `calicoctl get policy`.
 
 Before you update your cluster from Kubernetes version 1.9 or earlier to version 1.10 or later, review [Preparing to update to Calico v3](cs_versions.html#110_calicov3).
 {: tip}
