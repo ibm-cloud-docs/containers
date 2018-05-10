@@ -193,7 +193,7 @@ Before you begin:
 - [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
 - If you store data on your worker node, the data is deleted if not [stored outside the worker node](cs_storage.html#storage).
 
-**Attention**: Updates to worker nodes can cause downtime for your apps and services. All worker nodes in a pool are updated at the same time. You cannot update single worker nodes in a pool. Data is deleted if not [stored outside the pod](cs_storage.html#storage).
+**Attention**: Updates to worker nodes can cause downtime for your apps and services.  Data is deleted if not [stored outside the pod](cs_storage.html#storage).
 
 
 
@@ -234,7 +234,6 @@ You can update the machine types of your worker nodes by adding new worker nodes
     {: pre}
 
 6. Repeat these steps to upgrade other worker nodes to different machine types.
-
 
 
 
