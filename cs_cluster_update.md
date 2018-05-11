@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-10"
+lastupdated: "2018-05-11"
 
 ---
 
@@ -189,16 +189,23 @@ Next steps:
 ## Updating machine types
 {: #machine_type}
 
-Before you begin:
-- [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
-- If you store data on your worker node, the data is deleted if not [stored outside the worker node](cs_storage.html#storage).
 
-**Attention**: Updates to worker nodes can cause downtime for your apps and services.  Data is deleted if not [stored outside the pod](cs_storage.html#storage).
 
 
 
 You can update the machine types of your worker nodes by adding new worker nodes and removing the old ones. For example, if you have virtual worker nodes on deprecated machine types with `u1c` or `b1c` in the names, create worker nodes that use machine types with `u2c` or `b2c` in the names.
 {: shortdesc}
+
+
+
+Before you begin:
+- [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+- If you store data on your worker node, the data is deleted if not [stored outside the worker node](cs_storage.html#storage).
+
+
+**Attention**: Updates to worker nodes can cause downtime for your apps and services.  Data is deleted if not [stored outside the pod](cs_storage.html#storage).
+
+
 
 1. Note the names and locations of the worker nodes to update.
     ```
