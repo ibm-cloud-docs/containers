@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-08"
+lastupdated: "2018-05-11"
 
 ---
 
@@ -143,14 +143,14 @@ To expose an app by using the IBM-provided domain:
 1.  [Deploy your app to the cluster](cs_app.html#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file, such as `app: code`. This label is needed to identify all pods where your app is running so that the pods can be included in the Ingress load balancing.
 
 2.   Create a Kubernetes service for each app that you want to expose. Your app must be exposed by a Kubernetes service to be included by the cluster ALB in the Ingress load balancing.
-      1.  Open your preferred editor and create a service configuration file that is named, for example, `myalbservice.yaml`.
-      2.  Define a service for the app that the ALB will expose to the public.
+      1.  Open your preferred editor and create a service configuration file that is named, for example, `myapp_service.yaml`.
+      2.  Define a service for the app that the ALB will expose.
 
           ```
           apiVersion: v1
           kind: Service
           metadata:
-            name: myalbservice
+            name: myapp_service
           spec:
             selector:
               <selector_key>: <selector_value>
@@ -178,10 +178,10 @@ To expose an app by using the IBM-provided domain:
       4.  Create the service in your cluster. If you have apps deployed in multiple namespaces in your cluster, ensure the service deploys into the same namespace as the app that you want to expose.
 
           ```
-          kubectl apply -f myalbservice.yaml [-n <namespace>]
+          kubectl apply -f myapp_service.yaml [-n <namespace>]
           ```
           {: pre}
-      5.  Repeat these steps for every app that you want to expose to the public.
+      5.  Repeat these steps for every app that you want to expose.
 
 3. Get the details for your cluster to view the IBM-provided domain. Replace _&lt;cluster_name_or_ID&gt;_ with the name of the cluster where the app is deployed that you want to expose to the public.
 
@@ -285,9 +285,9 @@ To expose an app by using the IBM-provided domain:
 6.   In a web browser, enter the URL of the app service to access.
 
       ```
-      https://<ibm_domain>/<service1_path>
+      https://<domain>/<service1_path>
       ```
-      {: codeblock}
+      {: pre}
 
 
 <br />
@@ -309,14 +309,14 @@ To expose an app by using the IBM-provided domain with TLS:
 1.  [Deploy your app to the cluster](cs_app.html#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file, such as `app: code`. This label is needed to identify all pods where your app is running so that the pods can be included in the Ingress load balancing.
 
 2.   Create a Kubernetes service for each app that you want to expose. Your app must be exposed by a Kubernetes service to be included by the cluster ALB in the Ingress load balancing.
-      1.  Open your preferred editor and create a service configuration file that is named, for example, `myalbservice.yaml`.
-      2.  Define a service for the app that the ALB will expose to the public.
+      1.  Open your preferred editor and create a service configuration file that is named, for example, `myapp_service.yaml`.
+      2.  Define a service for the app that the ALB will expose.
 
           ```
           apiVersion: v1
           kind: Service
           metadata:
-            name: myalbservice
+            name: myapp_service
           spec:
             selector:
               <selector_key>: <selector_value>
@@ -344,10 +344,10 @@ To expose an app by using the IBM-provided domain with TLS:
       4.  Create the service in your cluster. If you have apps deployed in multiple namespaces in your cluster, ensure the service deploys into the same namespace as the app that you want to expose.
 
           ```
-          kubectl apply -f myalbservice.yaml [-n <namespace>]
+          kubectl apply -f myapp_service.yaml [-n <namespace>]
           ```
           {: pre}
-      5.  Repeat these steps for every app that you want to expose to the public.
+      5.  Repeat these steps for every app that you want to expose.
 
 3.   View the IBM-provided domain and TLS certificate. Replace _&lt;cluster_name_or_ID&gt;_ with the name of the cluster where the app is deployed.
 
@@ -463,9 +463,9 @@ To expose an app by using the IBM-provided domain with TLS:
 6.   In a web browser, enter the URL of the app service to access.
 
       ```
-      https://<ibm_domain>/<service1_path>
+      https://<domain>/<service1_path>
       ```
-      {: codeblock}
+      {: pre}
 
 
 <br />
@@ -509,14 +509,14 @@ To expose an app by using a custom domain with TLS:
 4.  [Deploy your app to the cluster](cs_app.html#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file, such as `app: code`. This label is needed to identify all pods where your app is running so that the pods can be included in the Ingress load balancing.
 
 5.   Create a Kubernetes service for each app that you want to expose. Your app must be exposed by a Kubernetes service to be included by the cluster ALB in the Ingress load balancing.
-      1.  Open your preferred editor and create a service configuration file that is named, for example, `myalbservice.yaml`.
-      2.  Define a service for the app that the ALB will expose to the public.
+      1.  Open your preferred editor and create a service configuration file that is named, for example, `myapp_service.yaml`.
+      2.  Define a service for the app that the ALB will expose.
 
           ```
           apiVersion: v1
           kind: Service
           metadata:
-            name: myalbservice
+            name: myapp_service
           spec:
             selector:
               <selector_key>: <selector_value>
@@ -544,10 +544,10 @@ To expose an app by using a custom domain with TLS:
       4.  Create the service in your cluster. If you have apps deployed in multiple namespaces in your cluster, ensure the service deploys into the same namespace as the app that you want to expose.
 
           ```
-          kubectl apply -f myalbservice.yaml [-n <namespace>]
+          kubectl apply -f myapp_service.yaml [-n <namespace>]
           ```
           {: pre}
-      5.  Repeat these steps for every app that you want to expose to the public.
+      5.  Repeat these steps for every app that you want to expose.
 
 6.  Create an Ingress resource. Ingress resources define the routing rules that the ALB uses to route traffic to your app service.
     * If your apps are all exposed by services in the same namespace, only one Ingress resource is required.
@@ -640,9 +640,9 @@ To expose an app by using a custom domain with TLS:
 8.   In a web browser, enter the URL of the app service to access.
 
       ```
-      https://<custom_domain>/<service1_path>
+      https://<domain>/<service1_path>
       ```
-      {: codeblock}
+      {: pre}
 
 
 <br />
@@ -863,9 +863,9 @@ You can route incoming network traffic on the IBM-provided domain to apps that a
 6.   In a web browser, enter the URL of the app service to access.
 
       ```
-      https://<ibm_domain>/<service1_path>
+      https://<domain>/<service1_path>
       ```
-      {: codeblock}
+      {: pre}
 
 
 <br />
@@ -975,14 +975,14 @@ To privately expose an app by using a custom domain without TLS using an externa
 3.  [Deploy your app to the cluster](cs_app.html#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file, such as `app: code`. This label is needed to identify all pods where your app is running so that the pods can be included in the Ingress load balancing.
 
 4.   Create a Kubernetes service for each app that you want to expose. Your app must be exposed by a Kubernetes service to be included by the cluster ALB in the Ingress load balancing.
-      1.  Open your preferred editor and create a service configuration file that is named, for example, `myalbservice.yaml`.
-      2.  Define a service for the app that the ALB will expose to the private network.
+      1.  Open your preferred editor and create a service configuration file that is named, for example, `myapp_service.yaml`.
+      2.  Define a service for the app that the ALB will expose.
 
           ```
           apiVersion: v1
           kind: Service
           metadata:
-            name: myalbservice
+            name: myapp_service
           spec:
             selector:
               <selector_key>: <selector_value>
@@ -1010,10 +1010,10 @@ To privately expose an app by using a custom domain without TLS using an externa
       4.  Create the service in your cluster. If you have apps deployed in multiple namespaces in your cluster, ensure the service deploys into the same namespace as the app that you want to expose.
 
           ```
-          kubectl apply -f myalbservice.yaml [-n <namespace>]
+          kubectl apply -f myapp_service.yaml [-n <namespace>]
           ```
           {: pre}
-      5.  Repeat these steps for every app that you want to expose to the private network.
+      5.  Repeat these steps for every app that you want to expose.
 
 5.  Create an Ingress resource. Ingress resources define the routing rules that the ALB uses to route traffic to your app service.
     * If your apps are all exposed by services in the same namespace, only one Ingress resource is required.
@@ -1097,9 +1097,9 @@ To privately expose an app by using a custom domain without TLS using an externa
 6.   In a web browser, enter the URL of the app service to access.
 
       ```
-      https://<custom_domain>/<service1_path>
+      https://<domain>/<service1_path>
       ```
-      {: codeblock}
+      {: pre}
 
 
 <br />
@@ -1134,14 +1134,14 @@ To privately expose an app by using a custom domain with TLS using an external D
 4.  [Deploy your app to the cluster](cs_app.html#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file, such as `app: code`. This label is needed to identify all pods where your app is running so that the pods can be included in the Ingress load balancing.
 
 5.   Create a Kubernetes service for each app that you want to expose. Your app must be exposed by a Kubernetes service to be included by the cluster ALB in the Ingress load balancing.
-      1.  Open your preferred editor and create a service configuration file that is named, for example, `myalbservice.yaml`.
-      2.  Define a service for the app that the ALB will expose to the private network.
+      1.  Open your preferred editor and create a service configuration file that is named, for example, `myapp_service.yaml`.
+      2.  Define a service for the app that the ALB will expose.
 
           ```
           apiVersion: v1
           kind: Service
           metadata:
-            name: myalbservice
+            name: myapp_service
           spec:
             selector:
               <selector_key>: <selector_value>
@@ -1169,10 +1169,10 @@ To privately expose an app by using a custom domain with TLS using an external D
       4.  Create the service in your cluster. If you have apps deployed in multiple namespaces in your cluster, ensure the service deploys into the same namespace as the app that you want to expose.
 
           ```
-          kubectl apply -f myalbservice.yaml [-n <namespace>]
+          kubectl apply -f myapp_service.yaml [-n <namespace>]
           ```
           {: pre}
-      5.  Repeat these steps for every app that you want to expose to the private network.
+      5.  Repeat these steps for every app that you want to expose.
 
 6.  Create an Ingress resource. Ingress resources define the routing rules that the ALB uses to route traffic to your app service.
     * If your apps are all exposed by services in the same namespace, only one Ingress resource is required.
@@ -1271,9 +1271,9 @@ To privately expose an app by using a custom domain with TLS using an external D
 6.   In a web browser, enter the URL of the app service to access.
 
       ```
-      https://<custom_domain>/<service1_path>
+      https://<domain>/<service1_path>
       ```
-      {: codeblock}
+      {: pre}
 
 
 For a comprehensive tutorial on how to secure microservice-to-microservice communication across your clusters by using the private ALB with TLS, check out [this blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://medium.com/ibm-cloud/secure-microservice-to-microservice-communication-across-kubernetes-clusters-using-a-private-ecbe2a8d4fe2).
@@ -1296,14 +1296,14 @@ You can configure the private ALB to route incoming network traffic to the apps 
 6.  [Deploy your app to the cluster](cs_app.html#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file, such as `app: code`. This label is needed to identify all pods where your app is running so that the pods can be included in the Ingress load balancing.
 
 7.   Create a Kubernetes service for each app that you want to expose. Your app must be exposed by a Kubernetes service to be included by the cluster ALB in the Ingress load balancing.
-      1.  Open your preferred editor and create a service configuration file that is named, for example, `myalbservice.yaml`.
-      2.  Define a service for the app that the ALB will expose to the private network.
+      1.  Open your preferred editor and create a service configuration file that is named, for example, `myapp_service.yaml`.
+      2.  Define a service for the app that the ALB will expose.
 
           ```
           apiVersion: v1
           kind: Service
           metadata:
-            name: myalbservice
+            name: myapp_service
           spec:
             selector:
               <selector_key>: <selector_value>
@@ -1331,10 +1331,10 @@ You can configure the private ALB to route incoming network traffic to the apps 
       4.  Create the service in your cluster. If you have apps deployed in multiple namespaces in your cluster, ensure the service deploys into the same namespace as the app that you want to expose.
 
           ```
-          kubectl apply -f myalbservice.yaml [-n <namespace>]
+          kubectl apply -f myapp_service.yaml [-n <namespace>]
           ```
           {: pre}
-      5.  Repeat these steps for every app that you want to expose to the private network.
+      5.  Repeat these steps for every app that you want to expose.
 
 8.  Create an Ingress resource. Ingress resources define the routing rules that the ALB uses to route traffic to your app service.
     * If your apps are all exposed by services in the same namespace, only one Ingress resource is required.
@@ -1434,9 +1434,9 @@ You can configure the private ALB to route incoming network traffic to the apps 
 9.   In a web browser, enter the URL of the app service to access.
 
       ```
-      https://<custom_domain>/<service1_path>
+      https://<domain>/<service1_path>
       ```
-      {: codeblock}
+      {: pre}
 
 
 <br />
