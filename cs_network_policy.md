@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-10"
+lastupdated: "2018-05-11"
 
 ---
 
@@ -103,7 +103,7 @@ In Kubernetes version 1.10 and newer clusters, a default Kubernetes policy which
 <br />
 
 
-## Install and configure the Calico CLI
+## Installing and configuring the Calico CLI
 {: #cli_install}
 
 To view, manage, and add Calico policies, install and configure the Calico CLI.
