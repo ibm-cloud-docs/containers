@@ -203,7 +203,7 @@ Before you begin:
 - If you store data on your worker node, the data is deleted if not [stored outside the worker node](cs_storage.html#storage).
 
 
-**Attention**: Updates to worker nodes can cause downtime for your apps and services.  Data is deleted if not [stored outside the pod](cs_storage.html#storage).
+**Attention**: Updates to worker nodes can cause downtime for your apps and services.  Data is deleted if not [stored outside the worker node or pod](cs_storage.html#storage).
 
 
 
