@@ -51,7 +51,8 @@ Check out the following table for information about the different log sources.
     <tr>
       <td><code>application</code></td>
       <td>Logs for your own application that runs in a Kubernetes cluster.</td>
-      <td>You can set the paths.</td>
+      <td><p>You can set the paths. In order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might have created a symlink.</p>
+      <p>Example: If the specified path is <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> but the logs actually go to <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, then the logs cannot be read.</p></td>
     </tr>
     <tr>
       <td><code>worker</code></td>
