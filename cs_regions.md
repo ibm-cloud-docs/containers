@@ -137,6 +137,7 @@ Locations are physical data centers that are available within an {{site.data.key
 | UK South      | lon02, lon04         | London |
 | US East      | mon01, tor01, wdc06, wdc07        | Montreal, Toronto, Washington DC |
 | US South     | dal10, dal12, dal13, sao01       | Dallas, São Paulo |
+{: caption="Available regions and locations" caption-side="top"}
 
 Your cluster's resources remain in the location (data center) in which the cluster is deployed. The following image highlights the relationship of your cluster within an example region of US East:
 

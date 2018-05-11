@@ -79,7 +79,7 @@ Create a non-expiring token for an image registry that you used for single and s
     {: pre}
 
     <table>
-    <caption>Table 1. Understanding this command's components</caption>
+    <caption>Understanding this command's components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
     </thead>
@@ -130,7 +130,7 @@ Create a non-expiring token for an image registry that you used for single and s
         {: codeblock}
 
         <table>
-        <caption>Table 2. Understanding the YAML file components</caption>
+        <caption>Understanding the YAML file components</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
         </thead>

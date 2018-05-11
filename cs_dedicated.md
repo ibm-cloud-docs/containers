@@ -41,6 +41,7 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
 {: #dedicated_env_differences}
 
 <table>
+<caption>Differences in cluster management</caption>
 <col width="20%">
 <col width="40%">
 <col width="40%">
@@ -302,6 +303,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     {: pre}
 
     <table>
+    <caption>Understanding this command's components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
     </thead>

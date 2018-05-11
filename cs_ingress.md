@@ -237,6 +237,7 @@ To expose an app by using the IBM-provided domain:
         {: codeblock}
 
         <table>
+        <caption>YAML file components</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
         </thead>
@@ -349,32 +350,32 @@ To expose an app by using the IBM-provided domain with TLS:
           {: pre}
       5.  Repeat these steps for every app that you want to expose.
 
-3.   View the IBM-provided domain and TLS certificate. Replace _&lt;cluster_name_or_ID&gt;_ with the name of the cluster where the app is deployed.
+3. View the IBM-provided domain and TLS certificate. Replace _&lt;cluster_name_or_ID&gt;_ with the name of the cluster where the app is deployed.
 
-      ```
-      bx cs cluster-get <cluster_name_or_ID>
-      ```
-      {: pre}
+    ```
+    bx cs cluster-get <cluster_name_or_ID>
+    ```
+    {: pre}
 
-      Example output:
+    Example output:
 
-      ```
-      Name:                   mycluster
-      ID:                     18a61a63c6a94b658596ca93d087aad9
-      State:                  normal
-      Created:                2018-01-12T18:33:35+0000
-      Location:               dal10
-      Master URL:             https://169.xx.xxx.xxx:26268
-      Ingress Subdomain:      mycluster-12345.us-south.containers.mybluemix.net
-      Ingress Secret:         <ibm_tls_secret>
-      Workers:                3
-      Version:                1.9.7
-      Owner Email:            owner@email.com
-      Monitoring Dashboard:   <dashboard_URL>
-      ```
-      {: screen}
+    ```
+    Name:                   mycluster
+    ID:                     18a61a63c6a94b658596ca93d087aad9
+    State:                  normal
+    Created:                2018-01-12T18:33:35+0000
+    Location:               dal10
+    Master URL:             https://169.xx.xxx.xxx:26268
+    Ingress Subdomain:      mycluster-12345.us-south.containers.mybluemix.net
+    Ingress Secret:         <ibm_tls_secret>
+    Workers:                3
+    Version:                1.9.7
+    Owner Email:            owner@email.com
+    Monitoring Dashboard:   <dashboard_URL>
+    ```
+    {: screen}
 
-      You can see the IBM-provided domain in the **Ingress subdomain** and the IBM-provided certificate in the **Ingress secret** fields.
+    You can see the IBM-provided domain in the **Ingress subdomain** and the IBM-provided certificate in the **Ingress secret** fields.
 
 4.  Create an Ingress resource. Ingress resources define the routing rules for the Kubernetes service that you created for your app and are used by the ALB to route incoming network traffic to the service. You must use one Ingress resource to define routing rules for multiple apps if every app is exposed via a Kubernetes service inside the cluster.
     1.  Open your preferred editor and create an Ingress configuration file that is named, for example, `myingressresource.yaml`.
@@ -406,6 +407,7 @@ To expose an app by using the IBM-provided domain with TLS:
         {: codeblock}
 
         <table>
+        <caption>YAML file components</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
         </thead>
@@ -581,6 +583,7 @@ To expose an app by using a custom domain with TLS:
         {: codeblock}
 
         <table>
+        <caption>YAML file components</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
         </thead>
@@ -719,6 +722,7 @@ You can route incoming network traffic on the IBM-provided domain to apps that a
         {: codeblock}
 
         <table>
+        <caption>YAML file components</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
         </thead>
@@ -742,32 +746,32 @@ You can route incoming network traffic on the IBM-provided domain to apps that a
         kubectl apply -f myexternalendpoint.yaml
         ```
         {: pre}
-3.   View the IBM-provided domain and TLS certificate. Replace _&lt;cluster_name_or_ID&gt;_ with the name of the cluster where the app is deployed.
+3. View the IBM-provided domain and TLS certificate. Replace _&lt;cluster_name_or_ID&gt;_ with the name of the cluster where the app is deployed.
 
-      ```
-      bx cs cluster-get <cluster_name_or_ID>
-      ```
-      {: pre}
+    ```
+    bx cs cluster-get <cluster_name_or_ID>
+    ```
+    {: pre}
 
-      Example output:
+    Example output:
 
-      ```
-      Name:                   mycluster
-      ID:                     18a61a63c6a94b658596ca93d087aad9
-      State:                  normal
-      Created:                2018-01-12T18:33:35+0000
-      Location:               dal10
-      Master URL:             https://169.xx.xxx.xxx:26268
-      Ingress Subdomain:      mycluster-12345.us-south.containers.mybluemix.net
-      Ingress Secret:         <ibm_tls_secret>
-      Workers:                3
-      Version:                1.9.7
-      Owner Email:            owner@email.com
-      Monitoring Dashboard:   <dashboard_URL>
-      ```
-      {: screen}
+    ```
+    Name:                   mycluster
+    ID:                     18a61a63c6a94b658596ca93d087aad9
+    State:                  normal
+    Created:                2018-01-12T18:33:35+0000
+    Location:               dal10
+    Master URL:             https://169.xx.xxx.xxx:26268
+    Ingress Subdomain:      mycluster-12345.us-south.containers.mybluemix.net
+    Ingress Secret:         <ibm_tls_secret>
+    Workers:                3
+    Version:                1.9.7
+    Owner Email:            owner@email.com
+    Monitoring Dashboard:   <dashboard_URL>
+    ```
+    {: screen}
 
-      You can see the IBM-provided domain in the **Ingress subdomain** and the IBM-provided certificate in the **Ingress secret** fields.
+    You can see the IBM-provided domain in the **Ingress subdomain** and the IBM-provided certificate in the **Ingress secret** fields.
 
 4.  Create an Ingress resource. Ingress resources define the routing rules for the Kubernetes service that you created for your app and are used by the ALB to route incoming network traffic to the service. You can use one Ingress resource to define routing rules for multiple external apps as long as every app is exposed with its external endpoint via a Kubernetes service inside the cluster.
     1.  Open your preferred editor and create an Ingress configuration file that is named, for example, `myexternalingress.yaml`.
@@ -799,6 +803,7 @@ You can route incoming network traffic on the IBM-provided domain to apps that a
         {: codeblock}
 
         <table>
+        <caption>YAML file components</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
         </thead>
@@ -1045,6 +1050,7 @@ To privately expose an app by using a custom domain without TLS using an externa
         {: codeblock}
 
         <table>
+        <caption>YAML file components</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
         </thead>
@@ -1207,7 +1213,8 @@ To privately expose an app by using a custom domain with TLS using an external D
            ```
            {: pre}
 
-           <table>
+          <table>
+          <caption>YAML file components</caption>
           <thead>
           <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
           </thead>
@@ -1372,6 +1379,7 @@ You can configure the private ALB to route incoming network traffic to the apps 
      {: codeblock}
 
     <table>
+    <caption>YAML file components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
     </thead>
@@ -1606,6 +1614,7 @@ By default, Ingress logs are formatted in JSON and display common log fields. Ho
     {: pre}
 
     <table>
+    <caption>YAML file components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the log-format configuration</th>
     </thead>

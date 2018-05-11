@@ -143,6 +143,7 @@ Each machine type has a different memory capacity. When there is less memory ava
 |64 GB | 4096 MB |
 |128 GB| 4096 MB |
 |242 GB| 4096 MB |
+{: caption="Worker node memory capacity and limits" caption-side="top"}
 
 To review how much memory is used on your worker node, run [kubectl top node ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/#top).
 
@@ -310,6 +311,7 @@ To create a cluster:
         {: pre}
 
         <table>
+        <caption>cluster-create components</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
         </thead>
@@ -483,6 +485,7 @@ To view information about a specific cluster, such as its location, master URL, 
 You can view the current cluster state by running the `bx cs clusters` command and locating the **State** field. To troubleshoot your cluster and worker nodes, see [Troubleshooting clusters](cs_troubleshoot.html#debug_clusters).
 
 <table summary="Every table row should be read left to right, with the cluster state in column one and a description in column two.">
+<caption>Cluster states</caption>
    <thead>
    <th>Cluster state</th>
    <th>Description</th>

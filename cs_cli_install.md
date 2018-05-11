@@ -394,6 +394,7 @@ The {{site.data.keyword.containershort_notm}} API requires header information th
 **Note:** To authenticate with {{site.data.keyword.containershort_notm}}, you must provide an Identity and Access Management (IAM) token that is generated with your {{site.data.keyword.Bluemix_notm}} credentials and that includes the {{site.data.keyword.Bluemix_notm}} account ID where the cluster was created. Depending on the way you authenticate with {{site.data.keyword.Bluemix_notm}}, you can choose between the following options to automate the creation of your IAM token.
 
 <table>
+<caption>ID types and options</caption>
 <thead>
 <th>{{site.data.keyword.Bluemix_notm}} ID</th>
 <th>My options</th>
@@ -429,7 +430,8 @@ The {{site.data.keyword.containershort_notm}} API requires header information th
 
     To specify an {{site.data.keyword.Bluemix_notm}} region, [review the region abbreviations as they are used in the API endpoints](cs_regions.html#bluemix_regions).
 
-    <table summary-"Input parameters to get tokens">
+    <table summary-"Input parameters to retrieve tokens">
+    <caption>Input parameters to get tokens</caption>
     <thead>
         <th>Input Parameters</th>
         <th>Values</th>
@@ -497,6 +499,7 @@ The {{site.data.keyword.containershort_notm}} API requires header information th
     {: codeblock}
 
     <table summary="Input parameters to get {{site.data.keyword.Bluemix_notm}} account ID">
+    <caption>Input parameters to get an {{site.data.keyword.Bluemix_notm}} account ID</caption>
     <thead>
   	<th>Input parameters</th>
   	<th>Values</th>
@@ -550,7 +553,8 @@ The {{site.data.keyword.containershort_notm}} API requires header information th
 
     To specify an {{site.data.keyword.Bluemix_notm}} region, [review the region abbreviations as they are used in the API endpoints](cs_regions.html#bluemix_regions).
 
-    <table summary-"Input parameters to get tokens">
+    <table summary-"Input parameters to retrieve tokens">
+    <caption>Input parameters to get tokens</caption>
     <thead>
         <th>Input Parameters</th>
         <th>Values</th>
@@ -620,6 +624,7 @@ The {{site.data.keyword.containershort_notm}} API requires header information th
      {: codeblock}
 
      <table summary="Input parameters to work with API">
+     <caption>Input parameters to work with the API</caption>
      <thead>
      <th>Input parameters</th>
      <th>Values</th>
@@ -662,6 +667,7 @@ Use the following steps if you want to create an IAM token or if you want to obt
     {: codeblock}
 
     <table summary="Input parameters for new IAM token">
+    <caption>Input parameters for a new IAM token</caption>
     <thead>
     <th>Input parameters</th>
     <th>Values</th>

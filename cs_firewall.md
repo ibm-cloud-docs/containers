@@ -186,6 +186,7 @@ Let your cluster access infrastructure resources and services from behind a fire
       - **Important**: You must allow outgoing traffic to port 443 for all of the locations within the region, to balance the load during the bootstrapping process. For example, if your cluster is in US South, you must allow traffic from port 443 to the IP addresses for all of the locations (dal10, dal12, and dal13).
       <p>
   <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
+  <caption>IP addresses to open for outgoing traffic</caption>
       <thead>
       <th>Region</th>
       <th>Location</th>
@@ -231,6 +232,7 @@ Let your cluster access infrastructure resources and services from behind a fire
       - Replace <em>&lt;registry_publicIP&gt;</em> with the registry IP addresses to which you want to allow traffic. The global registry stores IBM-provided public images, and regional registries store your own private or public images.
         <p>
 <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
+  <caption>IP addresses to open for Registry traffic</caption>
       <thead>
         <th>{{site.data.keyword.containershort_notm}} region</th>
         <th>Registry address</th>
@@ -270,6 +272,7 @@ Let your cluster access infrastructure resources and services from behind a fire
       - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
       - Replace <em>&lt;monitoring_public_IP&gt;</em> with all of the addresses for the monitoring regions to which you want to allow traffic:
         <p><table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
+  <caption>IP addresses to open for monitoring traffic</caption>
         <thead>
         <th>Container region</th>
         <th>Monitoring address</th>
@@ -298,6 +301,7 @@ Let your cluster access infrastructure resources and services from behind a fire
       - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
       - Replace <em>&lt;logging_public_IP&gt;</em> with all of the addresses for the logging regions to which you want to allow traffic:
         <p><table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
+<caption>IP addresses to open for logging traffic</caption>
         <thead>
         <th>Container region</th>
         <th>Logging address</th>

@@ -413,6 +413,7 @@ To execute a workload on a GPU machine:
     {: codeblock}
 
     <table>
+    <caption>YAML components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
     </thead>
@@ -553,6 +554,7 @@ Steps:
     {: pre}
 
     <table>
+    <caption>Command components for kubectl run</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command&apos;s components</th>
     </thead>
@@ -585,6 +587,7 @@ Steps:
     {: pre}
 
     <table>
+    <caption>Command components for kubectl autoscale</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command&apos;s components</th>
     </thead>

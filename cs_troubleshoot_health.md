@@ -39,6 +39,7 @@ When you access the Kibana dashboard, your logs do not display.
 Review the following reasons why your cluster logs are not appearing and the corresponding troubleshooting steps:
 
 <table>
+<caption>Troubleshootingå logs that do not display</caption>
   <col width="40%">
   <col width="60%">
   <thead>

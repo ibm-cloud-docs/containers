@@ -132,6 +132,7 @@ Create a Dockerfile that includes your app code and the necessary configurations
   {: pre}
 
   <table>
+  <caption>Understanding this command's components</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="This icon indicates that there is more information to learn about this command's components."/> Understanding this command's components</th>
   </thead>
@@ -214,6 +215,7 @@ Deploy your app as a container in a Kubernetes cluster.
   {: codeblock}
 
   <table>
+  <caption>Understanding the YAML file components</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
   </thead>

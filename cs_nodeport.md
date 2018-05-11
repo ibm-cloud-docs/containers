@@ -80,6 +80,7 @@ If you do not already have an app ready, you can use a Kubernetes example app ca
     {: codeblock}
 
     <table>
+    <caption>Understanding the NodePort service components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the NodePort service section components</th>
     </thead>

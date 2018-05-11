@@ -58,6 +58,7 @@ To create a subnet in an IBM Cloud infrastructure (SoftLayer) account and make i
     {: pre}
 
     <table>
+    <caption>Understanding this command's components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
     </thead>

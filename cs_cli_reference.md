@@ -42,7 +42,8 @@ bx plugin list
 
 
 
-<table summary="API commands">
+<table summary="API commands table">
+<caption>API commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -67,7 +68,8 @@ bx plugin list
 
 <br>
 
-<table summary="CLI plug-in usage commands">
+<table summary="CLI plug-in usage commands table">
+<caption>CLI plug-in usage commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -86,7 +88,8 @@ bx plugin list
 
 <br>
 
-<table summary="Cluster commands: Management">
+<table summary="Cluster commands: Management table">
+<caption>Cluster commands: Management commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -111,7 +114,8 @@ bx plugin list
 
 <br>
 
-<table summary="Cluster commands: Services and integrations">
+<table summary="Cluster commands: Services and integrations table">
+<caption>Cluster commands: Services and integrations commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -130,7 +134,8 @@ bx plugin list
 
 </br>
 
-<table summary="Cluster commands: Subnets">
+<table summary="Cluster commands: Subnets table">
+<caption>Cluster commands: Subnets commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -155,7 +160,8 @@ bx plugin list
 
 </br>
 
-<table summary="Infrastructure commands">
+<table summary="Infrastructure commands table">
+<caption>Cluster commands: Infrastructure commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -174,7 +180,8 @@ bx plugin list
 
 </br>
 
-<table summary="Ingress application load balancer (ALB) commands">
+<table summary="Ingress application load balancer (ALB) commands table">
+<caption>Ingress application load balancer (ALB) commands</caption>
 <col width = 25%>
 <col width = 25%>
 <col width = 25%>
@@ -201,7 +208,8 @@ bx plugin list
 
 </br>
 
-<table summary="Logging commands">
+<table summary="Logging commands table">
+<caption>Logging commands</caption>
 <col width = 25%>
 <col width = 25%>
 <col width = 25%>
@@ -234,7 +242,8 @@ bx plugin list
 
 </br>
 
-<table summary="Region commands">
+<table summary="Region commands table">
+<caption>Region commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -253,7 +262,8 @@ bx plugin list
 
 </br>
 
-<table summary="Worker node commands">
+<table summary="Worker node commands table">
+<caption>Worker node commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -639,7 +649,7 @@ trusted: <em>true</em>
 
 
 <table>
-    <caption>Table. Understanding the YAML file components</caption>
+    <caption>Understanding the YAML file components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
     </thead>
@@ -2263,7 +2273,7 @@ workerNum: <em>&lt;number_workers&gt;</em>
 diskEncryption: <em>false</em></code></pre>
 
 <table>
-<caption>Table 2. Understanding the YAML file components</caption>
+<caption>Understanding the YAML file components</caption>
 <thead>
 <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
 </thead>

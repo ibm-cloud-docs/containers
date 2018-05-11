@@ -29,6 +29,7 @@ The public network interface for the worker nodes in both free and standard clus
 |------------|------------------------------------------|
 |Free clusters|{{site.data.keyword.IBM_notm}}|
 |Standard clusters|You in your IBM Cloud infrastructure (SoftLayer) account|
+{: caption="Managers of the public VLANs by cluster type" caption-side="top"}
 
 For more information about in-cluster network communication between worker nodes and pods, see [In-cluster networking](cs_secure.html#in_cluster_network). For more information about securely connecting apps that run in a Kubernetes cluster to an on-premises network or to apps that are external to your cluster, see [Setting up VPN connectivity](cs_vpn.html).
 

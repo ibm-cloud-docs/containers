@@ -55,6 +55,7 @@ Default Calico policies are not applied to pods directly; they are applied to th
 **Important:** Do not remove policies that are applied to a host endpoint unless you fully understand the policy. Be sure that you do not need the traffic that is being allowed by the policy.
 
  <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
+ <caption>Default Calico policies for each cluster</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Default Calico policies for each cluster</th>
   </thead>
@@ -89,6 +90,7 @@ Default Calico policies are not applied to pods directly; they are applied to th
 In Kubernetes version 1.10 and newer clusters, a default Kubernetes policy which limits access to the Kubernetes Dashboard is also created.
 
 <table>
+<caption>Default Kubernetes policies for each cluster</caption>
 <thead>
 <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Default Kubernetes policies for each cluster</th>
 </thead>
