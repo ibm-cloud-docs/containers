@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-11"
+lastupdated: "2018-05-14"
 
 ---
 
@@ -404,10 +404,10 @@ If this cluster is an existing one, check your cluster capacity.
 
 4.  If you don't have enough capacity in your cluster, add another worker node to your cluster.
 
-  ```
-  bx cs worker-add <cluster_name_or_ID> 1
-  ```
-  {: pre}
+    ```
+    bx cs worker-add <cluster_name_or_ID> 1
+    ```
+    {: pre}
 
 5.  If your pods still stay in a **pending** state after the worker node is fully deployed, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) to further troubleshoot the pending state of your pod.
 
