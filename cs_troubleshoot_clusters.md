@@ -220,7 +220,7 @@ The specified IBM Cloud service could not be found. If you just created the serv
 {: screen}
 
 {: tsCauses}
-To bind services to a cluster, you must have the Cloud Foundry developer user role for the space where the service instances is provisioned. In addition, you must have IAM Editor access to {{site.data.keyword.containerlong}}. To access the service instance, you must be logged in to the space where the service instance is provisioned. 
+To bind services to a cluster, you must have the Cloud Foundry developer user role for the space where the service instance is provisioned. In addition, you must have the IAM Editor access to {{site.data.keyword.containerlong}}. To access the service instance, you must be logged in to the space where the service instance is provisioned. 
 
 {: tsResolve}
 
@@ -234,7 +234,7 @@ To bind services to a cluster, you must have the Cloud Foundry developer user ro
    
 2. Target the org and the space where the service instance is provisioned. 
    ```
-   bx target -o ORG -s SPACE
+   bx target -o <org> -s <space>
    ```
    {: pre}
    
@@ -252,7 +252,7 @@ To bind services to a cluster, you must have the Cloud Foundry developer user ro
 
 2. Verify that the user who experiences this problem has the [Cloud Foundry developer role for the space](/docs/iam/mngcf.html#updating-cloud-foundry-access) where the service is provisioned. 
 
-3. If the correct permissions exists, try assigning a different permission and then re-assign the required permission. 
+3. If the correct permissions exists, try assigning a different permission and then re-assigning the required permission. 
 
 4. Wait a few minutes, then let the user try to bind the service again. 
 
