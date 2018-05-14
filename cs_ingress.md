@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-11"
+lastupdated: "2018-05-14"
 
 ---
 
@@ -210,8 +210,6 @@ To expose an app by using the IBM-provided domain:
 
     You can see the IBM-provided domain in the **Ingress subdomain** field.
 4.  Create an Ingress resource. Ingress resources define the routing rules that the ALB uses to route traffic to your app service.
-    * If your apps are all exposed by services in the same namespace, only one Ingress resource is required.
-    * If your apps are exposed by services in different namespaces in one cluster, you must create one resource per namespace to define rules for the apps that are exposed there.
     1.  Open your preferred editor and create an Ingress configuration file that is named, for example, `myingressresource.yaml`.
     2.  Define an Ingress resource in your configuration file that uses the IBM-provided domain to route incoming network traffic to the services that you created earlier.
 
@@ -486,8 +484,8 @@ Before you begin:
 
 To expose an app by using a custom domain with TLS:
 
-1.    Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.Bluemix_notm}} ](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns).
-      * If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
+1.    Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.Bluemix_notm}} DNS ](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns).
+    * If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
 
 2.  Configure your domain to route incoming network traffic to the IBM-provided ALB. Choose between these options:
     -   Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `bx cs cluster-get <cluster_name>` and look for the **Ingress subdomain** field.
@@ -552,8 +550,6 @@ To expose an app by using a custom domain with TLS:
       5.  Repeat these steps for every app that you want to expose.
 
 6.  Create an Ingress resource. Ingress resources define the routing rules that the ALB uses to route traffic to your app service.
-    * If your apps are all exposed by services in the same namespace, only one Ingress resource is required.
-    * If your apps are exposed by services in different namespaces in one cluster, you must create one resource per namespace to define rules for the apps that are exposed there.
     1.  Open your preferred editor and create an Ingress configuration file that is named, for example, `myingressresource.yaml`.
     2.  Define an Ingress resource in your configuration file that uses your custom domain to route incoming network traffic to your services, and your custom certificate to manage the TLS termination.
 
@@ -973,8 +969,8 @@ Before you begin:
 
 To privately expose an app by using a custom domain without TLS using an external DNS provider:
 
-1.    Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.Bluemix_notm}} ](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns).
-      * If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
+1.    Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.Bluemix_notm}} DNS ](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns).
+    * If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
 
 2.  Map your custom domain to the portable private IP address of the IBM-provided private ALB by adding the IP address as a record. To find the portable private IP address of the private ALB, run `bx cs albs --cluster <cluster_name>`.
 3.  [Deploy your app to the cluster](cs_app.html#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file, such as `app: code`. This label is needed to identify all pods where your app is running so that the pods can be included in the Ingress load balancing.
@@ -1021,8 +1017,6 @@ To privately expose an app by using a custom domain without TLS using an externa
       5.  Repeat these steps for every app that you want to expose.
 
 5.  Create an Ingress resource. Ingress resources define the routing rules that the ALB uses to route traffic to your app service.
-    * If your apps are all exposed by services in the same namespace, only one Ingress resource is required.
-    * If your apps are exposed by services in different namespaces in one cluster, you must create one resource per namespace to define rules for the apps that are exposed there.
     1.  Open your preferred editor and create an Ingress configuration file that is named, for example, `myingressresource.yaml`.
     2.  Define an Ingress resource in your configuration file that uses your custom domain to route incoming network traffic to your services.
 
@@ -1123,8 +1117,8 @@ Before you begin:
 
 To privately expose an app by using a custom domain with TLS using an external DNS provider:
 
-1.    Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.Bluemix_notm}} ](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns).
-      * If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
+1.    Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.Bluemix_notm}} DNS ](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns).
+    * If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
 
 2.  Map your custom domain to the portable private IP address of the IBM-provided private ALB by adding the IP address as a record. To find the portable private IP address of the private ALB, run `bx cs albs --cluster <cluster_name>`.
 3.  Either import or create a TLS certificate and key secret. If you are using a wildcard domain, ensure you import or create a wildcard certificate.
@@ -1181,8 +1175,6 @@ To privately expose an app by using a custom domain with TLS using an external D
       5.  Repeat these steps for every app that you want to expose.
 
 6.  Create an Ingress resource. Ingress resources define the routing rules that the ALB uses to route traffic to your app service.
-    * If your apps are all exposed by services in the same namespace, only one Ingress resource is required.
-    * If your apps are exposed by services in different namespaces in one cluster, you must create one resource per namespace to define rules for the apps that are exposed there.
     1.  Open your preferred editor and create an Ingress configuration file that is named, for example, `myingressresource.yaml`.
     2.  Define an Ingress resource in your configuration file that uses your custom domain to route incoming network traffic to your services, and your custom certificate to manage the TLS termination.
 
@@ -1344,8 +1336,6 @@ You can configure the private ALB to route incoming network traffic to the apps 
       5.  Repeat these steps for every app that you want to expose.
 
 8.  Create an Ingress resource. Ingress resources define the routing rules that the ALB uses to route traffic to your app service.
-    * If your apps are all exposed by services in the same namespace, only one Ingress resource is required.
-    * If your apps are exposed by services in different namespaces in one cluster, you must create one resource per namespace to define rules for the apps that are exposed there.
   1.  Open your preferred editor and create an Ingress configuration file that is named, for example, `myingressresource.yaml`.
   2.  Define an Ingress resource in your configuration file that uses your custom domain to route incoming network traffic to your services.
 
