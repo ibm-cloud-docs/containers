@@ -293,9 +293,9 @@ To deploy the app:
     To see that the app is publicly available, try entering it into a browser on your cell phone.
     {: tip}
 
-12. [Launch the Kubernetes dashboard](cs_app.html#cli_dashboard). Depending on your version of Kubernetes, the steps differ.
+12. [Launch the Kubernetes dashboard](cs_app.html#cli_dashboard).
 
-13. In the **Workloads** tab, you can see the resources that you created. When you are done exploring the Kubernetes dashboard, use CTRL+C to exit the `proxy` command.
+13. In the **Workloads** tab, you can see the resources that you created.
 
 Congratulations! You deployed your first version of the app.
 
