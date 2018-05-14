@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-11"
+lastupdated: "2018-05-14"
 
 ---
 
@@ -120,9 +120,13 @@ Available physical and virtual machines types vary by the location in which you 
 When you create a cluster, every cluster is automatically connected to a VLAN from your IBM Cloud infrastructure (SoftLayer) account.
 {:shortdesc}
 
-A VLAN configures a group of worker nodes and pods as if they were attached to the same physical wire. The private VLAN determines the private IP address that is assigned to a worker node during cluster creation, and the public VLAN determines the public IP address that is assigned to a worker node during cluster creation.
+A VLAN configures a group of worker nodes and pods as if they were attached to the same physical wire.
+* The public VLAN has two subnets automatically provisioned on it. The primary public subnet determines the public IP address that is assigned to a worker node during cluster creation, and the portable public subnet provides public IP addresses for Ingress and load balancer networking services.
+* The private VLAN also has two subnets automatically provisioned on it. The primary private subnet determines the private IP address that is assigned to a worker node during cluster creation, and the portable private subnet provides private IP addresses for Ingress and load balancer networking services.
 
-For free clusters, the cluster's worker nodes are connected to an IBM-owned public VLAN and private VLAN by default during cluster creation. For standard clusters, you must connect your worker nodes to a private VLAN. You can either connect your worker nodes to both a public VLAN and the private VLAN, or to the private VLAN only. If you want to connect your worker nodes to a private VLAN only, you can designate the ID of an existing private VLAN during cluster creation or [create a private VLAN](/docs/cli/reference/softlayer/index.html#sl_vlan_create). If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity, such as a [Vyatta Gateway Appliance](cs_vpn.html#vyatta).
+For free clusters, the cluster's worker nodes are connected to an IBM-owned public VLAN and private VLAN by default during cluster creation.
+
+For standard clusters, the first time that you create a cluster in a location, a public VLAN and a private VLAN are automatically provisioned for you. For every subsequent cluster that you create in that location, you choose the VLANs that you want to use. You can either connect your worker nodes to both a public VLAN and the private VLAN, or to the private VLAN only. If you want to connect your worker nodes to a private VLAN only, you can use the ID of an existing private VLAN or [create a private VLAN](/docs/cli/reference/softlayer/index.html#sl_vlan_create) and use the ID during cluster creation. If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity, such as a [Vyatta Gateway Appliance](cs_vpn.html#vyatta), so that the worker nodes can communicate with the master.
 
 **Note**: If you have multiple VLANs for a cluster or multiple subnets on the same VLAN, you must turn on VLAN spanning so that your worker nodes can communicate with each other on the private network. For instructions, see [Enable or disable VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
 
