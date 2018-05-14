@@ -37,7 +37,7 @@ Check out what container developers are interested in learning about in {{site.d
 <tbody>
 <tr>
 <td>01 May</td>
-<td>[Deploy workloads on GPU bare metal in AP North only](cs_app.html#gpu_app)</td>
+<td>[Deploy workloads on GPU bare metal](cs_app.html#gpu_app)</td>
 <td>If you have a [bare metal graphics processing unit (GPU) machine type](cs_clusters.html#shared_dedicated_node) in your cluster, you can schedule mathematically intensive apps. The GPU worker node can process your app's workload across both the CPU and GPU to increase performance.</td>
 </tr>
 </tbody></table>
