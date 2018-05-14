@@ -256,7 +256,7 @@ To create a cluster:
         ```
         {: pre}
 
-        Your CLI output matches the [locations for the container region](cs_regions.html#locations).
+        Your CLI output matches the [locations for the {{site.data.keyword.containerlong}} region](cs_regions.html#locations).
 
     2.  **Standard clusters**: Choose a location and review the machine types available in that location. The machine type specifies the virtual or physical compute hosts that are available to each worker node.
 
