@@ -493,7 +493,7 @@ To add persistent storage:
 
     <pre class="pre"><code>kubectl describe storageclasses ibmc-file-silver</code></pre>
 
-4.  **If you choose the custom storage class**: You get [Performance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/performance-storage) and have more control over choosing the combination of IOPS and size. For example, if you select a size of 40Gi for your PVC, you can choose IOPS that is a multiple of 100 that is in the range of 100 - 2000 IOPS. The following table shows you what range of IOPS you can choose depending on the size that you select.
+4.  **If you choose the custom storage class**: You get [Performance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/performance-storage) and have more control over choosing the combination of IOPS and size. For example, if you select a size of 40Gi for your PVC, you can choose IOPS that is a multiple of 100 that is in the range of 100 - 2000 IOPS. The IOPS that you choose is static and does not scale with the size of the storage. If you choose 40Gi with 100 IOPS, your total IOPS remains 100. The following table shows you what range of IOPS you can choose depending on the size that you select.
 
     <table>
          <caption>Table of custom storage class size ranges and IOPS</caption>
