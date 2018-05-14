@@ -88,6 +88,8 @@ When you create a standard cluster in {{site.data.keyword.Bluemix_notm}}, you ch
 
 ![Hardware options for worker nodes in a standard cluster](images/cs_clusters_hardware.png)
 
+Review the following information to decide what type of worker pools you want. As you plan, consider the [worker node limit minimum threshold](#resource_limit_node) of 10% of total memory capacity.
+
 <dl>
 <dt>Physical machines (bare metal)</dt>
 <dd>You can provision your worker node as a single-tenant physical server, also referred to as bare metal. Bare metal gives you direct access to the physical resources on the machine, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all of a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance.
@@ -109,6 +111,7 @@ When you create a standard cluster in {{site.data.keyword.Bluemix_notm}}, you ch
 <p>Shared nodes are usually less costly than dedicated nodes because the costs for the underlying hardware are shared among multiple customers. However, when you decide between shared and dedicated nodes, you might want to check with your legal department to discuss the level of infrastructure isolation and compliance that your app environment requires.</p>
 <p><strong>Virtual `u2c` or `b2c` machine types</strong>: These machines use local disk instead of storage area networking (SAN) for reliability. Reliability benefits include higher throughput when serializing bytes to the local disk and reduced file system degradation due to network failures. These machine types contain 25GB primary local disk storage for the OS file system, and 100GB secondary local disk storage for `/var/lib/docker`, the directory that all the container data is written to.</p>
 <p><strong>Deprecated `u1c` or `b1c` machine types</strong>: To start using `u2c` and `b2c` machine types, [update the machine types by adding worker nodes](cs_cluster_update.html#machine_type).</p></dd>
+
 </dl>
 
 
