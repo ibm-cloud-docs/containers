@@ -69,7 +69,7 @@ Create a non-expiring token for an image registry that you used for single and s
     ```
     {: pre}
 
-    You can use this secret to work with IBM {{site.data.keyword.Bluemix_notm}} Container Service.
+    You can use this secret to work with {{site.data.keyword.containerlong}}.
 
 6.  Create the Kubernetes secret to store your token information.
 
