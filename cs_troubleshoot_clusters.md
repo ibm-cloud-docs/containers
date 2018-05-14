@@ -205,6 +205,74 @@ Use the service GUID instead of the service instance name in the `bx cs cluster-
 <br />
 
 
+## Binding a service to a cluster results in service not found error
+{: #cs_not_found_services}
+
+{: tsSymptoms}
+When you run `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>`, you see the following message.
+
+```
+Binding service to a namespace...
+FAILED
+
+The specified IBM Cloud service could not be found. If you just created the service, wait a little and then try to bind it again. To view available IBM Cloud service instances, run 'bx service list'. (E0023)
+```
+{: screen}
+
+{: tsCauses}
+To bind services to a cluster, you must have the Cloud Foundry developer user role for the space where the service instances is provisioned. In addition, you must have IAM Editor access to {{site.data.keyword.containerlong}}. To access the service instance, you must be logged in to the space where the service instance is provisioned. 
+
+{: tsResolve}
+
+**As the user:**
+
+1. Log in to {{site.data.keyword.Bluemix_notm}}. 
+   ```
+   bx login
+   ```
+   {: pre}
+   
+2. Target the org and the space where the service instance is provisioned. 
+   ```
+   bx target -o ORG -s SPACE
+   ```
+   {: pre}
+   
+3. Verify that you are in the right space by listing your service instances. 
+   ```
+   bx service list 
+   ```
+   {: pre}
+   
+4. Try binding the service again. If you get the same error, then contact the account administrator and verify that you have sufficient permissions to bind services (see the following account admin steps). 
+
+**As the account admin:**
+
+1. Verify that the user who experiences this problem has [Editor permissions for {{site.data.keyword.containerlong}}](/docs/iam/mngiam.html#editing-existing-access). 
+
+2. Verify that the user who experiences this problem has the [Cloud Foundry developer role for the space](/docs/iam/mngcf.html#updating-cloud-foundry-access) where the service is provisioned. 
+
+3. If the correct permissions exists, try assigning a different permission and then re-assign the required permission. 
+
+4. Wait a few minutes, then let the user try to bind the service again. 
+
+5. If this does not resolve the problem, then the IAM permissions are out of sync and you cannot resolve the issue yourself. [Contact IBM support](/docs/get-support/howtogetsupport.html#getting-customer-support) by openening a support ticket. Make sure to provide the cluster ID, the user ID, and the service instance ID. 
+   1. Retrieve the cluster ID. 
+      ```
+      bx cs clusters
+      ```
+      {: pre}
+      
+   2. Retrieve the service instance ID. 
+      ```
+      bx service show <service_name> --guid
+      ```
+      {: pre}
+
+
+<br />
+
+
 
 ## After a worker node updates or reloads, duplicate nodes and pods appear
 {: #cs_duplicate_nodes}
