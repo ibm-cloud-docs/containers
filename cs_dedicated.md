@@ -192,7 +192,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
 
     3.  Select **Assign access to resources**.
 
-    4.  From the **Services** list, select **IBM Cloud Container Service**.
+    4.  From the **Services** list, select **{{site.data.keyword.containerlong_notm}}**.
 
     5.  From the **Region** list, select **All current regions** or a specific region, if you are prompted.
 
