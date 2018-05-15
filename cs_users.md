@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-09"
+lastupdated: "2018-05-14"
 
 
 ---
@@ -79,6 +79,7 @@ The corresponding RBAC roles are automatically assigned to the default namespace
 {: tip}
 
 <table>
+<caption>Platform roles and actions</caption>
   <tr>
     <th>Platform roles</th>
     <th>Example actions</th>
@@ -118,6 +119,7 @@ In addition to granting specific infrastructure roles, you must also grant devic
 {: tip}
 
 <table>
+<caption>Infrastructure roles and actions</caption>
   <tr>
     <th>Infrastructure role</th>
     <th>Example actions</th>
@@ -147,6 +149,7 @@ RBAC roles are automatically set in conjunction with the platform role for the d
 {: tip}
 
 <table>
+<caption>RBAC roles and actions</caption>
   <tr>
     <th>RBAC role</th>
     <th>Example actions</th>
@@ -310,6 +313,7 @@ Before you begin, [target the Kubernetes CLI to the cluster](cs_cli_install.html
         {: codeblock}
 
         <table>
+        <caption>Understanding this YAML components</caption>
           <thead>
             <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this YAML components</th>
           </thead>
@@ -384,6 +388,7 @@ Before you begin, [target the Kubernetes CLI to the cluster](cs_cli_install.html
         {: codeblock}
 
         <table>
+        <caption>Understanding this YAML components</caption>
           <thead>
             <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this YAML components</th>
           </thead>

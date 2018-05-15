@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-07"
+lastupdated: "2018-05-14"
 
 ---
 
@@ -29,9 +29,11 @@ In {{site.data.keyword.containershort_notm}}, you can add stable, portable IP ad
 <dl>
   <dt>Creating a cluster includes subnet creation by default</dt>
   <dd>When you create a standard cluster, {{site.data.keyword.containershort_notm}} automatically provisions the following subnets:
-    <ul><li>A portable public subnet with 5 public IP addresses</li>
-      <li>A portable private subnet with 5 private IP addresses </li></ul>
-      Portable public and private IP addresses are static and do not change when a worker node is removed. For each subnet, one portable public and one portable private IP address is used for the [Ingress application load balancers](cs_ingress.html). You can use the Ingress application load balancer to expose multiple apps in your cluster. The remaining four portable public and four portable private IP addresses can be used to expose single apps to the public or private network by [creating a load balancer service](cs_loadbalancer.html).</dd>
+    <ul><li>A primary public subnet that determines the public IP addresses for worker nodes during cluster creation</li>
+    <li>A primary private subnet that determines private IP addresses for worker nodes during cluster creation</li>
+    <li>A portable public subnet that provides 5 public IP addresses for Ingress and load balancer networking services</li>
+    <li>A portable private subnet that provides 5 private IP addresses for Ingress and load balancer networking services</li></ul>
+      Portable public and private IP addresses are static and do not change when a worker node is removed. For each subnet, one portable public and one portable private IP address is used for the default [Ingress application load balancers](cs_ingress.html). You can use the Ingress application load balancer to expose multiple apps in your cluster. The remaining four portable public and four portable private IP addresses can be used to expose single apps to the public or private network by [creating a load balancer service](cs_loadbalancer.html).</dd>
   <dt>[Ordering and managing your own existing subnets](#custom)</dt>
   <dd>You can order and manage existing portable subnets in your IBM Cloud infrastructure (SoftLayer) account instead of using the automatically provisioned subnets. Use this option to retain stable static IP addresses across cluster removals and creations, or to order larger blocks of IP addresses. First, create a cluster without subnets by using the `cluster-create --no-subnet` command, and then add the subnet to the cluster with the `cluster-subnet-add` command. </dd>
 </dl>
@@ -58,6 +60,7 @@ To create a subnet in an IBM Cloud infrastructure (SoftLayer) account and make i
     {: pre}
 
     <table>
+    <caption>Understanding this command's components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
     </thead>
@@ -357,4 +360,3 @@ When you create a cluster, a subnet that ends in `/26` is provisioned in the sam
 This 62 worker node limit might be exceeded by a large cluster or by several smaller clusters in a single region that are on the same VLAN. When the 62 worker node limit is reached, a second primary subnet in the same VLAN is ordered.
 
 To route between subnets on the same VLAN, you must turn on VLAN spanning. For instructions, see [Enable or disable VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
-

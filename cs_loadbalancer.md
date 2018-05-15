@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-09"
+lastupdated: "2018-05-14"
 
 ---
 
@@ -26,7 +26,13 @@ Expose a port and use a portable IP address for the load balancer to access a co
 ## Managing network traffic by using LoadBalancers
 {: #planning}
 
-When you create a standard cluster, {{site.data.keyword.containershort_notm}} automatically requests five portable public and five portable private IP addresses. These private IPs are provisioned into your IBM Cloud infrastructure (SoftLayer) account during cluster creation. Two of the portable IP addresses, one public and one private, are used for [Ingress application load balancers](cs_ingress.html). Four portable public and four portable private IP addresses can be used to expose apps by creating a LoadBalancer service.
+When you create a standard cluster, {{site.data.keyword.containershort_notm}} automatically provisions the following subnets:
+* A primary public subnet that determines public IP addresses for worker nodes during cluster creation
+* A primary private subnet that determines private IP addresses for worker nodes during cluster creation
+* A portable public subnet that provides 5 public IP addresses for Ingress and load balancer networking services
+* A portable private subnet that provides 5 private IP addresses for Ingress and load balancer networking services
+
+Portable public and private IP addresses are static and do not change when a worker node is removed. For each subnet, one portable public and one portable private IP address is used for the default [Ingress application load balancers](cs_ingress.html). The remaining four portable public and four portable private IP addresses can be used to expose single apps to the public or private network by creating a load balancer service.
 
 When you create a Kubernetes LoadBalancer service in a cluster on a public VLAN, an external load balancer is created. Your options for IP addresses when you create a LoadBalancer service are as follows:
 
@@ -114,6 +120,7 @@ To create a load balancer service:
         {: codeblock}
 
         <table>
+        <caption>Understanding the YAML file components</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
         </thead>

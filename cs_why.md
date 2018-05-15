@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-08"
+lastupdated: "2018-05-14"
 
 ---
 
@@ -37,6 +37,7 @@ Clusters are deployed on compute hosts that provide native Kubernetes and {{site
 |Continuous monitoring of the cluster health|<ul><li>Use the cluster dashboard to quickly see and manage the health of your cluster, worker nodes, and container deployments.</li><li>Find detailed consumption metrics by using {{site.data.keyword.monitoringlong}} and quickly expand your cluster to meet work loads.</li><li>Review logging information by using {{site.data.keyword.loganalysislong}} to see detailed cluster activities.</li></ul>|
 |Secure exposure of apps to the public|<ul><li>Choose between a public IP address, an {{site.data.keyword.IBM_notm}} provided route, or your own custom domain to access services in your cluster from the internet.</li></ul>|
 |{{site.data.keyword.Bluemix_notm}} service integration|<ul><li>Add extra capabilities to your app through the integration of {{site.data.keyword.Bluemix_notm}} services, such as Watson APIs, Blockchain, data services, or Internet of Things.</li></ul>|
+{: caption="Benefits of the {{site.data.keyword.containerlong_notm}}" caption-side="top"}
 
 
 
@@ -49,9 +50,9 @@ Clusters are deployed on compute hosts that provide native Kubernetes and {{site
 You can run {{site.data.keyword.containershort_notm}} in {{site.data.keyword.Bluemix_notm}} Public or Dedicated, in {{site.data.keyword.Bluemix_notm}} Private, or in a hybrid setup.
 {:shortdesc}
 
-Review the following information for the differences between these {{site.data.keyword.containershort_notm}} setups.
 
 <table>
+<caption>Differences between {{site.data.keyword.containershort_notm}} setups</caption>
 <col width="22%">
 <col width="78%">
  <thead>
@@ -110,6 +111,7 @@ You can create one free cluster or any number of standard clusters. Try out free
 |[Option to provision your worker nodes on physical (bare metal) servers](cs_clusters.html#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Option to provision bare metal workers with Trusted Compute](cs_clusters.html#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Available in {{site.data.keyword.Bluemix_dedicated_notm}}](cs_dedicated.html#dedicated_environment)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+{: caption="Characteristics of free and standard clusters" caption-side="top"}
 
 <br />
 

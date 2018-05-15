@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-07"
+lastupdated: "2018-05-14"
 
 ---
 
@@ -28,7 +28,7 @@ When these worker nodes are marked for networking only, other workloads cannot c
 
 
 
-## Label worker nodes as edge nodes
+## Labeling worker nodes as edge nodes
 {: #edge_nodes}
 
 Add the `dedicated=edge` label to two or more worker nodes on each public VLAN in your cluster to ensure that Ingress and load balancers are deployed to those worker nodes only.
@@ -84,7 +84,7 @@ You labeled worker nodes with `dedicated=edge` and redeployed all of the existin
 <br />
 
 
-## Prevent workloads from running on edge worker nodes
+## Preventing workloads from running on edge worker nodes
 {: #edge_workloads}
 
 A benefit of edge worker nodes is that they can be specified to run networking services only.

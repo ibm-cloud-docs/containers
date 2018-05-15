@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-07"
+lastupdated: "2018-05-14"
 
 ---
 
@@ -41,6 +41,7 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
 {: #dedicated_env_differences}
 
 <table>
+<caption>Differences in cluster management</caption>
 <col width="20%">
 <col width="40%">
 <col width="40%">
@@ -191,7 +192,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
 
     3.  Select **Assign access to resources**.
 
-    4.  From the **Services** list, select **IBM Cloud Container Service**.
+    4.  From the **Services** list, select **{{site.data.keyword.containerlong}}**.
 
     5.  From the **Region** list, select **All current regions** or a specific region, if you are prompted.
 
@@ -302,6 +303,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     {: pre}
 
     <table>
+    <caption>Understanding this command's components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
     </thead>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-10"
+lastupdated: "2018-05-14"
 
 ---
 
@@ -26,6 +26,7 @@ To add capabilities to your Ingress application load balancer (ALB), you can spe
 For general information about Ingress services and how to get started using them, see [Managing network traffic by using Ingress](cs_ingress.html#planning).
 
 <table>
+<caption>General annotations</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -65,6 +66,7 @@ For general information about Ingress services and how to get started using them
 <br>
 
 <table>
+<caption>Connection annotations</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -109,6 +111,7 @@ For general information about Ingress services and how to get started using them
 <br>
 
   <table>
+  <caption>HTTPS and TLS/SSL authentication annotations</caption>
   <col width="20%">
   <col width="20%">
   <col width="60%">
@@ -153,6 +156,7 @@ For general information about Ingress services and how to get started using them
 <br>
 
 <table>
+<caption>Istio annotations</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -172,6 +176,7 @@ For general information about Ingress services and how to get started using them
 <br>
 
 <table>
+<caption>Proxy buffer annotations</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -206,6 +211,7 @@ For general information about Ingress services and how to get started using them
 <br>
 
 <table>
+<caption>Request and response annotations</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -240,6 +246,7 @@ For general information about Ingress services and how to get started using them
 <br>
 
 <table>
+<caption>Service limit annotations</caption>
 <col width="20%">
 <col width="20%">
 <col width="60%">
@@ -305,6 +312,7 @@ spec:
 </code></pre>
 
 <table>
+<caption>Understanding the annotation components</caption>
  <thead>
  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
  </thead>
@@ -342,6 +350,7 @@ Modify the way the ALB matches the request URI against the app path.
 <dd>
 
 <table>
+<caption>Supported modifiers</caption>
  <col width="10%">
  <col width="90%">
  <thead>
@@ -395,6 +404,7 @@ spec:
           servicePort: 80</code></pre>
 
  <table>
+ <caption>Understanding the annotation components</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
   </thead>
@@ -451,6 +461,7 @@ rules:
         servicePort: 8080</code></pre>
 
 <table>
+<caption>Understanding the annotation components</caption>
 <thead>
 <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
 </thead>
@@ -501,6 +512,7 @@ spec:
 </code></pre>
 
 <table>
+<caption>Understanding the annotation components</caption>
 <thead>
 <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
 </thead>
@@ -560,6 +572,7 @@ spec:
           servicePort: 80</code></pre>
 
  <table>
+ <caption>Understanding the annotation components</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
   </thead>
@@ -667,6 +680,7 @@ spec:
          servicePort: 8080</code></pre>
 
 <table>
+<caption>Understanding the annotation components</caption>
  <thead>
  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
  </thead>
@@ -725,6 +739,7 @@ rules:
         servicePort: 8080</code></pre>
 
 <table>
+<caption>Understanding the annotation components</caption>
 <thead>
 <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
 </thead>
@@ -784,6 +799,7 @@ spec:
          servicePort: 8080</code></pre>
 
 <table>
+<caption>Understanding the annotation components</caption>
  <thead>
  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
  </thead>
@@ -840,6 +856,7 @@ spec:
 </code></pre>
 
 <table>
+<caption>Understanding the annotation components</caption>
 <thead>
 <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
 </thead>
@@ -934,6 +951,7 @@ spec:
           servicePort: 80</code></pre>
 
   <table>
+  <caption>Understanding the annotation components</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
   </thead>
@@ -1003,6 +1021,7 @@ Set the maximum number of idle keepalive connections to the upstream server of a
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>Understanding the annotation components</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
   </thead>
@@ -1067,6 +1086,7 @@ Set the maximum number of idle keepalive connections to the upstream server of a
             servicePort: 8080</code></pre>
 
    <table>
+   <caption>Understanding the annotation components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
     </thead>
@@ -1141,6 +1161,7 @@ spec:
          servicePort: 8080</code></pre>
 
 <table>
+<caption>Understanding the annotation components</caption>
  <thead>
  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
  </thead>
@@ -1282,6 +1303,7 @@ spec:
           </code></pre>
 
 <table>
+<caption>Understanding the annotation components</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
   </thead>
@@ -1354,6 +1376,7 @@ spec:
           </code></pre>
 
 <table>
+<caption>Understanding the annotation components</caption>
 <thead>
 <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
 </thead>
@@ -1416,6 +1439,7 @@ spec:
           servicePort: 8444</code></pre>
 
 <table>
+<caption>Understanding the annotation components</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
   </thead>
@@ -1478,6 +1502,7 @@ spec:
           </code></pre>
 
 <table>
+<caption>Understanding the annotation components</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
   </thead>
@@ -1553,6 +1578,7 @@ spec:
             servicePort: &lt;istio_ingress_port&gt;</code></pre>
 
    <table>
+   <caption>Understanding the YAML file components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
     </thead>
@@ -1628,6 +1654,7 @@ spec:
          servicePort: 8080</code></pre>
 
 <table>
+<caption>Understanding the annotation components</caption>
  <thead>
  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
  </thead>
@@ -1683,6 +1710,7 @@ spec:
          servicePort: 8080</code></pre>
 
 <table>
+<caption>Understanding the annotation components</caption>
  <thead>
  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
  </thead>
@@ -1745,6 +1773,7 @@ spec:
 </code></pre>
 
 <table>
+<caption>Understanding the annotation components</caption>
  <thead>
  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
  </thead>
@@ -1805,6 +1834,7 @@ spec:
          </code></pre>
 
 <table>
+<caption>Understanding the annotation components</caption>
 <thead>
 <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
 </thead>
@@ -1911,6 +1941,7 @@ spec:
           servicePort: 80</code></pre>
 
  <table>
+ <caption>Understanding the annotation components</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
   </thead>
@@ -1978,6 +2009,7 @@ Remove header information that is included in the client response from the back-
            servicePort: 80</code></pre>
 
   <table>
+  <caption>Understanding the annotation components</caption>
    <thead>
    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
    </thead>
@@ -2035,6 +2067,7 @@ spec:
          servicePort: 8080</code></pre>
 
 <table>
+<caption>Understanding the annotation components</caption>
  <thead>
  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
  </thead>
@@ -2085,6 +2118,7 @@ spec:
          servicePort: 8080</code></pre>
 
 <table>
+<caption>Understanding the annotation components</caption>
  <thead>
  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
  </thead>
@@ -2147,6 +2181,7 @@ For all services, limit the request processing rate and the number of connection
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>Understanding the annotation components</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
   </thead>
@@ -2209,6 +2244,7 @@ Limit the request processing rate and the number of connections for specific ser
           servicePort: 8080</code></pre>
 
  <table>
+ <caption>Understanding the annotation components</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
   </thead>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-08"
+lastupdated: "2018-05-14"
 
 ---
 
@@ -57,6 +57,7 @@ Configuring your account to access the IBM Cloud infrastructure (SoftLayer) port
 |Older Pay-As-You-Go accounts|Pay-As-You-Go accounts that were created before automatic account linking was available, did not come with access to the IBM Cloud infrastructure (SoftLayer) portfolio.<p>If you have an existing IBM Cloud infrastructure (SoftLayer) account, you cannot link this account to an older Pay-As-You-Go account.</p>|<strong>Option 1:</strong> [Create a new Pay-As-You-Go account](/docs/account/index.html#billableacts) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. When you choose this option, you have two separate {{site.data.keyword.Bluemix_notm}} accounts and billings.<p>To continue using your old Pay-As-You-Go account, you can use your new Pay-As-You-Go account to generate an API key to access the IBM Cloud infrastructure (SoftLayer) portfolio. Then, you must [set the IBM Cloud infrastructure (SoftLayer) API key for your old Pay-As-You-Go account](cs_cli_reference.html#cs_credentials_set). </p><p><strong>Option 2:</strong> If you already have an existing IBM Cloud infrastructure (SoftLayer) account that you want to use, you can [set your credentials](cs_cli_reference.html#cs_credentials_set) in your {{site.data.keyword.Bluemix_notm}} account.</p><p>**Note:** When you manually link to an IBM Cloud infrastructure (SoftLayer) account, the credentials are used for every IBM Cloud infrastructure (SoftLayer) specific action in your {{site.data.keyword.Bluemix_notm}} account. You must ensure that the API key that you set has [sufficient infrastructure permissions](cs_users.html#infra_access) so that your users can create and work with clusters.</p>|
 |Subscription accounts|Subscription accounts are not set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio.|<strong>Option 1:</strong> [Create a new Pay-As-You-Go account](/docs/account/index.html#billableacts) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. When you choose this option, you have two separate {{site.data.keyword.Bluemix_notm}} accounts and billings.<p>If you want to continue using your Subscription account, you can use your new Pay-As-You-Go account to generate an API key in IBM Cloud infrastructure (SoftLayer). Then, you must manually [set the IBM Cloud infrastructure (SoftLayer) API key for your Subscription account](cs_cli_reference.html#cs_credentials_set). Keep in mind that IBM Cloud infrastructure (SoftLayer) resources are billed through your new Pay-As-You-Go account.</p><p><strong>Option 2:</strong> If you already have an existing IBM Cloud infrastructure (SoftLayer) account that you want to use, you can manually [set IBM Cloud infrastructure (SoftLayer) credentials](cs_cli_reference.html#cs_credentials_set) for your {{site.data.keyword.Bluemix_notm}} account.<p>**Note:** When you manually link to an IBM Cloud infrastructure (SoftLayer) account, the credentials are used for every IBM Cloud infrastructure (SoftLayer) specific action in your {{site.data.keyword.Bluemix_notm}} account. You must ensure that the API key that you set has [sufficient infrastructure permissions](cs_users.html#infra_access) so that your users can create and work with clusters.</p>|
 |IBM Cloud infrastructure (SoftLayer) accounts, no {{site.data.keyword.Bluemix_notm}} account|To create a standard cluster, you must have an {{site.data.keyword.Bluemix_notm}} account.|<p>[Create a Pay-As-You-Go account](/docs/account/index.html#billableacts) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. When you choose this option, an IBM Cloud infrastructure (SoftLayer) account is created for you. You have two separate IBM Cloud infrastructure (SoftLayer) accounts and billing.</p>|
+{: caption="Standard cluster creation options by account type" caption-side="top"}
 
 
 <br />
@@ -200,6 +201,74 @@ Use the service GUID instead of the service instance name in the `bx cs cluster-
   bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_GUID>
   ```
   {: pre}
+
+<br />
+
+
+## Binding a service to a cluster results in service not found error
+{: #cs_not_found_services}
+
+{: tsSymptoms}
+When you run `bx cs cluster-service-bind <cluster_name> <namespace> <service_instance_name>`, you see the following message.
+
+```
+Binding service to a namespace...
+FAILED
+
+The specified IBM Cloud service could not be found. If you just created the service, wait a little and then try to bind it again. To view available IBM Cloud service instances, run 'bx service list'. (E0023)
+```
+{: screen}
+
+{: tsCauses}
+To bind services to a cluster, you must have the Cloud Foundry developer user role for the space where the service instance is provisioned. In addition, you must have the IAM Editor access to {{site.data.keyword.containerlong}}. To access the service instance, you must be logged in to the space where the service instance is provisioned. 
+
+{: tsResolve}
+
+**As the user:**
+
+1. Log in to {{site.data.keyword.Bluemix_notm}}. 
+   ```
+   bx login
+   ```
+   {: pre}
+   
+2. Target the org and the space where the service instance is provisioned. 
+   ```
+   bx target -o <org> -s <space>
+   ```
+   {: pre}
+   
+3. Verify that you are in the right space by listing your service instances. 
+   ```
+   bx service list 
+   ```
+   {: pre}
+   
+4. Try binding the service again. If you get the same error, then contact the account administrator and verify that you have sufficient permissions to bind services (see the following account admin steps). 
+
+**As the account admin:**
+
+1. Verify that the user who experiences this problem has [Editor permissions for {{site.data.keyword.containerlong}}](/docs/iam/mngiam.html#editing-existing-access). 
+
+2. Verify that the user who experiences this problem has the [Cloud Foundry developer role for the space](/docs/iam/mngcf.html#updating-cloud-foundry-access) where the service is provisioned. 
+
+3. If the correct permissions exists, try assigning a different permission and then re-assigning the required permission. 
+
+4. Wait a few minutes, then let the user try to bind the service again. 
+
+5. If this does not resolve the problem, then the IAM permissions are out of sync and you cannot resolve the issue yourself. [Contact IBM support](/docs/get-support/howtogetsupport.html#getting-customer-support) by openening a support ticket. Make sure to provide the cluster ID, the user ID, and the service instance ID. 
+   1. Retrieve the cluster ID. 
+      ```
+      bx cs clusters
+      ```
+      {: pre}
+      
+   2. Retrieve the service instance ID. 
+      ```
+      bx service show <service_name> --guid
+      ```
+      {: pre}
+
 
 <br />
 
@@ -403,10 +472,10 @@ If this cluster is an existing one, check your cluster capacity.
 
 4.  If you don't have enough capacity in your cluster, add another worker node to your cluster.
 
-  ```
-  bx cs worker-add <cluster_name_or_ID> 1
-  ```
-  {: pre}
+    ```
+    bx cs worker-add <cluster_name_or_ID> 1
+    ```
+    {: pre}
 
 5.  If your pods still stay in a **pending** state after the worker node is fully deployed, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) to further troubleshoot the pending state of your pod.
 

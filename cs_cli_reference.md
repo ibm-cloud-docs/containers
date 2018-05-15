@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-09"
+lastupdated: "2018-05-15"
 
 ---
 
@@ -42,7 +42,8 @@ bx plugin list
 
 
 
-<table summary="API commands">
+<table summary="API commands table">
+<caption>API commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -67,7 +68,8 @@ bx plugin list
 
 <br>
 
-<table summary="CLI plug-in usage commands">
+<table summary="CLI plug-in usage commands table">
+<caption>CLI plug-in usage commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -86,7 +88,8 @@ bx plugin list
 
 <br>
 
-<table summary="Cluster commands: Management">
+<table summary="Cluster commands: Management table">
+<caption>Cluster commands: Management commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -111,7 +114,8 @@ bx plugin list
 
 <br>
 
-<table summary="Cluster commands: Services and integrations">
+<table summary="Cluster commands: Services and integrations table">
+<caption>Cluster commands: Services and integrations commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -130,7 +134,8 @@ bx plugin list
 
 </br>
 
-<table summary="Cluster commands: Subnets">
+<table summary="Cluster commands: Subnets table">
+<caption>Cluster commands: Subnets commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -155,7 +160,8 @@ bx plugin list
 
 </br>
 
-<table summary="Infrastructure commands">
+<table summary="Infrastructure commands table">
+<caption>Cluster commands: Infrastructure commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -174,7 +180,8 @@ bx plugin list
 
 </br>
 
-<table summary="Ingress application load balancer (ALB) commands">
+<table summary="Ingress application load balancer (ALB) commands table">
+<caption>Ingress application load balancer (ALB) commands</caption>
 <col width = 25%>
 <col width = 25%>
 <col width = 25%>
@@ -201,7 +208,8 @@ bx plugin list
 
 </br>
 
-<table summary="Logging commands">
+<table summary="Logging commands table">
+<caption>Logging commands</caption>
 <col width = 25%>
 <col width = 25%>
 <col width = 25%>
@@ -234,7 +242,8 @@ bx plugin list
 
 </br>
 
-<table summary="Region commands">
+<table summary="Region commands table">
+<caption>Region commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -253,7 +262,8 @@ bx plugin list
 
 </br>
 
-<table summary="Worker node commands">
+<table summary="Worker node commands table">
+<caption>Worker node commands</caption>
 <col width="25%">
 <col width="25%">
 <col width="25%">
@@ -303,10 +313,10 @@ Switching regions? Use the `bx cs region-set` [command](#cs_region-set) instead.
 
    <dt><code>--insecure</code></dt>
    <dd>Allow an insecure HTTP connection. This flag is optional.</dd>
-   
+
    <dt><code>--skip-ssl-validation</code></dt>
    <dd>Allow insecure SSL certificates. This flag is optional.</dd>
-   
+
    <dt><code>--api-version VALUE</code></dt>
    <dd>Specify the API version of the service that you want to use. This value is optional.</dd>
 
@@ -325,7 +335,7 @@ bx cs api
 API Endpoint:          https://containers.bluemix.net   
 API Version:           v1   
 Skip SSL Validation:   false   
-Region:                us-south 
+Region:                us-south
 ```
 {: screen}
 
@@ -639,7 +649,7 @@ trusted: <em>true</em>
 
 
 <table>
-    <caption>Table. Understanding the YAML file components</caption>
+    <caption>Understanding the YAML file components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
     </thead>
@@ -724,7 +734,7 @@ trusted: <em>true</em>
 <li>If this standard cluster is the first standard cluster that you create in this location, do not include this flag. A private VLAN is created for you when the clusters is created.</li>
 <li>If you created a standard cluster before in this location or created a private VLAN in IBM Cloud infrastructure (SoftLayer) before, you must specify that private VLAN.
 
-<p><strong>Note:</strong> {[matching_VLANs]}</p></li>
+<p><strong>Note:</strong> Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</p></li>
 </ul>
 
 <p>To find out if you already have a private VLAN for a specific location or to find the name of an existing private VLAN, run <code>bx cs vlans <em>&lt;location&gt;</em></code>.</p></dd>
@@ -734,9 +744,9 @@ trusted: <em>true</em>
 <ul>
 <li>This parameter is not available for free clusters.</li>
 <li>If this standard cluster is the first standard cluster that you create in this location, do not use this flag. A public VLAN is created for you when the cluster is created.</li>
-<li>If you created a standard cluster before in this location or created a public VLAN in IBM Cloud infrastructure (SoftLayer) before, you must specify that public VLAN.
+<li>If you created a standard cluster before in this location or created a public VLAN in IBM Cloud infrastructure (SoftLayer) before, specify that public VLAN. If you want to connect your worker nodes to a private VLAN only, do not specify this option.
 
-<p><strong>Note:</strong> {[matching_VLANs]}</p></li>
+<p><strong>Note:</strong> Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</p></li>
 </ul>
 
 <p>To find out if you already have a public VLAN for a specific location or to find the name of an existing public VLAN, run <code>bx cs vlans <em>&lt;location&gt;</em></code>.</p></dd>
@@ -800,7 +810,7 @@ Enable a feature on an existing cluster.
    <dt><code><em>--trusted</em></code></dt>
    <dd><p>Include the flag to enable [Trusted Compute](cs_secure.html#trusted_compute) for all supported bare metal worker nodes that are in the cluster. After you enable trust, you cannot later disable it for the cluster.</p>
    <p>To check whether the bare metal machine type supports trust, check the **Trustable** field in the output of the `bx cs machine-types <location>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `bx cs cluster-get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `bx cs worker-get` [command](#cs_worker_get).</p></dd>
-   
+
   <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
@@ -828,7 +838,7 @@ View information about a cluster in your organization.
 
    <dt><code><em>--showResources</em></code></dt>
    <dd>Show more cluster resources such as add-ons, VLANs, subnets, and storage.</dd>
-   
+
 
   <dt><code>-s</code></dt>
   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -1665,8 +1675,8 @@ You can provision your worker node as a virtual machine on shared or dedicated h
 <li><strong>mr1c.28x512</strong>: Maximize the RAM available to your worker nodes. RAM intensive with 28 cores, 512GB Memory, 2TB SATA Primary Disk, 960GB SSD Secondary Disk, and 10Gbps Bonded Network.</li>
 <li><strong>md1c.16x64.4x4tb</strong>: Provision worker nodes with a significant amount of local disk storage, including RAID to back up data that is stored locally on the machine. The 2x2TB primary storage disks are configured for RAID1, and the 4x4TB secondary storage disks are configured for RAID10. Data intensive with 16 cores, 64GB Memory, 2x2TB RAID1 Primary Disk, 4x4TB SATA RAID10 Secondary Disk, and 10Gbps Bonded Network.</li>
 <li><strong>md1c.28x512.4x4tb</strong>: Provision worker nodes with a significant amount of local disk storage, including RAID to back up data that is stored locally on the machine. The 2x2TB primary storage disks are configured for RAID1, and the 4x4TB secondary storage disks are configured for RAID10. Data intensive with 28 cores, 512GB Memory, 2x2TB RAID1 Primary Disk, 4x4TB SATA RAID10 Secondary Disk, and 10Gbps Bonded Network.</li>
-<li><strong>mg1c.16x128 (available in AP North only)</strong>: Choose this type if your worker nodes require graphics processing units (GPUs) for mathematically-intensive workloads such as 3D applications. This flavor has 1 physical card that has 2 GPUs per card for a total of 2 GPUs. The machine has 16 cores, 128GB Memory, 2TB SATA Primary Disk, 960GB SSD Secondary Disk, and 10Gbps Bonded Network.</li>
-<li><strong>mg1c.28x256 (available in AP North only)</strong>: Choose this type if your worker nodes require GPUs for mathematically-intensive workloads such as 3D applications. This flavor has 2 physical cards that have 2 GPUs per card for a total of 4 GPUs. The machine has 28 cores, 256GB Memory, 2TB SATA Primary Disk, 960GB SSD Secondary Disk, and 10Gbps Bonded Network.</li>
+<li><strong>mg1c.16x128</strong>: Choose this type if your worker nodes require graphics processing units (GPUs) for mathematically-intensive workloads such as 3D applications. This flavor has 1 physical card that has 2 GPUs per card for a total of 2 GPUs. The machine has 16 cores, 128GB Memory, 2TB SATA Primary Disk, 960GB SSD Secondary Disk, and 10Gbps Bonded Network.</li>
+<li><strong>mg1c.28x256</strong>: Choose this type if your worker nodes require GPUs for mathematically-intensive workloads such as 3D applications. This flavor has 2 physical cards that have 2 GPUs per card for a total of 4 GPUs. The machine has 28 cores, 256GB Memory, 2TB SATA Primary Disk, 960GB SSD Secondary Disk, and 10Gbps Bonded Network.</li>
 </ul></p></dd>
 <dt>Virtual machines</dt>
 <dd>When you create a standard virtual cluster, you must choose whether you want the underlying hardware to be shared by multiple {{site.data.keyword.IBM_notm}} customers (multi tenancy) or to be dedicated to you only (single tenancy).
@@ -1675,6 +1685,7 @@ You can provision your worker node as a virtual machine on shared or dedicated h
 <p>Shared nodes are usually less costly than dedicated nodes because the costs for the underlying hardware are shared among multiple customers. However, when you decide between shared and dedicated nodes, you might want to check with your legal department to discuss the level of infrastructure isolation and compliance that your app environment requires.</p>
 <p><strong>Virtual `u2c` or `b2c` machine types</strong>: These machines use local disk instead of storage area networking (SAN) for reliability. Reliability benefits include higher throughput when serializing bytes to the local disk and reduced file system degradation due to network failures. These machine types contain 25GB primary local disk storage for the OS file system, and 100GB secondary local disk storage for `/var/lib/docker`, the directory that all the container data is written to.</p>
 <p><strong>Deprecated `u1c` or `b1c` machine types</strong>: To start using `u2c` and `b2c` machine types, [update the machine types by adding worker nodes](cs_cluster_update.html#machine_type).</p></dd>
+
 </dl>
 
 
@@ -1755,7 +1766,7 @@ List the public and private VLANs that are available for a location in your IBM 
 ## Logging commands
 {: #logging_commands}
 
-### bx cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-containers CONTAINERS] [--app-paths PATHS_TO_LOGS] --type LOG_TYPE [--json] [--skip-validation] [-s]
+### bx cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-containers CONTAINERS] [--app-paths PATHS_TO_LOGS] [--syslog-protocol PROTOCOL] --type LOG_TYPE [--json] [--skip-validation] [-s]
 {: #cs_logging_create}
 
 Create a logging configuration. You can use this command to forward logs for containers, applications, worker nodes, Kubernetes clusters, and Ingress application load balancers to {{site.data.keyword.loganalysisshort_notm}} or to an external syslog server.
@@ -1765,39 +1776,43 @@ Create a logging configuration. You can use this command to forward logs for con
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster.</dd>
-    
+
   <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>    
-    <dd>The log source to enable log forwarding for. This argument supports a comma-separated list of log sources to apply the configuration for. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, and <code>ingress</code>. If you do not provide a log source, logging configurations are created for <code>container</code> and <code>ingress</code> log sources.</dd>
+    <dd>The log source to enable log forwarding for. This argument supports a comma-separated list of log sources to apply the configuration for. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, and <code>ingress</code>, and <code>kube-audit</code>. If you do not provide a log source, logging configurations are created for <code>container</code> and <code>ingress</code> log sources.</dd>
+
   <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
     <dd>The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the container log source and is optional. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</dd>
-    
+
   <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
     <dd>When the logging type is <code>syslog</code>, the hostname or IP address of the log collector server. This value is required for <code>syslog</code>. When the logging type is <code>ibm</code>, the {{site.data.keyword.loganalysislong_notm}} ingestion URL. You can find the list of available ingestion URLs [here](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region where your cluster was created is used.</dd>
-    
+
   <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
     <dd>The port of the log collector server. This value is optional. If you do not specify a port, then the standard port <code>514</code> is used for <code>syslog</code> and the standard port <code>9091</code> is used for <code>ibm</code>.</dd>
-    
+
   <dt><code>--space <em>CLUSTER_SPACE</em></code></dt>
     <dd>The name of the Cloud Foundry space that you want to send logs to. This value is valid only for log type <code>ibm</code> and is optional. If you do not specify a space, logs are sent to the account level.</dd>
-    
+
   <dt><code>--org <em>CLUSTER_ORG</em></code></dt>
     <dd>The name of the Cloud Foundry org that the space is in. This value is valid only for log type <code>ibm</code> and is required if you specified a space.</dd>
-    
+
   <dt><code>--app-paths</code></dt>
     <dd>The path on the container that the apps are logging to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma-separated list. This value is required for log source <code>application</code>. Example: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
-    
+
+  <dt><code>--syslog-protocol</code></dt>
+    <dd>The transfer layer protocol that is used when the logging type is <code>syslog</code>. Supported values are <code>TCP</code> and the default <code>UDP</code>. When forwarding to an rsyslog server with the <code>udp</code> protocol, logs that are over 1KB are truncated.</dd>
+
   <dt><code>--type <em>LOG_TYPE</em></code></dt>
     <dd>Where you want to forward your logs. Options are <code>ibm</code>, which forwards your logs to {{site.data.keyword.loganalysisshort_notm}} and <code>syslog</code>, which forwards your logs to an external server.</dd>
-    
+
   <dt><code>--app-containers</code></dt>
-    <dd>To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma-separated list. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided. This option is only valid for log source <code>application</code>. </dt>
-    
+    <dd>To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma-separated list. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided. This option is only valid for log source <code>application</code>.</dd>
+
   <dt><code>--json</code></dt>
     <dd>Prints the command output in JSON format. This value is optional.</dd>
-    
+
   <dt><code>--skip-validation</code></dt>
     <dd>Skip validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration does not correctly forward logs. This value is optional.</dd>
-    
+
     <dt><code>-s</code></dt>
     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
@@ -1835,13 +1850,16 @@ View all log forwarding configurations for a cluster, or filter logging configur
  <dl>
   <dt><code><em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster. This value is required.</dd>
-    
+
   <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-    <dd>The kind of log source for which you want to filter. Only logging configurations of this log source in the cluster are returned. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, and <code>ingress</code>. This value is optional.</dd>
-  
+    <dd>The kind of log source for which you want to filter. Only logging configurations of this log source in the cluster are returned. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, and <code>kube-audit</code>. This value is optional.</dd>
+
+  <dt><code>--show-covering-filters</code></dt>
+    <dd>Shows the logging filters that render previous filters obsolete.</dd>
+
   <dt><code>--json</code></dt>
     <dd>Prints the command output in JSON format. This value is optional.</dd>
-    
+
   <dt><code>-s</code></dt>
     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
  </dl>
@@ -1864,7 +1882,7 @@ Refresh the logging configuration for the cluster. This refreshes the logging to
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
-  
+
    <dt><code>-s</code></dt>
      <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
@@ -1887,13 +1905,13 @@ Delete one log forwarding configuration or all logging configurations for a clus
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
-   
+
   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
    <dd>If you want to remove a single logging configuration, the logging configuration ID.</dd>
-   
+
   <dt><code>--all</code></dt>
    <dd>The flag to remove all logging configurations in a cluster.</dd>
-   
+
    <dt><code>-s</code></dt>
      <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
@@ -1916,40 +1934,40 @@ Update the details of a log forwarding configuration.
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
    <dd>The name or ID of the cluster. This value is required.</dd>
-   
+
   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
    <dd>The logging configuration ID that you want to update. This value is required.</dd>
-   
+
   <dt><code>--namespace <em>NAMESPACE</em></code>
     <dd>The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the <code>container</code> log source. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</dd>
-    
+
   <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
    <dd>When the logging type is <code>syslog</code>, the hostname or IP address of the log collector server. This value is required for <code>syslog</code>. When the logging type is <code>ibm</code>, the {{site.data.keyword.loganalysislong_notm}} ingestion URL. You can find the list of available ingestion URLs [here](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region where your cluster was created is used.</dd>
-   
+
    <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
    <dd>The port of the log collector server. This value is optional when the logging type is <code>syslog</code>. If you do not specify a port, then the standard port <code>514</code> is used for <code>syslog</code> and <code>9091</code> is used for <code>ibm</code>.</dd>
-   
+
    <dt><code>--space <em>CLUSTER_SPACE</em></code></dt>
    <dd>The name of the space that you want to send logs to. This value is valid only for log type <code>ibm</code> and is optional. If you do not specify a space, logs are sent to the account level.</dd>
-   
+
    <dt><code>--org <em>CLUSTER_ORG</em></code></dt>
    <dd>The name of the org that the space is in. This value is valid only for log type <code>ibm</code> and is required if you specified a space.</dd>
-   
+
    <dt><code>--app-paths <em>PATH</em>,<em>PATH</em></code></dt>
      <dd>An absolute file path in the container to collect logs from. Wildcards, such as '/var/log/*.log', can be used, but recursive globs, such as '/var/log/**/test.log', cannot be used. To specify more than one path, use a comma separated list. This value is required when you specify 'application' for the log source. </dd>
-     
+
    <dt><code>--app-containers <em>PATH</em>,<em>PATH</em></code></dt>
      <dd>The path on the containers that the apps are logging to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma separated list. Example: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
-     
+
    <dt><code>--type <em>LOG_TYPE</em></code></dt>
    <dd>The log forwarding protocol that you want to use. Currently, <code>syslog</code> and <code>ibm</code> are supported. This value is required.</dd>
-   
+
    <dt><code>--json</code></dt>
    <dd>Prints the command output in JSON format. This value is optional.</dd>
-   
+
    <dt><code>--skipValidation</code></dt>
    <dd>Skip validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration does not correctly forward logs. This value is optional.</dd>
-   
+
    <dt><code>-s</code></dt>
      <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
      </dl>
@@ -1969,7 +1987,7 @@ Update the details of a log forwarding configuration.
   {: pre}
 
 
-### bx cs logging-filter-create CLUSTER --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--regex-message MESSAGE] [--json] [-s] 
+### bx cs logging-filter-create CLUSTER --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--regex-message MESSAGE] [--json] [-s]
 {: #cs_log_filter_create}
 
 Create a logging filter. You can use this command to filter out logs that are forwarded by your logging configuration.
@@ -1979,28 +1997,28 @@ Create a logging filter. You can use this command to filter out logs that are fo
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster that you want to create a logging filter for. This value is required.</dd>
-    
+
   <dt><code>--type <em>LOG_TYPE</em></code></dt>
     <dd>The type of logs that you want to apply the filter to. Currently <code>all</code>, <code>container</code>, and <code>host</code> are supported.</dd>
-    
+
   <dt><code>--logging-configs <em>CONFIGS</em></code></dt>
     <dd>A comma separated list of your logging configuration IDs. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the <code>--show-matching-configs</code> flag with the command. This value is optional.</dd>
-    
+
   <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
     <dd>The Kubernetes namespace from which you want to filter logs. This value is optional.</dd>
-    
+
   <dt><code>--container <em>CONTAINER_NAME</em></code></dt>
     <dd>The name of the container from which you want to filter out logs. This flag applies only when you are using log type <code>container</code>. This value is optional.</dd>
-    
+
   <dt><code>--level <em>LOGGING_LEVEL</em></code></dt>
     <dd>Filters out logs that are at the specified level and less. Acceptable values in their canonical order are <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code>, and <code>trace</code>. This value is optional. As an example, if you filtered logs at the <code>info</code> level, <code>debug</code>, and <code>trace</code> are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. Example output: <code>{"log": "hello", "level": "info"}</code></dd>
-    
+
   <dt><code>--regex-message <em>MESSAGE</em></code></dt>
     <dd>Filters out any logs that contain a specified message that is written as a regular expression anywhere in the log. This value is optional.</dd>
-    
+
   <dt><code>--json</code></dt>
     <dd>Prints the command output in JSON format. This value is optional.</dd>
-    
+
   <dt><code>-s</code></dt>
     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
@@ -2033,19 +2051,19 @@ View a logging filter configuration. You can use this command to view the loggin
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster that you want to view filters from. This value is required.</dd>
-    
+
   <dt><code>--id <em>FILTER_ID</em></code></dt>
     <dd>The ID of the log filter that you want to view.</dd>
-    
+
   <dt><code>--show-matching-configs</code></dt>
     <dd>Show the logging configurations that match the configuration that you're viewing. This value is optional.</dd>
-  
+
   <dt><code>--show-covering-filters</code></dt>
     <dd>Show the logging filters that render previous filters obsolete. This value is optional.</dd>
-    
+
   <dt><code>--json</code></dt>
     <dd>Prints the command output in JSON format. This value is optional.</dd>
-    
+
    <dt><code>-s</code></dt>
      <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
@@ -2061,18 +2079,18 @@ Delete a logging filter. You can use this command to remove a logging filter tha
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster that you want to delete a filter from.</dd>
-    
+
   <dt><code>--id <em>FILTER_ID</em></code></dt>
     <dd>The ID of the log filter to delete.</dd>
-    
+
   <dt><code>--all</code></dt>
     <dd>Delete all of your log forwarding filters. This value is optional.</dd>
-    
+
   <dt><code>-s</code></dt>
     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
-  
+
 ### bx cs logging-filter-update CLUSTER --id FILTER_ID --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--message MESSAGE] [--json] [-s]
 {: #cs_log_filter_update}
 
@@ -2083,31 +2101,31 @@ Update a logging filter. You can use this command to update a logging filter tha
 <dl>
   <dt><code><em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster that you want to update a logging filter for. This value is required.</dd>
- 
+
  <dt><code>--id <em>FILTER_ID</em></code></dt>
     <dd>The ID of the log filter to update.</dd>
-    
+
   <dt><code>--type <em>LOG_TYPE</em></code></dt>
     <dd>The type of logs that you want to apply the filter to. Currently <code>all</code>, <code>container</code>, and <code>host</code> are supported.</dd>
-    
+
   <dt><code>--logging-configs <em>CONFIGS</em></code></dt>
     <dd>A comma separated list of your logging configuration IDs. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the <code>--show-matching-configs</code> flag with the command. This value is optional.</dd>
-    
+
   <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
     <dd>The Kubernetes namespace from which you want to filter logs. This value is optional.</dd>
-    
+
   <dt><code>--container <em>CONTAINER_NAME</em></code></dt>
     <dd>The name of the container from which you want to filter out logs. This flag applies only when you are using log type <code>container</code>. This value is optional.</dd>
-    
+
   <dt><code>--level <em>LOGGING_LEVEL</em></code></dt>
     <dd>Filters out logs that are at the specified level and less. Acceptable values in their canonical order are <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code>, and <code>trace</code>. This value is optional. As an example, if you filtered logs at the <code>info</code> level, <code>debug</code>, and <code>trace</code> are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. Example output: <code>{"log": "hello", "level": "info"}</code></dd>
-    
+
   <dt><code>--message <em>MESSAGE</em></code></dt>
     <dd>Filters out any logs that contain a specified message anywhere in the log. The message is matched literally and not as an expression. Example: The messages “Hello”, “!”, and “Hello, World!”, would apply to the log “Hello, World!”. This value is optional.</dd>
-    
+
   <dt><code>--json</code></dt>
     <dd>Prints the command output in JSON format. This value is optional.</dd>
-  
+
   <dt><code>-s</code></dt>
     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
@@ -2235,11 +2253,12 @@ us-south      us-south
 {: worker_node_commands}
 
 
-
 ### bx cs worker-add --cluster CLUSTER [--file FILE_LOCATION] [--hardware HARDWARE] --machine-type MACHINE_TYPE --number NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt] [-s]
 {: #cs_worker_add}
 
 Add worker nodes to your standard cluster.
+
+
 
 <strong>Command options</strong>:
 
@@ -2263,7 +2282,7 @@ workerNum: <em>&lt;number_workers&gt;</em>
 diskEncryption: <em>false</em></code></pre>
 
 <table>
-<caption>Table 2. Understanding the YAML file components</caption>
+<caption>Understanding the YAML file components</caption>
 <thead>
 <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
 </thead>
@@ -2313,12 +2332,12 @@ diskEncryption: <em>false</em></code></pre>
 <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
 <dd>The private VLAN that was specified when the cluster was created. This value is required.
 
-<p><strong>Note:</strong> {[matching_VLANs]}</p></dd>
+<p><strong>Note:</strong> Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</p></dd>
 
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
 <dd>The public VLAN that was specified when the cluster was created. This value is optional. If you want your worker nodes to exist on a private VLAN only, do not provide a public VLAN ID. <strong>Note</strong>: {[private_VLAN_vyatta]}
 
-<p><strong>Note:</strong> {[matching_VLANs]}</p></dd>
+<p><strong>Note:</strong> Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
 <dd>Worker nodes feature disk encryption by default; [learn more](cs_secure.html#worker). To disable encryption, include this option.</dd>
@@ -2341,7 +2360,6 @@ diskEncryption: <em>false</em></code></pre>
   bx cs worker-add --cluster my_cluster --number 3 --machine-type u2c.2x4
   ```
   {: pre}
-
 
 
 
@@ -2596,12 +2614,12 @@ Before you remove your worker node, make sure that pods are rescheduled on other
   {: pre}
 
 
-
-
-### bx cs worker-update [-f] CLUSTER WORKER [WORKER] [--kube-version MAJOR.MINOR.PATCH] [--force-update] [-s]
+###bx cs worker-update [-f] CLUSTER WORKER [WORKER] [--kube-version MAJOR.MINOR.PATCH] [--force-update] [-s]
 {: #cs_worker_update}
 
 Update worker nodes to apply the latest security updates and patches to the operating system, and to update the Kubernetes version to match the version of the master node. You can update the master node Kubernetes version with the `bx cs cluster-update` [command](cs_cli_reference.html#cs_cluster_update).
+
+
 
 **Important**: Running `bx cs worker-update` can cause downtime for your apps and services. During the update, all pods are rescheduled onto other worker nodes and data is deleted if not stored outside the pod. To avoid downtime, [ensure that you have enough worker nodes to handle your workload while the selected worker nodes are updating](cs_cluster_update.html#worker_node).
 
@@ -2637,7 +2655,6 @@ You might need to change your YAML files for deployments before updating. Review
   bx cs worker-update my_cluster kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
   ```
   {: pre}
-
 
 
 ### bx cs workers CLUSTER [--show-deleted] [--json] [-s]

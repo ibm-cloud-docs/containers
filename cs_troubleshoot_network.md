@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-10"
+lastupdated: "2018-05-14"
 
 ---
 
@@ -264,6 +264,7 @@ When you list information about the ALB secret, the status says `*_failed`. For 
 Review the following reasons why the ALB secret might fail and the corresponding troubleshooting steps:
 
 <table>
+<caption>Troubleshooting Ingress application load balancer secrets</caption>
  <thead>
  <th>Why it's happening</th>
  <th>How to fix it</th>
@@ -434,6 +435,7 @@ Update the Helm chart values to reflect the worker node changes:
     If you added a worker node:
 
     <table>
+    <caption>Worker node settings</caption?
      <thead>
      <th>Setting</th>
      <th>Description</th>
@@ -460,6 +462,7 @@ Update the Helm chart values to reflect the worker node changes:
     If you deleted a worker node:
 
     <table>
+    <caption>Worker node settings</caption>
      <thead>
      <th>Setting</th>
      <th>Description</th>

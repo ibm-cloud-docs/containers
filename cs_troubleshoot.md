@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-07"
+lastupdated: "2018-05-14"
 
 ---
 
@@ -45,6 +45,7 @@ Review the options to debug your clusters and find the root causes for failures.
 2.  Review the `State` of your cluster. If your cluster is in a **Critical**, **Delete failed**, or **Warning** state, or is stuck in the **Pending** state for a long time, start [debugging the worker nodes](#debug_worker_nodes).
 
     <table summary="Every table row should be read left to right, with the cluster state in column one and a description in column two.">
+<caption>Cluster states</caption>
    <thead>
    <th>Cluster state</th>
    <th>Description</th>
@@ -121,6 +122,7 @@ Review the options to debug your worker nodes and find the root causes for failu
 2.  Review the `State` and `Status` field for every worker node in your CLI output.
 
   <table summary="Every table row should be read left to right, with the cluster state in column one and a description in column two.">
+  <caption>Worker node states</caption>
     <thead>
     <th>Worker node state</th>
     <th>Description</th>
@@ -191,6 +193,7 @@ Review the options to debug your worker nodes and find the root causes for failu
 Review common error messages and learn how to resolve them.
 
   <table>
+  <caption>Common error messages</caption>
     <thead>
     <th>Error message</th>
     <th>Description and resolution

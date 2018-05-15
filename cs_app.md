@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-09"
+lastupdated: "2018-05-15"
 
 ---
 
@@ -138,7 +138,7 @@ To learn more about each component, review the [Kubernetes basics](cs_tech.html#
 Open a Kubernetes dashboard on your local system to view information about a cluster and its worker nodes.
 {:shortdesc}
 
-You can use the Kubernetes dashboard button in the GUI to launch your dashboard with one click.
+If you select your cluster in the [{{site.data.keyword.Bluemix_notm}} GUI](https://console.bluemix.net/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
 {: tip}
 
 Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster. This task requires the [Administrator access policy](cs_users.html#access_policies). Verify your current [access policy](cs_users.html#infra_access).
@@ -372,7 +372,7 @@ If you have a [bare metal graphics processing unit (GPU) machine type](cs_cluste
 In the following steps, you learn how to deploy workloads that require the GPU. You can also [deploy apps](#app_ui) that don't need to process their workloads across both the GPU and CPU. After, you might find it useful to play around with mathematically intensive workloads such as the [TensorFlow ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.tensorflow.org/) machine learning framework with [this Kubernetes demo ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/pachyderm/pachyderm/tree/master/doc/examples/ml/tensorflow).
 
 Before you begin:
-* [Create a bare metal GPU machine type](cs_clusters.html#clusters_cli). Note that this process can take more than 1 business day to complete. GPU bare metal is available in AP North only.
+* [Create a bare metal GPU machine type](cs_clusters.html#clusters_cli). Note that this process can take more than 1 business day to complete.
 * Your cluster master and GPU worker node must run Kubernetes version 1.10 or later.
 
 To execute a workload on a GPU machine:
@@ -413,6 +413,7 @@ To execute a workload on a GPU machine:
     {: codeblock}
 
     <table>
+    <caption>YAML components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
     </thead>
@@ -553,6 +554,7 @@ Steps:
     {: pre}
 
     <table>
+    <caption>Command components for kubectl run</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command&apos;s components</th>
     </thead>
@@ -585,6 +587,7 @@ Steps:
     {: pre}
 
     <table>
+    <caption>Command components for kubectl autoscale</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command&apos;s components</th>
     </thead>

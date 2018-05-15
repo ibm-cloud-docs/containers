@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-07"
+lastupdated: "2018-05-14"
 
 ---
 
@@ -107,6 +107,7 @@ To configure the Helm chart:
     **Important**: If you do not need to change a property, comment that property out by placing a `#` in front of it.
 
     <table>
+    <caption>Understanding this YAML components</caption>
     <col width="22%">
     <col width="78%">
     <thead>
@@ -262,6 +263,7 @@ After you deploy your Helm chart, test the VPN connectivity.
 
     {: #vpn_tests_table}
     <table>
+    <caption>Understanding the Helm VPN connectivity tests</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the Helm VPN connectivity tests</th>
     </thead>

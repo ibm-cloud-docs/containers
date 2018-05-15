@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-09"
+lastupdated: "2018-05-14"
 
 ---
 
@@ -27,6 +27,7 @@ You can use various external services and catalog services with a standard Kuber
 
 ## Application services
 <table summary="Summary for accessibility">
+<caption>Application services</caption>
 <thead>
 <tr>
 <th>Service</th>
@@ -48,6 +49,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="External link 
 
 ## DevOps services
 <table summary="Summary for accessibility">
+<caption>DevOps services</caption>
 <thead>
 <tr>
 <th>Service</th>
@@ -80,6 +82,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="External link 
 
 ## Logging and monitoring services
 <table summary="Summary for accessibility">
+<caption>Logging and monitoring services</caption>
 <thead>
 <tr>
 <th>Service</th>
@@ -136,6 +139,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="External link 
 
 ## Security services
 <table summary="Summary for accessibility">
+<caption>Security services</caption>
 <thead>
 <tr>
 <th>Service</th>
@@ -176,6 +180,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="External link 
 
 ## Storage services
 <table summary="Summary for accessibility">
+<caption>Storage services</caption>
 <thead>
 <tr>
 <th>Service</th>
@@ -403,6 +408,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
     {: codeblock}
 
     <table>
+    <caption>Understanding the YAML file components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
     </thead>

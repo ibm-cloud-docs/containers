@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-07"
+lastupdated: "2018-05-14"
 
 ---
 
@@ -234,6 +234,7 @@ To access images in other {{site.data.keyword.Bluemix_notm}} regions or accounts
     {: pre}
 
     <table>
+    <caption>Understanding this command's components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
     </thead>
@@ -294,6 +295,7 @@ To create an imagePullSecret:
     {: pre}
 
     <table>
+    <caption>Understanding this command's components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
     </thead>
@@ -387,6 +389,7 @@ When you refer to the imagePullSecret in a pod deployment, the imagePullSecret i
     {: codeblock}
 
     <table>
+    <caption>Understanding the YAML file components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
     </thead>
