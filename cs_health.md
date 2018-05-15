@@ -179,7 +179,7 @@ You can create a configuration for cluster logging. You can differentiate betwee
       </tr>
       <tr>
         <td><code><em>&lt;log_source&gt;</em></code></td>
-        <td>The source that you want to forward logs from. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, and<code>ingress</code>, and <code>kube-audit</code>.</td>
+        <td>The source that you want to forward logs from. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, and <code>kube-audit</code>.</td>
       </tr>
       <tr>
         <td><code><em>&lt;kubernetes_namespace&gt;</em></code></td>
@@ -738,37 +738,6 @@ To forward Kubernetes API audit logs:
         ```
         {: pre}
 
-
-
-
-### Stopping Kubernetes API audit log forwarding
-{: #audit_delete}
-
-You can stop forwarding audit logs by disabling the webhook backend configuration for the cluster's API server.
-
-Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster that you want to stop collecting API server audit logs from.
-
-1. Disable the webhook backend configuration for the cluster's API server.
-
-    ```
-    bx cs apiserver-config-unset audit-webhook <cluster_name_or_ID>
-    ```
-    {: pre}
-
-2. Apply the configuration update by restarting the Kubernetes master.
-
-    ```
-    bx cs apiserver-refresh <cluster_name_or_ID>
-    ```
-    {: pre}
-
-<br />
-
-
-
-
-
-
 ## Viewing metrics
 {: #view_metrics}
 
@@ -830,16 +799,16 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
           helm inspect values ibm/ibm-worker-recovery > values.yaml
           ```
           {: pre}
-    
+
       2. Open the `values.yaml` file.
-      
+
       3. In the `checks` section, set `enabled` to `true` so that checks can be applied.
           ```
           checks:
                 enabled: true
           ```
           {: pre}
-        
+
       4. Modify the existing checks or use the existing checks as templates to add custom checks. Refer to the following tables for information about the three existing checks and information about the individual components of the checks.
 
          <table summary="Understanding the three kinds of checks">
