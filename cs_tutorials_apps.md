@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-14"
+lastupdated: "2018-05-15"
 
 ---
 
@@ -666,7 +666,7 @@ From the previous tutorial, you have your account and a cluster with one worker 
 
     In a browser, you can see the JSON response for the text you entered.
 
-10.  [Launch the Kubernetes dashboard](cs_app.html#cli_dashboard).
+10. [Launch the Kubernetes dashboard](cs_app.html#cli_dashboard).
 
 11. In the **Workloads** tab, you can see the resources that you created.
 
