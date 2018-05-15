@@ -807,7 +807,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
           checks:
                 enabled: true
           ```
-          {: pre}
+          {: codeblock}
 
       4. Modify the existing checks or use the existing checks as templates to add custom checks. Refer to the following tables for information about the three existing checks and information about the individual components of the checks.
 
