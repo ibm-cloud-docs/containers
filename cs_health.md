@@ -70,6 +70,11 @@ Check out the following table for information about the different log sources.
       <td>Logs for an Ingress application load balancer that manages the network traffic that comes into a cluster.</td>
       <td><code>/var/log/alb/ids/&ast;.log</code>, <code>/var/log/alb/ids/&ast;.err</code>, <code>/var/log/alb/customerlogs/&ast;.log</code>, <code>/var/log/alb/customerlogs/&ast;.err</code></td>
     </tr>
+    <tr>
+      <td><code>kube-audit</code></td>
+      <td>Logs for your Kubernetes API server.</td>
+      <td> </td>
+    </tr>
   </tbody>
 </table>
 
@@ -121,11 +126,18 @@ You can create a configuration for cluster logging. You can differentiate betwee
   * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider. Your syslog server must accept UDP protocol.
   * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in a Kubernetes cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host.
 
+    You can remove syslog prefixes to see your logs as valid JSON by adding the following code to the top of your `etc/rsyslog.conf` file where your rsyslog server is running.</br>
+    ```$template customFormat,"%msg%\n"
+    $ActionFileDefaultTemplate customFormat
+    ```
+    {: tip}
+
+
 **Forwarding logs**
 
 1. Create a log forwarding configuration.
   ```
-  bx cs logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type <type> --app-containers <containers> --app-paths <paths_to_logs> --skip-validation
+  bx cs logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type <type> --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
   ```
   {: pre}
 
@@ -167,7 +179,7 @@ You can create a configuration for cluster logging. You can differentiate betwee
       </tr>
       <tr>
         <td><code><em>&lt;log_source&gt;</em></code></td>
-        <td>The source that you want to forward logs from. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, and<code>ingress</code>.</td>
+        <td>The source that you want to forward logs from. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, and<code>ingress</code>, and <code>kube-audit</code>.</td>
       </tr>
       <tr>
         <td><code><em>&lt;kubernetes_namespace&gt;</em></code></td>
@@ -202,6 +214,10 @@ You can create a configuration for cluster logging. You can differentiate betwee
       <tr>
         <td><code><em>&lt;containers&gt;</em></code></td>
         <td>Optional: To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma-separated list. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided.</td>
+      </tr>
+      <tr>
+        <td><code><em>&lt;protocol&gt;</em></code></td>
+        <td>When the logging type is <code>syslog</code>, the transport layer protocol. Supported values are <code>TCP</code> and the default <code>UDP</code>. When forwarding to an rsyslog server with the <code>udp</code> protocol, logs that are over 1KB are truncated.</td>
       </tr>
       <tr>
         <td><code><em>--skip-validation</em></code></td>
@@ -529,18 +545,112 @@ You can stop forwarding logs one or all of the logging configurations for a clus
 ## Configuring log forwarding for Kubernetes API audit logs
 {: #api_forward}
 
-You can configure a webhook through the Kubernetes API server to capture any calls from your cluster. With a webhook enabled, logs can be sent to a remote server.
+Kubernetes automatically audits any events that are passed through your apiserver. You can forward the events to {{site.data.keyword.loganalysisshort_notm}} or to an external server.
 {: shortdesc}
-
 
 
 For more information about Kubernetes audit logs, see the <a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="blank">auditing topic <img src="../icons/launch-glyph.svg" alt="External link icon"></a> in the Kubernetes documentation.
 
 * Forwarding for Kubernetes API audit logs is only supported for Kubernetes version 1.7 and later.
 * Currently, a default audit policy is used for all clusters with this logging configuration.
-* Audit logs can be forwarded only to an external server.
 * Currently, filters are not supported.
+* There can be only one `kube-audit` configuration per cluster, but you can forward logs to {{site.data.keyword.loganalysisshort_notm}} and an external server by creating a logging configuration and a webhook.
 {: tip}
+
+
+### Sending audit logs to {{site.data.keyword.loganalysisshort_notm}}
+{: #audit_enable_loganalysis}
+
+You can forward your Kubernetes API server audit logs to {{site.data.keyword.loganalysisshort_notm}}
+
+**Before you begin**
+
+1. Verify permissions. If you specified a space when you created the cluster or the logging configuration, then both the account owner and {{site.data.keyword.containershort_notm}} key owner need Manager, Developer, or Auditor permissions in that space.
+
+2. [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster that you want to collect API server audit logs from. **Note**: If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
+
+**Forwarding logs**
+
+1. Create a logging configuration.
+
+    ```
+    bx cs logging-config-create <cluster_name_or_ID> --logsource kube-audit --space <cluster_space> --org <cluster_org> --hostname <ingestion_URL> --type ibm
+    ```
+    {: pre}
+
+    Example command and output:
+
+    ```
+    bx cs logging-config-create myCluster --logsource kube-audit
+    Creating logging configuration for kube-audit logs in cluster myCluster...
+    OK
+    Id                                     Source      Namespace   Host                                 Port    Org   Space   Protocol   Application Containers   Paths
+    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit  -           ingest-au-syd.logging.bluemix.net✣   9091✣   -     -       ibm        -                        -
+
+    ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysisshort_notm}} service.
+
+    ```
+    {: screen}
+
+    <table>
+    <caption>Understanding this command's components</caption>
+      <thead>
+        <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
+          <td>The name or ID of the cluster.</td>
+        </tr>
+        <tr>
+          <td><code><em>&lt;ingestion_URL&gt;</em></code></td>
+          <td>The endpoint where you want to forward logs. If you do not specify an [ingestion URL](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls), the endpoint for the region in which you created your cluster is used.</td>
+        </tr>
+        <tr>
+          <td><code><em>&lt;cluster_space&gt;</em></code></td>
+          <td>Optional: The name of the Cloud Foundry space that you want to send logs to. When forwarding logs to {{site.data.keyword.loganalysisshort_notm}}, the space and org are specified in the ingestion point. If you do not specify a space, logs are sent to the account level.</td>
+        </tr>
+        <tr>
+          <td><code><em>&lt;cluster_org&gt;</em></code></td>
+          <td>The name of the Cloud Foundry org that the space is in. This value is required if you specified a space.</td>
+        </tr>
+      </tbody>
+    </table>
+
+2. View your cluster logging configuration to verify that it was implemented the way that you intended.
+
+    ```
+    bx cs logging-config-get <cluster_name_or_ID>
+    ```
+    {: pre}
+
+    Example command and output:
+    ```
+    bx cs logging-config-get myCluster
+    Retrieving cluster myCluster logging configurations...
+    OK
+    Id                                     Source        Namespace   Host                                 Port    Org   Space   Protocol   Application Containers   Paths
+    a550d2ba-6a02-4d4d-83ef-68f7a113325c   container     *           ingest-au-syd.logging.bluemix.net✣   9091✣   -     -       ibm        -                        -
+    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit    -           ingest-au-syd.logging.bluemix.net✣   9091✣   -     -       ibm        -                    
+    ```
+    {: screen}
+
+  <table>
+  <caption>Understanding this command's components</caption>
+    <thead>
+      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
+        <td>The name or ID of the cluster.</td>
+      </tr>
+    </tbody>
+  </table>
+
+3. Optional: If you want to stop forwarding audit logs, you can [delete your configuration](#log_sources_delete).
+
+<br />
 
 
 
@@ -611,6 +721,22 @@ To forward Kubernetes API audit logs:
     bx cs apiserver-refresh <cluster_name_or_ID>
     ```
     {: pre}
+
+4. Optional: If you want to stop forwarding audit logs, you can disable your configuration.
+    1. [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster that you want to stop collecting API server audit logs from.
+    2. Disable the webhook backend configuration for the cluster's API server.
+
+        ```
+        bx cs apiserver-config-unset audit-webhook <cluster_name_or_ID>
+        ```
+        {: pre}
+
+    3. Apply the configuration update by restarting the Kubernetes master.
+
+        ```
+        bx cs apiserver-refresh <cluster_name_or_ID>
+        ```
+        {: pre}
 
 
 

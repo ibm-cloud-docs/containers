@@ -1766,7 +1766,7 @@ List the public and private VLANs that are available for a location in your IBM 
 ## Logging commands
 {: #logging_commands}
 
-### bx cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-containers CONTAINERS] [--app-paths PATHS_TO_LOGS] --type LOG_TYPE [--json] [--skip-validation] [-s]
+### bx cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-containers CONTAINERS] [--app-paths PATHS_TO_LOGS] [--syslog-protocol PROTOCOL] --type LOG_TYPE [--json] [--skip-validation] [-s]
 {: #cs_logging_create}
 
 Create a logging configuration. You can use this command to forward logs for containers, applications, worker nodes, Kubernetes clusters, and Ingress application load balancers to {{site.data.keyword.loganalysisshort_notm}} or to an external syslog server.
@@ -1778,7 +1778,8 @@ Create a logging configuration. You can use this command to forward logs for con
     <dd>The name or ID of the cluster.</dd>
 
   <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>    
-    <dd>The log source to enable log forwarding for. This argument supports a comma-separated list of log sources to apply the configuration for. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, and <code>ingress</code>. If you do not provide a log source, logging configurations are created for <code>container</code> and <code>ingress</code> log sources.</dd>
+    <dd>The log source to enable log forwarding for. This argument supports a comma-separated list of log sources to apply the configuration for. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, and <code>ingress</code>, and <code>kube-audit</code>. If you do not provide a log source, logging configurations are created for <code>container</code> and <code>ingress</code> log sources.</dd>
+
   <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
     <dd>The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the container log source and is optional. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</dd>
 
@@ -1797,11 +1798,14 @@ Create a logging configuration. You can use this command to forward logs for con
   <dt><code>--app-paths</code></dt>
     <dd>The path on the container that the apps are logging to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma-separated list. This value is required for log source <code>application</code>. Example: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
 
+  <dt><code>--syslog-protocol</code></dt>
+    <dd>The transfer layer protocol that is used when the logging type is <code>syslog</code>. Supported values are <code>TCP</code> and the default <code>UDP</code>. When forwarding to an rsyslog server with the <code>udp</code> protocol, logs that are over 1KB are truncated.</dd>
+
   <dt><code>--type <em>LOG_TYPE</em></code></dt>
     <dd>Where you want to forward your logs. Options are <code>ibm</code>, which forwards your logs to {{site.data.keyword.loganalysisshort_notm}} and <code>syslog</code>, which forwards your logs to an external server.</dd>
 
   <dt><code>--app-containers</code></dt>
-    <dd>To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma-separated list. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided. This option is only valid for log source <code>application</code>. </dt>
+    <dd>To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma-separated list. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided. This option is only valid for log source <code>application</code>.</dd>
 
   <dt><code>--json</code></dt>
     <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -1848,7 +1852,10 @@ View all log forwarding configurations for a cluster, or filter logging configur
     <dd>The name or ID of the cluster. This value is required.</dd>
 
   <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-    <dd>The kind of log source for which you want to filter. Only logging configurations of this log source in the cluster are returned. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, and <code>ingress</code>. This value is optional.</dd>
+    <dd>The kind of log source for which you want to filter. Only logging configurations of this log source in the cluster are returned. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, and <code>kube-audit</code>. This value is optional.</dd>
+
+  <dt><code>--show-covering-filters</code></dt>
+    <dd>Shows the logging filters that render previous filters obsolete.</dd>
 
   <dt><code>--json</code></dt>
     <dd>Prints the command output in JSON format. This value is optional.</dd>
