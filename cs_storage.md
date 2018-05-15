@@ -1027,7 +1027,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
 
 4. Verify that the installation was successful.
    ```
-   kubectl get pod -n kube-system | grep ibmcloud-block-storage-plugin
+   kubectl get pod -n kube-system | grep block
    ```
    {: pre}
 
