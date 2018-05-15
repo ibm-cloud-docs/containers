@@ -1033,9 +1033,12 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
 
    Example output:
    ```
-   ibmcloud-block-storage-plugin-58c5f9dc86-js6fd                    1/1       Running   0          4m
+   ibmcloud-block-storage-driver-kh4mt                              1/1       Running   0          27d       10.118.98.19   10.118.98.19
+   ibmcloud-block-storage-plugin-58c5f9dc86-pbl4t                   1/1       Running   0          14d       172.21.0.204   10.118.98.19
    ```
    {: screen}
+   
+   The installation is successful when you see one `ibmcloud-block-storage-plugin` pod and one or more `ibmcloud-block-storage-driver` pods. The number of `ibmcloud-block-storage-driver` equals the number of worker nodes in your cluster. All pods must be in a **Running** state. 
 
 5. Verify that the storage classes for block storage were added to your cluster.
    ```
