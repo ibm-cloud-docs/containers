@@ -79,23 +79,28 @@ At least one Ingress resource is required per namespace where you have apps that
 {:shortdesc}
 
 <dl>
-<dt>One namespace</dt>
+<dt>All apps are in one namespace</dt>
 <dd>If the apps in your cluster are all in the same namespace, at least one Ingress resource is required to define routing rules for the apps that are exposed there.
-<br>
-You can use a single domain to access all the apps in the namespace. If you want to use different domains for the apps in the namespace, use a wildcard domain. When a wildcard domain such as `*.mycluster.us-south.containers.mybluemix.net` is registered, multiple subdomains all resolve to the same host. Then, you can create multiple Ingress resources in the namespace and specify a different subdomain in each Ingress resource.</dd>
-<dt>Multiple namespaces</dt>
-<dd>If the apps in your cluster are in different namespaces, you must create at least one resource per namespace to define rules for the apps that are exposed there. To register multiple Ingress resources with the cluster's Ingress ALB, you must use a wildcard domain. When a wildcard domain such as `*.mycluster.us-south.containers.mybluemix.net` is registered, multiple subdomains all resolve to the same host. Then, you can create an Ingress resource in each namespace and specify a different subdomain in each Ingress resource.
+<br></br><img src="images/cs_ingress_single_ns.png" width="300" alt="At least one resource is required per namespace." style="width:300px; border-style: none"/>
+</dd>
+<dt>Apps are in multiple namespaces</dt>
+<dd>If the apps in your cluster are in different namespaces, you must create at least one resource per namespace to define rules for the apps that are exposed there. To register multiple Ingress resources with the cluster's Ingress ALB, you must use a wildcard domain. When a wildcard domain such as *.mycluster.us-south.containers.mybluemix.net` is registered, multiple subdomains all resolve to the same host. Then, you can create an Ingress resource in each namespace and specify a different subdomain in each Ingress resource.
 <br><br>
 For example, consider the following scenario:<ul>
-<li>You have two versions of the same app, `dev` and `stage`, for testing purposes.</li>
-<li>You deploy the apps in two different namespaces within the same cluster: `dev` into the development namespace, and `stage` into the staging namespace.</li></ul>
+<li>You have two versions of the same app, `app1` and `app3`, for testing purposes.</li>
+<li>You deploy the apps in two different namespaces within the same cluster: `app1` into the development namespace, and `app3` into the staging namespace.</li></ul>
 To use the same cluster ALB to manage traffic to these apps, you create the following:<ul>
-<li>A Kubernetes service for the `dev` app to expose it in the development namespace.</li>
+<li>A Kubernetes service in the development namespace to expose `app1`.</li>
 <li>An Ingress resource in the development namespace that specifies the host as `dev.mycluster.us-south.containers.mybluemix.net`.</li>
-<li>A Kubernetes service for the `stage` app to expose it in the staging namespace.</li>
-<li>An Ingress resource in the staging namespace that specifies the host as `stage.mycluster.us-south.containers.mybluemix.net` and the path as `/myservice`.</li></ul>
+<li>A Kubernetes service in the staging namespace to expose `app3`.</li>
+<li>An Ingress resource in the staging namespace that specifies the host as `stage.mycluster.us-south.containers.mybluemix.net`.</li></ul>
+<img src="images/cs_ingress_multi_ns.png" alt="Within a namespace, use subdomains in one or multiple resources" border-style: none"/>
 Now, both URLs resolve to the same domain and are thus both serviced by the same ALB. However, because the resource in the staging namespace is registered with the `stage` subdomain, the Ingress ALB correctly routes requests from the `stage.mycluster.us-south.containers.mybluemix.net/myservice` URL to only the `stage` version of the app.</dd>
 </dl>
+
+Within an individual namespace, you can use one domain to access all the apps in the namespace. If you want to use different domains for the apps within an individual namespace, use a wildcard domain. When a wildcard domain such as `*.mycluster.us-south.containers.mybluemix.net` is registered, multiple subdomains all resolve to the same host. Then, you can use one resource to specify multiple subdomain hosts within that resource. Alternatively, you can create multiple Ingress resources in the namespace and specify a different subdomain in each Ingress resource.
+
+<img src="images/cs_ingress_single_ns_multi_subs.png" alt="At least one resource is required per namespace." style="border-style: none"/>
 
 **Note**:
 * The IBM-provided Ingress subdomain wildcard, `*.<cluster_name>.<region>.containers.mybluemix.net`, is registered by default for your cluster. However, TLS is not supported for the IBM-provided Ingress subdomain wildcard.
