@@ -39,7 +39,28 @@ For information about changes since the previous version, see the following chan
 
 Review the following changes.
 
+### Changelog for worker node fix pack 1.10.1_1509
+{: #1101_1509}
 
+<table summary="Changes that were made since version 1.10.1_1508">
+<caption>Changes since version 1.10.1_1508</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kubelet</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>The data that you store in the `kubelet` root directory is now saved on the larger, secondary disk of your worker node machine.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.10.1_1508
 {: #1101_1508}
@@ -105,7 +126,28 @@ Review the following changes.
 
 Review the following changes.
 
+### Changelog for worker node fix pack 1.9.7_1511
+{: #197_1511}
 
+<table summary="Changes that were made since version 1.9.7_1510">
+<caption>Changes since version 1.9.7_1510</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kubelet</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>The data that you store in the `kubelet` root directory is now saved on the larger, secondary disk of your worker node machine.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.9.7_1510
 {: #197_1510}
@@ -153,7 +195,28 @@ Review the following changes.
 
 Review the following changes.
 
+### Changelog for worker node fix pack 1.8.11_1510
+{: #1811_1510}
 
+<table summary="Changes that were made since version 1.8.11_1509">
+<caption>Changes since version 1.8.11_1509</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kubelet</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>The data that you store in the `kubelet` root directory is now saved on the larger, secondary disk of your worker node machine.</td>
+</tr>
+</tbody>
+</table>
 
 
 ### Changelog for 1.8.11_1509
@@ -203,7 +266,28 @@ Review the following changes.
 
 Review the following changes.
 
+### Changelog for worker node fix pack 1.7.16_1512
+{: #1716_1512}
 
+<table summary="Changes that were made since version 1.7.16_1511">
+<caption>Changes since version 1.7.16_1511</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kubelet</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>The data that you store in the `kubelet` root directory is now saved on the larger, secondary disk of your worker node machine.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.7.16_1511
 {: #1716_1511}
