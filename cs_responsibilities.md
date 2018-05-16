@@ -57,7 +57,7 @@ Review the responsibilities that you share with IBM to manage your clusters.
 <br />
 
 
-## Abuse of containers
+## Abuse of {{site.data.keyword.containerlong}}
 {: #terms}
 
 Clients cannot misuse {{site.data.keyword.containershort_notm}}.
