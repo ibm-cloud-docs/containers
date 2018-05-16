@@ -240,7 +240,7 @@ Let your cluster access infrastructure resources and services from behind a fire
       </thead>
       <tbody>
         <tr>
-          <td>Global registry across container regions</td>
+          <td>Global registry across {{site.data.keyword.containershort_notm}} regions</td>
           <td>registry.bluemix.net</td>
           <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
         </tr>

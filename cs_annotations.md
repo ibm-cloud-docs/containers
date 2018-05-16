@@ -1450,7 +1450,7 @@ spec:
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Optional: If you want to use a TLS secret and your upstream app can handle TLS, replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the secret for the service. If you provide a secret, the value must contain the <code>server.crt</code>, <code>client.crt</code>, and <code>client.key</code> that your app is expecting from the client. To create a TLS secret, first [convert the certs and key into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/). Then see [Creating secrets](cs_app.html#secrets).</td>
+  <td>Optional: If you want to use a TLS secret and your upstream app can handle TLS, replace <code>&lt;<em>service-ssl-secret</em>&gt;</code> with the secret for the service. If you provide a secret, the value must contain the <code>trusted.crt</code>, <code>client.crt</code>, and <code>client.key</code> that your app is expecting from the client. To create a TLS secret, first [convert the certs and key into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/). Then see [Creating secrets](cs_app.html#secrets).</td>
   </tr>
   </tbody></table>
 
