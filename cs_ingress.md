@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-14"
+lastupdated: "2018-05-16"
 
 ---
 
@@ -54,9 +54,10 @@ The following diagram shows how Ingress directs communication from the internet 
 
 
 
-## Planning your Ingress configuration
+<br />
 
-### Prerequisites
+
+## Prerequisites
 {: #config_prereqs}
 
 Before getting started with Ingress, review the following prerequisites.
@@ -68,7 +69,10 @@ Before getting started with Ingress, review the following prerequisites.
 
 
 
-### Exposing apps in the same or in different namespaces
+<br />
+
+
+## Planning networking for multiple namespaces
 {: #multiple_namespaces}
 
 The number of Ingress resources that you must create depends on whether you want to expose apps in a single namespace or in multiple namespaces within a cluster.
@@ -92,8 +96,13 @@ To use the same ALB to manage traffic to these apps, you create the following:
 Now, both URLs resolve to the same domain and are thus both serviced by the same ALB. However, because the resource in the staging namespace is registered with the `stage` subdomain, the Ingress ALB correctly routes requests from the `stage.mycluster.us-south.containers.mybluemix.net/myservice` URL to only the `stage` version of the app.
 
 **Note**:
-* The Ingress subdomain wildcard, `*.<cluster_name>.<region>.containers.mybluemix.net`, is registered by default for your cluster. However, if you want to use wildcard subdomains with the Ingress subdomain, TLS is not supported.
+* The Ingress subdomain wildcard, `*.<cluster_name>.<region>.containers.mybluemix.net`, is registered by default for your cluster. However, if you want to use wildcard subdomains with the Ingress subdomain, TLS is not supported. 
 * If you want to use a custom domain, you must register the custom domain as a wildcard domain such as `*.custom_domain.net`. To manage the TLS termination while using your custom domain, you must get a wildcard certificate.
+
+<br />
+
+
+
 
 ### Choosing an Ingress configuration
 {: #choose_config}
@@ -271,14 +280,29 @@ To expose an app by using the IBM-provided domain:
         kubectl apply -f myingressresource.yaml [-n <namespace>]
         ```
         {: pre}
-    4.   Verify that the Ingress resource was created successfully.
+    4. ```
+https://<domain>/<app1_path>
+```
+{: pre}
 
-      ```
-      kubectl describe ingress myingressresource
-      ```
-      {: pre}
+If you exposed multiple apps, access those apps by changing the path appended to the URL.
 
-      1. If messages in the events describe an error in your resource configuration, change the values in your resource file and reapply the file for the resource.
+```
+https://<domain>/<app2_path>
+```
+{: pre}
+
+If you use a wildcard domain to expose apps in different namespaces, access those apps with their respective subdomains.
+
+```
+http://<subdomain1>.<domain>/<app1_path>
+```
+{: pre}
+
+```
+http://<subdomain2>.<domain>/<app1_path>
+```
+{: pre}
 
     5. If your apps are exposed by services in different namespaces in one cluster, repeat these steps to create one resource per namespace to define rules for the apps that are exposed there. Use a unique subdomain for each resource that you create in the cluster.
 6.   In a web browser, enter the URL of the app service to access.
@@ -451,14 +475,29 @@ To expose an app by using the IBM-provided domain with TLS:
         kubectl apply -f myingressresource.yaml
         ```
         {: pre}
-5.   Verify that the Ingress resource was created successfully.
+5. ```
+https://<domain>/<app1_path>
+```
+{: pre}
 
-      ```
-      kubectl describe ingress myingressresource
-      ```
-      {: pre}
+If you exposed multiple apps, access those apps by changing the path appended to the URL.
 
-      1. If messages in the events describe an error in your resource configuration, change the values in your resource file and reapply the file for the resource.
+```
+https://<domain>/<app2_path>
+```
+{: pre}
+
+If you use a wildcard domain to expose apps in different namespaces, access those apps with their respective subdomains.
+
+```
+http://<subdomain1>.<domain>/<app1_path>
+```
+{: pre}
+
+```
+http://<subdomain2>.<domain>/<app1_path>
+```
+{: pre}
 
 6.   In a web browser, enter the URL of the app service to access.
 
@@ -626,14 +665,29 @@ To expose an app by using a custom domain with TLS:
         kubectl apply -f myingressresource.yaml [-n <namespace>]
         ```
         {: pre}
-    4.   Verify that the Ingress resource was created successfully.
+    4. ```
+https://<domain>/<app1_path>
+```
+{: pre}
 
-      ```
-      kubectl describe ingress myingressresource
-      ```
-      {: pre}
+If you exposed multiple apps, access those apps by changing the path appended to the URL.
 
-      1. If messages in the events describe an error in your resource configuration, change the values in your resource file and reapply the file for the resource.
+```
+https://<domain>/<app2_path>
+```
+{: pre}
+
+If you use a wildcard domain to expose apps in different namespaces, access those apps with their respective subdomains.
+
+```
+http://<subdomain1>.<domain>/<app1_path>
+```
+{: pre}
+
+```
+http://<subdomain2>.<domain>/<app1_path>
+```
+{: pre}
 
     5. If your apps are exposed by services in different namespaces in one cluster, repeat these steps to create one resource per namespace to define rules for the apps that are exposed there. Use a unique subdomain for each resource that you create in the cluster.
 8.   In a web browser, enter the URL of the app service to access.
@@ -852,14 +906,29 @@ You can route incoming network traffic on the IBM-provided domain to apps that a
         kubectl apply -f myexternalingress.yaml
         ```
         {: pre}
-5.   Verify that the Ingress resource was created successfully.
+5. ```
+https://<domain>/<app1_path>
+```
+{: pre}
 
-      ```
-      kubectl describe ingress myingressresource
-      ```
-      {: pre}
+If you exposed multiple apps, access those apps by changing the path appended to the URL.
 
-      1. If messages in the events describe an error in your resource configuration, change the values in your resource file and reapply the file for the resource.
+```
+https://<domain>/<app2_path>
+```
+{: pre}
+
+If you use a wildcard domain to expose apps in different namespaces, access those apps with their respective subdomains.
+
+```
+http://<subdomain1>.<domain>/<app1_path>
+```
+{: pre}
+
+```
+http://<subdomain2>.<domain>/<app1_path>
+```
+{: pre}
 
 6.   In a web browser, enter the URL of the app service to access.
 
@@ -1084,14 +1153,29 @@ To privately expose an app by using a custom domain without TLS using an externa
         kubectl apply -f myingressresource.yaml [-n <namespace>]
         ```
         {: pre}
-    4.   Verify that the Ingress resource was created successfully.
+    4. ```
+https://<domain>/<app1_path>
+```
+{: pre}
 
-      ```
-      kubectl describe ingress myingressresource
-      ```
-      {: pre}
+If you exposed multiple apps, access those apps by changing the path appended to the URL.
 
-      1. If messages in the events describe an error in your resource configuration, change the values in your resource file and reapply the file for the resource.
+```
+https://<domain>/<app2_path>
+```
+{: pre}
+
+If you use a wildcard domain to expose apps in different namespaces, access those apps with their respective subdomains.
+
+```
+http://<subdomain1>.<domain>/<app1_path>
+```
+{: pre}
+
+```
+http://<subdomain2>.<domain>/<app1_path>
+```
+{: pre}
 
     5. If your apps are exposed by services in different namespaces in one cluster, repeat these steps to create one resource per namespace to define rules for the apps that are exposed there. Use a unique subdomain for each resource that you create in the cluster.
 6.   In a web browser, enter the URL of the app service to access.
@@ -1257,14 +1341,29 @@ To privately expose an app by using a custom domain with TLS using an external D
         kubectl apply -f myingressresource.yaml [-n <namespace>]
         ```
         {: pre}
-    4.   Verify that the Ingress resource was created successfully.
+    4. ```
+https://<domain>/<app1_path>
+```
+{: pre}
 
-      ```
-      kubectl describe ingress myingressresource
-      ```
-      {: pre}
+If you exposed multiple apps, access those apps by changing the path appended to the URL.
 
-      1. If messages in the events describe an error in your resource configuration, change the values in your resource file and reapply the file for the resource.
+```
+https://<domain>/<app2_path>
+```
+{: pre}
+
+If you use a wildcard domain to expose apps in different namespaces, access those apps with their respective subdomains.
+
+```
+http://<subdomain1>.<domain>/<app1_path>
+```
+{: pre}
+
+```
+http://<subdomain2>.<domain>/<app1_path>
+```
+{: pre}
 
     5. If your apps are exposed by services in different namespaces in one cluster, repeat these steps to create one resource per namespace to define rules for the apps that are exposed there. Use a unique subdomain for each resource that you create in the cluster.
 6.   In a web browser, enter the URL of the app service to access.
@@ -1419,14 +1518,29 @@ You can configure the private ALB to route incoming network traffic to the apps 
       kubectl apply -f myingressresource.yaml [-n <namespace>]
       ```
       {: pre}
-  4.   Verify that the Ingress resource was created successfully.
+  4. ```
+https://<domain>/<app1_path>
+```
+{: pre}
 
-      ```
-      kubectl describe ingress myingressresource
-      ```
-      {: pre}
+If you exposed multiple apps, access those apps by changing the path appended to the URL.
 
-      1. If messages in the events describe an error in your resource configuration, change the values in your resource file and reapply the file for the resource.
+```
+https://<domain>/<app2_path>
+```
+{: pre}
+
+If you use a wildcard domain to expose apps in different namespaces, access those apps with their respective subdomains.
+
+```
+http://<subdomain1>.<domain>/<app1_path>
+```
+{: pre}
+
+```
+http://<subdomain2>.<domain>/<app1_path>
+```
+{: pre}
 
   5. If your apps are exposed by services in different namespaces in one cluster, repeat these steps to create one resource per namespace to define rules for the apps that are exposed there. Use a unique subdomain for each resource that you create in the cluster.
 9.   In a web browser, enter the URL of the app service to access.
@@ -1438,6 +1552,8 @@ You can configure the private ALB to route incoming network traffic to the apps 
 
 
 <br />
+
+
 
 
 ## Optional application load balancer configurations
