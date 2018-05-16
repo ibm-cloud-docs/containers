@@ -37,7 +37,6 @@ IBM Cloud Container Service
         cs_network_policy.md
         cs_cluster_update.md
         cs_users.md
-        cs_infrastructure.md
         cs_edge.md
         cs_health.md
 
