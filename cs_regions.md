@@ -90,7 +90,7 @@ You can access the {{site.data.keyword.containershort_notm}} through one global 
 To use the API with the global endpoint, in all your requests, pass the region name in the `X-Region` header.
 {: tip}
 
-### Logging in to a different container service region
+### Logging in to a different {{site.data.keyword.containerlong}} region
 {: #container_login_endpoints}
 
 You can change locations by using the {{site.data.keyword.containershort_notm}} CLI.
@@ -104,7 +104,7 @@ You might want to log in to another {{site.data.keyword.containershort_notm}} re
 
 To quickly switch regions, run `bx cs region-set`.
 
-### Using container service API commands
+### Using {{site.data.keyword.containerlong}} API commands
 {: #containers_api}
 
 To interact with the {{site.data.keyword.containershort_notm}} API, enter the command type and append `/v1/command` to the global endpoint.
