@@ -487,7 +487,7 @@ To view logs for clusters and containers, you can use the standard Kubernetes an
 You can view the logs that you forwarded to {{site.data.keyword.loganalysislong_notm}} through the Kibana dashboard.
 {: shortdesc}
 
-If you used the default values to create your configuration file, then your logs can be found in the account, or org and space, in which the cluster was created. If you specified an org and space in your configuration file, then you can find your logs in that space. For more information about logging, see [Logging for the {{site.data.keyword.containershort_notm}}](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
+If you used the default values to create your configuration file, then your logs can be found in the account, or org and space, in which the cluster was created. If you specified an org and space in your configuration file, then you can find your logs in that space. For more information about logging, see [Logging for {{site.data.keyword.containershort_notm}}](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
 
 To access the Kibana dashboard, go to one of the following URLs and select the {{site.data.keyword.Bluemix_notm}} account or space where you configured log forwarding for the cluster.
 - US-South and US-East: https://logging.ng.bluemix.net
