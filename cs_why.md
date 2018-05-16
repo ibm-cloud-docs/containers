@@ -119,7 +119,7 @@ You can create one free cluster or any number of standard clusters. Try out free
 
 
 {: #responsibilities}
-**Note**: Looking for your responsibilities and container terms when you use the service?
+**Note**: Looking for your responsibilities and {{site.data.keyword.containerlong}} terms when you use the service?
 
 {: #terms}
 See [{{site.data.keyword.containershort_notm}} responsibilities](cs_responsibilities.html).
