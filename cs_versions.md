@@ -17,8 +17,11 @@ lastupdated: "2018-05-16"
 
 
 
-# Kubernetes versions
+# Version information and update actions
 {: #cs_versions}
+
+## Kubernetes version types
+{: #version_types}
 
 {{site.data.keyword.containerlong}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported.
 {:shortdesc}
@@ -49,7 +52,7 @@ Server Version: v1.9.7+9d6e0610086578
 
 
 ## Update types
-{: #version_types}
+{: #update_types}
 
 Your Kubernetes cluster has three types of updates: major, minor, and patch.
 {:shortdesc}
