@@ -193,7 +193,7 @@ Set up a private image repository in {{site.data.keyword.registryshort_notm}} an
 Set the context for your cluster in your CLI.
 {: shortdesc}
 
-Every time you log in to the container CLI to work with clusters, you must run these commands to set the path to the cluster's configuration file as a session variable. The Kubernetes CLI uses this variable to find a local configuration file and certificates that are necessary to connect with the cluster in {{site.data.keyword.Bluemix_notm}}.
+Every time you log in to the {{site.data.keyword.containerlong}} CLI to work with clusters, you must run these commands to set the path to the cluster's configuration file as a session variable. The Kubernetes CLI uses this variable to find a local configuration file and certificates that are necessary to connect with the cluster in {{site.data.keyword.Bluemix_notm}}.
 
 1.  Get the command to set the environment variable and download the Kubernetes configuration files.
 
