@@ -102,21 +102,10 @@ For general information about Ingress services and how to get started using them
   <td>Always route incoming network traffic to the same upstream server by using a sticky cookie.</td>
   </tr>
   <tr>
-  <td><a href="#upstream-fail-timeout">Upstream failtimeout</a></td>
-  <td><code>upstream-fail-timeout</code></td>
-  <td>Set the amount of time during which the ALB can attempt to connect to the server before the server is considered unavailable.</td>
-  </tr>
-  <tr>
   <td><a href="#upstream-keepalive">Upstream keepalive</a></td>
   <td><code>upstream-keepalive</code></td>
   <td>Set the maximum number of idle keepalive connections for an upstream server.</td>
   </tr>
-  <tr>
-  <td><a href="#upstream-max-fails">Upstream maxfails</a></td>
-  <td><code>upstream-max-fails</code></td>
-  <td>Set the maximum number of unsuccessful attempts to communicate with the server before the server is considered unavailable.</td>
-  </tr>
-
   </tbody></table>
 
 <br>
@@ -990,60 +979,11 @@ spec:
   </tbody></table>
 
  </dd></dl>
+ 
+<br />
 
-### Upstream failtimeout (upstream-fail-timeout)
-{: #upstream-fail-timeout}
+ 
 
-Set the amount of time during which the ALB can attempt to connect to the server.
-{:shortdesc}
-
-<dl>
-<dt>Description</dt>
-<dd>
-Set the amount of time during which the ALB can attempt to connect to a server before the server is considered unavailable. For a server to be considered unavailable, the ALB must hit the maximum number of failed connection attempts set by the <a href="#upstream-max-fails"><code>upstream-max-fails</code> annotation</a> within the set amount of time. This amount of time also determines how long the server is considered unavailable.
-</dd>
-
-
- <dt>Sample Ingress resource YAML</dt>
- <dd>
-
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
- kind: Ingress
- metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/upstream-fail-timeout: "serviceName=&lt;myservice&gt; failTimeout=&lt;fail_timeout&gt;"
- spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-
- <table>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>serviceName(Optional)</code></td>
-  <td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the Kubernetes service that you created for your app.</td>
-  </tr>
-  <tr>
-  <td><code>failTimeout</code></td>
-  <td>Replace <code>&lt;<em>fail_timeout</em>&gt;</code> with the amount of time that the ALB can attempt to connect to a server before the server is considered unavailable. The default is <code>10s</code>. Time must be in seconds.</td>
-  </tr>
-  </tbody></table>
-  </dd>
-  </dl>
 
 ### Upstream keepalive (upstream-keepalive)
 {: #upstream-keepalive}
@@ -1100,60 +1040,9 @@ Set the maximum number of idle keepalive connections to the upstream server of a
   </dd>
   </dl>
 
-### Upstream maxfails (upstream-max-fails)
-{: #upstream-max-fails}
-
-Set the maximum number of unsuccessful attempts to communicate with the server.
-{:shortdesc}
-
-<dl>
-<dt>Description</dt>
-<dd>
-Set the maximum number of times the ALB can fail to connect to the server before the server is considered unavailable. For the server to be considered unavailable, the ALB must hit the maximum number within the duration of time set by the <a href="#upstream-fail-timeout"><code>upstream-fail-timeout</code> annotation</a>. The duration of time that the server is considered unavailable is also set by the <code>upstream-fail-timeout</code> annotation.</dd>
-
-
- <dt>Sample Ingress resource YAML</dt>
- <dd>
-
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
- kind: Ingress
- metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/upstream-max-fails: "serviceName=&lt;myservice&gt; maxFails=&lt;max_fails&gt;"
- spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-
- <table>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>serviceName(Optional)</code></td>
-  <td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the Kubernetes service that you created for your app.</td>
-  </tr>
-  <tr>
-  <td><code>maxFails</code></td>
-  <td>Replace <code>&lt;<em>max_fails</em>&gt;</code> with the maximum number of unsuccessful attempts the ALB can make to communicate with the server. The default is <code>1</code>. A <code>0</code> value disables the annotation.</td>
-  </tr>
-  </tbody></table>
-  </dd>
-  </dl>
-
 <br />
+
+ 
 
 
 ## HTTPS and TLS/SSL authentication annotations
