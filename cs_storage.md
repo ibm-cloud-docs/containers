@@ -960,7 +960,70 @@ To apply the latest security updates and for a better performance, use the defau
 
 
 
+## Installing the IBM Cloud infrastructure (SoftLayer) CLI
+{: #slcli}
 
+Install the IBM Cloud infrastructure (SoftLayer) CLI to interact with your infrastructure resources such as NFS file and block storage instances.
+{: shortdesc}
+
+Before you begin, [install Python 3.6](https://www.python.org/downloads/).
+
+1.  View the [installation docs ![External link icon](../icons/launch-glyph.svg "External link icon")](http://softlayer-api-python-client.readthedocs.io/en/latest/install/).
+
+    1.  Click the link in the **Download the tarball** or **Download the zipball** steps. Do not use the `curl` command.
+    2.  Find the downloaded package, unzip it, and navigate into the directory.
+    3.  Install the CLI.
+    
+        ```
+        python3 setup.py install
+        ```
+        {: pre}
+    
+2.  Get your IBM Cloud infrastructure (SoftLayer) API user name and API key.
+
+    1.  From the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/), expand the menu and select **Infrastructure**.
+    2.  From your profile in the menu bar, select the infrastructure account that you want to use.
+    3.  Select **Account** > **Users** > **User List**.
+    4.  From the **Users** table, in the **API KEY** column, click **View**. If you do not see an API key, click **Generate**.
+    5.  Copy the user name and API key in the pop-up window.
+
+3.  Configure the CLI to connect to your IBM Cloud infrastructure (SoftLayer) account.
+
+    1.  Configure the IBM Cloud infrastructure (SoftLayer) CLI.
+        ```
+        slcli setup
+        ```
+        {: pre}
+
+    2.  Fill in the required information.
+    
+        * **Username**: Enter the IBM Cloud infrastructure (SoftLayer) API user name that you previously retrieved.
+        * **API Key or Password**: Enter the IBM Cloud infrastructure (SoftLayer) API key that you previously retrieved.
+        * **Endpoint (public|private|custom) [public]**: Enter `https://api.softlayer.com/rest/v3.1`.
+        * **Timeout [0]**: Enter a value in seconds for the CLI to wait for a response from the API. A value of `0` sets the CLI to wait forever.
+        
+        **Example**:
+        
+        ```
+        $ slcli setup
+        Username []: 1234567_user.name@example.com
+        API Key or Password []: 
+        Endpoint (public|private|custom) [public]: https://api.softlayer.com/rest/v3.1 
+        Timeout [0]: 6000
+        :..............:..................................................................:
+        :         name : value                                                            :
+        :..............:..................................................................:
+        :     Username : 1234567_user.name@example.com                                    :
+        :      API Key : 1111aa1111bbb22222b2b3c33333c3c3cc44d4444444444dd4444eee55e5e5e5 :
+        : Endpoint URL : https://api.softlayer.com/xmlrpc/v3.1/                           :
+        :      Timeout : 6000                                                             :
+        :..............:..................................................................:
+        Are you sure you want to write settings to "/Users/name/.softlayer"? [Y/n]: Y
+        Configuration Updated Successfully
+        ```
+        {: screen}
+
+You are now ready to use the IBM Cloud infrastructure (SoftLayer) CLI.
 
 ## Installing the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in on your cluster
 {: #install_block}
