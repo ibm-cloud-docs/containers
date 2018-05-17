@@ -41,7 +41,7 @@ Review the following changes.
 
 
 
-### Changelog for worker node fix pack 1.10.1_1509
+### Changelog for worker node fix pack 1.10.1_1509, released 16 May 2018
 {: #1101_1509}
 
 <table summary="Changes that were made since version 1.10.1_1508">
@@ -64,7 +64,7 @@ Review the following changes.
 </tbody>
 </table>
 
-### Changelog for 1.10.1_1508
+### Changelog for 1.10.1_1508, released 01 May 2018
 {: #1101_1508}
 
 <table summary="Changes that were made since version 1.9.7_1510">
@@ -130,7 +130,7 @@ Review the following changes.
 
 
 
-### Changelog for worker node fix pack 1.9.7_1511
+### Changelog for worker node fix pack 1.9.7_1511, released 16 May 2018
 {: #197_1511}
 
 <table summary="Changes that were made since version 1.9.7_1510">
@@ -153,7 +153,7 @@ Review the following changes.
 </tbody>
 </table>
 
-### Changelog for 1.9.7_1510
+### Changelog for 1.9.7_1510, released 30 April 2018
 {: #197_1510}
 
 <table summary="Changes that were made since version 1.9.3_1506">
@@ -201,7 +201,7 @@ Review the following changes.
 
 
 
-### Changelog for worker node fix pack 1.8.11_1510
+### Changelog for worker node fix pack 1.8.11_1510, released 16 May 2018
 {: #1811_1510}
 
 <table summary="Changes that were made since version 1.8.11_1509">
@@ -225,7 +225,7 @@ Review the following changes.
 </table>
 
 
-### Changelog for 1.8.11_1509
+### Changelog for 1.8.11_1509, released 19 April 2018
 {: #1811_1509}
 
 <table summary="Changes that were made since version 1.8.8_1507">
@@ -274,7 +274,7 @@ Review the following changes.
 
 
 
-### Changelog for worker node fix pack 1.7.16_1512
+### Changelog for worker node fix pack 1.7.16_1512, released 16 May 2018
 {: #1716_1512}
 
 <table summary="Changes that were made since version 1.7.16_1511">
@@ -297,7 +297,7 @@ Review the following changes.
 </tbody>
 </table>
 
-### Changelog for 1.7.16_1511
+### Changelog for 1.7.16_1511, released 19 April 2018
 {: #1716_1511}
 
 <table summary="Changes that were made since version 1.7.4_1509">
