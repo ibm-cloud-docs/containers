@@ -80,7 +80,7 @@ To install the CLIs and their prerequisites:
 1.  As a prerequisite for the {{site.data.keyword.containershort_notm}} plug-in, install the [{{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://clis.ng.bluemix.net/ui/home.html). To run {{site.data.keyword.Bluemix_notm}} CLI commands, use the prefix `bx`.
 2.  Follow the prompts to select an account and an {{site.data.keyword.Bluemix_notm}} organization. Clusters are specific to an account, but are independent from an {{site.data.keyword.Bluemix_notm}} organization or space.
 
-4.  Install the {{site.data.keyword.containershort_notm}} plug-in to create Kubernetes clusters and manage worker nodes. To run {{site.data.keyword.containershort_notm}} plug-in commands, use the prefix `ibmcloud`.
+4.  Install the {{site.data.keyword.containershort_notm}} plug-in to create Kubernetes clusters and manage worker nodes. To run {{site.data.keyword.containershort_notm}} plug-in commands, use the prefix `ibmcloud cs`.
 
     ```
     bx plugin install container-service -r Bluemix
@@ -175,7 +175,7 @@ Set up a private image repository in {{site.data.keyword.registryshort_notm}} an
 3.  Before you continue to the next step, verify that the deployment of your worker node is complete.
 
     ```
-    ibmcloud workers <cluster_name_or_ID>
+    ibmcloud cs workers <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -198,7 +198,7 @@ Every time you log in to the {{site.data.keyword.containerlong}} CLI to work wit
 1.  Get the command to set the environment variable and download the Kubernetes configuration files.
 
     ```
-    ibmcloud cluster-config <cluster_name_or_ID>
+    ibmcloud cs cluster-config <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -261,14 +261,14 @@ With {{site.data.keyword.Bluemix_notm}} services, you can take advantage of alre
 2.  Bind the {{site.data.keyword.toneanalyzershort}} instance to the `default` Kubernetes namespace for the cluster. Later, you can create your own namespaces to manage user access to Kubernetes resources, but for now, use the `default` namespace. Kubernetes namespaces are different from the registry namespace you created earlier.
 
     ```
-    ibmcloud cluster-service-bind <cluster_name> default <service_name>
+    ibmcloud cs cluster-service-bind <cluster_name> default <service_name>
     ```
     {: pre}
 
     Output:
 
     ```
-    ibmcloud cluster-service-bind pr_firm_cluster default mytoneanalyzer
+    ibmcloud cs cluster-service-bind pr_firm_cluster default mytoneanalyzer
     Binding service instance to namespace...
     OK
     Namespace:	default

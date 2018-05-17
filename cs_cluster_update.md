@@ -47,7 +47,7 @@ For _major_ or _minor_ updates, complete the following steps:
 
 1. Review the [Kubernetes changes](cs_versions.html) and make any updates marked _Update before master_.
 2. Update your Kubernetes API server and associated Kubernetes master components by using the GUI or running the [CLI command](cs_cli_reference.html#cs_cluster_update). When you update the Kubernetes API server, the API server is down for about 5 - 10 minutes. During the update, you cannot access or change the cluster. However, worker nodes, apps, and resources that cluster users have deployed are not modified and continue to run.
-3. Confirm that the update is complete. Review the Kubernetes API server version on the {{site.data.keyword.Bluemix_notm}} Dashboard or run `ibmcloud clusters`.
+3. Confirm that the update is complete. Review the Kubernetes API server version on the {{site.data.keyword.Bluemix_notm}} Dashboard or run `ibmcloud cs clusters`.
 4. Install the version of the [`kubectl cli`](cs_cli_install.html#kubectl) that matches the Kubernetes API server version that runs in the Kubernetes master.
 
 When the Kubernetes API server update is complete, you can update your worker nodes.
@@ -79,7 +79,7 @@ In the data information section of the configuration map, you can define up to 1
 
 The keys are defined. What now?
 
-After you define your rules, you run the `ibmcloud worker-update` command. If a successful response is returned, the worker nodes are queued to be updated. However, the nodes do not undergo the update process until all of the rules are satisfied. While they're queued, the rules are checked on an interval to see if any of the nodes are able to be updated.
+After you define your rules, you run the `ibmcloud cs worker-update` command. If a successful response is returned, the worker nodes are queued to be updated. However, the nodes do not undergo the update process until all of the rules are satisfied. While they're queued, the rules are checked on an interval to see if any of the nodes are able to be updated.
 
 What if I chose not to define a configuration map?
 
@@ -155,10 +155,10 @@ To update your worker nodes:
 
 3. Update your worker nodes from the GUI or by running the CLI command.
   * To update from the {{site.data.keyword.Bluemix_notm}} Dashboard, navigate to the `Worker Nodes` section of your cluster, and click `Update Worker`.
-  * To get worker node IDs, run `ibmcloud workers <cluster_name_or_ID>`. If you select multiple worker nodes, the worker nodes are placed in a queue for update evaluation. If they are considered ready after evaluation, they will be updated according to the rules set in the configurations
+  * To get worker node IDs, run `ibmcloud cs workers <cluster_name_or_ID>`. If you select multiple worker nodes, the worker nodes are placed in a queue for update evaluation. If they are considered ready after evaluation, they will be updated according to the rules set in the configurations
 
     ```
-    ibmcloud worker-update <cluster_name_or_ID> <worker_node1_ID> <worker_node2_ID>
+    ibmcloud cs worker-update <cluster_name_or_ID> <worker_node1_ID> <worker_node2_ID>
     ```
     {: pre}
 
@@ -169,7 +169,7 @@ To update your worker nodes:
     {: pre}
 
 5. Confirm that the update is complete:
-  * Review the Kubernetes version on the {{site.data.keyword.Bluemix_notm}} Dashboard or run `ibmcloud workers <cluster_name_or_ID>`.
+  * Review the Kubernetes version on the {{site.data.keyword.Bluemix_notm}} Dashboard or run `ibmcloud cs workers <cluster_name_or_ID>`.
   * Review the Kubernets version of the worker nodes by running `kubectl get nodes`.
   * In some cases, older clusters might list duplicate worker nodes with a **NotReady** status after an update. To remove duplicates, see [troubleshooting](cs_troubleshoot_clusters.html#cs_duplicate_nodes).
 
@@ -204,34 +204,34 @@ Before you begin:
 
 1. Note the names and locations of the worker nodes to update.
     ```
-    ibmcloud workers <cluster_name>
+    ibmcloud cs workers <cluster_name>
     ```
     {: pre}
 
 2. View the available machine types.
     ```
-    ibmcloud machine-types <location>
+    ibmcloud cs machine-types <location>
     ```
     {: pre}
 
-3. Add worker nodes by using the [ibmcloud worker-add](cs_cli_reference.html#cs_worker_add) command. Specify a machine type.
+3. Add worker nodes by using the [ibmcloud cs worker-add](cs_cli_reference.html#cs_worker_add) command. Specify a machine type.
 
     ```
-    ibmcloud worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+    ibmcloud cs worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
     ```
     {: pre}
 
 4. Verify that the worker nodes are added.
 
     ```
-    ibmcloud workers <cluster_name>
+    ibmcloud cs workers <cluster_name>
     ```
     {: pre}
 
 5. When the added worker nodes are in the `Normal` state, you can remove the outdated worker node. **Note**: If you are removing a machine type that is billed monthly (such as bare metal), you are charged for the entire the month.
 
     ```
-    ibmcloud worker-rm <cluster_name> <worker_node>
+    ibmcloud cs worker-rm <cluster_name> <worker_node>
     ```
     {: pre}
 

@@ -202,7 +202,7 @@ To expose an app by using the IBM-provided domain:
 3. Get the details for your cluster to view the IBM-provided domain. Replace _&lt;cluster_name_or_ID&gt;_ with the name of the cluster where the app is deployed that you want to expose to the public.
 
     ```
-    ibmcloud cluster-get <cluster_name_or_ID>
+    ibmcloud cs cluster-get <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -384,7 +384,7 @@ To expose an app by using the IBM-provided domain with TLS:
 3. View the IBM-provided domain and TLS certificate. Replace _&lt;cluster_name_or_ID&gt;_ with the name of the cluster where the app is deployed.
 
     ```
-    ibmcloud cluster-get <cluster_name_or_ID>
+    ibmcloud cs cluster-get <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -538,13 +538,13 @@ To expose an app by using a custom domain with TLS:
       * If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
 
 2.  Configure your domain to route incoming network traffic to the IBM-provided ALB. Choose between these options:
-    -   Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud cluster-get <cluster_name>` and look for the **Ingress subdomain** field.
-    -   Map your custom domain to the portable public IP address of the IBM-provided ALB by adding the IP address as a record. To find the portable public IP address of the ALB, run `ibmcloud alb-get <public_alb_ID>`.
+    -   Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud cs cluster-get <cluster_name>` and look for the **Ingress subdomain** field.
+    -   Map your custom domain to the portable public IP address of the IBM-provided ALB by adding the IP address as a record. To find the portable public IP address of the ALB, run `ibmcloud cs alb-get <public_alb_ID>`.
 3.  Either import or create a TLS certificate and key secret. If you are using a wildcard domain, ensure that you import or create a wildcard certificate.
     * If a TLS certificate is stored in {{site.data.keyword.cloudcerts_long_notm}} that you want to use, you can import its associated secret into your cluster by running the following command:
 
       ```
-      ibmcloud alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
+      ibmcloud cs alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
       ```
       {: pre}
 
@@ -643,7 +643,7 @@ To expose an app by using a custom domain with TLS:
         </tr>
         <tr>
         <td><code>tls/secretName</code></td>
-        <td>Replace <em>&lt;tls_secret_name&gt;</em> with the name of the secret that you created earlier that holds your custom TLS certificate and key. If you imported a certificate from {{site.data.keyword.cloudcerts_short}}, you can run <code>ibmcloud alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> to see the secrets that are associated with a TLS certificate.
+        <td>Replace <em>&lt;tls_secret_name&gt;</em> with the name of the secret that you created earlier that holds your custom TLS certificate and key. If you imported a certificate from {{site.data.keyword.cloudcerts_short}}, you can run <code>ibmcloud cs alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> to see the secrets that are associated with a TLS certificate.
         </tr>
         <tr>
         <td><code>host</code></td>
@@ -812,7 +812,7 @@ You can route incoming network traffic on the IBM-provided domain to apps that a
 3. View the IBM-provided domain and TLS certificate. Replace _&lt;cluster_name_or_ID&gt;_ with the name of the cluster where the app is deployed.
 
     ```
-    ibmcloud cluster-get <cluster_name_or_ID>
+    ibmcloud cs cluster-get <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -987,7 +987,7 @@ To enable the private ALB by using the pre-assigned, IBM-provided portable priva
 1. List the available ALBs in your cluster to get the ID of the private ALB. Replace <em>&lt;cluser_name&gt;</em> with the name of the cluster where the app that you want to expose is deployed.
 
     ```
-    ibmcloud albs --cluster <cluser_name>
+    ibmcloud cs albs --cluster <cluser_name>
     ```
     {: pre}
 
@@ -1002,24 +1002,24 @@ To enable the private ALB by using the pre-assigned, IBM-provided portable priva
 2. Enable the private ALB. Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for private ALB from the output in the previous step.
 
    ```
-   ibmcloud alb-configure --albID <private_ALB_ID> --enable
+   ibmcloud cs alb-configure --albID <private_ALB_ID> --enable
    ```
    {: pre}
 
 
 To enable the private ALB using your own portable private IP address:
 
-1. Configure the user-managed subnet of your chosen IP address to route traffic on the private VLAN of your cluster. Replace <em>&lt;cluser_name&gt;</em> with the name or ID of the cluster where the app that you want to expose is deployed, <em>&lt;subnet_CIDR&gt;</em> with the CIDR of your user-managed subnet, and <em>&lt;private_VLAN_ID&gt;</em> with an available private VLAN ID. You can find the ID of an available private VLAN by running `ibmcloud vlans`.
+1. Configure the user-managed subnet of your chosen IP address to route traffic on the private VLAN of your cluster. Replace <em>&lt;cluser_name&gt;</em> with the name or ID of the cluster where the app that you want to expose is deployed, <em>&lt;subnet_CIDR&gt;</em> with the CIDR of your user-managed subnet, and <em>&lt;private_VLAN_ID&gt;</em> with an available private VLAN ID. You can find the ID of an available private VLAN by running `ibmcloud cs vlans`.
 
    ```
-   ibmcloud cluster-user-subnet-add <cluster_name> <subnet_CIDR> <private_VLAN_ID>
+   ibmcloud cs cluster-user-subnet-add <cluster_name> <subnet_CIDR> <private_VLAN_ID>
    ```
    {: pre}
 
 2. List the available ALBs in your cluster to get the ID of private ALB.
 
     ```
-    ibmcloud albs --cluster <cluster_name>
+    ibmcloud cs albs --cluster <cluster_name>
     ```
     {: pre}
 
@@ -1034,7 +1034,7 @@ To enable the private ALB using your own portable private IP address:
 3. Enable the private ALB. Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for private ALB from the output in the previous step and <em>&lt;user_IP&gt;</em> with the IP address from your user-managed subnet that you want to use.
 
    ```
-   ibmcloud alb-configure --albID <private_ALB_ID> --enable --user-ip <user_IP>
+   ibmcloud cs alb-configure --albID <private_ALB_ID> --enable --user-ip <user_IP>
    ```
    {: pre}
 
@@ -1056,7 +1056,7 @@ To privately expose an app by using a custom domain without TLS using an externa
 1.    Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.Bluemix_notm}} DNS](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns).
       * If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
 
-2.  Map your custom domain to the portable private IP address of the IBM-provided private ALB by adding the IP address as a record. To find the portable private IP address of the private ALB, run `ibmcloud albs --cluster <cluster_name>`.
+2.  Map your custom domain to the portable private IP address of the IBM-provided private ALB by adding the IP address as a record. To find the portable private IP address of the private ALB, run `ibmcloud cs albs --cluster <cluster_name>`.
 3.  [Deploy your app to the cluster](cs_app.html#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file, such as `app: code`. This label is needed to identify all pods where your app is running so that the pods can be included in the Ingress load balancing.
 
 4.   Create a Kubernetes service for each app that you want to expose. Your app must be exposed by a Kubernetes service to be included by the cluster ALB in the Ingress load balancing.
@@ -1135,7 +1135,7 @@ To privately expose an app by using a custom domain without TLS using an externa
         <tbody>
         <tr>
         <td><code>ingress.bluemix.net/ALB-ID</code></td>
-        <td>Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for your private ALB. Run <code>ibmcloud albs --cluster <my_cluster></code> to find the ALB ID. For more information about this Ingress annotation, see [Private application load balancer routing](cs_annotations.html#alb-id).</td>
+        <td>Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for your private ALB. Run <code>ibmcloud cs albs --cluster <my_cluster></code> to find the ALB ID. For more information about this Ingress annotation, see [Private application load balancer routing](cs_annotations.html#alb-id).</td>
         </tr>
         <td><code>host</code></td>
         <td>Replace <em>&lt;custom_domain&gt;</em> with your custom domain. If your apps are exposed by services in different namespaces in one cluster, append a wildcard subdomain to the beginning of the domain, such as `subdomain1.custom_domain.net`. Use a unique subdomain for each resource that you create in the cluster.
@@ -1221,9 +1221,9 @@ To privately expose an app by using a custom domain with TLS using an external D
 1.    Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.Bluemix_notm}} DNS](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns).
       * If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
 
-2.  Map your custom domain to the portable private IP address of the IBM-provided private ALB by adding the IP address as a record. To find the portable private IP address of the private ALB, run `ibmcloud albs --cluster <cluster_name>`.
+2.  Map your custom domain to the portable private IP address of the IBM-provided private ALB by adding the IP address as a record. To find the portable private IP address of the private ALB, run `ibmcloud cs albs --cluster <cluster_name>`.
 3.  Either import or create a TLS certificate and key secret. If you are using a wildcard domain, ensure that you import or create a wildcard certificate.
-    * If a TLS certificate is stored in {{site.data.keyword.cloudcerts_long_notm}} that you want to use, you can import its associated secret into your cluster by running `ibmcloud alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>`.
+    * If a TLS certificate is stored in {{site.data.keyword.cloudcerts_long_notm}} that you want to use, you can import its associated secret into your cluster by running `ibmcloud cs alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>`.
     * If you do not have a TLS certificate ready, follow these steps:
         1. Create a TLS certificate and key for your domain that is encoded in PEM format.
         2. Create a secret that uses your TLS certificate and key. Replace <em>&lt;tls_secret_name&gt;</em> with a name for your Kubernetes secret, <em>&lt;tls_key_filepath&gt;</em> with the path to your custom TLS key file, and <em>&lt;tls_cert_filepath&gt;</em> with the path to your custom TLS certificate file.
@@ -1314,7 +1314,7 @@ To privately expose an app by using a custom domain with TLS using an external D
           <tbody>
           <tr>
           <td><code>ingress.bluemix.net/ALB-ID</code></td>
-          <td>Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for your private ALB. Run <code>ibmcloud albs --cluster <cluster_name></code> to find the ALB ID. For more information about this Ingress annotation, see [Private application load balancer routing (ALB-ID)](cs_annotations.html#alb-id).</td>
+          <td>Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for your private ALB. Run <code>ibmcloud cs albs --cluster <cluster_name></code> to find the ALB ID. For more information about this Ingress annotation, see [Private application load balancer routing (ALB-ID)](cs_annotations.html#alb-id).</td>
           </tr>
           <tr>
           <td><code>tls/hosts</code></td>
@@ -1325,7 +1325,7 @@ To privately expose an app by using a custom domain with TLS using an external D
           </tr>
           <tr>
           <td><code>tls/secretName</code></td>
-          <td>Replace <em>&lt;tls_secret_name&gt;</em> with the name of the secret that you created earlier and that holds your custom TLS certificate and key. If you imported a certificate from {{site.data.keyword.cloudcerts_short}}, you can run <code>ibmcloud alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> to see the secrets that are associated with a TLS certificate.
+          <td>Replace <em>&lt;tls_secret_name&gt;</em> with the name of the secret that you created earlier and that holds your custom TLS certificate and key. If you imported a certificate from {{site.data.keyword.cloudcerts_short}}, you can run <code>ibmcloud cs alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> to see the secrets that are associated with a TLS certificate.
           </tr>
           <tr>
           <td><code>host</code></td>
@@ -1409,7 +1409,7 @@ You can configure the private ALB to route incoming network traffic to the apps 
 3. [Configure your DNS service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
 4. Create a custom domain and register it with your DNS service.
     * If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
-5.  Map your custom domain to the portable private IP address of the IBM-provided private ALB by adding the IP address as a record. To find the portable private IP address of the private ALB, run `ibmcloud albs --cluster <cluster_name>`.
+5.  Map your custom domain to the portable private IP address of the IBM-provided private ALB by adding the IP address as a record. To find the portable private IP address of the private ALB, run `ibmcloud cs albs --cluster <cluster_name>`.
 6.  [Deploy your app to the cluster](cs_app.html#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file, such as `app: code`. This label is needed to identify all pods where your app is running so that the pods can be included in the Ingress load balancing.
 
 7.   Create a Kubernetes service for each app that you want to expose. Your app must be exposed by a Kubernetes service to be included by the cluster ALB in the Ingress load balancing.
@@ -1494,7 +1494,7 @@ You can configure the private ALB to route incoming network traffic to the apps 
     <tbody>
     <tr>
     <td><code>ingress.bluemix.net/ALB-ID</code></td>
-    <td>Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for your private ALB. Run <code>ibmcloud albs --cluster <my_cluster></code> to find the ALB ID. For more information about this Ingress annotation, see [Private application load balancer routing (ALB-ID)](cs_annotations.html#alb-id).</td>
+    <td>Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for your private ALB. Run <code>ibmcloud cs albs --cluster <my_cluster></code> to find the ALB ID. For more information about this Ingress annotation, see [Private application load balancer routing (ALB-ID)](cs_annotations.html#alb-id).</td>
     </tr>
     <tr>
     <td><code>tls/hosts</code></td>
@@ -1504,7 +1504,7 @@ You can configure the private ALB to route incoming network traffic to the apps 
     </tr>
     <tr>
     <td><code>tls/secretName</code></td>
-    <td>If you are using the `tls` section, replace <em>&lt;tls_secret_name&gt;</em> with the name of the secret that you created earlier and that holds your custom TLS certificate and key. If you imported a certificate from {{site.data.keyword.cloudcerts_short}}, you can run <code>ibmcloud alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> to see the secrets that are associated with a TLS certificate.
+    <td>If you are using the `tls` section, replace <em>&lt;tls_secret_name&gt;</em> with the name of the secret that you created earlier and that holds your custom TLS certificate and key. If you imported a certificate from {{site.data.keyword.cloudcerts_short}}, you can run <code>ibmcloud cs alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> to see the secrets that are associated with a TLS certificate.
     </tr>
     <tr>
     <td><code>host</code></td>

@@ -197,7 +197,7 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
     * If you are working with a free cluster, you must use the public IP of the worker node and the NodePort. Run the following command to get the public IP of the worker node:
 
        ```
-       ibmcloud workers <cluster_name_or_ID>
+       ibmcloud cs workers <cluster_name_or_ID>
        ```
        {: pre}
 

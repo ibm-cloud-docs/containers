@@ -84,8 +84,8 @@ By using {{site.data.keyword.containershort_notm}} regions, you can create or ac
 {:shortdesc}
 
 You can access the {{site.data.keyword.containershort_notm}} through one global endpoint: `https://containers.bluemix.net/`.
-* To check which {{site.data.keyword.containershort_notm}} region you are currently in, run `ibmcloud region`.
-* To retrieve a list of available regions and their endpoints, run `ibmcloud regions`.
+* To check which {{site.data.keyword.containershort_notm}} region you are currently in, run `ibmcloud cs region`.
+* To retrieve a list of available regions and their endpoints, run `ibmcloud cs regions`.
 
 To use the API with the global endpoint, in all your requests, pass the region name in the `X-Region` header.
 {: tip}
@@ -102,7 +102,7 @@ You might want to log in to another {{site.data.keyword.containershort_notm}} re
 
 </br>
 
-To quickly switch regions, run `ibmcloud region-set`.
+To quickly switch regions, run `ibmcloud cs region-set`.
 
 ### Using {{site.data.keyword.containerlong_notm}} API commands
 {: #containers_api}
@@ -118,7 +118,7 @@ Example of `GET /clusters` API:
 
 </br>
 
-To use the API with the global endpoint, in all your requests, pass the region name in the `X-Region` header. To list available regions, run `ibmcloud regions`.
+To use the API with the global endpoint, in all your requests, pass the region name in the `X-Region` header. To list available regions, run `ibmcloud cs regions`.
 {: tip}
 
 To view documentation on the API commands, view [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/).
@@ -145,7 +145,7 @@ Your cluster's resources remain in the location (data center) in which the clust
 
 2.  If you set up other cluster resources, such as storage, networking, compute, or apps that run in pods, the resources and their data remain in the location that you deployed your cluster to.
 
-3.  When you make cluster management actions, such as using `ibmcloud` commands, basic information about the cluster (such as name, ID, user, the command) is routed to a regional endpoint.
+3.  When you make cluster management actions, such as using `ibmcloud cs` commands, basic information about the cluster (such as name, ID, user, the command) is routed to a regional endpoint.
 
 ![Understanding where your cluster resources are](/images/region-cluster-resources.png)
 

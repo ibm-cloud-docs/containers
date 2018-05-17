@@ -250,7 +250,7 @@ Deploy your app as a container in a Kubernetes cluster.
     a.  Get the public IP address for the worker node in the cluster.
 
     ```
-    ibmcloud workers <cluster_name>
+    ibmcloud cs workers <cluster_name>
     ```
     {: pre}
 

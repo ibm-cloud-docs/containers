@@ -30,7 +30,7 @@ To install the CLI plug-in, see [Installing the CLI](cs_cli_install.html#cs_cli_
 Looking for `bx cr` commands? See the [{{site.data.keyword.registryshort_notm}} CLI reference](/docs/cli/plugins/registry/index.html). Looking for `kubectl` commands? See the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/).
 {:tip}
 
-## ibmcloud commands
+## ibmcloud cs commands
 {: #cs_commands}
 
 **Tip:** To see the version of the {{site.data.keyword.containershort_notm}} plug-in, run the following command.
@@ -52,15 +52,15 @@ bx plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud api](#cs_api)</td>
-    <td>[ibmcloud api-key-info](#cs_api_key_info)</td>
-    <td>[ibmcloud api-key-reset](#cs_api_key_reset)</td>
-    <td>[ibmcloud apiserver-config-get](#cs_apiserver_config_get)</td>
+    <td>[ibmcloud cs api](#cs_api)</td>
+    <td>[ibmcloud cs api-key-info](#cs_api_key_info)</td>
+    <td>[ibmcloud cs api-key-reset](#cs_api_key_reset)</td>
+    <td>[ibmcloud cs apiserver-config-get](#cs_apiserver_config_get)</td>
   </tr>
   <tr>
-    <td>[ibmcloud apiserver-config-set](#cs_apiserver_config_set)</td>
-    <td>[ibmcloud apiserver-config-unset](#cs_apiserver_config_unset)</td>
-    <td>[ibmcloud apiserver-refresh](#cs_apiserver_refresh)</td>
+    <td>[ibmcloud cs apiserver-config-set](#cs_apiserver_config_set)</td>
+    <td>[ibmcloud cs apiserver-config-unset](#cs_apiserver_config_unset)</td>
+    <td>[ibmcloud cs apiserver-refresh](#cs_apiserver_refresh)</td>
     <td></td>
  </tr>
 </tbody>
@@ -78,9 +78,9 @@ bx plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud help](#cs_help)</td>
-    <td>[ibmcloud init](#cs_init)</td>
-    <td>[ibmcloud messages](#cs_messages)</td>
+    <td>[ibmcloud cs help](#cs_help)</td>
+    <td>[ibmcloud cs init](#cs_init)</td>
+    <td>[ibmcloud cs messages](#cs_messages)</td>
     <td></td>
   </tr>
 </tbody>
@@ -98,16 +98,16 @@ bx plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud cluster-config](#cs_cluster_config)</td>
-    <td>[ibmcloud cluster-create](#cs_cluster_create)</td>
-    <td>[ibmcloud cluster-feature-enable](#cs_cluster_feature_enable)</td>
-    <td>[ibmcloud cluster-get](#cs_cluster_get)</td>
+    <td>[ibmcloud cs cluster-config](#cs_cluster_config)</td>
+    <td>[ibmcloud cs cluster-create](#cs_cluster_create)</td>
+    <td>[ibmcloud cs cluster-feature-enable](#cs_cluster_feature_enable)</td>
+    <td>[ibmcloud cs cluster-get](#cs_cluster_get)</td>
   </tr>
   <tr>
-    <td>[ibmcloud cluster-rm](#cs_cluster_rm)</td>
-    <td>[ibmcloud cluster-update](#cs_cluster_update)</td>
-    <td>[ibmcloud clusters](#cs_clusters)</td>
-    <td>[ibmcloud kube-versions](#cs_kube_versions)</td>
+    <td>[ibmcloud cs cluster-rm](#cs_cluster_rm)</td>
+    <td>[ibmcloud cs cluster-update](#cs_cluster_update)</td>
+    <td>[ibmcloud cs clusters](#cs_clusters)</td>
+    <td>[ibmcloud cs kube-versions](#cs_kube_versions)</td>
   </tr>
 </tbody>
 </table>
@@ -124,10 +124,10 @@ bx plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud cluster-service-bind](#cs_cluster_service_bind)</td>
-    <td>[ibmcloud cluster-service-unbind](#cs_cluster_service_unbind)</td>
-    <td>[ibmcloud cluster-services](#cs_cluster_services)</td>
-    <td>[ibmcloud webhook-create](#cs_webhook_create)</td>
+    <td>[ibmcloud cs cluster-service-bind](#cs_cluster_service_bind)</td>
+    <td>[ibmcloud cs cluster-service-unbind](#cs_cluster_service_unbind)</td>
+    <td>[ibmcloud cs cluster-services](#cs_cluster_services)</td>
+    <td>[ibmcloud cs webhook-create](#cs_webhook_create)</td>
   </tr>
 </tbody>
 </table>
@@ -144,13 +144,13 @@ bx plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud cluster-subnet-add](#cs_cluster_subnet_add)</td>
-    <td>[ibmcloud cluster-subnet-create](#cs_cluster_subnet_create)</td>
-    <td>[ibmcloud cluster-user-subnet-add](#cs_cluster_user_subnet_add)</td>
-    <td>[ibmcloud cluster-user-subnet-rm](#cs_cluster_user_subnet_rm)</td>
+    <td>[ibmcloud cs cluster-subnet-add](#cs_cluster_subnet_add)</td>
+    <td>[ibmcloud cs cluster-subnet-create](#cs_cluster_subnet_create)</td>
+    <td>[ibmcloud cs cluster-user-subnet-add](#cs_cluster_user_subnet_add)</td>
+    <td>[ibmcloud cs cluster-user-subnet-rm](#cs_cluster_user_subnet_rm)</td>
   </tr>
   <tr>
-    <td>[ibmcloud subnets](#cs_subnets)</td>
+    <td>[ibmcloud cs subnets](#cs_subnets)</td>
     <td></td>
     <td></td>
     <td></td>
@@ -170,10 +170,10 @@ bx plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud credentials-set](#cs_credentials_set)</td>
-    <td>[ibmcloud credentials-unset](#cs_credentials_unset)</td>
-    <td>[ibmcloud machine-types](#cs_machine_types)</td>
-    <td>[ibmcloud vlans](#cs_vlans)</td>
+    <td>[ibmcloud cs credentials-set](#cs_credentials_set)</td>
+    <td>[ibmcloud cs credentials-unset](#cs_credentials_unset)</td>
+    <td>[ibmcloud cs machine-types](#cs_machine_types)</td>
+    <td>[ibmcloud cs vlans](#cs_vlans)</td>
   </tr>
 </tbody>
 </table>
@@ -192,16 +192,16 @@ bx plugin list
   </thead>
   <tbody>
     <tr>
-      <td>[ibmcloud alb-cert-deploy](#cs_alb_cert_deploy)</td>
-      <td>[ibmcloud alb-cert-get](#cs_alb_cert_get)</td>
-      <td>[ibmcloud alb-cert-rm](#cs_alb_cert_rm)</td>
-      <td>[ibmcloud alb-certs](#cs_alb_certs)</td>
+      <td>[ibmcloud cs alb-cert-deploy](#cs_alb_cert_deploy)</td>
+      <td>[ibmcloud cs alb-cert-get](#cs_alb_cert_get)</td>
+      <td>[ibmcloud cs alb-cert-rm](#cs_alb_cert_rm)</td>
+      <td>[ibmcloud cs alb-certs](#cs_alb_certs)</td>
     </tr>
     <tr>
-      <td>[ibmcloud alb-configure](#cs_alb_configure)</td>
-      <td>[ibmcloud alb-get](#cs_alb_get)</td>
-      <td>[ibmcloud alb-types](#cs_alb_types)</td>
-      <td>[ibmcloud albs](#cs_albs)</td>
+      <td>[ibmcloud cs alb-configure](#cs_alb_configure)</td>
+      <td>[ibmcloud cs alb-get](#cs_alb_get)</td>
+      <td>[ibmcloud cs alb-types](#cs_alb_types)</td>
+      <td>[ibmcloud cs albs](#cs_albs)</td>
     </tr>
   </tbody>
 </table>
@@ -220,19 +220,19 @@ bx plugin list
   </thead>
   <tbody>
     <tr>
-      <td>[ibmcloud logging-config-create](#cs_logging_create)</td>
-      <td>[ibmcloud logging-config-get](#cs_logging_get)</td>
-      <td>[ibmcloud logging-config-refresh](#cs_logging_refresh)</td>
-      <td>[ibmcloud logging-config-rm](#cs_logging_rm)</td>
+      <td>[ibmcloud cs logging-config-create](#cs_logging_create)</td>
+      <td>[ibmcloud cs logging-config-get](#cs_logging_get)</td>
+      <td>[ibmcloud cs logging-config-refresh](#cs_logging_refresh)</td>
+      <td>[ibmcloud cs logging-config-rm](#cs_logging_rm)</td>
     </tr>
     <tr>
-      <td>[ibmcloud logging-config-update](#cs_logging_update)</td>
-      <td>[ibmcloud logging-filter-create](#cs_log_filter_create)</td>
-      <td>[ibmcloud logging-filter-update](#cs_log_filter_update)</td>
-      <td>[ibmcloud logging-filter-get](#cs_log_filter_view)</td>
+      <td>[ibmcloud cs logging-config-update](#cs_logging_update)</td>
+      <td>[ibmcloud cs logging-filter-create](#cs_log_filter_create)</td>
+      <td>[ibmcloud cs logging-filter-update](#cs_log_filter_update)</td>
+      <td>[ibmcloud cs logging-filter-get](#cs_log_filter_view)</td>
     </tr>
     <tr>
-      <td>[ibmcloud logging-filter-rm](#cs_log_filter_delete)</td>
+      <td>[ibmcloud cs logging-filter-rm](#cs_log_filter_delete)</td>
       <td></td>
       <td></td>
       <td></td>
@@ -252,10 +252,10 @@ bx plugin list
  </thead>
  <tbody>
   <tr>
-    <td>[ibmcloud locations](#cs_datacenters)</td>
-    <td>[ibmcloud region](#cs_region)</td>
-    <td>[ibmcloud region-set](#cs_region-set)</td>
-    <td>[ibmcloud regions](#cs_regions)</td>
+    <td>[ibmcloud cs locations](#cs_datacenters)</td>
+    <td>[ibmcloud cs region](#cs_region)</td>
+    <td>[ibmcloud cs region-set](#cs_region-set)</td>
+    <td>[ibmcloud cs regions](#cs_regions)</td>
   </tr>
 </tbody>
 </table>
@@ -272,15 +272,15 @@ bx plugin list
  </thead>
  <tbody>
     <tr>
-      <td>[ibmcloud worker-add](#cs_worker_add)</td>
-      <td>[ibmcloud worker-get](#cs_worker_get)</td>
-      <td>[ibmcloud worker-reboot](#cs_worker_reboot)</td>
-      <td>[ibmcloud worker-reload](#cs_worker_reload)</td></staging>
+      <td>[ibmcloud cs worker-add](#cs_worker_add)</td>
+      <td>[ibmcloud cs worker-get](#cs_worker_get)</td>
+      <td>[ibmcloud cs worker-reboot](#cs_worker_reboot)</td>
+      <td>[ibmcloud cs worker-reload](#cs_worker_reload)</td></staging>
     </tr>
     <tr>
-      <td>[ibmcloud worker-rm](#cs_worker_rm)</td>
-      <td>[ibmcloud worker-update](#cs_worker_update)</td>
-      <td>[ibmcloud workers](#cs_workers)</td>
+      <td>[ibmcloud cs worker-rm](#cs_worker_rm)</td>
+      <td>[ibmcloud cs worker-update](#cs_worker_update)</td>
+      <td>[ibmcloud cs workers](#cs_workers)</td>
       <td></td>
     </tr>
   </tbody>
@@ -289,12 +289,12 @@ bx plugin list
 ## API commands
 {: #api_commands}
 
-### ibmcloud api ENDPOINT [--insecure] [--skip-ssl-validation] [--api-version VALUE] [-s]
+### ibmcloud cs api ENDPOINT [--insecure] [--skip-ssl-validation] [--api-version VALUE] [-s]
 {: #cs_api}
 
 Target the API endpoint for {{site.data.keyword.containershort_notm}}. If you do not specify an endpoint, you can view information about the current endpoint that is targeted.
 
-Switching regions? Use the `ibmcloud region-set` [command](#cs_region-set) instead.
+Switching regions? Use the `ibmcloud cs region-set` [command](#cs_region-set) instead.
 {: tip}
 
 <strong>Command options</strong>:
@@ -327,7 +327,7 @@ Switching regions? Use the `ibmcloud region-set` [command](#cs_region-set) inste
 
 **Example**: View information about the current API endpoint that is targeted.
 ```
-ibmcloud api
+ibmcloud cs api
 ```
 {: pre}
 
@@ -340,7 +340,7 @@ Region:                us-south
 {: screen}
 
 
-### ibmcloud api-key-info CLUSTER [--json] [-s]
+### ibmcloud cs api-key-info CLUSTER [--json] [-s]
 {: #cs_api_key_info}
 
 View the name and email address for the owner of the IAM API key in an {{site.data.keyword.containershort_notm}} region.
@@ -349,9 +349,9 @@ The Identity and Access Management (IAM) API key is automatically set for a regi
 
 When a different user performs an action in this region that requires interaction with the IBM Cloud infrastructure (SoftLayer) portfolio, such as creating a new cluster or reloading a worker node, the stored API key is used to determine if sufficient permissions exist to perform that action. To make sure that infrastructure-related actions in your cluster can be successfully performed, assign your {{site.data.keyword.containershort_notm}} admin users the **Super user** infrastructure access policy. For more information, see [Managing user access](cs_users.html#infra_access).
 
-If you find that you need to update the API key that is stored for a region, you can do so by running the [ibmcloud api-key-reset](#cs_api_key_reset) command. This command requires the {{site.data.keyword.containershort_notm}} admin access policy and stores the API key of the user that executes this command in the account.
+If you find that you need to update the API key that is stored for a region, you can do so by running the [ibmcloud cs api-key-reset](#cs_api_key_reset) command. This command requires the {{site.data.keyword.containershort_notm}} admin access policy and stores the API key of the user that executes this command in the account.
 
-**Tip:** The API key that is returned in this command might not be used if IBM Cloud infrastructure (SoftLayer) credentials were manually set by using the [ibmcloud credentials-set](#cs_credentials_set) command.
+**Tip:** The API key that is returned in this command might not be used if IBM Cloud infrastructure (SoftLayer) credentials were manually set by using the [ibmcloud cs credentials-set](#cs_credentials_set) command.
 
 <strong>Command options</strong>:
 
@@ -370,17 +370,17 @@ If you find that you need to update the API key that is stored for a region, you
 **Example**:
 
   ```
-  ibmcloud api-key-info my_cluster
+  ibmcloud cs api-key-info my_cluster
   ```
   {: pre}
 
 
-### ibmcloud api-key-reset [-s]
+### ibmcloud cs api-key-reset [-s]
 {: #cs_api_key_reset}
 
 Replace the current IAM API key in an {{site.data.keyword.containershort_notm}} region.
 
-This command requires the {{site.data.keyword.containershort_notm}} admin access policy and stores the API key of the user that executes this command in the account. The IAM API key is required to order infrastructure from the IBM Cloud infrastructure (SoftLayer) portfolio. Once stored, the API key is used for every action in a region that requires infrastructure permissions independent of the user that executes this command. For more information about how IAM API keys work, see the [`ibmcloud api-key-info` command](#cs_api_key_info).
+This command requires the {{site.data.keyword.containershort_notm}} admin access policy and stores the API key of the user that executes this command in the account. The IAM API key is required to order infrastructure from the IBM Cloud infrastructure (SoftLayer) portfolio. Once stored, the API key is used for every action in a region that requires infrastructure permissions independent of the user that executes this command. For more information about how IAM API keys work, see the [`ibmcloud cs api-key-info` command](#cs_api_key_info).
 
 **Important** Before you use this command, make sure that the user who executes this command has the required [{{site.data.keyword.containershort_notm}} and IBM Cloud infrastructure (SoftLayer) permissions](cs_users.html#users).
 
@@ -395,17 +395,17 @@ This command requires the {{site.data.keyword.containershort_notm}} admin access
 **Example**:
 
   ```
-  ibmcloud api-key-reset
+  ibmcloud cs api-key-reset
   ```
   {: pre}
 
 
-### ibmcloud apiserver-config-get
+### ibmcloud cs apiserver-config-get
 {: #cs_apiserver_config_get}
 
 Get information about an option for a cluster's Kubernetes API server configuration. This command must be combined with one of the following subcommands for the configuration option you want information on.
 
-#### ibmcloud apiserver-config-get audit-webhook CLUSTER
+#### ibmcloud cs apiserver-config-get audit-webhook CLUSTER
 {: #cs_apiserver_api_webhook_get}
 
 View the URL for the remote logging service that you are sending API server audit logs to. The URL was specified when you created the webhook backend for the API server configuration.
@@ -420,16 +420,16 @@ View the URL for the remote logging service that you are sending API server audi
 **Example**:
 
   ```
-  ibmcloud apiserver-config-get audit-webhook my_cluster
+  ibmcloud cs apiserver-config-get audit-webhook my_cluster
   ```
   {: pre}
 
-### ibmcloud apiserver-config-set
+### ibmcloud cs apiserver-config-set
 {: #cs_apiserver_config_set}
 
 Set an option for a cluster's Kubernetes API server configuration. This command must be combined with one of the following subcommands for the configuration option you want to set.
 
-#### ibmcloud apiserver-config-set audit-webhook CLUSTER [--remoteServer SERVER_URL_OR_IP] [--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH] [--clientKey CLIENT_KEY_PATH]
+#### ibmcloud cs apiserver-config-set audit-webhook CLUSTER [--remoteServer SERVER_URL_OR_IP] [--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH] [--clientKey CLIENT_KEY_PATH]
 {: #cs_apiserver_api_webhook_set}
 
 Set the webhook backend for the API server configuration. The webhook backend forwards API server audit logs to a remote server. A webhook configuration is created based on the information you provide in this command's flags. If you do not provide any information in the flags, a default webhook configuration is used.
@@ -456,17 +456,17 @@ Set the webhook backend for the API server configuration. The webhook backend fo
 **Example**:
 
   ```
-  ibmcloud apiserver-config-set audit-webhook my_cluster --remoteServer https://audit.example.com/audit --caCert /mnt/etc/kubernetes/apiserver-audit/ca.pem --clientCert /mnt/etc/kubernetes/apiserver-audit/cert.pem --clientKey /mnt/etc/kubernetes/apiserver-audit/key.pem
+  ibmcloud cs apiserver-config-set audit-webhook my_cluster --remoteServer https://audit.example.com/audit --caCert /mnt/etc/kubernetes/apiserver-audit/ca.pem --clientCert /mnt/etc/kubernetes/apiserver-audit/cert.pem --clientKey /mnt/etc/kubernetes/apiserver-audit/key.pem
   ```
   {: pre}
 
 
-### ibmcloud apiserver-config-unset
+### ibmcloud cs apiserver-config-unset
 {: #cs_apiserver_config_unset}
 
 Disable an option for a cluster's Kubernetes API server configuration. This command must be combined with one of the following subcommands for the configuration option you want to unset.
 
-#### ibmcloud apiserver-config-unset audit-webhook CLUSTER
+#### ibmcloud cs apiserver-config-unset audit-webhook CLUSTER
 {: #cs_apiserver_api_webhook_unset}
 
 Disable the webhook backend configuration for the cluster's API server. Diabling the webhook backend stops forwarding API server audit logs to a remote server.
@@ -481,11 +481,11 @@ Disable the webhook backend configuration for the cluster's API server. Diabling
 **Example**:
 
   ```
-  ibmcloud apiserver-config-unset audit-webhook my_cluster
+  ibmcloud cs apiserver-config-unset audit-webhook my_cluster
   ```
   {: pre}
 
-### ibmcloud apiserver-refresh CLUSTER [-s]
+### ibmcloud cs apiserver-refresh CLUSTER [-s]
 {: #cs_apiserver_refresh}
 
 Restart the Kubernetes master in the cluster to apply changes to the API server configuration.
@@ -504,7 +504,7 @@ Restart the Kubernetes master in the cluster to apply changes to the API server 
 **Example**:
 
   ```
-  ibmcloud apiserver-refresh my_cluster
+  ibmcloud cs apiserver-refresh my_cluster
   ```
   {: pre}
 
@@ -515,7 +515,7 @@ Restart the Kubernetes master in the cluster to apply changes to the API server 
 ## CLI plug-in usage commands
 {: #cli_plug-in_commands}
 
-### ibmcloud help
+### ibmcloud cs help
 {: #cs_help}
 
 View a list of supported commands and parameters.
@@ -527,12 +527,12 @@ View a list of supported commands and parameters.
 **Example**:
 
   ```
-  ibmcloud help
+  ibmcloud cs help
   ```
   {: pre}
 
 
-### ibmcloud init [--host HOST] [--insecure] [-p] [-u] [-s]
+### ibmcloud cs init [--host HOST] [--insecure] [-p] [-u] [-s]
 {: #cs_init}
 
 Initialize the {{site.data.keyword.containershort_notm}} plug-in or specify the region where you want to create or access Kubernetes clusters.
@@ -561,12 +561,12 @@ Initialize the {{site.data.keyword.containershort_notm}} plug-in or specify the 
 
 
 ```
-ibmcloud init --host https://uk-south.containers.bluemix.net
+ibmcloud cs init --host https://uk-south.containers.bluemix.net
 ```
 {: pre}
 
 
-### ibmcloud messages
+### ibmcloud cs messages
 {: #cs_messages}
 
 View current messages for the IBMid user.
@@ -574,7 +574,7 @@ View current messages for the IBMid user.
 **Example**:
 
 ```
-ibmcloud messages
+ibmcloud cs messages
 ```
 {: pre}
 
@@ -586,7 +586,7 @@ ibmcloud messages
 {: #cluster_mgmt_commands}
 
 
-### ibmcloud cluster-config CLUSTER [--admin] [--export] [-s] [--yaml]
+### ibmcloud cs cluster-config CLUSTER [--admin] [--export] [-s] [--yaml]
 {: #cs_cluster_config}
 
 After logging in, download Kubernetes configuration data and certificates to connect to your cluster and run `kubectl` commands. The files are downloaded to `user_home_directory/.bluemix/plugins/container-service/clusters/<cluster_name>`.
@@ -614,12 +614,12 @@ After logging in, download Kubernetes configuration data and certificates to con
 **Example**:
 
 ```
-ibmcloud cluster-config my_cluster
+ibmcloud cs cluster-config my_cluster
 ```
 {: pre}
 
 
-### ibmcloud cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
+### ibmcloud cs cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
 {: #cs_cluster_create}
 
 Create a cluster in your organization. For free clusters, you specify the cluster name; everything else is set to a default value. A free cluster is automatically deleted after 21 days. You can have one free cluster at a time. To take advantage of the full capabilities of Kubernetes, create a standard cluster.
@@ -661,7 +661,7 @@ trusted: <em>true</em>
     </tr>
     <tr>
     <td><code><em>location</em></code></td>
-    <td>Replace <code><em>&lt;location&gt;</em></code> with the location where you want to create your cluster. The available locations are dependent on the region that you are logged in. To list available locations, run <code>ibmcloud locations</code>. </td>
+    <td>Replace <code><em>&lt;location&gt;</em></code> with the location where you want to create your cluster. The available locations are dependent on the region that you are logged in. To list available locations, run <code>ibmcloud cs locations</code>. </td>
      </tr>
      <tr>
      <td><code><em>no-subnet</em></code></td>
@@ -669,15 +669,15 @@ trusted: <em>true</em>
       </tr>
      <tr>
      <td><code><em>machine-type</em></code></td>
-     <td>Replace <code><em>&lt;machine_type&gt;</em></code> with the type of machine that you want to deploy your worker nodes to. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the location in which you deploy the cluster. For more information, see the documentation for the `ibmcloud machine-type` [command](cs_cli_reference.html#cs_machine_types).</td>
+     <td>Replace <code><em>&lt;machine_type&gt;</em></code> with the type of machine that you want to deploy your worker nodes to. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the location in which you deploy the cluster. For more information, see the documentation for the `ibmcloud cs machine-type` [command](cs_cli_reference.html#cs_machine_types).</td>
      </tr>
      <tr>
      <td><code><em>private-vlan</em></code></td>
-     <td>Replace <code><em>&lt;private_VLAN&gt;</em></code> with the ID of the private VLAN that you want to use for your worker nodes. To list available VLANs, run <code>ibmcloud vlans <em>&lt;location&gt;</em></code> and look for VLAN routers that start with <code>bcr</code> (back-end router).</td>
+     <td>Replace <code><em>&lt;private_VLAN&gt;</em></code> with the ID of the private VLAN that you want to use for your worker nodes. To list available VLANs, run <code>ibmcloud cs vlans <em>&lt;location&gt;</em></code> and look for VLAN routers that start with <code>bcr</code> (back-end router).</td>
      </tr>
      <tr>
      <td><code><em>public-vlan</em></code></td>
-     <td>Replace <code><em>&lt;public_VLAN&gt;</em></code> with the ID of the public VLAN that you want to use for your worker nodes. To list available VLANs, run <code>ibmcloud vlans <em>&lt;location&gt;</em></code> and look for VLAN routers that start with <code>fcr</code> (front-end router).</td>
+     <td>Replace <code><em>&lt;public_VLAN&gt;</em></code> with the ID of the public VLAN that you want to use for your worker nodes. To list available VLANs, run <code>ibmcloud cs vlans <em>&lt;location&gt;</em></code> and look for VLAN routers that start with <code>fcr</code> (front-end router).</td>
      </tr>
      <tr>
      <td><code><em>hardware</em></code></td>
@@ -689,14 +689,14 @@ trusted: <em>true</em>
      </tr>
      <tr>
       <td><code><em>kube-version</em></code></td>
-      <td>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default of supported Kubernetes versions. To see available versions, run <code>ibmcloud kube-versions</code>.
+      <td>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default of supported Kubernetes versions. To see available versions, run <code>ibmcloud cs kube-versions</code>.
 </td></tr>
       <tr>
       <td><code>diskEncryption: <em>false</em></code></td>
       <td>Worker nodes feature disk encryption by default; [learn more](cs_secure.html#worker). To disable encryption, include this option and set the value to <code>false</code>.</td></tr>
       <tr>
       <td><code>trusted: <em>true</em></code></td>
-      <td>**Bare metal only**: Enable [Trusted Compute](cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</td></tr>
+      <td>**Bare metal only**: Enable [Trusted Compute](cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</td></tr>
      </tbody></table>
     </p></dd>
 
@@ -713,14 +713,14 @@ trusted: <em>true</em>
 </dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the location in which you deploy the cluster. For more information, see the documentation for the `ibmcloud machine-types` [command](cs_cli_reference.html#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
+<dd>Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the location in which you deploy the cluster. For more information, see the documentation for the `ibmcloud cs machine-types` [command](cs_cli_reference.html#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
 <dd>The name for the cluster.  This value is required. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Note that the cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 </dd>
 
 <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
-<dd>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default of supported Kubernetes versions. To see available versions, run <code>ibmcloud kube-versions</code>.
+<dd>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default of supported Kubernetes versions. To see available versions, run <code>ibmcloud cs kube-versions</code>.
 </dd>
 
 <dt><code>--no-subnet</code></dt>
@@ -737,7 +737,7 @@ trusted: <em>true</em>
 <p><strong>Note:</strong> Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</p></li>
 </ul>
 
-<p>To find out if you already have a private VLAN for a specific location or to find the name of an existing private VLAN, run <code>ibmcloud vlans <em>&lt;location&gt;</em></code>.</p></dd>
+<p>To find out if you already have a private VLAN for a specific location or to find the name of an existing private VLAN, run <code>ibmcloud cs vlans <em>&lt;location&gt;</em></code>.</p></dd>
 
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
 <dd>
@@ -749,7 +749,7 @@ trusted: <em>true</em>
 <p><strong>Note:</strong> Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</p></li>
 </ul>
 
-<p>To find out if you already have a public VLAN for a specific location or to find the name of an existing public VLAN, run <code>ibmcloud vlans <em>&lt;location&gt;</em></code>.</p></dd>
+<p>To find out if you already have a public VLAN for a specific location or to find the name of an existing public VLAN, run <code>ibmcloud cs vlans <em>&lt;location&gt;</em></code>.</p></dd>
 
 <dt><code>--workers WORKER</code></dt>
 <dd>The number of worker nodes that you want to deploy in your cluster. If you do not specify this option, a cluster with 1 worker node is created. This value is optional for standard clusters and is not available for free clusters.
@@ -760,8 +760,8 @@ trusted: <em>true</em>
 <dd>Worker nodes feature disk encryption by default; [learn more](cs_secure.html#worker). To disable encryption, include this option.</dd>
 
 <dt><code>--trusted</code></dt>
-<dd><p>**Bare metal only**: Enable [Trusted Compute](cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</p>
-<p>To check whether the bare metal machine type supports trust, check the `Trustable` field in the output of the `ibmcloud machine-types <location>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ibmcloud cluster-get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ibmcloud worker-get` [command](#cs_worker_get).</p></dd>
+<dd><p>**Bare metal only**: Enable [Trusted Compute](cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</p>
+<p>To check whether the bare metal machine type supports trust, check the `Trustable` field in the output of the `ibmcloud cs machine-types <location>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ibmcloud cs cluster-get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ibmcloud cs worker-get` [command](#cs_worker_get).</p></dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -775,25 +775,25 @@ trusted: <em>true</em>
   {: #example_cluster_create}
 
   ```
-  ibmcloud cluster-create --location dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type u2c.2x4 --name my_cluster --hardware shared --workers 2
+  ibmcloud cs cluster-create --location dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type u2c.2x4 --name my_cluster --hardware shared --workers 2
   ```
   {: pre}
 
   Example for a free cluster:
 
   ```
-  ibmcloud cluster-create --name my_cluster
+  ibmcloud cs cluster-create --name my_cluster
   ```
   {: pre}
 
   Example for an {{site.data.keyword.Bluemix_dedicated_notm}} environment:
 
   ```
-  ibmcloud cluster-create --machine-type machine-type --workers number --name cluster_name
+  ibmcloud cs cluster-create --machine-type machine-type --workers number --name cluster_name
   ```
   {: pre}
 
-### ibmcloud cluster-feature-enable [-f] CLUSTER [--trusted] [-s]
+### ibmcloud cs cluster-feature-enable [-f] CLUSTER [--trusted] [-s]
 {: #cs_cluster_feature_enable}
 
 Enable a feature on an existing cluster.
@@ -809,7 +809,7 @@ Enable a feature on an existing cluster.
 
    <dt><code><em>--trusted</em></code></dt>
    <dd><p>Include the flag to enable [Trusted Compute](cs_secure.html#trusted_compute) for all supported bare metal worker nodes that are in the cluster. After you enable trust, you cannot later disable it for the cluster.</p>
-   <p>To check whether the bare metal machine type supports trust, check the **Trustable** field in the output of the `ibmcloud machine-types <location>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ibmcloud cluster-get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ibmcloud worker-get` [command](#cs_worker_get).</p></dd>
+   <p>To check whether the bare metal machine type supports trust, check the **Trustable** field in the output of the `ibmcloud cs machine-types <location>` [command](#cs_machine_types). To verify that a cluster is trust-enabled, view the **Trust ready** field in the output of the `ibmcloud cs cluster-get` [command](#cs_cluster_get). To verify a bare metal worker node is trust-enabled, view the **Trust** field in the output of the `ibmcloud cs worker-get` [command](#cs_worker_get).</p></dd>
 
   <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -818,11 +818,11 @@ Enable a feature on an existing cluster.
 **Example command**:
 
   ```
-  ibmcloud cluster-feature-enable my_cluster --trusted=true
+  ibmcloud cs cluster-feature-enable my_cluster --trusted=true
   ```
   {: pre}
 
-### ibmcloud cluster-get CLUSTER [--json] [--showResources] [-s]
+### ibmcloud cs cluster-get CLUSTER [--json] [--showResources] [-s]
 {: #cs_cluster_get}
 
 View information about a cluster in your organization.
@@ -849,7 +849,7 @@ View information about a cluster in your organization.
 **Example command**:
 
   ```
-  ibmcloud cluster-get my_cluster --showResources
+  ibmcloud cs cluster-get my_cluster --showResources
   ```
   {: pre}
 
@@ -884,7 +884,7 @@ View information about a cluster in your organization.
   ```
   {: screen}
 
-### ibmcloud cluster-rm [-f] CLUSTER [-s]
+### ibmcloud cs cluster-rm [-f] CLUSTER [-s]
 {: #cs_cluster_rm}
 
 Remove a cluster from your organization.
@@ -906,12 +906,12 @@ Remove a cluster from your organization.
 **Example**:
 
   ```
-  ibmcloud cluster-rm my_cluster
+  ibmcloud cs cluster-rm my_cluster
   ```
   {: pre}
 
 
-### ibmcloud cluster-update [-f] CLUSTER [--kube-version MAJOR.MINOR.PATCH] [--force-update] [-s]
+### ibmcloud cs cluster-update [-f] CLUSTER [--kube-version MAJOR.MINOR.PATCH] [--force-update] [-s]
 {: #cs_cluster_update}
 
 Update the Kubernetes master to the default API version. During the update, you cannot access or change the cluster. Worker nodes, apps, and resources that were deployed by the user are not modified and continue to run.
@@ -925,7 +925,7 @@ You might need to change your YAML files for future deployments. Review this [re
    <dd>The name or ID of the cluster. This value is required.</dd>
 
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
-   <dd>The Kubernetes version of the cluster. If you do not specify a version, the Kubernetes master is updated to the default API version. To see available versions, run [ibmcloud kube-versions](#cs_kube_versions). This value is optional.</dd>
+   <dd>The Kubernetes version of the cluster. If you do not specify a version, the Kubernetes master is updated to the default API version. To see available versions, run [ibmcloud cs kube-versions](#cs_kube_versions). This value is optional.</dd>
 
    <dt><code>-f</code></dt>
    <dd>Use this option to force the update of the master with no user prompts. This value is optional.</dd>
@@ -940,12 +940,12 @@ You might need to change your YAML files for future deployments. Review this [re
 **Example**:
 
   ```
-  ibmcloud cluster-update my_cluster
+  ibmcloud cs cluster-update my_cluster
   ```
   {: pre}
 
 
-### ibmcloud clusters [--json] [-s]
+### ibmcloud cs clusters [--json] [-s]
 {: #cs_clusters}
 
 View a list of clusters in your organization.
@@ -963,12 +963,12 @@ View a list of clusters in your organization.
 **Example**:
 
   ```
-  ibmcloud clusters
+  ibmcloud cs clusters
   ```
   {: pre}
 
 
-### ibmcloud kube-versions [--json] [-s]
+### ibmcloud cs kube-versions [--json] [-s]
 {: #cs_kube_versions}
 
 View a list of Kubernetes versions supported in {{site.data.keyword.containershort_notm}}. Update your [cluster master](#cs_cluster_update) and [worker nodes](cs_cli_reference.html#cs_worker_update) to the default version for the latest, stable capabilities.
@@ -986,7 +986,7 @@ View a list of Kubernetes versions supported in {{site.data.keyword.containersho
 **Example**:
 
   ```
-  ibmcloud kube-versions
+  ibmcloud cs kube-versions
   ```
   {: pre}
 
@@ -1000,7 +1000,7 @@ View a list of Kubernetes versions supported in {{site.data.keyword.containersho
 {: #cluster_services_commands}
 
 
-### ibmcloud cluster-service-bind CLUSTER KUBERNETES_NAMESPACE SERVICE_INSTANCE_NAME [-s]
+### ibmcloud cs cluster-service-bind CLUSTER KUBERNETES_NAMESPACE SERVICE_INSTANCE_NAME [-s]
 {: #cs_cluster_service_bind}
 
 Add an {{site.data.keyword.Bluemix_notm}} service to a cluster. To view available {{site.data.keyword.Bluemix_notm}} services from the {{site.data.keyword.Bluemix_notm}} catalog, run `bx service offerings`. **Note**: You can only add {{site.data.keyword.Bluemix_notm}} services that support service keys.
@@ -1025,12 +1025,12 @@ Add an {{site.data.keyword.Bluemix_notm}} service to a cluster. To view availabl
 **Example**:
 
   ```
-  ibmcloud cluster-service-bind my_cluster my_namespace my_service_instance
+  ibmcloud cs cluster-service-bind my_cluster my_namespace my_service_instance
   ```
   {: pre}
 
 
-### ibmcloud cluster-service-unbind CLUSTER KUBERNETES_NAMESPACE SERVICE_INSTANCE_GUID [-s]
+### ibmcloud cs cluster-service-unbind CLUSTER KUBERNETES_NAMESPACE SERVICE_INSTANCE_GUID [-s]
 {: #cs_cluster_service_unbind}
 
 Remove an {{site.data.keyword.Bluemix_notm}} service from a cluster.
@@ -1047,7 +1047,7 @@ Remove an {{site.data.keyword.Bluemix_notm}} service from a cluster.
    <dd>The name of the Kubernetes namespace. This value is required.</dd>
 
    <dt><code><em>SERVICE_INSTANCE_GUID</em></code></dt>
-   <dd>The ID of the {{site.data.keyword.Bluemix_notm}} service instance that you want to remove. To find the ID of the service instance, run `ibmcloud cluster-services <cluster_name_or_ID>`.This value is required.</dd>
+   <dd>The ID of the {{site.data.keyword.Bluemix_notm}} service instance that you want to remove. To find the ID of the service instance, run `ibmcloud cs cluster-services <cluster_name_or_ID>`.This value is required.</dd>
 
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -1057,12 +1057,12 @@ Remove an {{site.data.keyword.Bluemix_notm}} service from a cluster.
 **Example**:
 
   ```
-  ibmcloud cluster-service-unbind my_cluster my_namespace 8567221
+  ibmcloud cs cluster-service-unbind my_cluster my_namespace 8567221
   ```
   {: pre}
 
 
-### ibmcloud cluster-services CLUSTER [--namespace KUBERNETES_NAMESPACE] [--all-namespaces] [--json] [-s]
+### ibmcloud cs cluster-services CLUSTER [--namespace KUBERNETES_NAMESPACE] [--all-namespaces] [--json] [-s]
 {: #cs_cluster_services}
 
 List the services that are bound to one or all of the Kubernetes namespace in a cluster. If no options are specified, the services for the default namespace are displayed.
@@ -1090,13 +1090,13 @@ List the services that are bound to one or all of the Kubernetes namespace in a 
 **Example**:
 
   ```
-  ibmcloud cluster-services my_cluster --namespace my_namespace
+  ibmcloud cs cluster-services my_cluster --namespace my_namespace
   ```
   {: pre}
 
 
 
-### ibmcloud webhook-create --cluster CLUSTER --level LEVEL --type slack --url URL  [-s]
+### ibmcloud cs webhook-create --cluster CLUSTER --level LEVEL --type slack --url URL  [-s]
 {: #cs_webhook_create}
 
 Register a webhook.
@@ -1123,7 +1123,7 @@ Register a webhook.
 **Example**:
 
   ```
-  ibmcloud webhook-create --cluster my_cluster --level Normal --type slack --url http://github.com/mywebhook
+  ibmcloud cs webhook-create --cluster my_cluster --level Normal --type slack --url http://github.com/mywebhook
   ```
   {: pre}
 
@@ -1134,7 +1134,7 @@ Register a webhook.
 ## Cluster commands: Subnets
 {: #cluster_subnets_commands}
 
-### ibmcloud cluster-subnet-add CLUSTER SUBNET [-s]
+### ibmcloud cs cluster-subnet-add CLUSTER SUBNET [-s]
 {: #cs_cluster_subnet_add}
 
 Make a subnet in an IBM Cloud infrastructure (SoftLayer) account available to a specified cluster.
@@ -1160,12 +1160,12 @@ Make a subnet in an IBM Cloud infrastructure (SoftLayer) account available to a 
 **Example**:
 
   ```
-  ibmcloud cluster-subnet-add my_cluster 1643389
+  ibmcloud cs cluster-subnet-add my_cluster 1643389
   ```
   {: pre}
 
 
-### ibmcloud cluster-subnet-create CLUSTER SIZE VLAN_ID [-s]
+### ibmcloud cs cluster-subnet-create CLUSTER SIZE VLAN_ID [-s]
 {: #cs_cluster_subnet_create}
 
 Create a subnet in an IBM Cloud infrastructure (SoftLayer) account and make it available to a specified cluster in {{site.data.keyword.containershort_notm}}.
@@ -1178,13 +1178,13 @@ Create a subnet in an IBM Cloud infrastructure (SoftLayer) account and make it a
 
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
-   <dd>The name or ID of the cluster. This value is required. To list your clusters, use the `ibmcloud clusters` [command](#cs_clusters).</dd>
+   <dd>The name or ID of the cluster. This value is required. To list your clusters, use the `ibmcloud cs clusters` [command](#cs_clusters).</dd>
 
    <dt><code><em>SIZE</em></code></dt>
    <dd>The number of subnet IP addresses. This value is required. Possible values are 8, 16, 32, or 64.</dd>
 
    <dt><code><em>VLAN_ID</em></code></dt>
-   <dd>The VLAN in which to create the subnet. This value is required. To list available VLANS, use the `ibmcloud vlans <location>` [command](#cs_vlans). </dd>
+   <dd>The VLAN in which to create the subnet. This value is required. To list available VLANS, use the `ibmcloud cs vlans <location>` [command](#cs_vlans). </dd>
 
    <dt><code>-s</code></dt>
    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -1194,17 +1194,17 @@ Create a subnet in an IBM Cloud infrastructure (SoftLayer) account and make it a
 **Example**:
 
   ```
-  ibmcloud cluster-subnet-create my_cluster 8 1764905
+  ibmcloud cs cluster-subnet-create my_cluster 8 1764905
   ```
   {: pre}
 
 
-### ibmcloud cluster-user-subnet-add CLUSTER SUBNET_CIDR PRIVATE_VLAN
+### ibmcloud cs cluster-user-subnet-add CLUSTER SUBNET_CIDR PRIVATE_VLAN
 {: #cs_cluster_user_subnet_add}
 
 Bring your own private subnet to your {{site.data.keyword.containershort_notm}} clusters.
 
-This private subnet is not one provided by IBM Cloud infrastructure (SoftLayer). As such, you must configure any inbound and outbound network traffic routing for the subnet. To add an IBM Cloud infrastructure (SoftLayer) subnet, use the `ibmcloud cluster-subnet-add` [command](#cs_cluster_subnet_add).
+This private subnet is not one provided by IBM Cloud infrastructure (SoftLayer). As such, you must configure any inbound and outbound network traffic routing for the subnet. To add an IBM Cloud infrastructure (SoftLayer) subnet, use the `ibmcloud cs cluster-subnet-add` [command](#cs_cluster_subnet_add).
 
 **Note**:
 * When you add a private user subnet to a cluster, IP addresses of this subnet are used for private Load Balancers in the cluster. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containershort_notm}} at the same time.
@@ -1228,12 +1228,12 @@ This private subnet is not one provided by IBM Cloud infrastructure (SoftLayer).
 **Example**:
 
   ```
-  ibmcloud cluster-user-subnet-add my_cluster 169.xx.xxx.xxx/29 1502175
+  ibmcloud cs cluster-user-subnet-add my_cluster 169.xx.xxx.xxx/29 1502175
   ```
   {: pre}
 
 
-### ibmcloud cluster-user-subnet-rm CLUSTER SUBNET_CIDR PRIVATE_VLAN
+### ibmcloud cs cluster-user-subnet-rm CLUSTER SUBNET_CIDR PRIVATE_VLAN
 {: #cs_cluster_user_subnet_rm}
 
 Remove your own private subnet from a specified cluster.
@@ -1247,20 +1247,20 @@ Remove your own private subnet from a specified cluster.
    <dd>The name or ID of the cluster. This value is required.</dd>
 
    <dt><code><em>SUBNET_CIDR</em></code></dt>
-   <dd>The subnet Classless InterDomain Routing (CIDR). This value is required, and must match the CIDR that was set by the `ibmcloud cluster-user-subnet-add` [command](#cs_cluster_user_subnet_add).</dd>
+   <dd>The subnet Classless InterDomain Routing (CIDR). This value is required, and must match the CIDR that was set by the `ibmcloud cs cluster-user-subnet-add` [command](#cs_cluster_user_subnet_add).</dd>
 
    <dt><code><em>PRIVATE_VLAN</em></code></dt>
-   <dd>The ID of the private VLAN. This value is required, and must match the VLAN ID that was set by the `ibmcloud cluster-user-subnet-add` [command](#cs_cluster_user_subnet_add).</dd>
+   <dd>The ID of the private VLAN. This value is required, and must match the VLAN ID that was set by the `ibmcloud cs cluster-user-subnet-add` [command](#cs_cluster_user_subnet_add).</dd>
    </dl>
 
 **Example**:
 
   ```
-  ibmcloud cluster-user-subnet-rm my_cluster 169.xx.xxx.xxx/29 1502175
+  ibmcloud cs cluster-user-subnet-rm my_cluster 169.xx.xxx.xxx/29 1502175
   ```
   {: pre}
 
-### ibmcloud subnets [--json] [-s]
+### ibmcloud cs subnets [--json] [-s]
 {: #cs_subnets}
 
 View a list of subnets that are available in an IBM Cloud infrastructure (SoftLayer) account.
@@ -1278,7 +1278,7 @@ View a list of subnets that are available in an IBM Cloud infrastructure (SoftLa
 **Example**:
 
   ```
-  ibmcloud subnets
+  ibmcloud cs subnets
   ```
   {: pre}
 
@@ -1289,7 +1289,7 @@ View a list of subnets that are available in an IBM Cloud infrastructure (SoftLa
 ## Ingress application load balancer (ALB) commands
 {: #alb_commands}
 
-### ibmcloud alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NAME --cert-crn CERTIFICATE_CRN [-s]
+### ibmcloud cs alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NAME --cert-crn CERTIFICATE_CRN [-s]
 {: #cs_alb_cert_deploy}
 
 Deploy or update a certificate from your {{site.data.keyword.cloudcerts_long_notm}} instance to the ALB in a cluster.
@@ -1322,19 +1322,19 @@ Deploy or update a certificate from your {{site.data.keyword.cloudcerts_long_not
 Example for deploying an ALB secret:
 
    ```
-   ibmcloud alb-cert-deploy --secret-name my_alb_secret --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
+   ibmcloud cs alb-cert-deploy --secret-name my_alb_secret --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
    ```
    {: pre}
 
 Example for updating an existing ALB secret:
 
  ```
- ibmcloud alb-cert-deploy --update --secret-name my_alb_secret --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:7e21fde8ee84a96d29240327daee3eb2
+ ibmcloud cs alb-cert-deploy --update --secret-name my_alb_secret --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:7e21fde8ee84a96d29240327daee3eb2
  ```
  {: pre}
 
 
-### ibmcloud alb-cert-get --cluster CLUSTER [--secret-name SECRET_NAME] [--cert-crn CERTIFICATE_CRN] [--json] [-s]
+### ibmcloud cs alb-cert-get --cluster CLUSTER [--secret-name SECRET_NAME] [--cert-crn CERTIFICATE_CRN] [--json] [-s]
 {: #cs_alb_cert_get}
 
 View information about an ALB secret in a cluster.
@@ -1365,19 +1365,19 @@ View information about an ALB secret in a cluster.
  Example for fetching information on an ALB secret:
 
  ```
- ibmcloud alb-cert-get --cluster my_cluster --secret-name my_alb_secret
+ ibmcloud cs alb-cert-get --cluster my_cluster --secret-name my_alb_secret
  ```
  {: pre}
 
  Example for fetching information on all ALB secrets that match a specified certificate CRN:
 
  ```
- ibmcloud alb-cert-get --cluster my_cluster --cert-crn  crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
+ ibmcloud cs alb-cert-get --cluster my_cluster --cert-crn  crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
  ```
  {: pre}
 
 
-### ibmcloud alb-cert-rm --cluster CLUSTER [--secret-name SECRET_NAME] [--cert-crn CERTIFICATE_CRN] [-s]
+### ibmcloud cs alb-cert-rm --cluster CLUSTER [--secret-name SECRET_NAME] [--cert-crn CERTIFICATE_CRN] [-s]
 {: #cs_alb_cert_rm}
 
 Remove an ALB secret in a cluster.
@@ -1406,19 +1406,19 @@ Remove an ALB secret in a cluster.
  Example for removing an ALB secret:
 
  ```
- ibmcloud alb-cert-rm --cluster my_cluster --secret-name my_alb_secret
+ ibmcloud cs alb-cert-rm --cluster my_cluster --secret-name my_alb_secret
  ```
  {: pre}
 
  Example for removing all ALB secrets that match a specified certificate CRN:
 
  ```
- ibmcloud alb-cert-rm --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
+ ibmcloud cs alb-cert-rm --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
  ```
  {: pre}
 
 
-### ibmcloud alb-certs --cluster CLUSTER [--json] [-s]
+### ibmcloud cs alb-certs --cluster CLUSTER [--json] [-s]
 {: #cs_alb_certs}
 
 View a list of ALB secrets in a cluster.
@@ -1439,11 +1439,11 @@ View a list of ALB secrets in a cluster.
 **Example**:
 
  ```
- ibmcloud alb-certs --cluster my_cluster
+ ibmcloud cs alb-certs --cluster my_cluster
  ```
  {: pre}
 
-### ibmcloud alb-configure --albID ALB_ID [--enable][--disable][--user-ip USERIP] [-s]
+### ibmcloud cs alb-configure --albID ALB_ID [--enable][--disable][--user-ip USERIP] [-s]
 {: #cs_alb_configure}
 
 Enable or disable an ALB in your standard cluster. The public ALB is enabled by default.
@@ -1452,7 +1452,7 @@ Enable or disable an ALB in your standard cluster. The public ALB is enabled by 
 
    <dl>
    <dt><code><em>--albID </em>ALB_ID</code></dt>
-   <dd>The ID for an ALB. Run <code>ibmcloud albs <em>--cluster </em>CLUSTER</code> to view the IDs for the ALBs in a cluster. This value is required.</dd>
+   <dd>The ID for an ALB. Run <code>ibmcloud cs albs <em>--cluster </em>CLUSTER</code> to view the IDs for the ALBs in a cluster. This value is required.</dd>
 
    <dt><code>--enable</code></dt>
    <dd>Include this flag to enable an ALB in a cluster.</dd>
@@ -1479,25 +1479,25 @@ Enable or disable an ALB in your standard cluster. The public ALB is enabled by 
   Example for enabling an ALB:
 
   ```
-  ibmcloud alb-configure --albID private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --enable
+  ibmcloud cs alb-configure --albID private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --enable
   ```
   {: pre}
 
   Example for enabling an ALB with a user-provided IP address:
 
   ```
-  ibmcloud alb-configure --albID private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --enable --user-ip user_ip
+  ibmcloud cs alb-configure --albID private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --enable --user-ip user_ip
   ```
   {: pre}
 
   Example for disabling an ALB:
 
   ```
-  ibmcloud alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
+  ibmcloud cs alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
   ```
   {: pre}
 
-### ibmcloud alb-get --albID ALB_ID [--json] [-s]
+### ibmcloud cs alb-get --albID ALB_ID [--json] [-s]
 {: #cs_alb_get}
 
 View the details of an ALB.
@@ -1506,7 +1506,7 @@ View the details of an ALB.
 
    <dl>
    <dt><code><em>--albID </em>ALB_ID</code></dt>
-   <dd>The ID for an ALB. Run <code>ibmcloud albs --cluster <em>CLUSTER</em></code> to view the IDs for the ALBs in a cluster. This value is required.</dd>
+   <dd>The ID for an ALB. Run <code>ibmcloud cs albs --cluster <em>CLUSTER</em></code> to view the IDs for the ALBs in a cluster. This value is required.</dd>
 
    <dt><code>--json</code></dt>
    <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -1519,11 +1519,11 @@ View the details of an ALB.
 **Example**:
 
   ```
-  ibmcloud alb-get --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1
+  ibmcloud cs alb-get --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1
   ```
   {: pre}
 
-### ibmcloud alb-types [--json] [-s]
+### ibmcloud cs alb-types [--json] [-s]
 {: #cs_alb_types}
 
 View the ALB types that are supported in the region.
@@ -1541,12 +1541,12 @@ View the ALB types that are supported in the region.
 **Example**:
 
   ```
-  ibmcloud alb-types
+  ibmcloud cs alb-types
   ```
   {: pre}
 
 
-### ibmcloud albs --cluster CLUSTER [--json] [-s]
+### ibmcloud cs albs --cluster CLUSTER [--json] [-s]
 {: #cs_albs}
 
 View the status of all ALBs in a cluster. If no ALB IDs are returned, then the cluster does not have a portable subnet. You can [create](#cs_cluster_subnet_create) or [add](#cs_cluster_subnet_add) subnets to a cluster.
@@ -1568,7 +1568,7 @@ View the status of all ALBs in a cluster. If no ALB IDs are returned, then the c
 **Example**:
 
   ```
-  ibmcloud albs --cluster my_cluster
+  ibmcloud cs albs --cluster my_cluster
   ```
   {: pre}
 
@@ -1579,7 +1579,7 @@ View the status of all ALBs in a cluster. If no ALB IDs are returned, then the c
 ## Infrastructure commands
 {: #infrastructure_commands}
 
-### ibmcloud credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
+### ibmcloud cs credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME [-s]
 {: #cs_credentials_set}
 
 Set IBM Cloud infrastructure (SoftLayer) account credentials for your {{site.data.keyword.containershort_notm}} account.
@@ -1629,12 +1629,12 @@ You cannot set multiple credentials for one {{site.data.keyword.containershort_n
 **Example**:
 
   ```
-  ibmcloud credentials-set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
+  ibmcloud cs credentials-set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
   ```
   {: pre}
 
 
-### ibmcloud credentials-unset
+### ibmcloud cs credentials-unset
 {: #cs_credentials_unset}
 
 Remove IBM Cloud infrastructure (SoftLayer) account credentials from your {{site.data.keyword.containershort_notm}} account.
@@ -1651,12 +1651,12 @@ After you remove the credentials, the [IAM API key](#cs_api_key_info) is used to
 **Example**:
 
   ```
-  ibmcloud credentials-unset
+  ibmcloud cs credentials-unset
   ```
   {: pre}
 
 
-### ibmcloud machine-types LOCATION [--json] [-s]
+### ibmcloud cs machine-types LOCATION [--json] [-s]
 {: #cs_machine_types}
 
 View a list of available machine types for your worker nodes. Machine types vary by location. Each machine type includes the amount of virtual CPU, memory, and disk space for each worker node in the cluster. By default, the `/var/lib/docker` directory, where all container data is stored, is encrypted with LUKS encryption. If the `disable-disk-encrypt` option is included during cluster creation, then the host's Docker data is not encrypted. [Learn more about the encryption.](cs_secure.html#encrypted_disks)
@@ -1668,8 +1668,8 @@ You can provision your worker node as a virtual machine on shared or dedicated h
 <dt>Physical machines (bare metal)</dt>
 <dd>You can provision your worker node as a single-tenant physical server, also referred to as bare metal. Bare metal gives you direct access to the physical resources on the machine, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all of a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance.
 <p><strong>Monthly billing</strong>: Bare metal servers are more expensive than virtual servers, and are best suited for high-performance apps that need more resources and host control. Bare metal servers are billed monthly. If you cancel a bare metal server before the end of the month, you are charged through the end of that month. Ordering and canceling bare metal servers is a manual process through your IBM Cloud infrastructure (SoftLayer) account. It can take more than one business day to complete.</p>
-<p><strong>Option to enable Trusted Compute</strong>: Enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containershort_notm}} with Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute is available on clusters that run Kubernetes version 1.9 or later and have certain bare metal machine types. When you run the `ibmcloud machine-types <location>` [command](cs_cli_reference.html#cs_machine_types), you can see which machines support trust by reviewing the `Trustable` field. For example, `mgXc` GPU flavors do not support Trusted Compute.</p>
-<p><strong>Bare metal machine type groups</strong>: Bare metal machine types come in groups that have different compute resources that you can choose from to meet your app's needs. Physical machine types have more local storage than virtual, and some have RAID to back up local data. To learn about the different types of bare metal offerings, see the `ibmcloud machine-type` [command](cs_cli_reference.html#cs_machine_types).
+<p><strong>Option to enable Trusted Compute</strong>: Enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containershort_notm}} with Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute is available on clusters that run Kubernetes version 1.9 or later and have certain bare metal machine types. When you run the `ibmcloud cs machine-types <location>` [command](cs_cli_reference.html#cs_machine_types), you can see which machines support trust by reviewing the `Trustable` field. For example, `mgXc` GPU flavors do not support Trusted Compute.</p>
+<p><strong>Bare metal machine type groups</strong>: Bare metal machine types come in groups that have different compute resources that you can choose from to meet your app's needs. Physical machine types have more local storage than virtual, and some have RAID to back up local data. To learn about the different types of bare metal offerings, see the `ibmcloud cs machine-type` [command](cs_cli_reference.html#cs_machine_types).
 <ul><li><strong>mb1c.4x32</strong>: If you don't need RAM-, GPU- or data-intensive resources, choose this type for a balanced configuration of physical machine resources for your worker nodes. Balanced with 4 cores, 32GB Memory, 2TB SATA Primary Disk, 2TB SATA Secondary Disk, and 10Gbps Bonded Network.</li>
 <li><strong>mb1c.16x64</strong>: If you don't need RAM-, GPU- or data-intensive resources, choose this type for a balanced configuration of physical machine resources for your worker nodes. Balanced with 16 cores, 64GB Memory, 2TB SATA Primary Disk, 960GB SSD Secondary Disk, and 10Gbps Bonded Network.</li>
 <li><strong>mr1c.28x512</strong>: Maximize the RAM available to your worker nodes. RAM intensive with 28 cores, 512GB Memory, 2TB SATA Primary Disk, 960GB SSD Secondary Disk, and 10Gbps Bonded Network.</li>
@@ -1705,7 +1705,7 @@ You can provision your worker node as a virtual machine on shared or dedicated h
 **Example command**:
 
   ```
-  ibmcloud machine-types dal10
+  ibmcloud cs machine-types dal10
   ```
   {: pre}
 
@@ -1731,7 +1731,7 @@ You can provision your worker node as a virtual machine on shared or dedicated h
   {: screen}
 
 
-### ibmcloud vlans LOCATION [--all] [--json] [-s]
+### ibmcloud cs vlans LOCATION [--all] [--json] [-s]
 {: #cs_vlans}
 
 List the public and private VLANs that are available for a location in your IBM Cloud infrastructure (SoftLayer) account. To list available VLANs, you must have a paid account.
@@ -1755,7 +1755,7 @@ List the public and private VLANs that are available for a location in your IBM 
 **Example**:
 
   ```
-  ibmcloud vlans dal10
+  ibmcloud cs vlans dal10
   ```
   {: pre}
 
@@ -1766,7 +1766,7 @@ List the public and private VLANs that are available for a location in your IBM 
 ## Logging commands
 {: #logging_commands}
 
-### ibmcloud logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-containers CONTAINERS] [--app-paths PATHS_TO_LOGS] [--syslog-protocol PROTOCOL] --type LOG_TYPE [--json] [--skip-validation] [-s]
+### ibmcloud cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-containers CONTAINERS] [--app-paths PATHS_TO_LOGS] [--syslog-protocol PROTOCOL] --type LOG_TYPE [--json] [--skip-validation] [-s]
 {: #cs_logging_create}
 
 Create a logging configuration. You can use this command to forward logs for containers, applications, worker nodes, Kubernetes clusters, and Ingress application load balancers to {{site.data.keyword.loganalysisshort_notm}} or to an external syslog server.
@@ -1822,25 +1822,25 @@ Create a logging configuration. You can use this command to forward logs for con
 Example for log type `ibm` that forwards from a `container` log source on default port 9091:
 
   ```
-  ibmcloud logging-config-create my_cluster --logsource container --namespace my_namespace --hostname ingest.logging.ng.bluemix.net --type ibm
+  ibmcloud cs logging-config-create my_cluster --logsource container --namespace my_namespace --hostname ingest.logging.ng.bluemix.net --type ibm
   ```
   {: pre}
 
 Example for log type `syslog` that forwards from a `container` log source on default port 514:
 
   ```
-  ibmcloud logging-config-create my_cluster --logsource container --namespace my_namespace  --hostname 169.xx.xxx.xxx --type syslog
+  ibmcloud cs logging-config-create my_cluster --logsource container --namespace my_namespace  --hostname 169.xx.xxx.xxx --type syslog
   ```
   {: pre}
 
 Example for log type `syslog` that forwards logs from an `ingress` source on a port different than the default:
 
   ```
-  ibmcloud logging-config-create my_cluster --logsource container --hostname 169.xx.xxx.xxx --port 5514 --type syslog
+  ibmcloud cs logging-config-create my_cluster --logsource container --hostname 169.xx.xxx.xxx --port 5514 --type syslog
   ```
   {: pre}
 
-### ibmcloud logging-config-get CLUSTER [--logsource LOG_SOURCE] [--json] [-s]
+### ibmcloud cs logging-config-get CLUSTER [--logsource LOG_SOURCE] [--json] [-s]
 {: #cs_logging_get}
 
 View all log forwarding configurations for a cluster, or filter logging configurations based on log source.
@@ -1867,12 +1867,12 @@ View all log forwarding configurations for a cluster, or filter logging configur
 **Example**:
 
   ```
-  ibmcloud logging-config-get my_cluster --logsource worker
+  ibmcloud cs logging-config-get my_cluster --logsource worker
   ```
   {: pre}
 
 
-### ibmcloud logging-config-refresh CLUSTER [-s]
+### ibmcloud cs logging-config-refresh CLUSTER [-s]
 {: #cs_logging_refresh}
 
 Refresh the logging configuration for the cluster. This refreshes the logging token for any logging configuration that is forwarding to the space level in your cluster.
@@ -1890,12 +1890,12 @@ Refresh the logging configuration for the cluster. This refreshes the logging to
 **Example**:
 
   ```
-  ibmcloud logging-config-refresh my_cluster
+  ibmcloud cs logging-config-refresh my_cluster
   ```
   {: pre}
 
 
-### ibmcloud logging-config-rm CLUSTER [--id LOG_CONFIG_ID] [--all] [-s]
+### ibmcloud cs logging-config-rm CLUSTER [--id LOG_CONFIG_ID] [--all] [-s]
 {: #cs_logging_rm}
 
 Delete one log forwarding configuration or all logging configurations for a cluster. This stops log forwarding to a remote syslog server or to {{site.data.keyword.loganalysisshort_notm}}.
@@ -1919,12 +1919,12 @@ Delete one log forwarding configuration or all logging configurations for a clus
 **Example**:
 
   ```
-  ibmcloud logging-config-rm my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e
+  ibmcloud cs logging-config-rm my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e
   ```
   {: pre}
 
 
-### ibmcloud logging-config-update CLUSTER --id LOG_CONFIG_ID [--namespace NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-paths PATH] [--app-containers PATH] --type LOG_TYPE [--json] [--skipValidation] [-s]
+### ibmcloud cs logging-config-update CLUSTER --id LOG_CONFIG_ID [--namespace NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-paths PATH] [--app-containers PATH] --type LOG_TYPE [--json] [--skipValidation] [-s]
 {: #cs_logging_update}
 
 Update the details of a log forwarding configuration.
@@ -1975,19 +1975,19 @@ Update the details of a log forwarding configuration.
 **Example for log type `ibm`**:
 
   ```
-  ibmcloud logging-config-update my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e --type ibm
+  ibmcloud cs logging-config-update my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e --type ibm
   ```
   {: pre}
 
 **Example for log type `syslog`**:
 
   ```
-  ibmcloud logging-config-update my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e --hostname localhost --port 5514 --type syslog
+  ibmcloud cs logging-config-update my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e --hostname localhost --port 5514 --type syslog
   ```
   {: pre}
 
 
-### ibmcloud logging-filter-create CLUSTER --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--regex-message MESSAGE] [--json] [-s]
+### ibmcloud cs logging-filter-create CLUSTER --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--regex-message MESSAGE] [--json] [-s]
 {: #cs_log_filter_create}
 
 Create a logging filter. You can use this command to filter out logs that are forwarded by your logging configuration.
@@ -2028,20 +2028,20 @@ Create a logging filter. You can use this command to filter out logs that are fo
 This example filters out all logs that are forwarded from containers with the name `test-container` in the default namespace that are at the debug level or less, and have a log message that contains "GET request".
 
   ```
-  ibmcloud logging-filter-create example-cluster --type container --namespace default --container test-container --level debug --message "GET request"
+  ibmcloud cs logging-filter-create example-cluster --type container --namespace default --container test-container --level debug --message "GET request"
   ```
   {: pre}
 
 This example filters out all of the logs that are forwarded, at an info level or less, from a specific cluster. The output is returned as JSON.
 
   ```
-  ibmcloud logging-filter-create example-cluster --type all --level info --json
+  ibmcloud cs logging-filter-create example-cluster --type all --level info --json
   ```
   {: pre}
 
 
 
-### ibmcloud logging-filter-get CLUSTER [--id FILTER_ID] [--show-matching-configs] [--show-covering-filters] [--json] [-s]
+### ibmcloud cs logging-filter-get CLUSTER [--id FILTER_ID] [--show-matching-configs] [--show-covering-filters] [--json] [-s]
 {: #cs_log_filter_view}
 
 View a logging filter configuration. You can use this command to view the logging filters that you created.
@@ -2069,7 +2069,7 @@ View a logging filter configuration. You can use this command to view the loggin
 </dl>
 
 
-### ibmcloud logging-filter-rm CLUSTER [--id FILTER_ID] [--all] [-s]
+### ibmcloud cs logging-filter-rm CLUSTER [--id FILTER_ID] [--all] [-s]
 {: #cs_log_filter_delete}
 
 Delete a logging filter. You can use this command to remove a logging filter that you created.
@@ -2091,7 +2091,7 @@ Delete a logging filter. You can use this command to remove a logging filter tha
 </dl>
 
 
-### ibmcloud logging-filter-update CLUSTER --id FILTER_ID --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--message MESSAGE] [--json] [-s]
+### ibmcloud cs logging-filter-update CLUSTER --id FILTER_ID --type LOG_TYPE [--logging-configs CONFIGS] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--message MESSAGE] [--json] [-s]
 {: #cs_log_filter_update}
 
 Update a logging filter. You can use this command to update a logging filter that you created.
@@ -2139,7 +2139,7 @@ Update a logging filter. You can use this command to update a logging filter tha
 ## Region commands
 {: #region_commands}
 
-### ibmcloud locations [--json] [-s]
+### ibmcloud cs locations [--json] [-s]
 {: #cs_datacenters}
 
 View a list of available locations for you to create a cluster in.
@@ -2157,20 +2157,20 @@ View a list of available locations for you to create a cluster in.
 **Example**:
 
   ```
-  ibmcloud locations
+  ibmcloud cs locations
   ```
   {: pre}
 
 
-### ibmcloud region
+### ibmcloud cs region
 {: #cs_region}
 
-Find the {{site.data.keyword.containershort_notm}} region that you are currently in. You create and manage clusters specific to the region. Use the `ibmcloud region-set` command to change regions.
+Find the {{site.data.keyword.containershort_notm}} region that you are currently in. You create and manage clusters specific to the region. Use the `ibmcloud cs region-set` command to change regions.
 
 **Example**:
 
 ```
-ibmcloud region
+ibmcloud cs region
 ```
 {: pre}
 
@@ -2180,12 +2180,12 @@ Region: us-south
 ```
 {: screen}
 
-### ibmcloud region-set [REGION]
+### ibmcloud cs region-set [REGION]
 {: #cs_region-set}
 
 Set the region for {{site.data.keyword.containershort_notm}}. You create and manage clusters specific to the region, and you might want clusters in multiple regions for high availability.
 
-For example, you can log in to {{site.data.keyword.Bluemix_notm}} in the US South region and create a cluster. Next, you can use `ibmcloud region-set eu-central` to target the EU Central region and create another cluster. Finally, you can use `ibmcloud region-set us-south` to return to US South to manage your cluster in that region.
+For example, you can log in to {{site.data.keyword.Bluemix_notm}} in the US South region and create a cluster. Next, you can use `ibmcloud cs region-set eu-central` to target the EU Central region and create another cluster. Finally, you can use `ibmcloud cs region-set us-south` to return to US South to manage your cluster in that region.
 
 **Command options**:
 
@@ -2193,17 +2193,17 @@ For example, you can log in to {{site.data.keyword.Bluemix_notm}} in the US Sout
 <dt><code><em>REGION</em></code></dt>
 <dd>Enter the region that you want to target. This value is optional. If you do not provide the region, you can select it from the list in the output.
 
-For a list of available regions, review [regions and locations](cs_regions.html) or use the `ibmcloud regions` [command](#cs_regions).</dd></dl>
+For a list of available regions, review [regions and locations](cs_regions.html) or use the `ibmcloud cs regions` [command](#cs_regions).</dd></dl>
 
 **Example**:
 
 ```
-ibmcloud region-set eu-central
+ibmcloud cs region-set eu-central
 ```
 {: pre}
 
 ```
-ibmcloud region-set
+ibmcloud cs region-set
 ```
 {: pre}
 
@@ -2221,7 +2221,7 @@ OK
 ```
 {: screen}
 
-### ibmcloud regions
+### ibmcloud cs regions
 {: #cs_regions}
 
 Lists the available regions. The `Region Name` is the {{site.data.keyword.containershort_notm}} name, and the `Region Alias` is the general {{site.data.keyword.Bluemix_notm}} name for the region.
@@ -2229,7 +2229,7 @@ Lists the available regions. The `Region Name` is the {{site.data.keyword.contai
 **Example**:
 
 ```
-ibmcloud regions
+ibmcloud cs regions
 ```
 {: pre}
 
@@ -2253,7 +2253,7 @@ us-south      us-south
 {: worker_node_commands}
 
 
-### ibmcloud worker-add --cluster CLUSTER [--file FILE_LOCATION] [--hardware HARDWARE] --machine-type MACHINE_TYPE --number NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt] [-s]
+### ibmcloud cs worker-add --cluster CLUSTER [--file FILE_LOCATION] [--hardware HARDWARE] --machine-type MACHINE_TYPE --number NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt] [-s]
 {: #cs_worker_add}
 
 Add worker nodes to your standard cluster.
@@ -2293,19 +2293,19 @@ diskEncryption: <em>false</em></code></pre>
 </tr>
 <tr>
 <td><code><em>location</em></code></td>
-<td>Replace <code><em>&lt;location&gt;</em></code> with the location to deploy your worker nodes. The available locations are dependent on the region that you are logged in. To list available locations, run <code>ibmcloud locations</code>.</td>
+<td>Replace <code><em>&lt;location&gt;</em></code> with the location to deploy your worker nodes. The available locations are dependent on the region that you are logged in. To list available locations, run <code>ibmcloud cs locations</code>.</td>
 </tr>
 <tr>
 <td><code><em>machine-type</em></code></td>
-<td>Replace <code><em>&lt;machine_type&gt;</em></code> with the type of machine that you want to deploy your worker nodes to. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the location in which you deploy the cluster. For more information, see the `ibmcloud machine-types` [command](cs_cli_reference.html#cs_machine_types).</td>
+<td>Replace <code><em>&lt;machine_type&gt;</em></code> with the type of machine that you want to deploy your worker nodes to. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the location in which you deploy the cluster. For more information, see the `ibmcloud cs machine-types` [command](cs_cli_reference.html#cs_machine_types).</td>
 </tr>
 <tr>
 <td><code><em>private-vlan</em></code></td>
-<td>Replace <code><em>&lt;private_VLAN&gt;</em></code> with the ID of the private VLAN that you want to use for your worker nodes. To list available VLANs, run <code>ibmcloud vlans <em>&lt;location&gt;</em></code> and look for VLAN routers that start with <code>bcr</code> (back-end router).</td>
+<td>Replace <code><em>&lt;private_VLAN&gt;</em></code> with the ID of the private VLAN that you want to use for your worker nodes. To list available VLANs, run <code>ibmcloud cs vlans <em>&lt;location&gt;</em></code> and look for VLAN routers that start with <code>bcr</code> (back-end router).</td>
 </tr>
 <tr>
 <td><code>public-vlan</code></td>
-<td>Replace <code>&lt;public_VLAN&gt;</code> with the ID of the public VLAN that you want to use for your worker nodes. To list available VLANs, run <code>ibmcloud vlans &lt;location&gt;</code> and look for VLAN routers that start with <code>fcr</code> (front-end router). <br><strong>Note</strong>: {[private_VLAN_vyatta]}</td>
+<td>Replace <code>&lt;public_VLAN&gt;</code> with the ID of the public VLAN that you want to use for your worker nodes. To list available VLANs, run <code>ibmcloud cs vlans &lt;location&gt;</code> and look for VLAN routers that start with <code>fcr</code> (front-end router). <br><strong>Note</strong>: {[private_VLAN_vyatta]}</td>
 </tr>
 <tr>
 <td><code>hardware</code></td>
@@ -2324,7 +2324,7 @@ diskEncryption: <em>false</em></code></pre>
 <dd>The level of hardware isolation for your worker node. Use dedicated if you want to have available physical resources dedicated to you only, or shared to allow physical resources to be shared with other IBM customers. The default is shared. This value is optional.</dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the location in which you deploy the cluster. For more information, see the documentation for the `ibmcloud machine-types` [command](cs_cli_reference.html#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
+<dd>Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the location in which you deploy the cluster. For more information, see the documentation for the `ibmcloud cs machine-types` [command](cs_cli_reference.html#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
 
 <dt><code>--number <em>NUMBER</em></code></dt>
 <dd>An integer that represents the number of worker nodes to create in the cluster. The default value is 1. This value is optional.</dd>
@@ -2350,20 +2350,20 @@ diskEncryption: <em>false</em></code></pre>
 **Examples**:
 
   ```
-  ibmcloud worker-add --cluster my_cluster --number 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type u2c.2x4 --hardware shared
+  ibmcloud cs worker-add --cluster my_cluster --number 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type u2c.2x4 --hardware shared
   ```
   {: pre}
 
   Example for {{site.data.keyword.Bluemix_dedicated_notm}}:
 
   ```
-  ibmcloud worker-add --cluster my_cluster --number 3 --machine-type u2c.2x4
+  ibmcloud cs worker-add --cluster my_cluster --number 3 --machine-type u2c.2x4
   ```
   {: pre}
 
 
 
-### ibmcloud worker-get [CLUSTER_NAME_OR_ID] WORKER_NODE_ID [--json] [-s]
+### ibmcloud cs worker-get [CLUSTER_NAME_OR_ID] WORKER_NODE_ID [--json] [-s]
 {: #cs_worker_get}
 
 View the details of a worker node.
@@ -2375,7 +2375,7 @@ View the details of a worker node.
    <dd>The name or ID of the worker node's cluster. This value is optional.</dd>
 
    <dt><code><em>WORKER_NODE_ID</em></code></dt>
-   <dd>The name of your worker node. Run <code>ibmcloud workers <em>CLUSTER</em></code> to view the IDs for the worker nodes in a cluster. This value is required.</dd>
+   <dd>The name of your worker node. Run <code>ibmcloud cs workers <em>CLUSTER</em></code> to view the IDs for the worker nodes in a cluster. This value is required.</dd>
 
    <dt><code>--json</code></dt>
    <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -2387,7 +2387,7 @@ View the details of a worker node.
 **Example command**:
 
   ```
-  ibmcloud worker-get my_cluster kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1
+  ibmcloud cs worker-get my_cluster kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1
   ```
   {: pre}
 
@@ -2408,7 +2408,7 @@ View the details of a worker node.
   ```
   {: screen}
 
-### ibmcloud worker-reboot [-f] [--hard] CLUSTER WORKER [WORKER] [-s]
+### ibmcloud cs worker-reboot [-f] [--hard] CLUSTER WORKER [WORKER] [-s]
 {: #cs_worker_reboot}
 
 Reboot a worker node in a cluster. During the reboot, the state of your worker node does not change.
@@ -2421,7 +2421,7 @@ Before you reboot your worker node, make sure that pods are rescheduled on other
    ```
    kubectl get nodes
    ```
-   The**name** that is returned in this command is the private IP address that is assigned to your worker node. You can find more information about your worker node when you run the `ibmcloud workers <cluster_name_or_ID>` command and look for the worker node with the same **Private IP** address.
+   The**name** that is returned in this command is the private IP address that is assigned to your worker node. You can find more information about your worker node when you run the `ibmcloud cs workers <cluster_name_or_ID>` command and look for the worker node with the same **Private IP** address.
 2. Mark the worker node as unschedulable in a process that is known as cordoning. When you cordon a worker node, you make it unavailable for future pod scheduling. Use the **name** of the worker node that you retrieved in the previous step.
    ```
    kubectl cordon <worker_name>
@@ -2440,9 +2440,9 @@ Before you reboot your worker node, make sure that pods are rescheduled on other
     ```
     {: pre}
     This process can take a few minutes.
- 5. Reboot the worker node. Use the worker ID that is returned from the `ibmcloud workers <cluster_name_or_ID>` command.
+ 5. Reboot the worker node. Use the worker ID that is returned from the `ibmcloud cs workers <cluster_name_or_ID>` command.
     ```
-    ibmcloud worker-reboot <cluster_name_or_ID> <worker_name_or_ID>
+    ibmcloud cs worker-reboot <cluster_name_or_ID> <worker_name_or_ID>
     ```
     {: pre}
  6. Wait about 5 minutes before you make your worker node available for pod scheduling to ensure that the reboot is finished. During the reboot, the state of your worker node does not change. The reboot of a worker node is usually completed in a few seconds.
@@ -2475,12 +2475,12 @@ Before you reboot your worker node, make sure that pods are rescheduled on other
 **Example**:
 
   ```
-  ibmcloud worker-reboot my_cluster kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
+  ibmcloud cs worker-reboot my_cluster kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
   ```
   {: pre}
 
 
-### ibmcloud worker-reload [-f] CLUSTER WORKER [WORKER] [-s]
+### ibmcloud cs worker-reload [-f] CLUSTER WORKER [WORKER] [-s]
 {: #cs_worker_reload}
 
 Reload all the necessary configurations for a worker node. A reload can be useful if your worker node experiences problems, such as slow performance or if your worker node is stuck in an unhealthy state.
@@ -2494,7 +2494,7 @@ Before you reload your worker node, make sure that pods are rescheduled on other
    ```
    kubectl get nodes
    ```
-   The **name** that is returned in this command is the private IP address that is assigned to your worker node. You can find more information about your worker node when you run the `ibmcloud workers <cluster_name_or_ID>` command and look for the worker node with the same **Private IP** address.
+   The **name** that is returned in this command is the private IP address that is assigned to your worker node. You can find more information about your worker node when you run the `ibmcloud cs workers <cluster_name_or_ID>` command and look for the worker node with the same **Private IP** address.
 2. Mark the worker node as unschedulable in a process that is known as cordoning. When you cordon a worker node, you make it unavailable for future pod scheduling. Use the **name** of the worker node that you retrieved in the previous step.
    ```
    kubectl cordon <worker_name>
@@ -2513,9 +2513,9 @@ Before you reload your worker node, make sure that pods are rescheduled on other
     ```
     {: pre}
     This process can take a few minutes.
- 5. Reload the worker node. Use the worker ID that is returned from the `ibmcloud workers <cluster_name_or_ID>` command.
+ 5. Reload the worker node. Use the worker ID that is returned from the `ibmcloud cs workers <cluster_name_or_ID>` command.
     ```
-    ibmcloud worker-reload <cluster_name_or_ID> <worker_name_or_ID>
+    ibmcloud cs worker-reload <cluster_name_or_ID> <worker_name_or_ID>
     ```
     {: pre}
  6. Wait for the reload to complete.
@@ -2543,12 +2543,12 @@ Before you reload your worker node, make sure that pods are rescheduled on other
 **Example**:
 
   ```
-  ibmcloud worker-reload my_cluster kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
+  ibmcloud cs worker-reload my_cluster kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
   ```
   {: pre}
 
 
-### ibmcloud worker-rm [-f] CLUSTER WORKER [WORKER] [-s]
+### ibmcloud cs worker-rm [-f] CLUSTER WORKER [WORKER] [-s]
 {: #cs_worker_rm}
 
 Remove one or more worker nodes from a cluster. If you remove a worker node, your cluster becomes unbalanced. 
@@ -2560,7 +2560,7 @@ Before you remove your worker node, make sure that pods are rescheduled on other
    ```
    kubectl get nodes
    ```
-   The **name** that is returned in this command is the private IP address that is assigned to your worker node. You can find more information about your worker node when you run the `ibmcloud workers <cluster_name_or_ID>` command and look for the worker node with the same **Private IP** address.
+   The **name** that is returned in this command is the private IP address that is assigned to your worker node. You can find more information about your worker node when you run the `ibmcloud cs workers <cluster_name_or_ID>` command and look for the worker node with the same **Private IP** address.
 2. Mark the worker node as unschedulable in a process that is known as cordoning. When you cordon a worker node, you make it unavailable for future pod scheduling. Use the **name** of the worker node that you retrieved in the previous step.
    ```
    kubectl cordon <worker_name>
@@ -2579,15 +2579,15 @@ Before you remove your worker node, make sure that pods are rescheduled on other
    ```
    {: pre}
    This process can take a few minutes.
-5. Remove the worker node. Use the worker ID that is returned from the `ibmcloud workers <cluster_name_or_ID>` command.
+5. Remove the worker node. Use the worker ID that is returned from the `ibmcloud cs workers <cluster_name_or_ID>` command.
    ```
-   ibmcloud worker-rm <cluster_name_or_ID> <worker_name_or_ID>
+   ibmcloud cs worker-rm <cluster_name_or_ID> <worker_name_or_ID>
    ```
    {: pre}
 
 6. Verify that the worker node is removed.
    ```
-   ibmcloud workers <cluster_name_or_ID>
+   ibmcloud cs workers <cluster_name_or_ID>
    ```
 </br>
 <strong>Command options</strong>:
@@ -2609,19 +2609,19 @@ Before you remove your worker node, make sure that pods are rescheduled on other
 **Example**:
 
   ```
-  ibmcloud worker-rm my_cluster kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
+  ibmcloud cs worker-rm my_cluster kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
   ```
   {: pre}
 
 
-###ibmcloud worker-update [-f] CLUSTER WORKER [WORKER] [--kube-version MAJOR.MINOR.PATCH] [--force-update] [-s]
+###ibmcloud cs worker-update [-f] CLUSTER WORKER [WORKER] [--kube-version MAJOR.MINOR.PATCH] [--force-update] [-s]
 {: #cs_worker_update}
 
-Update worker nodes to apply the latest security updates and patches to the operating system, and to update the Kubernetes version to match the version of the master node. You can update the master node Kubernetes version with the `ibmcloud cluster-update` [command](cs_cli_reference.html#cs_cluster_update).
+Update worker nodes to apply the latest security updates and patches to the operating system, and to update the Kubernetes version to match the version of the master node. You can update the master node Kubernetes version with the `ibmcloud cs cluster-update` [command](cs_cli_reference.html#cs_cluster_update).
 
 
 
-**Important**: Running `ibmcloud worker-update` can cause downtime for your apps and services. During the update, all pods are rescheduled onto other worker nodes and data is deleted if not stored outside the pod. To avoid downtime, [ensure that you have enough worker nodes to handle your workload while the selected worker nodes are updating](cs_cluster_update.html#worker_node).
+**Important**: Running `ibmcloud cs worker-update` can cause downtime for your apps and services. During the update, all pods are rescheduled onto other worker nodes and data is deleted if not stored outside the pod. To avoid downtime, [ensure that you have enough worker nodes to handle your workload while the selected worker nodes are updating](cs_cluster_update.html#worker_node).
 
 You might need to change your YAML files for deployments before updating. Review this [release note](cs_versions.html) for details.
 
@@ -2652,12 +2652,12 @@ You might need to change your YAML files for deployments before updating. Review
 **Example**:
 
   ```
-  ibmcloud worker-update my_cluster kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
+  ibmcloud cs worker-update my_cluster kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
   ```
   {: pre}
 
 
-### ibmcloud workers CLUSTER [--show-deleted] [--json] [-s]
+### ibmcloud cs workers CLUSTER [--show-deleted] [--json] [-s]
 {: #cs_workers}
 
 View a list of worker nodes and the status for each in a cluster.
@@ -2681,6 +2681,6 @@ View a list of worker nodes and the status for each in a cluster.
 **Example**:
 
   ```
-  ibmcloud workers my_cluster
+  ibmcloud cs workers my_cluster
   ```
   {: pre}

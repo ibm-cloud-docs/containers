@@ -468,7 +468,7 @@ rules:
 <tbody>
 <tr>
 <td><code>&lt;private_ALB_ID&gt;</code></td>
-<td>The ID for your private ALB. To find the private ALB ID, run <code>ibmcloud albs --cluster &lt;my_cluster&gt;</code>.
+<td>The ID for your private ALB. To find the private ALB ID, run <code>ibmcloud cs albs --cluster &lt;my_cluster&gt;</code>.
 </td>
 </tr>
 </tbody></table>
@@ -1119,7 +1119,7 @@ Set the maximum number of idle keepalive connections to the upstream server of a
     <li>Provision an [{{site.data.keyword.appid_short_notm}} instance](https://console.bluemix.net/catalog/services/app-id).</li>
     <li>In the {{site.data.keyword.appid_short_notm}} management console, add redirectURIs for your app.</li>
     <li>Create a bind secret.
-    <pre class="pre"><code>ibmcloud cluster-service-bind &lt;my_cluster&gt; &lt;my_namespace&gt; &lt;my_service_instance_GUID&gt;</code></pre> </li>
+    <pre class="pre"><code>ibmcloud cs cluster-service-bind &lt;my_cluster&gt; &lt;my_namespace&gt; &lt;my_service_instance_GUID&gt;</code></pre> </li>
     <li>Configure the <code>appid-auth</code> annotation.</li>
     </ol></dd>
     </dl>
