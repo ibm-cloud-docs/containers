@@ -36,6 +36,11 @@ Check out what container developers are interested in learning about in {{site.d
 </thead>
 <tbody>
 <tr>
+<td>17 May</td>
+<td>The `bx` CLI command name is changing to `ibmcloud` CLI</td>
+<td>When you download the latest version of the {{site.data.keyword.Bluemix_notm}} CLI, you now run commands by using the `ibmcloud` prefix instead of `bx`. For example, list your clusters by running `ibmcloud cs clusters`.</td>
+</tr>
+<tr>
 <td>14 May</td>
 <td>[Update: Deploy workloads on GPU bare metal worldwide](cs_app.html#gpu_app)</td>
 <td>If you have a [bare metal graphics processing unit (GPU) machine type](cs_clusters.html#shared_dedicated_node) in your cluster, you can schedule mathematically intensive apps. The GPU worker node can process your app's workload across both the CPU and GPU to increase performance.</td>
