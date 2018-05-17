@@ -95,7 +95,7 @@ To use the same cluster ALB to manage traffic to these apps, you create the foll
 <li>A Kubernetes service in the staging namespace to expose `app3`.</li>
 <li>An Ingress resource in the staging namespace that specifies the host as `stage.mycluster.us-south.containers.mybluemix.net`.</li></ul></br>
 <img src="images/cs_ingress_multi_ns.png" alt="Within a namespace, use subdomains in one or multiple resources" style="border-style: none"/>
-Now, both URLs resolve to the same domain and are thus both serviced by the same ALB. However, because the resource in the staging namespace is registered with the `stage` subdomain, the Ingress ALB correctly routes requests from the `stage.mycluster.us-south.containers.mybluemix.net/myservice` URL to only `app3`.</dd>
+Now, both URLs resolve to the same domain and are thus both serviced by the same ALB. However, because the resource in the staging namespace is registered with the `stage` subdomain, the Ingress ALB correctly routes requests from the `stage.mycluster.us-south.containers.mybluemix.net/app3` URL to only `app3`.</dd>
 </dl>
 
 **Note**:
