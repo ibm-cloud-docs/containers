@@ -22,6 +22,7 @@ lastupdated: "2018-05-17"
 {: #storage}
 You can persist data in {{site.data.keyword.containerlong}} to share data between app instances and to protect your data from being lost if a component in your Kubernetes cluster fails.
 
+
 ## Planning highly available storage
 {: #planning}
 
@@ -95,8 +96,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
 
 {: caption="Table. Persistent data storage options for deployments in Kubernetes clusters" caption-side="top"}
 
-<br />
-
+{[white-space.md]}
 
 
 ## Using existing NFS file shares in clusters
@@ -241,8 +241,7 @@ To create a PV and matching PVC, follow these steps.
 
 You successfully created a PV object and bound it to a PVC. Cluster users can now [mount the PVC](#app_volume_mount) to their deployments and start reading from and writing to the PV object.
 
-<br />
-
+{[white-space.md]}
 
 
 ## Using existing block storage in your cluster
@@ -406,8 +405,7 @@ To create a PV and matching PVC, follow these steps.
 
 You successfully created a PV and bound it to a PVC. Cluster users can now [mount the PVC](#app_volume_mount) to their deployments and start reading from and writing to the PV.
 
-<br />
-
+{[white-space.md]}
 
 
 ## Adding NFS file storage or block storage to apps
@@ -783,8 +781,7 @@ To add persistent storage:
 
 **NFS permissions**: Looking for documentation on enabling NFS non-root permissions? See [Adding non-root user access to NFS file storage](cs_troubleshoot_storage.html#nonroot).
 
-<br />
-
+{[white-space.md]}
 	
 ## Customizing a storage class for XFS block storage
 {: #custom_storageclass}
@@ -843,8 +840,7 @@ To create a customized storage class:
 
 4. Provision [XFS block storage](#create) with your customized storage class. 
 
-<br />
-
+{[white-space.md]}
 
 ## Changing the default NFS file storage version
 {: #nfs_version}
@@ -955,8 +951,7 @@ To apply the latest security updates and for a better performance, use the defau
    ```
    {: screen}
    
-<br />
-
+{[white-space.md]}
 
 
 
@@ -1128,8 +1123,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
 
 You can now continue to [create a PVC](#create) to provision block storage for your app.
 
-<br />
-
+{[white-space.md]}
 
 ### Updating the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in
 You can upgrade the existing {{site.data.keyword.Bluemix_notm}} Block Storage plug-in to the latest version.
@@ -1155,8 +1149,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
    ```
    {: pre}
 
-<br />
-
+{[white-space.md]}
 
 ### Removing the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in
 If you do not want to provision and use {{site.data.keyword.Bluemix_notm}} Block Storage for your cluster, you can uninstall the helm chart.
@@ -1198,8 +1191,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
    {: pre}
    The removal of the storage classes is successful if no storage classes are displayed in your CLI output.
 
-<br />
-
+{[white-space.md]}
 
 
 ## Setting up backup and restore solutions for NFS file shares and block storage
