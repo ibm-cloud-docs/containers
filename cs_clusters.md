@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-16"
+lastupdated: "2018-05-17"
 
 ---
 
@@ -44,20 +44,20 @@ Review these potential cluster setups that are ordered with increasing degrees o
 <dl>
   <dt>Spread apps across worker nodes</dt>
     <dd>Allow developers to spread their apps in containers across multiple worker nodes per cluster. An app instance in each of three worker nodes allow for the downtime of one worker node without interrupting the usage of the app. You can specify how many worker nodes to include when you create a cluster from the [{{site.data.keyword.Bluemix_notm}} GUI](cs_clusters.html#clusters_ui) or the [CLI](cs_clusters.html#clusters_cli). Kubernetes limits the maximum number of worker nodes that you can have in a cluster, so keep in mind the [worker node and pod quotas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/cluster-large/).
-    <pre class="codeblock"><code>bx cs cluster-create --location dal10 --workers 3 --public-vlan &lt;public_VLAN_ID&gt; --private-vlan &lt;private_VLAN_ID&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;cluster_name_or_ID&gt;</code></pre></dd>
+    <pre class="codeblock"><code>ibmcloud cluster-create --location dal10 --workers 3 --public-vlan &lt;public_VLAN_ID&gt; --private-vlan &lt;private_VLAN_ID&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;cluster_name_or_ID&gt;</code></pre></dd>
   <dt>Spread apps across clusters</dt>
     <dd>Create multiple clusters, each with multiple worker nodes. If an outage occurs with one cluster, users can still access an app that is also deployed in another cluster.
       <p>Cluster 1:</p>
-        <pre class="codeblock"><code>bx cs cluster-create --location dal10 --workers 3 --public-vlan &lt;public_VLAN_ID&gt; --private-vlan &lt;private_VLAN_ID&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;cluster_name_or_ID&gt;</code></pre>
+        <pre class="codeblock"><code>ibmcloud cluster-create --location dal10 --workers 3 --public-vlan &lt;public_VLAN_ID&gt; --private-vlan &lt;private_VLAN_ID&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;cluster_name_or_ID&gt;</code></pre>
       <p>Cluster 2:</p>
-        <pre class="codeblock"><code>bx cs ccluster-create --location dal12 --workers 3 --public-vlan &lt;public_VLAN_ID&gt; --private-vlan &lt;private_VLAN_ID&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;cluster_name_or_ID&gt;</code></pre></dd>
+        <pre class="codeblock"><code>ibmcloud ccluster-create --location dal12 --workers 3 --public-vlan &lt;public_VLAN_ID&gt; --private-vlan &lt;private_VLAN_ID&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;cluster_name_or_ID&gt;</code></pre></dd>
   <dt>Spread apps across clusters in different regions</dt>
     <dd>When you spread apps across clusters in different regions, you can allow load balancing to occur based on the region the user is in. If the cluster, hardware, or even an entire location in one region goes down, traffic is routed to the container that is deployed in another location.
       <p><strong>Important:</strong> After you configure a custom domain, you can use these commands to create the clusters.</p>
       <p>Location 1:</p>
-        <pre class="codeblock"><code>bx cs cluster-create --location dal10 --workers 3 --public-vlan &lt;public_VLAN_ID&gt; --private-vlan &lt;private_VLAN_ID&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;cluster_name_or_ID&gt;</code></pre>
+        <pre class="codeblock"><code>ibmcloud cluster-create --location dal10 --workers 3 --public-vlan &lt;public_VLAN_ID&gt; --private-vlan &lt;private_VLAN_ID&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;cluster_name_or_ID&gt;</code></pre>
       <p>Location 2:</p>
-        <pre class="codeblock"><code>bx cs cluster-create --location ams03 --workers 3 --public-vlan &lt;public_VLAN_ID&gt; --private-vlan &lt;private_VLAN_ID&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;cluster_name_or_ID&gt;</code></pre></dd>
+        <pre class="codeblock"><code>ibmcloud cluster-create --location ams03 --workers 3 --public-vlan &lt;public_VLAN_ID&gt; --private-vlan &lt;private_VLAN_ID&gt; --machine-type &lt;u2c.2x4&gt; --name &lt;cluster_name_or_ID&gt;</code></pre></dd>
 </dl>
 
 <br />
@@ -94,8 +94,8 @@ Review the following information to decide what type of worker pools you want. A
 <dt>Physical machines (bare metal)</dt>
 <dd>You can provision your worker node as a single-tenant physical server, also referred to as bare metal. Bare metal gives you direct access to the physical resources on the machine, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all of a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance.
 <p><strong>Monthly billing</strong>: Bare metal servers are more expensive than virtual servers, and are best suited for high-performance apps that need more resources and host control. Bare metal servers are billed monthly. If you cancel a bare metal server before the end of the month, you are charged through the end of that month. Ordering and canceling bare metal servers is a manual process through your IBM Cloud infrastructure (SoftLayer) account. It can take more than one business day to complete.</p>
-<p><strong>Option to enable Trusted Compute</strong>: Enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `bx cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containershort_notm}} with Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute is available on clusters that run Kubernetes version 1.9 or later and have certain bare metal machine types. When you run the `bx cs machine-types <location>` [command](cs_cli_reference.html#cs_machine_types), you can see which machines support trust by reviewing the `Trustable` field. For example, `mgXc` GPU flavors do not support Trusted Compute.</p>
-<p><strong>Bare metal machine type groups</strong>: Bare metal machine types come in groups that have different compute resources that you can choose from to meet your app's needs. Physical machine types have more local storage than virtual, and some have RAID to back up local data. To learn about the different types of bare metal offerings, see the `bx cs machine-type` [command](cs_cli_reference.html#cs_machine_types).
+<p><strong>Option to enable Trusted Compute</strong>: Enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containershort_notm}} with Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute is available on clusters that run Kubernetes version 1.9 or later and have certain bare metal machine types. When you run the `ibmcloud machine-types <location>` [command](cs_cli_reference.html#cs_machine_types), you can see which machines support trust by reviewing the `Trustable` field. For example, `mgXc` GPU flavors do not support Trusted Compute.</p>
+<p><strong>Bare metal machine type groups</strong>: Bare metal machine types come in groups that have different compute resources that you can choose from to meet your app's needs. Physical machine types have more local storage than virtual, and some have RAID to back up local data. To learn about the different types of bare metal offerings, see the `ibmcloud machine-type` [command](cs_cli_reference.html#cs_machine_types).
 <ul><li><strong>mb1c.4x32</strong>: If you don't need RAM-, GPU- or data-intensive resources, choose this type for a balanced configuration of physical machine resources for your worker nodes. Balanced with 4 cores, 32GB Memory, 2TB SATA Primary Disk, 2TB SATA Secondary Disk, and 10Gbps Bonded Network.</li>
 <li><strong>mb1c.16x64</strong>: If you don't need RAM-, GPU- or data-intensive resources, choose this type for a balanced configuration of physical machine resources for your worker nodes. Balanced with 16 cores, 64GB Memory, 2TB SATA Primary Disk, 960GB SSD Secondary Disk, and 10Gbps Bonded Network.</li>
 <li><strong>mr1c.28x512</strong>: Maximize the RAM available to your worker nodes. RAM intensive with 28 cores, 512GB Memory, 2TB SATA Primary Disk, 960GB SSD Secondary Disk, and 10Gbps Bonded Network.</li>
@@ -115,7 +115,7 @@ Review the following information to decide what type of worker pools you want. A
 </dl>
 
 
-Available physical and virtual machines types vary by the location in which you deploy the cluster. For more information, see the `bx cs machine-type` [command](cs_cli_reference.html#cs_machine_types). You can deploy clusters by using the [console UI](#clusters_ui) or the [CLI](#clusters_cli).
+Available physical and virtual machines types vary by the location in which you deploy the cluster. For more information, see the `ibmcloud machine-type` [command](cs_cli_reference.html#cs_machine_types). You can deploy clusters by using the [console UI](#clusters_ui) or the [CLI](#clusters_cli).
 
 ### VLAN connection for worker nodes
 {: #worker_vlan_connection}
@@ -245,14 +245,14 @@ To create a cluster:
 
 3. If you have multiple {{site.data.keyword.Bluemix_notm}} accounts, select the account where you want to create your Kubernetes cluster.
 
-4.  If you want to create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, run `bx cs region-set`.
+4.  If you want to create or access Kubernetes clusters in a region other than the {{site.data.keyword.Bluemix_notm}} region that you selected earlier, run `ibmcloud region-set`.
 
 6.  Create a cluster.
 
     1.  **Standard clusters**: Review the locations that are available. The locations that are shown depend on the {{site.data.keyword.containershort_notm}} region that you are logged in.
 
         ```
-        bx cs locations
+        ibmcloud locations
         ```
         {: pre}
 
@@ -263,21 +263,21 @@ To create a cluster:
         -  View the **Server Type** field to choose virtual or physical (bare metal) machines.
         -  **Virtual**: Billed hourly, virtual machines are provisioned on shared or dedicated hardware.
         -  **Physical**: Billed monthly, bare metal servers are provisioned by manual interaction with IBM Cloud infrastructure (SoftLayer), and can take more than one business day to complete. Bare metal is best suited for high-performance applications that need more resources and host control.
-        - **Physical machines with Trusted Compute**: For bare metal clusters that run Kubernetes version 1.9 or later, you can also choose to enable [Trusted Compute](cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. Trusted Compute is available for select bare metal machine types. For example, `mgXc` GPU flavors do not support Trusted Compute. If you don't enable trust during cluster creation but want to later, you can use the `bx cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.
-        -  **Machine types**: To decide what machine type to deploy, review the core, memory, and storage combinations or consult the `bx cs machine-types` [command documentation](cs_cli_reference.html#cs_machine_types). After you create your cluster, you can add different physical or virtual machine types by using the `bx cs worker-add` [command](cs_cli_reference.html#cs_worker_add).
+        - **Physical machines with Trusted Compute**: For bare metal clusters that run Kubernetes version 1.9 or later, you can also choose to enable [Trusted Compute](cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. Trusted Compute is available for select bare metal machine types. For example, `mgXc` GPU flavors do not support Trusted Compute. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.
+        -  **Machine types**: To decide what machine type to deploy, review the core, memory, and storage combinations or consult the `ibmcloud machine-types` [command documentation](cs_cli_reference.html#cs_machine_types). After you create your cluster, you can add different physical or virtual machine types by using the `ibmcloud worker-add` [command](cs_cli_reference.html#cs_worker_add).
 
            Be sure that you want to provision a bare metal machine. Because it is billed monthly, if you cancel it immediately after an order by  mistake, you are still charged the full month.
            {:tip}
 
         ```
-        bx cs machine-types <location>
+        ibmcloud machine-types <location>
         ```
         {: pre}
 
     3.  **Standard clusters**: Check to see if a public and private VLAN already exists in the IBM Cloud infrastructure (SoftLayer) for this account.
 
         ```
-        bx cs vlans <location>
+        ibmcloud vlans <location>
         ```
         {: pre}
 
@@ -297,14 +297,14 @@ To create a cluster:
     4.  **Free and standard clusters**: Run the `cluster-create` command. You can choose between a free cluster, which includes one worker node set up with 2vCPU and 4GB memory and is automatically deleted after 21 days. When you create a standard cluster, by default, the worker node disks are encrypted, its hardware is shared by multiple IBM customers, and it is billed by hours of usage. </br>Example for a standard cluster. Specify the cluster's options:
 
         ```
-        bx cs cluster-create --location dal10 --machine-type u2c.2x4 --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers 3 --name <cluster_name> --kube-version <major.minor.patch> [--disable-disk-encrypt] [--trusted]
+        ibmcloud cluster-create --location dal10 --machine-type u2c.2x4 --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers 3 --name <cluster_name> --kube-version <major.minor.patch> [--disable-disk-encrypt] [--trusted]
         ```
         {: pre}
 
         Example for a free cluster. Specify the cluster name:
 
         ```
-        bx cs cluster-create --name my_cluster
+        ibmcloud cluster-create --name my_cluster
         ```
         {: pre}
 
@@ -324,7 +324,7 @@ To create a cluster:
         </tr>
         <tr>
         <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
-        <td>**Standard clusters**: Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the location in which you deploy the cluster. For more information, see the documentation for the `bx cs machine-type` [command](cs_cli_reference.html#cs_machine_types). For free clusters, you do not have to define the machine type.</td>
+        <td>**Standard clusters**: Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the location in which you deploy the cluster. For more information, see the documentation for the `ibmcloud machine-type` [command](cs_cli_reference.html#cs_machine_types). For free clusters, you do not have to define the machine type.</td>
         </tr>
         <tr>
         <td><code>--hardware <em>&lt;shared_or_dedicated&gt;</em></code></td>
@@ -353,7 +353,7 @@ To create a cluster:
         </tr>
         <tr>
           <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
-          <td>**Standard clusters**: The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default of supported Kubernetes versions. To see available versions, run <code>bx cs kube-versions</code>.
+          <td>**Standard clusters**: The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default of supported Kubernetes versions. To see available versions, run <code>ibmcloud kube-versions</code>.
 </td>
         </tr>
         <tr>
@@ -362,14 +362,14 @@ To create a cluster:
         </tr>
         <tr>
         <td><code>--trusted</code></td>
-        <td>**Standard bare metal clusters**: Enable [Trusted Compute](cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. Trusted Compute is available for select bare metal machine types. For example, `mgXc` GPU flavors do not support Trusted Compute. If you don't enable trust during cluster creation but want to later, you can use the `bx cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</td>
+        <td>**Standard bare metal clusters**: Enable [Trusted Compute](cs_secure.html#trusted_compute) to verify your bare metal worker nodes against tampering. Trusted Compute is available for select bare metal machine types. For example, `mgXc` GPU flavors do not support Trusted Compute. If you don't enable trust during cluster creation but want to later, you can use the `ibmcloud feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later.</td>
         </tr>
         </tbody></table>
 
 7.  Verify that the creation of the cluster was requested.
 
     ```
-    bx cs clusters
+    ibmcloud clusters
     ```
     {: pre}
 
@@ -386,7 +386,7 @@ To create a cluster:
 8.  Check the status of the worker nodes.
 
     ```
-    bx cs workers <cluster_name_or_ID>
+    ibmcloud workers <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -404,7 +404,7 @@ To create a cluster:
     1.  Get the command to set the environment variable and download the Kubernetes configuration files.
 
         ```
-        bx cs cluster-config <cluster_name_or_ID>
+        ibmcloud cluster-config <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -478,9 +478,9 @@ To create a cluster:
 Review the state of a Kubernetes cluster to get information about the availability and capacity of the cluster, and potential problems that might have occurred.
 {:shortdesc}
 
-To view information about a specific cluster, such as its location, master URL, Ingress subdomain, version, workers, owner, and monitoring dashboard, use the `bx cs cluster-get <cluster_name_or_ID>` [command](cs_cli_reference.html#cs_cluster_get). Include the `--showResources` flag to view more cluster resources such as add-ons for storage pods or subnet VLANs for public and private IPs.
+To view information about a specific cluster, such as its location, master URL, Ingress subdomain, version, workers, owner, and monitoring dashboard, use the `ibmcloud cluster-get <cluster_name_or_ID>` [command](cs_cli_reference.html#cs_cluster_get). Include the `--showResources` flag to view more cluster resources such as add-ons for storage pods or subnet VLANs for public and private IPs.
 
-You can view the current cluster state by running the `bx cs clusters` command and locating the **State** field. To troubleshoot your cluster and worker nodes, see [Troubleshooting clusters](cs_troubleshoot.html#debug_clusters).
+You can view the current cluster state by running the `ibmcloud clusters` command and locating the **State** field. To troubleshoot your cluster and worker nodes, see [Troubleshooting clusters](cs_troubleshoot.html#debug_clusters).
 
 <table summary="Every table row should be read left to right, with the cluster state in column one and a description in column two.">
 <caption>Cluster states</caption>
@@ -552,7 +552,7 @@ Free and standard clusters that are created with a Pay-As-You-Go account must be
 
 **Warning:**
   - No backups are created of your cluster or your data in your persistent storage. Deleting a cluster or persistent storage is permanent and cannot be undone.
-  - When you remove a cluster, you also remove any subnets that were automatically provisioned when you created the cluster and that you created by using the `bx cs cluster-subnet-create` command. However, if you manually added existing subnets to your cluster by using the `bx cs cluster-subnet-add command`, these subnets are not removed from your IBM Cloud infrastructure (SoftLayer) account and you can reuse them in other clusters.
+  - When you remove a cluster, you also remove any subnets that were automatically provisioned when you created the cluster and that you created by using the `ibmcloud cluster-subnet-create` command. However, if you manually added existing subnets to your cluster by using the `ibmcloud cluster-subnet-add command`, these subnets are not removed from your IBM Cloud infrastructure (SoftLayer) account and you can reuse them in other clusters.
 
 To remove a cluster:
 
@@ -563,14 +563,14 @@ To remove a cluster:
     1.  List the available clusters.
 
         ```
-        bx cs clusters
+        ibmcloud clusters
         ```
         {: pre}
 
     2.  Delete the cluster.
 
         ```
-        bx cs cluster-rm <cluster_name_or_ID>
+        ibmcloud cluster-rm <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -580,6 +580,6 @@ To remove a cluster:
           **Note**: Due to the monthly billing cycle, a persistent volume claim cannot be deleted on the last day of a month. If you delete the persistent volume claim on the last day of the month, the deletion remains pending until the beginning of the next month.
 
 Next steps:
-- After it is no longer listed in the available clusters list when you run the `bx cs clusters` command, you can reuse the name of a removed cluster.
+- After it is no longer listed in the available clusters list when you run the `ibmcloud clusters` command, you can reuse the name of a removed cluster.
 - If you kept the subnets, you can [reuse them in a new cluster](cs_subnets.html#custom) or manually delete them later from your IBM Cloud infrastructure (SoftLayer) portfolio.
 - If you kept the persistent storage, you can delete your storage later through the IBM Cloud infrastructure (SoftLayer) dashboard in the {{site.data.keyword.Bluemix_notm}} GUI.

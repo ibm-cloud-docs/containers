@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-16"
+lastupdated: "2018-05-17"
 
 ---
 
@@ -239,7 +239,7 @@ Kubernetes secrets are a secure way to store confidential information, such as u
 
 To view the default TLS secret:
 <pre>
-bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
+ibmcloud cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 </pre>
 </p>
 To create your own instead, complete the steps in this topic.</td>

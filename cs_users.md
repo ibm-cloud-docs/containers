@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-16"
+lastupdated: "2018-05-17"
 
 
 ---
@@ -188,7 +188,7 @@ Before you begin, verify that you are assigned the `Manager` Cloud Foundry role 
 3.  Assign a platform role to a user to set access for {{site.data.keyword.containershort_notm}}.
       1. From the **Services** drop-down list, select **{{site.data.keyword.containershort_notm}}**.
       2. From the **Region** drop-down list, select the region to invite the user to.
-      3. From the **Service instance** drop-down list, select the cluster to invite the user to. To find the ID of a specific cluster, run `bx cs clusters`.
+      3. From the **Service instance** drop-down list, select the cluster to invite the user to. To find the ID of a specific cluster, run `ibmcloud clusters`.
       4. In the **Select roles** section, choose a role. To find a list of supported actions per role, see [Access policies and permissions](#access_policies).
 4. [Optional: Assign a Cloud Foundry role](/docs/iam/mngcf.html#mngcf).
 5. [Optional: Assign an infrastructure role](/docs/iam/infrastructureaccess.html#infrapermission).
@@ -197,20 +197,20 @@ Before you begin, verify that you are assigned the `Manager` Cloud Foundry role 
 <br />
 
 
-## Understanding the IAM API key and the `bx cs credentials-set` command
+## Understanding the IAM API key and the `ibmcloud credentials-set` command
 {: #api_key}
 
-To successfully provision and work with clusters in your account, you must ensure that your account is correctly set up to access the IBM Cloud infrastructure (SoftLayer) portfolio. Depending on your account setup, you either use the IAM API key or infrastructure credentials that you manually set by using the `bx cs credentials-set` command.
+To successfully provision and work with clusters in your account, you must ensure that your account is correctly set up to access the IBM Cloud infrastructure (SoftLayer) portfolio. Depending on your account setup, you either use the IAM API key or infrastructure credentials that you manually set by using the `ibmcloud credentials-set` command.
 
 <dl>
   <dt>IAM API key</dt>
     <dd><p>The Identity and Access Management (IAM) API key is automatically set for a region when the first action that requires the {{site.data.keyword.containershort_notm}} admin access policy is performed. For example, one of your admin users creates the first cluster in the <code>us-south</code> region. By doing that, the IAM API key for this user is stored in the account for this region. The API key is used to order IBM Cloud infrastructure (SoftLayer), such as new worker nodes or VLANs.</p> <p>When a different user performs an action in this region that requires interaction with the IBM Cloud infrastructure (SoftLayer) portfolio, such as creating a new cluster or reloading a worker node, the stored API key is used to determine whether sufficient permissions exist to perform that action. To make sure that infrastructure-related actions in your cluster can be successfully performed, assign your {{site.data.keyword.containershort_notm}} admin users the <strong>Super user</strong> infrastructure access policy.</p>
-    <p>You can find the current API key owner by running [<code>bx cs api-key-info</code>](cs_cli_reference.html#cs_api_key_info). If you find that you need to update the API key that is stored for a region, you can do so by running the [<code>bx cs api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) command. This command requires the {{site.data.keyword.containershort_notm}} admin access policy and stores the API key of the user that executes this command in the account.</p>
-    <p><strong>Note:</strong> The API key that is stored for the region might not be used if IBM Cloud infrastructure (SoftLayer) credentials were manually set by using the <code>bx cs credentials-set</code> command.</p></dd>
-  <dt>IBM Cloud infrastructure (SoftLayer) credentials via <code>bx cs credentials-set</code></dt>
-    <dd><p>If you have an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account, you have access to the IBM Cloud infrastructure (SoftLayer) portfolio by default. However, you might want to use a different IBM Cloud infrastructure (SoftLayer) account that you already have to order infrastructure. You can link this infrastructure account to your {{site.data.keyword.Bluemix_notm}} account by using the [<code>bx cs credentials-set</code>](cs_cli_reference.html#cs_credentials_set) command.</p>
+    <p>You can find the current API key owner by running [<code>ibmcloud api-key-info</code>](cs_cli_reference.html#cs_api_key_info). If you find that you need to update the API key that is stored for a region, you can do so by running the [<code>ibmcloud api-key-reset</code>](cs_cli_reference.html#cs_api_key_reset) command. This command requires the {{site.data.keyword.containershort_notm}} admin access policy and stores the API key of the user that executes this command in the account.</p>
+    <p><strong>Note:</strong> The API key that is stored for the region might not be used if IBM Cloud infrastructure (SoftLayer) credentials were manually set by using the <code>ibmcloud credentials-set</code> command.</p></dd>
+  <dt>IBM Cloud infrastructure (SoftLayer) credentials via <code>ibmcloud credentials-set</code></dt>
+    <dd><p>If you have an {{site.data.keyword.Bluemix_notm}} Pay-As-You-Go account, you have access to the IBM Cloud infrastructure (SoftLayer) portfolio by default. However, you might want to use a different IBM Cloud infrastructure (SoftLayer) account that you already have to order infrastructure. You can link this infrastructure account to your {{site.data.keyword.Bluemix_notm}} account by using the [<code>ibmcloud credentials-set</code>](cs_cli_reference.html#cs_credentials_set) command.</p>
     <p>If IBM Cloud infrastructure (SoftLayer) credentials are manually set, these credentials are used to order infrastructure, even if an IAM API key exists for the account. If the user whose credentials are stored does not have the required permissions to order infrastructure, then infrastructure-related actions, such as creating a cluster or reloading a worker node can fail.</p>
-    <p>To remove IBM Cloud infrastructure (SoftLayer) credentials that were manually set, you can use the [<code>bx cs credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset) command. After the credentials are removed, the IAM API key is used to order infrastructure.</p></dd>
+    <p>To remove IBM Cloud infrastructure (SoftLayer) credentials that were manually set, you can use the [<code>ibmcloud credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset) command. After the credentials are removed, the IAM API key is used to order infrastructure.</p></dd>
 </dl>
 
 <br />

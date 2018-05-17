@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-16"
+lastupdated: "2018-05-17"
 
 ---
 
@@ -118,7 +118,7 @@ When the app is deployed, you can use the public IP address of any worker node a
 1.  Get the public IP address for a worker node in the cluster.
 
     ```
-    bx cs workers <cluster_name>
+    ibmcloud workers <cluster_name>
     ```
     {: pre}
 

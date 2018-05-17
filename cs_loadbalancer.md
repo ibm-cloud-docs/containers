@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-16"
+lastupdated: "2018-05-17"
 
 ---
 
@@ -271,7 +271,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
 
     1. List portable public VLANs for your cluster.
         ```
-        bx cs cluster-get <cluster_name_or_ID> --showResources
+        ibmcloud cluster-get <cluster_name_or_ID> --showResources
         ```
         {: pre}
 
