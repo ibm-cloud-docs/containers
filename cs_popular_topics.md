@@ -27,6 +27,7 @@ Check out what container developers are interested in learning about in {{site.d
 ## Popular topics in May 2018
 {: #may18}
 
+
 <table summary="The table shows popular topics. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three.">
 <caption>Popular topics for containers and Kubernetes clusters in May 2018</caption>
 <thead>
@@ -51,6 +52,9 @@ Check out what container developers are interested in learning about in {{site.d
 <td>Did you ever want to access the Kubernetes dashboard with one click? Check out the **Kubernetes Dashboard** button in the {{site.data.keyword.Bluemix_notm}} GUI.</td>
 </tr>
 </tbody></table>
+
+
+
 
 ## Popular topics in April 2018
 {: #apr18}
