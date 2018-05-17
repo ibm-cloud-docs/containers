@@ -135,15 +135,24 @@ To learn more about each component, review the [Kubernetes basics](cs_tech.html#
 ## Launching the Kubernetes dashboard
 {: #cli_dashboard}
 
-Open a Kubernetes dashboard on your local system to view information about a cluster and its worker nodes.
+Open a Kubernetes dashboard on your local system to view information about a cluster and its worker nodes. [In the GUI](#db_gui), you can access the dashboard with a convenient one-click button. [With the CLI](#db_cli), you can access the dashboard or use the steps in an automation process such as for a CI/CD pipeline.
 {:shortdesc}
-
-If you select your cluster in the [{{site.data.keyword.Bluemix_notm}} GUI](https://console.bluemix.net/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
-{: tip}
 
 Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster. This task requires the [Administrator access policy](cs_users.html#access_policies). Verify your current [access policy](cs_users.html#infra_access).
 
 You can use the default port or set your own port to launch the Kubernetes dashboard for a cluster.
+
+**Launching the Kubernetes dashboard from the GUI**
+{: #db_gui}
+
+1.  Log in to the [{{site.data.keyword.Bluemix_notm}} GUI](https://console.bluemix.net/).
+2.  From your profile in the menu bar, select the account that you want to use.
+3.  From the menu, click **Containers**.
+4.  On the **Clusters** page, click the cluster that you want to access.
+5.  From the cluster detail page, click the **Kubernetes Dashboard** button.
+
+**Launching the Kubernetes dashboard from the CLI**
+{: #db_cli}
 
 1.  For clusters with a Kubernetes master version of 1.7.16 or earlier:
 
@@ -206,10 +215,9 @@ You can use the default port or set your own port to launch the Kubernetes dashb
 
       3.  Then, paste the **id-token** value that you previously copied into the **Token** field and click **SIGN IN**.
 
-[Next, you can run a configuration file from the dashboard.](#app_ui)
-
 When you are done with the Kubernetes dashboard, use `CTRL+C` to exit the `proxy` command. After you exit, the Kubernetes dashboard is no longer available. Run the `proxy` command to restart the Kubernetes dashboard.
 
+[Next, you can run a configuration file from the dashboard.](#app_ui)
 
 
 <br />

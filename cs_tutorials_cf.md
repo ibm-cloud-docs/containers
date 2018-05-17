@@ -266,9 +266,11 @@ Deploy your app as a container in a Kubernetes cluster.
 
     <img src="images/python_flask.png" alt="A screen capture of the deployed boilerplate Python Flask app." />
 
-5. [Launch the Kubernetes dashboard](cs_app.html#cli_dashboard). The steps differ depending on your version of Kubernetes.
+5.  [Launch the Kubernetes dashboard](cs_app.html#cli_dashboard).
 
-6. In the **Workloads** tab, you can see the resources that you created. When you are done exploring the Kubernetes dashboard, use `ctrl + c` to exit the `proxy` command.
+    If you select your cluster in the [{{site.data.keyword.Bluemix_notm}} GUI](https://console.bluemix.net/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
+    {: tip}
+
+6. In the **Workloads** tab, you can see the resources that you created.
 
 Congratulations! Your app is deployed in a container!
-

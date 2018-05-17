@@ -40,6 +40,16 @@ Check out what container developers are interested in learning about in {{site.d
 <td>[Update: Deploy workloads on GPU bare metal worldwide](cs_app.html#gpu_app)</td>
 <td>If you have a [bare metal graphics processing unit (GPU) machine type](cs_clusters.html#shared_dedicated_node) in your cluster, you can schedule mathematically intensive apps. The GPU worker node can process your app's workload across both the CPU and GPU to increase performance.</td>
 </tr>
+<tr>
+<td>03 May</td>
+<td>[Container Image Security Enforcement (beta)](/docs/services/Registry/registry_security_enforce.html#security_enforce)</td>
+<td>Does your team need a little extra help to know which image to pull in your app containers? Try out the Container Image Security Enforcement beta to verify container images before you deploy them. Available for clusters that run Kubernetes 1.9 or later.</td>
+</tr>
+<tr>
+<td>01 May</td>
+<td>[Deploy the Kubernetes dashboard from the GUI](cs_app.html#cli_dashboard)</td>
+<td>Did you ever want to access the Kubernetes dashboard with one click? Check out the **Kubernetes Dashboard** button in the {{site.data.keyword.Bluemix_notm}} GUI.</td>
+</tr>
 </tbody></table>
 
 ## Popular topics in April 2018

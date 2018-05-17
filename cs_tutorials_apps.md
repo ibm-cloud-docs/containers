@@ -295,6 +295,9 @@ To deploy the app:
 
 12. [Launch the Kubernetes dashboard](cs_app.html#cli_dashboard).
 
+    If you select your cluster in the [{{site.data.keyword.Bluemix_notm}} GUI](https://console.bluemix.net/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
+    {: tip}
+
 13. In the **Workloads** tab, you can see the resources that you created.
 
 Congratulations! You deployed your first version of the app.
