@@ -29,6 +29,7 @@ You can persist data in {{site.data.keyword.containerlong}} to share data betwee
 In {{site.data.keyword.containerlong_notm}}, you can choose from several options to store your app data and share data across pods in your cluster. However, not all storage options offer the same level of persistence and availability in situations where a component in your cluster or a whole site fails.
 {: shortdesc}
 
+
 ### Non-persistent data storage options
 {: #non_persistent}
 
