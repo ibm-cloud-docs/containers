@@ -93,10 +93,16 @@ To use the same cluster ALB to manage traffic to these apps, you create the foll
 <li>A Kubernetes service in the development namespace to expose `app1`.</li>
 <li>An Ingress resource in the development namespace that specifies the host as `dev.mycluster.us-south.containers.mybluemix.net`.</li>
 <li>A Kubernetes service in the staging namespace to expose `app3`.</li>
-<li>An Ingress resource in the staging namespace that specifies the host as `stage.mycluster.us-south.containers.mybluemix.net`.</li></ul>
+<li>An Ingress resource in the staging namespace that specifies the host as `stage.mycluster.us-south.containers.mybluemix.net`.</li></ul></br>
 <img src="images/cs_ingress_multi_ns.png" alt="Within a namespace, use subdomains in one or multiple resources" style="border-style: none"/>
 Now, both URLs resolve to the same domain and are thus both serviced by the same ALB. However, because the resource in the staging namespace is registered with the `stage` subdomain, the Ingress ALB correctly routes requests from the `stage.mycluster.us-south.containers.mybluemix.net/myservice` URL to only `app3`.</dd>
 </dl>
+
+**Note**:
+* The IBM-provided Ingress subdomain wildcard, `*.<cluster_name>.<region>.containers.mybluemix.net`, is registered by default for your cluster. However, TLS is not supported for the IBM-provided Ingress subdomain wildcard.
+* If you want to use a custom domain, you must register the custom domain as a wildcard domain such as `*.custom_domain.net`. To use TLS, you must get a wildcard certificate.
+
+### Multiple domains within a namespace
 
 Within an individual namespace, you can use one domain to access all the apps in the namespace. If you want to use different domains for the apps within an individual namespace, use a wildcard domain. When a wildcard domain such as `*.mycluster.us-south.containers.mybluemix.net` is registered, multiple subdomains all resolve to the same host. Then, you can use one resource to specify multiple subdomain hosts within that resource. Alternatively, you can create multiple Ingress resources in the namespace and specify a different subdomain in each Ingress resource.
 
