@@ -267,14 +267,14 @@ To add a service:
 5.  Add the service to your cluster.
 
     ```
-    ibmcloud cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
+    bx cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
     {: pre}
 
     When the service is successfully added to your cluster, a cluster secret is created that holds the credentials of your service instance. Example CLI output:
 
     ```
-    ibmcloud cs cluster-service-bind mycluster mynamespace cleardb
+    bx cs cluster-service-bind mycluster mynamespace cleardb
     Binding service instance to namespace...
     OK
     Namespace:	mynamespace
