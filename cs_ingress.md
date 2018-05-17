@@ -80,11 +80,11 @@ At least one Ingress resource is required per namespace where you have apps that
 
 <dl>
 <dt>All apps are in one namespace</dt>
-<dd>If the apps in your cluster are all in the same namespace, at least one Ingress resource is required to define routing rules for the apps that are exposed there.
+<dd>If the apps in your cluster are all in the same namespace, at least one Ingress resource is required to define routing rules for the apps that are exposed there. For example, if you have `app1` and `app2` exposed by services in a development namespace, you can create an Ingress resource in the namespace. The resource specifies `domain.net` as the host and registers the paths that each app listens on with `domain.net`.
 <br></br><img src="images/cs_ingress_single_ns.png" width="300" alt="At least one resource is required per namespace." style="width:300px; border-style: none"/>
 </dd>
 <dt>Apps are in multiple namespaces</dt>
-<dd>If the apps in your cluster are in different namespaces, you must create at least one resource per namespace to define rules for the apps that are exposed there. To register multiple Ingress resources with the cluster's Ingress ALB, you must use a wildcard domain. When a wildcard domain such as *.mycluster.us-south.containers.mybluemix.net` is registered, multiple subdomains all resolve to the same host. Then, you can create an Ingress resource in each namespace and specify a different subdomain in each Ingress resource.
+<dd>If the apps in your cluster are in different namespaces, you must create at least one resource per namespace to define rules for the apps that are exposed there. To register multiple Ingress resources with the cluster's Ingress ALB, you must use a wildcard domain. When a wildcard domain such as `*.mycluster.us-south.containers.mybluemix.net` is registered, multiple subdomains all resolve to the same host. Then, you can create an Ingress resource in each namespace and specify a different subdomain in each Ingress resource.
 <br><br>
 For example, consider the following scenario:<ul>
 <li>You have two versions of the same app, `app1` and `app3`, for testing purposes.</li>
