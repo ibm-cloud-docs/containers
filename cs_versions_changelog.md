@@ -39,7 +39,28 @@ For information about changes since the previous version, see the following chan
 
 Review the following changes.
 
+### Changelog for worker node fix pack 1.10.1_1510, released 18 May 2018
+{: #1101_1510}
 
+<table summary="Changes that were made since version 1.10.1_1509">
+<caption>Changes since version 1.10.1_1509</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kubelet</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fix to address a bug that occurred if you used the block storage plug-in.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.10.1_1509, released 16 May 2018
 {: #1101_1509}
@@ -128,7 +149,28 @@ Review the following changes.
 
 Review the following changes.
 
+### Changelog for worker node fix pack 1.9.7_1512, released 18 May 2018
+{: #197_1512}
 
+<table summary="Changes that were made since version 1.9.7_1511">
+<caption>Changes since version 1.9.7_1511</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kubelet</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fix to address a bug that occurred if you used the block storage plug-in.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.9.7_1511, released 16 May 2018
 {: #197_1511}
@@ -199,7 +241,28 @@ Review the following changes.
 
 Review the following changes.
 
+### Changelog for worker node fix pack 1.8.11_1511, released 18 May 2018
+{: #1811_1511}
 
+<table summary="Changes that were made since version 1.8.11_1510">
+<caption>Changes since version 1.8.11_1510</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kubelet</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fix to address a bug that occurred if you used the block storage plug-in.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.8.11_1510, released 16 May 2018
 {: #1811_1510}
@@ -272,7 +335,28 @@ Review the following changes.
 
 Review the following changes.
 
+### Changelog for worker node fix pack 1.7.16_1513, released 18 May 2018
+{: #1716_1513}
 
+<table summary="Changes that were made since version 1.7.16_1512">
+<caption>Changes since version 1.7.16_1512</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kubelet</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fix to address a bug that occurred if you used the block storage plug-in.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.7.16_1512, released 16 May 2018
 {: #1716_1512}
