@@ -250,8 +250,6 @@ To troubleshoot your Ingress:
 <br />
 
 
-
-
 ## Ingress application load balancer secret issues
 {: #cs_albsecret_fails}
 
