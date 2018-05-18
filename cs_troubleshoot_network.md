@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-14"
+lastupdated: "2018-05-18"
 
 ---
 
@@ -248,8 +248,6 @@ To troubleshoot your Ingress:
     3.  Look for error messages in the ALB logs.
 
 <br />
-
-
 
 
 ## Ingress application load balancer secret issues

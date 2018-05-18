@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-14"
+lastupdated: "2018-05-18"
 
 ---
 
@@ -63,7 +63,7 @@ You can run {{site.data.keyword.containershort_notm}} in {{site.data.keyword.Blu
  <tr>
  <td>{{site.data.keyword.Bluemix_notm}} Public
  </td>
- <td>With {{site.data.keyword.Bluemix_notm}} Public on [shared or dedicated hardware or on bare metal machines](cs_clusters.html#shared_dedicated_node), you can host your apps in clusters on the cloud by using {{site.data.keyword.containershort_notm}}. {{site.data.keyword.containershort_notm}} on {{site.data.keyword.Bluemix_notm}} Public delivers powerful tools by combining Docker and Kubernetes technologies, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts.<br><br>For more information, see [{{site.data.keyword.containershort_notm}} technology](cs_tech.html#ibm-cloud-container-service-technology).
+ <td>With {{site.data.keyword.Bluemix_notm}} Public on [shared or dedicated hardware or on bare metal machines](cs_clusters.html#shared_dedicated_node), you can host your apps in clusters on the cloud by using {{site.data.keyword.containershort_notm}}. {{site.data.keyword.containershort_notm}} on {{site.data.keyword.Bluemix_notm}} Public delivers powerful tools by combining Docker and Kubernetes technologies, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts.<br><br>For more information, see [{{site.data.keyword.containershort_notm}} technology](cs_tech.html).
  </td>
  </tr>
  <tr>
@@ -119,7 +119,7 @@ You can create one free cluster or any number of standard clusters. Try out free
 
 
 {: #responsibilities}
-**Note**: Looking for your responsibilities and container terms when you use the service?
+**Note**: Looking for your responsibilities and {{site.data.keyword.containerlong}} terms when you use the service?
 
 {: #terms}
 See [{{site.data.keyword.containershort_notm}} responsibilities](cs_responsibilities.html).

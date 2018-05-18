@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-15"
+lastupdated: "2018-05-18"
 
 ---
 
@@ -57,7 +57,7 @@ Review the responsibilities that you share with IBM to manage your clusters.
 <br />
 
 
-## Abuse of containers
+## Abuse of {{site.data.keyword.containerlong_notm}}
 {: #terms}
 
 Clients cannot misuse {{site.data.keyword.containershort_notm}}.

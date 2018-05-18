@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-14"
+lastupdated: "2018-05-18"
 
 ---
 
@@ -240,7 +240,7 @@ Let your cluster access infrastructure resources and services from behind a fire
       </thead>
       <tbody>
         <tr>
-          <td>Global registry across container regions</td>
+          <td>Global registry across {{site.data.keyword.containershort_notm}} regions</td>
           <td>registry.bluemix.net</td>
           <td><code>169.60.72.144/28</code><br><code>169.61.76.176/28</code></td>
         </tr>
@@ -274,7 +274,7 @@ Let your cluster access infrastructure resources and services from behind a fire
         <p><table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
   <caption>IP addresses to open for monitoring traffic</caption>
         <thead>
-        <th>Container region</th>
+        <th>{{site.data.keyword.containershort_notm}} region</th>
         <th>Monitoring address</th>
         <th>Monitoring IP addresses</th>
         </thead>
@@ -303,7 +303,7 @@ Let your cluster access infrastructure resources and services from behind a fire
         <p><table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
 <caption>IP addresses to open for logging traffic</caption>
         <thead>
-        <th>Container region</th>
+        <th>{{site.data.keyword.containershort_notm}} region</th>
         <th>Logging address</th>
         <th>Logging IP addresses</th>
         </thead>

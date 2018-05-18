@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-14"
+lastupdated: "2018-05-18"
 
 ---
 
@@ -180,7 +180,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
 
     ```
     ID                                                  Public IP        Private IP     Machine Type   State      Status   Location   Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal     Ready    dal10      1.9.7
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.9.7
     ```
     {: screen}
 
@@ -253,7 +253,7 @@ To add a subnet from an on-premises network:
     VLANs
     VLAN ID   Subnet CIDR       Public   User-managed
     2234947   10.xxx.xx.xxx/29  false    false
-    2234945   169.xx.xxx.xxx/29 true   false
+    2234945   169.xx.xxx.xxx/29 true     false
     2234947   10.xxx.xx.xxx/24  false    true
     ```
     {: screen}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-15"
+lastupdated: "2018-05-18"
 
 ---
 
@@ -22,11 +22,13 @@ lastupdated: "2018-05-15"
 {: #storage}
 You can persist data in {{site.data.keyword.containerlong}} to share data between app instances and to protect your data from being lost if a component in your Kubernetes cluster fails.
 
+
 ## Planning highly available storage
 {: #planning}
 
 In {{site.data.keyword.containerlong_notm}}, you can choose from several options to store your app data and share data across pods in your cluster. However, not all storage options offer the same level of persistence and availability in situations where a component in your cluster or a whole site fails.
 {: shortdesc}
+
 
 ### Non-persistent data storage options
 {: #non_persistent}
@@ -51,10 +53,11 @@ The following image shows available non-persistent data storage options in {{sit
     </tr>
   <tr>
     <td>2. On the worker node</td>
-    <td>Every worker node is set up with primary and secondary storage that is determined by the machine type that you select for your worker node. The primary storage is used to store data from the operating system and can be accessed by using a [Kubernetes <code>hostPath</code> volume ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath). The secondary storage is used to store data in <code>/var/lib/docker</code>, the directory that all the container data is written to. You can access the secondary storage by using a [Kubernetes <code>emptyDir</code> volume ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir)<br/><br/>While <code>hostPath</code> volumes are used to mount files from the worker node file system to your pod, <code>emptyDir</code> creates an empty directory that is assigned to a pod in your cluster. All containers in that pod can read from and write to that volume. Because the volume is assigned to one specific pod, data cannot be shared with other pods in a replica set.<br/><br/><p>A <code>hostPath</code> or <code>emptyDir</code> volume and its data are removed when: <ul><li>The worker node is deleted.</li><li>The worker node is reloaded or updated.</li><li>The cluster is deleted.</li><li>The {{site.data.keyword.Bluemix_notm}} account reaches a suspended state. </li></ul></p><p>In addition, data in an <code>emptyDir</code> volume is removed when: <ul><li>The assigned pod is permanently deleted from the worker node.</li><li>The assigned pod is scheduled on another worker node.</li></ul></p><p><strong>Note:</strong> If the container inside the pod crashes, the data in the volume is still available on the worker node.</p></td>
+    <td>Every worker node is set up with primary and secondary storage that is determined by the machine type that you select for your worker node. The primary storage is used to store data from the operating system and can be accessed by using a [Kubernetes <code>hostPath</code> volume ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath). The secondary storage is used to store data from the `kubelet` and the container runtime engine. You can access the secondary storage by using a [Kubernetes <code>emptyDir</code> volume ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir)<br/><br/>While <code>hostPath</code> volumes are used to mount files from the worker node file system to your pod, <code>emptyDir</code> creates an empty directory that is assigned to a pod in your cluster. All containers in that pod can read from and write to that volume. Because the volume is assigned to one specific pod, data cannot be shared with other pods in a replica set.<br/><br/><p>A <code>hostPath</code> or <code>emptyDir</code> volume and its data are removed when: <ul><li>The worker node is deleted.</li><li>The worker node is reloaded or updated.</li><li>The cluster is deleted.</li><li>The {{site.data.keyword.Bluemix_notm}} account reaches a suspended state. </li></ul></p><p>In addition, data in an <code>emptyDir</code> volume is removed when: <ul><li>The assigned pod is permanently deleted from the worker node.</li><li>The assigned pod is scheduled on another worker node.</li></ul></p><p><strong>Note:</strong> If the container inside the pod crashes, the data in the volume is still available on the worker node.</p></td>
     </tr>
     </tbody>
     </table>
+
 
 ### Persistent data storage options for high availability
 {: #persistent}
@@ -959,6 +962,71 @@ To apply the latest security updates and for a better performance, use the defau
 
 
 
+
+## Installing the IBM Cloud infrastructure (SoftLayer) CLI
+{: #slcli}
+
+Install the IBM Cloud infrastructure (SoftLayer) CLI to interact with your infrastructure resources such as NFS file and block storage instances.
+{: shortdesc}
+
+Before you begin, [install Python 3.6](https://www.python.org/downloads/).
+
+1.  View the [installation docs ![External link icon](../icons/launch-glyph.svg "External link icon")](http://softlayer-api-python-client.readthedocs.io/en/latest/install/).
+
+    1.  Click the link in the **Download the tarball** or **Download the zipball** steps. Do not use the `curl` command.
+    2.  Find the downloaded package, unzip it, and navigate into the directory.
+    3.  Install the CLI.
+    
+        ```
+        python3 setup.py install
+        ```
+        {: pre}
+    
+2.  Get your IBM Cloud infrastructure (SoftLayer) API user name and API key.
+
+    1.  From the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/), expand the menu and select **Infrastructure**.
+    2.  From your profile in the menu bar, select the infrastructure account that you want to use.
+    3.  Select **Account** > **Users** > **User List**.
+    4.  From the **Users** table, in the **API KEY** column, click **View**. If you do not see an API key, click **Generate**.
+    5.  Copy the user name and API key in the pop-up window.
+
+3.  Configure the CLI to connect to your IBM Cloud infrastructure (SoftLayer) account.
+
+    1.  Configure the IBM Cloud infrastructure (SoftLayer) CLI.
+        ```
+        slcli setup
+        ```
+        {: pre}
+
+    2.  Fill in the required information.
+    
+        * **Username**: Enter the IBM Cloud infrastructure (SoftLayer) API user name that you previously retrieved.
+        * **API Key or Password**: Enter the IBM Cloud infrastructure (SoftLayer) API key that you previously retrieved.
+        * **Endpoint (public|private|custom) [public]**: Enter `https://api.softlayer.com/rest/v3.1`.
+        * **Timeout [0]**: Enter a value in seconds for the CLI to wait for a response from the API. A value of `0` sets the CLI to wait forever.
+        
+        **Example**:
+        
+        ```
+        $ slcli setup
+        Username []: 1234567_user.name@example.com
+        API Key or Password []: 
+        Endpoint (public|private|custom) [public]: https://api.softlayer.com/rest/v3.1 
+        Timeout [0]: 6000
+        :..............:..................................................................:
+        :         name : value                                                            :
+        :..............:..................................................................:
+        :     Username : 1234567_user.name@example.com                                    :
+        :      API Key : 1111aa1111bbb22222b2b3c33333c3c3cc44d4444444444dd4444eee55e5e5e5 :
+        : Endpoint URL : https://api.softlayer.com/xmlrpc/v3.1/                           :
+        :      Timeout : 6000                                                             :
+        :..............:..................................................................:
+        Are you sure you want to write settings to "/Users/name/.softlayer"? [Y/n]: Y
+        Configuration Updated Successfully
+        ```
+        {: screen}
+
+You are now ready to use the IBM Cloud infrastructure (SoftLayer) CLI.
 
 ## Installing the {{site.data.keyword.Bluemix_notm}} Block Storage plug-in on your cluster
 {: #install_block}

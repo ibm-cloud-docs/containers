@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-14"
+lastupdated: "2018-05-18"
 
 ---
 
@@ -28,6 +28,7 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for tr
 
 If you have a more general issue, try out [cluster debugging](cs_troubleshoot.html).
 {: tip}
+
 
 
 ## File systems for worker nodes change to read-only
