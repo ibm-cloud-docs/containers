@@ -96,5 +96,4 @@ IBM Cloud Kubernetes Service
 
     cs_popular_topics.md
     cs_rellinks.md
-    
     {: .navgroup-end}
