@@ -21,7 +21,7 @@ lastupdated: "2018-05-18"
 # Popular topics for {{site.data.keyword.containershort_notm}}
 {: #cs_popular_topics}
 
-Check out what container developers are interested in learning about in {{site.data.keyword.containerlong}}.
+Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about new features to explore, a trick to try out, or some popular topics that other developers are finding useful in the now.
 {:shortdesc}
 
 ## Popular topics in May 2018
