@@ -560,7 +560,7 @@ To use a custom domain:
 Ingress resources define the routing rules that the ALB uses to route traffic to your app service.
 {: shortdesc}
 
-**Note:** If you are exposing multiple external apps, and the services you created for the apps in [Step 1]({: #public_outside_1}) are in different namespaces, at least one Ingress resource is required per namespace. However, each namespace must use a different host. You must register a wildcard domain and specify a different subdomain in each resource. For more information, see [Planning networking for single or multiple namespaces](#multiple_namespaces).
+**Note:** If you are exposing multiple external apps, and the services you created for the apps in [Step 1](#public_outside_1) are in different namespaces, at least one Ingress resource is required per namespace. However, each namespace must use a different host. You must register a wildcard domain and specify a different subdomain in each resource. For more information, see [Planning networking for single or multiple namespaces](#multiple_namespaces).
 
 1. Open your preferred editor and create an Ingress configuration file that is named, for example, `myexternalingress.yaml`.
 
