@@ -63,12 +63,7 @@ Review these potential cluster setups that are ordered with increasing degrees o
 <br />
 
 
-[Add a global load balancer](/docs/infrastructure/cis/how-to.html#add-a-load-balancer) that uses your origin pools.
-    * To use your own global load balancer:
-        1. Configure your domain to route incoming traffic to your ALB or load balancer services by adding the IP addresses of all public enabled ALBs and load balancer services to your domain.
-        2. For each IP address, enable a ping-based health check so that your DNS provider can detect unhealthy IP addresses. If an unhealthy IP address is detected, traffic is not routed to this IP address anymore.
 
-</staging>
 
 
 ## Worker node configuration planning
