@@ -2,7 +2,7 @@
 {:topicgroup: .topicgroup}
 
 {: .toc subcollection="containers" audience="compute" href="/docs/containers/container_index.html"}
-IBM Cloud Container Service
+IBM Cloud Kubernetes Service
 
     {: .navgroup id="learn"}
     container_index.md
@@ -37,7 +37,6 @@ IBM Cloud Container Service
         cs_network_policy.md
         cs_cluster_update.md
         cs_users.md
-        cs_infrastructure.md
         cs_edge.md
         cs_health.md
 
@@ -61,7 +60,7 @@ IBM Cloud Container Service
     cs_cli_reference.md
 
     {: .topicgroup}
-    Kubernetes versions for IBM Cloud Container Service
+    Kubernetes versions for IBM Cloud Kubernetes Service
         cs_versions.md
         cs_versions_changelog.md
 
@@ -97,4 +96,5 @@ IBM Cloud Container Service
 
     cs_popular_topics.md
     cs_rellinks.md
+    
     {: .navgroup-end}
