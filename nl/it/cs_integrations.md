@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-05"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -19,12 +19,13 @@ lastupdated: "2018-02-05"
 # Integrazione dei servizi
 {: #integrations}
 
-Puoi utilizzare diversi servizi esterni e servizi nel catalogo {{site.data.keyword.Bluemix_notm}} con un cluster standard
-in {{site.data.keyword.containershort_notm}}.
+Puoi utilizzare vari servizi esterni e servizi di catalogo con un cluster Kubernetes standard in {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
+
+## Servizi delle applicazioni
 <table summary="Riepilogo dell'accessibilità">
-<caption>Tabella. Opzioni di integrazione per i cluster e le applicazioni in Kubernetes </caption>
+<caption>Tabella. Opzioni di integrazione per i servizi delle applicazioni</caption>
 <thead>
 <tr>
 <th>Servizio</th>
@@ -33,27 +34,61 @@ in {{site.data.keyword.containershort_notm}}.
 </thead>
 <tbody>
 <tr>
-<td>Aqua Security</td>
-  <td>Come un supplemento al <a href="/docs/services/va/va_index.html" target="_blank">Controllo vulnerabilità</a>, puoi utilizzare <a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per migliorare la sicurezza delle distribuzioni del contenitore riducendo cosa è consentito fare alla tua applicazione. Per ulteriori informazioni, consulta <a href="https://www.ibm.com/blogs/bluemix/2017/06/protecting-container-deployments-bluemix-aqua-security/" target="_blank">Protecting container deployments on {{site.data.keyword.Bluemix_notm}} with Aqua Security <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
-</tr>
-<tr>
-<td>Blockchain</td>
+<td>{{site.data.keyword.blockchainfull}}</td>
 <td>Distribuisci un ambiente di sviluppo pubblicamente per IBM Blockchain a un cluster Kubernetes in {{site.data.keyword.containerlong_notm}}. Utilizza questo ambiente per sviluppare e personalizzare la tua propria rete blockchain per distribuire le applicazioni che condividono un ledger immutabile per la registrazione della cronologia delle transazioni. Per ulteriori informazioni, consulta
 <a href="https://ibm-blockchain.github.io" target="_blank">Sviluppa in un sandbox cloud della piattaforma
 IBM Blockchain <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
 </tr>
+</tbody>
+</table>
+
+<br />
+
+
+
+## Servizi DevOps
+<table summary="Riepilogo dell'accessibilità">
+<caption>Tabella. Opzioni di integrazione per la gestione di DevOps</caption>
+<thead>
 <tr>
-<td>{{site.data.keyword.cloudcerts_short}}</td>
-<td>Puoi utilizzare <a href="../services/certificate-manager/index.html" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per archiviare e gestire i certificati SSL per le tue applicazioni. Per ulteriori informazioni, consulta <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containershort_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
+<th>Servizio</th>
+<th>Descrizione</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td>Codeship</td>
 <td>Puoi utilizzare <a href="https://codeship.com" target="_blank">Codeship <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per l'integrazione e la consegna continua dei contenitori. Per ulteriori informazioni, consulta <a href="https://www.ibm.com/blogs/bluemix/2017/10/using-codeship-pro-deploy-workloads-ibm-container-service/" target="_blank">Using Codeship Pro To Deploy Workloads to {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
 </tr>
 <tr>
-<td>{{site.data.keyword.contdelivery_short}}</td>
-<td>Automatizza le creazioni delle tue applicazioni e le distribuzioni ai cluster Kubernetes utilizzando una toolchain. Per informazioni sulla configurazione, consulta il blog <a href="https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines/" target="_blank">Deploy Kubernetes pods to the {{site.data.keyword.containerlong_notm}} using DevOps Pipelines <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
+<td>Helm</td>
+<td> <a href="https://helm.sh/" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> è un gestore del pacchetto Kubernetes. Puoi creare nuovi grafici Helm o utilizzare grafici Helm preesistenti per definire, installare e aggiornare applicazioni Kubernetes complesse eseguite nei cluster {{site.data.keyword.containerlong_notm}}. <p>Per ulteriori informazioni, vedi [Configurazione di Helm in {{site.data.keyword.containershort_notm}}](cs_integrations.html#helm).</p></td>
 </tr>
+<tr>
+<td>{{site.data.keyword.contdelivery_full}}</td>
+<td>Automatizza le creazioni delle tue applicazioni e le distribuzioni del contenitore ai cluster Kubernetes utilizzando una toolchain. Per informazioni sulla configurazione, consulta il blog <a href="https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines/" target="_blank">Deploy Kubernetes pods to the {{site.data.keyword.containerlong_notm}} using DevOps Pipelines <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
+</tr>
+<tr>
+<td>Istio</td>
+<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> è un servizio open source che offre agli sviluppatori un modo per connettere, proteggere, gestire e monitorare una rete di microservizi, nota anche come rete (mesh) di servizi, su piattaforme di orchestrazione cloud come Kubernetes. Controlla il post del blog relativo a <a href="https://developer.ibm.com/dwblog/2017/istio/" target="_blank">come IBM ha collaborato a fondare e avviato Istio<img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per trovare ulteriori informazioni sul progetto open source. Per installare Istio sul tuo cluster Kubernetes in {{site.data.keyword.containershort_notm}} e iniziare ad utilizzare un'applicazione di esempio, consulta [Tutorial: Managing microservices with Istio](cs_tutorials_istio.html#istio_tutorial).</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
+
+
+## Servizi di registrazione e monitoraggio
+<table summary="Riepilogo dell'accessibilità">
+<caption>Tabella. Opzioni di integrazione per la gestione di log e metriche</caption>
+<thead>
+<tr>
+<th>Servizio</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td>CoScale</td>
 <td>Monitora i nodi di lavoro, i contenitori, le serie di repliche, i controller della replica e i servizi con <a href="https://www.coscale.com/" target="_blank">CoScale <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. Per ulteriori informazioni, consulta <a href="https://www.ibm.com/blogs/bluemix/2017/06/monitoring-ibm-bluemix-container-service-coscale/" target="_blank">Monitoring {{site.data.keyword.containershort_notm}} with CoScale <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
@@ -63,20 +98,16 @@ IBM Blockchain <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a
 <td>Monitora il tuo cluster e visualizza le metriche delle prestazioni dell'applicazione e dell'infrastruttura con <a href="https://www.datadoghq.com/" target="_blank">Datadog <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. Per ulteriori informazioni, consulta <a href="https://www.ibm.com/blogs/bluemix/2017/07/monitoring-ibm-bluemix-container-service-datadog/" target="_blank">Monitoring {{site.data.keyword.containershort_notm}} with Datadog <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
 </tr>
 <tr>
-<td>Helm</td>
-<td> <a href="https://helm.sh/" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> è un gestore del pacchetto Kubernetes. Crea i grafici Helm per definire, installare e aggiornare le applicazioni Kubernetes complesse in esecuzione nei cluster {{site.data.keyword.containerlong_notm}}. Ulteriori informazioni su come puoi <a href="https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/" target="_blank">aumentare la velocità di distribuzione con i grafici Kubernetes<img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
+<td>{{site.data.keyword.loganalysisfull}}</td>
+<td>Espandi le tue capacità di raccolta, conservazione e ricerca dei log con {{site.data.keyword.loganalysisfull_notm}}. Per ulteriori informazioni, vedi <a href="../services/CloudLogAnalysis/containers/containers_kube_other_logs.html" target="_blank">Abilitazione della raccolta automatica dei log di cluster <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.monitoringlong}}</td>
+<td>Espandi le tue capacità di raccolta e conservazione delle metriche definendo regole e avvisi con {{site.data.keyword.monitoringlong_notm}}. Per ulteriori informazioni, vedi <a href="../services/cloud-monitoring/tutorials/container_service_metrics.html" target="_blank">Analizza le metriche in Grafana per un'applicazione distribuita in un cluster Kubernetes <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
 </tr>
 <tr>
 <td>Instana</td>
 <td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> fornisce il monitoraggio delle prestazioni di infrastruttura e applicazioni con una GUI che rileva e associa automaticamente le tue applicazioni. Istana cattura ogni richiesta alle tue applicazioni, che ti consente di risolvere i problemi ed eseguire l'analisi delle cause principali per evitare che i problemi si ripetano. Per ulteriori informazioni, controlla il post del blog relativo alla <a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">distribuzione di Istana in {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>.</td>
-</tr>
-<tr>
-<td>Istio</td>
-<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> è un servizio open source che offre agli sviluppatori un modo per connettere, proteggere, gestire e monitorare una rete di microservizi, nota anche come rete (mesh) di servizi, su piattaforme di orchestrazione cloud come Kubernetes. Controlla il post del blog relativo a <a href="https://developer.ibm.com/dwblog/2017/istio/" target="_blank">come IBM ha collaborato a fondare e avviato Istio<img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per trovare ulteriori informazioni sul progetto open source. Per installare Istio sul tuo cluster Kubernetes in {{site.data.keyword.containershort_notm}} e iniziare ad utilizzare un'applicazione di esempio, consulta [Tutorial: Managing microservices with Istio](cs_tutorials_istio.html#istio_tutorial).</td>
-</tr>
-<tr>
-<td>NeuVector</td>
-<td>Proteggi i contenitori con un firewall nativo nel cloud utilizzando <a href="https://neuvector.com/" target="_blank">NeuVector <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. Per ulteriori informazioni, consulta <a href="https://www.ibm.com/us-en/marketplace/neuvector-container-security" target="_blank">NeuVector Container Security <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
 </tr>
 <tr>
 <td>Prometheus</td>
@@ -90,20 +121,12 @@ per monitorare le prestazioni e i carichi di lavoro nel tuo cluster.
 </td>
 </tr>
 <tr>
-<td>{{site.data.keyword.bpshort}}</td>
-<td>{{site.data.keyword.bplong}} è uno strumento di automazione che utilizza Terraform per distribuire la tua infrastruttura come codice. Quando distribuisci la tua infrastruttura come una sola unità, puoi riutilizzare queste definizioni della risorsa cloud in un qualsiasi numero di ambienti. Per definire un cluster Kubernetes come una risorsa con {{site.data.keyword.bpshort}}, prova a creare un ambiente con il [template container-cluster](https://console.bluemix.net/schematics/templates/details/Cloud-Schematics%2Fcontainer-cluster). Per ulteriori informazioni su Schematics, consulta [Informazioni su {{site.data.keyword.bplong_notm}}](/docs/services/schematics/schematics_overview.html#about).</td>
-</tr>
-<tr>
 <td>Sematext</td>
 <td>Visualizza le metriche e i log per le tue applicazioni inserite in un contenitore utilizzando <a href="https://sematext.com/" target="_blank">Sematext <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. Per ulteriori informazioni, consulta <a href="https://www.ibm.com/blogs/bluemix/2017/09/monitoring-logging-ibm-bluemix-container-service-sematext/" target="_blank">Monitoring & logging for containers with Sematext <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
 </tr>
 <tr>
 <td>Sysdig</td>
 <td>Acquisisci le metriche dell'applicazione, del contenitore, di statsd e dell'host con un solo punto di strumentazione utilizzando <a href="https://sysdig.com/" target="_blank">Sysdig <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. Per ulteriori informazioni, consulta <a href="https://www.ibm.com/blogs/bluemix/2017/08/monitoring-ibm-bluemix-container-service-sysdig-container-intelligence/" target="_blank">Monitoring {{site.data.keyword.containershort_notm}} with Sysdig Container Intelligence <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
-</tr>
-<tr>
-<td>Twistlock</td>
-<td>Come un supplemento al <a href="/docs/services/va/va_index.html" target="_blank">Controllo vulnerabilità</a>, puoi utilizzare <a href="https://www.twistlock.com/" target="_blank">Twistlock <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per gestire i firewall, la protezione dalle minacce e la risposta agli incidenti. Per ulteriori informazioni, consulta <a href="https://www.ibm.com/blogs/bluemix/2017/07/twistlock-ibm-bluemix-container-service/" target="_blank">Twistlock on {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
 </tr>
 <tr>
 <td>Weave Scope</td>
@@ -119,12 +142,47 @@ per la CPU e la memoria e inoltre fornisce strumenti per inserire ed eseguire in
 
 
 
-## Aggiunta dei servizi ai cluster
+## Servizi di sicurezza
+<table summary="Riepilogo dell'accessibilità">
+<caption>Tabella. Opzioni di integrazione per la gestione della sicurezza</caption>
+<thead>
+<tr>
+<th>Servizio</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+  <tr id="appid">
+    <td>{{site.data.keyword.appid_full}}</td>
+    <td>Aggiungi un livello di sicurezza alle tue applicazioni con [{{site.data.keyword.appid_short}}](/docs/services/appid/index.html#gettingstarted) richiedendo agli utenti di effettuare l'accesso. Per autenticare le richieste HTTP/HTTPS web o API nella tua applicazione, puoi integrare {{site.data.keyword.appid_short_notm}} con il tuo servizio Ingress utilizzando l'[annotazione Ingress per l'autenticazione {{site.data.keyword.appid_short_notm}}](cs_annotations.html#appid-auth).</td>
+  </tr>
+<tr>
+<td>Aqua Security</td>
+  <td>Come un supplemento al <a href="/docs/services/va/va_index.html" target="_blank">Controllo vulnerabilità</a>, puoi utilizzare <a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per migliorare la sicurezza delle distribuzioni del contenitore riducendo cosa è consentito fare alla tua applicazione. Per ulteriori informazioni, consulta <a href="https://www.ibm.com/blogs/bluemix/2017/06/protecting-container-deployments-bluemix-aqua-security/" target="_blank">Protecting container deployments on {{site.data.keyword.Bluemix_notm}} with Aqua Security <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloudcerts_full}}</td>
+<td>Puoi utilizzare <a href="../services/certificate-manager/index.html" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per archiviare e gestire i certificati SSL per le tue applicazioni. Per ulteriori informazioni, consulta <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containershort_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
+</tr>
+<tr>
+<td>NeuVector</td>
+<td>Proteggi i contenitori con un firewall nativo nel cloud utilizzando <a href="https://neuvector.com/" target="_blank">NeuVector <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. Per ulteriori informazioni, consulta <a href="https://www.ibm.com/us-en/marketplace/neuvector-container-security" target="_blank">NeuVector Container Security <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
+</tr>
+<tr>
+<td>Twistlock</td>
+<td>Come un supplemento al <a href="/docs/services/va/va_index.html" target="_blank">Controllo vulnerabilità</a>, puoi utilizzare <a href="https://www.twistlock.com/" target="_blank">Twistlock <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per gestire i firewall, la protezione dalle minacce e la risposta agli incidenti. Per ulteriori informazioni, consulta <a href="https://www.ibm.com/blogs/bluemix/2017/07/twistlock-ibm-bluemix-container-service/" target="_blank">Twistlock on {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
+
+
+## Aggiunta di servizi Cloud Foundry ai cluster
 {: #adding_cluster}
 
-Aggiungi un'istanza del servizio {{site.data.keyword.Bluemix_notm}} esistente al tuo cluster
-per abilitare gli utenti del cluster ad accedere e utilizzare il servizio
-{{site.data.keyword.Bluemix_notm}} quando distribuiscono un'applicazione al cluster.
+Aggiungi un'istanza del servizio Cloud Foundry esistente al tuo cluster per consentire agli utenti del cluster di accedere e utilizzare il servizio quando distribuiscono un'applicazione sul cluster.
 {:shortdesc}
 
 Prima di iniziare:
@@ -132,6 +190,7 @@ Prima di iniziare:
 1. [Indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) al tuo cluster.
 2. [Richiedi un'istanza del servizio {{site.data.keyword.Bluemix_notm}}](/docs/apps/reqnsi.html#req_instance).
    **Nota:** per creare un'istanza di un servizio nell'ubicazione Washington, devi utilizzare la CLI.
+3. I servizi Cloud Foundry sono supportati per il bind con i cluster, ma altri servizi non lo sono. Puoi vedere i diversi tipi di servizio dopo aver creato l'istanza del servizio e i servizi sono raggruppati nel dashboard come **Servizi Cloud Foundry** e **Servizi**. Per eseguire il bind dei servizi elencati nella sezione **Servizi** ai cluster, [crea prima gli alias Cloud Foundry](#adding_resource_cluster).
 
 **Nota:**
 <ul><ul>
@@ -202,28 +261,70 @@ della tua istanza del servizio. Output CLI di esempio:
 
 Per utilizzare il
 servizio in un pod distribuito nel cluster, gli utenti del cluster possono accedere alle credenziali del servizio {{site.data.keyword.Bluemix_notm}} da
-[montaggio del segreto Kubernetes come un volume secreto in un pod](cs_integrations.html#adding_app).
+[montaggio del segreto Kubernetes come un volume secreto in un pod](cs_storage.html#app_volume_mount).
+
+
+
 
 <br />
 
 
+## Creazione di alias Cloud Foundry per altre risorse del servizio {{site.data.keyword.Bluemix_notm}}
+{: #adding_resource_cluster}
 
-## Aggiunta dei servizi alle applicazioni 
+I servizi Cloud Foundry sono supportati per il bind con i cluster. Per eseguire il bind di un servizio {{site.data.keyword.Bluemix_notm}} che non è un servizio Cloud Foundry al tuo cluster, crea un alias Cloud Foundry per l'istanza del servizio.
+{:shortdesc}
+
+Prima di iniziare, [richiedi un'istanza del servizio {{site.data.keyword.Bluemix_notm}}](/docs/apps/reqnsi.html#req_instance).
+
+Per creare un alias Cloud Foundry per l'istanza del servizio:
+
+1. Specifica l'organizzazione e uno spazio in cui viene creata l'istanza del servizio.
+
+    ```
+    bx target -o <org_name> -s <space_name>
+    ```
+    {: pre}
+
+2. Prendi nota del nome dell'istanza del servizio.
+    ```
+    bx resource service-instances
+    ```
+    {: pre}
+
+3. Crea un alias Cloud Foundry per l'istanza del servizio.
+    ```
+    bx resource service-alias-create <service_alias_name> --instance-name <service_instance>
+    ```
+    {: pre}
+
+4. Verifica che l'alias di servizio sia stato creato.
+
+    ```
+    bx service list
+    ```
+    {: pre}
+
+5. [Esegui il bind dell'alias Cloud Foundry al cluster](#adding_cluster).
+
+
+
+<br />
+
+
+## Aggiunta dei servizi alle applicazioni
 {: #adding_app}
 
 I segreti Kubernetes crittografati sono utilizzati per memorizzare i dettagli e le credenziali del servizio {{site.data.keyword.Bluemix_notm}}
-e consentono una comunicazione sicura tra il servizio e il cluster. In qualità di utente del cluster,
-puoi accedere a questo segreto montandolo come volume in un pod.
+e consentono una comunicazione sicura tra il servizio e il cluster.
 {:shortdesc}
 
-Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) al tuo cluster. Accertati che il servizio {{site.data.keyword.Bluemix_notm}} che vuoi usare nella tua applicazione sia stato [aggiunto al cluster](cs_integrations.html#adding_cluster) dall'amministratore del cluster.
-
 I segreti Kubernetes rappresentano un modo sicuro per memorizzare informazioni riservate, quali nome utente, password o
-chiavi. Anziché esporre informazioni riservate attraverso le variabili di ambiente o direttamente nel
-Dockerfile, i segreti devono essere montati come volume segreto in un pod per renderli accessibili a un
-contenitore in esecuzione in un pod.
+chiavi. Invece di esporre informazioni riservate attraverso le variabili di ambiente o direttamente nel Dockerfile, gli utenti del cluster possono montare segreti in un pod. Quindi, un contenitore in esecuzione in un pod potrà accedere a questi segreti.
 
 Quando monti un volume segreto nel tuo pod, un file denominato binding viene memorizzato nella directory di montaggio del volume che include tutte le informazioni e credenziali di cui hai bisogno per accedere al servizio {{site.data.keyword.Bluemix_notm}}.
+
+Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) al tuo cluster. Accertati che il servizio {{site.data.keyword.Bluemix_notm}} che vuoi usare nella tua applicazione sia stato [aggiunto al cluster](cs_integrations.html#adding_cluster) dall'amministratore del cluster.
 
 1.  Elenca i segreti disponibili nello spazio dei nomi del cluster.
 
@@ -251,7 +352,7 @@ corretto.
 segreto. Se hai associato più di un servizio, verifica che ogni segreto sia associato al servizio corretto.
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1beta1
     kind: Deployment
     metadata:
       labels:
@@ -359,13 +460,67 @@ determinare i dettagli del servizio.
 <br />
 
 
+## Configurazione di Helm in {{site.data.keyword.containershort_notm}}
+{: #helm}
+
+[Helm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh/) è un gestore pacchetti di Kubernetes. Puoi creare grafici Helm o utilizzare grafici Helm preesistenti per definire, installare e aggiornare applicazioni Kubernetes complesse eseguite nei cluster {{site.data.keyword.containerlong_notm}}.
+{:shortdesc}
+
+Prima di utilizzare i grafici Helm con {{site.data.keyword.containershort_notm}}, devi installare e inizializzare un'istanza Helm per il tuo cluster. Puoi quindi aggiungere il repository Helm {{site.data.keyword.Bluemix_notm}} alla tua istanza Helm.
+
+Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) al cluster in cui vuoi utilizzare un grafico Helm.
+
+1. Installa la <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">CLI Helm <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>.
+
+2. Avvia Helm e installa `tiller`.
+
+    ```
+    helm init
+    ```
+    {: pre}
+
+3. Verifica che il pod `tiller-deploy` abbia uno **Status** di `Running` nel tuo cluster.
+
+    ```
+    kubectl get pods -n kube-system -l app=helm
+    ```
+    {: pre}
+
+    Output di esempio:
+
+    ```
+    NAME                            READY     STATUS    RESTARTS   AGE
+    tiller-deploy-352283156-nzbcm   1/1       Running   0          2m
+    ```
+    {: screen}
+
+4. Aggiungi il repository Helm {{site.data.keyword.Bluemix_notm}} alla tua istanza Helm.
+
+    ```
+    helm repo add ibm  https://registry.bluemix.net/helm/ibm
+    ```
+    {: pre}
+
+5. Elenca i grafici Helm attualmente disponibili nel repository {{site.data.keyword.Bluemix_notm}}.
+
+    ```
+    helm search ibm
+    ```
+    {: pre}
+
+
+### Link Helm correlati
+{: #helm_links}
+
+* Per utilizzare il grafico Helm strongSwan, vedi [Configurazione della connettività VPN con il grafico Helm del servizio VPN IPSec strongSwan](cs_vpn.html#vpn-setup).
+* Visualizza i grafici Helm disponibili che puoi utilizzare con {{site.data.keyword.Bluemix_notm}} nella GUI [Helm Charts Catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts).
+* Ulteriori informazioni sui comandi Helm utilizzati per configurare e gestire i grafici Helm sono disponibili nella <a href="https://docs.helm.sh/helm/" target="_blank">documentazione Helm <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.
+* Ulteriori informazioni su come puoi [aumentare la velocità di distribuzione con i grafici Helm Kubernetes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/).
 
 ## Visualizzazione delle risorse del cluster Kubernetes
 {: #weavescope}
 
-Weave Scope fornisce un diagramma visivo delle risorse in un cluster Kubernetes,
-inclusi i servizi, i pod, i contenitori, i processi, i nodi e altro. Scope fornisce metriche interattive
-per la CPU e la memoria e inoltre fornisce strumenti per inserire ed eseguire in un contenitore.
+Weave Scope fornisce un diagramma visivo delle tue risorse all'interno di un cluster Kubernetes, inclusi servizi, pod, contenitori e altro. Weave Scope fornisce metriche interattive per CPU e memoria e strumenti per l'accodamento e l'esecuzione in un contenitore.
 {:shortdesc}
 
 Prima di iniziare:
@@ -373,7 +528,7 @@ Prima di iniziare:
 -   Ricorda di non esporre le informazioni del tuo cluster pubblicamente su internet. Completa questa procedura per distribuire in sicurezza Weave Scope e accedervi da un browser web
 localmente.
 -   Se non ne hai già uno, [crea un
-cluster standard](cs_clusters.html#clusters_ui). Weave Scope può essere intensivo per la CPU, specialmente l'applicazione. Esegui Weave Scope con grandi cluster a pagamento, non con cluster gratuito. 
+cluster standard](cs_clusters.html#clusters_ui). Weave Scope può essere intensivo per la CPU, specialmente l'applicazione. Esegui Weave Scope con grandi cluster a pagamento, non con cluster gratuito.
 -   [Indirizza la tua
 CLI](cs_cli_install.html#cs_cli_configure) al tuo cluster per eseguire i comandi kubectl.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-14"
 
 ---
 
@@ -18,7 +18,7 @@ lastupdated: "2018-01-11"
 # 在防火牆中開啟必要埠及 IP 位址
 {: #firewall}
 
-請檢閱下列狀況，您在下列狀況時可能需要在防火牆中開啟特定的埠和 IP 位址：
+請檢閱下列狀況，在下列狀況時，您可能需要在防火牆中為 {{site.data.keyword.containerlong}} 開啟特定的埠和 IP 位址。
 {:shortdesc}
 
 * 當組織網路原則導致無法透過 Proxy 或防火牆存取公用網際網路端點時，從本端系統[執行 `bx` 指令](#firewall_bx)。
@@ -192,7 +192,7 @@ lastupdated: "2018-01-11"
       <tr>
         <td>亞太地區北部</td>
         <td>hkg02<br>seo01<br>sng01<br>tok02</td>
-        <td><code>169.56.132.234</code><br><code>161.202.126.210</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
+        <td><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><code>161.202.126.210</code></td>
        </tr>
       <tr>
          <td>亞太地區南部</td>
@@ -202,7 +202,7 @@ lastupdated: "2018-01-11"
       <tr>
          <td>歐盟中部</td>
          <td>ams03<br>fra02<br>mil01<br>par01</td>
-         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.170</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
         </tr>
       <tr>
         <td>英國南部</td>
@@ -216,8 +216,8 @@ lastupdated: "2018-01-11"
       </tr>
       <tr>
         <td>美國南部</td>
-        <td>dal10<br>dal12<br>dal13<br>sao01</td>
-        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>169.57.151.10</code></td>
+        <td>dal10<br>dal12<br>dal13<br>hou02<br>sao01</td>
+        <td><code>169.47.234.18, 169.46.7.238</code><br><code>169.47.70.10</code><br><code>169.60.128.2</code><br><code>184.173.44.62</code><br><code>169.57.151.10</code></td>
       </tr>
       </tbody>
     </table>

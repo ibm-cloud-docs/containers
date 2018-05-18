@@ -16,10 +16,10 @@ lastupdated: "2017-11-02"
 {:download: .download}
 
 
-# Creazione di un token {{site.data.keyword.registryshort_notm}} per un registro di immagini di {{site.data.keyword.Bluemix_dedicated_notm}} 
+# Creazione di un token {{site.data.keyword.registryshort_notm}} per un registro di immagini di {{site.data.keyword.Bluemix_dedicated_notm}}
 {: #cs_dedicated_tokens}
 
-Crea un token senza scadenza per utilizzare un registro di immagini che hai utilizzato per i gruppi scalabili o singoli con cluster.
+Crea un token senza scadenza per un registro di immagini che hai utilizzato per i gruppi singoli o scalabili con i cluster in {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
 1.  Accedi all'ambiente {{site.data.keyword.Bluemix_dedicated_notm}}.
@@ -84,9 +84,7 @@ variabile.
     <tbody>
     <tr>
     <td><code>--namespace &lt;kubernetes_namespace&gt;</code></td>
-    <td>Obbligatoria. Lo spazio dei nomi Kubernetes del cluster in cui vuoi utilizzare il segreto e a cui
-distribuire i contenitori. Esegui <code>kubectl get namespaces</code> per elencare tutti gli spazi dei nomi nel tuo
-cluster.</td>
+    <td>Obbligatoria. Lo spazio dei nomi Kubernetes del cluster in cui vuoi utilizzare il segreto e a cui distribuire i contenitori. Esegui <code>kubectl get namespaces</code> per elencare tutti gli spazi dei nomi nel tuo cluster.</td>
     </tr>
     <tr>
     <td><code>&lt;secret_name&gt;</code></td>
@@ -94,8 +92,7 @@ cluster.</td>
     </tr>
     <tr>
     <td><code>--docker-server &lt;registry_url&gt;</code></td>
-    <td>Obbligatoria. L'URL del registro di immagini in cui è configurato il tuo spazio dei nomi:
-registry.&lt;dedicated_domain&gt;</li></ul></td>
+    <td>Obbligatoria. L'URL del registro di immagini in cui è configurato il tuo spazio dei nomi: registry.&lt;dedicated_domain&gt;</li></ul></td>
     </tr>
     <tr>
     <td><code>--docker-username &lt;docker_username&gt;</code></td>
@@ -107,17 +104,14 @@ registry.&lt;dedicated_domain&gt;</li></ul></td>
     </tr>
     <tr>
     <td><code>--docker-email &lt;docker-email&gt;</code></td>
-    <td>Obbligatoria. Se ne hai uno, immetti il tuo indirizzo e-mail Docker. Se non hai uno, immetti
-un indirizzo e-mail fittizio, come ad esempio a@b.c. Questa e-mail è obbligatoria per creare un segreto Kubernetes,
-ma non viene utilizzata dopo la creazione.</td>
+    <td>Obbligatoria. Se ne hai uno, immetti il tuo indirizzo e-mail Docker. Se non hai uno, immetti un indirizzo e-mail fittizio, come ad esempio a@b.c. Questa e-mail è obbligatoria per creare un segreto Kubernetes, ma non viene utilizzata dopo la creazione.</td>
     </tr>
     </tbody></table>
 
 7.  Crea un a pod che fa riferimento all'imagePullSecret.
 
     1.  Apri il tuo editor preferito e crea uno script di configurazione del pod denominato mypod.yaml.
-    2.  Definisci il pod e l'imagePullSecret che vuoi utilizzare per accedere al registro. Per
-utilizzare un'immagine privata da uno spazio dei nomi:
+    2.  Definisci il pod e l'imagePullSecret che vuoi utilizzare per accedere al registro. Per utilizzare un'immagine privata da uno spazio dei nomi:
 
         ```
         apiVersion: v1
@@ -149,16 +143,14 @@ utilizzare un'immagine privata da uno spazio dei nomi:
         </tr>
         <tr>
         <td><code>&lt;my_namespace&gt;</code></td>
-        <td>Lo spazio dei nomi in cui è memorizzata la tua immagine. Per elencare gli spazi dei nomi disponibili, esegui `bx cr
-namespace-list`.</td>
+        <td>Lo spazio dei nomi in cui è memorizzata la tua immagine. Per elencare gli spazi dei nomi disponibili, esegui `bx cr namespace-list`.</td>
         </tr>
         <td><code>&lt;my_image&gt;</code></td>
         <td>Il nome dell'immagine che vuoi utilizzare. Per elencare le immagini disponibili in un account {{site.data.keyword.Bluemix_notm}}, esegui <code>bx cr image-list</code>.</td>
         </tr>
         <tr>
         <td><code>&lt;tag&gt;</code></td>
-        <td>La versione dell'immagine che vuoi utilizzare. Se non si specifica una tag, viene utilizzata l'immagine contrassegnata con
-<strong>latest</strong> per impostazione predefinita.</td>
+        <td>La versione dell'immagine che vuoi utilizzare. Se non si specifica una tag, viene utilizzata l'immagine contrassegnata con <strong>latest</strong> per impostazione predefinita.</td>
         </tr>
         <tr>
         <td><code>&lt;secret_name&gt;</code></td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-14"
 
 ---
 
@@ -19,16 +19,22 @@ lastupdated: "2018-01-11"
 # Container auf Grundlage von Images erstellen
 {: #images}
 
-Ein Docker-Image bildet die Grundlage für die Erstellung eines jeden Containers. Ein Image wird auf der Grundlage einer Dockerfile erstellt. Hierbei handelt es sich um eine Datei, die Anweisungen zum Erstellen des Image enthält. Eine Dockerfile referenziert möglicherweise in ihren Anweisungen Buildartefakte, die separat gespeichert sind, z. B. eine App, die Konfiguration der App und ihre Abhängigkeiten.
+Ein Docker-Image ist die Basis für jeden Container, den Sie mit {{site.data.keyword.containerlong}} erstellen.
 {:shortdesc}
+
+Ein Image wird auf der Grundlage einer Dockerfile erstellt. Hierbei handelt es sich um eine Datei, die Anweisungen zum Erstellen des Image enthält. Eine Dockerfile referenziert möglicherweise in ihren Anweisungen Buildartefakte, die separat gespeichert sind, z. B. eine App, die Konfiguration der App und ihre Abhängigkeiten.
+
 
 
 ## Image-Registrys planen
 {: #planning}
 
-Images werden in der Regel in einer Registry gespeichert, auf die der Zugriff entweder öffentlich (extern) möglich ist (öffentliche Registry) oder aber so eingerichtet ist, dass der Zugriff auf eine kleine Gruppe von Benutzern beschränkt ist (private Registry). Öffentliche Registrys wie Docker Hub sind gut dafür geeignet, sich mit Docker und Kubernetes vertraut zu machen und die erste containerisierte App in einem Cluster zu erstellen. Was Unternehmensanwendungen betrifft, so sollten Sie jedoch eine private Registry (wie z. B. die von {{site.data.keyword.registryshort_notm}} bereitgestellte Registry) verwenden,
-um zu verhindern, dass Ihre Images durch nicht berechtigte Benutzer verwendet oder unbefugt Änderungen an ihnen vorgenommen werden. Private Registrys müssen vom Clusteradministrator eingerichtet werden, damit sichergestellt ist, dass die Berechtigungsnachweise für den Zugriff auf die private Registry den Clusterbenutzern zur Verfügung stehen.
+Images werden in der Regel in einer Registry gespeichert, auf die der Zugriff entweder öffentlich (extern) möglich ist (öffentliche Registry) oder aber so eingerichtet ist, dass der Zugriff auf eine kleine Gruppe von Benutzern beschränkt ist (private Registry). 
 {:shortdesc}
+
+Öffentliche Registrys wie Docker Hub sind gut dafür geeignet, sich mit Docker und Kubernetes vertraut zu machen und die erste containerisierte App in einem Cluster zu erstellen. Was Unternehmensanwendungen betrifft, so sollten Sie jedoch eine private Registry (wie z. B. die von {{site.data.keyword.registryshort_notm}} bereitgestellte Registry) verwenden,
+um zu verhindern, dass Ihre Images durch nicht berechtigte Benutzer verwendet oder unbefugt Änderungen an ihnen vorgenommen werden. Private Registrys müssen vom Clusteradministrator eingerichtet werden, damit sichergestellt ist, dass die Berechtigungsnachweise für den Zugriff auf die private Registry den Clusterbenutzern zur Verfügung stehen.
+
 
 Für die Bereitstellung Ihrer Apps im Cluster können Sie mehrere Registrys mit {{site.data.keyword.containershort_notm}} verwenden.
 
@@ -62,7 +68,7 @@ Wenn Sie einen Cluster erstellen, werden automatisch nicht ablaufende Registry-T
 
 Jedes Token muss in einem `imagePullSecret` von Kubernetes gespeichert sein, damit ein Kubernetes-Cluster darauf zugreifen kann, wenn Sie eine containerisierte App bereitstellen. Bei der Erstellung Ihres Clusters werden die Tokens für die globale Registry (mit den von IBM bereitgestellten öffentlichen Images) von {{site.data.keyword.containershort_notm}} automatisch in geheimen Schlüsseln für Image-Pulloperationen (imagePullSecrets) in Kubernetes gespeichert. Diese geheimen Schlüssel für Image-Pulloperationen werden dem `standardmäßigen` Kubernetes-Namensbereich (default), der Standardliste mit geheimen Schlüsseln im Servicekonto (`ServiceAccount`) für diesen Namensbereich und dem Namensbereich `kube-system` hinzugefügt.
 
-**Hinweis:** Bei dieser anfänglichen Konfiguration können Sie Container aus allen Images, die in einem Namensbereich in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto verfügbar sind, im **Standardnamensbereich** Ihres Clusters bereitstellen. Wenn Sie einen Container in anderen Namespaces Ihres Clusters bereitstellen möchten oder wenn Sie ein Image verwenden möchten, das in einer {{site.data.keyword.Bluemix_notm}}-Region oder in einem anderen {{site.data.keyword.Bluemix_notm}}-Konto gespeichert ist, müssen Sie [Ihr eigenes 'imagePullSecret' für Ihren Cluster erstellen](#other).
+**Hinweis:** Bei dieser anfänglichen Konfiguration können Sie Container aus allen Images, die in einem Namensbereich in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto verfügbar sind, im **Standardnamensbereich** Ihres Clusters bereitstellen. Wenn Sie einen Container in anderen Namensbereichen Ihres Clusters bereitstellen möchten oder wenn Sie ein Image verwenden möchten, das in einer {{site.data.keyword.Bluemix_notm}}-Region oder in einem anderen {{site.data.keyword.Bluemix_notm}}-Konto gespeichert ist, müssen Sie [Ihr eigenes 'imagePullSecret' für Ihren Cluster erstellen](#other).
 
 Um einen Container im Standardnamensbereich (**default**) Ihres Clusters bereitzustellen, müssen Sie eine Konfigurationsdatei erstellen.
 
@@ -73,7 +79,7 @@ Um einen Container im Standardnamensbereich (**default**) Ihres Clusters bereitz
 um ein privates Image aus einem Namensbereich in {{site.data.keyword.registryshort_notm}} zu verwenden:
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1beta1
     kind: Deployment
     metadata:
       name: ibmliberty-deployment
@@ -86,7 +92,7 @@ um ein privates Image aus einem Namensbereich in {{site.data.keyword.registrysho
         spec:
           containers:
           - name: ibmliberty
-            image: registry.<region>.bluemix.net/<namensbereich>/<mein_image>:<tag>
+            image: registry.<region>.bluemix.net/<namespace>/<my_image>:<tag>
     ```
     {: codeblock}
 
@@ -289,7 +295,7 @@ Erstellen Sie eine Bereitstellungskonfigurationsdatei.
 2.  Definieren Sie die Bereitstellung und das gewünschte öffentliche Image aus Docker Hub. Die folgende Konfigurationsdatei verwendet das öffentliche NGINX-Image, das in Docker Hub verfügbar ist.
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1beta1
     kind: Deployment
     metadata:
       name: nginx-deployment
@@ -327,7 +333,7 @@ Erstellen Sie eine Bereitstellungskonfigurationsdatei.
 ## Zugriff auf Images in anderen privaten Registrys
 {: #private_images}
 
-Wenn bereits eine private Registry vorhanden ist und Sie diese verwenden wollen, müssen Sie die Berechtigungsnachweise für die Registry in einem 'imagePullSecret' von Kubernetes
+Wenn bereits eine private Registry zur Verwendung vorhanden ist, müssen Sie die Berechtigungsnachweise für die Registry in einem 'imagePullSecret' von Kubernetes
 speichern und diesen geheimen Schlüssel in Ihrer Konfigurationsdatei referenzieren.
 {:shortdesc}
 
@@ -442,4 +448,3 @@ Gehen Sie wie folgt vor, um ein 'imagePullSecret' zu erstellen:
         kubectl apply -f mypod.yaml
         ```
         {: pre}
-

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-02"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -19,13 +19,19 @@ lastupdated: "2018-02-02"
 # 更新集群和工作程序节点
 {: #update}
 
+可以通过安装更新，使 {{site.data.keyword.containerlong}} 中的 Kubernetes 集群保持最新。
+{:shortdesc}
+
 ## 更新 Kubernetes 主节点
 {: #master}
 
-Kubernetes 会定期发布更新。这可能是[主要更新、次要更新或补丁更新](cs_versions.html#version_types)。根据更新类型，您可能要负责更新 Kubernetes 主节点。使工作程序节点保持最新始终是您的责任。进行更新时，会先更新 Kubernetes 主节点，后更新工作程序节点。
+Kubernetes 会定期发布[主要更新、次要更新或补丁更新](cs_versions.html#version_types)。根据更新类型，您可能要负责更新 Kubernetes 主节点组件。
 {:shortdesc}
 
-缺省情况下，您最多只能跨当前版本 Kubernetes 主节点的两个次版本进行更新。例如，如果当前主节点的版本是 1.5，而您要更新到 1.8，那么必须先更新到 1.7。可以强制更新执行，但跨两个以上的次版本更新可能会导致意外结果。
+更新会影响 Kubernetes 主节点中的 Kubernetes API 服务器版本或其他组件。使工作程序节点保持最新始终是您的责任。进行更新时，会先更新 Kubernetes 主节点，后更新工作程序节点。
+
+
+缺省情况下，您最多只能跨当前版本 Kubernetes 主节点的两个次版本来更新 Kubernetes API 服务器。例如，如果当前 Kubernetes API 服务器的版本是 1.5，而您要更新到 1.8，那么必须先更新到 1.7。可以强制更新执行，但跨两个以上的次版本更新可能会导致意外结果。如果集群运行的是不支持的 Kubernetes 版本，那么可能必须强制执行此更新。
 
 下图显示更新主节点时可以执行的流程。
 
@@ -38,10 +44,11 @@ Kubernetes 会定期发布更新。这可能是[主要更新、次要更新或�
 对于_主要_或_次要_更新，请完成以下步骤：
 
 1. 查看 [Kubernetes 更改](cs_versions.html)，并对任何更新标记为_在更新主节点之前更新_。
-2. 使用 GUI 或运行 [CLI 命令](cs_cli_reference.html#cs_cluster_update)来更新 Kubernetes 主节点。当您更新 Kubernetes 主节点时，主节点将关闭约 5 到 10 分钟。在更新期间，您无法访问或更改集群。但是，不会修改集群用户已部署的工作程序节点、应用程序和资源，并继续运行。
-3. 确认更新已完成。在 {{site.data.keyword.Bluemix_notm}} 仪表板上查看 Kubernetes 版本，或运行 `bx cs clusters`。
+2. 使用 GUI 或运行 [CLI 命令](cs_cli_reference.html#cs_cluster_update)来更新 Kubernetes API 服务器和关联的 Kubernetes 主节点组件。更新 Kubernetes API 服务器时，该 API 服务器将关闭约 5 到 10 分钟。在更新期间，您无法访问或更改集群。但是，不会修改集群用户已部署的工作程序节点、应用程序和资源，并继续运行。
+3. 确认更新已完成。在 {{site.data.keyword.Bluemix_notm}}“仪表板”上查看 Kubernetes API 服务器版本，或运行 `bx cs clusters`。
+4. 安装与 Kubernetes 主节点中运行的 Kubernetes API 服务器版本相匹配的 [`kubectl cli`](cs_cli_install.html#kubectl) 版本。
 
-Kubernetes 主节点更新完成后，可以更新工作程序节点。
+Kubernetes API 服务器更新完成后，可以更新工作程序节点。
 
 <br />
 
@@ -49,8 +56,10 @@ Kubernetes 主节点更新完成后，可以更新工作程序节点。
 ## 更新工作程序节点
 {: #worker_node}
 
-您收到了工作程序节点更新通知。这意味着什么呢？这说明您的数据已存储在工作程序节点的 pod 内部。由于 Kubernetes 主节点的安全性更新和补丁已到位，因此您需要确保工作程序节点保持同步。工作程序主节点的版本不能高于 Kubernetes 主节点的版本。
+您收到了工作程序节点更新通知。这意味着什么呢？由于 Kubernetes API 服务器和其他 Kubernetes 主节点组件的安全性更新和补丁已到位，因此您必须确保工作程序节点保持同步。
 {: shortdesc}
+
+工作程序节点 Kubernetes 版本不能高于在 Kubernetes 主节点中运行的 Kubernetes API 服务器版本。开始之前，请[更新 Kubernetes 主节点](#master)。
 
 <ul>**注意**：</br>
 <li>更新工作程序节点可能会导致应用程序和服务产生停机时间。</li>
@@ -75,11 +84,9 @@ Kubernetes 主节点更新完成后，可以更新工作程序节点。
 
 要更新工作程序节点，请执行以下操作：
 
-1. 安装与 Kubernetes 主节点的 Kubernetes 版本相匹配的 [`kubectl cli` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/tools/install-kubectl/) 版本。
+1. 落实在 [Kubernetes 更改](cs_versions.html)中标记为_在主节点后更新_的任何更改。
 
-2. 落实在 [Kubernetes 更改](cs_versions.html)中标记为_在主节点后更新_的任何更改。
-
-3. 可选：定义配置映射。
+2. 可选：定义配置映射。
     示例：
 
     ```
@@ -110,7 +117,7 @@ Kubernetes 主节点更新完成后，可以更新工作程序节点。
     {:pre}
   <table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是参数，第二列是匹配的描述。">
     <thead>
-      <th colspan=2><img src="images/idea.png"/> 了解组成部分</th>
+      <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解组成部分</th>
     </thead>
     <tbody>
       <tr>
@@ -162,5 +169,51 @@ Kubernetes 主节点更新完成后，可以更新工作程序节点。
   - 对其他集群重复更新过程。
   - 通知在集群中工作的开发者将其 `kubectl` CLI 更新到 Kubernetes 主节点的版本。
   - 如果 Kubernetes 仪表板未显示利用率图形，请[删除 `kube-dashboard` pod](cs_troubleshoot.html#cs_dashboard_graphs)。
+
+
 <br />
+
+
+
+## 更新机器类型
+{: #machine_type}
+
+可以通过添加新工作程序节点并除去旧工作程序节点来更新工作程序节点中使用的机器类型。例如，如果在其名称中含有 `u1c` 或 `b1c` 的不推荐机器类型上具有虚拟工作程序节点，请创建使用其名称中含有 `u2c` 或 `b2c` 的机器类型的工作程序节点。
+{: shortdesc}
+
+1. 记下要更新的工作程序节点的名称和位置。
+    ```
+    bx cs workers <cluster_name>
+    ```
+    {: pre}
+
+2. 查看可用的机器类型。
+    ```
+        bx cs machine-types <location>
+        ```
+    {: pre}
+
+3. 使用 [bx cs worker-add](cs_cli_reference.html#cs_worker_add) 命令，并指定在先前命令的输出中列出的其中一个机器类型来添加工作程序节点。
+
+    ```
+    bx cs worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_vlan> --public-vlan <public_vlan>
+    ```
+    {: pre}
+
+4. 验证工作程序节点是否已添加。
+
+    ```
+    bx cs workers <cluster_name>
+    ```
+    {: pre}
+
+5. 添加的工作程序节点处于 `Normal` 状态时，可以除去过时的工作程序节点。**注**：如果要除去按月计费的机器类型（如裸机），那么仍将对整个月收费。
+
+    ```
+    bx cs worker-rm <cluster_name> <worker_node>
+    ```
+    {: pre}
+
+6. 重复这些步骤以将其他工作程序节点升级到不同的机器类型。
+
 

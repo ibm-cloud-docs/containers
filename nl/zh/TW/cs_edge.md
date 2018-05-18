@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-07"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -18,15 +18,20 @@ lastupdated: "2018-02-07"
 # 限制送至邊緣工作者節點的網路資料流量
 {: #edge}
 
-邊緣工作者節點可以藉由容許較少的工作者節點可在外部進行存取，以及隔離網路工作負載，來增進叢集的安全。僅在標示這些工作者節點可以進行網路連線時，其他工作負載才無法取用工作者節點的記憶體，並干擾網路連線。
+邊緣工作者節點可以藉由容許較少的工作者節點可在外部進行存取，以及隔離 {{site.data.keyword.containerlong}} 中的網路工作負載，來增進 Kubernetes 叢集的安全。
 {:shortdesc}
+
+僅在標示這些工作者節點可以進行網路連線時，其他工作負載才無法取用工作者節點的記憶體，並干擾網路連線。
+
+
 
 
 
 ## 將工作者節點標示為邊緣節點
 {: #edge_nodes}
 
-將 `dedicated=edge` 標籤新增至叢集中兩個以上的工作者節點，以確保 Ingress 及負載平衡器只會部署至那些工作者節點。
+將 `dedicated=edge` 標籤新增至叢集中每一個公用 VLAN 的兩個以上工作者節點，以確保 Ingress 及負載平衡器只會部署至那些工作者節點。
+{:shortdesc}
 
 開始之前：
 
@@ -36,7 +41,7 @@ lastupdated: "2018-02-07"
 
 步驟：
 
-1. 列出叢集中的所有工作者節點。請使用來自 **NAME** 直欄的專用 IP 位址來識別節點。至少選取兩個工作者節點作為邊緣工作者節點。使用兩個以上的工作者節點可提高網路資源的可用性。
+1. 列出叢集中的所有工作者節點。請使用來自 **NAME** 直欄的專用 IP 位址來識別節點。在每一個公用 VLAN 上至少選取兩個工作者節點作為邊緣工作者節點。使用兩個以上的工作者節點可提高網路資源的可用性。
 
   ```
   kubectl get nodes -L publicVLAN,privateVLAN,dedicated
@@ -81,8 +86,12 @@ lastupdated: "2018-02-07"
 ## 避免工作負載在邊緣工作者節點上執行
 {: #edge_workloads}
 
-邊緣工作者節點的一項好處是它們可以指定為僅執行網路服務。使用 `dedicated=edge` 容錯，表示所有負載平衡器及 Ingress 服務都只會部署至已標示的工作者節點。不過，為了避免其他工作負載在邊緣工作者節點上執行，以及取用工作者節點資源，您必須使用 [Kubernetes 污點 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)。
-{:shortdesc}
+邊緣工作者節點的一項好處是它們可以指定為僅執行網路服務。
+{:shortdesc} 
+
+使用 `dedicated=edge` 容忍，表示所有負載平衡器及 Ingress 服務都只會部署至已標示的工作者節點。不過，為了避免其他工作負載在邊緣工作者節點上執行，以及取用工作者節點資源，您必須使用 [Kubernetes 污點 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)。
+
+
 
 1. 列出所有具有 `edge` 標籤的工作者節點。
 
@@ -97,4 +106,4 @@ lastupdated: "2018-02-07"
   kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute
   ```
 
-現在，僅具有 `dedicated=edge` 容錯的 Pod 才會部署至您的邊緣工作者節點。
+現在，僅具有 `dedicated=edge` 容忍的 Pod 才會部署至您的邊緣工作者節點。

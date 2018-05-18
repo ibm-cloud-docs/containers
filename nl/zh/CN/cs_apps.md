@@ -24,7 +24,7 @@ lastupdated: "2018-01-11"
 - [允许对应用程序进行公共访问](cs_network_planning.html#planning)
   - [使用 NodePort 服务类型来配置对应用程序的公共访问权](cs_nodeport.html#config)
   - [使用 LoadBalancer 服务类型来配置对应用程序的访问权](cs_loadbalancer.html#config)
-  - [使用 Ingress 来配置对应用程序的访问权](cs_ingress.html#config)
+  - [使用 Ingress 来配置对应用程序的访问权](cs_ingress.html#configure_alb)
     - [使用 IBM 提供的域（不带 TLS 终止）](cs_ingress.html#ibm_domain)
     - [使用 IBM 提供的域（带 TLS 终止）](cs_ingress.html#ibm_domain_cert)
     - [使用定制域和 TLS 证书执行 TLS 终止](cs_ingress.html#custom_domain_cert)

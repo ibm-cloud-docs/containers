@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-02-28"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-01-24"
 # アプリをクラスターにデプロイする
 {: #app}
 
-Kubernetes の技法を利用して、アプリをデプロイし、アプリの常時稼働を確保することができます。 例えば、ダウン時間なしでローリング更新とロールバックを実行できます。
+{{site.data.keyword.containerlong}} で Kubernetes の技法を利用して、アプリをコンテナーにデプロイし、それらのアプリを常に稼働させることができます。例えば、ダウン時間なしでローリング更新とロールバックを実行できます。
 {:shortdesc}
 
 次のイメージの領域をクリックして、アプリをデプロイするための一般的な手順を確認してください。
@@ -40,9 +40,9 @@ Kubernetes の技法を利用して、アプリをデプロイし、アプリの
 {: #highly_available_apps}
 
 セットアップ時に複数のワーカー・ノードとクラスターを分散させる範囲を広くすればするほど、各ユーザーがアプリのダウン時間を経験する可能性は低くなります。
+{:shortdesc}
 
 アプリのセットアップ方法を以下にまとめます。下に行くほど可用性が高くなります。
-{:shortdesc}
 
 ![アプリの高可用性の段階](images/cs_app_ha_roadmap.png)
 
@@ -51,7 +51,7 @@ Kubernetes の技法を利用して、アプリをデプロイし、アプリの
 3.  n+2 個のポッドをレプリカ・セットで管理し、別々の場所に存在する複数のノードに分散させる (アンチアフィニティー) デプロイメント。
 4.  n+2 個のポッドをレプリカ・セットで管理し、別々の地域に存在する複数のノードに分散させる (アンチアフィニティー) デプロイメント。
 
-アプリの可用性を高めるための技法について詳しく説明します。
+### アプリの可用性の向上
 
 <dl>
 <dt>デプロイメントとレプリカ・セットを使用してアプリとその依存項目をデプロイする</dt>
@@ -74,7 +74,7 @@ Kubernetes の技法を利用して、アプリをデプロイし、アプリの
 <strong>注:</strong> 以下の YAML ファイルでは、それぞれのポッドを異なるワーカー・ノードにデプロイします。 定義したレプリカの数がクラスター内の使用できるワーカー・ノードの数より多い場合は、アンチアフィニティーの要件を満たせる数のレプリカだけがデプロイされます。 それ以外のレプリカは、ワーカー・ノードがさらにクラスターに追加されるまで保留状態になります。
 
 <pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+<code>apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: wasliberty
@@ -135,7 +135,7 @@ spec:
 
 図に示すように、最小限のアプリ用にコンポーネントをデプロイするには、次の例のような構成ファイルを使用します。
 ```
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: ibmliberty
@@ -339,8 +339,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 ## GUI でアプリをデプロイする方法
 {: #app_ui}
 
-Kubernetes ダッシュボードを使用してアプリをクラスターにデプロイすると、クラスター内でポッドを作成、更新、管理するためのデプロイメント・リソースが自動的に作成されます。
-{:shortdesc}
+Kubernetes ダッシュボードを使用してアプリをクラスターにデプロイすると、デプロイメント・リソースが、クラスター内にポッドを自動的に作成し、更新および管理します。{:shortdesc}
 
 開始前に、以下のことを行います。
 
@@ -351,7 +350,7 @@ Kubernetes ダッシュボードを使用してアプリをクラスターにデ
 
 1.  [Kubernetes ダッシュボードを開きます](#cli_dashboard)。
 2.  Kubernetes ダッシュボードで**「+ 作成」**をクリックします。
-3.  **「ここでアプリの詳細情報を指定する (Specify app details below)」**を選択してアプリの詳細情報を GUI で入力するか、**「YAML ファイルまたは JSON ファイルをアップロードする (Upload a YAML or JSON file)」**を選択してアプリの[構成ファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) をアップロードします。 [このサンプル YAML ファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/IBM-Bluemix/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml) を使用して米国南部地域の **ibmliberty** イメージからコンテナーをデプロイします。
+3.  **「ここでアプリの詳細情報を指定する (Specify app details below)」**を選択してアプリの詳細情報を GUI で入力するか、**「YAML ファイルまたは JSON ファイルをアップロードする (Upload a YAML or JSON file)」**を選択してアプリの[構成ファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) をアップロードします。 [このサンプル YAML ファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml) を使用して米国南部地域の **ibmliberty** イメージからコンテナーをデプロイします。
 4.  Kubernetes ダッシュボードで**「デプロイメント」**をクリックして、デプロイメントが作成されたことを確認します。
 5.  ノード・ポート・サービス、ロード・バランサー・サービス、または Ingress を使用して、アプリをだれでも利用できるようにした場合は、アプリにアクセスできることを確認します。
 
@@ -397,14 +396,15 @@ Kubernetes ダッシュボードを使用してアプリをクラスターにデ
 ## アプリのスケーリング
 {: #app_scaling}
 
-アプリケーションの需要の変化に応じて必要な場合にのみリソースを使用するクラウド・アプリケーションをデプロイできます。 自動スケーリングを使用すれば、CPU に基づいてアプリのインスタンス数を自動的に増減できます。
-{:shortdesc}
+Kubernetes では、[ポッドの自動水平スケーリング ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) を有効にして、CPU に基づいてアプリのインスタンス数を自動的に増減できます。{:shortdesc}
 
-始めに、[CLI のターゲット](cs_cli_install.html#cs_cli_configure)を自分のクラスターに設定してください。
+Cloud Foundry アプリケーションのスケーリングに関する情報をお探しですか?
+[IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html) を参照してください。 
+{: tip}
 
-**注:** 自動スケーリング Cloud Foundry アプリケーションに関する情報をお探しですか? [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html) を参照してください。
-
-Kubernetes では、[水平ポッド自動スケーリング ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale) を有効にして CPU ベースでアプリをスケーリングできます。
+開始前に、以下のことを行います。
+- [CLI のターゲットを](cs_cli_install.html#cs_cli_configure)自分のクラスターに設定します。
+- 自動スケーリングするクラスターに Heapster モニターをデプロイする必要があります。
 
 1.  CLI を使用して、アプリをクラスターにデプロイします。 アプリをデプロイする時に、CPU を要求する必要があります。
 
@@ -435,8 +435,10 @@ Kubernetes では、[水平ポッド自動スケーリング ![外部リンク�
     <td>外部からアプリを使用するためのポート。</td>
     </tr></tbody></table>
 
-    **注:** デプロイメントがかなり複雑になる場合は、[構成ファイル](#app_cli)を作成する必要があります。
-2.  水平ポッド自動スケーリング機能を作成し、ポリシーを定義します。 `kubectl autoscale` コマンドの使い方について詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale) を参照してください。
+    デプロイメントがかなり複雑になる場合は、[構成ファイル](#app_cli)を作成する必要があります。
+    {: tip}
+
+2.  自動スケーリング機能を作成し、ポリシーを定義します。`kubetcl autoscale` コマンドの使い方について詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale) を参照してください。
 
     ```
     kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
@@ -461,7 +463,6 @@ Kubernetes では、[水平ポッド自動スケーリング ![外部リンク�
     <td>指定した CPU 使用率を維持するために使用するデプロイ済みのポッドの最大数。</td>
     </tr>
     </tbody></table>
-
 
 
 <br />

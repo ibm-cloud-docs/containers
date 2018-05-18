@@ -19,13 +19,14 @@ lastupdated: "2018-01-24"
 # IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセス
 {: #infrastructure}
 
-標準の Kubernetes クラスターを作成するには、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスする必要があります。 クラスターのワーカー・ノード、ポータブル・パブリック IP アドレス、永続ストレージなど、有料のインフラストラクチャー・リソースを要求するには、このアクセスが必要です。
+標準の Kubernetes クラスターを作成するには、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスする必要があります。 {{site.data.keyword.containerlong}} で、Kubernetes クラスターのワーカー・ノード、ポータブル・パブリック IP アドレス、永続ストレージなど、有料のインフラストラクチャー・リソースを要求するには、このアクセスが必要です。
 {:shortdesc}
 
 ## IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセス
 {: #unify_accounts}
 
-自動アカウント・リンクが使用できるようになった後に作成した {{site.data.keyword.Bluemix_notm}} 従量制課金アカウントには、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセスが既にセットアップされているので、追加の構成なしでクラスター用のインフラストラクチャー・リソースを購入できます。
+自動アカウント・リンクを有効にした後に作成した {{site.data.keyword.Bluemix_notm}} の従量制課金アカウントは、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスできるように既にセットアップされています。追加の構成を行わなくても、クラスターのためのインフラストラクチャー・リソースを購入できます。
+{:shortdesc}
 
 他の {{site.data.keyword.Bluemix_notm}} アカウント・タイプを持つユーザー、または {{site.data.keyword.Bluemix_notm}} アカウントにリンクされていない既存の IBM Cloud インフラストラクチャー (SoftLayer) アカウントを持つユーザーは、標準クラスターを作成できるようにアカウントを構成する必要があります。
 {:shortdesc}
@@ -45,8 +46,7 @@ lastupdated: "2018-01-24"
 ## {{site.data.keyword.Bluemix_notm}} アカウントで使用する IBM Cloud インフラストラクチャー (SoftLayer) API キーの生成
 {: #old_account}
 
-以前の従量制課金アカウントまたはサブスクリプション・アカウントを使用して標準クラスターを作成する場合は、
-新しい従量制課金アカウントを使用して API キーを生成し、その API キーを以前のアカウントに設定する必要があります。
+以前の従量制課金アカウントまたはサブスクリプション・アカウントを使用して標準クラスターを作成する場合は、新しい従量制課金アカウントを使用して API キーを生成し、その API キーを以前のアカウントに設定します。
 {:shortdesc}
 
 開始する前に、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセスが自動的にセットアップされる {{site.data.keyword.Bluemix_notm}} 従量制課金アカウントを作成します。

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-03-13"
 
 ---
 
@@ -16,14 +16,14 @@ lastupdated: "2018-01-24"
 {:download: .download}
 
 # Regioni e ubicazioni
-{{site.data.keyword.Bluemix}} è ospitato in tutto il mondo. Una regione è un'area geografica a cui è possibile accedere da un endpoint. Le ubicazioni sono data center all'interno della regione. I servizi in {{site.data.keyword.Bluemix_notm}} potrebbero essere disponibili globalmente o all'interno di una regione specifica.
+{{site.data.keyword.Bluemix}} è ospitato in tutto il mondo. Una regione è un'area geografica a cui è possibile accedere da un endpoint. Le ubicazioni sono data center all'interno della regione. I servizi in {{site.data.keyword.Bluemix_notm}} potrebbero essere disponibili globalmente o all'interno di una regione specifica. Quando crei un cluster Kubernetes in {{site.data.keyword.containerlong}}, le sue risorse rimangono nella regione in cui hai distribuito il cluster.
 {:shortdesc}
 
 [Le regioni {{site.data.keyword.Bluemix_notm}}](#bluemix_regions) sono diverse dalle regioni [{{site.data.keyword.containershort_notm}}](#container_regions).
 
-![{{site.data.keyword.containershort_notm}} - Regioni e data center](images/regions.png)
+![{{site.data.keyword.containershort_notm}} - Regioni e data center](/images/regions.png)
 
-Figura 1. Regioni e data center {{site.data.keyword.containershort_notm}} 
+Figura. Regioni e data center {{site.data.keyword.containershort_notm}}
 
 Regioni {{site.data.keyword.containershort_notm}} supportate:
   * Asia Pacifico Nord
@@ -32,7 +32,6 @@ Regioni {{site.data.keyword.containershort_notm}} supportate:
   * Regno Unito Sud
   * Stati Uniti Est
   * Stati Uniti Sud
-
 
 
 
@@ -46,7 +45,7 @@ Per verificare in quale regione {{site.data.keyword.Bluemix_notm}} sei al moment
 
 È possibile accedere alle regioni {{site.data.keyword.Bluemix_notm}} specificando l'endpoint API quando accedi. Se non specifici una regione, viene automaticamente fatto accesso alla regione a te più vicina.
 
-Endpoint API della regione {{site.data.keyword.Bluemix_notm}} con i comandi di accesso di esempio: 
+Endpoint API della regione {{site.data.keyword.Bluemix_notm}} con i comandi di accesso di esempio:
 
   * Stati Uniti Sud e Stati Uniti Est
       ```
@@ -95,6 +94,9 @@ Per utilizzare l'API con l'endpoint globale, in tutte le richieste, trasmetti il
 ### Accesso a una diversa regione del servizio del contenitore
 {: #container_login_endpoints}
 
+Puoi cambiare ubicazione utilizzando la CLI {{site.data.keyword.containershort_notm}}.
+{:shortdesc}
+
 Potresti voler accedere a un'altra regione {{site.data.keyword.containershort_notm}} per i seguenti motivi:
   * Hai creato i servizi {{site.data.keyword.Bluemix_notm}} o le immagini Docker private in una regione e desideri utilizzarle con {{site.data.keyword.containershort_notm}} in un'altra regione.
   * Vuoi accedere a un cluster in una regione diversa dalla regione {{site.data.keyword.Bluemix_notm}} predefinita a cui hai eseguito l'accesso.
@@ -103,28 +105,13 @@ Potresti voler accedere a un'altra regione {{site.data.keyword.containershort_no
 
 Per selezionare velocemente la regione, esegui `bx cs region-set`.
 
-### Ubicazioni disponibili per il servizio del contenitore
-{: #locations}
-
-Le ubicazioni sono data center disponibili in una regione.
-
-  | Regione | Ubicazione | Città |
-  |--------|----------|------|
-  | Asia Pacifico Nord | hkg02, seo01, sng01, tok02 | Hong Kong, Seoul, Singapore, Tokyo |
-  | Asia Pacifico Sud     | mel01, syd01, syd04        | Melbourne, Sydney |
-  | Europa Centrale     | ams03, fra02, mil01, par01        | Amsterdam, Francoforte, Milano, Parigi|
-  | Regno Unito Sud      | lon02, lon04         | Londra |
-  | Stati Uniti Est      | mon01, tor01, wdc06, wdc07        | Montreal, Toronto, Washington DC |
-  | Stati Uniti Sud     | dal10, dal12, dal13, sao01       | Dallas, São Paolo |
-
-**Nota**: Milano (mil01) è disponibile solo per i cluster gratuiti.
-
 ### Utilizzo dei comandi API del servizio del contenitore
-{: #container_api}
+{: #containers_api}
 
-Per interagire con l'API {{site.data.keyword.containershort_notm}}, immetti il tipo di comando e aggiungi `/v1/command` all'endpoint globale. 
+Per interagire con l'API {{site.data.keyword.containershort_notm}}, immetti il tipo di comando e aggiungi `/v1/command` all'endpoint globale.
+{:shortdesc}
 
-Esempio di API `GET /clusters`: 
+Esempio di API `GET /clusters`:
   ```
   GET https://containers.bluemix.net/v1/clusters
   ```
@@ -136,3 +123,30 @@ Per utilizzare l'API con l'endpoint globale, in tutte le richieste, trasmetti il
 {: tip}
 
 Per visualizzare la documentazione sui comandi API, vedi [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/).
+
+## Ubicazioni disponibili in {{site.data.keyword.containershort_notm}}
+{: #locations}
+
+Le ubicazioni sono data center fisici che sono disponibili in una regione {{site.data.keyword.Bluemix_notm}}. Le regioni sono uno strumento concettuale per organizzare le ubicazioni e possono includere ubicazioni (data center) in diversi paesi. La seguente tabella visualizza le ubicazioni disponibili per regione.
+{:shortdesc}
+
+| Regione | Ubicazione | Città |
+|--------|----------|------|
+| Asia Pacifico Nord | hkg02, seo01, sng01, tok02 | Hong Kong, Seoul, Singapore, Tokyo |
+| Asia Pacifico Sud     | mel01, syd01, syd04        | Melbourne, Sydney |
+| Europa Centrale     | ams03, fra02, par01        | Amsterdam, Francoforte, Parigi |
+| Regno Unito Sud      | lon02, lon04         | Londra |
+| Stati Uniti Est      | mon01, tor01, wdc06, wdc07        | Montreal, Toronto, Washington DC |
+| Stati Uniti Sud     | dal10, dal12, dal13, sao01       | Dallas, San Paolo |
+
+Le risorse del tuo cluster rimangono nell'ubicazione (data center) in cui è distribuito il cluster. La seguente immagine evidenzia la relazione del tuo cluster in una regione di esempio degli Stati Uniti Est:
+
+1.  Le risorse del tuo cluster, inclusi i nodi master e di lavoro, si trovano nella stessa ubicazione in cui hai distribuito il cluster. Quando avvii azioni di orchestrazione del contenitore locale, come i comandi `kubectl`, le informazioni vengono scambiate tra i tuoi nodi master e di lavoro all'interno della stessa ubicazione.
+
+2.  Se configuri altre risorse del cluster, come archiviazione, rete, calcolo o applicazioni in esecuzione nei pod, le risorse e i loro dati rimangono nell'ubicazione in cui hai distribuito il tuo cluster.
+
+3.  Quando avvii azioni di gestione del cluster, utilizzando ad esempio i comandi `bx cs`, le informazioni di base sul cluster (come nome, ID, utente, comando) vengono instradate a un endpoint regionale.
+
+![Descrizione della posizione in cui risiedono le risorse del cluster](/images/region-cluster-resources.png)
+
+Figura. Descrizione della posizione in cui risiedono le risorse del cluster.

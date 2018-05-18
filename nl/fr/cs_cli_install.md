@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-29"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-01-29"
 # Configuration de l'interface CLI et de l'API
 {: #cs_cli_install}
 
-Vous pouvez utiliser l'interface CLI ou l'API {{site.data.keyword.containershort_notm}} pour créer et gérer vos clusters Kubernetes.
+Vous pouvez utiliser l'interface CLI ou l'API {{site.data.keyword.containerlong}} pour créer et gérer vos clusters Kubernetes.
 {:shortdesc}
 
 <br />
@@ -36,7 +36,7 @@ Cette tâche inclut les informations relatives à l'installation de ces interfac
 
 -   Interface CLI de {{site.data.keyword.Bluemix_notm}} version 0.5.0 ou ultérieure
 -   Plug-in de {{site.data.keyword.containershort_notm}}
--   Interface CLI de Kubernetes, version 1.8.6 ou ultérieure
+-   Interface CLI de Kubernetes version 1.8.8 ou ultérieure
 -   Facultatif : plug-in de {{site.data.keyword.registryshort_notm}}
 -   Facultatif : Docker version 1.9 ou ultérieure
 
@@ -45,18 +45,16 @@ Pour installer les interfaces CLI, procédez comme suit :
 
 1.  Comme condition prérequise pour le plug-in {{site.data.keyword.containershort_notm}}, installez l'[interface CLI de {{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://clis.ng.bluemix.net/ui/home.html). Le préfixe pour l'exécution de commandes via l'interface CLI de {{site.data.keyword.Bluemix_notm}} est `bx`.
 
-2.  Connectez-vous à l'interface CLI de {{site.data.keyword.Bluemix_notm}}. A l'invite, entrez vos données
-d'identification {{site.data.keyword.Bluemix_notm}}.
+2.  Connectez-vous à l'interface CLI de {{site.data.keyword.Bluemix_notm}}. A l'invite, entrez vos données d'identification {{site.data.keyword.Bluemix_notm}}.
 
     ```
     bx login
     ```
     {: pre}
 
-    **Remarque :** si vous possédez un ID fédéré, exécutez la commande `bx login --sso` pour vous connecter à l'interface de ligne de commande {{site.data.keyword.Bluemix_notm}}. Entrez votre nom d'utilisateur et utilisez l'URL mentionnée dans la sortie CLI pour extraire votre code d'accès à usage unique. Si la connexion échoue alors que vous omettez l'option `--sso`
-et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré.
+    **Remarque :** si vous possédez un ID fédéré, exécutez la commande `bx login --sso` pour vous connecter à l'interface de ligne de commande {{site.data.keyword.Bluemix_notm}}. Entrez votre nom d'utilisateur et utilisez l'URL mentionnée dans la sortie CLI pour extraire votre code d'accès à usage unique. Si la connexion échoue alors que vous omettez l'option `--sso` et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré.
 
-3.  Pour créer des clusters Kubernetes et gérer les noeuds d'agent, installez le plug-in {{site.data.keyword.containershort_notm}}. Le préfixe pour l'exécution de commandes via le plug-in de {{site.data.keyword.containershort_notm}} est `bx`.
+3.  Pour créer des clusters Kubernetes et gérer les noeuds worker, installez le plug-in {{site.data.keyword.containershort_notm}}. Le préfixe pour l'exécution de commandes via le plug-in de {{site.data.keyword.containershort_notm}} est `bx`.
 
     ```
     bx plugin install container-service -r Bluemix
@@ -72,19 +70,15 @@ et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré
 
     Le plug-in {{site.data.keyword.containershort_notm}} est affiché dans les résultats en tant que container-service (service de conteneur).
 
-4.  Pour afficher une version locale du tableau de bord Kubernetes et déployer des applications dans vos clusters, [installez l'interface CLI de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Le préfixe pour l'exécution de commandes via l'interface CLI de Kubernetes est `kubectl`.
+4.  {: #kubectl}Pour afficher une version locale du tableau de bord Kubernetes et déployer des applications dans vos clusters, [installez l'interface CLI de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Le préfixe pour l'exécution de commandes via l'interface CLI de Kubernetes est `kubectl`.
 
-    1.  Pour obtenir la compatibilité fonctionnelle complète, téléchargez la version de l'interface CLI de Kubernetes qui correspond à la version du cluster Kubernetes que vous envisagez d'utiliser. La version {{site.data.keyword.containershort_notm}} actuelle par défaut de Kubernetes est la version 1.8.6.
+    1.  Téléchargez la version `major.minor` de l'interface CLI Kubernetes qui correspond à la version `major.minor` que vous envisagez d'utiliser. La version {{site.data.keyword.containershort_notm}} actuelle par défaut de Kubernetes est la version 1.8.8. **Remarque** : Si vous utilisez une version d'interface CLI `kubectl` qui ne correspond pas au moins à la version `major.minor` de vos clusters, vous risquez d'obtenir des résultats inattendus. Assurez-vous de maintenir votre cluster Kubernetes et les versions de l'interface CLI à jour.
 
-        OS X :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
+        - **OS X** :   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl)
+        - **Linux** :   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl)
+        - **Windows** :    [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe)
 
-        Linux :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
-
-        Windows :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
-
-        **Astuce :** si vous utilisez Windows, installez l'interface CLI de Kubernetes dans le même répertoire que l'interface CLI de {{site.data.keyword.Bluemix_notm}}. Cette configuration vous évite diverses modifications de chemin de fichier lorsque vous exécuterez des commandes plus tard.
-
-    2.  Utilisateurs OSX et Linux : procédez comme suit.
+    2.  **Pour OS X et Linux**, procédez comme suit :
         1.  Déplacez le fichier exécutable vers le répertoire `/usr/local/bin`.
 
             ```
@@ -112,6 +106,8 @@ et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré
             chmod +x /usr/local/bin/kubectl
             ```
             {: pre}
+
+    3.  **Pour Windows** : Installez l'interface CLI Kubernetes dans le même répertoire que l'interface CLI {{site.data.keyword.Bluemix_notm}}. Cette configuration vous évite diverses modifications de chemin de fichier lorsque vous exécuterez des commandes plus tard.
 
 5.  Pour gérer un référentiel d'images privé, installez le plug-in {{site.data.keyword.registryshort_notm}}. Utilisez ce plug-in pour mettre en place votre propre espace de nom dans un registre d'images privé à service partagé, haute disponibilité et évolutif, hébergé par IBM, et pour stocker et partager des images Docker avec d'autres utilisateurs. Des images Docker sont requises pour pouvoir déployer des conteneurs dans un cluster. Le préfixe pour l'exécution de commandes de registre est `bx cr`.
 
@@ -133,8 +129,7 @@ et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré
 
 Ensuite, passez à l'étape [Création de clusters Kubernetes depuis l'interface CLI d'{{site.data.keyword.containershort_notm}}](cs_clusters.html#clusters_cli).
 
-Pour des informations de référence sur ces interfaces de ligne de commande,
-reportez-vous à la documentation relative à ces outils.
+Pour des informations de référence sur ces interfaces de ligne de commande, reportez-vous à la documentation relative à ces outils.
 
 -   [Commandes `bx`](/docs/cli/reference/bluemix_cli/bx_cli.html)
 -   [Commandes `bx cs`](cs_cli_reference.html#cs_cli_reference)
@@ -147,8 +142,10 @@ reportez-vous à la documentation relative à ces outils.
 ## Configuration de l'interface CLI pour exécution de commandes `kubectl`
 {: #cs_cli_configure}
 
-Vous pouvez utiliser les commandes fournies avec l'interface de ligne de commande Kubernetes pour gérer les clusters dans {{site.data.keyword.Bluemix_notm}}. Toutes les commandes `kubectl` disponibles dans Kubernetes version 1.8.6 sont prises en charge pour leur utilisation avec des clusters dans {{site.data.keyword.Bluemix_notm}}. Après avoir créé un cluster, définissez le contexte de votre interface de ligne de commande locale vers ce cluster à l'aide d'une variable d'environnement. Vous pouvez ensuite exécuter les commandes Kubernetes `kubectl` pour utiliser votre cluster dans {{site.data.keyword.Bluemix_notm}}.
+Vous pouvez utiliser les commandes fournies avec l'interface de ligne de commande Kubernetes pour gérer les clusters dans {{site.data.keyword.Bluemix_notm}}.
 {:shortdesc}
+
+Toutes les commandes `kubectl` disponibles dans Kubernetes 1.8.8 sont prises en charge pour l'utilisation avec des clusters dans {{site.data.keyword.Bluemix_notm}}. Après avoir créé un cluster, définissez le contexte de votre interface de ligne de commande locale vers ce cluster à l'aide d'une variable d'environnement. Vous pouvez ensuite exécuter les commandes Kubernetes `kubectl` pour utiliser votre cluster dans {{site.data.keyword.Bluemix_notm}}.
 
 Avant de pouvoir lancer des commandes `kubectl`, vous devez [installer les interfaces CLI requises](#cs_cli_install) et [créer un cluster](cs_clusters.html#clusters_cli).
 
@@ -159,8 +156,7 @@ Avant de pouvoir lancer des commandes `kubectl`, vous devez [installer les inter
       ```
       {: pre}
 
-      **Remarque :** si vous possédez un ID fédéré, exécutez la commande `bx login --sso` pour vous connecter à l'interface de ligne de commande {{site.data.keyword.Bluemix_notm}}. Entrez votre nom d'utilisateur et utilisez l'URL mentionnée dans la sortie CLI pour extraire votre code d'accès à usage unique. Si la connexion échoue alors que vous omettez l'option `--sso`
-et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré.
+      **Remarque :** si vous possédez un ID fédéré, exécutez la commande `bx login --sso` pour vous connecter à l'interface de ligne de commande {{site.data.keyword.Bluemix_notm}}. Entrez votre nom d'utilisateur et utilisez l'URL mentionnée dans la sortie CLI pour extraire votre code d'accès à usage unique. Si la connexion échoue alors que vous omettez l'option `--sso` et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré.
 
   2.  Sélectionnez un compte {{site.data.keyword.Bluemix_notm}}. Si vous êtes affecté à plusieurs organisations {{site.data.keyword.Bluemix_notm}}, sélectionnez celle dans laquelle le cluster a été créé. Les clusters sont spécifiques à une organisation, mais sont indépendants d'un espace {{site.data.keyword.Bluemix_notm}}. Vous n'avez donc pas besoin de sélectionner un espace.
 
@@ -174,17 +170,14 @@ et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré
       {: pre}
 
   5.  Définissez le cluster que vous avez créé comme contexte de cette session. Effectuez ces étapes de configuration à chaque fois que vous utilisez votre cluster.
-      1.  Obtenez la commande permettant de définir la variable d'environnement et téléchargez
-les fichiers de configuration Kubernetes.
+      1.  Obtenez la commande permettant de définir la variable d'environnement et téléchargez les fichiers de configuration Kubernetes.
 
           ```
           bx cs cluster-config <cluster_name_or_id>
           ```
           {: pre}
 
-          Une fois les fichiers de configuration téléchargés, une commande s'affiche ; elle vous
-permet de définir le chemin vers le fichier de configuration Kubernetes local en tant que
-variable d'environnement.
+          Une fois les fichiers de configuration téléchargés, une commande s'affiche ; elle vous permet de définir le chemin vers le fichier de configuration Kubernetes local en tant que variable d'environnement.
 
           Exemple :
 
@@ -193,10 +186,8 @@ variable d'environnement.
           ```
           {: screen}
 
-      2.  Copiez et collez la commande qui s'affiche sur votre terminal pour définir la
-variable d'environnement `KUBECONFIG`.
-      3.  Vérifiez que la variable d'environnement `KUBECONFIG` est
-correctement définie.
+      2.  Copiez et collez la commande qui s'affiche sur votre terminal pour définir la variable d'environnement `KUBECONFIG`.
+      3.  Vérifiez que la variable d'environnement `KUBECONFIG` est correctement définie.
 
           Exemple :
 
@@ -211,8 +202,7 @@ correctement définie.
           ```
           {: screen}
 
-  6.  Vérifiez que les commandes `kubectl` fonctionnent correctement avec votre cluster en vérifiant la version du serveur CLI de
-Kubernetes.
+  6.  Vérifiez que les commandes `kubectl` fonctionnent correctement avec votre cluster en vérifiant la version du serveur CLI de Kubernetes.
 
       ```
       kubectl version  --short
@@ -222,13 +212,12 @@ Kubernetes.
       Exemple de sortie :
 
       ```
-      Client Version: v1.8.6
-      Server Version: v1.8.6
+      Client Version: v1.8.8
+      Server Version: v1.8.8
       ```
       {: screen}
 
-Vous pouvez à présent exécuter des commandes `kubectl` pour gérer
-vos clusters dans {{site.data.keyword.Bluemix_notm}}. Pour obtenir la liste complète des commandes, voir la [documentation Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).
+Vous pouvez à présent exécuter des commandes `kubectl` pour gérer vos clusters dans {{site.data.keyword.Bluemix_notm}}. Pour obtenir la liste complète des commandes, voir la [documentation Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).
 
 **Astuce :** si vous utilisez Windows et que l'interface CLI de Kubernetes n'est pas installée dans le même répertoire que l'interface CLI de {{site.data.keyword.Bluemix_notm}}, vous devez basculer entre les répertoires en spécifiant le chemin d'accès de l'installation de l'interface CLI de Kubernetes pour que l'exécution de `kubectl` puisse aboutir.
 
@@ -248,7 +237,7 @@ CLI.
 
 -   Interface CLI de {{site.data.keyword.Bluemix_notm}} version 0.5.0 ou ultérieure
 -   Plug-in de {{site.data.keyword.containershort_notm}}
--   Interface CLI de Kubernetes, version 1.8.6 ou ultérieure
+-   Interface CLI de Kubernetes version 1.8.8 ou ultérieure
 -   Plug-in de {{site.data.keyword.registryshort_notm}}
 -   Docker version 1.9. ou ultérieure
 
@@ -265,8 +254,7 @@ Pour mettre à jour les interfaces de ligne de commande, procédez comme suit :
     ```
     {: pre}
 
-     **Remarque :** si vous possédez un ID fédéré, exécutez la commande `bx login --sso` pour vous connecter à l'interface de ligne de commande {{site.data.keyword.Bluemix_notm}}. Entrez votre nom d'utilisateur et utilisez l'URL mentionnée dans la sortie CLI pour extraire votre code d'accès à usage unique. Si la connexion échoue alors que vous omettez l'option `--sso`
-et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré.
+     **Remarque :** si vous possédez un ID fédéré, exécutez la commande `bx login --sso` pour vous connecter à l'interface de ligne de commande {{site.data.keyword.Bluemix_notm}}. Entrez votre nom d'utilisateur et utilisez l'URL mentionnée dans la sortie CLI pour extraire votre code d'accès à usage unique. Si la connexion échoue alors que vous omettez l'option `--sso` et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré.
 
 3.  Mettez à jour le plug-in {{site.data.keyword.containershort_notm}}.
     1.  Installez la mise à jour à partir du référentiel de plug-in {{site.data.keyword.Bluemix_notm}}.
@@ -276,8 +264,7 @@ et aboutit en incluant l'option `--sso`, ceci indique que votre ID est fédéré
         ```
         {: pre}
 
-    2.  Vérifiez l'installation du plug-in en exécutant la commande suivante et en vérifiant la liste des
-plug-in installés.
+    2.  Vérifiez l'installation du plug-in en exécutant la commande suivante et en vérifiant la liste des plug-in installés.
 
         ```
         bx plugin list
@@ -293,45 +280,7 @@ plug-in installés.
         ```
         {: pre}
 
-4.  Mettez à jour l'interface de ligne de commande Kubernetes.
-    1.  Mettez à jour l'interface CLI de Kubernetes qui correspond à la version du cluster Kubernetes que vous envisagez d'utiliser. La version {{site.data.keyword.containershort_notm}} actuelle par défaut de Kubernetes est la version 1.8.6.
-
-        OS X :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
-
-        Linux :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
-
-        Windows :   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
-
-        **Astuce :** si vous utilisez Windows, installez l'interface CLI de Kubernetes dans le même répertoire que l'interface CLI de {{site.data.keyword.Bluemix_notm}}. Cette configuration vous évite diverses modifications de chemin de fichier lorsque vous exécuterez des commandes plus tard.
-
-    2.  Utilisateurs OSX et Linux : procédez comme suit.
-        1.  Déplacez le fichier exécutable vers le répertoire `/usr/local/bin`.
-
-            ```
-            mv /<path_to_file>/kubectl /usr/local/bin/kubectl
-            ```
-            {: pre}
-
-        2.  Vérifiez que `/usr/local/bin` est listé dans votre variable système `PATH`. La variable `PATH` contient tous les répertoires où votre système d'exploitation peut trouver des fichiers exécutables. Les répertoires mentionnés dans la variable `PATH` ont des objets différents. `/usr/local/bin` stocke les fichiers exécutables de logiciels qui ne font pas partie du système d'exploitation et qui ont été installés manuellement par l'administrateur système.
-
-            ```
-            echo $PATH
-            ```
-            {: pre}
-
-            Exemple de sortie d'interface CLI :
-
-            ```
-            /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-            ```
-            {: screen}
-
-        3.  Rendez le fichier exécutable.
-
-            ```
-            chmod +x /usr/local/bin/kubectl
-            ```
-            {: pre}
+4.  [Mettez à jour l'interface CLI Kubernetes](#kubectl).
 
 5.  Mettez à jour le plug-in {{site.data.keyword.registryshort_notm}}.
     1.  Installez la mise à jour à partir du référentiel de plug-in {{site.data.keyword.Bluemix_notm}}.
@@ -341,8 +290,7 @@ plug-in installés.
         ```
         {: pre}
 
-    2.  Vérifiez l'installation du plug-in en exécutant la commande suivante et en vérifiant la liste des
-plug-in installés.
+    2.  Vérifiez l'installation du plug-in en exécutant la commande suivante et en vérifiant la liste des plug-in installés.
 
         ```
         bx plugin list
@@ -352,8 +300,7 @@ plug-in installés.
         Le plug-in du registre s'affiche dans les résultats sous la forme container-registry.
 
 6.  Mettez à jour Docker.
-    -   Si vous utilisez Docker Community Edition, démarrez Docker, cliquez sur l'icône
-**Docker**, puis sur **Check for updates**.
+    -   Si vous utilisez Docker Community Edition, démarrez Docker, cliquez sur l'icône **Docker**, puis sur **Check for updates**.
     -   Si vous utilisez Docker Toolbox, téléchargez la [version la plus récente ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.docker.com/toolbox/toolbox_install_windows/) et exécutez le programme d'installation.
 
 <br />
@@ -369,7 +316,7 @@ Cette tâche inclut les informations relatives au retrait de ces interfaces CLI 
 
 
 -   Plug-in de {{site.data.keyword.containershort_notm}}
--   Interface CLI de Kubernetes, version 1.8.6 ou ultérieure
+-   Interface CLI de Kubernetes version 1.8.8 ou ultérieure
 -   Plug-in de {{site.data.keyword.registryshort_notm}}
 -   Docker version 1.9. ou ultérieure
 
@@ -392,8 +339,7 @@ Pour désinstaller les interfaces CLI, procédez comme suit :
     ```
     {: pre}
 
-3.  Vérifiez que les plug-ins ont bien été désinstallés en exécutant la commande suivante et en examinant la liste des
-plug-in installés.
+3.  Vérifiez que les plug-ins ont bien été désinstallés en exécutant la commande suivante et en examinant la liste des plug-in installés.
 
     ```
     bx plugin list
@@ -476,7 +422,7 @@ L'API {{site.data.keyword.containershort_notm}} requiert de fournir des informat
     <tr>
     <td>Corps pour le nom d'utilisateur et le mot de passe {{site.data.keyword.Bluemix_notm}}</td>
     <td><ul><li>grant_type: password</li>
-    <li>response_type: cloud_iam, uaa</li>
+    <li>response_type: cloud_iam uaa</li>
     <li>username: <em>&lt;my_username&gt;</em></li>
     <li>password: <em>&lt;my_password&gt;</em></li>
     <li>uaa_client_id: cf</li>
@@ -597,7 +543,7 @@ L'API {{site.data.keyword.containershort_notm}} requiert de fournir des informat
     <tr>
     <td>Corps pour le nom d'utilisateur et le mot de passe {{site.data.keyword.Bluemix_notm}}</td>
     <td><ul><li>grant_type: password</li>
-    <li>response_type: cloud_iam, uaa</li>
+    <li>response_type: cloud_iam uaa</li>
     <li>username: <em>&lt;my_username&gt;</em></li>
     <li>password: <em>&lt;my_password&gt;</em></li>
     <li>uaa_client_id: cf</li>
@@ -703,7 +649,7 @@ Procédez comme suit si vous désirez actualiser votre jeton IAM.
     <tr>
     <td>Body</td>
     <td><ul><li>grant_type: refresh_token</li>
-    <li>response_type: cloud_iam, uaa</li>
+    <li>response_type: cloud_iam uaa</li>
     <li>refresh_token: <em>&lt;iam_refresh_token&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li>
@@ -728,7 +674,6 @@ Procédez comme suit si vous désirez actualiser votre jeton IAM.
     ```
     {: screen}
 
-    Votre nouveau jeton IAM figure dans la zone **access_token** et le jeton d'actualisation IAM dans la zone
-**refresh_token** de la sortie d'API.
+    Votre nouveau jeton IAM figure dans la zone **access_token** et le jeton d'actualisation IAM dans la zone **refresh_token** de la sortie d'API.
 
 2.  Continuez à travailler avec la [documentation d'API {{site.data.keyword.containershort_notm}}![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://us-south.containers.bluemix.net/swagger-api) en utilisant le jeton de l'étape précédente.

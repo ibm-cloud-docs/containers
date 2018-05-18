@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-06"
+lastupdated: "2018-03-13"
 
 ---
 
@@ -19,20 +19,44 @@ lastupdated: "2018-02-06"
 # 設定負載平衡器服務
 {: #loadbalancer}
 
-公開埠並使用可攜式 IP 位址，讓負載平衡器可以存取應用程式。使用公用 IP 位址，將應用程式設為可在網際網路上進行存取，或使用專用 IP 位址，將應用程式設為可在專用基礎架構網路上進行存取。
+公開埠並使用可攜式 IP 位址，讓負載平衡器可以存取容器化應用程式。
 {:shortdesc}
 
+## 使用 LoadBalancer 服務規劃外部網路
+{: #planning}
+
+當您建立標準叢集時，{{site.data.keyword.containershort_notm}} 會自動要求五個可攜式公用 IP 位址及五個可攜式專用 IP 位址，並在建立叢集期間將它們佈建至 IBM Cloud 基礎架構 (SoftLayer) 帳戶。兩個可攜式 IP 位址（一個公用、一個專用）會用於 [Ingress 應用程式負載平衡器](cs_ingress.html#planning)。建立 LoadBalancer 服務，即可使用四個可攜式公用 IP 位址及四個可攜式專用 IP 位址來公開應用程式。
+
+當您在公用 VLAN 上的叢集建立 Kubernetes LoadBalancer 服務時，會建立外部負載平衡器。當您建立 LoadBalancer 服務時，您的 IP 位址選項如下：
+
+- 如果您的叢集是在公用 VLAN 上，則會使用四個可用的可攜式公用 IP 位址的其中一個。
+- 如果您的叢集只能在專用 VLAN 上使用，則會使用四個可用的可攜式專用 IP 位址的其中一個。
+- 您可以透過將註釋新增至配置檔，要求 LoadBalancer 服務的可攜式公用或專用 IP 位址：`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>`。
+
+指派給 LoadBalancer 服務的可攜式公用 IP 位址是永久性的，在叢集中移除或重建工作者節點時並不會變更。因此，LoadBalancer 服務的可用性比 NodePort 服務高。與 NodePort 服務不同，您可以將任何埠指派給負載平衡器，而且未連結至特定埠範圍。如果您使用 LoadBalancer 服務，則任何工作者節點的每一個 IP 位址也都有一個節點埠可用。若要在使用 LoadBalancer 服務時封鎖對節點埠的存取，請參閱[封鎖送入的資料流量](cs_network_policy.html#block_ingress)。
+
+LoadBalancer 服務是作為應用程式送入要求的外部進入點。若要從網際網路存取 LoadBalancer 服務，請使用負載平衡器的公用 IP 位址以及 `<ip_address>:<port>` 格式的已指派埠。下圖顯示負載平衡器如何將通訊從網際網路導向應用程式：
+
+<img src="images/cs_loadbalancer_planning.png" width="550" alt="使用負載平衡器在 {{site.data.keyword.containershort_notm}} 中公開應用程式" style="width:550px; border-style: none"/>
+
+1. 使用負載平衡器的公用 IP 位址及工作者節點上的已指派埠，將要求傳送至應用程式。
+
+2. 該要求會自動轉遞至負載平衡器服務的內部叢集 IP 位址及埠。內部叢集 IP 位址只能在叢集內部存取。
+
+3. `kube-proxy` 會將要求遞送至應用程式的 Kubernetes 負載平衡器服務。
+
+4. 要求會轉遞至應用程式部署所在 Pod 的專用 IP 位址。如果叢集中已部署多個應用程式實例，則負載平衡器會在應用程式 Pod 之間遞送要求。
 
 
-## 使用負載平衡器服務類型來配置應用程式的存取
+
+
+<br />
+
+
+
+
+## 使用負載平衡器配置應用程式的存取權
 {: #config}
-
-與 NodePort 服務不同，負載平衡器服務的可攜式 IP 位址不是取決於在其上已部署應用程式的工作者節點。不過，Kubernetes LoadBalancer 服務也是 NodePort 服務。LoadBalancer 服務可讓您的應用程式透過負載平衡器 IP 位址及埠提供使用，並讓您的應用程式可透過服務的節點埠提供使用。
-{:shortdesc}
-
-負載平衡器的可攜式 IP 位址會自動進行指派，而且不會在您新增或移除工作者節點時變更。因此，負載平衡器服務的高可用性高於 NodePort 服務。使用者可以選取負載平衡器的任何埠，而不只限於 NodePort 埠範圍。您可以針對 TCP 及 UDP 通訊協定使用負載平衡器服務。
-
-**附註**：LoadBalancer 服務不支援 TLS 終止。如果您的應用程式需要 TLS 終止，您可以使用 [Ingress](cs_ingress.html) 來公開應用程式，或配置應用程式來管理 TLS 終止。
 
 開始之前：
 
@@ -108,12 +132,11 @@ lastupdated: "2018-02-06"
         </tr>
         <tr>
           <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:`
-          <td>要指定 LoadBalancer 類型的註釋。值為 `private` 和 `public`。在公用 VLAN 的叢集中建立公用 LoadBalancer 時，不需要此註釋。
-        </td>
+          <td>要指定 LoadBalancer 類型的註釋。值為 `private` 和 `public`。如果您要在公用 VLAN 的叢集中建立公用 LoadBalancer，則不需要此註釋。</td>
         </tr>
         <tr>
           <td><code>loadBalancerIP</code></td>
-          <td>建立專用 LoadBalancer 或針對公用 LoadBalancer 使用特定的可攜式 IP 位址時，請將 <em>&lt;loadBalancerIP&gt;</em> 取代為您要使用的 IP 位址。如需相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer)。</td>
+          <td>若要建立專用 LoadBalancer 或針對公用 LoadBalancer 使用特定的可攜式 IP 位址，請將 <em>&lt;loadBalancerIP&gt;</em> 取代為您要使用的 IP 位址。如需相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer)。</td>
         </tr>
         </tbody></table>
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-03-13"
 
 ---
 
@@ -17,13 +17,14 @@ lastupdated: "2018-01-24"
 
 # 区域和位置
 {{site.data.keyword.Bluemix}} 在全球托管。区域是由端点访问的地理区域。位置是该区域内的数据中心。{{site.data.keyword.Bluemix_notm}} 内的服务可以在全球可用或在特定区域内可用。
+在 {{site.data.keyword.containerlong}} 中创建 Kubernetes 集群时，其资源仍保留在将集群部署到的区域中。
 {:shortdesc}
 
 [{{site.data.keyword.Bluemix_notm}} 区域](#bluemix_regions)与 [{{site.data.keyword.containershort_notm}} 区域](#container_regions)不同。
 
-![{{site.data.keyword.containershort_notm}} 区域和数据中心](images/regions.png)
+![{{site.data.keyword.containershort_notm}} 区域和数据中心](/images/regions.png)
 
-图 1. {{site.data.keyword.containershort_notm}} 区域和数据中心
+图. {{site.data.keyword.containershort_notm}} 区域和数据中心
 
 支持的 {{site.data.keyword.containershort_notm}} 区域：
   * 亚太地区北部
@@ -32,7 +33,6 @@ lastupdated: "2018-01-24"
   * 英国南部
   * 美国东部
   * 美国南部
-
 
 
 
@@ -94,6 +94,9 @@ lastupdated: "2018-01-24"
 ### 登录到其他容器服务区域
 {: #container_login_endpoints}
 
+可以使用 {{site.data.keyword.containershort_notm}} CLI 来更改位置。
+{:shortdesc}
+
 出于以下原因，您可能希望登录到其他 {{site.data.keyword.containershort_notm}} 区域：
   * 您在一个区域中创建了 {{site.data.keyword.Bluemix_notm}} 服务或专用 Docker 映像，并希望将其用于另一个区域中的 {{site.data.keyword.containershort_notm}}。
   * 您希望访问与登录到的缺省 {{site.data.keyword.Bluemix_notm}} 区域不同的区域中的集群。
@@ -102,26 +105,11 @@ lastupdated: "2018-01-24"
 
 要快速切换区域，请运行 `bx cs region-set`。
 
-### 可供容器服务使用的位置
-{: #locations}
-
-位置是区域内可用的数据中心。
-
-  | 区域| 位置| 城市|
-  |--------|----------|------|
-  | 亚太地区北部| hkg02、seo01、sng01、tok02 | 香港、首尔、新加坡和东京|
-  | 亚太地区南部| mel01、syd01、syd04        | 墨尔本、悉尼|
-  | 欧洲中部| ams03、fra02、mil01、par01| 阿姆斯特丹、法兰克福、米兰、巴黎|
-  | 英国南部| lon02、lon04         | 伦敦|
-  | 美国东部| mon01、tor01、wdc06、wdc07        | 蒙特利尔、多伦多、华盛顿|
-  | 美国南部| dal10、dal12、dal13、sao01        | 达拉斯、圣保罗|
-
-**注**：米兰 (mil01) 仅可用于免费集群。
-
 ### 使用容器服务 API 命令
-{: #container_api}
+{: #containers_api}
 
 要与 {{site.data.keyword.containershort_notm}} API 交互，请输入命令类型并将 `/v1/command` 附加到全局端点。
+{:shortdesc}
 
 `GET /clusters` API 的示例：
   ```
@@ -135,3 +123,30 @@ lastupdated: "2018-01-24"
 {: tip}
 
 要查看有关 API 命令的文档，请查看 [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/)。
+
+## {{site.data.keyword.containershort_notm}} 中可用的位置
+{: #locations}
+
+位置是 {{site.data.keyword.Bluemix_notm}} 区域内可用的物理数据中心。区域是用于组织位置的概念工具，可以包含不同国家或地区中的位置（数据中心）。下表按区域显示可用的位置。
+{:shortdesc}
+
+| 区域| 位置| 城市|
+|--------|----------|------|
+| 亚太地区北部| hkg02、seo01、sng01、tok02 | 香港、首尔、新加坡和东京|
+| 亚太地区南部| mel01、syd01、syd04        | 墨尔本、悉尼|
+| 欧洲中部| ams03、fra02、par01        | 阿姆斯特丹、法兰克福、巴黎|
+| 英国南部| lon02、lon04         | 伦敦|
+| 美国东部| mon01、tor01、wdc06、wdc07        | 蒙特利尔、多伦多、华盛顿|
+| 美国南部| dal10、dal12、dal13、sao01        | 达拉斯、圣保罗|
+
+集群的资源保留在部署集群的位置（数据中心）中。下图突出显示了集群在美国东部示例区域中的关系：
+
+1.  集群资源（包括主节点和工作程序节点）位于将集群部署到的位置中。启动本地容器编排操作（例如，`kubectl` 命令）时，将在同一位置内的主节点与工作程序节点之间交换信息。
+
+2.  如果设置了其他集群资源（例如，存储器、联网、计算或在 pod 中运行的应用程序），那么资源及其数据会保留在将集群部署到的位置中。
+
+3.  启动集群管理操作（例如，使用 `bx cs` 命令）时，有关集群的基本信息（如名称、标识、用户和命令）会路由到区域端点。
+
+![了解集群资源的位置](/images/region-cluster-resources.png)
+
+图. 了解集群资源的位置。

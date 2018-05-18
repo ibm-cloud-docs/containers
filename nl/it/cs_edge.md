@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-07"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -18,26 +18,30 @@ lastupdated: "2018-02-07"
 # Limitazione del traffico di rete ai nodi di lavoro edge
 {: #edge}
 
-I nodi di lavoro edge possono migliorare la sicurezza del tuo cluster consentendo a un minor numero di nodi di lavoro di essere accessibili esternamente e isolando il carico di lavoro della rete. Quando questi nodi di lavoro sono contrassegnati solo per la rete, gli altri carichi di lavoro non possono consumare la CPU o la memoria del nodo di lavoro e interferire con la rete.
+I nodi di lavoro edge possono migliorare la sicurezza del tuo cluster Kubernetes consentendo a un minor numero di nodi di lavoro di essere accessibili esternamente e isolando il carico di lavoro della rete in {{site.data.keyword.containerlong}}.
 {:shortdesc}
+
+Quando questi nodi di lavoro sono contrassegnati solo per la rete, gli altri carichi di lavoro non possono consumare la CPU o la memoria del nodo di lavoro e interferire con la rete.
+
 
 
 
 ## Etichetta nodi di lavoro come nodi edge
 {: #edge_nodes}
 
-Aggiungi l'etichetta `dedicated=edge` a due o più nodi di lavoro nel tuo cluster per garantire che i programmi di bilanciamento del carico e Ingress vengano distribuiti solo a quei nodi di lavoro.
+Aggiungi l'etichetta `dedicated=edge` a due o più nodi di lavoro su ogni VLAN pubblica nel tuo cluster per garantire che i programmi di bilanciamento del carico e Ingress vengano distribuiti solo a quei nodi di lavoro.
+{:shortdesc}
 
 Prima di iniziare:
 
 - [Crea un cluster standard.](cs_clusters.html#clusters_cli)
 - Assicurati che il tuo cluster abbia almeno una VLAN pubblica. I nodi di lavoro edge non sono disponibili per i cluster con solo le VLAN private.
-- [Indirizza la CLI Kubernetes CLI al
+- [Indirizza la CLI Kubernetes al
 cluster](cs_cli_install.html#cs_cli_configure).
 
 Passi:
 
-1. Elenca tutti i nodi di lavoro nel cluster. Utilizza l'indirizzo IP privato dalla colonna **NAME** per identificare i nodi. Seleziona almeno due nodi di lavoro per impostarli come nodi di lavoro edge. L'utilizzo di due o più nodi di lavoro migliora la disponibilità delle risorse di rete.
+1. Elenca tutti i nodi di lavoro nel cluster. Utilizza l'indirizzo IP privato dalla colonna **NAME** per identificare i nodi. Seleziona almeno due nodi di lavoro su ogni VLAN pubblica per impostarli come nodi di lavoro edge. L'utilizzo di due o più nodi di lavoro migliora la disponibilità delle risorse di rete.
 
   ```
   kubectl get nodes -L publicVLAN,privateVLAN,dedicated
@@ -82,8 +86,11 @@ Hai etichettato i nodi di lavoro con `dedicated=edge` e hai ridistribuito tutti 
 ## Impedisci l'esecuzione dei carichi di lavoro sui nodi di lavoro edge
 {: #edge_workloads}
 
-Uno dei vantaggi dei nodi di lavoro edge è che possono essere specificati per eseguire solo i servizi di rete. L'utilizzo della tolleranza `dedicated=edge` indica che tutti i servizi di bilanciamento del carico e Ingress vengono distribuiti solo ai nodi di lavoro etichettati. Tuttavia, per impedire che altri carichi di lavoro vengano eseguiti sui nodi di lavoro edge e consumino le risorse dei nodi di lavoro, devi utilizzare le [corruzioni Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
-{:shortdesc}
+Uno dei vantaggi dei nodi di lavoro edge è che possono essere specificati per eseguire solo i servizi di rete.
+{:shortdesc} 
+
+L'utilizzo della tolleranza `dedicated=edge` indica che tutti i servizi di bilanciamento del carico e Ingress vengono distribuiti solo ai nodi di lavoro etichettati. Tuttavia, per impedire che altri carichi di lavoro vengano eseguiti sui nodi di lavoro edge e consumino le risorse dei nodi di lavoro, devi utilizzare le [corruzioni Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
+
 
 1. Elenca tutti i nodi di lavoro con l'etichetta `edge`.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-02-27"
 
 ---
 
@@ -18,25 +18,20 @@ lastupdated: "2018-01-24"
 # Contrôle du trafic à l'aide de règles réseau
 {: #network_policies}
 
-Chaque cluster Kubernetes est installé avec un plug-in réseau nommé Calico. Des règles réseau par défaut sont mises en place pour sécuriser
-l'interface réseau publique de chaque noeud worker. Vous pouvez exploiter
-Calico et les fonctionnalités Kubernetes natives pour configurer des règles réseau supplémentaires pour un cluster si vous avez des exigences de sécurité particulières. Ces règles réseau spécifient le trafic réseau que vous désirez autoriser ou bloquer vers et depuis un pod d'un cluster.
+Chaque cluster Kubernetes est installé avec un plug-in réseau nommé Calico. Des règles réseau par défaut sont mises en place pour sécuriser l'interface réseau publique de chaque noeud worker dans {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-Vous avez le choix entre la fonctionnalités Calico et les fonctionnalités Kubernetes natives pour créer des règles réseau pour votre cluster. Vous pouvez utiliser les règles réseau Kubernetes pour débuter, mais pour des capacités plus robustes, utilisez les règles réseau Calico.
+Vous pouvez exploiter Calico et les fonctionnalités Kubernetes natives pour configurer des règles réseau supplémentaires pour un cluster si vous avez des exigences de sécurité particulières. Ces règles réseau spécifient le trafic réseau que vous désirez autoriser ou bloquer vers et depuis un pod dans un cluster. Vous pouvez utiliser les règles réseau Kubernetes pour débuter, mais pour des capacités plus robustes, utilisez les règles réseau Calico.
 
 <ul>
-  <li>[Règles réseau Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/services-networking/network-policies/) : quelques options élémentaires sont fournies, comme la possibilité de spécifier quels pods peuvent communiquer entre eux. Le trafic réseau entrant peut être autorisé ou bloqué pour un protocole et un port donnés. Ce trafic peut être filtré en fonction des libellés et des espaces de nom Kubernetes du pod qui tente de se connecter à d'autres pods.</br>Ces règles peuvent être appliquées par le biais de commandes
-`kubectl` ou d'API Kubernetes. Lorsque ces règles sont appliquées, elles sont converties en règles réseau
-Calico et mises en vigueur par Calico.</li>
+  <li>[Règles réseau Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/services-networking/network-policies/) : quelques options élémentaires sont fournies, comme la possibilité de spécifier quels pods peuvent communiquer entre eux. Le trafic réseau entrant peut être autorisé ou bloqué pour un protocole et un port donnés. Ce trafic peut être filtré en fonction des libellés et des espaces de nom Kubernetes du pod qui tente de se connecter à d'autres pods.</br>Ces règles peuvent être appliquées par le biais de commandes `kubectl` ou d'API Kubernetes. Lorsque ces règles sont appliquées, elles sont converties en règles réseau Calico et mises en vigueur par Calico.</li>
   <li>[Règles réseau Calico![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy) : ces règles sont un sur-ensemble des règles réseau Kubernetes et optimisent les capacités Kubernetes natives en leur ajoutant les fonctionnalités suivantes.</li>
     <ul><ul><li>Autorisation ou blocage du trafic réseau sur des interfaces réseau spécifiques, et non pas seulement le trafic des pods Kubernetes.</li>
     <li>Autorisation ou blocage de trafic réseau entrant (ingress) et sortant (egress).</li>
     <li>[Blocage de trafic (ingress) entrant vers les services Kubernetes LoadBalancer ou NodePort](#block_ingress).</li>
     <li>Autorisation ou blocage de trafic sur la base d'une adresse IP ou CIDR source ou de destination.</li></ul></ul></br>
 
-Ces règles sont appliquées via les commandes `calicoctl`. Calico met en vigueur ces règles, y-compris les éventuelles règles réseau
-Kubernetes converties en règles Calico, en configurant des règles Linux iptables sur les noeuds d'agent Kubernetes. Les règles iptables font office de pare-feu pour le noeud worker en définissant les caractéristiques que le trafic réseau doit respecter pour être acheminé à la ressource ciblée.</ul>
+Ces règles sont appliquées via les commandes `calicoctl`. Calico met en vigueur ces règles, y-compris les éventuelles règles réseau Kubernetes converties en règles Calico, en configurant des règles Linux iptables sur les noeuds worker Kubernetes. Les règles iptables font office de pare-feu pour le noeud worker en définissant les caractéristiques que le trafic réseau doit respecter pour être acheminé vers la ressource ciblée.</ul>
 
 <br />
 
@@ -44,7 +39,7 @@ Kubernetes converties en règles Calico, en configurant des règles Linux iptabl
 ## Configuration de règles par défaut
 {: #default_policy}
 
-Lorsqu'un cluster est créé, des règles réseau par défaut sont automatiquement configurées pour l'interface réseau publique de chaque noeud public afin de limiter le trafic entrant d'un noeud worker depuis l'Internet public. Ces règles n'affectent pas le trafic entre les pods et son mises en place pour permettre l'accès au port de noeud Kubernetes, à l'équilibreur de charge et aux services Ingress.
+Lorsqu'un cluster est créé, des règles réseau par défaut sont définies pour l'interface réseau publique de chaque noeud worker afin de limiter le trafic entrant depuis le réseau Internet public. Ces règles n'affectent pas le trafic entre les pods et permettent l'accès aux services Nodeport, LoadBalancer et Ingress de Kubernetes.
 {:shortdesc}
 
 Des règles par défaut ne sont pas appliquées aux pods directement, mais à l'interface réseau publique d'un noeud worker à l'aide d'un noeud final d'hôte Calico. Quand un noeud final d'hôte est créé dans Calico, tout le trafic vers et depuis l'interface réseau publique de ce noeud worker est bloqué, sauf s'il est autorisé par une règle.
@@ -72,16 +67,15 @@ Des règles par défaut ne sont pas appliquées aux pods directement, mais à l'
      </tr>
     <tr>
       <td><code>allow-node-port-dnat</code></td>
-      <td>Autorise le trafic entrant du service nodeport, d'équilibrage de charge et Ingress service vers les ports que ces
-services exposent. Notez que le port que ces services exposent sur l'interface publique n'a pas besoin d'être spécifié puisque Kubernetes utilise la conversion d'adresse de réseau de destination (DNAT) pour réacheminer ces demandes de service aux pods corrects. Ce réacheminement intervient avant de les règles de noeud final d'hôte soient appliquées dans des iptables.</td>
+      <td>Autorise le trafic entrant du service nodeport, d'équilibrage de charge et Ingress service vers les ports que ces services exposent. Notez que le port que ces services exposent sur l'interface publique n'a pas besoin d'être spécifié puisque Kubernetes utilise la conversion d'adresse de réseau de destination (DNAT) pour réacheminer ces demandes de service aux pods corrects. Ce réacheminement intervient avant de les règles de noeud final d'hôte soient appliquées dans des iptables.</td>
    </tr>
    <tr>
       <td><code>allow-sys-mgmt</code></td>
-      <td>Autorise les connexions entrantes pour des systèmes d'infrastructure IBM Cloud (SoftLayer) spécifiques utilisés pour gérer les noeuds d'agent.</td>
+      <td>Autorise les connexions entrantes pour des systèmes d'infrastructure IBM Cloud (SoftLayer) spécifiques utilisés pour gérer les noeuds worker.</td>
    </tr>
    <tr>
     <td><code>allow-vrrp</code></td>
-    <td>Autorise les paquets vrrp, lesquels sont utilisés pour suivi et déplacement d'adresses IP virtuelles entre noeuds d'agent.</td>
+    <td>Autorise les paquets vrrp, lesquels sont utilisés pour suivi et déplacement d'adresses IP virtuelles entre noeuds worker.</td>
    </tr>
   </tbody>
 </table>
@@ -99,8 +93,7 @@ Avant de commencer :
 
 1.  [Installez les interfaces CLI de {{site.data.keyword.containershort_notm}} et de Kubernetes.](cs_cli_install.html#cs_cli_install)
 2.  [Créez un cluster gratuit ou standard.](cs_clusters.html#clusters_ui)
-3.  [Ciblez l'interface CLI de Kubernetes sur le cluster](cs_cli_install.html#cs_cli_configure). Incluez l'option `--admin` avec la commande `bx cs
-cluster-config`, laquelle est utilisée pour télécharger les fichiers de certificat et d'autorisations. Ce téléchargement inclut également les clés pour le rôle Superutilisateur, dont vous aurez besoin pour exécuter des commandes Calico.
+3.  [Ciblez l'interface CLI de Kubernetes sur le cluster](cs_cli_install.html#cs_cli_configure). Incluez l'option `--admin` avec la commande `bx cs cluster-config`, laquelle est utilisée pour télécharger les fichiers de certificat et d'autorisations. Ce téléchargement inclut également les clés pour le rôle Superutilisateur, dont vous aurez besoin pour exécuter des commandes Calico.
 
   ```
   bx cs cluster-config <cluster_name> --admin
@@ -330,7 +323,7 @@ Calico.
 ## Blocage du trafic entrant vers les services LoadBalancer ou NodePort.
 {: #block_ingress}
 
-Par défaut, les services Kubernetes `NodePort` et `LoadBalancer` sont conçus pour rendre accessible votre application sur toutes les interfaces de cluster publiques et privées. Vous pouvez toutefois bloquer le trafic entrant vers vos services en fonction de la source ou de la destination du trafic. Pour bloquer le trafic, créez des règles réseau `preDNAT` Calico.
+Par défaut, les services Kubernetes `NodePort` et `LoadBalancer` sont conçus pour rendre accessible votre application sur toutes les interfaces de cluster publiques et privées. Vous pouvez toutefois bloquer le trafic entrant vers vos services en fonction de la source ou de la destination du trafic.
 {:shortdesc}
 
 Un service Kubernetes LoadBalancer est également un service NodePort. Un service LoadBalancer rend accessible votre application via l'adresse IP et le port de l'équilibreur de charge et la rend accessible via le ou les ports de noeud du service. Les ports de noeud sont accessibles sur toutes les adresses IP (publiques et privées) pour tous les noeuds figurant dans le cluster.
@@ -343,7 +336,7 @@ L'administrateur du cluster peut utiliser des règles réseau `preDNAT` Calico p
 Quelques utilisations classiques des règles réseau `preDNAT` Calico :
 
   - Bloquer le trafic vers des ports de noeud publics d'un service LoadBalancer privé.
-  - Bloquer le trafic vers des ports de noeud publics sur des clusters qui exécutent des [noeuds d'agent de périphérie](cs_edge.html#edge). Le blocage des ports de noeud garantit que les noeuds d'agent de périphérie sont les seuls noeuds d'agent à traiter le trafic entrant.
+  - Bloquer le trafic vers des ports de noeud publics sur des clusters qui exécutent des [noeuds worker de périphérie](cs_edge.html#edge). Le blocage des ports de noeud garantit que les noeuds worker de périphérie sont les seuls noeuds worker à traiter le trafic entrant.
 
 Les règles réseau `preDNAT` sont pratiques car les règles par défaut de Kubernetes et Calico sont difficiles à appliquer pour protéger les services Kubernetes NodePort et LoadBalancer en raison des règles iptables DNAT générées pour ces services.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-16"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -19,10 +19,10 @@ lastupdated: "2018-01-16"
 # Annotations Ingress
 {: #ingress_annotation}
 
-Pour ajouter des fonctionnalités à votre équilibreur de charge d'application, vous pouvez spécifier des annotations sous forme de métadonnées dans une ressource Ingress.
+Pour ajouter des fonctionnalités à l'équilibreur de charge d'application (ALB) Ingress, vous pouvez indiquer des annotations sous forme de métadonnées dans une ressource Ingress.
 {: shortdesc}
 
-Pour des informations générales sur les services Ingress et comment les utiliser, voir [Configuration de l'accès public à une application à l'aide d'Ingress](cs_ingress.html#config).
+Pour des informations générales sur les services Ingress et comment les utiliser, voir [Configuration de l'accès public à une application à l'aide d'Ingress](cs_ingress.html#configure_alb).
 
 <table>
 <col width="20%">
@@ -40,19 +40,24 @@ Pour des informations générales sur les services Ingress et comment les utilis
  <td>Permet d'ajouter des définitions de chemin à des services externes, tels qu'un service hébergé dans {{site.data.keyword.Bluemix_notm}}.</td>
  </tr>
  <tr>
- <td><a href="#alb-id">Routage d'équilibreur de charge d'application privé</a></td>
+ <td><a href="#location-modifier">Modificateur d'emplacement</a></td>
+ <td><code>location-modifier</code></td>
+ <td>Modifier le mode utilisé par l'équilibreur de charge ALB pour faire correspondre l'URI de la demande au chemin de l'application.</td>
+ </tr>
+ <tr>
+ <td><a href="#alb-id">Routage de l'équilibreur de charge d'application (ALB) privé</a></td>
  <td><code>ALB-ID</code></td>
- <td>Routez les demandes entrantes à vos applications  avec un équilibreur de charge d'application privé.</td>
+ <td>Router les demandes entrantes vers vos applications avec un équilibreur de charge ALB privé.</td>
  </tr>
  <tr>
  <td><a href="#rewrite-path">Chemins de redirection</a></td>
  <td><code>rewrite-path</code></td>
- <td>Acheminer le trafic réseau entrant vers un autre chemin sur lequel votre application de back end est en mode écoute.</td>
+ <td>Router le trafic réseau entrant vers un autre chemin sur lequel votre application de back end est à l'écoute.</td>
  </tr>
  <tr>
  <td><a href="#sticky-cookie-services">Affinité de session avec des cookies</a></td>
  <td><code>sticky-cookie-services</code></td>
- <td>Acheminer systématiquement le trafic réseau entrant vers le même serveur en amont à l'aide d'un cookie compliqué.</td>
+ <td>Acheminer systématiquement le trafic réseau entrant vers le même serveur en amont à l'aide d'un cookie d'association (sticky cookie).</td>
  </tr>
  <tr>
  <td><a href="#tcp-ports">Ports TCP</a></td>
@@ -74,25 +79,68 @@ Pour des informations générales sur les services Ingress et comment les utilis
   <tbody>
   <tr>
   <td><a href="#proxy-connect-timeout">Personnalisation des paramètres connect-timeouts et read-timeouts</a></td>
-  <td><code>proxy-connect-timeout</code></td>
-  <td>Permet d'ajuster le délai d'attente observé par l'équilibreur de charge d'application pour établir une connexion et effectuer une lecture depuis l'application de back-end avant que celle-ci ne soit considérée comme indisponible.</td>
+  <td><code>proxy-connect-timeout, proxy-read-timeout</code></td>
+  <td>Définir la durée d'attente de connexion de l'équilibreur de charge ALB à l'application de back end et la durée de lecture avant que l'application soit considérée comme indisponible.</td>
   </tr>
   <tr>
-  <td><a href="#keepalive-requests">Demandes de signal de présence</a></td>
+  <td><a href="#keepalive-requests">Demandes keepalive</a></td>
   <td><code>keepalive-requests</code></td>
-  <td>Configurer le nombre maximum de demandes pouvant être traitées via une connexion de signal de présence.</td>
+  <td>Configurer le nombre maximum de demandes pouvant être traitées via une connexion persistante (keepalive).</td>
   </tr>
   <tr>
-  <td><a href="#keepalive-timeout">Délai d'expiration de signal de présence</a></td>
+  <td><a href="#keepalive-timeout">Délai d'expiration de connexion persistante (keepalive)</a></td>
   <td><code>keepalive-timeout</code></td>
-  <td>Configurer la durée d'ouverture d'une connexion de signal de présence sur le serveur.</td>
+  <td>Configurer la durée d'ouverture d'une connexion persistante sur le serveur.</td>
   </tr>
   <tr>
-  <td><a href="#upstream-keepalive">Signal de présence en amont</a></td>
+  <td><a href="#upstream-keepalive">Connexions persistantes en amont</a></td>
   <td><code>upstream-keepalive</code></td>
-  <td>Configurer le nombre maximum de connexions de signal de présence inactives pour un serveur en amont.</td>
+  <td>Configurer le nombre maximum de connexions persistantes (keepalive) inactives pour un serveur en amont.</td>
   </tr>
   </tbody></table>
+
+  <table>
+  <col width="20%">
+  <col width="20%">
+  <col width="60%">
+  <thead>
+  <th>Annotations d'authentification HTTPS et TLS/SSL</th>
+  <th>Nom</th>
+  <th>Description</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><a href="#appid-auth">Authentification {{site.data.keyword.appid_short}}</a></td>
+  <td><code>appid-auth</code></td>
+  <td>Utiliser {{site.data.keyword.appid_full_notm}} pour l'authentification auprès de votre application.</td>
+  </tr>
+  <tr>
+  <td><a href="#custom-port">Ports HTTP et HTTPS personnalisés</a></td>
+  <td><code>custom-port</code></td>
+  <td>Modifier les ports par défaut pour le trafic réseau HTTP (port 80) et HTTPS (port 443).</td>
+  </tr>
+  <tr>
+  <td><a href="#redirect-to-https">Redirection HTTP vers HTTPS</a></td>
+  <td><code>redirect-to-https</code></td>
+  <td>Rediriger les demandes HTTP non sécurisées sur votre domaine vers HTTPS.</td>
+  </tr>
+  <tr>
+  <td><a href="#hsts">Dispositif de sécurité HSTS (HTTP Strict Transport Security)</a></td>
+  <td><code>hsts</code></td>
+  <td>Définir le navigateur pour accéder au domaine uniquement à l'aide de HTTPS.</td>
+  </tr>
+  <tr>
+  <td><a href="#mutual-auth">Authentification mutuelle</a></td>
+  <td><code>mutual-auth</code></td>
+  <td>Configurer l'authentification mutuelle pour l'équilibreur de charge ALB.</td>
+  </tr>
+  <tr>
+  <td><a href="#ssl-services">Support des services SSL</a></td>
+  <td><code>ssl-services</code></td>
+  <td>Autoriser le support des services SSL à chiffrer le trafic vers vos applications en amont nécessitant HTTPS. </td>
+  </tr>
+  </tbody></table>
+
 
 
 <table>
@@ -100,7 +148,7 @@ Pour des informations générales sur les services Ingress et comment les utilis
 <col width="20%">
 <col width="60%">
  <thead>
- <th>Annotations de tampons de proxy</th>
+ <th>Annotations de mémoire tampon de proxy</th>
  <th>Nom</th>
  <th>Description</th>
  </thead>
@@ -108,22 +156,22 @@ Pour des informations générales sur les services Ingress et comment les utilis
  <tr>
  <td><a href="#proxy-buffering">Mise en mémoire tampon des données de réponse client</a></td>
  <td><code>proxy-buffering</code></td>
- <td>Désactiver la mise en mémoire tampon d'une réponse client sur l'équilibreur de charge d'application lors de l'envoi de la réponse au client.</td>
+ <td>Désactiver la mise en mémoire tampon d'une réponse client sur l'équilibreur de charge ALB lors de l'envoi de la réponse au client.</td>
  </tr>
  <tr>
  <td><a href="#proxy-buffers">Tampons de proxy</a></td>
  <td><code>proxy-buffers</code></td>
- <td>Permet de définir le nombre et la taille des tampons qui lisent une réponse pour une connexion unique provenant du serveur relayé via un proxy.</td>
+ <td>Définir le nombre et la taille des mémoires tampons qui lisent une réponse pour une connexion unique provenant du serveur relayé via un proxy.</td>
  </tr>
  <tr>
- <td><a href="#proxy-buffer-size">Taille de tampon de proxy</a></td>
+ <td><a href="#proxy-buffer-size">Taille de mémoire tampon de proxy</a></td>
  <td><code>proxy-buffer-size</code></td>
- <td>Permet de définir la taille du tampon qui lit la première partie de la réponse reçue du serveur relayé via un proxy.</td>
+ <td>Définir la taille de la mémoire tampon qui lit la première partie de la réponse reçue du serveur relayé via un proxy.</td>
  </tr>
  <tr>
- <td><a href="#proxy-busy-buffers-size">Taille des tampons occupés de proxy</a></td>
+ <td><a href="#proxy-busy-buffers-size">Taille des mémoires tampons occupées de proxy</a></td>
  <td><code>proxy-busy-buffers-size</code></td>
- <td>Définit la taille des tampons de proxy pouvant être occupés.</td>
+ <td>Définir la taille des mémoires tampons de proxy pouvant être occupées.</td>
  </tr>
  </tbody></table>
 
@@ -140,7 +188,7 @@ Pour des informations générales sur les services Ingress et comment les utilis
 <tbody>
 <tr>
 <td><a href="#proxy-add-headers">En-tête de réponse ou de demande client supplémentaire</a></td>
-<td><code>proxy-add-headers</code></td>
+<td><code>proxy-add-headers, response-add-headers</code></td>
 <td>Ajouter des informations d'en-tête à une demande client avant d'acheminer la demande vers votre application de back end ou à une réponse client avant d'envoyer la réponse au client.</td>
 </tr>
 <tr>
@@ -149,9 +197,14 @@ Pour des informations générales sur les services Ingress et comment les utilis
 <td>Retirer les informations d'en-tête d'une réponse client avant d'acheminer la réponse vers le client.</td>
 </tr>
 <tr>
-<td><a href="#client-max-body-size">Personnaliser la taille du corps de demande client maximale</a></td>
+<td><a href="#client-max-body-size">Taille du corps de demande client</a></td>
 <td><code>client-max-body-size</code></td>
-<td>Ajustez la taille du corps de la demande du client pouvant être envoyée à l'équilibreur de charge d'application.</td>
+<td>Définir la taille maximale du corps que le client peut envoyer dans le cadre d'une demande.</td>
+</tr>
+<tr>
+<td><a href="#large-client-header-buffers">Mémoires tampon d'en-têtes de demande client volumineux</a></td>
+<td><code>large-client-header-buffers</code></td>
+<td>Définir le nombre et la taille maximum des mémoires tampons qui lisent des en-têtes de demande client volumineux</td>
 </tr>
 </tbody></table>
 
@@ -168,44 +221,12 @@ Pour des informations générales sur les services Ingress et comment les utilis
 <tr>
 <td><a href="#global-rate-limit">Limites de débit globales</a></td>
 <td><code>global-rate-limit</code></td>
-<td>Limite le débit de traitement des demandes et le nombre de connexions compte tenu d'une clé définie pour tous les services.</td>
+<td>Limiter le débit de traitement des demandes et le nombre de connexions compte tenu d'une clé définie pour tous les services.</td>
 </tr>
 <tr>
 <td><a href="#service-rate-limit">Limites de débit de service</a></td>
 <td><code>service-rate-limit</code></td>
-<td>Limite le débit de traitement des demandes et le nombre de connexions compte tenu d'une clé définie pour des services spécifiques.</td>
-</tr>
-</tbody></table>
-
-<table>
-<col width="20%">
-<col width="20%">
-<col width="60%">
-<thead>
-<th>Annotations d'authentification HTTPS et TLS/SSL</th>
-<th>Nom</th>
-<th>Description</th>
-</thead>
-<tbody>
-<tr>
-<td><a href="#custom-port">Ports HTTP et HTTPS personnalisés</a></td>
-<td><code>custom-port</code></td>
-<td>Modifiez les ports par défaut pour le trafic réseau HTTP (port 80) et HTTPS (port 443).</td>
-</tr>
-<tr>
-<td><a href="#redirect-to-https">Redirection HTTP vers HTTPS</a></td>
-<td><code>redirect-to-https</code></td>
-<td>Rediriger les demandes HTTP non sécurisées sur votre domaine vers HTTPS.</td>
-</tr>
-<tr>
-<td><a href="#mutual-auth">Authentification mutuelle</a></td>
-<td><code>mutual-auth</code></td>
-<td>Configurez une authentification mutuelle pour l'équilibreur de charge d'application.</td>
-</tr>
-<tr>
-<td><a href="#ssl-services">Support des services SSL</a></td>
-<td><code>ssl-services</code></td>
-<td>Autorise la prise en charge des services SSL pour l'équilibrage de charge.</td>
+<td>Limiter le débit de traitement des demandes et le nombre de connexions compte tenu d'une clé définie pour des services spécifiques.</td>
 </tr>
 </tbody></table>
 
@@ -222,7 +243,7 @@ Ajoutez des définitions de chemin d'accès à des services externes, tels des s
 
 <dl>
 <dt>Description</dt>
-<dd>Ajouter des définitions de chemin d'accès à des services externes. N'utilisez cette annotation que si votre application opère sur un service externe au lieu d'un service de back-end. Lorsque vous utilisez cette annotation pour créer une route de service externe, seules les annotations `client-max-body-size`, `proxy-read-timeout`, `proxy-connect-timeout` et `proxy-buffering` sont prises en charge en conjonction. Aucune autre annotation n'est prise en charge en conjonction avec `proxy-external-service`.
+<dd>Ajouter des définitions de chemin d'accès à des services externes. N'utilisez cette annotation que si votre application opère sur un service externe au lieu d'un service de back end. Lorsque vous utilisez cette annotation pour créer une route de service externe, seules les annotations `client-max-body-size`, `proxy-read-timeout`, `proxy-connect-timeout` et `proxy-buffering` sont prises en charge conjointement. Aucune autre annotation n'est prise en charge en conjonction avec `proxy-external-service`.
 </dd>
 <dt>Exemple de fichier YAML de ressource Ingress</dt>
 <dd>
@@ -274,17 +295,79 @@ spec:
 <br />
 
 
+### Modificateur d'emplacement (location-modifier)
+{: #location-modifier}
 
-### Routage  d'équilibreur de charge d'application privé (ALB-ID)
+Modifiez le mode utilisé par l'équilibreur de charge d'application (ALB) pour faire correspondre l'URI de la demande avec le chemin de l'application.
+{:shortdesc}
+
+<dl>
+<dt>Description</dt>
+<dd>Par défaut, les équilibreurs de charge ALB traitent les chemins sur lesquels les applications sont à l'écoute en tant que préfixes. Lorsqu'un équilibreur de charge ALB reçoit une demande destinée à une application, il recherche un chemin (sous forme de préfixe) dans la ressource Ingress qui correspond au début de l'URI de la demande. Si une correspondance est trouvée, la demande est transmise à l'adresse IP du pod sur lequel est déployée l'application.<br><br>L'annotation `location-modifier` modifie le mode utilisé par l'équilibreur de charge ALB pour rechercher des correspondances en modifiant l'emplacement de configuration des blocs. Le bloc d'emplacement détermine comment sont traitées les demandes correspondant au chemin de l'application. **Remarque** : cette annotation est obligatoire pour traiter les chemins d'expression régulière (regex).</dd>
+<dt>Modificateurs pris en charge</dt>
+<dd>
+<ul>
+<li><code>=</code> : avec le modificateur signe égal, l'équilibreur de charge ALB sélectionne uniquement les correspondances exactes. Lorsqu'une correspondance exacte est trouvée, la recherche s'arrête et le chemin correspondant est sélectionné.</li>
+<li><code>~</code> : avec le modificateur tilde, l'équilibreur de charge ALB traite les chemins comme des chemins d'expression régulière sensibles à la casse lors de la correspondance.</li>
+<li><code>~*</code> : avec le modificateur tilde suivi d'un astérisque, l'équilibreur de charge ALB traite les chemins comme des chemins d'expression régulière insensibles à la casse lors de la correspondance.</li>
+<li><code>^~</code> : avec le modificateur caret suivi d'un tilde, l'équilibreur de charge ALB sélectionne la meilleure correspondance (hors expression régulière) au lieu d'un chemin d'accès d'expression régulière.</li>
+</ul>
+</dd>
+
+<dt>Exemple de fichier YAML de ressource Ingress</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+name: myingress
+annotations:
+  ingress.bluemix.net/location-modifier: "modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice&gt;;modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice2&gt;"
+spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mysecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: &lt;myservice&gt;
+          servicePort: 80</code></pre>
+
+ <table>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>modifier</code></td>
+  <td>Remplacez <code>&lt;<em>location_modifier</em>&gt;</code> par le modificateur d'emplacement à utiliser pour le chemin. Les modificateurs pris en charge sont <code>'='</code>,<code>'~'</code>,<code>'~*'</code> et <code>'^~'</code>. Vous devez mettre les modificateurs entre guillemets simples.</td>
+  </tr>
+  <tr>
+  <td><code>serviceName</code></td>
+  <td>Remplacez <code>&lt;<em>myservice</em>&gt;</code> par le nom du service Kubernetes que vous avez créé pour votre application.</td>
+  </tr>
+  </tbody></table>
+  </dd>
+  </dl>
+
+<br />
+
+
+### Routage d'équilibreur de charge ALB privé (ALB-ID)
 {: #alb-id}
 
-Routez les demandes entrantes vers vos applications à l'aide d'un équilibreur de charge d'application privé.
+Routez les demandes entrantes vers vos applications avec un équilibreur de charge ALB privé.
 {:shortdesc}
 
 <dl>
 <dt>Description</dt>
 <dd>
-Choisissez un équilibreur de charge d'application privé pour acheminer les demandes entrantes au lieu d'utiliser l'équilibreur de charge d'application public.</dd>
+Sélectionner un équilibreur de charge ALB privé pour acheminer les demandes entrantes au lieu de l'équilibreur de charge ALB public.</dd>
 
 
 <dt>Exemple de fichier YAML de ressource Ingress</dt>
@@ -318,7 +401,7 @@ tls:
 <tbody>
 <tr>
 <td><code>&lt;private_ALB_ID&gt;</code></td>
-<td>ID de votre équilibreur de charge d'application privé. Lancez la commande <code>bx cs albs --cluster <my_cluster></code> pour identifier l'ID de l'équilibreur de charge d'application privé.
+<td>ID de votre équilibreur de charge d'application (ALB) privé. Exécutez la commande <code>bx cs albs --cluster <my_cluster></code> pour trouver l'ID de l'ALB privé.
 </td>
 </tr>
 </tbody></table>
@@ -332,12 +415,12 @@ tls:
 ### Chemins de redirection (rewrite-path)
 {: #rewrite-path}
 
-Acheminez le trafic réseau entrant sur un chemin de domaine d'équilibreur de charge d'application différent de celui où votre application de back end est à l'écoute.
+Routez le trafic réseau entrant sur un chemin de domaine d'un équilibreur de charge ALB vers un autre chemin utilisé par votre application de back end en mode écoute.
 {:shortdesc}
 
 <dl>
 <dt>Description</dt>
-<dd>Votre domaine d'équilibreur de charge d'application Ingress achemine le trafic réseau sur <code>mykubecluster.us-south.containers.mybluemix.net/beans</code> à votre application. Votre application est en mode écoute sur <code>/coffee</code> au lieu de <code>/beans</code>. Pour acheminer le trafic réseau entrant vers votre application, ajoutez l'annotation rewrite au fichier de configuration de votre ressource Ingress. L'annotation rewrite garantit que le trafic réseau entrant sur <code>/beans</code> est réacheminé vers votre application en utilisant le chemin <code>/coffee</code>. Lorsque vous incluez plusieurs services, utilisez uniquement un point-virgule (;) pour les séparer.</dd>
+<dd>Votre domaine d'équilibreur de charge d'application (ALB) Ingress achemine le trafic réseau sur <code>mykubecluster.us-south.containers.mybluemix.net/beans</code> vers votre application. Votre application est en mode écoute sur <code>/coffee</code> au lieu de <code>/beans</code>. Pour acheminer le trafic réseau entrant vers votre application, ajoutez l'annotation rewrite au fichier de configuration de votre ressource Ingress. L'annotation rewrite garantit que le trafic réseau entrant sur <code>/beans</code> est réacheminé vers votre application en utilisant le chemin <code>/coffee</code>. Lorsque vous incluez plusieurs services, utilisez uniquement un point-virgule (;) pour les séparer.</dd>
 <dt>Exemple de fichier YAML de ressource Ingress</dt>
 <dd>
 <pre class="codeblock">
@@ -373,7 +456,7 @@ spec:
 </tr>
 <tr>
 <td><code>rewrite</code></td>
-<td>Remplacez <code>&lt;<em>target_path</em>&gt;</code> par le chemin sur lequel votre application est à l'écoute. Le trafic réseau entrant sur le domaine d'équilibreur de charge d'application est acheminé au service Kubernetes en utilisant ce chemin. La plupart des applications ne sont pas à l'écoute sur un chemin spécifique, mais utilisent le chemin racine et un port spécifique. Dans l'exemple ci-dessus, le chemin de redirection a été défini en tant que <code>/coffee</code>.</td>
+<td>Remplacez <code>&lt;<em>target_path</em>&gt;</code> par le chemin sur lequel votre application est à l'écoute. Le trafic réseau entrant sur le domaine ALB est acheminé au service Kubernetes en utilisant ce chemin. La plupart des applications ne sont pas à l'écoute sur un chemin spécifique, mais utilisent le chemin racine et un port spécifique. Dans l'exemple ci-dessus, le chemin de redirection a été défini en tant que <code>/coffee</code>.</td>
 </tr>
 </tbody></table>
 
@@ -385,15 +468,15 @@ spec:
 ### Affinité de session avec des cookies (sticky-cookie-services)
 {: #sticky-cookie-services}
 
-Utilisez l'annotation sticky cookie pour ajouter une affinité de session à votre équilibreur de charge d'application et toujours acheminer le trafic réseau entrant au même serveur en amont.
+Utilisez l'annotation sticky cookie pour ajouter une affinité de session à votre équilibreur de charge ALB et toujours acheminer le trafic réseau entrant au même serveur en amont.
 {:shortdesc}
 
 <dl>
 <dt>Description</dt>
-<dd>Pour la haute disponibilité, certaines configurations d'application nécessitent de déployer plusieurs serveurs en amont qui prennent en charge les demandes client entrantes. Lorsqu'un client se connecte à votre application de back end, vous pouvez utiliser l'affinité de session pour qu'un client soit servi par le même serveur en amont pendant toute la durée d'une session ou pendant la durée d'exécution d'une tâche. Vous pouvez configurer votre équilibreur de charge d'application pour assurer une affinité de session en acheminant toujours le trafic réseau entrant au même serveur en amont.
+<dd>Pour la haute disponibilité, certaines configurations d'application nécessitent de déployer plusieurs serveurs en amont qui prennent en charge les demandes client entrantes. Lorsqu'un client se connecte à votre application de back end, vous pouvez utiliser l'affinité de session pour qu'un client soit servi par le même serveur en amont pendant toute la durée d'une session ou pendant la durée d'exécution d'une tâche. Vous pouvez configurer votre équilibreur de charge ALB pour assurer une affinité de session en acheminant toujours le trafic réseau entrant au même serveur en amont.
 
 </br></br>
-Chaque client qui se connecte à votre application de back end est affecté par l'équilibreur de charge d'application à l'un des serveurs en amont disponibles. L'équilibreur de charge d'application crée un cookie de session stocké dans l'application du client et inclus dans les informations d'en-tête de chaque demande entre l'équilibreur de charge d'application et le client. Les informations contenues dans le cookie garantissent la prise en charge de toutes les demandes par le même serveur en amont pendant toute la session.
+Chaque client qui se connecte à votre application de back end est affecté par l'équilibreur de charge d'application (ALB) à l'un des serveurs en amont disponibles. L'équilibreur de charge ALB crée un cookie de session stocké dans l'application du client et inclus dans les informations d'en-tête de chaque demande entre l'équilibreur de charge ALB et le client. Les informations contenues dans le cookie garantissent la prise en charge de toutes les demandes par le même serveur en amont pendant toute la session.
 
 </br></br>
 Lorsque vous incluez plusieurs services, utilisez un point-virgule (;) pour les séparer.</dd>
@@ -437,15 +520,15 @@ spec:
   </tr>
   <tr>
   <td><code>name</code></td>
-  <td>Remplacez <code>&lt;<em>cookie_name</em>&gt;</code> par le nom d'un cooky sticky créé lors d'une session.</td>
+  <td>Remplacez <code>&lt;<em>cookie_name</em>&gt;</code> par le nom d'un cookie d'asociation (sticky cookie) créé lors d'une session.</td>
   </tr>
   <tr>
   <td><code>expires</code></td>
-  <td>Remplacez <code>&lt;<em>expiration_time</em>&gt;</code> par le délai en secondes (s), minutes (m), ou heures (h) avant expiration du cookie sticky. Ce délai est indépendant de l'activité d'utilisateur. Une fois le cookie arrivé à expiration, il est supprimé par le navigateur Web du client et n'est plus envoyé à l'équilibreur de charge d'application. Par exemple, pour définir un délai d'expiration d'1 seconde, d'1 minute ou d'1 heure, entrez <code>1s</code>, <code>1m</code> ou <code>1h</code>.</td>
+  <td>Remplacez <code>&lt;<em>expiration_time</em>&gt;</code> par le délai en secondes (s), minutes (m) ou heures (h) avant expiration du cookie d'association. Ce délai est indépendant de l'activité d'utilisateur. Une fois le cookie arrivé à expiration, il est supprimé par le navigateur Web du client et n'est plus envoyé à l'équilibreur de charge ALB. Par exemple, pour définir un délai d'expiration d'1 seconde, d'1 minute ou d'1 heure, entrez <code>1s</code>, <code>1m</code> ou <code>1h</code>.</td>
   </tr>
   <tr>
   <td><code>path</code></td>
-  <td>Remplacez <code>&lt;<em>cookie_path</em>&gt;</code> par le chemin ajouté au sous-domaine Ingress et qui indique pour quels domaines et sous-domaines le cookie est envoyé à l'équilibreur de charge d'application. Par exemple, si votre domaine Ingress est <code>www.myingress.com</code> et que vous souhaitez envoyer le cookie dans chaque demande client, vous devez définir <code>path=/</code>. Si vous souhaitez envoyer le cookie uniquement pour <code>www.myingress.com/myapp</code> et tous ses sous-domaines, vous devez définir <code>path=/myapp</code>.</td>
+  <td>Remplacez <code>&lt;<em>cookie_path</em>&gt;</code> par le chemin ajouté au sous-domaine Ingress et qui indique pour quels domaines et sous-domaines le cookie est envoyé à l'équilibreur de charge ALB. Par exemple, si votre domaine Ingress est <code>www.myingress.com</code> et que vous souhaitez envoyer le cookie dans chaque demande client, vous devez définir <code>path=/</code>. Si vous souhaitez envoyer le cookie uniquement pour <code>www.myingress.com/myapp</code> et tous ses sous-domaines, vous devez définir <code>path=/myapp</code>.</td>
   </tr>
   <tr>
   <td><code>hash</code></td>
@@ -470,7 +553,7 @@ Accédez à une application via un port TCP non standard.
 <dd>
 Utiliser cette annotation pour une application qui s'exécute sur une charge de travail de flux TCP.
 
-<p>**Remarque **: l'équilibreur de charge d'application opère en mode "pass-through" et achemine le trafic aux applications de back end. La terminaison SSL n'est pas prise en charge dans ce cas.</p>
+<p>**Remarque** : l'équilibreur de charge ALB opère en mode passe-système et achemine le trafic aux applications de back end. La terminaison SSL n'est pas prise en charge dans ce cas.</p>
 </dd>
 
 
@@ -505,7 +588,7 @@ spec:
   <tbody>
   <tr>
   <td><code>serviceName</code></td>
-  <td>Remplacez <code>&lt;<em>myservice</em>&gt;</code> par le nom du service Kubernetes pour accès au port TCP non standard.</td>
+  <td>Remplacez <code>&lt;<em>myservice</em>&gt;</code> par le nom du service Kubernetes auquel accéder via un port TCP non standard.</td>
   </tr>
   <tr>
   <td><code>ingressPort</code></td>
@@ -516,11 +599,47 @@ spec:
   <td>Ce paramètre est facultatif. Lorsqu'il est fourni, le port est remplacé par cette valeur avant l'envoi du trafic à l'application de back end. Sinon, le port est identique au port Ingress.</td>
   </tr>
   </tbody></table>
-  </dd>
-  </dl>
+
+ </dd>
+ <dt>Utilisation</dt>
+ <dd><ol><li>Passez en revue les ports ouverts pour votre équilibreur de charge ALB.
+<pre class="pre">
+<code>kubectl get service -n kube-system</code></pre>
+La sortie de votre interface CLI sera similaire à ceci :
+<pre class="screen">
+<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
+public-ingress-ctl-svc   10.10.10.149   169.60.16.246   80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+<li>Ouvrez la mappe de configuration ALB.
+<pre class="pre">
+<code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
+<li>Ajoutez les ports TCP à la mappe de configuration. Remplacez &lt;port&gt; par les ports TCP que vous souhaitez ouvrir.
+<pre class="codeblock">
+<code>apiVersion: v1
+kind: ConfigMap
+data:
+ public-ports: &lt;port1&gt;;&lt;port2&gt;
+metadata:
+ creationTimestamp: 2017-08-22T19:06:51Z
+ name: ibm-cloud-provider-ingress-cm
+ namespace: kube-system
+ resourceVersion: "1320"
+ selfLink: /api/v1/namespaces/kube-system/configmaps/ibm-cloud-provider-ingress-cm
+ uid: &lt;uid&gt;</code></pre></li>
+ <li>Vérifiez que votre équilibreur de charge ALB est reconfiguré avec les ports TCP.
+<pre class="pre">
+<code>kubectl get service -n kube-system</code></pre>
+La sortie de votre interface CLI sera similaire à ceci :
+<pre class="screen">
+<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
+public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+<li>Configurez Ingress pour accéder à votre application via un port TCP non standard. Utilisez l'exemple de fichier YAML dans cette référence. </li>
+<li>Mettez à jour la configuration de votre équilibreur de charge ALB.
+<pre class="pre">
+<code>kubectl apply -f &lt;yaml_file&gt;</code></pre>
+</li>
+<li>Ouvrez le navigateur Web de votre choix pour accéder à votre application. Exemple : <code>https://&lt;ibmdomain&gt;:&lt;ingressPort&gt;/</code></li></ol></dd></dl>
 
 <br />
-
 
 
 ## Annotations de connexion
@@ -529,21 +648,21 @@ spec:
 ### Personnalisation des paramètres connect-timeout et read-timeout (proxy-connect-timeout, proxy-read-timeout)
 {: #proxy-connect-timeout}
 
-Définissez un paramètre connect-timeout et un paramètre read-timeout personnalisés pour l'équilibreur de charge d'application. Permet d'ajuster le délai pendant lequel l'équilibreur de charge d'application patiente pour se connecter et effectuer une lecture depuis l'application de back-end avant de déterminer que celle-ci est indisponible.
+Définissez un paramètre connect-timeout et un paramètre read-timeout personnalisés pour l'équilibreur de charge d'application (ALB). Définissez la durée d'attente de connexion de l'équilibreur de charge ALB à l'application de back end et la durée de lecture avant que l'application soit considérée comme indisponible.
 {:shortdesc}
 
 <dl>
 <dt>Description</dt>
-<dd>Lorsqu'une demande client est envoyée à l'équilibreur de charge d'application Ingress, une connexion à l'application de back end est ouverte par l'équilibreur de charge d'application. Par défaut, l'équilibreur de charge d'application patiente pendant 60 secondes pour la réception d'une réponse de l'application de back end. Si l'application de back end ne répond pas au cours de ce délai de 60 secondes, la demande de connexion est abandonnée et l'application de back end est considérée comme indisponible.
+<dd>Lorsqu'une demande client est envoyée à l'équilibreur de charge d'application (ALB) Ingress, une connexion à l'application de back end est ouverte par l'ALB. Par défaut, l'ALB patiente pendant 60 secondes pour la réception d'une réponse de l'application de back end. Si l'application de back end ne répond pas au cours de ce délai de 60 secondes, la demande de connexion est abandonnée et l'application de back end est considérée comme indisponible.
 
 </br></br>
-Une fois que l'équilibreur de charge d'application est connecté à l'application de back end, les données de réponse sont lues depuis cette application par l'équilibreur de charge d'application. Au cours de cette opération de lecture, l'équilibreur de charge d'application patiente jusqu'à 60 secondes entre deux opérations de lecture pour recevoir des données de l'application de back end. Si l'application de back end n'envoie pas les données au cours de ce délai de 60 secondes, la connexion avec l'application de back end est fermée et cette dernière est considérée comme indisponible.
+Une fois que l'ALB est connecté à l'application de back end, les données de réponse sont lues depuis cette application par l'ALB. Au cours de cette opération de lecture, l'ALB patiente jusqu'à 60 secondes entre deux opérations de lecture pour recevoir des données de l'application de back end. Si l'application de back end n'envoie pas les données au cours de ce délai de 60 secondes, la connexion avec l'application de back end est fermée et cette dernière est considérée comme indisponible.
 </br></br>
 Sur un proxy, les paramètres connect-timeout et read-timeout sont définis par défaut sur 60 secondes et ne doivent généralement pas être modifiés.
 </br></br>
-En cas d'instabilité de la disponibilité de votre application ou si celle-ci est lente à répondre en raison de charges de travail élevées, vous souhaiterez peut-être augmenter la valeur du paramètre connect-timeout ou read-timeout. Rappelez-vous que l'augmentation du délai d'attente a une incidence sur les performances de l'équilibreur de charge d'application puisque la connexion à l'application de back end doit rester ouverte jusqu'à expiration de ce délai.
+En cas d'instabilité de la disponibilité de votre application ou si celle-ci est lente à répondre en raison de charges de travail élevées, vous souhaiterez peut-être augmenter la valeur du paramètre connect-timeout ou read-timeout. Notez que l'augmentation du délai d'attente a une incidence sur les performances de l'équilibreur de charge ALB puisque la connexion à l'application de back end doit rester ouverte jusqu'à expiration de ce délai.
 </br></br>
-D'une autre côté, vous pouvez réduire le délai d'attente afin d'améliorer les performances de l'équilibreur de charge d'application. Assurez-vous que votre application de back end est capable de traiter les demandes dans le délai d'attente imparti, même lorsque les charges de travail sont plus importantes.</dd>
+D'un autre côté, vous pouvez réduire le délai d'attente afin d'améliorer les performances sur l'équilibreur de charge ALB. Assurez-vous que votre application de back end est capable de traiter les demandes dans le délai d'attente imparti, même lorsque les charges de travail sont plus importantes.</dd>
 <dt>Exemple de fichier YAML de ressource Ingress</dt>
 <dd>
 
@@ -576,11 +695,11 @@ spec:
  <tbody>
  <tr>
  <td><code>&lt;connect_timeout&gt;</code></td>
- <td>Délai d'attente, en secondes, pour connexion à l'application de back-end. Par exemple, <code>65s</code>. <strong>Remarque :</strong> La valeur d'un paramètre connect-timeout ne doit pas excéder 75 secondes.</td>
+ <td>Délai d'attente, en secondes, pour connexion à l'application de back end. Par exemple, <code>65s</code>. <strong>Remarque :</strong> la valeur d'un paramètre connect-timeout ne doit pas excéder 75 secondes.</td>
  </tr>
  <tr>
  <td><code>&lt;read_timeout&gt;</code></td>
- <td>Délai d'attente pour lecture depuis l'application de back-end. Par exemple, <code>65s</code>. <strong>Remarque :</strong> un délai d'attente en lecture ne peut pas dépasser 120 secondes.</td>
+ <td>Délai d'attente pour lecture depuis l'application de back end. Par exemple, <code>65s</code>. <strong>Remarque :</strong> un délai d'attente en lecture ne peut pas dépasser 120 secondes.</td>
  </tr>
  </tbody></table>
 
@@ -590,16 +709,16 @@ spec:
 
 
 
-### Demandes de signal de présence (keepalive-requests)
+### Demandes keepalive (keepalive-requests)
 {: #keepalive-requests}
 
-Configurez le nombre maximum de demandes pouvant être traitées via une connexion de signal de présence.
+Configurez le nombre maximum de demandes pouvant être traitées via une connexion persistante (keepalive).
 {:shortdesc}
 
 <dl>
 <dt>Description</dt>
 <dd>
-Définir le nombre maximum de demandes pouvant être traitées via une connexion de signal de présence.
+Définir le nombre maximum de demandes pouvant être traitées via une connexion persistante.
 </dd>
 
 
@@ -634,11 +753,11 @@ tls:
 <tbody>
 <tr>
 <td><code>serviceName</code></td>
-<td>Remplacez <code>&lt;<em>myservice</em>&gt;</code> par le nom du service Kubernetes que vous avez créé pour votre application. Ce paramètre est facultatif. Si aucun service n'est spécifié, la configuration est appliquée à tous les services de l'hôte Ingress. Si le paramètre est fourni, les demandes de signal de présence sont définies pour le service indiqué. Si le paramètre n'est pas fourni, les demandes de signal de présence sont définies au niveau serveur de <code>nginx.conf</code> pour tous les services pour lesquels aucune demande de signal de présence n'est configurée.</td>
+<td>Remplacez <code>&lt;<em>myservice</em>&gt;</code> par le nom du service Kubernetes que vous avez créé pour votre application. Ce paramètre est facultatif. Si aucun service n'est spécifié, la configuration est appliquée à tous les services de l'hôte Ingress. Si le paramètre est fourni, les demandes keepalive sont définies pour le service indiqué. Si le paramètre n'est pas fourni, les demandes keepalive sont définies au niveau serveur de <code>nginx.conf</code> pour tous les services pour lesquels aucune demande keepalive n'est configurée.</td>
 </tr>
 <tr>
 <td><code>requests</code></td>
-<td>Remplacez <code>&lt;<em>max_requests</em>&gt;</code> par le nombre maximal de demandes pouvant être traitées dans le cadre d'une connexion avec signal de présence (keepalive).</td>
+<td>Remplacez <code>&lt;<em>max_requests</em>&gt;</code> par le nombre maximal de demandes pouvant être traitées dans le cadre d'une connexion persistante (keepalive).</td>
 </tr>
 </tbody></table>
 
@@ -649,16 +768,16 @@ tls:
 
 
 
-### Délai d'expiration de signal de présence (keepalive-timeout)
+### Délai d'expiration d'une connexion persistante (keepalive-timeout)
 {: #keepalive-timeout}
 
-Configurez la durée d'ouverture d'une connexion de signal de présence côté serveur.
+Configurez la durée d'ouverture d'une connexion persistante côté serveur.
 {:shortdesc}
 
 <dl>
 <dt>Description</dt>
 <dd>
-Définit la durée d'ouverture d'une connexion de signal de présence côté serveur.
+Définir la durée d'ouverture d'une connexion persistante côté serveur.
 </dd>
 
 
@@ -693,11 +812,11 @@ spec:
  <tbody>
  <tr>
  <td><code>serviceName</code></td>
- <td>Remplacez <code>&lt;<em>myservice</em>&gt;</code> par le nom du service Kubernetes que vous avez créé pour votre application. Ce paramètre est facultatif. Si le paramètre est fourni, le délai d'expiration de signal de présence est défini pour le service indiqué. Si le paramètre n'est pas fourni, le délai d'expiration de signal de présence est défini au niveau serveur de <code>nginx.conf</code> pour tous les services pour lesquels aucun délai d'expiration de signal de présence n'est configuré.</td>
+ <td>Remplacez <code>&lt;<em>myservice</em>&gt;</code> par le nom du service Kubernetes que vous avez créé pour votre application. Ce paramètre est facultatif. Si le paramètre est fourni, le délai d'expiration de la connexion persistante est défini pour le service indiqué. Si le paramètre n'est pas fourni, le délai d'expiration de la connexion persistante est défini au niveau serveur de <code>nginx.conf</code> pour tous les services pour lesquels aucun délai d'expiration de connexion persistante (keepalive timeout) n'est configuré.</td>
  </tr>
  <tr>
  <td><code>timeout</code></td>
- <td>Remplacez <code>&lt;<em>time</em>&gt;</code> par la durée, en secondes. Exemple :<code>timeout=20s</code>. Une valeur zéro désactive les connexions client de signal de présence.</td>
+ <td>Remplacez <code>&lt;<em>time</em>&gt;</code> par la durée, en secondes. Exemple :<code>timeout=20s</code>. Une valeur zéro désactive les connexions client persistantes.</td>
  </tr>
  </tbody></table>
 
@@ -708,16 +827,16 @@ spec:
 
 
 
-### Signal de présence en amont (upstream-keepalive)
+### Connexions persistantes en amont (upstream-keepalive)
 {: #upstream-keepalive}
 
-Configurez le nombre maximum de connexions de signal de présence inactives pour un serveur en amont.
+Configurez le nombre maximum de connexions persistantes (keepalive) inactives pour un serveur en amont.
 {:shortdesc}
 
 <dl>
 <dt>Description</dt>
 <dd>
-Modifier le nombre maximum de connexions de signal de présence inactives à un serveur en amont d'un service donné. Le serveur en amont accepte, par défaut, de 64 connexions de signal de présence inactives.
+Définir le nombre maximum de connexions persistantes inactives à un serveur en amont d'un service donné. Le serveur en amont accepte, par défaut, de 64 connexions persistantes inactives.
 </dd>
 
 
@@ -756,7 +875,7 @@ Modifier le nombre maximum de connexions de signal de présence inactives à un 
   </tr>
   <tr>
   <td><code>keepalive</code></td>
-  <td>Remplacez <code>&lt;<em>max_connections</em>&gt;</code> par le nombre maximal de connexions inactives avec signal de présence au serveur en amont. Valeur par défaut : <code>64</code>. La valeur <code>0</code> désactive les connexions avec signal de présence en amont pour le service spécifié.</td>
+  <td>Remplacez <code>&lt;<em>max_connections</em>&gt;</code> par le nombre maximal de connexions persistantes inactives dans le serveur en amont. Valeur par défaut : <code>64</code>. La valeur <code>0</code> désactive les connexions persistantes en amont pour le service spécifié.</td>
   </tr>
   </tbody></table>
   </dd>
@@ -765,25 +884,500 @@ Modifier le nombre maximum de connexions de signal de présence inactives à un 
 <br />
 
 
+## Annotations d'authentification HTTPS et TLS/SSL
+{: #https-auth}
 
-## Annotations de tampons de proxy
+### Authentification {{site.data.keyword.appid_short_notm}} (appid-auth)
+{: #appid-auth}
+
+  Utilisez {{site.data.keyword.appid_full_notm}} pour l'authentification auprès de votre application.
+  {:shortdesc}
+
+  <dl>
+  <dt>Description</dt>
+  <dd>
+  Authentifier les demandes Web ou HTTP/HTTPS d'API avec {{site.data.keyword.appid_short_notm}}.
+
+  <p>Si vous définissez le type de demande sur <code>web</code>, une demande Web qui contient un jeton d'accès {{site.data.keyword.appid_short_notm}} est validée. En cas d'échec de la validation de jeton, la demande Web est rejetée. Si la demande ne contient pas de jeton d'accès, elle est redirigée vers la page de connexion {{site.data.keyword.appid_short_notm}}. **Remarque** : pour que l'authentification Web {{site.data.keyword.appid_short_notm}} fonctionne, les cookies doivent être activés dans le navigateur de l'utilisateur.</p>
+
+  <p>Si vous définissez le type de requête sur <code>api</code>, une demande API qui contient un jeton d'accès {{site.data.keyword.appid_short_notm}} est validée. Si la demande ne contient pas de jeton d'accès, le message d'erreur <code>401: Unauthorized</code> est renvoyé à l'utilisateur.</p>
+  </dd>
+
+   <dt>Exemple de fichier YAML de ressource Ingress</dt>
+   <dd>
+
+   <pre class="codeblock">
+   <code>apiVersion: extensions/v1beta1
+   kind: Ingress
+   metadata:
+    name: myingress
+    annotations:
+      ingress.bluemix.net/appid-auth: "bindSecret=&lt;bind_secret&gt; namespace=&lt;namespace&gt; requestType=&lt;request_type&gt; serviceName=&lt;myservice&gt;"
+   spec:
+    tls:
+    - hosts:
+      - mydomain
+    secretName: mytlssecret
+  rules:
+    - host: mydomain
+    http:
+      paths:
+        - path: /
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
+
+   <table>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>bindSecret</code></td>
+    <td>Remplacez <em><code>&lt;bind_secret&gt;</code></em> par la valeur confidentielle (secret) Kubernetes qui stocke la valeur confidentielle de liaison.</td>
+    </tr>
+    <tr>
+    <td><code>espace de nom</code></td>
+    <td>Remplacez <em><code>&lt;namespace&gt;</code></em> par l'espace de nom de la valeur confidentielle de liaison. Par défaut, cette zone correspond à l'espace de nom `default`.</td>
+    </tr>
+    <tr>
+    <td><code>requestType</code></td>
+    <td>Remplacez <code><em>&lt;request_type&gt;</em></code> par le type de demande que vous voulez envoyer à {{site.data.keyword.appid_short_notm}}. Les valeurs admises sont `web` ou `api`. La valeur par défaut est `api`.</td>
+    </tr>
+    <tr>
+    <td><code>serviceName</code></td>
+    <td>Remplacez <code><em>&lt;myservice&gt</em></code> par le nom du service Kubernetes que vous avez créé pour votre application. Cette zone est facultative. Si aucun nom de service n'est inclus, l'annotation est activée pour tous les services. Si un nom de service est inclus, l'annotation est activée uniquement pour ce service. S'il y a plusieurs services, séparez-les par un point-virgule (;).</td>
+    </tr>
+    </tbody></table>
+    </dd>
+    <dt>Utilisation</dt>
+    <dd>Comme l'application utilise {{site.data.keyword.appid_short_notm}} pour l'authentification, vous devez mettre à disposition une instance {{site.data.keyword.appid_short_notm}}, configurer cette instance avec des URI de redirection valides et générer une valeur confidentielle de liaison.
+    <ol>
+    <li>Mettez à disposition une instance [{{site.data.keyword.appid_short_notm}}](https://console.bluemix.net/catalog/services/app-id).</li>
+    <li>Dans la console de gestion {{site.data.keyword.appid_short_notm}}, ajouter des URI de redirection pour votre application.</li>
+    <li>Créez une valeur confidentielle de liaison.
+    <pre class="pre"><code>bx cs cluster-service-bind &lt;my_cluster&gt; &lt;my_namespace&gt; &lt;my_service_instance_GUID&gt;</code></pre> </li>
+    <li>Configurez l'annotation <code>appid-auth</code>.</li>
+    </ol></dd>
+    </dl>
+
+<br />
+
+
+
+### Ports HTTP et HTTPS personnalisés (custom-port)
+{: #custom-port}
+
+Modifiez les ports par défaut pour le trafic réseau HTTP (port 80) et HTTPS (port 443).
+{:shortdesc}
+
+<dl>
+<dt>Description</dt>
+<dd>Par défaut, l'équilibreur de charge d'application (ALB) est configuré pour écouter le trafic réseau HTTP entrant sur le port 80 et pour le trafic réseau HTTPS entrant sur le port 443. Vous pouvez modifier les ports par défaut pour renforcer la sécurité de votre domaine ALB ou pour activer uniquement un port HTTPS.
+</dd>
+
+
+<dt>Exemple de fichier YAML de ressource Ingress</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: myingress
+ annotations:
+   ingress.bluemix.net/custom-port: "protocol=&lt;protocol1&gt; port=&lt;port1&gt;;protocol=&lt;protocol2&gt;port=&lt;port2&gt;"
+spec:
+ tls:
+ - hosts:
+   - mydomain
+    secretName: mytlssecret
+  rules:
+ - host: mydomain
+   http:
+     paths:
+     - path: /
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
+
+<table>
+ <thead>
+ <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>&lt;protocol&gt;</code></td>
+ <td>Entrez <code>http</code> ou <code>https</code> pour changer le port par défaut pour le trafic réseau HTTP ou HTTPS entrant.</td>
+ </tr>
+ <tr>
+ <td><code>&lt;port&gt;</code></td>
+ <td>Entrez le numéro de port que vous désirez utiliser pour le trafic réseau HTTP ou HTTPS entrant.  <p><strong>Remarque :</strong> lorsqu'un port personnalisé est indiqué pour HTTP ou HTTPS, les ports par défaut ne sont plus valides à la fois pour HTTP et HTTPS. Par exemple, pour remplacer le port par défaut pour HTTPS par 8443, mais utiliser le port par défaut pour HTTP, vous devez définir des ports personnalisés pour les deux ports : <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p></td>
+ </tr>
+ </tbody></table>
+
+ </dd>
+ <dt>Utilisation</dt>
+ <dd><ol><li>Passez en revue les ports ouverts pour votre équilibreur de charge ALB.
+<pre class="pre">
+<code>kubectl get service -n kube-system</code></pre>
+La sortie de votre interface CLI sera similaire à ceci :
+<pre class="screen">
+<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
+public-ingress-ctl-svc   10.10.10.149   169.60.16.246   80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+<li>Ouvrez la mappe de configuration ALB.
+<pre class="pre">
+<code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
+<li>Ajoutez les ports HTTP et HTTPS différents des valeurs par défaut à la mappe de configuration (ConfigMap). Remplacez &lt;port&gt; par le port HTTP ou HTTPS que vous souhaitez ouvrir.
+<pre class="codeblock">
+<code>apiVersion: v1
+kind: ConfigMap
+data:
+ public-ports: &lt;port1&gt;;&lt;port2&gt;
+metadata:
+ creationTimestamp: 2017-08-22T19:06:51Z
+ name: ibm-cloud-provider-ingress-cm
+ namespace: kube-system
+ resourceVersion: "1320"
+ selfLink: /api/v1/namespaces/kube-system/configmaps/ibm-cloud-provider-ingress-cm
+ uid: &lt;uid&gt;</code></pre></li>
+ <li>Vérifiez que votre équilibreur de charge ALB est reconfiguré avec d'autres ports que les ports par défaut.
+<pre class="pre">
+<code>kubectl get service -n kube-system</code></pre>
+La sortie de votre interface CLI sera similaire à ceci :
+<pre class="screen">
+<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
+public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+<li>Configurez Ingress pour utiliser les ports différents des ports par défaut lorsque vous routez le trafic réseau entrant vers vos services. Utilisez l'exemple de fichier YAML dans cette référence. </li>
+<li>Mettez à jour la configuration de votre équilibreur de charge ALB.
+<pre class="pre">
+<code>kubectl apply -f &lt;yaml_file&gt;</code></pre>
+</li>
+<li>Ouvrez le navigateur Web de votre choix pour accéder à votre application. Exemple : <code>https://&lt;ibmdomain&gt;:&lt;port&gt;/&lt;service_path&gt;/</code></li></ol></dd></dl>
+
+<br />
+
+
+
+### Redirection HTTP vers HTTPS (redirect-to-https)
+{: #redirect-to-https}
+
+Convertissez les demandes HTTP non sécurisées en demandes HTTPS.
+{:shortdesc}
+
+<dl>
+<dt>Description</dt>
+<dd>Configurer votre équilibreur de charge d'application (ALB) Ingress pour sécuriser votre domaine avec le certificat TLS fourni par IBM ou votre certificat TLS personnalisé. Certains utilisateurs peuvent tenter d'accéder à vos applications en utilisant une demande <code>http</code> non sécurisée vers votre domaine ALB (par exemple, <code>http://www.myingress.com</code> au lieu de d'utiliser <code>https</code>). Vous pouvez utiliser l'annotation redirect pour convertir systématiquement en HTTPS les demandes HTTP non sécurisées. Si vous n'utilisez pas cette annotation, les demandes HTTP non sécurisées ne sont pas converties par défaut en demandes HTTPS et peuvent exposer au public des informations confidentielles non chiffrées.
+
+</br></br>
+La redirection de demandes HTTP en demandes HTTPS est désactivée par défaut.</dd>
+
+<dt>Exemple de fichier YAML de ressource Ingress</dt>
+<dd>
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: myingress
+ annotations:
+   ingress.bluemix.net/redirect-to-https: "True"
+spec:
+ tls:
+ - hosts:
+   - mydomain
+    secretName: mytlssecret
+  rules:
+ - host: mydomain
+   http:
+     paths:
+     - path: /
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
+</dd></dl>
+
+<br />
+
+
+### Dispositif de sécurité HSTS (HTTP Strict Transport Security)
+{: #hsts}
+
+<dl>
+<dt>Description</dt>
+<dd>
+Le dispositif de sécurité HSTS enjoint le navigateur à n'accéder à un domaine qu'en utilisant HTTPS. Même si l'utilisateur saisit ou suit un lien HTTP normal, le navigateur met à niveau la connexion exclusivement vers HTTPS.
+</dd>
+
+
+<dt>Exemple de fichier YAML de ressource Ingress</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/hsts: enabled=&lt;true&gt; maxAge=&lt;31536000&gt; includeSubdomains=&lt;true&gt;
+spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mysecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: myservice1
+          servicePort: 8443
+      - path: /
+        backend:
+          serviceName: myservice2
+          servicePort: 8444</code></pre>
+
+<table>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>enabled</code></td>
+  <td>Utilisez <code>true</code> pour activer HSTS.</td>
+  </tr>
+    <tr>
+  <td><code>maxAge</code></td>
+  <td>Remplacez <code>&lt;<em>31536000</em>&gt;</code> par un nombre entier représentant le nombre de secondes nécessaire à un navigateur pour mettre en cache les demandes d'envoi directement sur HTTPS. La valeur par défaut est <code>31536000</code>, ce qui équivaut à 1 an.</td>
+  </tr>
+  <tr>
+  <td><code>includeSubdomains</code></td>
+  <td>Utilisez <code>true</code> pour demander au navigateur que la politique HSTS s'applique également à tous les sous-domaines du domaine en cours. La valeur par défaut est <code>true</code>. </td>
+  </tr>
+  </tbody></table>
+
+  </dd>
+  </dl>
+
+
+<br />
+
+
+### Authentification mutuelle (mutual-auth)
+{: #mutual-auth}
+
+Configure l'authentification mutuelle pour l'équilibreur de charge d'application (ALB).
+{:shortdesc}
+
+<dl>
+<dt>Description</dt>
+<dd>
+Configurer l'authentification mutuelle pour l'équilibreur de charge d'application (ALB) Ingress. Le client authentifie le serveur et le serveur authentifie également le client à l'aide de certificats. L'authentification mutuelle est également appelée authentification basée sur des certificats ou authentification bidirectionnelle.
+</dd>
+
+<dt>Conditions prérequises</dt>
+<dd>
+<ul>
+<li>[Vous devez disposer d'une valeur confidentielle valide contenant l'autorité de certification (CA) requise](cs_app.html#secrets). Les valeurs <code>client.key</code> et <code>client.crt</code> sont également nécessaires pour une authentification via l'authentification mutuelle.</li>
+<li>Pour activer l'authentification mutuelle sur un autre port que le port 443, [configurez l'équilibreur de charge de manière à ouvrir un port valide](cs_ingress.html#opening_ingress_ports).</li>
+</ul>
+</dd>
+
+
+<dt>Exemple de fichier YAML de ressource Ingress</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+name: myingress
+annotations:
+  ingress.bluemix.net/mutual-auth: "secretName=&lt;mysecret&gt; port=&lt;port&gt; serviceName=&lt;servicename1&gt;,&lt;servicename2&gt;"
+spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mytlssecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
+
+<table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
+</thead>
+<tbody>
+<tr>
+<td><code>secretName</code></td>
+<td>Remplacez <code>&lt;<em>mysecret</em>&gt;</code> par le nom de la ressource confidentielle.</td>
+</tr>
+<tr>
+<td><code>&lt;port&gt;</code></td>
+<td>Numéro de port de l'équilibreur de charge ALB.</td>
+</tr>
+<tr>
+<td><code>&lt;serviceName&gt;</code></td>
+<td>Nom d'une ou de plusieurs ressources Ingress. Ce paramètre est facultatif.</td>
+</tr>
+</tbody></table>
+
+</dd>
+</dl>
+
+<br />
+
+
+
+### Support des services SSL (ssl-services)
+{: #ssl-services}
+
+Autorisez les demandes HTTPS et chiffrez le trafic vers vos applications en amont.
+{:shortdesc}
+
+<dl>
+<dt>Description</dt>
+<dd>
+Chiffrer le trafic vers vos applications en amont nécessitant HTTPS.
+
+**Facultatif** : vous pouvez ajouter [l'authentification unidirectionnelle ou l'authentification mutuelle](#ssl-services-auth) à cette annotation.
+</dd>
+
+
+<dt>Exemple de fichier YAML de ressource Ingress</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: &lt;nom_ingress&gt;
+  annotations:
+    ingress.bluemix.net/ssl-services: "ssl-service=&lt;myservice1&gt; [ssl-secret=&lt;service1-ssl-secret&gt;];ssl-service=&lt;myservice2&gt; [ssl-secret=&lt;service2-ssl-secret&gt;]
+spec:
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: myservice1
+          servicePort: 8443
+      - path: /
+        backend:
+          serviceName: myservice2
+          servicePort: 8444</code></pre>
+
+<table>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>ssl-service</code></td>
+  <td>Remplacez <code>&lt;<em>myservice</em>&gt;</code> par le nom du service qui représente votre application. Le trafic est chiffré entre l'équilibreur de charge ALB et cette application.</td>
+  </tr>
+  <tr>
+  <td><code>ssl-secret</code></td>
+  <td>Remplacez <code>&lt;<em>service-ssl-secret</em>&gt;</code> par le nom de la valeur confidentielle pour le service. Ce paramètre est facultatif. S'il est fourni, la valeur doit contenir la clé et le certificat que votre application attend du client.</td>
+  </tr>
+  </tbody></table>
+
+  </dd>
+</dl>
+
+<br />
+
+
+#### Support des services SSL avec authentification
+{: #ssl-services-auth}
+
+<dl>
+<dt>Description</dt>
+<dd>
+Autoriser les demandes HTTPS et chiffrez le trafic vers vos applications en amont avec authentification unidirectionnelle ou mutuelle pour une sécurité supplémentaire.
+
+**Remarque** : avant de commencer, [convertissez le certificat et la clé en base 64 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.base64encode.org/).
+
+</dd>
+
+
+<dt>Exemple de fichier YAML de ressource Ingress</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: &lt;nom_ingress&gt;
+  annotations:
+    ingress.bluemix.net/ssl-services: |
+      ssl-service=&lt;myservice1&gt; ssl-secret=&lt;service1-ssl-secret&gt;;
+      ssl-service=&lt;myservice2&gt; ssl-secret=&lt;service2-ssl-secret&gt;
+spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mysecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: myservice1
+          servicePort: 8443
+      - path: /
+        backend:
+          serviceName: myservice2
+          servicePort: 8444</code></pre>
+
+<table>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>ssl-service</code></td>
+  <td>Remplacez <code>&lt;<em>myservice</em>&gt;</code> par le nom du service qui représente votre application. Le trafic est chiffré entre l'équilibreur de charge ALB et cette application.</td>
+  </tr>
+  <tr>
+  <td><code>ssl-secret</code></td>
+  <td>Remplacez <code>&lt;<em>service-ssl-secret</em>&gt;</code> par le nom de la valeur confidentielle pour le service. Ce paramètre est facultatif. S'il est fourni, la valeur doit contenir la clé et le certificat que votre application attend du client.</td>
+  </tr>
+  </tbody></table>
+
+  </dd>
+  </dl>
+
+<br />
+
+
+
+
+## Annotations de mémoire tampon de proxy
 {: #proxy-buffer}
 
 
 ### Mise en mémoire tampon des données de réponse client (proxy-buffering)
 {: #proxy-buffering}
 
-Utilisez l'annotation de buffer pour désactiver le stockage de données de réponse sur l'équilibreur de charge d'application tandis que les données sont envoyées au client.
+Utilisez l'annotation de mémoire tampon pour désactiver le stockage de données de réponse sur l'équilibreur de charge d'application (ALB) tandis que les données sont envoyées au client.
 {:shortdesc}
 
 <dl>
 <dt>Description</dt>
-<dd>L'équilibreur de charge d'application Ingress fait office de proxy entre votre application de back end et le navigateur Web du client. Lorsqu'une réponse est envoyée de l'application de back end au client, les données de réponse sont placées par défaut en mémoire tampon sur l'équilibreur de charge d'application. L'équilibreur de charge d'application met en proxy la réponse client et commence à envoyer la réponse au client à la cadence du client. Une fois que toutes les données du back end ont été reçues par l'équilibreur de charge d'application, la connexion à l'application de back end est clôturée. La connexion de l'équilibreur de charge au client reste ouverte jusqu'à ce que le client ait reçu toutes les données.
+<dd>L'équilibreur de charge d'application (ALB) Ingress fait office de proxy entre votre application de back end et le navigateur Web du client. Lorsqu'une réponse est envoyée de l'application de back end au client, les données de réponse sont placées par défaut en mémoire tampon sur l'ALB par défaut. L'équilibreur de charge ALB met en proxy la réponse client et commence à envoyer la réponse au client à la cadence du client. Une fois que toutes les données de l'application de back end ont été reçues par l'équilibreur de charge ALB, la connexion à l'application de back end est clôturée. La connexion de l'équilibreur de charge ALB au client reste ouverte jusqu'à ce que le client ait reçu toutes les données.
 
 </br></br>
-Si la mise en mémoire tampon des données de réponse sur l'équilibreur de charge d'application est désactivée, les données sont envoyées immédiatement de l'équilibreur de charge d'application au client. Le client doit être capable de traiter les données entrantes au rythme de l'équilibreur de charge d'application. Si le client est trop lent, les données risquent d'être perdues.
+Si la mise en mémoire tampon des données de réponse sur l'équilibreur de charge d'application (ALB) est désactivée, les données sont envoyées immédiatement de l'ALB au client. Le client doit être capable de traiter les données entrantes au rythme de l'ALB. Si le client est trop lent, les données risquent d'être perdues.
 </br></br>
-La mise en mémoire tampon des données de réponse sur l'équilibreur de charge d'application est activée par défaut.</dd>
+La mise en mémoire tampon des données de réponse sur l'équilibreur de charge ALB est activée par défaut.</dd>
 <dt>Exemple de fichier YAML de ressource Ingress</dt>
 <dd>
 
@@ -813,16 +1407,16 @@ spec:
 
 
 
-### Tampons de proxy (proxy-buffers)
+### Mémoires tampons de proxy (proxy-buffers)
 {: #proxy-buffers}
 
-Permet de configurer le nombre et la taille des tampons de proxy pour l'équilibreur de charge d'application.
+Configurez le nombre et la taille des mémoires tampons de proxy pour l'équilibreur de charge d'application (ALB).
 {:shortdesc}
 
 <dl>
 <dt>Description</dt>
 <dd>
-Permet de définir le nombre et la taille des tampons qui lisent une réponse pour une connexion unique provenant du serveur relayé via un proxy. Si aucun service n'est spécifié, la configuration est appliquée à tous les services de l'hôte Ingress. Par exemple, si une configuration telle que <code>serviceName=SERVICE number=2 size=1k</code> est spécifiée, 1k est appliqué au service. Si une configuration telle que <code>number=2 size=1k</code> est spécifiée, 1k est appliqué à tous les services de l'hôte Ingress.
+Définir le nombre et la taille des mémoires tampons qui lisent une réponse pour une connexion unique provenant du serveur relayé via un proxy. Si aucun service n'est spécifié, la configuration est appliquée à tous les services de l'hôte Ingress. Par exemple, si une configuration telle que <code>serviceName=SERVICE number=2 size=1k</code> est spécifiée, 1k est appliqué au service. Si une configuration telle que <code>number=2 size=1k</code> est spécifiée, 1k est appliqué à tous les services de l'hôte Ingress.
 </dd>
 <dt>Exemple de fichier YAML de ressource Ingress</dt>
 <dd>
@@ -862,7 +1456,7 @@ spec:
  </tr>
  <tr>
  <td><code>size</code></td>
- <td>Remplacez <code>&lt;<em>size</em>&gt;</code> par la taille de chaque tampon, en kilooctets (k ou K). Par exemple, <em>1K</em>.</td>
+ <td>Remplacez <code>&lt;<em>size</em>&gt;</code> par la taille de chaque mémoire tampon, en kilooctets (k ou K). Par exemple, <em>1K</em>.</td>
  </tr>
  </tbody>
  </table>
@@ -871,16 +1465,16 @@ spec:
 <br />
 
 
-### Taille de tampon de proxy (proxy-buffer-size)
+### Taille de mémoire tampon de proxy (proxy-buffer-size)
 {: #proxy-buffer-size}
 
-Permet de définir la taille du tampon de proxy qui lit la première partie de la réponse.
+Définissez la taille de la mémoire tampon de proxy qui lit la première partie de la réponse.
 {:shortdesc}
 
 <dl>
 <dt>Description</dt>
 <dd>
-Permet de définir la taille du tampon qui lit la première partie de la réponse reçue du serveur relayé via un proxy. Cette partie de la réponse contient généralement un petit en-tête de réponse. Si aucun service n'est spécifié, la configuration est appliquée à tous les services de l'hôte Ingress. Par exemple, si une configuration telle que <code>serviceName=SERVICE size=1k</code> est spécifiée, 1k est appliqué au service. Si une configuration telle que <code>size=1k</code> est spécifiée, 1k est appliqué à tous les services de l'hôte Ingress.
+Définir la taille de la mémoire tampon qui lit la première partie de la réponse reçue du serveur relayé via un proxy. Cette partie de la réponse contient généralement un petit en-tête de réponse. Si aucun service n'est spécifié, la configuration est appliquée à tous les services de l'hôte Ingress. Par exemple, si une configuration telle que <code>serviceName=SERVICE size=1k</code> est spécifiée, 1k est appliqué au service. Si une configuration telle que <code>size=1k</code> est spécifiée, 1k est appliqué à tous les services de l'hôte Ingress.
 </dd>
 
 
@@ -920,7 +1514,7 @@ spec:
  </tr>
  <tr>
  <td><code>size</code></td>
- <td>Remplacez <code>&lt;<em>size</em>&gt;</code> par la taille de chaque tampon, en kilooctets (k ou K). Par exemple, <em>1K</em>.</td>
+ <td>Remplacez <code>&lt;<em>size</em>&gt;</code> par la taille de chaque mémoire tampon, en kilooctets (k ou K). Par exemple, <em>1K</em>.</td>
  </tr>
  </tbody></table>
 
@@ -931,16 +1525,16 @@ spec:
 
 
 
-### Taille des tampons occupés de proxy (proxy-busy-buffers-size)
+### Taille des mémoires tampons occupées de proxy (proxy-busy-buffers-size)
 {: #proxy-busy-buffers-size}
 
-Permet de configurer la taille des tampons de proxy pouvant être occupés.
+Configurez la taille des mémoires tampons de proxy pouvant être occupées.
 {:shortdesc}
 
 <dl>
 <dt>Description</dt>
 <dd>
-Limite la taille des tampons pouvant envoyer une réponse au client alors que la réponse n'a pas été encore complètement lue. Dans l'intervalle, le reste des tampons peut lire la réponse et, au besoin, placer en mémoire tampon une partie de la réponse dans un fichier temporaire. Si aucun service n'est spécifié, la configuration est appliquée à tous les services de l'hôte Ingress. Par exemple, si une configuration telle que <code>serviceName=SERVICE size=1k</code> est spécifiée, 1k est appliqué au service. Si une configuration telle que <code>size=1k</code> est spécifiée, 1k est appliqué à tous les services de l'hôte Ingress.
+Limiter la taille des mémoires tampons pouvant envoyer une réponse au client alors que la réponse n'a pas été encore complètement lue. Dans l'intervalle, le reste des mémoires tampons peut lire la réponse et, au besoin, placer en mémoire tampon une partie de la réponse dans un fichier temporaire. Si aucun service n'est spécifié, la configuration est appliquée à tous les services de l'hôte Ingress. Par exemple, si une configuration telle que <code>serviceName=SERVICE size=1k</code> est spécifiée, 1k est appliqué au service. Si une configuration telle que <code>size=1k</code> est spécifiée, 1k est appliqué à tous les services de l'hôte Ingress.
 </dd>
 
 
@@ -979,7 +1573,7 @@ spec:
 </tr>
 <tr>
 <td><code>size</code></td>
-<td>Remplacez <code>&lt;<em>size</em>&gt;</code> par la taille de chaque tampon, en kilooctets (k ou K). Par exemple, <em>1K</em>.</td>
+<td>Remplacez <code>&lt;<em>size</em>&gt;</code> par la taille de chaque mémoire tampon, en kilooctets (k ou K). Par exemple, <em>1K</em>.</td>
 </tr>
 </tbody></table>
 
@@ -994,7 +1588,7 @@ spec:
 {: #request-response}
 
 
-### En-tête de réponse ou de demande client supplémentaire (proxy-add-headers)
+### En-tête de réponse ou de demande client supplémentaire (proxy-add-headers, response-add-headers)
 {: #proxy-add-headers}
 
 Ajoutez des informations d'en-tête à une demande client avant d'envoyer la demande vers l'application de back end ou à une réponse client avant d'envoyer la réponse au client.
@@ -1002,10 +1596,37 @@ Ajoutez des informations d'en-tête à une demande client avant d'envoyer la dem
 
 <dl>
 <dt>Description</dt>
-<dd>L'équilibreur de charge d'application Ingress fait office de proxy entre l'application client et l'application de back end . Les demandes client envoyées à l'équilibreur de charge d'application sont traitées (relayées via un proxy) et placées dans une nouvelles demande envoyée ensuite depuis l'équilibreur de charge d'application à votre application de back-end. Lorsqu'une demande passe par un  proxy, les informations d'en-tête HTTP intialement envoyées par le client, par exemple, le nom d'utilisateur, sont retirées. Si votre application de back end a besoin de cette information, vous pouvez utiliser l'annotation <strong>ingress.bluemix.net/proxy-add-headers</strong> pour ajouter les informations d'en-tête à la demande client avant qu'elle ne soit envoyée de l'équilibreur de charge d'application à votre application de back end.
+<dd>L'équilibreur de charge d'application (ALB) Ingress fait office de proxy entre l'application client et l'application de back end. Les demandes client envoyées à l'équilibreur de charge ALB sont traitées (relayées via un proxy) et placées dans une nouvelle demande, envoyée ensuite à votre application de back end. De la même manière, les réponses de l'application de back end sont envoyées à l'équilibreur de charge ALB sont traitées (relayées via un proxy) et placées dans une nouvelle réponse qui est ensuite envoyée au client. Lorsqu'une demande ou une réponse passe par un proxy, les informations d'en-tête HTTP initialement envoyées par le client ou l'application de back end, par exemple, le nom d'utilisateur, sont retirées. 
 
-</br></br>
-Lorsqu'une application de back end envoie une réponse au client, celle-ci est relayée via proxy par l'équilibreur de charge d'application et les en-têtes HTTP sont supprimés de la réponse. L'application Web client peut avoir besoin de ces informations d'en-tête pour traiter correctement la réponse. Vous pouvez utiliser l'annotation <strong>ingress.bluemix.net/response-add-headers</strong> pour ajouter des informations d'en-tête à la réponse client avant que celle-ci ne soit envoyée de l'équilibreur de charge d'application à l'application Web client.</dd>
+<br><br>
+Si votre application de back end a besoin des informations d'en-tête HTTP, vous pouvez utiliser l'annotation <code>proxy-add-headers</code> pour ajouter des informations d'en-tête à la demande client avant son envoi par l'équilibreur de charge ALB à l'application de back end.
+
+<br>
+<ul><li>Par exemple, vous devrez peut-être ajouter les informations d'en-tête X-Forward suivantes à la demande avant son transfert vers votre application :
+
+<pre class="screen">
+<code>proxy_set_header Host $host;
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header X-Forwarded-Proto $scheme;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</code></pre>
+
+</li>
+
+<li>Pour ajouter les informations d'en-tête X-Forward à la demande envoyée à votre application, utilisez l'annotation `proxy-add-headers` comme suit :
+
+<pre class="screen">
+<code>ingress.bluemix.net/proxy-add-headers: |
+  serviceName=<myservice1> {
+  Host $host;
+  X-Real-IP $remote_addr;
+  X-Forwarded-Proto $scheme;
+  X-Forwarded-For $proxy_add_x_forwarded_for;
+  }</code></pre>
+
+</li></ul><br>
+
+Si l'application Web du client nécessite des informations d'en-tête HTTP, vous pouvez utiliser l'annotation <code>response-add-headers</code> pour ajouter les informations d'en-tête à la réponse avant son envoi par l'équilibreur de charge ALB à l'application Web du client.</dd>
+
 <dt>Exemple de fichier YAML de ressource Ingress</dt>
 <dd>
 
@@ -1025,11 +1646,11 @@ metadata:
       }
     ingress.bluemix.net/response-add-headers: |
       serviceName=&lt;myservice1&gt; {
-      "&lt;header1&gt;: &lt;value1&gt;";
-      "&lt;header2&gt;: &lt;value2&gt;";
+      &lt;header1&gt;: &lt;value1&gt;;
+      &lt;header2&gt;: &lt;value2&gt;;
       }
       serviceName=&lt;myservice2&gt; {
-      "&lt;header3&gt;: &lt;value3&gt;";
+      &lt;header3&gt;: &lt;value3&gt;;
       }
 spec:
   tls:
@@ -1081,7 +1702,7 @@ Retirez de l'application de back end les informations d'en-tête incluses dans l
 
  <dl>
  <dt>Description</dt>
- <dd>L'équilibreur de charge d'application Ingress fait office de proxy entre votre application de back end et le navigateur Web du client. Les réponses client de l'application de back end qui sont envoyées à l'équilibreur de charge d'application (relayées via proxy) et placées dans une nouvelle réponse qui est alors envoyée de l'équilibreur de charge d'application au navigateur Web du client. Même si le fait de relayer une réponse via un proxy permet de retirer les informations d'en-tête HTTP initialement envoyées à partir de l'application de back end, il se peut que les en-têtes propres à l'application de back end ne soient pas tous retirés par ce processus. Supprimez les informations d'en-tête d'une réponse client avant que celle-ci ne soit envoyée de l'équilibreur de charge d'application au navigateur Web du client.</dd>
+ <dd>L'équilibreur de charge d'application (ALB) Ingress fait office de proxy entre votre application de back end et le navigateur Web du client. Les réponses client de l'application de back end qui sont envoyées à l'équilibreur de charge ALB (relayées via proxy) sont traitées et placées dans une nouvelle réponse qui est alors envoyée de l'ALB au navigateur Web du client. Même si le fait de relayer une réponse via un proxy permet de retirer les informations d'en-tête HTTP initialement envoyées à partir de l'application de back end, il se peut que les en-têtes propres à l'application de back end ne soient pas tous retirés par ce processus. Supprimez les informations d'en-tête d'une réponse client avant que celle-ci ne soit envoyée de l'équilibreur de charge ALB au navigateur Web du client.</dd>
  <dt>Exemple de fichier YAML de ressource Ingress</dt>
  <dd>
  <pre class="codeblock">
@@ -1135,18 +1756,18 @@ Retirez de l'application de back end les informations d'en-tête incluses dans l
 <br />
 
 
-### Personnaliser la taille maximale du corps de demande client (client-max-body-size)
+### Taille du corps de demande client (client-max-body-size)
 {: #client-max-body-size}
 
-Ajustez la taille maximale du corps que le client peut envoyer dans le cadre d'une demande.
+Définissez la taille maximale du corps que le client peut envoyer dans le cadre d'une demande.
 {:shortdesc}
 
 <dl>
 <dt>Description</dt>
-<dd>Dans le but de maintenir les performances attendues, la valeur définie pour la taille maximale du corps de la demande client est 1 mégaoctet. Lorsqu'une demande client dont la taille du corps dépasse la limite est envoyée à l'équilibreur de charge d'application Ingress et que le client n'autorise pas la scission des données, l'équilibreur de charge d'application renvoie une réponse HTTP 413 (Entité de demande trop volumineuse) au client. Une connexion entre le client et l'équilibreur de charge d'application n'est pas possible tant que le corps de la demande n'a pas été réduit. Lorsque le client autorise le fractionnement des données en plusieurs blocs, les données sont divisées en packages de 1 mégaoctet et envoyées à l'équilibreur de charge d'application.
+<dd>Dans le but de maintenir les performances attendues, la valeur définie pour la taille maximale du corps de la demande client est 1 mégaoctet. Lorsqu'une demande client dont la taille du corps dépasse la limite est envoyée à l'équilibreur de charge ALB Ingress et que le client n'autorise pas la scission des données, l'équilibreur de charge ALB renvoie une réponse HTTP 413 (Entité de demande trop volumineuse) au client. Une connexion entre le client et l'équilibreur de charge ALB n'est pas possible tant que le corps de la demande n'a pas été réduit. Lorsque le client autorise le fractionnement des données en plusieurs blocs, les données sont divisées en packages de 1 mégaoctet et envoyées à l'équilibreur de charge ALB.
 
 </br></br>
-Vous souhaiterez peut-être augmenter la taille maximale du corps car vous attendez des demandes client avec une taille de corps supérieure à 1 mégaoctet. Par exemple, vous voulez que votre client puisse télécharger des fichiers volumineux. L'augmentation de la taille de corps de demande maximale peut avoir une incidence sur les performances de votre équilibreur de charge d'application puisque la connexion au client doit rester ouverte jusqu'à ce que la réponse ait été reçue.
+Vous souhaiterez peut-être augmenter la taille maximale du corps car vous attendez des demandes client avec une taille de corps supérieure à 1 mégaoctet. Par exemple, vous voulez que votre client puisse télécharger des fichiers volumineux. L'augmentation de la taille de corps de demande maximale peut avoir une incidence sur les performances de votre équilibreur de charge ALB puisque la connexion au client doit rester ouverte jusqu'à ce que la demande ait été reçue.
 </br></br>
 <strong>Remarque :</strong> certains navigateurs Web client ne peuvent pas afficher correctement le message de réponse HTTP 413.</dd>
 <dt>Exemple de fichier YAML de ressource Ingress</dt>
@@ -1189,6 +1810,60 @@ spec:
 <br />
 
 
+### Mémoires tampon d'en-têtes de demande client volumineux (large-client-header-buffers)
+{: #large-client-header-buffers}
+
+Définissez le nombre et la taille maximum des mémoires tampons qui lisent des en-têtes de demande client volumineux.
+{:shortdesc}
+
+<dl>
+<dt>Description</dt>
+<dd>Les mémoires tampons qui lisent des en-têtes de demande client volumineux sont attribuées uniquement à la demande : si une connexion passe à l'état keepalive après le traitement de la fin de la demande (end-of-request), ces mémoires tampons sont libérées. Par défaut, la taille de la mémoire tampon est égale à <code>8K</code> octets. Si une ligne de demande dépasse la taille maximale d'une mémoire tampon, le message d'erreur <code>414 Request-URI Too Large</code> est renvoyé au client. Par ailleurs, si la zone d'en-tête de demande dépasse la taille maximale d'une mémoire tampon, l'erreur <code>400 Bad Request</code> est renvoyée au client. Vous pouvez ajuster le nombre et la taille maximum des mémoires tampons utilisées pour la lecture des en-têtes de demande client volumineux.
+
+<dt>Exemple de fichier YAML de ressource Ingress</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: myingress
+ annotations:
+   ingress.bluemix.net/large-client-header-buffers: "number=&lt;number&gt; size=&lt;size&gt;"
+spec:
+ tls:
+ - hosts:
+   - mydomain
+    secretName: mytlssecret
+  rules:
+ - host: mydomain
+   http:
+     paths:
+     - path: /
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
+
+<table>
+ <thead>
+ <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>&lt;number&gt;</code></td>
+ <td>Nombre maximal de mémoires tampons à attribuer pour lire les en-têtes de demande client volumineux. Par exemple, pour le définir à 4, définissez <code>4</code>.</td>
+ </tr>
+ <tr>
+ <td><code>&lt;size&gt;</code></td>
+ <td>Taille maximale des mémoires tampons utilisées pour la lecture des en-têtes de demande client volumineux. Par exemple, pour la définir à 16 kilooctets, indiquez <code>16k</code>.
+   <strong>Remarque :</strong> la taille doit se terminer par <code>k</code> pour kilooctet ou <code>m</code> pour mégaoctet.</td>
+ </tr>
+</tbody></table>
+</dd>
+</dl>
+
+<br />
+
 
 ## Annotations de limite de service
 {: #service-limit}
@@ -1197,7 +1872,7 @@ spec:
 ### Limites de débit globales (global-rate-limit)
 {: #global-rate-limit}
 
-Limite le débit de traitement des demandes et le nombre de connexions compte tenu d'une clé définie pour tous les services.
+Limitez le débit de traitement des demandes et le nombre de connexions compte tenu d'une clé définie pour tous les services.
 {:shortdesc}
 
 <dl>
@@ -1260,12 +1935,12 @@ Pour tous les services, permet de limiter d'après une clé définie le débit d
 ### Limites de débit de service (service-rate-limit)
 {: #service-rate-limit}
 
-Permet de limiter le débit de traitement des demandes et le nombre de connexions pour des services spécifiques.
+Limitez le débit de traitement des demandes et le nombre de connexions pour des services spécifiques.
 {:shortdesc}
 
 <dl>
 <dt>Description</dt>
-<dd>Pour des services spécifiques, limitez le débit de traitement des demandes et le nombre de connexions par une clé définie émanant d'une même adresse IP pour tous le chemins des back end sélectionnés.
+<dd>Pour des services spécifiques, permet de limiter le débit de traitement des demandes et le nombre de connexions par une clé définie émanant d'une même adresse IP pour tous les chemins des back end sélectionnés.
 </dd>
 
 
@@ -1319,345 +1994,6 @@ Permet de limiter le débit de traitement des demandes et le nombre de connexion
   </dl>
 
   <br />
-
-
-
-## Annotations d'authentification HTTPS et TLS/SSL
-{: #https-auth}
-
-
-### Ports HTTP et HTTPS personnalisés (custom-port)
-{: #custom-port}
-
-Modifiez les ports par défaut pour le trafic réseau HTTP (port 80) et HTTPS (port 443).
-{:shortdesc}
-
-<dl>
-<dt>Description</dt>
-<dd>Par défaut, l'équilibreur de charge d'application Ingress est configuré pour être à l'écoute du trafic réseau HTTP entrant sur le port 80 et du trafic réseau HTTPS entrant sur le port 443. Vous pouvez changer les ports par défaut pour renforcer la sécurité de votre domaine d'équilibreur de charge ou pour activer seulement un port HTTPS.
-</dd>
-
-
-<dt>Exemple de fichier YAML de ressource Ingress</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
- name: myingress
- annotations:
-   ingress.bluemix.net/custom-port: "protocol=&lt;protocol1&gt; port=&lt;port1&gt;;protocol=&lt;protocol2&gt;port=&lt;port2&gt;"
-spec:
- tls:
- - hosts:
-   - mydomain
-    secretName: mytlssecret
-  rules:
- - host: mydomain
-   http:
-     paths:
-     - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-
-<table>
- <thead>
- <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
- </thead>
- <tbody>
- <tr>
- <td><code>&lt;protocol&gt;</code></td>
- <td>Entrez <strong>http</strong> ou <strong>https</strong> pour changer le port par défaut pour le trafic réseau HTTP ou HTTPS entrant .</td>
- </tr>
- <tr>
- <td><code>&lt;port&gt;</code></td>
- <td>Entrez le numéro de port que vous désirez utiliser pour le trafic réseau HTTP ou HTTPS entrant.  <p><strong>Remarque :</strong> lorsqu'un port personnalisé est indiqué pour HTTP ou HTTPS, les ports par défaut ne sont plus valides à la fois pour HTTP et HTTPS. Par exemple, pour remplacer le port par défaut pour HTTPS par 8443, mais utiliser le port par défaut pour HTTP, vous devez définir des ports personnalisés pour les deux ports : <code>custom-port: "protocol=http port=80; protocol=https port=8443"</code>.</p></td>
- </tr>
- </tbody></table>
-
- </dd>
- <dt>Utilisation</dt>
- <dd><ol><li>Examinez les ports ouverts pour votre équilibreur de charge d'application. 
-<pre class="pre">
-<code>kubectl get service -n kube-system</code></pre>
-La sortie de votre interface CLI sera similaire à ceci:
-<pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.10.10.149   169.60.16.246   80:30776/TCP,443:30412/TCP   8d</code></pre></li>
-<li>Ouvrez la mappe de configuration Ingress.
-<pre class="pre">
-<code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>Ajoutez les ports HTTP et HTTPS différents des valeurs par défaut à la mappe de configuration (ConfigMap). Remplacez &lt;port&gt; par le port HTTP ou HTTPS que vous souhaitez ouvrir.
-<pre class="codeblock">
-<code>apiVersion: v1
-kind: ConfigMap
-data:
- public-ports: &lt;port1&gt;;&lt;port2&gt;
-metadata:
- creationTimestamp: 2017-08-22T19:06:51Z
- name: ibm-cloud-provider-ingress-cm
- namespace: kube-system
- resourceVersion: "1320"
- selfLink: /api/v1/namespaces/kube-system/configmaps/ibm-cloud-provider-ingress-cm
- uid: &lt;uid&gt;</code></pre></li>
- <li>Vérifiez que votre contrôleur Ingress est reconfiguré avec les ports différents des ports par défaut.
-<pre class="pre">
-<code>kubectl get service -n kube-system</code></pre>
-La sortie de votre interface CLI sera similaire à ceci:
-<pre class="screen">
-<code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
-<li>Configurez Ingress pour utiliser les ports différents des ports par défaut lorsque vous routez le trafic réseau entrant vers vos services. Utilisez l'exemple de fichier YAML dans cette référence. </li>
-<li>Mettez à jour la configuration de votre contrôleur Ingress.
-<pre class="pre">
-<code>kubectl apply -f &lt;yaml_file&gt;</code></pre>
-</li>
-<li>Ouvrez le navigateur Web de votre choix pour accéder à votre application. Exemple : <code>https://&lt;ibmdomain&gt;:&lt;port&gt;/&lt;service_path&gt;/</code></li></ol></dd></dl>
-
-<br />
-
-
-
-### Redirection HTTP vers HTTPS (redirect-to-https)
-{: #redirect-to-https}
-
-Convertissez les demandes HTTP non sécurisées en demandes HTTPS.
-{:shortdesc}
-
-<dl>
-<dt>Description</dt>
-<dd>Configurez votre équilibreur de charge d'application Ingress pour sécuriser votre domaine avec le certificat TLS fourni par IBM ou votre certificat TLS personnalisé. Certains utilisateurs peuvent tenter d'accéder à vos applications en utilisant une demande HTTP non sécurisée vers le domaine d'équilibreur de charge de votre application (par exemple, <code>http://www.myingress.com</code> au lieu de d'utiliser <code>https</code>). Vous pouvez utiliser l'annotation redirect pour convertir systématiquement en HTTPS les demandes HTTP non sécurisées. Si vous n'utilisez pas cette annotation, les demandes HTTP non sécurisées ne sont pas converties par défaut en demandes HTTPS et peuvent exposer au public des informations confidentielles non chiffrées.
-
-</br></br>
-La redirection de demandes HTTP en demandes HTTPS est désactivée par défaut.</dd>
-
-<dt>Exemple de fichier YAML de ressource Ingress</dt>
-<dd>
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
- name: myingress
- annotations:
-   ingress.bluemix.net/redirect-to-https: "True"
-spec:
- tls:
- - hosts:
-   - mydomain
-    secretName: mytlssecret
-  rules:
- - host: mydomain
-   http:
-     paths:
-     - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-</dd></dl>
-
-<br />
-
-
-
-### Authentification mutuelle (mutual-auth)
-{: #mutual-auth}
-
-Configurez une authentification mutuelle pour l'équilibreur de charge d'application.
-{:shortdesc}
-
-<dl>
-<dt>Description</dt>
-<dd>
-Configurez une authentification mutuelle pour l'équilibreur de charge d'application Ingress. Le client authentifie le serveur et le serveur authentifie également le client à l'aide de certificats. L'authentification mutuelle est également appelée authentification basée sur des certificats ou authentification bidirectionnelle.
-</dd>
-
-<dt>Conditions prérequises</dt>
-<dd>
-<ul>
-<li>[Vous devez disposer d'une valeur confidentielle valide contenant l'autorité de certification (CA) requise](cs_app.html#secrets). Les valeurs <code>client.key</code> et <code>client.crt</code> sont également nécessaires pour une authentification via l'authentification mutuelle.</li>
-<li>Pour activer l'authentification mutuelle sur un autre port que le port 443, [configurez l'équilibreur de charge de manière à ouvrir un port valide](cs_ingress.html#opening_ingress_ports).</li>
-</ul>
-</dd>
-
-
-<dt>Exemple de fichier YAML de ressource Ingress</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-name: myingress
-annotations:
-  ingress.bluemix.net/mutual-auth: "secretName=&lt;mysecret&gt; port=&lt;port&gt; serviceName=&lt;servicename1&gt;,&lt;servicename2&gt;"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: myservice
-          servicePort: 8080</code></pre>
-
-<table>
-<thead>
-<th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
-</thead>
-<tbody>
-<tr>
-<td><code>secretName</code></td>
-<td>Remplacez <code>&lt;<em>mysecret</em>&gt;</code> par le nom de la ressource confidentielle.</td>
-</tr>
-<tr>
-<td><code>&lt;port&gt;</code></td>
-<td>Numéro de port de l'équilibreur de charge d'application.</td>
-</tr>
-<tr>
-<td><code>&lt;serviceName&gt;</code></td>
-<td>Nom d'une ou de plusieurs ressources Ingress. Ce paramètre est facultatif.</td>
-</tr>
-</tbody></table>
-
-</dd>
-</dl>
-
-<br />
-
-
-
-### Support des services SSL (ssl-services)
-{: #ssl-services}
-
-Autorisez les demandes HTTPS et chiffrez le trafic vers vos applications en amont.
-{:shortdesc}
-
-<dl>
-<dt>Description</dt>
-<dd>
-Chiffrez le trafic vers vos applications en amont qui requièrent d'utiliser HTTPS avec les équilibreurs de charge d'application.
-
-**Facultatif** : vous pouvez ajouter [l'authentification unidirectionnelle ou l'authentification mutuelle](#ssl-services-auth) à cette annotation.
-</dd>
-
-
-<dt>Exemple de fichier YAML de ressource Ingress</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: &lt;nom_ingress&gt;
-  annotations:
-    ingress.bluemix.net/ssl-services: "ssl-service=&lt;myservice1&gt; [ssl-secret=&lt;service1-ssl-secret&gt;];ssl-service=&lt;myservice2&gt; [ssl-secret=&lt;service2-ssl-secret&gt;]
-spec:
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: myservice1
-          servicePort: 8443
-      - path: /
-        backend:
-          serviceName: myservice2
-          servicePort: 8444</code></pre>
-
-<table>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>ssl-service</code></td>
-  <td>Remplacez <code>&lt;<em>myservice</em>&gt;</code> par le nom du service qui représente votre application. Le trafic depuis l'équilibreur de charge d'application vers cette application est chiffré.</td>
-  </tr>
-  <tr>
-  <td><code>ssl-secret</code></td>
-  <td>Remplacez <code>&lt;<em>service-ssl-secret</em>&gt;</code> par le nom de la valeur confidentielle pour le service. Ce paramètre est facultatif. S'il est fourni, la valeur doit contenir la clé et le certificat que votre application attend du client.</td>
-  </tr>
-  </tbody></table>
-
-  </dd>
-</dl>
-
-<br />
-
-
-#### Support des services SSL avec authentification
-{: #ssl-services-auth}
-
-Autorisez les demandes HTTPS et chiffrez le trafic vers vos applications en amont avec authentification unidirectionnelle ou mutuelle pour une sécurité supplémentaire.
-{:shortdesc}
-
-<dl>
-<dt>Description</dt>
-<dd>
-Configurer l'authentification mutuelle pour des applications d'équilibrage de charge authentication qui nécessitent HTTPS avec les contrôleurs Ingress.
-
-**Remarque** : avant de commencer, [convertit le certificat et la clé en base 64 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.base64encode.org/).
-
-</dd>
-
-
-<dt>Exemple de fichier YAML de ressource Ingress</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: &lt;nom_ingress&gt;
-  annotations:
-    ingress.bluemix.net/ssl-services: |
-      ssl-service=&lt;myservice1&gt; ssl-secret=&lt;service1-ssl-secret&gt;;
-      ssl-service=&lt;myservice2&gt; ssl-secret=&lt;service2-ssl-secret&gt;
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mysecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: myservice1
-          servicePort: 8443
-      - path: /
-        backend:
-          serviceName: myservice2
-          servicePort: 8444</code></pre>
-
-<table>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>ssl-service</code></td>
-  <td>Remplacez <code>&lt;<em>myservice</em>&gt;</code> par le nom du service qui représente votre application. Le trafic depuis l'équilibreur de charge d'application vers cette application est chiffré.</td>
-  </tr>
-  <tr>
-  <td><code>ssl-secret</code></td>
-  <td>Remplacez <code>&lt;<em>service-ssl-secret</em>&gt;</code> par le nom de la valeur confidentielle pour le service. Ce paramètre est facultatif. S'il est fourni, la valeur doit contenir la clé et le certificat que votre application attend du client.</td>
-  </tr>
-  </tbody></table>
-
-  </dd>
-  </dl>
-
-
-<br />
 
 
 

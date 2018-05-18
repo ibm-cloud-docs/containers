@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-01"
+lastupdated: "2018-03-15"
 
 ---
 
@@ -18,22 +18,21 @@ lastupdated: "2018-02-01"
 # {{site.data.keyword.Bluemix_dedicated_notm}} でのクラスターの概説
 {: #dedicated}
 
-{{site.data.keyword.Bluemix_dedicated}} アカウントがある場合、クラスターを専用クラウド環境 (`https://<my-dedicated-cloud-instance>.bluemix.net`) にデプロイし、同じくそこで実行されている事前選択された {{site.data.keyword.Bluemix}} サービスに接続することができます。
-{:shortdesc}
+{{site.data.keyword.containerlong}} を使用するための {{site.data.keyword.Bluemix_dedicated}} アカウントがある場合は、Kubernetes クラスターを専用クラウド環境 (`https://<my-dedicated-cloud-instance>.bluemix.net`) にデプロイし、同じくそこで実行されている事前選択した {{site.data.keyword.Bluemix}} サービスに接続することができます。{:shortdesc}
 
 {{site.data.keyword.Bluemix_dedicated_notm}} アカウントがない場合、{{site.data.keyword.Bluemix_notm}} Public アカウントを使用して [{{site.data.keyword.containershort_notm}} を開始](container_index.html#container_index)できます。
 
 ## Dedicated クラウド環境について
 {: #dedicated_environment}
 
-{{site.data.keyword.Bluemix_dedicated_notm}} アカウントを使用するとき、使用可能な物理リソースはお客様のクラスター専用であり、{{site.data.keyword.IBM_notm}} の他のお客様のクラスターと共有されません。 クラスターの分離が必要であり、使用する他の {{site.data.keyword.Bluemix_notm}} サービスにもそのような分離が必要な場合は、{{site.data.keyword.Bluemix_dedicated_notm}} 環境をセットアップすることができます。 Dedicated アカウントがない場合は、{{site.data.keyword.Bluemix_notm}} Public で専用ハードウェアを使用してクラスターを作成できます。
+{{site.data.keyword.Bluemix_dedicated_notm}} アカウントを使用するとき、使用可能な物理リソースはお客様のクラスター専用であり、{{site.data.keyword.IBM_notm}} の他のお客様のクラスターと共有されません。 クラスターの分離が必要であり、使用する他の {{site.data.keyword.Bluemix_notm}} サービスにもそのような分離が必要な場合は、{{site.data.keyword.Bluemix_dedicated_notm}} 環境をセットアップすることができます。 Dedicated アカウントがない場合は、[{{site.data.keyword.Bluemix_notm}} Public で専用ハードウェアを使用してクラスターを作成](cs_clusters.html#clusters_ui)できます。
 
 {{site.data.keyword.Bluemix_dedicated_notm}} では、Dedicated コンソール内のカタログから、または {{site.data.keyword.containershort_notm}} CLI を使用することにより、クラスターを作成することができます。 Dedicated コンソールを使用するときには、Dedicated と Public の両方のアカウントに IBM ID を使用して同時にログインします。 この二重ログインにより、Dedicated コンソールを使用してパブリック・クラスターにアクセスすることが可能になります。 CLI を使用するときには、Dedicated エンドポイント (`api.<my-dedicated-cloud-instance>.bluemix.net.`) を使用してログインし、Dedicated 環境に関連付けられたパブリック地域の {{site.data.keyword.containershort_notm}} API エンドポイントをターゲットにします。
 
 {{site.data.keyword.Bluemix_notm}} Public と Dedicated の間の最も大きな違いは以下の点です。
 
-*   ワーカー・ノード、VLAN、サブネットがデプロイされる IBM Cloud インフラストラクチャー (SoftLayer) アカウントは、お客様が所有するアカウントではなく、{{site.data.keyword.IBM_notm}} が所有して管理するアカウントです。
-*   それらの VLAN とサブネットの仕様は、クラスターの作成時ではなく、Dedicated 環境が有効化されるときに決まります。
+*   {{site.data.keyword.Bluemix_dedicated_notm}} では、ワーカー・ノード、VLAN、サブネットがデプロイされた IBM Cloud インフラストラクチャー (SoftLayer) アカウントを {{site.data.keyword.IBM_notm}} が所有および管理します。{{site.data.keyword.Bluemix_notm}} Public では、お客様が IBM Cloud infrastructure (SoftLayer) アカウントを所有します。
+*   {{site.data.keyword.Bluemix_dedicated_notm}} では、{{site.data.keyword.IBM_notm}} 管理の IBM Cloud インフラストラクチャー (SoftLayer) アカウントの VLAN およびサブネットの仕様は、Dedicated 環境が有効化されるときに決まります。{{site.data.keyword.Bluemix_notm}} Public では、VLAN とサブネットの仕様は、クラスターの作成時に決まります。
 
 ### クラウド環境間のクラスター管理の違い
 {: #dedicated_env_differences}
@@ -42,7 +41,7 @@ lastupdated: "2018-02-01"
 |--|--------------|--------------------------------|
 |クラスター作成|フリー・クラスターを作成したり、標準クラスターに関する以下の詳細を指定したりします。<ul><li>クラスター・タイプ</li><li>名前</li><li>ロケーション</li><li>マシン・タイプ</li><li>ワーカー・ノードの数</li><li>パブリック VLAN</li><li>プライベート VLAN</li><li>ハードウェア</li></ul>|標準クラスターに関する以下の詳細を指定します。<ul><li>名前</li><li>Kubernetes バージョン</li><li>マシン・タイプ</li><li>ワーカー・ノードの数</li></ul><p>**注:** VLAN とハードウェアの設定は、{{site.data.keyword.Bluemix_notm}} 環境の作成時に事前定義されます。</p>|
 |クラスターのハードウェアと所有権|標準クラスターでは、ハードウェアは {{site.data.keyword.IBM_notm}} の他のお客様と共有することも、お客様専用にすることもできます。 パブリック VLAN とプライベート VLAN は、お客様の IBM Cloud インフラストラクチャー (SoftLayer) アカウントでお客様が所有して管理します。|{{site.data.keyword.Bluemix_dedicated_notm}} のクラスターでは、ハードウェアは常に専用です。 パブリック VLAN とプライベート VLAN は、お客様の代わりに IBM が所有して管理します。 {{site.data.keyword.Bluemix_notm}} 環境のロケーションは事前定義されます。|
-|ロード・バランサーと Ingress ネットワーキング|標準クラスターのプロビジョニング時には、以下のアクションが自動的に行われます。<ul><li>1 つのポータブル・パブリック・サブネットと 1 つのポータブル・プライベート・サブネットがクラスターにバインドされて、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに割り当てられます。</li><li>1 つのポータブル・パブリック IP アドレスが可用性の高いアプリケーション・ロード・バランサー用に使用され、固有のパブリック経路が &lt;cluster_name&gt;.containers.mybluemix.net の形式で割り当てられます。 この経路を使用して、複数のアプリをパブリックに公開できます。 1 つのポータブル・プライベート IP アドレスが専用アプリケーション・ロード・バランサーのために使用されます。</li><li>ロード・バランサー・サービスを介してアプリを公開するために使用できる、4 つのポータブル・パブリック IP アドレスと 4 つのポータブル・プライベート IP アドレスがクラスターに割り当てられます。 IBM Cloud インフラストラクチャー (SoftLayer) アカウントを介して追加のサブネットを要求できます。</li></ul>|Dedicated アカウントを作成するときには、クラスター・サービスの公開方法とアクセス方法に関する接続の決定を行います。 独自のエンタープライズ IP 範囲 (ユーザー管理の IP) を使用する場合は、それらを [{{site.data.keyword.Bluemix_dedicated_notm}} 環境のセットアップ](/docs/dedicated/index.html#setupdedicated)時に指定する必要があります。 <ul><li>デフォルトでは、ポータブル・パブリック・サブネットは Dedicated アカウントに作成したクラスターにバインドされません。 代わりに、エンタープライズに最適な接続モデルを柔軟に選択できます。</li><li>クラスターを作成した後に、バインドするサブネットのタイプを選択して、ロード・バランサーまたは Ingress 接続のためにクラスターで使用します。<ul><li>パブリック・ポータブル・サブネットまたはプライベート・ポータブル・サブネットでは、[サブネットをクラスターに追加](cs_subnets.html#subnets)できます</li><li>Dedicated での開発時に IBM に提供したユーザー管理の IP アドレスでは、[ユーザー管理のサブネットをクラスターに追加](#dedicated_byoip_subnets)することができます。</li></ul></li><li>サブネットをクラスターにバインドした後に、Ingress コントローラーが作成されます。 ポータブル・パブリック・サブネットを使用した場合にのみパブリック Ingress ルートが作成されます。</li></ul>|
+|ロード・バランサーと Ingress ネットワーキング|標準クラスターのプロビジョニング時には、以下のアクションが自動的に行われます。<ul><li>1 つのポータブル・パブリック・サブネットと 1 つのポータブル・プライベート・サブネットがクラスターにバインドされて、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに割り当てられます。</li><li>1 つのポータブル・パブリック IP アドレスが可用性の高いアプリケーション・ロード・バランサー用に使用され、固有のパブリック経路が &lt;cluster_name&gt;.containers.mybluemix.net の形式で割り当てられます。 この経路を使用して、複数のアプリをパブリックに公開できます。 1 つのポータブル・プライベート IP アドレスが専用アプリケーション・ロード・バランサーのために使用されます。</li><li>ロード・バランサー・サービスを介してアプリを公開するために使用できる、4 つのポータブル・パブリック IP アドレスと 4 つのポータブル・プライベート IP アドレスがクラスターに割り当てられます。 IBM Cloud インフラストラクチャー (SoftLayer) アカウントを介して追加のサブネットを要求できます。</li></ul>|Dedicated アカウントを作成するときには、クラスター・サービスの公開方法とアクセス方法に関する接続の決定を行います。 独自のエンタープライズ IP 範囲 (ユーザー管理の IP) を使用する場合は、それらを [{{site.data.keyword.Bluemix_dedicated_notm}} 環境のセットアップ](/docs/dedicated/index.html#setupdedicated)時に指定する必要があります。 <ul><li>デフォルトでは、ポータブル・パブリック・サブネットは Dedicated アカウントに作成したクラスターにバインドされません。 代わりに、エンタープライズに最適な接続モデルを柔軟に選択できます。</li><li>クラスターを作成した後に、バインドするサブネットのタイプを選択して、ロード・バランサーまたは Ingress 接続のためにクラスターで使用します。<ul><li>パブリック・ポータブル・サブネットまたはプライベート・ポータブル・サブネットでは、[サブネットをクラスターに追加](cs_subnets.html#subnets)できます</li><li>Dedicated での開発時に IBM に提供したユーザー管理の IP アドレスでは、[ユーザー管理のサブネットをクラスターに追加](#dedicated_byoip_subnets)することができます。</li></ul></li><li>サブネットをクラスターにバインドした後に、Ingress アプリケーション・ロード・バランサーが作成されます。 ポータブル・パブリック・サブネットを使用した場合にのみパブリック Ingress ルートが作成されます。</li></ul>|
 |NodePort ネットワーキング|ワーカー・ノードのパブリック・ポートを公開し、ワーカー・ノードのパブリック IP アドレスを使用して、クラスター内のサービスにパブリック・アクセスを行います。|ワーカー・ノードのすべてのパブリック IP アドレスがファイアウォールによってブロックされます。 ただし、クラスターに追加された {{site.data.keyword.Bluemix_notm}} サービスでは、パブリック IP アドレスまたはプライベート IP アドレスを使用してノード・ポートにアクセスできます。|
 |永続ストレージ|ボリュームの[動的プロビジョニング](cs_storage.html#create)または[静的プロビジョニング](cs_storage.html#existing)を使用します。|ボリュームの[動的プロビジョニング](cs_storage.html#create)を使用します。 ボリュームのバックアップの要求、ボリュームからのリストアの要求、その他のストレージ機能の実行のためには、[サポート・チケットを開きます](/docs/get-support/howtogetsupport.html#getting-customer-support)。</li></ul>|
 |{{site.data.keyword.registryshort_notm}} のイメージ・レジストリー URL|<ul><li>米国南部と米国東部: <code>registry.ng bluemix.net</code></li><li>英国南部: <code>registry.eu-gb.bluemix.net</code></li><li>中欧 (フランクフルト): <code>registry.eu-de.bluemix.net</code></li><li>オーストラリア (シドニー): <code>registry.au-syd.bluemix.net</code></li></ul>|<ul><li>新しい名前空間には、{{site.data.keyword.Bluemix_notm}} パブリックに対して定義されたものと同じ地域をベースとするレジストリーを使用してください。</li><li>{{site.data.keyword.Bluemix_dedicated_notm}} で単一コンテナーとスケーラブル・コンテナー用にセットアップされた名前空間の場合は、<code>registry.&lt;dedicated_domain&gt;</code> を使用します。</li></ul>|
@@ -55,8 +54,11 @@ lastupdated: "2018-02-01"
 ### サービス・アーキテクチャー
 {: #dedicated_ov_architecture}
 
-各ワーカー・ノードのセットアップ時には、{{site.data.keyword.IBM_notm}} 管理の Docker エンジン、別個のコンピュート・リソース、ネットワーキング、ボリューム・サービスが用意されます。 標準装備のセキュリティー機能は、分離機能、リソース管理機能、そしてワーカー・ノードのセキュリティー・コンプライアンスを提供します。 ワーカー・ノードは、機密保護機能のある TLS 証明書と openVPN 接続を使用してマスターと通信します。
+各ワーカー・ノードのセットアップ時には、{{site.data.keyword.IBM_notm}} 管理の Docker エンジン、別個のコンピュート・リソース、ネットワーキング、ボリューム・サービスが用意されます。
 {:shortdesc}
+
+標準装備のセキュリティー機能は、分離機能、リソース管理機能、そしてワーカー・ノードのセキュリティー・コンプライアンスを提供します。 ワーカー・ノードは、機密保護機能のある TLS 証明書と openVPN 接続を使用してマスターと通信します。
+
 
 *{{site.data.keyword.Bluemix_dedicated_notm}} での Kubernetes アーキテクチャーとネットワーキング*
 
@@ -68,7 +70,7 @@ lastupdated: "2018-02-01"
 ## Dedicated での {{site.data.keyword.containershort_notm}} のセットアップ
 {: #dedicated_setup}
 
-各 {{site.data.keyword.Bluemix_dedicated_notm}} 環境には、{{site.data.keyword.Bluemix_notm}} 内にパブリック、クライアント所有、そして企業のアカウントがあります。 Dedicated 環境内のユーザーがクラスターを作成するためには、管理者が、ユーザーを Dedicated 環境内のこのパブリック企業アカウントに追加する必要があります。
+各 {{site.data.keyword.Bluemix_dedicated_notm}} 環境には、{{site.data.keyword.Bluemix_notm}} 内にパブリック、クライアント所有、そして企業のアカウントがあります。 Dedicated 環境のユーザーがクラスターを作成するためには、管理者がそのユーザーをパブリック企業アカウントに追加する必要があります。{:shortdesc}
 
 開始前に、以下のことを行います。
   * [{{site.data.keyword.Bluemix_dedicated_notm}} 環境をセットアップします](/docs/dedicated/index.html#setupdedicated)。
@@ -201,7 +203,7 @@ lastupdated: "2018-02-01"
 2. **「Bluemix Public にもログインする (Also log in to {{site.data.keyword.Bluemix_notm}} Public)」**チェック・ボックスを選択して、**「ログイン」**をクリックします。
 3. プロンプトに従い、IBM ID を使用してログインします。 Dedicated アカウントに初めてログインする場合は、プロンプトに従って {{site.data.keyword.Bluemix_dedicated_notm}} にログインします。
 4.  カタログから**「コンテナー」**を選択して、**「Kubernetes クラスター」**をクリックします。
-5.  **クラスター名**を入力します。
+5.  **クラスター名**を入力します。 名前は文字で始まり、文字、数字、および - を含めることができ、35 文字以内でなければなりません。{{site.data.keyword.IBM_notm}} が割り当てる Ingress サブドメインは、クラスター名に由来することに注意してください。クラスター名と Ingress サブドメインが合わさって形成する完全修飾ドメイン名は、地域内で固有で、かつ 63 文字以内でなければなりません。これらの要件を満たすために、クラスター名が切り捨てられたり、サブドメインにランダムな文字値が割り当てられたりする場合があります。
 6.  **マシン・タイプ**を選択します。 各ワーカー・ノードにセットアップされる仮想 CPU とメモリーの量は、マシン・タイプによって決まります。 この仮想 CPU とメモリーは、ノードにデプロイされるすべてのコンテナーで使用できます。
     -   「マイクロ (micro)」のマシン・タイプは、最小のオプションを表しています。
     -   「分散型 (Balanced)」のマシン・タイプは、同じ容量のメモリーが各 CPU に割り当てられるので、パフォーマンスが最適化されます。
@@ -252,7 +254,7 @@ lastupdated: "2018-02-01"
     </tr>
     <tr>
     <td><code>--name <em>&lt;name&gt;</em></code></td>
-    <td><em>&lt;name&gt;</em> をクラスターの名前に置き換えます。</td>
+    <td><em>&lt;name&gt;</em> をクラスターの名前に置き換えます。 名前は文字で始まり、文字、数字、および - を含めることができ、35 文字以内でなければなりません。{{site.data.keyword.IBM_notm}} が割り当てる Ingress サブドメインは、クラスター名に由来することに注意してください。クラスター名と Ingress サブドメインが合わさって形成する完全修飾ドメイン名は、地域内で固有で、かつ 63 文字以内でなければなりません。これらの要件を満たすために、クラスター名が切り捨てられたり、サブドメインにランダムな文字値が割り当てられたりする場合があります。</td>
     </tr>
     <tr>
     <td><code>--workers <em>&lt;number&gt;</em></code></td>
@@ -272,8 +274,8 @@ lastupdated: "2018-02-01"
     クラスターのプロビジョニングが完了すると、クラスターの状態が **deployed** に変わります。
 
     ```
-    Name         ID                                   State      Created          Workers   
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1
+    Name         ID                                   State      Created          Workers   Location   Version
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         dal10      1.8.8
     ```
     {: screen}
 
@@ -287,8 +289,8 @@ lastupdated: "2018-02-01"
     ワーカー・ノードの準備が完了すると、状態が **normal** に変わり、状況が **Ready** になります。 ノードの状況が**「Ready」**になったら、クラスターにアクセスできます。
 
     ```
-    ID                                                  Public IP        Private IP     Machine Type   State      Status  
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1   169.47.223.113   10.171.42.93   free           normal    Ready
+    ID                                                  Public IP        Private IP     Machine Type   State      Status   Location   Version
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.47.223.113   10.171.42.93   free           normal     Ready    dal10      1.8.8
     ```
     {: screen}
 
@@ -397,7 +399,9 @@ lastupdated: "2018-02-01"
     ```
     {: screen}
 
-4. オンプレミスと内部アカウントの接続を構成するには、以下のオプションの間から選択します。
+4. オプション: [同じ VLAN 上のサブネット間のルーティングを有効にします](cs_subnets.html#vlan-spanning)。
+
+5. オンプレミスと内部アカウントの接続を構成するには、以下のオプションの間から選択します。
   - サブネットに 10.x.x.x プライベート IP アドレス範囲を使用した場合、その範囲にある有効な IP を使用して、Ingress とロード・バランサーによるオンプレミスと内部アカウントの接続を構成します。 詳しくは、[アプリへのアクセスの構成](cs_network_planning.html#planning)を参照してください。
   - サブネットに 10.x.x.x プライベート IP アドレス範囲を使用していない場合、その範囲にある有効な IP を使用して、Ingress とロード・バランサーによるオンプレミスの接続を構成します。 詳しくは、[アプリへのアクセスの構成](cs_network_planning.html#planning)を参照してください。 ただし、IBM Cloud インフラストラクチャー (SoftLayer) のポータブル・プライベート・サブネットを使用して、クラスターと他の Cloud Foundry ベースのサービスの間に内部アカウントの接続を構成する必要があります。 ポータブル・プライベート・サブネットは、[`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) コマンドによって作成できます。 このシナリオでは、クラスターに、オンプレミス接続のためのユーザー管理のサブネットと、内部アカウント接続のための IBM Cloud インフラストラクチャー (SoftLayer) のポータブル・プライベート・サブネットの両方があります。
 
@@ -409,6 +413,7 @@ lastupdated: "2018-02-01"
   * [Kubernetes マスターの更新](cs_cluster_update.html#master)
   * [ワーカー・ノードの更新](cs_cluster_update.html#worker_node)
   * [クラスター・ロギングの構成](cs_health.html#logging)
+      * **注**: ログの有効化は Dedicated エンドポイントからはサポートされていません。ログの転送を有効にするには、パブリックな {{site.data.keyword.cloud_notm}} エンドポイントにログインして、パブリックな組織とスペースをターゲットにする必要があります。
   * [クラスター・モニタリングの構成](cs_health.html#monitoring)
       * **注**: `ibm-monitoring` クラスターは各 {{site.data.keyword.Bluemix_dedicated_notm}} アカウント内にあります。 このクラスターは、Dedicated 環境での {{site.data.keyword.containerlong_notm}} の正常性を継続的にモニターし、環境の安定度と接続性を検査します。 このクラスターは環境から除去しないでください。
   * [Kubernetes クラスター・リソースの視覚化](cs_integrations.html#weavescope)
@@ -438,7 +443,7 @@ Kubernetes の技法を利用して、アプリを {{site.data.keyword.Bluemix_d
 #### Ingress を使用してアプリへのパブリック・アクセスを構成する方法
 {: #dedicated_apps_public_ingress}
 
-アプリケーション・ロード・バランサーにパブリック IP アドレスを使用する場合、企業ファイアウォール・ホワイトリストが IBM に提出されていることを確認するか、[サポート・チケットを開いて](/docs/get-support/howtogetsupport.html#getting-customer-support)ファイアウォール・ホワイトリストを構成します。 その後、[Ingress を使用してアプリへのアクセスを構成する方法](cs_ingress.html#config)の手順に従います。
+アプリケーション・ロード・バランサーにパブリック IP アドレスを使用する場合、企業ファイアウォール・ホワイトリストが IBM に提出されていることを確認するか、[サポート・チケットを開いて](/docs/get-support/howtogetsupport.html#getting-customer-support)ファイアウォール・ホワイトリストを構成します。 その後、[Ingress を使用してアプリへのアクセスを構成する方法](cs_ingress.html#configure_alb)の手順に従います。
 
 ### 永続ストレージの作成
 {: #dedicated_apps_volume_claim}

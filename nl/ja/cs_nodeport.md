@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -19,20 +19,43 @@ lastupdated: "2018-01-24"
 # NodePort サービスのセットアップ
 {: #nodeport}
 
-クラスター内のいずれかのワーカー・ノードのパブリック IP アドレスを使用し、ノード・ポートを公開することによって、アプリをインターネットで利用できるようにします。 このオプションは、テストの場合や短期間のパブリック・アクセスを許可する場合に使用してください。
+Kubernetes クラスター内のいずれかのワーカー・ノードのパブリック IP アドレスを使用し、ノード・ポートを公開することによって、コンテナー化アプリをインターネットで利用できるようにします。 このオプションは、{{site.data.keyword.containerlong}} をテストする場合や短期間のパブリック・アクセスを許可する場合に使用してください。
 {:shortdesc}
 
-## NodePort タイプのサービスを使用してアプリへのパブリック・アクセスを構成する方法
+## NodePort サービスを使用した外部ネットワーキングの計画
+{: #planning}
+
+ワーカー・ノードのパブリック・ポートを公開し、ワーカー・ノードのパブリック IP アドレスを使用して、クラスター内のサービスにインターネットからパブリック・アクセスを行います。
+{:shortdesc}
+
+NodePort タイプの Kubernetes サービスを作成してアプリを公開する場合は、30000 から 32767 の範囲の NodePort と内部クラスター IP アドレスがサービスに割り当てられます。 NodePort サービスは、アプリに対する着信要求のための外部エントリー・ポイントとして機能します。 割り当てられた NodePort は、クラスター内の各ワーカー・ノードの kubeproxy 設定でパブリックに公開されます。 どのワーカー・ノードも、割り当てられた NodePort で、サービスに対する着信要求の listen を開始します。 インターネットからサービスにアクセスするには、クラスター作成時に割り当てられたワーカー・ノードのパブリック IP アドレスと NodePort を使用します。その形式は、`<ip_address>:<nodeport>` です。 NodePort サービスは、パブリック IP アドレスに加えて、ワーカー・ノードのプライベート IP アドレスを介して利用可能です。
+
+次の図は、NodePort サービスが構成されているときに、インターネットからアプリへの通信がどのように誘導されるかを示しています。
+
+<img src="images/cs_nodeport_planning.png" width="550" alt="NodePort を使用した {{site.data.keyword.containershort_notm}} でのアプリの公開" style="width:550px; border-style: none"/>
+
+1. ワーカー・ノードのパブリック IP アドレスとワーカー・ノード上の NodePort を使用して、要求がアプリに送信されます。
+
+2. 要求が、NodePort サービスの内部クラスター IP アドレスとポートに自動的に転送されます。内部クラスター IP アドレスはクラスター内でのみアクセス可能です。
+
+3. `kube-proxy` が、要求をアプリの Kubernetes NodePort サービスにルーティングします。
+
+4. 要求が、アプリがデプロイされたポッドのプライベート IP アドレスに転送されます。複数のアプリ・インスタンスがクラスターにデプロイされている場合、NodePort サービスは、アプリ・ポッド間で要求をルーティングします。
+
+**注:** ワーカー・ノードのパブリック IP アドレスは永続的なアドレスではありません。 ワーカー・ノードが削除されたり再作成されたりすると、新しいパブリック IP アドレスがワーカー・ノードに割り当てられます。 NodePort サービスは、アプリのパブリック・アクセスをテストする場合や、パブリック・アクセスが短期間だけ必要な場合に使用できます。 安定的なパブリック IP アドレスによってサービスの可用性を高める必要がある場合は、[LoadBalancer サービス](cs_loadbalancer.html#planning)または [Ingress](cs_ingress.html#planning) を使用してアプリを公開してください。
+
+<br />
+
+
+## NodePort サービスを使用してアプリへのパブリック・アクセスを構成する方法
 {: #config}
 
 フリー・クラスターでも標準クラスターでも、アプリは Kubernetes NodePort サービスとして公開できます。
 {:shortdesc}
 
-**注:** ワーカー・ノードのパブリック IP アドレスは永続的なアドレスではありません。 ワーカー・ノードを再作成しなければならない場合は、新しいパブリック IP アドレスがワーカー・ノードに割り当てられます。 安定的なパブリック IP アドレスによってサービスの可用性を高める必要がある場合は、[LoadBalancer サービス](cs_loadbalancer.html)または [Ingress](cs_ingress.html) を使用してアプリを公開してください。
-
 まだアプリの準備ができていない場合は、[Guestbook ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/blob/master/examples/guestbook/all-in-one/guestbook-all-in-one.yaml) という名前の Kubernetes サンプル・アプリを使用できます。
 
-1.  アプリの構成ファイルで、[service ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/services-networking/service/) セクションを定義します。
+1.  アプリの構成ファイルで、[service ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/services-networking/service/) セクションを定義します。 **注**: Guestbook サンプルで、フロントエンド・サービス・セクションは構成ファイル内に既に存在しています。 Guestbook アプリを外部で使用できるようにするには、NodePort タイプと、30000 から 32767 の範囲の NodePort をフロントエンド・サービス・セクションに追加します。
 
     例:
 
@@ -77,28 +100,6 @@ lastupdated: "2018-01-24"
      <td>オプション: <code><em>&lt;31514&gt;</em></code> を、30000 から 32767 の範囲の NodePort に置き換えます。 別のサービスで既に使用されている NodePort は指定しないでください。 NodePort を割り当てなければ、ランダムに割り当てられます。<br><br>NodePort を指定する時に使用中の NodePort を確認する場合は、以下のコマンドを実行できます。 <pre class="pre"><code>kubectl get svc</code></pre>使用中の NodePorts は、**Ports** フィールドの下に表示されます。</td>
      </tr>
      </tbody></table>
-
-
-    Guestbook サンプルで、フロントエンド・サービス・セクションは構成ファイル内に既に存在しています。 Guestbook アプリを外部で使用できるようにするには、NodePort タイプと、30000 から 32767 の範囲の NodePort をフロントエンド・サービス・セクションに追加します。
-
-    ```
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: frontend
-      labels:
-        app: guestbook
-        tier: frontend
-    spec:
-      type: NodePort
-      ports:
-      - port: 80
-        nodePort: 31513
-      selector:
-        app: guestbook
-        tier: frontend
-    ```
-    {: codeblock}
 
 2.  更新された構成ファイルを保存します。
 

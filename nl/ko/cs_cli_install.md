@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-29"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-01-29"
 # CLI 및 API 설정
 {: #cs_cli_install}
 
-{{site.data.keyword.containershort_notm}} CLI 또는 API를 사용하여 Kubernetes 클러스터를 작성하고 관리할 수 있습니다.
+{{site.data.keyword.containerlong}} CLI 또는 API를 사용하여 Kubernetes 클러스터를 작성하고 관리할 수 있습니다.
 {:shortdesc}
 
 <br />
@@ -35,7 +35,7 @@ lastupdated: "2018-01-29"
 
 -   {{site.data.keyword.Bluemix_notm}} CLI 버전 0.5.0 이상
 -   {{site.data.keyword.containershort_notm}} 플러그인
--   Kubernetes CLI 버전 1.8.6 이상
+-   Kubernetes CLI 버전 1.8.8 이상
 -   선택사항: {{site.data.keyword.registryshort_notm}} 플러그인
 -   선택사항: Docker 버전 1.9 이상
 
@@ -69,19 +69,15 @@ CLI를 설치하려면 다음을 수행하십시오.
 
     {{site.data.keyword.containershort_notm}} 플러그인은 container-service로 결과에 표시됩니다.
 
-4.  Kubernetes 대시보드의 로컬 버전을 보고 클러스터에 앱을 배치하려면 [Kubernetes CLI를 설치 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)하십시오. Kubernetes CLI를 사용하여 명령을 실행하기 위한 접두부는 `kubectl`입니다.
+4.  {: #kubectl}Kubernetes 대시보드의 로컬 버전을 보고 클러스터에 앱을 배치하려면 [Kubernetes CLI를 설치 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)하십시오. Kubernetes CLI를 사용하여 명령을 실행하기 위한 접두부는 `kubectl`입니다.
 
-    1.  전체 기능 호환성을 위해 사용하려는 Kubernetes 클러스터 버전과 일치하는 Kubernetes CLI 버전을 다운로드하십시오. 현재 {{site.data.keyword.containershort_notm}} 기본 Kubernetes 버전은 1.8.6입니다.
+    1.  사용하려는 Kubernetes 클러스터 `major.minor` 버전과 일치하는 Kubernetes CLI `major.minor` 버전을 다운로드하십시오. 현재 {{site.data.keyword.containershort_notm}} 기본 Kubernetes 버전은 1.8.8입니다. **참고**: 클러스터의 최소 `major.minor` CLI 버전과 일치하는 `kubectl` CLI 버전을 사용하는 경우 예상치 못한 결과가 발생할 수 있습니다. Kubernetes 클러스터 및 CLI 버전을 최신 상태로 유지해야 합니다. 
 
-        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
+        - **OS X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl)
+        - **Linux X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl)
+        - **Windows X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe)
 
-        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
-
-        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
-
-        **팁:** Windows를 사용하는 경우, {{site.data.keyword.Bluemix_notm}} CLI와 동일한 디렉토리에 Kubernetes CLI를 설치하십시오. 이 설정을 사용하면 나중에 명령을 실행할 때 일부 파일 경로 변경이 필요하지 않습니다.
-
-    2.  OSX 및 Linux 사용자의 경우, 다음 단계를 완료하십시오.
+    2.  **OSX 및 Linux의 경우**: 다음 단계를 완료하십시오.
         1.  실행 파일을 `/usr/local/bin` 디렉토리로 이동하십시오.
 
             ```
@@ -96,7 +92,7 @@ CLI를 설치하려면 다음을 수행하십시오.
             ```
             {: pre}
 
-            CLI 출력 예제:
+            CLI 출력 예:
 
             ```
              /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
@@ -109,6 +105,8 @@ CLI를 설치하려면 다음을 수행하십시오.
             chmod +x /usr/local/bin/kubectl
             ```
             {: pre}
+
+    3.  **Windows의 경우**: {{site.data.keyword.Bluemix_notm}} CLI와 동일한 디렉토리에 Kubernetes CLI를 설치하십시오. 이 설정을 사용하면 나중에 명령을 실행할 때 일부 파일 경로 변경이 필요하지 않습니다.
 
 5.  개인용 이미지 저장소를 관리하려면 {{site.data.keyword.registryshort_notm}} 플러그인을 설치하십시오. 이 플러그인을 사용하여 IBM이 호스팅하는 멀티 테넌트, 고가용성 및 확장 가능한 개인용 이미지 레지스트리에서 사용자 고유의 네임스페이스를 설정할 수 있으며 Docker 이미지를 저장하고 이를 다른 사용자와 공유할 수 있습니다. Docker 이미지는 클러스터로 컨테이너를 배치하는 데 필요합니다. 레지스트리 명령을 실행하기 위한 접두부는 `bx cr`입니다.
 
@@ -143,8 +141,10 @@ CLI를 설치하려면 다음을 수행하십시오.
 ## `kubectl`을 실행하도록 CLI 구성
 {: #cs_cli_configure}
 
-Kubernetes CLI와 함께 제공되는 명령을 사용하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터를 관리할 수 있습니다. Kubernetes 1.8.6에서 사용 가능한 모든 `kubectl` 명령은 {{site.data.keyword.Bluemix_notm}}의 클러스터와 함께 사용할 수 있도록 지원됩니다. 클러스터를 작성한 후, 로컬 CLI에 대한 컨텍스트를 환경 변수가 있는 해당 클러스터로 설정하십시오. 그런 다음, Kubernetes `kubectl` 명령을 실행하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터 관련 작업을 수행할 수 있습니다.
+Kubernetes CLI와 함께 제공되는 명령을 사용하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터를 관리할 수 있습니다.
 {:shortdesc}
+
+Kubernetes 1.8.8에서 사용 가능한 모든 `kubectl` 명령은 {{site.data.keyword.Bluemix_notm}}의 클러스터와 함께 사용할 수 있도록 지원됩니다. 클러스터를 작성한 후, 로컬 CLI에 대한 컨텍스트를 환경 변수가 있는 해당 클러스터로 설정하십시오. 그런 다음, Kubernetes `kubectl` 명령을 실행하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터 관련 작업을 수행할 수 있습니다.
 
 `kubectl` 명령을 실행하려면 우선 [필수 CLI를 설치](#cs_cli_install)하고 [클러스터를 작성](cs_clusters.html#clusters_cli)하십시오.
 
@@ -211,8 +211,8 @@ Kubernetes CLI와 함께 제공되는 명령을 사용하여 {{site.data.keyword
       출력 예:
 
       ```
-      Client Version: v1.8.6
-      Server Version: v1.8.6
+      Client Version: v1.8.8
+      Server Version: v1.8.8
       ```
       {: screen}
 
@@ -234,7 +234,7 @@ Kubernetes CLI와 함께 제공되는 명령을 사용하여 {{site.data.keyword
 
 -   {{site.data.keyword.Bluemix_notm}} CLI 버전 0.5.0 이상
 -   {{site.data.keyword.containershort_notm}} 플러그인
--   Kubernetes CLI 버전 1.8.6 이상
+-   Kubernetes CLI 버전 1.8.8 이상
 -   {{site.data.keyword.registryshort_notm}} 플러그인
 -   Docker 버전 1.9. 이상
 
@@ -276,45 +276,7 @@ CLI를 업데이트하려면 다음을 수행하십시오.
         ```
         {: pre}
 
-4.  Kubernetes CLI를 업데이트하십시오.
-    1.  사용할 계획인 Kubernetes 클러스터 버전과 일치하는 Kubernetes CLI 버전으로 업데이트하십시오. 현재 {{site.data.keyword.containershort_notm}} 기본 Kubernetes 버전은 1.8.6입니다.
-
-        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
-
-        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
-
-        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
-
-        **팁:** Windows를 사용하는 경우, {{site.data.keyword.Bluemix_notm}} CLI와 동일한 디렉토리에 Kubernetes CLI를 설치하십시오. 이 설정을 사용하면 나중에 명령을 실행할 때 일부 파일 경로 변경이 필요하지 않습니다.
-
-    2.  OSX 및 Linux 사용자의 경우, 다음 단계를 완료하십시오.
-        1.  실행 파일을 `/usr/local/bin` 디렉토리로 이동하십시오.
-
-            ```
-             mv /<path_to_file>/kubectl /usr/local/bin/kubectl
-            ```
-            {: pre}
-
-        2.  `/usr/local/bin`이 `PATH` 시스템 변수에 나열되어 있는지 확인하십시오. `PATH` 변수에는 운영 체제가 실행 파일을 찾을 수 있는 모든 디렉토리가 포함되어 있습니다. `PATH` 변수에 나열된 디렉토리는 서로 다른 용도로 사용됩니다. `/usr/local/bin`은 시스템 관리자가 수동으로 설치했으며 운영 체제의 일부가 아닌 소프트웨어의 실행 파일을 저장하는 데 사용됩니다.
-
-            ```
-             echo $PATH
-            ```
-            {: pre}
-
-            CLI 출력 예제:
-
-            ```
-             /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-            ```
-            {: screen}
-
-        3.  파일을 실행 가능하도록 설정하십시오.
-
-            ```
-            chmod +x /usr/local/bin/kubectl
-            ```
-            {: pre}
+4.  [Kubernetes CLI를 업데이트](#kubectl)하십시오.
 
 5.  {{site.data.keyword.registryshort_notm}} 플러그인을 업데이트하십시오.
     1.  {{site.data.keyword.Bluemix_notm}} 플러그인 저장소에서 업데이트를 설치하십시오.
@@ -351,7 +313,7 @@ CLI가 더 이상 필요하지 않으면 이를 설치 제거할 수 있습니�
 
 
 -   {{site.data.keyword.containershort_notm}} 플러그인
--   Kubernetes CLI 버전 1.8.6 이상
+-   Kubernetes CLI 버전 1.8.8 이상
 -   {{site.data.keyword.registryshort_notm}} 플러그인
 -   Docker 버전 1.9. 이상
 
@@ -454,7 +416,7 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 사용자 이름 및 비밀번호에 대한 본문</td>
     <td><ul><li>grant_type: password</li>
-    <li>response_type: cloud_iam, uaa</li>
+    <li>response_type: cloud_iam uaa</li>
     <li>username: <em>&lt;my_username&gt;</em></li>
     <li>password: <em>&lt;my_password&gt;</em></li>
     <li>uaa_client_id: cf</li>
@@ -482,7 +444,7 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
     </tbody>
     </table>
 
-    API 출력 예제:
+    API 출력 예:
 
     ```
     {
@@ -522,7 +484,7 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
     </tbody>
     </table>
 
-    API 출력 예제:
+    API 출력 예:
 
     ```
     {
@@ -575,7 +537,7 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 사용자 이름 및 비밀번호에 대한 본문</td>
     <td><ul><li>grant_type: password</li>
-    <li>response_type: cloud_iam, uaa</li>
+    <li>response_type: cloud_iam uaa</li>
     <li>username: <em>&lt;my_username&gt;</em></li>
     <li>password: <em>&lt;my_password&gt;</em></li>
     <li>uaa_client_id: cf</li>
@@ -606,7 +568,7 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
     </tbody>
     </table>
 
-    API 출력 예제:
+    API 출력 예:
 
     ```
     {
@@ -645,7 +607,7 @@ CLI를 설치 제거하려면 다음을 수행하십시오.
         </tbody>
         </table>
 
-5.  지원되는 API 목록은 [{{site.data.keyword.containershort_notm}} API 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.bluemix.net/swagger-api)을 검토하십시오.
+5.  지원되는 API 목록은 [{{site.data.keyword.containershort_notm}} API 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.bluemix.net/swagger-api)를 검토하십시오.
 
 <br />
 
@@ -681,7 +643,7 @@ IAM 토큰을 새로 고치려면 다음 단계를 사용하십시오.
     <tr>
     <td>본문</td>
     <td><ul><li>grant_type: refresh_token</li>
-    <li>response_type: cloud_iam, uaa</li>
+    <li>response_type: cloud_iam uaa</li>
     <li>refresh_token: <em>&lt;iam_refresh_token&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li>
@@ -690,7 +652,7 @@ IAM 토큰을 새로 고치려면 다음 단계를 사용하십시오.
     </tbody>
     </table>
 
-    API 출력 예제:
+    API 출력 예:
 
     ```
     {

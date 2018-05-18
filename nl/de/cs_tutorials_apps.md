@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-02-05"
+lastupdated: "2017-02-27"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2017-02-05"
 # Lernprogramm: Apps in Clustern bereitstellen
 {: #cs_apps_tutorial}
 
-Hier erfahren Sie, wie Sie mit {{site.data.keyword.containershort_notm}} eine containerisierte App bereitstellen, die den {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} nutzt.
+Hier erfahren Sie, wie Sie mit {{site.data.keyword.containerlong}} eine containerisierte App bereitstellen, die den {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} nutzt.
 {: shortdesc}
 
 In diesem Szenario nutzt ein fiktives PR-Unternehmen den {{site.data.keyword.Bluemix_notm}}-Service, um Pressemitteilungen zu analysieren und Feedback zum Tenor in ihren Nachrichten zu erhalten.
@@ -60,8 +60,10 @@ Softwareentwickler und Netzadministratoren, die noch nie zuvor eine App in einem
 ## Lerneinheit 1: Einzelinstanz-Apps auf Kubernetes-Clustern bereitstellen
 {: #cs_apps_tutorial_lesson1}
 
-Im vorherigen Lernprogramm haben Sie einen Cluster mit einem Workerknoten erstellt. In dieser Lerneinheit konfigurieren Sie eine Bereitstellung und stellen eine einzelne Instanz der App in einem Kubernetes-Pod im Workerknoten bereit. Das folgende Diagramm zeigt die Komponenten, die Sie im Rahmen dieser Lerneinheit bereitstellen.
+Im vorherigen Lernprogramm haben Sie einen Cluster mit einem Workerknoten erstellt. In dieser Lerneinheit konfigurieren Sie eine Bereitstellung und stellen eine einzelne Instanz der App in einem Kubernetes-Pod im Workerknoten bereit.
 {:shortdesc}
+
+Das folgende Diagramm zeigt die Komponenten, die Sie im Rahmen dieser Lerneinheit bereitstellen.
 
 ![Konfiguration für die Bereitstellung](images/cs_app_tutorial_components1.png)
 
@@ -172,7 +174,7 @@ um den Pfad zu der lokalen Kubernetes-Konfigurationsdatei als Umgebungsvariable 
         ```
         {: screen}
 
-8.  Bereitstellungen werden zum Verwalten von Pods verwendet, die containerisierte Instanzen einer App enthalten. Der folgende Befehl stellt die App in einem einzelnen Pod bereit. Im vorliegenden Lernprogramm wird der Bereitstellung der Name 'hello-world-deployment' zugeordnet. Sie können jedoch einen eigenen Namen verwenden. Wenn Sie das Docker Quickstart-Terminal verwendet haben, um Docker-Befehle auszuführen, wechseln Sie unbedingt zurück zu der CLI (Befehlszeilenschnittstelle), die Sie zum Festlegen der Sitzungsvariable `KUBECONFIG` verwendet haben.
+8.  Bereitstellungen werden zum Verwalten von Pods verwendet, die containerisierte Instanzen einer App enthalten. Der folgende Befehl stellt die App in einem einzelnen Pod bereit. Im vorliegenden Lernprogramm wird der Bereitstellung der Name 'hello-world-deployment' zugeordnet. Sie können jedoch einen eigenen Namen verwenden. Wenn Sie das Docker Quickstart-Terminal verwendet haben, um Docker-Befehle auszuführen, wechseln Sie unbedingt zurück zu der CLI (Befehlszeilenschnittstelle), die Sie zum Festlegen der Sitzungsvariablen `KUBECONFIG` verwendet haben.
 
     ```
     kubectl run hello-world-deployment --image=registry.<region>.bluemix.net/<namensbereich>/hello-world:1
@@ -272,8 +274,8 @@ um den Pfad zu der lokalen Kubernetes-Konfigurationsdatei als Umgebungsvariable 
         ```
         Listing cluster workers...
         OK
-        ID                                            Public IP        Private IP      Machine Type   State      Status
-        dal10-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.47.227.138   10.171.53.188   free           normal    Ready
+        ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.47.227.138  10.171.53.188    free           normal   Ready    mil01      1.8.8
         ```
         {: screen}
 
@@ -302,10 +304,10 @@ Sie sind der Ansicht, dass diese Lerneinheit zu viele Befehle enthält? Ganz Ihr
 ## Lerneinheit 2: Apps mit höherer Verfügbarkeit bereitstellen und aktualisieren
 {: #cs_apps_tutorial_lesson2}
 
-In dieser Lerneinheit stellen Sie drei Instanzen der App 'Hello World' in einem Cluster für höhere Verfügbarkeit als in der ersten Version der App bereit. Höhere Verfügbarkeit bedeutet, dass der Benutzerzugriff auf drei Instanzen aufgeteilt ist. Versuchen zu viele Benutzer, auf dieselbe Instanz der App zuzugreifen, so können schleppende Reaktionszeiten auftreten. Eine höhere Anzahl von Instanzen kann für Ihre Benutzer gleichbedeutend mit geringeren Reaktionszeiten sein. In der vorliegenden Lerneinheit erfahren Sie außerdem, wie Statusprüfungen und Bereitstellungsaktualisierungen mit Kubernetes funktionieren können.
+In dieser Lerneinheit stellen Sie drei Instanzen der App 'Hello World' in einem Cluster mit höherer Verfügbarkeit als in der ersten Version der App bereit.
 {:shortdesc}
 
-Das folgende Diagramm enthält die von Ihnen im Rahmen der Lerneinheit bereitgestellten Komponenten.
+Höhere Verfügbarkeit bedeutet, dass der Benutzerzugriff auf drei Instanzen aufgeteilt ist. Versuchen zu viele Benutzer, auf dieselbe Instanz der App zuzugreifen, so können schleppende Reaktionszeiten auftreten. Eine höhere Anzahl von Instanzen kann für Ihre Benutzer gleichbedeutend mit geringeren Reaktionszeiten sein. In der vorliegenden Lerneinheit erfahren Sie außerdem, wie Statusprüfungen und Bereitstellungsaktualisierungen mit Kubernetes funktionieren können. Das folgende Diagramm enthält die von Ihnen im Rahmen der Lerneinheit bereitgestellten Komponenten.
 
 ![Konfiguration für die Bereitstellung](images/cs_app_tutorial_components2.png)
 
@@ -471,10 +473,10 @@ service "hw-demo-service" deleted
 ## Lerneinheit 3: App 'Watson Tone Analyzer' bereitstellen und aktualisieren
 {: #cs_apps_tutorial_lesson3}
 
-In den vorherigen Lerneinheiten wurden die Apps als einzelne Komponenten in einem Workerknoten bereitgestellt. In dieser Lerneinheit stellen Sie zwei Komponenten einer App in einem Cluster bereit, die den Service {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} verwenden. Durch das Aufteilen der Komponenten auf verschiedene Container stellen Sie sicher, dass Sie ein Element aktualisieren können, ohne dass sich dies nachteilig auf die übrigen auswirkt. Dann aktualisieren Sie die App, um sie mit einer größeren Anzahl von Replikaten vertikal zu skalieren und so ihre Verfügbarkeit weiter zu steigern.
+In den vorherigen Lerneinheiten wurden die Apps als einzelne Komponenten in einem Workerknoten bereitgestellt. In dieser Lerneinheit stellen Sie zwei Komponenten einer App in einem Cluster bereit, die den Service {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} verwenden.
 {:shortdesc}
 
-Das folgende Diagramm enthält die von Ihnen im Rahmen der Lerneinheit bereitgestellten Komponenten.
+Durch das Aufteilen der Komponenten auf verschiedene Container stellen Sie sicher, dass Sie ein Element aktualisieren können, ohne dass sich dies nachteilig auf die übrigen auswirkt. Dann aktualisieren Sie die App, um sie mit einer größeren Anzahl von Replikaten vertikal zu skalieren und so ihre Verfügbarkeit weiter zu steigern. Das folgende Diagramm enthält die von Ihnen im Rahmen der Lerneinheit bereitgestellten Komponenten.
 
 ![Konfiguration für die Bereitstellung](images/cs_app_tutorial_components3.png)
 
@@ -753,5 +755,5 @@ service "watson-talk-service" deleted
 Nachdem Sie sich mit den grundlegenden Informationen vertraut gemacht haben, können Sie nun komplexere Aufgaben in Angriff nehmen. Ziehen Sie eine der folgenden Aufgaben in Betracht:
 
 - Komplexeres Lab im Repository vervollständigen
-- Eigene Apps mit {{site.data.keyword.containershort_notm}}](cs_app.html#app_scaling) automatisch skalieren
+- [Apps automatisch skalieren](cs_app.html#app_scaling) mit {{site.data.keyword.containershort_notm}}
 - Erkunden Sie Lernprogramme für die Containerorchestrierung unter [developerWorks ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/code/journey/category/container-orchestration/)

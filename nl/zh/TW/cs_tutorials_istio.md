@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-05"
+lastupdated: "2018-02-27"
 
 ---
 
@@ -19,13 +19,12 @@ lastupdated: "2018-02-05"
 # 指導教學：在 {{site.data.keyword.containerlong_notm}} 上安裝 Istio
 {: #istio_tutorial}
 
-[Istio](https://www.ibm.com/cloud/info/istio) 是一種開放平台，提供統一方法讓開發人員連接、保護及管理雲端平台上微服務（也稱為服務網）的網路，例如 Kubernetes。Istio 提供功能來管理網路資料流量、負載平衡至微服務、強制執行存取原則、驗證服務網上的服務身分等等。
-
+[Istio](https://www.ibm.com/cloud/info/istio) 是一種開放平台，能夠連接、保護及管理雲端平台上的微服務網路（也稱為服務網），例如 {{site.data.keyword.containerlong}} 中的 Kubernetes。透過 Istio 可管理網路資料流量、微服務之間的負載平衡、強制執行存取原則、驗證服務網上的服務身分等等。
 {:shortdesc}
 
 在本指導教學中，您可以看到如何為一個稱為 BookInfo 的簡單模擬書店應用程式，一起安裝 Istio 及四個微服務。微服務包括產品網頁、書籍詳細資料、檢閱及評等。將 BookInfo 的微服務部署至已安裝 Istio 的 {{site.data.keyword.containershort}} 叢集時，即會在每一個微服務的 Pod 中注入 Istio Envoy Sidecar Proxy。
 
-**附註**：Istio 平台的一些配置及特性仍在開發中，而且會根據使用者意見進行變更。請先給與幾個月的時間待其穩定，再於正式作業環境中使用 Istio。 
+**附註**：Istio 平台的一些配置及特性仍在開發中，而且會根據使用者意見進行變更。請先等待幾個月的時間，待其穩定後再於正式作業環境中使用 Istio。 
 
 ## 目標
 
@@ -52,6 +51,7 @@ lastupdated: "2018-02-05"
 {: #istio_tutorial1}
 
 在叢集中下載並安裝 Istio。
+{:shortdesc}
 
 1. 直接從 [https://github.com/istio/istio/releases ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/istio/istio/releases) 下載 Istio，或使用 curl 取得最新版本：
 
@@ -69,7 +69,7 @@ lastupdated: "2018-02-05"
    ```
    {: pre}
 
-4. 將目錄切換至 Istio 檔案位置。
+4. 切換至 Istio 檔案位置的目錄。
 
    ```
    cd <path_to_istio-0.4.0>
@@ -83,7 +83,7 @@ lastupdated: "2018-02-05"
    ```
    {: pre}
 
-   **附註**：如果您需要在 Sidecar 之間啟用相互 TLS 鑑別，則可以改為安裝 `istio-auth` 檔案：`kubectl apply -f install/kubernetes/istio-auth.yaml`
+   **附註**：如果您需要在 Sidecar 之間啟用交互 TLS 鑑別，則可以改為安裝 `istio-auth` 檔案：`kubectl apply -f install/kubernetes/istio-auth.yaml`
 
 6. 先確定已完整部署 Kubernetes 服務 `istio-pilot`、`istio-mixer` 及 `istio-ingress`，再繼續進行。
 
@@ -122,7 +122,10 @@ lastupdated: "2018-02-05"
 ## 課程 2：部署 BookInfo 應用程式
 {: #istio_tutorial2}
 
-將 BookInfo 範例應用程式的微服務部署至 Kubernetes 叢集。這四個微服務包括產品網頁、書籍詳細資料、檢閱（含數個版本的檢閱微服務）及評等。您可以在 Istio 安裝的 `samples/bookinfo` 目錄中找到此範例所使用的所有檔案。
+將 BookInfo 範例應用程式的微服務部署至 Kubernetes 叢集。
+{:shortdesc}
+
+這四個微服務包括產品網頁、書籍詳細資料、檢閱（含數個版本的檢閱微服務）及評等。您可以在 Istio 安裝的 `samples/bookinfo` 目錄中找到此範例所使用的所有檔案。
 
 當您部署 BookInfo 時，會先將 Envoy Sidecar Proxy 當成容器注入至應用程式微服務的 Pod，再部署微服務 Pod。Istio 會使用延伸版本的 Envoy Proxy 來調解服務網中所有微服務的所有入埠及出埠資料流量。如需 Envoy 的相關資訊，請參閱 [Istio 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/concepts/what-is-istio/overview.html#envoy)。
 
@@ -213,7 +216,7 @@ lastupdated: "2018-02-05"
 
 5. 在瀏覽器中，導覽至 `http://$GATEWAY_URL/productpage` 以檢視 BookInfo 網頁。
 
-6. 嘗試多次重新整理頁面。不同版本的檢閱區段會循環使用紅星、黑星及無星星。
+6. 嘗試多次重新整理頁面。不同版本的檢閱區段會循環使用紅色星星、黑色星星及無任何星星。
 
 恭喜！您已順利使用 Istio Envoy Sidecar 來部署 BookInfo 範例應用程式。接下來，您可以清理資源，或繼續執行其他指導教學來進一步探索 Istio 功能。
 
@@ -221,6 +224,7 @@ lastupdated: "2018-02-05"
 {: #istio_tutorial_cleanup}
 
 如果您不想要探索[下一步為何？](#istio_tutorial_whatsnext)中所提供的其他 Istio 功能，則可以清理叢集中的 Istio 資源。
+{:shortdesc}
 
 1. 刪除叢集中的所有 BookInfo 服務、Pod 及部署。
 
@@ -241,6 +245,6 @@ lastupdated: "2018-02-05"
 
 若要進一步探索 Istio 功能，您可以在 [Istio 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/) 中找到更多手冊。
 
-* [智慧型遞送 ![外部鏈結圖示 ](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/guides/intelligent-routing.html)：此範例顯示如何使用 Istio 的資料流量管理功能，將資料流量遞送至特定版本之 BookInfo 的檢閱及評等微服務。
+* [Intelligent Routing ![外部鏈結圖示 ](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/guides/intelligent-routing.html)：此範例顯示如何使用 Istio 的資料流量管理功能，將資料流量遞送至特定版本之 BookInfo 的檢閱及評等微服務。
 
-* [深度遙測 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/guides/telemetry.html)：此範例顯示如何使用 Istio Mixer 及 Envoy Proxy 來取得 BookInfo 微服務的統一度量值、日誌及追蹤。
+* [In-Depth Telemetry ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/guides/telemetry.html)：此範例顯示如何使用 Istio Mixer 及 Envoy Proxy 來取得 BookInfo 微服務的統一度量值、日誌及追蹤。

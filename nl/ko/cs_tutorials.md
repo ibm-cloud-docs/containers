@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-01-29"
+lastupdated: "2017-02-27"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2017-01-29"
 # 튜토리얼: 클러스터 작성
 {: #cs_cluster_tutorial}
 
-{{site.data.keyword.Bluemix_short}}에서 고유 Kubernetes 클러스터를 배치하고 관리하십시오. 작업자 노드라고 하는 독립적 컴퓨팅 호스트의 클러스터에서 컨테이너화된 앱의 배치, 오퍼레이션, 스케일링 및 모니터링을 자동화할 수 있습니다.
+{{site.data.keyword.containerlong}}에서 Kubernetes 클러스터를 배치하고 관리하십시오. 클러스터에서 컨테이너화된 앱의 배치, 오퍼레이션, 스케일링 및 모니터링을 자동화할 수 있습니다.
 {:shortdesc}
 
 이 튜토리얼 시리즈에서는 가상의 홍보(PR) 회사가 Kubernetes 기능을 사용하여 {{site.data.keyword.Bluemix_notm}}의 컨테이너화된 앱을 배치하는 방법을 보여줍니다. PR 회사에서는 Leveraging {{site.data.keyword.toneanalyzerfull}}를 활용하여 보도 자료를 분석하고 피드백을 받습니다.
@@ -31,7 +31,7 @@ lastupdated: "2017-01-29"
 
 인프라를 설정하려면 다음을 수행하십시오.
 
--   단일 작업자 노드의 Kubernetes 클러스터 작성
+-   단일 작업자 노드가 있는 Kubernetes 클러스터 작성
 -   Kubernetes 명령 실행 및 Docker 이미지 관리를 위한 CLI 설치
 -   이미지를 저장하기 위해 {{site.data.keyword.registrylong_notm}}에서 개인용 이미지 저장소 작성
 -   클러스터의 앱이 해당 서비스를 사용할 수 있도록 {{site.data.keyword.toneanalyzershort}} 서비스를 클러스터에 추가
@@ -85,13 +85,13 @@ CLI 및 해당 필수 소프트웨어를 설치하려면 다음을 수행하십�
     {: pre}
 
 5.  Kubernetes 대시보드의 로컬 버전을 보고 클러스터에 앱을 배치하려면 [Kubernetes CLI를 설치 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)하십시오. Kubernetes CLI를 사용하여 명령을 실행하려면 `kubectl` 접두부를 사용하십시오.
-    1.  전체 기능 호환성을 위해 사용하려는 Kubernetes 클러스터 버전과 일치하는 Kubernetes CLI 버전을 다운로드하십시오. 현재 {{site.data.keyword.containershort_notm}} 기본 Kubernetes 버전은 1.8.6입니다.
+    1.  전체 기능 호환성을 위해 사용하려는 Kubernetes 클러스터 버전과 일치하는 Kubernetes CLI 버전을 다운로드하십시오. 현재 {{site.data.keyword.containershort_notm}} 기본 Kubernetes 버전은 1.8.8입니다.
 
-        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
+        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl)
 
-        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
+        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl)
 
-        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
+        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe)
 
           **팁:** Windows를 사용하는 경우, {{site.data.keyword.Bluemix_notm}} CLI와 동일한 디렉토리에 Kubernetes CLI를 설치하십시오. 이 설정을 사용하면 나중에 명령을 실행할 때 일부 파일 경로 변경이 필요하지 않습니다.
 
@@ -146,6 +146,7 @@ CLI 및 해당 필수 소프트웨어를 설치하려면 다음을 수행하십�
 {: #cs_cluster_tutorial_lesson2}
 
 {{site.data.keyword.registryshort_notm}}에서 개인용 이미지 저장소를 설정하고 {{site.data.keyword.toneanalyzershort}} 서비스에 액세스할 수 있도록 클러스터에 시크릿을 추가하십시오.
+{: shortdesc}
 
 1.  프롬프트가 표시되면 {{site.data.keyword.Bluemix_notm}} 신임 정보를 사용하여 {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오.
 
@@ -176,15 +177,18 @@ CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색�
     작업자 노드의 프로비저닝이 완료되면 상태가 **준비**로 변경되며 {{site.data.keyword.Bluemix_notm}} 서비스 바인딩을 시작할 수 있습니다.
 
     ```
-    ID                                                 Public IP       Private IP       Machine Type   State    Status
-    kube-par02-pafe24f557f070463caf9e31ecf2d96625-w1   169.48.131.37   10.177.161.132   free           normal    Ready
+    ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.48.131.37   10.177.161.132   free           normal   Ready    mil01      1.8.8
     ```
     {: screen}
 
 ## 학습 3: 클러스터 환경 설정
 {: #cs_cluster_tutorial_lesson3}
 
-CLI에서 클러스터의 컨텍스트를 설정하십시오. 클러스터 관련 작업을 위해 컨테이너 CLI에 로그인할 때마다 사용자는 이러한 명령을 실행하여 세션 변수로서 클러스터의 구성 파일에 대한 경로를 설정해야 합니다. Kubernetes CLI는 이 변수를 사용하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터와 연결하는 데 필요한 로컬 구성 파일과 인증서를 찾습니다.
+CLI에서 클러스터의 컨텍스트를 설정하십시오.
+{: shortdesc}
+
+클러스터 관련 작업을 위해 컨테이너 CLI에 로그인할 때마다 사용자는 이러한 명령을 실행하여 세션 변수로서 클러스터의 구성 파일에 대한 경로를 설정해야 합니다. Kubernetes CLI는 이 변수를 사용하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터와 연결하는 데 필요한 로컬 구성 파일과 인증서를 찾습니다.
 
 1.  환경 변수를 설정하기 위한 명령을 가져오고 Kubernetes 구성 파일을 다운로드하십시오.
 
@@ -230,8 +234,8 @@ CLI에서 클러스터의 컨텍스트를 설정하십시오. 클러스터 관�
     출력 예:
 
     ```
-    Client Version: v1.8.6
-    Server Version: v1.8.6
+    Client Version: v1.8.8
+    Server Version: v1.8.8
     ```
     {: screen}
 

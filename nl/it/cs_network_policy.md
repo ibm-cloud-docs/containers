@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-02-27"
 
 ---
 
@@ -18,15 +18,13 @@ lastupdated: "2018-01-24"
 # Controllo del traffico con le politiche di rete
 {: #network_policies}
 
-Ogni cluster Kubernetes è configurato con un plug-in di rete chiamato Calico. Le politiche di rete predefinite
-vengono configurate per proteggere l'interfaccia di rete pubblica di ogni nodo di lavoro. Puoi utilizzare
-le funzionalità Calico e Kubernetes native per configurare ulteriori politiche di rete per un cluster
-quando hai requisiti di sicurezza univoci. Queste politiche di rete specificano il traffico di rete che vuoi
-consentire o bloccare da e verso un pod in un cluster.
+Ogni cluster Kubernetes è configurato con un plug-in di rete chiamato Calico. Le politiche di rete predefinite vengono configurate per proteggere l'interfaccia di rete pubblica di ogni nodo di lavoro in {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-Puoi scegliere tra le funzionalità Calico e Kubernetes native per creare politiche di rete per il tuo
-cluster. Per iniziare, potresti utilizzare le politiche di rete Kubernetes, ma, per delle funzionalità più
+Puoi utilizzare
+le funzionalità Calico e Kubernetes native per configurare ulteriori politiche di rete per un cluster
+quando hai requisiti di sicurezza univoci. Queste politiche di rete specificano il traffico di rete che vuoi
+consentire o bloccare da e verso un pod in un cluster. Per iniziare, potresti utilizzare le politiche di rete Kubernetes, ma, per delle funzionalità più
 solide, utilizza le politiche di rete Calico.
 
 <ul>
@@ -55,10 +53,7 @@ alla risorsa di destinazione.</ul>
 ## Configurazione delle politiche predefinite
 {: #default_policy}
 
-Quando si crea un cluster, le politiche di rete predefinite vengono configurate automaticamente per
-l'interfaccia di rete pubblica di ogni nodo di lavoro per limitare il traffico in entrata per un nodo di lavoro
-dall'Internet pubblico. Queste politiche non influiscono sul traffico tra i pod e sono configurate per consentire l'accesso ai
-servizi nodeport, programma di bilanciamento del carico e Ingress di Kubernetes.
+Quando si crea un cluster, vengono impostate politiche di rete predefinite per l'interfaccia di rete pubblica di ciascun nodo di lavoro per limitare il traffico in entrata dall'Internet pubblico. Queste politiche non influiscono sul traffico tra i pod e consentono l'accesso ai servizi nodeport, programma di bilanciamento del carico e Ingress di Kubernetes.
 {:shortdesc}
 
 Le politiche predefinite non vengono applicate direttamente ai pod; vengono applicate all'interfaccia di rete pubblica di un nodo di lavoro utilizzando un endpoint host Calico. Quando un endpoint host viene creato in Calico, tutto il traffico da e verso l'interfaccia
@@ -69,7 +64,7 @@ tu non abbia compreso pienamente la politica e sappia che non hai bisogno del tr
 
 
  <table summary="La prima riga nella tabella si estende su entrambe le colonne. Le rimanenti righe devono essere lette da sinistra a destra, con l'ubicazione del server nella prima colonna e gli indirizzi IP corrispondenti nella seconda colonna.">
- <caption>Politiche predefinite per ogni cluster </caption>
+ <caption>Politiche predefinite per ogni cluster</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Politiche predefinite per ogni cluster</th>
   </thead>
@@ -120,7 +115,7 @@ Prima di iniziare:
 
 1.  [Installa le CLI di {{site.data.keyword.containershort_notm}} e Kubernetes.](cs_cli_install.html#cs_cli_install)
 2.  [Crea un cluster gratuito o standard.](cs_clusters.html#clusters_ui)
-3.  [Indirizza la CLI Kubernetes CLI al
+3.  [Indirizza la CLI Kubernetes al
 cluster](cs_cli_install.html#cs_cli_configure). Includi l'opzione --admin con il comando bx cs
 cluster-config`, che viene utilizzato per scaricare i file di autorizzazione e i certificati. Questo download include inoltre le chiavi per il ruolo Super utente, di cui hai bisogno per eseguire i comandi
 Calico.
@@ -264,8 +259,7 @@ output:
 
             **Nota**: per ottenere il percorso della directory, rimuovi il nome file `kube-config-prod-<location>-<cluster_name>.yml` dalla fine dell'output.
 
-        3.  Richiama il
-<code>ca-*pem_file<code>.
+        3.  Richiama il <code>ca-*pem_file<code>.
 
             -   Linux e OS X:
 
@@ -275,12 +269,10 @@ output:
               {: pre}
 
             -   Windows:
-              <ol><li>Apri la directory che hai richiamato nell'ultimo
-passo.</br><pre class="codeblock"><code>C:\Users\<user>\.bluemix\plugins\container-service\&lt;cluster_name&gt;-admin\</code></pre>
+              <ol><li>Apri la directory che hai richiamato nell'ultimo passo.</br><pre class="codeblock"><code>C:\Users\<user>\.bluemix\plugins\container-service\&lt;cluster_name&gt;-admin\</code></pre>
               <li> Individua il file <code>ca-*pem_file</code>.</ol>
 
-        4.  Verifica che la configurazione di Calico funzioni
-correttamente.
+        4.  Verifica che la configurazione di Calico funzioni correttamente.
 
             -   Linux e OS X:
 
@@ -308,33 +300,28 @@ correttamente.
 
 3.  Esamina le politiche di rete esistenti.
 
-    -   Visualizza l'endpoint host
-Calico.
+    -   Visualizza l'endpoint host Calico.
 
       ```
       calicoctl get hostendpoint -o yaml
       ```
       {: pre}
 
-    -   Visualizza tutte le politiche di rete di Calico e Kubernetes che sono state create per il cluster. Questo elenco contiene politiche che potrebbero non essere ancora applicate a tutti i pod o gli host. Affinché una politica di rete
-venga applicata, deve trovare una risorsa Kubernetes che corrisponda al selettore definito
-nella politica di rete Calico.
+    -   Visualizza tutte le politiche di rete di Calico e Kubernetes che sono state create per il cluster. Questo elenco contiene politiche che potrebbero non essere ancora applicate a tutti i pod o gli host. Affinché una politica di rete venga applicata, deve trovare una risorsa Kubernetes che corrisponda al selettore definito nella politica di rete Calico.
 
       ```
       calicoctl get policy -o wide
       ```
       {: pre}
 
-    -   Visualizza i dettagli per una politica di
-rete.
+    -   Visualizza i dettagli per una politica di rete.
 
       ```
       calicoctl get policy -o yaml <policy_name>
       ```
       {: pre}
 
-    -   Visualizza i dettagli di tutte le politiche di rete per il
-cluster.
+    -   Visualizza i dettagli di tutte le politiche di rete per il cluster.
 
       ```
       calicoctl get policy -o yaml
@@ -343,11 +330,7 @@ cluster.
 
 4.  Crea le politiche di rete Calico per consentire o bloccare il traffico.
 
-    1.  Definisci la tua [politica di rete Calico
-![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy) creando uno script di configurazione (.yaml). Questi file di configurazione includono i selettori
-che descrivono a quali pod, spazi dei nomi o host vengono applicate queste politiche. Fai riferimento a queste
-[politiche Calico di esempio
-![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy) per informazioni su come creare le tue proprie politiche.
+    1.  Definisci la tua [politica di rete Calico ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy) creando uno script di configurazione (.yaml). Questi file di configurazione includono i selettori che descrivono a quali pod, spazi dei nomi o host vengono applicate queste politiche. Fai riferimento a queste [politiche Calico di esempio ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy) per informazioni su come creare le tue proprie politiche.
 
     2.  Applica le politiche al cluster.
         -   Linux e OS X:
@@ -370,8 +353,7 @@ che descrivono a quali pod, spazi dei nomi o host vengono applicate queste polit
 ## Blocca il traffico in entrata nei servizi LoadBalancer o NodePort.
 {: #block_ingress}
 
-Per impostazione predefinita, i servizi Kubernetes `NodePort` e `LoadBalancer` sono progettati per rendere le tue applicazioni disponibili
-su tutte le interfacce del cluster private e pubbliche. Tuttavia, puoi bloccare il traffico in entrata ai tuoi servizi in base alla destinazione o all'origine del traffico. Per bloccare il traffico, crea le politiche di rete `preDNAT` Calico.
+Per impostazione predefinita, i servizi Kubernetes `NodePort` e `LoadBalancer` sono progettati per rendere le tue applicazioni disponibili su tutte le interfacce del cluster private e pubbliche. Tuttavia, puoi bloccare il traffico in entrata ai tuoi servizi in base alla destinazione o all'origine del traffico.
 {:shortdesc}
 
 Un servizio Kubernetes LoadBalancer è anche un servizio NodePort. Un servizio LoadBalancer rende la tua applicazione disponibile per la porta e l'indirizzo IP del programma di bilanciamento del carico e per le porte del nodo del servizio. È possibile accedere alle porte del nodo da ogni indirizzo IP (pubblico e privato) di ogni nodo all'interno del cluster.

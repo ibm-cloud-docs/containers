@@ -19,7 +19,7 @@ lastupdated: "2017-11-02"
 # 建立 {{site.data.keyword.Bluemix_dedicated_notm}} 映像檔登錄的 {{site.data.keyword.registryshort_notm}} 記號
 {: #cs_dedicated_tokens}
 
-建立不會過期的記號，以使用您用於單一及可擴充群組並與叢集搭配使用的映像檔登錄。
+針對您用於單一及可擴充群組並與 {{site.data.keyword.containerlong}} 中的叢集搭配使用的映像檔登錄，建立不會過期的記號。
 {:shortdesc}
 
 1.  登入 {{site.data.keyword.Bluemix_dedicated_notm}} 環境。
@@ -43,7 +43,7 @@ lastupdated: "2017-11-02"
     ```
     {: pre}
 
-4.  要求現行階段作業的永久性登錄記號。將 <dedicated_domain> 取代為 {{site.data.keyword.Bluemix_dedicated_notm}} 環境的網域。此記號會授與現行名稱空間中映像檔的存取權。
+4.  要求現行階段作業的永久性登錄記號。將 <dedicated_domain> 取代為 {{site.data.keyword.Bluemix_dedicated_notm}} 環境的網域。此記號會授與對現行名稱空間中映像檔的存取權。
 
     ```
     curl -XPOST -H "Authorization: ${OAUTH_TOKEN}" -H "Organization: ${ORG_GUID}" https://registry.<dedicated_domain>/api/v1/tokens?permanent=true
@@ -68,7 +68,7 @@ lastupdated: "2017-11-02"
 
     您可以利用此密碼來使用 IBM {{site.data.keyword.Bluemix_notm}} Container Service。
 
-6.  建立用來儲存記號資訊的 Kubernetes Secret。
+6.  建立用來儲存記號資訊的 Kubernetes 密碼。
 
     ```
     kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_url> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
@@ -83,7 +83,7 @@ lastupdated: "2017-11-02"
     <tbody>
     <tr>
     <td><code>--namespace &lt;kubernetes_namespace&gt;</code></td>
-    <td>必要。您要使用 Secret 並在其中部署容器的叢集的 Kubernetes 名稱空間。執行 <code>kubectl get namespaces</code>，以列出叢集中的所有名稱空間。</td>
+    <td>必要。您要使用密碼並在其中部署容器的叢集的 Kubernetes 名稱空間。執行 <code>kubectl get namespaces</code>，以列出叢集中的所有名稱空間。</td>
     </tr>
     <tr>
     <td><code>&lt;secret_name&gt;</code></td>
@@ -103,7 +103,7 @@ lastupdated: "2017-11-02"
     </tr>
     <tr>
     <td><code>--docker-email &lt;docker-email&gt;</code></td>
-    <td>必要。如果您有 Docker 電子郵件位址，請輸入它。否則，請輸入虛構的電子郵件位址，例如 a@b.c。此電子郵件是建立 Kubernetes Secret 的必要項目，但在建立之後就不再使用。</td>
+    <td>必要。如果您有 Docker 電子郵件位址，請輸入它。否則，請輸入虛構的電子郵件位址，例如 a@b.c。此電子郵件是建立 Kubernetes 密碼的必要項目，但在建立之後就不再使用。</td>
     </tr>
     </tbody></table>
 

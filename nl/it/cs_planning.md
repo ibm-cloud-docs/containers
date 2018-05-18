@@ -15,7 +15,7 @@ lastupdated: "2018-01-24"
 {:tip: .tip}
 {:download: .download}
 
-# Il contenuto che stai cercando di spostare 
+# Il contenuto che stai cercando di spostare
 
 Controlla le ultime informazioni nella nuova ubicazione:
  - [Confronto tra i cluster standard e gratuito](cs_why.html#cluster_types)
@@ -27,6 +27,6 @@ Controlla le ultime informazioni nella nuova ubicazione:
  - [Rete pubblica](cs_network_planning.html#planning)
  - [Gestione degli accessi utente](cs_users.html#users)
  - [Registri immagini](cs_images.html#planning)
- - [Archivio di dati persistenti](cs_storage.html#planning)
+ - [Archiviazione dati persistente](cs_storage.html#planning)
  - [Integrazioni](cs_integrations.html#integrations)
  - [Accesso al portfolio dell'infrastruttura IBM Cloud (SoftLayer)](cs_infrastructure.html#unify_accounts)

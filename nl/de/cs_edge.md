@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-07"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -18,15 +18,18 @@ lastupdated: "2018-02-07"
 # Netzverkehr zu Edge-Workerknoten beschränken
 {: #edge}
 
-Mit Edge-Workerknoten kann die Sicherheit des Clusters verbessert werden, indem der externe Zugriff auf Workerknoten beschränkt und die Netzarbeitslast isoliert wird. Wenn diese Workerknoten nur für den Netzbetrieb markiert sind, können andere Arbeitslasten nicht die CPU oder den Speicher des entsprechenden Workerknotens nutzen und somit Auswirkungen auf den Netzbetrieb haben.
+Mit Edge-Workerknoten kann die Sicherheit des Kubernetes-Clusters verbessert werden, indem der externe Zugriff auf Workerknoten beschränkt und die Netzarbeitslast in {{site.data.keyword.containerlong}} isoliert wird.
 {:shortdesc}
+
+Wenn diese Workerknoten nur für den Netzbetrieb markiert sind, können andere Arbeitslasten nicht die CPU oder den Speicher des entsprechenden Workerknotens nutzen und somit Auswirkungen auf den Netzbetrieb haben.
+
 
 
 
 ## Bezeichnung für Edge-Knoten zu Workerknoten hinzufügen
 {: #edge_nodes}
 
-Fügen Sie die Bezeichnung `dedicated=edge` zu mindestens zwei Workerknoten in Ihrem Cluster hinzu, um sicherzustellen, dass Ingress- und Lastausgleichsservices nur für diese Workerknoten bereitgestellt werden.
+Fügen Sie die Bezeichnung `dedicated=edge` zu mindestens zwei Workerknoten auf jedem öffentlichen VLAN in Ihrem Cluster hinzu, um sicherzustellen, dass Ingress- und  Lastausgleichsservices nur für diese Workerknoten bereitgestellt werden.{:shortdesc}
 
 Vorbemerkungen:
 
@@ -36,7 +39,7 @@ Vorbemerkungen:
 
 Schritte:
 
-1. Listen Sie alle Workerknoten im Cluster auf. Verwenden Sie die private IP-Adresse aus der Spalte **NAME**, um die Knoten anzugeben. Wählen Sie mindestens zwei Workerknoten als Edge-Workerknoten aus. Durch die Verwendung von zwei oder mehr Workerknoten wird die Verfügbarkeit der Netzressourcen verbessert.
+1. Listen Sie alle Workerknoten im Cluster auf. Verwenden Sie die private IP-Adresse aus der Spalte **NAME**, um die Knoten anzugeben. Wählen Sie mindestens zwei Workerknoten in jedem öffentlichen VLAN als Edge-Workerknoten aus. Durch die Verwendung von zwei oder mehr Workerknoten wird die Verfügbarkeit der Netzressourcen verbessert.
 
   ```
   kubectl get nodes -L publicVLAN,privateVLAN,dedicated
@@ -81,8 +84,11 @@ Sie haben Workerknoten mit der Bezeichnung `dedicated=edge` markiert und alle vo
 ## Verhindern, dass Arbeitslasten auf Edge-Workerknoten ausgeführt werden
 {: #edge_workloads}
 
-Ein Vorteil von Edge-Workerknoten besteht darin, dass sie so konfiguriert werden können, dass sie nur Netzservices (Networking Services) ausführen. Die Verwendung der Tolerierung `dedicated=edge` bedeutet, dass alle Lastausgleichs- und Ingress-Services nur auf den markierten Workerknoten ausgeführt werden. Um jedoch zu verhindern, dass andere Arbeitslasten auf Edge-Workerknoten ausgeführt werden und deren Ressourcen verbrauchen, müssen Sie [Kubernetes-Taints ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) verwenden.
-{:shortdesc}
+Ein Vorteil von Edge-Workerknoten besteht darin, dass sie so konfiguriert werden können, dass sie nur Netzservices (Networking Services) ausführen.
+{:shortdesc} 
+
+Die Verwendung der Tolerierung `dedicated=edge` bedeutet, dass alle Lastausgleichs- und Ingress-Services nur auf den markierten Workerknoten ausgeführt werden. Um jedoch zu verhindern, dass andere Arbeitslasten auf Edge-Workerknoten ausgeführt werden und deren Ressourcen verbrauchen, müssen Sie [Kubernetes-Taints ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) verwenden.
+
 
 1. Listen Sie alle Workerknoten mit der Bezeichnung `edge` auf.
 

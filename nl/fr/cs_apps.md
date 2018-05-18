@@ -24,7 +24,7 @@ Consultez les informations les plus récentes dans son nouvel emplacement :
 - [Autorisation d'accès public aux applications](cs_network_planning.html#planning)
   - [Configuration de l'accès public à une application à l'aide du type de service NodePort](cs_nodeport.html#config)
   - [Configuration de l'accès public à une application à l'aide du type de service LoadBalancer](cs_loadbalancer.html#config)
-  - [Configuration de l'accès à une application à l'aide d'Ingress](cs_ingress.html#config)
+  - [Configuration de l'accès à une application à l'aide d'Ingress](cs_ingress.html#configure_alb)
     - [Utilisation du domaine fourni par IBM sans terminaison TLS](cs_ingress.html#ibm_domain)
     - [Utilisation du domaine fourni par IBM avec terminaison TLS](cs_ingress.html#ibm_domain_cert)
     - [Utilisation d'un domaine personnalisé et d'un certificat TLS pour la terminaison TLS](cs_ingress.html#custom_domain_cert)

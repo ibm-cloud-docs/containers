@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-02-28"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-01-24"
 # 在叢集中部署應用程式
 {: #app}
 
-您隨時可以使用 Kubernetes 技術部署應用程式，以及確保您的應用程式已啟動並在執行中。例如，您可以執行漸進式更新及回復，而不會對使用者造成任何關閉時間。
+您可以在 {{site.data.keyword.containerlong}} 中使用 Kubernetes 技術於容器中部署應用程式，並確保那些應用程式始終處於運行狀態。例如，您可以執行漸進式更新及回復，而不會對使用者造成任何關閉時間。
 {:shortdesc}
 
 藉由按一下下列影像的區域，來瞭解部署應用程式的一般步驟。
@@ -40,10 +40,10 @@ lastupdated: "2018-01-24"
 {: #highly_available_apps}
 
 將設定分佈到越多個工作者節點及叢集，使用者遇到應用程式關閉的可能性越低。
-
+{:shortdesc}
 
 檢閱下列潛在的應用程式設定，它們依遞增的可用性程度進行排序：
-{:shortdesc}
+
 
 ![應用程式高可用性階段](images/cs_app_ha_roadmap.png)
 
@@ -52,7 +52,7 @@ lastupdated: "2018-01-24"
 3.  含有 n+2 個 Pod 的部署，由抄本集管理，分散於不同位置中的多個節點（反親緣性）。
 4.  含有 n+2 個 Pod 的部署，由抄本集管理，分散於不同地區中的多個節點（反親緣性）。
 
-進一步瞭解這些技術來增加應用程式的可用性：
+### 增加應用程式的可用性
 
 <dl>
 <dt>使用部署和抄本集來部署您的應用程式及其相依關係</dt>
@@ -60,7 +60,7 @@ lastupdated: "2018-01-24"
 當您部署多個 Pod 時，會自動為您的部署建立抄本集來監視 Pod，並確保隨時都有所需數目的 Pod 在執行。當一個 Pod 關閉時，抄本集會以新的 Pod 來取代無回應的 Pod。</br></br>
 您可以使用部署來定義應用程式的更新策略，包括您要在漸進式更新期間新增的 Pod 數目，以及每次更新時可能無法使用的 Pod 數目。當您執行漸進式更新時，部署會檢查修訂版是否正常運作，並且在偵測到失敗時停止推出。</br></br>
 部署也有可能讓您同時部署多個具有不同旗標的修訂版，所以舉例來說，您可以先測試部署，然後再決定將其推送至正式作業環境。</br></br>
-每個部署都會追蹤已部署的修訂版。當您發現更新項目無法如預期般運作時，可以使用此修訂歷程來回復至舊版。</dd>
+每個部署都會追蹤已部署的修訂版。當您發現更新無法如預期般運作時，可以使用此修訂歷程來回復至舊版。</dd>
 <dt>為應用程式的工作負載包含足夠的抄本，然後加兩個</dt>
 <dd>為了讓應用程式具備高可用性以及更大的失敗復原力，請考慮包含多於最小值的額外抄本來處理預期工作負載。額外的抄本可以在 Pod 當機，而抄本集尚未回復當機的 Pod 時，處理工作負載。為了預防兩者同時失敗，請包含兩個額外的抄本。此設定是 N+2 型樣，其中 N 是處理送入工作負載的抄本數，而 +2 是額外的兩個抄本。您可以在叢集中有任意數量的 Pod，只要叢集有足夠的空間容納它們即可。</dd>
 <dt>將 Pod 分散於多個節點（反親緣性）</dt>
@@ -70,7 +70,7 @@ lastupdated: "2018-01-24"
 <strong>附註：</strong>下列 YAML 檔案會強制將每個 Pod 部署至不同的工作者節點。當您定義的抄本多於叢集中可用的工作者節點時，只有已部署的抄本數可以滿足反親緣性需求。任何其他抄本都會維持在擱置狀態，直到有其他工作者節點新增至叢集為止。
 
 <pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+<code>apiVersion: apps/v1beta1
 kind: Deployment
     metadata:
 name: wasliberty
@@ -131,7 +131,7 @@ spec:
 
 若要部署最小應用程式的元件（如圖所示），請使用類似於下列範例的配置檔：
 ```
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: ibmliberty
@@ -251,29 +251,27 @@ spec:
 
 
 
-## 建立 Secret
+## 建立密碼
 {: #secrets}
 
-Kubernetes Secret 是一種儲存機密資訊（例如使用者名稱、密碼或金鑰）的安全方式。
+Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或金鑰）的安全方式。
 {:shortdesc}
 
 <table>
-<caption>表格。需要藉由作業儲存在 Secret 中的檔案</caption>
+<caption>表格. 需要藉由作業儲存在密碼中的檔案</caption>
 <thead>
 <th>作業</th>
-<th>要儲存在 Secret 中的必要檔案</th>
+<th>要儲存在密碼中的必要檔案</th>
 </thead>
 <tbody>
 <tr>
 <td>將服務新增至叢集</td>
-<td>無。將服務連結至叢集時，系統會為您建立 Secret。</td>
+<td>無。將服務連結至叢集時，系統會為您建立密碼。</td>
 </tr>
 <tr>
-<td>選用項目：如果不是使用 ingress-secret，請配置 Ingress 服務與 TLS 搭配。<p><b>附註</b>：依預設，TLS 已啟用，且已針對「TLS 連線」建立 Secret。
+<td>選用項目：如果不是使用 ingress-secret，請配置 Ingress 服務與 TLS 搭配。<p><b>附註</b>：依預設，TLS 已啟用，且已針對「TLS 連線」建立密碼。
 
-
-
-若要檢視預設 TLS Secret，請執行下列指令：
+若要檢視預設 TLS 密碼，請執行下列指令：
 <pre>
 bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 </pre>
@@ -287,11 +285,11 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 </tbody>
 </table>
 
-如需您可以在 Secret 中儲存哪些項目的相關資訊，請參閱 [Kubernetes 文件](https://kubernetes.io/docs/concepts/configuration/secret/)。
+如需您可以在密碼中儲存哪些項目的相關資訊，請參閱 [Kubernetes 文件](https://kubernetes.io/docs/concepts/configuration/secret/)。
 
 
 
-若要使用憑證來建立 Secret，請執行下列動作：
+若要使用憑證來建立密碼，請執行下列動作：
 
 1. 從憑證提供者產生憑證管理中心 (CA) 憑證及金鑰。如果您有自己的網域，請為您的網域購買正式的 TLS 憑證。基於測試目的，您可以產生自簽憑證。
 
@@ -306,26 +304,26 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
  ```
  {: codeblock}
 
-2. 建立憑證作為 Kubernetes Secret。
+2. 建立憑證作為 Kubernetes 密碼。
 
    ```
- kubectl create secret generic <secretName> --from-file=<cert_file>=<cert_file>
- ```
+   kubectl create secret generic <secretName> --from-file=<cert_file>=<cert_file>
+   ```
    {: pre}
 
      範例：
    - TLS 連線：
 
      ```
- kubectl create secret tls <secretName> --from-file=tls.crt=server.crt --from-file=tls.key=server.key
- ```
+     kubectl create secret tls <secretName> --from-file=tls.crt=server.crt --from-file=tls.key=server.key
+     ```
      {: pre}
 
    - 交互鑑別註釋：
 
      ```
- kubectl create secret generic <secretName> --from-file=ca.crt=ca.crt
- ```
+     kubectl create secret generic <secretName> --from-file=ca.crt=ca.crt
+     ```
      {: pre}
 
 <br />
@@ -337,7 +335,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 ## 使用 GUI 部署應用程式
 {: #app_ui}
 
-當您使用 Kubernetes 儀表板將應用程式部署至叢集時，會自動建立可建立、更新及管理叢集中 Pod 的部署資源。
+當您使用 Kubernetes 儀表板將應用程式部署至叢集時，部署資源會自動在叢集中建立、更新及管理 Pod。
 {:shortdesc}
 
 開始之前：
@@ -349,7 +347,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 
 1.  [開啟 Kubernetes 儀表板](#cli_dashboard)。
 2.  從 Kubernetes 儀表板中，按一下 **+ 建立**。
-3.  選取**在下面指定應用程式詳細資料**以在 GUI 上輸入應用程式詳細資料，或選取**上傳 YAML 或 JSON 檔案**以上傳應用程式[配置檔 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/)。使用[此範例 YAML 檔案 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-Bluemix/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml)，以在美國南部地區從 **ibmliberty** 映像檔部署容器。
+3.  選取**在下面指定應用程式詳細資料**以在 GUI 上輸入應用程式詳細資料，或選取**上傳 YAML 或 JSON 檔案**以上傳應用程式[配置檔 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/)。使用[此範例 YAML 檔案 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml)，以在美國南部地區從 **ibmliberty** 映像檔部署容器。
 4.  在 Kubernetes 儀表板中，按一下**部署**，以驗證已建立部署。
 5.  如果您使用節點埠服務讓應用程式可公開使用，負載平衡器服務（或 Ingress）會確認您可以存取此應用程式。
 
@@ -395,18 +393,17 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 ## 調整應用程式
 {: #app_scaling}
 
-部署雲端應用程式，以回應應用程式要求的變更，並且只在需要時才使用資源。自動調整可根據 CPU 自動增加或減少應用程式的實例數。
+使用 Kubernetes，您可以啟用[水平 Pod 自動調整![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)，根據 CPU 自動增加或減少應用程式的實例數目。
 {:shortdesc}
 
-開始之前，請先將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為您的叢集。
+要尋找調整 Cloud Foundry 應用程式的相關資訊嗎？請查看 [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html)。
+{: tip}
 
-**附註：**您在尋找調整 Cloud Foundry 應用程式的相關資訊嗎？請查看 [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html)。
-
-使用 Kubernetes，您可以啟用 [Horizontal Pod Autoscaling ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale)，根據 CPU 來調整應用程式。
+開始之前：
+- [將 CLI 的目標設為](cs_cli_install.html#cs_cli_configure)您的叢集。
+- Heapster 監視必須部署在您要自動調整的叢集中。
 
 1.  從 CLI 將應用程式部署至叢集。當您部署應用程式時，必須要求 CPU。
-
-
 
     ```
     kubectl run <name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
@@ -435,8 +432,10 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
     <td>透過此埠可讓您的應用程式供外部使用。</td>
     </tr></tbody></table>
 
-    **附註：**若為更複雜的部署，您可能需要建立[配置檔](#app_cli)。
-2.  建立 Horizontal Pod Autoscaler，並定義您的原則。如需使用 `kubectl autoscale` 指令的相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale)。
+    若為更複雜的部署，您可能需要建立[配置檔](#app_cli)。
+    {: tip}
+
+2.  建立 autoscaler 並定義原則。如需使用 `kubetcl autoscale` 指令的相關資訊，請參閱 [Kubernetes 文件![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale)。
 
     ```
     kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
@@ -461,7 +460,6 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
     <td>用來維護指定 CPU 使用率百分比之已部署的 Pod 數目上限。</td>
     </tr>
     </tbody></table>
-
 
 
 <br />

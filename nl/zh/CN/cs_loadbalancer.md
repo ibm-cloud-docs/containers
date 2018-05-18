@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-06"
+lastupdated: "2018-03-13"
 
 ---
 
@@ -19,20 +19,45 @@ lastupdated: "2018-02-06"
 # 设置 LoadBalancer 服务
 {: #loadbalancer}
 
-公开一个端口，并使用负载均衡器的可移植 IP 地址来访问应用程序。使用公共 IP 地址使应用程序可在因特网上进行访问，或使用专用 IP 地址使应用程序可在专用基础架构网络上进行访问。
+公开一个端口，并使用负载均衡器的可移植 IP 地址来访问容器化应用程序。
 {:shortdesc}
 
+## 使用 LoadBalancer 服务规划外部联网
+{: #planning}
+
+创建标准集群时，{{site.data.keyword.containershort_notm}} 会自动请求 5 个可移植公共 IP 地址和 5 个可移植专用 IP 地址，并在集群创建期间将其供应给 IBM Cloud infrastructure (SoftLayer) 帐户。两个可移植 IP 地址（一个公共一个专用）用于 [Ingress 应用程序负载均衡器](cs_ingress.html#planning)。通过创建 LoadBalancer 服务，可以使用 4 个可移植公共 IP 地址和 4 个可移植专用 IP 地址来公开应用程序。
+
+在公用 VLAN 上于集群中创建 Kubernetes LoadBalancer 服务时，会创建一个外部负载均衡器。在创建 LoadBalancer 服务时，IP 地址的选项如下所示：
+
+- 如果集群位于公用 VLAN 上，那么将使用 4 个可用的可移植公共 IP 地址中的一个地址。
+- 如果集群仅在专用 VLAN 上可用，那么将使用 4 个可用的可移植专用 IP 地址中的一个地址。
+- 通过向配置文件添加注释，可请求用于 LoadBalancer 服务的可移植公共或专用 IP 地址：`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type
+<public_or_private>`.
+
+分配给 LoadBalancer 服务的可移植公共 IP 地址是永久固定的，在除去或重新创建工作程序节点时不会更改。因此，LoadBalancer 服务的可用性比 NodePort 服务更高。与 NodePort 服务不同，您可以为负载均衡器分配任何端口，而不限于特定端口范围。如果使用 LoadBalancer 服务，那么任何工作程序节点的每个 IP 地址上也提供一个节点端口。要在使用 LoadBalancer 服务时阻止访问节点端口，请参阅[阻止入局流量](cs_network_policy.html#block_ingress)。
+
+LoadBalancer 服务充当应用程序入局请求的外部入口点。要从因特网访问 LoadBalancer 服务，请使用负载均衡器的公共 IP 地址以及分配的端口，格式为 `<ip_address>:<port>`. 下图显示负载均衡器如何将通信从因特网定向到应用程序：
+
+<img src="images/cs_loadbalancer_planning.png" width="550" alt="使用负载均衡器公开 {{site.data.keyword.containershort_notm}} 中的应用程序" style="width:550px; border-style: none"/>
+
+1. 使用负载均衡器的公共 IP 地址和工作程序节点上分配的端口，将请求发送到应用程序。
+
+2. 请求会自动转发到 LoadBalancer 服务的内部集群 IP 地址和端口。该内部集群 IP 地址只能在集群内部访问。
+
+3. `kube-proxy` 将请求路由到应用程序的 Kubernetes LoadBalancer 服务。
+
+4. 该请求会转发到部署了应用程序的 pod 的专用 IP 地址。如果集群中部署了多个应用程序实例，那么负载均衡器会在应用程序 pod 之间路由请求。
 
 
-## 使用 LoadBalancer 服务类型来配置对应用程序的访问权
+
+
+<br />
+
+
+
+
+## 使用负载均衡器来配置对应用程序的访问权
 {: #config}
-
-与 NodePort 服务不同，LoadBalancer 服务的可移植 IP 地址不依赖于应用程序所部署到的工作程序节点。但是，Kubernetes LoadBalancer 服务也是 NodePort 服务。LoadBalancer 服务通过负载均衡器 IP 地址和端口提供应用程序，并通过服务的节点端口使应用程序可用。
-{:shortdesc}
-
-系统将为您分配负载均衡器的可移植 IP 地址，并且在添加或除去工作程序节点时不会更改此 IP 地址。因此，LoadBalancer 服务要比 NodePort 服务具有更高的可用性。用户可以选择负载均衡器的任何端口，端口不限于 NodePort 端口范围。可以将 LoadBalancer 服务用于 TCP 和 UDP 协议。
-
-**注**：LoadBalancer 服务不支持 TLS 终止。如果应用程序需要 TLS 终止，可以通过使用 [Ingress](cs_ingress.html) 公开应用程序，或者配置应用程序以管理 TLS 终止。
 
 开始之前：
 
@@ -108,11 +133,11 @@ lastupdated: "2018-02-06"
         </tr>
         <tr>
           <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:`
-          <td>指定 LoadBalancer 类型的注释。值为 `private` 和 `public`。在公用 VLAN 上的集群中创建公共 LoadBalancer 时，不需要此注释。</td>
+          <td>指定 LoadBalancer 类型的注释。值为 `private` 和 `public`。如果要在公用 VLAN 上的集群中创建公共 LoadBalancer，那么不需要此注释。</td>
         </tr>
         <tr>
           <td><code>loadBalancerIP</code></td>
-          <td>创建专用 LoadBalancer 或要将特定可移植 IP 地址用于公共 LoadBalancer 时，请将 <em>&lt;loadBalancerIP&gt;</em> 替换为要使用的 IP 地址。有关更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer)。</td>
+          <td>要创建专用 LoadBalancer 或要将特定可移植 IP 地址用于公共 LoadBalancer，请将 <em>&lt;loadBalancerIP&gt;</em> 替换为要使用的 IP 地址。有关更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer)。</td>
         </tr>
         </tbody></table>
 

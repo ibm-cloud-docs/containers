@@ -24,7 +24,7 @@ lastupdated: "2018-01-11"
 - [앱에 대한 공용 액세스 허용](cs_network_planning.html#planning)
   - [NodePort 서비스 유형을 사용하여 앱에 대한 공용 액세스 구성](cs_nodeport.html#config)
   - [로드 밸런서 서비스 유형을 사용하여 앱에 대한 액세스 구성](cs_loadbalancer.html#config)
-  - [Ingress를 사용하여 앱에 대한 액세스 구성](cs_ingress.html#config)
+  - [Ingress를 사용하여 앱에 대한 액세스 구성](cs_ingress.html#configure_alb)
     - [TLS 종료 없이 IBM 제공 도메인 사용](cs_ingress.html#ibm_domain)
     - [TLS 종료와 함께 IBM 제공 도메인 사용](cs_ingress.html#ibm_domain_cert)
     - [TLS 종료를 수행하기 위해 사용자 정의 도메인 및 TLS 인증서 사용](cs_ingress.html#custom_domain_cert)

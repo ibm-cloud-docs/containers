@@ -19,13 +19,14 @@ lastupdated: "2018-01-24"
 # 访问 IBM Cloud Infrastructure (SoftLayer) 产品服务组合
 {: #infrastructure}
 
-要创建标准 Kubernetes 集群，您必须具有对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权。需要此访问权才能为集群请求付费基础架构资源，如工作程序节点、可移植公共 IP 地址或持久存储器。
+要创建标准 Kubernetes 集群，您必须具有对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权。需要此访问权才能为 {{site.data.keyword.containerlong}} 中的 Kubernetes 集群请求付费基础架构资源，如工作程序节点、可移植公共 IP 地址或持久存储器。
 {:shortdesc}
 
 ## 访问 IBM Cloud infrastructure (SoftLayer) 产品服务组合
 {: #unify_accounts}
 
-在启用自动帐户链接后创建的 {{site.data.keyword.Bluemix_notm}} 现买现付帐户已设置为具有对 IBM Cloud infrastructure (SoftLayer) 产品服务组合的访问权，因此无需额外配置即可为集群购买基础架构资源。
+在自动帐户链接启用后创建的 {{site.data.keyword.Bluemix_notm}} 现买现付帐户已设置有对 IBM Cloud Infrastructure (SoftLayer) 产品服务组合的访问权。您可以为集群购买基础架构资源，而无需额外配置。
+{:shortdesc}
 
 具有其他 {{site.data.keyword.Bluemix_notm}} 帐户类型的用户或具有未链接到其 {{site.data.keyword.Bluemix_notm}} 帐户的现有 IBM Cloud infrastructure (SoftLayer) 帐户的用户必须对其帐户进行配置才能创建标准集群。
 {:shortdesc}
@@ -45,7 +46,7 @@ lastupdated: "2018-01-24"
 ## 生成要用于 {{site.data.keyword.Bluemix_notm}} 帐户的 IBM Cloud infrastructure (SoftLayer) API 密钥
 {: #old_account}
 
-如果要继续使用旧的“现买现付”或“预订”帐户来创建标准集群，那么必须使用新的“现买现付”帐户生成 API 密钥，并为旧帐户设置 API 密钥。
+要继续使用旧的现买现付或预订帐户来创建标准集群，请使用新的现买现付帐户生成 API 密钥，并为旧帐户设置 API 密钥。
 {:shortdesc}
 
 开始之前，请先创建一个自动设置为具有 IBM Cloud infrastructure (SoftLayer) 产品服务组合访问权的 {{site.data.keyword.Bluemix_notm}} 现买现付帐户。
@@ -54,7 +55,7 @@ lastupdated: "2018-01-24"
 2.  选择**帐户**，然后选择**用户**。
 3.  单击**生成**，为新的现买现付帐户生成 IBM Cloud infrastructure (SoftLayer) API 密钥。
 4.  复制 API 密钥。
-5.  在 CLI 中，使用旧的“现买现付”或“预订”帐户的 {{site.data.keyword.ibmid}}和密码登录到 {{site.data.keyword.Bluemix_notm}}。
+5.  在 CLI 中，使用旧的现买现付或预订帐户的 {{site.data.keyword.ibmid}}和密码登录到 {{site.data.keyword.Bluemix_notm}}。
 
   ```
   bx login

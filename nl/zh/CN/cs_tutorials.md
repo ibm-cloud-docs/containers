@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-01-29"
+lastupdated: "2017-02-27"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2017-01-29"
 # 教程：创建集群
 {: #cs_cluster_tutorial}
 
-在 {{site.data.keyword.Bluemix_short}} 中部署和管理您自己的 Kubernetes 集群。您可以在称为工作程序节点的独立计算主机集群中自动执行对容器化应用程序的部署、操作、扩展和监视。
+在 {{site.data.keyword.containerlong}} 中部署和管理 Kubernetes 集群。您可以在集群中自动执行对容器化应用程序的部署、操作、扩展和监视。
 {:shortdesc}
 
 在本教程系列中，您可以看到虚构的公关公司使用 Kubernetes 功能在 {{site.data.keyword.Bluemix_notm}} 中部署容器化应用程序的方式。利用 {{site.data.keyword.toneanalyzerfull}}，该 PR 公司可以分析他们的新闻稿，并获得反馈。
@@ -29,7 +29,7 @@ lastupdated: "2017-01-29"
 
 在第一个教程中，您将充当 PR 公司的网络管理员。配置用于部署和测试应用程序的 Hello World 版本的定制 Kubernetes 集群。
 
-要设置基础结构，请执行以下操作：
+要设置基础架构，请执行以下操作：
 
 -   创建具有一个工作程序节点的 Kubernetes 集群
 -   安装 CLI 以运行 Kubernetes 命令并管理 Docker 映像
@@ -85,13 +85,13 @@ lastupdated: "2017-01-29"
     {: pre}
 
 5.  要查看 Kubernetes 仪表板的本地版本以及将应用程序部署到集群，请[安装 Kubernetes CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。要使用 Kubernetes CLI 运行命令，请使用前缀 `kubectl`。
-    1.  为了实现完整的功能兼容性，请下载与您计划使用的 Kubernetes 集群版本相匹配的 Kubernetes CLI 版本。当前 {{site.data.keyword.containershort_notm}} 缺省 Kubernetes 版本是 1.8.6。
+    1.  为了实现完整的功能兼容性，请下载与您计划使用的 Kubernetes 集群版本相匹配的 Kubernetes CLI 版本。当前 {{site.data.keyword.containershort_notm}} 缺省 Kubernetes 版本是 1.8.8。
 
-        OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
+        OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl)
 
-        Linux：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
+        Linux：[https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl)
 
-        Windows：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
+        Windows：[https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe)
 
           **提示：**如果使用的是 Windows，请将 Kubernetes CLI 安装在 {{site.data.keyword.Bluemix_notm}} CLI 所在的目录中。此安装将在您以后运行命令时减少一些文件路径更改操作。
 
@@ -146,6 +146,7 @@ lastupdated: "2017-01-29"
 {: #cs_cluster_tutorial_lesson2}
 
 在 {{site.data.keyword.registryshort_notm}} 中设置专用映像存储库，并向集群添加私钥，以便应用程序可以访问 {{site.data.keyword.toneanalyzershort}} 服务。
+{: shortdesc}
 
 1.  收到提示时，使用 {{site.data.keyword.Bluemix_notm}} 凭证登录到 {{site.data.keyword.Bluemix_notm}} CLI。
 
@@ -175,15 +176,18 @@ lastupdated: "2017-01-29"
     工作程序节点供应完成时，状态会更改为 **Ready**，这时可以开始绑定 {{site.data.keyword.Bluemix_notm}} 服务。
 
     ```
-    ID                                                 Public IP       Private IP       Machine Type   State    Status
-    kube-par02-pafe24f557f070463caf9e31ecf2d96625-w1   169.48.131.37   10.177.161.132   free           normal    Ready
+    ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.48.131.37   10.177.161.132   free           normal   Ready    mil01      1.8.8
     ```
     {: screen}
 
 ## 第 3 课：设置集群环境
 {: #cs_cluster_tutorial_lesson3}
 
-在 CLI 中设置集群的上下文。每次登录到容器 CLI 来使用集群时，必须运行这些命令以将集群配置文件的路径设置为会话变量。Kubernetes CLI 使用此变量来查找与 {{site.data.keyword.Bluemix_notm}} 中的集群连接所必需的本地配置文件和证书。
+在 CLI 中设置集群的上下文。
+{: shortdesc}
+
+每次登录到容器 CLI 来使用集群时，必须运行这些命令以将集群配置文件的路径设置为会话变量。Kubernetes CLI 使用此变量来查找与 {{site.data.keyword.Bluemix_notm}} 中的集群连接所必需的本地配置文件和证书。
 
 1.  获取命令以设置环境变量并下载 Kubernetes 配置文件。
 
@@ -229,8 +233,8 @@ lastupdated: "2017-01-29"
     输出示例：
 
     ```
-    Client Version: v1.8.6
-    Server Version: v1.8.6
+    Client Version: v1.8.8
+    Server Version: v1.8.8
     ```
     {: screen}
 

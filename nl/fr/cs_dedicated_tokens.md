@@ -19,7 +19,7 @@ lastupdated: "2017-11-02"
 # Création d'un jeton {{site.data.keyword.registryshort_notm}} pour un registre d'images {{site.data.keyword.Bluemix_dedicated_notm}}
 {: #cs_dedicated_tokens}
 
-Créez un jeton sans date d'expiration pour utiliser un registre d'images que vous utilisez pour des groupes de conteneurs uniques et évolutifs avec des clusters.
+Créez un jeton sans date d'expiration pour un registre d'images que vous utilisez pour des groupes de conteneurs uniques et évolutifs avec des clusters dans {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
 1.  Connectez-vous à l'environnement {{site.data.keyword.Bluemix_dedicated_notm}}.

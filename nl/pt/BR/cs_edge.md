@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-07"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -18,15 +18,19 @@ lastupdated: "2018-02-07"
 # Restringindo o tráfego de rede para os nós do trabalhador de borda
 {: #edge}
 
-Os nós do trabalhador de borda podem melhorar a segurança de seu cluster, permitindo que menos nós do trabalhador sejam acessados externamente e isolando a carga de trabalho de rede. Quando esses nós do trabalhador são marcados somente para rede, outras cargas de trabalho não podem consumir a CPU ou memória do nó do trabalhador e interferir na rede.
+Os nós do trabalhador de borda podem melhorar a segurança de seu cluster do Kubernetes, permitindo que menos nós do trabalhador sejam acessados externamente e isolando a carga de trabalho de rede no {{site.data.keyword.containerlong}}.
 {:shortdesc}
+
+Quando esses nós do trabalhador são marcados somente para rede, outras cargas de trabalho não podem consumir a CPU ou memória do nó do trabalhador e interferir na rede.
+
 
 
 
 ## Rotular nós do trabalhador como nós da borda
 {: #edge_nodes}
 
-Inclua o rótulo `dedicated=edge` em dois ou mais nós do trabalhador em seu cluster para assegurar que o Ingresso e os balanceadores de carga sejam implementados somente nesses nós do trabalhador.
+Inclua o rótulo `dedicated=edge` em dois ou mais nós do trabalhador em cada VLAN pública em seu cluster para assegurar que o Ingresso e os balanceadores de carga sejam implementados somente nesses nós do trabalhador.
+{:shortdesc}
 
 Antes de iniciar:
 
@@ -36,7 +40,7 @@ Antes de iniciar:
 
 Etapas:
 
-1. Liste todos os nós do trabalhador no cluster. Use o endereço IP privado da coluna **NAME** para identificar os nós. Selecione pelo menos dois nós do trabalhador para serem os nós do trabalhador de borda. Usar dois ou mais nós do trabalhador melhora a disponibilidade dos recursos de rede.
+1. Liste todos os nós do trabalhador no cluster. Use o endereço IP privado da coluna **NAME** para identificar os nós. Selecione pelo menos dois nós do trabalhador em cada VLAN pública para serem os nós do trabalhador de borda. Usar dois ou mais nós do trabalhador melhora a disponibilidade dos recursos de rede.
 
   ```
   kubectl get nodes -L publicVLAN,privateVLAN,dedicated
@@ -81,8 +85,11 @@ Você rotulou os nós do trabalhador com `dedicated=edge` e reimplementou todos 
 ## Evitar que cargas de trabalho sejam executadas em nós do trabalhador de borda
 {: #edge_workloads}
 
-Um benefício de nós do trabalhador de borda é que eles podem ser especificados para executar somente serviços de rede. Usar a tolerância `dedicated=edge` significa que todos os serviços de balanceador de carga e de Ingresso são implementados somente nos nós do trabalhador rotulados. No entanto, para evitar que outras cargas de trabalho sejam executadas em nós do trabalhador de borda e consumam recursos do nó do trabalhador, deve-se usar [contaminações do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
-{:shortdesc}
+Um benefício de nós do trabalhador de borda é que eles podem ser especificados para executar somente serviços de rede.
+{:shortdesc} 
+
+Usar a tolerância `dedicated=edge` significa que todos os serviços de balanceador de carga e de Ingresso são implementados somente nos nós do trabalhador rotulados. No entanto, para evitar que outras cargas de trabalho sejam executadas em nós do trabalhador de borda e consumam recursos do nó do trabalhador, deve-se usar [contaminações do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
+
 
 1. Liste todos os nós do trabalhador com o rótulo `edge`.
 

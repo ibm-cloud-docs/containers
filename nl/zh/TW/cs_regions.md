@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-03-13"
 
 ---
 
@@ -17,13 +17,14 @@ lastupdated: "2018-01-24"
 
 # 地區及位置
 {{site.data.keyword.Bluemix}} 是在全球各地管理。地區是端點所存取的地理區域。位置是地區內的資料中心。{{site.data.keyword.Bluemix_notm}} 內的服務可能在全球提供，或在特定地區內提供。
+當您在 {{site.data.keyword.containerlong}} 中建立 Kubernetes 叢集時，其資源會保留在您已部署叢集的地區。
 {:shortdesc}
 
 [{{site.data.keyword.Bluemix_notm}} 地區](#bluemix_regions)與 [{{site.data.keyword.containershort_notm}} 地區](#container_regions)不同。
 
-![{{site.data.keyword.containershort_notm}} 地區與資料中心](images/regions.png)
+![{{site.data.keyword.containershort_notm}} 地區與資料中心](/images/regions.png)
 
-圖 1. {{site.data.keyword.containershort_notm}} 地區與資料中心
+圖. {{site.data.keyword.containershort_notm}} 地區與資料中心
 
 支援的 {{site.data.keyword.containershort_notm}} 地區：
   * 亞太地區北部
@@ -32,7 +33,6 @@ lastupdated: "2018-01-24"
   * 英國南部
   * 美國東部
   * 美國南部
-
 
 
 
@@ -93,6 +93,9 @@ lastupdated: "2018-01-24"
 ### 登入不同的容器服務地區
 {: #container_login_endpoints}
 
+您可以使用 {{site.data.keyword.containershort_notm}} CLI 來變更位置。
+{:shortdesc}
+
 您可能因為下列原因而想要登入另一個 {{site.data.keyword.containershort_notm}} 地區：
   * 您已在其中一個地區中建立 {{site.data.keyword.Bluemix_notm}} 服務或專用 Docker 映像檔，並且想要在另一個地區中將它們與 {{site.data.keyword.containershort_notm}} 搭配使用。
   * 您要在與您登入的預設 {{site.data.keyword.Bluemix_notm}} 地區不同的地區中存取叢集。
@@ -101,26 +104,11 @@ lastupdated: "2018-01-24"
 
 若要快速切換地區，請執行 `bx cs region-set`。
 
-### 容器服務可用的位置
-{: #locations}
-
-位置是地區內可用的資料中心。
-
-  | 地區| 位置| 城市|
-  |--------|----------|------|
-  | 亞太地區北部| hkg02、seo01、sng01、tok02 | 香港、首爾、新加坡、東京|
-  | 亞太地區南部| mel01、syd01、syd04| 墨爾本、雪梨|
-  | 歐盟中部| ams03、fra02、mil01、par01| 阿姆斯特丹、法蘭克福、米蘭、巴黎|
-  | 英國南部| lon02、lon04| 倫敦|
-  | 美國東部| mon01、tor01、wdc06、wdc07| 蒙特利爾、多倫多、華盛頓特區|
-  | 美國南部| dal10、dal12、dal13、sao01| 達拉斯、聖保羅|
-
-**附註**：米蘭 (mil01) 僅適用於免費叢集。
-
 ### 使用容器服務 API 指令
-{: #container_api}
+{: #containers_api}
 
 若要與 {{site.data.keyword.containershort_notm}} API 互動，請輸入指令類型，並在廣域端點附加 `/v1/command`。
+{:shortdesc}
 
 `GET /clusters` API 的範例：
   ```
@@ -134,3 +122,30 @@ lastupdated: "2018-01-24"
 {: tip}
 
 若要檢視 API 指令的文件，請檢視 [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/)。
+
+## {{site.data.keyword.containershort_notm}} 可用的位置
+{: #locations}
+
+位置是指 {{site.data.keyword.Bluemix_notm}} 地區內可用的實體資料中心。地區是組織位置的概念工具，可包括不同國家/地區中的位置（資料中心）。下表依地區顯示可用的位置。
+{:shortdesc}
+
+| 地區| 位置| 城市|
+|--------|----------|------|
+| 亞太地區北部| hkg02、seo01、sng01、tok02 | 香港、首爾、新加坡、東京|
+| 亞太地區南部| mel01、syd01、syd04| 墨爾本、雪梨|
+| 歐盟中部| ams03、fra02、par01        | 阿姆斯特丹、法蘭克福、巴黎|
+| 英國南部| lon02、lon04| 倫敦|
+| 美國東部| mon01、tor01、wdc06、wdc07| 蒙特利爾、多倫多、華盛頓特區|
+| 美國南部| dal10、dal12、dal13、sao01| 達拉斯、聖保羅|
+
+叢集的資源會保留在已部署叢集的位置（資料中心）。下列影像強調顯示叢集在美國東部地區範例內的關係：
+
+1.  叢集的資源（包括主節點及工作者節點）位於您已部署叢集的相同位置。當您起始本端容器編排動作（例如，`kubectl` 指令）時，會在相同位置內的主節點與工作者節點之間交換資訊。
+
+2.  如果您設定了其他叢集資源（例如，儲存空間、網路、運算或在 Pod 執行的應用程式），則資源及其資料會保留在您已部署叢集的位置。
+
+3.  當您起始叢集管理動作（例如，使用 `bx cs` 指令）時，會將有關叢集的基本資訊（例如，名稱、ID、使用者、指令）遞送至地區端點。
+
+![瞭解叢集資源所在的位置](/images/region-cluster-resources.png)
+
+圖. 瞭解叢集資源所在的位置。

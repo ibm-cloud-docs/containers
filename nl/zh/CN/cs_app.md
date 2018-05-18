@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-02-28"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-01-24"
 # 在集群中部署应用程序
 {: #app}
 
-您可以使用 Kubernetes 方法来部署应用程序，并确保应用程序始终正常运行。例如，可以执行滚动更新以及回滚，而不给用户造成任何停机时间。
+您可以在 {{site.data.keyword.containerlong}} 中使用 Kubernetes 方法来部署容器中的应用程序，并确保这些应用程序始终保持启动并正常运行。例如，可以执行滚动更新以及回滚，而不给用户造成任何停机时间。
 {:shortdesc}
 
 通过单击下图中的某个区域可了解用于部署应用程序的常规步骤。
@@ -40,10 +40,10 @@ lastupdated: "2018-01-24"
 {: #highly_available_apps}
 
 设置在多个工作程序节点和集群上分发得越广泛，用户使用应用程序时遭遇停机时间的可能性就越低。
-
+{:shortdesc}
 
 查看以下潜在的应用程序设置（按可用性程度从低到高排序）。
-{:shortdesc}
+
 
 ![应用程序的高可用性阶段](images/cs_app_ha_roadmap.png)
 
@@ -52,7 +52,7 @@ lastupdated: "2018-01-24"
 3.  部署具有 n+2 个 pod，这些 pod 由副本集管理并跨不同位置的多个节点分布（反亲缘关系）。
 4.  部署具有 n+2 个 pod，这些 pod 由副本集管理并跨不同区域的多个节点分布（反亲缘关系）。
 
-了解有关用于提高应用程序可用性的方法的更多信息：
+### 提高应用程序的可用性
 
 <dl>
 <dt>使用部署和副本集来部署应用程序及其依赖项</dt>
@@ -70,7 +70,7 @@ lastupdated: "2018-01-24"
 <strong>注</strong>：以下 YAML 文件强制将每个 pod 部署到不同的工作程序节点。如果定义的副本数超过集群中可用的工作程序节点数，仅会部署可以满足反亲缘关系需求的副本数。任何其他副本都将保持暂挂状态，直到向集群添加了更多工作程序节点为止。
 
 <pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+<code>apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
 name: wasliberty
@@ -131,7 +131,7 @@ spec:
 
 要部署图中所示的最简应用程序的组件，请使用类似于以下示例的配置文件：
 ```
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: ibmliberty
@@ -336,7 +336,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 ## 使用 GUI 部署应用程序
 {: #app_ui}
 
-使用 Kubernetes 仪表板将应用程序部署到集群时，会自动创建用于在集群中创建、更新和管理 pod 的部署资源。
+使用 Kubernetes 仪表板将应用程序部署到集群时，部署资源会在集群中自动创建、更新和管理 pod。
 {:shortdesc}
 
 开始之前：
@@ -348,7 +348,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 
 1.  [打开 Kubernetes 仪表板](#cli_dashboard)。
 2.  在 Kubernetes 仪表板中，单击 **+ 创建**。
-3.  选择**在下面指定应用程序详细信息**以在 GUI 上输入应用程序详细信息，或者选择**上传 YAML 或 JSON 文件**以上传应用程序[配置文件 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/)。使用[此示例 YAML 文件 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/IBM-Bluemix/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml) 通过美国南部区域的 **ibmliberty** 映像部署容器。
+3.  选择**在下面指定应用程序详细信息**以在 GUI 上输入应用程序详细信息，或者选择**上传 YAML 或 JSON 文件**以上传应用程序[配置文件 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/)。使用[此示例 YAML 文件 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml) 通过美国南部区域的 **ibmliberty** 映像部署容器。
 4.  在 Kubernetes 仪表板中，单击**部署**以验证部署是否已创建。
 5.  如果使用 NodePort 服务、LoadBalancer 服务或 Ingress 使应用程序公共可用，请验证您是否可以访问该应用程序。
 
@@ -394,14 +394,15 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 ## 扩展应用程序
 {: #app_scaling}
 
-部署能够响应应用程序需求变化以及仅在需要时使用资源的云应用程序。自动扩展会根据 CPU 来自动增加或减少应用程序的实例数。
+使用 Kubernetes，可以启用[水平 pod 自动扩展 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)，以根据 CPU 来自动增加或减少应用程序的实例数。
 {:shortdesc}
 
-开始之前，请[设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群。
+需要有关扩展 Cloud Foundry 应用程序的信息？请查看 [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html)。
+{: tip}
 
-**注：**是否需要有关扩展 Cloud Foundry 应用程序的信息？请查看 [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html)。
-
-使用 Kubernetes，可以启用[水平 pod 自动扩展 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale) 以基于 CPU 扩展应用程序。
+开始之前：
+- [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群。
+- 必须在要自动扩展的集群中部署 heapster 监视。
 
 1.  通过 CLI 将应用程序部署到集群。部署应用程序时，必须请求 CPU。
 
@@ -433,8 +434,10 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
     <td>应用程序对外部可用的端口。</td>
     </tr></tbody></table>
 
-    **注：**对于更复杂的部署，有关更复杂的部署，可能需要创建[配置文件](#app_cli)。
-2.  创建 Horizontal Pod Autoscaler，然后定义策略。有关使用 `kubectl autoscale` 命令的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale)。
+    对于更复杂的部署，您可能需要创建[配置文件](#app_cli)。
+    {: tip}
+
+2.  创建自动扩展程序并定义策略。有关使用 `kubetcl autoscale` 命令的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale)。
 
     ```
     kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
@@ -459,7 +462,6 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
     <td>用于保持指定 CPU 使用率百分比的最大部署 Pod 数。</td>
     </tr>
     </tbody></table>
-
 
 
 <br />

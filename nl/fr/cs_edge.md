@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-07"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -15,36 +15,39 @@ lastupdated: "2018-02-07"
 {:tip: .tip}
 {:download: .download}
 
-# Restriction du trafic réseau aux noeuds d'agent de périphérie
+# Restriction du trafic réseau aux noeuds worker de périphérie
 {: #edge}
 
-Les noeuds d'agent de périphérie peuvent améliorer la sécurité de votre cluster en limitant les accès aux noeuds d'agent depuis l'extérieur et en isolant la charge de travail du réseau. Lorsque ces noeuds d'agent sont marqués pour mise en réseau uniquement, les autres charges de travail ne peuvent pas consommer d'unité centrale ou de mémoire ni interférer avec le réseau.
-{:shortdesc}
+Les noeuds worker de périphérie peuvent améliorer la sécurité de votre cluster en limitant les accès aux noeuds worker depuis l'extérieur et en isolant la charge de travail du réseau dans {{site.data.keyword.containerlong}}. {:shortdesc}
+
+Lorsque ces noeuds worker sont marqués pour mise en réseau uniquement, les autres charges de travail ne peuvent pas consommer d'unité centrale ou de mémoire ni interférer avec le réseau.
 
 
 
-## Etiquettage de noeuds worker en tant que noeuds de périphérie
+
+## Etiquetage de noeuds worker en tant que noeuds de périphérie
 {: #edge_nodes}
 
-Ajoutez l'étiquette `dedicated=edge` à deux noeuds d'agent ou plus de votre cluster par garantir que Ingress et les équilibreurs de charge sont déployés uniquement sur ces noeuds d'agent.
+Ajoutez l'étiquette `dedicated=edge` à au moins deux noeuds worker sur chaque VLAN public de votre cluster par garantir qu'Ingress et les équilibreurs de charge sont déployés uniquement sur ces noeuds worker.
+{:shortdesc}
 
 Avant de commencer :
 
 - [Créez un cluster standard.
 ](cs_clusters.html#clusters_cli)
-- Vérifiez que votre cluster dispose d'au moins un VLAN public. Les noeuds d'agent de périphérie ne sont pas disponibles pour les clusters avec VLAN privés uniquement.
+- Vérifiez que votre cluster dispose d'au moins un VLAN public. Les noeuds worker de périphérie ne sont pas disponibles pour les clusters avec VLAN privés uniquement.
 - [Ciblez l'interface CLI de Kubernetes sur le cluster](cs_cli_install.html#cs_cli_configure).
 
 Etapes :
 
-1. Répertoriez tous les noeuds d'agent présents dans votre cluster. Utilisez l'adresse IP privée de la colonne **NAME** pour identifier les noeuds. Sélectionnez au moins deux noeuds d'agent comme noeuds d'agent de périphérie. L'utilisation d'au moins deux noeuds d'agent améliore la disponibilité des ressource de mise en réseau.
+1. Répertoriez tous les noeuds worker présents dans votre cluster. Utilisez l'adresse IP privée de la colonne **NAME** pour identifier les noeuds. Sélectionnez au moins deux noeuds worker sur chaque VLAN public comme noeuds worker de périphérie. L'utilisation d'au moins deux noeuds worker améliore la disponibilité des ressource de mise en réseau.
 
   ```
   kubectl get nodes -L publicVLAN,privateVLAN,dedicated
   ```
   {: pre}
 
-2. Etiquetez les noeuds d'agent `dedicated=edge`. Une fois qu'un noeud worker est marqué avec `dedicated=edge`, tous les équilibreurs de charge et Ingress suivants sont déployés sur un noeud worker de périphérie.
+2. Etiquetez les noeuds worker `dedicated=edge`. Une fois qu'un noeud worker est marqué avec `dedicated=edge`, tous les équilibreurs de charge et Ingress suivants sont déployés sur un noeud worker de périphérie.
 
   ```
   kubectl label nodes <node_name> <node_name2> dedicated=edge
@@ -74,28 +77,31 @@ Etapes :
   ```
   {: screen}
 
-Vous avez étiqueté des noeuds d'agent avec `dedicated=edge` et redéployé tous les équilibreurs de charge et Ingress existants sur les noeuds d'agent de périphérie. Ensuite, empêchez d'autres[charges de travail de s'exécuter sur des noeuds d'agent de périphérie](#edge_workloads) et [bloquez le trafic entrant vers des ports de noeud sur des noeuds d'agent](cs_network_policy.html#block_ingress).
+Vous avez étiqueté des noeuds worker avec `dedicated=edge` et redéployé tous les équilibreurs de charge et Ingress existants sur les noeuds worker de périphérie. Ensuite, empêchez d'autres[charges de travail de s'exécuter sur des noeuds worker de périphérie](#edge_workloads) et [bloquez le trafic entrant vers des ports de noeud sur des noeuds worker](cs_network_policy.html#block_ingress).
 
 <br />
 
 
-## Empêcher l'exécution de charges de travail sur des noeuds d'agent de périphérie
+## Empêcher l'exécution de charges de travail sur des noeuds worker de périphérie
 {: #edge_workloads}
 
-L'un des avantages de noeuds worker de périphérie est qu'ils peuvent être définis pour n'exécuter que des services de mise en réseau. La tolérance `dedicated=edge` implique que tous les services d'équilibreur de charge et Ingress sont déployés uniquement sur les noeuds d'agent étiquetés. Toutefois, pour empêcher d'autres charges de travail de s'exécuter sur des noeuds d'agent de périphérie et de consommer des ressources de noeud worker, vous devez utiliser une [annotation Kubernetes taints![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
-{:shortdesc}
+L'un des avantages de noeuds worker de périphérie est qu'ils peuvent être définis pour n'exécuter que des services de mise en réseau.
+{:shortdesc} 
 
-1. Répertoriez tous les noeuds d'agent étiquetés `edge`.
+La tolérance `dedicated=edge` implique que tous les services d'équilibreur de charge et Ingress sont déployés uniquement sur les noeuds worker étiquetés. Toutefois, pour empêcher d'autres charges de travail de s'exécuter sur des noeuds worker de périphérie et de consommer des ressources de noeud worker, vous devez utiliser une [annotation Kubernetes taints![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
+
+
+1. Répertoriez tous les noeuds worker étiquetés `edge`.
 
   ```
   kubectl get nodes -L publicVLAN,privateVLAN,dedicated -l dedicated=edge
   ```
   {: pre}
 
-2. Appliquez à chaque noeud worker une annotation taint qui empêche l'exécution des pods sur le noeud worker et qui supprime du noeud worker ceux qui n'ont pas l'étiquette `edge`. Les pods supprimés sont redéployés sur d'autres noeuds d'agent dont la capacité le permet.
+2. Appliquez à chaque noeud worker une annotation taint qui empêche l'exécution des pods sur le noeud worker et qui supprime du noeud worker ceux qui n'ont pas l'étiquette `edge`. Les pods supprimés sont redéployés sur d'autres noeuds worker dont la capacité le permet.
 
   ```
   kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute
   ```
 
-Maintenant, seuls les pods ayant la tolérance `dedicated=edge` sont déployés sur vos noeuds d'agent de périphérie.
+Maintenant, seuls les pods ayant la tolérance `dedicated=edge` sont déployés sur vos noeuds worker de périphérie.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-29"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-01-29"
 # 设置 CLI 和 API
 {: #cs_cli_install}
 
-可以使用 {{site.data.keyword.containershort_notm}} CLI 或 API 来创建和管理 Kubernetes 集群。
+可以使用 {{site.data.keyword.containerlong}} CLI 或 API 来创建和管理 Kubernetes 集群。
 {:shortdesc}
 
 <br />
@@ -35,7 +35,7 @@ lastupdated: "2018-01-29"
 
 -   {{site.data.keyword.Bluemix_notm}} CLI V0.5.0 或更高版本
 -   {{site.data.keyword.containershort_notm}} 插件
--   Kubernetes CLI V1.8.6 或更高版本
+-   Kubernetes CLI V1.8.8 或更高版本
 -   可选：{{site.data.keyword.registryshort_notm}} 插件
 -   可选：Docker V1.9 或更高版本
 
@@ -71,19 +71,16 @@ lastupdated: "2018-01-29"
 
     {{site.data.keyword.containershort_notm}} 插件会在结果中显示为 container-service。
 
-4.  要查看 Kubernetes 仪表板的本地版本以及将应用程序部署到集群，请[安装 Kubernetes CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。用于通过 Kubernetes CLI 来运行命令的前缀是 `kubectl`。
+4.  {: #kubectl}要查看 Kubernetes 仪表板的本地版本以及将应用程序部署到集群，请[安装 Kubernetes CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。用于通过 Kubernetes CLI 来运行命令的前缀是 `kubectl`。
 
-    1.  为了实现完整的功能兼容性，请下载与您计划使用的 Kubernetes 集群版本相匹配的 Kubernetes CLI 版本。当前 {{site.data.keyword.containershort_notm}} 缺省 Kubernetes 版本是 1.8.6。
+    1.  下载与您计划使用的 Kubernetes 集群 `major.minor` 版本相匹配的 Kubernetes CLI `major.minor` 版本。当前 {{site.data.keyword.containershort_notm}} 缺省 Kubernetes 版本是 1.8.8。**注**：如果您使用的 `kubectl` CLI 版本至少与集群的 `major.minor` 版本相匹配，那么可能会遇到意外的结果。请确保使 Kubernetes 集群和 CLI 版本保持最新。
 
-        OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
 
-        Linux：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
+        - **OS X**：[https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl)
+        - **Linux**：[https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl)
+        - **Windows**：[https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe)
 
-        Windows：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
-
-        **提示：**如果使用的是 Windows，请将 Kubernetes CLI 安装在 {{site.data.keyword.Bluemix_notm}} CLI 所在的目录中。此安装将在您以后运行命令时减少一些文件路径更改操作。
-
-    2.  对于 OSX 和 Linux 用户，请完成以下步骤。
+    2.  **对于 OSX 和 Linux**：完成以下步骤。
         1.  将可执行文件移至 `/usr/local/bin` 目录。
 
             ```
@@ -111,6 +108,8 @@ lastupdated: "2018-01-29"
             chmod +x /usr/local/bin/kubectl
             ```
             {: pre}
+
+    3.  **对于 Windows：**将 Kubernetes CLI 安装在 {{site.data.keyword.Bluemix_notm}} CLI 所在的目录中。此安装将在您以后运行命令时减少一些文件路径更改操作。
 
 5.  要管理专用映像存储库，请安装 {{site.data.keyword.registryshort_notm}} 插件。使用此插件可在 IBM 托管的具备高可用性和高可扩展性的多租户专用映像注册表中设置自己的名称空间，存储 Docker 映像并与其他用户共享这些映像。要将容器部署到集群中，Docker 映像是必需的。用于运行注册表命令的前缀是 `bx cr`。
 
@@ -145,9 +144,12 @@ lastupdated: "2018-01-29"
 ## 将 CLI 配置为运行 `kubectl`
 {: #cs_cli_configure}
 
-您可以使用 Kubernetes CLI 随附的命令，在 {{site.data.keyword.Bluemix_notm}} 中管理集群。支持 Kubernetes 1.8.6 中可用的所有 `kubectl` 命令用于 {{site.data.keyword.Bluemix_notm}} 中的集群。创建集群后，使用环境变量，将本地 CLI 的上下文设置到该集群。
-然后，您可以运行 Kubernetes `kubectl` 命令，以在 {{site.data.keyword.Bluemix_notm}} 中使用集群。
+您可以使用 Kubernetes CLI 随附的命令，在 {{site.data.keyword.Bluemix_notm}} 中管理集群。
 {:shortdesc}
+
+支持 Kubernetes 1.8.8 中可用的所有 `kubectl` 命令用于 {{site.data.keyword.Bluemix_notm}} 中的集群。创建集群后，使用环境变量，将本地 CLI 的上下文设置到该集群。
+然后，您可以运行 Kubernetes `kubectl` 命令，以在 {{site.data.keyword.Bluemix_notm}} 中使用集群。
+
 
 [安装必需的 CLI](#cs_cli_install) 并[创建集群](cs_clusters.html#clusters_cli)后，才能运行 `kubectl` 命令。
 
@@ -214,8 +216,8 @@ lastupdated: "2018-01-29"
       输出示例：
 
       ```
-      Client Version: v1.8.6
-      Server Version: v1.8.6
+      Client Version: v1.8.8
+      Server Version: v1.8.8
       ```
       {: screen}
 
@@ -237,7 +239,7 @@ lastupdated: "2018-01-29"
 
 -   {{site.data.keyword.Bluemix_notm}} CLI V0.5.0 或更高版本
 -   {{site.data.keyword.containershort_notm}} 插件
--   Kubernetes CLI V1.8.6 或更高版本
+-   Kubernetes CLI V1.8.8 或更高版本
 -   {{site.data.keyword.registryshort_notm}} 插件
 -   Docker V1.9 或更高版本
 
@@ -280,45 +282,7 @@ lastupdated: "2018-01-29"
         ```
         {: pre}
 
-4.  更新 Kubernetes CLI。
-    1.  更新与您计划使用的 Kubernetes 集群版本相匹配的 Kubernetes CLI 版本。当前 {{site.data.keyword.containershort_notm}} 缺省 Kubernetes 版本是 1.8.6。
-
-        OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
-
-        Linux：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
-
-        Windows：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
-
-        **提示：**如果使用的是 Windows，请将 Kubernetes CLI 安装在 {{site.data.keyword.Bluemix_notm}} CLI 所在的目录中。此安装将在您以后运行命令时减少一些文件路径更改操作。
-
-    2.  对于 OSX 和 Linux 用户，请完成以下步骤。
-        1.  将可执行文件移至 `/usr/local/bin` 目录。
-
-            ```
-            mv /<path_to_file>/kubectl /usr/local/bin/kubectl
-            ```
-            {: pre}
-
-        2.  确保 `/usr/local/bin` 列在 `PATH` 系统变量中。`PATH` 变量包含操作系统可以在其中找到可执行文件的所有目录。列在 `PATH` 变量中的目录用于不同的用途。`/usr/local/bin` 用于为不属于操作系统的一部分，而是由系统管理员手动安装的软件存储其可执行文件。
-
-            ```
-            echo $PATH
-            ```
-            {: pre}
-
-            示例 CLI 输出：
-
-            ```
-            /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-            ```
-            {: screen}
-
-        3.  使文件可执行。
-
-            ```
-            chmod +x /usr/local/bin/kubectl
-            ```
-            {: pre}
+4.  [更新 Kubernetes CLI](#kubectl)。
 
 5.  更新 {{site.data.keyword.registryshort_notm}} 插件。
     1.  通过 {{site.data.keyword.Bluemix_notm}} 插件存储库安装更新。
@@ -354,7 +318,7 @@ lastupdated: "2018-01-29"
 
 
 -   {{site.data.keyword.containershort_notm}} 插件
--   Kubernetes CLI V1.8.6 或更高版本
+-   Kubernetes CLI V1.8.8 或更高版本
 -   {{site.data.keyword.registryshort_notm}} 插件
 -   Docker V1.9 或更高版本
 
@@ -460,7 +424,7 @@ lastupdated: "2018-01-29"
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 用户名和密码的主体</td>
     <td><ul><li>grant_type: password</li>
-    <li>response_type: cloud_iam, uaa</li>
+    <li>response_type: cloud_iam uaa</li>
     <li>username: <em>&lt;my_username&gt;</em></li>
     <li>password: <em>&lt;my_password&gt;</em></li>
     <li>uaa_client_id: cf</li>
@@ -582,7 +546,7 @@ lastupdated: "2018-01-29"
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} 用户名和密码的主体</td>
     <td><ul><li>grant_type: password</li>
-    <li>response_type: cloud_iam, uaa</li>
+    <li>response_type: cloud_iam uaa</li>
     <li>username: <em>&lt;my_username&gt;</em></li>
     <li>password: <em>&lt;my_password&gt;</em></li>
     <li>uaa_client_id: cf</li>
@@ -689,7 +653,7 @@ lastupdated: "2018-01-29"
     <tr>
     <td>主体</td>
     <td><ul><li>grant_type: refresh_token</li>
-    <li>response_type: cloud_iam, uaa</li>
+    <li>response_type: cloud_iam uaa</li>
     <li>refresh_token: <em>&lt;iam_refresh_token&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret: </li>

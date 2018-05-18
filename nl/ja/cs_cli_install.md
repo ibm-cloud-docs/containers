@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-29"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-01-29"
 # CLI と API のセットアップ
 {: #cs_cli_install}
 
-{{site.data.keyword.containershort_notm}} CLI または API を使用して、Kubernetes クラスターを作成して管理できます。
+{{site.data.keyword.containerlong}} CLI または API を使用して、Kubernetes クラスターを作成して管理できます。
 {:shortdesc}
 
 <br />
@@ -35,7 +35,7 @@ lastupdated: "2018-01-29"
 
 -   {{site.data.keyword.Bluemix_notm}} CLI バージョン 0.5.0 以降
 -   {{site.data.keyword.containershort_notm}} プラグイン
--   Kubernetes CLI バージョン 1.8.6 以降
+-   Kubernetes CLI バージョン 1.8.8 以降
 -   オプション: {{site.data.keyword.registryshort_notm}} プラグイン
 -   オプション: Docker バージョン 1.9 以降
 
@@ -69,19 +69,15 @@ CLI をインストールするには、以下のことを行います。
 
     {{site.data.keyword.containershort_notm}} プラグインは container-service として結果に表示されます。
 
-4.  Kubernetes ダッシュボードのローカル・バージョンを表示して、アプリをクラスター内にデプロイするには、[Kubernetes CLI をインストールします![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。 Kubernetes CLI を使用してコマンドを実行するための接頭部は、`kubectl` です。
+4.  {: #kubectl}Kubernetes ダッシュボードのローカル・バージョンを表示して、アプリをクラスター内にデプロイするには、[Kubernetes CLI をインストールします![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。 Kubernetes CLI を使用してコマンドを実行するための接頭部は、`kubectl` です。
 
-    1.  機能の完全な互換性を確保するには、使用する予定の Kubernetes クラスター・バージョンと一致する Kubernetes CLI バージョンをダウンロードします。 現在の {{site.data.keyword.containershort_notm}} のデフォルト Kubernetes バージョンは 1.8.6 です。
+    1.  使用する予定の Kubernetes クラスターの `major.minor` バージョンと一致する Kubernetes CLI の `major.minor` バージョンをダウンロードします。現在の {{site.data.keyword.containershort_notm}} のデフォルト Kubernetes バージョンは 1.8.8 です。 **注**: 少なくともクラスターの `major.minor` バージョンと一致する `kubectl` CLI バージョンを使用しないと、予期しない結果になる可能性があります。Kubernetes クラスターと CLI のバージョンを最新の状態に保つようにしてください。
 
-        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
+        - **OS X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl)
+        - **Linux**:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl)
+        - **Windows**:    [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe)
 
-        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
-
-        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
-
-        **ヒント:** Windows を使用している場合、Kubernetes CLI を {{site.data.keyword.Bluemix_notm}} CLI と同じディレクトリーにインストールします。 このようにセットアップすると、後でコマンドを実行するとき、ファイル・パスの変更を行う手間がいくらか少なくなります。
-
-    2.  OSX と Linux のユーザーは、以下の手順を実行してください。
+    2.  **OSX および Linux の場合**: 以下の手順を実行します。
         1.  実行可能ファイルを `/usr/local/bin` ディレクトリーに移動します。
 
             ```
@@ -109,6 +105,8 @@ CLI をインストールするには、以下のことを行います。
             chmod +x /usr/local/bin/kubectl
             ```
             {: pre}
+
+    3.  **Windows の場合**: Kubernetes CLI を {{site.data.keyword.Bluemix_notm}} CLI と同じディレクトリーにインストールします。このようにセットアップすると、後でコマンドを実行するとき、ファイル・パスの変更を行う手間がいくらか少なくなります。
 
 5.  プライベート・イメージ・リポジトリーを管理するには、{{site.data.keyword.registryshort_notm}} プラグインをインストールします。 このプラグインを使用して、IBM がホストするマルチテナントで可用性が高く拡張可能なプライベート・イメージ・レジストリー内に独自の名前空間をセットアップし、Docker イメージを保管して他のユーザーと共有します。 クラスターにコンテナーをデプロイするためには、Docker イメージが必要です。 レジストリー・コマンドを実行するための接頭部は、`bx cr` です。
 
@@ -143,8 +141,10 @@ CLI をインストールするには、以下のことを行います。
 ## `kubectl` を実行するように CLI を構成する
 {: #cs_cli_configure}
 
-Kubernetes CLI に用意されているコマンドを使用して、{{site.data.keyword.Bluemix_notm}} のクラスターを管理することができます。 Kubernetes 1.8.6 内で使用できるすべての `kubectl` コマンドは、{{site.data.keyword.Bluemix_notm}} 内のクラスターに対して使用することができます。 クラスターを作成したら、環境変数を使用してローカル CLI のコンテキストをそのクラスターに設定します。 その後、Kubernetes のさまざまな `kubectl` コマンドを実行して、{{site.data.keyword.Bluemix_notm}} のクラスターを操作することができます。
+Kubernetes CLI に用意されているコマンドを使用して、{{site.data.keyword.Bluemix_notm}} のクラスターを管理することができます。
 {:shortdesc}
+
+Kubernetes 1.8.8 内で使用できるすべての `kubectl` コマンドは、{{site.data.keyword.Bluemix_notm}} 内のクラスターに対して使用することができます。 クラスターを作成したら、環境変数を使用してローカル CLI のコンテキストをそのクラスターに設定します。 その後、Kubernetes のさまざまな `kubectl` コマンドを実行して、{{site.data.keyword.Bluemix_notm}} のクラスターを操作することができます。
 
 `kubectl` コマンドを実行する前に、[必要な CLI をインストール](#cs_cli_install)して、[クラスターを作成](cs_clusters.html#clusters_cli)します。
 
@@ -211,8 +211,8 @@ Kubernetes CLI に用意されているコマンドを使用して、{{site.data
       出力例:
 
       ```
-      Client Version: v1.8.6
-      Server Version: v1.8.6
+      Client Version: v1.8.8
+    Server Version: v1.8.8
       ```
       {: screen}
 
@@ -234,7 +234,7 @@ Kubernetes CLI に用意されているコマンドを使用して、{{site.data
 
 -   {{site.data.keyword.Bluemix_notm}} CLI バージョン 0.5.0 以降
 -   {{site.data.keyword.containershort_notm}} プラグイン
--   Kubernetes CLI バージョン 1.8.6 以降
+-   Kubernetes CLI バージョン 1.8.8 以降
 -   {{site.data.keyword.registryshort_notm}} プラグイン
 -   Docker バージョン 1.9. 以降
 
@@ -276,45 +276,7 @@ CLI を更新するには、以下のようにします。
         ```
         {: pre}
 
-4.  Kubernetes CLI を更新します。
-    1.  使用する予定の Kubernetes クラスター・バージョンと一致する Kubernetes CLI バージョンに更新します。 現在の {{site.data.keyword.containershort_notm}} のデフォルト Kubernetes バージョンは 1.8.6 です。
-
-        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
-
-        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
-
-        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
-
-        **ヒント:** Windows を使用している場合、Kubernetes CLI を {{site.data.keyword.Bluemix_notm}} CLI と同じディレクトリーにインストールします。 このようにセットアップすると、後でコマンドを実行するとき、ファイル・パスの変更を行う手間がいくらか少なくなります。
-
-    2.  OSX と Linux のユーザーは、以下の手順を実行してください。
-        1.  実行可能ファイルを `/usr/local/bin` ディレクトリーに移動します。
-
-            ```
-            mv /<path_to_file>/kubectl /usr/local/bin/kubectl
-            ```
-            {: pre}
-
-        2.  `/usr/local/bin` が `PATH` システム変数にリストされていることを確認します。 `PATH` 変数には、オペレーティング・システムが実行可能ファイルを見つけることのできるすべてのディレクトリーが含まれています。 `PATH` 変数にリストされた複数のディレクトリーには、それぞれ異なる目的があります。 `/usr/local/bin` は実行可能ファイルを保管するために使用されますが、保管対象となるのは、オペレーティング・システムの一部ではなく、システム管理者によって手動でインストールされたソフトウェアです。
-
-            ```
-            echo $PATH
-            ```
-            {: pre}
-
-            CLI 出力例:
-
-            ```
-            /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-            ```
-            {: screen}
-
-        3.  ファイルを実行可能にします。
-
-            ```
-            chmod +x /usr/local/bin/kubectl
-            ```
-            {: pre}
+4.  [Kubernetes CLI を更新します](#kubectl)。
 
 5.  {{site.data.keyword.registryshort_notm}} プラグインを更新します。
     1.  {{site.data.keyword.Bluemix_notm}} プラグイン・リポジトリーからアップデートをインストールします。
@@ -350,7 +312,7 @@ CLI を更新するには、以下のようにします。
 
 
 -   {{site.data.keyword.containershort_notm}} プラグイン
--   Kubernetes CLI バージョン 1.8.6 以降
+-   Kubernetes CLI バージョン 1.8.8 以降
 -   {{site.data.keyword.registryshort_notm}} プラグイン
 -   Docker バージョン 1.9. 以降
 
@@ -453,7 +415,7 @@ CLI をアンインストールするには、以下のようにします。
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} ユーザー名とパスワードの本文</td>
     <td><ul><li>grant_type: password</li>
-    <li>response_type: cloud_iam、uaa</li>
+    <li>response_type: cloud_iam uaa</li>
     <li>username: <em>&lt;my_username&gt;</em></li>
     <li>password: <em>&lt;my_password&gt;</em></li>
     <li>uaa_client_id: cf</li>
@@ -574,7 +536,7 @@ CLI をアンインストールするには、以下のようにします。
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} ユーザー名とパスワードの本文</td>
     <td><ul><li>grant_type: password</li>
-    <li>response_type: cloud_iam、uaa</li>
+    <li>response_type: cloud_iam uaa</li>
     <li>username: <em>&lt;my_username&gt;</em></li>
     <li>password: <em>&lt;my_password&gt;</em></li>
     <li>uaa_client_id: cf</li>
@@ -680,7 +642,7 @@ IAM トークンをリフレッシュするには、以下の手順を実行し�
     <tr>
     <td>本文</td>
     <td><ul><li>grant_type: refresh_token</li>
-    <li>response_type: cloud_iam、uaa</li>
+    <li>response_type: cloud_iam uaa</li>
     <li>refresh_token: <em>&lt;iam_refresh_token&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-03-13"
 
 ---
 
@@ -16,14 +16,14 @@ lastupdated: "2018-01-24"
 {:download: .download}
 
 # Régions et emplacements
-{{site.data.keyword.Bluemix}} est présent dans le monde entier. Une région est un lieu géographique auquel accède un noeud final. Les emplacements sont des centres de données figurant dans la région. Les services au sein de {{site.data.keyword.Bluemix_notm}} peuvent être disponibles partout ou dans une région spécifique.
+{{site.data.keyword.Bluemix}} est présent dans le monde entier. Une région est un lieu géographique auquel accède un noeud final. Les emplacements sont des centres de données figurant dans la région. Les services au sein de {{site.data.keyword.Bluemix_notm}} peuvent être disponibles partout ou dans une région spécifique. Lorsque vous créez un cluster Kubernetes dans {{site.data.keyword.containerlong}}, ses ressources restent dans la région dans laquelle vous avez déployé le cluster.
 {:shortdesc}
 
 [Les régions {{site.data.keyword.Bluemix_notm}}](#bluemix_regions) sont différentes des régions [{{site.data.keyword.containershort_notm}}](#container_regions).
 
-![{{site.data.keyword.containershort_notm}} : régions et centres de données](images/regions.png)
+![{{site.data.keyword.containershort_notm}} : régions et centres de données](/images/regions.png)
 
-Figure 1. Régions et centres de données {{site.data.keyword.containershort_notm}}
+Figure. Régions et centres de données {{site.data.keyword.containershort_notm}}
 
 Régions {{site.data.keyword.containershort_notm}} prises en charge :
   * Asie-Pacifique nord
@@ -32,7 +32,6 @@ Régions {{site.data.keyword.containershort_notm}} prises en charge :
   * Sud du Royaume-Uni
   * Est des Etats-Unis
   * Sud des Etats-Unis
-
 
 
 
@@ -46,7 +45,7 @@ Pour vérifier dans quelle région {{site.data.keyword.Bluemix_notm}} vous vous 
 
 Vous pouvez accéder aux régions {{site.data.keyword.Bluemix_notm}} en spécifiant le noeud final d'API utilisé lorsque vous vous êtes connecté. Si vous ne spécifiez pas de région, vous êtes automatiquement connecté à la région la plus proche de vous.
 
-{{site.data.keyword.Bluemix_notm}} Noeuds finaux d'API de région avec exemples de commandes de connexion :
+Noeuds finaux d'API de région {{site.data.keyword.Bluemix_notm}} avec exemples de commandes de connexion :
 
   * Sud et Est des Etats-Unis
       ```
@@ -93,6 +92,9 @@ Pour utiliser l'API avec le noeud final global, dans toutes vos demandes, transm
 ### Connexion à une autre région du service de conteneur
 {: #container_login_endpoints}
 
+Vous pouvez modifier les emplacements en utilisant l'interface CLI {{site.data.keyword.containershort_notm}}.
+{:shortdesc}
+
 Vous souhaiterez peut-être vous connecter à une autre région {{site.data.keyword.containershort_notm}} pour les raisons suivantes :
   * Vous avez créé des services {{site.data.keyword.Bluemix_notm}} ou des images Docker privées dans une région et vous souhaitez les utiliser avec {{site.data.keyword.containershort_notm}} dans une autre région.
   * Vous souhaitez accéder à un cluster dans une région différente de la région {{site.data.keyword.Bluemix_notm}} par défaut à laquelle vous êtes connecté.
@@ -101,26 +103,11 @@ Vous souhaiterez peut-être vous connecter à une autre région {{site.data.keyw
 
 Pour basculer rapidement entre les régions,  exécutez `bx cs region-set`.
 
-### Emplacements disponibles pour le service de conteneur
-{: #locations}
-
-Les emplacements sont des centres de données disponibles dans une région.
-
-  | Région | Emplacement | Ville |
-  |--------|----------|------|
-  | Asie-Pacifique nord | hkg02, seo01, sng01, tok02 | Hong Kong, Séoul, Singapour, Tokyo |
-  | Asie-Pacifique sud     | mel01, syd01, syd04        | Melbourne, Sydney |
-  | Europe centrale     | ams03, fra02, mil01, par01        | Amsterdam, Frankfurt, Milan, Paris |
-  | Sud du Royaume-Uni      | lon02, lon04         | Londres |
-  | Est des Etats-Unis      | mon01, tor01, wdc06, wdc07        | Montréal, Toronto, Washington DC |
-  | Sud des Etats-Unis     | dal10, dal12, dal13, sao01       | Dallas, São Paolo |
-
-**Remarque **: la région Milan (mil01) n'est disponible que pour les clusters gratuits.
-
 ### Utilisation des commandes d'API du service de conteneur
-{: #container_api}
+{: #containers_api}
 
-Pour intergair avec l'API {{site.data.keyword.containershort_notm}}, entrez le type de commande et ajoutez `/v1/command` au noeud final global.
+Pour interagir avec l'API {{site.data.keyword.containershort_notm}}, entrez le type de commande et ajoutez `/v1/command` au noeud final global.
+{:shortdesc}
 
 Exemple d'API `GET /clusters` :
   ```
@@ -134,3 +121,30 @@ Pour utiliser l'API avec le noeud final global, dans toutes vos demandes, transm
 {: tip}
 
 Pour afficher la documentation sur les commandes d'API, accédez à [https://containers.bluemix.net/swagger-api/](https://containers.bluemix.net/swagger-api/).
+
+## Emplacements disponibles dans {{site.data.keyword.containershort_notm}}
+{: #locations}
+
+Les emplacements sont des centres de données disponibles dans une région {{site.data.keyword.Bluemix_notm}}. Les régions constituent un outil conceptuel permettant d'organiser les emplacements et peuvent inclure des emplacements (centres de données) dans différents pays. Le tableau suivant affiche les emplacements disponibles par région.
+{:shortdesc}
+
+| Région | Emplacement | Ville |
+|--------|----------|------|
+| Asie-Pacifique nord | hkg02, seo01, sng01, tok02 | Hong Kong, Séoul, Singapour, Tokyo |
+| Asie-Pacifique sud     | mel01, syd01, syd04        | Melbourne, Sydney |
+| Europe centrale     | ams03, fra02, par01        | Amsterdam, Francfort, Paris |
+| Sud du Royaume-Uni      | lon02, lon04         | Londres |
+| Est des Etats-Unis      | mon01, tor01, wdc06, wdc07        | Montréal, Toronto, Washington DC |
+| Sud des Etats-Unis     | dal10, dal12, dal13, sao01       | Dallas, São Paulo |
+
+Les ressources de votre cluster restent à l'emplacement (centre de données) dans lequel le cluster est déployé. L'image suivante met en évidence les relations de votre cluster avec en exemple, la région Est des Etats-Unis :
+
+1.  Les ressources de votre cluster, y compris le maître et les noeuds worker, se trouvent toutes à l'emplacement dans lequel vous avez déployé le cluster. Lorsque vous initiez des actions d'orchestration de conteneurs locaux, par exemple des commandes `kubectl`, les informations s'échangent entre le maître et vos noeuds worker au même emplacement.
+
+2.  Si vous configurez d'autres ressources de cluster, par exemple du stockage, des ressources réseau, du calcul ou des applications s'exécutant dans des pods, les ressources et leurs données restent à l'emplacement dans lequel vous avez déployé votre cluster.
+
+3.  Lorsque vous initiez des actions de gestion de cluster, par exemple l'exécution de commandes `bx cs`, les informations de base sur le cluster (par exemple le nom, l'ID, l'utilisateur, la commande) sont acheminées vers un noeud final régional.
+
+![Description de l'emplacement des ressources sur votre cluster](/images/region-cluster-resources.png)
+
+Figure. Description de l'emplacement des ressources sur votre cluster.

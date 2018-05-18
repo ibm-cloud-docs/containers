@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-05"
+lastupdated: "2018-02-27"
 
 ---
 
@@ -19,8 +19,7 @@ lastupdated: "2018-02-05"
 # 教程：在 {{site.data.keyword.containerlong_notm}} 上安装 Istio
 {: #istio_tutorial}
 
-[Istio](https://www.ibm.com/cloud/info/istio) 是一个开放式平台，为开发人员提供一种统一的方式，在云平台上（如 Kubernetes）连接、保护和管理微服务网络（也称为服务网）。通过 Istio，可以管理网络流量、在微服务之间进行负载均衡、强制实施访问策略、在服务网上验证服务身份等。
-
+[Istio](https://www.ibm.com/cloud/info/istio) 是一个开放式平台，用于在云平台上（如 {{site.data.keyword.containerlong}} 中的 Kubernetes）连接、保护和管理微服务网络（也称为服务网）。通过 Istio，可管理网络流量，在微服务之间进行负载均衡，强制实施访问策略，在服务网上验证服务身份，等等。
 {:shortdesc}
 
 在本教程中，您可以查看如何为简单的模拟书店应用程序“BookInfo”安装 Istio 以及四个微服务。微服务包括产品 Web 页面、书籍详细信息、评论和评级。将 BookInfo 的微服务部署到安装了 Istio 的 {{site.data.keyword.containershort}} 集群时，会在每个微服务的 pod 中注入 Istio Envoecar sidecar 代理。
@@ -52,6 +51,7 @@ lastupdated: "2018-02-05"
 {: #istio_tutorial1}
 
 在集群中下载并安装 Istio。
+{:shortdesc}
 
 1. 直接从 [https://github.com/istio/istio/releases ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/istio/istio/releases) 下载 Istio，或使用 curl 获取最新版本：
 
@@ -122,7 +122,10 @@ lastupdated: "2018-02-05"
 ## 第 2 课：部署 BookInfo 应用程序
 {: #istio_tutorial2}
 
-将 BookInfo 样本应用程序的微服务部署到 Kubernetes 集群。这四个微服务包括产品 Web 页面、书籍详细信息、评论（具有多个版本的评论微服务）和评级。您可以在 Istio 安装的 `samples/bookinfo` 目录中找到本示例中使用的所有文件。
+将 BookInfo 样本应用程序的微服务部署到 Kubernetes 集群。
+{:shortdesc}
+
+这四个微服务包括产品 Web 页面、书籍详细信息、评论（具有多个版本的评论微服务）和评级。您可以在 Istio 安装的 `samples/bookinfo` 目录中找到本示例中使用的所有文件。
 
 部署 BookInfo 时，在部署微服务 pod 之前，Envoy sidecar 代理会作为容器注入到应用程序微服务的 pod 中。Istio 使用 Envoy 代理的扩展版本来调解服务网中所有微服务的所有入站和出站流量。有关 Envoy 的更多信息，请参阅 [Istio 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/docs/concepts/what-is-istio/overview.html#envoy)。
 
@@ -221,6 +224,7 @@ lastupdated: "2018-02-05"
 {: #istio_tutorial_cleanup}
 
 如果您不希望探索[后续步骤？](#istio_tutorial_whatsnext)中提供的更多 Istio 功能，那么可以清除集群中的 Istio 资源。
+{:shortdesc}
 
 1. 删除集群中的所有 BookInfo 服务、pod 和部署。
 

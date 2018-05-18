@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-05"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -19,11 +19,13 @@ lastupdated: "2018-02-05"
 # 整合服務
 {: #integrations}
 
-您可以使用各種外部服務，以及具有 {{site.data.keyword.containershort_notm}} 中標準叢集的「{{site.data.keyword.Bluemix_notm}} 型錄」中的服務。
+在 {{site.data.keyword.containerlong}} 中，您可以使用各種外部服務及型錄服務來與標準 Kubernetes 叢集搭配使用。
 {:shortdesc}
 
+
+## 應用程式服務
 <table summary="可存取性摘要">
-<caption>表格。Kubernetes 中叢集及應用程式的整合選項</caption>
+<caption>表格. 應用程式服務的整合選項</caption>
 <thead>
 <tr>
 <th>服務</th>
@@ -32,25 +34,59 @@ lastupdated: "2018-02-05"
 </thead>
 <tbody>
 <tr>
-<td>Aqua Security</td>
-  <td>作為<a href="/docs/services/va/va_index.html" target="_blank">漏洞警告器</a>的補充，您可以使用 <a href="https://www.aquasec.com/" target="_blank">Aqua Security<img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>，透過減少容許應用程式執行的內容來改善容器部署的安全。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2017/06/protecting-container-deployments-bluemix-aqua-security/" target="_blank">使用 Aqua Security 保護 {{site.data.keyword.Bluemix_notm}} 上的容器部署 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
-</tr>
-<tr>
-<td>Blockchain</td>
+<td>{{site.data.keyword.blockchainfull}}</td>
 <td>將 IBM Blockchain 的可公開使用開發環境部署至 {{site.data.keyword.containerlong_notm}} 中的 Kubernetes 叢集。使用此環境開發及自訂您自己的區塊鏈網路，以部署應用程式來共用可記錄交易歷程的不可變分類帳。如需相關資訊，請參閱<a href="https://ibm-blockchain.github.io" target="_blank">在雲端沙盤推演 IBM Blockchain 平台中開發 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
+</tbody>
+</table>
+
+<br />
+
+
+
+## DevOps Services
+<table summary="可存取性摘要">
+<caption>表格. 管理 DevOps 的整合選項</caption>
+<thead>
 <tr>
-<td>{{site.data.keyword.cloudcerts_short}}</td>
-<td>您可以使用 <a href="../services/certificate-manager/index.html" target="_blank">{{site.data.keyword.cloudcerts_long}}<img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來儲存及管理應用程式的 SSL 憑證。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">使用 {{site.data.keyword.cloudcerts_long_notm}} 與 {{site.data.keyword.containershort_notm}} 搭配來部署自訂網域 TLS 憑證 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+<th>服務</th>
+<th>說明</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td>Codeship</td>
 <td>您可以使用 <a href="https://codeship.com" target="_blank">Codeship <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>，以持續整合及遞送容器。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2017/10/using-codeship-pro-deploy-workloads-ibm-container-service/" target="_blank">使用 Codeship Pro 將工作負載部署至 {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.contdelivery_short}}</td>
+<td>Helm</td>
+<td> <a href="https://helm.sh/" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 是 Kubernetes 套件管理程式。您可以建立新的 Helm 圖表或使用預先存在的 Helm 圖表，來定義、安裝及升級在 {{site.data.keyword.containerlong_notm}} 叢集中執行的複式 Kubernetes 應用程式。<p>如需相關資訊，請參閱[在 {{site.data.keyword.containershort_notm}} 中設定 Helm](cs_integrations.html#helm)。</p></td>
+</tr>
+<tr>
+<td>{{site.data.keyword.contdelivery_full}}</td>
 <td>使用工具鏈自動建置應用程式，並將容器部署至 Kubernetes 叢集。如需設定資訊，請參閱部落格 <a href="https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines/" target="_blank">Deploy Kubernetes pods to the {{site.data.keyword.containerlong_notm}} using DevOps Pipelines <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
+<tr>
+<td>Istio</td>
+<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio<img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 是一種開放程式碼服務，提供方法讓開發人員連接、保護、管理及監視雲端編排平台上微服務（也稱為服務網）的網路，例如 Kubernetes。請參閱關於 <a href="https://developer.ibm.com/dwblog/2017/istio/" target="_blank">IBM 如何共同建立及啟動 Istio <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 的部落格文章，以進一步瞭解開放程式碼專案的相關資訊。若要在 {{site.data.keyword.containershort_notm}} 的 Kubernetes 叢集上安裝 Istio，並開始使用範例應用程式，請參閱[指導教學：使用 Istio 管理微服務](cs_tutorials_istio.html#istio_tutorial)。</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
+
+
+## 記載及監視服務
+<table summary="可存取性摘要">
+<caption>表格. 管理日誌及度量值的整合選項</caption>
+<thead>
+<tr>
+<th>服務</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td>CoScale</td>
 <td>使用 <a href="https://www.coscale.com/" target="_blank">CoScale <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來監視工作者節點、容器、抄本集、抄寫控制器及服務。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2017/06/monitoring-ibm-bluemix-container-service-coscale/" target="_blank">使用 CoScale 監視 {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
@@ -60,20 +96,16 @@ lastupdated: "2018-02-05"
 <td>使用 <a href="https://www.datadoghq.com/" target="_blank">Dataloadog <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來監視您的叢集，並檢視基礎架構和應用程式效能度量值。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2017/07/monitoring-ibm-bluemix-container-service-datadog/" target="_blank">使用 Datadog 監視 {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
 <tr>
-<td>Helm</td>
-<td> <a href="https://helm.sh/" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 是 Kubernetes 套件管理程式。建立「Helm 圖表」，以定義、安裝及升級在 {{site.data.keyword.containerlong_notm}} 叢集中執行的複式 Kubernetes 應用程式。進一步瞭解您如何<a href="https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/" target="_blank">使用 Kubernetes Helm 圖表來加快部署 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+<td>{{site.data.keyword.loganalysisfull}}</td>
+<td>使用 {{site.data.keyword.loganalysisfull_notm}} 來擴充日誌收集、保留及搜尋能力。如需相關資訊，請參閱<a href="../services/CloudLogAnalysis/containers/containers_kube_other_logs.html" target="_blank">啟用叢集日誌的自動收集 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.monitoringlong}}</td>
+<td>使用 {{site.data.keyword.monitoringlong_notm}} 定義規則及警示，以擴充度量值收集及保留功能。如需相關資訊，請參閱<a href="../services/cloud-monitoring/tutorials/container_service_metrics.html" target="_blank">針對已部署在 Kubernetes 叢集中的應用程式，在 Grafana 中分析度量值 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
 <tr>
 <td>Instana</td>
 <td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 透過自動探索及對映應用程式的 GUI，提供基礎架構及應用程式效能監視。Istana 會擷取向應用程式提出的每一個要求，讓您可以進行疑難排解，並執行主要原因分析，以避免問題再次發生。如需進一步瞭解，請參閱關於<a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">在 {{site.data.keyword.containershort_notm}} 中部署 Istana <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 的部落格文章。</td>
-</tr>
-<tr>
-<td>Istio</td>
-<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio<img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 是一種開放程式碼服務，提供方法讓開發人員連接、保護、管理及監視雲端編排平台上微服務（也稱為服務網）的網路，例如 Kubernetes。請參閱關於 <a href="https://developer.ibm.com/dwblog/2017/istio/" target="_blank">IBM 如何共同建立及啟動 Istio <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 的部落格文章，以進一步瞭解開放程式碼專案的相關資訊。若要在 {{site.data.keyword.containershort_notm}} 的 Kubernetes 叢集上安裝 Istio，並開始使用範例應用程式，請參閱[指導教學：使用 Istio 管理微服務](cs_tutorials_istio.html#istio_tutorial)。</td>
-</tr>
-<tr>
-<td>NeuVector</td>
-<td>使用 <a href="https://neuvector.com/" target="_blank">Neutretor <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來保護容器與雲端原生防火牆。如需相關資訊，請參閱 <a href="https://www.ibm.com/us-en/marketplace/neuvector-container-security" target="_blank">NeuVector Container Security <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
 <tr>
 <td>Prometheus</td>
@@ -83,20 +115,12 @@ lastupdated: "2018-02-05"
 </td>
 </tr>
 <tr>
-<td>{{site.data.keyword.bpshort}}</td>
-<td>{{site.data.keyword.bplong}} 是一種自動化工具，可使用 Terraform 將基礎架構部署為程式碼。當您將基礎架構部署為單一單元時，可以跨任意數目的環境重複使用那些雲端資源定義。若要使用 {{site.data.keyword.bpshort}} 將 Kubernetes 叢集定義為資源，請嘗試使用 [container-cluster 範本](https://console.bluemix.net/schematics/templates/details/Cloud-Schematics%2Fcontainer-cluster)來建立環境。如需 Schematics 的相關資訊，請參閱[關於 {{site.data.keyword.bplong_notm}}](/docs/services/schematics/schematics_overview.html#about)。</td>
-</tr>
-<tr>
 <td>Sematext</td>
 <td>使用 <a href="https://sematext.com/" target="_blank">Sematext <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來檢視容器化應用程式的度量值和日誌。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2017/09/monitoring-logging-ibm-bluemix-container-service-sematext/" target="_blank">使用 Sematext 監視及記載容器 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
 <tr>
 <td>Sysdig</td>
 <td>使用 <a href="https://sysdig.com/" target="_blank">Sysindig <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>，以單一檢測點來擷取應用程式、容器、statsd 及主機度量值。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2017/08/monitoring-ibm-bluemix-container-service-sysdig-container-intelligence/" target="_blank">使用 Sysdig Container Intelligence 監視 {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
-</tr>
-<tr>
-<td>Twistlock</td>
-<td>作為<a href="/docs/services/va/va_index.html" target="_blank">漏洞警告器</a>的補充，您可以使用 <a href="https://www.twistlock.com/" target="_blank">Twistlock <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來管理防火牆、威脅保護及突發事件回應。如需相關資訊，請參閱 <a href="https://www.ibm.com/blogs/bluemix/2017/07/twistlock-ibm-bluemix-container-service/" target="_blank">{{site.data.keyword.containershort_notm}} 上的 Twistlock <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
 <tr>
 <td>Weave Scope</td>
@@ -111,10 +135,47 @@ lastupdated: "2018-02-05"
 
 
 
-## 將服務新增至叢集
+## 安全服務
+<table summary="可存取性摘要">
+<caption>表格. 管理安全的整合選項</caption>
+<thead>
+<tr>
+<th>服務</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+  <tr id="appid">
+    <td>{{site.data.keyword.appid_full}}</td>
+    <td>要求使用者登入，以 [{{site.data.keyword.appid_short}}](/docs/services/appid/index.html#gettingstarted) 新增應用程式的安全層次。若要鑑別針對您應用程式的 API HTTP/HTTPS 要求，您可以使用 [{{site.data.keyword.appid_short_notm}} 鑑別 Ingress 註釋](cs_annotations.html#appid-auth)，來整合 {{site.data.keyword.appid_short_notm}} 與 Ingress 服務。</td>
+  </tr>
+<tr>
+<td>Aqua Security</td>
+  <td>作為<a href="/docs/services/va/va_index.html" target="_blank">漏洞警告器</a>的補充，您可以使用 <a href="https://www.aquasec.com/" target="_blank">Aqua Security<img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>，透過減少容許應用程式執行的內容來改善容器部署的安全。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2017/06/protecting-container-deployments-bluemix-aqua-security/" target="_blank">使用 Aqua Security 保護 {{site.data.keyword.Bluemix_notm}} 上的容器部署 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloudcerts_full}}</td>
+<td>您可以使用 <a href="../services/certificate-manager/index.html" target="_blank">{{site.data.keyword.cloudcerts_long}}<img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來儲存及管理應用程式的 SSL 憑證。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">使用 {{site.data.keyword.cloudcerts_long_notm}} 與 {{site.data.keyword.containershort_notm}} 搭配來部署自訂網域 TLS 憑證 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+</tr>
+<tr>
+<td>NeuVector</td>
+<td>使用 <a href="https://neuvector.com/" target="_blank">Neutretor <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來保護容器與雲端原生防火牆。如需相關資訊，請參閱 <a href="https://www.ibm.com/us-en/marketplace/neuvector-container-security" target="_blank">NeuVector Container Security <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+</tr>
+<tr>
+<td>Twistlock</td>
+<td>作為<a href="/docs/services/va/va_index.html" target="_blank">漏洞警告器</a>的補充，您可以使用 <a href="https://www.twistlock.com/" target="_blank">Twistlock <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來管理防火牆、威脅保護及突發事件回應。如需相關資訊，請參閱 <a href="https://www.ibm.com/blogs/bluemix/2017/07/twistlock-ibm-bluemix-container-service/" target="_blank">{{site.data.keyword.containershort_notm}} 上的 Twistlock <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
+
+
+## 將 Cloud Foundry 服務新增至叢集
 {: #adding_cluster}
 
-將現有 {{site.data.keyword.Bluemix_notm}} 服務實例新增至叢集，讓叢集使用者在將應用程式部署至叢集時能夠存取及使用 {{site.data.keyword.Bluemix_notm}} 服務。
+將現有的 Cloud Foundry 服務實例新增至叢集，讓叢集使用者在將應用程式部署至叢集時能夠存取及使用該服務。
 {:shortdesc}
 
 開始之前：
@@ -122,6 +183,7 @@ lastupdated: "2018-02-05"
 1. [將 CLI 的目標設為](cs_cli_install.html#cs_cli_configure)您的叢集。
 2. [要求 {{site.data.keyword.Bluemix_notm}} 服務的實例](/docs/apps/reqnsi.html#req_instance)。
    **附註：**若要在華盛頓特區中建立服務實例，您必須使用 CLI。
+3. 支援 Cloud Foundry 服務與叢集連結，但不支援其他服務。在建立服務實例之後，您會看到不同的服務類型，且會在儀表板中將服務分組為 **Cloud Foundry 服務**及**服務**。若要連結**服務**區段中的服務與叢集，[請先建立 Cloud Foundry 別名](#adding_resource_cluster)。
 
 **附註：**
 <ul><ul>
@@ -169,7 +231,7 @@ lastupdated: "2018-02-05"
     ```
     {: pre}
 
-    將服務順利新增至叢集之後，即會建立叢集 Secret，以保留服務實例認證。CLI 輸出範例：
+    將服務順利新增至叢集之後，即會建立叢集密碼，以保留服務實例認證。CLI 輸出範例：
 
     ```
     bx cs cluster-service-bind mycluster mynamespace cleardb 
@@ -180,7 +242,7 @@ lastupdated: "2018-02-05"
     ```
     {: screen}
 
-6.  驗證已在叢集名稱空間中建立 Secret。
+6.  驗證已在叢集名稱空間中建立密碼。
 
     ```
     kubectl get secrets --namespace=<namespace>
@@ -188,25 +250,70 @@ lastupdated: "2018-02-05"
     {: pre}
 
 
-若要在叢集中所部署的 Pod 中使用服務，叢集使用者可以存取 {{site.data.keyword.Bluemix_notm}} 服務的服務認證，方法是[將 Kubernetes 密碼以密碼磁區形式裝載至 Pod](cs_integrations.html#adding_app)。
+若要在叢集中所部署的 Pod 中使用服務，叢集使用者可以存取 {{site.data.keyword.Bluemix_notm}} 服務的服務認證，方法是[將 Kubernetes 密碼以密碼磁區形式裝載至 Pod](cs_storage.html#app_volume_mount)。
+
+
+
 
 <br />
 
+
+## 為其他 {{site.data.keyword.Bluemix_notm}} 服務資源建立 Cloud Foundry 別名
+{: #adding_resource_cluster}
+
+支援 Cloud Foundry 服務與叢集連結。若要將不是 Cloud Foundry 服務的 {{site.data.keyword.Bluemix_notm}} 服務連結至叢集，請為該服務實例建立 Cloud Foundry 別名。
+{:shortdesc}
+
+開始之前，先[要求 {{site.data.keyword.Bluemix_notm}} 服務的實例](/docs/apps/reqnsi.html#req_instance)。
+
+若要建立服務實例的 Cloud Foundry 別名，請執行下列動作：
+
+1. 將建立服務實例的組織及空間設為目標。
+
+    ```
+    bx target -o <org_name> -s <space_name>
+    ```
+    {: pre}
+
+2. 請記下服務實例名稱。
+    ```
+    bx resource service-instances
+    ```
+    {: pre}
+
+3. 建立服務實例的 Cloud Foundry 別名。
+    ```
+    bx resource service-alias-create <service_alias_name> --instance-name <service_instance>
+    ```
+    {: pre}
+
+4. 驗證已建立服務別名。
+
+    ```
+    bx service list
+    ```
+    {: pre}
+
+5. [將 Cloud Foundry 別名連結至叢集](#adding_cluster)。
+
+
+
+<br />
 
 
 ## 將服務新增至應用程式
 {: #adding_app}
 
-加密 Kubernetes Secret 是用來儲存 {{site.data.keyword.Bluemix_notm}} 服務詳細資料及認證，以及容許服務與叢集之間的安全通訊。身為叢集使用者，您可以將此 Secret 以磁區形式裝載至 Pod 來進行存取。
+加密 Kubernetes 密碼是用來儲存 {{site.data.keyword.Bluemix_notm}} 服務詳細資料及認證，以及容許服務與叢集之間的安全通訊。
 {:shortdesc}
+
+Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或金鑰）的安全方式。叢集使用者可以將密碼裝載至 Pod，而不透過環境變數或直接在 Dockerfile 中公開機密資訊。然後，Pod 中的執行容器可以存取那些密碼。
+
+當您將密碼磁區裝載至 Pod 時，會將名為 binding 的檔案儲存在磁區裝載目錄中，該目錄包括您存取 {{site.data.keyword.Bluemix_notm}} 服務所需的所有資訊及認證。
 
 開始之前，請先將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為您的叢集。請確定叢集管理者已將您要用在應用程式中的 {{site.data.keyword.Bluemix_notm}} 服務[新增至叢集](cs_integrations.html#adding_cluster)。
 
-Kubernetes Secret 是一種儲存機密資訊（例如使用者名稱、密碼或金鑰）的安全方式。Secret 必須以 Secret 磁區形式裝載至 Pod，以供在 Pod 中執行的容器存取，而不是透過環境變數或直接在 Dockerfile 中公開機密資訊。
-
-當您將 Secret 磁區裝載至 Pod 時，會將名為 binding 的檔案儲存在磁區裝載目錄中，該目錄包括您存取 {{site.data.keyword.Bluemix_notm}} 服務所需的所有資訊及認證。
-
-1.  列出叢集名稱空間中的可用 Secret。
+1.  列出叢集名稱空間中的可用密碼。
 
     ```
     kubectl get secrets --namespace=<my_namespace>
@@ -222,14 +329,14 @@ Kubernetes Secret 是一種儲存機密資訊（例如使用者名稱、密碼�
     ```
     {: screen}
 
-2.  尋找 **Opaque** 類型的 Secret，並記下 Secret 的**名稱**。如果有多個 Secret，請與叢集管理者聯絡，以識別正確的服務 Secret。
+2.  尋找 **Opaque** 類型的密碼，並記下密碼的**名稱**。如果有多個密碼，請與叢集管理者聯絡，以識別正確的服務密碼。
 
 3.  開啟您偏好的編輯器。
 
-4.  建立 YAML 檔案，以配置可透過 Secret 磁區存取服務詳細資料的 Pod。如果您連結了多個服務，請驗證每一個密碼是否與正確的服務相關聯。
+4.  建立 YAML 檔案，以配置可透過密碼磁區存取服務詳細資料的 Pod。如果您連結了多個服務，請驗證每一個密碼是否與正確的服務相關聯。
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1beta1
     kind: Deployment
     metadata:
       labels:
@@ -267,22 +374,22 @@ Kubernetes Secret 是一種儲存機密資訊（例如使用者名稱、密碼�
     <tbody>
     <tr>
     <td><code>volumeMounts/mountPath</code></td>
-    <td>您要裝載至容器的 Secret 磁區的名稱。</td>
+    <td>您要裝載至容器的密碼磁區的名稱。</td>
     </tr>
     <tr>
     <td><code>volumes/name</code></td>
-    <td>輸入您要裝載至容器的 Secret 磁區的名稱。</td>
+    <td>輸入您要裝載至容器的密碼磁區的名稱。</td>
     </tr>
     <tr>
     <td><code>secret/defaultMode</code></td>
-    <td>設定服務 Secret 的唯讀許可權。</td>
+    <td>設定服務密碼的唯讀許可權。</td>
     </tr>
     <tr>
     <td><code>secret/secretName</code></td>
-    <td>輸入您稍早記下的 Secret 的名稱。</td>
+    <td>輸入您稍早記下的密碼的名稱。</td>
     </tr></tbody></table>
 
-5.  建立 Pod，並裝載 Secret 磁區。
+5.  建立 Pod，並裝載密碼磁區。
 
     ```
     kubectl apply -f <yaml_path>
@@ -305,7 +412,7 @@ Kubernetes Secret 是一種儲存機密資訊（例如使用者名稱、密碼�
     {: screen}
 
 7.  記下 Pod 的**名稱**。
-8.  取得有關 Pod 的詳細資料，並尋找 Secret 名稱。
+8.  取得有關 Pod 的詳細資料，並尋找密碼名稱。
 
     ```
     kubectl describe pod <pod_name>
@@ -326,18 +433,74 @@ Kubernetes Secret 是一種儲存機密資訊（例如使用者名稱、密碼�
 
     
 
-9.  實作應用程式時，請將它配置為在裝載目錄中尋找名為 **binding** 的 Secret 檔案、剖析 JSON 內容，以及判定可存取 {{site.data.keyword.Bluemix_notm}} 服務的 URL 及服務認證。
+9.  實作應用程式時，請將它配置為在裝載目錄中尋找名為 **binding** 的密碼檔案、剖析 JSON 內容，以及判定可存取 {{site.data.keyword.Bluemix_notm}} 服務的 URL 及服務認證。
 
-您現在可以存取 {{site.data.keyword.Bluemix_notm}} 服務詳細資料及認證。若要使用 {{site.data.keyword.Bluemix_notm}} 服務，請確定應用程式已配置為在裝載目錄中尋找服務 Secret 檔案、剖析 JSON 內容，以及判定服務詳細資料。
+您現在可以存取 {{site.data.keyword.Bluemix_notm}} 服務詳細資料及認證。若要使用 {{site.data.keyword.Bluemix_notm}} 服務，請確定應用程式已配置為在裝載目錄中尋找服務密碼檔案、剖析 JSON 內容，以及判定服務詳細資料。
 
 <br />
 
 
+## 在 {{site.data.keyword.containershort_notm}} 中設定 Helm
+{: #helm}
+
+[Helm ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://helm.sh/) 是 Kubernetes 套件管理程式。您可以建立 Helm 圖表或使用預先存在的 Helm 圖表，來定義、安裝及升級在 {{site.data.keyword.containerlong_notm}} 叢集中執行的複式 Kubernetes 應用程式。
+{:shortdesc}
+
+在使用 Helm 圖表與 {{site.data.keyword.containershort_notm}} 搭配之前，您必須先在叢集中安裝及起始設定 Helm 實例。然後，您可以將 {{site.data.keyword.Bluemix_notm}} Helm 儲存庫新增至 Helm 實例。
+
+開始之前，請先將 [CLI 的目標](cs_cli_install.html#cs_cli_configure)設為您要在其中使用 Helm 圖表的叢集。
+
+1. 安裝 <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。
+
+2. 起始設定 Helm，並安裝 `tiller`。
+
+    ```
+        helm init
+        ```
+    {: pre}
+
+3. 驗證 `tiller - deploy` Pod 在叢集中的 **Status** 為 `Running`。
+
+    ```
+        kubectl get pods -n kube-system -l app=helm
+        ```
+    {: pre}
+
+    輸出範例：
+
+    ```
+    NAME                            READY     STATUS    RESTARTS   AGE
+    tiller-deploy-352283156-nzbcm   1/1       Running   0          2m
+    ```
+    {: screen}
+
+4. 將 {{site.data.keyword.Bluemix_notm}} Helm 儲存庫新增至 Helm 實例。
+
+    ```
+    helm repo add ibm  https://registry.bluemix.net/helm/ibm
+    ```
+    {: pre}
+
+5. 列出 {{site.data.keyword.Bluemix_notm}} 儲存庫中目前可用的 Helm 圖表。
+
+    ```
+    helm search ibm
+    ```
+    {: pre}
+
+
+### 相關的 Helm 鏈結
+{: #helm_links}
+
+* 若要使用 strongSwan Helm 圖表，請參閱[使用 strongSwan IPSec VPN 服務 Helm 圖表設定 VPN 連線功能](cs_vpn.html#vpn-setup)。
+* 在 [Helm 圖表型錄 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts) GUI 中，檢視您可以與 {{site.data.keyword.Bluemix_notm}} 搭配使用的可用 Helm 圖表。
+* 進一步瞭解 <a href="https://docs.helm.sh/helm/" target="_blank">Helm 文件 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 中有關用來設定及管理 Helm 圖表的 Helm 指令。
+* 進一步瞭解如何[使用 Kubernetes Helm 圖表來加快部署 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/)。
 
 ## 視覺化 Kubernetes 叢集資源
 {: #weavescope}
 
-Weave Scope 提供 Kubernetes 叢集內資源（包括服務、Pod、容器、處理程序、節點等項目）的視覺圖。Weave Scope 提供 CPU 及記憶體的互動式度量值，也提供工具來調整並執行至容器。
+Weave Scope 提供 Kubernetes 叢集內的資源（包括服務、Pod、容器等等）的視覺圖。Weave Scope 提供 CPU 及記憶體的互動式度量值，以及對容器執行 tail 及 exec 的工具。
 {:shortdesc}
 
 開始之前：

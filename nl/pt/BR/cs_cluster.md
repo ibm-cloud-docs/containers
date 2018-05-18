@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-03-08"
 
 ---
 
@@ -40,9 +40,8 @@ Verifique as informações mais recentes em seu novo local:
     - [Incluindo sub-redes gerenciadas por usuário e endereços IP para clusters do Kubernetes](cs_subnets.html#user_managed)
 - [Usando compartilhamentos de arquivo NFS existentes em clusters](cs_storage.html#existing)
 - [Configurando a criação de log de cluster](cs_health.html#logging)
-    - [Ativando o encaminhamento de log](cs_health.html#log_sources_enable)
-    - [Ativando o encaminhamento de log para aplicativos](cs_health.html#apps_enable)
-    - [Atualizando a configuração de encaminhamento de log](cs_health.html#log_sources_update)
+    - [Ativando o encaminhamento de log](cs_health.html#logging)
+    - [Atualizando a configuração de encaminhamento de log](cs_health.html#logging)
     - [Parando o encaminhamento de log](cs_health.html#log_sources_delete)
     - [Configurando o encaminhamento de log para os logs de auditoria da API do Kubernetes](cs_health.html#app_forward)
     - [Ativando o encaminhamento de log de auditoria da API do Kubernetes](cs_health.html#audit_enable)

@@ -19,7 +19,7 @@ lastupdated: "2017-11-02"
 # Criando um token do {{site.data.keyword.registryshort_notm}} para um registro de imagem do {{site.data.keyword.Bluemix_dedicated_notm}}
 {: #cs_dedicated_tokens}
 
-Crie um token que não expira para usar um registro de imagem que você usou para grupos únicos e escaláveis com clusters.
+Crie um token sem expiração para um registro de imagem que você usou para grupos únicos e escaláveis com clusters no {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
 1.  Efetue login no ambiente {{site.data.keyword.Bluemix_dedicated_notm}}.

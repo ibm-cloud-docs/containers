@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-02"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -19,47 +19,55 @@ lastupdated: "2018-02-02"
 # Mise à jour des clusters et des noeuds worker
 {: #update}
 
+Vous pouvez installer des mises à jour pour maintenir vos clusters Kubernetes à jour dans {{site.data.keyword.containerlong}}.
+{:shortdesc}
+
 ## Mise à jour du maître Kubernetes
 {: #master}
 
-Kubernetes publie périodiquement des mises à jour. Il peut s'agir d'une [mise à jour majeure, mineure, ou d'un correctif](cs_versions.html#version_types). Selon le type de mise à jour, la mise à jour de votre maître Kubernetes peut vous incomber. Vous êtes toujours responsable de l'application des mises à jour à vos noeuds worker. Lors de l'application de mises à jour, le maître Kubernetes est actualisé avant vos noeuds worker.
+Régulièrement, Kubernetes publie des [mises à jour principales, secondaires ou des correctifs](cs_versions.html#version_types). En fonction du type de mise à jour, vous pouvez être chargé de mettre à jour des composants du maître Kubernetes.
 {:shortdesc}
 
-Par défaut, vous ne pouvez mettre à jour votre maître Kubernetes que vers les deux versions mineures suivantes après votre version actuelle. Par exemple, si votre maître actuel est de la version 1.5 et que vous désirez le mettre à jour vers la version 1.8, vous devez tout d'abord le mettre à jour vers la version 1.7. Vous pouvez forcer la mise à jour au delà de deux versions mineures, mais ceci peut entraîner des résultats inattendus.
+Les mises à jour peuvent affecter la version du serveur d'API Kubernetes ou d'autres composants dans le maître Kubernetes.  C'est toujours vous qui êtes chargé de garder vos noeuds worker à jour. Lors de l'application de mises à jour, le maître Kubernetes est actualisé avant les noeuds worker. 
+
+Par défaut, votre possibilité de mettre à jour le serveur d'API Kubernetes est limitée dans le maître Kubernetes dont les versions secondaires sont plus de deux fois supérieures à la version actuelle. Par exemple, si la version actuelle de votre serveur d'API Kubernetes est 1.5 et que vous voulez le mettre à jour à la version 1.8, vous devez d'abord effectuer une mise à jour vers la version 1.7. Vous pouvez forcer la mise à jour au-delà de deux versions secondaires, mais ceci peut entraîner des résultats inattendus. Si votre cluster s'exécute sur une version non prise en charge de Kubernetes, il vous faudra peut-être forcer la mise à jour.
 
 Le diagramme suivant illustre la procédure que vous pourriez suivre pour mettre à jour votre maître.
 
-![Procédure recommandée pour mise à jour du maître](/images/update-tree.png)
+![Procédure recommandée pour la mise à jour du maître](/images/update-tree.png)
 
 Figure 1. Diagramme de la procédure de mise à jour du maître Kubernetes
 
 **Attention** : Vous ne pouvez pas revenir à une version antérieure du cluster une fois réalisée la procédure de mise à jour. Prenez soin d'utiliser un cluster de test et de suivre les instructions afin d'éviter des problèmes potentiels avant de mettre à jour votre maître de production.
 
-Pour des mises à jour _majeures_ ou _mineures_, procédez comme suit :
+Pour des mises à jour _principales_ ou _secondaires_, procédez comme suit :
 
 1. Passez en revue les [modifications Kubernetes](cs_versions.html) et effectuez les mises à jour marquées _Mise à jour avant le maître_.
-2. Mettez à jour le maître Kubernetes à l'aide de l'interface graphique ou en exécutant la [commande CLI](cs_cli_reference.html#cs_cluster_update). Lorsque vous le mettez à jour, le maître Kubernetes est indisponible pendant 5 à 10 minutes. Pendant la mise à jour, vous ne pouvez ni accéder au cluster, ni le modifier. En revanche, les noeuds d'agent, les applications et les ressources que les utilisateurs du cluster ont déployés ne sont pas modifiés et poursuivent leur exécution.
-3. Confirmez que la mise à jour est terminée. Vérifiez la version Kubernetes dans le tableau de bord {{site.data.keyword.Bluemix_notm}} ou exécutez la commande `bx cs clusters`.
+2. Mettez à jour votre serveur d'API Kubernetes et les composants du maître Kubernetes associés en utilisant l'interface graphique ou en exécutant la [commande CLI](cs_cli_reference.html#cs_cluster_update). Lorsque vous mettez à jour le serveur d'API Kubernetes, il est indisponible durant  5 à 10 minutes environ. Pendant la mise à jour, vous ne pouvez ni accéder au cluster, ni le modifier. En revanche, les noeuds worker, les applications et les ressources que les utilisateurs du cluster ont déployés ne sont pas modifiés et poursuivent leur exécution.
+3. Confirmez que la mise à jour est terminée. Vérifiez la version du serveur d'API Kubernetes dans le tableau de bord {{site.data.keyword.Bluemix_notm}} ou exécutez la commande `bx cs clusters`.
+4. Installez la version de l'interface CLI [`kubectl cli`](cs_cli_install.html#kubectl) qui correspond à la version du serveur d'API qui s'exécute sur le maître Kubernetes.
 
-Une fois la mise à jour du maître Kubernetes terminée, vous pouvez mettre à jour vos noeuds d'agent.
+Lorsque la mise à jour du serveur d'API Kubernetes est terminée, vous pouvez mettre à jour vos noeuds worker.
 
 <br />
 
 
-## Mise à jour des noeuds d'agent
+## Mise à jour des noeuds worker
 {: #worker_node}
 
-Vous avez donc reçu une notification pour mettre à jour vos noeuds worker. Qu'est-ce que cela signifie ? Vos données sont hébergées dans les pods de vos noeuds worker. Au fur et à mesure que des mises à jour et des correctifs sont installés pour le maître Kubernetes, vous devez vous assurer que vos noeuds worker restent synchronisés. Le maître du noeud worker ne peut pas être à un niveau plus élevé que le maître Kubernetes.
+Vous avez reçu une notification vous invitant à mettre à jour vos noeuds worker. Qu'est-ce que cela signifie ? Comme les mises à jour de sécurité et les correctifs sont mis en place pour le serveur d'API Kubernetes et d'autres composants du maître Kubernetes, vous devez vérifier que vos noeuds worker soient toujours synchronisés.
 {: shortdesc}
+
+La version Kubernetes du noeud worker ne peut pas être supérieure à celle du serveur d'API Kubernetes qui s'exécute sur votre maître Kubernetes. Avant de commencer, [mettez à jour le maître Kubernetes](#master).
 
 <ul>**Attention** :</br>
 <li>Les mises à jour des noeuds worker peuvent entraîner des temps d'indisponibilité de vos applications et services.</li>
-<li>Des données sont supprimées si elles ne sont pas stockées hors du pod.</li>
+<li>Les données sont supprimées si elles ne sont pas stockées hors du pod.</li>
 <li>Utilisez des [répliques ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#replicas) dans vos déploiements pour replanifier des pods sur les noeuds disponibles.</li></ul>
 
-Que faire si je ne dispose pas de temps d'indisponibilité ?
+Que faire si je ne peux pas me permettre d'avoir des temps d'indisponibilité ?
 
-Dans le cadre de la procédure de mise à jour, des noeuds spécifiques deviendront indisponibles pendant un certain temps. En vue d'éviter des temps d'indisponibilité de votre application, vous pouvez définir des clés uniques dans une mappe de configuration qui spécifie des pourcentages de seuil pour des types de noeud spécifiques lors de la procédure de mise à jour. En définissant des règles basées sur des labels Kubernetes standard et en attribuant un pourcentage en nombre maximal de noeuds pouvant être indisponibles, vous pouvez vous assurer que votre application demeure opérationnelle. Un noeud est considéré être indisponible s'il doit encore effectuer la procédure de mise à jour.
+Dans le cadre de la procédure de mise à jour, des noeuds spécifiques deviendront indisponibles pendant un certain temps. En vue d'éviter des temps d'indisponibilité de votre application, vous pouvez définir des clés uniques dans une mappe de configuration qui spécifie des pourcentages de seuil pour des types de noeud spécifiques lors de la procédure de mise à jour. En définissant des règles basées sur des labels Kubernetes standard et en attribuant un pourcentage en nombre maximal de noeuds pouvant être indisponibles, vous pouvez vous assurer que votre application demeure opérationnelle. Un noeud est considéré comme indisponible s'il lui reste à effectuer le processus de déploiement.
 
 Comment sont définies les clés ?
 
@@ -75,11 +83,9 @@ Si aucune mappe de configuration n'est définie, celle par défaut est utilisée
 
 Pour mettre à jour vos noeuds worker, procédez comme suit :
 
-1. Installez la version de l'[`interface de ligne de commande kubectl` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/tools/install-kubectl/) correspondant à la version Kubernetes du maître Kubernetes.
+1. Apportez toutes les modifications indiquées par _Mise à jour après le maître_ dans [Modifications Kubernetes](cs_versions.html).
 
-2. Apportez toutes les modifications indiquées par _Mise à jour après le maître_ dans [Modifications Kubernetes](cs_versions.html).
-
-3. Facultatif : Définissez votre mappe de configuration.
+2. Facultatif : Définissez votre mappe de configuration.
     Exemple :
 
     ```
@@ -110,7 +116,7 @@ Pour mettre à jour vos noeuds worker, procédez comme suit :
     {:pre}
   <table summary="La première ligne du tableau couvre les deux colonnes. Le reste des lignes doit être lu de gauche à droite, le paramètre figurant dans la première colonne et les descriptions correspondantes dans la seconde colonne.">
     <thead>
-      <th colspan=2><img src="images/idea.png"/> Description des composants </th>
+      <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants </th>
     </thead>
     <tbody>
       <tr>
@@ -140,7 +146,7 @@ Pour mettre à jour vos noeuds worker, procédez comme suit :
 
 3. Mettez à jour vos noeuds worker depuis l'interface graphique ou la ligne de commande (CLI).
   * Pour effectuer la mise à jour à partir du tableau de bord {{site.data.keyword.Bluemix_notm}}, accédez à la section `Worker nodes` de votre cluster, et cliquez sur `Update Worker`.
-  * Pour obtenir les ID des noeuds d'agent, exécutez la commande `bx cs workers <cluster_name_or_id>`. Si vous sélectionnez plusieurs noeuds worker, ceux-ci sont placés en file d'attente pour évaluation de la mise à jour. S'ils sont considérés comme prêts au terme de l'évaluation, ils seront mis à jour d'après les règles définies dans les configurations.
+  * Pour obtenir les ID des noeuds worker, exécutez la commande `bx cs workers <cluster_name_or_id>`. Si vous sélectionnez plusieurs noeuds worker, ceux-ci sont placés en file d'attente pour évaluation de la mise à jour. S'ils sont considérés comme prêts au terme de l'évaluation, ils seront mis à jour d'après les règles définies dans les configurations.
 
     ```
     bx cs worker-update <cluster_name_or_id> <worker_node_id1> <worker_node_id2>
@@ -155,12 +161,58 @@ Pour mettre à jour vos noeuds worker, procédez comme suit :
 
 5. Confirmez que la mise à jour est terminée :
   * Vérifiez la version Kubernetes dans le tableau de bord {{site.data.keyword.Bluemix_notm}} ou exécutez la commande `bx cs workers <cluster_name_or_id>`.
-  * Vérifiez la version Kubernets des noeuds d'agent en exécutant la commande `kubectl get nodes`.
-  * Dans certains cas, des clusters plus anciens peuvent répertorier des noeuds d'agent en double avec un statut **NotReady** après une mise à jour. Pour supprimer ces doublons, voir la section de [traitement des incidents](cs_troubleshoot.html#cs_duplicate_nodes).
+  * Vérifiez la version Kubernets des noeuds worker en exécutant la commande `kubectl get nodes`.
+  * Dans certains cas, des clusters plus anciens peuvent répertorier des noeuds worker en double avec un statut **NotReady** après une mise à jour. Pour supprimer ces doublons, voir la section de [traitement des incidents](cs_troubleshoot.html#cs_duplicate_nodes).
 
 Etapes suivantes :
   - Répétez le processus de mise à jour pour les autres clusters.
   - Informez les développeurs qui travaillent dans le cluster pour qu'ils mettent à jour leur interface de ligne de commande `kubectl` à la version du maître Kubernetes.
   - Si le tableau de bord Kubernetes n'affiche pas les graphiques d'utilisation, [supprimez le pod `kube-dashboard`](cs_troubleshoot.html#cs_dashboard_graphs).
+
+
 <br />
+
+
+
+## Mise à jour des types de machine
+{: #machine_type}
+
+Vous pouvez mettre à jour les types de machine utilisés dans les noeuds worker en ajoutant de nouveaux noeuds worker et en supprimant les anciens. Par exemple, si vous disposez de noeuds worker sur des types de machine dépréciés comportant `u1c` ou `b1c` dans le nom, créez des noeuds worker ayant `u2c` ou `b2c` dans le nom.
+{: shortdesc}
+
+1. Notez les noms et emplacements des noeuds worker à ajouter.
+    ```
+    bx cs workers <cluster_name>
+    ```
+    {: pre}
+
+2. Affichez les types de machine disponibles.
+    ```
+    bx cs machine-types <location>
+    ```
+    {: pre}
+
+3. Ajoutez un noeud worker en utilisant la commande [bx cs worker-add](cs_cli_reference.html#cs_worker_add) et indiquez l'un des types de machine répertoriés dans la sortie de la commande précédente.
+
+    ```
+    bx cs worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_vlan> --public-vlan <public_vlan>
+    ```
+    {: pre}
+
+4. Vérifiez que le noeud worker a été ajouté.
+
+    ```
+    bx cs workers <cluster_name>
+    ```
+    {: pre}
+
+5. Lorsque le noeud worker ajouté est à l'état `Normal`, vous pouvez supprimer le noeud worker périmé. **Remarque** : Si vous supprimez un type de machine qui est facturé au mois (par exemple bare metal), vous êtes facturé pour le mois complet.
+
+    ```
+    bx cs worker-rm <cluster_name> <worker_node>
+    ```
+    {: pre}
+
+6. Répétez cette procédure pour mettre à niveau d'autres noeuds worker sur d'autres types de machine.
+
 

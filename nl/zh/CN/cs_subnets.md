@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-01-12"
 # 配置集群的子网
 {: #subnets}
 
-通过向集群添加子网，更改可用的可移植公共或专用 IP 地址的池。
+通过向 {{site.data.keyword.containerlong}} 中的 Kubernetes 集群添加子网，更改可用的可移植公共或专用 IP 地址的池。
 {:shortdesc}
 
 在 {{site.data.keyword.containershort_notm}} 中，您可以通过将网络子网添加到集群来为 Kubernetes 服务添加稳定的可移植 IP。在这种情况下，不会将子网与 netmasking 一起使用，以在一个或多个集群间创建连接。相反，子网用于从可用于访问该服务的集群，为服务提供永久固定 IP。
@@ -28,10 +28,11 @@ lastupdated: "2018-01-12"
 
 **注**：可移植公共 IP 地址按月收费。如果在供应集群后选择除去可移植公共 IP 地址，那么即使只使用了很短的时间，您也仍然必须支付一个月的费用。
 
-## 为集群请求其他子网
+## 为集群请求更多子网
 {: #request}
 
 可以通过向集群分配子网，将稳定的可移植公共或专用 IP 添加到集群。
+{:shortdesc}
 
 **注**：使子网可供集群使用时，此子网的 IP 地址会用于集群联网。为了避免 IP 地址冲突，请确保一个子网只用于一个集群。不要同时将一个子网用于多个集群或用于 {{site.data.keyword.containershort_notm}} 外部的其他用途。
 
@@ -62,7 +63,7 @@ lastupdated: "2018-01-12"
     </tr>
     <tr>
     <td><code><em>&lt;subnet_size&gt;</em></code></td>
-    <td>将 <code>&lt;subnet_size&gt;</code> 替换为要从可移植子网中添加的 IP 地址数。接受的值为 8、16、32 或 64。<p>**注**：添加子网的可移植 IP 地址时，会使用 3 个 IP 地址来建立集群内部联网，所以不能将这 3 个地址用于应用程序负载均衡器或用于创建 LoadBalancer 服务。例如，如果请求 8 个可移植公共 IP 地址，那么可以使用其中 5 个地址向公众公开应用程序。</p> </td>
+    <td>将 <code>&lt;subnet_size&gt;</code> 替换为要从可移植子网中添加的 IP 地址数。接受的值为 8、16、32 或 64。<p>**注**：添加子网的可移植 IP 地址时，会使用 3 个 IP 地址来建立集群内部联网。所以不能将这 3 个地址用于应用程序负载均衡器或用于创建 LoadBalancer 服务。例如，如果请求 8 个可移植公共 IP 地址，那么可以使用其中 5 个地址向公众公开应用程序。</p> </td>
     </tr>
     <tr>
     <td><code><em>&lt;VLAN_ID&gt;</em></code></td>
@@ -77,6 +78,8 @@ lastupdated: "2018-01-12"
     ```
     {: pre}
 
+3. 可选：[启用同一 VLAN 上子网之间的路由](#vlan-spanning)。
+
 <br />
 
 
@@ -84,10 +87,11 @@ lastupdated: "2018-01-12"
 {: #custom}
 
 可以向 Kubernetes 集群添加现有可移植公用或专用子网。
+{:shortdesc}
 
 开始之前，请[设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群。
 
-如果 IBM Cloud infrastructure (SoftLayer) 产品服务组合中存在具有要使用的定制防火墙规则或可用 IP 地址的现有子网，请创建不具有子网的集群，并在集群供应时使现有子网可供集群使用。
+要将 IBM Cloud Infrastructure (SoftLayer) 产品服务组合中的现有子网与定制防火墙规则或可用 IP 地址配合使用，请执行以下操作：
 
 1.  识别要使用的子网。记下子网的标识和 VLAN 标识。在此示例中，子网标识为 807861，VLAN 标识为 1901230。
 
@@ -141,8 +145,8 @@ lastupdated: "2018-01-12"
     当完成集群供应时，集群的状态会更改为**已部署**。
 
     ```
-    Name         ID                                   State      Created          Workers   
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   3   
+    Name         ID                                   State      Created          Workers   Location   Version
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   3         dal10      1.8.8
     ```
     {: screen}
 
@@ -156,17 +160,19 @@ lastupdated: "2018-01-12"
     当工作程序节点已准备就绪时，状态会更改为 **normal**，而阶段状态为 **Ready**。节点阶段状态为 **Ready** 时，可以访问集群。
 
     ```
-    ID                                                  Public IP        Private IP     Machine Type   State      Status
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1   169.47.223.113   10.171.42.93   free           normal    Ready
+    ID                                                  Public IP        Private IP     Machine Type   State      Status   Location   Version
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.47.223.113   10.171.42.93   free           normal     Ready    dal10      1.8.8
     ```
     {: screen}
 
-6.  通过指定子网标识，向集群添加子网。使子网可供集群使用后，将创建 Kubernetes 配置映射，其中包含所有可用的可移植公共 IP 地址以供您使用。如果尚不存在用于集群的应用程序负载均衡器，那么会自动使用一个可移植公共 IP 地址和一个可移植专用 IP 地址来创建公共和专用应用程序负载均衡器。其他所有可移植公共和专用 IP 地址都可用于为应用程序创建 LoadBalancer 服务。
+6.  通过指定子网标识，向集群添加子网。使子网可供集群使用后，将创建 Kubernetes 配置映射，其中包含所有可用的可移植公共 IP 地址以供您使用。如果不存在用于集群的应用程序负载均衡器，那么会自动使用一个可移植公共 IP 地址和一个可移植专用 IP 地址来创建公共和专用应用程序负载均衡器。其他所有可移植公共和专用 IP 地址都可用于为应用程序创建 LoadBalancer 服务。
 
     ```
     bx cs cluster-subnet-add mycluster 807861
     ```
     {: pre}
+
+7. 可选：[启用同一 VLAN 上子网之间的路由](#vlan-spanning)。
 
 <br />
 
@@ -174,7 +180,8 @@ lastupdated: "2018-01-12"
 ## 将用户管理的子网和 IP 地址添加到 Kubernetes 集群
 {: #user_managed}
 
-从要 {{site.data.keyword.containershort_notm}} 访问的内部部署网络中提供自己的子网。然后，可以将专用 IP 地址从该子网添加到 Kubernetes 集群中的 LoadBalancer 服务。
+从您希望 {{site.data.keyword.containershort_notm}} 访问的内部部署网络提供子网。然后，可以将专用 IP 地址从该子网添加到 Kubernetes 集群中的 LoadBalancer 服务。
+{:shortdesc}
 
 需求：
 - 用户管理的子网只能添加到专用 VLAN。
@@ -183,7 +190,9 @@ lastupdated: "2018-01-12"
 
 开始之前：
 - 配置进出外部子网的网络流量的路径。
-- 确认内部部署数据中心网关设备与 IBM Cloud infrastructure (SoftLayer) 产品服务组合中的专用网络 Vyatta 之间或与集群中运行的 Strongswan VPN 服务之间是否具有 VPN 连接。要使用 Vyatta，请参阅此[博客帖子 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/)。要使用 Strongswan，请参阅[使用 Strongswan IPSec VPN 服务设置 VPN 连接](cs_vpn.html)。
+- 确认内部部署数据中心网关设备与 IBM Cloud Infrastructure (SoftLayer) 产品服务组合中的专用网络 Vyatta 之间或与集群中运行的 strongSwan VPN 服务之间是否具有 VPN 连接。要使用 Vyatta，请参阅此[博客帖子 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/)。要使用 strongSwan，请参阅[使用 strongSwan IPSec VPN 服务设置 VPN 连接](cs_vpn.html)。
+
+要从内部部署网络添加子网，请执行以下操作：
 
 1. 查看集群的专用 VLAN 的标识。找到 **VLAN** 部分。在 **User-managed** 字段中，识别带有 _false_ 的 VLAN 标识。
 
@@ -230,7 +239,9 @@ lastupdated: "2018-01-12"
     ```
     {: screen}
 
-4. 添加专用 LoadBalancer 服务或专用 Ingress 应用程序负载均衡器，以通过专用网络访问应用程序。如果要使用在创建专用负载均衡器或专用 Ingress 应用程序负载均衡器时添加的子网的专用 IP 地址，那么必须指定 IP 地址。否则，将在专用 VLAN 上的 IBM Cloud infrastructure (SoftLayer) 子网或用户提供的子网中随机选择 IP 地址。有关更多信息，请参阅[使用 LoadBalancer 服务类型配置对应用程序的访问](cs_loadbalancer.html#config)或[启用专用应用程序负载均衡器](cs_ingress.html#private_ingress)。
+4. 可选：[启用同一 VLAN 上子网之间的路由](#vlan-spanning)。
+
+5. 添加专用 LoadBalancer 服务或专用 Ingress 应用程序负载均衡器，以通过专用网络访问应用程序。要使用已添加子网中的专用 IP 地址，必须指定 IP 地址。否则，将在专用 VLAN 上的 IBM Cloud infrastructure (SoftLayer) 子网或用户提供的子网中随机选择 IP 地址。有关更多信息，请参阅[使用 LoadBalancer 服务类型配置对应用程序的访问](cs_loadbalancer.html#config)或[启用专用应用程序负载均衡器](cs_ingress.html#private_ingress)。
 
 <br />
 
@@ -238,16 +249,22 @@ lastupdated: "2018-01-12"
 ## 管理 IP 地址和子网
 {: #manage}
 
-您可以使用可移植公共和专用子网和 IP 地址公开集群中的应用程序，使其可通过因特网或专用网络进行访问。
+请查看以下选项，这些选项用于列出可用的公共 IP 地址，释放使用的 IP 地址以及在同一 VLAN 上的多个子网之间进行路由。
 {:shortdesc}
 
-在 {{site.data.keyword.containershort_notm}} 中，您可以通过将网络子网添加到集群来为 Kubernetes 服务添加稳定的可移植 IP。创建标准集群时，{{site.data.keyword.containershort_notm}} 会自动供应具有 5 个可移植公共 IP 地址的可移植公用子网和具有 5 个可移植专用 IP 地址的可移植专用子网。可移植 IP 地址是静态的，不会在除去工作程序节点甚至集群时更改。
+### 查看可用的可移植公用 IP 地址
+{: #review_ip}
 
-其中两个可移植 IP 地址（一个公共，一个专用）用于可用于公开集群中多个应用程序的 [Ingress 应用程序负载均衡器](cs_ingress.html)。通过[创建 LoadBalancer 服务](cs_loadbalancer.html)，可以使用 4 个可移植公共 IP 地址和 4 个专用 IP 地址来公开应用程序。
+要列出集群中的所有 IP 地址（已用和可用），可以运行以下命令：
 
-**注**：可移植公共 IP 地址按月收费。如果在供应集群后选择除去可移植公共 IP 地址，那么即使只使用了很短的时间，您也仍然必须支付一个月的费用。
+  ```
+  kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
+  ```
+  {: pre}
 
+要仅列出集群的可用公共 IP 地址，可以使用以下步骤：
 
+开始之前，请[为要使用的集群设置上下文](cs_cli_install.html#cs_cli_configure)。
 
 1.  创建名为 `myservice.yaml` 的 Kubernetes 服务配置文件，并使用哑元负载均衡器 IP 地址定义类型为 `LoadBalancer` 的服务。以下示例使用 IP 地址 1.1.1.1 作为负载均衡器 IP 地址。
 
@@ -295,15 +312,11 @@ lastupdated: "2018-01-12"
     ```
     {: screen}
 
-<br />
-
-
-
-
-## 释放已用的 IP 地址
+### 释放已用的 IP 地址
 {: #free}
 
 可以通过删除正在使用可移植 IP 地址的 LoadBalancer 服务，释放该已用可移植 IP 地址。
+{:shortdesc}
 
 开始之前，请[为要使用的集群设置上下文](cs_cli_install.html#cs_cli_configure)。
 
@@ -320,3 +333,13 @@ lastupdated: "2018-01-12"
     kubectl delete service <myservice>
     ```
     {: pre}
+
+### 启用同一 VLAN 上子网之间的路由
+{: #vlan-spanning}
+
+创建集群时，将在集群所在的 VLAN 中供应以 `/26` 结尾的子网。此主子网最多可容纳 62 个工作程序节点。
+{:shortdesc}
+
+如果是大型集群，或者在同一 VLAN 上有单个区域中的多个较小集群，可能会超过此 62 个工作程序节点的限制。达到 62 个工作程序节点的限制时，将订购同一 VLAN 中的第二个主子网。
+
+要在同一 VLAN 上的子网之间进行路由，必须开启 VLAN 生成。有关指示信息，请参阅[启用或禁用 VLAN 生成](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning)。

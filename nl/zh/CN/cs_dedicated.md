@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-01"
+lastupdated: "2018-03-15"
 
 ---
 
@@ -18,7 +18,7 @@ lastupdated: "2018-02-01"
 # 开始使用 {{site.data.keyword.Bluemix_dedicated_notm}} 中的集群
 {: #dedicated}
 
-如果您具有 {{site.data.keyword.Bluemix_dedicated}} 帐户，那么可以在专用云环境 (`https://<my-dedicated-cloud-instance>.bluemix.net`) 中部署集群，并使用也在其中运行的预先选择的 {{site.data.keyword.Bluemix}} 服务进行连接。
+如果您有 {{site.data.keyword.Bluemix_dedicated}} 帐户要使用 {{site.data.keyword.containerlong}}，那么可以在专用云环境 (`https://<my-dedicated-cloud-instance>.bluemix.net`) 中部署 Kubernetes 集群，并使用也在其中运行的预先选择的 {{site.data.keyword.Bluemix}} 服务进行连接。
 {:shortdesc}
 
 如果您没有 {{site.data.keyword.Bluemix_dedicated_notm}} 帐户，那么可以在公共 {{site.data.keyword.Bluemix_notm}} 帐户中[开始使用 {{site.data.keyword.containershort_notm}}](container_index.html#container_index)。
@@ -26,14 +26,14 @@ lastupdated: "2018-02-01"
 ## 关于 Dedicated 云环境
 {: #dedicated_environment}
 
-使用 {{site.data.keyword.Bluemix_dedicated_notm}} 帐户，可用物理资源仅供您的集群专用，而不会与其他 {{site.data.keyword.IBM_notm}} 客户的集群共享。如果您希望对集群进行隔离，并且还需要对您使用的其他 {{site.data.keyword.Bluemix_notm}} 服务进行此类隔离，可选择设置 {{site.data.keyword.Bluemix_dedicated_notm}} 环境。如果您没有 Dedicated 帐户，那么可以在 {{site.data.keyword.Bluemix_notm}} Public 中创建具有专用硬件的集群。
+使用 {{site.data.keyword.Bluemix_dedicated_notm}} 帐户，可用物理资源仅供您的集群专用，而不会与其他 {{site.data.keyword.IBM_notm}} 客户的集群共享。如果您希望对集群进行隔离，并且还需要对您使用的其他 {{site.data.keyword.Bluemix_notm}} 服务进行此类隔离，可选择设置 {{site.data.keyword.Bluemix_dedicated_notm}} 环境。如果您没有 Dedicated 帐户，那么可以[在 {{site.data.keyword.Bluemix_notm}} Public 中创建具有专用硬件的集群](cs_clusters.html#clusters_ui)。
 
 使用 {{site.data.keyword.Bluemix_dedicated_notm}}，您可以在 Dedicated 控制台中或通过使用 {{site.data.keyword.containershort_notm}} CLI 在目录中创建集群。使用 Dedicated 控制台时，您将利用自己的 IBM 标识同时登录到 Dedicated 和 Public 帐户。此双登录允许您使用 Dedicated 控制台访问公共集群。使用 CLI 时，请利用 Dedicated 端点 (`api.<my-dedicated-cloud-instance>.bluemix.net.`) 登录，然后将与 Dedicated 环境相关联的公共区域的 {{site.data.keyword.containershort_notm}} API 端点设定为目标。
 
 {{site.data.keyword.Bluemix_notm}} Public 和 Dedicated 之间的最显著区别如下所示。
 
-*   {{site.data.keyword.IBM_notm}} 拥有并管理已部署工作程序节点、VLAN 和子网的 IBM Cloud infrastructure (SoftLayer) 帐户，而不是您拥有的帐户。
-*   这些 VLAN 和子网的规范在启用 Dedicated 环境时确定，而不是在创建集群时确定。
+*   在 {{site.data.keyword.Bluemix_dedicated_notm}} 中，{{site.data.keyword.IBM_notm}} 拥有并管理已部署工作程序节点、VLAN 和子网的 IBM Cloud Infrastructure (SoftLayer) 帐户。在 {{site.data.keyword.Bluemix_notm}} Public 中，您拥有 IBM Cloud Infrastructure (SoftLayer) 帐户。
+*   在 {{site.data.keyword.Bluemix_dedicated_notm}} 中，将在启用 Dedicated 环境时确定 {{site.data.keyword.IBM_notm}} 管理的 IBM Cloud Infrastructure (SoftLayer) 帐户中 VLAN 和子网的规范。在 {{site.data.keyword.Bluemix_notm}} Public 中，将在创建集群时确定 VLAN 和子网的规范。
 
 ### 云环境之间集群管理的差异
 {: #dedicated_env_differences}
@@ -42,7 +42,7 @@ lastupdated: "2018-02-01"
 |--|--------------|--------------------------------|
 |集群创建|创建免费集群或为标准集群指定以下详细信息：<ul><li>集群类型</li><li>名称</li><li>位置</li><li>机器类型</li><li>工作程序节点数</li><li>公共 VLAN</li><li>专用 VLAN</li><li>硬件</li></ul>|为标准集群指定以下详细信息：<ul><li>名称</li><li>Kubernetes 版本</li><li>机器类型</li><li>工作程序节点数</li></ul><p>**注**：在创建 {{site.data.keyword.Bluemix_notm}} 环境期间，会预先定义 VLAN 和硬件设置。</p>|
 |集群硬件和所有权|在标准集群中，硬件可由其他 {{site.data.keyword.IBM_notm}} 客户共享或仅供您专用。公用和专用 VLAN 由您在 IBM Cloud infrastructure (SoftLayer) 帐户中所拥有和管理。|在 {{site.data.keyword.Bluemix_dedicated_notm}} 上的集群中，硬件始终是专用的。公用和专用 VLAN 由 IBM 代表您拥有并进行管理。位置是为 {{site.data.keyword.Bluemix_notm}} 环境预定义的。|
-|负载均衡器和 Ingress 联网|在标准集群供应期间，会自动执行以下操作。<ul><li>一个可移植的公共子网和一个可移植的专用子网将绑定到您的集群，并分配给您的 IBM Cloud infrastructure (SoftLayer) 帐户。</li><li>一个可移植公共 IP 地址用于一个高可用性应用程序负载均衡器，并分配格式为 &lt;cluster_name&gt;.containers.mybluemix.net 的唯一公共路径。您可以使用此路径向公众公开多个应用程序。一个可移植专用 IP 地址用于专用应用程序负载均衡器。</li><li>向集群分配四个可移植公共 IP 地址和四个可移植专用 IP 地址，这些地址可用于通过 LoadBalancer 服务来公开应用程序。通过 IBM Cloud infrastructure (SoftLayer) 帐户可以请求更多子网。</li></ul>|创建 Dedicated 帐户时，您会对如何公开和访问集群服务作出连接决策。如果要使用自己的企业 IP 范围（用户管理的 IP），那么必须在[设置 {{site.data.keyword.Bluemix_dedicated_notm}} 环境](/docs/dedicated/index.html#setupdedicated)时提供这些 IP 范围。<ul><li>缺省情况下，不会将任何可移植公共子网绑定到您在 Dedicated 帐户中创建的集群。相反，您可以灵活地选择最适合于您企业的连接模型。</li><li>创建集群后，选择要绑定的子网类型，并与集群配合使用以获取负载均衡器或 Ingress 连接。<ul><li>对于公共或专用可移植子网，可以[向集群添加子网](cs_subnets.html#subnets)</li><li>对于在 Dedicated 上线时提供给 IBM 的用户管理的 IP 地址，您可以[向集群添加用户管理的子网](#dedicated_byoip_subnets)。</li></ul></li><li>将子网绑定到集群后，将创建 Ingress 控制器。仅当使用可移植公共子网时，才会创建公共 Ingress 路径。</li></ul>|
+|负载均衡器和 Ingress 联网|在标准集群供应期间，会自动执行以下操作。<ul><li>一个可移植的公共子网和一个可移植的专用子网将绑定到您的集群，并分配给您的 IBM Cloud infrastructure (SoftLayer) 帐户。</li><li>一个可移植公共 IP 地址用于一个高可用性应用程序负载均衡器，并分配格式为 &lt;cluster_name&gt;.containers.mybluemix.net 的唯一公共路径。您可以使用此路径向公众公开多个应用程序。一个可移植专用 IP 地址用于专用应用程序负载均衡器。</li><li>向集群分配四个可移植公共 IP 地址和四个可移植专用 IP 地址，这些地址可用于通过 LoadBalancer 服务来公开应用程序。通过 IBM Cloud infrastructure (SoftLayer) 帐户可以请求更多子网。</li></ul>|创建 Dedicated 帐户时，您会对如何公开和访问集群服务作出连接决策。如果要使用自己的企业 IP 范围（用户管理的 IP），那么必须在[设置 {{site.data.keyword.Bluemix_dedicated_notm}} 环境](/docs/dedicated/index.html#setupdedicated)时提供这些 IP 范围。<ul><li>缺省情况下，不会将任何可移植公共子网绑定到您在 Dedicated 帐户中创建的集群。相反，您可以灵活地选择最适合于您企业的连接模型。</li><li>创建集群后，选择要绑定的子网类型，并与集群配合使用以获取负载均衡器或 Ingress 连接。<ul><li>对于公共或专用可移植子网，可以[向集群添加子网](cs_subnets.html#subnets)</li><li>对于在 Dedicated 上线时提供给 IBM 的用户管理的 IP 地址，您可以[向集群添加用户管理的子网](#dedicated_byoip_subnets)。</li></ul></li><li>将子网绑定到集群后，将创建 Ingress 应用程序负载均衡器。仅当使用可移植公共子网时，才会创建公共 Ingress 路径。</li></ul>|
 |NodePort 联网|在您的工作程序节点上公开一个公共端口，并使用该工作程序节点的公共 IP 地址来公共访问集群中的服务。|防火墙将阻止工作程序节点的所有公共 IP 地址。但是，对于添加到集群的 {{site.data.keyword.Bluemix_notm}} 服务，可以通过公共 IP 地址或专用 IP 地址访问节点端口。|
 |持久性存储器|使用卷的[动态供应](cs_storage.html#create)或[静态供应](cs_storage.html#existing)。|使用卷的[动态供应](cs_storage.html#create)。[开具支持凭单](/docs/get-support/howtogetsupport.html#getting-customer-support)以请求对卷执行备份、请求从卷复原以及请求其他存储功能。</li></ul>|
 |{{site.data.keyword.registryshort_notm}} 中的映像注册表 URL|<ul><li>美国南部和美国东部：<code>registry.ng bluemix.net</code></li><li>英国南部：<code>registry.eu-gb.bluemix.net</code></li><li>欧洲中部（法兰克福）：<code>registry.eu-de.bluemix.net</code></li><li>澳大利亚（悉尼）：<code>registry.au-syd.bluemix.net</code></li></ul>|<ul><li>对于新名称空间，请使用为 {{site.data.keyword.Bluemix_notm}} Public 定义的基于相同区域的注册表。</li><li>对于在 {{site.data.keyword.Bluemix_dedicated_notm}} 中为单个和可扩展容器设置的名称空间，请使用 <code>registry.&lt;dedicated_domain&gt;</code></li></ul>|
@@ -55,8 +55,12 @@ lastupdated: "2018-02-01"
 ### 服务体系结构
 {: #dedicated_ov_architecture}
 
-每个工作程序节点均设置有 {{site.data.keyword.IBM_notm}} 管理的 Docker Engine、独立的计算资源、联网和卷服务。内置安全性功能提供了隔离、资源管理功能和工作程序节点安全合规性。工作程序节点使用安全 TLS 证书和 OpenVPN 连接与主节点进行通信。
+每个工作程序节点均设置有 {{site.data.keyword.IBM_notm}} 管理的 Docker Engine、独立的计算资源、联网和卷服务。
 {:shortdesc}
+
+内置安全性功能提供了隔离、资源管理功能和工作程序节点安全合规性。工作程序节点使用安全 TLS 证书和 OpenVPN 连接与主节点进行通信。
+
+
 
 *{{site.data.keyword.Bluemix_dedicated_notm}} 中的 Kubernetes 体系结构和联网情况*
 
@@ -68,7 +72,8 @@ lastupdated: "2018-02-01"
 ## 在 Dedicated 上设置 {{site.data.keyword.containershort_notm}}
 {: #dedicated_setup}
 
-每个 {{site.data.keyword.Bluemix_dedicated_notm}} 环境在 {{site.data.keyword.Bluemix_notm}} 中都有一个公共的客户机拥有的企业帐户。为了让 Dedicated 环境中的用户能够创建集群，管理员必须将用户添加到 Dedicated 环境的这个公共公司帐户中。
+每个 {{site.data.keyword.Bluemix_dedicated_notm}} 环境在 {{site.data.keyword.Bluemix_notm}} 中都有一个公共的客户机拥有的企业帐户。为了让 Dedicated 环境中的用户能够创建集群，管理员必须将这些用户添加到公共公司帐户中。
+{:shortdesc}
 
 开始之前：
   * [设置 {{site.data.keyword.Bluemix_dedicated_notm}} 环境](/docs/dedicated/index.html#setupdedicated)。
@@ -201,7 +206,7 @@ lastupdated: "2018-02-01"
 2. 选中**同时登录到 {{site.data.keyword.Bluemix_notm}} Public** 复选框，然后单击**登录**。
 3. 按照提示使用 IBM 标识登录。如果这是您首次登录到 Dedicated 帐户，请按照提示登录到 {{site.data.keyword.Bluemix_dedicated_notm}}。
 4.  在目录中，选择**容器**，然后单击 **Kubernetes 集群**。
-5.  输入**集群名称**。
+5.  输入**集群名称**。名称必须以字母开头，可以包含字母、数字和 -，并且不能超过 35 个字符。请注意，{{site.data.keyword.IBM_notm}} 分配的 Ingress 子域派生自集群名称。集群名称和 Ingress 子域共同构成标准域名，该名称在区域中必须唯一，并且不超过 63 个字符。为了满足这些需求，可能会截断集群名称，或者可能会为子域分配随机字符值。
 6.  选择**机器类型**。机器类型定义在每个工作程序节点中设置的虚拟 CPU 和内存量。此虚拟 CPU 和内存可用于您在节点中部署的所有容器。
     -   微机器类型指示最小的选项。
     -   均衡机器类型具有分配给每个 CPU 的相等内存量，从而优化性能。
@@ -252,7 +257,7 @@ lastupdated: "2018-02-01"
     </tr>
     <tr>
     <td><code>--name <em>&lt;name&gt;</em></code></td>
-    <td>将 <em>&lt;name&gt;</em> 替换为集群的名称。</td>
+    <td>将 <em>&lt;name&gt;</em> 替换为集群的名称。名称必须以字母开头，可以包含字母、数字和 -，并且不能超过 35 个字符。请注意，{{site.data.keyword.IBM_notm}} 分配的 Ingress 子域派生自集群名称。集群名称和 Ingress 子域共同构成标准域名，该名称在区域中必须唯一，并且不超过 63 个字符。为了满足这些需求，可能会截断集群名称，或者可能会为子域分配随机字符值。</td>
     </tr>
     <tr>
     <td><code>--workers <em>&lt;number&gt;</em></code></td>
@@ -273,8 +278,8 @@ lastupdated: "2018-02-01"
 
 
     ```
-    Name         ID                                   State      Created          Workers
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1
+    Name         ID                                   State      Created          Workers   Location   Version
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         dal10      1.8.8
     ```
     {: screen}
 
@@ -288,8 +293,8 @@ lastupdated: "2018-02-01"
     当工作程序节点已准备就绪时，状态会更改为 **normal**，而阶段状态为 **Ready**。节点阶段状态为 **Ready** 时，可以访问集群。
 
     ```
-    ID                                                  Public IP        Private IP     Machine Type   State      Status
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1   169.47.223.113   10.171.42.93   free           normal    Ready
+    ID                                                  Public IP        Private IP     Machine Type   State      Status   Location   Version
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.47.223.113   10.171.42.93   free           normal     Ready    dal10      1.8.8
     ```
     {: screen}
 
@@ -399,7 +404,9 @@ lastupdated: "2018-02-01"
     ```
     {: screen}
 
-4. 要配置内部部署和内部帐户连接，请在以下选项之间进行选择：
+4. 可选：[启用同一 VLAN 上子网之间的路由](cs_subnets.html#vlan-spanning)。
+
+5. 要配置内部部署和内部帐户连接，请在以下选项之间进行选择：
   - 如果将 10.x.x.x 专用 IP 地址范围用于子网，请使用该范围内的有效 IP，以配置与 Ingress 和负载均衡器的内部部署和内部帐户连接。有关更多信息，请参阅[配置对应用程序的访问权](cs_network_planning.html#planning)。
   - 如果未将 10.x.x.x 专用 IP 地址范围用于子网，请使用该范围内的有效 IP，以配置与 Ingress 和负载均衡器的内部部署连接。有关更多信息，请参阅[配置对应用程序的访问权](cs_network_planning.html#planning)。但是，您必须使用 IBM Cloud infrastructure (SoftLayer) 可移植专用子网，在您的集群与其他基于 Cloud Foundry 的服务之前配置内部帐户连接。您可以使用 [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) 命令来创建可移植专用子网。对于此场景，集群同时具有用于内部部署连接的用户管理子网和用于内部帐户连接的 IBM Cloud infrastructure (SoftLayer) 可移植专用子网。
 
@@ -411,6 +418,7 @@ lastupdated: "2018-02-01"
   * [更新 Kubernetes 主节点](cs_cluster_update.html#master)
   * [更新工作程序节点](cs_cluster_update.html#worker_node)
   * [配置集群日志记录](cs_health.html#logging)
+      * **注**：Dedicated 端点不支持日志启用。您必须登录到公共 {{site.data.keyword.cloud_notm}} 端点并将公共组织和空间设定为目标，才能启用日志转发。
   * [配置集群监视](cs_health.html#monitoring)
       * **注**：`ibm-monitoring` 集群存在于每个 {{site.data.keyword.Bluemix_dedicated_notm}} 帐户中。此集群持续监视 Dedicated 环境中 {{site.data.keyword.containerlong_notm}} 的运行状况，检查环境的稳定性和连通性。请勿从环境中除去此集群。
   * [可视化 Kubernetes 集群资源](cs_integrations.html#weavescope)
@@ -440,7 +448,7 @@ lastupdated: "2018-02-01"
 #### 使用 Ingress 配置对应用程序的公共访问权
 {: #dedicated_apps_public_ingress}
 
-如果要对应用程序负载均衡器使用公共 IP 地址，请确保向 IBM 提供企业防火墙白名单，或[开具支持凭单](/docs/get-support/howtogetsupport.html#getting-customer-support)以配置防火墙白名单。然后，按照[使用 Ingress 配置对应用程序的访问权](cs_ingress.html#config)中的步骤进行操作。
+如果要对应用程序负载均衡器使用公共 IP 地址，请确保向 IBM 提供企业防火墙白名单，或[开具支持凭单](/docs/get-support/howtogetsupport.html#getting-customer-support)以配置防火墙白名单。然后，按照[使用 Ingress 配置对应用程序的访问权](cs_ingress.html#configure_alb)中的步骤进行操作。
 
 ### 创建持久性存储器
 {: #dedicated_apps_volume_claim}

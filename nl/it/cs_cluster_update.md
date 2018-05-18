@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-02"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -19,13 +19,18 @@ lastupdated: "2018-02-02"
 # Aggiornamento dei cluster e dei nodi di lavoro
 {: #update}
 
+Puoi installare gli aggiornamenti per mantenere aggiornati i tuoi cluster Kubernetes in {{site.data.keyword.containerlong}}.
+{:shortdesc}
+
 ## Aggiornamento del master Kubernetes
 {: #master}
 
-Periodicamente, Kubernetes rilascia gli aggiornamenti. Questo può essere un [aggiornamento maggiore, minore o patch](cs_versions.html#version_types). A seconda del tipo di aggiornamento, potresti essere responsabile dell'aggiornamento del tuo master Kubernetes. Sei sempre responsabile di mantenere i tuoi nodi di lavoro aggiornati. Quando effettui gli aggiornamenti, il master Kubernetes viene aggiornato prima dei tuoi nodi di lavoro.
+Periodicamente, Kubernetes rilascia [aggiornamenti principali, secondari o patch](cs_versions.html#version_types). A seconda del tipo di aggiornamento, potresti essere responsabile dell'aggiornamento dei componenti master di Kubernetes.
 {:shortdesc}
 
-Per impostazione predefinita, limitiamo la tua capacità di aggiornare un master Kubernetes a più di due versioni secondarie in avanti rispetto alla tua versione corrente. Ad esempio, se il master corrente è la versione 1.5 e vuoi aggiornare a 1.8, devi prima aggiornare a 1.7. Puoi forzare l'aggiornamento, ma l'aggiornamento di più di due versioni secondarie potrebbe causare risultati imprevisti. 
+Gli aggiornamenti possono influire sulla versione del server API Kubernetes o su altri componenti nel tuo master Kubernetes.  Sei sempre responsabile di mantenere i tuoi nodi di lavoro aggiornati. Quando esegui gli aggiornamenti, il master Kubernetes viene aggiornato prima dei nodi di lavoro.
+
+Per impostazione predefinita, la possibilità di aggiornare il server API Kubernetes è limitata nel master Kubernetes a più di due versioni secondarie in avanti rispetto alla tua versione corrente. Ad esempio, se la versione corrente del server API Kubernetes è 1.5 e vuoi aggiornare alla 1.8, devi prima aggiornare alla 1.7. Puoi forzare l'aggiornamento, ma l'aggiornamento di più di due versioni secondarie potrebbe causare risultati imprevisti. Se il tuo cluster esegue una versione di Kubernetes non supportata, potresti dover forzare l'aggiornamento.
 
 Il seguente diagramma illustra il processo che puoi seguire per aggiornare il tuo master.
 
@@ -38,10 +43,11 @@ Figura 1. Diagramma del processo di aggiornamento del master Kubernetes
 Per gli aggiornamenti _maggiore_ o _minore_, completa la seguente procedura:
 
 1. Controlla le [modifiche Kubernetes](cs_versions.html) ed effettua tutti gli aggiornamenti contrassegnati come _Aggiorna prima master_.
-2. Aggiorna il tuo master Kubernetes utilizzando la GUI o eseguendo il comando della CLI [](cs_cli_reference.html#cs_cluster_update). Quando aggiorni il master Kubernetes, il master non è attivo per circa 5 - 10 minuti. Durante l'aggiornamento, non è possibile accedere o modificare il cluster. Tuttavia, i nodi di lavoro, le applicazioni e le risorse che gli utenti del cluster hanno distribuito non vengono modificate e continuano ad essere eseguite.
-3. Conferma che l'aggiornamento è stato completato. Controlla la versione di Kubernetes nel dashboard {{site.data.keyword.Bluemix_notm}} o esegui `bx cs clusters`.
+2. Aggiorna il tuo server API Kubernetes e i componenti master Kubernetes associati utilizzando la GUI o eseguendo il [comando della CLI](cs_cli_reference.html#cs_cluster_update). Quando aggiorni il server API Kubernetes, il server API resta inattivo per circa 5-10 minuti. Durante l'aggiornamento, non è possibile accedere o modificare il cluster. Tuttavia, i nodi di lavoro, le applicazioni e le risorse che gli utenti del cluster hanno distribuito non vengono modificate e continuano ad essere eseguite.
+3. Conferma che l'aggiornamento è stato completato. Controlla la versione del server API Kubernetes nel dashboard {{site.data.keyword.Bluemix_notm}} o eseguendo `bx cs clusters`.
+4. Installa la versione della [`cli kubectl`](cs_cli_install.html#kubectl) che corrisponde alla versione del server API Kubernetes eseguita nel master Kubernetes.
 
-Una volta completato l'aggiornamento del master Kubernetes, puoi aggiornare i tuoi nodi di lavoro.
+Una volta completato l'aggiornamento del server API Kubernetes, puoi aggiornare i tuoi nodi di lavoro.
 
 <br />
 
@@ -49,11 +55,13 @@ Una volta completato l'aggiornamento del master Kubernetes, puoi aggiornare i tu
 ## Aggiornamento dei nodi di lavoro
 {: #worker_node}
 
-Dunque, hai ricevuto una notifica di aggiornare il tuo nodo di lavoro. Cosa significa? I tuoi dati sono archiviati nei pod all'interno dei tuoi nodi di lavoro. Quando sono disponibili patch e aggiornamenti di sicurezza per il master Kubernetes, devi assicurati che i tuoi nodi di lavoro rimangano sincronizzati. Il master del nodo di lavoro non può essere superiore al master Kubernetes.
+Hai ricevuto una notifica per aggiornare i tuoi nodi di lavoro. Cosa significa? Man mano che gli aggiornamenti e le patch di sicurezza vengono implementati per il server API Kubernetes e altri componenti master di Kubernetes, devi assicurati che i tuoi nodi di lavoro rimangano sincronizzati.
 {: shortdesc}
 
+La versione Kubernetes del nodo di lavoro non può essere superiore alla versione del server API Kubernetes che viene eseguita nel master Kubernetes. Prima di iniziare, [aggiorna il master Kubernetes](#master).
+
 <ul>**Attenzione**:</br>
-<li>Gli aggiornamenti ai nodi di lavoro possono causare tempi di inattività per applicazioni e servizi. </li>
+<li>Gli aggiornamenti ai nodi di lavoro possono causare tempi di inattività per applicazioni e servizi.</li>
 <li>I dati vengono eliminati se non archiviati al di fuori del pod.</li>
 <li>Utilizza le [repliche ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#replicas) nelle tue distribuzioni per ripianificare i pod sui nodi disponibili.</li></ul>
 
@@ -65,7 +73,7 @@ Come vengono definite le chiavi?
 
 Nella sezione delle informazioni sui dati della mappa di configurazione, puoi definire fino a 10 regole separate da eseguire in qualsiasi momento. Per essere aggiornati, i nodi di lavoro devono passare ogni regola definita.
 
-Le chiavi sono definite. E adesso? 
+Le chiavi sono definite. E adesso?
 
 Dopo aver definito le tue regole, esegui il comando `worker-upgrade`. Se viene restituita una risposta positiva, i nodi di lavoro sono in coda per essere aggiornati. Tuttavia, i nodi non si sottopongono al processo di upgrade finché non vengono soddisfatte tutte le regole. Mentre sono in coda, le regole vengono controllate a intervalli per vedere se è possibile aggiornare i nodi.
 
@@ -75,11 +83,9 @@ Quando la mappa di configurazione non è definita, viene utilizzato il valore pr
 
 Per aggiornare i tuoi nodi di lavoro:
 
-1. Installa la versione della [`cli kubectl` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/tools/install-kubectl/) che corrisponde alla versione di Kubernetes del master Kubernetes.
+1. Apporta tutte le modifiche contrassegnate come _Aggiorna dopo il master_ in [Modifiche Kubernetes](cs_versions.html).
 
-2. Apporta tutte le modifiche contrassegnate come _Aggiorna dopo il master_ in [Modifiche Kubernetes](cs_versions.html).
-
-3. Facoltativo: definisci la tua mappa di configurazione.
+2. Facoltativo: definisci la tua mappa di configurazione.
     Esempio:
 
     ```
@@ -110,7 +116,7 @@ Per aggiornare i tuoi nodi di lavoro:
     {:pre}
   <table summary="La prima riga nella tabella si estende su entrambe le colonne. Le rimanenti righe devono essere lette da sinistra a destra, con il parametro nella colonna uno e la descrizione corrispondente nella colonna due.">
     <thead>
-      <th colspan=2><img src="images/idea.png"/> Descrizione dei componenti </th>
+      <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti </th>
     </thead>
     <tbody>
       <tr>
@@ -162,5 +168,51 @@ Passi successivi:
   - Ripeti il processo di aggiornamento con gli altri cluster.
   - Avvisa gli sviluppatori che lavorano nel cluster di aggiornare la loro CLI `kubectl` alla versione del master Kubernetes.
   - Se il dashboard Kubernetes non visualizza i grafici di utilizzo, [elimina il pod `kube-dashboard`](cs_troubleshoot.html#cs_dashboard_graphs).
+
+
 <br />
+
+
+
+## Aggiornamento dei tipi di macchina
+{: #machine_type}
+
+Puoi aggiornare i tipi di macchina che vengono utilizzati nei nodi di lavoro aggiungendo nuovi nodi di lavoro e rimuovendo quelli vecchi. Ad esempio, se hai nodi di lavoro virtuali su tipi di macchina obsoleti che includono `u1c` o `b1c` nei nomi, crea dei nodi di lavoro che utilizzano i tipi di macchina con `u2c` o `b2c` nei nomi.
+{: shortdesc}
+
+1. Prendi nota dei nomi e delle ubicazioni dei nodi di lavoro da aggiornare.
+    ```
+    bx cs workers <cluster_name>
+    ```
+    {: pre}
+
+2. Visualizza i tipi di macchina disponibili.
+    ```
+    bx cs machine-types <location>
+    ```
+    {: pre}
+
+3. Aggiungi un nodo di lavoro utilizzando il comando [bx cs worker-add](cs_cli_reference.html#cs_worker_add) e specifica uno dei tipi di macchina elencati nell'output del comando precedente.
+
+    ```
+    bx cs worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_vlan> --public-vlan <public_vlan>
+    ```
+    {: pre}
+
+4. Verifica che il nodo di lavoro sia stato aggiunto.
+
+    ```
+    bx cs workers <cluster_name>
+    ```
+    {: pre}
+
+5. Quando il nodo di lavoro aggiunto è nello stato `Normal`, puoi rimuovere il nodo di lavoro obsoleto. **Nota**: se rimuovi un tipo di macchina con fatturazione mensile (ad esempio, bare metal), ti viene addebitato l'intero mese.
+
+    ```
+    bx cs worker-rm <cluster_name> <worker_node>
+    ```
+    {: pre}
+
+6. Ripeti questi passi per aggiornare altri nodi di lavoro in tipi di macchine differenti.
+
 

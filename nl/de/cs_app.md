@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-02-28"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-01-24"
 # Apps in Clustern bereitstellen
 {: #app}
 
-Sie können Kubernetes-Verfahren verwenden, um Apps bereitzustellen und sicherzustellen, dass Ihre Apps ununterbrochen betriebsbereit sind. Sie können beispielsweise rollierende Aktualisierungen und Rollbacks ausführen, ohne dass Ihren Benutzern hierdurch Ausfallzeiten entstehen.
+Sie können Kubernetes-Verfahren in {{site.data.keyword.containerlong}} verwenden, um Apps in Containern bereitzustellen und um sicherzustellen, dass Ihre Apps ununterbrochen betriebsbereit sind. Sie können beispielsweise rollierende Aktualisierungen und Rollbacks ausführen, ohne dass Ihren Benutzern hierdurch Ausfallzeiten entstehen.
 {:shortdesc}
 
 Erfahren Sie mehr zu den allgemeinen Schritten zur Bereitstellung von Apps, indem Sie auf einen Bereich der folgenden Abbildung klicken.
@@ -40,9 +40,9 @@ Erfahren Sie mehr zu den allgemeinen Schritten zur Bereitstellung von Apps, inde
 {: #highly_available_apps}
 
 Je breiter gefächert Sie Ihre Containerkonfiguration auf mehrere Workerknoten und Cluster verteilen, umso geringer ist die Wahrscheinlichkeit, dass Ihre Benutzer Ausfallzeiten mit Ihrer App verzeichnen.
+{:shortdesc}
 
 Betrachten Sie die folgenden potenziellen Appkonfigurationen, die nach zunehmendem Grad der Verfügbarkeit angeordnet sind.
-{:shortdesc}
 
 ![Stufen der Hochverfügbarkeit für eine App](images/cs_app_ha_roadmap.png)
 
@@ -53,7 +53,7 @@ Betrachten Sie die folgenden potenziellen Appkonfigurationen, die nach zunehmend
 (Anti-Affinität) an unterschiedlichen Standorten verteilt sind.
 4.  Bereitstellung mit n+2 Pods, deren Verwaltung durch eine Replikatgruppe erfolgt und die auf mehrere Knoten (Anti-Affinität) in unterschiedlichen Regionen verteilt sind.
 
-Erfahren Sie mehr über die Verfahren zum Verbessern der Verfügbarkeit Ihrer App:
+### Verfügbarkeit Ihrer App erhöhen
 
 <dl>
 <dt>Bereitstellungen und Replikatgruppen zum Bereitstellen Ihrer App und deren Abhängigkeiten verwenden</dt>
@@ -75,7 +75,7 @@ Jede Bereitstellung verfolgt die Revisionen, die bereitgestellt wurden. Dieses V
 <strong>Hinweis:</strong> Die folgende YAML-Datei setzt durch, dass jeder Pod auf einem anderen Workerknoten bereitgestellt wird. Sind mehr Replikate definiert als Workerknoten in Ihrem Cluster verfügbar sind, so wird nur die Anzahl an Replikaten bereitgestellt, die die Anti-Affinitätsanforderung erfüllen kann. Alle zusätzlichen Replikate verweilen so lange in einem Wartestatus, bis weitere Workerknoten zum Cluster hinzugefügt werden.
 
 <pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+<code>apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: wasliberty
@@ -138,7 +138,7 @@ Eine grundlegende App-Bereitstellung in einem kostenlosen Cluster oder Standardc
 
 Um die Komponenten für eine minimale App wie im Diagramm dargestellt bereitzustellen, verwenden Sie eine Konfigurationsdatei wie im folgenden Beispiel:
 ```
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: ibmliberty
@@ -342,7 +342,7 @@ Gehen Sie wie folgt vor, um einen geheimen Schlüssel mit einem Zertifikat zu er
 ## Apps über die GUI bereitstellen
 {: #app_ui}
 
-Wenn Sie eine App über das Kubernetes-Dashboard in Ihrem Cluster bereitstellen, wird automatisch eine Bereitstellungsressource erstellt, die die Pods in Ihrem Cluster erstellt, aktualisiert und verwaltet.
+Wenn Sie eine App über das Kubernetes-Dashboard in Ihrem Cluster bereitstellen, wird eine Bereitstellungsressource automatisch die Pods in Ihrem Cluster erstellen, aktualisieren und verwalten.
 {:shortdesc}
 
 Vorbemerkungen:
@@ -354,7 +354,7 @@ Gehen Sie wie folgt vor, um Ihre App bereitzustellen:
 
 1.  [Öffnen Sie das Kubernetes-Dashboard](#cli_dashboard).
 2.  Klicken Sie im Kubernetes-Dashboard auf **+ Create**.
-3.  Wählen Sie **Specify app details below** (App-Details unten angeben) aus, um die App-Details über die GUI einzugeben, oder wählen Sie die Option **Upload a YAML or JSON file** (YAML- oder JSON-Datei hochladen) aus, um die [Konfigurationsdatei ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) für Ihre App hochzuladen. Verwenden Sie [diese YAML-Beispieldatei ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/IBM-Bluemix/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml), um einen Container aus dem Image **ibmliberty** in der Region 'Vereinigte Staaten (Süden)' bereitzustellen.
+3.  Wählen Sie **Specify app details below** (App-Details unten angeben) aus, um die App-Details über die GUI einzugeben, oder wählen Sie die Option **Upload a YAML or JSON file** (YAML- oder JSON-Datei hochladen) aus, um die [Konfigurationsdatei ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) für Ihre App hochzuladen. Verwenden Sie [diese YAML-Beispieldatei ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml), um einen Container aus dem Image **ibmliberty** in der Region 'Vereinigte Staaten (Süden)' bereitzustellen.
 4.  Klicken Sie im Kubernetes-Dashboard auf **Deployments**, um zu überprüfen, ob die Bereitstellung auch tatsächlich erstellt wurde.
 5.  Wenn Sie Ihre App mithilfe eines Knotenportservice, eines Lastenausgleichsservice oder Ingress öffentlich zugänglich gemacht haben, überprüfen Sie, dass Sie auf die App zugreifen können.
 
@@ -400,14 +400,15 @@ Gehen Sie wie folgt vor, um Ihre App bereitzustellen:
 ## Apps skalieren
 {: #app_scaling}
 
-Stellen Sie Cloudanwendungen bereit, die auf Bedarfsänderungen für Ihre Anwendungen reagieren und Ressourcen nur dann belegen, wenn sie auch benötigt werden. Bei der automatischen Skalierung (Autoskalierung) wird die Anzahl der Instanzen Ihrer Apps je nach CPU-Auslastung automatisch erhöht oder verringert.
+Mit Kubernetes können Sie die [horizontale Autoskalierung von Pods ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) aktivieren, um die Anzahl der Instanzen Ihrer Apps CPU-basiert automatisch zu erhöhen oder zu verringern.
 {:shortdesc}
 
-Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) auf Ihren Cluster aus.
+Suchen Sie Informationen zum Skalieren von Cloud Foundry-Anwendungen? Lesen Sie den Abschnitt zur [IBM Autoskalierung für {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html). 
+{: tip}
 
-**Hinweis:** Suchen Sie Informationen zum Skalieren von Cloud Foundry-Anwendungen? Lesen Sie den Abschnitt zur [IBM Autoskalierung für {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html).
-
-Mit Kubernetes können Sie die [horizontale Autoskalierung von Pods ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale) aktivieren, um Ihre Apps CPU-basiert zu skalieren.
+Vorbemerkungen:
+- [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) (Befehlszeilenschnittstelle) auf Ihren Cluster aus.
+- Die Heapsterüberwachung muss in dem Cluster bereitgestellt werden, den Sie automatisch skalieren möchten.
 
 1.  Stellen Sie Ihre App über die Befehlszeilenschnittstelle (CLI) bereit. Bei der Bereitstellung Ihrer App müssen Sie CPU anfordern.
 
@@ -438,8 +439,9 @@ Mit Kubernetes können Sie die [horizontale Autoskalierung von Pods ![Symbol fü
     <td>Der Port, an dem Ihre App extern verfügbar ist.</td>
     </tr></tbody></table>
 
-    **Hinweis:** Für Bereitstellungen mit einem höheren Grad an Komplexität ist gegebenenfalls die Erstellung einer [Konfigurationsdatei](#app_cli) erforderlich.
-2.  Erstellen Sie eine Funktion zur automatischen horizontalen Skalierung von Pods (Horizontal Pod Autoscaler) und definieren Sie Ihre Richtlinie. Weitere Informationen zum Arbeiten mit dem Befehl `kubectl autoscale` finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
+    Für Bereitstellungen mit einem höheren Grad an Komplexität ist gegebenenfalls die Erstellung einer [Konfigurationsdatei](#app_cli) erforderlich. {: tip}
+
+2.  Erstellen Sie einen automatischen Scaler und definieren Sie Ihre Richtlinie. Weitere Informationen zur Arbeit mit dem Befehl `kubetcl autoscale` finden Sie in der [Dokumentation zu Kubernetes ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
 
     ```
     kubectl autoscale deployment <bereitstellungsname> --cpu-percent=<prozentsatz> --min=<mindestwert> --max=<höchstwert>
@@ -464,7 +466,6 @@ Mit Kubernetes können Sie die [horizontale Autoskalierung von Pods ![Symbol fü
     <td>Die maximale Anzahl von bereitgestellten Pods, die zur Aufrechterhaltung der angegebenen CPU-Auslastung verwendet werden.</td>
     </tr>
     </tbody></table>
-
 
 
 <br />

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-30"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -18,7 +18,7 @@ lastupdated: "2018-01-30"
 # {{site.data.keyword.containerlong_notm}}를 선택해야 하는 이유
 {: #cs_ov}
 
-{{site.data.keyword.containershort}}는 Docker와 Kubernetes 기술을 결합한 강력한 도구, 직관적인 사용자 경험, 기본 제공 보안 및 격리를 제공하여 컴퓨팅 호스트의 클러스터에서 컨테이너화된 앱의 배치, 오퍼레이션, 스케일링 및 모니터링을 자동화합니다.
+{{site.data.keyword.containerlong}}는 Docker와 Kubernetes 기술을 결합한 강력한 도구, 직관적인 사용자 경험, 기본 제공 보안 및 격리를 제공하여 컴퓨팅 호스트의 클러스터에서 컨테이너화된 앱의 배치, 오퍼레이션, 스케일링 및 모니터링을 자동화합니다.
 {:shortdesc}
 
 ## 서비스 사용의 이점
@@ -29,7 +29,7 @@ lastupdated: "2018-01-30"
 
 |이점|설명|
 |-------|-----------|
-|컴퓨팅, 네트워크 및 스토리지 인프라가 격리된 단일 테넌트 Kubernetes 클러스터|<ul><li>조직의 요구사항을 충족하는 고유의 사용자 정의된 인프라를 작성하십시오.</li><li>IBM Cloud 인프라(SoftLayer)에서 제공하는 리소스를 사용하여 데디케이티드 및 보안 Kubernetes 마스터, 작업자 노드, 가상 네트워크 및 스토리지를 프로비저닝합니다.</li><li>클러스터를 사용 가능한 상태로 유지하도록 {{site.data.keyword.IBM_notm}}에서 지속적으로 모니터하고 업데이트하는 완전히 관리되는 Kubernetes 마스터.</li><li>지속적 데이터를 저장하고, Kubernetes 포드 간에 데이터를 공유하며, 통합 및 보안 볼륨 서비스에서 필요 시에 데이터를 복원합니다.</li><li>모든 기본 Kubernetes API에 대한 전체 지원의 이점.</li></ul>|
+|컴퓨팅, 네트워크 및 스토리지 인프라가 격리된 단일 테넌트 Kubernetes 클러스터|<ul><li>조직의 요구사항을 충족하는 고유의 사용자 정의된 인프라를 작성하십시오.</li><li>IBM Cloud 인프라(SoftLayer)에서 제공하는 리소스를 사용하여 데디케이티드 및 보안 Kubernetes 마스터, 작업자 노드, 가상 네트워크 및 스토리지를 프로비저닝합니다.</li><li>클러스터를 사용 가능한 상태로 유지하도록 {{site.data.keyword.IBM_notm}}에서 지속적으로 모니터하고 업데이트하는 완전히 관리되는 Kubernetes 마스터.</li><li>신뢰할 수 있는 컴퓨팅을 사용하여 베어메탈 서버로 작업자 노드를 프로비저닝하는 옵션.</li><li>지속적 데이터를 저장하고, Kubernetes 포드 간에 데이터를 공유하며, 통합 및 보안 볼륨 서비스에서 필요 시에 데이터를 복원합니다.</li><li>모든 기본 Kubernetes API에 대한 전체 지원의 이점.</li></ul>|
 |Vulnerability Advisor에서 이미지 보안 준수|<ul><li>이미지가 저장되고 조직의 모든 사용자에 의해 공유되는 자체 보안 Docker 개인용 이미지 레지스트리를 설정합니다.</li><li>개인용 {{site.data.keyword.Bluemix_notm}} 레지스트리에서 이미지를 자동 스캔하는 이점.</li><li>잠재적 취약점을 해결하기 위해 이미지에서 사용된 운영 체제에 특정한 권장사항을 검토합니다.</li></ul>|
 |클러스터 상태의 지속적 모니터링|<ul><li>클러스터 대시보드를 사용하여 클러스터, 작업자 노드 및 컨테이너 배치의 상태를 빠르게 보고 관리합니다.</li><li>{{site.data.keyword.monitoringlong}}를 사용하여 세부 이용 메트릭을 찾아서 작업 로드를 충족하도록 클러스터를 신속하게 확장합니다.</li><li>{{site.data.keyword.loganalysislong}}를 사용하여 로깅 정보를 검토하고 자세한 클러스터 활동을 확인하십시오.</li></ul>|
 |공용으로 앱을 안전하게 노출|<ul><li>인터넷에서 클러스터의 서비스에 액세스하기 위해 공인 IP 주소, {{site.data.keyword.IBM_notm}} 제공 라우트 또는 자체 사용자 정의 도메인 간에 선택합니다.</li></ul>|
@@ -38,6 +38,8 @@ lastupdated: "2018-01-30"
 
 
 <br />
+
+
 
 
 ## 무료 및 표준 클러스터 비교
@@ -49,15 +51,17 @@ lastupdated: "2018-01-30"
 |특성|무료 클러스터|표준 클러스터|
 |---------------|-------------|-----------------|
 |[클러스터 내부 네트워킹](cs_secure.html#in_cluster_network)|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
-|[NodePort 서비스에 의한 공용 네트워크 앱 액세스](cs_network_planning.html#nodeport)|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
+|[NodePort 서비스에 의한 안정적이지 않은 IP 주소에 대한 공용 네트워크 앱 액세스](cs_nodeport.html#planning)|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
 |[사용자 액세스 관리](cs_users.html#managing)|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
 |[클러스터와 앱에서 {{site.data.keyword.Bluemix_notm}} 서비스 액세스](cs_integrations.html#adding_cluster)|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
-|[스토리지를 위한 작업자 노드의 디스크 공간](cs_storage.html#planning)|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
+|[비지속적 스토리지를 위한 작업자 노드의 디스크 공간](cs_storage.html#planning)|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
 |[볼륨이 있는 지속적 NFS 파일 기반 스토리지](cs_storage.html#planning)| |<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
-|[로드 밸런서 서비스에 의한 공용 또는 사설 네트워크 앱 액세스](cs_network_planning.html#loadbalancer)| |<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
-|[Ingress 서비스에 의한 공용 네트워크 앱 액세스](cs_network_planning.html#ingress)| |<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
+|[로드 밸런서 서비스에 의한 안정적인 IP 주소에 대한 공용 또는 사설 네트워크 앱 액세스](cs_loadbalancer.html#planning)| |<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
+|[Ingress 서비스에 의한 안정적인 IP 주소 및 사용자 정의할 수 있는 URL에 대한 공용 네트워크 앱 액세스](cs_ingress.html#planning)| |<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
 |[포터블 공인 IP 주소](cs_subnets.html#manage)| |<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
 |[로깅 및 모니터링](cs_health.html#logging)| |<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
+|[실제(베어메탈) 서버에 작업자 노드를 프로비저닝하는 옵션](cs_clusters.html#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
+|[신뢰할 수 있는 컴퓨팅을 사용하여 베어메탈 작업자를 프로비저닝하는 옵션](cs_clusters.html#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
 |[{{site.data.keyword.Bluemix_dedicated_notm}}](cs_dedicated.html#dedicated_environment)에서 사용 가능| |<img src="images/confirm.svg" width="32" alt="사용 가능한 기능" style="width:32px;" />|
 
 <br />
@@ -72,11 +76,11 @@ lastupdated: "2018-01-30"
 
 **IBM은 다음을 담당합니다.**
 
-- 클러스터 작성 시 마스터, 작업자 노드 및 클러스터 내의 관리 컴포넌트(예: Ingress 제어기) 배치
+- 클러스터 작성 시 마스터, 작업자 노드 및 클러스터 내의 관리 컴포넌트(예: Ingress 애플리케이션 로드 밸런서) 배치
 - 클러스터에 대한 Kubernetes 마스터의 업데이트, 모니터링 및 복구 관리
 - 작업자 노드의 상태를 모니터하고 해당 작업자 노드의 업데이트 및 복구 자동화 제공
 - 작업자 노드 추가, 작업자 노드 제거 및 기본 서브넷 작성을 포함하여 인프라 계정에 대한 자동화 태스크 수행
-- 클러스터 내의 운영 컴포넌트(예: Ingress 제어기 및 스토리지 플러그인) 관리, 업데이트 및 복구
+- 클러스터 내의 운영 컴포넌트(예: Ingress 애플리케이션 로드 밸런서 및 스토리지 플러그인) 관리, 업데이트 및 복구
 - 지속적 볼륨 클레임에서 요청될 때 스토리지 볼륨 프로비저닝
 - 모든 작업자 노드에 대한 보안 설정 제공
 
@@ -92,6 +96,7 @@ lastupdated: "2018-01-30"
 - [`kubectl` 명령(예: `cordon` 또는 `drain`)을 실행하고 `bx cs` 명령(예: `reboot`, `reload` 또는 `delete`)을 실행하여 문제가 발생한 작업자 노드 복구](cs_cli_reference.html#cs_worker_reboot)
 - [필요에 따라 IBM Cloud 인프라(SoftLayer)에서 서브넷 추가 또는 제거](cs_subnets.html#subnets)
 - [IBM Cloud 인프라(SoftLayer)의 지속적 스토리지에 데이터 백업 및 복원 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](../services/RegistryImages/ibm-backup-restore/index.html)
+- [자동 복구를 통해 작업자 노드의 상태 모니터링 구성](cs_health.html#autorecovery)
 
 <br />
 

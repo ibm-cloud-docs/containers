@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-02-27"
 
 ---
 
@@ -18,10 +18,11 @@ lastupdated: "2018-01-24"
 # 使用网络策略控制流量
 {: #network_policies}
 
-每个 Kubernetes 集群均设置有名为 Calico 的网络插件。缺省网络策略设置为保护每个工作程序节点的公用网络接口的安全。当您有独特的安全需求时，可以使用 Calico 和本机 Kubernetes 功能来为集群配置更多网络策略。这些网络策略会指定是要允许还是阻止与集群中的 pod 之间进出的网络流量。
+每个 Kubernetes 集群均设置有名为 Calico 的网络插件。缺省网络策略设置为保护 {{site.data.keyword.containerlong}} 中每个工作程序节点的公用网络接口的安全。
 {: shortdesc}
 
-可以从 Calico 和本机 Kubernetes 功能中进行选择来为集群创建网络策略。一开始可使用 Kubernetes 网络策略，但为了获得更稳健的功能，请使用 Calico 网络策略。
+当您有独特的安全需求时，可以使用 Calico 和本机 Kubernetes 功能来为集群配置更多网络策略。这些网络策略会指定是要允许还是阻止与集群中的 pod 之间进出的网络流量。
+一开始可使用 Kubernetes 网络策略，但为了获得更稳健的功能，请使用 Calico 网络策略。
 
 <ul>
   <li>[Kubernetes 网络策略 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/services-networking/network-policies/)：提供了一些基本选项，例如指定哪些 pod 可以相互通信。对于协议和端口，可以允许或阻止入局网络流量。可以依据正尝试连接到其他 pod 的 pod 的标签和 Kubernetes 名称空间，过滤此流量。</br>可以使用 `kubectl` 命令或 Kubernetes API 来应用这些策略。这些策略应用后，即会转换成 Calico 网络策略，Calico 会强制实施这些策略。</li>
@@ -39,7 +40,7 @@ lastupdated: "2018-01-24"
 ## 缺省策略配置
 {: #default_policy}
 
-创建集群时，会自动为每个工作程序节点的公用网络接口设置缺省网络策略，以限制来自公共因特网的工作程序节点的入局流量。这些策略不会影响 pod 到 pod 的流量，并设置为允许访问 Kubernetes NodePort、LoadBalancer 和 Ingress 服务。
+创建集群时，会为每个工作程序节点的公用网络接口设置缺省网络策略，以限制来自公用因特网的入局流量。这些策略不会影响 pod 到 pod 的流量，并允许访问 Kubernetes NodePort、LoadBalancer 和 Ingress 服务。
 {:shortdesc}
 
 不会直接将缺省策略应用于 pod；缺省策略使用 Calico 主机端点应用于工作程序节点的公用网络接口。在 Calico 中创建主机端点后，除非策略允许与工作程序节点网络接口之间进出的所有流量，否则将阻止该流量。
@@ -319,7 +320,7 @@ lastupdated: "2018-01-24"
 ## 阻止流至 LoadBalancer 或 NodePort 服务的入局流量。
 {: #block_ingress}
 
-缺省情况下， Kubernetes `NodePort` 和 `LoadBalancer` 服务旨在使应用程序在所有公用和专用集群接口上都可用。但是，您可以基于流量源或目标，阻止流至服务的入局流量。要阻止流量，请创建 Calico `preDNAT` 网络策略。
+缺省情况下， Kubernetes `NodePort` 和 `LoadBalancer` 服务旨在使应用程序在所有公用和专用集群接口上都可用。但是，您可以基于流量源或目标，阻止流至服务的入局流量。
 {:shortdesc}
 
 Kubernetes LoadBalancer 服务也是 NodePort 服务。LoadBalancer 服务通过负载均衡器 IP 地址和端口提供应用程序，并通过服务的节点端口使应用程序可用。对于集群内的每个节点，在每个 IP 地址（公共和专用）上都可以访问节点端口。

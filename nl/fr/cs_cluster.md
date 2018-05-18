@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-03-08"
 
 ---
 
@@ -31,18 +31,17 @@ Consultez les informations les plus récentes dans son nouvel emplacement :
 - [Gestion de l'accès au cluster](cs_users.html)
     - [Règles et droits d'accès](cs_users.html#access_policies)
     - [Ajout d'utilisateurs](cs_users.html#add_users)
-    - [Personnalisation des droits sur l'infrastructure pour un utilisateur](cs_users.html#infra_access)
+    - [Personnalisation des droits Infrastructure pour un utilisateur](cs_users.html#infra_access)
 - [Mise à jour du maître Kubernetes](cs_cluster_update.html#master)
-- [Mise à jour des noeuds d'agent](cs_cluster_update.html#worker_node)
+- [Mise à jour des noeuds worker](cs_cluster_update.html#worker_node)
 - [Ajout de sous-réseaux à des clusters](cs_subnets.html#subnets)
     - [Demande de sous-réseaux supplémentaires pour votre cluster](cs_subnets.html#request)
     - [Ajout de sous-réseaux personnalisés et existants à des clusters Kubernetes](cs_subnets.html#custom)
     - [Ajout de sous-réseaux et d'adresses IP gérés par l'utilisateur aux clusters Kubernetes](cs_subnets.html#user_managed)
 - [Utilisation de partages de fichiers NFS existants dans des clusters](cs_storage.html#existing)
 - [Configuration de la journalisation de cluster](cs_health.html#logging)
-    - [Activation du transfert de journal](cs_health.html#log_sources_enable)
-    - [Activation du transfert de journaux pour des applications](cs_health.html#apps_enable)
-    - [Mise à jour de la configuration d'acheminement de journal](cs_health.html#log_sources_update)
+    - [Activation du transfert de journal](cs_health.html#logging)
+    - [Mise à jour de la configuration d'acheminement de journal](cs_health.html#logging)
     - [Arrêt du transfert de journaux](cs_health.html#log_sources_delete)
     - [Configuration du transfert de journaux pour les journaux d'audit d'API Kubernetes](cs_health.html#app_forward)
     - [Activation de l'acheminement de journal d'audit d'API Kubernetes](cs_health.html#audit_enable)
@@ -53,6 +52,6 @@ Consultez les informations les plus récentes dans son nouvel emplacement :
 - [Configuration de la surveillance de cluster](cs_health.html#monitoring)
     - [Affichage des métriques](cs_health.html#view_metrics)
     - [Autres outils de surveillance de l'état de santé](cs_health.html#health_tools)
-    - [Configuration de la surveillance de l'état de santé des noeuds d'agent avec le système de reprise automatique](cs_health.html#autorecovery)
+    - [Configuration de la surveillance de l'état de santé des noeuds worker avec le système de reprise automatique](cs_health.html#autorecovery)
 - [Visualisation de ressources de cluster Kubernetes](cs_integrations.html#weavescope)
 - [Suppression de clusters](cs_clusters.html#remove)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-06"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -16,16 +16,19 @@ lastupdated: "2018-02-06"
 {:download: .download}
 
 
-# Référence de l'interface de ligne de commande pour la gestion de clusters
+# Guide de référence de l'interface de ligne de commande (CLI) d'{{site.data.keyword.containerlong_notm}}
 {: #cs_cli_reference}
 
-Reportez-vous aux commandes suivantes pour créer et gérer des clusters dans {{site.data.keyword.Bluemix_notm}}.
+Reportez-vous aux commandes suivantes pour créer et gérer des clusters Kubernetes dans {{site.data.keyword.containerlong}}.
 {:shortdesc}
+
+Pour installer le plug-in de l'interface CLI, voir [Installation de l'interface de ligne de commande](cs_cli_install.html#cs_cli_install_steps).
+
+Vous recherchez des commandes `bx cr` ? Consultez le [guide de référence de l'interface CLI {{site.data.keyword.registryshort_notm}}](/docs/cli/plugins/registry/index.html). Vous recherchez des commandes `kubectl` ? Consultez la [documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).
+{:tip}
 
 ## Commandes bx cs
 {: #cs_commands}
-
-**Astuce :** vous recherchez des commandes `bx cr` ? Consultez la [référence de l'interface CLI {{site.data.keyword.registryshort_notm}}](/docs/cli/plugins/registry/index.html). Vous recherchez des commandes `kubectl` ? Consultez la [documentation Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).
 
 **Astuce :** pour identifier la version du plug-in {{site.data.keyword.containershort_notm}}, exécutez la commande suivante :
 
@@ -36,12 +39,12 @@ bx plugin list
 
 
 
-<table summary="Commandes d'équilibreur de charge d'application">
+<table summary="Commandes de l'équilibreur de charge d'application (ALB)">
 <col width="25%">
 <col width="25%">
 <col width="25%">
  <thead>
-    <th colspan=4>Commandes de l'équilibreur de charge d'application</th>
+    <th colspan=4>Commandes de l'équilibreur de charge d'application (ALB)</th>
  </thead>
  <tbody>
   <tr>
@@ -116,10 +119,11 @@ bx plugin list
   <tr>
     <td>[bx cs cluster-config](#cs_cluster_config)</td>
     <td>[bx cs cluster-create](#cs_cluster_create)</td>
+    <td>[bx cs cluster-feature-enable](#cs_cluster_feature_enable)</td>
     <td>[bx cs cluster-get](#cs_cluster_get)</td>
-    <td>[bx cs cluster-rm](#cs_cluster_rm)</td>
   </tr>
   <tr>
+    <td>[bx cs cluster-rm](#cs_cluster_rm)</td>
     <td>[bx cs cluster-update](#cs_cluster_update)</td>
     <td>[bx cs clusters](#cs_clusters)</td>
     <td>[bx cs kube-versions](#cs_kube_versions)</td>
@@ -260,13 +264,13 @@ bx plugin list
 </tbody>
 </table>
 
-## Commandes de l'équilibreur de charge d'application
+## Commandes de l'équilibreur de charge d'application (ALB)
 {: #alb_commands}
 
 ### bx cs alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NAME --cert-crn CERTIFICATE_CRN
 {: #cs_alb_cert_deploy}
 
-Permet de déployer ou de mettre à jour un certificat de votre instance {{site.data.keyword.cloudcerts_long_notm}} dans l'équilibreur de charge d'application dans un cluster.
+Déploiement ou mise à jour d'un certificat à partir de votre instance {{site.data.keyword.cloudcerts_long_notm}} vers l'équilibreur de charge d'application (ALB) dans un cluster.
 
 **Remarque :**
 * Seul un utilisateur affecté au rôle d'accès Administrateur peut exécuter cette commande.
@@ -279,10 +283,10 @@ Permet de déployer ou de mettre à jour un certificat de votre instance {{site.
    <dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
 
    <dt><code>--update</code></dt>
-   <dd>Incluez cet indicateur pour mettre à jour le certificat pour une valeur confidentielle d'équilibreur de charge d'application dans un cluster. Cette valeur est facultative.</dd>
+   <dd>Incluez cet indicateur pour mettre à jour le certificat pour une valeur confidentielle (secret) ALB dans un cluster. Cette valeur est facultative.</dd>
 
    <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
-   <dd>Nom de la valeur confidentielle de l'équilibreur de charge d'application. Cette valeur est obligatoire.</dd>
+   <dd>Nom de la valeur confidentielle ALB. Cette valeur est obligatoire.</dd>
 
    <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
    <dd>CRN du certificat. Cette valeur est obligatoire.</dd>
@@ -290,14 +294,14 @@ Permet de déployer ou de mettre à jour un certificat de votre instance {{site.
 
 **Exemples** :
 
-Exemple de déploiement d'une valeur confidentielle d'équilibreur de charge d'application :
+Exemple de déploiement d'une valeur confidentielle ALB :
 
    ```
    bx cs alb-cert-deploy --secret-name my_alb_secret_name --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
    ```
    {: pre}
 
-Exemple de mise à jour d'une valeur confidentielle existante d'équilibreur de charge d'application :
+Exemple de mise à jour d'une valeur confidentielle ALB existante :
 
  ```
  bx cs alb-cert-deploy --update --secret-name my_alb_secret_name --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:7e21fde8ee84a96d29240327daee3eb2
@@ -308,9 +312,9 @@ Exemple de mise à jour d'une valeur confidentielle existante d'équilibreur de 
 ### bx cs alb-cert-get --cluster CLUSTER [--secret-name SECRET_NAME][--cert-crn CERTIFICATE_CRN]
 {: #cs_alb_cert_get}
 
-Affichage d'informations sur la valeur confidentielle de l'équilibreur de charge d'application dans un cluster.
+Affichage d'informations sur une valeur confidentielle ALB dans un cluster.
 
-**Remarque :** Seul un utilisateur affecté au rôle d'accès Administrateur peut exécuter cette commande.
+**Remarque :** seul un utilisateur affecté au rôle d'accès Administrateur peut exécuter cette commande.
 
 <strong>Options de commande</strong>
 
@@ -319,22 +323,22 @@ Affichage d'informations sur la valeur confidentielle de l'équilibreur de charg
   <dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
 
   <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
-  <dd>Nom de la valeur confidentielle de l'équilibreur de charge d'application. Cette valeur est requise pour obtenir des informations sur une valeur confidentielle spécifique d'équilibreur de charge d'application dans le cluster.</dd>
+  <dd>Nom de la valeur confidentielle ALB. Cette valeur est requise pour obtenir des informations sur une valeur confidentielle ALB spécifique dans le cluster.</dd>
 
   <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
-  <dd>CRN du certificat. Cette valeur est requise pour obtenir des informations sur toutes les valeurs confidentielles d'équilibreur de charge d'application correspondant à un CRN de certificat spécifique dans le cluster.</dd>
+  <dd>CRN du certificat. Cette valeur est requise pour obtenir des informations sur toutes les valeurs confidentielles ALB correspondant à un CRN de certificat spécifique dans le cluster.</dd>
   </dl>
 
 **Exemples** :
 
- Exemple d'extraction d'informations sur une valeur confidentielle d'équilibreur de charge d'application :
+ Exemple d'extraction d'informations sur une valeur confidentielle ALB :
 
  ```
  bx cs alb-cert-get --cluster my_cluster --secret-name my_alb_secret_name
  ```
  {: pre}
 
- Exemple d'extraction d'informations sur toutes les valeurs confidentielles d'équilibreur de charge d'application correspondant à un CRN de certificat spécifié :
+ Exemple d'extraction d'informations sur toutes les valeurs confidentielles ALB correspondant à un CRN de certificat spécifié :
 
  ```
  bx cs alb-cert-get --cluster my_cluster --cert-crn  crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
@@ -345,9 +349,9 @@ Affichage d'informations sur la valeur confidentielle de l'équilibreur de charg
 ### bx cs alb-cert-rm --cluster CLUSTER [--secret-name SECRET_NAME][--cert-crn CERTIFICATE_CRN]
 {: #cs_alb_cert_rm}
 
-Permet de supprimer d'un cluster une valeur confidentielle d'équilibreur de charge d'application.
+Retrait d'une valeur confidentielle ALB dans un cluster.
 
-**Remarque :** Seul un utilisateur affecté au rôle d'accès Administrateur peut exécuter cette commande.
+**Remarque :** seul un utilisateur affecté au rôle d'accès Administrateur peut exécuter cette commande.
 
 <strong>Options de commande</strong>
 
@@ -356,22 +360,22 @@ Permet de supprimer d'un cluster une valeur confidentielle d'équilibreur de cha
   <dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
 
   <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
-  <dd>Nom de la valeur confidentielle ALB. Cette valeur est requise pour supprimer du cluster une valeur confidentielle spécifique d'équilibreur de charge d'application.</dd>
+  <dd>Nom de la valeur confidentielle ALB. Cette valeur est requise pour retirer une valeur confidentielle ALB spécifique dans le cluster.</dd>
 
   <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
-  <dd>CRN du certificat. Cette valeur est requise pour supprimer du cluster toutes les valeurs confidentielles d'équilibreur de charge d'application correspondant à un CRN de certificat spécifique.</dd>
+  <dd>CRN du certificat. Cette valeur est requise pour retirer toutes les valeurs confidentielles ALB correspondant à un CRN de certificat spécifique dans le cluster.</dd>
   </dl>
 
 **Exemples** :
 
- Exemple de suppression d'une valeur confidentielle d'équilibreur de charge d'application :
+ Exemple de retrait d'une valeur confidentielle ALB :
 
  ```
  bx cs alb-cert-rm --cluster my_cluster --secret-name my_alb_secret_name
  ```
  {: pre}
 
- Exemple de suppression de toutes les valeurs confidentielles d'équilibreur de charge d'application correspondant à un CRN de certificat spécifié :
+ Exemple de retrait de toutes les valeurs confidentielles ALB correspondant à un CRN de certificat spécifié :
 
  ```
  bx cs alb-cert-rm --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
@@ -382,9 +386,9 @@ Permet de supprimer d'un cluster une valeur confidentielle d'équilibreur de cha
 ### bx cs alb-certs --cluster CLUSTER
 {: #cs_alb_certs}
 
-Affichage de la liste des valeurs confidentielles d'équilibreur de charge dans un cluster.
+Affichage d'une liste de valeurs confidentielles ALB dans un cluster.
 
-**Remarque :** Seul un utilisateur affecté au rôle d'accès Administrateur peut exécuter cette commande.
+**Remarque :** seul un utilisateur affecté au rôle d'accès Administrateur peut exécuter cette commande.
 
 <strong>Options de commande</strong>
 
@@ -406,47 +410,47 @@ Affichage de la liste des valeurs confidentielles d'équilibreur de charge dans 
 ### bx cs alb-configure --albID ALB_ID [--enable][--disable][--user-ip USERIP]
 {: #cs_alb_configure}
 
-Activez ou désactivez un équilibreur de charge d'application dans votre cluster standard. L'équilibreur de charge d'application public est activé par défaut.
+Activation ou désactivation d'un équilibreur de charge ALB dans votre cluster standard. L'ALB public est activé par défaut.
 
 **Options de commande** :
 
    <dl>
    <dt><code><em>--albID </em>ALB_ID</code></dt>
-   <dd>ID de l'équilibreur de charge d'application. Exécutez la commande <code>bx cs albs <em>--cluster </em>CLUSTER</code> pour afficher les ID des équilibreurs de charge d'application dans un cluster. Cette valeur est obligatoire.</dd>
+   <dd>ID d'un équilibreur de charge ALB. Exécutez <code>bx cs albs <em>--cluster </em>CLUSTER</code> pour afficher les ID des équilibreurs de charge ALB dans un cluster. Cette valeur est obligatoire.</dd>
 
    <dt><code>--enable</code></dt>
-   <dd>Incluez cet indicateur pour activer un équilibreur de charge d'application dans un cluster.</dd>
+   <dd>Incluez cet indicateur pour activer un équilibreur de charge ALB dans un cluster.</dd>
 
    <dt><code>--disable</code></dt>
-   <dd>Incluez cet indicateur pour désactiver un équilibreur de charge d'application dans un cluster.</dd>
+   <dd>Incluez cet indicateur pour désactiver un équilibreur de charge ALB dans un cluster.</dd>
 
    <dt><code>--user-ip <em>USER_IP</em></code></dt>
    <dd>
 
    <ul>
-    <li>Ce paramètre n'est disponible que pour un équilibreur de charge d'application privé</li>
-    <li>L'équilibreur de charge d'application privé est déployé avec une adresse IP issue d'un sous-réseau privé fourni par l'utilisateur. Si aucune adresse IP n'est fournie, l'équilibreur de charge d'application est déployé avec une adresse IP privée issue du sous-réseau privé portable provisionné automatiquement lorsque vous avez créé le cluster.</li>
+    <li>Ce paramètre n'est disponible que pour un équilibreur de charge d'application (ALB) privé</li>
+    <li>L'ALB privé est déployé avec une adresse IP à partir d'un sous-réseau privé fourni par l'utilisateur. Si aucune adresse IP n'est fournie, l'ALB est déployé avec une adresse IP privée issue du sous-réseau privé portable qui est mis à disposition automatiquement lorsque vous avez créé le cluster.</li>
    </ul>
    </dd>
    </dl>
 
 **Exemples** :
 
-  Exemple d'activation d'un équilibreur de charge d'application :
+  Exemple d'activation d'un équilibreur de charge ALB :
 
   ```
   bx cs alb-configure --albID my_alb_id --enable
   ```
   {: pre}
 
-  Exemple de désactivation d'un équilibreur de charge d'application :
+  Exemple de désactivation d'un équilibreur de charge ALB :
 
   ```
   bx cs alb-configure --albID my_alb_id --disable
   ```
   {: pre}
 
-  Exemple d'activation d'un équilibreur de charge d'application avec une adresse IP fournie par l'utilisateur :
+  Exemple d'activation d'un équilibreur de charge ALB avec une adresse IP fournie par l'utilisateur :
 
   ```
   bx cs alb-configure --albID my_private_alb_id --enable --user-ip user_ip
@@ -458,13 +462,13 @@ Activez ou désactivez un équilibreur de charge d'application dans votre cluste
 ### bx cs alb-get --albID ALB_ID
 {: #cs_alb_get}
 
-Affiche les détails d'un équilibreur de charge d'application.
+Affichage des détails d'un équilibreur de charge ALB.
 
 <strong>Options de commande</strong> :
 
    <dl>
    <dt><code><em>--albID </em>ALB_ID</code></dt>
-   <dd>ID de l'équilibreur de charge d'application. Exécutez la commande <code>bx cs albs --cluster <em>CLUSTER</em></code> pour afficher les ID des équilibreurs de charge d'application dans un cluster. Cette valeur est obligatoire.</dd>
+   <dd>ID d'un équilibreur de charge ALB. Exécutez la commande <code>bx cs albs --cluster <em>CLUSTER</em></code> pour afficher les ID des équilibreurs de charge ALB dans un cluster. Cette valeur est obligatoire.</dd>
    </dl>
 
 **Exemple** :
@@ -477,7 +481,7 @@ Affiche les détails d'un équilibreur de charge d'application.
 ### bx cs alb-types
 {: #cs_alb_types}
 
-Affichez les types d'équilibreur de charge d'application pris en charge dans la région.
+Affichage des types d'équilibreur de charge ALB pris en charge dans la région.
 
 <strong>Options de commande</strong> :
 
@@ -494,13 +498,13 @@ Affichez les types d'équilibreur de charge d'application pris en charge dans la
 ### bx cs albs --cluster CLUSTER
 {: #cs_albs}
 
-Affiche le statut de tous les équilibreurs de charge d'application dans un cluster. Si aucun ID d'équilibreur de charge d'application n'est renvoyé, le cluster ne dispose pas de sous-réseau portable. Vous pouvez [créer](#cs_cluster_subnet_create) ou [ajouter](#cs_cluster_subnet_add) des sous-réseaux à un cluster.
+Affichage du statut de tous les équilibreurs de charge ALB dans un cluster. Si aucun ID ALB n'est renvoyé, le cluster n'a pas de sous-réseau portable. Vous pouvez [créer](#cs_cluster_subnet_create) ou [ajouter](#cs_cluster_subnet_add) des sous-réseaux à un cluster.
 
 <strong>Options de commande</strong> :
 
    <dl>
    <dt><code><em>--cluster </em>CLUSTER</code></dt>
-   <dd>Le nom ou l'ID du cluster dans lequel vous répertoriez les équilibreurs de charge d'application disponibles. Cette valeur est obligatoire.</dd>
+   <dd>Nom ou ID du cluster sur lequel répertorier les équilibreurs de charge ALB disponibles. Cette valeur est obligatoire.</dd>
    </dl>
 
 **Exemple** :
@@ -520,7 +524,15 @@ Affiche le statut de tous les équilibreurs de charge d'application dans un clus
 ### bx cs api-key-info CLUSTER
 {: #cs_api_key_info}
 
-Affichage du nom et de l'adresse de courrier électronique du propriétaire de la clé d'API IAM du cluster.
+Affichage du nom et de l'adresse e-mail du propriétaire de la clé d'API IAM dans une région {{site.data.keyword.containershort_notm}}.
+
+La clé d'API IAM (Identity and Access Management) est définie automatiquement pour une région lorsque la première action qui nécessite la politique de contrôle d'accès admin {{site.data.keyword.containershort_notm}} est effectuée. Par exemple, supposons que l'un de vos administrateurs crée le premier cluster dans la région `us-south`. Pour cette opération, la clé d'API IAM de cet utilisateur est stockée dans le compte correspondant à cette région. La clé d'API est utilisée pour commander des ressources dans l'infrastructure IBM Cloud (SoftLayer), par exemple de nouveaux noeuds worker ou réseaux locaux virtuels (VLAN).
+
+Lorsqu'un autre utilisateur effectue une action qui nécessite une interaction avec le portefeuille d'infrastructure IBM Cloud (SoftLayer) dans cette région, par exemple la création d'un nouveau cluster ou le rechargement d'un noeud worker, la clé d'API stockée est utilisée pour déterminer s'il dispose des droits suffisants requis pour effectuer cette action. Pour vous assurer que les actions liées à l'infrastructure dans votre cluster peuvent être effectuées sans problème, affectez à vos administrateurs la politique d'accès à l'infrastructure {{site.data.keyword.containershort_notm}} **Superutilisateur**. Pour plus d'informations, voir [Gestion de l'accès utilisateur](cs_users.html#infra_access).
+
+Si vous constatez que la clé d'API stockée pour une région nécessite une mise à jour, vous pouvez le faire en exécutant la commande [bx cs api-key-reset](#cs_api_key_reset). Cette commande nécessite la politique d'accès admin {{site.data.keyword.containershort_notm}} et stocke la clé d'API de l'utilisateur qui exécute cette commande dans le compte.
+
+**Astuce :** la clé d'API renvoyée par cette commande ne peut pas être utilisée si les données d'identification ont été définies manuellement à l'aide de la commande [bx cs credentials-set](#cs_credentials_set).
 
 <strong>Options de commande</strong> :
 
@@ -540,7 +552,11 @@ Affichage du nom et de l'adresse de courrier électronique du propriétaire de l
 ### bx cs api-key-reset
 {: #cs_api_key_reset}
 
-Remplace la clé d'API. La clé d'API est requise pour gérer vos clusters. Pour éviter des interruptions de service, ne remplacez pas la clé d'API à moins que votre clé existante ne soit compromise.
+Remplacement de la clé d'API IAM actuelle dans une région {{site.data.keyword.containershort_notm}}.
+
+Cette commande nécessite la politique d'accès admin {{site.data.keyword.containershort_notm}} et stocke la clé d'API de l'utilisateur qui exécute cette commande dans le compte. La clé d'API IAM est nécessaire pour commander l'infrastructure depuis le portefeuille d'infrastructure IBM Cloud (SoftLayer). Une fois stockée, la clé d'API est utilisée pour toutes les actions dans une région qui nécessite des droits d'accès à l'infrastructure indépendamment de l'utilisateur qui exécute cette commande. Pour plus d'informations sur le mode de fonctionnement des clés d'API IAM, voir la commande [`bx cs api-key-info`](#cs_api_key_info).
+
+**Important** : avant d'utiliser cette commande, assurez-vous que l'utilisateur qui l'exécute dispose des droits [{{site.data.keyword.containershort_notm}} et des droit de l'infrastructure IBM Cloud (SoftLayer)](cs_users.html#users) requis.
 
 **Exemple** :
 
@@ -597,10 +613,10 @@ Définissez le backend webhook pour la configuration de serveur d'API. Le backen
    <dd>Chemin de fichier du certificat d'autorité de certification utilisé pour vérifier le service de journalisation distant. Cette valeur est facultative.</dd>
 
    <dt><code>--clientCert <em>CLIENT_CERT_PATH</em></code></dt>
-   <dd>Chemin de fichier du certificat d'autorité de certification utilisé pour authentification vis à vis du service de journalisation distant. Cette valeur est facultative.</dd>
+   <dd>Chemin de fichier du certificat d'autorité de certification utilisé pour l'authentification auprès du service de journalisation distant. Cette valeur est facultative.</dd>
 
    <dt><code>--clientKey <em> CLIENT_KEY_PATH</em></code></dt>
-   <dd>Chemin de fichier da la clé client correspondante utilisée pour la connexion au service de journalisation distant. Cette valeur est facultative.</dd>
+   <dd>Chemin de fichier de la clé client correspondante utilisée pour la connexion au service de journalisation distant. Cette valeur est facultative.</dd>
    </dl>
 
 **Exemple** :
@@ -746,17 +762,17 @@ bx cs cluster-config my_cluster
 {: pre}
 
 
-### bx cs cluster-create [--file FILE_LOCATION][--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH][--no-subnet] [--private-vlan PRIVATE_VLAN][--public-vlan PUBLIC_VLAN] [--workers WORKER][--disable-disk-encrypt]
+### bx cs cluster-create [--file FILE_LOCATION][--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH][--no-subnet] [--private-vlan PRIVATE_VLAN][--public-vlan PUBLIC_VLAN] [--workers WORKER][--disable-disk-encrypt] [--trusted]
 {: #cs_cluster_create}
 
-Permet de créer un cluster dans votre organisation.
+Permet de créer un cluster dans votre organisation. Pour les clusters gratuits, indiquez le nom du cluster, tout le reste est défini avec des valeurs par défaut. Vous ne pouvez disposer que d'un cluster gratuit à la fois. Pour tirer parti de toutes les fonctions de Kubernetes, créez un cluster standard.
 
 <strong>Options de commande</strong>
 
 <dl>
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
 
-<dd>Chemin d'accès au fichier YAML pour créer votre cluster standard. Au lieu de définir les caractéristiques de votre cluster à l'aide des options fournies dans cette commande, vous pouvez utiliser un fichier YAML.  Cette valeur est facultative pour les clusters standards et n'est pas disponible pour les clusters gratuits.
+<dd>Chemin d'accès au fichier YAML pour créer votre cluster standard. Au lieu de définir les caractéristiques de votre cluster à l'aide des options fournies dans cette commande, vous pouvez utiliser un fichier YAML.  Cette valeur est facultative pour les clusters standard et n'est pas disponible pour les clusters gratuits.
 
 <p><strong>Remarque :</strong> si vous indiquez la même option dans la commande comme paramètre dans le fichier YAML, la valeur de l'option de la commande est prioritaire sur la valeur définie dans le fichier YAML. Par exemple, si vous indiquez un emplacement dans votre fichier YAML et utilisez l'option <code>--location</code> dans la commande, la valeur que vous avez entrée dans l'option de commande se substitue à la valeur définie dans le fichier YAML.
 
@@ -770,12 +786,13 @@ public-vlan: <em>&lt;public_vlan&gt;</em>
 hardware: <em>&lt;shared_or_dedicated&gt;</em>
 workerNum: <em>&lt;number_workers&gt;</em>
 kube-version: <em>&lt;kube-version&gt;</em>
-
+diskEncryption: <em>false</em>
+trusted: <em>true</em>
 </code></pre>
 
 
 <table>
-    <caption>Tableau 1. Description des composants du fichier YAML</caption>
+    <caption>Tableau. Description des composants du fichier YAML</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
     </thead>
@@ -794,49 +811,53 @@ kube-version: <em>&lt;kube-version&gt;</em>
       </tr>
      <tr>
      <td><code><em>machine-type</em></code></td>
-     <td>Remplacez <code><em>&lt;machine_type&gt;</em></code> par le type de machine souhaité pour vos noeuds d'agent. Pour afficher la liste des types de machine disponibles pour votre emplacement, exécutez la commande <code>bx cs machine-types <em>&lt;location&gt;</em></code>.</td>
+     <td>Remplacez <code><em>&lt;machine_type&gt;</em></code> par le type de machine souhaité pour vos noeuds worker. Pour afficher la liste des types de machine disponibles pour votre emplacement, exécutez la commande <code>bx cs machine-types <em>&lt;location&gt;</em></code>.</td>
+     <td>Remplacez <code><em>&lt;machine_type&gt;</em></code> par le type de machine sur lequel vous envisagez de déployer vos noeuds worker. Vous pouvez déployer vos noeuds worker en tant que machines virtuelles sur du matériel partagé ou dédié ou en tant que machines physiques d'un serveur bare metal. Les types de machines virtuelles et physiques disponibles varient en fonction de l'emplacement de déploiement du cluster. Pour plus d'informations, voir la documentation correspondant à la [commande](cs_cli_reference.html#cs_machine_types) `bx cs machine-type`.</td>
      </tr>
      <tr>
      <td><code><em>private-vlan</em></code></td>
-     <td>Remplacez <code><em>&lt;private_vlan&gt;</em></code> par l'ID du réseau local virtuel privé que vous souhaitez utiliser pour vos noeuds d'agent. Pour afficher la liste des réseaux locaux virtuels disponibles, exécutez la commande <code>bx cs vlans <em>&lt;location&gt;</em></code> et recherchez les routeurs VLAN débutant par <code>bcr</code> (routeur dorsal).</td>
+     <td>Remplacez <code><em>&lt;private_vlan&gt;</em></code> par l'ID du réseau local virtuel privé que vous souhaitez utiliser pour vos noeuds worker. Pour afficher la liste des réseaux locaux virtuels disponibles, exécutez la commande <code>bx cs vlans <em>&lt;location&gt;</em></code> et recherchez les routeurs VLAN débutant par <code>bcr</code> (routeur dorsal).</td>
      </tr>
      <tr>
      <td><code><em>public-vlan</em></code></td>
-     <td>Remplacez <code><em>&lt;public_vlan&gt;</em></code> par l'ID du réseau local virtuel public que vous souhaitez utiliser pour vos noeuds d'agent. Pour afficher la liste des réseaux locaux virtuels disponibles, exécutez la commande <code>bx cs vlans <em>&lt;location&gt;</em></code> et recherchez les routeurs VLAN débutant par <code>fcr</code> (routeur frontal).</td>
+     <td>Remplacez <code><em>&lt;public_vlan&gt;</em></code> par l'ID du réseau local virtuel public que vous souhaitez utiliser pour vos noeuds worker. Pour afficher la liste des réseaux locaux virtuels disponibles, exécutez la commande <code>bx cs vlans <em>&lt;location&gt;</em></code> et recherchez les routeurs VLAN débutant par <code>fcr</code> (routeur frontal).</td>
      </tr>
      <tr>
      <td><code><em>hardware</em></code></td>
-     <td>Niveau d'isolation du matériel pour votre noeud worker. Utilisez un cluster dédié si vous désirez que toutes les ressources physiques vous soient dédiées exclusivement ou un cluster partagé pour permettre leur partage avec d'autres clients IBM. La valeur par défaut est <code>shared</code> (partagé).</td>
+     <td>Pour les types de machine virtuelle : niveau d'isolement de votre noeud worker. Utilisez un cluster dédié si vous désirez que toutes les ressources physiques vous soient dédiées exclusivement ou un cluster partagé pour permettre leur partage avec d'autres clients IBM. La valeur par défaut est <code>shared</code> (partagé).</td>
      </tr>
      <tr>
      <td><code><em>workerNum</em></code></td>
-     <td>Remplacez <code><em>&lt;number_workers&gt;</em></code> par le nombre de noeuds d'agent que vous souhaitez déployer.</td>
+     <td>Remplacez <code><em>&lt;number_workers&gt;</em></code> par le nombre de noeuds worker que vous souhaitez déployer.</td>
      </tr>
      <tr>
       <td><code><em>kube-version</em></code></td>
       <td>Version Kubernetes du noeud maître du cluster. Cette valeur est facultative. Sans spécification, le cluster est créé avec les versions Kubernetes prises en charge par défaut. Pour connaître les versions disponibles, exécutez la commande <code>bx cs kube-versions</code>.</td></tr>
       <tr>
       <td><code>diskEncryption: <em>false</em></code></td>
-      <td>Les noeuds Worker exploitent par défaut le chiffrement de disque ; [En savoir plus](cs_secure.html#worker). Pour désactiver le chiffrement, incluez cette option en lui attribuant la valeur <code>false</code>.</td></tr>
+      <td>Les noeuds worker disposent par défaut du chiffrement de disque. [En savoir plus](cs_secure.html#worker). Pour désactiver le chiffrement, incluez cette option en lui attribuant la valeur <code>false</code>.</td></tr>
+      <tr>
+      <td><code>trusted: <em>true</em></code></td>
+      <td>**Serveur bare metal uniquement** : activez la fonction [Informatique de confiance](cs_secure.html#trusted_compute) pour vérifier que vos noeuds worker bare metal ne font pas l'objet de falsification. Si vous n'activez pas cette fonction lors de la création du cluster mais souhaitez le faire ultérieurement, vous pouvez utiliser la [commande](cs_cli_reference.html#cs_cluster_feature_enable) `bx cs feature-enable`. Après avoir activé cette fonction, vous ne pourrez plus la désactiver par la suite.</td></tr>
      </tbody></table>
     </p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
-<dd>Niveau d'isolation du matériel pour votre noeud worker. Utilisez dedicated pour que toutes les ressources physiques vous soient dédiées exclusivement ou shared pour permettre leur partage avec d'autres clients IBM. La valeur par défaut est shared.  Cette valeur est facultative pour les clusters standards et n'est pas disponible pour les clusters gratuits.</dd>
+<dd>Niveau d'isolation du matériel pour votre noeud worker. Utilisez dedicated pour que toutes les ressources physiques vous soient dédiées exclusivement ou shared pour permettre leur partage avec d'autres clients IBM. La valeur par défaut est shared.  Cette valeur est facultative pour les clusters standard et n'est pas disponible pour les clusters gratuits.</dd>
 
 <dt><code>--location <em>LOCATION</em></code></dt>
 <dd>Emplacement sous lequel vous désirez créer le cluster. Les emplacements disponibles dépendent de la région
-{{site.data.keyword.Bluemix_notm}} à laquelle vous vous êtes connecté. Pour des performances optimales, sélectionnez la région physiquement la plus proche.  Cette valeur est obligatoire pour les clusters standards et facultative pour les clusters gratuits.
+{{site.data.keyword.Bluemix_notm}} à laquelle vous êtes connecté. Pour des performances optimales, sélectionnez la région physiquement la plus proche.  Cette valeur est obligatoire pour les clusters standard et facultative pour les clusters gratuits.
 
 <p>Passez en revue les [emplacements disponibles](cs_regions.html#locations).
 </p>
 
-<p><strong>Remarque :</strong> si vous sélectionnez un emplacement à l'étranger,
-il se peut que vous ayez besoin d'une autorisation des autorités pour stocker physiquement les données dans un autre pays.</p>
+<p><strong>Remarque :</strong> si vous sélectionnez un emplacement à l'étranger, il se peut que vous ayez besoin d'une autorisation légale pour stocker physiquement les données dans un autre pays.</p>
 </dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>Le type de machine choisi a une incidence sur la quantité de mémoire et l'espace disque disponible pour les conteneurs déployés sur votre noeud worker. Pour afficher la liste des types de machine disponibles, exécutez la commande [bx cs machine-types <em>LOCATION</em>](#cs_machine_types).  Cette valeur est obligatoire pour les clusters standards et n'est pas disponible pour les clusters gratuits.</dd>
+<dd>Le type de machine choisi a une incidence sur la quantité de mémoire et l'espace disque disponible pour les conteneurs déployés sur votre noeud worker. Pour afficher la liste des types de machine disponibles, exécutez la commande [bx cs machine-types <em>LOCATION</em>](#cs_machine_types).  Cette valeur est obligatoire pour les clusters standard et n'est pas disponible pour les clusters gratuits.</dd>
+<dd>Choisissez un type de machine. Vous pouvez déployer vos noeuds worker en tant que machines virtuelles sur du matériel partagé ou dédié ou en tant que machines physiques d'un serveur bare metal. Les types de machines virtuelles et physiques disponibles varient en fonction de l'emplacement de déploiement du cluster. Pour plus d'informations, voir la documentation correspondant à la [commande](cs_cli_reference.html#cs_machine_types) `bx cs machine-type`. Cette valeur est obligatoire pour les clusters standard et n'est pas disponible pour les clusters gratuits.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
 <dd>Nom du cluster.  Cette valeur est obligatoire.</dd>
@@ -873,14 +894,17 @@ il se peut que vous ayez besoin d'une autorisation des autorités pour stocker p
 <p>Pour déterminer si vous disposez déjà d'un VLAN public pour un emplacement spécifique ou pour identifier le nom d'un VLAN public existant, exécutez la commande <code>bx cs vlans <em>&lt;location&gt;</em></code>.</p></dd>
 
 <dt><code>--workers WORKER</code></dt>
-<dd>Nombre de noeuds d'agent que vous désirez déployer dans votre cluster. Si vous ne spécifiez pas cette
-option, un cluster avec 1 noeud worker est créé. Cette valeur est facultative pour les clusters standards et n'est pas disponible pour les clusters gratuits.
+<dd>Nombre de noeuds worker que vous désirez déployer dans votre cluster. Si vous ne spécifiez pas cette option, un cluster avec 1 noeud worker est créé. Cette valeur est facultative pour les clusters standard et n'est pas disponible pour les clusters gratuits.
 
-<p><strong>Remarque :</strong> A chaque noeud worker sont affectés un ID de noeud worker unique et un nom de domaine qui ne doivent pas être modifiés manuellement après la création du cluster. La modification de l'ID ou du domaine empêcherait le maître
+<p><strong>Remarque :</strong> à chaque noeud worker sont affectés un ID de noeud worker unique et un nom de domaine qui ne doivent pas être modifiés manuellement après la création du cluster. La modification de l'ID ou du domaine empêcherait le maître
 Kubernetes de gérer votre cluster.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>Les noeuds Worker exploitent par défaut le chiffrement de disque ; [En savoir plus](cs_secure.html#worker). Pour désactiver le chiffrement, incluez cette option.</dd>
+<dd>Les noeuds worker disposent par défaut du chiffrement de disque. [En savoir plus](cs_secure.html#worker). Pour désactiver le chiffrement, incluez cette option.</dd>
+
+<dt><code>--trusted</code></dt>
+<dd><p>**Serveur bare metal uniquement** : activez la fonction [Informatique de confiance](cs_secure.html#trusted_compute) pour vérifier que vos noeuds worker bare metal ne font pas l'objet de falsification. Si vous n'activez pas cette fonction lors de la création du cluster mais souhaitez le faire ultérieurement, vous pouvez utiliser la [commande](cs_cli_reference.html#cs_cluster_feature_enable) `bx cs feature-enable`. Après avoir activé cette fonction, vous ne pourrez plus la désactiver par la suite. Pour plus d'informations sur le mode de fonctionnement de la fonction de confiance (trust), voir [{{site.data.keyword.containershort_notm}} avec Informatique de confiance](cs_secure.html#trusted_compute).</p>
+<p>Pour vérifier si le type de machine bare metal prend en charge la fonction trust, vérifiez la zone `Trustable` dans la sortie de la [commande](#cs_machine_types)`bx cs machine-types <location>`. Pour vérifier que la fonction trust est activée sur un cluster, visualisez la zone **Trust ready** dans la sortie de la [commande](#cs_cluster_get) `bx cs cluster-get`. Pour vérifier que la fonction trust est activée sur un noeud worker bare metal, visualisez la zone **Trust** dans la sortie de la [commande](#cs_worker_get) `bx cs worker-get`.</p></dd>
 </dl>
 
 **Exemples** :
@@ -909,6 +933,28 @@ Kubernetes de gérer votre cluster.</p></dd>
   ```
   {: pre}
 
+### bx cs cluster-feature-enable CLUSTER [--trusted]
+{: #cs_cluster_feature_enable}
+
+Activez une fonction sur un cluster existant.
+
+<strong>Options de commande</strong> :
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
+
+   <dt><code><em>--trusted</em></code></dt>
+   <dd><p>Incluez cet indicateur pour activer l'informatique de confiance pour tous les noeuds worker bare metal présents dans le cluster. Après avoir activé cette fonction, vous ne pourrez plus la désactiver pour le cluster. Pour plus d'informations sur le mode de fonctionnement de la fonction de confiance (trust), voir [{{site.data.keyword.containershort_notm}} Informatique de confiance](cs_secure.html#trusted_compute).</p>
+   <p>Pour vérifier si le type de machine bare metal prend en charge la fonction trust, vérifiez la zone `Trustable` dans la sortie de la [commande](#cs_machine_types) `bx cs machine-types <location>`. Pour vérifier que la fonction trust est activée sur un cluster, visualisez la zone **Trust ready** dans la sortie de la [commande](#cs_cluster_get) `bx cs cluster-get`. Pour vérifier que la fonction trust est activée sur un noeud worker bare metal, visualisez la zone **Trust** dans la sortie de la [commande](#cs_worker_get) `bx cs worker-get`.</p></dd>
+   </dl>
+
+**Exemple de commande** :
+
+  ```
+  bx cs cluster-feature-enable my_cluster --trusted=true
+  ```
+  {: pre}
 
 ### bx cs cluster-get CLUSTER [--showResources]
 {: #cs_cluster_get}
@@ -922,16 +968,46 @@ Affiche des informations sur un cluster dans votre organisation.
    <dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
 
    <dt><code><em>--showResources</em></code></dt>
-   <dd>Affiche les VLAN et les sous-réseaux pour un cluster.</dd>
+   <dd>Affiche d'autres ressources de cluster, telles que des modules complémentaires, des réseaux locaux virtuels (VLAN), des sous-réseaux et du stockage.</dd>
    </dl>
 
-**Exemple** :
+**Exemple de commande** :
 
   ```
-  bx cs cluster-get my_cluster
+  bx cs cluster-get my_cluster --showResources
   ```
   {: pre}
 
+**Exemple de sortie** :
+
+  ```
+  Name:			   mycluster
+  ID:			     abc1234567
+  State:			 normal
+  Trust ready: false
+  Created:		 2018-01-01T17:19:28+0000
+  Location:		 dal10
+  Master URL:	 https://169.xx.x.xxx:xxxxx
+  Ingress subdomain: mycluster.us-south.containers.mybluemix.net
+  Ingress secret:		 mycluster
+  Workers:		3
+  Version:		1.7.4_1509* (1.8.8_1507 latest)
+  Owner Email:		name@example.com
+  Monitoring dashboard:	https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
+
+  Addons
+  Name                   Enabled
+  customer-storage-pod   true
+  basic-ingress-v2       true
+  storage-watcher-pod    true
+
+  Subnet VLANs
+  VLAN ID   Subnet CIDR         Public   User-managed
+  2234947   10.xxx.xxx.x/29     false    false
+  2234945   169.xx.xxx.xxx/29   true     false
+
+  ```
+  {: screen}
 
 ### bx cs cluster-rm [-f] CLUSTER
 {: #cs_cluster_rm}
@@ -959,7 +1035,7 @@ Supprime un cluster de votre organisation.
 ### bx cs cluster-update [-f] CLUSTER [--kube-version MAJOR.MINOR.PATCH][--force-update]
 {: #cs_cluster_update}
 
-Mettez à jour le maître Kubernetes à la version par défaut de l'API. Pendant la mise à jour, vous ne pouvez ni accéder au cluster, ni le modifier. Les noeuds d'agent, applis et ressources qui ont été déployés par l'utilisateur ne sont pas modifiés et poursuivront leur exécution.
+Mettez à jour le maître Kubernetes à la version par défaut de l'API. Pendant la mise à jour, vous ne pouvez ni accéder au cluster, ni le modifier. Les noeuds worker, applis et ressources qui ont été déployés par l'utilisateur ne sont pas modifiés et poursuivront leur exécution.
 
 Vous pourriez devoir modifier vos fichiers YAML en vue de déploiements ultérieurs. Consultez cette [note sur l'édition](cs_versions.html) pour plus de détails.
 
@@ -976,7 +1052,7 @@ Vous pourriez devoir modifier vos fichiers YAML en vue de déploiements ultérie
    <dd>Utilisez cette option pour forcer la mise à jour d'un maître sans invites utilisateur. Cette valeur est facultative.</dd>
 
    <dt><code>--force-update</code></dt>
-   <dd>Tentative de mise à jour alors que la modification est supérieure à deux niveaux de version mineure. Cette valeur est facultative.</dd>
+   <dd>Tentative de mise à jour alors que la modification est supérieure à deux niveaux de version secondaire. Cette valeur est facultative.</dd>
    </dl>
 
 **Exemple** :
@@ -1007,7 +1083,7 @@ Affiche la liste des clusters dans votre organisation.
 ### bx cs kube-versions
 {: #cs_kube_versions}
 
-Affichez la liste des versions Kubernetes prises en charge dans {{site.data.keyword.containershort_notm}}. Mettez à jour votre [maître de cluster](#cs_cluster_update) et vos [noeuds d'agent](#cs_worker_update) à la version par défaut pour bénéficier des fonctionnalités stables les plus récentes.
+Affichez la liste des versions Kubernetes prises en charge dans {{site.data.keyword.containershort_notm}}. Mettez à jour votre [maître de cluster](#cs_cluster_update) et vos [noeuds worker](#cs_worker_update) à la version par défaut pour bénéficier des fonctionnalités stables les plus récentes.
 
 **Options de commande** :
 
@@ -1027,10 +1103,11 @@ Affichez la liste des versions Kubernetes prises en charge dans {{site.data.keyw
 ## Commandes de cluster : Services et intégrations
 {: #cluster_services_commands}
 
-### bx cs cluster-service-bind CLUSTER KUBERNETES_NAMESPACE SERVICE_INSTANCE_GUID
+
+### bx cs cluster-service-bind CLUSTER KUBERNETES_NAMESPACE SERVICE_INSTANCE_NAME
 {: #cs_cluster_service_bind}
 
-Ajoutez un service {{site.data.keyword.Bluemix_notm}} à un cluster. Pour afficher les services {{site.data.keyword.Bluemix_notm}} disponibles dans le catalogue {{site.data.keyword.Bluemix_notm}}, exécutez la commande `bx service offerings`. Si vous avez déjà provisionné des instances de service {{site.data.keyword.Bluemix_notm}} dans un espace IBM Cloud, vous pouvez les répertorier en exécutant la commande `bx service list`. **Remarque **: vous ne pouvez ajouter que des services {{site.data.keyword.Bluemix_notm}} qui prennent en charge les clés de service.
+Ajoutez un service {{site.data.keyword.Bluemix_notm}} à un cluster. Pour afficher les services {{site.data.keyword.Bluemix_notm}} disponibles dans le catalogue {{site.data.keyword.Bluemix_notm}}, exécutez la commande `bx service offerings`. **Remarque **: vous ne pouvez ajouter que des services {{site.data.keyword.Bluemix_notm}} qui prennent en charge les clés de service.
 
 <strong>Options de commande</strong> :
 
@@ -1041,14 +1118,14 @@ Ajoutez un service {{site.data.keyword.Bluemix_notm}} à un cluster. Pour affich
    <dt><code><em>KUBERNETES_NAMESPACE</em></code></dt>
    <dd>Nom de l'espace de nom Kubernetes. Cette valeur est obligatoire.</dd>
 
-   <dt><code><em>SERVICE_INSTANCE_GUID</em></code></dt>
-   <dd>ID de l'instance de service {{site.data.keyword.Bluemix_notm}} que vous désirez lier. Pour identifier l'ID de l'instance de service, exécutez la commande `bx cs cluster-services <cluster_name_or_ID>`. Cette valeur est obligatoire.</dd>
+   <dt><code><em>SERVICE_INSTANCE_NAME</em></code></dt>
+   <dd>Nom de l'instance de service {{site.data.keyword.Bluemix_notm}} que vous voulez lier. Pour connaître le nom de votre instance de service, exécutez la commande <code>bx service list</code>. Si plusieurs instances ont le même nom dans le compte, utilisez l'ID d'instance à la place du nom. Pour obtenir l'ID, exécutez la commande <code>bx service show <service instance name> --guid</code>. L'une de ces valeurs est obligatoire.</dd>
    </dl>
 
 **Exemple** :
 
   ```
-  bx cs cluster-service-bind my_cluster my_namespace my_service_instance_GUID
+  bx cs cluster-service-bind my_cluster my_namespace my_service_instance
   ```
   {: pre}
 
@@ -1147,7 +1224,9 @@ Permet d'enregistrer un webhook.
 
 Rendez un sous-réseau d'un compte d'infrastructure IBM Cloud (SoftLayer) disponible pour le cluster spécifié.
 
-**Remarque :** lorsque vous rendez un sous-réseau disponible pour un cluster, les adresses IP du sous-réseau sont utilisées pour l'opération réseau du cluster. Pour éviter des conflits d'adresse IP, prenez soin de n'utiliser le sous-réseau qu'avec un seul cluster. N'utilisez pas en même temps un sous-réseau pour plusieurs clusters ou à d'autres fins hors d'{{site.data.keyword.containershort_notm}}.
+**Remarque :**
+* Lorsque vous rendez un sous-réseau accessible à un cluster, les adresses IP de ce sous-réseau sont utilisées pour la mise en réseau du cluster. Pour éviter des conflits d'adresse IP, prenez soin de n'utiliser le sous-réseau qu'avec un seul cluster. N'utilisez pas en même temps un sous-réseau pour plusieurs clusters ou à d'autres fins hors d'{{site.data.keyword.containershort_notm}}.
+* Pour effectuer un routage entre les sous-réseaux d'un même VLAN, vous devez [activer la fonction Spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
 
 <strong>Options de commande</strong> :
 
@@ -1172,7 +1251,9 @@ Rendez un sous-réseau d'un compte d'infrastructure IBM Cloud (SoftLayer) dispon
 
 Créez un sous-réseau dans un compte d'infrastructure IBM Cloud (SoftLayer) et le rend disponible pour le cluster spécifié dans {{site.data.keyword.containershort_notm}}.
 
-**Remarque :** lorsque vous rendez un sous-réseau disponible pour un cluster, les adresses IP du sous-réseau sont utilisées pour l'opération réseau du cluster. Pour éviter des conflits d'adresse IP, prenez soin de n'utiliser le sous-réseau qu'avec un seul cluster. N'utilisez pas en même temps un sous-réseau pour plusieurs clusters ou à d'autres fins hors d'{{site.data.keyword.containershort_notm}}.
+**Remarque :**
+* Lorsque vous rendez un sous-réseau accessible à un cluster, les adresses IP de ce sous-réseau sont utilisées pour la mise en réseau du cluster. Pour éviter des conflits d'adresse IP, prenez soin de n'utiliser le sous-réseau qu'avec un seul cluster. N'utilisez pas en même temps un sous-réseau pour plusieurs clusters ou à d'autres fins hors d'{{site.data.keyword.containershort_notm}}.
+* Pour effectuer un routage entre les sous-réseaux d'un même VLAN, vous devez [activer la fonction Spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
 
 <strong>Options de commande</strong> :
 
@@ -1184,7 +1265,7 @@ Créez un sous-réseau dans un compte d'infrastructure IBM Cloud (SoftLayer) et 
    <dd>Nombre d'adresses IP du sous-réseau. Cette valeur est obligatoire. Les valeurs possibles sont : 8, 16, 32 ou 64.</dd>
 
    <dt><code><em>VLAN_ID</em></code></dt>
-   <dd>Réseau local virtuel(VLAN) dans lequel créer le sous-réseau. Cette valeur est obligatoire. Pour répertorier les VLAN disponibles, utilisez la [commande](#cs_vlans) `bx cs vlans<location>`. </dd>
+   <dd>Réseau local virtuel (VLAN) dans lequel créer le sous-réseau. Cette valeur est obligatoire. Pour répertorier les VLAN disponibles, utilisez la [commande](#cs_vlans) `bx cs vlans<location>`. </dd>
    </dl>
 
 **Exemple** :
@@ -1202,7 +1283,9 @@ Mettez à disposition votre propre sous-réseau privé sur vos clusters {{site.d
 
 Ce sous-réseau privé n'est pas celui qui est fourni par l'infrastructure IBM Cloud (SoftLayer). De ce fait, vous devez configurer tout routage de trafic entrant et sortant pour le sous-réseau. Pour ajouter un sous-réseau d'infrastructure IBM Cloud (SoftLayer), utilisez la [commande](#cs_cluster_subnet_add) `bx cs cluster-subnet-add`.
 
-**Remarque** : lorsque vous ajoutez un sous-réseau utilisateur privé à un cluster, les adresses IP de ce sous-réseau sont utilisées pour les équilibreurs de charge privés figurant dans le cluster. Pour éviter des conflits d'adresse IP, prenez soin de n'utiliser le sous-réseau qu'avec un seul cluster. N'utilisez pas en même temps un sous-réseau pour plusieurs clusters ou à d'autres fins hors d'{{site.data.keyword.containershort_notm}}.
+**Remarque **:
+* Lorsque vous ajoutez un sous-réseau utilisateur privé à un cluster, les adresses IP de ce sous-réseau sont utilisées pour les équilibreurs de charge privés figurant dans le cluster. Pour éviter des conflits d'adresse IP, prenez soin de n'utiliser le sous-réseau qu'avec un seul cluster. N'utilisez pas en même temps un sous-réseau pour plusieurs clusters ou à d'autres fins hors d'{{site.data.keyword.containershort_notm}}.
+* Pour effectuer un routage entre les sous-réseaux d'un même VLAN, vous devez [activer la fonction Spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
 
 <strong>Options de commande</strong> :
 
@@ -1213,10 +1296,10 @@ Ce sous-réseau privé n'est pas celui qui est fourni par l'infrastructure IBM C
    <dt><code><em>SUBNET_CIDR</em></code></dt>
    <dd>CIDR (Classless InterDomain Routing) du sous-réseau. Cette valeur est obligatoire et ne doit pas entrer en conflit avec un sous-réseau utilisé par l'infrastructure IBM Cloud (SoftLayer).
 
-   Les préfixes pris en charge sont compris entre `/30` (1 adresse IP) et `/24` (253 adresses IP). Si vous avez défini un CIDR avec une longueur de préfixe et que vous devez modifier sa valeur, ajoutez d'abord le nouveau CIDR, puis [supprimer l'ancien CIDR](#cs_cluster_user_subnet_rm).</dd>
+   Les préfixes pris en charge sont compris entre `/30` (1 adresse IP) et `/24` (253 adresses IP). Si vous avez défini un CIDR avec une longueur de préfixe et que vous devez modifier sa valeur, ajoutez d'abord le nouveau CIDR, puis [supprimez l'ancien CIDR](#cs_cluster_user_subnet_rm).</dd>
 
    <dt><code><em>PRIVATE_VLAN</em></code></dt>
-   <dd>ID du VLAN privé. Cette valeur est obligatoire. Elle doit correspondre à l'ID du VLAN privé d'un ou plusieurs noeuds d'agent dans le cluster.</dd>
+   <dd>ID du VLAN privé. Cette valeur est obligatoire. Elle doit correspondre à l'ID du VLAN privé d'un ou plusieurs noeuds worker dans le cluster.</dd>
    </dl>
 
 **Exemple** :
@@ -1257,7 +1340,7 @@ Supprimez votre propre sous-réseau privé du cluster indiqué.
 ### bx cs subnets
 {: #cs_subnets}
 
-Affiches la liste des sous-réseaux disponibles dans un compte d'infrastructure IBM Cloud (SoftLayer).
+Affichez la liste des sous-réseaux disponibles dans un compte d'infrastructure IBM Cloud (SoftLayer).
 
 <strong>Options de commande</strong> :
 
@@ -1280,9 +1363,15 @@ Affiches la liste des sous-réseaux disponibles dans un compte d'infrastructure 
 ### bx cs credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME
 {: #cs_credentials_set}
 
-Définissez les données d'identification du compte d'infrastructure IBM Cloud (SoftLayer) pour votre compte {{site.data.keyword.Bluemix_notm}}. Elles vous permettront d'accéder au portefeuille d'infrastructure IBM Cloud (SoftLayer) via votre compte {{site.data.keyword.Bluemix_notm}}.
+Définissez les données d'identification du compte d'infrastructure IBM Cloud (SoftLayer) pour votre compte {{site.data.keyword.containershort_notm}}.
 
-**Remarque :** ne définissez pas plusieurs données d'identification pour un compte {{site.data.keyword.Bluemix_notm}}. Tout compte {{site.data.keyword.Bluemix_notm}} est lié à un seul portefeuille d'infrastructure IBM Cloud (SoftLayer).
+Si vous disposez d'un compte de paiement à la carte {{site.data.keyword.Bluemix_notm}}, vous avez accès au portefeuille d'infrastructure IBM Cloud (SoftLayer) par défaut. Cependant, vous pouvez utiliser un autre compte d'infrastructure IBM Cloud (SoftLayer) dont vous disposez déjà pour commander l'infrastructure. Vous pouvez lier le compte de cette infrastructure à votre compte {{site.data.keyword.Bluemix_notm}} en utilisant cette commande.
+
+Si les données d'identification de l'infrastructure IBM Cloud (SoftLayer) sont définies manuellement, ces données sont utilisées pour commander l'infrastructure, même s'il existe déjà une  [clé d'API IAM](#cs_api_key_info) pour le compte. Si l'utilisateur dont les données d'identification sont stockées ne dispose pas des droits requis pour commander l'infrastructure, les actions liées à l'infrastructure, par exemple la création d'un cluster ou le rechargement d'un noeud worker risquent d'échouer.
+
+Vous ne pouvez pas définir plusieurs données d'identification pour un compte {{site.data.keyword.containershort_notm}}. Tout compte {{site.data.keyword.containershort_notm}} est lié à un seul portefeuille d'infrastructure IBM Cloud (SoftLayer).
+
+**Important :** avant d'utiliser cette commande, assurez-vous que l'utilisateur dont les données d'identification sont utilisées dispose des droits [{{site.data.keyword.containershort_notm}} et des droits de l'infrastructure IBM Cloud (SoftLayer)](cs_users.html#users) requis.
 
 <strong>Options de commande</strong> :
 
@@ -1325,7 +1414,9 @@ Définissez les données d'identification du compte d'infrastructure IBM Cloud (
 ### bx cs credentials-unset
 {: #cs_credentials_unset}
 
-Supprimez les données d'identification du compte d'infrastructure IBM Cloud (SoftLayer) de votre compte {{site.data.keyword.Bluemix_notm}}. Une fois les données d'identification supprimées, vous ne pouvez plus accéder au portefeuille d'infrastructure IBM Cloud (SoftLayer) via votre compte {{site.data.keyword.Bluemix_notm}}.
+Supprimez les données d'identification du compte d'infrastructure IBM Cloud (SoftLayer) de votre compte {{site.data.keyword.containershort_notm}}.
+
+Après avoir supprimé les données d'identification, la [clé d'API IAM](#cs_api_key_info) est utilisée pour commander des ressources dans l'infrastructure IBM Cloud (SoftLayer).
 
 <strong>Options de commande</strong> :
 
@@ -1342,11 +1433,29 @@ Supprimez les données d'identification du compte d'infrastructure IBM Cloud (So
 ### bx cs machine-types LOCATION
 {: #cs_machine_types}
 
-Affichez la liste des types de machine disponibles pour vos noeuds d'agent. Chaque type de machine inclut la quantité d'UC virtuelles, de mémoire et d'espace disque pour chaque noeud worker dans le cluster.
-- Par défaut, les données Docker de l'hôte sont chiffrées dans les types de machine. Le répertoire `/var/lib/docker`, dans lequel sont stockées toutes les données des conteneurs, est chiffré avec le chiffrement LUKS. Si l'option `disable-disk-encrypt` est incluse lors de la création du cluster, les données Docker de l'hôte ne sont pas chiffrées. [En savoir plus sur le chiffrement.](cs_secure.html#encrypted_disks)
-- Les types de machine dont le nom inclut `u2c` ou `b2c` utilisent le disque local au lieu du réseau de stockage SAN pour plus de fiabilité. Un SAN procure, entre autres, une capacité de traitement plus élevée lors de la sérialisation des octets sur le disque local et réduit les risques de dégradation du système de fichiers en cas de défaillance du réseau. Ces types de machines disposent d'un stockage sur disque local principal de 25 Go pour le système de fichiers du système d'exploitation, auquel l'utilisateur ne peut pas accéder, et d'un stockage sur disque local secondaire de 100 Go pour le répertoire où sont consignées toutes les données de conteneur (`/var/lib/docker`)).
-- Les types de machine dont le nom inclut `u1c` ou `b1c` sont obsolètes. Par exemple, `u1c.2x4`. Pour démarrer des machines de type `u2c` et`b2c`, utilisez la commande `bx cs worker-add` afin d'ajouter des noeuds d'agent avec les types de machine mis à jour. Ensuite, supprimez les noeuds d'agent qui utilisent les types de machine obsolètes à l'aide de la commande `bx cs worker-rm`.
-</p>
+Affichez la liste des types de machine disponibles pour vos noeuds worker. Chaque type de machine inclut la quantité d'UC virtuelles, de mémoire et d'espace disque pour chaque noeud worker dans le cluster. Par défaut, le répertoire `/var/lib/docker`, dans lequel sont stockées toutes les données des conteneurs, est chiffré avec le chiffrement LUKS. Si l'option `disable-disk-encrypt` est incluse lors de la création du cluster, les données Docker de l'hôte ne sont pas chiffrées. [En savoir plus sur le chiffrement.](cs_secure.html#encrypted_disks)
+{:shortdesc}
+
+Vous pouvez mettre à disposition votre noeud worker en tant que machine virtuelle sur un matériel dédié ou partagé, ou en tant que machine physique sur un serveur bare metal.
+
+<dl>
+<dt>Machines physiques (bare metal)</dt>
+<dd>Bare metal est un serveur à service exclusif dont les ressources sont dédiées exclusivement au noeud worker. Les serveurs bare metal sont plus chers que les serveurs virtuels et sont mieux adaptés aux applications à hautes performances nécessitant plus de ressources et de contrôle hôte.
+<p><strong>Facturation mensuelle</strong> : les serveurs bare metal sont facturés au mois. Si vous annulez un serveur bare metal avant la fin du mois, vous êtes facturé jusqu'à la fin de ce mois. Lorsque vous mettez à disposition des serveurs bare metal, vous interagissez directement avec l'infrastructure IBM Cloud (SoftLayer), et, par conséquent, l'exécution de ce processus manuel peut prendre plus d'un jour ouvrable.</p>
+<p><strong>Groupes de types de machine bare metal</strong> : les types de machine bare metal sont fournis en groupes ayant des ressources de traitement différentes que vous pouvez sélectionner pour répondre aux besoins de votre application.
+<ul><li>`mb1c.4x32` : sélectionnez ce type pour obtenir une configuration équilibrée des ressources de machine physique pour vos noeuds worker. Configuration équilibrée avec 4 coeurs, 32 Go de RAM, un disque principal SATA de 1 To, un disque secondaire SATA de 2 To, un réseau de liaisons à 10 Gbit/s.</li>
+<li>`mb1c.16x64` : sélectionnez ce type pour obtenir une configuration équilibrée des ressources de machine physique pour vos noeuds worker. Configuration équilibrée avec 16 coeurs, 64 Go de RAM, un disque principal SATA de 1 To, un disque secondaire SSD de 1,75 To, un réseau de liaisons à 10 Gbit/s.</li>
+<li>`mr1c.28x512` : sélectionnez ce type pour maximiser la mémoire RAM disponible pour vos noeuds worker. Grande capacité de mémoire RAM avec 28 coeurs, 512 Go de mémoire, un disque principal SATA 1 To, un disque secondaire SSD 1,7 To, un réseau de liaisons à 10 Gbit/s.</li>
+<li>`md1c.16x64.4x4tb` : sélectionnez ce type si vos noeuds worker nécessitent une quantité substantielle de stockage sur disque local, y compris sur disque RAID pour la sauvegarde des données stockées localement sur la machine. Les disques de stockage principaux d'une capacité de 1 To sont configurés pour RAID1 et les disques de stockage secondaires de 4 To sont configurés pour RAID10. Grande capacité de données avec 28 coeurs, 512 Go de mémoire, disque principal RAID1 de 2 x 1 To, disque secondaire RAID10 SATA 4x4 To, réseau de liaisons à 10 Gbit/s.</li>
+<li>`md1c.28x512.4x4tb` : sélectionnez ce type si vos noeuds worker nécessitent une quantité substantielle de stockage sur disque local, y compris sur disque RAID pour la sauvegarde des données stockées localement sur la machine. Les disques de stockage principaux d'une capacité de 1 To sont configurés pour RAID1 et les disques de stockage secondaires de 4 To sont configurés pour RAID10. Grande capacité de données avec 16 coeurs, 64 Go de mémoire, disque principal RAID1 de 2 x 1 To, disque secondaire RAID10 SATA 4x4 To, réseau de liaisons à 10 Gbit/s.</li>
+
+</ul></p>
+<p><strong>Informatique de confiance</strong> : vous pouvez choisir d'activer la fonction de confiance (trust) pour tous les noeuds worker bare metal qui exécutent Kubernetes version 1.9 ou ultérieure et figurent dans le cluster. La fonction Informatique de confiance vérifie que vos noeuds worker ne font pas l'objet de falsification et que seuls les utilisateurs autorisés ont accès à votre cluster. Si vous n'activez pas cette fonction lors de la création du cluster mais souhaitez le faire ultérieurement, vous pouvez utiliser la [commande](cs_cli_reference.html#cs_cluster_feature_enable) `bx cs feature-enable`. Après avoir activé cette fonction, vous ne pourrez plus la désactiver pour le cluster. Pour plus d'informations sur le mode de fonctionnement de la fonction de confiance (trust), voir [{{site.data.keyword.containershort_notm}} avec Informatique de confiance](cs_secure.html#trusted_compute). Lorsque vous exécutez la commande `bx cs machine-types`, vous pouvez voir les machines qui prennent en charge la fonction de confiance en examinant la zone `Trustable`.</p></dd>
+<dt>Machines virtuelles</dt>
+<dd>Les types de machine virtuelle sont mis à disposition en tant qu'instances virtuelles sur du matériel physique pouvant être partagé ou dédié. Ils sont facturés à l'heure et leur mise à disposition dans votre compte s'effectue en principe en quelques minutes.
+<p><strong>Types de machine virtuelle `u2c` ou `b2c`</strong> : ces machines utilisent le disque local au lieu du réseau SAN (Storage Area Networking) pour une plus grande fiabilité. Un réseau SAN procure, entre autres, une capacité de traitement plus élevée lors de la sérialisation des octets sur le disque local et réduit les risques de dégradation du système de fichiers en cas de défaillance du réseau. Ces types de machine contiennent un stockage sur disque local principal de 25 Go pour le système de fichiers du système d'exploitation et 100 Go de stockage sur disque local secondaire pour `/var/lib/docker`, répertoire dans lequel sont écrites toutes les données des conteneurs.</p>
+<p><strong>Types de machine `u1c` ou `b1c` obsolètes</strong> : pour commencer à utiliser les types de machine `u2c` et `b2c`, [mettez à jour les types de machine en ajoutant des noeuds worker](cs_cluster_update.html#machine_type).</p></dd>
+</dl>
 
 
 <strong>Options de commande</strong> :
@@ -1355,14 +1464,36 @@ Affichez la liste des types de machine disponibles pour vos noeuds d'agent. Chaq
    <dt><code><em>LOCATION</em></code></dt>
    <dd>Indiquez l'emplacement où répertorier les types de machine disponibles. Cette valeur est obligatoire. Passez en revue les [emplacements disponibles](cs_regions.html#locations).</dd></dl>
 
-**Exemple** :
+**Exemple de commande** :
 
   ```
   bx cs machine-types dal10
   ```
   {: pre}
 
-### bx cs vlans LOCATION 
+**Exemple de sortie** :
+
+  ```
+  Getting machine types list...
+  OK
+  Machine Types
+  Name                 Cores   Memory   Network Speed   OS             Server Type   Storage   Secondary Storage   Trustable
+  u2c.2x4              2       4GB      1000Mbps        UBUNTU_16_64   virtual       25GB      100GB               False
+  b2c.4x16             4       16GB     1000Mbps        UBUNTU_16_64   virtual       25GB      100GB               False
+  b2c.16x64            16      64GB     1000Mbps        UBUNTU_16_64   virtual       25GB      100GB               False
+  b2c.32x128           32      128GB    1000Mbps        UBUNTU_16_64   virtual       25GB      100GB               False
+  b2c.56x242           56      242GB    1000Mbps        UBUNTU_16_64   virtual       25GB      100GB               False
+  mb1c.4x32            4       32GB     10000Mbps       UBUNTU_16_64   physical      1000GB    2000GB              False
+  mb1c.16x64           16      64GB     10000Mbps       UBUNTU_16_64   physical      1000GB    1700GB              False
+  mr1c.28x512          28      512GB    10000Mbps       UBUNTU_16_64   physical      1000GB    1700GB              False
+  md1c.16x64.4x4tb     16      64GB     10000Mbps       UBUNTU_16_64   physical      1000GB    8000GB              False
+  md1c.28x512.4x4tb    28      512GB    10000Mbps       UBUNTU_16_64   physical      1000GB    8000GB              False
+  
+  ```
+  {: screen}
+
+
+### bx cs vlans LOCATION [--all]
 {: #cs_vlans}
 
 Répertoriez les VLAN publics et privés disponibles pour un emplacement dans votre compte d'infrastructure IBM Cloud (SoftLayer). Pour répertorier ces réseaux, vous devez disposer d'un compte payant.
@@ -1372,7 +1503,8 @@ Répertoriez les VLAN publics et privés disponibles pour un emplacement dans vo
    <dl>
    <dt><code><em>LOCATION</em></code></dt>
    <dd>Indiquez l'emplacement où répertorier vos VLAN privés et publics. Cette valeur est obligatoire. Passez en revue les [emplacements disponibles](cs_regions.html#locations).</dd>
-   
+   <dt><code>--all</code></dt>
+   <dd>Répertorie tous les VLAN disponibles. Par défaut, les VLAN sont filtrés pour n'afficher que ceux qui sont valides. Pour être valide, un VLAN doit être associé à l'infrastructure qui peut héberger un noeud worker avec un stockage sur disque local.</dd>
    </dl>
 
 **Exemple** :
@@ -1389,7 +1521,7 @@ Répertoriez les VLAN publics et privés disponibles pour un emplacement dans vo
 ## Commandes de journalisation
 {: #logging_commands}
 
-### bx cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT][--space CLUSTER_SPACE] [--org CLUSTER_ORG] --type LOG_TYPE [--json]
+### bx cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT][--space CLUSTER_SPACE] [--org CLUSTER_ORG] --type LOG_TYPE [--json][--skip-validation]
 {: #cs_logging_create}
 
 Créez une configuration de journalisation. Vous pouvez utiliser cette commande pour acheminer des journaux de conteneurs, applications, noeuds worker, clusters Kubernetes et équilibreurs de charge d'application Ingress à {{site.data.keyword.loganalysisshort_notm}} ou à un serveur syslog externe.
@@ -1400,7 +1532,7 @@ Créez une configuration de journalisation. Vous pouvez utiliser cette commande 
 <dt><code><em>CLUSTER</em></code></dt>
 <dd>Nom ou ID du cluster.</dd>
 <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-<dd>Source de journal pour laquelle activer l'acheminement de journal. Valeurs admises : <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code> et <code>ingress</code>. Cette valeur est obligatoire.</dd>
+<dd>Source de journal pour laquelle activer l'acheminement de journal. Cet argument prend en charge une liste séparée par des virgules de sources de journal auxquelles appliquer la configuration. Valeurs admises : <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code> et <code>ingress</code>. Si vous ne fournissez pas de source de journal, les configurations de journalisation sont créées pour les sources de journal <code>container</code> et <code>ingress</code>.</dd>
 <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
 <dd>Espace de nom Kubernetes depuis lequel vous désirez acheminer des journaux. Le transfert des journaux n'est pas pris en charge pour les espaces de nom Kubernetes <code>ibm-system</code> et <code>kube-system</code>. Cette valeur est facultative et n'est valide que pour la source de journal conteneur. Si vous n'indiquez pas d'espace de nom, tous les espaces de nom du cluster utilisent cette configuration.</dd>
 <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
@@ -1415,6 +1547,8 @@ Créez une configuration de journalisation. Vous pouvez utiliser cette commande 
 <dd>Protocole de transfert de journal que vous souhaitez utiliser. Actuellement, <code>syslog</code> et <code>ibm</code> sont pris en charge. Cette valeur est obligatoire.</dd>
 <dt><code>--json</code></dt>
 <dd>(Facultatif) Imprime la sortie de la commande au format JSON.</dd>
+<dt><code>--skip-validation</code></dt>
+<dd>(Facultatif) Ignore la validation des noms d'espace et d'organisation lorsqu'ils sont indiqués. Cette opération permet de réduire le temps de traitement, mais une configuration de journalisation non valide ne transférera pas correctement les journaux.</dd>
 </dl>
 
 **Exemples** :
@@ -1484,10 +1618,10 @@ Actualise la configuration de journalisation pour le cluster. Ceci actualise le 
   {: pre}
 
 
-### bx cs logging-config-rm CLUSTER --id LOG_CONFIG_ID
+### bx cs logging-config-rm CLUSTER [--id LOG_CONFIG_ID][--all]
 {: #cs_logging_rm}
 
-Supprime une configuration d'acheminement de journaux. Ceci cesse l'acheminement des journaux à un serveur syslog distant ou à {{site.data.keyword.loganalysisshort_notm}}.
+Supprimez une configuration d'acheminement des journaux ou toutes les configurations de journalisation d'un cluster. Ceci cesse l'acheminement des journaux à un serveur syslog distant ou à {{site.data.keyword.loganalysisshort_notm}}.
 
 <strong>Options de commande</strong> :
 
@@ -1495,7 +1629,9 @@ Supprime une configuration d'acheminement de journaux. Ceci cesse l'acheminement
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
    <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
-   <dd>ID de configuration de journalisation que vous souhaitez retirer de la source de journal. Cette valeur est obligatoire.</dd>
+   <dd>Si vous souhaitez supprimer une seule configuration de journalisation, ID de la configuration de journalisation.</dd>
+   <dt><code>--all</code></dt>
+   <dd>Indicateur permettant de supprimer toutes les configurations de journalisation dans un cluster.</dd>
    </dl>
 
 **Exemple** :
@@ -1506,7 +1642,7 @@ Supprime une configuration d'acheminement de journaux. Ceci cesse l'acheminement
   {: pre}
 
 
-### bx cs logging-config-update CLUSTER --id LOG_CONFIG_ID [--hostname LOG_SERVER_HOSTNAME_OR_IP][--port LOG_SERVER_PORT] [--space CLUSTER_SPACE][--org CLUSTER_ORG] --type LOG_TYPE [--json]
+### bx cs logging-config-update CLUSTER --id LOG_CONFIG_ID [--hostname LOG_SERVER_HOSTNAME_OR_IP][--port LOG_SERVER_PORT] [--space CLUSTER_SPACE][--org CLUSTER_ORG] --type LOG_TYPE [--json][--skipValidation]
 {: #cs_logging_update}
 
 Mettez à jour les détails d'une configuration d'acheminement de journaux.
@@ -1530,6 +1666,8 @@ Mettez à jour les détails d'une configuration d'acheminement de journaux.
    <dd>Protocole de transfert de journal que vous souhaitez utiliser. Actuellement, <code>syslog</code> et <code>ibm</code> sont pris en charge. Cette valeur est obligatoire.</dd>
    <dt><code>--json</code></dt>
    <dd>(Facultatif) Imprime la sortie de la commande au format JSON.</dd>
+   <dt><code>--skipValidation</code></dt>
+   <dd>(Facultatif) Ignore la validation des noms d'espace et d'organisation lorsqu'ils sont indiqués. Cette opération permet de réduire le temps de traitement, mais une configuration de journalisation non valide ne transférera pas correctement les journaux.</dd>
    </dl>
 
 **Exemple pour le type de journal `ibm`** :
@@ -1663,7 +1801,7 @@ us-south      us-south
 ### bx cs worker-add --cluster CLUSTER [--file FILE_LOCATION][--hardware HARDWARE] --machine-type MACHINE_TYPE --number NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt]
 {: #cs_worker_add}
 
-Ajout de noeuds d'agent à votre cluster standard.
+Ajout de noeuds worker à votre cluster standard.
 
 <strong>Options de commande</strong> :
 
@@ -1672,7 +1810,7 @@ Ajout de noeuds d'agent à votre cluster standard.
 <dd>Nom ou ID du cluster. Cette valeur est obligatoire.</dd>
 
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
-<dd>Chemin d'accès au fichier YAML pour ajouter des noeuds d'agent à votre cluster. Au lieu de définir les caractéristiques de vos noeuds d'agent supplémentaires à l'aide des options fournies dans cette commande, vous pouvez utiliser un fichier YAML. Cette valeur est facultative.
+<dd>Chemin d'accès au fichier YAML pour ajouter des noeuds worker à votre cluster. Au lieu de définir les caractéristiques de vos noeuds worker supplémentaires à l'aide des options fournies dans cette commande, vous pouvez utiliser un fichier YAML. Cette valeur est facultative.
 
 <p><strong>Remarque :</strong> si vous indiquez la même option dans la commande comme paramètre dans le fichier YAML, la valeur de l'option de la commande est prioritaire sur la valeur définie dans le fichier YAML. Par exemple, si vous définissez un type de machine dans votre fichier YAML et que vous utilisez l'option --machine-type dans la commande, la valeur que vous avez entrée dans l'option de commande se substitue à la valeur définie dans le fichier YAML.
 
@@ -1684,7 +1822,7 @@ private-vlan: <em>&lt;private_vlan&gt;</em>
 public-vlan: <em>&lt;public_vlan&gt;</em>
 hardware: <em>&lt;shared_or_dedicated&gt;</em>
 workerNum: <em>&lt;number_workers&gt;</em>
-</code></pre>
+diskEncryption: <em>false</em></code></pre>
 
 <table>
 <caption>Tableau 2. Description des composants du fichier YAML</caption>
@@ -1694,35 +1832,36 @@ workerNum: <em>&lt;number_workers&gt;</em>
 <tbody>
 <tr>
 <td><code><em>name</em></code></td>
-<td>Remplacez <code><em>&lt;cluster_name_or_id&gt;</em></code> par le nom ou l'ID du cluster sur lequel vous souhaitez ajouter des noeuds d'agent.</td>
+<td>Remplacez <code><em>&lt;cluster_name_or_id&gt;</em></code> par le nom ou l'ID du cluster sur lequel vous souhaitez ajouter des noeuds worker.</td>
 </tr>
 <tr>
 <td><code><em>location</em></code></td>
-<td>Remplacez <code><em>&lt;location&gt;</em></code> par l'emplacement où vous souhaitez déployer vos noeuds d'agent. Les emplacements disponibles dépendent de la région à laquelle vous êtes connecté. Pour afficher la liste des emplacements disponibles, exécutez la commande <code>bx cs locations</code>.</td>
+<td>Remplacez <code><em>&lt;location&gt;</em></code> par l'emplacement où vous souhaitez déployer vos noeuds worker. Les emplacements disponibles dépendent de la région à laquelle vous êtes connecté. Pour afficher la liste des emplacements disponibles, exécutez la commande <code>bx cs locations</code>.</td>
 </tr>
 <tr>
 <td><code><em>machine-type</em></code></td>
-<td>Remplacez <code><em>&lt;machine_type&gt;</em></code> par le type de machine souhaité pour vos noeuds d'agent. Pour afficher la liste des types de machine disponibles pour votre emplacement, exécutez la commande <code>bx cs machine-types <em>&lt;location&gt;</em></code>.</td>
+<td>Remplacez <code><em>&lt;machine_type&gt;</em></code> par le type de machine souhaité pour vos noeuds worker. Pour afficher la liste des types de machine disponibles pour votre emplacement, exécutez la commande <code>bx cs machine-types <em>&lt;location&gt;</em></code></td>
+<td>Remplacez <code><em>&lt;machine_type&gt;</em></code> par le type de machine sur lequel vous envisagez de déployer vos noeuds worker. Vous pouvez déployer vos noeuds worker en tant que machines virtuelles sur du matériel partagé ou dédié ou en tant que machines physiques d'un serveur bare metal. Les types de machines virtuelles et physiques disponibles varient en fonction de l'emplacement de déploiement du cluster. Pour plus d'informations, voir la documentation correspondant à la [commande](cs_cli_reference.html#cs_machine_types) `bx cs machine-type`.</td>
 </tr>
 <tr>
 <td><code><em>private-vlan</em></code></td>
-<td>Remplacez <code><em>&lt;private_vlan&gt;</em></code> par l'ID du réseau local virtuel privé que vous souhaitez utiliser pour vos noeuds d'agent. Pour afficher la liste des réseaux locaux virtuels disponibles, exécutez la commande <code>bx cs vlans <em>&lt;location&gt;</em></code> et recherchez les routeurs VLAN débutant par <code>bcr</code> (routeur dorsal).</td>
+<td>Remplacez <code><em>&lt;private_vlan&gt;</em></code> par l'ID du réseau local virtuel privé que vous souhaitez utiliser pour vos noeuds worker. Pour afficher la liste des réseaux locaux virtuels disponibles, exécutez la commande <code>bx cs vlans <em>&lt;location&gt;</em></code> et recherchez les routeurs VLAN débutant par <code>bcr</code> (routeur dorsal).</td>
 </tr>
 <tr>
 <td><code>public-vlan</code></td>
-<td>Remplacez <code>&lt;public_vlan&gt;</code> par l'ID du réseau local virtuel public que vous souhaitez utiliser pour vos noeuds d'agent. Pour afficher la liste des réseaux locaux virtuels disponibles, exécutez la commande <code>bx cs vlans &lt;location&gt;</code> et recherchez les routeurs VLAN débutant par <code>fcr</code> (routeur frontal). <br><strong>Remarque </strong>: si vous décidez de ne pas sélectionner de réseau virtuel local public car vous désirez que vos noeuds worker se connectent uniquement à un réseau local virtuel privé, vous devez configurer une solution alternative. Voir [Connexion de réseau virtuel pour noeuds worker](cs_clusters.html#worker_vlan_connection) pour plus d'informations.</td>
+<td>Remplacez <code>&lt;public_vlan&gt;</code> par l'ID du réseau local virtuel public que vous souhaitez utiliser pour vos noeuds worker. Pour afficher la liste des réseaux locaux virtuels disponibles, exécutez la commande <code>bx cs vlans &lt;location&gt;</code> et recherchez les routeurs VLAN débutant par <code>fcr</code> (routeur frontal). <br><strong>Remarque </strong>: si vous décidez de ne pas sélectionner de réseau virtuel local public car vous désirez que vos noeuds worker se connectent uniquement à un réseau local virtuel privé, vous devez configurer une solution alternative. Voir [Connexion de réseau virtuel pour noeuds worker](cs_clusters.html#worker_vlan_connection) pour plus d'informations. </td>
 </tr>
 <tr>
 <td><code>hardware</code></td>
-<td>Niveau d'isolation du matériel pour votre noeud worker. Utilisez un cluster dédié si vous désirez que toutes les ressources physiques vous soient dédiées exclusivement ou un cluster partagé pour permettre leur partage avec d'autres clients IBM. La valeur par défaut est shared.</td>
+<td>Pour les types de machine virtuelle : niveau d'isolement de votre noeud worker. Utilisez un cluster dédié si vous désirez que toutes les ressources physiques vous soient dédiées exclusivement ou un cluster partagé pour permettre leur partage avec d'autres clients IBM. La valeur par défaut est shared.</td>
 </tr>
 <tr>
 <td><code>workerNum</code></td>
-<td>Remplacez <code><em>&lt;number_workers&gt;</em></code> par le nombre de noeuds d'agent que vous souhaitez déployer.</td>
+<td>Remplacez <code><em>&lt;number_workers&gt;</em></code> par le nombre de noeuds worker que vous souhaitez déployer.</td>
 </tr>
 <tr>
 <td><code>diskEncryption: <em>false</em></code></td>
-<td>Les noeuds Worker exploitent par défaut le chiffrement de disque ; [En savoir plus](cs_secure.html#worker). Pour désactiver le chiffrement, incluez cette option en lui attribuant la valeur <code>false</code>.</td></tr>
+<td>Les noeuds worker disposent par défaut du chiffrement de disque. [En savoir plus](cs_secure.html#worker). Pour désactiver le chiffrement, incluez cette option en lui attribuant la valeur <code>false</code>.</td></tr>
 </tbody></table></p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
@@ -1730,22 +1869,23 @@ workerNum: <em>&lt;number_workers&gt;</em>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
 <dd>Le type de machine choisi a une incidence sur la quantité de mémoire et l'espace disque disponible pour les conteneurs déployés sur votre noeud worker. Cette valeur est obligatoire. Pour afficher la liste des types de machine disponibles, exécutez la commande [bx cs machine-types LOCATION](#cs_machine_types).</dd>
+<dd>Choisissez un type de machine. Vous pouvez déployer vos noeuds worker en tant que machines virtuelles sur du matériel partagé ou dédié ou en tant que machines physiques d'un serveur bare metal. Les types de machines virtuelles et physiques disponibles varient en fonction de l'emplacement de déploiement du cluster. Pour plus d'informations, voir la documentation correspondant à la [commande](cs_cli_reference.html#cs_machine_types) `bx cs machine-type`. Cette valeur est obligatoire pour les clusters standard et n'est pas disponible pour les clusters gratuits.</dd>
 
 <dt><code>--number <em>NUMBER</em></code></dt>
-<dd>Entier représentant le nombre de noeuds d'agent à créer dans le cluster. La valeur par défaut est 1. Cette valeur est facultative.</dd>
+<dd>Entier représentant le nombre de noeuds worker à créer dans le cluster. La valeur par défaut est 1. Cette valeur est facultative.</dd>
 
 <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
 <dd>VLAN privé spécifié lors de la création du cluster. Cette valeur est obligatoire.
 
-<p><strong>Remarque :</strong> Les VLAN publics et privés que vous indiquez doivent correspondre. Les routeurs de VLAN privé commencent toujours par <code>bcr</code> (routeur dorsal) et les routeurs de VLAN public par <code>fcr</code> (routeur frontal). Le numéro et la combinaison de lettres après ces préfixes doivent correspondre pour pouvoir utiliser ces réseaux locaux virtuels lors de la création d'un cluster. N'utilisez pas de réseaux locaux virtuels publics et privés qui ne correspondent pas pour créer un cluster.</p></dd>
+<p><strong>Remarque :</strong> les VLAN publics et privés que vous indiquez doivent correspondre. Les routeurs de VLAN privé commencent toujours par <code>bcr</code> (routeur dorsal) et les routeurs de VLAN public par <code>fcr</code> (routeur frontal). Le numéro et la combinaison de lettres après ces préfixes doivent correspondre pour pouvoir utiliser ces réseaux locaux virtuels lors de la création d'un cluster. N'utilisez pas de réseaux locaux virtuels publics et privés qui ne correspondent pas pour créer un cluster.</p></dd>
 
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
 <dd>VLAN public spécifié lors de la création du cluster. Cette valeur est facultative. Si vous désirez que vos noeuds worker ne soient présents que sur un réseau virtuel local privé, n'indiquez pas d'ID de réseau virtuel local public. <strong>Remarque</strong> : si vous choisissez de ne pas sélectionner de VLAN public, vous devez configurer une solution alternative. Voir [Connexion de réseau virtuel pour noeuds worker](cs_clusters.html#worker_vlan_connection) pour plus d'informations.
 
-<p><strong>Remarque :</strong> Les VLAN publics et privés que vous indiquez doivent correspondre. Les routeurs de VLAN privé commencent toujours par <code>bcr</code> (routeur dorsal) et les routeurs de VLAN public par <code>fcr</code> (routeur frontal). Le numéro et la combinaison de lettres après ces préfixes doivent correspondre pour pouvoir utiliser ces réseaux locaux virtuels lors de la création d'un cluster. N'utilisez pas de réseaux locaux virtuels publics et privés qui ne correspondent pas pour créer un cluster.</p></dd>
+<p><strong>Remarque :</strong> les VLAN publics et privés que vous indiquez doivent correspondre. Les routeurs de VLAN privé commencent toujours par <code>bcr</code> (routeur dorsal) et les routeurs de VLAN public par <code>fcr</code> (routeur frontal). Le numéro et la combinaison de lettres après ces préfixes doivent correspondre pour pouvoir utiliser ces réseaux locaux virtuels lors de la création d'un cluster. N'utilisez pas de réseaux locaux virtuels publics et privés qui ne correspondent pas pour créer un cluster.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>Les noeuds Worker exploitent par défaut le chiffrement de disque ; [En savoir plus](cs_secure.html#worker). Pour désactiver le chiffrement, incluez cette option.</dd>
+<dd>Les noeuds worker disposent par défaut du chiffrement de disque. [En savoir plus](cs_secure.html#worker). Pour désactiver le chiffrement, incluez cette option.</dd>
 </dl>
 
 **Exemples** :
@@ -1774,21 +1914,77 @@ Affichez les informations détaillées d'un noeud worker.
    <dt><code><em>CLUSTER_NAME_OR_ID</em></code></dt>
    <dd>Nom ou ID du cluster du noeud worker. Cette valeur est facultative.</dd>
    <dt><code><em>WORKER_NODE_ID</em></code></dt>
-   <dd>ID d'un noeud worker. Exécutez la commande <code>bx cs workers <em>CLUSTER</em></code> pour afficher les ID des noeuds d'agent dans un cluster. Cette valeur est obligatoire.</dd>
+   <dd>ID d'un noeud worker. Exécutez la commande <code>bx cs workers <em>CLUSTER</em></code> pour afficher les ID des noeuds worker dans un cluster. Cette valeur est obligatoire.</dd>
    </dl>
 
-**Exemple** :
+**Exemple de commande** :
 
   ```
   bx cs worker-get [CLUSTER_NAME_OR_ID] WORKER_NODE_ID
   ```
   {: pre}
 
+**Exemple de sortie** :
+
+  ```
+  ID:				    kube-dal10-123456789-w1
+  State:				normal
+  Status:				Ready
+  Trust:        disabled
+  Private VLAN:			223xxxx
+  Public VLAN:			223xxxx
+  Private IP:			10.xxx.xx.xx
+  Public IP:			169.xx.xxx.xxx
+  Hardware:			shared
+  Zone:				dal10
+  Version:			1.8.8_1507
+  ```
+  {: screen}
 
 ### bx cs worker-reboot [-f][--hard] CLUSTER WORKER [WORKER]
 {: #cs_worker_reboot}
 
-Redémarre les noeuds d'agent dans un cluster. Si un problème affecte un noeud worker, essayez d'abord de réamorcer celui-ci, ce qui a pour effet de redémarrer le noeud worker. Si le réamorçage ne résout pas le problème, essayez alors la commande `worker-reload`. L'état des agents ne change pas pendant le réamorçage. L'état continue à indiquer `deployed` (déployé), mais le statut de l'agent est mis à jour.
+Redémarrez un noeud worker dans un cluster. Lors du redémarrage, l'état de votre noeud worker reste inchangé.
+
+**Attention :** le redémarrage d'un noeud worker peut entraîner l'altération des données sur le noeud worker. Utilisez cette commande avec précaution et lorsque vous savez qu'un redémarrage pourra vous aider à restaurer le noeud worker. Dans tous les autres cas de figure,  [rechargez votre noeud worker](#cs_worker_reload) à la place.
+
+Avant de redémarrer le noeud worker, assurez-vous que les pods sont replanifiés sur d'autres noeuds worker afin d'éviter toute indisponibilité de votre application ou l'altération des données sur votre noeud worker.
+
+1. Répertoriez tous les noeuds worker présents dans votre cluster et notez le **nom** de celui que vous envisagez de redémarrer.
+   ```
+   kubectl get nodes
+   ```
+   Le **nom** renvoyé dans cette commande correspond à l'adresse IP privée affectée à votre noeud worker. Vous pouvez obtenir plus d'informations sur votre noeud worker lorsque vous exécutez la commande `bx cs workers <cluster_name_or_id>` et recherchez le noeud worker avec la même adresse **IP privée**.
+2. Marquez le noeud worker comme non planifiable dans un processus désigné par cordon. Lorsque vous exécutez ce processus sur un noeud worker, vous le rendez indisponible pour toute planification de pod ultérieure. Utilisez le **nom** du noeud worker que vous avez récupéré à l'étape précédente.
+   ```
+   kubectl cordon <worker_name>
+   ```
+   {: pre}
+
+3. Vérifiez que la planification de pod est désactivée pour votre noeud worker.
+   ```
+   kubectl get nodes
+   ```
+   {: pre}
+   Votre noeud worker ne sera pas activé pour la planification de pod si le statut affiché est **SchedulingDisabled**.
+ 4. Imposez le retrait des pods de votre noeud worker et leur replanification sur les noeuds worker restants dans le cluster.
+    ```
+    kubectl drain <worker_name>
+    ```
+    {: pre}
+    Ce processus peut prendre quelques minutes.
+ 5. Redémarrez le noeud worker. Utilisez l'ID du noeud worker renvoyé dans la commande `bx cs workers <cluster_name_or_id>`.
+    ```
+    bx cs worker-reboot <cluster_name_or_id> <worker_name_or_id>
+    ```
+    {: pre}
+ 6. Patientez environ 5 minutes avant de rendre votre noeud worker disponible pour la planification de pod pour vous assurer que le redémarrage est terminé. Lors du redémarrage, l'état de votre noeud worker reste inchangé. Le redémarrage d'un noeud worker s'effectue en principe en quelques secondes.
+ 7. Rendez votre noeud worker disponible pour la planification de pod. Utilisez le **nom** de noeud worker renvoyé par la commande `kubectl get nodes`.
+    ```
+    kubectl uncordon <worker_name>
+    ```
+    {: pre}
+    </br>
 
 <strong>Options de commande</strong> :
 
@@ -1803,7 +1999,7 @@ Redémarre les noeuds d'agent dans un cluster. Si un problème affecte un noeud 
    <dd>Utilisez cette option pour forcer un redémarrage à froid d'un noeud worker en coupant son alimentation. Utilisez cette option si le noeud worker ne répond plus ou connaît un blocage Docker. Cette valeur est facultative.</dd>
 
    <dt><code><em>WORKER</em></code></dt>
-   <dd>Nom ou ID d'un ou de plusieurs noeuds d'agent. Utilisez un espace pour répertorier plusieurs noeuds d'agent. Cette valeur est obligatoire.</dd>
+   <dd>Nom ou ID d'un ou de plusieurs noeuds worker. Utilisez un espace pour répertorier plusieurs noeuds worker. Cette valeur est obligatoire.</dd>
    </dl>
 
 **Exemple** :
@@ -1817,8 +2013,44 @@ Redémarre les noeuds d'agent dans un cluster. Si un problème affecte un noeud 
 ### bx cs worker-reload [-f] CLUSTER WORKER [WORKER]
 {: #cs_worker_reload}
 
-Recharge les noeuds d'agent dans un cluster. Si un problème affecte un noeud worker, essayez d'abord de le réamorcer. Si le réamorçage ne résout pas le problème, essayez alors la commande `worker-reload`, laquelle recharge toutes les configurations requises pour le noeud worker.
+Rechargez toutes les configurations nécessaires relatives à un noeud worker. Un rechargement peut s'avérer utile en cas de problème sur votre noeud worker, par exemple une dégradation des performances ou une immobilisation dans un mauvais état de santé.
 
+Avant de recharger le noeud worker, assurez-vous que les pods sont replanifiés sur d'autres noeuds worker afin d'éviter toute indisponibilité de votre application ou l'altération des données sur votre noeud worker.
+
+1. Répertoriez tous les noeuds worker dans votre cluster et notez le **nom** de celui que vous envisagez de recharger.
+   ```
+   kubectl get nodes
+   ```
+   Le **nom** renvoyé dans cette commande correspond à l'adresse IP privée affectée à votre noeud worker. Vous pouvez obtenir plus d'informations sur votre noeud worker lorsque vous exécutez la commande `bx cs workers <cluster_name_or_id>` et recherchez le noeud worker avec la même adresse **IP privée**.
+2. Marquez le noeud worker comme non planifiable dans un processus désigné par cordon. Lorsque vous exécutez ce processus sur un noeud worker, vous le rendez indisponible pour toute planification de pod ultérieure. Utilisez le **nom** du noeud worker que vous avez récupéré à l'étape précédente.
+   ```
+   kubectl cordon <worker_name>
+   ```
+   {: pre}
+
+3. Vérifiez que la planification de pod est désactivée pour votre noeud worker.
+   ```
+   kubectl get nodes
+   ```
+   {: pre}
+   Votre noeud worker ne sera pas activé pour la planification de pod si le statut affiché est **SchedulingDisabled**.
+ 4. Imposez le retrait des pods de votre noeud worker et leur replanification sur les noeuds worker restants dans le cluster.
+    ```
+    kubectl drain <worker_name>
+    ```
+    {: pre}
+    Ce processus peut prendre quelques minutes.
+ 5. Rechargez le noeud worker. Utilisez l'ID du noeud worker renvoyé dans la commande `bx cs workers <cluster_name_or_id>`.
+    ```
+    bx cs worker-reload <cluster_name_or_id> <worker_name_or_id>
+    ```
+    {: pre}
+ 6. Patientez jusqu'à la fin du rechargement.
+ 7. Rendez votre noeud worker disponible pour la planification de pod. Utilisez le **nom** de noeud worker renvoyé par la commande `kubectl get nodes`.
+    ```
+    kubectl uncordon <worker_name>
+    ```
+</br>
 <strong>Options de commande</strong> :
 
    <dl>
@@ -1829,7 +2061,7 @@ Recharge les noeuds d'agent dans un cluster. Si un problème affecte un noeud wo
    <dd>Utilisez cette option pour forcer le rechargement d'un noeud worker sans invites utilisateur. Cette valeur est facultative.</dd>
 
    <dt><code><em>WORKER</em></code></dt>
-   <dd>Nom ou ID d'un ou de plusieurs noeuds d'agent. Utilisez un espace pour répertorier plusieurs noeuds d'agent. Cette valeur est obligatoire.</dd>
+   <dd>Nom ou ID d'un ou de plusieurs noeuds worker. Utilisez un espace pour répertorier plusieurs noeuds worker. Cette valeur est obligatoire.</dd>
    </dl>
 
 **Exemple** :
@@ -1842,8 +2074,44 @@ Recharge les noeuds d'agent dans un cluster. Si un problème affecte un noeud wo
 ### bx cs worker-rm [-f] CLUSTER WORKER [WORKER]
 {: #cs_worker_rm}
 
-Supprime un ou plusieurs noeuds d'agent d'un cluster.
+Supprime un ou plusieurs noeuds worker d'un cluster.
 
+Avant de supprimer le noeud worker, assurez-vous que les pods sont replanifiés sur d'autres noeuds worker afin d'éviter toute indisponibilité de votre application ou l'altération des données sur votre noeud worker.
+
+1. Répertoriez tous les noeuds worker dans votre cluster et notez le **nom** de celui que vous envisagez de supprimer.
+   ```
+   kubectl get nodes
+   ```
+   Le **nom** renvoyé dans cette commande correspond à l'adresse IP privée affectée à votre noeud worker. Vous pouvez obtenir plus d'informations sur votre noeud worker lorsque vous exécutez la commande `bx cs workers <cluster_name_or_id>` et recherchez le noeud worker avec la même adresse **IP privée**.
+2. Marquez le noeud worker comme non planifiable dans un processus désigné par cordon. Lorsque vous exécutez ce processus sur un noeud worker, vous le rendez indisponible pour toute planification de pod ultérieure. Utilisez le **nom** du noeud worker que vous avez récupéré à l'étape précédente.
+   ```
+   kubectl cordon <worker_name>
+   ```
+   {: pre}
+
+3. Vérifiez que la planification de pod est désactivée pour votre noeud worker.
+   ```
+   kubectl get nodes
+   ```
+   {: pre}
+   Votre noeud worker ne sera pas activé pour la planification de pod si le statut affiché est **SchedulingDisabled**.
+4. Imposez le retrait des pods de votre noeud worker et leur replanification sur les noeuds worker restants dans le cluster.
+   ```
+   kubectl drain <worker_name>
+   ```
+   {: pre}
+   Ce processus peut prendre quelques minutes.
+5. Supprimez le noeud worker. Utilisez l'ID du noeud worker renvoyé dans la commande `bx cs workers <cluster_name_or_id>`.
+   ```
+   bx cs worker-rm <cluster_name_or_id> <worker_name_or_id>
+   ```
+   {: pre}
+
+6. Vérifiez que le noeud worker est supprimé.
+   ```
+   bx cs workers <cluster_name_or_id>
+   ```
+</br>
 <strong>Options de commande</strong> :
 
    <dl>
@@ -1854,7 +2122,7 @@ Supprime un ou plusieurs noeuds d'agent d'un cluster.
    <dd>Utilisez cette option pour forcer la suppression d'un noeud worker sans invites utilisateur. Cette valeur est facultative.</dd>
 
    <dt><code><em>WORKER</em></code></dt>
-   <dd>Nom ou ID d'un ou de plusieurs noeuds d'agent. Utilisez un espace pour répertorier plusieurs noeuds d'agent. Cette valeur est obligatoire.</dd>
+   <dd>Nom ou ID d'un ou de plusieurs noeuds worker. Utilisez un espace pour répertorier plusieurs noeuds worker. Cette valeur est obligatoire.</dd>
    </dl>
 
 **Exemple** :
@@ -1867,7 +2135,7 @@ Supprime un ou plusieurs noeuds d'agent d'un cluster.
 ### bx cs worker-update [-f] CLUSTER WORKER [WORKER][--kube-version MAJOR.MINOR.PATCH] [--force-update]
 {: #cs_worker_update}
 
-Met à jour les noeuds d'agent à la dernière version Kubernetes. L'exécution de la commande `bx cs worker-update` peut entraîner l'indisponibilité de vos services et applications. Lors de la mise à jour, tous les pods sont replanifiés sur d'autres noeuds d'agent et les données sont supprimées si elles ne sont pas stockées hors du pod. Pour éviter des temps d'indisponibilité, [vérifiez que vous disposez de suffisamment de noeuds worker pour traiter votre charge de travail alors que les noeuds worker sélectionnés sont en cours de mise à jour](cs_cluster_update.html#worker_node).
+Met à jour les noeuds worker à la dernière version Kubernetes. L'exécution de la commande `bx cs worker-update` peut entraîner l'indisponibilité de vos services et applications. Lors de la mise à jour, tous les pods sont replanifiés sur d'autres noeuds worker et les données sont supprimées si elles ne sont pas stockées hors du pod. Pour éviter des temps d'indisponibilité, [vérifiez que vous disposez de suffisamment de noeuds worker pour traiter votre charge de travail alors que les noeuds worker sélectionnés sont en cours de mise à jour](cs_cluster_update.html#worker_node).
 
 Vous pourriez devoir modifier vos fichiers YAML en vue des déploiements avant la mise à jour. Consultez cette [note sur l'édition](cs_versions.html) pour plus de détails.
 
@@ -1876,7 +2144,7 @@ Vous pourriez devoir modifier vos fichiers YAML en vue des déploiements avant l
    <dl>
 
    <dt><em>CLUSTER</em></dt>
-   <dd>Nom ou ID du cluster sur lequel répertorier les noeuds d'agent disponibles. Cette valeur est obligatoire.</dd>
+   <dd>Nom ou ID du cluster sur lequel répertorier les noeuds worker disponibles. Cette valeur est obligatoire.</dd>
 
    <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
    <dd>Version Kubernetes du cluster. Si cet indicateur n'est pas spécifié, le noeud worker est mis à jour à la version par défaut. Pour connaître les versions disponibles, exécutez la commande [bx cs kube-versions](#cs_kube_versions). Cette valeur est facultative.</dd>
@@ -1885,10 +2153,10 @@ Vous pourriez devoir modifier vos fichiers YAML en vue des déploiements avant l
    <dd>Utilisez cette option pour forcer la mise à jour d'un maître sans invites utilisateur. Cette valeur est facultative.</dd>
 
    <dt><code>--force-update</code></dt>
-   <dd>Tentative de mise à jour alors que la modification est supérieure à deux niveaux de version mineure. Cette valeur est facultative.</dd>
+   <dd>Tentative de mise à jour alors que la modification est supérieure à deux niveaux de version secondaire. Cette valeur est facultative.</dd>
 
    <dt><code><em>WORKER</em></code></dt>
-   <dd>ID d'un ou de plusieurs noeuds d'agent. Utilisez un espace pour répertorier plusieurs noeuds d'agent. Cette valeur est obligatoire.</dd>
+   <dd>ID d'un ou de plusieurs noeuds worker. Utilisez un espace pour répertorier plusieurs noeuds worker. Cette valeur est obligatoire.</dd>
    </dl>
 
 **Exemple** :
@@ -1901,13 +2169,13 @@ Vous pourriez devoir modifier vos fichiers YAML en vue des déploiements avant l
 ### bx cs workers CLUSTER
 {: #cs_workers}
 
-Affiche la liste des noeuds d'agent dans un cluster et la statut de chacun d'eux.
+Affiche la liste des noeuds worker dans un cluster et la statut de chacun d'eux.
 
 <strong>Options de commande</strong> :
 
    <dl>
    <dt><em>CLUSTER</em></dt>
-   <dd>Nom ou ID du cluster sur lequel répertorier les noeuds d'agent disponibles. Cette valeur est obligatoire.</dd>
+   <dd>Nom ou ID du cluster sur lequel répertorier les noeuds worker disponibles. Cette valeur est obligatoire.</dd>
    </dl>
 
 **Exemple** :

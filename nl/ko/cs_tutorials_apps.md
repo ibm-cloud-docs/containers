@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-02-05"
+lastupdated: "2017-02-27"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2017-02-05"
 # 튜토리얼: 클러스터에 앱 배치
 {: #cs_apps_tutorial}
 
-{{site.data.keyword.containershort_notm}}를 사용하여 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}를 활용하는 컨테이너화된 앱을 배치하는 방법을 학습할 수 있습니다.
+{{site.data.keyword.containerlong}}를 사용하여 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}를 활용하는 컨테이너화된 앱을 배치하는 방법을 학습할 수 있습니다.
 {: shortdesc}
 
 이 시나리오에서는 가상의 PR 회사가 {{site.data.keyword.Bluemix_notm}} 서비스를 사용하여 보도 자료를 분석하고 메시지의 논조에 대한 피드백을 받습니다.
@@ -60,8 +60,10 @@ PR 회사의 앱 개발자가 지난 튜토리얼에서 작성한 Kubernetes 클
 ## 학습 1: Kubernetes 클러스터에 단일 인스턴스 앱 배치
 {: #cs_apps_tutorial_lesson1}
 
-이전 튜토리얼에서는 하나의 작업자 노드가 있는 클러스터를 작성했습니다. 이 학습에서는 배치를 구성하고 작업자 노드 내의 Kubernetes 포드에 단일 앱 인스턴스를 배치합니다. 이 학습을 완료하여 배치하는 컴포넌트가 다음 다이어그램에 표시됩니다.
+이전 튜토리얼에서는 하나의 작업자 노드가 있는 클러스터를 작성했습니다. 이 학습에서는 배치를 구성하고 작업자 노드 내의 Kubernetes 포드에 단일 앱 인스턴스를 배치합니다.
 {:shortdesc}
+
+이 학습을 완료하여 배치하는 컴포넌트가 다음 다이어그램에 표시됩니다.
 
 ![배치 설정](images/cs_app_tutorial_components1.png)
 
@@ -185,7 +187,7 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
     ```
     {: screen}
 
-9.  NodePort 서비스로서 배치를 노출하여 외부에서 앱에 액세스할 수 있도록 하십시오. Cloud Foundry 앱에 대한 포트를 노출하는 것과 같이 노출하는 NodePort는 작업자 노드가 트래픽을 청취하는 포트입니다. 
+9.  NodePort 서비스로서 배치를 노출하여 외부에서 앱에 액세스할 수 있도록 하십시오. Cloud Foundry 앱에 대한 포트를 노출하는 것과 같이 노출하는 NodePort는 작업자 노드가 트래픽을 청취하는 포트입니다.
 
     ```
     kubectl expose deployment/hello-world-deployment --type=NodePort --port=8080 --name=hello-world-service --target-port=8080
@@ -271,8 +273,8 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
         ```
         Listing cluster workers...
         OK
-        ID                                            Public IP        Private IP      Machine Type   State      Status
-        dal10-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.47.227.138   10.171.53.188   free           normal    Ready
+        ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.47.227.138  10.171.53.188    free           normal   Ready    mil01      1.8.8
         ```
         {: screen}
 
@@ -299,10 +301,10 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
 ## 학습 2: 보다 높은 가용성의 앱 배치 및 업데이트
 {: #cs_apps_tutorial_lesson2}
 
-이 학습에서는 앱의 첫 번째 버전보다 높은 가용성을 위해 클러스터에 Hello World 앱의 세 인스턴스를 배치합니다. 보다 높은 가용성이란 사용자 액세스가 세 인스턴스 간에 분리됨을 의미합니다. 너무 많은 사용자가 동일한 앱 인스턴스에 액세스하려고 시도하는 경우, 사용자는 응답 시간이 느려짐을 감지할 수 있습니다. 다중 인스턴스는 사용자에 대한 보다 빠른 응답 시간을 의미할 수 있습니다. 이 학습에서는 Kubernetes에서 상태 검사와 배치 업데이트가 작동하는 방법도 알아봅니다.
+이 학습에서는 앱의 첫 번째 버전보다 높은 가용성을 위해 클러스터에 Hello World 앱의 세 인스턴스를 배치합니다.
 {:shortdesc}
 
-다음 다이어그램에는 이 학습을 완료하여 배치한 컴포넌트가 포함됩니다.
+보다 높은 가용성이란 사용자 액세스가 세 인스턴스 간에 분리됨을 의미합니다. 너무 많은 사용자가 동일한 앱 인스턴스에 액세스하려고 시도하는 경우, 사용자는 응답 시간이 느려짐을 감지할 수 있습니다. 다중 인스턴스는 사용자에 대한 보다 빠른 응답 시간을 의미할 수 있습니다. 이 학습에서는 Kubernetes에서 상태 검사와 배치 업데이트가 작동하는 방법도 알아봅니다. 다음 다이어그램에는 이 학습을 완료하여 배치한 컴포넌트가 포함됩니다.
 
 ![배치 설정](images/cs_app_tutorial_components2.png)
 
@@ -419,7 +421,7 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
 
   `http://169.47.227.138:30072/healthz`에서 상태도 확인할 수 있습니다.
 
-  처음 10 - 15초 동안 200개의 메시지가 리턴됩니다. 따라서 앱이 정상적으로 실행 중임을 알 수 있습니다. 이 15초 이후에는 제한시간 초과 메시지가 표시됩니다. 이는 예상 동작입니다. 
+  처음 10 - 15초 동안 200개의 메시지가 리턴됩니다. 따라서 앱이 정상적으로 실행 중임을 알 수 있습니다. 이 15초 이후에는 제한시간 초과 메시지가 표시됩니다. 이는 예상 동작입니다.
 
   ```
   {
@@ -465,10 +467,10 @@ service "hw-demo-service" deleted
 ## 학습 3: Watson Tone Analyzer 앱의 배치 및 업데이트
 {: #cs_apps_tutorial_lesson3}
 
-이전 학습에서 앱은 단일 작업자 노드의 단일 컴포넌트로서 배치되었습니다. 이 학습에서는{{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 서비스를 사용하는 두 개의 앱 컴포넌트를 클러스터에 배치할 수 있습니다. 컴포넌트를 서로 다른 컨테이너로 분리하면 다른 쪽에 영향을 주지 않고 하나를 업데이트할 수 있습니다. 그리고 사용자는 보다 높은 가용성을 구축하기 위해 추가 복제본으로 확장되도록 앱을 업데이트합니다.
+이전 학습에서 앱은 단일 작업자 노드의 단일 컴포넌트로서 배치되었습니다. 이 학습에서는{{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 서비스를 사용하는 두 개의 앱 컴포넌트를 클러스터에 배치할 수 있습니다.
 {:shortdesc}
 
-다음 다이어그램에는 이 학습을 완료하여 배치한 컴포넌트가 포함됩니다.
+컴포넌트를 서로 다른 컨테이너로 분리하면 다른 쪽에 영향을 주지 않고 하나를 업데이트할 수 있습니다. 그리고 사용자는 보다 높은 가용성을 구축하기 위해 추가 복제본으로 확장되도록 앱을 업데이트합니다. 다음 다이어그램에는 이 학습을 완료하여 배치한 컴포넌트가 포함됩니다.
 
 ![배치 설정](images/cs_app_tutorial_components3.png)
 
@@ -650,7 +652,7 @@ service "hw-demo-service" deleted
         ```
         {: codeblock}
 
-8.  브라우저를 열고 일부 텍스트를 분석하십시오. URL의 형식은 `http://<worker_node_IP_address>:<watson-talk-nodeport>/analyze/"<text_to_analyze>"`입니다.
+8.  브라우저를 열고 일부 텍스트를 분석하십시오. URL의 형식은 `http://<worker_node_IP_address>:<watson-talk-nodeport>/analyze/"<text_to_analyze>"`.
 
     예:
 
@@ -742,5 +744,5 @@ bx cs cluster-rm <pr_firm_cluster>
 이제 기본사항을 습득했으므로 고급 활동으로 이동할 수 있습니다. 다음 중 하나를 시도해 보십시오.
 
 - 저장소에서 더 복잡한 실험 완료
-- {{site.data.keyword.containershort_notm}}](cs_app.html#app_scaling)를 사용하여 자동으로 앱 스케일링
+- {{site.data.keyword.containershort_notm}}를 사용하여 [자동으로 앱 스케일링](cs_app.html#app_scaling)
 - [developerWorks ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")에서 컨테이너 오케스트레이션 과정 탐색](https://developer.ibm.com/code/journey/category/container-orchestration/)

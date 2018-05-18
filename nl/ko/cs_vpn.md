@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-29"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -18,98 +18,80 @@ lastupdated: "2018-01-29"
 # VPN 연결 설정
 {: #vpn}
 
-VPN 연결을 통해 Kubernetes 클러스터의 앱을 온프레미스 네트워크에 안전하게 연결할 수 있습니다. 클러스터 내에서 실행 중인 앱에 클러스터 외부의 앱을 연결할 수도 있습니다.
+VPN 연결을 통해  {{site.data.keyword.containerlong}}에서 Kubernetes 클러스터의 앱을 온프레미스 네트워크에 안전하게 연결할 수 있습니다. 클러스터 내에서 실행 중인 앱에 클러스터 외부의 앱을 연결할 수도 있습니다.
 {:shortdesc}
 
-## Strongswan IPSec VPN 서비스 Helm 차트로 VPN 연결 설정
+온프레미스 데이터센터에 작업자 노드와 앱을 연결하려면 strongSwan 서비스, Vyatta Gateway Appliance 또는 Fortigate Appliance로 VPN IPSec 엔드포인트를 구성할 수 있습니다.
+
+- **strongSwan IPSec VPN 서비스**: Kubernetes 클러스터를 온프레미스 네트워크와 안전하게 연결하는 [strongSwan IPSec VPN 서비스 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.strongswan.org/)를 설정할 수 있습니다. strongSwan IPSec VPN 서비스는 IPsec(Industry-standard Protocol Security) 프로토콜 스위트를 기반으로 하는 인터넷을 통해 안전한 엔드-투-엔드 통신 채널을 제공합니다. 클러스터와 온프레미스 네트워크 간의 보안 연결을 설정하려면 온프레미스 데이터센터에 IPsec VPN 게이트웨이를 설치해야 합니다. 그러면 Kubernetes 포드에 [strongSwan IPSec VPN 서비스를 구성 및 배치](#vpn-setup)할 수 있습니다.
+
+- **Vyatta Gateway Appliance 또는 Fortigate Appliance**: 클러스터의 규모가 더 크고 단일 VPN을 통해 비Kubernetes 리소스에 액세스하려고 하거나 단일 VPN을 통해 다중 클러스터에 액세스하려는 경우, IPSec VPN 엔드포인트를 구성하기 위해 Vyatta Gateway Appliance 또는 Fortigate Appliance를 설정하는 것이 바람직합니다. 자세한 정보는 [클러스터를 온프레미스 데이터센터에 연결 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/)의 블로그 게시물을 참조하십시오.
+
+## strongSwan IPSec VPN 서비스 Helm 차트로 VPN 연결 설정
 {: #vpn-setup}
 
-VPN 연결을 설정하려면 Helm 차트를 사용하여 Kubernetes 포드 내에 [Strongswan IPSec VPN 서비스 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.strongswan.org/)를 구성하고 배치할 수 있습니다. 그러면 모든 VPN 트래픽은 이 포드를 통해 라우팅됩니다. Strongswan 차트를 설정하는 데 사용되는 Helm 명령에 대한 자세한 정보는 <a href="https://docs.helm.sh/helm/" target="_blank">Helm 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오.
+Helm 차트를 사용하여 Kubernetes 포드 내부에 strongSwan IPSec VPN 서비스를 구성 및 배치하십시오. 그러면 모든 VPN 트래픽은 이 포드를 통해 라우팅됩니다.
 {:shortdesc}
 
+strongSwan 차트를 설정하는 데 사용되는 Helm 명령에 대한 자세한 정보는 <a href="https://docs.helm.sh/helm/" target="_blank">Helm 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오.
+
+
+
+### strongSwan Helm 차트 구성
+{: #vpn_configure}
+
 시작하기 전에:
+* 온프레미스 데이터센터에 IPsec VPN 게이트웨이를 설치해야 합니다. 
+* [표준 클러스터 작성](cs_clusters.html#clusters_cli)하거나 [기존 클러스터를 버전 1.7.4 이상으로 업데이트](cs_cluster_update.html#master)하십시오.
+* 클러스터에는 하나 이상의 사용 가능한 공인 로드 밸런서 IP 주소가 있어야 합니다. [사용 가능한 공인 IP 주소를 볼 수 있는지 확인](cs_subnets.html#manage)하거나 [사용된 IP 주소를 해제](cs_subnets.html#free)할 수 있습니다.
+* [Kubernetes CLI를 클러스터에 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
 
-- [표준 클러스터를 작성](cs_clusters.html#clusters_cli)하십시오.
-- [기존 클러스터를 사용 중인 경우 버전 1.7.4 이상으로 업데이트](cs_cluster_update.html#master)하십시오.
-- 클러스터에는 하나 이상의 사용 가능한 공인 로드 밸런서 IP 주소가 있어야 합니다.
-- [Kubernetes CLI를 클러스터에 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
+Helm 차트를 구성하려면 다음을 수행하십시오.
 
-Strongswan으로 VPN 연결을 설정하려면 다음을 수행하십시오.
+1. [클러스터를 위해 Helm을 설치하고 {{site.data.keyword.Bluemix_notm}} 저장소를 Helm 인스턴스에 추가](cs_integrations.html#helm)하십시오.
 
-1. 아직 사용되지 않은 경우, 클러스터를 위해 Helm을 설치하고 초기화하십시오.
-
-    1. <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 설치하십시오.
-
-    2. Helm을 초기화하고 `tiller`를 설치하십시오.
-
-        ```
-        helm init
-        ```
-        {: pre}
-
-    3. `tiller-deploy` 포드가 클러스터에서 `Running` 상태인지 확인하십시오.
-
-        ```
-        kubectl get pods -n kube-system -l app=helm
-        ```
-        {: pre}
-
-        출력 예:
-
-        ```
-        NAME                            READY     STATUS    RESTARTS   AGE
-        tiller-deploy-352283156-nzbcm   1/1       Running   0          10m
-        ```
-        {: screen}
-
-    4. {{site.data.keyword.containershort_notm}} Helm 저장소를 Helm 인스턴스에 추가하십시오.
-
-        ```
-        helm repo add bluemix  https://registry.bluemix.net/helm
-        ```
-        {: pre}
-
-    5. Strongswan 차트가 Helm 저장소에 나열되는지 확인하십시오.
-
-        ```
-        helm search bluemix
-        ```
-        {: pre}
-
-2. Strongswan Helm 차트를 위한 기본 구성 설정을 로컬 YAML 파일에 저장하십시오.
+2. strongSwan Helm 차트를 위한 기본 구성 설정을 로컬 YAML 파일에 저장하십시오.
 
     ```
-    helm inspect values bluemix/strongswan > config.yaml
+    helm inspect values ibm/strongswan > config.yaml
     ```
     {: pre}
 
-3. `config.yaml` 파일을 열고 원하는 VPN 구성에 따라 기본값을 다음과 같이 변경하십시오. 특성에 선택 가능한 특정 값이 있으면 해당 값이 파일의 개별 특성 위의 주석에 나열됩니다. **중요**: 특성을 변경할 필요가 없는 경우 해당 특성 앞에 `#`를 놓아서 주석 처리하십시오.
+3. `config.yaml` 파일을 열고 원하는 VPN 구성에 따라 기본값을 다음과 같이 변경하십시오. 구성 파일 주석에서 더 자세한 고급 설정에 대한 설명을 찾을 수 있습니다. 
+
+    **중요**: 특성을 변경할 필요가 없는 경우 해당 특성 앞에 `#`를 놓아서 주석 처리하십시오.
 
     <table>
+    <col width="22%">
+    <col width="78%">
     <caption>YAML 파일 컴포넌트 이해</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
     </thead>
     <tbody>
     <tr>
-    <td><code>overRideIpsecConf</code></td>
-    <td>사용할 기존 <code>ipsec.conf</code> 파일이 있는 경우, 중괄호(<code>{}</code>)를 제거하고 이 특성 뒤에 파일의 컨텐츠를 추가하십시오. 파일 컨텐츠는 들여써야 합니다. **참고:** 고유의 파일을 사용하는 경우, <code>ipsec</code>, <code>local</code> 및 <code>remote</code> 섹션의 값은 사용되지 않습니다.</td>
+    <td><code>localSubnetNAT</code></td>
+    <td>서브넷의 NAT(Network Address Translation)은 로컬과 온프레미스 네트워크 간의 서브넷 충돌에 대한 임시 해결책을 제공합니다. NAT를 사용하여 클러스터의 사설 로컬 IP 서브넷, 포드 서브넷(172.30.0.0/16) 또는 포드 서비스 서브넷(172.21.0.0/16)을 다른 사설 서브넷에 다시 맵핑할 수 있습니다. VPN 터널에서 원래의 서브넷 대신 다시 맵핑된 IP 서브넷을 확인합니다. VPN을 통해 패킷을 전송하기 전과 VPN 터널에서 패킷이 도달된 후에 다시 맵핑이 발생합니다. VPN을 통해 동시에 다시 맵핑되고 다시 맵핑되지 않은 서브넷을 모두 노출할 수 있습니다. <br><br>NAT를 사용하려면 전체 서브넷 또는 개별 IP 주소를 추가할 수 있습니다. 전체 서브넷을 추가하는 경우(<code>10.171.42.0/24=10.10.10.0/24</code> 형식으로), 다시 맵핑은 일대일입니다. 내부 네트워크 서브넷의 모든 IP 주소가 외부 네트워크 서브넷에 맵핑되고 반대의 경우도 마찬가지입니다. 개별 IP 주소를 추가하는 경우(<code>10.171.42.17/32=10.10.10.2/32,10.171.42.29/32=10.10.10.3/32</code> 형식으로) 내부 IP 주소만 지정된 외부 IP 주소에 맵핑됩니다. <br><br>이 옵션을 사용하는 경우 VPN 연결을 통해 노출된 로컬 서브넷은 "내부" 서브넷이 맵핑된 "외부" 서브넷입니다. </td>
     </tr>
     <tr>
-    <td><code>overRideIpsecSecrets</code></td>
-    <td>사용할 기존 <code>ipsec.secrets</code> 파일이 있는 경우, 중괄호(<code>{}</code>)를 제거하고 이 특성 뒤에 파일의 컨텐츠를 추가하십시오. 파일 컨텐츠는 들여써야 합니다. **참고:** 고유의 파일을 사용하는 경우, <code>preshared</code> 섹션의 값은 사용되지 않습니다.</td>
+    <td><code>loadBalancerIP</code></td>
+    <td>strongSwan VPN 서비스에 사용할 이 클러스터에 지정된 서브넷에서 포터블 공인 IP 주소를 추가하십시오. VPN 연결이 온프레미스 게이트웨이에서 시작되는 경우(<code>ipsec.auto</code>가 <code>add</code>로 설정됨) 이 특성을 사용하여 클러스터에 대한 온프레미스 게이트웨이의 지속적 공인 IP 주소를 구성할 수 있습니다.  이 값은 선택사항입니다.</td>
+    </tr>
+    <tr>
+    <td><code>nodeSelector</code></td>
+    <td>strongSwan VPN 포드가 배치하는 노드를 제한하려면 특정 작업자 노드의 IP 주소 또는 작업자 노드 레이블을 추가하십시오. 예를 들어, 값 <code>kubernetes.io/hostname: 10.184.110.141</code>은 VPN 포드를 해당 작업자 노드에서만 실행하도록 제한합니다. 값 <code>strongswan: vpn</code>은 VPN 포드를 해당 레이블과 함께 모든 작업자 노드에서 실행하도록 제한합니다. 모든 작업자 노드 레이블을 사용할 수 있으나 이 차트의 다른 배치를 통해 다른 작업자 노드를 사용할 수 있도록 <code>strongswan: &lt;release_name&gt;</code>을 사용하는 것이 좋습니다. <br><br>VPN 연결이 클러스터로 시작되는 경우(<code>ipsec.auto</code>가 <code>start</code>로 설정됨) 이 특성을 사용하여 온프레미스 게이트웨이에 노출된 VPN 연결의 소스 IP 주소를 제한할 수 있습니다.  이 값은 선택사항입니다.</td>
     </tr>
     <tr>
     <td><code>ipsec.keyexchange</code></td>
-    <td>온프레미스 VPN 터널 엔드포인트가 연결 초기화를 위한 프로토콜로 <code>ikev2</code>를 지원하지 않는 경우, 이 값을 <code>ikev1</code>로 변경하십시오.</td>
+    <td>온프레미스 VPN 터널 엔드포인트가 연결 초기화를 위한 프로토콜로 <code>ikev2</code>를 지원하지 않는 경우, 이 값을 <code>ikev1</code> 또는 <code>ike</code>로 변경하십시오.</td>
     </tr>
     <tr>
     <td><code>ipsec.esp</code></td>
-    <td>온프레미스 VPN 터널 엔드포인트가 연결에 사용하는 ESP 암호화/인증 알고리즘의 목록으로 이 값을 변경하십시오.</td>
+    <td>온프레미스 VPN 터널 엔드포인트가 연결에 사용하는 ESP 암호화/인증 알고리즘의 목록을 추가하십시오. 이 값은 선택사항입니다. 이 필드를 공백으로 두면 기본 strongSwan 알고리즘 <code>aes128-sha1,3des-sha1</code>이 연결에 사용됩니다. </td>
     </tr>
     <tr>
     <td><code>ipsec.ike</code></td>
-    <td>온프레미스 VPN 터널 엔드포인트가 연결에 사용하는 IKE/ISAKMP SA 암호화/인증 알고리즘의 목록으로 이 값을 변경하십시오.</td>
+    <td>온프레미스 VPN 터널 엔드포인트가 연결에 사용하는 IKE/ISAKMP SA 암호화/인증 알고리즘의 목록을 추가하십시오. 이 값은 선택사항입니다. 이 필드를 공백으로 두면 기본 strongSwan 알고리즘 <code>aes128-sha1-modp2048,3des-sha1-modp1536</code>이 연결에 사용됩니다. </td>
     </tr>
     <tr>
     <td><code>ipsec.auto</code></td>
@@ -117,7 +99,7 @@ Strongswan으로 VPN 연결을 설정하려면 다음을 수행하십시오.
     </tr>
     <tr>
     <td><code>local.subnet</code></td>
-    <td>VPN 연결을 통해 온프레미스 네트워크에 노출할 클러스터 서브넷 CIDR의 목록으로 이 값을 변경하십시오. 이 목록은 다음 서브넷을 포함할 수 있습니다. <ul><li>Kubernetes 포드 서브넷 CIDR: <code>172.30.0.0/16</code></li><li>Kubernetes 서비스 서브넷 CIDR: <code>172.21.0.0/16</code></li><li>사설 네트워크의 NodePort 서비스에서 애플리케이션을 노출한 경우 작업자 노드의 사설 서브넷 CIDR입니다. 이 값을 찾으려면 <code>bx cs subnets | grep <xxx.yyy.zzz></code>를 실행하십시오. 여기서 <code>&lt;xxx.yyy.zzz&gt;</code>는 작업자 노드 사설 IP 주소의 처음 세 옥텟입니다.</li><li>사설 네트워크에서 LoadBalancer 서비스가 노출한 애플리케이션이 있는 경우, 클러스터의 사설 또는 사용자 관리 서브넷 CIDR입니다. 이러한 값을 찾으려면 <code>bx cs cluster-get <cluster name> --showResources</code>를 실행하십시오. <b>VLANS</b> 섹션에서 <b>Public</b> 값이 <code>false</code>인 CIDR을 찾으십시오.</li></ul></td>
+    <td>VPN 연결을 통해 온프레미스 네트워크에 노출할 클러스터 서브넷 CIDR의 목록으로 이 값을 변경하십시오. 이 목록은 다음 서브넷을 포함할 수 있습니다. <ul><li>Kubernetes 포드 서브넷 CIDR: <code>172.30.0.0/16</code></li><li>Kubernetes 서비스 서브넷 CIDR: <code>172.21.0.0/16</code></li><li>사설 네트워크의 NodePort 서비스에서 앱을 노출한 경우 작업자 노드의 사설 서브넷 CIDR입니다. 이 값을 찾으려면 <code>bx cs subnets | grep <xxx.yyy.zzz></code>를 실행하십시오. 여기서 <code>&lt;xxx.yyy.zzz&gt;</code>는 작업자 노드 사설 IP 주소의 처음 세 옥텟입니다.</li><li>사설 네트워크에서 LoadBalancer 서비스가 노출한 앱이 있는 경우, 클러스터의 사설 또는 사용자 관리 서브넷 CIDR입니다. 이러한 값을 찾으려면 <code>bx cs cluster-get <cluster name> --showResources</code>를 실행하십시오. <b>VLANS</b> 섹션에서 <b>Public</b> 값이 <code>false</code>인 CIDR을 찾으십시오.</li></ul></td>
     </tr>
     <tr>
     <td><code>local.id</code></td>
@@ -125,7 +107,7 @@ Strongswan으로 VPN 연결을 설정하려면 다음을 수행하십시오.
     </tr>
     <tr>
     <td><code>remote.gateway</code></td>
-    <td>온프레미스 VPN 게이트웨이의 공인 IP 주소로 이 값을 변경하십시오.</td>
+    <td>온프레미스 VPN 게이트웨이의 공인 IP 주소로 이 값을 변경하십시오. <code>ipsec.auto</code>가 <code>start</code>로 설정되면 이 값은 필수입니다. </td>
     </tr>
     <td><code>remote.subnet</code></td>
     <td>Kubernetes 클러스터가 액세스하도록 허용된 온프레미스 사설 서브넷 CIDR의 목록으로 이 값을 변경하십시오.</td>
@@ -135,17 +117,23 @@ Strongswan으로 VPN 연결을 설정하려면 다음을 수행하십시오.
     <td>VPN 터널 엔드포인트가 연결에 사용하는 원격 온프레미스 측 문자열 ID로 이 값을 변경하십시오.</td>
     </tr>
     <tr>
+    <td><code>remote.privateIPtoPing</code></td>
+    <td>VPN Ping 연결 테스트를 위해 Helm 테스트 유효성 검증 프로그램으로 사용되도록 원격 서브넷의 사설 IP 주소를 추가하십시오.  이 값은 선택사항입니다.</td>
+    </tr>
+    <tr>
     <td><code>preshared.secret</code></td>
-    <td>온프레미스 VPN 터널 엔드포인트 게이트웨이가 연결에 사용하는 사전 공유된 시크릿으로 이 값을 변경하십시오.</td>
+    <td>온프레미스 VPN 터널 엔드포인트 게이트웨이가 연결에 사용하는 사전 공유된 시크릿으로 이 값을 변경하십시오. 이 값은 <code>ipsec.secrets</code>에 저장됩니다.</td>
     </tr>
     </tbody></table>
 
 4. 업데이트된 `config.yaml` 파일을 저장하십시오.
 
-5. 업데이트된 `config.yaml` 파일로 Helm 차트를 클러스터에 설치하십시오. 업데이트된 특성은 차트의 구성 맵에 저장됩니다.
+5. 업데이트된 `config.yaml` 파일을 사용하여 Helm 차트를 클러스터에 설치하십시오. 업데이트된 특성은 차트의 configmap에 저장됩니다.
+
+    **참고**: 단일 클러스터에 다중 VPN 배치가 있는 경우 이름 지정 충돌을 방지할 수 있고 `vpn` 이외의 좀 더 구체적인 릴리스 이름을 선택하여 배치를 구별할 수 있습니다. 릴리스 이름이 잘리지 않으려면 릴리스 이름을 35자 미만으로 제한하십시오. 
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=vpn bluemix/strongswan
+    helm install -f config.yaml --namespace=kube-system --name=vpn ibm/strongswan
     ```
     {: pre}
 
@@ -163,49 +151,233 @@ Strongswan으로 VPN 연결을 설정하려면 다음을 수행하십시오.
     ```
     {: pre}
 
-8. 새 VPN 연결을 테스트하십시오.
-    1. 온프레미스 게이트웨이에서 VPN이 활성이 아닌 경우 VPN을 시작하십시오.
 
-    2. `STRONGSWAN_POD` 환경 변수를 설정하십시오.
+### VPN 연결 테스트 및 확인
+{: #vpn_test}
 
-        ```
+Helm 차트를 배치한 후 VPN 연결을 테스트하십시오.
+{:shortdesc}
+
+1. 온프레미스 게이트웨이에서 VPN이 활성이 아닌 경우 VPN을 시작하십시오.
+
+2. `STRONGSWAN_POD` 환경 변수를 설정하십시오.
+
+    ```
         export STRONGSWAN_POD=$(kubectl get pod -n kube-system -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
-        ```
-        {: pre}
+    ```
+    {: pre}
 
-    3. VPN의 상태를 확인하십시오. `ESTABLISHED` 상태는 VPN 연결이 성공임을 의미합니다.
+3. VPN의 상태를 확인하십시오. `ESTABLISHED` 상태는 VPN 연결이 성공임을 의미합니다.
 
-        ```
+    ```
         kubectl exec -n kube-system  $STRONGSWAN_POD -- ipsec status
-        ```
-        {: pre}
+    ```
+    {: pre}
 
-        출력 예:
-        ```
-        Security Associations (1 up, 0 connecting):
-            k8s-conn[1]: ESTABLISHED 17 minutes ago, 172.30.244.42[ibm-cloud]...192.168.253.253[on-prem]
-            k8s-conn{2}:  INSTALLED, TUNNEL, reqid 12, ESP in UDP SPIs: c78cb6b1_i c5d0d1c3_o
-            k8s-conn{2}:   172.21.0.0/16 172.30.0.0/16 === 10.91.152.128/26
-        ```
-        {: screen}
+    출력 예:
 
-      **참고**:
-          - 이 Helm 차트를 처음 사용하는 경우 VPN 상태는 `ESTABLISHED`가 아닐 수 있습니다. 연결이 성공하기 전에 온프레미스 VPN 엔드포인트 설정을 확인하고 3단계로 돌아가서 `config.yaml` 파일을 여러 번 변경해야 할 수도 있습니다.
-          - VPN 포드가 `ERROR` 상태이거나 계속 충돌하고 다시 시작되는 경우, 차트 구성 맵에 있는 `ipsec.conf` 설정의 매개변수 유효성 검증 때문일 수 있습니다. `kubectl logs -n kube-system $STRONGSWAN_POD`를 실행하여 Strongswan 포드 로그에서 유효성 검증 오류가 있는지 확인하십시오. 유효성 검증 오류가 있는 경우, `helm delete --purge vpn`을 실행하고 3단계로 돌아가서 `config.yaml` 파일에서 잘못된 값을 수정한 후 4 - 8단계를 반복하십시오. 클러스터에 많은 수의 작업자 로드가 있는 경우에는 `helm delete` 및 `helm install`을 실행하는 대신 `helm upgrade`를 사용하여 변경사항을 더 빠르게 적용할 수도 있습니다.
+    ```
+    Security Associations (1 up, 0 connecting):
+    k8s-conn[1]: ESTABLISHED 17 minutes ago, 172.30.244.42[ibm-cloud]...192.168.253.253[on-premises]
+    k8s-conn{2}: INSTALLED, TUNNEL, reqid 12, ESP in UDP SPIs: c78cb6b1_i c5d0d1c3_o
+    k8s-conn{2}: 172.21.0.0/16 172.30.0.0/16 === 10.91.152.128/26
+    ```
+    {: screen}
 
-    4. VPN이 `ESTABLISHED` 상태가 된 후 `ping`으로 연결을 테스트하십시오. 다음 예제는 Kubernetes 클러스터의 VPN 포드에서 온프레미스 VPN 게이트웨이의 사설 IP 주소로 Ping을 전송합니다. 구성 파일에 올바른 `remote.subnet` 및 `local.subnet`이 지정되었는지 확인하고 로컬 서브넷 목록에 Ping을 전송 중인 소스 IP 주소가 포함되었는지 확인하십시오.
+    **참고**:
 
-        ```
-        kubectl exec -n kube-system  $STRONGSWAN_POD -- ping -c 3  <on-prem_gateway_private_IP>
-        ```
-        {: pre}
+    <ul>
+    <li>strongSwan Helm 차트를 사용하여 VPN 연결을 설정하려는 경우 처음에 VPN 상태는 `ESTABLISHED`가 아닐 수 있습니다. 연결이 성공하기 전에 온프레미스 VPN 엔드포인트 설정을 확인하고 구성 파일을 여러 번 변경해야 할 수도 있습니다.<ol><li>`helm delete --purge <release_name>`을 실행하십시오.</li><li>구성 파일에서 올바르지 않은 값을 수정하십시오.</li><li>`helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan`을 실행하십시오.</li></ol>다음 단계에서 추가 확인을 실행할 수도 있습니다. </li>
+    <li>VPN 포드가 `ERROR` 상태이거나 계속 충돌하고 다시 시작되는 경우, 차트의 configmap에 있는 `ipsec.conf` 설정의 매개변수 유효성 검증 때문일 수 있습니다. <ol><li>`kubectl logs -n kube-system $STRONGSWAN_POD`를 실행하여 strongSwan 포드 로그에서 유효성 검증 오류가 있는지 확인하십시오. </li><li>유효성 검증 오류가 있는 경우 `helm delete --purge <release_name>`을 실행하십시오.<li>구성 파일에서 올바르지 않은 값을 수정하십시오.</li><li>`helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan`을 실행하십시오.</li></ol>클러스터에 많은 수의 작업자 로드가 있는 경우에는 `helm delete` 및 `helm install`을 실행하는 대신 `helm upgrade`를 사용하여 변경사항을 더 빠르게 적용할 수도 있습니다.</li>
+    </ul>
 
-### Strongswan IPSec VPN 서비스 사용 안함
-{: vpn_disable}
+4. strongSwan 차트 정의에 포함된 5회의 Helm 테스트를 실행하여 VPN 연결을 추가로 테스트할 수 있습니다. 
 
-1. Helm 차트를 삭제하십시오.
+    ```
+    helm test vpn
+    ```
+    {: pre}
+
+    * 모든 테스트에 통과한 경우 strongSwan VPN 연결이 설정됩니다. 
+
+    * 테스트에 실패한 경우 다음 단계로 진행하십시오.
+
+5. 테스트 포드의 로그를 확인하여 실패한 테스트의 출력을 보십시오.
+
+    ```
+    kubectl logs -n kube-system <test_program>
+    ```
+    {: pre}
+
+    **참고**: 일부 테스트에는 VPN 구성에서 선택적 설정인 요구사항이 포함됩니다. 일부 테스트가 실패하는 경우 실패는 선택적 설정의 지정 여부에 따라 허용될 수 있습니다. 각 테스트에 대한 자세한 정보와 실패 이유를 확인하려면 다음 표를 참조하십시오. 
+
+    {: #vpn_tests_table}
+    <table>
+    <caption>Helm VPN 연결 테스트 이해</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> Helm VPN 연결 테스트 이해</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>vpn-strongswan-check-config</code></td>
+    <td><code>config.yaml</code> 파일에서 생성된 <code>ipsec.conf</code> 파일의 구문을 유효성 검증하십시오. 이 테스트는 <code>config.yaml</code> 파일의 올바르지 않은 값으로 인해 실패할 수 있습니다. </td>
+    </tr>
+    <tr>
+    <td><code>vpn-strongswan-check-state</code></td>
+    <td>VPN 연결이 <code>ESTABLISHED</code> 상태인지 확인합니다. 다음과 같은 이유로 인해 이 테스트가 실패할 수 있습니다. <ul><li><code>config.yaml</code> 파일의 값 및 온프레미스 VPN 엔드포인트 설정 간에 차이점이 있습니다.</li><li>클러스터가 "청취" 모드에 있는 경우(<code>ipsec.auto</code>가 <code>add</code>로 설정됨) 연결이 온프레미스 측에 설정되지 않습니다.</li></ul></td>
+    </tr>
+    <tr>
+    <td><code>vpn-strongswan-ping-remote-gw</code></td>
+    <td><code>config.yaml</code> 파일에 구성한 <code>remote.gateway</code> 공인 IP 주소에 대해 ping을 실행합니다. 다음과 같은 이유로 인해 이 테스트가 실패할 수 있습니다. <ul><li>온프레미스 VPN 게이트웨이 IP 주소를 지정하지 않았습니다. <code>ipsec.auto</code>가 <code>start</code>로 설정된 경우 <code>remote.gateway</code> IP 주소가 필수입니다. </li><li>VPN 연결이 <code>ESTABLISHED</code> 상태가 아닙니다. 자세한 정보는 <code>vpn-strongswan-check-state</code>를 참조하십시오. </li><li>VPN 연결 상태는 <code>ESTABLISHED</code>이지만 ICMP 패킷이 방화벽으로 차단됩니다. </li></ul></td>
+    </tr>
+    <tr>
+    <td><code>vpn-strongswan-ping-remote-ip-1</code></td>
+    <td>클러스터의 VPN 포드에서 온프레미스 VPN 게이트웨이의 <code>remote.privateIPtoPing</code> 게이트웨이 IP 주소에 대해 ping을 실행합니다. 다음과 같은 이유로 인해 이 테스트가 실패할 수 있습니다. <ul><li><code>remote.privateIPtoPing</code> IP 주소를 지정하지 않았습니다. 의도적으로 IP 주소를 지정하지 않은 경우 이 실패는 허용됩니다. </li><li><code>local.subnet</code> 목록에 있는 클러스터 포드 서브넷 CIDR인 <code>172.30.0.0/16</code>을 지정하지 않았습니다.</li></ul></td>
+    </tr>
+    <tr>
+    <td><code>vpn-strongswan-ping-remote-ip-2</code></td>
+    <td>클러스터의 작업자 노드에서 온프레미스 VPN 게이트웨이의 <code>remote.privateIPtoPing</code> 게이트웨이 IP 주소에 대해 ping을 실행합니다. 다음과 같은 이유로 인해 이 테스트가 실패할 수 있습니다. <ul><li><code>remote.privateIPtoPing</code> IP 주소를 지정하지 않았습니다. 의도적으로 IP 주소를 지정하지 않은 경우 이 실패는 허용됩니다. </li><li><code>local.subnet</code> 목록에 있는 클러스터 작업자 노드 사설 서브넷 CIDR을 지정하지 않았습니다.</li></ul></td>
+    </tr>
+    </tbody></table>
+
+6. 현재 Helm 차트를 삭제하십시오.
 
     ```
     helm delete --purge vpn
     ```
     {: pre}
+
+7. `config.yaml` 파일을 열고 올바르지 않은 값을 수정하십시오.
+
+8. 업데이트된 `config.yaml` 파일을 저장하십시오.
+
+9. 업데이트된 `config.yaml` 파일로 Helm 차트를 클러스터에 설치하십시오. 업데이트된 특성은 차트의 configmap에 저장됩니다.
+
+    ```
+    helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan
+    ```
+    {: pre}
+
+10. 차트 배치 상태를 확인하십시오. 차트가 준비 상태인 경우, 출력의 맨 위 근처에 있는 **STATUS** 필드의 값은 `DEPLOYED`입니다.
+
+    ```
+    helm status vpn
+    ```
+    {: pre}
+
+11. 차트가 배치된 후 `config.yaml` 파일에서 업데이트된 설정이 사용되었는지 확인하십시오.
+
+    ```
+    helm get values vpn
+    ```
+    {: pre}
+
+12. 현재 테스트 포드를 정리하십시오. 
+
+    ```
+    kubectl get pods -a -n kube-system -l app=strongswan-test
+    ```
+    {: pre}
+
+    ```
+    kubectl delete pods -n kube-system -l app=strongswan-test
+    ```
+    {: pre}
+
+13. 테스트를 다시 실행하십시오.
+
+    ```
+    helm test vpn
+    ```
+    {: pre}
+
+<br />
+
+
+## strongSwan Helm 차트 업그레이드
+{: #vpn_upgrade}
+
+strongSwan Helm 차트를 업그레이드하여 최신 상태인지 확인하십시오.
+{:shortdesc}
+
+strongSwan Helm 차트를 최신 버전으로 업그레이드하려면 다음을 수행하십시오. 
+
+  ```
+  helm upgrade -f config.yaml --namespace kube-system <release_name> ibm/strongswan
+  ```
+  {: pre}
+
+
+### 버전 1.0.0에서 업그레이드
+{: #vpn_upgrade_1.0.0}
+
+버전 1.0.0 Helm 차트에 사용된 일부 설정으로 인해 `helm upgrade`를 사용하여 1.0.0에서 최신 버전으로 업데이트할 수 없습니다.
+{:shortdesc}
+
+버전 1.0.0에서 업그레이드하려면 1.0.0 차트를 삭제하고 최신 버전을 설치해야 합니다. 
+
+1. 1.0.0 Helm 차트를 삭제하십시오.
+
+    ```
+    helm delete --purge <release_name>
+    ```
+    {: pre}
+
+2. 최신 버전의 strongSwan Helm 차트를 위한 기본 구성 설정을 로컬 YAML 파일에 저장하십시오.
+
+    ```
+    helm inspect values ibm/strongswan > config.yaml
+    ```
+    {: pre}
+
+3. 구성 파일을 업데이트하고 변경사항을 포함하여 파일을 저장하십시오. 
+
+4. 업데이트된 `config.yaml` 파일로 Helm 차트를 클러스터에 설치하십시오. 
+
+    ```
+    helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/strongswan
+    ```
+    {: pre}
+
+또한 1.0.0에서 하드 코딩된 특정 `ipsec.conf` 제한시간 설정은 이후 버전에서 구성 가능한 특성으로 노출됩니다. 일부 구성 가능한 `ipsec.conf` 제한시간 설정의 이름 및 기본값도 strongSwan 표준과 좀 더 일치하도록 변경되었습니다. 1.0.0에서 Helm 차트를 업그레이드하는 중이고 제한시간 설정의 1.0.0 버전 기본값을 보존하려면 이전 기본값을 사용하여 새 설정을 차트 구성 파일에 추가하십시오.
+
+  <table>
+  <caption>버전 1.0.0과 최신 버전 간의 ipsec.conf 설정 차이점</caption>
+  <thead>
+  <th>1.0.0 설정 이름</th>
+  <th>1.0.0 기본값</th>
+  <th>최신 버전 설정 이름</th>
+  <th>최신 버전 기본값</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>ikelifetime</code></td>
+  <td>60m</td>
+  <td><code>ikelifetime</code></td>
+  <td>3h</td>
+  </tr>
+  <tr>
+  <td><code>keylife</code></td>
+  <td>20m</td>
+  <td><code>lifetime</code></td>
+  <td>1h</td>
+  </tr>
+  <tr>
+  <td><code>rekeymargin</code></td>
+  <td>3m</td>
+  <td><code>margintime</code></td>
+  <td>9m</td>
+  </tr>
+  </tbody></table>
+
+
+## strongSwan IPSec VPN 서비스 사용 안함
+{: vpn_disable}
+
+Helm 차트를 삭제하여 VPN 연결을 사용 안함으로 설정할 수 있습니다.
+{:shortdesc}
+
+  ```
+  helm delete --purge <release_name>
+  ```
+  {: pre}

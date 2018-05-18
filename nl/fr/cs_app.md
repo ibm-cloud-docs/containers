@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-02-28"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-01-24"
 # Déploiement d'applications dans des clusters
 {: #app}
 
-Vous pouvez utiliser des techniques Kubernetes pour déployer des applications et faire en sorte qu'elles soient toujours opérationnelles. Par exemple, vous pouvez effectuer des mises à jour et des rétromigrations tournantes sans générer de temps d'indisponibilité pour vos utilisateurs.
+Vous pouvez recourir à des techniques Kubernetes dans {{site.data.keyword.containerlong}} pour déployer des applications et faire en sorte qu'elles soient toujours opérationnelles. Par exemple, vous pouvez effectuer des mises à jour et des rétromigrations tournantes sans générer de temps d'indisponibilité pour vos utilisateurs.
 {:shortdesc}
 
 Découvrez les étapes générales de déploiement d'applications en cliquant sur une zone de l'image suivante.
@@ -39,19 +39,19 @@ Découvrez les étapes générales de déploiement d'applications en cliquant su
 ## Planification de déploiements à haute disponibilité
 {: #highly_available_apps}
 
-Plus votre configuration sera distribuée entre plusieurs noeuds d'agent et clusters, et moins vos utilisateurs seront susceptibles d'encourir des temps d'indisponibilité de votre application.
-
-Examinez ces configurations potentielles d'application, classées par ordre de disponibilité croissante.
+Plus votre configuration sera distribuée entre plusieurs noeuds worker et clusters, et moins vos utilisateurs seront susceptibles d'encourir des temps d'indisponibilité de votre application.
 {:shortdesc}
 
-![Niveaux de haute disponibilité pour un cluster](images/cs_app_ha_roadmap.png)
+Examinez les configurations potentielles d'application suivantes, classées par ordre de disponibilité croissante.
+
+![Niveaux de haute disponibilité pour une application](images/cs_app_ha_roadmap.png)
 
 1.  Déploiement avec n+2 pods gérés par un jeu de répliques.
 2.  Déploiement avec n+2 pods gérés par un jeu de répliques et disséminés entre plusieurs noeuds (anti-affinité) sur le même emplacement.
 3.  Déploiement avec n+2 pods gérés par un jeu de répliques et disséminés entre plusieurs noeuds (anti-affinité) dans des emplacements différents.
 4.  Déploiement avec n+2 pods gérés par un jeu de répliques et disséminés entre plusieurs noeuds (anti-affinité) dans des régions différentes.
 
-Découvrez les techniques qui vous permettent d'améliorer la disponibilité de votre application :
+### Augmentation de la disponibilité de votre application
 
 <dl>
 <dt>Utilisez des déploiements et des jeux de répliques pour déployer votre application et ses dépendances</dt>
@@ -65,15 +65,15 @@ Les déploiements offrent également la possibilité de déployer simultanément
 </br></br>
 Chaque déploiement conserve un suivi des révisions qui ont été déployées. Vous pouvez utiliser cet historique des révisions pour rétablir une version antérieure si vos mises à jour ne fonctionnent pas comme prévu.</dd>
 <dt>Incluez suffisamment de répliques pour répondre à la charge de travail de votre application, plus deux répliques</dt>
-<dd>Pour rendre votre application encore plus disponible et réfractaire aux échecs, envisagez d'inclure des répliques supplémentaires au-delà du strict minimum requis pour gérer la charge de travail anticipée. Ces répliques supplémentaires pourront gérer la charge de travail en cas de panne d'un pod et avant que le jeu de répliques n'ait encore rétabli le pod défaillant. Pour une protection face à deux défaillances simultanées de pods, incluez deux répliques supplémentaires. Cette configuration correspond à un canevas N+2, où N désigne le nombre de pods destinés à traiter la charge de travail entrante et +2 indique d'ajouter deux répliques supplémentaires. Vous pouvez avoir autant de pods que vous le souhaitez dans un cluster, à condition qu'il y ait suffisamment d'espace pour les hébeger dans le cluster.</dd>
+<dd>Pour rendre votre application encore plus disponible et réfractaire aux échecs, envisagez d'inclure des répliques supplémentaires au-delà du strict minimum requis pour gérer la charge de travail anticipée. Ces répliques supplémentaires pourront gérer la charge de travail en cas de panne d'un pod et avant que le jeu de répliques n'ait encore rétabli le pod défaillant. Pour une protection face à deux défaillances simultanées de pods, incluez deux répliques supplémentaires. Cette configuration correspond à un canevas N+2, où N désigne le nombre de pods destinés à traiter la charge de travail entrante et +2 indique d'ajouter deux répliques supplémentaires. Vous pouvez avoir autant de pods que vous le souhaitez dans un cluster, à condition qu'il y ait suffisamment d'espace pour les héberger dans le cluster.</dd>
 <dt>Disséminez les pods entre plusieurs noeuds (anti-affinité)</dt>
-<dd>Lorsque vous créez votre déploiement, vous pouvez déployer tous les pods sur le même noeud worker. Cette configuration où les pods résident sur le même noeud worker est dénommée 'affinité' ou 'collocation'. Pour protéger votre application contre une défaillance du noeud worker, vous pouvez opter lors du déploiement de disséminer les pods entre plusieurs noeuds d'agent, et ce en utilisant l'option <strong>podAntiAffinity</strong>. Cette option n'est disponible que pour les clusters standards.
+<dd>Lorsque vous créez votre déploiement, vous pouvez déployer tous les pods sur le même noeud worker. Cette configuration où les pods résident sur le même noeud worker est dénommée 'affinité' ou 'collocation'. Pour protéger votre application contre une défaillance du noeud worker, vous pouvez opter lors du déploiement de disséminer les pods entre plusieurs noeuds worker, et ce en utilisant l'option <strong>podAntiAffinity</strong>. Cette option n'est disponible que pour les clusters standard.
 
 </br></br>
-<strong>Remarque :</strong> le fichier YAML suivant contrôle que chaque pod est déployé sur un noeud worker différent. Lorsque le nombre de répliques défini dépasse le nombre de noeuds d'agent disponibles dans votre cluster, le nombre de répliques déployées se limite à celui requis pour répondre à l'exigence d'anti-affinité. Les répliques excédentaires demeurent à l'état En attente jusqu'à ce que des noeuds d'agent supplémentaires soient éventuellement ajoutés au cluster.
+<strong>Remarque :</strong> le fichier YAML suivant contrôle que chaque pod est déployé sur un noeud worker différent. Lorsque le nombre de répliques défini dépasse le nombre de noeuds worker disponibles dans votre cluster, le nombre de répliques déployées se limite à celui requis pour répondre à l'exigence d'anti-affinité. Les répliques excédentaires demeurent à l'état En attente jusqu'à ce que des noeuds worker supplémentaires soient éventuellement ajoutés au cluster.
 
 <pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+<code>apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: wasliberty
@@ -120,7 +120,7 @@ spec:
 <dt>Dissémination des pods entre plusieurs emplacements ou régions</dt>
 <dd>Pour protéger votre application en cas d'une défaillance d'un emplacement ou d'une région, vous pouvez créer un second cluster dans un autre emplacement ou une autre région et utiliser un fichier YAML de déploiement afin de déployer un doublon du jeu de répliques pour votre application. En ajoutant une route partagée et un équilibreur de charge devant vos clusters, vous pouvez répartir votre charge de travail entre plusieurs emplacements et régions. Pour plus d'informations sur le partage de route entre clusters, voir <a href="cs_clusters.html#clusters" target="_blank">Haute disponibilité des clusters</a>.
 
-Pour plus de détails, examinez les options pour <a href="cs_clusters.html#planning_clusters" target="_blank">les déploiements 'applications à haute disponibilité</a>.</dd>
+Pour plus de détails, examinez les options pour <a href="cs_clusters.html#planning_clusters" target="_blank">les déploiements d'applications à haute disponibilité</a>.</dd>
 </dl>
 
 
@@ -134,7 +134,7 @@ Un déploiement élémentaire d'application dans un cluster gratuit ou standard 
 
 Pour déployer les composants pour une application minimale comme illustré dans le diagramme, vous utilisez un fichier de configuration semblable à l'exemple suivant :
 ```
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: ibmliberty
@@ -175,7 +175,7 @@ Pour en savoir plus sur chaque composant, revoyez les [concepts de base de Kuber
 ## Lancement du tableau de bord Kubernetes
 {: #cli_dashboard}
 
-Ouvrez un tableau de bord Kubernetes sur votre système local pour consulter des informations sur un cluster et ses noeuds d'agent.
+Ouvrez un tableau de bord Kubernetes sur votre système local pour consulter des informations sur un cluster et ses noeuds worker.
 {:shortdesc}
 
 Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) votre cluster. Cette tâche requiert d'utiliser la [règle d'accès administrateur](cs_users.html#access_policies). Vérifiez votre [règle d'accès actuelle](cs_users.html#infra_access).
@@ -259,11 +259,11 @@ Lorsque vous avez fini d'examiner le tableau de bord Kubernetes, utilisez les to
 {: #secrets}
 
 Les valeurs confidentielles Kubernetes permettent de stocker de manière
-sécurisée des informations sensibles, comme les noms de utilisateurs, leur mots de passe ou leur clés.
+sécurisée des informations sensibles, comme les noms des utilisateurs, leurs mots de passe ou leurs clés.
 {:shortdesc}
 
 <table>
-<caption>Table. Fichiers devant être stockés dans des valeurs confidentielles par tâche</caption>
+<caption>Tableau. Fichiers devant être stockés dans des valeurs confidentielles par tâche</caption>
 <thead>
 <th>Tâche</th>
 <th>Fichiers à stocker dans des valeurs confidentielles</th>
@@ -284,7 +284,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 Pour créer à la place votre propre valeur confidentielle, exécutez la procédure décrite dans cette rubrique.</td>
 <td>Certificat et clé de serveur : <code>server.crt</code> et <code>server.key</code></td>
 <tr>
-<td>Création de l'annotation mutual-authentication .</td>
+<td>Création de l'annotation mutual-authentication.</td>
 <td>Certificat d'autorité de certification : <code>ca.crt</code></td>
 </tr>
 </tbody>
@@ -298,7 +298,7 @@ Pour créer une valeur confidentielle avec un certificat :
 
 1. Procurez-vous le certificat d'autorité de certification et la clé auprès de votre fournisseur de certificat. Si vous disposez de votre propre domaine, achetez un certificat TLS officiel pour votre domaine. Pour des tests, vous pouvez générer un certificat autosigné.
 
- Important : Assurez-vous que la valeur [CN](https://support.dnsimple.com/articles/what-is-common-name/) est différente pour chaque certificat.
+ Important : assurez-vous que la valeur [CN](https://support.dnsimple.com/articles/what-is-common-name/) est différente pour chaque certificat.
 
  Le certificat et la clé du client doivent être vérifiés jusqu'au niveau du certificat racine accrédité qui, dans ce cas, est le certificat de l'autorité de certification. Exemple :
 
@@ -340,21 +340,19 @@ Pour créer une valeur confidentielle avec un certificat :
 ## Déploiement d'applications depuis l'interface graphique
 {: #app_ui}
 
-Lorsque vous déployez une application dans votre cluster à l'aide du tableau de bord Kubernetes, une ressource de déploiement est automatiquement générée qui crée, met à jour et gère les pods de votre cluster.
+Lorsque vous déployez une application dans votre cluster à l'aide du tableau de bord Kubernetes, une ressource de déploiement crée, met à jour et gère automatiquement les pods dans votre cluster.
 {:shortdesc}
 
 Avant de commencer :
 
--   Installez les
-[interfaces de ligne de
-commande](cs_cli_install.html#cs_cli_install) requises.
+-   Installez les [interfaces de ligne de commande](cs_cli_install.html#cs_cli_install) requises.
 -   [Ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) vers votre cluster.
 
 Pour déployer votre application :
 
 1.  [Ouvrez le tableau de bord Kubernetes](#cli_dashboard).
 2.  Dans le tableau de bord Kubernetes, cliquez sur **+ Créer**.
-3.  Sélectionnez **Spécifier les détails de l'application ci-dessous** pour entrer les détails de l'application sur l'interface graphique ou **Télécharger un fichier YAML ou JSON** pour télécharger le [fichier de configuration de votre application ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/). Utilisez [cet exemple de fichier YAML![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/IBM-Bluemix/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml) pour déployer un conteneur depuis l'image **ibmliberty** dans la région Sud des Etats-Unis.
+3.  Sélectionnez **Spécifier les détails de l'application ci-dessous** pour entrer les détails de l'application sur l'interface graphique ou **Télécharger un fichier YAML ou JSON** pour télécharger le [fichier de configuration de votre application ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/). Utilisez [cet exemple de fichier YAML ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml) pour déployer un conteneur depuis l'image **ibmliberty** dans la région Sud des Etats-Unis.
 4.  Dans le tableau de bord Kubernetes, cliquez sur **Déploiements** pour vérifier que le déploiement a bien été créé.
 5.  Si vous avez rendu votre application disponible au public en utilisant un service de port de noeud, un service d'équilibreur de charge ou Ingress, vérifiez que vous pouvez accéder à l'application.
 
@@ -402,14 +400,15 @@ Pour déployer votre application :
 ## Mise à l'échelle des applications
 {: #app_scaling}
 
-Déployez des applications en cloud qui répondent aux fluctuations de la demande pour vos applications et qui n'utilisent des ressources qu'en cas de besoin. La mise à l'échelle automatique étend ou réduit automatiquement le nombre d'instances de vos applications en fonction de l'unité centrale.
+Avec Kubernetes, vous pouvez activer la [mise à l'échelle automatique horizontale de pod ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) pour augmenter ou diminuer automatiquement le nombre d'instances de vos applications en fonction de l'UC.
 {:shortdesc}
 
-Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) votre cluster.
+Vous recherchez des informations sur la mise à l'échelle des applications Cloud Foundry ? Consultez [IBM - Mise à l'échelle automatique pour {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html). 
+{: tip}
 
-**Remarque :** recherchez-vous des informations sur la mise à l'échelle d'applications Cloud Foundry ? Consultez [IBM - Mise à l'échelle automatique pour {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html).
-
-Avec Kubernetes, vous pouvez activer la [mise à l'échelle horizontale de pod ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale) pour dimensionner vos applications en fonction de l'UC.
+Avant de commencer :
+- [Ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) vers votre cluster.
+- La surveillance avec Heapster doit être déployée dans le cluster qui doit faire l'objet de la mise à l'échelle automatique.
 
 1.  Déployez votre application dans le cluster depuis l'interface CLI. Lorsque vous déployez votre application vous devez solliciter une unité centrale (cpu).
 
@@ -440,8 +439,10 @@ Avec Kubernetes, vous pouvez activer la [mise à l'échelle horizontale de pod !
     <td>Port sur lequel votre application est disponible en externe.</td>
     </tr></tbody></table>
 
-    **Remarque :** Pour les déploiements plus complexes, vous devrez éventuellement créer un [fichier de configuration](#app_cli).
-2.  Créez un service de mise à l'échelle automatique de pod et définissez votre règle. Pour plus d'informations sur l'utilisation de la commande `kubectl autoscale`, reportez-vous à la [Documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
+    Pour les déploiements plus complexes, vous devrez éventuellement créer un [fichier de configuration](#app_cli).
+    {: tip}
+
+2.  Créez un service de mise à l'échelle automatique et définissez votre règle. Pour plus d'informations sur l'utilisation de la commande `kubectl autoscale`, voir [la documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
 
     ```
     kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
@@ -466,7 +467,6 @@ Avec Kubernetes, vous pouvez activer la [mise à l'échelle horizontale de pod !
     <td>Nombre maximum de pods déployés utilisés pour gérer le pourcentage d'utilisation d'UC spécifié.</td>
     </tr>
     </tbody></table>
-
 
 
 <br />

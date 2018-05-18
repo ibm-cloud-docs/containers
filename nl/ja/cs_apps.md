@@ -24,7 +24,7 @@ lastupdated: "2018-01-11"
 - [アプリへのパブリック・アクセスを許可する方法](cs_network_planning.html#planning)
   - [NodePort タイプのサービスを使用してアプリへのパブリック・アクセスを構成する方法](cs_nodeport.html#config)
   - [ロード・バランサー・タイプのサービスを使用してアプリへのアクセスを構成する方法](cs_loadbalancer.html#config)
-  - [Ingress を使用してアプリへのアクセスを構成する方法](cs_ingress.html#config)
+  - [Ingress を使用してアプリへのアクセスを構成する方法](cs_ingress.html#configure_alb)
     - [TLS 終端なしで IBM 提供ドメインを使用する](cs_ingress.html#ibm_domain)
     - [TLS 終端ありで IBM 提供ドメインを使用する](cs_ingress.html#ibm_domain_cert)
     - [TLS 終端を実行するためにカスタム・ドメインと TLS 証明書を使用する](cs_ingress.html#custom_domain_cert)

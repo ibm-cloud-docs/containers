@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-01-24"
+lastupdated: "2018-02-14"
 
 ---
 
@@ -19,81 +19,13 @@ lastupdated: "2017-01-24"
 # Riferimenti CLI per la gestione dei cluster
 {: #cs_cli_reference}
 
-Fai riferimento a questi comandi per creare e gestire i cluster.
+Fai riferimento a questi comandi per creare e gestire i cluster su {{site.data.keyword.Bluemix_notm}}.
 {:shortdesc}
 
+## Comandi bx cs
+{: #cs_commands}
+
 **Suggerimento:** Stai cercando i comandi `bx cr`? Consulta i riferimenti CLI [{{site.data.keyword.registryshort_notm}} ](/docs/cli/plugins/registry/index.html). Stai cercando i comandi `kubectl`? Consulta la [Documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).
-
-
-
-
-<table summary="Comandi per la creazione dei cluster in {{site.data.keyword.Bluemix_notm}}">
- <thead>
-    <th colspan=5>Comandi per la creazione dei cluster in {{site.data.keyword.Bluemix_notm}}</th>
- </thead>
- <tbody>
-  <tr>
-    <td>[bx cs albs](#cs_albs)</td>
-    <td>[bx cs alb-configure](#cs_alb_configure)</td>
-    <td>[bx cs alb-get](#cs_alb_get)</td>
-    <td>[bx cs alb-types](#cs_alb_types)</td>
-    <td>[bx cs cluster-config](#cs_cluster_config)</td>
-  </tr>
- <tr>
-    <td>[bx cs cluster-create](#cs_cluster_create)</td>
-    <td>[bx cs cluster-get](#cs_cluster_get)</td>
-    <td>[bx cs cluster-rm](#cs_cluster_rm)</td>
-    <td>[bx cs cluster-service-bind](#cs_cluster_service_bind)</td>
-    <td>[bx cs cluster-service-unbind](#cs_cluster_service_unbind)</td>
- </tr>
- <tr>
-    <td>[bx cs cluster-services](#cs_cluster_services)</td>
-    <td>[bx cs cluster-subnet-add](#cs_cluster_subnet_add)</td>
-    <td>[bx cs cluster-subnet-create](#cs_cluster_subnet_create)</td>
-    <td>[bx cs cluster-user-subnet-add](#cs_cluster_user_subnet_add)</td>
-    <td>[bx cs cluster-user-subnet-rm](#cs_cluster_user_subnet_rm)</td>
- </tr>
- <tr>
-    <td>[bx cs cluster-update](#cs_cluster_update)</td>
-    <td>[      bx cs clusters
-      ](#cs_clusters)</td>
-    <td>[bx cs credentials-set](#cs_credentials_set)</td>
-    <td>[  bx cs credentials-unset
-  ](#cs_credentials_unset)</td>
-    <td>[  bx cs help
-  ](#cs_help)</td>
- </tr>
- <tr>
-    <td>[        bx cs init
-        ](#cs_init)</td>
-    <td>[bx cs kube-versions](#cs_kube_versions)</td>
-    <td>[  bx cs locations
-  ](#cs_datacenters)</td>
-    <td>[bx cs logging-config-create](#cs_logging_create)</td>
-    <td>[bx cs logging-config-get](#cs_logging_get)</td>
- </tr>
- <tr>
-    <td>[bx cs logging-config-rm](#cs_logging_rm)</td>
-    <td>[bx cs logging-config-update](#cs_logging_update)</td>
-    <td>[bx cs machine-types](#cs_machine_types)</td>
-    <td>[    bx cs subnets
-    ](#cs_subnets)</td>
-    <td>[bx cs vlans](#cs_vlans)</td>
- </tr>
- <tr>
-    <td>[bx cs webhook-create](#cs_webhook_create)</td>
-    <td>[bx cs worker-add](#cs_worker_add)</td>
-    <td>[bx cs worker-get](#cs_worker_get)</td>
-    <td>[bx cs worker-rm](#cs_worker_rm)</td>
-    <td>[bx cs worker-update](#cs_worker_update)</td>
- </tr>
- <tr>
-    <td>[bx cs worker-reboot](#cs_worker_reboot)</td>
-    <td>[bx cs worker-reload](#cs_worker_reload)</td>
-    <td>[bx cs workers](#cs_workers)</td>
- </tr>
- </tbody>
- </table>
 
 **Suggerimento:** per visualizzare la versione del plugin {{site.data.keyword.containershort_notm}}, esegui il seguente comando.
 
@@ -102,27 +34,378 @@ bx plugin list
 ```
 {: pre}
 
-## Comandi bx cs
-{: #cs_commands}
 
-### bx cs albs --cluster CLUSTER
-{: #cs_albs}
 
-Visualizza lo stato di tutti i programmi di bilanciamento del carico dell'applicazione in un cluster. Se non viene restituito alcun ID del programma di bilanciamento del carico dell'applicazione, il cluster non ha una sottorete portatile. Puoi [creare](#cs_cluster_subnet_create) o [aggiungere](#cs_cluster_subnet_add) le sottoreti a un cluster.
+<table summary="Comandi del programma di bilanciamento del carico dell'applicazione">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>Comandi del programma di bilanciamento del carico dell'applicazione</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs alb-cert-deploy](#cs_alb_cert_deploy)</td>
+    <td>[bx cs alb-cert-get](#cs_alb_cert_get)</td>
+    <td>[bx cs alb-cert-rm](#cs_alb_cert_rm)</td>
+    <td>[bx cs alb-certs](#cs_alb_certs)</td>
+  </tr>
+  <tr>
+    <td>[bx cs alb-configure](#cs_alb_configure)</td>
+    <td>[bx cs alb-get](#cs_alb_get)</td>
+    <td>[bx cs alb-types](#cs_alb_types)</td>
+    <td>[bx cs albs](#cs_albs)</td>
+ </tr>
+</tbody>
+</table>
 
-<strong>Opzioni comando</strong>:
+<br>
+
+<table summary="Comandi API">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>Comandi API</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs api-key-info](#cs_api_key_info)</td>
+    <td>[bx cs api-key-reset](#cs_api_key_reset)</td>
+    <td>[bx cs apiserver-config-get](#cs_apiserver_config_get)</td>
+    <td>[bx cs apiserver-config-set](#cs_apiserver_config_set)</td>
+  </tr>
+  <tr>
+    <td>[bx cs apiserver-config-unset](#cs_apiserver_config_unset)</td>
+    <td>[bx cs apiserver-refresh](#cs_apiserver_refresh)</td>
+    <td></td>
+    <td></td>
+ </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="Comandi utilizzo plugin CLI">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>Comandi utilizzo plugin CLI</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[  bx cs help
+  ](#cs_help)</td>
+    <td>[        bx cs init
+        ](#cs_init)</td>
+    <td>[bx cs messages](#cs_messages)</td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="Comandi cluster: gestione">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>Comandi cluster: gestione</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs cluster-config](#cs_cluster_config)</td>
+    <td>[bx cs cluster-create](#cs_cluster_create)</td>
+    <td>[bx cs cluster-get](#cs_cluster_get)</td>
+    <td>[bx cs cluster-rm](#cs_cluster_rm)</td>
+  </tr>
+  <tr>
+    <td>[bx cs cluster-update](#cs_cluster_update)</td>
+    <td>[      bx cs clusters
+      ](#cs_clusters)</td>
+    <td>[bx cs kube-versions](#cs_kube_versions)</td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="Comandi cluster: servizi e integrazioni">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>Comandi cluster: servizi e integrazioni</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs cluster-service-bind](#cs_cluster_service_bind)</td>
+    <td>[bx cs cluster-service-unbind](#cs_cluster_service_unbind)</td>
+    <td>[bx cs cluster-services](#cs_cluster_services)</td>
+    <td>[bx cs webhook-create](#cs_webhook_create)</td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="Comandi cluster: sottoreti">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>Comandi cluster: sottoreti</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs cluster-subnet-add](#cs_cluster_subnet_add)</td>
+    <td>[bx cs cluster-subnet-create](#cs_cluster_subnet_create)</td>
+    <td>[bx cs cluster-user-subnet-add](#cs_cluster_user_subnet_add)</td>
+    <td>[bx cs cluster-user-subnet-rm](#cs_cluster_user_subnet_rm)</td>
+  </tr>
+  <tr>
+    <td>[    bx cs subnets
+    ](#cs_subnets)</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="Comandi infrastruttura">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>Comandi infrastruttura</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs credentials-set](#cs_credentials_set)</td>
+    <td>[  bx cs credentials-unset
+  ](#cs_credentials_unset)</td>
+    <td>[bx cs machine-types](#cs_machine_types)</td>
+    <td>[bx cs vlans](#cs_vlans)</td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="Comandi registrazione">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>Comandi registrazione</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs logging-config-create](#cs_logging_create)</td>
+    <td>[bx cs logging-config-get](#cs_logging_get)</td>
+    <td>[bx cs logging-config-refresh](#cs_logging_refresh)</td>
+    <td>[bx cs logging-config-rm](#cs_logging_rm)</td>
+  </tr>
+  <tr>
+    <td>[bx cs logging-config-update](#cs_logging_update)</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="Comandi regione">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>Comandi regione</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[  bx cs locations
+  ](#cs_datacenters)</td>
+    <td>[bx cs region](#cs_region)</td>
+    <td>[bx cs region-set](#cs_region-set)</td>
+    <td>[bx cs regions](#cs_regions)</td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<table summary="Comandi nodo di lavoro">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+ <thead>
+    <th colspan=4>Comandi nodo di lavoro</th>
+ </thead>
+ <tbody>
+  <tr>
+    <td>[bx cs worker-add](#cs_worker_add)</td>
+    <td>[bx cs worker-get](#cs_worker_get)</td>
+    <td>[bx cs worker-reboot](#cs_worker_reboot)</td>
+    <td>[bx cs worker-reload](#cs_worker_reload)</td>
+  </tr>
+  <tr>
+    <td>[bx cs worker-rm](#cs_worker_rm)</td>
+    <td>[bx cs worker-update](#cs_worker_update)</td>
+    <td>[bx cs workers](#cs_workers)</td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+
+## Comandi del programma di bilanciamento del carico dell'applicazione
+{: #alb_commands}
+
+### bx cs alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NAME --cert-crn CERTIFICATE_CRN
+{: #cs_alb_cert_deploy}
+
+Distribuisci o aggiorna un certificato dalla tua istanza {{site.data.keyword.cloudcerts_long_notm}} al programma di bilanciamento del carico dell'applicazione in un cluster.
+
+**Nota:**
+* Solo un utente con il ruolo di accesso di amministratore può eseguire questo comando.
+* Puoi soltanto aggiornare i certificati importati dalla stessa istanza {{site.data.keyword.cloudcerts_long_notm}}.
+
+<strong>Opzioni comando</strong>
 
    <dl>
-   <dt><code><em>--cluster </em>CLUSTER</code></dt>
-   <dd>Il nome o l'ID del cluster in cui elenchi i programmi di bilanciamento del carico dell'applicazione disponibili. Questo valore è obbligatorio.</dd>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
+
+   <dt><code>--update</code></dt>
+   <dd>Includi questo indicatore per aggiornare il certificato per un segreto del programma di bilanciamento del carico dell'applicazione in un cluster. Questo valore è facoltativo.</dd>
+
+   <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
+   <dd>Il nome del segreto del programma di bilanciamento del carico dell'applicazione. Questo valore è obbligatorio.</dd>
+
+   <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
+   <dd>Il CRN del certificato. Questo valore è obbligatorio.</dd>
+   </dl>
+
+**Esempi**:
+
+Esempio per distribuire un segreto del programma di bilanciamento del carico dell'applicazione:
+
+   ```
+   bx cs alb-cert-deploy --secret-name my_alb_secret_name --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
+   ```
+   {: pre}
+
+Esempio per aggiornare un segreto del programma di bilanciamento del carico dell'applicazione esistente:
+
+ ```
+ bx cs alb-cert-deploy --update --secret-name my_alb_secret_name --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:7e21fde8ee84a96d29240327daee3eb2
+ ```
+ {: pre}
+
+
+### bx cs alb-cert-get --cluster CLUSTER [--secret-name SECRET_NAME][--cert-crn CERTIFICATE_CRN]
+{: #cs_alb_cert_get}
+
+Visualizza le informazioni su un segreto del programma di bilanciamento del carico dell'applicazione in un cluster.
+
+**Nota:** solo un utente con il ruolo di accesso di amministratore può eseguire questo comando.
+
+<strong>Opzioni comando</strong>
+
+  <dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+  <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
+
+  <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
+  <dd>Il nome del segreto del programma di bilanciamento del carico dell'applicazione. Questo valore è obbligatorio per ottenere le informazioni su un segreto del programma di bilanciamento del carico dell'applicazione specifico nel cluster.</dd>
+
+  <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
+  <dd>Il CRN del certificato. Questo valore è obbligatorio per ottenere le informazioni su tutti i segreti del programma di bilanciamento del carico dell'applicazione che corrispondono a un CRN del certificato specifico nel cluster.</dd>
+  </dl>
+
+**Esempi**:
+
+ Esempio per recuperare le informazioni su un segreto del programma di bilanciamento del carico dell'applicazione:
+
+ ```
+ bx cs alb-cert-get --cluster my_cluster --secret-name my_alb_secret_name
+ ```
+ {: pre}
+
+ Esempio per recuperare le informazioni su tutti i segreti del programma di bilanciamento del carico dell'applicazione che corrispondono a un CRN del certificato specificato.
+
+ ```
+ bx cs alb-cert-get --cluster my_cluster --cert-crn  crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
+ ```
+ {: pre}
+
+
+### bx cs alb-cert-rm --cluster CLUSTER [--secret-name SECRET_NAME][--cert-crn CERTIFICATE_CRN]
+{: #cs_alb_cert_rm}
+
+Rimuovi un segreto del programma di bilanciamento del carico dell'applicazione in un cluster.
+
+**Nota:** solo un utente con il ruolo di accesso di amministratore può eseguire questo comando.
+
+<strong>Opzioni comando</strong>
+
+  <dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+  <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
+
+  <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
+  <dd>Il nome del segreto ALB. Questo valore è obbligatorio per rimuovere un segreto del programma di bilanciamento del carico dell'applicazione specifico nel cluster.</dd>
+
+  <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
+  <dd>Il CRN del certificato. Questo valore è obbligatorio per rimuovere tutti i segreti del programma di bilanciamento del carico dell'applicazione che corrispondono a un CRN del certificato specifico nel cluster.</dd>
+  </dl>
+
+**Esempi**:
+
+ Esempio per rimuovere un segreto del programma di bilanciamento del carico dell'applicazione:
+
+ ```
+ bx cs alb-cert-rm --cluster my_cluster --secret-name my_alb_secret_name
+ ```
+ {: pre}
+
+ Esempio per rimuovere tutti i segreti del programma di bilanciamento del carico dell'applicazione che corrispondono a un CRN del certificato specificato.
+
+ ```
+ bx cs alb-cert-rm --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
+ ```
+ {: pre}
+
+
+### bx cs alb-certs --cluster CLUSTER
+{: #cs_alb_certs}
+
+Visualizza un elenco dei segreti del programma di bilanciamento del carico dell'applicazione in un cluster.
+
+**Nota:** solo un utente con il ruolo di accesso di amministratore può eseguire questo comando.
+
+<strong>Opzioni comando</strong>
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
    </dl>
 
 **Esempio**:
 
-  ```
-  bx cs albs --cluster mycluster
-  ```
-  {: pre}
+ ```
+ bx cs alb-certs --cluster my_cluster
+ ```
+ {: pre}
+
 
 
 
@@ -176,6 +459,8 @@ Abilita o disabilita un programma di bilanciamento del carico dell'applicazione 
   ```
   {: pre}
 
+
+
 ### bx cs alb-get --albID ALB_ID
 {: #cs_alb_get}
 
@@ -212,10 +497,69 @@ Visualizza i tipi di programmi di bilanciamento del carico dell'applicazione che
   {: pre}
 
 
-### bx cs apiserver-config-set
-{: #cs_apiserver_config_set}
+### bx cs albs --cluster CLUSTER
+{: #cs_albs}
 
-Imposta un'opzione per una configurazione del server API Kubernetes del cluster. Questo comando deve essere combinato con uno dei seguenti comandi secondari per l'opzione di configurazione che vuoi impostare.
+Visualizza lo stato di tutti i programmi di bilanciamento del carico dell'applicazione in un cluster. Se non viene restituito alcun ID del programma di bilanciamento del carico dell'applicazione, il cluster non ha una sottorete portatile. Puoi [creare](#cs_cluster_subnet_create) o [aggiungere](#cs_cluster_subnet_add) le sottoreti a un cluster.
+
+<strong>Opzioni comando</strong>:
+
+   <dl>
+   <dt><code><em>--cluster </em>CLUSTER</code></dt>
+   <dd>Il nome o l'ID del cluster in cui elenchi i programmi di bilanciamento del carico dell'applicazione disponibili. Questo valore è obbligatorio.</dd>
+   </dl>
+
+**Esempio**:
+
+  ```
+  bx cs albs --cluster mycluster
+  ```
+  {: pre}
+
+
+<br />
+
+
+## Comandi API
+{: #api_commands}
+
+### bx cs api-key-info CLUSTER
+{: #cs_api_key_info}
+
+Visualizza il nome e l'indirizzo email del proprietario della chiave API IAM del cluster.
+
+<strong>Opzioni comando</strong>:
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
+   </dl>
+
+**Esempio**:
+
+  ```
+  bx cs api-key-info my_cluster
+  ```
+  {: pre}
+
+
+### bx cs api-key-reset
+{: #cs_api_key_reset}
+
+Sostituisci la chiave API. La chiave API è obbligatoria per gestire i cluster. Per evitare interruzioni del servizio, non sostituire la chiave API a meno che la chiave esistente non sia compromessa.
+
+**Esempio**:
+
+  ```
+  bx cs api-key-reset
+  ```
+  {: pre}
+
+
+### bx cs apiserver-config-get
+{: #cs_apiserver_config_get}
+
+Ottieni le informazioni su un'opzione per una configurazione del server API Kubernetes del cluster. Questo comando deve essere combinato con uno dei seguenti comandi secondari per l'opzione di configurazione per cui vuoi le informazioni.
 
 #### bx cs apiserver-config-get audit-webhook CLUSTER
 {: #cs_apiserver_api_webhook_get}
@@ -235,6 +579,11 @@ Visualizza l'URL del servizio di registrazione remoto a cui stai inviando i log 
   bx cs apiserver-config-get audit-webhook my_cluster
   ```
   {: pre}
+
+### bx cs apiserver-config-set
+{: #cs_apiserver_config_set}
+
+Imposta un'opzione per una configurazione del server API Kubernetes del cluster. Questo comando deve essere combinato con uno dei seguenti comandi secondari per l'opzione di configurazione che vuoi impostare.
 
 #### bx cs apiserver-config-set audit-webhook CLUSTER [--remoteServer SERVER_URL_OR_IP][--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH][--clientKey CLIENT_KEY_PATH]
 {: #cs_apiserver_api_webhook_set}
@@ -266,6 +615,12 @@ Imposta il backend webhook per la configurazione del server API. Il backend webh
   bx cs apiserver-config-set audit-webhook my_cluster --remoteServer https://audit.example.com/audit --caCert /mnt/etc/kubernetes/apiserver-audit/ca.pem --clientCert /mnt/etc/kubernetes/apiserver-audit/cert.pem --clientKey /mnt/etc/kubernetes/apiserver-audit/key.pem
   ```
   {: pre}
+
+
+### bx cs apiserver-config-unset
+{: #cs_apiserver_config_unset}
+
+Disabilita un'opzione per una configurazione del server API Kubernetes del cluster. Questo comando deve essere combinato con uno dei seguenti comandi secondari per l'opzione di configurazione che vuoi disabilitare.
 
 #### bx cs apiserver-config-unset audit-webhook CLUSTER
 {: #cs_apiserver_api_webhook_unset}
@@ -306,6 +661,70 @@ Riavvia il master Kubernetes nel cluster per applicare le modifiche alla configu
   {: pre}
 
 
+<br />
+
+
+## Comandi utilizzo plugin CLI
+{: #cli_plug-in_commands}
+
+### bx cs help
+{: #cs_help}
+
+Visualizzare un elenco di comandi e parametri supportati.
+
+<strong>Opzioni comando</strong>:
+
+   Nessuno
+
+**Esempio**:
+
+  ```
+  bx cs help
+  ```
+  {: pre}
+
+
+### bx cs init [--host HOST]
+{: #cs_init}
+
+Inizializza il plugin {{site.data.keyword.containershort_notm}} o specificare la regione in cui desideri creare o accedere ai cluster Kubernetes.
+
+<strong>Opzioni comando</strong>:
+
+   <dl>
+   <dt><code>--host <em>HOST</em></code></dt>
+   <dd>L'endpoint API {{site.data.keyword.containershort_notm}} da utilizzare.  Questo valore è facoltativo. [Visualizza i valori dell'endpoint API disponibili.](cs_regions.html#container_regions)</dd>
+   </dl>
+
+**Esempio**:
+
+
+```
+bx cs init --host https://uk-south.containers.bluemix.net
+```
+{: pre}
+
+
+### bx cs messages
+{: #cs_messages}
+
+Visualizza i messaggi correnti dell'utente ID IBM.
+
+**Esempio**:
+
+```
+bx cs messages
+```
+{: pre}
+
+
+<br />
+
+
+## Comandi cluster: gestione
+{: #cluster_mgmt_commands}
+
+
 ### bx cs cluster-config CLUSTER [--admin][--export]
 {: #cs_cluster_config}
 
@@ -332,11 +751,10 @@ bx cs cluster-config my_cluster
 {: pre}
 
 
-
 ### bx cs cluster-create [--file FILE_LOCATION][--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH][--no-subnet] [--private-vlan PRIVATE_VLAN][--public-vlan PUBLIC_VLAN] [--workers WORKER][--disable-disk-encrypt]
 {: #cs_cluster_create}
 
-Per creare un cluster nella tua organizzazione.
+Crea un cluster nella tua organizzazione. Per i cluster gratuiti, specifica il nome del cluster; tutto il resto è impostato su un valore predefinito. Puoi avere un solo cluster gratuito alla volta. Per sfruttare tutte le funzionalità di Kubernetes, crea un cluster standard.
 
 <strong>Opzioni comando</strong>
 
@@ -362,7 +780,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
 
 
 <table>
-    <caption>Tabella 1.Descrizione dei componenti del file YAML</caption>
+    <caption>Tabella. Descrizione dei componenti del file YAML</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
     </thead>
@@ -405,7 +823,7 @@ kube-version: <em>&lt;kube-version&gt;</em>
       <td>La versione di Kubernetes per il nodo master del cluster. Questo valore è facoltativo. Se non specificato, il cluster viene creato con l'impostazione predefinita delle versioni di Kubernetes supportate. Per visualizzare le versioni disponibili. esegui <code>bx cs kube-versions</code>.</td></tr>
       <tr>
       <td><code>diskEncryption: <em>false</em></code></td>
-      <td>Codifica del disco della funzione dei nodi di lavoro predefinita; [learn more](cs_secure.html#worker). Per disabilitare la codifica, includi questa opzione e imposta il valore su <code>false</code>.</td></tr>
+      <td>Codifica del disco della funzione dei nodi di lavoro predefinita; [ulteriori informazioni](cs_secure.html#worker). Per disabilitare la codifica, includi questa opzione e imposta il valore su <code>false</code>.</td></tr>
      </tbody></table>
     </p></dd>
 
@@ -481,7 +899,7 @@ cluster. La modifica dell'ID o del nome dominio impedisce al master Kubernetes d
 cluster.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>Codifica del disco della funzione dei nodi di lavoro predefinita; [learn more](cs_secure.html#worker). Per disabilitare la codifica, includi questa opzione.</dd>
+<dd>Codifica del disco della funzione dei nodi di lavoro predefinita; [ulteriori informazioni](cs_secure.html#worker). Per disabilitare la codifica, includi questa opzione.</dd>
 </dl>
 
 **Esempi**:
@@ -557,10 +975,82 @@ Rimuovere un cluster dalla tua organizzazione.
   {: pre}
 
 
-### bx cs cluster-service-bind CLUSTER KUBERNETES_NAMESPACE SERVICE_INSTANCE_GUID
+### bx cs cluster-update [-f] CLUSTER [--kube-version MAJOR.MINOR.PATCH][--force-update]
+{: #cs_cluster_update}
+
+Aggiorna il master Kubernetes alla versione API predefinita. Durante l'aggiornamento, non è possibile accedere o modificare il cluster. I nodi di lavoro, le applicazioni e le risorse che sono state distribuite dall'utente non vengono modificate e continueranno ad essere in esecuzione.
+
+Potresti dover modificare i tuoi file YAML per distribuzioni future. Controlla questa [nota sulla release](cs_versions.html) per i dettagli.
+
+<strong>Opzioni comando</strong>:
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
+
+   <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
+   <dd>La versione Kubernetes del cluster. Se non specifichi una versione, il master Kubernetes viene aggiornato alla versione API predefinita. Per visualizzare le versioni disponibili. esegui [bx cs kube-versions](#cs_kube_versions). Questo valore è facoltativo.</dd>
+
+   <dt><code>-f</code></dt>
+   <dd>Utilizza questa opzione per forzare l'aggiornamento di un master senza richiedere l'intervento dell'utente. Questo valore è facoltativo.</dd>
+
+   <dt><code>--force-update</code></dt>
+   <dd>Tenta l'aggiornamento anche se la modifica è maggiore di due versioni secondarie. Questo valore è facoltativo.</dd>
+   </dl>
+
+**Esempio**:
+
+  ```
+  bx cs cluster-update my_cluster
+  ```
+  {: pre}
+
+
+### bx cs clusters
+{: #cs_clusters}
+
+Visualizzare un elenco di cluster nella tua organizzazione.
+
+<strong>Opzioni comando</strong>:
+
+  Nessuno
+
+**Esempio**:
+
+  ```
+  bx cs clusters
+  ```
+  {: pre}
+
+
+### bx cs kube-versions
+{: #cs_kube_versions}
+
+Visualizza un elenco di versioni di Kubernetes supportate in {{site.data.keyword.containershort_notm}}. Aggiorna i tuoi [master cluster](#cs_cluster_update) e [nodi di lavoro](#cs_worker_update) alla versione predefinita per le funzionalità stabili più recenti.
+
+**Opzioni comando**:
+
+  Nessuno
+
+**Esempio**:
+
+  ```
+  bx cs kube-versions
+  ```
+  {: pre}
+
+
+<br />
+
+
+## Comandi cluster: servizi e integrazioni
+{: #cluster_services_commands}
+
+
+### bx cs cluster-service-bind CLUSTER KUBERNETES_NAMESPACE SERVICE_INSTANCE_NAME
 {: #cs_cluster_service_bind}
 
-Aggiungi un servizio {{site.data.keyword.Bluemix_notm}} a un cluster.
+Aggiungi un servizio {{site.data.keyword.Bluemix_notm}} a un cluster. Per visualizzare i servizi {{site.data.keyword.Bluemix_notm}} disponibili dal catalogo {{site.data.keyword.Bluemix_notm}}, esegui `bx service offerings`. **Nota**: puoi aggiungere solo servizi {{site.data.keyword.Bluemix_notm}} che supportano le chiavi del servizio.
 
 <strong>Opzioni comando</strong>:
 
@@ -569,17 +1059,16 @@ Aggiungi un servizio {{site.data.keyword.Bluemix_notm}} a un cluster.
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
    <dt><code><em>KUBERNETES_NAMESPACE</em></code></dt>
-   <dd>Il nome dello spazio di nomi Kubernetes. Questo valore è obbligatorio.</dd>
+   <dd>Il nome dello spazio dei nomi Kubernetes. Questo valore è obbligatorio.</dd>
 
-   <dt><code><em>SERVICE_INSTANCE_GUID</em></code></dt>
-   <dd>L'ID dell'istanza del servizio {{site.data.keyword.Bluemix_notm}}
-di cui vuoi eseguire il bind. Questo valore è obbligatorio.</dd>
+   <dt><code><em>SERVICE_INSTANCE_NAME</em></code></dt>
+   <dd>Il nome dell'istanza del servizio {{site.data.keyword.Bluemix_notm}} di cui vuoi eseguire il bind. Per trovare il nome della tua istanza del servizio, esegui <code>bx service list</code>. Se nell'account più di un'istanza ha lo stesso nome, utilizza l'ID dell'istanza del servizio anziché il nome. Per trovare l'ID, esegui <code>bx service show <service instance name> --guid</code>. Uno di questi valori è obbligatorio.</dd>
    </dl>
 
 **Esempio**:
 
   ```
-  bx cs cluster-service-bind my_cluster my_namespace my_service_instance_GUID
+  bx cs cluster-service-bind my_cluster my_namespace my_service_instance
   ```
   {: pre}
 
@@ -599,11 +1088,11 @@ si verificherà un errore perché non è possibile trovare le credenziali del se
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
 
    <dt><code><em>KUBERNETES_NAMESPACE</em></code></dt>
-   <dd>Il nome dello spazio di nomi Kubernetes. Questo valore è obbligatorio.</dd>
+   <dd>Il nome dello spazio dei nomi Kubernetes. Questo valore è obbligatorio.</dd>
 
    <dt><code><em>SERVICE_INSTANCE_GUID</em></code></dt>
    <dd>L'ID dell'istanza del servizio {{site.data.keyword.Bluemix_notm}}
-che vuoi rimuovere. Questo valore è obbligatorio.</dd>
+che vuoi rimuovere. Per trovare l'ID dell'istanza del servizio, esegui `bx cs cluster-services <cluster_name_or_ID>`.Questo valore è obbligatorio.</dd>
    </dl>
 
 **Esempio**:
@@ -642,6 +1131,42 @@ alcuna opzione, vengono visualizzati i servizi per lo spazio dei nomi predefinit
   {: pre}
 
 
+### bx cs webhook-create --cluster CLUSTER --level LEVEL --type slack --URL URL
+{: #cs_webhook_create}
+
+Registra un webhook.
+
+<strong>Opzioni comando</strong>:
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
+
+   <dt><code>--level <em>LEVEL</em></code></dt>
+   <dd>Il livello di notifica, come ad esempio <code>Normal</code> o
+<code>Warning</code>. <code>Warning</code> è il valore predefinito. Questo valore è facoltativo.</dd>
+
+   <dt><code>--type <em>slack</em></code></dt>
+   <dd>Il tipo di webhook. Al momento è supportato slack. Questo valore è obbligatorio.</dd>
+
+   <dt><code>--URL <em>URL</em></code></dt>
+   <dd>L'URL del webhook. Questo valore è obbligatorio.</dd>
+   </dl>
+
+**Esempio**:
+
+  ```
+  bx cs webhook-create --cluster my_cluster --level Normal --type slack --URL http://github.com/<mywebhook>
+  ```
+  {: pre}
+
+
+<br />
+
+
+## Comandi cluster: sottoreti
+{: #cluster_subnets_commands}
+
 ### bx cs cluster-subnet-add CLUSTER SUBNET
 {: #cs_cluster_subnet_add}
 
@@ -670,6 +1195,7 @@ contemporaneamente.
   ```
   {: pre}
 
+
 ### bx cs cluster-subnet-create CLUSTER SIZE VLAN_ID
 {: #cs_cluster_subnet_create}
 
@@ -691,7 +1217,7 @@ contemporaneamente.
    <dd>Il nome di indirizzi IP della sottorete. Questo valore è obbligatorio. I valori possibili sono 8, 16, 32 o 64.</dd>
 
    <dt><code><em>VLAN_ID</em></code></dt>
-   <dd>La VLAN in cui creare la sottorete. Questo valore è obbligatorio. Per elencare le VLAN, utilizza il [comando](#cs_vlans) `bx cs vlans <location>`.</dd>
+   <dd>La VLAN in cui creare la sottorete. Questo valore è obbligatorio. Per elencare le VLAN, utilizza il [comando](#cs_vlans) `bx cs vlans <location>`. </dd>
    </dl>
 
 **Esempio**:
@@ -700,6 +1226,7 @@ contemporaneamente.
   bx cs cluster-subnet-create my_cluster 8 1764905
   ```
   {: pre}
+
 
 ### bx cs cluster-user-subnet-add CLUSTER SUBNET_CIDR PRIVATE_VLAN
 {: #cs_cluster_user_subnet_add}
@@ -763,60 +1290,35 @@ Rimuovi la tua propria sottorete privata da un cluster specificato.
   ```
   {: pre}
 
+### bx cs subnets
+{: #cs_subnets}
 
-### bx cs cluster-update [-f] CLUSTER [--kube-version MAJOR.MINOR.PATCH][--force-update]
-{: #cs_cluster_update}
-
-Aggiorna il master Kubernetes alla versione API predefinita. Durante l'aggiornamento, non è possibile accedere o modificare il cluster. I nodi di lavoro, le applicazioni e le risorse che sono state distribuite dall'utente non vengono modificate e continueranno ad essere in esecuzione.
-
-Potresti dover modificare i tuoi file YAML per distribuzioni future. Controlla questa [nota sulla release](cs_versions.html) per i dettagli.
+Visualizza un elenco di sottoreti disponibili in un account dell'infrastruttura IBM Cloud (SoftLayer).
 
 <strong>Opzioni comando</strong>:
 
-   <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
-   <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
-
-   <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
-   <dd>La versione Kubernetes del cluster. Se questo indicatore non è specificato, il master Kubernetes viene aggiornato alla versione API predefinita. Per visualizzare le versioni disponibili. esegui [bx cs kube-versions](#cs_kube_versions). Questo valore è facoltativo.</dd>
-
-   <dt><code>-f</code></dt>
-   <dd>Utilizza questa opzione per forzare l'aggiornamento di un master senza richiedere l'intervento dell'utente. Questo valore è facoltativo.</dd>
-
-   <dt><code>--force-update</code></dt>
-   <dd>Tenta l'aggiornamento anche se la modifica è maggiore di due versioni secondarie. Questo valore è facoltativo.</dd>
-   </dl>
+   Nessuno
 
 **Esempio**:
 
   ```
-  bx cs cluster-update my_cluster
+  bx cs subnets
   ```
   {: pre}
 
-### bx cs clusters
-{: #cs_clusters}
 
-Visualizzare un elenco di cluster nella tua organizzazione.
+<br />
 
-<strong>Opzioni comando</strong>:
 
-  Nessuno
-
-**Esempio**:
-
-  ```
-  bx cs clusters
-  ```
-  {: pre}
-
+## Comandi infrastruttura
+{: #infrastructure_commands}
 
 ### bx cs credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME
 {: #cs_credentials_set}
 
-Imposta le credenziali di account dell'infrastruttura IBM Cloud (SoftLayer) per il tuo account {{site.data.keyword.Bluemix_notm}}. Queste credenziali ti consentono di accedere al portfolio dell'infrastruttura IBM Cloud (SoftLayer) attraverso il tuo account {{site.data.keyword.Bluemix_notm}}.
+Imposta le credenziali di account dell'infrastruttura IBM Cloud (SoftLayer) per il tuo account {{site.data.keyword.containershort_notm}}. Queste credenziali ti consentono di accedere al portfolio dell'infrastruttura IBM Cloud (SoftLayer) attraverso il tuo account {{site.data.keyword.containershort_notm}}.
 
-**Nota:** non configurare più credenziali per un account {{site.data.keyword.Bluemix_notm}}. Ogni account {{site.data.keyword.Bluemix_notm}} è collegato a un solo portfolio dell'infrastruttura IBM Cloud (SoftLayer).
+**Nota:** non configurare più credenziali per un account {{site.data.keyword.containershort_notm}}. Ogni account {{site.data.keyword.containershort_notm}} è collegato a un solo portfolio dell'infrastruttura IBM Cloud (SoftLayer).
 
 <strong>Opzioni comando</strong>:
 
@@ -859,7 +1361,7 @@ Imposta le credenziali di account dell'infrastruttura IBM Cloud (SoftLayer) per 
 ### bx cs credentials-unset
 {: #cs_credentials_unset}
 
-Rimuovi le credenziali di account dell'infrastruttura IBM Cloud (SoftLayer) dal tuo account {{site.data.keyword.Bluemix_notm}}. Dopo aver rimosso le credenziali, non potrai più accedere al portfolio dell'infrastruttura IBM Cloud (SoftLayer) attraverso il tuo account {{site.data.keyword.Bluemix_notm}}.
+Rimuovi le credenziali di account dell'infrastruttura IBM Cloud (SoftLayer) dal tuo account {{site.data.keyword.containershort_notm}}. Dopo aver rimosso le credenziali, non potrai più accedere al portfolio dell'infrastruttura IBM Cloud (SoftLayer) attraverso il tuo account {{site.data.keyword.containershort_notm}}.
 
 <strong>Opzioni comando</strong>:
 
@@ -873,74 +1375,57 @@ Rimuovi le credenziali di account dell'infrastruttura IBM Cloud (SoftLayer) dal 
   {: pre}
 
 
+### bx cs machine-types LOCATION
+{: #cs_machine_types}
 
-### bx cs help
-{: #cs_help}
+Visualizzare un elenco di tipi di macchina disponibili per i tuoi nodi di lavoro. Ogni tipo di macchina include
+la quantità di CPU virtuale, memoria e spazio su disco per ogni nodo di lavoro nel cluster.
+- Per impostazione predefinita, i dati Docker dell'host vengono codificati nei tipi di macchina. La directory `/var/lib/docker`, in cui vengono memorizzati tutti i dati del contenitore, è codificata con la crittografia LUKS. Se l'opzione `disable-disk-encrypt` viene inclusa durante la creazione del cluster, i dati Docker dell'host non vengono codificati. [Ulteriori informazioni sulla codifica.](cs_secure.html#encrypted_disks)
+- I tipi di macchina con `u2c` o `b2c` nel nome utilizzano il disco locale invece di SAN (storage area networking) per garantire l'affidabilità. I vantaggi dell'affidabilità includono una velocità di elaborazione più elevata durante la serializzazione dei byte sul disco locale e una riduzione del danneggiamento del file system dovuto a errori di rete. Questi tipi di macchina contengono 25 GB di archiviazione su disco locale primaria per il file system del sistema operativo e 100 GB di archiviazione su disco locale secondaria per `/var/lib/docker`, ossia la directory in cui sono scritti tutti i dati del contenitore.
+- I tipi di macchina con `u1c` o `b1c` nel nome sono obsoleti, ad esempio `u1c.2x4`. Per iniziare a utilizzare i tipi di macchina `u2c` e `b2c`, usa il comando `bx cs worker-add` per aggiungere nodi di lavoro con il tipo di macchina aggiornato. Quindi, rimuovi i nodi di lavoro che utilizzano i tipi di macchina obsoleti utilizzando il comando `bx cs worker-rm`.
+</p>
 
-Visualizzare un elenco di comandi e parametri supportati.
-
-<strong>Opzioni comando</strong>:
-
-   Nessuno
-
-**Esempio**:
-
-  ```
-  bx cs help
-  ```
-  {: pre}
-
-
-### bx cs init [--host HOST]
-{: #cs_init}
-
-Inizializza il plugin {{site.data.keyword.containershort_notm}} o specificare la regione in cui desideri creare o accedere ai cluster Kubernetes.
 
 <strong>Opzioni comando</strong>:
 
    <dl>
-   <dt><code>--host <em>HOST</em></code></dt>
-   <dd>L'endpoint API {{site.data.keyword.containershort_notm}} da utilizzare.  Questo valore è facoltativo. [Visualizza i valori dell'endpoint API disponibili.](cs_regions.html#container_regions)</dd>
-   </dl>
-
-
-
-```
-bx cs init --host https://uk-south.containers.bluemix.net
-```
-{: pre}
-
-### bx cs kube-versions
-{: #cs_kube_versions}
-
-Visualizza un elenco di versioni di Kubernetes supportate in {{site.data.keyword.containershort_notm}}. Aggiorna i tuoi [master cluster](#cs_cluster_update) e [nodi di lavoro](#cs_worker_update) alla versione predefinita per le funzionalità stabili più recenti.
-
-**Opzioni comando**:
-
-  Nessuno
+   <dt><code><em>LOCATION</em></code></dt>
+   <dd>Immetti l'ubicazione in cui vuoi elencare i tipi di macchina disponibili. Questo valore è obbligatorio. Controlla le [ubicazioni disponibili](cs_regions.html#locations).</dd></dl>
 
 **Esempio**:
 
   ```
-  bx cs kube-versions
+  bx cs machine-types dal10
   ```
   {: pre}
 
-### bx cs locations
-{: #cs_datacenters}
+### bx cs vlans LOCATION 
+{: #cs_vlans}
 
-Visualizzare un elenco di ubicazioni disponibili in cui creare un cluster.
+Elenca le VLAN pubbliche e private disponibili per un'ubicazione nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). Per elencare le VLAN disponibili,
+devi avere un account a pagamento.
 
 <strong>Opzioni comando</strong>:
 
-   Nessuno
+   <dl>
+   <dt><code><em>LOCATION</em></code></dt>
+   <dd>Immetti l'ubicazione in cui vuoi elencare le tue VLAN pubbliche e private. Questo valore è obbligatorio. Controlla le [ubicazioni disponibili](cs_regions.html#locations).</dd>
+   
+   </dl>
 
 **Esempio**:
 
   ```
-  bx cs locations
+  bx cs vlans dal10
   ```
   {: pre}
+
+
+<br />
+
+
+## Comandi registrazione
+{: #logging_commands}
 
 ### bx cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT][--space CLUSTER_SPACE] [--org CLUSTER_ORG] --type LOG_TYPE [--json]
 {: #cs_logging_create}
@@ -955,15 +1440,15 @@ Crea una configurazione di registrazione. Puoi utilizzare questo comando per ino
 <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
 <dd>L'origine del log per la quale desideri abilitare l'inoltro di log. I valori accettati sono <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code> e <code>ingress</code>. Questo valore è obbligatorio.</dd>
 <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
-<dd>Lo spazio dei nomi del contenitore Docker dal quale desideri inoltrare i log. L'inoltro del log non è supportato per gli spazi dei nomi Kubernetes <code>ibm-system</code> e <code>kube-system</code>. Questo valore è valido solo per l'origine del log del contenitore ed è facoltativo. Se non specifichi uno spazio dei nomi, tutti gli spazi dei nomi nel contenitore utilizzeranno questa configurazione.</dd>
+<dd>Lo spazio dei nomi Kubernetes dal quale desideri inoltrare i log. L'inoltro del log non è supportato per gli spazi dei nomi Kubernetes <code>ibm-system</code> e <code>kube-system</code>. Questo valore è valido solo per l'origine del log del contenitore ed è facoltativo. Se non specifichi uno spazio dei nomi, tutti gli spazi dei nomi nel cluster utilizzeranno questa configurazione.</dd>
 <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
 <dd>Quando il tipo di registrazione è <code>syslog</code>, il nome host o l'indirizzo IP del server di raccolta del log. Questo valore è obbligatorio per <code>syslog</code>. Quando il tipo di registrazione è <code>ibm</code>, l'URL di inserimento {{site.data.keyword.loganalysislong_notm}}. Puoi trovare l'elenco degli URL di inserimento disponibili [qui](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). Se non specifichi un URL di inserimento, viene utilizzato l'endpoint della regione in cui è stato creato il tuo cluster.</dd>
 <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
 <dd>La porta del server di raccolta del log. Questo valore è facoltativo. Se non specifichi una porta, viene utilizzata la porta standard <code>514</code> per <code>syslog</code> e <code>9091</code> per <code>ibm</code>.</dd>
 <dt><code>--space <em>CLUSTER_SPACE</em></code></dt>
-<dd>Il nome dello spazio a cui vuoi inviare i log. Questo valore è valido solo per il tipo di log <code>ibm</code> ed è facoltativo. Se non specifichi uno spazio, i log vengono inviati al livello dell'account.</dd>
+<dd>Il nome dello spazio Cloud Foundry a cui vuoi inviare i log. Questo valore è valido solo per il tipo di log <code>ibm</code> ed è facoltativo. Se non specifichi uno spazio, i log vengono inviati al livello dell'account.</dd>
 <dt><code>--org <em>CLUSTER_ORG</em></code></dt>
-<dd>Il nome dell'organizzazione in cui si trova lo spazio. Questo valore è valido solo per il tipo di log <code>ibm</code> ed è obbligatorio se hai specificato uno spazio.</dd>
+<dd>Il nome dell'organizzazione Cloud Foundry in cui si trova lo spazio. Questo valore è valido solo per il tipo di log <code>ibm</code> ed è obbligatorio se hai specificato uno spazio.</dd>
 <dt><code>--type <em>LOG_TYPE</em></code></dt>
 <dd>Il protocollo di inoltro del log che desideri utilizzare. Al momento, sono supportati <code>syslog</code> e <code>ibm</code>. Questo valore è obbligatorio.</dd>
 <dt><code>--json</code></dt>
@@ -986,12 +1471,12 @@ Esempio del tipo di log `syslog` che inoltra da un'origine log `container` sulla
   ```
   {: pre}
 
-  Esempio di un tipo di log `syslog` che inoltra i log da un'origine `ingress` su una porta differente dalla predefinita:
+Esempio di un tipo di log `syslog` che inoltra i log da un'origine `ingress` su una porta differente dalla predefinita:
 
-    ```
-    bx cs logging-config-create my_cluster --logsource container --hostname my_hostname-or-IP --port 5514 --type syslog
-    ```
-    {: pre}
+  ```
+  bx cs logging-config-create my_cluster --logsource container --hostname my_hostname-or-IP --port 5514 --type syslog
+  ```
+  {: pre}
 
 ### bx cs logging-config-get CLUSTER [--logsource LOG_SOURCE][--json]
 {: #cs_logging_get}
@@ -1017,29 +1502,49 @@ Visualizza tutte le configurazioni di inoltro di un cluster o filtrale in base a
   {: pre}
 
 
-### bx cs logging-config-rm CLUSTER LOG_CONFIG_ID
-{: #cs_logging_rm}
+### bx cs logging-config-refresh CLUSTER
+{: #cs_logging_refresh}
 
-Elimina una configurazione di inoltro del log. Questo arresta l'inoltro dei log a un server syslog o a {{site.data.keyword.loganalysisshort_notm}}.
+Aggiorna la configurazione di registrazione per il cluster. Questo aggiorna il token di registrazione per tutte le configurazioni di registrazione che stanno eseguendo l'inoltro al livello dello spazio nel tuo cluster.
 
 <strong>Opzioni comando</strong>:
 
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
-   <dt><code><em>LOG_CONFIG_ID</em></code></dt>
+   </dl>
+
+**Esempio**:
+
+  ```
+  bx cs logging-config-refresh my_cluster
+  ```
+  {: pre}
+
+
+### bx cs logging-config-rm CLUSTER --id LOG_CONFIG_ID
+{: #cs_logging_rm}
+
+Elimina una configurazione di inoltro dei log. Questo arresta l'inoltro dei log a un server syslog remoto o a {{site.data.keyword.loganalysisshort_notm}}.
+
+<strong>Opzioni comando</strong>:
+
+   <dl>
+   <dt><code><em>CLUSTER</em></code></dt>
+   <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
+   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
    <dd>L'ID di configurazione di registrazione che desideri rimuovere dall'origine del log. Questo valore è obbligatorio.</dd>
    </dl>
 
 **Esempio**:
 
   ```
-  bx cs logging-config-rm my_cluster f4bc77c0-ee7d-422d-aabf-a4e6b977264e
+  bx cs logging-config-rm my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e
   ```
   {: pre}
 
 
-### bx cs logging-config-update CLUSTER LOG_CONFIG_ID [--hostname LOG_SERVER_HOSTNAME_OR_IP][--port LOG_SERVER_PORT] [--space CLUSTER_SPACE][--org CLUSTER_ORG] --type LOG_TYPE [--json]
+### bx cs logging-config-update CLUSTER --id LOG_CONFIG_ID [--hostname LOG_SERVER_HOSTNAME_OR_IP][--port LOG_SERVER_PORT] [--space CLUSTER_SPACE][--org CLUSTER_ORG] --type LOG_TYPE [--json]
 {: #cs_logging_update}
 
 Aggiorna i dettagli di una configurazione di inoltro del log.
@@ -1049,7 +1554,7 @@ Aggiorna i dettagli di una configurazione di inoltro del log.
    <dl>
    <dt><code><em>CLUSTER</em></code></dt>
    <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
-   <dt><code><em>LOG_CONFIG_ID</em></code></dt>
+   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
    <dd>L'ID di configurazione di registrazione che desideri aggiornare. Questo valore è obbligatorio.</dd>
    <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
    <dd>Quando il tipo di registrazione è <code>syslog</code>, il nome host o l'indirizzo IP del server di raccolta del log. Questo valore è obbligatorio per <code>syslog</code>. Quando il tipo di registrazione è <code>ibm</code>, l'URL di inserimento {{site.data.keyword.loganalysislong_notm}}. Puoi trovare l'elenco degli URL di inserimento disponibili [qui](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). Se non specifichi un URL di inserimento, viene utilizzato l'endpoint della regione in cui è stato creato il tuo cluster.</dd>
@@ -1068,41 +1573,40 @@ Aggiorna i dettagli di una configurazione di inoltro del log.
 **Esempio di tipo di log `ibm`**:
 
   ```
-  bx cs logging-config-update my_cluster f4bc77c0-ee7d-422d-aabf-a4e6b977264e --type ibm
+  bx cs logging-config-update my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e --type ibm
   ```
   {: pre}
 
 **Esempio di tipo di log `syslog`**:
 
   ```
-  bx cs logging-config-update my_cluster f4bc77c0-ee7d-422d-aabf-a4e6b977264e --hostname localhost --port 5514 --type syslog
+  bx cs logging-config-update my_cluster --id f4bc77c0-ee7d-422d-aabf-a4e6b977264e --hostname localhost --port 5514 --type syslog
   ```
   {: pre}
 
 
-### bx cs machine-types LOCATION
-{: #cs_machine_types}
+<br />
 
-Visualizzare un elenco di tipi di macchina disponibili per i tuoi nodi di lavoro. Ogni tipo di macchina include
-la quantità di CPU virtuale, memoria e spazio su disco per ogni nodo di lavoro nel cluster.
-- I tipi di macchina con `u2c` o `b2c` nel nome utilizzano il disco locale invece di SAN (storage area networking) per garantire l'affidabilità. I vantaggi dell'affidabilità includono una velocità di elaborazione più elevata durante la serializzazione dei byte sul disco locale e una riduzione del danneggiamento del file system dovuto a errori di rete. Questi tipi di macchina contengono un'archiviazione disco locale da 25 GB per il file system del sistema operativo e un'archiviazione disco locale da 100 GB per `/var/lib/docker`, la directory in cui sono scritti tutti i dati del contenitore.
-- I tipi di macchina che includono `encrypted` nel nome codificano i dati Docker dell'host. La directory `/var/lib/docker`, in cui vengono memorizzati tutti i dati del contenitore, è codificata con la crittografia LUKS.
-- I tipi di macchina con `u1c` o `b1c` nel nome sono obsoleti, ad esempio `u1c.2x4`. Per iniziare a utilizzare i tipi di macchina `u2c` e `b2c`, usa il comando `bx cs worker-add` per aggiungere nodi di lavoro con il tipo di macchina aggiornato. Quindi, rimuovi i nodi di lavoro che utilizzano i tipi di macchina obsoleti utilizzando il comando `bx cs worker-rm`.
-</p>
 
+## Comandi regione
+{: #region_commands}
+
+### bx cs locations
+{: #cs_datacenters}
+
+Visualizzare un elenco di ubicazioni disponibili in cui creare un cluster.
 
 <strong>Opzioni comando</strong>:
 
-   <dl>
-   <dt><code><em>LOCATION</em></code></dt>
-   <dd>Immetti l'ubicazione in cui vuoi elencare i tipi di macchina disponibili. Questo valore è obbligatorio. Controlla le [ubicazioni disponibili](cs_regions.html#locations).</dd></dl>
+   Nessuno
 
 **Esempio**:
 
   ```
-  bx cs machine-types dal10
+  bx cs locations
   ```
   {: pre}
+
 
 ### bx cs region
 {: #cs_region}
@@ -1125,7 +1629,7 @@ Region: us-south
 ### bx cs region-set [REGION]
 {: #cs_region-set}
 
-Imposta la regione per {{site.data.keyword.containershort_notm}}. Crei e gestisci i cluster specifici della regione e puoi volere i cluster in più regioni per l'elevata disponibilità. 
+Imposta la regione per {{site.data.keyword.containershort_notm}}. Crei e gestisci i cluster specifici della regione e puoi volere i cluster in più regioni per l'elevata disponibilità.
 
 Ad esempio, puoi accedere a {{site.data.keyword.Bluemix_notm}} nella regione Stati Uniti Sud e creare un cluster. Successivamente, puoi utilizzare `bx cs region-set eu-central` per specificare la regione Europa Centrale e creare un altro cluster. Infine, puoi utilizzare `bx cs region-set us-south` per ritornare alla regione Stati Uniti Sud per gestire il tuo cluster in tale regione.
 
@@ -1187,73 +1691,12 @@ us-south      us-south
 ```
 {: screen}
 
-### bx cs subnets
-{: #cs_subnets}
 
-Visualizza un elenco di sottoreti disponibili in un account dell'infrastruttura IBM Cloud (SoftLayer).
-
-<strong>Opzioni comando</strong>:
-
-   Nessuno
-
-**Esempio**:
-
-  ```
-  bx cs subnets
-  ```
-  {: pre}
+<br />
 
 
-### bx cs vlans LOCATION
-{: #cs_vlans}
-
-Elenca le VLAN pubbliche e private disponibili per un'ubicazione nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). Per elencare le VLAN disponibili,
-devi avere un account a pagamento.
-
-<strong>Opzioni comando</strong>:
-
-   <dl>
-   <dt><code><em>LOCATION</em></code></dt>
-   <dd>Immetti l'ubicazione in cui vuoi elencare le tue VLAN pubbliche e private. Questo valore è obbligatorio. Controlla le [ubicazioni disponibili](cs_regions.html#locations).</dd>
-   </dl>
-
-**Esempio**:
-
-  ```
-  bx cs vlans dal10
-  ```
-  {: pre}
-
-
-### bx cs webhook-create --cluster CLUSTER --level LEVEL --type slack --URL URL
-{: #cs_webhook_create}
-
-Creare webhook.
-
-<strong>Opzioni comando</strong>:
-
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>Il nome o l'ID del cluster. Questo valore è obbligatorio.</dd>
-
-   <dt><code>--level <em>LEVEL</em></code></dt>
-   <dd>Il livello di notifica, come ad esempio <code>Normal</code> o
-<code>Warning</code>. <code>Warning</code> è il valore predefinito. Questo valore è facoltativo.</dd>
-
-   <dt><code>--type <em>slack</em></code></dt>
-   <dd>Il tipo di webhook, come ad esempio slack. È supportato solo slack. Questo valore è obbligatorio.</dd>
-
-   <dt><code>--URL <em>URL</em></code></dt>
-   <dd>L'URL del webhook. Questo valore è obbligatorio.</dd>
-   </dl>
-
-**Esempio**:
-
-  ```
-  bx cs webhook-create --cluster my_cluster --level Normal --type slack --URL http://github.com/<mywebhook>
-  ```
-  {: pre}
-
+## Comandi nodo di lavoro
+{: worker_node_commands}
 
 ### bx cs worker-add --cluster CLUSTER [--file FILE_LOCATION][--hardware HARDWARE] --machine-type MACHINE_TYPE --number NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt]
 {: #cs_worker_add}
@@ -1305,7 +1748,7 @@ workerNum: <em>&lt;number_workers&gt;</em>
 </tr>
 <tr>
 <td><code>public-vlan</code></td>
-<td>Sostituisci <code>&lt;public_vlan&gt;</code> con l'ID della VLAN pubblica che vuoi utilizzare per i tuoi nodi di lavoro. Per elencare le VLAN disponibili, esegui <code>bx cs vlans &lt;location&gt;</code> e ricerca i router VLAN che iniziano con <code>fcr</code> (router di front-end).</td>
+<td>Sostituisci <code>&lt;public_vlan&gt;</code> con l'ID della VLAN pubblica che vuoi utilizzare per i tuoi nodi di lavoro. Per elencare le VLAN disponibili, esegui <code>bx cs vlans &lt;location&gt;</code> e ricerca i router VLAN che iniziano con <code>fcr</code> (router di front-end). <br><strong>Nota</strong>: se scegli di non selezionare una VLAN pubblica perché vuoi che i nodi di lavoro si colleghino solo a una VLAN privata, devi configurare una soluzione alternativa. Consulta [Connessione VLAN per i nodi di lavoro](cs_clusters.html#worker_vlan_connection) per ulteriori informazioni. </td>
 </tr>
 <tr>
 <td><code>hardware</code></td>
@@ -1317,7 +1760,7 @@ workerNum: <em>&lt;number_workers&gt;</em>
 </tr>
 <tr>
 <td><code>diskEncryption: <em>false</em></code></td>
-<td>Codifica del disco della funzione dei nodi di lavoro predefinita; [learn more](cs_secure.html#worker). Per disabilitare la codifica, includi questa opzione e imposta il valore su <code>false</code>.</td></tr>
+<td>Codifica del disco della funzione dei nodi di lavoro predefinita; [ulteriori informazioni](cs_secure.html#worker). Per disabilitare la codifica, includi questa opzione e imposta il valore su <code>false</code>.</td></tr>
 </tbody></table></p></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
@@ -1339,7 +1782,7 @@ dopo questi prefissi devono corrispondere per utilizzare tali VLAN durante la cr
 VLAN pubbliche e private che non corrispondono.</p></dd>
 
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
-<dd>La VLAN pubblica specificata quando è stato creato il cluster. Questo valore è facoltativo.
+<dd>La VLAN pubblica specificata quando è stato creato il cluster. Questo valore è facoltativo. Se vuoi che i tuoi nodi di lavoro siano solo su una VLAN privata, non fornire un ID VLAN pubblico. <strong>Nota</strong>: se scegli di non selezionare una VLAN pubblica, devi configurare una soluzione alternativa. Consulta [Connessione VLAN per i nodi di lavoro](cs_clusters.html#worker_vlan_connection) per ulteriori informazioni.
 
 <p><strong>Nota:</strong> le VLAN pubbliche e private che specifichi devono corrispondere. I router della VLAN privata iniziano sempre con <code>bcr</code> (router back-end) e i router
 della VLAN pubblica iniziano sempre con <code>fcr</code> (router front-end). La combinazione di numeri e lettere
@@ -1347,7 +1790,7 @@ dopo questi prefissi devono corrispondere per utilizzare tali VLAN durante la cr
 VLAN pubbliche e private che non corrispondono.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>Codifica del disco della funzione dei nodi di lavoro predefinita; [learn more](cs_secure.html#worker). Per disabilitare la codifica, includi questa opzione.</dd>
+<dd>Codifica del disco della funzione dei nodi di lavoro predefinita; [ulteriori informazioni](cs_secure.html#worker). Per disabilitare la codifica, includi questa opzione.</dd>
 </dl>
 
 **Esempi**:
@@ -1478,7 +1921,7 @@ nodi di lavoro. Questo valore è obbligatorio.</dd>
 ### bx cs worker-update [-f] CLUSTER WORKER [WORKER][--kube-version MAJOR.MINOR.PATCH] [--force-update]
 {: #cs_worker_update}
 
-Aggiorna i nodi di lavoro con l'ultima versione di Kubernetes. L'esecuzione di `bx cs worker-update` può causare tempi di inattività per le applicazioni e i servizi. Durante l'aggiornamento, tutti i pod vengono ripianificati in altri nodi di lavoro e i dati vengono eliminati se non archiviati al di fuori del pod. Per evitare il tempo di inattività, assicurati di disporre di abbastanza nodi di lavoro per gestire il tuo carico di lavoro mentre vengono aggiornati i nodi di lavoro selezionati.
+Aggiorna i nodi di lavoro con l'ultima versione di Kubernetes. L'esecuzione di `bx cs worker-update` può causare tempi di inattività per le applicazioni e i servizi. Durante l'aggiornamento, tutti i pod vengono ripianificati in altri nodi di lavoro e i dati vengono eliminati se non archiviati al di fuori del pod. Per evitare il tempo di inattività, [assicurati di avere abbastanza nodi di lavoro per gestire il carico di lavoro mentre vengono aggiornati i nodi di lavoro selezionati](cs_cluster_update.html#worker_node).
 
 Potresti dover modificare i tuoi file YAML per le distribuzioni prima dell'aggiornamento. Controlla questa [nota sulla release](cs_versions.html) per i dettagli.
 
@@ -1528,6 +1971,3 @@ Visualizzare un elenco di nodi di lavoro e lo stato di ciascun cluster.
   bx cs workers mycluster
   ```
   {: pre}
-
-<br />
-

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-08"
+lastupdated: "2018-03-13"
 
 ---
 
@@ -18,16 +18,21 @@ lastupdated: "2018-02-08"
 # Versions de Kubernetes pour {{site.data.keyword.containerlong_notm}}
 {: #cs_versions}
 
-{{site.data.keyword.containerlong}} gère la coexistence de plusieurs versions de Kubernetes : une version la plus récente, une version par défaut et une version prise en charge, généralement deux versions derrière la plus récente. La version par défaut peut être identique à la plus récente et elle est utilisée lorsque vous créez un cluster, à moins que vous n'en spécifiez une autre.
+{{site.data.keyword.containerlong}} prend en charge plusieurs versions de Kubernetes simultanément. Lorsque la version la plus récente (n) est publiée, jusqu'à 2 versions antérieures (n-2) sont prises en charge. Les versions au-delà de deux versions avant la version la plus récente (n-3) sont d'abord dépréciées, puis finissent par ne plus être prises en charge.
 {:shortdesc}
 
 Versions Kubernetes actuellement prises en charge :
 
-- Version la plus récente : 1.9.2
-- Version par défaut : 1.8.6
+- Version la plus récente : 1.9.3
+- Version par défaut : 1.8.8
 - Version prise en charge : 1.7.4
+- Versions dépréciées : 1.5.x, non prises en charge depuis le 4 avril 2018
 
-Si vous utilisez des clusters sur une version Kubernetes non prise en charge actuellement, [examinez les informations sur les impacts potentiels](#version_types) pour identifier les mises à jour, puis [mettez à jour votre cluster](cs_cluster_update.html#update) immédiatement pour continuer à recevoir des mises à jour de sécurité importantes et bénéficier du support. Pour identifier la version la plus récente, exécutez la commande suivante.
+**Versions dépréciées** : Lorsque des clusters s'exécutent sur une version Kubernetes dépréciée, vous disposez de 30 jours pour vérifier et passer à une version Kubernetes prise en charge. Passé ce délai, votre version ne sera plus prise en charge. Lors de cette période de dépréciation, vous pouvez exécuter un nombre limité de commandes dans vos clusters pour ajouter ou recharger des noeuds worker et mettre à jour le cluster. Vous ne pouvez pas créer de cluster dans la version dépréciée.
+
+**Versions non prises en charge** : Si vous exécutez des clusters sur une version Kubernetes qui n'est pas prise en charge, [consultez les impacts potentiels](#version_types) concernant les mises à jour, puis [mettez à jour votre cluster](cs_cluster_update.html#update) immédiatement pour continuer à recevoir les mises à jour de sécurité importantes et l'aide du support.
+
+Pour identifier la version la plus récente, exécutez la commande suivante.
 
 ```
 kubectl version  --short | grep -i server
@@ -37,9 +42,10 @@ kubectl version  --short | grep -i server
 Exemple de sortie :
 
 ```
-Server Version: 1.8.6
+Server Version: 1.8.8
 ```
 {: screen}
+
 
 ## Types de mise à jour
 {: #version_types}
@@ -51,22 +57,25 @@ Kubernetes fournit les types de mise à jour de version suivants :
 |-----|-----|-----|-----|
 |Principale|1.x.x|Vous|Modifications d'opérations pour des clusters, y compris scripts ou déploiements.|
 |Secondaire|x.5.x|Vous|Modifications d'opérations pour des clusters, y compris scripts ou déploiements.|
-|Correctif|x.x.3|IBM et vous|Pas de modifications des scripts ou des déploiements. IBM met automatiquement à jour les maîtres, mais vous appliquez les correctifs à vos noeuds d'agent.|
+|Correctif|x.x.3|IBM et vous|Pas de modifications des scripts ou des déploiements. IBM met automatiquement à jour les maîtres, mais vous appliquez les correctifs à vos noeuds worker.|
 {: caption="Impacts des mises à jour Kubernetes" caption-side="top"}
 
-Par défaut, vous ne pouvez pas mettre à jour le maître Kubernetes de plus de deux versions mineures. Par exemple, si votre version maître actuelle est la version 1.5 et que vous voulez passer à la version 1.8, vous devez d'abord passer en version 1.7. Vous pouvez forcer la mise à jour pour continuer, mais passer à plus de deux versions au-dessus de la version en cours risque d'entraîner des résultats inattendus.
+Par défaut, vous ne pouvez pas mettre à jour le maître Kubernetes de plus de deux niveaux de version secondaire. Par exemple, si votre version maître actuelle est la version 1.5 et que vous voulez passer à la version 1.8, vous devez d'abord passer en version 1.7. Vous pouvez forcer la mise à jour pour continuer, mais effectuer une mise à jour au-delà de deux niveaux de version secondaire par rapport à la version en cours risque d'entraîner des résultats inattendus.
 {: tip}
 
 Les informations qui suivent récapitulent les mises à jour susceptibles d'avoir un impact sur les applications déployées lorsque vous mettez à jour un cluster vers une nouvelle version. Consultez le journal [Kubernetes changelog ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md) pour obtenir la liste complète des modifications dans les versions de Kubernetes.
 
-Pour plus d'informations sur le processus de mise à jour, voir [Mise à jour des clusters](cs_cluster_update.html#master) et [Mise à jour des noeuds d'agent](cs_cluster_update.html#worker_node).
+Pour plus d'informations concernant le processus de mise à jour, voir [Mise à jour des clusters](cs_cluster_update.html#master) et [Mise à jour des noeuds worker](cs_cluster_update.html#worker_node).
+
+Si vous utilisez une version d'interface CLI `kubectl` qui ne correspond pas au moins à la version principale et secondaire (`major.minor`) de vos clusters, vous risquez d'obtenir des résultats inattendus. Assurez-vous de maintenir votre cluster Kubernetes et les [versions CLI](cs_cli_install.html#kubectl) à jour.
+{:tip}
 
 ## Version 1.9
 {: #cs_v19}
 
+<p><img src="images/certified_kubernetes_1x9.png" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" height="100" width="63" align="left" alt="Ce badge indique une certification Kubernetes version 1.9 pour IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} est un produit certifié Kubernetes pour la version 1.9 sous le programme de certification de conformité de logiciel CNCF Kubernetes. _Kubernetes® est une marque de la Fondation Linux aux Etats-Unis et dans d'autres pays et est utilisé dans le cadre d'une licence de la Fondation Linux._</p>
 
-
-Passez en revue les modifications que vous devrez peut-être apporter lors d'une mise à jour depuis la version Kubernetes antérieure vers la version 1.9.
+Passez en revue les modifications que vous devrez peut-être apporter lors d'une mise à jour de la version Kubernetes précédente vers la version 1.9.
 
 <br/>
 
@@ -74,7 +83,7 @@ Passez en revue les modifications que vous devrez peut-être apporter lors d'une
 {: #19_before}
 
 <table summary="Mises à jour Kubernetes pour la version 1.9">
-<caption>Modifications à apporter lors de la mise à jour du maître vers la version Kubernetes 1.9</caption>
+<caption>Modifications à apporter avant la mise à jour du maître vers la version Kubernetes 1.9</caption>
 <thead>
 <tr>
 <th>Type</th>
@@ -108,20 +117,16 @@ Auparavant, l'opération échouait et un message d'erreur `xxx is not found` (xx
 </tr>
 <tr>
 <td>`kubectl patch`</td>
-<td>Maintenant, lorsqu'aucune modification n'est apportée à la ressource concernée, la commande the `kubectl patch` échoue avec un `exit code 1`. Si vos scripts reposent sur le comportement antérieur, mettez-les à jour.</td>
+<td>Maintenant, lorsqu'aucune modification n'est apportée à la ressource concernée, la commande `kubectl patch` échoue avec `exit code 1`. Si vos scripts reposent sur le comportement antérieur, mettez-les à jour.</td>
 </tr>
 <tr>
 <td>Droits sur le tableau de bord Kubernetes</td>
-<td>Les utilisateurs doivent à présent se connecter au tableau de bord Kubernetes avec leurs données d'identification pour afficher les ressources du cluster. L'autorisation RBAC `ClusterRoleBinding` du tableau de bord Kubernetes par défaut a été supprimée. Pour les instructions correspondantes, voir [Lancement du tableau de bord Kubernetes](cs_app.html#cli_dashboard).</td>
-</tr>
-<tr>
-<td>RBAC pour `ServiceAccount` `default` </td>
-<td>L'administrateur `ClusterRoleBinding` pour le `ServiceAccount` `default` dans l'espace nom `default` a été supprimé. Si vos applications s'appuient sur cette règle RBAC pour accéder à l'API Kubernetes, [mettez à jour vos règles RBAC](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview).</td>
+<td>Les utilisateurs doivent se connecter au tableau de bord Kubernetes avec leurs données d'identification pour afficher les ressources du cluster. L'autorisation RBAC `ClusterRoleBinding` du tableau de bord Kubernetes par défaut est supprimée. Pour les instructions correspondantes, voir [Lancement du tableau de bord Kubernetes](cs_app.html#cli_dashboard).</td>
 </tr>
 <tr>
 <td>Annotations Taints et tolerations</td>
-<td>Les annotations taint `node.alpha.kubernetes.io/notReady` et `node.alpha.kubernetes.io/unreachable` en été changées respectivement en `node.kubernetes.io/not-ready` et `node.kubernetes.io/unreachable`.<br>
-Bien que ces annotations taint soient mises à jour automatiquement, vous devez mettre à jour manuellement leurs annotations tolerations. Pour chaque espace nom, hormis `ibm-system` et `kube-system`, déterminez si vous avez besoin de modifier les annotations tolerations :<br>
+<td>Les annotations taint `node.alpha.kubernetes.io/notReady` et `node.alpha.kubernetes.io/unreachable` sont remplacées respectivement par `node.kubernetes.io/not-ready` et `node.kubernetes.io/unreachable`.<br>
+Bien que ces annotations taint soient mises à jour automatiquement, vous devez mettre à jour manuellement leurs annotations tolerations. Pour chaque espace de nom à l'exception d'`ibm-system` et de `kube-system`, déterminez si vous devez modifier les annotations tolerations :<br>
 <ul><li><code>kubectl get pods -n &lt;namespace&gt; -o yaml | grep "node.alpha.kubernetes.io/notReady" && echo "Action required"</code></li><li>
 <code>kubectl get pods -n &lt;namespace&gt; -o yaml | grep "node.alpha.kubernetes.io/unreachable" && echo "Action required"</code></li></ul><br>
 Si `Action required` est renvoyé, modifiez les annotations tolerations de pod en conséquence.</td>
@@ -139,7 +144,7 @@ Si `Action required` est renvoyé, modifiez les annotations tolerations de pod e
 
 <p><img src="images/certified_kubernetes_1x8.png" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" height="100" width="62.5" align="left" alt="Ce badge indique la certification Kubernetes version 1.8 pour IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} est un produit certifié par Kubernetes pour la version 1.8 sous le programme CNCF de certification de conformité de logiciels Kubernetes. _Kubernetes® est une marque de la Fondation Linux aux Etats-Unis et dans d'autres pays et est utilisé dans le cadre d'une licence de la Fondation Linux._</p>
 
-Passez en revue les modifications que vous devrez peut-être apporter lors d'une mise à jour depuis la version Kubernetes antérieure vers la version 1.8.
+Passez en revue les modifications que vous devrez peut-être apporter lors d'une mise à jour de la version Kubernetes précédente vers la version 1.8.
 
 <br/>
 
@@ -147,7 +152,7 @@ Passez en revue les modifications que vous devrez peut-être apporter lors d'une
 {: #18_before}
 
 <table summary="Mises à jour Kubernetes pour les versions 1.8">
-<caption>Modifications à effectuer avant mise à jour du maître vers Kubernetes 1.8</caption>
+<caption>Modifications à effectuer avant la mise à jour du maître vers Kubernetes 1.8</caption>
 <thead>
 <tr>
 <th>Type</th>
@@ -156,7 +161,8 @@ Passez en revue les modifications que vous devrez peut-être apporter lors d'une
 </thead>
 <tbody>
 <tr>
-<td colspan='2'>Aucune modification requise avant mise à jour du maître</td>
+<td>Aucune</td>
+<td>Aucune modification n'est requise avant la mise à jour du maître</td>
 </tr>
 </tbody>
 </table>
@@ -165,7 +171,7 @@ Passez en revue les modifications que vous devrez peut-être apporter lors d'une
 {: #18_after}
 
 <table summary="Mises à jour Kubernetes pour les versions 1.8">
-<caption>Modifications à effectuer après mise à jour du maître vers Kubernetes 1.8</caption>
+<caption>Modifications à effectuer après la mise à jour du maître vers Kubernetes 1.8</caption>
 <thead>
 <tr>
 <th>Type</th>
@@ -179,11 +185,11 @@ Passez en revue les modifications que vous devrez peut-être apporter lors d'une
 </tr>
 <tr>
 <td>Droits sur le tableau de bord Kubernetes</td>
-<td>Pour forcer des utilisateurs à se connecter avec leurs données d'identification pour afficher des ressources de cluster en version 1.8, supprimez l'autorisation RBAC 1.7 ClusterRoleBinding. Exécutez `kubectl delete clusterrolebinding -n kube-system kubernetes-dashboard`.</td>
+<td>Pour forcer les utilisateurs à se connecter avec leurs données d'identification pour afficher des ressources de cluster en version 1.8, supprimez l'autorisation RBAC 1.7 ClusterRoleBinding. Exécutez `kubectl delete clusterrolebinding -n kube-system kubernetes-dashboard`.</td>
 </tr>
 <tr>
 <td>`kubectl delete`</td>
-<td>La commande `kubectl delete` ne réduit plus les objets d'API de charge de travail, tels que les pods, avant suppression de l'objet. Si vous avez besoin de réduire l'objet, utilisez la commande [kubectl scale ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale) avant de supprimer l'objet.</td>
+<td>La commande `kubectl delete` ne réduit plus les objets d'API de charge de travail, tels que les pods, avant suppression de l'objet. Si vous avez besoin de réduire l'objet, utilisez la commande [`kubectl scale ` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale) avant de supprimer l'objet.</td>
 </tr>
 <tr>
 <td>`kubectl run`</td>
@@ -202,7 +208,7 @@ Passez en revue les modifications que vous devrez peut-être apporter lors d'une
 
 <p><img src="images/certified_kubernetes_1x7.png" height="100" width="62.5" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" align="left" alt="Ce badge indique une certification Kubernetes version 1.7 pour IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} est un produit certifié Kubernetes pour la version 1.7 sous le programme de certification de conformité de logiciel Kubernetes.</p>
 
-Passez en revue les modifications que vous devrez peut-être apporter lors d'une mise à jour depuis la version Kubernetes antérieure vers la version 1.7.
+Passez en revue les modifications que vous devrez peut-être apporter lors d'une mise à jour de la version Kubernetes précédente vers la version 1.7.
 
 <br/>
 
@@ -210,7 +216,7 @@ Passez en revue les modifications que vous devrez peut-être apporter lors d'une
 {: #17_before}
 
 <table summary="Mises à jour de Kubernetes pour les versions 1.7 et 1.6">
-<caption>Modifications à effectuer avant mise à jour du maître vers Kubernetes 1.7</caption>
+<caption>Modifications à effectuer avant la mise à jour du maître vers Kubernetes 1.7</caption>
 <thead>
 <tr>
 <th>Type</th>
@@ -228,7 +234,7 @@ Passez en revue les modifications que vous devrez peut-être apporter lors d'une
   ```
   </br>
 
-  <li>Si `Action required` est renvoyé, modifiez les pods de manière à référencer le chemin absolu avant de mettre à jour tous vos noeuds d'agent. Si le pod est détenu par une autre ressource, par exemple un déploiement, modifiez [_PodSpec_ ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) dans cette ressource.
+  <li>Si `Action required` est renvoyé, modifiez les pods de manière à référencer le chemin absolu avant de mettre à jour tous vos noeuds worker. Si le pod est détenu par une autre ressource, par exemple un déploiement, modifiez [_PodSpec_ ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) dans cette ressource.
 </ol>
 </td>
 </tr>
@@ -239,7 +245,7 @@ Passez en revue les modifications que vous devrez peut-être apporter lors d'une
 {: #17_after}
 
 <table summary="Mises à jour de Kubernetes pour les versions 1.7 et 1.6">
-<caption>Modifications à effectuer après mise à jour du maître vers Kubernetes 1.7</caption>
+<caption>Modifications à effectuer après la mise à jour du maître vers Kubernetes 1.7</caption>
 <thead>
 <tr>
 <th>Type</th>
@@ -247,6 +253,10 @@ Passez en revue les modifications que vous devrez peut-être apporter lors d'une
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>`apiVersion` dans le fichier Deployment</td>
+<td>Après avoir mis à jour le cluster à partir de Kubernetes 1.5, utilisez `apps/v1beta1` pour la zone `apiVersion` dans les nouveaux fichiers YAML `Deployment`. Continuez à utiliser `extensions/v1beta1` pour les autres ressources, par exemple `Ingress`.</td>
+</tr>
 <tr>
 <td>kubectl</td>
 <td>Après avoir mis à jour l'interface CLI `kubectl`, ces commandes `kubectl create` doivent utiliser plusieurs indicateurs à la place d'arguments séparés par des virgules :<ul>
@@ -257,18 +267,6 @@ Passez en revue les modifications que vous devrez peut-être apporter lors d'une
  <li>`secret`
  </ul>
 </br>  Par exemple, exécutez la commande `kubectl create role --resource-name <x> --resource-name <y>` et non pas `kubectl create role --resource-name <x>,<y>`.</td>
-</tr>
-<tr>
-<td>Planification d'affinité de pods</td>
-<td> L'annotation `scheduler.alpha.kubernetes.io/affinity` est obsolète.
-<ol>
-  <li>Pour chaque espace de nom à l'exception d'`ibm-system` et de `kube-system`, déterminez si vous devez mettre à jour la planification d'affinité des pods :</br>
-  ```
-  kubectl get pods -n <namespace> -o yaml | grep "scheduler.alpha.kubernetes.io/affinity" && echo "Action required"
-  ```
-  </br></li>
-  <li>Si `"Action required"` es renvoyé, utilisez la zone [_PodSpec_ ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _affinity_ au lieu de l'annotation `scheduler.alpha.kubernetes.io/affinity`.</li>
-</ol>
 </tr>
 <tr>
 <td>Règles réseau</td>
@@ -299,12 +297,64 @@ Passez en revue les modifications que vous devrez peut-être apporter lors d'une
   kubectl annotate ns <namespace> --overwrite "net.beta.kubernetes.io/network-policy-"
   ```
   </li></ol>
+</td></tr>
+<tr>
+<td>Planification d'affinité de pods</td>
+<td> L'annotation `scheduler.alpha.kubernetes.io/affinity` est obsolète.
+<ol>
+  <li>Pour chaque espace de nom à l'exception d'`ibm-system` et de `kube-system`, déterminez si vous devez mettre à jour la planification d'affinité des pods :</br>
+  ```
+  kubectl get pods -n <namespace> -o yaml | grep "scheduler.alpha.kubernetes.io/affinity" && echo "Action required"
+  ```
+  </br></li>
+  <li>Si `"Action required"` es renvoyé, utilisez la zone [_PodSpec_ ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _affinity_ au lieu de l'annotation `scheduler.alpha.kubernetes.io/affinity`.</li>
+</ol>
+</td></tr>
+<tr>
+<td>RBAC pour `ServiceAccount` `default`</td>
+<td><p>L'autorisation `ClusterRoleBinding` de l'administrateur pour `default` `ServiceAccount` dans l'espace de nom `default` est supprimée pour renforcer la sécurité du cluster. Les applications qui s'exécutent dans l'espace de nom `default` ne disposent plus des privilèges d'administrateur de cluster sur l'API Kubernetes et pourront obtenir des messages d'erreur d'autorisation de type RBAC DENY. Si vos applications dépendent de ces privilèges, [créez des ressources d'autorisation RBAC](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) pour ces applications.</p>
+  <p>Lorsque vous mettez à jour les règles RBAC de votre application, vous souhaiterez peut-être revenir temporairement à l'espace de nom `default` précédent. Copiez, sauvegardez et appliquez les fichiers suivants avec la commande `kubectl apply -f FILENAME`. <strong>Remarque</strong> : Revenez à 'default' pour vous laisser le temps de mettre à jour l'ensemble des ressources de votre application et non pas comme solution à long terme.</p>
+
+  <p><pre class="codeblock">
+  <code>
+  kind: ClusterRoleBinding
+  apiVersion: rbac.authorization.k8s.io/v1
+  metadata:
+   name: admin-binding-nonResourceURLSs-default
+  subjects:
+    - kind: ServiceAccount
+      name: default
+      namespace: default
+  roleRef:
+   kind: ClusterRole
+   name: admin-role-nonResourceURLSs
+   apiGroup: rbac.authorization.k8s.io
+  ---
+  kind: ClusterRoleBinding
+  apiVersion: rbac.authorization.k8s.io/v1
+  metadata:
+   name: admin-binding-resourceURLSs-default
+  subjects:
+    - kind: ServiceAccount
+      name: default
+      namespace: default
+  roleRef:
+   kind: ClusterRole
+   name: admin-role-resourceURLSs
+   apiGroup: rbac.authorization.k8s.io
+  </code>
+  </pre></p>
+  </td>
+</tr>
+<tr>
+<td>DNS de pod StatefulSet</td>
+<td>Les pods StatefulSet perdent leurs entrées DNS Kubernetes après la mise à jour du maître. Pour restaurer les entrées DNS, supprimez les pods StatefulSet. Kubernetes recrée les pods et restaure automatiquement les entrées DNS. Pour plus d'informations, voir [Problèmes Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/issues/48327).</td>
 </tr>
 <tr>
 <td>Annotation tolerations</td>
 <td>L'annotation `scheduler.alpha.kubernetes.io/tolerations` n'est plus disponible.
 <ol>
-  <li>Pour chaque espace de nom à l'exception d'`ibm-system` et de `kube-system`, déterminez si vous devez modifier des tolérances :</br>
+  <li>Pour chaque espace de nom à l'exception d'`ibm-system` et de `kube-system`, déterminez si vous devez modifier les annotations tolerations :</br>
   ```
   kubectl get pods -n <namespace> -o yaml | grep "scheduler.alpha.kubernetes.io/tolerations" && echo "Action required"
   ```
@@ -312,7 +362,7 @@ Passez en revue les modifications que vous devrez peut-être apporter lors d'une
 
   <li>Si `"Action required"` es renvoyé, utilisez la zone [_PodSpec_ ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _tolerations_ au lieu de l'annotation `scheduler.alpha.kubernetes.io/tolerations`
 </ol>
-</tr>
+</td></tr>
 <tr>
 <td>Annotation taints</td>
 <td>L'annotation `scheduler.alpha.kubernetes.io/taints` n'est plus disponible.
@@ -326,10 +376,16 @@ Passez en revue les modifications que vous devrez peut-être apporter lors d'une
   <li>Ajoutez une annotation taint à chaque noeud :</br>
   `kubectl taint node <node> <taint>`
   </li></ol>
-</tr>
-<tr>
-<td>DNS de pod StatefulSet</td>
-<td>Les pods StatefulSet perdent leurs entrées DNS Kubernetes après mise à jour du maître. Pour restaurer les entrées DNS, supprimez les pods StatefulSet. Kubernetes recrée les pods et restaure automatiquement les entrées DNS. Pour plus d'informations, voir [Problèmes Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/kubernetes/issues/48327).
-</tr>
+</td></tr>
 </tbody>
 </table>
+
+## Archive
+{: #k8s_version_archive}
+
+### Version 1.5 (dépréciée)
+{: #cs_v1-5}
+
+A partir du 5 mars 2018, les clusters {{site.data.keyword.containershort_notm}} qui exécutent [Kubernetes version 1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) sont dépréciés. A partir du 4 Avril 2018, les clusters de la version 1.5 ne peuvent pas recevoir des mises à jour ou du support sauf s'ils ont été mis à jour à la version suivante la plus récente ([Kubernetes 1.7](#cs_v17)).
+
+[Consultez l'impact potentiel](cs_versions.html#cs_versions) de chaque mise à jour de version Kubernetes, puis [mettez à jour vos clusters](cs_cluster_update.html#update) immédiatement. Notez que la mise à jour s'effectue d'une version à la version suivante la plus récente, par exemple de 1.5 à 1.7 ou de 1.8 à 1.9.

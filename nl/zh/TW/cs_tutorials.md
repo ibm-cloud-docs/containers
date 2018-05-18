@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-01-29"
+lastupdated: "2017-02-27"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2017-01-29"
 # 指導教學：建立叢集
 {: #cs_cluster_tutorial}
 
-在 {{site.data.keyword.Bluemix_short}} 中部署及管理自己的 Kubernetes 叢集。您可以在稱為工作者節點的獨立運算主機叢集中，自動化進行容器化應用程式的部署、作業、擴充及監視。
+在 {{site.data.keyword.containerlong}} 中部署及管理 Kubernetes 叢集。您可以在叢集中，自動進行容器化應用程式的部署、作業、擴充及監視。
 {:shortdesc}
 
 在本指導教學系列中，您可以看到虛構公關公司如何使用 Kubernetes 功能在 {{site.data.keyword.Bluemix_notm}} 中部署容器化應用程式。利用 {{site.data.keyword.toneanalyzerfull}}，公關公司會分析其新聞稿並收到回饋意見。
@@ -85,13 +85,13 @@ lastupdated: "2017-01-29"
     {: pre}
 
 5.  若要檢視本端版本的 Kubernetes 儀表板，以及將應用程式部署至叢集，請[安裝 Kubernetes CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。若要使用 Kubernetes CLI 來執行指令，請使用字首 `kubectl`。
-    1.  如需完整的功能相容性，請下載與您計劃使用之 Kubernetes 叢集版本相符的 Kubernetes CLI 版本。現行 {{site.data.keyword.containershort_notm}} 預設 Kubernetes 版本為 1.8.6。
+    1.  如需完整的功能相容性，請下載與您計劃使用之 Kubernetes 叢集版本相符的 Kubernetes CLI 版本。現行 {{site.data.keyword.containershort_notm}} 預設 Kubernetes 版本為 1.8.8。
 
-        OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
+        OS X：[https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl)
 
-        Linux：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
+        Linux：[https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl)
 
-        Windows：[https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
+        Windows：[https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe)
 
           **提示：**如果您使用的是 Windows，請在與 {{site.data.keyword.Bluemix_notm}} CLI 相同的目錄中安裝 Kubernetes CLI。當您稍後執行指令時，此設定可為您省去一些檔案路徑變更。
 
@@ -146,6 +146,7 @@ lastupdated: "2017-01-29"
 {: #cs_cluster_tutorial_lesson2}
 
 在 {{site.data.keyword.registryshort_notm}} 中設定專用映像檔儲存庫，以及將密碼新增至叢集，讓應用程式可以存取 {{site.data.keyword.toneanalyzershort}} 服務。
+{: shortdesc}
 
 1.  當出現提示時，使用 {{site.data.keyword.Bluemix_notm}} 認證登入 {{site.data.keyword.Bluemix_notm}} CLI。
 
@@ -175,15 +176,18 @@ lastupdated: "2017-01-29"
     當您的工作者節點完成佈建時，狀態會變更為 **Ready**，且您可以開始連結 {{site.data.keyword.Bluemix_notm}} 服務。
 
     ```
-    ID                                                 Public IP       Private IP       Machine Type   State    Status
-    kube-par02-pafe24f557f070463caf9e31ecf2d96625-w1   169.48.131.37   10.177.161.132   free           normal    Ready
+    ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.48.131.37   10.177.161.132   free           normal   Ready    mil01      1.8.8
     ```
     {: screen}
 
 ## 課程 3：設定您的叢集環境
 {: #cs_cluster_tutorial_lesson3}
 
-在 CLI 中，設定叢集的環境定義。每次登入容器 CLI 以使用叢集時，您都必須執行這些指令，以將叢集配置檔的路徑設為階段作業變數。Kubernetes CLI 會使用此變數來尋找與 {{site.data.keyword.Bluemix_notm}} 中的叢集連接所需的本端配置檔及憑證。
+在 CLI 中，設定叢集的環境定義。
+{: shortdesc}
+
+每次登入容器 CLI 以使用叢集時，您都必須執行這些指令，以將叢集配置檔的路徑設為階段作業變數。Kubernetes CLI 會使用此變數來尋找與 {{site.data.keyword.Bluemix_notm}} 中的叢集連接所需的本端配置檔及憑證。
 
 1.  取得指令來設定環境變數，並下載 Kubernetes 配置檔。
 
@@ -197,8 +201,8 @@ lastupdated: "2017-01-29"
     OS X 的範例：
 
     ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
-        ```
+    export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
+    ```
     {: screen}
 
 2.  複製並貼上終端機中顯示的指令，以設定 `KUBECONFIG` 環境變數。
@@ -208,29 +212,29 @@ lastupdated: "2017-01-29"
     OS X 的範例：
 
     ```
-        echo $KUBECONFIG
-        ```
+    echo $KUBECONFIG
+    ```
     {: pre}
 
     輸出：
 
     ```
-        /Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
-        ```
+    /Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
+    ```
     {: screen}
 
 4.  檢查 Kubernetes CLI 伺服器版本，驗證叢集已適當地執行 `kubectl` 指令。
 
     ```
-        kubectl version  --short
-        ```
+    kubectl version  --short
+    ```
     {: pre}
 
     輸出範例：
 
     ```
-    Client Version: v1.8.6
-    Server Version: v1.8.6
+    Client Version: v1.8.8
+    Server Version: v1.8.8
     ```
     {: screen}
 
@@ -244,29 +248,29 @@ lastupdated: "2017-01-29"
     **附註：**當您將 {{site.data.keyword.toneanalyzershort}} 服務新增至帳戶時，會顯示一則訊息指出該服務並非免費。如果您限制 API 呼叫，則此指導教學不會有 {{site.data.keyword.watson}} 服務所引起的費用。[請檢閱 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 服務的定價資訊 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/watson/developercloud/tone-analyzer.html#pricing-block)。
 
     ```
-        bx service create tone_analyzer standard <mytoneanalyzer>
-        ```
+    bx service create tone_analyzer standard <mytoneanalyzer>
+    ```
     {: pre}
 
 2.  將 {{site.data.keyword.toneanalyzershort}} 實例連結至叢集的 `default` Kubernetes 名稱空間。稍後，您可以建立自己的名稱空間來管理使用者對 Kubernetes 資源的存取權，但現在請使用 `default` 名稱空間。Kubernetes 名稱空間與您稍早所建立的登錄名稱空間不同。
 
     ```
-        bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
-        ```
+    bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
+    ```
     {: pre}
 
     輸出：
 
     ```
-        bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
-        Binding service instance to namespace...
-        OK
-        Namespace:	default
-        Secret name:	binding-mytoneanalyzer
-        ```
+    bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
+    Binding service instance to namespace...
+    OK
+    Namespace:	default
+    Secret name:	binding-mytoneanalyzer
+    ```
     {: screen}
 
-3.  驗證已在叢集名稱空間中建立 Kubernetes Secret。包括服務的機密資訊（例如，容器用來存取服務的使用者名稱、密碼及 URL）的 JSON 檔案會定義每個 {{site.data.keyword.Bluemix_notm}} 服務。若要安全地儲存此資訊，則會使用 Kubernetes Secret。在此範例中，密碼包括認證，可用來存取帳戶中佈建的 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 實例。
+3.  驗證已在叢集名稱空間中建立 Kubernetes 密碼。包括服務的機密資訊（例如，容器用來存取服務的使用者名稱、密碼及 URL）的 JSON 檔案會定義每個 {{site.data.keyword.Bluemix_notm}} 服務。為了安全地儲存此資訊，因此使用 Kubernetes 密碼。在此範例中，密碼包括可用來存取帳戶中所佈建 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 實例的認證。
 
     ```
     kubectl get secrets --namespace=default
@@ -284,9 +288,7 @@ lastupdated: "2017-01-29"
     {: screen}
 
 </br>
-做得好！您已配置叢集，且您的本端環境已備妥，可開始將應用程式部署到叢集。
-
-
+做得好！您已配置叢集，且您的本端環境已就緒，可開始將應用程式部署到叢集。
 
 ## 下一步為何？
 {: #next}

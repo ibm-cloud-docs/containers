@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-14"
 
 ---
 
@@ -19,17 +19,23 @@ lastupdated: "2018-01-11"
 # 이미지에서 컨테이너 빌드
 {: #images}
 
-Docker 이미지는 작성하는 모든 컨테이너의 기초가 됩니다. 이미지는 이미지를 빌드하는 지시사항이 포함된 파일인 Dockerfile에서 작성됩니다. Dockerfile은 앱, 해당 앱의 구성 및 그 종속 항목과 같이 개별적으로 저장되는 해당 지시사항의 빌드 아티팩트를 참조할 수 있습니다.
+Docker 이미지는 {{site.data.keyword.containerlong}}를 사용하여 작성하는 모든 컨테이너의 기초가 됩니다.
 {:shortdesc}
+
+이미지는 이미지를 빌드하는 지시사항이 포함된 파일인 Dockerfile에서 작성됩니다. Dockerfile은 앱, 해당 앱의 구성 및 그 종속 항목과 같이 개별적으로 저장되는 해당 지시사항의 빌드 아티팩트를 참조할 수 있습니다.
+
 
 
 ## 이미지 레지스트리 계획
 {: #planning}
 
-일반적으로 이미지는 공용으로 액세스 가능한 레지스트리(공용 레지스트리) 또는 소규모 사용자 그룹에 대한 제한된 액세스 권한으로 설정된 레지스트리(개인용 레지스트리)에 저장됩니다. 공용 레지스트리(예: Docker Hub)는 클러스터에서 첫 번째 컨테이너화된 앱을 작성하기 위해 Docker 및 Kubernetes를 시작하는 데 사용될 수 있습니다. 그러나 엔터프라이즈 애플리케이션인 경우에는 {{site.data.keyword.registryshort_notm}}에 제공된 레지스트리와 같은 개인용 레지스트리를 사용하여 권한 없는 사용자가 이미지를 사용하고 변경하지 못하도록 보호하십시오. 
+일반적으로 이미지는 공용으로 액세스 가능한 레지스트리(공용 레지스트리) 또는 소규모 사용자 그룹에 대한 제한된 액세스 권한으로 설정된 레지스트리(개인용 레지스트리)에 저장됩니다. 
+{:shortdesc}
+
+공용 레지스트리(예: Docker Hub)는 클러스터에서 첫 번째 컨테이너화된 앱을 작성하기 위해 Docker 및 Kubernetes를 시작하는 데 사용될 수 있습니다. 그러나 엔터프라이즈 애플리케이션인 경우에는 {{site.data.keyword.registryshort_notm}}에 제공된 레지스트리와 같은 개인용 레지스트리를 사용하여 권한 없는 사용자가 이미지를 사용하고 변경하지 못하도록 보호하십시오. 
 개인용 레지스트리에 액세스하기 위한 신임 정보를 클러스터 사용자가 사용할 수 있도록 보장하기 위해,
 개인용 레지스트리는 클러스터 관리자에 의해 설정되어야 합니다.
-{:shortdesc}
+
 
 {{site.data.keyword.containershort_notm}}에서 다중 레지스트리를 사용하여 클러스터에 앱을 배치할 수 있습니다.
 
@@ -59,7 +65,7 @@ Docker 이미지는 작성하는 모든 컨테이너의 기초가 됩니다. 이
 2. [클러스터를 작성](cs_clusters.html#clusters_cli)하십시오.
 3. [클러스터에 CLI를 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
 
-클러스터를 작성할 때 만료되지 않는 레지스트리 토큰과 시크릿이 [가장 근접한 지역 레지스트리와 글로벌 레지스트리](/docs/services/Registry/registry_overview.html#registry_regions) 둘 다에 대해 자동으로 작성됩니다. 글로벌 레지스트리는 개별 지역 레지스트리에 저장된 이미지에 대한 서로 다른 참조를 가지는 대신 배치 전반에서 참조할 수 있는 공용 IBM 제공 이미지를 저장합니다. 지역 레지스트리는 글로벌 레지스트리에 저장된 동일한 공용 이미지 외에도 사용자의 개인용 Docker 이미지를 안전하게 저장합니다. 토큰을 사용하여 이러한 공용(글로벌 레지스트리) 및 개인용(지역 레지스트리) 이미지로 작업할 수 있도록 {{site.data.keyword.registryshort_notm}}에서 사용자가 설정한 임의의 네임스페이스에 대한 읽기 전용 액세스 권한을 부여합니다. 
+클러스터를 작성할 때 만료되지 않는 레지스트리 토큰과 시크릿이 [가장 근접한 지역 레지스트리와 글로벌 레지스트리](/docs/services/Registry/registry_overview.html#registry_regions) 둘 다에 대해 자동으로 작성됩니다. 글로벌 레지스트리는 개별 지역 레지스트리에 저장된 이미지에 대한 서로 다른 참조를 가지는 대신 배치 전반에서 참조할 수 있는 공용 IBM 제공 이미지를 저장합니다. 지역 레지스트리는 글로벌 레지스트리에 저장된 동일한 공용 이미지 외에도 사용자의 개인용 Docker 이미지를 안전하게 저장합니다. 토큰을 사용하여 이러한 공용(글로벌 레지스트리) 및 개인용(지역 레지스트리) 이미지로 작업할 수 있도록 {{site.data.keyword.registryshort_notm}}에서 사용자가 설정한 임의의 네임스페이스에 대한 읽기 전용 액세스 권한을 부여합니다.
 
 개별 토큰은 컨테이너화된 앱을 배치할 때 Kubernetes 클러스터에 액세스할 수 있도록 Kubernetes `imagePullSecret`에 저장되어야 합니다. 클러스터가 작성되면 {{site.data.keyword.containershort_notm}}에서 Kubernetes 이미지 풀 시크릿의 글로벌(IBM 제공 공용 이미지) 및 지역 레지스트리에 대한 토큰을 자동으로 저장합니다. 이미지 풀 시크릿은 `기본` Kubernetes 네임스페이스, 해당 네임스페이스의 `ServiceAccount`에 있는 기본 시크릿 목록 및 `kube-system` 네임스페이스에 추가됩니다.
 
@@ -73,7 +79,7 @@ Docker 이미지는 작성하는 모든 컨테이너의 기초가 됩니다. 이
     {{site.data.keyword.registryshort_notm}}의 네임스페이스에서 개인용 이미지 사용:
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1beta1
     kind: Deployment
     metadata:
       name: ibmliberty-deployment
@@ -135,7 +141,7 @@ Docker 이미지는 작성하는 모든 컨테이너의 기초가 됩니다. 이
     ```
     {: pre}
 
-3.  사용하려는 토큰 ID를 기록해 놓으십시오.
+3.  사용하려는 토큰 ID를 기록해 두십시오.
 4.  토큰의 값을 검색하십시오. <em>&lt;token_id&gt;</em>를 이전 단계에서 검색한 토큰의 ID로 대체하십시오.
 
     ```
@@ -285,7 +291,7 @@ Docker Hub에 저장된 공용 이미지를 사용하여 추가 구성 없이 �
 2.  사용하려는 Docker Hub로부터 배치 및 공용 이미지를 정의하십시오. 다음 구성 파일은 Docker Hub에서 사용 가능한 공용 NGINX 이미지를 사용합니다.
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1beta1
     kind: Deployment
     metadata:
       name: nginx-deployment
@@ -323,7 +329,7 @@ Docker Hub에 저장된 공용 이미지를 사용하여 추가 구성 없이 �
 ## 다른 개인용 레지스트리에 저장된 이미지에 액세스
 {: #private_images}
 
-사용하려는 개인용 레지스트리가 이미 있는 경우, 레지스트리 신임 정보를 Kubernetes imagePullSecret에 저장하고 구성 파일에서 이 시크릿을 참조해야 합니다.
+사용할 개인용 레지스트리가 이미 있는 경우, 레지스트리 신임 정보를 Kubernetes imagePullSecret에 저장하고 구성 파일에서 이 시크릿을 참조해야 합니다.
 {:shortdesc}
 
 시작하기 전에:
@@ -434,4 +440,3 @@ imagePullSecret을 작성하려면 다음을 수행하십시오.
          kubectl apply -f mypod.yaml
         ```
         {: pre}
-

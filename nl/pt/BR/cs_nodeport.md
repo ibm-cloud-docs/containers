@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -19,20 +19,45 @@ lastupdated: "2018-01-24"
 # Configurando serviços NodePort
 {: #nodeport}
 
-Torne seu app disponível para acesso à Internet usando o endereço IP público de qualquer nó do trabalhador em um cluster e expondo uma porta do nó. Use essa opção para teste e acesso público de curto prazo.
+Disponibilize seu app conteinerizado para acesso à Internet usando o endereço IP público de qualquer nó do trabalhador em um cluster do Kubernetes e expondo uma porta de nó. Use essa opção para testar o {{site.data.keyword.containerlong}} e o acesso público de curto prazo.
 {:shortdesc}
 
-## Configurando o acesso público para um app usando o tipo de serviço NodePort
+## Planejando a rede externa com serviços NodePort
+{: #planning}
+
+Exponha uma porta pública em seu nó do trabalhador e use o endereço IP público do nó do trabalhador para acessar seu serviço no cluster publicamente por meio da Internet.
+{:shortdesc}
+
+Ao expor seu app criando um serviço do Kubernetes do tipo NodePort, um NodePort no intervalo de 30.000 a 32.767 e um endereço IP interno do cluster são designados ao serviço. O serviço NodePort serve como o ponto de entrada externo para solicitações recebidas para seu app. O NodePort designado é exposto publicamente nas configurações kubeproxy de cada nó do trabalhador no cluster. Cada nó do trabalhador inicia o atendimento no NodePort designado para solicitações recebidas para o
+serviço. Para acessar o serviço por meio da Internet, será possível usar o endereço IP público de qualquer nó do trabalhador que tenha sido designado durante a criação do cluster e o NodePort no formato `<ip_address>:<nodeport>`. Além do endereço IP público, um serviço NodePort está disponível durante o endereço IP privado de um nó do trabalhador.
+
+O diagrama a seguir mostra como a comunicação é direcionada da Internet para um app quando um serviço NodePort está configurado:
+
+<img src="images/cs_nodeport_planning.png" width="550" alt="Expor um app no {{site.data.keyword.containershort_notm}} usando NodePort" style="width:550px; border-style: none"/>
+
+1. Uma solicitação é enviada para seu app usando o endereço IP público do seu nó do trabalhador e o NodePort no nó do trabalhador.
+
+2. A solicitação é encaminhada automaticamente para o endereço IP e a porta do cluster interno do serviço NodePort. O endereço IP do cluster interno é acessível somente dentro do cluster.
+
+3. `kube-proxy` roteia a solicitação para o serviço NodePort do Kubernetes para o app.
+
+4. A solicitação é encaminhada para o endereço IP privado do pod no qual o app é implementado. Se múltiplas instâncias do app são implementadas no cluster, o serviço NodePort roteia as solicitações entre os pods de app.
+
+**Nota:** o endereço IP público do nó do trabalhador não é permanente. Quando um nó do trabalhador é removido ou recriado, um novo endereço IP público é designado ao
+nó do trabalhador. É possível usar o serviço do NodePort para testar o acesso público para o seu aplicativo ou quando o acesso público for necessário apenas para uma quantia pequena de tempo. Ao requerer um endereço IP público estável e mais disponibilidade para seu serviço, exponha seu app usando um [serviço LoadBalancer](cs_loadbalancer.html#planning) ou [Ingresso](cs_ingress.html#planning).
+
+<br />
+
+
+## Configurando o acesso público a um app usando o serviço NodePort
 {: #config}
 
 É possível expor seu app como um serviço NodePort do Kubernetes para clusters grátis ou padrão.
 {:shortdesc}
 
-**Nota:** o endereço IP público de um nó do trabalhador não é permanente. Se o nó do trabalhador precisar ser recriado, um novo endereço IP público será designado ao nó do trabalhador. Se você precisar de um endereço IP público estável e mais disponibilidade para seu serviço, exponha seu app usando um [serviço LoadBalancer](cs_loadbalancer.html) ou [Ingresso](cs_ingress.html).
-
 Se você ainda não tem um app pronto, é possível usar um app de exemplo do Kubernetes chamado [Guestbook ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes/kubernetes/blob/master/examples/guestbook/all-in-one/guestbook-all-in-one.yaml).
 
-1.  No arquivo de configuração para seu app, defina uma seção de [serviço ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/services-networking/service/).
+1.  No arquivo de configuração para seu app, defina uma seção de [serviço ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/services-networking/service/). **Nota**: para o exemplo Guestbook, uma seção de serviço de front-end já existe no arquivo de configuração. Para disponibilizar o app Guestbook externamente, inclua o tipo NodePort e uma NodePort no intervalo de 30000 a 32767 na seção de serviço de front-end.
 
     Exemplo:
 
@@ -77,28 +102,6 @@ Se você ainda não tem um app pronto, é possível usar um app de exemplo do Ku
      <td>Opcional: substitua <code><em>&lt;31514&gt;</em></code> por um NodePort no intervalo de 30000 a 32767. Não especifique um NodePort que já esteja em uso por outro serviço. Se nenhum NodePort for designado, um aleatório será designado para você.<br><br>Se você deseja especificar um NodePort e deseja ver quais NodePorts já estão em uso, é possível executar o comando a seguir: <pre class="pre"><code>kubectl get svc</code></pre>Os NodePorts em uso aparecem sob o campo **Portas**.</td>
      </tr>
      </tbody></table>
-
-
-    Para o exemplo Guestbook, uma seção de serviço de front-end já existe no arquivo de configuração. Para disponibilizar o app Guestbook externamente, inclua o tipo NodePort e uma NodePort no intervalo de 30000 a 32767 na seção de serviço de front-end.
-
-    ```
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: frontend
-      labels:
-        app: guestbook
-        tier: frontend
-    spec:
-      type: NodePort
-      ports:
-      - port: 80
-        nodePort: 31513
-      selector:
-        app: guestbook
-        tier: frontend
-    ```
-    {: codeblock}
 
 2.  Salve o arquivo de configuração atualizado.
 

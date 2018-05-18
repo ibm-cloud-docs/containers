@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-01"
+lastupdated: "2018-03-15"
 
 ---
 
@@ -18,7 +18,7 @@ lastupdated: "2018-02-01"
 # Einführung in Cluster in {{site.data.keyword.Bluemix_dedicated_notm}}
 {: #dedicated}
 
-Wenn Sie über ein {{site.data.keyword.Bluemix_dedicated}}-Konto verfügen, können Sie Cluster in einer dedizierten Cloudumgebung (`https://<my-dedicated-cloud-instance>.bluemix.net`) bereitstellen und eine Verbindung mit den vorausgewählten {{site.data.keyword.Bluemix}}-Services herstellen, die ebenfalls darin ausgeführt werden.
+Wenn Sie über ein {{site.data.keyword.Bluemix_dedicated}}-Konto für die Verwendung von {{site.data.keyword.containerlong}} verfügen, können Sie Kubernetes-Cluster in einer dedizierten Cloudumgebung (`https://<my-dedicated-cloud-instance>.bluemix.net`) bereitstellen und eine Verbindung mit den vorausgewählten {{site.data.keyword.Bluemix}}-Services herstellen, die ebenfalls darin ausgeführt werden.
 {:shortdesc}
 
 Wenn Sie nicht über ein {{site.data.keyword.Bluemix_dedicated_notm}}-Konto verfügen, können Sie [Ihre ersten Schritte mit {{site.data.keyword.containershort_notm}}](container_index.html#container_index) in einem {{site.data.keyword.Bluemix_notm}} Public-Konto ausführen.
@@ -26,14 +26,14 @@ Wenn Sie nicht über ein {{site.data.keyword.Bluemix_dedicated_notm}}-Konto verf
 ## Informationen zur Dedicated-Cloudumgebung
 {: #dedicated_environment}
 
-Bei einem {{site.data.keyword.Bluemix_dedicated_notm}}-Konto sind die verfügbaren physischen Ressourcen nur Ihrem Cluster zugeordnet und werden nicht mit Clustern von anderen {{site.data.keyword.IBM_notm}} Kunden geteilt. Sie können eine {{site.data.keyword.Bluemix_dedicated_notm}}-Umgebung einrichten, wenn Sie eine Isolation für Ihren Cluster sowie eine Isolation für die anderen, von Ihnen genutzten {{site.data.keyword.Bluemix_notm}}-Services benötigen. Wenn Sie nicht über ein Dedicated-Konto verfügen, können Sie Cluster mit dedizierter Hardware in {{site.data.keyword.Bluemix_notm}} Public-Konten erstellen.
+Bei einem {{site.data.keyword.Bluemix_dedicated_notm}}-Konto sind die verfügbaren physischen Ressourcen nur Ihrem Cluster zugeordnet und werden nicht mit Clustern von anderen {{site.data.keyword.IBM_notm}} Kunden geteilt. Sie können eine {{site.data.keyword.Bluemix_dedicated_notm}}-Umgebung einrichten, wenn Sie eine Isolation für Ihren Cluster sowie eine Isolation für die anderen, von Ihnen genutzten {{site.data.keyword.Bluemix_notm}}-Services benötigen. Wenn Sie nicht über ein Dedicated-Konto verfügen, können Sie [Cluster mit dedizierter Hardware in {{site.data.keyword.Bluemix_notm}}  Public-Konten erstellen](cs_clusters.html#clusters_ui).
 
 Mit {{site.data.keyword.Bluemix_dedicated_notm}} können Sie Cluster aus dem Katalog in der Dedicated-Konsole oder mithilfe der {{site.data.keyword.containershort_notm}}-CLI erstellen. Wenn Sie die Dedicated-Konsole verwenden, melden Sie sich mit Ihrer IBMid sowohl bei Ihren Dedicated- als auch den Public-Konten gleichzeitig an. Dank dieser dualen Anmeldung können Sie auf Ihre Public-Cluster über Ihre Dedicated-Konsole zugreifen. Wenn Sie die CLI verwenden, melden Sie sich mithilfe Ihres Dedicated-Endpunkts (`api.<my-dedicated-cloud-instance>.bluemix.net.`) an und legen den {{site.data.keyword.containershort_notm}}-API-Endpunkt der öffentlichen Region, die der Dedicated-Umgebung zugeordnet ist, als Ziel fest.
 
 Die wichtigsten Unterschiede zwischen {{site.data.keyword.Bluemix_notm}} Public- und Bluemix Dedicated-Konten sind die folgenden.
 
-*   {{site.data.keyword.IBM_notm}} besitzt und verwaltet das Konto von IBM Cloud Infrastructure (SoftLayer), unter dem die Workerknoten, VLANs und Teilnetze bereitgestellt werden. Die Bereitstellung wird nicht unter einem Konto durchgeführt, dessen Eigner Sie sind.
-*   Die Spezifikationen für diese VLANs und Teilnetze werden bestimmt, wenn die Dedicated-Umgebung aktiviert wird, und nicht, wenn der Cluster erstellt wird.
+*   In {{site.data.keyword.Bluemix_dedicated_notm}} besitzt und verwaltet {{site.data.keyword.IBM_notm}} das Konto von IBM Cloud Infrastructure (SoftLayer), unter dem die Workerknoten, VLANs und Teilnetze bereitgestellt werden. In {{site.data.keyword.Bluemix_notm}} Public sind Sie Eigner des Kontos von IBM Cloud Infrastructure (SoftLayer).
+*   In  {{site.data.keyword.Bluemix_dedicated_notm}} werden die Spezifikationen für die VLANs und Teilnetze im {{site.data.keyword.IBM_notm}}-verwalteten Konto von IBM Cloud Infrastructure (SoftLayer) festgelegt, wenn die Dedicated-Umgebung aktiviert ist. In {{site.data.keyword.Bluemix_notm}} Public werden Spezifikationen für VLANs und Teilnetze festgelegt, wenn der Cluster erstellt wird. 
 
 ### Unterschiede in der Clusterverwaltung zwischen den Cloudumgebungen
 {: #dedicated_env_differences}
@@ -43,7 +43,7 @@ Die wichtigsten Unterschiede zwischen {{site.data.keyword.Bluemix_notm}} Public-
 |Clustererstellung|Erstellen Sie einen kostenlosen Cluster oder geben Sie die folgenden Details für einen Standardcluster an:<ul><li>Clustertyp</li><li>Name</li><li>Standort</li><li>Maschinentyp</li><li>Anzahl von Workerknoten</li><li>Öffentliches VLAN</li><li>Privates VLAN</li><li>Hardware</li></ul>|Geben Sie die folgenden Details für einen Standardcluster an:<ul><li>Name</li><li>Kubernetes-Version</li><li>Maschinentyp</li><li>Anzahl von Workerknoten</li></ul><p>**Hinweis:** Die VLAN- und Hardware-Einstellungen werden beim Erstellen der {{site.data.keyword.Bluemix_notm}}-Umgebung vordefiniert.</p>|
 |Cluster-Hardware und Eigentumsrechte|In Standardclustern kann die Hardware mit anderen {{site.data.keyword.IBM_notm}} Kunden gemeinsam genutzt oder nur Ihnen zugeordnet werden. Die öffentlichen und privaten VLANs sind Ihr Eigentum und werden von Ihnen in Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) verwaltet.|In Clustern in {{site.data.keyword.Bluemix_dedicated_notm}} ist die Hardware immer dediziert. Die öffentlichen und privaten VLANs sind Eigentum von IBM und werden von IBM verwaltet. Die Position ist für die {{site.data.keyword.Bluemix_notm}}-Umgebung vordefiniert.|
 |Lastausgleichsfunktion und Ingress Networking|Bei der Bereitstellung von Standardclustern werden die folgenden Aktionen automatisch ausgeführt.<ul><li>Ein öffentliches portierbares Teilnetz und ein privates portierbares Teilnetz werden an Ihren Cluster gebunden und Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) zugeordnet.</li><li>Eine portierbare öffentliche IP-Adresse wird für eine hoch verfügbare Lastausgleichsfunktion für Anwendungen verwendet und eine eindeutige öffentliche Route wird im Format '&lt;clustername&gt;.containers.mybluemix.net' zugeordnet. Sie können diese Route verwenden, um mehrere Apps öffentlich zugänglich zu machen. Eine private portierbare IP-Adresse wird für eine private Lastausgleichsfunktion für Anwendungen verwendet.</li><li>Vier öffentliche und vier private portierbare IP-Adressen sind dem Cluster zugeordnet, mit denen Apps über Lastausgleichsservices öffentlich zugänglich gemacht werden können. Zusätzliche Teilnetze können über Ihr Konto von IBM Cloud Infrastructure (SoftLayer) angefordert werden.</li></ul>|Wenn Sie Ihr Dedicated-Konto erstellen, treffen Sie eine Entscheidung, wie Sie Ihre Cluster-Services zugänglich machen und darauf zugreifen wollen. Wenn Sie Ihre eigenen Unternehmens-IP-Bereiche (benutzerverwaltete IPs) verwenden möchten, müssen Sie diese beim [Einrichten einer {{site.data.keyword.Bluemix_dedicated_notm}}-Umgebung](/docs/dedicated/index.html#setupdedicated) angeben. <ul><li>Standardmäßig sind keine öffentlichen portierbaren Teilnetze an Cluster gebunden, die Sie in Ihrem Dedicated-Konto erstellen. Stattdessen haben Sie die Flexibilität, das Konnektivitätsmodell auszuwählen, das am besten zu Ihrem Unternehmen passt.</li><li>Nachdem Sie das Cluster erstellt haben, wählen Sie den Typ der Teilnetze aus, die sie an Ihren Cluster binden und für den Lastausgleich bzw. die Ingress-Konnektivität verwenden möchten.<ul><li>Für öffentliche oder private portierbare Teilnetze können Sie
-[Teilnetze zu Clustern hinzufügen](cs_subnets.html#subnets).</li><li>Für benutzerverwaltete IP-Adressen, die Sie IBM beim Dedicated-Onboarding bereitgestellt haben, können Sie [benutzerverwaltete Teilnetze zu Clustern hinzufügen](#dedicated_byoip_subnets).</li></ul></li><li>Nachdem Sie ein Teilnetz an Ihren Cluster gebunden haben, wird der Ingress-Controller erstellt. Eine öffentliche Ingress-Route wird nur dann erstellt, wenn Sie ein portierbares öffentliches Teilnetz verwenden.</li></ul>|
+[Teilnetze zu Clustern hinzufügen](cs_subnets.html#subnets).</li><li>Für benutzerverwaltete IP-Adressen, die Sie IBM beim Dedicated-Onboarding bereitgestellt haben, können Sie [benutzerverwaltete Teilnetze zu Clustern hinzufügen](#dedicated_byoip_subnets).</li></ul></li><li>Nachdem Sie ein Teilnetz an Ihren Cluster gebunden haben, wird die Ingress-Lastausgleichsfunktion für Anwendungen erstellt. Eine öffentliche Ingress-Route wird nur dann erstellt, wenn Sie ein portierbares öffentliches Teilnetz verwenden.</li></ul>|
 |NodePort Networking|Machen Sie auf Ihrem Workerknoten einen öffentlichen Port zugänglich und verwenden Sie die öffentliche IP-Adresse des Workerknotens, um öffentlich auf Ihren Service im Cluster zuzugreifen.|Alle öffentlichen IP-Adressen der Workerknoten sind durch eine Firewall blockiert. Bei {{site.data.keyword.Bluemix_notm}}-Services, die dem Cluster hinzugefügt wurden, kann der Knotenport jedoch über eine öffentliche IP-Adresse oder eine private IP-Adresse zugegriffen werden.|
 |Persistenter Speicher|Verwenden Sie für Datenträger eine [dynamische Bereitstellung](cs_storage.html#create) oder eine [statische Bereitstellung](cs_storage.html#existing).|Verwenden Sie für Datenträger eine [dynamische Bereitstellung](cs_storage.html#create). [Öffnen Sie ein Support-Ticket](/docs/get-support/howtogetsupport.html#getting-customer-support), um eine Sicherung für ihre Datenträger bzw. eine Wiederherstellung von Ihren Datenträgern anzufordern und andere Speicherfunktionen auszuführen.</li></ul>|
 |Image-Registry-URL in {{site.data.keyword.registryshort_notm}}|<ul><li>Vereinigte Staaten (Süden) und Vereinigte Staaten (Osten): <code>registry.ng bluemix.net</code></li><li>Vereinigtes Königreich (Süden): <code>registry.eu-gb.bluemix.net</code></li><li>EU-Central (Frankfurt): <code>registry.eu-de.bluemix.net</code></li><li>Australien (Sydney): <code>registry.au-syd.bluemix.net</code></li></ul>|<ul><li>Verwenden Sie für neue Namensbereiche dieselben regionsbasierten Registrys, die für {{site.data.keyword.Bluemix_notm}} Public definiert sind.</li><li>Verwenden Sie für Namensbereiche, die für einzelne und skalierbare Container in {{site.data.keyword.Bluemix_dedicated_notm}} eingerichtet wurden, <code>registry.&lt;dedizierte_domäne&gt;</code>.</li></ul>|
@@ -56,8 +56,11 @@ Die wichtigsten Unterschiede zwischen {{site.data.keyword.Bluemix_notm}} Public-
 ### Servicearchitektur
 {: #dedicated_ov_architecture}
 
-Jeder Workerknoten ist mit einer von {{site.data.keyword.IBM_notm}} verwalteten Docker Engine, getrennten Berechnungsressourcen, Netzbetrieb und einem Datenträgerservice eingerichtet. Integrierte Sicherheitsfeatures stellen die Isolation, die Funktionalität für die Verwaltung von Ressourcen und die Einhaltung der Sicherheitsbestimmungen für die Workerknoten sicher. Der Workerknoten kommuniziert über sichere TLS-Zertifikate und eine openVPN-Verbindung mit dem Master.
+Jeder Workerknoten ist mit einer von {{site.data.keyword.IBM_notm}} verwalteten Docker Engine, getrennten Rechenressourcen, Netzbetrieb und einem Datenträgerservice eingerichtet.
 {:shortdesc}
+
+Integrierte Sicherheitsfeatures stellen die Isolation, die Funktionalität für die Verwaltung von Ressourcen und die Einhaltung der Sicherheitsbestimmungen für die Workerknoten sicher. Der Workerknoten kommuniziert über sichere TLS-Zertifikate und eine openVPN-Verbindung mit dem Master.
+
 
 *Kubernetes-Architektur und Netzbetrieb in {{site.data.keyword.Bluemix_dedicated_notm}}*
 
@@ -69,7 +72,7 @@ Jeder Workerknoten ist mit einer von {{site.data.keyword.IBM_notm}} verwalteten 
 ## {{site.data.keyword.containershort_notm}} unter Dedicated einrichten
 {: #dedicated_setup}
 
-Jede {{site.data.keyword.Bluemix_dedicated_notm}}-Umgebung verfügt über ein öffentliches, zum Client gehörendes Unternehmenskonto in {{site.data.keyword.Bluemix_notm}}. Damit Benutzer in der Dedicated-Umgebung Cluster erstellen können, muss der Administrator die Benutzer zu diesem öffentlichen Unternehmenskonto für die Dedicated-Umgebung hinzufügen.
+Jede {{site.data.keyword.Bluemix_dedicated_notm}}-Umgebung verfügt über ein öffentliches, zum Client gehörendes Unternehmenskonto in {{site.data.keyword.Bluemix_notm}}. Damit Benutzer in der Dedicated-Umgebung Cluster erstellen können, muss der Administrator die Benutzer zu einem öffentlichen Unternehmenskonto hinzufügen.{:shortdesc}
 
 Vorbemerkungen:
   * [{{site.data.keyword.Bluemix_dedicated_notm}}-Umgebung einrichten](/docs/dedicated/index.html#setupdedicated).
@@ -202,7 +205,7 @@ Konzipieren Sie die Konfiguration Ihres {{site.data.keyword.Bluemix_dedicated_no
 2. Aktivieren Sie das Kontrollkästchen **Also log in to {{site.data.keyword.Bluemix_notm}} Public** und klicken Sie auf **Log in**.
 3. Folgen Sie den Eingabeaufforderungen, um sich mit Ihrer IBMid anzumelden. Wenn Sie sich zum ersten Mal bei Ihrem Dedicated-Konto anmelden, befolgen Sie die Eingabeaufforderungen für die Anmeldung bei {{site.data.keyword.Bluemix_dedicated_notm}}.
 4.  Wählen Sie im Katalog **Containers** aus und klicken Sie auf **Kubernetes cluster**.
-5.  Geben Sie bei **Cluster Name** einen Namen für den Cluster ein.
+5.  Geben Sie bei **Cluster Name** einen Namen für den Cluster ein. Der Name muss mit einem Buchstaben beginnen, darf Buchstaben, Ziffern und den Bindestrich enthalten und darf maximal 35 Zeichen lang sein. Beachten Sie, dass die {{site.data.keyword.IBM_notm}}-zugeordnete Ingress-Unterdomäne aus dem Clusternamen abgeleitet wird. Der Clustername und die Ingress-Unterdomäne bilden zusammen den vollständig qualifizierten Domänennamen, der innerhalb einer Region eindeutig sein muss und maximal 63 Zeichen lang sein darf. Um diese Anforderungen zu erfüllen, kann der Clustername abgeschnitten werden oder der Unterdomäne können zufällige Zeichenwerte zugeordnet werden.
 6.  Wählen Sie in **Machine type** einen Maschinentyp aus. Der Maschinentyp definiert die Menge an virtueller CPU und Hauptspeicher, die in jedem Workerknoten eingerichtet wird. Sowohl die virtuelle CPU als auch der Hauptspeicher sind für alle Container verfügbar, die Sie in Ihren Knoten bereitstellen.
     -   Der Maschinentyp 'Micro' gibt die kleinste Option an.
     -   Bei einem ausgeglichenen Maschinentyp ist jeder CPU dieselbe Speichermenge zugeordnet. Dadurch wird die Leistung optimiert.
@@ -254,7 +257,7 @@ Nutzungsstunden abgerechnet.
     </tr>
     <tr>
     <td><code>--name <em>&lt;name&gt;</em></code></td>
-    <td>Ersetzen Sie <em>&lt;name&gt;</em> durch den Namen Ihres Clusters.</td>
+    <td>Ersetzen Sie <em>&lt;name&gt;</em> durch den Namen Ihres Clusters. Der Name muss mit einem Buchstaben beginnen, darf Buchstaben, Ziffern und den Bindestrich enthalten und darf maximal 35 Zeichen lang sein. Beachten Sie, dass die {{site.data.keyword.IBM_notm}}-zugeordnete Ingress-Unterdomäne aus dem Clusternamen abgeleitet wird. Der Clustername und die Ingress-Unterdomäne bilden zusammen den vollständig qualifizierten Domänennamen, der innerhalb einer Region eindeutig sein muss und maximal 63 Zeichen lang sein darf. Um diese Anforderungen zu erfüllen, kann der Clustername abgeschnitten werden oder der Unterdomäne können zufällige Zeichenwerte zugeordnet werden.</td>
     </tr>
     <tr>
     <td><code>--workers <em>&lt;anzahl&gt;</em></code></td>
@@ -275,8 +278,8 @@ Konto eingerichtet und bereitgestellt wird.
     Nach Abschluss der Bereitstellung Ihres Clusters wird der Status des Clusters in **deployed** (Bereitgestellt) geändert.
 
     ```
-    Name         ID                                   State      Created          Workers
-    mein_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1
+    Name         ID                                   State      Created          Workers   Location   Version
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         dal10      1.8.8
     ```
     {: screen}
 
@@ -290,8 +293,8 @@ Konto eingerichtet und bereitgestellt wird.
     Wenn die Workerknoten bereit sind, wechselt der Zustand (State) zu **Normal**, während für den Status die Angabe **Bereit** angezeigt wird. Wenn der Knotenstatus **Bereit** lautet, können Sie auf den Cluster zugreifen.
 
     ```
-    ID                                                  Public IP        Private IP     Machine Type   State      Status  
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1   169.47.223.113   10.171.42.93   free           normal    Ready
+    ID                                                  Public IP        Private IP     Machine Type   State      Status   Location   Version
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.47.223.113   10.171.42.93   free           normal     Ready    dal10      1.8.8
     ```
     {: screen}
 
@@ -402,7 +405,9 @@ Vorab müssen Sie das Routing des Netzverkehrs zwischen Ihrem Unternehmensnetz u
     ```
     {: screen}
 
-4. Wählen Sie eine der folgenden Optionen aus, um lokale und interne Kontokonnektivität zu konfigurieren:
+4. Optional: [Routing zwischen Teilnetzen auf demselben VLAN aktivieren](cs_subnets.html#vlan-spanning).
+
+5. Wählen Sie eine der folgenden Optionen aus, um lokale und interne Kontokonnektivität zu konfigurieren:
   - Wenn Sie einen privaten IP-Adressbereich 10.x.x.x für das Teilnetz verwendet haben, nutzen Sie gültige IPs aus diesem Bereich, um lokale und interne Kontokonnektivität mit Ingress und einer Lastausgleichsfunktion zu konfigurieren. Weitere Informationen finden Sie unter [Zugriff auf eine App konfigurieren](cs_network_planning.html#planning).
   - Wenn Sie keinen privaten IP-Adressbereich 10.x.x.x für das Teilnetz verwendet haben, nutzen Sie gültige IPs aus diesem Bereich, um lokale Konnektivität mit Ingress und einer Lastausgleichsfunktion zu konfigurieren. Weitere Informationen finden Sie unter [Zugriff auf eine App konfigurieren](cs_network_planning.html#planning). Sie müssen allerdings ein portierbares, privates Teilnetz von IBM Cloud Infrastructure (SoftLayer) verwenden, um interne Kontokonnektivität zwischen Ihrem Cluster und anderen Cloud Foundry-basierten Services zu konfigurieren. Sie können ein portierbares privates Teilnetz mithilfe des Befehls [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add) erstellen. In diesem Szenario verfügt Ihr Cluster sowohl über ein benutzerverwaltetes Teilnetz für lokale Konnektivität als auch über ein portierbares privates Teilnetz von IBM Cloud Infrastructure (SoftLayer) für interne Kontokonnektivität.
 
@@ -414,6 +419,7 @@ Sehen Sie sich die folgenden Optionen für andere Clusterkonfigurationen an:
   * [Kubernetes-Master aktualisieren](cs_cluster_update.html#master)
   * [Workerknoten aktualisieren](cs_cluster_update.html#worker_node)
   * [Clusterprotokollierung konfigurieren](cs_health.html#logging)
+      * **Hinweis**: Die Aktivierung des Protokolls wird vom Dedicated-Endpunkt nicht unterstützt. Melden Sie sich beim öffentlichen {{site.data.keyword.cloud_notm}}-Endpunkt an und geben Sie als Ziel Ihre öffentliche Organisation und den Bereich an, um die Protokollweiterleitung zu ermöglichen. 
   * [Clusterüberwachung konfigurieren](cs_health.html#monitoring)
       * **Hinweis**: In jedem {{site.data.keyword.Bluemix_dedicated_notm}}-Konto gibt es einen `ibm-monitoring`-Cluster. Dieser Cluster überwacht kontinuierlich den Status von {{site.data.keyword.containerlong_notm}} in der Dedicated-Umgebung, wobei er die Stabilität und Konnektivität der Umgebung prüft. Entfernen Sie diesen Cluster nicht aus der Umgebung.
   * [Kubernetes-Clusterressourcen grafisch darstellen](cs_integrations.html#weavescope)
@@ -443,7 +449,7 @@ Wenn Sie öffentliche IP-Adressen für die Lastausgleichsfunktion verwenden möc
 #### Öffentlichen Zugriff auf eine App mithilfe von Ingress konfigurieren
 {: #dedicated_apps_public_ingress}
 
-Wenn Sie öffentliche IP-Adressen für die Lastausgleichsfunktion für Anwendungen verwenden möchten, stellen Sie sicher, dass eine Unternehmensfirewall-Whitelist für IBM bereitgestellt wurde, oder [öffnen Sie ein Support-Ticket](/docs/get-support/howtogetsupport.html#getting-customer-support), um die Firewall-Whitelist zu konfigurieren. Befolgen Sie dann die Schritte unter [Zugriff auf eine App mithilfe von Ingress konfigurieren](cs_ingress.html#config).
+Wenn Sie öffentliche IP-Adressen für die Lastausgleichsfunktion für Anwendungen verwenden möchten, stellen Sie sicher, dass eine Unternehmensfirewall-Whitelist für IBM bereitgestellt wurde, oder [öffnen Sie ein Support-Ticket](/docs/get-support/howtogetsupport.html#getting-customer-support), um die Firewall-Whitelist zu konfigurieren. Befolgen Sie dann die Schritte unter [Zugriff auf eine App mithilfe von Ingress konfigurieren](cs_ingress.html#configure_alb).
 
 ### Persistenten Speicher erstellen
 {: #dedicated_apps_volume_claim}
