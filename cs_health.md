@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-18"
+lastupdated: "2018-05-19"
 
 ---
 
@@ -867,7 +867,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
    </tbody>
    </table>
 
-   <table summary="Understanding the individual components of checks">
+   <table summary="Understanding individual components of checks">
    <caption>Understanding the individual components of checks</caption>
    <thead>
    <th colspan=2><img src="images/idea.png" alt="Idea icon"/>Understanding the individual components of checks </th>
