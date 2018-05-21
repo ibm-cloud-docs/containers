@@ -22,6 +22,8 @@ lastupdated: "2018-05-21"
 Design your Kubernetes cluster setup for maximum container availability and capacity with {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
+
+
 ## Cluster configuration planning
 {: #planning_clusters}
 
@@ -61,6 +63,8 @@ Review these potential cluster setups that are ordered with increasing degrees o
 </dl>
 
 <br />
+
+
 
 
 
