@@ -339,9 +339,9 @@ To create a cluster:
         bx cs locations
         ```
         {: pre}
-
+        
         Your CLI output matches the [locations for the {{site.data.keyword.containerlong}} region](cs_regions.html#locations).
-
+        
     2.  **Standard clusters**: Choose a location and review the machine types available in that location. The machine type specifies the virtual or physical compute hosts that are available to each worker node.
 
         -  View the **Server Type** field to choose virtual or physical (bare metal) machines.
