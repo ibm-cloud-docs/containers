@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-18"
+lastupdated: "2018-05-21"
 
 ---
 
@@ -66,7 +66,7 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch.
 
 As updates become available, you are notified when you view information about the worker nodes, such as with the `bx cs workers <cluster>` or `bx cs worker-get <cluster> <worker>` commands.
 -  **Major and minor updates**: First, [update your master node](cs_cluster_update.html#master) and then [update the worker nodes](cs_cluster_update.html#worker_node). 
-   - By default, you cannot update a Kubernetes master more than two minor versions ahead. For example, if your current master is version 1.5 and you want to update to 1.8, you must update to 1.7 first. You can force the update to continue, but updating more than two minor versions might cause unexpected results.
+   - By default, you cannot update a Kubernetes master three or more minor versions ahead. For example, if your current master is version 1.5 and you want to update to 1.8, you must update to 1.7 first. You can force the update to continue, but updating more than two minor versions might cause unexpected results.
    - If you use a `kubectl` CLI version that does match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and [CLI versions](cs_cli_install.html#kubectl) up-to-date.
 -  **Patch updates**: Check monthly to see whether an update is available, and use the `bx cs worker-update` [command](cs_cli_reference.html#cs_worker_update) or the `bx cs worker-reload` [command](cs_cli_reference.html#cs_worker_reload) to apply these security and operating system patches. For more information, see [Version changelog](cs_versions_changelog.html).
 
@@ -76,7 +76,6 @@ This information summarizes updates that are likely to have impact on deployed a
 -  Version 1.10 [migration actions](#cs_v110).
 -  Version 1.9 [migration actions](#cs_v19).
 -  Version 1.8 [migration actions](#cs_v18).
--  Version 1.7 [migration actions](#cs_v17).
 -  [Archive](#k8s_version_archive) of deprecated or unsupported versions.
 
 <br/>
@@ -340,6 +339,8 @@ If your apps rely on the previous insecure behavior, modify them accordingly.</t
 <br />
 
 
+
+
 ## Version 1.7
 {: #cs_v17}
 
@@ -530,8 +531,10 @@ If your apps rely on the previous insecure behavior, modify them accordingly.</t
 
 
 
+
 ## Archive
 {: #k8s_version_archive}
+
 
 
 ### Version 1.5 (Unsupported)

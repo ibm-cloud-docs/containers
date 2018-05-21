@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-18"
+lastupdated: "2018-05-21"
 
 ---
 
@@ -80,7 +80,7 @@ Review the following potential app setups that are ordered with increasing degre
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-18"
+lastupdated: "2018-05-21"
 
 ---
 
@@ -232,7 +232,7 @@ You can use the default port or set your own port to launch the Kubernetes dashb
 **Launching the Kubernetes dashboard from the CLI**
 {: #db_cli}
 
-1.  For clusters with a Kubernetes master version of 1.7.16 or earlier:
+*  For clusters with a Kubernetes master version of 1.7.16 or earlier:
 
     1.  Set the proxy with the default port number.
 
@@ -255,7 +255,7 @@ You can use the default port or set your own port to launch the Kubernetes dashb
         ```
         {: codeblock}
 
-2.  For clusters with a Kubernetes master version of 1.8.2 or later:
+*  For clusters with a Kubernetes master version of 1.8.2 or later:
 
     1.  Get your credentials for Kubernetes.
 
