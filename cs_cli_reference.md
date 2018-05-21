@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-18"
+lastupdated: "2018-05-21"
 
 ---
 
@@ -771,22 +771,29 @@ trusted: <em>true</em>
 
   
 
-  Example for a standard cluster:
-  {: #example_cluster_create}
-
-  ```
-  bx cs cluster-create --location dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type u2c.2x4 --name my_cluster --hardware shared --workers 2
-  ```
-  {: pre}
-
-  Example for a free cluster:
+  **Create a free cluster**: Specify the cluster name only; everything else is set to a default value. A free cluster is automatically deleted after 21 days. You can have one free cluster at a time. To take advantage of the full capabilities of Kubernetes, create a standard cluster.
 
   ```
   bx cs cluster-create --name my_cluster
   ```
   {: pre}
 
-  Example for an {{site.data.keyword.Bluemix_dedicated_notm}} environment:
+  **Create your first standard cluster**: The first standard cluster that is created in a location also creates a private VLAN. Therefore, do not include the `--public-vlan` flag.
+  {: #example_cluster_create}
+
+  ```
+  bx cs cluster-create --location dal10 --private-vlan my_private_VLAN_ID --machine-type u2c.2x4 --name my_cluster --hardware shared --workers 2
+  ```
+  {: pre}
+
+  **Create subsequent standard clusters**: If you already created a standard cluster in this location or created a public VLAN in IBM Cloud infrastructure (SoftLayer) before, specify that public VLAN with the `--public-vlan` flag. To find out if you already have a public VLAN for a specific location or to find the name of an existing public VLAN, run `bx cs vlans <location>`.
+
+  ```
+  bx cs cluster-create --location dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type u2c.2x4 --name my_cluster --hardware shared --workers 2
+  ```
+  {: pre}
+
+  **Create a cluster in an {{site.data.keyword.Bluemix_dedicated_notm}} environment**:
 
   ```
   bx cs cluster-create --machine-type machine-type --workers number --name cluster_name
