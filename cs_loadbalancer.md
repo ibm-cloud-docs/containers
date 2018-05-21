@@ -197,7 +197,7 @@ To create a load balancer service:
         ```
         {: codeblock}
 
-5. If you choose to [preserve the source IP address of the incoming package![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) and have edge nodes, private-only worker nodes, or multiple VLANs, ensure that app pods are included in load balancing by [adding node affinity and tolerations to app pods](#node_affinity_tolerations).
+5. If you choose to [enable source IP preservation for a load balancer service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), ensure that app pods are scheduled onto the edge worker nodes by [adding edge node affinity to app pods](cs_loadbalancer.html#edge_nodes). App pods must be scheduled onto edge nodes to receive incoming requests.
 
 <br />
 
@@ -208,10 +208,10 @@ To create a load balancer service:
 Whenever you deploy app pods, load balancer service pods are also deployed to the worker nodes that the app pods are deployed to. However, some situations exist where the load balancer pods and app pods might not be scheduled onto the same worker node:
 {: shortdesc}
 
-* You have tainted edge nodes that only load balancer service pods can deploy to. App pods are not permitted to deploy to those nodes.
+* You have edge nodes that are tainted so that only load balancer service pods can deploy to them. App pods are not permitted to deploy to those nodes.
 * Your cluster is connected to multiple public or private VLANs, and your app pods might deploy to worker nodes that are connected only to one VLAN. Load balancer service pods might not deploy to those worker nodes because the load balancer IP address is connected to a different VLAN than the worker nodes.
 
-When a client request to your app is sent to your cluster, the request is routed to a pod for the Kubernetes load balancer service that exposes the app. If an app pod does not exist on the same worker node as the load balancer service pod, the load balancer forwards the request to a different worker node where an app pod is deployed. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running.
+When a client request to your app is sent to your cluster, the request is routed to a pod for the Kubernetes load balancer service that exposes the app. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running.
 
 To preserve the original source IP address of the client request, you can [enable source IP ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) for load balancer services. Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies. After you enable the source IP, load balancer service pods must forward requests to app pods that are deployed to the same worker node only. To force your app to deploy to specific worker nodes that load balancer service pods can also deploy to, you must add affinity rules and tolerations to your app deployment.
 
@@ -249,7 +249,7 @@ spec:
 ```
 {: codeblock}
 
-Note that both the **affinity** and **tolerations** sections have `dedicated` as the `key` and `edge` as the `value`.
+Both the **affinity** and **tolerations** sections have `dedicated` as the `key` and `edge` as the `value`.
 
 ### Adding affinity rules for multiple public or private VLANs
 {: #edge_nodes_multiple_vlans}
@@ -288,7 +288,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
 
     2. In the output under **Subnet VLANs**, look for the subnet CIDR that matches the load balancer IP address that you retrieved earlier and note the VLAN ID.
 
-        For example, if the load balancer service IP address is `169.36.5.xxx`, the matching subnet in the above example output is `169.36.5.xxx/29`. The VLAN ID that the subnet is connected to is `2234945`.
+        For example, if the load balancer service IP address is `169.36.5.xxx`, the matching subnet in the example output of the previous step is `169.36.5.xxx/29`. The VLAN ID that the subnet is connected to is `2234945`.
 
 3. [Add an affinity rule ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) to the app deployment for the VLAN ID that you noted in the previous step.
 
@@ -315,7 +315,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
     ```
     {: codeblock}
 
-    In the above yaml, the **affinity** section has `publicVLAN` as the `key` and `"2234945"` as the `value`.
+    In the exmaple YAML, the **affinity** section has `publicVLAN` as the `key` and `"2234945"` as the `value`.
 
 4. Apply the updated deployment configuration file.
     ```
@@ -340,7 +340,7 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
 
     2. In the output, identify a pod for your app. Note the **NODE** ID of the worker node that the pod is on.
 
-        In the above example output, the app pod `cf-py-d7b7d94db-vp8pq` is on worker node `10.176.48.78`.
+        In the example output of the previous step, the app pod `cf-py-d7b7d94db-vp8pq` is on worker node `10.176.48.78`.
 
     3. List the details for the worker node.
 

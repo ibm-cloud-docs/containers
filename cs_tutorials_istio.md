@@ -44,9 +44,9 @@ This tutorial is intended for software developers and network administrators who
 
 ## Prerequisites
 
--  [Install the CLIs](cs_cli_install.html#cs_cli_install_steps). Istio requires the Kubernetes version 1.9 or higher. Make sure to install the `kubectl` CLI version that matches the Kubernetes version of your cluster. 
--  [Create a cluster](cs_clusters.html#clusters_cli) with a Kubernetes version of 1.9 or higher. 
--  [Target the CLI to your cluster](cs_cli_install.html#cs_cli_configure). 
+-  [Install the CLIs](cs_cli_install.html#cs_cli_install_steps). Istio requires the Kubernetes version 1.9 or higher. Make sure to install the `kubectl` CLI version that matches the Kubernetes version of your cluster.
+-  [Create a cluster](cs_clusters.html#clusters_cli) with a Kubernetes version of 1.9 or higher.
+-  [Target the CLI to your cluster](cs_cli_install.html#cs_cli_configure).
 
 ## Lesson 1: Download and install Istio
 {: #istio_tutorial1}
@@ -117,7 +117,7 @@ Download and install Istio in your cluster.
    {: screen}
 
 
-Congratulations! You successfully installed Istio into your cluster. Next, deploy the BookInfo sample app into your cluster.
+Good work! You successfully installed Istio into your cluster. Next, deploy the BookInfo sample app into your cluster.
 
 
 ## Lesson 2: Deploy the BookInfo app
@@ -179,7 +179,7 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
        ```
        {: pre}
 
-       The output looks like the following:
+       Example output:
 
        ```
        NAME      HOSTS     ADDRESS          PORTS     AGE
@@ -215,16 +215,16 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
    ```
    {: pre}
 
-5. In a browser, navigate to `http://$GATEWAY_URL/productpage` to view the BookInfo web page.
+5. In a browser, go to `http://$GATEWAY_URL/productpage` to view the BookInfo web page.
 
 6. Try refreshing the page several times. Different versions of the reviews section round robin through red stars, black stars, and no stars.
 
-Congratulations! You successfully deployed the BookInfo sample app with Istio Envoy sidecars. Next, you can clean up your resources or continue on with more tutorials to explore Istio functionality further.
+Good work! You successfully deployed the BookInfo sample app with Istio Envoy sidecars. Next, you can clean up your resources or continue on with more tutorials to explore Istio further.
 
 ## Cleanup
 {: #istio_tutorial_cleanup}
 
-If you're finished working with Istio and don't want to [continue exploring the functionality](#istio_tutorial_whatsnext), then you can clean up the Istio resources in your cluster.
+If you're finished working with Istio and don't want to [continue exploring](#istio_tutorial_whatsnext), then you can clean up the Istio resources in your cluster.
 {:shortdesc}
 
 1. Delete all BookInfo services, pods, and deployments in the cluster.
@@ -244,7 +244,7 @@ If you're finished working with Istio and don't want to [continue exploring the 
 ## What's next?
 {: #istio_tutorial_whatsnext}
 
-To explore Istio functionality further, you can find more guides in the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/).
+To explore Istio further, you can find more guides in the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/).
 
 * [Intelligent Routing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/guides/intelligent-routing.html): This example shows how to route traffic to a specific version of BookInfo's reviews and ratings microservices by using Istio's traffic management capabilities.
 
