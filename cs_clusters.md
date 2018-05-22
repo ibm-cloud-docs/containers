@@ -638,6 +638,9 @@ Free and standard clusters that are created with a Pay-As-You-Go account must be
   - No backups are created of your cluster or your data in your persistent storage. Deleting a cluster or persistent storage is permanent and cannot be undone.
   - When you remove a cluster, you also remove any subnets that were automatically provisioned when you created the cluster and that you created by using the `bx cs cluster-subnet-create` command. However, if you manually added existing subnets to your cluster by using the `bx cs cluster-subnet-add command`, these subnets are not removed from your IBM Cloud infrastructure (SoftLayer) account and you can reuse them in other clusters.
 
+Before you begin, note down your cluster ID. You might need the cluster ID to investigate and remove related IBM Cloud infrastructure (SoftLayer) resources that are not automatically deleted with your cluster, such as persistent storage.
+{: tip}
+
 To remove a cluster:
 
 -   From the {{site.data.keyword.Bluemix_notm}} GUI
