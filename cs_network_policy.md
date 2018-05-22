@@ -89,7 +89,7 @@ Review the following default Calico network policies that are automatically appl
   </tbody>
 </table>
 
-In Kubernetes version 1.10 and newer clusters, a default Kubernetes policy that limits access to the Kubernetes Dashboard is also created.
+In Kubernetes version 1.10 and newer clusters, a default Kubernetes policy that limits access to the Kubernetes Dashboard is also created. Kubernetes policies don't apply to the host endpoint, but to the `kube-dashboard` pod instead. This policy applies to clusters connected only to a private VLAN and clusters connected to a public and private VLAN.
 
 <table>
 <caption>Default Kubernetes policies for each cluster</caption>
