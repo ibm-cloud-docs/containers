@@ -69,7 +69,7 @@ The most significant differences between {{site.data.keyword.Bluemix_notm}} publ
  <tr>
  <td>NodePort networking</td>
  <td>Expose a public port on your worker node and use the public IP address of the worker node to publicly access your service in the cluster.</td>
- <td>All public IP addresses of the workers nodes are blocked by a firewall. However, for {{site.data.keyword.Bluemix_notm}} services that are added to the cluster, the node port can be accessed through a public IP address or a private IP address.</td>
+ <td>All public IP addresses of the workers nodes are blocked by a firewall. However, for {{site.data.keyword.Bluemix_notm}} services that are added to the cluster, the NodePort can be accessed through a public IP address or a private IP address.</td>
  </tr>
  <tr>
  <td>Persistent storage</td>

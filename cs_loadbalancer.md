@@ -40,7 +40,7 @@ When you create a Kubernetes LoadBalancer service in a cluster on a public VLAN,
 - If your cluster is available on a private VLAN only, one of the four available portable private IP addresses is used.
 - You can request a portable public or private IP address for a LoadBalancer service by adding an annotation to the configuration file: `service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>`.
 
-The portable public IP address that is assigned to your LoadBalancer service is permanent and does not change when a worker node is removed or re-created. Therefore, the LoadBalancer service is more available than the NodePort service. Unlike with NodePort services, you can assign any port to your load balancer and are not bound to a certain port range. If you use a LoadBalancer service, a node port is also available on each IP address of any worker node. To block access to node port while you are using a LoadBalancer service, see [Blocking incoming traffic](cs_network_policy.html#block_ingress).
+The portable public IP address that is assigned to your LoadBalancer service is permanent and does not change when a worker node is removed or re-created. Therefore, the LoadBalancer service is more available than the NodePort service. Unlike with NodePort services, you can assign any port to your load balancer and are not bound to a certain port range. If you use a LoadBalancer service, a NodePort is also available on each IP address of any worker node. To block access to NodePort while you are using a LoadBalancer service, see [Blocking incoming traffic](cs_network_policy.html#block_ingress).
 
 The LoadBalancer service serves as the external entry point for incoming requests for the app. To access the LoadBalancer service from the internet, use the public IP address of your load balancer and the assigned port in the format `<IP_address>:<port>`. The following diagram shows how a load balancer directs communication from the internet to an app.
 
@@ -69,7 +69,7 @@ Before you begin:
 
 -   This feature is available for standard clusters only.
 -   You must have a portable public or private IP address available to assign to the load balancer service.
--   A load balancer service with a portable private IP address still has a public node port open on every worker node. To add a network policy to prevent public traffic, see [Blocking incoming traffic](cs_network_policy.html#block_ingress).
+-   A load balancer service with a portable private IP address still has a public NodePort open on every worker node. To add a network policy to prevent public traffic, see [Blocking incoming traffic](cs_network_policy.html#block_ingress).
 
 To create a load balancer service:
 
