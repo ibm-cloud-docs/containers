@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-21"
+lastupdated: "2018-05-22"
 
 ---
 
@@ -211,7 +211,7 @@ To troubleshoot your Ingress:
     Rules:
       Host                                             Path  Backends
       ----                                             ----  --------
-      mycluster.us-south.containers.mybluemix.net
+      mycluster.us-south.containers.appdomain.cloud
                                                        /tea      myservice1:80 (<none>)
                                                        /coffee   myservice2:80 (<none>)
     Annotations:

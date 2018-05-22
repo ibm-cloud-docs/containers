@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-21"
+lastupdated: "2018-05-22"
 
 ---
 
@@ -870,7 +870,7 @@ View information about a cluster in your organization.
   Created:     2018-01-01T17:19:28+0000
   Location:    dal10
   Master URL:  https://169.xx.xxx.xxx:xxxxx
-  Ingress subdomain: my_cluster.us-south.containers.mybluemix.net
+  Ingress subdomain: my_cluster.us-south.containers.appdomain.cloud
   Ingress secret:    my_cluster
   Workers:     3
   Version:     1.7.16_1511* (1.8.11_1509 latest)

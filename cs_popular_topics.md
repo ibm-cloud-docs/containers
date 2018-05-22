@@ -37,6 +37,11 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 </thead>
 <tbody>
 <tr>
+<td>23 May</td>
+<td>[New Ingress subdomain format](cs_ingress.html)</td>
+<td>Clusters created after 23 May are assigned an Ingress subdomain in a new format: <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.appdomain.cloud</code>. When you use Ingress to expose your apps, you can use the new subdomain to access your apps from the internet.</td>
+</tr>
+<tr>
 <td>14 May</td>
 <td>[Update: Deploy workloads on GPU bare metal worldwide](cs_app.html#gpu_app)</td>
 <td>If you have a [bare metal graphics processing unit (GPU) machine type](cs_clusters.html#shared_dedicated_node) in your cluster, you can schedule mathematically intensive apps. The GPU worker node can process your app's workload across both the CPU and GPU to increase performance.</td>
