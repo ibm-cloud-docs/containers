@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-18"
+lastupdated: "2018-05-21"
 
 ---
 
@@ -54,7 +54,7 @@ Default Calico policies are not applied to pods directly; they are applied to th
 
 **Important:** Do not remove policies that are applied to a host endpoint unless you fully understand the policy. Be sure that you do not need the traffic that is being allowed by the policy.
 
- <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server location in column one and IP addresses to match in column two.">
+ <table summary="The first row in the table spans both columns. Read the rest of the rows from left to right, with the server location in column one and IP addresses to match in column two.">
  <caption>Default Calico policies for each cluster</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Default Calico policies for each cluster</th>
@@ -74,7 +74,7 @@ Default Calico policies are not applied to pods directly; they are applied to th
      </tr>
     <tr>
       <td><code>allow-node-port-dnat</code></td>
-      <td>Allows incoming nodeport, load balancer, and ingress service traffic to the pods that those services are exposing. <strong>Note</strong>: You don't have to specify the exposed ports because Kubernetes uses destination network address translation (DNAT) to forward the service requests to the correct pods. That forwarding takes place before the host endpoint policies are applied in iptables.</td>
+      <td>Allows incoming nodeport, load balancer, and ingress service traffic to the pods that those services are exposing. <strong>Note</strong>: You don't need to specify the exposed ports because Kubernetes uses destination network address translation (DNAT) to forward the service requests to the correct pods. That forwarding takes place before the host endpoint policies are applied in iptables.</td>
    </tr>
    <tr>
       <td><code>allow-sys-mgmt</code></td>
@@ -87,7 +87,7 @@ Default Calico policies are not applied to pods directly; they are applied to th
   </tbody>
 </table>
 
-In Kubernetes version 1.10 and newer clusters, a default Kubernetes policy which limits access to the Kubernetes Dashboard is also created.
+In Kubernetes version 1.10 and newer clusters, a default Kubernetes policy that limits access to the Kubernetes Dashboard is also created.
 
 <table>
 <caption>Default Kubernetes policies for each cluster</caption>
@@ -97,7 +97,7 @@ In Kubernetes version 1.10 and newer clusters, a default Kubernetes policy which
 <tbody>
  <tr>
   <td><code>kubernetes-dashboard</code></td>
-  <td><b>In Kubernetes v1.10 only</b>, provided in the <code>kube-system</code> namespace: Blocks all pods from accessing the Kubernetes Dashboard. This does not impact accessing the dashboard from the {{site.data.keyword.Bluemix_notm}} UI or via <code>kubectl proxy</code>. If a pod requires access to the dashboard, is should be deployed in a namespace with the <code>kubernetes-dashboard-policy: allow</code> label assigned.</td>
+  <td><b>In Kubernetes v1.10 only</b>, provided in the <code>kube-system</code> namespace: Blocks all pods from accessing the Kubernetes Dashboard. This policy does not impact accessing the dashboard from the {{site.data.keyword.Bluemix_notm}} UI or by using <code>kubectl proxy</code>. If a pod requires access to the dashboard, deploy the pod in a namespace that has the <code>kubernetes-dashboard-policy: allow</code> label.</td>
  </tr>
 </tbody>
 </table>
@@ -166,7 +166,7 @@ To install and configure the 3.1.1 Calico CLI:
     ```
     {: pre}
 
-4. If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, [allow TCP access for Calico commands](cs_firewall.html#firewall).
+4. If corporate network policies use proxies or firewalls to prevent access from your local system to public endpoints, [allow TCP access for Calico commands](cs_firewall.html#firewall).
 
 5. For Linux and OS X, create the `/etc/calico` directory. For Windows, any directory can be used.
 
@@ -341,7 +341,7 @@ To install and configure the 1.6.3 Calico CLI:
     ```
     {: pre}
 
-4. **If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls**: See [Running `calicoctl` commands from behind a firewall](cs_firewall.html#firewall) for instructions on how to allow TCP access for Calico commands.
+4. If corporate network policies use proxies or firewalls to prevent access from your local system to public endpoints: See [Running `calicoctl` commands from behind a firewall](cs_firewall.html#firewall) for instructions on how to allow TCP access for Calico commands.
 
 5. For Linux and OS X, create the `/etc/calico` directory. For Windows, any directory can be used.
     ```
@@ -570,7 +570,7 @@ In most cases, the default policies do not need to be changed. Only advanced sce
 
 To create Kubernetes network policies, see the [Kubernetes network policy documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
 
-To create Calico policies, follow the steps below.
+To create Calico policies, use the following steps.
 
 Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)

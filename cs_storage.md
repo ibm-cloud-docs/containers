@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-18"
+lastupdated: "2018-05-22"
 
 ---
 
@@ -462,8 +462,8 @@ To add persistent storage:
     **Tip:** If you want to change the default storage class, run `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` and replace `<storageclass>` with the name of the storage class.
 
 2.  Decide if you want to keep your data and the NFS file share or block storage after you delete the PVC.
-    - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, the PV is removed, but the NFS file or block storage and your data still exist in your IBM Cloud infrastructure (SoftLayer) account. Later, to access this data in your cluster, create a PVC and a matching PV that refers to your existing [NFS file](#existing) or [block](#existing_block) storage.
-    - If you want the data and your NFS file share or block storage to be deleted when you delete the PVC, choose a storage class without `retain`.
+    - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, only the PVC is deleted. The PV still exists in the cluster and the data in it is saved, but it cannot be reused with another PVC. Also, the NFS file or block storage and your data still exist in your IBM Cloud infrastructure (SoftLayer) account. Later, to access this data in your cluster, create a PVC and a matching PV that refers to your existing [NFS file](#existing) or [block](#existing_block) storage. 
+    - If you want the PV, the data, and your NFS file share or block storage to be deleted when you delete the PVC, choose a storage class without `retain`.
 
 3.  **If you choose a bronze, silver, or gold storage class**: You get [Endurance storage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/topic/endurance-storage) that defines the IOPS per GB for each class. However, you can determine the total IOPS by choosing a size within the available range. You can select any whole number of gigabyte sizes within the allowed size range (such as 20 Gi, 256 Gi, 11854 Gi). For example, if you select a 1000Gi file share or block storage size in the silver storage class of 4 IOPS per GB, your volume has a total of 4000 IOPS. The more IOPS your PV has, the faster it processes input and output operations. The following table describes the IOPS per gigabyte and size range for each storage class.
 
@@ -1215,8 +1215,7 @@ Review the following backup and restore options for your NFS file shares and blo
 
 <dl>
   <dt>Set up periodic snapshots</dt>
-  <dd><p>You can set up [periodic snapshots](/docs/infrastructure/FileStorage/snapshots.html) for your NFS file share or block storage, which is a read-only image that captures the state of the instance at a point in time. Snapshots are stored on the same file share or block storage within the same location. You can restore data from a snapshot if a user accidentally removes important data from the volume.</p>
-  <p>For more information, see:<ul><li>[NFS periodic snapshots](/docs/infrastructure/FileStorage/snapshots.html)</li><li>[Block periodic snapshots](/docs/infrastructure/BlockStorage/snapshots.html#snapshots)</li></ul></p></dd>
+  <dd><p>You can set up periodic snapshots for your NFS file share or block storage, which is a read-only image that captures the state of the instance at a point in time. To store the snapshot, you must request snapshot space on your NFS file share or block storage. Snapshots are stored on the existing storage instance within the same location. You can restore data from a snapshot if a user accidentally removes important data from the volume. </br></br> <strong>To create a snapshot for your volume: </strong><ol><li>List existing PVs in your cluster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Get the details for the PV for which you want to create snapshot space and note the volume ID, the size and the IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> For file storage, the volume ID, the size and the IOPS can be found in the <strong>Labels</strong> section of your CLI output. For block storage, the size and IOPS are shown in the <strong>Labels</strong> section of your CLI output. To find the volume ID, review the <code>ibm.io/network-storage-id</code> annotation of your CLI output. </li><li>Create the snapshot size for your existing volume with the parameters that you retrieved in the previous step. <pre class="pre"><code>slcli file snapshot-order --capacity &lt;size&gt; --tier &lt;iops&gt; &lt;volume_id&gt;</code></pre><pre class="pre"><code>slcli block snapshot-order --capacity &lt;size&gt; --tier &lt;iops&gt; &lt;volume_id&gt;</code></pre></li><li>Wait for the snapshot size to create. <pre class="pre"><code>slcli file volume-detail &lt;volume_id&gt;</code></pre><pre class="pre"><code>slcli block volume-detail &lt;volume_id&gt;</code></pre>The snapshot size is successfully provisioned when the <strong>Snapshot Capacity (GB)</strong> in your CLI output changes from 0 to the size that you ordered. </li><li>Create the snapshot for your volume and note the ID of the snapshot that is created for you. <pre class="pre"><code>slcli file snapshot-create &lt;volume_id&gt;</code></pre><pre class="pre"><code>slcli block snapshot-create &lt;volume_id&gt;</code></pre></li><li>Verify that the snapshot is created successfully. <pre class="pre"><code>slcli file volume-detail &lt;snapshot_id&gt;</code></pre><pre class="pre"><code>slcli block volume-detail &lt;snapshot_id&gt;</code></pre></li></ol></br><strong>To restore data from a snapshot to an existing volume: </strong><pre class="pre"><code>slcli file snapshot-restore -s &lt;snapshot_id&gt; &lt;volume_id&gt;</code></pre><pre class="pre"><code>slcli block snapshot-restore -s &lt;snapshot_id&gt; &lt;volume_id&gt;</code></pre></br>For more information, see:<ul><li>[NFS periodic snapshots](/docs/infrastructure/FileStorage/snapshots.html)</li><li>[Block periodic snapshots](/docs/infrastructure/BlockStorage/snapshots.html#snapshots)</li></ul></p></dd>
   <dt>Replicate snapshots to another location</dt>
  <dd><p>To protect your data from a location failure, you can [replicate snapshots](/docs/infrastructure/FileStorage/replication.html#working-with-replication) to an NFS file share or block storage instance that is set up in another location. Data can be replicated from the primary storage to the backup storage only. You cannot mount a replicated NFS file share or block storage instance to a cluster. When your primary storage fails, you can manually set your replicated backup storage to be the primary one. Then, you can mount it to your cluster. After your primary storage is restored, you can restore the data from the backup storage.</p>
  <p>For more information, see:<ul><li>[Replicate snapshots for NFS](/docs/infrastructure/FileStorage/replication.html#working-with-replication)</li><li>[Replicate snapshots for Block](/docs/infrastructure/BlockStorage/replication.html#working-with-replication)</li></ul></p></dd>
@@ -1231,9 +1230,10 @@ Review the following backup and restore options for your NFS file shares and blo
 <p>Before you begin, [target your Kubernetes CLI](cs_cli_install.html#cs_cli_configure) to the cluster that you want to use. If you do not specify a container with <code>-c</code>, the command uses to the first available container in the pod.</p>
 <p>You can use the command in various ways:</p>
 <ul>
-<li>Copy data from your local machine to a pod in your cluster: <code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></li>
-<li>Copy data from a pod in your cluster to your local machine: <code>kubectl cp <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;/&lt;filename&gt;</var> <var>&lt;local_filepath&gt;/&lt;filename&gt;</var></code></li>
-<li>Copy data from a pod in your cluster to a specific container in another pod another: <code>kubectl cp <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var> <var>&lt;namespace&gt;/&lt;other_pod&gt;:&lt;pod_filepath&gt;</var> -c <var>&lt;container></var></code></li>
-</ul>
-</dd>
+<li>Copy data from your local machine to a pod in your cluster: <pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>
+<li>Copy data from a pod in your cluster to your local machine: <pre class="pre"><code>kubectl cp <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;/&lt;filename&gt;</var> <var>&lt;local_filepath&gt;/&lt;filename&gt;</var></code></pre></li>
+<li>Copy data from a pod in your cluster to a specific container in another pod another: <pre class="pre"><code>kubectl cp <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var> <var>&lt;namespace&gt;/&lt;other_pod&gt;:&lt;pod_filepath&gt;</var> -c <var>&lt;container></var></code></pre></li>
+</ul></dd>
   </dl>
+
+

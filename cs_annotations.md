@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-18"
+lastupdated: "2018-05-22"
 
 ---
 
@@ -149,7 +149,7 @@ For general information about Ingress services and how to get started using them
   <tr>
   <td><a href="#ssl-services">SSL services support</a></td>
   <td><code>ssl-services</code></td>
-  <td>Allow SSL services support to encrypt traffic to your upstream apps that require HTTPS. </td>
+  <td>Allow SSL services support to encrypt traffic to your upstream apps that require HTTPS.</td>
   </tr>
   </tbody></table>
 
@@ -979,10 +979,10 @@ spec:
   </tbody></table>
 
  </dd></dl>
- 
+
 <br />
 
- 
+
 
 
 ### Upstream keepalive (upstream-keepalive)
@@ -1042,7 +1042,7 @@ Set the maximum number of idle keepalive connections to the upstream server of a
 
 <br />
 
- 
+
 
 
 ## HTTPS and TLS/SSL authentication annotations
@@ -1192,7 +1192,7 @@ public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx   
 <li>Open the ALB config map.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>Add the non-default HTTP and HTTPS ports to the config map. Replace &lt;port&gt; with the HTTP or HTTPS port that you want to open. <b>Note</b>: By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, you must also include them in addition to any other TCP ports you specify in the `public-ports` field. If you enabled a private ALB, you must also specify any posrt you want to keep open in the `private-ports` field. For more information, see <a href="cs_ingress.html#opening_ingress_ports">Opening ports in the Ingress ALB</a>.
+<li>Add the non-default HTTP and HTTPS ports to the config map. Replace &lt;port&gt; with the HTTP or HTTPS port that you want to open. <b>Note</b>: By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, you must also include them in addition to any other TCP ports you specify in the `public-ports` field. If you enabled a private ALB, you must also specify any ports you want to keep open in the `private-ports` field. For more information, see <a href="cs_ingress.html#opening_ingress_ports">Opening ports in the Ingress ALB</a>.
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -1342,7 +1342,7 @@ Configure mutual authentication for the ALB.
 <dl>
 <dt>Description</dt>
 <dd>
-Configure mutual authentication for the Ingress ALB. The client authenticates the server and the server also authenticates the client by using certificates. Mutual authentication is also known as certificate-based authentication or two-way authentication.
+Configure mutual authentication of downstream traffic for the Ingress ALB. The external client authenticates the server and the server also authenticates the client by using certificates. Mutual authentication is also known as certificate-based authentication or two-way authentication.
 </dd>
 
 <dt>Pre-requisites</dt>
@@ -1415,7 +1415,7 @@ Allow HTTPS requests and encrypt traffic to your upstream apps.
 <dl>
 <dt>Description</dt>
 <dd>
-Encrypt traffic to upstream apps that require HTTPS. If your upstream apps can handle TLS, you can optionally provide a certificate that is contained in a TLS secret.<br></br>**Optional**: You can add [one-way authentication or mutual authentication](#ssl-services-auth) to this annotation.</dd>
+Encrypt traffic that Ingress sends to upstream apps that require HTTPS. If your upstream apps can handle TLS, you can optionally provide a certificate that is contained in a TLS secret.<br></br>**Optional**: You can add [one-way authentication or mutual authentication](#ssl-services-auth) to this annotation.</dd>
 
 
 <dt>Sample Ingress resource YAML</dt>

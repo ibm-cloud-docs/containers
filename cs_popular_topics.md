@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-18"
+lastupdated: "2018-05-22"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-05-18"
 # Popular topics for {{site.data.keyword.containershort_notm}}
 {: #cs_popular_topics}
 
-Check out what container developers are interested in learning about in {{site.data.keyword.containerlong}}.
+Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about new features to explore, a trick to try out, or some popular topics that other developers are finding useful in the now.
 {:shortdesc}
 
 ## Popular topics in May 2018
@@ -151,7 +151,7 @@ Check out what container developers are interested in learning about in {{site.d
 <tr>
 <td>19 February</td>
 <td>[Set up the strongSwan IPSec VPN](cs_vpn.html#vpn-setup)</td>
-<td>Quickly deploy the strongSwan IPSec VPN Helm chart to connect your {{site.data.keyword.containershort_notm}} cluster securely to your on-premises data center without a Vyatta.</td>
+<td>Quickly deploy the strongSwan IPSec VPN Helm chart to connect your {{site.data.keyword.containershort_notm}} cluster securely to your on-premises data center without a Virtual Router Appliance.</td>
 </tr>
 <tr>
 <td>14 February</td>

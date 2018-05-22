@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-18"
+lastupdated: "2018-05-22"
 
 ---
 
@@ -44,18 +44,20 @@ So you want to deploy an app in a container? Hold on! Start by creating a Kubern
 
 And what is a cluster? A cluster is a set of resources, worker nodes, networks, and storage devices that keep apps highly available. After you have your cluster, then you can deploy your apps in containers.
 
-Before you begin, you must have a Trial, Pay-As-You-Go, or Subscription [{{site.data.keyword.Bluemix_notm}} account](https://console.bluemix.net/registration/) to create a free cluster.
+**Before you begin**
 
-**What {{site.data.keyword.Bluemix_notm}} account type should I get?** With Pay-As-You-Go and Subscription accounts, you can provision IBM Cloud infrastructure (SoftLayer) resources for your Kubernetes clusters and create one free cluster or standard clusters. With a Trial account, you can create one free cluster but no standard clusters. All free clusters are deleted after 21 days. To continue with Kubernetes clusters, create another free cluster until your Trial account ends, or upgrade your account to a Pay-As-You-Go or Subscription.
+You must have a Trial, Pay-As-You-Go, or Subscription [{{site.data.keyword.Bluemix_notm}} account](https://console.bluemix.net/registration/).
+
+With a Trial account, you can create one free cluster that you can use for 21 days to get familiar with the service. With a Pay-As-You-Go or Subscription account, you can still create a free trial cluster but you can also provision IBM Cloud infrastructure (SoftLayer) resources to use in standard clusters.
 {:tip}
 
 To create a free cluster:
 
-1.  From the [{{site.data.keyword.Bluemix_notm}} **Catalog** ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/catalog/?category=containers) **Containers** category, click **Containers in Kubernetes Clusters**.
+1.  In the [{{site.data.keyword.Bluemix_notm}} **Catalog** ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/catalog/?category=containers), select **Containers in Kubernetes Clusters** and click **Create**. A cluster configuration page opens. By default, **Free cluster** is selected.
 
-2.  Read up on clusters, then click **Create**. Enter a **Cluster Name**. The default cluster type is free. Next time, you can create a standard cluster and define additional customizations, like the number of worker nodes.
+2. Give your cluster a unique name.
 
-3.  Click **Create Cluster**. The details for the cluster open, but the worker node in the cluster takes a few minutes to provision. You can see the status of the worker node in the **Worker nodes** tab. When the status reaches `Ready`, your worker node is ready to be used.
+3.  Click **Create Cluster**. A worker node is created that can take a few minutes to provision, but you can see the progress in the **Worker nodes** tab. When the status reaches `Ready` you can start working with your cluster!
 
 Good work! You created your first Kubernetes cluster. Here are some details about your free cluster:
 
@@ -72,4 +74,3 @@ Over the next 21 days, try out some things with your free cluster.
 * [Deploy an app in your cluster.](cs_app.html#app_cli)
 * [Create a standard cluster with multiple nodes for higher availability.](cs_clusters.html#clusters_ui)
 * [Set up a private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry/index.html)
-

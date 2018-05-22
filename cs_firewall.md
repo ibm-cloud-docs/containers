@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-18"
+lastupdated: "2018-05-21"
 
 ---
 
@@ -359,4 +359,3 @@ You can allow incoming access to NodePort, load balancer, and Ingress services.
   <dt>Ingress</dt>
   <dd>Open port 80 for HTTP or port 443 for HTTPS to the IP address for the Ingress application load balancer.</dd>
 </dl>
-

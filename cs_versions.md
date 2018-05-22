@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-18"
+lastupdated: "2018-05-22"
 
 ---
 
@@ -30,7 +30,7 @@ The current supported Kubernetes versions are:
 
 - Latest: 1.10.1
 - Default: 1.9.7
-- Supported: 1.8.11, 1.7.16
+- Supported: 1.8.11
 
 **Deprecated Versions**: When clusters are running on a deprecated Kubernetes, you have 30 days to review and update to a supported Kubernetes version before the version becomes unsupported. During the deprecation period, you can run limited commands in your clusters to add workers, reload workers, and update the cluster. You cannot create new clusters in the deprecated version.
 
@@ -66,7 +66,7 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch.
 
 As updates become available, you are notified when you view information about the worker nodes, such as with the `bx cs workers <cluster>` or `bx cs worker-get <cluster> <worker>` commands.
 -  **Major and minor updates**: First, [update your master node](cs_cluster_update.html#master) and then [update the worker nodes](cs_cluster_update.html#worker_node). 
-   - By default, you cannot update a Kubernetes master more than two minor versions ahead. For example, if your current master is version 1.5 and you want to update to 1.8, you must update to 1.7 first. You can force the update to continue, but updating more than two minor versions might cause unexpected results.
+   - By default, you cannot update a Kubernetes master three or more minor versions ahead. For example, if your current master is version 1.5 and you want to update to 1.8, you must update to 1.7 first. You can force the update to continue, but updating more than two minor versions might cause unexpected results.
    - If you use a `kubectl` CLI version that does match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and [CLI versions](cs_cli_install.html#kubectl) up-to-date.
 -  **Patch updates**: Check monthly to see whether an update is available, and use the `bx cs worker-update` [command](cs_cli_reference.html#cs_worker_update) or the `bx cs worker-reload` [command](cs_cli_reference.html#cs_worker_reload) to apply these security and operating system patches. For more information, see [Version changelog](cs_versions_changelog.html).
 
@@ -76,7 +76,6 @@ This information summarizes updates that are likely to have impact on deployed a
 -  Version 1.10 [migration actions](#cs_v110).
 -  Version 1.9 [migration actions](#cs_v19).
 -  Version 1.8 [migration actions](#cs_v18).
--  Version 1.7 [migration actions](#cs_v17).
 -  [Archive](#k8s_version_archive) of deprecated or unsupported versions.
 
 <br/>
@@ -340,8 +339,19 @@ If your apps rely on the previous insecure behavior, modify them accordingly.</t
 <br />
 
 
-## Version 1.7
+
+## Archive
+{: #k8s_version_archive}
+
+### Version 1.7 (Deprecated)
 {: #cs_v17}
+
+**As of 22 May 2018, {{site.data.keyword.containershort_notm}} clusters that run Kubernetes version 1.7 are deprecated**. After 21 June 2018, Version 1.7 clusters cannot receive security updates or support unless they are updated to the next most recent version ([Kubernetes 1.8](#cs_v18)).
+
+[Review potential impact](cs_versions.html#cs_versions) of each Kubernetes version update, and then [update your clusters](cs_cluster_update.html#update) immediately.
+
+Are you still running Kubernetes version 1.5? Review the following information to assess the impact of updating your cluster from v1.5 to v1.7. [Update your clusters](cs_cluster_update.html#update) to v1.7, then immediately update them to at least v1.8.
+{: tip}
 
 <p><img src="images/certified_kubernetes_1x7.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.7 certification for IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.7 under the CNCF Kubernetes Software Conformance Certification program.</p>
 
@@ -349,7 +359,7 @@ Review changes that you might need to make when you are updating from the previo
 
 <br/>
 
-### Update before master
+#### Update before master
 {: #17_before}
 
 <table summary="Kubernetes updates for versions 1.7 and 1.6">
@@ -378,7 +388,7 @@ Review changes that you might need to make when you are updating from the previo
 </tbody>
 </table>
 
-### Update after master
+#### Update after master
 {: #17_after}
 
 <table summary="Kubernetes updates for versions 1.7 and 1.6">
@@ -527,11 +537,6 @@ If your apps rely on the previous insecure behavior, modify them accordingly.</t
 </table>
 
 <br />
-
-
-
-## Archive
-{: #k8s_version_archive}
 
 
 ### Version 1.5 (Unsupported)

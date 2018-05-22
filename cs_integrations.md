@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-14"
+lastupdated: "2018-05-21"
 
 ---
 
@@ -108,18 +108,18 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="External link 
 </tr>
 <tr>
 <td>Instana</td>
-<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="External link icon"></a> provides infrastructure and app performance monitoring with a GUI that automatically discovers and maps your apps. Istana captures every request to your apps, which lets you troubleshoot and perform root cause analysis to prevent the problems from happening again. Check out the blog post about <a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">deploying Istana in {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to learn more.</td>
+<td> <a href="https://www.instana.com/" target="_blank">Instana <img src="../icons/launch-glyph.svg" alt="External link icon"></a> provides infrastructure and app performance monitoring with a GUI that automatically discovers and maps your apps. Istana captures every request to your apps, which you can use to troubleshoot and perform root cause analysis to prevent the problems from happening again. Check out the blog post about <a href="https://www.instana.com/blog/precise-visibility-applications-ibm-bluemix-container-service/" target="_blank">deploying Istana in {{site.data.keyword.containershort_notm}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to learn more.</td>
 </tr>
 <tr>
 <td>Prometheus</td>
-<td>Prometheus is an open source monitoring, logging, and alerting tool that was specifically designed for Kubernetes to retrieve detailed information about the cluster, worker nodes, and deployment health based on the Kubernetes logging information. The CPU, memory, I/O, and network activity of all of the running containers in a cluster are collected and can be used in custom queries or alerts to monitor performance and workloads in your cluster.
+<td>Prometheus is an open source monitoring, logging, and alerting tool that was specifically designed for Kubernetes. Prometheus retrieves detailed information about the cluster, worker nodes, and deployment health based on Kubernetes logging information. CPU, memory, I/O, and network activity is collected for each container running in a cluster. You can use the collected data in custom queries or alerts to monitor performance and workloads in your cluster.
 
-<p>To use Prometheus, follow the <a href="https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus" target="_blank">the CoreOS instructions <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</p>
+<p>To use Prometheus, follow the <a href="https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus" target="_blank">CoreOS instructions <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</p>
 </td>
 </tr>
 <tr>
 <td>Sematext</td>
-<td>View metrics and logs for your containerized applications by using <a href="https://sematext.com/" target="_blank">Sematext <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. For more information, see <a href="https://www.ibm.com/blogs/bluemix/2017/09/monitoring-logging-ibm-bluemix-container-service-sematext/" target="_blank">Monitoring & logging for containers with Sematext <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
+<td>View metrics and logs for your containerized applications by using <a href="https://sematext.com/" target="_blank">Sematext <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. For more information, see <a href="https://www.ibm.com/blogs/bluemix/2017/09/monitoring-logging-ibm-bluemix-container-service-sematext/" target="_blank">Monitoring and logging for containers with Sematext <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
 </tr>
 <tr>
 <td>Sysdig</td>
@@ -227,7 +227,7 @@ Before you begin:
 
 **Note:**
 <ul><ul>
-<li>You can only add {{site.data.keyword.Bluemix_notm}} services that support service keys. If the service does not support service keys, see [Enabling external apps to use {{site.data.keyword.Bluemix_notm}} services](/docs/apps/reqnsi.html#accser_external).</li>
+<li>You can add only {{site.data.keyword.Bluemix_notm}} services that support service keys. If the service does not support service keys, see [Enabling external apps to use {{site.data.keyword.Bluemix_notm}} services](/docs/apps/reqnsi.html#accser_external).</li>
 <li>The cluster and the worker nodes must be deployed fully before you can add a service.</li>
 </ul></ul>
 
@@ -257,7 +257,7 @@ To add a service:
         ```
         {: pre}
 
-    -   Create a new namespace in your cluster.
+    -   Create a namespace in your cluster.
 
         ```
         kubectl create namespace <namespace_name>
@@ -289,11 +289,7 @@ To add a service:
     ```
     {: pre}
 
-
-To use the service in a pod that is deployed in the cluster, cluster users can access the service credentials of the {{site.data.keyword.Bluemix_notm}} service by [mounting the Kubernetes secret as a secret volume to a pod](#adding_app).
-
-
-
+To use the service in a pod that is deployed in the cluster, cluster users must access the service credentials. Users can access the service credentials of the {{site.data.keyword.Bluemix_notm}} service by [mounting the Kubernetes secret as a secret volume to a pod](#adding_app).
 
 <br />
 
@@ -349,7 +345,7 @@ Encrypted Kubernetes secrets are used to store {{site.data.keyword.Bluemix_notm}
 
 Kubernetes secrets are a secure way to store confidential information, such as user names, passwords, or keys. Rather than exposing confidential information via environment variables or directly in the Dockerfile, you can mount secrets to a pod. Then, those secrets can be accessed by a running container in a pod.
 
-When you mount a secret volume to your pod, a file named binding is stored in the volume mount directory that includes all information and credentials that you need to access the {{site.data.keyword.Bluemix_notm}} service.
+When you mount a secret volume to your pod, a file that is named `binding` is stored in the volume mount directory. The `binding` file includes all information and credentials that you need to access the {{site.data.keyword.Bluemix_notm}} service.
 
 Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster. Make sure that the {{site.data.keyword.Bluemix_notm}} service that you want to use in your app was [added to the cluster](cs_integrations.html#adding_cluster) by the cluster admin.
 
@@ -474,9 +470,9 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to you
 
     
 
-9.  When implementing your app, configure it to find the secret file that is named **binding** in the mount directory, parse the JSON content and determine the URL and service credentials to access your {{site.data.keyword.Bluemix_notm}} service.
+9.  Configure your apps to find the `binding` secret file in the mount directory, parse the JSON content, and determine the URL and service credentials to access your {{site.data.keyword.Bluemix_notm}} service.
 
-You can now access the {{site.data.keyword.Bluemix_notm}} service details and credentials. To work with your {{site.data.keyword.Bluemix_notm}} service, make sure your app is configured to find the service secret file in the mount directory, parse the JSON content and determine the service details.
+You can now access the {{site.data.keyword.Bluemix_notm}} service details and credentials. To work with your {{site.data.keyword.Bluemix_notm}} service, ensure that your app is configured to find the service secret file in the mount directory, parse the JSON content and determine the service details.
 
 <br />
 
@@ -487,7 +483,7 @@ You can now access the {{site.data.keyword.Bluemix_notm}} service details and cr
 [Helm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh/) is a Kubernetes package manager. You can create Helm charts or use preexisting Helm charts to define, install, and upgrade complex Kubernetes applications that run in {{site.data.keyword.containerlong_notm}} clusters.
 {:shortdesc}
 
-Before using Helm charts with {{site.data.keyword.containershort_notm}}, you must install and initialize a Helm instance your cluster. You can then add the {{site.data.keyword.Bluemix_notm}} Helm repository to your Helm instance.
+Before you use Helm charts with {{site.data.keyword.containershort_notm}}, you must install and initialize a Helm instance your cluster. You can then add the {{site.data.keyword.Bluemix_notm}} Helm repository to your Helm instance.
 
 Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster where you want to use a Helm chart.
 
@@ -637,7 +633,7 @@ To use Weave Scope with a cluster:
     ```
     {: screen}
 
-4.  Run a port forwarding command to bring up the service on your computer. Now that Weave Scope is configured with the cluster, to access Weave Scope next time, you can run this port forwarding command without completing the previous configuration steps again.
+4.  Run a port forwarding command to open the service on your computer. The next time that you access Weave Scope, you can run this port forwarding command without completing the previous configuration steps again.
 
     ```
     kubectl port-forward -n weave "$(kubectl get -n weave pod --selector=weave-scope-component=app -o jsonpath='{.items..metadata.name}')" 4040

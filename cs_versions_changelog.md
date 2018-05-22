@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-18"
+lastupdated: "2018-05-22"
 
 ---
 
@@ -32,7 +32,7 @@ For information about changes since the previous version, see the following chan
 -  Version 1.10 [changelog](#110_changelog).
 -  Version 1.9 [changelog](#19_changelog).
 -  Version 1.8 [changelog](#18_changelog).
--  Version 1.7 [changelog](#17_changelog).
+-  **Deprecated**: Version 1.7 [changelog](#17_changelog).
 
 ## Version 1.10 changelog
 {: #110_changelog}
@@ -329,13 +329,15 @@ Review the following changes.
 </tbody>
 </table>
 
+## Archive
+{: #changelog_archive}
 
-## Version 1.7 changelog
+### Version 1.7 changelog (Deprecated)
 {: #17_changelog}
 
 Review the following changes.
 
-### Changelog for worker node fix pack 1.7.16_1513, released 18 May 2018
+#### Changelog for worker node fix pack 1.7.16_1513, released 18 May 2018
 {: #1716_1513}
 
 <table summary="Changes that were made since version 1.7.16_1512">
@@ -358,7 +360,7 @@ Review the following changes.
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.7.16_1512, released 16 May 2018
+#### Changelog for worker node fix pack 1.7.16_1512, released 16 May 2018
 {: #1716_1512}
 
 <table summary="Changes that were made since version 1.7.16_1511">
@@ -381,7 +383,7 @@ Review the following changes.
 </tbody>
 </table>
 
-### Changelog for 1.7.16_1511, released 19 April 2018
+#### Changelog for 1.7.16_1511, released 19 April 2018
 {: #1716_1511}
 
 <table summary="Changes that were made since version 1.7.4_1509">
