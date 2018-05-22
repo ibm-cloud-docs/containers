@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-21"
+lastupdated: "2018-05-22"
 
 ---
 
@@ -209,7 +209,7 @@ Requirements:
 
 Before you begin:
 - Configure the routing of network traffic into and out of the external subnet.
-- Confirm that you have VPN connectivity between the on-premises data center network gateway and either the private network Vyatta or the strongSwan VPN service that runs in your cluster. For more information, see [Setting up VPN connectivity](cs_vpn.html).
+- Confirm that you have VPN connectivity between the on-premises data center network gateway and either the private network Virtual Router Appliance or the strongSwan VPN service that runs in your cluster. For more information, see [Setting up VPN connectivity](cs_vpn.html).
 
 To add a subnet from an on-premises network:
 

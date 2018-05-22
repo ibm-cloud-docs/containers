@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-21"
+lastupdated: "2018-05-22"
 
 ---
 
@@ -24,41 +24,9 @@ With VPN connectivity, you can securely connect apps in a Kubernetes cluster on 
 
 To connect your worker nodes and apps to an on-premises data center, you can configure one of the following options.
 
-- **Vyatta Gateway Appliance or Fortigate Appliance**: You might choose to set up a Vyatta Gateway Appliance or [Fortigate Security Appliance ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/infrastructure/fortigate-10g/getting-started.html#getting-started-with-fortigate-security-appliance-10gbps) to configure an IPSec VPN endpoint. This option is useful when you have a larger cluster, want to access non-Kubernetes resources over the VPN, or want to access multiple clusters over a single VPN. To configure a Vyatta, see [Setting up VPN connectivity with Vyatta](#vyatta).
-
 - **strongSwan IPSec VPN Service**: You can set up a [strongSwan IPSec VPN service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.strongswan.org/) that securely connects your Kubernetes cluster with an on-premises network. The strongSwan IPSec VPN service provides a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPsec) protocol suite. To set up a secure connection between your cluster and an on-premises network, [configure and deploy the strongSwan IPSec VPN service](#vpn-setup) directly in a pod in your cluster.
 
-
-## Setting up VPN connectivity with a Vyatta Gateway Appliance
-{: #vyatta}
-
-The [Vyatta Gateway Appliance ![External link icon](../icons/launch-glyph.svg "External link icon")](http://knowledgelayer.softlayer.com/learning/network-gateway-devices-vyatta) is a bare metal server that runs a special distribution of Linux. You can use a Vyatta as VPN gateway to securely connect to an on-premises network.
-{:shortdesc}
-
-All public and private network traffic that enters or exits the cluster VLANs is routed through a Vyatta. You can use the Vyatta as a VPN endpoint to create an encrypted IPSec tunnel between servers in IBM Cloud infrastructure (SoftLayer) and on-premises resources. For example, the following diagram shows how an app on a private-only worker node in {{site.data.keyword.containershort_notm}} can communicate with an on-premises server via a Vyatta VPN connection:
-
-<img src="images/cs_vpn_vyatta.png" width="725" alt="Expose an app in {{site.data.keyword.containershort_notm}} by using a load balancer" style="width:725px; border-style: none"/>
-
-1. An app in your cluster, `myapp2`, receives a request from an Ingress or LoadBalancer service and needs to securely connect to data in your on-premises network.
-
-2. Because `myapp2` is on a worker node that is on a private VLAN only, the Vyatta acts as a secure connection between the worker nodes and the on-premises network. The Vyatta uses the destination IP address to determine which network packets to send to the on-premises network.
-
-3. The request is encrypted and sent over the VPN tunnel to the on-premises data center.
-
-4. The incoming request passes through the on-premises firewall and is delivered to the VPN tunnel endpoint (router) where it is decrypted.
-
-5. The VPN tunnel endpoint (router) forwards the request to the on-premises server or mainframe, depending on the destination IP address that was specified in step 2. The necessary data is sent back over the VPN connection to `myapp2` through the same process.
-
-To set up a Vyatta Gateway Appliance:
-
-1. [Order a Vyatta ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/procedure/how-order-vyatta).
-
-2. [Configure the private VLAN on the Vyatta ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/procedure/basic-configuration-vyatta).
-
-3. To enable a VPN connection by using the Vyatta, [configure IPSec on the Vyatta ![External link icon](../icons/launch-glyph.svg "External link icon")](https://knowledgelayer.softlayer.com/procedure/how-configure-ipsec-vyatta).
-
-For more information, see this blog post on [connecting a cluster to an on-premises data center ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/).
-
+- **Virtual Router Appliance (VRA) or Fortigate Security Appliance (FSA)**: You might choose to set up a [VRA](/docs/infrastructure/virtual-router-appliance/about.html) or [FSA](/docs/infrastructure/fortigate-10g/about.html) to configure an IPSec VPN endpoint. This option is useful when you have a larger cluster, want to access non-Kubernetes resources over the VPN, or want to access multiple clusters over a single VPN. To configure a VRA, see [Setting up VPN connectivity with VRA](#vyatta).
 
 ## Setting up VPN connectivity with the strongSwan IPSec VPN service Helm chart
 {: #vpn-setup}
@@ -435,3 +403,34 @@ You can disable the VPN connection by deleting the Helm chart.
   helm delete --purge <release_name>
   ```
   {: pre}
+
+<br />
+
+
+## Setting up VPN connectivity with a Virtual Router Appliance
+{: #vyatta}
+
+The [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance/about.html) provides the latest Vyatta 5600 operating system for x86 bare metal servers. You can use a VRA as VPN gateway to securely connect to an on-premises network.
+{:shortdesc}
+
+All public and private network traffic that enters or exits the cluster VLANs is routed through a VRA. You can use the VRA as a VPN endpoint to create an encrypted IPSec tunnel between servers in IBM Cloud infrastructure (SoftLayer) and on-premises resources. For example, the following diagram shows how an app on a private-only worker node in {{site.data.keyword.containershort_notm}} can communicate with an on-premises server via a VRA VPN connection:
+
+<img src="images/cs_vpn_vyatta.png" width="725" alt="Expose an app in {{site.data.keyword.containershort_notm}} by using a load balancer" style="width:725px; border-style: none"/>
+
+1. An app in your cluster, `myapp2`, receives a request from an Ingress or LoadBalancer service and needs to securely connect to data in your on-premises network.
+
+2. Because `myapp2` is on a worker node that is on a private VLAN only, the VRA acts as a secure connection between the worker nodes and the on-premises network. The VRA uses the destination IP address to determine which network packets to send to the on-premises network.
+
+3. The request is encrypted and sent over the VPN tunnel to the on-premises data center.
+
+4. The incoming request passes through the on-premises firewall and is delivered to the VPN tunnel endpoint (router) where it is decrypted.
+
+5. The VPN tunnel endpoint (router) forwards the request to the on-premises server or mainframe, depending on the destination IP address that was specified in step 2. The necessary data is sent back over the VPN connection to `myapp2` through the same process.
+
+To set up a Virtual Router Appliance:
+
+1. [Order a VRA](/docs/infrastructure/virtual-router-appliance/getting-started.html).
+
+2. [Configure the private VLAN on the VRA](/docs/infrastructure/virtual-router-appliance/manage-vlans.html).
+
+3. To enable a VPN connection by using the VRA, [configure VRRP on the VRA](/docs/infrastructure/virtual-router-appliance/vrrp.html#high-availability-vpn-with-vrrp).

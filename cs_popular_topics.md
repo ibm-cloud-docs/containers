@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-21"
+lastupdated: "2018-05-22"
 
 ---
 
@@ -151,7 +151,7 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <tr>
 <td>19 February</td>
 <td>[Set up the strongSwan IPSec VPN](cs_vpn.html#vpn-setup)</td>
-<td>Quickly deploy the strongSwan IPSec VPN Helm chart to connect your {{site.data.keyword.containershort_notm}} cluster securely to your on-premises data center without a Vyatta.</td>
+<td>Quickly deploy the strongSwan IPSec VPN Helm chart to connect your {{site.data.keyword.containershort_notm}} cluster securely to your on-premises data center without a Virtual Router Appliance.</td>
 </tr>
 <tr>
 <td>14 February</td>
