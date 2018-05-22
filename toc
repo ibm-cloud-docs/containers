@@ -70,19 +70,7 @@ IBM Cloud Kubernetes Service
     {: .topicgroup}
     IBM Cloud Dedicated
         cs_dedicated.md
-        [Deprecated: Running single and scalable containers](cs_classic.html)
-            [Migrating single and scalable containers to Kubernetes clusters](cs_classic.html#cs_classic_migrating)
-            [About single and scalable containers](container_ov.html)
-            [Planning single and scalable containers](container_planning.html)
-            [Security for single and scalable containers](container_security.html)
-            [Setting up the CLI for single and scalable containers](container_cli_cfic_install.html)
-            [IBM Images](../services/RegistryImages/index.html)
-            [Running short-term tasks as containers](container_single_ui.html)
-            [Running highly available groups](container_ha.html)
-            [Storing persistent data for single and scalable containers](container_volumes_ov.html)
-            [Integrating services with single and scalable containers](container_integrations.html)
-            [CLI reference for single and scalable containers](container_cli_reference_cfic.html)
-            [Troubleshooting single and scalable containers](container_troubleshoot.html)
+        [Deprecated: Running single and scalable containers](https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip)
     {: .navgroup-end}
 
     {: .navgroup id="help"}
