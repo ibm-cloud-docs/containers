@@ -60,7 +60,7 @@ IBM Cloud Kubernetes Service
     cs_cli_reference.md
 
     {: .topicgroup}
-    Kubernetes versions for IBM Cloud Kubernetes Service
+    IBM Cloud Kubernetes Service versions
         cs_versions.md
         cs_versions_changelog.md
 
