@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-22"
+lastupdated: "2018-05-23"
 
 ---
 
@@ -32,7 +32,7 @@ In this first tutorial, you act as the PR firm's networking administrator. You c
 
 To set up the infrastructure:
 
--   Create a Kubernetes cluster with one worker node.
+-   Create a cluster with  1 worker node.
 -   Install the CLIs for running Kubernetes commands and managing Docker images.
 -   Create a private image repository in {{site.data.keyword.registrylong_notm}} to store your images.
 -   Add the {{site.data.keyword.toneanalyzershort}} service to the cluster so that any app in the cluster can use that service.
@@ -59,15 +59,16 @@ This tutorial is intended for software developers and network administrators who
 Create your cluster in the GUI and install the required CLIs.
 {: shortdesc}
 
+**To create your cluster**
 
-To create your cluster:
+Because it can take a few minutes to provision, create your cluster before you install the CLIs.
 
-1. It can take a few minutes to provision your cluster. To make the most of your time, [create your cluster in the GUI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/launch?env_id=ibm:yp:united-kingdom) before installing the CLIs.
+1.  [In the GUI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/catalog/cluster/create) create a free or standard cluster with  one worker node in it.
 
-You can also create a [cluster in the CLI](cs_clusters.html#clusters_cli).
-{: tip}
+    You can also create a [cluster in the CLI](cs_clusters.html#clusters_cli).
+    {: tip}
 
-The following CLIs and their prerequisites are used to manage clusters through the CLI:
+As your cluster provisions, install the following CLIs that are used to manage clusters:
 -   {{site.data.keyword.Bluemix_notm}} CLI
 -   {{site.data.keyword.containershort_notm}} plug-in
 -   Kubernetes CLI
@@ -75,7 +76,7 @@ The following CLIs and their prerequisites are used to manage clusters through t
 -   Docker CLI
 
 </br>
-To install the CLIs and their prerequisites:
+**To install the CLIs and their prerequisites**
 
 1.  As a prerequisite for the {{site.data.keyword.containershort_notm}} plug-in, install the [{{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](https://clis.ng.bluemix.net/ui/home.html). To run {{site.data.keyword.Bluemix_notm}} CLI commands, use the prefix `bx`.
 2.  Follow the prompts to select an account and an {{site.data.keyword.Bluemix_notm}} organization. Clusters are specific to an account, but are independent from an {{site.data.keyword.Bluemix_notm}} organization or space.
