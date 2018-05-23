@@ -486,7 +486,7 @@ Route incoming network traffic on an ALB domain path to a different path that yo
 
 <dl>
 <dt>Description</dt>
-<dd>Your Ingress ALB domain routes incoming network traffic on <code>mykubecluster.us-south.containers.mybluemix.net/beans</code> to your app. Your app listens on <code>/coffee</code>, instead of <code>/beans</code>. To forward incoming network traffic to your app, add the rewrite annotation to your Ingress resource configuration file. The rewrite annotation ensures that incoming network traffic on <code>/beans</code> is forwarded to your app by using the <code>/coffee</code> path. When including multiple services, use only a semi-colon (;) to separate them.</dd>
+<dd>Your Ingress ALB domain routes incoming network traffic on <code>mykubecluster.us-south.containers.appdomain.cloud/beans</code> to your app. Your app listens on <code>/coffee</code>, instead of <code>/beans</code>. To forward incoming network traffic to your app, add the rewrite annotation to your Ingress resource configuration file. The rewrite annotation ensures that incoming network traffic on <code>/beans</code> is forwarded to your app by using the <code>/coffee</code> path. When including multiple services, use only a semi-colon (;) to separate them.</dd>
 <dt>Sample Ingress resource YAML</dt>
 <dd>
 <pre class="codeblock">

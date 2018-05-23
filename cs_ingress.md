@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-22"
+lastupdated: "2018-05-23"
 
 ---
 
@@ -37,14 +37,14 @@ Ingress consists of two components:
 <dt>Application load balancer</dt>
 <dd>The application load balancer (ALB) is an external load balancer that listens for incoming HTTP, HTTPS, TCP, or UDP service requests and forwards requests to the appropriate app pod. When you create a standard cluster, {{site.data.keyword.containershort_notm}} automatically creates a highly available ALB for your cluster and assigns a unique public route to it. The public route is linked to a portable public IP address that is provisioned into your IBM Cloud infrastructure (SoftLayer) account during cluster creation. A default private ALB is also automatically created, but is not automatically enabled.</dd>
 <dt>Ingress resource</dt>
-<dd>To expose an app by using Ingress, you must create a Kubernetes service for your app and register this service with the ALB by defining an Ingress resource. The Ingress resource is a Kubernetes resource that defines the rules for how to route incoming requests for an app. The Ingress resource also specifies the path to your app service, which is appended to the public route to form a unique app URL such as `mycluster.us-south.containers.mybluemix.net/myapp`.</dd>
+<dd>To expose an app by using Ingress, you must create a Kubernetes service for your app and register this service with the ALB by defining an Ingress resource. The Ingress resource is a Kubernetes resource that defines the rules for how to route incoming requests for an app. The Ingress resource also specifies the path to your app service, which is appended to the public route to form a unique app URL such as `mycluster.us-south.containers.appdomain.cloud/myapp`.</li></ul></dd>
 </dl>
 
 The following diagram shows how Ingress directs communication from the internet to an app:
 
 <img src="images/cs_ingress.png" width="550" alt="Expose an app in {{site.data.keyword.containershort_notm}} by using Ingress" style="width:550px; border-style: none"/>
 
-1. A user sends a request to your app by accessing your app's URL. This URL is the public URL for your exposed app appended with the Ingress resource path, such as `mycluster.us-south.containers.mybluemix.net/myapp`.
+1. A user sends a request to your app by accessing your app's URL. This URL is the public URL for your exposed app appended with the Ingress resource path, such as `mycluster.us-south.containers.appdomain.cloud/myapp`.
 
 2. A DNS system service that acts as the global load balancer resolves the URL to the portable public IP address of the default public ALB in the cluster. The request is routed to the Kubernetes ALB service for the app.
 
@@ -84,32 +84,32 @@ At least one Ingress resource is required per namespace where you have apps that
 <br></br><img src="images/cs_ingress_single_ns.png" width="300" alt="At least one resource is required per namespace." style="width:300px; border-style: none"/>
 </dd>
 <dt>Apps are in multiple namespaces</dt>
-<dd>If the apps in your cluster are in different namespaces, you must create at least one resource per namespace to define rules for the apps that are exposed there. To register multiple Ingress resources with the cluster's Ingress ALB, you must use a wildcard domain. When a wildcard domain such as `*.mycluster.us-south.containers.mybluemix.net` is registered, multiple subdomains all resolve to the same host. Then, you can create an Ingress resource in each namespace and specify a different subdomain in each Ingress resource.
+<dd>If the apps in your cluster are in different namespaces, you must create at least one resource per namespace to define rules for the apps that are exposed there. To register multiple Ingress resources with the cluster's Ingress ALB, you must use a wildcard domain. When a wildcard domain such as `*.mycluster.us-south.containers.appdomain.cloud` is registered, multiple subdomains all resolve to the same host. Then, you can create an Ingress resource in each namespace and specify a different subdomain in each Ingress resource.
 <br><br>
 For example, consider the following scenario:<ul>
 <li>You have two versions of the same app, `app1` and `app3`, for testing purposes.</li>
 <li>You deploy the apps in two different namespaces within the same cluster: `app1` into the development namespace, and `app3` into the staging namespace.</li></ul>
 To use the same cluster ALB to manage traffic to these apps, you create the following services and resources:<ul>
 <li>A Kubernetes service in the development namespace to expose `app1`.</li>
-<li>An Ingress resource in the development namespace that specifies the host as `dev.mycluster.us-south.containers.mybluemix.net`.</li>
+<li>An Ingress resource in the development namespace that specifies the host as `dev.mycluster.us-south.containers.appdomain.cloud`.</li>
 <li>A Kubernetes service in the staging namespace to expose `app3`.</li>
-<li>An Ingress resource in the staging namespace that specifies the host as `stage.mycluster.us-south.containers.mybluemix.net`.</li></ul></br>
+<li>An Ingress resource in the staging namespace that specifies the host as `stage.mycluster.us-south.containers.appdomain.cloud`.</li></ul></br>
 <img src="images/cs_ingress_multi_ns.png" alt="Within a namespace, use subdomains in one or multiple resources" style="border-style: none"/>
-Now, both URLs resolve to the same domain and are thus both serviced by the same ALB. However, because the resource in the staging namespace is registered with the `stage` subdomain, the Ingress ALB correctly routes requests from the `stage.mycluster.us-south.containers.mybluemix.net/app3` URL to only `app3`.</dd>
+Now, both URLs resolve to the same domain and are thus both serviced by the same ALB. However, because the resource in the staging namespace is registered with the `stage` subdomain, the Ingress ALB correctly routes requests from the `stage.mycluster.us-south.containers.appdomain.cloud/app3` URL to only `app3`.</dd>
 </dl>
 
 **Note**:
-* The IBM-provided Ingress subdomain wildcard, `*.<cluster_name>.<region>.containers.mybluemix.net`, is registered by default for your cluster. However, TLS is not supported for the IBM-provided Ingress subdomain wildcard.
+* The IBM-provided Ingress subdomain wildcard, `*.<cluster_name>.<region>.containers.appdomain.cloud`, is registered by default for your cluster. However, TLS is not supported for the IBM-provided Ingress subdomain wildcard.
 * If you want to use a custom domain, you must register the custom domain as a wildcard domain such as `*.custom_domain.net`. To use TLS, you must get a wildcard certificate.
 
 ### Multiple domains within a namespace
 
-Within an individual namespace, you can use one domain to access all the apps in the namespace. If you want to use different domains for the apps within an individual namespace, use a wildcard domain. When a wildcard domain such as `*.mycluster.us-south.containers.mybluemix.net` is registered, multiple subdomains all resolve to the same host. Then, you can use one resource to specify multiple subdomain hosts within that resource. Alternatively, you can create multiple Ingress resources in the namespace and specify a different subdomain in each Ingress resource.
+Within an individual namespace, you can use one domain to access all the apps in the namespace. If you want to use different domains for the apps within an individual namespace, use a wildcard domain. When a wildcard domain such as `*.mycluster.us-south.containers.appdomain.cloud` is registered, multiple subdomains all resolve to the same host. Then, you can use one resource to specify multiple subdomain hosts within that resource. Alternatively, you can create multiple Ingress resources in the namespace and specify a different subdomain in each Ingress resource.
 
 <img src="images/cs_ingress_single_ns_multi_subs.png" alt="At least one resource is required per namespace." style="border-style: none"/>
 
 **Note**:
-* The IBM-provided Ingress subdomain wildcard, `*.<cluster_name>.<region>.containers.mybluemix.net`, is registered by default for your cluster. However, TLS is not supported for the IBM-provided Ingress subdomain wildcard.
+* The IBM-provided Ingress subdomain wildcard, `*.<cluster_name>.<region>.containers.appdomain.cloud`, is registered by default for your cluster. However, TLS is not supported for the IBM-provided Ingress subdomain wildcard.
 * If you want to use a custom domain, you must register the custom domain as a wildcard domain such as `*.custom_domain.net`. To use TLS, you must get a wildcard certificate.
 
 <br />
@@ -185,7 +185,7 @@ When you configure the public ALB, you choose the domain that your apps will be 
 
 <dl>
 <dt>Domain</dt>
-<dd>You can use the IBM-provided domain, such as <code>mycluster-12345.us-south.containers.mybluemix.net/myapp</code>, to access your app from the internet. To use a custom domain instead, you can map your custom domain to the IBM-provided domain or the ALB's public IP address.</dd>
+<dd>You can use the IBM-provided domain, such as <code>mycluster-12345.us-south.containers.appdomain.cloud/myapp</code>, to access your app from the internet. To use a custom domain instead, you can map your custom domain to the IBM-provided domain or the ALB's public IP address.</dd>
 <dt>TLS termination</dt>
 <dd>The ALB load balances HTTP network traffic to the apps in your cluster. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster. If you are using the IBM-provided Ingress subdomain, you can use the IBM-provided TLS certificate. TLS is not currently supported for IBM-provided wildcard subdomains. If you are using a custom domain, you can use your own TLS certificate to manage TLS termination.</dd>
 </dl>
@@ -207,7 +207,7 @@ To use the IBM-provided Ingress domain:
     Created:                2018-01-12T18:33:35+0000
     Location:               dal10
     Master URL:             https://169.xx.xxx.xxx:26268
-    Ingress Subdomain:      mycluster-12345.us-south.containers.mybluemix.net
+    Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
     Ingress Secret:         <tls_secret>
     Workers:                3
     Version:                1.9.7
@@ -310,7 +310,7 @@ Ingress resources define the routing rules that the ALB uses to route traffic to
     <td>To use TLS, replace <em>&lt;domain&gt;</em> with the IBM-provided Ingress subdomain or your custom domain.
 
     </br></br>
-    <strong>Note:</strong><ul><li>If your apps are exposed by services in different namespaces in one cluster, append a wildcard subdomain to the beginning of the domain, such as `subdomain1.custom_domain.net` or `subdomain1.mycluster.us-south.containers.mybluemix.net`. Use a unique subdomain for each resource that you create in the cluster.</li><li>Do not use &ast; for your host or leave the host property empty to avoid failures during Ingress creation.</li></ul></td>
+    <strong>Note:</strong><ul><li>If your apps are exposed by services in different namespaces in one cluster, append a wildcard subdomain to the beginning of the domain, such as `subdomain1.custom_domain.net` or `subdomain1.mycluster.us-south.containers.appdomain.cloud`. Use a unique subdomain for each resource that you create in the cluster.</li><li>Do not use &ast; for your host or leave the host property empty to avoid failures during Ingress creation.</li></ul></td>
     </tr>
     <tr>
     <td><code>tls/secretName</code></td>
@@ -321,7 +321,7 @@ Ingress resources define the routing rules that the ALB uses to route traffic to
     <td>Replace <em>&lt;domain&gt;</em> with the IBM-provided Ingress subdomain or your custom domain.
 
     </br></br>
-    <strong>Note:</strong><ul><li>If your apps are exposed by services in different namespaces in one cluster, append a wildcard subdomain to the beginning of the domain, such as `subdomain1.custom_domain.net` or `subdomain1.mycluster.us-south.containers.mybluemix.net`. Use a unique subdomain for each resource that you create in the cluster.</li><li>Do not use &ast; for your host or leave the host property empty to avoid failures during Ingress creation.</li></ul></td>
+    <strong>Note:</strong><ul><li>If your apps are exposed by services in different namespaces in one cluster, append a wildcard subdomain to the beginning of the domain, such as `subdomain1.custom_domain.net` or `subdomain1.mycluster.us-south.containers.appdomain.cloud`. Use a unique subdomain for each resource that you create in the cluster.</li><li>Do not use &ast; for your host or leave the host property empty to avoid failures during Ingress creation.</li></ul></td>
     </tr>
     <tr>
     <td><code>path</code></td>
@@ -500,7 +500,7 @@ When you configure the public ALB, you choose the domain that your apps will be 
 
 <dl>
 <dt>Domain</dt>
-<dd>You can use the IBM-provided domain, such as <code>mycluster-12345.us-south.containers.mybluemix.net/myapp</code>, to access your app from the internet. To use a custom domain instead, you can map your custom domain to the IBM-provided domain or the ALB's public IP address.</dd>
+<dd>You can use the IBM-provided domain, such as <code>mycluster-12345.us-south.containers.appdomain.cloud/myapp</code>, to access your app from the internet. To use a custom domain instead, you can map your custom domain to the IBM-provided domain or the ALB's public IP address.</dd>
 <dt>TLS termination</dt>
 <dd>The ALB load balances HTTP network traffic to the apps in your cluster. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster. If you are using the IBM-provided Ingress subdomain, you can use the IBM-provided TLS certificate. TLS is not currently supported for IBM-provided wildcard subdomains. If you are using a custom domain, you can use your own TLS certificate to manage TLS termination.</dd>
 </dl>
@@ -522,7 +522,7 @@ To use the IBM-provided Ingress domain:
     Created:                2018-01-12T18:33:35+0000
     Location:               dal10
     Master URL:             https://169.xx.xxx.xxx:26268
-    Ingress Subdomain:      mycluster-12345.us-south.containers.mybluemix.net
+    Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
     Ingress Secret:         <tls_secret>
     Workers:                3
     Version:                1.9.7
@@ -624,7 +624,7 @@ Ingress resources define the routing rules that the ALB uses to route traffic to
     <td>To use TLS, replace <em>&lt;domain&gt;</em> with the IBM-provided Ingress subdomain or your custom domain.
 
     </br></br>
-    <strong>Note:</strong><ul><li>If your app services in different namespaces in the cluster, append a wildcard subdomain to the beginning of the domain, such as `subdomain1.custom_domain.net` or `subdomain1.mycluster.us-south.containers.mybluemix.net`. Use a unique subdomain for each resource that you create in the cluster.</li><li>Do not use &ast; for your host or leave the host property empty to avoid failures during Ingress creation.</li></ul></td>
+    <strong>Note:</strong><ul><li>If your app services in different namespaces in the cluster, append a wildcard subdomain to the beginning of the domain, such as `subdomain1.custom_domain.net` or `subdomain1.mycluster.us-south.containers.appdomain.cloud`. Use a unique subdomain for each resource that you create in the cluster.</li><li>Do not use &ast; for your host or leave the host property empty to avoid failures during Ingress creation.</li></ul></td>
     </tr>
     <tr>
     <td><code>tls/secretName</code></td>
@@ -635,7 +635,7 @@ Ingress resources define the routing rules that the ALB uses to route traffic to
     <td>Replace <em>&lt;domain&gt;</em> with the IBM-provided Ingress subdomain or your custom domain.
 
     </br></br>
-    <strong>Note:</strong><ul><li>If your apps are exposed by services in different namespaces in one cluster, append a wildcard subdomain to the beginning of the domain, such as `subdomain1.custom_domain.net` or `subdomain1.mycluster.us-south.containers.mybluemix.net`. Use a unique subdomain for each resource that you create in the cluster.</li><li>Do not use &ast; for your host or leave the host property empty to avoid failures during Ingress creation.</li></ul></td>
+    <strong>Note:</strong><ul><li>If your apps are exposed by services in different namespaces in one cluster, append a wildcard subdomain to the beginning of the domain, such as `subdomain1.custom_domain.net` or `subdomain1.mycluster.us-south.containers.appdomain.cloud`. Use a unique subdomain for each resource that you create in the cluster.</li><li>Do not use &ast; for your host or leave the host property empty to avoid failures during Ingress creation.</li></ul></td>
     </tr>
     <tr>
     <td><code>path</code></td>

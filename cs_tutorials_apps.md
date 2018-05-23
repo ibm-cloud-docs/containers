@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-21"
+lastupdated: "2018-05-23"
 
 ---
 
@@ -25,6 +25,7 @@ You can learn how to use {{site.data.keyword.containerlong}} to deploy a contain
 In this scenario, a fictional PR firm uses the {{site.data.keyword.Bluemix_notm}} service to analyze their press releases and receive feedback on the tone of their messages.
 
 Using the Kubernetes cluster that is created in the last tutorial, the PR firm's app developer deploys a Hello World version of the app. Building on each lesson in this tutorial, the app developer deploys progressively more complicated versions of the same app. The following diagram shows the components of each deployment by lesson.
+
 
 ![Lesson components](images/cs_app_tutorial_roadmap.png)
 
@@ -66,6 +67,7 @@ In the previous tutorial, you created a cluster with one worker node. In this le
 
 The components that you deploy by completing this lesson are shown in the following diagram.
 
+
 ![Deployment setup](images/cs_app_tutorial_components1.png)
 
 To deploy the app:
@@ -87,7 +89,7 @@ To deploy the app:
     ```
     {: pre}
 
-3.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. To specify an {{site.data.keyword.Bluemix_notm}} region, [include the API endpoint](cs_regions.html#bluemix_regions).
+3.  Log in to the {{site.data.keyword.Bluemix_notm}} CLI. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. To specify an {{site.data.keyword.Bluemix_notm}} region, use the `bx cs region-set` command.
 
     ```
     bx login [--sso]
@@ -176,7 +178,7 @@ To deploy the app:
         ```
         {: screen}
 
-8.  Deployments are used to manage pods, which include containerized instances of an app. The following command deploys the app in single pod. For the purposes of this tutorial, the deployment is named hello-world-deployment, but you can give it any name that you want. If you used the Docker Quickstart terminal to run Docker commands, be sure that you switch back to the CLI that you used to set the `KUBECONFIG` session variable.
+8.  Deployments are used to manage pods, which include containerized instances of an app. The following command deploys the app in single pod. For the purposes of this tutorial, the deployment is named **hello-world-deployment**, but you can give it any name that you want. If you used the Docker Quickstart terminal to run Docker commands, be sure that you switch back to the CLI that you used to set the `KUBECONFIG` session variable.
 
     ```
     kubectl run hello-world-deployment --image=registry.<region>.bluemix.net/<namespace>/hello-world:1
@@ -192,7 +194,7 @@ To deploy the app:
 
     Learn more about [securing your personal information](cs_secure.html#pi) when you work with Kubernetes resources.
 
-9.  Make the app accessible to the world by exposing the deployment as a NodePort service. Just as you might expose a port for a Cloud Foundry app, the NodePort you expose is the port on which the worker node listens for traffic.
+9.  Make the app accessible to the world by exposing the deployment as a NodePort service. Just as you might expose a port for a Cloud Foundry app, the NodePort that you expose is the port on which the worker node listens for traffic.
 
     ```
     kubectl expose deployment/hello-world-deployment --type=NodePort --port=8080 --name=hello-world-service --target-port=8080
@@ -313,13 +315,14 @@ Too many commands in this lesson? Agreed. How about using a configuration script
 In this lesson, you deploy three instances of the Hello World app into a cluster for higher availability than the first version of the app.
 {:shortdesc}
 
-Higher availability means that user access is divided between the three instances. When too many users are trying to access the same app instance, they might notice slow response times. Multiple instances can mean faster response times for your users. In this lesson, you also learn how health checks and deployment updates can work with Kubernetes. The following diagram includes the components that you deploy by completing this lesson.
+Higher availability means that user access is divided across the three instances. When too many users are trying to access the same app instance, they might notice slow response times. Multiple instances can mean faster response times for your users. In this lesson, you also learn how health checks and deployment updates can work with Kubernetes. The following diagram includes the components that you deploy by completing this lesson.
+
 
 ![Deployment setup](images/cs_app_tutorial_components2.png)
 
 In the previous tutorial, you created your account and a cluster with one worker node. In this lesson, you configure a deployment and deploy three instances of the Hello World app. Each instance is deployed in a Kubernetes pod as part of a replica set in the worker node. To make it publicly available, you also create a Kubernetes service.
 
-As defined in the configuration script, Kubernetes can use an availability check to see whether a container in a pod is running or not. For example, these checks might catch deadlocks, where an app is running, but it is unable progress. Restarting a container that is in this condition can help to make the app more available despite bugs. Then, Kubernetes uses readiness check to know when a container is ready to start accepting traffic again. A pod is considered ready when its container is ready. When the pod is ready, it is started again. In this version of the app, every 15 seconds it times out. With a health check configured in the configuration script, containers are re-created if the health check finds an issue with an app.
+As defined in the configuration script, Kubernetes can use an availability check to see whether a container in a pod is running or not. For example, these checks might catch deadlocks, where an app is running, but it is unable to progress. Restarting a container that is in this condition can help to make the app more available despite bugs. Then, Kubernetes uses a readiness check to know when a container is ready to start accepting traffic again. A pod is considered ready when its container is ready. When the pod is ready, it is started again. In this version of the app, every 15 seconds it times out. With a health check configured in the configuration script, containers are re-created if the health check finds an issue with an app.
 
 1.  In a CLI, navigate to the `Lab 2` directory.
 
@@ -385,7 +388,7 @@ As defined in the configuration script, Kubernetes can use an availability check
         ```
         {: codeblock}
 
-    3.  Note the HTTP liveness probe that check health of the container every 5 seconds.
+    3.  Note the HTTP liveness probe that checks the health of the container every 5 seconds.
 
         ```
         livenessProbe:
@@ -479,6 +482,7 @@ In the previous lessons, the apps were deployed as single components in one work
 Separating components into different containers ensures that you can update one without affecting the others. Then, you update the app to scale it up with more replicas to make it more highly available. The following diagram includes the components that you deploy by completing this lesson.
 
 ![Deployment setup](images/cs_app_tutorial_components3.png)
+
 
 From the previous tutorial, you have your account and a cluster with one worker node. In this lesson, you create an instance of {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} service in your {{site.data.keyword.Bluemix_notm}} account and configure two deployments, one deployment for each component of the app. Each component is deployed in a Kubernetes pod in the worker node. To make both of those components publicly available, you also create a Kubernetes service for each component.
 
@@ -575,7 +579,7 @@ From the previous tutorial, you have your account and a cluster with one worker 
     ```
     {: screen}
 
-6.  Open the `watson-deployment.yml` file, in the `Lab 3` directory, with a text editor. This configuration script includes a deployment and a service for both the watson and watson-talk components of the app.
+6.  Open the `watson-deployment.yml` file, in the `Lab 3` directory, with a text editor. This configuration script includes a deployment and a service for both the `watson` and `watson-talk` components of the app.
 
     1.  Update the details for the image in your registry namespace for both deployments.
 
@@ -749,6 +753,6 @@ Ready to delete what you created? You can use the configuration script to delete
 
 Now that you conquered the basics, you can move to more advanced activities. Consider trying out one of the following:
 
-- Complete a more complicated lab in the repository
+- Complete a [more complicated lab ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM/container-service-getting-started-wt#lab-overview) in the repository
 - [Automatically scale your apps](cs_app.html#app_scaling) with {{site.data.keyword.containershort_notm}}
 - Explore the container orchestration journeys on [developerWorks ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/code/journey/category/container-orchestration/)

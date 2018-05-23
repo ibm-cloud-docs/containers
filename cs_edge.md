@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-21"
+lastupdated: "2018-05-22"
 
 ---
 
@@ -79,7 +79,7 @@ Steps:
   ```
   {: screen}
 
-You labeled worker nodes with `dedicated=edge` and redeployed all of the existing load balancers and Ingress to the edge worker nodes. Next, prevent other [workloads from running on edge worker nodes](#edge_workloads) and [block inbound traffic to node ports on worker nodes](cs_network_policy.html#block_ingress).
+You labeled worker nodes with `dedicated=edge` and redeployed all of the existing load balancers and Ingress to the edge worker nodes. Next, prevent other [workloads from running on edge worker nodes](#edge_workloads) and [block inbound traffic to NodePorts on worker nodes](cs_network_policy.html#block_ingress).
 
 <br />
 

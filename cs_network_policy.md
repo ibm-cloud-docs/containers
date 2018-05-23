@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-21"
+lastupdated: "2018-05-23"
 
 ---
 
@@ -23,7 +23,7 @@ lastupdated: "2018-05-21"
 Every Kubernetes cluster is set up with a network plug-in called Calico. Default network policies are set up to secure the public network interface of every worker node in {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-If you have unique security requirements, you can use Calico and Kubernetes to create network policies for a cluster. With Kubernetes network policies, you can specify the network traffic that you want to allow or block to and from a pod within a cluster. To set more advanced network policies such as blocking incoming (ingress) traffic to LoadBalancer services, use Calico.
+If you have unique security requirements, you can use Calico and Kubernetes to create network policies for a cluster. With Kubernetes network policies, you can specify the network traffic that you want to allow or block to and from a pod within a cluster. To set more advanced network policies such as blocking inbound (ingress) traffic to LoadBalancer services, use Calico network policies.
 
 <ul>
   <li>
@@ -34,7 +34,7 @@ If you have unique security requirements, you can use Calico and Kubernetes to c
     <ul>
     <li>Allow or block network traffic on specific network interfaces regardless of the Kubernetes pod source or destination IP address or CIDR.</li>
     <li>Allow or block network traffic for pods across namespaces.</li>
-    <li>[Block incoming (ingress) traffic to LoadBalancer or NodePort Kubernetes services](#block_ingress).</li>
+    <li>[Block inbound (ingress) traffic to LoadBalancer or NodePort Kubernetes services](#block_ingress).</li>
     </ul>
   </li>
   </ul>
@@ -47,10 +47,12 @@ Calico enforces these policies, including any Kubernetes network policies that a
 ## Default Calico and Kubernetes network policies
 {: #default_policy}
 
-When a cluster is created, default Calico policies are set for the public network interface of each worker node to limit incoming traffic from the public internet. These policies don't affect pod to pod traffic and allow access to the Kubernetes nodeport, load balancer, and Ingress services.
+When a cluster with a public VLAN is created, a HostEndpoint resource with the `ibm.role: worker_public` label is created automatically for each worker node and its public network interface. To protect the public network interface of a worker node, default Calico policies are applied to any host endpoint with the `ibm.role: worker_public` label.
 {:shortdesc}
 
-Default Calico policies are not applied to pods directly; they are applied to the public network interface of a worker node by using a Calico host endpoint. When a host endpoint is created in Calico, all traffic to and from that worker node's network interface is blocked, unless that traffic is allowed by a policy.
+These default Calico policies allow all outbound network traffic and allow inbound traffic to specific cluster components, such as Kubernetes NodePort, LoadBalancer, and Ingress services. Any other inbound network traffic from the internet to your worker nodes that is not specified in the default policies is blocked. The default policies don't affect pod to pod traffic.
+
+Review the following default Calico network policies that are automatically applied to your cluster.
 
 **Important:** Do not remove policies that are applied to a host endpoint unless you fully understand the policy. Be sure that you do not need the traffic that is being allowed by the policy.
 
@@ -74,7 +76,7 @@ Default Calico policies are not applied to pods directly; they are applied to th
      </tr>
     <tr>
       <td><code>allow-node-port-dnat</code></td>
-      <td>Allows incoming nodeport, load balancer, and ingress service traffic to the pods that those services are exposing. <strong>Note</strong>: You don't need to specify the exposed ports because Kubernetes uses destination network address translation (DNAT) to forward the service requests to the correct pods. That forwarding takes place before the host endpoint policies are applied in iptables.</td>
+      <td>Allows incoming NodePort, LoadBalancer, and Ingress service traffic to the pods that those services are exposing. <strong>Note</strong>: You don't need to specify the exposed ports because Kubernetes uses destination network address translation (DNAT) to forward the service requests to the correct pods. That forwarding takes place before the host endpoint policies are applied in iptables.</td>
    </tr>
    <tr>
       <td><code>allow-sys-mgmt</code></td>
@@ -87,7 +89,7 @@ Default Calico policies are not applied to pods directly; they are applied to th
   </tbody>
 </table>
 
-In Kubernetes version 1.10 and newer clusters, a default Kubernetes policy that limits access to the Kubernetes Dashboard is also created.
+In Kubernetes version 1.10 and newer clusters, a default Kubernetes policy that limits access to the Kubernetes Dashboard is also created. Kubernetes policies don't apply to the host endpoint, but to the `kube-dashboard` pod instead. This policy applies to clusters connected only to a private VLAN and clusters connected to a public and private VLAN.
 
 <table>
 <caption>Default Kubernetes policies for each cluster</caption>
@@ -634,13 +636,13 @@ Before you update your cluster from Kubernetes version 1.9 or earlier to version
 <br />
 
 
-## Blocking incoming traffic to LoadBalancer or NodePort services
+## Blocking inbound traffic to LoadBalancer or NodePort services
 {: #block_ingress}
 
-By default, Kubernetes `NodePort` and `LoadBalancer` services are designed to make your app available on all public and private cluster interfaces. However, you can block incoming traffic to your services based on traffic source or destination.
+[By default](#default_policy), Kubernetes NodePort and LoadBalancer services are designed to make your app available on all public and private cluster interfaces. However, you can block incoming traffic to your services based on traffic source or destination.
 {:shortdesc}
 
-A Kubernetes LoadBalancer service is also a NodePort service. A LoadBalancer service makes your app available over the load balancer IP address and port and makes your app available over the service's node ports. Node ports are accessible on every IP address (public and private) for every node within the cluster.
+A Kubernetes LoadBalancer service is also a NodePort service. A LoadBalancer service makes your app available over the LoadBalancer IP address and port and makes your app available over the service's NodePorts. NodePorts are accessible on every IP address (public and private) for every node within the cluster.
 
 The cluster administrator can use Calico `preDNAT` network policies to block:
 
@@ -649,19 +651,19 @@ The cluster administrator can use Calico `preDNAT` network policies to block:
 
 Some common uses for Calico `preDNAT` network policies:
 
-  - Block traffic to public node ports of a private LoadBalancer service.
-  - Block traffic to public node ports on clusters that are running [edge worker nodes](cs_edge.html#edge). Blocking node ports ensures that the edge worker nodes are the only worker nodes that handle incoming traffic.
+  - Block traffic to public NodePorts of a private LoadBalancer service.
+  - Block traffic to public NodePorts on clusters that are running [edge worker nodes](cs_edge.html#edge). Blocking NodePorts ensures that the edge worker nodes are the only worker nodes that handle incoming traffic.
 
 Default Kubernetes and Calico policies are difficult to apply to protecting Kubernetes NodePort and LoadBalancer services due to the DNAT iptables rules generated for these services.
 
 Calico `preDNAT` network policies can help you because they generate iptables rules based on a Calico
 network policy resource. Kubernetes version 1.10 or later clusters use [network policies with `calicoctl.cfg` v3 syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/reference/calicoctl/resources/networkpolicy). Kubernetes version 1.9 or earlier clusters use [policies with `calicoctl.cfg` v2 syntax ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy).
 
-1. Define a Calico `preDNAT` network policy for ingress access to Kubernetes services.
+1. Define a Calico `preDNAT` network policy for ingress (inbound traffic) access to Kubernetes services.
 
     * Kubernetes version 1.10 or later clusters must use Calico v3 policy syntax.
 
-        Example resource that blocks all node ports:
+        Example resource that blocks all NodePorts:
 
         ```
         apiVersion: projectcalico.org/v3
@@ -692,7 +694,7 @@ network policy resource. Kubernetes version 1.10 or later clusters use [network 
 
     * Kubernetes version 1.9 or earlier clusters must use Calico v2 policy syntax.
 
-        Example resource that blocks all node ports:
+        Example resource that blocks all NodePorts:
 
         ```
         apiVersion: v1
