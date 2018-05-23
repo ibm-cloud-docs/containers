@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-22"
+lastupdated: "2018-05-23"
 
 ---
 
@@ -267,7 +267,7 @@ To install and configure the 3.1.1 Calico CLI:
 
         - Windows:
           <ol><li>Open the directory that you retrieved in the last step.</br><pre class="codeblock"><code>C:\Users\<user>\.bluemix\plugins\container-service\&lt;cluster_name&gt;-admin\</code></pre>
-          <li> Locate the <code>ca-*pem&#95;file</code> file.</ol>
+          <li> Locate the <code>ca-*pem_file</code> file.</ol>
 
     4. Verify that the Calico configuration is working correctly.
 
@@ -440,7 +440,7 @@ To install and configure the 1.6.3 Calico CLI:
 
         - Windows:
           <ol><li>Open the directory that you retrieved in the last step.</br><pre class="codeblock"><code>C:\Users\<user>\.bluemix\plugins\container-service\&lt;cluster_name&gt;-admin\</code></pre>
-          <li> Locate the <code>ca-*pem&#95;file</code> file.</ol>
+          <li> Locate the <code>ca-*pem_file</code> file.</ol>
 
     4. Verify that the Calico configuration is working correctly.
 
