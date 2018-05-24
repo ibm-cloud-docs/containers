@@ -556,6 +556,7 @@ To create a cluster:
 <br />
 
 
+
 :    us-south
     Worker zones:       dal10,dal12
     Master URL:         https://169.xx.xxx.xxx:21111
@@ -614,7 +615,8 @@ With the iccs-cluster-autoscaler image you can scale worker nodes that are provi
 The alpha version currently supports single zone availability only and is not available for worker nodes on physical bare metal servers.
 {: tip}
 
-The iccs-cluster-autoscaler monitors the pods in your cluster by watching the Kubernetes API server and automatically scales the size of your cluster by adding or deleting worker nodes. To configure the autoscaler or learn more, see [Getting started with the iccs-cluster-autoscaler image](/docs/services/RegistryImages/ibm-cluster-autoscaler/index.html#ibm-cluster-autoscaler)
+The iccs-cluster-autoscaler monitors the pods in your cluster by watching the Kubernetes API server and automatically scales the size of your cluster by adding or deleting worker nodes. To configure the autoscaler or learn more, see [Getting started with the iccs-cluster-autoscaler image](/docs/services/RegistryImages/ibm-cluster-autoscaler/index.html#ibm-cluster-autoscaler).
+
 </staging>
 
 ## Viewing cluster states
