@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-02"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -19,13 +19,18 @@ lastupdated: "2018-02-02"
 # Actualización de clústeres y nodos trabajadores
 {: #update}
 
+Puede instalar actualizaciones para mantener actualizados los clústeres de Kubernetes en {{site.data.keyword.containerlong}}.
+{:shortdesc}
+
 ## Actualización del maestro de Kubernetes
 {: #master}
 
-Periódicamente, Kubernetes publica actualizaciones. Podría ser una [actualización mayor, menor o un parche](cs_versions.html#version_types). En función del tipo de actualización, podría ser responsable de actualizar su maestro de Kubernetes. Usted siempre es el responsable de mantener actualizados los nodos trabajadores. Cuando se realizan actualizaciones, el maestro de Kubernetes se actualiza antes que los nodos trabajadores.
+Periódicamente, Kubernetes publica [actualizaciones de parche, mayores o menores](cs_versions.html#version_types). En función del tipo de actualización, podría ser responsable de actualizar los componentes del maestro de Kubernetes.
 {:shortdesc}
 
-De forma predeterminada, limitamos la posibilidad de actualizar un maestro de Kubernetes con una antigüedad superior a dos versiones después de su versión actual. Por ejemplo, si el maestro actual es de la versión 1.5 y desea actualizar a 1.8, primero se debe actualizar a la versión 1.7. Puede forzar que se produzca, pero actualizar a dos versiones menores puede provocar resultados imprevistos.
+Las actualizaciones pueden afectar a la versión del servidor de API de Kubernetes o a otros componentes del maestro de Kubernetes.  Usted siempre es el responsable de mantener actualizados los nodos trabajadores. Cuando se realizan actualizaciones, el maestro de Kubernetes se actualiza antes que los nodos trabajadores.
+
+De forma predeterminada, la posibilidad de actualizar el servidor de API de Kubernetes está limitada en el maestro de Kubernetes a dos versiones menores posteriores a su versión actual. Por ejemplo, si el servidor de API de Kubernetes actual es de la versión 1.5 y desea actualizar a 1.8, primero se debe actualizar a la versión 1.7. Puede forzar que se produzca, pero actualizar a dos versiones menores puede provocar resultados imprevistos. Si el clúster está ejecutando una versión no soportada de Kubernetes, es posible que tenga que forzar la actualización.
 
 El diagrama siguiente muestra el proceso que puede realizar para actualizar el maestro.
 
@@ -38,10 +43,11 @@ Figura 1. Diagrama del proceso de actualización del maestro de Kubernetes
 Para las actualizaciones _mayores_ o _menores_, siga estos pasos:
 
 1. Revise los [cambios de Kubernetes](cs_versions.html) y realice las actualizaciones marcadas como _Actualizar antes que maestro_.
-2. Actualizar el maestro de Kubernetes mediante la GUI o mediante la ejecución del [mandato de CLI](cs_cli_reference.html#cs_cluster_update). Cuando actualice el maestro de Kubernetes, el maestro está inactivo durante unos 5 o 10 minutos. Durante la actualización, no puede acceder ni cambiar el clúster. Sin embargo, los nodos trabajadores, las apps y los recursos que los usuarios del clúster han desplegado no se modifican y continúan ejecutándose.
-3. Confirme que la actualización se ha completado. Revise la versión de Kubernetes en el panel de control de {{site.data.keyword.Bluemix_notm}} o ejecutando `cs bx clusters`.
+2. Actualice el servidor de API de Kubernetes y los componentes asociados del maestro de Kubernetes mediante la GUI o mediante la ejecución del [mandato de CLI](cs_cli_reference.html#cs_cluster_update). Cuando actualice el servidor de API de Kubernetes, el servidor de API estará inactivo durante unos 5 o 10 minutos. Durante la actualización, no puede acceder ni cambiar el clúster. Sin embargo, los nodos trabajadores, las apps y los recursos que los usuarios del clúster han desplegado no se modifican y continúan ejecutándose.
+3. Confirme que la actualización se ha completado. Revise la versión del servidor de API de Kubernetes en el panel de control de {{site.data.keyword.Bluemix_notm}} o ejecutando `cs bx clusters`.
+4. Instale la versión de [`kubectl cli`](cs_cli_install.html#kubectl) que coincida con la versión del servidor de API de Kubernetes API que se ejecuta en el maestro de Kubernetes.
 
-Cuando finalice la actualización del maestro de Kubernetes, puede actualizar los nodos trabajadores.
+Cuando finalice la actualización del servidor de API de Kubernetes, puede actualizar los nodos trabajadores.
 
 <br />
 
@@ -49,8 +55,10 @@ Cuando finalice la actualización del maestro de Kubernetes, puede actualizar lo
 ## Actualización de nodos trabajadores
 {: #worker_node}
 
-Ha recibido una notificación para actualizar sus nodos trabajadores. ¿Qué significa esto? Sus datos se almacenan dentro de los pods de los nodos trabajadores. Como las actualizaciones y parches de seguridad se han aplicado para el maestro de Kubernetes, debe asegurarse de que los nodos trabajadores permanecen sincronizados. El maestro del nodo trabajador no puede ser superior al maestro de Kubernetes.
+Ha recibido una notificación para actualizar los nodos trabajadores. ¿Qué significa esto? Como las actualizaciones y parches de seguridad se han aplicado para el servidor de API de Kubernetes y otros componentes del maestro de Kubernetes, debe asegurarse de que los nodos trabajadores permanecen sincronizados.
 {: shortdesc}
+
+La versión de Kubernetes del nodo trabajador no puede ser superior a la a la versión del servidor de API de Kubernetes que se ejecuta en el maestro de Kubernetes. Antes de empezar, [actualice el maestro de Kubernetes](#master).
 
 <ul>**Atención:**:</br>
 <li>Las actualizaciones de los nodos trabajadores pueden provocar que las apps y servicios estén un tiempo inactivos.</li>
@@ -75,11 +83,9 @@ Si el mapa de configuración no está definido, se utiliza el valor predetermina
 
 Para actualizar los nodos trabajadores:
 
-1. Instale la versión de [`kubectl cli` ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/tools/install-kubectl/) que coincida con la versión de Kubernetes del maestro de Kubernetes.
+1. Aplique los cambios que se marcan como _Actualizar después de maestro_ en [Cambios de Kubernetes](cs_versions.html).
 
-2. Aplique los cambios que se marcan como _Actualizar después de maestro_ en [Cambios de Kubernetes](cs_versions.html).
-
-3. Opcional: Defina el mapa de configuración.
+2. Opcional: Defina el mapa de configuración.
     Ejemplo:
 
     ```
@@ -110,7 +116,7 @@ Para actualizar los nodos trabajadores:
     {:pre}
   <table summary="La primera fila de la tabla abarca ambas columnas. El resto de las filas se deben leer de izquierda a derecha, con el parámetro en la columna uno y la descripción correspondiente en la columna dos. ">
     <thead>
-      <th colspan=2><img src="images/idea.png"/> Visión general de los componentes </th>
+      <th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Descripción de los componentes </th>
     </thead>
     <tbody>
       <tr>
@@ -162,5 +168,51 @@ Pasos siguientes:
   - Repita el proceso de actualización con otros clústeres.
   - Informe a los desarrolladores que trabajan en el clúster para que actualicen su CLI de `kubectl` a la versión del maestro de Kubernetes.
   - Si el panel de control de Kubernetes no muestra los gráficos de utilización, [suprima el pod `kube-dashboard`](cs_troubleshoot.html#cs_dashboard_graphs).
+
+
 <br />
+
+
+
+## Actualización de los tipos de máquina
+{: #machine_type}
+
+Puede actualizar los tipos de máquina que se utilizan en los nodos trabajadores añadiendo nuevos nodos trabajadores y eliminando los antiguos. Por ejemplo, si tiene nodos trabajadores virtuales en tipos de máquina en desuso con `u1c` o `b1c` en los nombres, cree nodos trabajadores que utilicen tipos de máquina con `u2c` o `b2c` en el nombre.
+{: shortdesc}
+
+1. Anote los nombres y las ubicaciones de los nodos trabajadores que desea actualizar.
+    ```
+    bx cs workers <cluster_name>
+    ```
+    {: pre}
+
+2. Consulte los tipos de máquina disponibles.
+    ```
+    bx cs machine-types <location>
+    ```
+    {: pre}
+
+3. Añada un nodo trabajador utilizando el mandato [bx cs worker-add](cs_cli_reference.html#cs_worker_add) y especifique uno de los tipos de máquina enumerados en la salida del mandato anterior.
+
+    ```
+    bx cs worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_vlan> --public-vlan <public_vlan>
+    ```
+    {: pre}
+
+4. Verifique que se añade el nodo trabajador.
+
+    ```
+    bx cs workers <cluster_name>
+    ```
+    {: pre}
+
+5. Cuando el nodo trabajador añadido está en estado `Normal`, puede eliminar el nodo trabajador obsoleto. **Nota**: Si va a eliminar un tipo de máquina que se factura mensualmente (como las nativas), se le facturará todo el mes.
+
+    ```
+    bx cs worker-rm <cluster_name> <worker_node>
+    ```
+    {: pre}
+
+6. Repita estos pasos para actualizar otros nodos trabajadores a diferentes tipos de máquina.
+
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-03-08"
 
 ---
 
@@ -40,9 +40,8 @@ Consulte la información más reciente en su nueva ubicación:
     - [Adición de subredes y direcciones IP gestionadas por el usuario a clústeres de Kubernetes](cs_subnets.html#user_managed)
 - [Utilización de recursos compartidos de archivos de NFS existentes en clústeres](cs_storage.html#existing)
 - [Configuración del registro de clúster](cs_health.html#logging)
-    - [Habilitación del reenvío de registros](cs_health.html#log_sources_enable)
-    - [Habilitación del reenvío de registros para aplicaciones](cs_health.html#apps_enable)
-    - [Actualización de la configuración de reenvío de registros](cs_health.html#log_sources_update)
+    - [Habilitación del reenvío de registros](cs_health.html#logging)
+    - [Actualización de la configuración de reenvío de registros](cs_health.html#logging)
     - [Detención del reenvío de registros](cs_health.html#log_sources_delete)
     - [Configuración de reenvío de registros para registros de auditoría de API de Kubernetes](cs_health.html#app_forward)
     - [Habilitación del reenvío de registros de auditoría de API de Kubernetes](cs_health.html#audit_enable)

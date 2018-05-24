@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-06"
+lastupdated: "2018-03-13"
 
 ---
 
@@ -19,20 +19,44 @@ lastupdated: "2018-02-06"
 # Configuración de los servicios del equilibrador de carga
 {: #loadbalancer}
 
-Exponga un puerto y utilice la dirección IP portátil para que el equilibrador de carga acceda a la app. Utilice una dirección IP pública para hacer una app accesible en Internet o una dirección IP privada para hacer una app accesible en la red de infraestructura privada.
+Exponga un puerto y utilice la dirección IP portátil para que el equilibrador de carga acceda a la app contenerizada.
 {:shortdesc}
 
+## Planificación del trabajo en red externo con servicios LoadBalancer
+{: #planning}
+
+Cuando se crea un clúster estándar, {{site.data.keyword.containershort_notm}} solicita automáticamente cinco direcciones IP públicas portátiles y cinco direcciones IP privadas portátiles y las suministra a la cuenta de infraestructura de IBM Cloud (SoftLayer) durante la creación de un clúster. Dos de las direcciones IP portátiles, una pública y una privada, se utilizan para los [equilibradores de carga de aplicación de Ingress](cs_ingress.html#planning). Se pueden utilizar cuatro direcciones IP públicas portátiles y cuatro direcciones IP privadas portátiles para exponer apps al público mediante la creación de un servicio LoadBalancer.
+
+Cuando se crea un servicio LoadBalancer de Kubernetes en un clúster en una VLAN pública, se crea un equilibrador de carga externo. Las opciones para las direcciones IP cuando se crea un servicio LoadBalancer son las siguientes:
+
+- Si el clúster está en una VLAN pública, se utiliza una de las cuatro direcciones IP públicas portátiles disponibles.
+- Si el clúster solo está disponible en una VLAN privada, se utiliza una de las cuatro direcciones IP privadas portátiles disponibles.
+- Puede solicitar una dirección IP privada o pública portátil para un servicio LoadBalancer añadiendo una anotación al archivo de configuración: `service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>`.
+
+La dirección IP pública portátil asignada al servicio LoadBalancer es permanente y no cambia cuando se elimina o se vuelve a crear un nodo trabajador. Por lo tanto, el servicio LoadBalancer está más disponible que el servicio NodePort. A diferencia de los servicios NodePort, puede asignar cualquier puerto al equilibrador de carga y no está vinculado a ningún rango de puertos determinado. Si utiliza un servicio LoadBalancer, también hay un puerto de nodo disponible en cada dirección IP de cualquier nodo trabajador. Para bloquear el acceso al puerto del nodo mientras está utilizando un servicio LoadBalancer, consulte [Bloqueo del tráfico de entrada](cs_network_policy.html#block_ingress).
+
+El servicio LoadBalancer sirve como punto de entrada externo para las solicitudes entrantes para la app. Para acceder al servicio LoadBalancer desde Internet, utilice la dirección IP pública del equilibrador de carga y el puerto asignado en el formato `<ip_address>:<port>`. El siguiente diagrama muestra cómo se dirige la comunicación del equilibrador de carga desde Internet a una app:
+
+<img src="images/cs_loadbalancer_planning.png" width="550" alt="Exponer una app en {{site.data.keyword.containershort_notm}} utilizando un equilibrador de carga" style="width:550px; border-style: none"/>
+
+1. Se envía una solicitud a la app mediante la dirección IP pública del equilibrador de carga y el puerto asignado en el nodo trabajador.
+
+2. La solicitud se reenvía automáticamente al puerto y a la dirección IP del clúster interno del servicio del equilibrador de carga. Solo se puede acceder a la dirección IP del clúster interno dentro del clúster.
+
+3. `kube-proxy` direcciona la solicitud al servicio del equilibrador de carga de Kubernetes para la app.
+
+4. La solicitud se reenvía a la dirección IP privada del pod en el que se ha desplegado la app. Si se despliegan varias instancias de app en el clúster, el equilibrador de carga direcciona las solicitudes entre los pods de app.
 
 
-## Configuración del acceso a una app utilizando el tipo de servicio LoadBalancer
+
+
+<br />
+
+
+
+
+## Configuración del acceso a una app con un equilibrador de carga
 {: #config}
-
-A diferencia del servicio NodePort, la dirección IP portátil del servicio equilibrador de carga no depende del nodo trabajador en el que se ha desplegado la app. Sin embargo, un servicio LoadBalancer de Kubernetes es también un servicio NodePort. Un servicio LoadBalancer hace que la app está disponible en la dirección IP y puerto del equilibrador de carga y hace que la app está disponible en los puertos del nodo del servicio.
-{:shortdesc}
-
-La dirección IP portátil del equilibrador de carga se asigna automáticamente y no cambia cuando se añaden o eliminan nodos trabajadores. Por lo tanto, los servicios del equilibrador de carga están más disponibles que los servicios NodePort. Los usuarios pueden seleccionar cualquier puerto para el equilibrador de carga y no están limitados al rango de puertos de NodePort. Puede utilizar los servicios equilibradores de carga para los protocolos TCP y UDP.
-
-**Nota:** Los servicios LoadBalancer no dan soporte a la terminación TLS. Si la app necesita terminación TLS, puede exponer la app mediante [Ingress](cs_ingress.html) o configurar la app de modo que gestione la terminación TLS.
 
 Antes de empezar:
 
@@ -108,11 +132,11 @@ Para crear un servicio equilibrador de carga:
         </tr>
         <tr>
           <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:`
-          <td>Anotación para especificar el tipo de LoadBalancer. Los valores son `private` y `public`. Cuando se crea un LoadBalancer público en clústeres en VLAN públicas, esta anotación no es necesaria.</td>
+          <td>Anotación para especificar el tipo de LoadBalancer. Los valores son `private` y `public`. Si va a crear un LoadBalancer público en clústeres en VLAN públicas, esta anotación no es necesaria.</td>
         </tr>
         <tr>
           <td><code>loadBalancerIP</code></td>
-          <td>Al crear un LoadBalancer privado o utilizar una dirección IP portátil específica para un LoadBalancer público, sustituya <em>&lt;loadBalancerIP&gt;</em> por la dirección IP que desee utilizar. Para obtener más información, consulte la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer).</td>
+          <td>Para crear un LoadBalancer privado o utilizar una dirección IP portátil específica para un LoadBalancer público, sustituya <em>&lt;loadBalancerIP&gt;</em> por la dirección IP que desee utilizar. Para obtener más información, consulte la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer).</td>
         </tr>
         </tbody></table>
 

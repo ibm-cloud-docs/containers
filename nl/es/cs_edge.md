@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-07"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -18,15 +18,19 @@ lastupdated: "2018-02-07"
 # Restricción del tráfico de red para los nodos trabajadores de extremo
 {: #edge}
 
-Los nodos trabajadores de extremo pueden mejorar la seguridad de su clúster al permitir el acceso externo a un número inferior de nodos trabajadores y aislar la carga de trabajo en red. Cuando estos nodos trabajadores se marcan solo para trabajo en red, las demás cargas de trabajo no pueden consumir la CPU ni la memoria del nodo trabajador ni interferir con la red.
+Los nodos trabajadores de extremo pueden mejorar la seguridad de su clúster de Kubernetes al permitir el acceso externo a un número inferior de nodos trabajadores y aislar la carga de trabajo en red en {{site.data.keyword.containerlong}}. 
 {:shortdesc}
+
+Cuando estos nodos trabajadores se marcan solo para trabajo en red, las demás cargas de trabajo no pueden consumir la CPU ni la memoria del nodo trabajador ni interferir con la red.
+
 
 
 
 ## Etiquetar nodos trabajadores como nodos extremos
 {: #edge_nodes}
 
-Añada la etiqueta `dedicated=edge` a dos o más nodos trabajadores en el clúster para garantizar que Ingress y los equilibradores de carga están desplegados solo en los nodos trabajadores.
+Añada la etiqueta `dedicated=edge` a dos o más nodos trabajadores en cada VLAN pública en el clúster para garantizar que Ingress y los equilibradores de carga están desplegados solo en los nodos trabajadores.
+{:shortdesc}
 
 Antes de empezar:
 
@@ -36,7 +40,7 @@ Antes de empezar:
 
 Pasos:
 
-1. Obtenga una lista de todos los nodos trabajadores del clúster. Utilice la dirección IP privada de la columna **NAME** para identificar los nodos. Seleccione al menos dos nodos trabajadores para que sean nodos trabajadores de extremo. Utilizar dos o más nodos trabajadores mejora la disponibilidad de los recursos de red.
+1. Obtenga una lista de todos los nodos trabajadores del clúster. Utilice la dirección IP privada de la columna **NAME** para identificar los nodos. Seleccione al menos dos nodos trabajadores en cada VLAN pública para que sean nodos trabajadores de extremo. Utilizar dos o más nodos trabajadores mejora la disponibilidad de los recursos de red.
 
   ```
   kubectl get nodes -L publicVLAN,privateVLAN,dedicated
@@ -81,8 +85,11 @@ Se ha añadido a los nodos trabajadores la etiqueta `dedicated=edge` y se han vu
 ## Restricción de la ejecución de cargas de trabajo en los nodos trabajadores de extremo
 {: #edge_workloads}
 
-Una de las ventajas de los nodos trabajadores extremos es que se puede especificar que solo ejecuten servicios de red. Mediante la tolerancia `dedicated=edge` se conseguirá que todos los servicios de equilibradores de carga y de Ingress se desplieguen solo en los nodos trabajadores etiquetados. Sin embargo, para evitar que se ejecuten otras cargas de trabajo en los nodos trabajadores de extremo y consuman recursos de los nodos trabajadores, se deben utilizar [corrupciones de Kubernetes ![Enlace de icono externo](../icons/launch-glyph.svg "Enlace de icono externo")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
-{:shortdesc}
+Una de las ventajas de los nodos trabajadores extremos es que se puede especificar que solo ejecuten servicios de red.
+{:shortdesc} 
+
+Mediante la tolerancia `dedicated=edge` se conseguirá que todos los servicios de equilibradores de carga y de Ingress se desplieguen solo en los nodos trabajadores etiquetados. Sin embargo, para evitar que se ejecuten otras cargas de trabajo en los nodos trabajadores de extremo y consuman recursos de los nodos trabajadores, se deben utilizar [corrupciones de Kubernetes ![Enlace de icono externo](../icons/launch-glyph.svg "Enlace de icono externo")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
+
 
 1. Obtenga una lista de todos los nodos trabajadores con la etiqueta `edge`.
 

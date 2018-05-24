@@ -19,7 +19,7 @@ lastupdated: "2017-11-02"
 # Creación de una señal de {{site.data.keyword.registryshort_notm}} para un registro de imágenes de {{site.data.keyword.Bluemix_dedicated_notm}}
 {: #cs_dedicated_tokens}
 
-Cree una señal que no caduque para utilizar un registro de imágenes que pueda utilizar para grupos escalables con clústeres.
+Cree una señal que no caduque para un registro de imágenes que pueda utilizar para grupos escalables y únicos con clústeres en {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
 1.  Inicie sesión en el entorno de {{site.data.keyword.Bluemix_dedicated_notm}}.

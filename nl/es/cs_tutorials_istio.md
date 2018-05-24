@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-05"
+lastupdated: "2018-02-27"
 
 ---
 
@@ -19,8 +19,7 @@ lastupdated: "2018-02-05"
 # Guía de aprendizaje: Instalación de Istio en {{site.data.keyword.containerlong_notm}}
 {: #istio_tutorial}
 
-[Istio](https://www.ibm.com/cloud/info/istio) es una plataforma de código abierto que ofrece a los desarrolladores una forma uniforme de conectarse, proteger y gestionar una red de microservicios, también conocida como malla de servicios, en plataformas de nube, como Kubernetes. Istio proporciona la posibilidad de gestionar el tráfico de la red, equilibrar la carga entre los microservicios, aplicar políticas de acceso y verificar la identidad en la malla de servicios, entre otras muchas funciones.
-
+[Istio](https://www.ibm.com/cloud/info/istio) es una plataforma de código abierto para conectarse, proteger y gestionar una red de microservicios, también conocida como malla de servicios, en plataformas de nube, como Kubernetes en {{site.data.keyword.containerlong}}. Istio le permite gestionar el tráfico de la red, equilibrar la carga entre los microservicios, aplicar políticas de acceso y verificar la identidad en la malla de servicios, entre otras funciones.
 {:shortdesc}
 
 En esta guía de aprendizaje, puede aprender cómo instalar Istio junto a cuatro microservicios para una sencilla app ficticia sobre libros denominada BookInfo. Los microservicios incluyen una página web de productos, detalles de libros, revisiones y evaluaciones. Cuando se despliegan los microservicios de BookInfo en un clúster de {{site.data.keyword.containershort}} en el que está instalado Istio, se inyectan los proxies sidecar Envoy de Istio en los pods de cada microservicio.
@@ -53,6 +52,7 @@ Esta guía de aprendizaje está destinada a los desarrolladores de software y ad
 {: #istio_tutorial1}
 
 Descargar e instalar Istio en el clúster.
+{:shortdesc}
 
 1. Descargue Istio directamente desde [https://github.com/istio/istio/releases ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/istio/istio/releases) u obtenga la última versión mediante curl:
 
@@ -123,7 +123,10 @@ Descargar e instalar Istio en el clúster.
 ## Lección 2: Desplegar la app BookInfo
 {: #istio_tutorial2}
 
-Despliegue los microservicios de la app de muestra BookInfo en el clúster de Kubernetes. Los microservicios incluyen una página web de productos, detalles de libros, revisiones (con varias versiones del microservicio de revisión) y evaluaciones. Puede encontrar todos los archivos utilizados en este ejemplo en el directorio de instalación de Istio `samples/bookinfo`.
+Despliegue los microservicios de la app de muestra BookInfo en el clúster de Kubernetes.
+{:shortdesc}
+
+Los microservicios incluyen una página web de productos, detalles de libros, revisiones (con varias versiones del microservicio de revisión) y evaluaciones. Puede encontrar todos los archivos utilizados en este ejemplo en el directorio de instalación de Istio `samples/bookinfo`.
 
 Cuando despliega BookInfo, los proxies sidecar Envoy se inyectan como contenedores en los pods de los microservicios de la app antes de que se desplieguen los pods de microservicio. Istio utiliza una versión ampliada del proxy Envoy para conciliar todo el tráfico de entrada y salida de todos los microservicios de la malla de servicios. Para obtener más información sobre Envoy, consulte la [documentación de Istio ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://istio.io/docs/concepts/what-is-istio/overview.html#envoy).
 
@@ -222,6 +225,7 @@ Cuando despliega BookInfo, los proxies sidecar Envoy se inyectan como contenedor
 {: #istio_tutorial_cleanup}
 
 Si no desea explorar más funciones de Istio indicadas en [¿Qué es lo siguiente?](#istio_tutorial_whatsnext), puede limpiar los recursos de Istio en el clúster.
+{:shortdesc}
 
 1. Suprima todos los servicios, pods y despliegues de BookInfo del clúster.
 

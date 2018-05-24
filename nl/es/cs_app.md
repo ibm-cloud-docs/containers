@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-02-28"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-01-24"
 # Despliegue de apps en clústeres
 {: #app}
 
-Puede utilizar las técnicas de Kubernetes para desplegar apps y asegurarse de que sus apps están siempre activas y en funcionamiento. Por ejemplo, puede realizar actualizaciones continuas y retrotracciones sin causar a los usuarios tiempos de inactividad.
+Puede utilizar las técnicas de Kubernetes en {{site.data.keyword.containerlong}} para desplegar apps en contenedores y asegurarse de que las estén siempre activas y en funcionamiento. Por ejemplo, puede realizar actualizaciones continuas y retrotracciones sin causar a los usuarios tiempos de inactividad.
 {:shortdesc}
 
 Conozca los pasos generales para desplegar apps pulsando en un área de la imagen siguiente.
@@ -40,8 +40,9 @@ Conozca los pasos generales para desplegar apps pulsando en un área de la image
 {: #highly_available_apps}
 
 Cuanto más ampliamente distribuya la configuración entre varios nodos trabajadores y clústeres, menor será la probabilidad de que los usuarios experimenten tiempo de inactividad con la app.
+{:shortdesc}
 
-Revise las siguientes configuraciones potenciales de apps que están ordenadas por grados de disponibilidad en orden ascendente.{:shortdesc}
+Revise las siguientes configuraciones potenciales de apps que están ordenadas por grados de disponibilidad en orden ascendente.
 
 ![Etapas de alta disponibilidad de una app](images/cs_app_ha_roadmap.png)
 
@@ -50,7 +51,7 @@ Revise las siguientes configuraciones potenciales de apps que están ordenadas p
 3.  Un despliegue con n+2 pods gestionados por un conjunto de réplicas y distribuidos en varios nodos (antiafinidad) en distintas ubicaciones.
 4.  Un despliegue con n+2 pods gestionados por un conjunto de réplicas y distribuidos en varios nodos (antiafinidad) en distintas regiones.
 
-Obtenga más información sobre las técnicas para aumentar la disponibilidad de su app:
+### Cómo aumentar la disponibilidad de la app
 
 <dl>
 <dt>Utilice despliegues y conjuntos de réplicas para desplegar la app y sus dependencias</dt>
@@ -73,7 +74,7 @@ como afinidad o coubicación. Para proteger la app ante un error del nodo trabaj
 <strong>Nota:</strong> El siguiente archivo YAML hace que cada pod se despliegue en un nodo trabajador diferente. Cuando tenga más réplicas definidas que nodos trabajadores disponibles en el clúster, solo se despliega el número de réplicas que cumpla el requisito antiafinidad. Las réplicas adicionales permanecen en estado pendiente hasta que se añaden al clúster nodos trabajadores adicionales.
 
 <pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
+<code>apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: wasliberty
@@ -134,7 +135,7 @@ Un despliegue básico de app en un clúster gratuito o estándar puede incluir l
 
 Para desplegar los componentes de una app mínima tal como se muestra en el diagrama, utilice un archivo de configuración parecido al del siguiente ejemplo:
 ```
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: ibmliberty
@@ -338,7 +339,7 @@ Para crear un secreto con un certificado:
 ## Despliegue de apps con la GUI
 {: #app_ui}
 
-Cuando despliega una app a un clúster utilizando el panel de control de Kubernetes, se crea automáticamente un recurso de despliegue que crea, actualiza y gestiona los pods del clúster.
+Cuando despliega una app a un clúster utilizando el panel de control de Kubernetes, un recurso de despliegue crea, actualiza y gestiona automáticamente los pods del clúster.
 {:shortdesc}
 
 Antes de empezar:
@@ -350,7 +351,7 @@ Para desplegar la app:
 
 1.  [Abra el panel de control de Kubernetes](#cli_dashboard).
 2.  En el panel de control de Kubernetes, pulse **+ Crear**.
-3.  Seleccione **Especificar detalles de app a continuación** para especificar los detalles de la app en la GUI o bien **Cargar un archivo YAML o JSON** para cargar el [archivo de configuración ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) de la app. Utilice [este archivo YAML de ejemplo ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/IBM-Bluemix/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml) para desplegar un contenedor desde la imagen **ibmliberty** de la región US-Sur.
+3.  Seleccione **Especificar detalles de app a continuación** para especificar los detalles de la app en la GUI o bien **Cargar un archivo YAML o JSON** para cargar el [archivo de configuración ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) de la app. Utilice [este archivo YAML de ejemplo ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml) para desplegar un contenedor desde la imagen **ibmliberty** de la región US-Sur.
 4.  En el panel de control de Kubernetes, pulse **Despliegues** para verificar que el despliegue se ha creado.
 5.  Si ha puesto la app a disponibilidad pública mediante un servicio de puerto de nodo, un servicio de equilibrador de carga o Ingress, compruebe que puede acceder a la app.
 
@@ -396,14 +397,15 @@ Para desplegar la app:
 ## Escalado de apps
 {: #app_scaling}
 
-Despliegue aplicaciones en la nube que respondan a cambios en la demanda para las aplicaciones y que utilicen los recursos solo cuando los necesiten. El escalado automático aumenta o reduce automáticamente el número de instancias de las apps en función de la CPU.
+Con Kubernetes, puede habilitar el [escalado automático de pod horizontal ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) para aumentar o disminuir automáticamente el número de instancias de las apps en función de la CPU.
 {:shortdesc}
 
-Antes de empezar, seleccione su clúster como [destino de la CLI](cs_cli_install.html#cs_cli_configure).
+¿Está buscando información sobre las aplicaciones de escalado de Cloud Foundry? Consulte [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html). 
+{: tip}
 
-**Nota:** ¿Está buscando información sobre las aplicaciones de escalado de Cloud Foundry? Consulte [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html).
-
-Con Kubernetes, puede habilitar el [escalado automático de pod horizontal ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale) para escalar las apps en función de la CPU.
+Antes de empezar:
+- Defina su clúster como [destino de la CLI](cs_cli_install.html#cs_cli_configure).
+- La supervisión de Heapster debe desplegarse en el clúster que desea escalar automáticamente.
 
 1.  Despliegue la app en el clúster desde la CLI. Cuando despliegue la app, debe solicitar CPU.
 
@@ -434,8 +436,10 @@ Con Kubernetes, puede habilitar el [escalado automático de pod horizontal ![Ico
     <td>El puerto en el que la app está disponible externamente.</td>
     </tr></tbody></table>
 
-    **Nota:** Para despliegues más complejos, es posible que tenga que crear un [archivo de configuración](#app_cli).
-2.  Cree Horizontal Pod Autoscaler y defina la política. Para obtener más información sobre cómo trabajar con el mandato `kubectl autoscale`, consulte [la documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
+    Para despliegues más complejos, es posible que tenga que crear un [archivo de configuración](#app_cli).
+    {: tip}
+
+2.  Cree un autoscaler y defina la política. Para obtener más información sobre cómo trabajar con el mandato `kubetcl autoscale`, consulte [la documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
 
     ```
     kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
@@ -460,7 +464,6 @@ Con Kubernetes, puede habilitar el [escalado automático de pod horizontal ![Ico
     <td>El número máximo de pods desplegados que se utilizan para mantener el porcentaje especificado de utilización de CPU.</td>
     </tr>
     </tbody></table>
-
 
 
 <br />

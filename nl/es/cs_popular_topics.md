@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-14"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -19,43 +19,114 @@ lastupdated: "2017-12-14"
 # Temas populares sobre {{site.data.keyword.containershort_notm}}
 {: #cs_popular_topics}
 
-Vea en qué están interesados los desarrolladores de contenedores.
+Vea qué les interesa aprender a los desarrolladores de contenedores en {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
-<table>
+## Temas populares en marzo de 2018
+{: #mar18}
+
+<table summary="La tabla muestra los temas populares. Las filas se leen de izquierda a derecha, con la fecha en la columna uno, el título de la característica en la columna dos y una descripción en la columna tres.">
+<caption>Temas populares para contenedores y clústeres de Kubernetes en febrero de 2018</caption>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Icono Idea"/>Temas Populares para contenedores y grupos Kubernetes</th>
+<th>Fecha</th>
+<th>Título</th>
+<th>Descripción</th>
 </thead>
 <tbody>
 <tr>
-<td>[Iniciación](container_index.html)</td>
-<td>Puede gestionar sus
-apps de alta disponibilidad dentro de contenedores Docker y clústeres de Kubernetes en la nube de IBM.</td>
+<td> 16 de marzo</td>
+<td>[Suministre un clúster nativo con Trusted Compute](cs_clusters.html#shared_dedicated_node)</td>
+<td>Cree un clúster nativo que ejecute la [versión 1.9 de Kubernetes](cs_versions.html#cs_v19) o posterior y habilitar Trusted Compute para verificar que los nodos trabajadores no se manipulan de forma indebida.</td>
 </tr>
 <tr>
-<td>[Acerca de contenedores y clústeres](cs_ov.html)</td>
-<td>Docker y Kubernetes
-ofrecen funciones integradas de seguridad y detección y permiten automatizar el despliegue, operación, escalado y supervisión de apps contenerizadas en un clúster de hosts de cálculo independientes.</td>
+<td>14 de marzo</td>
+<td>[Inicio de sesión seguro con {{site.data.keyword.appid_full}}](cs_integrations.html#appid)</td>
+<td>Mejore las apps que se ejecutan en {{site.data.keyword.containershort_notm}} requiriendo a los usuarios que inicien sesión.</td>
 </tr>
 <tr>
-<td>[Despliegue de apps en clústeres](cs_app.html)</td>
-<td>Puede utilizar las técnicas de Kubernetes para desplegar apps y asegurarse de que sus apps están siempre activas y en funcionamiento. Por ejemplo, puede realizar actualizaciones continuas y retrotracciones sin causar a los usuarios tiempos de inactividad.</td>
+<td>13 de marzo</td>
+<td>[Ubicación disponible en São Paulo](cs_regions.html)</td>
+<td>Damos la bienvenida a São Paulo, Brasil, como nueva ubicación en la región EE.UU. sur. Si tiene un cortafuegos, [abra los puertos de cortafuegos necesarios](cs_firewall.html#firewall) para esta ubicación, así como los demás de la región en la que está el clúster.</td>
 </tr>
 <tr>
-<td>[Configuración de la CLI](cs_cli_install.html)</td>
-<td>Con la CLI, puede crear y gestionar sus clústeres de Kubernetes.</td>
+<td>12 de marzo</td>
+<td>[¿Se acaba de unir a {{site.data.keyword.Bluemix_notm}} con una cuenta de prueba? Pruebe un clúster de Kubernetes gratuito.](container_index.html#clusters)</td>
+<td>Con una [cuenta de {{site.data.keyword.Bluemix_notm}} de prueba](https://console.bluemix.net/registration/), puede desplegar 1 clúster gratuito durante 21 días para probar las funciones de Kubernetes.</td>
+</tr>
+</tbody></table>
+
+## Temas populares en febrero de 2018
+{: #feb18}
+
+<table summary="La tabla muestra los temas populares. Las filas se leen de izquierda a derecha, con la fecha en la columna uno, el título de la característica en la columna dos y una descripción en la columna tres.">
+<caption>Temas populares para contenedores y clústeres de Kubernetes en febrero de 2018</caption>
+<thead>
+<th>Fecha</th>
+<th>Título</th>
+<th>Descripción</th>
+</thead>
+<tbody>
+<tr>
+<td>27 de febrero</td>
+<td>Imágenes de máquina virtual de hardware (HVM) para nodos trabajadores</td>
+<td>Aumente el rendimiento de E/S de las cargas de trabajo con imágenes de HVM. Active la función en cada nodo trabajador existente mediante el [mandato](cs_cli_reference.html#cs_worker_reload) `bx cs worker-reload` o el [mandato](cs_cli_reference.html#cs_worker_update) `bx cs worker-update`.</td>
 </tr>
 <tr>
-<td>[Apertura de los puertos y direcciones IP necesarios en el cortafuegos](cs_firewall.html#firewall)</td>
-<td>Puede que tenga que abrir puertos específicos y direcciones IP en el cortafuegos para ejecutar mandatos de CLI o para permitir la comunicación entre el maestro de Kubernetes y los nodos trabajadores.</td>
+<td>26 de febrero</td>
+<td>[Escalado automático de KubeDNS](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/)</td>
+<td>KubeDNS ahora se amplía con el clúster a medida que crece. Puede ajustar los índices de escalado mediante el mandato siguiente: `kubectl -n kube-system edit cm kube-dns-autoscaler`.</td>
 </tr>
 <tr>
-<td>[Actualizar Kubernetes](cs_versions.html)</td>
-<td>Revise los cambios que debe realizar en sus clústeres antes de actualizar Kubernetes.</td>
+<td>23 de febrero</td>
+<td>Vea la interfaz de usuario web para los [registros](cs_health.html#view_logs) y las [métricas](cs_health.html#view_metrics)</td>
+<td>Vea fácilmente los datos de registros y métricas del clúster y sus componentes con una mejor interfaz de usuario web. Consulte la página de detalles de clúster para el acceso.</td>
 </tr>
 <tr>
-<td>[API REST para clústeres ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://containers.bluemix.net/swagger)</td>
-<td>Consulte la documentación de la API para gestionar el {{site.data.keyword.containershort_notm}}.</td>
+<td>20 de febrero</td>
+<td>Imágenes cifradas y [contenido firmado y de confianza](../services/Registry/registry_trusted_content.html#registry_trustedcontent)</td>
+<td>En {{site.data.keyword.registryshort_notm}}, puede firmar y cifrar imágenes para garantizar su integridad al almacenar en el espacio de nombres de registro. Cree contenedores utilizando sólo contenido de confianza.</td>
+</tr>
+<tr>
+<td>19 de febrero</td>
+<td>[Configure la VPN IPSec de strongSwan](cs_vpn.html#vpn-setup)</td>
+<td>Despliegue rápidamente el diagrama de Helm de la VPN IPSec de strongSwan Helm para conectar el clúster de {{site.data.keyword.containershort_notm}} de forma segura al centro de datos local sin un Vyatta.</td>
+</tr>
+<tr>
+<td>14 de febrero</td>
+<td>[Ubicación disponible en Seúl](cs_regions.html)</td>
+<td>Justo a tiempo para los Juegos Olímpicos, despliegue un clúster de Kubernetes en Seúl en la región AP Norte. Si tiene un cortafuegos, [abra los puertos de cortafuegos necesarios](cs_firewall.html#firewall) para esta ubicación, así como los demás de la región en la que está el clúster.</td>
+</tr>
+<tr>
+<td>8 de febrero</td>
+<td>[Actualice Kubernetes 1.9](cs_versions.html#cs_v19)</td>
+<td>Revise los cambios que debe realizar en los clústeres antes de actualizar Kubernetes 1.9.</td>
+</tr>
+</tbody></table>
+
+## Temas populares en enero de 2018
+{: #jan18}
+
+<table summary="La tabla muestra los temas populares. Las filas se leen de izquierda a derecha, con la fecha en la columna uno, el título de la característica en la columna dos y una descripción en la columna tres.">
+<caption>Temas populares para contenedores y clústeres de Kubernetes en enero de 2018</caption>
+<thead>
+<th>Fecha</th>
+<th>Título</th>
+<th>Descripción</th>
+</thead>
+<tbody>
+<td>25 de enero</td>
+<td>[Registro global disponible](../services/Registry/registry_overview.html#registry_regions)</td>
+<td>Con {{site.data.keyword.registryshort_notm}}, puede utilizar `registry.bluemix.net` global para extraer imágenes públicas proporcionadas por IBM.</td>
+</tr>
+<tr>
+<td>23 de enero</td>
+<td>[Ubicaciones disponibles en Singapur y Montreal, CA](cs_regions.html)</td>
+<td>Singapur y Montreal son ubicaciones disponibles en las regiones AP Norte y EE.UU. este de {{site.data.keyword.containershort_notm}}. Si tiene un cortafuegos, [abra los puertos de cortafuegos necesarios](cs_firewall.html#firewall) para estas ubicaciones, así como los demás de la región en la que está el clúster.</td>
+</tr>
+<tr>
+<td>8 de enero</td>
+<td>[Tipos de máquina mejorados disponibles](cs_cli_reference.html#cs_machine_types)</td>
+<td>Los tipos de máquina de serie 2 incluyen almacenamiento SSD local y cifrado de disco. [Migre las cargas de trabajo](cs_cluster_update.html#machine_type) a estos tipos de máquina para mejorar el rendimiento y la estabilidad.</td>
 </tr>
 </tbody></table>
 
@@ -63,5 +134,6 @@ ofrecen funciones integradas de seguridad y detección y permiten automatizar el
 {: #slack}
 
 Vea de qué están hablando otros desarrolladores y realice sus propias preguntas en [{{site.data.keyword.containershort_notm}} Slack. ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibm-container-service.slack.com)
+{:shortdesc}
 
 Consejo: si no utiliza un ID de IBM para la cuenta de {{site.data.keyword.Bluemix_notm}}, [solicite una invitación](https://bxcs-slack-invite.mybluemix.net/) a este Slack.

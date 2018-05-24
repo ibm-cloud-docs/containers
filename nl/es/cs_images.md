@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-02-14"
 
 ---
 
@@ -19,15 +19,21 @@ lastupdated: "2018-01-11"
 # Compilación de contenedores a partir de imágenes
 {: #images}
 
-Una imagen de Docker es la base para cada contenedor que pueda crear. Se crea una imagen a partir de Dockerfile, que es un archivo que contiene instrucciones para crear la imagen. Un Dockerfile puede hacer referencia a artefactos de compilación en sus instrucciones que se almacenan por separado, como por ejemplo una app, la configuración de la app y sus dependencias.
+Una imagen de Docker es la base para cada contenedor que pueda crear con {{site.data.keyword.containerlong}}. 
 {:shortdesc}
+
+Se crea una imagen a partir de Dockerfile, que es un archivo que contiene instrucciones para crear la imagen. Un Dockerfile puede hacer referencia a artefactos de compilación en sus instrucciones que se almacenan por separado, como por ejemplo una app, la configuración de la app y sus dependencias.
+
 
 
 ## Planificación de registros de imagen
 {: #planning}
 
-Las imágenes normalmente se almacenan en un registro que puede ser tanto de acceso público (registro público) como estar configurado con acceso limitado para un pequeño grupo de usuarios (registro privado). Los registros públicos, como por ejemplo Docker Hub, se pueden utilizar para empezar a trabajar con Docker y Kubernetes para crear la primera app contenerizada de un clúster. Pero, cuando se trate de aplicaciones de empresa, utilice un registro privado, como el que se suministra en {{site.data.keyword.registryshort_notm}}, para proteger sus imágenes frente a un posible uso y modificación por parte de usuarios no autorizados. El administrador del clúster debe configurar los registros privados para asegurarse de que las credenciales para acceder al registro privado están disponibles para los usuarios del clúster.
+Las imágenes normalmente se almacenan en un registro que puede ser tanto de acceso público (registro público) como estar configurado con acceso limitado para un pequeño grupo de usuarios (registro privado). 
 {:shortdesc}
+
+Los registros públicos, como por ejemplo Docker Hub, se pueden utilizar para empezar a trabajar con Docker y Kubernetes para crear la primera app contenerizada de un clúster. Pero, cuando se trate de aplicaciones de empresa, utilice un registro privado, como el que se suministra en {{site.data.keyword.registryshort_notm}}, para proteger sus imágenes frente a un posible uso y modificación por parte de usuarios no autorizados. El administrador del clúster debe configurar los registros privados para asegurarse de que las credenciales para acceder al registro privado están disponibles para los usuarios del clúster.
+
 
 Puede utilizar varios registros con {{site.data.keyword.containershort_notm}} para desplegar apps en el clúster.
 
@@ -71,7 +77,7 @@ Para desplegar un contenedor en el espacio de nombres **default** del clúster, 
     Para utilizar una imagen privada de un espacio de nombres de {{site.data.keyword.registryshort_notm}}:
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1beta1
     kind: Deployment
     metadata:
       name: ibmliberty-deployment
@@ -283,7 +289,7 @@ Cree un archivo de configuración de despliegue.
 2.  Defina el despliegue y la imagen pública de Docker Hub que desea utilizar. En el siguiente archivo de configuración se utiliza la imagen pública NGINX que está disponible en Docker Hub.
 
     ```
-    apiVersion: extensions/v1beta1
+    apiVersion: apps/v1beta1
     kind: Deployment
     metadata:
       name: nginx-deployment
@@ -321,7 +327,7 @@ Cree un archivo de configuración de despliegue.
 ## Acceso a imágenes almacenadas en otros registros privados
 {: #private_images}
 
-Si ya tiene un registro privado que desea utilizar, debe almacenar las credenciales del registro en un imagePullSecret de Kubernetes y hacer referencia a dicho secreto en el archivo de configuración.
+Si ya tiene un registro privado que utilizar, debe almacenar las credenciales del registro en un imagePullSecret de Kubernetes y hacer referencia a dicho secreto en el archivo de configuración.
 {:shortdesc}
 
 Antes de empezar:
@@ -432,4 +438,3 @@ Para crear un imagePullSecret:
         kubectl apply -f mypod.yaml
         ```
         {: pre}
-

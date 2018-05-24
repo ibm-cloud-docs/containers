@@ -19,13 +19,14 @@ lastupdated: "2018-01-24"
 # Acceso al portafolio de infraestructura de IBM Cloud (SoftLayer)
 {: #infrastructure}
 
-Para crear un clúster de Kubernetes estándar, debe tener acceso al portafolio de infraestructura de IBM Cloud (SoftLayer). Este acceso es necesario para solicitar recursos de infraestructura de pago como, por ejemplo, nodos trabajadores, direcciones de IP públicas o almacenamiento persistente para su clúster.
+Para crear un clúster de Kubernetes estándar, debe tener acceso al portafolio de infraestructura de IBM Cloud (SoftLayer). Este acceso es necesario para solicitar recursos de infraestructura de pago como, por ejemplo, nodos trabajadores, direcciones de IP públicas o almacenamiento persistente para su clúster de Kubernetes en {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
 ## Acceda al portafolio de infraestructura de IBM Cloud (SoftLayer)
 {: #unify_accounts}
 
-Las cuentas de Pago según uso de {{site.data.keyword.Bluemix_notm}} creadas después de haber enlazado una cuenta automática ya se han configurado con acceso a la infraestructura de IBM Cloud (SoftLayer), de modo que es posible adquirir recursos de la infraestructura para el clúster sin configuración adicional.
+Las cuentas de Pago según uso de {{site.data.keyword.Bluemix_notm}} creadas después de haber enlazado una cuenta automática ya se han configurado con acceso a la infraestructura de IBM Cloud (SoftLayer). Es posible adquirir recursos de la infraestructura para el clúster sin configuración adicional.
+{:shortdesc}
 
 Los usuarios con otros tipos de cuenta de {{site.data.keyword.Bluemix_notm}} o los usuarios con cuentas existentes de infraestructura de IBM Cloud (SoftLayer) no enlazadas a su cuenta de {{site.data.keyword.Bluemix_notm}}, primero deben configurar sus cuentas para crear clústeres estándares.
 {:shortdesc}
@@ -45,7 +46,7 @@ Revise la siguiente tabla para encontrar las opciones disponibles para cada tipo
 ## Generación de una clave API de infraestructura de IBM Cloud (SoftLayer) para utilizar con cuentas de {{site.data.keyword.Bluemix_notm}}
 {: #old_account}
 
-Si desea continuar utilizando su cuenta antigua de Suscripción o de Pago según uso para crear clústeres estándares, debe generar una clave de API con la nueva cuenta de Pago según uso y establecer la clave de API para su cuenta antigua.
+Para continuar utilizando su cuenta antigua de Suscripción o de Pago según uso para crear clústeres estándares, genere una clave de API con la nueva cuenta de Pago según uso y establecer la clave de API para su cuenta antigua.
 {:shortdesc}
 
 Antes de continuar, cree una cuenta de {{site.data.keyword.Bluemix_notm}} de Pago según uso que está automáticamente configurada para acceder al portafolio de infraestructura de IBM Cloud (SoftLayer).

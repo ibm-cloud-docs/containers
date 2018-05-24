@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-02-05"
+lastupdated: "2017-02-27"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2017-02-05"
 # Guía de aprendizaje: Despliegue de apps en clústeres
 {: #cs_apps_tutorial}
 
-Puede aprender a utilizar {{site.data.keyword.containershort_notm}} para desplegar unan app contenerizada que aproveche {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}.
+Puede aprender a utilizar {{site.data.keyword.containerlong}} para desplegar unan app contenerizada que aproveche {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}.
 {: shortdesc}
 
 En este escenario, una empresa PR ficticia utiliza el servicio {{site.data.keyword.Bluemix_notm}} para analizar sus notas de prensa y recibir comentarios sobre el tono de sus mensajes.
@@ -60,8 +60,10 @@ Desarrolladores de software y administradores de la red que nunca antes han desp
 ## Lección 1: Despliegue de apps de una sola instancia en clústeres de Kubernetes
 {: #cs_apps_tutorial_lesson1}
 
-En la guía de aprendizaje anterior, ha creado un clúster con un nodo trabajador. En esta lección, configurará un despliegue y desplegará una única instancia de la app en un pod de Kubernetes dentro del nodo trabajador. Los componentes que desplegará al completar esta lección se muestran en el siguiente diagrama.
+En la guía de aprendizaje anterior, ha creado un clúster con un nodo trabajador. En esta lección, configurará un despliegue y desplegará una única instancia de la app en un pod de Kubernetes dentro del nodo trabajador.
 {:shortdesc}
+
+Los componentes que desplegará al completar esta lección se muestran en el siguiente diagrama.
 
 ![Configuración del despliegue](images/cs_app_tutorial_components1.png)
 
@@ -187,7 +189,7 @@ Docker y luego vuelva a la CLI en la que ha definido la variable de sesión `KUB
     ```
     {: screen}
 
-9.  Facilite el acceso general a la app exponiendo el despliegue como un servicio NodePort. Al igual que puede exponer un puerto para una app de Cloud Foundry, el NodePort que expone es el puerto en el que el nodo trabajador escucha si hay tráfico. 
+9.  Facilite el acceso general a la app exponiendo el despliegue como un servicio NodePort. Al igual que puede exponer un puerto para una app de Cloud Foundry, el NodePort que expone es el puerto en el que el nodo trabajador escucha si hay tráfico.
 
     ```
     kubectl expose deployment/hello-world-deployment --type=NodePort --port=8080 --name=hello-world-service --target-port=8080
@@ -275,8 +277,8 @@ dentro del rango 30000-32767. En este ejemplo, el NodePort es 30872.
         ```
         Listing cluster workers...
         OK
-        ID                                            Public IP        Private IP      Machine Type   State      Status
-        dal10-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.47.227.138   10.171.53.188   free           normal    Ready
+        ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.47.227.138  10.171.53.188    free           normal   Ready    mil01      1.8.8
         ```
         {: screen}
 
@@ -305,10 +307,10 @@ World esté realmente disponible a nivel público.
 ## Lección 2: Despliegue y actualización de apps con mayor disponibilidad
 {: #cs_apps_tutorial_lesson2}
 
-En esta lección, desplegará tres instancias de la app Hello World en un clúster para aumentar la disponibilidad con respecto a la primera versión de la app. Mayor disponibilidad significa que el acceso de usuario se divide entre las tres instancias. Cuando hay demasiados usuarios que intentan acceder a la misma instancia de la app, es posible que el tiempo de respuesta sea lento. Varias instancias puede significar mejores tiempos de respuesta para los usuarios. En esta lección, también aprenderá cómo funcionan las comprobaciones de estado y las actualizaciones de despliegue con Kubernetes.
+En esta lección, desplegará tres instancias de la app Hello World en un clúster para aumentar la disponibilidad con respecto a la primera versión de la app.
 {:shortdesc}
 
-El siguiente diagrama incluye los componentes que desplegará al completar esta lección.
+Mayor disponibilidad significa que el acceso de usuario se divide entre las tres instancias. Cuando hay demasiados usuarios que intentan acceder a la misma instancia de la app, es posible que el tiempo de respuesta sea lento. Varias instancias puede significar mejores tiempos de respuesta para los usuarios. En esta lección, también aprenderá cómo funcionan las comprobaciones de estado y las actualizaciones de despliegue con Kubernetes. El siguiente diagrama incluye los componentes que desplegará al completar esta lección.
 
 ![Configuración del despliegue](images/cs_app_tutorial_components2.png)
 
@@ -316,7 +318,7 @@ En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un n
 
 Tal como se define en el script de configuración, Kubernetes puede utilizar una comprobación de disponibilidad para ver si un contenedor de un pod se está o no ejecutando. Por ejemplo, estas comprobaciones pueden detectar puntos muertos, en los que una app se está ejecutando pero no progresa. Reiniciar un contenedor que está en esta condición puede ayudar a mejorar la disponibilidad de la app a pesar de los errores. Luego Kubernetes utiliza la comprobación de preparación para ver si un contenedor está preparado para empezar de nuevo a aceptar tráfico. Se considera que un pod está preparado cuando su contenedor está preparado. Cuando el pod está preparado, se inicia de nuevo. En esta versión de la app, cada 15 segundos se agota el tiempo de espera de la app. Con una comprobación de estado configurada en el script de configuración, los contenedores se vuelven a crear si la comprobación de estado encuentra un problema con una app.
 
-1.  En una CLI, vaya al directorio `Lab 2`. 
+1.  En una CLI, vaya al directorio `Lab 2`.
 
   ```
   cd 'container-service-getting-started-wt/Lab 2'
@@ -471,10 +473,10 @@ service "hw-demo-service" deleted
 ## Lección 3: Despliegue y actualización de la app Watson Tone Analyzer
 {: #cs_apps_tutorial_lesson3}
 
-En las lecciones anteriores, las apps se han desplegado como componentes únicos de un nodo trabajador. En esta lección, puede desplegar dos componentes de una app en un clúster que utiliza el servicio {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}. La separación de componentes en distintos contenedores garantiza que puede actualizar uno sin que afecte a los otros. A continuación, actualizará la app para ampliarla con más réplicas a fin de aumentar su disponibilidad.
+En las lecciones anteriores, las apps se han desplegado como componentes únicos de un nodo trabajador. En esta lección, puede desplegar dos componentes de una app en un clúster que utiliza el servicio {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}.
 {:shortdesc}
 
-El siguiente diagrama incluye los componentes que desplegará al completar esta lección.
+La separación de componentes en distintos contenedores garantiza que puede actualizar uno sin que afecte a los otros. A continuación, actualizará la app para ampliarla con más réplicas a fin de aumentar su disponibilidad. El siguiente diagrama incluye los componentes que desplegará al completar esta lección.
 
 ![Configuración del despliegue](images/cs_app_tutorial_components3.png)
 
@@ -484,7 +486,7 @@ En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un n
 ### Lección 3a: Despliegue de la app {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}
 {: #lesson3a}
 
-1.  En una CLI, vaya al directorio `Lab 3`. 
+1.  En una CLI, vaya al directorio `Lab 3`.
 
   ```
   cd 'container-service-getting-started-wt/Lab 3'
@@ -749,5 +751,5 @@ service "watson-talk-service" deleted
 Ahora que ya domina los conceptos básicos, puede pasar a actividades más avanzadas. Considere probar uno de los siguientes:
 
 - Completar un laboratorio más complicado en el repositorio
-- Escalar automáticamente sus apps con {{site.data.keyword.containershort_notm}}](cs_app.html#app_scaling)
+- [Escalar automáticamente sus apps](cs_app.html#app_scaling) con {{site.data.keyword.containershort_notm}}
 - Explorar los trayectos de orquestación de contenedores en [developerWorks ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/code/journey/category/container-orchestration/)

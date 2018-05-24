@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-29"
+lastupdated: "2018-03-14"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-01-29"
 # Configuración de la CLI y la API
 {: #cs_cli_install}
 
-Puede utilizar la CLI o la API de {{site.data.keyword.containershort_notm}} para crear y gestionar sus clústeres de Kubernetes.
+Puede utilizar la CLI o la API de {{site.data.keyword.containerlong}} para crear y gestionar sus clústeres de Kubernetes.
 {:shortdesc}
 
 <br />
@@ -35,7 +35,7 @@ Esta tarea incluye la información para instalar estas CLI y plug-ins:
 
 -   {{site.data.keyword.Bluemix_notm}} CLI versión 0.5.0 o posterior
 -   Plug-in de {{site.data.keyword.containershort_notm}}
--   CLI de Kubernetes versión 1.8.6 o posterior
+-   CLI de Kubernetes versión 1.8.8 o posterior
 -   Opcional: plug-in {{site.data.keyword.registryshort_notm}}
 -   Opcional: Docker versión 1.9 o posterior
 
@@ -71,19 +71,15 @@ la sesión en la CLI de {{site.data.keyword.Bluemix_notm}}. Especifique su nombr
 
     El plug-in {{site.data.keyword.containershort_notm}} se visualiza en los resultados como servicio de contenedor.
 
-4.  Para ver una versión local del panel de control Kubernetes y desplegar apps en los clústeres, [instale la CLI de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). El prefijo para ejecutar mandatos utilizando la CLI de Kubernetes es `kubectl`.
+4.  {: #kubectl}Para ver una versión local del panel de control Kubernetes y desplegar apps en los clústeres, [instale la CLI de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). El prefijo para ejecutar mandatos utilizando la CLI de Kubernetes es `kubectl`.
 
-    1.  Para disponer de compatibilidad funcional completa, descargue la versión de la CLI de Kubernetes que coincida con la versión del clúster Kubernetes que piensa utilizar. La versión de Kubernetes predeterminada actual de {{site.data.keyword.containershort_notm}} es la 1.8.6.
+    1.  Descargue la versión `major.minor` de la CLI de Kubernetes que coincida con la versión `major.minor` del clúster Kubernetes que piensa utilizar. La versión de Kubernetes predeterminada actual de {{site.data.keyword.containershort_notm}} es la 1.8.8. **Nota**: Si utiliza una versión de CLI `kubectl` que coincide al menos con la versión `major.minor` de los clústeres, puede experimentar resultados inesperados. Mantenga actualizadas las versiones de la CLI y el clúster de Kubernetes.
 
-        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
+        - **OS X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl)
+        - **Linux**:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl)
+        - **Windows**:    [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe)
 
-        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
-
-        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
-
-        **Sugerencia:** Si utiliza Windows, instale la CLI de Kubernetes en el mismo directorio que la CLI de {{site.data.keyword.Bluemix_notm}}. Esta configuración le ahorra algunos cambios en filepath cuando ejecute mandatos posteriormente.
-
-    2.  Para usuarios de OSX y Linux, siga los pasos siguientes:
+    2.  **Para OSX y Linux**: Complete los pasos siguientes.
         1.  Mueva el archivo ejecutable al directorio `/usr/local/bin`.
 
             ```
@@ -111,6 +107,8 @@ la sesión en la CLI de {{site.data.keyword.Bluemix_notm}}. Especifique su nombr
             chmod +x /usr/local/bin/kubectl
             ```
             {: pre}
+
+    3.  **Para Windows**: Instale la CLI de Kubernetes en el mismo directorio que la CLI de {{site.data.keyword.Bluemix_notm}}. Esta configuración le ahorra algunos cambios en filepath cuando ejecute mandatos posteriormente.
 
 5.  Para gestionar un repositorio de imágenes privadas, instale el plug-in {{site.data.keyword.registryshort_notm}}. Utilice este plug-in para configurar su propio espacio de nombres en un registro privado de imágenes multiarrendatario, de alta disponibilidad y escalable alojado por IBM, y para almacenar y compartir imágenes de Docker con otros usuarios. Las imágenes de Docker son necesarias para desplegar contenedores en un clúster. El prefijo para ejecutar mandatos de registro es `bx cr`.
 
@@ -145,8 +143,10 @@ Para obtener información acerca de estas CLI, consulte la documentación de dic
 ## Configuración de la CLI para que ejecute mandatos `kubectl`
 {: #cs_cli_configure}
 
-Puede utilizar los mandatos que se proporcionan con la CLI de Kubernetes para gestionar clústeres en {{site.data.keyword.Bluemix_notm}}. Todos los mandatos `kubectl` que están disponibles en Kubernetes 1.8.6 se pueden utilizar con clústeres en {{site.data.keyword.Bluemix_notm}}. Después de crear un clúster, establezca el contexto de la CLI local para dicho clúster con una variable de entorno. A continuación, puede ejecutar el mandato de Kubernetes `kubectl` para trabajar con el clúster en {{site.data.keyword.Bluemix_notm}}.
+Puede utilizar los mandatos que se proporcionan con la CLI de Kubernetes para gestionar clústeres en {{site.data.keyword.Bluemix_notm}}.
 {:shortdesc}
+
+Todos los mandatos `kubectl` disponibles en Kubernetes 1.8.8 se pueden utilizar con clústeres en {{site.data.keyword.Bluemix_notm}}. Después de crear un clúster, establezca el contexto de la CLI local para dicho clúster con una variable de entorno. A continuación, puede ejecutar el mandato de Kubernetes `kubectl` para trabajar con el clúster en {{site.data.keyword.Bluemix_notm}}.
 
 Para poder ejecutar mandatos `kubectl`, [instale las CLI necesarias](#cs_cli_install) y [cree un clúster](cs_clusters.html#clusters_cli).
 
@@ -218,8 +218,8 @@ Kubernetes local como variable de entorno.
       Salida de ejemplo:
 
       ```
-      Client Version: v1.8.6
-      Server Version: v1.8.6
+      Client Version: v1.8.8
+      Server Version: v1.8.8
       ```
       {: screen}
 
@@ -241,7 +241,7 @@ Esta tarea incluye la información para actualizar estas CLI.
 
 -   {{site.data.keyword.Bluemix_notm}} CLI versión 0.5.0 o posterior
 -   Plug-in de {{site.data.keyword.containershort_notm}}
--   CLI de Kubernetes versión 1.8.6 o posterior
+-   CLI de Kubernetes versión 1.8.8 o posterior
 -   Plug-in de {{site.data.keyword.registryshort_notm}}
 -   Docker versión 1.9. o posterior
 
@@ -286,45 +286,7 @@ y compruebe la lista de plug-ins instalados.
         ```
         {: pre}
 
-4.  Actualice la CLI de Kubernetes.
-    1.  Actualice la versión de la CLI de Kubernetes que coincida con la versión del clúster Kubernetes que piensa utilizar. La versión de Kubernetes predeterminada actual de {{site.data.keyword.containershort_notm}} es la 1.8.6.
-
-        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl)
-
-        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl)
-
-        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe)
-
-        **Sugerencia:** Si utiliza Windows, instale la CLI de Kubernetes en el mismo directorio que la CLI de {{site.data.keyword.Bluemix_notm}}. Esta configuración le ahorra algunos cambios en filepath cuando ejecute mandatos posteriormente.
-
-    2.  Para usuarios de OSX y Linux, siga los pasos siguientes:
-        1.  Mueva el archivo ejecutable al directorio `/usr/local/bin`.
-
-            ```
-            mv /<path_to_file>/kubectl /usr/local/bin/kubectl
-            ```
-            {: pre}
-
-        2.  Asegúrese de que `/usr/local/bin` aparezca en la variable del sistema `PATH`. La variable `PATH` contiene todos los directorios en los que el sistema operativo puede encontrar archivos ejecutables. Los directorios que se muestran en la variable `PATH` sirven para distintos propósitos. `/usr/local/bin` se utiliza para guardar archivos ejecutables correspondientes a software que no forma parte del sistema operativo y que ha instalado manualmente el administrador del sistema.
-
-            ```
-            echo $PATH
-            ```
-            {: pre}
-
-            Ejemplo de salida de CLI:
-
-            ```
-            /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-            ```
-            {: screen}
-
-        3.  Convierta el archivo en ejecutable.
-
-            ```
-            chmod +x /usr/local/bin/kubectl
-            ```
-            {: pre}
+4.  [Actualice la CLI de Kubernetes](#kubectl).
 
 5.  Actualice el plug-in de {{site.data.keyword.registryshort_notm}}.
     1.  Instale la actualización desde el repositorio del plug-in de {{site.data.keyword.Bluemix_notm}}.
@@ -361,7 +323,7 @@ Esta tarea incluye la información para eliminar estas CLI:
 
 
 -   Plug-in de {{site.data.keyword.containershort_notm}}
--   CLI de Kubernetes versión 1.8.6 o posterior
+-   CLI de Kubernetes versión 1.8.8 o posterior
 -   Plug-in de {{site.data.keyword.registryshort_notm}}
 -   Docker versión 1.9. o posterior
 
@@ -464,7 +426,7 @@ La API de {{site.data.keyword.containershort_notm}} precisa de información de c
     <tr>
     <td>Cuerpo correspondiente al nombre de usuario y contraseña de {{site.data.keyword.Bluemix_notm}}</td>
     <td><ul><li>grant_type: password</li>
-    <li>response_type: cloud_iam, uaa</li>
+    <li>response_type: cloud_iam uaa</li>
     <li>username: <em>&lt;my_username&gt;</em></li>
     <li>password: <em>&lt;my_password&gt;</em></li>
     <li>uaa_client_id: cf</li>
@@ -586,7 +548,7 @@ _&lt;my_account_id&gt;_ por el ID de la cuenta de {{site.data.keyword.Bluemix_no
     <tr>
     <td>Cuerpo correspondiente al nombre de usuario y contraseña de {{site.data.keyword.Bluemix_notm}}</td>
     <td><ul><li>grant_type: password</li>
-    <li>response_type: cloud_iam, uaa</li>
+    <li>response_type: cloud_iam uaa</li>
     <li>username: <em>&lt;my_username&gt;</em></li>
     <li>password: <em>&lt;my_password&gt;</em></li>
     <li>uaa_client_id: cf</li>
@@ -692,7 +654,7 @@ Siga los pasos siguientes si desea renovar sus señales de acceso de IAM.
     <tr>
     <td>Cuerpo</td>
     <td><ul><li>grant_type: refresh_token</li>
-    <li>response_type: cloud_iam, uaa</li>
+    <li>response_type: cloud_iam uaa</li>
     <li>refresh_token: <em>&lt;iam_refresh_token&gt;</em></li>
     <li>uaa_client_id: cf</li>
     <li>uaa_client_secret:</li>

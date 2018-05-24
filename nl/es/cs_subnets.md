@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-12"
+lastupdated: "2018-03-16"
 
 ---
 
@@ -19,19 +19,20 @@ lastupdated: "2018-01-12"
 # Configuración de subredes para clústeres
 {: #subnets}
 
-Cambie la agrupación de las direcciones IP públicas o privadas portátiles disponibles añadiendo subredes a su clúster.
+Cambie la agrupación de las direcciones IP públicas o privadas portátiles disponibles añadiendo subredes al clúster de Kubernetes en {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
 En {{site.data.keyword.containershort_notm}}, tiene la posibilidad de añadir direcciones IP portátiles y estables para los servicios de Kubernetes añadiendo subredes al clúster. En este caso, las subredes no se utilizan con máscara de red para crear conectividad entre uno o varios clústeres. En su lugar, las subredes se utilizan para proporcionar IP fijas permanentes para un servicio de un clúster que puede utilizarse para acceder a ese servicio.
 
-Cuando se crea un clúster estándar, {{site.data.keyword.containershort_notm}} automáticamente suministra una subred pública portátil con 5 direcciones IP públicas portátiles y una subred privada portátil con 5 direcciones IP privadas. Las direcciones IP públicas y privadas portátiles son estáticas y no cambian cuando se elimina un nodo trabajador o incluso el clúster. Para cada subred, una de las direcciones públicas portátiles y una de las direcciones IP privadas portátiles se utilizan para los [equilibradores de carga de aplicación](cs_ingress.html), que puede utilizar para exponer varias apps en el clúster. Las 4 direcciones IP públicas portátiles y las 4 direcciones IP privadas portátiles restantes se pueden utilizar para exponer apps individuales al público mediante la [creación de un servicio equilibrador de carga](cs_loadbalancer.html).
+Cuando se crea un clúster estándar, {{site.data.keyword.containershort_notm}} automáticamente suministra una subred pública portátil con 5 direcciones IP públicas portátiles y una subred privada portátil con 5 direcciones IP privadas. Las direcciones IP públicas y privadas portátiles son estáticas y no cambian cuando se elimina un nodo trabajador o incluso el clúster. Para cada subred, una de las direcciones públicas portátiles y una de las direcciones IP privadas portátiles se utilizan para los [equilibradores de carga de aplicación](cs_ingress.html), que puede utilizar para exponer varias apps en el clúster. Las cuatro direcciones IP públicas portátiles y las cuatro direcciones IP privadas portátiles restantes se pueden utilizar para exponer apps individuales al público mediante la [creación de un servicio equilibrador de carga](cs_loadbalancer.html).
 
 **Nota:** Las direcciones IP públicas portátiles se facturan mensualmente. Si decide retirar las direcciones IP públicas portátiles una vez suministrado el clúster, tendrá que pagar el cargo mensual, aunque solo las haya utilizado un breve periodo de tiempo.
 
-## Solicitud de subredes adicionales para el clúster
+## Solicitud de más subredes para el clúster
 {: #request}
 
 Puede añadir direcciones IP públicas o privadas portátiles estables al clúster asignándole subredes.
+{:shortdesc}
 
 **Nota:** Cuando se pone una subred a disponibilidad de un clúster, las direcciones IP de esta subred se utilizan para la gestión de redes del clúster. Para evitar conflictos de direcciones IP, asegúrese de utilizar una subred con un solo clúster. No utilice una subred para varios clústeres o para otros fines externos a {{site.data.keyword.containershort_notm}} al mismo tiempo.
 
@@ -62,7 +63,7 @@ Para crear una subred en una cuenta de infraestructura de IBM Cloud (SoftLayer) 
     </tr>
     <tr>
     <td><code><em>&lt;subnet_size&gt;</em></code></td>
-    <td>Sustituya <code>&lt;subnet_size&gt;</code> por el número de direcciones IP que desea añadir desde la subred portátil. Los valores aceptados son 8, 16, 32 o 64. <p>**Nota:** Cuando añade direcciones IP portátiles para la subred, se utilizan tres direcciones IP para establecer conexión por red clúster-interna, de modo que no puede utilizarlas para el equilibrador de carga de aplicación o para crear un servicio equilibrador de carga. Por ejemplo, si solicita ocho direcciones IP públicas portátiles, puede utilizar cinco de ellas para exponer sus apps al público.</p> </td>
+    <td>Sustituya <code>&lt;subnet_size&gt;</code> por el número de direcciones IP que desea añadir desde la subred portátil. Los valores aceptados son 8, 16, 32 o 64. <p>**Nota:** Cuando añade direcciones IP portátiles para la subred, se utilizan tres direcciones IP para establecer conexión por red clúster-interna. No puede utilizar estas tres IP para el equilibrador de carga de aplicación o para crear un servicio equilibrador de carga. Por ejemplo, si solicita ocho direcciones IP públicas portátiles, puede utilizar cinco de ellas para exponer sus apps al público.</p> </td>
     </tr>
     <tr>
     <td><code><em>&lt;VLAN_ID&gt;</em></code></td>
@@ -77,6 +78,8 @@ Para crear una subred en una cuenta de infraestructura de IBM Cloud (SoftLayer) 
     ```
     {: pre}
 
+3. Opcional: [Habilite el direccionamiento entre subredes en la misma VLAN](#vlan-spanning).
+
 <br />
 
 
@@ -84,10 +87,11 @@ Para crear una subred en una cuenta de infraestructura de IBM Cloud (SoftLayer) 
 {: #custom}
 
 Existe la posibilidad de añadir subredes públicas o privadas portátiles existentes a su clúster de Kubernetes.
+{:shortdesc}
 
 Antes de empezar, seleccione su clúster como [destino de la CLI](cs_cli_install.html#cs_cli_configure).
 
-Si tiene una subred existente en su portafolio de infraestructura de IBM Cloud (SoftLayer) con reglas de cortafuegos personalizadas o con direcciones IP disponibles que desea utilizar, cree un clúster sin subredes y haga que su subred existente esté disponible para el clúster al suministrar dicho clúster.
+Para utilizar una subred existente en su portafolio de infraestructura de IBM Cloud (SoftLayer) con reglas de cortafuegos personalizadas o con direcciones IP disponibles:
 
 1.  Identifique la subred que desea utilizar. Anote el ID de la subred y el ID de la VLAN. En este ejemplo, el ID de subred es 807861 y el ID de la VLAN es 1901230.
 
@@ -136,14 +140,13 @@ Si tiene una subred existente en su portafolio de infraestructura de IBM Cloud (
     ```
     {: pre}
 
-    **Nota:** Puede llevar hasta 15 minutos la ordenación de las máquinas del nodo trabajador y la configuración y suministro del clúster
-en su cuenta.
+    **Nota:** Se puede tardar hasta 15 minutos en pedir las máquinas de nodo trabajador y en configurar y suministrar el clúster en la cuenta.
 
     Una vez completado el suministro del clúster, el estado del clúster pasa a ser **deployed**.
 
     ```
-    Name         ID                                   State      Created          Workers
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   3
+    Name         ID                                   State      Created          Workers   Location   Version
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   3         dal10      1.8.8
     ```
     {: screen}
 
@@ -157,8 +160,8 @@ en su cuenta.
     Cuando los nodos trabajadores están listos, el estado pasa a **normal** y el estado es **Ready**. Cuando el estado del nodo sea **Preparado**, podrá acceder al clúster.
 
     ```
-    ID                                                  Public IP        Private IP     Machine Type   State      Status
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1   169.47.223.113   10.171.42.93   free           normal    Ready
+    ID                                                  Public IP        Private IP     Machine Type   State      Status   Location   Version
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.47.223.113   10.171.42.93   free           normal     Ready    dal10      1.8.8
     ```
     {: screen}
 
@@ -169,13 +172,16 @@ en su cuenta.
     ```
     {: pre}
 
+7. Opcional: [Habilite el direccionamiento entre subredes en la misma VLAN](#vlan-spanning).
+
 <br />
 
 
 ## Adición de subredes y direcciones IP gestionadas por el usuario a clústeres de Kubernetes
 {: #user_managed}
 
-Especifique su propia subred desde una red local a la que desea que acceda {{site.data.keyword.containershort_notm}}. A continuación, puede añadir direcciones IP privadas desde dicha subred a los servicios del equilibrador de carga del clúster de Kubernetes.
+Especifique una subred desde una red local a la que desea que acceda {{site.data.keyword.containershort_notm}}. A continuación, puede añadir direcciones IP privadas desde dicha subred a los servicios del equilibrador de carga del clúster de Kubernetes.
+{:shortdesc}
 
 Requisitos:
 - Las subredes gestionadas por el usuario solo se pueden añadir a VLAN privadas.
@@ -184,7 +190,9 @@ Requisitos:
 
 Antes de empezar:
 - Configure el direccionamiento del tráfico de red de entrada y de salida de la subred externa.
-- Confirme que tiene conectividad VPN entre el dispositivo de pasarela del centro de datos local y Vyatta de la red privada en el portafolio de la infraestructura de IBM Cloud (SoftLayer) o bien el servicio VPN de Strongswan que se ejecuta en el clúster. Para utilizar un Vyatta, consulte esta [publicación de blog ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/)]. Para utilizar Strongswan, consulte [Configuración de la conectividad de VPN con el servicio VPN IPSec de Strongswan](cs_vpn.html).
+- Confirme que tiene conectividad VPN entre el dispositivo de pasarela del centro de datos local y Vyatta de la red privada en el portafolio de la infraestructura de IBM Cloud (SoftLayer) o bien el servicio VPN de strongSwan que se está ejecutando en el clúster. Para utilizar un Vyatta, consulte esta [publicación de blog ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/)]. Para utilizar strongSwan, consulte [Configuración de la conectividad de VPN con el servicio VPN IPSec de strongSwan](cs_vpn.html).
+
+Para añadir una subred desde una red local:
 
 1. Consulte el ID de la VLAN privada del clúster. Localice la sección **VLAN**. En el campo **User-managed**, identifique el ID de VLAN con _false_.
 
@@ -231,7 +239,9 @@ Antes de empezar:
     ```
     {: screen}
 
-4. Añada un servicio de equilibrador de carga privado o un equilibrador de carga de aplicación de Ingress privado para acceder a la app sobre la red privada. Si desea utilizar una dirección IP privada de la subred que ha añadido al crear un equilibrador de carga privado o un equilibrador de carga de aplicación de Ingress privado, debe especificar una dirección IP. De lo contrario, se elige una dirección IP aleatoria de las subredes de infraestructura de IBM Cloud (SoftLayer) o las subredes proporcionadas por el usuario en la VLAN privada. Para obtener más información, consulte [Configuración del acceso a una app utilizando el tipo de servicio LoadBalancer](cs_loadbalancer.html#config) o [Habilitación del equilibrador de carga de aplicación privado](cs_ingress.html#private_ingress).
+4. Opcional: [Habilite el direccionamiento entre subredes en la misma VLAN](#vlan-spanning).
+
+5. Añada un servicio de equilibrador de carga privado o un equilibrador de carga de aplicación de Ingress privado para acceder a la app sobre la red privada. Para utilizar una dirección IP privada de la subred que ha añadido, debe especificar una dirección IP. De lo contrario, se elige una dirección IP aleatoria de las subredes de infraestructura de IBM Cloud (SoftLayer) o las subredes proporcionadas por el usuario en la VLAN privada. Para obtener más información, consulte [Configuración del acceso a una app utilizando el tipo de servicio LoadBalancer](cs_loadbalancer.html#config) o [Habilitación del equilibrador de carga de aplicación privado](cs_ingress.html#private_ingress).
 
 <br />
 
@@ -239,16 +249,22 @@ Antes de empezar:
 ## Gestión de direcciones IP y subredes
 {: #manage}
 
-Puede utilizar subredes públicas y privadas portátiles y direcciones IP para exponer apps en el clúster y hacer que se pueda acceder a las mismas desde Internet o desde una red privada.
+Revise las opciones siguientes para obtener una lista de las direcciones IP públicas disponibles, liberar direcciones IP utilizadas y direccionar entre varias subredes en la misma VLAN.
 {:shortdesc}
 
-En {{site.data.keyword.containershort_notm}}, tiene la posibilidad de añadir direcciones IP portátiles y estables para los servicios de Kubernetes añadiendo subredes al clúster. Cuando se crea un clúster estándar, {{site.data.keyword.containershort_notm}} automáticamente suministra una subred pública portátil con 5 direcciones IP públicas portátiles y una subred privada portátil con 5 direcciones IP privadas. Las direcciones IP portátiles son estáticas y no cambian cuando se elimina un nodo trabajador o incluso el clúster.
+### Visualización de direcciones IP públicas disponibles
+{: #review_ip}
 
-Dos de las direcciones IP portátiles, una pública y una privada, se utilizan para los [equilibradores de carga de aplicación de Ingress](cs_ingress.html), que puede utilizar para exponer varias apps en el clúster. Se pueden utilizar 4 direcciones IP públicas portátiles y 4 direcciones IP privadas para exponer apps mediante la [creación de un servicio equilibrador de carga](cs_loadbalancer.html).
+Para obtener una lista de todas las direcciones IP del clúster, tanto utilizadas como disponibles, puede ejecutar:
 
-**Nota:** Las direcciones IP públicas portátiles se facturan mensualmente. Si decide retirar las direcciones IP públicas portátiles una vez suministrado el clúster, tendrá que pagar el cargo mensual, aunque solo las haya utilizado un breve periodo de tiempo.
+  ```
+  kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
+  ```
+  {: pre}
 
+Para obtener una lista sólo de las direcciones IP públicas disponibles para el clúster, puede utilizar los pasos siguientes:
 
+Antes de empezar, [establezca el contexto para el clúster que desea utilizar.](cs_cli_install.html#cs_cli_configure)
 
 1.  Cree un archivo de configuración de servicio Kubernetes denominado `myservice.yaml` y defina un servicio de tipo `LoadBalancer` con una dirección IP de equilibrador de carga ficticia. En el ejemplo siguiente se utiliza la dirección IP 1.1.1.1 como dirección IP del equilibrador de carga.
 
@@ -294,15 +310,11 @@ Dos de las direcciones IP portátiles, una pública y una privada, se utilizan p
     ```
     {: screen}
 
-<br />
-
-
-
-
-## Liberación de direcciones IP utilizadas
+### Liberación de direcciones IP utilizadas
 {: #free}
 
 Puede liberar una dirección IP portátil utilizada suprimiendo el servicio equilibrador de carga que está utilizando la dirección IP pública portátil.
+{:shortdesc}
 
 Antes de empezar, [establezca el contexto para el clúster que desea utilizar.](cs_cli_install.html#cs_cli_configure)
 
@@ -319,3 +331,13 @@ Antes de empezar, [establezca el contexto para el clúster que desea utilizar.](
     kubectl delete service <myservice>
     ```
     {: pre}
+
+### Habilitación del direccionamiento entre subredes en la misma VLAN
+{: #vlan-spanning}
+
+Cuando crea un clúster, se suministra una subred que acaba en `/26` en la misma VLAN en la que está el clúster. Esta subred primaria puede contener hasta 62 nodos trabajadores.
+{:shortdesc}
+
+Este límite de 62 nodos trabajadores se puede superar en un clúster grande o en varios clústeres más pequeños en una sola región que estén en la misma VLAN. Cuando se alcanza el límite de 62 nodos trabajadores, se solicita una segunda subred primaria en la misma VLAN.
+
+Para direccionar entre subredes de la misma VLAN, se debe activar la expansión de VLAN. Para obtener instrucciones, consulte [Habilitar o inhabilitar la expansión de VLAN](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).

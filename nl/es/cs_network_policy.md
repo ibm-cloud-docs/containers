@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-02-27"
 
 ---
 
@@ -18,10 +18,10 @@ lastupdated: "2018-01-24"
 # Control del tráfico con políticas de red
 {: #network_policies}
 
-Cada clúster de Kubernetes está configurado con un plugin de red que se denomina Calico. Las políticas de red predeterminadas se configuran para proteger la interfaz de red pública de cada nodo trabajador. Puede utilizar Calico y las funciones nativas de Kubernetes para configurar más políticas de red para un clúster cuando tenga requisitos de seguridad exclusivos. Estas políticas de red especifican el tráfico de red que desea permitir o bloquear de entrada y de salida de un pod de un clúster.
+Cada clúster de Kubernetes está configurado con un plugin de red que se denomina Calico. Las políticas de red predeterminadas se configuran para proteger la interfaz de red pública de cada nodo trabajador en {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-Puede elegir entre Calico y las funciones nativas de Kubernetes para crear políticas de red para el clúster. Puede utilizar las políticas de red de Kubernetes para empezar, pero utilice las políticas de red de Calico para obtener funciones más potentes.
+Puede utilizar Calico y las funciones nativas de Kubernetes para configurar más políticas de red para un clúster cuando tenga requisitos de seguridad exclusivos. Estas políticas de red especifican el tráfico de red que desea permitir o bloquear de entrada y de salida de un pod de un clúster. Puede utilizar las políticas de red de Kubernetes para empezar, pero utilice las políticas de red de Calico para obtener funciones más potentes.
 
 <ul>
   <li>[Políticas de red de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/services-networking/network-policies/): se ofrecen algunas opciones básicas, como por ejemplo la especificación de los pods que se pueden comunicar entre sí. El tráfico de red de entrada se puede permitir o bloquear para un protocolo y un puerto. El tráfico se puede filtrar en función de las etiquetas y de los espacios de nombres de Kubernetes del pod que intenta establecer la conexión con otros pods.</br>Estas políticas se pueden aplicar utilizando mandatos `kubectl` o la API de Kubernetes. Cuando se aplican estas políticas, se convierten en políticas de red de Calico y Calico impone estas políticas.</li>
@@ -40,7 +40,7 @@ Estas políticas se aplican mediante mandatos `calicoctl`. Calico impone estas p
 ## Configuración de la política predeterminada
 {: #default_policy}
 
-Cuando se crea un clúster, se configuran automáticamente políticas de red predeterminadas para la interfaz de red pública de cada nodo trabajador a fin de limitar el tráfico entrante de Internet público para un nodo trabajador. Estas políticas no afectan al tráfico entre pods y se configuran para permitir el acceso a nodeport de Kubernetes, al equilibrador de carga y a los servicios de Ingress.
+Cuando se crea un clúster, se definen políticas de red predeterminadas para la interfaz de red pública de cada nodo trabajador a fin de limitar el tráfico entrante de Internet público. Estas políticas no afectan al tráfico entre pods y permiten el acceso a nodeport de Kubernetes, al equilibrador de carga y a los servicios de Ingress.
 {:shortdesc}
 
 Las políticas predeterminadas no se aplican directamente a los pods; se aplican a la interfaz de red pública de un nodo trabajador utilizando un punto final de host de Calico. Cuando se crea un punto final de host en Calico, todo el tráfico de entrada y de salida de la interfaz de red del nodo trabajador se bloquea, a no ser que una política permita dicho tráfico.
@@ -323,7 +323,7 @@ X:
 ## Bloquear el tráfico de entrada a los servicios LoadBalancer o NodePort.
 {: #block_ingress}
 
-De forma predeterminada, los servicios `NodePort` y `LoadBalancer` de Kubernetes están diseñados para hacer que su app esté disponible en todas las interfaces del clúster públicas y privadas. Sin embargo, puede bloquear el tráfico de entrada a los servicios en función del origen o el destino del tráfico. Para bloquear el tráfico, cree políticas de red `preDNAT` de Calico.
+De forma predeterminada, los servicios `NodePort` y `LoadBalancer` de Kubernetes están diseñados para hacer que su app esté disponible en todas las interfaces del clúster públicas y privadas. Sin embargo, puede bloquear el tráfico de entrada a los servicios en función del origen o el destino del tráfico.
 {:shortdesc}
 
 Un servicio LoadBalancer de Kubernetes es también un servicio NodePort. Un servicio LoadBalancer hace que la app está disponible en la dirección IP y puerto del equilibrador de carga y hace que la app está disponible en los puertos del nodo del servicio. Se puede acceder a los puertos del nodo en cada dirección IP (pública y privada) para cada nodo del clúster.
