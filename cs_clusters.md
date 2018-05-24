@@ -557,67 +557,7 @@ To create a cluster:
 
 
 
-:    us-south
-    Worker zones:       dal10,dal12
-    Master URL:         https://169.xx.xxx.xxx:21111
-    Ingress subdomain:  ...
-    Ingress secret:     ...
-    Workers:            6
-    Version:            1.8.6_1504
-    ```
-    {: screen}  
 
-6. Enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it.
-
-### Deprecated: Adding stand-alone worker nodes
-{: #standalone}
-
-If you have a cluster that was created before worker pools were introduced, you can use the deprecated commands to add stand-alone worker nodes.
-{: shortdesc}
-
-**Note:** If you have a cluster that was created after worker pools were introduced, you cannot add stand-alone worker nodes. Instead, you can [create a worker pool](#add_pool), [resize an existing worker pool](#resize_pool), or [add a zone to a worker pool](#add_zone) to add worker nodes to your cluster.
-
-1. List available zones and pick the zone where you want to add worker nodes.
-   ```
-   bx cs zones
-   ```
-   {: pre}
-
-2. List available VLANs in that zone and note their ID.
-   ```
-   bx cs vlans <zone>
-   ```
-   {: pre}
-
-3. List available machine types in that zone.
-   ```
-   bx cs machine-types <zone>
-   ```
-   {: pre}
-
-4. Add stand-alone worker nodes to the cluster.
-   ```
-   bx cs worker-add --cluster <cluster_name_or_ID> --number <number_of_worker_nodes> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --machine-type <machine_type> --hardware <shared_or_dedicated>
-   ```
-   {: pre}
-
-5. Verify that the worker nodes are created.
-   ```
-   bx cs workers <cluster_name_or_ID>
-   ```
-   {: pre}
-
-## Scaling clusters (alpha)
-{: #scaling_clusters}
-
-With the iccs-cluster-autoscaler image you can scale worker nodes that are provisioned on virtual server instances within your Kubernetes cluster up or down, across any specified autoscaling group.
-
-The alpha version currently supports single zone availability only and is not available for worker nodes on physical bare metal servers.
-{: tip}
-
-The iccs-cluster-autoscaler monitors the pods in your cluster by watching the Kubernetes API server and automatically scales the size of your cluster by adding or deleting worker nodes. To configure the autoscaler or learn more, see [Getting started with the iccs-cluster-autoscaler image](/docs/services/RegistryImages/ibm-cluster-autoscaler/index.html#ibm-cluster-autoscaler).
-
-</staging>
 
 ## Viewing cluster states
 {: #states}
