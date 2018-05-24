@@ -23,7 +23,7 @@ lastupdated: "2018-05-24"
 To add capabilities to your Ingress application load balancer (ALB), you can specify annotations as metadata in an Ingress resource.
 {: shortdesc}
 
-For general information about Ingress services and how to get started using them, see [Managing network traffic by using Ingress](cs_ingress.html#planning).
+**Important**: Before you use annotations, make sure you have properly set up your Ingress service configuration by following the steps in [Exposing apps with Ingress](cs_ingress.html). Once you have set up the Ingress ALB with a basic configuration, you can then expand its capabilities by adding annotations to the Ingress resource file.
 
 <table>
 <caption>General annotations</caption>
