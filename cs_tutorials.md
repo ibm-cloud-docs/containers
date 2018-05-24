@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-23"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -51,6 +51,7 @@ This tutorial is intended for software developers and network administrators who
 ## Prerequisites
 
 -  A Pay-As-You-Go or Subscription [{{site.data.keyword.Bluemix_notm}} account ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/registration/)
+-  The [Cloud Foundry Developer role](/iam/mngcf.html#mngcf) in the cluster space that you want to work in.
 
 
 ## Lesson 1: Creating a cluster and setting up the CLI
