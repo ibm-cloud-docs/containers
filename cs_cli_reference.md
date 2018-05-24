@@ -1084,15 +1084,14 @@ List the services that are bound to one or all of the Kubernetes namespace in a 
    <dd>Include the services that are bound to a specific namespace in a cluster. This value is optional.</dd>
 
    <dt><code>--all-namespaces</code></dt>
-    <dd>Include the services that are bound to all of the namespaces in a cluster. This value is optional.</dd>
+   <dd>Include the services that are bound to all of the namespaces in a cluster. This value is optional.</dd>
 
-    <dt><code>--json</code></dt>
-    <dd>Prints the command output in JSON format. This value is optional.</dd>
+   <dt><code>--json</code></dt>
+   <dd>Prints the command output in JSON format. This value is optional.</dd>
 
-    <dt><code>-s</code></dt>
-    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-
-    </dl>
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+   </dl>
 
 **Example**:
 
