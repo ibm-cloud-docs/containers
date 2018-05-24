@@ -206,7 +206,7 @@ To use the IBM-provided Ingress domain:
     ID:                     18a61a63c6a94b658596ca93d087aad9
     State:                  normal
     Created:                2018-01-12T18:33:35+0000
-    Location:               dal10
+    Location:                 dal10
     Master URL:             https://169.xx.xxx.xxx:26268
     Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
     Ingress Secret:         <tls_secret>
@@ -521,7 +521,7 @@ To use the IBM-provided Ingress domain:
     ID:                     18a61a63c6a94b658596ca93d087aad9
     State:                  normal
     Created:                2018-01-12T18:33:35+0000
-    Location:               dal10
+    Location:                 dal10
     Master URL:             https://169.xx.xxx.xxx:26268
     Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
     Ingress Secret:         <tls_secret>
