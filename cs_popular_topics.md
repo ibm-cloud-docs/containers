@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-23"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -36,6 +36,11 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+<td>24 May</td>
+<td>[New Ingress subdomain format](cs_ingress.html)</td>
+<td>Clusters created after 24 May are assigned an Ingress subdomain in a new format: <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.appdomain.cloud</code>. When you use Ingress to expose your apps, you can use the new subdomain to access your apps from the internet.</td>
+</tr>
 <tr>
 <td>14 May</td>
 <td>[Update: Deploy workloads on GPU bare metal worldwide](cs_app.html#gpu_app)</td>
