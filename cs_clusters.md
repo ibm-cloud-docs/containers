@@ -82,8 +82,6 @@ You can choose between virtual or physical (bare metal) servers. Depending on th
 
 
 
-
-
 ### Hardware for worker nodes
 {: #shared_dedicated_node}
 
