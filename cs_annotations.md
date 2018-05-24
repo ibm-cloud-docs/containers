@@ -1415,7 +1415,7 @@ Allow HTTPS requests and encrypt traffic to your upstream apps.
 <dl>
 <dt>Description</dt>
 <dd>
-Encrypt traffic that Ingress sends to upstream apps that require HTTPS. If your upstream apps can handle TLS, you can optionally provide a certificate that is contained in a TLS secret.<br></br>**Optional**: You can add [one-way authentication or mutual authentication](#ssl-services-auth) to this annotation.</dd>
+When your Ingress resource configuration has a TLS section, the Ingress ALB can handle HTTPS-secured URL requests to your app. However, the ALB decrypts the request before forwarding traffic to your apps. If you have apps that require HTTS and need traffic to be encrypted before it is forwarded to those upstream apps, you can use the `ssl-services` annotation. If your upstream apps can handle TLS, you can optionally provide a certificate that is contained in a TLS secret.<br></br>**Optional**: You can add [one-way authentication or mutual authentication](#ssl-services-auth) to this annotation.</dd>
 
 
 <dt>Sample Ingress resource YAML</dt>
