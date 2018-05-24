@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-23"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -39,7 +39,7 @@ In the following diagram, you can see security features that are grouped by Kube
 <img src="images/cs_security.png" width="400" alt="{{site.data.keyword.containershort_notm}} cluster security" style="width:400px; border-style: none"/>
 
 
-<table summary="The first row in the table spans both columns. The remaining rows are to be read left to right, with the server location in column one and IP addresses to match in column two.">
+<table summary="The first row in the table spans both columns. The remaining rows are to be read left to right, with the security component in column one and features to match in column two.">
 <caption>Security by component</caption>
   <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Built-in cluster security settings in {{site.data.keyword.containershort_notm}}</th>

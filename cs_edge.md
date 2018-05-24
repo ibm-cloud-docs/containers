@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-22"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -40,9 +40,9 @@ Before you begin:
 - Ensure that your cluster has a least one public VLAN. Edge worker nodes are not available for clusters with private VLANs only.
 - [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure).
 
-Steps:
+To label worker nodes as edge nodes:
 
-1. List all of the worker nodes in the cluster. Use the private IP address from the **NAME** column to identify the nodes. Select at least two worker nodes on each public VLAN to be edge worker nodes. Using two or more worker nodes improves availability of the networking resources.
+1. List all of the worker nodes in the cluster. Use the private IP address from the **NAME** column to identify the nodes. Select at least two worker nodes on each public VLAN to be edge worker nodes. Ingress requires at least two worker nodes in each zone to provide high availability. 
 
   ```
   kubectl get nodes -L publicVLAN,privateVLAN,dedicated
@@ -63,7 +63,7 @@ Steps:
   ```
   {: pre}
 
-  Output:
+  Example output:
 
   ```
   kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f
@@ -72,7 +72,7 @@ Steps:
 
 4. Using the output from the previous step, copy and paste each `kubectl get service` line. This command redeploys the load balancer to an edge worker node. Only public load balancers must be redeployed.
 
-  Output:
+  Example output:
 
   ```
   service "my_loadbalancer" configured
@@ -93,14 +93,14 @@ A benefit of edge worker nodes is that they can be specified to run networking s
 Using the `dedicated=edge` toleration means that all load balancer and Ingress services are deployed to the labeled worker nodes only. However, to prevent other workloads from running on edge worker nodes and consuming worker node resources, you must use [Kubernetes taints ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
 
 
-1. List all of the worker nodes with the `edge` label.
+1. List all of the worker nodes with the `dedicated=edge` label.
 
   ```
   kubectl get nodes -L publicVLAN,privateVLAN,dedicated -l dedicated=edge
   ```
   {: pre}
 
-2. Apply a taint to each worker node that prevents pods from running on the worker node and that removes pods that do not have the `edge` label from the worker node. The pods that are removed are redeployed on other worker nodes with capacity.
+2. Apply a taint to each worker node that prevents pods from running on the worker node and that removes pods that do not have the `dedicated=edge` label from the worker node. The pods that are removed are redeployed on other worker nodes with capacity.
 
   ```
   kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute

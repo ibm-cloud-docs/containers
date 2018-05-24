@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-22"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -427,7 +427,7 @@ If you just created the cluster, the worker nodes might still be configuring. If
 
 You can try one of the following solutions:
   - Check the status of your cluster by running `bx cs clusters`. Then, check to be sure that your worker nodes are deployed by running `bx cs workers <cluster_name>`.
-  - Check to see whether your VLAN is valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage. You can [list your VLANs](/docs/containers/cs_cli_reference.html#cs_vlans) by running `bx cs vlans LOCATION` if the VLAN does not show in the list, then it is not valid. Choose a different VLAN.
+  - Check to see whether your VLAN is valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage. You can [list your VLANs](/docs/containers/cs_cli_reference.html#cs_vlans) by running `bx cs vlans <location>` if the VLAN does not show in the list, then it is not valid. Choose a different VLAN.
 
 <br />
 
