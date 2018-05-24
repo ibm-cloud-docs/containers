@@ -96,10 +96,9 @@ Review the following information to decide what type of worker pools you want. A
 
 <dl>
 <dt>Why would I use physical machines (bare metal)?</dt>
-<dd><p><strong>Use bare metal when you need lots of compute resources</strong>: You can provision your worker node as a single-tenant physical server, also referred to as bare metal. Bare metal gives you direct access to the physical resources on the machine, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all of a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance.</p>
-<p><strong>Understand monthly billing</strong>: Bare metal servers are more expensive than virtual servers, and are best suited for high-performance apps that need more resources and host control. Bare metal servers are billed monthly. If you cancel a bare metal server before the end of the month, you are charged through the end of that month. Ordering and canceling bare metal servers is a manual process through your IBM Cloud infrastructure (SoftLayer) account. It can take more than one business day to complete.</p>
-<p><strong>Option to enable Trusted Compute</strong>: Enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `bx cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containershort_notm}} with Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute is available on clusters that run Kubernetes version 1.9 or later and have certain bare metal machine types. When you run the `bx cs machine-types <location>` [command](cs_cli_reference.html#cs_machine_types), you can see which machines support trust by reviewing the `Trustable` field. For example, `mgXc` GPU flavors do not support Trusted Compute.</p>
-<p><strong>Bare metal flavors</strong>: Bare metal machine types come in groups that have different compute resources that you can choose from to meet your app's needs. Physical machine types have more local storage than virtual, and some have RAID to back up local data. To learn about the different types of bare metal offerings, see the `bx cs machine-type` [command](cs_cli_reference.html#cs_machine_types).</p></dd>
+<dd><p><strong>More compute resources</strong>: You can provision your worker node as a single-tenant physical server, also referred to as bare metal. Bare metal gives you direct access to the physical resources on the machine, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all of a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance. Physical machine types have more local storage than virtual, and some have RAID to back up local data.</p>
+<p><strong>Monthly billing</strong>: Bare metal servers are more expensive than virtual servers, and are best suited for high-performance apps that need more resources and host control. Bare metal servers are billed monthly. If you cancel a bare metal server before the end of the month, you are charged through the end of that month. Ordering and canceling bare metal servers is a manual process through your IBM Cloud infrastructure (SoftLayer) account. It can take more than one business day to complete.</p>
+<p><strong>Option to enable Trusted Compute</strong>: Enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `bx cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containershort_notm}} with Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute is available on clusters that run Kubernetes version 1.9 or later and have certain bare metal machine types. When you run the `bx cs machine-types <location>` [command](cs_cli_reference.html#cs_machine_types), you can see which machines support trust by reviewing the **Trustable** field. For example, `mgXc` GPU flavors do not support Trusted Compute.</p></dd>
 <dt>Why would I use virtual machines?</dt>
 <dd><p>With VMs, you get greater flexibility, quicker provisioning times, and more automatic scalability features than bare metal, at a more cost-effective price. You can use VMs for most general purpose use cases such as testing and development environments, staging and prod environments, microservices, and business apps. However, there is a trade-off in performance. If you need high performance computing for RAM-, data-, or GPU-intensive workloads, use bare metal.</p>
 <p><strong>Decide between single or multiple tenancy</strong>: When you create a standard virtual cluster, you must choose whether you want the underlying hardware to be shared by multiple {{site.data.keyword.IBM_notm}} customers (multi tenancy) or to be dedicated to you only (single tenancy).</p>
@@ -277,19 +276,20 @@ To create a cluster:
 
         - **Virtual - Shared**: Infrastructure resources, such as the hypervisor and physical hardware, are shared across you and other IBM customers, but each worker node is accessible only by you. Although this option is less expensive and sufficient in most cases, you might want to verify your performance and infrastructure requirements with your company policies.
 
-        - **Bare Metal**: Billed monthly, bare metal servers are provisioned by manual interaction with IBM Cloud infrastructure (SoftLayer), and can take more than one business day to complete. Bare metal is best suited for high-performance applications that need more resources and host control. 
+        - **Bare Metal**: Billed monthly, bare metal servers are provisioned by manual interaction with IBM Cloud infrastructure (SoftLayer), and can take more than one business day to complete. Bare metal is best suited for high-performance applications that need more resources and host control.
 
         Be sure that you want to provision a bare metal machine. Because it is billed monthly, if you cancel it immediately after an order by mistake, you are still charged the full month.
         {:tip}
 
     5.  **Standard**: Select a machine type. The machine type defines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to the containers. Available bare metal and virtual machines types vary by the location in which you deploy the cluster. After you create your cluster, you can add different machine types by adding a node to the cluster.
 
-    6. **Standard**: Specify the number of worker nodes that you need in the cluster. 
+    6. **Standard**: Specify the number of worker nodes that you need in the cluster.
 
     7. **Standard**: Select a public VLAN (optional) and private VLAN (required) from your IBM Cloud infrastructure (SoftLayer) account. Both VLANs communicate between worker nodes but the public VLAN also communicates with the IBM-managed Kubernetes master. You can use the same VLAN for multiple clusters.
         **Note**: If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. For more information, see [VLAN connection for worker nodes](cs_clusters.html#worker_vlan_connection).
 
     8. By default, **Encrypt local disk** is selected. If you choose to clear the check box, then the host's Docker data is not encrypted.
+
 
 4. Click **Create cluster**. You can see the progress of the worker node deployment in the **Worker nodes** tab. When the deploy is done, you can see that your cluster is ready in the **Overview** tab.
     **Note:** Every worker node is assigned a unique worker node ID and domain name that must not be manually changed after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
@@ -558,7 +558,58 @@ To create a cluster:
 <br />
 
 
+:    us-south
+    Worker zones:       dal10,dal12
+    Master URL:         https://169.xx.xxx.xxx:21111
+    Ingress subdomain:  ...
+    Ingress secret:     ...
+    Workers:            6
+    Version:            1.8.6_1504
+    ```
+    {: screen}  
 
+6. Enable [VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](cs_users.html#infra_access), or you can request the account owner to enable it.
+
+### Deprecated: Adding stand-alone worker nodes
+{: #standalone}
+
+If you have a cluster that was created before worker pools were introduced, you can use the deprecated commands to add stand-alone worker nodes.
+{: shortdesc}
+
+**Note:** If you have a cluster that was created after worker pools were introduced, you cannot add stand-alone worker nodes. Instead, you can [create a worker pool](#add_pool), [resize an existing worker pool](#resize_pool), or [add a zone to a worker pool](#add_zone) to add worker nodes to your cluster.
+
+1. List available zones and pick the zone where you want to add worker nodes.
+   ```
+   bx cs zones
+   ```
+   {: pre}
+
+2. List available VLANs in that zone and note their ID.
+   ```
+   bx cs vlans <zone>
+   ```
+   {: pre}
+
+3. List available machine types in that zone.
+   ```
+   bx cs machine-types <zone>
+   ```
+   {: pre}
+
+4. Add stand-alone worker nodes to the cluster.
+   ```
+   bx cs worker-add --cluster <cluster_name_or_ID> --number <number_of_worker_nodes> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --machine-type <machine_type> --hardware <shared_or_dedicated>
+   ```
+   {: pre}
+
+5. Verify that the worker nodes are created.
+   ```
+   bx cs workers <cluster_name_or_ID>
+   ```
+   {: pre}
+
+
+</staging>
 
 
 
@@ -568,7 +619,7 @@ To create a cluster:
 Review the state of a Kubernetes cluster to get information about the availability and capacity of the cluster, and potential problems that might have occurred.
 {:shortdesc}
 
-To view information about a specific cluster, such as its location, master URL, Ingress subdomain, version, owner, and monitoring dashboard, use the `bx cs cluster-get <cluster_name_or_ID>` [command](cs_cli_reference.html#cs_cluster_get). Include the `--showResources` flag to view more cluster resources such as add-ons for storage pods or subnet VLANs for public and private IPs.
+To view information about a specific cluster, such as its locations, master URL, Ingress subdomain, version, owner, and monitoring dashboard, use the `bx cs cluster-get <cluster_name_or_ID>` [command](cs_cli_reference.html#cs_cluster_get). Include the `--showResources` flag to view more cluster resources such as add-ons for storage pods or subnet VLANs for public and private IPs.
 
 You can view the current cluster state by running the `bx cs clusters` command and locating the **State** field. To troubleshoot your cluster and worker nodes, see [Troubleshooting clusters](cs_troubleshoot.html#debug_clusters).
 

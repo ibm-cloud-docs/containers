@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-22"
+lastupdated: "2018-05-24"
 
 ---
 
@@ -1673,10 +1673,9 @@ You can provision your worker node as a virtual machine on shared or dedicated h
 
 <dl>
 <dt>Why would I use physical machines (bare metal)?</dt>
-<dd><p><strong>Use bare metal when you need lots of compute resources</strong>: You can provision your worker node as a single-tenant physical server, also referred to as bare metal. Bare metal gives you direct access to the physical resources on the machine, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all of a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance.</p>
-<p><strong>Understand monthly billing</strong>: Bare metal servers are more expensive than virtual servers, and are best suited for high-performance apps that need more resources and host control. Bare metal servers are billed monthly. If you cancel a bare metal server before the end of the month, you are charged through the end of that month. Ordering and canceling bare metal servers is a manual process through your IBM Cloud infrastructure (SoftLayer) account. It can take more than one business day to complete.</p>
-<p><strong>Option to enable Trusted Compute</strong>: Enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `bx cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containershort_notm}} with Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute is available on clusters that run Kubernetes version 1.9 or later and have certain bare metal machine types. When you run the `bx cs machine-types <location>` [command](cs_cli_reference.html#cs_machine_types), you can see which machines support trust by reviewing the `Trustable` field. For example, `mgXc` GPU flavors do not support Trusted Compute.</p>
-<p><strong>Bare metal flavors</strong>: Bare metal machine types come in groups that have different compute resources that you can choose from to meet your app's needs. Physical machine types have more local storage than virtual, and some have RAID to back up local data. To learn about the different types of bare metal offerings, see the `bx cs machine-type` [command](cs_cli_reference.html#cs_machine_types).</p></dd>
+<dd><p><strong>More compute resources</strong>: You can provision your worker node as a single-tenant physical server, also referred to as bare metal. Bare metal gives you direct access to the physical resources on the machine, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all of a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance. Physical machine types have more local storage than virtual, and some have RAID to back up local data.</p>
+<p><strong>Monthly billing</strong>: Bare metal servers are more expensive than virtual servers, and are best suited for high-performance apps that need more resources and host control. Bare metal servers are billed monthly. If you cancel a bare metal server before the end of the month, you are charged through the end of that month. Ordering and canceling bare metal servers is a manual process through your IBM Cloud infrastructure (SoftLayer) account. It can take more than one business day to complete.</p>
+<p><strong>Option to enable Trusted Compute</strong>: Enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `bx cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containershort_notm}} with Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute is available on clusters that run Kubernetes version 1.9 or later and have certain bare metal machine types. When you run the `bx cs machine-types <location>` [command](cs_cli_reference.html#cs_machine_types), you can see which machines support trust by reviewing the **Trustable** field. For example, `mgXc` GPU flavors do not support Trusted Compute.</p></dd>
 <dt>Why would I use virtual machines?</dt>
 <dd><p>With VMs, you get greater flexibility, quicker provisioning times, and more automatic scalability features than bare metal, at a more cost-effective price. You can use VMs for most general purpose use cases such as testing and development environments, staging and prod environments, microservices, and business apps. However, there is a trade-off in performance. If you need high performance computing for RAM-, data-, or GPU-intensive workloads, use bare metal.</p>
 <p><strong>Decide between single or multiple tenancy</strong>: When you create a standard virtual cluster, you must choose whether you want the underlying hardware to be shared by multiple {{site.data.keyword.IBM_notm}} customers (multi tenancy) or to be dedicated to you only (single tenancy).</p>
@@ -2229,7 +2228,7 @@ Update a logging filter. You can use this command to update a logging filter tha
 ### bx cs locations [--json] [-s]
 {: #cs_datacenters}
 
-View a list of available locations for you to create a cluster in.
+View a list of available locations for you to create a cluster in. The available locations vary by the region that you are logged in to. To switch regions, run `bx cs region-set`.
 
 <strong>Command options</strong>:
 
@@ -2448,7 +2447,145 @@ diskEncryption: <em>false</em></code></pre>
   ```
   {: pre}
 
+ in which you deploy the cluster. For more information, see the documentation for the `bx cs machine-types` [command](cs_cli_reference.html#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
 
+  <dt><code>--size-per-zone <em>WORKERS_PER_ZONE</em></code></dt>
+    <dd>The number of workers to create in each zone. This value is required.</dd>
+
+  <dt><code>--kube-version <em>VERSION</em></code></dt>
+    <dd>The version of Kubernetes that you want your worker nodes to be created with. The default version is used if this value is not specified.</dd>
+
+  <dt><code>--hardware <em>HARDWARE</em></code></dt>
+    <dd>The level of hardware isolation for your worker node. Use dedicated if you want to have available physical resources dedicated to you only, or shared to allow physical resources to be shared with other IBM customers. The default is shared. This value is optional.</dd>
+
+  <dt><code>--labels <em>LABELS</em></code></dt>
+    <dd>The labels that you want to assign to the workers in your pool. Example: <key1>=<val1>,<key2>=<val2></dd>
+
+  <dt><code>--private-only </code></dt>
+    <dd>Specifies that there are no public VLANS on the worker pool. The default value is <code>false</code>.</dd>
+
+  <dt><code>--diable-disk-encrpyt</code></dt>
+    <dd>Specifies that the disk is not encrypted. The default value is <code>false</code>.</dd>
+
+</dl>
+
+**Example command**:
+
+  ```
+  bx cs worker-pool-add my_cluster --machine-type u2c.2x4 --size-per-zone 6
+  ```
+  {: pre}
+
+### bx cs worker-pools --cluster CLUSTER
+{: #cs_worker_pools}
+
+View the worker pools that you have in a cluster.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER_NAME_OR_ID</em></code></dt>
+    <dd>The name or ID of the cluster for which you want to list worker pools. This value is required.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  bx cs worker-pools --cluster my_cluster
+  ```
+  {: pre}
+
+### bx cs worker-pool-get --worker-pool WORKER_POOL --cluster CLUSTER
+{: #cs_worker_pool_get}
+
+View the details of a worker pool.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
+    <dd>The name of the worker node pool that you want to view the details of. This value is required.</dd>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster where the worker pool is located. This value is required.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  bx cs worker-pool-get --worker-pool pool1 --cluster my_cluster
+  ```
+  {: pre}
+
+### bx cs worker-pool-update --worker-pool WORKER_POOL --cluster CLUSTER
+{: #cs_worker_pool_update}
+
+Update all of the worker nodes in your pool to the latest Kubernetes version that matches the specified master.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
+    <dd>The name of the worker node pool that you want to update. This value is required.</dd>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster for which you want to update worker pools. This value is required.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  bx cs worker-pool-update --worker-pool pool1 --cluster my_cluster
+  ```
+  {: pre}
+
+
+
+### bx cs worker-pool-resize --worker-pool WORKER_POOL --cluster CLUSTER --size-per-zone WORKERS_PER_ZONE
+{: #cs_worker_pool_resize}
+
+Resize your worker pool to increase or decrease the number of worker nodes that are in each zone of your cluster.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
+    <dd>The name of the worker node pool that you want to update. This value is required.</dd>
+
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster for which you want to resize worker pools. This value is required.</dd>
+
+  <dt><code>--size-per-zone <em>WORKERS_PER_ZONE</em></code></dt>
+    <dd>The number of workers that you want to create in each zone. This value is required.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  bx cs worker-pool-update --cluster my_cluster --worker-pool pool1,pool2 --size-per-zone 3
+  ```
+  {: pre}
+
+### bx cs worker-pool-rm --worker-pool WORKER_POOL --cluster CLUSTER
+{: #cs_worker_pool_rm}
+
+Remove a worker pool from your cluster. All worker nodes in the pool are deleted. Your pods are rescheduled when you delete. To avoid downtime, be sure that you have enough workers to run your workload.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
+    <dd>The name of the worker node pool that you want to remove. This value is required.</dd>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster that you want to remove the worker pool from. This value is required.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  bx cs worker-pool-rm --cluster my_cluster --worker-pool pool1
+  ```
+  {: pre}
+
+</staging>
 
 ### bx cs worker-get [CLUSTER_NAME_OR_ID] WORKER_NODE_ID [--json] [-s]
 {: #cs_worker_get}
