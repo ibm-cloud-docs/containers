@@ -198,7 +198,7 @@ Review the following information to decide what type of worker pools you want. A
 </dl>
 
 
-Available physical and virtual machines types vary by the location in which you deploy the cluster. For more information, see the `bx cs machine-type` [command](cs_cli_reference.html#cs_machine_types). You can deploy clusters by using the [console UI](#clusters_ui) or the [CLI](#clusters_cli).
+You can deploy clusters by using the [console UI](#clusters_ui) or the [CLI](#clusters_cli).
 
 ### VLAN connection for worker nodes
 {: #worker_vlan_connection}
@@ -608,10 +608,16 @@ If you have a cluster that was created before worker pools were introduced, you 
    ```
    {: pre}
 
+## Scaling clusters (alpha)
+{: #scaling_clusters}
 
+With the iccs-cluster-autoscaler image you can scale worker nodes that are provisioned on virtual server instances within your Kubernetes cluster up or down, across any specified autoscaling group.
+
+The alpha version currently supports single zone availability only and is not available for worker nodes on physical bare metal servers.
+{: tip}
+
+The iccs-cluster-autoscaler monitors the pods in your cluster by watching the Kubernetes API server and automatically scales the size of your cluster by adding or deleting worker nodes. To configure the autoscaler or learn more, see [Getting started with the iccs-cluster-autoscaler image](/docs/services/RegistryImages/ibm-cluster-autoscaler/index.html#ibm-cluster-autoscaler)
 </staging>
-
-
 
 ## Viewing cluster states
 {: #states}
