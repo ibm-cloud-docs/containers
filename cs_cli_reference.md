@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-05-29"
 
 ---
 
@@ -2212,7 +2212,7 @@ us-south      us-south
 {: worker_node_commands}
 
 
-### bx cs worker-add --cluster CLUSTER [--file FILE_LOCATION] [--hardware HARDWARE] --machine-type MACHINE_TYPE --number NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt] [-s]
+### bx cs worker-add --cluster CLUSTER [--file FILE_LOCATION] [--hardware HARDWARE] --machine-type MACHINE_TYPE --workers NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt] [-s]
 {: #cs_worker_add}
 
 Add worker nodes to your standard cluster.
@@ -2285,7 +2285,7 @@ diskEncryption: <em>false</em></code></pre>
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
 <dd>Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the location in which you deploy the cluster. For more information, see the documentation for the `bx cs machine-types` [command](cs_cli_reference.html#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
 
-<dt><code>--number <em>NUMBER</em></code></dt>
+<dt><code>--workers <em>NUMBER</em></code></dt>
 <dd>An integer that represents the number of worker nodes to create in the cluster. The default value is 1. This value is optional.</dd>
 
 <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
@@ -2325,9 +2325,6 @@ diskEncryption: <em>false</em></code></pre>
   <dt><code>--size-per-zone <em>WORKERS_PER_ZONE</em></code></dt>
     <dd>The number of workers to create in each zone. This value is required.</dd>
 
-  <dt><code>--kube-version <em>VERSION</em></code></dt>
-    <dd>The version of Kubernetes that you want your worker nodes to be created with. The default version is used if this value is not specified.</dd>
-
   <dt><code>--hardware <em>HARDWARE</em></code></dt>
     <dd>The level of hardware isolation for your worker node. Use dedicated if you want to have available physical resources dedicated to you only, or shared to allow physical resources to be shared with other IBM customers. The default is shared. This value is optional.</dd>
 
@@ -2349,7 +2346,7 @@ diskEncryption: <em>false</em></code></pre>
   ```
   {: pre}
 
-### bx cs worker-pools --cluster CLUSTER
+### bx cs worker-pools --cluster CLUSTER [--json] [-s]
 {: #cs_worker_pools}
 
 View the worker pools that you have in a cluster.
@@ -2359,6 +2356,10 @@ View the worker pools that you have in a cluster.
 <dl>
   <dt><code>--cluster <em>CLUSTER_NAME_OR_ID</em></code></dt>
     <dd>The name or ID of the cluster for which you want to list worker pools. This value is required.</dd>
+  <dt><code>--json</code></dt>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
 **Example command**:
@@ -2377,7 +2378,7 @@ View the details of a worker pool.
 
 <dl>
   <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
-    <dd>The name of the worker node pool that you want to view the details of. This value is required.</dd>
+    <dd>The name of the worker node pool that you want to view the details of. To list available worker pools, run `bx cs worker-pools --cluster <cluster_name_or_ID>`. bxThis value is required.</dd>
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster where the worker pool is located. This value is required.</dd>
 </dl>
@@ -2388,11 +2389,28 @@ View the details of a worker pool.
   bx cs worker-pool-get --worker-pool pool1 --cluster my_cluster
   ```
   {: pre}
+  
+**Example output**:
+  
+  ```
+  Name:               pool   
+  ID:                 a1a11b2222222bb3c33c3d4d44d555e5-f6f777g   
+  State:              active   
+  Hardware:           shared   
+  Zones:              dal10,dal12   
+  Workers per zone:   3   
+  Machine type:       b2c.4x16.encrypted   
+  Labels:             -   
+  Version:            1.9.7_1512 
+  ```
+  {: screen}
 
-### bx cs worker-pool-update --worker-pool WORKER_POOL --cluster CLUSTER
+### bx cs worker-pool-update --worker-pool WORKER_POOL --cluster CLUSTER [-f] [-s]
 {: #cs_worker_pool_update}
 
-Update all of the worker nodes in your pool to the latest Kubernetes version that matches the specified master.
+Update all of the worker nodes in your pool to the latest Kubernetes version that matches the cluster's master version.
+
+**Important**: Running `bx cs worker-update` can cause downtime for your apps and services. During the update, all pods are rescheduled onto other worker nodes and data is deleted if not stored outside the pod. To avoid downtime, [ensure that you have enough worker nodes to handle your workload while the selected worker nodes are updating](cs_cluster_update.html#worker_node).
 
 <strong>Command options</strong>:
 
@@ -2401,6 +2419,10 @@ Update all of the worker nodes in your pool to the latest Kubernetes version tha
     <dd>The name of the worker node pool that you want to update. This value is required.</dd>
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster for which you want to update worker pools. This value is required.</dd>
+  <dt><code>-f</code></dt> 
+    <dd>Force the update with no user prompts. This value is optional.</dd>
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
 **Example command**:
@@ -2412,7 +2434,7 @@ Update all of the worker nodes in your pool to the latest Kubernetes version tha
 
 
 
-### bx cs worker-pool-resize --worker-pool WORKER_POOL --cluster CLUSTER --size-per-zone WORKERS_PER_ZONE
+### bx cs worker-pool-resize --worker-pool WORKER_POOL --cluster CLUSTER --size-per-zone WORKERS_PER_ZONE [-s]
 {: #cs_worker_pool_resize}
 
 Resize your worker pool to increase or decrease the number of worker nodes that are in each zone of your cluster.
@@ -2427,17 +2449,21 @@ Resize your worker pool to increase or decrease the number of worker nodes that 
     <dd>The name or ID of the cluster for which you want to resize worker pools. This value is required.</dd>
 
   <dt><code>--size-per-zone <em>WORKERS_PER_ZONE</em></code></dt>
-    <dd>The number of workers that you want to create in each zone. This value is required.</dd>
+    <dd>The number of workers that you want to have in each zone. This value is required.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
 </dl>
 
 **Example command**:
 
   ```
-  bx cs worker-pool-update --cluster my_cluster --worker-pool pool1,pool2 --size-per-zone 3
+  bx cs worker-pool-update --cluster my_cluster --worker-pool my_pool --size-per-zone 3
   ```
   {: pre}
 
-### bx cs worker-pool-rm --worker-pool WORKER_POOL --cluster CLUSTER
+### bx cs worker-pool-rm --worker-pool WORKER_POOL --cluster CLUSTER [--json] [-s]
 {: #cs_worker_pool_rm}
 
 Remove a worker pool from your cluster. All worker nodes in the pool are deleted. Your pods are rescheduled when you delete. To avoid downtime, be sure that you have enough workers to run your workload.
@@ -2449,6 +2475,10 @@ Remove a worker pool from your cluster. All worker nodes in the pool are deleted
     <dd>The name of the worker node pool that you want to remove. This value is required.</dd>
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster that you want to remove the worker pool from. This value is required.</dd>
+  <dt><code>--json</code></dt>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
 **Example command**:
