@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -22,11 +22,39 @@ lastupdated: "2018-03-16"
 Scopri cosa vogliono conoscere gli sviluppatori di contenitori in merito a {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
+## Argomenti popolari nell'aprile 2018
+{: #apr18}
+
+<table summary="La tabella mostra gli argomenti popolari. Le righe devono essere lette da sinistra a destra, con la data nella colonna uno, il titolo della funzione nella colonna due e una descrizione nella colonna tre.">
+<caption>Argomenti popolari per i contenitori e i cluster Kubernetes  nell'aprile 2018</caption>
+<thead>
+<th>Data</th>
+<th>Titolo</th>
+<th>Descrizione</th>
+</thead>
+<tbody>
+<tr>
+<td>17 aprile</td>
+<td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
+<td>Installa il [plug-in](cs_storage.html#install_block) di {{site.data.keyword.Bluemix_notm}} Block Storage per salvare i dati persistenti nell'archiviazione blocchi. Quindi puoi [creare una nuova](cs_storage.html#create) archiviazione blocchi o [utilizzarne una esistente](cs_storage.html#existing_block) per il tuo cluster.</td>
+</tr>
+<tr>
+<td>13 aprile</td>
+<td>[Nuova esercitazione per la migrazione delle applicazioni Cloud Foundry nei cluster](cs_tutorials_cf.html#cf_tutorial)</td>
+<td>Hai un'applicazione Cloud Foundry? Impara a distribuire lo stesso codice proveniente da tale applicazione ad un'applicazione che viene eseguita in un cluster Kubernetes.</td>
+</tr>
+<tr>
+<td>5 aprile</td>
+<td>[Filtraggio dei log](cs_health.html#filter-logs)</td>
+<td>Filtra specifici log per impedire che vengano inoltrati. I log possono essere filtrati per uno specifico spazio dei nomi, nome contenitore, livello di log e stringa di messaggio. </td>
+</tr>
+</tbody></table>
+
 ## Argomenti popolari nel marzo 2018
 {: #mar18}
 
 <table summary="La tabella mostra gli argomenti popolari. Le righe devono essere lette da sinistra a destra, con la data nella colonna uno, il titolo della funzione nella colonna due e una descrizione nella colonna tre.">
-<caption>Argomenti popolari per i contenitori e i cluster Kubernetes nel febbraio 2018</caption>
+<caption>Argomenti popolari per i contenitori e i cluster Kubernetes nel marzo 2018</caption>
 <thead>
 <th>Data</th>
 <th>Titolo</th>
@@ -133,7 +161,8 @@ Scopri cosa vogliono conoscere gli sviluppatori di contenitori in merito a {{sit
 ## Utilizza la chat per parlare con sviluppatori con interessi simili su Slack
 {: #slack}
 
-Puoi vedere di cosa parlano gli altri utenti e porre le tue domande in [{{site.data.keyword.containershort_notm}} Slack. ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com)
+Puoi vedere di cosa parlano gli altri utenti e porre le tue domande in [{{site.data.keyword.containershort_notm}} Slack. ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://ibm-container-service.slack.com)
 {:shortdesc}
 
-Suggerimento: se non stai utilizzando un ID IBM per il tuo account {{site.data.keyword.Bluemix_notm}}, [richiedi un invito](https://bxcs-slack-invite.mybluemix.net/) a questo slack.
+
+

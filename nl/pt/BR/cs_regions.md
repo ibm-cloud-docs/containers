@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-13"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -23,7 +23,7 @@ Regi천es do [{{site.data.keyword.Bluemix_notm}} ](#bluemix_regions) diferem de r
 
 ![{{site.data.keyword.containershort_notm}} Regi천es e data centers](/images/regions.png)
 
-Figura. Regi천es e data centers do {{site.data.keyword.containershort_notm}}
+Regi천es e data centers do {{site.data.keyword.containershort_notm}}
 
 Regi천es do {{site.data.keyword.containershort_notm}} suportadas:
   * AP Norte
@@ -147,4 +147,5 @@ Os recursos de seu cluster permanecem no local (data center) no qual o cluster �
 
 ![Entendendo onde seus recursos de cluster residem](/images/region-cluster-resources.png)
 
-Figura. Entendendo onde seus recursos de cluster residem.
+Entendendo onde seus recursos de cluster residem.
+

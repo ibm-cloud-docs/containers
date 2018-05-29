@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -16,38 +16,38 @@ lastupdated: "2018-03-16"
 {:download: .download}
 
 
-# NodePort-Services einrichten
+# Apps mit NodePorts zugänglich machen
 {: #nodeport}
 
 Sie können Ihre containerisierte App für den Internetzugriff verfügbar machen, indem Sie die öffentliche IP-Adresse eines beliebigen Workerknotens in einem Kubernetes-Cluster verwenden und einen Knotenport zugänglich machen. Verwenden Sie diese Option zum Testen von {{site.data.keyword.containerlong}} und zur Bereitstellung von öffentlichem Zugriff über einen kurzen Zeitraum.
 {:shortdesc}
 
-## Externem Netzbetrieb mit NodePort-Services planen
+## Netzverkehr mithilfe von NodePorts verwalten
 {: #planning}
 
 Machen Sie auf Ihrem Workerknoten einen öffentlichen Port zugänglich und verwenden Sie die öffentliche IP-Adresse des Workerknotens, um öffentlich über das Internet auf Ihren Service im Cluster zuzugreifen.
 {:shortdesc}
 
-Wenn Sie Ihre App durch Erstellen eines Kubernetes-Service vom Typ 'NodePort' zugänglich machen, wird dem Service eine Knotenportnummer im Zahlenbereich 30000-32767 und eine interne Cluster-IP-Adresse zugewiesen. Der NodePort-Service fungiert als externer Einstiegspunkt für eingehende Anforderungen an die App. Der zugewiesene NodePort wird in den kubeproxy-Einstellungen eines jeden Workerknotens im Cluster zugänglich gemacht. Jeder Workerknoten beginnt, am zugewiesenen Knotenport empfangsbereit für eingehende Anforderungen für den Service zu sein. Um vom Internet aus auf den Service zuzugreifen, können Sie die öffentliche IP-Adresse eines beliebigen Workerknotens, die bei der Clustererstellung zugewiesen wurde, in Verbindung mit der Knotenportnummer im Format `<ip_address>:<nodeport>`. Zusätzlich zur öffentlichen IP-Adresse steht ein NodePort-Service über die private IP-Adresse eines Workerknotens zur Verfügung.
+Wenn Sie Ihre App durch Erstellen eines Kubernetes-Service vom Typ 'NodePort' zugänglich machen, wird dem Service eine Knotenportnummer im Zahlenbereich 30000-32767 und eine interne Cluster-IP-Adresse zugewiesen. Der NodePort-Service fungiert als externer Einstiegspunkt für eingehende Anforderungen an die App. Der zugewiesene NodePort wird in den kubeproxy-Einstellungen eines jeden Workerknotens im Cluster zugänglich gemacht. Jeder Workerknoten beginnt, am zugewiesenen Knotenport empfangsbereit für eingehende Anforderungen für den Service zu sein. Um vom Internet aus auf den Service zuzugreifen, können Sie die öffentliche IP-Adresse eines beliebigen Workerknotens, die bei der Clustererstellung zugewiesen wurde, in Verbindung mit der Knotenportnummer im Format `<IP_address>:<nodeport>`. Zusätzlich zur öffentlichen IP-Adresse steht ein NodePort-Service über die private IP-Adresse eines Workerknotens zur Verfügung.
 
 Das folgende Diagramm veranschaulicht, wie die Kommunikation vom Internet an eine App geleitet wird, wenn ein NodePort-Service konfiguriert ist:
 
-<img src="images/cs_nodeport_planning.png" width="550" alt="Stellen Sie eine App in {{site.data.keyword.containershort_notm}} bereit, indem Sie NodePort" style="width:550px; border-style: none"/> verwenden. 
+<img src="images/cs_nodeport_planning.png" width="550" alt="Stellen Sie eine App in {{site.data.keyword.containershort_notm}} bereit, indem Sie NodePort" style="width:550px; border-style: none"/> verwenden.
 
-1. Eine Anforderung wird an Ihre App gesendet, indem die öffentliche IP-Adresse Ihres Workerknotens und des NodePort auf dem Workerknoten verwendet wird. 
+1. Eine Anforderung wird an Ihre App gesendet, indem die öffentliche IP-Adresse Ihres Workerknotens und des NodePort auf dem Workerknoten verwendet wird.
 
-2. Die Anforderung wird automatisch an die interne Cluster-IP-Adresse und den internen Port des NodePort-Service weitergeleitet. Auf die interne Cluster-IP-Adresse kann nur aus dem Cluster selbst heraus zugegriffen werden. 
+2. Die Anforderung wird automatisch an die interne Cluster-IP-Adresse und den internen Port des NodePort-Service weitergeleitet. Auf die interne Cluster-IP-Adresse kann nur aus dem Cluster selbst heraus zugegriffen werden.
 
 3. `kube-proxy` leitet die Anforderung an den Kubernetes NodePort-Service für die App weiter.
 
 4. Die Anforderung wird an die private IP-Adresse des Pods weitergeleitet, auf dem die App bereitgestellt wird. Wenn mehrere App-Instanzen im Cluster bereitgestellt werden, leitet der NodePort-Service die Anforderungen zwischen den App-Pods weiter.
 
-**Hinweis:** Die öffentliche IP-Adresse des Workerknotens ist nicht permanent. Wird ein Workerknoten entfernt oder neu erstellt, so wird ihm eine neue öffentliche IP-Adresse zugewiesen. Sie können den NodePort-Service verwenden, wenn Sie den öffentlichen Zugriff auf Ihre App testen möchten oder der öffentliche Zugriff nur über einen beschränkten Zeitraum erforderlich ist. Wenn Sie eine stabile öffentliche IP-Adresse und ein höheres Maß an Verfügbarkeit für Ihren Service benötigen, sollten Sie Ihre App über einen [LoadBalancer-Service](cs_loadbalancer.html#planning) oder über [Ingress](cs_ingress.html#planning) verfügbar machen.
+**Hinweis:** Die öffentliche IP-Adresse des Workerknotens ist nicht permanent. Wird ein Workerknoten entfernt oder neu erstellt, so wird ihm eine neue öffentliche IP-Adresse zugewiesen. Sie können den NodePort-Service verwenden, wenn Sie den öffentlichen Zugriff auf Ihre App testen möchten oder der öffentliche Zugriff nur über einen beschränkten Zeitraum erforderlich ist. Wenn Sie eine stabile öffentliche IP-Adresse und ein höheres Maß an Verfügbarkeit für Ihren Service benötigen, sollten Sie Ihre App über einen [LoadBalancer-Service](cs_loadbalancer.html) oder über [Ingress](cs_ingress.html) verfügbar machen.
 
 <br />
 
 
-## Öffentlichen Zugriff auf eine App durch Verwenden des NodePort-Service konfigurieren
+## Öffentlichen Zugriff auf eine App mithilfe eines NodePort-Service aktivieren
 {: #config}
 
 Sie können Ihre App als einen Kubernetes-NodePort-Service für kostenlose Cluster oder Standardcluster zugänglich machen.
@@ -65,10 +65,10 @@ Wenn bisher keine App bereitsteht, können Sie eine Kubernetes-Beispielapp namen
     metadata:
       name: <mein_nodeport-service>
       labels:
-        run: <meine_demo>
+        <mein_bezeichnungsschlüssel>: <mein_bezeichnungswert>
     spec:
       selector:
-        run: <meine_demo>
+        <mein_selektorschlüssel>: <mein_selektorwert>
       type: NodePort
       ports:
        - port: <8081>
@@ -78,25 +78,28 @@ Wenn bisher keine App bereitsteht, können Sie eine Kubernetes-Beispielapp namen
     {: codeblock}
 
     <table>
-    <caption>Erklärung der Komponenten dieser YAML-Datei</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten des NodePort-Serviceabschnitts</th>
     </thead>
     <tbody>
     <tr>
-    <td><code>name</code></td>
+    <td><code>metadata.name</code></td>
     <td>Ersetzen Sie <code><em>&lt;mein_nodeport-service&gt;</em></code> durch einen Namen für Ihren NodePort-Service.</td>
     </tr>
     <tr>
-    <td><code>run</code></td>
-    <td>Ersetzen Sie <code><em>&lt;meine_demo&gt;</em></code> durch den Namen Ihrer Bereitstellung.</td>
+    <td><code>metadata.labels</code></td>
+    <td>Ersetzen Sie <code><em>&lt;mein_bezeichnungsschlüssel&gt;</em></code> und <code><em>&lt;mein_bezeichnungswert&gt;</em></code> durch die Bezeichnung, die Sie für Ihren Service verwenden möchten. </td>
     </tr>
     <tr>
-    <td><code>port</code></td>
+      <td><code>spec.selector</code></td>
+      <td>Ersetzen Sie <code><em>&lt;mein_selektorschlüssel&gt;</em></code> und <code><em>&lt;mein_selektorwert&gt;</em></code> durch das Schlüssel/Wert-Paar, das Sie im Abschnitt <code>spec.template.metadata.labels</code> Ihrer YAML-Bereitstellungsdatei verwendet haben.
+      </tr>
+    <tr>
+    <td><code>ports.port</code></td>
     <td>Ersetzen Sie <code><em>&lt;8081&gt;</em></code> durch den Port, an dem Ihr Service empfangsbereit ist. </td>
      </tr>
      <tr>
-     <td><code>nodePort</code></td>
+     <td><code>ports.nodePort</code></td>
      <td>Optional: Ersetzen Sie <code><em>&lt;31514&gt;</em></code> durch eine Knotenportnummer aus dem Bereich 30000 bis 32767. Geben Sie für 'NodePort' keine Portnummer an, die bereits von einem anderen Service verwendet wird. Wenn manuell keine Knotenportnummer festgelegt wird, so erfolgt die Zuweisung automatisch nach dem Zufallsprinzip.<br><br>Wenn Sie für 'NodePort' eine Portnummer festlegen wollen und ermitteln wollen, welche Knotenportnummern bereits belegt sind, führen Sie den folgenden Befehl aus: <pre class="pre"><code>   kubectl get svc
    </code></pre>Alle bereits belegten Knotenportnummern werden unter dem Feld **Ports** angezeigt.</td>
      </tr>
@@ -150,6 +153,8 @@ Bei Bereitstellung der App können Sie mithilfe der öffentlichen IP-Adresse jed
     ```
     {: screen}
 
-    In diesem Beispiel lautet die Portnummer für 'NodePort' `30872`.
+    In diesem Beispiel lautet die Portnummer für 'NodePort' `30872`.</br>
+    **Hinweis:** Wenn im Abschnitt **Endpoints** `<none>` angezeigt wird, stellen Sie sicher, dass der `<selektorschlüssel>` und der `<selektorwert>`, die Sie im Abschnitt `spec.selector` des NodePort-Service angegeben haben, dem Schlüssel/Wert-Paar entspricht, das Sie im Abschnitt `spec.template.metadata.labels` Ihrer YAML-Bereitstellungsdatei verwendet haben. 
 
 3.  Bilden Sie die URL mit einer der öffentlichen IP-Adressen des Workerknotens und der Portnummer für 'NodePort'. Beispiel: `http://192.0.2.23:30872`
+

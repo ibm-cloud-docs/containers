@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-02-27"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -86,13 +86,13 @@ Para instalar as CLIs e seus pré-requisitos:
     {: pre}
 
 5.  Para visualizar uma versão local do painel do Kubernetes e implementar apps em seus clusters, [instale a CLI do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Para executar comandos usando a CLI do Kubernetes, use o prefixo `kubectl`.
-    1.  Para obter compatibilidade funcional completa, faça download da versão de CLI do Kubernetes que corresponda à versão do cluster do Kubernetes que você planeja usar. A versão atual do Kubernetes padrão do {{site.data.keyword.containershort_notm}} é 1.8.8.
+    1.  Para obter compatibilidade funcional completa, faça download da versão de CLI do Kubernetes que corresponda à versão do cluster do Kubernetes que você planeja usar. A versão padrão do Kubernetes do {{site.data.keyword.containershort_notm}} atual é 1.8.11.
 
-        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl)
+        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl)
 
-        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl)
+        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl)
 
-        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe)
+        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe)
 
           **Dica:** se estiver usando o Windows, instale a CLI do Kubernetes no mesmo diretório que a CLI do {{site.data.keyword.Bluemix_notm}}. Essa configuração economiza algumas
 mudanças de caminho de arquivo ao executar comandos posteriormente.
@@ -101,7 +101,7 @@ mudanças de caminho de arquivo ao executar comandos posteriormente.
         1.  Mova o arquivo executável para o diretório `/usr/local/bin`.
 
             ```
-            mv /<path_to_file>/kubectl /usr/local/bin/kubectl
+            Mv filepath / kubectl /usr/local/bin/kubectl
             ```
             {: pre}
 
@@ -162,17 +162,19 @@ Configure um repositório de imagem privada no {{site.data.keyword.registryshort
 2.  Configure o seu próprio repositório de imagem privada no {{site.data.keyword.registryshort_notm}} para armazenar com segurança e compartilhar imagens do Docker com todos os usuários do cluster. Um repositório de imagem privada no {{site.data.keyword.Bluemix_notm}} é identificado por um namespace. O namespace é usado para criar uma URL exclusiva para o seu repositório de imagem que
 os desenvolvedores podem usar para acessar imagens privadas do Docker.
 
-    Neste exemplo, a firma PR deseja criar somente um repositório de imagem no {{site.data.keyword.registryshort_notm}}; portanto, eles escolhem _pr_firm_ como o seu namespace para agrupar todas as imagens em sua conta. Substitua _&lt;your_namespace&gt;_ por um namespace de sua escolha que não esteja relacionado ao tutorial.
+   
+    
+    Neste exemplo, a firma PR deseja criar somente um repositório de imagem no {{site.data.keyword.registryshort_notm}}; portanto, eles escolhem _pr_firm_ como o seu namespace para agrupar todas as imagens em sua conta. Substitua _&lt;namespace&gt;_ por um namespace de sua preferência que não esteja relacionado ao tutorial.
 
     ```
-    bx cr namespace-add <your_namespace>
+    bx cr namespace-add <namespace>
     ```
     {: pre}
 
 3.  Antes de continuar com a próxima etapa, verifique se a implementação de seu nó do trabalhador está concluída.
 
     ```
-    bx cs workers <cluster_name>
+    bx cs workers <cluster_name_or_ID>
     ```
      {: pre}
 
@@ -180,7 +182,7 @@ os desenvolvedores podem usar para acessar imagens privadas do Docker.
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.48.131.37   10.177.161.132   free           normal   Ready    mil01      1.8.8
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.8.11
     ```
     {: screen}
 
@@ -195,7 +197,7 @@ Toda vez que você efetua login na CLI do contêiner para trabalhar com clusters
 1.  Obtenha o comando para configurar a variável de ambiente e fazer download dos arquivos de configuração do Kubernetes.
 
     ```
-    bx cs cluster-config <cluster_name>
+    bx cs cluster-config <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -236,7 +238,7 @@ Toda vez que você efetua login na CLI do contêiner para trabalhar com clusters
     Saída de exemplo:
 
     ```
-    Versão do cliente: v1.8.8 Versão do servidor: v1.8.8
+    Versão do cliente: v1.8.11 Versão do Servidor: v1.8.11
     ```
     {: screen}
 
@@ -245,30 +247,30 @@ Toda vez que você efetua login na CLI do contêiner para trabalhar com clusters
 
 Com serviços {{site.data.keyword.Bluemix_notm}}, é possível aproveitar a funcionalidade já desenvolvida nos apps. Qualquer serviço do {{site.data.keyword.Bluemix_notm}} que estiver ligado ao cluster poderá ser usado por qualquer app que for implementado nesse cluster. Repita as etapas a seguir para cada serviço do {{site.data.keyword.Bluemix_notm}} que você deseja usar com seus apps.
 
-1.  Inclua o serviço {{site.data.keyword.toneanalyzershort}} em sua conta do {{site.data.keyword.Bluemix_notm}}.
+1.  Inclua o serviço {{site.data.keyword.toneanalyzershort}} em sua conta do {{site.data.keyword.Bluemix_notm}}. Substitua <service_name> por um nome para sua instância de serviço.
 
     **Nota:** quando você incluir o serviço {{site.data.keyword.toneanalyzershort}} em sua conta, será exibida uma mensagem de que o serviço não é grátis. Se você limitar sua chamada API, este tutorial não incorrerá em encargos do serviço {{site.data.keyword.watson}}. [Revise as informações de precificação para o serviço {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/watson/developercloud/tone-analyzer.html#pricing-block).
 
     ```
-    bx service create tone_analyzer standard <mytoneanalyzer>
+    bx service create tone_analyzer standard <service_name>
     ```
     {: pre}
 
 2.  Ligue a instância do {{site.data.keyword.toneanalyzershort}} ao namespace `padrão` do Kubernetes para o cluster. Posteriormente, será possível criar seus próprios namespaces para gerenciar o acesso de usuário aos recursos do Kubernetes, mas por enquanto, use o namespace `padrão`. Os namespaces do Kubernetes são diferentes do namespace de registro que você criou anteriormente.
 
     ```
-    bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
+    bx cs cluster-service-bind <cluster_name> default <service_name>
     ```
     {: pre}
 
     Saída:
 
     ```
-    bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
-        Binding service instance to namespace...
-        OK
-        Namespace:	default
-        Secret name:	binding-mytoneanalyzer
+    bx cs cluster-service-bind pr_firm_cluster default mytoneanalyzer
+    Binding service instance to namespace...
+    OK
+    Namespace:	default
+    Secret name:	binding-mytoneanalyzer
     ```
     {: screen}
 
@@ -298,3 +300,4 @@ Bom trabalho! Você já configurou seu cluster e seu ambiente local está pronto
 * [Teste seus conhecimentos e faça um teste! ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
 
 * Tente o [Tutorial: implementando apps nos clusters do Kubernetes no {{site.data.keyword.containershort_notm}}](cs_tutorials_apps.html#cs_apps_tutorial) para implementar o app da firma PR no cluster que você criou.
+

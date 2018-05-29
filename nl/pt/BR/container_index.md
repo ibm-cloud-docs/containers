@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -45,7 +45,7 @@ E o que é um cluster? Um cluster é um conjunto de recursos, nós de trabalhado
 
 Antes de iniciar, deve-se ter uma [conta do {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/) para Teste, de Pay-As-You-Go ou de Assinatura para criar um cluster grátis.
 
-**Qual tipo de conta do {{site.data.keyword.Bluemix_notm}} devo obter?** Com as contas de Pay-As-You-Go e de Assinatura, é possível provisionar os recursos de infraestrutura do IBM Cloud (SoftLayer) para seus clusters do Kubernetes e criar um cluster grátis ou clusters padrão. Com uma conta para Teste, é possível criar um cluster grátis por 21 dias, mas não clusters padrão. Após 21 dias, seu cluster grátis é excluído. Para continuar com clusters do Kubernetes, crie outro cluster grátis até que sua conta para Teste termine ou faça upgrade de sua conta para Pay-As-You-Go ou Assinatura.
+**Qual tipo de conta do {{site.data.keyword.Bluemix_notm}} devo obter?** Com as contas de Pay-As-You-Go e de Assinatura, é possível provisionar os recursos de infraestrutura do IBM Cloud (SoftLayer) para seus clusters do Kubernetes e criar um cluster grátis ou clusters padrão. Com uma conta para Teste, é possível criar um cluster grátis, mas não clusters padrão. Todos os clusters grátis são excluídos depois de 21 dias. Para continuar com clusters do Kubernetes, crie outro cluster grátis até que sua conta para Teste termine ou faça upgrade de sua conta para Pay-As-You-Go ou Assinatura.
 {:tip}
 
 Para criar um cluster grátis:
@@ -65,12 +65,12 @@ Bom Trabalho! Você criou seu primeiro cluster do Kubernetes. Aqui estão alguns
 *   **Local e outras opções**: clusters grátis são implementados dentro da região que você seleciona, mas não é possível escolher qual o local (data center). Para obter mais controle sobre local, rede e armazenamento persistente, crie um cluster padrão. [Saiba mais sobre os benefícios de clusters grátis e padrão](cs_why.html#cluster_types).
 
 
-**O que Vem a Seguir?**
-
-Quando o cluster estiver funcionando, comece a fazer algo com o seu cluster.
+**O que vem a seguir?**
+Nos próximos 21 dias, tente algumas coisas com seu cluster grátis.
 
 * [Instale as CLIs para iniciar o trabalho com seu cluster.](cs_cli_install.html#cs_cli_install)
 * [Implementar um app no cluster.](cs_app.html#app_cli)
 * [Crie um cluster padrão com múltiplos
 nós para disponibilidade mais alta.](cs_clusters.html#clusters_ui)
 * [Configure seu próprio registro privado no {{site.data.keyword.Bluemix_notm}} para armazenar e compartilhar imagens do Docker com outros usuários.](/docs/services/Registry/index.html)
+

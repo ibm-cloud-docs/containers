@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-13"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -16,14 +16,14 @@ lastupdated: "2018-03-13"
 {:download: .download}
 
 # Régions et emplacements
-{{site.data.keyword.Bluemix}} est présent dans le monde entier. Une région est un lieu géographique auquel accède un noeud final. Les emplacements sont des centres de données figurant dans la région. Les services au sein de {{site.data.keyword.Bluemix_notm}} peuvent être disponibles partout ou dans une région spécifique. Lorsque vous créez un cluster Kubernetes dans {{site.data.keyword.containerlong}}, ses ressources restent dans la région dans laquelle vous avez déployé le cluster.
+{{site.data.keyword.Bluemix}} est présent dans le monde entier. Une région est un lieu géographique auquel accède un noeud final. Les emplacements sont des centres de données figurant dans la région. Les services au sein d'{{site.data.keyword.Bluemix_notm}} peuvent être disponibles partout ou dans une région spécifique. Lorsque vous créez un cluster Kubernetes dans {{site.data.keyword.containerlong}}, ses ressources restent dans la région dans laquelle vous avez déployé le cluster.
 {:shortdesc}
 
 [Les régions {{site.data.keyword.Bluemix_notm}}](#bluemix_regions) sont différentes des régions [{{site.data.keyword.containershort_notm}}](#container_regions).
 
 ![{{site.data.keyword.containershort_notm}} : régions et centres de données](/images/regions.png)
 
-Figure. Régions et centres de données {{site.data.keyword.containershort_notm}}
+Régions et centres de données {{site.data.keyword.containershort_notm}}
 
 Régions {{site.data.keyword.containershort_notm}} prises en charge :
   * Asie-Pacifique nord
@@ -147,4 +147,5 @@ Les ressources de votre cluster restent à l'emplacement (centre de données) da
 
 ![Description de l'emplacement des ressources sur votre cluster](/images/region-cluster-resources.png)
 
-Figure. Description de l'emplacement des ressources sur votre cluster.
+Description de l'emplacement des ressources sur votre cluster.
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-01-24"
  - [무료 및 표준 클러스터 비교](cs_why.html#cluster_types)
  - [클러스터 구성](cs_clusters.html#planning_clusters)
  - [작업자 노드 구성](cs_clusters.html#planning_worker_nodes)
- - [클러스터 관리 책임](cs_why.html#responsibilities)
+ - [클러스터 관리 책임](cs_responsibilities.html)
  - [배치](cs_app.html#highly_available_apps)
  - [클러스터 내부 네트워킹](cs_secure.html#in_cluster_network)
  - [공용 네트워킹](cs_network_planning.html#planning)
@@ -30,3 +30,4 @@ lastupdated: "2018-01-24"
  - [지속적 데이터 스토리지](cs_storage.html#planning)
  - [통합](cs_integrations.html#integrations)
  - [IBM Cloud 인프라(SoftLayer) 포트폴리오 액세스](cs_infrastructure.html#unify_accounts)
+

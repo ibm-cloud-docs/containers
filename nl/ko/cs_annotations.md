@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2018-03-16"
 Ingress 애플리케이션 로드 밸런서(ALB)에 기능을 추가하려면 Ingress 리소스에서 어노테이션을 메타데이터로 지정할 수 있습니다.
 {: shortdesc}
 
-Ingress 서비스 및 이 서비스 사용을 시작하는 방법에 대한 일반 정보는 [Ingress를 사용하여 앱에 대한 공용 액세스 구성](cs_ingress.html#configure_alb)을 참조하십시오.
+Ingress 서비스 및 이 서비스의 사용을 시작하는 방법에 대한 일반 정보는 [Ingress를 사용한 네트워크 트래픽 관리](cs_ingress.html#planning)를 참조하십시오.
 
 <table>
 <col width="20%">
@@ -55,17 +55,13 @@ Ingress 서비스 및 이 서비스 사용을 시작하는 방법에 대한 일�
  <td>백엔드 앱이 청취하는 다른 경로로 수신 네트워크 트래픽을 라우팅합니다.</td>
  </tr>
  <tr>
- <td><a href="#sticky-cookie-services">쿠키를 사용하는 세션 선호도</a></td>
- <td><code>sticky-cookie-services</code></td>
- <td>스티키 쿠키(sticky cookie)를 사용하여 동일한 업스트림 서버에 수신 네트워크 트래픽을 항상 라우팅합니다.</td>
- </tr>
- <tr>
  <td><a href="#tcp-ports">TCP 포트</a></td>
  <td><code>tcp-ports</code></td>
  <td>비표준 TCP 포트를 통해 앱에 액세스합니다.</td>
  </tr>
  </tbody></table>
 
+<br>
 
 <table>
 <col width="20%">
@@ -85,19 +81,31 @@ Ingress 서비스 및 이 서비스 사용을 시작하는 방법에 대한 일�
   <tr>
   <td><a href="#keepalive-requests">Keepalive 요청</a></td>
   <td><code>keepalive-requests</code></td>
-  <td>하나의 Keepalive 연결을 통해 제공할 수 있는 최대 요청 수를 구성합니다.</td>
+  <td>하나의 Keepalive 연결을 통해 서비스할 수 있는 최대 요청 수를 설정합니다. </td>
   </tr>
   <tr>
   <td><a href="#keepalive-timeout">Keepalive 제한시간</a></td>
   <td><code>keepalive-timeout</code></td>
-  <td>서버에서 Keepalive 연결이 열려 있는 시간을 구성합니다.</td>
+  <td>서버에서 Keepalive 연결이 열려 있는 최대 시간을 설정합니다. </td>
+  </tr>
+  <tr>
+  <td><a href="#proxy-next-upstream-config">다음 업스트림 프록시</a></td>
+  <td><code>proxy-next-upstream-config</code></td>
+  <td>ALB가 다음 업스트림 서버로 요청을 전달할 수 있는 시점을 설정합니다. </td>
+  </tr>
+  <tr>
+  <td><a href="#sticky-cookie-services">쿠키를 사용하는 세션 선호도</a></td>
+  <td><code>sticky-cookie-services</code></td>
+  <td>스티키 쿠키(sticky cookie)를 사용하여 동일한 업스트림 서버에 수신 네트워크 트래픽을 항상 라우팅합니다.</td>
   </tr>
   <tr>
   <td><a href="#upstream-keepalive">업스트림 Keepalive</a></td>
   <td><code>upstream-keepalive</code></td>
-  <td>업스트림 서버에 대한 최대 수의 유휴 Keepalive 연결을 구성합니다.</td>
+  <td>업스트림 서버에 대한 최대 유휴 Keepalive 연결 수를 설정합니다. </td>
   </tr>
   </tbody></table>
+
+<br>
 
   <table>
   <col width="20%">
@@ -112,8 +120,7 @@ Ingress 서비스 및 이 서비스 사용을 시작하는 방법에 대한 일�
   <tr>
   <td><a href="#appid-auth">{{site.data.keyword.appid_short}} 인증</a></td>
   <td><code>appid-auth</code></td>
-  <td>{{site.data.keyword.appid_full_notm}}를 사용하여 앱으로 인증합니다.
-</td>
+  <td>{{site.data.keyword.appid_full_notm}}를 사용하여 앱으로 인증합니다.</td>
   </tr>
   <tr>
   <td><a href="#custom-port">사용자 정의 HTTP 및 HTTPS 포트</a></td>
@@ -138,11 +145,30 @@ Ingress 서비스 및 이 서비스 사용을 시작하는 방법에 대한 일�
   <tr>
   <td><a href="#ssl-services">SSL 서비스 지원</a></td>
   <td><code>ssl-services</code></td>
-  <td>SSL 서비스 지원이 HTTPS가 필요한 업스트림 앱에 트래픽을 암호화하도록 허용합니다.</td>
+  <td>SSL 서비스 지원이 HTTPS가 필요한 업스트림 앱에 트래픽을 암호화하도록 허용합니다. </td>
   </tr>
   </tbody></table>
 
+<br>
 
+<table>
+<col width="20%">
+<col width="20%">
+<col width="60%">
+<thead>
+<th>Istio 어노테이션</th>
+<th>이름</th>
+<th>설명</th>
+</thead>
+<tbody>
+<tr>
+<td><a href="#istio-services">Istio 서비스</a></td>
+<td><code>istio-services</code></td>
+<td>Istio 관리 서비스로 트래픽을 라우팅합니다. </td>
+</tr>
+</tbody></table>
+
+<br>
 
 <table>
 <col width="20%">
@@ -176,6 +202,7 @@ Ingress 서비스 및 이 서비스 사용을 시작하는 방법에 대한 일�
  </tr>
  </tbody></table>
 
+<br>
 
 <table>
 <col width="20%">
@@ -209,6 +236,8 @@ Ingress 서비스 및 이 서비스 사용을 시작하는 방법에 대한 일�
 </tr>
 </tbody></table>
 
+<br>
+
 <table>
 <col width="20%">
 <col width="20%">
@@ -230,6 +259,8 @@ Ingress 서비스 및 이 서비스 사용을 시작하는 방법에 대한 일�
 <td>특정 서비스의 정의된 키별 연결 수와 요청 처리 속도를 제한합니다.</td>
 </tr>
 </tbody></table>
+
+<br>
 
 
 
@@ -304,15 +335,38 @@ ALB가 앱 경로에 대해 요청 URI를 일치시키는 방법을 수정합니
 
 <dl>
 <dt>설명</dt>
-<dd>기본적으로, ALB는 앱이 청취하는 경로를 접두부로 처리합니다. ALB가 앱에 대한 요청을 수신하는 경우 ALB는 요청 URI의 시작과 일치하는 경로(접두부로)의 Ingress 리소스를 처리합니다. 일치 항목이 있으면 요청은 앱이 배치된 포드의 IP 주소로 전달됩니다. <br><br>`location-modifier` 어노테이션은 ALB가 위치 블록 구성을 수정하여 일치 항목을 검색하는 방법을 변경합니다. 위치 블록은 앱 경로에 대한 요청을 처리하는 방법을 결정합니다. **참고**: 정규식(regex) 경로를 처리하기 위해 이 어노테이션이 필요합니다. </dd>
+<dd>기본적으로, ALB는 앱이 청취하는 경로를 접두부로 처리합니다. ALB가 앱에 대한 요청을 수신하는 경우 ALB는 요청 URI의 시작과 일치하는 경로(접두부로)의 Ingress 리소스를 처리합니다. 일치 항목이 있으면 요청은 앱이 배치된 팟(Pod)의 IP 주소로 전달됩니다.<br><br>`location-modifier` 어노테이션은 ALB가 위치 블록 구성을 수정하여 일치 항목을 검색하는 방법을 변경합니다. 위치 블록은 앱 경로에 대한 요청을 처리하는 방법을 결정합니다.<br><br>**참고**: 정규식(regex) 경로를 처리하기 위해 이 어노테이션이 필요합니다.</dd>
+
 <dt>지원되는 수정자</dt>
 <dd>
-<ul>
-<li><code>=</code>: 등호 수정자를 통해 ALB는 정확하게 일치하는 항목만 선택할 수 있습니다. 정확하게 일치하는 항목을 찾으면 검색을 중지하고 일치하는 경로가 선택됩니다. </li>
-<li><code>~</code>: 물결 기호 수정자를 통해 ALB는 일치 작업 중에 경로를 대소문자를 구분하는 regex 경로로 처리할 수 있습니다. </li>
-<li><code>~*</code>: 물결 기호 다음에 별표를 이어서 사용하여 ALB는 일치 작업 중에 경로를 대소문자를 구분하지 않는 regex 경로로 처리할 수 있습니다. </li>
-<li><code>^~</code>: 캐럿 다음에 물결 기호 수정자를 이어서 사용하여 ALB는 regex 경로 대신 최적의 비regex 일치를 선택할 수 있습니다. </li>
-</ul>
+
+<table>
+ <col width="10%">
+ <col width="90%">
+ <thead>
+ <th>수정자</th>
+ <th>설명</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>=</code></td>
+ <td>등호 수정자는 ALB가 정확히 일치하는 항목만 선택하도록 합니다. 정확하게 일치하는 항목을 찾으면 검색을 중지하고 일치하는 경로가 선택됩니다.</td>
+ </tr>
+ <tr>
+ <td><code>~</code></td>
+ <td>물결 기호 수정자는 ALB가 비교 중에 경로를 대소문자를 구분하는 정규식 경로로 처리하도록 합니다. </td>
+ </tr>
+ <tr>
+ <td><code>~\*</code></td>
+ <td>물결 기호와 그 뒤의 별표는 ALB가 비교 중에 경로를 대소문자를 구분하지 않는 정규식 경로로 처리하도록 합니다. </td>
+ </tr>
+ <tr>
+ <td><code>^~</code></td>
+ <td>캐럿과 그 뒤의 물결 기호는 ALB가 정규식 경로 대신 정규식이 아닌 최적 일치 항목을 선택하도록 합니다. </td>
+ </tr>
+ </tbody>
+</table>
+
 </dd>
 
 <dt>샘플 Ingress 리소스 YAML</dt>
@@ -324,7 +378,7 @@ kind: Ingress
 metadata:
   name: myingress
 annotations:
-  ingress.bluemix.net/location-modifier: "modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice&gt;;modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice2&gt;"
+  ingress.bluemix.net/location-modifier: "modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice1&gt;;modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice2&gt;"
 spec:
 tls:
   - hosts:
@@ -346,11 +400,11 @@ tls:
   <tbody>
   <tr>
   <td><code>modifier</code></td>
-  <td><code>&lt;<em>location_modifier</em>&gt;</code>를 경로에 사용할 위치 수정자로 대체합니다. 지원되는 수정자는 <code>'='</code>, <code>'~'</code>, <code>'~*'</code> 및 <code>'^~'</code>입니다. 작은따옴표로 수정자를 묶어야 합니다. </td>
+  <td><code>&lt;<em>location_modifier</em>&gt;</code>를 경로에 사용할 위치 수정자로 대체합니다. 지원되는 수정자는 <code>'='</code>, <code>'~'</code>, <code>'~\*'</code> 및 <code>'^~'</code>입니다. 작은따옴표로 수정자를 묶어야 합니다.</td>
   </tr>
   <tr>
   <td><code>serviceName</code></td>
-  <td><code>&lt;<em>myservice</em>&gt;</code>를 앱에 대해 작성된 Kubernetes 서비스의 이름으로 대체합니다. </td>
+  <td><code>&lt;<em>myservice</em>&gt;</code>를 앱에 대해 작성된 Kubernetes 서비스의 이름으로 대체합니다.</td>
   </tr>
   </tbody></table>
   </dd>
@@ -368,7 +422,7 @@ tls:
 <dl>
 <dt>설명</dt>
 <dd>
-공용 ALB 대신 수신 요청을 라우팅하는 데 사용할 사설 ALB를 선택합니다. </dd>
+공용 ALB 대신 수신 요청을 라우팅할 개인용 ALB를 선택합니다. </dd>
 
 
 <dt>샘플 Ingress 리소스 YAML</dt>
@@ -402,7 +456,7 @@ paths:
 <tbody>
 <tr>
 <td><code>&lt;private_ALB_ID&gt;</code></td>
-<td>사설 ALB의 ID입니다. 사설 ALB ID를 찾으려면 <code>bx cs albs --cluster <my_cluster></code>를 실행하십시오.
+<td>사설 ALB의 ID입니다. 개인용 ALB ID를 찾으려면 <code>bx cs albs --cluster &lt;my_cluster&gt;</code>를 실행하십시오.
 </td>
 </tr>
 </tbody></table>
@@ -410,7 +464,6 @@ paths:
 </dl>
 
 <br />
-
 
 
 ### 경로 재작성(rewrite-path)
@@ -464,83 +517,6 @@ tls:
 </dd></dl>
 
 <br />
-
-
-### 쿠키에 대한 세션 선호도(sticky-cookie-services)
-{: #sticky-cookie-services}
-
-ALB에 세션 선호도를 추가하고 수신 네트워크 트래픽을 항상 동일한 업스트림 서버로 라우팅하려면 스티키 쿠키 어노테이션을 사용하십시오.
-{:shortdesc}
-
-<dl>
-<dt>설명</dt>
-<dd>고가용성을 위해 앱 설정에 따라 수신 클라이언트 요청을 처리하는 여러 업스트림 서버를 배치해야 합니다. 클라이언트가 백엔드 앱에 연결할 때 세션 지속 기간 동안 또는 태스크를 완료할 때까지 소요되는 시간 동안 동일한 업스트림 서버에서 클라이언트에 서비스를 제공하도록 세션 선호도를 사용할 수 있습니다. 수신 네트워크 트래픽이 항상 동일한 업스트림 서버로 라우팅되게 하여 세션 선호도를 보장하도록 ALB를 구성할 수 있습니다.
-
-</br></br>
-백엔드 앱에 연결하는 모든 클라이언트는 ALB를 통해 사용 가능한 업스트림 서버 중 하나에 지정됩니다. ALB는 클라이언트 앱에 저장되는 세션 쿠키를 작성하며, 이 쿠키는 애플리케이션 로드 밸런서와 클라이언트 간 모든 요청의 헤더 정보에 포함됩니다. 쿠키의 정보를 사용하면 세션 전체에서 동일한 업스트림 서버가 모든 요청을 처리할 수 있습니다.
-
-</br></br>
-여러 서비스가 포함된 경우에는 세미콜론(;)을 사용하여 구분하십시오.</dd>
-<dt>샘플 Ingress 리소스 YAML</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: myingress
-annotations:
-    ingress.bluemix.net/sticky-cookie-services: "serviceName=&lt;myservice1&gt; name=&lt;cookie_name1&gt; expires=&lt;expiration_time1&gt; path=&lt;cookie_path1&gt; hash=&lt;hash_algorithm1&gt;;serviceName=&lt;myservice2&gt; name=&lt;cookie_name2&gt; expires=&lt;expiration_time2&gt; path=&lt;cookie_path2&gt; hash=&lt;hash_algorithm2&gt;"
-spec:
-tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: &lt;myservice1&gt;
-          servicePort: 8080
-      - path: /myapp
-        backend:
-          serviceName: &lt;myservice2&gt;
-          servicePort: 80</code></pre>
-
-  <table>
-  <caption>YAML 파일 컴포넌트 이해</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>serviceName</code></td>
-  <td><code>&lt;<em>myservice</em>&gt;</code>를 앱에 대해 작성된 Kubernetes 서비스의 이름으로 대체합니다.</td>
-  </tr>
-  <tr>
-  <td><code>name</code></td>
-  <td><code>&lt;<em>cookie_name</em>&gt;</code>을 세션 중 작성된 스티키 쿠키의 이름으로 대체합니다.</td>
-  </tr>
-  <tr>
-  <td><code>expires</code></td>
-  <td>스티키 쿠키가 만료되기 전에 <code>&lt;<em>expiration_time</em>&gt;</code>을 초, 분 또는 시간 단위의 시간으로 대체합니다. 이 시간은 사용자 활동과 무관합니다. 쿠키가 만료되고 나면 클라이언트 웹 브라우저에서 쿠키가 삭제되어 더 이상 ALB로 전송되지 않습니다. 예를 들어, 만기 시간을 1초, 1분 또는 1시간으로 설정하려면 <code>1s</code>, <code>1m</code> 또는 <code>1h</code>를 입력하십시오.</td>
-  </tr>
-  <tr>
-  <td><code>path</code></td>
-  <td><code>&lt;<em>cookie_path</em>&gt;</code>를 Ingress 하위 도메인에 추가되는 경로로 대체합니다. 이 경로는 ALB로 쿠키가 전송되는 도메인과 하위 도메인을 표시합니다. 예를 들어, Ingress 도메인이 <code>www.myingress.com</code>이고 모든 클라이언트 요청에 해당 쿠키를 전송하려는 경우 <code>path=/</code>를 설정해야 합니다. <code>www.myingress.com/myapp</code> 및 해당 하위 도메인 모두에 대해서만 쿠키를 전송하려는 경우 <code>path=/myapp</code>으로 설정해야 합니다.</td>
-  </tr>
-  <tr>
-  <td><code>hash</code></td>
-  <td><code>&lt;<em>hash_algorithm</em>&gt;</code>를 쿠키의 정보를 보호하는 해시 알고리즘으로 대체합니다. <code>sha1</code>만 지원됩니다. SHA1은 쿠키의 정보를 기반으로 해시 합계를 작성하고 이 해시 합계를 쿠키에 추가합니다. 서버에서 쿠키의 정보를 복호화하고 데이터 무결성을 확인할 수 있습니다.</td>
-  </tr>
-  </tbody></table>
-
- </dd></dl>
-
-<br />
-
 
 
 ### 애플리케이션 로드 밸런서의 TCP 포트(tcp-ports)
@@ -609,11 +585,11 @@ tls:
 CLI 출력이 다음과 유사하게 나타납니다.
 <pre class="screen">
 <code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.10.10.149   169.60.16.246   80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  80:30776/TCP,443:30412/TCP   8d</code></pre></li>
 <li>ALB 구성 맵을 여십시오.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>TCP 포트를 구성 맵에 추가하십시오. 열려는 TCP 포트로 &lt;port&gt;를 대체하십시오.
+<li>TCP 포트를 구성 맵에 추가하십시오. 열려는 TCP 포트로 <code>&lt;port&gt;</code>를 대체하십시오.
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -632,13 +608,14 @@ metadata:
 CLI 출력이 다음과 유사하게 나타납니다.
 <pre class="screen">
 <code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
 <li>비표준 TCP 포트를 통해 앱에 액세스하도록 Ingress를 구성하십시오. 이 참조서에 있는 샘플 YAML 파일을 사용하십시오. </li>
 <li>ALB 구성을 업데이트하십시오.
 <pre class="pre">
-<code>kubectl apply -f &lt;yaml_file&gt;</code></pre>
+<code>         kubectl apply -f myingress.yaml
+        </code></pre>
 </li>
-<li>선호하는 웹 브라우저를 열어 앱에 액세스하십시오. 예를 들면, <code>https://&lt;ibmdomain&gt;:&lt;ingressPort&gt;/</code>입니다. </li></ol></dd></dl>
+<li>선호하는 웹 브라우저를 열어 앱에 액세스하십시오. 예를 들면, <code>https://&lt;ibmdomain&gt;:&lt;ingressPort&gt;/</code>입니다.</li></ol></dd></dl>
 
 <br />
 
@@ -649,7 +626,7 @@ public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,
 ### 사용자 정의 연결 제한시간 및 읽기 제한시간(proxy-connect-timeout, proxy-read-timeout)
 {: #proxy-connect-timeout}
 
-ALB의 사용자 정의 연결 제한시간 및 읽기 제한시간을 설정합니다. 백엔드 앱이 사용할 수 없는 것으로 간주되기 전에 백엔드 앱에 연결하고 백엔드 앱에서 읽기 위해 ALB가 대기하는 시간을 설정합니다.
+백엔드 앱이 사용할 수 없는 것으로 간주되기 전에 백엔드 앱에 연결하고 백엔드 앱에서 읽기 위해 ALB가 대기하는 시간을 설정합니다.
 {:shortdesc}
 
 <dl>
@@ -713,7 +690,7 @@ paths:
 ### Keepalive 요청(keepalive-requests)
 {: #keepalive-requests}
 
-하나의 Keepalive 연결을 통해 제공할 수 있는 최대 요청 수를 구성합니다.
+하나의 Keepalive 연결을 통해 서비스할 수 있는 최대 요청 수를 설정합니다.
 {:shortdesc}
 
 <dl>
@@ -772,13 +749,13 @@ paths:
 ### Keepalive 제한시간(keepalive-timeout)
 {: #keepalive-timeout}
 
-Keepalive 연결이 서버 측에서 열려 있는 시간을 구성합니다.
+서버에서 Keepalive 연결이 열려 있는 최대 시간을 설정합니다.
 {:shortdesc}
 
 <dl>
 <dt>설명</dt>
 <dd>
-  서버에서 Keepalive 연결이 열려 있는 시간을 설정합니다.
+서버에서 Keepalive 연결이 열려 있는 최대 시간을 설정합니다.
 </dd>
 
 
@@ -827,11 +804,171 @@ paths:
 <br />
 
 
+### 다음 업스트림 프록시(proxy-next-upstream-config)
+{: #proxy-next-upstream-config}
+
+ALB가 다음 업스트림 서버로 요청을 전달할 수 있는 시점을 설정합니다.
+{:shortdesc}
+
+<dl>
+<dt>설명</dt>
+<dd>
+Ingress ALB가 클라이언트 앱과 사용자의 앱 간의 프록시 역할을 수행합니다. 일부 앱 설정은 ALB로부터 수신되는 클라이언트 요청을 처리하는 여러 업스트림 서버를 필요로 합니다. ALB가 사용하는 프록시 서버가 앱이 사용하는 업스트림 서버와의 연결을 설정하지 못하는 경우가 있습니다. 이 경우 ALB는 다음 업스트림 서버와 연결을 설정하여 여기에 대신 요청을 전달하려 할 수 있습니다. 사용자는 `proxy-next-upstream-config` 어노테이션을 사용하여 ALB가 다음 업스트림 서버로 요청을 전달할 수 있는 경우, 시간 및 횟수를 설정할 수 있습니다. <br><br><strong>참고</strong>: `proxy-next-upstream-config`를 사용할 때는 제한시간이 항상 구성되므로 이 어노테이션에 `timeout=true`를 추가하지 마십시오.
+</dd>
+<dt>샘플 Ingress 리소스 YAML</dt>
+<dd>
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+annotations:
+    ingress.bluemix.net/proxy-next-upstream-config: "serviceName=&lt;myservice1&gt; retries=&lt;tries&gt; timeout=&lt;time&gt; error=true http_502=true; serviceName=&lt;myservice2&gt; http_403=true non_idempotent=true"
+spec:
+tls:
+  - hosts:
+    - mydomain
+    secretName: mysecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: myservice1
+          servicePort: 80
+</code></pre>
+
+<table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td><code>&lt;<em>myservice</em>&gt;</code>를 앱에 대해 작성된 Kubernetes 서비스의 이름으로 대체합니다.</td>
+</tr>
+<tr>
+<td><code>retries</code></td>
+<td><code>&lt;<em>tries</em>&gt;</code>를 ALB가 다음 업스트림 서버로 요청을 전달하려 시도하는 최대 횟수로 대체하십시오. 이 숫자는 원래 요청을 포함합니다. 이 한계를 해제하려면 <code>0</code>을 사용하십시오. 값을 지정하지 않으면 기본값 <code>0</code>이 사용됩니다.
+</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td><code>&lt;<em>time</em>&gt;</code>을 ALB가 다음 업스트림 서버로 요청을 전달하려 시도하는 최대 시간(초)으로 대체하십시오. 예를 들어, 30초를 설정하려면 <code>30s</code>를 입력하십시오. 이 한계를 해제하려면 <code>0</code>을 사용하십시오. 값을 지정하지 않으면 기본값 <code>0</code>이 사용됩니다.
+</td>
+</tr>
+<tr>
+<td><code>error</code></td>
+<td><code>true</code>로 설정되면 첫 번째 업스트림 서버와 연결을 설정하거나, 여기에 요청을 전달하거나, 응답 헤더를 읽는 중에 오류가 발생하는 경우 ALB가 요청을 다음 업스트림 서버로 전달합니다.
+</td>
+</tr>
+<tr>
+<td><code>invalid_header</code></td>
+<td><code>true</code>로 설정되면 첫 번째 업스트림 서버가 비어 있거나 올바르지 않은 응답을 리턴하는 경우 ALB가 요청을 다음 업스트림 서버로 전달합니다.
+</td>
+</tr>
+<tr>
+<td><code>http_502</code></td>
+<td><code>true</code>로 설정되면 첫 번째 업스트림 서버가 코드 502를 포함하는 응답을 리턴하는 경우 ALB가 요청을 다음 업스트림 서버로 전달합니다. HTTP 응답 코드 <code>500</code>, <code>502</code>, <code>503</code>, <code>504</code>, <code>403</code>, <code>404</code>, <code>429</code>를 지정할 수 있습니다.
+</td>
+</tr>
+<tr>
+<td><code>non_idempotent</code></td>
+<td><code>true</code>로 설정되면 ALB가 멱등이 아닌 메소드를 사용한 요청을 다음 업스트림 서버로 전달할 수 있습니다. 기본적으로 ALB는 이러한 요청을 다음 업스트림 서버로 전달하지 않습니다.
+</td>
+</tr>
+<tr>
+<td><code>off</code></td>
+<td>ALB가 다음 업스트림 서버로 요청을 전달하지 않도록 하려면 <code>true</code>로 설정하십시오.
+</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
+
+<br />
+
+
+### 쿠키에 대한 세션 선호도(sticky-cookie-services)
+{: #sticky-cookie-services}
+
+ALB에 세션 선호도를 추가하고 수신 네트워크 트래픽을 항상 동일한 업스트림 서버로 라우팅하려면 스티키 쿠키 어노테이션을 사용하십시오.
+{:shortdesc}
+
+<dl>
+<dt>설명</dt>
+<dd>고가용성을 위해 앱 설정에 따라 수신 클라이언트 요청을 처리하는 여러 업스트림 서버를 배치해야 합니다. 클라이언트가 백엔드 앱에 연결할 때 세션 지속 기간 동안 또는 태스크를 완료할 때까지 소요되는 시간 동안 동일한 업스트림 서버에서 클라이언트에 서비스를 제공하도록 세션 선호도를 사용할 수 있습니다. 수신 네트워크 트래픽이 항상 동일한 업스트림 서버로 라우팅되게 하여 세션 선호도를 보장하도록 ALB를 구성할 수 있습니다.
+
+</br></br>
+백엔드 앱에 연결하는 모든 클라이언트는 ALB를 통해 사용 가능한 업스트림 서버 중 하나에 지정됩니다. ALB는 클라이언트 앱에 저장되는 세션 쿠키를 작성하며, 이 쿠키는 애플리케이션 로드 밸런서와 클라이언트 간 모든 요청의 헤더 정보에 포함됩니다. 쿠키의 정보를 사용하면 세션 전체에서 동일한 업스트림 서버가 모든 요청을 처리할 수 있습니다.
+
+</br></br>
+여러 서비스가 포함된 경우에는 세미콜론(;)을 사용하여 구분하십시오.</dd>
+<dt>샘플 Ingress 리소스 YAML</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+annotations:
+    ingress.bluemix.net/sticky-cookie-services: "serviceName=&lt;myservice1&gt; name=&lt;cookie_name1&gt; expires=&lt;expiration_time1&gt; path=&lt;cookie_path1&gt; hash=&lt;hash_algorithm1&gt;;serviceName=&lt;myservice2&gt; name=&lt;cookie_name2&gt; expires=&lt;expiration_time2&gt; path=&lt;cookie_path2&gt; hash=&lt;hash_algorithm2&gt;"
+spec:
+tls:
+  - hosts:
+    - mydomain
+    secretName: mytlssecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: &lt;myservice1&gt;
+          servicePort: 8080
+      - path: /myapp
+        backend:
+          serviceName: &lt;myservice2&gt;
+          servicePort: 80</code></pre>
+
+  <table>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>serviceName</code></td>
+  <td><code>&lt;<em>myservice</em>&gt;</code>를 앱에 대해 작성된 Kubernetes 서비스의 이름으로 대체합니다.</td>
+  </tr>
+  <tr>
+  <td><code>name</code></td>
+  <td><code>&lt;<em>cookie_name</em>&gt;</code>을 세션 중 작성된 스티키 쿠키의 이름으로 대체합니다.</td>
+  </tr>
+  <tr>
+  <td><code>expires</code></td>
+  <td>스티키 쿠키가 만료되기 전에 <code>&lt;<em>expiration_time</em>&gt;</code>을 초, 분 또는 시간 단위의 시간으로 대체합니다. 이 시간은 사용자 활동과 무관합니다. 쿠키가 만료되고 나면 클라이언트 웹 브라우저에서 쿠키가 삭제되어 더 이상 ALB로 전송되지 않습니다. 예를 들어, 만기 시간을 1초, 1분 또는 1시간으로 설정하려면 <code>1s</code>, <code>1m</code> 또는 <code>1h</code>를 입력하십시오.</td>
+  </tr>
+  <tr>
+  <td><code>path</code></td>
+  <td><code>&lt;<em>cookie_path</em>&gt;</code>를 Ingress 하위 도메인에 추가되는 경로로 대체합니다. 이 경로는 ALB로 쿠키가 전송되는 도메인과 하위 도메인을 표시합니다. 예를 들어, Ingress 도메인이 <code>www.myingress.com</code>이고 모든 클라이언트 요청에 해당 쿠키를 전송하려는 경우 <code>path=/</code>를 설정해야 합니다. <code>www.myingress.com/myapp</code> 및 해당 하위 도메인 모두에 대해서만 쿠키를 전송하려는 경우 <code>path=/myapp</code>으로 설정해야 합니다.</td>
+  </tr>
+  <tr>
+  <td><code>hash</code></td>
+  <td><code>&lt;<em>hash_algorithm</em>&gt;</code>를 쿠키의 정보를 보호하는 해시 알고리즘으로 대체합니다. <code>sha1</code>만 지원됩니다. SHA1은 쿠키의 정보를 기반으로 해시 합계를 작성하고 이 해시 합계를 쿠키에 추가합니다. 서버에서 쿠키의 정보를 복호화하고 데이터 무결성을 확인할 수 있습니다.</td>
+  </tr>
+  </tbody></table>
+
+ </dd></dl>
+
+<br />
+
 
 ### 업스트림 Keepalive(upstream-keepalive)
 {: #upstream-keepalive}
 
-업스트림 서버에 대한 최대 수의 유휴 Keepalive 연결을 구성합니다.
+업스트림 서버에 대한 최대 유휴 Keepalive 연결 수를 설정합니다.
 {:shortdesc}
 
 <dl>
@@ -892,18 +1029,19 @@ tls:
 {: #appid-auth}
 
   {{site.data.keyword.appid_full_notm}}를 사용하여 애플리케이션으로 인증합니다.
-{:shortdesc}
+  {:shortdesc}
 
   <dl>
   <dt>설명</dt>
   <dd>
   {{site.data.keyword.appid_short_notm}}를 사용하여 웹 또는 API HTTP/HTTPS 요청을 인증합니다.
 
-  <p>요청 유형을 <code>web</code>으로 설정하면 {{site.data.keyword.appid_short_notm}} 액세스 토큰이 포함된 웹 요청이 유효성 검증됩니다. 토큰 유효성 검증에 실패하는 경우 웹 요청이 거부됩니다. 요청에 액세스 토큰이 포함되지 않으면 요청이 {{site.data.keyword.appid_short_notm}} 로그인 페이지로 경로 재지정됩니다. **참고**: {{site.data.keyword.appid_short_notm}} 웹 인증이 작동하려면 사용자의 브라우저에서 쿠키가 사용으로 설정되어야 합니다. </p>
+  <p>요청 유형을 <code>web</code>으로 설정하면 {{site.data.keyword.appid_short_notm}} 액세스 토큰이 포함된 웹 요청이 유효성 검증됩니다. 토큰 유효성 검증에 실패하는 경우 웹 요청이 거부됩니다. 요청에 액세스 토큰이 포함되지 않으면 요청이 {{site.data.keyword.appid_short_notm}} 로그인 페이지로 경로 재지정됩니다. **참고**: {{site.data.keyword.appid_short_notm}} 웹 인증이 작동하려면 사용자의 브라우저에서 쿠키가 사용으로 설정되어야 합니다.</p>
 
-  <p>요청 유형을 <code>api</code>로 설정하면 {{site.data.keyword.appid_short_notm}} 액세스 토큰이 포함된 API 요청이 유효성 검증됩니다. 요청에 액세스 토큰이 포함되지 않으면 <code>401: Unauthorized</code> 오류 메시지가 사용자에게 리턴됩니다. </p>
+  <p>요청 유형을 <code>api</code>로 설정하면 {{site.data.keyword.appid_short_notm}} 액세스 토큰이 포함된 API 요청이 유효성 검증됩니다. 요청에 액세스 토큰이 포함되지 않으면 <code>401: Unauthorized</code> 오류 메시지가 사용자에게 리턴됩니다.</p>
+
+  <p>**참고**: 보안상의 이유로, {{site.data.keyword.appid_short_notm}} 인증은 TLS/SSL을 사용하는 백엔드만 지원합니다. </p>
   </dd>
-
    <dt>샘플 Ingress 리소스 YAML</dt>
    <dd>
 
@@ -935,11 +1073,11 @@ tls:
     <tbody>
     <tr>
     <td><code>bindSecret</code></td>
-    <td><em><code>&lt;bind_secret&gt;</code></em>을 바인드 시크릿을 저장하는 Kubernetes 시크릿으로 대체합니다. </td>
+    <td><em><code>&lt;bind_secret&gt;</code></em>을 바인드 시크릿을 저장하는 Kubernetes 시크릿으로 대체합니다.</td>
     </tr>
     <tr>
     <td><code>namespace</code></td>
-    <td><em><code>&lt;namespace&gt;</code></em>를 바인드 시크릿으로 대체합니다. 이 필드의 기본값은 `default` 네임스페이스입니다. </td>
+    <td><em><code>&lt;namespace&gt;</code></em>를 바인드 시크릿으로 대체합니다. 이 필드의 기본값은 `default` 네임스페이스입니다.</td>
     </tr>
     <tr>
     <td><code>requestType</code></td>
@@ -947,13 +1085,13 @@ tls:
     </tr>
     <tr>
     <td><code>serviceName</code></td>
-    <td><code><em>&lt;myservice&gt</em></code>를 앱에 작성한 Kubernetes 서비스의 이름으로 대체합니다. 이 필드는 선택사항입니다. 서비스 이름이 포함되지 않으면 어노테이션은 모든 서비스에 대해 사용으로 설정됩니다. 서비스 이름이 포함되면 어노테이션은 해당 서비스에 대해서만 사용으로 설정됩니다. 여러 서비스는 세미콜론(;)으로 구분하십시오.</td>
+    <td><code><em>&lt;myservice&gt;</em></code>를 앱에 대해 작성된 Kubernetes 서비스의 이름으로 대체합니다. 이 필드는 선택사항입니다. 서비스 이름이 포함되지 않으면 어노테이션은 모든 서비스에 대해 사용으로 설정됩니다.  서비스 이름이 포함되면 어노테이션은 해당 서비스에 대해서만 사용으로 설정됩니다. 여러 서비스는 세미콜론(;)으로 구분하십시오.</td>
     </tr>
     </tbody></table>
     </dd>
     <dt>사용</dt>
     <dd>애플리케이션이 인증을 위해 {{site.data.keyword.appid_short_notm}}를 사용하므로 {{site.data.keyword.appid_short_notm}} 인스턴스를 프로비저닝하고 유효한 경로 재지정 URI로 인스턴스를 구성하며 바인드 시크릿을 생성해야 합니다.
-<ol>
+    <ol>
     <li>[{{site.data.keyword.appid_short_notm}} 인스턴스](https://console.bluemix.net/catalog/services/app-id)를 프로비저닝하십시오.</li>
     <li>{{site.data.keyword.appid_short_notm}} 관리 콘솔에서 앱의 redirectURI를 추가하십시오.</li>
     <li>바인드 시크릿을 작성하십시오.
@@ -1025,7 +1163,7 @@ paths:
 CLI 출력이 다음과 유사하게 나타납니다.
 <pre class="screen">
 <code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.10.10.149   169.60.16.246   80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  80:30776/TCP,443:30412/TCP   8d</code></pre></li>
 <li>ALB 구성 맵을 여십시오.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
@@ -1048,11 +1186,12 @@ metadata:
 CLI 출력이 다음과 유사하게 나타납니다.
 <pre class="screen">
 <code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
 <li>수신 네트워크 트래픽을 서버로 라우팅할 때 기본이 아닌 포트를 사용하도록 Ingress를 구성하십시오. 이 참조서에 있는 샘플 YAML 파일을 사용하십시오. </li>
 <li>ALB 구성을 업데이트하십시오.
 <pre class="pre">
-<code>kubectl apply -f &lt;yaml_file&gt;</code></pre>
+<code>         kubectl apply -f myingress.yaml
+        </code></pre>
 </li>
 <li>선호하는 웹 브라우저를 열어 앱에 액세스하십시오. 예: <code>https://&lt;ibmdomain&gt;:&lt;port&gt;/&lt;service_path&gt;/</code></li></ol></dd></dl>
 
@@ -1119,7 +1258,7 @@ kind: Ingress
 metadata:
   name: myingress
 annotations:
-    ingress.bluemix.net/hsts: enabled=&lt;true&gt; maxAge=&lt;31536000&gt; includeSubdomains=&lt;true&gt;
+    ingress.bluemix.net/hsts: enabled=true maxAge=&lt;31536000&gt; includeSubdomains=true
 spec:
 tls:
   - hosts:
@@ -1150,7 +1289,7 @@ tls:
   </tr>
     <tr>
   <td><code>maxAge</code></td>
-  <td><code>&lt;<em>31536000</em>&gt;</code>을 브라우저가 바로 HTTP에 전송 요청을 캐시하는 기간(초)을 나타내는 정수로 대체합니다. 기본값은 <code>31536000</code>로, 1년과 같습니다. </td>
+  <td><code>&lt;<em>31536000</em>&gt;</code>을 브라우저가 바로 HTTP에 전송 요청을 캐시하는 기간(초)을 나타내는 정수로 대체합니다. 기본값은 <code>31536000</code>로, 1년과 같습니다.</td>
   </tr>
   <tr>
   <td><code>includeSubdomains</code></td>
@@ -1181,7 +1320,7 @@ Ingress ALB에 대한 상호 인증을 구성합니다. 클라이언트는 서�
 <dd>
 <ul>
 <li>[필수 인증 기관(CA)이 포함된 올바른 시크릿을 가져야 합니다](cs_app.html#secrets). <code>client.key</code> 및 <code>client.crt</code>는 상호 인증으로 인증해야 합니다.</li>
-<li>443이 아닌 다른 포트에서 상호 인증을 사용하려면 [올바른 포트를 열도록 로드 밸런서를 구성](cs_ingress.html#opening_ingress_ports)하십시오.</li>
+<li>443 외 포트에서의 상호 인증을 가능하게 하려면 [유효한 포트를 열도록 ALB를 구성](cs_ingress.html#opening_ingress_ports)하십시오. </li>
 </ul>
 </dd>
 
@@ -1220,12 +1359,12 @@ tls:
 <td><code>&lt;<em>mysecret</em>&gt;</code>을 시크릿 리소스의 이름으로 대체합니다.</td>
 </tr>
 <tr>
-<td><code>&lt;port&gt;</code></td>
-<td>ALB 포트 번호입니다.</td>
+<td><code>port</code></td>
+<td><code>&lt;<em>port</em>&gt;</code>를 ALB 포트 번호로 대체하십시오. </td>
 </tr>
 <tr>
-<td><code>&lt;serviceName&gt;</code></td>
-<td>하나 이상의 Ingress 리소스의 이름입니다. 이 매개변수는 선택사항입니다.</td>
+<td><code>serviceName</code></td>
+<td><code>&lt;<em>servicename</em>&gt;</code>을 하나 이상의 Ingress 리소스의 이름으로 대체하십시오. 이 매개변수는 선택사항입니다.</td>
 </tr>
 </tbody></table>
 
@@ -1282,11 +1421,11 @@ rules:
   <tbody>
   <tr>
   <td><code>ssl-service</code></td>
-  <td><code>&lt;<em>myservice</em>&gt;</code>를 앱을 나타내는 서비스의 이름으로 대체합니다. ALB에서 이 앱으로의 트래픽은 암호화됩니다.</td>
+  <td><code>&lt;<em>myservice</em>&gt;</code>를 HTTPS를 필요로 하는 서비스의 이름으로 대체하십시오. ALB에서 이 앱의 서비스로의 트래픽이 암호화됩니다. </td>
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td><code>&lt;<em>service-ssl-secret</em>&gt;</code>을 서비스 시크릿으로 대체합니다. 이 매개변수는 선택사항입니다. 이 매개변수가 제공되면 값에 앱이 클라이언트에 요구하는 인증서와 키가 포함되어야 합니다.</td>
+  <td><code>&lt;<em>service-ssl-secret</em>&gt;</code>을 서비스 시크릿으로 대체합니다. 이 매개변수는 선택사항입니다. 이 매개변수가 제공되면 값에 앱이 클라이언트에 요구하는 인증서와 키가 포함되어야 합니다. TLS 시크릿을 작성하려면 [시크릿 작성](cs_app.html#secrets)을 참조하십시오. </td>
   </tr>
   </tbody></table>
 
@@ -1347,11 +1486,11 @@ tls:
   <tbody>
   <tr>
   <td><code>ssl-service</code></td>
-  <td><code>&lt;<em>myservice</em>&gt;</code>를 앱을 나타내는 서비스의 이름으로 대체합니다. 트래픽은 ALB에서 이 앱까지 암호화됩니다.</td>
+  <td><code>&lt;<em>myservice</em>&gt;</code>를 HTTPS를 필요로 하는 서비스의 이름으로 대체하십시오. ALB에서 이 앱의 서비스로의 트래픽이 암호화됩니다. </td>
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td><code>&lt;<em>service-ssl-secret</em>&gt;</code>을 서비스 시크릿으로 대체합니다. 이 매개변수는 선택사항입니다. 이 매개변수가 제공되면 값에 앱이 클라이언트에 요구하는 인증서와 키가 포함되어야 합니다.</td>
+  <td><code>&lt;<em>service-ssl-secret</em>&gt;</code>을 서비스 시크릿으로 대체합니다. 이 매개변수는 선택사항입니다. 이 매개변수가 제공되면 값에 앱이 클라이언트에 요구하는 인증서와 키가 포함되어야 합니다. 상호 인증 시크릿을 작성하려면 [시크릿 작성](cs_app.html#secrets)을 참조하십시오. </td>
   </tr>
   </tbody></table>
 
@@ -1361,7 +1500,92 @@ tls:
 <br />
 
 
+## Istio 어노테이션
+{: #istio-annotations}
 
+### Istio 서비스(istio-services)
+{: #istio-services}
+
+  Istio 관리 서비스로 트래픽을 라우팅합니다.
+  {:shortdesc}
+
+  <dl>
+  <dt>설명</dt>
+  <dd>
+  Istio 관리 서비스가 있는 경우에는 클러스터 ALB를 사용하여 HTTP/HTTPS 요청을 Istio Ingress 제어기로 라우팅할 수 있습니다. 그 후 Istio Ingress 제어기는 요청을 앱 서비스로 라우팅합니다. 트래픽을 라우팅하려면 클러스터 ALB 및 Istio Ingress 제어기에 대한 Ingress 리소스를 모두 변경해야 합니다.
+    <br><br>클러스터 ALB에 대한 Ingress 리소스에서는 다음 작업을 수행해야 합니다.
+      <ul>
+        <li>`istio-services` 어노테이션 지정</li>
+        <li>서비스 경로를 앱이 청취하는 실제 경로로 정의</li>
+        <li>서비스 포트를 Istio Ingress 제어기의 포트로 정의</li>
+      </ul>
+    <br>Istio Ingress 제어기에 대한 Ingress 리소스에서는 다음 작업을 수행해야 합니다.
+      <ul>
+        <li>서비스 경로를 앱이 청취하는 실제 경로로 정의</li>
+        <li>서비스 포트를 Istio Ingress 제어기에 의해 노출된 앱 서비스의 HTTP/HTTPS 포트로 정의</li>
+    </ul>
+  </dd>
+
+   <dt>클러스터 ALB에 대한 Ingress 리소스 YAML 예</dt>
+   <dd>
+
+   <pre class="codeblock">
+   <code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+annotations:
+      ingress.bluemix.net/istio-services: "enable=True serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
+spec:
+tls:
+    - hosts:
+      - mydomain
+    secretName: mytlssecret
+  rules:
+    - host: mydomain
+    http:
+      paths:
+        - path: &lt;/myapp1&gt;
+          backend:
+            serviceName: &lt;myservice1&gt;
+            servicePort: &lt;istio_ingress_port&gt;
+        - path: &lt;/myapp2&gt;
+          backend:
+            serviceName: &lt;myservice2&gt;
+            servicePort: &lt;istio_ingress_port&gt;</code></pre>
+
+   <table>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>enable</code></td>
+      <td>Istio 관리 서비스에 대한 트래픽 라우팅을 사용하려면 <code>True</code>로 설정하십시오. </td>
+    </tr>
+    <tr>
+    <td><code>serviceName</code></td>
+    <td><code><em>&lt;myservice1&gt;</em></code>을 Istio 관리 앱을 위해 작성한 Kubernetes 서비스의 이름으로 대체하십시오. 여러 서비스는 세미콜론(;)으로 구분하십시오. 이 필드는 선택사항입니다. 서비스 이름을 지정하지 않으면 모든 Istio 관리 서비스에서 트래픽 라우팅을 사용할 수 있게 됩니다. </td>
+    </tr>
+    <tr>
+    <td><code>istioServiceNamespace</code></td>
+    <td><code><em>&lt;istio-namespace&gt;</em></code>를 Istio가 설치된 Kubernetes 네임스페이스로 대체하십시오. 이 필드는 선택사항입니다. 네임스페이스를 지정하지 않으면 <code>istio-system</code> 네임스페이스가 사용됩니다. </td>
+    </tr>
+    <tr>
+    <td><code>istioServiceName</code></td>
+    <td><code><em>&lt;istio-ingress-service&gt;</em></code>를 Istio Ingress 서비스의 이름으로 대체하십시오. 이 필드는 선택사항입니다. Istio Ingress 서비스 이름을 지정하지 않으면 서비스 이름 <code>istio-ingress</code>가 사용됩니다. </td>
+    </tr>
+    <tr>
+    <td><code>path</code></td>
+      <td>트래픽을 라우팅할 각 Istio 관리 서비스에 대해, <code><em>&lt;/myapp1&gt;</em></code>을 Istio 관리 서비스가 청취하는 백엔드 경로로 대체하십시오. 이 경로는 Istio Ingress 리소스에 정의한 경로와 대응해야 합니다. </td>
+    </tr>
+    <tr>
+    <td><code>servicePort</code></td>
+    <td>트래픽을 라우팅할 각 Istio 관리 서비스에 대해, <code><em>&lt;istio_ingress_port&gt;</em></code>를 Istio Ingress 제어기의 포트로 대체하십시오. </td>
+    </tr>
+    </tbody></table>
+    </dd>
+    </dl>
 
 ## 프록시 버퍼 어노테이션
 {: #proxy-buffer}
@@ -1454,7 +1678,7 @@ paths:
  <td><code>&lt;<em>myservice</em>&gt;</code>를 프록시-버퍼를 적용할 서비스 이름으로 대체합니다.</td>
  </tr>
  <tr>
- <td><code>number_of_buffers</code></td>
+ <td><code>number</code></td>
  <td><code>&lt;<em>number_of_buffers</em>&gt;</code>를 숫자(예: <em>2</em>)로 대체합니다.</td>
  </tr>
  <tr>
@@ -1550,7 +1774,7 @@ kind: Ingress
 metadata:
   name: proxy-ingress
 annotations:
-    ingress.bluemix.net/proxy-busy-buffers-size: "serviceName=&lt;serviceName&gt; size=&lt;size&gt;"
+   ingress.bluemix.net/proxy-busy-buffers-size: "serviceName=&lt;myservice&gt; size=&lt;size&gt;"
 spec:
 tls:
  - hosts:
@@ -1599,7 +1823,7 @@ paths:
 
 <dl>
 <dt>설명</dt>
-<dd>Ingress ALB는 클라이언트 앱과 백엔드 앱 사이의 프록시 역할을 합니다. ALB로 전송된 클라이언트 요청은 처리(프록시)되어 이후에 백엔드 앱으로 전송되는 새 요청에 넣어집니다. 이와 유사하게, ALB로 전송된 백엔드 요청은 처리(프록시)되어 이후에 클라이언트로 전송되는 새 요청에 넣어집니다. 요청 또는 응답을 프록시하면 클라이언트 또는 백엔드 앱에서 처음에 전송된 HTTP 헤더 정보(예: 사용자 이름)가 제거됩니다. 
+<dd>Ingress ALB는 클라이언트 앱과 백엔드 앱 사이의 프록시 역할을 합니다. ALB로 전송된 클라이언트 요청은 처리(프록시)되어 이후에 백엔드 앱으로 전송되는 새 요청에 넣어집니다. 이와 유사하게, ALB로 전송된 백엔드 요청은 처리(프록시)되어 이후에 클라이언트로 전송되는 새 요청에 넣어집니다. 요청 또는 응답을 프록시하면 클라이언트 또는 백엔드 앱에서 처음에 전송된 HTTP 헤더 정보(예: 사용자 이름)가 제거됩니다.
 
 <br><br>
 백엔드 앱에서 HTTP 헤더 정보가 필요하면 ALB가 백엔드 앱으로 요청을 전달하기 전에 <code>proxy-add-headers</code> 어노테이션을 사용하여 클라이언트 요청에 헤더 정보를 추가할 수 있습니다.
@@ -1821,7 +2045,7 @@ paths:
 
 <dl>
 <dt>설명</dt>
-<dd>대형 클라이언트 요청 헤더를 읽는 버퍼는 요청 시에만 할당됩니다. 요청 처리가 끝난 후 연결이 keepalive 상태로 전이되는 경우 이 버퍼가 해제됩니다. 기본적으로 버퍼 크기는 <code>8K</code>바이트와 같습니다. 요청 행이 한 개 버퍼의 설정 최대 크기를 초과하는 경우 <code>414 Request-URI Too Large</code> 오류가 클라이언트에 리턴됩니다. 또한 요청 헤더 필드가 한 개 버퍼의 설정 최대 크기를 초과하는 경우 <code>400 Bad Request Large</code> 오류가 클라이언트에 리턴됩니다. 대형 클라이언트 요청 헤더를 읽는 데 사용된 버퍼의 최대 수 및 크기를 조정할 수 있습니다. 
+<dd>대형 클라이언트 요청 헤더를 읽는 버퍼는 요청 시에만 할당됩니다. 요청 처리가 끝난 후 연결이 keepalive 상태로 전이되는 경우 이 버퍼가 해제됩니다. 기본적으로 버퍼 크기는 <code>8K</code>바이트와 같습니다. 요청 행이 한 개 버퍼의 설정 최대 크기를 초과하는 경우 <code>414 Request-URI Too Large</code> 오류가 클라이언트에 리턴됩니다. 또한 요청 헤더 필드가 한 개 버퍼의 설정 최대 크기를 초과하는 경우 <code>400 Bad Request Large</code> 오류가 클라이언트에 리턴됩니다. 대형 클라이언트 요청 헤더를 읽는 데 사용된 버퍼의 최대 수 및 크기를 조정할 수 있습니다.
 
 <dt>샘플 Ingress 리소스 YAML</dt>
 <dd>
@@ -1854,12 +2078,12 @@ paths:
  <tbody>
  <tr>
  <td><code>&lt;number&gt;</code></td>
- <td>대형 클라이언트 요청 헤더를 읽는 데 할당되어야 하는 최대 버퍼의 수입니다. 예를 들어, 4로 설정하려면 <code>4</code>를 정의하십시오.  </td>
+ <td>대형 클라이언트 요청 헤더를 읽는 데 할당되어야 하는 최대 버퍼의 수입니다. 예를 들어, 4로 설정하려면 <code>4</code>를 정의하십시오.</td>
  </tr>
  <tr>
  <td><code>&lt;size&gt;</code></td>
  <td>대형 클라이언트 요청 헤더를 읽는 최대 버퍼의 크기입니다. 예를 들어, 16KB로 설정하려면 <code>16k</code>를 정의하십시오.
-<strong>참고:</strong> 크기는 KB의 경우 <code>k</code>로 끝나고 MB의 경우 <code>m</code>으로 끝나야 합니다.</td>
+   <strong>참고:</strong> 크기는 KB의 경우 <code>k</code>로 끝나고 MB의 경우 <code>m</code>으로 끝나야 합니다.</td>
  </tr>
 </tbody></table>
 </dd>
@@ -1997,6 +2221,3 @@ tls:
   </dl>
 
   <br />
-
-
-

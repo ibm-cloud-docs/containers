@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -22,11 +22,39 @@ lastupdated: "2018-03-16"
 查看容器开发者有兴趣了解 {{site.data.keyword.containerlong}} 中的哪些内容。
 {:shortdesc}
 
+## 2018 年 4 月的热门主题
+{: #apr18}
+
+<table summary="此表显示热门主题。各行都应从左到右阅读，其中第一列是日期，第二列是功能标题，第三列是描述。">
+<caption>2018 年 4 月容器和 Kubernetes 集群的热门主题</caption>
+<thead>
+<th>日期</th>
+<th>标题</th>
+<th>描述</th>
+</thead>
+<tbody>
+<tr>
+<td>4 月 17 日</td>
+<td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
+<td>安装 {{site.data.keyword.Bluemix_notm}} Block Storage [插件](cs_storage.html#install_block)以在块存储器中保存持久数据。然后，可以为集群[创建新的](cs_storage.html#create)块存储器或[使用现有](cs_storage.html#existing_block)块存储器。</td>
+</tr>
+<tr>
+<td>4 月 13 日</td>
+<td>[用于将 Cloud Foundry 应用程序迁移到集群的新教程](cs_tutorials_cf.html#cf_tutorial)</td>
+<td>您有 Cloud Foundry 应用程序吗？请了解如何将该应用程序中的相同代码部署到在 Kubernetes 集群中运行的容器。</td>
+</tr>
+<tr>
+<td>4 月 5 日</td>
+<td>[过滤日志](cs_health.html#filter-logs)</td>
+<td>过滤掉特定日志，使其不会转发。可以针对特定名称空间、容器名称、日志级别和消息字符串过滤掉日志。</td>
+</tr>
+</tbody></table>
+
 ## 2018 年 3 月的热门主题
 {: #mar18}
 
 <table summary="此表显示热门主题。各行都应从左到右阅读，其中第一列是日期，第二列是功能标题，第三列是描述。">
-<caption>2018 年 2 月容器和 Kubernetes 集群的热门主题</caption>
+<caption>2018 年 3 月容器和 Kubernetes 集群的热门主题</caption>
 <thead>
 <th>日期</th>
 <th>标题</th>
@@ -136,4 +164,5 @@ lastupdated: "2018-03-16"
 您可以在 [{{site.data.keyword.containershort_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 中查看其他人正在讨论的内容并提出自己的问题。
 {:shortdesc}
 
-提示：如果未将 IBM 标识用于 {{site.data.keyword.Bluemix_notm}} 帐户，请针对此 Slack [请求邀请](https://bxcs-slack-invite.mybluemix.net/)。
+
+

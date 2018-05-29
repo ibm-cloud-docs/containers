@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -44,6 +44,50 @@ ai servizi nel tuo cluster da internet.</li></ul>|
 <br />
 
 
+## Confronto delle offerte e le loro combinazioni
+{: #differentiation}
+
+Puoi eseguire {{site.data.keyword.containershort_notm}} in {{site.data.keyword.Bluemix_notm}} Public o Dedicated, in {{site.data.keyword.Bluemix_notm}} Private o in una configurazione ibrida.
+{:shortdesc}
+
+Esamina le seguenti informazioni per le differenze tra queste configurazioni di {{site.data.keyword.containershort_notm}}.
+
+<table>
+<col width="22%">
+<col width="78%">
+ <thead>
+ <th>Configurazione di {{site.data.keyword.containershort_notm}}</th>
+ <th>Descrizione</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td>{{site.data.keyword.Bluemix_notm}} Public
+ </td>
+ <td>Con {{site.data.keyword.Bluemix_notm}} Public sull'[hardware condiviso o dedicato o sulle macchine bare metal](cs_clusters.html#shared_dedicated_node), puoi ospitare le tue applicazioni nei cluster sul cloud utilizzando {{site.data.keyword.containershort_notm}}. {{site.data.keyword.containershort_notm}} su {{site.data.keyword.Bluemix_notm}} Public offre potenti strumenti combinando le tecnologie Docker e Kubernetes, un'esperienza utente intuitiva e la sicurezza e l'isolamento integrati per automatizzare la distribuzione, il funzionamento, il ridimensionamento e il monitoraggio di applicazioni caricate nei contenitori in un cluster di host di calcolo. <br><br>Per ulteriori informazioni, vedi la [tecnologia {{site.data.keyword.containershort_notm}}](cs_tech.html#ibm-cloud-container-service-technology).
+ </td>
+ </tr>
+ <tr>
+ <td>{{site.data.keyword.Bluemix_notm}} Dedicated
+ </td>
+ <td>{{site.data.keyword.Bluemix_notm}} Dedicated offre le stesse capacità {{site.data.keyword.containershort_notm}} sul cloud di {{site.data.keyword.Bluemix_notm}} Public. Tuttavia, con un account {{site.data.keyword.Bluemix_notm}} Dedicated, le [risorse fisiche disponibili sono dedicate solo al tuo cluster](cs_clusters.html#shared_dedicated_node) e non vengono condivise con i cluster provenienti dagli altri clienti {{site.data.keyword.IBM_notm}}. Potresti scegliere di impostare un ambiente {{site.data.keyword.Bluemix_notm}} Dedicated quando richiedi l'isolamento per il tuo cluster e gli altri servizi {{site.data.keyword.Bluemix_notm}} che utilizzi.<br><br>Per ulteriori informazioni, vedi [Introduzione ai cluster in {{site.data.keyword.Bluemix_notm}} Dedicated](cs_dedicated.html#dedicated).
+ </td>
+ </tr>
+ <tr>
+ <td>{{site.data.keyword.Bluemix_notm}} Private
+ </td>
+ <td>{{site.data.keyword.Bluemix_notm}} Private è una piattaforma applicativa che può essere installata localmente sulle tue macchine. Puoi scegliere di utilizzare {{site.data.keyword.containershort_notm}} in {{site.data.keyword.Bluemix_notm}} Private quando hai bisogno di sviluppare applicazioni inserite nel contenitore in loco nel tuo ambiente controllato dietro un firewall. <br><br>Per ulteriori informazioni, vedi le [informazioni sul prodotto {{site.data.keyword.Bluemix_notm}} Private ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/cloud-computing/products/ibm-cloud-private/) e la [documentazione ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html).
+ </td>
+ </tr>
+ <tr>
+ <td>Configurazione ibrida
+ </td>
+ <td>La configurazione ibrida consiste nell'uso combinato dei servizi che vengono eseguiti in {{site.data.keyword.Bluemix_notm}} Public o Dedicated e altri servizi che vengono eseguiti in loco, come ad esempio un'applicazione in {{site.data.keyword.Bluemix_notm}} Private. Esempi per una configurazione ibrida: <ul><li>Eseguire il provisioning di un cluster con {{site.data.keyword.containershort_notm}} in {{site.data.keyword.Bluemix_notm}} Public ma connettendo tale cluster a un database in loco.</li><li>Esecuzione del provisioning di un cluster con {{site.data.keyword.containershort_notm}} in {{site.data.keyword.Bluemix_notm}} Private e distribuzione di un'applicazione in tale cluster. Tuttavia, questa applicazione potrebbe utilizzare un servizio {{site.data.keyword.ibmwatson}}, ad esempio {{site.data.keyword.toneanalyzershort}}, in {{site.data.keyword.Bluemix_notm}} Public.</li></ul><br>Per abilitare la comunicazione tra i servizi che sono in esecuzione in {{site.data.keyword.Bluemix_notm}} Public o Dedicated e i servizi che sono in esecuzione in loco, devi [configurare una connessione VPN](cs_vpn.html).
+ </td>
+ </tr>
+ </tbody>
+</table>
+
+<br />
 
 
 ## Confronto tra i cluster standard e gratuito
@@ -55,7 +99,7 @@ Puoi creare un cluster gratuito o un qualsiasi numero di cluster standard. Prova
 |Caratteristiche|Cluster gratuiti|Cluster standard|
 |---------------|-------------|-----------------|
 |[Rete in cluster](cs_secure.html#in_cluster_network)|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
-|[Accesso dell'applicazione della rete pubblica da un servizio NodePort a un indirizzo IP non stabile](cs_nodeport.html#planning)|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
+|[Accesso dell'applicazione della rete pubblica da un servizio NodePort a un indirizzo IP non stabile](cs_nodeport.html)|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
 |[Gestione degli accessi utente](cs_users.html#managing)|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
 |[Accesso al servizio {{site.data.keyword.Bluemix_notm}} dal cluster e dalle applicazioni](cs_integrations.html#adding_cluster)|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
 |[Spazio su disco sul nodo di lavoro per l'archiviazione non persistente](cs_storage.html#planning)|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
@@ -72,55 +116,10 @@ Puoi creare un cluster gratuito o un qualsiasi numero di cluster standard. Prova
 
 
 
-## Responsabilità di gestione del cluster
+
 {: #responsibilities}
+**Nota**: cerchi le tue responsabilità e i termini del contenitore quando utilizzi il servizio? 
 
-Controlla le responsabilità che condividi con IBM per gestire i tuoi cluster.
-{:shortdesc}
-
-**IBM è responsabile per:**
-
-- Distribuzione del master, dei nodi di lavoro e dei componenti di gestione all'interno del cluster, come il programma di bilanciamento del carico dell'applicazione Ingress, al momento della creazione del cluster
-- Gestione degli aggiornamenti, dei monitoraggi e del ripristino del master Kubernetes del cluster
-- Monitoraggio dell'integrità dei nodi di lavoro e la fornitura dell'automazione dell'aggiornamento e del ripristino di tali nodi di lavoro
-- Esecuzione delle attività di automazione nel tuo account dell'infrastruttura, inclusi l'aggiunta e la rimozione dei nodi di lavoro e la creazione di una sottorete predefinita
-- Gestione, aggiornamento e ripristino dei componenti operativi all'interno del cluster, come il programma di bilanciamento del carico dell'applicazione Ingress e il plug-in di archiviazione
-- Provisioning di volumi di archiviazione quando richiesto dalle attestazioni del volume persistente
-- Fornitura delle impostazioni di sicurezza per tutti i nodi di lavoro
-
-</br>
-**Tu sei responsabile per:**
-
-- [Distribuzione e gestione delle risorse Kubernetes, come i pod, i servizi e le distribuzioni, all'interno del cluster](cs_app.html#app_cli)
-- [Utilizzo delle funzionalità del servizio e di Kubernetes per garantire l'elevata disponibilità alle applicazioni](cs_app.html#highly_available_apps)
-- [Aggiunta o rimozione della capacità di utilizzare la CLI per aggiungere o rimuovere i nodi di lavoro](cs_cli_reference.html#cs_worker_add)
-- [Creazione delle VLAN pubblica e privata nell'infrastruttura IBM Cloud (SoftLayer) per l'isolamento di rete del tuo cluster](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
-- [Verifica che tutti i nodi di lavoro dispongano di connettività di rete all'URL del master Kubernetes](cs_firewall.html#firewall) <p>**Nota**: se un nodo di lavoro ha sia una VLAN pubblica che privata, viene configurata la connettività di rete. Se il nodo di lavoro ha solo una VLAN privata, è necessario un Vyatta per fornire la connettività di rete.</p>
-- [Aggiornamento di kube-apiserver master e dei nodi di lavoro quando sono disponibili gli aggiornamenti delle versioni principali o secondarie di Kubernetes](cs_cluster_update.html#master)
-- [Ripristino dei nodi di lavoro con problemi eseguendo i comandi `kubectl`, come `cordon` o `drain` ed eseguendo i comandi `bx cs`, come `reboot`, `reload` o `delete`](cs_cli_reference.html#cs_worker_reboot)
-- [Aggiunta o rimozione delle sottoreti nell'infrastruttura IBM Cloud (SoftLayer) secondo necessità](cs_subnets.html#subnets)
-- [Backup e ripristino dei dati nell'archiviazione persistente nell'infrastruttura IBM Cloud (SoftLayer) ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](../services/RegistryImages/ibm-backup-restore/index.html)
-- [Configurazione del monitoraggio dell'integrità per i nodi di lavoro con Autorecovery](cs_health.html#autorecovery)
-
-<br />
-
-
-## Abuso dei contenitori
 {: #terms}
+Vedi [Responsabilità di {{site.data.keyword.containershort_notm}}](cs_responsibilities.html).
 
-I clienti non possono usare impropriamente il {{site.data.keyword.containershort_notm}}.
-{:shortdesc}
-
-L'utilizzo improprio include:
-
-*   Qualsiasi attività illegale
-*   La distribuzione o l'esecuzione di malware
-*   Il danneggiamento di {{site.data.keyword.containershort_notm}} o l'interferenza
-con l'utilizzo di {{site.data.keyword.containershort_notm}}
-*   Il danneggiamento o l'interferenza con l'utilizzo di qualsiasi altro servizio o sistema
-*   L'accesso non autorizzato a qualsiasi servizio o sistema
-*   La modifica non autorizzata a qualsiasi servizio o sistema
-*   La violazione dei diritti altrui
-
-Per i termini generali di utilizzo, consulta [Termini dei
-servizi cloud](/docs/navigation/notices.html#terms).

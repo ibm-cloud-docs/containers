@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-14"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -35,7 +35,7 @@ lastupdated: "2018-03-14"
 
 -   {{site.data.keyword.Bluemix_notm}} CLI バージョン 0.5.0 以降
 -   {{site.data.keyword.containershort_notm}} プラグイン
--   Kubernetes CLI バージョン 1.8.8 以降
+-   クラスターの `major.minor` バージョンと一致する Kubernetes CLI バージョン
 -   オプション: {{site.data.keyword.registryshort_notm}} プラグイン
 -   オプション: Docker バージョン 1.9 以降
 
@@ -71,17 +71,17 @@ CLI をインストールするには、以下のことを行います。
 
 4.  {: #kubectl}Kubernetes ダッシュボードのローカル・バージョンを表示して、アプリをクラスター内にデプロイするには、[Kubernetes CLI をインストールします![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。 Kubernetes CLI を使用してコマンドを実行するための接頭部は、`kubectl` です。
 
-    1.  使用する予定の Kubernetes クラスターの `major.minor` バージョンと一致する Kubernetes CLI の `major.minor` バージョンをダウンロードします。現在の {{site.data.keyword.containershort_notm}} のデフォルト Kubernetes バージョンは 1.8.8 です。 **注**: 少なくともクラスターの `major.minor` バージョンと一致する `kubectl` CLI バージョンを使用しないと、予期しない結果になる可能性があります。Kubernetes クラスターと CLI のバージョンを最新の状態に保つようにしてください。
+    1.  使用する予定の Kubernetes クラスターの `major.minor` バージョンと一致する Kubernetes CLI の `major.minor` バージョンをダウンロードします。 現在の {{site.data.keyword.containershort_notm}} のデフォルト Kubernetes バージョンは 1.8.11 です。 **注**: 少なくともクラスターの `major.minor` バージョンと同じ `kubectl` CLI バージョンを使用しないと、予期しない結果になる可能性があります。Kubernetes クラスターと CLI のバージョンを最新の状態に保つようにしてください。
 
-        - **OS X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl)
-        - **Linux**:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl)
-        - **Windows**:    [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe)
+        - **OS X**:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl)
+        - **Linux**:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl)
+        - **Windows**:    [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe)
 
     2.  **OSX および Linux の場合**: 以下の手順を実行します。
         1.  実行可能ファイルを `/usr/local/bin` ディレクトリーに移動します。
 
             ```
-            mv /<path_to_file>/kubectl /usr/local/bin/kubectl
+            mv /filepath/kubectl /usr/local/bin/kubectl
             ```
             {: pre}
 
@@ -106,7 +106,7 @@ CLI をインストールするには、以下のことを行います。
             ```
             {: pre}
 
-    3.  **Windows の場合**: Kubernetes CLI を {{site.data.keyword.Bluemix_notm}} CLI と同じディレクトリーにインストールします。このようにセットアップすると、後でコマンドを実行するとき、ファイル・パスの変更を行う手間がいくらか少なくなります。
+    3.  **Windows の場合**: Kubernetes CLI を {{site.data.keyword.Bluemix_notm}} CLI と同じディレクトリーにインストールします。 このようにセットアップすると、後でコマンドを実行するとき、ファイル・パスの変更を行う手間がいくらか少なくなります。
 
 5.  プライベート・イメージ・リポジトリーを管理するには、{{site.data.keyword.registryshort_notm}} プラグインをインストールします。 このプラグインを使用して、IBM がホストするマルチテナントで可用性が高く拡張可能なプライベート・イメージ・レジストリー内に独自の名前空間をセットアップし、Docker イメージを保管して他のユーザーと共有します。 クラスターにコンテナーをデプロイするためには、Docker イメージが必要です。 レジストリー・コマンドを実行するための接頭部は、`bx cr` です。
 
@@ -144,77 +144,79 @@ CLI をインストールするには、以下のことを行います。
 Kubernetes CLI に用意されているコマンドを使用して、{{site.data.keyword.Bluemix_notm}} のクラスターを管理することができます。
 {:shortdesc}
 
-Kubernetes 1.8.8 内で使用できるすべての `kubectl` コマンドは、{{site.data.keyword.Bluemix_notm}} 内のクラスターに対して使用することができます。 クラスターを作成したら、環境変数を使用してローカル CLI のコンテキストをそのクラスターに設定します。 その後、Kubernetes のさまざまな `kubectl` コマンドを実行して、{{site.data.keyword.Bluemix_notm}} のクラスターを操作することができます。
+Kubernetes 1.8.11 内で使用できるすべての `kubectl` コマンドは、{{site.data.keyword.Bluemix_notm}} 内のクラスターに対して使用することができます。 クラスターを作成したら、環境変数を使用してローカル CLI のコンテキストをそのクラスターに設定します。 その後、Kubernetes のさまざまな `kubectl` コマンドを実行して、{{site.data.keyword.Bluemix_notm}} のクラスターを操作することができます。
 
 `kubectl` コマンドを実行する前に、[必要な CLI をインストール](#cs_cli_install)して、[クラスターを作成](cs_clusters.html#clusters_cli)します。
 
 1.  {{site.data.keyword.Bluemix_notm}} CLI にログインします。 プロンプトが出されたら、{{site.data.keyword.Bluemix_notm}} 資格情報を入力します。 {{site.data.keyword.Bluemix_notm}} 地域を指定するには、[API エンドポイントを含めます](cs_regions.html#bluemix_regions)。
 
-      ```
-      bx login
-      ```
-      {: pre}
+    ```
+    bx login
+    ```
+    {: pre}
 
-      **注:** フェデレーテッド ID がある場合は、`bx login --sso` を使用して、{{site.data.keyword.Bluemix_notm}} CLI にログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。 `--sso` なしではログインに失敗し、`--sso` オプションを指定すると成功する場合、フェデレーテッド ID があることがわかります。
+    **注:** フェデレーテッド ID がある場合は、`bx login --sso` を使用して、{{site.data.keyword.Bluemix_notm}} CLI にログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。 `--sso` なしではログインに失敗し、`--sso` オプションを指定すると成功する場合、フェデレーテッド ID があることがわかります。
 
-  2.  {{site.data.keyword.Bluemix_notm}} アカウントを選択します。 複数の {{site.data.keyword.Bluemix_notm}} の組織が割り当てられている場合は、対象クラスターが作成されている組織を選択してください。 クラスターは組織に固有のものですが、{{site.data.keyword.Bluemix_notm}} スペースからは独立しています。 そのため、スペースを選択する必要はありません。
+2.  {{site.data.keyword.Bluemix_notm}} アカウントを選択します。 複数の {{site.data.keyword.Bluemix_notm}} の組織が割り当てられている場合は、対象クラスターが作成されている組織を選択してください。 クラスターは組織に固有のものですが、{{site.data.keyword.Bluemix_notm}} スペースからは独立しています。 そのため、スペースを選択する必要はありません。
 
-  3.  前に選択した {{site.data.keyword.Bluemix_notm}} 地域以外の地域で Kubernetes クラスターの作成とアクセスを行う場合は、`bx cs region-set` を実行します。
+3.  前に選択した {{site.data.keyword.Bluemix_notm}} 地域以外の地域で Kubernetes クラスターの作成とアクセスを行う場合は、`bx cs region-set` を実行します。
 
-  4.  クラスターの名前を取得するために、アカウントに含まれているすべてのクラスターのリストを出力します。
+4.  クラスターの名前を取得するために、アカウントに含まれているすべてのクラスターのリストを出力します。
 
-      ```
-      bx cs clusters
-      ```
-      {: pre}
+    ```
+    bx cs clusters
+    ```
+    {: pre}
 
-  5.  作成したクラスターを、このセッションのコンテキストとして設定します。 次の構成手順は、クラスターの操作時に毎回行ってください。
-      1.  環境変数を設定して Kubernetes 構成ファイルをダウンロードするためのコマンドを取得します。
+5.  作成したクラスターを、このセッションのコンテキストとして設定します。 次の構成手順は、クラスターの操作時に毎回行ってください。
+    1.  環境変数を設定して Kubernetes 構成ファイルをダウンロードするためのコマンドを取得します。
 
-          ```
-          bx cs cluster-config <cluster_name_or_id>
-          ```
-          {: pre}
+    ```
+    bx cs cluster-config <cluster_name_or_ID>
+    ```
+    {: pre}
 
-          構成ファイルをダウンロードした後に、そのローカルの Kubernetes 構成ファイルのパスを環境変数として設定するために使用できるコマンドが表示されます。
+    構成ファイルをダウンロードした後に、そのローカルの Kubernetes 構成ファイルのパスを環境変数として設定するために使用できるコマンドが表示されます。
 
-          例:
+    例:
 
-          ```
-          export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
-          ```
-          {: screen}
+    ```
+    export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
+    ```
+    {: screen}
 
-      2.  `KUBECONFIG` 環境変数を設定するためのコマンドとしてターミナルに表示されたものを、コピーして貼り付けます。
-      3.  `KUBECONFIG` 環境変数が適切に設定されたことを確認します。
+    2.  `KUBECONFIG` 環境変数を設定するためのコマンドとしてターミナルに表示されたものを、コピーして貼り付けます。
 
-          例:
+    3.  `KUBECONFIG` 環境変数が適切に設定されたことを確認します。
 
-          ```
-          echo $KUBECONFIG
-          ```
-          {: pre}
+        例:
 
-          出力:
-          ```
-          /Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
-          ```
-          {: screen}
+        ```
+        echo $KUBECONFIG
+        ```
+        {: pre}
 
-  6.  Kubernetes CLI サーバーのバージョンを調べて、ご使用のクラスターで `kubectl` コマンドが正常に実行することを確認します。
+        出力:
+        ```
+        /Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
 
-      ```
-      kubectl version  --short
-      ```
-      {: pre}
+        ```
+        {: screen}
 
-      出力例:
+6.  Kubernetes CLI サーバーのバージョンを調べて、ご使用のクラスターで `kubectl` コマンドが正常に実行することを確認します。
 
-      ```
-      Client Version: v1.8.8
-    Server Version: v1.8.8
-      ```
-      {: screen}
+    ```
+    kubectl version  --short
+    ```
+    {: pre}
+
+    出力例:
+
+    ```
+    Client Version: v1.8.11
+    Server Version: v1.8.11
+    ```
+    {: screen}
 
 これで、`kubectl` のコマンドを実行して、{{site.data.keyword.Bluemix_notm}} のクラスターを管理できるようになりました。 すべてのコマンドのリストについては、[Kubernetes の資料![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands) を参照してください。
 
@@ -234,7 +236,7 @@ Kubernetes 1.8.8 内で使用できるすべての `kubectl` コマンドは、{
 
 -   {{site.data.keyword.Bluemix_notm}} CLI バージョン 0.5.0 以降
 -   {{site.data.keyword.containershort_notm}} プラグイン
--   Kubernetes CLI バージョン 1.8.8 以降
+-   Kubernetes CLI バージョン 1.8.11 以降
 -   {{site.data.keyword.registryshort_notm}} プラグイン
 -   Docker バージョン 1.9. 以降
 
@@ -312,7 +314,7 @@ CLI を更新するには、以下のようにします。
 
 
 -   {{site.data.keyword.containershort_notm}} プラグイン
--   Kubernetes CLI バージョン 1.8.8 以降
+-   Kubernetes CLI
 -   {{site.data.keyword.registryshort_notm}} プラグイン
 -   Docker バージョン 1.9. 以降
 
@@ -341,10 +343,6 @@ CLI をアンインストールするには、以下のようにします。
     {: pre}
 
     container-service プラグインと container-registry プラグインは結果に表示されません。
-
-
-
-
 
 6.  Docker をアンインストールします。 Docker をアンインストールする手順は、ご使用のオペレーティング・システムによって異なります。
 
@@ -383,10 +381,10 @@ CLI をアンインストールするには、以下のようにします。
 </table>
 
 1.  IAM (ID およびアクセス管理) アクセス・トークンを作成します。 要求に含まれる本文情報は、使用する {{site.data.keyword.Bluemix_notm}} 認証方式によって異なります。 以下の値を置き換えます。
-  - _&lt;my_username&gt;_: {{site.data.keyword.Bluemix_notm}} ユーザー名。
-  - _&lt;my_password&gt;_: {{site.data.keyword.Bluemix_notm}} パスワード。
-  - _&lt;my_api_key&gt;_: {{site.data.keyword.Bluemix_notm}} API キー。
-  - _&lt;my_passcode&gt;_: {{site.data.keyword.Bluemix_notm}} ワンタイム・パスコード。 `bx login --sso` を実行し、CLI 出力の説明に従って、Web ブラウザーを使用してワンタイム・パスコードを取得します。
+  - _&lt;username&gt;_: {{site.data.keyword.Bluemix_notm}} ユーザー名。
+  - _&lt;password&gt;_: {{site.data.keyword.Bluemix_notm}} パスワード。
+  - _&lt;api_key&gt;_: {{site.data.keyword.Bluemix_notm}} API キー。
+  - _&lt;passcode&gt;_: {{site.data.keyword.Bluemix_notm}} ワンタイム・パスコード。 `bx login --sso` を実行し、CLI 出力の説明に従って、Web ブラウザーを使用してワンタイム・パスコードを取得します。
 
     ```
     POST https://iam.<region>.bluemix.net/oidc/token
@@ -397,7 +395,7 @@ CLI をアンインストールするには、以下のようにします。
     ```
     POST https://iam.ng.bluemix.net/oidc/token
     ```
-    {: pre}
+    {: codeblock}
 
     {{site.data.keyword.Bluemix_notm}} 地域を指定するには、[API エンドポイントで使用される地域の略語を確認してください](cs_regions.html#bluemix_regions)。
 
@@ -409,36 +407,36 @@ CLI をアンインストールするには、以下のようにします。
     <tbody>
     <tr>
     <td>ヘッダー</td>
-    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><b>注</b>: この Yng6Yng= は、ユーザー名 **bx** とパスワード **bx** の URL エンコードされた許可です。</p></li></ul>
+    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><strong>注</strong>: <code>Yng6Yng=</code> は、ユーザー名 <strong>bx</strong> とパスワード <strong>bx</strong> を URL にエンコードする許可と同じです。</p></li></ul>
     </td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} ユーザー名とパスワードの本文</td>
     <td><ul><li>grant_type: password</li>
     <li>response_type: cloud_iam uaa</li>
-    <li>username: <em>&lt;my_username&gt;</em></li>
-    <li>password: <em>&lt;my_password&gt;</em></li>
-    <li>uaa_client_id: cf</li>
+    <li>username: <em>&lt;username&gt;</em></li>
+    <li>password: <em>&lt;password&gt;</em></li>
+    <li>uaa_client_ID: cf</li>
     <li>uaa_client_secret:</li></ul>
-    <p><b>注</b>: uaa_client_secret キーは値を指定せずに追加します。</p></td>
+    <strong>注</strong>: <code>uaa_client_secret</code> キーは値を指定せずに追加します。</td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} API キーの本文</td>
     <td><ul><li>grant_type: urn:ibm:params:oauth:grant-type:apikey</li>
-    <li>response_type: cloud_iam、uaa</li>
-    <li>apikey: <em>&lt;my_api_key&gt;</em></li>
-    <li>uaa_client_id: cf</li>
+    <li>response_type: cloud_iam uaa</li>
+    <li>apikey: <em>&lt;api_key&gt;</em></li>
+    <li>uaa_client_ID: cf</li>
     <li>uaa_client_secret:</li></ul>
-    <p><b>注</b>: uaa_client_secret キーは値を指定せずに追加します。</p></td>
+    <strong>注</strong>: <code>uaa_client_secret</code> キーは値を指定せずに追加します。</td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} ワンタイム・パスコードの本文</td>
     <td><ul><li>grant_type: urn:ibm:params:oauth:grant-type:passcode</li>
-    <li>response_type: cloud_iam、uaa</li>
-    <li>passcode: <em>&lt;my_passcode&gt;</em></li>
-    <li>uaa_client_id: cf</li>
+    <li>response_type: cloud_iam uaa</li>
+    <li>passcode: <em>&lt;passcode&gt;</em></li>
+    <li>uaa_client_ID: cf</li>
     <li>uaa_client_secret:</li></ul>
-    <p><b>注</b>: uaa_client_secret キーは値を指定せずに追加します。</p></td>
+    <strong>注</strong>: <code>uaa_client_secret</code> キーは値を指定せずに追加します。</td>
     </tr>
     </tbody>
     </table>
@@ -494,8 +492,8 @@ CLI をアンインストールするには、以下のようにします。
       "resources":
         {
           "metadata": {
-            "guid": "<my_account_id>",
-            "url": "/v1/accounts/<my_account_id>",
+            "guid": "<account_ID>",
+            "url": "/v1/accounts/<account_ID>",
             "created_at": "2016-01-07T18:55:09.726Z",
             "updated_at": "2017-04-28T23:46:03.739Z",
             "origin": "BSS"
@@ -505,7 +503,7 @@ CLI をアンインストールするには、以下のようにします。
 
     API 出力の **resources/metadata/guid** フィールドに、{{site.data.keyword.Bluemix_notm}} アカウントの ID があります。
 
-3.  {{site.data.keyword.Bluemix_notm}} 資格情報と、クラスターの作成に使用したアカウント ID の両方が含まれる新しい IAM トークンを生成します。 _&lt;my_account_id&gt;_ を、前のステップで取得した {{site.data.keyword.Bluemix_notm}} アカウントの ID に置き換えます。
+3.  {{site.data.keyword.Bluemix_notm}} 資格情報と、クラスターの作成に使用したアカウント ID の両方が含まれる新しい IAM トークンを生成します。 _&lt;account_id&gt;_ を、前のステップで取得した {{site.data.keyword.Bluemix_notm}} アカウントの ID に置き換えます。
 
     **注:** {{site.data.keyword.Bluemix_notm}} API キーを使用している場合、API キーの作成対象となった {{site.data.keyword.Bluemix_notm}} アカウント ID を使用する必要があります。 他のアカウントのクラスターにアクセスするには、そのアカウントにログインし、このアカウントに基づく {{site.data.keyword.Bluemix_notm}} API キーを作成します。
 
@@ -518,7 +516,7 @@ CLI をアンインストールするには、以下のようにします。
     ```
     POST https://iam.ng.bluemix.net/oidc/token
     ```
-    {: pre}
+    {: codeblock}
 
     {{site.data.keyword.Bluemix_notm}} 地域を指定するには、[API エンドポイントで使用される地域の略語を確認してください](cs_regions.html#bluemix_regions)。
 
@@ -530,39 +528,38 @@ CLI をアンインストールするには、以下のようにします。
     <tbody>
     <tr>
     <td>ヘッダー</td>
-    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><b>注</b>: この Yng6Yng= は、ユーザー名 **bx** とパスワード **bx** の URL エンコードされた許可です。</p></li></ul>
+    <td><ul><li>Content-Type:application/x-www-form-urlencoded</li> <li>Authorization: Basic Yng6Yng=<p><strong>注</strong>: <code>Yng6Yng=</code> は、ユーザー名 <strong>bx</strong> とパスワード <strong>bx</strong> を URL にエンコードする許可と同じです。</p></li></ul>
     </td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} ユーザー名とパスワードの本文</td>
     <td><ul><li>grant_type: password</li>
     <li>response_type: cloud_iam uaa</li>
-    <li>username: <em>&lt;my_username&gt;</em></li>
-    <li>password: <em>&lt;my_password&gt;</em></li>
-    <li>uaa_client_id: cf</li>
+    <li>username: <em>&lt;username&gt;</em></li>
+    <li>password: <em>&lt;password&gt;</em></li>
+    <li>uaa_client_ID: cf</li>
     <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;my_account_id&gt;</em></li></ul>
-    <p><b>注</b>: uaa_client_secret キーは値を指定せずに追加します。</p></td>
+    <li>bss_account: <em>&lt;account_ID&gt;</em></li></ul>
+    <strong>注</strong>: <code>uaa_client_secret</code> キーは値を指定せずに追加します。</td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} API キーの本文</td>
     <td><ul><li>grant_type: urn:ibm:params:oauth:grant-type:apikey</li>
-    <li>response_type: cloud_iam、uaa</li>
-    <li>apikey: <em>&lt;my_api_key&gt;</em></li>
-    <li>uaa_client_id: cf</li>
+    <li>response_type: cloud_iam uaa</li>
+    <li>apikey: <em>&lt;api_key&gt;</em></li>
+    <li>uaa_client_ID: cf</li>
     <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;my_account_id&gt;</em></li></ul>
-    <p><b>注</b>: uaa_client_secret キーは値を指定せずに追加します。</p></td>
+    <li>bss_account: <em>&lt;account_ID&gt;</em></li></ul>
+      <strong>注</strong>: <code>uaa_client_secret</code> キーは値を指定せずに追加します。</td>
     </tr>
     <tr>
     <td>{{site.data.keyword.Bluemix_notm}} ワンタイム・パスコードの本文</td>
     <td><ul><li>grant_type: urn:ibm:params:oauth:grant-type:passcode</li>
-    <li>response_type: cloud_iam、uaa</li>
-    <li>passcode: <em>&lt;my_passcode&gt;</em></li>
-    <li>uaa_client_id: cf</li>
+    <li>response_type: cloud_iam uaa</li>
+    <li>passcode: <em>&lt;passcode&gt;</em></li>
+    <li>uaa_client_ID: cf</li>
     <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;my_account_id&gt;</em></li></ul>
-    <p><b>注<b>: uaa_client_secret キーは値を指定せずに追加します。</p></td>
+    <li>bss_account: <em>&lt;account_ID&gt;</em></li></ul><strong>注</strong>: <code>uaa_client_secret</code> キーは値を指定せずに追加します。</td>
     </tr>
     </tbody>
     </table>
@@ -587,42 +584,48 @@ CLI をアンインストールするには、以下のようにします。
 
 4.  アカウント内の Kubernetes クラスターをすべてリストします。 前述のステップで取得した情報を使用して、ヘッダー情報をビルドします。
 
-        ```
-        GET https://containers.bluemix.net/v1/clusters
-        ```
-        {: codeblock}
+     ```
+     GET https://containers.bluemix.net/v1/clusters
+     ```
+     {: codeblock}
 
-        <table summary="API を使用するための入力パラメーター">
-        <thead>
-        <th>入力パラメーター</th>
-        <th>値</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td>ヘッダー</td>
-        <td><ul><li>Authorization: bearer <em>&lt;iam_token&gt;</em></li>
-        <li>X-Auth-Refresh-Token: <em>&lt;refresh_token&gt;</em></li></ul></td>
-        </tr>
-        </tbody>
-        </table>
+     <table summary="API を使用するための入力パラメーター">
+     <thead>
+     <th>入力パラメーター</th>
+     <th>値</th>
+     </thead>
+     <tbody>
+     <tr>
+     <td>ヘッダー</td>
+     <td><ul><li>Authorization: bearer <em>&lt;iam_token&gt;</em></li>
+     <li>X-Auth-Refresh-Token: <em>&lt;refresh_token&gt;</em></li></ul></td>
+     </tr>
+     </tbody>
+     </table>
 
 5.  [{{site.data.keyword.containershort_notm}} API の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.bluemix.net/swagger-api) を参照して、サポートされている API のリストを確認します。
 
 <br />
 
 
-## IAM アクセス・トークンのリフレッシュ
+## IAM アクセス・トークンのリフレッシュと新しいリフレッシュ・トークンの取得
 {: #cs_api_refresh}
 
-API から発行されるすべての IAM (ID およびアクセス管理) アクセス・トークンの有効期間は 1 時間です。 {{site.data.keyword.containershort_notm}} API へのアクセスを確保するには、アクセス・トークンを定期的にリフレッシュする必要があります。
+API から発行されるすべての IAM (ID およびアクセス管理) アクセス・トークンの有効期間は 1 時間です。 {{site.data.keyword.Bluemix_notm}} API へのアクセスを確保するには、アクセス・トークンを定期的にリフレッシュする必要があります。 同じ手順を使用して、新しいリフレッシュ・トークンを取得できます。
 {:shortdesc}
 
-始める前に、新しいアクセス・トークンを要求するために使用できる IAM リフレッシュ・トークンを用意してください。 リフレッシュ・トークンがない場合は、[{{site.data.keyword.containershort_notm}} API によるクラスターの作成と管理のプロセスの自動化](#cs_api)を参照してアクセス・トークンを取得してください。
+まず始めに、新しいアクセス・トークンを要求するために使用できる IAM リフレッシュ・トークンまたは {{site.data.keyword.Bluemix_notm}} API キーを用意してください。
+- **リフレッシュ・トークン:** [{{site.data.keyword.Bluemix_notm}} API を使用したクラスターの作成と管理のプロセスの自動化](#cs_api) の説明に従います。
+- **API キー:** 次のように [{{site.data.keyword.Bluemix_notm}} ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://console.bluemix.net/) API キーを取得します。
+   1. メニュー・バーから、**「管理」** > **「セキュリティー」** > **「プラットフォーム API キー」**の順にクリックします。
+   2. **「作成」**をクリックします。
+   3. API キーの**「名前」**と**「説明」**を入力し、**「作成」**をクリックします。
+   4. **「表示」**をクリックして、生成された API キーを確認します。
+   5. API キーをコピーして、新しい IAM アクセス・トークンを取得できるようにします。
 
-IAM トークンをリフレッシュするには、以下の手順を実行します。
+IAM トークンを作成する場合、または新しいリフレッシュ・トークンを取得する場合は、以下の手順を使用します。
 
-1.  新しい IAM アクセス・トークンを生成します。 _&lt;iam_refresh_token&gt;_ を、{{site.data.keyword.Bluemix_notm}} での認証時に受け取った IAM リフレッシュ・トークンに置き換えます。
-
+1.  リフレッシュ・トークンまたは {{site.data.keyword.Bluemix_notm}} API キーを使用して、新しい IAM アクセス・トークンを生成します。
     ```
     POST https://iam.bluemix.net/identity/token
     ```
@@ -637,16 +640,24 @@ IAM トークンをリフレッシュするには、以下の手順を実行し�
     <tr>
     <td>ヘッダー</td>
     <td><ul><li>Content-Type: application/x-www-form-urlencoded</li>
-    <li>Authorization: Basic Yng6Yng=<p><b>注</b>: この Yng6Yng= は、ユーザー名 **bx** とパスワード **bx** の URL エンコードされた許可です。</p></li></ul></td>
+      <li>Authorization: Basic Yng6Yng=</br></br><strong>注:</strong> <code>Yng6Yng=</code> は、ユーザー名 <strong>bx</strong> とパスワード <strong>bx</strong> を URL にエンコードする許可と同じです。</li></ul></td>
     </tr>
     <tr>
-    <td>本文</td>
+    <td>リフレッシュ・トークン使用時の本体</td>
     <td><ul><li>grant_type: refresh_token</li>
     <li>response_type: cloud_iam uaa</li>
     <li>refresh_token: <em>&lt;iam_refresh_token&gt;</em></li>
-    <li>uaa_client_id: cf</li>
+    <li>uaa_client_ID: cf</li>
     <li>uaa_client_secret:</li>
-    <li>bss_account: <em>&lt;account_id&gt;</em></li></ul><p><b>注</b>: uaa_client_secret キーは値を指定せずに追加します。</p></td>
+    <li>bss_account: <em>&lt;account_ID&gt;</em></li></ul><strong>注</strong>: <code>uaa_client_secret</code> キーは値を指定せずに追加します。</td>
+    </tr>
+    <tr>
+      <td>{{site.data.keyword.Bluemix_notm}} API キー使用時の本体</td>
+      <td><ul><li>grant_type: <code>urn:ibm:params:oauth:grant-type:apikey</code></li>
+    <li>response_type: cloud_iam uaa</li>
+    <li>apikey: <em>&lt;api_key&gt;</em></li>
+    <li>uaa_client_ID: cf</li>
+        <li>uaa_client_secret:</li></ul><strong>注:</strong> <code>uaa_client_secret</code> キーは値を指定せずに追加します。</td>
     </tr>
     </tbody>
     </table>
@@ -670,3 +681,4 @@ IAM トークンをリフレッシュするには、以下の手順を実行し�
     API 出力の **access_token** フィールドに新しい IAM トークンがあり、**refresh_token** フィールドに IAM リフレッシュ・トークンがあります。
 
 2.  前の手順のトークンを使用して、[{{site.data.keyword.containershort_notm}} API の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://us-south.containers.bluemix.net/swagger-api) の作業を進めます。
+

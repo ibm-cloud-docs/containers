@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-01"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -23,9 +23,10 @@ lastupdated: "2017-12-01"
 
 - [Calculatrice de prix pour les clusters ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://console.bluemix.net/?direct=classic%2F&env_id=ibm%3Ayp%3Aus-south#/pricing/cloudOEPaneId=pricing&paneId=pricingSheet&orgGuid=83f3f6dd-e430-4955-8225-0963753d8b0f&spaceGuid=f616188f-e265-4e04-84be-1b3d2ec63db3)
 - [API REST pour les clusters ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://containers.bluemix.net/swagger)
-- [API REST pour la journalisation des clusters ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://us-south.containers.bluemix.net/swagger-logging/)
+- [API REST pour la consignation des clusters ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://us-south.containers.bluemix.net/swagger-logging/)
 - [API REST pour équilibrage de charge d'application Ingress du cluster ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://us-south.containers.bluemix.net/swagger-alb-api/)
 - [Méthodologies d'orchestration de conteneur dans developerWorks  ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/code/journey/category/container-orchestration/)
+- [Cours developerWorks ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/courses/all/?s=IBM+Cloud+Container+Service)
 - [Documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/)
 - [Documentation Docker ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.docker.com/engine/)
 - <a href="https://docs.helm.sh/helm/" target="_blank">Documentation Helm <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> pour gestion de package Kubernetes
@@ -56,6 +57,9 @@ lastupdated: "2017-12-01"
 
 - [API REST pour les conteneurs uniques et évolutifs ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](http://ccsapi-doc.mybluemix.net/)
 
+<br />
+
+
 **Général**
 
 - [Twitter ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://twitter.com/hashtag/ibmcontainers)
@@ -63,4 +67,5 @@ lastupdated: "2017-12-01"
 - [Microservices.TV ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/tv/microservices/)
 
 <br />
+
 

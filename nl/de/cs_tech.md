@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -38,6 +38,8 @@ Erfahren Sie mehr über einige grundlegende Docker-Konzepte:
 <dd>Jeder Container wird auf der Grundlage eines Images erstellt. Ein Container ist eine gepackte App mit den zugehörigen Abhängigkeiten, sodass die App in eine andere Umgebungen verlagert und dort ohne Änderungen ausgeführt werden kann. Im Unterschied zu virtuellen Maschinen virtualisieren Container keine Einheiten, die zugehörigen Betriebssysteme und die zugrunde liegende Hardware. Nur App-Code, Laufzeit, Systemtools, Bibliotheken und Einstellungen werden in dem Container gepackt. Container werden als isolierte Prozesse auf Ubuntu-Rechenhosts ausgeführt und nutzen dasselbe Hostbetriebssystem und dieselben Hardwareressourcen. Dadurch ist ein Container schlanker, leichter portierbar und effizienter als eine virtuelle Maschine.</dd>
 </dl>
 
+
+
 ### Die wichtigsten Vorteile der Verwendung von Containern
 {: #container_benefits}
 
@@ -47,20 +49,27 @@ Erfahren Sie mehr über einige grundlegende Docker-Konzepte:
 <dt>Container sind klein</dt>
 <dd>Sie können in dem Speicherbereich, den eine einzelne virtuelle Maschine benötigt, viele Container unterbringen.</dd>
 <dt>Container sind portierbar</dt>
-<dd><ul>
+<dd>
+<ul>
   <li>Verwenden Sie Teile von Images wieder, um Container zu erstellen. </li>
   <li>Verschieben Sie App-Code schnell von Staging- in Produktionsumgebungen.</li>
-  <li>Automatisieren Sie Ihre Prozesse mit Continuous Delivery-Tools.</li> </ul></dd>
-</dl>
+  <li>Automatisieren Sie Ihre Prozesse mit Continuous Delivery-Tools.</li>
+  </ul>
+  </dd>
 
+
+  
+<p>Sind Sie bereit, mehr über Docker zu erfahren? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Erfahren Sie, wie Docker und {{site.data.keyword.containershort_notm}} zusammenarbeiten, indem Sie diesen Kurs absolvieren.</a></p>
+
+</dl>
 
 <br />
 
 
-## Grundlegende Informationen zu Kubernetes
+## Kubernetes-Cluster
 {: #kubernetes_basics}
 
-Das Open-Source-Projekt Kubernetes vereint die Ausführung einer containerisierten Infrastruktur mit Produktionsarbeitslasten, Open-Source-Beiträgen und Managementtools für Docker-Container. Die Kubernetes-Infrastruktur bietet eine isolierte und sichere App-Plattform für die Verwaltung von Containern, die portierbar, erweiterbar und bei Auftreten von Failover-Situationen selbstheilend ist.
+<img src="images/certified-kubernetes-resized.png" style="padding-right: 10px;" align="left" alt="Diese Markierung zeigt die Kubernetes-Zertifizierung für IBM Cloud Container Service an."/>Das Open-Source-Projekt Kubernetes vereint die Ausführung einer containerisierten Infrastruktur mit Produktionsarbeitslasten, Open-Source-Beiträgen und Managementtools für Docker-Container. Die Kubernetes-Infrastruktur bietet eine isolierte und sichere App-Plattform für die Verwaltung von Containern, die portierbar, erweiterbar und bei Auftreten von Failover-Situationen selbstheilend ist.
 {:shortdesc}
 
 Im folgenden Diagramm sind einige grundlegende Kubernetes-Konzepte veranschaulicht.
@@ -87,9 +96,14 @@ Definieren Sie Aktualisierungsstrategien für Ihre App. Dabei können Sie unter 
 <dd>Jede containerisierte App, die in einem Cluster bereitgestellt wird, wird von einer Kubernetes-Ressource namens Pod bereitgestellt, ausgeführt und verwaltet. Pods stellen kleine bereitstellbare Einheiten in einem Kubernetes-Cluster dar und werden verwendet, um Container zu gruppieren, die als einzelne Einheit verarbeitet werden müssen. In den meisten Fällen wird ein Container in einem eigenen Pod bereitgestellt. Es kann jedoch erforderlich sein, dass für eine App ein Container und weitere Hilfscontainer in einem Pod bereitgestellt werden, damit diese Container mit derselben privaten IP-Adresse referenziert werden können.</dd>
 
 <dt>App</dt>
-<dd>Eine App kann sich auf eine gesamte App oder eine Komponente einer App beziehen. Sie können Komponenten einer App in verschiedenen Pods oder Workerknoten bereitstellen.
-</br></br>
-Weitere Informationen zur Kubernetes-Terminologie finden Sie im <a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Lernprogramm</a>.</dd>
+<dd>Eine App kann sich auf eine gesamte App oder eine Komponente einer App beziehen. Sie können Komponenten einer App in verschiedenen Pods oder Workerknoten bereitstellen.</dd>
+
+
+  
+<p>Sind Sie bereit, mehr über Kubernetes zu erfahren? </p>
+<ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Erweitern Sie Ihr terminologisches Wissen mithilfe des Lernprogramms "Cluster erstellen"</a>. </li>
+<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Erfahren Sie, wie Kubernetes und {{site.data.keyword.containershort_notm}} zusammenarbeiten, indem Sie diesen Kurs absolvieren.</a></li></ul>
+
 
 </dl>
 
@@ -99,19 +113,24 @@ Weitere Informationen zur Kubernetes-Terminologie finden Sie im <a href="cs_tuto
 ## Servicearchitektur
 {: #architecture}
 
-In einem Kubernetes-Cluster, der auf {{site.data.keyword.containershort_notm}} ausgeführt wird, sind Ihre containerisierten Apps auf Rechenhosts gehostet, die als Workerknoten bezeichnet werden. Ganz genau genommen, werden sie auf Pods ausgeführt, die wiederum auf Workerknoten gehostet werden. Workerknoten werden vom Kubernetes-Master verwaltet. Der Kubernetes Master und die Arbeitsknoten kommunizieren über sichere TLS-Zertifikate und eine openVPN-Verbindung miteinander, um Ihre Clusterkonfigurationen zu koordinieren.{: shortdesc}
+In einem Kubernetes-Cluster, der auf {{site.data.keyword.containershort_notm}} ausgeführt wird, sind Ihre containerisierten Apps auf Rechenhosts gehostet, die als Workerknoten bezeichnet werden. Ganz genau genommen, werden die Apps auf Pods ausgeführt, die wiederum auf Workerknoten gehostet werden. Workerknoten werden vom Kubernetes-Master verwaltet. Der Kubernetes Master und die Arbeitsknoten kommunizieren über sichere TLS-Zertifikate und eine openVPN-Verbindung miteinander, um Ihre Clusterkonfigurationen zu koordinieren.
+{: shortdesc}
 
-Worin besteht der Unterschied zwischen dem Kubernetes-Master und einem Workerknoten? Gut, dass Sie das fragen. 
+Worin besteht der Unterschied zwischen dem Kubernetes-Master und einem Workerknoten? Gut, dass Sie das fragen.
 
 <dl>
   <dt>Kubernetes-Master</dt>
-    <dd>Der Kubernetes-Master hat die Aufgabe, alle Rechen-, Netz- und Speicherressourcen im Cluster zu verwalten. Der Kubernetes-Master stellt sicher, dass Ihre containerisierten Apps und Services auf den Workerknoten im Cluster gleichmäßig bereitgestellt werden. Abhängig davon, wie Sie Ihre App und Services konfigurieren, bestimmt der Master den Workerknoten, der über ausreichend Ressourcen verfügt, um die Anforderungen einer App zu erfüllen. </dd>
+    <dd>Der Kubernetes-Master hat die Aufgabe, alle Rechen-, Netz- und Speicherressourcen im Cluster zu verwalten. Der Kubernetes-Master stellt sicher, dass Ihre containerisierten Apps und Services auf den Workerknoten im Cluster gleichmäßig bereitgestellt werden. Abhängig davon, wie Sie Ihre App und Services konfigurieren, bestimmt der Master den Workerknoten, der über ausreichend Ressourcen verfügt, um die Anforderungen einer App zu erfüllen.</dd>
   <dt>Workerknoten</dt>
-    <dd>Jeder Workerknoten ist eine physische Maschine (Bare-Metal) oder eine virtuelle Maschine, die auf physischer Hardware ausgeführt wird, und die in einer Cloudumgebung verwaltet wird. Wenn Sie einen Workerknoten bereitstellen, legen Sie die Ressourcen fest, die den auf diesem Workerknoten gehosteten Containern zur Verfügung stehen. Ohne Vorbereitungen sind Ihre Workerknoten mit einer von {{site.data.keyword.IBM_notm}} verwalteten Docker Engine, getrennten Rechenressourcen, Netzbetrieb und einem Datenträgerservice eingerichtet. Die integrierten Sicherheitsfeatures stellen die Isolation, die Funktionalität für die Verwaltung von Ressourcen und die Einhaltung der Sicherheitsbestimmungen für die Workerknoten sicher. </dd>
+    <dd>Jeder Workerknoten ist eine physische Maschine (Bare-Metal) oder eine virtuelle Maschine, die auf physischer Hardware in der Cloudumgebung ausgeführt wird. Wenn Sie einen Workerknoten bereitstellen, legen Sie die Ressourcen fest, die den auf diesem Workerknoten gehosteten Containern zur Verfügung stehen. Ohne Vorbereitungen sind Ihre Workerknoten mit einer von {{site.data.keyword.IBM_notm}} verwalteten Docker Engine, getrennten Rechenressourcen, Netzbetrieb und einem Datenträgerservice eingerichtet. Die integrierten Sicherheitsfeatures stellen die Isolation, die Funktionalität für die Verwaltung von Ressourcen und die Einhaltung der Sicherheitsbestimmungen für die Workerknoten sicher.</dd>
 </dl>
 
 ![{{site.data.keyword.containerlong_notm}} Kubernetes-Architektur](images/cs_org_ov.png)
 Abbildung. {{site.data.keyword.containershort_notm}}-Architektur
 
+Möchten Sie sehen, wie {{site.data.keyword.containerlong_notm}} mit anderen Produkten und Services verwendet werden kann? Werfen Sie einen Blick auf einige [Integrationen](cs_integrations.html#integrations). 
+
+
 <br />
+
 

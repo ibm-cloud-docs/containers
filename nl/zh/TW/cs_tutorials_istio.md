@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-27"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -72,7 +72,7 @@ lastupdated: "2018-02-27"
 4. 切換至 Istio 檔案位置的目錄。
 
    ```
-   cd <path_to_istio-0.4.0>
+   cd filepath/istio-0.4.0
    ```
    {: pre}
 
@@ -94,9 +94,9 @@ lastupdated: "2018-02-27"
 
    ```
    NAME            TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)                                                            AGE
-   istio-ingress   LoadBalancer   172.21.121.139   169.48.221.218   80:31176/TCP,443:30288/TCP                                         2m
-   istio-mixer     ClusterIP      172.21.31.30     <none>           9091/TCP,15004/TCP,9093/TCP,9094/TCP,9102/TCP,9125/UDP,42422/TCP   2m
-   istio-pilot     ClusterIP      172.21.97.191    <none>           15003/TCP,443/TCP                                                  2m
+   istio-ingress   LoadBalancer   172.21.xxx.xxx   169.xx.xxx.xxx   80:31176/TCP,443:30288/TCP                                         2m
+   istio-mixer     ClusterIP      172.21.xxx.xxx     <none>           9091/TCP,15004/TCP,9093/TCP,9094/TCP,9102/TCP,9125/UDP,42422/TCP   2m
+   istio-pilot     ClusterIP      172.21.xxx.xxx    <none>           15003/TCP,443/TCP                                                  2m
    ```
    {: screen}
 
@@ -145,11 +145,11 @@ lastupdated: "2018-02-27"
 
    ```
    NAME                       CLUSTER-IP   EXTERNAL-IP   PORT(S)              AGE
-   details                    10.0.0.31    <none>        9080/TCP             6m
-   kubernetes                 10.0.0.1     <none>        443/TCP              30m
-   productpage                10.0.0.120   <none>        9080/TCP             6m
-   ratings                    10.0.0.15    <none>        9080/TCP             6m
-   reviews                    10.0.0.170   <none>        9080/TCP             6m
+   details                    10.xxx.xx.xxx    <none>        9080/TCP             6m
+   kubernetes                 10.xxx.xx.xxx     <none>        443/TCP              30m
+   productpage                10.xxx.xx.xxx   <none>        9080/TCP             6m
+   ratings                    10.xxx.xx.xxx    <none>        9080/TCP             6m
+   reviews                    10.xxx.xx.xxx   <none>        9080/TCP             6m
    ```
    {: screen}
 
@@ -182,14 +182,14 @@ lastupdated: "2018-02-27"
 
        ```
        NAME      HOSTS     ADDRESS          PORTS     AGE
-       gateway   *         169.48.221.218   80        3m
+       gateway   *         169.xx.xxx.xxx   80        3m
        ```
        {: screen}
 
        針對此範例所產生的 Ingress 位址是 `169.48.221.218:80`。使用下列指令，將位址匯出為閘道 URL。您將在下一步中使用閘道 URL 來存取 BookInfo 產品頁面。
 
        ```
-       export GATEWAY_URL=169.48.221.218:80
+       export GATEWAY_URL=169.xx.xxx.xxx:80
        ```
        {: pre}
 
@@ -248,3 +248,4 @@ lastupdated: "2018-02-27"
 * [Intelligent Routing ![外部鏈結圖示 ](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/guides/intelligent-routing.html)：此範例顯示如何使用 Istio 的資料流量管理功能，將資料流量遞送至特定版本之 BookInfo 的檢閱及評等微服務。
 
 * [In-Depth Telemetry ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/guides/telemetry.html)：此範例顯示如何使用 Istio Mixer 及 Envoy Proxy 來取得 BookInfo 微服務的統一度量值、日誌及追蹤。
+

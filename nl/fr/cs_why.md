@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -29,10 +29,10 @@ Les clusters sont déployés sur des hôtes de calcul qui fournissent des capaci
 
 |Avantage|Description|
 |-------|-----------|
-|Clusters Kubernetes à service exclusif avec isolement de l'infrastructure de traitement, de réseau et de stockage|<ul><li>Créez votre propre infrastructure personnalisée afin de répondre aux besoins de votre organisation.</li><li>Allouez à un maître Kubernetes dédié et sécurisé, des noeuds worker, des réseaux virtuels et un espace de stockage en utilisant les ressources fournies par l'infrastructure IBM Cloud (SoftLayer).</li><li>Le maître Kubernetes entièrement géré est constamment surveillé et mis à jour par {{site.data.keyword.IBM_notm}} pour que votre cluster soit toujours disponible.</li><li>Option permettant de mettre à disposition des noeuds worker en tant que serveurs bare metal avec la fonction Informatique de confiance.</li><li>Stockez les données persistantes, partagez les données entre les pods Kubernetes et restaurez les données en cas de besoin avec le service de volumes intégré et sécurisé.</li><li>Tirez parti de la prise en charge complète de toutes les API Kubernetes natives.</li></ul>|
+|Clusters Kubernetes à service exclusif avec isolement de l'infrastructure de traitement, de réseau et de stockage|<ul><li>Créez votre propre infrastructure personnalisée afin de répondre aux besoins de votre organisation.</li><li>Allouez à un maître Kubernetes dédié et sécurisé, des noeuds worker, des réseaux virtuels et un espace de stockage en utilisant les ressources fournies par l'infrastructure IBM Cloud (SoftLayer).</li><li>Le maître Kubernetes entièrement géré est constamment surveillé et mis à jour par {{site.data.keyword.IBM_notm}} pour que votre cluster soit toujours disponible.</li><li>Option permettant de mettre à disposition des noeuds worker en tant que serveurs bare metal avec la fonction Calcul sécurisé.</li><li>Stockez les données persistantes, partagez les données entre les pods Kubernetes et restaurez les données en cas de besoin avec le service de volumes intégré et sécurisé.</li><li>Tirez parti de la prise en charge complète de toutes les API Kubernetes natives.</li></ul>|
 |Conformité en matière de sécurité d'image avec Vulnerability Advisor|<ul><li>Configurez votre propre registre d'images Docker privé et sécurisée où les images sont stockées et partagés par tous les utilisateurs dans l'organisation.</li><li>Tirez parti de l'analyse automatique des images dans votre registre {{site.data.keyword.Bluemix_notm}} privé.</li><li>Examinez les recommandations spécifiques au système d'exploitation utilisé dans l'image afin de corriger les vulnérabilités potentielles.</li></ul>|
-|Surveillance continue de l'état de santé du cluster|<ul><li>Utilisez le tableau de bord du cluster pour déterminer rapidement et gérer l'état de santé de votre cluster, des noeuds worker et des déploiements de conteneurs.</li><li>Accédez à des métriques de consommation détaillées en utilisant {{site.data.keyword.monitoringlong}} et élargissez rapidement votre cluster pour répondre aux charges de travail.</li><li>Examinez les informations de journalisation à l'aide d'{{site.data.keyword.loganalysislong}} pour voir les activités détaillées du cluster.</li></ul>|
-|Exposition sécurisée des applications au public|<ul><li>Possibilité de sélection d'une adresse IP publique, d'une route fournie par {{site.data.keyword.IBM_notm}} ou de votre propre domaine personnalisé pour accéder à des services dans votre cluster depuis Internet.</li></ul>|
+|Surveillance en continu de l'état de santé du cluster|<ul><li>Utilisez le tableau de bord du cluster pour déterminer rapidement et gérer l'état de santé de votre cluster, des noeuds worker et des déploiements de conteneurs.</li><li>Accédez à des métriques de consommation détaillées en utilisant {{site.data.keyword.monitoringlong}} et élargissez rapidement votre cluster pour répondre aux charges de travail.</li><li>Examinez les informations de consignation à l'aide d'{{site.data.keyword.loganalysislong}} pour voir les activités détaillées du cluster.</li></ul>|
+|Exposition sécurisée des applications au public|<ul><li>Sélectionnez une adresse IP publique, une route fournie par {{site.data.keyword.IBM_notm}} ou votre propre domaine personnalisé pour accéder à des services dans votre cluster depuis Internet.</li></ul>|
 |Intégration de services {{site.data.keyword.Bluemix_notm}}|<ul><li>Vous pouvez ajouter des fonctionnalités supplémentaires à votre application via l'intégration de services {{site.data.keyword.Bluemix_notm}}, tels que les API Watson, Blockchain, services de données ou Internet of Things.</li></ul>|
 
 
@@ -40,6 +40,50 @@ Les clusters sont déployés sur des hôtes de calcul qui fournissent des capaci
 <br />
 
 
+## Comparaison d'offres et de leurs combinaisons
+{: #differentiation}
+
+Vous pouvez exécuter {{site.data.keyword.containershort_notm}} dans {{site.data.keyword.Bluemix_notm}} Public ou Dedicated, dans {{site.data.keyword.Bluemix_notm}} Private ou dans une configuration hybride.
+{:shortdesc}
+
+Consultez les informations suivantes pour connaître les différences entre ces configurations d'{{site.data.keyword.containershort_notm}}.
+
+<table>
+<col width="22%">
+<col width="78%">
+ <thead>
+ <th>Configuration d'{{site.data.keyword.containershort_notm}}</th>
+ <th>Description</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td>{{site.data.keyword.Bluemix_notm}} Public
+ </td>
+ <td>Avec {{site.data.keyword.Bluemix_notm}} Public sur du [matériel partagé ou dédié ou sur des machines bare metal](cs_clusters.html#shared_dedicated_node), vous pouvez héberger vos applications dans des clusters sur le cloud à l'aide d'{{site.data.keyword.containershort_notm}}. {{site.data.keyword.containershort_notm}} sur {{site.data.keyword.Bluemix_notm}} Public fournit des outils performants en combinant les technologies de Docker et Kubernetes, une expérience utilisateur intuitive, ainsi qu'une sécurité et un isolement intégrés pour automatiser le déploiement, l'exploitation, la mise à l'échelle et la surveillance d'applications conteneurisées dans un cluster d'hôtes de calcul.<br><br>Pour plus d'informations, voir [Technologie d'{{site.data.keyword.containershort_notm}}](cs_tech.html#ibm-cloud-container-service-technology).
+ </td>
+ </tr>
+ <tr>
+ <td>{{site.data.keyword.Bluemix_notm}} Dedicated
+ </td>
+ <td>{{site.data.keyword.Bluemix_notm}} Dedicated offre les mêmes fonctions qu'{{site.data.keyword.containershort_notm}} sur le cloud que {{site.data.keyword.Bluemix_notm}} Public. Cependant, avec un compte {{site.data.keyword.Bluemix_notm}} Dedicated, les [ressources physiques disponibles sont dédiées exclusivement à votre cluster](cs_clusters.html#shared_dedicated_node) et ne sont pas partagées par d'autres clients {{site.data.keyword.IBM_notm}}. Vous pouvez opter pour la mise en place d'un environnement {{site.data.keyword.Bluemix_notm}} Dedicated si vous avez besoin d'isoler votre cluster et les autres services {{site.data.keyword.Bluemix_notm}} que vous utilisez. <br><br>Pour plus d'informations, voir [Initiation aux clusters dans {{site.data.keyword.Bluemix_notm}} Dedicated](cs_dedicated.html#dedicated).
+ </td>
+ </tr>
+ <tr>
+ <td>{{site.data.keyword.Bluemix_notm}} Private
+ </td>
+ <td>{{site.data.keyword.Bluemix_notm}} Private est une plateforme applicative pouvant être installée en local sur vos propres machines. Vous pouvez choisir d'utiliser {{site.data.keyword.containershort_notm}} dans {{site.data.keyword.Bluemix_notm}} Private lorsque vous devez développer et gérer des applications conteneurisées sur site dans votre propre environnement contrôlé et protégé derrière un pare-feu. <br><br>Pour plus d'informations, voir [les informations produit {{site.data.keyword.Bluemix_notm}} Private ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud-computing/products/ibm-cloud-private/) et la [documentation associée ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html).
+ </td>
+ </tr>
+ <tr>
+ <td>Configuration hybride
+ </td>
+ <td>Une configuration hybride est l'utiliation combinée de services qui s'exécutent dans l'environnement {{site.data.keyword.Bluemix_notm}} Public ou Dedicated et d'autres services exécutés sur site, par exemple une application dans l'environnement {{site.data.keyword.Bluemix_notm}} Private. Exemples de configuration hybride : <ul><li>Mise à disposition d'un cluster avec {{site.data.keyword.containershort_notm}} dans l'environnement {{site.data.keyword.Bluemix_notm}} Public, mais en connectant ce cluster à une base de données sur site.</li><li>Mise à disposition d'un cluster avec {{site.data.keyword.containershort_notm}} dans l'environnement {{site.data.keyword.Bluemix_notm}} Private et déploiement d'une application dans ce cluster. Cependant, cette application peut utiliser un service {{site.data.keyword.ibmwatson}}, tel que {{site.data.keyword.toneanalyzershort}}, dans l'environnement {{site.data.keyword.Bluemix_notm}} Public.</li></ul><br>Pour activer la communication entre les services qui s'exécutent dans {{site.data.keyword.Bluemix_notm}} Public ou Dedicated et les services qui s'exécutent sur site, vous devez [configurer une connexion VPN](cs_vpn.html).
+ </td>
+ </tr>
+ </tbody>
+</table>
+
+<br />
 
 
 ## Comparaison des clusters gratuits et standard
@@ -51,7 +95,7 @@ Vous pouvez créer un cluster gratuit ou n'importe quel nombre de clusters stand
 |Caractéristiques|Clusters gratuits|Clusters standard|
 |---------------|-------------|-----------------|
 |[Mise en réseau au sein d'un cluster](cs_secure.html#in_cluster_network)|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
-|[Accès à des applications réseau publiques par un service NodePort avec une adresse IP instable](cs_nodeport.html#planning)|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
+|[Accès à des applications réseau publiques par un service NodePort avec une adresse IP instable](cs_nodeport.html)|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
 |[Gestion de l'accès utilisateur](cs_users.html#managing)|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
 |[Accès au service {{site.data.keyword.Bluemix_notm}} depuis le cluster et les applications](cs_integrations.html#adding_cluster)|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
 |[Espace disque sur un noeud worker pour stockage non persistant](cs_storage.html#planning)|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
@@ -59,63 +103,19 @@ Vous pouvez créer un cluster gratuit ou n'importe quel nombre de clusters stand
 |[Accès à des applications réseau publiques ou privées par un service d'équilibreur de charge avec une adresse IP stable](cs_loadbalancer.html#planning)| |<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
 |[Accès à des applications réseau publiques par un service Ingress avec une adresse IP stable et une URL personnalisable](cs_ingress.html#planning)| |<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
 |[Adresses IP publiques portables](cs_subnets.html#manage)| |<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
-|[Journalisation et surveillance](cs_health.html#logging)| |<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
+|[Consignation et surveillance](cs_health.html#logging)| |<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
 |[Option permettant de mettre à disposition vos noeuds worker sur des serveurs physiques (bare metal)](cs_clusters.html#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
-|[Option permettant de mettre à disposition des noeuds worker bare metal avec Informatique de confiance](cs_clusters.html#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
+|[Option permettant de mettre à disposition des noeuds worker bare metal avec la fonction de calcul sécurisé](cs_clusters.html#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
 |[Disponible dans {{site.data.keyword.Bluemix_dedicated_notm}}](cs_dedicated.html#dedicated_environment)| |<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
 
 <br />
 
 
 
-## Responsabilités de gestion de cluster
+
 {: #responsibilities}
+**Remarque** : vous recherchez quelles sont vos responsabilités et les dispositions relatives aux conteneurs quand vous utilisez le service ?
 
-Passez en revue les responsabilités que vous partagez avec IBM pour gérer vos clusters.
-{:shortdesc}
-
-**IBM est chargé de :**
-
-- Déployer le maître, les noeuds worker et les composants de gestion au sein du cluster, tels que l'équilibreur de charge d'application Ingress, en phase de création du cluster
-- Gérer les mises à jour, la surveillance et la reprise du maître Kubernetes pour le cluster
-- Surveiller l'état de santé des noeuds worker et fournir l'automatisation pour leur mise à jour et leur reprise
-- Effectuer des tâches d'automatisation dans votre compte d'infrastructure, notamment ajouter des noeuds worker, retirer des noeuds worker et créer un sous-réseau par défaut
-- Gérer, mettre à jour et récupérer des composants opérationnels dans le cluster, tels que l'équilibreur de charge d'application Ingress et le plug-in de stockage
-- Mettre à disposition des volumes de stockage lorsqu'ils sont demandés par des réservations de volume persistant
-- Fournir des paramètres de sécurité sur tous les noeuds worker
-
-</br>
-**Vous êtes chargé de :**
-
-- [Déployer et gérer les ressources Kubernetes, telles que les pods, services et déploiements, au sein du cluster](cs_app.html#app_cli)
-- [Tirer parti des capacités du service et de Kubernetes pour assurer la haute disponibilité des applications](cs_app.html#highly_available_apps)
-- [Ajouter ou retirer de la capacité en utilisant l'interface CLI pour ajouter ou retirer des noeuds worker](cs_cli_reference.html#cs_worker_add)
-- [Création de réseaux locaux virtuels (VLAN) publics et privés dans l'infrastructure IBM Cloud (SoftLayer) pour isolement de votre cluster dans le réseau](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
-- [Assurer que tous les noeuds worker ont une connectivité réseau avec l'URL du maître Kubernetes](cs_firewall.html#firewall) <p>**Remarque** : si un noeud worker comporte à la fois des VLAN public et privé, la connectivité réseau est configurée. Si le noeud worker est configuré uniquement avec un VLAN privé, un dispositif Vyatta est requis pour fournir la connectivité réseau.</p>
-- [Mettre à jour le kube-apiserver maître et les noeuds worker lorsque des mises à jour principales ou secondaires de Kubernetes sont disponibles](cs_cluster_update.html#master)
-- [Récupération de noeuds worker problématiques en exécutant des commandes `kubectl`, comme `cordon` ou `drain`, et des commandes `bx cs`, comme `reboot`, `reload` ou `delete`](cs_cli_reference.html#cs_worker_reboot)
-- [Ajout ou suppression de sous-réseaux dans l'infrastructure IBM Cloud (SoftLayer) selon les besoins](cs_subnets.html#subnets)
-- [Sauvegarder et restaurer des données dans du stockage persistant dans l'infrastructure IBM Cloud (SoftLayer) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](../services/RegistryImages/ibm-backup-restore/index.html)
-- [Configuration de la surveillance de l'état de santé des noeuds worker avec le système de reprise automatique](cs_health.html#autorecovery)
-
-<br />
-
-
-## Usage abusif de conteneurs
 {: #terms}
+Voir [Responsabilités liées à l'utilisation d'{{site.data.keyword.containershort_notm}}](cs_responsibilities.html).
 
-Les clients ne doivent pas utiliser à mauvais escient {{site.data.keyword.containershort_notm}}.
-{:shortdesc}
-
-L'utilisation à mauvais escient inclut :
-
-*   Toute activité illégale
-*   Distribution ou exécution de logiciel malveillant
-*   Endommager {{site.data.keyword.containershort_notm}} ou porter atteinte à l'utilisation
-d'{{site.data.keyword.containershort_notm}} par autrui
-*   Endommager ou porter atteinte à l'utilisation d'un autre service ou système par autrui
-*   Accès non autorisé à un service ou système quelconque
-*   Modification non autorisée d'un service ou système quelconque
-*   Violation des droits d'autrui
-
-Voir [Dispositions des services cloud](/docs/navigation/notices.html#terms) pour les conditions générales d'utilisation.

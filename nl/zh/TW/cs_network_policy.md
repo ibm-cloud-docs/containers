@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-27"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -50,7 +50,6 @@ lastupdated: "2018-02-27"
 
 
  <table summary="表格中的第一列跨這兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器位置，第二欄則為要符合的 IP 位址。">
-  <caption>每一個叢集的預設原則</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 每一個叢集的預設原則</th>
   </thead>
@@ -115,14 +114,14 @@ lastupdated: "2018-02-27"
             -   Linux：
 
               ```
-              mv /<path_to_file>/calicoctl /usr/local/bin/calicoctl
+              mv filepath/calicoctl /usr/local/bin/calicoctl
               ```
               {: pre}
 
             -   OS X：
 
               ```
-              mv /<path_to_file>/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
+              mv filepath/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
               ```
               {: pre}
 
@@ -175,7 +174,7 @@ lastupdated: "2018-02-27"
         ```
         {: codeblock}
 
-        1.  擷取 `<ETCD_URL>`。如果這個指令失敗，且出現 `calico-config` 錯誤，請參閱這個[疑難排解主題](cs_troubleshoot.html#cs_calico_fails)。
+        1.  擷取 `<ETCD_URL>`。如果這個指令失敗，且出現 `calico-config` 錯誤，請參閱這個[疑難排解主題](cs_troubleshoot_network.html#cs_calico_fails)。
 
           -   Linux 及 OS X：
 
@@ -187,13 +186,13 @@ lastupdated: "2018-02-27"
           -   輸出範例：
 
               ```
-              https://169.1.1.1:30001
+              https://169.xx.xxx.xxx:30001
               ```
               {: screen}
 
           -   Windows：<ol>
             <li>從配置對映取得 calico 配置值。</br><pre class="codeblock"><code>kubectl get cm -n kube-system calico-config -o yaml</code></pre></br>
-            <li>在 `data` 區段中，找到 etcd_endpoints 值。範例：<code>https://169.1.1.1:30001</code>
+            <li>在 `data` 區段中，找到 etcd_endpoints 值。範例：<code>https://169.xx.xxx.xxx:30001</code>
             </ol>
 
         2.  擷取 `<CERTS_DIR>`，這是將 Kubernetes 憑證下載至其中的目錄。
@@ -222,7 +221,7 @@ lastupdated: "2018-02-27"
                 輸出範例：
 
               ```
-              C:/Users/<user>/.bluemix/plugins/container-service/<cluster_name>-admin/kube-config-prod-<location>-<cluster_name>.yml
+              C:/Users/<user>/.bluemix/plugins/container-service/mycluster-admin/kube-config-prod-dal10-mycluster.yml
               ```
               {: screen}
 
@@ -252,7 +251,7 @@ lastupdated: "2018-02-27"
             -   Windows：
 
               ```
-              calicoctl get nodes --config=<path_to_>/calicoctl.cfg
+              calicoctl get nodes --config=filepath/calicoctl.cfg
               ```
               {: pre}
 
@@ -304,14 +303,14 @@ lastupdated: "2018-02-27"
         -   Linux 及 OS X：
 
           ```
-          calicoctl apply -f <policy_file_name.yaml>
+          calicoctl apply -f policy.yaml
           ```
           {: pre}
 
         -   Windows：
 
           ```
-          calicoctl apply -f <path_to_>/<policy_file_name.yaml> --config=<path_to_>/calicoctl.cfg
+          calicoctl apply -f filepath/policy.yaml --config=filepath/calicoctl.cfg
           ```
           {: pre}
 
@@ -372,3 +371,4 @@ Calico `preDNAT` 網路原則會根據 [Calico 網路原則資源 ![外部鏈結
   calicoctl apply -f deny-kube-node-port-services.yaml
   ```
   {: pre}
+

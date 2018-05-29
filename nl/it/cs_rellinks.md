@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-01"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -26,6 +26,7 @@ lastupdated: "2017-12-01"
 - [REST API for cluster logging ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://us-south.containers.bluemix.net/swagger-logging/)
 - [REST API for cluster Ingress application load balancing ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://us-south.containers.bluemix.net/swagger-alb-api/)
 - [developerWorks container orchestration journeys ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/code/journey/category/container-orchestration/)
+- [developerWorks courses ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/courses/all/?s=IBM+Cloud+Container+Service)
 - [Kubernetes documentation ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/)
 - [Docker documentation ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.docker.com/engine/)
 - <a href="https://docs.helm.sh/helm/" target="_blank">Helm documentation <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per la gestione del pacchetto Kubernetes
@@ -56,6 +57,9 @@ lastupdated: "2017-12-01"
 
 - [REST API for single and scalable containers ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](http://ccsapi-doc.mybluemix.net/)
 
+<br />
+
+
 **Generale**
 
 - [Twitter ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://twitter.com/hashtag/ibmcontainers)
@@ -63,4 +67,5 @@ lastupdated: "2017-12-01"
 - [Microservices.TV ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/tv/microservices/)
 
 <br />
+
 

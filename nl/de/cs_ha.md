@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-12"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -29,9 +29,10 @@ Sie können eine hohe Verfügbarkeit auf verschiedenen Ebenen in Ihrer IT-Infras
 ## Übersicht über mögliche Fehlerquellen in {{site.data.keyword.containerlong_notm}}
 {: #fault_domains} 
 
-Die {{site.data.keyword.containerlong_notm}}-Architektur und -Infrastruktur wurde konzipiert, um eine hohe Zuverlässigkeit, eine geringe Latenzzeit bei der Verarbeitung und eine maximale Betriebszeit des Service zu gewährleisten. Fehler können jedoch trozdem auftreten. Abhängig von dem Service, den Sie in {{site.data.keyword.Bluemix_notm}} hosten, können Sie möglicherweise keine Fehler tolerieren, selbst wenn die Fehler nur einige Minuten dauern.{: shortdesc}
+Die {{site.data.keyword.containerlong_notm}}-Architektur und -Infrastruktur wurde konzipiert, um eine hohe Zuverlässigkeit, eine geringe Latenzzeit bei der Verarbeitung und eine maximale Betriebszeit des Service zu gewährleisten. Fehler können jedoch trozdem auftreten. Abhängig von dem Service, den Sie in {{site.data.keyword.Bluemix_notm}} hosten, können Sie möglicherweise keine Fehler tolerieren, selbst wenn die Fehler nur einige Minuten dauern.
+{: shortdesc}
 
-{{site.data.keyword.containershort_notm}} stellt mehrere Methoden bereit, um Ihrem Cluster mehr Verfügbarkeit hinzuzufügen, indem Redundanz und Anti-Affinität hinzugefügt werden. Sehen Sie sich die folgende Abbildung an, um mehr über mögliche Fehlerquellen zu lernen und wie Sie diese beseitigen können. 
+{{site.data.keyword.containershort_notm}} stellt mehrere Methoden bereit, um Ihrem Cluster mehr Verfügbarkeit hinzuzufügen, indem Redundanz und Anti-Affinität hinzugefügt werden. Sehen Sie sich die folgende Abbildung an, um mehr über mögliche Fehlerquellen zu lernen und wie Sie diese beseitigen können.
 
 <img src="images/cs_failure_ov.png" alt="Übersicht über Fehlerbereiche in einem Hochverfügbarkeitscluster innerhalb einer {{site.data.keyword.containershort_notm}}-Region." width="250" style="width:250px; border-style: none"/>
 
@@ -68,20 +69,21 @@ Die {{site.data.keyword.containerlong_notm}}-Architektur und -Infrastruktur wurd
   <tr>
     <td>4</td>
     <td>Standortfehler</td>
-    <td>Ein Standortfehler betrifft alle physischen Rechenhosts und den NFS-Speicher. Fehler umfassen Ausfälle bei Stromversorgung, Kühlung, Netzbetrieb oder Speicherausfälle sowie Naturkatastrophen wie Überschwemmungen, Erdbeben und Stürme. Um sich vor einem Standortfehler zu schützen, müssen Sie über Cluster an zwei unterschiedlichen Standorten verfügen, wobei eine externe Lastausgleichsfunktion den Lastausgleich zwischen den Standorten vornimmt. </td>
+    <td>Ein Standortfehler betrifft alle physischen Rechenhosts und den NFS-Speicher. Fehler umfassen Ausfälle bei Stromversorgung, Kühlung, Netzbetrieb oder Speicherausfälle sowie Naturkatastrophen wie Überschwemmungen, Erdbeben und Stürme. Um sich vor einem Standortfehler zu schützen, müssen Sie über Cluster an zwei unterschiedlichen Standorten verfügen, wobei eine externe Lastausgleichsfunktion den Lastausgleich zwischen den Standorten vornimmt.</td>
     <td>[Hoch verfügbare Cluster konfigurieren](cs_clusters.html#planning_clusters)</td>
   </tr>
   <tr>
     <td>5</td>
     <td>Regionsfehler</td>
-    <td>Jede Region wird mit einer hoch verfügbaren Lastausgleichsfunktion konfiguriert, auf die von einem regionsspezifischen API-Endpunkt aus zugegriffen werden kann. Die Lastausgleichsfunktion leitet eingehende und ausgehende Anforderungen an Cluster zu den regionalen Standorten weiter. Die Wahrscheinlichkeit eines vollständigen regionalen Ausfalls ist gering. Wenn Sie diesem Fehler jedoch vorbeugen möchten, können Sie mehrere Cluster in verschiedenen Regionen einrichten und sie mithilfe einer externen Lastausgleichsfunktion verbinden. Wenn eine ganze Region ausfällt, kann der Cluster in der anderen Region die Arbeitslast übernehmen. <br/><br/><strong>Hinweis:</strong> Ein Cluster in mehreren Regionen erfordert mehrere Cloudressourcen und kann abhängig von Ihrer App sehr komplex und kostenintensiv sein. Prüfen Sie, ob Sie eine Konfiguration über mehrere Regionen benötigen, oder ob Sie mit einer möglichen Serviceunterbrechung umgehen können. Wenn Sie einen Cluster in mehreren Regionen konfigurieren möchten, stellen Sie sicher, dass Ihre App und die Daten in einer anderen Region gehostet werden können, und dass Ihre App die Replikation von globalen Daten handhaben kann. </td>
+    <td>Jede Region wird mit einer hoch verfügbaren Lastausgleichsfunktion konfiguriert, auf die von einem regionsspezifischen API-Endpunkt aus zugegriffen werden kann. Die Lastausgleichsfunktion leitet eingehende und ausgehende Anforderungen an Cluster zu den regionalen Standorten weiter. Die Wahrscheinlichkeit eines vollständigen regionalen Ausfalls ist gering. Wenn Sie diesem Fehler jedoch vorbeugen möchten, können Sie mehrere Cluster in verschiedenen Regionen einrichten und sie mithilfe einer externen Lastausgleichsfunktion verbinden. Wenn eine ganze Region ausfällt, kann der Cluster in der anderen Region die Arbeitslast übernehmen. <br/><br/><strong>Hinweis:</strong> Ein Cluster in mehreren Regionen erfordert mehrere Cloudressourcen und kann abhängig von Ihrer App sehr komplex und kostenintensiv sein. Prüfen Sie, ob Sie eine Konfiguration über mehrere Regionen benötigen, oder ob Sie mit einer möglichen Serviceunterbrechung umgehen können. Wenn Sie einen Cluster in mehreren Regionen konfigurieren möchten, stellen Sie sicher, dass Ihre App und die Daten in einer anderen Region gehostet werden können, und dass Ihre App die Replikation von globalen Daten handhaben kann.</td>
     <td>[Hoch verfügbare Cluster konfigurieren](cs_clusters.html#planning_clusters)</td>
   </tr>
   <tr>
     <td>6a, 6b</td>
     <td>Speicherfehler</td>
-    <td>In einer statusabhängigen App spielen Daten eine wichtige Rolle, um Ihre App betriebsbereit zu halten. Sie möchten sicherstellen, dass Ihre Daten hoch verfügbar sind, so dass Sie eine Wiederherstellung nach einem potenziellen Fehler vornehmen können. In {{site.data.keyword.containershort_notm}} können Sie aus mehreren Optionen auswählen, um Ihre Daten als persistent zu definieren. Sie können zum Beispiel NFS-Speicher bereitstellen, indem Sie native, persistente Kubernetes-Datenträger verwenden oder Ihre Daten mithilfe eines {{site.data.keyword.Bluemix_notm}}-Datenbankservice speichern. </td>
+    <td>In einer statusabhängigen App spielen Daten eine wichtige Rolle, um Ihre App betriebsbereit zu halten. Sie möchten sicherstellen, dass Ihre Daten hoch verfügbar sind, so dass Sie eine Wiederherstellung nach einem potenziellen Fehler vornehmen können. In {{site.data.keyword.containershort_notm}} können Sie aus mehreren Optionen auswählen, um Ihre Daten als persistent zu definieren. Sie können zum Beispiel NFS-Speicher bereitstellen, indem Sie native, persistente Kubernetes-Datenträger verwenden oder Ihre Daten mithilfe eines {{site.data.keyword.Bluemix_notm}}-Datenbankservice speichern.</td>
     <td>[Hoch verfügbare Daten planen](cs_storage.html#planning)</td>
   </tr>
   </tbody>
   </table>
+

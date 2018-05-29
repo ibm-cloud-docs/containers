@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -45,7 +45,7 @@ Qu'est-ce qu'un cluster ? Un cluster est un ensemble de ressources, de noeuds wo
 
 Avant de commencer, vous devez disposer d'un [compte {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/) de type Paiement à la carte, Compte d'essai ou Abonnement pour créer un cluster gratuit.
 
-**Quel type de compte {{site.data.keyword.Bluemix_notm}} obtenir ?** Avec les comptes de type Paiement à la carte et Abonnement, vous pouvez mettre à disposition des ressources d'infrastructure IBM Cloud (SoftLayer) pour vos clusters Kubernetes et créer un cluster gratuit ou des clusters standard. Avec un compte d'essai, vous pouvez créer un cluster gratuit valable 21 jours mais pas de cluster standard. Au bout de 21 jours, le cluster gratuit est supprimé. Pour aller plus loin avec des clusters Kubernetes, créez un autre cluster gratuit jusqu'à expiration de votre compte d'essai ou mettez à niveau votre compte pour passer à un compte de type Paiement à la carte ou Abonnement.
+**Quel type de compte {{site.data.keyword.Bluemix_notm}} obtenir ?** Avec les comptes de type Paiement à la carte et Abonnement, vous pouvez mettre à disposition des ressources d'infrastructure IBM Cloud (SoftLayer) pour vos clusters Kubernetes et créer un cluster gratuit ou des clusters standard. Avec un compte d'essai, vous pouvez créer un cluster gratuit mais pas de cluster standard. Tous les clusters gratuits sont supprimés au bout de 21 jours. Pour aller plus loin avec des clusters Kubernetes, créez un autre cluster gratuit jusqu'à expiration de votre compte d'essai ou mettez à niveau votre compte pour passer à un compte de type Paiement à la carte ou Abonnement.
 {:tip}
 
 Pour créer un cluster gratuit :
@@ -54,21 +54,21 @@ Pour créer un cluster gratuit :
 
 2.  Lisez la section clusters, puis cliquez sur **Créer**. Entrez un nom dans **Nom du cluster**. Le type de cluster par défaut est gratuit. La prochaine fois, vous pourrez créer un cluster standard et définir des personnalisations supplémentaires (par exemple, le nombre de noeuds worker).
 
-3.  Cliquez sur **Créer un cluster**. Les détails du cluster s'affichent, mais l'allocation du noeud worker dans le cluster prend quelques minutes. Vous pouvez examiner le statut du noeud worker dans l'onglet **Noeuds worker**. Lorsque son statut indique `Ready`, votre noeud worker est prêt à être utilisé.
+3.  Cliquez sur **Créer un cluster**. Les détails du cluster s'affichent, mais la mise à disposition du noeud worker dans le cluster prend quelques minutes. Vous pouvez examiner le statut du noeud worker dans l'onglet **Noeuds worker**. Lorsque son statut indique `Ready`, votre noeud worker est prêt à être utilisé.
 
 Bien joué ! Vous avez créé votre premier cluster Kubernetes. Voici quelques détails sur votre cluster gratuit :
 
 *   **Type de machine** : Le cluster gratuit dispose d'un noeud worker virtuel avec 2 UC et 4 Go de mémoire mis à la disposition de vos applications. Lorsque vous créez un cluster standard, vous pouvez choisir entre des machines physiques (bare metal) ou virtuelles, ainsi que diverses tailles de machine.
 *   **Maître géré** : Le noeud worker est surveillé et géré de manière centralisée par un maître Kubernetes appartenant à {{site.data.keyword.IBM_notm}}, dédié et à haute disponibilité, qui contrôle et surveille l'ensemble des ressources Kubernetes dans le cluster. Vous pouvez vous concentrer sur votre noeud worker et sur les applications qui y sont déployées sans avoir aussi à gérer ce maître.
 *   **Ressources de l'infrastructure** : Les ressources nécessaires pour l'exécution du cluster, par exemple les réseaux locaux virtuels (VLAN) et les adresses IP, sont gérées dans un compte d'infrastructure IBM Cloud (SoftLayer) appartenant à {{site.data.keyword.IBM_notm}}. Lorsque vous créez un cluster standard, vous gérez ces ressources dans votre propre compte d'infrastructure IBM Cloud (SoftLayer). Vous pouvez en savoir plus sur ces ressources et les [droits nécessaires](cs_users.html#infra_access) lorsque vous créez un cluster standard.
-*   **Emplacement et autres options** : Les clusters gratuits sont déployés dans la région que vous sélectionnez, mais vous ne pouvez pas décider de leur emplacement (centre de données). Pour plus de contrôle sur l'emplacement, la mise en réseau et le stockage permanent, créez un cluster standard. [En savoir plus sur les avantages des clusters gratuits et standard](cs_why.html#cluster_types).
+*   **Emplacement et autres options** : Les clusters gratuits sont déployés dans la région que vous sélectionnez, mais vous ne pouvez pas décider de leur emplacement (centre de données). Pour plus de contrôle sur l'emplacement, la mise en réseau et le stockage persistant, créez un cluster standard. [En savoir plus sur les avantages des clusters gratuits et standard](cs_why.html#cluster_types).
 
 
 **Etape suivante ?**
-
-Une fois le cluster opérationnel, vous pouvez commencer à l'utiliser.
+Au cours des 21 jours de validité, expérimentez certaines opérations avec votre cluster gratuit.
 
 * [Installer les interfaces de ligne de commande pour commencer à utiliser votre cluster.](cs_cli_install.html#cs_cli_install)
 * [Déployer une application dans votre cluster.](cs_app.html#app_cli)
 * [Créer un cluster standard avec plusieurs noeuds pour une plus haute disponibilité.](cs_clusters.html#clusters_ui)
-* [Configurer votre propre registre privé dans {{site.data.keyword.Bluemix_notm}} afin de stocker et de partager des images Docker avec d'autres utilisateurs.](/docs/services/Registry/index.html)
+* [Configurer votre propre registre privé dans {{site.data.keyword.Bluemix_notm}} pour stocker et partager des images Docker avec d'autres utilisateurs.](/docs/services/Registry/index.html)
+

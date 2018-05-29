@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-14"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -97,14 +97,14 @@ Per concedere l'accesso per un cluster specifico:
 4. Richiama l'**URL master** del tuo cluster.
 
    ```
-   bx cs cluster-get <cluster_name_or_id>
+   bx cs cluster-get <cluster_name_or_ID>
    ```
    {: pre}
 
    Output di esempio:
    ```
    ...
-   Master URL:		https://169.46.7.238:31142
+   Master URL:		https://169.xx.xxx.xxx:31142
    ...
    ```
    {: screen}
@@ -120,7 +120,7 @@ Per concedere l'accesso per un cluster specifico:
 
    Comando di esempio:
    ```
-   curl --insecure https://169.46.7.238:31142/version
+   curl --insecure https://169.xx.xxx.xxx:31142/version
    ```
    {: pre}
 
@@ -176,7 +176,7 @@ Permetti al tuo cluster di accedere ai servizi e alle risorse dell'infrastruttur
   1.  Prendi nota dell'indirizzo IP pubblico di tutti i nodi di lavoro nel cluster.
 
       ```
-      bx cs workers <cluster_name_or_id>
+      bx cs workers <cluster_name_or_ID>
       ```
       {: pre}
 
@@ -203,7 +203,7 @@ Permetti al tuo cluster di accedere ai servizi e alle risorse dell'infrastruttur
       <tr>
          <td>Europa Centrale</td>
          <td>ams03<br>fra02<br>mil01<br>par01</td>
-         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+         <td><code>169.50.169.110, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
         </tr>
       <tr>
         <td>Regno Unito Sud</td>
@@ -265,8 +265,8 @@ Permetti al tuo cluster di accedere ai servizi e alle risorse dell'infrastruttur
 </p>
 
   4.  Facoltativo: consenti il traffico di rete in uscita dai nodi di lavoro ai servizi {{site.data.keyword.monitoringlong_notm}} e {{site.data.keyword.loganalysislong_notm}}:
-      - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
-      - Sostituisci <em>&lt;monitoring_publicIP&gt;</em> con tutti gli indirizzi delle regioni di monitoraggio per cui desideri consentire il traffico:
+      - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
+      - Sostituisci <em>&lt;monitoring_public_IP&gt;</em> con tutti gli indirizzi delle regioni di monitoraggio per cui desideri consentire il traffico:
         <p><table summary="La prima riga nella tabella si estende su entrambe le colonne. Le rimanenti righe devono essere lette da sinistra a destra, con l'ubicazione del server nella prima colonna e gli indirizzi IP corrispondenti nella seconda colonna.">
         <thead>
         <th>Regione del contenitore</th>
@@ -293,8 +293,8 @@ Permetti al tuo cluster di accedere ai servizi e alle risorse dell'infrastruttur
         </tbody>
       </table>
 </p>
-      - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
-      - Sostituisci <em>&lt;logging_publicIP&gt;</em> con tutti gli indirizzi delle regioni di registrazione per cui desideri consentire il traffico:
+      - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
+      - Sostituisci <em>&lt;logging_public_IP&gt;</em> con tutti gli indirizzi delle regioni di registrazione per cui desideri consentire il traffico:
         <p><table summary="La prima riga nella tabella si estende su entrambe le colonne. Le rimanenti righe devono essere lette da sinistra a destra, con l'ubicazione del server nella prima colonna e gli indirizzi IP corrispondenti nella seconda colonna.">
         <thead>
         <th>Regione del contenitore</th>
@@ -353,3 +353,4 @@ Puoi ora consentire l'accesso in entrata ai servizi NodePort, programma di bilan
   <dt>Ingress</dt>
   <dd>Apri la porta 80 per HTTP o la 443 per HTTPS per l'indirizzo IP per il programma di bilanciamento del carico dell'applicazione Ingress.</dd>
 </dl>
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -75,7 +75,7 @@ Nella sezione delle informazioni sui dati della mappa di configurazione, puoi de
 
 Le chiavi sono definite. E adesso?
 
-Dopo aver definito le tue regole, esegui il comando `worker-upgrade`. Se viene restituita una risposta positiva, i nodi di lavoro sono in coda per essere aggiornati. Tuttavia, i nodi non si sottopongono al processo di upgrade finché non vengono soddisfatte tutte le regole. Mentre sono in coda, le regole vengono controllate a intervalli per vedere se è possibile aggiornare i nodi.
+Dopo aver definito le tue regole, esegui il comando `bx cs worker-update`. Se viene restituita una risposta positiva, i nodi di lavoro sono in coda per essere aggiornati. Tuttavia, i nodi non si sottopongono al processo di aggiornamento finché non vengono soddisfatte tutte le regole. Mentre sono in coda, le regole vengono controllate a intervalli per vedere se è possibile aggiornare i nodi. 
 
 Se scelgo di non definire una mappa di configurazione?
 
@@ -95,6 +95,7 @@ Per aggiornare i tuoi nodi di lavoro:
       name: ibm-cluster-update-configuration
       namespace: kube-system
     data:
+     drain_timeout_seconds: "120"
      zonecheck.json: |
        {
          "MaxUnavailablePercentage": 70,
@@ -107,7 +108,6 @@ Per aggiornare i tuoi nodi di lavoro:
          "NodeSelectorKey": "failure-domain.beta.kubernetes.io/region",
          "NodeSelectorValue": "us-south"
        }
-    ...
      defaultcheck.json: |
        {
          "MaxUnavailablePercentage": 100
@@ -120,12 +120,16 @@ Per aggiornare i tuoi nodi di lavoro:
     </thead>
     <tbody>
       <tr>
-        <td><code>defaultcheck.json</code></td>
-        <td> Come valore predefinito, se la mappa ibm-cluster-update-configuration non viene definita in un modo valido, solo il 20% dei tuoi cluster possono non essere disponibili in una sola volta. Se una o più regole valide sono definite senza un valore predefinito globale, il nuovo valore predefinito è di consentire al 100% dei nodi di lavoro di non essere disponibili in una sola volta. Puoi controllarlo creando una percentuale predefinita. </td>
+        <td><code>drain_timeout_seconds</code></td>
+        <td> Facoltativo: il timeout in secondi dello svuotamento che verrà eseguito durante l'aggiornamento del nodo di lavoro. Lo svuotamento imposta il nodo su `unschedulable` che impedisce ai nuovi pod di essere distribuiti in tale nodo. Lo svuotamento elimina anche i pod dal nodo. I valori accettati sono numeri interi compresi tra 1 e 180. Il valore predefinito è 30.</td>
       </tr>
       <tr>
         <td><code>zonecheck.json</code></br><code>regioncheck.json</code></td>
         <td> Esempi di chiavi univoche per cui vuoi impostare le regole. I nomi delle chiavi possono essere qualsiasi cosa tu voglia; le informazioni vengono analizzate dalle configurazioni impostate nella chiave. Per ogni chiave che definisci, puoi impostare solo un valore per <code>NodeSelectorKey</code> e <code>NodeSelectorValue</code>. Se vuoi impostare le regole per più di una regione o ubicazione (data center), crea una nuova voce chiave. </td>
+      </tr>
+      <tr>
+        <td><code>defaultcheck.json</code></td>
+        <td> Come valore predefinito, se la mappa <code>ibm-cluster-update-configuration</code> non viene definita in un modo valido, solo il 20% dei tuoi cluster può risultare non disponibile allo stesso tempo. Se una o più regole valide sono definite senza un valore predefinito globale, il nuovo valore predefinito è di consentire al 100% dei nodi di lavoro di non essere disponibili in una sola volta. Puoi controllarlo creando una percentuale predefinita. </td>
       </tr>
       <tr>
         <td><code>MaxUnavailablePercentage</code></td>
@@ -146,10 +150,10 @@ Per aggiornare i tuoi nodi di lavoro:
 
 3. Aggiorna i tuoi nodi di lavoro dalla GUI o eseguendo il comando CLI.
   * Per aggiornare dal dashboard {{site.data.keyword.Bluemix_notm}}, passa alla sezione `Nodi di lavoro` del tuo cluster e fai clic su `Aggiorna nodo di lavoro`.
-  * Per ottenere gli ID del nodo di lavoro, esegui `bx cs workers <cluster_name_or_id>`. Se selezioni più nodi di lavoro, vengono posizionati in una coda per la valutazione dell'aggiornamento. Se vengono considerati pronti dopo la valutazione, saranno aggiornati in base alle regole impostate nelle configurazioni.
+  * Per ottenere gli ID del nodo di lavoro, esegui `bx cs workers <cluster_name_or_ID>`. Se selezioni più nodi di lavoro, vengono posizionati in una coda per la valutazione dell'aggiornamento. Se vengono considerati pronti dopo la valutazione, saranno aggiornati in base alle regole impostate nelle configurazioni.
 
     ```
-    bx cs worker-update <cluster_name_or_id> <worker_node_id1> <worker_node_id2>
+    bx cs worker-update <cluster_name_or_ID> <worker_node1_ID> <worker_node2_ID>
     ```
     {: pre}
 
@@ -160,14 +164,14 @@ Per aggiornare i tuoi nodi di lavoro:
     {: pre}
 
 5. Conferma che l'aggiornamento sia stato completato:
-  * Controlla la versione di Kubernetes nel dashboard {{site.data.keyword.Bluemix_notm}} o esegui `bx cs workers <cluster_name_or_id>`.
+  * Controlla la versione di Kubernetes nel dashboard {{site.data.keyword.Bluemix_notm}} o esegui `bx cs workers <cluster_name_or_ID>`.
   * Controlla la versione di Kubernetes dei nodi di lavoro eseguendo `kubectl get nodes`.
-  * In alcuni casi, i cluster meno recenti possono elencare nodi di lavoro duplicati con uno stato di **Non pronto** dopo un aggiornamento. Per rimuovere i duplicati, consulta [risoluzione dei problemi](cs_troubleshoot.html#cs_duplicate_nodes).
+  * In alcuni casi, i cluster meno recenti possono elencare nodi di lavoro duplicati con uno stato di **Non pronto** dopo un aggiornamento. Per rimuovere i duplicati, consulta [risoluzione dei problemi](cs_troubleshoot_clusters.html#cs_duplicate_nodes).
 
 Passi successivi:
   - Ripeti il processo di aggiornamento con gli altri cluster.
   - Avvisa gli sviluppatori che lavorano nel cluster di aggiornare la loro CLI `kubectl` alla versione del master Kubernetes.
-  - Se il dashboard Kubernetes non visualizza i grafici di utilizzo, [elimina il pod `kube-dashboard`](cs_troubleshoot.html#cs_dashboard_graphs).
+  - Se il dashboard Kubernetes non visualizza i grafici di utilizzo, [elimina il pod `kube-dashboard`](cs_troubleshoot_health.html#cs_dashboard_graphs).
 
 
 <br />
@@ -192,21 +196,21 @@ Puoi aggiornare i tipi di macchina che vengono utilizzati nei nodi di lavoro agg
     ```
     {: pre}
 
-3. Aggiungi un nodo di lavoro utilizzando il comando [bx cs worker-add](cs_cli_reference.html#cs_worker_add) e specifica uno dei tipi di macchina elencati nell'output del comando precedente.
+3. Aggiungi i nodi di lavoro utilizzando il comando [bx cs worker-add](cs_cli_reference.html#cs_worker_add). Specifica un tipo di macchina. 
 
     ```
-    bx cs worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_vlan> --public-vlan <public_vlan>
+    bx cs worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
     ```
     {: pre}
 
-4. Verifica che il nodo di lavoro sia stato aggiunto.
+4. Verifica che i nodi di lavoro siano stati aggiunti. 
 
     ```
     bx cs workers <cluster_name>
     ```
     {: pre}
 
-5. Quando il nodo di lavoro aggiunto è nello stato `Normal`, puoi rimuovere il nodo di lavoro obsoleto. **Nota**: se rimuovi un tipo di macchina con fatturazione mensile (ad esempio, bare metal), ti viene addebitato l'intero mese.
+5. Quando i nodi di lavoro aggiunti si trovano nello stato `Normal`, puoi rimuovere il nodo di lavoro obsoleto. **Nota**: se rimuovi un tipo di macchina con fatturazione mensile (ad esempio, bare metal), ti viene addebitato l'intero mese.
 
     ```
     bx cs worker-rm <cluster_name> <worker_node>
@@ -214,5 +218,6 @@ Puoi aggiornare i tipi di macchina che vengono utilizzati nei nodi di lavoro agg
     {: pre}
 
 6. Ripeti questi passi per aggiornare altri nodi di lavoro in tipi di macchine differenti.
+
 
 

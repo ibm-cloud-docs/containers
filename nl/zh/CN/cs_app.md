@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-28"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-02-28"
 {: #app}
 
 您可以在 {{site.data.keyword.containerlong}} 中使用 Kubernetes 方法来部署容器中的应用程序，并确保这些应用程序始终保持启动并正常运行。例如，可以执行滚动更新以及回滚，而不给用户造成任何停机时间。
-{:shortdesc}
+{: shortdesc}
 
 通过单击下图中的某个区域可了解用于部署应用程序的常规步骤。
 
@@ -40,7 +40,7 @@ lastupdated: "2018-02-28"
 {: #highly_available_apps}
 
 设置在多个工作程序节点和集群上分发得越广泛，用户使用应用程序时遭遇停机时间的可能性就越低。
-{:shortdesc}
+{: shortdesc}
 
 查看以下潜在的应用程序设置（按可用性程度从低到高排序）。
 
@@ -52,72 +52,29 @@ lastupdated: "2018-02-28"
 3.  部署具有 n+2 个 pod，这些 pod 由副本集管理并跨不同位置的多个节点分布（反亲缘关系）。
 4.  部署具有 n+2 个 pod，这些 pod 由副本集管理并跨不同区域的多个节点分布（反亲缘关系）。
 
+
+
+
 ### 提高应用程序的可用性
 
 <dl>
-<dt>使用部署和副本集来部署应用程序及其依赖项</dt>
-<dd>部署是一种 Kubernetes 资源，可用于声明应用程序的所有组件以及应用程序的依赖项。通过描述单个组件，而不是写下所有必要的步骤和创建这些步骤的顺序，您可以专注于应用程序在运行时的外观。</br></br>
-部署多个 pod 时，会自动为部署创建副本集；副本集用于监视这些 pod，并确保始终有所需数量的 pod 正常运行。pod 发生故障时，副本集会将无响应的 pod 替换为新的 pod。</br></br>
-您可以使用部署来定义应用程序的更新策略，包括在滚动更新期间要添加的 pod 数，以及允许同时不可用的 pod 数。执行滚动更新时，部署将检查修订版是否有效，并在检测到故障时停止应用。</br></br>
-部署还提供了同时部署具有不同标志的多个修订版的可能性，因此，例如您可以先测试部署，然后再决定是否将其推送到生产环境。</br></br>
-每个部署都会跟踪已部署的修订版。遇到更新无法按预期运行时，可以使用此修订版历史记录回滚到上一个版本。</dd>
-<dt>包含足够多的副本用于应用程序的工作负载，在此基础上再额外增加两个副本</dt>
-<dd>要使应用程序具有更高可用性且在出现故障时能够更快恢复，请考虑在处理预期工作负载所需最低要求的副本数基础上，再包含额外的副本。在某个 pod 崩溃且副本集尚未恢复已崩溃 pod 的情况下，额外的副本可处理工作负载。要针对同时发生两个故障的情况进行防护，请包含两个额外的副本。此设置是 N+2 模式，其中 N 是处理入局工作负载的副本数，+2 是额外两个副本。只要集群有足够的空间用于 pod，就可以在集群中拥有尽可能多的 pod。</dd>
-<dt>跨多个节点分布 pod（反亲缘关系）</dt>
-<dd>创建部署时，各个 pod 可能会部署到同一工作程序节点。这种 pod 存在于相同工作程序节点上的设置称为亲缘关系或共存。为了保护应用程序不受工作程序节点故障的影响，可以使用 <strong>podAntiAffinity</strong> 选项来强制您的部署跨多个工作程序节点分布 pod。此选项仅可用于标准集群。
-
-</br></br>
-<strong>注</strong>：以下 YAML 文件强制将每个 pod 部署到不同的工作程序节点。如果定义的副本数超过集群中可用的工作程序节点数，仅会部署可以满足反亲缘关系需求的副本数。任何其他副本都将保持暂挂状态，直到向集群添加了更多工作程序节点为止。
-
-<pre class="codeblock">
-<code>apiVersion: apps/v1beta1
-kind: Deployment
-metadata:
-name: wasliberty
-spec:
-        replicas: 3
-        template:
-metadata:
-labels:
-app: wasliberty
-spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - wasliberty
-              topologyKey: kubernetes.io/hostname
-      containers:
-      - name: wasliberty
-        image: registry.&lt;region&gt;.bluemix.net/ibmliberty
-        ports:
-        - containerPort: 9080
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: wasliberty
-  labels:
-    app: wasliberty
-spec:
-  ports:
-    # the port that this service should serve on
-  - port: 9080
-  selector:
-    app: wasliberty
-  type: NodePort</code></pre>
-
-</dd>
-<dt>跨多个位置或区域分布 pod</dt>
-<dd>为了保护应用程序不受位置或区域故障的影响，可以在另一个位置或区域中创建第二个集群，并使用部署 YAML 来部署应用程序的重复副本集。通过在集群前端添加共享路径和负载均衡器，可以跨位置和区域分布工作负载。有关在集群之间共享路径的更多信息，请参阅<a href="cs_clusters.html#clusters" target="_blank">集群高可用性</a>。
-
-有关更多详细信息，请查看<a href="cs_clusters.html#planning_clusters" target="_blank">高可用性部署</a>的选项。</dd>
+  <dt>使用部署和副本集来部署应用程序及其依赖项</dt>
+    <dd><p>部署是一种 Kubernetes 资源，可用于声明应用程序的所有组件以及应用程序的依赖项。通过部署，您不必记下所有这些步骤，而可以将重点放在应用程序上。</p>
+    <p>部署多个 pod 时，会自动为部署创建副本集；副本集用于监视这些 pod，并确保始终有所需数量的 pod 正常运行。pod 发生故障时，副本集会将无响应的 pod 替换为新的 pod。</p>
+    <p>您可以使用部署来定义应用程序的更新策略，包括在滚动更新期间要添加的 pod 数，以及允许同时不可用的 pod 数。执行滚动更新时，部署将检查修订版是否有效，并在检测到故障时停止应用。</p>
+    <p>通过部署，可以同时部署多个具有不同标志的修订版。例如，您可以先测试部署，然后再决定是否将其推送到生产环境。</p>
+    <p>部署允许您跟踪任何已部署的修订版。如果遇到更新无法按预期运行的情况，可以使用此历史记录回滚到上一个版本。</p></dd>
+  <dt>包含足够多的副本用于应用程序的工作负载，在此基础上再额外增加两个副本</dt>
+    <dd>要使应用程序具有更高可用性且在出现故障时能够更快恢复，请考虑在处理预期工作负载所需最低要求的副本数基础上，再包含额外的副本。在某个 pod 崩溃且副本集尚未恢复已崩溃 pod 的情况下，额外的副本可处理工作负载。要针对同时发生两个故障的情况进行防护，请包含两个额外的副本。此设置是 N+2 模式，其中 N 是处理入局工作负载的副本数，+2 是额外两个副本。只要集群具有足够的空间，就可以拥有任意数量的 pod。</dd>
+  <dt>跨多个节点分布 pod（反亲缘关系）</dt>
+    <dd><p>创建部署时，各个 pod 可部署到同一工作程序节点。这称为亲缘关系或共存。为了保护应用程序不受工作程序节点故障的影响，可以在标准集群中使用 <em>podAntiAffinity</em> 选项将部署配置为跨多个工作程序节点分布 pod。可以定义两种类型的 pod 反亲缘关系：首选或必需。有关更多信息，请参阅有关<a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="（在新选项卡或窗口中打开）">为节点分配 pod</a> 的 Kubernetes 文档。</p>
+    <p><strong>注</strong>：在需要反亲缘关系的情况下，可以部署的副本数不超过您拥有的工作程序节点数。例如，如果集群中有 3 个工作程序节点，但在 YAML 文件中定义了 5 个副本，那么仅部署 3 个副本。每个副本位于不同的工作程序节点上。剩余的 2 个副本保持暂挂状态。如果将另一个工作程序节点添加到集群，那么其中一个剩余副本将自动部署到这一新的工作程序节点。<p>
+    <p><strong>部署 YAML 文件示例</strong>：<ul>
+    <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/nginx_preferredAntiAffinity.yaml" rel="external" target="_blank" title="（在新选项卡或窗口中打开）">具有首选 pod 反亲缘关系的 Nginx 应用程序。</a></li>
+    <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="（在新选项卡或窗口中打开）">具有必需 pod 反亲缘关系的 IBM® WebSphere® Application Server Liberty 应用程序。</a></li></ul></p>
+    </dd>
+<dt>跨多个专区或区域分布 pod</dt>
+  <dd>为了保护应用程序不受位置或区域故障的影响，可以在另一个位置或区域中创建第二个集群，并使用部署 YAML 来部署应用程序的重复副本集。通过在集群前端添加共享路径和负载均衡器，可以跨位置和区域分布工作负载。有关更多信息，请参阅[集群的高可用性](cs_clusters.html#clusters)。</dd>
 </dl>
 
 
@@ -125,7 +82,7 @@ spec:
 {: #minimal_app_deployment}
 
 免费或标准集群中的基本应用程序部署可能包含以下组件。
-{:shortdesc}
+{: shortdesc}
 
 ![部署设置](images/cs_app_tutorial_components1.png)
 
@@ -144,7 +101,9 @@ spec:
     spec:
       containers:
       - name: ibmliberty
-        image: registry.<region>.bluemix.net/ibmliberty:latest
+        image: registry.bluemix.net/ibmliberty:latest
+        ports:
+        - containerPort: 9080        
 ---
 apiVersion: v1
 kind: Service
@@ -154,7 +113,7 @@ metadata:
     app: ibmliberty
 spec:
   selector:
-    run: ibmliberty
+    app: ibmliberty
   type: NodePort
   ports:
    - protocol: TCP
@@ -162,7 +121,7 @@ spec:
 ```
 {: codeblock}
 
-要了解有关每个组件的更多信息，请查看 [Kubernetes 基础知识](cs_tech.html#kubernetes_basics)。
+**注**：要公开服务，请确保在服务的 `spec.selector` 部分中使用的键/值对与部署 YAML 的 `spec.template.metadata.labels` 部分中使用的键/值对相同。要了解有关每个组件的更多信息，请查看 [Kubernetes 基础知识](cs_tech.html#kubernetes_basics)。
 
 <br />
 
@@ -179,7 +138,7 @@ spec:
 
 可以使用缺省端口或设置自己的端口来启动集群的 Kubernetes 仪表板。
 
-1.  对于带有 Kubernetes V1.7.4 或更低版本主节点的集群：
+1.  对于带有 Kubernetes V1.7.16 或更低版本主节点的集群：
 
     1.  使用缺省端口号设置代理。
 
@@ -229,16 +188,16 @@ spec:
 
     4.  登录到仪表板。
 
-        1.  在浏览器中，浏览至以下 URL：
+      1.  在浏览器中，浏览至以下 URL：
 
-            ```
+          ```
             http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
             ```
-            {: codeblock}
+          {: codeblock}
 
-        2.  在登录页面中，选择**令牌**认证方法。
+      2.  在登录页面中，选择**令牌**认证方法。
 
-        3.  接下来，将先前复制的 **id-token** 值粘贴到**令牌**字段中，然后单击**登录**。
+      3.  接下来，将先前复制的 **id-token** 值粘贴到**令牌**字段中，然后单击**登录**。
 
 [接下来，可以通过仪表板来运行配置文件。](#app_ui)
 
@@ -258,7 +217,7 @@ Kubernetes 私钥是一种存储保密信息（如用户名、密码或密钥）
 {:shortdesc}
 
 <table>
-<caption>表. 需要通过任务以私钥形式存储的文件</caption>
+<caption>要通过任务以私钥形式存储的必需文件</caption>
 <thead>
 <th>任务</th>
 <th>要以私钥形式存储的必需文件</th>
@@ -274,7 +233,7 @@ Kubernetes 私钥是一种存储保密信息（如用户名、密码或密钥）
 
 要查看缺省 TLS 私钥：
 <pre>
-bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
+bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 </pre>
 </p>
 要改为创建自己的私钥，请完成本主题中的步骤。</td>
@@ -294,7 +253,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 
 1. 通过证书提供者生成认证中心 (CA) 证书和密钥。如果您有自己的域，请为您的域购买正式的 TLS 证书。如果是为了进行测试，您可以生成自签名证书。
 
- 重要信息：请确保每个证书的 [CN](https://support.dnsimple.com/articles/what-is-common-name/) 唯一。
+ **重要信息**：请确保每个证书的 [CN](https://support.dnsimple.com/articles/what-is-common-name/) 都是不同的。
 
  必须验证客户机证书和客户机密钥，一直验证到可信根证书（在本例中为 CA 证书）。示例：
 
@@ -308,23 +267,23 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 2. 将证书创建为 Kubernetes 私钥。
 
    ```
- kubectl create secret generic <secretName> --from-file=<cert_file>=<cert_file>
- ```
+   kubectl create secret generic <secret_name> --from-file=<cert_file>=<cert_file>
+   ```
    {: pre}
 
      示例：
    - TLS 连接：
 
      ```
- kubectl create secret tls <secretName> --from-file=tls.crt=server.crt --from-file=tls.key=server.key
- ```
+     kubectl create secret tls <secret_name> --from-file=tls.crt=server.crt --from-file=tls.key=server.key
+     ```
      {: pre}
 
    - 相互认证注释：
 
      ```
- kubectl create secret generic <secretName> --from-file=ca.crt=ca.crt
- ```
+     kubectl create secret generic <secret_name> --from-file=ca.crt=ca.crt
+     ```
      {: pre}
 
 <br />
@@ -346,11 +305,17 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 
 要部署应用程序，请执行以下操作：
 
-1.  [打开 Kubernetes 仪表板](#cli_dashboard)。
-2.  在 Kubernetes 仪表板中，单击 **+ 创建**。
-3.  选择**在下面指定应用程序详细信息**以在 GUI 上输入应用程序详细信息，或者选择**上传 YAML 或 JSON 文件**以上传应用程序[配置文件 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/)。使用[此示例 YAML 文件 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml) 通过美国南部区域的 **ibmliberty** 映像部署容器。
-4.  在 Kubernetes 仪表板中，单击**部署**以验证部署是否已创建。
-5.  如果使用 NodePort 服务、LoadBalancer 服务或 Ingress 使应用程序公共可用，请验证您是否可以访问该应用程序。
+1.  在 Kubernetes [仪表板](#cli_dashboard)中，单击 **+ 创建**。
+2.  通过下面两种方式中的一种来输入应用程序详细信息。
+  * 选择**在下面指定应用程序详细信息**，然后输入详细信息。
+  * 选择**上传 YAML 或 JSON 文件**以上传应用程序[配置文件 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/)。
+
+  需要配置文件的相关帮助？请查看此 [YAML 文件示例 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml)。在此示例中，将从美国南部区域中的 **ibmliberty** 映像部署容器。
+  {: tip}
+
+3.  通过下列其中一种方式验证是否已成功部署应用程序。
+  * 在 Kubernetes 仪表板中，单击**部署**。这将显示成功部署的列表。
+  * 如果应用程序[公开可用](cs_network_planning.html#public_access)，请浏览至 {{site.data.keyword.containerlong}} 仪表板中的集群概述页面。复制位于“集群摘要”部分中的子域，并将其粘贴到浏览器以查看应用程序。
 
 <br />
 
@@ -376,10 +341,12 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 
     -   [Ingress ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/services-networking/ingress/)：指定一种类型的负载均衡器，以提供用于公开访问应用程序的路径。
 
+    
+
 2.  在集群上下文中运行配置文件。
 
     ```
-    kubectl apply -f deployment_script_location
+    kubectl apply -f config.yaml
     ```
     {: pre}
 
@@ -390,8 +357,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 
 
 
-
-## 扩展应用程序
+## 扩展应用程序 
 {: #app_scaling}
 
 使用 Kubernetes，可以启用[水平 pod 自动扩展 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)，以根据 CPU 来自动增加或减少应用程序的实例数。
@@ -404,11 +370,13 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 - [设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为集群。
 - 必须在要自动扩展的集群中部署 heapster 监视。
 
+步骤：
+
 1.  通过 CLI 将应用程序部署到集群。部署应用程序时，必须请求 CPU。
 
 
     ```
-    kubectl run <name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
+    kubectl run <app_name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
     ```
     {: pre}
 
@@ -437,7 +405,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
     对于更复杂的部署，您可能需要创建[配置文件](#app_cli)。
     {: tip}
 
-2.  创建自动扩展程序并定义策略。有关使用 `kubetcl autoscale` 命令的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale)。
+2.  创建自动扩展程序并定义策略。有关使用 `kubectl autoscale` 命令的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale)。
 
     ```
     kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
@@ -537,4 +505,5 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
         {: pre}
 
 <br />
+
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-02-27"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -101,7 +101,7 @@ lastupdated: "2017-02-27"
     1. 获取命令以设置环境变量并下载 Kubernetes 配置文件。
 
         ```
-        bx cs cluster-config <pr_firm_cluster>
+        bx cs cluster-config <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -135,6 +135,8 @@ lastupdated: "2017-02-27"
 
 7.  构建包含 `Lab 1` 目录中应用程序文件的 Docker 映像。如果未来需要对应用程序进行更改，请重复这些步骤以创建映像的另一个版本。
 
+    
+
     1.  在本地构建映像。指定要使用的名称和标记。确保使用上一个教程中在 {{site.data.keyword.registryshort_notm}} 中创建的名称空间。使用名称空间信息来标记映像，可让 Docker 知道在后续步骤中应将映像推送到何处。在映像名称中仅使用小写字母数字字符或下划线 (`_`)。不要忘记在命令末尾输入句点 (`.`)。句点将通知 Docker 在当前目录内查找用于构建映像的 Dockerfile 和构建工件。
 
         ```
@@ -156,10 +158,10 @@ lastupdated: "2017-02-27"
         ```
         {: pre}
 
-        输出：
+        输出示例：
 
         ```
-        The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+        The push refers to a repository [registry.ng.bluemix.net/pr_firm/hello-world]
         ea2ded433ac8: Pushed
         894eb973f4d3: Pushed
         788906ca2c7e: Pushed
@@ -182,12 +184,14 @@ lastupdated: "2017-02-27"
     ```
     {: pre}
 
-    输出：
+    输出示例：
 
     ```
     deployment "hello-world-deployment" created
     ```
     {: screen}
+
+    
 
 9.  通过将部署公开为 NodePort 服务，使应用程序可供公共访问。正如您可能会公开 Cloud Foundry 应用程序的端口，您公开的 NodePort 就是工作程序节点用于侦听流量的端口。
 
@@ -196,7 +200,7 @@ lastupdated: "2017-02-27"
     ```
     {: pre}
 
-    输出：
+    输出示例：
 
     ```
     service "hello-world-service" exposed
@@ -205,7 +209,6 @@ lastupdated: "2017-02-27"
 
     <table>
     <table summary=“Information about the expose command parameters.”>
-    <caption>表 1. 命令参数</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 关于 expose 参数的更多信息</th>
     </thead>
@@ -240,11 +243,11 @@ lastupdated: "2017-02-27"
     1.  获取有关服务的信息以查看分配的 NodePort。
 
         ```
-        kubectl describe service <hello-world-service>
+        kubectl describe service hello-world-service
         ```
         {: pre}
 
-        输出：
+        输出示例：
 
         ```
         Name:                   hello-world-service
@@ -252,10 +255,10 @@ lastupdated: "2017-02-27"
         Labels:                 run=hello-world-deployment
         Selector:               run=hello-world-deployment
         Type:                   NodePort
-        IP:                     10.10.10.8
+        IP:                     10.xxx.xx.xxx
         Port:                   <unset> 8080/TCP
         NodePort:               <unset> 30872/TCP
-        Endpoints:              172.30.171.87:8080
+        Endpoints:              172.30.xxx.xxx:8080
         Session Affinity:       None
         No events.
         ```
@@ -266,21 +269,22 @@ lastupdated: "2017-02-27"
     2.  获取集群中工作程序节点的公共 IP 地址。
 
         ```
-        bx cs workers <pr_firm_cluster>
-        ```
+       bx cs workers <cluster_name_or_ID>
+       ```
         {: pre}
 
-        输出：
+        输出示例：
 
         ```
+        bx cs workers pr_firm_cluster
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.47.227.138  10.171.53.188    free           normal   Ready    mil01      1.8.8
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.8.11
         ```
         {: screen}
 
-11. 打开浏览器并通过以下 URL 检查应用程序：`http://<IP_address>:<NodePort>`. 使用示例值时，URL 为 `http://169.47.227.138:30872`。在浏览器中输入该 URL 时，可以看到以下文本。
+11. 打开浏览器并通过以下 URL 检查应用程序：`http://<IP_address>:<NodePort>`. 使用示例值时，URL 为 `http://169.xx.xxx.xxx:30872`。在浏览器中输入该 URL 时，可以看到以下文本。
 
 
     ```
@@ -347,10 +351,10 @@ lastupdated: "2017-02-27"
   ```
   {: pre}
 
-  输出：
+  输出示例：
 
   ```
-  The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+  The push refers to a repository [registry.ng.bluemix.net/pr_firm/hello-world]
   ea2ded433ac8: Pushed
   894eb973f4d3: Pushed
   788906ca2c7e: Pushed
@@ -402,7 +406,7 @@ lastupdated: "2017-02-27"
   ```
   {: pre}
 
-  输出：
+  输出示例：
 
   ```
   deployment "hw-demo-deployment" created
@@ -413,11 +417,11 @@ lastupdated: "2017-02-27"
 7.  现在，部署工作已完成，您可以打开浏览器并检查应用程序。要构成 URL，请采用上一课中用于工作程序节点的公共 IP 地址，并将其与配置脚本中指定的 NodePort 组合在一起。要获取工作程序节点的公共 IP 地址，请执行以下操作：
 
   ```
-  bx cs workers <pr_firm_cluster>
-  ```
+       bx cs workers <cluster_name_or_ID>
+       ```
   {: pre}
 
-  使用示例值时，URL 为 `http://169.47.227.138:30072`。在浏览器中，可能会看到以下文本。如果未看到此文本，也不必担心。此应用程序本来就是要让文本时而显示时而隐藏的。
+  使用示例值时，URL 为 `http://169.xx.xxx.xxx:30072`。在浏览器中，可能会看到以下文本。如果未看到此文本，也不必担心。此应用程序本来就是要让文本时而显示时而隐藏的。
 
 
   ```
@@ -425,7 +429,7 @@ lastupdated: "2017-02-27"
   ```
   {: screen}
 
-  您还可以检查 `http://169.47.227.138:30072/healthz` 以了解状态。
+  您还可以检查 `http://169.xx.xxx.xxx:30072/healthz` 以了解状态。
 
   在前 10-15 秒内返回了 200 消息，这表明应用程序在成功运行。超过这 15 秒后，将显示超时消息。这是预期的行为。
 
@@ -460,7 +464,7 @@ lastupdated: "2017-02-27"
   ```
   {: pre}
 
-  输出：
+  输出示例：
 
   ```
 deployment "hw-demo-deployment" deleted
@@ -528,7 +532,7 @@ service "hw-demo-service" deleted
         ```
         {: pre}
 
-3.  构建 {{site.data.keyword.watson}}-talk 映像。
+4.  构建 {{site.data.keyword.watson}}-talk 映像。
 
     1.  浏览到 `watson-talk` 目录。
 
@@ -559,27 +563,27 @@ service "hw-demo-service" deleted
         ```
         {: pre}
 
-4.  验证映像是否已成功添加到注册表名称空间。如果使用了 Docker Quickstart 终端来运行 Docker 命令，请确保切换回用于设置 `KUBECONFIG` 会话变量的 CLI。
+5.  验证映像是否已成功添加到注册表名称空间。如果使用了 Docker Quickstart 终端来运行 Docker 命令，请确保切换回用于设置 `KUBECONFIG` 会话变量的 CLI。
 
     ```
     bx cr images
     ```
     {: pre}
 
-    输出：
+    输出示例：
 
     ```
     Listing images...
 
-    REPOSITORY                                  NAMESPACE  TAG            DIGEST         CREATED         SIZE     VULNERABILITY STATUS
-    registry.<region>.bluemix.net/namespace/hello-world   namespace  1              0d90cb732881   40 minutes ago  264 MB   OK
-    registry.<region>.bluemix.net/namespace/hello-world   namespace  2              c3b506bdf33e   20 minutes ago  264 MB   OK
-    registry.<region>.bluemix.net/namespace/watson        namespace  latest         fedbe587e174   3 minutes ago   274 MB   OK
-    registry.<region>.bluemix.net/namespace/watson-talk   namespace  latest         fedbe587e174   2 minutes ago   274 MB   OK
+    REPOSITORY                                      NAMESPACE  TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS
+    registry.ng.bluemix.net/namespace/hello-world   namespace  1        0d90cb732881   40 minutes ago  264 MB   OK
+    registry.ng.bluemix.net/namespace/hello-world   namespace  2        c3b506bdf33e   20 minutes ago  264 MB   OK
+    registry.ng.bluemix.net/namespace/watson        namespace  latest   fedbe587e174   3 minutes ago   274 MB   OK
+    registry.ng.bluemix.net/namespace/watson-talk   namespace  latest   fedbe587e174   2 minutes ago   274 MB   OK
     ```
     {: screen}
 
-5.  使用文本编辑器打开 `Lab 3` 目录中的 `watson-deployment.yml` 文件。此配置脚本包含同时用于应用程序的 watson 和 watson-talk 组件的部署和服务。
+6.  使用文本编辑器打开 `Lab 3` 目录中的 `watson-deployment.yml` 文件。此配置脚本包含同时用于应用程序的 watson 和 watson-talk 组件的部署和服务。
 
     1.  在注册表名称空间中为两个部署更新该映像的详细信息。
 
@@ -606,7 +610,7 @@ service "hw-demo-service" deleted
                 - name: service-bind-volume
                   secret:
                     defaultMode: 420
-                    secretName: binding-<mytoneanalyzer>
+                    secretName: binding-mytoneanalyzer
         ```
         {: codeblock}
 
@@ -619,14 +623,14 @@ service "hw-demo-service" deleted
 
     3.  在 watson-talk 服务部分中，记下为 `NodePort` 设置的值。此示例使用 30080。
 
-6.  运行配置脚本。
+7.  运行配置脚本。
 
   ```
   kubectl apply -f watson-deployment.yml
   ```
   {: pre}
 
-7.  可选：验证 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 私钥是否已作为卷安装到 pod。
+8.  可选：验证 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 私钥是否已作为卷安装到 pod。
 
     1.  要获取 watson pod 的名称，请运行以下命令。
 
@@ -635,7 +639,7 @@ service "hw-demo-service" deleted
         ```
         {: pre}
 
-        输出：
+        输出示例：
 
         ```
         NAME                                 READY     STATUS    RESTARTS  AGE
@@ -651,7 +655,7 @@ service "hw-demo-service" deleted
         ```
         {: pre}
 
-        输出：
+        输出示例：
 
         ```
         Volumes:
@@ -664,20 +668,20 @@ service "hw-demo-service" deleted
         ```
         {: codeblock}
 
-8.  打开浏览器并分析一些文本。URL 的格式为 `http://<worker_node_IP_address>:<watson-talk-nodeport>/analyze/"<text_to_analyze>"`.
+9.  打开浏览器并分析一些文本。URL 的格式为 `http://<worker_node_IP_address>:<watson-talk-nodeport>/analyze/"<text_to_analyze>"`.
 
     示例：
 
     ```
-    http://169.47.227.138:30080/analyze/"Today is a beautiful day"
+    http://169.xx.xxx.xxx:30080/analyze/"Today is a beautiful day"
     ```
     {: screen}
 
     在浏览器中，可以看到对所输入文本的 JSON 响应。
 
-9.  [启动 Kubernetes 仪表板](cs_app.html#cli_dashboard)。请注意，步骤根据您的 Kubernetes 版本而有所不同。
+10.  [启动 Kubernetes 仪表板](cs_app.html#cli_dashboard)。请注意，步骤根据您的 Kubernetes 版本而有所不同。
 
-10. 在**工作负载**选项卡中，可以查看已创建的资源。探索完 Kubernetes 仪表板后，使用 CTRL+C 以退出 `proxy` 命令。
+11. 在**工作负载**选项卡中，可以查看已创建的资源。探索完 Kubernetes 仪表板后，使用 CTRL+C 以退出 `proxy` 命令。
 
 ### 第 3b 课：更新正在运行的 Watson Tone Analyzer 部署
 {: #lesson3b}
@@ -735,7 +739,7 @@ service "hw-demo-service" deleted
   ```
   {: pre}
 
-  输出：
+  输出示例：
 
   ```
 deployment "watson-pod" deleted
@@ -748,8 +752,8 @@ service "watson-talk-service" deleted
   如果不希望保留集群，还可以删除该集群。
 
   ```
-bx cs cluster-rm <pr_firm_cluster>
-```
+  bx cs cluster-rm <cluster_name_or_ID>
+  ```
   {: pre}
 
 ## 接下来要做什么？
@@ -760,3 +764,4 @@ bx cs cluster-rm <pr_firm_cluster>
 - 在存储库中完成更复杂的实验
 - 使用 {{site.data.keyword.containershort_notm}} [自动扩展应用程序](cs_app.html#app_scaling)
 - 在 [developerWorks ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/code/journey/category/container-orchestration/) 上浏览容器编排过程
+

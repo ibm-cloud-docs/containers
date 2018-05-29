@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2018-03-16"
 Para añadir prestaciones al equilibrador de carga de aplicación (ALB) de Ingress, especifique anotaciones como metadatos en un recurso Ingress.
 {: shortdesc}
 
-Para obtener información general sobre los servicios de Ingress y cómo empezar a utilizarlos, consulte [Configuración de acceso público a una app utilizando Ingress](cs_ingress.html#configure_alb).
+Para obtener información general sobre los servicios de Ingress y cómo empezar a utilizarlos, consulte [Gestión de tráfico de red utilizando Ingress](cs_ingress.html#planning).
 
 <table>
 <col width="20%">
@@ -55,17 +55,13 @@ Para obtener información general sobre los servicios de Ingress y cómo empezar
  <td>Se direcciona el tráfico de red entrante a una vía de acceso distinta de aquella en la que escucha la app de fondo.</td>
  </tr>
  <tr>
- <td><a href="#sticky-cookie-services">Afinidad de sesión con cookies</a></td>
- <td><code>sticky-cookie-services</code></td>
- <td>El tráfico de red de entrada siempre se direcciona al mismo servidor en sentido ascendente mediante una "sticky cookie".</td>
- </tr>
- <tr>
  <td><a href="#tcp-ports">Puertos TCP</a></td>
  <td><code>tcp-ports</code></td>
  <td>Acceda a una app a través de un puerto TCP no estándar.</td>
  </tr>
  </tbody></table>
 
+<br>
 
 <table>
 <col width="20%">
@@ -85,19 +81,34 @@ Para obtener información general sobre los servicios de Ingress y cómo empezar
   <tr>
   <td><a href="#keepalive-requests">Solicitudes de estado activo</a></td>
   <td><code>keepalive-requests</code></td>
-  <td>Configure el número máximo de solicitudes que se pueden servir a través de una conexión en estado activo.</td>
+  <td>Establece el número máximo de solicitudes que se pueden servir a través de una conexión en estado activo.
+</td>
   </tr>
   <tr>
   <td><a href="#keepalive-timeout">Tiempo de espera en estado activo</a></td>
   <td><code>keepalive-timeout</code></td>
-  <td>Configure el tiempo que se mantiene abierta una conexión en estado activo en el servidor.</td>
+  <td>Establece el tiempo máximo que se mantiene abierta una conexión en estado activo en el servidor.
+</td>
+  </tr>
+  <tr>
+  <td><a href="#proxy-next-upstream-config">Siguiente proxy sentido ascendente</a></td>
+  <td><code>proxy-next-upstream-config</code></td>
+  <td>Establece cuándo el ALB puede pasar una solicitud al siguiente servidor en sentido ascendente. </td>
+  </tr>
+  <tr>
+  <td><a href="#sticky-cookie-services">Afinidad de sesión con cookies</a></td>
+  <td><code>sticky-cookie-services</code></td>
+  <td>El tráfico de red de entrada siempre se direcciona al mismo servidor en sentido ascendente mediante una "sticky cookie".</td>
   </tr>
   <tr>
   <td><a href="#upstream-keepalive">Estado activo en sentido ascendente</a></td>
   <td><code>upstream-keepalive</code></td>
-  <td>Configure el número máximo de conexiones de estado activo en sentido ascendente para un servidor en sentido ascendente.</td>
+  <td>Establece el número máximo de conexiones de estado activo para un servidor en sentido ascendente.
+</td>
   </tr>
   </tbody></table>
+
+<br>
 
   <table>
   <col width="20%">
@@ -141,7 +152,26 @@ Para obtener información general sobre los servicios de Ingress y cómo empezar
   </tr>
   </tbody></table>
 
+<br>
 
+<table>
+<col width="20%">
+<col width="20%">
+<col width="60%">
+<thead>
+<th>Anotaciones de Istio</th>
+<th>Nombre</th>
+<th>Descripción</th>
+</thead>
+<tbody>
+<tr>
+<td><a href="#istio-services">Servicios de Istio</a></td>
+<td><code>istio-services</code></td>
+<td>Direcciona el tráfico a los servicios gestionados por Istio. </td>
+</tr>
+</tbody></table>
+
+<br>
 
 <table>
 <col width="20%">
@@ -175,6 +205,7 @@ Para obtener información general sobre los servicios de Ingress y cómo empezar
  </tr>
  </tbody></table>
 
+<br>
 
 <table>
 <col width="20%">
@@ -208,6 +239,8 @@ Para obtener información general sobre los servicios de Ingress y cómo empezar
 </tr>
 </tbody></table>
 
+<br>
+
 <table>
 <col width="20%">
 <col width="20%">
@@ -229,6 +262,8 @@ Para obtener información general sobre los servicios de Ingress y cómo empezar
 <td>Limite la velocidad de procesamiento de solicitudes y el número de conexiones por una clave definida para servicios específicos.</td>
 </tr>
 </tbody></table>
+
+<br>
 
 
 
@@ -303,15 +338,38 @@ Modifique la forma en la que el ALB coteja el URI de solicitud con la vía de ac
 
 <dl>
 <dt>Descripción</dt>
-<dd>De forma predeterminada, los ALB procesan las vías de acceso en las que escuchan las apps como prefijos. Cuando un ALB recibe una solicitud para una app, el ALB comprueba el recurso de Ingress para una vía de acceso (como prefijo) que coincide con el comienzo del URI de solicitud. Si se encuentra una coincidencia, la solicitud se reenvía a la dirección IP del pod en el que se ha desplegado la app.<br><br>La anotación `location-modifier` cambia la forma en la que el ALB busca coincidencias modificando la configuración de bloques de ubicación. El bloque de ubicación determina cómo se gestionan las solicitudes de vía de acceso de la app. **Nota**: Para gestionar vías de acceso de expresión regular (regex), es necesaria esta anotación.</dd>
+<dd>De forma predeterminada, los ALB procesan las vías de acceso en las que escuchan las apps como prefijos. Cuando un ALB recibe una solicitud para una app, el ALB comprueba el recurso de Ingress para una vía de acceso (como prefijo) que coincide con el comienzo del URI de solicitud. Si se encuentra una coincidencia, la solicitud se reenvía a la dirección IP del pod en el que se ha desplegado la app.<br><br>La anotación `location-modifier` cambia la forma en la que el ALB busca coincidencias modificando la configuración de bloques de ubicación. El bloque de ubicación determina cómo se gestionan las solicitudes de vía de acceso de la app.<br><br>**Nota**: Para gestionar vías de acceso de expresión regular (regex), es necesaria esta anotación.</dd>
+
 <dt>Modificadores soportados</dt>
 <dd>
-<ul>
-<li><code>=</code>: El modificador del signo igual provoca que el ALB seleccione sólo coincidencias exactas. Cuando se encuentra una coincidencia exacta, la búsqueda se detiene y se selecciona la vía de acceso coincidente.</li>
-<li><code>~</code>: El modificador de tilde provoca que el ALB procese las vías de acceso como vía de acceso de expresión regular sensibles a las mayúsculas y minúsculas durante la coincidencia.</li>
-<li><code>~*</code>: El modificador de tilde seguida por un asterisco provoca que el ALB procese las vías de acceso como vías de acceso de expresión regular ignorando las mayúsculas y minúsculas durante la coincidencia.</li>
-<li><code>^~</code>: El modificador de acento circunflejo seguido de provoca que el ALB seleccione la mejor coincidencia que no sea expresión regular en lugar de una vía de acceso de expresión regular.</li>
-</ul>
+
+<table>
+ <col width="10%">
+ <col width="90%">
+ <thead>
+ <th>Modificador </th>
+ <th>Descripción</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>=</code></td>
+ <td>El modificador del signo igual provoca que el ALB seleccione sólo coincidencias exactas. Cuando se encuentra una coincidencia exacta, la búsqueda se detiene y se selecciona la vía de acceso coincidente.</td>
+ </tr>
+ <tr>
+ <td><code>~</code></td>
+ <td>El modificador de tilde provoca que el ALB procese las vías de acceso como vía de acceso de expresión regular sensibles a las mayúsculas y minúsculas durante la coincidencia.</td>
+ </tr>
+ <tr>
+ <td><code>~\*</code></td>
+ <td>El modificador de tilde seguida por un asterisco provoca que el ALB procese las vías de acceso como vías de acceso de expresión regular ignorando las mayúsculas y minúsculas durante la coincidencia.</td>
+ </tr>
+ <tr>
+ <td><code>^~</code></td>
+ <td>El modificador de acento circunflejo seguido de provoca que el ALB seleccione la mejor coincidencia que no sea expresión regular en lugar de una vía de acceso de expresión regular.</td>
+ </tr>
+ </tbody>
+</table>
+
 </dd>
 
 <dt>YAML del recurso de Ingress de ejemplo</dt>
@@ -323,7 +381,7 @@ kind: Ingress
 metadata:
 name: myingress
 annotations:
-  ingress.bluemix.net/location-modifier: "modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice&gt;;modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice2&gt;"
+  ingress.bluemix.net/location-modifier: "modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice1&gt;;modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice2&gt;"
 spec:
   tls:
   - hosts:
@@ -345,7 +403,7 @@ spec:
   <tbody>
   <tr>
   <td><code>modifier</code></td>
-  <td>Sustituya <code>&lt;<em>location_modifier</em>&gt;</code> con el modificador de ubicación desea utilizar para la vía de acceso. Los modificadores soportados son <code>'='</code>,<code>'~'</code>,<code>'~*'</code> y <code>'^~'</code>. Debe rodear los modificadores con comillas simples.</td>
+  <td>Sustituya <code>&lt;<em>location_modifier</em>&gt;</code> con el modificador de ubicación desea utilizar para la vía de acceso. Los modificadores soportados son <code>'='</code>, <code>'~'</code>, <code>'~\*'</code> y <code>'^~'</code>. Debe rodear los modificadores con comillas simples.</td>
   </tr>
   <tr>
   <td><code>serviceName</code></td>
@@ -401,7 +459,7 @@ tls:
 <tbody>
 <tr>
 <td><code>&lt;private_ALB_ID&gt;</code></td>
-<td>El ID de su ALB. Ejecute <code>bx cs albs --cluster <my_cluster></code> para encontrar el ID del ALB privado.
+<td>El ID de su ALB. Para encontrar el ID de ALB privado, ejecute <code>bx cs albs --cluster &lt;my_cluster&gt;</code>.
 </td>
 </tr>
 </tbody></table>
@@ -409,7 +467,6 @@ tls:
 </dl>
 
 <br />
-
 
 
 ### Vías de acceso de reescritura (rewrite-path)
@@ -463,84 +520,6 @@ spec:
 </dd></dl>
 
 <br />
-
-
-### Afinidad de sesión con cookies (sticky-cookie-services)
-{: #sticky-cookie-services}
-
-Utilice la anotación de cookie sticky para añadir afinidad de sesión al ALB y direccionar siempre el tráfico de red entrante al mismo servidor en sentido ascendente.
-{:shortdesc}
-
-<dl>
-<dt>Descripción</dt>
-<dd>Para la alta disponibilidad, es posible que la configuración de la app requiera que despliegue varios servidores en sentido ascendente para que gestionen las solicitudes entrantes del cliente y garanticen una mayor disponibilidad. Cuando un cliente se conecta a la app de fondo, podría ser útil que un cliente recibiera el servicio del mismo servidor en sentido ascendente mientras dure la sesión o durante el tiempo que se tarda en completar una tarea. Puede configurar el ALB de modo que asegure la afinidad de sesión direccionando siempre el tráfico de red de entrada al mismo servidor en sentido ascendente.
-
-</br></br>
-El ALB asigna cada cliente que se conecta a la app de fondo a uno de los servidores en sentido ascendente disponibles. El ALB crea una cookie de sesión que se almacena en la app del cliente y que se incluye en la información de cabecera de cada solicitud entre el ALB y el cliente. La información de la cookie garantiza que todas las solicitudes se gestionan en el mismo servidor en sentido ascendente durante todo el periodo de la sesión.
-
-</br></br>
-Si incluye varios servicios, utilice únicamente un punto y coma (;) para separarlos.</dd>
-<dt>YAML del recurso de Ingress de ejemplo</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/sticky-cookie-services: "serviceName=&lt;myservice1&gt; name=&lt;cookie_name1&gt; expires=&lt;expiration_time1&gt; path=&lt;cookie_path1&gt; hash=&lt;hash_algorithm1&gt;;serviceName=&lt;myservice2&gt; name=&lt;cookie_name2&gt; expires=&lt;expiration_time2&gt; path=&lt;cookie_path2&gt; hash=&lt;hash_algorithm2&gt;"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: &lt;myservice1&gt;
-          servicePort: 8080
-      - path: /myapp
-        backend:
-          serviceName: &lt;myservice2&gt;
-          servicePort: 80</code></pre>
-
-  <table>
-  <caption>Visión general de los componentes del archivo YAML</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Visión general de los componentes del archivo YAML</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>serviceName</code></td>
-  <td>Sustituya <code>&lt;<em>myservice</em>&gt;</code> por el nombre del servicio de Kubernetes que ha creado para la app.</td>
-  </tr>
-  <tr>
-  <td><code>name</code></td>
-  <td>Sustituya <code>&lt;<em>cookie_name</em>&gt;</code> por el nombre de una "stickie cookie" que se crea durante una sesión.</td>
-  </tr>
-  <tr>
-  <td><code>expires</code></td>
-  <td>Sustituya <code>&lt;<em>expiration_time</em>&gt;</code> por el tiempo en segundos (s), minutos (m) u horas (h) antes de que caduque la "sticky cookie". Este tiempo depende de la actividad del usuario. Una vez caducada la cookie, el navegador web del cliente la suprime y se deja de enviar al ALB. Por ejemplo, para establecer un tiempo de caducidad de 1 segundo, 1 minutos o 1 hora, escriba <code>1s</code>, <code>1m</code> o <code>1h</code>.</td>
-  </tr>
-  <tr>
-  <td><code>path</code></td>
-  <td>Sustituya <code>&lt;<em>cookie_path</em>&gt;</code> por vía de acceso que se añade al subdominio de Ingress y que indica los dominios y subdominios para los que se envía la cookie al ALB. Por ejemplo, si el dominio de Ingress es <code>www.myingress.com</code> y desea enviar la cookie en cada solicitud del cliente, debe establecer <code>path=/</code>. Si desea enviar la cookie solo para <code>www.myingress.com/myapp</code> y todos sus subdominios, establezca este valor en <code>path=/myapp</code>.</td>
-  </tr>
-  <tr>
-  <td><code>hash</code></td>
-  <td>Sustituya <code>&lt;<em>hash_algorithm</em>&gt;</code> por el algoritmo hash que protege la información en la cookie. Solo se admite <code>sha1
-</code>. SHA1 crea una suma de hash en función de la información de la cookie y añade esta suma de hash a la cookie. El servidor puede descifrar la información de la cookie y verificar la integridad de los datos.</td>
-  </tr>
-  </tbody></table>
-
- </dd></dl>
-
-<br />
-
 
 
 ### Puertos TCP para los equilibradores de carga de aplicación (tcp-ports)
@@ -610,11 +589,11 @@ es opcional. Cuando se proporciona, el puerto se sustituye por este valor antes 
 La salida de la CLI se parecerá a la siguiente:
 <pre class="screen">
 <code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.10.10.149   169.60.16.246   80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  80:30776/TCP,443:30412/TCP   8d</code></pre></li>
 <li>Abra el mapa de configuración del ALB.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>Añada los puertos TCP al mapa de configuración. Sustituya &lt;port&gt; por los puertos TCP que desea abrir.
+<li>Añada los puertos TCP al mapa de configuración. Sustituya <code>&lt;port&gt;</code> por los puertos TCP que desea abrir.
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -633,11 +612,11 @@ metadata:
 La salida de la CLI se parecerá a la siguiente:
 <pre class="screen">
 <code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
 <li>Configure Ingress para acceder a la app a través de un puerto TCP no estándar. Utilice el archivo YAML de ejemplo de esta referencia. </li>
 <li>Actualice la configuración del ALB.
 <pre class="pre">
-<code>kubectl apply -f &lt;yaml_file&gt;</code></pre>
+<code>kubectl apply -f myingress.yaml</code></pre>
 </li>
 <li>Abra el navegador web preferido para acceder a la app. Ejemplo: <code>https://&lt;ibmdomain&gt;:&lt;ingressPort&gt;/</code></li></ol></dd></dl>
 
@@ -650,7 +629,7 @@ public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,
 ### Tiempos de espera excedidos de conexión y tiempos de espera excedidos de lectura personalizados (proxy-connect-timeout, proxy-read-timeout)
 {: #proxy-connect-timeout}
 
-Establecimiento de un tiempo de espera excedido de conexión y de un tiempo de espera excedido de lectura personalizados para el ALB. Defina el tiempo que el ALB espera para conectarse a la app de fondo y para leer información de la misma antes de considerar que la app de fondo no está disponible.
+Defina el tiempo que el ALB espera para conectarse a la app de fondo y para leer información de la misma antes de considerar que la app de fondo no está disponible.
 {:shortdesc}
 
 <dl>
@@ -714,7 +693,7 @@ spec:
 ### Solicitudes de estado activo (keepalive-requests)
 {: #keepalive-requests}
 
-Configure el número máximo de solicitudes que se pueden servir a través de una conexión en estado activo.
+Establece el número máximo de solicitudes que se pueden servir a través de una conexión en estado activo.
 {:shortdesc}
 
 <dl>
@@ -774,13 +753,13 @@ es opcional. La configuración se aplica a todos los servicios del host de Ingre
 ### Tiempo de espera de estado activo (keepalive-timeout)
 {: #keepalive-timeout}
 
-Configure el tiempo que se mantiene abierta una conexión en estado activo en el servidor.
+Establece el tiempo máximo que se mantiene abierta una conexión en estado activo en el lado del servidor.
 {:shortdesc}
 
 <dl>
 <dt>Descripción</dt>
 <dd>
-Establece el tiempo que se mantiene abierta una conexión en estado activo en el servidor.
+Establece el tiempo máximo que se mantiene abierta una conexión en estado activo en el servidor.
 </dd>
 
 
@@ -830,11 +809,166 @@ es opcional. Si se proporciona el parámetro, se establece el tiempo de espera d
 <br />
 
 
+### Siguiente proxy en sentido ascendente (proxy-next-upstream-config)
+{: #proxy-next-upstream-config}
+
+Establece cuándo el ALB puede pasar una solicitud al siguiente servidor en sentido ascendente. {:shortdesc}
+
+<dl>
+<dt>Descripción</dt>
+<dd>
+El ALB de Ingress actúa como un proxy entre la app del cliente y la app. Algunas configuraciones de app precisan de varios servidores en sentido ascendente para manejar las solicitudes de cliente entrantes desde el ALB. A veces el servidor proxy que utiliza el ALB no puede establecer una conexión con un servidor en sentido ascendente que utilice la app. El ALB, puede entonces intentar establecer una conexión con el siguiente servidor en sentido ascendente para pasarle en su lugar la solicitud. Puede utilizar la anotación `proxy-next-upstream-config` para definir en qué casos, cuánto tiempo y cuántas veces el ALB puede intentar pasar una solicitud al siguiente servidor en sentido ascendente. <br><br><strong>Nota</strong>: Siempre se configura un tiempo de espera al utilizar `proxy-next-upstream-config`, de forma que no añada `timeout=true` a esta anotación.
+</dd>
+<dt>YAML del recurso de Ingress de ejemplo</dt>
+<dd>
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/proxy-next-upstream-config: "serviceName=&lt;myservice1&gt; retries=&lt;tries&gt; timeout=&lt;time&gt; error=true http_502=true; serviceName=&lt;myservice2&gt; http_403=true non_idempotent=true"
+spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mysecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: myservice1
+          servicePort: 80
+</code></pre>
+
+<table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Visión general de los componentes del archivo YAML</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td>Sustituya <code>&lt;<em>myservice</em>&gt;</code> por el nombre del servicio de Kubernetes que ha creado para la app.</td>
+</tr>
+<tr>
+<td><code>retries</code></td>
+<td>Sustituya <code>&lt;<em>tries</em>&gt;</code> con el número máximo de veces que ALB debe intentar pasar una solicitud al siguiente servidor en sentido ascendente. Este valor incluye la solicitud original. Para desactivar esta limitación, utilice <code>0</code>. Si no especifica un valor, se utiliza el valor predeterminado <code>0</code>. </td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Sustituya <code>&lt;<em>time</em>&gt;</code> con el máximo de tiempo, en segundos, que ALB debe intentar pasar una solicitud al siguiente servidor en sentido ascendente. Por ejemplo, para establecer un tiempo de 30 segundos, especifique <code>30s</code>. Para desactivar esta limitación, utilice <code>0</code>. Si no especifica un valor, se utiliza el valor predeterminado <code>0</code>. </td>
+</tr>
+<tr>
+<td><code>error</code></td>
+<td>Si se establece en <code>true</code>, el ALB pasa una solicitud al siguiente servidor en sentido ascendente cuando se produce un error al establecer una conexión con el primer servidor en sentido ascendente, pasando una solicitud al mismo, o leyendo la cabecera de respuesta. </td>
+</tr>
+<tr>
+<td><code>invalid_header</code></td>
+<td>Si se establece en <code>true</code>, el ALB pasa una solicitud al siguiente servidor en sentido ascendente cuando el primer servidor en sentido ascendente devuelve una respuesta vacía o no válida. </td>
+</tr>
+<tr>
+<td><code>http_502</code></td>
+<td>Si se establece en <code>true</code>, el ALB pasa una solicitud al siguiente servidor en sentido ascendente cuando el primer servidor en sentido ascendente devuelve una respuesta con el código 502. Puede designar los siguientes códigos de respuesta HTTP: <code>500</code>, <code>502</code>, <code>503</code>, <code>504</code>, <code>403</code>, <code>404</code>, <code>429</code>.
+</td>
+</tr>
+<tr>
+<td><code>non_idempotent</code></td>
+<td>Si se establece en <code>true</code>, el ALB puede pasar solicitudes con un método no idempotente al siguiente servidor en sentido ascendente. De forma predeterminada, el ALB no pasa estas solicitudes al siguiente servidor en sentido ascendente. </td>
+</tr>
+<tr>
+<td><code>off</code></td>
+<td>Establezca este valor en <code>true</code> para evitar que el ALB pase solicitudes al siguiente servidor en sentido ascendente.
+</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
+
+<br />
+
+
+### Afinidad de sesión con cookies (sticky-cookie-services)
+{: #sticky-cookie-services}
+
+Utilice la anotación de cookie sticky para añadir afinidad de sesión al ALB y direccionar siempre el tráfico de red entrante al mismo servidor en sentido ascendente.
+{:shortdesc}
+
+<dl>
+<dt>Descripción</dt>
+<dd>Para la alta disponibilidad, es posible que la configuración de la app requiera que despliegue varios servidores en sentido ascendente para que gestionen las solicitudes entrantes del cliente y garanticen una mayor disponibilidad. Cuando un cliente se conecta a la app de fondo, podría ser útil que un cliente recibiera el servicio del mismo servidor en sentido ascendente mientras dure la sesión o durante el tiempo que se tarda en completar una tarea. Puede configurar el ALB de modo que asegure la afinidad de sesión direccionando siempre el tráfico de red de entrada al mismo servidor en sentido ascendente.
+
+</br></br>
+El ALB asigna cada cliente que se conecta a la app de fondo a uno de los servidores en sentido ascendente disponibles. El ALB crea una cookie de sesión que se almacena en la app del cliente y que se incluye en la información de cabecera de cada solicitud entre el ALB y el cliente. La información de la cookie garantiza que todas las solicitudes se gestionan en el mismo servidor en sentido ascendente durante todo el periodo de la sesión.
+
+</br></br>
+Si incluye varios servicios, utilice únicamente un punto y coma (;) para separarlos.</dd>
+<dt>YAML del recurso de Ingress de ejemplo</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/sticky-cookie-services: "serviceName=&lt;myservice1&gt; name=&lt;cookie_name1&gt; expires=&lt;expiration_time1&gt; path=&lt;cookie_path1&gt; hash=&lt;hash_algorithm1&gt;;serviceName=&lt;myservice2&gt; name=&lt;cookie_name2&gt; expires=&lt;expiration_time2&gt; path=&lt;cookie_path2&gt; hash=&lt;hash_algorithm2&gt;"
+spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mytlssecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: &lt;myservice1&gt;
+          servicePort: 8080
+      - path: /myapp
+        backend:
+          serviceName: &lt;myservice2&gt;
+          servicePort: 80</code></pre>
+
+  <table>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Visión general de los componentes del archivo YAML</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>serviceName</code></td>
+  <td>Sustituya <code>&lt;<em>myservice</em>&gt;</code> por el nombre del servicio de Kubernetes que ha creado para la app.</td>
+  </tr>
+  <tr>
+  <td><code>name</code></td>
+  <td>Sustituya <code>&lt;<em>cookie_name</em>&gt;</code> por el nombre de una "stickie cookie" que se crea durante una sesión.</td>
+  </tr>
+  <tr>
+  <td><code>expires</code></td>
+  <td>Sustituya <code>&lt;<em>expiration_time</em>&gt;</code> por el tiempo en segundos (s), minutos (m) u horas (h) antes de que caduque la "sticky cookie". Este tiempo depende de la actividad del usuario. Una vez caducada la cookie, el navegador web del cliente la suprime y se deja de enviar al ALB. Por ejemplo, para establecer un tiempo de caducidad de 1 segundo, 1 minutos o 1 hora, escriba <code>1s</code>, <code>1m</code> o <code>1h</code>.</td>
+  </tr>
+  <tr>
+  <td><code>path</code></td>
+  <td>Sustituya <code>&lt;<em>cookie_path</em>&gt;</code> por vía de acceso que se añade al subdominio de Ingress y que indica los dominios y subdominios para los que se envía la cookie al ALB. Por ejemplo, si el dominio de Ingress es <code>www.myingress.com</code> y desea enviar la cookie en cada solicitud del cliente, debe establecer <code>path=/</code>. Si desea enviar la cookie solo para <code>www.myingress.com/myapp</code> y todos sus subdominios, establezca este valor en <code>path=/myapp</code>.</td>
+  </tr>
+  <tr>
+  <td><code>hash</code></td>
+  <td>Sustituya <code>&lt;<em>hash_algorithm</em>&gt;</code> por el algoritmo hash que protege la información en la cookie. Solo se admite <code>sha1
+</code>. SHA1 crea una suma de hash en función de la información de la cookie y añade esta suma de hash a la cookie. El servidor puede descifrar la información de la cookie y verificar la integridad de los datos.</td>
+  </tr>
+  </tbody></table>
+
+ </dd></dl>
+
+<br />
+
 
 ### Estado activo en sentido ascendente (upstream-keepalive)
 {: #upstream-keepalive}
 
-Configure el número máximo de conexiones de estado activo en sentido ascendente para un servidor en sentido ascendente.
+Establece el número máximo de conexiones de estado activo para un servidor en sentido ascendente.
 {:shortdesc}
 
 <dl>
@@ -905,8 +1039,9 @@ Define el número máximo de conexiones de estado activo desocupadas para el ser
   <p>Si establece el tipo de solicitud en <code>web</code>, se valida una solicitud web que contiene una señal de acceso de {{site.data.keyword.appid_short_notm}}. Si la validación de señal falla, la solicitud web es rechazada. Si la solicitud no contiene ninguna señal de acceso, la solicitud se redirige a la página de inicio de sesión de {{site.data.keyword.appid_short_notm}}. **Nota**: Para que funcione la autenticación web de {{site.data.keyword.appid_short_notm}}, las cookies deben estar habilitadas en el navegador del usuario.</p>
 
   <p>Si establece el tipo de solicitud en <code>api</code>, se valida una solicitud de API que contiene una señal de acceso de {{site.data.keyword.appid_short_notm}}. Si la solicitud no contiene ninguna señal de acceso, el usuario recibe un mensaje de error <code>401: Unauthorized</code>.</p>
-  </dd>
 
+  <p>**Nota**: Por razones de seguridad, la autenticación de {{site.data.keyword.appid_short_notm}} solo da soporte a sistemas de fondos que tenga TLS/SSL habilitado. </p>
+  </dd>
    <dt>YAML del recurso de Ingress de ejemplo</dt>
    <dd>
 
@@ -950,7 +1085,7 @@ Define el número máximo de conexiones de estado activo desocupadas para el ser
     </tr>
     <tr>
     <td><code>serviceName</code></td>
-    <td>Sustituya <code><em>&lt;myservice&gt</em></code> con el nombre del servicio de Kubernetes que ha creado para la app. Este campo es opcional. Si no se incluye un nombre de servicio, la anotación se habilita para todos los servicios.  Si se incluye un nombre de servicio, la anotación se habilita solo para ese servicio. Separe varios servicios con punto y coma (;).</td>
+    <td>Sustituya <code><em>&lt;myservice&gt;</em></code> por el nombre del servicio de Kubernetes que ha creado para la app. Este campo es opcional. Si no se incluye un nombre de servicio, la anotación se habilita para todos los servicios.  Si se incluye un nombre de servicio, la anotación se habilita solo para ese servicio. Separe varios servicios con punto y coma (;).</td>
     </tr>
     </tbody></table>
     </dd>
@@ -1028,7 +1163,7 @@ spec:
 La salida de la CLI se parecerá a la siguiente:
 <pre class="screen">
 <code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.10.10.149   169.60.16.246   80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  80:30776/TCP,443:30412/TCP   8d</code></pre></li>
 <li>Abra el mapa de configuración del ALB.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
@@ -1051,11 +1186,11 @@ metadata:
 La salida de la CLI se parecerá a la siguiente:
 <pre class="screen">
 <code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
 <li>Configure Ingress para que utilice los puertos no predeterminados cuando direccione el tráfico de entrada de la red a sus servicios. Utilice el archivo YAML de ejemplo de esta referencia. </li>
 <li>Actualice la configuración del ALB.
 <pre class="pre">
-<code>kubectl apply -f &lt;yaml_file&gt;</code></pre>
+<code>kubectl apply -f myingress.yaml</code></pre>
 </li>
 <li>Abra el navegador web preferido para acceder a la app. Ejemplo: <code>https://&lt;ibmdomain&gt;:&lt;port&gt;/&lt;service_path&gt;/</code></li></ol></dd></dl>
 
@@ -1122,7 +1257,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/hsts: enabled=&lt;true&gt; maxAge=&lt;31536000&gt; includeSubdomains=&lt;true&gt;
+    ingress.bluemix.net/hsts: enabled=true maxAge=&lt;31536000&gt; includeSubdomains=true
 spec:
   tls:
   - hosts:
@@ -1184,7 +1319,7 @@ Configure la autenticación mutua para el ALB de Ingress. El cliente autentica e
 <dd>
 <ul>
 <li>[Debe tener un secreto válido que contenga la autoridad de certificado necesaria (CA)](cs_app.html#secrets). Para autenticarse con la autenticación mutua también son necesarios <code>client.key</code> y <code>client.crt</code>.</li>
-<li>Para habilitar la autenticación mutua en un puerto distinto de 443, [configure el equilibrador de carga para abrir el puerto válido](cs_ingress.html#opening_ingress_ports).</li>
+<li>Para habilitar la autenticación mutua en un puerto distinto de 443, [configure el ALB para abrir el puerto válido](cs_ingress.html#opening_ingress_ports).</li>
 </ul>
 </dd>
 
@@ -1223,12 +1358,12 @@ spec:
 <td>Sustituya <code>&lt;<em>mysecret</em>&gt;</code> por el nombre del recurso de secreto.</td>
 </tr>
 <tr>
-<td><code>&lt;port&gt;</code></td>
-<td>El número de puerto del ALB.</td>
+<td><code>port</code></td>
+<td>Sustituya <code>&lt;<em>port</em>&gt;</code> con el número de puerto del ALB. </td>
 </tr>
 <tr>
-<td><code>&lt;serviceName&gt;</code></td>
-<td>El nombre de uno o varios recursos de Ingress. Este parámetro
+<td><code>serviceName</code></td>
+<td>Sustituya <code>&lt;<em>servicename</em>&gt;</code> con el nombre de uno o varios recursos de Ingress. Este parámetro
 es opcional.</td>
 </tr>
 </tbody></table>
@@ -1286,12 +1421,12 @@ spec:
   <tbody>
   <tr>
   <td><code>ssl-service</code></td>
-  <td>Sustituya <code>&lt;<em>myservice</em>&gt;</code> por el nombre del servicio que representa su app. El tráfico está cifrado desde el ALB a la app.</td>
+  <td>Sustituya <code>&lt;<em>myservice</em>&gt;</code> por el nombre del servicio que precisa HTTPS. Se cifrará el tráfico entre el ALB y este servicio de app. </td>
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
   <td>Sustituya <code>&lt;<em>service-ssl-secret</em>&gt;</code> por el secreto para el servicio. Este parámetro
-es opcional. Si se proporciona el parámetro, el valor debe contener la clave y el certificado que la app espera del cliente.</td>
+es opcional. Si se proporciona el parámetro, el valor debe contener la clave y el certificado que la app espera del cliente. Para crear un secreto TLS, consulte [Creación de secretos](cs_app.html#secrets).</td>
   </tr>
   </tbody></table>
 
@@ -1352,12 +1487,12 @@ spec:
   <tbody>
   <tr>
   <td><code>ssl-service</code></td>
-  <td>Sustituya <code>&lt;<em>myservice</em>&gt;</code> por el nombre del servicio que representa su app. El tráfico está cifrado desde el ALB a la app.</td>
+  <td>Sustituya <code>&lt;<em>myservice</em>&gt;</code> por el nombre del servicio que precisa HTTPS. Se cifrará el tráfico entre el ALB y este servicio de app. </td>
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
   <td>Sustituya <code>&lt;<em>service-ssl-secret</em>&gt;</code> por el secreto para el servicio. Este parámetro
-es opcional. Si se proporciona el parámetro, el valor debe contener la clave y el certificado que la app espera del cliente.</td>
+es opcional. Si se proporciona el parámetro, el valor debe contener la clave y el certificado que la app espera del cliente. Para crear un secreto de autenticación mutuo, consulte [Creación de secretos](cs_app.html#secrets). </td>
   </tr>
   </tbody></table>
 
@@ -1367,7 +1502,92 @@ es opcional. Si se proporciona el parámetro, el valor debe contener la clave y 
 <br />
 
 
+## Anotaciones de Istio
+{: #istio-annotations}
 
+### Servicios de Istio (istio-services)
+{: #istio-services}
+
+  Direcciona el tráfico a los servicios gestionados por Istio.
+  {:shortdesc}
+
+  <dl>
+  <dt>Descripción</dt>
+  <dd>
+  Si tiene servicios gestionados por Istio, puede utilizar un clúster ALB para direccionar las solicitudes HTTP/HTTPS al controlador de Ingress Istio. A continuación, el controlador de Istio Ingress direcciona las solicitudes a los servicios de app. Para poder direccionar el tráfico, es necesario cambiar los recursos de Ingress tanto para el clúster ALB como al controlador de Istio Ingress.
+    <br><br>En el recurso Ingress para el clúster ALB debe:
+      <ul>
+        <li>especificar la anotación `istio-services` </li>
+        <li>definir la vía de acceso del servicio como la vía de acceso actual en la que la aplicación está a la escucha</li>
+        <li>definir el puerto de servicio como el puerto del controlador de Ingress Istio </li>
+      </ul>
+    <br>En el recurso Ingress para el controlador Istio Ingress debe:
+      <ul>
+        <li>definir la vía de acceso del servicio como la vía de acceso actual en la que la aplicación está a la escucha</li>
+        <li>definir el puerto de servicio como el puerto HTTP/HTTPS del servicio de app que expone el controlador de Istio Ingress</li>
+    </ul>
+  </dd>
+
+   <dt>YAML del recurso de Ingress de ejemplo para el clúster ALB</dt>
+   <dd>
+
+   <pre class="codeblock">
+   <code>apiVersion: extensions/v1beta1
+   kind: Ingress
+   metadata:
+    name: myingress
+    annotations:
+      ingress.bluemix.net/istio-services: "enable=True serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
+   spec:
+    tls:
+    - hosts:
+      - mydomain
+    secretName: mytlssecret
+  rules:
+    - host: mydomain
+    http:
+      paths:
+        - path: &lt;/myapp1&gt;
+          backend:
+            serviceName: &lt;myservice1&gt;
+            servicePort: &lt;istio_ingress_port&gt;
+        - path: &lt;/myapp2&gt;
+          backend:
+            serviceName: &lt;myservice2&gt;
+            servicePort: &lt;istio_ingress_port&gt;</code></pre>
+
+   <table>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Visión general de los componentes del archivo YAML</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>enable</code></td>
+      <td>Para habilitar el direccionamiento del tráfico de servicios gestionados de Istio, establézcalo en <code>True</code>. </td>
+    </tr>
+    <tr>
+    <td><code>serviceName</code></td>
+    <td>Sustituya <code><em>&lt;myservice1&gt;</em></code> por el nombre del servicio de Kubernetes que ha creado para la app gestionada de Istio. Separe varios servicios con punto y coma (;). Este campo es opcional. Si no especifica un nombre de servicio, se habilitan todos los servicios gestionados de Istio para el direccionamiento del tráfico. </td>
+    </tr>
+    <tr>
+    <td><code>istioServiceNamespace</code></td>
+    <td>Sustituya <code><em>&lt;istio-namespace&gt;</em></code> con el espacio de nombres de Kubernetes en donde Istio está instalado. Este campo es opcional. Si no especifica un espacio de nombres, se utiliza el espacio de nombres <code>istio-system</code>.  </td>
+    </tr>
+    <tr>
+    <td><code>istioServiceName</code></td>
+    <td>Sustituya <code><em>&lt;istio-ingress-service&gt;</em></code> con el nombre del servicio de Istio Ingress. Este campo es opcional. Si no especifica el nombre del servicio de Istio Ingress, se utiliza el nombre de servicio <code>istio-ingress</code>. </td>
+    </tr>
+    <tr>
+    <td><code>path</code></td>
+      <td>Para cada servicio gestionado de Istio para el que desee direccionar el tráfico, sustituya <code><em>&lt;/myapp1&gt;</em></code> con la vía de acceso del sistema de fondo en el que el servicio gestionado de Istio está a la escucha. La vía de acceso debe corresponder a la vía de acceso que haya definido en el recurso de Ingress. </td>
+    </tr>
+    <tr>
+    <td><code>servicePort</code></td>
+    <td>Para cada servicio gestionado de Istio para el que desee direccionar el tráfico, sustituya <code><em>&lt;istio_ingress_port&gt;</em></code> con el puerto del controlador de Istio Ingress. </td>
+    </tr>
+    </tbody></table>
+    </dd>
+    </dl>
 
 ## Anotaciones de almacenamiento intermedio de proxy
 {: #proxy-buffer}
@@ -1460,7 +1680,7 @@ spec:
  <td>Sustituya <code>&lt;<em>myservice</em>&gt;</code> por el nombre de un servicio para aplicar almacenamientos intermedios de proxy.</td>
  </tr>
  <tr>
- <td><code>number_of_buffers</code></td>
+ <td><code>number</code></td>
  <td>Sustituya <code>&lt;<em>number_of_buffers</em>&gt;</code> por un número, como <em>2</em>.</td>
  </tr>
  <tr>
@@ -1556,7 +1776,7 @@ kind: Ingress
 metadata:
  name: proxy-ingress
  annotations:
-   ingress.bluemix.net/proxy-busy-buffers-size: "serviceName=&lt;serviceName&gt; size=&lt;size&gt;"
+   ingress.bluemix.net/proxy-busy-buffers-size: "serviceName=&lt;myservice&gt; size=&lt;size&gt;"
 spec:
  tls:
  - hosts:
@@ -2003,6 +2223,3 @@ Limita la velocidad de procesamiento de solicitudes y el número de conexiones p
   </dl>
 
   <br />
-
-
-

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-08"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -39,13 +39,13 @@ Consultez les informations les plus récentes dans son nouvel emplacement :
     - [Ajout de sous-réseaux personnalisés et existants à des clusters Kubernetes](cs_subnets.html#custom)
     - [Ajout de sous-réseaux et d'adresses IP gérés par l'utilisateur aux clusters Kubernetes](cs_subnets.html#user_managed)
 - [Utilisation de partages de fichiers NFS existants dans des clusters](cs_storage.html#existing)
-- [Configuration de la journalisation de cluster](cs_health.html#logging)
-    - [Activation du transfert de journal](cs_health.html#logging)
-    - [Mise à jour de la configuration d'acheminement de journal](cs_health.html#logging)
-    - [Arrêt du transfert de journaux](cs_health.html#log_sources_delete)
-    - [Configuration du transfert de journaux pour les journaux d'audit d'API Kubernetes](cs_health.html#app_forward)
-    - [Activation de l'acheminement de journal d'audit d'API Kubernetes](cs_health.html#audit_enable)
-    - [Arrêt de l'acheminement de journaux d'audit d'API Kubernetes](cs_health.html#audit_delete)
+- [Configuration de la consignation de cluster](cs_health.html#logging)
+    - [Activation de l'acheminement des journaux](cs_health.html#logging)
+    - [Mise à jour de la configuration d'acheminement des journaux](cs_health.html#logging)
+    - [Arrêt de l'acheminement de journaux](cs_health.html#log_sources_delete)
+    - [Configuration de l'acheminement des journaux d'audit d'API Kubernetes](cs_health.html#app_forward)
+    - [Activation de l'acheminement des journaux d'audit d'API Kubernetes](cs_health.html#audit_enable)
+    - [Arrêt de l'acheminement des journaux d'audit d'API Kubernetes](cs_health.html#audit_delete)
     - [Affichage des journaux](cs_health.html#view_logs)
     - [IBM Cloud Log Analysis](cs_health.html#view_logs_k8s)
     - [Journaux Docker](cs_health.html#view_logs_docker)
@@ -55,3 +55,4 @@ Consultez les informations les plus récentes dans son nouvel emplacement :
     - [Configuration de la surveillance de l'état de santé des noeuds worker avec le système de reprise automatique](cs_health.html#autorecovery)
 - [Visualisation de ressources de cluster Kubernetes](cs_integrations.html#weavescope)
 - [Suppression de clusters](cs_clusters.html#remove)
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -46,7 +46,7 @@ lastupdated: "2018-03-16"
 
 开始之前，您必须具有试用、现买现付或预订 [{{site.data.keyword.Bluemix_notm}} 帐户](https://console.bluemix.net/registration/)才能创建免费集群。
 
-**我应该获取哪种 {{site.data.keyword.Bluemix_notm}} 帐户类型？**通过现买现付和预订帐户，可以为 Kubernetes 集群供应 IBM Cloud Infrastructure (SoftLayer) 资源，并创建一个免费集群或创建标准集群。通过试用帐户，您可以创建 1 个免费使用 21 天的集群，而不能创建标准集群。21 天后，系统会删除免费集群。要继续使用 Kubernetes 集群，请创建另一个免费集群，直到试用帐户结束，或者将帐户升级为现买现付或预订帐户。
+**我应该获取哪种 {{site.data.keyword.Bluemix_notm}} 帐户类型？**通过现买现付和预订帐户，可以为 Kubernetes 集群供应 IBM Cloud Infrastructure (SoftLayer) 资源，并创建一个免费集群或创建标准集群。通过试用帐户，您可以创建 1 个免费集群，而不能创建标准集群。所有免费集群在 21 天后会被删除。要继续使用 Kubernetes 集群，请创建另一个免费集群，直到试用帐户结束，或者将帐户升级为现买现付或预订帐户。
 {:tip}
 
 要创建免费集群，请执行以下操作：
@@ -66,10 +66,10 @@ lastupdated: "2018-03-16"
 
 
 **接下来要做什么？**
-
-集群启动并开始运行后，请首先对集群执行一些操作。
+在接下来的 21 天内，请使用免费集群试用一些功能。
 
 * [安装 CLI 以开始使用集群。](cs_cli_install.html#cs_cli_install)
 * [在集群中部署应用程序。](cs_app.html#app_cli)
 * [创建具有多个节点的标准集群以获得更高可用性。](cs_clusters.html#clusters_ui)
 * [在 {{site.data.keyword.Bluemix_notm}} 中设置自己的专用注册表，以存储 Docker 映像并与其他用户共享这些映像。](/docs/services/Registry/index.html)
+

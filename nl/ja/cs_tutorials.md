@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-02-27"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -85,13 +85,13 @@ CLI とその前提条件をインストールするには、以下のように�
     {: pre}
 
 5.  Kubernetes ダッシュボードのローカル・バージョンを表示して、アプリをクラスター内にデプロイするには、[Kubernetes CLI をインストールします![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。 Kubernetes CLI を使用してコマンドを実行するには、接頭部 `kubectl` を使用します。
-    1.  機能の完全な互換性を確保するには、使用する予定の Kubernetes クラスター・バージョンと一致する Kubernetes CLI バージョンをダウンロードします。 現在の {{site.data.keyword.containershort_notm}} のデフォルト Kubernetes バージョンは 1.8.8 です。
+    1.  機能の完全な互換性を確保するには、使用する予定の Kubernetes クラスター・バージョンと一致する Kubernetes CLI バージョンをダウンロードします。 現在の {{site.data.keyword.containershort_notm}} のデフォルト Kubernetes バージョンは 1.8.11 です。
 
-        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl)
+        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl)
 
-        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl)
+        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl)
 
-        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe)
+        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe)
 
           **ヒント:** Windows を使用している場合、Kubernetes CLI を {{site.data.keyword.Bluemix_notm}} CLI と同じディレクトリーにインストールします。 このようにセットアップすると、後でコマンドを実行するとき、ファイル・パスの変更を行う手間がいくらか少なくなります。
 
@@ -99,7 +99,7 @@ CLI とその前提条件をインストールするには、以下のように�
         1.  実行可能ファイルを `/usr/local/bin` ディレクトリーに移動します。
 
             ```
-            mv /<path_to_file>/kubectl /usr/local/bin/kubectl
+            mv filepath/kubectl /usr/local/bin/kubectl
             ```
             {: pre}
 
@@ -159,17 +159,19 @@ CLI とその前提条件をインストールするには、以下のように�
 
 2.  独自のプライベート・イメージ・リポジトリーを {{site.data.keyword.registryshort_notm}} にセットアップすることによって、Docker イメージを安全に保管し、すべてのクラスター・ユーザーと共有します。 {{site.data.keyword.Bluemix_notm}} 内のプライベート・イメージ・リポジトリーは、名前空間によって識別されます。 イメージ・リポジトリーの固有の URL を作成するために名前空間が使用されます。開発者はこれを使用してプライベート Dockerイメージにアクセスできます。
 
-    この例で PR 会社はイメージ・リポジトリーを {{site.data.keyword.registryshort_notm}} に 1 つだけを作成するので、アカウント内のすべてのイメージをグループする名前空間として _pr_firm_ を選択します。 _&lt;your_namespace&gt;_ を、このチュートリアルに関係のない任意の名前空間に置き換えてください。
+   
+    
+    この例で PR 会社はイメージ・リポジトリーを {{site.data.keyword.registryshort_notm}} に 1 つだけを作成するので、アカウント内のすべてのイメージをグループする名前空間として _pr_firm_ を選択します。 _&lt;namespace&gt;_ を、このチュートリアルに関係のない任意の名前空間に置き換えてください。
 
     ```
-    bx cr namespace-add <your_namespace>
+    bx cr namespace-add <namespace>
     ```
     {: pre}
 
 3.  次のステップに進む前に、ワーカー・ノードのデプロイメントが完了したことを確認します。
 
     ```
-    bx cs workers <cluster_name>
+    bx cs workers <cluster_name_or_ID>
     ```
      {: pre}
 
@@ -177,7 +179,7 @@ CLI とその前提条件をインストールするには、以下のように�
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.48.131.37   10.177.161.132   free           normal   Ready    mil01      1.8.8
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.8.11
     ```
     {: screen}
 
@@ -192,7 +194,7 @@ CLI でクラスターのコンテキストを設定します。
 1.  環境変数を設定して Kubernetes 構成ファイルをダウンロードするためのコマンドを取得します。
 
     ```
-    bx cs cluster-config <cluster_name>
+    bx cs cluster-config <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -233,8 +235,8 @@ CLI でクラスターのコンテキストを設定します。
     出力例:
 
     ```
-    Client Version: v1.8.8
-    Server Version: v1.8.8
+    Client Version: v1.8.11
+    Server Version: v1.8.11
     ```
     {: screen}
 
@@ -243,30 +245,30 @@ CLI でクラスターのコンテキストを設定します。
 
 {{site.data.keyword.Bluemix_notm}} サービスを使用すると、既に開発された機能をアプリで活用できます。 クラスターにバインドされているすべての {{site.data.keyword.Bluemix_notm}} サービスは、そのクラスターにデプロイされたアプリで使用できます。 アプリで使用する {{site.data.keyword.Bluemix_notm}} サービスごとに、以下の手順を繰り返してください。
 
-1.  {{site.data.keyword.toneanalyzershort}} サービスを {{site.data.keyword.Bluemix_notm}} アカウントに追加します。
+1.  {{site.data.keyword.toneanalyzershort}} サービスを {{site.data.keyword.Bluemix_notm}} アカウントに追加します。 <service_name> をサービス・インスタンスの名前に置き換えます。
 
     **注:** {{site.data.keyword.toneanalyzershort}} サービスをアカウントに追加すると、そのサービスが無料ではないことを示すメッセージが表示されます。 API 呼び出しを制限している場合には、このチュートリアルによって {{site.data.keyword.watson}} サービスからの課金は発生しません。 [{{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} サービスの料金情報を確認します ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/watson/developercloud/tone-analyzer.html#pricing-block)。
 
     ```
-    bx service create tone_analyzer standard <mytoneanalyzer>
+    bx service create tone_analyzer standard <service_name>
     ```
     {: pre}
 
 2.  {{site.data.keyword.toneanalyzershort}} インスタンスをクラスターの `default` の Kubernetes 名前空間にバインドします。 あとで独自の名前空間を作成して Kubernetes リソースへのユーザー・アクセスを管理できますが、現時点では `default` 名前空間を使用します。 Kubernetes 名前空間は、以前に作成したレジストリー名前空間とは異なります。
 
     ```
-    bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
+    bx cs cluster-service-bind <cluster_name> default <service_name>
     ```
     {: pre}
 
     出力:
 
     ```
-    bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
-        Binding service instance to namespace...
-        OK
-        Namespace:	default
-        Secret name:	binding-mytoneanalyzer
+    bx cs cluster-service-bind pr_firm_cluster default mytoneanalyzer
+    Binding service instance to namespace...
+    OK
+    Namespace:	default
+    Secret name:	binding-mytoneanalyzer
     ```
     {: screen}
 
@@ -296,3 +298,4 @@ CLI でクラスターのコンテキストを設定します。
 * [クイズに答えて知識を試してみましょう!![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
 
 * [チュートリアル: {{site.data.keyword.containershort_notm}} の Kubernetes クラスターにアプリをデプロイする方法](cs_tutorials_apps.html#cs_apps_tutorial)を試して、作成したクラスターに PR 会社のアプリをデプロイします。
+

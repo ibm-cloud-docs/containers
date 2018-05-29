@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-28"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-02-28"
 {: #app}
 
 Sie können Kubernetes-Verfahren in {{site.data.keyword.containerlong}} verwenden, um Apps in Containern bereitzustellen und um sicherzustellen, dass Ihre Apps ununterbrochen betriebsbereit sind. Sie können beispielsweise rollierende Aktualisierungen und Rollbacks ausführen, ohne dass Ihren Benutzern hierdurch Ausfallzeiten entstehen.
-{:shortdesc}
+{: shortdesc}
 
 Erfahren Sie mehr zu den allgemeinen Schritten zur Bereitstellung von Apps, indem Sie auf einen Bereich der folgenden Abbildung klicken.
 
@@ -40,7 +40,7 @@ Erfahren Sie mehr zu den allgemeinen Schritten zur Bereitstellung von Apps, inde
 {: #highly_available_apps}
 
 Je breiter gefächert Sie Ihre Containerkonfiguration auf mehrere Workerknoten und Cluster verteilen, umso geringer ist die Wahrscheinlichkeit, dass Ihre Benutzer Ausfallzeiten mit Ihrer App verzeichnen.
-{:shortdesc}
+{: shortdesc}
 
 Betrachten Sie die folgenden potenziellen Appkonfigurationen, die nach zunehmendem Grad der Verfügbarkeit angeordnet sind.
 
@@ -53,78 +53,32 @@ Betrachten Sie die folgenden potenziellen Appkonfigurationen, die nach zunehmend
 (Anti-Affinität) an unterschiedlichen Standorten verteilt sind.
 4.  Bereitstellung mit n+2 Pods, deren Verwaltung durch eine Replikatgruppe erfolgt und die auf mehrere Knoten (Anti-Affinität) in unterschiedlichen Regionen verteilt sind.
 
+
+
+
 ### Verfügbarkeit Ihrer App erhöhen
 
 <dl>
-<dt>Bereitstellungen und Replikatgruppen zum Bereitstellen Ihrer App und deren Abhängigkeiten verwenden</dt>
-<dd>Eine Bereitstellung ist eine Kubernetes-Ressource, mit der Sie alle Komponenten Ihrer App und deren Abhängigkeiten deklarieren können. Dadurch, dass Sie die einzelnen Komponenten beschreiben und nicht etwa notieren, welche Schritte notwendig sind und in welcher Reihenfolge ausgeführt müssen, um sie zu erstellen, können Sie sich voll darauf konzentrieren, wie Ihre App zur Ausführungszeit aussehen soll.
-</br></br>
-Wenn Sie mehrere Pods bereitstellen, wird für Ihre Bereitstellungen automatisch eine Replikatgruppe erstellt, anhand der die Pods überwacht werden und sichergestellt wird, dass die gewünschte Anzahl von Pods jederzeit betriebsbereit ist. Wird ein Pod inaktiv, so ersetzt die Replikatgruppe den inaktiven Pod durch einen neuen Pod.
-</br></br>
-Mit einer Bereitstellung können Sie Aktualisierungsstrategien für Ihre App definieren. Dabei können Sie unter Anderem die Anzahl von Pods angeben, die Sie bei einer rollierenden Aktualisierung hinzufügen wollen, und festlegen, wie viele Pods zur gleichen Zeit nicht verfügbar sein dürfen. Wenn Sie eine rollierende Aktualisierung durchführen, prüft die Bereitstellung, ob die Überarbeitung funktioniert, und stoppt den Rollout, wenn Fehler erkannt werden.
-</br></br>
-Bereitstellungen bieten ferner die Möglichkeit der gleichzeitigen (simultanen) Bereitstellung mehrerer Revisionen (Überarbeitungen) mit verschiedenen Flags. Dadurch können Sie beispielsweise eine Bereitstellung testen, bevor Sie sich entschließen, sie mit einer Push-Operation an die Produktion zu übertragen.
-</br></br>
-Jede Bereitstellung verfolgt die Revisionen, die bereitgestellt wurden. Dieses Verlaufsprotokoll von Revisionen können Sie verwenden, um ein Rollback auf eine vorherige Version durchzuführen, falls Sie feststellen, dass Ihre Aktualisierungen nicht wie erwartet funktionieren.</dd>
-<dt>Ausreichende Anzahl von Replikaten für die Arbeitslast Ihrer App plus 2 einbeziehen</dt>
-<dd>Um Ihre App noch verfügbarer zu machen und ihre Ausfallsicherheit zu steigern, sollten Sie erwägen, über die Mindestzahl hinaus zusätzliche Replikate einzubinden, damit die erwartete Arbeitslast verarbeitet werden kann. Zusätzliche Replikate sind in der Lage, die Arbeitslast abzufangen, wenn ein Pod ausfällt und der ausgefallene Pod noch nicht durch die Replikatgruppe ersetzt wurde. Zum Schutz vor zwei gleichzeitigen Ausfällen sollten Sie zwei zusätzliche Replikate einbinden. Diese Konfiguration folgt dem Muster 'N+2'. Hierbei steht 'N' für die Anzahl der Replikate, die für die Verarbeitung der eingehenden Arbeitslast zur Verfügung steht, während der Wert '+2' die beiden zusätzlich eingebundenen Replikate angibt. Sie können in einem Cluster mit beliebig vielen Pods arbeiten, solange im Cluster ein genügend großer Bereich dafür zur Verfügung steht.</dd>
-<dt>Pods auf mehrere Knoten (Anti-Affinität) verteilen</dt>
-<dd>Wenn Sie Ihre Bereitstellung erstellen, ist es möglich, dass jeder Pod auf demselben Workerknoten bereitgestellt wird. Diese Konfiguration, bei der sich die Pods auf demselben Workerknoten befinden, wird als Affinität oder Kollokation (Zusammenstellung) bezeichnet. Zum Schutz Ihrer App vor dem Ausfall eines Workerknotens können Sie von Ihrer Bereitstellung durch Verwenden der Option <strong>podAntiAffinity</strong> die Verteilung der Pods auf mehrere Workerknoten erzwingen. Diese Option steht nur für Standardcluster zur Verfügung.
-
-</br></br>
-<strong>Hinweis:</strong> Die folgende YAML-Datei setzt durch, dass jeder Pod auf einem anderen Workerknoten bereitgestellt wird. Sind mehr Replikate definiert als Workerknoten in Ihrem Cluster verfügbar sind, so wird nur die Anzahl an Replikaten bereitgestellt, die die Anti-Affinitätsanforderung erfüllen kann. Alle zusätzlichen Replikate verweilen so lange in einem Wartestatus, bis weitere Workerknoten zum Cluster hinzugefügt werden.
-
-<pre class="codeblock">
-<code>apiVersion: apps/v1beta1
-kind: Deployment
-metadata:
-  name: wasliberty
-spec:
-  replicas: 3
-  template:
-    metadata:
-      labels:
-        app: wasliberty
-    spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - wasliberty
-              topologyKey: kubernetes.io/hostname
-      containers:
-      - name: wasliberty
-        image: registry.&lt;region&gt;.bluemix.net/ibmliberty
-        ports:
-        - containerPort: 9080
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: wasliberty
-  labels:
-    app: wasliberty
-spec:
-  ports:
-    # Port, den dieser Service bedienen soll
-  - port: 9080
-  selector:
-    app: wasliberty
-  type: NodePort</code></pre>
-
-</dd>
-<dt>Pods auf mehrere Standorte oder Regionen verteilen</dt>
-<dd>Als Schutz Ihrer App vor einem Ausfall des Standorts oder der Region können Sie an einem anderen Standort oder in einer anderen Region
+  <dt>Bereitstellungen und Replikatgruppen zum Bereitstellen Ihrer App und deren Abhängigkeiten verwenden</dt>
+    <dd><p>Eine Bereitstellung ist eine Kubernetes-Ressource, mit der Sie alle Komponenten Ihrer App und deren Abhängigkeiten deklarieren können. Bei Bereitstellungen müssen Sie nicht alle Schritte niederschreiben und können sich stattdessen auf Ihre App konzentrieren. </p>
+    <p>Wenn Sie mehrere Pods bereitstellen, wird für Ihre Bereitstellungen automatisch eine Replikatgruppe erstellt, anhand der die Pods überwacht werden und sichergestellt wird, dass die gewünschte Anzahl von Pods jederzeit betriebsbereit ist. Wird ein Pod inaktiv, so ersetzt die Replikatgruppe den inaktiven Pod durch einen neuen Pod.</p>
+    <p>Mit einer Bereitstellung können Sie Aktualisierungsstrategien für Ihre App definieren. Dabei können Sie unter Anderem die Anzahl von Pods angeben, die Sie bei einer rollierenden Aktualisierung hinzufügen wollen, und festlegen, wie viele Pods zur gleichen Zeit nicht verfügbar sein dürfen. Wenn Sie eine rollierende Aktualisierung durchführen, prüft die Bereitstellung, ob die Überarbeitung funktioniert, und stoppt den Rollout, wenn Fehler erkannt werden.</p>
+    <p>Sie können mehrere Revisionen mit unterschiedlichen Flags gleichzeitig bereitstellen. Sie können beispielsweise eine Bereitstellung zuerst testen, bevor Sie sich entschließen, sie per Push-Operation an die Produktion zu übertragen. </p>
+    <p>Mit Bereitstellungen können Sie alle bereitgestellten Revisionen nachverfolgen. Sie können dieses Verlaufsprotokoll verwenden, um ein Rollback auf eine vorherige Version durchzuführen, falls Sie feststellen, dass Ihre Aktualisierungen nicht wie erwartet funktionieren. </p></dd>
+  <dt>Ausreichende Anzahl von Replikaten für die Arbeitslast Ihrer App plus 2 einbeziehen</dt>
+    <dd>Um Ihre App noch verfügbarer zu machen und ihre Ausfallsicherheit zu steigern, sollten Sie erwägen, über die Mindestzahl hinaus zusätzliche Replikate einzubinden, damit die erwartete Arbeitslast verarbeitet werden kann. Zusätzliche Replikate sind in der Lage, die Arbeitslast abzufangen, wenn ein Pod ausfällt und der ausgefallene Pod noch nicht durch die Replikatgruppe ersetzt wurde. Zum Schutz vor zwei gleichzeitigen Ausfällen sollten Sie zwei zusätzliche Replikate einbinden. Diese Konfiguration folgt dem Muster 'N+2'. Hierbei steht 'N' für die Anzahl der Replikate, die für die Verarbeitung der eingehenden Arbeitslast zur Verfügung steht, während der Wert '+2' die beiden zusätzlich eingebundenen Replikate angibt. Vorausgesetzt, in Ihrem Cluster ist ausreichend Platz, ist die Anzahl der mögliche Pods unbegrenzt. </dd>
+  <dt>Pods auf mehrere Knoten (Anti-Affinität) verteilen</dt>
+    <dd><p>Wenn Sie Ihre Bereitstellung erstellen, können alle Pods auf demselben Workerknoten bereitgestellt werden. Dies wird als Affinität oder Zusammenstellung bezeichnet. Zum Schutz Ihrer App vor dem Ausfall eines Workerknotens können Sie Ihre Bereitstellung so konfigurieren, dass Ihre Pods mithilfe der Option <em>podAntiAffinity</em> in Ihren Standardclustern über mehrere Workerknoten verteilt werden. Sie können zwei Typen von Pod-Anti-Affinität definieren: bevorzugt oder erforderlich. Weitere Informationen finden Sie in der Kubernetes-Dokumentation unter <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="(Wird in einem neuen Tab oder einem neuen Fenster geöffnet)">Assigning Pods to Nodes</a>. </p>
+    <p><strong>Hinweis</strong>: Mit der erforderlichen Anti-Affinität können Sie nur die Anzahl von Replikaten bereitstellen, für die es Workerknoten gibt. Wenn Sie beispielsweise drei Workerknoten haben, aber in Ihrer YAML-Datei fünf Replikate definieren, werden nur drei Replikate bereitgestellt. Jedes Replikat befindet sich auf einem anderen Workerknoten. Die zwei übrigen Replikate verbleiben ausstehend. Wenn Sie einen weiteren Workerknoten zu Ihrem Cluster hinzufügen, wird eines der restlichen Replikate automatisch auf dem Workerknoten bereitgestellt. <p>
+    <p><strong>Beispiele für YAML-Bereitstellungsdateien</strong>:<ul>
+    <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/nginx_preferredAntiAffinity.yaml" rel="external" target="_blank" title="(Wird in einem neuen Tab oder Fenster geöffnet)">Nginx-App mit bevorzugter Anti-Affinität für Pods</a></li>
+    <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="(Wird in einem neuen Tab oder Fenster geöffnet)">IBM® WebSphere® Application Server Liberty-App mit erforderlicher Anti-Affinität für Pods</a></li></ul></p>
+    </dd>
+<dt>Pods auf mehrere Zonen oder Regionen verteilen</dt>
+  <dd>Als Schutz Ihrer App vor einem Ausfall des Standorts oder der Region können Sie an einem anderen Standort oder in einer anderen Region
 einen zweiten Cluster erstellen und mit der YAML-Datei für die Bereitstellung ein Duplikat der Replikatgruppe bereitstellen. Durch Einfügen einer gemeinsam genutzten Route und einer Lastausgleichsfunktion (Load Balancer)
-vor Ihren Clustern können Sie eine Verteilung der Arbeitslast auf mehrere Standorte oder Regionen bewirken. Weitere Informationen zur gemeinsamen Nutzung einer Route durch mehrere Cluster enthält <a href="cs_clusters.html#clusters" target="_blank">Hochverfügbarkeit von Clustern</a>.
-
-Weitere Details finden Sie unter den Optionen für <a href="cs_clusters.html#planning_clusters" target="_blank">hoch verfügbare Bereitstellungen</a>.</dd>
+vor Ihren Clustern können Sie eine Verteilung der Arbeitslast auf mehrere Standorte oder Regionen bewirken. Weitere Informationen finden Sie unter [Hochverfügbarkeit von Clustern](cs_clusters.html#clusters).
+  </dd>
 </dl>
 
 
@@ -132,7 +86,7 @@ Weitere Details finden Sie unter den Optionen für <a href="cs_clusters.html#pla
 {: #minimal_app_deployment}
 
 Eine grundlegende App-Bereitstellung in einem kostenlosen Cluster oder Standardcluster kann die folgenden Komponenten enthalten.
-{:shortdesc}
+{: shortdesc}
 
 ![Konfiguration für die Bereitstellung](images/cs_app_tutorial_components1.png)
 
@@ -151,7 +105,9 @@ spec:
     spec:
       containers:
       - name: ibmliberty
-        image: registry.<region>.bluemix.net/ibmliberty:latest
+        image: registry.bluemix.net/ibmliberty:latest
+        ports:
+        - containerPort: 9080        
 ---
 apiVersion: v1
 kind: Service
@@ -161,7 +117,7 @@ metadata:
     app: ibmliberty
 spec:
   selector:
-    run: ibmliberty
+    app: ibmliberty
   type: NodePort
   ports:
    - protocol: TCP
@@ -169,6 +125,7 @@ spec:
 ```
 {: codeblock}
 
+**Hinweis:** Um Ihren Service verfügbar zu machen, müssen Sie sicherstellen, dass das Schlüssel/Wert-Paar, das Sie im Abschnitt `spec.selector` verwendet haben, dem Schlüssel/Wert-Paar entspricht, dass Sie im Abschnitt `spec.template.metadata.labels` Ihrer YAML-Bereitstellungsdatei angegeben haben.
 Um mehr über die einzelnen Komponenten zu erfahren, lesen Sie sich den Abschnitt [Grundlegende Informationen zu Kubernetes](cs_tech.html#kubernetes_basics) durch.
 
 <br />
@@ -186,7 +143,7 @@ Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_i
 
 Sie können den Standardport verwenden oder einen eigenen Port festlegen, um das Kubernetes-Dashboard für einen Cluster zu starten.
 
-1.  Für Cluster mit der Kubernetes-Masterversion 1.7.4 oder einer früheren Version:
+1.  Für Cluster mit der Kubernetes-Masterversion 1.7.16 oder einer früheren Version:
 
     1.  Legen Sie die Standardportnummer für den Proxy fest.
 
@@ -236,16 +193,16 @@ Sie können den Standardport verwenden oder einen eigenen Port festlegen, um das
 
     4.  Melden Sie sich beim Dashboard an.
 
-        1.  Navigieren Sie in Ihrem Browser zur folgenden URL:
+      1.  Navigieren Sie in Ihrem Browser zur folgenden URL:
 
-            ```
-            http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
-            ```
-            {: codeblock}
+          ```
+          http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+          ```
+          {: codeblock}
 
-        2.  Wählen Sie auf der Anmeldeseite die Authentifizierungsmethode **Token** aus.
+      2.  Wählen Sie auf der Anmeldeseite die Authentifizierungsmethode **Token** aus.
 
-        3.  Fügen Sie dann den zuvor kopierten Wert für **id-token** in das Feld **Token** ein und klicken Sie auf **ANMELDEN**.
+      3.  Fügen Sie dann den zuvor kopierten Wert für **id-token** in das Feld **Token** ein und klicken Sie auf **ANMELDEN**.
 
 [Als Nächstes können Sie eine Konfigurationsdatei über das Dashboard ausführen.](#app_ui)
 
@@ -265,7 +222,7 @@ Geheime Kubernetes-Schlüssel stellen eine sichere Methode zum Speichern vertrau
 {:shortdesc}
 
 <table>
-<caption>Tabelle. Dateien müssen in geheimen Schlüsseln nach Task gespeichert werden</caption>
+<caption>Erforderliche Dateien, die nach Task in geheimen Schlüsseln gespeichert werden müssen</caption>
 <thead>
 <th>Task</th>
 <th>Erforderliche Dateien, die in geheimen Schlüssel gespeichert werden müssen</th>
@@ -280,7 +237,7 @@ Geheime Kubernetes-Schlüssel stellen eine sichere Methode zum Speichern vertrau
 
 Gehen Sie wie folgt vor, um den geheimen TLS-Standardschlüssel anzuzeigen:
 <pre>
-bx cs cluster-get &gt;CLUSTERNAME&lt; | grep "Ingress secret"
+bx cs cluster-get &lt;clustername_oder_-id&gt; | grep "Ingress secret"
 </pre>
 </p>
 Um stattdessen Ihren eigenen geheimen Schlüssel zu erstellen, führen Sie die Schritte im nachfolgenden Abschnitt durch.</td>
@@ -300,7 +257,7 @@ Gehen Sie wie folgt vor, um einen geheimen Schlüssel mit einem Zertifikat zu er
 
 1. Generieren Sie das Zertifikat und den Schlüssel der Zertifizierungsstelle über Ihren Zertifikatsanbieter. Wenn Sie über eine eigene Domäne verfügen, kaufen Sie ein offizielles TLS-Zertifikat für Ihre Domäne. Zu Testzwecken können Sie ein selbst signiertes Zertifikat generieren.
 
- Wichtig: Stellen Sie sicher, dass der [allgemeine Name](https://support.dnsimple.com/articles/what-is-common-name/) für jedes Zertifikat anders ist.
+ **Wichtig**: Stellen Sie sicher, dass der [allgemeine Name](https://support.dnsimple.com/articles/what-is-common-name/) für jedes Zertifikat anders ist.
 
  Das Clientzertifikat und der Clientschlüssel müssen anhand des Trusted-Root-Zertifikats verifiziert werden, welches in diesem Fall das Zertifikat der Zertifizierungsstelle ist. Beispiel:
 
@@ -352,11 +309,17 @@ Vorbemerkungen:
 
 Gehen Sie wie folgt vor, um Ihre App bereitzustellen:
 
-1.  [Öffnen Sie das Kubernetes-Dashboard](#cli_dashboard).
-2.  Klicken Sie im Kubernetes-Dashboard auf **+ Create**.
-3.  Wählen Sie **Specify app details below** (App-Details unten angeben) aus, um die App-Details über die GUI einzugeben, oder wählen Sie die Option **Upload a YAML or JSON file** (YAML- oder JSON-Datei hochladen) aus, um die [Konfigurationsdatei ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) für Ihre App hochzuladen. Verwenden Sie [diese YAML-Beispieldatei ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml), um einen Container aus dem Image **ibmliberty** in der Region 'Vereinigte Staaten (Süden)' bereitzustellen.
-4.  Klicken Sie im Kubernetes-Dashboard auf **Deployments**, um zu überprüfen, ob die Bereitstellung auch tatsächlich erstellt wurde.
-5.  Wenn Sie Ihre App mithilfe eines Knotenportservice, eines Lastenausgleichsservice oder Ingress öffentlich zugänglich gemacht haben, überprüfen Sie, dass Sie auf die App zugreifen können.
+1.  Öffnen Sie das Kubernetes-[Dashboard](#cli_dashboard) und klicken Sie auf **+ Erstellen**. 
+2.  Geben Sie Ihre App-Details auf einem der beiden folgenden Wege ein. 
+  * Wählen Sie **App-Details unten angeben** aus und geben Sie die Details ein. 
+  * Wählen Sie **YAML- oder JSON-Datei hochladen** aus, um die [Konfigurationsdatei ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) Ihrer App hochzuladen. 
+
+  Benötigen Sie Hilfe mit Ihrer Konfigurationsdatei? Sehen Sie sich diese [YAML-Beispieldatei ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml). In diesem Beispiel wird ein Container aus dem Image **ibmliberty** in der Region 'Vereinigte Staaten (Süden)' bereitgestellt.
+  {: tip}
+
+3.  Überprüfen Sie auf einem der beiden folgenden Wege, dass Sie Ihre App erfolgreich bereitgestellt haben. 
+  * Klicken Sie im Kubernetes-Dashboard auf **Bereitstellungen**. Es wird eine Liste der erfolgreichen Bereitstellungen angezeigt. 
+  * Wenn Ihre App [öffentlich verfügbar](cs_network_planning.html#public_access) ist, navigieren Sie zur Clusterübersichtsseite in Ihrem {{site.data.keyword.containerlong}}-Dashboard. Kopieren Sie die Unterdomäne, die sich im Abschnitt mit der Clusterzusammenfassung befindet, und fügen Sie sie in einen Browser ein, um Ihre App anzuzeigen. 
 
 <br />
 
@@ -382,10 +345,12 @@ Gehen Sie wie folgt vor, um Ihre App bereitzustellen:
 
     -   [Ingress ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/services-networking/ingress/): Gibt einen Typ von Lastausgleichsfunktion an, die Routen für den öffentlichen Zugriff auf Ihre App bereitstellt.
 
+    
+
 2.  Führen Sie die Konfigurationsdatei in dem Kontext eines Clusters aus.
 
     ```
-    kubectl apply -f position_des_bereitstellungscripts
+    kubectl apply -f config.yaml
     ```
     {: pre}
 
@@ -396,8 +361,7 @@ Gehen Sie wie folgt vor, um Ihre App bereitzustellen:
 
 
 
-
-## Apps skalieren
+## Apps skalieren 
 {: #app_scaling}
 
 Mit Kubernetes können Sie die [horizontale Autoskalierung von Pods ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) aktivieren, um die Anzahl der Instanzen Ihrer Apps CPU-basiert automatisch zu erhöhen oder zu verringern.
@@ -410,10 +374,12 @@ Vorbemerkungen:
 - [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) (Befehlszeilenschnittstelle) auf Ihren Cluster aus.
 - Die Heapsterüberwachung muss in dem Cluster bereitgestellt werden, den Sie automatisch skalieren möchten.
 
+Schritte:
+
 1.  Stellen Sie Ihre App über die Befehlszeilenschnittstelle (CLI) bereit. Bei der Bereitstellung Ihrer App müssen Sie CPU anfordern.
 
     ```
-    kubectl run <name> --image=<image> --requests=cpu=<cpu> --expose --port=<portnummer>
+    kubectl run <appname> --image=<image> --requests=cpu=<cpu> --expose --port=<portnummer>
     ```
     {: pre}
 
@@ -439,9 +405,10 @@ Vorbemerkungen:
     <td>Der Port, an dem Ihre App extern verfügbar ist.</td>
     </tr></tbody></table>
 
-    Für Bereitstellungen mit einem höheren Grad an Komplexität ist gegebenenfalls die Erstellung einer [Konfigurationsdatei](#app_cli) erforderlich. {: tip}
+    Für Bereitstellungen mit einem höheren Grad an Komplexität ist gegebenenfalls die Erstellung einer [Konfigurationsdatei](#app_cli) erforderlich.
+    {: tip}
 
-2.  Erstellen Sie einen automatischen Scaler und definieren Sie Ihre Richtlinie. Weitere Informationen zur Arbeit mit dem Befehl `kubetcl autoscale` finden Sie in der [Dokumentation zu Kubernetes ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
+2.  Erstellen Sie einen automatischen Scaler und definieren Sie Ihre Richtlinie. Weitere Informationen zur Arbeit mit dem Befehl `kubectl autoscale` finden Sie in der [Dokumentation zu Kubernetes ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
 
     ```
     kubectl autoscale deployment <bereitstellungsname> --cpu-percent=<prozentsatz> --min=<mindestwert> --max=<höchstwert>
@@ -541,4 +508,5 @@ Erstellen Sie zunächst eine [Bereitstellung](#app_cli).
         {: pre}
 
 <br />
+
 

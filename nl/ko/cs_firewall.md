@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-14"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -97,14 +97,14 @@ lastupdated: "2018-02-14"
 4. 클러스터의 **Master URL**을 검색하십시오.
 
    ```
-   bx cs cluster-get <cluster_name_or_id>
+   bx cs cluster-get <cluster_name_or_ID>
    ```
    {: pre}
 
    출력 예:
    ```
    ...
-   Master URL:		https://169.46.7.238:31142
+   Master URL:		https://169.xx.xxx.xxx:31142
    ...
    ```
    {: screen}
@@ -120,7 +120,7 @@ lastupdated: "2018-02-14"
 
    명령 예:
    ```
-   curl --insecure https://169.46.7.238:31142/version
+   curl --insecure https://169.xx.xxx.xxx:31142/version
    ```
    {: pre}
 
@@ -176,7 +176,7 @@ lastupdated: "2018-02-14"
   1.  클러스터에서 모든 작업자 노드에 대한 공인 IP 주소를 기록해 두십시오.
 
       ```
-    bx cs workers <cluster_name_or_id>
+       bx cs workers <cluster_name_or_ID>
       ```
       {: pre}
 
@@ -203,7 +203,7 @@ lastupdated: "2018-02-14"
       <tr>
          <td>중앙 유럽</td>
          <td>ams03<br>fra02<br>mil01<br>par01</td>
-         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+         <td><code>169.50.169.110, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
         </tr>
       <tr>
         <td>영국 남부</td>
@@ -265,8 +265,8 @@ lastupdated: "2018-02-14"
 </p>
 
   4.  선택사항: 작업자 노드에서 {{site.data.keyword.monitoringlong_notm}} 및 {{site.data.keyword.loganalysislong_notm}} 서비스로의 발신 네트워크 트래픽을 허용하십시오.
-      - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
-      - 트래픽을 허용하려는 모니터링 지역에 대한 모든 주소로 <em>&lt;monitoring_publicIP&gt;</em>를 대체하십시오.
+      - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
+      - <em>&lt;monitoring_public_IP&gt;</em>를 트래픽을 허용할 모니터링 지역에 대한 모든 주소로 대체하십시오.
         <p><table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
         <thead>
         <th>컨테이너 지역</th>
@@ -293,8 +293,8 @@ lastupdated: "2018-02-14"
         </tbody>
       </table>
 </p>
-      - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
-      - 트래픽을 허용하려는 로깅 지역에 대한 모든 주소로 <em>&lt;logging_publicIP&gt;</em>를 대체하십시오.
+      - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
+      - <em>&lt;logging_public_IP&gt;</em>를 트래픽을 허용할 로깅 지역에 대한 모든 주소로 대체하십시오.
         <p><table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
         <thead>
         <th>컨테이너 지역</th>
@@ -353,3 +353,4 @@ NodePort, 로드 밸런서 및 Ingress 서비스에 대한 수신 액세스를 �
   <dt>Ingress</dt>
   <dd>Ingress 애플리케이션 로드 밸런서의 IP 주소에 대해 HTTP의 경우 포트 80을 열고 HTTPS의 경우 포트 443을 여십시오.</dd>
 </dl>
+

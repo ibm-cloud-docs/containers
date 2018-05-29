@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-28"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-02-28"
 {: #app}
 
 Puede utilizar las técnicas de Kubernetes en {{site.data.keyword.containerlong}} para desplegar apps en contenedores y asegurarse de que las estén siempre activas y en funcionamiento. Por ejemplo, puede realizar actualizaciones continuas y retrotracciones sin causar a los usuarios tiempos de inactividad.
-{:shortdesc}
+{: shortdesc}
 
 Conozca los pasos generales para desplegar apps pulsando en un área de la imagen siguiente.
 
@@ -40,7 +40,7 @@ Conozca los pasos generales para desplegar apps pulsando en un área de la image
 {: #highly_available_apps}
 
 Cuanto más ampliamente distribuya la configuración entre varios nodos trabajadores y clústeres, menor será la probabilidad de que los usuarios experimenten tiempo de inactividad con la app.
-{:shortdesc}
+{: shortdesc}
 
 Revise las siguientes configuraciones potenciales de apps que están ordenadas por grados de disponibilidad en orden ascendente.
 
@@ -51,77 +51,30 @@ Revise las siguientes configuraciones potenciales de apps que están ordenadas p
 3.  Un despliegue con n+2 pods gestionados por un conjunto de réplicas y distribuidos en varios nodos (antiafinidad) en distintas ubicaciones.
 4.  Un despliegue con n+2 pods gestionados por un conjunto de réplicas y distribuidos en varios nodos (antiafinidad) en distintas regiones.
 
+
+
+
 ### Cómo aumentar la disponibilidad de la app
 
 <dl>
-<dt>Utilice despliegues y conjuntos de réplicas para desplegar la app y sus dependencias</dt>
-<dd>Un despliegue es un recurso de Kubernetes que puede utilizar para declarar todos los componentes de su app y sus dependencias. Si describe cada componente en lugar de escribir todos los pasos necesarios y el orden con el que se crean, puede concentrarse en cómo debe quedar la app cuando se ejecute.
-</br></br>
-Si despliega más de un pod, se crea automáticamente un conjunto de réplicas que supervisa los pods y garantiza que el número deseado de pods están activos y en ejecución en todo momento. Cuando un pod pasa a estar inactivo, el conjunto de réplicas sustituye el pod que no responde por uno nuevo.
-</br></br>
-Puede utilizar un despliegue para definir estrategias para la app que incluyan el número de pods que desea añadir durante una actualización continuada y el número de pods que pueden no estar disponibles al mismo tiempo. Cuando lleva a cabo una actualización continuada, el despliegue comprueba si la revisión funciona o no y detiene la implantación cuando se detectan anomalías.
-</br></br>
-Los despliegues también proporcionan la posibilidad de desplegar simultáneamente varias revisiones con diferentes distintivos, por lo que puede, por ejemplo, probar un despliegue antes de decidir si se debe enviar a producción.
-</br></br>
-Cada despliegue realiza un seguimiento de las revisiones que se han desplegado. Puede utilizar este historial de revisiones para retrotraerse a una versión anterior cuando detecta que las actualizaciones no funcionan como esperaba.</dd>
-<dt>Incluya suficientes réplicas para la carga de trabajo de la app, más dos</dt>
-<dd>Para que la app esté aún más disponible y resulte más resistente frente a errores, considere la posibilidad de incluir más réplicas que el mínimo para gestionar la carga de trabajo prevista. Las réplicas adicionales pueden gestionar la carga de trabajo en el caso de que un pod se cuelgue y el conjunto de réplicas aún no haya recuperado el pod inactivo. Para la protección frente a dos anomalías simultáneas, incluya dos réplicas adicionales. Esta configuración es un patrón de tipo N+2, donde N es el número de réplicas necesario para gestionar la carga de trabajo entrante y +2 significa dos réplicas adicionales. Puede tener tantos pods como desee en un clúster, siempre que el clúster tenga suficiente espacio para ellos.</dd>
-<dt>Distribuya los pods entre varios nodos (antiafinidad)</dt>
-<dd>Cuando se crea un despliegue, cada pod se puede desplegar en el mismo nodo trabajador. Esta configuración en la que los pods residen en el mismo nodo trabajador se conoce
-como afinidad o coubicación. Para proteger la app ante un error del nodo trabajador, puede hacer que el despliegue distribuya los pods entre varios nodos trabajadores mediante la opción <strong>podAntiAffinity</strong>. Esta opción solo está disponible para los clústeres estándares.
-
-</br></br>
-<strong>Nota:</strong> El siguiente archivo YAML hace que cada pod se despliegue en un nodo trabajador diferente. Cuando tenga más réplicas definidas que nodos trabajadores disponibles en el clúster, solo se despliega el número de réplicas que cumpla el requisito antiafinidad. Las réplicas adicionales permanecen en estado pendiente hasta que se añaden al clúster nodos trabajadores adicionales.
-
-<pre class="codeblock">
-<code>apiVersion: apps/v1beta1
-kind: Deployment
-metadata:
-  name: wasliberty
-spec:
-  replicas: 3
-  template:
-    metadata:
-      labels:
-        app: wasliberty
-    spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - wasliberty
-              topologyKey: kubernetes.io/hostname
-      containers:
-      - name: wasliberty
-        image: registry.&lt;region&gt;.bluemix.net/ibmliberty
-        ports:
-        - containerPort: 9080
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: wasliberty
-  labels:
-    app: wasliberty
-spec:
-  ports:
-    # el puerto en el que debe servir este servicio
-  - port: 9080
-  selector:
-    app: wasliberty
-  type: NodePort</code></pre>
-
-</dd>
-<dt>Distribuya los pods entre varias ubicaciones o regiones</dt>
-<dd>Para proteger la app ante un error de la ubicación o de la región, puede crear un segundo clúster en otra ubicación o región y utilizar el archivo YAML de despliegue para desplegar un conjunto de réplicas duplicado para la app. Mediante la adición de una ruta compartida y un equilibrador de la carga frente a los clústeres, puede distribuir la carga de trabajo entre las ubicaciones y regiones. Para obtener más información sobre cómo compartir una ruta entre clústeres, consulte <a href="cs_clusters.html#clusters" target="_blank">Alta disponibilidad de clústeres</a>.
-
-Para obtener más información, revise las opciones correspondientes a <a href="cs_clusters.html#planning_clusters" target="_blank">despliegues de alta disponibilidad</a>.</dd>
+  <dt>Utilice despliegues y conjuntos de réplicas para desplegar la app y sus dependencias</dt>
+    <dd><p>Un despliegue es un recurso de Kubernetes que puede utilizar para declarar todos los componentes de su app y sus dependencias. Con los despliegues, no tiene que encargarse de todos los pasos y en su lugar puede centrarse en la app. </p>
+    <p>Si despliega más de un pod, se crea automáticamente un conjunto de réplicas que supervisa los pods y garantiza que el número deseado de pods están activos y en ejecución en todo momento. Cuando un pod pasa a estar inactivo, el conjunto de réplicas sustituye el pod que no responde por uno nuevo.</p>
+    <p>Puede utilizar un despliegue para definir estrategias para la app que incluyan el número de pods que desea añadir durante una actualización continuada y el número de pods que pueden no estar disponibles al mismo tiempo. Cuando lleva a cabo una actualización continuada, el despliegue comprueba si la revisión funciona o no y detiene la implantación cuando se detectan anomalías.</p>
+    <p>Los despliegues permiten desplegar simultáneamente varias revisiones con diferentes distintivos. Por ejemplo, puede probar un primer despliegue antes de decidir si se debe utilizar para producción. </p>
+    <p>Los despliegues permiten realizar un seguimiento de las revisiones desplegadas. Puede utilizar este historial para retrotraer a una versión anterior si detecta que las actualizaciones no funcionan como esperaba. </p></dd>
+  <dt>Incluya suficientes réplicas para la carga de trabajo de la app, más dos</dt>
+    <dd>Para que la app esté aún más disponible y resulte más resistente frente a errores, considere la posibilidad de incluir más réplicas que el mínimo para gestionar la carga de trabajo prevista. Las réplicas adicionales pueden gestionar la carga de trabajo en el caso de que un pod se cuelgue y el conjunto de réplicas aún no haya recuperado el pod inactivo. Para la protección frente a dos anomalías simultáneas, incluya dos réplicas adicionales. Esta configuración es un patrón de tipo N+2, donde N es el número de réplicas necesario para gestionar la carga de trabajo entrante y +2 significa dos réplicas adicionales. Mientras el clúster tenga suficiente espacio, puede tener tantos pods como desee. </dd>
+  <dt>Distribuya los pods entre varios nodos (antiafinidad)</dt>
+    <dd><p>Cuando se crea un despliegue, cada pod se puede desplegar en el mismo nodo trabajador. Esto se conoce como afinidad o coubicación. Para proteger la app con relación a una anomalía del nodo trabajador, es posible configurar el despliegue para repartir los pods a través de varios nodos de trabajo utilizando la opción <em>podAntiAffinity</em> con los clústeres estándar.  Puede definir dos tipos de antiafinidad de pod: preferida o necesaria. Para obtener más información, consulte la documentación de Kubernetes en <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="(Se abre en un nuevo separador o ventana)">Asignación de pods a nodos</a>. </p>
+    <p><strong>Nota</strong>: Con la antiafinidad necesaria, únicamente puede desplegar un número de réplicas para las que tenga nodos de trabajador. Por ejemplo, si tiene 3 nodos de trabajador en su clúster y define 5 réplicas en su archivo YAML, únicamente se desplegarán 3 réplicas. Cada réplica se basa en un nodo trabajador diferente. Las 2 réplicas sobrantes quedarán pendientes. Si añade otro nodo trabajador al clúster, una de las réplicas sobrantes se desplegará de forma automática en el nuevo nodo trabajador. <p>
+    <p><strong>Ejemplo de archivos YAML de despliegue</strong>:<ul>
+    <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/nginx_preferredAntiAffinity.yaml" rel="external" target="_blank" title="(Se abre en un nuevo separador o ventana)">App de Nginx con antiafinidad de pod preferida. </a></li>
+    <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="(Se abre en un nuevo separador o ventana)">App de IBM WebSphere Application Server Liberty con antiafinidad de pod requerida. </a></li></ul></p>
+    </dd>
+<dt>Distribución de pods entre varias zonas o regiones</dt>
+  <dd>Para proteger la app ante un error de la ubicación o de la región, puede crear un segundo clúster en otra ubicación o región y utilizar el archivo YAML de despliegue para desplegar un conjunto de réplicas duplicado para la app. Mediante la adición de una ruta compartida y un equilibrador de la carga frente a los clústeres, puede distribuir la carga de trabajo entre las ubicaciones y regiones. Para obtener más información, consulte [Alta disponibilidad de clústeres](cs_clusters.html#clusters).
+  </dd>
 </dl>
 
 
@@ -129,7 +82,7 @@ Para obtener más información, revise las opciones correspondientes a <a href="
 {: #minimal_app_deployment}
 
 Un despliegue básico de app en un clúster gratuito o estándar puede incluir los siguientes componentes.
-{:shortdesc}
+{: shortdesc}
 
 ![Configuración del despliegue](images/cs_app_tutorial_components1.png)
 
@@ -148,7 +101,9 @@ spec:
     spec:
       containers:
       - name: ibmliberty
-        image: registry.<region>.bluemix.net/ibmliberty:latest
+        image: registry.bluemix.net/ibmliberty:latest
+        ports:
+        - containerPort: 9080        
 ---
 apiVersion: v1
 kind: Service
@@ -158,7 +113,7 @@ metadata:
     app: ibmliberty
 spec:
   selector:
-    run: ibmliberty
+    app: ibmliberty
   type: NodePort
   ports:
    - protocol: TCP
@@ -166,7 +121,7 @@ spec:
 ```
 {: codeblock}
 
-Para obtener más información sobre cada componente, revise [Aspectos básicos de Kubernetes](cs_tech.html#kubernetes_basics).
+**Nota:** Para exponer el servicio, asegúrese de que el par clave/valor que utiliza en la sección `spec.selector` del servicio es el mismo que el par de clave/valor utilizado en la sección `spec.template.metadata.labels` de su yaml de despliegue. Para obtener más información sobre cada componente, revise [Aspectos básicos de Kubernetes](cs_tech.html#kubernetes_basics).
 
 <br />
 
@@ -183,7 +138,7 @@ Antes de empezar, seleccione su clúster como [destino de la CLI](cs_cli_install
 
 Puede utilizar el puerto predeterminado o definir su propio puerto para iniciar el panel de control de Kubernetes para un clúster.
 
-1.  Para clústeres con una versión maestra de Kubernetes 1.7.4 o anterior:
+1.  Para clústeres con una versión maestra de Kubernetes 1.7.16 o anterior:
 
     1.  Establezca el proxy con el número de puerto predeterminado.
 
@@ -233,16 +188,16 @@ Puede utilizar el puerto predeterminado o definir su propio puerto para iniciar 
 
     4.  Inicie sesión en el panel de control.
 
-        1.  En el navegador, vaya al siguiente URL:
+      1.  En el navegador, vaya al siguiente URL:
 
-            ```
-            http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
-            ```
-            {: codeblock}
+          ```
+          http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+          ```
+          {: codeblock}
 
-        2.  En la página de inicio de sesión, seleccione el método de autenticación **Señal**.
+      2.  En la página de inicio de sesión, seleccione el método de autenticación **Señal**.
 
-        3.  A continuación, pegue el valor **id-token** que ha copiado anteriormente en el campo **Señal** y pulse **INICIAR SESIÓN**.
+      3.  A continuación, pegue el valor **id-token** que ha copiado anteriormente en el campo **Señal** y pulse **INICIAR SESIÓN**.
 
 [A continuación, puede ejecutar un archivo de configuración desde el panel de control.](#app_ui)
 
@@ -262,7 +217,7 @@ Los secretos de Kubernetes constituyen una forma segura de almacenar informació
 {:shortdesc}
 
 <table>
-<caption>Tabla. Archivos necesarios para almacenarse en secretos por tarea</caption>
+<caption>Archivos necesarios para almacenar en secretos por tarea</caption>
 <thead>
 <th>Tarea</th>
 <th>Archivos necesarios para almacenar en secretos</th>
@@ -277,7 +232,7 @@ Los secretos de Kubernetes constituyen una forma segura de almacenar informació
 
 Para ver el secreto de TLS predeterminado:
 <pre>
-bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
+bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 </pre>
 </p>
 Para crear su propio secreto, siga los pasos de este tema.</td>
@@ -297,7 +252,7 @@ Para crear un secreto con un certificado:
 
 1. Genere el certificado de la autoridad de certificados (CA) y la clave de su proveedor de certificados. Si tiene su propio dominio, compre un certificado TLS oficial para el mismo. Para realizar pruebas, puede generar un certificado firmado de forma automática.
 
- Importante: asegúrese de que [CN](https://support.dnsimple.com/articles/what-is-common-name/) sea diferente para cada certificado.
+ **Importante**: asegúrese de que [CN](https://support.dnsimple.com/articles/what-is-common-name/) sea diferente para cada certificado. 
 
  El certificado de cliente y la clave de cliente se deben verificar hasta el certificado raíz de confianza, que en este caso, es el certificado de CA. Ejemplo:
 
@@ -311,7 +266,7 @@ Para crear un secreto con un certificado:
 2. Cree el certificado como un secreto de Kubernetes.
 
    ```
-   kubectl create secret generic <secretName> --from-file=<cert_file>=<cert_file>
+   kubectl create secret generic <secret_name> --from-file=<cert_file>=<cert_file>
    ```
    {: pre}
 
@@ -319,14 +274,14 @@ Para crear un secreto con un certificado:
    - Conexión de TLS:
 
      ```
-     kubectl create secret tls <secretName> --from-file=tls.crt=server.crt --from-file=tls.key=server.key
+     kubectl create secret tls <secret_name> --from-file=tls.crt=server.crt --from-file=tls.key=server.key
      ```
      {: pre}
 
    - Anotación de autenticación mutua:
 
      ```
-     kubectl create secret generic <secretName> --from-file=ca.crt=ca.crt
+     kubectl create secret generic <secret_name> --from-file=ca.crt=ca.crt
      ```
      {: pre}
 
@@ -349,11 +304,17 @@ Antes de empezar:
 
 Para desplegar la app:
 
-1.  [Abra el panel de control de Kubernetes](#cli_dashboard).
-2.  En el panel de control de Kubernetes, pulse **+ Crear**.
-3.  Seleccione **Especificar detalles de app a continuación** para especificar los detalles de la app en la GUI o bien **Cargar un archivo YAML o JSON** para cargar el [archivo de configuración ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) de la app. Utilice [este archivo YAML de ejemplo ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml) para desplegar un contenedor desde la imagen **ibmliberty** de la región US-Sur.
-4.  En el panel de control de Kubernetes, pulse **Despliegues** para verificar que el despliegue se ha creado.
-5.  Si ha puesto la app a disponibilidad pública mediante un servicio de puerto de nodo, un servicio de equilibrador de carga o Ingress, compruebe que puede acceder a la app.
+1.  Abra el [panel de control](#cli_dashboard) de Kubernetes y pulse **+ Crear**. 
+2.  Especifique los detalles de la app de una de las dos siguientes maneras. 
+  * Seleccione **Especificar detalles de app a continuación** y especifique los detalles.
+  * Seleccione **Cargar un archivo YAML o JSON** para cargar su [archivo de configuración ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/). 
+
+  ¿Necesita ayuda con su archivo de configuración? Consulte este [archivo YAML de ejemplo ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml). En este ejemplo, se despliega un contenedor desde la imagen **ibmliberty** en la región EE.UU. Sur.
+  {: tip}
+
+3.  Verifique que ha desplegado satisfactoriamente la app de una de las siguientes formas.
+  * En el panel de control de Kubernetes, pulse **Despliegues**. Se visualiza una lista de despliegues satisfactorios. 
+  * Si la app está [disponible públicamente](cs_network_planning.html#public_access), vaya a la página de visión general del clúster en el panel de control de {{site.data.keyword.containerlong}}. Copie el subdominio, que se encuentra en la sección de resumen del clúster y péguelo en un navegador para ver la app. 
 
 <br />
 
@@ -379,10 +340,12 @@ Para desplegar la app:
 
     -   [Ingress ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/services-networking/ingress/): Especifica un tipo de equilibrador de carga que ofrece rutas para acceder a la app a nivel público.
 
+    
+
 2.  Ejecute el archivo de configuración en el contexto de un clúster.
 
     ```
-    kubectl apply -f deployment_script_location
+    kubectl apply -f config.yaml
     ```
     {: pre}
 
@@ -393,8 +356,7 @@ Para desplegar la app:
 
 
 
-
-## Escalado de apps
+## Escalado de apps 
 {: #app_scaling}
 
 Con Kubernetes, puede habilitar el [escalado automático de pod horizontal ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) para aumentar o disminuir automáticamente el número de instancias de las apps en función de la CPU.
@@ -407,10 +369,12 @@ Antes de empezar:
 - Defina su clúster como [destino de la CLI](cs_cli_install.html#cs_cli_configure).
 - La supervisión de Heapster debe desplegarse en el clúster que desea escalar automáticamente.
 
+Pasos:
+
 1.  Despliegue la app en el clúster desde la CLI. Cuando despliegue la app, debe solicitar CPU.
 
     ```
-    kubectl run <name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
+    kubectl run <app_name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
     ```
     {: pre}
 
@@ -439,7 +403,7 @@ Antes de empezar:
     Para despliegues más complejos, es posible que tenga que crear un [archivo de configuración](#app_cli).
     {: tip}
 
-2.  Cree un autoscaler y defina la política. Para obtener más información sobre cómo trabajar con el mandato `kubetcl autoscale`, consulte [la documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
+2.  Cree un autoscaler y defina la política. Para obtener más información sobre cómo trabajar con el mandato `kubectl autoscale`, consulte [la documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
 
     ```
     kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
@@ -539,4 +503,5 @@ Antes de empezar, cree un [despliegue](#app_cli).
         {: pre}
 
 <br />
+
 

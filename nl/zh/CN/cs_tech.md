@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -37,6 +37,8 @@ lastupdated: "2018-03-16"
 <dd>每个容器都是通过映像创建的。容器是一个打包应用程序，其具有所有依赖项，以便可以在环境之间移动应用程序并在不进行更改的情况下运行。与虚拟机不同，容器不会对设备、其操作系统和底层硬件进行虚拟化。在容器中只打包应用程序代码、运行时、系统工具、库和设置。容器在 Ubuntu 计算主机上作为隔离进程运行，并共享主机操作系统及其硬件资源。这种方式使得容器比虚拟机更轻便、可移植性更高且更高效。</dd>
 </dl>
 
+
+
 ### 使用容器的主要优点
 {: #container_benefits}
 
@@ -46,20 +48,27 @@ lastupdated: "2018-03-16"
 <dt>容器小巧</dt>
 <dd>在单个虚拟机所需的空间中，可以放入许多容器。</dd>
 <dt>容器可移植</dt>
-<dd><ul>
+<dd>
+<ul>
   <li>复用一些映像来构建容器。</li>
   <li>快速将应用程序代码从编译打包环境转移到生产环境。</li>
-  <li>利用持续交付工具使流程自动化。</li> </ul></dd>
-</dl>
+  <li>利用持续交付工具使流程自动化。</li>
+  </ul>
+  </dd>
 
+
+  
+<p>准备好进一步了解 Docker 了吗？<a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">通过完成本课程，了解如何一起使用 Docker 和 {{site.data.keyword.containershort_notm}}</a>。</p>
+
+</dl>
 
 <br />
 
 
-## Kubernetes 基础知识
+## Kubernetes 集群
 {: #kubernetes_basics}
 
-名为 Kubernetes 的开放式源代码项目将运行容器化基础架构与生产工作负载、开放式源代码供应和 Docker 容器管理工具相结合。Kubernetes 基础架构提供了隔离、安全的应用程序平台，用于管理可移植、可扩展，并能在发生故障转移时自我复原的容器。
+<img src="images/certified-kubernetes-resized.png" style="padding-right: 10px;" align="left" alt="此角标指示 IBM Cloud Container Service 的 Kubernetes 证书。"/>名为 Kubernetes 的开放式源代码项目将运行容器化基础架构与生产工作负载、开放式源代码供应和 Docker 容器管理工具相结合。Kubernetes 基础架构提供了隔离、安全的应用程序平台，用于管理可移植、可扩展，并能在发生故障转移时自我复原的容器。
 {:shortdesc}
 
 了解一些基本的 Kubernetes 概念，如下图所示。
@@ -84,8 +93,14 @@ lastupdated: "2018-03-16"
 <dd>部署到集群中的每个容器化应用程序都由称为 pod 的 Kubernetes 资源进行部署、运行和管理。pod 代表 Kubernetes 集群中的小型可部署单元，用于将必须视为单个单元的容器分组在一起。在大多数情况下，每个容器都会部署到其自己的 pod 中。但是，应用程序可能需要将一个容器和其他辅助容器部署到一个 pod 中，以便可以使用相同的专用 IP 地址寻址到这些容器。</dd>
 
 <dt>应用程序</dt>
-<dd>应用程序可能是指完整应用程序或应用程序组件。可在单独的 pod 或单独的工作程序节点中部署应用程序的组件。</br></br>
-要了解有关 Kubernetes 术语的更多信息，请<a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">尝试教程</a>。</dd>
+<dd>应用程序可能是指完整应用程序，也可能指应用程序组件。可在单独的 pod 或单独的工作程序节点中部署应用程序的组件。</dd>
+
+
+  
+<p>准备好进一步了解 Kubernetes 了吗？</p>
+<ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">通过“创建集群”教程扩大对术语的了解</a>。</li>
+<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">通过完成本课程，了解如何一起使用 Kubernetes 和 {{site.data.keyword.containershort_notm}}</a>。</li></ul>
+
 
 </dl>
 
@@ -95,7 +110,7 @@ lastupdated: "2018-03-16"
 ## 服务体系结构
 {: #architecture}
 
-在 {{site.data.keyword.containershort_notm}} 上运行的 Kubernetes 集群中，容器化应用程序在称为工作程序节点的计算主机上托管。更具体地说，容器化应用程序是在 pod 中运行，而 pod 在工作程序节点上托管。工作程序节点由 Kubernetes 主节点进行管理。Kubernetes 主节点和工作程序节点通过安全的 TLS 证书和 openVPN 连接相互通信，以编排集群配置。
+在 {{site.data.keyword.containershort_notm}} 上运行的 Kubernetes 集群中，容器化应用程序在称为工作程序节点的计算主机上托管。更具体地说，应用程序在 pod 中运行，而 pod 在工作程序节点上托管。工作程序节点由 Kubernetes 主节点进行管理。Kubernetes 主节点和工作程序节点通过安全的 TLS 证书和 openVPN 连接相互通信，以编排集群配置。
 {: shortdesc}
 
 Kubernetes 主节点与工作程序节点之间有何区别？问得好。
@@ -104,11 +119,15 @@ Kubernetes 主节点与工作程序节点之间有何区别？问得好。
   <dt>Kubernetes 主节点</dt>
     <dd>Kubernetes 主节点负责的任务是管理集群中的所有计算资源、网络资源和存储资源。Kubernetes 主节点可确保将容器化应用程序和服务同等部署到集群中的工作程序节点。根据您配置应用程序和服务的方式，主节点会确定具有足够资源来满足应用程序需求的工作程序节点。</dd>
   <dt>工作程序节点</dt>
-    <dd>每个工作程序节点是物理机器（裸机）或是在云环境中管理的物理硬件上运行的虚拟机。供应工作程序节点时，您将确定可供该工作程序节点上托管的容器使用的资源。工作程序节点现成设置有 {{site.data.keyword.IBM_notm}} 管理的 Docker Engine 以及独立的计算资源、联网和卷服务。内置安全性功能提供了隔离、资源管理功能和工作程序节点安全合规性。</dd>
+    <dd>每个工作程序节点都是物理机器（裸机）或是在云环境中的物理硬件上运行的虚拟机。供应工作程序节点时，您将确定可供该工作程序节点上托管的容器使用的资源。工作程序节点现成设置有 {{site.data.keyword.IBM_notm}} 管理的 Docker Engine 以及独立的计算资源、联网和卷服务。内置安全性功能提供了隔离、资源管理功能和工作程序节点安全合规性。</dd>
 </dl>
 
 ![{{site.data.keyword.containerlong_notm}} Kubernetes 体系结构](images/cs_org_ov.png)
 图. {{site.data.keyword.containershort_notm}} 体系结构
 
+想要了解如何将 {{site.data.keyword.containerlong_notm}} 与其他产品和服务配合使用？请查看一些[集成](cs_integrations.html#integrations)。
+
+
 <br />
+
 

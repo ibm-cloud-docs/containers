@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -62,13 +62,14 @@ lastupdated: "2018-01-24"
   ```
   {: pre}
 
-6.  設定先前產生以存取 IBM Cloud 基礎架構 (SoftLayer) 組合的 API 金鑰。請將 `<API_KEY>` 取代為 API 金鑰，並將 `<USERNAME>` 取代為新「隨收隨付制」帳戶的 {{site.data.keyword.ibmid}}。
+6.  設定先前產生以存取 IBM Cloud 基礎架構 (SoftLayer) 組合的 API 金鑰。請將 `<API_key>` 取代為 API 金鑰，並將 `<username>` 取代為新「隨收隨付制」帳戶的 {{site.data.keyword.ibmid}}。
 
   ```
-  bx cs credentials-set --infrastructure-api-key <API_KEY> --infrastructure-username <USERNAME>
+  bx cs credentials-set --infrastructure-api-key <API_key> --infrastructure-username <username>
   ```
   {: pre}
 
 7.  開始[建立標準叢集](cs_clusters.html#clusters_cli)。
 
 **附註：**若要在產生 API 金鑰之後進行檢閱，請遵循步驟 1 及 2，然後按一下 **API 金鑰**區段中的**檢視**，以查看使用者 ID 的 API 金鑰。
+

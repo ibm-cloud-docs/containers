@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -16,10 +16,10 @@ lastupdated: "2018-03-16"
 {:download: .download}
 
 
-# 外部ネットワーキングの計画
+# NodePort、LoadBalancer、または Ingress サービスを使用したネットワーキングの計画
 {: #planning}
 
-{{site.data.keyword.containerlong}} で Kubernetes クラスターを作成する場合は、すべてのクラスターをパブリック VLAN に接続する必要があります。ワーカー・ノードに割り当てられるパブリック IP アドレスは、クラスター作成時にパブリック VLAN によって決定されます。
+{{site.data.keyword.containerlong}} で Kubernetes クラスターを作成する場合は、すべてのクラスターをパブリック VLAN に接続する必要があります。 ワーカー・ノードに割り当てられるパブリック IP アドレスは、クラスター作成時にパブリック VLAN によって決定されます。
 {:shortdesc}
 
 フリー・クラスターと標準クラスターの両方とも、ワーカー・ノードのパブリック・ネットワーク・インターフェースは Calico ネットワーク・ポリシーによって保護されます。 デフォルトでは、これらのポリシーは大部分のインバウンド・トラフィックをブロックします。 ただし、Kubernetes が機能するために必要なインバウンド・トラフィックは、NodePort、LoadBalancer、Ingress の各サービスへの接続と同様に、許可されます。 ポリシーの変更方法を含め、これらのポリシーの詳細については、[ネットワーク・ポリシー](cs_network_policy.html#network_policies)を参照してください。
@@ -28,7 +28,6 @@ lastupdated: "2018-03-16"
 |------------|------------------------------------------|
 |{{site.data.keyword.Bluemix_notm}} 内のフリー・クラスター|{{site.data.keyword.IBM_notm}}|
 |{{site.data.keyword.Bluemix_notm}} 内の標準クラスター|IBM Cloud インフラストラクチャー (SoftLayer) アカウントを使用するお客様|
-{: caption="VLAN 管理の責任" caption-side="top"}
 
 ワーカー・ノードとポッドの間のクラスター内ネットワーク通信について詳しくは、[クラスター内ネットワーキング](cs_secure.html#in_cluster_network)を参照してください。 Kubernetes クラスター内で実行するアプリをセキュアにオンプレミス・ネットワークに接続する、またはクラスター外のアプリに接続する方法について詳しくは、[VPN 接続のセットアップ](cs_vpn.html)を参照してください。
 
@@ -67,8 +66,7 @@ lastupdated: "2018-03-16"
  <ul>
   <li>HTTP または HTTPS、TCP、UDP のいずれかで使用できる外部ロード・バランサーを 1 つ作成することによって、クラスターに複数のアプリを公開できます。このロード・バランサーを使用して、保護された固有のパブリック・エントリー・ポイントから着信要求を各アプリにルーティングします。</li>
   <li>1 つのパブリック・ルートを使用してクラスター内の複数のアプリをサービスとして公開できます。</li>
-  <li>Ingress は、Ingress リソースおよびアプリケーション・ロード・バランサーという 2 つの主要なコンポーネントで構成されています。
-   <ul>
+  <li>Ingress は、以下の 2 つのコンポーネントで構成されています。<ul>
     <li>Ingress リソースでは、アプリに対する着信要求のルーティングとロード・バランシングの方法に関するルールを定義します。</li>
     <li>アプリケーション・ロード・バランサー (ALB) は、着信する HTTP または HTTPS、TCP、または UDP のサービス要求を listen し、Ingress リソースに定義されたルールに基づいて、アプリのポッドに要求を転送します。</li>
    </ul>
@@ -80,7 +78,8 @@ lastupdated: "2018-03-16"
 
 <img usemap="#networking_map" border="0" class="image" src="images/networkingdt.png" width="500px" alt="このイメージは、アプリケーションに最適なネットワーキング・オプションを選択する手順を説明しています。このイメージが表示されない場合でも、文書内で情報を見つけることができます。" style="width:500px;" />
 <map name="networking_map" id="networking_map">
-<area href="/docs/containers/cs_nodeport.html#planning" alt="Nodeport サービス" shape="circle" coords="52, 283, 45"/>
-<area href="/docs/containers/cs_loadbalancer.html#planning" alt="LoadBalancer サービス" shape="circle" coords="247, 419, 44"/>
-<area href="/docs/containers/cs_ingress.html#planning" alt="Ingress サービス" shape="circle" coords="445, 420, 45"/>
+<area href="/docs/containers/cs_nodeport.html" alt="Nodeport サービス" shape="circle" coords="52, 283, 45"/>
+<area href="/docs/containers/cs_loadbalancer.html" alt="LoadBalancer サービス" shape="circle" coords="247, 419, 44"/>
+<area href="/docs/containers/cs_ingress.html" alt="Ingress サービス" shape="circle" coords="445, 420, 45"/>
 </map>
+

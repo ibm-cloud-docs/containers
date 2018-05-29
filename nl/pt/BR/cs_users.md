@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-06"
+lastupdated: "2018-4-20"
 
 
 ---
@@ -17,73 +17,171 @@ lastupdated: "2018-03-06"
 {:download: .download}
 
 
-# Designando acesso de usuário para clusters
+# Designando acesso ao cluster
 {: #users}
 
-É possível conceder acesso a um cluster do Kubernetes para assegurar que somente os usuários autorizados possam trabalhar com o cluster e implementar contêineres para o cluster no {{site.data.keyword.containerlong}}.
-{:shortdesc}
+Como um administrador de cluster, é possível definir políticas de acesso para seu cluster do Kubernetes para criar diferentes níveis de acesso para diferentes usuários. Por exemplo, é possível autorizar determinados usuários para trabalhar com recursos de cluster enquanto outros podem apenas implementar contêineres.
+{: shortdesc}
 
+## Planejando solicitações de acesso
+{: #planning_access}
 
-## Planejando processos de comunicação
-Como um administrador de cluster, considere como pode estabelecer um processo de comunicação para os membros de sua organização para comunicar solicitações de acesso a você para que mantenha-se organizado.
-{:shortdesc}
+Como um administrador de cluster, pode ser difícil manter o controle de solicitações de acesso. Estabelecer um padrão de comunicação para solicitações de acesso é essencial para manter a segurança de seu cluster.
+{: shortdesc}
 
-Forneça instruções para seus usuários do cluster sobre como solicitar acesso a um cluster ou como obter ajuda com quaisquer tipos de tarefas comuns de um administrador de cluster. Como o Kubernetes não facilita esse tipo de comunicação, cada equipe pode ter variações em seu processo preferencial.
+Para assegurar-se de que as pessoas certas tenham o acesso correto, seja muito claro com aqueles que possuem acesso ao cluster em suas políticas para solicitar acesso ou obter ajuda com tarefas comuns.
 
-Você pode escolher qualquer um dos métodos a seguir ou estabelecer seu próprio método.
-- Criar um sistema de chamado
-- Criar um modelo de formulário
-- Crie uma página da wiki
-- Requerer uma solicitação de e-mail
-- Use o método de rastreamento de problema que você já usa para controlar o trabalho diário de sua equipe
+Você já pode ter um método que funcione para sua equipe e isso é ótimo! Se você estiver procurando um local para começar, considere tentar um dos métodos a seguir.
 
+*  Criar um sistema de chamado
+*  Criar um modelo de formulário
+*  Crie uma página da wiki
+*  Requerer uma solicitação de e-mail
+*  Usar o sistema de rastreamento de problemas que você já usa para controlar o trabalho diário de sua equipe
 
-## Gerenciando o acesso ao cluster
-{: #managing}
-
-A cada usuário que trabalha com o {{site.data.keyword.containershort_notm}} deve ser designada uma combinação de funções de usuário específicas do serviço que determinam quais ações o usuário pode executar.
-{:shortdesc}
-
-<dl>
-<dt>Políticas de acesso do {{site.data.keyword.containershort_notm}}</dt>
-<dd>No Identity and Access Management, as políticas de acesso do {{site.data.keyword.containershort_notm}} determinam as ações de gerenciamento de cluster que podem ser executadas em um cluster, como criar ou remover clusters e incluir ou remover nós do trabalhador adicionais. Essas políticas devem ser configuradas em conjunto com políticas de infraestrutura. É possível conceder acesso a clusters em uma base regional.</dd>
-<dt>Políticas de acesso de infraestrutura</dt>
-<dd>No Identity and Access Management, as políticas de acesso de infraestrutura permitem que as ações que são solicitadas da interface com o usuário do {{site.data.keyword.containershort_notm}} ou da CLI sejam concluídas na infraestrutura do IBM Cloud (SoftLayer). Essas políticas devem ser configuradas em conjunto com as políticas de acesso do {{site.data.keyword.containershort_notm}}. [Saiba mais sobre as funções de infraestrutura disponíveis](/docs/iam/infrastructureaccess.html#infrapermission).</dd>
-<dt>Grupos de recursos</dt>
-<dd>Um grupo de recursos é uma maneira de organizar serviços do {{site.data.keyword.Bluemix_notm}} em agrupamentos para que seja possível designar rapidamente acesso de usuário para mais de um recurso por vez. [Saiba como gerenciar os usuários que estão usando grupos de recursos](/docs/account/resourcegroups.html#rgs).</dd>
-<dt>Funções do Cloud Foundry</dt>
-<dd>No Identity and Access Management, cada usuário deve ser designado a uma função de usuário do Cloud Foundry. Essa função determina as ações que o usuário pode executar na conta do {{site.data.keyword.Bluemix_notm}}, como convidar outros usuários ou visualizar o uso de cota. [Saiba mais sobre as funções do Cloud Foundry disponíveis](/docs/iam/cfaccess.html#cfaccess).</dd>
-<dt>Funções RBAC do Kubernetes</dt>
-<dd>Cada usuário que é designado a uma política de acesso do {{site.data.keyword.containershort_notm}} é automaticamente designada à função RBAC do Kubernetes.  No Kubernetes, as funções RBAC determinam as ações que podem ser executadas em recursos do Kubernetes dentro do cluster. As funções RBAC são configuradas somente para o namespace padrão. O administrador de cluster pode incluir funções RBAC para outros namespaces no cluster. Veja a tabela a seguir na seção [Acessar políticas e permissões](#access_policies) para ver qual função RBAC corresponde a qual política de acesso do {{site.data.keyword.containershort_notm}}. Para obter mais informações sobre funções RBAC em geral, veja [Usando autorização RBAC ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) na documentação do Kubernetes.</dd>
-</dl>
-
-<br />
-
+Sente-se sobrecarregado? Experimente este tutorial sobre as [melhores práticas para organizar usuários, equipes e aplicativos](/docs/tutorials/users-teams-applications.html).
+{: tip}
 
 ## Políticas de acesso e permissões
 {: #access_policies}
 
-Revise as políticas e permissões de acesso que é possível conceder aos usuários em sua conta do {{site.data.keyword.Bluemix_notm}}.
-{:shortdesc}
+O escopo de uma política de acesso baseia-se em uma função ou funções definidas pelos usuários que determinam as ações que eles têm permissão para executar. É possível configurar políticas específicas para seu cluster, sua infraestrutura, instâncias do serviço ou funções do Cloud Foundry.
+{: shortdesc}
 
-As funções de operador e editor do {{site.data.keyword.Bluemix_notm}} Identity Access and Management (IAM) têm permissões separadas. Se você deseja que um usuário, por exemplo, inclua nós do trabalhador e serviços de ligação, deve-se designar ao usuário as funções de operador e editor. Para obter mais detalhes sobre as políticas de acesso de infraestrutura correspondente, veja [Customizando permissões de infraestrutura para um usuário](#infra_access).<br/><br/>Se você muda a política de acesso de um usuário, as políticas do RBAC associadas à mudança em seu cluster são limpas. </br></br>**Nota:** quando você faz downgrade de permissões, por exemplo, deseja designar acesso de visualizador a um administrador de cluster antigo, deve-se aguardar alguns minutos para o downgrade ser concluído.
+{: #managing}
+Deve-se definir políticas de acesso para cada usuário que trabalhe com o {{site.data.keyword.containershort_notm}}. Algumas políticas são predefinidas, mas outras podem ser customizadas. Verifique a imagem e as definições a seguir para ver quais funções se alinham com tarefas comuns do usuário e identificar locais nos quais você possa querer customizar uma política.
 
-|Política de acesso do {{site.data.keyword.containershort_notm}}|Permissões de gerenciamento de cluster|Permissões de recursos do Kubernetes|
-|-------------|------------------------------|-------------------------------|
-|Administrator|Essa função herda permissões do Editor, do Operador e funções do Visualizador para todos os clusters
-nessa conta. <br/><br/>Quando configurado para todas as instâncias de serviço atuais:<ul><li>Crie um cluster grátis ou padrão</li><li>Configure credenciais para uma conta do {{site.data.keyword.Bluemix_notm}} para acessar o portfólio da infraestrutura do IBM Cloud (SoftLayer)</li><li>Remover um Cluster</li><li>Designar e mudar as políticas de acesso do {{site.data.keyword.containershort_notm}} para outros usuários existentes nessa conta.</li></ul><p>Quando configurado para um ID do cluster específico:<ul><li>Remover um cluster específico</li></ul></p>Política de acesso de infraestrutura correspondente: superusuário<br/><br/><strong>Observação</strong>: para criar recursos como máquinas, VLANs e sub-redes, os usuários precisam da função de infraestrutura do **Superusuário**.|<ul><li>Função RBAC: cluster-admin</li><li>Acesso de leitura/gravação para recursos em cada namespace</li><li>Criar funções dentro de um namespace</li><li>Acessar o painel do Kubernetes</li><li>Crie um recurso Ingresso que torne os aplicativos disponíveis</li></ul>|
-|Operador|<ul><li>Incluir nós do trabalhador adicionais em um cluster</li><li>Remover nós do trabalhador de um cluster</li><li>Reinicializar um nó do trabalhador</li><li>Recarregar um nó do trabalhador</li><li>Incluir uma sub-rede em um cluster</li></ul><p>Política de acesso de infraestrutura correspondente: [Customizada](#infra_access)</p>|<ul><li>Função do RBAC: administrador</li><li>Acesso de leitura/gravação para recursos dentro do namespace padrão, mas não no próprio namespace</li><li>Criar funções dentro de um namespace</li></ul>|
-|Aplicativos <br/><br/><strong>Dica</strong>: use essa função para desenvolvedores de app.|<ul><li>Ligar um serviço do {{site.data.keyword.Bluemix_notm}} a um cluster.</li><li>Desvincular um serviço do {{site.data.keyword.Bluemix_notm}} para um cluster.</li><li>Criar um webhook.</li></ul><p>Política de acesso de infraestrutura correspondente: [Customizada](#infra_access)|<ul><li>Funções RBAC: editar</li><li>Acesso de leitura/gravação para recursos dentro do namespace padrão</li></ul></p>|
-|Viewer|<ul><li>Listar um cluster</li><li>Visualizar detalhes para um cluster</li></ul><p>Política de acesso de infraestrutura correspondente: somente visualizar</p>|<ul><li>Funções RBAC: visualização</li><li>Acesso de leitura para recursos dentro do namespace padrão</li><li>Nenhum acesso de leitura para segredos do Kubernetes</li></ul>|
+Funções de acesso do ![{{site.data.keyword.containershort_notm}}](/images/user-policies.png)
 
-|Política de acesso do Cloud Foundry|Permissões de gerenciamento de conta|
-|-------------|------------------------------|
-|Função de organização: gerenciador|<ul><li>Incluir usuários adicionais em uma conta do {{site.data.keyword.Bluemix_notm}}</li></ul>| |
-|Função de espaço: desenvolvedor|<ul><li>Criar instâncias de serviço do
-{{site.data.keyword.Bluemix_notm}}</li><li>Ligar instâncias de serviço do {{site.data.keyword.Bluemix_notm}} a clusters</li></ul>| 
+Figura. Funções de acesso do {{site.data.keyword.containershort_notm}}
+
+<dl>
+  <dt>Políticas do Identity and Access Management (IAM)</dt>
+    <dd><p><em>Plataforma</em>: é possível determinar as ações que os indivíduos podem executar em um cluster do {{site.data.keyword.containershort_notm}}. É possível configurar essas políticas por região. Exemplo de ações que estão criando ou removendo clusters ou incluindo nós extras do trabalhador. Essas políticas devem ser configuradas em conjunto com políticas de infraestrutura.</p>
+    <p><em>Infraestrutura</em>: é possível determinar os níveis de acesso para sua infraestrutura, como as máquinas do nó do cluster, rede ou recursos de armazenamento. A mesma política será aplicada se o usuário fizer a solicitação por meio da GUI do {{site.data.keyword.containershort_notm}} ou por meio da CLI; mesmo quando as ações são concluídas na infraestrutura do IBM Cloud (SoftLayer). Deve-se configurar esse tipo de política em conjunto com as políticas de acesso de plataforma do {{site.data.keyword.containershort_notm}}. Para conhecer as funções disponíveis, verifique as [permissões de infraestrutura](/docs/iam/infrastructureaccess.html#infrapermission).</p></dd>
+  <dt>Funções do Resource Based Access Control (RBAC) do Kubernetes</dt>
+    <dd>Cada usuário a quem é designada uma política de acesso de plataforma é designado automaticamente a uma função do Kubernetes. No Kubernetes, o [Role Based Access Control (RBAC) ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) determina as ações que um usuário pode executar nos recursos dentro de um cluster. As funções de RBAC são configuradas automaticamente para o namespace <code>default</code>, mas como o administrador de cluster, é possível designar funções para outros namespaces.</dd>
+  <dt>Cloud Foundry</dt>
+    <dd>Neste momento, nem todos os serviços podem ser gerenciados com o Cloud IAM. Se você estiver usando um desses serviços, será possível continuar usando as [funções de usuário do Cloud Foundry](/docs/iam/cfaccess.html#cfaccess) para controlar o acesso a seus serviços.</dd>
+</dl>
+
+
+Reduzindo permissões? Pode levar alguns minutos para a ação ser concluída.
+{: tip}
+
+### Funções da plataforma
+{: #platform_roles}
+
+{{site.data.keyword.containershort_notm}} é configurado para usar o {{site.data.keyword.Bluemix_notm}} plataforma funções. As permissões de função são construídas umas sobre as outras, o que significa que a função `Editor` possui as mesmas permissões que a função `Viewer`, além das permissões concedidas a um editor. A tabela a seguir explica os tipos de ações que cada função pode executar.
+
+<table>
+  <tr>
+    <th>Funções da plataforma</th>
+    <th>Exemplo de ações</th>
+    <th>Função RBAC correspondente</th>
+  </tr>
+  <tr>
+      <td>Viewer</td>
+      <td>Visualiza os detalhes para um cluster ou outras instâncias de serviço.</td>
+      <td>Visualizar</td>
+  </tr>
+  <tr>
+    <td>Aplicativos</td>
+    <td>Pode ligar ou desvincular um serviço IBM Cloud de um cluster ou criar um webhook.</td>
+    <td>Editar</td>
+  </tr>
+  <tr>
+    <td>Operador</td>
+    <td>Pode criar, remover, reinicializar ou recarregar um nó do trabalhador. Pode incluir uma sub-rede em um cluster.</td>
+    <td>Administrador</td>
+  </tr>
+  <tr>
+    <td>Administrator</td>
+    <td>Pode criar e remover clusters. Pode editar políticas de acesso para outros no nível de conta para o serviço e a infraestrutura.</td>
+    <td>Administrador de cluster</td>
+  </tr>
+</table>
+
+Para obter mais informações sobre como designar funções de usuário na UI, veja [Gerenciando o acesso ao IAM](/docs/iam/mngiam.html#iammanidaccser).
+
+### Funções de infraestrutura
+{: #infrastructure_roles}
+
+As funções de infraestrutura permitem que os usuários executem tarefas em recursos no nível da infraestrutura. A tabela a seguir explica os tipos de ações que cada função pode executar. As funções de infraestrutura são customizáveis; certifique-se de dar aos usuários apenas o acesso que precisam às suas tarefas.
+
+<table>
+  <tr>
+    <th>Função de infraestrutura</th>
+    <th>Exemplo de ações</th>
+  </tr>
+  <tr>
+    <td><i>Apenas Visualizar</i></td>
+    <td>Pode visualizar os detalhes da infraestrutura. Pode ver um resumo da conta, incluindo faturas e pagamentos.</td>
+  </tr>
+  <tr>
+    <td><i>Usuário básico</i></td>
+    <td>Pode editar configurações de serviço, incluindo endereços IP, incluir ou editar registros DNS e incluir novos usuários com acesso à infraestrutura.</td>
+  </tr>
+  <tr>
+    <td><i>Superusuário</i></td>
+    <td>Pode executar todas as ações relacionadas à infraestrutura.</td>
+  </tr>
+</table>
+
+Para começar a designar funções, siga as etapas em [Customizando permissões de infraestrutura para um usuário](#infra_access).
+
+### Funções do RBAC
+{: #rbac_roles}
+
+O Resource-based access control (RBAC) é uma maneira de proteger os recursos que estão dentro do cluster e decidir quem pode executar quais ações do Kubernetes. Na tabela a seguir, é possível ver os tipos de funções do RBAC e os tipos de ações que os usuários podem executar com essa função. As permissões construídas umas sobre as outras, que significa que um `Admin` também possui todas as políticas que vêm com as funções `View` e `Edit`. Certifique-se de dar aos usuários apenas o acesso que eles precisam.
+
+<table>
+  <tr>
+    <th>Função RBAC</th>
+    <th>Exemplo de ações</th>
+  </tr>
+  <tr>
+    <td>Visualizar</td>
+    <td>Pode visualizar recursos dentro do namespace padrão.</td>
+  </tr>
+  <tr>
+    <td>Editar</td>
+    <td>Pode ler e gravar recursos dentro do namespace padrão.</td>
+  </tr>
+  <tr>
+    <td>Administrador</td>
+    <td>Pode ler e gravar recursos dentro do namespace padrão, mas não no próprio namespace. Pode criar funções dentro de um namespace.</td>
+  </tr>
+  <tr>
+    <td>Administrador de cluster</td>
+    <td>Pode ler e gravar recursos em cada namespace. Pode criar funções dentro de um namespace. Pode acessar o painel do Kubernetes. Pode criar um recurso do Ingress que disponibiliza publicamente os apps.</td>
+  </tr>
+</table>
 
 <br />
 
+
+## Incluindo usuários em uma conta do {{site.data.keyword.Bluemix_notm}}
+{: #add_users}
+
+É possível incluir usuários em uma conta do {{site.data.keyword.Bluemix_notm}} para conceder acesso aos seus clusters.
+{:shortdesc}
+
+Antes de iniciar, verifique se você foi designado à função `Manager` do Cloud Foundry para uma conta do {{site.data.keyword.Bluemix_notm}}.
+
+1.  [Inclua o usuário na conta](../iam/iamuserinv.html#iamuserinv).
+2.  Na seção **Acesso**, expanda **Serviços**.
+3.  Designe uma função de plataforma a um usuário para configurar o acesso para o {{site.data.keyword.containershort_notm}}.
+      1. Na lista suspensa **Serviços**, selecione **{{site.data.keyword.containershort_notm}}**.
+      2. Na lista suspensa **Região**, selecione a região para a qual convidar o usuário.
+      3. Na lista suspensa **Instância de serviço**, selecione o cluster para o qual convidar o usuário. Para localizar o ID de um cluster específico, execute `bx cs clusters`.
+      4. Na seção **Selecionar funções**, escolha uma função. Para localizar uma lista de ações suportadas por função, consulte [Políticas e permissões de
+acesso](#access_policies).
+4. [Opcional: designe uma função do Cloud Foundry](/docs/iam/mngcf.html#mngcf).
+5. [Opcional: designe uma função de infraestrutura](/docs/iam/infrastructureaccess.html#infrapermission).
+6. Clique em **Convidar usuários**.
+
+<br />
 
 
 ## Entendendo a chave API do IAM e o comando `bx cs credentials-set`
@@ -99,88 +197,8 @@ Quando um usuário diferente executa uma ação nessa região que requer intera�
 <dd>Se você tiver uma {{site.data.keyword.Bluemix_notm}}conta Pay As You Go, terá acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer) por padrão. No entanto, talvez você queira usar uma conta de infraestrutura do IBM Cloud (SoftLayer) diferente da que você já tem para pedir a infraestrutura. É possível vincular essa conta de infraestrutura à sua conta do {{site.data.keyword.Bluemix_notm}} usando o comando [<code>bx cs credentials-set</code>](cs_cli_reference.html#cs_credentials_set). </br></br>Se as credenciais de infraestrutura do IBM Cloud (SoftLayer) são configuradas manualmente, essas credenciais são usadas para pedir a infraestrutura, mesmo se uma chave API do IAM já existe para a conta. Se o usuário cujas credenciais estão armazenadas não tiver as permissões necessárias para pedir a infraestrutura, as ações relacionadas à infraestrutura, como a criação de um cluster ou o recarregamento de um nó do trabalhador, poderão falhar. </br></br> Para remover as credenciais de infraestrutura do IBM Cloud (SoftLayer) que foram configuradas manualmente, é possível usar o comando [<code>bx cs credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset). Após as credenciais serem removidas, a chave API do IAM é usada para pedir infraestrutura. </dd>
 </dl>
 
-## Incluindo usuários em uma conta do {{site.data.keyword.Bluemix_notm}}
-{: #add_users}
-
-É possível incluir usuários em uma conta do {{site.data.keyword.Bluemix_notm}} para conceder acesso aos seus clusters.
-{:shortdesc}
-
-Antes de iniciar, verifique se você foi designado à função de Gerenciador do Cloud Foundry para uma conta do {{site.data.keyword.Bluemix_notm}}.
-
-1.  [Inclua o usuário na conta](../iam/iamuserinv.html#iamuserinv).
-2.  Na seção **Acesso**, expanda **Serviços**.
-3.  Designe uma função de acesso do {{site.data.keyword.containershort_notm}}. Na lista suspensa **Designar acesso a**, decida se você deseja conceder acesso somente à sua conta do {{site.data.keyword.containershort_notm}} (**Recurso**) ou a uma coleção de vários recursos dentro de sua conta (**Grupo de recursos**).
-  -  Para **Recurso**:
-      1. Na lista suspensa **Serviços**, selecione **{{site.data.keyword.containershort_notm}}**.
-      2. Na lista suspensa **Região**, selecione a região para a qual convidar o usuário. **Nota**: para acesso aos clusters na [região Norte AP](cs_regions.html#locations), veja [Concedendo acesso do IAM aos usuários para clusters dentro da região Norte AP](#iam_cluster_region).
-      3. Na lista suspensa **Instância de serviço**, selecione o cluster para o qual convidar o usuário. Para localizar o ID de um cluster específico, execute `bx cs clusters`.
-      4. Na seção **Selecionar funções**, escolha uma função. Para localizar uma lista de ações suportadas por função, consulte [Políticas e permissões de
-acesso](#access_policies).
-  - Para **Grupo de recursos**:
-      1. Na lista suspensa **Grupo de recursos**, selecione o grupo de recursos que inclui permissões para o recurso {{site.data.keyword.containershort_notm}} de sua conta.
-      2. Na lista suspensa **Designar acesso a um grupo de recursos**, selecione uma função. Para localizar uma lista de ações suportadas por função, consulte [Políticas e permissões de
-acesso](#access_policies).
-4. [Opcional: designe uma função do Cloud Foundry](/docs/iam/mngcf.html#mngcf).
-5. [Opcional: designe uma função de infraestrutura](/docs/iam/infrastructureaccess.html#infrapermission).
-6. Clique em **Convidar usuários**.
-
 <br />
 
-
-### Concedendo acesso do IAM aos usuários para clusters dentro da região Norte AP
-{: #iam_cluster_region}
-
-Ao [incluir usuários em sua conta do {{site.data.keyword.Bluemix_notm}}](#add_users), você seleciona as regiões para as quais eles receberam acesso. No entanto, algumas regiões, como Norte AP, podem não estar disponíveis no console e devem ser incluídas usando a CLI.
-{:shortdesc}
-
-Antes de iniciar, verifique se você é um administrador para a conta do {{site.data.keyword.Bluemix_notm}}.
-
-1.  Efetue login na CLI do {{site.data.keyword.Bluemix_notm}}. Selecione a conta que você deseja usar.
-
-    ```
-    bx login [--sso]
-    ```
-    {: pre}
-
-    **Nota:** se você tiver um ID federado, use `bx login --sso` para efetuar login na CLI do {{site.data.keyword.Bluemix_notm}}. Insira seu nome do usuário e use a URL fornecida na saída da CLI para recuperar sua senha descartável. Você sabe que tem um ID federado quando o login falha sem a opção `--sso` e é bem-sucedido com a opção `--sso`.
-
-2.  Destine o ambiente para o qual você deseja conceder permissões, como a região Norte AP (`jp-tok`). Para obter mais detalhes sobre as opções de comando, como organização e espaço, veja o [comando `bluemix target`](../cli/reference/bluemix_cli/bx_cli.html#bluemix_target).
-
-    ```
-    bx target -r jp-tok
-    ```
-    {: pre}
-
-3.  Obtenha o nome ou IDs dos clusters da região aos quais você deseja conceder acesso.
-
-    ```
-    bx cs clusters
-    ```
-    {: pre}
-
-4.  Obtenha os IDs de usuário aos quais você deseja conceder acesso.
-
-    ```
-    bx account users
-    ```
-    {: pre}
-
-5.  Selecione as funções para a política de acesso.
-
-    ```
-    bx iam roles --service containers-kubernetes
-    ```
-    {: pre}
-
-6.  Conceda o acesso de usuário para o cluster com a função apropriada. Este exemplo designa ao `user@example.com` as funções `Operator` e `Editor` para três clusters.
-
-    ```
-    bx iam user-policy-create user@example.com --roles Operator,Editor --service-name containers-kubernetes --region jp-tok --service-instance cluster1,cluster2,cluster3
-    ```
-    {: pre}
-
-    Para conceder acesso aos clusters existentes e futuros região, não especifique a sinalização `--service-instance`. Para obter mais informações, veja o [comando `bluemix iam user-policy-create`](../cli/reference/bluemix_cli/bx_cli.html#bluemix_iam_user_policy_create).
-    {:tip}
 
 ## Customizando as permissões de infraestrutura para um usuário
 {: #infra_access}
@@ -205,36 +223,37 @@ Por exemplo, **Usuários básicos** podem reinicializar um nó do trabalhador, m
     <table summary="Permissões de infraestrutura para cenários comuns do {{site.data.keyword.containershort_notm}}.">
      <caption>Permissões de infraestrutura normalmente necessárias para o {{site.data.keyword.containershort_notm}}</caption>
      <thead>
-     <th>Tarefas comuns no {{site.data.keyword.containershort_notm}}</th>
-     <th>Permissões de infraestrutura necessárias por guia</th>
+      <th>Tarefas comuns no {{site.data.keyword.containershort_notm}}</th>
+      <th>Permissões de infraestrutura necessárias por guia</th>
      </thead>
      <tbody>
-     <tr>
-     <td><strong>Permissões mínimas</strong>: <ul><li>Crie um cluster.</li></ul></td>
-     <td><strong>Dispositivos</strong>:<ul><li>Visualize os detalhes do servidor virtual</li><li>Reinicializar o servidor e visualizar informações do sistema IPMI</li><li>Emitir recarregamentos de OS e iniciar o kernel de resgate</li></ul><strong>Conta</strong>: <ul><li>Incluir/fazer upgrade de instâncias da nuvem</li><li>Incluir servidor</li></ul></td>
-     </tr>
-     <tr>
-     <td><strong>Administração de cluster</strong>: <ul><li>Criar, atualizar e excluir clusters.</li><li>Incluir, recarregar e reinicializar nós do trabalhador.</li><li>Visualizar VLANs.</li><li>Criar sub-redes.</li><li>Implementar pods e serviços do balanceador de carga.</li></ul></td>
-     <td><strong>Suporte</strong>:<ul><li>Visualizar chamados</li><li>Incluir chamados</li><li>Editar chamados</li></ul>
-     <strong>Dispositivos</strong>:<ul><li>Visualize os detalhes do servidor virtual</li><li>Reinicializar o servidor e visualizar informações do sistema IPMI</li><li>Fazer upgrade do servidor</li><li>Emitir recarregamentos de OS e iniciar o kernel de resgate</li></ul>
-     <strong>Serviços</strong>:<ul><li>Gerenciar chaves SSH</li></ul>
-     <strong>Conta</strong>:<ul><li>Visualizar resumo da conta</li><li>Incluir/fazer upgrade de instâncias da nuvem</li><li>Cancelar servidor</li><li>Incluir servidor</li></ul></td>
-     </tr>
-     <tr>
-     <td><strong>Armazenamento</strong>: <ul><li>Criar solicitações de volume persistente para provisionar volumes persistentes.</li><li>Criar e gerenciar recursos de infraestrutura de armazenamento.</li></ul></td>
-     <td><strong>Serviços</strong>:<ul><li>Gerenciar armazenamento</li></ul><strong>Conta</strong>:<ul><li>Incluir armazenamento</li></ul></td>
-     </tr>
-     <tr>
-     <td><strong>Rede privada</strong>: <ul><li>Gerenciar VLANs privadas para rede em cluster.</li><li>Configurar a conectividade VPN para redes privadas.</li></ul></td>
-     <td><strong>Rede</strong>:<ul><li>Gerenciar rotas de sub-rede da rede</li><li>Gerenciar ampliação de VLAN da rede</li><li>Gerenciar túneis de rede do IPSEC</li><li>Gerenciar gateways de rede</li><li>Administração da VPN</li></ul></td>
-     </tr>
-     <tr>
-     <td><strong>Rede pública</strong>:<ul><li>Configurar o balanceador de carga pública ou rede de Ingresso para expor apps.</li></ul></td>
-     <td><strong>Dispositivos</strong>:<ul><li>Gerenciar balanceadores de carga</li><li>Editar nome do host/domínio</li><li>Gerenciar controle de porta</li></ul>
-     <strong>Rede</strong>:<ul><li>Incluir cálculo com porta de rede pública</li><li>Gerenciar rotas de sub-rede da rede</li><li>Gerenciar ampliação de VLAN da rede</li><li>Incluir endereços IP</li></ul>
-     <strong>Serviços</strong>:<ul><li>Gerenciar DNS, DNS reverso e WHOIS</li><li>Visualizar certificados (SSL)</li><li>Gerenciar certificados (SSL)</li></ul></td>
-     </tr>
-     </tbody></table>
+       <tr>
+         <td><strong>Permissões mínimas</strong>: <ul><li>Crie um cluster.</li></ul></td>
+         <td><strong>Dispositivos</strong>:<ul><li>Visualize os detalhes do servidor virtual</li><li>Reinicializar o servidor e visualizar informações do sistema IPMI</li><li>Emitir recarregamentos de OS e iniciar o kernel de resgate</li></ul><strong>Conta</strong>: <ul><li>Incluir/fazer upgrade de instâncias da nuvem</li><li>Incluir servidor</li></ul></td>
+       </tr>
+       <tr>
+         <td><strong>Administração de cluster</strong>: <ul><li>Criar, atualizar e excluir clusters.</li><li>Incluir, recarregar e reinicializar nós do trabalhador.</li><li>Visualizar VLANs.</li><li>Criar sub-redes.</li><li>Implementar pods e serviços do balanceador de carga.</li></ul></td>
+         <td><strong>Suporte</strong>:<ul><li>Visualizar chamados</li><li>Incluir chamados</li><li>Editar chamados</li></ul>
+         <strong>Dispositivos</strong>:<ul><li>Visualize os detalhes do servidor virtual</li><li>Reinicializar o servidor e visualizar informações do sistema IPMI</li><li>Fazer upgrade do servidor</li><li>Emitir recarregamentos de OS e iniciar o kernel de resgate</li></ul>
+         <strong>Serviços</strong>:<ul><li>Gerenciar chaves SSH</li></ul>
+         <strong>Conta</strong>:<ul><li>Visualizar resumo da conta</li><li>Incluir/fazer upgrade de instâncias da nuvem</li><li>Cancelar servidor</li><li>Incluir servidor</li></ul></td>
+       </tr>
+       <tr>
+         <td><strong>Armazenamento</strong>: <ul><li>Criar solicitações de volume persistente para provisionar volumes persistentes.</li><li>Criar e gerenciar recursos de infraestrutura de armazenamento.</li></ul></td>
+         <td><strong>Serviços</strong>:<ul><li>Gerenciar armazenamento</li></ul><strong>Conta</strong>:<ul><li>Incluir armazenamento</li></ul></td>
+       </tr>
+       <tr>
+         <td><strong>Rede privada</strong>: <ul><li>Gerenciar VLANs privadas para rede em cluster.</li><li>Configurar a conectividade VPN para redes privadas.</li></ul></td>
+         <td><strong>Rede</strong>:<ul><li>Gerenciar rotas de sub-rede da rede</li><li>Gerenciar ampliação de VLAN da rede</li><li>Gerenciar túneis de rede do IPSEC</li><li>Gerenciar gateways de rede</li><li>Administração da VPN</li></ul></td>
+       </tr>
+       <tr>
+         <td><strong>Rede pública</strong>:<ul><li>Configurar o balanceador de carga pública ou rede de Ingresso para expor apps.</li></ul></td>
+         <td><strong>Dispositivos</strong>:<ul><li>Gerenciar balanceadores de carga</li><li>Editar nome do host/domínio</li><li>Gerenciar controle de porta</li></ul>
+         <strong>Rede</strong>:<ul><li>Incluir cálculo com porta de rede pública</li><li>Gerenciar rotas de sub-rede da rede</li><li>Gerenciar ampliação de VLAN da rede</li><li>Incluir endereços IP</li></ul>
+         <strong>Serviços</strong>:<ul><li>Gerenciar DNS, DNS reverso e WHOIS</li><li>Visualizar certificados (SSL)</li><li>Gerenciar certificados (SSL)</li></ul></td>
+       </tr>
+     </tbody>
+    </table>
 
 5.  Para salvar as suas mudanças, clique em **Editar permissões do portal**.
 
@@ -244,7 +263,8 @@ Por exemplo, **Usuários básicos** podem reinicializar um nó do trabalhador, m
     * Para permitir que os usuários acessem os novos dispositivos que são criados, marque **Conceder acesso automaticamente quando novos dispositivos forem incluídos**.
     * Para salvar suas mudanças, clique em **Atualizar acesso ao dispositivo**.
 
-7.  Retorne para a lista de perfis do usuário e verifique se **Acesso ao dispositivo** foi concedido.
+<br />
+
 
 ## Autorizando usuários com funções RBAC customizadas do Kubernetes
 {: #rbac}
@@ -277,7 +297,6 @@ Antes de iniciar, [destine a CLI do Kubernetes para o cluster](cs_cli_install.ht
         {: codeblock}
 
         <table>
-        <caption>Tabela. Entendendo os componentes deste YAML</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Ícone Ideia"/> Entendendo os componentes deste YAML</th>
         </thead>
@@ -352,7 +371,6 @@ Antes de iniciar, [destine a CLI do Kubernetes para o cluster](cs_cli_install.ht
         {: codeblock}
 
         <table>
-        <caption>Tabela. Entendendo os componentes deste YAML</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Ícone Ideia"/> Entendendo os componentes deste YAML</th>
         </thead>
@@ -403,7 +421,7 @@ Antes de iniciar, [destine a CLI do Kubernetes para o cluster](cs_cli_install.ht
     2. Crie o recurso de ligação de função em seu cluster.
 
         ```
-        kubectl apply -f <path_to_yaml_file>
+        Kubectl apply -f filepath/my_role_team1.yaml
         ```
         {: pre}
 
@@ -415,3 +433,4 @@ Antes de iniciar, [destine a CLI do Kubernetes para o cluster](cs_cli_install.ht
         {: pre}
 
 Agora que você criou e ligou uma função RBAC customizada do Kubernetes, acompanhe com usuários. Peça-lhes para testar uma ação que eles tenham permissão para concluir devido à função, como excluir um pod.
+

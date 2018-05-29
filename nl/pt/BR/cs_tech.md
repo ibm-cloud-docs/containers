@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -40,6 +40,8 @@ as ferramentas de sistema, as bibliotecas e as configurações são empacotadas 
 uma máquina virtual.</dd>
 </dl>
 
+
+
 ### Benefícios chave do uso de contêineres
 {: #container_benefits}
 
@@ -49,20 +51,27 @@ uma máquina virtual.</dd>
 <dt>Contêineres são pequenos</dt>
 <dd>É possível ajustar vários contêineres na quantia de espaço que uma única máquina virtual requer.</dd>
 <dt>Contêineres são móveis</dt>
-<dd><ul>
+<dd>
+<ul>
   <li>Reutilize fragmentos de imagens para construir contêineres. </li>
   <li>Mova o código do app rapidamente do ambiente de preparação para o de produção.</li>
-  <li>Automatize seus processos com ferramentas de entrega contínua.</li> </ul></dd>
-</dl>
+  <li>Automatize seus processos com ferramentas de entrega contínua.</li>
+  </ul>
+  </dd>
 
+
+  
+<p>Pronto para obter um conhecimento mais profundo do Docker? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Saiba como o Docker e o {{site.data.keyword.containershort_notm}} trabalham juntos concluindo este curso.</a></p>
+
+</dl>
 
 <br />
 
 
-## Conceitos básicos do Kubernetes
+## Clusters do Kubernetes
 {: #kubernetes_basics}
 
-O projeto de software livre chamado Kubernetes combina a execução de uma infraestrutura conteinerizada com cargas de trabalho de produção, contribuições de software livre e ferramentas de gerenciamento de contêiner do Docker. A infraestrutura do Kubernetes fornece uma plataforma de app isolado e seguro para gerenciar contêineres que são móveis, extensíveis e com capacidade de recuperação automática em caso de failovers.
+<img src="images/certified-kubernetes-resized.png" style="padding-right: 10px;" align="left" alt="Este badge indica a certificação do Kubernetes para o IBM Cloud Container Service."/>O projeto de software livre chamado Kubernetes combina a execução de uma infraestrutura conteinerizada com cargas de trabalho de produção, contribuições de software livre e ferramentas de gerenciamento de contêiner do Docker. A infraestrutura do Kubernetes fornece uma plataforma de app isolado e seguro para gerenciar contêineres que são móveis, extensíveis e com capacidade de recuperação automática em caso de failovers.
 {:shortdesc}
 
 Aprenda alguns conceitos básicos do Kubernetes conforme mostrado no diagrama a seguir.
@@ -91,9 +100,14 @@ Defina as estratégias de atualização para seu app, incluindo o número de pod
 <dd>Cada app conteinerizado que é implementado em um cluster é implementado, executado e gerenciado por um recurso do Kubernetes que é chamado de pod. Os pods representam pequenas unidades implementáveis em um cluster do Kubernetes e são usados para agrupar os contêineres que devem ser tratados como uma unidade única. Na maioria dos casos, cada contêiner é implementado em seu próprio pod. No entanto, um app pode requerer que um contêiner e outros contêineres auxiliares sejam implementados em um pod para que esses contêineres possam ser direcionados usando o mesmo endereço IP privado.</dd>
 
 <dt>App</dt>
-<dd>Um app pode se referir a um app completo ou um componente de um app. Você pode implementar componentes de um app em pods separados ou nós do trabalhador separados.
-</br></br>
-Para aprender mais sobre a terminologia do Kubernetes, <a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">tente o tutorial</a>.</dd>
+<dd>Um app pode se referir a um app completo ou um componente de um app. Você pode implementar componentes de um app em pods separados ou nós do trabalhador separados.</dd>
+
+
+  
+<p>Pronto para obter um conhecimento mais profundo do Kubernetes?</p>
+<ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Expanda seu conhecimento de terminologia com o tutorial Criando clusters</a>.</li>
+<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Saiba como o Kubernetes e o {{site.data.keyword.containershort_notm}} trabalham juntos concluindo este curso.</a></li></ul>
+
 
 </dl>
 
@@ -103,7 +117,7 @@ Para aprender mais sobre a terminologia do Kubernetes, <a href="cs_tutorials.htm
 ## Arquitetura de serviço
 {: #architecture}
 
-Em um cluster do Kubernetes que é executado no {{site.data.keyword.containershort_notm}}, seus apps conteinerizados são hospedados em hosts de cálculo que são chamados de nós do trabalhador. Para ser mais específico, eles são executados em pods e os pods são hospedados em nós do trabalhador. Os nós do trabalhador são gerenciados pelo mestre do Kubernetes. O mestre do Kubernetes e os nós do trabalhador se comunicam entre si por meio de certificados TLS seguros e uma conexão openVPN para orquestrar suas configurações de cluster.
+Em um cluster do Kubernetes que é executado no {{site.data.keyword.containershort_notm}}, seus apps conteinerizados são hospedados em hosts de cálculo que são chamados de nós do trabalhador. Bem, para ser mais específico, os apps são executados em pods e os pods são hospedados em nós do trabalhador. Os nós do trabalhador são gerenciados pelo mestre do Kubernetes. O mestre do Kubernetes e os nós do trabalhador se comunicam entre si por meio de certificados TLS seguros e uma conexão openVPN para orquestrar suas configurações de cluster.
 {: shortdesc}
 
 Qual é a diferença entre o mestre do Kubernetes e um nó do trabalhador? Feliz por perguntar.
@@ -112,11 +126,15 @@ Qual é a diferença entre o mestre do Kubernetes e um nó do trabalhador? Feliz
   <dt>Mestre do Kubernetes</dt>
     <dd>O mestre do Kubernetes é encarregado de gerenciar todos os recursos de cálculo, rede e armazenamento no cluster. O mestre do Kubernetes assegura que seus apps e serviços conteinerizados sejam igualmente implementados nos nós do trabalhador no cluster. Dependendo de como você configura seu app e serviços, o mestre determina o nó do trabalhador que tem recursos suficientes para preencher os requisitos do app.</dd>
   <dt>Nó do trabalhador</dt>
-    <dd>Cada nó do trabalhador é uma máquina física (bare metal) ou uma máquina virtual que é executada em hardware físico, que é gerenciado em um ambiente de nuvem. Ao provisionar um nó do trabalhador, você determina os recursos que estão disponíveis para os contêineres hospedados nesse nó do trabalhador. Prontos para utilização, os nós do trabalhador são configurados com um mecanismo de Docker gerenciado pela {{site.data.keyword.IBM_notm}}, recursos de cálculo separados, rede e um serviço de volume. Os recursos de segurança integrada fornecem isolamento, capacidades de gerenciamento de recurso e conformidade de segurança do nó do trabalhador.</dd>
+    <dd>Cada nó do trabalhador é uma máquina física (bare metal) ou uma máquina virtual que é executada em hardware físico no ambiente de nuvem. Ao provisionar um nó do trabalhador, você determina os recursos que estão disponíveis para os contêineres hospedados nesse nó do trabalhador. Prontos para utilização, os nós do trabalhador são configurados com um mecanismo de Docker gerenciado pela {{site.data.keyword.IBM_notm}}, recursos de cálculo separados, rede e um serviço de volume. Os recursos de segurança integrada fornecem isolamento, capacidades de gerenciamento de recurso e conformidade de segurança do nó do trabalhador.</dd>
 </dl>
 
 ![{{site.data.keyword.containerlong_notm}} Arquitetura do Kubernetes](images/cs_org_ov.png)
 Figura. Arquitetura do {{site.data.keyword.containershort_notm}}
 
+Quer ver como o {{site.data.keyword.containerlong_notm}} pode ser usado com outros produtos e serviços? Confira algumas das [integrações](cs_integrations.html#integrations).
+
+
 <br />
+
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-14"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -96,14 +96,14 @@ lastupdated: "2018-02-14"
 4. 检索集群的**主 URL**。
 
    ```
-   bx cs cluster-get <cluster_name_or_id>
+   bx cs cluster-get <cluster_name_or_ID>
    ```
    {: pre}
 
    输出示例：
    ```
    ...
-   Master URL:		https://169.46.7.238:31142
+   Master URL:		https://169.xx.xxx.xxx:31142
    ...
    ```
    {: screen}
@@ -119,7 +119,7 @@ lastupdated: "2018-02-14"
 
    示例命令：
    ```
-   curl --insecure https://169.46.7.238:31142/version
+   curl --insecure https://169.xx.xxx.xxx:31142/version
    ```
    {: pre}
 
@@ -169,14 +169,14 @@ lastupdated: "2018-02-14"
 ## 允许集群访问基础架构资源和其他服务
 {: #firewall_outbound}
 
-支持集群从防火墙后访问基础架构资源和服务，例如 {{site.data.keyword.containershort_notm}} 区域、{{site.data.keyword.registrylong_notm}}、{{site.data.keyword.monitoringlong_notm}}、{{site.data.keyword.loganalysislong_notm}}、IBM Cloud Infrastructure (SoftLayer) 专用 IP 以及用于持久性卷申领的 Egress。
+支持集群从防火墙后访问基础架构资源和服务，例如 {{site.data.keyword.containershort_notm}} 区域、{{site.data.keyword.registrylong_notm}}、{{site.data.keyword.monitoringlong_notm}}、{{site.data.keyword.loganalysislong_notm}}、IBM Cloud Infrastructure (SoftLayer) 专用 IP 以及用于持久性卷申领的流出访问。
 {:shortdesc}
 
   1.  记下用于集群中所有工作程序节点的公共 IP 地址。
 
       ```
-    bx cs workers <cluster_name_or_id>
-    ```
+       bx cs workers <cluster_name_or_ID>
+       ```
       {: pre}
 
   2.  允许从源 _<each_worker_node_publicIP>_ 到目标 TCP/UDP 端口范围 20000-32767 和端口 443 以及以下 IP 地址和网络组的出站网络流量。如果您拥有的公司防火墙阻止您的本地机器访问公用因特网端点，请对源工作程序节点和本地机器执行此步骤。
@@ -202,7 +202,7 @@ lastupdated: "2018-02-14"
       <tr>
          <td>欧洲中部</td>
          <td>ams03<br>fra02<br>mil01<br>par01</td>
-         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+         <td><code>169.50.169.110, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
         </tr>
       <tr>
         <td>英国南部</td>
@@ -264,8 +264,9 @@ lastupdated: "2018-02-14"
 </p>
 
   4.  可选：允许出站网络流量从工作程序节点流至 {{site.data.keyword.monitoringlong_notm}} 和 {{site.data.keyword.loganalysislong_notm}} 服务：
-      - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
-      - 将 <em>&lt;monitoring_publicIP&gt;</em> 替换为要允许流量的监视区域的所有地址：<p><table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
+      - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
+      - 将 <em>&lt;monitoring_public_IP&gt;</em> 替换为要允许流量流至的监视区域的所有地址：
+        <p><table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
       <thead>
         <th>容器区域</th>
         <th>监视地址</th>
@@ -291,8 +292,9 @@ lastupdated: "2018-02-14"
         </tbody>
       </table>
 </p>
-      - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
-      - 将 <em>&lt;logging_publicIP&gt;</em> 替换为要允许流量的日志记录区域的所有地址：<p><table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
+      - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
+      - 将 <em>&lt;logging_public_IP&gt;</em> 替换为要允许流量流至的日志记录区域的所有地址：
+        <p><table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
       <thead>
         <th>容器区域</th>
         <th>日志记录地址</th>
@@ -328,7 +330,7 @@ lastupdated: "2018-02-14"
       - 请注意，必须添加 dal01 位置（数据中心）。
       - 打开端口 80 和 443 以允许集群引导过程。
 
-  6. {: #pvc}要为数据存储创建持久性卷申领，请允许通过防火墙 egress 访问集群所在位置（数据中心）的 [IBM Cloud infrastructure (SoftLayer) IP 地址](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)。
+  6. {: #pvc}要为数据存储创建持久性卷申领，请针对集群所在位置（数据中心）的 [IBM Cloud Infrastructure (SoftLayer) IP 地址](https://knowledgelayer.softlayer.com/faq/what-ip-ranges-do-i-allow-through-firewall)允许通过防火墙进行流出访问。
       - 要找到集群的位置（数据中心），请运行 `bx cs clusters`。
       - 允许访问**前端（公共）网络**和**后端（专用）网络**的 IP 范围。
       - 请注意，必须添加**后端（专用）网络**的 dal01 位置（数据中心）。
@@ -350,3 +352,4 @@ lastupdated: "2018-02-14"
   <dt>Ingress</dt>
   <dd>针对 Ingress 应用程序负载均衡器的 IP 地址打开端口 80（对于 HTTP）或端口 443（对于 HTTPS）。</dd>
 </dl>
+

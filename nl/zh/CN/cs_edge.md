@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -51,7 +51,7 @@ lastupdated: "2018-03-16"
 2. 使用 `dedicated=edge` 标记工作程序节点。工作程序节点标记有 `dedicated=edge` 后，所有后续 Ingress 和负载均衡器都会部署到边缘工作程序节点。
 
   ```
-  kubectl label nodes <node_name> <node_name2> dedicated=edge
+  kubectl label nodes <node1_name> <node2_name> dedicated=edge
   ```
   {: pre}
 
@@ -65,7 +65,7 @@ lastupdated: "2018-03-16"
   输出：
 
   ```
-  kubectl get service -n <namespace> <name> -o yaml | kubectl apply -f
+  kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f
   ```
   {: screen}
 
@@ -74,7 +74,7 @@ lastupdated: "2018-03-16"
   输出：
 
   ```
-  service "<name>" configured
+  service "my_loadbalancer" configured
   ```
   {: screen}
 
@@ -87,7 +87,7 @@ lastupdated: "2018-03-16"
 {: #edge_workloads}
 
 边缘工作程序节点的一个优点是可以将其指定为仅运行联网服务。
-{:shortdesc} 
+{:shortdesc}
 
 使用 `dedicated=edge` 容忍度意味着所有 LoadBalancer 和 Ingress 服务仅部署到已标记的工作程序节点。但是，要阻止其他工作负载在边缘工作程序节点上运行并使用工作程序节点资源，必须使用 [Kubernetes 污点 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)。
 
@@ -105,5 +105,7 @@ lastupdated: "2018-03-16"
   ```
   kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute
   ```
-
 现在，仅具有 `dedicated=edge` 容忍度的 pod 会部署到边缘工作程序节点。
+
+3. 如果选择[为 LoadBalancer 服务启用源 IP 保留 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer)，请确保通过[向应用程序 pod 添加边缘节点亲缘关系](cs_loadbalancer.html#edge_nodes)，将应用程序 pod 安排到边缘工作程序节点，以便可以将入局请求转发到应用程序 pod。
+

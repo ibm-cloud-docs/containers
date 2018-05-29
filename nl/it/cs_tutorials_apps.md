@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-02-27"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -114,7 +114,7 @@ Per distribuire l'applicazione:
     1. Richiama il comando per impostare la variabile di ambiente e scaricare i file di configurazione Kubernetes.
 
         ```
-        bx cs cluster-config <pr_firm_cluster>
+        bx cs cluster-config <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -152,6 +152,8 @@ Docker e quindi ritorna alla CLI in cui hai configurato la variabile della sessi
 7.  Crea un'immagine Docker che include i file dell'applicazione della directory `Lab 1`. Se hai bisogno di effettuare una modifica all'applicazione in futuro, ripeti questi passi per creare un'altra versione
 dell'immagine.
 
+    
+
     1.  Crea l'immagine in locale. Specifica il nome e la tag che vuoi utilizzare. Assicurati di utilizzare lo spazio dei nomi che hai creato in {{site.data.keyword.registryshort_notm}} nella precedente esercitazione. L'inserimento di tag nell'immagine con le informazioni dello spazio dei nomi indica a Docker dove eseguire il push dell'immagine in una fase successiva. Utilizza caratteri alfanumerici minuscoli o di sottolineatura (`_`) solo nei nomi di immagine. Non dimenticare il punto (`.`) alla fine del comando. Il punto indica a Docker di guardare all'interno della directory corrente per trovare il Dockerfile e le risorse di build per creare l'immagine.
 
         ```
@@ -173,10 +175,10 @@ dell'immagine.
         ```
         {: pre}
 
-        Output:
+        Output di esempio:
 
         ```
-        The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+        The push refers to a repository [registry.ng.bluemix.net/pr_firm/hello-world]
         ea2ded433ac8: Pushed
         894eb973f4d3: Pushed
         788906ca2c7e: Pushed
@@ -199,12 +201,14 @@ dell'immagine.
     ```
     {: pre}
 
-    Output:
+    Output di esempio:
 
     ```
     deployment "hello-world-deployment" created
     ```
     {: screen}
+
+    
 
 9.  Rendi la tua applicazione accessibile al mondo esponendo la distribuzione come un servizio NodePort. Così come puoi esporre una porta per un'applicazione Cloud Foundry, la NodePort esposta è la porta su cui il nodo di lavoro è in ascolto per il traffico.
 
@@ -213,7 +217,7 @@ dell'immagine.
     ```
     {: pre}
 
-    Output:
+    Output di esempio:
 
     ```
     service "hello-world-service" exposed
@@ -222,7 +226,6 @@ dell'immagine.
 
     <table>
     <table summary=“Information about the expose command parameters.”>
-    <caption>Tabella 1. Parametri del comando</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Ulteriori informazioni sui parametri di esposizione</th>
     </thead>
@@ -257,11 +260,11 @@ dell'immagine.
     1.  Ottieni le informazioni sul servizio per visualizzare quale NodePort è stata assegnata.
 
         ```
-        kubectl describe service <hello-world-service>
+        kubectl describe service hello-world-service
         ```
         {: pre}
 
-        Output:
+        Output di esempio:
 
         ```
         Name:                   hello-world-service
@@ -269,10 +272,10 @@ dell'immagine.
         Labels:                 run=hello-world-deployment
         Selector:               run=hello-world-deployment
         Type:                   NodePort
-        IP:                     10.10.10.8
+        IP:                     10.xxx.xx.xxx
         Port:                   <unset> 8080/TCP
         NodePort:               <unset> 30872/TCP
-        Endpoints:              172.30.171.87:8080
+        Endpoints:              172.30.xxx.xxx:8080
         Session Affinity:       None
         No events.
         ```
@@ -283,28 +286,29 @@ dell'immagine.
     2.  Ottieni l'indirizzo IP pubblico per il nodo di lavoro nel cluster.
 
         ```
-        bx cs workers <pr_firm_cluster>
+        bx cs workers <cluster_name_or_ID>
         ```
         {: pre}
 
-        Output:
+        Output di esempio:
 
         ```
+        bx cs workers pr_firm_cluster
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.47.227.138  10.171.53.188    free           normal   Ready    mil01      1.8.8
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.8.11
         ```
         {: screen}
 
-11. Apri un browser e controlla l'applicazione con il seguente URL: `http://<IP_address>:<NodePort>`. Con i valori di esempio, l'URL è `http://169.47.227.138:30872`. Quando immetti tale URL in un browser, puoi visualizzare il seguente testo.
+11. Apri un browser e controlla l'applicazione con il seguente URL: `http://<IP_address>:<NodePort>`. Con i valori di esempio, l'URL è `http://169.xx.xxx.xxx:30872`. Quando immetti tale URL in un browser, puoi visualizzare il seguente testo.
 
     ```
     Hello world! La tua applicazione è attiva e in esecuzione in un cluster!
     ```
     {: screen}
 
-    Puoi dare questo URL a un collaboratore come prova o immetterlo nel browser del cellulare, in modo da poter controllare che l'applicazione Hello World sia realmente disponibile pubblicamente. 
+    Puoi dare questo URL a un collaboratore come prova o immetterlo nel browser del cellulare, in modo da poter controllare che l'applicazione Hello World sia realmente disponibile pubblicamente.
 
 12. [Avvia il dashboard Kubernetes](cs_app.html#cli_dashboard). Tieni presente che i passi sono diversi a seconda della tua versione di Kubernetes.
 
@@ -361,10 +365,10 @@ Come definito nello script di configurazione, Kubernetes può utilizzare un cont
   ```
   {: pre}
 
-  Output:
+  Output di esempio:
 
   ```
-  The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+  The push refers to a repository [registry.ng.bluemix.net/pr_firm/hello-world]
   ea2ded433ac8: Pushed
   894eb973f4d3: Pushed
   788906ca2c7e: Pushed
@@ -416,7 +420,7 @@ Come definito nello script di configurazione, Kubernetes può utilizzare un cont
   ```
   {: pre}
 
-  Output:
+  Output di esempio:
 
   ```
   deployment "hw-demo-deployment" created
@@ -427,18 +431,18 @@ Come definito nello script di configurazione, Kubernetes può utilizzare un cont
 7.  Ora che il lavoro di distribuzione è stato effettuato puoi aprire un browser e controllare l'applicazione. Per creare l'URL, prendi lo stesso indirizzo IP pubblico che hai utilizzato nella lezione precedente per il tuo nodo di lavoro e combinalo con la NodePort specificata nello script di configurazione. Per ottenere l'indirizzo IP pubblico per il nodo di lavoro:
 
   ```
-  bx cs workers <pr_firm_cluster>
+  bx cs workers <cluster_name_or_ID>
   ```
   {: pre}
 
-  Con i valori di esempio, l'URL è `http://169.47.227.138:30072`. In un browser, potresti visualizzare il seguente testo. Se non visualizzi questo testo, non ti preoccupare. Questa applicazione è progettata per essere attiva e disattiva.
+  Con i valori di esempio, l'URL è `http://169.xx.xxx.xxx:30072`. In un browser, potresti visualizzare il seguente testo. Se non visualizzi questo testo, non ti preoccupare. Questa applicazione è progettata per essere attiva e disattiva.
 
   ```
   Hello world! Ottimo lavoro per aver reso la seconda fase attiva e in esecuzione!
   ```
   {: screen}
 
-  Puoi anche controllare `http://169.47.227.138:30072/healthz` per lo stato.
+  Puoi anche controllare `http://169.xx.xxx.xxx:30072/healthz` per lo stato. 
 
   Per i primi 10 - 15 secondi, viene restituito un messaggio 200, in modo che puoi sapere se l'applicazione è in esecuzione correttamente. Dopo questi 15 secondi, viene visualizzato un messaggio di timeout. Questo è un comportamento previsto.
 
@@ -472,7 +476,7 @@ Pronto a eliminare quello che hai precedentemente creato prima di continuare? Qu
   ```
   {: pre}
 
-  Output:
+  Output di esempio:
 
   ```
   deployment "hw-demo-deployment" deleted
@@ -538,7 +542,7 @@ Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di la
         ```
         {: pre}
 
-3.  Crea l'immagine {{site.data.keyword.watson}}-talk.
+4.  Crea l'immagine {{site.data.keyword.watson}}-talk.
 
     1.  Passa alla directory `watson-talk`.
 
@@ -568,27 +572,27 @@ Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di la
         ```
         {: pre}
 
-4.  Verifica che le immagini siano state correttamente aggiunte al tuo spazio dei nomi del registro. Se hai utilizzato il terminale Docker Quickstart per eseguire i comandi Docker, assicurati di ritornare alla CLI che hai utilizzato per impostare la variabile della sessione `KUBECONFIG`.
+5.  Verifica che le immagini siano state correttamente aggiunte al tuo spazio dei nomi del registro. Se hai utilizzato il terminale Docker Quickstart per eseguire i comandi Docker, assicurati di ritornare alla CLI che hai utilizzato per impostare la variabile della sessione `KUBECONFIG`.
 
     ```
     bx cr images
     ```
     {: pre}
 
-    Output:
+    Output di esempio:
 
     ```
     Listing images...
 
-    REPOSITORY                                  NAMESPACE  TAG            DIGEST         CREATED         SIZE     VULNERABILITY STATUS
-    registry.<region>.bluemix.net/namespace/hello-world   namespace  1              0d90cb732881   40 minutes ago  264 MB   OK
-    registry.<region>.bluemix.net/namespace/hello-world   namespace  2              c3b506bdf33e   20 minutes ago  264 MB   OK
-    registry.<region>.bluemix.net/namespace/watson        namespace  latest         fedbe587e174   3 minutes ago   274 MB   OK
-    registry.<region>.bluemix.net/namespace/watson-talk   namespace  latest         fedbe587e174   2 minutes ago   274 MB   OK
+    REPOSITORY                                      NAMESPACE  TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS
+    registry.ng.bluemix.net/namespace/hello-world   namespace  1        0d90cb732881   40 minutes ago  264 MB   OK
+    registry.ng.bluemix.net/namespace/hello-world   namespace  2        c3b506bdf33e   20 minutes ago  264 MB   OK
+    registry.ng.bluemix.net/namespace/watson        namespace  latest   fedbe587e174   3 minutes ago   274 MB   OK
+    registry.ng.bluemix.net/namespace/watson-talk   namespace  latest   fedbe587e174   2 minutes ago   274 MB   OK
     ```
     {: screen}
 
-5.  Apri il file `watson-deployment.yml`, nella directory `Lab 3`, con un editor di testo. Questo script di configurazione include una distribuzione e un servizio per entrambi i componenti watson e watson-talk dell'applicazione.
+6.  Apri il file `watson-deployment.yml`, nella directory `Lab 3`, con un editor di testo. Questo script di configurazione include una distribuzione e un servizio per entrambi i componenti watson e watson-talk dell'applicazione.
 
     1.  Aggiorna i dettagli dell'immagine nel tuo spazio dei nomi del registro per entrambe le distribuzioni.
 
@@ -613,7 +617,7 @@ Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di la
                 - name: service-bind-volume
                   secret:
                     defaultMode: 420
-                    secretName: binding-<mytoneanalyzer>
+                    secretName: binding-mytoneanalyzer
         ```
         {: codeblock}
 
@@ -626,14 +630,14 @@ Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di la
 
     3.  Nella sezione del servizio watson-talk, prendi nota del valore impostato per la `NodePort`. Questo esempio utilizza 30080.
 
-6.  Esegui lo script di configurazione.
+7.  Esegui lo script di configurazione.
 
   ```
   kubectl apply -f watson-deployment.yml
   ```
   {: pre}
 
-7.  Facoltativo: verifica che il segreto {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} sia montato come un volume al pod.
+8.  Facoltativo: verifica che il segreto {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} sia montato come un volume al pod.
 
     1.  Per ottenere il nome di un pod watson, esegui il seguente comando.
 
@@ -642,7 +646,7 @@ Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di la
         ```
         {: pre}
 
-        Output:
+        Output di esempio:
 
         ```
         NAME                                 READY     STATUS    RESTARTS  AGE
@@ -658,7 +662,7 @@ Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di la
         ```
         {: pre}
 
-        Output:
+        Output di esempio:
 
         ```
         Volumes:
@@ -671,21 +675,21 @@ Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di la
         ```
         {: codeblock}
 
-8.  Apri un browser e analizza del testo. Il formato dell'URL è `http://<worker_node_IP_address>:<watson-talk-nodeport>/analyze/"<text_to_analyze>"`.
+9.  Apri un browser e analizza del testo. Il formato dell'URL è `http://<worker_node_IP_address>:<watson-talk-nodeport>/analyze/"<text_to_analyze>"`.
 
     Esempio:
 
     ```
-    http://169.47.227.138:30080/analyze/"Today is a beautiful day"
+    http://169.xx.xxx.xxx:30080/analyze/"Today is a beautiful day"
     ```
     {: screen}
 
     In
 un browser, puoi visualizzare la risposta JSON per il testo che hai immesso.
 
-9.  [Avvia il dashboard Kubernetes](cs_app.html#cli_dashboard). Tieni presente che i passi sono diversi a seconda della tua versione di Kubernetes.
+10.  [Avvia il dashboard Kubernetes](cs_app.html#cli_dashboard). Tieni presente che i passi sono diversi a seconda della tua versione di Kubernetes.
 
-10. Nella scheda **Carichi di lavoro**, puoi visualizzare le risorse che hai creato. Quando hai terminato di controllare il dashboard Kubernetes, utilizza CTRL+C per uscire dal comando `proxy`.
+11. Nella scheda **Carichi di lavoro**, puoi visualizzare le risorse che hai creato. Quando hai terminato di controllare il dashboard Kubernetes, utilizza CTRL+C per uscire dal comando `proxy`.
 
 ### Lezione 3b. Aggiornamento ed esecuzione della distribuzione Watson Tone Analyzer
 {: #lesson3b}
@@ -743,7 +747,7 @@ Pronto a eliminare quello che hai precedentemente creato? Puoi utilizzare lo scr
   ```
   {: pre}
 
-  Output:
+  Output di esempio:
 
   ```
   deployment "watson-pod" deleted
@@ -756,7 +760,7 @@ service "watson-talk-service" deleted
   Se non lo vuoi conservare, puoi eliminare anche il cluster.
 
   ```
-  bx cs cluster-rm <pr_firm_cluster>
+  bx cs cluster-rm <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -768,3 +772,4 @@ Ora che hai acquisito le basi, puoi passare ad attività più avanzate. Prendi i
 - Completa un lab più complicato nel repository
 - [Ridimensiona automaticamente le tue applicazioni](cs_app.html#app_scaling) con {{site.data.keyword.containershort_notm}}
 - Esplora il percorso di orchestrazione del contenitore in [developerWorks ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/code/journey/category/container-orchestration/)
+

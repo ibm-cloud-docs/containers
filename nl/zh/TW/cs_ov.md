@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -24,3 +24,4 @@ lastupdated: "2018-01-11"
  - [使用叢集的優點](cs_why.html#benefits)
  - [服務架構](cs_tech.html#architecture)
  - [容器濫用](cs_why.html#terms)
+

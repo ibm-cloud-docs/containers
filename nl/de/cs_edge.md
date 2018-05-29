@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -29,7 +29,8 @@ Wenn diese Workerknoten nur für den Netzbetrieb markiert sind, können andere A
 ## Bezeichnung für Edge-Knoten zu Workerknoten hinzufügen
 {: #edge_nodes}
 
-Fügen Sie die Bezeichnung `dedicated=edge` zu mindestens zwei Workerknoten auf jedem öffentlichen VLAN in Ihrem Cluster hinzu, um sicherzustellen, dass Ingress- und  Lastausgleichsservices nur für diese Workerknoten bereitgestellt werden.{:shortdesc}
+Fügen Sie die Bezeichnung `dedicated=edge` zu mindestens zwei Workerknoten auf jedem öffentlichen VLAN in Ihrem Cluster hinzu, um sicherzustellen, dass Ingress- und  Lastausgleichsservices nur für diese Workerknoten bereitgestellt werden.
+{:shortdesc}
 
 Vorbemerkungen:
 
@@ -49,7 +50,7 @@ Schritte:
 2. Ordnen Sie den Workerknoten die Bezeichnung `dedicated=edge` zu. Nachdem ein Workerknoten mit der Bezeichnung `dedicated=edge` markiert wurde, werden alle Ingress- und Lastausgleichsservices auf einem Edge-Workerknoten bereitgestellt.
 
   ```
-  kubectl label nodes <knotenname> <knotenname2> dedicated=edge
+  kubectl label nodes <knoten1_name> <knoten2_name> dedicated=edge
   ```
   {: pre}
 
@@ -63,7 +64,7 @@ Schritte:
   Ausgabe:
 
   ```
-  kubectl get service -n <namensbereich> <name> -o yaml | kubectl apply -f
+  kubectl get service -n <namensbereich> <servicename> -o yaml | kubectl apply -f
   ```
   {: screen}
 
@@ -72,7 +73,7 @@ Schritte:
   Ausgabe:
 
   ```
-  service "<name>" configured
+  service "my_loadbalancer" configured
   ```
   {: screen}
 
@@ -85,7 +86,7 @@ Sie haben Workerknoten mit der Bezeichnung `dedicated=edge` markiert und alle vo
 {: #edge_workloads}
 
 Ein Vorteil von Edge-Workerknoten besteht darin, dass sie so konfiguriert werden können, dass sie nur Netzservices (Networking Services) ausführen.
-{:shortdesc} 
+{:shortdesc}
 
 Die Verwendung der Tolerierung `dedicated=edge` bedeutet, dass alle Lastausgleichs- und Ingress-Services nur auf den markierten Workerknoten ausgeführt werden. Um jedoch zu verhindern, dass andere Arbeitslasten auf Edge-Workerknoten ausgeführt werden und deren Ressourcen verbrauchen, müssen Sie [Kubernetes-Taints ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) verwenden.
 
@@ -102,5 +103,7 @@ Die Verwendung der Tolerierung `dedicated=edge` bedeutet, dass alle Lastausgleic
   ```
   kubectl taint node <knotenname> dedicated=edge:NoSchedule dedicated=edge:NoExecute
   ```
+  Nun werden nur Pods mit der Tolerierung `dedicated=edge` auf Ihren Edge-Workerknoten bereitgestellt.
 
-Nun werden nur Pods mit der Tolerierung `dedicated=edge` auf Ihren Edge-Workerknoten bereitgestellt.
+3. Wenn Sie die [Beibehaltung der Quellen-IP für einen Lastausgleichsservice ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link") aktivieren](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), stellen Sie sicher, dass App-Pods auf den Edge-Workerknoten geplant sind, indem Sie [Edge-Knoten-Affinität zu App-Pods hinzufügen](cs_loadbalancer.html#edge_nodes), damit eingehende Anforderungen an Ihre App-Pods weitergeleitet werden können. 
+

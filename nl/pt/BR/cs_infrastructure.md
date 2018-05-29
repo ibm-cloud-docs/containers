@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -70,13 +70,14 @@ Antes de iniciar, crie uma conta {{site.data.keyword.Bluemix_notm}} Pay-As-You-G
   ```
   {: pre}
 
-6.  Configure a chave API gerada anteriormente para acessar o portfólio de infraestrutura do IBM Cloud (SoftLayer). Substitua `<API_KEY>` pela chave API e `<USERNAME>` pelo {{site.data.keyword.ibmid}} de sua nova conta de Pagamento por uso.
+6.  Configure a chave API gerada anteriormente para acessar o portfólio de infraestrutura do IBM Cloud (SoftLayer). Substitua `<API_key>` pela chave API e `<username>` pelo {{site.data.keyword.ibmid}} de sua nova conta de Pagamento por uso.
 
   ```
-  bx cs credentials-set --infrastructure-api-key <API_KEY> --infrastructure-username <USERNAME>
+  bx cs credentials-set --infrastructure-api-key <API_key> --infrastructure-username <username>
   ```
   {: pre}
 
 7.  Inicie [criando clusters padrão](cs_clusters.html#clusters_cli).
 
 **Nota:** para revisar sua chave API depois de ela ter sido gerada, siga as etapas 1 e 2 e, em seguida, na seção **Chave API**, clique em **Visualizar** para ver a chave API de seu ID do usuário.
+

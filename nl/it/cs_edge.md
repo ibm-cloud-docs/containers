@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -51,7 +51,7 @@ Passi:
 2. Etichetta i nodi di lavoro con `dedicated=edge`. Una volta che un nodo di lavoro è contrassegnato con `dedicated=edge`, tutti i successivi programmi di bilanciamento del carico e Ingress vengono distribuiti a un nodo di lavoro edge.
 
   ```
-  kubectl label nodes <node_name> <node_name2> dedicated=edge
+  kubectl label nodes <node1_name> <node2_name> dedicated=edge
   ```
   {: pre}
 
@@ -65,7 +65,7 @@ Passi:
   Output:
 
   ```
-  kubectl get service -n <namespace> <name> -o yaml | kubectl apply -f
+  kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f
   ```
   {: screen}
 
@@ -74,7 +74,7 @@ Passi:
   Output:
 
   ```
-  service "<name>" configured
+  service "my_loadbalancer" configured
   ```
   {: screen}
 
@@ -87,7 +87,7 @@ Hai etichettato i nodi di lavoro con `dedicated=edge` e hai ridistribuito tutti 
 {: #edge_workloads}
 
 Uno dei vantaggi dei nodi di lavoro edge è che possono essere specificati per eseguire solo i servizi di rete.
-{:shortdesc} 
+{:shortdesc}
 
 L'utilizzo della tolleranza `dedicated=edge` indica che tutti i servizi di bilanciamento del carico e Ingress vengono distribuiti solo ai nodi di lavoro etichettati. Tuttavia, per impedire che altri carichi di lavoro vengano eseguiti sui nodi di lavoro edge e consumino le risorse dei nodi di lavoro, devi utilizzare le [corruzioni Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
 
@@ -104,5 +104,7 @@ L'utilizzo della tolleranza `dedicated=edge` indica che tutti i servizi di bilan
   ```
   kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute
   ```
+  Adesso, solo i pod con la tolleranza `dedicated=edge` vengono distribuiti ai tuoi nodi di lavoro edge.
 
-Adesso, solo i pod con la tolleranza `dedicated=edge` vengono distribuiti ai tuoi nodi di lavoro edge.
+3. Se scegli di [abilitare la conservazione dell'IP di origine per un servizio del programma di bilanciamento del carico ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), assicurati che i pod dell'applicazione siano pianificati sui nodi di lavoro edge [aggiungendo l'affinità del nodo edge ai pod dell'applicazione](cs_loadbalancer.html#edge_nodes) in modo che le richieste in entrata possano essere inoltrate ai tuoi pod dell'applicazione. 
+

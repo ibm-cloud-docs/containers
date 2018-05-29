@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -18,8 +18,9 @@ lastupdated: "2018-03-16"
 # {{site.data.keyword.containerlong_notm}}のセキュリティー
 {: #security}
 
-{{site.data.keyword.containerlong}} の標準装備のセキュリティー・フィーチャーをリスク分析とセキュリティー保護に使用できます。これらのフィーチャーは、Kubernetes クラスター・インフラストラクチャーとネットワーク通信を保護し、コンピュート・リソースを分離し、インフラストラクチャー・コンポーネントとコンテナー・デプロイメントにおけるセキュリティー・コンプライアンスを確保するためのものです。
+{{site.data.keyword.containerlong}} の標準装備のセキュリティー・フィーチャーをリスク分析とセキュリティー保護に使用できます。 これらのフィーチャーは、Kubernetes クラスター・インフラストラクチャーとネットワーク通信を保護し、コンピュート・リソースを分離し、インフラストラクチャー・コンポーネントとコンテナー・デプロイメントにおけるセキュリティー・コンプライアンスを確保するためのものです。
 {: shortdesc}
+
 
 ## クラスター・コンポーネントによるセキュリティー
 {: #cluster}
@@ -34,20 +35,20 @@ lastupdated: "2018-03-16"
 <img src="images/cs_security.png" width="400" alt="{{site.data.keyword.containershort_notm}} クラスター・セキュリティー" style="width:400px; border-style: none"/>
 
 
-  <table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
+<table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> {{site.data.keyword.containershort_notm}} での組み込みのクラスター・セキュリティー設定</th>
+    <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> {{site.data.keyword.containershort_notm}} での組み込みのクラスター・セキュリティー設定</th>
   </thead>
   <tbody>
     <tr>
       <td>Kubernetes マスター</td>
-      <td>各クラスターの Kubernetes マスターは IBM によって管理され、高い可用性を備えています。 マスターには、セキュリティー・コンプライアンスを確保し、ワーカー・ノードとの間の通信を保護するための {{site.data.keyword.containershort_notm}} セキュリティー設定が含まれています。 更新は IBM が必要に応じて行います。 専用 Kubernetes マスターは、クラスター内のすべての Kubernetes リソースを一元的に制御してモニターします。 デプロイメント要件とクラスターの容量に基づき、Kubernetes マスターは、コンテナー化されたアプリが使用可能なワーカー・ノードにデプロイされるように自動的にスケジュール設定します。 詳しくは、[Kubernetes マスターのセキュリティー](#master)を参照してください。</td>
+      <td>各クラスターの Kubernetes マスターは IBM によって管理され、高い可用性を備えています。 マスターには、セキュリティー・コンプライアンスを確保し、ワーカー・ノードとの間の通信を保護するための {{site.data.keyword.containershort_notm}} セキュリティー設定が含まれています。 セキュリティー更新は、IBM が必要に応じて行います。専用 Kubernetes マスターは、クラスター内のすべての Kubernetes リソースを一元的に制御してモニターします。 デプロイメント要件とクラスターの容量に基づき、Kubernetes マスターは、コンテナー化されたアプリが使用可能なワーカー・ノードにデプロイされるように自動的にスケジュール設定します。 詳しくは、[Kubernetes マスターのセキュリティー](#master)を参照してください。</td>
     </tr>
     <tr>
       <td>ワーカー・ノード</td>
       <td>コンテナーはワーカー・ノードにデプロイされます。ワーカー・ノードは特定の 1 つのクラスターのために専用で使用されるので、IBM のお客様に提供されるコンピュート、ネットワーク、およびストレージがそれぞれ分離されます。 {{site.data.keyword.containershort_notm}} が備える組み込みセキュリティー機能により、プライベート・ネットワークとパブリック・ネットワークのワーカー・ノードのセキュリティーを維持し、ワーカー・ノードのセキュリティー・コンプライアンスを遵守できます。 詳しくは、[ワーカー・ノードのセキュリティー](#worker)を参照してください。 さらに、[Calico ネットワーク・ポリシー](cs_network_policy.html#network_policies)を追加して、ワーカー・ノード上のポッドを出入りするネットワーク・トラフィックのどれを許可し、どれをブロックするかを指定することができます。</td>
-     </tr>
-     <tr>
+    </tr>
+    <tr>
       <td>イメージ</td>
       <td>クラスター管理者は、保護された独自の Docker イメージ・リポジトリーを {{site.data.keyword.registryshort_notm}} にセットアップできます。このレジストリーに Docker イメージを保管してクラスター・ユーザー間で共有することができます。 安全にコンテナー・デプロイメントを行うために、プライベート・レジストリー内のすべてのイメージが Vulnerability Advisor によってスキャンされます。 Vulnerability Advisor は {{site.data.keyword.registryshort_notm}}のコンポーネントであり、潜在的な脆弱性がないかスキャンし、セキュリティーに関する推奨を行い、脆弱性を解決するための方法を提示します。 詳しくは、[{{site.data.keyword.containershort_notm}} のイメージ・セキュリティー](#images)を参照してください。</td>
     </tr>
@@ -66,11 +67,11 @@ Kubernetes マスターを保護し、クラスター・ネットワーク通信
 <dl>
   <dt>完全に管理される専用 Kubernetes マスター</dt>
     <dd>{{site.data.keyword.containershort_notm}} に含まれる Kubernetes クラスターはすべて、IBM が所有する IBM Cloud インフラストラクチャー (SoftLayer) アカウントで、IBM が管理する専用 Kubernetes マスターにより制御されます。 Kubernetes マスターは、他の IBM のお客様とは共用されない、以下の専用コンポーネントを使用してセットアップされます。
-    <ul><li>etcd データ・ストア: サービス、デプロイメント、ポッドなどのクラスターのすべての Kubernetes リソースを保管します。 Kubernetes ConfigMaps および Secrets は、ポッドで実行されるアプリで使用できるように、キー値ペアとして保管されるアプリ・データです。 etcd のデータは、IBM 管理の暗号化ディスクに保管され、毎日バックアップされます。ポッドに送信されるデータは、TLS で暗号化されるので、データの保護と完全性が確保されます。</li>
-    <li>kube-apiserver: ワーカー・ノードから Kubernetes マスターへのすべての要求のメインエントリー・ポイントとなります。 kube-apiserver は要求を検証して処理し、etcd データ・ストアに対する読み取り/書き込みを行うことができます。</li>
-    <li>kube-scheduler: ポッドをどこにデプロイするかを決定します。このとき、キャパシティーとパフォーマンスのニーズ、ハードウェアとソフトウェアのポリシー制約、アンチアフィニティー仕様、およびワークロード要件が考慮されます。 要件に合致するワーカー・ノードが見つからなければ、ポッドはクラスターにデプロイされません。</li>
-    <li>kube-controller-manager: レプリカ・セットをモニターし、対応するポッドを作成して目的の状態を実現するためのコンポーネントです。</li>
-    <li>OpenVPN: {{site.data.keyword.containershort_notm}} 固有のコンポーネントであり、Kubernetes マスターからワーカー・ノードへのすべての通信のためのセキュア・ネットワーク接続を提供します。</li></ul></dd>
+      <ul><li>etcd データ・ストア: サービス、デプロイメント、ポッドなどのクラスターのすべての Kubernetes リソースを保管します。 Kubernetes ConfigMaps および Secrets は、ポッドで実行されるアプリで使用できるように、キー値ペアとして保管されるアプリ・データです。 etcd のデータは、IBM 管理の暗号化ディスクに保管され、毎日バックアップされます。 ポッドに送信されるデータは、TLS で暗号化されるので、データの保護と完全性が確保されます。 </li>
+      <li>kube-apiserver: ワーカー・ノードから Kubernetes マスターへのすべての要求のメインエントリー・ポイントとなります。 kube-apiserver は要求を検証して処理し、etcd データ・ストアに対する読み取り/書き込みを行うことができます。</li>
+      <li>kube-scheduler: ポッドをどこにデプロイするかを決定します。このとき、キャパシティーとパフォーマンスのニーズ、ハードウェアとソフトウェアのポリシー制約、アンチアフィニティー仕様、およびワークロード要件が考慮されます。 要件に合致するワーカー・ノードが見つからなければ、ポッドはクラスターにデプロイされません。</li>
+      <li>kube-controller-manager: レプリカ・セットをモニターし、対応するポッドを作成して目的の状態を実現するためのコンポーネントです。</li>
+      <li>OpenVPN: {{site.data.keyword.containershort_notm}} 固有のコンポーネントであり、Kubernetes マスターからワーカー・ノードへのすべての通信のためのセキュア・ネットワーク接続を提供します。</li></ul></dd>
   <dt>ワーカー・ノードから Kubernetes マスターへのすべての通信のための TLS セキュア・ネットワーク接続</dt>
     <dd>Kubernetes マスターへのネットワーク通信を保護するために、{{site.data.keyword.containershort_notm}} によって TLS 証明書がクラスターごとに生成されます。これを使って kube-apiserver コンポーネントおよび etcd データ・ストア・コンポーネントとの間でやり取りされる通信が暗号化されます。 これらの証明書は、クラスター間で共有されたり、Kubernetes マスター・コンポーネント間で共有されたりすることはありません。</dd>
   <dt>Kubernetes マスターからワーカー・ノードへのすべての通信のための OpenVPN セキュア・ネットワーク接続</dt>
@@ -92,30 +93,34 @@ Kubernetes マスターを保護し、クラスター・ネットワーク通信
 
 <dl>
   <dt>ワーカー・ノードの所有権</dt>
-    <dd>ワーカー・ノードの所有権は、作成するクラスターのタイプによって異なります。 <p> フリー・クラスター内のワーカー・ノードは、IBM の所有する IBM Cloud インフラストラクチャー (SoftLayer) アカウントにプロビジョンされます。 このワーカー・ノードにアプリをデプロイすることはできますが、このワーカー・ノードで設定の変更や追加のソフトウェアのインストールはできません。</p> <p>標準クラスター内のワーカー・ノードは、お客様の IBM Cloud パブリック・アカウントまたは専用アカウントに関連付けられている IBM Cloud インフラストラクチャー (SoftLayer) アカウントにプロビジョンされます。 ワーカー・ノードはお客様が所有しますが、オペレーティング・システムに更新プログラムやセキュリティー・パッチをデプロイするために、IBM はワーカー・ノードへのアクセスを維持しています。 お客様は IBM Cloud Container Service の規定に従って、このワーカー・ノードでセキュリティー設定を変更したり、追加のソフトウェアをインストールしたりできます。</p> </dd>
+    <dd>ワーカー・ノードの所有権は、作成するクラスターのタイプによって異なります。 <p> フリー・クラスター内のワーカー・ノードは、IBM の所有する IBM Cloud インフラストラクチャー (SoftLayer) アカウントにプロビジョンされます。 このワーカー・ノードにアプリをデプロイすることはできますが、このワーカー・ノードで設定の変更や追加のソフトウェアのインストールはできません。</p>
+    <p>標準クラスター内のワーカー・ノードは、お客様の IBM Cloud パブリック・アカウントまたは専用アカウントに関連付けられている IBM Cloud インフラストラクチャー (SoftLayer) アカウントにプロビジョンされます。 ワーカー・ノードは、お客様が所有します。お客様は IBM Cloud Container Service の規定に従って、このワーカー・ノードでセキュリティー設定を変更したり、追加のソフトウェアをインストールしたりできます。</p> </dd>
   <dt>コンピュート、ネットワーク、およびストレージ・インフラストラクチャーの分離</dt>
-    <dd>お客様がクラスターを作成すると、IBM は、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオを使用してワーカー・ノードを仮想マシンとしてプロビジョンします。 ワーカー・ノードは特定のクラスターの専用であり、他のクラスターのワークロードをホストすることはありません。<p> ワーカー・ノードのネットワーク・パフォーマンスと分離の品質を保証するために、すべての {{site.data.keyword.Bluemix_notm}} アカウントには、IBM Cloud インフラストラクチャー (SoftLayer) VLAN がセットアップされます。 また、ワーカー・ノードをプライベート VLAN だけに接続して、プライベートとして指定することもできます。</p> <p>クラスターにデータを保持する場合は、IBM Cloud インフラストラクチャー (SoftLayer) の NFS ベースの専用ファイル・ストレージをプロビジョンし、このプラットフォームの組み込みデータ・セキュリティー機能を利用することができます。 </p></dd>
+    <dd><p>お客様がクラスターを作成すると、IBM は、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオを使用してワーカー・ノードを仮想マシンとしてプロビジョンします。 ワーカー・ノードは特定のクラスターの専用であり、他のクラスターのワークロードをホストすることはありません。</p>
+    <p> ワーカー・ノードのネットワーク・パフォーマンスと分離の品質を保証するために、すべての {{site.data.keyword.Bluemix_notm}} アカウントには、IBM Cloud インフラストラクチャー (SoftLayer) VLAN がセットアップされます。 また、ワーカー・ノードをプライベート VLAN だけに接続して、プライベートとして指定することもできます。</p> <p>クラスターにデータを保持する場合は、IBM Cloud インフラストラクチャー (SoftLayer) の NFS ベースの専用ファイル・ストレージをプロビジョンし、このプラットフォームの組み込みデータ・セキュリティー機能を利用することができます。</p></dd>
   <dt>保護されたワーカー・ノードのセットアップ</dt>
-    <dd>すべてのワーカー・ノードは Ubuntu オペレーティング・システムを使用してセットアップされ、ワーカー・ノードの所有者が変更することはできません。 ワーカー・ノードのオペレーティング・システムが Ubuntu であるため、ワーカー・ノードにデプロイするすべてのコンテナーは、Ubuntu カーネルを使用する Linux ディストリビューションを使用する必要があります。別の方法でカーネルと通信する必要がある Linux ディストリビューションは使用できません。ワーカー・ノードのオペレーティング・システムを潜在的な攻撃から保護するために、すべてのワーカー・ノードに、Linux iptable ルールによって適用されるエキスパート・ファイアウォール設定が構成されます。<p> Kubernetes 上で実行されるコンテナーはすべて、定義済みの Calico ネットワーク・ポリシー設定で保護されます。この設定は、クラスター作成時にワーカー・ノードごとに構成されます。 このようなセットアップにより、ワーカー・ノードとポッドの間のセキュア・ネットワーク通信が確保されます。 標準クラスター内のワーカー・ノードでコンテナーが実行できるアクションをさらに制限するために、ユーザーは、ワーカー・ノードに [AppArmor ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tutorials/clusters/apparmor/) を構成することを選択できます。</p><p> ワーカー・ノード上の SSH アクセスは無効になっています。 標準クラスターのワーカー・ノードに追加機能をインストールする場合には、[Kubernetes デーモン・セット ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset) を使用できます。これにより、あらゆるワーカー・ノードであらゆるアクションを実行できます。また、[Kubernetes ジョブ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) を使用することもできます。これは、1 回限りのアクションに使用できます。</p></dd>
+    <dd><p>すべてのワーカー・ノードは Ubuntu オペレーティング・システムを使用してセットアップされ、ワーカー・ノードの所有者が変更することはできません。 ワーカー・ノードのオペレーティング・システムが Ubuntu であるため、ワーカー・ノードにデプロイするすべてのコンテナーは、Ubuntu カーネルを使用する Linux ディストリビューションを使用する必要があります。 別の方法でカーネルと通信する必要がある Linux ディストリビューションは使用できません。 ワーカー・ノードのオペレーティング・システムを潜在的な攻撃から保護するために、すべてのワーカー・ノードに、Linux iptable ルールによって適用されるエキスパート・ファイアウォール設定が構成されます。</p>
+    <p>Kubernetes 上で実行されるコンテナーはすべて、定義済みの Calico ネットワーク・ポリシー設定で保護されます。この設定は、クラスター作成時にワーカー・ノードごとに構成されます。 このようなセットアップにより、ワーカー・ノードとポッドの間のセキュア・ネットワーク通信が確保されます。</p>
+    <p>ワーカー・ノード上の SSH アクセスは無効になっています。 標準クラスターのワーカー・ノードに追加機能をインストールする場合には、[Kubernetes デーモン・セット ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset) を使用できます。これにより、あらゆるワーカー・ノードであらゆるアクションを実行できます。また、[Kubernetes ジョブ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) を使用することもできます。これは、1 回限りのアクションに使用できます。</p></dd>
   <dt>Kubernetes ワーカー・ノードのセキュリティー・コンプライアンス</dt>
-    <dd>IBM は、社内と社外のセキュリティー顧問チームと協力して、セキュリティー・コンプライアンスにおける潜在的な脆弱性と取り組んでいます。 オペレーティング・システムに更新プログラムやセキュリティー・パッチをデプロイするために、IBM はワーカー・ノードへのアクセスを維持しています。<p> <b>重要</b>: ワーカー・ノードを定期的にリブートして、オペレーティング・システムに自動的にデプロイされた更新プログラムとセキュリティー・パッチがインストールされるようにします。 ワーカー・ノードが IBM によってリブートされることはありません。</p></dd>
+    <dd>IBM は、社内と社外のセキュリティー顧問チームと協力して、セキュリティー・コンプライアンスにおける潜在的な脆弱性と取り組んでいます。 <b>重要</b>: `bx cs worker-update` [コマンド](cs_cli_reference.html#cs_worker_update)を定期的 (毎月など) に使用して、更新とセキュリティー・パッチをオペレーティング・システムに導入し、Kubernetes バージョンを更新してください。更新が利用可能になると、`bx cs workers <cluster_name>` や `bx cs worker-get <cluster_name> <worker_ID>` コマンドなどを使用してワーカー・ノードの情報を表示したときに通知されます。</dd>
   <dt>物理 (ベア・メタル) サーバーにノードをデプロイするオプション</dt>
-  <dd>ワーカー・ノードを (仮想サーバー・インスタンスではなく) ベア・メタル物理サーバーにプロビジョニングする場合は、メモリーや CPU など、コンピュート・ホストをさらに細かく制御できます。このセットアップには、ホスト上で稼働する仮想マシンに物理リソースを割り振る仮想マシン・ハイパーバイザーは含まれません。むしろ、ベア・メタル・マシンのすべてのリソースがこのワーカーの専用であるため、リソースを共有したりパフォーマンスを低下させたりする「ノイジー・ネイバー」について心配する必要がありません。ベア・メタル・サーバーはお客様専用であり、そのすべてのリソースをクラスターに使用できます。</dd>
+    <dd>ワーカー・ノードを (仮想サーバー・インスタンスではなく) ベア・メタル物理サーバーにプロビジョニングする場合は、メモリーや CPU など、コンピュート・ホストをさらに細かく制御できます。 このセットアップには、ホスト上で稼働する仮想マシンに物理リソースを割り振る仮想マシン・ハイパーバイザーは含まれません。 むしろ、ベア・メタル・マシンのすべてのリソースがこのワーカーの専用であるため、リソースを共有したりパフォーマンスを低下させたりする「ノイジー・ネイバー」について心配する必要がありません。 ベア・メタル・サーバーはお客様専用であり、そのすべてのリソースをクラスターに使用できます。</dd>
   <dt id="trusted_compute">トラステッド・コンピューティングを使用する {{site.data.keyword.containershort_notm}}</dt>
-  <dd><p>トラステッド・コンピューティングをサポートする[ベア・メタルにクラスターをデプロイ](cs_clusters.html#clusters_ui)した場合は、トラストを有効にすることができます。トラステッド・コンピューティングをサポートするクラスター内の各ベア・メタル・ワーカー・ノード (クラスターに将来追加するノードも含む) の Trusted Platform Module (TPM) チップが有効になります。したがって、トラストを有効にした後に、クラスターのトラストを無効にすることはできません。トラスト・サーバーがマスター・ノードにデプロイされ、トラスト・エージェントがワーカー・ノードにポッドとしてデプロイされます。ワーカー・ノードが始動すると、トラスト・エージェント・ポッドがプロセスの各ステージをモニターします。</p>
-  <p>ハードウェアがトラストのルートに位置し、TPM を使用して測定値を送信します。TPM は、測定データの伝送をプロセス全体で保護するために使用する暗号鍵を生成します。トラスト・エージェントは、始動プロセス時に各コンポーネント (TPM ハードウェアと対話する BIOS ファームウェアからブート・ローダーや OS カーネルまで) の測定値をトラスト・サーバーに渡します。その後、トラステッド・エージェントはそれらの測定値をトラステッド・サーバー内の予期値と比較して、始動が有効であったかどうかを確認します。トラステッド・コンピューティング・プロセスでは、ワーカー・ノード内の他のポッド (アプリケーションなど) はモニターされません。</p>
-  <p>例えば、無許可ユーザーがシステムにアクセスし、データを収集するためのロジックを追加して OS カーネルを変更すると、トラスト・エージェントがこれを検出し、ワーカーが信頼できなくなったことを知らせるためにノードのトラステッド状況を変更します。トラステッド・コンピューティングを使用すると、ワーカー・ノードが改ざんされていないことを検証できます。</p>
-  <p><img src="images/trusted_compute.png" alt="ベア・メタル・クラスターのトラステッド・コンピューティング" width="480" style="width:480px; border-style: none"/></p></dd>
+    <dd><p>トラステッド・コンピューティングをサポートする[ベア・メタルにクラスターをデプロイ](cs_clusters.html#clusters_ui)した場合は、トラストを有効にすることができます。 トラステッド・コンピューティングをサポートするクラスター内の各ベア・メタル・ワーカー・ノード (クラスターに将来追加するノードも含む) の Trusted Platform Module (TPM) チップが有効になります。 したがって、トラストを有効にした後に、クラスターのトラストを無効にすることはできません。 トラスト・サーバーがマスター・ノードにデプロイされ、トラスト・エージェントがワーカー・ノードにポッドとしてデプロイされます。 ワーカー・ノードが始動すると、トラスト・エージェント・ポッドがプロセスの各ステージをモニターします。</p>
+    <p>例えば、無許可ユーザーがシステムにアクセスし、データを収集するためのロジックを追加して OS カーネルを変更すると、トラスト・エージェントがこれを検出し、ワーカーが信頼できなくなったことを知らせるためにノードのトラステッド状況を変更します。 トラステッド・コンピューティングを使用すると、ワーカー・ノードが改ざんされていないことを検証できます。</p>
+    </dd>
   <dt id="encrypted_disks">暗号化ディスク</dt>
-  <dd>{{site.data.keyword.containershort_notm}} は、ワーカー・ノードのプロビジョン時にデフォルトですべてのワーカー・ノード用に 2 つのローカル SSD 暗号化データ・パーティションを提供します。 1 つ目のパーティションは暗号化されず、2 つ目のパーティションは _/var/lib/docker_ にマウントされ、LUKS 暗号鍵を使用してアンロックされます。 各 Kubernetes クラスター内の各ワーカーには、独自の固有の LUKS 暗号キーがあり、{{site.data.keyword.containershort_notm}} によって管理されます。 クラスターを作成する際やワーカー・ノードを既存のクラスターに追加する際に、この鍵は安全にプルされてから、暗号化ディスクのアンロック後に破棄されます。
-  <p><b>注</b>: 暗号化はディスク入出力のパフォーマンスに影響します。 高性能のディスク入出力が必要なワークロードの場合、暗号化を有効/無効にした両方のクラスターをテストし、暗号化をオフにするかどうかの決定に役立ててください。</p>
-  </dd>
+    <dd><p>{{site.data.keyword.containershort_notm}} は、ワーカー・ノードのプロビジョン時にデフォルトですべてのワーカー・ノード用に 2 つのローカル SSD 暗号化データ・パーティションを提供します。 1 つ目のパーティションは暗号化されず、2 つ目のパーティションは _/var/lib/docker_ にマウントされ、LUKS 暗号鍵を使用してアンロックされます。 各 Kubernetes クラスター内の各ワーカーには、独自の固有の LUKS 暗号キーがあり、{{site.data.keyword.containershort_notm}} によって管理されます。 クラスターを作成する際やワーカー・ノードを既存のクラスターに追加する際に、この鍵は安全にプルされてから、暗号化ディスクのアンロック後に破棄されます。</p>
+    <p><b>注</b>: 暗号化はディスク入出力のパフォーマンスに影響します。 高性能のディスク入出力が必要なワークロードの場合、暗号化を有効/無効にした両方のクラスターをテストし、暗号化をオフにするかどうかの決定に役立ててください。</p></dd>
   <dt>IBM Cloud インフラストラクチャー (SoftLayer) ネットワーク・ファイアウォールのサポート</dt>
     <dd>{{site.data.keyword.containershort_notm}} は、すべての [ IBM Cloud インフラストラクチャー (SoftLayer) ファイアウォール・オファリング ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud-computing/bluemix/network-security) に対応しています。 {{site.data.keyword.Bluemix_notm}} Public では、カスタム・ネットワーク・ポリシーをファイアウォールにセットアップして、標準クラスターのための専用ネットワーク・セキュリティーを設定し、ネットワーク侵入を検出して対処することができます。 例えば、ファイアウォールとして不要なトラフィックをブロックするように [Vyatta ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://knowledgelayer.softlayer.com/topic/vyatta-1) をセットアップすることを選択できます。 ファイアウォールをセットアップする場合は、マスター・ノードとワーカー・ノードが通信できるように、地域ごとに[必要なポートと IP アドレスを開く](cs_firewall.html#firewall)必要もあります。</dd>
   <dt>サービスをプライベートにしておくか、サービスとアプリを選択的に公共のインターネットに公開する</dt>
     <dd>サービスとアプリをプライベートにして、このトピックで説明した組み込みのセキュリティー機能を利用して、ワーカー・ノードとポッドの間のセキュアな通信を確保することができます。 サービスとアプリを公共のインターネットに公開する場合は、Ingress とロード・バランサーのサポートを活用してサービスを安全に公開することができます。</dd>
   <dt>ワーカー・ノードとアプリをオンプレミス・データ・センターにセキュアに接続する</dt>
-  <dd>ワーカー・ノードとアプリをオンプレミス・データ・センターに接続するには、strongSwan サービス、Vyatta Gateway Appliance、または Fortigate Appliance を使用して VPN IPSec エンドポイントを構成できます。<br><ul><li><b>strongSwan IPSec VPN サービス</b>: Kubernetes クラスターをオンプレミス・ネットワークとセキュアに接続する [strongSwan IPSec VPN サービス ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.strongswan.org/) をセットアップできます。 strongSwan IPSec VPN サービスは、業界標準の Internet Protocol Security (IPsec) プロトコル・スイートに基づき、インターネット上にセキュアなエンドツーエンドの通信チャネルを確立します。 クラスターとオンプレミス・ネットワークの間にセキュアな接続をセットアップするためには、オンプレミスのデータ・センターに IPsec VPN ゲートウェイを設置する必要があります。 その後、Kubernetes ポッドで [strongSwan IPSec VPN サービスの構成とデプロイ](cs_vpn.html#vpn-setup)を行うことができます。</li><li><b>Vyatta Gateway Appliance または Fortigate Appliance</b>: クラスターが比較的大きい場合、VPN を使用して非 Kubernetes リソースにアクセスする場合、または 1 つの VPN で複数のクラスターにアクセスする場合は、Vyatta Gateway Appliance または Fortigate Appliance をセットアップして IPSec VPN エンドポイントを構成できます。詳しくは、この[オンプレミス・データ・センターへのクラスターの接続 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/) に関するブログ投稿を参照してください。</li></ul></dd>
+    <dd><p>ワーカー・ノードとアプリをオンプレミス・データ・センターに接続するには、strongSwan サービス、Vyatta Gateway Appliance、または Fortigate Appliance を使用して VPN IPSec エンドポイントを構成できます。</p>
+    <ul><li><b>strongSwan IPSec VPN サービス</b>: Kubernetes クラスターをオンプレミス・ネットワークとセキュアに接続する [strongSwan IPSec VPN サービス ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.strongswan.org/) をセットアップできます。 strongSwan IPSec VPN サービスは、業界標準の Internet Protocol Security (IPsec) プロトコル・スイートに基づき、インターネット上にセキュアなエンドツーエンドの通信チャネルを確立します。 クラスターとオンプレミス・ネットワークの間にセキュア接続をセットアップするには、[オンプレミス・データ・センターに IPsec VPN ゲートウェイをインストールする](/docs/infrastructure/iaas-vpn/set-up-ipsec-vpn.html#setting-up-an-ipsec-connection)必要があります。 その後、Kubernetes ポッドで [strongSwan IPSec VPN サービスの構成とデプロイ](cs_vpn.html#vpn-setup)を行うことができます。</li>
+    <li><b>Vyatta Gateway Appliance または Fortigate Appliance</b>: クラスターが比較的大きい場合、VPN を使用して非 Kubernetes リソースにアクセスする場合、または 1 つの VPN で複数のクラスターにアクセスする場合は、Vyatta Gateway Appliance または Fortigate Appliance をセットアップして IPSec VPN エンドポイントを構成できます。 Vyatta を構成するには、[Vyatta を使用した VPN 接続のセットアップ](cs_vpn.html#vyatta)を参照してください。</li></ul></dd>
   <dt>クラスター・アクティビティーの継続的なモニタリングとロギング</dt>
     <dd>標準クラスターの場合、ワーカー・ノードの追加、ローリング更新の進行状況、キャパシティー使用状況情報などのすべてのクラスター関連イベントを、{{site.data.keyword.containershort_notm}} によってログに記録してモニターし、{{site.data.keyword.loganalysislong_notm}} と {{site.data.keyword.monitoringlong_notm}} に送ることできます。 ロギングとモニタリングのセットアップに関する情報については、[クラスター・ロギングの構成](/docs/containers/cs_health.html#logging)と[クラスター・モニタリングの構成](/docs/containers/cs_health.html#monitoring)を参照してください。</dd>
 </dl>
@@ -131,10 +136,10 @@ Kubernetes マスターを保護し、クラスター・ネットワーク通信
 
 <dl>
 <dt>{{site.data.keyword.registryshort_notm}} の保護された Docker プライベート・イメージ・リポジトリー</dt>
-<dd>IBM がホストおよび管理するマルチテナントで可用性が高く拡張可能なプライベート・イメージ・レジストリー内に独自の Docker イメージ・リポジトリーをセットアップし、Docker イメージを作成して安全に保管し、クラスター・ユーザー間で共有することができます。</dd>
-
+  <dd>IBM がホストおよび管理するマルチテナントで可用性が高く拡張可能なプライベート・イメージ・レジストリー内に独自の Docker イメージ・リポジトリーをセットアップし、Docker イメージを作成して安全に保管し、クラスター・ユーザー間で共有することができます。
+  </dd>
 <dt>イメージのセキュリティー・コンプライアンス</dt>
-<dd>{{site.data.keyword.registryshort_notm}}を使用する際、Vulnerability Advisor に標準装備のセキュリティー・スキャンを利用できます。 名前空間にプッシュされるどのイメージも、CentOS、Debian、Red Hat、および Ubuntu の既知の問題のデータベースに基づいて、脆弱性が自動的にスキャンされます。 脆弱性が検出されると、それらを解決してイメージの保全性とセキュリティーを確保する方法を Vulnerability Advisor が提示します。</dd>
+  <dd>{{site.data.keyword.registryshort_notm}}を使用する際、Vulnerability Advisor に標準装備のセキュリティー・スキャンを利用できます。 名前空間にプッシュされるどのイメージも、CentOS、Debian、Red Hat、および Ubuntu の既知の問題のデータベースに基づいて、脆弱性が自動的にスキャンされます。 脆弱性が検出されると、それらを解決してイメージの保全性とセキュリティーを確保する方法を Vulnerability Advisor が提示します。</dd>
 </dl>
 
 イメージの脆弱性評価を表示する方法については、[Vulnerability Advisor の文書を参照してください](/docs/services/va/va_index.html#va_registry_cli)。
@@ -153,7 +158,7 @@ Kubernetes マスターを保護し、クラスター・ネットワーク通信
 |クラスター・タイプ|クラスターのプライベート VLAN の管理者|
 |------------|-------------------------------------------|
 |{{site.data.keyword.Bluemix_notm}} 内のフリー・クラスター|{{site.data.keyword.IBM_notm}}|
-|{{site.data.keyword.Bluemix_notm}} 内の標準クラスター|IBM Cloud インフラストラクチャー (SoftLayer) アカウントを使用するお客様 <p>**ヒント:** アカウント内のすべての VLAN にアクセスできるようにするには、[VLAN スパンニング](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning)をオンにします。</p>|
+|{{site.data.keyword.Bluemix_notm}} 内の標準クラスター|IBM Cloud インフラストラクチャー (SoftLayer) アカウントを使用するお客様 <p>**ヒント:** アカウント内のすべての VLAN にアクセスできるようにするには、[VLAN Spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning)をオンにします。</p>|
 
 ワーカー・ノードにデプロイされるすべてのポッドにも、プライベート IP アドレスが割り当てられます。 ポッドには 172.30.0.0/16 のプライベート・アドレス範囲で IP が割り当てられ、ワーカー・ノード間でのみルーティングされます。 競合を避けるために、ご使用のワーカー・ノードと通信するノードにはこの IP 範囲を使用しないでください。 ワーカー・ノードとポッドは、プライベート IP アドレスを使用してプライベート・ネットワーク上で安全に通信できます。 しかし、ポッドが異常終了した場合やワーカー・ノードを再作成する必要がある場合は、新しいプライベート IP アドレスが割り当てられます。
 
@@ -163,4 +168,30 @@ Kubernetes マスターを保護し、クラスター・ネットワーク通信
 
 クラスター IP タイプのサービスを作成する方法について詳しくは、[Kubernetes サービス ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services---service-types) を参照してください。
 
-Kubernetes クラスター内のアプリをオンプレミス・ネットワークにセキュアに接続する方法について詳しくは、[VPN 接続のセットアップ](cs_vpn.html#vpn)を参照してください。 外部ネットワーク通信のためにアプリを公開する方法について詳しくは、[外部ネットワーキングの計画](cs_network_planning.html#planning)を参照してください。
+Kubernetes クラスター内のアプリをオンプレミス・ネットワークにセキュアに接続する方法について詳しくは、[VPN 接続のセットアップ](cs_vpn.html#vpn)を参照してください。 外部ネットワーク通信のためにアプリを公開する方法について詳しくは、[アプリへのパブリック・アクセスを許可する方法](cs_network_planning.html#public_access)を参照してください。
+
+## クラスターの信頼
+{: cs_trust}
+
+セキュリティー機能が豊富な環境でコンテナー化アプリをデプロイできるように、{{site.data.keyword.containerlong_notm}} は[クラスター・コンポーネント向けの機能](#cluster)をデフォルトで数多く提供します。クラスターの信頼レベルを高めて、より確実に、意図したことだけがクラスターで行われるようにします。以下の図に示すように、さまざまな方法でクラスターに信頼を実装できます。
+{:shortdesc}
+
+![信頼できるコンテンツを使用してコンテナーをデプロイする](images/trusted_story.png)
+
+1.  **トラステッド・コンピューティングを使用した {{site.data.keyword.containerlong_notm}}**: ベア・メタル・クラスターでは、トラストを有効にすることができます。トラスト・エージェントがハードウェアの始動処理をモニターして変更を報告するので、ベア・メタル・ワーカー・ノードが改ざんされていないことを検証できます。トラステッド・コンピューティングを使用すると、検証されたベア・メタル・ホストにコンテナーをデプロイして、信頼できるハードウェア上でワークロードを実行できます。[トラステッド・コンピューティングの仕組みについて詳しくは、こちらをご覧ください](#trusted_compute)。
+
+2.  **イメージのコンテンツの信頼**: {{site.data.keyword.registryshort_notm}} でコンテンツの信頼を有効にして、イメージの完全性を確保します。信頼できるコンテンツを使用する場合は、信頼できるイメージとしてイメージに署名できるユーザーを制御できます。信頼できる署名者がイメージをレジストリーにプッシュすると、ユーザーはその署名付きのコンテンツをプルして、イメージのソースを確認できます。詳しくは、[Signing images for trusted content](/docs/services/Registry/registry_trusted_content.html#registry_trustedcontent) を参照してください。
+
+3.  **Container Image Security Enforcement (ベータ)**: コンテナー・イメージを検証してからデプロイできるように、アドミッション・コントローラーとカスタム・ポリシーを作成します。Container Image Security Enforcement を使用すると、イメージのデプロイ元を制御できるうえに、イメージが [Vulnerability Advisor](/docs/services/va/va_index.html) ポリシーまたは[コンテンツの信頼](/docs/services/Registry/registry_trusted_content.html#registry_trustedcontent)要件を満たしていることを確認できます。設定したポリシーをデプロイメントが満たしていなければ、Security Enforcement によって、クラスターの変更が防止されます。詳しくは、[Enforcing container image security (beta)](/docs/services/Registry/registry_security_enforce.html#security_enforce) を参照してください。
+
+4.  **コンテナー脆弱性スキャナー**: デフォルトでは Vulnerability Advisor が、{{site.data.keyword.registryshort_notm}} に保管されているイメージをスキャンします。クラスター内で実行されているライブ・コンテナーの状況を確認するには、コンテナー・スキャナーをインストールします。詳しくは、[コンテナー・スキャナーのインストール](/docs/services/va/va_index.html#va_install_livescan)を参照してください。
+
+5.  **Security Advisor (プレビュー) によるネットワーク分析**: {{site.data.keyword.Bluemix_notm}} Security Advisor を使用すると、Vulnerability Advisor や {{site.data.keyword.cloudcerts_short}} などの {{site.data.keyword.Bluemix_notm}} サービスから得られるセキュリティー分析データを集約できます。クラスターで Security Advisor を有効にすると、不審な着信および発信ネットワーク・トラフィックに関するレポートを参照できます。詳しくは、[Network Analytics](/docs/services/security-advisor/network-analytics.html#network-analytics) を参照してください。インストールするには、[Setting up monitoring of suspicious clients and server IPs for a Kubernetes cluster](/docs/services/security-advisor/setup_cluster.html) を参照してください。
+
+6.  **{{site.data.keyword.cloudcerts_long_notm}} (ベータ)**: クラスターが米国南部にあり、[TLS ありでカスタム・ドメインを使用してアプリを公開する](https://console.bluemix.net/docs/containers/cs_ingress.html#custom_domain_cert)場合は、TLS 証明書を {{site.data.keyword.cloudcerts_short}} に保管できます。既に期限切れか、まもなく期限切れになる証明書も Security Advisor ダッシュボードに報告されます。詳しくは、[{{site.data.keyword.cloudcerts_short}} 概説](/docs/services/certificate-manager/index.html#gettingstarted)を参照してください。
+
+
+
+
+
+

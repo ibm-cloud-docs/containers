@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -62,13 +62,14 @@ lastupdated: "2018-01-24"
   ```
   {: pre}
 
-6.  设置先前生成的 API 密钥，以用于访问 IBM Cloud infrastructure (SoftLayer) 产品服务组合。将 `<API_KEY>` 替换为 API 密钥，将 `<USERNAME>` 替换为新的现买现付帐户的 {{site.data.keyword.ibmid}}。
+6.  设置先前生成的 API 密钥，以用于访问 IBM Cloud infrastructure (SoftLayer) 产品服务组合。将 `<API_key>` 替换为 API 密钥，将 `<username>` 替换为新的现买现付帐户的 {{site.data.keyword.ibmid}}。
 
   ```
-  bx cs credentials-set --infrastructure-api-key <API_KEY> --infrastructure-username <USERNAME>
+  bx cs credentials-set --infrastructure-api-key <API_key> --infrastructure-username <username>
   ```
   {: pre}
 
 7.  开始[创建标准集群](cs_clusters.html#clusters_cli)。
 
 **注**：要在生成 API 密钥后对其进行复查，请执行步骤 1 和 2，然后在 **API 密钥**部分中，单击**查看**以查看适用于您用户标识的 API 密钥。
+

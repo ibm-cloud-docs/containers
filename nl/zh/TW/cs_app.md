@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-28"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-02-28"
 {: #app}
 
 您可以在 {{site.data.keyword.containerlong}} 中使用 Kubernetes 技術於容器中部署應用程式，並確保那些應用程式始終處於運行狀態。例如，您可以執行漸進式更新及回復，而不會對使用者造成任何關閉時間。
-{:shortdesc}
+{: shortdesc}
 
 藉由按一下下列影像的區域，來瞭解部署應用程式的一般步驟。
 
@@ -40,7 +40,7 @@ lastupdated: "2018-02-28"
 {: #highly_available_apps}
 
 將設定分佈到越多個工作者節點及叢集，使用者遇到應用程式關閉的可能性越低。
-{:shortdesc}
+{: shortdesc}
 
 檢閱下列潛在的應用程式設定，它們依遞增的可用性程度進行排序：
 
@@ -52,72 +52,30 @@ lastupdated: "2018-02-28"
 3.  含有 n+2 個 Pod 的部署，由抄本集管理，分散於不同位置中的多個節點（反親緣性）。
 4.  含有 n+2 個 Pod 的部署，由抄本集管理，分散於不同地區中的多個節點（反親緣性）。
 
+
+
+
 ### 增加應用程式的可用性
 
 <dl>
-<dt>使用部署和抄本集來部署您的應用程式及其相依關係</dt>
-<dd>部署是一種 Kubernetes 資源，您可以用來宣告應用程式的所有元件及其相依關係。透過說明單一元件，而不是寫下所有必要步驟和建立的順序，讓您可以專注於應用程式執行時應該呈現的樣子。</br></br>
-當您部署多個 Pod 時，會自動為您的部署建立抄本集來監視 Pod，並確保隨時都有所需數目的 Pod 在執行。當一個 Pod 關閉時，抄本集會以新的 Pod 來取代無回應的 Pod。</br></br>
-您可以使用部署來定義應用程式的更新策略，包括您要在漸進式更新期間新增的 Pod 數目，以及每次更新時可能無法使用的 Pod 數目。當您執行漸進式更新時，部署會檢查修訂版是否正常運作，並且在偵測到失敗時停止推出。</br></br>
-部署也有可能讓您同時部署多個具有不同旗標的修訂版，所以舉例來說，您可以先測試部署，然後再決定將其推送至正式作業環境。</br></br>
-每個部署都會追蹤已部署的修訂版。當您發現更新無法如預期般運作時，可以使用此修訂歷程來回復至舊版。</dd>
-<dt>為應用程式的工作負載包含足夠的抄本，然後加兩個</dt>
-<dd>為了讓應用程式具備高可用性以及更大的失敗復原力，請考慮包含多於最小值的額外抄本來處理預期工作負載。額外的抄本可以在 Pod 當機，而抄本集尚未回復當機的 Pod 時，處理工作負載。為了預防兩者同時失敗，請包含兩個額外的抄本。此設定是 N+2 型樣，其中 N 是處理送入工作負載的抄本數，而 +2 是額外的兩個抄本。您可以在叢集中有任意數量的 Pod，只要叢集有足夠的空間容納它們即可。</dd>
-<dt>將 Pod 分散於多個節點（反親緣性）</dt>
-<dd>當您建立部署時，可以將每一個 Pod 部署至相同的工作者節點。這種 Pod 存在於相同工作者節點的設定，稱為親緣性或共置。為了保護應用程式不受工作者節點故障影響，您可以使用 <strong>podAntiAffinity</strong> 選項，強制部署將 Pod 分散至多個工作者節點。此選項僅適用於標準叢集。
-
-</br></br>
-<strong>附註：</strong>下列 YAML 檔案會強制將每個 Pod 部署至不同的工作者節點。當您定義的抄本多於叢集中可用的工作者節點時，只有已部署的抄本數可以滿足反親緣性需求。任何其他抄本都會維持在擱置狀態，直到有其他工作者節點新增至叢集為止。
-
-<pre class="codeblock">
-<code>apiVersion: apps/v1beta1
-kind: Deployment
-    metadata:
-name: wasliberty
-    spec:
-  replicas: 3
-  template:
-    metadata:
-      labels:
-        app: wasliberty
-    spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - wasliberty
-              topologyKey: kubernetes.io/hostname
-      containers:
-      - name: wasliberty
-        image: registry.&lt;region&gt;.bluemix.net/ibmliberty
-        ports:
-        - containerPort: 9080
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: wasliberty
-  labels:
-    app: wasliberty
-spec:
-  ports:
-    # 服務應該提供服務的埠
-  - port: 9080
-  selector:
-    app: wasliberty
-  type: NodePort</code></pre>
-
-</dd>
-<dt>將 Pod 分散在多個位置或地區</dt>
-<dd>為了保護應用程式不受位置或地區故障的影響，您可以在另一個位置或地區建立第二個叢集，並使用部署 YAML 來為應用程式部署複製的抄本集。透過在叢集前面新增共用路徑及負載平衡器，您可以將工作負載分散至各位置及地區。如需在叢集之間共用路徑的相關資訊，請參閱<a href="cs_clusters.html#clusters" target="_blank">叢集的高可用性</a>。
-
-如需詳細資料，請檢閱<a href="cs_clusters.html#planning_clusters" target="_blank">高可用性部署</a>的選項。</dd>
+  <dt>使用部署和抄本集來部署您的應用程式及其相依關係</dt>
+    <dd><p>部署是一種 Kubernetes 資源，您可以用來宣告應用程式的所有元件及其相依關係。使用部署時，您不必寫下所有步驟，而是可以著重於您的應用程式。</p>
+    <p>當您部署多個 Pod 時，會自動為您的部署建立抄本集來監視 Pod，並確保隨時都有所需數目的 Pod 在執行。當一個 Pod 關閉時，抄本集會以新的 Pod 來取代無回應的 Pod。</p>
+    <p>您可以使用部署來定義應用程式的更新策略，包括您要在漸進式更新期間新增的 Pod 數目，以及每次更新時可能無法使用的 Pod 數目。當您執行漸進式更新時，部署會檢查修訂版是否正常運作，並且在偵測到失敗時停止推出。</p>
+    <p>使用部署，您可以同時部署多個具有不同旗標的修訂。例如，您可以先測試部署，然後再決定將其推送至正式作業。</p>
+    <p>部署可讓您追蹤任何已部署的修訂。如果發現更新無法如預期般運作時，則您可以使用此歷程來回復至舊版。</p></dd>
+  <dt>為應用程式的工作負載包含足夠的抄本，然後加兩個</dt>
+    <dd>為了讓應用程式具備高可用性以及更大的失敗復原力，請考慮包含多於最小值的額外抄本來處理預期工作負載。額外的抄本可以在 Pod 當機，而抄本集尚未回復當機的 Pod 時，處理工作負載。為了預防兩者同時失敗，請包含兩個額外的抄本。此設定是 N+2 型樣，其中 N 是處理送入工作負載的抄本數，而 +2 是額外的兩個抄本。只要您的叢集有足夠空間，就可以有任意數目的 Pod。</dd>
+  <dt>將 Pod 分散於多個節點（反親緣性）</dt>
+    <dd><p>當您建立部署時，可以將每一個 Pod 部署至相同的工作者節點。這稱為親緣性或主機託管。為了保護您的應用程式不受工作者節點失敗影響，您可以使用 <em>podAntiAffinity</em> 選項與標準叢集搭配，將部署配置為將 Pod 分散至多個工作者節點。您可以定義兩種類型的 Pod 反親緣性：偏好或必要。如需相關資訊，請參閱關於<a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="（在新分頁或視窗中開啟）">將 Pod 指派給節點</a>的 Kubernetes 文件。</p>
+    <p><strong>附註</strong>：使用必要的反親緣性，您只能部署對其具有工作者節點之抄本的數量。比方說，如果您的叢集中有 3 個工作者節點，但您在 YAML 檔案中定義 5 個抄本，則只會部署 3 個抄本。每一個抄本都位於不同的工作者節點上。剩餘的 2 個抄本會保持擱置狀態。如果您新增另一個工作者節點至叢集，則其中一個剩餘的抄本會自動部署至新的工作者節點。<p>
+    <p><strong>範例部署 YAML 檔案</strong>:<ul>
+    <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/nginx_preferredAntiAffinity.yaml" rel="external" target="_blank" title="（在新分頁或視窗中開啟）">具有偏好的 Pod 反親緣性的 Nginx 應用程式。</a></li>
+    <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="（在新分頁或視窗中開啟）">具有必要的 Pod 反親緣性的 IBM® WebSphere® Application Server Liberty 應用程式。</a></li></ul></p>
+    </dd>
+<dt>將 Pod 分散在多個區域或地區</dt>
+  <dd>為了保護應用程式不受位置或地區故障的影響，您可以在另一個位置或地區建立第二個叢集，並使用部署 YAML 來為應用程式部署複製的抄本集。透過在叢集前面新增共用路徑及負載平衡器，您可以將工作負載分散至各位置及地區。如需相關資訊，請參閱[叢集的高可用性](cs_clusters.html#clusters)。
+  </dd>
 </dl>
 
 
@@ -125,7 +83,7 @@ spec:
 {: #minimal_app_deployment}
 
 免費或標準叢集中的基本應用程式部署可能包括下列元件。
-{:shortdesc}
+{: shortdesc}
 
 ![部署設定](images/cs_app_tutorial_components1.png)
 
@@ -144,7 +102,9 @@ spec:
     spec:
       containers:
       - name: ibmliberty
-        image: registry.<region>.bluemix.net/ibmliberty:latest
+        image: registry.bluemix.net/ibmliberty:latest
+        ports:
+        - containerPort: 9080        
 ---
 apiVersion: v1
 kind: Service
@@ -154,7 +114,7 @@ metadata:
     app: ibmliberty
 spec:
   selector:
-    run: ibmliberty
+    app: ibmliberty
   type: NodePort
   ports:
    - protocol: TCP
@@ -162,7 +122,7 @@ spec:
 ```
 {: codeblock}
 
-若要進一步瞭解每一個元件，請檢閱 [Kubernetes 基本概念](cs_tech.html#kubernetes_basics)。
+**附註：**若要公開您的服務，請確定您在服務的 `spec.selector` 區段中使用的鍵值組，與您在部署 yaml 的 `spec.template.metadata.labels` 區段中使用的鍵值組相同。若要進一步瞭解每一個元件，請檢閱 [Kubernetes 基本概念](cs_tech.html#kubernetes_basics)。
 
 <br />
 
@@ -179,7 +139,7 @@ spec:
 
 您可以使用預設埠或設定自己的埠，來啟動叢集的 Kubernetes 儀表板。
 
-1.  對於 Kubernetes 主要版本為 1.7.4 或之前版本的叢集：
+1.  對於 Kubernetes 主要版本為 1.7.16 或之前版本的叢集：
 
     1.  使用預設埠號來設定 Proxy。
 
@@ -229,16 +189,16 @@ spec:
 
     4.  登入儀表板。
 
-        1.  在您的瀏覽器中，導覽至下列 URL：
+      1.  在您的瀏覽器中，導覽至下列 URL：
 
-            ```
+          ```
             http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
             ```
-            {: codeblock}
+          {: codeblock}
 
-        2.  在登入頁面中，選取**記號**鑑別方法。
+      2.  在登入頁面中，選取**記號**鑑別方法。
 
-        3.  然後，將您先前複製的 **id-token** 值貼到**記號**欄位，然後按一下**登入**。
+      3.  然後，將您先前複製的 **id-token** 值貼到**記號**欄位，然後按一下**登入**。
 
 [接下來，您可以從儀表板執行配置檔。](#app_ui)
 
@@ -258,7 +218,7 @@ Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或
 {:shortdesc}
 
 <table>
-<caption>表格. 需要藉由作業儲存在密碼中的檔案</caption>
+<caption>要藉由作業儲存在密碼中的必要檔案</caption>
 <thead>
 <th>作業</th>
 <th>要儲存在密碼中的必要檔案</th>
@@ -273,7 +233,7 @@ Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或
 
 若要檢視預設 TLS 密碼，請執行下列指令：
 <pre>
-bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
+bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 </pre>
 </p>
 若要改為自行建立，請完成這個主題中的步驟。</td>
@@ -293,7 +253,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 
 1. 從憑證提供者產生憑證管理中心 (CA) 憑證及金鑰。如果您有自己的網域，請為您的網域購買正式的 TLS 憑證。基於測試目的，您可以產生自簽憑證。
 
- 重要事項：請確定每一個憑證的 [CN](https://support.dnsimple.com/articles/what-is-common-name/) 都不同。
+ **重要事項**：請確定每一個憑證的 [CN](https://support.dnsimple.com/articles/what-is-common-name/) 都不同。
 
  用戶端憑證及用戶端金鑰必須最多驗證到授信主要憑證（在此情況下，指的是 CA 憑證）。範例：
 
@@ -307,7 +267,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 2. 建立憑證作為 Kubernetes 密碼。
 
    ```
-   kubectl create secret generic <secretName> --from-file=<cert_file>=<cert_file>
+   kubectl create secret generic <secret_name> --from-file=<cert_file>=<cert_file>
    ```
    {: pre}
 
@@ -315,14 +275,14 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
    - TLS 連線：
 
      ```
-     kubectl create secret tls <secretName> --from-file=tls.crt=server.crt --from-file=tls.key=server.key
+     kubectl create secret tls <secret_name> --from-file=tls.crt=server.crt --from-file=tls.key=server.key
      ```
      {: pre}
 
    - 交互鑑別註釋：
 
      ```
-     kubectl create secret generic <secretName> --from-file=ca.crt=ca.crt
+     kubectl create secret generic <secret_name> --from-file=ca.crt=ca.crt
      ```
      {: pre}
 
@@ -345,11 +305,17 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 
 若要部署應用程式，請執行下列動作：
 
-1.  [開啟 Kubernetes 儀表板](#cli_dashboard)。
-2.  從 Kubernetes 儀表板中，按一下 **+ 建立**。
-3.  選取**在下面指定應用程式詳細資料**以在 GUI 上輸入應用程式詳細資料，或選取**上傳 YAML 或 JSON 檔案**以上傳應用程式[配置檔 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/)。使用[此範例 YAML 檔案 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml)，以在美國南部地區從 **ibmliberty** 映像檔部署容器。
-4.  在 Kubernetes 儀表板中，按一下**部署**，以驗證已建立部署。
-5.  如果您使用節點埠服務讓應用程式可公開使用，負載平衡器服務（或 Ingress）會確認您可以存取此應用程式。
+1.  開啟 Kubernetes [儀表板](#cli_dashboard)，然後按一下**+ 建立**。
+2.  使用下列兩種方式之一來輸入您的應用程式詳細資料。
+  * 選取**在下面指定應用程式詳細資料**，然後輸入詳細資料。
+  * 選取**上傳 YAML 或 JSON 檔案**以上傳應用程式[配置檔 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/)。
+
+  需要配置檔的說明嗎？請移出此[範例 YAML 檔案 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml)。在此範例中，容器是從美國南部地區中的 **ibmliberty** 映像檔部署的。
+  {: tip}
+
+3.  驗證您是否已使用下列其中一種方式，順利部署您的應用程式。
+  * 在 Kubernees 儀表板中，按一下**部署**。即會顯示成功部署的清單。
+  * 如果您的應用程式是[公開可用](cs_network_planning.html#public_access)，請導覽至 {{site.data.keyword.containerlong}} 儀表板中的叢集概觀頁面。複製位於叢集摘要區段的子網域，並將其貼入瀏覽器中，以檢視您的應用程式。
 
 <br />
 
@@ -375,10 +341,12 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 
     -   [Ingress ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/ingress/)：指定一種負載平衡器，提供路徑來公開存取您的應用程式。
 
+    
+
 2.  在叢集的環境定義中執行配置檔。
 
     ```
-    kubectl apply -f deployment_script_location
+    kubectl apply -f config.yaml
     ```
     {: pre}
 
@@ -389,8 +357,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 
 
 
-
-## 調整應用程式
+## 調整應用程式 
 {: #app_scaling}
 
 使用 Kubernetes，您可以啟用[水平 Pod 自動調整![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)，根據 CPU 自動增加或減少應用程式的實例數目。
@@ -403,10 +370,12 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 - [將 CLI 的目標設為](cs_cli_install.html#cs_cli_configure)您的叢集。
 - Heapster 監視必須部署在您要自動調整的叢集中。
 
+步驟：
+
 1.  從 CLI 將應用程式部署至叢集。當您部署應用程式時，必須要求 CPU。
 
     ```
-    kubectl run <name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
+    kubectl run <app_name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
     ```
     {: pre}
 
@@ -435,7 +404,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
     若為更複雜的部署，您可能需要建立[配置檔](#app_cli)。
     {: tip}
 
-2.  建立 autoscaler 並定義原則。如需使用 `kubetcl autoscale` 指令的相關資訊，請參閱 [Kubernetes 文件![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale)。
+2.  建立 autoscaler 並定義原則。如需使用 `kubectl autoscale` 指令的相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale)。
 
     ```
     kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
@@ -535,4 +504,5 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
         {: pre}
 
 <br />
+
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-08"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -55,3 +55,4 @@ lastupdated: "2018-03-08"
     - [Autorecovery を使用したワーカー・ノードの正常性モニタリングの構成](cs_health.html#autorecovery)
 - [Kubernetes クラスター・リソースの視覚化](cs_integrations.html#weavescope)
 - [クラスターの削除](cs_clusters.html#remove)
+

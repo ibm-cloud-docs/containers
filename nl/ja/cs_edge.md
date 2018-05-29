@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -18,7 +18,8 @@ lastupdated: "2018-03-16"
 # ネットワーク・トラフィックをエッジ・ワーカー・ノードに制限する
 {: #edge}
 
-エッジ・ワーカー・ノードを使用すると、外部からアクセスされるワーカー・ノードの数を減らし、{{site.data.keyword.containerlong}} のネットワーキングのワークロードを分離することができるので、Kubernetes クラスターのセキュリティーが改善されます。{:shortdesc}
+エッジ・ワーカー・ノードを使用すると、外部からアクセスされるワーカー・ノードの数を減らし、{{site.data.keyword.containerlong}} のネットワーキングのワークロードを分離することができるので、Kubernetes クラスターのセキュリティーが改善されます。
+{:shortdesc}
 
 これらのワーカー・ノードがネットワーキング専用としてマーク付けされると、他のワークロードはワーカー・ノードの CPU やメモリーを消費してネットワーキングに干渉することがなくなります。
 
@@ -28,7 +29,8 @@ lastupdated: "2018-03-16"
 ## ワーカー・ノードをエッジ・ノードとしてラベル付けする
 {: #edge_nodes}
 
-クラスター内の各パブリック VLAN 上の複数のワーカー・ノードに `dedicated=edge` ラベルを追加して、Ingress とロード・バランサーがそれらのワーカー・ノードにだけデプロイされるようにします。{:shortdesc}
+クラスター内の各パブリック VLAN 上の複数のワーカー・ノードに `dedicated=edge` ラベルを追加して、Ingress とロード・バランサーがそれらのワーカー・ノードにだけデプロイされるようにします。
+{:shortdesc}
 
 開始前に、以下のことを行います。
 
@@ -38,7 +40,7 @@ lastupdated: "2018-03-16"
 
 手順:
 
-1. クラスター内のすべてのワーカー・ノードをリストします。 **NAME** 列からプライベート IP アドレスを使用して、ノードを識別します。 各パブリック VLAN で少なくとも 2 つのワーカー・ノードをエッジ・ワーカー・ノードとして選択します。2 つ以上のワーカー・ノードを使用することにより、ネットワーキング・リソースの可用性が向上します。
+1. クラスター内のすべてのワーカー・ノードをリストします。 **NAME** 列からプライベート IP アドレスを使用して、ノードを識別します。 各パブリック VLAN で少なくとも 2 つのワーカー・ノードをエッジ・ワーカー・ノードとして選択します。 2 つ以上のワーカー・ノードを使用することにより、ネットワーキング・リソースの可用性が向上します。
 
   ```
   kubectl get nodes -L publicVLAN,privateVLAN,dedicated
@@ -48,7 +50,7 @@ lastupdated: "2018-03-16"
 2. `dedicated=edge` により、ワーカー・ノードにラベルを付けます。 `dedicated=edge` によりワーカー・ノードにマークが付けられると、すべての後続の Ingress とロード・バランサーは、エッジ・ワーカー・ノードにデプロイされます。
 
   ```
-  kubectl label nodes <node_name> <node_name2> dedicated=edge
+  kubectl label nodes <node1_name> <node2_name> dedicated=edge
   ```
   {: pre}
 
@@ -62,7 +64,7 @@ lastupdated: "2018-03-16"
   出力:
 
   ```
-  kubectl get service -n <namespace> <name> -o yaml | kubectl apply -f
+  kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f
   ```
   {: screen}
 
@@ -71,7 +73,7 @@ lastupdated: "2018-03-16"
   出力:
 
   ```
-  service "<name>" configured
+  service "my_loadbalancer" configured
   ```
   {: screen}
 
@@ -84,7 +86,7 @@ lastupdated: "2018-03-16"
 {: #edge_workloads}
 
 エッジ・ワーカー・ノードの利点の 1 つは、それらがネットワーク・サービスだけを実行するように指定できることです。
-{:shortdesc} 
+{:shortdesc}
 
 `dedicated=edge` 耐障害性の使用は、すべてのロード・バランサーと Ingress サービスが、ラベルの付けられたワーカー・ノードにのみデプロイされることを意味します。 ただし、他のワークロードがエッジ・ワーカー・ノード上で実行されてワーカー・ノードのリソースを消費することがないようにするため、[Kubernetes テイント ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) を使用する必要があります。
 
@@ -101,5 +103,7 @@ lastupdated: "2018-03-16"
   ```
   kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute
   ```
+  これで、`dedicated=edge` 耐障害性のあるポッドだけがエッジ・ワーカー・ノードにデプロイされます。
 
-これで、`dedicated=edge` 耐障害性のあるポッドだけがエッジ・ワーカー・ノードにデプロイされます。
+3. [ロード・バランサー・サービスのソース IP 保持を有効にする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) 場合は、必ず、[アプリ・ポッドにエッジ・ノード・アフィニティーを追加](cs_loadbalancer.html#edge_nodes)して、アプリ・ポッドをエッジ・ワーカー・ノードにスケジュールすることで、着信要求をアプリ・ポッドに転送できるようにします。
+

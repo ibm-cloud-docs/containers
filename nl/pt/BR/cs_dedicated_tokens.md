@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-11-02"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -165,3 +165,4 @@ Crie um token sem expiração para um registro de imagem que você usou para gru
           kubectl apply -f mypod.yaml
           ```
           {: pre}
+

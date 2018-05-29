@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-14"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -18,7 +18,8 @@ lastupdated: "2018-02-14"
 # Erforderliche Ports und IP-Adressen in Ihrer Firewall öffnen
 {: #firewall}
 
-Überprüfen Sie die hier aufgeführten Situationen, in denen Sie möglicherweise bestimmte Ports und IP-Adressen in Ihren Firewalls öffnen müssen, um folgende Aktionen zu ermöglichen:{:shortdesc}
+Überprüfen Sie die hier aufgeführten Situationen, in denen Sie möglicherweise bestimmte Ports und IP-Adressen in Ihren Firewalls {{site.data.keyword.containerlong}} öffnen müssen, um folgende Aktionen zu ermöglichen:
+{:shortdesc}
 
 * [Ausführen von `bx`-Befehlen](#firewall_bx) aus Ihrem lokalen System, wenn die Netzrichtlinien eines Unternehmens den Zugriff auf öffentliche Internetendpunkte über Proxys oder Firewalls verhindern.
 * [Ausführen von `kubectl`-Befehlen](#firewall_kubectl) aus Ihrem lokalen System, wenn die Netzrichtlinien eines Unternehmens den Zugriff auf öffentliche Internetendpunkte über Proxys oder Firewalls verhindern.
@@ -95,14 +96,14 @@ Gehen Sie wie folgt vor, um Zugriff auf einen bestimmten Cluster zu gewähren:
 4. Rufen Sie die **Master-URL** für Ihren Cluster ab.
 
    ```
-   bx cs cluster-get <clustername_oder_-id>
-   ```
+    bx cs cluster-get <clustername_oder_-id>
+    ```
    {: pre}
 
    Beispielausgabe:
    ```
    ...
-   Master URL:		https://169.46.7.238:31142
+   Master URL:		https://169.xx.xxx.xxx:31142
    ...
    ```
    {: screen}
@@ -118,7 +119,7 @@ Gehen Sie wie folgt vor, um Zugriff auf einen bestimmten Cluster zu gewähren:
 
    Beispielbefehl:
    ```
-   curl --insecure https://169.46.7.238:31142/version
+   curl --insecure https://169.xx.xxx.xxx:31142/version
    ```
    {: pre}
 
@@ -201,7 +202,7 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
       <tr>
          <td>Zentraleuropa</td>
          <td>ams03<br>fra02<br>mil01<br>par01</td>
-         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+         <td><code>169.50.169.110, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
         </tr>
       <tr>
         <td>Großbritannien (Süden)</td>
@@ -263,8 +264,8 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
 </p>
 
   4.  Optional: Erlauben Sie den ausgehenden Netzverkehr von den Workerknoten an {{site.data.keyword.monitoringlong_notm}} und die {{site.data.keyword.loganalysislong_notm}}-Services:
-      - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
-      - Ersetzen Sie <em>&lt;monitoring_publicIP&gt;</em> durch alle Adressen für die Überwachungsregionen, an die der Datenverkehr als zulässig definiert werden soll:
+      - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
+      - Ersetzen Sie <em>&lt;monitoring_public_IP&gt;</em> durch alle Adressen für die Überwachungsregionen, an die der Datenverkehr als zulässig definiert werden soll:
         <p><table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
         <thead>
         <th>Containerregion</th>
@@ -291,8 +292,8 @@ Ermöglichen Sie es Ihrem Cluster, auf Infrastrukturressourcen und Services von 
         </tbody>
       </table>
 </p>
-      - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
-      - Ersetzen Sie <em>&lt;logging_publicIP&gt;</em> durch alle Adressen für die Protokollierungsregionen, an die der Datenverkehr als zulässig definiert werden soll:
+      - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
+      - Ersetzen Sie <em>&lt;logging_public_IP&gt;</em> durch alle Adressen für die Protokollierungsregionen, an die der Datenverkehr als zulässig definiert werden soll:
         <p><table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
         <thead>
         <th>Containerregion</th>
@@ -351,3 +352,4 @@ Sie können eingehenden Zugriff auf NodePort-, LoadBalancer- und Ingress-Service
   <dt>Ingress</dt>
   <dd>Öffnen Sie Port 80 für HTTP oder Port 443 für HTTPS an der IP-Adresse für die Ingress-Lastausgleichsfunktion für Anwendungen.</dd>
 </dl>
+

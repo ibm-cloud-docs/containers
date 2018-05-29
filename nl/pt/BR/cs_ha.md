@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-12"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -86,3 +86,4 @@ O {{site.data.keyword.containershort_notm}} fornece várias abordagens para incl
   </tr>
   </tbody>
   </table>
+

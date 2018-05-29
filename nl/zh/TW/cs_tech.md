@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -37,6 +37,8 @@ lastupdated: "2018-03-16"
 <dd>每個容器都是從映像檔所建立。容器是具有其所有相依關係的已包裝應用程式，讓應用程式能夠在環境之間移動，並且不需變更即可執行。容器與虛擬機器不同，容器不會將裝置、其作業系統及基礎硬體虛擬化。只有應用程式碼、運行環境、系統工具、程式庫及設定會包裝在容器中。容器會以隔離的處理程序形式在 Ubuntu 運算主機上執行，並共用主機作業系統及其硬體資源。此方式讓容器比虛擬機器更輕量、可攜性更高且更有效率。</dd>
 </dl>
 
+
+
 ### 使用容器的重要優點
 {: #container_benefits}
 
@@ -46,20 +48,27 @@ lastupdated: "2018-03-16"
 <dt>容器很小</dt>
 <dd>您可以在單一虛擬機器所需的空間量中容納許多容器。</dd>
 <dt>容器具有可攜性</dt>
-<dd><ul>
+<dd>
+<ul>
   <li>重複使用映像檔的各部分來建置容器。</li>
   <li>將應用程式碼從暫置環境快速移至正式作業環境。</li>
-  <li>使用持續交付工具，自動執行處理程序。</li> </ul></dd>
-</dl>
+  <li>使用持續交付工具，自動執行處理程序。</li>
+  </ul>
+  </dd>
 
+
+  
+<p>準備好深入瞭解 Docker 嗎？<a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">完成本課程來瞭解 Docker 與 {{site.data.keyword.containershort_notm}} 如何一起運作。</a></p>
+
+</dl>
 
 <br />
 
 
-## Kubernetes 基本概念
+## Kubernetes 叢集
 {: #kubernetes_basics}
 
-名為 Kubernetes 的開放程式碼專案，結合了容器化基礎架構的執行與正式作業工作負載、開放程式碼提出及 Docker 容器管理工具。Kubernetes 基礎架構提供一個隔離且安全的應用程式平台來管理容器，此平台具有可攜性、可延伸並且在發生失效接手時可自我修復。
+<img src="images/certified-kubernetes-resized.png" style="padding-right: 10px;" align="left" alt="此徽章指出 IBM Cloud Container Service 的 Kubernetes 憑證。"/>名為 Kubernetes 的開放程式碼專案，結合了容器化基礎架構的執行與正式作業工作負載、開放程式碼提出及 Docker 容器管理工具。Kubernetes 基礎架構提供一個隔離且安全的應用程式平台來管理容器，此平台具有可攜性、可延伸並且在發生失效接手時可自我修復。
 {:shortdesc}
 
 瞭解一些基本 Kubernetes 概念，如下圖所示。
@@ -86,8 +95,14 @@ lastupdated: "2018-03-16"
 
 <dt>應用程式</dt>
 <dd>應用程式可能指的是完整應用程式或應用程式的元件。您可以在個別 Pod 或個別工作者節點中部署應用程式的元件。
-</br></br>
-若要進一步瞭解 Kubernetes 術語，請<a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">嘗試指導教學</a>。</dd>
+</dd>
+
+
+  
+<p>準備好深入瞭解 Kubernetes 嗎？</p>
+<ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">使用「建立叢集」指導教學</a>，擴充您的術語知識。</li>
+<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">完成本課程來瞭解 Kubernetes 與 {{site.data.keyword.containershort_notm}} 如何一起運作。</a></li></ul>
+
 
 </dl>
 
@@ -97,7 +112,7 @@ lastupdated: "2018-03-16"
 ## 服務架構
 {: #architecture}
 
-在 {{site.data.keyword.containershort_notm}} 上執行的 Kubernetes 叢集中，您的容器化應用程式是在稱為工作者節點的運算主機上進行管理。更明確的說法是，它們是在 Pod 執行，而 Pod 是在工作者節點上進行管理。工作者節點是由 Kubernetes 主節點管理。Kubernetes 主節點及工作者節點是透過安全的 TLS 憑證及 openVPN 連線來彼此通訊，以編排叢集配置。
+在 {{site.data.keyword.containershort_notm}} 上執行的 Kubernetes 叢集中，您的容器化應用程式是在稱為工作者節點的運算主機上進行管理。更明確的說法是，應用程式是在 Pod 執行，而 Pod 是在工作者節點上進行管理。工作者節點是由 Kubernetes 主節點管理。Kubernetes 主節點及工作者節點是透過安全的 TLS 憑證及 openVPN 連線來彼此通訊，以編排叢集配置。
 {: shortdesc}
 
 Kubernetes 主節點與工作者節點之間的差異為何？問得好。
@@ -106,11 +121,15 @@ Kubernetes 主節點與工作者節點之間的差異為何？問得好。
   <dt>Kubernetes 主節點</dt>
     <dd>Kubernetes 主節點負責管理叢集中的所有運算、網路及儲存空間資源。Kubernetes 主節點確保您的容器化應用程式和服務平均部署至叢集中的工作者節點。取決於您如何配置應用程式及服務，主節點會判斷具有足夠資源來滿足應用程式需求的工作者節點。</dd>
   <dt>工作者節點</dt>
-    <dd>每一個工作者節點都是實體機器（裸機）或是在實體硬體上執行的虛擬機器，其在雲端環境中進行管理。當您佈建工作者節點時，要判斷該工作者節點上管理之容器可用的資源。工作者節點預設都已設定 {{site.data.keyword.IBM_notm}} 所管理的 Docker Engine、不同的運算資源、網路及磁區服務。內建安全特性提供隔離、資源管理功能及工作者節點安全規範。</dd>
+    <dd>每一個工作者節點都是實體機器（裸機）或是在雲端環境中實體硬體上執行的虛擬機器。當您佈建工作者節點時，要判斷該工作者節點上管理之容器可用的資源。工作者節點預設都已設定 {{site.data.keyword.IBM_notm}} 所管理的 Docker Engine、不同的運算資源、網路及磁區服務。內建安全特性提供隔離、資源管理功能及工作者節點安全規範。</dd>
 </dl>
 
 ![{{site.data.keyword.containerlong_notm}} Kubernetes 架構](images/cs_org_ov.png)
 圖. {{site.data.keyword.containershort_notm}} 架構
 
+想要查看 {{site.data.keyword.containerlong_notm}} 如何與其他產品及服務搭配使用嗎？請查看部分[整合](cs_integrations.html#integrations)。
+
+
 <br />
+
 

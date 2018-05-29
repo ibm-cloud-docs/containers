@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -50,7 +50,8 @@ Sehen Sie sich die folgende Tabelle an, um die verfügbaren Optionen für die ei
 {: #old_account}
 
 Um Ihr altes nutzungsabhängiges Konto oder Ihr Abonnementkonto weiterhin zu verwenden, um Standardcluster zu erstellen, generieren Sie
-einen API-Schlüssel für Ihr neues nutzungsabhängiges Konto. Legen Sie dann den API-Schlüssel für Ihr altes Konto fest. {:shortdesc}
+einen API-Schlüssel für Ihr neues nutzungsabhängiges Konto. Legen Sie dann den API-Schlüssel für Ihr altes Konto fest.
+{:shortdesc}
 
 Erstellen Sie zunächst ein nutzungsabhängiges {{site.data.keyword.Bluemix_notm}}-Konto, das automatisch mit Zugriff auf das Portfolio vom IBM Cloud Infrastructure (SoftLayer) eingerichtet wird.
 
@@ -66,10 +67,10 @@ Sie die {{site.data.keyword.ibmid}} und das Kennwort für Ihr altes nutzungsabh�
   ```
   {: pre}
 
-6.  Legen Sie den API-Schlüssel fest, den Sie zuvor generiert haben, um auf das Portfolio von IBM Cloud Infrastructure (SoftLayer) zuzugreifen. Ersetzen Sie `<API_KEY>` durch den API-Schlüssel und `<USERNAME>` durch die {{site.data.keyword.ibmid}} Ihres neuen nutzungsabhängigen Kontos.
+6.  Legen Sie den API-Schlüssel fest, den Sie zuvor generiert haben, um auf das Portfolio von IBM Cloud Infrastructure (SoftLayer) zuzugreifen. Ersetzen Sie `<API_key>` durch den API-Schlüssel und `<username>` durch die {{site.data.keyword.ibmid}} Ihres neuen nutzungsabhängigen Kontos.
 
   ```
-  bx cs credentials-set --infrastructure-api-key <API-SCHLÜSSEL> --infrastructure-username <BENUTZERNAME>
+  bx cs credentials-set --infrastructure-api-key <api-schlüssel> --infrastructure-username <benutzername>
   ```
   {: pre}
 
@@ -77,3 +78,4 @@ Sie die {{site.data.keyword.ibmid}} und das Kennwort für Ihr altes nutzungsabh�
 
 **Hinweis:** Nachdem Sie Ihren API-Schlüssel generiert haben, überprüfen Sie ihn. Befolgen Sie dazu Schritt 1 und 2. Klicken Sie dann im Abschnitt
 **API-Schlüssel** auf **Anzeigen**, um den API-Schlüssel für Ihre Benutzer-ID anzuzeigen.
+

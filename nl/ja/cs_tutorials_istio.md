@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-27"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-02-27"
 # チュートリアル: {{site.data.keyword.containerlong_notm}} での Istio のインストール
 {: #istio_tutorial}
 
-[Istio](https://www.ibm.com/cloud/info/istio) は、{{site.data.keyword.containerlong}} の Kubernetes のようなクラウド・プラットフォームでマイクロサービスのネットワーク (サービス・メッシュともいう) を接続、保護、管理するためのオープン・プラットフォームです。Istio を使用して、ネットワーク・トラフィックの管理、マイクロサービス間のロード・バランシング、アクセス・ポリシーの実施、サービス・メッシュでのサービス ID の検証などを行います。
+[Istio](https://www.ibm.com/cloud/info/istio) は、{{site.data.keyword.containerlong}} の Kubernetes のようなクラウド・プラットフォームでマイクロサービスのネットワーク (サービス・メッシュともいう) を接続、保護、管理するためのオープン・プラットフォームです。 Istio を使用して、ネットワーク・トラフィックの管理、マイクロサービス間のロード・バランシング、アクセス・ポリシーの実施、サービス・メッシュでのサービス ID の検証などを行います。
 {:shortdesc}
 
 このチュートリアルでは、BookInfo と呼ばれる単純な演習用ブックストア・アプリ用に、Istio と一緒に 4 つのマイクロサービスをインストールする方法を確認できます。 このマイクロサービスには、製品 Web ページ、本の詳細情報、レビュー、評価が含まれます。 Istio をインストールする {{site.data.keyword.containershort}} クラスターに BookInfo のマイクロサービスをデプロイする際には、各マイクロサービスのポッド内に Istio Envoy サイドカー・プロキシーを挿入します。
@@ -72,7 +72,7 @@ lastupdated: "2018-02-27"
 4. ディレクトリーを Istio ファイルの場所に切り替えます。
 
    ```
-   cd <path_to_istio-0.4.0>
+   cd filepath/istio-0.4.0
    ```
    {: pre}
 
@@ -94,9 +94,9 @@ lastupdated: "2018-02-27"
 
    ```
    NAME            TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)                                                            AGE
-   istio-ingress   LoadBalancer   172.21.121.139   169.48.221.218   80:31176/TCP,443:30288/TCP                                         2m
-   istio-mixer     ClusterIP      172.21.31.30     <none>           9091/TCP,15004/TCP,9093/TCP,9094/TCP,9102/TCP,9125/UDP,42422/TCP   2m
-   istio-pilot     ClusterIP      172.21.97.191    <none>           15003/TCP,443/TCP                                                  2m
+   istio-ingress   LoadBalancer   172.21.xxx.xxx   169.xx.xxx.xxx   80:31176/TCP,443:30288/TCP                                         2m
+   istio-mixer     ClusterIP      172.21.xxx.xxx     <none>           9091/TCP,15004/TCP,9093/TCP,9094/TCP,9102/TCP,9125/UDP,42422/TCP   2m
+   istio-pilot     ClusterIP      172.21.xxx.xxx    <none>           15003/TCP,443/TCP                                                  2m
    ```
    {: screen}
 
@@ -145,11 +145,11 @@ BookInfo をデプロイする際には、Envoy サイドカー・プロキシ�
 
    ```
    NAME                       CLUSTER-IP   EXTERNAL-IP   PORT(S)              AGE
-   details                    10.0.0.31    <none>        9080/TCP             6m
-   kubernetes                 10.0.0.1     <none>        443/TCP              30m
-   productpage                10.0.0.120   <none>        9080/TCP             6m
-   ratings                    10.0.0.15    <none>        9080/TCP             6m
-   reviews                    10.0.0.170   <none>        9080/TCP             6m
+   details                    10.xxx.xx.xxx    <none>        9080/TCP             6m
+   kubernetes                 10.xxx.xx.xxx     <none>        443/TCP              30m
+   productpage                10.xxx.xx.xxx   <none>        9080/TCP             6m
+   ratings                    10.xxx.xx.xxx    <none>        9080/TCP             6m
+   reviews                    10.xxx.xx.xxx   <none>        9080/TCP             6m
    ```
    {: screen}
 
@@ -182,14 +182,14 @@ BookInfo をデプロイする際には、Envoy サイドカー・プロキシ�
 
        ```
        NAME      HOSTS     ADDRESS          PORTS     AGE
-       gateway   *         169.48.221.218   80        3m
+       gateway   *         169.xx.xxx.xxx   80        3m
        ```
        {: screen}
 
        この例では、結果の Ingress アドレスは `169.48.221.218:80` になります。 以下のコマンドを使用して、このアドレスをゲートウェイ URL としてエクスポートします。 次のステップで、このゲートウェイ URL を使用して BookInfo 製品ページにアクセスすることになります。
 
        ```
-       export GATEWAY_URL=169.48.221.218:80
+       export GATEWAY_URL=169.xx.xxx.xxx:80
        ```
        {: pre}
 
@@ -248,3 +248,4 @@ Istio 機能をさらに探索するには、[Istio の資料 ![外部リンク�
 * [Intelligent Routing ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/guides/intelligent-routing.html): この例では、Istio のトラフィック管理機能を使用して、特定のバージョンの BookInfo のレビューと評価のマイクロサービスにトラフィックをルーティングする方法を示しています。
 
 * [In-Depth Telemetry ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/guides/telemetry.html): この例では、Istio Mixer と Envoy プロキシーを使用して、BookInfo のマイクロサービス間で統一されたメトリック、ログ、トレースを取得する方法を示しています。
+

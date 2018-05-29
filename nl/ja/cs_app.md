@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-28"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -19,8 +19,8 @@ lastupdated: "2018-02-28"
 # アプリをクラスターにデプロイする
 {: #app}
 
-{{site.data.keyword.containerlong}} で Kubernetes の技法を利用して、アプリをコンテナーにデプロイし、それらのアプリを常に稼働させることができます。例えば、ダウン時間なしでローリング更新とロールバックを実行できます。
-{:shortdesc}
+{{site.data.keyword.containerlong}} で Kubernetes の技法を利用して、アプリをコンテナーにデプロイし、それらのアプリを常に稼働させることができます。 例えば、ダウン時間なしでローリング更新とロールバックを実行できます。
+{: shortdesc}
 
 次のイメージの領域をクリックして、アプリをデプロイするための一般的な手順を確認してください。
 
@@ -40,7 +40,7 @@ lastupdated: "2018-02-28"
 {: #highly_available_apps}
 
 セットアップ時に複数のワーカー・ノードとクラスターを分散させる範囲を広くすればするほど、各ユーザーがアプリのダウン時間を経験する可能性は低くなります。
-{:shortdesc}
+{: shortdesc}
 
 アプリのセットアップ方法を以下にまとめます。下に行くほど可用性が高くなります。
 
@@ -51,77 +51,29 @@ lastupdated: "2018-02-28"
 3.  n+2 個のポッドをレプリカ・セットで管理し、別々の場所に存在する複数のノードに分散させる (アンチアフィニティー) デプロイメント。
 4.  n+2 個のポッドをレプリカ・セットで管理し、別々の地域に存在する複数のノードに分散させる (アンチアフィニティー) デプロイメント。
 
+
+
+
 ### アプリの可用性の向上
 
 <dl>
-<dt>デプロイメントとレプリカ・セットを使用してアプリとその依存項目をデプロイする</dt>
-<dd>デプロイメントとは、アプリのすべてのコンポーネントや依存項目を宣言するために使用できる Kubernetes リソースです。 必要なすべての手順やコンポーネントの作成順序ではなくそれぞれの単一コンポーネントを記述することにより、
-稼働中のアプリの動作に集中できます。
-</br></br>
-複数のポッドをデプロイすると、デプロイメントのレプリカ・セットが自動的に作成されます。そのレプリカ・セットによってポッドがモニターされ、いつでも望ましい数のポッドが稼働状態になります。 ポッドがダウンすると、応答しなくなったポッドがレプリカ・セットによって新しいポッドに置き換えられます。
-</br></br>
-デプロイメントを使用して、ローリング更新中に追加するポッドの数や、1 度に使用不可にできるポッドの数など、アプリの更新戦略を定義できます。 ローリング更新の実行時には、デプロイメントによって、リビジョンが動作しているかどうかが確認され、障害が検出されるとロールアウトが停止されます。
-</br></br>
-デプロイメントを使用すれば、異なるフラグを設定した複数のリビジョンを同時にデプロイすることもできるので、まずデプロイメントをテストしてから実稼働環境にプッシュするかどうかを決める、といったことが可能になります。
-</br></br>
-すべてのデプロイメントで、デプロイされたリビジョンが追跡されます。 こうしたリビジョンの履歴を使用して、更新が予期したとおりに機能しない場合に、以前のバージョンにロールバックできます。</dd>
-<dt>アプリのワークロードに十分なレプリカ数、プラス 2 を組み込む</dt>
-<dd>アプリの可用性と耐障害性を高めるために、予想されるワークロードを処理する最低限の数のレプリカに加えて予備のレプリカを組み込むことを検討してください。 ポッドがクラッシュし、そのポッドがレプリカ・セットによってまだリカバリーされていない状況でも、予備のレプリカでワークロードを処理できます。 2 つが同時に障害を発生した場合に対応できるようにするには、2 つ余分にレプリカを組み込みます。 このセットアップは N+2 パターンです。N は着信ワークロードを処理するレプリカの数、+2 は追加の 2 つのインスタンスです。 クラスターに十分なスペースがある限り、ポッドをいくつでもクラスターに含めることができます。</dd>
-<dt>複数のノードにポッドを分散させる (アンチアフィニティー)</dt>
-<dd>デプロイメントを作成する時に、各ポッドを同じワーカー・ノードにデプロイすることもできます。 複数のポッドが同じワーカー・ノード上に存在するセットアップは、アフィニティーまたはコロケーションといいます。 ワーカー・ノードの障害からアプリを保護するために、デプロイメントによって複数のワーカー・ノードにポッドを分散させることもできます。そのためには、<strong>podAntiAffinity</strong> オプションを使用します。 このオプションを使用できるのは標準クラスターの場合に限られます。
-
-</br></br>
-<strong>注:</strong> 以下の YAML ファイルでは、それぞれのポッドを異なるワーカー・ノードにデプロイします。 定義したレプリカの数がクラスター内の使用できるワーカー・ノードの数より多い場合は、アンチアフィニティーの要件を満たせる数のレプリカだけがデプロイされます。 それ以外のレプリカは、ワーカー・ノードがさらにクラスターに追加されるまで保留状態になります。
-
-<pre class="codeblock">
-<code>apiVersion: apps/v1beta1
-kind: Deployment
-metadata:
-  name: wasliberty
-spec:
-  replicas: 3
-  template:
-    metadata:
-      labels:
-        app: wasliberty
-    spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - wasliberty
-              topologyKey: kubernetes.io/hostname
-      containers:
-      - name: wasliberty
-        image: registry.&lt;region&gt;.bluemix.net/ibmliberty
-        ports:
-        - containerPort: 9080
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: wasliberty
-  labels:
-    app: wasliberty
-spec:
-  ports:
-    # the port that this service should serve on
-  - port: 9080
-  selector:
-    app: wasliberty
-  type: NodePort</code></pre>
-
-</dd>
-<dt>複数の場所にポッドを分散させる</dt>
-<dd>ある場所や領域の障害からアプリを保護するために、別の場所の 2 つ目のクラスターを作成し、デプロイメントの YAML を使用してアプリの重複レプリカ・セットをデプロイできます。 クラスターの前に共有ルートとロード・バランサーを追加して、複数の場所や領域にワークロードを分散させることもできます。 クラスター間でルートを共有する方法について詳しくは、<a href="cs_clusters.html#clusters" target="_blank">クラスターの高可用性</a>を参照してください。
-
-詳しくは、<a href="cs_clusters.html#planning_clusters" target="_blank">可用性の高いデプロイメント</a>のオプションを参照してください。</dd>
+  <dt>デプロイメントとレプリカ・セットを使用してアプリとその依存項目をデプロイする</dt>
+    <dd><p>デプロイメントとは、アプリのすべてのコンポーネントや依存項目を宣言するために使用できる Kubernetes リソースです。 デプロイメントでは、すべての手順を記述する必要はなく、アプリに集中できます。</p>
+    <p>複数のポッドをデプロイすると、デプロイメントのレプリカ・セットが自動的に作成されます。そのレプリカ・セットによってポッドがモニターされ、いつでも望ましい数のポッドが稼働状態になります。 ポッドがダウンすると、応答しなくなったポッドがレプリカ・セットによって新しいポッドに置き換えられます。</p>
+    <p>デプロイメントを使用して、ローリング更新中に追加するポッドの数や、1 度に使用不可にできるポッドの数など、アプリの更新戦略を定義できます。 ローリング更新の実行時には、デプロイメントによって、リビジョンが動作しているかどうかが確認され、障害が検出されるとロールアウトが停止されます。</p>
+    <p>デプロイメントでは、異なるフラグを使用して同時に複数のリビジョンをデプロイできます。例えば、実稼働環境にプッシュする前に、デプロイメントをテストすることができます。</p>
+    <p>デプロイメントでは、デプロイしたリビジョンを追跡できます。更新が期待どおりに機能しない場合に、この履歴を使用して以前のバージョンにロールバックすることができます。</p></dd>
+  <dt>アプリのワークロードに十分なレプリカ数、プラス 2 を組み込む</dt>
+    <dd>アプリの可用性と耐障害性を高めるために、予想されるワークロードを処理する最低限の数のレプリカに加えて予備のレプリカを組み込むことを検討してください。 ポッドがクラッシュし、そのポッドがレプリカ・セットによってまだリカバリーされていない状況でも、予備のレプリカでワークロードを処理できます。 2 つが同時に障害を発生した場合に対応できるようにするには、2 つ余分にレプリカを組み込みます。 この構成は N+2 パターンです。N は着信ワークロードを処理するレプリカの数、+2 は追加の 2 つのインスタンスです。クラスターに十分なスペースがある限り、必要な数のポッドを作成できます。</dd>
+  <dt>複数のノードにポッドを分散させる (アンチアフィニティー)</dt>
+    <dd><p>デプロイメントを作成するときに、各ポッドを同じワーカー・ノードにデプロイすることもできます。これは、アフィニティーまたはコロケーションとして知られています。ワーカー・ノードの障害からアプリを保護するには、標準クラスターで <em>podAntiAffinity</em> オプションを使用して、複数のワーカー・ノードにポッドを分散させるようにデプロイメントを構成します。「優先」と「必須」という 2 つのタイプのポッド・アンチアフィニティーを定義できます。詳しくは、Kubernetes の資料 <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="(新しいタブまたはウィンドウで開く)">Assigning Pods to Nodes</a> を参照してください。</p>
+    <p><strong>注</strong>: 「必須」のアンチアフィニティーでは、ワーカー・ノードの数しかレプリカをデプロイできません。例えば、クラスターに 3 つのワーカー・ノードがある場合は、YAML ファイルに 5 つのレプリカを定義しても、3 つのレプリカしかデプロイされません。各レプリカは異なるワーカー・ノード上に存在します。残りの 2 つのレプリカは保留中のままです。別のワーカー・ノードをクラスターに追加すると、残りのレプリカのうち 1 つが新しいワーカー・ノードに自動的にデプロイされます。<p>
+    <p><strong>デプロイメント YAML ファイルのサンプル</strong>:<ul>
+    <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/nginx_preferredAntiAffinity.yaml" rel="external" target="_blank" title="(新しいタブまたはウィンドウで開く)">優先のポッド・アンチアフィニティーを使用する Nginx アプリ。</a></li>
+    <li> <a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="(新しいタブまたはウィンドウで開く)">必須のポッド・アンチアフィニティーを使用する IBM® WebSphere® Application Server Liberty アプリ。</a></li></ul></p>
+    </dd>
+<dt>複数のゾーンまたは領域にポッドを分散させる</dt>
+  <dd>ある場所や領域の障害からアプリを保護するために、別の場所の 2 つ目のクラスターを作成し、デプロイメントの YAML を使用してアプリの重複レプリカ・セットをデプロイできます。 クラスターの前に共有ルートとロード・バランサーを追加して、複数の場所や領域にワークロードを分散させることもできます。 詳しくは、[クラスターの高可用性](cs_clusters.html#clusters)を参照してください。</dd>
 </dl>
 
 
@@ -129,7 +81,7 @@ spec:
 {: #minimal_app_deployment}
 
 フリー・クラスターまたは標準クラスターへの基本的なアプリのデプロイメントには、一般には以下の構成要素が含まれます。
-{:shortdesc}
+{: shortdesc}
 
 ![デプロイメントのセットアップ](images/cs_app_tutorial_components1.png)
 
@@ -148,7 +100,9 @@ spec:
     spec:
       containers:
       - name: ibmliberty
-        image: registry.<region>.bluemix.net/ibmliberty:latest
+        image: registry.bluemix.net/ibmliberty:latest
+        ports:
+        - containerPort: 9080        
 ---
 apiVersion: v1
 kind: Service
@@ -158,7 +112,7 @@ metadata:
     app: ibmliberty
 spec:
   selector:
-    run: ibmliberty
+    app: ibmliberty
   type: NodePort
   ports:
    - protocol: TCP
@@ -166,6 +120,7 @@ spec:
 ```
 {: codeblock}
 
+**注:** サービスを公開するには、サービスの `spec.selector` セクションで使用するキー/値のペアが、デプロイメント YAML の `spec.template.metadata.labels` セクションで使用したキー/値のペアと同じであることを確認してください。
 各コンポーネントについて詳しくは、[Kubernetes の基本](cs_tech.html#kubernetes_basics)を参照してください。
 
 <br />
@@ -183,7 +138,7 @@ spec:
 
 クラスターの Kubernetes ダッシュボードを起動するために、デフォルトのポートを使用するか、独自のポートを設定できます。
 
-1.  バージョン 1.7.4 以前の Kubernetes マスターを使用するクラスターの場合は、以下のようにします。
+1.  バージョン 1.7.16 以前の Kubernetes マスターを使用するクラスターの場合は、以下のようにします。
 
     1.  デフォルトのポート番号でプロキシーを設定します。
 
@@ -233,16 +188,16 @@ spec:
 
     4.  ダッシュボードにサインインします。
 
-        1.  ブラウザーで、次の URL に移動します。
+      1.  ブラウザーで、次の URL に移動します。
 
-            ```
-            http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
-            ```
-            {: codeblock}
+          ```
+          http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+          ```
+          {: codeblock}
 
-        2.  サインオン・ページで、**トークン**認証方式を選択します。
+      2.  サインオン・ページで、**トークン**認証方式を選択します。
 
-        3.  次に、先ほどコピーした **id-token** 値を **Token** フィールドに貼り付けて、**「SIGN IN」**をクリックします。
+      3.  次に、先ほどコピーした **id-token** 値を **Token** フィールドに貼り付けて、**「SIGN IN」**をクリックします。
 
 [次に、ダッシュボードから構成ファイルを実行できます。](#app_ui)
 
@@ -262,7 +217,7 @@ Kubernetes シークレットは、機密情報 (ユーザー名、パスワー�
 {:shortdesc}
 
 <table>
-<caption>表。 シークレットに保管する必要があるファイル (タスク別)</caption>
+<caption>シークレットに保管する必須ファイル (タスク別)</caption>
 <thead>
 <th>タスク</th>
 <th>シークレットに保管する必要があるファイル</th>
@@ -277,7 +232,7 @@ Kubernetes シークレットは、機密情報 (ユーザー名、パスワー�
 
 デフォルトの TLS シークレットを表示するには、次のようにします。
 <pre>
-bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
+bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 </pre>
 </p>
 代わりに独自のものを作成するには、このトピックの手順を実行してください。</td>
@@ -297,7 +252,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 
 1. 証明書プロバイダーから認証局 (CA) の証明書と鍵を生成します。 独自のドメインがある場合は、ご使用のドメインの正式な TLS 証明書を購入してください。 テストが目的であれば、自己署名証明書を生成できます。
 
- 重要: 証明書ごとに異なる [CN](https://support.dnsimple.com/articles/what-is-common-name/) を使用してください。
+ **重要**: 証明書ごとに異なる [CN](https://support.dnsimple.com/articles/what-is-common-name/) を使用してください。
 
  クライアント証明書とクライアント鍵は、トラステッド・ルート証明書 (この場合は CA 証明書) まで検証する必要があります。次に例を示します。
 
@@ -311,7 +266,7 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 2. 証明書を Kubernetes シークレットとして作成します。
 
    ```
-   kubectl create secret generic <secretName> --from-file=<cert_file>=<cert_file>
+   kubectl create secret generic <secret_name> --from-file=<cert_file>=<cert_file>
    ```
    {: pre}
 
@@ -319,14 +274,14 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
    - TLS 接続:
 
      ```
-     kubectl create secret tls <secretName> --from-file=tls.crt=server.crt --from-file=tls.key=server.key
+     kubectl create secret tls <secret_name> --from-file=tls.crt=server.crt --from-file=tls.key=server.key
      ```
      {: pre}
 
    - 相互認証アノテーション:
 
      ```
-     kubectl create secret generic <secretName> --from-file=ca.crt=ca.crt
+     kubectl create secret generic <secret_name> --from-file=ca.crt=ca.crt
      ```
      {: pre}
 
@@ -339,7 +294,8 @@ bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
 ## GUI でアプリをデプロイする方法
 {: #app_ui}
 
-Kubernetes ダッシュボードを使用してアプリをクラスターにデプロイすると、デプロイメント・リソースが、クラスター内にポッドを自動的に作成し、更新および管理します。{:shortdesc}
+Kubernetes ダッシュボードを使用してアプリをクラスターにデプロイすると、デプロイメント・リソースが、クラスター内にポッドを自動的に作成し、更新および管理します。
+{:shortdesc}
 
 開始前に、以下のことを行います。
 
@@ -348,11 +304,16 @@ Kubernetes ダッシュボードを使用してアプリをクラスターにデ
 
 アプリをデプロイするには、以下の手順で行います。
 
-1.  [Kubernetes ダッシュボードを開きます](#cli_dashboard)。
-2.  Kubernetes ダッシュボードで**「+ 作成」**をクリックします。
-3.  **「ここでアプリの詳細情報を指定する (Specify app details below)」**を選択してアプリの詳細情報を GUI で入力するか、**「YAML ファイルまたは JSON ファイルをアップロードする (Upload a YAML or JSON file)」**を選択してアプリの[構成ファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) をアップロードします。 [このサンプル YAML ファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml) を使用して米国南部地域の **ibmliberty** イメージからコンテナーをデプロイします。
-4.  Kubernetes ダッシュボードで**「デプロイメント」**をクリックして、デプロイメントが作成されたことを確認します。
-5.  ノード・ポート・サービス、ロード・バランサー・サービス、または Ingress を使用して、アプリをだれでも利用できるようにした場合は、アプリにアクセスできることを確認します。
+1.  Kubernetes [ダッシュボード](#cli_dashboard)を開き、**「+ 作成」**をクリックします。
+2.  2 つの方法のいずれかでアプリの詳細を入力します。
+  * **「以下にアプリの詳細を指定する (Specify app details below)」**を選択し、詳細を入力します。
+  * **「YAML ファイルまたは JSON ファイルをアップロードする (Upload a YAML or JSON file)」**を選択して、アプリの[構成ファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) をアップロードします。
+
+  構成ファイルのヘルプが必要な場合は、この [YAML ファイルのサンプル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml) を確認してください。この例では、コンテナーは米国南部地域の **ibmliberty** イメージからデプロイされます。{: tip}
+
+3.  以下のいずれかの方法でアプリを正常にデプロイしたことを確認します。
+  * Kubernetes ダッシュボードで、**「デプロイメント」**をクリックします。 正常なデプロイメントのリストが表示されます。
+  * アプリが[公開](cs_network_planning.html#public_access)されている場合は、{{site.data.keyword.containerlong}} ダッシュボードのクラスター概要ページにナビゲートします。クラスター概要セクションにあるサブドメインをコピーし、ブラウザーに貼り付けてアプリを表示します。
 
 <br />
 
@@ -378,10 +339,12 @@ Kubernetes ダッシュボードを使用してアプリをクラスターにデ
 
     -   [Ingress ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/services-networking/ingress/): アプリをだれでも利用できるようにする経路を提供するロード・バランサーのタイプを指定します。
 
+    
+
 2.  クラスターのコンテキストで構成ファイルを実行します。
 
     ```
-    kubectl apply -f deployment_script_location
+    kubectl apply -f config.yaml
     ```
     {: pre}
 
@@ -392,24 +355,25 @@ Kubernetes ダッシュボードを使用してアプリをクラスターにデ
 
 
 
-
-## アプリのスケーリング
+## アプリのスケーリング 
 {: #app_scaling}
 
-Kubernetes では、[ポッドの自動水平スケーリング ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) を有効にして、CPU に基づいてアプリのインスタンス数を自動的に増減できます。{:shortdesc}
+Kubernetes では、[ポッドの自動水平スケーリング ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) を有効にして、CPU に基づいてアプリのインスタンス数を自動的に増減できます。
+{:shortdesc}
 
-Cloud Foundry アプリケーションのスケーリングに関する情報をお探しですか?
-[IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html) を参照してください。 
+Cloud Foundry アプリケーションのスケーリングに関する情報をお探しですか? [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html) を参照してください。 
 {: tip}
 
 開始前に、以下のことを行います。
 - [CLI のターゲットを](cs_cli_install.html#cs_cli_configure)自分のクラスターに設定します。
 - 自動スケーリングするクラスターに Heapster モニターをデプロイする必要があります。
 
+手順:
+
 1.  CLI を使用して、アプリをクラスターにデプロイします。 アプリをデプロイする時に、CPU を要求する必要があります。
 
     ```
-    kubectl run <name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
+    kubectl run <app_name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
     ```
     {: pre}
 
@@ -438,7 +402,7 @@ Cloud Foundry アプリケーションのスケーリングに関する情報を
     デプロイメントがかなり複雑になる場合は、[構成ファイル](#app_cli)を作成する必要があります。
     {: tip}
 
-2.  自動スケーリング機能を作成し、ポリシーを定義します。`kubetcl autoscale` コマンドの使い方について詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale) を参照してください。
+2.  自動スケーリング機能を作成し、ポリシーを定義します。 `kubectl autoscale` コマンドの使い方について詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale) を参照してください。
 
     ```
     kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
@@ -538,4 +502,5 @@ Cloud Foundry アプリケーションのスケーリングに関する情報を
         {: pre}
 
 <br />
+
 

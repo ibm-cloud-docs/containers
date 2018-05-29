@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-14"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -25,7 +25,6 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 
 ## Services d'application
 <table summary="Récapitulatif de l'accessibilité">
-<caption>Tableau. Options d'intégration pour les services d'application</caption>
 <thead>
 <tr>
 <th>Service</th>
@@ -46,7 +45,6 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 
 ## Services DevOps
 <table summary="Récapitulatif de l'accessibilité">
-<caption>Tableau. Options d'intégration pour la gestion de DevOps</caption>
 <thead>
 <tr>
 <th>Service</th>
@@ -77,9 +75,8 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 
 
 
-## Services de journalisation et de surveillance
+## Services de consignation et de surveillance
 <table summary="Récapitulatif de l'accessibilité">
-<caption>Tableau. Options d'intégration pour la gestion des journaux et des métriques</caption>
 <thead>
 <tr>
 <th>Service</th>
@@ -109,7 +106,7 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 </tr>
 <tr>
 <td>Prometheus</td>
-<td>Prometheus est un outil à code source ouvert de surveillance, de journalisation et d'alerte conçu spécifiquement pour Kubernetes afin d'extraire des informations détaillées sur le cluster, les noeuds worker et l'état de santé du déploiement à partir des informations de journalisation de Kubernetes. Les informations d'utilisation de l'UC, de la mémoire et du réseau de tous les conteneurs en activité sont collectées et peuvent être utilisées dans des interrogations ou des alertes personnalisées pour surveiller les performances et les charges de travail de votre cluster.
+<td>Prometheus est un outil à code source ouvert de surveillance, de consignation et d'alerte conçu spécifiquement pour Kubernetes afin d'extraire des informations détaillées sur le cluster, les noeuds worker et l'état de santé du déploiement à partir des informations de consignation de Kubernetes. Les informations d'utilisation de l'UC, de la mémoire et du réseau de tous les conteneurs en activité sont collectées et peuvent être utilisées dans des interrogations ou des alertes personnalisées pour surveiller les performances et les charges de travail de votre cluster.
 
 <p>Pour utiliser Prometheus, suivez les <a href="https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus" target="_blank">instructions CoreOS <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>.</p>
 </td>
@@ -136,7 +133,6 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 
 ## Services de sécurité
 <table summary="Récapitulatif de l'accessibilité">
-<caption>Tableau. Options d'intégration pour la gestion de la sécurité</caption>
 <thead>
 <tr>
 <th>Service</th>
@@ -157,6 +153,10 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 <td>Vous pouvez utiliser <a href="../services/certificate-manager/index.html" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> pour stocker et gérer les certificats SSL pour vos applications. Pour plus d'informations, voir <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containershort_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>. </td>
 </tr>
 <tr>
+  <td>{{site.data.keyword.registrylong}}</td>
+  <td>Configurez votre propre référentiel d'images Docker sécurisé où vous pourrez stocker et partager des images en toute sécurité entre les utilisateurs du cluster. Pour plus d'informations, voir la <a href="/docs/services/Registry/index.html" target="_blank">documentation d'{{site.data.keyword.registrylong}} <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>.</td>
+</tr>
+<tr>
 <td>NeuVector</td>
 <td>Vous pouvez protéger vos conteneurs avec un pare-feu natif du cloud à l'aide de <a href="https://neuvector.com/" target="_blank">NeuVector <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>. Pour plus d'informations, voir <a href="https://www.ibm.com/us-en/marketplace/neuvector-container-security" target="_blank">NeuVector Container Security <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>. </td>
 </tr>
@@ -166,6 +166,35 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 </tr>
 </tbody>
 </table>
+
+<br />
+
+
+
+## Services de stockage
+<table summary="Récapitulatif de l'accessibilité">
+<thead>
+<tr>
+<th>Service</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>{{site.data.keyword.cos_full}}</td>
+  <td>Les données stockées avec {{site.data.keyword.cos_short}} sont chiffrées et disséminées entre plusieurs emplacements géographiques. Elles sont accessibles via HTTP en utilisant une API REST. Vous pouvez utiliser l'[image ibm-backup-restore](/docs/services/RegistryImages/ibm-backup-restore/index.html) pour configurer le service de sorte à effectuer des sauvegardes ponctuelles ou planifiées pour les données figurant dans vos clusters. Pour obtenir des informations générales sur le service, voir la <a href="/docs/services/cloud-object-storage/about-cos.html" target="_blank">documentation d'{{site.data.keyword.cos_short}} <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>.</td>
+</tr>
+  <tr>
+    <td>{{site.data.keyword.cloudantfull}}</td>
+    <td>{{site.data.keyword.cloudant_short_notm}} est une base de données orientée document de type DBaas (DataBase as a Service) qui stocke les données sous forme de documents au format JSON. Le service est construit pour favoriser l'évolutivité, la haute disponibilité et la durabilité. Pour plus d'informations, voir la <a href="/docs/services/Cloudant/getting-started.html" target="_blank">documentation de {{site.data.keyword.cloudant_short_notm}} <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>.</td>
+  </tr>
+  <tr>
+    <td>{{site.data.keyword.composeForMongoDB_full}}</td>
+    <td>{{site.data.keyword.composeForMongoDB}} assure la redondance et la haute disponibilité, fournit des sauvegardes automatiques et à la demande en continu, ainsi que des outils de surveillances, l'intégration à des systèmes d'alerte, des vues d'analyses de performances, et bien plus encore. Pour plus d'informations, voir la <a href="/docs/services/ComposeForMongoDB/index.html" target="_blank">documentation de {{site.data.keyword.composeForMongoDB}} <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>.</td>
+  </tr>
+</tbody>
+</table>
+
 
 <br />
 
@@ -226,7 +255,7 @@ Pour ajouter un service, procédez comme suit :
 5.  Ajoutez le service à votre cluster.
 
     ```
-    bx cs cluster-service-bind <cluster_name_or_id> <namespace> <service_instance_name>
+    bx cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
     {: pre}
 
@@ -393,7 +422,7 @@ a été [ajouté au cluster](cs_integrations.html#adding_cluster) par l'administ
 5.  Créez le pod et montez le volume secret.
 
     ```
-    kubectl apply -f <yaml_path>
+    kubectl apply -f secret-test.yaml
     ```
     {: pre}
 
@@ -434,14 +463,9 @@ a été [ajouté au cluster](cs_integrations.html#adding_cluster) par l'administ
 
     
 
-9.  Lors de l'implémentation de votre application, configurez-la afin de rechercher le fichier de valeur confidentielle nommé **binding** sous le répertoire de montage, d'analyser le contenu
-JSON et de déterminer l'URL et les données d'identification du service pour accéder à votre service {{site.data.keyword.Bluemix_notm}}.
+9.  Lors de l'implémentation de votre application, configurez-la afin de rechercher le fichier de valeur confidentielle nommé **binding** sous le répertoire de montage, d'analyser le contenu JSON et de déterminer l'URL et les données d'identification du service pour accéder à votre service {{site.data.keyword.Bluemix_notm}}.
 
-Vous pouvez à présent accéder aux informations détaillées et aux données d'identification du service {{site.data.keyword.Bluemix_notm}}. Pour utiliser votre service
-{{site.data.keyword.Bluemix_notm}},
-vérifiez que votre application est configurée pour rechercher le fichier de la valeur
-confidentielle du service dans le répertoire de montage, analyser le contenu JSON et
-examiner les informations détaillées du service.
+Vous pouvez à présent accéder aux informations détaillées et aux données d'identification du service {{site.data.keyword.Bluemix_notm}}. Pour utiliser votre service {{site.data.keyword.Bluemix_notm}}, vérifiez que votre application est configurée pour rechercher le fichier de la valeur confidentielle du service dans le répertoire de montage, analyser le contenu JSON et examiner les informations détaillées du service.
 
 <br />
 
@@ -458,14 +482,50 @@ Avant de commencer, [ciblez avec votre interface de ligne de commande (CLI)](cs_
 
 1. Installez l'<a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">interface de ligne de commande Helm  <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>.
 
-2. Initialisez Helm et installez `tiller`.
+2. **Important** : pour assurer la sécurité du cluster, créez un compte de service pour Tiller dans l'espace de nom `kube-system` et une liaison de rôle de cluster RBAC Kubernetes pour le pod `tiller-deploy`.
+
+    1. Dans l'éditeur de votre choix, créez le fichier suivant et sauvegardez-le avec le nom `rbac-config.yaml`.
+      **Remarque **:
+        * Le rôle de cluster `cluster-admin` est créé par défaut dans les clusters Kubernetes, par conséquent, vous n'avez pas à le définir de manière explicite.
+        * Si vous utilisez un cluster de version 1.7.x, remplacez `apiVersion` par `rbac.authorization.k8s.io/v1beta1`.
+
+      ```
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: tiller
+        namespace: kube-system
+      ---
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: tiller
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-admin
+      subjects:
+        - kind: ServiceAccount
+          name: tiller
+          namespace: kube-system
+      ```
+      {: codeblock}
+
+    2. Créez le compte de service et la liaison de rôle de cluster.
+
+        ```
+        kubectl create -f rbac-config.yaml
+        ```
+        {: pre}
+
+3. Initialisez Helm et installez `tiller` avec le compte de service que vous avez créé.
 
     ```
-    helm init
+    helm init --service-account tiller
     ```
     {: pre}
 
-3. Vérifiez que la zone **Status** du pod `tiller-deploy` indique `Running` dans votre cluster.
+4. Vérifiez que la zone **Status** du pod `tiller-deploy` indique `Running` dans votre cluster.
 
     ```
     kubectl get pods -n kube-system -l app=helm
@@ -480,17 +540,26 @@ Avant de commencer, [ciblez avec votre interface de ligne de commande (CLI)](cs_
     ```
     {: screen}
 
-4. Ajoutez le référentiel {{site.data.keyword.Bluemix_notm}} Helm à votre instance Helm.
+5. Ajoutez le référentiel {{site.data.keyword.Bluemix_notm}} Helm à votre instance Helm.
 
     ```
     helm repo add ibm  https://registry.bluemix.net/helm/ibm
     ```
     {: pre}
 
-5. Répertoriez les chartes Helm actuellement disponibles dans le référentiel {{site.data.keyword.Bluemix_notm}}.
+6. Répertoriez les chartes Helm actuellement disponibles dans le référentiel {{site.data.keyword.Bluemix_notm}}.
 
     ```
     helm search ibm
+    ```
+    {: pre}
+
+7. Pour en savoir plus sur une charte, affichez la liste de ses paramètres et valeurs par défaut.
+
+    Par exemple, pour afficher les paramètres, la documentation et les valeurs par défaut de la charte Helm du service VPN IPSec strongSwan, exécutez la commande :
+
+    ```
+    helm inspect ibm/strongswan
     ```
     {: pre}
 
@@ -581,4 +650,5 @@ Pour utiliser Weave Scope avec un cluster, procédez comme suit :
 [En savoir plus sur les fonctions Weave Scope ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.weave.works/docs/scope/latest/features/).
 
 <br />
+
 

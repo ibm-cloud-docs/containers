@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -75,7 +75,7 @@ En la sección de información de datos del mapa de configuración, puede defini
 
 Las claves están definidas. ¿Qué hago?
 
-Tras definir las reglas, ejecute el mandato `worker-upgrade`. Si se devuelve una respuesta satisfactoria, los nodos trabajadores se pondrán en cola para ser actualizados. Sin embargo, los nodos no pasan por el proceso de actualización hasta que se satisfacen todas las reglas. Mientras están en cola, las reglas se comprueban a intervalos para ver si alguno de los nodos puede ser actualizado.
+Después de definir las reglas, ejecute el mandato `bx cs worker-update`. Si se devuelve una respuesta satisfactoria, los nodos trabajadores se pondrán en cola para ser actualizados. Sin embargo, los nodos no completan el proceso de actualización hasta que se satisfacen todas las reglas. Mientras están en cola, las reglas se comprueban a intervalos para ver si alguno de los nodos puede ser actualizado. 
 
 ¿Qué ocurre si opto por no definir ningún mapa de configuración?
 
@@ -95,6 +95,7 @@ Para actualizar los nodos trabajadores:
       name: ibm-cluster-update-configuration
       namespace: kube-system
     data:
+     drain_timeout_seconds: "120"
      zonecheck.json: |
        {
          "MaxUnavailablePercentage": 70,
@@ -107,7 +108,6 @@ Para actualizar los nodos trabajadores:
          "NodeSelectorKey": "failure-domain.beta.kubernetes.io/region",
          "NodeSelectorValue": "us-south"
        }
-    ...
      defaultcheck.json: |
        {
          "MaxUnavailablePercentage": 100
@@ -120,12 +120,16 @@ Para actualizar los nodos trabajadores:
     </thead>
     <tbody>
       <tr>
-        <td><code>defaultcheck.json</code></td>
-        <td> De forma predeterminada, si el mapa ibm-cluster-update-configuration no está definido de forma válida, sólo el 20% de los clústeres podrán estar no disponibles a la vez. Si se definen una o varias reglas válidas sin un valor predeterminado global, el nuevo valor predeterminado es permitir que el 100% de los trabajadores estén no disponibles simultáneamente. Puede controlarlo creando un porcentaje predeterminado. </td>
+        <td><code>drain_timeout_seconds</code></td>
+        <td> Opcional: Tiempo de espera en segundos para el drenaje que se produce durante la actualización del nodo trabajador. El drenaje coloca al nodo en un estado `unschedulable`, lo que impide desplegar nuevos pods en dicho nodo. El drenaje también suprime nodos fuera del nodo. Los valores enteros aceptados van del 1 al 180. El valor predeterminado es 30. </td>
       </tr>
       <tr>
         <td><code>zonecheck.json</code></br><code>regioncheck.json</code></td>
         <td> Ejemplos de claves exclusivas para las que desea establecer reglas. Los nombres de las claves pueden ser los que desee; las configuraciones definidas en la clave analizan la información. Para cada clave que defina, sólo puede establecer un valor para <code>NodeSelectorKey</code> y <code>NodeSelectorValue</code>. Si desea establecer reglas para más de una región o ubicación (centro de datos), cree una nueva entrada de clave. </td>
+      </tr>
+      <tr>
+        <td><code>defaultcheck.json</code></td>
+        <td> De forma predeterminada, si el mapa <code>ibm-cluster-update-configuration</code> no está definido de forma válida, sólo el 20% de los clústeres podrán estar no disponibles a la vez. Si se definen una o varias reglas válidas sin un valor predeterminado global, el nuevo valor predeterminado es permitir que el 100% de los trabajadores estén no disponibles simultáneamente. Puede controlarlo creando un porcentaje predeterminado. </td>
       </tr>
       <tr>
         <td><code>MaxUnavailablePercentage</code></td>
@@ -146,10 +150,10 @@ Para actualizar los nodos trabajadores:
 
 3. Actualice los nodos trabajadores de la GUI o ejecutando el mandato de CLI.
   * Para actualizar desde el panel de control de {{site.data.keyword.Bluemix_notm}}, vaya a la sección `Nodos trabajadores` del clúster y pulse `Actualizar trabajador`.
-  * Para obtener los ID de los nodos trabajadores, ejecute `bx cs workers <cluster_name_or_id>`. Si selecciona varios nodos trabajadores, los nodos trabajadores se colocan en cola para la evaluación de la actualización. Si se considera que están listos tras la evaluación, se actualizarán según las reglas establecidas en las configuraciones.
+  * Para obtener los ID de los nodos trabajadores, ejecute `bx cs workers <cluster_name_or_ID>`. Si selecciona varios nodos trabajadores, los nodos trabajadores se colocan en cola para la evaluación de la actualización. Si se considera que están listos tras la evaluación, se actualizarán según las reglas establecidas en las configuraciones.
 
     ```
-    bx cs worker-update <cluster_name_or_id> <worker_node_id1> <worker_node_id2>
+    bx cs worker-update <cluster_name_or_ID> <worker_node1_ID> <worker_node2_ID>
     ```
     {: pre}
 
@@ -160,14 +164,14 @@ Para actualizar los nodos trabajadores:
     {: pre}
 
 5. Confirme que la actualización se ha completado:
-  * Revise la versión de Kubernetes en el panel de control de {{site.data.keyword.Bluemix_notm}} o ejecutando `cs bx workers <cluster_name_or_id>`.
+  * Revise la versión de Kubernetes en el panel de control de {{site.data.keyword.Bluemix_notm}} o ejecutando `cs bx workers <cluster_name_or_ID>`.
   * Revise la versión de Kubernetes de los nodos trabajadores ejecutando `kubectl get nodes`.
-  * En algunos casos, es posible que los clústeres antiguos muestren nodos trabajadores duplicados con el estado **NotReady** después de una actualización. Para eliminar los duplicados, consulte [resolución de problemas](cs_troubleshoot.html#cs_duplicate_nodes).
+  * En algunos casos, es posible que los clústeres antiguos muestren nodos trabajadores duplicados con el estado **NotReady** después de una actualización. Para eliminar los duplicados, consulte [resolución de problemas](cs_troubleshoot_clusters.html#cs_duplicate_nodes).
 
 Pasos siguientes:
   - Repita el proceso de actualización con otros clústeres.
   - Informe a los desarrolladores que trabajan en el clúster para que actualicen su CLI de `kubectl` a la versión del maestro de Kubernetes.
-  - Si el panel de control de Kubernetes no muestra los gráficos de utilización, [suprima el pod `kube-dashboard`](cs_troubleshoot.html#cs_dashboard_graphs).
+  - Si el panel de control de Kubernetes no muestra los gráficos de utilización, [suprima el pod `kube-dashboard`](cs_troubleshoot_health.html#cs_dashboard_graphs). 
 
 
 <br />
@@ -192,21 +196,21 @@ Puede actualizar los tipos de máquina que se utilizan en los nodos trabajadores
     ```
     {: pre}
 
-3. Añada un nodo trabajador utilizando el mandato [bx cs worker-add](cs_cli_reference.html#cs_worker_add) y especifique uno de los tipos de máquina enumerados en la salida del mandato anterior.
+3. Añada nodos de trabajador utilizando el mandato [bx cs worker-add](cs_cli_reference.html#cs_worker_add). Especifique un tipo de máquina.
 
     ```
-    bx cs worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_vlan> --public-vlan <public_vlan>
+    bx cs worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
     ```
     {: pre}
 
-4. Verifique que se añade el nodo trabajador.
+4. Verifique que se añaden los nodos trabajadores. 
 
     ```
     bx cs workers <cluster_name>
     ```
     {: pre}
 
-5. Cuando el nodo trabajador añadido está en estado `Normal`, puede eliminar el nodo trabajador obsoleto. **Nota**: Si va a eliminar un tipo de máquina que se factura mensualmente (como las nativas), se le facturará todo el mes.
+5. Cuando los nodos trabajadores añadidos están en estado `Normal`, puede eliminar los nodos trabajadores obsoletos. **Nota**: Si va a eliminar un tipo de máquina que se factura mensualmente (como las nativas), se le facturará todo el mes.
 
     ```
     bx cs worker-rm <cluster_name> <worker_node>
@@ -214,5 +218,6 @@ Puede actualizar los tipos de máquina que se utilizan en los nodos trabajadores
     {: pre}
 
 6. Repita estos pasos para actualizar otros nodos trabajadores a diferentes tipos de máquina.
+
 
 

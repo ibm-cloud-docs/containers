@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2018-03-16"
 Um Ihrer Lastausgleichsfunktion für Ingress-Anwendungen (ALB) Funktionalität hinzuzufügen, können Sie Annotationen als Metadaten in einer Ingress-Ressource angeben.
 {: shortdesc}
 
-Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwendung finden Sie in [Öffentlichen Zugriff auf eine App durch Verwenden von Ingress konfigurieren](cs_ingress.html#configure_alb).
+Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwendung finden Sie unter [Netzverkehr mithilfe von Ingress verwalten](cs_ingress.html#planning). 
 
 <table>
 <col width="20%">
@@ -42,22 +42,17 @@ Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwe
  <tr>
  <td><a href="#location-modifier">Positionsmodifikator</a></td>
  <td><code>location-modifier</code></td>
- <td>Die Art und Weise ändern, in der die ALB die Anforderungs-URI mit dem App-Pfad abgleicht. </td>
+ <td>Die Art und Weise ändern, in der die ALB die Anforderungs-URI mit dem App-Pfad abgleicht.</td>
  </tr>
  <tr>
  <td><a href="#alb-id">Privates ALB-Routing</a></td>
  <td><code>ALB-ID</code></td>
- <td>Eingehende Anforderungen an Ihre Apps mit einer privaten ALB weiterleiten. </td>
+ <td>Eingehende Anforderungen an Ihre Apps mit einer privaten ALB weiterleiten.</td>
  </tr>
  <tr>
  <td><a href="#rewrite-path">Pfade neu schreiben</a></td>
  <td><code>rewrite-path</code></td>
  <td>Eingehenden Netzverkehr an einen anderen Pfad weiterleiten, den Ihre Back-End-App überwacht.</td>
- </tr>
- <tr>
- <td><a href="#sticky-cookie-services">Sitzungsaffinität mit Cookies</a></td>
- <td><code>sticky-cookie-services</code></td>
- <td>Eingehenden Netzverkehr mithilfe eines permanenten Cookies immer an denselben Upstream-Server weiterleiten.</td>
  </tr>
  <tr>
  <td><a href="#tcp-ports">TCP-Ports</a></td>
@@ -66,6 +61,7 @@ Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwe
  </tr>
  </tbody></table>
 
+<br>
 
 <table>
 <col width="20%">
@@ -85,19 +81,31 @@ Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwe
   <tr>
   <td><a href="#keepalive-requests">Keepalive-Anforderungen</a></td>
   <td><code>keepalive-requests</code></td>
-  <td>Maximale Anzahl von Anforderungen konfigurieren, die über eine Keepalive-Verbindung bedient werden können.</td>
+  <td>Maximale Anzahl von Anforderungen festlegen, die über eine Keepalive-Verbindung bedient werden können. </td>
   </tr>
   <tr>
   <td><a href="#keepalive-timeout">Keepalive-Zeitlimit</a></td>
   <td><code>keepalive-timeout</code></td>
-  <td>Zeitspanne konfigurieren, die eine Keepalive-Verbindung auf dem Server geöffnet bleibt.</td>
+  <td>Maximale Zeitspanne festlegen, die eine Keepalive-Verbindung auf dem Server geöffnet bleibt. </td>
+  </tr>
+  <tr>
+  <td><a href="#proxy-next-upstream-config">Proxy zu nächstem Upstream</a></td>
+  <td><code>proxy-next-upstream-config</code></td>
+  <td>Festlegen, wann die ALB eine Anforderung an den nächsten Upstream-Server übergeben kann. </td>
+  </tr>
+  <tr>
+  <td><a href="#sticky-cookie-services">Sitzungsaffinität mit Cookies</a></td>
+  <td><code>sticky-cookie-services</code></td>
+  <td>Eingehenden Netzverkehr mithilfe eines permanenten Cookies immer an denselben Upstream-Server weiterleiten.</td>
   </tr>
   <tr>
   <td><a href="#upstream-keepalive">Keepalive-Verbindungen für Upstream-Server</a></td>
   <td><code>upstream-keepalive</code></td>
-  <td>Maximale Anzahl der inaktiven Keepalive-Verbindungen für einen Upstream-Server konfigurieren.</td>
+  <td>Maximale Anzahl der inaktiven Keepalive-Verbindungen für einen Upstream-Server festlegen. </td>
   </tr>
   </tbody></table>
+
+<br>
 
   <table>
   <col width="20%">
@@ -141,7 +149,26 @@ Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwe
   </tr>
   </tbody></table>
 
+<br>
 
+<table>
+<col width="20%">
+<col width="20%">
+<col width="60%">
+<thead>
+<th>Istio-Annotationen</th>
+<th>Name</th>
+<th>Beschreibung</th>
+</thead>
+<tbody>
+<tr>
+<td><a href="#istio-services">Istio-Services</a></td>
+<td><code>istio-services</code></td>
+<td>Datenverkehr an Istio-verwaltete Services weiterleiten. </td>
+</tr>
+</tbody></table>
+
+<br>
 
 <table>
 <col width="20%">
@@ -175,6 +202,7 @@ Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwe
  </tr>
  </tbody></table>
 
+<br>
 
 <table>
 <col width="20%">
@@ -199,14 +227,16 @@ Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwe
 <tr>
 <td><a href="#client-max-body-size">Größe des Hauptteils der Clientanforderung</a></td>
 <td><code>client-max-body-size</code></td>
-<td>Die maximale Größe des Hauptteils anpassen, den der Client als Teil der Anforderung senden kann. </td>
+<td>Die maximale Größe des Hauptteils anpassen, den der Client als Teil der Anforderung senden kann.</td>
 </tr>
 <tr>
 <td><a href="#large-client-header-buffers">Puffer für große Client-Header</a></td>
 <td><code>large-client-header-buffers</code></td>
-<td>Die maximale Anzahl und Größe der Puffer festlegen, die große Clientanforderungsheader lesen. </td>
+<td>Die maximale Anzahl und Größe der Puffer festlegen, die große Clientanforderungsheader lesen.</td>
 </tr>
 </tbody></table>
+
+<br>
 
 <table>
 <col width="20%">
@@ -229,6 +259,8 @@ Allgemeine Informationen zu Ingress-Services und eine Einführung in deren Verwe
 <td>Verarbeitungsrate für Anforderungen und Anzahl der Verbindungen anhand eines definierten Schlüssels für bestimmte Services begrenzen.</td>
 </tr>
 </tbody></table>
+
+<br>
 
 
 
@@ -298,19 +330,43 @@ spec:
 ### Positionsmodifikator (location-modifier)
 {: #location-modifier}
 
-Die Art und Weise ändern, in der die ALB die Anforderungs-URI mit dem App-Pfad abgleicht. {:shortdesc}
+Die Art und Weise ändern, in der die ALB die Anforderungs-URI mit dem App-Pfad abgleicht.
+{:shortdesc}
 
 <dl>
 <dt>Beschreibung</dt>
-<dd>Standardmäßig verarbeiten ALBs die Pfade, auf denen Apps empfangsbereit sind, als Präfixe. Wenn eine ALB eine Anforderung an eine App empfängt, prüft die ALB die Ingress-Ressource auf einen Pfad (als Präfix), der mit dem Anfang der Anforderungs-URI übereinstimmt. Wenn eine Übereinstimmung gefunden wurde, wird die Anforderung an die IP-Adresse des Pods weitergeleitet, in dem die App bereitgestellt ist. <br><br>Die Annotation `location-modifier` ändert die Art und Weise, in der die ALB nach Übereinstimmungen sucht, indem die Positionsblockkonfiguration geändert wird. Der Positionsblock bestimmt, wie Anforderungen für den App-Pfad gehandhabt werden. **Hinweis**: Um reguläre Ausdruckspfade (regex) zu bearbeiten, ist diese Anmerkung erforderlich. </dd>
+<dd>Standardmäßig verarbeiten ALBs die Pfade, auf denen Apps empfangsbereit sind, als Präfixe. Wenn eine ALB eine Anforderung an eine App empfängt, prüft die ALB die Ingress-Ressource auf einen Pfad (als Präfix), der mit dem Anfang der Anforderungs-URI übereinstimmt. Wenn eine Übereinstimmung gefunden wurde, wird die Anforderung an die IP-Adresse des Pods weitergeleitet, in dem die App bereitgestellt ist.<br><br>Die Annotation `location-modifier` ändert die Art und Weise, in der die ALB nach Übereinstimmungen sucht, indem die Positionsblockkonfiguration geändert wird. Der Positionsblock bestimmt, wie Anforderungen für den App-Pfad gehandhabt werden.<br><br>**Hinweis**: Um reguläre Ausdruckspfade (regex) zu bearbeiten, ist diese Anmerkung erforderlich.</dd>
+
 <dt>Unterstützte Modifikatoren</dt>
 <dd>
-<ul>
-<li><code>=</code> : Der Modifikator 'Gleichheitszeichen' bewirkt, dass die ALB nur exakte Übereinstimmungen auswählt. Wenn eine exakte Übereinstimmung gefunden wird, wird die Suche gestoppt, und der übereinstimmende Pfad wird ausgewählt.</li>
-<li><code>~</code> : Der Modifikator 'Tilde' bewirkt, dass die ALB während der Suche nach Übereinstimmungen Pfade als regex-Pfade betrachtet, bei denen die Groß-/Kleinschreibung beachtet werden muss. </li>
-<li><code>~*</code> : Der Modifikator 'Tilde' gefolgt von einem Modifikator 'Stern' bewirkt, dass die ALB während der Suche nach Übereinstimmungen Pfade als regex-Pfade betrachtet, bei denen die Groß-/Kleinschreibung nicht beachtet werden muss.</li>
-<li><code>^~</code> : Der Modifikator 'Zirkumflex' gefolgt von einem Modifikator 'Tilde' bewirkt, dass die ALB keinen regex-Pfad sondern die beste nicht-regex-Übereinstimmung auswählt. </li>
-</ul>
+
+<table>
+ <col width="10%">
+ <col width="90%">
+ <thead>
+ <th>Modifikator</th>
+ <th>Beschreibung</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>=</code></td>
+ <td>Der Modifikator 'Gleichheitszeichen' bewirkt, dass die ALB nur exakte Übereinstimmungen auswählt. Wenn eine exakte Übereinstimmung gefunden wird, wird die Suche gestoppt, und der übereinstimmende Pfad wird ausgewählt.</td>
+ </tr>
+ <tr>
+ <td><code>~</code></td>
+ <td>Der Modifikator 'Tilde' bewirkt, dass die ALB während der Suche nach Übereinstimmungen Pfade als regex-Pfade betrachtet, bei denen die Groß-/Kleinschreibung beachtet werden muss. </td>
+ </tr>
+ <tr>
+ <td><code>~\*</code></td>
+ <td>Der Modifikator 'Tilde' gefolgt von einem Modifikator 'Stern' bewirkt, dass die ALB während der Suche nach Übereinstimmungen Pfade als regex-Pfade betrachtet, bei denen die Groß-/Kleinschreibung nicht beachtet werden muss.</td>
+ </tr>
+ <tr>
+ <td><code>^~</code></td>
+ <td>Der Modifikator 'Zirkumflex' gefolgt von einem Modifikator 'Tilde' bewirkt, dass die ALB keinen regex-Pfad, sondern die beste nicht-regex-Übereinstimmung auswählt. </td>
+ </tr>
+ </tbody>
+</table>
+
 </dd>
 
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
@@ -322,7 +378,7 @@ kind: Ingress
 metadata:
 name: myingress
 annotations:
-  ingress.bluemix.net/location-modifier: "modifier='&lt;standortmodifikator&gt;' serviceName=&lt;mein_service&gt;;modifier='&lt;standortmodifikator&gt;' serviceName=&lt;mein_service2&gt;"
+  ingress.bluemix.net/location-modifier: "modifier='&lt;standortmodifikator&gt;' serviceName=&lt;mein_service1&gt;;modifier='&lt;standortmodifikator&gt;' serviceName=&lt;mein_service2&gt;"
 spec:
   tls:
   - hosts:
@@ -344,7 +400,7 @@ spec:
   <tbody>
   <tr>
   <td><code>modifier</code></td>
-  <td>Ersetzen Sie <code>&lt;<em>standortmodifikator</em>&gt;</code> durch den Positionsmodifikator, den Sie für den Pfad verwenden möchten. Unterstützte Modifikatoren sind <code>'='</code>,<code>'~'</code>,<code>'~*'</code> und <code>'^~'</code>. Sie müssen die Modifikatoren in einfache Anführungszeichen setzen. </td>
+  <td>Ersetzen Sie <code>&lt;<em>standortmodifikator</em>&gt;</code> durch den Positionsmodifikator, den Sie für den Pfad verwenden möchten. Unterstützte Modifikatoren sind <code>'='</code>, <code>'~'</code>, <code>'~\*'</code> und <code>'^~'</code>. Sie müssen die Modifikatoren in einfache Anführungszeichen setzen.</td>
   </tr>
   <tr>
   <td><code>serviceName</code></td>
@@ -360,12 +416,13 @@ spec:
 ### Private ALB-Weiterleitung (ALB-ID)
 {: #alb-id}
 
-Eingehende Anforderungen an Ihre Apps mit einer privaten ALB weiterleiten. {:shortdesc}
+Eingehende Anforderungen an Ihre Apps mit einer privaten ALB weiterleiten.
+{:shortdesc}
 
 <dl>
 <dt>Beschreibung</dt>
 <dd>
-Wählen Sie statt der öffentlichen eine private Lastausgleichsfunktion für Anwendungen (ALB) für die Weiterleitung von eingehenden Anforderungen aus.</dd>
+Wählen Sie statt der öffentlichen eine private Lastausgleichsfunktion für Anwendungen (ALB) für die Weiterleitung von eingehenden Anforderungen aus. </dd>
 
 
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
@@ -399,7 +456,7 @@ tls:
 <tbody>
 <tr>
 <td><code>&lt;private_ALB-ID&gt;</code></td>
-<td>Die ID für Ihre private ALB. Führen Sie <code>bx cs albs --cluster <mein_cluster></code> aus, um die private ALB ID zu suchen.
+<td>Die ID für Ihre private ALB. Führen Sie den Befehl <code>bx cs albs --cluster &lt;mein_cluster&gt;</code> aus, um nach der privaten ALB-ID zu suchen.
 </td>
 </tr>
 </tbody></table>
@@ -407,7 +464,6 @@ tls:
 </dl>
 
 <br />
-
 
 
 ### Pfade neu schreiben (rewrite-path)
@@ -461,83 +517,6 @@ spec:
 </dd></dl>
 
 <br />
-
-
-### Sitzungsaffinität mit Cookies (sticky-cookie-services)
-{: #sticky-cookie-services}
-
-Verwenden Sie die permanente Cookie-Annotation, um Ihrer Lastausgleichsfunktion für Anwendungen (ALB) Sitzungsaffinität hinzuzufügen und eingehenden Netzverkehr immer an denselben Upstream-Server weiterzuleiten.
-{:shortdesc}
-
-<dl>
-<dt>Beschreibung</dt>
-<dd>Um eine hohe Verfügbarkeit zu erreichen, müssen Sie bei einigen Appkonfigurationen unter Umständen mehrere Upstream-Server bereitstellen, die eingehende Clientanforderungen verarbeiten. Wenn ein Client eine Verbindung mit Ihrer Back-End-App herstellt, kann ein Client für die Dauer einer Sitzung bzw. für die Zeit, die für den Abschluss einer Task erforderlich ist, von demselben Upstream-Server bedient werden. Sie können Ihre Lastausgleichsfunktion für Anwendungen (ALB) so konfigurieren, dass Sitzungsaffinität sichergestellt ist, indem Sie eingehenden Netzverkehr immer an denselben Upstream-Server weiterleiten.
-
-</br></br>
-Jeder Client, der eine Verbindung mit Ihrer Back-End-App herstellt, wird durch die Lastausgleichsfunktion für Anwendungen (ALB) einem der verfügbaren Upstream-Server zugeordnet. Die Lastausgleichsfunktion für Anwendungen (ALB) erstellt ein Sitzungscookie, das in der App des Clients gespeichert wird und das in die Headerinformationen jeder Anforderung zwischen der ALB und dem Client eingeschlossen wird. Die Informationen im Cookie stellen sicher, dass alle Anforderungen während der gesamten Sitzung von demselben Upstream-Server verarbeitet werden.
-
-</br></br>
-Wenn Sie mehrere Services einschließen, verwenden Sie ein Semikolon (;) zum Trennen der Services.</dd>
-<dt>YAML-Beispiel einer Ingress-Ressource</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/sticky-cookie-services: "serviceName=&lt;mein_service1&gt; name=&lt;cookiename1&gt; expires=&lt;ablaufzeit1&gt; path=&lt;cookiepfad1&gt; hash=&lt;hashalgorithmus1&gt;;serviceName=&lt;mein_service2&gt; name=&lt;cookiename2&gt; expires=&lt;ablaufzeit2&gt; path=&lt;cookiepfad2&gt; hash=&lt;hashalgorithmus2&gt;"
-spec:
-  tls:
-  - hosts:
-    - meine_domäne
-    secretName: mein_geheimer_tls-schlüssel
-  rules:
-  - host: meine_domäne
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: &lt;mein_service1&gt;
-          servicePort: 8080
-      - path: /myapp
-        backend:
-          serviceName: &lt;mein_service2&gt;
-          servicePort: 80</code></pre>
-
-  <table>
-  <caption>Erklärung der Komponenten der YAML-Datei</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>serviceName</code></td>
-  <td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben.</td>
-  </tr>
-  <tr>
-  <td><code>name</code></td>
-  <td>Ersetzen Sie <code>&lt;<em>cookiename</em>&gt;</code> durch den Namen eines permanenten Cookies, das während einer Sitzung erstellt wird.</td>
-  </tr>
-  <tr>
-  <td><code>expires</code></td>
-  <td>Ersetzen Sie <code>&lt;<em>ablaufzeit</em>&gt;</code> durch den Zeitraum in Sekunden (s), Minuten (m) oder Stunden (h), nach dem das permanente Cookie abläuft. Diese Zeit ist unabhängig von der Benutzeraktivität. Nachdem das Cookie abgelaufen ist, wird es durch den Web-Browser des Clients gelöscht und nicht mehr an die Lastausgleichsfunktion für Anwendungen (ALB) gesendet. Um beispielsweise eine Ablaufzeit von einer Sekunde, einer Minute oder einer Stunde festzulegen, geben Sie <code>1s</code>, <code>1m</code> oder <code>1h</code> ein.</td>
-  </tr>
-  <tr>
-  <td><code>path</code></td>
-  <td>Ersetzen Sie <code>&lt;<em>cookiepfad</em>&gt;</code> durch den Pfad, der an die Ingress-Unterdomäne angehängt werden soll und der angibt, für welche Domänen und Unterdomänen das Cookie an die Lastausgleichsfunktion für Anwendungen (ALB) gesendet wird. Wenn Ihre Ingress-Domäne beispielsweise <code>www.myingress.com</code> ist und Sie das Cookie in jeder Clientanforderung senden möchten, müssen Sie <code>path=/</code> festlegen. Wenn Sie das Cookie nur für <code>www.myingress.com/myapp</code> und alle zugehörigen Unterdomänen senden möchten, müssen Sie <code>path=/myapp</code> festlegen.</td>
-  </tr>
-  <tr>
-  <td><code>hash</code></td>
-  <td>Ersetzen Sie <code>&lt;<em>hashalgorithmus</em>&gt;</code> durch den Hashalgorithmus, der die Informationen im Cookie schützt. Nur <code>sha1</code> wird unterstützt. SHA1 erstellt eine Hashsumme auf der Grundlage der Informationen im Cookie und hängt die Hashsumme an das Cookie an. Der Server kann die Informationen im Cookie entschlüsseln und die Datenintegrität bestätigen.</td>
-  </tr>
-  </tbody></table>
-
- </dd></dl>
-
-<br />
-
 
 
 ### TCP-Ports für Lastausgleichsfunktionen für Anwendungen (tcp-ports)
@@ -606,11 +585,11 @@ spec:
 Die Ausgabe in der Befehlszeilenschnittstelle (CLI) ähnelt der folgenden:
 <pre class="screen">
 <code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.10.10.149   169.60.16.246   80:30776/TCP,443:30412/TCP   8d</code></pre></li>
-<li>Öffnen Sie die ALB-Konfigurationsübersicht.
+public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+<li>Öffnen Sie die ALB-Konfigurationszuordnung.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>Fügen Sie die TCP-Ports zur Konfigurationsübersicht hinzu. Ersetzen Sie &lt;port&gt; durch die TCP-Ports, die Sie öffnen möchten.
+<li>Fügen Sie die TCP-Ports zur Konfigurationszuordnung hinzu. Ersetzen Sie <code>&lt;port&gt;</code> durch die TCP-Ports, die Sie öffnen möchten.
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -629,11 +608,12 @@ metadata:
 Die Ausgabe in der Befehlszeilenschnittstelle (CLI) ähnelt der folgenden:
 <pre class="screen">
 <code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
 <li>Konfigurieren Sie Ingress für den Zugriff auf Ihre App über einen vom Standard abweichenden TCP-Port. Verwenden Sie die YAML-Beispieldatei in dieser Referenz. </li>
 <li>Aktualisieren Sie Ihre ALB-Konfiguration.
 <pre class="pre">
-<code>kubectl apply -f &lt;yaml-datei&gt;</code></pre>
+<code>        kubectl apply -f myingress.yaml
+        </code></pre>
 </li>
 <li>Öffnen Sie Ihren bevorzugten Web-Browser, um auf Ihre App zuzugreifen. Beispiel: <code>https://&lt;ibm domäne&gt;:&lt;ingress-port&gt;/</code></li></ol></dd></dl>
 
@@ -646,7 +626,7 @@ public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,
 ### Angepasste Verbindungs- und Lesezeitlimits (proxy-connect-timeout, proxy-read-timeout)
 {: #proxy-connect-timeout}
 
-Legen Sie ein angepasstes Verbindungszeitlimit und ein Lesezeitlimit für die ALB fest. Legen Sie den Zeitraum fest, über den die Lastausgleichsfunktion für Anwendungen auf das Herstellen einer Verbindung mit bzw. auf das Lesen von Daten aus der Back-End-App warten soll, bis die Back-End-App als nicht verfügbar betrachtet wird.
+Legen Sie den Zeitraum fest, über den die Lastausgleichsfunktion für Anwendungen auf das Herstellen einer Verbindung mit bzw. auf das Lesen von Daten aus der Back-End-App warten soll, bis die Back-End-App als nicht verfügbar betrachtet wird.
 {:shortdesc}
 
 <dl>
@@ -710,8 +690,7 @@ spec:
 ### Keepalive-Anforderungen (keepalive-requests)
 {: #keepalive-requests}
 
-Konfiguration der maximalen Anzahl von Anforderungen, die über eine Keepalive-Verbindung bedient werden können.
-{:shortdesc}
+Maximale Anzahl von Anforderungen festlegen, die über eine Keepalive-Verbindung bedient werden können. {:shortdesc}
 
 <dl>
 <dt>Beschreibung</dt>
@@ -769,14 +748,12 @@ tls:
 ### Keepalive-Zeitlimit (keepalive-timeout)
 {: #keepalive-timeout}
 
-Konfiguration der Zeitspanne, die eine Keepalive-Verbindung serverseitig geöffnet bleibt.
-{:shortdesc}
+Maximale Zeitspanne festlegen, die eine Keepalive-Verbindung serverseitig geöffnet bleibt. {:shortdesc}
 
 <dl>
 <dt>Beschreibung</dt>
 <dd>
-Legen Sie die Zeitspanne fest, die eine Keepalive-Verbindung auf dem Server geöffnet bleibt.
-</dd>
+Maximale Zeitspanne festlegen, die eine Keepalive-Verbindung auf dem Server geöffnet bleibt. </dd>
 
 
 <dt>YAML-Beispiel einer Ingress-Ressource</dt>
@@ -824,17 +801,175 @@ spec:
 <br />
 
 
+### Proxy zu nächstem Upstream (proxy-next-upstream-config)
+{: #proxy-next-upstream-config}
 
-### Keepalive-Verbindungen für Upstream-Server (upstream-keepalive)
-{: #upstream-keepalive}
-
-Konfiguration der maximalen Anzahl der inaktiven Keepalive-Verbindungen für einen Upstream-Server.
-{:shortdesc}
+Festlegen, wann die ALB eine Anforderung an den nächsten Upstream-Server übergeben kann. {:shortdesc}
 
 <dl>
 <dt>Beschreibung</dt>
 <dd>
-Legen Sie die maximale Anzahl inaktiver Keepalive-Verbindungen zum Upstream-Server für einen angegegebenen Service fest. Der Upstream-Server verfügt standardmäßig über 64 inaktive Keepalive-Verbindungen.
+Die Ingress-Lastausgleichsfunktion für Anwendungen (Ingress-ALB) fungiert als Proxy zwischen der Client-App und Ihrer App. Für einige Appkonfigurationen müssen Sie unter Umständen mehrere Upstream-Server bereitstellen, die eingehende Clientanforderungen von der ALB verarbeiten. Manchmal kann der Proxy-Server, den die ALB verwendet, keine Verbindung mit einem Upstream-Server herstellen, den die App verwendet. Die ALB kann dann versuchen, eine Verbindung mit dem nächsten Upstream-Server herzustellen, um die Anforderung stattdessen an ihn zu übergeben. Sie können die Annotation `proxy-next-upstream-config` verwenden, um festzulegen, in welchen Fällen, wie lange und wie oft die ALB versuchen kann, eine Anforderung an den nächsten Upstream-Server zu übergeben. <br><br><strong>Hinweis</strong>: Wenn Sie `proxy-next-upstream-config` verwenden, ist immer ein Zeitlimit konfiguriert. Fügen Sie deshalb `timeout=true` nicht zu dieser Annotation hinzu.
+</dd>
+<dt>YAML-Beispiel einer Ingress-Ressource</dt>
+<dd>
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/proxy-next-upstream-config: "serviceName=&lt;mein_service1&gt; retries=&lt;versuche&gt; timeout=&lt;zeit&gt; error=true http_502=true; serviceName=&lt;mein_service2&gt; http_403=true non_idempotent=true"
+spec:
+  tls:
+  - hosts:
+    - meine_domäne
+    secretName: mein_geheimer_schlüssel
+  rules:
+  - host: meine_domäne
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: mein_service1
+          servicePort: 80
+</code></pre>
+
+<table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben.</td>
+</tr>
+<tr>
+<td><code>retries</code></td>
+<td>Ersetzen Sie <code>&lt;<em>versuche</em>&gt;</code> durch die maximale Anzahl von Versuchen, die der ALB zur Verfügung stehen, um eine Anforderung an den nächsten Upstream-Server zu übergeben. Diese Anzahl beinhaltet die ursprüngliche Anforderung. Um diese Einschränkung zu inaktivieren, geben Sie <code>0</code> an. Wenn Sie keinen Wert angeben, wird der Standardwert <code>0</code> verwendet.
+</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Ersetzen Sie <code>&lt;<em>zeit</em>&gt;</code> durch die Höchstdauer (in Sekunden), die die ALB versucht, eine Anforderung an den nächsten Upstream-Server zu übergeben. Geben Sie beispielsweise <code>30s</code> ein, um eine Dauer von 30 Sekunden festzulegen. Um diese Einschränkung zu inaktivieren, geben Sie <code>0</code> an. Wenn Sie keinen Wert angeben, wird der Standardwert <code>0</code> verwendet.
+</td>
+</tr>
+<tr>
+<td><code>error</code></td>
+<td>Hat dieser Parameter den Wert <code>true</code>, übergibt die ALB eine Anforderung an den nächsten Upstream-Server, wenn ein Fehler auftritt, während gleichzeitig eine Verbindung mit dem ersten Upstream-Server eingerichtet, eine Anforderung an ihn übergeben oder der Antwortheader gelesen wird.
+</td>
+</tr>
+<tr>
+<td><code>invalid_header</code></td>
+<td>Hat dieser Parameter <code>true</code>, übergibt die ALB eine Anforderung an den nächsten Upstream-Server, wenn der erste Upstream-Server eine leere oder ungültige Antwort zurückgibt.
+</td>
+</tr>
+<tr>
+<td><code>http_502</code></td>
+<td>Hat dieser Parameter den Wert <code>true</code>, übergibt die ALB eine Anforderung an den nächsten Upstream-Server, wenn der erste Upstream-Server eine Antwort mit dem Code 502 zurückgibt. Sie können die folgenden HTTP-Antwortcodes bestimmen: <code>500</code>, <code>502</code>, <code>503</code>, <code>504</code>, <code>403</code>, <code>404</code>, <code>429</code>.
+</td>
+</tr>
+<tr>
+<td><code>non_idempotent</code></td>
+<td>Hat dieser Parameter den Wert <code>true</code>, kann die ALB Anforderungen mit einer 'non-idempotent'-Methode an den nächsten Upstream-Server übergeben. Standardmäßig übergibt die ALB diese Anforderungen nicht an den nächsten Upstream-Server.
+</td>
+</tr>
+<tr>
+<td><code>off</code></td>
+<td>Um zu verhindern, dass die ALB Anforderungen an den nächsten Upstream-Server übergibt, setzen Sie diesen Parameter auf <code>true</code>.
+</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
+
+<br />
+
+
+### Sitzungsaffinität mit Cookies (sticky-cookie-services)
+{: #sticky-cookie-services}
+
+Verwenden Sie die permanente Cookie-Annotation, um Ihrer Lastausgleichsfunktion für Anwendungen (ALB) Sitzungsaffinität hinzuzufügen und eingehenden Netzverkehr immer an denselben Upstream-Server weiterzuleiten.
+{:shortdesc}
+
+<dl>
+<dt>Beschreibung</dt>
+<dd>Um eine hohe Verfügbarkeit zu erreichen, müssen Sie bei einigen Appkonfigurationen unter Umständen mehrere Upstream-Server bereitstellen, die eingehende Clientanforderungen verarbeiten. Wenn ein Client eine Verbindung mit Ihrer Back-End-App herstellt, kann ein Client für die Dauer einer Sitzung bzw. für die Zeit, die für den Abschluss einer Task erforderlich ist, von demselben Upstream-Server bedient werden. Sie können Ihre Lastausgleichsfunktion für Anwendungen (ALB) so konfigurieren, dass Sitzungsaffinität sichergestellt ist, indem Sie eingehenden Netzverkehr immer an denselben Upstream-Server weiterleiten.
+
+</br></br>
+Jeder Client, der eine Verbindung mit Ihrer Back-End-App herstellt, wird durch die Lastausgleichsfunktion für Anwendungen (ALB) einem der verfügbaren Upstream-Server zugewiesen. Die Lastausgleichsfunktion für Anwendungen (ALB) erstellt ein Sitzungscookie, das in der App des Clients gespeichert wird und das in die Headerinformationen jeder Anforderung zwischen der ALB und dem Client eingeschlossen wird. Die Informationen im Cookie stellen sicher, dass alle Anforderungen während der gesamten Sitzung von demselben Upstream-Server verarbeitet werden.
+
+</br></br>
+Wenn Sie mehrere Services einschließen, verwenden Sie ein Semikolon (;) zum Trennen der Services.</dd>
+<dt>YAML-Beispiel einer Ingress-Ressource</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/sticky-cookie-services: "serviceName=&lt;mein_service1&gt; name=&lt;cookiename1&gt; expires=&lt;ablaufzeit1&gt; path=&lt;cookiepfad1&gt; hash=&lt;hashalgorithmus1&gt;;serviceName=&lt;mein_service2&gt; name=&lt;cookiename2&gt; expires=&lt;ablaufzeit2&gt; path=&lt;cookiepfad2&gt; hash=&lt;hashalgorithmus2&gt;"
+spec:
+  tls:
+  - hosts:
+    - meine_domäne
+    secretName: mein_geheimer_tls-schlüssel
+  rules:
+  - host: meine_domäne
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: &lt;mein_service1&gt;
+          servicePort: 8080
+      - path: /myapp
+        backend:
+          serviceName: &lt;mein_service2&gt;
+          servicePort: 80</code></pre>
+
+  <table>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>serviceName</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben.</td>
+  </tr>
+  <tr>
+  <td><code>name</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>cookiename</em>&gt;</code> durch den Namen eines permanenten Cookies, das während einer Sitzung erstellt wird.</td>
+  </tr>
+  <tr>
+  <td><code>expires</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>ablaufzeit</em>&gt;</code> durch den Zeitraum in Sekunden (s), Minuten (m) oder Stunden (h), nach dem das permanente Cookie abläuft. Diese Zeit ist unabhängig von der Benutzeraktivität. Nachdem das Cookie abgelaufen ist, wird es durch den Web-Browser des Clients gelöscht und nicht mehr an die Lastausgleichsfunktion für Anwendungen (ALB) gesendet. Um beispielsweise eine Ablaufzeit von einer Sekunde, einer Minute oder einer Stunde festzulegen, geben Sie <code>1s</code>, <code>1m</code> oder <code>1h</code> ein.</td>
+  </tr>
+  <tr>
+  <td><code>path</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>cookiepfad</em>&gt;</code> durch den Pfad, der an die Ingress-Unterdomäne angehängt werden soll und der angibt, für welche Domänen und Unterdomänen das Cookie an die Lastausgleichsfunktion für Anwendungen (ALB) gesendet wird. Wenn Ihre Ingress-Domäne beispielsweise <code>www.myingress.com</code> ist und Sie das Cookie in jeder Clientanforderung senden möchten, müssen Sie <code>path=/</code> festlegen. Wenn Sie das Cookie nur für <code>www.myingress.com/myapp</code> und alle zugehörigen Unterdomänen senden möchten, müssen Sie <code>path=/myapp</code> festlegen.</td>
+  </tr>
+  <tr>
+  <td><code>hash</code></td>
+  <td>Ersetzen Sie <code>&lt;<em>hashalgorithmus</em>&gt;</code> durch den Hashalgorithmus, der die Informationen im Cookie schützt. Nur <code>sha1</code> wird unterstützt. SHA1 erstellt eine Hashsumme auf der Grundlage der Informationen im Cookie und hängt die Hashsumme an das Cookie an. Der Server kann die Informationen im Cookie entschlüsseln und die Datenintegrität bestätigen.</td>
+  </tr>
+  </tbody></table>
+
+ </dd></dl>
+
+<br />
+
+
+### Keepalive-Verbindungen für Upstream-Server (upstream-keepalive)
+{: #upstream-keepalive}
+
+Maximale Anzahl der inaktiven Keepalive-Verbindungen für einen Upstream-Server festlegen. {:shortdesc}
+
+<dl>
+<dt>Beschreibung</dt>
+<dd>
+Legen Sie die maximale Anzahl inaktiver Keepalive-Verbindungen zum Upstream-Server für einen angegebenen Service fest. Der Upstream-Server verfügt standardmäßig über 64 inaktive Keepalive-Verbindungen.
 </dd>
 
 
@@ -888,7 +1023,8 @@ Legen Sie die maximale Anzahl inaktiver Keepalive-Verbindungen zum Upstream-Serv
 ### {{site.data.keyword.appid_short_notm}} Authentifizierung (appid-auth)
 {: #appid-auth}
 
-  Verwenden Sie {{site.data.keyword.appid_full_notm}} zur Authentifizierung bei Ihrer Anwendung.{:shortdesc}
+  Verwenden Sie {{site.data.keyword.appid_full_notm}} zur Authentifizierung bei Ihrer Anwendung.
+  {:shortdesc}
 
   <dl>
   <dt>Beschreibung</dt>
@@ -898,8 +1034,9 @@ Legen Sie die maximale Anzahl inaktiver Keepalive-Verbindungen zum Upstream-Serv
   <p>Wenn Sie den Anforderungstyp auf <code>web</code> setzen, wird eine Webanforderung, die ein {{site.data.keyword.appid_short_notm}}-Zugriffstoken enthält, geprüft. Wenn die Tokenprüfung fehlschlägt, wird die Webanforderung zurückgewiesen. Wenn die Anforderung kein Zugriffstoken enthält, wird die Anforderung an die {{site.data.keyword.appid_short_notm}}-Anmeldeseite umgeleitet. **Hinweis**: Damit die {{site.data.keyword.appid_short_notm}}-Webauthentifizierung funktioniert, müssen Cookies im Browser des Benutzers aktiviert sein.</p>
 
   <p>Wenn Sie den Anforderungstyp auf <code>api</code> setzen, wird eine API-Anforderung, die ein {{site.data.keyword.appid_short_notm}}-Zugriffstoken enthält, geprüft. Wenn die Anforderung kein Zugriffstoken enthält, wird die Fehlernachricht <code>401: Unauthorized</code> an den Benutzer zurückgegeben.</p>
-  </dd>
 
+  <p>**Hinweis**: Aus Sicherheitsgründen unterstützt die {{site.data.keyword.appid_short_notm}}-Authentifizierung nur Back-Ends mit aktiviertem TLS/SSL. </p>
+  </dd>
    <dt>YAML-Beispiel einer Ingress-Ressource</dt>
    <dd>
 
@@ -931,7 +1068,7 @@ Legen Sie die maximale Anzahl inaktiver Keepalive-Verbindungen zum Upstream-Serv
     <tbody>
     <tr>
     <td><code>bindSecret</code></td>
-    <td>Ersetzen Sie <em><code>&lt;geheimer_bindungsschlüssel&gt;</code></em> durch den geheimen Kubernetes-Schlüssel, der den geheimen Bindungsschlüssel enthält. </td>
+    <td>Ersetzen Sie <em><code>&lt;geheimer_bindungsschlüssel&gt;</code></em> durch den geheimen Kubernetes-Schlüssel, der den geheimen Bindungsschlüssel enthält.</td>
     </tr>
     <tr>
     <td><code>namespace</code></td>
@@ -939,21 +1076,22 @@ Legen Sie die maximale Anzahl inaktiver Keepalive-Verbindungen zum Upstream-Serv
     </tr>
     <tr>
     <td><code>requestType</code></td>
-    <td>Ersetzen Sie <code><em>&lt;anforderungstyp&gt;</em></code> durch den Anforderungstyp, den Sie an {{site.data.keyword.appid_short_notm}} senden wollen. Gütlige Werte sind `web` oder `api`. Der Standardwert ist `api`.</td>
+    <td>Ersetzen Sie <code><em>&lt;anforderungstyp&gt;</em></code> durch den Anforderungstyp, den Sie an {{site.data.keyword.appid_short_notm}} senden wollen. Gültige Werte sind `web` oder `api`. Der Standardwert ist `api`.</td>
     </tr>
     <tr>
     <td><code>serviceName</code></td>
-    <td>Ersetzen Sie <code><em>&lt;mein_service&</em></code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben. Dieses Feld ist optional. Wenn ein Servicename nicht enthalten ist, wird die Annotation für alle Services aktiviert.  Wenn ein Servicename enthalten ist, wird die Annotation nur für diesen Service aktiviert. Trennen Sie mehrere Services durch ein Semikolon (;).</td>
+    <td>Ersetzen Sie <code><em>&lt;mein_service&gt;</em></code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben. Dieses Feld ist optional. Wenn ein Servicename nicht enthalten ist, wird die Annotation für alle Services aktiviert.  Wenn ein Servicename enthalten ist, wird die Annotation nur für diesen Service aktiviert. Trennen Sie mehrere Services durch ein Semikolon (;).</td>
     </tr>
     </tbody></table>
     </dd>
     <dt>Syntax</dt>
-    <dd>Da die Anwendung {{site.data.keyword.appid_short_notm}} für die Authentifizierung verwendet, müssen Sie eine {{site.data.keyword.appid_short_notm}}-Instanz bereitstellen, die Instanz mit gültigen Umleitungs-URIs konfigurieren und einen geheimen Bindungsschlüssel generieren.<ol>
+    <dd>Da die Anwendung {{site.data.keyword.appid_short_notm}} für die Authentifizierung verwendet, müssen Sie eine {{site.data.keyword.appid_short_notm}}-Instanz bereitstellen, die Instanz mit gültigen Umleitungs-URIs konfigurieren und einen geheimen Bindungsschlüssel generieren.
+    <ol>
     <li>Stellen Sie eine [{{site.data.keyword.appid_short_notm}}-Instanz bereit](https://console.bluemix.net/catalog/services/app-id).</li>
-    <li>Fügen Sie in der {{site.data.keyword.appid_short_notm}}-Managementkonsole Weiterleitungs-URIs (redirectURIs) für Ihre App hinzu. </li>
+    <li>Fügen Sie in der {{site.data.keyword.appid_short_notm}}-Managementkonsole Weiterleitungs-URIs (redirectURIs) für Ihre App hinzu.</li>
     <li>Erstellen Sie einen geheimen Bindungsschlüssel.
     <pre class="pre"><code>bx cs cluster-service-bind &lt;mein_cluster&gt; &lt;mein_namensbereich&gt; &lt;meine_serviceinstanz_GUID&gt;</code></pre> </li>
-    <li>Konfigurieren Sie die Annotation <code>appid-auth</code>. </li>
+    <li>Konfigurieren Sie die Annotation <code>appid-auth</code>.</li>
     </ol></dd>
     </dl>
 
@@ -1020,11 +1158,11 @@ spec:
 Die Ausgabe in der Befehlszeilenschnittstelle (CLI) ähnelt der folgenden:
 <pre class="screen">
 <code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.10.10.149   169.60.16.246   80:30776/TCP,443:30412/TCP   8d</code></pre></li>
-<li>Öffnen Sie die ALB-Konfigurationsübersicht.
+public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+<li>Öffnen Sie die ALB-Konfigurationszuordnung.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>Fügen Sie die nicht dem Standard entsprechenden HTTP- und HTTPS-Ports zur Konfigurationsübersicht hinzu. Ersetzen Sie &lt;port&gt; durch den HTTP- oder HTTPS-Port, der geöffnet werden soll.
+<li>Fügen Sie die nicht dem Standard entsprechenden HTTP- und HTTPS-Ports zur Konfigurationszuordnung hinzu. Ersetzen Sie &lt;port&gt; durch den HTTP- oder HTTPS-Port, der geöffnet werden soll.
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -1043,11 +1181,12 @@ metadata:
 Die Ausgabe in der Befehlszeilenschnittstelle (CLI) ähnelt der folgenden:
 <pre class="screen">
 <code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
 <li>Konfigurieren Sie Ingress zur Verwendung der nicht dem Standard entsprechenden Ports bei der Weiterleitung von eingehendem Netzverkehr an Ihre Services. Verwenden Sie die YAML-Beispieldatei in dieser Referenz. </li>
 <li>Aktualisieren Sie Ihre ALB-Konfiguration.
 <pre class="pre">
-<code>kubectl apply -f &lt;yaml-datei&gt;</code></pre>
+<code>        kubectl apply -f myingress.yaml
+        </code></pre>
 </li>
 <li>Öffnen Sie Ihren bevorzugten Web-Browser, um auf Ihre App zuzugreifen. Beispiel: <code>https://&lt;ibm_domäne&gt;:&lt;port&gt;/&lt;servicepfad&gt;/</code></li></ol></dd></dl>
 
@@ -1114,7 +1253,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/hsts: enabled=&lt;true&gt; maxAge=&lt;31536000&gt; includeSubdomains=&lt;true&gt;
+    ingress.bluemix.net/hsts: enabled=true maxAge=&lt;31536000&gt; includeSubdomains=true
 spec:
   tls:
   - hosts:
@@ -1145,7 +1284,7 @@ spec:
   </tr>
     <tr>
   <td><code>maxAge</code></td>
-  <td>Ersetzen Sie <code>&lt;<em>31536000</em>&gt;</code> durch eine ganze Zahl, die angibt, wie viele Sekunden ein Browser Sendeanforderungen direkt an HTTPS zwischenspeichert. Der Standardwert ist <code>31536000</code>, was 1 Jahr entspricht. </td>
+  <td>Ersetzen Sie <code>&lt;<em>31536000</em>&gt;</code> durch eine ganze Zahl, die angibt, wie viele Sekunden ein Browser Sendeanforderungen direkt an HTTPS zwischenspeichert. Der Standardwert ist <code>31536000</code>, was 1 Jahr entspricht.</td>
   </tr>
   <tr>
   <td><code>includeSubdomains</code></td>
@@ -1163,7 +1302,8 @@ spec:
 ### Gegenseitige Authentifizierung (mutual-auth)
 {: #mutual-auth}
 
-Gegenseitige Authentifizierung für die Lastausgleichsfunktion für Anwendungen (ALB) konfigurieren.{:shortdesc}
+Gegenseitige Authentifizierung für die Lastausgleichsfunktion für Anwendungen (ALB) konfigurieren.
+{:shortdesc}
 
 <dl>
 <dt>Beschreibung</dt>
@@ -1175,7 +1315,7 @@ Konfigurieren Sie die gegenseitige Authentifizierung für die Ingress-ALB. Der C
 <dd>
 <ul>
 <li>[Sie müssen über einen geheimen Schlüssel verfügen, der die erforderliche Zertifizierungsstelle (CA) enthält](cs_app.html#secrets). Außerdem werden die Dateien <code>client.key</code> und <code>client.crt</code> für die gegenseitige Authentifizierung benötigt.</li>
-<li>Um die gegenseitige Authentifizierung an einem anderen Port als 443 zu ermöglichen, [konfigurieren Sie die Lastausgleichsfunktion zum Öffnen des gültigen Ports](cs_ingress.html#opening_ingress_ports).</li>
+<li>Um die gegenseitige Authentifizierung an einem anderen Port als 443 zu ermöglichen, [konfigurieren Sie die Lastausgleichsfunktion für Anwendungen (ALB) zum Öffnen des gültigen Ports](cs_ingress.html#opening_ingress_ports).</li>
 </ul>
 </dd>
 
@@ -1215,12 +1355,12 @@ spec:
 <td>Ersetzen Sie <code>&lt;<em>mein_geheimer_schlüssel</em>&gt;</code> durch einen Namen für die Ressource mit dem geheimen Schlüssel.</td>
 </tr>
 <tr>
-<td><code>&lt;port&gt;</code></td>
-<td>Die ALB-Portnummer. </td>
+<td><code>port</code></td>
+<td>Ersetzen Sie <code>&lt;<em>port</em>&gt;</code> durch die ALB-Portnummer. </td>
 </tr>
 <tr>
-<td><code>&lt;servicename&gt;</code></td>
-<td>Der Namen von mindestens einer Ingress-Ressource. Dieser Parameter ist optional.</td>
+<td><code>serviceName</code></td>
+<td>Ersetzen Sie <code>&lt;<em>servicename</em>&gt;</code> durch den Namen mindestens einer Ingress-Ressource. Dieser Parameter ist optional.</td>
 </tr>
 </tbody></table>
 
@@ -1240,7 +1380,7 @@ Lassen Sie HTTPS-Anforderungen zu und verschlüsseln Sie Datenverkehr zu Ihren U
 <dl>
 <dt>Beschreibung</dt>
 <dd>
-Verschlüsseln Sie den Datenverkehr zu Ihren Upstream-Apps, für die HTTPS erforderlich ist. 
+Verschlüsseln Sie den Datenverkehr zu Ihren Upstream-Apps, für die HTTPS erforderlich ist.
 
 **Optional**: Sie können die [unidirektionale Authentifizierung oder die gegenseitige Authentifizierung](#ssl-services-auth) zu dieser Annotation hinzufügen.
 </dd>
@@ -1277,11 +1417,11 @@ spec:
   <tbody>
   <tr>
   <td><code>ssl-service</code></td>
-  <td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Service, der Ihre App darstellt. Der Datenverkehr wird von der Lastausgleichsfunktion für Anwendungen (ALB) zu dieser App verschlüsselt.</td>
+  <td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Service, der HTTPS erfordert. Der Datenverkehr wird von der Lastausgleichsfunktion für Anwendungen (ALB) zu diesem App-Service verschlüsselt. </td>
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Ersetzen Sie <code>&lt;<em>geheimer_ssl-schlüssel_für_service</em>&gt;</code> durch den geheimen Schlüssel für den Service. Dieser Parameter ist optional. Wenn der Parameter bereitgestellt wird, muss der Wert den Schlüssel und das Zertifikat enthalten, den/das die App vom Client erwartet.</td>
+  <td>Ersetzen Sie <code>&lt;<em>geheimer_ssl-schlüssel_für_service</em>&gt;</code> durch den geheimen Schlüssel für den Service. Dieser Parameter ist optional. Wenn der Parameter bereitgestellt wird, muss der Wert den Schlüssel und das Zertifikat enthalten, den/das die App vom Client erwartet. Informationen zum Erstellen eines geheimen TLS-Schlüssels finden Sie unter [Geheime Schlüssel erstellen](cs_app.html#secrets). </td>
   </tr>
   </tbody></table>
 
@@ -1342,11 +1482,11 @@ spec:
   <tbody>
   <tr>
   <td><code>ssl-service</code></td>
-  <td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Service, der Ihre App darstellt. Der Datenverkehr wird von der Lastausgleichsfunktion für Anwendungen (ALB) zu dieser App verschlüsselt.</td>
+  <td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Service, der HTTPS erfordert. Der Datenverkehr wird von der Lastausgleichsfunktion für Anwendungen (ALB) zu diesem App-Service verschlüsselt. </td>
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Ersetzen Sie <code>&lt;<em>geheimer_ssl-schlüssel_für_service</em>&gt;</code> durch den geheimen Schlüssel für den Service. Dieser Parameter ist optional. Wenn der Parameter bereitgestellt wird, muss der Wert den Schlüssel und das Zertifikat enthalten, den/das die App vom Client erwartet.</td>
+  <td>Ersetzen Sie <code>&lt;<em>geheimer_ssl-schlüssel_für_service</em>&gt;</code> durch den geheimen Schlüssel für den Service. Dieser Parameter ist optional. Wenn der Parameter bereitgestellt wird, muss der Wert den Schlüssel und das Zertifikat enthalten, den/das die App vom Client erwartet. Informationen zum Erstellen eines geheimen Schlüssels für die gegenseitige Authentifizierung finden Sie unter [Geheime Schlüssel erstellen](cs_app.html#secrets). </td>
   </tr>
   </tbody></table>
 
@@ -1356,7 +1496,89 @@ spec:
 <br />
 
 
+## Istio-Annotationen
+{: #istio-annotations}
 
+### Istio-Services (istio-services)
+{: #istio-services}
+
+  Datenverkehr an Istio-verwaltete Services weiterleiten. {:shortdesc}
+
+  <dl>
+  <dt>Beschreibung</dt>
+  <dd>
+  Wenn Sie über Istio-verwaltete Services verfügen, können Sie eine Cluster-ALB verwenden, um HTTP-/HTTPS-Anforderungen an den Istio-Ingress-Controller weiterzuleiten. Der Istio-Ingress-Controller leitet die Anforderungen dann weiter an die App-Services. Damit der Datenverkehr weitergeleitet werden kann, müssen Sie Änderungen an den Ingress-Ressourcen für die Cluster-ALB und den Istio-Ingress-Controller vornehmen.
+    <br><br>In der Ingress-Ressource für die Cluster-ALB müssen Sie Folgendes tun:       <ul>
+        <li>die Annotation `istio-services` angeben</li>
+        <li>den Servicepfad als tatsächlichen Pfad definieren, den die App überwacht</li>
+        <li>den Service-Port als Port des Istio-Ingress-Controllers angeben</li>
+      </ul>
+    <br>In der Ingress-Ressource für den Istio-Ingress-Controller müssen Sie Folgendes tun:       <ul>
+        <li>den Servicepfad als tatsächlichen Pfad definieren, den die App überwacht</li>
+        <li>den Service-Port als den HTTP-/HTTPS-Port des App-Service definieren, der vom Istio-Ingress-Controller öffentlich zugänglich gemacht wird</li>
+    </ul>
+  </dd>
+
+   <dt>YAML-Beispiel einer Ingress-Ressource für die Cluster-ALB </dt>
+   <dd>
+
+   <pre class="codeblock">
+   <code>apiVersion: extensions/v1beta1
+   kind: Ingress
+   metadata:
+    name: myingress
+    annotations:
+      ingress.bluemix.net/istio-services: "enable=True serviceName=&lt;mein_service1&gt; istioServiceNamespace=&lt;istio-namensbereich&gt; istioServiceName=&lt;istio-ingress-service&gt;"
+   spec:
+    tls:
+    - hosts:
+      - meine_domäne
+    secretName: mein_geheimer_tls-schlüssel
+  rules:
+    - host: meine_domäne
+    http:
+      paths:
+        - path: &lt;/myapp1&gt;
+          backend:
+            serviceName: &lt;mein_service1&gt;
+            servicePort: &lt;istio-ingress-port&gt;
+        - path: &lt;/myapp2&gt;
+          backend:
+            serviceName: &lt;mein_service2&gt;
+            servicePort: &lt;istio-ingress-port&gt;</code></pre>
+
+   <table>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>enable</code></td>
+      <td>Um das Weiterleiten von Datenverkehr zu Istio-verwalteten Services zu aktivieren, legen Sie diesen Parameter auf <code>True</code> fest. </td>
+    </tr>
+    <tr>
+    <td><code>serviceName</code></td>
+    <td>Ersetzen Sie <code><em>&lt;mein_service1&gt;</em></code> durch den Namen des Kubernetes-Service, den Sie für Ihre Istio-verwaltete App erstellt haben. Trennen Sie mehrere Services durch ein Semikolon (;). Dieses Feld ist optional. Wenn Sie keinen Servicenamen angeben, werden alle Istio-verwalteten Services für die Weiterleitung von Datenverkehr aktiviert. </td>
+    </tr>
+    <tr>
+    <td><code>istioServiceNamespace</code></td>
+    <td>Ersetzen Sie <code><em>&lt;istio-namensbereich&gt;</em></code> durch den Kubernetes-Namensbereich, in dem Istio installiert ist. Dieses Feld ist optional. Wenn Sie keinen Namensbereich angeben, wird der Namensbereich <code>istio-system</code> verwendet. </td>
+    </tr>
+    <tr>
+    <td><code>istioServiceName</code></td>
+    <td>Ersetzen Sie <code><em>&lt;istio-ingress-service&gt;</em></code> durch den Namen des Istio-Ingress-Service. Dieses Feld ist optional. Wenn Sie den Istio-Ingress-Servicenamen nicht angeben, wird der Servicename <code>istio-ingress</code> verwendet. </td>
+    </tr>
+    <tr>
+    <td><code>path</code></td>
+      <td>Ersetzen Sie für jeden Istio-verwalteten Service, an den Sie Datenverkehr weiterleiten möchten, <code><em>&lt;/myapp1&gt;</em></code> durch den Back-End-Pfad, den der Istio-verwaltete Service überwacht. Der Pfad muss dem Pfad entsprechen, den Sie in der Istio-Ingress-Ressource definiert haben. </td>
+    </tr>
+    <tr>
+    <td><code>servicePort</code></td>
+    <td>Ersetzen Sie für jeden Istio-verwalteten Service, an den Sie Datenverkehr weiterleiten möchten, <code><em>&lt;istio-ingress-port&gt;</em></code> durch den Port des Istio-Ingress-Controllers. </td>
+    </tr>
+    </tbody></table>
+    </dd>
+    </dl>
 
 ## Annotationen für Proxypuffer
 {: #proxy-buffer}
@@ -1366,7 +1588,7 @@ spec:
 {: #proxy-buffering}
 
 Verwenden Sie die 'buffer'-Annotation, um das Speichern von Antwortdaten in der Lastausgleichsfunktion für Anwendungen (ALB) während des Sendens von Daten an den Client zu inaktivieren.
- {:shortdesc}
+{:shortdesc}
 
 <dl>
 <dt>Beschreibung</dt>
@@ -1449,7 +1671,7 @@ spec:
  <td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen eines Service, der 'proxy-buffers' anwenden soll.</td>
  </tr>
  <tr>
- <td><code>number</code></td>
+ <td><code>anzahl</code></td>
  <td>Ersetzen Sie <code>&lt;<em>anzahl_puffer</em>&gt;</code> durch eine Zahl. Beispiel: <em>2</em>.</td>
  </tr>
  <tr>
@@ -1545,7 +1767,7 @@ kind: Ingress
 metadata:
  name: proxy-ingress
  annotations:
-   ingress.bluemix.net/proxy-busy-buffers-size: "serviceName=&lt;servicename&gt; size=&lt;größe&gt;"
+   ingress.bluemix.net/proxy-busy-buffers-size: "serviceName=&lt;mein_service&gt; size=&lt;größe&gt;"
 spec:
  tls:
  - hosts:
@@ -1595,13 +1817,13 @@ Hinzufügen von zusätzlichen Headerinformationen zu einer Clientanforderung, be
 
 <dl>
 <dt>Beschreibung</dt>
-<dd>Die Ingress-Lastausgleichsfunktion für Anwendungen (Ingress-ALB) fungiert als Proxy zwischen der Client-App und Ihrer Back-End-App. Clientanforderungen, die an die Lastausgleichsfunktion für Anwendungen (ALB) gesendet werden, werden (als Proxy) verarbeitet und in eine neue Anforderung umgesetzt, die anschließend an Ihre Back-End-App gesendet wird. In ähnlicher Weise werden die an die ALB gesendeten Back-End-App-Antworten verarbeitet (als Proxy) und in eine neue Antwort gestellt, die dann an den Client gesendet wird. Beim Senden einer Anforderung als Proxy oder Antwort werden HTTP-Headerinformationen entfernt, z. B. der Benutzername, der ursprünglich vom Client oder der Back-End-App gesendet wurde. 
+<dd>Die Ingress-Lastausgleichsfunktion für Anwendungen (Ingress-ALB) fungiert als Proxy zwischen der Client-App und Ihrer Back-End-App. Clientanforderungen, die an die Lastausgleichsfunktion für Anwendungen (ALB) gesendet werden, werden (als Proxy) verarbeitet und in eine neue Anforderung umgesetzt, die anschließend an Ihre Back-End-App gesendet wird. In ähnlicher Weise werden die an die ALB gesendeten Back-End-App-Antworten verarbeitet (als Proxy) und in eine neue Antwort gestellt, die dann an den Client gesendet wird. Beim Senden einer Anforderung als Proxy oder Antwort werden HTTP-Headerinformationen entfernt, z. B. der Benutzername, der ursprünglich vom Client oder der Back-End-App gesendet wurde.
 
 <br><br>
 Wenn Ihre Back-End-App HTTP-Headerinformationen erfordert, können Sie die Annotation <code>proxy-add-headers</code> verwenden, um Headerinformationen zur Clientanforderung hinzuzufügen, bevor die Anforderung von der ALB an die Back-End-App weitergeleitet wird.
 
 <br>
-<ul><li>Sie müssen möglicherweise die folgenden X-Forward-Headerinformationen zur Anforderung hinzufügen, bevor sie an Ihre App weitergeleitet wird. 
+<ul><li>Sie müssen möglicherweise die folgenden X-Forward-Headerinformationen zur Anforderung hinzufügen, bevor sie an Ihre App weitergeleitet wird.
 
 <pre class="screen">
 <code>proxy_set_header Host $host;
@@ -1758,7 +1980,8 @@ Entfernen von Headerinformationen, die in der Clientantwort von der Back-End-App
 ### Größe des Hauptteils der Clientanforderung (client-max-body-size)
 {: #client-max-body-size}
 
-Die maximale Größe des Hauptteils anpassen, den der Client als Teil der Anforderung senden kann. {:shortdesc}
+Die maximale Größe des Hauptteils anpassen, den der Client als Teil der Anforderung senden kann.
+{:shortdesc}
 
 <dl>
 <dt>Beschreibung</dt>
@@ -1811,7 +2034,8 @@ spec:
 ### Puffer für große Client-Header (large-client-header-buffers)
 {: #large-client-header-buffers}
 
-Die maximale Anzahl und Größe der Puffer festlegen, die große Clientanforderungsheader lesen. {:shortdesc}
+Die maximale Anzahl und Größe der Puffer festlegen, die große Clientanforderungsheader lesen.
+{:shortdesc}
 
 <dl>
 <dt>Beschreibung</dt>
@@ -1991,6 +2215,3 @@ Begrenzung der Verarbeitungsrate für Anforderungen und Anzahl der Verbindungen 
   </dl>
 
   <br />
-
-
-

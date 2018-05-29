@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-14"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -25,7 +25,6 @@ lastupdated: "2018-03-14"
 
 ## 應用程式服務
 <table summary="可存取性摘要">
-<caption>表格. 應用程式服務的整合選項</caption>
 <thead>
 <tr>
 <th>服務</th>
@@ -46,7 +45,6 @@ lastupdated: "2018-03-14"
 
 ## DevOps Services
 <table summary="可存取性摘要">
-<caption>表格. 管理 DevOps 的整合選項</caption>
 <thead>
 <tr>
 <th>服務</th>
@@ -79,7 +77,6 @@ lastupdated: "2018-03-14"
 
 ## 記載及監視服務
 <table summary="可存取性摘要">
-<caption>表格. 管理日誌及度量值的整合選項</caption>
 <thead>
 <tr>
 <th>服務</th>
@@ -137,7 +134,6 @@ lastupdated: "2018-03-14"
 
 ## 安全服務
 <table summary="可存取性摘要">
-<caption>表格. 管理安全的整合選項</caption>
 <thead>
 <tr>
 <th>服務</th>
@@ -158,6 +154,10 @@ lastupdated: "2018-03-14"
 <td>您可以使用 <a href="../services/certificate-manager/index.html" target="_blank">{{site.data.keyword.cloudcerts_long}}<img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來儲存及管理應用程式的 SSL 憑證。如需相關資訊，請參閱<a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">使用 {{site.data.keyword.cloudcerts_long_notm}} 與 {{site.data.keyword.containershort_notm}} 搭配來部署自訂網域 TLS 憑證 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
 <tr>
+  <td>{{site.data.keyword.registrylong}}</td>
+  <td>設定您自己的安全 Docker 映像檔儲存庫，您可以在其中安全地儲存映像檔，以及在叢集使用者之間共用映像檔。如需相關資訊，請參閱 <a href="/docs/services/Registry/index.html" target="_blank">{{site.data.keyword.registrylong}} 文件 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+</tr>
+<tr>
 <td>NeuVector</td>
 <td>使用 <a href="https://neuvector.com/" target="_blank">Neutretor <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a> 來保護容器與雲端原生防火牆。如需相關資訊，請參閱 <a href="https://www.ibm.com/us-en/marketplace/neuvector-container-security" target="_blank">NeuVector Container Security <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
 </tr>
@@ -167,6 +167,35 @@ lastupdated: "2018-03-14"
 </tr>
 </tbody>
 </table>
+
+<br />
+
+
+
+## 儲存服務
+<table summary="可存取性摘要">
+<thead>
+<tr>
+<th>服務</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>{{site.data.keyword.cos_full}}</td>
+  <td>與 {{site.data.keyword.cos_short}} 一起儲存的資料會加密及分散在多個地理位置，並使用 REST API 透過 HTTP 進行存取。您可以使用 [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore/index.html) 來配置服務，以針對叢集中的資料進行一次性或排定的備份。如需服務的一般資訊，請參閱 <a href="/docs/services/cloud-object-storage/about-cos.html" target="_blank">{{site.data.keyword.cos_short}} 文件 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+</tr>
+  <tr>
+    <td>{{site.data.keyword.cloudantfull}}</td>
+    <td>{{site.data.keyword.cloudant_short_notm}} 是文件導向的「資料庫即服務 (DBaaS)」，用來將資料儲存為 JSON 格式的文件。此服務是針對可調整性、高可用性和延續性而建置。如需相關資訊，請參閱 <a href="/docs/services/Cloudant/getting-started.html" target="_blank">{{site.data.keyword.cloudant_short_notm}} 文件 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+  </tr>
+  <tr>
+    <td>{{site.data.keyword.composeForMongoDB_full}}</td>
+    <td>{{site.data.keyword.composeForMongoDB}} 提供高可用性及備援、自動化及隨需應變持續備份、監視工具、整合至警示系統、效能分析視圖等。如需相關資訊，請參閱 <a href="/docs/services/ComposeForMongoDB/index.html" target="_blank">{{site.data.keyword.composeForMongoDB}} 文件 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。</td>
+  </tr>
+</tbody>
+</table>
+
 
 <br />
 
@@ -227,7 +256,7 @@ lastupdated: "2018-03-14"
 5.  將服務新增至叢集。
 
     ```
-    bx cs cluster-service-bind <cluster_name_or_id> <namespace> <service_instance_name>
+    bx cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
     {: pre}
 
@@ -392,7 +421,7 @@ Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或
 5.  建立 Pod，並裝載密碼磁區。
 
     ```
-    kubectl apply -f <yaml_path>
+    kubectl apply -f secret-test.yaml
     ```
     {: pre}
 
@@ -452,14 +481,50 @@ Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或
 
 1. 安裝 <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。
 
-2. 起始設定 Helm，並安裝 `tiller`。
+2. **重要事項**：若要維護叢集安全，請在 `kube-system` 名稱空間中建立 Tiller 的服務帳戶，以及針對 `tiller-deploy` Pod 建立 Kubernetes RBAC 叢集角色連結。
+
+    1. 在偏好的編輯器中，建立下列檔案，並將它儲存為`rbac-config.yaml`。
+      **附註**：
+        * 在 Kubernetes 叢集中，依預設會建立 `cluster-admin` 叢集角色，因此您不需要明確定義它。
+        * 如果您使用的是 1.7.x 版叢集，請將 `apiVersion` 變更為 `rbac.authorization.k8s.io/v1beta1`。
+
+      ```
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: tiller
+        namespace: kube-system
+      ---
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: tiller
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-admin
+      subjects:
+        - kind: ServiceAccount
+          name: tiller
+          namespace: kube-system
+      ```
+      {: codeblock}
+
+    2. 建立服務帳戶及叢集角色連結。
+
+        ```
+        kubectl create -f rbac-config.yaml
+        ```
+        {: pre}
+
+3. 利用您所建立的服務帳戶，來起始設定 Helm 並安裝 `tiller`。
 
     ```
-        helm init
-        ```
+    helm init --service-account tiller
+    ```
     {: pre}
 
-3. 驗證 `tiller - deploy` Pod 在叢集中的 **Status** 為 `Running`。
+4. 驗證 `tiller - deploy` Pod 在叢集中的 **Status** 為 `Running`。
 
     ```
         kubectl get pods -n kube-system -l app=helm
@@ -474,17 +539,26 @@ Kubernetes 密碼是一種儲存機密資訊（例如使用者名稱、密碼或
     ```
     {: screen}
 
-4. 將 {{site.data.keyword.Bluemix_notm}} Helm 儲存庫新增至 Helm 實例。
+5. 將 {{site.data.keyword.Bluemix_notm}} Helm 儲存庫新增至 Helm 實例。
 
     ```
     helm repo add ibm  https://registry.bluemix.net/helm/ibm
     ```
     {: pre}
 
-5. 列出 {{site.data.keyword.Bluemix_notm}} 儲存庫中目前可用的 Helm 圖表。
+6. 列出 {{site.data.keyword.Bluemix_notm}} 儲存庫中目前可用的 Helm 圖表。
 
     ```
     helm search ibm
+    ```
+    {: pre}
+
+7. 若要進一步瞭解圖表，請列出其設定及預設值。
+
+    例如，若要檢視 strongSwan IPSec 服務 helm 圖表的設定、文件及預設值，請執行下列指令：
+
+    ```
+    helm inspect ibm/strongswan
     ```
     {: pre}
 
@@ -575,4 +649,5 @@ Weave Scope 提供 Kubernetes 叢集內的資源（包括服務、Pod、容器�
 [進一步瞭解 Weave Scope 特性 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.weave.works/docs/scope/latest/features/)。
 
 <br />
+
 

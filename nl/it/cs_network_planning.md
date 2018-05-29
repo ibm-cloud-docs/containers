@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -16,7 +16,7 @@ lastupdated: "2018-03-16"
 {:download: .download}
 
 
-# Pianificazione della rete esterna
+# Pianificazione della rete con i servizi NodePort, LoadBalancer o Ingress
 {: #planning}
 
 Quando crei un cluster Kubernetes in {{site.data.keyword.containerlong}}, ogni cluster deve essere collegato a una VLAN pubblica. La VLAN pubblica
@@ -29,7 +29,6 @@ L'interfaccia di rete pubblica dei nodi di lavoro nei cluster gratuito e standar
 |------------|------------------------------------------|
 |Cluster gratuiti in {{site.data.keyword.Bluemix_notm}}|{{site.data.keyword.IBM_notm}}|
 |Cluster standard in {{site.data.keyword.Bluemix_notm}}|Tu nel tuo account dell'infrastruttura IBM Cloud (SoftLayer)|
-{: caption="Responsabilità di gestione della VLAN" caption-side="top"}
 
 Per informazioni sulla comunicazione della rete in cluster tra i nodi di lavoro e i pod, consulta [Rete in cluster](cs_secure.html#in_cluster_network). Per informazioni sulla connessione sicura delle applicazioni eseguite in un cluster Kubernetes a una rete in loco o ad applicazioni esterne al cluster, vedi [Configurazione della connettività VPN](cs_vpn.html).
 
@@ -74,7 +73,7 @@ standard)</dt>
  <ul>
   <li>Esponi più applicazioni nel tuo cluster creando un programma di bilanciamento del carico HTTP o HTTPS, TCP, o UDP che utilizza un punto di ingresso pubblico protetto e univoco per instradare le richieste in entrata alle tue applicazioni.</li>
   <li>Puoi utilizzare una rotta pubblica per esporre più applicazioni nel tuo cluster come servizi.</li>
-  <li>Ingress è costituito da due componenti principali: la risorsa Ingress e il programma di bilanciamento del carico dell'applicazione.
+  <li>Ingress è composto da due componenti:
    <ul>
     <li>La risorsa Ingress definisce
 le regole su come instradare e bilanciare il carico delle richieste in entrata per un'applicazione.</li>
@@ -88,7 +87,8 @@ Per scegliere la migliore opzione di rete per la tua applicazione, puoi seguire 
 
 <img usemap="#networking_map" border="0" class="image" src="images/networkingdt.png" width="500px" alt="Questa immagine ti guida nella scelta della migliore opzione di rete per la tua applicazione. Se questa immagine non viene visualizzata, le informazioni possono ancora essere trovate nella documentazione." style="width:500px;" />
 <map name="networking_map" id="networking_map">
-<area href="/docs/containers/cs_nodeport.html#planning" alt="Servizio Nodeport" shape="circle" coords="52, 283, 45"/>
-<area href="/docs/containers/cs_loadbalancer.html#planning" alt="Servizio LoadBalancer" shape="circle" coords="247, 419, 44"/>
-<area href="/docs/containers/cs_ingress.html#planning" alt="Servizio Ingress" shape="circle" coords="445, 420, 45"/>
+<area href="/docs/containers/cs_nodeport.html" alt="Servizio Nodeport" shape="circle" coords="52, 283, 45"/>
+<area href="/docs/containers/cs_loadbalancer.html" alt="Servizio LoadBalancer" shape="circle" coords="247, 419, 44"/>
+<area href="/docs/containers/cs_ingress.html" alt="Servizio Ingress" shape="circle" coords="445, 420, 45"/>
 </map>
+

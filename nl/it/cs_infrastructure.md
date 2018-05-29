@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -72,10 +72,10 @@ Sottoscrizione.
   ```
   {: pre}
 
-6.  Imposta la chiave API creata in precedenza per accedere al portfolio dell'infrastruttura IBM Cloud (SoftLayer). Sostituisci `<API_KEY>` con la chiave API e `<USERNAME>` con {{site.data.keyword.ibmid}} del tuo nuovo account a a Pagamento a consumo.
+6.  Imposta la chiave API creata in precedenza per accedere al portfolio dell'infrastruttura IBM Cloud (SoftLayer). Sostituisci `<API_key>` con la chiave API e `<username>` con {{site.data.keyword.ibmid}} del tuo nuovo account a a Pagamento a consumo.
 
   ```
-  bx cs credentials-set --infrastructure-api-key <API_KEY> --infrastructure-username <USERNAME>
+  bx cs credentials-set --infrastructure-api-key <API_key> --infrastructure-username <username>
   ```
   {: pre}
 
@@ -84,3 +84,4 @@ Sottoscrizione.
 **Nota:** per esaminare la tua chiave API dopo averla generata, segui i passi 1 e 2 e quindi, nella
 sezione **Chiave API**, fai clic su **Visualizza** per visualizzare la chiave API
 per il tuo ID utente.
+

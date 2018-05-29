@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -22,11 +22,39 @@ lastupdated: "2018-03-16"
 Schauen Sie sich an, was Container-Anwendungsentwickler in Bezug auf {{site.data.keyword.containerlong}} wissen wollen.
 {:shortdesc}
 
+## Beliebte Themen im April 2018
+{: #apr18}
+
+<table summary="Die Tabelle zeigt beliebte Themen. Die Zeilen sind von links nach rechts zu lesen. In Spalte 1 finden Sie das Datum, den Titel der Funktion in Zeile 2 und eine Beschreibung in Zeile 3.">
+<caption>Beliebte Themen im Bereich Container und Kubernetes-Cluster im April 2018</caption>
+<thead>
+<th>Datum</th>
+<th>Titel</th>
+<th>Beschreibung</th>
+</thead>
+<tbody>
+<tr>
+<td>17. April</td>
+<td>{{site.data.keyword.Bluemix_notm}}-Blockspeicher</td>
+<td>Installieren Sie das {{site.data.keyword.Bluemix_notm}}-Blockspeicher-[Plug-in](cs_storage.html#install_block), um persistente Daten in einem Blockspeicher zu speichern. Anschließend können Sie einen [neuen](cs_storage.html#create) Blockspeicher für Ihren Cluster erstellen oder einen [vorhandenen](cs_storage.html#existing_block) Blockspeicher verwenden. </td>
+</tr>
+<tr>
+<td>13. April</td>
+<td>[Neues Lernprogramm zum Migrieren von Cloud Foundry-Apps in Cluster](cs_tutorials_cf.html#cf_tutorial)</td>
+<td>Haben Sie eine Cloud Foundry-App? Hier erfahren Sie, wie Sie denselben Code aus dieser App in einem Container implementieren, der in einem Kubernetes-Cluster ausgeführt wird. </td>
+</tr>
+<tr>
+<td>5. April</td>
+<td>[Protokolle filtern](cs_health.html#filter-logs)</td>
+<td>Filtern Sie spezifische Protokolle heraus, damit sie nicht weitergeleitet werden. Protokolle können nach einem bestimmten Namensbereich, Containernamen, nach einer Protokollebene und einer Nachrichtenzeichenfolge gefiltert werden. </td>
+</tr>
+</tbody></table>
+
 ## Beliebte Themen im März 2018
 {: #mar18}
 
 <table summary="Die Tabelle zeigt beliebte Themen. Die Zeilen sind von links nach rechts zu lesen. In Spalte 1 finden Sie das Datum, den Titel der Funktion in Zeile 2 und eine Beschreibung in Zeile 3.">
-<caption>Beliebte Themen im Bereich Container und Kubernetes-Cluster im Februar 2018</caption>
+<caption>Beliebte Themen im Bereich Container und Kubernetes-Cluster im März 2018</caption>
 <thead>
 <th>Datum</th>
 <th>Titel</th>
@@ -36,7 +64,7 @@ Schauen Sie sich an, was Container-Anwendungsentwickler in Bezug auf {{site.data
 <tr>
 <td> 16. März</td>
 <td>[Bereitstellung eines Bare-Metal-Clusters mit Trusted Compute](cs_clusters.html#shared_dedicated_node)</td>
-<td>Erstellen Sie ein Bare-Metal-Cluster, das [Kubernetes Version 1.9](cs_versions.html#cs_v19) oder eine höhere Version ausführt und aktivieren Sie Trusted Compute, um Ihre Workerknoten auf Manipulation zu überprüfen. </td>
+<td>Erstellen Sie ein Bare-Metal-Cluster, das [Kubernetes Version 1.9](cs_versions.html#cs_v19) oder eine höhere Version ausführt und aktivieren Sie Trusted Compute, um Ihre Workerknoten auf Manipulation zu überprüfen.</td>
 </tr>
 <tr>
 <td>14. März</td>
@@ -46,12 +74,12 @@ Schauen Sie sich an, was Container-Anwendungsentwickler in Bezug auf {{site.data
 <tr>
 <td>13. März</td>
 <td>[Standort in São Paulo verfügbar](cs_regions.html)</td>
-<td>Willkommen in São Paulo, Brasilien, dem neuen Standort in der Regtion 'Vereinigte Staaten (Süden)'. Wenn Sie eine Firewall haben, stellen Sie sicher, dass Sie [die erforderlichen Firewall-Ports](cs_firewall.html#firewall) für diesen Standort und die anderen Standorte in der Region Ihres Clusters öffnen. </td>
+<td>Willkommen in São Paulo, Brasilien, dem neuen Standort in der Region 'Vereinigte Staaten (Süden)'. Wenn Sie eine Firewall haben, stellen Sie sicher, dass Sie [die erforderlichen Firewall-Ports](cs_firewall.html#firewall) für diesen Standort und die anderen Standorte in der Region Ihres Clusters öffnen.</td>
 </tr>
 <tr>
 <td>12. März</td>
 <td>[Haben Sie nur ein Testkonto für {{site.data.keyword.Bluemix_notm}}? Probieren Sie die kostenlosen Kubernetes-Cluster aus!](container_index.html#clusters)</td>
-<td>Mit dem [{{site.data.keyword.Bluemix_notm}}-Testkonto](https://console.bluemix.net/registration/) können Sie 1 kostenlosen Cluster für 21 Tage testen und das Leistungsspektrum von Kubernetes ausprobieren. </td>
+<td>Mit dem [{{site.data.keyword.Bluemix_notm}}-Testkonto](https://console.bluemix.net/registration/) können Sie 1 kostenlosen Cluster für 21 Tage testen und das Leistungsspektrum von Kubernetes ausprobieren.</td>
 </tr>
 </tbody></table>
 
@@ -79,7 +107,7 @@ Schauen Sie sich an, was Container-Anwendungsentwickler in Bezug auf {{site.data
 <tr>
 <td>23. Februar</td>
 <td>Suchen Sie in der Webbenutzerschnittstelle nach [Protokollierung](cs_health.html#view_logs) und [Messwerten](cs_health.html#view_metrics)</td>
-<td>Sie können Protokolle und Messwerte mit einer verbesserten Webbenutzerschnittstelle bequem in Ihrem Cluster und seinen Komponenten anzeigen. Auf der Detailseite des Clusters finden Sie Informationen zum Zugriff. </td>
+<td>Sie können Protokolle und Messwerte mit einer verbesserten Webbenutzerschnittstelle bequem in Ihrem Cluster und seinen Komponenten anzeigen. Auf der Detailseite des Clusters finden Sie Informationen zum Zugriff.</td>
 </tr>
 <tr>
 <td>20. Februar</td>
@@ -88,13 +116,13 @@ Schauen Sie sich an, was Container-Anwendungsentwickler in Bezug auf {{site.data
 </tr>
 <tr>
 <td>19. Februar</td>
-<td>[StrongSwan IPSec-VPN konfigurieren](cs_vpn.html#vpn-setup)</td>
-<td>Stellen Sie schnell das StrongSwan IPSec-VPN-Helm-Diagramm bereit, um eine sichere Verbindung ohne Vyatta zu Ihrem {{site.data.keyword.containershort_notm}}-Cluster in Ihrem Rechenzentrum vor Ort herzustellen. </td>
+<td>[strongSwan-IPSec-VPN konfigurieren](cs_vpn.html#vpn-setup)</td>
+<td>Stellen Sie schnell das strongSwan-IPSec-VPN-Helm-Diagramm bereit, um eine sichere Verbindung ohne Vyatta zu Ihrem {{site.data.keyword.containershort_notm}}-Cluster in Ihrem Rechenzentrum vor Ort herzustellen.</td>
 </tr>
 <tr>
 <td>14. Februar</td>
 <td>[Standort in Seoul verfügbar](cs_regions.html)</td>
-<td>Gerade rechtzeitig für Olympia wird ein Kubernetes-Cluster in Seoul in der Region 'Asien-Pazifik (Norden)' bereitgestellt. Wenn Sie eine Firewall haben, stellen Sie sicher, dass Sie [die erforderlichen Firewall-Ports](cs_firewall.html#firewall) für diesen Standort und die anderen Standorte in der Region Ihres Clusters öffnen. </td>
+<td>Gerade rechtzeitig für Olympia wird ein Kubernetes-Cluster in Seoul in der Region 'Asien-Pazifik (Norden)' bereitgestellt. Wenn Sie eine Firewall haben, stellen Sie sicher, dass Sie [die erforderlichen Firewall-Ports](cs_firewall.html#firewall) für diesen Standort und die anderen Standorte in der Region Ihres Clusters öffnen.</td>
 </tr>
 <tr>
 <td>8. Februar</td>
@@ -116,12 +144,12 @@ Schauen Sie sich an, was Container-Anwendungsentwickler in Bezug auf {{site.data
 <tbody>
 <td>25. Januar</td>
 <td>[Global Registry verfügbar](../services/Registry/registry_overview.html#registry_regions)</td>
-<td>Mit {{site.data.keyword.registryshort_notm}} können Sie die globale Registry `registry.bluemix.net` verwenden, um von IBM bereitgestellte öffentliche Images zu extrahieren. </td>
+<td>Mit {{site.data.keyword.registryshort_notm}} können Sie die globale Registry `registry.bluemix.net` verwenden, um von IBM bereitgestellte öffentliche Images zu extrahieren.</td>
 </tr>
 <tr>
 <td>23. Januar</td>
-<td>[Standort in Singapore und Montreal verfügbar](cs_regions.html)</td>
-<td>Singapore und Montreal sind Standorte, die in den {{site.data.keyword.containershort_notm}}-Regionen 'Asien-Pazifik (Norden)' und 'Vereinigte Staaten (Osten)' verfügbar sind. Wenn Sie eine Firewall haben, stellen Sie sicher, dass Sie [die erforderlichen Firewall-Ports](cs_firewall.html#firewall) für diese Standorte und die anderen Standorte in der betreffenden Region Ihres Clusters öffnen. </td>
+<td>[Standort in Singapur und Montreal verfügbar](cs_regions.html)</td>
+<td>Singapur und Montreal sind Standorte, die in den {{site.data.keyword.containershort_notm}}-Regionen 'Asien-Pazifik (Norden)' und 'Vereinigte Staaten (Osten)' verfügbar sind. Wenn Sie eine Firewall haben, stellen Sie sicher, dass Sie [die erforderlichen Firewall-Ports](cs_firewall.html#firewall) für diese Standorte und die anderen Standorte in der betreffenden Region Ihres Clusters öffnen.</td>
 </tr>
 <tr>
 <td>8. Januar</td>
@@ -136,4 +164,5 @@ Schauen Sie sich an, was Container-Anwendungsentwickler in Bezug auf {{site.data
 Sie können die Diskussionen anderer verfolgen und Ihre Fragen im [{{site.data.keyword.containershort_notm}}-Slack stellen. ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com)
 {:shortdesc}
 
-Tipp: Wenn Sie keine IBM ID für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, [fordern Sie eine Einladung](https://bxcs-slack-invite.mybluemix.net/) zu diesem Slack an.
+
+

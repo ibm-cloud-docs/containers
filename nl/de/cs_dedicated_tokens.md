@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-11-02"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -107,10 +107,10 @@ Erstellen Sie ein Token ohne Ablaufdatum für eine Image-Registry, die Sie für 
     </tr>
     </tbody></table>
 
-7.  Erstellen Sie einen Pod, der das 'imagePullSecret' referenziert.
+7.  Erstellen Sie einen Pod, der das imagePullSecret referenziert.
 
     1.  Öffnen Sie Ihren bevorzugten Editor und erstellen Sie ein Podkonfigurationsscript namens 'mypod.yaml'.
-    2.  Definieren Sie den Pod und das 'imagePullSecret', das Sie für den Zugriff auf die Registry verwenden möchten. Gehen Sie wie folgt vor, um ein privates Image aus einem Namensbereich zu verwenden:
+    2.  Definieren Sie den Pod und das imagePullSecret, das Sie für den Zugriff auf die Registry verwenden möchten. Gehen Sie wie folgt vor, um ein privates Image aus einem Namensbereich zu verwenden:
 
         ```
         apiVersion: v1
@@ -153,7 +153,7 @@ Erstellen Sie ein Token ohne Ablaufdatum für eine Image-Registry, die Sie für 
         </tr>
         <tr>
         <td><code>&lt;name_des_geheimen_schlüssels&gt;</code></td>
-        <td>Der Name des 'imagePullSecret', das Sie zuvor erstellt haben.</td>
+        <td>Der Name des imagePullSecret, das Sie zuvor erstellt haben.</td>
         </tr>
         </tbody></table>
 
@@ -165,3 +165,4 @@ Erstellen Sie ein Token ohne Ablaufdatum für eine Image-Registry, die Sie für 
           kubectl apply -f mypod.yaml
           ```
           {: pre}
+

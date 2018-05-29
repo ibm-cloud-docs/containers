@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -18,7 +18,7 @@ lastupdated: "2018-03-16"
 # Restricción del tráfico de red para los nodos trabajadores de extremo
 {: #edge}
 
-Los nodos trabajadores de extremo pueden mejorar la seguridad de su clúster de Kubernetes al permitir el acceso externo a un número inferior de nodos trabajadores y aislar la carga de trabajo en red en {{site.data.keyword.containerlong}}. 
+Los nodos trabajadores de extremo pueden mejorar la seguridad de su clúster de Kubernetes al permitir el acceso externo a un número inferior de nodos trabajadores y aislar la carga de trabajo en red en {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
 Cuando estos nodos trabajadores se marcan solo para trabajo en red, las demás cargas de trabajo no pueden consumir la CPU ni la memoria del nodo trabajador ni interferir con la red.
@@ -50,7 +50,7 @@ Pasos:
 2. Añada a los nodos trabajadores la etiqueta `dedicated=edge`. Cuando un nodo se ha marcado con `dedicated=edge`, todos los Ingress y equilibradores de carga posteriores se despliegan en un nodo trabajador de extremo.
 
   ```
-  kubectl label nodes <node_name> <node_name2> dedicated=edge
+  kubectl label nodes <node1_name> <node2_name> dedicated=edge
   ```
   {: pre}
 
@@ -64,7 +64,7 @@ Pasos:
   Salida:
 
   ```
-  kubectl get service -n <namespace> <name> -o yaml | kubectl apply -f
+  kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f
   ```
   {: screen}
 
@@ -73,7 +73,7 @@ Pasos:
   Salida:
 
   ```
-  service "<name>" configured
+  service "my_loadbalancer" configured
   ```
   {: screen}
 
@@ -86,9 +86,9 @@ Se ha añadido a los nodos trabajadores la etiqueta `dedicated=edge` y se han vu
 {: #edge_workloads}
 
 Una de las ventajas de los nodos trabajadores extremos es que se puede especificar que solo ejecuten servicios de red.
-{:shortdesc} 
+{:shortdesc}
 
-Mediante la tolerancia `dedicated=edge` se conseguirá que todos los servicios de equilibradores de carga y de Ingress se desplieguen solo en los nodos trabajadores etiquetados. Sin embargo, para evitar que se ejecuten otras cargas de trabajo en los nodos trabajadores de extremo y consuman recursos de los nodos trabajadores, se deben utilizar [corrupciones de Kubernetes ![Enlace de icono externo](../icons/launch-glyph.svg "Enlace de icono externo")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
+Mediante la tolerancia `dedicated=edge` se conseguirá que todos los servicios de equilibradores de carga y de Ingress se desplieguen solo en los nodos trabajadores etiquetados. Sin embargo, para evitar que se ejecuten otras cargas de trabajo en los nodos trabajadores de extremo y consuman recursos de los nodos trabajadores, se deben utilizar [antagonismos de Kubernetes ![Enlace de icono externo](../icons/launch-glyph.svg "Enlace de icono externo")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
 
 
 1. Obtenga una lista de todos los nodos trabajadores con la etiqueta `edge`.
@@ -98,10 +98,12 @@ Mediante la tolerancia `dedicated=edge` se conseguirá que todos los servicios d
   ```
   {: pre}
 
-2. Aplique una corrupción a cada nodo trabajador que impida que los pods se ejecuten en el nodo trabajador y que elimine los pods que no tengan la etiqueta `edge` del nodo trabajador. Los pods que se eliminen se volverán a desplegar en los demás nodos trabajadores con capacidad.
+2. Aplique un antagonismo a cada nodo trabajador que impida que los pods se ejecuten en el nodo trabajador y que elimine los pods que no tengan la etiqueta `edge` del nodo trabajador. Los pods que se eliminen se volverán a desplegar en los demás nodos trabajadores con capacidad.
 
   ```
   kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute
   ```
+  Ahora, solo se desplegarán en los nodos trabajadores de extremo los pods con la tolerancia `dedicated=edge`.
 
-Ahora, solo se desplegarán en los nodos trabajadores de extremo los pods con la tolerancia `dedicated=edge`.
+3. Si elige [habilitar la conservación de direcciones IP de origen para un servicio de equilibrio de carga ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), asegúrese de que los pods de apps están planificados en los nodos trabajadores de extremo [añadiendo afinidad de nodos de extremo a los pods de app](cs_loadbalancer.html#edge_nodes) de forma que las solicitudes entrantes se puedan reenviar a los pods de apps. 
+

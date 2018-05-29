@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-08"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -55,3 +55,4 @@ Controlla le ultime informazioni nella nuova ubicazione:
     - [Configurazione del monitoraggio dell'integrità per i nodi di lavoro con Autorecovery](cs_health.html#autorecovery)
 - [Visualizzazione delle risorse del cluster Kubernetes](cs_integrations.html#weavescope)
 - [Rimozione dei cluster](cs_clusters.html#remove)
+

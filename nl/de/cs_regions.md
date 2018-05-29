@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-13"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -23,7 +23,7 @@ lastupdated: "2018-03-13"
 
 ![{{site.data.keyword.containershort_notm}}-Regionen und -Rechenzentren](/images/regions.png)
 
-Abbildung. {{site.data.keyword.containershort_notm}}-Regionen und Rechenzentren
+{{site.data.keyword.containershort_notm}}-Regionen und Rechenzentren
 
 Unterstützte {{site.data.keyword.containershort_notm}}-Regionen:
   * Asien-Pazifik (Norden)
@@ -137,14 +137,15 @@ Standorte sind physische Rechenzentren, die innerhalb einer {{site.data.keyword.
 | Vereinigte Staaten (Osten)      | mon01, tor01, wdc06, wdc07        | Montreal, Toronto, Washington DC |
 | Vereinigte Staaten (Süden)     | dal10, dal12, dal13, sao01       | Dallas, São Paulo |
 
-Die Ressourcen Ihrer Cluster bleiben an dem Standort (Rechenzentrum), an dem der Cluster bereitgestellt wird. Die folgende Abbildung stellt die Beziehung Ihres Clusters innerhalb der Beispielregion 'Vereinigte Staaten (Osten)' genauer dar. 
+Die Ressourcen Ihrer Cluster bleiben an dem Standort (Rechenzentrum), an dem der Cluster bereitgestellt wird. Die folgende Abbildung stellt die Beziehung Ihres Clusters innerhalb der Beispielregion 'Vereinigte Staaten (Osten)' genauer dar.
 
 1.  Die Ressourcen Ihres Clusters, einschließlich der Master- und Workerknoten, befinden sich an demselben Standort, an dem Sie den Cluster bereitgestellt haben. Wenn Sie lokale Container-Orchestrierungsaktionen wie z. B. `kubectl`-Befehle einleiten, werden die Informationen zwischen den Master- und Workerknoten innerhalb desselben Standortsausgetauscht.
 
 2.  Wenn Sie andere Clusterressourcen konfigurieren, z. B. Speicher-, Netz- und Rechenressourcen oder Anwendungen, die in Pods ausgeführt werden, verbleiben die Ressourcen und ihre Daten an dem Standort, an dem Sie den Cluster bereitgestellt haben.
 
-3.  Wenn Sie  Cluster-Management-Aktionen wie die `bx cs`-Befehle ausführen, werden Basisinformationen über die Cluster (wie z. B. Name, ID, Benutzer, Befehl) an den regionalen Endpunkt weitergeleitet. 
+3.  Wenn Sie  Cluster-Management-Aktionen wie die `bx cs`-Befehle ausführen, werden Basisinformationen über die Cluster (wie z. B. Name, ID, Benutzer, Befehl) an den regionalen Endpunkt weitergeleitet.
 
 ![Erklärung, wo Ihre Clusterresourcen sich befinden](/images/region-cluster-resources.png)
 
-Abbildung. Erklärung, wo Ihre Clusterressourcen sich befinden.
+Erklärung, wo Ihre Clusterressourcen sich befinden.
+

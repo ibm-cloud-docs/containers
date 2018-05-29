@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-02-27"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -92,13 +92,13 @@ Gehen Sie wie folgt vor, um die App bereitzustellen:
   ```
   {: pre}
 
-  **Anmerkung**: Wenn der Anmeldebefehl fehlschlägt, verwenden Sie möglicherweise eine eingebundene ID. Versuchen Sie, das Flag `--sso` an den Befehl anzufügen. Verwenden Sie die bereitgestellte URL in Ihrer CLI-Ausgabe, um einen einmaligen Kenncode abzurufen.
+  **Hinweis**: Wenn der Anmeldebefehl fehlschlägt, verwenden Sie möglicherweise eine eingebundene ID. Versuchen Sie, das Flag `--sso` an den Befehl anzufügen. Verwenden Sie die bereitgestellte URL in Ihrer CLI-Ausgabe, um einen einmaligen Kenncode abzurufen.
 
 4. Legen Sie in Ihrer CLI (Befehlszeilenschnittstelle) den Kontext für den Cluster fest.
     1. Ermitteln Sie den Befehl zum Festlegen der Umgebungsvariablen und laden Sie die Kubernetes-Konfigurationsdateien herunter.
 
         ```
-        bx cs cluster-config <pr-unternehmenscluster>
+        bx cs cluster-config <clustername_oder_-id>
         ```
         {: pre}
 
@@ -134,6 +134,8 @@ um den Pfad zu der lokalen Kubernetes-Konfigurationsdatei als Umgebungsvariable 
 
 7.  Erstellen Sie ein Docker-Image, das die App-Dateien aus dem Verzeichnis `Lab 1` enthält. Falls zu einem späteren Zeitpunkt Änderungen an der App vorgenommen werden sollen, wiederholen Sie diese Schritte, um eine weitere Version des Image zu erstellen.
 
+    
+
     1.  Erstellen Sie das Image lokal. Geben Sie den Namen und den Tag an, den Sie verwenden möchten. Verwenden Sie unbedingt den Namensbereich, den Sie in {{site.data.keyword.registryshort_notm}} im vorherigen Lernprogramm erstellt haben. Durch die Kennzeichnung (das Tagging) des Image mit den Namensbereichsinformationen weiß Docker, wohin das Image in einem späteren Schritt per Push-Operation übertragen werden soll. Verwenden Sie im Imagenamen nur alphanumerische Zeichen in Kleinschreibung oder Unterstreichungszeichen (`_`). Vergessen Sie nicht den Punkt (`.`) am Ende des Befehls. Der Punkt signalisiert Docker, im aktuellen Verzeichnis nach der Dockerfile zu suchen und Artefakte zum Erstellen des Image zu erstellen.
 
         ```
@@ -143,7 +145,7 @@ um den Pfad zu der lokalen Kubernetes-Konfigurationsdatei als Umgebungsvariable 
 
         Überprüfen Sie nach der Beendigung des Buildprozesses, dass die folgende Nachricht über die erfolgreiche Ausführung angezeigt wird:
         ```
-        Successfully built <image_id>
+        Successfully built <image-id>
         Successfully tagged <image_tag>
         ```
         {: screen}
@@ -155,10 +157,10 @@ um den Pfad zu der lokalen Kubernetes-Konfigurationsdatei als Umgebungsvariable 
         ```
         {: pre}
 
-        Ausgabe:
+        Beispielausgabe:
 
         ```
-        The push refers to a repository [registry.<region>.bluemix.net/<namensbereich>/hello-world]
+        The push refers to a repository [registry.ng.bluemix.net/pr_firm/hello-world]
         ea2ded433ac8: Pushed
         894eb973f4d3: Pushed
         788906ca2c7e: Pushed
@@ -181,12 +183,14 @@ um den Pfad zu der lokalen Kubernetes-Konfigurationsdatei als Umgebungsvariable 
     ```
     {: pre}
 
-    Ausgabe:
+    Beispielausgabe:
 
     ```
     deployment "hello-world-deployment" created
     ```
     {: screen}
+
+    
 
 9.  Machen Sie die App zugänglich, indem Sie die Bereitstellung als Service vom Typ 'NodePort' zur Verfügung stellen. Genau wie beim Zugänglichmachen eines Ports für eine Cloud Foundry-App machen Sie als Knotenport (NodePort) den Port zugänglich, an dem der Workerknoten für Datenverkehr empfangsbereit ist.
 
@@ -195,7 +199,7 @@ um den Pfad zu der lokalen Kubernetes-Konfigurationsdatei als Umgebungsvariable 
     ```
     {: pre}
 
-    Ausgabe:
+    Beispielausgabe:
 
     ```
     service "hello-world-service" exposed
@@ -204,7 +208,6 @@ um den Pfad zu der lokalen Kubernetes-Konfigurationsdatei als Umgebungsvariable 
 
     <table>
     <table summary=“Information about the expose command parameters.”>
-    <caption>Tabelle 1. Befehlsparameter</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Weitere Informationen zu den Parametern von 'expose'</th>
     </thead>
@@ -239,11 +242,11 @@ um den Pfad zu der lokalen Kubernetes-Konfigurationsdatei als Umgebungsvariable 
     1.  Rufen Sie Informationen zum Service ab, um zu erfahren, welcher Knotenport (NodePort) zugewiesen wurde.
 
         ```
-        kubectl describe service <hello-world-service>
+        kubectl describe service hello-world-service
         ```
         {: pre}
 
-        Ausgabe:
+        Beispielausgabe:
 
         ```
         Name:                   hello-world-service
@@ -251,10 +254,10 @@ um den Pfad zu der lokalen Kubernetes-Konfigurationsdatei als Umgebungsvariable 
         Labels:                 run=hello-world-deployment
         Selector:               run=hello-world-deployment
         Type:                   NodePort
-        IP:                     10.10.10.8
+        IP:                     10.xxx.xx.xxx
         Port:                   <unset> 8080/TCP
         NodePort:               <unset> 30872/TCP
-        Endpoints:              172.30.171.87:8080
+        Endpoints:              172.30.xxx.xxx:8080
         Session Affinity:       None
         No events.
         ```
@@ -265,21 +268,22 @@ um den Pfad zu der lokalen Kubernetes-Konfigurationsdatei als Umgebungsvariable 
     2.  Rufen Sie die öffentliche IP-Adresse für den Workerknoten im Cluster ab.
 
         ```
-        bx cs workers <pr-unternehmenscluster>
+        bx cs workers <clustername_oder_-id>
         ```
         {: pre}
 
-        Ausgabe:
+        Beispielausgabe:
 
         ```
+        bx cs workers pr_firm_cluster
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.47.227.138  10.171.53.188    free           normal   Ready    mil01      1.8.8
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.8.11
         ```
         {: screen}
 
-11. Öffnen Sie einen Browser und überprüfen Sie die App mit der folgenden URL: `http://<IP_address>:<NodePort>`. Anhand der Werte für das Beispiel lautet die URL wie folgt: `http://169.47.227.138:30872`. Bei Eingabe dieser URL in einen Browser wird folgender Text angezeigt.
+11. Öffnen Sie einen Browser und überprüfen Sie die App mit der folgenden URL: `http://<IP_address>:<NodePort>`. Anhand der Werte im Beispiel lautet die URL wie folgt: `http://169.xx.xxx.xxx:30872`. Bei Eingabe dieser URL in einen Browser wird folgender Text angezeigt.
 
     ```
     Hello world! Your app is up and running in a cluster!
@@ -345,10 +349,10 @@ Wie im Konfigurationsscript definiert kann Kubernetes anhand einer Verfügbarkei
   ```
   {: pre}
 
-  Ausgabe:
+  Beispielausgabe:
 
   ```
-  The push refers to a repository [registry.<region>.bluemix.net/<namensbereich>/hello-world]
+  The push refers to a repository [registry.ng.bluemix.net/pr_firm/hello-world]
   ea2ded433ac8: Pushed
   894eb973f4d3: Pushed
   788906ca2c7e: Pushed
@@ -400,7 +404,7 @@ Wie im Konfigurationsscript definiert kann Kubernetes anhand einer Verfügbarkei
   ```
   {: pre}
 
-  Ausgabe:
+  Beispielausgabe:
 
   ```
   deployment "hw-demo-deployment" created
@@ -411,18 +415,18 @@ Wie im Konfigurationsscript definiert kann Kubernetes anhand einer Verfügbarkei
 7.  Nachdem die Bereitstellung nun abgeschlossen ist, können Sie einen Browser öffnen und die App überprüfen. Um die URL zu bilden, kombinieren Sie die öffentliche IP-Adresse, die Sie in der vorherigen Lerneinheit für Ihren Workerknoten verwendet haben, mit der Knotenportnummer (NodePort), die im Konfigurationsscript angegeben war. So rufen Sie die öffentliche IP-Adresse für den Workerknoten ab:
 
   ```
-  bx cs workers <pr-unternehmenscluster>
+  bx cs workers <clustername_oder_-id>
   ```
   {: pre}
 
-  Anhand der Werte für das Beispiel lautet die URL wie folgt: `http://169.47.227.138:30072`. Bei Eingabe dieser URL in einen Browser wird gegebenenfalls der folgende Text angezeigt. Falls dieser Text nicht angezeigt wird, machen Sie sich keine Gedanken. Diese App wurde für alternierende Intervalle von Aktivität und Inaktivität konzipiert.
+  Anhand der Werte im Beispiel lautet die URL wie folgt: `http://169.xx.xxx.xxx:30072`. Bei Eingabe dieser URL in einen Browser wird gegebenenfalls der folgende Text angezeigt. Falls dieser Text nicht angezeigt wird, machen Sie sich keine Gedanken. Diese App wurde für alternierende Intervalle von Aktivität und Inaktivität konzipiert.
 
   ```
   Hello world! Great job getting the second stage up and running! (Hallo Welt! Sie haben Stage2 hervorragend umgesetzt.)
   ```
   {: screen}
 
-  Sie können den Status auch unter `http://169.47.227.138:30072/healthz` überprüfen.
+  Sie können den Status auch unter `http://169.xx.xxx.xxx:30072/healthz` überprüfen. 
 
   Während der ersten 10-15 Sekunden wird eine Nachricht vom Typ 200 zurückgegeben. Dadurch wissen Sie, dass die App erfolgreich ausgeführt wird. Nach Verstreichen dieser 15 Sekunden wird eine Zeitlimitnachricht angezeigt. Dies entspricht dem erwarteten Verhalten.
 
@@ -459,7 +463,7 @@ Sind Sie bereit, die von Ihnen erstellten Elemente zu löschen, bevor Sie fortfa
   ```
   {: pre}
 
-  Ausgabe:
+  Beispielausgabe:
 
   ```
   deployment "hw-demo-deployment" deleted
@@ -525,7 +529,7 @@ Aus dem vorherigen Lernprogramm verfügen Sie bereits über ein Konto und einen 
         ```
         {: pre}
 
-3.  Erstellen Sie das '{{site.data.keyword.watson}}-talk'-Image.
+4.  Erstellen Sie das '{{site.data.keyword.watson}}-talk'-Image.
 
     1.  Navigieren Sie zum Verzeichnis `watson-talk`.
 
@@ -555,27 +559,27 @@ Aus dem vorherigen Lernprogramm verfügen Sie bereits über ein Konto und einen 
         ```
         {: pre}
 
-4.  Überprüfen Sie, ob die Images erfolgreich zu Ihrem Registry-Namensbereich hinzugefügt wurden. Wenn Sie das Docker Quickstart-Terminal verwendet haben, um Docker-Befehle auszuführen, wechseln Sie unbedingt zurück zu der CLI (Befehlszeilenschnittstelle), die Sie zum Festlegen der Sitzungsvariablen `KUBECONFIG` verwendet haben.
+5.  Überprüfen Sie, ob die Images erfolgreich zu Ihrem Registry-Namensbereich hinzugefügt wurden. Wenn Sie das Docker Quickstart-Terminal verwendet haben, um Docker-Befehle auszuführen, wechseln Sie unbedingt zurück zu der CLI (Befehlszeilenschnittstelle), die Sie zum Festlegen der Sitzungsvariablen `KUBECONFIG` verwendet haben.
 
     ```
     bx cr images
     ```
     {: pre}
 
-    Ausgabe:
+    Beispielausgabe:
 
     ```
     Listing images...
 
-    REPOSITORY                                  NAMESPACE  TAG            DIGEST         CREATED         SIZE     VULNERABILITY STATUS
-    registry.<region>.bluemix.net/namespace/hello-world   namespace  1              0d90cb732881   40 minutes ago  264 MB   OK
-    registry.<region>.bluemix.net/namespace/hello-world   namespace  2              c3b506bdf33e   20 minutes ago  264 MB   OK
-    registry.<region>.bluemix.net/namespace/watson        namespace  latest         fedbe587e174   3 minutes ago   274 MB   OK
-    registry.<region>.bluemix.net/namespace/watson-talk   namespace  latest         fedbe587e174   2 minutes ago   274 MB   OK
+    REPOSITORY                                      NAMESPACE  TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS
+    registry.ng.bluemix.net/namespace/hello-world   namespace  1        0d90cb732881   40 minutes ago  264 MB   OK
+    registry.ng.bluemix.net/namespace/hello-world   namespace  2        c3b506bdf33e   20 minutes ago  264 MB   OK
+    registry.ng.bluemix.net/namespace/watson        namespace  latest   fedbe587e174   3 minutes ago   274 MB   OK
+    registry.ng.bluemix.net/namespace/watson-talk   namespace  latest   fedbe587e174   2 minutes ago   274 MB   OK
     ```
     {: screen}
 
-5.  Öffnen Sie die Datei `watson-deployment.yml` im Verzeichnis `Lab 3` mit einem Texteditor. Dieses Konfigurationsscript enthält sowohl für die 'watson'- als auch die 'watson-talk'-Komponente der
+6.  Öffnen Sie die Datei `watson-deployment.yml` im Verzeichnis `Lab 3` mit einem Texteditor. Dieses Konfigurationsscript enthält sowohl für die 'watson'- als auch die 'watson-talk'-Komponente der
 App eine Bereitstellung und einen Service.
 
     1.  Aktualisieren Sie für beide Bereitstellungen die Details für das Image in Ihrem Registry-Namensbereich.
@@ -605,7 +609,7 @@ Serviceberechtigungsnachweise unter Verwendung des Datenträgermountpfads suchen
                 - name: service-bind-volume
                   secret:
                     defaultMode: 420
-                    secretName: binding-<mein_tone_analyzer>
+                    secretName: binding-mytoneanalyzer
         ```
         {: codeblock}
 
@@ -618,14 +622,14 @@ Serviceberechtigungsnachweise unter Verwendung des Datenträgermountpfads suchen
 
     3.  Beachten Sie im Abschnitt für den Service 'watson-talk' die Knotenportnummer, die für `NodePort` festgelegt ist. Das vorliegende Beispiel verwendet die Nummer 30080.
 
-6.  Führen Sie das Konfigurationsscript aus.
+7.  Führen Sie das Konfigurationsscript aus.
 
   ```
   kubectl apply -f watson-deployment.yml
   ```
   {: pre}
 
-7.  Optional: Überprüfen Sie, ob der geheime Schlüssel für {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} als Datenträger an den Pod angehängt wurde.
+8.  Optional: Überprüfen Sie, ob der geheime Schlüssel für {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} als Datenträger an den Pod angehängt wurde.
 
     1.  Wenn Sie den Namen eines Watson-Pods abrufen wollen, führen Sie den folgenden Befehl aus:
 
@@ -634,7 +638,7 @@ Serviceberechtigungsnachweise unter Verwendung des Datenträgermountpfads suchen
         ```
         {: pre}
 
-        Ausgabe:
+        Beispielausgabe:
 
         ```
         NAME                                 READY     STATUS    RESTARTS  AGE
@@ -650,7 +654,7 @@ Serviceberechtigungsnachweise unter Verwendung des Datenträgermountpfads suchen
         ```
         {: pre}
 
-        Ausgabe:
+        Beispielausgabe:
 
         ```
         Volumes:
@@ -663,20 +667,20 @@ Serviceberechtigungsnachweise unter Verwendung des Datenträgermountpfads suchen
         ```
         {: codeblock}
 
-8.  Öffnen Sie einen Browser und analysieren Sie Text. Die URL weist das folgende Format auf: `http://<worker_node_IP_address>:<watson-talk-nodeport>/analyze/"<text_to_analyze>"`.
+9.  Öffnen Sie einen Browser und analysieren Sie Text. Die URL weist das folgende Format auf: `http://<worker_node_IP_address>:<watson-talk-nodeport>/analyze/"<text_to_analyze>"`.
 
     Beispiel:
 
     ```
-    http://169.47.227.138:30080/analyze/"Heute ist ein herrlicher Tag"
+    http://169.xx.xxx.xxx:30080/analyze/"Heute ist ein herrlicher Tag"
     ```
     {: screen}
 
     In einem Browser wird die JSON-Antwort auf den von Ihnen eingegebenen Text angezeigt.
 
-9.  [Starten Sie das Kubernetes-Dashboard](cs_app.html#cli_dashboard). Beachten Sie, dass die auszuführenden Schritte entsprechend Ihrer Kubernetes-Version variieren.
+10.  [Starten Sie das Kubernetes-Dashboard](cs_app.html#cli_dashboard). Beachten Sie, dass die auszuführenden Schritte entsprechend Ihrer Kubernetes-Version variieren.
 
-10. Auf der Registerkarte **Workloads** werden die von Ihnen erstellten Ressourcen angezeigt. Wenn Sie das Kubernetes-Dashboard fertig untersucht haben, beenden Sie den Befehl `proxy` mit der Tastenkombination STRG + C.
+11. Auf der Registerkarte **Workloads** werden die von Ihnen erstellten Ressourcen angezeigt. Wenn Sie das Kubernetes-Dashboard fertig untersucht haben, beenden Sie den Befehl `proxy` mit der Tastenkombination STRG + C.
 
 ### Lerneinheit 3b. Aktive Bereitstellung von 'Watson Tone Analyzer' aktualisieren
 {: #lesson3b}
@@ -732,7 +736,7 @@ Sind Sie bereit, die von Ihnen erstellten Elemente zu löschen? Zum Löschen der
   ```
   {: pre}
 
-  Ausgabe:
+  Beispielausgabe:
 
   ```
   deployment "watson-pod" deleted
@@ -745,8 +749,8 @@ service "watson-talk-service" deleted
   Falls Sie den Cluster nicht beibehalten wollen, können Sie diesen ebenfalls löschen.
 
   ```
-  bx cs cluster-rm <pr-unternehmenscluster>
-  ```
+        bx cs cluster-rm <clustername_oder_-id>
+        ```
   {: pre}
 
 ## Womit möchten Sie fortfahren?
@@ -757,3 +761,4 @@ Nachdem Sie sich mit den grundlegenden Informationen vertraut gemacht haben, kö
 - Komplexeres Lab im Repository vervollständigen
 - [Apps automatisch skalieren](cs_app.html#app_scaling) mit {{site.data.keyword.containershort_notm}}
 - Erkunden Sie Lernprogramme für die Containerorchestrierung unter [developerWorks ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/code/journey/category/container-orchestration/)
+

@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-15"
+lastupdated: "2018-4-20"
 
 ---
 
-{:new_window: target="_blank"}
+{:new_window: target="blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -38,19 +38,56 @@ As diferenças mais significativas entre o {{site.data.keyword.Bluemix_notm}} p�
 ### Diferenças no gerenciamento de cluster entre os ambientes de nuvem
 {: #dedicated_env_differences}
 
-|Áreas|{{site.data.keyword.Bluemix_notm}} público|{{site.data.keyword.Bluemix_dedicated_notm}}|
-|--|--------------|--------------------------------|
-|Criação do cluster|Crie um cluster grátis ou especifique os detalhes a seguir para um cluster padrão:<ul><li>Tipo de cluster</li><li>Nome</li><li>Localização</li><li>Machine type</li><li>Número de nós do trabalhador</li><li>VLAN pública</li><li>VLAN privada</li><li>Hardware</li></ul>|Especifique os detalhes a seguir para um cluster padrão:<ul><li>Nome</li><li>Versão do Kubernetes</li><li>Machine type</li><li>Número de nós do trabalhador</li></ul><p>**Nota:** as configurações de VLANs e de Hardware são predefinidas durante a criação do ambiente do {{site.data.keyword.Bluemix_notm}}.</p>|
-|Hardware de cluster e propriedade|Em clusters padrão, o hardware pode ser compartilhado por outros clientes {{site.data.keyword.IBM_notm}} ou dedicado somente a você. As VLANs públicas e privadas são pertencentes e gerenciadas por você em sua conta de infraestrutura do IBM Cloud (SoftLayer).|Em clusters no {{site.data.keyword.Bluemix_dedicated_notm}}, o hardware é sempre dedicado. As VLANs públicas e privadas pertencem e são gerenciadas pela IBM para você. O local é predefinido para o ambiente do {{site.data.keyword.Bluemix_notm}}.|
-|Balanceador de carga e rede de Ingresso|Durante o fornecimento de clusters padrão, as ações a seguir ocorrem automaticamente.<ul><li>Uma sub-rede pública móvel e uma sub-rede privada móvel são ligadas ao seu cluster e designadas à sua conta do IBM Cloud infrastructure (SoftLayer).</li><li>Um endereço IP público portátil é usado para um balanceador de carga de aplicativos altamente disponível e uma rota pública exclusiva é atribuída no formato &lt;cluster_name&gt;.containers.mybluemix.net. É possível usar essa rota para expor múltiplos apps ao público. Um endereço IP privado móvel será usado para um balanceador de carga de aplicativo privado.</li><li>Quatro endereços IP públicos móveis e quatro endereços IP privados móveis são designados ao cluster e podem ser usados para expor apps por meio de serviços do balanceador de carga. Sub-redes adicionais podem ser solicitadas por meio de sua conta de infraestrutura do IBM Cloud (SoftLayer).</li></ul>|Quando você cria sua conta dedicada, você toma uma decisão de conectividade sobre como deseja expor e acessar seus serviços de cluster. Se você quer usar seus próprios intervalos de IP corporativos (IPs gerenciados pelo usuário), deve-se fornecê-los quando você [configura um ambiente de {{site.data.keyword.Bluemix_dedicated_notm}}](/docs/dedicated/index.html#setupdedicated). <ul><li>Por padrão, nenhuma sub-rede pública é ligada aos clusters que você cria em sua conta dedicada. Em vez disso, você tem a flexibilidade de escolher o modelo de conectividade que melhor combina com sua empresa.</li><li>Depois de criar o cluster, você escolhe o tipo de sub-rede que você deseja ligar e usar com seu cluster para a conectividade do balanceador de carga ou do Ingress.<ul><li>Para sub-redes móveis públicas ou privadas, é possível [incluir sub-redes nos clusters](cs_subnets.html#subnets)</li><li>Para endereços IP gerenciados pelo usuário que você forneceu à IBM na migração do dedicado, é possível [incluir sub-redes gerenciadas por usuário nos clusters](#dedicated_byoip_subnets).</li></ul></li><li>Depois de ligar uma sub-rede a seu cluster, o balanceador de carga do aplicativo de Ingresso é criado. Uma rota pública do Ingress será criada somente se você usar uma sub-rede pública móvel.</li></ul>|
-|Rede de NodePort|Exponha uma porta pública em seu nó do trabalhador e use o endereço IP público do nó do trabalhador
-para acessar publicamente seu serviço no cluster.|Todos os endereços IP públicos dos nós do trabalhador são bloqueados por um firewall. No entanto, para serviços do {{site.data.keyword.Bluemix_notm}} incluídos no cluster, a porta de nó pode ser acessada por meio de um endereço IP público ou de um endereço IP privado.|
-|Armazenamento persistente|Use o [fornecimento
+<table>
+<col width="20%">
+<col width="40%">
+<col width="40%">
+ <thead>
+ <th>Áreas</th>
+ <th>{{site.data.keyword.Bluemix_notm}} público</th>
+ <th>{{site.data.keyword.Bluemix_dedicated_notm}}</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td>Criação do cluster</td>
+ <td>Crie um cluster grátis ou um cluster padrão.</td>
+ <td>Crie um cluster padrão.</td>
+ </tr>
+ <tr>
+ <td>Hardware de cluster e propriedade</td>
+ <td>Em clusters padrão, o hardware pode ser compartilhado por outros clientes {{site.data.keyword.IBM_notm}} ou dedicado somente a você. As VLANs públicas e privadas são pertencentes e gerenciadas por você em sua conta de infraestrutura do IBM Cloud (SoftLayer).</td>
+ <td>Em clusters no {{site.data.keyword.Bluemix_dedicated_notm}}, o hardware é sempre dedicado. As VLANs públicas e privadas disponíveis para criação de cluster são predefinidas quando o ambiente do {{site.data.keyword.Bluemix_dedicated_notm}} é configurado e pertencem e são gerenciadas pela IBM para você. O local disponível durante a criação de cluster também é predefinido para o ambiente do {{site.data.keyword.Bluemix_notm}}.</td>
+ </tr>
+ <tr>
+ <td>Balanceador de carga e rede de Ingresso</td>
+ <td>Durante o fornecimento de clusters padrão, as ações a seguir ocorrem automaticamente.<ul><li>Uma sub-rede pública móvel e uma sub-rede privada móvel são ligadas ao seu cluster e designadas à sua conta do IBM Cloud infrastructure (SoftLayer). Sub-redes adicionais podem ser solicitadas por meio de sua conta de infraestrutura do IBM Cloud (SoftLayer).</li></li><li>Um endereço IP público móvel é usado para um balanceador de carga do aplicativo (ALB) altamente disponível do Ingress e uma rota pública exclusiva é designada no formato <code>&lt;cluster_name&gt;. Containers.mybluemix.net</code>. É possível usar essa rota para expor múltiplos apps ao público. Um endereço IP privado móvel será usado para um ALB privado.</li><li>Quatro endereços IP públicos móveis e quatro endereços IP privados móveis são designados ao cluster e podem ser usados para expor apps por meio de serviços do balanceador de carga.</ul></td>
+ <td>Quando você cria sua conta dedicada, você toma uma decisão de conectividade sobre como deseja expor e acessar seus serviços de cluster. Se você quer usar seus próprios intervalos de IP corporativos (IPs gerenciados pelo usuário), deve-se fornecê-los quando você [configura um ambiente de {{site.data.keyword.Bluemix_dedicated_notm}}](/docs/dedicated/index.html#setupdedicated). <ul><li>Por padrão, nenhuma sub-rede pública é ligada aos clusters que você cria em sua conta dedicada. Em vez disso, você tem a flexibilidade de escolher o modelo de conectividade que melhor combina com sua empresa.</li><li>Depois de criar o cluster, você escolhe o tipo de sub-rede que você deseja ligar e usar com seu cluster para a conectividade do balanceador de carga ou do Ingress.<ul><li>Para sub-redes móveis públicas ou privadas, é possível [incluir sub-redes nos clusters](cs_subnets.html#subnets)</li><li>Para endereços IP gerenciados pelo usuário que você forneceu à IBM na migração do dedicado, é possível [incluir sub-redes gerenciadas por usuário nos clusters](#dedicated_byoip_subnets).</li></ul></li><li>Depois que você ligar uma sub-rede ao cluster, o ALB do Ingress será criado. Uma rota pública do Ingress será criada somente se você usar uma sub-rede pública móvel.</li></ul></td>
+ </tr>
+ <tr>
+ <td>Rede de NodePort</td>
+ <td>Exponha uma porta pública em seu nó do trabalhador e use o endereço IP público do nó do trabalhador
+para acessar publicamente seu serviço no cluster.</td>
+ <td>Todos os endereços IP públicos dos nós do trabalhador são bloqueados por um firewall. No entanto, para serviços do {{site.data.keyword.Bluemix_notm}} incluídos no cluster, a porta de nó pode ser acessada por meio de um endereço IP público ou de um endereço IP privado.</td>
+ </tr>
+ <tr>
+ <td>Armazenamento persistente</td>
+ <td>Use o [fornecimento
 dinâmico](cs_storage.html#create) ou o [fornecimento
-estático](cs_storage.html#existing) de volumes.|Use [fornecimento dinâmico](cs_storage.html#create) de volumes. [Abra um chamado de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support) para solicitar um backup para seus volumes, solicitar uma restauração de seus volumes e executar outras funções de armazenamento.</li></ul>|
-|URL do registro de imagem no {{site.data.keyword.registryshort_notm}}|<ul><li>Sul e Leste dos EUA: <code>registry.ng bluemix.net</code></li><li>Sul do Reino Unido: <code>registry.eu-gb.bluemix.net</code></li><li>UE Central (Frankfurt): <code>registry.eu-de.bluemix.net</code></li><li>Austrália (Sydney): <code>registry.au-syd.bluemix.net</code></li></ul>|<ul><li>Para novos namespaces, use os mesmos registros baseados em região que são definidos para o {{site.data.keyword.Bluemix_notm}} público.</li><li>Para namespaces que foram configurados para contêineres únicos e escaláveis no {{site.data.keyword.Bluemix_dedicated_notm}}, use <code>registro.&lt;dedicated_domain&gt;</code></li></ul>|
-|Acessando o registro|Veja as opções em [Usando registros de imagem privada e pública com o {{site.data.keyword.containershort_notm}}](cs_images.html).|<ul><li>Para novos namespaces, veja as opções em [Usando registros de imagem privada e pública com o {{site.data.keyword.containershort_notm}}](cs_images.html).</li><li>Para namespaces que tenham sido configurados para grupos únicos e escaláveis, [use um token e crie um segredo do
-Kubernetes](cs_dedicated_tokens.html#cs_dedicated_tokens) para autenticação.</li></ul>|
+estático](cs_storage.html#existing) de volumes.</td>
+ <td>Use [fornecimento dinâmico](cs_storage.html#create) de volumes. [Abra um chamado de suporte](cs_troubleshoot_storage.html#ts_getting_help) para solicitar um backup para seus volumes, solicitar uma restauração de seus volumes e executar outras funções de armazenamento.</li></ul></td>
+ </tr>
+ <tr>
+ <td>URL do registro de imagem no {{site.data.keyword.registryshort_notm}}</td>
+ <td><ul><li>Sul e Leste dos EUA: <code>registry.ng bluemix.net</code></li><li>Sul do Reino Unido: <code>registry.eu-gb.bluemix.net</code></li><li>UE Central (Frankfurt): <code>registry.eu-de.bluemix.net</code></li><li>Austrália (Sydney): <code>registry.au-syd.bluemix.net</code></li></ul></td>
+ <td><ul><li>Para novos namespaces, use os mesmos registros baseados em região que são definidos para o {{site.data.keyword.Bluemix_notm}} público.</li><li>Para namespaces que foram configurados para contêineres únicos e escaláveis no {{site.data.keyword.Bluemix_dedicated_notm}}, use <code>registro.&lt;dedicated_domain&gt;</code></li></ul></td>
+ </tr>
+ <tr>
+ <td>Acessando o registro</td>
+ <td>Veja as opções em [Usando registros de imagem privada e pública com o {{site.data.keyword.containershort_notm}}](cs_images.html).</td>
+ <td><ul><li>Para novos namespaces, veja as opções em [Usando registros de imagem privada e pública com o {{site.data.keyword.containershort_notm}}](cs_images.html).</li><li>Para namespaces que tenham sido configurados para grupos únicos e escaláveis, [use um token e crie um segredo do
+Kubernetes](cs_dedicated_tokens.html#cs_dedicated_tokens) para autenticação.</li></ul></td>
+ </tr>
+</tbody></table>
 {: caption="Diferenças de recursos entre o {{site.data.keyword.Bluemix_notm}} público e o {{site.data.keyword.Bluemix_dedicated_notm}}" caption-side="top"}
 
 <br />
@@ -123,26 +160,26 @@ Para permitir que os usuários do {{site.data.keyword.Bluemix_dedicated_notm}} a
         * Para convidar um único usuário:
 
             ```
-            bx cf bluemix-admin invite-users-to-public -userid=<user_email> -apikey=<public_api_key> -public_org_id=<public_org_id>
+            bx cf bluemix-admin invite-users-to-public -userid=<user_email> -apikey=<public_API_key> -public_org_id=<public_org_ID>
             ```
             {: pre}
 
-            Substitua <em>&lt;user_IBMid&gt;</em> pelo e-mail do usuário que você deseja convidar, <em>&lt;public_api_key&gt;</em> pela chave de API gerada na etapa anterior e <em>&lt;public_org_id&gt;</em> pelo GUID da organização da conta pública. Consulte [Convidando um usuário do IBM Cloud Dedicated](/docs/cli/plugins/bluemix_admin/index.html#admin_dedicated_invite_public) para obter mais informações sobre esse comando.
+            Substitua <em>&lt;user_IBMid&gt;</em> pelo e-mail do usuário que você deseja convidar, <em>&lt;public_API_key&gt;</em> pela chave API gerada na etapa anterior e <em>&lt;public_org_ID&gt;</em> pelo GUID da organização da conta pública. Consulte [Convidando um usuário do IBM Cloud Dedicated](/docs/cli/plugins/bluemix_admin/index.html#admin_dedicated_invite_public) para obter mais informações sobre esse comando.
 
         * Para convidar todos os usuários atualmente em uma organização de conta dedicada:
 
             ```
-            bx cf bluemix-admin invite-users-to-public -organization=<dedicated_org_id> -apikey=<public_api_key> -public_org_id=<public_org_id>
+            bx cf bluemix-admin invite-users-to-public -organization=<dedicated_org_ID> -apikey=<public_API_key> -public_org_id=<public_org_ID>
             ```
 
-            Substitua <em>&lt;dedicated_org_id&gt;</em> pelo ID da organização da conta dedicada, <em>&lt;public_api_key&gt;</em> pela chave API gerada na etapa anterior e <em>&lt;public_org_id&gt;</em> pela GUID da organização de conta pública. Consulte [Convidando um usuário do IBM Cloud Dedicated](/docs/cli/plugins/bluemix_admin/index.html#admin_dedicated_invite_public) para obter mais informações sobre esse comando.
+            Substitua <em>&lt;dedicated_org_ID&gt;</em> pelo ID da organização da conta dedicada, <em>&lt;public_API_key&gt;</em> pela chave API gerada na etapa anterior e <em>&lt;public_org_ID&gt;</em> pelo GUID da organização da conta pública. Consulte [Convidando um usuário do IBM Cloud Dedicated](/docs/cli/plugins/bluemix_admin/index.html#admin_dedicated_invite_public) para obter mais informações sobre esse comando.
 
     3.  Se um IBMid existe para um usuário, o usuário é automaticamente incluído na organização especificada na conta pública. Se um IBMid ainda não existe para um usuário, então um convite é enviado para o endereço de e-mail do usuário. Quando o usuário aceita o convite, um IBMid é criado para o usuário e o usuário é incluído na organização especificada na conta pública.
 
     4.  Verifique se os usuários foram incluídos na conta.
 
         ```
-        bx cf bluemix-admin invite-users-status -apikey=<public_api_key>
+        bx cf bluemix-admin invite-users-status -apikey=<public_API_key>
         ```
         {: pre}
 
@@ -205,16 +242,42 @@ Projete sua configuração de cluster do {{site.data.keyword.Bluemix_dedicated_n
 ### Criando clusters com a GUI
 {: #dedicated_creating_ui}
 
-1.  Abra o console dedicado: `https://<my-dedicated-cloud-instance>.bluemix.net`.
+1. Abra o console dedicado: `https://<my-dedicated-cloud-instance>.bluemix.net`.
+
 2. Marque a caixa de seleção **Efetuar login também no {{site.data.keyword.Bluemix_notm}} Público** e clique em **Efetuar login**.
+
 3. Siga os prompts para efetuar login com seu IBMid. Se esta for a primeira vez que você efetua login em sua conta dedicada, siga os prompts para efetuar login no {{site.data.keyword.Bluemix_dedicated_notm}}.
-4.  No catálogo, selecione **Contêineres** e clique em **Cluster do Kubernetes**.
-5.  Insira um **Nome do cluster**. O nome deve iniciar com uma letra, pode conter letras, números e - e deve ter 35 caracteres ou menos. Observe que o subdomínio do Ingresso designado à {{site.data.keyword.IBM_notm}} é derivado do nome do cluster. O nome do cluster e o subdomínio do Ingresso juntos formam o nome completo do domínio, que deve ser exclusivo dentro de uma região e ter 63 caracteres ou menos. Para atender a esses requisitos, o nome do cluster pode ser truncado ou o subdomínio pode ser designado a valores de caractere aleatórios.
-6.  Selecione um **Tipo de máquina**. O tipo de máquina define a quantia de CPU e de memória virtual que é configurada em cada nó do trabalhador. Essa CPU e memória virtual está disponível para todos os contêineres que você implementa em seus nós.
-    -   O tipo de máquina micro indica a menor opção.
-    -   Um tipo de máquina balanceada tem uma quantia igual de memória designada a cada CPU, que otimiza o desempenho.
-7.  Escolha o **Número de nós do trabalhador** que você precisa. Selecione `3` para assegurar a alta disponibilidade de seu cluster.
-8.  Clique em **Criar Cluster**. Os detalhes para o cluster são abertos, mas os nós do trabalhador no cluster levam alguns minutos para provisão. Na guia **Nós do trabalhador**, é possível ver o progresso da implementação do nó do trabalhador. Quando os nós do trabalhador estão prontos, o estado muda para **Pronto**.
+
+4. No catálogo, selecione **Contêineres** e clique em **Cluster do Kubernetes**.
+
+5. Configure os detalhes do seu cluster.
+
+    1. Insira um **Nome do cluster**. O nome deve iniciar com uma letra, pode conter letras, números e hífen (-) e deve ter 35 caracteres ou menos. Observe que o nome do cluster e a região na qual o cluster é implementado formam o nome completo do domínio para o subdomínio do Ingress. Para assegurar que o subdomínio do Ingress seja exclusivo dentro de uma região, o nome do cluster pode ser truncado e anexado com um valor aleatório dentro do nome de domínio do Ingress.
+
+    2. Selecione o **Local** no qual implementar o cluster. O local disponível foi predefinido quando o ambiente do {{site.data.keyword.Bluemix_dedicated_notm}} foi configurado.
+
+    3. Escolha a versão do servidor da API do Kubernetes para o nó principal do cluster.
+
+    4. Selecione um tipo de isolamento de hardware. Virtual é faturado por hora e bare metal é faturado mensalmente.
+
+        - **Virtual - Dedicado**: os seus nós do trabalhador são hospedados na infraestrutura que é dedicada à sua conta. Os seus recursos físicos estão completamente isolados.
+
+        - **Bare metal**: faturados mensalmente, os servidores bare metal são provisionados pela interação manual com a infraestrutura do IBM Cloud (SoftLayer) e podem levar mais de um dia útil para serem concluídos. Bare metal é mais adequado para aplicativos de alto desempenho que precisam de mais recursos e controle do host. 
+
+        Certifique-se de que deseja provisionar uma máquina bare metal. Como o faturamento é mensal, se ele for cancelado imediatamente após uma ordem por engano, você ainda será cobrado pelo mês integral.
+        {:tip}
+
+    5. Selecione um **Tipo de máquina**. O tipo de máquina define a quantia de CPU virtual, memória e espaço em disco que é configurada em cada nó do trabalhador e disponibilizada para os contêineres. Os tipos de máquinas virtuais e bare metal disponíveis variam pelo local no qual você implementa o cluster. Para obter mais informações, veja a documentação do [comando](cs_cli_reference.html#cs_machine_types) `bx cs machine-type`. Depois de criar seu cluster, é possível incluir tipos de máquina diferentes, incluindo um novo nó do trabalhador no cluster.
+
+    6. Escolha o **Número de nós do trabalhador** que você precisa. Selecione `3` para assegurar a alta disponibilidade de seu cluster.
+
+    7. Selecione uma **VLAN pública** (opcional) e uma **VLAN privada** (necessário). As VLANs pública e privada disponíveis são predefinidas quando o ambiente do {{site.data.keyword.Bluemix_dedicated_notm}} é configurado. Ambas as VLANs se comunicam entre os nós do trabalhador, mas a VLAN pública também se comunica com o mestre do Kubernetes gerenciado pela IBM. É possível usar a mesma VLAN para múltiplos clusters.
+        **Nota**: se os nós do trabalhador estiverem configurados com apenas uma VLAN privada, será necessário configurar uma solução alternativa para conectividade de rede. Para obter mais informações, veja [Conexão da VLAN para nós do trabalhador](cs_clusters.html#worker_vlan_connection).
+
+    8. Por padrão, **Criptografar disco local** é selecionado. Se você escolher limpar a caixa de seleção, os dados do Docker do host não serão criptografados.[Saiba mais sobre a criptografia](cs_secure.html#encrypted_disks).
+
+6. Clique em **Criar cluster**. É possível ver o progresso da implementação do nó do trabalhador na guia **Nós do trabalhador**. Quando a implementação está pronta, é possível ver que seu cluster está pronto na guia **Visão geral**.
+    **Nota:** a cada nó do trabalhador é designado um ID de nó do trabalhador e um nome de domínio exclusivos que não devem ser mudados manualmente após a criação do cluster. Mudar o ID ou o nome do domínio evita que o mestre do Kubernetes gerencie o cluster.
 
 ### Criando clusters com a CLI
 {: #dedicated_creating_cli}
@@ -236,35 +299,56 @@ Projete sua configuração de cluster do {{site.data.keyword.Bluemix_dedicated_n
     Exemplo:
 
     ```
-    bx cs cluster-create --location <location> --machine-type <machine-type> --name <cluster_name> --workers <number>
+    bx cs cluster-create --location <location> --machine-type <machine_type> --name <cluster_name> --workers <number>
     ```
     {: pre}
 
     <table>
-    <caption>Entendendo os componentes deste comando</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes desse comando</th>
     </thead>
     <tbody>
     <tr>
-    <td><code> cluster-create</code></td>
+    <td><code>cluster-create</code></td>
     <td>O comando para criar um cluster na organização do {{site.data.keyword.Bluemix_notm}}.</td>
     </tr>
     <tr>
     <td><code>--location <em>&lt;location&gt;</em></code></td>
-    <td>Substitua &lt;location&gt; pelo ID do local do {{site.data.keyword.Bluemix_notm}} que seu ambiente dedicado está configurado para usar.</td>
+    <td>Insira o ID do local do {{site.data.keyword.Bluemix_notm}} que seu ambiente dedicado está configurado para usar.</td>
     </tr>
     <tr>
     <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
-    <td>Se você estiver criando um cluster padrão, escolha um tipo de máquina. O tipo de máquina especifica os recursos de cálculo virtual que estão disponíveis para cada nó do trabalhador. Revise [Comparação de clusters livres e padrão para o {{site.data.keyword.containershort_notm}}](cs_why.html#cluster_types) para obter mais informações. Para clusters livres, não é necessário definir o tipo de máquina.</td>
+    <td>Insira um tipo de máquina. É possível implementar os nós do trabalhador como máquinas virtuais no hardware dedicado ou como máquinas físicas no bare metal. Os tipos de máquinas físicas e virtuais disponíveis variam pelo local no qual o cluster é implementado. Para obter mais informações, veja a documentação do [comando](cs_cli_reference.html#cs_machine_types) `bx cs machine-type`.</td>
     </tr>
     <tr>
+    <td><code>--public-vlan <em>&lt;machine_type&gt;</em></code></td>
+    <td>Insira o ID da VLAN pública que seu ambiente dedicado está configurado para usar. Se você deseja conectar seus nós do trabalhador somente a uma VLAN privada, não especifique esta opção. **Nota**: se os nós do trabalhador estiverem configurados com apenas uma VLAN privada, será necessário configurar uma solução alternativa para conectividade de rede. Para obter mais informações, veja [Conexão da VLAN para nós do trabalhador](cs_clusters.html#worker_vlan_connection).</td>
+    </tr>
+    <tr>
+    <td><code>--private-vlan <em>&lt;machine_type&gt;</em></code></td>
+    <td>Insira o ID da VLAN privada que seu ambiente dedicado está configurado para usar.</td>
+    </tr>  
+    <tr>
     <td><code>--name <em>&lt;name&gt;</em></code></td>
-    <td>Substitua <em>&lt;name&gt;</em> por um nome para seu cluster. O nome deve iniciar com uma letra, pode conter letras, números e - e deve ter 35 caracteres ou menos. Observe que o subdomínio do Ingresso designado à {{site.data.keyword.IBM_notm}} é derivado do nome do cluster. O nome do cluster e o subdomínio do Ingresso juntos formam o nome completo do domínio, que deve ser exclusivo dentro de uma região e ter 63 caracteres ou menos. Para atender a esses requisitos, o nome do cluster pode ser truncado ou o subdomínio pode ser designado a valores de caractere aleatórios.</td>
+    <td>Insira um nome para seu cluster. O nome deve iniciar com uma letra, pode conter letras, números e hífen (-) e deve ter 35 caracteres ou menos. Observe que o nome do cluster e a região na qual o cluster é implementado formam o nome completo do domínio para o subdomínio do Ingress. Para assegurar que o subdomínio do Ingress seja exclusivo dentro de uma região, o nome do cluster pode ser truncado e anexado com um valor aleatório dentro do nome de domínio do Ingress.
+</td>
     </tr>
     <tr>
     <td><code>--workers <em>&lt;number&gt;</em></code></td>
-    <td>O número de nós do trabalhador a serem incluídos no cluster. Se a opção <code>--workers</code> não for especificada, um nó do trabalhador será criado.</td>
+    <td>Insira o número de nós do trabalhador a serem incluídos no cluster. Se a opção <code>--workers</code> não for especificada, um nó do trabalhador será criado.</td>
+    </tr>
+    <tr>
+    <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
+    <td>A versão do Kubernetes para o nó principal do cluster. Esse valor é opcional. Quando a versão não for especificada, o cluster será criado com o padrão de versões do Kubernetes suportadas. Para ver versões disponíveis, execute <code>bx cs kube-versions</code>.
+</td>
+    </tr>
+    <tr>
+    <td><code>--disable-disk-encrypt</code></td>
+    <td>Os nós do trabalhador apresentam [criptografia de disco](cs_secure.html#encrypted_disks) por padrão. Se desejar desativar a criptografia, inclua esta opção.</td>
+    </tr>
+    <tr>
+    <td><code>--trusted</code></td>
+    <td>Ative [Cálculo confiável](cs_secure.html#trusted_compute) para verificar os nós do trabalhador do bare metal com relação à violação. Se você não ativar a confiança durante a criação do cluster, mas quiser fazer isso mais tarde, será possível usar o [comando](cs_cli_reference.html#cs_cluster_feature_enable) `bx cs feature-enable`. Depois de ativar a confiança, não é possível desativá-la posteriormente.</td>
     </tr>
     </tbody></table>
 
@@ -275,27 +359,28 @@ Projete sua configuração de cluster do {{site.data.keyword.Bluemix_dedicated_n
     ```
     {: pre}
 
-    **Nota:** pode levar até 15 minutos para que as máquinas do nó do trabalhador sejam ordenadas e para que o cluster seja configurado e provisionado em sua conta.
+    **Nota:** para máquinas virtuais, pode levar alguns minutos para as máquinas do nó do trabalhador serem pedidas e para o cluster ser configurado e provisionado em sua conta. As máquinas físicas bare metal são provisionadas pela interação manual com a infraestrutura do IBM Cloud (SoftLayer) e podem levar mais de um dia útil para serem concluídas.
 
-    Quando o fornecimento do cluster é concluído, o estado do cluster muda para **implementado**.
+    Quando o fornecimento do cluster é concluído, o status do cluster muda para **implementado**.
 
     ```
-    Name         ID                                   State      Created          Workers   Location   Version
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         dal10      1.8.8
+    Name ID State Created Workers Location Version my_cluster paf97e8843e29941b49c598f516de72101 deployed 20170201162433 1 mil01 1.8.11
     ```
     {: screen}
 
 6.  Verifique o status dos nós do trabalhador.
 
     ```
-    bx cs workers <cluster>
+    bx cs workers <cluster_name_or_ID>
     ```
     {: pre}
 
     Quando os nós do trabalhador estiverem prontos, o estado mudará para **normal** e o status será **Pronto**. Quando o status do nó for **Pronto**, será possível, então, acessar o cluster.
 
+    **Nota:** a cada nó do trabalhador é designado um ID de nó do trabalhador e um nome de domínio exclusivos que não devem ser mudados manualmente após a criação do cluster. Mudar o ID ou o nome do domínio evita que o mestre do Kubernetes gerencie o cluster.
+
     ```
-    ID Public IP Private IP Machine Type State Status Location Version prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1 169.47.223.113 10.171.42.93 free normal Ready dal10 1.8.8
+    ID Public IP Private IP Machine Type State Status Location Version kube-mil01-paf97e8843e29941b49c598f516de72101-w1 169.xx.xxx.xxx 10.xxx.xx.xxx free normal Ready mil01 1.8.11
     ```
     {: screen}
 
@@ -304,7 +389,7 @@ Projete sua configuração de cluster do {{site.data.keyword.Bluemix_dedicated_n
     1.  Obtenha o comando para configurar a variável de ambiente e fazer download dos arquivos de configuração do Kubernetes.
 
         ```
-        bx cs cluster-config <cluster_name_or_id>
+        bx cs cluster-config <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -358,6 +443,7 @@ Projete sua configuração de cluster do {{site.data.keyword.Bluemix_dedicated_n
 ### Usando registros de imagem privada e pública
 {: #dedicated_images}
 
+
 Para novos namespaces, veja as opções em [Usando registros de imagem privada e pública com o {{site.data.keyword.containershort_notm}}](cs_images.html). Para namespaces que tenham sido configurados para grupos únicos e escaláveis, [use um token e crie um segredo do
 Kubernetes](cs_dedicated_tokens.html#cs_dedicated_tokens) para autenticação.
 
@@ -378,7 +464,7 @@ Requisitos:
 
 Antes de iniciar: configure o roteamento de tráfego de rede dentro e fora de sua rede corporativa para a rede do {{site.data.keyword.Bluemix_dedicated_notm}} que utilizará a sub-rede gerenciada pelo usuário.
 
-1. Para usar sua própria sub-rede, [abra um chamado de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support) e forneça a lista de sub-CIDRs que você deseja usar.
+1. Para usar sua própria sub-rede, [abra um chamado de suporte](cs_troubleshoot_network.html#ts_getting_help) e forneça a lista de sub-CIDRs que você deseja usar.
     **Observação**: a forma com que o ALB e os balanceadores de carga são gerenciados para conectividade de conta local e interna difere, dependendo do formato da sub-rede CIDR. Consulte a etapa final para ver as diferenças de configuração.
 
 2. Após a {{site.data.keyword.IBM_notm}} provisionar as sub-redes gerenciadas pelo usuário, torne a sub-rede disponível para seu cluster do Kubernetes.
@@ -389,7 +475,7 @@ Antes de iniciar: configure o roteamento de tráfego de rede dentro e fora de su
     {: pre}
     Substitua <em>&lt;cluster_name&gt;</em> pelo nome ou o ID do cluster, <em>&lt;subnet_CIDR&gt;</em> por uma das sub-redes CIDRs que você forneceu no chamado de suporte e <em>&lt;private_VLAN&gt;</em> por um ID de VLAN privada disponível. É possível localizar o ID de uma VLAN privada disponível executando `bx cs vlans`.
 
-3. Verifique se as sub-redes foram incluídas em seu cluster. O campo **Gerenciado por usuário** para sub-redes fornecidas pelo usuário é _true_.
+3. Verifique se as sub-redes foram incluídas em seu cluster. O campo **Gerenciado pelo usuário** para sub-redes fornecidas pelo usuário é _`true`_.
 
     ```
     bx cs cluster-get --showResources <cluster_name>
@@ -399,17 +485,17 @@ Antes de iniciar: configure o roteamento de tráfego de rede dentro e fora de su
     ```
     VLANs
     VLAN ID   Subnet CIDR         Public       User-managed
-    1555503   192.0.2.0/24        true         false
-    1555505   198.51.100.0/24     false        false
-    1555505   203.0.113.0/24      false        true
+    1555503   169.xx.xxx.xxx/24   true         false
+    1555505   10.xxx.xx.xxx/24    false        false
+    1555505   10.xxx.xx.xxx/24    false        true
     ```
     {: screen}
 
 4. Opcional: [Ative o roteamento entre as sub-redes na mesma VLAN](cs_subnets.html#vlan-spanning).
 
 5. Para configurar a conectividade de conta local e interna, escolha entre estas opções:
-  - Se você usou um intervalo de endereços IP privados 10.x.x.x para a sub-rede, use os IPs válidos desse intervalo para configurar a conectividade de conta local e interna com o Ingress e um balanceador de carga. Para obter mais informações, consulte [Configurando acesso para um aplicativo](cs_network_planning.html#planning).
-  - Se você não usou um intervalo de endereços IP privados 10.x.x.x para a sub-rede, use os IPs válidos desse intervalo para configurar a conectividade local com o Ingress e um balanceador de carga. Para obter mais informações, consulte [Configurando acesso para um aplicativo](cs_network_planning.html#planning). No entanto, deve-se usar uma sub-rede privada móvel de infraestrutura do IBM Cloud (SoftLayer) para configurar a conectividade de conta interna entre o seu cluster e outros serviços baseados no Cloud Foundry. É possível criar uma sub-rede privada móvel com o comando [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add). Para este cenário, seu cluster tem tanto uma sub-rede gerenciada pelo usuário para conectividade local quanto uma sub-rede privada móvel de infraestrutura do IBM Cloud (SoftLayer) para conectividade de conta interna.
+  - Se você usou um intervalo de endereços IP privados 10.x.x.x para a sub-rede, use os IPs válidos desse intervalo para configurar a conectividade de conta local e interna com o Ingress e um balanceador de carga. Para obter mais informações, veja [Planejando a rede com os serviços do NodePort, LoadBalancer ou Ingress](cs_network_planning.html#planning).
+  - Se você não usou um intervalo de endereços IP privados 10.x.x.x para a sub-rede, use os IPs válidos desse intervalo para configurar a conectividade local com o Ingress e um balanceador de carga. Para obter mais informações, veja [Planejando a rede com os serviços do NodePort, LoadBalancer ou Ingress](cs_network_planning.html#planning). No entanto, deve-se usar uma sub-rede privada móvel de infraestrutura do IBM Cloud (SoftLayer) para configurar a conectividade de conta interna entre o seu cluster e outros serviços baseados no Cloud Foundry. É possível criar uma sub-rede privada móvel com o comando [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add). Para este cenário, seu cluster tem tanto uma sub-rede gerenciada pelo usuário para conectividade local quanto uma sub-rede privada móvel de infraestrutura do IBM Cloud (SoftLayer) para conectividade de conta interna.
 
 ### Outras configurações de cluster
 {: #dedicated_other}
@@ -436,6 +522,8 @@ Revise as opções a seguir para outras configurações de cluster:
 
 Para implementar apps em clusters, é possível seguir as instruções para [implementar apps em clusters públicos do {{site.data.keyword.Bluemix_notm}}](cs_app.html#app). Revise as diferenças a seguir para clusters do {{site.data.keyword.Bluemix_dedicated_notm}}.
 
+
+
 ### Permitindo o acesso público a apps
 {: #dedicated_apps_public}
 
@@ -444,14 +532,15 @@ Para ambientes do {{site.data.keyword.Bluemix_dedicated_notm}}, os endereços IP
 #### Configurando o acesso a um app usando o tipo de serviço do balanceador de carga
 {: #dedicated_apps_public_load_balancer}
 
-Se você quiser usar endereços IP públicos para o balanceador de carga, assegure-se de que uma lista de desbloqueio firewall corporativo tenha sido fornecido para a IBM ou [abra um chamado de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support) para configurar o desbloqueio de firewall. Depois, siga as etapas em [Configurando o acesso a um app usando o tipo de serviço de balanceador de carga](cs_loadbalancer.html#config).
+Se você quiser usar endereços IP públicos para o balanceador de carga, assegure-se de que uma lista de desbloqueio firewall corporativo tenha sido fornecido para a IBM ou [abra um chamado de suporte](cs_troubleshoot_network.html#ts_getting_help) para configurar o desbloqueio de firewall. Em seguida, siga as etapas em [Expondo apps com LoadBalancers](cs_loadbalancer.html).
 
 #### Configurando o acesso público a um app usando o Ingress
 {: #dedicated_apps_public_ingress}
 
-Se você quiser usar endereços IP públicos para o balanceador de carga de aplicativo, assegure-se de que uma lista de desbloqueio firewall corporativo foi fornecido para a IBM ou [abra um chamado de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support) para configurar o desbloqueio de firewall. Em seguida, siga as etapas em [Configurando acesso a um app usando Ingresso](cs_ingress.html#configure_alb).
+Se você quiser usar endereços IP públicos para o balanceador de carga de aplicativo, assegure-se de que uma lista de desbloqueio firewall corporativo foi fornecido para a IBM ou [abra um chamado de suporte](cs_troubleshoot_network.html#ts_getting_help) para configurar o desbloqueio de firewall. Em seguida, siga as etapas em [Expondo apps ao público](cs_ingress.html#ingress_expose_public).
 
 ### Criando armazenamento persistente
 {: #dedicated_apps_volume_claim}
 
-Para revisar as opções para criar armazenamento persistente, consulte [armazenamento de dados persistentes](cs_storage.html#planning). Para solicitar um backup para seus volumes, uma restauração de seus volumes e outras funções de armazenamento, deve-se [abrir um chamado de suporte](/docs/get-support/howtogetsupport.html#getting-customer-support).
+Para revisar as opções para criar armazenamento persistente, consulte [armazenamento de dados persistentes](cs_storage.html#planning). Para solicitar um backup para seus volumes, uma restauração de seus volumes e outras funções de armazenamento, deve-se [abrir um chamado de suporte](cs_troubleshoot_storage.html#ts_getting_help).
+

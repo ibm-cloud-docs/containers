@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-27"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -48,7 +48,6 @@ Des règles par défaut ne sont pas appliquées aux pods directement, mais à l'
 
 
  <table summary="La première ligne du tableau s'étend sur deux colonnes. Les autres lignes se lisent de gauche à droite. L'emplacement du serveur figure dans la première colonne et les adresses IP pour concordance dans la seconde colonne.">
- <caption>Règles par défaut pour chaque cluster</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Règles par défaut pour chaque cluster</th>
   </thead>
@@ -106,22 +105,21 @@ Pour ajouter des règles réseau, procédez comme suit :
 1.  Installez l'interface CLI de Calico.
     1.  [Téléchargez l'interface CLI de Calico ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/projectcalico/calicoctl/releases/tag/v1.6.1).
 
-        **Astuce :** si vous utilisez Windows, installez l'interface CLI de Calico dans le même répertoire que l'interface CLI de {{site.data.keyword.Bluemix_notm}}. Cette configuration vous évite diverses modifications de chemin de fichier lorsque vous exécuterez des commandes plus tard.
+        **Astuce :** si vous utilisez Windows, installez l'interface CLI de Calico dans le même répertoire que l'interface CLI d'{{site.data.keyword.Bluemix_notm}}. Cette configuration vous évite diverses modifications de chemin de fichier lorsque vous exécuterez des commandes plus tard.
 
     2.  Utilisateurs OSX et Linux : procédez comme suit.
         1.  Déplacez le fichier exécutable vers le répertoire /usr/local/bin.
             -   Linux :
 
               ```
-              mv /<path_to_file>/calicoctl /usr/local/bin/calicoctl
+              mv filepath/calicoctl /usr/local/bin/calicoctl
               ```
               {: pre}
 
-            -   OS
-X :
+            -   OS X :
 
               ```
-              mv /<path_to_file>/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
+              mv filepath/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
               ```
               {: pre}
 
@@ -174,7 +172,7 @@ X :
         ```
         {: codeblock}
 
-        1.  Extrayez la valeur `<ETCD_URL>`. En cas d'échec de cette commande avec l'erreur `calico-config not found`, consultez cette [rubrique de traitement des incidents](cs_troubleshoot.html#cs_calico_fails).
+        1.  Extrayez la valeur `<ETCD_URL>`. En cas d'échec de cette commande avec l'erreur `calico-config not found`, consultez cette [rubrique de traitement des incidents](cs_troubleshoot_network.html#cs_calico_fails).
 
           -   Linux et OS X :
 
@@ -186,14 +184,14 @@ X :
           -   Exemple de sortie :
 
               ```
-              https://169.1.1.1:30001
+              https://169.xx.xxx.xxx:30001
               ```
               {: screen}
 
           -   Windows :
             <ol>
             <li>Récupérez les valeurs de configuration calico dans la mappe de configuration. </br><pre class="codeblock"><code>kubectl get cm -n kube-system calico-config -o yaml</code></pre></br>
-            <li>Dans la section `data`, localisez la valeur etcd_endpoints. Exemple : <code>https://169.1.1.1:30001</code>
+            <li>Dans la section `data`, localisez la valeur etcd_endpoints. Exemple : <code>https://169.xx.xxx.xxx:30001</code>
             </ol>
 
         2.  Extrayez la valeur `<CERTS_DIR>` dans lequel les certificats Kubernetes sont téléchargés.
@@ -222,7 +220,7 @@ X :
                 Exemple de sortie :
 
               ```
-              C:/Users/<user>/.bluemix/plugins/container-service/<cluster_name>-admin/kube-config-prod-<location>-<cluster_name>.yml
+              C:/Users/<user>/.bluemix/plugins/container-service/mycluster-admin/kube-config-prod-dal10-mycluster.yml
               ```
               {: screen}
 
@@ -253,7 +251,7 @@ X :
             -   Windows :
 
               ```
-              calicoctl get nodes --config=<path_to_>/calicoctl.cfg
+              calicoctl get nodes --config=filepath/calicoctl.cfg
               ```
               {: pre}
 
@@ -306,14 +304,14 @@ Calico.
         -   Linux et OS X :
 
           ```
-          calicoctl apply -f <policy_file_name.yaml>
+          calicoctl apply -f policy.yaml
           ```
           {: pre}
 
         -   Windows :
 
           ```
-          calicoctl apply -f <path_to_>/<policy_file_name.yaml> --config=<path_to_>/calicoctl.cfg
+          calicoctl apply -f filepath/policy.yaml --config=filepath/calicoctl.cfg
           ```
           {: pre}
 
@@ -375,3 +373,4 @@ soient appliquées dans tout le cluster.
   calicoctl apply -f deny-kube-node-port-services.yaml
   ```
   {: pre}
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-27"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -64,7 +64,6 @@ tu non abbia compreso pienamente la politica e sappia che non hai bisogno del tr
 
 
  <table summary="La prima riga nella tabella si estende su entrambe le colonne. Le rimanenti righe devono essere lette da sinistra a destra, con l'ubicazione del server nella prima colonna e gli indirizzi IP corrispondenti nella seconda colonna.">
- <caption>Politiche predefinite per ogni cluster</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Politiche predefinite per ogni cluster</th>
   </thead>
@@ -140,7 +139,7 @@ quando esegui il comando in un secondo momento.
             -   Linux:
 
               ```
-              mv /<path_to_file>/calicoctl /usr/local/bin/calicoctl
+              mv filepath/calicoctl /usr/local/bin/calicoctl
               ```
               {: pre}
 
@@ -148,7 +147,7 @@ quando esegui il comando in un secondo momento.
 X:
 
               ```
-              mv /<path_to_file>/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
+              mv filepath/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
               ```
               {: pre}
 
@@ -202,7 +201,7 @@ X:
         {: codeblock}
 
         1.  Richiama `<ETCD_URL>`. Se questo comando ha esito negativo con un errore `calico-config not found`,
-consulta questo [argomento sulla risoluzione dei problemi](cs_troubleshoot.html#cs_calico_fails).
+consulta questo [argomento sulla risoluzione dei problemi](cs_troubleshoot_network.html#cs_calico_fails).
 
           -   Linux e OS X:
 
@@ -215,14 +214,14 @@ consulta questo [argomento sulla risoluzione dei problemi](cs_troubleshoot.html#
 output:
 
               ```
-              https://169.1.1.1:30001
+              https://169.xx.xxx.xxx:30001
               ```
               {: screen}
 
           -   Windows:
             <ol>
             <li>Ottieni i valori di configurazione calico dalla mappa di configurazione. </br><pre class="codeblock"><code>kubectl get cm -n kube-system calico-config -o yaml</code></pre></br>
-            <li>Nella sezione `data`, individua il valore etcd_endpoints. Esempio: <code>https://169.1.1.1:30001</code>
+            <li>Nella sezione `data`, individua il valore etcd_endpoints. Esempio: <code>https://169.xx.xxx.xxx:30001</code>
             </ol>
 
         2.  Richiama `<CERTS_DIR>`, ossia la directory in cui vengono scaricati i certificati Kubernetes.
@@ -253,7 +252,7 @@ output:
 output:
 
               ```
-              C:/Users/<user>/.bluemix/plugins/container-service/<cluster_name>-admin/kube-config-prod-<location>-<cluster_name>.yml
+              C:/Users/<user>/.bluemix/plugins/container-service/mycluster-admin/kube-config-prod-dal10-mycluster.yml
               ```
               {: screen}
 
@@ -284,7 +283,7 @@ output:
             -   Windows:
 
               ```
-              calicoctl get nodes --config=<path_to_>/calicoctl.cfg
+              calicoctl get nodes --config=filepath/calicoctl.cfg
               ```
               {: pre}
 
@@ -330,20 +329,20 @@ output:
 
 4.  Crea le politiche di rete Calico per consentire o bloccare il traffico.
 
-    1.  Definisci la tua [politica di rete Calico ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy) creando uno script di configurazione (.yaml). Questi file di configurazione includono i selettori che descrivono a quali pod, spazi dei nomi o host vengono applicate queste politiche. Fai riferimento a queste [politiche Calico di esempio ![External link icon](../icons/launch-glyph.svg "External link icon")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy) per informazioni su come creare le tue proprie politiche.
+    1.  Definisci la tua [politica di rete Calico ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy) creando uno script di configurazione (.yaml). Questi file di configurazione includono i selettori che descrivono a quali pod, spazi dei nomi o host vengono applicate queste politiche. Fai riferimento a queste [politiche Calico di esempio ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy) per informazioni su come creare le tue proprie politiche.
 
     2.  Applica le politiche al cluster.
         -   Linux e OS X:
 
           ```
-          calicoctl apply -f <policy_file_name.yaml>
+          calicoctl apply -f policy.yaml
           ```
           {: pre}
 
         -   Windows:
 
           ```
-          calicoctl apply -f <path_to_>/<policy_file_name.yaml> --config=<path_to_>/calicoctl.cfg
+          calicoctl apply -f filepath/policy.yaml --config=filepath/calicoctl.cfg
           ```
           {: pre}
 
@@ -406,3 +405,4 @@ perché le modifiche alla politica vengano applicate nel cluster.
   calicoctl apply -f deny-kube-node-port-services.yaml
   ```
   {: pre}
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -24,3 +24,4 @@ Aktuelle Informationen finden Sie an der neuen Position:
  - [Vorteile durch die Verwendung von Clustern](cs_why.html#benefits)
  - [Servicearchitektur](cs_tech.html#architecture)
  - [Missbrauch von Containern](cs_why.html#terms)
+

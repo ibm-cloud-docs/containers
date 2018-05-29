@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -45,7 +45,7 @@ Y ¿qué es un clúster? Un clúster es un conjunto de recursos, nodos, redes y 
 
 Antes de empezar, debe tener una [cuenta de {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/) de prueba, de pago según uso o de suscripción para crear un clúster gratuito.
 
-**¿Qué tipo de cuenta de {{site.data.keyword.Bluemix_notm}} debería tener?** Con las cuentas de pago según uso y de suscripción, puede suministrar recursos de infraestructura de IBM Cloud (SoftLayer) para los clústeres de Kubernetes y crear un clúster gratuito o clústeres estándar. Con una cuenta de prueba, puede crear un clúster gratuito durante 21 días, pero no clústeres estándar. Tras 21 días, el clúster gratuito se suprime. Para continuar con clústeres de Kubernetes, cree otro clúster gratuito hasta que finalice su cuenta de prueba, o actualice la cuenta a una de suscripción o de pago según uso.
+**¿Qué tipo de cuenta de {{site.data.keyword.Bluemix_notm}} debería tener?** Con las cuentas de pago según uso y de suscripción, puede suministrar recursos de infraestructura de IBM Cloud (SoftLayer) para los clústeres de Kubernetes y crear un clúster gratuito o clústeres estándar. Con una cuenta de prueba, puede crear un clúster gratuito durante, pero no clústeres estándar. Todos los clústeres gratuitos se suprimen después de 21 días. Para continuar con clústeres de Kubernetes, cree otro clúster gratuito hasta que finalice su cuenta de prueba, o actualice la cuenta a una de suscripción o de pago según uso.
 {:tip}
 
 Para crear un clúster gratuito:
@@ -65,11 +65,11 @@ Enhorabuena. Ha creado su primer clúster de Kubernetes. Estos son algunos detal
 
 
 **¿Qué es lo siguiente?**
-
-Cuando el clúster esté activo y en ejecución, empiece a utilizarlo.
+En los próximos 21 días, pruebe lo siguiente en su clúster gratuito. 
 
 * [Instalar las CLI para empezar a trabajar con el clúster.](cs_cli_install.html#cs_cli_install)
 * [Desplegar una app en el clúster.](cs_app.html#app_cli)
 * [Cree un clúster estándar con varios nodos para aumentar la disponibilidad.](cs_clusters.html#clusters_ui)
 * [Configure su propio registro privado en {{site.data.keyword.Bluemix_notm}}
 para almacenar y compartir imágenes de Docker con otros usuarios. ](/docs/services/Registry/index.html)
+

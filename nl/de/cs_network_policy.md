@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-27"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -56,7 +56,6 @@ Standardrichtlinien werden nicht direkt auf Pods angewendet. Sie werden mithilfe
 
 
  <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Der Rest der Zeilen sollte von links nach rechts gelesen werden, wobei die Serverposition in der ersten Spalte und die passenden IP-Adressen in der zweiten Spalte angegeben sind.">
- <caption>Standardrichtlinien für die einzelnen Cluster</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Standardrichtlinien für die einzelnen Cluster</th>
   </thead>
@@ -122,7 +121,7 @@ Gehen Sie wie folgt vor, um Netzrichtlinien hinzuzufügen:
             -   Linux:
 
               ```
-              mv /<dateipfad>/calicoctl /usr/local/bin/calicoctl
+              mv filepath/calicoctl /usr/local/bin/calicoctl
               ```
               {: pre}
 
@@ -130,7 +129,7 @@ Gehen Sie wie folgt vor, um Netzrichtlinien hinzuzufügen:
 X:
 
               ```
-              mv /<dateipfad>/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
+              mv filepath/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
               ```
               {: pre}
 
@@ -183,7 +182,7 @@ X:
         ```
         {: codeblock}
 
-        1.  Rufen Sie die `<ETCD_URL>` ab. Schlägt die Ausführung dieses Befehls mit dem Fehler `calico-config nicht gefunden` fehl, dann lesen Sie die Informationen in diesem [Abschnitt zur Fehlerbehebung](cs_troubleshoot.html#cs_calico_fails).
+        1.  Rufen Sie die `<ETCD_URL>` ab. Schlägt die Ausführung dieses Befehls mit dem Fehler `calico-config nicht gefunden` fehl, dann lesen Sie die Informationen in diesem [Abschnitt zur Fehlerbehebung](cs_troubleshoot_network.html#cs_calico_fails).
 
           -   Linux und OS X:
 
@@ -195,14 +194,14 @@ X:
           -   Ausgabebeispiel:
 
               ```
-              https://169.1.1.1:30001
+              https://169.xx.xxx.xxx:30001
               ```
               {: screen}
 
           -   Windows:
             <ol>
-            <li>Rufen Sie die Calico-Konfigurationswerte aus der Konfigurationsübersicht ab. </br><pre class="codeblock"><code>kubectl get cm -n kube-system calico-config -o yaml</code></pre></br>
-            <li>Suchen Sie im Abschnitt `data` nach dem Wert für 'etcd_endpoints'. Beispiel: <code>https://169.1.1.1:30001</code>
+            <li>Rufen Sie die Calico-Konfigurationswerte aus der Konfigurationszuordnung ab. </br><pre class="codeblock"><code>kubectl get cm -n kube-system calico-config -o yaml</code></pre></br>
+            <li>Suchen Sie im Abschnitt `data` nach dem Wert für 'etcd_endpoints'. Beispiel: <code>https://169.xx.xxx.xxx:30001</code>
             </ol>
 
         2.  Rufen Sie das Verzeichnis `<CERTS_DIR>` ab. Dies ist das Verzeichnis, in das die Kubernetes-Zertifikate heruntergeladen werden.
@@ -231,11 +230,11 @@ X:
                 Ausgabebeispiel:
 
               ```
-              C:/Benutzer/<benutzer>/.bluemix/plugins/container-service/<clustername>-admin/kube-config-prod-<standort>-<clustername>.yml
+              C:/Users/<benutzer>/.bluemix/plugins/container-service/mycluster-admin/kube-config-prod-dal10-mycluster.yml
               ```
               {: screen}
 
-            **Hinweis**: Entfernen Sie den Dateinamen `kube-config-prod-<location>-<cluster_name>.yml` am Ende der Ausgabe, um den Verzeichnispfad zu erhalten.
+            **Hinweis**: Entfernen Sie den Dateinamen `kube-config-prod-<location>-<clustername>.yml` am Ende der Ausgabe, um den Verzeichnispfad zu erhalten.
 
         3.  Rufen Sie die <code>ca-*pem-datei<code> ab.
 
@@ -262,7 +261,7 @@ X:
             -   Windows:
 
               ```
-              calicoctl get nodes --config=<pfad_zu_>/calicoctl.cfg
+              calicoctl get nodes --config=filepath/calicoctl.cfg
               ```
               {: pre}
 
@@ -315,14 +314,14 @@ erzwungen wird, muss sie eine Kubernetes-Ressource finden, die mit dem Selektor 
         -   Linux und OS X:
 
           ```
-          calicoctl apply -f <richtliniendateiname.yaml>
+          calicoctl apply -f policy.yaml
           ```
           {: pre}
 
         -   Windows:
 
           ```
-          calicoctl apply -f <pfad_zu_>/<richtliniendateiname.yaml> --config=<pfad_zu_>/calicoctl.cfg
+          calicoctl apply -f filepath/policy.yaml --config=filepath/calicoctl.cfg
           ```
           {: pre}
 
@@ -384,3 +383,4 @@ Die Calico-Netzrichtlinien des Typs `preDNAT` generieren iptables-Regeln auf Bas
   calicoctl apply -f deny-kube-node-port-services.yaml
   ```
   {: pre}
+

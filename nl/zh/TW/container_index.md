@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -46,7 +46,7 @@ lastupdated: "2018-03-16"
 
 開始之前，您必須具有「試用」、「隨收隨付制」或「訂閱」的 [{{site.data.keyword.Bluemix_notm}} 帳戶](https://console.bluemix.net/registration/)，才能建立免費叢集。
 
-**我應該取得何種 {{site.data.keyword.Bluemix_notm}} 帳戶類型？**使用「隨收隨付制」及「訂閱」帳戶，您可以針對 Kubernetes 叢集佈建 IBM Cloud 基礎架構 (SoftLayer) 資源，並建立一個免費叢集或數個標準叢集。使用「試用」帳戶，您可以建立一個免費的 21 天叢集，但不能建立任何標準叢集。21 天之後，即會刪除您的免費叢集。若要繼續使用 Kubernetes 叢集，請建立另一個免費叢集，直到「試用」帳戶終止，或者將您的帳戶升級成「隨收隨付制」或「訂閱」帳戶。
+**我應該取得何種 {{site.data.keyword.Bluemix_notm}} 帳戶類型？**使用「隨收隨付制」及「訂閱」帳戶，您可以針對 Kubernetes 叢集佈建 IBM Cloud 基礎架構 (SoftLayer) 資源，並建立一個免費叢集或數個標準叢集。使用「試用」帳戶，您可以建立一個免費叢集，但不能建立任何標準叢集。在 21 天之後，會刪除所有免費的叢集。若要繼續使用 Kubernetes 叢集，請建立另一個免費叢集，直到「試用」帳戶終止，或者將您的帳戶升級成「隨收隨付制」或「訂閱」帳戶。
 {:tip}
 
 若要建立免費叢集，請執行下列動作：
@@ -66,10 +66,10 @@ lastupdated: "2018-03-16"
 
 
 **下一步為何？**
-
-叢集開始進行時，請處理您的叢集。
+在未來 21 天內，請試著使用您的免費叢集來做一些事情。
 
 * [安裝 CLI 以開始使用您的叢集。](cs_cli_install.html#cs_cli_install)
 * [在叢集中部署應用程式。](cs_app.html#app_cli)
 * [建立含有多個節點的標準叢集，以提高可用性。](cs_clusters.html#clusters_ui)
 * [在 {{site.data.keyword.Bluemix_notm}} 中設定您自己的專用登錄，以儲存 Docker 映像檔，並將它與其他使用者共用。](/docs/services/Registry/index.html)
+

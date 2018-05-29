@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -24,3 +24,4 @@ lastupdated: "2018-01-11"
  - [クラスターを使用する利点](cs_why.html#benefits)
  - [サービス・アーキテクチャー](cs_tech.html#architecture)
  - [コンテナーの不正使用](cs_why.html#terms)
+

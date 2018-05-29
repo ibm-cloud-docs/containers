@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-13"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -16,15 +16,14 @@ lastupdated: "2018-03-13"
 {:download: .download}
 
 # 地區及位置
-{{site.data.keyword.Bluemix}} 是在全球各地管理。地區是端點所存取的地理區域。位置是地區內的資料中心。{{site.data.keyword.Bluemix_notm}} 內的服務可能在全球提供，或在特定地區內提供。
-當您在 {{site.data.keyword.containerlong}} 中建立 Kubernetes 叢集時，其資源會保留在您已部署叢集的地區。
+{{site.data.keyword.Bluemix}} 是在全球各地管理。地區是端點所存取的地理區域。位置是地區內的資料中心。{{site.data.keyword.Bluemix_notm}} 內的服務可能在全球提供，或在特定地區內提供。當您在 {{site.data.keyword.containerlong}} 中建立 Kubernetes 叢集時，其資源會保留在您已部署叢集的地區。
 {:shortdesc}
 
 [{{site.data.keyword.Bluemix_notm}} 地區](#bluemix_regions)與 [{{site.data.keyword.containershort_notm}} 地區](#container_regions)不同。
 
 ![{{site.data.keyword.containershort_notm}} 地區與資料中心](/images/regions.png)
 
-圖. {{site.data.keyword.containershort_notm}} 地區與資料中心
+{{site.data.keyword.containershort_notm}} 地區與資料中心
 
 支援的 {{site.data.keyword.containershort_notm}} 地區：
   * 亞太地區北部
@@ -148,4 +147,5 @@ lastupdated: "2018-03-13"
 
 ![瞭解叢集資源所在的位置](/images/region-cluster-resources.png)
 
-圖. 瞭解叢集資源所在的位置。
+瞭解叢集資源所在的位置。
+

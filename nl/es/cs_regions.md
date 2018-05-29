@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-13"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -23,7 +23,7 @@ Las [regiones de {{site.data.keyword.Bluemix_notm}}](#bluemix_regions) difieren 
 
 ![Regiones y centros de datos de {{site.data.keyword.containershort_notm}}](/images/regions.png)
 
-Figura. Regiones y centros de datos de {{site.data.keyword.containershort_notm}}
+Regiones y centros de datos de {{site.data.keyword.containershort_notm}}
 
 Regiones de {{site.data.keyword.containershort_notm}} soportadas:
   * AP Norte
@@ -147,4 +147,5 @@ Los recursos del clúster permanecen en la ubicación (centro de datos) en la qu
 
 ![Dónde residen los recursos de clúster](/images/region-cluster-resources.png)
 
-Figura. Dónde residen los recursos de clúster.
+Dónde residen los recursos de clúster.
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-14"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -25,7 +25,6 @@ Puede utilizar diversos servicios externos y servicios del catálogo con un clú
 
 ## Servicios de aplicación
 <table summary="Resumen de las características de accesibilidad">
-<caption>Tabla. Opciones de integración para servicios de aplicaciones</caption>
 <thead>
 <tr>
 <th>Servicio</th>
@@ -47,7 +46,6 @@ IBM Blockchain de recinto de pruebas de nube <img src="../icons/launch-glyph.svg
 
 ## DevOps services
 <table summary="Resumen de las características de accesibilidad">
-<caption>Tabla. Opciones de integración para gestionar DevOps</caption>
 <thead>
 <tr>
 <th>Servicio</th>
@@ -81,7 +79,6 @@ utilizando a cadena de herramientas. Para obtener información sobre la configur
 
 ## Servicios de registro y supervisión
 <table summary="Resumen de las características de accesibilidad">
-<caption>Tabla. Opciones de integración para gestionar registros y métricas</caption>
 <thead>
 <tr>
 <th>Servicio</th>
@@ -139,7 +136,6 @@ de todos los contenedores en ejecución de un clúster, que se puede utilizar en
 
 ## Servicios de seguridad
 <table summary="Resumen de las características de accesibilidad">
-<caption>Tabla. Opciones de integración para gestionar la seguridad</caption>
 <thead>
 <tr>
 <th>Servicio</th>
@@ -160,6 +156,10 @@ de todos los contenedores en ejecución de un clúster, que se puede utilizar en
 <td>Puede utilizar <a href="../services/certificate-manager/index.html" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> para almacenar y gestionar certificados SSL para sus apps. Para obtener más información, consulte <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Uso de {{site.data.keyword.cloudcerts_long_notm}} con {{site.data.keyword.containershort_notm}} para desplegar certificados TLS de dominio personalizados <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. </td>
 </tr>
 <tr>
+  <td>{{site.data.keyword.registrylong}}</td>
+  <td>Configure su propio repositorio de imágenes de Docker protegidas para almacenar y compartir de forma segura las imágenes entre los usuarios del clúster. Para obtener más información, consulte la <a href="/docs/services/Registry/index.html" target="_blank">documentación de {{site.data.keyword.registrylong}} <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>.</td>
+</tr>
+<tr>
 <td>NeuVector</td>
 <td>Proteja los contenedores con un cortafuegos nativo en la nube utilizando <a href="https://neuvector.com/" target="_blank">NeuVector <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. Para obtener más información, consulte <a href="https://www.ibm.com/us-en/marketplace/neuvector-container-security" target="_blank">NeuVector Container Security <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. </td>
 </tr>
@@ -169,6 +169,35 @@ de todos los contenedores en ejecución de un clúster, que se puede utilizar en
 </tr>
 </tbody>
 </table>
+
+<br />
+
+
+
+## Servicios de almacenamiento
+<table summary="Resumen de las características de accesibilidad">
+<thead>
+<tr>
+<th>Servicio</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>{{site.data.keyword.cos_full}}</td>
+  <td>Los datos que se almacenan con {{site.data.keyword.cos_short}} están cifrados y se dispersan entre varias ubicaciones geográficas. Se accede a estos datos sobre HTTP utilizando una API REST. Utilice [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore/index.html) para configurar el servicio y hacer copias de seguridad puntuales o planificadas de los datos en los clústeres. Para obtener información general sobre el servicio, consulte la <a href="/docs/services/cloud-object-storage/about-cos.html" target="_blank">documentación de {{site.data.keyword.cos_short}} <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>.</td>
+</tr>
+  <tr>
+    <td>{{site.data.keyword.cloudantfull}}</td>
+    <td>{{site.data.keyword.cloudant_short_notm}} es una DBaaS (DataBase as a Service) orientada a documentos donde los datos se almacenan como documentos en formato JSON. El servicio se crea ofreciendo escalabilidad, alta disponibilidad y durabilidad. Para obtener más información, consulte la <a href="/docs/services/Cloudant/getting-started.html" target="_blank">documentación de {{site.data.keyword.cloudant_short_notm}} <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>.</td>
+  </tr>
+  <tr>
+    <td>{{site.data.keyword.composeForMongoDB_full}}</td>
+    <td>{{site.data.keyword.composeForMongoDB}} ofrece alta disponibilidad y redundancia, copias de seguridad automatizadas y bajo demanda sin interrupciones, herramientas de supervisión, integración en sistemas de alertas, vistas de análisis de rendimiento y mucho más. Para obtener más información, consulte la <a href="/docs/services/ComposeForMongoDB/index.html" target="_blank">documentación de {{site.data.keyword.composeForMongoDB}} <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>. </td>
+  </tr>
+</tbody>
+</table>
+
 
 <br />
 
@@ -229,7 +258,7 @@ Para añadir un servicio:
 5.  Añada el servicio al clúster.
 
     ```
-    bx cs cluster-service-bind <cluster_name_or_id> <namespace> <service_instance_name>
+    bx cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
     {: pre}
 
@@ -394,7 +423,7 @@ Antes de empezar, seleccione su clúster como [destino de la CLI](cs_cli_install
 5.  Cree el pod y monte el volumen secreto.
 
     ```
-    kubectl apply -f <yaml_path>
+    kubectl apply -f secret-test.yaml
     ```
     {: pre}
 
@@ -454,14 +483,50 @@ Antes de empezar, seleccione [como destino de la CLI](cs_cli_install.html#cs_cli
 
 1. Instale la <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">CLI de Helm <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>.
 
-2. Inicialice Helm e instale `tiller`.
+2. **Importante**: Para mantener la seguridad del clúster, cree una cuenta de servicio para Tiller en el espacio de nombres `kube-system` y un enlace de rol de clúster de Kubernetes RBAC para el pod `tiller-deploy`. 
+
+    1. En su editor de preferencias, cree el siguiente archivo y guárdelo como `rbac-config.yaml`.
+      **Nota**:
+        * El rol de clúster `cluster-admin` se crea de forma predeterminada en los clústeres de Kubernetes de forma que no tendrá que definirlo de forma explícita. 
+        * Si está utilizando un clúster versión 1.7.x, cambie `apiVersion` a `rbac.authorization.k8s.io/v1beta1`.
+
+      ```
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: tiller
+        namespace: kube-system
+      ---
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: tiller
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-admin
+      subjects:
+        - kind: ServiceAccount
+          name: tiller
+          namespace: kube-system
+      ```
+      {: codeblock}
+
+    2. Cree la cuenta de servicio y el enlace de rol de clúster. 
+
+        ```
+        kubectl create -f rbac-config.yaml
+        ```
+        {: pre}
+
+3. Inicialice Helm e instale `tiller` con la cuenta de servicio que acaba de crear. 
 
     ```
-    helm init
+    helm init --service-account tiller
     ```
     {: pre}
 
-3. Verifique que el pod `tiller-deploy` tiene el **Estado** `En ejecución` en el clúster.
+4. Verifique que el pod `tiller-deploy` tiene el **Estado** `En ejecución` en el clúster.
 
     ```
     kubectl get pods -n kube-system -l app=helm
@@ -476,17 +541,26 @@ Antes de empezar, seleccione [como destino de la CLI](cs_cli_install.html#cs_cli
     ```
     {: screen}
 
-4. Añada el repositorio de Helm de {{site.data.keyword.Bluemix_notm}} a la instancia de Helm.
+5. Añada el repositorio de Helm de {{site.data.keyword.Bluemix_notm}} a la instancia de Helm.
 
     ```
     helm repo add ibm  https://registry.bluemix.net/helm/ibm
     ```
     {: pre}
 
-5. Obtenga una lista de los diagramas de Helm disponibles actualmente en el repositorio de {{site.data.keyword.Bluemix_notm}}.
+6. Obtenga una lista de los diagramas de Helm disponibles actualmente en el repositorio de {{site.data.keyword.Bluemix_notm}}.
 
     ```
     helm search ibm
+    ```
+    {: pre}
+
+7. Para obtener más información sobre un gráfico, obtenga una lista de sus valores y los valores predeterminados. 
+
+    Por ejemplo, para visualizar los valores, la documentación y los valores predeterminados para el gráfico Helm del servicio strongSwan IPSec VPN: 
+
+    ```
+    helm inspect ibm/strongswan
     ```
     {: pre}
 
@@ -577,4 +651,5 @@ Para utilizar Weave Scope con una clúster:
 [Más información sobre las características de Weave Scope ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.weave.works/docs/scope/latest/features/).
 
 <br />
+
 

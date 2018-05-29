@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-11-02"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -165,3 +165,4 @@ Cree una señal que no caduque para un registro de imágenes que pueda utilizar 
           kubectl apply -f mypod.yaml
           ```
           {: pre}
+

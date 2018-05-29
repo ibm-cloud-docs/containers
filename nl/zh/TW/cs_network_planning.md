@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -16,7 +16,7 @@ lastupdated: "2018-03-16"
 {:download: .download}
 
 
-# 規劃外部網路
+# 規劃搭配 NodePort、LoadBalancer 或 Ingress 服務的網路
 {: #planning}
 
 當您在 {{site.data.keyword.containerlong}} 中建立 Kubernetes 叢集時，每個叢集都必須連接至公用 VLAN。公用 VLAN 會判定在建立叢集期間指派給工作者節點的公用 IP 位址。
@@ -28,7 +28,6 @@ lastupdated: "2018-03-16"
 |------------|------------------------------------------|
 |{{site.data.keyword.Bluemix_notm}} 中的免費叢集|{{site.data.keyword.IBM_notm}}|
 |{{site.data.keyword.Bluemix_notm}}中的標準叢集|在您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶中時|
-{: caption="VLAN 管理責任" caption-side="top"}
 
 如需工作者節點與 Pod 之間叢集內網路通訊的相關資訊，請參閱[叢集內網路](cs_secure.html#in_cluster_network)。如需將 Kubernetes 叢集中執行的應用程式安全地連接至內部部署網路，或連接到您叢集外部的應用程式的相關資訊，請參閱[設定 VPN 連線功能](cs_vpn.html)。
 
@@ -67,7 +66,7 @@ lastupdated: "2018-03-16"
  <ul>
   <li>在叢集中公開多個應用程式，方法是透過建立一個外部 HTTP 或 HTTPS、TCP 或 UDP 負載平衡器，使用安全且唯一的公用進入點，將送入要求遞送給應用程式。</li>
   <li>您可以使用一個公用路徑，將叢集中的多個應用程式公開為服務。</li>
-  <li>Ingress 包含兩個主要元件：Ingress 資源及應用程式負載平衡器。
+  <li>Ingress 由兩個元件組成：
    <ul>
     <li>Ingress 資源會定義如何遞送及負載平衡應用程式送入要求的規則。</li>
     <li>應用程式負載平衡器 (ALB) 會根據您在 Ingress 資源中定義的規則，接聽送入的 HTTP 或 HTTPS、TCP 或 UDP 服務要求，以及在應用程式的 Pod 之間轉遞要求。</li>
@@ -80,7 +79,8 @@ lastupdated: "2018-03-16"
 
 <img usemap="#networking_map" border="0" class="image" src="images/networkingdt.png" width="500px" alt="此圖會引導您完成選擇應用程式的最佳網路選項。如果未顯示此圖，仍然可以在文件中找到這項資訊。" style="width:500px;" />
 <map name="networking_map" id="networking_map">
-<area href="/docs/containers/cs_nodeport.html#planning" alt="Nodeport 服務" shape="circle" coords="52, 283, 45"/>
-<area href="/docs/containers/cs_loadbalancer.html#planning" alt="LoadBalancer 服務" shape="circle" coords="247, 419, 44"/>
-<area href="/docs/containers/cs_ingress.html#planning" alt="Ingress 服務" shape="circle" coords="445, 420, 45"/>
+<area href="/docs/containers/cs_nodeport.html" alt="Nodeport 服務" shape="circle" coords="52, 283, 45"/>
+<area href="/docs/containers/cs_loadbalancer.html" alt="LoadBalancer 服務" shape="circle" coords="247, 419, 44"/>
+<area href="/docs/containers/cs_ingress.html" alt="Ingress 服務" shape="circle" coords="445, 420, 45"/>
 </map>
+

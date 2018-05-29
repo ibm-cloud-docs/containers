@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -50,7 +50,7 @@ Etapas:
 2. Rotule os nós do trabalhador com `dedicated=edge`. Após um nó do trabalhador ser marcado com `dedicated=edge`, todo Ingresso subsequente e balanceadores de carga são implementados em um nó do trabalhador de borda.
 
   ```
-  kubectl label nodes <node_name> <node_name2> dedicated=edge
+  Kubectl label nodes < node1_name> < node2_name> dedicated=edge
   ```
   {: pre}
 
@@ -64,7 +64,7 @@ Etapas:
   Saída:
 
   ```
-  kubectl get service -n <namespace> <name> -o yaml | kubectl apply -f
+  kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f
   ```
   {: screen}
 
@@ -73,7 +73,7 @@ Etapas:
   Saída:
 
   ```
-  service "<name>" configured
+  Serviço "my_loadbalancer" configurado
   ```
   {: screen}
 
@@ -86,7 +86,7 @@ Você rotulou os nós do trabalhador com `dedicated=edge` e reimplementou todos 
 {: #edge_workloads}
 
 Um benefício de nós do trabalhador de borda é que eles podem ser especificados para executar somente serviços de rede.
-{:shortdesc} 
+{:shortdesc}
 
 Usar a tolerância `dedicated=edge` significa que todos os serviços de balanceador de carga e de Ingresso são implementados somente nos nós do trabalhador rotulados. No entanto, para evitar que outras cargas de trabalho sejam executadas em nós do trabalhador de borda e consumam recursos do nó do trabalhador, deve-se usar [contaminações do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
 
@@ -103,5 +103,7 @@ Usar a tolerância `dedicated=edge` significa que todos os serviços de balancea
   ```
   kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute
   ```
+  Agora, somente pods com a tolerância `dedicated=edge` são implementados em nós do trabalhador de borda.
 
-Agora, somente pods com a tolerância `dedicated=edge` são implementados em nós do trabalhador de borda.
+3. Se você optar por [ativar a preservação IP de origem para um serviço de balanceador de carga ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), assegure-se de que os pods do app sejam planejados para os nós do trabalhador de borda [incluindo a afinidade do nó de borda nos pods do app](cs_loadbalancer.html#edge_nodes) para que as solicitações recebidas possam ser encaminhadas para os pods de seu app.
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-28"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-02-28"
 {: #app}
 
 Puoi utilizzare le tecniche di Kubernetes nel {{site.data.keyword.containerlong}} per distribuire le applicazioni nei contenitori e assicurarti che tali applicazioni siano sempre attive e funzionanti. Ad esempio, puoi eseguire aggiornamenti continui e rollback senza tempi di inattività per i tuoi utenti.
-{:shortdesc}
+{: shortdesc}
 
 Scopri la procedura generale per distribuire le applicazioni facendo clic su un'area della seguente immagine.
 
@@ -40,7 +40,7 @@ Scopri la procedura generale per distribuire le applicazioni facendo clic su un'
 {: #highly_available_apps}
 
 Più ampiamente distribuisci la tua configurazione su più nodi di lavoro e cluster, meno è probabile che i tuoi utenti riscontrino tempi di inattività con la tua applicazione.
-{:shortdesc}
+{: shortdesc}
 
 Rivedi queste potenziali configurazioni delle applicazioni ordinate con diversi gradi di disponibilità.
 
@@ -54,76 +54,30 @@ Rivedi queste potenziali configurazioni delle applicazioni ordinate con diversi 
 4.  Una distribuzione con n+2 pod gestiti da una serie di repliche ed estesi a più nodi
 (anti-affinità) in diverse regioni.
 
+
+
+
 ### Aumento della disponibilità della tua applicazione
 
 <dl>
-<dt>Utilizza le distribuzioni e le serie di repliche per distribuire la tua applicazione e le sue dipendenze.</dt>
-<dd>Una distribuzione è una risorsa Kubernetes che puoi utilizzare per dichiarare tutti i componenti della tua applicazione e le sue dipendenze. Descrivendo i singoli componenti anziché scrivere tutti i passi necessari e il loro ordine di creazione, puoi concentrarti sull'aspetto che deve avere la tua applicazione quando è in esecuzione.
-</br></br>
-Quando distribuisci più di un pod, viene creata automaticamente una serie di repliche per le tue distribuzioni che monitora i pod e assicura che il numero di pod desiderato sia sempre in esecuzione. In caso di interruzione di un pod, la serie di repliche sostituisce il pod inattivo con uno nuovo.
-</br></br>
-Puoi utilizzare una distribuzione per definire le strategie di aggiornamento per la tua applicazione incluso il numero di pod da aggiungere durante un aggiornamento continuo e il numero di pod che possono non essere disponibili in un determinato momento. Quando effettui un aggiornamento continuo, la distribuzione controlla che la revisione funzioni e arresta il rollout quando vengono rilevati degli errori.
-</br></br>
-Le distribuzioni offrono anche la possibilità di distribuire contemporaneamente più revisioni con indicatori diversi, per cui puoi, ad esempio, verificare una distribuzione prima di decidere di metterla in produzione.
-</br></br>
-Ogni distribuzione tiene traccia delle revisioni che sono state distribuite. Puoi utilizzare questa cronologia di revisioni per eseguire il rollback a una versione precedente nel caso in cui riscontri che gli aggiornamenti non funzionano nel modo previsto.</dd>
-<dt>Includi repliche sufficienti per il carico di lavoro della tua applicazione, più due</dt>
-<dd>Per rendere la tua applicazione ancora più disponibile e più resiliente agli errori, valuta la possibilità di includere delle repliche aggiuntive rispetto al numero minimo per gestire il carico di lavoro previsto. Le repliche aggiuntive possono gestire il carico di lavoro se si verifica un arresto anomalo del pod e la serie di repliche non ha ancora ripristinato il pod arrestato. Per la protezione da due errori simultanei, includi due ulteriori repliche. Questa configurazione è un modello N+2, dove N è il numero di repliche per gestire il carico di lavoro in entrata e +2 sono le due repliche aggiuntive. Puoi avere quanti pod desideri in un cluster, finché il cluster dispone di abbastanza spazio per essi.</dd>
-<dt>Espandi i pod tra più nodi (anti-affinità)</dt>
-<dd>Quando crei la tua distribuzione, ogni pod può essere distribuito allo stesso nodo di lavoro. Questa configurazione in cui i pod sono presenti sullo stesso nodo di lavoro è nota come affinità o condivisione percorso. Per proteggere la tua applicazione da un errore del nodo di lavoro, puoi implementare la tua distribuzione per espandere i pod tra più nodi di lavoro utilizzando l'opzione <strong>podAntiAffinity</strong>. Questa opzione è disponibile solo per i cluster standard.
-
-</br></br>
-<strong>Nota:</strong> il seguente file YAML definisce che ogni pod venga distribuito a un nodo di lavoro differente. Quando il numero di repliche definite è maggiore rispetto ai nodi di lavoro disponibili nel tuo cluster, viene distribuito solo il numero di repliche che possa rispettare il requisito di anti-affinità. Tutte le altre repliche rimangono in uno stato di attesa finché non vengono aggiunti ulteriori nodi di lavoro al cluster.
-
-<pre class="codeblock">
-<code>apiVersion: apps/v1beta1
-kind: Deployment
-metadata:
-  name: wasliberty
-spec:
-  replicas: 3
-  template:
-    metadata:
-      labels:
-        app: wasliberty
-    spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - wasliberty
-              topologyKey: kubernetes.io/hostname
-      containers:
-      - name: wasliberty
-        image: registry.&lt;region&gt;.bluemix.net/ibmliberty
-        ports:
-        - containerPort: 9080
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: wasliberty
-  labels:
-    app: wasliberty
-spec:
-  ports:
-    # the port that this service should serve on
-  - port: 9080
-  selector:
-    app: wasliberty
-  type: NodePort</code></pre>
-
-</dd>
-<dt>Distribuisci i pod tra più ubicazioni o regioni</dt>
-<dd>Per proteggere la tua applicazione da un malfunzionamento di un'ubicazione o di una regione, puoi creare un secondo cluster in un'altra ubicazione o regione e utilizzare un YAML di distribuzione per distribuire una serie di repliche duplicata per la tua applicazione. Aggiungendo una rotta condivisa e un programma di bilanciamento del carico davanti ai tuoi cluster, puoi distribuire il tuo carico di lavoro tra le ubicazioni e regioni. Per ulteriori informazioni sulla condivisione di una rotta tra i cluster, vedi <a href="cs_clusters.html#clusters" target="_blank">Elevata disponibilità dei cluster</a>.
-
-Per ulteriori dettagli, riesamina le opzioni per le <a href="cs_clusters.html#planning_clusters" target="_blank">distribuzioni ad alta disponibilità</a>.</dd>
+  <dt>Utilizza le distribuzioni e le serie di repliche per distribuire la tua applicazione e le sue dipendenze.</dt>
+    <dd><p>Una distribuzione è una risorsa Kubernetes che puoi utilizzare per dichiarare tutti i componenti della tua applicazione e le sue dipendenze. Con le distribuzioni, non devi scrivere tutta la procedura e puoi invece concentrarti sulla tua applicazione. </p>
+    <p>Quando distribuisci più di un pod, viene creata automaticamente una serie di repliche per le tue distribuzioni che monitora i pod e assicura che il numero di pod desiderato sia sempre in esecuzione. In caso di interruzione di un pod, la serie di repliche sostituisce il pod inattivo con uno nuovo.</p>
+    <p>Puoi utilizzare una distribuzione per definire le strategie di aggiornamento per la tua applicazione incluso il numero di pod da aggiungere durante un aggiornamento continuo e il numero di pod che possono non essere disponibili in un determinato momento. Quando effettui un aggiornamento continuo, la distribuzione controlla che la revisione funzioni e arresta il rollout quando vengono rilevati degli errori.</p>
+    <p>Con le distribuzioni puoi distribuire contemporaneamente più revisioni con indicatori diversi. Ad esempio, puoi verificare una distribuzione prima di decidere di metterla in produzione. </p>
+    <p>Le distribuzioni ti consentono di tenere traccia delle revisioni distribuite. Puoi utilizzare questa cronologia per eseguire il rollback a una versione precedente nel caso in cui riscontri che gli aggiornamenti non funzionano come previsto. </p></dd>
+  <dt>Includi repliche sufficienti per il carico di lavoro della tua applicazione, più due</dt>
+    <dd>Per rendere la tua applicazione ancora più disponibile e più resiliente agli errori, valuta la possibilità di includere delle repliche aggiuntive rispetto al numero minimo per gestire il carico di lavoro previsto. Le repliche aggiuntive possono gestire il carico di lavoro se si verifica un arresto anomalo del pod e la serie di repliche non ha ancora ripristinato il pod arrestato. Per la protezione da due errori simultanei, includi due ulteriori repliche. Questa configurazione è un modello N+2, dove N è il numero di repliche per gestire il carico di lavoro in entrata e +2 sono le due repliche aggiuntive. Finché il tuo cluster ha spazio sufficiente, puoi avere quanti pod desideri. </dd>
+  <dt>Espandi i pod tra più nodi (anti-affinità)</dt>
+    <dd><p>Quando crei la tua distribuzione, ogni pod può essere distribuito allo stesso nodo di lavoro. Ciò è noto come affinità o condivisione percorso. Per proteggere la tua applicazione da un errore del nodo di lavoro, puoi configurare la tua distribuzione per espandere i pod tra più nodi di lavoro utilizzando l'opzione <em>podAntiAffinity</em> con i tuoi cluster standard. Puoi definire due tipi di anti-affinità pod: preferito o richiesto. Per ulteriori informazioni, consulta la documentazione Kubernetes in <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="(Si apre in una nuova scheda o finestra)">Assigning Pods to Nodes</a>.</p>
+    <p><strong>Nota</strong>: con l'anti-affinità richiesta, puoi distribuire solo la quantità di repliche per le quali disponi dei nodi di lavoro. Ad esempio, se hai 3 nodi di lavoro nel tuo cluster ma definisci 5 repliche nel tuo file YAML, verranno distribuite solo 3 repliche. Ciascuna replica è attiva su un nodo di lavoro diverso. Le 2 repliche rimanenti rimarranno in sospeso. Se aggiungi un nodo di lavoro al tuo cluster, una delle repliche rimanenti viene distribuita automaticamente al nuovo nodo di lavoro. <p>
+    <p><strong>File YAML di distribuzione di esempio</strong>:<ul>
+    <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/nginx_preferredAntiAffinity.yaml" rel="external" target="_blank" title="(Si apre in una nuova scheda o finestra)">Nginx app with preferred pod anti-affinity.</a></li>
+    <li><a href="https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="(Si apre in una nuova scheda o finestra)">IBM® WebSphere® Application Server Liberty app with required pod anti-affinity.</a></li></ul></p>
+    </dd>
+<dt>Distribuisci i pod tra più zone o regioni</dt>
+  <dd>Per proteggere la tua applicazione da un malfunzionamento di un'ubicazione o di una regione, puoi creare un secondo cluster in un'altra ubicazione o regione e utilizzare un YAML di distribuzione per distribuire una serie di repliche duplicata per la tua applicazione. Aggiungendo una rotta condivisa e un programma di bilanciamento del carico davanti ai tuoi cluster, puoi distribuire il tuo carico di lavoro tra le ubicazioni e regioni. Per ulteriori informazioni, vedi [Elevata disponibilità dei cluster](cs_clusters.html#clusters).
+  </dd>
 </dl>
 
 
@@ -131,7 +85,7 @@ Per ulteriori dettagli, riesamina le opzioni per le <a href="cs_clusters.html#pl
 {: #minimal_app_deployment}
 
 Una distribuzione di base dell'applicazione in un cluster gratuito o standard può includere i seguenti componenti.
-{:shortdesc}
+{: shortdesc}
 
 ![Impostazioni di distribuzione](images/cs_app_tutorial_components1.png)
 
@@ -150,7 +104,9 @@ spec:
     spec:
       containers:
       - name: ibmliberty
-        image: registry.<region>.bluemix.net/ibmliberty:latest
+        image: registry.bluemix.net/ibmliberty:latest
+        ports:
+        - containerPort: 9080        
 ---
 apiVersion: v1
 kind: Service
@@ -160,7 +116,7 @@ metadata:
     app: ibmliberty
 spec:
   selector:
-    run: ibmliberty
+    app: ibmliberty
   type: NodePort
   ports:
    - protocol: TCP
@@ -168,6 +124,7 @@ spec:
 ```
 {: codeblock}
 
+**Nota:** per esporre il tuo servizio, assicurati che la coppia chiave/valore che utilizzi nella sezione `spec.selector` del servizio sia la stessa coppia chiave/valore che utilizzi nella sezione `spec.template.metadata.labels` del tuo yaml di distribuzione.
 Per ulteriori informazioni su ciascun componente, consulta i [Principi di base di Kubernetes](cs_tech.html#kubernetes_basics).
 
 <br />
@@ -185,7 +142,7 @@ Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) 
 
 Puoi utilizzare la porta predefinita o impostare una tua porta per avviare il dashboard Kubernetes per un cluster.
 
-1.  Per i cluster con una versione del master Kubernetes di 1.7.4 o precedente:
+1.  Per i cluster con una versione del master Kubernetes di 1.7.16 o precedente:
 
     1.  Imposta il proxy con il numero di porta predefinito.
 
@@ -235,16 +192,16 @@ Puoi utilizzare la porta predefinita o impostare una tua porta per avviare il da
 
     4.  Accedi al dashboard.
 
-        1.  Nel tuo browser, passa al seguente URL:
+      1.  Nel tuo browser, passa al seguente URL:
 
-            ```
-            http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
-            ```
-            {: codeblock}
+          ```
+          http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+          ```
+          {: codeblock}
 
-        2.  Nella pagina di accesso, seleziona il metodo di autenticazione **Token**.
+      2.  Nella pagina di accesso, seleziona il metodo di autenticazione **Token**.
 
-        3.  Quindi, incolla il valore **id-token** che hai precedentemente copiato nel campo **Token** e fai clic su **ACCEDI**.
+      3.  Quindi, incolla il valore **id-token** che hai precedentemente copiato nel campo **Token** e fai clic su **ACCEDI**.
 
 [Successivamente, puoi eseguire un file di configurazione dal dashboard.](#app_ui)
 
@@ -264,7 +221,7 @@ I segreti Kubernetes rappresentano un modo sicuro per memorizzare informazioni r
 {:shortdesc}
 
 <table>
-<caption>Tabella. File necessari da memorizzare nei segreti in base all'attività</caption>
+<caption>File richiesti per memorizzare i segreti in base all'attività</caption>
 <thead>
 <th>Attività</th>
 <th>File richiesti da memorizzare nei segreti</th>
@@ -279,7 +236,7 @@ I segreti Kubernetes rappresentano un modo sicuro per memorizzare informazioni r
 
 Per visualizzare il segreto TLS:
 <pre>
-bx cs cluster-get &gt;CLUSTER-NAME&lt; | grep "Ingress secret"
+bx cs cluster-get &lt;cluster_name_or_ID&gt; | grep "Ingress secret"
 </pre>
 </p>
 Per creare il tuo proprio segreto, completa la procedura in questo argomento.</td>
@@ -299,7 +256,7 @@ Per creare un segreto con un certificato:
 
 1. Genera il certificato e la chiave di autorità di certificazione (CA, certificate authority) dal tuo provider di certificati. Se disponi del tuo proprio dominio, acquista un certificato TLS ufficiale per il dominio. A scopo di test, puoi generare un certificato autofirmato.
 
- Importante: assicurati che il [CN](https://support.dnsimple.com/articles/what-is-common-name/) sia diverso per ogni certificato.
+ **Importante**: assicurati che il [CN](https://support.dnsimple.com/articles/what-is-common-name/) sia diverso per ogni certificato. 
 
  Il certificato client e la chiave client devono essere verificati utilizzando il certificato di fonte attendibile, che in questo caso è il certificato CA. Esempio:
 
@@ -313,7 +270,7 @@ Per creare un segreto con un certificato:
 2. Crea il certificato come segreto Kubernetes.
 
    ```
-   kubectl create secret generic <secretName> --from-file=<cert_file>=<cert_file>
+   kubectl create secret generic <secret_name> --from-file=<cert_file>=<cert_file>
    ```
    {: pre}
 
@@ -321,14 +278,14 @@ Per creare un segreto con un certificato:
    - Connessione TLS:
 
      ```
-     kubectl create secret tls <secretName> --from-file=tls.crt=server.crt --from-file=tls.key=server.key
+     kubectl create secret tls <secret_name> --from-file=tls.crt=server.crt --from-file=tls.key=server.key
      ```
      {: pre}
 
    - Annotazione di autenticazione reciproca:
 
      ```
-     kubectl create secret generic <secretName> --from-file=ca.crt=ca.crt
+     kubectl create secret generic <secret_name> --from-file=ca.crt=ca.crt
      ```
      {: pre}
 
@@ -351,11 +308,17 @@ Prima di iniziare:
 
 Per distribuire la tua applicazione:
 
-1.  [Apri il dashboard Kubernetes](#cli_dashboard).
-2.  Dal dashboard Kubernetes, fai clic su **+ Create**.
-3.  Seleziona **Specify app details below** per immettere i dettagli dell'applicazione nella GUI o **Upload a YAML or JSON file** per caricare il tuo [file di configurazione dell'applicazione ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/). Utilizza [questo file YAML di esempio ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml) per distribuire un contenitore dall'immagine **ibmliberty** nella regione Stati Uniti Sud.
-4.  Nel dashboard Kubernetes, fai clic su **Deployments** per verificare che la distribuzione sia stata creata.
-5.  Se rendi la tua applicazione disponibile pubblicamente utilizzando un servizio della porta del nodo, un servizio del programma di bilanciamento del carico o Ingress, verifica di poter accedere all'applicazione.
+1.  Apri il [dashboard](#cli_dashboard) Kubernetes e fai clic su **+ Create**.
+2.  Immetti i dettagli della tua applicazione in uno dei due modi. 
+  * Seleziona **Specify app details below** e immetti i dettagli. 
+  * Seleziona **Upload a YAML or JSON file** per caricare il [file di configurazione ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) della tua applicazione.
+
+  Hai bisogno di aiuto con il tuo file di configurazione? Controlla questo [file YAML di esempio ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml). In questo esempio, un contenitore viene distribuito dall'immagine **ibmliberty** nella regione Stati Uniti Sud.
+  {: tip}
+
+3.  Verifica di aver distribuito correttamente la tua applicazione in uno dei seguenti modi. 
+  * Nel dashboard Kubernetes, fai clic su **Deployments**. Viene visualizzato un elenco delle distribuzioni riuscite. 
+  * Se la tua applicazione è [disponibile pubblicamente](cs_network_planning.html#public_access), passa alla pagina di panoramica del cluster nel tuo dashboard {{site.data.keyword.containerlong}}. Copia il dominio secondario, che si trova nella sezione di riepilogo del cluster, e incollalo in un browser per visualizzare la tua applicazione. 
 
 <br />
 
@@ -381,10 +344,12 @@ Per distribuire la tua applicazione:
 
     -   [Ingress ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/services-networking/ingress/): specifica un tipo di programma di bilanciamento del carico che fornisce le rotte per accedere alla tua applicazione pubblicamente.
 
+    
+
 2.  Esegui il file di configurazione nel contesto di un cluster.
 
     ```
-    kubectl apply -f deployment_script_location
+    kubectl apply -f config.yaml
     ```
     {: pre}
 
@@ -395,11 +360,10 @@ Per distribuire la tua applicazione:
 
 
 
-
-## Ridimensionamento delle applicazioni
+## Ridimensionamento delle applicazioni 
 {: #app_scaling}
 
-Con Kubernetes, puoi abilitare il [ridimensionamento automatico pod orizzontale ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) per aumentare o ridurre automaticamente il numero di istanze delle tue applicazioni in base alla CPU.
+Con Kubernetes, puoi abilitare il [ridimensionamento automatico pod orizzontale ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) per aumentare o ridurre automaticamente il numero di istanze delle tue applicazioni in base alla CPU.
 {:shortdesc}
 
 Cerchi informazioni sul ridimensionamento delle applicazioni Cloud Foundry? Controlla [IBM Auto-Scaling per {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling/index.html). 
@@ -409,10 +373,12 @@ Prima di iniziare:
 - [Indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) al tuo cluster.
 - Il monitoraggio Heapster deve essere distribuito nel cluster che vuoi ridimensionare automaticamente.
 
+Passi:
+
 1.  Distribuisci la tua applicazione al cluster dalla CLI. Quando distribuisci la tua applicazione, devi richiedere la CPU.
 
     ```
-    kubectl run <name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
+    kubectl run <app_name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
     ```
     {: pre}
 
@@ -441,7 +407,7 @@ Prima di iniziare:
     Per distribuzioni più complesse, potresti dover creare un [file di configurazione](#app_cli).
     {: tip}
 
-2.  Crea un autoscaler e definisci la tua politica. Per ulteriori informazioni sull'utilizzo del comando `kubetcl autoscale`, consulta la [documentazione Kubernetes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
+2.  Crea un autoscaler e definisci la tua politica. Per ulteriori informazioni sull'utilizzo del comando `kubectl autoscale`, consulta la [documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://v1-8.docs.kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale).
 
     ```
     kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>
@@ -541,4 +507,5 @@ Prima di iniziare, crea una [distribuzione](#app_cli).
         {: pre}
 
 <br />
+
 

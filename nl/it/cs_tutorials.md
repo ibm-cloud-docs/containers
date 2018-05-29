@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-02-27"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -88,13 +88,13 @@ Per installare le CLI e i loro prerequisiti:
 
 5.  Per visualizzare una versione locale del dashboard Kubernetes e per distribuire le applicazioni nei tuoi cluster,
 [installa la CLI Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Per eseguire i comandi utilizzando la CLI Kubernetes, utilizza il prefisso `kubectl`.
-    1.  Per una compatibilità funzionale completa, scarica la versione della CLI Kubernetes che corrisponde alla versione del cluster Kubernetes che vuoi utilizzare. L'attuale versione Kubernetes predefinita per {{site.data.keyword.containershort_notm}} è la 1.8.8.
+    1.  Per una compatibilità funzionale completa, scarica la versione della CLI Kubernetes che corrisponde alla versione del cluster Kubernetes che vuoi utilizzare. L'attuale versione Kubernetes predefinita per {{site.data.keyword.containershort_notm}} è la 1.8.11.
 
-        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl)
+        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl)
 
-        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl)
+        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl)
 
-        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe)
+        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe)
 
           **Suggerimento:** se stai utilizzando Windows, installa la CLI Kubernetes nella stessa directory della CLI {{site.data.keyword.Bluemix_notm}}. Questa configurazione salva alcune modifiche al percorso file quando esegui il comando in un secondo momento.
 
@@ -102,7 +102,7 @@ Per installare le CLI e i loro prerequisiti:
         1.  Sposta il file eseguibile nella directory `/usr/local/bin`.
 
             ```
-            mv /<path_to_file>/kubectl /usr/local/bin/kubectl
+            mv filepath/kubectl /usr/local/bin/kubectl
             ```
             {: pre}
 
@@ -173,20 +173,21 @@ con tutti gli utenti del cluster. Un repository delle immagini privato in {{site
 identificato da uno spazio dei nomi. Lo spazio dei nomi viene utilizzato per creare un URL univoco per il tuo repository delle immagini
 che gli sviluppatori possono utilizzare per accedere alle immagini Docker private.
 
+   
+    
     In questo esempio, l'agenzia di PR vuole creare solo
 un repository delle immagini in {{site.data.keyword.registryshort_notm}}, per cui sceglie
-_agenzia_PR_ come proprio spazio dei nomi per raggruppare tutte le immagini nel suo account. Sostituisci
-_&lt;tuo_spazionomi&gt;_ con uno spazio di nomi di tua scelta che non sia correlato all'esercitazione.
+_agenzia_PR_ come proprio spazio dei nomi per raggruppare tutte le immagini nel suo account. Sostituisci _&lt;namespace&gt;_ con uno spazio dei nomi di tua scelta che non sia correlato all'esercitazione. 
 
     ```
-    bx cr namespace-add <your_namespace>
+    bx cr namespace-add <namespace>
     ```
     {: pre}
 
 3.  Prima di continuare con il prossimo passo, verifica che la distribuzione del tuo nodo di lavoro sia completa.
 
     ```
-    bx cs workers <cluster_name>
+    bx cs workers <cluster_name_or_ID>
     ```
      {: pre}
 
@@ -194,7 +195,7 @@ _&lt;tuo_spazionomi&gt;_ con uno spazio di nomi di tua scelta che non sia correl
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.48.131.37   10.177.161.132   free           normal   Ready    mil01      1.8.8
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.8.11
     ```
     {: screen}
 
@@ -212,7 +213,7 @@ cluster in {{site.data.keyword.Bluemix_notm}}.
 1.  Richiama il comando per impostare la variabile di ambiente e scaricare i file di configurazione Kubernetes.
 
     ```
-    bx cs cluster-config <cluster_name>
+    bx cs cluster-config <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -254,8 +255,8 @@ Kubernetes.
     Output di esempio:
 
     ```
-    Client Version: v1.8.8
-    Server Version: v1.8.8
+    Client Version: v1.8.11
+    Server Version: v1.8.11
     ```
     {: screen}
 
@@ -267,12 +268,12 @@ puoi approfittare della funzionalità già sviluppata nelle tue applicazioni. Og
 cluster può essere utilizzato da qualsiasi applicazione distribuita in tale cluster. Ripeti i seguenti passi per ogni
 servizio {{site.data.keyword.Bluemix_notm}} che desideri utilizzare con le tue applicazioni.
 
-1.  Aggiungi il servizio {{site.data.keyword.toneanalyzershort}} al tuo account {{site.data.keyword.Bluemix_notm}}.
+1.  Aggiungi il servizio {{site.data.keyword.toneanalyzershort}} al tuo account {{site.data.keyword.Bluemix_notm}}. Sostituisci <service_name> con un nome per la tua istanza di servizio. 
 
     **Nota:** quando aggiungi il servizio {{site.data.keyword.toneanalyzershort}} al tuo account, viene visualizzato un messaggio che indica che il servizio non è gratuito. Se limiti la tua chiamata API, per questa esercitazione non sarà addebitato nulla dal tuo servizio {{site.data.keyword.watson}}. [Rivedi le informazioni sul prezzo per il servizio {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/watson/developercloud/tone-analyzer.html#pricing-block).
 
     ```
-    bx service create tone_analyzer standard <mytoneanalyzer>
+    bx service create tone_analyzer standard <service_name>
     ```
     {: pre}
 
@@ -280,18 +281,18 @@ servizio {{site.data.keyword.Bluemix_notm}} che desideri utilizzare con le tue a
 sono diversi dallo spazio dei nomi del registro che hai precedentemente creato
 
     ```
-    bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
+    bx cs cluster-service-bind <cluster_name> default <service_name>
     ```
     {: pre}
 
     Output:
 
     ```
-    bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
-        Binding service instance to namespace...
-        OK
-        Namespace:	default
-        Secret name:	binding-mytoneanalyzer
+    bx cs cluster-service-bind pr_firm_cluster default mytoneanalyzer
+    Binding service instance to namespace...
+    OK
+    Namespace:	default
+    Secret name:	binding-mytoneanalyzer
     ```
     {: screen}
 
@@ -327,3 +328,4 @@ Ottimo lavoro! Il cluster è stato configurato e il tuo ambiente locale è pront
 * Prova [Esercitazione: distribuzione delle applicazioni nei cluster Kubernetes
 in {{site.data.keyword.containershort_notm}}](cs_tutorials_apps.html#cs_apps_tutorial) per distribuire l'applicazione dell'agenzia di PR
 nel cluster che hai creato.
+

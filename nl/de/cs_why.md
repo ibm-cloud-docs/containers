@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -40,6 +40,50 @@ Cluster werden auf Rechenhosts bereitgestellt, die native Kubernetes-Funktionali
 <br />
 
 
+## Vergleich von Angeboten und ihren Kombinationen
+{: #differentiation}
+
+Sie können {{site.data.keyword.containershort_notm}} in {{site.data.keyword.Bluemix_notm}} Public oder Dedicated, in {{site.data.keyword.Bluemix_notm}} Private oder in einem Hybridsetup ausführen.
+{:shortdesc}
+
+Lesen Sie in den folgenden Informationen über die Unterschiede zwischen diesen {{site.data.keyword.containershort_notm}}-Setups. 
+
+<table>
+<col width="22%">
+<col width="78%">
+ <thead>
+ <th>{{site.data.keyword.containershort_notm}}-Setup</th>
+ <th>Beschreibung</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td>{{site.data.keyword.Bluemix_notm}} Public
+ </td>
+ <td>Mit {{site.data.keyword.Bluemix_notm}} Public auf [gemeinsam genutzter oder dedizierter Hardware oder auf Bare-Metal-Maschinen](cs_clusters.html#shared_dedicated_node) können Sie Ihre Apps mithilfe von {{site.data.keyword.containershort_notm}} in Clustern in der Cloud hosten. {{site.data.keyword.containershort_notm}} auf {{site.data.keyword.Bluemix_notm}} Public bietet durch die Kombination von Docker- und Kubernetes-Technologien leistungsstarke Tools, ein intuitives Benutzererlebnis sowie integrierte Sicherheit und Isolation, um die Bereitstellung, den Betrieb, die Skalierung und die Überwachung von containerisierten Apps über einen Cluster von Rechenhosts zu automatisieren. <br><br>Weitere Informationen finden Sie unter [{{site.data.keyword.containershort_notm}}-Technologie](cs_tech.html#ibm-cloud-container-service-technology).
+ </td>
+ </tr>
+ <tr>
+ <td>{{site.data.keyword.Bluemix_notm}} Dedicated
+ </td>
+ <td>{{site.data.keyword.Bluemix_notm}} Dedicated bietet dieselben {{site.data.keyword.containershort_notm}}-Funktionalitäten in der Cloud wie {{site.data.keyword.Bluemix_notm}} Public. Bei einem {{site.data.keyword.Bluemix_notm}} Dedicated-Konto sind die verfügbaren [physischen Ressourcen jedoch nur Ihrem Cluster zugeordnet](cs_clusters.html#shared_dedicated_node) und werden nicht mit Clustern von anderen {{site.data.keyword.IBM_notm}} Kunden geteilt. Sie können eine {{site.data.keyword.Bluemix_notm}} Dedicated-Umgebung einrichten, wenn Sie eine Isolation für Ihren Cluster und die anderen, von Ihnen genutzten {{site.data.keyword.Bluemix_notm}}-Services benötigen. <br><br>Weitere Informationen finden Sie unter [Einführung in Cluster in {{site.data.keyword.Bluemix_notm}} Dedicated](cs_dedicated.html#dedicated).
+ </td>
+ </tr>
+ <tr>
+ <td>{{site.data.keyword.Bluemix_notm}} Private
+ </td>
+ <td>{{site.data.keyword.Bluemix_notm}} Private ist eine Anwendungsplattform, die lokal auf Ihren Maschinen installiert werden kann. Sie können {{site.data.keyword.containershort_notm}} in {{site.data.keyword.Bluemix_notm}} Private verwenden, wenn Sie lokale, containerisierte Apps in Ihrer eigenen kontrollierten Umgebung hinter einer Firewall entwickeln und verwalten müssen. <br><br>Weitere Informationen finden Sie in den [Produktinformationen zu {{site.data.keyword.Bluemix_notm}} Private ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud-computing/products/ibm-cloud-private/) und der zugehörigen [Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html).
+ </td>
+ </tr>
+ <tr>
+ <td>Hybridsetup
+ </td>
+ <td>Hybrid ist die kombinierte Nutzung von Services, die in {{site.data.keyword.Bluemix_notm}} Public oder Dedicated ausgeführt werden, sowie anderen Services, die lokal ausgeführt werden, z. B. als App {{site.data.keyword.Bluemix_notm}} Private. Beispiele für ein Hybridsetup: <ul><li>Bereitstellung eines Clusters mit {{site.data.keyword.containershort_notm}} in {{site.data.keyword.Bluemix_notm}} Public, aber Verbindung dieses Clusters mit einer lokalen Datenbank. </li><li>Bereitstellung eines Clusters mit {{site.data.keyword.containershort_notm}} in {{site.data.keyword.Bluemix_notm}} Private und Implementierung einer App in diesem Cluster. Diese App kann jedoch einen {{site.data.keyword.ibmwatson}}-Service wie {{site.data.keyword.toneanalyzershort}} in {{site.data.keyword.Bluemix_notm}} Public nutzen. </li></ul><br>Um die Kommunikation zwischen Services zu aktivieren, die in {{site.data.keyword.Bluemix_notm}} Public oder Dedicated ausgeführt werden, und Services, die lokal ausgeführt werden, müssen Sie eine [VPN-Verbindung einrichten](cs_vpn.html).
+ </td>
+ </tr>
+ </tbody>
+</table>
+
+<br />
 
 
 ## Vergleich von kostenlosen Clustern und Standardclustern
@@ -51,7 +95,7 @@ Sie können einen kostenlosen Cluster oder beliebig viele Standardcluster erstel
 |Merkmale|Kostenlose Cluster|Standardcluster|
 |---------------|-------------|-----------------|
 |[Netzbetrieb in Clustern](cs_secure.html#in_cluster_network)|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
-|[Öffentlicher App-Zugriff auf eine nicht stabile IP-Adresse durch einen NodePort-Service](cs_nodeport.html#planning)|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
+|[Öffentlicher App-Zugriff auf eine nicht stabile IP-Adresse durch einen NodePort-Service](cs_nodeport.html)|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
 |[Benutzerzugriffsverwaltung](cs_users.html#managing)|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
 |[Zugriff auf den {{site.data.keyword.Bluemix_notm}}-Service über den Cluster und die Apps](cs_integrations.html#adding_cluster)|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
 |[Plattenspeicher auf Workerknoten für nicht persistenten Speicher](cs_storage.html#planning)|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Funktion verfügbar" style="width:32px;" />|
@@ -68,53 +112,10 @@ Sie können einen kostenlosen Cluster oder beliebig viele Standardcluster erstel
 
 
 
-## Zuständigkeiten beim Cluster-Management
+
 {: #responsibilities}
+**Hinweis**: Möchten Sie Ihre Verantwortlichkeiten als Kunde und die Nutzungsbedingungen des Service kennen? 
 
-Informieren Sie sich über die Zuständigkeiten, die Sie gemeinsam mit IBM bei der Verwaltung von Clustern haben.
-{:shortdesc}
-
-**IBM ist für Folgendes verantwortlich:**
-
-- Bereitstellen des Masters, der Workerknoten und Managementkomponenten im Cluster (z. B. Ingress-Lastausgleichsfunktion für Anwendungen) bei der Clustererstellung
-- Verwalten der Aktualisierungen, Überwachen und Wiederherstellen des Kubernetes-Masters für den Cluster
-- Überwachen des Zustands der Workerknoten und Bereitstellen der Automatisierung für Aktualisierung und Wiederherstellung dieser Workerknoten
-- Ausführen von Automatisierungstasks für das Infrastrukturkonto einschließlich Hinzufügen von Workerknoten, Entfernen von Workerknoten und Erstellen eines Standardteilnetzes
-- Verwalten, Aktualisieren und Wiederherstellen der aktiven Komponenten im Cluster (z. B. Ingress-Lastausgleichsfunktion für Anwendungen und Speicher-Plug-in)
-- Bereitstellen der Speicherdatenträger auf Anforderung von PVCs (Persistant Volume Claims)
-- Bereitstellen der Sicherheitseinstellungen auf allen Workerknoten
-
-</br>
-**Sie sind für Folgendes verantwortlich:**
-
-- [Bereitstellen und Verwalten der Kubernetes-Ressourcen (z. B. Pods, Services und Bereitstellungen) im Cluster](cs_app.html#app_cli)
-- [Nutzen der Funktionalität des Service und von Kubernetes zur Sicherstellung einer hohen Verfügbarkeit der Apps](cs_app.html#highly_available_apps)
-- [Hinzufügen oder Entfernen von Kapazitäten über die CLI durch Hinzufügen und Entfernen von Workerknoten](cs_cli_reference.html#cs_worker_add)
-- [Erstellen öffentlicher und privater VLANs in IBM Cloud Infrastructure (SoftLayer) zur Netzisolation Ihres Clusters](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
-- [Sicherstellen der Netzkonnektivität zur Kubernetes-Master-URL für alle Workerknoten](cs_firewall.html#firewall) <p>**Hinweis**: Wenn ein Workerknoten sowohl über öffentliche als auch private VLANs verfügt, dann ist die Netzkonnektivität konfiguriert. Wenn für den Workerknoten ausschließlich ein privates VLAN konfiguriert wurde, dann ist eine Vyatta-Einheit erforderlich, um die Netzkonnektivität bereitzustellen.</p>
-- [Aktualisieren der Master-Komponente 'kube-apiserver' und der Workerknoten, wenn Aktualisierungen für Haupt- und Nebenversionen von Kubernetes verfügbar sind](cs_cluster_update.html#master)
-- [Wiederherstellen von fehlerhaften Workerknoten durch Ausführen der geeigneten `kubectl`-Befehle (z. B. `cordon` oder `drain`) und durch Ausführen der geeigneten `bx cs`-Befehle (z. B. `reboot`, `reload` oder `delete`](cs_cli_reference.html#cs_worker_reboot))
-- [Hinzufügen oder Entfernen von Teilnetzen in der IBM Cloud-Infrastruktur (SoftLayer) nach Bedarf](cs_subnets.html#subnets)
-- [Sichern und Wiederherstellen von Daten im persistenten Speicher in IBM Cloud Infrastructure (SoftLayer) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](../services/RegistryImages/ibm-backup-restore/index.html)
-- [Zustandsüberwachung für Workerknoten mit automatischer Wiederherstellung konfigurieren](cs_health.html#autorecovery)
-
-<br />
-
-
-## Missbrauch von Containern
 {: #terms}
+Weitere Informationen finden Sie unter [{{site.data.keyword.containershort_notm}}-Zuständigkeiten](cs_responsibilities.html). 
 
-Der unsachgemäße Gebrauch von {{site.data.keyword.containershort_notm}} ist untersagt.
-{:shortdesc}
-
-Ein unsachgemäßer Gebrauch umfasst:
-
-*   Illegale Aktivitäten
-*   Verteilung und Ausführung von Malware
-*   {{site.data.keyword.containershort_notm}} beschädigen oder Verwendung von {{site.data.keyword.containershort_notm}} durch einen anderen Benutzer stören
-*   Schäden verursachen oder Verwendung durch einen anderen Benutzer stören
-*   Unbefugter Zugriff auf Services oder Systeme
-*   Unberechtigte Änderung von Services oder Systemen
-*   Verletzung von Rechten anderer Benutzer
-
-Alle Nutzungsbedingungen finden Sie unter [Bedingungen für Cloud-Services](/docs/navigation/notices.html#terms).

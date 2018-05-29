@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-29"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -31,5 +31,4 @@ lastupdated: "2018-01-29"
  - [使用 Strongswan IPSec VPN 服務 Helm 圖表設定 VPN 連線功能](cs_vpn.html#vpn)
  - [網路原則](cs_network_policy.html#network_policies)
  - [限制送至邊緣工作者節點的網路資料流量](cs_edge.html#edge)
-
 

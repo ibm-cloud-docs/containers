@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -24,3 +24,4 @@ lastupdated: "2018-01-11"
  - [클러스터 사용의 이점](cs_why.html#benefits)
  - [서비스 아키텍처](cs_tech.html#architecture)
  - [컨테이너의 오용](cs_why.html#terms)
+

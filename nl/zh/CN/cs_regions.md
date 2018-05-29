@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-13"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -24,7 +24,7 @@ lastupdated: "2018-03-13"
 
 ![{{site.data.keyword.containershort_notm}} 区域和数据中心](/images/regions.png)
 
-图. {{site.data.keyword.containershort_notm}} 区域和数据中心
+{{site.data.keyword.containershort_notm}} 区域和数据中心
 
 支持的 {{site.data.keyword.containershort_notm}} 区域：
   * 亚太地区北部
@@ -149,4 +149,5 @@ lastupdated: "2018-03-13"
 
 ![了解集群资源的位置](/images/region-cluster-resources.png)
 
-图. 了解集群资源的位置。
+了解集群资源的位置。
+

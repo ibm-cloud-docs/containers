@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-13"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -15,24 +15,23 @@ lastupdated: "2018-03-13"
 {:tip: .tip}
 {:download: .download}
 
-# {{site.data.keyword.containerlong_notm}} に対応した Kubernetes バージョン
+# Kubernetes のバージョン
 {: #cs_versions}
 
-{{site.data.keyword.containerlong}} は、複数のバージョンの Kubernetes を同時にサポートします。最新バージョン (n) がリリースされると、2 つ前のバージョン (n-2) までサポートされます。最新バージョンから 2 つより前のバージョン (n-3) は、まず非推奨になり、その後サポートされなくなります。
+{{site.data.keyword.containerlong}} は、複数のバージョンの Kubernetes を同時にサポートします。 最新バージョン (n) がリリースされると、2 つ前のバージョン (n-2) までサポートされます。 最新バージョンから 2 つより前のバージョン (n-3) は、まず非推奨になり、その後サポートされなくなります。
 {:shortdesc}
 
 現在サポートされている Kubernetes のバージョンは以下のとおりです。
 
 - 最新: 1.9.3
-- デフォルト: 1.8.8
-- サポート対象: 1.7.4
-- 非推奨: 1.5.x (2018 年 4 月 4 日から非サポート)
+- デフォルト: 1.8.11
+- サポート対象: 1.7.16
 
-**非推奨バージョン**: 非推奨 Kubernetes でクラスターを実行している場合は、そのバージョンがサポートされなくなるまでの 30 日の間に、サポートされるバージョンの Kubernetes を確認したうえで更新してください。非推奨期間中は、制限されたコマンドをクラスターで実行して、ワーカーの追加、ワーカーの再ロード、クラスターの更新を行えます。非推奨バージョンでは新規クラスターを作成できません。
+**非推奨バージョン**: 非推奨 Kubernetes でクラスターを実行している場合は、そのバージョンがサポートされなくなるまでの 30 日の間に、サポートされるバージョンの Kubernetes を確認したうえで更新してください。 非推奨期間中は、制限されたコマンドをクラスターで実行して、ワーカーの追加、ワーカーの再ロード、クラスターの更新を行えます。 非推奨バージョンでは新規クラスターを作成できません。
 
 **非サポート・バージョン**: サポートされないバージョンの Kubernetes でクラスターを実行している場合は、更新が[与える可能性のある影響を確認](#version_types)したうえで、ただちに[クラスターを更新](cs_cluster_update.html#update)して、重要なセキュリティー更新とサポートを継続して受けられるようにしてください。
 
-サーバーのバージョンを確認するには、以下のコマンドを実行します。
+クラスターのサーバー・バージョンを確認するには、以下のコマンドを実行します。
 
 ```
 kubectl version  --short | grep -i server
@@ -42,7 +41,7 @@ kubectl version  --short | grep -i server
 出力例:
 
 ```
-Server Version: 1.8.8
+Server Version: v1.8.11+9d6e0610086578
 ```
 {: screen}
 
@@ -50,30 +49,40 @@ Server Version: 1.8.8
 ## 更新タイプ
 {: #version_types}
 
-Kubernetes には以下のようなバージョン更新のタイプがあります。
+Kubernetes クラスターには、メジャー、マイナー、およびパッチという 3 つのタイプの更新があります。
 {:shortdesc}
 
 |更新タイプ|バージョン・ラベルの例|更新の実行者|影響
 |-----|-----|-----|-----|
 |メジャー|1.x.x|お客様|スクリプトやデプロイメントを含むクラスターの操作変更。|
-|マイナー|x.5.x|お客様|スクリプトやデプロイメントを含むクラスターの操作変更。|
-|パッチ|x.x.3|IBM とお客様|スクリプトやデプロイメントは変更されません。 マスターは IBM が自動的に更新しますが、ワーカー・ノードへのパッチはお客様が適用する必要があります。|
+|マイナー|x.9.x|お客様|スクリプトやデプロイメントを含むクラスターの操作変更。|
+|パッチ|x.x.4_1510|IBM とお客様|Kubernetes のパッチ、および、セキュリティー・パッチやオペレーティング・システム・パッチなどの他の {{site.data.keyword.Bluemix_notm}} Provider コンポーネントの更新。マスターは IBM が自動的に更新しますが、ワーカー・ノードへのパッチはお客様が適用する必要があります。|
 {: caption="Kubernetes 更新の影響" caption-side="top"}
 
-デフォルトでは、Kubernetes マスターを更新できるのは 2 つ先のマイナー・バージョンまでです。 例えば、現在のマスターがバージョン 1.5 であり 1.8 に更新する計画の場合、まず 1.7 に更新する必要があります。 続けて更新を強制実行することは可能ですが、2 つのマイナー・バージョンを超える更新は予期しない結果を生じることがあります。
-{: tip}
+更新が利用可能になると、`bx cs workers <cluster>` や `bx cs worker-get <cluster> <worker>` コマンドなどを使用してワーカー・ノードの情報を表示したときに通知されます。
+-  **メジャー更新とマイナー更新**: まず[マスター・ノードを更新して](cs_cluster_update.html#master)、それから[ワーカー・ノードを更新します](cs_cluster_update.html#worker_node)。 
+   - デフォルトでは、Kubernetes マスターを更新できるのは 2 つ先のマイナー・バージョンまでです。 例えば、現在のマスターがバージョン 1.5 であり 1.8 に更新する計画の場合、まず 1.7 に更新する必要があります。 続けて更新を強制実行することは可能ですが、2 つのマイナー・バージョンを超える更新は予期しない結果を生じることがあります。
+   - 少なくともクラスターの `major.minor` バージョンに一致する `kubectl` CLI バージョンを使用しないと、予期しない結果になる可能性があります。 Kubernetes クラスターと [CLI のバージョン](cs_cli_install.html#kubectl)を最新の状態に保つようにしてください。
+-  **パッチ更新**: 更新が利用可能になっていないか毎月確認し、`bx cs worker-update` [コマンド](cs_cli_reference.html#cs_worker_update)を使用して、それらのセキュリティー・パッチとオペレーティング・システム・パッチを適用します。詳しくは、[バージョンの変更ログ](cs_versions_changelog.html)を参照してください。
 
-以下の情報は、クラスターを前のバージョンから新しいバージョンに更新した場合に、デプロイされているアプリに影響を与える可能性がある更新についてまとめたものです。 Kubernetes の各バージョンでの変更内容を示す完全なリストについては、[Kubernetes changelog ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md) を参照してください。
+<br/>
 
-更新処理について詳しくは、[クラスターの更新](cs_cluster_update.html#master)と[ワーカー・ノードの更新](cs_cluster_update.html#worker_node)を参照してください。
+このページの情報は、クラスターを前のバージョンから新しいバージョンに更新した場合に、デプロイされているアプリに影響を与える可能性がある更新についてまとめたものです。
+-  バージョン 1.9 [マイグレーションの操作](#cs_v19)。
+-  バージョン 1.8 [マイグレーションの操作](#cs_v18)。
+-  バージョン 1.7 [マイグレーションの操作](#cs_v17)。
+-  非推奨または非サポートのバージョンの[アーカイブ](#k8s_version_archive)。
 
-少なくともクラスターの `major.minor` バージョンに一致する `kubectl` CLI バージョンを使用しないと、予期しない結果になる可能性があります。Kubernetes クラスターと [CLI のバージョン](cs_cli_install.html#kubectl)を最新の状態に保つようにしてください。
-{:tip}
+<br/>
+
+より詳しい変更内容のリストが必要な場合は、以下を参照してください。
+* [Kubernetes の変更ログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md)。
+* [IBM バージョンの変更ログ](cs_versions_changelog.html)。
 
 ## バージョン 1.9
 {: #cs_v19}
 
-<p><img src="images/certified_kubernetes_1x9.png" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" height="100" width="63" align="left" alt="このバッジは、IBM Cloud Container Service が Kubernetes バージョン 1.9 の認定を受けたことを示しています。"/> {{site.data.keyword.containerlong_notm}} は、CNCF Kubernetes Software Conformance Certification プログラムのもとでバージョン 1.9 の認定を受けた Kubernetes 製品です。</p>
+<p><img src="images/certified_kubernetes_1x9.png" style="padding-right: 10px;" align="left" alt="このバッジは、IBM Cloud Container Service が Kubernetes バージョン 1.9 の認定を受けたことを示しています。"/> {{site.data.keyword.containerlong_notm}} は、CNCF Kubernetes Software Conformance Certification プログラムのもとで認定を受けたバージョン 1.9 の Kubernetes 製品です。__</p>
 
 Kubernetes を前のバージョンから 1.9 に更新する場合に必要な可能性がある変更作業について説明します。
 
@@ -138,11 +147,13 @@ Kubernetes を前のバージョンから 1.9 に更新する場合に必要な�
 </tbody>
 </table>
 
+<br />
+
 
 ## バージョン 1.8
 {: #cs_v18}
 
-<p><img src="images/certified_kubernetes_1x8.png" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" height="100" width="62.5" align="left" alt="このバッジは、IBM Cloud Container Service に関する Kubernetes バージョン 1.8 証明書を示しています。"/> {{site.data.keyword.containerlong_notm}} は、CNCF Kubernetes Software Conformance Certification プログラムにおけるバージョン 1.8 の認定 Kubernetes 製品です。</p>
+<p><img src="images/certified_kubernetes_1x8.png" style="padding-right: 10px;" align="left" alt="このバッジは、IBM Cloud Container Service が Kubernetes バージョン 1.8 の認定を受けたことを示しています。"/> {{site.data.keyword.containerlong_notm}} は、CNCF Kubernetes Software Conformance Certification プログラムのもとで認定を受けたバージョン 1.8 の Kubernetes 製品です。__</p>
 
 Kubernetes を前のバージョンから 1.8 に更新する場合に必要な可能性がある変更作業について説明します。
 
@@ -199,14 +210,23 @@ Kubernetes を前のバージョンから 1.8 に更新する場合に必要な�
 <td>`kubectl stop`</td>
 <td>`kubectl stop` コマンドは使用できなくなりました。</td>
 </tr>
+<tr>
+<td>読み取り専用 API データ・ボリューム</td>
+<td>`secret`、`configMap`、`downwardAPI`、および投影ボリュームは、読み取り専用でマウントされるようになります。
+これまでは、システムによって自動的に元の状態に戻されることがあるこれらのボリュームに、アプリがデータを書き込めました。このマイグレーション操作は、
+セキュリティーの脆弱性 [CVE-2017-1002102](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102) を修正するために必要です。
+アプリが以前の非セキュアな動作に依存している場合は、適切に変更してください。</td>
+</tr>
 </tbody>
 </table>
+
+<br />
 
 
 ## バージョン 1.7
 {: #cs_v17}
 
-<p><img src="images/certified_kubernetes_1x7.png" height="100" width="62.5" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" align="left" alt="このバッジは、IBM Cloud Container Service に関する Kubernetes バージョン 1.7 証明書を示しています。"/> {{site.data.keyword.containerlong_notm}} は、CNCF Kubernetes Software Conformance Certification プログラムにおけるバージョン 1.7 の認定 Kubernetes 製品です。</p>
+<p><img src="images/certified_kubernetes_1x7.png" style="padding-right: 10px;" align="left" alt="このバッジは、IBM Cloud Container Service に関する Kubernetes バージョン 1.7 証明書を示しています。"/> {{site.data.keyword.containerlong_notm}} は、CNCF Kubernetes Software Conformance Certification プログラムにおけるバージョン 1.7 の認定 Kubernetes 製品です。</p>
 
 Kubernetes を前のバージョンから 1.7 に更新する場合に必要な可能性がある変更作業について説明します。
 
@@ -255,7 +275,7 @@ Kubernetes を前のバージョンから 1.7 に更新する場合に必要な�
 <tbody>
 <tr>
 <td>デプロイメント `apiVersion`</td>
-<td>Kubernetes 1.5 からクラスターを更新した後は、新しい `Deployment` YAML ファイル内の `apiVersion` フィールドには `apps/v1beta1` を使用してください。`Ingress` などの他のリソースには、引き続き `extensions/v1beta1` を使用してください。</td>
+<td>Kubernetes 1.5 からクラスターを更新した後は、新しい `Deployment` YAML ファイル内の `apiVersion` フィールドには `apps/v1beta1` を使用してください。 `Ingress` などの他のリソースには、引き続き `extensions/v1beta1` を使用してください。</td>
 </tr>
 <tr>
 <td>kubectl</td>
@@ -312,39 +332,47 @@ Kubernetes を前のバージョンから 1.7 に更新する場合に必要な�
 </td></tr>
 <tr>
 <td>`default` `ServiceAccount` の RBAC</td>
-<td><p>`default` 名前空間の `default` `ServiceAccount` の管理者 `ClusterRoleBinding` は、クラスターのセキュリティーを改善するために削除されました。`default` 名前空間で実行されるアプリケーションは、Kubernetes API に対するクラスター管理者特権を失うので、RBAC DENY 権限エラーが発生する可能性があります。これらの特権にアプリケーションが依存している場合は、アプリのために [RBAC 権限リソースを作成](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview)してください。</p>
-  <p>アプリの RBAC ポリシーを更新する際に、前の `default` に一時的に戻す必要がある場合があります。`kubectl apply -f FILENAME` コマンドを使用して、以下のファイルをコピー、保存、適用してください。<strong>注</strong>: 長期的な解決策としてではなく、すべてのアプリケーション・リソースを更新する時間を確保するために戻ります。</p>
+<td><p>`default` 名前空間の `default` `ServiceAccount` の管理者 `ClusterRoleBinding` は、クラスターのセキュリティー向上のために削除されました。`default` 名前空間で実行されるアプリケーションは、Kubernetes API に対するクラスター管理者特権を失うので、`RBAC DENY` 権限エラーが発生する可能性があります。 使用するアプリとその `.yaml` ファイルを調べて、アプリが `default` 名前空間で実行され、`default ServiceAccount` を使用し、Kubernetes API にアクセスするかどうかを確認してください。</p>
+<p>これらの特権にアプリケーションが依存している場合は、アプリのために [RBAC 権限リソースを作成![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview)してください。</p>
+  <p>アプリの RBAC ポリシーを更新する際に、前の `default` に一時的に戻す必要がある場合があります。 `kubectl apply -f FILENAME` コマンドを使用して、以下のファイルをコピー、保存、適用してください。 <strong>注</strong>: 長期的な解決策としてではなく、すべてのアプリケーション・リソースを更新する時間を確保するために戻ります。</p>
 
-  <p><pre class="codeblock">
-  <code>
-  kind: ClusterRoleBinding
-  apiVersion: rbac.authorization.k8s.io/v1
-  metadata:
-   name: admin-binding-nonResourceURLSs-default
-  subjects:
-    - kind: ServiceAccount
-      name: default
-      namespace: default
-  roleRef:
-   kind: ClusterRole
-   name: admin-role-nonResourceURLSs
-   apiGroup: rbac.authorization.k8s.io
-  ---
-  kind: ClusterRoleBinding
-  apiVersion: rbac.authorization.k8s.io/v1
-  metadata:
-   name: admin-binding-resourceURLSs-default
-  subjects:
-    - kind: ServiceAccount
-      name: default
-      namespace: default
-  roleRef:
-   kind: ClusterRole
-   name: admin-role-resourceURLSs
-   apiGroup: rbac.authorization.k8s.io
-  </code>
-  </pre></p>
-  </td>
+<p><pre class="codeblock">
+<code>
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+ name: admin-binding-nonResourceURLSs-default
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: default
+roleRef:
+ kind: ClusterRole
+ name: admin-role-nonResourceURLSs
+ apiGroup: rbac.authorization.k8s.io
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+ name: admin-binding-resourceURLSs-default
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: default
+roleRef:
+ kind: ClusterRole
+ name: admin-role-resourceURLSs
+ apiGroup: rbac.authorization.k8s.io
+</code>
+</pre></p>
+</td>
+</tr>
+<tr>
+<td>読み取り専用 API データ・ボリューム</td>
+<td>`secret`、`configMap`、`downwardAPI`、および投影ボリュームは、読み取り専用でマウントされるようになります。
+これまでは、システムによって自動的に元の状態に戻されることがあるこれらのボリュームに、アプリがデータを書き込めました。このマイグレーション操作は、
+セキュリティーの脆弱性 [CVE-2017-1002102](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102) を修正するために必要です。
+アプリが以前の非セキュアな動作に依存している場合は、適切に変更してください。</td>
 </tr>
 <tr>
 <td>StatefulSet ポッド DNS</td>
@@ -380,12 +408,16 @@ Kubernetes を前のバージョンから 1.7 に更新する場合に必要な�
 </tbody>
 </table>
 
+<br />
+
+
 ## アーカイブ
 {: #k8s_version_archive}
 
-### バージョン 1.5 (非推奨)
+### バージョン 1.5 (サポート対象外)
 {: #cs_v1-5}
 
-2018 年 3 月 5 日現在、[Kubernetes バージョン 1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) を実行する {{site.data.keyword.containershort_notm}} クラスターは非推奨です。2018 年 4 月 4 日以降、バージョン 1.5 クラスターは、次に最新のバージョン ([Kubernetes 1.7](#cs_v17)) に更新しない限り、セキュリティー更新もサポートも受けられません。
+2018 年 4 月 4 日現在、[Kubernetes バージョン 1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) を実行する {{site.data.keyword.containershort_notm}} クラスターはサポートされていません。バージョン 1.5 クラスターは、次に最新のバージョン ([Kubernetes 1.7](#cs_v17)) に更新しない限り、セキュリティー更新もサポートも受けられません。
 
-各 Kubernetes バージョンの更新が[与える可能性のある影響を確認](cs_versions.html#cs_versions)したうえで、ただちに[クラスターを更新](cs_cluster_update.html#update)してください。あるバージョンから次に最新のバージョンに (例えば、1.5 から 1.7 に、または 1.8 から 1.9 に) 更新するようにしてください。
+各 Kubernetes バージョンの更新が[与える可能性のある影響を確認](cs_versions.html#cs_versions)したうえで、ただちに[クラスターを更新](cs_cluster_update.html#update)してください。 あるバージョンから次に最新のバージョンに (例えば、1.5 から 1.7 に、または 1.8 から 1.9 に) 更新するようにしてください。
+

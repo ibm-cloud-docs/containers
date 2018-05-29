@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-29"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -31,5 +31,4 @@ lastupdated: "2018-01-29"
  - [Strongswan IPSec VPN サービスの Helm Chart を使用した VPN 接続のセットアップ](cs_vpn.html#vpn)
  - [ネットワーク・ポリシー](cs_network_policy.html#network_policies)
  - [ネットワーク・トラフィックをエッジ・ワーカー・ノードに制限する](cs_edge.html#edge)
-
 

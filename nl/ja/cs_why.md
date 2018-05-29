@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -33,13 +33,58 @@ lastupdated: "2018-03-16"
 |Vulnerability Advisor によるイメージ・セキュリティー・コンプライアンス|<ul><li>保護された独自の Docker プライベート・イメージ・レジストリーをセットアップできる。このレジストリーにイメージが格納され、組織内のすべてのユーザーによって共有される。</li><li>プライベート {{site.data.keyword.Bluemix_notm}} レジストリー内のイメージを自動スキャンすることによる利点。</li><li>イメージ内で使用されるオペレーティング・システムに固有の推奨を確認して、潜在的な脆弱性を修正できる。</li></ul>|
 |クラスターの正常性に関する継続的なモニター|<ul><li>クラスター・ダッシュボードを使用して、クラスター、ワーカー・ノード、およびコンテナー・デプロイメントの正常性を素早く参照して管理できる。</li><li>{{site.data.keyword.monitoringlong}}を使用して詳細な使用量メトリックを確認し、ワークロードに合わせてクラスターを素早く拡張することができる。</li><li>{{site.data.keyword.loganalysislong}}を使用してロギング情報を参照して、クラスター・アクティビティーの詳細を確認できる。</li></ul>|
 |アプリにパブリック・アクセスできるよう安全に公開する|<ul><li>インターネットからクラスター内のサービスにアクセスする方法を、パブリック IP アドレス、{{site.data.keyword.IBM_notm}} 提供の経路、独自のカスタム・ドメインの中から選択できる。</li></ul>|
-|{{site.data.keyword.Bluemix_notm}} サービスの統合|<ul><li>Watson API、ブロックチェーン、データ・サービス、モノのインターネットなどの {{site.data.keyword.Bluemix_notm}} サービスを統合してアプリに付加的な機能を追加する。</li></ul>|
+|{{site.data.keyword.Bluemix_notm}} サービスの統合|<ul><li>Watson API、Blockchain、データ・サービス、モノのインターネットなどの {{site.data.keyword.Bluemix_notm}} サービスを統合してアプリに付加的な機能を追加する。</li></ul>|
 
 
 
 <br />
 
 
+## オファーとそれらの組み合わせの比較
+{: #differentiation}
+
+{{site.data.keyword.containershort_notm}} は、{{site.data.keyword.Bluemix_notm}} Public、Dedicated、{{site.data.keyword.Bluemix_notm}} Private、またはハイブリッド構成で実行できます。
+{:shortdesc}
+
+これらの {{site.data.keyword.containershort_notm}} 構成の違いについて、以下に説明します。
+
+<table>
+<col width="22%">
+<col width="78%">
+ <thead>
+ <th>{{site.data.keyword.containershort_notm}} 構成</th>
+ <th>説明</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td>{{site.data.keyword.Bluemix_notm}} Public
+ </td>
+ <td>[共有ハードウェアまたは専用ハードウェア、あるいはベア・メタル・マシン上の](cs_clusters.html#shared_dedicated_node) {{site.data.keyword.Bluemix_notm}} Public では、{{site.data.keyword.containershort_notm}} を使用してクラウド上のクラスターでアプリをホストできます。{{site.data.keyword.Bluemix_notm}} Public 上の {{site.data.keyword.containershort_notm}} では、Docker と Kubernetes のテクノロジーを組み合わせた強力なツール、直観的なユーザー・エクスペリエンス、標準装備のセキュリティーと分離機能を利用できます。それにより、コンピュート・ホストのクラスター内でのコンテナー化アプリのデプロイメント、運用、スケーリング、モニタリングを自動化できます。
+<br><br>詳しくは、[{{site.data.keyword.containershort_notm}} テクノロジー](cs_tech.html#ibm-cloud-container-service-technology)を参照してください。
+ </td>
+ </tr>
+ <tr>
+ <td>{{site.data.keyword.Bluemix_notm}} Dedicated
+ </td>
+ <td>{{site.data.keyword.Bluemix_notm}} Dedicated は、クラウド上で {{site.data.keyword.Bluemix_notm}} Public と同じ {{site.data.keyword.containershort_notm}} 機能を提供します。ただし、{{site.data.keyword.Bluemix_notm}} Dedicated アカウントを使用する場合、使用可能な[物理リソースはお客様のクラスター専用であり](cs_clusters.html#shared_dedicated_node)、{{site.data.keyword.IBM_notm}} の他のお客様のクラスターと共有されません。クラスターや使用する他の {{site.data.keyword.Bluemix_notm}} サービスのために分離が必要な場合は、{{site.data.keyword.Bluemix_notm}} Dedicated 環境のセットアップを選ぶことができます。<br><br>詳しくは、[{{site.data.keyword.Bluemix_notm}} Dedicated でのクラスターの概説](cs_dedicated.html#dedicated)を参照してください。
+ </td>
+ </tr>
+ <tr>
+ <td>{{site.data.keyword.Bluemix_notm}} Private
+ </td>
+ <td>{{site.data.keyword.Bluemix_notm}} Private は、ユーザー自身のマシン上にローカルにインストールできるアプリケーション・プラットフォームです。ファイアウォールの内側にあるユーザー所有の制御された環境で、社内用のコンテナー化アプリを開発して管理する必要がある場合は、{{site.data.keyword.Bluemix_notm}} Private で {{site.data.keyword.containershort_notm}} を使用することを選択できます。<br><br>詳しくは、[{{site.data.keyword.Bluemix_notm}} Private の製品情報 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud-computing/products/ibm-cloud-private/) および [資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html) を参照してください。
+ </td>
+ </tr>
+ <tr>
+ <td>ハイブリッド構成
+ </td>
+ <td>ハイブリッドとは、{{site.data.keyword.Bluemix_notm}} Public または Dedicated で実行されるサービスと、{{site.data.keyword.Bluemix_notm}} Private 内のアプリなどのオンプレミスで実行される他のサービスを組み合わせて使用することです。ハイブリッド構成の例を以下に示します。<ul><li>{{site.data.keyword.Bluemix_notm}} Public で {{site.data.keyword.containershort_notm}} を使用してクラスターをプロビジョンしながら、そのクラスターを社内データベースに接続する。</li><li>{{site.data.keyword.Bluemix_notm}} Private で {{site.data.keyword.containershort_notm}} を使用してクラスターをプロビジョンしながら、アプリをそのクラスターにデプロイする。ただし、そのアプリは {{site.data.keyword.Bluemix_notm}} Public の {{site.data.keyword.ibmwatson}} サービス ({{site.data.keyword.toneanalyzershort}} など) を使用する可能性がある。</li></ul><br>{{site.data.keyword.Bluemix_notm}} Public または Dedicated で実行しているサービスとオンプレミスで実行しているサービスの間の通信を有効にするには、[VPN 接続をセットアップする](cs_vpn.html)必要があります。
+ </td>
+ </tr>
+ </tbody>
+</table>
+
+<br />
 
 
 ## フリー・クラスターと標準クラスターの比較
@@ -51,7 +96,7 @@ lastupdated: "2018-03-16"
 |特性|フリー・クラスター|標準クラスター|
 |---------------|-------------|-----------------|
 |[クラスター内ネットワーキング](cs_secure.html#in_cluster_network)|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
-|[NodePort サービスによる非安定 IP アドレスへのパブリック・ネットワークのアプリ・アクセス](cs_nodeport.html#planning)|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
+|[NodePort サービスによる非安定 IP アドレスへのパブリック・ネットワークのアプリ・アクセス](cs_nodeport.html)|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
 |[ユーザー・アクセス管理](cs_users.html#managing)|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
 |[クラスターとアプリからの {{site.data.keyword.Bluemix_notm}} サービス・アクセス](cs_integrations.html#adding_cluster)|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
 |[非永続ストレージ用のワーカー・ノードのディスク・スペース](cs_storage.html#planning)|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />|
@@ -68,53 +113,10 @@ lastupdated: "2018-03-16"
 
 
 
-## クラスター管理の責任
+
 {: #responsibilities}
+**注**: サービスを使用する際の責任とコンテナーのご利用条件をお探しですか?
 
-お客様が IBM と分担する、クラスター管理の責任について確認してください。
-{:shortdesc}
-
-**IBM は以下について責任を持ちます。**
-
-- クラスター作成時に、マスター、ワーカー・ノード、管理コンポーネント (Ingress アプリケーション・ロード・バランサーなど) をクラスター内にデプロイする
-- クラスターにおける Kubernetes マスターの更新、モニタリング、リカバリーを管理する
-- ワーカー・ノードの正常性をモニタリングし、それらのワーカー・ノードの更新とリカバリーの自動化を提供する
-- ワーカー・ノードの追加、ワーカー・ノードの削除、デフォルト・サブネットの作成などの、インフラストラクチャー・アカウントに対する自動化タスクを実行する
-- クラスター内の運用コンポーネント (Ingress アプリケーション・ロード・バランサーやストレージ・プラグインなど) を管理、更新、リカバリーする
-- ストレージ・ボリュームを、永続ボリューム請求で要求されたときにプロビジョンする
-- すべてのワーカー・ノードにセキュリティー設定を提供する
-
-</br>
-**お客様は以下について責任を持ちます。**
-
-- [Kubernetes リソース (ポッド、サービス、デプロイメントなど) をクラスター内にデプロイして管理する](cs_app.html#app_cli)
-- [アプリの高可用性が確保されるように、サービスと Kubernetes の機能を活用する](cs_app.html#highly_available_apps)
-- [CLI を使用してワーカー・ノードを追加または解除することで、キャパシティーを追加または縮小する](cs_cli_reference.html#cs_worker_add)
-- [クラスターのネットワーク分離のために IBM Cloud インフラストラクチャー (SoftLayer) でパブリック VLAN とプライベート VLAN を作成する ](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
-- [すべてのワーカー・ノードに、Kubernetes マスター URL へのネットワーク接続を設定する](cs_firewall.html#firewall) <p>**注**: ワーカー・ノードにパブリック VLAN とプライベート VLAN の両方が設定されている場合は、ネットワーク接続が構成されています。 ワーカー・ノードにプライベート VLAN のみがセットアップされている場合は、ネットワーク接続を確立するために Vyatta が必要です。</p>
-- [Kubernetes のメジャー・バージョンまたはマイナー・バージョンの更新が利用可能な場合に、マスター kube-apiserver ノードとワーカー・ノードを更新する](cs_cluster_update.html#master)
-- [トラブルが発生したワーカー・ノードをリカバリーする。これは、`kubectl` コマンド (`cordon` や `drain` など) を実行したり、`bx cs` コマンド (`reboot`、`reload`、`delete` など) を実行したりして行う](cs_cli_reference.html#cs_worker_reboot)
-- [IBM Cloud インフラストラクチャー (SoftLayer) 内のサブネットを必要に応じて追加または解除する](cs_subnets.html#subnets)
-- [IBM Cloud インフラストラクチャー (SoftLayer) で永続ストレージのデータのバックアップとリストアを実行する ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](../services/RegistryImages/ibm-backup-restore/index.html)
-- [Autorecovery を使用したワーカー・ノードの正常性モニタリングの構成](cs_health.html#autorecovery)
-
-<br />
-
-
-## コンテナーの不正使用
 {: #terms}
+[{{site.data.keyword.containershort_notm}} の責任](cs_responsibilities.html)を参照してください。
 
-お客様は {{site.data.keyword.containershort_notm}} を不正使用してはいけません。
-{:shortdesc}
-
-不正使用には、以下が含まれます。
-
-*   不法行為
-*   マルウェアの配布や実行
-*   {{site.data.keyword.containershort_notm}} に損害を与えたり、他のお客様による {{site.data.keyword.containershort_notm}} の使用に干渉したりすること
-*   他のサービスやシステムに損害を与えたり、他のお客様による使用に干渉したりすること
-*   サービスまたはシステムに対する無許可アクセス
-*   サービスまたはシステムに対する無許可の変更
-*   他のお客様の権利を侵害すること
-
-すべての使用条件については、[クラウド・サービスのご利用条件](/docs/navigation/notices.html#terms)を参照してください。

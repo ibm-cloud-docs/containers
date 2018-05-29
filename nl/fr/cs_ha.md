@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-12"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -42,7 +42,7 @@ L'architecture et l'infrastructure d'{{site.data.keyword.containerlong_notm}} es
 <col width="70%">
 <col width="17%">
   <thead>
-  <th>N°</th>
+  <th>#</th>
   <th>Point de défaillance</th>
   <th>Description</th>
   <th>Lien vers la documentation</th>
@@ -86,3 +86,4 @@ L'architecture et l'infrastructure d'{{site.data.keyword.containerlong_notm}} es
   </tr>
   </tbody>
   </table>
+

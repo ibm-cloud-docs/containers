@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-08"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -55,3 +55,4 @@ lastupdated: "2018-03-08"
     - [針對具有自動回復的工作者節點配置性能監視](cs_health.html#autorecovery)
 - [視覺化 Kubernetes 叢集資源](cs_integrations.html#weavescope)
 - [移除叢集](cs_clusters.html#remove)
+

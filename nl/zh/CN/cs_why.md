@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -40,6 +40,50 @@ lastupdated: "2018-03-16"
 <br />
 
 
+## 比较产品及其组合
+{: #differentiation}
+
+可以在 {{site.data.keyword.Bluemix_notm}} Public 或 Dedicated 中、在 {{site.data.keyword.Bluemix_notm}} Private 中或者在混合设置中运行 {{site.data.keyword.containershort_notm}}。
+{:shortdesc}
+
+查看以下信息以了解这些 {{site.data.keyword.containershort_notm}} 设置的差异。
+
+<table>
+<col width="22%">
+<col width="78%">
+ <thead>
+ <th>{{site.data.keyword.containershort_notm}} 设置</th>
+ <th>描述</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td>{{site.data.keyword.Bluemix_notm}} Public
+ </td>
+ <td>使用位于[共享或专用硬件或者位于裸机机器上](cs_clusters.html#shared_dedicated_node)的 {{site.data.keyword.Bluemix_notm}} Public 时，可以使用 {{site.data.keyword.containershort_notm}} 在云上的集群中托管应用程序。{{site.data.keyword.Bluemix_notm}} Public 上的 {{site.data.keyword.containershort_notm}} 通过将 Docker 和 Kubernetes 技术、直观的用户体验以及内置安全和隔离功能组合使用，交付了功能强大的工具，可在计算主机的集群中对容器化应用程序自动执行部署、操作、扩展和监视。<br><br>有关更多信息，请参阅 [{{site.data.keyword.containershort_notm}} 技术](cs_tech.html#ibm-cloud-container-service-technology)。
+ </td>
+ </tr>
+ <tr>
+ <td>{{site.data.keyword.Bluemix_notm}} Dedicated
+ </td>
+ <td>{{site.data.keyword.Bluemix_notm}} Dedicated 在云上提供的 {{site.data.keyword.containershort_notm}} 功能与 {{site.data.keyword.Bluemix_notm}} Public 相同。但是，使用 {{site.data.keyword.Bluemix_notm}} Dedicated 帐户，可用[物理资源仅供您的集群专用](cs_clusters.html#shared_dedicated_node)，而不会与其他 {{site.data.keyword.IBM_notm}} 客户的集群共享。需要对集群和使用的其他 {{site.data.keyword.Bluemix_notm}} 服务进行隔离时，您可能会选择设置 {{site.data.keyword.Bluemix_notm}} Dedicated 环境。<br><br>有关更多信息，请参阅[开始使用 {{site.data.keyword.Bluemix_notm}} Dedicated 中的集群](cs_dedicated.html#dedicated)。
+ </td>
+ </tr>
+ <tr>
+ <td>{{site.data.keyword.Bluemix_notm}} Private
+ </td>
+ <td>{{site.data.keyword.Bluemix_notm}} Private 是可以在自己的机器上本地安装的应用程序平台。如果需要在防火墙后您自己的受控环境中开发和管理内部部署容器化应用程序，那么可以选择在 {{site.data.keyword.Bluemix_notm}} Private 中使用 {{site.data.keyword.containershort_notm}}。<br><br>有关更多信息，请参阅 [{{site.data.keyword.Bluemix_notm}} Private 产品信息 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/cloud-computing/products/ibm-cloud-private/) 和[文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html)。
+ </td>
+ </tr>
+ <tr>
+ <td>混合设置
+ </td>
+ <td>混合是将 {{site.data.keyword.Bluemix_notm}} Public 或 Dedicated 中运行的服务与内部部署运行的其他服务（例如，{{site.data.keyword.Bluemix_notm}} Private 中的应用程序）组合使用。混合设置的示例：<ul><li>在 {{site.data.keyword.Bluemix_notm}} Public 中使用 {{site.data.keyword.containershort_notm}} 供应集群，但将该集群连接到内部部署数据库。</li><li>在 {{site.data.keyword.Bluemix_notm}} Private 中使用 {{site.data.keyword.containershort_notm}} 供应集群，并将应用程序部署到该集群中。但是，此应用程序可能会使用 {{site.data.keyword.Bluemix_notm}} Public 中的 {{site.data.keyword.ibmwatson}} 服务，例如 {{site.data.keyword.toneanalyzershort}}。</li></ul><br>要启用在 {{site.data.keyword.Bluemix_notm}} Public 或 Dedicated 中运行的服务与内部部署运行的服务之间的通信，必须[设置 VPN 连接](cs_vpn.html)。
+ </td>
+ </tr>
+ </tbody>
+</table>
+
+<br />
 
 
 ## 比较免费和标准集群
@@ -51,7 +95,7 @@ lastupdated: "2018-03-16"
 |特征|免费集群|标准集群|
 |---------------|-------------|-----------------|
 |[集群内联网](cs_secure.html#in_cluster_network)|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
-|[NodePort 服务对非稳定 IP 地址的公用网络应用程序访问权](cs_nodeport.html#planning)|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
+|[NodePort 服务对非稳定 IP 地址的公用网络应用程序访问权](cs_nodeport.html)|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |[用户访问管理](cs_users.html#managing)|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |[从集群和应用程序访问 {{site.data.keyword.Bluemix_notm}} 服务](cs_integrations.html#adding_cluster)|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 |[工作程序节点上用于非持久性存储的磁盘空间](cs_storage.html#planning)|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
@@ -68,53 +112,10 @@ lastupdated: "2018-03-16"
 
 
 
-## 集群管理责任
+
 {: #responsibilities}
+**注**：使用服务时，想查找您的责任和容器条款？
 
-查看您与 IBM 共享的用于管理集群的责任。
-{:shortdesc}
-
-**IBM 负责：**
-
-- 在集群中部署主节点、工作程序节点和管理组件，例如在集群创建时部署 Ingress 应用程序负载均衡器
-- 管理集群的 Kubernetes 主节点的更新、监视和恢复
-- 监视工作程序节点的运行状况并为这些工作程序节点的更新和恢复提供自动化
-- 对基础架构帐户执行自动化任务，包括添加工作程序节点、除去工作程序节点以及创建缺省子网
-- 管理、更新和恢复集群内的操作组件，例如 Ingress 应用程序负载均衡器和存储插件
-- 在持久性卷申领请求时供应存储卷
-- 在所有工作程序节点上提供安全性设置
-
-</br>
-**您负责：**
-
-- [在集群中部署和管理 Kubernetes 资源，例如，Pod、服务和部署](cs_app.html#app_cli)
-- [利用服务和 Kubernetes 的功能以确保应用程序的高可用性](cs_app.html#highly_available_apps)
-- [通过使用 CLI 添加或除去工作程序节点来添加或除去容量](cs_cli_reference.html#cs_worker_add)
-- [在 IBM Cloud infrastructure (SoftLayer) 中创建公用和专用 VLAN 以针对集群进行网络隔离](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
-- [确保所有工作程序节点都具有到 Kibernetes 主节点 URL 的网络连接](cs_firewall.html#firewall)<p>**注**：如果工作程序节点同时具有公用和专用 VLAN，那么已配置网络连接。如果工作程序节点采用了仅专用 VLAN 的设置，那么需要 Vyatta 来提供网络连接。</p>
-- [Kubernetes 主版本或次版本更新可用时，更新 kube-apiserver 主节点和工作程序节点](cs_cluster_update.html#master)
-- [通过运行 `kubectl` 命令（如 `cordon` 或 `drain`）以及运行 `bx cs` 命令（如 `reboot`、`reload` 或 `delete`](cs_cli_reference.html#cs_worker_reboot)）来恢复有故障的工作程序节点。
-- [根据需要在 IBM Cloud infrastructure (SoftLayer) 中添加或除去子网](cs_subnets.html#subnets)
-- [在 IBM Cloud infrastructure (SoftLayer) 中备份和复原持久性存储器中的数据 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](../services/RegistryImages/ibm-backup-restore/index.html)
-- [使用自动恢复为工作程序节点配置运行状况监视](cs_health.html#autorecovery)
-
-<br />
-
-
-## 容器滥用
 {: #terms}
+请参阅 [{{site.data.keyword.containershort_notm}} 责任](cs_responsibilities.html)。
 
-客户机不能滥用 {{site.data.keyword.containershort_notm}}。
-{:shortdesc}
-
-滥用包括：
-
-*   任何非法活动
-*   分发或执行恶意软件
-*   损害 {{site.data.keyword.containershort_notm}} 或干扰任何人使用 {{site.data.keyword.containershort_notm}}
-*   损害或干扰任何人使用任何其他服务或系统
-*   对任何服务或系统进行未经授权的访问
-*   对任何服务或系统进行未经授权的修改
-*   侵犯他人的权利
-
-请参阅 [Cloud Services 条款](/docs/navigation/notices.html#terms)，以获取总体使用条款。

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -22,11 +22,39 @@ lastupdated: "2018-03-16"
 Vea qué les interesa aprender a los desarrolladores de contenedores en {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
+## Temas populares en abril de 2018
+{: #apr18}
+
+<table summary="La tabla muestra los temas populares. Las filas se leen de izquierda a derecha, con la fecha en la columna uno, el título de la característica en la columna dos y una descripción en la columna tres.">
+<caption>Temas populares para contenedores y clústeres de Kubernetes en abril de 2018</caption>
+<thead>
+<th>Fecha</th>
+<th>Título</th>
+<th>Descripción</th>
+</thead>
+<tbody>
+<tr>
+<td>17 de abril</td>
+<td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
+<td>Instale el [plugin](cs_storage.html#install_block) {{site.data.keyword.Bluemix_notm}} Block Storage para guardar datos persistentes en el almacenamiento en bloque. A continuación puede [crear nuevo almacenamiento en bloque](cs_storage.html#create) o [utilizar almacenamiento en bloque existente](cs_storage.html#existing_block) para su clúster. </td>
+</tr>
+<tr>
+<td>13 de abril</td>
+<td>[Nueva guía de aprendizaje para migrar apps de Cloud Foundry a clústeres ](cs_tutorials_cf.html#cf_tutorial)</td>
+<td>¿Tiene una app de Cloud Foundry? Aprenda a desplegar el mismo código de la app en un contenedor que se ejecute en un clúster Kubernetes.</td>
+</tr>
+<tr>
+<td>5 de abril</td>
+<td>[Filtrado de registros](cs_health.html#filter-logs)</td>
+<td>Filtre registros específicos al reenviarlos. Los registros se pueden filtrar por una serie de mensaje, un nivel de registro, un nombre de contenedor o un espacio de nombres específico. </td>
+</tr>
+</tbody></table>
+
 ## Temas populares en marzo de 2018
 {: #mar18}
 
 <table summary="La tabla muestra los temas populares. Las filas se leen de izquierda a derecha, con la fecha en la columna uno, el título de la característica en la columna dos y una descripción en la columna tres.">
-<caption>Temas populares para contenedores y clústeres de Kubernetes en febrero de 2018</caption>
+<caption>Temas populares para contenedores y clústeres de Kubernetes en marzo de 2018</caption>
 <thead>
 <th>Fecha</th>
 <th>Título</th>
@@ -84,7 +112,7 @@ Vea qué les interesa aprender a los desarrolladores de contenedores en {{site.d
 <tr>
 <td>20 de febrero</td>
 <td>Imágenes cifradas y [contenido firmado y de confianza](../services/Registry/registry_trusted_content.html#registry_trustedcontent)</td>
-<td>En {{site.data.keyword.registryshort_notm}}, puede firmar y cifrar imágenes para garantizar su integridad al almacenar en el espacio de nombres de registro. Cree contenedores utilizando sólo contenido de confianza.</td>
+<td>En {{site.data.keyword.registryshort_notm}}, puede firmar y cifrar imágenes para garantizar su integridad al almacenar en el espacio de nombres del registro. Cree contenedores utilizando sólo contenido de confianza.</td>
 </tr>
 <tr>
 <td>19 de febrero</td>
@@ -136,4 +164,5 @@ Vea qué les interesa aprender a los desarrolladores de contenedores en {{site.d
 Vea de qué están hablando otros desarrolladores y realice sus propias preguntas en [{{site.data.keyword.containershort_notm}} Slack. ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibm-container-service.slack.com)
 {:shortdesc}
 
-Consejo: si no utiliza un ID de IBM para la cuenta de {{site.data.keyword.Bluemix_notm}}, [solicite una invitación](https://bxcs-slack-invite.mybluemix.net/) a este Slack.
+
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-02-27"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -85,13 +85,13 @@ Gehen Sie wie folgt vor, um die CLIs (Befehlszeilenschnittstellen) und die zugeh
     {: pre}
 
 5.  Um eine lokale Version des Kubernetes-Dashboards anzuzeigen und Apps in Ihren Clustern bereitzustellen, müssen Sie die [Kubernetes-CLI installieren ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Um Befehle über die Kubernetes-CLI auszuführen, müssen Sie das Präfix `kubectl` verwenden.
-    1.  Zur Erreichung der vollständigen funktionalen Kompatibilität müssen Sie die Kubernetes-CLI-Version herunterladen, die mit der Version des Kubernetes-Clusters übereinstimmt, die verwendet werden soll. Die aktuelle standardmäßige Kubernetes-Version für {{site.data.keyword.containershort_notm}} ist die Version 1.8.8.
+    1.  Zur Erreichung der vollständigen funktionalen Kompatibilität müssen Sie die Kubernetes-CLI-Version herunterladen, die mit der Version des Kubernetes-Clusters übereinstimmt, die verwendet werden soll. Die aktuelle standardmäßige Kubernetes-Version für {{site.data.keyword.containershort_notm}} ist die Version 1.8.11. 
 
-        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl)
+        OS X:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl)
 
-        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl)
+        Linux:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl)
 
-        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe)
+        Windows:   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe)
 
           **Tipp:** Wenn Sie Windows verwenden, installieren Sie die Kubernetes-CLI in demselben Verzeichnis wie die {{site.data.keyword.Bluemix_notm}}-CLI. Diese Konstellation erspart Ihnen einige Dateipfadänderungen, wenn Sie spätere Befehle ausführen.
 
@@ -99,7 +99,7 @@ Gehen Sie wie folgt vor, um die CLIs (Befehlszeilenschnittstellen) und die zugeh
         1.  Verschieben Sie die ausführbare Datei in das Verzeichnis `/usr/local/bin`.
 
             ```
-            mv /<dateipfad>/kubectl /usr/local/bin/kubectl
+            mv filepath/kubectl /usr/local/bin/kubectl
             ```
             {: pre}
 
@@ -159,17 +159,19 @@ Richten Sie ein privates Image-Repository in {{site.data.keyword.registryshort_n
 
 2.  Richten Sie Ihr eigenes privates Image-Repository in {{site.data.keyword.registryshort_notm}} ein, um Docker-Images sicher zu speichern und mit allen Benutzern des Clusters gemeinsam nutzen zu können. In {{site.data.keyword.Bluemix_notm}} ist ein privates Image-Repository durch einen Namensbereich gekennzeichnet. Der Namensbereich dient der Erstellung einer eindeutigen URL zu Ihrem Image-Repository, das Entwickler für den Zugriff auf private Docker-Images verwenden können.
 
-    Im vorliegenden Beispiel will das PR-Unternehmen lediglich ein Image-Repository in {{site.data.keyword.registryshort_notm}} erstellen und wählt daher _pr-unternehmen_ als Namensbereich aus, um alle Images im Konto zu gruppieren. Ersetzen Sie _&lt;ihr_namensbereich&gt;_ durch einen Namensbereich Ihrer Wahl, der sich nicht auf das Lernprogramm bezieht.
+   
+    
+    Im vorliegenden Beispiel will das PR-Unternehmen lediglich ein Image-Repository in {{site.data.keyword.registryshort_notm}} erstellen und wählt daher _pr-unternehmen_ als Namensbereich aus, um alle Images im Konto zu gruppieren. Ersetzen Sie _&lt;namensbereich&gt;_ durch einen Namensbereich Ihrer Wahl, der sich nicht auf das Lernprogramm bezieht. 
 
     ```
-    bx cr namespace-add <ihr_namensbereich>
+    bx cr namespace-add <namensbereich>
     ```
     {: pre}
 
 3.  Vergewissern Sie sich zuerst, dass die Bereitstellung Ihres Workerknotens abgeschlossen ist, bevor Sie mit dem nächsten Schritt fortfahren.
 
     ```
-    bx cs workers <clustername>
+    bx cs workers <clustername_oder_-id>
     ```
      {: pre}
 
@@ -177,7 +179,7 @@ Richten Sie ein privates Image-Repository in {{site.data.keyword.registryshort_n
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.48.131.37   10.177.161.132   free           normal   Ready    mil01      1.8.8
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.8.11
     ```
     {: screen}
 
@@ -192,8 +194,8 @@ Jedes Mal, wenn Sie sich an der Container-CLI anmelden, um mit Clustern zu arbei
 1.  Ermitteln Sie den Befehl zum Festlegen der Umgebungsvariablen und laden Sie die Kubernetes-Konfigurationsdateien herunter.
 
     ```
-    bx cs cluster-config <clustername>
-    ```
+        bx cs cluster-config <clustername_oder_-id>
+        ```
     {: pre}
 
     Wenn
@@ -235,8 +237,8 @@ um den Pfad zu der lokalen Kubernetes-Konfigurationsdatei als Umgebungsvariable 
     Beispielausgabe:
 
     ```
-    Client Version: v1.8.8
-    Server Version: v1.8.8
+    Client Version: v1.8.11
+    Server Version: v1.8.11
     ```
     {: screen}
 
@@ -245,30 +247,30 @@ um den Pfad zu der lokalen Kubernetes-Konfigurationsdatei als Umgebungsvariable 
 
 Mit den {{site.data.keyword.Bluemix_notm}}-Services können Sie bereits entwickelte Funktionen in Ihren Apps nutzen. Jeder an den Cluster gebundene {{site.data.keyword.Bluemix_notm}}-Service kann von jeder App genutzt werden, die in diesem Cluster bereitgestellt ist. Wiederholen Sie die folgenden Schritte für jeden {{site.data.keyword.Bluemix_notm}}-Service, den Sie in Verbindung mit Ihren Apps verwenden wollen.
 
-1.  Fügen Sie den {{site.data.keyword.toneanalyzershort}}-Service zu Ihrem {{site.data.keyword.Bluemix_notm}}-Konto hinzu.
+1.  Fügen Sie den {{site.data.keyword.toneanalyzershort}}-Service zu Ihrem {{site.data.keyword.Bluemix_notm}}-Konto hinzu. Ersetzen Sie <servicename> durch einen Namen für Ihre Serviceinstanz. 
 
     **Hinweis:** Wenn Sie den {{site.data.keyword.toneanalyzershort}}-Service zu Ihrem Konto hinzufügen, wird eine Nachricht mit dem Inhalt angezeigt, dass der Service nicht kostenlos ist. Wenn Sie Ihren API-Aufruf einschränken, entstehen im Rahmen dieses Lernprogramms keine Kosten durch den {{site.data.keyword.watson}}-Service. [Informieren Sie sich über die Preisinformationen für den {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}-Service ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/watson/developercloud/tone-analyzer.html#pricing-block).
 
     ```
-    bx service create tone_analyzer standard <mein_tone_analyzer>
+    bx service create tone_analyzer standard <servicename>
     ```
     {: pre}
 
 2.  Binden Sie die {{site.data.keyword.toneanalyzershort}}-Instanz an den Kubernetes-Standardnamensbereich (`default`) für den Cluster. Später können Sie Ihren eigenen Namensbereich erstellen, um Benutzerzugriff auf Kubernetes-Ressourcen zu verwalten. Aber für den Moment müssen Sie den Namensbereich `default` verwenden. Kubernetes-Namensbereiche unterscheiden sich von dem Registry-Namensbereich, den Sie davor erstellt haben.
 
     ```
-    bx cs cluster-service-bind <clustername> default <mein_tone_analyzer>
+    bx cs cluster-service-bind <clustername> default <servicename>
     ```
     {: pre}
 
     Ausgabe:
 
     ```
-    bx cs cluster-service-bind <clustername> default <mein_tone_analyzer>
-        Binding service instance to namespace...
-        OK
-        Namespace:	default
-        Secret name:	binding-mytoneanalyzer
+    bx cs cluster-service-bind pr_firm_cluster default mytoneanalyzer
+    Binding service instance to namespace...
+    OK
+    Namespace:	default
+    Secret name:	binding-mytoneanalyzer
     ```
     {: screen}
 
@@ -298,3 +300,4 @@ Ganz hervorragend! Sie haben den Cluster konfiguriert und Ihre lokale Umgebung i
 * [Testen Sie Ihr Wissen in einem Quiz! ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
 
 * Machen Sie sich mit dem [Lernprogramm: Apps in Kubernetes-Clustern in {{site.data.keyword.containershort_notm}} bereitstellen](cs_tutorials_apps.html#cs_apps_tutorial) vertraut, um die App der PR-Firma in dem von Ihnen erstellten Cluster bereitzustellen.
+

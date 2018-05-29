@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-08"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -55,3 +55,4 @@ lastupdated: "2018-03-08"
     - [자동 복구를 통해 작업자 노드의 상태 모니터링 구성](cs_health.html#autorecovery)
 - [Kubernetes 클러스터 리소스 시각화](cs_integrations.html#weavescope)
 - [클러스터 제거](cs_clusters.html#remove)
+

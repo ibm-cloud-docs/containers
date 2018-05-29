@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-14"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -97,14 +97,14 @@ sus credenciales de {{site.data.keyword.Bluemix_notm}} cuando se le solicite. Si
 4. Recupere el **URL maestro** del clúster.
 
    ```
-   bx cs cluster-get <cluster_name_or_id>
+   bx cs cluster-get <cluster_name_or_ID>
    ```
    {: pre}
 
    Salida de ejemplo:
    ```
    ...
-   Master URL:		https://169.46.7.238:31142
+   Master URL:		https://169.xx.xxx.xxx:31142
    ...
    ```
    {: screen}
@@ -120,7 +120,7 @@ sus credenciales de {{site.data.keyword.Bluemix_notm}} cuando se le solicite. Si
 
    Mandato de ejemplo:
    ```
-   curl --insecure https://169.46.7.238:31142/version
+   curl --insecure https://169.xx.xxx.xxx:31142/version
    ```
    {: pre}
 
@@ -176,7 +176,7 @@ Permita que el clúster acceda a servicios y recursos de infraestructura desde d
   1.  Anote la dirección IP pública de todos los nodos trabajadores del clúster.
 
       ```
-      bx cs workers <cluster_name_or_id>
+      bx cs workers <cluster_name_or_ID>
       ```
       {: pre}
 
@@ -203,7 +203,7 @@ Permita que el clúster acceda a servicios y recursos de infraestructura desde d
       <tr>
          <td>UE Central</td>
          <td>ams03<br>fra02<br>mil01<br>par01</td>
-         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+         <td><code>169.50.169.110, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
         </tr>
       <tr>
         <td>UK Sur</td>
@@ -265,8 +265,8 @@ Permita que el clúster acceda a servicios y recursos de infraestructura desde d
 </p>
 
   4.  Opcional: Permita el tráfico de red de salida de los nodos trabajadores a {{site.data.keyword.monitoringlong_notm}} y a los servicios {{site.data.keyword.loganalysislong_notm}}:
-      - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
-      - Sustituya <em>&lt;monitoring_publicIP&gt;</em> por todas las direcciones de las regiones de supervisión a las que desea permitir el tráfico:
+      - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
+      - Sustituya <em>&lt;monitoring_public_IP&gt;</em> por todas las direcciones de las regiones de supervisión a las que desea permitir el tráfico:
         <p><table summary="La primera fila de la tabla abarca ambas columnas. El resto de las filas se deben leer de izquierda a derecha; la ubicación del servidor está en la columna uno y las direcciones IP correspondientes en la columna dos. ">
         <thead>
         <th>Región del contenedor</th>
@@ -293,8 +293,8 @@ Permita que el clúster acceda a servicios y recursos de infraestructura desde d
         </tbody>
       </table>
 </p>
-      - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
-      - Sustituya <em>&lt;logging_publicIP&gt;</em> por todas las direcciones de las regiones de registro a las que desea permitir el tráfico:
+      - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
+      - Sustituya <em>&lt;logging_public_IP&gt;</em> por todas las direcciones de las regiones de registro a las que desea permitir el tráfico:
         <p><table summary="La primera fila de la tabla abarca ambas columnas. El resto de las filas se deben leer de izquierda a derecha; la ubicación del servidor está en la columna uno y las direcciones IP correspondientes en la columna dos. ">
         <thead>
         <th>Región del contenedor</th>
@@ -353,3 +353,4 @@ Puede permitir el acceso a servicios NodePort, de equilibrador de carga e Ingres
   <dt>Ingress</dt>
   <dd>Abra el puerto 80 para HTTP o el puerto 443 para HTTPS a la dirección IP del equilibrador de carga de aplicación de Ingress.</dd>
 </dl>
+

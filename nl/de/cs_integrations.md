@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-14"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -25,7 +25,6 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 
 ## Anwendungsservices
 <table summary="Zusammenfassung der Zugriffsmöglichkeiten">
-<caption>Tabelle. Integrationsoptionen für Anwendungsservices</caption>
 <thead>
 <tr>
 <th>Service</th>
@@ -46,7 +45,6 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 
 ## DevOps-Services
 <table summary="Zusammenfassung der Zugriffsmöglichkeiten">
-<caption>Tabelle. Integrationsoptionen für die Verwaltung von DevOps</caption>
 <thead>
 <tr>
 <th>Service</th>
@@ -79,7 +77,6 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 
 ## Protokollierungs- und Überwachungsservices
 <table summary="Zusammenfassung der Zugriffsmöglichkeiten">
-<caption>Tabelle. Integrationsoptionen für die Verwaltung von Protokollen und Metriken</caption>
 <thead>
 <tr>
 <th>Service</th>
@@ -136,7 +133,6 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 
 ## Sicherheitsservices
 <table summary="Zusammenfassung der Zugriffsmöglichkeiten">
-<caption>Tabelle. Integrationsoptionen zur Verwaltung von Sicherheit</caption>
 <thead>
 <tr>
 <th>Service</th>
@@ -157,6 +153,10 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 <td>Sie können <a href="../services/certificate-manager/index.html" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> verwenden, um SSL-Zertifikate für Ihre Apps zu speichern und zu verwalten. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containershort_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
 </tr>
 <tr>
+  <td>{{site.data.keyword.registrylong}}</td>
+  <td>Richten Sie Ihr eigenes gesichertes Docker-Image-Repository ein, in dem Sie Images sicher speichern und mit Clusterbenutzern teilen können. Weitere Informationen finden Sie in der <a href="/docs/services/Registry/index.html" target="_blank">{{site.data.keyword.registrylong}}-Dokumentation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
+</tr>
+<tr>
 <td>NeuVector</td>
 <td>Schützen Sie Container durch eine native Cloud-Firewall mithilfe von <a href="https://neuvector.com/" target="_blank">NeuVector <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. Weitere Informationen finden Sie unter <a href="https://www.ibm.com/us-en/marketplace/neuvector-container-security" target="_blank">NeuVector Container Security <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
 </tr>
@@ -171,12 +171,42 @@ Sie können verschiedene externe Services und Katalogservices mit einem Kubernet
 
 
 
+## Speicherservices
+<table summary="Zusammenfassung der Zugriffsmöglichkeiten">
+<thead>
+<tr>
+<th>Service</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>{{site.data.keyword.cos_full}}</td>
+  <td>In {{site.data.keyword.cos_short}} gespeicherte Daten werden verschlüsselt und über mehrere geografische Regionen verteilt. Auf sie kann über HTTP mithilfe einer REST-API zugegriffen werden. Sie können den Befehl [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore/index.html) verwenden, um den Service so zu konfigurieren, dass er einmalige oder geplante Sicherungen von Daten in Ihrem Cluster ausführt. Allgemeine Informationen zu dem Service finden Sie in der <a href="/docs/services/cloud-object-storage/about-cos.html" target="_blank">{{site.data.keyword.cos_short}}-Dokumentation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
+</tr>
+  <tr>
+    <td>{{site.data.keyword.cloudantfull}}</td>
+    <td>{{site.data.keyword.cloudant_short_notm}} ist eine dokumentorientierte Database as a Service (DBaaS), die Daten als Dokumente im JSON-Format speichert. Der Service ist auf Skalierbarkeit, Hochverfügbarkeit und Langlebigkeit ausgelegt. Weitere Informationen finden Sie in der <a href="/docs/services/Cloudant/getting-started.html" target="_blank">{{site.data.keyword.cloudant_short_notm}}-Dokumentation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
+  </tr>
+  <tr>
+    <td>{{site.data.keyword.composeForMongoDB_full}}</td>
+    <td>{{site.data.keyword.composeForMongoDB}} bietet Hochverfügbarkeit und Redundanz, automatisierte und bedarfsgesteuerte, unterbrechungsfreie Sicherungen, Überwachungstools, Integration in Alertsysteme, Leistungsanalyseansichten und vieles mehr. Weitere Informationen finden Sie in der <a href="/docs/services/ComposeForMongoDB/index.html" target="_blank">{{site.data.keyword.composeForMongoDB}}-Dokumentation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>. </td>
+  </tr>
+</tbody>
+</table>
+
+
+<br />
+
+
+
 ## Cloud Foundry-Services zu Clustern hinzufügen
 {: #adding_cluster}
 
 Sie können eine vorhandene Cloud Foundry-Serviceinstanz
 zu Ihrem Cluster hinzufügen, um den Benutzern Ihres Clusters den Zugriff auf den
-Service sowie seine Verwendung zu ermöglichen, wenn sie eine App auf dem Cluster bereitstellen. {:shortdesc}
+Service sowie seine Verwendung zu ermöglichen, wenn sie eine App auf dem Cluster bereitstellen.
+{:shortdesc}
 
 Vorbemerkungen:
 
@@ -267,9 +297,9 @@ Cloud Foundry-Services werden für die Bindung mit Clustern unterstützt. Um ein
 
 [Fordern Sie zunächst eine Instanz des {{site.data.keyword.Bluemix_notm}}-Service an](/docs/apps/reqnsi.html#req_instance).
 
-Gehen Sie wie folgt vor, um einen Cloud Foundry-Aliasnamen zu erstellen: 
+Gehen Sie wie folgt vor, um einen Cloud Foundry-Aliasnamen zu erstellen:
 
-1. Geben Sie als Ziel die Organisation und den Bereich an, wo die Serviceinstanz erstellt wurde. 
+1. Geben Sie als Ziel die Organisation und den Bereich an, wo die Serviceinstanz erstellt wurde.
 
     ```
     bx target -o <organisationsname> -s <bereichsname>
@@ -282,7 +312,7 @@ Gehen Sie wie folgt vor, um einen Cloud Foundry-Aliasnamen zu erstellen:
     ```
     {: pre}
 
-3. Erstellen Sie einen Cloud Foundry-Aliasnamen für die Serviceinstanz. 
+3. Erstellen Sie einen Cloud Foundry-Aliasnamen für die Serviceinstanz.
     ```
     bx resource service-alias-create <servicealiasname> --instance-name <serviceinstanz>
     ```
@@ -308,7 +338,7 @@ Gehen Sie wie folgt vor, um einen Cloud Foundry-Aliasnamen zu erstellen:
 Zum Speichern der Detailinformationen und Berechtigungsnachweise für {{site.data.keyword.Bluemix_notm}}-Services und zur Sicherstellung der sicheren Kommunikation zwischen dem Service und dem Cluster werden verschlüsselte Kubernetes-Schlüssel verwendet.
 {:shortdesc}
 
-Geheime Kubernetes-Schlüssel stellen eine sichere Methode zum Speichern vertraulicher Informationen wie Benutzernamen, Kennwörter oder Schlüssel dar. Statt vertrauliche Informationen über Umgebungsvariablen oder direkt in der Dockerfile selbst offenzulegen, können Clusterbenutzer geheime Schlüssel an einen Pod anhängen. Auf diese geheimen Schlüssel kann anschließend über einen aktiven Container in einem Pod zugegriffen werden. 
+Geheime Kubernetes-Schlüssel stellen eine sichere Methode zum Speichern vertraulicher Informationen wie Benutzernamen, Kennwörter oder Schlüssel dar. Statt vertrauliche Informationen über Umgebungsvariablen oder direkt in der Dockerfile selbst offenzulegen, können Clusterbenutzer geheime Schlüssel an einen Pod anhängen. Auf diese geheimen Schlüssel kann anschließend über einen aktiven Container in einem Pod zugegriffen werden.
 
 Wenn Sie einen Datenträger für geheime Schlüssel an Ihren Pod anhängen, wird im Mountverzeichnis des Datenträgers eine Datei namens 'binding' gespeichert. Diese Datei enthält sämtliche Informationen und Berechtigungsnachweise, die Sie benötigen, um auf den {{site.data.keyword.Bluemix_notm}}-Service zuzugreifen.
 
@@ -393,7 +423,7 @@ Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_i
 5.  Erstellen Sie den Pod und hängen Sie den Datenträger für geheime Schlüssel an.
 
     ```
-    kubectl apply -f <yaml-pfad>
+    kubectl apply -f secret-test.yaml
     ```
     {: pre}
 
@@ -444,22 +474,59 @@ Sie können nun auf die Details für den {{site.data.keyword.Bluemix_notm}}-Serv
 ## Helm in {{site.data.keyword.containershort_notm}} konfigurieren
 {: #helm}
 
-[Helm ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://helm.sh/) ist ein Kubernetes-Paketmanager. Sie können Helm-Diagramme zum Definieren, Installieren und Durchführen von Upgrades für komplexe Kubernetes-Anwendungen, die in {{site.data.keyword.containerlong_notm}}-Clustern ausgeführt werden, erstellen. {:shortdesc}
+[Helm ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://helm.sh/) ist ein Kubernetes-Paketmanager. Sie können Helm-Diagramme zum Definieren, Installieren und Durchführen von Upgrades für komplexe Kubernetes-Anwendungen, die in {{site.data.keyword.containerlong_notm}}-Clustern ausgeführt werden, erstellen.
+{:shortdesc}
 
-Vor der Verwendung von Helm-Diagrammen mit {{site.data.keyword.containershort_notm}} müssen Sie eine Helm-Instanz in Ihrem Cluster installieren und initialisieren. Sie können anschließend das {{site.data.keyword.Bluemix_notm}}-Helm-Rpository zu Ihrer Helm-Instanz hinzufügen.
+Vor der Verwendung von Helm-Diagrammen mit {{site.data.keyword.containershort_notm}} müssen Sie eine Helm-Instanz in Ihrem Cluster installieren und initialisieren. Sie können anschließend das {{site.data.keyword.Bluemix_notm}}-Helm-Repository zu Ihrer Helm-Instanz hinzufügen.
 
-Führen Sie zunächst den folgenden Schritt aus: [Geben Sie als Ziel der CLI](cs_cli_install.html#cs_cli_configure) den Cluster an, auf dem Sie ein Helm-Diagramm verwenden möchten. 
+Führen Sie zunächst den folgenden Schritt aus: [Geben Sie als Ziel der CLI](cs_cli_install.html#cs_cli_configure) den Cluster an, auf dem Sie ein Helm-Diagramm verwenden möchten.
 
 1. Installieren Sie die <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm-CLI <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a>.
 
-2. Initialisieren Sie Helm und installieren Sie `tiller`.
+2. **Wichtig**: Um Clustersicherheit zu bewahren, erstellen Sie ein Servicekonto für Tiller im Namensbereich `kube-system` und eine RBAC-Clusterrollenbindung für Kubernetes für den Pod `tiller-deploy`. 
+
+    1. Erstellen Sie in Ihrem bevorzugten Editor die folgende Datei und speichern Sie sie als `rbac-config.yaml`.
+      **Hinweis**:
+        * Die Clusterrolle `cluster-admin` wird standardmäßig in Kubernetes-Clustern erstellt, Sie müssen sie also nicht explizit definieren. 
+        * Wenn Sie ein Cluster der Version 1.7.x verwenden, ändern Sie `apiVersion` in `rbac.authorization.k8s.io/v1beta1`. 
+
+      ```
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: tiller
+        namespace: kube-system
+      ---
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: tiller
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-admin
+      subjects:
+        - kind: ServiceAccount
+          name: tiller
+          namespace: kube-system
+      ```
+      {: codeblock}
+
+    2. Erstellen Sie das Servicekonto und die Clusterrollenbindung. 
+
+        ```
+        kubectl create -f rbac-config.yaml
+        ```
+        {: pre}
+
+3. Initialisieren Sie Helm und installieren Sie `tiller` mit dem erstellten Servicekonto. 
 
     ```
-    helm init
+    helm init --service-account tiller
     ```
     {: pre}
 
-3. Überprüfen Sie, dass der Pod `tiller-deploy` in Ihrem Cluster den **Status** `Running` aufweist. 
+4. Überprüfen Sie, dass der Pod `tiller-deploy` in Ihrem Cluster den **Status** `Running` aufweist.
 
     ```
     kubectl get pods -n kube-system -l app=helm
@@ -474,17 +541,26 @@ Führen Sie zunächst den folgenden Schritt aus: [Geben Sie als Ziel der CLI](cs
     ```
     {: screen}
 
-4. Fügen Sie das {{site.data.keyword.Bluemix_notm}}-Helm-Repository zu Ihrer Helm-Instanz hinzu.
+5. Fügen Sie das {{site.data.keyword.Bluemix_notm}}-Helm-Repository zu Ihrer Helm-Instanz hinzu.
 
     ```
     helm repo add ibm  https://registry.bluemix.net/helm/ibm
     ```
     {: pre}
 
-5. Listen Sie die aktuell verfügbaren Helm-Diagramme im {{site.data.keyword.Bluemix_notm}}Repository auf.
+6. Listen Sie die aktuell verfügbaren Helm-Diagramme im {{site.data.keyword.Bluemix_notm}}Repository auf.
 
     ```
     helm search ibm
+    ```
+    {: pre}
+
+7. Wenn Sie mehr über ein Diagramm erfahren möchten, listen Sie die zugehörigen Einstellungen und Standardwerte auf. 
+
+    So können Sie beispielsweise die Einstellungen, Dokumentation und Standardwerte für das Helm-Diagramm des strongSwan-IPSec-VPN-Service anzeigen: 
+
+    ```
+    helm inspect ibm/strongswan
     ```
     {: pre}
 
@@ -575,4 +651,5 @@ Gehen Sie wie folgt vor, um Weave Scope mit einem Cluster zu verwenden:
 [Weitere Informationen zu den Weave Scope-Funktionen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.weave.works/docs/scope/latest/features/).
 
 <br />
+
 

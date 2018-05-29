@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-01"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -26,6 +26,7 @@ lastupdated: "2017-12-01"
 - [REST-API für Clusterprotokollierung ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://us-south.containers.bluemix.net/swagger-logging/)
 - [REST-API für Ingress-Lastausgleich für Clusteranwendungen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://us-south.containers.bluemix.net/swagger-alb-api/)
 - [Lernprogramme für developerWorks-Containerorchestrierung ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/code/journey/category/container-orchestration/)
+- [developerWorks-Kurse ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/courses/all/?s=IBM+Cloud+Container+Service)
 - [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/)
 - [Docker-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.docker.com/engine/)
 - <a href="https://docs.helm.sh/helm/" target="_blank">Helm-Dokumentation <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> für Kubernetes-Paketmanagement
@@ -56,6 +57,9 @@ lastupdated: "2017-12-01"
 
 - [REST-API für einzelne und skalierbare Container ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](http://ccsapi-doc.mybluemix.net/)
 
+<br />
+
+
 **Allgemein**
 
 - [Twitter ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://twitter.com/hashtag/ibmcontainers)
@@ -63,4 +67,5 @@ lastupdated: "2017-12-01"
 - [Microservices.TV ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/tv/microservices/)
 
 <br />
+
 

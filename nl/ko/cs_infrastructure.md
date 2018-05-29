@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -62,13 +62,14 @@ lastupdated: "2018-01-24"
   ```
   {: pre}
 
-6.  IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스할 수 있도록 이전에 생성된 API 키를 설정하십시오. `<API_KEY>`를 API 키로 대체하고 `<USERNAME>`을 새 종량과금제 계정의 {{site.data.keyword.ibmid}}로 대체하십시오.
+6.  IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스할 수 있도록 이전에 생성된 API 키를 설정하십시오. `<API_key>`를 API 키로 대체하고 `<username>`을 새 종량과금제 계정의 {{site.data.keyword.ibmid}}로 대체하십시오.
 
   ```
-  bx cs credentials-set --infrastructure-api-key <API_KEY> --infrastructure-username <USERNAME>
+  bx cs credentials-set --infrastructure-api-key <API_key> --infrastructure-username <username>
   ```
   {: pre}
 
 7.  [표준 클러스터 작성](cs_clusters.html#clusters_cli)을 시작하십시오.
 
 **참고:** API 키를 생성한 후에 이를 검토하려면 1단계와 2단계를 수행한 후에 **API 키** 섹션에서 **보기**를 클릭하여 사용자 ID에 대한 API 키를 보십시오.
+

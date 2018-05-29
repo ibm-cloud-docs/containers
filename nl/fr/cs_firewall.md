@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-14"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -21,11 +21,11 @@ lastupdated: "2018-02-14"
 Examinez ces situations pour lesquelles vous aurez peut-être à ouvrir des ports et des adresses IP spécifiques dans vos pare-feux pour {{site.data.keyword.containerlong}} :
 {:shortdesc}
 
-* [Pour exécuter des commandes `bx` commands](#firewall_bx) depuis votre système local lorsque les règles réseau de l'entreprise empêchent l'accès à des noeuds finaux Internet publics via des proxies ou des pare-feux.
+* [Pour exécuter des commandes `bx`](#firewall_bx) depuis votre système local lorsque les règles réseau de l'entreprise empêchent l'accès à des noeuds finaux Internet publics via des proxies ou des pare-feux.
 * [Pour exécuter des commandes `kubectl`](#firewall_kubectl) depuis votre système local lorsque les règles réseau de l'entreprise empêchent l'accès à des noeuds finaux Internet publics via des proxies ou des pare-feux.
-* [Pour exécuter des commandes `calicoctl` commands](#firewall_calicoctl) depuis votre système local lorsque les règles réseau de l'entreprise empêchent l'accès à des noeuds finaux Internet publics via des proxies ou des pare-feux.
+* [Pour exécuter des commandes `calicoctl`](#firewall_calicoctl) depuis votre système local lorsque les règles réseau de l'entreprise empêchent l'accès à des noeuds finaux Internet publics via des proxies ou des pare-feux.
 * [Pour autoriser la communication entre le maître Kubernetes et les noeuds worker ](#firewall_outbound)lorsqu'un pare-feu a été mis en place pour les noeuds worker ou que les paramètres du pare-feu ont été personnalisés dans votre compte d'infrastructure IBM Cloud (SoftLayer).
-* [Pour accéder au service NodePort, au service LoasBalancer, ou à Ingress depuis l'extérieur du cluster](#firewall_inbound).
+* [Pour accéder au service NodePort, au service LoasBalancer, ou à Ingress de l'extérieur du cluster](#firewall_inbound).
 
 <br />
 
@@ -96,14 +96,14 @@ Pour autoriser l'accès à un cluster spécifique :
 4. Extrayez la valeur **Master URL** pour votre cluster.
 
    ```
-   bx cs cluster-get <cluster_name_or_id>
+   bx cs cluster-get <cluster_name_or_ID>
    ```
    {: pre}
 
    Exemple de sortie :
    ```
    ...
-   Master URL:		https://169.46.7.238:31142
+   Master URL:		https://169.xx.xxx.xxx:31142
    ...
    ```
    {: screen}
@@ -119,7 +119,7 @@ Pour autoriser l'accès à un cluster spécifique :
 
    Exemple de commande :
    ```
-   curl --insecure https://169.46.7.238:31142/version
+   curl --insecure https://169.xx.xxx.xxx:31142/version
    ```
    {: pre}
 
@@ -175,7 +175,7 @@ Laissez votre cluster accéder aux ressources d'infrastructure et aux services d
   1.  Notez l'adresse IP publique pour tous vos noeuds worker dans le cluster.
 
       ```
-      bx cs workers <cluster_name_or_id>
+      bx cs workers <cluster_name_or_ID>
       ```
       {: pre}
 
@@ -202,7 +202,7 @@ Laissez votre cluster accéder aux ressources d'infrastructure et aux services d
       <tr>
          <td>Europe centrale</td>
          <td>ams03<br>fra02<br>mil01<br>par01</td>
-         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+         <td><code>169.50.169.110, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
         </tr>
       <tr>
         <td>Sud du Royaume-Uni</td>
@@ -264,8 +264,8 @@ Laissez votre cluster accéder aux ressources d'infrastructure et aux services d
 </p>
 
   4.  Facultatif : autorisez le trafic réseau sortant depuis les noeuds worker vers les services {{site.data.keyword.monitoringlong_notm}} et {{site.data.keyword.loganalysislong_notm}} :
-      - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
-      - Remplacez <em>&lt;monitoring_publicIP&gt;</em> par toutes les adresses des régions de surveillance auxquelles vous voulez autoriser le trafic :
+      - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
+      - Remplacez <em>&lt;monitoring_public_IP&gt;</em> par toutes les adresses des régions de surveillance auxquelles vous voulez autoriser le trafic :
         <p><table summary="La première ligne du tableau s'étend sur deux colonnes. Les autres lignes se lisent de gauche à droite. L'emplacement du serveur figure dans la première colonne et les adresses IP pour concordance dans la seconde colonne.">
         <thead>
         <th>Région du conteneur</th>
@@ -292,13 +292,13 @@ Laissez votre cluster accéder aux ressources d'infrastructure et aux services d
         </tbody>
       </table>
 </p>
-      - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
-      - Remplacez <em>&lt;logging_publicIP&gt;</em> par toutes les adresses de journalisation auxquelles vous voulez autoriser le trafic :
+      - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
+      - Remplacez <em>&lt;logging_public_IP&gt;</em> par toutes les adresses des régions de consignation auxquelles vous voulez autoriser le trafic :
         <p><table summary="La première ligne du tableau s'étend sur deux colonnes. Les autres lignes se lisent de gauche à droite. L'emplacement du serveur figure dans la première colonne et les adresses IP pour concordance dans la seconde colonne.">
         <thead>
         <th>Région du conteneur</th>
-        <th>Adresse de journalisation</th>
-        <th>Adresses IP de journalisation</th>
+        <th>Adresse de consignation</th>
+        <th>Adresses IP de consignation</th>
         </thead>
         <tbody>
           <tr>
@@ -352,3 +352,4 @@ Vous pouvez autoriser l'accès entrant au NodePort, à l'équilibreur de charge 
   <dt>Ingress</dt>
   <dd>Ouvrez le port 80 pour HTTP ou le port 443 pour HTTPS vers l'adresse IP de l'équilibreur de charge d'application Ingress.</dd>
 </dl>
+

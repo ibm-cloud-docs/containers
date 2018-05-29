@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -23,27 +23,70 @@ lastupdated: "2018-03-16"
 
 若要將工作者節點及應用程式連接至內部部署的資料中心，您可以使用 strongSwan 服務或者 Vyatta Gateway Appliance 或 Fortigate Appliance 來配置 VPN IPSec 端點。
 
-- **strongSwan IPSec VPN 服務**：您可以設定 [strongSwan IPSec VPN 服務 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.strongswan.org/)，以安全地連接 Kubernetes 叢集與內部部署網路。在根據業界標準網際網路通訊協定安全 (IPsec) 通訊協定套組的網際網路上，strongsWan IPSec VPN 服務提供安全的端對端通訊通道。若要設定叢集與內部部署網路之間的安全連線，您必須在內部部署資料中心內安裝 IPsec VPN 閘道。然後，您可以在 Kubernetes Pod 中[配置及部署 strongSwan IPSec VPN 服務](#vpn-setup)。
+- **Vyatta Gateway Appliance 或 Fortigate Appliance**：如果您有較大的叢集，且要透過 VPN 存取非 Kubernetes 資源，或要透過單一 VPN 存取多個叢集，則可以選擇設定 Vyatta Gateway Appliance 或 [Fortigate Security Appliance![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/infrastructure/fortigate-10g/getting-started.html#getting-started-with-fortigate-security-appliance-10gbps) 來配置 IPSec VPN 端點。若要配置 Vyatta，請參閱[使用 Vyatta 設定 VPN 連線功能](#vyatta)。
 
-- **Vyatta Gateway Appliance 或 Fortigate Appliance**：如果您有較大的叢集，且要透過 VPN 存取非 Kubernetes 資源，或要透過單一 VPN 存取多個叢集，則可以選擇設定 Vyatta Gateway Appliance 或 Fortigate Appliance 來配置 IPSec VPN 端點。如需相關資訊，請參閱[將叢集連接至內部部署資料中心 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/) 上的這篇部落格文章。
+- **strongSwan IPSec VPN 服務**：您可以設定 [strongSwan IPSec VPN 服務 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.strongswan.org/)，以安全地連接 Kubernetes 叢集與內部部署網路。在根據業界標準網際網路通訊協定安全 (IPsec) 通訊協定套組的網際網路上，strongsWan IPSec VPN 服務提供安全的端對端通訊通道。若要設定叢集與內部部署網路之間的安全連線，請直接在叢集的 Pod 中[配置及部署 strongSwan IPSec VPN 服務](#vpn-setup)。
+
+## 利用 Vyatta Gateway Appliance 設定 VPN 連線功能
+{: #vyatta}
+
+[Vyatta Gateway Appliance ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](http://knowledgelayer.softlayer.com/learning/network-gateway-devices-vyatta) 是執行特殊 Linux 發行套件的裸機伺服器。您可以使用 Vyatta 作為 VPN 閘道，以安全地連接至內部部署網路。
+{:shortdesc}
+
+進入或離開叢集 VLAN 的所有公用及專用網路資料流量都會透過 Vyatta 遞送。您可以使用 Vyatta 作為 VPN 端點，在 IBM Cloud 基礎架構 (SoftLayer) 及內部部署資源中的伺服器之間建立已加密的 IPSec 通道。例如，下圖顯示 {{site.data.keyword.containershort_notm}} 中僅限專用工作者節點上的應用程式如何透過 Vyatta VPN 連線與內部部署伺服器通訊：
+
+<img src="images/cs_vpn_vyatta.png" width="725" alt="使用負載平衡器公開 {{site.data.keyword.containershort_notm}} 中的應用程式" style="width:725px; border-style: none"/>
+
+1. 叢集中的應用程式 (`myapp2`) 會接收來自 Ingress 或 LoadBalancer 服務的要求，且需要安全地連接至內部部署網路中的資料。
+
+2. 因為 `myapp2` 位於僅限專用 VLAN 的工作者節點上，所以 Vyatta 在工作者節點與內部部署網路之間充當安全連線。Vyatta 會使用目的地 IP 位址，來決定哪些網路封包應該傳送至內部部署網路。
+
+3. 此要求會加密並透過 VPN 通道傳送至內部部署資料中心。
+
+4. 送入的要求會通過內部部署防火牆，並遞送至解密所在的 VPN 通道端點（路由器）。
+
+5. VPN 通道端點（路由器）會將要求轉遞至內部部署伺服器或大型主機，視步驟 2 中指定的目的地 IP 位址而定。必要資料會藉由相同的處理程序，透過 VPN 連線傳回至 `myapp2`。
+
+若要設定 Vyatta Gateway Appliance，請執行下列動作：
+
+1. [訂購 Vyatta ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/procedure/how-order-vyatta)。
+
+2. [在 Vyatta 上配置專用 VLAN ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/procedure/basic-configuration-vyatta)。
+
+3. 若要使用 Vyatta 啟用 VPN 連線，請[在 Vyatta 上配置 IPSec ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://knowledgelayer.softlayer.com/procedure/how-configure-ipsec-vyatta)。
+
+如需相關資訊，請參閱[將叢集連接至內部部署資料中心 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/) 上的這篇部落格文章。
 
 ## 使用 strongSwan IPSec VPN 服務 Helm 圖表設定 VPN 連線功能
 {: #vpn-setup}
 
-使用 Helm 圖表，可以在 Kubernetes Pod 中配置及部署 strongSwan IPSec VPN 服務。接著會透過此 Pod 遞送所有 VPN 資料流量。
+使用 Helm 圖表，可以在 Kubernetes Pod 中配置及部署 strongSwan IPSec VPN 服務。
 {:shortdesc}
 
-如需用來設定 strongSwan 圖表之 Helm 指令的相關資訊，請參閱 <a href="https://docs.helm.sh/helm/" target="_blank">Helm 文件 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。
+因為 strongSwan 已整合在您的叢集內，所以您不需要外部閘道裝置。建立 VPN 連線功能時，會在叢集中的所有工作者節點上自動配置路徑。這些路線容許透過 VPN 通道在任何工作者節點與遠端系統上的 Pod 之間進行雙向連線。例如，下圖顯示 {{site.data.keyword.containershort_notm}} 中的應用程式如何透過 strongSwan VPN 連線與內部部署伺服器通訊：
 
+<img src="images/cs_vpn_strongswan.png" width="700" alt="使用負載平衡器公開 {{site.data.keyword.containershort_notm}} 中的應用程式" style="width:700px; border-style: none"/>
+
+1. 叢集中的應用程式 (`myapp`) 會接收來自 Ingress 或 LoadBalancer 服務的要求，且需要安全地連接至內部部署網路中的資料。
+
+2. 內部部署資料中心的要求會轉遞至 IPSec strongSwan VPN Pod。目的地 IP 位址是用來判定應該將哪些網路封包傳送至 IPSec strongSwan VPN Pod。
+
+3. 此要求會加密並透過 VPN 通道傳送至內部部署資料中心。
+
+4. 送入的要求會通過內部部署防火牆，並遞送至解密所在的 VPN 通道端點（路由器）。
+
+5. VPN 通道端點（路由器）會將要求轉遞至內部部署伺服器或大型主機，視步驟 2 中指定的目的地 IP 位址而定。必要資料會藉由相同的處理程序，透過 VPN 連線傳回至 `myapp`。
 
 ### 配置 strongSwan Helm 圖表
 {: #vpn_configure}
 
 開始之前：
-* 您必須在內部部署資料中心內安裝 IPsec VPN 閘道。
-* [建立標準叢集](cs_clusters.html#clusters_cli)或[將現有叢集更新為 1.7.4 版或更新版本](cs_cluster_update.html#master)。
+* [在內部部署資料中心內安裝 IPsec VPN 閘道。](/docs/infrastructure/iaas-vpn/set-up-ipsec-vpn.html#setting-up-an-ipsec-connection).
+* [建立標準叢集](cs_clusters.html#clusters_cli)或[將現有叢集更新為 1.7.16 版或更新版本](cs_cluster_update.html#master)。
 * 叢集必須至少有一個可用的公用「負載平衡器」IP 位址。[您可以查看可用的公用 IP 位址](cs_subnets.html#manage)或[釋放已使用的 IP 位址](cs_subnets.html#free)。
 * [將 Kubernetes CLI 的目標設為叢集](cs_cli_install.html#cs_cli_configure)。
+
+如需用來設定 strongSwan 圖表之 Helm 指令的相關資訊，請參閱 <a href="https://docs.helm.sh/helm/" target="_blank">Helm 文件 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>。
 
 若要配置 Helm 圖表，請執行下列動作：
 
@@ -63,22 +106,25 @@ lastupdated: "2018-03-16"
     <table>
     <col width="22%">
     <col width="78%">
-    <caption>瞭解 YAML 檔案元件</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 檔案元件</th>
     </thead>
     <tbody>
     <tr>
     <td><code>localSubnetNAT</code></td>
-    <td>子網路的「網址轉換 (NAT)」提供本端與內部部署網路之間子網路衝突的暫行解決方法。您可以使用 NAT，將叢集的專用本端 IP 子網路、Pod 子網路 (172.30.0.0/16) 或 Pod 服務子網路 (172.21.0.0/16) 重新對映至不同的專用子網路。VPN 通道會看到重新對映的 IP 子網路，而非原始子網路。重新對映發生在封包透過 VPN 通道傳送之前，以及封包從 VPN 通道抵達之後。您可以透過 VPN 同時公開重新對映及非重新對映的子網路。<br><br>若要啟用 NAT，您可以新增整個子網路或個別 IP 位址。如果您新增整個子網路（格式為 <code>10.171.42.0/24=10.10.10.0/24</code>），則重新對映是 1 對 1：內部網路子網路中的所有 IP 位址都會對映到外部網路子網路，反之亦然。如果您新增個別 IP 位址（格式為 <code>10.171.42.17/32=10.10.10.2/32,10.171.42.29/32=10.10.10.3/32</code>），則只有那些內部 IP 位址會對映到指定的外部 IP 位址。<br><br>如果您使用此選項，則透過 VPN 連線公開的本端子網路即為「內部」子網路所對映到的「外部」子網路。</td>
+    <td>子網路的「網址轉換 (NAT)」提供本端與內部部署網路之間子網路衝突的暫行解決方法。您可以使用 NAT，將叢集的專用本端 IP 子網路、Pod 子網路 (172.30.0.0/16) 或 Pod 服務子網路 (172.21.0.0/16) 重新對映至不同的專用子網路。VPN 通道會看到重新對映的 IP 子網路，而非原始子網路。重新對映發生在封包透過 VPN 通道傳送之前，以及封包從 VPN 通道抵達之後。您可以透過 VPN 同時公開重新對映及非重新對映的子網路。<br><br>若要啟用 NAT，您可以新增整個子網路或個別 IP 位址。如果您新增整個子網路（格式為 <code>10.171.42.0/24=10.10.10.0/24</code>），則重新對映是 1 對 1：內部網路子網路中的所有 IP 位址都會對映到外部網路子網路，反之亦然。如果您新增個別 IP 位址（格式為 <code>10.171.42.17/32=10.10.10.2/32, 10.171.42.29/32=10.10.10.3/32</code>），則只有那些內部 IP 位址會對映到指定的外部 IP 位址。<br><br>如果您使用此選項，則透過 VPN 連線公開的本端子網路即為「內部」子網路所對映到的「外部」子網路。</td>
     </tr>
     <tr>
     <td><code>loadBalancerIP</code></td>
-    <td>從指派給您要用於 strongSwan VPN 服務的這個叢集的子網路中新增可攜式公用 IP 位址。如果從內部部署閘道起始 VPN 連線（<code>ipsec.auto</code> 設為 <code>add</code>），則您可以使用此內容，在叢集的內部部署閘道上配置持續性公用 IP 位址。這是選用值。</td>
+    <td>如果您想要針對 strongSwan VPN 服務指定可攜式公用 IP 位址，進行入埠 VPN 連線，請新增該 IP 位址。當您需要穩定的 IP 位址時（例如，當您必須指定允許哪些 IP 位址通過內部部署防火牆時），指定 IP 位址很有用。<br><br>若要檢視指派給此叢集的可攜性公用 IP 位址，請參閱[管理 IP 位址及子網路](cs_subnets.html#manage)。如果您將此設定保留空白，則會使用免費的可攜式公用 IP 位址。如果從內部部署閘道起始 VPN 連線（<code>ipsec.auto</code> 設為 <code>add</code>），則您可以使用此內容，在叢集的內部部署閘道上配置持續性公用 IP 位址。</td>
+    </tr>
+    <tr>
+    <td><code>connectUsingLoadBalancerIP</code></td>
+    <td>使用您在 <code>loadBalancerIP</code> 中所新增的負載平衡器 IP 位址，也可以建立出埠 VPN 連線。如果啟用此選項，則所有叢集工作者節點都必須位於相同的公用 VLAN 上。否則，您必須使用 <code>nodeSelector</code> 設定，以確保 VPN Pod 部署至與 <code>loadBalancerIP</code> 相同的公用 VLAN 上的工作者節點。如果將 <code>ipsec.auto</code> 設為 <code>add</code>，則會忽略此選項。<p>接受值：</p><ul><li><code>"false"</code>：不使用負載平衡器 IP 來連接 VPN。改為使用 VPN Pod 執行所在之工作者節點的 IP 位址。</li><li><code>"true"</code>：使用負載平衡器 IP 作為本端來源 IP 來建立 VPN。如果未設定 <code>loadBalancerIP</code>，則會使用指派給負載平衡器服務的外部 IP 位址。</li><li><code>"auto"</code>：將 <code>ipsec.auto</code> 設為 <code>start</code>，並設定 <code>loadBalancerIP</code> 時，請使用負載平衡器 IP 作為本端來源 IP 來建立 VPN。</li></ul></td>
     </tr>
     <tr>
     <td><code>nodeSelector</code></td>
-    <td>若要限制 strongSwan VPN Pod 部署至哪些節點，請新增特定工作者節點的 IP 位址或工作者節點標籤。例如，<code>kubernetes.io/hostname: 10.184.110.141</code> 值限制 VPN Pod 只能在該工作者節點上執行。<code>strongswan: vpn</code> 值限制 VPN Pod 在任何具有該標籤的工作者節點上執行。您可以使用任何工作者節點標籤，但建議您使用 <code>strongswan: &lt;release_name&gt;</code>，這樣不同的工作者節點才可以與這個圖表的不同部署搭配使用。<br><br>如果由叢集起始 VPN 連線（<code>ipsec.auto</code> 設為 <code>start</code>），您可以使用此內容來限制公開給內部部署閘道的 VPN 連線的來源 IP 位址。這是選用值。</td>
+    <td>若要限制 strongSwan VPN Pod 部署至哪些節點，請新增特定工作者節點的 IP 位址或工作者節點標籤。例如，<code>kubernetes.io/hostname: 10.xxx.xx.xxx</code> 值限制 VPN Pod 只能在該工作者節點上執行。<code>strongswan: vpn</code> 值限制 VPN Pod 在任何具有該標籤的工作者節點上執行。您可以使用任何工作者節點標籤，但建議您使用 <code>strongswan: &lt;release_name&gt;</code>，這樣不同的工作者節點才可以與這個圖表的不同部署搭配使用。<br><br>如果由叢集起始 VPN 連線（<code>ipsec.auto</code> 設為 <code>start</code>），您可以使用此內容來限制公開給內部部署閘道的 VPN 連線的來源 IP 位址。這是選用值。</td>
     </tr>
     <tr>
     <td><code>ipsec.keyexchange</code></td>
@@ -86,11 +132,11 @@ lastupdated: "2018-03-16"
     </tr>
     <tr>
     <td><code>ipsec.esp</code></td>
-    <td>新增內部部署 VPN 通道端點用於連線的 ESP 加密/鑑別演算法的清單。這是選用值。如果您將此欄位保留空白，則連線會使用預設 strongSwan 演算法 <code>aes128-sha1,3des-sha1</code>。</td>
+    <td>新增內部部署 VPN 通道端點用於連線之 ESP 加密及鑑別演算法的清單。<ul><li>如果將 <code>ipsec.keyexchange</code> 設為 <code>ikev1</code>，則必須指定此設定。</li><li>如果將 <code>ipsec.keyexchange</code> 設為 <code>ikev2</code>，則此設定為選用項目。如果您將此設定保留空白，則連線會使用預設 strongSwan 演算法 <code>aes128-sha1,3des-sha1</code>。</li></ul></td>
     </tr>
     <tr>
     <td><code>ipsec.ike</code></td>
-    <td>新增內部部署 VPN 通道端點用於連線的 IKE/ISAKMP SA 加密/鑑別演算法的清單。這是選用值。如果您將此欄位保留空白，則連線會使用預設 strongSwan 演算法 <code>aes128-sha1-modp2048,3des-sha1-modp1536</code>。</td>
+    <td>新增內部部署 VPN 通道端點用於連線之 IKE/ISAKMP SA 加密及鑑別演算法的清單。<ul><li>如果將 <code>ipsec.keyexchange</code> 設為 <code>ikev1</code>，則必須指定此設定。</li><li>如果將 <code>ipsec.keyexchange</code> 設為 <code>ikev2</code>，則此設定為選用項目。如果您將此設定保留空白，則連線會使用預設 strongSwan 演算法 <code>aes128-sha1-modp2048,3des-sha1-modp1536</code>。</li></ul></td>
     </tr>
     <tr>
     <td><code>ipsec.auto</code></td>
@@ -98,7 +144,7 @@ lastupdated: "2018-03-16"
     </tr>
     <tr>
     <td><code>local.subnet</code></td>
-    <td>將此值變更為要透過 VPN 連線公開給內部部署網路使用之叢集子網路 CIDR 的清單。此清單可能包括下列子網路：<ul><li>Kubernetes Pod 子網路 CIDR：<code>172.30.0.0/16</code></li><li>Kubernetes 服務子網路 CIDR：<code>172.21.0.0/16</code></li><li>如果您的應用程式是由專用網路上的 NodePort 服務公開，則為工作者節點的專用子網路 CIDR。若要尋找此值，請執行 <code>bx cs subnets | grep <xxx.yyy.zzz></code>，其中 <code>&lt;xxx.yyy.zzz&gt;</code> 是工作者節點專用 IP 位址的前三個八位元組。</li><li>如果您的應用程式是由專用網路上的 LoadBalancer 服務公開，則為叢集的專用或使用者管理的子網路 CIDR。若要尋找這些值，請執行 <code>bx cs cluster-get <cluster name> --showResources</code>。在 <b>VLANS</b> 區段中，請尋找 <b>Public</b> 值為 <code>false</code> 的 CIDR。</li></ul></td>
+    <td>將此值變更為要透過 VPN 連線公開給內部部署網路使用之叢集子網路 CIDR 的清單。此清單可能包括下列子網路：<ul><li>Kubernetes Pod 子網路 CIDR：<code>172.30.0.0/16</code></li><li>Kubernetes 服務子網路 CIDR：<code>172.21.0.0/16</code></li><li>如果您的應用程式是由專用網路上的 NodePort 服務公開，則為工作者節點的專用子網路 CIDR。藉由執行 <code>bx cs worker &lt;cluster_name&gt;</code>，來擷取工作者專用 IP 位址的前三個八位元組。比方說，如果它是 <code>&lt;10.176.48.xx&gt;</code>，請注意 <code>&lt;10.176.48&gt;</code>。接下來，執行下列指令，將 <code>&lt;xxx.yyy.zz&gt;</code> 取代為您先前擷取的八位元組，來取得工作者專用子網路 CIDR：<code>bx cs subnets | grep &lt;xxx.yyy.zzz&gt;</code>。</li><li>如果您的應用程式是由專用網路上的 LoadBalancer 服務公開，則為叢集的專用或使用者管理的子網路 CIDR。若要尋找這些值，請執行 <code>bx cs cluster-get &lt;cluster_name&gt; --showResources</code>。在 **VLANS** 區段中，請尋找 **Public** 值為 <code>false</code> 的 CIDR。</li></ul>**附註**：如果將 <code>ipsec.keyexchange</code> 設為 <code>ikev1</code>，則您只能指定一個子網路。</td>
     </tr>
     <tr>
     <td><code>local.id</code></td>
@@ -109,7 +155,7 @@ lastupdated: "2018-03-16"
     <td>將此值變更為內部部署 VPN 閘道的公用 IP 位址。當 <code>ipsec.auto</code> 設為 <code>start</code> 時，這是必要值。</td>
     </tr>
     <td><code>remote.subnet</code></td>
-    <td>將此值變更為容許 Kubernetes 叢集存取的內部部署專用子網路 CIDR 清單。</td>
+    <td>將此值變更為容許 Kubernetes 叢集存取的內部部署專用子網路 CIDR 清單。**附註**：如果將 <code>ipsec.keyexchange</code> 設為 <code>ikev1</code>，則您只能指定一個子網路。</td>
     </tr>
     <tr>
     <td><code>remote.id</code></td>
@@ -177,9 +223,9 @@ lastupdated: "2018-03-16"
 
     ```
     Security Associations (1 up, 0 connecting):
-    k8s-conn[1]: ESTABLISHED 17 minutes ago, 172.30.244.42[ibm-cloud]...192.168.253.253[on-premises]
+    k8s-conn[1]: ESTABLISHED 17 minutes ago, 172.30.xxx.xxx[ibm-cloud]...192.xxx.xxx.xxx[on-premises]
     k8s-conn{2}: INSTALLED, TUNNEL, reqid 12, ESP in UDP SPIs: c78cb6b1_i c5d0d1c3_o
-    k8s-conn{2}: 172.21.0.0/16 172.30.0.0/16 === 10.91.152.128/26
+    k8s-conn{2}: 172.21.0.0/16 172.30.0.0/16 === 10.91.152.xxx/26
     ```
     {: screen}
 
@@ -212,7 +258,6 @@ lastupdated: "2018-03-16"
 
     {: #vpn_tests_table}
     <table>
-    <caption>瞭解 Helm VPN 連線功能測試</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="構想圖示"/>瞭解 Helm VPN 連線功能測試</th>
     </thead>
@@ -380,3 +425,4 @@ lastupdated: "2018-03-16"
   helm delete --purge <release_name>
   ```
   {: pre}
+

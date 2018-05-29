@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-29"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -31,5 +31,4 @@ lastupdated: "2018-01-29"
  - [Strongswan IPSec VPN 서비스 Helm 차트로 VPN 연결 설정](cs_vpn.html#vpn)
  - [네트워크 정책](cs_network_policy.html#network_policies)
  - [네트워크 트래픽을 에지 작업자 노드로 제한](cs_edge.html#edge)
-
 

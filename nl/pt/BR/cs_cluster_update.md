@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -75,7 +75,7 @@ Na seção de informações de dados do mapa de configuração, é possível def
 
 As chaves estão definidas. E agora?
 
-Depois de definir suas regras, você executa o comando `worker-upgrade`. Se uma resposta de êxito é retornada, os nós do trabalhador são enfileirados para serem submetidos a upgrade. No entanto, os nós não são submetidos ao processo de upgrade até que todas as regras estejam satisfeitas. Enquanto são enfileiradas, as regras são verificadas em um intervalo para ver se qualquer um dos nós pode ser submetido a upgrade.
+Depois de definir suas regras, você executa o comando `bx cs worker-update`. Se uma resposta bem-sucedida for retornada, os nós do trabalhador serão enfileirados para serem atualizados. No entanto, os nós não são submetidos ao processo de atualização até que todas as regras estejam satisfeitas. Enquanto são enfileiradas, as regras são verificadas em um intervalo para ver se algum dos nós é capaz de ser atualizado.
 
 E se eu escolher não definir um mapa de configuração?
 
@@ -95,6 +95,7 @@ Para atualizar seus nós do trabalhador:
       name: ibm-cluster-update-configuration
       namespace: kube-system
     data:
+     drain_timeout_seconds: "120"
      zonecheck.json: |
        {
          "MaxUnavailablePercentage": 70,
@@ -107,7 +108,6 @@ Para atualizar seus nós do trabalhador:
          "NodeSelectorKey": "failure-domain.beta.kubernetes.io/region",
          "NodeSelectorValue": "us-south"
        }
-    ...
      defaultcheck.json: |
        {
          "MaxUnavailablePercentage": 100
@@ -120,12 +120,16 @@ Para atualizar seus nós do trabalhador:
     </thead>
     <tbody>
       <tr>
-        <td><code>defaultcheck.json</code></td>
-        <td> Como um padrão, se o mapa ibm-cluster-update-configuration não está definido de uma maneira válida, somente 20% de seus clusters podem ficar indisponíveis por vez. Se uma ou mais regras válidas são definidas sem um padrão global, o novo padrão é para permitir que 100% dos trabalhadores fiquem indisponíveis por vez. É possível controlar isso criando uma porcentagem padrão. </td>
+        <td><code>drain_timeout_seconds</code></td>
+        <td> Opcional: o tempo limite em segundos do dreno que ocorre durante a atualização do nó do trabalhador. O dreno configura o nó como `unschedulable`, que evita que os novos pods sejam implementados nesse nó. O dreno também exclui os pods do nó. Os valores aceitos são números inteiros de 1 a 180. O valor padrão é 30.</td>
       </tr>
       <tr>
         <td><code>zonecheck.json</code></br><code>regioncheck.json</code></td>
         <td> Exemplos de chaves exclusivas para as quais você deseja configurar regras. Os nomes das chaves pode ser qualquer coisa que você desejar; as informações são analisadas pelas configurações definidas na chave. Para cada chave definida, é possível configurar somente um valor para <code>NodeSelectorKey</code> e <code>NodeSelectorValue</code>. Se desejar configurar regras para mais de uma região ou local (data center), crie uma nova entrada de chave. </td>
+      </tr>
+      <tr>
+        <td><code>defaultcheck.json</code></td>
+        <td> Como padrão, se o mapa <code>ibm-cluster-update-configuration</code> não for definido de uma maneira válida, somente 20% de seus clusters poderão ficar indisponíveis de cada vez. Se uma ou mais regras válidas são definidas sem um padrão global, o novo padrão é para permitir que 100% dos trabalhadores fiquem indisponíveis por vez. É possível controlar isso criando uma porcentagem padrão. </td>
       </tr>
       <tr>
         <td><code>MaxUnavailablePercentage</code></td>
@@ -146,10 +150,10 @@ Para atualizar seus nós do trabalhador:
 
 3. Atualize seus nós do trabalhador na GUI ou executando o comando da CLI.
   * Para atualizar do Painel do {{site.data.keyword.Bluemix_notm}}, navegue para a seção `Nós do trabalhador` de seu cluster e clique em `Atualizar trabalhador`.
-  * Para obter IDs de nó do trabalhador, execute `bx cs workers <cluster_name_or_id>`. Se você seleciona múltiplos nós do trabalhador, os nós do trabalhador são colocados em uma fila para avaliação de atualização. Se eles forem considerados prontos após a avaliação, eles serão atualizados de acordo com as regras definidas nas configurações
+  * Para obter IDs de nó do trabalhador, execute `bx cs workers <cluster_name_or_ID>`. Se você seleciona múltiplos nós do trabalhador, os nós do trabalhador são colocados em uma fila para avaliação de atualização. Se eles forem considerados prontos após a avaliação, eles serão atualizados de acordo com as regras definidas nas configurações
 
     ```
-    bx cs worker-update <cluster_name_or_id> <worker_node_id1> <worker_node_id2>
+    bx cs worker-update <cluster_name_or_ID> <worker_node1_ID> <worker_node2_ID>
     ```
     {: pre}
 
@@ -160,14 +164,14 @@ Para atualizar seus nós do trabalhador:
     {: pre}
 
 5. Confirme se a atualização foi concluída:
-  * Revise a versão do Kubernetes no Painel do {{site.data.keyword.Bluemix_notm}} ou execute `bx cs workers <cluster_name_or_id>`.
+  * Revise a versão do Kubernetes no Painel do {{site.data.keyword.Bluemix_notm}} ou execute `bx cs workers <cluster_name_or_ID>`.
   * Revise a versão do Kubernets dos nós do trabalhador executando `kubectl get nodes`.
-  * Em alguns casos, clusters mais velhos podem listar nós do trabalhador duplicados com um status de **NotReady** após uma atualização. Para remover duplicatas, consulte [Resolução de problemas](cs_troubleshoot.html#cs_duplicate_nodes).
+  * Em alguns casos, clusters mais velhos podem listar nós do trabalhador duplicados com um status de **NotReady** após uma atualização. Para remover duplicatas, consulte [Resolução de problemas](cs_troubleshoot_clusters.html#cs_duplicate_nodes).
 
 Próximas etapas:
   - Repita o processo de atualização com outros clusters.
   - Informe aos desenvolvedores que trabalham no cluster para atualizar sua CLI `kubectl` para a versão do mestre do Kubernetes.
-  - Se o painel do Kubernetes não exibir gráficos de utilização, [exclua o pod `kube-dashboard`](cs_troubleshoot.html#cs_dashboard_graphs).
+  - Se o painel do Kubernetes não exibir gráficos de utilização, [exclua o pod `kube-dashboard`](cs_troubleshoot_health.html#cs_dashboard_graphs).
 
 
 <br />
@@ -192,21 +196,21 @@ Próximas etapas:
     ```
     {: pre}
 
-3. Inclua um nó do trabalhador usando o comando [bx cs worker-add](cs_cli_reference.html#cs_worker_add) e especifique um dos tipos de máquina listados na saída do comando anterior.
+3. Inclua nós do trabalhador usando o comando [bx cs worker-add](cs_cli_reference.html#cs_worker_add). Especifique um tipo de máquina.
 
     ```
-    bx cs worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_vlan> --public-vlan <public_vlan>
+    bx cs worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
     ```
     {: pre}
 
-4. Verifique se o nó do trabalhador foi incluído.
+4. Verifique se os nós do trabalhador foram incluídos.
 
     ```
     bx cs workers <cluster_name>
     ```
     {: pre}
 
-5. Quando o nó do trabalhador incluído está no estado `Normal`, é possível remover o nó do trabalhador desatualizado. **Nota**: se estiver removendo um tipo de máquina que seja faturado mensalmente (como bare metal), você será cobrado pelo mês inteiro.
+5. Quando os nós do trabalhador incluídos estiverem no estado `Normal`, será possível remover o nó do trabalhador desatualizado. **Nota**: se estiver removendo um tipo de máquina que seja faturado mensalmente (como bare metal), você será cobrado pelo mês inteiro.
 
     ```
     bx cs worker-rm <cluster_name> <worker_node>
@@ -214,5 +218,6 @@ Próximas etapas:
     {: pre}
 
 6. Repita essas etapas para atualizar outros nós do trabalhador para tipos de máquina diferentes.
+
 
 

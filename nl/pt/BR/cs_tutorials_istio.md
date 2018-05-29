@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-27"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -73,7 +73,7 @@ Faça download e instale o Istio em seu cluster.
 4. Mude o diretório para o local do arquivo Istio.
 
    ```
-   cd <path_to_istio-0.4.0>
+   Cd filepath/istio-0.4.0
    ```
    {: pre}
 
@@ -95,9 +95,9 @@ Faça download e instale o Istio em seu cluster.
 
    ```
    NAME            TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)                                                            AGE
-   istio-ingress   LoadBalancer   172.21.121.139   169.48.221.218   80:31176/TCP,443:30288/TCP                                         2m
-   istio-mixer     ClusterIP      172.21.31.30     <none>           9091/TCP,15004/TCP,9093/TCP,9094/TCP,9102/TCP,9125/UDP,42422/TCP   2m
-   istio-pilot     ClusterIP      172.21.97.191    <none>           15003/TCP,443/TCP                                                  2m
+   istio-ingress   LoadBalancer   172.21.xxx.xxx   169.xx.xxx.xxx   80:31176/TCP,443:30288/TCP                                         2m
+   istio-mixer     ClusterIP      172.21.xxx.xxx     <none>           9091/TCP,15004/TCP,9093/TCP,9094/TCP,9102/TCP,9125/UDP,42422/TCP   2m
+   istio-pilot     ClusterIP      172.21.xxx.xxx    <none>           15003/TCP,443/TCP                                                  2m
    ```
    {: screen}
 
@@ -146,11 +146,11 @@ Quando você implementa o BookInfo, os proxies sidecar do Envoy são injetados c
 
    ```
    NAME                       CLUSTER-IP   EXTERNAL-IP   PORT(S)              AGE
-   details                    10.0.0.31    <none>        9080/TCP             6m
-   kubernetes                 10.0.0.1     <none>        443/TCP              30m
-   productpage                10.0.0.120   <none>        9080/TCP             6m
-   ratings                    10.0.0.15    <none>        9080/TCP             6m
-   reviews                    10.0.0.170   <none>        9080/TCP             6m
+   details                    10.xxx.xx.xxx    <none>        9080/TCP             6m
+   kubernetes                 10.xxx.xx.xxx     <none>        443/TCP              30m
+   productpage                10.xxx.xx.xxx   <none>        9080/TCP             6m
+   ratings                    10.xxx.xx.xxx    <none>        9080/TCP             6m
+   reviews                    10.xxx.xx.xxx   <none>        9080/TCP             6m
    ```
    {: screen}
 
@@ -183,14 +183,14 @@ Quando você implementa o BookInfo, os proxies sidecar do Envoy são injetados c
 
        ```
        NAME      HOSTS     ADDRESS          PORTS     AGE
-       gateway   *         169.48.221.218   80        3m
+       gateway   *         169.xx.xxx.xxx   80        3m
        ```
        {: screen}
 
        O endereço resultante do Ingress para este exemplo é `169.48.221.218:80`. Exporte o endereço como a URL do gateway com o comando a seguir. Você usará a URL de gateway na próxima etapa para acessar a página de produto do BookInfo.
 
        ```
-       export GATEWAY_URL=169.48.221.218:80
+       Export GATEWAY_URL=169.xx.xxx.xxx: 80
        ```
        {: pre}
 
@@ -249,3 +249,4 @@ Para explorar ainda mais a funcionalidade do Istio, é possível localizar mais 
 * [Roteamento inteligente ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://istio.io/docs/guides/intelligent-routing.html): este exemplo mostra como rotear o tráfego para uma versão específica de microsserviços de revisões e classificações do BookInfo usando recursos de gerenciamento de tráfego do Istio.
 
 * [Telemetria detalhada ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://istio.io/docs/guides/telemetry.html): este exemplo mostra como obter métricas, logs e rastreios uniformes entre microsserviços de BookInfo usando o Istio Mixer e o proxy do Envoy.
+

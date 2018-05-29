@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -35,8 +35,10 @@ Obtenga información acerca de algunos aspectos básicos de Docker:
 <dd>Un registro de imagen es un lugar para almacenar, recuperar y compartir imágenes de Docker. Las imágenes que se almacenan en un registro pueden estar disponibles a nivel público (registro público) o pueden resultar accesibles para un pequeño grupo de usuarios (registro privado). {{site.data.keyword.containershort_notm}} ofrece imágenes públicas, como ibmliberty, que puede utilizar para crear su primera app contenerizada. Cuando se trate de aplicaciones de empresa, utilice un registro privado como el que se proporciona en {{site.data.keyword.Bluemix_notm}} para evitar que usuarios no autorizados utilicen sus imágenes.
 </dd>
 <dt>Contenedor</dt>
-<dd>Cada contenedor se crea a partir de una imagen. Un contenedor es una app empaquetada con todas sus dependencias, de modo que la app se puede traspasar entre entornos y se puede ejecutar sin cambios. A diferencia de las máquinas virtuales, los contenedores no virtualizan un dispositivo, su sistema operativo y el hardware subyacente. El contenedor solo contiene código de la app, tiempo de ejecución, herramientas del sistema, bibliotecas y valores. Los contenedores se ejecutan como procesos aislados en los hosts de cálculo de Ubuntu y comparten el sistema operativo del host y sus recursos de hardware. Este enfoque hace que el contenedor sea más ligero, portable y eficiente que una máquina virtual.</dd>
+<dd>Cada contenedor se crea a partir de una imagen. Un contenedor es una app empaquetada con todas sus dependencias, de modo que la app se puede traspasar entre entornos y se puede ejecutar sin cambios. A diferencia de las máquinas virtuales, los contenedores no virtualizan un dispositivo, su sistema operativo y el hardware subyacente. El contenedor solo contiene código de la app, tiempo de ejecución, herramientas del sistema, bibliotecas y valores. Los contenedores se ejecutan como procesos aislados en los hosts de cálculo de Ubuntu y comparten el sistema operativo del host y sus recursos de hardware. Este enfoque hace que el contenedor sea más ligero, portátil y eficiente que una máquina virtual.</dd>
 </dl>
+
+
 
 ### Principales ventajas de utilizar contenedores
 {: #container_benefits}
@@ -47,20 +49,27 @@ Obtenga información acerca de algunos aspectos básicos de Docker:
 <dt>Los contenedores son pequeños</dt>
 <dd>Puede incluir varios contenedores en el espacio que necesita una sola máquina virtual.</dd>
 <dt>Los contenedores son portátiles</dt>
-<dd><ul>
+<dd>
+<ul>
   <li>Reutilice fragmentos de imágenes para crear contenedores. </li>
   <li>Traslade código de app rápidamente de los entornos de transferencia a producción.</li>
-  <li>Automatice los procesos con herramientas de entrega continua.</li> </ul></dd>
-</dl>
+  <li>Automatice los procesos con herramientas de entrega continua.</li>
+  </ul>
+  </dd>
 
+
+  
+<p>¿Listo para conocer Docker en más profundidad?  <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Complete este curso para conocer cómo Docker y {{site.data.keyword.containershort_notm}} funcionan conjuntamente.</a></p>
+
+</dl>
 
 <br />
 
 
-## Aspectos básicos de Kubernetes
+## Clústeres de Kubernetes
 {: #kubernetes_basics}
 
-El proyecto de código abierto Kubernetes combina la ejecución de una infraestructura contenerizada con cargas de trabajo de producción, contribuciones de código abierto y herramientas de gestión de contenedores Docker. La infraestructura de Kubernetes ofrece una plataforma de app aislada y segura para gestionar contenedores que es portátil, ampliable y con resolución automática de problemas en caso de que se produzcan anomalías.
+<img src="images/certified-kubernetes-resized.png" style="padding-right: 10px;" align="left" alt="Este distintivo indica la certificación de Kubernetes para IBM Cloud Container Service."/>El proyecto de código abierto Kubernetes combina la ejecución de una infraestructura contenerizada con cargas de trabajo de producción, contribuciones de código abierto y herramientas de gestión de contenedores Docker. La infraestructura de Kubernetes ofrece una plataforma de app aislada y segura para gestionar contenedores que es portátil, ampliable y con resolución automática de problemas en caso de que se produzcan anomalías.
 {:shortdesc}
 
 Conozca algunos conceptos básicos de Kubernetes que se muestran en el diagrama siguiente.
@@ -88,9 +97,14 @@ Defina estrategias para la app que incluyan el número de pods que desea añadir
 <dd>Cada app contenerizada que se despliega en un clúster se despliega, ejecuta y gestiona mediante un recurso de Kubernetes que se denomina pod. Los pods representan las unidades desplegables de tamaño reducido de un clúster de Kubernetes y se utilizan para agrupar contenedores que se deben tratar como una sola unidad. En la mayoría de los casos, cada contenedor se despliega en su propio pod. Sin embargo, una app puede requerir un contenedor y otros contenedores ayudantes para desplegarse en un pod, de manera que dichos contenedores puedan resolverse mediante la misma dirección IP privada.</dd>
 
 <dt>App</dt>
-<dd>Una app puede hacer referencia a una app completa o al componente de una app. Puede desplegar componentes de una app en pods o nodos trabajadores independientes.
-</br></br>
-Para obtener más información sobre terminología de Kubernetes, <a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">consulte la Guía de aprendizaje</a>.</dd>
+<dd>Una app puede hacer referencia a una app completa o al componente de una app. Puede desplegar componentes de una app en pods o nodos trabajadores independientes.</dd>
+
+
+  
+<p>¿Listo para conocer Kubernetes en más profundidad?  </p>
+<ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Amplíe su conocimiento terminológico con la guía de aprendizaje de creación de clústeres</a>.</li>
+<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Complete este curso para conocer cómo Kubernetes y {{site.data.keyword.containershort_notm}} funcionan conjuntamente.</a></li></ul>
+
 
 </dl>
 
@@ -100,7 +114,7 @@ Para obtener más información sobre terminología de Kubernetes, <a href="cs_tu
 ## Arquitectura del servicio
 {: #architecture}
 
-En un clúster de Kubernetes que se ejecuta en {{site.data.keyword.containershort_notm}}, las apps contenerizadas se alojan en hosts de cálculo que se denominan nodos trabajadores. En realidad, para ser más específicos, se ejecutan en pods, y los pods se alojan en nodos trabajadores. Los nodos trabajadores están gestionados por el maestro de Kubernetes. El maestro de Kubernetes y los nodos trabajadores se comunican entre sí mediante certificados TLS seguros y una conexión openVPN para organizar sus configuraciones de clúster.
+En un clúster de Kubernetes que se ejecuta en {{site.data.keyword.containershort_notm}}, las apps contenerizadas se alojan en hosts de cálculo que se denominan nodos trabajadores. En realidad, para ser más específicos, las apps se ejecutan en pods, y los pods se alojan en nodos trabajadores. Los nodos trabajadores están gestionados por el maestro de Kubernetes. El maestro de Kubernetes y los nodos trabajadores se comunican entre sí mediante certificados TLS seguros y una conexión openVPN para organizar sus configuraciones de clúster.
 {: shortdesc}
 
 ¿Cuál es la diferencia entre el maestro de Kubernetes y un nodo trabajador? Nos complace que lo pregunte.
@@ -109,11 +123,15 @@ En un clúster de Kubernetes que se ejecuta en {{site.data.keyword.containershor
   <dt>Maestro de Kubernetes</dt>
     <dd>El maestro de Kubernetes está relacionado con la gestión de todos los recursos de cálculo, red y almacenamiento del clúster. El maestro de Kubernetes se asegura de que las apps y los servicios se desplieguen de igual forma en los nodos trabajadores del clúster. En función de cómo configurar la app y los servicios, el maestro determina el nodo trabajador que tiene los recursos suficientes para cumplir los requisitos de la app.</dd>
   <dt>Nodo trabajador</dt>
-    <dd>Cada nodo trabajador es una máquina física (nativa) o una máquina virtual que se ejecuta en hardware físico, que se gestiona en un entorno de nube. Al suministrar un nodo trabajador, puede determinar los recursos que están disponibles para los contenedores alojados en dicho nodo trabajador. De forma predeterminada, los nodos trabajadores están configurados con un motor Docker gestionado por {{site.data.keyword.IBM_notm}}, distintos recursos de cálculo, sistema de red y un servicio de volúmenes. Las características integradas de seguridad proporcionan aislamiento, funciones de gestión de recursos y conformidad con la seguridad de los nodos trabajadores.</dd>
+    <dd>Cada nodo trabajador es una máquina física (nativa) o una máquina virtual que se ejecuta en hardware físico en el entorno de nube. Al suministrar un nodo trabajador, puede determinar los recursos que están disponibles para los contenedores alojados en dicho nodo trabajador. De forma predeterminada, los nodos trabajadores están configurados con un motor Docker gestionado por {{site.data.keyword.IBM_notm}}, distintos recursos de cálculo, sistema de red y un servicio de volúmenes. Las características integradas de seguridad proporcionan aislamiento, funciones de gestión de recursos y conformidad con la seguridad de los nodos trabajadores.</dd>
 </dl>
 
 ![Arquitectura de Kubernetes de {{site.data.keyword.containerlong_notm}}](images/cs_org_ov.png)
 Figura. Arquitectura de {{site.data.keyword.containershort_notm}}
 
+¿Desea ver cómo se puede utilizar {{site.data.keyword.containerlong_notm}} con otros productos y servicios? Compruebe algunas de las [integraciones](cs_integrations.html#integrations).
+
+
 <br />
+
 

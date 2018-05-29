@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-27"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -28,7 +28,7 @@ lastupdated: "2018-02-27"
   <li>[Kubernetes 网络策略 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/services-networking/network-policies/)：提供了一些基本选项，例如指定哪些 pod 可以相互通信。对于协议和端口，可以允许或阻止入局网络流量。可以依据正尝试连接到其他 pod 的 pod 的标签和 Kubernetes 名称空间，过滤此流量。</br>可以使用 `kubectl` 命令或 Kubernetes API 来应用这些策略。这些策略应用后，即会转换成 Calico 网络策略，Calico 会强制实施这些策略。</li>
   <li>[Calico 网络策略 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy)：这些策略是 Kubernetes 网络策略的超集，通过以下功能增强了本机 Kubernetes 能力。</li>
     <ul><ul><li>允许或阻止特定网络接口上的网络流量，而不仅仅是 Kubernetes pod 流量。</li>
-    <li>允许或阻止入局 (流入）和出局 (外流) 网络流量。</li>
+    <li>允许或阻止入局 (流入）和出局 (流出) 网络流量。</li>
     <li>[阻止流至 LoadBalancer 或 NodePort Kubernetes 服务的入局（Ingress）流量](#block_ingress)。</li>
     <li>允许或阻止基于源或目标 IP 地址或 CIDR 的流量。</li></ul></ul></br>
 
@@ -49,7 +49,6 @@ lastupdated: "2018-02-27"
 
 
  <table summary="表中的第一行跨两列。其余行应从左到右阅读，其中第一列是服务器位置，第二列是要匹配的 IP 地址。">
-  <caption>每个集群的缺省策略</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 每个集群的缺省策略</th>
   </thead>
@@ -115,14 +114,14 @@ lastupdated: "2018-02-27"
 
 
               ```
-              mv /<path_to_file>/calicoctl /usr/local/bin/calicoctl
+              mv filepath/calicoctl /usr/local/bin/calicoctl
               ```
               {: pre}
 
             -   OS X：
 
               ```
-              mv /<path_to_file>/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
+              mv filepath/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
               ```
               {: pre}
 
@@ -175,7 +174,7 @@ lastupdated: "2018-02-27"
       ```
         {: codeblock}
 
-        1.  检索 `<ETCD_URL>`. 如果此命令失败，并返回 `calico-config not found` 错误，请参阅此[故障诊断主题](cs_troubleshoot.html#cs_calico_fails)。
+        1.  检索 `<ETCD_URL>`. 如果此命令失败，并返回 `calico-config not found` 错误，请参阅此[故障诊断主题](cs_troubleshoot_network.html#cs_calico_fails)。
 
           -   Linux 和 OS X：
 
@@ -187,13 +186,14 @@ lastupdated: "2018-02-27"
           -   输出示例：
 
               ```
-              https://169.1.1.1:30001
+              https://169.xx.xxx.xxx:30001
               ```
               {: screen}
 
           -   Windows：<ol>
             <li>从配置映射获取 Calico 配置值。</br><pre class="codeblock"><code>kubectl get cm -n kube-system calico-config -o yaml</code></pre></br>
-            <li>在 `data` 部分中，找到 etcd_endpoints 值。示例：<code>https://169.1.1.1:30001</code></ol>
+            <li>在 `data` 部分中，找到 etcd_endpoints 值。示例：<code>https://169.xx.xxx.xxx:30001</code>
+            </ol>
 
         2.  检索 `<CERTS_DIR>`，即 Kubernetes 证书的下载目录。
 
@@ -221,7 +221,7 @@ lastupdated: "2018-02-27"
                 输出示例：
 
               ```
-              C:/Users/<user>/.bluemix/plugins/container-service/<cluster_name>-admin/kube-config-prod-<location>-<cluster_name>.yml
+              C:/Users/<user>/.bluemix/plugins/container-service/mycluster-admin/kube-config-prod-dal10-mycluster.yml
               ```
               {: screen}
 
@@ -251,7 +251,7 @@ lastupdated: "2018-02-27"
             -   Windows：
 
               ```
-              calicoctl get nodes --config=<path_to_>/calicoctl.cfg
+              calicoctl get nodes --config=filepath/calicoctl.cfg
               ```
               {: pre}
 
@@ -303,14 +303,14 @@ lastupdated: "2018-02-27"
         -   Linux 和 OS X：
 
           ```
-          calicoctl apply -f <policy_file_name.yaml>
+          calicoctl apply -f policy.yaml
           ```
           {: pre}
 
         -   Windows：
 
           ```
-          calicoctl apply -f <path_to_>/<policy_file_name.yaml> --config=<path_to_>/calicoctl.cfg
+          calicoctl apply -f filepath/policy.yaml --config=filepath/calicoctl.cfg
           ```
           {: pre}
 
@@ -320,7 +320,7 @@ lastupdated: "2018-02-27"
 ## 阻止流至 LoadBalancer 或 NodePort 服务的入局流量。
 {: #block_ingress}
 
-缺省情况下， Kubernetes `NodePort` 和 `LoadBalancer` 服务旨在使应用程序在所有公用和专用集群接口上都可用。但是，您可以基于流量源或目标，阻止流至服务的入局流量。
+缺省情况下，Kubernetes `NodePort` 和 `LoadBalancer` 服务旨在使应用程序在所有公用和专用集群接口上都可用。但是，您可以基于流量源或目标，阻止流至服务的入局流量。
 {:shortdesc}
 
 Kubernetes LoadBalancer 服务也是 NodePort 服务。LoadBalancer 服务通过负载均衡器 IP 地址和端口提供应用程序，并通过服务的节点端口使应用程序可用。对于集群内的每个节点，在每个 IP 地址（公共和专用）上都可以访问节点端口。
@@ -371,3 +371,4 @@ Calico `preDNAT` 网络策略基于 [Calico 网络策略资源 ![外部链接图
   calicoctl apply -f deny-kube-node-port-services.yaml
   ```
   {: pre}
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -40,6 +40,49 @@ lastupdated: "2018-03-16"
 <br />
 
 
+## 供應項目及其組合的比較
+{: #differentiation}
+
+您可以在 {{site.data.keyword.Bluemix_notm}} Public 或 Dedicated、在 {{site.data.keyword.Bluemix_notm}} Private，或在混合式設定中執行 {{site.data.keyword.containershort_notm}}。
+{:shortdesc}
+
+檢閱下列資訊，在這些 {{site.data.keyword.containershort_notm}} 設定之間找出差異。
+
+<table>
+<col width="22%">
+<col width="78%">
+ <thead>
+ <th>{{site.data.keyword.containershort_notm}} 設定</th>
+ <th>說明</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td>{{site.data.keyword.Bluemix_notm}} Public
+ </td>
+ <td>利用[共用或專用硬體上或祼機機器上](cs_clusters.html#shared_dedicated_node)的 {{site.data.keyword.Bluemix_notm}} Public，您可以使用 {{site.data.keyword.containershort_notm}} 來管理雲端上叢集中的應用程式。{{site.data.keyword.Bluemix_notm}} Public 上的 {{site.data.keyword.containershort_notm}} 藉由結合 Docker 和 Kubernetes 技術、直覺式使用者體驗以及內建安全和隔離來提供功能強大的工具，以在運算主機的叢集中自動部署、操作、擴充及監視容器化應用程式。<br><br>如需相關資訊，請參閱 [{{site.data.keyword.containershort_notm}} 技術](cs_tech.html#ibm-cloud-container-service-technology)。</td>
+ </tr>
+ <tr>
+ <td>{{site.data.keyword.Bluemix_notm}} Dedicated
+ </td>
+ <td>{{site.data.keyword.Bluemix_notm}} Dedicated 在雲端上提供與 {{site.data.keyword.Bluemix_notm}} Public 相同的 {{site.data.keyword.containershort_notm}} 功能。不過，使用 {{site.data.keyword.Bluemix_notm}} Dedicated 帳戶，可用的[實體資源只供您的叢集專用](cs_clusters.html#shared_dedicated_node)，無法與其他 {{site.data.keyword.IBM_notm}} 客戶的叢集共用。當需要隔離您的叢集與您使用的其他 {{site.data.keyword.Bluemix_notm}} 服務時，您可能選擇設定 {{site.data.keyword.Bluemix_notm}} Dedicated 環境。<br><br>如需相關資訊，請參閱[開始使用 {{site.data.keyword.Bluemix_notm}} Dedicated 中的叢集](cs_dedicated.html#dedicated)。
+ </td>
+ </tr>
+ <tr>
+ <td>{{site.data.keyword.Bluemix_notm}} Private
+ </td>
+ <td>{{site.data.keyword.Bluemix_notm}} Private 是可在您自己機器本端安裝的應用程式平台。當您需要在防火牆後面的專屬控制環境中開發及管理內部部署容器化應用程式時，您可能選擇使用 {{site.data.keyword.Bluemix_notm}} Private 中的 {{site.data.keyword.containershort_notm}}。<br><br>如需相關資訊，請參閱 [{{site.data.keyword.Bluemix_notm}} Private 產品資訊 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/cloud-computing/products/ibm-cloud-private/)，以及[文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html)。
+ </td>
+ </tr>
+ <tr>
+ <td>混合式設定
+ </td>
+ <td>混合式可結合使用 {{site.data.keyword.Bluemix_notm}} Public 或 Dedicated 中執行的服務，以及在內部部署上執行的其他服務（例如 {{site.data.keyword.Bluemix_notm}} Private 中的應用程式）。混合式設定的範例：<ul><li>使用 {{site.data.keyword.Bluemix_notm}} Public 中的 {{site.data.keyword.containershort_notm}} 佈建叢集，但將該叢集連接至內部部署資料庫。</li><li>使用 {{site.data.keyword.Bluemix_notm}} Private 中的 {{site.data.keyword.containershort_notm}} 佈建叢集，並將該應用程式部署至該叢集。不過，此應用程式可能使用 {{site.data.keyword.Bluemix_notm}} Public 中的 {{site.data.keyword.ibmwatson}} 服務，例如 {{site.data.keyword.toneanalyzershort}}。</li></ul><br>若要在 {{site.data.keyword.Bluemix_notm}} Public 或 Dedicated 執行的服務與執行內部部署的服務之間啟用通訊，您必須[設定 VPN 連線](cs_vpn.html)。
+ </td>
+ </tr>
+ </tbody>
+</table>
+
+<br />
 
 
 ## 免費與標準叢集的比較
@@ -51,7 +94,7 @@ lastupdated: "2018-03-16"
 |特徵|免費叢集|標準叢集|
 |---------------|-------------|-----------------|
 |[叢集內網路](cs_secure.html#in_cluster_network)|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
-|[NodePort 服務對於不穩定 IP 位址的公用網路應用程式存取](cs_nodeport.html#planning)|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
+|[NodePort 服務對於不穩定 IP 位址的公用網路應用程式存取](cs_nodeport.html)|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
 |[使用者存取管理](cs_users.html#managing)|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
 |[叢集及應用程式中的 {{site.data.keyword.Bluemix_notm}} 服務存取](cs_integrations.html#adding_cluster)|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
 |[工作者節點上用於非持續性儲存空間的磁碟空間](cs_storage.html#planning)|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" />|
@@ -68,53 +111,10 @@ lastupdated: "2018-03-16"
 
 
 
-## 叢集管理責任
+
 {: #responsibilities}
+**附註**：在您使用服務時，要尋找您的責任及容器術語嗎？
 
-檢閱您與 IBM 共同分擔的叢集管理責任。
-{:shortdesc}
-
-**IBM 負責：**
-
-- 在建立叢集時，在叢集內部署主節點、工作者節點及管理元件，例如 Ingress 應用程式負載平衡器
-- 管理叢集的 Kubernetes 主節點更新、監視及回復
-- 監視工作者節點的性能，並為那些工作者節點提供自動化更新及回復
-- 對基礎架構帳戶執行自動化作業，包括新增工作者節點、移除工作者節點及建立預設子網路
-- 管理、更新及回復叢集內的作業元件，例如 Ingress 應用程式負載平衡器及儲存空間外掛程式
-- 在持續性磁區宣告要求時，佈建儲存磁區
-- 在所有工作者節點上提供安全設定
-
-</br>
-**您負責：**
-
-- [在叢集內部署及管理 Kubernetes 資源，例如 Pod、服務及部署](cs_app.html#app_cli)
-- [利用服務及 Kubernetes 的功能以確保應用程式的高可用性](cs_app.html#highly_available_apps)
-- [使用 CLI 新增或移除工作者節點，以新增或移除產能](cs_cli_reference.html#cs_worker_add)
-- [在 IBM Cloud 基礎架構 (SoftLayer) 建立公用及專用 VLAN，以進行叢集的網路隔離](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
-- [確保所有工作者節點都具有 Kubernetes 主節點 URL 的網路連線功能](cs_firewall.html#firewall) <p>**附註**：如果工作者節點同時具有公用和專用 VLAN，則已配置網路連線功能。如果工作者節點具有僅限專用 VLAN 的設定，則需要有 Vyatta 才能提供網路連線功能。</p>
-- [在有 Kubernetes 主要或次要版本更新時，更新主要 kube-apiserver 及工作者節點](cs_cluster_update.html#master)
-- [回復出問題的工作者節點，方法為執行 `kudectl` 指令，例如 `coron` 或 `drain`，以及執行 `bx cs` 指令，例如 `reboot`、`reload` 或 `delete`](cs_cli_reference.html#cs_worker_reboot)
-- [視需要新增或移除 IBM Cloud 基礎架構 (SoftLayer) 中的子網路](cs_subnets.html#subnets)
-- [在 IBM Cloud 基礎架構 (SoftLayer) 備份及還原持續性儲存空間裡的資料 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](../services/RegistryImages/ibm-backup-restore/index.html)
-- [針對具有自動回復的工作者節點配置性能監視](cs_health.html#autorecovery)
-
-<br />
-
-
-## 容器濫用
 {: #terms}
+請參閱 [{{site.data.keyword.containershort_notm}} 責任](cs_responsibilities.html)。
 
-客戶不得誤用 {{site.data.keyword.containershort_notm}}。
-{:shortdesc}
-
-誤用包括：
-
-*   任何不合法的活動
-*   散佈或執行惡意軟體
-*   危害 {{site.data.keyword.containershort_notm}} 或干擾任何人使用 {{site.data.keyword.containershort_notm}}
-*   危害或干擾任何人使用任何其他服務或系統
-*   未經授權即存取任何服務或系統
-*   未經授權即修改任何服務或系統
-*   違反他人權利
-
-如需整體使用條款，請參閱[雲端服務條款](/docs/navigation/notices.html#terms)。

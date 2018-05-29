@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-02-27"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -98,7 +98,7 @@ Kubernetes クラスターにアプリをデプロイしたことがないソフ
     1. 環境変数を設定して Kubernetes 構成ファイルをダウンロードするためのコマンドを取得します。
 
         ```
-        bx cs cluster-config <pr_firm_cluster>
+        bx cs cluster-config <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -132,6 +132,8 @@ Kubernetes クラスターにアプリをデプロイしたことがないソフ
 
 7.  `Lab 1` ディレクトリーのアプリ・ファイルを組み込んだ Docker イメージをビルドします。 後日アプリを変更しなければならなくなった場合は、この手順を繰り返して別バージョンのイメージを作成します。
 
+    
+
     1.  イメージをローカルにビルドします。 使用する名前とタグを指定します。 必ず、前のチュートリアルで {{site.data.keyword.registryshort_notm}} に作成した名前空間を使用してください。 名前空間の情報でイメージにタグを付けておけば、後の手順でイメージをプッシュする時に、Docker がプッシュ先の場所を判別できるようになります。 イメージ名には小文字の英数字または下線 (`_`) のみを使用してください。 コマンドの末尾にピリオド (`.`) をつけることを忘れないようにしてください。 このピリオドは、イメージをビルドするための Dockerfile とビルド成果物を、現行ディレクトリー内で探すよう Docker に指示するものです。
 
         ```
@@ -153,10 +155,10 @@ Kubernetes クラスターにアプリをデプロイしたことがないソフ
         ```
         {: pre}
 
-        出力:
+        出力例:
 
         ```
-        The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+        The push refers to a repository [registry.ng.bluemix.net/pr_firm/hello-world]
         ea2ded433ac8: Pushed
         894eb973f4d3: Pushed
         788906ca2c7e: Pushed
@@ -179,12 +181,14 @@ Kubernetes クラスターにアプリをデプロイしたことがないソフ
     ```
     {: pre}
 
-    出力:
+    出力例:
 
     ```
     deployment "hello-world-deployment" created
     ```
     {: screen}
+
+    
 
 9.  デプロイメントを NodePort サービスとして公開することによって、だれでもアプリにアクセスできるようにします。 Cloud Foundry アプリのポートを公開する場合と同じく、ここで公開する NodePort は、そのワーカー・ノードがトラフィックを listen するポートです。
 
@@ -193,7 +197,7 @@ Kubernetes クラスターにアプリをデプロイしたことがないソフ
     ```
     {: pre}
 
-    出力:
+    出力例:
 
     ```
     service "hello-world-service" exposed
@@ -202,7 +206,6 @@ Kubernetes クラスターにアプリをデプロイしたことがないソフ
 
     <table>
     <table summary=“Information about the expose command parameters.”>
-    <caption>表 1. コマンド・パラメーター</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> expose のパラメーターに関する詳細</th>
     </thead>
@@ -237,11 +240,11 @@ Kubernetes クラスターにアプリをデプロイしたことがないソフ
     1.  サービスに関する情報を取得して、割り当てられた NodePort を確認します。
 
         ```
-        kubectl describe service <hello-world-service>
+        kubectl describe service hello-world-service
         ```
         {: pre}
 
-        出力:
+        出力例:
 
         ```
         Name:                   hello-world-service
@@ -249,10 +252,10 @@ Kubernetes クラスターにアプリをデプロイしたことがないソフ
         Labels:                 run=hello-world-deployment
         Selector:               run=hello-world-deployment
         Type:                   NodePort
-        IP:                     10.10.10.8
+        IP:                     10.xxx.xx.xxx
         Port:                   <unset> 8080/TCP
         NodePort:               <unset> 30872/TCP
-        Endpoints:              172.30.171.87:8080
+        Endpoints:              172.30.xxx.xxx:8080
         Session Affinity:       None
         No events.
         ```
@@ -263,21 +266,22 @@ Kubernetes クラスターにアプリをデプロイしたことがないソフ
     2.  クラスター内のワーカー・ノードのパブリック IP アドレスを取得します。
 
         ```
-        bx cs workers <pr_firm_cluster>
+        bx cs workers <cluster_name_or_ID>
         ```
         {: pre}
 
-        出力:
+        出力例:
 
         ```
+        bx cs workers pr_firm_cluster
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.47.227.138  10.171.53.188    free           normal   Ready    mil01      1.8.8
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.8.11
         ```
         {: screen}
 
-11. ブラウザーを開き、`http://<IP_address>:<NodePort>` という形式の URL でアプリを確認します。 この例の値を使用した場合、URL は `http://169.47.227.138:30872` になります。 その URL をブラウザーに入力すると、以下のテキストが表示されます。
+11. ブラウザーを開き、`http://<IP_address>:<NodePort>` という形式の URL でアプリを確認します。 この例の値を使用した場合、URL は `http://169.xx.xxx.xxx:30872` になります。 その URL をブラウザーに入力すると、以下のテキストが表示されます。
 
     ```
     Hello world! Your app is up and running in a cluster!
@@ -341,10 +345,10 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
   ```
   {: pre}
 
-  出力:
+  出力例:
 
   ```
-  The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+  The push refers to a repository [registry.ng.bluemix.net/pr_firm/hello-world]
   ea2ded433ac8: Pushed
   894eb973f4d3: Pushed
   788906ca2c7e: Pushed
@@ -396,7 +400,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
   ```
   {: pre}
 
-  出力:
+  出力例:
 
   ```
   deployment "hw-demo-deployment" created
@@ -407,18 +411,18 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
 7.  デプロイメント作業が完了したので、ブラウザーを開いてアプリを確認できます。 前のレッスンで使用したのと同じワーカー・ノードのパブリック IP アドレスに、構成スクリプトで指定した NodePort を組み合わせて、URL を作成します。 ワーカー・ノードのパブリック IP アドレスを取得するには、以下のようにします。
 
   ```
-  bx cs workers <pr_firm_cluster>
+  bx cs workers <cluster_name_or_ID>
   ```
   {: pre}
 
-  この例の値を使用した場合、URL は `http://169.47.227.138:30072` になります。 ブラウザーに以下のテキストが表示される可能性があります。 そのテキストが表示されなくても、心配は無用です。 このアプリは、稼働状態になったりダウン状態になったりする設計になっているからです。
+  この例の値を使用した場合、URL は `http://169.xx.xxx.xxx:30072` になります。 ブラウザーに以下のテキストが表示される可能性があります。 そのテキストが表示されなくても、心配は無用です。 このアプリは、稼働状態になったりダウン状態になったりする設計になっているからです。
 
   ```
   Hello world! Great job getting the second stage up and running!
   ```
   {: screen}
 
-  `http://169.47.227.138:30072/healthz` で状況を確認することもできます。
+  `http://169.xx.xxx.xxx:30072/healthz` で状況を確認することもできます。
 
   最初の 10 秒から 15 秒で 200 というメッセージが返されます。アプリが正常に稼働しているという意味のメッセージです。 その 15 秒が経過すると、タイムアウト・メッセージが表示されます。 これは予期される動作です。
 
@@ -452,7 +456,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
   ```
   {: pre}
 
-  出力:
+  出力例:
 
   ```
   deployment "hw-demo-deployment" deleted
@@ -518,7 +522,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
         ```
         {: pre}
 
-3.  {{site.data.keyword.watson}}-talk イメージをビルドします。
+4.  {{site.data.keyword.watson}}-talk イメージをビルドします。
 
     1.  `watson-talk` ディレクトリーに移動します。
 
@@ -548,27 +552,27 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
         ```
         {: pre}
 
-4.  それぞれのイメージがレジストリー名前空間に正常に追加されたことを確認します。 Docker Quickstart Terminal を使用して Docker コマンドを実行した場合は、必ず、`KUBECONFIG` セッション変数の設定時に使用した CLI に切り替えてください。
+5.  それぞれのイメージがレジストリー名前空間に正常に追加されたことを確認します。 Docker Quickstart Terminal を使用して Docker コマンドを実行した場合は、必ず、`KUBECONFIG` セッション変数の設定時に使用した CLI に切り替えてください。
 
     ```
     bx cr images
     ```
     {: pre}
 
-    出力:
+    出力例:
 
     ```
     Listing images...
 
-    REPOSITORY                                  NAMESPACE  TAG            DIGEST         CREATED         SIZE     VULNERABILITY STATUS
-    registry.<region>.bluemix.net/namespace/hello-world   namespace  1              0d90cb732881   40 minutes ago  264 MB   OK
-    registry.<region>.bluemix.net/namespace/hello-world   namespace  2              c3b506bdf33e   20 minutes ago  264 MB   OK
-    registry.<region>.bluemix.net/namespace/watson        namespace  latest         fedbe587e174   3 minutes ago   274 MB   OK
-    registry.<region>.bluemix.net/namespace/watson-talk   namespace  latest         fedbe587e174   2 minutes ago   274 MB   OK
+    REPOSITORY                                      NAMESPACE  TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS
+    registry.ng.bluemix.net/namespace/hello-world   namespace  1        0d90cb732881   40 minutes ago  264 MB   OK
+    registry.ng.bluemix.net/namespace/hello-world   namespace  2        c3b506bdf33e   20 minutes ago  264 MB   OK
+    registry.ng.bluemix.net/namespace/watson        namespace  latest   fedbe587e174   3 minutes ago   274 MB   OK
+    registry.ng.bluemix.net/namespace/watson-talk   namespace  latest   fedbe587e174   2 minutes ago   274 MB   OK
     ```
     {: screen}
 
-5.  テキスト・エディターを使用して、`Lab 3` ディレクトリー内の `watson-deployment.yml` ファイルを開きます。 この構成スクリプトには、アプリの watson のコンポーネントと watson-talk のコンポーネントの両方のデプロイメントとサービスが含まれています。
+6.  テキスト・エディターを使用して、`Lab 3` ディレクトリー内の `watson-deployment.yml` ファイルを開きます。 この構成スクリプトには、アプリの watson のコンポーネントと watson-talk のコンポーネントの両方のデプロイメントとサービスが含まれています。
 
     1.  レジストリー名前空間にある両方のデプロイメントのイメージの詳細情報を更新します。
 
@@ -593,7 +597,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
                 - name: service-bind-volume
                   secret:
                     defaultMode: 420
-                    secretName: binding-<mytoneanalyzer>
+                    secretName: binding-mytoneanalyzer
         ```
         {: codeblock}
 
@@ -606,14 +610,14 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
 
     3.  watson-talk の service セクションで、`NodePort` の設定値に注目します。 この例では 30080 を使用しています。
 
-6.  構成スクリプトを実行します。
+7.  構成スクリプトを実行します。
 
   ```
   kubectl apply -f watson-deployment.yml
   ```
   {: pre}
 
-7.  オプション: {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} のシークレットがポッドに対してボリュームとしてマウントされたことを確認します。
+8.  オプション: {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} のシークレットがポッドに対してボリュームとしてマウントされたことを確認します。
 
     1.  watson ポッドの名前を取得するには、以下のコマンドを実行します。
 
@@ -622,7 +626,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
         ```
         {: pre}
 
-        出力:
+        出力例:
 
         ```
         NAME                                 READY     STATUS    RESTARTS  AGE
@@ -638,7 +642,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
         ```
         {: pre}
 
-        出力:
+        出力例:
 
         ```
         Volumes:
@@ -651,20 +655,20 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
         ```
         {: codeblock}
 
-8.  ブラウザーを開いて、何かのテキストを分析します。 URL の形式は `http://<worker_node_IP_address>:<watson-talk-nodeport>/analyze/"<text_to_analyze>"` です。
+9.  ブラウザーを開いて、何かのテキストを分析します。 URL の形式は `http://<worker_node_IP_address>:<watson-talk-nodeport>/analyze/"<text_to_analyze>"` です。
 
     例:
 
     ```
-    http://169.47.227.138:30080/analyze/"Today is a beautiful day"
+    http://169.xx.xxx.xxx:30080/analyze/"Today is a beautiful day"
     ```
     {: screen}
 
     入力したテキストに関する JSON 応答がブラウザーに表示されます。
 
-9.  [Kubernetes ダッシュボードを起動](cs_app.html#cli_dashboard)します。 Kubernetes のバージョンに応じて手順が異なることに注意してください。
+10.  [Kubernetes ダッシュボードを起動](cs_app.html#cli_dashboard)します。 Kubernetes のバージョンに応じて手順が異なることに注意してください。
 
-10. **「ワークロード」**タブで、作成したリソースを表示します。 Kubernetes ダッシュボードでの検討作業が完了したら、CTRL+C を使用して `proxy` コマンドを終了します。
+11. **「ワークロード」**タブで、作成したリソースを表示します。 Kubernetes ダッシュボードでの検討作業が完了したら、CTRL+C を使用して `proxy` コマンドを終了します。
 
 ### レッスン 3b: 稼働中の Watson Tone Analyzer デプロイメントを更新する
 {: #lesson3b}
@@ -720,7 +724,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
   ```
   {: pre}
 
-  出力:
+  出力例:
 
   ```
   deployment "watson-pod" deleted
@@ -733,7 +737,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
   クラスターを保持する必要がない場合は、クラスターも削除できます。
 
   ```
-  bx cs cluster-rm <pr_firm_cluster>
+  bx cs cluster-rm <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -745,3 +749,4 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
 - リポジトリー内のさらに複雑な Lab を実行する
 - {{site.data.keyword.containershort_notm}} を使用して[アプリの自動スケーリングを行う](cs_app.html#app_scaling)
 - [developerWorks ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/code/journey/category/container-orchestration/) でコンテナーのオーケストレーション・ジャーニーを探索する
+

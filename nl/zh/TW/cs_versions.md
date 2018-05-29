@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-13"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -15,7 +15,7 @@ lastupdated: "2018-03-13"
 {:tip: .tip}
 {:download: .download}
 
-# {{site.data.keyword.containerlong_notm}} 的 Kubernetes 版本
+# Kubernetes 版本
 {: #cs_versions}
 
 {{site.data.keyword.containerlong}} 同時支援多個 Kubernetes 版本。發行最新版本 (n) 時，最多支援到前 2 個 (n-2) 版本。超過最新版本前 2 個版本的版本 (n-3) 會先被淘汰，然後不受支援。
@@ -24,15 +24,14 @@ lastupdated: "2018-03-13"
 現行支援的 Kubernetes 版本如下：
 
 - 最新：1.9.3
-- 預設：1.8.8
-- 支援：1.7.4
-- 已淘汰：1.5.x，自 2018 年 4 月 4 日起不受支援
+- 預設值：1.8.11
+- 支援：1.7.16
 
 **已淘汰的版本**：當叢集在已淘汰的 Kubernetes 上執行時，在版本變成不受支援之前，您有 30 天的時間可以檢閱並更新至受支援的 Kubernetes 版本。在淘汰期間，您可以在叢集中執行有限的指令來新增工作者節點、重新載入工作者節點，以及更新叢集。您無法在已淘汰的版本中建立新的叢集。
 
 **不受支援的版本**：如果您在不受支援的 Kubernetes 版本上執行叢集，請針對更新[檢閱潛在影響](#version_types)，然後立即[更新叢集](cs_cluster_update.html#update)，以繼續接收重要的安全更新和支援。
 
-若要檢查伺服器版本，請執行下列指令。
+若要檢查叢集的伺服器版本，請執行下列指令。
 
 ```
 kubectl version  --short | grep -i server
@@ -42,7 +41,7 @@ kubectl version  --short | grep -i server
 輸出範例：
 
 ```
-Server Version: 1.8.8
+Server Version: v1.8.11+9d6e0610086578
 ```
 {: screen}
 
@@ -50,30 +49,42 @@ Server Version: 1.8.8
 ## 更新類型
 {: #version_types}
 
-Kubernetes 提供下列版本更新類型：
+您的 Kubernetes 叢集具有三種類型的更新：主要、次要及修補程式。
 {:shortdesc}
 
 |更新類型|版本標籤的範例|更新者|影響
 |-----|-----|-----|-----|
 |主要|1.x.x|您|叢集的作業變更，包括 Script 或部署。|
-|次要|x.5.x|您|叢集的作業變更，包括 Script 或部署。|
-|修補程式|x.x.3|IBM 與您|沒有 Script 或部署的變更。IBM 會自動更新主節點，但由您將修補程式套用至工作者節點。|
+|次要|x.9.x|您|叢集的作業變更，包括 Script 或部署。|
+|修補程式|x.x.4_1510|IBM 與您|Kubernetes 修補程式，以及其他 {{site.data.keyword.Bluemix_notm}} Provider 元件更新，例如安全及作業系統修補程式。IBM 會自動更新主節點，但由您將修補程式套用至工作者節點。|
 {: caption="Kubernetes 更新的影響" caption-side="top"}
 
-依預設，Kibernetes 主節點無法往前更新超過兩個次要版本。例如，如果現行主節點是 1.5 版，而您要更新至 1.8，則必須先更新至 1.7。您可以強制更新繼續進行，但更新超過兩個次要版本可能會造成非預期的結果。
-{: tip}
+當更新變成可用時，會在您檢視工作者節點的相關資訊時，利用如下指令通知您：`bx cs workers <cluster>` 或 `bx cs worker-get <cluster> <worker>`。
+-  **主要及次要更新**：首先[更新您的主節點](cs_cluster_update.html#master)，然後[更新工作者節點](cs_cluster_update.html#worker_node)。 
+   - 依預設，Kibernetes 主節點無法往前更新超過兩個次要版本。例如，如果現行主節點是 1.5 版，而您要更新至 1.8，則必須先更新至 1.7。您可以強制更新繼續進行，但更新超過兩個次要版本可能會造成非預期的結果。
 
-下列資訊彙總當您將叢集從舊版更新為新版本時，可能會對已部署的應用程式造成影響的更新。請檢閱 [Kubernetes 變更日誌 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md)，以取得 Kubernetes 版本變更的完整清單。
+   - 如果您使用的 `kubectl` CLI 版本未至少符合叢集的 `major.minor` 版本，則您可能會看到非預期的結果。請確定 Kubernetes 叢集及 [CLI 版本](cs_cli_install.html#kubectl)保持最新。
 
-如需更新程序的相關資訊，請參閱[更新叢集](cs_cluster_update.html#master)及[更新工作者節點](cs_cluster_update.html#worker_node)。
+-  **修補程式更新**：每月檢查以查看是否有可用的更新，並使用 `bx cs worker-update`[ 指令](cs_cli_reference.html#cs_worker_update)來套用這些安全及作業系統修補程式。如需詳細資料，請參閱[版本變更日誌](cs_versions_changelog.html)。
 
-如果您使用的 `kubectl` CLI 版本未至少符合叢集的 `major.minor` 版本，則您可能會看到非預期的結果。請確定 Kubernetes 叢集及 [CLI 版本](cs_cli_install.html#kubectl)保持最新。
-{:tip}
+<br/>
+
+此頁面上的資訊彙總當您將叢集從舊版更新為新版本時，可能會對已部署的應用程式造成影響的更新。
+-  1.9 版[移轉動作](#cs_v19)。
+-  1.8 版[移轉動作](#cs_v18)。
+-  1.7 版[移轉動作](#cs_v17)。
+-  已淘汰或不受支援版本的[保存檔](#k8s_version_archive)。
+
+<br/>
+
+如需更完整的變更清單，請檢閱下列項目：
+* [Kubernetes 變更日誌 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md)。
+* [IBM 版本變更日誌](cs_versions_changelog.html)。
 
 ## 1.9 版
 {: #cs_v19}
 
-<p><img src="images/certified_kubernetes_1x9.png" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" height="100" width="63" align="left" alt="此徽章指出 IBM Cloud Container Service 的 Kubernetes 1.9 版憑證。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 計畫下 1.9 版的已認證 Kubernetes 產品。_Kubernetes® 是 The Linux Foundation 在美國及其他國家或地區的註冊商標，並且根據 The Linux Foundation 的授權予以使用。_</p>
+<p><img src="images/certified_kubernetes_1x9.png" style="padding-right: 10px;" align="left" alt="此徽章指出 IBM Cloud Container Service 的 Kubernetes 1.9 版憑證。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 計畫下 1.9 版的已認證 Kubernetes 產品。_Kubernetes® 是 The Linux Foundation 在美國及其他國家或地區的註冊商標，並且根據 The Linux Foundation 的授權予以使用。_</p>
 
 請檢閱從舊版 Kubernetes 更新至 1.9 版時，您可能需要進行的變更。
 
@@ -138,11 +149,13 @@ Kubernetes 提供下列版本更新類型：
 </tbody>
 </table>
 
+<br />
+
 
 ## 1.8 版
 {: #cs_v18}
 
-<p><img src="images/certified_kubernetes_1x8.png" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" height="100" width="62.5" align="left" alt="此徽章指出 IBM Cloud Container Service 的 Kubernetes 1.8 版憑證。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 計畫下 1.8 版的認證 Kubernetes 產品。_Kubernetes® 是 The Linux Foundation 在美國及其他國家或地區的註冊商標，並且根據 The Linux Foundation 的授權予以使用。_</p>
+<p><img src="images/certified_kubernetes_1x8.png" style="padding-right: 10px;" align="left" alt="此徽章指出 IBM Cloud Container Service 的 Kubernetes 1.8 版憑證。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 計畫下 1.8 版的認證 Kubernetes 產品。_Kubernetes® 是 The Linux Foundation 在美國及其他國家或地區的註冊商標，並且根據 The Linux Foundation 的授權予以使用。_</p>
 
 請檢閱從舊版 Kubernetes 更新至 1.8 版時，您可能需要進行的變更。
 
@@ -199,14 +212,21 @@ Kubernetes 提供下列版本更新類型：
 <td>`kubectl stop`</td>
 <td>`kubectl stop` 指令無法再使用。</td>
 </tr>
+<tr>
+<td>唯讀 API 資料磁區</td>
+<td>現在，`secret`、`configMap`、`downwardAPI` 及預期的磁區是已裝載的唯讀磁區。
+先前，容許應用程式可將資料寫入至這些磁區，而系統可能會自動回復這些磁區。修正安全漏洞 [CVE-2017-1002102](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102) 需要這個移轉動作。如果您的應用程式依賴先前不安全的行為，請相應地修改它們。</td>
+</tr>
 </tbody>
 </table>
+
+<br />
 
 
 ## 1.7 版
 {: #cs_v17}
 
-<p><img src="images/certified_kubernetes_1x7.png" height="100" width="62.5" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" align="left" alt="此徽章指出 IBM Cloud Container Service 的 Kubernetes 1.7 版憑證。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 計畫下 1.7 版的認證 Kubernetes 產品。</p>
+<p><img src="images/certified_kubernetes_1x7.png" style="padding-right: 10px;" align="left" alt="此徽章指出 IBM Cloud Container Service 的 Kubernetes 1.7 版憑證。"/> {{site.data.keyword.containerlong_notm}} 是 CNCF Kubernetes Software Conformance Certification 計畫下 1.7 版的認證 Kubernetes 產品。</p>
 
 請檢閱從舊版 Kubernetes 更新至 1.7 版時，您可能需要進行的變更。
 
@@ -311,43 +331,50 @@ Kubernetes 提供下列版本更新類型：
 </td></tr>
 <tr>
 <td>`default` `ServiceAccount` 的 RBAC</td>
-<td><p>已移除 `default` 名稱空間中 `default` `ServiceAccount` 的管理者 `ClusterRoleBinding`，以加強叢集安全。在 `default` 名稱空間中執行的應用程式，對 Kubernetes API 不再具有叢集管理者專用權，且可能會發生 RBAC DENY 許可權錯誤。如果您的應用程式仰賴這些專用權，請為您的應用程式[建立 RBAC 授權資源](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview)。</p>
+<td><p>已移除 `default` 名稱空間中 `default` `ServiceAccount` 的管理者 `ClusterRoleBinding`，以改善叢集安全。在 `default` 名稱空間中執行的應用程式，對 Kubernetes API 不再具有叢集管理者專用權，且可能會發生 `RBAC DENY` 許可權錯誤。檢查您的應用程式及其 `.yaml` 檔案，以查看它是否在 `default` 名稱空間中執行、使用 `default ServiceAccount`，以及存取 Kubernetes API。</p>
+<p>如果您的應用程式仰賴這些專用權，請為您的應用程式[建立 RBAC 授權資源 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview)。</p>
   <p>當您更新應用程式 RBAC 原則時，建議您暫時回復到先前的 `default`。請使用 `kubectl apply -f FILENAME` 指令來複製、儲存及套用下列檔案。<strong>附註</strong>：回復是為了讓您自己有時間更新所有應用程式資源，並不是長期解決方案。</p>
 
-  <p><pre class="codeblock">
-  <code>
+<p><pre class="codeblock">
+<code>
   kind: ClusterRoleBinding
-  apiVersion: rbac.authorization.k8s.io/v1
+apiVersion: rbac.authorization.k8s.io/v1beta1
   metadata:
    name: admin-binding-nonResourceURLSs-default
   subjects:
-    - kind: ServiceAccount
-      name: default
-      namespace: default
-  roleRef:
-   kind: ClusterRole
-   name: admin-role-nonResourceURLSs
-   apiGroup: rbac.authorization.k8s.io
-  ---
-  kind: ClusterRoleBinding
-  apiVersion: rbac.authorization.k8s.io/v1
-  metadata:
-   name: admin-binding-resourceURLSs-default
-  subjects:
-    - kind: ServiceAccount
+  - kind: ServiceAccount
+    name: default
+    namespace: default
+roleRef:
+ kind: ClusterRole
+ name: admin-role-nonResourceURLSs
+ apiGroup: rbac.authorization.k8s.io
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+ name: admin-binding-resourceURLSs-default
+subjects:
+  - kind: ServiceAccount
       name: default
       namespace: default
   roleRef:
    kind: ClusterRole
    name: admin-role-resourceURLSs
    apiGroup: rbac.authorization.k8s.io
-  </code>
-  </pre></p>
-  </td>
+</code>
+</pre></p>
+</td>
+</tr>
+<tr>
+<td>唯讀 API 資料磁區</td>
+<td>現在，`secret`、`configMap`、`downwardAPI` 及預期的磁區是已裝載的唯讀磁區。
+先前，容許應用程式可將資料寫入至這些磁區，而系統可能會自動回復這些磁區。修正安全漏洞 [CVE-2017-1002102](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102) 需要這個移轉動作。
+如果您的應用程式依賴先前不安全的行為，請相應地修改它們。</td>
 </tr>
 <tr>
 <td>StatefulSet Pod DNS</td>
-<td>在更新主節點之後，StatefulSet Pod 會失去其 Kuberneges DNS 項目。若要還原 DNS 項目，請刪除 StatefulSet Pod。Kubbernetes 會重建 Pod，並自動還原 DNS 項目。如需相關資訊，請參閱 [Kubernetes 問題![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/kubernetes/issues/48327)。
+<td>在更新主節點之後，StatefulSet Pod 會失去其 Kubernetes DNS 項目。若要還原 DNS 項目，請刪除 StatefulSet Pod。Kubbernetes 會重建 Pod，並自動還原 DNS 項目。如需相關資訊，請參閱 [Kubernetes 問題![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/kubernetes/kubernetes/issues/48327)。
 </td>
 </tr>
 <tr>
@@ -380,12 +407,16 @@ Kubernetes 提供下列版本更新類型：
 </tbody>
 </table>
 
+<br />
+
+
 ## 保存
 {: #k8s_version_archive}
 
-### 1.5 版（已淘汰）
+### 1.5 版（不受支援）
 {: #cs_v1-5}
 
-自 2018 年 3 月 5 日起，已淘汰執行 [Kubernetes 1.5 版](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md)的 {{site.data.keyword.containershort_notm}} 叢集。在 2018 年 4 月 4 日之後，1.5 版叢集就無法接收安全更新或支援，除非它們更新為下一個最新版本 ([Kubernetes 1.7](#cs_v17))。
+自 2018 年 4 月 4 日起，不支援執行 [Kubernetes 1.5 版](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md)的 {{site.data.keyword.containershort_notm}} 叢集。1.5 版叢集無法接收安全更新或支援，除非它們更新為下一個最新版本 ([Kubernetes 1.7](#cs_v17))。
 
 針對每一個 Kubernetes 版本更新[檢閱潛在影響](cs_versions.html#cs_versions)，然後立即[更新您的叢集](cs_cluster_update.html#update)。請注意，您會從某個版本更新至下一個最新版本，例如，1.5 到 1.7 或 1.8 到 1.9。
+

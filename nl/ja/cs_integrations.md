@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-14"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -25,7 +25,6 @@ lastupdated: "2018-03-14"
 
 ## アプリケーション・サービス
 <table summary="アクセシビリティーについての要約">
-<caption>表。 アプリケーション・サービスの統合オプション</caption>
 <thead>
 <tr>
 <th>サービス</th>
@@ -47,7 +46,6 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 
 ## DevOps サービス
 <table summary="アクセシビリティーについての要約">
-<caption>表。 DevOps を管理するための統合オプション</caption>
 <thead>
 <tr>
 <th>サービス</th>
@@ -61,7 +59,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 </tr>
 <tr>
 <td>Helm</td>
-<td> <a href="https://helm.sh/" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> は Kubernetes パッケージ・マネージャーです。 新しい Helm チャートを作成するか、既存の Helm チャートを使用して、{{site.data.keyword.containerlong_notm}} クラスターで実行される複雑な Kubernetes アプリケーションの定義、インストール、アップグレードを行うことができます。<p>詳しくは、[{{site.data.keyword.containershort_notm}} での Helm のセットアップ](cs_integrations.html#helm)を参照してください。</p></td>
+<td> <a href="https://helm.sh/" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> は Kubernetes パッケージ・マネージャーです。 新しい Helm チャートを作成するか、既存の Helm チャートを使用して、{{site.data.keyword.containerlong_notm}} クラスターで実行される複雑な Kubernetes アプリケーションの定義、インストール、アップグレードを行うことができます。 <p>詳しくは、[{{site.data.keyword.containershort_notm}} での Helm のセットアップ](cs_integrations.html#helm)を参照してください。</p></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.contdelivery_full}}</td>
@@ -80,7 +78,6 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 
 ## サービスのロギングとモニタリング
 <table summary="アクセシビリティーについての要約">
-<caption>表。 ログおよびメトリックを管理するための統合オプション</caption>
 <thead>
 <tr>
 <th>サービス</th>
@@ -98,11 +95,11 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 </tr>
 <tr>
 <td>{{site.data.keyword.loganalysisfull}}</td>
-<td>{{site.data.keyword.loganalysisfull_notm}} を使用して、ログの収集、保存、検索の機能を拡張します。詳しくは、<a href="../services/CloudLogAnalysis/containers/containers_kube_other_logs.html" target="_blank">クラスター・ログの自動収集の有効化 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
+<td>{{site.data.keyword.loganalysisfull_notm}} を使用して、ログの収集、保存、検索の機能を拡張します。 詳しくは、<a href="../services/CloudLogAnalysis/containers/containers_kube_other_logs.html" target="_blank">クラスター・ログの自動収集の有効化 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
 </tr>
 <tr>
 <td>{{site.data.keyword.monitoringlong}}</td>
-<td>{{site.data.keyword.monitoringlong_notm}} を使用してルールとアラートを定義して、メトリックの収集と保存の機能を拡張します。詳しくは、<a href="../services/cloud-monitoring/tutorials/container_service_metrics.html" target="_blank">Kubernetes クラスターにデプロイされたアプリに関する Grafana でのメトリックの分析 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
+<td>{{site.data.keyword.monitoringlong_notm}} を使用してルールとアラートを定義して、メトリックの収集と保存の機能を拡張します。 詳しくは、<a href="../services/cloud-monitoring/tutorials/container_service_metrics.html" target="_blank">Kubernetes クラスターにデプロイされたアプリに関する Grafana でのメトリックの分析 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
 </tr>
 <tr>
 <td>Instana</td>
@@ -137,7 +134,6 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 
 ## セキュリティー・サービス
 <table summary="アクセシビリティーについての要約">
-<caption>表。 セキュリティーを管理するための統合オプション</caption>
 <thead>
 <tr>
 <th>サービス</th>
@@ -147,7 +143,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 <tbody>
   <tr id="appid">
     <td>{{site.data.keyword.appid_full}}</td>
-    <td>ユーザーにサインインを義務付けることで、[{{site.data.keyword.appid_short}}](/docs/services/appid/index.html#gettingstarted) によって、アプリのセキュリティー・レベルを強化します。アプリに対する Web または API の HTTP /HTTPS 要求を認証するために、[{{site.data.keyword.appid_short_notm}} 認証 Ingress アノテーション](cs_annotations.html#appid-auth)を使用して、{{site.data.keyword.appid_short_notm}} を Ingress サービスと統合できます。</td>
+    <td>ユーザーに対してサインインを要求することにより、[{{site.data.keyword.appid_short}}](/docs/services/appid/index.html#gettingstarted) によって、アプリのセキュリティー・レベルを強化します。 アプリに対する Web または API の HTTP /HTTPS 要求を認証するために、[{{site.data.keyword.appid_short_notm}} 認証 Ingress アノテーション](cs_annotations.html#appid-auth)を使用して、{{site.data.keyword.appid_short_notm}} を Ingress サービスと統合できます。</td>
   </tr>
 <tr>
 <td>Aqua Security</td>
@@ -156,6 +152,10 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
 <td><a href="../services/certificate-manager/index.html" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、アプリの SSL 証明書を保管および管理できます。 詳しくは、<a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containershort_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
+</tr>
+<tr>
+  <td>{{site.data.keyword.registrylong}}</td>
+  <td>保護された独自の Docker イメージ・リポジトリーをセットアップします。そこでイメージを安全に保管し、クラスター・ユーザー間で共有することができます。詳しくは、<a href="/docs/services/Registry/index.html" target="_blank">{{site.data.keyword.registrylong}} の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
 </tr>
 <tr>
 <td>NeuVector</td>
@@ -172,6 +172,35 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 
 
 
+## ストレージ・サービス
+<table summary="アクセシビリティーについての要約">
+<thead>
+<tr>
+<th>サービス</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>{{site.data.keyword.cos_full}}</td>
+  <td>{{site.data.keyword.cos_short}} で保管するデータは、暗号化され、複数の地理的ロケーションに分散され、REST API を使用して HTTP によってアクセスされます。[ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore/index.html) を使用して、クラスターのデータの一回限りのバックアップ、またはスケジュールしたバックアップを実行するようにサービスを構成できます。このサービスに関する一般情報については、<a href="/docs/services/cloud-object-storage/about-cos.html" target="_blank">{{site.data.keyword.cos_short}} の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
+</tr>
+  <tr>
+    <td>{{site.data.keyword.cloudantfull}}</td>
+    <td>{{site.data.keyword.cloudant_short_notm}} は、データを JSON 形式の文書として保管する文書指向の DataBase as a Service (DBaaS) です。このサービスは、スケーラビリティー、高可用性、耐久性を実現するように設計されています。詳しくは、<a href="/docs/services/Cloudant/getting-started.html" target="_blank">{{site.data.keyword.cloudant_short_notm}} の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
+  </tr>
+  <tr>
+    <td>{{site.data.keyword.composeForMongoDB_full}}</td>
+    <td>{{site.data.keyword.composeForMongoDB}} は、高可用性と冗長性、自動およびオンデマンドのノンストップ・バックアップ、モニター・ツール、アラート・システムへの統合、パフォーマンス分析ビューなどを提供します。詳しくは、<a href="/docs/services/ComposeForMongoDB/index.html" target="_blank">{{site.data.keyword.composeForMongoDB}} の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
+  </tr>
+</tbody>
+</table>
+
+
+<br />
+
+
+
 ## Cloud Foundry サービスをクラスターに追加する
 {: #adding_cluster}
 
@@ -183,7 +212,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 1. [CLI のターゲットを](cs_cli_install.html#cs_cli_configure)自分のクラスターに設定します。
 2. [{{site.data.keyword.Bluemix_notm}} サービスのインスタンスを要求します](/docs/apps/reqnsi.html#req_instance)。
    **注:** ワシントン DC のロケーションでサービスのインスタンスを作成するには、CLI を使用する必要があります。
-3. Cloud Foundry サービスはクラスターとのバインドがサポートされていますが、他のサービスはサポートされていません。サービス・インスタンスを作成するとさまざまなサービス・タイプが表示され、それらのサービスはダッシュボード内で**「Cloud Foundry サービス」**および**「サービス」**としてグループ化されます。**「サービス」**セクション内のサービスをクラスターにバインドするには、[まず Cloud Foundry 別名を作成します](#adding_resource_cluster)。
+3. Cloud Foundry サービスはクラスターとのバインドがサポートされていますが、他のサービスはサポートされていません。 サービス・インスタンスを作成するとさまざまなサービス・タイプが表示され、それらのサービスはダッシュボード内で**「Cloud Foundry サービス」**および**「サービス」**としてグループ化されます。 **「サービス」**セクション内のサービスをクラスターにバインドするには、[まず Cloud Foundry 別名を作成します](#adding_resource_cluster)。
 
 **注:**
 <ul><ul>
@@ -227,7 +256,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 5.  サービスをクラスターに追加します。
 
     ```
-    bx cs cluster-service-bind <cluster_name_or_id> <namespace> <service_instance_name>
+    bx cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
     {: pre}
 
@@ -261,7 +290,7 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="外部リン�
 ## 他の {{site.data.keyword.Bluemix_notm}} サービス・リソース用のクラウド Foundry 別名の作成
 {: #adding_resource_cluster}
 
-Cloud Foundry サービスは、クラスターとのバインディングをサポートされます。Cloud Foundry サービスではない {{site.data.keyword.Bluemix_notm}} サービスをクラスターにバインドするには、サービス・インスタンスの Cloud Foundry 別名を作成します。
+Cloud Foundry サービスは、クラスターとのバインディングをサポートされます。 Cloud Foundry サービスではない {{site.data.keyword.Bluemix_notm}} サービスをクラスターにバインドするには、サービス・インスタンスの Cloud Foundry 別名を作成します。
 {:shortdesc}
 
 始める前に、[{{site.data.keyword.Bluemix_notm}} サービスのインスタンスを要求します](/docs/apps/reqnsi.html#req_instance)。
@@ -307,7 +336,7 @@ Cloud Foundry サービスは、クラスターとのバインディングをサ
 暗号化した Kubernetes シークレットを使用して、{{site.data.keyword.Bluemix_notm}} サービスの詳細情報や資格情報を保管し、サービスとクラスターの間のセキュアな通信を確保します。
 {:shortdesc}
 
-Kubernetes シークレットは、機密情報 (ユーザー名、パスワード、鍵など) を安全に保管するための手段です。 機密情報を環境変数で公開したり、Dockerfile に直接書き込んだりする代わりに、クラスター・ユーザーはシークレットをポッドにマウントできます。それにより、それらのシークレットに、ポッド内で実行中のコンテナーからアクセスできます。
+Kubernetes シークレットは、機密情報 (ユーザー名、パスワード、鍵など) を安全に保管するための手段です。 機密情報を環境変数で公開したり、Dockerfile に直接書き込んだりする代わりに、クラスター・ユーザーはシークレットをポッドにマウントできます。 それにより、それらのシークレットに、ポッド内で実行中のコンテナーからアクセスできます。
 
 シークレット・ボリュームをポッドにマウントすると、binding という名前のファイルがボリューム・マウント・ディレクトリーに保管されます。そのファイルに、{{site.data.keyword.Bluemix_notm}} サービスにアクセスするのに必要なすべての情報や資格情報が格納されます。
 
@@ -392,7 +421,7 @@ Kubernetes シークレットは、機密情報 (ユーザー名、パスワー�
 5.  ポッドを作成して、シークレット・ボリュームをマウントします。
 
     ```
-    kubectl apply -f <yaml_path>
+    kubectl apply -f secret-test.yaml
     ```
     {: pre}
 
@@ -446,20 +475,56 @@ Kubernetes シークレットは、機密情報 (ユーザー名、パスワー�
 [Helm ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://helm.sh/) は Kubernetes パッケージ・マネージャーです。 Helm チャートを作成するか、既存の Helm チャートを使用して、{{site.data.keyword.containerlong_notm}} クラスターで実行される複雑な Kubernetes アプリケーションの定義、インストール、アップグレードを行うことができます。
 {:shortdesc}
 
-Helm チャートを {{site.data.keyword.containershort_notm}} で使用する前に、クラスターに Helm インスタンスをインストールして初期化する必要があります。その後、{{site.data.keyword.Bluemix_notm}} Helm リポジトリーを Helm インスタンスに追加できます。
+Helm チャートを {{site.data.keyword.containershort_notm}} で使用する前に、クラスターに Helm インスタンスをインストールして初期化する必要があります。 その後、{{site.data.keyword.Bluemix_notm}} Helm リポジトリーを Helm インスタンスに追加できます。
 
 始めに、[CLI のターゲット](cs_cli_install.html#cs_cli_configure)を、Helm チャートを使用するクラスターに設定してください。
 
 1. <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> をインストールします。
 
-2. Helm を初期化して `tiller` をインストールします。
+2. **重要**: クラスターのセキュリティーを維持するため、Tiller のサービス・アカウントを `kube-system` 名前空間に作成し、`tiller-deploy` ポッドに対する Kubernetes RBAC クラスター役割バインディングを作成します。
+
+    1. 任意のエディターで、以下のファイルを作成し、`rbac-config.yaml` として保存します。
+      **注:**
+        * `cluster-admin` クラスター役割は、デフォルトで Kubernetes クラスターに作成されるので、明示的に定義する必要はありません。
+        * バージョン 1.7.x のクラスターを使用する場合、`apiVersion` を `rbac.authorization.k8s.io/v1beta1` に変更してください。
+
+      ```
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: tiller
+        namespace: kube-system
+      ---
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: tiller
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-admin
+      subjects:
+        - kind: ServiceAccount
+          name: tiller
+          namespace: kube-system
+      ```
+      {: codeblock}
+
+    2. サービス・アカウントとクラスター役割バインディングを作成します。
+
+        ```
+        kubectl create -f rbac-config.yaml
+        ```
+        {: pre}
+
+3. 作成したサービス・アカウントを使用して、Helm を初期化し、`tiller` をインストールします。
 
     ```
-    helm init
+    helm init --service-account tiller
     ```
     {: pre}
 
-3. クラスター内の `tiller-deploy` ポッドの**「状況」**が`「実行中」`になっていることを確認します。
+4. クラスター内の `tiller-deploy` ポッドの**「状況」**が`「実行中」`になっていることを確認します。
 
     ```
     kubectl get pods -n kube-system -l app=helm
@@ -474,17 +539,26 @@ Helm チャートを {{site.data.keyword.containershort_notm}} で使用する�
     ```
     {: screen}
 
-4. {{site.data.keyword.Bluemix_notm}} Helm リポジトリーを Helm インスタンスに追加します。
+5. {{site.data.keyword.Bluemix_notm}} Helm リポジトリーを Helm インスタンスに追加します。
 
     ```
     helm repo add ibm  https://registry.bluemix.net/helm/ibm
     ```
     {: pre}
 
-5. {{site.data.keyword.Bluemix_notm}} リポジトリーで現在使用可能な Helm チャートをリストします。
+6. {{site.data.keyword.Bluemix_notm}} リポジトリーで現在使用可能な Helm チャートをリストします。
 
     ```
     helm search ibm
+    ```
+    {: pre}
+
+7. チャートの詳細を確認するには、その設定とデフォルト値をリストします。
+
+    例えば、strongSwan IPSec VPN サービス Helm チャートの設定、文書、デフォルト値を確認するには、次のようにします。
+
+    ```
+    helm inspect ibm/strongswan
     ```
     {: pre}
 
@@ -500,7 +574,7 @@ Helm チャートを {{site.data.keyword.containershort_notm}} で使用する�
 ## Kubernetes クラスター・リソースの視覚化
 {: #weavescope}
 
-Weave Scope は、Kubernetes クラスター内のリソース (サービス、ポッド、コンテナーなど) のビジュアル図を表示します。Weave Scope には、CPU とメモリーのインタラクティブ・メトリックと、コンテナーの中で追跡したり実行したりできるツールが備わっています。
+Weave Scope は、Kubernetes クラスター内のリソース (サービス、ポッド、コンテナーなど) のビジュアル図を表示します。 Weave Scope には、CPU とメモリーのインタラクティブ・メトリックと、コンテナーの中で追跡したり実行したりできるツールが備わっています。
 {:shortdesc}
 
 開始前に、以下のことを行います。
@@ -575,4 +649,5 @@ Weave Scope をクラスターで使用するには、以下のようにしま�
 [Weave Scope の機能についての詳細 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.weave.works/docs/scope/latest/features/)。
 
 <br />
+
 

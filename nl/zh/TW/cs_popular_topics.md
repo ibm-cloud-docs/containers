@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -22,11 +22,39 @@ lastupdated: "2018-03-16"
 查看容器開發人員有興趣瞭解 {{site.data.keyword.containerlong}} 的哪些方面。
 {:shortdesc}
 
+## 2018 年 4 月的熱門主題
+{: #apr18}
+
+<table summary="此表格顯示熱門主題。列應該從左到右閱讀，第一欄為日期，第二欄為特性的標題，第三欄為說明。">
+<caption>2018 年 4 月關於容器及 Kubernetes 叢集的熱門主題</caption>
+<thead>
+<th>日期</th>
+<th>標題</th>
+<th>說明</th>
+</thead>
+<tbody>
+<tr>
+<td>4 月 17 日</td>
+<td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
+<td>安裝 {{site.data.keyword.Bluemix_notm}} Block Storage [外掛程式](cs_storage.html#install_block)，以在區塊儲存空間中儲存持續資料。然後，您可以為叢集[建立新的](cs_storage.html#create)或[使用現有的](cs_storage.html#existing_block)區塊儲存空間。</td>
+</tr>
+<tr>
+<td>4 月 13 日</td>
+<td>[將 Cloud Foundry 應用程式移轉至叢集的新指導教學](cs_tutorials_cf.html#cf_tutorial)</td>
+<td>您有 Cloud Foundry 應用程式嗎？學習如何將該應用程式中的相同程式碼部署至 Kubernetes 叢集中執行的容器。</td>
+</tr>
+<tr>
+<td>4 月 5 日</td>
+<td>[過濾日誌](cs_health.html#filter-logs)</td>
+<td>從轉遞的日誌中濾出特定日誌。可以針對特定的名稱空間、容器名稱、記載層次及訊息字串來濾出日誌。</td>
+</tr>
+</tbody></table>
+
 ## 2018 年 3 月的熱門主題
 {: #mar18}
 
 <table summary="此表格顯示熱門主題。列應該從左到右閱讀，第一欄為日期，第二欄為特性的標題，第三欄為說明。">
-<caption>2018 年 2 月關於容器及 Kubernetes 叢集的熱門主題</caption>
+<caption>2018 年 3 月關於容器及 Kubernetes 叢集的熱門主題</caption>
 <thead>
 <th>日期</th>
 <th>標題</th>
@@ -46,7 +74,7 @@ lastupdated: "2018-03-16"
 <tr>
 <td>3 月 13 日</td>
 <td>[聖保羅現在為可用位置](cs_regions.html)</td>
-<td>巴西聖保羅已成為美國南部地區的新位置。如果您有防火牆，請務必針對此位置以及您叢集所在地區內的其他位置[開啟必要的防火牆埠](cs_firewall.html#firewall)。</td>
+<td>巴西聖保羅已成為美國南部地區的新位置。如果您有防火牆，務必針對此位置以及您叢集所在地區內的其他位置[開啟必要的防火牆埠](cs_firewall.html#firewall)。</td>
 </tr>
 <tr>
 <td>3 月 12 日</td>
@@ -136,4 +164,5 @@ lastupdated: "2018-03-16"
 您可以看到別人談論的內容，也可以在 [{{site.data.keyword.containershort_notm}} Slack ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-container-service.slack.com) 中提出自己的問題。
 {:shortdesc}
 
-提示：如果您的 {{site.data.keyword.Bluemix_notm}} 帳戶未使用 IBM ID，請[要求邀請](https://bxcs-slack-invite.mybluemix.net/)以加入此 Slack。
+
+

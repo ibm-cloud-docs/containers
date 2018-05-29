@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -51,7 +51,7 @@ lastupdated: "2018-03-16"
 2. 使用 `dedicated=edge` 來標示工作者節點。在使用 `dedicated=edge` 標示工作者節點之後，所有後續的 Ingress 及負載平衡器都會部署至邊緣工作者節點。
 
   ```
-  kubectl label nodes <node_name> <node_name2> dedicated=edge
+  kubectl label nodes <node1_name> <node2_name> dedicated=edge
   ```
   {: pre}
 
@@ -65,7 +65,7 @@ lastupdated: "2018-03-16"
   輸出：
 
   ```
-  kubectl get service -n <namespace> <name> -o yaml | kubectl apply -f
+  kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f
   ```
   {: screen}
 
@@ -74,7 +74,7 @@ lastupdated: "2018-03-16"
   輸出：
 
   ```
-  service "<name>" configured
+  service "my_loadbalancer" configured
   ```
   {: screen}
 
@@ -87,7 +87,7 @@ lastupdated: "2018-03-16"
 {: #edge_workloads}
 
 邊緣工作者節點的一項好處是它們可以指定為僅執行網路服務。
-{:shortdesc} 
+{:shortdesc}
 
 使用 `dedicated=edge` 容忍，表示所有負載平衡器及 Ingress 服務都只會部署至已標示的工作者節點。不過，為了避免其他工作負載在邊緣工作者節點上執行，以及取用工作者節點資源，您必須使用 [Kubernetes 污點 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)。
 
@@ -105,5 +105,7 @@ lastupdated: "2018-03-16"
   ```
   kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute
   ```
-
 現在，僅具有 `dedicated=edge` 容忍的 Pod 才會部署至您的邊緣工作者節點。
+
+3. 如果您選擇[針對負載平衡器服務啟用來源 IP 保留 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer)，請確保藉由[將邊緣節點親緣性新增至應用程式 Pod](cs_loadbalancer.html#edge_nodes)，在邊緣工作者節點上排定應用程式 Pod，以便可將送入的要求轉遞至您的應用程式 Pod。
+

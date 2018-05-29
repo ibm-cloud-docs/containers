@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-13"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -15,7 +15,7 @@ lastupdated: "2018-03-13"
 {:tip: .tip}
 {:download: .download}
 
-# {{site.data.keyword.containerlong_notm}}의 Kubernetes 버전
+# Kubernetes 버전
 {: #cs_versions}
 
 {{site.data.keyword.containerlong}}는 동시에 여러 Kubernetes 버전을 지원합니다. 최신 버전이 릴리스될 때 최대 두 개의 이전 버전이(n-2)이 지원됩니다. 최신 버전보다 세 개 이상의 이전 버전(n-3)이 먼저 더 이상 사용되지 않게 되고 지원되지 않습니다.
@@ -24,15 +24,14 @@ lastupdated: "2018-03-13"
 현재 지원되는 Kubernetes 버전은 다음과 같습니다.
 
 - 최신 버전: 1.9.3
-- 기본 버전: 1.8.8
-- 지원되는 버전: 1.7.4
-- 더 이상 사용되지 않음: 1.5.x, 2018일 4월 4일에 지원이 중단됨
+- 기본 버전: 1.8.11
+- 지원되는 버전: 1.7.16
 
-**더 이상 사용되지 않는 버전**: 클러스터가 더 이상 사용되지 않는 Kubernetes에서 실행되는 경우 버전 지원이 중단되기 전에 지원되는 Kubernetes 버전을 검토하고 업데이트하기 위한 30일의 기간이 주어집니다. 지원 중단 중에 클러스터에서 제한된 명령을 실행하여 작업자를 추가하고 작업자를 다시 로드하며 클러스터를 업데이트할 수 있습니다. 더 이상 사용되지 않는 버전에 새 클러스터를 작성할 수 없습니다. 
+**더 이상 사용되지 않는 버전**: 클러스터가 더 이상 사용되지 않는 Kubernetes에서 실행되는 경우 버전 지원이 중단되기 전에 지원되는 Kubernetes 버전을 검토하고 업데이트하기 위한 30일의 기간이 주어집니다. 지원 중단 중에 클러스터에서 제한된 명령을 실행하여 작업자를 추가하고 작업자를 다시 로드하며 클러스터를 업데이트할 수 있습니다. 더 이상 사용되지 않는 버전에 새 클러스터를 작성할 수 없습니다.
 
-**지원되지 않는 버전**: 지원되지 않는 Kubernetes 버전에서 클러스터를 실행 중인 경우 업데이트에 대한 [잠재적인 영향을 검토](#version_types)한 후 즉각적으로 [클러스터를 업데이트](cs_cluster_update.html#update)하여 중요한 보안 업데이트 및 지원을 계속 받으십시오. 
+**지원되지 않는 버전**: 지원되지 않는 Kubernetes 버전에서 클러스터를 실행 중인 경우 업데이트에 대한 [잠재적인 영향을 검토](#version_types)한 후 즉각적으로 [클러스터를 업데이트](cs_cluster_update.html#update)하여 중요한 보안 업데이트 및 지원을 계속 받으십시오.
 
-서버 버전을 확인하려면 다음 명령을 실행하십시오.
+클러스터의 서버 버전을 확인하려면 다음 명령을 실행하십시오. 
 
 ```
 kubectl version  --short | grep -i server
@@ -42,7 +41,7 @@ kubectl version  --short | grep -i server
 출력 예:
 
 ```
-Server Version: 1.8.8
+Server Version: v1.8.11+9d6e0610086578
 ```
 {: screen}
 
@@ -50,30 +49,40 @@ Server Version: 1.8.8
 ## 업데이트 유형
 {: #version_types}
 
-Kubernetes는 다음 버전 업데이트 유형을 제공합니다.
+Kubernetes 클러스터에 대한 업데이트에는 세 가지 유형(주 버전, 부 버전 및 패치)가 있습니다.
 {:shortdesc}
 
 |업데이트 유형|버전 레이블의 예|업데이트 수행자|영향
 |-----|-----|-----|-----|
 |주 버전|1.x.x|사용자|스크립트 또는 배치를 포함한 클러스터의 오퍼레이션 변경.|
-|부 버전|x.5.x|사용자|스크립트 또는 배치를 포함한 클러스터의 오퍼레이션 변경.|
-|패치|x.x.3|IBM 및 사용자|스크립트 또는 배치 변경 없음. IBM은 자동으로 마스터를 업데이트하지만 사용자는 작업자 노드에 패치를 적용합니다.|
+|부 버전|x.9.x|사용자|스크립트 또는 배치를 포함한 클러스터의 오퍼레이션 변경.|
+|패치|x.x.4_1510|IBM 및 사용자|Kubernetes 패치 및 기타 {{site.data.keyword.Bluemix_notm}} Provider 컴포넌트 업데이트(보안 및 운영 체제 패치 등)입니다. IBM은 자동으로 마스터를 업데이트하지만 사용자는 작업자 노드에 패치를 적용합니다.|
 {: caption="Kubernetes 업데이트의 영향" caption-side="top"}
 
-기본적으로 부 버전의 차이가 2를 넘게(상위) Kubernetes 마스터를 업데이트할 수 없습니다. 예를 들어, 현재 마스터가 버전 1.5이고 1.8로 업데이트하려면 먼저 1.7로 업데이트해야 합니다. 업데이트를 강제로 계속할 수 있지만 2를 넘는 부 버전 업데이트로 인해 예상치 못한 결과가 발생할 수 있습니다.
-{: tip}
+업데이트가 사용 가능해지면 `bx cs workers <cluster>` 또는 `bx cs worker-get <cluster> <worker>` 명령 등을 사용하여 작업자 노드에 대한 정보를 볼 때 알림을 받습니다. 
+-  **주 버전 및 부 버전 업데이트**: 먼저 [마스터 노드를 업데이트](cs_cluster_update.html#master)한 후 [작업자 노드를 업데이트](cs_cluster_update.html#worker_node)하십시오.  
+   - 기본적으로 부 버전의 차이가 2를 넘게(상위) Kubernetes 마스터를 업데이트할 수 없습니다. 예를 들어, 현재 마스터가 버전 1.5이고 1.8로 업데이트하려면 먼저 1.7로 업데이트해야 합니다. 업데이트를 강제로 계속할 수 있지만 2를 넘는 부 버전 업데이트로 인해 예상치 못한 결과가 발생할 수 있습니다.
+   - 클러스터의 최소 `major.minor` CLI 버전과 일치하는 `kubectl` CLI 버전을 사용하는 경우 예상치 못한 결과가 발생할 수 있습니다. Kubernetes 클러스터 및 [CLI 버전](cs_cli_install.html#kubectl)을 최신 상태로 유지해야 합니다.
+-  **패치 업데이트**: 업데이트가 사용 가능한지 매월 확인하고, `bx cs worker-update` [명령](cs_cli_reference.html#cs_worker_update)을 사용하여 이러한 보안 및 운영 체제 패치를 적용하십시오. 세부사항은 [버전 변경 로그](cs_versions_changelog.html)를 참조하십시오. 
 
-다음 정보에는 클러스터를 이전 버전에서 새 버전으로 업데이트할 때 배치된 앱에 영향을 미칠 수 있는 업데이트가 요약되어 있습니다. Kubernetes 버전의 전체 변경사항 목록은 [Kubernetes changelog ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md)를 검토하십시오.
+<br/>
 
-업데이트 프로세스에 대한 자세한 정보는 [클러스터 업데이트](cs_cluster_update.html#master) 및 [작업자 노드 업데이트](cs_cluster_update.html#worker_node)를 참조하십시오.
+이 페이지의 정보에는 클러스터를 이전 버전에서 새 버전으로 업데이트할 때 배치된 앱에 영향을 미칠 수 있는 업데이트가 요약되어 있습니다. 
+-  버전 1.9 [마이그레이션 조치](#cs_v19). 
+-  버전 1.8 [마이그레이션 조치](#cs_v18). 
+-  버전 1.7 [마이그레이션 조치](#cs_v17). 
+-  더 이상 사용되지 않거나 지원되지 않는 버전의 [아카이브](#k8s_version_archive). 
 
-클러스터의 최소 `major.minor` CLI 버전과 일치하는 `kubectl` CLI 버전을 사용하는 경우 예상치 못한 결과가 발생할 수 있습니다. Kubernetes 클러스터 및 [CLI 버전](cs_cli_install.html#kubectl)을 최신 상태로 유지해야 합니다.
-{:tip}
+<br/>
+
+전체 변경사항 목록은 다음 항목을 검토하십시오. 
+* [Kubernetes 변경 로그 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md). 
+* [IBM 버전 변경 로그](cs_versions_changelog.html). 
 
 ## 버전 1.9
 {: #cs_v19}
 
-<p><img src="images/certified_kubernetes_1x9.png" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" height="100" width="63" align="left" alt="이 배지는 IBM Cloud 컨테이너 서비스에 대한 Kubernetes 버전 1.9 인증을 표시합니다."/> {{site.data.keyword.containerlong_notm}}는 CNCF Kubernetes Software Conformance Certification 프로그램에서 버전 1.9에 대해 인증된 Kubernetes 제품입니다. _Kubernetes®는 미국 또는 기타 국가에서 사용되는 Linux Foundation의 등록상표이며, Linux Foundation의 라이센스에 따라 사용됩니다. _</p>
+<p><img src="images/certified_kubernetes_1x9.png" style="padding-right: 10px;" align="left" alt="이 배지는 IBM Cloud 컨테이너 서비스에 대한 Kubernetes 버전 1.9 인증을 표시합니다."/> {{site.data.keyword.containerlong_notm}}는 CNCF Kubernetes Software Conformance Certification 프로그램에서 버전 1.9에 대해 인증된 Kubernetes 제품입니다. _Kubernetes®는 미국 또는 기타 국가에서 사용되는 Linux Foundation의 등록상표이며, Linux Foundation의 라이센스에 따라 사용됩니다. _</p>
 
 이전 Kubernetes 버전에서 1.9로 업데이트 중일 때 작성해야 할 변경사항을 검토하십시오.
 
@@ -129,7 +138,7 @@ Kubernetes는 다음 버전 업데이트 유형을 제공합니다.
 오염이 자동으로 업데이트되지만 이러한 오염에 대한 결함 허용을 수동으로 업데이트해야 합니다. `ibm-system` 및 `kube-system`을 제외한 각 네임스페이스에서 결함 허용을 변경할지 여부를 판별하십시오.<br>
 <ul><li><code>kubectl get pods -n &lt;namespace&gt; -o yaml | grep "node.alpha.kubernetes.io/notReady" && echo "Action required"</code></li><li>
 <code>kubectl get pods -n &lt;namespace&gt; -o yaml | grep "node.alpha.kubernetes.io/unreachable" && echo "Action required"</code></li></ul><br>
-`Action required`가 리턴되면 포드 결함 허용을 적절히 수정하십시오.</td>
+`Action required`가 리턴되면 팟(Pod) 결함 허용을 적절히 수정하십시오.</td>
 </tr>
 <tr>
 <td>웹훅 허가 API</td>
@@ -138,11 +147,13 @@ Kubernetes는 다음 버전 업데이트 유형을 제공합니다.
 </tbody>
 </table>
 
+<br />
+
 
 ## 버전 1.8
 {: #cs_v18}
 
-<p><img src="images/certified_kubernetes_1x8.png" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" height="100" width="62.5" align="left" alt="이 배지는 IBM Cloud 컨테이너 서비스에 대한 Kubernetes 버전 1.8 인증을 표시합니다."/> {{site.data.keyword.containerlong_notm}}는 CNCF Kubernetes Software Conformance Certification 프로그램에서 버전 1.8에 대해 인증된 Kubernetes 제품입니다. _Kubernetes®는 미국 또는 기타 국가에서 사용되는 Linux Foundation의 등록상표이며, Linux Foundation의 라이센스에 따라 사용됩니다. _</p>
+<p><img src="images/certified_kubernetes_1x8.png" style="padding-right: 10px;" align="left" alt="이 배지는 IBM Cloud 컨테이너 서비스에 대한 Kubernetes 버전 1.8 인증을 표시합니다."/> {{site.data.keyword.containerlong_notm}}는 CNCF Kubernetes Software Conformance Certification 프로그램에서 버전 1.8에 대해 인증된 Kubernetes 제품입니다. _Kubernetes®는 미국 또는 기타 국가에서 사용되는 Linux Foundation의 등록상표이며, Linux Foundation의 라이센스에 따라 사용됩니다. _</p>
 
 이전 Kubernetes 버전에서 1.8로 업데이트 중일 때 작성해야 할 변경사항을 검토하십시오.
 
@@ -189,7 +200,7 @@ Kubernetes는 다음 버전 업데이트 유형을 제공합니다.
 </tr>
 <tr>
 <td>`kubectl delete`</td>
-<td>`kubectl delete` 명령은 오브젝트가 삭제되기 전에 포드와 같은 워크로드 API 오브젝트를 더 이상 축소하지 않습니다. 오브젝트를 축소해야 하는 경우, 오브젝트를 삭제하기 전에 [`kubectl 스케일 ` ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale)을 사용하십시오.</td>
+<td>`kubectl delete` 명령은 오브젝트가 삭제되기 전에 팟(Pod)과 같은 워크로드 API 오브젝트를 더 이상 축소하지 않습니다. 오브젝트를 축소해야 하는 경우, 오브젝트를 삭제하기 전에 [`kubectl 스케일 ` ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale)을 사용하십시오.</td>
 </tr>
 <tr>
 <td>`kubectl run`</td>
@@ -199,14 +210,24 @@ Kubernetes는 다음 버전 업데이트 유형을 제공합니다.
 <td>`kubectl stop`</td>
 <td>`kubectl stop` 명령은 더 이상 사용 가능하지 않습니다.</td>
 </tr>
+<tr>
+<td>읽기 전용 API 데이터 볼륨</td>
+<td>이제 `secret`, `configMap`, `downwardAPI` 및 투영 볼륨은 읽기 전용으로 마운트됩니다.
+이전에는 시스템이 자동으로 되돌릴 수 있는 이러한 볼륨에 앱이 데이터를
+기록할 수 있었습니다. 이 마이그레이션 조치는 보안 취약성
+[CVE-2017-1002102](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102)를 수정하는 데 필요합니다.
+앱이 이전의 안전하지 않은 작동에 의존하는 경우에는 이를 적절히 수정하십시오. </td>
+</tr>
 </tbody>
 </table>
+
+<br />
 
 
 ## 버전 1.7
 {: #cs_v17}
 
-<p><img src="images/certified_kubernetes_1x7.png" height="100" width="62.5" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" align="left" alt="이 배지는 IBM Cloud 컨테이너 서비스에 대한 Kubernetes 버전 1.7 인증을 표시합니다."/> {{site.data.keyword.containerlong_notm}}는 CNCF Kubernetes Software Conformance Certification 프로그램에서 버전 1.7에 대해 인증된 Kubernetes 제품입니다.</p>
+<p><img src="images/certified_kubernetes_1x7.png" style="padding-right: 10px;" align="left" alt="이 배지는 IBM Cloud 컨테이너 서비스에 대한 Kubernetes 버전 1.7 인증을 표시합니다."/> {{site.data.keyword.containerlong_notm}}는 CNCF Kubernetes Software Conformance Certification 프로그램에서 버전 1.7에 대해 인증된 Kubernetes 제품입니다.</p>
 
 이전 Kubernetes 버전에서 1.7로 업데이트 중일 때 작성해야 할 변경사항을 검토하십시오.
 
@@ -234,7 +255,7 @@ Kubernetes는 다음 버전 업데이트 유형을 제공합니다.
   ```
   </br>
 
-  <li>`Action required`가 리턴되면 작업자 노드를 모두 업데이트하기 전에 절대 경로를 참조하도록 포드를 변경하십시오. 다른 리소스(예: 배치)에서 포드를 소유하는 경우 해당 리소스 내에서 [_PodSpec_ ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core)을 변경하십시오.
+  <li>`Action required`가 리턴되면 작업자 노드를 모두 업데이트하기 전에 절대 경로를 참조하도록 팟(Pod)을 변경하십시오. 다른 리소스(예: 배치)에서 팟(Pod)을 소유하는 경우 해당 리소스 내에서 [_PodSpec_ ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core)을 변경하십시오.
 </ol>
 </td>
 </tr>
@@ -299,56 +320,65 @@ spec:
   </li></ol>
 </td></tr>
 <tr>
-<td>포드 연관관계 스케줄링</td>
+<td>팟(Pod) 친화성 스케줄링</td>
 <td> `scheduler.alpha.kubernetes.io/affinity` 어노테이션은 더 이상 사용되지 않습니다.
 <ol>
-  <li>`ibm-system` 및 `kube-system`을 제외한 각 네임스페이스에서 포드 선호도 스케줄링을 업데이트할지 여부를 판별하십시오.</br>
+  <li>`ibm-system` 및 `kube-system`을 제외한 각 네임스페이스에서 팟(Pod) 친화성 스케줄링을 업데이트할지 여부를 판별하십시오.</br>
   ```
   kubectl get pods -n <namespace> -o yaml | grep "scheduler.alpha.kubernetes.io/affinity" && echo "Action required"
   ```
   </br></li>
-  <li>`"Action required"`가 리턴되는 경우 `scheduler.alpha.kubernetes.io/affinity` 어노테이션 대신 [_PodSpec_ ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _선호도_ 필드를 사용하십시오.</li>
+  <li>`"Action required"`가 리턴되는 경우 `scheduler.alpha.kubernetes.io/affinity` 어노테이션 대신 [_PodSpec_ ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/api-reference/v1.7/#podspec-v1-core) _친화성_ 필드를 사용하십시오.</li>
 </ol>
 </td></tr>
 <tr>
 <td>`default` `ServiceAccount`에 대한 RBAC</td>
-<td><p>`default` 네임스페이스에서 `default` `ServiceAccount`에 대한 `ClusterRoleBinding` 관리자가 향상된 클러스터 보안을 위해 제거되었습니다. `default` 네임스페이스에서 실행되는 애플리케이션에는 더 이상 Kubernetes API에 대한 클러스터 관리자 권한이 없으며 RBAC DENY 권한 오류가 발생할 수 있습니다. 애플리케이션이 권한에 의존하는 경우 앱에 대한 [RBAC 권한 리소스를 작성](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview)하십시오.</p>
-  <p>앱 RBAC 정책을 업데이트할 때 이전 `default`로 임시로 되돌리려고 할 수 있습니다. `kubectl apply -f FILENAME` 명령을 사용하여 다음 파일을 복사, 저장 및 적용하십시오. <strong>참고</strong>: 장기적인 솔루션이 아닌 모든 애플리케이션 리소스를 업데이트할 시간을 자신에게 부여하도록 되돌리십시오. </p>
+<td><p>`default` 네임스페이스의 `default` `ServiceAccount`에 대한 관리자 `ClusterRoleBinding`이 클러스터 보안 개선을 위해 제거되었습니다. `default` 네임스페이스에서 실행되는 애플리케이션에는 더 이상 Kubernetes API에 대한 클러스터 관리자 권한이 없으며 `RBAC DENY` 권한 오류가 발생할 수 있습니다. 앱 및 해당 `.yaml` 파일을 확인하여 앱이 `default` 네임스페이스에서 실행되는지, `default ServiceAccount`를 사용하는지, Kubernetes API에 액세스하는지 확인하십시오. </p>
+<p>애플리케이션이 이러한 권한에 의존하는 경우에는 앱에 대한 [RBAC 권한 리소스를 작성 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview)하십시오. </p>
+  <p>앱 RBAC 정책을 업데이트할 때 이전 `default`로 임시로 되돌리려고 할 수 있습니다. `kubectl apply -f FILENAME` 명령을 사용하여 다음 파일을 복사, 저장 및 적용하십시오. <strong>참고</strong>: 장기적인 솔루션이 아닌 모든 애플리케이션 리소스를 업데이트할 시간을 자신에게 부여하도록 되돌리십시오.</p>
 
-  <p><pre class="codeblock">
-  <code>
+<p><pre class="codeblock">
+<code>
   kind: ClusterRoleBinding
-  apiVersion: rbac.authorization.k8s.io/v1
+apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
    name: admin-binding-nonResourceURLSs-default
   subjects:
-    - kind: ServiceAccount
-      name: default
-      namespace: default
-  roleRef:
-   kind: ClusterRole
-   name: admin-role-nonResourceURLSs
-   apiGroup: rbac.authorization.k8s.io
-  ---
-  kind: ClusterRoleBinding
-  apiVersion: rbac.authorization.k8s.io/v1
-  metadata:
-   name: admin-binding-resourceURLSs-default
-  subjects:
-    - kind: ServiceAccount
+  - kind: ServiceAccount
+    name: default
+    namespace: default
+roleRef:
+ kind: ClusterRole
+ name: admin-role-nonResourceURLSs
+ apiGroup: rbac.authorization.k8s.io
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+ name: admin-binding-resourceURLSs-default
+subjects:
+  - kind: ServiceAccount
       name: default
       namespace: default
   roleRef:
    kind: ClusterRole
    name: admin-role-resourceURLSs
    apiGroup: rbac.authorization.k8s.io
-  </code>
-  </pre></p>
-  </td>
+</code>
+</pre></p>
+</td>
 </tr>
 <tr>
-<td>StatefulSet 포드 DNS</td>
-<td>StatefulSet 포드는 마스터를 업데이트한 후 해당 Kubernetes DNS 항목을 잃습니다. DNS 항목을 복원하려면 StatefulSet 포드를 삭제하십시오. Kubernetes는 포드를 다시 작성하고 자동으로 DNS 항목을 복원합니다. 자세한 정보는 [Kubernetes 문제 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/issues/48327)를 참조하십시오.</td>
+<td>읽기 전용 API 데이터 볼륨</td>
+<td>이제 `secret`, `configMap`, `downwardAPI` 및 투영 볼륨은 읽기 전용으로 마운트됩니다.
+이전에는 시스템이 자동으로 되돌릴 수 있는 이러한 볼륨에 앱이 데이터를
+기록할 수 있었습니다. 이 마이그레이션 조치는 보안 취약성
+[CVE-2017-1002102](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102)를 수정하는 데 필요합니다.
+앱이 이전의 안전하지 않은 작동에 의존하는 경우에는 이를 적절히 수정하십시오. </td>
+</tr>
+<tr>
+<td>StatefulSet 팟(Pod) DNS</td>
+<td>StatefulSet 팟(Pod)은 마스터를 업데이트한 후 해당 Kubernetes DNS 항목을 잃습니다. DNS 항목을 복원하려면 StatefulSet 팟(Pod)을 삭제하십시오. Kubernetes는 팟(Pod)을 다시 작성하고 자동으로 DNS 항목을 복원합니다. 자세한 정보는 [Kubernetes 문제 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/issues/48327)를 참조하십시오.</td>
 </tr>
 <tr>
 <td>결함 허용</td>
@@ -380,12 +410,16 @@ metadata:
 </tbody>
 </table>
 
+<br />
+
+
 ## 아카이브
 {: #k8s_version_archive}
 
-### 버전 1.5(더 이상 사용되지 않음)
+### 버전 1.5(지원되지 않음)
 {: #cs_v1-5}
 
-2018년 3월 5일부로 [Kubernetes 버전 1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md)가 실행되는 {{site.data.keyword.containershort_notm}} 클러스터가 더 이상 사용되지 않습니다. 2018년 4월 4일 이후에 버전 1.5 클러스터는 다음 최신 버전([Kubernetes 1.7](#cs_v17))으로 업데이트되지 않는 한 보안 업데이트 또는 지원을 받을 수 없습니다. 
+2018년 4월 4일부터, [Kubernetes 버전 1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md)를 실행하는 {{site.data.keyword.containershort_notm}} 클러스터는 지원되지 않습니다. 버전 1.5 클러스터는 그 다음 최신 버전([Kubernetes 1.7](#cs_v17))으로 업데이트되지 않는 한 보안 업데이트 또는 지원을 받을 수 없습니다. 
 
-각 Kubernetes 버전 업데이트의 [잠재적인 영향을 검토](cs_versions.html#cs_versions)한 후 즉시 [클러스터를 업데이트](cs_cluster_update.html#update)하십시오. 버전 1.5에서 1.7 또는 1.8에서 1.9와 같이 하나의 버전에서 그 다음 최신 버전으로 업데이트해야 합니다. 
+각 Kubernetes 버전 업데이트의 [잠재적인 영향을 검토](cs_versions.html#cs_versions)한 후 즉시 [클러스터를 업데이트](cs_cluster_update.html#update)하십시오. 버전 1.5에서 1.7 또는 1.8에서 1.9와 같이 하나의 버전에서 그 다음 최신 버전으로 업데이트해야 합니다.
+

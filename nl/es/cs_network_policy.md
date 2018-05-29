@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-27"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -49,7 +49,6 @@ Las políticas predeterminadas no se aplican directamente a los pods; se aplican
 
 
  <table summary="La primera fila de la tabla abarca ambas columnas. El resto de las filas se deben leer de izquierda a derecha; la ubicación del servidor está en la columna uno y las direcciones IP correspondientes en la columna dos. ">
- <caption>Políticas predeterminadas para cada clúster</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Políticas predeterminadas para cada clúster</th>
   </thead>
@@ -114,7 +113,7 @@ Para añadir políticas de red:
             -   Linux:
 
               ```
-              mv /<path_to_file>/calicoctl /usr/local/bin/calicoctl
+              mv filepath/calicoctl /usr/local/bin/calicoctl
               ```
               {: pre}
 
@@ -122,7 +121,7 @@ Para añadir políticas de red:
 X:
 
               ```
-              mv /<path_to_file>/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
+              mv filepath/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
               ```
               {: pre}
 
@@ -175,7 +174,7 @@ X:
         ```
         {: codeblock}
 
-        1.  Recupere `<ETCD_URL>`. Si este mandato falla con un error `calico-config not found`, consulte este [tema de resolución de problemas](cs_troubleshoot.html#cs_calico_fails).
+        1.  Recupere `<ETCD_URL>`. Si este mandato falla con un error `calico-config not found`, consulte este [tema de resolución de problemas](cs_troubleshoot_network.html#cs_calico_fails).
 
           -   Linux y OS X:
 
@@ -187,14 +186,14 @@ X:
           -   Ejemplo de salida:
 
               ```
-              https://169.1.1.1:30001
+              https://169.xx.xxx.xxx:30001
               ```
               {: screen}
 
           -   Windows:
             <ol>
             <li>Obtener los valores de configuración de calico del mapa de configuración. </br><pre class="codeblock"><code>kubectl get cm -n kube-system calico-config -o yaml</code></pre></br>
-            <li>En la sección `data`, localice el valor etcd_endpoints. Ejemplo: <code>https://169.1.1.1:30001</code>
+            <li>En la sección `data`, localice el valor etcd_endpoints. Ejemplo: <code>https://169.xx.xxx.xxx:30001</code>
             </ol>
 
         2.  Recupere `<CERTS_DIR>`, el directorio en el que se han descargado los certificados de Kubernetes.
@@ -223,7 +222,7 @@ X:
                 Ejemplo de salida:
 
               ```
-              C:/Users/<user>/.bluemix/plugins/container-service/<cluster_name>-admin/kube-config-prod-<location>-<cluster_name>.yml
+              C:/Users/<user>/.bluemix/plugins/container-service/mycluster-admin/kube-config-prod-dal10-mycluster.yml
               ```
               {: screen}
 
@@ -254,7 +253,7 @@ X:
             -   Windows:
 
               ```
-              calicoctl get nodes --config=<path_to_>/calicoctl.cfg
+              calicoctl get nodes --config=filepath/calicoctl.cfg
               ```
               {: pre}
 
@@ -306,14 +305,14 @@ X:
         -   Linux y OS X:
 
           ```
-          calicoctl apply -f <policy_file_name.yaml>
+          calicoctl apply -f policy.yaml
           ```
           {: pre}
 
         -   Windows:
 
           ```
-          calicoctl apply -f <path_to_>/<policy_file_name.yaml> --config=<path_to_>/calicoctl.cfg
+          calicoctl apply -f filepath/policy.yaml --config=filepath/calicoctl.cfg
           ```
           {: pre}
 
@@ -375,3 +374,4 @@ Las políticas de red `preDNAT` de Calico generan reglas iptables basadas en un 
   calicoctl apply -f deny-kube-node-port-services.yaml
   ```
   {: pre}
+

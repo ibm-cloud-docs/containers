@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-14"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -25,7 +25,6 @@ lastupdated: "2018-03-14"
 
 ## 应用程序服务
 <table summary="可访问性摘要">
-<caption>表. 应用程序服务的集成选项</caption>
 <thead>
 <tr>
 <th>服务</th>
@@ -46,7 +45,6 @@ lastupdated: "2018-03-14"
 
 ## DevOps 服务
 <table summary="可访问性摘要">
-<caption>表. 用于管理 DevOps 的集成选项</caption>
 <thead>
 <tr>
 <th>服务</th>
@@ -79,7 +77,6 @@ lastupdated: "2018-03-14"
 
 ## 日志记录和监视服务
 <table summary="可访问性摘要">
-<caption>表. 用于管理日志和度量值的集成选项</caption>
 <thead>
 <tr>
 <th>服务</th>
@@ -136,7 +133,6 @@ lastupdated: "2018-03-14"
 
 ## 安全服务
 <table summary="可访问性摘要">
-<caption>表. 用于管理安全性的集成选项</caption>
 <thead>
 <tr>
 <th>服务</th>
@@ -157,6 +153,10 @@ lastupdated: "2018-03-14"
 <td>可以使用 <a href="../services/certificate-manager/index.html" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 来存储和管理应用程序的 SSL 证书。有关更多信息，请参阅 <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containershort_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</td>
 </tr>
 <tr>
+  <td>{{site.data.keyword.registrylong}}</td>
+  <td>设置自己的安全 Docker 映像存储库，在其中可以安全地存储映像并在集群用户之间共享这些映像。有关更多信息，请参阅 <a href="/docs/services/Registry/index.html" target="_blank">{{site.data.keyword.registrylong}} 文档 <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</td>
+</tr>
+<tr>
 <td>NeuVector</td>
 <td>使用 <a href="https://neuvector.com/" target="_blank">NeuVector <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 可通过云本机防火墙来保护容器。有关更多信息，请参阅 <a href="https://www.ibm.com/us-en/marketplace/neuvector-container-security" target="_blank">NeuVector Container Security <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</td>
 </tr>
@@ -166,6 +166,35 @@ lastupdated: "2018-03-14"
 </tr>
 </tbody>
 </table>
+
+<br />
+
+
+
+## 存储服务
+<table summary="可访问性摘要">
+<thead>
+<tr>
+<th>服务</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>{{site.data.keyword.cos_full}}</td>
+  <td>使用 {{site.data.keyword.cos_short}} 存储的数据经过加密，分散在多个地理位置，并使用 REST API 通过 HTTP 进行访问。您可以使用 [ibm-backup-restore 映像](/docs/services/RegistryImages/ibm-backup-restore/index.html)来配置服务，以便为集群中的数据生成一次性备份或安排的备份。有关该服务的常规信息，请参阅 <a href="/docs/services/cloud-object-storage/about-cos.html" target="_blank">{{site.data.keyword.cos_short}} 文档 <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</td>
+</tr>
+  <tr>
+    <td>{{site.data.keyword.cloudantfull}}</td>
+    <td>{{site.data.keyword.cloudant_short_notm}} 是面向文档的数据库即服务 (DBaaS)，用于将数据存储为 JSON 格式的文档。该服务是针对可扩展性、高可用性和耐久性而构建的。有关更多信息，请参阅 <a href="/docs/services/Cloudant/getting-started.html" target="_blank">{{site.data.keyword.cloudant_short_notm}} 文档 <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</td>
+  </tr>
+  <tr>
+    <td>{{site.data.keyword.composeForMongoDB_full}}</td>
+    <td>{{site.data.keyword.composeForMongoDB}} 交付高可用性和冗余、自动化和随需应变的不中断备份、监视工具、与警报系统集成、性能分析视图等内容。有关更多信息，请参阅 <a href="/docs/services/ComposeForMongoDB/index.html" target="_blank">{{site.data.keyword.composeForMongoDB}} 文档 <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。</td>
+  </tr>
+</tbody>
+</table>
+
 
 <br />
 
@@ -227,7 +256,7 @@ lastupdated: "2018-03-14"
 5.  将服务添加到集群。
 
     ```
-    bx cs cluster-service-bind <cluster_name_or_id> <namespace> <service_instance_name>
+    bx cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
     {: pre}
 
@@ -392,7 +421,7 @@ Kubernetes 私钥是一种存储保密信息（如用户名、密码或密钥）
 5.  创建 pod 并安装私钥卷。
 
     ```
-    kubectl apply -f <yaml_path>
+    kubectl apply -f secret-test.yaml
     ```
     {: pre}
 
@@ -452,14 +481,50 @@ Kubernetes 私钥是一种存储保密信息（如用户名、密码或密钥）
 
 1. 安装 <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a>。
 
-2. 初始化 Helm 并安装 `tiller`。
+2. **重要信息**：要维护集群安全性，请在 `kube-system` 名称空间中为 Tiller 创建服务帐户，为 `tiller-deploy` pod 创建 Kubernetes RBAC 集群角色绑定。
+
+    1. 在首选编辑器中，创建以下文件并将其另存为 `rbac-config.yaml`。
+      **注**：
+        * 缺省情况下，`cluster-admin` 集群角色会在 Kubernetes 集群中创建，因此您无需显式对其进行定义。
+        * 如果使用的是 V1.7.x 集群，请将 `apiVersion` 更改为 `rbac.authorization.k8s.io/v1beta1`。
+
+      ```
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: tiller
+        namespace: kube-system
+      ---
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: tiller
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-admin
+      subjects:
+        - kind: ServiceAccount
+          name: tiller
+          namespace: kube-system
+      ```
+      {: codeblock}
+
+    2. 创建服务帐户和集群角色绑定。
+
+        ```
+        kubectl create -f rbac-config.yaml
+        ```
+        {: pre}
+
+3. 使用创建的服务帐户来初始化 Helm 并安装 `tiller`。
 
     ```
-        helm init
-        ```
+    helm init --service-account tiller
+    ```
     {: pre}
 
-3. 验证 `tiller-deploy` pod 在集群中的 **Status** 是否为 `Running`。
+4. 验证 `tiller-deploy` pod 在集群中的 **Status** 是否为 `Running`。
 
     ```
         kubectl get pods -n kube-system -l app=helm
@@ -474,17 +539,26 @@ Kubernetes 私钥是一种存储保密信息（如用户名、密码或密钥）
     ```
     {: screen}
 
-4. 向 Helm 实例添加 {{site.data.keyword.Bluemix_notm}} Helm 存储库。
+5. 向 Helm 实例添加 {{site.data.keyword.Bluemix_notm}} Helm 存储库。
 
     ```
     helm repo add ibm  https://registry.bluemix.net/helm/ibm
     ```
     {: pre}
 
-5. 列出 {{site.data.keyword.Bluemix_notm}} 存储库中当前可用的 Helm 图表。
+6. 列出 {{site.data.keyword.Bluemix_notm}} 存储库中当前可用的 Helm 图表。
 
     ```
     helm search ibm
+    ```
+    {: pre}
+
+7. 要了解有关图表的更多信息，请列出其设置和缺省值。
+
+    例如，要查看 strongSwan IPSec VPN 服务 Helm 图表的设置、文档和缺省值，请运行以下命令：
+
+    ```
+    helm inspect ibm/strongswan
     ```
     {: pre}
 
@@ -575,4 +649,5 @@ Weave Scope 提供了 Kubernetes 集群内资源（包括服务、pod、容器�
 [了解有关 Weave Scope 功能的更多信息 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.weave.works/docs/scope/latest/features/)。
 
 <br />
+
 

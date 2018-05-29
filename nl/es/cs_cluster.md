@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-08"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -55,3 +55,4 @@ Consulte la información más reciente en su nueva ubicación:
     - [Configuración de la supervisión de estado de los nodos trabajadores con recuperación automática](cs_health.html#autorecovery)
 - [Visualización de recursos de un clúster de Kubernetes](cs_integrations.html#weavescope)
 - [Eliminación de clústeres](cs_clusters.html#remove)
+

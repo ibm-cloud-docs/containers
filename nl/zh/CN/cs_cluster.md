@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-08"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -55,3 +55,4 @@ lastupdated: "2018-03-08"
     - [使用自动恢复为工作程序节点配置运行状况监视](cs_health.html#autorecovery)
 - [可视化 Kubernetes 集群资源](cs_integrations.html#weavescope)
 - [除去集群](cs_clusters.html#remove)
+

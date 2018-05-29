@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -39,6 +39,8 @@ o essere accessibili da un piccolo gruppo di utenti (registro privato). {{site.d
 <dd>Ogni contenitore viene creato da un'immagine. Un contenitore è un'applicazione in pacchetto con tutte le sue dipendenze in modo che l'applicazione possa essere spostata tra gli ambienti ed eseguita senza modifiche. A differenza delle macchine virtuali, i contenitori non virtualizzano un dispositivo, il suo sistema operativo e l'hardware sottostante. Nel contenitore sono impacchettati solo il codice dell'applicazione, il runtime, gli strumenti di sistema, le librerie e le impostazioni. I contenitori sono eseguiti come processi isolati su host di calcolo Ubuntu e condividono il sistema operativo host e le sue risorse hardware. Questo approccio rende un contenitore più leggero, portatile ed efficiente di una macchina virtuale.</dd>
 </dl>
 
+
+
 ### Vantaggi chiave dell'utilizzo di contenitori
 {: #container_benefits}
 
@@ -49,20 +51,27 @@ ambienti standardizzati alle distribuzioni di sviluppo e produzione. Il runtime 
 <dt>I contenitori sono piccoli</dt>
 <dd>Puoi sistemare molti contenitori nella stessa quantità di spazio richiesta da una singola macchina virtuale.</dd>
 <dt>I contenitori sono portabili</dt>
-<dd><ul>
+<dd>
+<ul>
   <li>Riutilizza le parti delle immagini per creare i contenitori. </li>
   <li>Sposta velocemente il codice dell'applicazione dall'ambiente in fase di preparazione a quello di produzione.</li>
-  <li>Automatizza i tuoi processi con gli strumenti di fornitura continua.</li> </ul></dd>
-</dl>
+  <li>Automatizza i tuoi processi con gli strumenti di fornitura continua.</li>
+  </ul>
+  </dd>
 
+
+  
+<p>Pronto per approfondire le informazioni su Docker? <a href="https://developer.ibm.com/courses/all/docker-essentials-extend-your-apps-with-containers/" target="_blank">Impara come Docker e {{site.data.keyword.containershort_notm}} funzionano insieme completando questo corso.</a></p>
+
+</dl>
 
 <br />
 
 
-## Principi di base di Kubernetes
+## Cluster Kubernetes
 {: #kubernetes_basics}
 
-Il progetto open source denominato Kubernetes combina l'esecuzione di un'infrastruttura inserita in un contenitore con carichi di lavoro di produzione, contributi open source e strumenti di gestione dei contenitori Docker. L'infrastruttura Kubernetes fornisce una piattaforma applicativa isolata e sicura per la gestione dei contenitori che è portatile, estensibile e con riparazione automatica in caso di failover.
+<img src="images/certified-kubernetes-resized.png" style="padding-right: 10px;" align="left" alt="Questo badge indica la certificazione Kubernetes per il servizio IBM Cloud Container."/>Il progetto open source denominato Kubernetes combina l'esecuzione di un'infrastruttura inserita in un contenitore con carichi di lavoro di produzione, contributi open source e strumenti di gestione dei contenitori Docker. L'infrastruttura Kubernetes fornisce una piattaforma applicativa isolata e sicura per la gestione dei contenitori che è portatile, estensibile e con riparazione automatica in caso di failover.
 {:shortdesc}
 
 Ulteriori informazioni su alcuni concetti Kubernetes di base sono mostrate nel seguente diagramma.
@@ -94,9 +103,14 @@ Definisci le strategie di aggiornamento per la tua applicazione, incluso il nume
 in un pod, in modo che tali contenitori possano essere indirizzati utilizzando lo stesso indirizzo IP privato.</dd>
 
 <dt>Applicazione</dt>
-<dd>Un'applicazione può far riferimento a un'applicazione completa o a un componente di un'applicazione. Potresti distribuire i componenti di un'applicazione in pod o nodi di lavoro separati.
-</br></br>
-Per ulteriori informazioni sulla terminologia Kubernetes, <a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">prova questa esercitazione</a>.</dd>
+<dd>Un'applicazione può far riferimento a un'applicazione completa o a un componente di un'applicazione. Potresti distribuire i componenti di un'applicazione in pod o nodi di lavoro separati.</dd>
+
+
+  
+<p>Pronto per approfondire le informazioni su Kubernetes? </p>
+<ul><li><a href="cs_tutorials.html#cs_cluster_tutorial" target="_blank">Amplia la tua conoscenza della terminologia con l'esercitazione Creazione dei cluster</a>.</li>
+<li><a href="https://developer.ibm.com/courses/all/get-started-kubernetes-ibm-cloud-container-service/" target="_blank">Impara come Kubernetes e {{site.data.keyword.containershort_notm}} funzionano insieme completando questo corso.</a></li></ul>
+
 
 </dl>
 
@@ -106,7 +120,7 @@ Per ulteriori informazioni sulla terminologia Kubernetes, <a href="cs_tutorials.
 ## Architettura del servizio
 {: #architecture}
 
-In un cluster Kubernetes eseguito su {{site.data.keyword.containershort_notm}}, le tue applicazioni inserite in un contenitore sono ospitate su host di calcolo denominati nodi di lavoro. Per essere più specifici, vengono eseguite nei pod e i pod sono ospitati sui nodi di lavoro. I nodi di lavoro sono gestiti dal master Kubernetes. Il master Kubernetes e i nodi di lavoro comunicano tra loro tramite certificati TLS protetti e una connessione openVPN per orchestrare le configurazioni del tuo cluster.
+In un cluster Kubernetes eseguito su {{site.data.keyword.containershort_notm}}, le tue applicazioni inserite in un contenitore sono ospitate su host di calcolo denominati nodi di lavoro. Per essere più specifici, le applicazioni vengono eseguite nei pod e i pod sono ospitati sui nodi di lavoro. I nodi di lavoro sono gestiti dal master Kubernetes. Il master Kubernetes e i nodi di lavoro comunicano tra loro tramite certificati TLS protetti e una connessione openVPN per orchestrare le configurazioni del tuo cluster.
 {: shortdesc}
 
 Qual è la differenza tra il master Kubernetes e un nodo di lavoro? Grazie di averlo chiesto.
@@ -115,11 +129,15 @@ Qual è la differenza tra il master Kubernetes e un nodo di lavoro? Grazie di av
   <dt>Master Kubernetes</dt>
     <dd>Il master Kubernetes ha il compito di gestire tutte le risorse di calcolo, rete e archiviazione nel cluster. Il master Kubernetes garantisce che le applicazioni inserite in un contenitore e i servizi siano distribuiti equamente nei nodi di lavoro nel cluster. A seconda del modo in cui configuri l'applicazione e i servizi, il master determina il nodo di lavoro che dispone di risorse sufficienti per soddisfare i requisiti dell'applicazione.</dd>
   <dt>Nodo di lavoro</dt>
-    <dd>Ogni nodo di lavoro è una macchina fisica (bare metal) o una macchina virtuale che viene eseguita su hardware fisico, gestito in un ambiente cloud. Quando esegui il provisioning di un nodo di lavoro, determini le risorse disponibili per i contenitori ospitati su quel nodo di lavoro. Per impostazione predefinita, i tuoi nodi di lavoro sono configurati con un motore Docker gestito da {{site.data.keyword.IBM_notm}}, risorse di calcolo separate, collegamento di rete e un servizio di volume. Le funzioni di sicurezza integrate forniscono isolamento, funzionalità di gestione delle risorse e conformità di sicurezza dei nodi di lavoro.</dd>
+    <dd>Ogni nodo di lavoro è una macchina fisica (bare metal) o una macchina virtuale che viene eseguita su hardware fisico nell'ambiente cloud. Quando esegui il provisioning di un nodo di lavoro, determini le risorse disponibili per i contenitori ospitati su quel nodo di lavoro. Per impostazione predefinita, i tuoi nodi di lavoro sono configurati con un motore Docker gestito da {{site.data.keyword.IBM_notm}}, risorse di calcolo separate, collegamento di rete e un servizio di volume. Le funzioni di sicurezza integrate forniscono isolamento, funzionalità di gestione delle risorse e conformità di sicurezza dei nodi di lavoro.</dd>
 </dl>
 
 ![{{site.data.keyword.containerlong_notm}} - Architettura Kubernetes](images/cs_org_ov.png)
 Figura. Architettura {{site.data.keyword.containershort_notm}}
 
+Vuoi vedere in che modo {{site.data.keyword.containerlong_notm}} può essere utilizzato con altri prodotti e servizi? Controlla alcune delle [integrazioni](cs_integrations.html#integrations).
+
+
 <br />
+
 

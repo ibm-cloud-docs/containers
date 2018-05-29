@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-14"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -25,7 +25,6 @@ lastupdated: "2018-03-14"
 
 ## 애플리케이션 서비스
 <table summary="접근성 요약">
-<caption>표. 애플리케이션 서비스에 대한 통합 옵션</caption>
 <thead>
 <tr>
 <th>서비스</th>
@@ -47,7 +46,6 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 
 ## DevOps 서비스
 <table summary="접근성 요약">
-<caption>표. DevOps 관리를 위한 통합 옵션</caption>
 <thead>
 <tr>
 <th>서비스</th>
@@ -65,7 +63,7 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 </tr>
 <tr>
 <td>{{site.data.keyword.contdelivery_full}}</td>
-<td>도구 체인을 사용하여 Kubernetes 클러스터에 대한 컨테이너 배치 및 앱 빌드를 자동화합니다. 설정 정보는 <a href="https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines/" target="_blank">DevOps 파이프라인을 사용하여 {{site.data.keyword.containerlong_notm}}에 Kubernetes 포드 배치 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a> 블로그를 참조하십시오. </td>
+<td>도구 체인을 사용하여 Kubernetes 클러스터에 대한 컨테이너 배치 및 앱 빌드를 자동화합니다. 설정 정보는 <a href="https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines/" target="_blank">DevOps 파이프라인을 사용하여 {{site.data.keyword.containerlong_notm}}에 Kubernetes 팟(Pod) 배치 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a> 블로그를 참조하십시오. </td>
 </tr>
 <tr>
 <td>Istio</td>
@@ -80,7 +78,6 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 
 ## 서비스 로깅 및 모니터링
 <table summary="접근성 요약">
-<caption>표. 로그 및 메트릭 관리를 위한 통합 옵션</caption>
 <thead>
 <tr>
 <th>서비스</th>
@@ -127,7 +124,7 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 </tr>
 <tr>
 <td>Weave Scope</td>
-<td>Weave Scope는 서비스, 포드, 컨테이너, 프로세스, 노드 등을 포함하여 Kubernetes 클러스터 내의 리소스에 대한 시각적 다이어그램을 제공합니다. Weave Scope는 CPU 및 메모리에 대한 대화식 메트릭을 제공하며 컨테이너로 tail 및 exec를 실행하기 위한 도구도 제공합니다.<p>자세한 정보는 [Weave Scope 및 {{site.data.keyword.containershort_notm}}를 사용하여 Kubernetes 클러스터 리소스 시각화](cs_integrations.html#weavescope)를 참조하십시오.</p></li></ol>
+<td>Weave Scope는 서비스, 팟(Pod), 컨테이너, 프로세스, 노드 등을 포함하여 Kubernetes 클러스터 내의 리소스에 대한 시각적 다이어그램을 제공합니다. Weave Scope는 CPU 및 메모리에 대한 대화식 메트릭을 제공하며 컨테이너로 tail 및 exec를 실행하기 위한 도구도 제공합니다.<p>자세한 정보는 [Weave Scope 및 {{site.data.keyword.containershort_notm}}를 사용하여 Kubernetes 클러스터 리소스 시각화](cs_integrations.html#weavescope)를 참조하십시오.</p></li></ol>
 </td>
 </tr>
 </tbody>
@@ -139,7 +136,6 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 
 ## 보안 서비스
 <table summary="접근성 요약">
-<caption>표. 보안 관리를 위한 통합 옵션</caption>
 <thead>
 <tr>
 <th>서비스</th>
@@ -160,6 +156,10 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 <td><a href="../services/certificate-manager/index.html" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 사용하여 앱에 대한 SSL 인증서를 저장하고 관리할 수 있습니다. 자세한 정보는 <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">{{site.data.keyword.cloudcerts_long_notm}}를 {{site.data.keyword.containershort_notm}}와 함께 사용하여 사용자 정의 도메인 TLS 인증서 배치 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오. </td>
 </tr>
 <tr>
+  <td>{{site.data.keyword.registrylong}}</td>
+  <td>클러스터 사용자 간에 이미지를 안전하게 저장하고 공유할 수 있는 보안된 Docker 이미지 저장소를 설정하십시오. 자세한 정보는 <a href="/docs/services/Registry/index.html" target="_blank">{{site.data.keyword.registrylong}} 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오. </td>
+</tr>
+<tr>
 <td>NeuVector</td>
 <td><a href="https://neuvector.com/" target="_blank">NeuVector <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 사용하여 클라우드 고유 방화벽으로 컨테이너를 보호합니다. 자세한 정보는 <a href="https://www.ibm.com/us-en/marketplace/neuvector-container-security" target="_blank">NeuVector Container Security <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오. </td>
 </tr>
@@ -169,6 +169,35 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 </tr>
 </tbody>
 </table>
+
+<br />
+
+
+
+## 스토리지 서비스
+<table summary="접근성 요약">
+<thead>
+<tr>
+<th>서비스</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>{{site.data.keyword.cos_full}}</td>
+  <td>{{site.data.keyword.cos_short}}에 저장된 데이터는 암호화되어 여러 지리적 위치에 분산되며, REST API를 사용하여 HTTP를 통해 액세스할 수 있습니다. [ibm-backup-restore 이미지](/docs/services/RegistryImages/ibm-backup-restore/index.html) 를 사용하여 클러스터 내의 데이터에 대해 일회성 또는 스케줄된 백업을 작성하도록 서비스를 구성할 수 있습니다. 이 서비스에 대한 일반 정보는 <a href="/docs/services/cloud-object-storage/about-cos.html" target="_blank">{{site.data.keyword.cos_short}} 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오. </td>
+</tr>
+  <tr>
+    <td>{{site.data.keyword.cloudantfull}}</td>
+    <td>{{site.data.keyword.cloudant_short_notm}}는  데이터를 JSON 형식의 문서로 저장하는 문서 지향 DBaaS(DataBase as a Service)입니다. 이 서비스는 확장성, 고가용성 및 내구성을 제공하기 위해 제작되었습니다. 자세한 정보는 <a href="/docs/services/Cloudant/getting-started.html" target="_blank">{{site.data.keyword.cloudant_short_notm}} 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오. </td>
+  </tr>
+  <tr>
+    <td>{{site.data.keyword.composeForMongoDB_full}}</td>
+    <td>{{site.data.keyword.composeForMongoDB}}는 고가용성 및 중복성, On-Demand 방식의 자동화된 비중지 백업, 모니터링 도구, 경보 시스템으로의 통합, 성능 분석 보기 등을 제공합니다. 자세한 정보는 <a href="/docs/services/ComposeForMongoDB/index.html" target="_blank">{{site.data.keyword.composeForMongoDB}} 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오. </td>
+  </tr>
+</tbody>
+</table>
+
 
 <br />
 
@@ -185,7 +214,7 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 1. 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
 2. [{{site.data.keyword.Bluemix_notm}} 서비스의 인스턴스를 요청](/docs/apps/reqnsi.html#req_instance)하십시오.
    **참고:** 워싱턴 DC 위치에 서비스 인스턴스를 작성하려면 CLI를 사용해야 합니다.
-3. Cloud Foundry 서비스는 클러스터와 바인드하는 데 지원되지만 기타 서비스는 지원되지 않습니다. 서비스 인스턴스를 작성하고 서비스가 **Cloud Foundry 서비스** 및 **서비스**로 대시보드에 그룹화된 후 다른 서비스 유형을 볼 수 있습니다. **서비스** 섹션의 서비스를 클러스터와 바인드하려면 [먼저 Cloud Foundry 별명을 작성](#adding_resource_cluster)하십시오.
+3. Cloud Foundry 서비스는 클러스터와 바인딩하는 데 지원되지만 기타 서비스는 지원되지 않습니다. 서비스 인스턴스를 작성하고 서비스가 **Cloud Foundry 서비스** 및 **서비스**로 대시보드에 그룹화된 후 다른 서비스 유형을 볼 수 있습니다. **서비스** 섹션의 서비스를 클러스터와 바인딩하려면 [먼저 Cloud Foundry 별명을 작성](#adding_resource_cluster)하십시오.
 
 **참고:**
 <ul><ul>
@@ -230,7 +259,7 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 5.  서비스를 클러스터에 추가하십시오.
 
     ```
-    bx cs cluster-service-bind <cluster_name_or_id> <namespace> <service_instance_name>
+    bx cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
     {: pre}
 
@@ -253,7 +282,7 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
     {: pre}
 
 
-클러스터에 배치된 포드에서 서비스를 사용하려면 [Kubernetes 시크릿을 시크릿 볼륨으로 포드에 마운트](cs_storage.html#app_volume_mount)하여 클러스터 사용자가 {{site.data.keyword.Bluemix_notm}} 서비스의 서비스 자격 증명에 액세스할 수 있어야 합니다.
+클러스터에 배치된 팟(Pod)에서 서비스를 사용하려면 [Kubernetes 시크릿을 시크릿 볼륨으로 팟(Pod)에 마운트](cs_storage.html#app_volume_mount)하여 클러스터 사용자가 {{site.data.keyword.Bluemix_notm}} 서비스의 서비스 자격 증명에 액세스할 수 있어야 합니다.
 
 
 
@@ -264,14 +293,14 @@ IBM Blockchain Platform에서 개발 <img src="../icons/launch-glyph.svg" alt="�
 ## 기타 {{site.data.keyword.Bluemix_notm}} 서비스 리소스에 대한 Cloud Foundry 별명 작성
 {: #adding_resource_cluster}
 
-Cloud Foundry 서비스는 클러스터와의 바인딩을 위해 지원됩니다. Cloud Foundry 서비스가 아닌 {{site.data.keyword.Bluemix_notm}} 서비스를 클러스터에 바인드하려면 서비스 인스턴스에 대한 Cloud Foundry 별명을 작성하십시오.
+Cloud Foundry 서비스는 클러스터와의 바인딩을 위해 지원됩니다. Cloud Foundry 서비스가 아닌 {{site.data.keyword.Bluemix_notm}} 서비스를 클러스터에 바인딩하려면 서비스 인스턴스에 대한 Cloud Foundry 별명을 작성하십시오.
 {:shortdesc}
 
 시작하기 전에 [{{site.data.keyword.Bluemix_notm}} 서비스의 인스턴스를 요청](/docs/apps/reqnsi.html#req_instance)하십시오.
 
 서비스 인스턴스에 대한 Cloud Foundry 별명을 작성하려면 다음을 수행하십시오.
 
-1. 서비스 인스턴스가 작성된 조직 및 영역을 대상으로 지정하십시오. 
+1. 서비스 인스턴스가 작성된 조직 및 영역을 대상으로 지정하십시오.
 
     ```
     bx target -o <org_name> -s <space_name>
@@ -297,7 +326,7 @@ Cloud Foundry 서비스는 클러스터와의 바인딩을 위해 지원됩니�
     ```
     {: pre}
 
-5. [Cloud Foundry 별명을 클러스터에 바인드](#adding_cluster)하십시오.
+5. [Cloud Foundry 별명을 클러스터에 바인딩](#adding_cluster)하십시오.
 
 
 
@@ -310,9 +339,9 @@ Cloud Foundry 서비스는 클러스터와의 바인딩을 위해 지원됩니�
 암호화된 Kubernetes 시크릿을 사용하여 {{site.data.keyword.Bluemix_notm}} 서비스 세부사항과 신임 정보를 저장하고 서비스와 클러스터 간의 보안 통신을 허용합니다.
 {:shortdesc}
 
-Kubernetes 시크릿은 사용자 이름, 비밀번호 또는 키와 같은 기밀 정보를 저장하는 안전한 방법입니다. 환경 변수를 사용하거나 Dockerfile에서 직접 기밀 정보를 노출하는 대신 클러스터 사용자는 시크릿을 포드에 마운트할 수 있습니다. 그런 다음, 포드의 컨테이너를 실행하여 이 시크릿에 액세스할 수 있습니다. 
+Kubernetes 시크릿은 사용자 이름, 비밀번호 또는 키와 같은 기밀 정보를 저장하는 안전한 방법입니다. 환경 변수를 사용하거나 Dockerfile에서 직접 기밀 정보를 노출하는 대신 클러스터 사용자는 시크릿을 팟(Pod)에 마운트할 수 있습니다. 그런 다음, 팟(Pod)의 컨테이너를 실행하여 이 시크릿에 액세스할 수 있습니다.
 
-시크릿 볼륨을 포드에 마운트하면, 이름이 binding인 파일이 {{site.data.keyword.Bluemix_notm}} 서비스에 액세스하는 데 필요한 모든 정보와 신임 정보가 포함된 볼륨 마운트 디렉토리에 저장됩니다.
+시크릿 볼륨을 팟(Pod)에 마운트하면, 이름이 binding인 파일이 {{site.data.keyword.Bluemix_notm}} 서비스에 액세스하는 데 필요한 모든 정보와 신임 정보가 포함된 볼륨 마운트 디렉토리에 저장됩니다.
 
 시작하기 전에 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오. 앱에서 사용하려는 {{site.data.keyword.Bluemix_notm}} 서비스를 클러스터 관리자가 [클러스터에 추가](cs_integrations.html#adding_cluster)하게 하십시오.
 
@@ -336,7 +365,7 @@ Kubernetes 시크릿은 사용자 이름, 비밀번호 또는 키와 같은 기�
 
 3.  선호하는 편집기를 여십시오.
 
-4.  시크릿 볼륨을 통해 서비스 세부사항에 액세스할 수 있는 포드를 구성하기 위한 YAML 파일을 작성하십시오. 둘 이상의 서비스를 바인드한 경우 각 시크릿이 올바른 서비스와 연관되었는지 확인하십시오.
+4.  시크릿 볼륨을 통해 서비스 세부사항에 액세스할 수 있는 팟(Pod)을 구성하기 위한 YAML 파일을 작성하십시오. 둘 이상의 서비스를 바인딩한 경우 각 시크릿이 올바른 서비스와 연관되었는지 확인하십시오.
 
     ```
     apiVersion: apps/v1beta1
@@ -392,14 +421,14 @@ Kubernetes 시크릿은 사용자 이름, 비밀번호 또는 키와 같은 기�
     <td>이전에 기록한 시크릿의 이름을 입력하십시오.</td>
     </tr></tbody></table>
 
-5.  포드를 작성하고 시크릿 볼륨을 마운트하십시오.
+5.  팟(Pod)을 작성하고 시크릿 볼륨을 마운트하십시오.
 
     ```
-    kubectl apply -f <yaml_path>
+    kubectl apply -f secret-test.yaml
     ```
     {: pre}
 
-6.  포드가 작성되었는지 확인하십시오.
+6.  팟(Pod)이 작성되었는지 확인하십시오.
 
     ```
     kubectl get pods --namespace=<my_namespace>
@@ -414,8 +443,8 @@ Kubernetes 시크릿은 사용자 이름, 비밀번호 또는 키와 같은 기�
     ```
     {: screen}
 
-7.  포드의 **이름**을 기록해 두십시오.
-8.  포드에 대한 세부사항을 가져오고 시크릿 이름을 찾으십시오.
+7.  팟(Pod)의 **이름**을 기록해 두십시오.
+8.  팟(Pod)에 대한 세부사항을 가져오고 시크릿 이름을 찾으십시오.
 
     ```
     kubectl describe pod <pod_name>
@@ -455,14 +484,50 @@ Kubernetes 시크릿은 사용자 이름, 비밀번호 또는 키와 같은 기�
 
 1. <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 설치하십시오.
 
-2. Helm을 초기화하고 `tiller`를 설치하십시오.
+2. **중요**: 클러스터 보안을 유지하려면 `kube-system` 네임스페이스에 tiller에 대한 서비스 계정을 작성하고 `tiller-deploy` 팟(Pod)에 대한 Kubernetes RBAC 클러스터 역할 바인딩을 작성하십시오. 
+
+    1. 선호하는 편집기에서 다음 파일을 작성하고 `rbac-config.yaml`로 저장하십시오.
+      **참고**:
+        * `cluster-admin` 클러스터 역할은 Kubernetes 클러스터에서 기본적으로 작성되므로 이를 명시적으로 정의할 필요는 없습니다. 
+        * 버전 1.7.x 클러스터를 사용하고 있는 경우에는 `apiVersion`을 `rbac.authorization.k8s.io/v1beta1`로 변경하십시오. 
+
+      ```
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: tiller
+        namespace: kube-system
+      ---
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: tiller
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-admin
+      subjects:
+        - kind: ServiceAccount
+          name: tiller
+          namespace: kube-system
+      ```
+      {: codeblock}
+
+    2. 서비스 계정 및 클러스터 역할 바인딩을 작성하십시오. 
+
+        ```
+        kubectl create -f rbac-config.yaml
+        ```
+        {: pre}
+
+3. Helm을 초기화하고 작성한 서비스 계정을 사용하여 `tiller`를 설치하십시오. 
 
     ```
-        helm init
+    helm init --service-account tiller
     ```
     {: pre}
 
-3. `tiller-deploy` 포드가 클러스터에서 `Running` **상태**인지 확인하십시오.
+4. `tiller-deploy` 팟(Pod)이 클러스터에서 `Running` **상태**인지 확인하십시오.
 
     ```
         kubectl get pods -n kube-system -l app=helm
@@ -477,17 +542,26 @@ Kubernetes 시크릿은 사용자 이름, 비밀번호 또는 키와 같은 기�
     ```
     {: screen}
 
-4. {{site.data.keyword.Bluemix_notm}} Helm 저장소를 Helm 인스턴스에 추가하십시오.
+5. {{site.data.keyword.Bluemix_notm}} Helm 저장소를 Helm 인스턴스에 추가하십시오.
 
     ```
     helm repo add ibm  https://registry.bluemix.net/helm/ibm
     ```
     {: pre}
 
-5. {{site.data.keyword.Bluemix_notm}} 저장소에서 현재 사용 가능한 Helm 차트를 나열하십시오.
+6. {{site.data.keyword.Bluemix_notm}} 저장소에서 현재 사용 가능한 Helm 차트를 나열하십시오.
 
     ```
     helm search ibm
+    ```
+    {: pre}
+
+7. 차트에 대해 자세히 알아보려면 해당 설정 및 기본값을 나열하십시오. 
+
+    예를 들어, strongSwan IPSec VPN 서비스 Helm 차트의 설정, 문서 및 기본값을 보려면 다음과 같이 입력하십시오. 
+
+    ```
+    helm inspect ibm/strongswan
     ```
     {: pre}
 
@@ -498,13 +572,12 @@ Kubernetes 시크릿은 사용자 이름, 비밀번호 또는 키와 같은 기�
 * strongSwan Helm 차트를 사용하려면 [strongSwan IPSec VPN 서비스 Helm 차트와 VPN 연결 설정](cs_vpn.html#vpn-setup)을 참조하십시오.
 * [Helm 차트 카탈로그 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts) GUI에서 {{site.data.keyword.Bluemix_notm}}와 함께 사용할 수 있는 사용 가능한 Helm 차트를 보십시오.
 * <a href="https://docs.helm.sh/helm/" target="_blank">Helm 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>에서 Helm 차트를 설정하고 관리하는 데 사용되는 Helm 명령에 대해 자세히 알아보십시오.
-
-* [Kubernetes Helm 차트를 사용하여 배치 속도를 향상시키는 방법 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/)에 대해 자세히 알아보십시오. 
+* [Kubernetes Helm 차트를 사용하여 배치 속도를 향상시키는 방법 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/)에 대해 자세히 알아보십시오.
 
 ## Kubernetes 클러스터 리소스 시각화
 {: #weavescope}
 
-Weave Scope는 서비스, 포드, 컨테이너, 프로세스 등을 포함하여 Kubernetes 클러스터 내의 리소스에 대한 시각적 다이어그램을 제공합니다. Weave Scope는 CPU 및 메모리 및 도구에 대한 대화식 메트릭을 제공하여 컨테이너로 tail 및 exec를 실행합니다.
+Weave Scope는 서비스, 팟(Pod), 컨테이너, 프로세스 등을 포함하여 Kubernetes 클러스터 내의 리소스에 대한 시각적 다이어그램을 제공합니다. Weave Scope는 CPU 및 메모리 및 도구에 대한 대화식 메트릭을 제공하여 컨테이너로 tail 및 exec를 실행합니다.
 {:shortdesc}
 
 시작하기 전에:
@@ -579,4 +652,5 @@ Weave Scope는 서비스, 포드, 컨테이너, 프로세스 등을 포함하여
 [Weave Scope 기능에 대해 자세히 알아보십시오 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.weave.works/docs/scope/latest/features/).
 
 <br />
+
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -76,7 +76,7 @@ Kubernetes API 服务器更新完成后，可以更新工作程序节点。
 
 键已定义。现在，我该怎样做？
 
-定义规则后，请运行 `worker-upgrade` 命令。如果返回成功的响应，说明工作程序节点在排队等待升级。但是，节点须满足所有规则后，才会执行升级过程。节点排队时，会按一定时间间隔检查规则，确定是否有任何节点可以升级。
+定义规则后，请运行 `bx cs worker-update` 命令。如果返回成功的响应，说明工作程序节点在排队等待更新。但是，节点须满足所有规则后，才会执行更新过程。节点排队时，会定期检查规则，确定是否有任何节点可以更新。
 
 如果选择不定义配置映射会怎样？
 
@@ -96,6 +96,7 @@ Kubernetes API 服务器更新完成后，可以更新工作程序节点。
       name: ibm-cluster-update-configuration
       namespace: kube-system
     data:
+     drain_timeout_seconds: "120"
      zonecheck.json: |
        {
          "MaxUnavailablePercentage": 70,
@@ -108,8 +109,7 @@ Kubernetes API 服务器更新完成后，可以更新工作程序节点。
          "NodeSelectorKey": "failure-domain.beta.kubernetes.io/region",
          "NodeSelectorValue": "us-south"
        }
-    ...
-     defaultcheck.json: |
+    defaultcheck.json: |
        {
          "MaxUnavailablePercentage": 100
        }
@@ -121,12 +121,16 @@ Kubernetes API 服务器更新完成后，可以更新工作程序节点。
     </thead>
     <tbody>
       <tr>
-        <td><code>defaultcheck.json</code></td>
-        <td> 缺省情况下，如果未以有效方式定义 ibm-cluster-update-configuration 映射，那么集群中只能有 20% 的节点同时不可用。如果在未使用全局缺省值的情况下定义了一个或多个有效规则，那么新的缺省值是允许 100% 的工作程序同时不可用。您可以通过创建缺省百分比来控制此比例。</td>
+        <td><code>drain_timeout_seconds</code></td>
+        <td> 可选：工作程序节点更新期间发生的漏出的超时（以秒为单位）。漏出会将节点设置为 `unschedulable`，这将阻止新 pod 部署到该节点。漏出还会删除该节点的 pod。接受的值为 1 到 180 之间的整数。缺省值为 30。</td>
       </tr>
       <tr>
         <td><code>zonecheck.json</code></br><code>regioncheck.json</code></td>
         <td> 要为其设置规则的唯一键的示例。键名可以根据需要设置；信息由键内设置的配置进行解析。对于定义的每个键，只能为 <code>NodeSelectorKey</code> 和 <code>NodeSelectorValue</code> 设置一个值。如果要为多个区域或位置（数据中心）设置规则，请创建新的键条目。</td>
+      </tr>
+      <tr>
+        <td><code>defaultcheck.json</code></td>
+        <td> 缺省情况下，如果未以有效方式定义 <code>ibm-cluster-update-configuration</code> 映射，那么集群中只能有 20% 的节点同时不可用。如果在未使用全局缺省值的情况下定义了一个或多个有效规则，那么新的缺省值是允许 100% 的工作程序同时不可用。您可以通过创建缺省百分比来控制此比例。</td>
       </tr>
       <tr>
         <td><code>MaxUnavailablePercentage</code></td>
@@ -147,10 +151,10 @@ Kubernetes API 服务器更新完成后，可以更新工作程序节点。
 
 3. 通过 GUI 或运行 CLI 命令来更新工作程序节点。
   * 要从 {{site.data.keyword.Bluemix_notm}} 仪表板进行更新，请浏览到集群的 `Worker Nodes` 部分，然后单击 `Update Worker`。
-  * 要获取工作程序节点标识，请运行 `bx cs workers <cluster_name_or_id>`. 如果选择多个工作程序节点，那么会将这些工作程序节点放入队列等待更新评估。如果在评估后认为工作程序节点已经准备就绪，那么将根据配置中设置的规则对其进行更新。
+  * 要获取工作程序节点标识，请运行 `bx cs workers <cluster_name_or_ID>`. 如果选择多个工作程序节点，那么会将这些工作程序节点放入队列等待更新评估。如果在评估后认为工作程序节点已经准备就绪，那么将根据配置中设置的规则对其进行更新。
 
     ```
-    bx cs worker-update <cluster_name_or_id> <worker_node_id1> <worker_node_id2>
+    bx cs worker-update <cluster_name_or_ID> <worker_node1_ID> <worker_node2_ID>
     ```
     {: pre}
 
@@ -161,14 +165,14 @@ Kubernetes API 服务器更新完成后，可以更新工作程序节点。
     {: pre}
 
 5. 确认更新是否已完成：
-  * 在 {{site.data.keyword.Bluemix_notm}}“仪表板”上查看 Kubernetes 版本，或运行 `bx cs workers <cluster_name_or_id>`.
+  * 在 {{site.data.keyword.Bluemix_notm}}“仪表板”上查看 Kubernetes 版本，或运行 `bx cs workers <cluster_name_or_ID>`.
   * 通过运行 `kubectl get nodes`，查看工作程序节点的 Kubernetes 版本。
-  * 在某些情况下，较旧的集群可能会在更新后列出具有 **NotReady** 状态的重复工作程序节点。要除去重复项，请参阅[故障诊断](cs_troubleshoot.html#cs_duplicate_nodes)。
+  * 在某些情况下，较旧的集群可能会在更新后列出具有 **NotReady** 状态的重复工作程序节点。要除去重复项，请参阅[故障诊断](cs_troubleshoot_clusters.html#cs_duplicate_nodes)。
 
 后续步骤：
   - 对其他集群重复更新过程。
   - 通知在集群中工作的开发者将其 `kubectl` CLI 更新到 Kubernetes 主节点的版本。
-  - 如果 Kubernetes 仪表板未显示利用率图形，请[删除 `kube-dashboard` pod](cs_troubleshoot.html#cs_dashboard_graphs)。
+  - 如果 Kubernetes 仪表板未显示利用率图形，请[删除 `kube-dashboard` pod](cs_troubleshoot_health.html#cs_dashboard_graphs)。
 
 
 <br />
@@ -193,10 +197,10 @@ Kubernetes API 服务器更新完成后，可以更新工作程序节点。
         ```
     {: pre}
 
-3. 使用 [bx cs worker-add](cs_cli_reference.html#cs_worker_add) 命令，并指定在先前命令的输出中列出的其中一个机器类型来添加工作程序节点。
+3. 使用 [bx cs worker-add](cs_cli_reference.html#cs_worker_add) 命令来添加工作程序节点。请指定机器类型。
 
     ```
-    bx cs worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_vlan> --public-vlan <public_vlan>
+    bx cs worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
     ```
     {: pre}
 
@@ -215,5 +219,6 @@ Kubernetes API 服务器更新完成后，可以更新工作程序节点。
     {: pre}
 
 6. 重复这些步骤以将其他工作程序节点升级到不同的机器类型。
+
 
 

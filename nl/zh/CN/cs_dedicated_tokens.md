@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-11-02"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -166,3 +166,4 @@ lastupdated: "2017-11-02"
           kubectl apply -f mypod.yaml
           ```
           {: pre}
+

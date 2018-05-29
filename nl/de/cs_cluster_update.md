@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -28,9 +28,9 @@ Sie können Aktualisierungen installieren, um Ihre Kubernetes-Cluster in {{site.
 Kubernetes gibt regelmäßig [Hauptversionen, Nebenversionen oder Patches als Aktualisierungen heraus.](cs_versions.html#version_types). Abhängig vom Aktualisierungstyp können Sie für die Aktualisierung der Kubernetes-Masterkomponente verantwortlich sein.
 {:shortdesc}
 
-Aktualisierungen können die API-Serverversion von Kubernetes oder andere Komponenten in Ihrem Kubernetes-Master betreffen. Auf jeden Fall sind Sie immer dafür verantwortlich, Ihre Workerknoten auf dem neuesten Stand zu halten. Bei Aktualisierungen  wird der Kubernetes-Master vor den Workerknoten aktualisiert. 
+Aktualisierungen können die API-Serverversion von Kubernetes oder andere Komponenten in Ihrem Kubernetes-Master betreffen.  Auf jeden Fall sind Sie immer dafür verantwortlich, Ihre Workerknoten auf dem neuesten Stand zu halten. Bei Aktualisierungen  wird der Kubernetes-Master vor den Workerknoten aktualisiert.
 
-Standardmäßig ist Ihre Fähigkeit den API-Server von Kubernetes zu aktualisieren in Ihrem Kubernetes-Master auf zwei Nebenversionen vor Ihrer aktuellen Version begrenzt. Beispiel: Wenn Ihre aktuelle API-Serverversion von Kubernetes die Version 1.5 ist und Sie auf Version 1.8 aktualisieren möchten, müssen Sie zuerst auf Version 1.7 aktualisieren. Sie können die gewünschte Aktualisierung zwar erzwingen, doch kann eine Aktualisierung über mehr als zwei Nebenversionen hinweg unter Umständen zu nicht erwarteten Ergebnissen führen. Falls Ihr Cluster in einer nicht unterstützten Kubernetes-Version ausgeführt wird, müssen Sie die Aktualisierung möglicherweise erzwingen. 
+Standardmäßig ist Ihre Fähigkeit den API-Server von Kubernetes zu aktualisieren in Ihrem Kubernetes-Master auf zwei Nebenversionen vor Ihrer aktuellen Version begrenzt. Beispiel: Wenn Ihre aktuelle API-Serverversion von Kubernetes die Version 1.5 ist und Sie auf Version 1.8 aktualisieren möchten, müssen Sie zuerst auf Version 1.7 aktualisieren. Sie können die gewünschte Aktualisierung zwar erzwingen, doch kann eine Aktualisierung über mehr als zwei Nebenversionen hinweg unter Umständen zu nicht erwarteten Ergebnissen führen. Falls Ihr Cluster in einer nicht unterstützten Kubernetes-Version ausgeführt wird, müssen Sie die Aktualisierung möglicherweise erzwingen.
 
 Das folgende Diagramm zeigt den Prozess, den Sie zum Aktualisieren des Masters durchlaufen können.
 
@@ -45,9 +45,9 @@ Bei der Durchführung einer Aktualisierung für eine _Hauptversion_ oder _Nebenv
 1. Überprüfen Sie die [Kubernetes-Änderungen](cs_versions.html) und führen Sie alle Aktualisierungen durch, die mit der Markierung _Vor Master aktualisieren_ gekennzeichnet sind.
 2. Aktualisieren Sie Ihre API-Server von Kubernetes und die zugehörigen Masterkomponenten von Kubernetes, indem Sie die GUI verwenden oder den [CLI-Befehl](cs_cli_reference.html#cs_cluster_update) ausführen. Wenn Sie den API-Server von Kubernetes aktualisieren, ist der API-Server für 5 bis 10 Minuten inaktiv. Während der Aktualisierung können Sie weder auf den Cluster zugreifen noch Änderungen am Cluster vornehmen. Allerdings werden Workerknoten, Apps und Ressourcen, die von Clusterbenutzern bereitgestellt wurden, nicht geändert und weiterhin ausgeführt.
 3. Vergewissern Sie sich, dass die Aktualisierung abgeschlossen wurde. Überprüfen Sie die API-Serverversion von Kubernetes im {{site.data.keyword.Bluemix_notm}}-Dashboard oder führen Sie den folgenden Befehl aus: `bx cs clusters`.
-4. Installieren Sie die Version von [`kubectl cli`](cs_cli_install.html#kubectl), die mit dem API-Server von Kubernetes übereinstimmt, der in Ihrem Kubernetes-Master ausgeführt wird. 
+4. Installieren Sie die Version von [`kubectl cli`](cs_cli_install.html#kubectl), die mit dem API-Server von Kubernetes übereinstimmt, der in Ihrem Kubernetes-Master ausgeführt wird.
 
-Wenn die Aktualisierung des API-Servers von Kubernetes abgeschlossen ist, können Sie Ihre Workerknoten aktualisieren. 
+Wenn die Aktualisierung des API-Servers von Kubernetes abgeschlossen ist, können Sie Ihre Workerknoten aktualisieren.
 
 <br />
 
@@ -75,7 +75,7 @@ Im Abschnitt für Dateninformationen der Konfigurationszuordnung können Sie bis
 
 Die Schlüssel sind definiert. Was kommt als Nächstes?
 
-Nachdem die gewünschten Regeln definiert worden sind, führen Sie den Befehl `worker-upgrade` aus. Bei erfolgreicher Ausführung und Rückgabe einer entsprechenden Antwort werden die Workerknoten in eine Warteschlange zwecks Aktualisierung eingereiht. Die Knoten durchlaufen den Aktualisierungsprozess jedoch erst dann, wenn sämtliche Regeln erfüllt sind. Während sich die Knoten in der Warteschlange befinden, werden die Regeln in Intervallen überprüft, um festzustellen, ob die Knoten aktualisiert werden können.
+Nachdem die gewünschten Regeln definiert worden sind, führen Sie den Befehl `bx cs worker-update` aus. Bei erfolgreicher Ausführung und Rückgabe einer entsprechenden Antwort werden die Workerknoten in eine Warteschlange zwecks Aktualisierung eingereiht. Die Knoten durchlaufen den Aktualisierungsprozess jedoch erst dann, wenn sämtliche Regeln erfüllt sind. Während sich die Knoten in der Warteschlange befinden, werden die Regeln in Intervallen überprüft, um festzustellen, ob die Knoten aktualisiert werden können. 
 
 Wie sieht es aus, wenn keine Konfigurationszuordnung definiert wurde?
 
@@ -95,6 +95,7 @@ Gehen Sie wie folgt vor, um Ihre Workerknoten zu aktualisieren:
       name: ibm-cluster-update-configuration
       namespace: kube-system
     data:
+     drain_timeout_seconds: "120"
      zonecheck.json: |
        {
          "MaxUnavailablePercentage": 70,
@@ -107,7 +108,6 @@ Gehen Sie wie folgt vor, um Ihre Workerknoten zu aktualisieren:
          "NodeSelectorKey": "failure-domain.beta.kubernetes.io/region",
          "NodeSelectorValue": "us-south"
        }
-    ...
      defaultcheck.json: |
        {
          "MaxUnavailablePercentage": 100
@@ -116,16 +116,20 @@ Gehen Sie wie folgt vor, um Ihre Workerknoten zu aktualisieren:
     {:pre}
   <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Die übrigen Zeilen sollten von links nach rechts gelesen werden, wobei der Parameter in der ersten Spalte und die entsprechende Beschreibung in der zweiten Spalte angegeben sind.">
     <thead>
-      <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten</th>
+      <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten </th>
     </thead>
     <tbody>
       <tr>
-        <td><code>defaultcheck.json</code></td>
-        <td> Wenn keine gültige Definition der Zuordnung 'ibm-cluster-update-configuration' vorhanden ist, dann können standardmäßig immer nur maximal 20% Ihrer Cluster gleichzeitig nicht verfügbar sein. Wird mindestens eine gültige Regel ohne globalen Standardwert definiert, dann sieht der neue Standardwert vor, dass 100 % der Worker gleichzeitig nicht verfügbar sein dürfen. Dies lässt sich entsprechend steuern, indem Sie einen Eintrag mit einem Standardprozentsatz erstellen. </td>
+        <td><code>drain_timeout_seconds</code></td>
+        <td> Optional: Das Zeitlimit in Sekunden für das Entleeren, das während der Aktualisierung des Workerknotens auftritt. Beim Entleeren wird der Knoten auf `unschedulable` (nicht planbar) gesetzt, was verhindert, dass neue Pods auf diesem Knoten bereitgestellt werden. Beim Entleeren werden außerdem Pods vom Knoten gelöscht. Zulässige Werte liegen zwischen 1 und 180. Der Standardwert ist 30. </td>
       </tr>
       <tr>
         <td><code>zonecheck.json</code></br><code>regioncheck.json</code></td>
         <td> Dies sind Beispiele für eindeutige Schlüssel, für die Regeln festgelegt werden sollen. Die Namen der Schlüssel können beliebig gewählt werden; die Informationen werden von den festgelegten Konfigurationen im Schlüssel geparst. Für jeden definierten Schlüssel kann jeweils nur ein einziger Wert für <code>NodeSelectorKey</code> und <code>NodeSelectorValue</code> festgelegt werden. Wenn Sie Regeln für mehr als eine Region oder mehr als einen Standort (Rechenzentrum) festlegen möchten, müssen Sie jeweils einen neuen Schlüsseleintrag erstellen. </td>
+      </tr>
+      <tr>
+        <td><code>defaultcheck.json</code></td>
+        <td> Wenn keine gültige Definition der Zuordnung <code>ibm-cluster-update-configuration</code> vorhanden ist, dann können standardmäßig immer nur maximal 20% Ihrer Cluster gleichzeitig nicht verfügbar sein. Wird mindestens eine gültige Regel ohne globalen Standardwert definiert, dann sieht der neue Standardwert vor, dass 100 % der Worker gleichzeitig nicht verfügbar sein dürfen. Dies lässt sich entsprechend steuern, indem Sie einen Eintrag mit einem Standardprozentsatz erstellen. </td>
       </tr>
       <tr>
         <td><code>MaxUnavailablePercentage</code></td>
@@ -146,10 +150,10 @@ Gehen Sie wie folgt vor, um Ihre Workerknoten zu aktualisieren:
 
 3. Aktualisieren Sie Ihre Workerknoten über die grafische Benutzerschnittstelle (GUI) oder durch Ausführung des CLI-Befehls.
   * Zur Aktualisierung über das {{site.data.keyword.Bluemix_notm}}-Dashboard navigieren Sie zum Abschnitt für die `Workerknoten` Ihres Clusters und klicken dann auf `Worker aktualisieren`.
-  * Zum Abrufen von Workerknoten-IDs müssen Sie den Befehl `bx cs workers <cluster_name_or_id>` ausführen. Wenn Sie mehrere Workerknoten auswählen, werden die Workerknoten zwecks Evaluierung der Aktualisierung in eine Warteschlange gestellt. Ergibt die Evaluierung, dass die Knoten für die Aktualisierung bereit sind, werden sie gemäß den in den Konfigurationen festgelegten Regeln aktualisiert.
+  * Zum Abrufen von Workerknoten-IDs müssen Sie den Befehl `bx cs workers <clustername_oder_-id>` ausführen. Wenn Sie mehrere Workerknoten auswählen, werden die Workerknoten zwecks Evaluierung der Aktualisierung in eine Warteschlange gestellt. Ergibt die Evaluierung, dass die Knoten für die Aktualisierung bereit sind, werden sie gemäß den in den Konfigurationen festgelegten Regeln aktualisiert.
 
     ```
-    bx cs worker-update <clustername_oder_-id> <workerknoten_id1> <workerknoten_id2>
+    bx cs worker-update <clustername_oder_-id> <workerknoten1-id> <workerknoten2-id>
     ```
     {: pre}
 
@@ -160,14 +164,14 @@ Gehen Sie wie folgt vor, um Ihre Workerknoten zu aktualisieren:
     {: pre}
 
 5. Vergewissern Sie sich, dass die Aktualisierung abgeschlossen wurde:
-  * Überprüfen Sie die Kubernetes-Version im {{site.data.keyword.Bluemix_notm}}-Dashboard oder führen Sie den Befehl `bx cs workers <cluster_name_or_id>` aus.
+  * Überprüfen Sie die Kubernetes-Version im {{site.data.keyword.Bluemix_notm}}-Dashboard oder führen Sie den Befehl `bx cs workers <clustername_oder_-id>` aus.
   * Überprüfen Sie die Kubernetes-Version der Workerknoten, indem Sie den Befehl `kubectl get nodes` ausführen.
-  * In bestimmten Fällen werden in älteren Clustern nach einer Aktualisierung doppelte Workerknoten mit dem Status **NotReady** (Nicht bereit) aufgelistet. Informationen zum Entfernen doppelter Workerknoten finden Sie im Abschnitt zur [Fehlerbehebung](cs_troubleshoot.html#cs_duplicate_nodes).
+  * In bestimmten Fällen werden in älteren Clustern nach einer Aktualisierung doppelte Workerknoten mit dem Status **NotReady** (Nicht bereit) aufgelistet. Informationen zum Entfernen doppelter Workerknoten finden Sie im Abschnitt zur [Fehlerbehebung](cs_troubleshoot_clusters.html#cs_duplicate_nodes).
 
 Nächste Schritte:
   - Wiederholen Sie den Aktualisierungsprozess für andere Cluster.
   - Informieren Sie die Entwickler, die im Cluster arbeiten, damit diese ihre `kubectl`-CLI auf die Version des Kubernetes-Masters aktualisieren können.
-  - Wenn im Kubernetes-Dashboard keine Nutzungsdiagramme angezeigt werden, [löschen Sie den Pod `kube-dashboard`](cs_troubleshoot.html#cs_dashboard_graphs).
+  - Wenn im Kubernetes-Dashboard keine Nutzungsdiagramme angezeigt werden, [löschen Sie den Pod `kube-dashboard`](cs_troubleshoot_health.html#cs_dashboard_graphs). 
 
 
 <br />
@@ -192,27 +196,28 @@ Sie können die Maschinentypen aktualisieren, die in den Workerknoten verwendet 
     ```
     {: pre}
 
-3. Fügen Sie einen Workerknoten hinzu, indem Sie den Befehl [bx cs worker-add](cs_cli_reference.html#cs_worker_add) verwenden und einen der Maschinentypen angeben, der in der Ausgabe des vorherigen Befehls aufgelistet ist. 
+3. Fügen Sie Workerknoten mit dem Befehl [bx cs worker-add](cs_cli_reference.html#cs_worker_add) hinzu. Geben Sie einen Maschinentyp an. 
 
     ```
-    bx cs worker-add --cluster <clustername> --machine-type <maschinentyp> --number <anzahl_der_workerknoten> --private-vlan <privates_vlan> --public-vlan <öffentliches_vlan>
+    bx cs worker-add --cluster <clustername> --machine-type <maschinentyp> --number <anzahl_der_workerknoten> --private-vlan <private_vlan-id> --public-vlan <öffentliche_vlan-id>
     ```
     {: pre}
 
-4. Überprüfen Sie, dass der Workerknoten hinzugefügt wurde.
+4. Überprüfen Sie, dass die Workerknoten hinzugefügt wurden. 
 
     ```
     bx cs workers <clustername>
     ```
     {: pre}
 
-5. Wenn der hinzugefügte Workerknoten sich im Status `Normal` befindet, können Sie den veralteten Workerknoten entfernen. **Hinweis**: Wenn Sie einen Maschinentyp entfernen, der monatlich abgerechnet wird (zum Beispiel Bare-Metal), dann wird Ihnen der gesamte Monat noch berechnet. 
+5. Wenn die hinzugefügten Workerknoten sich im Status `Normal` befinden, können Sie den veralteten Workerknoten entfernen. **Hinweis**: Wenn Sie einen Maschinentyp entfernen, der monatlich abgerechnet wird (zum Beispiel Bare-Metal), dann wird Ihnen der gesamte Monat noch berechnet.
 
     ```
     bx cs worker-rm <clustername> <workerknoten>
     ```
     {: pre}
 
-6. Wiederholen Sie diese Schritte, um andere Workerknoten auf unterschiedliche Maschinentypen zu aktualisieren. 
+6. Wiederholen Sie diese Schritte, um andere Workerknoten auf unterschiedliche Maschinentypen zu aktualisieren.
+
 
 

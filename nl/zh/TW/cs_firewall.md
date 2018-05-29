@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-14"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -96,14 +96,14 @@ lastupdated: "2018-02-14"
 4. 擷取叢集的**主要 URL**。
 
    ```
-   bx cs cluster-get <cluster_name_or_id>
+   bx cs cluster-get <cluster_name_or_ID>
    ```
    {: pre}
 
    輸出範例：
    ```
    ...
-   Master URL:		https://169.46.7.238:31142
+   Master URL:		https://169.xx.xxx.xxx:31142
    ...
    ```
    {: screen}
@@ -119,7 +119,7 @@ lastupdated: "2018-02-14"
 
    範例指令：
    ```
-   curl --insecure https://169.46.7.238:31142/version
+   curl --insecure https://169.xx.xxx.xxx:31142/version
    ```
    {: pre}
 
@@ -175,8 +175,8 @@ lastupdated: "2018-02-14"
   1.  記下叢集中所有工作者節點的公用 IP 位址。
 
       ```
-      bx cs workers <cluster_name_or_id>
-      ```
+       bx cs workers <cluster_name_or_ID>
+       ```
       {: pre}
 
   2.  容許從來源 _<each_worker_node_publicIP>_ 到目的地 TCP/UDP 埠範圍 20000-32767 和埠 443 以及下列 IP 位址和網路群組的送出網路資料流量。如果您的組織防火牆導致本端機器無法存取公用網際網路端點，請針對來源工作者節點及本端機器執行此步驟。
@@ -202,7 +202,7 @@ lastupdated: "2018-02-14"
       <tr>
          <td>歐盟中部</td>
          <td>ams03<br>fra02<br>mil01<br>par01</td>
-         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+         <td><code>169.50.169.110, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
         </tr>
       <tr>
         <td>英國南部</td>
@@ -264,8 +264,8 @@ lastupdated: "2018-02-14"
 </p>
 
   4.  選用項目：容許從工作者節點到 {{site.data.keyword.monitoringlong_notm}} 及 {{site.data.keyword.loganalysislong_notm}} 服務的送出網路資料流量：
-      - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
-      - 將 <em>&lt;monitoring_publicIP&gt;</em> 取代為您要容許資料流量的監視地區的所有位址：
+      - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
+      - 將 <em>&lt;monitoring_public_IP&gt;</em> 取代為您要容許資料流量的監視地區的所有位址：
         <p><table summary="表格中的第一列跨這兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器位置，第二欄則為要符合的 IP 位址。">
   <thead>
         <th>容器地區</th>
@@ -292,8 +292,8 @@ lastupdated: "2018-02-14"
         </tbody>
       </table>
 </p>
-      - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
-      - 將 <em>&lt;logging_publicIP&gt;</em> 取代為您要容許資料流量的記載地區的所有位址：
+      - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
+      - 將 <em>&lt;logging_public_IP&gt;</em> 取代為您要容許資料流量的記載地區的所有位址：
         <p><table summary="表格中的第一列跨這兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器位置，第二欄則為要符合的 IP 位址。">
   <thead>
         <th>容器地區</th>
@@ -352,3 +352,4 @@ lastupdated: "2018-02-14"
   <dt>Ingress</dt>
   <dd>針對 Ingress 應用程式負載平衡器的 IP 位址，開啟埠 80（適用於 HTTP）或埠 443（適用於 HTTPS）。</dd>
 </dl>
+

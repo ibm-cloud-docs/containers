@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -16,7 +16,7 @@ lastupdated: "2018-03-16"
 {:download: .download}
 
 
-# Externen Netzbetrieb planen
+# Netzbetrieb mit NodePort-, LoadBalancer- oder Ingress-Services planen
 {: #planning}
 
 Wenn Sie einen Kubernetes-Cluster in {{site.data.keyword.containerlong}} erstellen, muss jeder Cluster mit einem öffentlichen VLAN verbunden sein. Das öffentliche VLAN bestimmt, welche öffentliche IP-Adresse einem Workerknoten während der Clustererstellung zugewiesen wird.
@@ -28,7 +28,6 @@ Die öffentliche Netzschnittstelle für die Workerknoten in kostenlosen Clustern
 |------------|------------------------------------------|
 |Kostenlose Cluster in {{site.data.keyword.Bluemix_notm}}|{{site.data.keyword.IBM_notm}}|
 |Standardcluster in {{site.data.keyword.Bluemix_notm}}|Sie bei Ihrem Konto von IBM Cloud Infrastructure (SoftLayer)|
-{: caption="Zuständigkeiten beim Management von VLANs" caption-side="top"}
 
 Informationen zur clusterinternen Netzkommunikation zwischen Workerknoten und Pods finden Sie in [Netzbetrieb in Clustern](cs_secure.html#in_cluster_network). Informationen zu sicheren Verbindungen von Apps, die in einem Kubernetes-Cluster ausgeführt werden, zu einem lokalen Netz oder zu Apps außerhalb Ihres Clusters finden Sie in [VPN-Konnektivität einrichten](cs_vpn.html).
 
@@ -67,22 +66,20 @@ Das Diagramm zeigt, wie Kubernetes Benutzernetzverkehr in {{site.data.keyword.co
  <ul>
   <li>Sie können mehrere Apps in ihrem Cluster öffentlich zugänglich machen, indem Sie eine einzelne externe HTTP- oder HTTPS-, TCP- oder UDP-Lastausgleichsfunktion (LoadBalancer) erstellen, die einen geschützten und eindeutigen Einstiegspunkt für die Weiterleitung eingehender Anforderungen an Ihre Apps verwendet.</li>
   <li>Sie können eine öffentliche Route verwenden, um mehrere Apps in Ihrem Cluster als Services zugänglich zu machen.</li>
-  <li>Ingress besteht aus zwei Hauptkomponenten: der Ingress-Ressource und der Lastausgleichsfunktion für Anwendungen.
-   <ul>
+  <li>Ingress besteht aus zwei Komponenten: <ul>
     <li>Die Ingress-Ressource definiert die Regeln, die festlegen, wie die Weiterleitung der eingehenden Anforderungen für eine App und deren Lastausgleich erfolgen soll.</li>
-    <li>Die Lastausgleichsfunktion für Anwendungen (ALB) ist für eingehende HTTP- oder HTTPS-, TCP- oder UDP-Serviceanforderungen  empfangsbereit und leitet Anforderungen über die Pods der App in Übereinstimmung mit den für jede Ingress-Ressource definierten Regeln weiter. </li>
+    <li>Die Lastausgleichsfunktion für Anwendungen (ALB) ist für eingehende HTTP- oder HTTPS-, TCP- oder UDP-Serviceanforderungen  empfangsbereit und leitet Anforderungen über die Pods der App in Übereinstimmung mit den für jede Ingress-Ressource definierten Regeln weiter.</li>
    </ul>
-  <li>Verwenden Sie Ingress, wenn Sie Ihre eigene ALB mit angepassten Regeln für die Weiterleitung implementieren möchten und wenn Sie SSL-Terminierung für Ihre Apps benötigen.
-
-</li>
+  <li>Verwenden Sie Ingress, wenn Sie Ihre eigene ALB mit angepassten Regeln für die Weiterleitung implementieren möchten und wenn Sie SSL-Terminierung für Ihre Apps benötigen.</li>
  </ul>
 </dd></dl>
 
-Folgen Sie diesem Entscheidungsbaum, um die beste Netzoption für Ihre Anwendung auszuwählen. Informationen zur Planung und Anweisungen zur Konfiguration erhalten Sie, indem Sie auf die von Ihnen ausgewählte Option für Networking Services klicken. 
+Folgen Sie diesem Entscheidungsbaum, um die beste Netzoption für Ihre Anwendung auszuwählen. Informationen zur Planung und Anweisungen zur Konfiguration erhalten Sie, indem Sie auf die von Ihnen ausgewählte Option für Networking Services klicken.
 
 <img usemap="#networking_map" border="0" class="image" src="images/networkingdt.png" width="500px" alt="In dieser Grafik werden Sie durch einzelnen Schritte zur Auswahl der besten Netzoption für Ihre Anwendung geführt. Wird diese Grafik hier nicht angezeigt, können Sie die erforderlichen Informationen an anderer Stelle in der Dokumentation finden." style="width:500px;" />
 <map name="networking_map" id="networking_map">
-<area href="/docs/containers/cs_nodeport.html#planning" alt="NodePort-Service" shape="circle" coords="52, 283, 45"/>
-<area href="/docs/containers/cs_loadbalancer.html#planning" alt="LoadBalancer-Service" shape="circle" coords="247, 419, 44"/>
-<area href="/docs/containers/cs_ingress.html#planning" alt="Ingress-Service" shape="circle" coords="445, 420, 45"/>
+<area href="/docs/containers/cs_nodeport.html" alt="NodePort-Service" shape="circle" coords="52, 283, 45"/>
+<area href="/docs/containers/cs_loadbalancer.html" alt="LoadBalancer-Service" shape="circle" coords="247, 419, 44"/>
+<area href="/docs/containers/cs_ingress.html" alt="Ingress-Service" shape="circle" coords="445, 420, 45"/>
 </map>
+

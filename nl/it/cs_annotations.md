@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2018-03-16"
 Per aggiungere funzionalità al tuo programma di bilanciamento del carico dell'applicazione (o ALB, application load balancer) Ingress, puoi specificare delle annotazioni sotto forma di metadati in una risorsa Ingress.
 {: shortdesc}
 
-Per informazioni generali sui servizi Ingress e su come iniziare ad usarli, vedi [Configurazione dell'accesso pubblico a un'applicazione utilizzando Ingress](cs_ingress.html#configure_alb).
+Per informazioni generali sui servizi Ingress e su come iniziare ad usarli, vedi [Gestione del traffico di rete utilizzando Ingress](cs_ingress.html#planning).
 
 <table>
 <col width="20%">
@@ -55,17 +55,13 @@ Per informazioni generali sui servizi Ingress e su come iniziare ad usarli, vedi
  <td>Instrada il traffico di rete in entrata a un percorso diverso su cui è in ascolto la tua applicazione di back-end.</td>
  </tr>
  <tr>
- <td><a href="#sticky-cookie-services">Affinità di sessione con i cookie</a></td>
- <td><code>sticky-cookie-services</code></td>
- <td>Instrada sempre il tuo traffico di rete in entrata allo stesso server upstream utilizzando un cookie permanente.</td>
- </tr>
- <tr>
  <td><a href="#tcp-ports">Porte TCP</a></td>
  <td><code>tcp-ports</code></td>
  <td>Accedi a un'applicazione tramite una porta TCP non standard.</td>
  </tr>
  </tbody></table>
 
+<br>
 
 <table>
 <col width="20%">
@@ -85,19 +81,31 @@ Per informazioni generali sui servizi Ingress e su come iniziare ad usarli, vedi
   <tr>
   <td><a href="#keepalive-requests">Richieste di keepalive</a></td>
   <td><code>keepalive-requests</code></td>
-  <td>Configura il numero massimo di richieste che possono essere offerte attraverso una connessione keepalive.</td>
+  <td>Imposta il numero massimo di richieste che possono essere offerte attraverso una connessione keepalive.</td>
   </tr>
   <tr>
   <td><a href="#keepalive-timeout">Timeout di keepalive</a></td>
   <td><code>keepalive-timeout</code></td>
-  <td>Configura la durata in cui una connessione keepalive rimane aperta sul server.</td>
+  <td>Imposta il tempo massimo per cui una connessione keepalive rimane aperta sul server.</td>
+  </tr>
+  <tr>
+  <td><a href="#proxy-next-upstream-config">Upstream successivo del proxy</a></td>
+  <td><code>proxy-next-upstream-config</code></td>
+  <td>Imposta quando l'ALB può passare una richiesta al server upstream successivo.</td>
+  </tr>
+  <tr>
+  <td><a href="#sticky-cookie-services">Affinità di sessione con i cookie</a></td>
+  <td><code>sticky-cookie-services</code></td>
+  <td>Instrada sempre il tuo traffico di rete in entrata allo stesso server upstream utilizzando un cookie permanente.</td>
   </tr>
   <tr>
   <td><a href="#upstream-keepalive">Keepalive upstream</a></td>
   <td><code>upstream-keepalive</code></td>
-  <td>Configura il numero massimo di connessioni keepalive inattive per un server upstream.</td>
+  <td>Imposta il numero massimo di connessioni keepalive inattive per un server upstream.</td>
   </tr>
   </tbody></table>
+
+<br>
 
   <table>
   <col width="20%">
@@ -141,7 +149,26 @@ Per informazioni generali sui servizi Ingress e su come iniziare ad usarli, vedi
   </tr>
   </tbody></table>
 
+<br>
 
+<table>
+<col width="20%">
+<col width="20%">
+<col width="60%">
+<thead>
+<th>Annotazioni Istio</th>
+<th>Nome</th>
+<th>Descrizione</th>
+</thead>
+<tbody>
+<tr>
+<td><a href="#istio-services">Servizi Istio</a></td>
+<td><code>istio-services</code></td>
+<td>Instrada il traffico ai servizi gestiti da Istio.</td>
+</tr>
+</tbody></table>
+
+<br>
 
 <table>
 <col width="20%">
@@ -175,6 +202,7 @@ Per informazioni generali sui servizi Ingress e su come iniziare ad usarli, vedi
  </tr>
  </tbody></table>
 
+<br>
 
 <table>
 <col width="20%">
@@ -208,6 +236,8 @@ Per informazioni generali sui servizi Ingress e su come iniziare ad usarli, vedi
 </tr>
 </tbody></table>
 
+<br>
+
 <table>
 <col width="20%">
 <col width="20%">
@@ -229,6 +259,8 @@ Per informazioni generali sui servizi Ingress e su come iniziare ad usarli, vedi
 <td>Limita la velocità di elaborazione delle richieste e il numero di connessioni per una chiave definita per servizi specifici.</td>
 </tr>
 </tbody></table>
+
+<br>
 
 
 
@@ -303,15 +335,38 @@ Modifica il modo in cui l'ALB mette in corrispondenza l'URI della richiesta con 
 
 <dl>
 <dt>Descrizione</dt>
-<dd>Per impostazione predefinita, gli ALB elaborano i percorsi che le applicazioni ascoltano sotto forma di prefissi. Alla ricezione di una richiesta a un'applicazione, l'ALB controlla la risorsa Ingress per rilevare un percorso (come prefisso) che corrisponda all'inizio dell'URI della richiesta. Se viene trovata una corrispondenza, la richiesta viene inoltrata all'indirizzo IP del pod in cui viene distribuita l'applicazione.<br><br>L'annotazione `location-modifier` cambia il modo in cui l'ALB cerca le corrispondenze modificando la configurazione del blocco di ubicazione. Il blocco di ubicazione determina come vengono gestite le richieste per il percorso dell'applicazione. **Nota**: per gestire i percorsi di espressioni regolari (regex), questa annotazione è obbligatoria. </dd>
+<dd>Per impostazione predefinita, gli ALB elaborano i percorsi che le applicazioni ascoltano sotto forma di prefissi. Alla ricezione di una richiesta a un'applicazione, l'ALB controlla la risorsa Ingress per rilevare un percorso (come prefisso) che corrisponda all'inizio dell'URI della richiesta. Se viene trovata una corrispondenza, la richiesta viene inoltrata all'indirizzo IP del pod in cui viene distribuita l'applicazione.<br><br>L'annotazione `location-modifier` cambia il modo in cui l'ALB cerca le corrispondenze modificando la configurazione del blocco di ubicazione. Il blocco di ubicazione determina come vengono gestite le richieste per il percorso dell'applicazione.<br><br>**Nota**: per gestire i percorsi di espressioni regolari (regex), questa annotazione è obbligatoria.</dd>
+
 <dt>Modificatori supportati</dt>
 <dd>
-<ul>
-<li><code>=</code> : il modificatore con segno di uguale fa sì che l'ALB selezioni solo le corrispondenze esatte. Quando viene trovata una corrispondenza esatta, la ricerca si ferma e viene selezionato il percorso corrispondente.</li>
-<li><code>~</code> : il modificatore con tilde fa sì che l'ALB elabori i percorsi come percorsi regex sensibili al maiuscolo/minuscolo durante la corrispondenza.</li>
-<li><code>~*</code> : il modificatore con tilde seguita da un asterisco fa sì che l'ALB elabori i percorsi come percorsi regex non sensibili al maiuscolo/minuscolo durante la corrispondenza.</li>
-<li><code>^~</code> : il modificatore con accento circonflesso seguito da una tilde fa sì che l'ALB selezioni la migliore corrispondenza non regex anziché un percorso regex.</li>
-</ul>
+
+<table>
+ <col width="10%">
+ <col width="90%">
+ <thead>
+ <th>Modificatore</th>
+ <th>Descrizione</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td><code>=</code></td>
+ <td>Il modificatore con segno di uguale fa sì che l'ALB selezioni solo le corrispondenze esatte. Quando viene trovata una corrispondenza esatta, la ricerca si ferma e viene selezionato il percorso corrispondente.</td>
+ </tr>
+ <tr>
+ <td><code>~</code></td>
+ <td>il modificatore con tilde fa sì che l'ALB elabori i percorsi come percorsi regex sensibili al maiuscolo/minuscolo durante la corrispondenza.</td>
+ </tr>
+ <tr>
+ <td><code>~\*</code></td>
+ <td>Il modificatore con tilde seguita da un asterisco fa sì che l'ALB elabori i percorsi come percorsi regex non sensibili al maiuscolo/minuscolo durante la corrispondenza.</td>
+ </tr>
+ <tr>
+ <td><code>^~</code></td>
+ <td>Il modificatore con accento circonflesso seguito da una tilde fa sì che l'ALB selezioni la migliore corrispondenza non regex anziché un percorso regex.</td>
+ </tr>
+ </tbody>
+</table>
+
 </dd>
 
 <dt>YAML risorsa Ingress di esempio</dt>
@@ -323,7 +378,7 @@ kind: Ingress
 metadata:
 name: myingress
 annotations:
-  ingress.bluemix.net/location-modifier: "modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice&gt;;modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice2&gt;"
+  ingress.bluemix.net/location-modifier: "modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice1&gt;;modifier='&lt;location_modifier&gt;' serviceName=&lt;myservice2&gt;"
 spec:
   tls:
   - hosts:
@@ -345,7 +400,7 @@ spec:
   <tbody>
   <tr>
   <td><code>modifier</code></td>
-  <td>Sostituisci <code>&lt;<em>location_modifier</em>&gt;</code> con il modificatore ubicazione che vuoi utilizzare per il percorso. I modificatori supportati sono <code>'='</code>,<code>'~'</code>,<code>'~*'</code> e <code>'^~'</code>. Devi racchiudere i modificatori tra virgolette singole.</td>
+  <td>Sostituisci <code>&lt;<em>location_modifier</em>&gt;</code> con il modificatore ubicazione che vuoi utilizzare per il percorso. I modificatori supportati sono <code>'='</code>, <code>'~'</code>, <code>'~\*'</code> e <code>'^~'</code>. Devi racchiudere i modificatori tra virgolette singole.</td>
   </tr>
   <tr>
   <td><code>serviceName</code></td>
@@ -401,7 +456,7 @@ tls:
 <tbody>
 <tr>
 <td><code>&lt;private_ALB_ID&gt;</code></td>
-<td>L'ID per il tuo ALB privato. Esegui <code>bx cs albs --cluster <my_cluster></code> per trovare l'ID ALB privato.
+<td>L'ID per il tuo ALB privato. Per trovare l'ID ALB privato, esegui <code>bx cs albs --cluster &lt;my_cluster&gt;</code>.
 </td>
 </tr>
 </tbody></table>
@@ -409,7 +464,6 @@ tls:
 </dl>
 
 <br />
-
 
 
 ### Percorsi di riscrittura (rewrite-path)
@@ -465,84 +519,6 @@ in ascolto su uno specifico percorso, ma utilizza il percorso root e una porta s
 </dd></dl>
 
 <br />
-
-
-### Affinità di sessione con i cookie (sticky-cookie-services)
-{: #sticky-cookie-services}
-
-Utilizza l'annotazione cookie permanente per aggiungere l'affinità di sessione al tuo ALB e instradare sempre il traffico di rete in entrata allo stesso server upstream.
-{:shortdesc}
-
-<dl>
-<dt>Descrizione</dt>
-<dd>Per l'alta disponibilità, alcune configurazioni di applicazione richiedono di distribuire più server upstream che gestiscono le richieste client in entrata. Quando un client si collega alla tua applicazione di back-end, puoi utilizzare l'affinità di sessione in modo che un client sia servito dallo stesso server upstream per la durata di una sessione o per il tempo necessario per completare un'attività. Puoi configurare il tuo ALB per garantire l'affinità di sessione indirizzando sempre il traffico di rete in entrata allo stesso server upstream.
-
-</br></br>
-Ad ogni client che si collega alla tua applicazione di back-end, l'ALB assegna uno dei server upstream disponibili. L'ALB crea un cookie di sessione che viene memorizzato nell'applicazione del client e che viene incluso nelle informazioni di intestazione di ogni richiesta tra l'ALB e il client. Le informazioni nel cookie garantiscono che tutte le richieste vengano gestite dallo stesso server upstream nella sessione.
-
-</br></br>
-Quando includi più servizi, utilizza un un punto e virgola (;) per separarli.</dd>
-<dt>YAML risorsa Ingress di esempio</dt>
-<dd>
-
-<pre class="codeblock">
-<code>apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: myingress
-  annotations:
-    ingress.bluemix.net/sticky-cookie-services: "serviceName=&lt;myservice1&gt; name=&lt;cookie_name1&gt; expires=&lt;expiration_time1&gt; path=&lt;cookie_path1&gt; hash=&lt;hash_algorithm1&gt;;serviceName=&lt;myservice2&gt; name=&lt;cookie_name2&gt; expires=&lt;expiration_time2&gt; path=&lt;cookie_path2&gt; hash=&lt;hash_algorithm2&gt;"
-spec:
-  tls:
-  - hosts:
-    - mydomain
-    secretName: mytlssecret
-  rules:
-  - host: mydomain
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: &lt;myservice1&gt;
-          servicePort: 8080
-      - path: /myapp
-        backend:
-          serviceName: &lt;myservice2&gt;
-          servicePort: 80</code></pre>
-
-  <table>
-  <caption>Descrizione dei componenti del file YAML</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>serviceName</code></td>
-  <td>Sostituisci <code>&lt;<em>myservice</em>&gt;</code> con il nome del servizio Kubernetes che hai creato per la tua applicazione.</td>
-  </tr>
-  <tr>
-  <td><code>name</code></td>
-  <td>Sostituisci <code>&lt;<em>cookie_name</em>&gt;</code> con il nome di un cookie permanente creato durante una sessione.</td>
-  </tr>
-  <tr>
-  <td><code>expires</code></td>
-  <td>Sostituisci <code>&lt;<em>expiration_time</em>&gt;</code> con il tempo in secondi (s), minuti (m) o ore (h) prima che scada il cookie permanente. Il tempo non è dipendente dall'attività utente. Una volta scaduto, il cookie viene eliminato dal browser web del client e non viene più inviato all'ALB. Ad esempio, per impostare un orario di scadenza di 1 secondo, 1 minuto o 1 ora, immetti <code>1s</code>, <code>1m</code> o <code>1h</code>.</td>
-  </tr>
-  <tr>
-  <td><code>path</code></td>
-  <td>Sostituisci <code>&lt;<em>cookie_path</em>&gt;</code> con il percorso che viene aggiunto al dominio secondario Ingress e che indica per quali domini e domini secondari il cookie viene inviato all'ALB. Ad esempio, se il tuo dominio Ingress è <code>www.myingress.com</code> e desideri inviare il cookie in ogni richiesta client, devi impostare <code>path=/</code>. Se desideri inviare il cookie solo per <code>www.myingress.com/myapp</code> e a tutti i relativi domini secondari, devi impostare <code>path=/myapp</code>.</td>
-  </tr>
-  <tr>
-  <td><code>hash</code></td>
-  <td>Sostituisci <code>&lt;<em>hash_algorithm</em>&gt;</code> con l'algoritmo hash che protegge le informazioni nel cookie. È
-supportato solo <code>sha1</code>. SHA1 crea un riepilogo hash in base alle informazioni nel cookie e lo accoda ad esso. Il server può decrittografare le informazioni nel cookie e verificare l'integrità dei dati.</td>
-  </tr>
-  </tbody></table>
-
- </dd></dl>
-
-<br />
-
 
 
 ### Porte TCP per i programmi di bilanciamento del carico dell'applicazione (tcp-ports)
@@ -611,11 +587,11 @@ spec:
 L'output della CLI sarà simile al seguente:
 <pre class="screen">
 <code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.10.10.149   169.60.16.246   80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  80:30776/TCP,443:30412/TCP   8d</code></pre></li>
 <li>Apri la mappa di configurazione di ALB.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
-<li>Aggiungi le porte TCP alla mappa di configurazione. Sostituisci &lt;port&gt; con le porte TCP che desideri aprire.
+<li>Aggiungi le porte TCP alla mappa di configurazione. Sostituisci <code>&lt;port&gt;</code> con le porte TCP che desideri aprire.
 <pre class="codeblock">
 <code>apiVersion: v1
 kind: ConfigMap
@@ -634,11 +610,12 @@ metadata:
 L'output della CLI sarà simile al seguente:
 <pre class="screen">
 <code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
 <li>Configura Ingress per accedere alla tua applicazione tramite una porta TCP non standard. Utilizza il file YAML di esempio in questo riferimento. </li>
 <li>Aggiorna la configurazione del tuo ALB.
 <pre class="pre">
-<code>kubectl apply -f &lt;yaml_file&gt;</code></pre>
+<code>        kubectl apply -f myingress.yaml
+        </code></pre>
 </li>
 <li>Apri il tuo browser web preferito per accedere alla tua applicazione. Esempio: <code>https://&lt;ibmdomain&gt;:&lt;ingressPort&gt;/</code></li></ol></dd></dl>
 
@@ -651,7 +628,7 @@ public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,
 ### Timeout di lettura e connessione personalizzati (proxy-connect-timeout, proxy-read-timeout)
 {: #proxy-connect-timeout}
 
-Imposta timeout di lettura e connessione personalizzati per l'ALB. Imposta il tempo in cui l'ALB attende di connettersi e leggere dall'applicazione di back-end prima che questa venga considerata non disponibile.
+Imposta il tempo in cui l'ALB attende di connettersi e leggere dall'applicazione di back-end prima che questa venga considerata non disponibile.
 {:shortdesc}
 
 <dl>
@@ -715,7 +692,7 @@ spec:
 ### Richieste di keepalive (keepalive-requests)
 {: #keepalive-requests}
 
-Configura il numero massimo di richieste che possono essere offerte attraverso una connessione keepalive.
+Imposta il numero massimo di richieste che possono essere offerte attraverso una connessione keepalive.
 {:shortdesc}
 
 <dl>
@@ -774,13 +751,13 @@ tls:
 ### Timeout di keepalive (keepalive-timeout)
 {: #keepalive-timeout}
 
-Configura la durata in cui una connessione keepalive rimane aperta sul lato server.
+Imposta il tempo massimo per cui una connessione keepalive rimane aperta sul lato server.
 {:shortdesc}
 
 <dl>
 <dt>Descrizione</dt>
 <dd>
-Imposta la durata in cui una connessione keepalive rimane aperta sul server.
+Imposta il tempo massimo per cui una connessione keepalive rimane aperta sul server.
 </dd>
 
 
@@ -829,11 +806,172 @@ spec:
 <br />
 
 
+### Upstream successivo del proxy (proxy-next-upstream-config)
+{: #proxy-next-upstream-config}
+
+Imposta quando l'ALB può passare una richiesta al server upstream successivo.
+{:shortdesc}
+
+<dl>
+<dt>Descrizione</dt>
+<dd>
+L'ALB Ingress funge da proxy tra l'applicazione client e la tua applicazione. Alcune configurazioni di applicazione richiedono più server upstream che gestiscono le richieste client in entrata dall'ALB. A volte, il server proxy utilizzato dall'ALB non può stabilire una connessione con un server upstream utilizzato dall'applicazione L'ALB può quindi tentare di stabilire una connessione con il server upstream successivo per passare ad esso la richiesta. Puoi utilizzare l'annotazione `proxy-next-upstream-config` per impostare in quali casi, per quanto tempo e per quante volte l'ALB può tentare di passare una richiesta al server upstream successivo.<br><br><strong>Nota</strong>: il timeout viene sempre configurato quando utilizzi `proxy-next-upstream-config`, quindi non aggiungere `timeout=true` a questa annotazione.
+</dd>
+<dt>YAML risorsa Ingress di esempio</dt>
+<dd>
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/proxy-next-upstream-config: "serviceName=&lt;myservice1&gt; retries=&lt;tries&gt; timeout=&lt;time&gt; error=true http_502=true; serviceName=&lt;myservice2&gt; http_403=true non_idempotent=true"
+spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mysecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: myservice1
+          servicePort: 80
+</code></pre>
+
+<table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td>Sostituisci <code>&lt;<em>myservice</em>&gt;</code> con il nome del servizio Kubernetes che hai creato per la tua applicazione.</td>
+</tr>
+<tr>
+<td><code>retries</code></td>
+<td>Sostituisci <code>&lt;<em>tries</em>&gt;</code> con il numero massimo di volte in cui l'ALB tenterà di passare una richiesta al server upstream successivo. Questo numero include la richiesta originale. Per disattivare questa limitazione, utilizza <code>0</code>. Se non specifichi un valore, verrà utilizzato il valore predefinito <code>0</code>.
+</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Sostituisci <code>&lt;<em>time</em>&gt;</code> con la quantità di tempo massima, in secondi, in cui l'ALB tenta di passare una richiesta al server upstream successivo. Ad esempio, per impostare un tempo di 30 secondi, immetti <code>30s</code>. Per disattivare questa limitazione, utilizza <code>0</code>. Se non specifichi un valore, verrà utilizzato il valore predefinito <code>0</code>.
+</td>
+</tr>
+<tr>
+<td><code>error</code></td>
+<td>Se impostato su <code>true</code>, l'ALB passa una richiesta al server upstream successivo quando si verifica un errore mentre si stabilisce una connessione con il primo server upstream, si passa una richiesta ad esso oppure si legge l'intestazione della risposta.
+</td>
+</tr>
+<tr>
+<td><code>invalid_header</code></td>
+<td>Se impostato su <code>true</code>, l'ALB passa una richiesta al server upstream successivo quando il primo server upstream restituisce una risposta vuota o non valida.
+</td>
+</tr>
+<tr>
+<td><code>http_502</code></td>
+<td>Se impostato su <code>true</code>, l'ALB passa una richiesta al server upstream successivo quando il primo server upstream restituisce una risposta con il codice 502. Puoi designare i seguenti codici di risposta HTTP: <code>500</code>, <code>502</code>, <code>503</code>, <code>504</code>, <code>403</code>, <code>404</code>, <code>429</code>.
+</td>
+</tr>
+<tr>
+<td><code>non_idempotent</code></td>
+<td>Se impostato su <code>true</code>, l'ALB può passare le richieste con un metodo non-idempotent al server upstream successivo. Per impostazione predefinita, l'ALB non passa queste richieste al server upstream successivo.
+</td>
+</tr>
+<tr>
+<td><code>off</code></td>
+<td>Per impedire che l'ALB passi le richieste al server upstream successivo, deve essere impostato su <code>true</code>.
+</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
+
+<br />
+
+
+### Affinità di sessione con i cookie (sticky-cookie-services)
+{: #sticky-cookie-services}
+
+Utilizza l'annotazione cookie permanente per aggiungere l'affinità di sessione al tuo ALB e instradare sempre il traffico di rete in entrata allo stesso server upstream.
+{:shortdesc}
+
+<dl>
+<dt>Descrizione</dt>
+<dd>Per l'alta disponibilità, alcune configurazioni di applicazione richiedono di distribuire più server upstream che gestiscono le richieste client in entrata. Quando un client si collega alla tua applicazione di back-end, puoi utilizzare l'affinità di sessione in modo che un client sia servito dallo stesso server upstream per la durata di una sessione o per il tempo necessario per completare un'attività. Puoi configurare il tuo ALB per garantire l'affinità di sessione indirizzando sempre il traffico di rete in entrata allo stesso server upstream.
+
+</br></br>
+Ad ogni client che si collega alla tua applicazione di back-end, l'ALB assegna uno dei server upstream disponibili. L'ALB crea un cookie di sessione che viene memorizzato nell'applicazione del client e che viene incluso nelle informazioni di intestazione di ogni richiesta tra l'ALB e il client. Le informazioni nel cookie garantiscono che tutte le richieste vengano gestite dallo stesso server upstream nella sessione.
+
+</br></br>
+Quando includi più servizi, utilizza un un punto e virgola (;) per separarli.</dd>
+<dt>YAML risorsa Ingress di esempio</dt>
+<dd>
+
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/sticky-cookie-services: "serviceName=&lt;myservice1&gt; name=&lt;cookie_name1&gt; expires=&lt;expiration_time1&gt; path=&lt;cookie_path1&gt; hash=&lt;hash_algorithm1&gt;;serviceName=&lt;myservice2&gt; name=&lt;cookie_name2&gt; expires=&lt;expiration_time2&gt; path=&lt;cookie_path2&gt; hash=&lt;hash_algorithm2&gt;"
+spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mytlssecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: &lt;myservice1&gt;
+          servicePort: 8080
+      - path: /myapp
+        backend:
+          serviceName: &lt;myservice2&gt;
+          servicePort: 80</code></pre>
+
+  <table>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>serviceName</code></td>
+  <td>Sostituisci <code>&lt;<em>myservice</em>&gt;</code> con il nome del servizio Kubernetes che hai creato per la tua applicazione.</td>
+  </tr>
+  <tr>
+  <td><code>name</code></td>
+  <td>Sostituisci <code>&lt;<em>cookie_name</em>&gt;</code> con il nome di un cookie permanente creato durante una sessione.</td>
+  </tr>
+  <tr>
+  <td><code>expires</code></td>
+  <td>Sostituisci <code>&lt;<em>expiration_time</em>&gt;</code> con il tempo in secondi (s), minuti (m) o ore (h) prima che scada il cookie permanente. Il tempo non è dipendente dall'attività utente. Una volta scaduto, il cookie viene eliminato dal browser web del client e non viene più inviato all'ALB. Ad esempio, per impostare un orario di scadenza di 1 secondo, 1 minuto o 1 ora, immetti <code>1s</code>, <code>1m</code> o <code>1h</code>.</td>
+  </tr>
+  <tr>
+  <td><code>path</code></td>
+  <td>Sostituisci <code>&lt;<em>cookie_path</em>&gt;</code> con il percorso che viene aggiunto al dominio secondario Ingress e che indica per quali domini e domini secondari il cookie viene inviato all'ALB. Ad esempio, se il tuo dominio Ingress è <code>www.myingress.com</code> e desideri inviare il cookie in ogni richiesta client, devi impostare <code>path=/</code>. Se desideri inviare il cookie solo per <code>www.myingress.com/myapp</code> e a tutti i relativi domini secondari, devi impostare <code>path=/myapp</code>.</td>
+  </tr>
+  <tr>
+  <td><code>hash</code></td>
+  <td>Sostituisci <code>&lt;<em>hash_algorithm</em>&gt;</code> con l'algoritmo hash che protegge le informazioni nel cookie. È
+supportato solo <code>sha1</code>. SHA1 crea un riepilogo hash in base alle informazioni nel cookie e lo accoda ad esso. Il server può decrittografare le informazioni nel cookie e verificare l'integrità dei dati.</td>
+  </tr>
+  </tbody></table>
+
+ </dd></dl>
+
+<br />
+
 
 ### Keepalive upstream (upstream-keepalive)
 {: #upstream-keepalive}
 
-Configura il numero massimo di connessioni keepalive inattive per un server upstream.
+Imposta il numero massimo di connessioni keepalive inattive per un server upstream.
 {:shortdesc}
 
 <dl>
@@ -904,8 +1042,9 @@ Imposta il numero massimo di connessioni keepalive inattive al server upstream d
   <p>Se imposti il tipo di richiesta su <code>web</code>, viene convalidata una richiesta web che contiene un token di accesso {{site.data.keyword.appid_short_notm}}. Se la convalida del token non riesce, la richiesta web viene rifiutata. Se la richiesta non contiene un token di accesso, verrà reindirizzata alla pagina di accesso di {{site.data.keyword.appid_short_notm}}. **Nota**: perché l'autenticazione web {{site.data.keyword.appid_short_notm}} funzioni, è necessario abilitare i cookie nel browser dell'utente.</p>
 
   <p>Se imposti il tipo di richiesta su <code>api</code>, viene convalidata una richiesta API che contiene un token di accesso {{site.data.keyword.appid_short_notm}}. Se la richiesta non contiene un token di accesso, l'utente riceverà il messaggio di errore <code>401: Unauthorized</code>.</p>
-  </dd>
 
+  <p>**Nota**: per motivi di sicurezza, l'autenticazione {{site.data.keyword.appid_short_notm}} supporta solo i backend con TLS/SSL abilitato.</p>
+  </dd>
    <dt>YAML risorsa Ingress di esempio</dt>
    <dd>
 
@@ -949,7 +1088,7 @@ Imposta il numero massimo di connessioni keepalive inattive al server upstream d
     </tr>
     <tr>
     <td><code>serviceName</code></td>
-    <td>Sostituisci <code><em>&lt;myservice&gt</em></code> con il nome del servizio Kubernetes che hai creato per la tua applicazione. Questo campo è facoltativo. Se non si include un nome di servizio, l'annotazione viene abilitata per tutti i servizi.  Se si include un nome di servizio, l'annotazione viene abilitata solo per tale servizio. Separa più servizi con un punto e virgola (;).</td>
+    <td>Sostituisci <code><em>&lt;myservice&gt;</em></code> con il nome del servizio Kubernetes che hai creato per la tua applicazione. Questo campo è facoltativo. Se non si include un nome di servizio, l'annotazione viene abilitata per tutti i servizi.  Se si include un nome di servizio, l'annotazione viene abilitata solo per tale servizio. Separa più servizi con un punto e virgola (;).</td>
     </tr>
     </tbody></table>
     </dd>
@@ -1027,7 +1166,7 @@ spec:
 L'output della CLI sarà simile al seguente:
 <pre class="screen">
 <code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.10.10.149   169.60.16.246   80:30776/TCP,443:30412/TCP   8d</code></pre></li>
+public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  80:30776/TCP,443:30412/TCP   8d</code></pre></li>
 <li>Apri la mappa di configurazione di ALB.
 <pre class="pre">
 <code>kubectl edit configmap ibm-cloud-provider-ingress-cm -n kube-system</code></pre></li>
@@ -1050,11 +1189,12 @@ metadata:
 L'output della CLI sarà simile al seguente:
 <pre class="screen">
 <code>NAME                     CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
-public-ingress-ctl-svc   10.10.10.149   169.60.16.246   &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
+public-ingress-ctl-svc   10.xxx.xx.xxx  169.xx.xxx.xxx  &lt;port1&gt;:30776/TCP,&lt;port2&gt;:30412/TCP   8d</code></pre></li>
 <li>Configura il tuo Ingress in modo che utilizzi le porte non predefinite quando instrada il traffico di rete ai tuoi servizi. Utilizza il file YAML di esempio in questo riferimento. </li>
 <li>Aggiorna la configurazione del tuo ALB.
 <pre class="pre">
-<code>kubectl apply -f &lt;yaml_file&gt;</code></pre>
+<code>        kubectl apply -f myingress.yaml
+        </code></pre>
 </li>
 <li>Apri il tuo browser web preferito per accedere alla tua applicazione. Esempio: <code>https://&lt;ibmdomain&gt;:&lt;port&gt;/&lt;service_path&gt;/</code></li></ol></dd></dl>
 
@@ -1121,7 +1261,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/hsts: enabled=&lt;true&gt; maxAge=&lt;31536000&gt; includeSubdomains=&lt;true&gt;
+    ingress.bluemix.net/hsts: enabled=true maxAge=&lt;31536000&gt; includeSubdomains=true
 spec:
   tls:
   - hosts:
@@ -1183,7 +1323,7 @@ Configura l'autenticazione reciproca per l'ALB Ingress. Il client autentica il s
 <dd>
 <ul>
 <li>[Devi disporre di un segreto valido che contenga l'autorità di certificazione (CA) richiesta](cs_app.html#secrets). Per l'autenticazione reciproca sono necessari anche <code>client.key</code> e <code>client.crt</code>.</li>
-<li>Per abilitare l'autenticazione reciproca su una porta diversa da 443, [configura il programma di bilanciamento del carico per aprire la porta valida](cs_ingress.html#opening_ingress_ports).</li>
+<li>Per abilitare l'autenticazione reciproca su una porta diversa da 443, [configura l'ALB per aprire la porta valida](cs_ingress.html#opening_ingress_ports).</li>
 </ul>
 </dd>
 
@@ -1222,12 +1362,12 @@ spec:
 <td>Sostituisci <code>&lt;<em>mysecret</em>&gt;</code> con un nome per la risorsa del segreto.</td>
 </tr>
 <tr>
-<td><code>&lt; port&gt;</code></td>
-<td>Il numero di porta dell'ALB.</td>
+<td><code> port</code></td>
+<td>Sostituisci <code>&lt;<em>port</em>&gt;</code> con il numero di porta ALB.</td>
 </tr>
 <tr>
-<td><code>&lt;serviceName&gt;</code></td>
-<td>Il nome di una o più risorse Ingress. Questo parametro è facoltativo.</td>
+<td><code>serviceName</code></td>
+<td>Sostituisci <code>&lt;<em>servicename</em>&gt;</code> con il nome di una o più risorse Ingress. Questo parametro è facoltativo.</td>
 </tr>
 </tbody></table>
 
@@ -1284,11 +1424,11 @@ spec:
   <tbody>
   <tr>
   <td><code>ssl-service</code></td>
-  <td>Sostituisci <code>&lt;<em>myservice</em>&gt;</code> con il nome del servizio che rappresenta la tua applicazione. Il traffico viene crittografato dall'ALB a questa applicazione.</td>
+  <td>Sostituisci <code>&lt;<em>myservice</em>&gt;</code> con il nome del servizio che richiede HTTPS. Il traffico viene crittografato dall'ALB a questo servizio dell'applicazione.</td>
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Sostituisci <code>&lt;<em>service-ssl-secret</em>&gt;</code> con il segreto per il servizio. Questo parametro è facoltativo. Se il parametro viene fornito, il valore deve contenere la chiave e il certificato che la tua applicazione si aspetta dal client.</td>
+  <td>Sostituisci <code>&lt;<em>service-ssl-secret</em>&gt;</code> con il segreto per il servizio. Questo parametro è facoltativo. Se il parametro viene fornito, il valore deve contenere la chiave e il certificato che la tua applicazione si aspetta dal client. Per creare un segreto TLS, vedi [Creazione dei segreti](cs_app.html#secrets).</td>
   </tr>
   </tbody></table>
 
@@ -1349,11 +1489,11 @@ spec:
   <tbody>
   <tr>
   <td><code>ssl-service</code></td>
-  <td>Sostituisci <code>&lt;<em>myservice</em>&gt;</code> con il nome del servizio che rappresenta la tua applicazione. Il traffico viene crittografato dall'ALB a questa applicazione.</td>
+  <td>Sostituisci <code>&lt;<em>myservice</em>&gt;</code> con il nome del servizio che richiede HTTPS. Il traffico viene crittografato dall'ALB a questo servizio dell'applicazione.</td>
   </tr>
   <tr>
   <td><code>ssl-secret</code></td>
-  <td>Sostituisci <code>&lt;<em>service-ssl-secret</em>&gt;</code> con il segreto per il servizio. Questo parametro è facoltativo. Se il parametro viene fornito, il valore deve contenere la chiave e il certificato che la tua applicazione si aspetta dal client.</td>
+  <td>Sostituisci <code>&lt;<em>service-ssl-secret</em>&gt;</code> con il segreto per il servizio. Questo parametro è facoltativo. Se il parametro viene fornito, il valore deve contenere la chiave e il certificato che la tua applicazione si aspetta dal client. Per creare un segreto di autenticazione reciproca, vedi [Creazione dei segreti](cs_app.html#secrets).</td>
   </tr>
   </tbody></table>
 
@@ -1363,7 +1503,92 @@ spec:
 <br />
 
 
+## Annotazioni Istio
+{: #istio-annotations}
 
+### Servizi Istio (istio-services)
+{: #istio-services}
+
+  Instrada il traffico ai servizi gestiti da Istio.
+  {:shortdesc}
+
+  <dl>
+  <dt>Descrizione</dt>
+  <dd>
+  Se hai servizi gestiti da Istio, puoi utilizzare un ALB cluster per instradare le richieste HTTP/HTTPS al controller Ingress Istio. Il controller Ingress Istio instrada quindi le richieste ai servizi dell'applicazione. Al fine di instradare il traffico, devi apportare modifiche alle risorse Ingress sia per l'ALB cluster che per il controller Ingress Istio.
+    <br><br>Nella risorsa Ingress per l'ALB cluster, devi:
+      <ul>
+        <li>specificare l'annotazione `istio-services`</li>
+        <li>definire il percorso di servizio come il percorso effettivo su cui è in ascolto l'applicazione </li>
+        <li>definire la porta di servizio come la porta del controller Ingress Istio</li>
+      </ul>
+    <br>Nella risorsa Ingress per il controller Ingress Istio, devi:
+      <ul>
+        <li>definire il percorso di servizio come il percorso effettivo su cui è in ascolto l'applicazione </li>
+        <li>definire la porta di servizio come la porta HTTP/HTTPS del servizio dell'applicazione esposto dal controller Ingress Istio</li>
+    </ul>
+  </dd>
+
+   <dt>YAML risorsa Ingress di esempio per l'ALB cluster</dt>
+   <dd>
+
+   <pre class="codeblock">
+   <code>apiVersion: extensions/v1beta1
+   kind: Ingress
+   metadata:
+    name: myingress
+    annotations:
+      ingress.bluemix.net/istio-services: "enable=True serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
+   spec:
+    tls:
+    - hosts:
+      - mydomain
+    secretName: mytlssecret
+  rules:
+    - host: mydomain
+    http:
+      paths:
+        - path: &lt;/myapp1&gt;
+          backend:
+            serviceName: &lt;myservice1&gt;
+            servicePort: &lt;istio_ingress_port&gt;
+        - path: &lt;/myapp2&gt;
+          backend:
+            serviceName: &lt;myservice2&gt;
+            servicePort: &lt;istio_ingress_port&gt;</code></pre>
+
+   <table>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti del file YAML</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>enable</code></td>
+      <td>Per abilitare l'instradamento del traffico ai servizi gestiti da Istio, deve essere impostato su <code>True</code>.</td>
+    </tr>
+    <tr>
+    <td><code>serviceName</code></td>
+    <td>Sostituisci <code><em>&lt;myservice1&gt;</em></code> con il nome del servizio Kubernetes che hai creato per la tua applicazione gestita da Istio. Separa più servizi con un punto e virgola (;). Questo campo è facoltativo. Se non specifichi un nome di servizio, tutti i servizi gestiti da Istio verranno abilitati per l'instradamento del traffico. </td>
+    </tr>
+    <tr>
+    <td><code>istioServiceNamespace</code></td>
+    <td>Sostituisci <code><em>&lt;istio-namespace&gt;</em></code> con lo spazio dei nomi Kubernetes in cui è installato Istio. Questo campo è facoltativo. Se non specifichi uno spazio dei nomi, verrà utilizzato lo spazio dei nomi <code>istio-system</code>.</td>
+    </tr>
+    <tr>
+    <td><code>istioServiceName</code></td>
+    <td>Sostituisci <code><em>&lt;istio-ingress-service&gt;</em></code> con il nome del servizio Ingress Istio. Questo campo è facoltativo. Se non specifichi il nome di servizio Ingress Istio, verrà utilizzato il nome di servizio <code>istio-ingress</code>.</td>
+    </tr>
+    <tr>
+    <td><code>path</code></td>
+      <td>Per ciascun servizio gestito da Istio a cui desideri instradare il traffico, sostituisci <code><em>&lt;/myapp1&gt;</em></code> con il percorso di backend su cui è in ascolto il servizio gestito da Istio. Il percorso deve corrispondere a quello che hai definito nella risorsa Ingress Istio.</td>
+    </tr>
+    <tr>
+    <td><code>servicePort</code></td>
+    <td>Per ciascun servizio gestito da Istio a cui desideri instradare il traffico, sostituisci <code><em>&lt;istio_ingress_port&gt;</em></code> con la porta del controller Ingress Istio.</td>
+    </tr>
+    </tbody></table>
+    </dd>
+    </dl>
 
 ## Annotazioni buffer proxy
 {: #proxy-buffer}
@@ -1456,7 +1681,7 @@ spec:
  <td>Sostituisci <code>&lt;<em>myservice</em>&gt;</code> con il nome di un servizio a cui applicare proxy-buffers.</td>
  </tr>
  <tr>
- <td><code>number_of_buffers</code></td>
+ <td><code>number</code></td>
  <td>Sostituisci <code>&lt;<em>number_of_buffers</em>&gt;</code> con un numero, ad esempio <em>2</em>.</td>
  </tr>
  <tr>
@@ -1552,7 +1777,7 @@ kind: Ingress
 metadata:
  name: proxy-ingress
  annotations:
-   ingress.bluemix.net/proxy-busy-buffers-size: "serviceName=&lt;serviceName&gt; size=&lt;size&gt;"
+   ingress.bluemix.net/proxy-busy-buffers-size: "serviceName=&lt;myservice&gt; size=&lt;size&gt;"
 spec:
  tls:
  - hosts:
@@ -1999,6 +2224,3 @@ Limita la velocità di elaborazione delle richieste e il numero di connessioni p
   </dl>
 
   <br />
-
-
-

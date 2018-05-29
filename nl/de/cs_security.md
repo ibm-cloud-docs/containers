@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-29"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -31,5 +31,4 @@ Aktuelle Informationen finden Sie an der neuen Position:
  - [Helm-Diagramme zur Einrichtung von VPN-Konnektivität mit dem Strongswan-IPSec-VPN-Service](cs_vpn.html#vpn)
  - [Netzrichtlinien](cs_network_policy.html#network_policies)
  - [Netzverkehr zu Edge-Workerknoten beschränken](cs_edge.html#edge)
-
 

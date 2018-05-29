@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-01-24"
 # Acceso al portafolio de infraestructura de IBM Cloud (SoftLayer)
 {: #infrastructure}
 
-Para crear un clúster de Kubernetes estándar, debe tener acceso al portafolio de infraestructura de IBM Cloud (SoftLayer). Este acceso es necesario para solicitar recursos de infraestructura de pago como, por ejemplo, nodos trabajadores, direcciones de IP públicas o almacenamiento persistente para su clúster de Kubernetes en {{site.data.keyword.containerlong}}.
+Para crear un clúster de Kubernetes estándar, debe tener acceso al portafolio de infraestructura de IBM Cloud (SoftLayer). Este acceso es necesario para solicitar recursos de infraestructura de pago como, por ejemplo, nodos trabajadores, direcciones de IP públicas portátiles o almacenamiento persistente para su clúster de Kubernetes en {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
 ## Acceda al portafolio de infraestructura de IBM Cloud (SoftLayer)
@@ -63,13 +63,14 @@ utilizando el {{site.data.keyword.ibmid}} y la contraseña de su cuenta antigua 
   ```
   {: pre}
 
-6.  Establezca la clave de API que generó con anterioridad para acceder al portafolio de infraestructura de IBM Cloud (SoftLayer). Sustituya `<API_KEY>` por la clave de API y `<USERNAME>` por el {{site.data.keyword.ibmid}} de la nueva cuenta de pago según uso.
+6.  Establezca la clave de API que generó con anterioridad para acceder al portafolio de infraestructura de IBM Cloud (SoftLayer). Sustituya `<API_key>` por la clave de API y `<username>` por el {{site.data.keyword.ibmid}} de la nueva cuenta de pago según uso.
 
   ```
-  bx cs credentials-set --infrastructure-api-key <API_KEY> --infrastructure-username <USERNAME>
+  bx cs credentials-set --infrastructure-api-key <API_key> --infrastructure-username <username>
   ```
   {: pre}
 
 7.  Empiece [creando clústeres estándares](cs_clusters.html#clusters_cli).
 
 **Nota:** Para revisar la clave de la API después de generarla, siga el paso 1 y el paso 2 y, a continuación, en la sección de **Clave de API**, pulse **Ver** para ver la clave de API para su ID de usuario.
+

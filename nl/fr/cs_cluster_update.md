@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -28,7 +28,7 @@ Vous pouvez installer des mises à jour pour maintenir vos clusters Kubernetes �
 Régulièrement, Kubernetes publie des [mises à jour principales, secondaires ou des correctifs](cs_versions.html#version_types). En fonction du type de mise à jour, vous pouvez être chargé de mettre à jour des composants du maître Kubernetes.
 {:shortdesc}
 
-Les mises à jour peuvent affecter la version du serveur d'API Kubernetes ou d'autres composants dans le maître Kubernetes.  C'est toujours vous qui êtes chargé de garder vos noeuds worker à jour. Lors de l'application de mises à jour, le maître Kubernetes est actualisé avant les noeuds worker. 
+Les mises à jour peuvent affecter la version du serveur d'API Kubernetes ou d'autres composants dans le maître Kubernetes.  C'est toujours vous qui êtes chargé de garder vos noeuds worker à jour. Lors de l'application de mises à jour, le maître Kubernetes est actualisé avant les noeuds worker.
 
 Par défaut, votre possibilité de mettre à jour le serveur d'API Kubernetes est limitée dans le maître Kubernetes dont les versions secondaires sont plus de deux fois supérieures à la version actuelle. Par exemple, si la version actuelle de votre serveur d'API Kubernetes est 1.5 et que vous voulez le mettre à jour à la version 1.8, vous devez d'abord effectuer une mise à jour vers la version 1.7. Vous pouvez forcer la mise à jour au-delà de deux versions secondaires, mais ceci peut entraîner des résultats inattendus. Si votre cluster s'exécute sur une version non prise en charge de Kubernetes, il vous faudra peut-être forcer la mise à jour.
 
@@ -75,7 +75,7 @@ Dans la section des informations sur les données de la mappe de configuration, 
 
 Les clés ont été définies. Que faire maintenant ?
 
-Après avoir défini vos règles, exécutez la commande `worker-upgrade`. Si une réponse positive est renvoyée, les noeuds worker sont placés en file d'attente pour leur mise à niveau. Cependant, la procédure de mise à jour des noeuds n'est pas engagée tant que toutes les règles ne sont pas satisfaites. Une fois les noeuds placés en file d'attente, les règles sont vérifiées périodiquement pour déterminer si l'un des noeuds peut être mis à niveau.
+Après avoir défini vos règles, exécutez la commande `bx cs worker-update`. Si une réponse positive est renvoyée, les noeuds worker sont placés en file d'attente pour être mis à jour. Cependant, la procédure de mise à jour des noeuds n'est pas engagée tant que toutes les règles ne sont pas satisfaites. Une fois les noeuds placés en file d'attente, les règles sont vérifiées périodiquement pour déterminer si l'un des noeuds peut être mis à jour.
 
 Que se passe-t-il si je choisis de ne pas définir de mappe de configuration ?
 
@@ -95,6 +95,7 @@ Pour mettre à jour vos noeuds worker, procédez comme suit :
       name: ibm-cluster-update-configuration
       namespace: kube-system
     data:
+     drain_timeout_seconds: "120"
      zonecheck.json: |
        {
          "MaxUnavailablePercentage": 70,
@@ -107,7 +108,6 @@ Pour mettre à jour vos noeuds worker, procédez comme suit :
          "NodeSelectorKey": "failure-domain.beta.kubernetes.io/region",
          "NodeSelectorValue": "us-south"
        }
-    ...
      defaultcheck.json: |
        {
          "MaxUnavailablePercentage": 100
@@ -120,12 +120,16 @@ Pour mettre à jour vos noeuds worker, procédez comme suit :
     </thead>
     <tbody>
       <tr>
-        <td><code>defaultcheck.json</code></td>
-        <td> Par défaut, si une mappe de configuration ibm-cluster-update-configuration valide n'est pas définie, seuls 20 % de vos clusters peuvent être indisponibles à un moment donné. Si une ou plusieurs règles valides sont définies sans mappe de configuration globale par défaut celle utilisée par défaut autorise 100 % des noeuds worker à être indisponibles à un moment donné. Vous pouvez contrôler ce comportement en créant un pourcentage par défaut. </td>
+        <td><code>drain_timeout_seconds</code></td>
+        <td> Facultatif : délai en secondes dû à l'arrêt qui se produit lors d'une mise à jour de noeud worker. Cet arrêt fait passer le noeud à l'état `unschedulable`, ce qui empêche le déploiement de nouveaux pods sur ce noeud. Cela supprime également les pods hors fonction du noeud. Les valeurs admises sont des entiers compris entre 1 et 180. La valeur par défaut est 30.</td>
       </tr>
       <tr>
         <td><code>zonecheck.json</code></br><code>regioncheck.json</code></td>
         <td> Exemple de clés uniques pour lesquelles vous désirez définir des règles. Vous pouvez nommer les clés à votre gré ; les informations sont analysées par les configurations définies dans la clé. Pour chaque clé que vous définissez, vous ne pouvez affecter qu'une seule valeur à <code>NodeSelectorKey</code> et <code>NodeSelectorValue</code>. Si vous désirez définir des règles pour plusieurs régions ou emplacements (centres de données), créez une nouvelle entrée de clé. </td>
+      </tr>
+      <tr>
+        <td><code>defaultcheck.json</code></td>
+        <td> Par défaut, si la mappe <code>ibm-cluster-update-configuration</code> n'est pas définie correctement, seuls 20 % de vos clusters peuvent être indisponibles à un moment donné. Si une ou plusieurs règles valides sont définies sans mappe de configuration globale par défaut celle utilisée par défaut autorise 100 % des noeuds worker à être indisponibles à un moment donné. Vous pouvez contrôler ce comportement en créant un pourcentage par défaut. </td>
       </tr>
       <tr>
         <td><code>MaxUnavailablePercentage</code></td>
@@ -146,10 +150,10 @@ Pour mettre à jour vos noeuds worker, procédez comme suit :
 
 3. Mettez à jour vos noeuds worker depuis l'interface graphique ou la ligne de commande (CLI).
   * Pour effectuer la mise à jour à partir du tableau de bord {{site.data.keyword.Bluemix_notm}}, accédez à la section `Worker nodes` de votre cluster, et cliquez sur `Update Worker`.
-  * Pour obtenir les ID des noeuds worker, exécutez la commande `bx cs workers <cluster_name_or_id>`. Si vous sélectionnez plusieurs noeuds worker, ceux-ci sont placés en file d'attente pour évaluation de la mise à jour. S'ils sont considérés comme prêts au terme de l'évaluation, ils seront mis à jour d'après les règles définies dans les configurations.
+  * Pour obtenir les ID des noeuds worker, exécutez la commande `bx cs workers <cluster_name_or_ID>`. Si vous sélectionnez plusieurs noeuds worker, ceux-ci sont placés en file d'attente pour évaluation de la mise à jour. S'ils sont considérés comme prêts au terme de l'évaluation, ils seront mis à jour d'après les règles définies dans les configurations.
 
     ```
-    bx cs worker-update <cluster_name_or_id> <worker_node_id1> <worker_node_id2>
+    bx cs worker-update <cluster_name_or_ID> <worker_node1_ID> <worker_node2_ID>
     ```
     {: pre}
 
@@ -160,14 +164,14 @@ Pour mettre à jour vos noeuds worker, procédez comme suit :
     {: pre}
 
 5. Confirmez que la mise à jour est terminée :
-  * Vérifiez la version Kubernetes dans le tableau de bord {{site.data.keyword.Bluemix_notm}} ou exécutez la commande `bx cs workers <cluster_name_or_id>`.
+  * Vérifiez la version Kubernetes dans le tableau de bord {{site.data.keyword.Bluemix_notm}} ou exécutez la commande `bx cs workers <cluster_name_or_ID>`.
   * Vérifiez la version Kubernets des noeuds worker en exécutant la commande `kubectl get nodes`.
-  * Dans certains cas, des clusters plus anciens peuvent répertorier des noeuds worker en double avec un statut **NotReady** après une mise à jour. Pour supprimer ces doublons, voir la section de [traitement des incidents](cs_troubleshoot.html#cs_duplicate_nodes).
+  * Dans certains cas, des clusters plus anciens peuvent répertorier des noeuds worker en double avec un statut **NotReady** après une mise à jour. Pour supprimer ces doublons, voir la section de [traitement des incidents](cs_troubleshoot_clusters.html#cs_duplicate_nodes).
 
 Etapes suivantes :
   - Répétez le processus de mise à jour pour les autres clusters.
   - Informez les développeurs qui travaillent dans le cluster pour qu'ils mettent à jour leur interface de ligne de commande `kubectl` à la version du maître Kubernetes.
-  - Si le tableau de bord Kubernetes n'affiche pas les graphiques d'utilisation, [supprimez le pod `kube-dashboard`](cs_troubleshoot.html#cs_dashboard_graphs).
+  - Si le tableau de bord Kubernetes n'affiche pas les graphiques d'utilisation, [supprimez le pod `kube-dashboard`](cs_troubleshoot_health.html#cs_dashboard_graphs).
 
 
 <br />
@@ -192,21 +196,21 @@ Vous pouvez mettre à jour les types de machine utilisés dans les noeuds worker
     ```
     {: pre}
 
-3. Ajoutez un noeud worker en utilisant la commande [bx cs worker-add](cs_cli_reference.html#cs_worker_add) et indiquez l'un des types de machine répertoriés dans la sortie de la commande précédente.
+3. Ajoutez des noeuds worker en exécutant la commande [bx cs worker-add](cs_cli_reference.html#cs_worker_add). Indiquez un type de machine.
 
     ```
-    bx cs worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_vlan> --public-vlan <public_vlan>
+    bx cs worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
     ```
     {: pre}
 
-4. Vérifiez que le noeud worker a été ajouté.
+4. Vérifiez que les noeuds worer ont été ajoutés.
 
     ```
     bx cs workers <cluster_name>
     ```
     {: pre}
 
-5. Lorsque le noeud worker ajouté est à l'état `Normal`, vous pouvez supprimer le noeud worker périmé. **Remarque** : Si vous supprimez un type de machine qui est facturé au mois (par exemple bare metal), vous êtes facturé pour le mois complet.
+5. Lorsque les noeuds worker ajoutés sont à l'état `Normal`, vous pouvez supprimer le noeud worker périmé. **Remarque** : Si vous supprimez un type de machine qui est facturé au mois (par exemple bare metal), vous êtes facturé pour le mois complet.
 
     ```
     bx cs worker-rm <cluster_name> <worker_node>
@@ -214,5 +218,6 @@ Vous pouvez mettre à jour les types de machine utilisés dans les noeuds worker
     {: pre}
 
 6. Répétez cette procédure pour mettre à niveau d'autres noeuds worker sur d'autres types de machine.
+
 
 

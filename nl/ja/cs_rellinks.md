@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-01"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -26,6 +26,7 @@ lastupdated: "2017-12-01"
 - [クラスター・ロギング用の REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://us-south.containers.bluemix.net/swagger-logging/)
 - [クラスター Ingress のアプリケーション・ロード・バランシング用の REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://us-south.containers.bluemix.net/swagger-alb-api/)
 - [developerWorks コンテナー・オーケストレーション・ジャーニー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/code/journey/category/container-orchestration/)
+- [developerWorks のコース ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/courses/all/?s=IBM+Cloud+Container+Service)
 - [Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/)
 - [Docker の資料![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/engine/)
 - Kubernetes パッケージ管理のための <a href="https://docs.helm.sh/helm/" target="_blank">Helm の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a>
@@ -56,6 +57,9 @@ lastupdated: "2017-12-01"
 
 - [単一コンテナーとスケーラブル・コンテナー用の REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](http://ccsapi-doc.mybluemix.net/)
 
+<br />
+
+
 **一般**
 
 - [Twitter ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://twitter.com/hashtag/ibmcontainers)
@@ -63,4 +67,5 @@ lastupdated: "2017-12-01"
 - [Microservices.TV ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/tv/microservices/)
 
 <br />
+
 

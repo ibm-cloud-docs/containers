@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -16,29 +16,31 @@ lastupdated: "2018-03-16"
 {:download: .download}
 
 
-# Ingress サービスのセットアップ
+# Ingress を使用してアプリを公開する
 {: #ingress}
 
 {{site.data.keyword.containerlong}} で、IBM 提供のアプリケーション・ロード・バランサーで管理される Ingress リソースを作成して、Kubernetes クラスター内の複数のアプリを公開します。
 {:shortdesc}
 
-## Ingress サービスを使用したネットワーキングの計画
+## Ingress を使用してネットワーク・トラフィックを管理する
 {: #planning}
 
-Ingress を使用すると、クラスター内の複数のサービスを公開し、単一のパブリック・エントリー・ポイントを使用してそれらのサービスを提供できます。
+Ingress は、パブリック要求またはプライベート要求をアプリに転送して、クラスター内のネットワーク・トラフィック・ワークロードを負荷分散する Kubernetes サービスです。Ingress を利用すると、固有のパブリック経路またはプライベート経路を使用して複数のアプリ・サービスをパブリック・ネットワークまたはプライベート・ネットワークに公開できます。
 {:shortdesc}
 
-公開するアプリごとにロード・バランサー・サービスを作成するのではなく、Ingress では、1 つの固有のパブリック経路を使用し、各アプリに固有のパスに基づいてクラスター内外のアプリにパブリック要求を転送できます。Ingress は、アプリケーション・ロード・バランサーと Ingress コントローラーという 2 つの主要なコンポーネントで構成されています。
-
-アプリケーション・ロード・バランサー (ALB) は、着信 HTTP/HTTPS、TCP、または UDP サービス要求を listen し、適切なアプリ・ポッドに要求を転送する外部ロード・バランサーです。標準クラスターを作成すると、{{site.data.keyword.containershort_notm}} がそのクラスター用に可用性の高い ALB を自動で作成し、固有のパブリック経路を割り当てます。 パブリック経路は、クラスター作成時にお客様の IBM Cloud インフラストラクチャー (SoftLayer) アカウントにプロビジョンされたポータブル・パブリック IP アドレスにリンクされます。 デフォルトのプライベート ALB も自動的に作成されますが、自動的に有効になるわけではありません。
-
-Ingress 経由でアプリを公開するには、アプリ用に Kubernetes サービスを作成し、Ingress リソースを定義することによってこのサービスを ALB に登録する必要があります。 Ingress リソースには、公開するアプリ用の固有の URL (`mycluster.us-south.containers.mybluemix.net/myapp` など) を形成するためにパブリック経路に付加するパスを指定し、アプリに対する着信要求をルーティングする方法についてのルールを定義します。
+Ingress は、以下の 2 つのコンポーネントで構成されています。
+<dl>
+<dt>アプリケーション・ロード・バランサー</dt>
+<dd>アプリケーション・ロード・バランサー (ALB) は、着信 HTTP、HTTPS、TCP、または UDP サービス要求を listen し、適切なアプリ・ポッドに要求を転送する外部ロード・バランサーです。 標準クラスターを作成すると、{{site.data.keyword.containershort_notm}} がそのクラスター用に可用性の高い ALB を自動で作成し、固有のパブリック経路を割り当てます。 パブリック経路は、クラスター作成時にお客様の IBM Cloud インフラストラクチャー (SoftLayer) アカウントにプロビジョンされたポータブル・パブリック IP アドレスにリンクされます。 デフォルトのプライベート ALB も自動的に作成されますが、自動的に有効になるわけではありません。</dd>
+<dt>Ingress リソース</dt>
+<dd>Ingress を使用してアプリを公開するには、アプリ用に Kubernetes サービスを作成し、Ingress リソースを定義してそのサービスを ALB に登録する必要があります。Ingress リソースは、アプリに対する着信要求を転送する方法についてのルールを定義する Kubernetes リソースです。また、Ingress リソースによってアプリ・サービスへのパスも指定します。このパスがパブリック経路に付加されて、アプリの固有 URL が形成されます。例えば、`mycluster.us-south.containers.mybluemix.net/myapp` のようになります。</dd>
+</dl>
 
 次の図は、Ingress がインターネットからアプリへの通信をどのように誘導するかを示しています。
 
 <img src="images/cs_ingress_planning.png" width="550" alt="Ingress を使用して {{site.data.keyword.containershort_notm}} 内のアプリを公開する" style="width:550px; border-style: none"/>
 
-1. ユーザーがアプリの URL にアクセスしてアプリに要求を送信します。この URL は、Ingress リソース・パスが付加された公開アプリのパブリック URL です (例: `mycluster.us-south.containers.mybluemix.net/myapp`)。
+1. ユーザーがアプリの URL にアクセスしてアプリに要求を送信します。 この URL は、Ingress リソース・パスが付加された公開アプリのパブリック URL です (例: `mycluster.us-south.containers.mybluemix.net/myapp`)。
 
 2. グローバル・ロード・バランサーとして機能する DNS システム・サービスが、その URL を、クラスター内のデフォルトのパブリック ALB のポータブル・パブリック IP アドレスに解決します。
 
@@ -46,7 +48,7 @@ Ingress 経由でアプリを公開するには、アプリ用に Kubernetes サ
 
 4. Kubernetes サービスが、要求を ALB にルーティングします。
 
-5. ALB は、クラスター内の `myapp` パスのルーティング・ルールが存在するかどうかを検査します。 一致するルールが見つかった場合、要求は、Ingress リソースで定義したルールに従って、アプリがデプロイされているポッドに転送されます。複数のアプリ・インスタンスがクラスターにデプロイされている場合、ALB は、アプリ・ポッド間で要求のロード・バランシングを行います。
+5. ALB は、クラスター内の `myapp` パスのルーティング・ルールが存在するかどうかを検査します。 一致するルールが見つかった場合、要求は、Ingress リソースで定義したルールに従って、アプリがデプロイされているポッドに転送されます。 複数のアプリ・インスタンスがクラスターにデプロイされている場合、ALB は、アプリ・ポッド間で要求のロード・バランシングを行います。
 
 
 
@@ -93,137 +95,130 @@ Ingress でパブリックに公開するすべてのアプリに、パブリッ
 
 IBM 提供のドメインを使用してアプリを公開するには、以下のようにします。
 
-1.  [アプリをクラスターにデプロイします](cs_app.html#app_cli)。 アプリをクラスターにデプロイする際に、コンテナー内のアプリを実行するポッドが 1 つ以上自動的に作成されます。 構成ファイルの metadata セクションで、デプロイメントにラベルを追加しておく必要があります。 このラベルは、アプリが実行されるすべてのポッドを識別して、それらのポットが Ingress ロード・バランシングに含められるようにするために必要です。
-2.  公開するアプリ用に、Kubernetes サービスを作成します。 ALB が Ingress ロード・バランシングにアプリを含めることができるのは、クラスター内の Kubernetes サービスによってアプリが公開されている場合のみです。
-    1.  任意のエディターを開き、`myservice.yaml` などの名前のサービス構成ファイルを作成します。
-    2.  公開するアプリのサービスを定義します。
+1.  [アプリをクラスターにデプロイします](cs_app.html#app_cli)。 構成ファイルの metadata セクションで、デプロイメントにラベルを追加しておく必要があります (例えば、`app: code`)。このラベルは、アプリが実行されるすべてのポッドを識別して、それらのポットが Ingress ロード・バランシングに含められるようにするために必要です。
 
-        ```
-        apiVersion: v1
-        kind: Service
-        metadata:
-          name: <myservice>
-        spec:
-          selector:
-            <selectorkey>: <selectorvalue>
-          ports:
-           - protocol: TCP
-             port: 8080
-        ```
-        {: codeblock}
+2.   公開するアプリの Kubernetes サービスを作成します。 アプリをクラスター ALB の Ingress ロード・バランシングに含めるには、Kubernetes サービスを介してアプリを公開する必要があります。
+      1.  任意のエディターを開き、`myalbservice.yaml` などの名前のサービス構成ファイルを作成します。
+      2.  ALB でパブリックに公開するアプリのサービスを定義します。
 
-        <table>
-        <caption>ALB サービス・ファイルの構成要素について</caption>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>name</code></td>
-        <td><em>&lt;myservice&gt;</em> を ALB サービスの名前に置き換えます。</td>
-        </tr>
-        <tr>
-        <td><code>selector</code></td>
-        <td>アプリが実行されるポッドをターゲットにするために使用する、ラベル・キー (<em>&lt;selectorkey&gt;</em>) と値 (<em>&lt;selectorvalue&gt;</em>) のペアを入力します。 例えば、<code>app: code</code> というセレクターを使用した場合、メタデータにこのラベルがあるすべてのポッドが、ロード・バランシングに含められます。 アプリをクラスターにデプロイするときに使用したものと同じラベルを入力してください。 </td>
-         </tr>
-         <tr>
-         <td><code>port</code></td>
-         <td>サービスが listen するポート。</td>
-         </tr>
-         </tbody></table>
-    3.  変更を保存します。
-    4.  クラスター内にサービスを作成します。
+          ```
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: myalbservice
+          spec:
+            selector:
+              <selector_key>: <selector_value>
+            ports:
+             - protocol: TCP
+               port: 8080
+          ```
+          {: codeblock}
 
-        ```
-        kubectl apply -f myservice.yaml
-        ```
-        {: pre}
-    5.  公開するアプリごとに、上記のステップを繰り返します。
-3.  クラスターの詳細を取得して、IBM 提供ドメインを表示します。 _&lt;mycluster&gt;_ を、公開する対象のアプリがデプロイされているクラスターの名前に置き換えます。
+          <table>
+          <caption>ALB サービス・ファイルの構成要素について</caption>
+          <thead>
+          <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+          </thead>
+          <tbody>
+          <tr>
+          <td><code>selector</code></td>
+          <td>アプリが実行されるポッドをターゲットにするために使用する、ラベル・キー (<em>&lt;selector_key&gt;</em>) と値 (<em>&lt;selector_value&gt;</em>) のペアを入力します。 ポッドをターゲットにして、サービス・ロード・バランシングに含めるには、<em>&lt;selector_key&gt;</em> および <em>&lt;selector_value&gt;</em> が、デプロイメント yaml の <code>spec.template.metadata.labels</code> セクションで使用したキー/値のペアと同じであることを確認します。</td>
+           </tr>
+           <tr>
+           <td><code>port</code></td>
+           <td>サービスが listen するポート。</td>
+           </tr>
+           </tbody></table>
+      3.  変更を保存します。
+      4.  クラスター内にサービスを作成します。
+
+          ```
+          kubectl apply -f myalbservice.yaml
+          ```
+          {: pre}
+      5.  公開するアプリごとに、上記のステップを繰り返します。
+
+3. クラスターの詳細を取得して、IBM 提供ドメインを表示します。 _&lt;cluster_name_or_ID&gt;_ を、公開する対象のアプリがデプロイされているクラスターの名前に置き換えます。
 
     ```
-    bx cs cluster-get <mycluster>
+    bx cs cluster-get <cluster_name_or_ID>
     ```
     {: pre}
 
-    CLI 出力は、以下のようになります。
+    出力例:
 
     ```
-    Retrieving cluster <mycluster>...
-    OK
-    Name:    <mycluster>
-    ID:    b9c6b00dc0aa487f97123440b4895f2d
-    State:    normal
-    Created:  2017-04-26T19:47:08+0000
-    Location: dal10
-    Master URL:  https://169.57.40.165:1931
-    Ingress subdomain:  <ibmdomain>
-    Ingress secret:  <ibmtlssecret>
-    Workers:  3
-    Version: 1.8.8
+    Name:                   mycluster
+    ID:                     18a61a63c6a94b658596ca93d087aad9
+    State:                  normal
+    Created:                2018-01-12T18:33:35+0000
+    Location:               dal10
+    Master URL:             https://169.xx.xxx.xxx:26268
+    Ingress Subdomain:      mycluster-12345.us-south.containers.mybluemix.net
+    Ingress Secret:         <tls_secret>
+    Workers:                3
+    Version:                1.8.11
+    Owner Email:            owner@email.com
+    Monitoring Dashboard:   <dashboard_URL>
     ```
     {: screen}
 
     IBM 提供ドメインは、**「Ingress サブドメイン (Ingress subdomain)」**フィールドに示されます。
 4.  Ingress リソースを作成します。 Ingress リソースは、アプリ用に作成した Kubernetes サービスのルーティング・ルールを定義するもので、着信ネットワーク・トラフィックをサービスにルーティングするために ALB によって使用されます。 複数のアプリをクラスター内の 1 つの Kubernetes サービスで公開する場合は、1 つの Ingress リソースを使用してすべてのアプリのルーティング・ルールを定義する必要があります。
-    1.  任意のエディターを開き、`myingress.yaml` などの名前の Ingress 構成ファイルを作成します。
+    1.  任意のエディターを開き、`myingressresource.yaml` などの名前の Ingress 構成ファイルを作成します。
     2.  IBM 提供ドメインを使用して着信ネットワーク・トラフィックを作成済みのサービスにルーティングするように、Ingress リソースを構成ファイル内に定義します。
 
         ```
         apiVersion: extensions/v1beta1
         kind: Ingress
         metadata:
-          name: <myingressname>
+          name: myingressresource
         spec:
           rules:
-          - host: <ibmdomain>
+          - host: <ibm_domain>
             http:
               paths:
-              - path: /<myservicepath1>
+              - path: /<service1_path>
                 backend:
-                  serviceName: <myservice1>
+                  serviceName: <service1>
                   servicePort: 80
-              - path: /<myservicepath2>
+              - path: /<service2_path>
                 backend:
-                  serviceName: <myservice2>
+                  serviceName: <service2>
                   servicePort: 80
         ```
         {: codeblock}
 
         <table>
-        <caption>Ingress リソース・ファイルの構成要素について</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
         </thead>
         <tbody>
         <tr>
-        <td><code>name</code></td>
-        <td><em>&lt;myingressname&gt;</em> を Ingress リソースの名前に置き換えます。</td>
-        </tr>
-        <tr>
         <td><code>host</code></td>
-        <td><em>&lt;ibmdomain&gt;</em> を、前述のステップにある IBM 提供の<strong>「Ingress サブドメイン (Ingress subdomain)」</strong>の名前に置き換えます。
+        <td><em>&lt;ibm_domain&gt;</em> を、前述のステップにある IBM 提供の<strong>「Ingress サブドメイン (Ingress subdomain)」</strong>の名前に置き換えます。
 
         </br></br>
         <strong>注:</strong> Ingress 作成時の失敗を回避するため、ホストに * を使用したり、ホスト・プロパティーを空のままにしたりしないでください。</td>
         </tr>
         <tr>
         <td><code>path</code></td>
-        <td><em>&lt;myservicepath1&gt;</em> をスラッシュか、アプリが listen する固有のパスに置き換えて、ネットワーク・トラフィックをアプリに転送できるようにします。
+        <td><em>&lt;service1_path&gt;</em> をスラッシュか、アプリが listen する固有のパスに置き換えて、ネットワーク・トラフィックをアプリに転送できるようにします。
 
         </br>
-        Kubernetes サービスごとに、IBM 提供ドメインに付加する個別のパスを定義して、アプリへの固有のパス (例えば <code>ingress_domain/myservicepath1</code>) を作成できます。 この経路を Web ブラウザーに入力すると、ネットワーク・トラフィックが ALB にルーティングされます。 ALB は、同じパスを使用して、関連付けられたサービスを検索し、ネットワーク・トラフィックをそのサービスに送信し、アプリが実行されているポッドに送信します。 着信ネットワーク・トラフィックを受け取るには、このパスを listen するようにアプリをセットアップする必要があります。
+        Kubernetes サービスごとに、IBM 提供ドメインに付加する個別のパスを定義して、アプリへの固有のパス (例えば <code>ibm_domain/service1_path</code>) を作成することができます。この経路を Web ブラウザーに入力すると、ネットワーク・トラフィックが ALB にルーティングされます。 ALB は、関連付けられたサービスを検索し、ネットワーク・トラフィックをそのサービスに送信します。そして、サービスが、アプリを実行しているポッドにトラフィックを転送します。着信ネットワーク・トラフィックを受け取るには、このパスを listen するようにアプリをセットアップする必要があります。
 
         </br></br>
         多くのアプリは、特定のパスで listen するのではなく、ルート・パスと特定のポートを使用します。 この場合、ルート・パスを <code>/</code> として定義します。アプリ用の個別のパスは指定しないでください。
         </br>
-        例: <ul><li><code>http://ingress_host_name/</code> の場合、<code>/</code> をパスとして入力します。</li><li><code>http://ingress_host_name/myservicepath</code> の場合、<code>/myservicepath</code> をパスとして入力します。</li></ul>
+        例: <ul><li><code>http://ibm_domain/</code> の場合、<code>/</code> をパスとして入力します。</li><li><code>http://ibm_domain/service1_path</code> の場合、<code>/service1_path</code> をパスとして入力します。</li></ul>
         </br>
         <strong>ヒント:</strong> アプリが listen するパスとは異なるパスを listen するように Ingress を構成するには、[再書き込みアノテーション](cs_annotations.html#rewrite-path)を使用してアプリへの適切なルーティングを設定します。</td>
         </tr>
         <tr>
         <td><code>serviceName</code></td>
-        <td><em>&lt;myservice1&gt;</em> を、アプリ用に Kubernetes サービスを作成したときに使用したサービスの名前に置き換えます。</td>
+        <td><em>&lt;service1&gt;</em> を、アプリ用に Kubernetes サービスを作成したときに使用したサービスの名前に置き換えます。</td>
         </tr>
         <tr>
         <td><code>servicePort</code></td>
@@ -234,25 +229,25 @@ IBM 提供のドメインを使用してアプリを公開するには、以下�
     3.  クラスターの Ingress リソースを作成します。
 
         ```
-        kubectl apply -f myingress.yaml
+        kubectl apply -f myingressresource.yaml
         ```
         {: pre}
+5.   Ingress リソースが正常に作成されたことを確認します。
 
-5.  Ingress リソースが正常に作成されたことを確認します。 _&lt;myingressname&gt;_ を、先ほど作成した Ingress リソースの名前に置き換えます。
+      ```
+      kubectl describe ingress myingressresource
+      ```
+      {: pre}
 
-    ```
-    kubectl describe ingress <myingressname>
-    ```
-    {: pre}
+      1. イベント内のメッセージにリソース構成のエラーが示された場合は、リソース・ファイル内の値を変更して、リソースのファイルを再適用してください。
 
-    1. イベント内のメッセージにリソース構成のエラーが示された場合は、リソース・ファイル内の値を変更して、リソースのファイルを再適用してください。
+6.   Web ブラウザーに、アクセスするアプリ・サービスの URL を入力します。
 
-6.  Web ブラウザーに、アクセスするアプリ・サービスの URL を入力します。
+      ```
+      https://<ibm_domain>/<service1_path>
+      ```
+      {: codeblock}
 
-    ```
-    http://<ibmdomain>/<myservicepath1>
-    ```
-    {: codeblock}
 
 <br />
 
@@ -270,159 +265,146 @@ IBM 提供のドメインを使用してアプリを公開するには、以下�
 
 TLS ありで IBM 提供のドメインを使用してアプリを公開するには、以下のようにします。
 
-1.  [アプリをクラスターにデプロイします](cs_app.html#app_cli)。 構成ファイルの metadata セクションで、デプロイメントにラベルを追加しておく必要があります。 このラベルにより、アプリが実行されるすべてのポッドが識別され、それらのポッドが Ingress ロード・バランシングに含められます。
-2.  公開するアプリ用に、Kubernetes サービスを作成します。 ALB が Ingress ロード・バランシングにアプリを含めることができるのは、クラスター内の Kubernetes サービスによってアプリが公開されている場合のみです。
-    1.  任意のエディターを開き、`myservice.yaml` などの名前のサービス構成ファイルを作成します。
-    2.  パブリックに公開するアプリの ALB サービスを定義します。
+1.  [アプリをクラスターにデプロイします](cs_app.html#app_cli)。 構成ファイルの metadata セクションで、デプロイメントにラベルを追加しておく必要があります (例えば、`app: code`)。このラベルは、アプリが実行されるすべてのポッドを識別して、それらのポットが Ingress ロード・バランシングに含められるようにするために必要です。
 
-        ```
-        apiVersion: v1
-        kind: Service
-        metadata:
-          name: <myservice>
-        spec:
-          selector:
-            <selectorkey>: <selectorvalue>
-          ports:
-           - protocol: TCP
-             port: 8080
-        ```
-        {: codeblock}
+2.   公開するアプリの Kubernetes サービスを作成します。 アプリをクラスター ALB の Ingress ロード・バランシングに含めるには、Kubernetes サービスを介してアプリを公開する必要があります。
+      1.  任意のエディターを開き、`myalbservice.yaml` などの名前のサービス構成ファイルを作成します。
+      2.  ALB でパブリックに公開するアプリのサービスを定義します。
 
-        <table>
-        <caption>ALB サービス・ファイルの構成要素について</caption>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>name</code></td>
-        <td><em>&lt;myservice&gt;</em> を ALB サービスの名前に置き換えます。</td>
-        </tr>
-        <tr>
-        <td><code>selector</code></td>
-        <td>アプリが実行されるポッドをターゲットにするために使用する、ラベル・キー (<em>&lt;selectorkey&gt;</em>) と値 (<em>&lt;selectorvalue&gt;</em>) のペアを入力します。 例えば、<code>app: code</code> というセレクターを使用した場合、メタデータにこのラベルがあるすべてのポッドが、ロード・バランシングに含められます。 アプリをクラスターにデプロイするときに使用したものと同じラベルを入力してください。 </td>
-         </tr>
-         <tr>
-         <td><code>port</code></td>
-         <td>サービスが listen するポート。</td>
-         </tr>
-         </tbody></table>
+          ```
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: myalbservice
+          spec:
+            selector:
+              <selector_key>: <selector_value>
+            ports:
+             - protocol: TCP
+               port: 8080
+          ```
+          {: codeblock}
 
-    3.  変更を保存します。
-    4.  クラスター内にサービスを作成します。
+          <table>
+          <caption>ALB サービス・ファイルの構成要素について</caption>
+          <thead>
+          <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+          </thead>
+          <tbody>
+          <tr>
+          <td><code>selector</code></td>
+          <td>アプリが実行されるポッドをターゲットにするために使用する、ラベル・キー (<em>&lt;selector_key&gt;</em>) と値 (<em>&lt;selector_value&gt;</em>) のペアを入力します。 ポッドをターゲットにして、サービス・ロード・バランシングに含めるには、<em>&lt;selector_key&gt;</em> および <em>&lt;selector_value&gt;</em> が、デプロイメント yaml の <code>spec.template.metadata.labels</code> セクションで使用したキー/値のペアと同じであることを確認します。</td>
+           </tr>
+           <tr>
+           <td><code>port</code></td>
+           <td>サービスが listen するポート。</td>
+           </tr>
+           </tbody></table>
+      3.  変更を保存します。
+      4.  クラスター内にサービスを作成します。
 
-        ```
-        kubectl apply -f myservice.yaml
-        ```
-        {: pre}
+          ```
+          kubectl apply -f myalbservice.yaml
+          ```
+          {: pre}
+      5.  公開するアプリごとに、上記のステップを繰り返します。
 
-    5.  公開するアプリごとに、上記のステップを繰り返します。
+3.   IBM 提供ドメインと TLS 証明書を表示します。 _&lt;cluster_name_or_ID&gt;_ を、アプリがデプロイされているクラスターの名前に置き換えます。
 
-3.  IBM 提供ドメインと TLS 証明書を表示します。 _&lt;mycluster&gt;_ を、アプリがデプロイされているクラスターの名前に置き換えます。
+      ```
+      bx cs cluster-get <cluster_name_or_ID>
+      ```
+      {: pre}
 
-    ```
-    bx cs cluster-get <mycluster>
-    ```
-    {: pre}
+      出力例:
 
-    CLI 出力は、以下のようになります。
+      ```
+      Name:                   mycluster
+      ID:                     18a61a63c6a94b658596ca93d087aad9
+      State:                  normal
+      Created:                2018-01-12T18:33:35+0000
+      Location:               dal10
+      Master URL:             https://169.xx.xxx.xxx:26268
+      Ingress Subdomain:      mycluster-12345.us-south.containers.mybluemix.net
+      Ingress Secret:         <ibm_tls_secret>
+      Workers:                3
+      Version:                1.8.11
+      Owner Email:            owner@email.com
+      Monitoring Dashboard:   <dashboard_URL>
+      ```
+      {: screen}
 
-    ```
-    bx cs cluster-get <mycluster>
-    Retrieving cluster <mycluster>...
-    OK
-    Name:    <mycluster>
-    ID:    b9c6b00dc0aa487f97123440b4895f2d
-    State:    normal
-    Created:  2017-04-26T19:47:08+0000
-    Location: dal10
-    Master URL:  https://169.57.40.165:1931
-    Ingress subdomain:  <ibmdomain>
-    Ingress secret:  <ibmtlssecret>
-    Workers:  3
-    Version: 1.8.8
-    ```
-    {: screen}
-
-    IBM 提供ドメインが**「Ingress サブドメイン (Ingress subdomain)」**フィールドに示され、IBM 提供の証明書が**「Ingress シークレット (Ingress secret)」**フィールドに示されます。
+      IBM 提供ドメインが**「Ingress サブドメイン (Ingress subdomain)」**フィールドに示され、IBM 提供の証明書が**「Ingress シークレット (Ingress secret)」**フィールドに示されます。
 
 4.  Ingress リソースを作成します。 Ingress リソースは、アプリ用に作成した Kubernetes サービスのルーティング・ルールを定義するもので、着信ネットワーク・トラフィックをサービスにルーティングするために ALB によって使用されます。 複数のアプリをクラスター内の 1 つの Kubernetes サービスで公開する場合は、1 つの Ingress リソースを使用してすべてのアプリのルーティング・ルールを定義する必要があります。
-    1.  任意のエディターを開き、`myingress.yaml` などの名前の Ingress 構成ファイルを作成します。
-    2.  IBM 提供ドメインを使用して着信ネットワーク・トラフィックを対象サービスにルーティングし、IBM 提供の証明書を使用して TLS 終端を管理するように、Ingress リソースを構成ファイル内に定義します。 サービスごとに、IBM 提供ドメインに付加する個別のパスを定義して、アプリへの固有のパス (例えば、`https://ingress_domain/myapp`) を作成することができます。 この経路を Web ブラウザーに入力すると、ネットワーク・トラフィックが ALB にルーティングされます。 ALB は、関連付けられたサービスを検索し、ネットワーク・トラフィックをそのサービスに送信し、さらに、アプリが実行されているポッドに送信します。
-
-        **注:** Ingress リソースに定義されたパスでアプリが listen していなければなりません。 そうでない場合、ネットワーク・トラフィックをそのアプリに転送できません。 大多数のアプリは特定のパスで listen するのではなく、ルート・パスと特定のポートを使用します。 この場合、ルート・パスを `/` として定義します。アプリ用の個別のパスは指定しないでください。
+    1.  任意のエディターを開き、`myingressresource.yaml` などの名前の Ingress 構成ファイルを作成します。
+    2.  IBM 提供ドメインを使用して着信ネットワーク・トラフィックを作成済みのサービスに転送し、カスタム証明書を使用して TLS 終端を管理するように、Ingress リソースを構成ファイル内に定義します。
 
         ```
         apiVersion: extensions/v1beta1
         kind: Ingress
         metadata:
-          name: <myingressname>
+          name: myingressresource
         spec:
           tls:
           - hosts:
-            - <ibmdomain>
-            secretName: <ibmtlssecret>
+            - <ibm_domain>
+            secretName: <ibm_tls_secret>
           rules:
-          - host: <ibmdomain>
+          - host: <ibm_domain>
             http:
               paths:
-              - path: /<myservicepath1>
+              - path: /<service1_path>
                 backend:
-                  serviceName: <myservice1>
+                  serviceName: <service1>
                   servicePort: 80
-              - path: /<myservicepath2>
+              - path: /<service2_path>
                 backend:
-                  serviceName: <myservice2>
+                  serviceName: <service2>
                   servicePort: 80
         ```
         {: codeblock}
 
         <table>
-        <caption>Ingress リソース・ファイルの構成要素について</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
         </thead>
         <tbody>
         <tr>
-        <td><code>name</code></td>
-        <td><em>&lt;myingressname&gt;</em> を Ingress リソースの名前に置き換えます。</td>
-        </tr>
-        <tr>
         <td><code>tls/hosts</code></td>
-        <td><em>&lt;ibmdomain&gt;</em> を、前述のステップにある IBM 提供の<strong>「Ingress サブドメイン (Ingress subdomain)」</strong>の名前に置き換えます。 このドメインは TLS 終端用に構成されます。
+        <td><em>&lt;ibm_domain&gt;</em> を、前述のステップにある IBM 提供の<strong>「Ingress サブドメイン (Ingress subdomain)」</strong>の名前に置き換えます。 このドメインは TLS 終端用に構成されます。
 
         </br></br>
         <strong>注:</strong> Ingress 作成時の失敗を回避するため、ホストに &ast; を使用したり、ホスト・プロパティーを空のままにしたりしないでください。</td>
         </tr>
         <tr>
         <td><code>tls/secretName</code></td>
-        <td><em>&lt;ibmtlssecret&gt;</em> を、前述のステップにある IBM 提供の<strong>「Ingress シークレット (Ingress secret)」</strong>の名前に置き換えます。 この証明書で TLS 終端を管理します。
+        <td><em>&lt;<ibm_tls_secret>&gt;</em> を、前述のステップにある IBM 提供の<strong>「Ingress シークレット (Ingress secret)」</strong>の名前に置き換えます。 この証明書で TLS 終端を管理します。
         </tr>
         <tr>
         <td><code>host</code></td>
-        <td><em>&lt;ibmdomain&gt;</em> を、前述のステップにある IBM 提供の<strong>「Ingress サブドメイン (Ingress subdomain)」</strong>の名前に置き換えます。 このドメインは TLS 終端用に構成されます。
+        <td><em>&lt;ibm_domain&gt;</em> を、前述のステップにある IBM 提供の<strong>「Ingress サブドメイン (Ingress subdomain)」</strong>の名前に置き換えます。 このドメインは TLS 終端用に構成されます。
 
         </br></br>
         <strong>注:</strong> Ingress 作成時の失敗を回避するため、ホストに &ast; を使用したり、ホスト・プロパティーを空のままにしたりしないでください。</td>
         </tr>
         <tr>
         <td><code>path</code></td>
-        <td><em>&lt;myservicepath1&gt;</em> をスラッシュか、アプリが listen する固有のパスに置き換えて、ネットワーク・トラフィックをアプリに転送できるようにします。
+        <td><em>&lt;service1_path&gt;</em> をスラッシュか、アプリが listen する固有のパスに置き換えて、ネットワーク・トラフィックをアプリに転送できるようにします。
 
         </br>
-        Kubernetes サービスごとに、IBM 提供ドメインに付加する個別のパスを定義して、アプリへの固有のパス (例えば <code>ingress_domain/myservicepath1</code>) を作成できます。 この経路を Web ブラウザーに入力すると、ネットワーク・トラフィックが ALB にルーティングされます。 ALB は、同じパスを使用して、関連付けられたサービスを検索し、ネットワーク・トラフィックをそのサービスに送信し、アプリが実行されているポッドに送信します。 着信ネットワーク・トラフィックを受け取るには、このパスを listen するようにアプリをセットアップする必要があります。
+        Kubernetes サービスごとに、IBM 提供ドメインに付加する個別のパスを定義して、アプリへの固有のパスを作成できます。 この経路を Web ブラウザーに入力すると、ネットワーク・トラフィックが ALB にルーティングされます。 ALB は、関連付けられたサービスを検索し、ネットワーク・トラフィックをそのサービスに送信します。 そして、サービスが、アプリを実行しているポッドにトラフィックを転送します。着信ネットワーク・トラフィックを受け取るには、このパスを listen するようにアプリをセットアップする必要があります。
 
         </br>
         多くのアプリは、特定のパスで listen するのではなく、ルート・パスと特定のポートを使用します。 この場合、ルート・パスを <code>/</code> として定義します。アプリ用の個別のパスは指定しないでください。
 
         </br>
-        例: <ul><li><code>http://ingress_host_name/</code> の場合、<code>/</code> をパスとして入力します。</li><li><code>http://ingress_host_name/myservicepath</code> の場合、<code>/myservicepath</code> をパスとして入力します。</li></ul>
+        例: <ul><li><code>http://ibm_domain/</code> の場合、<code>/</code> をパスとして入力します。</li><li><code>http://ibm_domain/service1_path</code> の場合、<code>/service1_path</code> をパスとして入力します。</li></ul>
         <strong>ヒント:</strong> アプリが listen するパスとは異なるパスを listen するように Ingress を構成するには、[再書き込みアノテーション](cs_annotations.html#rewrite-path)を使用してアプリへの適切なルーティングを設定します。</td>
         </tr>
         <tr>
         <td><code>serviceName</code></td>
-        <td><em>&lt;myservice1&gt;</em> を、アプリ用に Kubernetes サービスを作成したときに使用したサービスの名前に置き換えます。</td>
+        <td><em>&lt;service1&gt;</em> を、アプリ用に Kubernetes サービスを作成したときに使用したサービスの名前に置き換えます。</td>
         </tr>
         <tr>
         <td><code>servicePort</code></td>
@@ -433,25 +415,25 @@ TLS ありで IBM 提供のドメインを使用してアプリを公開する�
     3.  クラスターの Ingress リソースを作成します。
 
         ```
-        kubectl apply -f myingress.yaml
+        kubectl apply -f myingressresource.yaml
         ```
         {: pre}
+5.   Ingress リソースが正常に作成されたことを確認します。
 
-5.  Ingress リソースが正常に作成されたことを確認します。 _&lt;myingressname&gt;_ を、先ほど作成した Ingress リソースの名前に置き換えます。
+      ```
+      kubectl describe ingress myingressresource
+      ```
+      {: pre}
 
-    ```
-    kubectl describe ingress <myingressname>
-    ```
-    {: pre}
+      1. イベント内のメッセージにリソース構成のエラーが示された場合は、リソース・ファイル内の値を変更して、リソースのファイルを再適用してください。
 
-    1. イベント内のメッセージにリソース構成のエラーが示された場合は、リソース・ファイル内の値を変更して、リソースのファイルを再適用してください。
+6.   Web ブラウザーに、アクセスするアプリ・サービスの URL を入力します。
 
-6.  Web ブラウザーに、アクセスするアプリ・サービスの URL を入力します。
+      ```
+      https://<ibm_domain>/<service1_path>
+      ```
+      {: codeblock}
 
-    ```
-    https://<ibmdomain>/<myservicepath1>
-    ```
-    {: codeblock}
 
 <br />
 
@@ -469,9 +451,9 @@ IBM 提供ドメインではなくカスタム・ドメインを使用する場�
 
 TLS ありでカスタム・ドメインを使用してアプリを公開するには、以下のようにします。
 
-1.  カスタム・ドメインを作成します。 カスタム・ドメインを作成するには、ドメイン・ネーム・サービス (DNS) プロバイダーまたは [{{site.data.keyword.Bluemix_notm}} ](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns)を使用してカスタム・ドメインを登録します。
+1.  カスタム・ドメインを作成します。 カスタム・ドメインを作成するには、Domain Name Service (DNS) プロバイダーまたは [{{site.data.keyword.Bluemix_notm}} ](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns)を使用してカスタム・ドメインを登録します。
 2.  着信ネットワーク・トラフィックを IBM 提供の ALB にルーティングするようにドメインを構成します。 以下の選択肢があります。
-    -   IBM 提供ドメインを正規名レコード (CNAME) として指定することで、カスタム・ドメインの別名を定義します。 IBM 提供の Ingress ドメインを確認するには、`bx cs cluster-get <mycluster>` を実行し、**「Ingress サブドメイン (Ingress subdomain)」**フィールドを見つけます。
+    -   IBM 提供ドメインを正規名レコード (CNAME) として指定することで、カスタム・ドメインの別名を定義します。 IBM 提供の Ingress ドメインを確認するには、`bx cs cluster-get <cluster_name>` を実行し、**「Ingress サブドメイン (Ingress subdomain)」**フィールドを見つけます。
     -   カスタム・ドメインを IBM 提供の ALB のポータブル・パブリック IP アドレスにマップします。これは、IP アドレスをレコードとして追加して行います。 ALB のポータブル・パブリック IP アドレスを見つけるには、`bx cs alb-get <public_alb_ID>` を実行します。
 3.  TLS 証明書とキー・シークレットをインポートまたは作成します。
     * 使用する TLS 証明書が {{site.data.keyword.cloudcerts_long_notm}} に保管されている場合は、それに関連付けられたシークレットを、以下のコマンドを実行してクラスター内にインポートできます。
@@ -483,116 +465,104 @@ TLS ありでカスタム・ドメインを使用してアプリを公開する�
 
     * TLS 証明書の準備ができていない場合は、以下の手順に従ってください。
         1. PEM 形式でエンコードされた TLS 証明書と鍵を、当該ドメインのために作成します。
-        2. TLS 証明書と鍵を使用するシークレットを作成します。 <em>&lt;mytlssecret&gt;</em> を Kubernetes シークレットの名前に、<em>&lt;tls_key_filepath&gt;</em> をカスタム TLS 鍵ファイルへのパスに、<em>&lt;tls_cert_filepath&gt;</em> をカスタム TLS 証明書ファイルへのパスに置き換えます。
+        2. TLS 証明書と鍵を使用するシークレットを作成します。 <em>&lt;tls_secret_name&gt;</em> を Kubernetes シークレットの名前に、<em>&lt;tls_key_filepath&gt;</em> をカスタム TLS 鍵ファイルへのパスに、<em>&lt;tls_cert_filepath&gt;</em> をカスタム TLS 証明書ファイルへのパスに置き換えます。
 
             ```
-            kubectl create secret tls <mytlssecret> --key <tls_key_filepath> --cert <tls_cert_filepath>
+            kubectl create secret tls <tls_secret_name> --key <tls_key_filepath> --cert <tls_cert_filepath>
             ```
             {: pre}
+4.  [アプリをクラスターにデプロイします](cs_app.html#app_cli)。 構成ファイルの metadata セクションで、デプロイメントにラベルを追加しておく必要があります (例えば、`app: code`)。このラベルは、アプリが実行されるすべてのポッドを識別して、それらのポットが Ingress ロード・バランシングに含められるようにするために必要です。
 
-4.  [アプリをクラスターにデプロイします](cs_app.html#app_cli)。 アプリをクラスターにデプロイする際に、コンテナー内のアプリを実行するポッドが 1 つ以上自動的に作成されます。 構成ファイルの metadata セクションで、デプロイメントにラベルを追加しておく必要があります。 このラベルは、アプリが実行されるすべてのポッドを識別して、それらのポットが Ingress ロード・バランシングに含められるようにするために必要です。
+5.   公開するアプリの Kubernetes サービスを作成します。 アプリをクラスター ALB の Ingress ロード・バランシングに含めるには、Kubernetes サービスを介してアプリを公開する必要があります。
+      1.  任意のエディターを開き、`myalbservice.yaml` などの名前のサービス構成ファイルを作成します。
+      2.  ALB でパブリックに公開するアプリのサービスを定義します。
 
-5.  公開するアプリ用に、Kubernetes サービスを作成します。 ALB が Ingress ロード・バランシングにアプリを含めることができるのは、クラスター内の Kubernetes サービスによってアプリが公開されている場合のみです。
+          ```
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: myalbservice
+          spec:
+            selector:
+              <selector_key>: <selector_value>
+            ports:
+             - protocol: TCP
+               port: 8080
+          ```
+          {: codeblock}
 
-    1.  任意のエディターを開き、`myservice.yaml` などの名前のサービス構成ファイルを作成します。
-    2.  パブリックに公開するアプリの ALB サービスを定義します。
+          <table>
+          <caption>ALB サービス・ファイルの構成要素について</caption>
+          <thead>
+          <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+          </thead>
+          <tbody>
+          <tr>
+          <td><code>selector</code></td>
+          <td>アプリが実行されるポッドをターゲットにするために使用する、ラベル・キー (<em>&lt;selector_key&gt;</em>) と値 (<em>&lt;selector_value&gt;</em>) のペアを入力します。 ポッドをターゲットにして、サービス・ロード・バランシングに含めるには、<em>&lt;selector_key&gt;</em> および <em>&lt;selector_value&gt;</em> が、デプロイメント yaml の <code>spec.template.metadata.labels</code> セクションで使用したキー/値のペアと同じであることを確認します。</td>
+           </tr>
+           <tr>
+           <td><code>port</code></td>
+           <td>サービスが listen するポート。</td>
+           </tr>
+           </tbody></table>
+      3.  変更を保存します。
+      4.  クラスター内にサービスを作成します。
 
-        ```
-        apiVersion: v1
-        kind: Service
-        metadata:
-          name: <myservice>
-        spec:
-          selector:
-            <selectorkey>: <selectorvalue>
-          ports:
-           - protocol: TCP
-             port: 8080
-        ```
-       {: codeblock}
+          ```
+          kubectl apply -f myalbservice.yaml
+          ```
+          {: pre}
+      5.  公開するアプリごとに、上記のステップを繰り返します。
 
-        <table>
-        <caption>ALB サービス・ファイルの構成要素について</caption>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>name</code></td>
-        <td><em>&lt;myservice1&gt;</em> を ALB サービスの名前に置き換えます。</td>
-        </tr>
-        <tr>
-        <td><code>selector</code></td>
-        <td>アプリが実行されるポッドをターゲットにするために使用する、ラベル・キー (<em>&lt;selectorkey&gt;</em>) と値 (<em>&lt;selectorvalue&gt;</em>) のペアを入力します。 例えば、<code>app: code</code> というセレクターを使用した場合、メタデータにこのラベルがあるすべてのポッドが、ロード・バランシングに含められます。 アプリをクラスターにデプロイするときに使用したものと同じラベルを入力してください。 </td>
-         </tr>
-         <td><code>port</code></td>
-         <td>サービスが listen するポート。</td>
-         </tbody></table>
-
-    3.  変更を保存します。
-    4.  クラスター内にサービスを作成します。
-
-        ```
-        kubectl apply -f myservice.yaml
-        ```
-        {: pre}
-
-    5.  公開するアプリごとに、上記のステップを繰り返します。
 6.  Ingress リソースを作成します。 Ingress リソースは、アプリ用に作成した Kubernetes サービスのルーティング・ルールを定義するもので、着信ネットワーク・トラフィックをサービスにルーティングするために ALB によって使用されます。 複数のアプリをクラスター内の 1 つの Kubernetes サービスで公開する場合は、1 つの Ingress リソースを使用してすべてのアプリのルーティング・ルールを定義する必要があります。
-    1.  任意のエディターを開き、`myingress.yaml` などの名前の Ingress 構成ファイルを作成します。
-    2.  カスタム・ドメインを使用して着信ネットワーク・トラフィックを対象サービスにルーティングし、カスタム証明書を使用して TLS 終端を管理するように、Ingress リソースを構成ファイル内に定義します。 サービスごとに、アプリへの固有のパス (例えば、`https://mydomain/myapp`) を作成するためにカスタム・ドメインに付加する個別のパスを定義できます。この経路を Web ブラウザーに入力すると、ネットワーク・トラフィックが ALB にルーティングされます。 ALB は、関連付けられたサービスを検索し、ネットワーク・トラフィックをそのサービスに送信し、さらに、アプリが実行されているポッドに送信します。
-
-        Ingress リソースに定義されたパスでアプリが listen していなければなりません。 そうでない場合、ネットワーク・トラフィックをそのアプリに転送できません。 大多数のアプリは特定のパスで listen するのではなく、ルート・パスと特定のポートを使用します。 この場合、ルート・パスを `/` として定義します。アプリ用の個別のパスは指定しないでください。
+    1.  任意のエディターを開き、`myingressresource.yaml` などの名前の Ingress 構成ファイルを作成します。
+    2.  カスタム・ドメインを使用して着信ネットワーク・トラフィックを対象サービスにルーティングし、カスタム証明書を使用して TLS 終端を管理するように、Ingress リソースを構成ファイル内に定義します。
 
         ```
         apiVersion: extensions/v1beta1
         kind: Ingress
         metadata:
-          name: <myingressname>
+          name: myingressresource
         spec:
           tls:
           - hosts:
-            - <mycustomdomain>
-            secretName: <mytlssecret>
+            - <custom_domain>
+            secretName: <tls_secret_name>
           rules:
-          - host: <mycustomdomain>
+          - host: <custom_domain>
             http:
               paths:
-              - path: /<myservicepath1>
+              - path: /<service1_path>
                 backend:
-                  serviceName: <myservice1>
+                  serviceName: <service1>
                   servicePort: 80
-              - path: /<myservicepath2>
+              - path: /<service2_path>
                 backend:
-                  serviceName: <myservice2>
+                  serviceName: <service2>
                   servicePort: 80
         ```
         {: codeblock}
 
         <table>
-        <caption>Ingress リソース・ファイルの構成要素について</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
         </thead>
         <tbody>
         <tr>
-        <td><code>name</code></td>
-        <td><em>&lt;myingressname&gt;</em> を Ingress リソースの名前に置き換えます。</td>
-        </tr>
-        <tr>
         <td><code>tls/hosts</code></td>
-        <td><em>&lt;mycustomdomain&gt;</em> を、TLS 終端のために構成するカスタム・ドメインに置き換えます。
+        <td><em>&lt;custom_domain&gt;</em> を、TLS 終端のために構成するカスタム・ドメインに置き換えます。
 
         </br></br>
         <strong>注:</strong> Ingress 作成時の失敗を回避するため、ホストに &ast; を使用したり、ホスト・プロパティーを空のままにしたりしないでください。</td>
         </tr>
         <tr>
         <td><code>tls/secretName</code></td>
-        <td><em>&lt;mytlssecret&gt;</em> を、先ほど作成した、カスタム TLS 証明書と鍵を保持するシークレットの名前に置き換えます。 {{site.data.keyword.cloudcerts_short}} から証明書をインポートする場合、<code>bx cs alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> を実行して、TLS 証明書に関連付けられたシークレットを確認できます。
+        <td><em>&lt;tls_secret_name&gt;</em> を、先ほど作成した、カスタム TLS 証明書と鍵を保持するシークレットの名前に置き換えます。 {{site.data.keyword.cloudcerts_short}} から証明書をインポートする場合、<code>bx cs alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> を実行して、TLS 証明書に関連付けられたシークレットを確認できます。
         </tr>
         <tr>
         <td><code>host</code></td>
-        <td><em>&lt;mycustomdomain&gt;</em> を、TLS 終端のために構成するカスタム・ドメインに置き換えます。
+        <td><em>&lt;custom_domain&gt;</em> を、TLS 終端のために構成するカスタム・ドメインに置き換えます。
 
         </br></br>
         <strong>注:</strong> Ingress 作成時の失敗を回避するため、ホストに &ast; を使用したり、ホスト・プロパティーを空のままにしたりしないでください。
@@ -600,22 +570,22 @@ TLS ありでカスタム・ドメインを使用してアプリを公開する�
         </tr>
         <tr>
         <td><code>path</code></td>
-        <td><em>&lt;myservicepath1&gt;</em> をスラッシュか、アプリが listen する固有のパスに置き換えて、ネットワーク・トラフィックをアプリに転送できるようにします。
+        <td><em>&lt;service1_path&gt;</em> をスラッシュか、アプリが listen する固有のパスに置き換えて、ネットワーク・トラフィックをアプリに転送できるようにします。
 
         </br>
-        Kubernetes サービスごとに、IBM 提供ドメインに付加する個別のパスを定義して、アプリへの固有のパス (例えば <code>ingress_domain/myservicepath1</code>) を作成できます。 この経路を Web ブラウザーに入力すると、ネットワーク・トラフィックが ALB にルーティングされます。 ALB は、同じパスを使用して、関連付けられたサービスを検索し、ネットワーク・トラフィックをそのサービスに送信し、アプリが実行されているポッドに送信します。 着信ネットワーク・トラフィックを受け取るには、このパスを listen するようにアプリをセットアップする必要があります。
+        サービスごとに、カスタム・ドメインに付加する個別のパスを定義して、アプリへの固有のパスを作成できます。 この経路を Web ブラウザーに入力すると、ネットワーク・トラフィックが ALB にルーティングされます。 ALB は、関連付けられたサービスを検索し、ネットワーク・トラフィックをそのサービスに送信します。 そして、サービスが、アプリを実行しているポッドにトラフィックを転送します。着信ネットワーク・トラフィックを受け取るには、このパスを listen するようにアプリをセットアップする必要があります。
 
         </br>
         多くのアプリは、特定のパスで listen するのではなく、ルート・パスと特定のポートを使用します。 この場合、ルート・パスを <code>/</code> として定義します。アプリ用の個別のパスは指定しないでください。
 
         </br></br>
-        例: <ul><li><code>https://mycustomdomain/</code> の場合、<code>/</code> をパスとして入力します。</li><li><code>https://mycustomdomain/myservicepath</code> の場合、<code>/myservicepath</code> をパスとして入力します。</li></ul>
+        例: <ul><li><code>https://custom_domain/</code> の場合、<code>/</code> をパスとして入力します。</li><li><code>https://custom_domain/service1_path</code> の場合、<code>/service1_path</code> をパスとして入力します。</li></ul>
         <strong>ヒント:</strong> アプリが listen するパスとは異なるパスを listen するように Ingress を構成するには、[再書き込みアノテーション](cs_annotations.html#rewrite-path)を使用してアプリへの適切なルーティングを設定します。
         </td>
         </tr>
         <tr>
         <td><code>serviceName</code></td>
-        <td><em>&lt;myservice1&gt;</em> を、アプリ用に Kubernetes サービスを作成したときに使用したサービスの名前に置き換えます。</td>
+        <td><em>&lt;service1&gt;</em> を、アプリ用に Kubernetes サービスを作成したときに使用したサービスの名前に置き換えます。</td>
         </tr>
         <tr>
         <td><code>servicePort</code></td>
@@ -627,27 +597,25 @@ TLS ありでカスタム・ドメインを使用してアプリを公開する�
     4.  クラスターの Ingress リソースを作成します。
 
         ```
-        kubectl apply -f myingress.yaml
+        kubectl apply -f myingressresource.yaml
         ```
         {: pre}
+7.   Ingress リソースが正常に作成されたことを確認します。
 
-7.  Ingress リソースが正常に作成されたことを確認します。 _&lt;myingressname&gt;_ を、先ほど作成した Ingress リソースの名前に置き換えます。
+      ```
+      kubectl describe ingress myingressresource
+      ```
+      {: pre}
 
-    ```
-    kubectl describe ingress <myingressname>
-    ```
-    {: pre}
+      1. イベント内のメッセージにリソース構成のエラーが示された場合は、リソース・ファイル内の値を変更して、リソースのファイルを再適用してください。
 
-    1. イベント内のメッセージにリソース構成のエラーが示された場合は、リソース・ファイル内の値を変更して、リソースのファイルを再適用してください。
+8.   Web ブラウザーに、アクセスするアプリ・サービスの URL を入力します。
 
-8.  インターネットからアプリにアクセスします。
-    1.  任意の Web ブラウザーを開きます。
-    2.  アクセスするアプリ・サービスの URL を入力します。
+      ```
+      https://<custom_domain>/<service1_path>
+      ```
+      {: codeblock}
 
-        ```
-        https://<mycustomdomain>/<myservicepath1>
-        ```
-        {: codeblock}
 
 <br />
 
@@ -655,7 +623,7 @@ TLS ありでカスタム・ドメインを使用してアプリを公開する�
 ### TLS ありで IBM 提供ドメインまたはカスタム・ドメインを使用してクラスターの外部にあるアプリをパブリックに公開する
 {: #external_endpoint}
 
-クラスターの外部に配置されたアプリを含めるように、ALB を構成することができます。IBM 提供ドメインまたはカスタム・ドメインでの着信要求は、自動的に外部アプリに転送されます。
+クラスターの外部に配置されたアプリを含めるように、ALB を構成することができます。 IBM 提供ドメインまたはカスタム・ドメインでの着信要求は、自動的に外部アプリに転送されます。
 {:shortdesc}
 
 開始前に、以下のことを行います。
@@ -674,7 +642,7 @@ IBM 提供ドメインへの着信ネットワーク・トラフィックを、�
         apiVersion: v1
         kind: Service
         metadata:
-          name: <myservicename>
+          name: myexternalservice
         spec:
           ports:
            - protocol: TCP
@@ -690,7 +658,7 @@ IBM 提供ドメインへの着信ネットワーク・トラフィックを、�
         <tbody>
         <tr>
         <td><code>metadata/name</code></td>
-        <td><em>&lt;myservicename&gt;</em> をサービスの名前に置き換えます。</td>
+        <td><em>&lt;myexternalservice&gt;</em> をサービスの名前に置き換えます。</td>
         </tr>
         <tr>
         <td><code>port</code></td>
@@ -704,7 +672,6 @@ IBM 提供ドメインへの着信ネットワーク・トラフィックを、�
         kubectl apply -f myexternalservice.yaml
         ```
         {: pre}
-
 2.  クラスター・ロード・バランシングに含める外部のアプリの場所を定義する、Kubernetes エンドポイントを構成します。
     1.  任意のエディターを開き、`myexternalendpoint.yaml` などの名前のエンドポイント構成ファイルを作成します。
     2.  外部エンドポイントを定義します。 外部アプリにアクセスするために使用可能な、すべてのパブリック IP アドレスとポートを含めます。
@@ -713,13 +680,13 @@ IBM 提供ドメインへの着信ネットワーク・トラフィックを、�
         kind: Endpoints
         apiVersion: v1
         metadata:
-          name: <myservicename>
+          name: myexternalendpoint
         subsets:
           - addresses:
-              - ip: <externalIP1>
-              - ip: <externalIP2>
+              - ip: <external_IP1>
+              - ip: <external_IP2>
             ports:
-              - port: <externalport>
+              - port: <external_port>
         ```
         {: codeblock}
 
@@ -730,14 +697,14 @@ IBM 提供ドメインへの着信ネットワーク・トラフィックを、�
         <tbody>
         <tr>
         <td><code>name</code></td>
-        <td><em>&lt;myendpointname&gt;</em> を、先ほど作成した Kubernetes サービスの名前に置き換えます。</td>
+        <td><em>&lt;myexternalendpoint&gt;</em> を、先ほど作成した Kubernetes サービスの名前に置き換えます。</td>
         </tr>
         <tr>
         <td><code>ip</code></td>
-        <td><em>&lt;externalIP&gt;</em> を、外部アプリに接続するためのパブリック IP アドレスに置き換えます。</td>
+        <td><em>&lt;external_IP&gt;</em> を、外部アプリに接続するためのパブリック IP アドレスに置き換えます。</td>
          </tr>
          <td><code>port</code></td>
-         <td><em>&lt;externalport&gt;</em> を、外部アプリが listen するポートに置き換えます。</td>
+         <td><em>&lt;external_port&gt;</em> を、外部アプリが listen するポートに置き換えます。</td>
          </tbody></table>
 
     3.  変更を保存します。
@@ -747,99 +714,91 @@ IBM 提供ドメインへの着信ネットワーク・トラフィックを、�
         kubectl apply -f myexternalendpoint.yaml
         ```
         {: pre}
+3.   IBM 提供ドメインと TLS 証明書を表示します。 _&lt;cluster_name_or_ID&gt;_ を、アプリがデプロイされているクラスターの名前に置き換えます。
 
-3.  IBM 提供ドメインと TLS 証明書を表示します。 _&lt;mycluster&gt;_ を、アプリがデプロイされているクラスターの名前に置き換えます。
+      ```
+      bx cs cluster-get <cluster_name_or_ID>
+      ```
+      {: pre}
 
-    ```
-    bx cs cluster-get <mycluster>
-    ```
-    {: pre}
+      出力例:
 
-    CLI 出力は、以下のようになります。
+      ```
+      Name:                   mycluster
+      ID:                     18a61a63c6a94b658596ca93d087aad9
+      State:                  normal
+      Created:                2018-01-12T18:33:35+0000
+      Location:               dal10
+      Master URL:             https://169.xx.xxx.xxx:26268
+      Ingress Subdomain:      mycluster-12345.us-south.containers.mybluemix.net
+      Ingress Secret:         <ibm_tls_secret>
+      Workers:                3
+      Version:                1.8.11
+      Owner Email:            owner@email.com
+      Monitoring Dashboard:   <dashboard_URL>
+      ```
+      {: screen}
 
-    ```
-    Retrieving cluster <mycluster>...
-    OK
-    Name:    <mycluster>
-    ID:    b9c6b00dc0aa487f97123440b4895f2d
-    State:    normal
-    Created:  2017-04-26T19:47:08+0000
-    Location: dal10
-    Master URL:  https://169.57.40.165:1931
-    Ingress subdomain:  <ibmdomain>
-    Ingress secret:  <ibmtlssecret>
-    Workers:  3
-    Version: 1.8.8
-    ```
-    {: screen}
-
-    IBM 提供ドメインが**「Ingress サブドメイン (Ingress subdomain)」**フィールドに示され、IBM 提供の証明書が**「Ingress シークレット (Ingress secret)」**フィールドに示されます。
+      IBM 提供ドメインが**「Ingress サブドメイン (Ingress subdomain)」**フィールドに示され、IBM 提供の証明書が**「Ingress シークレット (Ingress secret)」**フィールドに示されます。
 
 4.  Ingress リソースを作成します。 Ingress リソースは、アプリ用に作成した Kubernetes サービスのルーティング・ルールを定義するもので、着信ネットワーク・トラフィックをサービスにルーティングするために ALB によって使用されます。 すべてのアプリがクラスター内の Kubernetes サービスによってアプリの外部エンドポイントとともに公開されていれば、1 つの Ingress リソースを使用して複数の外部アプリのルーティング・ルールを定義できます。
     1.  任意のエディターを開き、`myexternalingress.yaml` などの名前の Ingress 構成ファイルを作成します。
-    2.  IBM 提供ドメインと TLS 証明書を使用し、定義済みの外部エンドポイントを使用して着信ネットワーク・トラフィックを外部アプリにルーティングするように、Ingress リソースを構成ファイル内に定義します。 サービスごとに、カスタム・ドメインに付加する個別のパスを定義して、アプリへの固有のパス (例えば、`https://ingress_domain/myapp`) を作成することができます。 この経路を Web ブラウザーに入力すると、ネットワーク・トラフィックが ALB にルーティングされます。 ALB は、関連付けられたサービスを検索し、ネットワーク・トラフィックをそのサービスに、さらに外部アプリに送信します。
-
-        Ingress リソースに定義されたパスでアプリが listen していなければなりません。 そうでない場合、ネットワーク・トラフィックをそのアプリに転送できません。 大多数のアプリは特定のパスで listen するのではなく、ルート・パスと特定のポートを使用します。 この場合、ルート・パスを / として定義します。アプリ用の個別のパスは指定しないでください。
+    2.  IBM 提供ドメインと TLS 証明書を使用し、定義済みの外部エンドポイントを使用して着信ネットワーク・トラフィックを外部アプリにルーティングするように、Ingress リソースを構成ファイル内に定義します。
 
         ```
         apiVersion: extensions/v1beta1
         kind: Ingress
         metadata:
-          name: <myingressname>
+          name: myexternalingress
         spec:
           tls:
           - hosts:
-            - <ibmdomain>
-            secretName: <ibmtlssecret>
+            - <ibm_domain>
+            secretName: <ibm_tls_secret>
           rules:
-          - host: <ibmdomain>
+          - host: <ibm_domain>
             http:
               paths:
-              - path: /<myexternalservicepath1>
+              - path: /<external_service1_path>
                 backend:
-                  serviceName: <myservice1>
+                  serviceName: <external_service1>
                   servicePort: 80
-              - path: /<myexternalservicepath2>
+              - path: /<external_service2_path>
                 backend:
-                  serviceName: <myexternalservice2>
+                  serviceName: <external_service2>
                   servicePort: 80
         ```
         {: codeblock}
 
         <table>
-        <caption>Ingress リソース・ファイルの構成要素について</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
         </thead>
         <tbody>
         <tr>
-        <td><code>name</code></td>
-        <td><em>&lt;myingressname&gt;</em> を Ingress リソースの名前に置き換えます。</td>
-        </tr>
-        <tr>
         <td><code>tls/hosts</code></td>
-        <td><em>&lt;ibmdomain&gt;</em> を、前述のステップにある IBM 提供の<strong>「Ingress サブドメイン (Ingress subdomain)」</strong>の名前に置き換えます。 このドメインは TLS 終端用に構成されます。
+        <td><em>&lt;ibm_domain&gt;</em> を、前述のステップにある IBM 提供の<strong>「Ingress サブドメイン (Ingress subdomain)」</strong>の名前に置き換えます。 このドメインは TLS 終端用に構成されます。
 
         </br></br>
         <strong>注:</strong> Ingress 作成時の失敗を回避するため、ホストに &ast; を使用したり、ホスト・プロパティーを空のままにしたりしないでください。</td>
         </tr>
         <tr>
         <td><code>tls/secretName</code></td>
-        <td><em>&lt;ibmtlssecret&gt;</em> を、前述のステップにある IBM 提供の<strong>「Ingress シークレット (Ingress secret)」</strong>に置き換えます。 この証明書で TLS 終端を管理します。</td>
+        <td><em>&lt;ibm_tls_secret&gt;</em> を、前述のステップにある IBM 提供の<strong>「Ingress シークレット (Ingress secret)」</strong>に置き換えます。 この証明書で TLS 終端を管理します。</td>
         </tr>
         <tr>
         <td><code>rules/host</code></td>
-        <td><em>&lt;ibmdomain&gt;</em> を、前述のステップにある IBM 提供の<strong>「Ingress サブドメイン (Ingress subdomain)」</strong>の名前に置き換えます。 このドメインは TLS 終端用に構成されます。
+        <td><em>&lt;ibm_domain&gt;</em> を、前述のステップにある IBM 提供の<strong>「Ingress サブドメイン (Ingress subdomain)」</strong>の名前に置き換えます。 このドメインは TLS 終端用に構成されます。
 
         </br></br>
         <strong>注:</strong> Ingress 作成時の失敗を回避するため、ホストに &ast; を使用したり、ホスト・プロパティーを空のままにしたりしないでください。</td>
         </tr>
         <tr>
         <td><code>path</code></td>
-        <td><em>&lt;myexternalservicepath&gt;</em> をスラッシュか、外部アプリが listen する固有のパスに置き換えて、ネットワーク・トラフィックをアプリに転送できるようにします。
+        <td><em>&lt;external_service_path&gt;</em> をスラッシュか、外部アプリが listen する固有のパスに置き換えて、ネットワーク・トラフィックをアプリに転送できるようにします。
 
         </br>
-        Kubernetes サービスごとに、ドメインに付加する個別のパスを定義して、アプリへの固有のパス (例えば、<code>https://ibmdomain/myservicepath1</code>) を作成することができます。 この経路を Web ブラウザーに入力すると、ネットワーク・トラフィックが ALB にルーティングされます。 ALB は、同じパスを使用して、関連付けられたサービスを検索し、ネットワーク・トラフィックを外部アプリに送信します。 着信ネットワーク・トラフィックを受け取るには、このパスを listen するようにアプリをセットアップする必要があります。
+        サービスごとに、カスタム・ドメインに付加する個別のパスを定義して、アプリへの固有のパス (例えば、<code>http://ibm_domain/external_service_path</code> または <code>http://custom_domain/</code>) を作成することができます。 この経路を Web ブラウザーに入力すると、ネットワーク・トラフィックが ALB にルーティングされます。 ALB は、関連付けられたサービスを検索し、ネットワーク・トラフィックをそのサービスに送信します。 サービスは、トラフィックを外部アプリに転送します。着信ネットワーク・トラフィックを受け取るには、このパスを listen するようにアプリをセットアップする必要があります。
 
         </br></br>
         多くのアプリは、特定のパスで listen するのではなく、ルート・パスと特定のポートを使用します。 この場合、ルート・パスを <code>/</code> として定義します。アプリ用の個別のパスは指定しないでください。
@@ -849,7 +808,7 @@ IBM 提供ドメインへの着信ネットワーク・トラフィックを、�
         </tr>
         <tr>
         <td><code>serviceName</code></td>
-        <td><em>&lt;myexternalservice&gt;</em> を、外部アプリ用に Kubernetes サービスを作成したときに使用したサービスの名前に置き換えます。</td>
+        <td><em>&lt;external_service&gt;</em> を、外部アプリ用に Kubernetes サービスを作成したときに使用したサービスの名前に置き換えます。</td>
         </tr>
         <tr>
         <td><code>servicePort</code></td>
@@ -864,24 +823,22 @@ IBM 提供ドメインへの着信ネットワーク・トラフィックを、�
         kubectl apply -f myexternalingress.yaml
         ```
         {: pre}
+5.   Ingress リソースが正常に作成されたことを確認します。
 
-5.  Ingress リソースが正常に作成されたことを確認します。 _&lt;myingressname&gt;_ を、先ほど作成した Ingress リソースの名前に置き換えます。
+      ```
+      kubectl describe ingress myingressresource
+      ```
+      {: pre}
 
-    ```
-    kubectl describe ingress <myingressname>
-    ```
-    {: pre}
+      1. イベント内のメッセージにリソース構成のエラーが示された場合は、リソース・ファイル内の値を変更して、リソースのファイルを再適用してください。
 
-    1. イベント内のメッセージにリソース構成のエラーが示された場合は、リソース・ファイル内の値を変更して、リソースのファイルを再適用してください。
+6.   Web ブラウザーに、アクセスするアプリ・サービスの URL を入力します。
 
-6.  外部アプリにアクセスします。
-    1.  任意の Web ブラウザーを開きます。
-    2.  外部アプリにアクセスするための URL を入力します。
+      ```
+      https://<ibm_domain>/<service1_path>
+      ```
+      {: codeblock}
 
-        ```
-        https://<ibmdomain>/<myexternalservicepath>
-        ```
-        {: codeblock}
 
 <br />
 
@@ -889,12 +846,15 @@ IBM 提供ドメインへの着信ネットワーク・トラフィックを、�
 ## プライベート・ネットワークにアプリを公開する
 {: #ingress_expose_private}
 
-標準クラスターを作成すると、IBM 提供のアプリケーション・ロード・バランサー (ALB) が作成され、ポータブル・プライベート IP アドレス 1 つとプライベート経路 1 つが割り当てられます。 ただし、デフォルトのプライベート ALB は自動的には有効になりません。 プライベート・ネットワークにアプリを公開するには、まず[デフォルトのプライベート・アプリケーション・ロード・バランサーを有効にします](#private_ingress)。
+標準クラスターを作成すると、IBM 提供のアプリケーション・ロード・バランサー (ALB) が作成され、ポータブル・プライベート IP アドレス 1 つとプライベート経路 1 つが割り当てられます。 ただし、デフォルトのプライベート ALB は自動的には有効になりません。
 {:shortdesc}
 
+プライベート・ネットワークにアプリを公開するには、まず[デフォルトのプライベート・アプリケーション・ロード・バランサーを有効にします](#private_ingress)。
+
 その後、以下のシナリオで Ingress を構成できます。
--   [TLS なしでカスタム・ドメインを使用してアプリをプライベートに公開する](#private_ingress_no_tls)
--   [TLS ありでカスタム・ドメインを使用してアプリをプライベートに公開する](#private_ingress_tls)
+-   [外部 DNS プロバイダーを使用して、TLS なしでカスタム・ドメインを使用してアプリをプライベートに公開する](#private_ingress_no_tls)
+-   [外部 DNS プロバイダーを使用して、TLS ありでカスタム・ドメインを使用してアプリをプライベートに公開する](#private_ingress_tls)
+-   [オンプレミスの DNS サービスを使用して、アプリをプライベートに公開する](#private_ingress_onprem_dns)
 
 ### デフォルトのプライベート・アプリケーション・ロード・バランサーを有効にする
 {: #private_ingress}
@@ -914,7 +874,7 @@ IBM 提供の事前割り当てポータブル・プライベート IP アドレ
 1. クラスター内で使用可能な ALB をリスト表示して、プライベート ALB の ID を取得します。 <em>&lt;cluser_name&gt;</em> を、公開するアプリがデプロイされているクラスターの名前に置き換えます。
 
     ```
-    bx cs albs --cluster <my_cluster>
+    bx cs albs --cluster <cluser_name>
     ```
     {: pre}
 
@@ -922,7 +882,7 @@ IBM 提供の事前割り当てポータブル・プライベート IP アドレ
     ```
     ALB ID                                            Enabled   Status     Type      ALB IP
     private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   false     disabled   private   -
-    public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    true      enabled    public    169.46.63.150
+    public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx
     ```
     {: screen}
 
@@ -936,17 +896,17 @@ IBM 提供の事前割り当てポータブル・プライベート IP アドレ
 
 独自のポータブル・プライベート IP アドレスを使用してプライベート ALB を有効にするには、以下のようにします。
 
-1. ご使用のクラスターのプライベート VLAN 上でトラフィックをルーティングするように、選択した IP アドレスのユーザー管理サブネットを構成します。 <em>&lt;cluser_name&gt;</em> を、公開するアプリがデプロイされているクラスターの名前または ID に置き換えます。<em>&lt;subnet_CIDR&gt;</em> をユーザー管理サブネットの CIDR に置き換え、<em>&lt;private_VLAN&gt;</em> を使用可能プライベート VLAN ID に置き換えます。 使用可能なプライベート VLAN の ID は、`bx cs vlans` を実行することによって見つけることができます。
+1. ご使用のクラスターのプライベート VLAN 上でトラフィックをルーティングするように、選択した IP アドレスのユーザー管理サブネットを構成します。 <em>&lt;cluser_name&gt;</em> を、公開するアプリがデプロイされているクラスターの名前または ID に置き換えます。<em>&lt;subnet_CIDR&gt;</em> をユーザー管理サブネットの CIDR に置き換え、<em>&lt;private_VLAN_ID&gt;</em> を使用可能プライベート VLAN ID に置き換えます。 使用可能なプライベート VLAN の ID は、`bx cs vlans` を実行することによって見つけることができます。
 
    ```
-   bx cs cluster-user-subnet-add <cluster_name> <subnet_CIDR> <private_VLAN>
+   bx cs cluster-user-subnet-add <cluster_name> <subnet_CIDR> <private_VLAN_ID>
    ```
    {: pre}
 
 2. クラスター内で使用可能な ALB をリスト表示して、プライベート ALB の ID を取得します。
 
     ```
-    bx cs albs --cluster <my_cluster>
+    bx cs albs --cluster <cluster_name>
     ```
     {: pre}
 
@@ -954,127 +914,116 @@ IBM 提供の事前割り当てポータブル・プライベート IP アドレ
     ```
     ALB ID                                            Enabled   Status     Type      ALB IP
     private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   false     disabled   private   -
-    public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    true      enabled    public    169.46.63.150
+    public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx
     ```
     {: screen}
 
-3. プライベート ALB を有効にします。 <em>&lt;private_ALB_ID&gt;</em> を、前のステップの出力にあるプライベート ALB の ID に置き換えます。<em>&lt;user_ip&gt;</em> を、使用するユーザー管理サブネットからの IP アドレスに置き換えます。
+3. プライベート ALB を有効にします。 <em>&lt;private_ALB_ID&gt;</em> を、前のステップの出力にあるプライベート ALB の ID に置き換えます。<em>&lt;user_IP&gt;</em> を、使用するユーザー管理サブネットからの IP アドレスに置き換えます。
 
    ```
-   bx cs alb-configure --albID <private_ALB_ID> --enable --user-ip <user_ip>
+   bx cs alb-configure --albID <private_ALB_ID> --enable --user-ip <user_IP>
    ```
    {: pre}
 
 <br />
 
 
-### TLS なしでカスタム・ドメインを使用してアプリをプライベートに公開する
+### 外部 DNS プロバイダーを使用して、TLS なしでカスタム・ドメインを使用してアプリをプライベートに公開する
 {: #private_ingress_no_tls}
 
 カスタム・ドメインを使用して着信ネットワーク・トラフィックをクラスター内のアプリにルーティングするように、プライベート ALB を構成できます。
 {:shortdesc}
 
-始めに、[プライベート・アプリケーションのロード・バランサーを有効にします](#private_ingress)。
+開始前に、以下のことを行います。
+* [プライベート・アプリケーションのロード・バランサーを有効にします](#private_ingress)。
+* プライベート・ワーカー・ノードがあり、外部 DNS プロバイダーを使用する場合、[パブリック・アクセスのあるエッジ・ノードを構成](cs_edge.html#edge)し、[Vyatta Gateway Appliance を構成 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/) する必要があります。プライベート・ネットワークのみに限定する場合は、代わりに[オンプレミスの DNS サービスを使用して、アプリをプライベートに公開する](#private_ingress_onprem_dns)を参照してください。
 
-TLS なしでカスタム・ドメインを使用してアプリをプライベートに公開するには、以下のようにします。
+外部 DNS プロバイダーを使用して、TLS なしでカスタム・ドメインを使用してアプリをプライベートに公開するには、以下のようにします。
 
-1.  カスタム・ドメインを作成します。 カスタム・ドメインを作成するには、ドメイン・ネーム・サービス (DNS) プロバイダーまたは [{{site.data.keyword.Bluemix_notm}} ](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns)を使用してカスタム・ドメインを登録します。
-
+1.  カスタム・ドメインを作成します。 カスタム・ドメインを作成するには、Domain Name Service (DNS) プロバイダーまたは [{{site.data.keyword.Bluemix_notm}} ](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns)を使用してカスタム・ドメインを登録します。
 2.  カスタム・ドメインを IBM 提供のプライベート ALB のポータブル・プライベート IP アドレスにマップします。これは、IP アドレスをレコードとして追加して行います。 プライベート ALB のポータブル・プライベート IP アドレスを見つけるには、`bx cs albs --cluster<cluster_name>` を実行します。
+3.  [アプリをクラスターにデプロイします](cs_app.html#app_cli)。 構成ファイルの metadata セクションで、デプロイメントにラベルを追加しておく必要があります (例えば、`app: code`)。このラベルは、アプリが実行されるすべてのポッドを識別して、それらのポットが Ingress ロード・バランシングに含められるようにするために必要です。
 
-3.  [アプリをクラスターにデプロイします](cs_app.html#app_cli)。 アプリをクラスターにデプロイする際に、コンテナー内のアプリを実行するポッドが 1 つ以上自動的に作成されます。 構成ファイルの metadata セクションで、デプロイメントにラベルを追加しておく必要があります。 このラベルにより、アプリを実行するすべてのポッドを識別できるので、それらを Ingress ロード・バランシングに含められます。
+4.   公開するアプリの Kubernetes サービスを作成します。 アプリをクラスター ALB の Ingress ロード・バランシングに含めるには、Kubernetes サービスを介してアプリを公開する必要があります。
+      1.  任意のエディターを開き、`myalbservice.yaml` などの名前のサービス構成ファイルを作成します。
+      2.  ALB によってプライベート・ネットワークに公開するアプリの、サービスを定義します。
 
-4.  公開するアプリ用に、Kubernetes サービスを作成します。 プライベート ALB が Ingress ロード・バランシングにアプリを含めることができるのは、クラスター内の Kubernetes サービスによってアプリが公開されている場合のみです。
+          ```
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: myalbservice
+          spec:
+            selector:
+              <selector_key>: <selector_value>
+            ports:
+             - protocol: TCP
+               port: 8080
+          ```
+          {: codeblock}
 
-    1.  任意のエディターを開き、`myservice.yaml` などの名前のサービス構成ファイルを作成します。
-    2.  パブリックに公開するアプリの ALB サービスを定義します。
+          <table>
+          <caption>ALB サービス・ファイルの構成要素について</caption>
+          <thead>
+          <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+          </thead>
+          <tbody>
+          <tr>
+          <td><code>selector</code></td>
+          <td>アプリが実行されるポッドをターゲットにするために使用する、ラベル・キー (<em>&lt;selector_key&gt;</em>) と値 (<em>&lt;selector_value&gt;</em>) のペアを入力します。 ポッドをターゲットにして、サービス・ロード・バランシングに含めるには、<em>&lt;selector_key&gt;</em> および <em>&lt;selector_value&gt;</em> が、デプロイメント yaml の <code>spec.template.metadata.labels</code> セクションで使用したキー/値のペアと同じであることを確認します。</td>
+           </tr>
+           <tr>
+           <td><code>port</code></td>
+           <td>サービスが listen するポート。</td>
+           </tr>
+           </tbody></table>
+      3.  変更を保存します。
+      4.  クラスター内にサービスを作成します。
 
-        ```
-        apiVersion: v1
-        kind: Service
-        metadata:
-          name: <myservice>
-        spec:
-          selector:
-            <selectorkey>: <selectorvalue>
-          ports:
-           - protocol: TCP
-             port: 8080
-        ```
-       {: codeblock}
+          ```
+          kubectl apply -f myalbservice.yaml
+          ```
+          {: pre}
+      5.  プライベート・ネットワークに公開するアプリごとに、これらのステップを繰り返します。
 
-        <table>
-        <caption>ALB サービス・ファイルの構成要素について</caption>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>name</code></td>
-        <td><em>&lt;myservice1&gt;</em> を ALB サービスの名前に置き換えます。</td>
-        </tr>
-        <tr>
-        <td><code>selector</code></td>
-        <td>アプリが実行されるポッドをターゲットにするために使用する、ラベル・キー (<em>&lt;selectorkey&gt;</em>) と値 (<em>&lt;selectorvalue&gt;</em>) のペアを入力します。 例えば、<code>app: code</code> というセレクターを使用した場合、メタデータにこのラベルがあるすべてのポッドが、ロード・バランシングに含められます。 アプリをクラスターにデプロイするときに使用したものと同じラベルを入力してください。 </td>
-         </tr>
-         <td><code>port</code></td>
-         <td>サービスが listen するポート。</td>
-         </tbody></table>
-
-    3.  変更を保存します。
-    4.  クラスター内に Kubernetes サービスを作成します。
-
-        ```
-        kubectl apply -f myservice.yaml
-        ```
-        {: pre}
-
-    5.  プライベート・ネットワークに公開するアプリごとに、これらのステップを繰り返します。
-7.  Ingress リソースを作成します。 Ingress リソースは、アプリ用に作成した Kubernetes サービスのルーティング・ルールを定義するもので、着信ネットワーク・トラフィックをサービスにルーティングするために ALB によって使用されます。 複数のアプリをクラスター内の 1 つの Kubernetes サービスで公開する場合は、1 つの Ingress リソースを使用してすべてのアプリのルーティング・ルールを定義する必要があります。
-    1.  任意のエディターを開き、`myingress.yaml` などの名前の Ingress 構成ファイルを作成します。
-    2.  カスタム・ドメインを使用して着信ネットワーク・トラフィックをサービスにルーティングする Ingress リソースを構成ファイルで定義します。 サービスごとに、カスタム・ドメインに付加する個別のパスを定義して、アプリへの固有のパス (例えば、`https://mydomain/myapp`) を作成することができます。 この経路を Web ブラウザーに入力すると、ネットワーク・トラフィックが ALB にルーティングされます。 ALB は、関連付けられたサービスを検索し、ネットワーク・トラフィックをそのサービスに送信し、さらに、アプリが実行されているポッドに送信します。
-
-        Ingress リソースに定義されたパスでアプリが listen していなければなりません。 そうでない場合、ネットワーク・トラフィックをそのアプリに転送できません。 大多数のアプリは特定のパスで listen するのではなく、ルート・パスと特定のポートを使用します。 この場合、ルート・パスを `/` として定義します。アプリ用の個別のパスは指定しないでください。
+5.  Ingress リソースを作成します。 Ingress リソースは、アプリ用に作成した Kubernetes サービスのルーティング・ルールを定義するもので、着信ネットワーク・トラフィックをサービスにルーティングするために ALB によって使用されます。 複数のアプリをクラスター内の 1 つの Kubernetes サービスで公開する場合は、1 つの Ingress リソースを使用してすべてのアプリのルーティング・ルールを定義する必要があります。
+    1.  任意のエディターを開き、`myingressresource.yaml` などの名前の Ingress 構成ファイルを作成します。
+    2.  カスタム・ドメインを使用して着信ネットワーク・トラフィックをサービスにルーティングする Ingress リソースを構成ファイルで定義します。
 
         ```
         apiVersion: extensions/v1beta1
         kind: Ingress
         metadata:
-          name: <myingressname>
+          name: myingressresource
           annotations:
             ingress.bluemix.net/ALB-ID: "<private_ALB_ID>"
         spec:
           rules:
-          - host: <mycustomdomain>
+          - host: <custom_domain>
             http:
               paths:
-              - path: /<myservicepath1>
+              - path: /<service1_path>
                 backend:
-                  serviceName: <myservice1>
+                  serviceName: <service1>
                   servicePort: 80
-              - path: /<myservicepath2>
+              - path: /<service2_path>
                 backend:
-                  serviceName: <myservice2>
+                  serviceName: <service2>
                   servicePort: 80
         ```
         {: codeblock}
 
         <table>
-        <caption>Ingress リソース・ファイルの構成要素について</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
         </thead>
         <tbody>
         <tr>
-        <td><code>name</code></td>
-        <td><em>&lt;myingressname&gt;</em> を Ingress リソースの名前に置き換えます。</td>
-        </tr>
-        <tr>
         <td><code>ingress.bluemix.net/ALB-ID</code></td>
         <td><em>&lt;private_ALB_ID&gt;</em> を、プライベート ALB の ID に置き換えます。 ALB ID を見つけるには、<code>bx cs albs --cluster <my_cluster></code> を実行します。 この Ingress アノテーションについて詳しくは、[プライベート・アプリケーションのロード・バランサーのルーティング](cs_annotations.html#alb-id)を参照してください。</td>
         </tr>
         <td><code>host</code></td>
-        <td><em>&lt;mycustomdomain&gt;</em> をカスタム・ドメインに置き換えます。
+        <td><em>&lt;custom_domain&gt;</em> をカスタム・ドメインに置き換えます。
 
         </br></br>
         <strong>注:</strong> Ingress 作成時の失敗を回避するため、ホストに &ast; を使用したり、ホスト・プロパティーを空のままにしたりしないでください。
@@ -1082,22 +1031,23 @@ TLS なしでカスタム・ドメインを使用してアプリをプライベ�
         </tr>
         <tr>
         <td><code>path</code></td>
-        <td><em>&lt;myservicepath1&gt;</em> をスラッシュか、アプリが listen する固有のパスに置き換えて、ネットワーク・トラフィックをアプリに転送できるようにします。
+        <td><em>&lt;service1_path&gt;</em> をスラッシュか、アプリが listen する固有のパスに置き換えて、ネットワーク・トラフィックをアプリに転送できるようにします。
 
         </br>
-        Kubernetes サービスごとに、カスタム・ドメインに付加する個別のパスを定義して、アプリへの固有のパス (例えば <code>custom_domain/myservicepath1</code>) を作成できます。 この経路を Web ブラウザーに入力すると、ネットワーク・トラフィックが ALB にルーティングされます。 ALB は、同じパスを使用して、関連付けられたサービスを検索し、ネットワーク・トラフィックをそのサービスに送信し、アプリが実行されているポッドに送信します。 着信ネットワーク・トラフィックを受け取るには、このパスを listen するようにアプリをセットアップする必要があります。
+
+        サービスごとに、カスタム・ドメインに付加する個別のパスを定義して、アプリへの固有のパスを作成できます。 この経路を Web ブラウザーに入力すると、ネットワーク・トラフィックが ALB にルーティングされます。 ALB は、関連付けられたサービスを検索し、ネットワーク・トラフィックをそのサービスに送信します。 そして、サービスが、アプリを実行しているポッドにトラフィックを転送します。着信ネットワーク・トラフィックを受け取るには、このパスを listen するようにアプリをセットアップする必要があります。
 
         </br>
         多くのアプリは、特定のパスで listen するのではなく、ルート・パスと特定のポートを使用します。 この場合、ルート・パスを <code>/</code> として定義します。アプリ用の個別のパスは指定しないでください。
 
         </br></br>
-        例: <ul><li><code>https://mycustomdomain/</code> の場合、<code>/</code> をパスとして入力します。</li><li><code>https://mycustomdomain/myservicepath</code> の場合、<code>/myservicepath</code> をパスとして入力します。</li></ul>
+        例: <ul><li><code>https://custom_domain/</code> の場合、<code>/</code> をパスとして入力します。</li><li><code>https://custom_domain/service1_path</code> の場合、<code>/service1_path</code> をパスとして入力します。</li></ul>
         <strong>ヒント:</strong> アプリが listen するパスとは異なるパスを listen するように Ingress を構成するには、[再書き込みアノテーション](cs_annotations.html#rewrite-path)を使用してアプリへの適切なルーティングを設定します。
         </td>
         </tr>
         <tr>
         <td><code>serviceName</code></td>
-        <td><em>&lt;myservice1&gt;</em> を、アプリ用に Kubernetes サービスを作成したときに使用したサービスの名前に置き換えます。</td>
+        <td><em>&lt;service1&gt;</em> を、アプリ用に Kubernetes サービスを作成したときに使用したサービスの名前に置き換えます。</td>
         </tr>
         <tr>
         <td><code>servicePort</code></td>
@@ -1109,224 +1059,372 @@ TLS なしでカスタム・ドメインを使用してアプリをプライベ�
     4.  クラスターの Ingress リソースを作成します。
 
         ```
-        kubectl apply -f myingress.yaml
+        kubectl apply -f myingressresource.yaml
         ```
         {: pre}
+6.   Ingress リソースが正常に作成されたことを確認します。
 
-8.  Ingress リソースが正常に作成されたことを確認します。 _&lt;myingressname&gt;_ を、先ほど作成した Ingress リソースの名前に置き換えます。
+      ```
+      kubectl describe ingress myingressresource
+      ```
+      {: pre}
 
-    ```
-    kubectl describe ingress <myingressname>
-    ```
-    {: pre}
+      1. イベント内のメッセージにリソース構成のエラーが示された場合は、リソース・ファイル内の値を変更して、リソースのファイルを再適用してください。
 
-    1. イベント内のメッセージにリソース構成のエラーが示された場合は、リソース・ファイル内の値を変更して、リソースのファイルを再適用してください。
+7.   Web ブラウザーに、アクセスするアプリ・サービスの URL を入力します。
 
-9.  インターネットからアプリにアクセスします。
-    1.  任意の Web ブラウザーを開きます。
-    2.  アクセスするアプリ・サービスの URL を入力します。
+      ```
+      https://<custom_domain>/<service1_path>
+      ```
+      {: codeblock}
 
-        ```
-        http://<mycustomdomain>/<myservicepath1>
-        ```
-        {: codeblock}
 
 <br />
 
 
-### TLS ありでカスタム・ドメインを使用してアプリをプライベートに公開する
+### 外部 DNS プロバイダーを使用して、TLS ありでカスタム・ドメインを使用してアプリをプライベートに公開する
 {: #private_ingress_tls}
 
-プライベート ALB を使用して、着信ネットワーク・トラフィックをクラスター内のアプリにルーティングできます。また、カスタム・ドメインを使用しながら、独自の TLS 証明書を使用して TLS 終端を管理できます。
+プライベート ALB を使用して、着信ネットワーク・トラフィックをクラスター内のアプリにルーティングできます。 また、カスタム・ドメインを使用しながら、独自の TLS 証明書を使用して TLS 終端を管理できます。
 {:shortdesc}
 
-始めに、[デフォルトのプライベート・アプリケーション・ロード・バランサーを有効にします](#private_ingress)。
+開始前に、以下のことを行います。
+* [プライベート・アプリケーションのロード・バランサーを有効にします](#private_ingress)。
+* プライベート・ワーカー・ノードがあり、外部 DNS プロバイダーを使用する場合、[パブリック・アクセスのあるエッジ・ノードを構成](cs_edge.html#edge)し、[Vyatta Gateway Appliance を構成 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/) する必要があります。プライベート・ネットワークのみに限定する場合は、代わりに[オンプレミスの DNS サービスを使用して、アプリをプライベートに公開する](#private_ingress_onprem_dns)を参照してください。
 
-TLS ありでカスタム・ドメインを使用してアプリをプライベートに公開するには、以下のようにします。
+外部 DNS プロバイダーを使用して、TLS ありでカスタム・ドメインを使用してアプリをプライベートに公開するには、以下のようにします。
 
-1.  カスタム・ドメインを作成します。 カスタム・ドメインを作成するには、ドメイン・ネーム・サービス (DNS) プロバイダーまたは [{{site.data.keyword.Bluemix_notm}} ](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns)を使用してカスタム・ドメインを登録します。
-
+1.  カスタム・ドメインを作成します。 カスタム・ドメインを作成するには、Domain Name Service (DNS) プロバイダーまたは [{{site.data.keyword.Bluemix_notm}} ](/docs/infrastructure/dns/getting-started.html#getting-started-with-dns)を使用してカスタム・ドメインを登録します。
 2.  カスタム・ドメインを IBM 提供のプライベート ALB のポータブル・プライベート IP アドレスにマップします。これは、IP アドレスをレコードとして追加して行います。 プライベート ALB のポータブル・プライベート IP アドレスを見つけるには、`bx cs albs --cluster<cluster_name>` を実行します。
-
 3.  TLS 証明書とキー・シークレットをインポートまたは作成します。
     * 使用する TLS 証明書が {{site.data.keyword.cloudcerts_long_notm}} に保管されている場合は、それに関連付けられたシークレットを、`bx cs alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>` を実行してクラスター内にインポートできます。
     * TLS 証明書の準備ができていない場合は、以下の手順に従ってください。
         1. PEM 形式でエンコードされた TLS 証明書と鍵を、当該ドメインのために作成します。
-        2. TLS 証明書と鍵を使用するシークレットを作成します。 <em>&lt;mytlssecret&gt;</em> を Kubernetes シークレットの名前に、<em>&lt;tls_key_filepath&gt;</em> をカスタム TLS 鍵ファイルへのパスに、<em>&lt;tls_cert_filepath&gt;</em> をカスタム TLS 証明書ファイルへのパスに置き換えます。
+        2. TLS 証明書と鍵を使用するシークレットを作成します。 <em>&lt;tls_secret_name&gt;</em> を Kubernetes シークレットの名前に、<em>&lt;tls_key_filepath&gt;</em> をカスタム TLS 鍵ファイルへのパスに、<em>&lt;tls_cert_filepath&gt;</em> をカスタム TLS 証明書ファイルへのパスに置き換えます。
 
             ```
-            kubectl create secret tls <mytlssecret> --key <tls_key_filepath> --cert <tls_cert_filepath>
+            kubectl create secret tls <tls_secret_name> --key <tls_key_filepath> --cert <tls_cert_filepath>
             ```
             {: pre}
+4.  [アプリをクラスターにデプロイします](cs_app.html#app_cli)。 構成ファイルの metadata セクションで、デプロイメントにラベルを追加しておく必要があります (例えば、`app: code`)。このラベルは、アプリが実行されるすべてのポッドを識別して、それらのポットが Ingress ロード・バランシングに含められるようにするために必要です。
 
-4.  [アプリをクラスターにデプロイします](cs_app.html#app_cli)。 アプリをクラスターにデプロイする際に、コンテナー内のアプリを実行するポッドが 1 つ以上自動的に作成されます。 構成ファイルの metadata セクションで、デプロイメントにラベルを追加しておく必要があります。 このラベルは、アプリが実行されるすべてのポッドを識別して、それらのポットが Ingress ロード・バランシングに含められるようにするために必要です。
+5.   公開するアプリの Kubernetes サービスを作成します。 アプリをクラスター ALB の Ingress ロード・バランシングに含めるには、Kubernetes サービスを介してアプリを公開する必要があります。
+      1.  任意のエディターを開き、`myalbservice.yaml` などの名前のサービス構成ファイルを作成します。
+      2.  ALB によってプライベート・ネットワークに公開するアプリの、サービスを定義します。
 
-5.  公開するアプリ用に、Kubernetes サービスを作成します。 プライベート ALB が Ingress ロード・バランシングにアプリを含めることができるのは、クラスター内の Kubernetes サービスによってアプリが公開されている場合のみです。
+          ```
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: myalbservice
+          spec:
+            selector:
+              <selector_key>: <selector_value>
+            ports:
+             - protocol: TCP
+               port: 8080
+          ```
+          {: codeblock}
 
-    1.  任意のエディターを開き、`myservice.yaml` などの名前のサービス構成ファイルを作成します。
-    2.  パブリックに公開するアプリのアプリケーション・ロード・バランサー・サービスを定義します。
+          <table>
+          <caption>ALB サービス・ファイルの構成要素について</caption>
+          <thead>
+          <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+          </thead>
+          <tbody>
+          <tr>
+          <td><code>selector</code></td>
+          <td>アプリが実行されるポッドをターゲットにするために使用する、ラベル・キー (<em>&lt;selector_key&gt;</em>) と値 (<em>&lt;selector_value&gt;</em>) のペアを入力します。 ポッドをターゲットにして、サービス・ロード・バランシングに含めるには、<em>&lt;selector_key&gt;</em> および <em>&lt;selector_value&gt;</em> が、デプロイメント yaml の <code>spec.template.metadata.labels</code> セクションで使用したキー/値のペアと同じであることを確認します。</td>
+           </tr>
+           <tr>
+           <td><code>port</code></td>
+           <td>サービスが listen するポート。</td>
+           </tr>
+           </tbody></table>
+      3.  変更を保存します。
+      4.  クラスター内にサービスを作成します。
 
-        ```
-        apiVersion: v1
-        kind: Service
-        metadata:
-          name: <myservice>
-        spec:
-          selector:
-            <selectorkey>: <selectorvalue>
-          ports:
-           - protocol: TCP
-             port: 8080
-        ```
-       {: codeblock}
+          ```
+          kubectl apply -f myalbservice.yaml
+          ```
+          {: pre}
+      5.  プライベート・ネットワークに公開するアプリごとに、これらのステップを繰り返します。
 
-        <table>
-        <caption>ALB サービス・ファイルの構成要素について</caption>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>name</code></td>
-        <td><em>&lt;myservice1&gt;</em> を ALB サービスの名前に置き換えます。</td>
-        </tr>
-        <tr>
-        <td><code>selector</code></td>
-        <td>アプリが実行されるポッドをターゲットにするために使用する、ラベル・キー (<em>&lt;selectorkey&gt;</em>) と値 (<em>&lt;selectorvalue&gt;</em>) のペアを入力します。 例えば、<code>app: code</code> というセレクターを使用した場合、メタデータにこのラベルがあるすべてのポッドが、ロード・バランシングに含められます。 アプリをクラスターにデプロイするときに使用したものと同じラベルを入力してください。 </td>
-         </tr>
-         <td><code>port</code></td>
-         <td>サービスが listen するポート。</td>
-         </tbody></table>
-
-    3.  変更を保存します。
-    4.  クラスター内にサービスを作成します。
-
-        ```
-        kubectl apply -f myservice.yaml
-        ```
-        {: pre}
-
-    5.  プライベート・ネットワークで公開するアプリごとに、これらのステップを繰り返します。
 6.  Ingress リソースを作成します。 Ingress リソースは、アプリ用に作成した Kubernetes サービスのルーティング・ルールを定義するもので、着信ネットワーク・トラフィックをサービスにルーティングするために ALB によって使用されます。 複数のアプリをクラスター内の 1 つの Kubernetes サービスで公開する場合は、1 つの Ingress リソースを使用してすべてのアプリのルーティング・ルールを定義する必要があります。
-    1.  任意のエディターを開き、`myingress.yaml` などの名前の Ingress 構成ファイルを作成します。
-    2.  カスタム・ドメインを使用して着信ネットワーク・トラフィックを対象サービスにルーティングし、カスタム証明書を使用して TLS 終端を管理するように、Ingress リソースを構成ファイル内に定義します。 サービスごとに、カスタム・ドメインに付加する個別のパスを定義して、アプリへの固有のパス (例えば、`https://mydomain/myapp`) を作成することができます。 この経路を Web ブラウザーに入力すると、ネットワーク・トラフィックが ALB にルーティングされます。 ALB は、関連付けられたサービスを検索し、ネットワーク・トラフィックをそのサービスに送信し、さらに、アプリが実行されているポッドに送信します。
+    1.  任意のエディターを開き、`myingressresource.yaml` などの名前の Ingress 構成ファイルを作成します。
+    2.  カスタム・ドメインを使用して着信ネットワーク・トラフィックを対象サービスにルーティングし、カスタム証明書を使用して TLS 終端を管理するように、Ingress リソースを構成ファイル内に定義します。
 
-        **注:** Ingress リソースに定義されたパスでアプリが listen していなければなりません。 そうでない場合、ネットワーク・トラフィックをそのアプリに転送できません。 大多数のアプリは特定のパスで listen するのではなく、ルート・パスと特定のポートを使用します。 この場合、ルート・パスを `/` として定義します。アプリ用の個別のパスは指定しないでください。
+          ```
+          apiVersion: extensions/v1beta1
+          kind: Ingress
+          metadata:
+            name: myingressresource
+            annotations:
+              ingress.bluemix.net/ALB-ID: "<private_ALB_ID>"
+          spec:
+            tls:
+            - hosts:
+              - <custom_domain>
+              secretName: <tls_secret_name>
+            rules:
+            - host: <custom_domain>
+              http:
+                paths:
+                - path: /<service1_path>
+                  backend:
+                    serviceName: <service1>
+                    servicePort: 80
+                - path: /<service2_path>
+                  backend:
+                    serviceName: <service2>
+                    servicePort: 80
+           ```
+           {: pre}
 
-        ```
-        apiVersion: extensions/v1beta1
-        kind: Ingress
-        metadata:
-          name: <myingressname>
-          annotations:
-            ingress.bluemix.net/ALB-ID: "<private_ALB_ID>"
-        spec:
-          tls:
-          - hosts:
-            - <mycustomdomain>
-            secretName: <mytlssecret>
-          rules:
-          - host: <mycustomdomain>
-            http:
-              paths:
-              - path: /<myservicepath1>
-                backend:
-                  serviceName: <myservice1>
-                  servicePort: 80
-              - path: /<myservicepath2>
-                backend:
-                  serviceName: <myservice2>
-                  servicePort: 80
-         ```
-         {: codeblock}
+           <table>
+          <thead>
+          <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+          </thead>
+          <tbody>
+          <tr>
+          <td><code>ingress.bluemix.net/ALB-ID</code></td>
+          <td><em>&lt;private_ALB_ID&gt;</em> を、プライベート ALB の ID に置き換えます。 ALB ID を見つけるには、<code>bx cs albs --cluster <cluster_name></code> を実行します。 この Ingress アノテーションについて詳しくは、[プライベート・アプリケーションのロード・バランサーのルーティング (ALB-ID)](cs_annotations.html#alb-id) を参照してください。</td>
+          </tr>
+          <tr>
+          <td><code>tls/hosts</code></td>
+          <td><em>&lt;custom_domain&gt;</em> を、TLS 終端のために構成するカスタム・ドメインに置き換えます。
 
-         <table>
-        <caption>Ingress リソース・ファイルの構成要素について</caption>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>name</code></td>
-        <td><em>&lt;myingressname&gt;</em> を Ingress リソースの名前に置き換えます。</td>
-        </tr>
-        <tr>
-        <td><code>ingress.bluemix.net/ALB-ID</code></td>
-        <td><em>&lt;private_ALB_ID&gt;</em> を、プライベート ALB の ID に置き換えます。 ALB ID を見つけるには、<code>bx cs albs --cluster <my_cluster></code> を実行します。 この Ingress アノテーションについて詳しくは、[プライベート・アプリケーションのロード・バランサーのルーティング (ALB-ID)](cs_annotations.html#alb-id) を参照してください。</td>
-        </tr>
-        <tr>
-        <td><code>tls/hosts</code></td>
-        <td><em>&lt;mycustomdomain&gt;</em> を、TLS 終端のために構成するカスタム・ドメインに置き換えます。
+          </br></br>
+          <strong>注:</strong> Ingress 作成時の失敗を回避するため、ホストに &ast; を使用したり、ホスト・プロパティーを空のままにしたりしないでください。</td>
+          </tr>
+          <tr>
+          <td><code>tls/secretName</code></td>
+          <td><em>&lt;tls_secret_name&gt;</em> を、先ほど作成した、カスタム TLS 証明書と鍵を保持するシークレットの名前に置き換えます。{{site.data.keyword.cloudcerts_short}} から証明書をインポートする場合、<code>bx cs alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> を実行して、TLS 証明書に関連付けられたシークレットを確認できます。
+          </tr>
+          <tr>
+          <td><code>host</code></td>
+          <td><em>&lt;custom_domain&gt;</em> を、TLS 終端のために構成するカスタム・ドメインに置き換えます。
 
-        </br></br>
-        <strong>注:</strong> Ingress 作成時の失敗を回避するため、ホストに &ast; を使用したり、ホスト・プロパティーを空のままにしたりしないでください。</td>
-        </tr>
-        <tr>
-        <td><code>tls/secretName</code></td>
-        <td><em>&lt;mytlssecret&gt;</em> を、先ほど作成した、カスタム TLS 証明書と鍵を保持するシークレットの名前に置き換えます。 {{site.data.keyword.cloudcerts_short}} から証明書をインポートする場合、<code>bx cs alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> を実行して、TLS 証明書に関連付けられたシークレットを確認できます。
-        </tr>
-        <tr>
-        <td><code>host</code></td>
-        <td><em>&lt;mycustomdomain&gt;</em> を、TLS 終端のために構成するカスタム・ドメインに置き換えます。
+          </br></br>
+          <strong>注:</strong> Ingress 作成時の失敗を回避するため、ホストに &ast; を使用したり、ホスト・プロパティーを空のままにしたりしないでください。
+          </td>
+          </tr>
+          <tr>
+          <td><code>path</code></td>
+          <td><em>&lt;service1_path&gt;</em> をスラッシュか、アプリが listen する固有のパスに置き換えて、ネットワーク・トラフィックをアプリに転送できるようにします。
 
-        </br></br>
-        <strong>注:</strong> Ingress 作成時の失敗を回避するため、ホストに &ast; を使用したり、ホスト・プロパティーを空のままにしたりしないでください。
-        </td>
-        </tr>
-        <tr>
-        <td><code>path</code></td>
-        <td><em>&lt;myservicepath1&gt;</em> をスラッシュか、アプリが listen する固有のパスに置き換えて、ネットワーク・トラフィックをアプリに転送できるようにします。
+          </br>
+          サービスごとに、カスタム・ドメインに付加する個別のパスを定義して、アプリへの固有のパスを作成できます。 この経路を Web ブラウザーに入力すると、ネットワーク・トラフィックが ALB にルーティングされます。 ALB は、同じパスを使用して、関連付けられたサービスを検索し、ネットワーク・トラフィックをそのサービスに送信し、アプリが実行されているポッドに送信します。 着信ネットワーク・トラフィックを受け取るには、このパスを listen するようにアプリをセットアップする必要があります。
 
-        </br>
-        Kubernetes サービスごとに、IBM 提供ドメインに付加する個別のパスを定義して、アプリへの固有のパス (例えば <code>ingress_domain/myservicepath1</code>) を作成できます。 この経路を Web ブラウザーに入力すると、ネットワーク・トラフィックが ALB にルーティングされます。 ALB は、同じパスを使用して、関連付けられたサービスを検索し、ネットワーク・トラフィックをそのサービスに送信し、アプリが実行されているポッドに送信します。 着信ネットワーク・トラフィックを受け取るには、このパスを listen するようにアプリをセットアップする必要があります。
+          </br>
+          多くのアプリは、特定のパスで listen するのではなく、ルート・パスと特定のポートを使用します。 この場合、ルート・パスを <code>/</code> として定義します。アプリ用の個別のパスは指定しないでください。
 
-        </br>
-        多くのアプリは、特定のパスで listen するのではなく、ルート・パスと特定のポートを使用します。 この場合、ルート・パスを <code>/</code> として定義します。アプリ用の個別のパスは指定しないでください。
-
-        </br></br>
-        例: <ul><li><code>https://mycustomdomain/</code> の場合、<code>/</code> をパスとして入力します。</li><li><code>https://mycustomdomain/myservicepath</code> の場合、<code>/myservicepath</code> をパスとして入力します。</li></ul>
-        <strong>ヒント:</strong> アプリが listen するパスとは異なるパスを listen するように Ingress を構成するには、[再書き込みアノテーション](cs_annotations.html#rewrite-path)を使用してアプリへの適切なルーティングを設定します。
-        </td>
-        </tr>
-        <tr>
-        <td><code>serviceName</code></td>
-        <td><em>&lt;myservice1&gt;</em> を、アプリ用に Kubernetes サービスを作成したときに使用したサービスの名前に置き換えます。</td>
-        </tr>
-        <tr>
-        <td><code>servicePort</code></td>
-        <td>サービスが listen するポート。 アプリ用に Kubernetes サービスを作成したときに定義したものと同じポートを使用します。</td>
-        </tr>
-         </tbody></table>
+          </br></br>
+          例: <ul><li><code>https://custom_domain/</code> の場合、<code>/</code> をパスとして入力します。</li><li><code>https://custom_domain/service1_path</code> の場合、<code>/service1_path</code> をパスとして入力します。</li></ul>
+          <strong>ヒント:</strong> アプリが listen するパスとは異なるパスを listen するように Ingress を構成するには、[再書き込みアノテーション](cs_annotations.html#rewrite-path)を使用してアプリへの適切なルーティングを設定します。
+          </td>
+          </tr>
+          <tr>
+          <td><code>serviceName</code></td>
+          <td><em>&lt;service1&gt;</em> を、アプリ用に Kubernetes サービスを作成したときに使用したサービスの名前に置き換えます。</td>
+          </tr>
+          <tr>
+          <td><code>servicePort</code></td>
+          <td>サービスが listen するポート。 アプリ用に Kubernetes サービスを作成したときに定義したものと同じポートを使用します。</td>
+          </tr>
+           </tbody></table>
 
     3.  変更を保存します。
     4.  クラスターの Ingress リソースを作成します。
 
         ```
-        kubectl apply -f myingress.yaml
+        kubectl apply -f myingressresource.yaml
         ```
         {: pre}
+7.   Ingress リソースが正常に作成されたことを確認します。
 
-7.  Ingress リソースが正常に作成されたことを確認します。 _&lt;myingressname&gt;_ を、先ほど作成した Ingress リソースの名前に置き換えます。
+      ```
+      kubectl describe ingress myingressresource
+      ```
+      {: pre}
 
-    ```
-    kubectl describe ingress <myingressname>
-    ```
-    {: pre}
+      1. イベント内のメッセージにリソース構成のエラーが示された場合は、リソース・ファイル内の値を変更して、リソースのファイルを再適用してください。
 
-    1. イベント内のメッセージにリソース構成のエラーが示された場合は、リソース・ファイル内の値を変更して、リソースのファイルを再適用してください。
+8.   Web ブラウザーに、アクセスするアプリ・サービスの URL を入力します。
 
-8.  インターネットからアプリにアクセスします。
-    1.  任意の Web ブラウザーを開きます。
-    2.  アクセスするアプリ・サービスの URL を入力します。
+      ```
+      https://<custom_domain>/<service1_path>
+      ```
+      {: codeblock}
 
-        ```
-        https://<mycustomdomain>/<myservicepath1>
-        ```
-        {: codeblock}
 
 プライベート ALB と TLS を使用してクラスター全体でマイクロサービス間通信を保護する方法を学ぶ包括的なチュートリアルを、[このブログの投稿 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://medium.com/ibm-cloud/secure-microservice-to-microservice-communication-across-kubernetes-clusters-using-a-private-ecbe2a8d4fe2) で確認してください。
 
 <br />
+
+
+### オンプレミスの DNS サービスを使用して、アプリをプライベートに公開する
+{: #private_ingress_onprem_dns}
+
+カスタム・ドメインを使用して着信ネットワーク・トラフィックをクラスター内のアプリにルーティングするように、プライベート ALB を構成できます。 プライベート・ワーカー・ノードがあり、プライベート・ネットワークのみに限定する場合は、プライベートのオンプレミス DNS を使用して、アプリへの URL 要求を解決できます。
+{:shortdesc}
+
+1. [プライベート・アプリケーションのロード・バランサーを有効にします](#private_ingress)。
+2. プライベート・ワーカー・ノードが Kubernetes マスターと通信できるようにするために、[VPN 接続をセットアップします](cs_vpn.html)。
+3. [DNS サービスを構成します ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/)。
+4. カスタム・ドメインを作成し、それを DNS サービスに登録します。
+5.  カスタム・ドメインを IBM 提供のプライベート ALB のポータブル・プライベート IP アドレスにマップします。これは、IP アドレスをレコードとして追加して行います。 プライベート ALB のポータブル・プライベート IP アドレスを見つけるには、`bx cs albs --cluster<cluster_name>` を実行します。
+6.  [アプリをクラスターにデプロイします](cs_app.html#app_cli)。 構成ファイルの metadata セクションで、デプロイメントにラベルを追加しておく必要があります (例えば、`app: code`)。このラベルは、アプリが実行されるすべてのポッドを識別して、それらのポットが Ingress ロード・バランシングに含められるようにするために必要です。
+
+7.   公開するアプリの Kubernetes サービスを作成します。 アプリをクラスター ALB の Ingress ロード・バランシングに含めるには、Kubernetes サービスを介してアプリを公開する必要があります。
+      1.  任意のエディターを開き、`myalbservice.yaml` などの名前のサービス構成ファイルを作成します。
+      2.  ALB によってプライベート・ネットワークに公開するアプリの、サービスを定義します。
+
+          ```
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: myalbservice
+          spec:
+            selector:
+              <selector_key>: <selector_value>
+            ports:
+             - protocol: TCP
+               port: 8080
+          ```
+          {: codeblock}
+
+          <table>
+          <caption>ALB サービス・ファイルの構成要素について</caption>
+          <thead>
+          <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+          </thead>
+          <tbody>
+          <tr>
+          <td><code>selector</code></td>
+          <td>アプリが実行されるポッドをターゲットにするために使用する、ラベル・キー (<em>&lt;selector_key&gt;</em>) と値 (<em>&lt;selector_value&gt;</em>) のペアを入力します。 ポッドをターゲットにして、サービス・ロード・バランシングに含めるには、<em>&lt;selector_key&gt;</em> および <em>&lt;selector_value&gt;</em> が、デプロイメント yaml の <code>spec.template.metadata.labels</code> セクションで使用したキー/値のペアと同じであることを確認します。</td>
+           </tr>
+           <tr>
+           <td><code>port</code></td>
+           <td>サービスが listen するポート。</td>
+           </tr>
+           </tbody></table>
+      3.  変更を保存します。
+      4.  クラスター内にサービスを作成します。
+
+          ```
+          kubectl apply -f myalbservice.yaml
+          ```
+          {: pre}
+      5.  プライベート・ネットワークに公開するアプリごとに、これらのステップを繰り返します。
+
+8.  Ingress リソースを作成します。 Ingress リソースは、アプリ用に作成した Kubernetes サービスのルーティング・ルールを定義するもので、着信ネットワーク・トラフィックをサービスにルーティングするために ALB によって使用されます。 複数のアプリをクラスター内の 1 つの Kubernetes サービスで公開する場合は、1 つの Ingress リソースを使用してすべてのアプリのルーティング・ルールを定義する必要があります。
+  1.  任意のエディターを開き、`myingressresource.yaml` などの名前の Ingress 構成ファイルを作成します。
+  2.  カスタム・ドメインを使用して着信ネットワーク・トラフィックをサービスにルーティングする Ingress リソースを構成ファイルで定義します。
+
+    **注**: TLS を使用しない場合は、以下の例から `tls` セクションを削除してください。
+
+    ```
+    apiVersion: extensions/v1beta1
+    kind: Ingress
+    metadata:
+      name: myingressresource
+      annotations:
+        ingress.bluemix.net/ALB-ID: "<private_ALB_ID>"
+    spec:
+      tls:
+      - hosts:
+        - <custom_domain>
+        secretName: <tls_secret_name>
+      rules:
+      - host: <custom_domain>
+        http:
+          paths:
+          - path: /<service1_path>
+            backend:
+              serviceName: <service1>
+              servicePort: 80
+          - path: /<service2_path>
+            backend:
+              serviceName: <service2>
+              servicePort: 80
+     ```
+     {: codeblock}
+
+    <table>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>ingress.bluemix.net/ALB-ID</code></td>
+    <td><em>&lt;private_ALB_ID&gt;</em> を、プライベート ALB の ID に置き換えます。 ALB ID を見つけるには、<code>bx cs albs --cluster <my_cluster></code> を実行します。 この Ingress アノテーションについて詳しくは、[プライベート・アプリケーションのロード・バランサーのルーティング (ALB-ID)](cs_annotations.html#alb-id) を参照してください。</td>
+    </tr>
+    <tr>
+    <td><code>tls/hosts</code></td>
+    <td>`tls` セクションを使用する場合は、<em>&lt;custom_domain&gt;</em> を、TLS 終端を構成するカスタム・ドメインに置き換えます。
+    </br></br>
+    <strong>注:</strong> Ingress 作成時の失敗を回避するため、ホストに &ast; を使用したり、ホスト・プロパティーを空のままにしたりしないでください。 </td>
+    </tr>
+    <tr>
+    <td><code>tls/secretName</code></td>
+    <td>`tls` セクションを使用する場合は、<em>&lt;tls_secret_name&gt;</em> を、先ほど作成した、カスタム TLS 証明書と鍵を保持するシークレットの名前に置き換えます。{{site.data.keyword.cloudcerts_short}} から証明書をインポートする場合、<code>bx cs alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> を実行して、TLS 証明書に関連付けられたシークレットを確認できます。
+    </tr>
+    <tr>
+    <td><code>host</code></td>
+    <td><em>&lt;custom_domain&gt;</em> を、TLS 終端のために構成するカスタム・ドメインに置き換えます。
+    </br></br>
+    <strong>注:</strong> Ingress 作成時の失敗を回避するため、ホストに &ast; を使用したり、ホスト・プロパティーを空のままにしたりしないでください。
+    </td>
+    </tr>
+    <tr>
+    <td><code>path</code></td>
+    <td><em>&lt;service1_path&gt;</em> をスラッシュか、アプリが listen する固有のパスに置き換えて、ネットワーク・トラフィックをアプリに転送できるようにします。
+    </br>
+    サービスごとに、カスタム・ドメインに付加する個別のパスを定義して、アプリへの固有のパスを作成できます。 この経路を Web ブラウザーに入力すると、ネットワーク・トラフィックが ALB にルーティングされます。 ALB は、同じパスを使用して、関連付けられたサービスを検索し、ネットワーク・トラフィックをそのサービスに送信し、アプリが実行されているポッドに送信します。 着信ネットワーク・トラフィックを受け取るには、このパスを listen するようにアプリをセットアップする必要があります。
+    </br>
+    多くのアプリは、特定のパスで listen するのではなく、ルート・パスと特定のポートを使用します。 この場合、ルート・パスを <code>/</code> として定義します。アプリ用の個別のパスは指定しないでください。
+    </br></br>
+    例: <ul><li><code>https://custom_domain/</code> の場合、<code>/</code> をパスとして入力します。</li><li><code>https://custom_domain/service1_path</code> の場合、<code>/service1_path</code> をパスとして入力します。</li></ul>
+    <strong>ヒント:</strong> アプリが listen するパスとは異なるパスを listen するように Ingress を構成するには、[再書き込みアノテーション](cs_annotations.html#rewrite-path)を使用してアプリへの適切なルーティングを設定します。
+    </td>
+    </tr>
+    <tr>
+    <td><code>serviceName</code></td>
+    <td><em>&lt;service1&gt;</em> を、アプリ用に Kubernetes サービスを作成したときに使用したサービスの名前に置き換えます。</td>
+    </tr>
+    <tr>
+    <td><code>servicePort</code></td>
+    <td>サービスが listen するポート。 アプリ用に Kubernetes サービスを作成したときに定義したものと同じポートを使用します。</td>
+    </tr>
+    </tbody></table>
+
+  3.  変更を保存します。
+  4.  クラスターの Ingress リソースを作成します。
+
+      ```
+      kubectl apply -f myingressresource.yaml
+      ```
+      {: pre}
+9.   Ingress リソースが正常に作成されたことを確認します。
+
+      ```
+      kubectl describe ingress myingressresource
+      ```
+      {: pre}
+
+      1. イベント内のメッセージにリソース構成のエラーが示された場合は、リソース・ファイル内の値を変更して、リソースのファイルを再適用してください。
+
+10.   Web ブラウザーに、アクセスするアプリ・サービスの URL を入力します。
+
+      ```
+      https://<custom_domain>/<service1_path>
+      ```
+      {: codeblock}
+
+
+<br />
+
 
 
 
@@ -1338,6 +1436,7 @@ TLS ありでカスタム・ドメインを使用してアプリをプライベ�
 
 -   [Ingress アプリケーション・ロード・バランサーでポートを開く](#opening_ingress_ports)
 -   [HTTP レベルで SSL プロトコルと SSL 暗号を構成する](#ssl_protocols_ciphers)
+-   [Ingress ログのフォーマットをカスタマイズする](#ingress_log_format)
 -   [アノテーションを使用してアプリケーション・ロード・バランサーをカスタマイズする](cs_annotations.html)
 {: #ingress_annotation}
 
@@ -1348,43 +1447,46 @@ TLS ありでカスタム・ドメインを使用してアプリをプライベ�
 デフォルトでは、Ingress ALB で公開されるのはポート 80 とポート 443 のみです。 他のポートを公開するには、`ibm-cloud-provider-ingress-cm` 構成マップ・リソースを編集します。
 {:shortdesc}
 
-1.  `ibm-cloud-provider-ingress-cm` 構成マップ・リソースに対応するローカル・バージョンの構成ファイルを作成します。<code>data</code> セクションを追加し、パブリック・ポート 80、443 と、構成マップ・ファイルに追加する他のポートを、セミコロン (;) で区切って指定します。
+1. `ibm-cloud-provider-ingress-cm` 構成マップ・リソースに対応するローカル・バージョンの構成ファイルを作成して開きます。
 
- 注: ポートを指定する際、それらのポートを開いたままにしておくためには 80 と 443 も含める必要があります。 指定しないポートは閉じられます。
+    ```
+    kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
+    ```
+    {: pre}
 
- ```
- apiVersion: v1
+2. <code>data</code> セクションを追加し、パブリック・ポート `80` および `443` と、公開する他のポートをセミコロン (;) で区切って指定します。
+
+    **注**: ポートを指定する際、それらのポートを開いたままにしておくためには 80 と 443 も含める必要があります。 指定しないポートは閉じられます。
+
+    ```
+    apiVersion: v1
  data:
    public-ports: "80;443;<port3>"
  kind: ConfigMap
  metadata:
    name: ibm-cloud-provider-ingress-cm
    namespace: kube-system
- ```
- {: codeblock}
+    ```
+    {: codeblock}
 
- 例:
- ```
- apiVersion: v1
+    例:
+    ```
+    apiVersion: v1
  data:
    public-ports: "80;443;9443"
  kind: ConfigMap
  metadata:
    name: ibm-cloud-provider-ingress-cm
    namespace: kube-system
- ```
+    ```
+    {: screen}
 
-2. 構成ファイルを適用します。
+3. 構成ファイルを保存します。
 
- ```
- kubectl apply -f <path/to/configmap.yaml>
- ```
- {: pre}
-
-3. 構成ファイルが適用されたことを検査します。
+4. 構成マップの変更が適用されたことを確認します。
 
  ```
- kubectl describe cm ibm-cloud-provider-ingress-cm -n kube-system
+ kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
  ```
  {: pre}
 
@@ -1398,9 +1500,9 @@ TLS ありでカスタム・ドメインを使用してアプリをプライベ�
  Data
  ====
 
-  public-ports: "80;443;<port3>"
+  public-ports: "80;443;9443"
  ```
- {: codeblock}
+ {: screen}
 
 構成マップ・リソースについて詳しくは、[Kubernetes の資料](https://kubernetes-v1-4.github.io/docs/user-guide/configmap/)を参照してください。
 
@@ -1412,18 +1514,18 @@ TLS ありでカスタム・ドメインを使用してアプリをプライベ�
 
 
 
-**注**: すべてのホストで有効なプロトコルを指定する場合、TLSv1.1 および TLSv1.2 パラメーター (1.1.13、1.0.12) は、OpenSSL 1.0.1 以上が使用されている場合にのみ使用できます。TLSv1.3 パラメーター (1.13.0) は、TLSv1.3 対応版の OpenSSL 1.1.1 が使用されている場合にのみ使用できます。
+**注**: すべてのホストで有効なプロトコルを指定する場合、TLSv1.1 および TLSv1.2 パラメーター (1.1.13、1.0.12) は、OpenSSL 1.0.1 以上が使用されている場合にのみ使用できます。 TLSv1.3 パラメーター (1.13.0) は、TLSv1.3 対応版の OpenSSL 1.1.1 が使用されている場合にのみ使用できます。
 
 構成マップを編集して SSL プロトコルおよび暗号を有効にするには、以下のようにします。
 
-1. ibm-cloud-provider-ingress-cm 構成マップ・リソースに対応するローカル・バージョンの構成ファイルを作成して開きます。
+1. `ibm-cloud-provider-ingress-cm` 構成マップ・リソースに対応するローカル・バージョンの構成ファイルを作成して開きます。
 
     ```
     kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
     ```
     {: pre}
 
-2. SSL プロトコルおよび暗号を追加します。[OpenSSL library cipher list format ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.openssl.org/docs/man1.0.2/apps/ciphers.html) に従って暗号の形式を設定します。
+2. SSL プロトコルおよび暗号を追加します。 [OpenSSL library cipher list format ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.openssl.org/docs/man1.0.2/apps/ciphers.html) に従って暗号の形式を設定します。
 
    ```
    apiVersion: v1
@@ -1437,17 +1539,12 @@ TLS ありでカスタム・ドメインを使用してアプリをプライベ�
    ```
    {: codeblock}
 
-2. 構成ファイルを適用します。
+3. 構成ファイルを保存します。
+
+4. 構成マップの変更が適用されたことを確認します。
 
    ```
-   kubectl apply -f <path/to/configmap.yaml>
-   ```
-   {: pre}
-
-3. 構成ファイルが適用されていることを検査します。
-
-   ```
-   kubectl describe cm ibm-cloud-provider-ingress-cm -n kube-system
+   kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
    ```
    {: pre}
 
@@ -1465,3 +1562,124 @@ TLS ありでカスタム・ドメインを使用してアプリをプライベ�
 ssl-ciphers : "HIGH:!aNULL:!MD5"
    ```
    {: screen}
+
+### Ingress ログの内容とフォーマットをカスタマイズする
+{: #ingress_log_format}
+
+Ingress ALB に関して収集されるログの内容とフォーマットをカスタマイズすることができます。
+{:shortdesc}
+
+デフォルトでは、Ingress ログは JSON 形式にフォーマットされ、一般的なログ・フィールドが示されます。しかし、カスタム・ログ・フォーマットを作成することもできます。転送するログの構成要素と、それらをログ出力に配置する方法を選択するには、以下のようにします。
+
+1. `ibm-cloud-provider-ingress-cm` 構成マップ・リソースに対応するローカル・バージョンの構成ファイルを作成して開きます。
+
+    ```
+    kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
+    ```
+    {: pre}
+
+2. <code>data</code> セクションを追加します。`log-format` フィールドと、オプションで `log-format-escape-json` フィールドを追加します。
+
+    ```
+    apiVersion: v1
+    data:
+      log-format: '{<key1>: <log_variable1>, <key2>: <log_variable2>, <key3>: <log_variable3>}'
+      log-format-escape-json: "true"
+    kind: ConfigMap
+    metadata:
+      name: ibm-cloud-provider-ingress-cm
+      namespace: kube-system
+    ```
+    {: pre}
+
+    <table>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> log-format の構成について</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>log-format</code></td>
+    <td><code>&lt;key&gt;</code> を、ログの構成要素の名前に置き換えます。<code>&lt;log_variable&gt;</code> を、ログ・エントリーに収集する、ログの構成要素の変数に置き換えます。ストリング値を囲む引用符や、ログの構成要素を区切るコンマなど、ログ・エントリーに含めたいテキストと句読点を指定できます。例えば、<code>request: "$request",</code> のように構成要素をフォーマットすると、<code>request: "GET / HTTP/1.1",</code> がログ・エントリーに生成されます。使用できるすべての変数のリストについては、<a href="http://nginx.org/en/docs/varindex.html">Nginx の変数の索引</a>を参照してください。<br><br><em>x-custom-ID</em> などの追加ヘッダーをログに記録するには、次のキー/値ペアをカスタム・ログの内容に追加します。<br><pre class="pre"><code>customID: $http_x_custom_id</code></pre> <br>ハイフン (<code>-</code>) は下線 (<code>_</code>) に変換されること、また <code>$http_</code> をカスタム・ヘッダー名の先頭に付加する必要があることに留意してください。</td>
+    </tr>
+    <tr>
+    <td><code>log-format-escape-json</code></td>
+    <td>オプション: デフォルトでは、ログはテキスト形式で生成されます。ログを JSON 形式で生成するには、<code>log-format-escape-json</code> フィールドを追加し、値 <code>true</code> を使用します。</td>
+    </tr>
+    </tbody></table>
+    </dd>
+    </dl>
+
+    例えば、ログ・フォーマットに以下の変数が含まれるとします。
+    ```
+    apiVersion: v1
+    data:
+      log-format: '{remote_address: $remote_addr, remote_user: "$remote_user",
+                    time_date: [$time_local], request: "$request",
+                    status: $status, http_referer: "$http_referer",
+                    http_user_agent: "$http_user_agent",
+                    request_id: $request_id}'
+    kind: ConfigMap
+    metadata:
+      name: ibm-cloud-provider-ingress-cm
+      namespace: kube-system
+    ```
+    {: screen}
+
+    このフォーマットに基づいたログ・エントリーは、以下のようになります。
+    ```
+    remote_address: 127.0.0.1, remote_user: "dbmanager", time_date: [30/Mar/2018:18:52:17 +0000], request: "GET / HTTP/1.1", status: 401, http_referer: "-", http_user_agent: "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:47.0) Gecko/20100101 Firefox/47.0", request_id: a02b2dea9cf06344a25611c1d7ad72db
+    ```
+    {: screen}
+
+    ALB ログのデフォルト・フォーマットに基づいたカスタム・ログ・フォーマットを作成するには、以下のセクションを構成マップに追加し、必要に応じて変更します。
+    ```
+    apiVersion: v1
+    data:
+      log-format: '{"time_date": "$time_iso8601", "client": "$remote_addr",
+                    "host": "$http_host", "scheme": "$scheme",
+                    "request_method": "$request_method", "request_uri": "$uri",
+                    "request_id": "$request_id", "status": $status,
+                    "upstream_addr": "$upstream_addr", "upstream_status":
+                    $upstream_status, "request_time": $request_time,
+                    "upstream_response_time": $upstream_response_time,
+                    "upstream_connect_time": $upstream_connect_time,
+                    "upstream_header_time": $upstream_header_time}'
+      log-format-escape-json: "true"
+    kind: ConfigMap
+    metadata:
+      name: ibm-cloud-provider-ingress-cm
+      namespace: kube-system
+    ```
+    {: codeblock}
+
+4. 構成ファイルを保存します。
+
+5. 構成マップの変更が適用されたことを確認します。
+
+ ```
+ kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
+ ```
+ {: pre}
+
+ 出力例:
+ ```
+ Name:        ibm-cloud-provider-ingress-cm
+ Namespace:    kube-system
+ Labels:        <none>
+ Annotations:    <none>
+
+ Data
+ ====
+
+  log-format: '{remote_address: $remote_addr, remote_user: "$remote_user", time_date: [$time_local], request: "$request", status: $status, http_referer: "$http_referer", http_user_agent: "$http_user_agent", request_id: $request_id}'
+  log-format-escape-json: "true"
+ ```
+ {: screen}
+
+4. Ingress ALB ログを表示するには、クラスターで [Ingress サービスのロギング構成を作成します](cs_health.html#logging)。
+
+<br />
+
+
+
+

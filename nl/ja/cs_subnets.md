@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -24,14 +24,22 @@ lastupdated: "2018-03-16"
 
 {{site.data.keyword.containershort_notm}} では、クラスターにネットワーク・サブネットを追加して、Kubernetes サービス用の安定したポータブル IP を追加できます。 このケースでは、1 つ以上のクラスター間に接続を作成するための、ネットマスキングを指定するサブネットは使用されません。 代わりに、サービスへのアクセスに使用できるクラスターからそのサービスの永続的な固定 IP を利用できるように、サブネットが使用されます。
 
-標準クラスターを作成すると、{{site.data.keyword.containershort_notm}} は、5 つのパブリック IP アドレスを持つポータブル・パブリック・サブネットと、5 つのプライベート IP アドレスを持つポータブル・プライベート・サブネットを自動的にプロビジョンします。 ポータブル・パブリック IP アドレスおよびポータブル・プライベート IP アドレスは静的で、ワーカー・ノードまたはクラスターが削除されても変更されません。 サブネットごとに、ポータブル・パブリック IP アドレスのうち 1 つとポータブル・プライベート IP アドレスのうち 1 つは [アプリケーション・ロード・バランサー](cs_ingress.html)用に使用され、これをクラスター内の複数のアプリを公開するために使用できます。 残りの 4 つのポータブル・パブリック IP アドレスと 4 つのポータブル・プライベート IP アドレスは、[ロード・バランサー・サービスを作成して](cs_loadbalancer.html)単一アプリをパブリックに公開するために使用できます。
+<dl>
+  <dt>クラスターの作成には、デフォルトでサブネットの作成が含まれる</dt>
+  <dd>標準クラスターを作成すると、{{site.data.keyword.containershort_notm}} は自動的に以下のサブネットをプロビジョンします。
+    <ul><li>5 つのパブリック IP アドレスを含むポータブル・パブリック・サブネット</li>
+      <li>5 つのプライベート IP アドレスを含むポータブル・プライベート・サブネット</li></ul>
+ポータブル・パブリック IP アドレスとポータブル・プライベート IP アドレスは静的で、ワーカー・ノードが削除されても変更されません。サブネットごとに、ポータブル・パブリック IP アドレスのうち 1 つとポータブル・プライベート IP アドレスのうち 1 つは [Ingress アプリケーション・ロード・バランサー](cs_ingress.html)用に使用され、これをクラスター内の複数のアプリを公開するために使用できます。 残りの 4 つのポータブル・パブリック IP アドレスと 4 つのポータブル・プライベート IP アドレスは、[ロード・バランサー・サービスを作成して](cs_loadbalancer.html)単一アプリをパブリック・ネットワークまたはプライベート・ネットワークに公開するために使用できます。</dd>
+  <dt>[独自の既存のサブネットを注文して管理する](#custom)</dt>
+  <dd>自動的にプロビジョンされるサブネットを使用する代わりに、IBM Cloud インフラストラクチャー (SoftLayer) アカウントで既存のポータブル・サブネットを注文して管理することができます。このオプションは、クラスターの削除や作成が行われても変わらない静的 IP を保持したい場合や、より大きな IP ブロックを注文したい場合に利用してください。まず、`cluster-create --no-subnet` コマンドを使用して、サブネットなしでクラスターを作成します。それから、`cluster-subnet-add` コマンドを使用して、サブネットをクラスターに追加します。</dd>
+</dl>
 
-**注:** ポータブル・パブリック IP アドレスは、月単位で課金されます。クラスターのプロビジョンの後にポータブル・パブリック IP アドレスを削除する場合、短時間しか使用しない場合でも月額課金を支払う必要があります。
+**注:** ポータブル・パブリック IP アドレスは、月単位で課金されます。 クラスターをプロビジョンした後にポータブル・パブリック IP アドレスを削除した場合、短時間しか使用していなくても月額料金を支払う必要があります。
 
 ## クラスターのその他のサブネットの要求
 {: #request}
 
-クラスターにサブネットを割り当て、安定したポータブル・パブリック IP またはポータブル・プライベート IP をクラスターに追加できます。
+クラスターにサブネットを割り当て、安定したポータブル・パブリック IP 、またはポータブル・プライベート IP をクラスターに追加できます。
 {:shortdesc}
 
 **注:** クラスターでサブネットを使用できるようにすると、このサブネットの IP アドレスは、クラスターのネットワーキングの目的で使用されるようになります。 IP アドレスの競合を回避するため、1 つのサブネットは必ず 1 つのクラスターでのみ使用してください。 あるサブネットを複数のクラスターで使用したり、同時に他の目的で {{site.data.keyword.containershort_notm}}の外部で使用したりしないでください。
@@ -48,7 +56,6 @@ IBM Cloud インフラストラクチャー (SoftLayer) アカウントでサブ
     {: pre}
 
     <table>
-    <caption>このコマンドの構成要素について</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> このコマンドの構成要素について</th>
     </thead>
@@ -74,7 +81,7 @@ IBM Cloud インフラストラクチャー (SoftLayer) アカウントでサブ
 2.  クラスターにサブネットが正常に作成されて追加されたことを確認します。 サブネットの CIDR は **VLANs** セクションにリストされます。
 
     ```
-    bx cs cluster-get --showResources <cluster name or id>
+    bx cs cluster-get --showResources <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -83,17 +90,24 @@ IBM Cloud インフラストラクチャー (SoftLayer) アカウントでサブ
 <br />
 
 
-## Kubernetes クラスターへの既存のカスタム・サブネットの追加
+## Kubernetes クラスターでカスタム・サブネットおよび既存のサブネットを追加または再使用する
 {: #custom}
 
-既存のポータブル・パブリック・サブネットまたはポータブル・プライベート・サブネットを Kubernetes クラスターに追加できます。
+既存のポータブル・パブリック・サブネットまたはポータブル・プライベート・サブネットを Kubernetes クラスターに追加したり、削除したクラスターのサブネットを再使用したりできます。
 {:shortdesc}
 
-始めに、[CLI のターゲット](cs_cli_install.html#cs_cli_configure)を自分のクラスターに設定してください。
+始める前に
+- [CLI のターゲットを](cs_cli_install.html#cs_cli_configure)自分のクラスターに設定します。
+- 不要になったクラスターのサブネットを再使用する場合は、不要なクラスターを削除します。サブネットは 24 時間以内に削除されます。
+
+   ```
+   bx cs cluster-rm <cluster_name_or_ID
+   ```
+   {: pre}
 
 IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにある、カスタム・ファイアウォール・ルールまたは使用可能な IP アドレスが設定された既存のサブネットを使用するには、以下のようにします。
 
-1.  使用するサブネットを確認します。 サブネットの ID と VLAN ID をメモしてください。 この例では、サブネット ID は 807861、VLAN ID は 1901230 です。
+1.  使用するサブネットを確認します。 サブネットの ID と VLAN ID をメモしてください。 この例では、サブネット ID は `1602829`、VLAN ID は `2234945` です。
 
     ```
     bx cs subnets
@@ -103,9 +117,9 @@ IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオに
     ```
     Getting subnet list...
     OK
-    ID        Network                                      Gateway                                   VLAN ID   Type      Bound Cluster   
-    553242    203.0.113.0/24                               10.87.15.00                               1565280   private      
-    807861    192.0.2.0/24                                 10.121.167.180                            1901230   public
+    ID        Network             Gateway          VLAN ID   Type      Bound Cluster
+    1550165   10.xxx.xx.xxx/26    10.xxx.xx.xxx    2234947   private
+    1602829   169.xx.xxx.xxx/28   169.xx.xxx.xxx   2234945   public
 
     ```
     {: screen}
@@ -120,16 +134,16 @@ IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオに
     ```
     Getting VLAN list...
     OK
-    ID        Name                  Number   Type      Router   
-    1900403   vlan                    1391     private   bcr01a.dal10   
-    1901230   vlan                    1180     public   fcr02a.dal10
+    ID        Name   Number   Type      Router         Supports Virtual Workers
+    2234947          1813     private   bcr01a.dal10   true
+    2234945          1618     public    fcr01a.dal10   true
     ```
     {: screen}
 
-3.  確認したロケーションと VLAN ID を使用して、クラスターを作成します。 新しいポータブル・パブリック IP サブネットと新しいポータブル・プライベート IP サブネットが自動的に作成されないようにするため、`--no-subnet` フラグを指定します。
+3.  確認したロケーションと VLAN ID を使用して、クラスターを作成します。 既存のサブネットを再使用する場合は、新しいポータブル・パブリック IP サブネットと新しいポータブル・プライベート IP サブネットが自動的に作成されないように、`--no-subnet` フラグを指定します。
 
     ```
-    bx cs cluster-create --location dal10 --machine-type u2c.2x4 --no-subnet --public-vlan 1901230 --private-vlan 1900403 --workers 3 --name my_cluster
+    bx cs cluster-create --location dal10 --machine-type u2c.2x4 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
     ```
     {: pre}
 
@@ -146,7 +160,7 @@ IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオに
 
     ```
     Name         ID                                   State      Created          Workers   Location   Version
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   3         dal10      1.8.8
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.8.11
     ```
     {: screen}
 
@@ -161,11 +175,11 @@ IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオに
 
     ```
     ID                                                  Public IP        Private IP     Machine Type   State      Status   Location   Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.47.223.113   10.171.42.93   free           normal     Ready    dal10      1.8.8
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal     Ready    dal10      1.8.11
     ```
     {: screen}
 
-6.  サブネット ID を指定してクラスターにサブネットを追加します。 クラスターでサブネットを使用できるようにすると、使用できるすべての使用可能なポータブル・パブリック IP アドレスが含まれた Kubernetes の構成マップが作成されます。アプリケーション・ロード・バランサーがクラスターに存在しない場合は、パブリック・アプリケーション・ロード・バランサーとプライベート・アプリケーション・ロード・バランサーを作成するために、1 つのポータブル・パブリック IP アドレスと 1 つのポータブル・プライベート IP アドレスが自動的に使用されます。 その他のすべてのポータブル・パブリック IP アドレスおよびポータブル・プライベート IP アドレスは、アプリのロード・バランサー・サービスの作成に使用できます。
+6.  サブネット ID を指定してクラスターにサブネットを追加します。 クラスターでサブネットを使用できるようにすると、使用できるすべての使用可能なポータブル・パブリック IP アドレスが含まれた Kubernetes の構成マップが作成されます。 アプリケーション・ロード・バランサーがクラスターに存在しない場合は、パブリック・アプリケーション・ロード・バランサーとプライベート・アプリケーション・ロード・バランサーを作成するために、1 つのポータブル・パブリック IP アドレスと 1 つのポータブル・プライベート IP アドレスが自動的に使用されます。 その他のすべてのポータブル・パブリック IP アドレスおよびポータブル・プライベート IP アドレスは、アプリのロード・バランサー・サービスの作成に使用できます。
 
     ```
     bx cs cluster-subnet-add mycluster 807861
@@ -180,17 +194,17 @@ IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオに
 ## Kubernetes クラスターへのユーザー管理のサブネットと IP アドレスの追加
 {: #user_managed}
 
-{{site.data.keyword.containershort_notm}} のアクセス先となるオンプレミス・ネットワークのサブネットを指定します。その後、そのサブネットからのプライベート IP アドレスを、Kubernetes クラスターのロード・バランサー・サービスに追加できます。
+{{site.data.keyword.containershort_notm}} のアクセス先となるオンプレミス・ネットワークのサブネットを指定します。 その後、そのサブネットからのプライベート IP アドレスを、Kubernetes クラスターのロード・バランサー・サービスに追加できます。
 {:shortdesc}
 
 要件:
 - ユーザー管理のサブネットを追加できるのは、プライベート VLAN のみです。
-- サブネットの接頭部の長さの限度は /24 から /30 です。 例えば、`203.0.113.0/24` は 253 個の使用可能なプライベート IP アドレスを示し、`203.0.113.0/30` は 1 つの使用可能なプライベート IP アドレスを示します。
+- サブネットの接頭部の長さの限度は /24 から /30 です。 例えば、`169.xx.xxx.xxx/24` は 253 個の使用可能なプライベート IP アドレスを示し、`169.xx.xxx.xxx/30` は 1 つの使用可能なプライベート IP アドレスを示します。
 - サブネットの最初の IP アドレスは、サブネットのゲートウェイとして使用する必要があります。
 
 開始前に、以下のことを行います。
 - 外部サブネットとのネットワーク・トラフィックの出入りのルーティングを構成します。
-- IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオ内のプライベート・ネットワーク Vyatta またはクラスター内で実行されている strongSwan VPN サービスと、オンプレミス・データ・センター・ゲートウェイ・デバイスとの間に VPN 接続があることを確認してください。 Vyatta の使用方法については、この[ブログ投稿 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/) を参照してください。 strongSwan の使用方法については、[strongSwan IPSec VPN サービスを使用した VPN 接続のセットアップ](cs_vpn.html)を参照してください。
+- IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオ内のプライベート・ネットワーク Vyatta またはクラスター内で実行されている strongSwan VPN サービスと、オンプレミス・データ・センター・ゲートウェイ・デバイスとの間に VPN 接続があることを確認してください。 詳しくは、[VPN 接続のセットアップ](cs_vpn.html)を参照してください。
 
 オンプレミス・ネットワークからサブネットを追加するには、以下のようにします。
 
@@ -203,9 +217,9 @@ IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオに
 
     ```
     VLANs
-    VLAN ID   Subnet CIDR         Public       User-managed
-    1555503   192.0.2.0/24        true         false
-    1555505   198.51.100.0/24     false        false
+    VLAN ID   Subnet CIDR       Public   User-managed
+    2234947   10.xxx.xx.xxx/29  false    false
+    2234945   169.xx.xxx.xxx/29 true     false
     ```
     {: screen}
 
@@ -219,7 +233,7 @@ IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオに
     例:
 
     ```
-    bx cs cluster-user-subnet-add my_cluster 203.0.113.0/24 1555505
+    bx cs cluster-user-subnet-add mycluster 10.xxx.xx.xxx/24 2234947
     ```
     {: pre}
 
@@ -232,16 +246,16 @@ IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオに
 
     ```
     VLANs
-    VLAN ID   Subnet CIDR         Public       User-managed
-    1555503   192.0.2.0/24        true         false
-    1555505   198.51.100.0/24     false        false
-    1555505   203.0.113.0/24      false        true
+    VLAN ID   Subnet CIDR       Public   User-managed
+    2234947   10.xxx.xx.xxx/29  false    false
+    2234945   169.xx.xxx.xxx/29 true   false
+    2234947   10.xxx.xx.xxx/24  false    true
     ```
     {: screen}
 
 4. オプション: [同一 VLAN 上のサブネット間のルーティングを有効に](#vlan-spanning)します。
 
-5. プライベート・ネットワークを介してアプリにアクセスするために、プライベート・ロード・バランサー・サービスまたはプライベート Ingress アプリケーション・ロード・バランサーを追加します。 追加したサブネットのプライベート IP アドレスを使用するには、IP アドレスを指定する必要があります。使用しない場合は、IP アドレスは IBM Cloud インフラストラクチャー (SoftLayer) サブネット、またはプライベート VLAN 上のユーザー提供のサブネットからランダムに選択されます。 詳しくは、[ロード・バランサー・タイプのサービスを使用してアプリへのアクセスを構成する方法](cs_loadbalancer.html#config)または[プライベート・アプリケーションのロード・バランサーを有効にする](cs_ingress.html#private_ingress)を参照してください。
+5. プライベート・ネットワークを介してアプリにアクセスするために、プライベート・ロード・バランサー・サービスまたはプライベート Ingress アプリケーション・ロード・バランサーを追加します。 追加したサブネットのプライベート IP アドレスを使用するには、IP アドレスを指定する必要があります。 使用しない場合は、IP アドレスは IBM Cloud インフラストラクチャー (SoftLayer) サブネット、またはプライベート VLAN 上のユーザー提供のサブネットからランダムに選択されます。 詳しくは、[LoadBalancer サービスを使用してアプリへのパブリック・アクセスまたはプライベート・アクセスを有効にする](cs_loadbalancer.html#config)または[プライベートのアプリケーション・ロード・バランサーを有効にする](cs_ingress.html#private_ingress)を参照してください。
 
 <br />
 
@@ -303,7 +317,7 @@ IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオに
     ```
     {: pre}
 
-    **注:** Kubernetes マスターが、指定されたロード・バランサー IP アドレスを Kubernetes 構成マップで見つけることができないため、このサービスの作成は失敗します。このコマンドを実行すると、エラー・メッセージと、クラスターで使用可能なパブリック IP アドレスのリストが表示されます。
+    **注:** Kubernetes マスターが、指定されたロード・バランサー IP アドレスを Kubernetes 構成マップで見つけることができないため、このサービスの作成は失敗します。 このコマンドを実行すると、エラー・メッセージと、クラスターで使用可能なパブリック IP アドレスのリストが表示されます。
 
     ```
     Error on cloud load balancer a8bfa26552e8511e7bee4324285f6a4a for service default/myservice with UID 8bfa2655-2e85-11e7-bee4-324285f6a4af: Requested cloud provider IP 1.1.1.1 is not available. The following cloud provider IPs are available: <list_of_IP_addresses>
@@ -328,16 +342,17 @@ IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオに
 2.  パブリック IP アドレスまたはプライベート IP アドレスを使用しているロード・バランサー・サービスを削除します。
 
     ```
-    kubectl delete service <myservice>
+    kubectl delete service <service_name>
     ```
     {: pre}
 
 ### 同一 VLAN 上のサブネット間のルーティングを有効にする
 {: #vlan-spanning}
 
-クラスターを作成すると、末尾が `/26` のサブネットが、そのクラスターがある同一の VLAN 内にプロビジョンされます。この 1 次サブネットは、最大 62 個までワーカー・ノードを保持できます。
+クラスターを作成すると、末尾が `/26` のサブネットが、そのクラスターがある同一の VLAN 内にプロビジョンされます。 この 1 次サブネットは、最大 62 個までワーカー・ノードを保持できます。
 {:shortdesc}
 
-同一 VLAN 上の単一地域内に大規模なクラスターがあったり、小さくても複数あったりすると、この 62 個のワーカー・ノードの制限を超過する可能性があります。62 個のワーカー・ノードの制限に達すると、同一 VLAN 内で 2 つ目の 1 次サブネットが配列されます。
+同一 VLAN 上の単一地域内に大規模なクラスターがあったり、小さくても複数あったりすると、この 62 個のワーカー・ノードの制限を超過する可能性があります。 62 個のワーカー・ノードの制限に達すると、同一 VLAN 内で 2 つ目の 1 次サブネットが配列されます。
 
-同一 VLAN 上のサブネット間をルーティングするには、VLAN スパンをオンにする必要があります。手順については、[VLAN スパンの有効化または無効化](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning)を参照してください。
+同一 VLAN 上のサブネット間をルーティングするには、VLAN スパンをオンにする必要があります。 手順については、[VLAN スパンの有効化または無効化](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning)を参照してください。
+

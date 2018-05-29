@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -45,7 +45,8 @@ Und was ist ein Cluster? Ein Cluster ist eine Gruppe von Ressourcen, Knoten, Net
 
 Bevor Sie beginnen, müssen Sie über ein Testkonto, ein nutzungsabhängiges Konto oder ein Abonnementkonto als [{{site.data.keyword.Bluemix_notm}}-Konto](https://console.bluemix.net/registration/) verfügen, um einen kostenlosen Cluster zu erstellen.
 
-**Welchen {{site.data.keyword.Bluemix_notm}}-Kontotyp soll ich abrufen?** Mit nutzungsabhängigen oder Abonnementkonten können Sie IBM Cloud-Infrastrukturressourcen (SoftLayer) für Ihre Kubernetes-Cluster bereitstellen und einen kostenlosen Cluster oder Standardcluster erstellen. Mit einem Testkonto können Sie einen kostenlosen 21-Tage-Cluster, aber keine Standardcluster erstellen. Nach 21 Tagen wird Ihr kostenloser Cluster gelöscht. Wenn Sie mit Kubernetes-Clustern fortfahren möchten, erstellen Sie einen weiteren kostenlosen Cluster, bis Ihr Testkonto endet, oder aktualisieren Sie Ihr Konto auf ein nutzungsabhängiges oder Abonnementkonto. {:tip}
+**Welchen {{site.data.keyword.Bluemix_notm}}-Kontotyp soll ich abrufen?** Mit nutzungsabhängigen oder Abonnementkonten können Sie IBM Cloud-Infrastrukturressourcen (SoftLayer) für Ihre Kubernetes-Cluster bereitstellen und einen kostenlosen Cluster oder Standardcluster erstellen. Mit einem Testkonto können Sie einen kostenlosen Cluster, aber keine Standardcluster erstellen. Alle kostenlosen Cluster werden nach 21 Tagen automatisch gelöscht. Wenn Sie mit Kubernetes-Clustern fortfahren möchten, erstellen Sie einen weiteren kostenlosen Cluster, bis Ihr Testkonto endet, oder aktualisieren Sie Ihr Konto auf ein nutzungsabhängiges oder Abonnementkonto.
+{:tip}
 
 Gehen Sie wie folgt vor, um einen kostenlosen Cluster zu erstellen:
 
@@ -63,11 +64,11 @@ Hervorragend! Sie haben Ihren ersten Kubernetes-Cluster erstellt. Im Folgenden f
 *   **Position und andere Optionen**: Kostenlose Cluster werden innerhalb der von Ihnen ausgewählten Region bereitgestellt. Sie können jedoch nicht auswählen, an welcher Position (in welchem Rechenzentrum) sie sich befinden werden. Erstellen Sie einen Standardcluster, um mehr Kontrolle über Position, Vernetzung und persistenten Speicher zu haben. [Weitere Informationen zu den Vorteilen von kostenlosen und Standardclustern](cs_why.html#cluster_types).
 
 
-**Womit möchten Sie fortfahren? **
-
-Wenn der Cluster betriebsbereit ist, können Sie verschiedene Aktionen für Ihren Cluster durchführen.
+**Womit möchten Sie fortfahren?**
+In den nächsten 21 Tagen haben Sie die Gelegenheit, verschiedene Dinge mit Ihrem kostenlosen Cluster auszuprobieren. 
 
 * [Installieren Sie die Befehlszeilenschnittstellen und nehmen Sie die Arbeit mit dem Cluster auf.](cs_cli_install.html#cs_cli_install)
 * [Stellen Sie eine App in Ihrem Cluster bereit.](cs_app.html#app_cli)
 * [Erstellen Sie einen Standardcluster mit mehreren Knoten zwecks höherer Verfügbarkeit.](cs_clusters.html#clusters_ui)
 * [Richten Sie Ihre eigene private Registry in {{site.data.keyword.Bluemix_notm}} ein, um Docker-Images zu speichern und gemeinsam mit anderen Benutzern zu verwenden.](/docs/services/Registry/index.html)
+

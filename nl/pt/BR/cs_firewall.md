@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-14"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -96,14 +96,14 @@ Para permitir acesso para um cluster específico:
 4. Recupere a **URL principal** para seu cluster.
 
    ```
-   bx cs cluster-get <cluster_name_or_id>
+   bx cs cluster-get <cluster_name_or_ID>
    ```
    {: pre}
 
    Saída de exemplo:
    ```
    ...
-   URL principal:		https://169.46.7.238:31142
+   Master URL:		https://169.xx.xxx.xxx:31142
    ...
    ```
    {: screen}
@@ -119,7 +119,7 @@ Para permitir acesso para um cluster específico:
 
    Exemplo de comando:
    ```
-   curl --insecure https://169.46.7.238:31142/version
+   Curl -- inseguro https://169.xx.xxx.xxx:31142/version
    ```
    {: pre}
 
@@ -175,7 +175,7 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
   1.  Observe o endereço IP público para todos os nós do trabalhador no cluster.
 
       ```
-      bx cs workers <cluster_name_or_id>
+      bx cs workers <cluster_name_or_ID>
       ```
       {: pre}
 
@@ -202,7 +202,7 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
       <tr>
          <td>União Europeia Central</td>
          <td>ams03<br>fra02<br>mil01<br>par01</td>
-         <td><code>169.50.169.106, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
+         <td><code>169.50.169.110, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149, 159.8.98.170</code></td>
         </tr>
       <tr>
         <td>Sul do Reino Unido</td>
@@ -264,8 +264,8 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
 </p>
 
   4.  Opcional: permita o tráfego de rede de saída dos nós do trabalhador para os serviços do {{site.data.keyword.monitoringlong_notm}} e do {{site.data.keyword.loganalysislong_notm}}:
-      - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
-      - Substitua <em>&lt;monitoring_publicIP&gt;</em> por todos os endereços para as regiões de monitoramento para as quais você deseja permitir o tráfego:
+      - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
+      - Substitua <em>&lt;monitoring_public_IP&gt;</em> por todos os endereços das regiões de monitoramento para as quais você deseja permitir o tráfego:
         <p><table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
         <thead>
         <th>Região do contêiner</th>
@@ -292,8 +292,8 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
         </tbody>
       </table>
 </p>
-      - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
-      - Substitua <em>&lt;logging_publicIP&gt;</em> por todos os endereços para as regiões de criação de log para as quais você deseja permitir tráfego:
+      - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
+      - Substitua <em>&lt;logging_public_IP&gt;</em> por todos os endereços das regiões de criação de log para as quais você deseja permitir o tráfego:
         <p><table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
         <thead>
         <th>Região do contêiner</th>
@@ -352,3 +352,4 @@ Deixe seus recursos e serviços de infraestrutura de acesso ao cluster atrás de
   <dt>Entrada</dt>
   <dd>Abra a porta 80 para HTTP ou a porta 443 para HTTPS para o endereço IP para o balanceador de carga do aplicativo Ingress.</dd>
 </dl>
+

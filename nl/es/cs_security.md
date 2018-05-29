@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-29"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -31,5 +31,4 @@ Consulte la información más reciente en su nueva ubicación:
  - [Configuración de la conectividad de VPN con los diagramas de Helm del servicio VPN IPSec de Strongswan](cs_vpn.html#vpn)
  - [Políticas de red](cs_network_policy.html#network_policies)
  - [Restricción del tráfico de red para los nodos trabajadores de extremo](cs_edge.html#edge)
-
 

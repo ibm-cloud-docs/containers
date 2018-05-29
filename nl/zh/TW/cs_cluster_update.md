@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -75,7 +75,7 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
 
 索引鍵定義好了。現在該怎麼做？
 
-在定義規則之後，請執行 `worker-upgrade` 指令。如果傳回成功的回應，工作者節點會排入佇列以便升級。不過，在所有規則都滿足之前，節點不會經歷升級程序。排入佇列時，會依照間隔檢查規則，查看是否有任何節點能夠升級。
+在定義規則之後，請執行 `bx cs worker-update` 指令。如果傳回成功的回應，工作者節點會排入佇列進行更新。不過，在所有規則都滿足之前，節點不會經歷更新程序。排入佇列時，會依照間隔檢查規則，查看是否有任何節點能夠更新。
 
 我選擇不要定義配置對映的話會怎樣？
 
@@ -95,6 +95,7 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
       name: ibm-cluster-update-configuration
       namespace: kube-system
     data:
+     drain_timeout_seconds: "120"
      zonecheck.json: |
        {
          "MaxUnavailablePercentage": 70,
@@ -107,8 +108,7 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
          "NodeSelectorKey": "failure-domain.beta.kubernetes.io/region",
          "NodeSelectorValue": "us-south"
        }
-    ...
-     defaultcheck.json: |
+    defaultcheck.json: |
        {
          "MaxUnavailablePercentage": 100
        }
@@ -120,12 +120,16 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
     </thead>
     <tbody>
       <tr>
-        <td><code>defaultcheck.json</code></td>
-        <td> 依預設，如果 ibm-cluster-update-configuration 對映未以有效的方式定義，則您的叢集在同一時間只能有 20% 無法使用。如果已定義一個以上的有效規則，但沒有廣域預設值，則新的預設值是允許在同一時間有 100% 的工作者節點無法使用。您可以建立預設百分比來控制此情況。</td>
+        <td><code>drain_timeout_seconds</code></td>
+        <td> 選用項目：工作者節點更新期間發生的排除逾時（以秒為單位）。排除會將節點設為 `unschedulable`，這可防止將新的 Pod 部署至該節點。排除也會刪除節點的 Pod。接受值是從 1 到 180 的整數。預設值為 30。</td>
       </tr>
       <tr>
         <td><code>zonecheck.json</code></br><code>regioncheck.json</code></td>
         <td> 您要為其設定規則的唯一索引鍵範例。索引鍵的名稱可以是您要的任何內容，索引鍵內的配置集會剖析資訊。針對您定義的每個索引鍵，您只能為 <code>NodeSelectorKey</code> 和 <code>NodeSelectorValue</code> 設定一個值。如果您想要為多個地區或位置（資料中心）設定規則，請建立新的索引鍵項目。</td>
+      </tr>
+      <tr>
+        <td><code>defaultcheck.json</code></td>
+        <td> 依預設，如果 <code>ibm-cluster-update-configuration</code> 對映未以有效的方式定義，則您的叢集在同一時間只能有 20% 無法使用。如果已定義一個以上的有效規則，但沒有廣域預設值，則新的預設值是允許在同一時間有 100% 的工作者節點無法使用。您可以建立預設百分比來控制此情況。</td>
       </tr>
       <tr>
         <td><code>MaxUnavailablePercentage</code></td>
@@ -146,10 +150,10 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
 
 3. 從 GUI 或藉由執行 CLI 指令更新您的工作者節點。
   * 若要從 {{site.data.keyword.Bluemix_notm}} 儀表板更新，請導覽至叢集的`工作者節點`區段，然後按一下`更新工作者`。
-  * 若要取得工作者節點 ID，請執行 `bx cs wokers<cluster_name_or_id>`。如果您選取多個工作者節點，則工作者節點會放入佇列以便進行更新評估。如果評估之後認為它們已就緒，則會根據配置中的規則來更新。
+  * 若要取得工作者節點 ID，請執行 `bx cs wokers<cluster_name_or_ID>`。如果您選取多個工作者節點，則工作者節點會放入佇列以便進行更新評估。如果評估之後認為它們已就緒，則會根據配置中的規則來更新。
 
     ```
-    bx cs worker-update <cluster_name_or_id> <worker_node_id1> <worker_node_id2>
+    bx cs worker-update <cluster_name_or_ID> <worker_node1_ID> <worker_node2_ID>
     ```
     {: pre}
 
@@ -160,14 +164,14 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
     {: pre}
 
 5. 確認更新已完成：
-  * 在 {{site.data.keyword.Bluemix_notm}} 儀表板上檢閱 Kubernetes 版本，或執行 `bx cs workers<cluster_name_or_id>`。
+  * 在 {{site.data.keyword.Bluemix_notm}} 儀表板上檢閱 Kubernetes 版本，或執行 `bx cs workers<cluster_name_or_ID>`。
   * 執行 `kudectl get nodes` 來檢閱工作者節點的 Kibernets 版本。
-  * 在部分情況下，較舊的叢集可能在更新之後將重複的工作者節點列為 **NotReady** 狀態。若要移除重複項目，請參閱[疑難排解](cs_troubleshoot.html#cs_duplicate_nodes)。
+  * 在部分情況下，較舊的叢集可能在更新之後將重複的工作者節點列為 **NotReady** 狀態。若要移除重複項目，請參閱[疑難排解](cs_troubleshoot_clusters.html#cs_duplicate_nodes)。
 
 後續步驟：
   - 對其他叢集重複更新程序。
   - 通知在叢集內工作的開發人員，將 `kubectl` CLI 更新至 Kubernetes 主節點的版本。
-  - 如果 Kubernetes 儀表板未顯示使用率圖形，則會[刪除 `kudbe-dashboard` Pod](cs_troubleshoot.html#cs_dashboard_graphs)。
+  - 如果 Kubernetes 儀表板未顯示使用率圖形，則會[刪除 `kudbe-dashboard` Pod](cs_troubleshoot_health.html#cs_dashboard_graphs)。
 
 
 <br />
@@ -192,14 +196,14 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
         ```
     {: pre}
 
-3. 使用 [bx cs worker-add](cs_cli_reference.html#cs_worker_add) 指令新增工作者節點，並指定前一個指令的輸出中列出的其中一個機型。
+3. 使用 [bx cs worker-add](cs_cli_reference.html#cs_worker_add) 指令來新增工作者節點。請指定機型。
 
     ```
-    bx cs worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_vlan> --public-vlan <public_vlan>
+    bx cs worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
     ```
     {: pre}
 
-4. 驗證已新增工作者節點。
+4. 驗證是否已新增工作者節點。
 
     ```
     bx cs workers <cluster_name>
@@ -214,5 +218,6 @@ Kubernetes 會定期發行[主要、次要或修補程式更新](cs_versions.htm
     {: pre}
 
 6. 重複這些步驟，將其他工作者節點升級至不同機型。
+
 
 

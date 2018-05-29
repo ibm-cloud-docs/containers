@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-13"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -15,7 +15,7 @@ lastupdated: "2018-03-13"
 {:tip: .tip}
 {:download: .download}
 
-# Versioni di Kubernetes per {{site.data.keyword.containerlong_notm}}
+# Versioni Kubernetes
 {: #cs_versions}
 
 {{site.data.keyword.containerlong}} supporta contemporaneamente più versioni di Kubernetes. Quando viene rilasciata una versione più recente (n), sono supportate fino a 2 versioni precedenti (n-2). Le versioni che sono più di 2 precedenti rispetto all'ultima (n-3) sono prima dichiarate obsolete e quindi non più supportate.
@@ -24,15 +24,14 @@ lastupdated: "2018-03-13"
 Le versioni di Kubernetes al momento supportate sono:
 
 - Più recente: 1.9.3
-- Predefinita: 1.8.8
-- Supportata: 1.7.4
-- Obsoleta: 1.5.x, non supportata 4 aprile 2018
+- Predefinita: 1.8.11
+- Supportata: 1.7.16
 
 **Versioni obsolete**: se i cluster sono in esecuzione su un Kubernetes deprecato, hai 30 giorni per controllare ed effettuare l'aggiornamento a una versione di Kubernetes supportata prima che la versione non sia più supportata. Durante il periodo di deprecazione, puoi eseguire comandi limitati nei cluster per aggiungere nodi di lavoro, ricaricare i nodi di lavoro e aggiornare il cluster. Non puoi creare nuovi cluster nella versione obsoleta.
 
 **Versioni non supportate**: se esegui i cluster in una versione Kubernetes che non è supportata, [controlla i potenziali impatti](#version_types) per gli aggiornamenti e quindi [aggiorna il tuo cluster](cs_cluster_update.html#update) immediatamente per continuare a ricevere il supporto e gli aggiornamenti di sicurezza importanti.
 
-Per controllare la versione del server, immetti il seguente comando.
+Per controllare la versione del server di un cluster, immetti il seguente comando.
 
 ```
 kubectl version  --short | grep -i server
@@ -42,7 +41,7 @@ kubectl version  --short | grep -i server
 Output di esempio:
 
 ```
-Server Version: 1.8.8
+Server Version: v1.8.11+9d6e0610086578
 ```
 {: screen}
 
@@ -50,30 +49,40 @@ Server Version: 1.8.8
 ## Tipi di aggiornamento
 {: #version_types}
 
-Kubernetes fornisce questi tipi di aggiornamento della versione:
+Per il tuo cluster Kubernetes sono disponibili tre tipi di aggiornamento: principale, secondario e patch.
 {:shortdesc}
 
 |Tipo di aggiornamento|Esempi di etichette di versione|Aggiornato da|Impatto
 |-----|-----|-----|-----|
 |Principale|1.x.x|Tu|Modifiche di funzionamento per i cluster, inclusi script o distribuzioni|
-|Secondario|x.5.x|Tu|Modifiche di funzionamento per i cluster, inclusi script o distribuzioni|
-|Patch|x.x.3|IBM e tu|Nessuna modifica agli script o alle distribuzioni. IBM aggiorna i master automaticamente, ma tu applichi le patch ai nodi di lavoro.|
+|Secondario|x.9.x|Tu|Modifiche di funzionamento per i cluster, inclusi script o distribuzioni|
+|Patch|x.x.4_1510|IBM e tu|Patch Kubernetes e altri aggiornamenti del componente {{site.data.keyword.Bluemix_notm}} Provider come patch di sicurezza e del sistema operativo. IBM aggiorna i master automaticamente, ma tu applichi le patch ai nodi di lavoro.|
 {: caption="Impatti degli aggiornamenti di Kubernetes" caption-side="top"}
 
-Per impostazione predefinita, non puoi aggiornare un master Kubernetes più di due versioni secondarie in avanti. Ad esempio, se il master corrente è la versione 1.5 e vuoi aggiornare a 1.8, devi prima aggiornare a 1.7. Puoi forzare l'aggiornamento per continuare, ma l'aggiornamento di più di due versioni secondarie potrebbe causare risultati imprevisti.
-{: tip}
+Quando gli aggiornamenti diventano disponibili, riceverai una notifica quando visualizzerai le informazioni relative ai nodi di lavoro, ad esempio con i comandi `bx cs workers <cluster>` o `bx cs worker-get <cluster> <worker>`.
+-  **Aggiornamenti principali e secondari**: per prima cosa, [aggiorna il tuo nodo master](cs_cluster_update.html#master) e poi [aggiorna i nodi di lavoro](cs_cluster_update.html#worker_node). 
+   - Per impostazione predefinita, non puoi aggiornare un master Kubernetes più di due versioni secondarie in avanti. Ad esempio, se il master corrente è la versione 1.5 e vuoi aggiornare a 1.8, devi prima aggiornare a 1.7. Puoi forzare l'aggiornamento per continuare, ma l'aggiornamento di più di due versioni secondarie potrebbe causare risultati imprevisti.
+   - Se utilizzi una versione della CLI `kubectl` che non corrisponde almeno alla versione `major.minor` dei tuoi cluster, potresti riscontrare risultati imprevisti. Assicurati di mantenere aggiornate le [versioni della CLI](cs_cli_install.html#kubectl) e dei cluster Kubernetes.
+-  **Aggiornamenti patch**: controlla mensilmente per vedere se è disponibile un aggiornamento e usa il [comando](cs_cli_reference.html#cs_worker_update) `bx cs worker-update` per applicare queste patch di sicurezza e del sistema operativo. Per ulteriori dettagli, vedi [Changelog versione](cs_versions_changelog.html).
 
-Le seguenti informazioni riassumono gli aggiornamenti che potrebbero avere un impatto sulle applicazioni distribuite quando aggiorni un cluster a una nuova versione dalla versione precedente. Rivedi [Kubernetes changelog ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md) per un elenco completo delle modifiche nelle versioni di Kubernetes.
+<br/>
 
-Per ulteriori informazioni sul processo di aggiornamento, vedi [Aggiornamento dei cluster](cs_cluster_update.html#master) e [Aggiornamento dei nodi di lavoro](cs_cluster_update.html#worker_node).
+Le informazioni in questa pagina riassumo gli aggiornamenti che potrebbero avere un impatto sulle applicazioni distribuite quando aggiorni un cluster a una nuova versione dalla versione precedente.
+-  [Azioni di migrazione](#cs_v19) Versione 1.9.
+-  [Azioni di migrazione](#cs_v18) Versione 1.8.
+-  [Azioni di migrazione](#cs_v17) Versione 1.7.
+-  [Archiviazione](#k8s_version_archive) di versioni obsolete o non supportate.
 
-Se utilizzi una versione della CLI `kubectl` che non corrisponde almeno alla versione `major.minor` dei tuoi cluster, potresti riscontrare risultati imprevisti. Assicurati di mantenere aggiornate le [versioni della CLI](cs_cli_install.html#kubectl) e dei cluster Kubernetes.
-{:tip}
+<br/>
+
+Per un elenco più completo delle modifiche, esamina quanto segue:
+* [Changelog Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md).
+* [Changelog versione IBM](cs_versions_changelog.html).
 
 ## Versione 1.9
 {: #cs_v19}
 
-<p><img src="images/certified_kubernetes_1x9.png" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" height="100" width="63" align="left" alt="Questo badge indica la certificazione Kubernetes versione 1.9 per il servizio IBM Cloud Container."/> {{site.data.keyword.containerlong_notm}} è un prodotto certificato Kubernetes per la versione 1.9 con il programma Kubernetes Software Conformance Certification di CNCF. _Kubernetes® è un marchio registrato della Linux Foundation negli Stati Uniti e in altri paesi e viene utilizzato in seguito a una licenza dalla Linux Foundation._</p>
+<p><img src="images/certified_kubernetes_1x9.png" style="padding-right: 10px;" align="left" alt="Questo badge indica la certificazione Kubernetes versione 1.9 per il servizio IBM Cloud Container."/> {{site.data.keyword.containerlong_notm}} è un prodotto certificato Kubernetes per la versione 1.9 con il programma Kubernetes Software Conformance Certification di CNCF. _Kubernetes® è un marchio registrato della Linux Foundation negli Stati Uniti e in altri paesi e viene utilizzato in seguito a una licenza dalla Linux Foundation._</p>
 
 Rivedi le modifiche che potresti dover apportare quando esegui l'aggiornamento dalla precedente versione di Kubernetes alla versione 1.9.
 
@@ -138,11 +147,13 @@ Se viene restituito `Action required`, modifica di conseguenza le tolleranze del
 </tbody>
 </table>
 
+<br />
+
 
 ## Versione 1.8
 {: #cs_v18}
 
-<p><img src="images/certified_kubernetes_1x8.png" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" height="100" width="62.5" align="left" alt="Questo badge indica la certificazione Kubernetes versione 1.8 per il servizio IBM Cloud Container."/> {{site.data.keyword.containerlong_notm}} è un prodotto Kubernetes certificato per la versione 1.8 nel programma CNCF Kubernetes Software Conformance Certification. _Kubernetes® è un marchio registrato della Linux Foundation negli Stati Uniti e in altri paesi e viene utilizzato in seguito a una licenza dalla Linux Foundation._</p>
+<p><img src="images/certified_kubernetes_1x8.png" style="padding-right: 10px;" align="left" alt="Questo badge indica la certificazione Kubernetes versione 1.8 per il servizio IBM Cloud Container."/> {{site.data.keyword.containerlong_notm}} è un prodotto Kubernetes certificato per la versione 1.8 nel programma CNCF Kubernetes Software Conformance Certification. _Kubernetes® è un marchio registrato della Linux Foundation negli Stati Uniti e in altri paesi e viene utilizzato in seguito a una licenza dalla Linux Foundation._</p>
 
 Rivedi le modifiche che potresti dover apportare quando esegui l'aggiornamento dalla precedente versione di Kubernetes alla versione 1.8.
 
@@ -199,14 +210,24 @@ Rivedi le modifiche che potresti dover apportare quando esegui l'aggiornamento d
 <td>`kubectl stop`</td>
 <td>Il comando `kubectl stop` non è più disponibile.</td>
 </tr>
+<tr>
+<td>Volumi di dati API in sola lettura</td>
+<td>Ora `secret`, `configMap`, `downwardAPI` e i volumi previsti sono montati in sola lettura.
+Precedentemente, le applicazioni potevano scrivere i dati in questi volumi che potevano essere ripristinati
+automaticamente dal sistema. Questa azione di migrazione è necessaria per risolvere la vulnerabilità di
+sicurezza [CVE-2017-1002102](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102).
+Se le tue applicazioni si basano sul comportamento non sicuro precedente, modificale.</td>
+</tr>
 </tbody>
 </table>
+
+<br />
 
 
 ## Versione 1.7
 {: #cs_v17}
 
-<p><img src="images/certified_kubernetes_1x7.png" height="100" width="62.5" style="width:62px; height: 100px; border-style: none; padding-right: 10px;" align="left" alt="Questo badge indica la certificazione Kubernetes versione 1.7 per il servizio IBM Cloud Container."/> {{site.data.keyword.containerlong_notm}} è un prodotto Kubernetes certificato per la versione 1.7 nel programma CNCF Kubernetes Software Conformance Certification.</p>
+<p><img src="images/certified_kubernetes_1x7.png" style="padding-right: 10px;" align="left" alt="Questo badge indica la certificazione Kubernetes versione 1.7 per il servizio IBM Cloud Container."/> {{site.data.keyword.containerlong_notm}} è un prodotto Kubernetes certificato per la versione 1.7 nel programma CNCF Kubernetes Software Conformance Certification.</p>
 
 Rivedi le modifiche che potresti dover apportare quando esegui l'aggiornamento dalla precedente versione di Kubernetes alla versione 1.7.
 
@@ -312,39 +333,48 @@ Rivedi le modifiche che potresti dover apportare quando esegui l'aggiornamento d
 </td></tr>
 <tr>
 <td>RBAC per `default` `ServiceAccount`</td>
-<td><p>Il `ClusterRoleBinding` dell'amministratore per `default` `ServiceAccount` nello spazio dei nomi `default` è stato rimosso per una migliore sicurezza del cluster. Le applicazioni eseguite nello spazio dei nomi `default` non dispongono più dei privilegi di amministratore del cluster sull'API Kubernetes e potrebbero riscontrare errori di autorizzazione RBAC DENY. Se le tue applicazioni si basano su questi privilegi, [crea risorse di autorizzazione RBAC](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) per le tue applicazioni.</p>
+<td><p>L'amministratore `ClusterRoleBinding` per `default` `ServiceAccount` nello spazio dei nomi `default` è stato rimosso per migliorare la sicurezza del cluster. Le applicazioni eseguite nello spazio dei nomi `default` non dispongono più dei privilegi di amministratore del cluster nell'API Kubernetes e potrebbero riscontrare errori di autorizzazione `RBAC DENY`. Controlla la tua applicazione e il suo file `.yaml` per vedere se viene eseguita nello spazio dei nomi `default`, usa `default ServiceAccount` e accede all'API Kubernetes.</p>
+<p>Se le tue applicazioni si basano su questi privilegi, [crea risorse di autorizzazione RBAC![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) per le tue applicazioni.</p>
   <p>Quando aggiorni le politiche RBAC della tua applicazione, potresti voler ripristinare temporaneamente i valori di `default` precedenti. Copia, salva e applica i seguenti file con il comando `kubectl apply -f FILENAME`. <strong>Nota</strong>: considera il ripristino come un modo per darti il tempo di aggiornare tutte le risorse dell'applicazione e non come soluzione a lungo termine.</p>
 
-  <p><pre class="codeblock">
-  <code>
-  kind: ClusterRoleBinding
-  apiVersion: rbac.authorization.k8s.io/v1
-  metadata:
-   name: admin-binding-nonResourceURLSs-default
-  subjects:
-    - kind: ServiceAccount
-      name: default
-      namespace: default
-  roleRef:
-   kind: ClusterRole
-   name: admin-role-nonResourceURLSs
-   apiGroup: rbac.authorization.k8s.io
-  ---
-  kind: ClusterRoleBinding
-  apiVersion: rbac.authorization.k8s.io/v1
-  metadata:
-   name: admin-binding-resourceURLSs-default
-  subjects:
-    - kind: ServiceAccount
+<p><pre class="codeblock">
+<code>
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+ name: admin-binding-nonResourceURLSs-default
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: default
+roleRef:
+ kind: ClusterRole
+ name: admin-role-nonResourceURLSs
+ apiGroup: rbac.authorization.k8s.io
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+ name: admin-binding-resourceURLSs-default
+subjects:
+  - kind: ServiceAccount
       name: default
       namespace: default
   roleRef:
    kind: ClusterRole
    name: admin-role-resourceURLSs
    apiGroup: rbac.authorization.k8s.io
-  </code>
-  </pre></p>
-  </td>
+</code>
+</pre></p>
+</td>
+</tr>
+<tr>
+<td>Volumi di dati API in sola lettura</td>
+<td>Ora `secret`, `configMap`, `downwardAPI` e i volumi previsti sono montati in sola lettura.
+Precedentemente, le applicazioni potevano scrivere i dati in questi volumi che potevano essere ripristinati
+automaticamente dal sistema. Questa azione di migrazione è necessaria per risolvere la vulnerabilità di
+sicurezza [CVE-2017-1002102](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2017-1002102).
+Se le tue applicazioni si basano sul comportamento non sicuro precedente, modificale.</td>
 </tr>
 <tr>
 <td>DNS pod StatefulSet</td>
@@ -380,12 +410,16 @@ Rivedi le modifiche che potresti dover apportare quando esegui l'aggiornamento d
 </tbody>
 </table>
 
+<br />
+
+
 ## Archivio
 {: #k8s_version_archive}
 
-### Versione 1.5 (obsoleta)
+### Versione 1.5 (non supportata)
 {: #cs_v1-5}
 
-A partire dal 5 marzo 2018, i cluster {{site.data.keyword.containershort_notm}} che eseguono [Kubernetes versione 1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) sono considerati obsoleti. Dopo il 5 aprile 2018, i cluster della versione 1.5 non possono ricevere aggiornamenti di sicurezza o supporto a meno che non vengano aggiornati alla versione successiva più recente ([Kubernetes 1.7](#cs_v17)).
+A partire dal 4 aprile 2018, i cluster {{site.data.keyword.containershort_notm}} che eseguono [Kubernetes versione 1.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.5.md) non sono supportati. I cluster versione 1.5 non possono ricevere gli aggiornamenti di sicurezza o il supporto a meno che non vengano aggiornati alla versione successiva più recente ([Kubernetes 1.7](#cs_v17)).
 
 [Esamina il potenziale impatto](cs_versions.html#cs_versions) di ogni aggiornamento della versione di Kubernetes e quindi [aggiorna i tuoi cluster](cs_cluster_update.html#update) immediatamente. Nota che l'aggiornamento viene eseguito da una versione alla successiva più recente, ad esempio da 1.5 a 1.7 o da 1.8 a 1.9.
+

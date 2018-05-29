@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -24,14 +24,22 @@ Mude o conjunto de endereços IP públicos ou privados móveis disponíveis, inc
 
 No {{site.data.keyword.containershort_notm}}, é possível incluir IPs móveis estáveis para serviços do Kubernetes, incluindo sub-redes da rede no cluster. Nesse caso, as sub-redes não estão sendo usadas com netmasking para criar a conectividade entre um ou mais clusters. Em vez disso, as sub-redes são usadas para fornecer IPs fixos permanente para um serviço de um cluster que pode ser usado para acessar esse serviço.
 
-Ao criar um cluster padrão, o {{site.data.keyword.containershort_notm}} provisiona automaticamente uma sub-rede pública móvel com 5 endereços IP públicos e uma sub-rede privada móvel com 5 endereços IP privados. Os endereços IP públicos e privados móveis são estáticos e não mudam quando um nó do trabalhador ou mesmo o cluster é removido. Para cada sub-rede, um dos endereços IP móveis públicos e um dos endereços IP móveis privados serão usados para os [balanceadores de carga de aplicativo](cs_ingress.html) que você pode usar para expor múltiplos apps em seu cluster. Os outros quatro endereços IP públicos móveis e os quatro privados móveis podem ser usados para expor apps únicos ao público [criando um serviço de balanceador de carga](cs_loadbalancer.html).
+<dl>
+  <dt>A criação de um cluster inclui a criação de uma sub-rede por padrão</dt>
+  <dd>Quando você cria um cluster padrão, o {{site.data.keyword.containershort_notm}} provisiona automaticamente as redes a seguir:
+    <ul><li>Uma sub-rede pública móvel com 5 endereços IP públicos</li>
+      <li>Uma sub-rede privada móvel com 5 endereços IP privados </li></ul>
+      Os endereços IP públicos e privados móveis são estáticos e não mudam quando um nó do trabalhador é removido. Para cada sub-rede, um dos endereços IP públicos móveis e um dos endereços IP privados móveis são usados para [balanceadores de carga de aplicativo do Ingress](cs_ingress.html) que podem ser usados para expor múltiplos apps em seu cluster. Os outros quatro endereços IP públicos e privados móveis podem ser usados para expor apps únicos à rede pública ou privada [criando um serviço de balanceador de carga](cs_loadbalancer.html).</dd>
+  <dt>[Solicitando e gerenciando suas próprias sub-redes existentes](#custom)</dt>
+  <dd>É possível solicitar e gerenciar sub-redes móveis existentes em sua conta de infraestrutura do IBM Cloud (SoftLayer) em vez de usar as sub-redes provisionadas automaticamente. Use essa opção para reter IPs estáticos estáveis nas remoções e criações de clusters ou para solicitar blocos de IPs maiores. Primeiramente crie um cluster sem sub-redes usando o comando `cluster-create --no-subnet` e, em seguida, inclua a sub-rede no cluster com o comando `cluster-subnet-add`. </dd>
+</dl>
 
-**Nota:** os endereços IP públicos móveis são cobrados mensalmente. Se escolher remover os endereços IP públicos móveis depois que o cluster for provisionado, ainda assim terá que pagar o encargo mensal, mesmo se você os usou por um curto tempo.
+**Nota:** os endereços IP públicos móveis são cobrados mensalmente. Se você remover os endereços IP públicos móveis depois que o cluster for provisionado, ainda terá que pagar o encargo mensal, mesmo se os tiver usado apenas por um curto período de tempo.
 
 ## Solicitando sub-redes adicionais para seu cluster
 {: #request}
 
-É possível incluir IPs públicos ou privados móveis e estáveis no cluster designando sub-redes para o cluster.
+É possível incluir IPs públicos ou privados estáveis e móveis no cluster designando sub-redes ao cluster.
 {:shortdesc}
 
 **Nota:** quando você disponibiliza uma sub-rede para um cluster, os endereços IP dessa sub-rede são usados para propósitos de rede do cluster. Para evitar conflitos de endereço IP, certifique-se de usar uma sub-rede com somente um cluster. Não use uma sub-rede para múltiplos clusters ou para outros
@@ -50,7 +58,6 @@ Para criar uma sub-rede em uma conta de infraestrutura do IBM Cloud (SoftLayer) 
     {: pre}
 
     <table>
-    <caption>Entendendo os componentes deste comando</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes desse comando</th>
     </thead>
@@ -76,7 +83,7 @@ Para criar uma sub-rede em uma conta de infraestrutura do IBM Cloud (SoftLayer) 
 2.  Verifique se a sub-rede foi criada com sucesso e se foi incluída em seu cluster. A sub-rede CIDR é listada na seção **VLANs**.
 
     ```
-    bx cs cluster-get --showResources <cluster name or id>
+    bx cs cluster-get --showResources <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -85,17 +92,24 @@ Para criar uma sub-rede em uma conta de infraestrutura do IBM Cloud (SoftLayer) 
 <br />
 
 
-## Incluindo sub-redes customizadas e existentes nos clusters do Kubernetes
+## Incluindo ou reutilizando sub-redes customizadas e existentes em clusters do Kubernetes
 {: #custom}
 
-É possível incluir sub-redes públicas ou privadas móveis existentes em seu cluster do Kubernetes.
+É possível incluir sub-redes públicas ou privadas móveis existentes no cluster do Kubernetes ou reutilizar sub-redes de um cluster excluído.
 {:shortdesc}
 
-Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para seu cluster.
+Antes de iniciar,
+- [Destine sua CLI](cs_cli_install.html#cs_cli_configure) para seu cluster.
+- Para reutilizar sub-redes de um cluster que você não precisa mais, exclua o cluster desnecessário. As sub-redes são excluídas dentro de 24 horas.
+
+   ```
+   Bx cs cluster-rm < cluster_name_or_ID
+   ```
+   {: pre}
 
 Para usar uma sub-rede existente no portfólio da infraestrutura do IBM Cloud (SoftLayer) com regras de firewall customizado ou endereços IP disponíveis:
 
-1.  Identifique a sub-rede a ser usada. Observe o ID da sub-rede e o ID da VLAN. Neste exemplo, o ID da sub-rede é 807861 e o ID da VLAN é 1901230.
+1.  Identifique a sub-rede a ser usada. Observe o ID da sub-rede e o ID da VLAN. Neste exemplo, o ID da sub-rede é `1602829` e o ID da VLAN é `2234945`.
 
     ```
     bx cs subnets
@@ -105,9 +119,9 @@ Para usar uma sub-rede existente no portfólio da infraestrutura do IBM Cloud (S
     ```
     Getting subnet list...
     OK
-    ID        Network                                      Gateway                                   VLAN ID   Type      Bound Cluster   
-    553242    203.0.113.0/24                               10.87.15.00                               1565280   private      
-    807861    192.0.2.0/24                                 10.121.167.180                            1901230   public
+    ID        Network             Gateway          VLAN ID   Type      Bound Cluster
+    1550165   10.xxx.xx.xxx/26    10.xxx.xx.xxx    2234947   private
+    1602829   169.xx.xxx.xxx/28   169.xx.xxx.xxx   2234945   public
 
     ```
     {: screen}
@@ -122,16 +136,16 @@ Para usar uma sub-rede existente no portfólio da infraestrutura do IBM Cloud (S
     ```
     Getting VLAN list...
     OK
-    ID        Name                  Number   Type      Router   
-    1900403   vlan                    1391     private   bcr01a.dal10   
-    1901230   vlan                    1180     public   fcr02a.dal10
+    ID        Name   Number   Type      Router         Supports Virtual Workers
+    2234947          1813     private   bcr01a.dal10   true
+    2234945          1618     public    fcr01a.dal10   true
     ```
     {: screen}
 
-3.  Crie um cluster usando o local e o ID da VLAN identificados. Inclua a sinalização `--no-subnet` para evitar que uma nova sub-rede IP pública móvel e uma nova sub-rede IP privada móvel seja criada automaticamente.
+3.  Crie um cluster usando o local e o ID da VLAN identificados. Para reutilizar uma sub-rede existente, inclua a sinalização `--no-subnet` para evitar que uma nova sub-rede IP pública móvel e uma nova sub-rede IP privada móvel seja criada automaticamente.
 
     ```
-    bx cs cluster-create --location dal10 --machine-type u2c.2x4 --no-subnet --public-vlan 1901230 --private-vlan 1900403 --workers 3 --name my_cluster
+    bx cs cluster-create --location dal10 --machine-type u2c.2x4 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
     ```
     {: pre}
 
@@ -148,7 +162,7 @@ Para usar uma sub-rede existente no portfólio da infraestrutura do IBM Cloud (S
 
     ```
     Name         ID                                   State      Created          Workers   Location   Version
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   3         dal10      1.8.8
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.8.11
     ```
     {: screen}
 
@@ -162,7 +176,8 @@ Para usar uma sub-rede existente no portfólio da infraestrutura do IBM Cloud (S
     Quando os nós do trabalhador estiverem prontos, o estado mudará para **normal** e o status será **Pronto**. Quando o status do nó for **Pronto**, será possível, então, acessar o cluster.
 
     ```
-    ID Public IP Private IP Machine Type State Status Location Version prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1 169.47.223.113 10.171.42.93 free normal Ready dal10 1.8.8
+    ID                                                  Public IP        Private IP     Machine Type   State      Status   Location   Version
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal     Ready    dal10      1.8.11
     ```
     {: screen}
 
@@ -186,12 +201,12 @@ Forneça uma sub-rede de uma rede no local que você deseja que o {{site.data.ke
 
 Requisitos:
 - Sub-redes gerenciadas pelo usuário podem ser incluídas em VLANs privadas apenas.
-- O limite de comprimento de prefixo de sub-rede é /24 para /30. Por exemplo, `203.0.113.0/24` especifica 253 endereços IP privados utilizáveis, enquanto `203.0.113.0/30` especifica 1 endereço IP privado utilizável.
+- O limite de comprimento de prefixo de sub-rede é /24 para /30. Por exemplo, `169.xx.xxx.xxx/24` especifica 253 endereços IP privados utilizáveis, enquanto `169.xx.xxx.xxx/30` especifica 1 endereço IP privado utilizável.
 - O primeiro endereço IP na sub-rede deve ser usado como o gateway para a sub-rede.
 
 Antes de iniciar:
 - Configure o roteamento de tráfego de rede dentro e fora da sub-rede externa.
-- Confirme se você tem conectividade VPN entre o dispositivo de gateway do data center no local e a rede privada Vyatta em seu portfólio de infraestrutura do IBM Cloud (SoftLayer) ou o serviço VPN do strongSwan que está em execução em seu cluster. Para usar um Vyatta, veja esta [postagem do blog ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/)]. Para usar o strongSwan, veja [Configurando a conectividade VPN com o serviço VPN IPSec do strongSwan](cs_vpn.html).
+- Confirme se você tem conectividade VPN entre o dispositivo de gateway do data center no local e a rede privada Vyatta em seu portfólio de infraestrutura do IBM Cloud (SoftLayer) ou o serviço VPN do strongSwan que está em execução em seu cluster. Para obter mais informações, veja [Configurando a conectividade VPN](cs_vpn.html).
 
 Para incluir uma sub-rede de uma rede no local:
 
@@ -204,9 +219,9 @@ Para incluir uma sub-rede de uma rede no local:
 
     ```
     VLANs
-    VLAN ID   Subnet CIDR         Public       User-managed
-    1555503   192.0.2.0/24        true         false
-    1555505   198.51.100.0/24     false        false
+    VLAN ID   Subnet CIDR       Public   User-managed
+    2234947   10.xxx.xx.xxx/29  false    false
+    2234945   169.xx.xxx.xxx/29 true     false
     ```
     {: screen}
 
@@ -220,7 +235,7 @@ Para incluir uma sub-rede de uma rede no local:
     Exemplo:
 
     ```
-    bx cs cluster-user-subnet-add my_cluster 203.0.113.0/24 1555505
+    Bx cs cluster-user-subnet-add mycluster 10.xxx.xx.xxx/ 24 2234947
     ```
     {: pre}
 
@@ -233,16 +248,16 @@ Para incluir uma sub-rede de uma rede no local:
 
     ```
     VLANs
-    VLAN ID   Subnet CIDR         Public       User-managed
-    1555503   192.0.2.0/24        true         false
-    1555505   198.51.100.0/24     false        false
-    1555505   203.0.113.0/24      false        true
+    VLAN ID   Subnet CIDR       Public   User-managed
+    2234947   10.xxx.xx.xxx/29  false    false
+    2234945   169.xx.xxx.xxx/29 true   false
+    2234947   10.xxx.xx.xxx/24  false    true
     ```
     {: screen}
 
 4. Opcional: [Ative o roteamento entre as sub-redes na mesma VLAN](#vlan-spanning).
 
-5. Inclua um serviço de balanceador de carga privado ou um balanceador de carga privado do aplicativo Ingress para acessar seu app na rede privada. Para usar um endereço IP privado da sub-rede que você incluiu, deve-se especificar um endereço IP. Caso contrário, um endereço IP será escolhido aleatoriamente das sub-redes de infraestrutura do IBM Cloud (SoftLayer) ou sub-redes fornecidas pelo usuário na VLAN privada. Para obter mais informações, veja [Configurando acesso a um app usando o tipo de serviço de balanceador de carga](cs_loadbalancer.html#config) ou [Ativando o balanceador de carga de aplicativo privado](cs_ingress.html#private_ingress).
+5. Inclua um serviço de balanceador de carga privado ou um balanceador de carga privado do aplicativo Ingress para acessar seu app na rede privada. Para usar um endereço IP privado da sub-rede que você incluiu, deve-se especificar um endereço IP. Caso contrário, um endereço IP será escolhido aleatoriamente das sub-redes de infraestrutura do IBM Cloud (SoftLayer) ou sub-redes fornecidas pelo usuário na VLAN privada. Para obter mais informações, veja [Ativando o acesso público ou privado a um app usando um serviço LoadBalancer](cs_loadbalancer.html#config) ou [Ativando o balanceador de carga de aplicativo privado](cs_ingress.html#private_ingress).
 
 <br />
 
@@ -329,7 +344,7 @@ Antes de iniciar, [configure o contexto para o cluster que você deseja usar.](c
 2.  Remova o serviço de balanceador de carga que usa um endereço IP público ou privado.
 
     ```
-    kubectl delete service <myservice>
+    kubectl delete service <service_name>
     ```
     {: pre}
 
@@ -342,3 +357,4 @@ Ao criar um cluster, uma sub-rede que termina em `/26` é provisionada na mesma 
 Esse limite de 62 nós do trabalhador pode ser excedido por um cluster grande ou por vários clusters menores em uma única região que estão na mesma VLAN. Quando o limite de 62 nós do trabalhador é atingido, uma segunda sub-rede primária na mesma VLAN é solicitada.
 
 Para rotear entre sub-redes na mesma VLAN, deve-se ativar a ampliação de VLAN. Para obter instruções, veja [Ativar ou desativar a ampliação de VLAN](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
+

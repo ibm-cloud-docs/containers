@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-27"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -21,14 +21,14 @@ lastupdated: "2018-02-27"
 모든 Kubernetes 클러스터는 Calico라는 네트워크 플러그인으로 설정됩니다. {{site.data.keyword.containerlong}}에서 모든 작업자 노드의 공용 네트워크 인터페이스 보안을 위해 기본 네트워크 정책이 설정됩니다.
 {: shortdesc}
 
-고유 보안 요구사항이 있을 때 Calico 및 기본 Kubernetes 기능을 사용하여 클러스터에 대한 네트워크 정책을 더 구성할 수 있습니다. 이러한 네트워크 정책은 클러스터에서 포드에 허용하거나 차단하고자 하는 네트워크 트래픽을 지정합니다. Kubernetes 네트워크 정책을 사용하여 시작할 수 있지만, 더 강력한 기능을 위해서는 Calico 네트워크 정책을 사용하십시오.
+고유 보안 요구사항이 있을 때 Calico 및 기본 Kubernetes 기능을 사용하여 클러스터에 대한 네트워크 정책을 더 구성할 수 있습니다. 이러한 네트워크 정책은 클러스터에서 팟(Pod)에 허용하거나 차단하고자 하는 네트워크 트래픽을 지정합니다. Kubernetes 네트워크 정책을 사용하여 시작할 수 있지만, 더 강력한 기능을 위해서는 Calico 네트워크 정책을 사용하십시오.
 
 <ul>
-  <li>[Kubernetes 네트워크 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/services-networking/network-policies/): 포드가 서로 통신할 수 있는지 지정하는 등의 일부 기본 옵션이 제공됩니다. 프로토콜 및 포트에 대한 수신 네트워크 트래픽을 허용하거나 차단할 수 있습니다. 다른 포드에 연결하려고 시도하는 포드의 Kubernetes 네임스페이스 및 레이블을 기반으로 이 트래픽을 필터링할 수 있습니다.</br>이러한 정책은
+  <li>[Kubernetes 네트워크 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/services-networking/network-policies/): 팟(Pod)이 서로 통신할 수 있는지 지정하는 등의 일부 기본 옵션이 제공됩니다. 프로토콜 및 포트에 대한 수신 네트워크 트래픽을 허용하거나 차단할 수 있습니다. 다른 팟(Pod)에 연결하려고 시도하는 팟(Pod)의 Kubernetes 네임스페이스 및 레이블을 기반으로 이 트래픽을 필터링할 수 있습니다.</br>이러한 정책은
 `kubectl` 명령 또는 Kubernetes API를 사용하여 적용될 수 있습니다. 해당 정책이 적용되면
 Calico 네트워크 정책으로 변환되고 Calico는 이러한 정책을 시행합니다.</li>
   <li>[Calico 네트워크 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy): 이러한 정책은 Kubernetes 네트워크 정책의 수퍼세트이며 다음 기능으로 기본 Kubernetes 기능을 향상시킵니다.</li>
-    <ul><ul><li>Kubernetes 포드 트래픽뿐만 아니라 특정 네트워크 인터페이스에서 네트워크 트래픽을 허용하거나 차단합니다.</li>
+    <ul><ul><li>Kubernetes 팟(Pod) 트래픽뿐만 아니라 특정 네트워크 인터페이스에서 네트워크 트래픽을 허용하거나 차단합니다.</li>
     <li>수신(ingress) 및 발신(egress) 네트워크 트래픽을 허용하거나 차단합니다.</li>
     <li>[LoadBalancer 또는 NodePort Kubernetes 서비스에 대한 수신(ingress) 트래픽을 차단](#block_ingress)합니다.</li>
     <li>소스 또는 대상 IP 주소 또는 CIDR을 기반으로 하는 트래픽을 허용하거나 차단합니다.</li></ul></ul></br>
@@ -44,17 +44,16 @@ Kubernetes 작업자 노드에서 Linux iptables 규칙을 설정하여 Calico �
 ## 기본 정책 구성
 {: #default_policy}
 
-클러스터가 작성되면 공용 인터넷에서 수신 트래픽을 제한하기 위해 기본 네트워크 정책이 각 작업자 노드의 공용 네트워크 인터페이스에 대해 설정됩니다. 이러한 정책은 포드에서 포드 트래픽에 영향을 미치지 않으며 Kubernetes 노드 포트, 로드 밸런서 및 Ingress 서비스에 대한 액세스를 허용합니다.
+클러스터가 작성되면 공용 인터넷에서 수신 트래픽을 제한하기 위해 기본 네트워크 정책이 각 작업자 노드의 공용 네트워크 인터페이스에 대해 설정됩니다. 이러한 정책은 팟(Pod)에서 팟(Pod) 트래픽에 영향을 미치지 않으며 Kubernetes 노드 포트, 로드 밸런서 및 Ingress 서비스에 대한 액세스를 허용합니다.
 {:shortdesc}
 
-기본 정책은 포드에 직접 적용되지 않습니다. Calico 호스트 엔드포인트를 사용하여 작업자 노드의 공용 네트워크 인터페이스에 적용됩니다. 호스트 엔드포인트가 Calico에서 작성되면
+기본 정책은 팟(Pod)에 직접 적용되지 않습니다. Calico 호스트 엔드포인트를 사용하여 작업자 노드의 공용 네트워크 인터페이스에 적용됩니다. 호스트 엔드포인트가 Calico에서 작성되면
 그 작업자 노드의 네트워크 인터페이스에서 나가고 들어오는 모든 트래픽은 그 트래픽이 정책에서 허용되는 경우를 제외하고 차단됩니다.
 
 **중요:** 정책을 완전히 이해하고 정책에서 허용하고 있는 트래픽이 필요하지 않다는 것을 아는 경우를 제외하고는 호스트 엔드포인트에 적용된 정책을 제거하지 마십시오.
 
 
  <table summary="테이블의 첫 번째 행에는 두 개의 열이 있습니다. 나머지 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서버 위치, 2열에는 일치시킬 IP 주소가 있습니다.">
- <caption>각 클러스터의 기본 정책</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 각 클러스터의 기본 정책</th>
   </thead>
@@ -73,7 +72,7 @@ Kubernetes 작업자 노드에서 Linux iptables 규칙을 설정하여 Calico �
      </tr>
     <tr>
       <td><code>allow-node-port-dnat</code></td>
-      <td>해당 서비스가 노출된 포드에 수신 노드 포트, 로드 밸런서 및 Ingress 서비스 트래픽을 허용합니다. Kubernetes는 해당 서비스 요청을 올바른 포드에 전달하기 위해 대상 네트워크 주소 변환(DNAT)을
+      <td>해당 서비스가 노출된 팟(Pod)에 수신 노드 포트, 로드 밸런서 및 Ingress 서비스 트래픽을 허용합니다. Kubernetes는 해당 서비스 요청을 올바른 팟(Pod)에 전달하기 위해 대상 네트워크 주소 변환(DNAT)을
 사용하기 때문에 해당 서비스가 공용 인터페이스에서 노출하는 포트를 지정할 필요가 없다는 점을 참고하십시오. 호스트 엔드포인트 정책이 iptables에 적용되기 전에 해당 전달이 이루어집니다.</td>
    </tr>
    <tr>
@@ -121,14 +120,14 @@ Kubernetes 작업자 노드에서 Linux iptables 규칙을 설정하여 Calico �
             -   Linux:
 
               ```
-               mv /<path_to_file>/calicoctl /usr/local/bin/calicoctl
+              mv filepath/calicoctl /usr/local/bin/calicoctl
               ```
               {: pre}
 
             -   OS X:
 
               ```
-              mv /<path_to_file>/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
+              mv filepath/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
               ```
               {: pre}
 
@@ -181,7 +180,7 @@ Kubernetes 작업자 노드에서 Linux iptables 규칙을 설정하여 Calico �
         ```
         {: codeblock}
 
-        1.  `<ETCD_URL>`을 검색하십시오.  이 명령이 실패하고 `calico-config not found` 오류가 발생하는 경우 이 [문제점 해결 주제](cs_troubleshoot.html#cs_calico_fails)를 참조하십시오.
+        1.  `<ETCD_URL>`을 검색하십시오. 이 명령이 실패하고 `calico-config not found` 오류가 발생하는 경우 이 [문제점 해결 주제](cs_troubleshoot_network.html#cs_calico_fails)를 참조하십시오.
 
           -   Linux 및 OS X:
 
@@ -193,14 +192,14 @@ Kubernetes 작업자 노드에서 Linux iptables 규칙을 설정하여 Calico �
           -   출력 예:
 
               ```
-               https://169.1.1.1:30001
+              https://169.xx.xxx.xxx:30001
               ```
               {: screen}
 
           -   Windows:
             <ol>
             <li>구성 맵에서 calico 구성 값을 가져오십시오. </br><pre class="codeblock"><code>kubectl get cm -n kube-system calico-config -o yaml</code></pre></br>
-            <li>`data` 섹션에서 etcd_endpoints 값을 찾으십시오. 예: <code>https://169.1.1.1:30001</code>
+            <li>`data` 섹션에서 etcd_endpoints 값을 찾으십시오. 예: <code>https://169.xx.xxx.xxx:30001</code>
             </ol>
 
         2.  Kubernetes 인증서가 다운로드되는 디렉토리인 `<CERTS_DIR>`을 검색하십시오.
@@ -229,7 +228,7 @@ Kubernetes 작업자 노드에서 Linux iptables 규칙을 설정하여 Calico �
                 출력 예:
 
               ```
-              C:/Users/<user>/.bluemix/plugins/container-service/<cluster_name>-admin/kube-config-prod-<location>-<cluster_name>.yml
+              C:/Users/<user>/.bluemix/plugins/container-service/mycluster-admin/kube-config-prod-dal10-mycluster.yml
               ```
               {: screen}
 
@@ -260,7 +259,7 @@ Kubernetes 작업자 노드에서 Linux iptables 규칙을 설정하여 Calico �
             -   Windows:
 
               ```
-              calicoctl get nodes --config=<path_to_>/calicoctl.cfg
+              calicoctl get nodes --config=filepath/calicoctl.cfg
               ```
               {: pre}
 
@@ -283,7 +282,7 @@ Kubernetes 작업자 노드에서 Linux iptables 규칙을 설정하여 Calico �
       ```
       {: pre}
 
-    -   클러스터에 작성된 모든 Calico 및 Kubernetes 네트워크 정책을 보십시오. 이 목록에는 포드 또는 호스트에 아직 적용되지 않았을 수 있는 정책이 포함됩니다. 네트워크 정책이 적용되려면 Calico 네트워크 정책에 정의된 선택기와 일치하는 Kubernetes 리소스를 찾아야 합니다.
+    -   클러스터에 작성된 모든 Calico 및 Kubernetes 네트워크 정책을 보십시오. 이 목록에는 팟(Pod) 또는 호스트에 아직 적용되지 않았을 수 있는 정책이 포함됩니다. 네트워크 정책이 적용되려면 Calico 네트워크 정책에 정의된 선택기와 일치하는 Kubernetes 리소스를 찾아야 합니다.
 
       ```
       calicoctl get policy -o wide
@@ -306,20 +305,20 @@ Kubernetes 작업자 노드에서 Linux iptables 규칙을 설정하여 Calico �
 
 4.  트래픽을 허용하거나 차단하도록 Calico 네트워크 정책을 작성하십시오.
 
-    1.  구성 스크립트(.yaml)를 작성하여 [Calico 네트워크 정책![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy)을 정의하십시오. 이러한 구성 파일에는 이러한 정책이 적용되는 포드, 네임스페이스 또는 호스트를 설명하는 선택기가 포함됩니다. 사용자 공유 정책을 작성하려면 이러한 [샘플 Calico 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy)을 참조하십시오.
+    1.  구성 스크립트(.yaml)를 작성하여 [Calico 네트워크 정책![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](http://docs.projectcalico.org/v2.6/reference/calicoctl/resources/policy)을 정의하십시오. 이러한 구성 파일에는 이러한 정책이 적용되는 팟(Pod), 네임스페이스 또는 호스트를 설명하는 선택기가 포함됩니다. 사용자 공유 정책을 작성하려면 이러한 [샘플 Calico 정책 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy)을 참조하십시오.
 
     2.  클러스터에 정책을 적용하십시오.
         -   Linux 및 OS X:
 
           ```
-          calicoctl apply -f <policy_file_name.yaml>
+          calicoctl apply -f policy.yaml
           ```
           {: pre}
 
         -   Windows:
 
           ```
-          calicoctl apply -f <path_to_>/<policy_file_name.yaml> --config=<path_to_>/calicoctl.cfg
+          calicoctl apply -f filepath/policy.yaml --config=filepath/calicoctl.cfg
           ```
           {: pre}
 
@@ -381,3 +380,4 @@ Calico `preDNAT` 네트워크 정책은 [Calico 네트워크 정책 리소스
   calicoctl apply -f deny-kube-node-port-services.yaml
   ```
   {: pre}
+

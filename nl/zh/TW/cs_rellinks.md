@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-01"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -26,6 +26,7 @@ lastupdated: "2017-12-01"
 - [用於叢集記載的 REST API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://us-south.containers.bluemix.net/swagger-logging/)
 - [用於叢集 Ingress 應用程式負載平衡的 REST API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://us-south.containers.bluemix.net/swagger-alb-api/)
 - [developerWorks 容器編排行程 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/code/journey/category/container-orchestration/)
+- [developerWorks 課程 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/courses/all/?s=IBM+Cloud+Container+Service)
 - [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/)
 - [Docker 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.docker.com/engine/)
 - Kubernetes 套件管理用的 <a href="https://docs.helm.sh/helm/" target="_blank">Helm 文件 <img src="../icons/launch-glyph.svg" alt="外部鏈結圖示"></a>
@@ -56,6 +57,9 @@ lastupdated: "2017-12-01"
 
 - [單一及可擴充容器的 REST API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](http://ccsapi-doc.mybluemix.net/)
 
+<br />
+
+
 **一般**
 
 - [Twitter ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://twitter.com/hashtag/ibmcontainers)
@@ -63,4 +67,5 @@ lastupdated: "2017-12-01"
 - [Microservices.TV ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/tv/microservices/)
 
 <br />
+
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-14"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -26,13 +26,11 @@ Uma imagem é criada por meio de um Dockerfile, que é um arquivo que contém in
 referenciar os artefatos de construção em suas instruções que são armazenadas separadamente, como um app, a configuração
 do app e suas dependências.
 
-
-
 ## Planejando registros de imagem
 {: #planning}
 
 As imagens geralmente são armazenadas em um registro que pode ser acessado pelo público (registro público) ou configurado com acesso
-limitado para um pequeno grupo de usuários (registro privado). 
+limitado para um pequeno grupo de usuários (registro privado).
 {:shortdesc}
 
 Os registros
@@ -54,35 +52,48 @@ recomendações específicas do S.O. para corrigi-las.</li></ul>|
 |Qualquer outro registro privado|Conecte qualquer registro privado existente a seu cluster criando um [imagePullSecret ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/containers/images/). O segredo é usado para salvar com segurança sua URL de registro e credenciais em um
 segredo do Kubernetes.|<ul><li>Use os registros privados existentes independentemente de sua origem (Docker Hub, registros pertencentes
 à organização ou outros registros de Nuvem privada).</li></ul>|
-|Docker Hub público|Use essa opção para usar imagens públicas existentes diretamente do Docker Hub quando nenhuma mudança
-do Dockerfile for necessária. <p>**Nota:** lembre-se de que essa opção poderá não atender aos requisitos de segurança de sua organização, como gerenciamento de acesso, varredura de vulnerabilidade ou privacidade de app.</p>|<ul><li>Nenhuma configuração adicional é necessária para seu cluster.</li><li>Inclui uma variedade de aplicativos de software livre.</li></ul>|
-{: caption="Tabela. Opções de registro de imagem pública e privada" caption-side="top"}
+|[Docker Hub público![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://hub.docker.com/){: #dockerhub}|Use essa opção para usar imagens públicas existentes diretamente do Docker Hub em sua [implementação do Kubernetes![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) quando nenhuma mudança do Dockerfile for necessária. <p>**Nota:** lembre-se de que essa opção poderá não atender aos requisitos de segurança de sua organização, como gerenciamento de acesso, varredura de vulnerabilidade ou privacidade de app.</p>|<ul><li>Nenhuma configuração adicional é necessária para seu cluster.</li><li>Inclui uma variedade de aplicativos de software livre.</li></ul>|
+{: caption="Opções de registro de imagem pública e privada" caption-side="top"}
 
 Depois de configurar um registro de imagem, os usuários do cluster podem usar as imagens para suas implementações de app
 no cluster.
 
 
+
 <br />
 
 
+## Configurando o conteúdo confiável para imagens de contêiner
+{: #trusted_images}
 
-## Acessando um namespace no {{site.data.keyword.registryshort_notm}}
+É possível construir contêineres de imagens confiáveis assinadas e armazenadas no {{site.data.keyword.registryshort_notm}} e evitar as implementações de imagens não assinadas ou vulneráveis.
+{:shortdesc}
+
+1.  [Conectar imagens para o conteúdo confiável](/docs/services/Registry/registry_trusted_content.html#registry_trustedcontent). Depois de configurar a confiança para suas imagens, será possível gerenciar o conteúdo confiável e os assinantes que podem enviar imagens por push para seu registro.
+2.  Para aplicar uma política na qual apenas imagens assinadas podem ser usadas para construir contêineres em seu cluster, [inclua o Container Image Security Enforcement (beta)](/docs/services/Registry/registry_security_enforce.html#security_enforce).
+3.  Implemente seu app.
+    1. [Implemente no namespace `default` do Kubernetes](#namespace).
+    2. [Implemente em um namespace diferente do Kubernetes ou em uma região ou uma conta diferente do {{site.data.keyword.Bluemix_notm}}](#other).
+
+<br />
+
+
+## Implementando contêineres de uma imagem do {{site.data.keyword.registryshort_notm}} no namespace `default` do Kubernetes
 {: #namespace}
 
 É possível implementar contêineres em seu cluster de uma imagem pública fornecida pela IBM ou de uma imagem privada que é armazenada em seu namespace no {{site.data.keyword.registryshort_notm}}.
 {:shortdesc}
-
-Antes de iniciar:
-
-1. [Configure um namespace no {{site.data.keyword.registryshort_notm}} no {{site.data.keyword.Bluemix_notm}} Public ou {{site.data.keyword.Bluemix_dedicated_notm}} e envie por push imagens para esse namespace](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add).
-2. [Crie um cluster](cs_clusters.html#clusters_cli).
-3. [Destine sua CLI para seu cluster](cs_cli_install.html#cs_cli_configure).
 
 Ao criar um cluster, segredos e tokens de registro sem expiração são criados automaticamente para o [registro regional mais próximo e o registro global](/docs/services/Registry/registry_overview.html#registry_regions). O registro global armazena com segurança as imagens públicas fornecidas pela IBM às quais é possível se referir em suas implementações em vez de ter referências diferentes para imagens que são armazenadas em cada registro regional. O registro regional armazena com segurança suas próprias imagens privadas do Docker, bem como as mesmas imagens públicas que são armazenadas no registro global. Os tokens são usados para autorizar acesso somente leitura a qualquer um dos namespaces que você configurou no {{site.data.keyword.registryshort_notm}} para que possa trabalhar com essas imagens públicas (registro global) e privadas (registros regionais).
 
 Cada token deve ser armazenado em um `imagePullSecret` do Kubernetes para que ele seja acessível para um cluster do Kubernetes quando você implementa um app conteinerizado. Quando o cluster é criado, o {{site.data.keyword.containershort_notm}} armazena automaticamente os tokens para os registros globais (imagens públicas fornecidas pela IBM) e regionais nos segredos de pull de imagem do Kubernetes. Os segredos de pull de imagem são incluídos no namespace do Kubernetes `default`, na lista padrão de segredos no `ServiceAccount` para esse namespace e no namespace `kube-system`.
 
 **Nota:** ao usar essa configuração inicial, será possível implementar contêineres de qualquer imagem que estiver disponível em um namespace na conta do {{site.data.keyword.Bluemix_notm}} no namespace **padrão** do cluster. Se você deseja implementar um contêiner em outros namespaces de seu cluster ou se deseja usar uma imagem que está armazenada em outra região do {{site.data.keyword.Bluemix_notm}} ou em outra conta do {{site.data.keyword.Bluemix_notm}}, deve-se [criar seu próprio imagePullSecret para o cluster](#other).
+
+Antes de iniciar:
+1. [Configure um namespace no {{site.data.keyword.registryshort_notm}} no {{site.data.keyword.Bluemix_notm}} Public ou {{site.data.keyword.Bluemix_dedicated_notm}} e envie por push imagens para esse namespace](/docs/services/Registry/registry_setup_cli_namespace.html#registry_namespace_add).
+2. [Crie um cluster](cs_clusters.html#clusters_cli).
+3. [Destine sua CLI para seu cluster](cs_cli_install.html#cs_cli_configure).
 
 Para implementar um contêiner no namespace **padrão** de seu cluster, crie um arquivo de configuração.
 
@@ -130,11 +141,14 @@ Para implementar um contêiner no namespace **padrão** de seu cluster, crie um 
 
 
 
-## Acessando imagens em outros namespaces do Kubernetes, regiões do {{site.data.keyword.Bluemix_notm}} e contas
+## Criando um `imagePullSecret` para acessar o {{site.data.keyword.Bluemix_notm}} ou os registros privados externos em outros namespaces do Kubernetes, regiões e contas do {{site.data.keyword.Bluemix_notm}}
 {: #other}
 
-É possível implementar contêineres em outros namespaces do Kubernetes, usar imagens armazenadas em outras regiões ou contas do {{site.data.keyword.Bluemix_notm}} ou usar imagens armazenadas no {{site.data.keyword.Bluemix_dedicated_notm}} criando o seu próprio imagePullSecret.
+Crie seu próprio `imagePullSecret` para implementar contêineres em outros namespaces do Kubernetes, usar imagens armazenadas em outras regiões ou contas do {{site.data.keyword.Bluemix_notm}}, usar imagens armazenadas no {{site.data.keyword.Bluemix_dedicated_notm}} ou usar imagens armazenadas em registros privados externos.
 {:shortdesc}
+
+Os ImagePullSecrets são válidos apenas para os namespaces do Kubernetes para os quais foram criados. Repita essas etapas para cada namespace no qual você desejar implementar contêineres. Imagens do [DockerHub](#dockerhub) não requerem ImagePullSecrets.
+{: tip}
 
 Antes de iniciar:
 
@@ -142,9 +156,64 @@ Antes de iniciar:
 2.  [Crie um cluster](cs_clusters.html#clusters_cli).
 3.  [Destine sua CLI para seu cluster](cs_cli_install.html#cs_cli_configure).
 
-Para criar seu próprio imagePullSecret:
+<br/>
+Para criar seu próprio imagePullSecret, será possível escolher entre as opções a seguir:
+- [Copie o imagePullSecret do namespace padrão para outros namespaces em seu cluster](#copy_imagePullSecret).
+- [Crie um imagePullSecret para acessar imagens em outras regiões e contas do {{site.data.keyword.Bluemix_notm}}](#other_regions_accounts).
+- [Crie um imagePullSecret para acessar imagens em registros privados externos](#private_images).
 
-**Nota:** os ImagePullSecrets são válidos apenas para os namespaces do Kubernetes para os quais foram criados. Repita essas etapas para cada namespace no qual você desejar implementar contêineres. Imagens do [DockerHub](#dockerhub) não requerem ImagePullSecrets.
+<br/>
+Se você já tiver criado um imagePullSecret em seu namespace que queira usar em sua implementação, veja [Implementando contêineres usando o imagePullSecret criado](#use_imagePullSecret).
+
+### Copiando o imagePullSecret do namespace padrão para outros namespaces em seu cluster
+{: #copy_imagePullSecret}
+
+É possível copiar o imagePullSecret criado automaticamente para o namespace `default` do Kubernetes para outros namespaces em seu cluster.
+{: shortdesc}
+
+1. Liste namespaces disponíveis em seu cluster.
+   ```
+   kubectl get namespaces
+   ```
+   {: pre}
+
+   Saída de exemplo:
+   ```
+   default          Active    79d
+   ibm-cert-store   Active    79d
+   ibm-system       Active    79d
+   istio-system     Active    34d
+   kube-public      Active    79d
+   kube-system      Active    79d
+   ```
+   {: screen}
+
+2. Opcional: crie um namespace em seu cluster.
+   ```
+   kubectl create namespace <namespace_name>
+   ```
+   {: pre}
+
+3. Copie o imagePullSecret do namespace `default` para o namespace de sua preferência. O novo imagePullSecret é denominado `bluemix-<namespace_name>-secret-regional`.
+   ```
+   kubectl get secret bluemix-default-secret-regional -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
+   ```
+   {: pre}
+
+4.  Verifique se o segredo foi criado com êxito.
+    ```
+    kubectl get secrets --namespace <namespace_name>
+    ```
+    {: pre}
+
+5. [Implemente um contêiner usando o imagePullSecret](#use_imagePullSecret) em seu espaço de nomes.
+
+
+### Criando um imagePullSecret para acessar imagens em outras regiões e contas do {{site.data.keyword.Bluemix_notm}}
+{: #other_regions_accounts}
+
+Para acessar imagens em outras regiões ou contas do {{site.data.keyword.Bluemix_notm}}, deve-se criar um token de registro e salvar suas credenciais em seu próprio imagePullSecret.
+{: shortdesc}
 
 1.  Se você não tiver um token, [crie um token para o registro que você desejar acessar.](/docs/services/Registry/registry_tokens.html#registry_tokens_create)
 2.  Liste tokens em sua conta. {{site.data.keyword.Bluemix_notm}}
@@ -155,8 +224,7 @@ Para criar seu próprio imagePullSecret:
     {: pre}
 
 3.  Anote o ID de token que você deseja usar.
-4.  Recupere o valor para seu token. Substitua <em>&lt;token_id&gt;</em>
-pelo ID do token que você recuperou na etapa anterior.
+4.  Recupere o valor para seu token. Substitua <em>&lt;token_ID&gt;</em> pelo ID do token que você recuperou na etapa anterior.
 
     ```
     bx cr token-get <token_id>
@@ -168,12 +236,11 @@ pelo ID do token que você recuperou na etapa anterior.
 5.  Crie o segredo do Kubernetes para armazenar suas informações do token.
 
     ```
-    kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_url> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
+    kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_URL> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
     ```
     {: pre}
 
     <table>
-    <caption>Tabela. Entendendo os componentes deste comando</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes desse comando</th>
     </thead>
@@ -187,7 +254,7 @@ pelo ID do token que você recuperou na etapa anterior.
     <td>Necessário. O nome que você deseja usar para seu imagePullSecret.</td>
     </tr>
     <tr>
-    <td><code>--docker-server <em>&lt;registry_url&gt;</em></code></td>
+    <td><code>--docker-server <em>&lt;registry_URL&gt;</em></code></td>
     <td>Necessário. A URL para o registro de imagem no qual o seu namespace está configurado.<ul><li>Para namespaces configurados no registry.ng.bluemix.net do Sul e Leste dos EUA.</li><li>Para namespaces configurados no sul do Reino Unido registry.eu-gb.bluemix.net</li><li>Para namespaces configurados na UE Central (Frankfurt) registry.eu-de.bluemix.net</li><li>Para namespaces configurados na Austrália (Sydney) registry.au-syd.bluemix.net</li><li>Para namespaces configurados no {{site.data.keyword.Bluemix_dedicated_notm}} registry.<em>&lt;dedicated_domain&gt;</em></li></ul></td>
     </tr>
     <tr>
@@ -211,137 +278,9 @@ pelo ID do token que você recuperou na etapa anterior.
     ```
     {: pre}
 
-7.  Crie um pod que referencie o imagePullSecret.
-    1.  Crie um arquivo de configuração de pod que seja denominado `mypod.yaml`.
-    2.  Defina o pod e o imagePullSecret que você deseja usar para acessar o registro privado do {{site.data.keyword.Bluemix_notm}}.
+7.  [Implemente um contêiner usando o imagePullSecret](#use_imagePullSecret) em seu espaço de nomes.
 
-        Uma imagem privada de um namespace:
-
-        ```
-        apiVersion: v1
-        kind: Pod
-        metadata:
-          name: <pod_name>
-        spec:
-          containers:
-            - name: <container_name>
-              image: registry.<region>.bluemix.net/<my_namespace>/<my_image>:<tag>  
-          imagePullSecrets:
-            - name: <secret_name>
-        ```
-        {: codeblock}
-
-        Uma imagem pública do {{site.data.keyword.Bluemix_notm}}:
-
-        ```
-        apiVersion: v1
-        kind: Pod
-        metadata:
-          name: <pod_name>
-        spec:
-          containers:
-            - name: <container_name>
-              image: registry.<region>.bluemix.net/
-          imagePullSecrets:
-            - name: <secret_name>
-        ```
-        {: codeblock}
-
-        <table>
-        <caption>Tabela. Entendendo os componentes de arquivo YAML</caption>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code><em>&lt;container_name&gt;</em></code></td>
-        <td>O nome do contêiner que você deseja implementar em seu cluster.</td>
-        </tr>
-        <tr>
-        <td><code><em>&lt;my_namespace&gt;</em></code></td>
-        <td>O namespace no qual sua imagem está armazenada. Para listar os namespaces disponíveis, execute `bx cr namespace-list`.</td>
-        </tr>
-        <tr>
-        <td><code><em>&lt;my_image&gt;</em></code></td>
-        <td>O nome da imagem que você deseja usar. Para listar as imagens disponíveis em uma conta do {{site.data.keyword.Bluemix_notm}}, execute `bx cr image-list`.</td>
-        </tr>
-        <tr>
-        <td><code><em>&lt;tag&gt;</em></code></td>
-        <td>A versão da imagem que você deseja usar. Se nenhuma tag for especificada, a imagem identificada como <strong>mais recente</strong> será usada por padrão.</td>
-        </tr>
-        <tr>
-        <td><code><em>&lt;secret_name&gt;</em></code></td>
-        <td>O nome do imagePullSecret que você criou anteriormente.</td>
-        </tr>
-        </tbody></table>
-
-   3.  Salve as suas mudanças.
-   4.  Crie a implementação em seu cluster.
-
-        ```
-        kubectl apply -f mypod.yaml
-        ```
-        {: pre}
-
-
-<br />
-
-
-
-## Acessando imagens públicas do Docker Hub
-{: #dockerhub}
-
-É possível usar qualquer imagem pública que esteja armazenada no Docker Hub para implementar um contêiner em seu
-cluster sem nenhuma configuração adicional.
-{:shortdesc}
-
-Antes de iniciar:
-
-1.  [Crie um cluster](cs_clusters.html#clusters_cli).
-2.  [Destine sua CLI para seu cluster](cs_cli_install.html#cs_cli_configure).
-
-Crie um arquivo de configuração de implementação.
-
-1.  Crie um arquivo de configuração que é denominado `mydeployment.yaml`.
-2.  Defina a implementação e a imagem pública do Docker Hub que você deseja usar. O arquivo de configuração a seguir usa a imagem pública NGINX disponível no Docker Hub.
-
-    ```
-    apiVersion: apps/v1beta1
-    kind: Deployment
-    metadata:
-      name: nginx-deployment
-    spec:
-      replicas: 3
-      template:
-        metadata:
-          labels:
-            app: nginx
-        spec:
-          containers:
-          - name: nginx
-            image: nginx
-    ```
-    {: codeblock}
-
-3.  Crie a implementação em seu cluster.
-
-    ```
-    kubectl apply -f mydeployment.yaml
-    ```
-    {: pre}
-
-    **Dica:** como alternativa, implemente um arquivo de configuração existente. O exemplo a seguir usa a mesma imagem NGINX pública, mas a aplica diretamente em seu cluster.
-
-    ```
-    kubectl apply -f https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy-nginx.yaml
-    ```
-    {: pre}
-
-<br />
-
-
-
-## Acessando imagens que são armazenadas em outros registros privados
+### Acessando imagens que são armazenadas em outros registros privados
 {: #private_images}
 
 Se você já tem um registro privado para uso, deve-se armazenar as credenciais de registro em um imagePullSecret do Kubernetes e referenciar esse segredo em seu arquivo de configuração.
@@ -354,17 +293,14 @@ Antes de iniciar:
 
 Para criar um imagePullSecret:
 
-**Nota:** os ImagePullSecrets são válidos para os namespaces do Kubernetes para os quais foram criados. Repita essas etapas para cada namespace no qual você deseja implementar contêineres de uma imagem em um registro privado do {{site.data.keyword.Bluemix_notm}}.
-
 1.  Crie o segredo do Kubernetes para armazenar suas credenciais de registro privado.
 
     ```
-    kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_url> --docker-username=<docker_username> --docker-password=<docker_password> --docker-email=<docker_email>
+    kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_URL> --docker-username=<docker_username> --docker-password=<docker_password> --docker-email=<docker_email>
     ```
     {: pre}
 
     <table>
-    <caption>Tabela. Entendendo os componentes deste comando</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes desse comando</th>
     </thead>
@@ -378,7 +314,7 @@ Para criar um imagePullSecret:
     <td>Necessário. O nome que você deseja usar para seu imagePullSecret.</td>
     </tr>
     <tr>
-    <td><code>--docker-server <em>&lt;registry_url&gt;</em></code></td>
+    <td><code>--docker-server <em>&lt;registry_URL&gt;</em></code></td>
     <td>Necessário. A URL para o registro no qual as imagens privadas são armazenadas.</td>
     </tr>
     <tr>
@@ -402,56 +338,156 @@ Para criar um imagePullSecret:
     ```
     {: pre}
 
-3.  Crie um pod que referencie o imagePullSecret.
-    1.  Crie um arquivo de configuração de pod que seja denominado `mypod.yaml`.
-    2.  Defina o pod e o imagePullSecret que você deseja usar para acessar o registro privado do {{site.data.keyword.Bluemix_notm}}. Para usar uma imagem privada do seu registro privado:
+3.  [Crie um pod que referencie o imagePullSecret](#use_imagePullSecret).
 
-        ```
-        apiVersion: v1
-        kind: Pod
-        metadata:
-          name: <pod_name>
-        spec:
-          containers:
-            - name: <container_name>
-              image: <my_image>:<tag>  
-          imagePullSecrets:
-            - name: <secret_name>
-        ```
-        {: codeblock}
+## Implementando contêineres usando o imagePullSecret criado
+{: #use_imagePullSecret}
 
-        <table>
-        <caption>Tabela. Entendendo os componentes de arquivo YAML</caption>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code><em>&lt;pod_name&gt;</em></code></td>
-        <td>O nome do pod que você deseja criar.</td>
-        </tr>
-        <tr>
-        <td><code><em>&lt;container_name&gt;</em></code></td>
-        <td>O nome do contêiner que você deseja implementar em seu cluster.</td>
-        </tr>
-        <tr>
-        <td><code><em>&lt;my_image&gt;</em></code></td>
-        <td>O caminho completo para a imagem em seu registro privado que você deseja usar.</td>
-        </tr>
-        <tr>
-        <td><code><em>&lt;tag&gt;</em></code></td>
-        <td>A versão da imagem que você deseja usar. Se nenhuma tag for especificada, a imagem identificada como <strong>mais recente</strong> será usada por padrão.</td>
-        </tr>
-        <tr>
-        <td><code><em>&lt;secret_name&gt;</em></code></td>
-        <td>O nome do imagePullSecret que você criou anteriormente.</td>
-        </tr>
-        </tbody></table>
+É possível definir um imagePullSecret na implementação de seu pod ou armazenar o imagePullSecret na conta de serviço do Kubernetes para que ele fique disponível para todas as implementações que não especifiquem uma conta de serviço.
+{: shortdesc}
 
-  3.  Salve as suas mudanças.
-  4.  Crie a implementação em seu cluster.
+Escolha entre as opções a seguir:
+* [Consultando o imagePullSecret na implementação do pod](#pod_imagePullSecret): use essa opção se não quiser conceder acesso ao seu registro a todos os pods em seu namespace, por padrão.
+* [Armazenando o imagePullSecret na conta de serviço do Kubernetes](#store_imagePullSecret): use essa opção para conceder acesso a imagens em seu registro para implementações nos namespaces selecionados do Kubernetes.
 
-        ```
-        kubectl apply -f mypod.yaml
-        ```
-        {: pre}
+Antes de iniciar:
+* [Crie um imagePullSecret](#other) para acessar imagens em outros registros, namespaces do Kubernetes, regiões ou contas do {{site.data.keyword.Bluemix_notm}}.
+* [Destine sua CLI para seu cluster](cs_cli_install.html#cs_cli_configure).
+
+### Consultando o `imagePullSecret` na implementação de seu pod
+{: #pod_imagePullSecret}
+
+Quando você consulta o imagePullSecret em uma implementação do pod, é válido para esse pod apenas e não pode ser compartilhado entre os pods no namespace.
+{:shortdesc}
+
+1.  Crie um arquivo de configuração de pod que seja denominado `mypod.yaml`.
+2.  Defina o pod e o imagePullSecret para acessar o {{site.data.keyword.registrylong_notm}} privado.
+
+    Para acessar uma imagem privada:
+    ```
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: mypod
+    spec:
+      containers:
+        - name: <container_name>
+          image: registry.<region>.bluemix.net/<namespace_name>/<image_name>:<tag>
+      imagePullSecrets:
+        - name: <secret_name>
+    ```
+    {: codeblock}
+
+    Para acessar uma imagem pública do {{site.data.keyword.Bluemix_notm}}:
+    ```
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: mypod
+    spec:
+      containers:
+        - name: <container_name>
+          image: registry.bluemix.net/<image_name>:<tag>
+      imagePullSecrets:
+        - name: <secret_name>
+    ```
+    {: codeblock}
+
+    <table>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code><em>&lt;container_name&gt;</em></code></td>
+    <td>O nome do contêiner que você deseja implementar em seu cluster.</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;namespace_name&gt;</em></code></td>
+    <td>O namespace no qual sua imagem está armazenada. Para listar os namespaces disponíveis, execute `bx cr namespace-list`.</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;image_name&gt;</em></code></td>
+    <td>O nome da imagem que você deseja usar. Para listar as imagens disponíveis em uma conta do {{site.data.keyword.Bluemix_notm}}, execute `bx cr image-list`.</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;tag&gt;</em></code></td>
+    <td>A versão da imagem que você deseja usar. Se nenhuma tag for especificada, a imagem identificada como <strong>mais recente</strong> será usada por padrão.</td>
+    </tr>
+    <tr>
+    <td><code><em>&lt;secret_name&gt;</em></code></td>
+    <td>O nome do imagePullSecret que você criou anteriormente.</td>
+    </tr>
+    </tbody></table>
+
+3.  Salve as suas mudanças.
+4.  Crie a implementação em seu cluster.
+    ```
+    kubectl apply -f mypod.yaml
+    ```
+    {: pre}
+
+### Armazenando o imagePullSecret na conta de serviço do Kubernetes para o namespace selecionado
+{:#store_imagePullSecret}
+
+Cada namespace tem uma conta de serviço do Kubernetes denominada `default`. É possível incluir o imagePullSecret nessa conta de serviço para conceder acesso a imagens em seu registro. As implementações que não especificam uma conta de serviço usarão automaticamente a conta de serviço `default` para este namespace.
+{:shortdesc}
+
+1. Verifique se um imagePullSecret já existe para sua conta de serviço padrão.
+   ```
+   kubectl describe serviceaccount default -n <namespace_name>
+   ```
+   {: pre}
+   Não existe quando `imagePullSecret<none>` é exibido na entrada **Segredos pull da imagem**.  
+2. Inclua o imagePullSecret em sua conta de serviço padrão.
+   - **Para incluir o imagePullSecret quando nenhum imagePullSecret está definido:**
+       ```
+       kubectl patch -n <namespace_name> serviceaccount/default -p '{"imagePullSecrets":[{"name": "bluemix-<namespace_name>-secret-regional"}]}'
+       ```
+       {: pre}
+   - **Para incluir o imagePullSecret quando um imagePullSecret já está definido:**
+       ```
+       kubectl patch -n <namespace_name> serviceaccount/default --type='json' -p='[{"op":"add","path":"/imagePullSecrets/-","value":{"name":"bluemix-<namespace_name>-secret-regional"}}]'
+       ```
+       {: pre}
+3. Verifique se o imagePullSecret foi incluído em sua conta de serviço padrão.
+   ```
+   kubectl describe serviceaccount default -n <namespace_name>
+   ```
+   {: pre}
+
+   Saída de exemplo:
+   ```
+   Name:                default
+   Namespace:           <namespace_name>
+   Labels:              <none>
+   Annotations:         <none>
+   Image pull secrets:  bluemix-namespace_name-secret-regional
+   Mountable secrets:   default-token-sh2dx
+   Tokens:              default-token-sh2dx
+   Events:              <none>
+   ```
+   {: pre}
+
+4. Implemente um contêiner de uma imagem em seu registro.
+   ```
+   apiVersion: v1
+   kind: Pod
+   metadata:
+     name: mypod
+   spec:
+     containers:
+       - name: <container_name>
+         image: registry.<region>.bluemix.net/<namespace_name>/<image_name>:<tag>
+   ```
+   {: codeblock}
+
+5. Crie a implementação em seu cluster.
+   ```
+   kubectl apply -f mypod.yaml
+   ```
+   {: pre}
+
+<br />
+
+

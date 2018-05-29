@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-11-02"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -107,10 +107,10 @@ lastupdated: "2017-11-02"
     </tr>
     </tbody></table>
 
-7.  imagePullSecret을 참조하는 포드를 작성하십시오.
+7.  imagePullSecret을 참조하는 팟(Pod)을 작성하십시오.
 
-    1.  선호하는 편집기를 열고 mypod.yaml이라는 이름의 포드 구성 스크립트를 작성하십시오.
-    2.  레지스트리에 액세스하기 위해 사용할 imagePullSecret 및 포드를 정의하십시오. 네임스페이스에서 개인용 이미지를 사용하려면 다음을 작성하십시오.
+    1.  선호하는 편집기를 열고 mypod.yaml이라는 이름의 팟(Pod) 구성 스크립트를 작성하십시오.
+    2.  레지스트리에 액세스하기 위해 사용할 imagePullSecret 및 팟(Pod)을 정의하십시오. 네임스페이스에서 개인용 이미지를 사용하려면 다음을 작성하십시오.
 
         ```
         apiVersion: v1
@@ -134,7 +134,7 @@ lastupdated: "2017-11-02"
         <tbody>
         <tr>
         <td><code>&lt;pod_name&gt;</code></td>
-        <td>작성하려는 포드의 이름입니다.</td>
+        <td>작성하려는 팟(Pod)의 이름입니다.</td>
         </tr>
         <tr>
         <td><code>&lt;container_name&gt;</code></td>
@@ -165,3 +165,4 @@ lastupdated: "2017-11-02"
           kubectl apply -f mypod.yaml
           ```
           {: pre}
+

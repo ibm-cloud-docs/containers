@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -25,7 +25,7 @@ lastupdated: "2018-01-24"
 ## IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセス
 {: #unify_accounts}
 
-自動アカウント・リンクを有効にした後に作成した {{site.data.keyword.Bluemix_notm}} の従量制課金アカウントは、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスできるように既にセットアップされています。追加の構成を行わなくても、クラスターのためのインフラストラクチャー・リソースを購入できます。
+自動アカウント・リンクを有効にした後に作成した {{site.data.keyword.Bluemix_notm}} の従量制課金アカウントは、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスできるように既にセットアップされています。 追加の構成を行わなくても、クラスターのためのインフラストラクチャー・リソースを購入できます。
 {:shortdesc}
 
 他の {{site.data.keyword.Bluemix_notm}} アカウント・タイプを持つユーザー、または {{site.data.keyword.Bluemix_notm}} アカウントにリンクされていない既存の IBM Cloud インフラストラクチャー (SoftLayer) アカウントを持つユーザーは、標準クラスターを作成できるようにアカウントを構成する必要があります。
@@ -62,13 +62,14 @@ lastupdated: "2018-01-24"
   ```
   {: pre}
 
-6.  IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするために、先ほど生成した API キーを設定します。 `<API_KEY>` を API キーに置き換え、`<USERNAME>` を新しい従量制課金アカウントの {{site.data.keyword.ibmid}} に置き換えます。
+6.  IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするために、先ほど生成した API キーを設定します。 `<API_key>` を API キーに置き換え、`<username>` を新しい従量制課金アカウントの {{site.data.keyword.ibmid}} に置き換えます。
 
   ```
-  bx cs credentials-set --infrastructure-api-key <API_KEY> --infrastructure-username <USERNAME>
+  bx cs credentials-set --infrastructure-api-key <API_key> --infrastructure-username <username>
   ```
   {: pre}
 
 7.  [標準クラスターの作成](cs_clusters.html#clusters_cli)を開始します。
 
 **注:** 生成した後に API キーを確認するには、手順 1 と 2 の後に、**「API キー」**セクションで**「表示 (View)」**をクリックして、ユーザー ID の API キーを参照します。
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-14"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -25,7 +25,6 @@ lastupdated: "2018-03-14"
 
 ## Serviços de aplicativos
 <table summary="Resumo para acessibilidade">
-<caption>Tabela. Opções de integração para serviços de aplicativos</caption>
 <thead>
 <tr>
 <th>Serviço</th>
@@ -47,7 +46,6 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="Ícone de link
 
 ## Serviços DevOps
 <table summary="Resumo para acessibilidade">
-<caption>Tabela. Opções de integração para gerenciar o DevOps</caption>
 <thead>
 <tr>
 <th>Serviço</th>
@@ -80,7 +78,6 @@ IBM Blockchain Platform <img src="../icons/launch-glyph.svg" alt="Ícone de link
 
 ## Serviços de criação de log e de monitoramento
 <table summary="Resumo para acessibilidade">
-<caption>Tabela. Opções de integração para gerenciar logs e métricas</caption>
 <thead>
 <tr>
 <th>Serviço</th>
@@ -141,7 +138,6 @@ para monitorar o desempenho e as cargas de trabalho em seu cluster.
 
 ## Serviços de segurança
 <table summary="Resumo para acessibilidade">
-<caption>Tabela. Opções de integração para gerenciar a segurança</caption>
 <thead>
 <tr>
 <th>Serviço</th>
@@ -162,6 +158,10 @@ para monitorar o desempenho e as cargas de trabalho em seu cluster.
 <td>É possível usar o <a href="../services/certificate-manager/index.html" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a> para armazenar e gerenciar certificados SSL para seus apps. Para obter mais informações, veja <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Usar o {{site.data.keyword.cloudcerts_long_notm}} com o {{site.data.keyword.containershort_notm}} para implementar Certificados TLS de domínio customizado <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a>. </td>
 </tr>
 <tr>
+  <td>{{site.data.keyword.registrylong}}</td>
+  <td>Configure o seu próprio repositório de imagem assegurado do Docker no qual é possível armazenar e compartilhar imagens com segurança entre usuários do cluster. Para obter mais informações, veja a documentação do <a href="/docs/services/Registry/index.html" target="_blank">{{site.data.keyword.registrylong}} <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a>.</td>
+</tr>
+<tr>
 <td>NeuVector</td>
 <td>Proteja os contêineres com um firewall de nuvem nativa usando o <a href="https://neuvector.com/" target="_blank">NeuVector <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a>. Para obter mais informações, veja <a href="https://www.ibm.com/us-en/marketplace/neuvector-container-security" target="_blank">NeuVector Container Security <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a>. </td>
 </tr>
@@ -171,6 +171,35 @@ para monitorar o desempenho e as cargas de trabalho em seu cluster.
 </tr>
 </tbody>
 </table>
+
+<br />
+
+
+
+## Serviços de Armazenamento
+<table summary="Resumo para acessibilidade">
+<thead>
+<tr>
+<th>Serviço</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>{{site.data.keyword.cos_full}}</td>
+  <td>Os dados armazenados com o {{site.data.keyword.cos_short}} são criptografados e dispersos em múltiplas localizações geográficas e acessados por HTTP usando uma API de REST. É possível usar [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore/index.html) para configurar o serviço para fazer backups únicos ou planejados para dados em seus clusters. Para obter informações gerais sobre o serviço, veja a documentação do <a href="/docs/services/cloud-object-storage/about-cos.html" target="_blank">{{site.data.keyword.cos_short}} <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a>.</td>
+</tr>
+  <tr>
+    <td>{{site.data.keyword.cloudantfull}}</td>
+    <td>O {{site.data.keyword.cloudant_short_notm}} é um Banco de dados como um serviço (DBaaS) orientado por documento que armazena dados como documentos no formato JSON. O serviço é construído para escalabilidade, alta disponibilidade e durabilidade. Para obter mais informações, veja a documentação do <a href="/docs/services/Cloudant/getting-started.html" target="_blank">{{site.data.keyword.cloudant_short_notm}} <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a>.</td>
+  </tr>
+  <tr>
+    <td>{{site.data.keyword.composeForMongoDB_full}}</td>
+    <td>O {{site.data.keyword.composeForMongoDB}} entrega alta disponibilidade e redundância, backups contínuos automatizados e sob demanda, ferramentas de monitoramento, integração em sistemas de alerta, visualizações de análise de desempenho e mais. Para obter mais informações, veja a documentação do <a href="/docs/services/ComposeForMongoDB/index.html" target="_blank">{{site.data.keyword.composeForMongoDB}} <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a>.</td>
+  </tr>
+</tbody>
+</table>
+
 
 <br />
 
@@ -232,7 +261,7 @@ Para incluir um serviço:
 5.  Inclua o serviço em seu cluster.
 
     ```
-    bx cs cluster-service-bind <cluster_name_or_id> <namespace> <service_instance_name>
+    bx cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
     {: pre}
 
@@ -266,7 +295,7 @@ Para usar o serviço em um pod que está implementado no cluster, os usuários d
 ## Criando aliases do Cloud Foundry para outros recursos de serviço do {{site.data.keyword.Bluemix_notm}}
 {: #adding_resource_cluster}
 
-Os serviços do Cloud Foundry são suportados para ligação com clusters. Para ligar um serviço do {{site.data.keyword.Bluemix_notm}} que não é um serviço do Cloud Foundry a seu cluster, crie um alias do Cloud Foundry para a instância de serviço.
+Os serviços do Cloud Foundry são suportados para ligação com clusters. Para ligar um serviço {{site.data.keyword.Bluemix_notm}} que não é um serviço Cloud Foundry a seu cluster, crie um alias do Cloud Foundry para a instância de serviço.
 {:shortdesc}
 
 Antes de iniciar, [solicite uma instância do serviço do {{site.data.keyword.Bluemix_notm}}](/docs/apps/reqnsi.html#req_instance).
@@ -398,7 +427,7 @@ de segredo. Se você ligou mais de um serviço, verifique se cada segredo está 
 5.  Crie o pod e monte o volume de segredo.
 
     ```
-    kubectl apply -f <yaml_path>
+    Kubectl apply -f secret-test.yaml
     ```
     {: pre}
 
@@ -458,14 +487,50 @@ Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para o
 
 1. Instale a <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">CLI do Helm <img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a>.
 
-2. Inicialize o Helm e instale o `tiller`.
+2. **Importante**: para manter a segurança do cluster, crie uma conta de serviço para Tiller no namespace `kube-system` e uma ligação de função de cluster RBAC do Kubernetes para o pod `tiller-deploy`.
+
+    1. Em seu editor preferencial, crie o arquivo a seguir e salve-o como `rbac-config.yaml`.
+      **Nota**:
+        * A função de cluster `cluster-admin` é criada por padrão nos clusters do Kubernetes, portanto, não é necessário defini-la explicitamente.
+        * Se você estiver usando um cluster versão 1.7.x, mude a `apiVersion` para `rbac.authorization.k8s.io/v1beta1`.
+
+      ```
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: tiller
+        namespace: kube-system
+      ---
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: tiller
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-admin
+      subjects:
+        - kind: ServiceAccount
+          name: tiller
+          namespace: kube-system
+      ```
+      {: codeblock}
+
+    2. Crie a conta de serviço e a ligação da função de cluster.
+
+        ```
+        kubectl create -f rbac-config.yaml
+        ```
+        {: pre}
+
+3. Inicialize o Helm e instale o `tiller` com a conta de serviço que você criou.
 
     ```
-    helm init
+    Helm init -- tiller de serviço da conta
     ```
     {: pre}
 
-3. Verifique se o pod `tiller-deploy` tem um **Status** de `Executando` em seu cluster.
+4. Verifique se o pod `tiller-deploy` tem um **Status** de `Executando` em seu cluster.
 
     ```
     kubectl get pods -n kube-system -l app=helm
@@ -480,17 +545,26 @@ Antes de iniciar, [destine sua CLI](cs_cli_install.html#cs_cli_configure) para o
     ```
     {: screen}
 
-4. Inclua o repositório do Helm do {{site.data.keyword.Bluemix_notm}} em sua instância do Helm.
+5. Inclua o repositório do Helm do {{site.data.keyword.Bluemix_notm}} em sua instância do Helm.
 
     ```
     helm repo add ibm https://registry.bluemix.net/helm/ibm
     ```
     {: pre}
 
-5. Liste os gráficos Helm atualmente disponíveis no repositório do {{site.data.keyword.Bluemix_notm}}.
+6. Liste os gráficos Helm atualmente disponíveis no repositório do {{site.data.keyword.Bluemix_notm}}.
 
     ```
     helm search ibm
+    ```
+    {: pre}
+
+7. Para saber mais sobre um gráfico, liste suas configurações e valores padrão.
+
+    Por exemplo, para visualizar as configurações, a documentação e os valores padrão do gráfico Helm do serviço VPN do IPSec do strongSwan:
+
+    ```
+    Helm inspect ibm/strongswan
     ```
     {: pre}
 
@@ -581,4 +655,5 @@ Para usar o Weave Scope com um cluster:
 [Saiba mais sobre os recursos do Weave Scope ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.weave.works/docs/scope/latest/features/).
 
 <br />
+
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -16,19 +16,19 @@ lastupdated: "2018-03-16"
 {:download: .download}
 
 
-# 设置 NodePort 服务
+# 使用 NodePort 公开应用程序
 {: #nodeport}
 
 通过使用 Kubernetes 集群中任何工作程序节点的公共 IP 地址并公开节点端口，使容器化应用程序可通过因特网访问。此选项可用于测试 {{site.data.keyword.containerlong}} 和短期公共访问权。
 {:shortdesc}
 
-## 使用 NodePort 服务规划外部联网
+## 使用 NodePort 管理网络流量
 {: #planning}
 
 在工作程序节点上公开一个公共端口，并使用该工作程序节点的公共 IP 地址通过因特网来公共访问集群中的服务。
 {:shortdesc}
 
-通过创建类型为 NodePort 的 Kubernetes 服务来公开应用程序时，将为该服务分配 30000-32767 范围内的 NodePort 以及内部集群 IP 地址。NodePort 服务充当应用程序入局请求的外部入口点。分配的 NodePort 在集群中每个工作程序节点的 kubeproxy 设置中公共公开。每个工作程序节点都会在分配的 NodePort 上开始侦听该服务的入局请求。要从因特网访问该服务，可以使用在集群创建期间分配的任何工作程序节点的公共 IP 地址以及 NodePort，格式为 `<ip_address>:<nodeport>`. 除了公共 IP 地址外，NodePort 服务还可用于工作程序节点的专用 IP 地址。
+通过创建类型为 NodePort 的 Kubernetes 服务来公开应用程序时，将为该服务分配 30000-32767 范围内的 NodePort 以及内部集群 IP 地址。NodePort 服务充当应用程序入局请求的外部入口点。分配的 NodePort 在集群中每个工作程序节点的 kubeproxy 设置中公共公开。每个工作程序节点都会在分配的 NodePort 上开始侦听该服务的入局请求。要从因特网访问该服务，可以使用在集群创建期间分配的任何工作程序节点的公共 IP 地址以及 NodePort，格式为 `<IP_address>:<nodeport>`. 除了公共 IP 地址外，NodePort 服务还可用于工作程序节点的专用 IP 地址。
 
 下图显示配置 NodePort 服务后，如何将通信从因特网定向到应用程序：
 
@@ -42,12 +42,12 @@ lastupdated: "2018-03-16"
 
 4. 该请求会转发到部署了应用程序的 pod 的专用 IP 地址。如果集群中部署了多个应用程序实例，那么 NodePort 服务会在应用程序 pod 之间路由请求。
 
-**注**：工作程序节点的公共 IP 地址不是永久固定的。除去或重新创建工作程序节点时，将为该工作程序节点分配新的公共 IP 地址。在测试应用程序的公共访问权时，或者仅在短时间内需要公共访问权时，可以使用 NodePort 服务。如果需要服务具有稳定的公共 IP 地址和更高可用性，请使用 [LoadBalancer 服务](cs_loadbalancer.html#planning)或 [Ingress](cs_ingress.html#planning) 来公开应用程序。
+**注**：工作程序节点的公共 IP 地址不是永久固定的。除去或重新创建工作程序节点时，将为该工作程序节点分配新的公共 IP 地址。在测试应用程序的公共访问权时，或者仅在短时间内需要公共访问权时，可以使用 NodePort 服务。如果需要服务具有稳定的公共 IP 地址和更高可用性，请使用 [LoadBalancer 服务](cs_loadbalancer.html)或 [Ingress](cs_ingress.html) 来公开应用程序。
 
 <br />
 
 
-## 使用 NodePort 服务类型来配置对应用程序的公共访问权
+## 使用 NodePort 服务来启用对应用程序的公共访问权
 {: #config}
 
 对于免费或标准集群，可以将应用程序公开为 Kubernetes NodePort 服务。
@@ -65,10 +65,10 @@ lastupdated: "2018-03-16"
     metadata:
       name: <my-nodeport-service>
       labels:
-        run: <my-demo>
+        <my-label-key>: <my-label-value>
     spec:
       selector:
-        run: <my-demo>
+        <my-selector-key>: <my-selector-value>
       type: NodePort
       ports:
        - port: <8081>
@@ -78,25 +78,28 @@ lastupdated: "2018-03-16"
     {: codeblock}
 
     <table>
-    <caption>了解此 YAML 文件的组成部分</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 NodePort 服务部分的组成部分</th>
     </thead>
     <tbody>
     <tr>
-    <td><code>name</code></td>
+    <td><code>metadata.name</code></td>
     <td>将 <code><em>&lt;my-nodeport-service&gt;</em></code> 替换为 NodePort 服务的名称。</td>
     </tr>
     <tr>
-    <td><code>run</code></td>
-    <td>将 <code><em>&lt;my-demo&gt;</em></code> 替换为部署的名称。</td>
+    <td><code>metadata.labels</code></td>
+    <td>将 <code><em>&lt;my-label-key&gt;</em></code> 和 <code><em>&lt;my-label-value&gt;</em></code> 替换为要用于服务的标签。</td>
     </tr>
     <tr>
-    <td><code>port</code></td>
+      <td><code>spec.selector</code></td>
+      <td>将 <code><em>&lt;my-selector-key&gt;</em></code> 和 <code><em>&lt;my-selector-value&gt;</em></code> 替换为您在部署 YAML 的 <code>spec.template.metadata.labels</code> 部分中使用的键/值对。
+      </tr>
+    <tr>
+    <td><code>ports.port</code></td>
     <td>将 <code><em>&lt;8081&gt;</em></code> 替换为服务侦听的端口。</td>
      </tr>
      <tr>
-     <td><code>nodePort</code></td>
+     <td><code>ports.nodePort</code></td>
      <td>可选：将 <code><em>&lt;31514&gt;</em></code> 替换为范围为 30000-32767 的 NodePort。不要指定其他服务已经在使用的 NodePort。如果未分配 NodePort，系统将为您分配随机的 NodePort。<br><br>如果要指定 NodePort，并希望查看哪些 NodePort 已在使用，可以运行以下命令：<pre class="pre"><code>    kubectl get svc
     </code></pre>所有已在使用的 NodePort 都会显示在**端口**字段下。</td>
      </tr>
@@ -150,6 +153,8 @@ lastupdated: "2018-03-16"
     ```
     {: screen}
 
-    在此示例中，NodePort为 `30872`。
+    在此示例中，NodePort为 `30872`。</br>
+    **注：**如果 **Endpoints** 部分显示 `<none>`，请确保 NodePort 服务的 `spec.selector` 部分中使用的 `<selectorkey>` 和 `<selectorvalue>` 与部署 YAML 的 `spec.template.metadata.labels` 部分中使用的键/值对相同。
 
 3.  使用其中一个工作程序节点公共 IP 地址和 NodePort 来构成 URL。示例：`http://192.0.2.23:30872`
+

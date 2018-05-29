@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -50,7 +50,7 @@ lastupdated: "2018-03-16"
 2. `dedicated=edge`로 작업자 노드의 레이블을 지정하십시오. 작업자 노드가 `dedicated=edge`와 함께 표시되면 모든 후속 Ingress 및 로드 밸런서가 에지 작업자 노드에 배치됩니다.
 
   ```
-  kubectl label nodes <node_name> <node_name2> dedicated=edge
+  kubectl label nodes <node1_name> <node2_name> dedicated=edge
   ```
   {: pre}
 
@@ -64,7 +64,7 @@ lastupdated: "2018-03-16"
   출력:
 
   ```
-  kubectl get service -n <namespace> <name> -o yaml | kubectl apply -f
+  kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f
   ```
   {: screen}
 
@@ -73,7 +73,7 @@ lastupdated: "2018-03-16"
   출력:
 
   ```
-  service "<name>" configured
+  service "my_loadbalancer" configured
   ```
   {: screen}
 
@@ -86,7 +86,7 @@ lastupdated: "2018-03-16"
 {: #edge_workloads}
 
 에지 작업자 노드의 이점 중 하나는 네트워킹 서비스만 실행하도록 이러한 작업자 노드를 지정할 수 있다는 것입니다.
-{:shortdesc} 
+{:shortdesc}
 
 `dedicated=edge` 결함 허용을 사용하면 모든 로드 밸런서와 Ingress 서비스가 레이블 지정된 작업자 노드에만 배치됩니다. 하지만 다른 워크로드가 에지 작업자 노드에서 실행되지 않고 작업자 노드 리소스를 이용하지 못하도록 하려면 [Kubernetes 오염 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)을 사용해야 합니다.
 
@@ -98,10 +98,12 @@ lastupdated: "2018-03-16"
   ```
   {: pre}
 
-2. 포드가 작업자 노드에서 실행되지 않도록 하고 작업자 노드에서 `edge` 레이블이 없는 포드를 제거하는 오염을 각 작업자 노드에 적용하십시오. 제거된 포드는 용량이 있는 다른 작업자 노드에 다시 배치됩니다.
+2. 팟(Pod)이 작업자 노드에서 실행되지 않도록 하고 작업자 노드에서 `edge` 레이블이 없는 팟(Pod)을 제거하는 오염을 각 작업자 노드에 적용하십시오. 제거된 팟(Pod)은 용량이 있는 다른 작업자 노드에 다시 배치됩니다.
 
   ```
   kubectl taint node <node_name> dedicated=edge:NoSchedule dedicated=edge:NoExecute
   ```
+이제 `dedicated=edge` 결함 허용을 사용하는 팟(Pod)만 에지 작업자 노드에 배치됩니다.
 
-이제 `dedicated=edge` 결함 허용을 사용하는 포드만 에지 작업자 노드에 배치됩니다.
+3. [로드 밸런서 서비스에 대해 소스 IP 유지를 사용 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer)하도록 선택하는 경우에는 수신 요청이 앱 팟(Pod)으로 전달될 수 있도록 [에지 노드 친화성을 앱 팟(Pod)에 추가](cs_loadbalancer.html#edge_nodes)하여 앱 팟(Pod)이 에지 작업자 노드에 스케줄되도록 하십시오. 
+

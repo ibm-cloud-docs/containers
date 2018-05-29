@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -23,28 +23,71 @@ La conectividad de VPN le permite conectar de forma segura apps de un clúster d
 
 Para conectar los nodos trabajadores y las apps a un centro de datos local, puede configurar un punto final de VPN IPSec con un servicio strongSwan o con un dispositivo Vyatta Gateway o un dispositivo Fortigate.
 
-- **Servicio VPN IPSec de strongSwan**: puede configurar un [servicio VPN IPSec de strongSwan ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.strongswan.org/) que se conecte de forma segura al clúster de Kubernetes con una red local. El servicio VPN IPSec de strongSwan proporciona un canal de comunicaciones de extremo a extremo seguro sobre Internet que está basado en la suite de protocolos
-Internet Protocol Security (IPsec) estándar del sector. Para configurar una conexión segura entre el clúster y una red local, debe instalar una pasarela VPN IPsec en el centro de datos local. A continuación, puede [configurar y desplegar el servicio VPN IPSec de strongSwan](#vpn-setup) en un pod de Kubernetes.
+- **Dispositivo Vyatta Gateway o dispositivo Fortigate**: Si tiene un clúster grande, y desea acceder a recursos que no son de Kubernetes a través de una VPN, o si desea acceder a varios clústeres a través de una única VPN, tiene la posibilidad de configurar un dispositivo Vyatta Gateway o un [Dispositivo de seguridad Fortigate ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](/docs/infrastructure/fortigate-10g/getting-started.html#getting-started-with-fortigate-security-appliance-10gbps) para configurar un punto final VPN IPSec. Para configurar Vyatta, consulte [Configuración de la conectividad de VPN con Vyatta](#vyatta). 
 
-- **Dispositivo Vyatta Gateway o Fortigate**: si tiene un clúster grande, desea acceder a recursos no Kubernetes sobre la VPN o desea acceder a varios clústeres en una sola VPN, puede elegir configurar un dispositivo Vyatta Gateway o Fortigate o para configurar un punto final de VPN IPSec. Para obtener más información, consulte esta publicación de blog sobre [Conexión de un clúster con un centro de datos local ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/).
+- **Servicio VPN IPSec de strongSwan**: puede configurar un [servicio VPN IPSec de strongSwan ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.strongswan.org/) que se conecte de forma segura al clúster de Kubernetes con una red local. El servicio VPN IPSec de strongSwan proporciona un canal de comunicaciones de extremo a extremo seguro sobre Internet que está basado en la suite de protocolos
+Internet Protocol Security (IPsec) estándar del sector. Para configurar una conexión segura entre el clúster y una red local, [configure y despliegue el servicio VPN IPSec strongSwan](#vpn-setup) directamente en un pod del clúster. 
+
+## Configuración de conectividad VPN con un dispositivo Vyatta Gateway
+{: #vyatta}
+
+El [Dispositivo Vyatta Gateway ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](http://knowledgelayer.softlayer.com/learning/network-gateway-devices-vyatta) es un servidor nativo que ejecuta una distribución especial de Linux. Puede utilizar Vyatta como una pasarela VPN para conectarse de forma segura a una red local.
+{:shortdesc}
+
+Todo el tráfico de red privado y público que entre o abandone las VLAN del clúster se direcciona a través de Vyatta. Puede utilizar Vyatta como un punto final de VPN para crear un túnel IPSec cifrado entre servidores en la infraestructura (Softlayer) de IBM Cloud y los recursos locales. Por ejemplo, en el diagrama siguiente se muestra cómo una app en un nodo trabajador privado en {{site.data.keyword.containershort_notm}} puede comunicarse con un servidor local a través de una conexión VPN Vyatta: 
+
+<img src="images/cs_vpn_vyatta.png" width="725" alt="Exposición de una app en {{site.data.keyword.containershort_notm}} mediante la utilización de un equilibrador de carga" style="width:725px; border-style: none"/>
+
+1. Una app en el clúster, `myapp2`, recibe una solicitud desde un servicio Ingress o LoadBalancer. Dicha app debe conectarse de forma segura a los datos en su red local. 
+
+2. Puesto que `myapp2` se encuentra en un nodo trabajador que está en una VLAN privada únicamente, el dispositivo Vyatta actúa como una conexión segura entre los nodos trabajadores y la red local. El dispositivo Vyatta utiliza la dirección IP de destino para determinar qué paquetes de red deben enviarse a la red local. 
+
+3. La solicitud se cifra y envía a través del túnel VPN al centro de datos local.
+
+4. La solicitud entrante pasa a través del cortafuegos local y se entrega al punto final de túnel VPN (direccionador) donde se descifra. 
+
+5. El punto final de túnel VPN (direccionador) reenvía la solicitud al servidor o sistema principal local dependiendo de la dirección IP de destino especificada en el paso 2. Los datos necesarios se envían a través de la conexión VPN a `myapp2` mediante el mismo proceso. 
+
+Para configurar un dispositivo Vyatta Gateway:
+
+1. [Solicite Vyatta ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://knowledgelayer.softlayer.com/procedure/how-order-vyatta). 
+
+2. [Configure la VLAN privada en Vyatta ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://knowledgelayer.softlayer.com/procedure/basic-configuration-vyatta).
+
+3. Para habilitar una conexión VPN utilizando Vyatta, [configure IPSec en Vyatta ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://knowledgelayer.softlayer.com/procedure/how-configure-ipsec-vyatta).
+
+Para obtener más información, consulte este artículo del blog sobre cómo [conectar un clúster a un centro de datos local ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/).
 
 ## Configuración de la conectividad de VPN con el diagrama de Helm del servicio VPN IPSec de strongSwan
 {: #vpn-setup}
 
-Utilice un diagrama de Helm para configurar y desplegar el servicio VPN IPSec de strongSwan dentro de un pod de Kubernetes. Todo el tráfico de VPN se direcciona a través de este pod.
+Utilice un diagrama de Helm para configurar y desplegar el servicio VPN IPSec de strongSwan dentro de un pod de Kubernetes.
 {:shortdesc}
 
-Para obtener más información sobre los mandatos Helm que se utilizan para configurar el diagrama de strongSwan, consulte la <a href="https://docs.helm.sh/helm/" target="_blank">documentación de Helm <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>.
+Puesto que strongSwan está integrado en su clúster, no necesita un dispositivo de pasarela externo. Cuando se establece una conectividad de VPN, las rutas se configuran automáticamente en todos los nodos trabajadores del clúster. Estas rutas permiten la conectividad bidireccional a través del túnel VPN entre pods en cualquier nodo trabajador y el sistema remoto. Por ejemplo, en el diagrama siguiente se muestra cómo una app en {{site.data.keyword.containershort_notm}} puede comunicarse con un servidor local a través de una conexión VPN strongSwan: 
 
+<img src="images/cs_vpn_strongswan.png" width="700" alt="Exponer una app en {{site.data.keyword.containershort_notm}} mediante la utilización de un equilibrador de carga" style="width:700px; border-style: none"/>
+
+1. Una app en el clúster, `myapp`, recibe una solicitud desde un servicio Ingress o LoadBalancer. Dicha app debe conectarse de forma segura a los datos en su red local. 
+
+2. La solicitud al centro de datos local se reenvía al pod de VPN de IPSec strongSwan. La dirección IP de destino se utiliza para determinar qué paquetes de red deben enviarse al pod de VPN de IPSec strongSwan. 
+
+3. La solicitud se cifra y envía a través del túnel VPN al centro de datos local.
+
+4. La solicitud entrante pasa a través del cortafuegos local y se entrega al punto final de túnel VPN (direccionador) donde se descifra. 
+
+5. El punto final de túnel VPN (direccionador) reenvía la solicitud al servidor o sistema principal local dependiendo de la dirección IP de destino especificada en el paso 2. Los datos necesarios se envían a través de la conexión VPN a `myapp` mediante el mismo proceso. 
 
 ### Configurar el diagrama de Helm de strongSwan
 {: #vpn_configure}
 
 Antes de empezar:
-* Debe instalar una pasarela VPN IPsec en el centro de datos local.
-* [Cree un clúster estándar](cs_clusters.html#clusters_cli) o [actualice un clúster existente a la versión 1.7.4 o posterior](cs_cluster_update.html#master).
+* [Instale una pasarela de VPN IPSec en su centro de datos local](/docs/infrastructure/iaas-vpn/set-up-ipsec-vpn.html#setting-up-an-ipsec-connection).
+* [Cree un clúster estándar](cs_clusters.html#clusters_cli) o [actualice un clúster existente a la versión 1.7.16 o posterior](cs_cluster_update.html#master).
 * El clúster debe tener disponible al menos una dirección IP del equilibrador de carga público. [Puede comprobar las direcciones IP públicas disponibles](cs_subnets.html#manage) o [liberar una dirección IP usada](cs_subnets.html#free).
 * [Defina el clúster como destino de la CLI de Kubernetes](cs_cli_install.html#cs_cli_configure).
+
+Para obtener más información sobre los mandatos Helm que se utilizan para configurar el diagrama de strongSwan, consulte la <a href="https://docs.helm.sh/helm/" target="_blank">documentación de Helm <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a>.
 
 Para configurar el diagrama de Helm:
 
@@ -64,23 +107,26 @@ Para configurar el diagrama de Helm:
     <table>
     <col width="22%">
     <col width="78%">
-    <caption>Visión general de los componentes del archivo YAML</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Visión general de los componentes del archivo YAML</th>
     </thead>
     <tbody>
     <tr>
     <td><code>localSubnetNAT</code></td>
-    <td>NAT (conversión de direcciones de red) para subredes supone una solución temporal para los conflictos de subred entre las redes locales e in situ. Puede utilizar NAT para volver a correlacionar las subredes IP locales privadas del clúster, la subred del pod (172.30.0.0/16) o la subred del servicio del pod (172.21.0.0/16) a una subred privada diferente. El túnel VPN ve subredes IP correlacionadas en lugar de las subredes originales. La correlación ocurre antes de que los paquetes se envíen a través del túnel VPN, así como después de que lleguen del túnel VPN. Puede exponer las redes correlacionadas y las no correlacionadas al mismo tiempo a través de la VPN.<br><br>Para habilitar NAT, puede añadir una subred entera o direcciones IP individuales. Si añade toda una subred (en el formato <code>10.171.42.0/24=10.10.10.0/24</code>), la correlación es de 1 a 1: todas las direcciones IP de la subred de red interna se correlacionan con la subred de red externa, y viceversa. Si añade direcciones IP individuales (en el formato <code>10.171.42.17/32=10.10.10.2/32,10.171.42.29/32=10.10.10.3/32</code>), sólo las direcciones IP internas se correlacionan con las direcciones IP externas especificadas.<br><br>Si utiliza esta opción, la subred local que se expone a través de la conexión VPN es la subred "externa" con la que se correlaciona la subred "interna".
+    <td>NAT (conversión de direcciones de red) para subredes supone una solución temporal para los conflictos de subred entre las redes locales e in situ. Puede utilizar NAT para volver a correlacionar las subredes IP locales privadas del clúster, la subred del pod (172.30.0.0/16) o la subred del servicio del pod (172.21.0.0/16) a una subred privada diferente. El túnel VPN ve subredes IP correlacionadas en lugar de las subredes originales. La correlación ocurre antes de que los paquetes se envíen a través del túnel VPN, así como después de que lleguen del túnel VPN. Puede exponer las redes correlacionadas y las no correlacionadas al mismo tiempo a través de la VPN.<br><br>Para habilitar NAT, puede añadir una subred entera o direcciones IP individuales. Si añade toda una subred (en el formato <code>10.171.42.0/24=10.10.10.0/24</code>), la correlación es de 1 a 1: todas las direcciones IP de la subred de red interna se correlacionan con la subred de red externa, y viceversa. Si añade direcciones IP individuales (en el formato <code>10.171.42.17/32=10.10.10.2/32, 10.171.42.29/32=10.10.10.3/32</code>), sólo las direcciones IP internas se correlacionan con las direcciones IP externas especificadas.<br><br>Si utiliza esta opción, la subred local que se expone a través de la conexión VPN es la subred "externa" con la que se correlaciona la subred "interna".
     </td>
     </tr>
     <tr>
     <td><code>loadBalancerIP</code></td>
-    <td>Añada una dirección IP pública portátil de una subred que esté asignada a este clúster que desea utilizar para el servicio VPN de strongSwan. Si la conexión VPN se inicia desde la pasarela local (<code>ipsec.auto</code> se establece en <code>add</code>), puede utilizar esta propiedad para configurar una dirección IP pública persistente en la pasarela local para el clúster. Este valor es opcional.</td>
+    <td>Si desea especificar una dirección IP pública portátil para el servicio VPN strongSwan para las conexiones VPN entrantes, añada dicha dirección IP. Especificar una dirección IP es útil cuando necesita una dirección IP estable como, por ejemplo, cuando debe designar las direcciones IP permitidas a través de un cortafuegos local. <br><br>Para ver las direcciones IP públicas portátiles disponibles asignadas a este clúster, consulte [gestión de subredes y direcciones IP](cs_subnets.html#manage). Si deja este valor en blanco, se utilizará una dirección IP pública portátil gratuita. Si la conexión VPN se inicia desde la pasarela local (<code>ipsec.auto</code> se establece en <code>add</code>), puede utilizar esta propiedad para configurar una dirección IP pública persistente en la pasarela local para el clúster. </td>
+    </tr>
+    <tr>
+    <td><code>connectUsingLoadBalancerIP</code></td>
+    <td>Utilice la dirección IP del equilibrador de carga que ha añadido en <code>loadBalancerIP</code> para establecer también la conexión VPN de salida. Si esta opción está habilitada, todos los nodos trabajadores del clúster deben estar en la misma VLAN pública. De lo contrario, debe utilizar el valor <code>nodeSelector</code> para asegurarse de que el pod de VPN se despliega en un nodo trabajador en la misma VLAN pública que <code>loadBalancerIP</code>. Esta opción se ignora si <code>ipsec.auto</code> se establece en <code>add</code>. <p>Valores aceptados:</p><ul><li><code>"false"</code>: No conectarse a la VPN utilizando la dirección IP del equilibrador de carga. En su lugar, se utiliza la dirección IP pública del nodo trabajador en el que se está ejecutando el pod de VPN. </li><li><code>"true"</code>: Establece la VPN utilizando la dirección IP del equilibrador de carga como la dirección IP de origen local. Si <code>loadBalancerIP</code> no está establecido, se utiliza la dirección IP externa asignada al servicio de equilibrio de carga. </li><li><code>"auto"</code>: Cuando <code>ipsec.auto</code> está establecido en <code>start</code> y se ha establecido <code>loadBalancerIP</code>, establece la VPN utilizando la dirección IP del equilibrador de carga como la dirección IP de origen local. </li></ul></td>
     </tr>
     <tr>
     <td><code>nodeSelector</code></td>
-    <td>Para limitar los nodos en los que se despliega el pod de VPN de strongSwan, añada la dirección IP de un nodo trabajador específico o una etiqueta de nodo trabajador. Por ejemplo, el valor <code>kubernetes.io/hostname: 10.184.110.141</code> restringe la ejecución del pod de VPN a ese nodo trabajador sólo. El valor <code>strongswan: vpn</code> restringe la ejecución del pod de VPN a los nodos trabajadores que tengan esa etiqueta. Puede utilizar cualquier etiqueta de nodo trabajador, pero se recomienda que utilice: <code>strongswan: &lt;release_name&gt;</code> para que puedan utilizarse nodos trabajadores diferentes con despliegues diferentes de este diagrama.<br><br>Si el clúster inicia la conexión VPN (<code>ipsec.auto</code> se establece en <code>start</code>), puede utilizar esta propiedad para limitar las direcciones IP de origen de la conexión VPN que se muestran a la pasarela local. Este valor es opcional.</td>
+    <td>Para limitar los nodos en los que se despliega el pod de VPN de strongSwan, añada la dirección IP de un nodo trabajador específico o una etiqueta de nodo trabajador. Por ejemplo, el valor <code>kubernetes.io/hostname: 10.xxx.xx.xxx</code> restringe la ejecución del pod de VPN a ese nodo trabajador sólo. El valor <code>strongswan: vpn</code> restringe la ejecución del pod de VPN a los nodos trabajadores que tengan esa etiqueta. Puede utilizar cualquier etiqueta de nodo trabajador, pero se recomienda que utilice: <code>strongswan: &lt;release_name&gt;</code> para que puedan utilizarse nodos trabajadores diferentes con despliegues diferentes de este diagrama.<br><br>Si el clúster inicia la conexión VPN (<code>ipsec.auto</code> se establece en <code>start</code>), puede utilizar esta propiedad para limitar las direcciones IP de origen de la conexión VPN que se muestran a la pasarela local. Este valor es opcional.</td>
     </tr>
     <tr>
     <td><code>ipsec.keyexchange</code></td>
@@ -88,11 +134,11 @@ Para configurar el diagrama de Helm:
     </tr>
     <tr>
     <td><code>ipsec.esp</code></td>
-    <td>Añada la lista de algoritmos de autenticación/cifrado de ESP que el punto final de túnel VPN local utiliza para la conexión. Este valor es opcional. Si deja este campo en blanco, se utilizan para la conexión los algoritmos predeterminados de strongSwan <code>aes128-sha1,3des-sha1</code>.</td>
+    <td>Añada la lista de algoritmos de autenticación y cifrado de ESP que el punto final de túnel de VPN local utiliza para la conexión. <ul><li>Si <code>ipsec.keyexchange</code> se establece en <code>ikev1</code>, se debe especificar este valor. </li><li>Si <code>ipsec.keyexchange</code> se establece en <code>ikev2</code>, este valor es opcional. Si deja este valor en blanco, se utilizan para la conexión los algoritmos predeterminados de strongSwan <code>aes128-sha1,3des-sha1</code>.</li></ul></td>
     </tr>
     <tr>
     <td><code>ipsec.ike</code></td>
-    <td>Añada la lista de algoritmos de autenticación/cifrado de IKE/ISAKMP SA que el punto final de túnel VPN local utiliza para la conexión. Este valor es opcional. Si deja este campo en blanco, se utilizan para la conexión los algoritmos predeterminados de strongSwan <code>aes128-sha1-modp2048,3des-sha1-modp1536</code>.</td>
+    <td>Añada la lista de algoritmos de autenticación y cifrado IKE/ISAKMP SA que el punto final de túnel de VPN local utiliza para la conexión. <ul><li>Si <code>ipsec.keyexchange</code> se establece en <code>ikev1</code>, se debe especificar este valor. </li><li>Si <code>ipsec.keyexchange</code> se establece en <code>ikev2</code>, este valor es opcional. Si deja este valor en blanco, se utilizan para la conexión los algoritmos predeterminados de strongSwan <code>aes128-sha1-modp2048,3des-sha1-modp1536</code>. </li></ul></td>
     </tr>
     <tr>
     <td><code>ipsec.auto</code></td>
@@ -100,7 +146,7 @@ Para configurar el diagrama de Helm:
     </tr>
     <tr>
     <td><code>local.subnet</code></td>
-    <td>Cambie este valor a la lista de CIDR de subred del clúster que se va a exponer a través de la conexión VPN a la red local. Esta lista puede incluir las subredes siguientes: <ul><li>El CIDR de subred del pod de Kubernetes: <code>172.30.0.0/16</code></li><li>El CIDR de subred del servicio de Kubernetes: <code>172.21.0.0/16</code></li><li>Si las apps están expuestas por un servicio NodePort en una red privada, el CIDR de subred privada del nodo trabajador. Para encontrar este valor, ejecute <code>bx cs subnets | grep <xxx.yyy.zzz></code>, donde <code>&lt;xxx.yyy.zzz&gt;</code> son los tres primeros octetos de la dirección IP privada del nodo trabajador.</li><li>Si tiene apps expuestas por los servicios de LoadBalancer en la red privada, el CIDR de subred privada o gestionada por el usuario del clúster. Para encontrar estos valores, ejecute <code>bx cs cluster-get <cluster name> --showResources</code>. En la sección <b>VLANS</b>, busque CIDR que tengan los valores <b>Public</b> o <code>false</code>.</li></ul></td>
+    <td>Cambie este valor a la lista de CIDR de subred del clúster que se va a exponer a través de la conexión VPN a la red local. Esta lista puede incluir las subredes siguientes: <ul><li>El CIDR de subred del pod de Kubernetes: <code>172.30.0.0/16</code></li><li>El CIDR de subred del servicio de Kubernetes: <code>172.21.0.0/16</code></li><li>Si las apps están expuestas por un servicio NodePort en una red privada, el CIDR de subred privada del nodo trabajador. Recupere los tres primeros octetos de la dirección de IP privada de su trabajador ejecutando el mandato <code>bx cs worker &lt;cluster_name&gt;</code>. Por ejemplo, si es <code>&lt;10.176.48.xx&gt;</code>, anote <code>&lt;10.176.48&gt;</code>. A continuación, obtenga el CIDR de subred privado del trabajador ejecutando el siguiente mandato, sustituyendo <code>&lt;xxx.yyy.zz&gt;</code> con el octeto recuperado con anterioridad: <code>bx cs subnets | grep &lt;xxx.yyy.zzz&gt;</code>.</li><li>Si tiene apps expuestas por los servicios de LoadBalancer en la red privada, el CIDR de subred privada o gestionada por el usuario del clúster. Para encontrar estos valores, ejecute <code>bx cs cluster-get &lt;cluster_name&gt; --showResources</code>. En la sección **VLANS**, busque CIDR que tengan los valores **Public** o <code>false</code>.</li></ul>**Nota**: Si <code>ipsec.keyexchange</code> se establece en <code>ikev1</code>, solo puede especificar una subred. </td>
     </tr>
     <tr>
     <td><code>local.id</code></td>
@@ -111,7 +157,7 @@ Para configurar el diagrama de Helm:
     <td>Cambie este valor a la dirección IP pública de la pasarela VPN local. Cuando <code>ipsec.auto</code> se establece en <code>start</code>, este valor es obligatorio.</td>
     </tr>
     <td><code>remote.subnet</code></td>
-    <td>Cambie este valor a la lista de CIDR de subred privada local a la que pueden acceder los clústeres de Kubernetes.</td>
+    <td>Cambie este valor a la lista de CIDR de subred privada local a la que pueden acceder los clústeres de Kubernetes. **Nota**: Si <code>ipsec.keyexchange</code> se establece en <code>ikev1</code>, solo puede especificar una subred. </td>
     </tr>
     <tr>
     <td><code>remote.id</code></td>
@@ -179,9 +225,9 @@ Después de desplegar el diagrama de Helm, pruebe la conectividad de VPN.
 
     ```
     Security Associations (1 up, 0 connecting):
-    k8s-conn[1]: ESTABLISHED 17 minutes ago, 172.30.244.42[ibm-cloud]...192.168.253.253[on-premises]
+    k8s-conn[1]: ESTABLISHED 17 minutes ago, 172.30.xxx.xxx[ibm-cloud]...192.xxx.xxx.xxx[on-premises]
     k8s-conn{2}: INSTALLED, TUNNEL, reqid 12, ESP in UDP SPIs: c78cb6b1_i c5d0d1c3_o
-    k8s-conn{2}: 172.21.0.0/16 172.30.0.0/16 === 10.91.152.128/26
+    k8s-conn{2}: 172.21.0.0/16 172.30.0.0/16 === 10.91.152.xxx/26
     ```
     {: screen}
 
@@ -214,7 +260,6 @@ Después de desplegar el diagrama de Helm, pruebe la conectividad de VPN.
 
     {: #vpn_tests_table}
     <table>
-    <caption>Descripción de las pruebas de conectividad de VPN de Helm</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Descripción de las pruebas de conectividad de VPN de Helm</th>
     </thead>
@@ -382,3 +427,4 @@ Puede inhabilitar la conexión VPN suprimiendo el diagrama de Helm.
   helm delete --purge <release_name>
   ```
   {: pre}
+

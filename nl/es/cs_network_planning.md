@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -16,7 +16,7 @@ lastupdated: "2018-03-16"
 {:download: .download}
 
 
-# Planificación del trabajo en red externo
+# Planificación de red con servicios NodePort, LoadBalancer o Ingress
 {: #planning}
 
 Cuando crea un clúster de Kubernetes en {{site.data.keyword.containerlong}}, cada clúster debe estar conectado a una VLAN pública. La VLAN pública determina la dirección IP pública que se asigna a un nodo trabajador durante la creación del clúster.
@@ -28,7 +28,6 @@ La interfaz de red pública para los nodos trabajadores tanto en clústeres grat
 |------------|------------------------------------------|
 |Clústeres gratuitos en {{site.data.keyword.Bluemix_notm}}|{{site.data.keyword.IBM_notm}}|
 |Clústeres estándares en {{site.data.keyword.Bluemix_notm}}|En la cuenta de infraestructura de IBM Cloud (SoftLayer)|
-{: caption="Responsabilidades de la gestión de VLAN" caption-side="top"}
 
 Para obtener información sobre la comunicación de red segura entre nodos trabajadores y pods, consulte [Redes en clúster](cs_secure.html#in_cluster_network). Para obtener información sobre la conexión segura de apps que se ejecutan en un clúster de Kubernetes a una red local o a otras apps externas al clúster, consulte [Configuración de la conectividad de VPN](cs_vpn.html).
 
@@ -67,8 +66,9 @@ El diagrama muestra cómo Kubernetes lleva el tráfico de red de usuario en {{si
  <ul>
   <li>Exponga varias apps en el clúster creando un equilibrador de carga HTTP o HTTPS, TCP o UDP externo que utilice un punto de entrada público seguro y exclusivo para direccionar las solicitudes entrantes a las apps.</li>
   <li>Puede utilizar una ruta pública para exponer varias apps en el clúster como servicios.</li>
-  <li>Ingress consta de dos componentes principales: el recurso de Ingress y el equilibrador de carga de aplicación.
-   <ul>
+  <li>Ingress consta de dos componentes:
+
+<ul>
     <li>El recurso de Ingress define las reglas sobre cómo direccionar y equilibrar la carga de las solicitudes de entrada para una app.</li>
     <li>El equilibrador de carga de aplicación (ALB) escucha solicitudes de entrada de servicio HTTP o HTTPS, TCP o UDP y reenvía las solicitudes a los pods de las apps según las reglas definidas en el recurso de Ingress.</li>
    </ul>
@@ -80,7 +80,8 @@ Para seleccionar la mejor opción de red para su aplicación, puede seguir este 
 
 <img usemap="#networking_map" border="0" class="image" src="images/networkingdt.png" width="500px" alt="Esta imagen le guía para elegir la mejor opción de red para la aplicación. Si esta imagen no se muestra, la información puede encontrarse en la documentación." style="width:500px;" />
 <map name="networking_map" id="networking_map">
-<area href="/docs/containers/cs_nodeport.html#planning" alt="Servicio NodePort" shape="circle" coords="52, 283, 45"/>
-<area href="/docs/containers/cs_loadbalancer.html#planning" alt="servicio LoadBalancer" shape="circle" coords="247, 419, 44"/>
-<area href="/docs/containers/cs_ingress.html#planning" alt="Servicio Ingress" shape="circle" coords="445, 420, 45"/>
+<area href="/docs/containers/cs_nodeport.html" alt="Servicio NodePort" shape="circle" coords="52, 283, 45"/>
+<area href="/docs/containers/cs_loadbalancer.html" alt="servicio LoadBalancer" shape="circle" coords="247, 419, 44"/>
+<area href="/docs/containers/cs_ingress.html" alt="Servicio Ingress" shape="circle" coords="445, 420, 45"/>
 </map>
+

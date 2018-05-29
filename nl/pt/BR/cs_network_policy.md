@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-27"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -49,7 +49,6 @@ As políticas padrão não são aplicadas a pods diretamente; elas são aplicada
 
 
  <table summary="A primeira linha na tabela abrange ambas as colunas. O resto das linhas deve ser lido da esquerda para a direita, com o local do servidor na coluna um e os endereços IP a serem correspondidos na coluna dois.">
- <caption>Políticas padrão para cada cluster</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> Políticas padrão para cada cluster</th>
   </thead>
@@ -115,7 +114,7 @@ mudanças de caminho de arquivo ao executar comandos posteriormente.
             -   Linux:
 
               ```
-              mv /<path_to_file>/calicoctl /usr/local/bin/calicoctl
+              Mv filepath /calicoctl /usr/local/bin/calicoctl
               ```
               {: pre}
 
@@ -123,7 +122,7 @@ mudanças de caminho de arquivo ao executar comandos posteriormente.
 X:
 
               ```
-              mv /<path_to_file>/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
+              Mv filepath/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
               ```
               {: pre}
 
@@ -176,7 +175,7 @@ X:
         ```
         {: codeblock}
 
-        1.  Recupere o `<ETCD_URL>`. Se este comando falhar com um erro `calico-config not found`, consulte este [tópico de resolução de problemas](cs_troubleshoot.html#cs_calico_fails).
+        1.  Recupere o `<ETCD_URL>`. Se este comando falhar com um erro `calico-config not found`, consulte este [tópico de resolução de problemas](cs_troubleshoot_network.html#cs_calico_fails).
 
           -   Linux e OS X:
 
@@ -188,14 +187,14 @@ X:
           -   Exemplo de saída:
 
               ```
-              https://169.1.1.1:30001
+              Https://169.xx.xxx.xxx:30001
               ```
               {: screen}
 
           -   Windows:
             <ol>
             <li>Obtenha os valores de configuração calico do mapa de configuração. </br><pre class="codeblock"><code>kubectl get cm -n kube-system calico-config -o yaml</code></pre></br>
-            <li>Na seção de `dados`, localize o valor etcd_endpoints. Exemplo: <code>https://169.1.1.1:30001</code>
+            <li>Na seção de `dados`, localize o valor etcd_endpoints. Exemplo: <code>https://169.xx.xxx.xxx:30001</code>
             </ol>
 
         2.  Recupere o `<CERTS_DIR>`, o diretório no qual os certificados do Kubernetes são transferidos por download.
@@ -224,7 +223,7 @@ X:
                 Exemplo de saída:
 
               ```
-              C:/Users/<user>/.bluemix/plugins/container-service/<cluster_name>-admin/kube-config-prod-<location>-<cluster_name>.yml
+              C: /Users/ < user>-service/mycluster-admin/kube-config-prod-dal10-mycluster.yml
               ```
               {: screen}
 
@@ -256,7 +255,7 @@ corretamente.
             -   Windows:
 
               ```
-              calicoctl get nodes --config=<path_to_>/calicoctl.cfg
+              Calicoctl get nodes -- config=filepath/calicoctl.cfg
               ```
               {: pre}
 
@@ -308,14 +307,14 @@ corretamente.
         -   Linux e OS X:
 
           ```
-          calicoctl apply -f <policy_file_name.yaml>
+          Policy.yaml calicoctl apply -f
           ```
           {: pre}
 
         -   Windows:
 
           ```
-          calicoctl apply -f <path_to_>/<policy_file_name.yaml> --config=<path_to_>/calicoctl.cfg
+          Filepath/policy.yaml apply -f calicoctl -- config=filepath/calicoctl.cfg
           ```
           {: pre}
 
@@ -377,3 +376,4 @@ política de rede Calico ![Ícone de link externo](../icons/launch-glyph.svg "Í
   calicoctl apply -f deny-kube-node-port-services.yaml
   ```
   {: pre}
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -24,3 +24,4 @@ lastupdated: "2018-01-11"
  - [使用集群的优点](cs_why.html#benefits)
  - [服务体系结构](cs_tech.html#architecture)
  - [容器滥用](cs_why.html#terms)
+

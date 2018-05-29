@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-13"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -16,15 +16,16 @@ lastupdated: "2018-03-13"
 {:download: .download}
 
 
-# LoadBalancer-Services einrichten
+# Apps mit LoadBalancers zugänglich machen
 {: #loadbalancer}
 
-Machen Sie einen Port zugänglich und verwenden Sie eine portierbare IP-Adresse für die Lastausgleichsfunktion (Load Balancer), um auf eine containerisierte App zuzugreifen. {:shortdesc}
+Machen Sie einen Port zugänglich und verwenden Sie eine portierbare IP-Adresse für die Lastausgleichsfunktion (Load Balancer), um auf eine containerisierte App zuzugreifen.
+{:shortdesc}
 
-## Externen Netzbetrieb mit LoadBalancer-Services planen
+## Netzverkehr mithilfe von LoadBalancers verwalten
 {: #planning}
 
-Wenn Sie einen Standardcluster erstellen, fordert {{site.data.keyword.containershort_notm}} automatisch fünf portierbare öffentliche IP-Adressen und fünf portierbare private IP-Adressen an und richtet diese bei der Erstellung des Clusters in Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) ein. Zwei der portierbaren IP-Adressen (eine öffentliche und eine private) werden für [Ingress-Lastausgleichsfunktionen für Anwendungen](cs_ingress.html#planning) verwendet. Vier portierbare öffentliche und vier portierbare private IP-Adressen können verwendet werden, um Apps verfügbar zu machen, indem Sie einen LoadBalancer-Service erstellen.
+Wenn Sie einen Standardcluster erstellen, fordert {{site.data.keyword.containershort_notm}} automatisch fünf portierbare öffentliche IP-Adressen und fünf portierbare private IP-Adressen an und richtet diese bei der Erstellung des Clusters in Ihrem Konto von IBM Cloud Infrastructure (SoftLayer) ein. Zwei der portierbaren IP-Adressen (eine öffentliche und eine private) werden für [Ingress-Lastausgleichsfunktionen für Anwendungen](cs_ingress.html) verwendet. Vier portierbare öffentliche und vier portierbare private IP-Adressen können verwendet werden, um Apps verfügbar zu machen, indem Sie einen LoadBalancer-Service erstellen.
 
 Wenn Sie einen Kubernetes-LoadBalancer-Service in einem Cluster in einem öffentlichen VLAN erstellen, wird eine externe Lastausgleichsfunktion erstellt. Ihre Optionen für IP-Adressen bei Erstellung eines LoadBalancer-Service lauten wie folgt:
 
@@ -34,15 +35,15 @@ Wenn Sie einen Kubernetes-LoadBalancer-Service in einem Cluster in einem öffent
 
 Die dem LoadBalancer-Service zugewiesene portierbare öffentliche IP-Adresse ist dauerhaft und ändert sich nicht, wenn ein Workerknoten entfernt oder neu erstellt wird. Dadurch bietet der LoadBalancer-Service eine höhere Verfügbarkeit als der NodePort-Service. Anders als bei NodePort-Services können Sie Ihrer Lastausgleichsfunktion jeden beliebigen Port zuweisen und sind dabei nicht an einen bestimmten Portnummernbereich gebunden. Wenn Sie einen LoadBalancer-Service verwenden, steht für jede IP-Adresse aller Workerknoten auch ein Knotenport zur Verfügung. Informationen zum Blockieren des Zugriffs auf den Knotenport während der Nutzung eines LoadBalancer-Service finden Sie in [Eingehenden Datenverkehr blockieren](cs_network_policy.html#block_ingress).
 
-Der LoadBalancer-Service fungiert als externer Einstiegspunkt für eingehende Anforderungen an die App. Um vom Internet aus auf den LoadBalancer-Service zuzugreifen, können Sie die öffentliche IP-Adresse Ihrer Lastausgleichsfunktion in Verbindung mit der zugewiesenen Portnummer im Format `<ip_address>:<port>`. Das folgende Diagramm veranschaulicht, wie eine Lastausgleichsfunktion die Kommunikation vom Internet an eine App leitet:
+Der LoadBalancer-Service fungiert als externer Einstiegspunkt für eingehende Anforderungen an die App. Um vom Internet aus auf den LoadBalancer-Service zuzugreifen, können Sie die öffentliche IP-Adresse Ihrer Lastausgleichsfunktion in Verbindung mit der zugewiesenen Portnummer im Format `<IP_address>:<port>`. Das folgende Diagramm veranschaulicht, wie eine Lastausgleichsfunktion die Kommunikation vom Internet an eine App leitet:
 
 <img src="images/cs_loadbalancer_planning.png" width="550" alt="Stellen Sie ein App in {{site.data.keyword.containershort_notm}} bereit, indem Sie eine Lastausgleichsfunktion verwenden" style="width:550px; border-style: none"/>
 
-1. Eine Anforderung wird an Ihre App gesendet, indem die öffentliche IP-Adresse Ihrer Lastausgleichsfunktion und der zugeordnete Port auf dem Workerknoten verwendet wird.
+1. Eine Anforderung wird an Ihre App gesendet, indem die öffentliche IP-Adresse Ihrer Lastausgleichsfunktion und der zugewiesene Port auf dem Workerknoten verwendet wird.
 
-2. Die Anforderung wird automatisch an die interne Cluster-IP-Adresse und den internen Port des Service für die Lastausgleichsfunktion weitergeleitet. Auf die interne Cluster-IP-Adresse kann nur aus dem Cluster selbst heraus zugegriffen werden. 
+2. Die Anforderung wird automatisch an die interne Cluster-IP-Adresse und den internen Port des Service für die Lastausgleichsfunktion weitergeleitet. Auf die interne Cluster-IP-Adresse kann nur aus dem Cluster selbst heraus zugegriffen werden.
 
-3. `kube-proxy` leitet die Anforderung an den Kubernetes-Service für die Lastausgleichsfunktion für die App weiter. 
+3. `kube-proxy` leitet die Anforderung an den Kubernetes-Service für die Lastausgleichsfunktion für die App weiter.
 
 4. Die Anforderung wird an die private IP-Adresse des Pods weitergeleitet, auf dem die App bereitgestellt wird. Wenn mehrere App-Instanzen im Cluster bereitgestellt werden, leitet die Lastausgleichsfunktion die Anforderungen zwischen den App-Pods weiter.
 
@@ -54,7 +55,7 @@ Der LoadBalancer-Service fungiert als externer Einstiegspunkt für eingehende An
 
 
 
-## Zugriff auf eine App mit einer Lastausgleichsfunktion konfigurieren
+## Öffentlichen oder privaten Zugriff auf eine App mithilfe eines LoadBalancer-Service aktivieren
 {: #config}
 
 Vorbemerkungen:
@@ -80,7 +81,7 @@ Gehen Sie wie folgt vor, um einen Service für die Lastausgleichsfunktion zu ers
         apiVersion: v1
         kind: Service
         metadata:
-          name: <mein_service>
+          name: myloadbalancer
         spec:
           type: LoadBalancer
           selector:
@@ -97,33 +98,28 @@ Gehen Sie wie folgt vor, um einen Service für die Lastausgleichsfunktion zu ers
         apiVersion: v1
         kind: Service
         metadata:
-          name: <mein_service>
+          name: myloadbalancer
           annotations:
             service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <öffentlich_oder_privat>
         spec:
           type: LoadBalancer
           selector:
-            <selektorschlüssel>:<selektorwert>
+            <selektorschlüssel>: <selektorwert>
           ports:
            - protocol: TCP
              port: 8080
-          loadBalancerIP: <private_ip-adresse>
+          loadBalancerIP: <ip-adresse>
         ```
         {: codeblock}
 
         <table>
-        <caption>Erklärung der Komponenten der LoadBalancer-Servicedatei</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
         </thead>
         <tbody>
         <tr>
-          <td><code>name</code></td>
-          <td>Ersetzen Sie <em>&lt;mein_service&gt;</em> durch den Namen für Ihren Lastenausgleichsservice.</td>
-        </tr>
-        <tr>
           <td><code>selector</code></td>
-          <td>Geben Sie das Paar aus Kennzeichnungsschlüssel (<em>&lt;selektorschlüssel&gt;</em>) und Wert (<em>&lt;selektorwert&gt;</em>) ein, das Sie für die Ausrichtung auf die Pods, in denen Ihre App ausgeführt wird, verwenden möchten. Wenn Sie beispielsweise den Selektor <code>app: code</code> verwenden, werden alle Pods, die diese Bezeichnung in den Metadaten aufweisen, in den Lastausgleich einbezogen. Geben Sie dieselbe Bezeichnung ein, die Sie verwendet haben, als Sie Ihre App dem Cluster bereitgestellt haben. </td>
+          <td>Geben Sie das Paar aus Kennzeichnungsschlüssel (<em>&lt;selektorschlüssel&gt;</em>) und Wert (<em>&lt;selektorwert&gt;</em>) ein, das Sie für die Ausrichtung auf die Pods, in denen Ihre App ausgeführt wird, verwenden möchten. Um Ihre Pods anzusprechen und in den Servicelastausgleich einzubeziehen, müssen Sie sicherstellen, dass der <em>&lt;selektorschlüssel&gt;</em> und der <em>&lt;selektorwert&gt;</em> mit dem Schlüssel/Wert-Paar übereinstimmen, das Sie im Abschnitt <code>spec.template.metadata.labels</code> Ihrer yaml-Bereitstellungsdatei verwendet haben. </td>
         </tr>
         <tr>
           <td><code>port</code></td>
@@ -131,15 +127,15 @@ Gehen Sie wie folgt vor, um einen Service für die Lastausgleichsfunktion zu ers
         </tr>
         <tr>
           <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:`
-          <td>Annotation zur Angabe des LoadBalancer-Typs. Die Werte sind `Privat` und `Öffentlich`. Bei der Erstellung eines öffentlichen LoadBalancers in Clustern in öffentlichen VLANs ist diese Annotation nicht erforderlich.</td>
+          <td>Annotation zur Angabe des LoadBalancer-Typs. Zulässige Werte sind `private` und `public`. Bei der Erstellung eines öffentlichen LoadBalancers in Clustern in öffentlichen VLANs ist diese Annotation nicht erforderlich.</td>
         </tr>
         <tr>
           <td><code>loadBalancerIP</code></td>
-          <td>Um eine private Lastausgleichsfunktion zu erstellen oder um eine bestimmte portierbare IP-Adresse für eine öffentliche Lastausgleichsfunktion zu verwenden, ersetzen Sie <em>&lt;loadBalancerIP&gt;</em> durch die IP-Adresse, die Sie verwenden wollen. Weitere Informationen enthält die [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer).</td>
+          <td>Um einen privaten LoadBalancer zu erstellen oder um eine bestimmte portierbare IP-Adresse für einen öffentlichen LoadBalancer zu verwenden, ersetzen Sie <em>&lt;ip-adresse&gt;</em> durch die IP-Adresse, die Sie verwenden wollen. Weitere Informationen enthält die [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer).</td>
         </tr>
         </tbody></table>
 
-    3.  Optional: Konfigurieren Sie eine Firewall, indem Sie `loadBalancerSourceRanges` im Spezifikationsabschnitt angeben. Weitere Informationen enthält die [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
+    3.  Optional: Konfigurieren Sie eine Firewall, indem Sie `loadBalancerSourceRanges` im Abschnitt **spec** angeben. Weitere Informationen enthält die [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
 
     4.  Erstellen Sie den Service in Ihrem Cluster.
 
@@ -148,12 +144,12 @@ Gehen Sie wie folgt vor, um einen Service für die Lastausgleichsfunktion zu ers
         ```
         {: pre}
 
-        Wenn der Lastenausgleichsservice erstellt wird, wird der Lastenausgleichsfunktion automatisch eine portierbare IP-Adresse zugeordnet. Ist keine portierbare IP-Adresse verfügbar, schlägt die Erstellung Ihres Lastenausgleichsservice fehl.
+        Wenn der Lastenausgleichsservice erstellt wird, wird der Lastenausgleichsfunktion automatisch eine portierbare IP-Adresse zugewiesen. Ist keine portierbare IP-Adresse verfügbar, schlägt die Erstellung Ihres Lastenausgleichsservice fehl.
 
-3.  Stellen Sie sicher, dass der Lastenausgleichsservice erstellt wurde. Ersetzen Sie _&lt;mein_service&gt;_ durch den Namen des Lastenausgleichsservice, den Sie im vorherigen Schritt erstellt haben.
+3.  Stellen Sie sicher, dass der Lastenausgleichsservice erstellt wurde.
 
     ```
-    kubectl describe service <mein_service>
+    kubectl describe service myloadbalancer
     ```
     {: pre}
 
@@ -162,33 +158,205 @@ Gehen Sie wie folgt vor, um einen Service für die Lastausgleichsfunktion zu ers
     CLI-Beispielausgabe:
 
     ```
-    Name:                   <mein_service>
+    Name:                   myloadbalancer
     Namespace:              default
-    Labels:                 <keine>
-    Selector:               <selectorschlüssel>=<selektorwert>
+    Labels:                 <none>
+    Selector:               app=liberty
     Type:                   LoadBalancer
     Location:               dal10
-    IP:                     10.10.10.90
-    LoadBalancer Ingress:   192.168.10.38
+    IP:                     172.21.xxx.xxx
+    LoadBalancer Ingress:   169.xx.xxx.xxx
     Port:                   <unset> 8080/TCP
     NodePort:               <unset> 32040/TCP
-    Endpoints:              172.30.171.87:8080
+    Endpoints:              172.30.xxx.xxx:8080
     Session Affinity:       None
     Events:
-    FirstSeen	LastSeen	Count	From			SubObjectPath	Type		Reason			Message
-      ---------	--------	-----	----			-------------	--------	------			-------
-      10s		10s		1	{service-controller }			Normal		CreatingLoadBalancer	Creating load balancer
-      10s		10s		1	{service-controller }			Normal		CreatedLoadBalancer	Created load balancer
+      FirstSeen	LastSeen	Count	From			SubObjectPath	Type	 Reason			          Message
+      ---------	--------	-----	----			-------------	----	 ------			          -------
+      10s		    10s		    1	    {service-controller }	  Normal CreatingLoadBalancer	Creating load balancer
+      10s		    10s		    1	    {service-controller }		Normal CreatedLoadBalancer	Created load balancer
     ```
     {: screen}
 
-    Die IP-Adresse für **LoadBalancer Ingress** ist die portierbare IP-Adresse, die dem Lastenausgleichsservice zugeordnet wurde.
+    Die IP-Adresse für **LoadBalancer Ingress** ist die portierbare IP-Adresse, die dem Lastenausgleichsservice zugewiesen wurde.
 
 4.  Wenn Sie eine öffentliche Lastausgleichsfunktion erstellt haben, dann greifen Sie über das Internet auf Ihre App zu.
     1.  Öffnen Sie Ihren bevorzugten Web-Browser.
-    2.  Geben Sie die portierbare öffentliche IP-Adresse der Lastausgleichsfunktion und des Ports ein. Im obigen Beispiel wurde dem Service für die Lastausgleichsfunktion die portierbare öffentliche IP-Adresse `192.168.10.38` zugeordnet.
+    2.  Geben Sie die portierbare öffentliche IP-Adresse der Lastausgleichsfunktion und des Ports ein.
 
         ```
-        http://192.168.10.38:8080
+        http://169.xx.xxx.xxx:8080
         ```
         {: codeblock}
+
+5. Wenn Sie die [Quellen-IP-Adresse des Eingangspakets beibehalten ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) möchten und über Edge-Knoten, rein private Workerknoten oder mehrere VLANs verfügen, müssen Sie sicherstellen, dass die App-Pods beim Lastausgleich einbezogen werden, indem Sie [Knotenaffinität und Tolerierungen zu App-Pods hinzufügen](#node_affinity_tolerations). 
+
+<br />
+
+
+## Knotenaffinität und Tolerierungen zu App-Pods für eine Quellen-IP hinzufügen
+{: #node_affinity_tolerations}
+
+Immer wenn Sie App-Pods bereitstellen, werden auch Lastausgleichsfunktions-Pods auf den Workerknoten bereitgestellt, auf denen sich die App-Pods befinden. Es kann jedoch vorkommen, dass die Lastausgleichsfunktions-Pods und die App-Pods nicht auf demselben Workerknoten geplant sind:
+{: shortdesc}
+
+* Sie verfügen Edge-Knoten, auf die ein Taint angewendet wurde und auf denen deshalb nur Lastausgleichsservice-Pods bereitgestellt werden können. App-Pods dürfen auf diesen Knoten nicht bereitgestellt werden. 
+* Ihr Cluster ist mit mehreren öffentlichen oder privaten VLANs verbunden und Ihre App-Pods werden unter Umständen auf Workerknoten bereitgestellt, die nur mit einem VLAN verbunden sind. Lastausgleichsservice-Pods lassen sich möglicherweise nicht auf solchen Workerknoten bereitstellen, weil die IP-Adresse der Lastausgleichsfunktion mit einem anderen VLAN als die Workerknoten verbunden ist. 
+
+Wenn eine Clientanforderung für Ihre App an Ihren Cluster gesendet wird, wird die Anforderung an einen Pod für den Kubernetes-Lastausgleichsservice weitergeleitet, der die App zugänglich macht. Wenn ein App-Pod nicht auf demselben Workernoten vorhanden ist wie der Lastausgleichsservice-Pod, leitet die Lastausgleichsfunktion die Anforderung an einen anderen Workerknoten weiter, auf dem kein App-Pod bereitgestellt ist. Die Quellen-IP-Adresse des Pakets wird in die öffentliche IP-Adresse des Workerknotens geändert, auf dem der App-Pod ausgeführt wird. 
+
+Wenn Sie die ursprüngliche Quellen-IP-Adresse der Clientanforderung beibehalten möchten, können Sie die [Quellen-IP ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) für Lastausgleichsservices aktivieren. Das Beibehalten der IP des Clients ist nützlich, z. B. wenn App-Server Sicherheits- und Zugriffssteuerungsrichtlinien genügen müssen. Nachdem Sie die Quellen-IP aktiviert haben, müssen Lastausgleichsservice-Pods Anforderungen an App-Pods weiterleiten, die auf demselben Workerknoten bereitgestellt sind. Um zu erzwingen, dass Ihre App auf bestimmten Workerknoten bereitgestellt wird, auf denen auch Lastausgleichsservice-Pods bereitgestellt werden können, müssen Sie Affinitätsregeln und Tolerierungen zu Ihrer App-Bereitstellung hinzufügen. 
+
+### Affinitätsregeln und Tolerierungen für Edge-Knoten hinzufügen
+{: #edge_nodes}
+
+Wenn Sie [Workerknoten als Edge-Knoten kennzeichnen](cs_edge.html#edge_nodes), werden Lastausgleichsservice-Pods nur auf diesen Edge-Knoten bereitgestellt. Wenn Sie zudem [Taints auf Edge-Knoten anwenden](cs_edge.html#edge_workloads), können App-Pods nicht auf Edge-Knoten bereitgestellt werden.
+{:shortdesc}
+
+Wenn Sie die Quellen-IP aktivieren, können eingehende Anforderungen nicht von der Lastausgleichsfunktion an Ihren App-Pod weitergeleitet werden. Um zu erzwingen, dass Ihre App-Pods auf Edge-Knoten bereitgestellt werden, fügen Sie eine [Affinitätsregel ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) für den Edge-Knoten und eine [Tolerierung ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/#concepts) zur App-Bereitstellung hinzu. 
+
+Beispiel für die YAML-Bereitstellungsdatei mit Edge-Knoten-Affinität und -Tolerierung:
+
+```
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: with-node-affinity
+spec:
+  template:
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: dedicated
+                operator: In
+                values:
+                - edge
+      tolerations:
+        - key: dedicated
+          value: edge
+...
+```
+{: codeblock}
+
+Beachten Sie, dass in beiden Abschnitten **affinity** und **tolerations** `dedicated` für `key` und `edge` für `value` angegeben ist. 
+
+### Affinitätsregeln für mehrere öffentliche oder private VLANs hinzufügen
+{: #edge_nodes}
+
+Wenn Ihr Cluster mit mehreren öffentlichen oder privaten VLANs verbunden ist, werden Ihre App-Pods unter Umständen auf Workerknoten bereitgestellt, die nur mit einem VLAN verbunden sind. Wenn die IP-Adresse der Lastausgleichsfunktion mit einem anderen VLAN als diese Workerknoten verbunden ist, werden die Lastausgleichsservice-Pods nicht auf diesen Workerknoten bereitgestellt. {:shortdesc}
+
+Wenn die Quellen-IP aktiviert ist, planen Sie App-Pods auf Workerknoten, die dasselbe VLAN wie die IP-Adresse der Lastausgleichsfunktion aufweisen, indem Sie eine Affinitätsregel zur App-Bereitstellung hinzufügen. 
+
+Führen Sie zunächst den folgenden Schritt aus: [Richten Sie Ihre CLI](cs_cli_install.html#cs_cli_configure) auf Ihren Cluster aus.
+
+1. Rufen Sie die IP-Adresse des gewünschten Lastausgleichsservice ab. Suchen Sie im Feld **LoadBalancer Ingress** nach der IP-Adresse. 
+    ```
+    kubectl describe service <name_des_loadbalancer-service>
+    ```
+    {: pre}
+
+2. Rufen Sie die VLAN-ID ab, mit der Ihr Lastausgleichsservice verbunden ist. 
+
+    1. Listen Sie portierbare öffentliche VLANs für Ihren Cluster auf. 
+        ```
+        bx cs cluster-get <clustername_oder_-id> --showResources
+        ```
+        {: pre}
+
+        Beispielausgabe:
+        ```
+        ...
+
+        Subnet VLANs
+        VLAN ID   Subnet CIDR       Public   User-managed
+        2234947   10.xxx.xx.xxx/29  false    false
+        2234945   169.36.5.xxx/29   true     false
+        ```
+        {: screen}
+
+    2. Suchen Sie in der Ausgabe unter **Subnet VLANs** nach der Teilnetz-CIDR, die mit der IP-Adresse der Lastausgleichsfunktion übereinstimmt, die Sie zuvor abgerufen haben, und notieren Sie sich die VLAN-ID. 
+
+        Wenn die IP-Adresse des Lastausgleichsservice beispielsweise `169.36.5.xxx` lautet, ist das passende Teilnetz in der obigen Beispielausgabe `169.36.5.xxx/29`. Die VLAN-ID, mit der das Teilnetz verbunden ist, lautet `2234945`. 
+
+3. [Fügen Sie eine Affinitätsregel ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) zu der App-Bereitstellung für die VLAN-ID hinzu, die Sie sich im vorherigen Schritt notiert haben. 
+
+    Wenn Sie beispielsweise über mehrere VLANs verfügen, aber Ihre App-Pods nur auf Workerknoten im öffentlichen VLAN `2234945` bereitstellen möchten. 
+
+    ```
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    metadata:
+      name: with-node-affinity
+    spec:
+      template:
+        spec:
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                - matchExpressions:
+                  - key: publicVLAN
+                    operator: In
+                    values:
+                    - "2234945"
+    ...
+    ```
+    {: codeblock}
+
+    In der obigen YAML-Datei enthält der Abschnitt **affinity** den Wert `publicVLAN` für `key` und den Wert `"2234945"` für `value`. 
+
+4. Wenden Sie die aktualisierte Bereitstellungskonfigurationsdatei an. 
+    ```
+    kubectl apply -f with-node-affinity.yaml
+    ```
+    {: pre}
+
+5. Überprüfen Sie, dass die App-Pods auf Workerknoten bereitgestellt werden, die mit dem designierten VLAN verbunden sind. 
+
+    1. Listen Sie die Pods in Ihrem Cluster auf. Ersetzen Sie `<selektor>` durch die Bezeichnung, die Sie für die App verwendet haben. 
+        ```
+        kubectl get pods -o wide app=<selektor>
+        ```
+        {: pre}
+
+        Beispielausgabe:
+        ```
+        NAME                   READY     STATUS              RESTARTS   AGE       IP               NODE
+        cf-py-d7b7d94db-vp8pq  1/1       Running             0          15d       172.30.xxx.xxx   10.176.48.78
+        ```
+        {: screen}
+
+    2. Geben Sie in der Ausgabe einen Pod für Ihre App an. Notieren Sie sich die Knoten-ID (**NODE**) des Workerknotens, auf dem sich der Pod befindet. 
+
+        In der obigen Beispielausgabe befindet sich der App-Pod `cf-py-d7b7d94db-vp8pq` auf dem Workerknoten `10.176.48.78`. 
+
+    3. Listen Sie die Details für den Workerknoten auf.
+
+        ```
+        kubectl describe node <workerknoten-ID>
+        ```
+        {: pre}
+
+        Beispielausgabe:
+
+        ```
+        Name:                   10.xxx.xx.xxx
+        Role:
+        Labels:                 arch=amd64
+                                beta.kubernetes.io/arch=amd64
+                                beta.kubernetes.io/os=linux
+                                failure-domain.beta.kubernetes.io/region=us-south
+                                failure-domain.beta.kubernetes.io/zone=dal10
+                                ibm-cloud.kubernetes.io/encrypted-docker-data=true
+                                kubernetes.io/hostname=10.xxx.xx.xxx
+                                privateVLAN=2234945
+                                publicVLAN=2234967
+        ...
+        ```
+        {: screen}
+
+    4. Überprüfen Sie im Abschnitt **Labels** der Ausgabe, dass es sich bei dem öffentlichen oder privaten VLAN um das VLAN handelt, das Sie in den vorherigen Schritten angegeben haben. 
+

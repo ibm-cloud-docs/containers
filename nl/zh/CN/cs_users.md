@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-06"
+lastupdated: "2018-4-20"
 
 
 ---
@@ -17,71 +17,170 @@ lastupdated: "2018-03-06"
 {:download: .download}
 
 
-# 为用户分配对集群的访问权
+# 分配集群访问权
 {: #users}
 
-您可以授予对 Kubernetes 集群的访问权，以确保只有授权用户才能使用集群以及将容器部署到 {{site.data.keyword.containerlong}} 中的集群。
-{:shortdesc}
+作为集群管理员，您可以为 Kubernetes 集群定义访问策略，以便为不同用户创建不同级别的访问权。例如，您可以授权某些用户使用集群资源，而其他用户只能部署容器。
+{: shortdesc}
 
+## 规划访问请求
+{: #planning_access}
 
-## 规划通信过程
-作为集群管理员，请考虑如何为组织的成员建立通信过程，以向您传递访问请求，以便您可以有条不紊地进行通信。
-{:shortdesc}
+作为集群管理员，可能很难跟踪访问请求。因此，建立访问请求的通信模式对于维护集群的安全性至关重要。
+{: shortdesc}
 
-向集群用户提供有关如何请求对集群的访问或如何从集群管理员那里获取任何类型常见任务帮助的指示信息。由于 Kubernetes 不会为这种通信提供便利，因此每个团队的首选过程可以有所变化。
+为了确保正确的人员具有正确的访问权，请在策略上非常明确地规定谁有权访问集群来请求访问权或获取有关常见任务的帮助。
 
-您可以选择以下任一方法，也可以建立自己的方法。
-- 创建凭单系统
-- 创建表单模板
-- 创建 Wiki 页面
-- 需要电子邮件请求
-- 使用您已用于跟踪团队日常工作的问题跟踪方法
+您可能已经有一个适用于您团队的方法，那很好！如果您还不知道从何着手，请考虑尝试下列其中一种方法。
 
+*  创建凭单系统
+*  创建表单模板
+*  创建 Wiki 页面
+*  需要电子邮件请求
+*  使用您已用于跟踪团队日常工作的问题跟踪系统
 
-## 管理集群访问权
-{: #managing}
-
-每个使用 {{site.data.keyword.containershort_notm}} 的用户都必须分配有服务特点用户角色的组合，以确定用户可以执行的操作。
-{:shortdesc}
-
-<dl>
-<dt>{{site.data.keyword.containershort_notm}} 访问策略</dt>
-<dd>在 Identity and Access Management 中，{{site.data.keyword.containershort_notm}} 访问策略用于确定可以在集群上执行的集群管理操作，例如创建或除去集群，以及添加或除去多余的工作程序节点。这些策略必须与基础架构策略一起设置。您可以基于区域授予对集群的访问权。</dd>
-<dt>基础架构访问策略</dt>
-<dd>在 Identity and Access Management 中，基础架构访问策略允许从 {{site.data.keyword.containershort_notm}} 用户界面或 CLI 请求的操作在 IBM Cloud infrastructure (SoftLayer) 中完成。这些策略必须与 {{site.data.keyword.containershort_notm}} 访问策略一起设置。[了解有关可用基础架构角色的更多信息](/docs/iam/infrastructureaccess.html#infrapermission)。</dd>
-<dt>资源组</dt>
-<dd>资源组用于将 {{site.data.keyword.Bluemix_notm}} 服务组织成分组，以便您可以一次性快速为用户分配对多个资源的访问权。[了解如何使用资源组来管理用户](/docs/account/resourcegroups.html#rgs)。</dd>
-<dt>Cloud Foundry 角色</dt>
-<dd>在 Identity and Access Management 中，必须为每个用户分配 Cloud Foundry 用户角色。此角色将确定用户可以在 {{site.data.keyword.Bluemix_notm}} 帐户上执行的操作，例如邀请其他用户或查看配额使用情况。[了解有关可用 Cloud Foundry 角色的更多信息](/docs/iam/cfaccess.html#cfaccess)。</dd>
-<dt>Kubernetes RBAC 角色</dt>
-<dd>分配了 {{site.data.keyword.containershort_notm}} 访问策略的每个用户都将自动分配有 Kubernetes RBAC 角色。在 Kubernetes 中，RBAC 角色将确定可以在集群内部的 Kubernetes 资源上执行的操作。只会为缺省名称空间设置 RBAC 角色。集群管理员可以为集群中的其他名称空间添加 RBAC 角色。请参阅[访问策略和许可权](#access_policies)部分中的下表，以了解哪个 RBAC 角色对应于哪个 {{site.data.keyword.containershort_notm}} 访问策略。有关 RBAC 角色的更多常规信息，请参阅 Kubernetes 文档中的[使用 RBAC 授权 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview)。</dd>
-</dl>
-
-<br />
-
+有些不知所措？请尝试了解有关[组织用户、团队和应用程序的最佳实践](/docs/tutorials/users-teams-applications.html)的这一教程。
+{: tip}
 
 ## 访问策略和许可权
 {: #access_policies}
 
-查看可以授予 {{site.data.keyword.Bluemix_notm}} 帐户中用户的访问策略和许可权。
-{:shortdesc}
+访问策略的作用域基于用户定义的一个或多个角色，这些角色确定允许用户执行的操作。可以设置特定于集群、基础架构、服务实例或 Cloud Foundry 角色的策略。
+{: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} Identity Access and Management (IAM)“操作员”和“编辑者”角色具有不同的许可权。例如，如果希望用户添加工作程序节点和绑定服务，那么必须为用户同时分配“操作员”和“编辑者”角色。有关相应的基础架构访问策略的更多详细信息，请参阅[定制用户的基础架构许可权](#infra_access)。<br/><br/>如果更改用户的访问策略，会清除集群中与更改关联的 RBAC 策略。</br></br>**注：**对许可权降级后，例如您希望将“查看者”访问权分配给前集群管理员，那么您必须等待几分钟才能完成降级。
+{: #managing}
+必须为使用 {{site.data.keyword.containershort_notm}} 的每个用户定义访问策略。某些策略是预定义策略，但其他策略可以进行定制。查看下图及定义，以了解哪些角色适用于常见用户任务，并确定您可能希望在哪里定制策略。
 
-|{{site.data.keyword.containershort_notm}} 访问策略|集群管理许可权|Kubernetes 资源许可权|
-|-------------|------------------------------|-------------------------------|
-|管理员|此角色会继承此帐户中所有集群的“编辑者”、“操作员”和“查看者”角色的许可权。<br/><br/>为所有当前服务实例设置时：<ul><li>创建免费或标准集群</li><li>为 {{site.data.keyword.Bluemix_notm}} 帐户设置凭证以访问 IBM Cloud infrastructure (SoftLayer) 产品服务组合</li><li>除去集群</li><li>为此帐户中的其他现有用户分配和更改 {{site.data.keyword.containershort_notm}} 访问策略。</li></ul><p>为特定集群标识设置时：<ul><li>除去特定集群。</li></ul></p>相应的基础架构访问策略：超级用户<br/><br/><strong>注</strong>：要创建资源（如机器、VLAN 和子网），用户需要**超级用户**基础架构角色。|<ul><li>RBAC 角色：集群管理员</li><li>对每个名称空间中资源的读/写访问权</li><li>在名称空间内创建角色</li><li>访问 Kubbernees 仪表板</li><li>创建使应用程序公共可用的 Ingress 资源</li></ul>|
-|操作员|<ul><li>向集群添加其他工作程序节点</li><li>从集群中除去工作程序节点</li><li>重新引导工作程序节点</li><li>重新装入工作程序节点</li><li>向集群添加子网</li></ul><p>相应的基础架构访问策略：[定制](#infra_access)</p>|<ul><li>RBAC 角色：管理员</li><li>具有对缺省名称空间内部资源的读/写访问权，但对名称空间本身没有读/写访问权</li><li>在名称空间内创建角色</li></ul>|
-|编辑者<br/><br/><strong>提示</strong>：将此角色用于应用程序开发者。|<ul><li>将 {{site.data.keyword.Bluemix_notm}} 服务绑定到集群。</li><li>取消 {{site.data.keyword.Bluemix_notm}} 服务与集群的绑定。</li><li>创建 Webhook。</li></ul><p>相应的基础架构访问策略：[定制](#infra_access)|<ul><li>RBAC 角色：编辑</li><li>对缺省名称空间内部资源的读/写访问权</li></ul></p>|
-|查看者|<ul><li>列出集群</li><li>查看集群的详细信息</li></ul><p>相应的基础架构访问策略：仅查看</p>|<ul><li>RBAC 角色：查看</li><li>对缺省名称空间内部资源的读访问权</li><li>对 Kubernetes 私钥无读访问权</li></ul>|
+![{{site.data.keyword.containershort_notm}} 访问角色](/images/user-policies.png)
 
-|Cloud Foundry 访问策略|帐户管理许可权|
-|-------------|------------------------------|
-|组织角色：管理员|<ul><li>将其他用户添加到 {{site.data.keyword.Bluemix_notm}} 帐户</li></ul>| |
-|空间角色：开发者|<ul><li>创建 {{site.data.keyword.Bluemix_notm}} 服务实例</li><li>将 {{site.data.keyword.Bluemix_notm}} 服务实例绑定到集群</li></ul>| 
+图. {{site.data.keyword.containershort_notm}} 访问角色
+
+<dl>
+  <dt>身份和访问管理 (IAM) 策略</dt>
+    <dd><p><em>平台</em>：可以确定个人可在 {{site.data.keyword.containershort_notm}} 集群上执行的操作。可以按区域设置这些策略。操作示例包括创建或除去集群，或者添加额外的工作程序节点。这些策略必须与基础架构策略一起设置。</p>
+    <p><em>基础架构</em>：可以确定基础架构的访问级别，例如集群节点机器、联网或存储资源。无论用户是通过 {{site.data.keyword.containershort_notm}} GUI 还是通过 CLI 发出请求，都将强制执行同一策略；即便在 IBM Cloud Infrastructure (SoftLayer) 中完成这些操作也是如此。必须将此类型的策略与 {{site.data.keyword.containershort_notm}} 平台访问策略一起设置。要了解可用角色的信息，请查看[基础架构许可权](/docs/iam/infrastructureaccess.html#infrapermission)。</p></dd>
+  <dt>Kubernetes 基于资源的访问控制 (RBAC) 角色</dt>
+    <dd>分配了平台访问策略的每个用户都会自动分配有 Kubernetes 角色。在 Kubernetes 中，[基于角色的访问控制 (RBAC) ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) 将确定用户可以对集群中的资源执行的操作。对于 <code>default</code> 名称空间，会自动为其配置 RBAC 角色，但作为集群管理员，您可以为其他名称空间分配角色。</dd>
+  <dt>Cloud Foundry</dt>
+    <dd>目前，并非所有服务都可以通过 Cloud IAM 进行管理。如果使用的是无法通过 Cloud IAM 管理的其中一个服务，那么可以继续使用 [Cloud Foundry 用户角色](/docs/iam/cfaccess.html#cfaccess)来控制对服务的访问。</dd>
+</dl>
+
+
+要降级许可权？完成此操作可能需要几分钟时间。
+{: tip}
+
+### 平台角色
+{: #platform_roles}
+
+{{site.data.keyword.containershort_notm}} 配置为使用 {{site.data.keyword.Bluemix_notm}} 平台角色。角色许可权基于彼此进行构建，这意味着`编辑者`角色具有与`查看者`角色相同的许可权，外加授予编辑者的许可权。下表说明了每个角色可以执行的操作的类型。
+
+<table>
+  <tr>
+    <th>平台角色</th>
+    <th>操作示例</th>
+    <th>相应的 RBAC 角色</th>
+  </tr>
+  <tr>
+      <td>查看者</td>
+      <td>查看集群或其他服务实例的详细信息。</td>
+      <td>查看</td>
+  </tr>
+  <tr>
+    <td>编辑者</td>
+    <td>可以将 IBM Cloud 服务绑定到集群或从集群取消绑定，也可以创建 Webhook。</td>
+    <td>编辑</td>
+  </tr>
+  <tr>
+    <td>操作员</td>
+    <td>可以创建、除去、重新引导或重新装入工作程序节点。可以将子网添加到集群。</td>
+    <td>管理</td>
+  </tr>
+  <tr>
+    <td>管理员</td>
+    <td>可以创建和除去集群。可以在服务和基础架构的帐户级别编辑其他用户的访问策略。</td>
+    <td>集群管理</td>
+  </tr>
+</table>
+
+有关在 UI 中分配用户角色的更多信息，请参阅[管理 IAM 访问权](/docs/iam/mngiam.html#iammanidaccser)。
+
+### 基础架构角色
+{: #infrastructure_roles}
+
+基础架构角色支持用户对基础架构级别的资源执行任务。下表说明了每个角色可以执行的操作的类型。基础架构角色可定制；请务必仅向用户授予执行其作业所需的访问权。
+
+<table>
+  <tr>
+    <th>基础架构角色</th>
+    <th>操作示例</th>
+  </tr>
+  <tr>
+    <td><i>仅查看</i></td>
+    <td>可以查看基础架构详细信息。可以查看帐户摘要，包括发票和付款情况。</td>
+  </tr>
+  <tr>
+    <td><i>基本用户</i></td>
+    <td>可以编辑服务配置（包括 IP 地址），添加或编辑 DNS 记录，以及添加有权访问基础架构的新用户。</td>
+  </tr>
+  <tr>
+    <td><i>超级用户</i></td>
+    <td>可以执行与基础架构相关的所有操作。</td>
+  </tr>
+</table>
+
+要开始分配角色，请执行[定制用户的基础架构许可权](#infra_access)中的步骤。
+
+### RBAC 角色
+{: #rbac_roles}
+
+基于资源的访问控制 (RBAC) 是一种保护集群内部资源并决定谁可以执行哪些 Kubernetes 操作的方法。在下表中，可以查看 RBAC 角色的类型以及具有该角色的用户可以执行的操作的类型。许可权基于彼此进行构建，这意味着`管理`同时具有`查看`和`编辑`角色随附的所有策略。请务必仅授予用户所需的访问权。
+
+<table>
+  <tr>
+    <th>RBAC 角色</th>
+    <th>操作示例</th>
+  </tr>
+  <tr>
+    <td>查看</td>
+    <td>可以查看缺省名称空间内部的资源。</td>
+  </tr>
+  <tr>
+    <td>编辑</td>
+    <td>对缺省名称空间内部资源执行读写操作。</td>
+  </tr>
+  <tr>
+    <td>管理</td>
+    <td>对缺省名称空间内的资源执行读写操作，但不能对名称空间本身执行读写操作。可以在名称空间内创建角色。</td>
+  </tr>
+  <tr>
+    <td>集群管理</td>
+    <td>可以对每个名称空间中的资源执行读写操作。可以在名称空间内创建角色。可以访问 Kubernetes 仪表板。可以创建使应用程序公开可用的 Ingress 资源。</td>
+  </tr>
+</table>
 
 <br />
 
+
+## 向 {{site.data.keyword.Bluemix_notm}} 帐户添加用户
+{: #add_users}
+
+可以将用户添加到 {{site.data.keyword.Bluemix_notm}} 帐户以授予对集群的访问权。
+{:shortdesc}
+
+开始之前，请验证您是否已分配有对 {{site.data.keyword.Bluemix_notm}} 帐户的`管理员` Cloud Foundry 角色。
+
+1.  [向帐户添加用户](../iam/iamuserinv.html#iamuserinv).
+2.  在**访问权**部分中，展开**服务**。
+3.  为用户分配平台角色以设置对 {{site.data.keyword.containershort_notm}} 的访问权。
+      1. 从**服务**下拉列表中，选择 **{{site.data.keyword.containershort_notm}}**。
+      2. 从**区域**下拉列表中，选择要邀请用户加入的区域。
+      3. 从**服务实例**下拉列表中，选择要邀请用户加入的集群。要找到特定集群的标识，请运行 `bx cs clusters`。
+      4. 在**选择角色**部分中，选择角色。要查找每个角色的受支持操作列表，请参阅[访问策略和许可权](#access_policies)。
+4. [可选：分配 Cloud Foundry 角色](/docs/iam/mngcf.html#mngcf)。
+5. [可选：分配基础架构角色](/docs/iam/infrastructureaccess.html#infrapermission)。
+6. 单击**邀请用户**。
+
+<br />
 
 
 ## 了解 IAM API 密钥和 `bx cs credentials-set` 命令
@@ -97,86 +196,8 @@ lastupdated: "2018-03-06"
 <dd>如果您有 {{site.data.keyword.Bluemix_notm}} 现买现付帐户，那么缺省情况下您可以访问 IBM Cloud Infrastructure (SoftLayer) 产品服务组合。但是，您可能希望使用已经拥有的其他 IBM Cloud Infrastructure (SoftLayer) 帐户来订购基础架构。您可以使用 [<code>bx cs credentials-set</code>](cs_cli_reference.html#cs_credentials_set) 命令将此基础架构帐户链接到 {{site.data.keyword.Bluemix_notm}} 帐户。</br></br>如果手动设置了 IBM Cloud Infrastructure (SoftLayer) 凭证，那么这些凭证会用于订购基础架构，即使已存在帐户的 IAM API 密钥也不例外。如果存储了其凭证的用户没有必需的许可权来订购基础架构，那么与基础架构相关的操作（例如，创建集群或重新装入工作程序节点）可能会失败。</br></br> 要除去手动设置的 IBM Cloud Infrastructure (SoftLayer) 凭证，可以使用 [<code>bx cs credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset) 命令。除去凭证后，将使用 IAM API 密钥来订购基础架构。</dd>
 </dl>
 
-## 向 {{site.data.keyword.Bluemix_notm}} 帐户添加用户
-{: #add_users}
-
-可以将用户添加到 {{site.data.keyword.Bluemix_notm}} 帐户以授予对集群的访问权。
-{:shortdesc}
-
-开始之前，请验证您是否已分配有对 {{site.data.keyword.Bluemix_notm}} 帐户的“管理员”Cloud Foundry 角色。
-
-1.  [向帐户添加用户](../iam/iamuserinv.html#iamuserinv).
-2.  在**访问权**部分中，展开**服务**。
-3.  分配 {{site.data.keyword.containershort_notm}} 访问角色。从**分配访问权**下拉列表中，决定是要仅授予对 {{site.data.keyword.containershort_notm}} 帐户（**资源**）的访问权，还是授予对帐户内各种资源的集合（**资源组**）的访问权。
-  -  对于**资源**：
-      1. 从**服务**下拉列表中，选择 **{{site.data.keyword.containershort_notm}}**。
-      2. 从**区域**下拉列表中，选择要邀请用户加入的区域。**注**：要访问[亚太地区北部区域](cs_regions.html#locations)中的集群，请参阅[授予用户对亚太地区北部区域内集群的 IAM 访问权](#iam_cluster_region)。
-      3. 从**服务实例**下拉列表中，选择要邀请用户加入的集群。要找到特定集群的标识，请运行 `bx cs clusters`。
-      4. 在**选择角色**部分中，选择角色。要查找每个角色的受支持操作列表，请参阅[访问策略和许可权](#access_policies)。
-  - 对于**资源组**：
-      1. 从**资源组**下拉列表中，选择包含帐户的 {{site.data.keyword.containershort_notm}} 资源许可权的资源组。
-      2. 从**分配对资源组的访问权**下拉列表中，选择角色。要查找每个角色的受支持操作列表，请参阅[访问策略和许可权](#access_policies)。
-4. [可选：分配 Cloud Foundry 角色](/docs/iam/mngcf.html#mngcf)。
-5. [可选：分配基础架构角色](/docs/iam/infrastructureaccess.html#infrapermission)。
-6. 单击**邀请用户**。
-
 <br />
 
-
-### 授予用户对亚太地区北部区域内集群的 IAM 访问权
-{: #iam_cluster_region}
-
-[将用户添加到 {{site.data.keyword.Bluemix_notm}} 帐户](#add_users)时，请选择向这些用户授予了访问权的区域。但是，某些区域（例如，亚太地区北部）可能在控制台中不可用，因此必须使用 CLI 进行添加。
-{:shortdesc}
-
-开始之前，请验证您是否为 {{site.data.keyword.Bluemix_notm}} 帐户的管理员。
-
-1.  登录到 {{site.data.keyword.Bluemix_notm}} CLI。选择要使用的帐户。
-
-    ```
-    bx login [--sso]
-    ```
-    {: pre}
-
-    **注**：如果您有联合标识，请使用 `bx login --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
-
-2.  确定要授予其许可权的环境，例如亚太地区北部区域 (`jp-tok`)。有关命令选项（例如，组织和空间）的更多详细信息，请参阅 [`bluemix target` 命令](../cli/reference/bluemix_cli/bx_cli.html#bluemix_target)。
-
-    ```
-    bx target -r jp-tok
-    ```
-    {: pre}
-
-3.  获取要向其授予访问权的区域集群的名称或标识。
-
-    ```
-    bx cs clusters
-    ```
-    {: pre}
-
-4.  获取要向其授予访问权的用户标识。
-
-    ```
-    bx account users
-    ```
-    {: pre}
-
-5.  选择访问策略的角色。
-
-    ```
-    bx iam roles --service containers-kubernetes
-    ```
-    {: pre}
-
-6.  通过相应的角色授予用户对集群的访问权。此示例为三个集群分配 `user@example.com` `Operator` 和 `Editor` 角色。
-
-    ```
-    bx iam user-policy-create user@example.com --roles Operator,Editor --service-name containers-kubernetes --region jp-tok --service-instance cluster1,cluster2,cluster3
-    ```
-    {: pre}
-
-    要授予对区域中现有和未来集群的访问权，请不要指定 `--service-instance` 标志。有关更多信息，请参阅 [`bluemix iam user-policy-create` 命令](../cli/reference/bluemix_cli/bx_cli.html#bluemix_iam_user_policy_create)。
-    {:tip}
 
 ## 定制用户的基础架构许可权
 {: #infra_access}
@@ -201,36 +222,37 @@ lastupdated: "2018-03-06"
     <table summary="常见 {{site.data.keyword.containershort_notm}} 场景的基础架构许可权。">
      <caption>{{site.data.keyword.containershort_notm}} 通常必需的基础架构许可权</caption>
      <thead>
-     <th>{{site.data.keyword.containershort_notm}} 中的常见任务</th>
-     <th>必需的基础架构许可权（按选项卡）</th>
+      <th>{{site.data.keyword.containershort_notm}} 中的常见任务</th>
+      <th>必需的基础架构许可权（按选项卡）</th>
      </thead>
      <tbody>
-     <tr>
-     <td><strong>最低许可权</strong>：<ul><li>创建集群。</li></ul></td>
-     <td><strong>设备</strong>：<ul><li>查看虚拟服务器详细信息</li><li>重新引导服务器并查看 IPMI 系统信息</li><li>发出操作系统重装并启动急救内核</li></ul><strong>帐户</strong>：<ul><li>添加/升级云实例</li><li>添加服务器</li></ul></td>
-     </tr>
-     <tr>
-     <td><strong>集群管理</strong>：<ul><li>创建、更新和删除集群。</li><li>添加、重新装入和重新引导工作程序节点。</li><li>查看 VLAN。</li><li>创建子网。</li><li>部署 pod 和 LoadBalancer 服务。</li></ul></td>
-     <td><strong>支持</strong>：<ul><li>查看凭单</li><li>添加凭单</li><li>编辑凭单</li></ul>
-     <strong>设备</strong>：<ul><li>查看虚拟服务器详细信息</li><li>重新引导服务器并查看 IPMI 系统信息</li><li>升级服务器</li><li>发出操作系统重装并启动急救内核</li></ul>
-     <strong>服务</strong>：<ul><li>管理 SSH 密钥</li></ul>
-     <strong>帐户</strong>：<ul><li>查看帐户摘要</li><li>添加/升级云实例</li><li>取消服务器</li><li>添加服务器</li></ul></td>
-     </tr>
-     <tr>
-     <td><strong>存储器</strong>：<ul><li>创建持久性卷申领以供应持久卷。</li><li>创建和管理存储器基础架构资源。</li></ul></td>
-     <td><strong>服务</strong>：<ul><li>管理存储器</li></ul><strong>帐户</strong>：<ul><li>添加存储器</li></ul></td>
-     </tr>
-     <tr>
-     <td><strong>专用联网</strong>：<ul><li>管理用于集群内联网的专用 VLAN。</li><li>设置与专用网络的 VPN 连接。</li></ul></td>
-     <td><strong>网络</strong>：<ul><li>管理网络子网路径</li><li>管理网络 VLAN 生成</li><li>管理 IPSEC 网络隧道</li><li>管理网络网关</li><li>VPN 管理</li></ul></td>
-     </tr>
-     <tr>
-     <td><strong>公用网络</strong>：<ul><li>设置公共负载均衡器或 Ingress 联网以公开应用程序。</li></ul></td>
-     <td><strong>设备</strong>：<ul><li>管理负载均衡器</li><li>编辑主机名/域</li><li>管理端口控制</li></ul>
-     <strong>网络</strong>：<ul><li>使用公用网络端口添加计算</li><li>管理网络子网路径</li><li>管理网络 VLAN 生成</li><li>添加 IP 地址</li></ul>
-     <strong>服务</strong>：<ul><li>管理 DNS、逆向 DNS 和 WHOIS</li><li>查看证书 (SSL)</li><li>管理证书 (SSL)</li></ul></td>
-     </tr>
-     </tbody></table>
+       <tr>
+         <td><strong>最低许可权</strong>：<ul><li>创建集群。</li></ul></td>
+         <td><strong>设备</strong>：<ul><li>查看虚拟服务器详细信息</li><li>重新引导服务器并查看 IPMI 系统信息</li><li>发出操作系统重装并启动急救内核</li></ul><strong>帐户</strong>：<ul><li>添加/升级云实例</li><li>添加服务器</li></ul></td>
+       </tr>
+       <tr>
+         <td><strong>集群管理</strong>：<ul><li>创建、更新和删除集群。</li><li>添加、重新装入和重新引导工作程序节点。</li><li>查看 VLAN。</li><li>创建子网。</li><li>部署 pod 和 LoadBalancer 服务。</li></ul></td>
+         <td><strong>支持</strong>：<ul><li>查看凭单</li><li>添加凭单</li><li>编辑凭单</li></ul>
+         <strong>设备</strong>：<ul><li>查看虚拟服务器详细信息</li><li>重新引导服务器并查看 IPMI 系统信息</li><li>升级服务器</li><li>发出操作系统重装并启动急救内核</li></ul>
+         <strong>服务</strong>：<ul><li>管理 SSH 密钥</li></ul>
+         <strong>帐户</strong>：<ul><li>查看帐户摘要</li><li>添加/升级云实例</li><li>取消服务器</li><li>添加服务器</li></ul></td>
+       </tr>
+       <tr>
+         <td><strong>存储器</strong>：<ul><li>创建持久性卷申领以供应持久卷。</li><li>创建和管理存储器基础架构资源。</li></ul></td>
+         <td><strong>服务</strong>：<ul><li>管理存储器</li></ul><strong>帐户</strong>：<ul><li>添加存储器</li></ul></td>
+       </tr>
+       <tr>
+         <td><strong>专用联网</strong>：<ul><li>管理用于集群内联网的专用 VLAN。</li><li>设置与专用网络的 VPN 连接。</li></ul></td>
+         <td><strong>网络</strong>：<ul><li>管理网络子网路径</li><li>管理网络 VLAN 生成</li><li>管理 IPSEC 网络隧道</li><li>管理网络网关</li><li>VPN 管理</li></ul></td>
+       </tr>
+       <tr>
+         <td><strong>公用网络</strong>：<ul><li>设置公共负载均衡器或 Ingress 联网以公开应用程序。</li></ul></td>
+         <td><strong>设备</strong>：<ul><li>管理负载均衡器</li><li>编辑主机名/域</li><li>管理端口控制</li></ul>
+         <strong>网络</strong>：<ul><li>使用公用网络端口添加计算</li><li>管理网络子网路径</li><li>管理网络 VLAN 生成</li><li>添加 IP 地址</li></ul>
+         <strong>服务</strong>：<ul><li>管理 DNS、逆向 DNS 和 WHOIS</li><li>查看证书 (SSL)</li><li>管理证书 (SSL)</li></ul></td>
+       </tr>
+     </tbody>
+    </table>
 
 5.  要保存更改，请单击**编辑门户网站许可权**。
 
@@ -240,7 +262,8 @@ lastupdated: "2018-03-06"
     * 要允许用户访问所创建的新设备，请选中**添加新设备时自动授予访问权**。
     * 要保存更改，请单击**更新设备访问权**。
 
-7.  返回到用户概要文件列表，并验证是否授予了**设备访问权**。
+<br />
+
 
 ## 授予用户定制 Kubernetes RBAC 角色
 {: #rbac}
@@ -273,7 +296,6 @@ lastupdated: "2018-03-06"
         {: codeblock}
 
         <table>
-        <caption>表. 了解此 YAML 的组成部分</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解此 YAML 的组成部分</th>
         </thead>
@@ -348,7 +370,6 @@ lastupdated: "2018-03-06"
         {: codeblock}
 
         <table>
-        <caption>表. 了解此 YAML 的组成部分</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解此 YAML 的组成部分</th>
         </thead>
@@ -399,7 +420,7 @@ lastupdated: "2018-03-06"
     2. 在集群中创建角色绑定资源。
 
         ```
-        kubectl apply -f <path_to_yaml_file>
+        kubectl apply -f filepath/my_role_team1.yaml
         ```
         {: pre}
 
@@ -411,3 +432,4 @@ lastupdated: "2018-03-06"
         {: pre}
 
 现在您已经创建并绑定了定制 Kubernetes RBAC 角色，接下来该由用户进行操作。请要求用户测试根据其角色有权完成的操作，例如删除 pod。
+

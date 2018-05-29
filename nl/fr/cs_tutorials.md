@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-02-27"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -65,16 +65,16 @@ Pour créer votre cluster :
 
 
 Les interfaces CLI suivantes et leurs prérequis sont utilisés pour gérer les clusters via l'interface de ligne de commande :
--   Interface CLI de {{site.data.keyword.Bluemix_notm}}
--   Plug-in de {{site.data.keyword.containershort_notm}}
+-   Interface CLI d'{{site.data.keyword.Bluemix_notm}}
+-   Plug-in {{site.data.keyword.containershort_notm}}
 -   Interface CLI de Kubernetes
--   Plug-in de {{site.data.keyword.registryshort_notm}}
+-   Plug-in {{site.data.keyword.registryshort_notm}}
 -   Interface CLI de Docker
 
 </br>
 Pour installer les interfaces CLI et leur prérequis :
 
-1.  Comme condition prérequise pour le plug-in {{site.data.keyword.containershort_notm}}, installez l'[interface CLI de {{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://clis.ng.bluemix.net/ui/home.html). Pour exécuter des commandes CLI {{site.data.keyword.Bluemix_notm}}, utilisez le préfixe `bx`.
+1.  Comme condition prérequise pour le plug-in {{site.data.keyword.containershort_notm}}, installez l'[interface CLI d'{{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://clis.ng.bluemix.net/ui/home.html). Pour exécuter des commandes CLI {{site.data.keyword.Bluemix_notm}}, utilisez le préfixe `bx`.
 2.  Suivez les invites pour sélectionner un compte et une organisation {{site.data.keyword.Bluemix_notm}}. Les clusters sont associés à un compte, mais sont indépendants de l'organisation ou d'un espace {{site.data.keyword.Bluemix_notm}}.
 
 4.  Installez le plug-in {{site.data.keyword.containershort_notm}} pour créer des clusters Kubernetes et gérer les noeuds worker. Pour exécuter des commandes du plug-in {{site.data.keyword.containershort_notm}}, utilisez le préfixe `bx cs`.
@@ -85,21 +85,21 @@ Pour installer les interfaces CLI et leur prérequis :
     {: pre}
 
 5.  Pour afficher une version locale du tableau de bord Kubernetes et déployer des applications dans vos clusters, [installez l'interface CLI de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Pour exécuter des commandes à l'aide de l'interface CLI de Kubernetes, utilisez le préfixe `kubectl`.
-    1.  Pour obtenir la compatibilité fonctionnelle complète, téléchargez la version de l'interface CLI de Kubernetes qui correspond à la version du cluster Kubernetes que vous envisagez d'utiliser. La version {{site.data.keyword.containershort_notm}} actuelle par défaut de Kubernetes est la version 1.8.8. 
+    1.  Pour obtenir la compatibilité fonctionnelle complète, téléchargez la version de l'interface CLI de Kubernetes qui correspond à la version du cluster Kubernetes que vous envisagez d'utiliser. La version {{site.data.keyword.containershort_notm}} actuelle par défaut de Kubernetes est la version 1.8.11. 
 
-        OS X :   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/darwin/amd64/kubectl)
+        OS X :   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/darwin/amd64/kubectl)
 
-        Linux :   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/linux/amd64/kubectl)
+        Linux :   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/linux/amd64/kubectl)
 
-        Windows :   [https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.8.8/bin/windows/amd64/kubectl.exe)
+        Windows :   [https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://storage.googleapis.com/kubernetes-release/release/v1.8.11/bin/windows/amd64/kubectl.exe)
 
-          **Astuce :** si vous utilisez Windows, installez l'interface CLI de Kubernetes dans le même répertoire que l'interface CLI de {{site.data.keyword.Bluemix_notm}}. Cette configuration vous évite diverses modifications de chemin de fichier lorsque vous exécuterez des commandes plus tard.
+          **Astuce :** si vous utilisez Windows, installez l'interface CLI de Kubernetes dans le même répertoire que l'interface CLI d'{{site.data.keyword.Bluemix_notm}}. Cette configuration vous évite diverses modifications de chemin de fichier lorsque vous exécuterez des commandes plus tard.
 
     2.  Si vous utilisez un système OS X ou Linux, procédez comme suit :
         1.  Déplacez le fichier exécutable vers le répertoire `/usr/local/bin`.
 
             ```
-            mv /<path_to_file>/kubectl /usr/local/bin/kubectl
+            mv filepath/kubectl /usr/local/bin/kubectl
             ```
             {: pre}
 
@@ -148,7 +148,7 @@ Félicitations ! Vous avez installé les interfaces CLI utilisées dans les proc
 Configurez un référentiel d'images privé dans {{site.data.keyword.registryshort_notm}} et ajoutez des valeurs confidentielles à votre cluster de sorte que l'application puisse accéder au service {{site.data.keyword.toneanalyzershort}}.
 {: shortdesc}
 
-1.  A l'invite, connectez-vous à l'interface CLI de {{site.data.keyword.Bluemix_notm}} en utilisant vos données d'identification {{site.data.keyword.Bluemix_notm}}.
+1.  A l'invite, connectez-vous à l'interface CLI d'{{site.data.keyword.Bluemix_notm}} en utilisant vos données d'identification {{site.data.keyword.Bluemix_notm}}.
 
     ```
     bx login [--sso]
@@ -160,17 +160,19 @@ Configurez un référentiel d'images privé dans {{site.data.keyword.registrysho
 2.  Configurez votre référentiel d'images privé dans {{site.data.keyword.registryshort_notm}}
 pour stocker de manière sécurisée et partager vos images Docker avec tous les utilisateurs du cluster. Un référentiel d'images privé dans {{site.data.keyword.Bluemix_notm}} est identifié par un espace de nom. L'espace de nom est utilisé pour créer une URL unique vers votre référentiel d'images que vos développeurs peuvent utiliser pour accéder aux images Docker privées.
 
-    Dans cet exemple, l'entreprise PR désire créer un seul registre d'images dans {{site.data.keyword.registryshort_notm}} et spécifie donc _pr_firm_ comme nom d'espace dans lequel regrouper toutes les images de leur compte. Remplacez _&lt;your_namespace&gt;_ par un espace nom de votre choix sans rapport avec ce tutoriel.
+   
+    
+    Dans cet exemple, l'entreprise PR désire créer un seul registre d'images dans {{site.data.keyword.registryshort_notm}} et spécifie donc _pr_firm_ comme nom d'espace dans lequel regrouper toutes les images de leur compte. Remplacez _&lt;namespace&gt;_ par un espace de nom de votre choix sans rapport avec ce tutoriel.
 
     ```
-    bx cr namespace-add <your_namespace>
+    bx cr namespace-add <namespace>
     ```
     {: pre}
 
 3.  Avant de passer à l'étape suivante, vérifiez que le déploiement de votre noeud worker a abouti.
 
     ```
-    bx cs workers <cluster_name>
+    bx cs workers <cluster_name_or_ID>
     ```
      {: pre}
 
@@ -178,7 +180,7 @@ pour stocker de manière sécurisée et partager vos images Docker avec tous les
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Location   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.48.131.37   10.177.161.132   free           normal   Ready    mil01      1.8.8
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.8.11
     ```
     {: screen}
 
@@ -193,7 +195,7 @@ Chaque fois que vous vous connectez à l'interface CLI du conteneur pour gérer 
 1.  Obtenez la commande permettant de définir la variable d'environnement et téléchargez les fichiers de configuration Kubernetes.
 
     ```
-    bx cs cluster-config <cluster_name>
+    bx cs cluster-config <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -234,8 +236,8 @@ Chaque fois que vous vous connectez à l'interface CLI du conteneur pour gérer 
     Exemple de sortie :
 
     ```
-    Client Version: v1.8.8
-    Server Version: v1.8.8
+    Client Version: v1.8.11
+    Server Version: v1.8.11
     ```
     {: screen}
 
@@ -244,30 +246,30 @@ Chaque fois que vous vous connectez à l'interface CLI du conteneur pour gérer 
 
 Via les services {{site.data.keyword.Bluemix_notm}}, vous pouvez tirer parti dans vos applications des fonctionnalités que vous avez déjà développées. Tout service {{site.data.keyword.Bluemix_notm}} lié au cluster peut être utilisé par une application quelconque déployée dans ce cluster. Répétez les étapes ci-après pour chaque service {{site.data.keyword.Bluemix_notm}} que vous désirez utiliser avec vos applications.
 
-1.  Ajoutez le service {{site.data.keyword.toneanalyzershort}} à votre compte {{site.data.keyword.Bluemix_notm}}.
+1.  Ajoutez le service {{site.data.keyword.toneanalyzershort}} à votre compte {{site.data.keyword.Bluemix_notm}}. Remplacez <service_name> par le nom de votre instance de service.
 
     **Remarque :** lorsque vous ajoutez le service {{site.data.keyword.toneanalyzershort}} à votre compte, un message s'affiche pour indiquer que ce service n'est pas gratuit. Si vous modérez votre appel d'API, ce tutoriel n'est pas assujetti à des frais pour le service {{site.data.keyword.watson}}. [Consultez les informations de tarification du service {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/watson/developercloud/tone-analyzer.html#pricing-block).
 
     ```
-    bx service create tone_analyzer standard <mytoneanalyzer>
+    bx service create tone_analyzer standard <service_name>
     ```
     {: pre}
 
 2.  Associez l'instance {{site.data.keyword.toneanalyzershort}} à l'espace de nom Kubernetes `default` pour le cluster. Ensuite, vous pourrez créer vos propres espaces de nom pour gérer les accès utilisateur aux ressources Kubernetes, mais dans l'immédiat, utilisez l'espace de nom`default`. Les espaces de nom Kubernetes sont différents de l'espace de nom du registre que vous avez créé auparavant.
 
     ```
-    bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
+    bx cs cluster-service-bind <cluster_name> default <service_name>
     ```
     {: pre}
 
     Sortie :
 
     ```
-    bx cs cluster-service-bind <cluster_name> default <mytoneanalyzer>
-        Binding service instance to namespace...
-        OK
-        Namespace:	default
-        Secret name:	binding-mytoneanalyzer
+    bx cs cluster-service-bind pr_firm_cluster default mytoneanalyzer
+    Binding service instance to namespace...
+    OK
+    Namespace:	default
+    Secret name:	binding-mytoneanalyzer
     ```
     {: screen}
 
@@ -297,3 +299,4 @@ Parfait ! Vous avez configuré votre cluster et votre environnement local est pr
 * [Testez vos connaissances en répondant à un quiz !![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)
 
 * Exécutez le [Tutoriel : Déploiement d'applications dans des clusters Kubernetes dans {{site.data.keyword.containershort_notm}}](cs_tutorials_apps.html#cs_apps_tutorial) pour déployer l'application de l'entreprise PR dans le cluster que vous avez créé.
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-06"
+lastupdated: "2018-4-20"
 
 
 ---
@@ -17,83 +17,170 @@ lastupdated: "2018-03-06"
 {:download: .download}
 
 
-# Assegnazione dell'accesso utente ai cluster
+# Assegnazione dell'accesso al cluster
 {: #users}
 
-Puoi concedere l'accesso a un cluster Kubernetes per garantire che solo gli utenti autorizzati possano lavorare con il cluster e distribuire i contenitori al cluster in {{site.data.keyword.containerlong}}.
-{:shortdesc}
+Come amministratore del cluster, puoi definire le politiche di accesso per il tuo cluster Kubernetes per creare livelli diversi di accesso per utenti differenti. Ad esempio, puoi autorizzare determinati utenti a lavorare con le risorse cluster mentre altri possono solo distribuire i contenitori.
+{: shortdesc}
 
+## Pianificazione delle richieste di accesso
+{: #planning_access}
 
-## Pianificazione dei processi di comunicazione
-Come amministratore di un cluster, considera come potresti stabilire un processo di comunicazione con cui i membri della tua organizzazione ti comunichino le richieste di accesso in modo da poter essere organizzato.
-{:shortdesc}
+Come amministratore del cluster, potrebbe essere difficile tenere traccia delle richieste di accesso. Stabilire un modello di comunicazione per le richieste di accesso è essenziale per mantenere la sicurezza del tuo cluster.
+{: shortdesc}
 
-Fornisci istruzioni agli utenti del tuo cluster su come richiedere l'accesso a un cluster o su come ottenere assistenza con qualsiasi tipo di attività comuni da un amministratore del cluster. Poiché Kubernetes non facilita questo tipo di comunicazione, ogni team può avere variazioni sul proprio processo preferito.
+Per essere sicuro che le persone giuste abbiano l'accesso corretto, sii molto chiaro con coloro che hanno accesso al cluster circa le tue politiche per la richiesta di accesso o la richiesta di assistenza per le attività comuni. 
 
-Puoi scegliere uno dei seguenti metodi o stabilire il tuo proprio metodo.
-- Crea un sistema di ticket
-- Crea un template di modulo
-- Crea una pagina wiki
-- Richiedi una richiesta tramite e-mail
-- Utilizza il metodo di tracciamento dei problemi che già usi per tracciare il lavoro quotidiano del tuo team
+Potresti avere già un metodo che funziona per il tuo team ed è ottimo! Se stai cercando da dove iniziare, prova con uno dei seguenti metodi. 
 
+*  Crea un sistema di ticket
+*  Crea un template di modulo
+*  Crea una pagina wiki
+*  Richiedi una richiesta tramite e-mail
+*  Utilizza il sistema di tracciamento dei problemi che già usi per tracciare il lavoro quotidiano del tuo team. 
 
-## Gestione dell'accesso al cluster
-{: #managing}
-
-A ogni utente che lavora con {{site.data.keyword.containershort_notm}} deve essere assegnata una combinazione di ruoli utente specifici per il sevizio
-che determina quali azioni può eseguire un utente.
-{:shortdesc}
-
-<dl>
-<dt>politiche di accesso
-{{site.data.keyword.containershort_notm}}</dt>
-<dd>In IAM (Identity and Access Management), le politiche di accesso {{site.data.keyword.containershort_notm}} determinano le azioni di gestione cluster che puoi eseguire su un
-cluster, come la creazione o rimozione dei cluster e l'aggiunta o la rimozione di nodi di lavoro supplementari. Queste politiche devono essere configurate insieme alle politiche dell'infrastruttura. Puoi concedere l'accesso ai cluster su base regionale.</dd>
-<dt>Politiche di accesso all'infrastruttura</dt>
-<dd>In IAM (Identity and Access Management), le politiche di accesso all'infrastruttura consentono il completamento delle azioni richieste dall'interfaccia utente
-{{site.data.keyword.containershort_notm}} dalla CLI nell'infrastruttura IBM Cloud (SoftLayer). Queste politiche devono essere configurate insieme alle politiche di accesso {{site.data.keyword.containershort_notm}}. [Ulteriori informazioni sui ruoli](/docs/iam/infrastructureaccess.html#infrapermission).</dd>
-<dt>Gruppi di risorse</dt>
-<dd>Un gruppo di risorse è un modo per organizzare i servizi {{site.data.keyword.Bluemix_notm}} in raggruppamenti in modo da poter assegnare rapidamente agli utenti l'accesso a più di una risorsa alla volta. [Scopri come gestire gli utenti utilizzando i gruppi di risorse](/docs/account/resourcegroups.html#rgs).</dd>
-<dt>Ruoli Cloud Foundry</dt>
-<dd>In IAM (Identity and Access Management), a ogni utente deve essere assegnato un ruolo Cloud Foundry. Questo ruolo
-determina le azioni che l'utente può eseguire sull'account {{site.data.keyword.Bluemix_notm}}, come l'invito di altri utenti
-o la visualizzazione dell'utilizzo della quota. [Ulteriori informazioni sui ruoli Cloud Foundry disponibili](/docs/iam/cfaccess.html#cfaccess).</dd>
-<dt>Ruoli RBAC Kubernetes</dt>
-<dd>Ad ogni utente a cui è assegnata una politica di accesso {{site.data.keyword.containershort_notm}} viene assegnato automaticamente un
-ruolo RBAC.  In Kubernetes, i ruoli RBAC determinano le azioni che puoi eseguire sulle risorse Kubernetes
-all'interno del cluster. I ruoli RBAC vengono configurati solo per lo spazio dei nomi predefinito. L'amministratore del cluster
-può aggiungere i ruoli RBAC per gli altri spazi dei nomi nel cluster. Consulta la seguente tabella nella sezione [Autorizzazioni e politiche di accesso](#access_policies) per vedere a quale ruolo RBAC corrisponde una determinata politica di accesso {{site.data.keyword.containershort_notm}}. Per ulteriori informazioni sui ruoli RBAC in generale, vedi [Using RBAC Authorization ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) nella documentazione di Kubernetes.</dd>
-</dl>
-
-<br />
-
+Ti senti sopraffatto? Prova questa esercitazione sulle [procedure consigliate per organizzare utenti, team e applicazioni](/docs/tutorials/users-teams-applications.html).
+{: tip}
 
 ## Autorizzazioni e politiche di accesso
 {: #access_policies}
 
-Esamina le politiche di accesso e le autorizzazioni che puoi concedere agli utenti nel tuo account {{site.data.keyword.Bluemix_notm}}.
-{:shortdesc}
+L'ambito di una politica di accesso si basa su un ruolo o sui ruoli definiti dagli utenti che determinano le azioni che essi possono eseguire. Puoi impostare politiche che siano specifiche per i tuoi ruoli cluster, infrastruttura, istanze dell'infrastruttura o Cloud Foundry.
+{: shortdesc}
 
-I ruoli operatore ed editor di {{site.data.keyword.Bluemix_notm}} Identity Access and Management (IAM) hanno autorizzazioni separate. Se vuoi, ad esempio, che un utente aggiunga nodi di lavoro ed esegua il bind dei servizi, devi assegnare all'utente sia il ruolo di operatore che di editor. Per maggiori dettagli sulle politiche di accesso all'infrastruttura corrispondenti, vedi [Personalizzazione delle autorizzazioni dell'infrastruttura per un utente](#infra_access).<br/><br/>Se modifichi la politica di accesso di un utente, le politiche RBAC associate alla modifica nel tuo cluster vengono eliminate automaticamente. </br></br>**Nota:** quando esegui il downgrade delle autorizzazioni, ad esempio se vuoi assegnare l'accesso di visualizzatore a un amministratore cluster precedente, devi attendere alcuni minuti per il completamento del downgrade.
+{: #managing}
+Devi definire le politiche di accesso per ogni utente che lavora con {{site.data.keyword.containershort_notm}}. Alcune politiche sono predefinite, ma altre possono essere personalizzate. Controlla l'immagine e le definizioni riportate di seguito per vedere quali ruoli sono allineati alle attività utente comuni e identificare dove potresti voler personalizzare una politica. 
 
-|Politica di accesso {{site.data.keyword.containershort_notm}}|Autorizzazioni di gestione del cluster|Autorizzazioni delle risorse Kubernetes|
-|-------------|------------------------------|-------------------------------|
-|Amministratore|Questo ruolo eredita le autorizzazioni dai ruoli editor, operatore e visualizzatore
-per tutti i cluster in questo account. <br/><br/>Quando impostato per tutte le istanze del servizio:<ul><li>Creare un cluster gratuito o standard</li><li>Impostare le credenziali per un account {{site.data.keyword.Bluemix_notm}} per accedere al portfolio dell'infrastruttura IBM Cloud (SoftLayer)</li><li>Rimuovere un cluster</li><li>Assegnare e modificare le politiche di accesso {{site.data.keyword.containershort_notm}}
-per altri utenti esistenti in questo account.</li></ul><p>Quando impostato per un ID client specifico:<ul><li>Rimuovere un cluster specifico</li></ul></p>Politica di accesso all'infrastruttura corrispondente: super utente<br/><br/><strong>Nota</strong>: per creare le risorse come le macchine, le VLAN e le sottoreti, gli utenti hanno bisogno del ruolo **Super utente**.|<ul><li>Ruolo RBAC: amministratore del cluster</li><li>Accesso in lettura/scrittura alle risorse in ogni spazio dei nomi</li><li>Creare ruoli all'interno di uno spazio dei nomi</li><li>Accesso al dashboard Kubernetes</li><li>Creare una risorsa Ingress che renda le applicazioni disponibili pubblicamente.</li></ul>|
-|Operatore|<ul><li>Aggiungere ulteriori nodi di lavoro a un cluster</li><li>Rimuovere nodi di lavoro da un cluster</li><li>Riavviare un nodo di lavoro</li><li>Ricaricare un nodo di lavoro</li><li>Aggiungere una sottorete a un cluster</li></ul><p>Politica di accesso all'infrastruttura corrispondente: [Personalizzato](#infra_access)</p>|<ul><li>Ruolo RBAC: amministratore</li><li>Accesso in lettura/scrittura alle risorse nello spazio dei nomi predefinito ma non allo spazio dei nomi</li><li>Creare ruoli all'interno di uno spazio dei nomi</li></ul>|
-|Editor <br/><br/><strong>Suggerimento</strong>: utilizza questo ruolo per gli sviluppatori dell'applicazione.|<ul><li>Eseguire il bind di un servizio {{site.data.keyword.Bluemix_notm}} a un cluster.</li><li>Annullare il bind di un servizio {{site.data.keyword.Bluemix_notm}} a un cluster.</li><li>Creare un webhook.</li></ul><p>Politica di accesso all'infrastruttura corrispondente: [Personalizzato](#infra_access)|<ul><li>Ruolo RBAC: modifica</li><li>Accesso in lettura/scrittura alle risorse nello spazio dei nomi predefinito</li></ul></p>|
-|Visualizzatore|<ul><li>Elencare un cluster</li><li>Visualizzare i dettagli per un cluster</li></ul><p>Politica di accesso all'infrastruttura corrispondente: solo visualizzazione</p>|<ul><li>Ruolo RBAC: visualizza</li><li>Accesso in lettura alle risorse nello spazio dei nomi predefinito</li><li>Nessun accesso in lettura ai segreti Kubernetes</li></ul>|
+![{{site.data.keyword.containershort_notm}} - ruoli di accesso](/images/user-policies.png)
 
-|Politica di accesso Cloud Foundry|Autorizzazioni di gestione dell'account|
-|-------------|------------------------------|
-|Ruolo organizzazione: gestore|<ul><li>Aggiungere ulteriori utenti a un account {{site.data.keyword.Bluemix_notm}}</li></ul>| |
-|Ruolo spazio: sviluppatore|<ul><li>Creare le istanze del servizio {{site.data.keyword.Bluemix_notm}}</li><li>Eseguire il bind delle istanze del servizio {{site.data.keyword.Bluemix_notm}}
-ai cluster</li></ul>| 
+Figura. Ruoli di accesso {{site.data.keyword.containershort_notm}}
+
+<dl>
+  <dt>Politiche IAM (Identity and Access Management)</dt>
+    <dd><p><em>Piattaforma</em>: puoi determinare le azioni che possono essere eseguite dai singoli utenti su un cluster {{site.data.keyword.containershort_notm}}. Puoi impostare queste politiche in base alla regione. Alcune azioni di esempio sono la creazione o la rimozione di cluster oppure l'aggiunta di nodi di lavoro extra. Queste politiche devono essere configurate insieme alle politiche dell'infrastruttura.</p>
+    <p><em>Infrastruttura</em>: puoi determinare i livelli di accesso per la tua infrastruttura come ad esempio le macchine del nodo cluster, la rete o le risorse di archiviazione. Si applica la stessa politica se l'utente esegue la richiesta dalla GUI {{site.data.keyword.containershort_notm}} oppure tramite la CLI; anche quando le azioni vengono completate nell'infrastruttura IBM Cloud (SoftLayer). Devi impostare questo tipo di politica insieme alle politiche di accesso alla piattaforma {{site.data.keyword.containershort_notm}}. Per informazioni sui ruoli disponibili, controlla le [autorizzazioni dell'infrastruttura](/docs/iam/infrastructureaccess.html#infrapermission).</p></dd>
+  <dt>Ruoli RBAC (Kubernetes Resource Based Access Control)</dt>
+    <dd>A ogni utente a cui è assegnata una politica di accesso alla piattaforma viene assegnato automaticamente un ruolo Kubernetes. In Kubernetes, [Role Based Access Control (RBAC) ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) determina le azioni che un utente può eseguire sulle risorse all'interno di un cluster. I ruoli RBAC vengono configurati automaticamente per lo spazio dei nomi <code>default</code>, ma come amministratore del cluster, puoi assegnare i ruoli per gli altri spazi dei nomi. </dd>
+  <dt>Cloud Foundry</dt>
+    <dd>Al momento, non tutti i servizi possono essere gestiti con Cloud IAM. Se stai utilizzando uno di questi servizi, puoi continuare a utilizzare i [ruoli utente Cloud Foundry](/docs/iam/cfaccess.html#cfaccess) per controllare l'accesso ai tuoi servizi. </dd>
+</dl>
+
+
+Downgrade delle autorizzazioni? Il completamento di questa operazione può richiedere alcuni minuti.
+{: tip}
+
+### Ruoli della piattaforma
+{: #platform_roles}
+
+{{site.data.keyword.containershort_notm}} è configurato per utilizzare i ruoli della piattaforma {{site.data.keyword.Bluemix_notm}}. Le autorizzazioni ruolo si basano l'una sull'altra, ciò significa che il ruolo `Editor` ha le stesse autorizzazioni del ruolo `Visualizzatore`, più le autorizzazioni concesse ad un editor. La tabella riportata di seguito spiega i tipi di azioni che ciascun ruolo può eseguire. 
+
+<table>
+  <tr>
+    <th>Ruoli della piattaforma</th>
+    <th>Azioni di esempio</th>
+    <th>Ruolo RBAC corrispondente </th>
+  </tr>
+  <tr>
+      <td>Visualizzatore</td>
+      <td>Visualizza i dettagli per un cluster o altre istanze di servizio. </td>
+      <td>Visualizzatore</td>
+  </tr>
+  <tr>
+    <td>Editor</td>
+    <td>Può eseguire o annullare il bind di un servizio IBM Cloud a un cluster oppure creare un webhook.</td>
+    <td>Editor</td>
+  </tr>
+  <tr>
+    <td>Operatore</td>
+    <td>Può creare, rimuovere, riavviare o ricaricare un nodo di lavoro. Può aggiungere una sottorete a un cluster.</td>
+    <td>Amministratore</td>
+  </tr>
+  <tr>
+    <td>Amministratore</td>
+    <td>Può creare e rimuovere i cluster. Può modificare le politiche di accesso per altri utenti a livello di account per il servizio e l'infrastruttura. </td>
+    <td>Amministratore cluster</td>
+  </tr>
+</table>
+
+Per ulteriori informazioni sull'assegnazione dei ruoli utente nell'IU, vedi [Gestione dell'accesso IAM](/docs/iam/mngiam.html#iammanidaccser).
+
+### Ruoli dell'infrastruttura
+{: #infrastructure_roles}
+
+I ruoli dell'infrastruttura consentono agli utenti di eseguire attività sulle risorse a livello dell'infrastruttura. La tabella riportata di seguito spiega i tipi di azioni che ciascun ruolo può eseguire. I ruoli dell'infrastruttura sono personalizzabili; assicurati di fornire agli utenti solo l'accesso di cui necessitano per eseguire le loro attività. 
+
+<table>
+  <tr>
+    <th>Ruolo dell'infrastruttura</th>
+    <th>Azioni di esempio</th>
+  </tr>
+  <tr>
+    <td><i>Solo visualizzazione</i></td>
+    <td>Può visualizzare i dettagli dell'infrastruttura. Può vedere un riepilogo dell'account, compresi le fatture e i pagamenti. </td>
+  </tr>
+  <tr>
+    <td><i>Utente di base</i></td>
+    <td>Può modificare le configurazioni del servizio, inclusi gli indirizzi IP, aggiungere o modificare i record DNS e aggiungere i nuovi utenti con l'accesso all'infrastruttura. </td>
+  </tr>
+  <tr>
+    <td><i>Super utente</i></td>
+    <td>Può eseguire tutte le azioni correlate all'infrastruttura. </td>
+  </tr>
+</table>
+
+Per iniziare ad assegnare i ruoli, segui la procedura presente in [Personalizzazione delle autorizzazioni dell'infrastruttura per un utente](#infra_access).
+
+### Ruoli RBAC
+{: #rbac_roles}
+
+RBAC (Resource-based access control) costituisce un modo per proteggere le tue risorse che si trovano all'interno del cluster e per decidere quali utenti possono eseguire i diversi tipi di azioni Kubernetes. Nella seguente tabella puoi vedere i tipi di ruoli RBAC e i tipi di azioni che gli utenti possono eseguire con ciascun ruolo. Le autorizzazioni si basano l'una sull'altra, ciò vuol dire che un `Amministratore` ha anche tutte le politiche fornite con i ruoli `Visualizzatore` ed `Editor`. Assicurati di fornire agli utenti solo l'accesso di cui necessitano. 
+
+<table>
+  <tr>
+    <th>Ruolo RBAC</th>
+    <th>Azioni di esempio</th>
+  </tr>
+  <tr>
+    <td>Visualizzatore</td>
+   <td>Può visualizzare le risorse all'interno dello spazio dei nomi predefinito. </td>
+  </tr>
+  <tr>
+    <td>Editor</td>
+    <td>Può leggere e scrivere le risorse all'interno dello spazio dei nomi predefinito. </td>
+  </tr>
+  <tr>
+    <td>Amministratore</td>
+    <td>Può leggere e scrivere le risorse all'interno dello spazio dei nomi predefinito ma non lo spazio dei nomi stesso. Può creare i ruoli all'interno di uno spazio dei nomi. </td>
+  </tr>
+  <tr>
+    <td>Amministratore cluster</td>
+    <td>Può leggere e scrivere le risorse in ogni spazio dei nomi. Può creare i ruoli all'interno di uno spazio dei nomi. Può accedere al dashboard Kubernetes. Può creare una risorsa Ingress che rende disponibili pubblicamente le applicazioni. </td>
+  </tr>
+</table>
 
 <br />
 
+
+## Aggiunta di utenti a un account {{site.data.keyword.Bluemix_notm}}
+{: #add_users}
+
+Puoi aggiungere utenti a un account {{site.data.keyword.Bluemix_notm}} per concedere l'accesso ai tuoi cluster.
+{:shortdesc}
+
+Prima di iniziare, verifica che ti sia stato assegnato il ruolo di `Gestore` Cloud Foundry per un account {{site.data.keyword.Bluemix_notm}}.
+
+1.  [Aggiungi l'utente all'account](../iam/iamuserinv.html#iamuserinv).
+2.  Nella sezione **Accesso**, espandi **Servizi**.
+3.  Assegna un ruolo della piattaforma ad un utente per impostare l'accesso per {{site.data.keyword.containershort_notm}}.
+      1. Dall'elenco a discesa **Servizi**, seleziona **{{site.data.keyword.containershort_notm}}**.
+      2. Dall'elenco a discesa **Regione**, seleziona la regione in cui invitare l'utente.
+      3. Dall'elenco a discesa **Istanza del servizio**, seleziona il cluster da cui invitare l'utente. Per trovare l'ID di uno specifico cluster, esegui `bx cs clusters`.
+      4. Nella sezione **Seleziona ruoli**, scegli un ruolo. Per trovare un elenco di azioni supportate per ciascun ruolo, vedi [Autorizzazioni e politiche di accesso](#access_policies).
+4. [Facoltativo: assegna un ruolo Cloud Foundry](/docs/iam/mngcf.html#mngcf).
+5. [Facoltativo: assegna un ruolo dell'infrastruttura](/docs/iam/infrastructureaccess.html#infrapermission).
+6. Fai clic su **Invita utenti**.
+
+<br />
 
 
 ## Descrizione della chiave API IAM e del comando `bx cs credentials-set`
@@ -109,87 +196,8 @@ Quando un altro utente esegue un'azione in questa regione che richiede l'interaz
 <dd>Se hai un account Pagamento a consumo {{site.data.keyword.Bluemix_notm}}, hai accesso al portfolio dell'infrastruttura IBM Cloud (SoftLayer) per impostazione predefinita. Tuttavia, potresti voler utilizzare un altro account dell'infrastruttura IBM Cloud (SoftLayer) di cui già disponi per ordinare l'infrastruttura. Puoi collegare questo account dell'infrastruttura al tuo account {{site.data.keyword.Bluemix_notm}} utilizzando il comando [<code>bx cs credentials-set</code>](cs_cli_reference.html#cs_credentials_set). </br></br>Se le credenziali dell'infrastruttura IBM Cloud (SoftLayer) vengono impostate manualmente, queste credenziali sono utilizzate per ordinare l'infrastruttura, anche se esiste già una chiave API IAM per l'account. Se l'utente di cui sono state memorizzate le credenziali non dispone delle autorizzazioni necessarie per ordinare l'infrastruttura, le azioni relative all'infrastruttura, come la creazione di un cluster o il ricaricamento di un nodo di lavoro, possono avere esito negativo. </br></br> Per rimuovere le credenziali dell'infrastruttura IBM Cloud (SoftLayer) che erano state impostate manualmente, puoi utilizzare il comando [<code>bx cs credentials-unset</code>](cs_cli_reference.html#cs_credentials_unset). Dopo aver rimosso le credenziali, viene utilizzata la chiave API IAM per ordinare l'infrastruttura. </dd>
 </dl>
 
-## Aggiunta di utenti a un account {{site.data.keyword.Bluemix_notm}}
-{: #add_users}
-
-Puoi aggiungere utenti a un account {{site.data.keyword.Bluemix_notm}} per concedere l'accesso ai tuoi cluster.
-{:shortdesc}
-
-Prima di iniziare, verifica che ti sia stato assegnato il ruolo Gestore di Cloud Foundry per un account {{site.data.keyword.Bluemix_notm}}.
-
-1.  [Aggiungi l'utente all'account](../iam/iamuserinv.html#iamuserinv).
-2.  Nella sezione **Accesso**, espandi **Servizi**.
-3.  Assegna un ruolo di accesso {{site.data.keyword.containershort_notm}}. Dall'elenco a discesa **Assegna accesso a**, decidi se vuoi concedere l'accesso solo al tuo account {{site.data.keyword.containershort_notm}} (**Risorse**) o a una raccolta di varie risorse nel tuo account (**Gruppo di risorse**).
-  -  Per **Risorsa**:
-      1. Dall'elenco a discesa **Servizi**, seleziona **{{site.data.keyword.containershort_notm}}**.
-      2. Dall'elenco a discesa **Regione**, seleziona la regione in cui invitare l'utente. **Nota**: per l'accesso ai cluster nella [regione Asia Pacifico Nord](cs_regions.html#locations), vedi [Concessione dell'accesso IAM agli utenti per i cluster all'interno della regione Asia Pacifico Nord](#iam_cluster_region).
-      3. Dall'elenco a discesa **Istanza del servizio**, seleziona il cluster da cui invitare l'utente. Per trovare l'ID di uno specifico cluster, esegui `bx cs clusters`.
-      4. Nella sezione **Seleziona ruoli**, scegli un ruolo. Per trovare un elenco di azioni supportate per ciascun ruolo, vedi [Autorizzazioni e politiche di accesso](#access_policies).
-  - Per **Gruppo di risorse**:
-      1. Dall'elenco a discesa **Gruppo di risorse**, seleziona il gruppo di risorse che include le autorizzazioni per la risorsa {{site.data.keyword.containershort_notm}} del tuo account.
-      2. Dall'elenco a discesa **Assegna accesso a un gruppo di risorse**, seleziona un ruolo. Per trovare un elenco di azioni supportate per ciascun ruolo, vedi [Autorizzazioni e politiche di accesso](#access_policies).
-4. [Facoltativo: assegna un ruolo Cloud Foundry](/docs/iam/mngcf.html#mngcf).
-5. [Facoltativo: assegna un ruolo dell'infrastruttura](/docs/iam/infrastructureaccess.html#infrapermission).
-6. Fai clic su **Invita utenti**.
-
 <br />
 
-
-### Concessione dell'accesso IAM agli utenti per i cluster all'interno della regione Asia Pacifico Nord
-{: #iam_cluster_region}
-
-Quando [aggiungi utenti al tuo account {{site.data.keyword.Bluemix_notm}}](#add_users), selezioni le regioni alle quali concedere loro l'accesso. Tuttavia, alcune regioni, come Asia Pacifico Nord, potrebbero non essere disponibili nella console e devono essere aggiunte utilizzando la CLI.
-{:shortdesc}
-
-Prima di iniziare, verifica di essere un amministratore per l'account {{site.data.keyword.Bluemix_notm}}.
-
-1.  Accedi alla CLI {{site.data.keyword.Bluemix_notm}}. Seleziona l'account che vuoi utilizzare.
-
-    ```
-    bx login [--sso]
-    ```
-    {: pre}
-
-    **Nota:** se disponi di un ID federato, utilizza `bx login --sso` per accedere alla CLI {{site.data.keyword.Bluemix_notm}}. Immetti il tuo nome utente e usa l'URL fornito nell'output della CLI per richiamare la tua passcode monouso. Sai che hai un ID federato quando l'accesso ha esito negativo senza
-`--sso` e positivo con l'opzione `--sso`.
-
-2.  Scegli l'ambiente a cui desideri concedere le autorizzazioni, ad esempio la regione Asia Pacifico Nord (`jp-tok`). Per ulteriori dettagli sulle opzioni di comando come organizzazione e spazio, vedi il [comando `bluemix target`](../cli/reference/bluemix_cli/bx_cli.html#bluemix_target).
-
-    ```
-    bx target -r jp-tok
-    ```
-    {: pre}
-
-3.  Ottieni il nome o gli ID dei cluster della regione a cui vuoi concedere l'accesso.
-
-    ```
-    bx cs clusters
-    ```
-    {: pre}
-
-4.  Ottieni gli ID utente a cui vuoi concedere l'accesso.
-
-    ```
-    bx account users
-    ```
-    {: pre}
-
-5.  Seleziona i ruoli per la politica di accesso.
-
-    ```
-    bx iam roles --service containers-kubernetes
-    ```
-    {: pre}
-
-6.  Concedi all'utente l'accesso al cluster con il ruolo appropriato. Questo esempio assegna a `user@example.com` i ruoli `Operator` ed `Editor` per tre cluster.
-
-    ```
-    bx iam user-policy-create user@example.com --roles Operator,Editor --service-name containers-kubernetes --region jp-tok --service-instance cluster1,cluster2,cluster3
-    ```
-    {: pre}
-
-    Per concedere l'accesso ai cluster esistenti e futuri nella regione, non specificare l'indicatore `--service-instance`. Per ulteriori informazioni, vedi il [comando `bluemix iam user-policy-create`](../cli/reference/bluemix_cli/bx_cli.html#bluemix_iam_user_policy_create).
-    {:tip}
 
 ## Personalizzazione delle autorizzazioni dell'infrastruttura per un utente
 {: #infra_access}
@@ -214,36 +222,37 @@ Ad esempio, gli **Utenti di base** possono riavviare un nodo di lavoro ma non po
     <table summary="Autorizzazioni dell'infrastruttura per scenari comuni di {{site.data.keyword.containershort_notm}}.">
      <caption>Autorizzazioni dell'infrastruttura comunemente richieste per {{site.data.keyword.containershort_notm}}</caption>
      <thead>
-     <th>Attività comuni in {{site.data.keyword.containershort_notm}}</th>
-     <th>Autorizzazioni dell'infrastruttura richieste per scheda</th>
+      <th>Attività comuni in {{site.data.keyword.containershort_notm}}</th>
+      <th>Autorizzazioni dell'infrastruttura richieste per scheda</th>
      </thead>
      <tbody>
-     <tr>
-     <td><strong>Autorizzazioni minime</strong>: <ul><li>Crea un cluster.</li></ul></td>
-     <td><strong>Dispositivi</strong>:<ul><li>Visualizza i dettagli del server virtuale</li><li>Riavvia il server e visualizza le informazioni di sistema IPMI</li><li>Emetti i ricaricamenti SO e avvia il kernel di salvataggio</li></ul><strong>Account</strong>: <ul><li>Aggiungi/Aggiorna istanze cloud</li><li>Aggiungi server</li></ul></td>
-     </tr>
-     <tr>
-     <td><strong>Amministrazione cluster</strong>: <ul><li>Crea, aggiorna ed elimina i cluster.</li><li>Aggiungi, ricarica e riavvia i nodi di lavoro.</li><li>Visualizza le VLAN.</li><li>Crea sottoreti.</li><li>Distribuisci i pod e i servizi di bilanciamento del carico.</li></ul></td>
-     <td><strong>Supporto</strong>:<ul><li>Visualizza ticket</li><li>Aggiungi ticket</li><li>Modifica ticket</li></ul>
-     <strong>Dispositivi</strong>:<ul><li>Visualizza i dettagli del server virtuale</li><li>Riavvia il server e visualizza le informazioni di sistema IPMI</li><li>Aggiorna server</li><li>Emetti i ricaricamenti SO e avvia il kernel di salvataggio</li></ul>
-     <strong>Servizi</strong>:<ul><li>Gestisci chiavi SSH</li></ul>
-     <strong>Account</strong>:<ul><li>Visualizza riepilogo account</li><li>Aggiungi/Aggiorna istanze cloud</li><li>Annulla server</li><li>Aggiungi server</li></ul></td>
-     </tr>
-     <tr>
-     <td><strong>Archiviazione</strong>: <ul><li>Crea attestazioni del volume persistente per il provisioning di volumi persistenti.</li><li>Crea e gestisci risorse dell'infrastruttura di archiviazione.</li></ul></td>
-     <td><strong>Servizi</strong>:<ul><li>Gestisci archiviazione</li></ul><strong>Account</strong>:<ul><li>Aggiungi archiviazione</li></ul></td>
-     </tr>
-     <tr>
-     <td><strong>Rete privata</strong>: <ul><li>Gestisci le VLAN private per la rete in cluster</li><li>Configura la connettività VPN per le reti private.</li></ul></td>
-     <td><strong>Rete</strong>:<ul><li>Gestisci le rotte di sottorete della rete</li><li>Gestisci lo spanning della VLAN di rete</li><li>Gestisci i tunnel di rete IPSEC</li><li>Gestisci gateway di rete</li><li>Amministrazione VPN</li></ul></td>
-     </tr>
-     <tr>
-     <td><strong>Rete pubblica</strong>:<ul><li>Configura la rete Ingress o programma di bilanciamento del carico pubblica per esporre le applicazioni.</li></ul></td>
-     <td><strong>Dispositivi</strong>:<ul><li>Gestisci programmi di bilanciamento del carico</li><li>Modifica nome host/dominio</li><li>Gestisci controllo porta</li></ul>
-     <strong>Rete</strong>:<ul><li>Aggiungi calcoli con la porta di rete pubblica</li><li>Gestisci le rotte di sottorete della rete</li><li>Gestisci lo spanning della VLAN di rete</li><li>Aggiungi indirizzi IP</li></ul>
-     <strong>Servizi</strong>:<ul><li>Gestisci DNS, DNS inverso e WHOIS</li><li>Visualizza certificati (SSL)</li><li>Gestisci certificati (SSL)</li></ul></td>
-     </tr>
-     </tbody></table>
+       <tr>
+         <td><strong>Autorizzazioni minime</strong>: <ul><li>Crea un cluster.</li></ul></td>
+         <td><strong>Dispositivi</strong>:<ul><li>Visualizza i dettagli del server virtuale</li><li>Riavvia il server e visualizza le informazioni di sistema IPMI</li><li>Emetti i ricaricamenti SO e avvia il kernel di salvataggio</li></ul><strong>Account</strong>: <ul><li>Aggiungi/Aggiorna istanze cloud</li><li>Aggiungi server</li></ul></td>
+       </tr>
+       <tr>
+         <td><strong>Amministrazione cluster</strong>: <ul><li>Crea, aggiorna ed elimina i cluster.</li><li>Aggiungi, ricarica e riavvia i nodi di lavoro.</li><li>Visualizza le VLAN.</li><li>Crea sottoreti.</li><li>Distribuisci i pod e i servizi di bilanciamento del carico.</li></ul></td>
+         <td><strong>Supporto</strong>:<ul><li>Visualizza ticket</li><li>Aggiungi ticket</li><li>Modifica ticket</li></ul>
+         <strong>Dispositivi</strong>:<ul><li>Visualizza i dettagli del server virtuale</li><li>Riavvia il server e visualizza le informazioni di sistema IPMI</li><li>Aggiorna server</li><li>Emetti i ricaricamenti SO e avvia il kernel di salvataggio</li></ul>
+         <strong>Servizi</strong>:<ul><li>Gestisci chiavi SSH</li></ul>
+         <strong>Account</strong>:<ul><li>Visualizza riepilogo account</li><li>Aggiungi/Aggiorna istanze cloud</li><li>Annulla server</li><li>Aggiungi server</li></ul></td>
+       </tr>
+       <tr>
+         <td><strong>Archiviazione</strong>: <ul><li>Crea attestazioni del volume persistente per il provisioning di volumi persistenti.</li><li>Crea e gestisci risorse dell'infrastruttura di archiviazione.</li></ul></td>
+         <td><strong>Servizi</strong>:<ul><li>Gestisci archiviazione</li></ul><strong>Account</strong>:<ul><li>Aggiungi archiviazione</li></ul></td>
+       </tr>
+       <tr>
+         <td><strong>Rete privata</strong>: <ul><li>Gestisci le VLAN private per la rete in cluster</li><li>Configura la connettività VPN per le reti private.</li></ul></td>
+         <td><strong>Rete</strong>:<ul><li>Gestisci le rotte di sottorete della rete</li><li>Gestisci lo spanning della VLAN di rete</li><li>Gestisci i tunnel di rete IPSEC</li><li>Gestisci gateway di rete</li><li>Amministrazione VPN</li></ul></td>
+       </tr>
+       <tr>
+         <td><strong>Rete pubblica</strong>:<ul><li>Configura la rete Ingress o programma di bilanciamento del carico pubblica per esporre le applicazioni.</li></ul></td>
+         <td><strong>Dispositivi</strong>:<ul><li>Gestisci programmi di bilanciamento del carico</li><li>Modifica nome host/dominio</li><li>Gestisci controllo porta</li></ul>
+         <strong>Rete</strong>:<ul><li>Aggiungi calcoli con la porta di rete pubblica</li><li>Gestisci le rotte di sottorete della rete</li><li>Gestisci lo spanning della VLAN di rete</li><li>Aggiungi indirizzi IP</li></ul>
+         <strong>Servizi</strong>:<ul><li>Gestisci DNS, DNS inverso e WHOIS</li><li>Visualizza certificati (SSL)</li><li>Gestisci certificati (SSL)</li></ul></td>
+       </tr>
+     </tbody>
+    </table>
 
 5.  Per salvare le modifiche, fai clic su **Modifica autorizzazioni del portale**.
 
@@ -253,15 +262,16 @@ Ad esempio, gli **Utenti di base** possono riavviare un nodo di lavoro ma non po
     * Per consentire agli utenti di accedere ai nuovi dispositivi che vengono creati, seleziona **Accesso concesso automaticamente quando vengono aggiunti nuovi dispositivi**.
     * Per salvare le modifiche, fai clic su **Aggiorna accesso dispositivo**.
 
-7.  Ritorna all'elenco dei profili utente e verifica che sia stato concesso l'**Accesso al dispositivo**.
+<br />
 
-## Autorizzazione di utenti con ruoli personalizzati di RBAC Kubernetes 
+
+## Autorizzazione di utenti con ruoli personalizzati di RBAC Kubernetes
 {: #rbac}
 
 Le politiche di accesso di {{site.data.keyword.containershort_notm}} corrispondono ad alcuni ruoli RBAC (role-based access control) di Kubernetes, come descritto in [Autorizzazioni e politiche di accesso](#access_policies). Per autorizzare altri ruoli Kubernetes che differiscono dalla politica di accesso corrispondente, puoi personalizzare i ruoli RBAC e quindi assegnare i ruoli a singoli individui o gruppi di utenti.
 {: shortdesc}
 
-Ad esempio, potresti voler concedere le autorizzazioni a un gruppo di sviluppatori affinché possano lavorare su un determinato gruppo API o con risorse all'interno di uno spazio dei nomi Kubernetes nel cluster, ma non nell'intero cluster. Dovrai creare un ruolo e quindi associare il ruolo agli utenti, utilizzando un nome utente che sia univoco per {{site.data.keyword.containershort_notm}}. Per informazioni più dettagliate, vedi [Using RBAC Authorization ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) nella documentazione di Kubernetes.
+Ad esempio, potresti voler concedere le autorizzazioni a un gruppo di sviluppatori affinché possano lavorare su un determinato gruppo API o con risorse all'interno di uno spazio dei nomi Kubernetes nel cluster, ma non nell'intero cluster. Dovrai creare un ruolo e quindi associare il ruolo agli utenti, utilizzando un nome utente che sia univoco per {{site.data.keyword.containershort_notm}}. Per informazioni più dettagliate, vedi [Using RBAC Authorization ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/admin/authorization/rbac/#api-overview) nella documentazione di Kubernetes.
 
 Prima di iniziare, [indirizza la CLI Kubernetes al cluster](cs_cli_install.html#cs_cli_configure).
 
@@ -286,7 +296,6 @@ Prima di iniziare, [indirizza la CLI Kubernetes al cluster](cs_cli_install.html#
         {: codeblock}
 
         <table>
-        <caption>Tabella. Descrizione dei componenti di questo YAML</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti di questo YAML</th>
         </thead>
@@ -309,15 +318,15 @@ Prima di iniziare, [indirizza la CLI Kubernetes al cluster](cs_cli_install.html#
         </tr>
         <tr>
         <td><code>rules/apiGroups</code></td>
-        <td><ul><li>Specifica i gruppi di API Kubernetes con i quali vuoi che gli utenti possano interagire, ad esempio `"apps"`, `"batch"` o `"extensions"`. </li><li>Per l'accesso al gruppo API principale nel percorso REST `api/v1`, lascia il gruppo vuoto: `[""]`.</li><li>Per ulteriori informazioni, vedi [API groups![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/api-overview/#api-groups) nella documentazione di Kubernetes.</li></ul></td>
+        <td><ul><li>Specifica i gruppi di API Kubernetes con i quali vuoi che gli utenti possano interagire, ad esempio `"apps"`, `"batch"` o `"extensions"`. </li><li>Per l'accesso al gruppo API principale nel percorso REST `api/v1`, lascia il gruppo vuoto: `[""]`.</li><li>Per ulteriori informazioni, vedi [API groups![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/api-overview/#api-groups) nella documentazione di Kubernetes.</li></ul></td>
         </tr>
         <tr>
         <td><code>rules/resources</code></td>
-        <td><ul><li>Specifica le risorse Kubernetes a cui vuoi concedere l'accesso, ad esempio `"daemonsets"`, `"deployments"`, `"events"` o `"ingresses"`.</li><li>Se specifichi `"nodes"`, il tipo di ruolo deve essere `ClusterRole`.</li><li>Per un elenco di risorse, vedi la tabella di [Tipi di risorse ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) nella pagina di aiuto di Kubernetes.</li></ul></td>
+        <td><ul><li>Specifica le risorse Kubernetes a cui vuoi concedere l'accesso, ad esempio `"daemonsets"`, `"deployments"`, `"events"` o `"ingresses"`.</li><li>Se specifichi `"nodes"`, il tipo di ruolo deve essere `ClusterRole`.</li><li>Per un elenco di risorse, vedi la tabella di [Tipi di risorse ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) nella pagina di aiuto di Kubernetes.</li></ul></td>
         </tr>
         <tr>
         <td><code>rules/verbs</code></td>
-        <td><ul><li>Specifica i tipi di azioni che vuoi che gli utenti siano in grado di eseguire, ad esempio `"get"`, `"list"`, `"describe"`, `"create"` o `"delete"`. </li><li>Per un elenco completo di verbi, vedi la [documentazione `kubectl` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).</li></ul></td>
+        <td><ul><li>Specifica i tipi di azioni che vuoi che gli utenti siano in grado di eseguire, ad esempio `"get"`, `"list"`, `"describe"`, `"create"` o `"delete"`. </li><li>Per un elenco completo di verbi, vedi la [documentazione `kubectl` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).</li></ul></td>
         </tr>
         </tbody>
         </table>
@@ -361,7 +370,6 @@ Prima di iniziare, [indirizza la CLI Kubernetes al cluster](cs_cli_install.html#
         {: codeblock}
 
         <table>
-        <caption>Tabella. Descrizione dei componenti di questo YAML</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti di questo YAML</th>
         </thead>
@@ -412,7 +420,7 @@ Prima di iniziare, [indirizza la CLI Kubernetes al cluster](cs_cli_install.html#
     2. Crea la risorsa di associazione del ruolo nel tuo cluster.
 
         ```
-        kubectl apply -f <path_to_yaml_file>
+        kubectl apply -f filepath/my_role_team1.yaml
         ```
         {: pre}
 
@@ -424,3 +432,4 @@ Prima di iniziare, [indirizza la CLI Kubernetes al cluster](cs_cli_install.html#
         {: pre}
 
 Ora che hai creato e associato un ruolo RBAC Kubernetes personalizzato, occupati degli utenti. Chiedi loro di testare un'azione per la quale dispongono dell'autorizzazione grazie al ruolo, come l'eliminazione di un pod.
+

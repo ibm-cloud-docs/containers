@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -42,6 +42,48 @@ y expanda rápidamente su clúster para ajustarlo a las cargas de trabajo.</li><
 <br />
 
 
+## Comparación de ofertas y sus combinaciones
+{: #differentiation}
+
+{{site.data.keyword.containershort_notm}} se puede ejecutar en {{site.data.keyword.Bluemix_notm}} Público o Dedicado, en {{site.data.keyword.Bluemix_notm}} Privado, o en una configuración híbrida.
+{:shortdesc}
+
+Revise la siguiente información para conocer las diferencias entre estas configuraciones de {{site.data.keyword.containershort_notm}}. 
+
+<table>
+<col width="22%">
+<col width="78%">
+ <thead>
+ <th>Configuración de {{site.data.keyword.containershort_notm}}</th>
+ <th>Descripción</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td>{{site.data.keyword.Bluemix_notm}} Público
+ </td>
+ <td>Con {{site.data.keyword.Bluemix_notm}} Público en [máquinas nativas o en hardware dedicado o compartido](cs_clusters.html#shared_dedicated_node), puede alojar sus apps en clústeres en la nube utilizando {{site.data.keyword.containershort_notm}}. {{site.data.keyword.containershort_notm}} en {{site.data.keyword.Bluemix_notm}} Público ofrece herramientas potentes, una interfaz intuitiva para el usuario y funciones integradas de seguridad e identificación para automatizar el despliegue, operación, escalado y supervisión de apps contenerizadas sobre un clúster de hosts de cálculo. <br><br>Para obtener más información, consulte la [Terminología de {{site.data.keyword.containershort_notm}}](cs_tech.html#ibm-cloud-container-service-technology).
+ </td>
+ </tr>
+ <tr>
+ <td>{{site.data.keyword.Bluemix_notm}} Dedicado
+ </td>
+ <td>{{site.data.keyword.Bluemix_notm}} Dedicado ofrece las mismas funcionalidades de {{site.data.keyword.containershort_notm}} en la nube que {{site.data.keyword.Bluemix_notm}} Público. Sin embargo, con una cuenta de {{site.data.keyword.Bluemix_notm}} Dedicado, los [recursos físicos disponibles son dedicados únicamente a su clúster](cs_clusters.html#shared_dedicated_node) y no se comparten con otros clústeres de otros clientes de {{site.data.keyword.IBM_notm}}. Es posible que elija configurar un entorno de {{site.data.keyword.Bluemix_notm}} Dedicado cuando necesite aislamiento para su clúster y otros servicios de {{site.data.keyword.Bluemix_notm}} que desee utilizar. <br><br>Para obtener más información, consulte [Iniciación a los clústeres en {{site.data.keyword.Bluemix_notm}} Dedicado](cs_dedicated.html#dedicated).  </td>
+ </tr>
+ <tr>
+ <td>{{site.data.keyword.Bluemix_notm}} Privado
+ </td>
+ <td>{{site.data.keyword.Bluemix_notm}} Privado es una plataforma de aplicaciones que se puede instalar de forma local en sus propias máquinas. Utilice {{site.data.keyword.containershort_notm}} en {{site.data.keyword.Bluemix_notm}} Privado cuando necesite desarrollar y gestionar aplicaciones contenerizadas localmente en su propio entorno controlado detrás de un cortafuegos. <br><br>Para obtener más información, consulte la [información del producto {{site.data.keyword.Bluemix_notm}} Privado ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/cloud-computing/products/ibm-cloud-private/) y esta [documentación ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html).
+ </td>
+ </tr>
+ <tr>
+ <td>Configuración híbrida  </td>
+ <td>Híbrida es la utilización combinada de los servicios que se ejecutan en {{site.data.keyword.Bluemix_notm}} Público o Dedicado y otros servicios que se ejecutan de forma local como, por ejemplo, una app en {{site.data.keyword.Bluemix_notm}} Privado. Ejemplos de una configuración híbrida: <ul><li>Suministro de un clúster con {{site.data.keyword.containershort_notm}} en {{site.data.keyword.Bluemix_notm}} Público conectando dicho clúster a una base de datos local. </li><li>
+Suministro de un clúster con {{site.data.keyword.containershort_notm}} en {{site.data.keyword.Bluemix_notm}} Privado desplegando una app en dicho clúster. No obstante, esta app podría utilizar un servicio de {{site.data.keyword.ibmwatson}} como, por ejemplo, {{site.data.keyword.toneanalyzershort}}, en {{site.data.keyword.Bluemix_notm}} Público. </li></ul><br>Para habilitar la comunicación entre los servicios que se ejecutan en {{site.data.keyword.Bluemix_notm}} Público o Dedicado y los servicios que se ejecutan localmente, debe [configurar una conexión VPN](cs_vpn.html).  </td>
+ </tr>
+ </tbody>
+</table>
+
+<br />
 
 
 ## Comparación entre clústeres gratuitos y estándares
@@ -53,14 +95,14 @@ Puede crear un clúster gratuito o cualquier número de clústeres estándar. Pr
 |Características|Clústeres gratuitos|Clústeres estándares|
 |---------------|-------------|-----------------|
 |[Redes en clúster](cs_secure.html#in_cluster_network)|<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|
-|[Acceso a app de red pública por parte de un servicio NodePort a una dirección IP no estable](cs_nodeport.html#planning)|<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|
+|[Acceso a app de red pública por parte de un servicio NodePort a una dirección IP no estable](cs_nodeport.html)|<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|
 |[Gestión de accesos de usuario](cs_users.html#managing)|<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|
 |Acceso a los servicios de [{{site.data.keyword.Bluemix_notm}} desde el clúster y las apps](cs_integrations.html#adding_cluster)|<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|
 |[Espacio de disco en nodo trabajador para almacenamiento no persistente](cs_storage.html#planning)|<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|
 |[Almacenamiento permanente basado en archivo NFS con volúmenes](cs_storage.html#planning)| |<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|
 |[Acceso a app de red pública o privada por parte de un servicio de equilibrador de carga a una dirección IP estable](cs_loadbalancer.html#planning)| |<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|
 |[Acceso a app de red pública por parte de un servicio Ingress a una dirección IP estable y un URL personalizable](cs_ingress.html#planning)| |<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|
-|[Direcciones IP públicas portables](cs_subnets.html#manage)| |<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|
+|[Direcciones IP públicas portátiles](cs_subnets.html#manage)| |<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|
 |[Registro y supervisión](cs_health.html#logging)| |<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|
 |[Opción para suministrar los nodos trabajadores en servidores físicos (nativos)](cs_clusters.html#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|
 |[Opción para suministrar trabajadores nativos con Trusted Compute](cs_clusters.html#shared_dedicated_node) | |<img src="images/confirm.svg" width="32" alt="Característica disponible" style="width:32px;" />|
@@ -70,53 +112,10 @@ Puede crear un clúster gratuito o cualquier número de clústeres estándar. Pr
 
 
 
-## Responsabilidades de la gestión de clústeres
+
 {: #responsibilities}
+**Nota**: ¿Está buscando los términos y responsabilidades de utilización del servicio? 
 
-Revise las responsabilidades que comparte con IBM para gestionar sus clústeres.
-{:shortdesc}
-
-**IBM es responsable de:**
-
-- Desplegar el maestro, los nodos trabajadores y los componentes de gestión dentro del clúster, como el equilibrador de carga de aplicación de Ingress, en el momento de la creación del clúster
-- Gestionar las actualizaciones, supervisión y recuperación del maestro de Kubernetes para el clúster
-- Supervisar la salud de los nodos trabajadores y proporcionar automatización para la actualización y recuperación de los nodos trabajadores
-- Realizar tareas de automatización sobre su cuenta de la infraestructura, incluida la adición de nodos trabajadores, la eliminación de nodos trabajadores y la creación de una subred predeterminada
-- Gestionar, actualizar y recuperar los componentes operativos dentro del clúster, como por ejemplo el equilibrador de carga de aplicación de Ingress y el plug-in de almacenamiento
-- Suministrar volúmenes de almacenamiento cuando lo soliciten las reclamaciones de volumen permanente
-- Proporcionar valores de seguridad en todos los nodos trabajadores
-
-</br>
-**El usuario es responsable de:**
-
-- [Desplegar y gestionar los recursos de Kubernetes, como pods, servicios y despliegues, dentro del clúster](cs_app.html#app_cli)
-- [Aprovechar la capacidad del servicio y de Kubernetes para garantizar la alta disponibilidad de las apps](cs_app.html#highly_available_apps)
-- [Añadir o eliminar capacidad mediante la CLI para añadir o eliminar nodos trabajadores](cs_cli_reference.html#cs_worker_add)
-- [Crear VLAN públicas y privadas en la infraestructura de IBM Cloud (SoftLayer) para el aislamiento de la red del clúster](/docs/infrastructure/vlans/getting-started.html#getting-started-with-vlans)
-- [Garantizar que todos los nodos trabajadores tienen conectividad de red con el URL maestro de Kubernetes](cs_firewall.html#firewall) <p>**Nota**: Si un trabajador tiene VLAN tanto públicas como privadas, se configura la conectividad de red. Si el nodo trabajador solo tiene una VLAN privada configurada, se necesita Vyatta para proporcionar conectividad de red.</p>
-- [Determinar cuándo se deben actualizar los nodos kube-apiserver maestros y los nodos trabajadores si hay versiones principales y secundarias de Kubernetes disponibles](cs_cluster_update.html#master)
-- [Recuperar nodos trabajadores con problemas ejecutando los mandatos `kubectl`, tales como `cordon` o `drain`, y ejecutando los mandatos `bx cs`, tales como `reboot`, `reload` o `delete`](cs_cli_reference.html#cs_worker_reboot)
-- [Añadir o eliminar subredes en la infraestructura de IBM Cloud (SoftLayer) cuando sea necesario](cs_subnets.html#subnets)
-- [Hacer copia de seguridad y restaurar datos en el almacenamiento permanente en la infraestructura de IBM Cloud (SoftLayer) ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](../services/RegistryImages/ibm-backup-restore/index.html)
-- [Configuración de la supervisión de estado de los nodos trabajadores con recuperación automática](cs_health.html#autorecovery)
-
-<br />
-
-
-## Abuso en los contenedores
 {: #terms}
+Consulte [Responsabilidades de {{site.data.keyword.containershort_notm}}](cs_responsibilities.html).
 
-Los clientes no puede utilizar {{site.data.keyword.containershort_notm}} de forma inapropiada.
-{:shortdesc}
-
-Entre los usos no apropiados se incluye:
-
-*   Cualquier actividad ilegal
-*   Distribuir o ejecutar malware
-*   Provocar cualquier daño a {{site.data.keyword.containershort_notm}} o interferir a cualquier usuario con la utilización de {{site.data.keyword.containershort_notm}}
-*   Provocar daños o interferir la utilización de otros usuarios con cualquier otro sistema o servicio
-*   Acceder de forma no autorizada a los servicios o sistemas
-*   Realizar modificaciones no autorizadas de los servicios o sistemas
-*   Incumplir los derechos de terceros
-
-Consulte [Términos de los servicios en la nube](/docs/navigation/notices.html#terms) para obtener una visión general de los términos uso.

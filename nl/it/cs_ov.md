@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-11"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -24,3 +24,4 @@ Controlla le ultime informazioni nella nuova ubicazione:
  - [Vantaggi dell'utilizzo dei cluster](cs_why.html#benefits)
  - [Architettura del servizio](cs_tech.html#architecture)
  - [Abuso dei contenitori](cs_why.html#terms)
+

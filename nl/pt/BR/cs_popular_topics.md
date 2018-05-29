@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -22,11 +22,39 @@ lastupdated: "2018-03-16"
 Verifique quais desenvolvedores de contêiner estão interessados em aprender sobre o {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
+## Tópicos populares em abril de 2018
+{: #apr18}
+
+<table summary="A tabela mostra tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<caption>Tópicos populares para contêineres e clusters do Kubernetes em abril de 2018</caption>
+<thead>
+<th>Data</th>
+<th>Título (Title)</th>
+<th>Descrição</th>
+</thead>
+<tbody>
+<tr>
+<td>17 de abril</td>
+<td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
+<td>Instale o [plug-in](cs_storage.html#install_block) do {{site.data.keyword.Bluemix_notm}} Block Storage para salvar dados persistentes no armazenamento de bloco. Em seguida, será possível [criar um novo](cs_storage.html#create) bloco de armazenamento ou [usar um existente](cs_storage.html#existing_block) para seu cluster.</td>
+</tr>
+<tr>
+<td>13 de abril</td>
+<td>[Novo tutorial para migrar apps Cloud Foundry para clusters](cs_tutorials_cf.html#cf_tutorial)</td>
+<td>Você tem um app Cloud Foundry? Saiba como implementar o mesmo código desse app em um contêiner executado em um cluster do Kubernetes.</td>
+</tr>
+<tr>
+<td>5 de abril</td>
+<td>[Filtrando logs](cs_health.html#filter-logs)</td>
+<td>Filtre o encaminhamento dos logs específicos. Os logs podem ser filtrados em relação a um namespace, um nome de contêiner, um nível de log e uma sequência de mensagem específicos.</td>
+</tr>
+</tbody></table>
+
 ## Tópicos populares em março de 2018
 {: #mar18}
 
-<table summary="A tabela mostra os tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
-<caption>Tópicos populares para contêineres e clusters do Kubernetes em fevereiro de 2018</caption>
+<table summary="A tabela mostra tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<caption>Tópicos populares para contêineres e clusters do Kubernetes em março de 2018</caption>
 <thead>
 <th>Data</th>
 <th>Título (Title)</th>
@@ -58,7 +86,7 @@ Verifique quais desenvolvedores de contêiner estão interessados em aprender so
 ## Tópicos populares em fevereiro de 2018
 {: #feb18}
 
-<table summary="A tabela mostra os tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<table summary="A tabela mostra tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
 <caption>Tópicos populares para contêineres e clusters do Kubernetes em fevereiro de 2018</caption>
 <thead>
 <th>Data</th>
@@ -106,7 +134,7 @@ Verifique quais desenvolvedores de contêiner estão interessados em aprender so
 ## Tópicos populares em janeiro de 2018
 {: #jan18}
 
-<table summary="A tabela mostra os tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
+<table summary="A tabela mostra tópicos populares. As linhas devem ser lidas da esquerda para a direita, com a data na coluna um, o título do recurso na coluna dois e uma descrição na coluna três.">
 <caption>Tópicos populares para contêineres e clusters do Kubernetes em janeiro de 2018</caption>
 <thead>
 <th>Data</th>
@@ -136,5 +164,5 @@ Verifique quais desenvolvedores de contêiner estão interessados em aprender so
 É possível ver sobre o que os outros estão falando e fazer suas próprias perguntas no [{{site.data.keyword.containershort_notm}} Slack. ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibm-container-service.slack.com)
 {:shortdesc}
 
-Dica: se você não estiver usando um IBMid para a sua conta do {{site.data.keyword.Bluemix_notm}},
-[solicite um convite](https://bxcs-slack-invite.mybluemix.net/) para esse Slack.
+
+

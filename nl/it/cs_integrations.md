@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-14"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -25,7 +25,6 @@ Puoi utilizzare vari servizi esterni e servizi di catalogo con un cluster Kubern
 
 ## Servizi delle applicazioni
 <table summary="Riepilogo dell'accessibilità">
-<caption>Tabella. Opzioni di integrazione per i servizi delle applicazioni</caption>
 <thead>
 <tr>
 <th>Servizio</th>
@@ -48,7 +47,6 @@ IBM Blockchain <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a
 
 ## Servizi DevOps
 <table summary="Riepilogo dell'accessibilità">
-<caption>Tabella. Opzioni di integrazione per la gestione di DevOps</caption>
 <thead>
 <tr>
 <th>Servizio</th>
@@ -81,7 +79,6 @@ IBM Blockchain <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a
 
 ## Servizi di registrazione e monitoraggio
 <table summary="Riepilogo dell'accessibilità">
-<caption>Tabella. Opzioni di integrazione per la gestione di log e metriche</caption>
 <thead>
 <tr>
 <th>Servizio</th>
@@ -99,11 +96,11 @@ IBM Blockchain <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a
 </tr>
 <tr>
 <td>{{site.data.keyword.loganalysisfull}}</td>
-<td>Espandi le tue capacità di raccolta, conservazione e ricerca dei log con {{site.data.keyword.loganalysisfull_notm}}. Per ulteriori informazioni, vedi <a href="../services/CloudLogAnalysis/containers/containers_kube_other_logs.html" target="_blank">Abilitazione della raccolta automatica dei log di cluster <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
+<td>Espandi le tue capacità di raccolta, conservazione e ricerca dei log con {{site.data.keyword.loganalysisfull_notm}}. Per ulteriori informazioni, vedi <a href="../services/CloudLogAnalysis/containers/containers_kube_other_logs.html" target="_blank">Abilitazione della raccolta automatica dei log di cluster <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
 </tr>
 <tr>
 <td>{{site.data.keyword.monitoringlong}}</td>
-<td>Espandi le tue capacità di raccolta e conservazione delle metriche definendo regole e avvisi con {{site.data.keyword.monitoringlong_notm}}. Per ulteriori informazioni, vedi <a href="../services/cloud-monitoring/tutorials/container_service_metrics.html" target="_blank">Analizza le metriche in Grafana per un'applicazione distribuita in un cluster Kubernetes <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
+<td>Espandi le tue capacità di raccolta e conservazione delle metriche definendo regole e avvisi con {{site.data.keyword.monitoringlong_notm}}. Per ulteriori informazioni, vedi <a href="../services/cloud-monitoring/tutorials/container_service_metrics.html" target="_blank">Analizza le metriche in Grafana per un'applicazione distribuita in un cluster Kubernetes <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
 </tr>
 <tr>
 <td>Instana</td>
@@ -144,7 +141,6 @@ per la CPU e la memoria e inoltre fornisce strumenti per inserire ed eseguire in
 
 ## Servizi di sicurezza
 <table summary="Riepilogo dell'accessibilità">
-<caption>Tabella. Opzioni di integrazione per la gestione della sicurezza</caption>
 <thead>
 <tr>
 <th>Servizio</th>
@@ -165,6 +161,10 @@ per la CPU e la memoria e inoltre fornisce strumenti per inserire ed eseguire in
 <td>Puoi utilizzare <a href="../services/certificate-manager/index.html" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per archiviare e gestire i certificati SSL per le tue applicazioni. Per ulteriori informazioni, consulta <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containershort_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
 </tr>
 <tr>
+  <td>{{site.data.keyword.registrylong}}</td>
+  <td>Imposta il tuo repository delle immagini Docker protetto in cui puoi memorizzare e condividere in modo sicuro le immagini tra gli utenti cluster. Per ulteriori informazioni, vedi la <a href="/docs/services/Registry/index.html" target="_blank">{{site.data.keyword.registrylong}} documentazione <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>.</td>
+</tr>
+<tr>
 <td>NeuVector</td>
 <td>Proteggi i contenitori con un firewall nativo nel cloud utilizzando <a href="https://neuvector.com/" target="_blank">NeuVector <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. Per ulteriori informazioni, consulta <a href="https://www.ibm.com/us-en/marketplace/neuvector-container-security" target="_blank">NeuVector Container Security <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
 </tr>
@@ -174,6 +174,35 @@ per la CPU e la memoria e inoltre fornisce strumenti per inserire ed eseguire in
 </tr>
 </tbody>
 </table>
+
+<br />
+
+
+
+## Servizi di archiviazione
+<table summary="Riepilogo dell'accessibilità">
+<thead>
+<tr>
+<th>Servizio</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>{{site.data.keyword.cos_full}}</td>
+  <td>I dati memorizzati con {{site.data.keyword.cos_short}} vengono crittografati e diffusi tra più posizioni geografiche e vi si accede su HTTP utilizzando un'API REST. Puoi utilizzare l'[immagine ibm-backup-restore](/docs/services/RegistryImages/ibm-backup-restore/index.html) per configurare il servizio per creare backup monouso o pianificati per i dati nei tuoi cluster. Per informazioni generali sul servizio, vedi la <a href="/docs/services/cloud-object-storage/about-cos.html" target="_blank">{{site.data.keyword.cos_short}} documentazione <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>.</td>
+</tr>
+  <tr>
+    <td>{{site.data.keyword.cloudantfull}}</td>
+    <td>{{site.data.keyword.cloudant_short_notm}} è un DBaaS (document-oriented DataBase as a Service) che memorizza i dati come documenti in formato JSON. Il servizio viene creato per la scalabilità, l'alta disponibilità e la durabilità. Per ulteriori informazioni, vedi la <a href="/docs/services/Cloudant/getting-started.html" target="_blank">{{site.data.keyword.cloudant_short_notm}} documentazione <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>.</td>
+  </tr>
+  <tr>
+    <td>{{site.data.keyword.composeForMongoDB_full}}</td>
+    <td>{{site.data.keyword.composeForMongoDB}} offre alta disponibilità e ridondanza, backup no-stop in locale e automatizzati, strumenti di monitoraggio, integrazione nei sistemi di avviso, viste dell'analisi delle prestazioni e altro ancora. Per ulteriori informazioni, vedi la <a href="/docs/services/ComposeForMongoDB/index.html" target="_blank">{{site.data.keyword.composeForMongoDB}} documentazione <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>.</td>
+  </tr>
+</tbody>
+</table>
+
 
 <br />
 
@@ -234,7 +263,7 @@ Per aggiungere un servizio:
 5.  Aggiungi il servizio al tuo cluster.
 
     ```
-    bx cs cluster-service-bind <cluster_name_or_id> <namespace> <service_instance_name>
+    bx cs cluster-service-bind <cluster_name_or_ID> <namespace> <service_instance_name>
     ```
     {: pre}
 
@@ -272,7 +301,7 @@ servizio in un pod distribuito nel cluster, gli utenti del cluster possono acced
 ## Creazione di alias Cloud Foundry per altre risorse del servizio {{site.data.keyword.Bluemix_notm}}
 {: #adding_resource_cluster}
 
-I servizi Cloud Foundry sono supportati per il bind con i cluster. Per eseguire il bind di un servizio {{site.data.keyword.Bluemix_notm}} che non è un servizio Cloud Foundry al tuo cluster, crea un alias Cloud Foundry per l'istanza del servizio.
+I servizi Cloud Foundry sono supportati per il bind con i cluster. Per associare un servizio {{site.data.keyword.Bluemix_notm}} che non è un servizio Cloud Foundry al tuo cluster, crea un alias Cloud Foundry per l'istanza del servizio.
 {:shortdesc}
 
 Prima di iniziare, [richiedi un'istanza del servizio {{site.data.keyword.Bluemix_notm}}](/docs/apps/reqnsi.html#req_instance).
@@ -408,7 +437,7 @@ segreto. Se hai associato più di un servizio, verifica che ogni segreto sia ass
 5.  Crea il pod e monta il volume segreto.
 
     ```
-    kubectl apply -f <yaml_path>
+    kubectl apply -f secret-test.yaml
     ```
     {: pre}
 
@@ -463,7 +492,7 @@ determinare i dettagli del servizio.
 ## Configurazione di Helm in {{site.data.keyword.containershort_notm}}
 {: #helm}
 
-[Helm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh/) è un gestore pacchetti di Kubernetes. Puoi creare grafici Helm o utilizzare grafici Helm preesistenti per definire, installare e aggiornare applicazioni Kubernetes complesse eseguite nei cluster {{site.data.keyword.containerlong_notm}}.
+[Helm ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://helm.sh/) è un gestore pacchetti di Kubernetes. Puoi creare grafici Helm o utilizzare grafici Helm preesistenti per definire, installare e aggiornare applicazioni Kubernetes complesse eseguite nei cluster {{site.data.keyword.containerlong_notm}}.
 {:shortdesc}
 
 Prima di utilizzare i grafici Helm con {{site.data.keyword.containershort_notm}}, devi installare e inizializzare un'istanza Helm per il tuo cluster. Puoi quindi aggiungere il repository Helm {{site.data.keyword.Bluemix_notm}} alla tua istanza Helm.
@@ -472,14 +501,50 @@ Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) 
 
 1. Installa la <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">CLI Helm <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>.
 
-2. Avvia Helm e installa `tiller`.
+2. **Importante**: per mantenere la sicurezza del cluster, crea un account di servizio per Tiller nello spazio dei nomi `kube-system` e un bind del ruolo cluster RBAC Kubernetes per il pod `tiller-deploy`.
+
+    1. Nel tuo editor preferito, crea il seguente file e salvalo come `rbac-config.yaml`.
+      **Nota**:
+        * Il ruolo cluster `cluster-admin` viene creato nei cluster Kubernetes per impostazione predefinita, quindi non devi definirlo esplicitamente. 
+        * Se stai utilizzando un cluster versione 1.7.x, modifica `apiVersion` in `rbac.authorization.k8s.io/v1beta1`.
+
+      ```
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: tiller
+        namespace: kube-system
+      ---
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: tiller
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-admin
+      subjects:
+        - kind: ServiceAccount
+          name: tiller
+          namespace: kube-system
+      ```
+      {: codeblock}
+
+    2. Crea l'account di servizio e il bind del ruolo cluster. 
+
+        ```
+        kubectl create -f rbac-config.yaml
+        ```
+        {: pre}
+
+3. Inizializza Helm e installa `tiller` con l'account di servizio che hai creato. 
 
     ```
-    helm init
+    helm init --service-account tiller
     ```
     {: pre}
 
-3. Verifica che il pod `tiller-deploy` abbia uno **Status** di `Running` nel tuo cluster.
+4. Verifica che il pod `tiller-deploy` abbia uno **Status** di `Running` nel tuo cluster.
 
     ```
     kubectl get pods -n kube-system -l app=helm
@@ -494,17 +559,26 @@ Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) 
     ```
     {: screen}
 
-4. Aggiungi il repository Helm {{site.data.keyword.Bluemix_notm}} alla tua istanza Helm.
+5. Aggiungi il repository Helm {{site.data.keyword.Bluemix_notm}} alla tua istanza Helm.
 
     ```
     helm repo add ibm  https://registry.bluemix.net/helm/ibm
     ```
     {: pre}
 
-5. Elenca i grafici Helm attualmente disponibili nel repository {{site.data.keyword.Bluemix_notm}}.
+6. Elenca i grafici Helm attualmente disponibili nel repository {{site.data.keyword.Bluemix_notm}}.
 
     ```
     helm search ibm
+    ```
+    {: pre}
+
+7. Per ulteriori informazioni su un grafico, elencane le impostazioni e i valori predefiniti. 
+
+    Ad esempio, per visualizzare le impostazioni, la documentazione e i valori predefiniti per il grafico Helm del servizio VPN IPSec strongSwan:
+
+    ```
+    helm inspect ibm/strongswan
     ```
     {: pre}
 
@@ -513,9 +587,9 @@ Prima di iniziare, [indirizza la tua CLI](cs_cli_install.html#cs_cli_configure) 
 {: #helm_links}
 
 * Per utilizzare il grafico Helm strongSwan, vedi [Configurazione della connettività VPN con il grafico Helm del servizio VPN IPSec strongSwan](cs_vpn.html#vpn-setup).
-* Visualizza i grafici Helm disponibili che puoi utilizzare con {{site.data.keyword.Bluemix_notm}} nella GUI [Helm Charts Catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts).
-* Ulteriori informazioni sui comandi Helm utilizzati per configurare e gestire i grafici Helm sono disponibili nella <a href="https://docs.helm.sh/helm/" target="_blank">documentazione Helm <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.
-* Ulteriori informazioni su come puoi [aumentare la velocità di distribuzione con i grafici Helm Kubernetes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/).
+* Visualizza i grafici Helm disponibili che puoi utilizzare con {{site.data.keyword.Bluemix_notm}} nella GUI [Helm Charts Catalog ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/containers-kubernetes/solutions/helm-charts).
+* Ulteriori informazioni sui comandi Helm utilizzati per configurare e gestire i grafici Helm sono disponibili nella <a href="https://docs.helm.sh/helm/" target="_blank">documentazione Helm <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>.
+* Ulteriori informazioni su come puoi [aumentare la velocità di distribuzione con i grafici Helm Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/).
 
 ## Visualizzazione delle risorse del cluster Kubernetes
 {: #weavescope}
@@ -602,4 +676,5 @@ eseguire questo comando di inoltro della porta senza dover completare nuovamente
 [Ulteriori informazioni sulle funzioni Weave Scope ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.weave.works/docs/scope/latest/features/).
 
 <br />
+
 

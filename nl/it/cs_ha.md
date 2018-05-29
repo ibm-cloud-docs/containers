@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-12"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -86,3 +86,4 @@ L'architettura e l'infrastruttura di {{site.data.keyword.containerlong_notm}} so
   </tr>
   </tbody>
   </table>
+

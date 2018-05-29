@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -38,31 +38,6 @@ bx plugin list
 {: pre}
 
 
-
-<table summary="应用程序负载均衡器 (ALB) 命令">
-<col width="25%">
-<col width="25%">
-<col width="25%">
- <thead>
-    <th colspan=4>应用程序负载均衡器 (ALB) 命令</th>
- </thead>
- <tbody>
-  <tr>
-    <td>[bx cs alb-cert-deploy](#cs_alb_cert_deploy)</td>
-    <td>[bx cs alb-cert-get](#cs_alb_cert_get)</td>
-    <td>[bx cs alb-cert-rm](#cs_alb_cert_rm)</td>
-    <td>[bx cs alb-certs](#cs_alb_certs)</td>
-  </tr>
-  <tr>
-    <td>[bx cs alb-configure](#cs_alb_configure)</td>
-    <td>[bx cs alb-get](#cs_alb_get)</td>
-    <td>[bx cs alb-types](#cs_alb_types)</td>
-    <td>[bx cs albs](#cs_albs)</td>
- </tr>
-</tbody>
-</table>
-
-<br>
 
 <table summary="API 命令">
 <col width="25%">
@@ -127,7 +102,6 @@ bx plugin list
     <td>[bx cs cluster-update](#cs_cluster_update)</td>
     <td>[bx cs clusters](#cs_clusters)</td>
     <td>[bx cs kube-versions](#cs_kube_versions)</td>
-    <td></td>
   </tr>
 </tbody>
 </table>
@@ -151,7 +125,7 @@ bx plugin list
 </tbody>
 </table>
 
-<br>
+</br>
 
 <table summary="集群命令：子网">
 <col width="25%">
@@ -176,7 +150,7 @@ bx plugin list
 </tbody>
 </table>
 
-<br>
+</br>
 
 <table summary="基础架构命令">
 <col width="25%">
@@ -195,32 +169,67 @@ bx plugin list
 </tbody>
 </table>
 
-<br>
+</br>
 
-<table summary="日志记录命令">
-<col width="25%">
-<col width="25%">
-<col width="25%">
- <thead>
-    <th colspan=4>日志记录命令</th>
- </thead>
- <tbody>
-  <tr>
-    <td>[bx cs logging-config-create](#cs_logging_create)</td>
-    <td>[bx cs logging-config-get](#cs_logging_get)</td>
-    <td>[bx cs logging-config-refresh](#cs_logging_refresh)</td>
-    <td>[bx cs logging-config-rm](#cs_logging_rm)</td>
-  </tr>
-  <tr>
-    <td>[bx cs logging-config-update](#cs_logging_update)</td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-</tbody>
+<table summary="Ingress 应用程序负载均衡器 (ALB) 命令">
+<col width = 25%>
+<col width = 25%>
+<col width = 25%>
+  <thead>
+    <tr>
+      <th colspan=4>Ingress 应用程序负载均衡器 (ALB) 命令</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>[bx cs alb-cert-deploy](#cs_alb_cert_deploy)</td>
+      <td>[bx cs alb-cert-get](#cs_alb_cert_get)</td>
+      <td>[bx cs alb-cert-rm](#cs_alb_cert_rm)</td>
+      <td>[bx cs alb-certs](#cs_alb_certs)</td>
+    </tr>
+    <tr>
+      <td>[bx cs alb-configure](#cs_alb_configure)</td>
+      <td>[bx cs alb-get](#cs_alb_get)</td>
+      <td>[bx cs alb-types](#cs_alb_types)</td>
+      <td>[bx cs albs](#cs_albs)</td>
+    </tr>
+  </tbody>
 </table>
 
-<br>
+</br>
+
+<table summary="日志记录命令">
+<col width = 25%>
+<col width = 25%>
+<col width = 25%>
+  <thead>
+    <tr>
+      <th colspan=4>日志记录命令</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>[bx cs logging-config-create](#cs_logging_create)</td>
+      <td>[bx cs logging-config-get](#cs_logging_get)</td>
+      <td>[bx cs logging-config-refresh](#cs_logging_refresh)</td>
+      <td>[bx cs logging-config-rm](#cs_logging_rm)</td>
+    </tr>
+    <tr>
+      <td>[bx cs logging-config-update](#cs_logging_update)</td>
+      <td>[bx cs logging-filter-create](#cs_log_filter_create)</td>
+      <td>[bx cs logging-filter-update](#cs_log_filter_update)</td>
+      <td>[bx cs logging-filter-get](#cs_log_filter_view)</td>
+    </tr>
+    <tr>
+      <td>[bx cs logging-filter-rm](#cs_log_filter_delete)</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+</br>
 
 <table summary="区域命令">
 <col width="25%">
@@ -239,7 +248,7 @@ bx plugin list
 </tbody>
 </table>
 
-<br>
+</br>
 
 <table summary="工作程序节点命令">
 <col width="25%">
@@ -249,274 +258,20 @@ bx plugin list
     <th colspan=4>工作程序节点命令</th>
  </thead>
  <tbody>
-  <tr>
-    <td>[bx cs worker-add](#cs_worker_add)</td>
-    <td>[bx cs worker-get](#cs_worker_get)</td>
-    <td>[bx cs worker-reboot](#cs_worker_reboot)</td>
-    <td>[bx cs worker-reload](#cs_worker_reload)</td>
-  </tr>
-  <tr>
-    <td>[bx cs worker-rm](#cs_worker_rm)</td>
-    <td>[bx cs worker-update](#cs_worker_update)</td>
-    <td>[bx cs workers](#cs_workers)</td>
-    <td></td>
-  </tr>
-</tbody>
+    <tr>
+      <td>[bx cs worker-add](#cs_worker_add)</td>
+      <td>[bx cs worker-get](#cs_worker_get)</td>
+      <td>[bx cs worker-reboot](#cs_worker_reboot)</td>
+      <td>[bx cs worker-reload](#cs_worker_reload)</td></staging>
+    </tr>
+    <tr>
+      <td>[bx cs worker-rm](#cs_worker_rm)</td>
+      <td>[bx cs worker-update](#cs_worker_update)</td>
+      <td>[bx cs workers](#cs_workers)</td>
+      <td></td>
+    </tr>
+  </tbody>
 </table>
-
-## 应用程序负载均衡器 (ALB) 命令
-{: #alb_commands}
-
-### bx cs alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NAME --cert-crn CERTIFICATE_CRN
-{: #cs_alb_cert_deploy}
-
-将 {{site.data.keyword.cloudcerts_long_notm}} 实例中的证书部署或更新到集群中的 ALB。
-
-**注：**
-* 只有具有管理员访问权角色的用户才能执行此命令。
-* 只能更新从同一 {{site.data.keyword.cloudcerts_long_notm}} 实例导入的证书。
-
-<strong>命令选项</strong>
-
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>集群的名称或标识。此值是必需的。</dd>
-
-   <dt><code>--update</code></dt>
-   <dd>包含此标志可在集群中更新 ALB 私钥的证书。此值是可选的。</dd>
-
-   <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
-   <dd>ALB 私钥的名称。此值是必需的。</dd>
-
-   <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
-   <dd>证书 CRN。此值是必需的。</dd>
-   </dl>
-
-**示例**：
-
-部署 ALB 私钥的示例：
-
-   ```
-   bx cs alb-cert-deploy --secret-name my_alb_secret_name --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
-   ```
-   {: pre}
-
-更新现有 ALB 私钥的示例：
-
- ```
- bx cs alb-cert-deploy --update --secret-name my_alb_secret_name --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:7e21fde8ee84a96d29240327daee3eb2
- ```
- {: pre}
-
-
-### bx cs alb-cert-get --cluster CLUSTER [--secret-name SECRET_NAME][--cert-crn CERTIFICATE_CRN]
-{: #cs_alb_cert_get}
-
-查看有关集群中 ALB 私钥的信息。
-
-**注：**只有具有管理员访问权角色的用户才能执行此命令。
-
-<strong>命令选项</strong>
-
-  <dl>
-  <dt><code>--cluster <em>CLUSTER</em></code></dt>
-  <dd>集群的名称或标识。此值是必需的。</dd>
-
-  <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
-  <dd>ALB 私钥的名称。要获取有关集群中特定 ALB 私钥的信息，此值是必需的。</dd>
-
-  <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
-  <dd>证书 CRN。要获取有关集群中与特定证书 CRN 匹配的所有 ALB 私钥的信息，此值是必需的。</dd>
-  </dl>
-
-**示例**：
-
- 访存 ALB 私钥相关信息的示例：
-
- ```
- bx cs alb-cert-get --cluster my_cluster --secret-name my_alb_secret_name
- ```
- {: pre}
-
- 访存与指定证书 CRN 匹配的所有 ALB 私钥相关信息的示例：
-
- ```
- bx cs alb-cert-get --cluster my_cluster --cert-crn  crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
- ```
- {: pre}
-
-
-### bx cs alb-cert-rm --cluster CLUSTER [--secret-name SECRET_NAME][--cert-crn CERTIFICATE_CRN]
-{: #cs_alb_cert_rm}
-
-除去集群中的 ALB 私钥。
-
-**注：**只有具有管理员访问权角色的用户才能执行此命令。
-
-<strong>命令选项</strong>
-
-  <dl>
-  <dt><code>--cluster <em>CLUSTER</em></code></dt>
-  <dd>集群的名称或标识。此值是必需的。</dd>
-
-  <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
-  <dd>ALB 私钥的名称。要除去集群中的特定 ALB 私钥，此值是必需的。</dd>
-
-  <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
-  <dd>证书 CRN。要除去集群中与特定证书 CRN 匹配的所有 ALB 私钥，此值是必需的。</dd>
-  </dl>
-
-**示例**：
-
- 除去 ALB 私钥的示例：
-
- ```
- bx cs alb-cert-rm --cluster my_cluster --secret-name my_alb_secret_name
- ```
- {: pre}
-
- 除去与指定证书 CRN 匹配的所有 ALB 私钥的示例：
-
- ```
- bx cs alb-cert-rm --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
- ```
- {: pre}
-
-
-### bx cs alb-certs --cluster CLUSTER
-{: #cs_alb_certs}
-
-查看集群中 ALB 私钥的列表。
-
-**注：**只有具有管理员访问权角色的用户才能执行此命令。
-
-<strong>命令选项</strong>
-
-   <dl>
-   <dt><code>--cluster <em>CLUSTER</em></code></dt>
-   <dd>集群的名称或标识。此值是必需的。</dd>
-   </dl>
-
-**示例**：
-
- ```
- bx cs alb-certs --cluster my_cluster
- ```
- {: pre}
-
-
-
-
-### bx cs alb-configure --albID ALB_ID [--enable][--disable][--user-ip USERIP]
-{: #cs_alb_configure}
-
-在标准集群中启用或禁用 ALB。缺省情况下，已启用公共 ALB。
-
-**命令选项**：
-
-   <dl>
-   <dt><code><em>--albID </em>ALB_ID</code></dt>
-   <dd>ALB 的标识。运行 <code>bx cs albs <em>--cluster </em>CLUSTER</code> 可查看集群中 ALB 的标识。此值是必需的。</dd>
-
-   <dt><code>--enable</code></dt>
-   <dd>包含此标志可在集群中启用 ALB。</dd>
-
-   <dt><code>--disable</code></dt>
-   <dd>包含此标志可在集群中禁用 ALB。</dd>
-
-   <dt><code>--user-ip <em>USER_IP</em></code></dt>
-   <dd>
-
-   <ul>
-    <li>此参数仅可用于专用 ALB。</li>
-    <li>专用 ALB 将使用用户提供的专用子网中的 IP 地址进行部署。如果未提供任何 IP 地址，那么该 ALB 将使用创建集群时自动供应的可移植专用子网中的专用 IP 地址进行部署。</li>
-   </ul>
-   </dd>
-   </dl>
-
-**示例**：
-
-  启用 ALB 的示例：
-
-  ```
-  bx cs alb-configure --albID my_alb_id --enable
-  ```
-  {: pre}
-
-  禁用 ALB 的示例：
-
-  ```
-  bx cs alb-configure --albID my_alb_id --disable
-  ```
-  {: pre}
-
-  使用用户提供的 IP 地址启用 ALB 的示例：
-
-  ```
-  bx cs alb-configure --albID my_private_alb_id --enable --user-ip user_ip
-  ```
-  {: pre}
-
-
-
-### bx cs alb-get --albID ALB_ID
-{: #cs_alb_get}
-
-查看 ALB 的详细信息。
-
-<strong>命令选项</strong>：
-
-   <dl>
-   <dt><code><em>--albID </em>ALB_ID</code></dt>
-   <dd>ALB 的标识。运行 <code>bx cs albs --cluster <em>CLUSTER</em></code> 可查看集群中 ALB 的标识。此值是必需的。</dd>
-   </dl>
-
-**示例**：
-
-  ```
-  bx cs alb-get --albID ALB_ID
-  ```
-  {: pre}
-
-### bx cs alb-types
-{: #cs_alb_types}
-
-查看区域中支持的 ALB 类型。
-
-<strong>命令选项</strong>：
-
-   无
-
-**示例**：
-
-  ```
-  bx cs alb-types
-  ```
-  {: pre}
-
-
-### bx cs albs --cluster CLUSTER
-{: #cs_albs}
-
-查看集群中所有 ALB 的阶段状态。如果未返回任何 ALB 标识，说明集群没有可移植子网。您可以为集群[创建](#cs_cluster_subnet_create)或[添加](#cs_cluster_subnet_add)子网。
-
-<strong>命令选项</strong>：
-
-   <dl>
-   <dt><code><em>--cluster </em>CLUSTER</code></dt>
-   <dd>列出其中可用 ALB 的集群的名称或标识。此值是必需的。</dd>
-   </dl>
-
-**示例**：
-
-  ```
-  bx cs albs --cluster mycluster
-  ```
-  {: pre}
-
-
-<br />
-
 
 ## API 命令
 {: #api_commands}
@@ -764,7 +519,7 @@ bx cs cluster-config my_cluster
 ### bx cs cluster-create [--file FILE_LOCATION][--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH][--no-subnet] [--private-vlan PRIVATE_VLAN][--public-vlan PUBLIC_VLAN] [--workers WORKER][--disable-disk-encrypt] [--trusted]
 {: #cs_cluster_create}
 
-在组织中创建集群。对于免费集群，请指定集群名称；其他所有项都设置为缺省值。一次只能有一个免费集群。要利用 Kubernetes 的全部功能，请创建标准集群。
+在组织中创建集群。对于免费集群，请指定集群名称；其他所有项都设置为缺省值。免费集群在 21 天后会被自动删除。一次只能有一个免费集群。要利用 Kubernetes 的全部功能，请创建标准集群。
 
 <strong>命令选项</strong>
 
@@ -781,8 +536,8 @@ bx cs cluster-config my_cluster
 location: <em>&lt;location&gt;</em>
 no-subnet: <em>&lt;no-subnet&gt;</em>
 machine-type: <em>&lt;machine_type&gt;</em>
-private-vlan: <em>&lt;private_vlan&gt;</em>
-public-vlan: <em>&lt;public_vlan&gt;</em>
+private-vlan: <em>&lt;private_VLAN&gt;</em>
+public-vlan: <em>&lt;public_VLAN&gt;</em>
 hardware: <em>&lt;shared_or_dedicated&gt;</em>
 workerNum: <em>&lt;number_workers&gt;</em>
 kube-version: <em>&lt;kube-version&gt;</em>
@@ -799,7 +554,7 @@ trusted: <em>true</em>
     <tbody>
     <tr>
     <td><code><em>name</em></code></td>
-    <td>将 <code><em>&lt;cluster_name&gt;</em></code> 替换为集群的名称。</td>
+    <td>将 <code><em>&lt;cluster_name&gt;</em></code> 替换为集群的名称。名称必须以字母开头，可以包含字母、数字和连字符 (-)，并且不能超过 35 个字符。请注意，集群名称和部署集群的区域构成了 Ingress 子域的标准域名。为了确保 Ingress 子域在区域内是唯一的，可能会截断 Ingress 域名中的集群名称并附加随机值。</td>
     </tr>
     <tr>
     <td><code><em>location</em></code></td>
@@ -811,16 +566,15 @@ trusted: <em>true</em>
       </tr>
      <tr>
      <td><code><em>machine-type</em></code></td>
-     <td>将 <code><em>&lt;machine_type&gt;</em></code> 替换为要用于工作程序节点的机器类型。要列出您所在位置的可用机器类型，请运行 <code>bx cs machine-types <em>&lt;location&gt;</em></code>。</td>
      <td>将 <code><em>&lt;machine_type&gt;</em></code> 替换为要将工作程序节点部署到的机器类型。可以将工作程序节点作为虚拟机部署在共享或专用硬件上，也可以作为物理机器部署在裸机上。可用的物理和虚拟机类型随集群的部署位置而变化。有关更多信息，请参阅 `bx cs machine-type` [命令](cs_cli_reference.html#cs_machine_types)的文档。</td>
      </tr>
      <tr>
      <td><code><em>private-vlan</em></code></td>
-     <td>将 <code><em>&lt;private_vlan&gt;</em></code> 替换为要用于工作程序节点的专用 VLAN 的标识。要列出可用的 VLAN，请运行 <code>bx cs vlans <em>&lt;location&gt;</em></code> 并查找以 <code>bcr</code>（后端路由器）开头的 VLAN 路由器。</td>
+     <td>将 <code><em>&lt;private_VLAN&gt;</em></code> 替换为要用于工作程序节点的专用 VLAN 的标识。要列出可用的 VLAN，请运行 <code>bx cs vlans <em>&lt;location&gt;</em></code> 并查找以 <code>bcr</code>（后端路由器）开头的 VLAN 路由器。</td>
      </tr>
      <tr>
      <td><code><em>public-vlan</em></code></td>
-     <td>将 <code><em>&lt;public_vlan&gt;</em></code> 替换为要用于工作程序节点的公用 VLAN 的标识。要列出可用的 VLAN，请运行 <code>bx cs vlans <em>&lt;location&gt;</em></code> 并查找以 <code>fcr</code>（前端路由器）开头的 VLAN 路由器。</td>
+     <td>将 <code><em>&lt;public_VLAN&gt;</em></code> 替换为要用于工作程序节点的公用 VLAN 的标识。要列出可用的 VLAN，请运行 <code>bx cs vlans <em>&lt;location&gt;</em></code> 并查找以 <code>fcr</code>（前端路由器）开头的 VLAN 路由器。</td>
      </tr>
      <tr>
      <td><code><em>hardware</em></code></td>
@@ -832,7 +586,7 @@ trusted: <em>true</em>
      </tr>
      <tr>
       <td><code><em>kube-version</em></code></td>
-      <td>集群主节点的 Kubernetes 版本。此值是可选的。除非指定，否则会使用受支持 Kubernetes 版本的缺省值来创建集群。要查看可用版本，请运行 <code>bx cs kube-versions</code>。</td></tr>
+      <td>集群主节点的 Kubernetes 版本。此值是可选的。未指定版本时，会使用受支持 Kubernetes 版本的缺省值来创建集群。要查看可用版本，请运行 <code>bx cs kube-versions</code>。</td></tr>
       <tr>
       <td><code>diskEncryption: <em>false</em></code></td>
       <td>工作程序节点缺省情况下具有磁盘加密功能：[了解更多](cs_secure.html#worker)。要禁用加密，请包括此选项并将值设置为 <code>false</code>。</td></tr>
@@ -856,14 +610,13 @@ trusted: <em>true</em>
 </dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>所选择的机器类型会影响部署到工作程序节点的容器可用的内存量和磁盘空间量。要列出可用的机器类型，请参阅 [bx cs machine-types <em>LOCATION</em>](#cs_machine_types)。此值对于标准集群是必需的，且不可用于免费集群。</dd>
-<dd>选择机器类型。可以将工作程序节点作为虚拟机部署在共享或专用硬件上，也可以作为物理机器部署在裸机上。可用的物理和虚拟机类型随集群的部署位置而变化。有关更多信息，请参阅 `bx cs machine-type` [命令](cs_cli_reference.html#cs_machine_types)的文档。此值对于标准集群是必需的，且不可用于免费集群。</dd>
+<dd>选择机器类型。可以将工作程序节点作为虚拟机部署在共享或专用硬件上，也可以作为物理机器部署在裸机上。可用的物理和虚拟机类型随集群的部署位置而变化。有关更多信息，请参阅 `bx cs machine-types` [命令](cs_cli_reference.html#cs_machine_types)的文档。此值对于标准集群是必需的，且不可用于免费集群。</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
-<dd>集群的名称。此值是必需的。</dd>
+<dd>集群的名称。此值是必需的。名称必须以字母开头，可以包含字母、数字和连字符 (-)，并且不能超过 35 个字符。请注意，集群名称和部署集群的区域构成了 Ingress 子域的标准域名。为了确保 Ingress 子域在区域内是唯一的，可能会截断 Ingress 域名中的集群名称并附加随机值。</dd>
 
 <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
-<dd>集群主节点的 Kubernetes 版本。此值是可选的。除非指定，否则会使用受支持 Kubernetes 版本的缺省值来创建集群。要查看可用版本，请运行 <code>bx cs kube-versions</code>。</dd>
+<dd>集群主节点的 Kubernetes 版本。此值是可选的。未指定版本时，会使用受支持 Kubernetes 版本的缺省值来创建集群。要查看可用版本，请运行 <code>bx cs kube-versions</code>。</dd>
 
 <dt><code>--no-subnet</code></dt>
 <dd>缺省情况下，将在与集群关联的 VLAN 上创建公用和专用可移植子网。包含 <code>--no-subnets</code> 标志可避免为集群创建子网。您可以日后为集群[创建](#cs_cluster_subnet_create)或[添加](#cs_cluster_subnet_add)子网。</dd>
@@ -878,7 +631,7 @@ trusted: <em>true</em>
 
 
 
-<p><strong>注</strong>：使用 create 命令指定的公用和专用 VLAN 必须匹配。专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。这两个前缀后面的数字和字母组合必须匹配，才可在创建集群时使用这些 VLAN。不要使用不匹配的公用和专用 VLAN 来创建集群。</p></li>
+<p><strong>注</strong>：{[matching_VLANs]}</p></li>
 </ul>
 
 <p>要了解您是否已具有用于特定位置的专用 VLAN，或要找到现有专用 VLAN 的名称，请运行 <code>bx cs vlans <em>&lt;location&gt;</em></code>。</p></dd>
@@ -892,7 +645,7 @@ trusted: <em>true</em>
 
 
 
-<p><strong>注</strong>：使用 create 命令指定的公用和专用 VLAN 必须匹配。专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。这两个前缀后面的数字和字母组合必须匹配，才可在创建集群时使用这些 VLAN。不要使用不匹配的公用和专用 VLAN 来创建集群。</p></li>
+<p><strong>注</strong>：{[matching_VLANs]}</p></li>
 </ul>
 
 <p>要了解您是否已具有用于特定位置的公用 VLAN，或要找到现有公用 VLAN 的名称，请运行 <code>bx cs vlans <em>&lt;location&gt;</em></code>。</p></dd>
@@ -906,7 +659,7 @@ trusted: <em>true</em>
 <dd>工作程序节点缺省情况下具有磁盘加密功能：[了解更多](cs_secure.html#worker)。要禁用加密，请包括此选项。</dd>
 
 <dt><code>--trusted</code></dt>
-<dd><p>**仅限裸机**：启用[可信计算](cs_secure.html#trusted_compute)以验证裸机工作程序节点是否被篡改。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `bx cs feature-enable` [命令](cs_cli_reference.html#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。有关信任工作方式的更多信息，请参阅[具有可信计算的 {{site.data.keyword.containershort_notm}}](cs_secure.html#trusted_compute)。</p>
+<dd><p>**仅限裸机**：启用[可信计算](cs_secure.html#trusted_compute)以验证裸机工作程序节点是否被篡改。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `bx cs feature-enable` [命令](cs_cli_reference.html#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。</p>
 <p>要检查裸机机器类型是否支持信任，请检查 `bx cs machine-types <location>` [命令](#cs_machine_types)输出中的 `Trustable` 字段。要验证集群是否已启用信任，请查看 `bx cs cluster-get` [命令](#cs_cluster_get)输出中的 **Trust ready** 字段。要验证裸机工作程序节点是否已启用信任，请查看 `bx cs worker-get` [ 命令](#cs_worker_get)输出中的 **Trust** 字段。</p></dd>
 </dl>
 
@@ -918,7 +671,7 @@ trusted: <em>true</em>
   {: #example_cluster_create}
 
   ```
-  bx cs cluster-create --location dal10 --public-vlan my_public_vlan_id --private-vlan my_private_vlan_id --machine-type u2c.2x4 --name my_cluster --hardware shared --workers 2
+  bx cs cluster-create --location dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type u2c.2x4 --name my_cluster --hardware shared --workers 2
   ```
   {: pre}
 
@@ -948,8 +701,8 @@ trusted: <em>true</em>
    <dd>集群的名称或标识。此值是必需的。</dd>
 
    <dt><code><em>--trusted</em></code></dt>
-   <dd><p>包含用于对集群中所有支持的裸机工作程序节点启用“可信计算”的标志。启用信任后，日后无法对集群禁用信任。有关信任工作方式的更多信息，请参阅[具有可信计算的 {{site.data.keyword.containershort_notm}}](cs_secure.html#trusted_compute)。</p>
-   <p>要检查裸机机器类型是否支持信任，请检查 `bx cs machine-types <location>` [命令](#cs_machine_types)输出中的 `Trustable` 字段。要验证集群是否已启用信任，请查看 `bx cs cluster-get` [命令](#cs_cluster_get)输出中的 **Trust ready** 字段。要验证裸机工作程序节点是否已启用信任，请查看 `bx cs worker-get` [ 命令](#cs_worker_get)输出中的 **Trust** 字段。</p></dd>
+   <dd><p>包含此标志可对集群中所有支持的裸机工作程序节点启用[可信计算](cs_secure.html#trusted_compute)。启用信任后，日后无法对集群禁用信任。</p>
+   <p>要检查裸机机器类型是否支持信任，请检查 `bx cs machine-types <location>` [命令](#cs_machine_types)输出中的 **Trustable** 字段。要验证集群是否已启用信任，请查看 `bx cs cluster-get` [命令](#cs_cluster_get)输出中的 **Trust ready** 字段。要验证裸机工作程序节点是否已启用信任，请查看 `bx cs worker-get` [ 命令](#cs_worker_get)输出中的 **Trust** 字段。</p></dd>
    </dl>
 
 **示例命令**：
@@ -984,19 +737,19 @@ trusted: <em>true</em>
 **示例输出**：
 
   ```
-  Name:			   mycluster
-  ID:			     abc1234567
-  State:			 normal
+  Name:        my_cluster
+  ID:          abc1234567
+  State:       normal
   Trust ready: false
-  Created:		 2018-01-01T17:19:28+0000
-  Location:		 dal10
-  Master URL:	 https://169.xx.x.xxx:xxxxx
-  Ingress subdomain: mycluster.us-south.containers.mybluemix.net
-  Ingress secret:		 mycluster
-  Workers:		3
-  Version:		1.7.4_1509* (1.8.8_1507 latest)
-  Owner Email:		name@example.com
-  Monitoring dashboard:	https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
+  Created:     2018-01-01T17:19:28+0000
+  Location:    dal10
+  Master URL:  https://169.xx.xxx.xxx:xxxxx
+  Ingress subdomain: my_cluster.us-south.containers.mybluemix.net
+  Ingress secret:    my_cluster
+  Workers:     3
+  Version:     1.7.16_1511* (1.8.11_1509 latest)
+  Owner Email: name@example.com
+  Monitoring dashboard: https://metrics.ng.bluemix.net/app/#/grafana4/dashboard/db/link
 
   Addons
   Name                   Enabled
@@ -1006,8 +759,8 @@ trusted: <em>true</em>
 
   Subnet VLANs
   VLAN ID   Subnet CIDR         Public   User-managed
-  2234947   10.xxx.xxx.x/29     false    false
-  2234945   169.xx.xxx.xxx/29   true     false
+  2234947   10.xxx.xx.xxx/29    false    false
+  2234945   169.xx.xxx.xxx/29  true    false
 
   ```
   {: screen}
@@ -1086,7 +839,7 @@ trusted: <em>true</em>
 ### bx cs kube-versions
 {: #cs_kube_versions}
 
-查看 {{site.data.keyword.containershort_notm}} 中支持的 Kubernetes 版本列表。将[集群主节点](#cs_cluster_update)和[工作程序节点](#cs_worker_update)更新到缺省版本以获取最新的稳定功能。
+查看 {{site.data.keyword.containershort_notm}} 中支持的 Kubernetes 版本列表。将[集群主节点](#cs_cluster_update)和[工作程序节点](cs_cli_reference.html#cs_worker_update)更新到缺省版本以获取最新的稳定功能。
 
 **命令选项**：
 
@@ -1100,7 +853,9 @@ trusted: <em>true</em>
   {: pre}
 
 
+
 <br />
+
 
 
 ## 集群命令：服务和集成
@@ -1156,7 +911,7 @@ trusted: <em>true</em>
 **示例**：
 
   ```
-  bx cs cluster-service-unbind my_cluster my_namespace my_service_instance_GUID
+  bx cs cluster-service-unbind my_cluster my_namespace 8567221
   ```
   {: pre}
 
@@ -1188,7 +943,8 @@ trusted: <em>true</em>
   {: pre}
 
 
-### bx cs webhook-create --cluster CLUSTER --level LEVEL --type slack --URL URL
+
+### bx cs webhook-create --cluster CLUSTER --level LEVEL --type slack --url URL
 {: #cs_webhook_create}
 
 注册 Webhook。
@@ -1205,14 +961,14 @@ trusted: <em>true</em>
    <dt><code>--type <em>slack</em></code></dt>
    <dd>Webhook 类型。当前支持 slack。此值是必需的。</dd>
 
-   <dt><code>--URL <em>URL</em></code></dt>
+   <dt><code>--url <em>URL</em></code></dt>
    <dd>Webhook 的 URL。此值是必需的。</dd>
    </dl>
 
 **示例**：
 
   ```
-  bx cs webhook-create --cluster my_cluster --level Normal --type slack --URL http://github.com/<mywebhook>
+  bx cs webhook-create --cluster my_cluster --level Normal --type slack --url http://github.com/mywebhook
   ```
   {: pre}
 
@@ -1245,7 +1001,7 @@ trusted: <em>true</em>
 **示例**：
 
   ```
-  bx cs cluster-subnet-add my_cluster subnet
+  bx cs cluster-subnet-add my_cluster 1643389
   ```
   {: pre}
 
@@ -1311,7 +1067,7 @@ trusted: <em>true</em>
 **示例**：
 
   ```
-  bx cs cluster-user-subnet-add my_cluster 192.168.10.0/29 1502175
+  bx cs cluster-user-subnet-add my_cluster 169.xx.xxx.xxx/29 1502175
   ```
   {: pre}
 
@@ -1339,7 +1095,7 @@ trusted: <em>true</em>
 **示例**：
 
   ```
-  bx cs cluster-user-subnet-rm my_cluster 192.168.10.0/29 1502175
+  bx cs cluster-user-subnet-rm my_cluster 169.xx.xxx.xxx/29 1502175
   ```
   {: pre}
 
@@ -1356,6 +1112,260 @@ trusted: <em>true</em>
 
   ```
   bx cs subnets
+  ```
+  {: pre}
+
+
+<br />
+
+
+## Ingress 应用程序负载均衡器 (ALB) 命令
+{: #alb_commands}
+
+### bx cs alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NAME --cert-crn CERTIFICATE_CRN
+{: #cs_alb_cert_deploy}
+
+将 {{site.data.keyword.cloudcerts_long_notm}} 实例中的证书部署或更新到集群中的 ALB。
+
+**注：**
+* 只有具有管理员访问权角色的用户才能执行此命令。
+* 只能更新从同一 {{site.data.keyword.cloudcerts_long_notm}} 实例导入的证书。
+
+<strong>命令选项</strong>
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>集群的名称或标识。此值是必需的。</dd>
+
+   <dt><code>--update</code></dt>
+   <dd>包含此标志可在集群中更新 ALB 私钥的证书。此值是可选的。</dd>
+
+   <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
+   <dd>ALB 私钥的名称。此值是必需的。</dd>
+
+   <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
+   <dd>证书 CRN。此值是必需的。</dd>
+   </dl>
+
+**示例**：
+
+部署 ALB 私钥的示例：
+
+   ```
+   bx cs alb-cert-deploy --secret-name my_alb_secret --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
+   ```
+   {: pre}
+
+更新现有 ALB 私钥的示例：
+
+ ```
+ bx cs alb-cert-deploy --update --secret-name my_alb_secret --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:7e21fde8ee84a96d29240327daee3eb2
+ ```
+ {: pre}
+
+
+### bx cs alb-cert-get --cluster CLUSTER [--secret-name SECRET_NAME][--cert-crn CERTIFICATE_CRN]
+{: #cs_alb_cert_get}
+
+查看有关集群中 ALB 私钥的信息。
+
+**注：**只有具有管理员访问权角色的用户才能执行此命令。
+
+<strong>命令选项</strong>
+
+  <dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+  <dd>集群的名称或标识。此值是必需的。</dd>
+
+  <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
+  <dd>ALB 私钥的名称。要获取有关集群中特定 ALB 私钥的信息，此值是必需的。</dd>
+
+  <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
+  <dd>证书 CRN。要获取有关集群中与特定证书 CRN 匹配的所有 ALB 私钥的信息，此值是必需的。</dd>
+  </dl>
+
+**示例**：
+
+ 访存 ALB 私钥相关信息的示例：
+
+ ```
+ bx cs alb-cert-get --cluster my_cluster --secret-name my_alb_secret
+ ```
+ {: pre}
+
+ 访存与指定证书 CRN 匹配的所有 ALB 私钥相关信息的示例：
+
+ ```
+ bx cs alb-cert-get --cluster my_cluster --cert-crn  crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
+ ```
+ {: pre}
+
+
+### bx cs alb-cert-rm --cluster CLUSTER [--secret-name SECRET_NAME][--cert-crn CERTIFICATE_CRN]
+{: #cs_alb_cert_rm}
+
+除去集群中的 ALB 私钥。
+
+**注：**只有具有管理员访问权角色的用户才能执行此命令。
+
+<strong>命令选项</strong>
+
+  <dl>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+  <dd>集群的名称或标识。此值是必需的。</dd>
+
+  <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
+  <dd>ALB 私钥的名称。要除去集群中的特定 ALB 私钥，此值是必需的。</dd>
+
+  <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
+  <dd>证书 CRN。要除去集群中与特定证书 CRN 匹配的所有 ALB 私钥，此值是必需的。</dd>
+  </dl>
+
+**示例**：
+
+ 除去 ALB 私钥的示例：
+
+ ```
+ bx cs alb-cert-rm --cluster my_cluster --secret-name my_alb_secret
+ ```
+ {: pre}
+
+ 除去与指定证书 CRN 匹配的所有 ALB 私钥的示例：
+
+ ```
+ bx cs alb-cert-rm --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
+ ```
+ {: pre}
+
+
+### bx cs alb-certs --cluster CLUSTER
+{: #cs_alb_certs}
+
+查看集群中 ALB 私钥的列表。
+
+**注**：只有具有管理员访问权角色的用户才能执行此命令。
+
+<strong>命令选项</strong>
+
+   <dl>
+   <dt><code>--cluster <em>CLUSTER</em></code></dt>
+   <dd>集群的名称或标识。此值是必需的。</dd>
+   </dl>
+
+**示例**：
+
+ ```
+ bx cs alb-certs --cluster my_cluster
+ ```
+ {: pre}
+
+
+
+
+### bx cs alb-configure --albID ALB_ID [--enable][--disable][--user-ip USERIP]
+{: #cs_alb_configure}
+
+在标准集群中启用或禁用 ALB。缺省情况下，已启用公共 ALB。
+
+**命令选项**：
+
+   <dl>
+   <dt><code><em>--albID </em>ALB_ID</code></dt>
+   <dd>ALB 的标识。运行 <code>bx cs albs <em>--cluster </em>CLUSTER</code> 可查看集群中 ALB 的标识。此值是必需的。</dd>
+
+   <dt><code>--enable</code></dt>
+   <dd>包含此标志可在集群中启用 ALB。</dd>
+
+   <dt><code>--disable</code></dt>
+   <dd>包含此标志可在集群中禁用 ALB。</dd>
+
+   <dt><code>--user-ip <em>USER_IP</em></code></dt>
+   <dd>
+
+   <ul>
+    <li>此参数仅可用于专用 ALB。</li>
+    <li>专用 ALB 将使用用户提供的专用子网中的 IP 地址进行部署。如果未提供任何 IP 地址，那么该 ALB 将使用创建集群时自动供应的可移植专用子网中的专用 IP 地址进行部署。</li>
+   </ul>
+   </dd>
+   </dl>
+
+**示例**：
+
+  启用 ALB 的示例：
+
+  ```
+  bx cs alb-configure --albID private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --enable
+  ```
+  {: pre}
+
+  禁用 ALB 的示例：
+
+  ```
+  bx cs alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
+  ```
+  {: pre}
+
+  使用用户提供的 IP 地址启用 ALB 的示例：
+
+  ```
+  bx cs alb-configure --albID private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --enable --user-ip user_ip
+  ```
+  {: pre}
+
+
+
+### bx cs alb-get --albID ALB_ID
+{: #cs_alb_get}
+
+查看 ALB 的详细信息。
+
+<strong>命令选项</strong>：
+
+   <dl>
+   <dt><code><em>--albID </em>ALB_ID</code></dt>
+   <dd>ALB 的标识。运行 <code>bx cs albs --cluster <em>CLUSTER</em></code> 可查看集群中 ALB 的标识。此值是必需的。</dd>
+   </dl>
+
+**示例**：
+
+  ```
+  bx cs alb-get --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1
+  ```
+  {: pre}
+
+### bx cs alb-types
+{: #cs_alb_types}
+
+查看区域中支持的 ALB 类型。
+
+<strong>命令选项</strong>：
+
+   无
+
+**示例**：
+
+  ```
+  bx cs alb-types
+  ```
+  {: pre}
+
+
+### bx cs albs --cluster CLUSTER
+{: #cs_albs}
+
+查看集群中所有 ALB 的阶段状态。如果未返回任何 ALB 标识，说明集群没有可移植子网。您可以为集群[创建](#cs_cluster_subnet_create)或[添加](#cs_cluster_subnet_add)子网。
+
+<strong>命令选项</strong>：
+
+   <dl>
+   <dt><code><em>--cluster </em>CLUSTER</code></dt>
+   <dd>列出其中可用 ALB 的集群的名称或标识。此值是必需的。</dd>
+   </dl>
+
+**示例**：
+
+  ```
+  bx cs albs --cluster my_cluster
   ```
   {: pre}
 
@@ -1412,7 +1422,7 @@ trusted: <em>true</em>
 **示例**：
 
   ```
-  bx cs credentials-set --infrastructure-api-key API_KEY --infrastructure-username USERNAME
+  bx cs credentials-set --infrastructure-api-key <api_key> --infrastructure-username dbmanager
   ```
   {: pre}
 
@@ -1446,17 +1456,21 @@ trusted: <em>true</em>
 
 <dl>
 <dt>物理机器（裸机）</dt>
-<dd>裸机是一种单租户物理服务器，具有仅供工作程序节点专用的资源。裸机服务器比虚拟服务器更昂贵，最适用于需要更多资源和主机控制的高性能应用程序。<p><strong>按月计费</strong>：裸机服务器按月计费。如果您在月底之前取消裸机服务器，那么仍将收取该整月的费用。供应裸机服务器时，您是与 IBM Cloud Infrastructure (SoftLayer) 直接交互，因此该手动过程可能需要一个工作日以上的时间才能完成。</p>
-<p><strong>裸机机器类型组</strong>：裸机机器类型分为多个组，每组具有不同的计算资源，您可以从中进行选择以满足应用程序的需求。<ul><li>`mb1c.4x32`：选择此类型可对工作程序节点的物理机器资源进行均衡配置。均衡的资源是 4 个核心、32 GB 内存、1 TB SATA 主磁盘、2 TB SATA 辅助磁盘和 10 Gbps 绑定网络。</li>
-<li>`mb1c.16x64`：选择此类型可对工作程序节点的物理机器资源进行均衡配置。均衡的资源是 16 个核心、64 GB 内存、1 TB SATA 主磁盘、1.7 TB SSD 辅助磁盘和 10 Gbps 绑定网络。</li>
+<dd>可以将工作程序节点作为单租户物理服务器（也称为裸机）进行供应。通过裸机，您可以直接访问机器上的物理资源，例如内存或 CPU。此设置无需虚拟机系统管理程序将物理资源分配给在主机上运行的虚拟机。相反，裸机机器的所有资源都仅供工作程序专用，因此您无需担心“吵闹的邻居”共享资源或降低性能。<p><strong>按月计费</strong>：裸机服务器比虚拟服务器更昂贵，最适用于需要更多资源和主机控制的高性能应用程序。裸机服务器按月计费。如果您在月底之前取消裸机服务器，那么仍将收取该整月的费用。订购和取消裸机服务器是通过 IBM Cloud Infrastructure (SoftLayer) 帐户进行的手动过程。完成此过程可能需要超过一个工作日的时间。</p>
+<p><strong>用于启用可信计算的选项</strong>：启用“可信计算”以验证工作程序节点是否被篡改。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `bx cs feature-enable` [命令](cs_cli_reference.html#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。可以创建不含信任的新集群。有关节点启动过程中的信任工作方式的更多信息，请参阅[具有可信计算的 {{site.data.keyword.containershort_notm}}](cs_secure.html#trusted_compute)。在运行 Kubernetes V1.9 或更高版本并具有特定裸机机器类型的集群上，可信计算可用。运行 `bx cs machine-types <location>` [命令](cs_cli_reference.html#cs_machine_types)后，可以通过查看 `Trustable` 字段来了解哪些机器支持信任。</p>
+<p><strong>裸机机器类型组</strong>：裸机机器类型分为多个组，每组具有不同的计算资源，您可以从中进行选择以满足应用程序的需求。物理机器类型的本地存储器大于虚拟机，并且某些类型具有用于备份本地数据的 RAID。要了解不同类型的裸机产品，请参阅 `bx cs machine-type` [命令](cs_cli_reference.html#cs_machine_types)。<ul><li>`mb1c.4x32`：如果不需要 RAM 密集型或数据密集型资源，请选择此类型以对工作程序节点的物理机器资源进行均衡配置。均衡的资源是 4 个核心、32 GB 内存、1 TB SATA 主磁盘、2 TB SATA 辅助磁盘和 10 Gbps 绑定网络。</li>
+<li>`mb1c.16x64`：如果不需要 RAM 密集型或数据密集型资源，请选择此类型以对工作程序节点的物理机器资源进行均衡配置。均衡的资源是 16 个核心、64 GB 内存、1 TB SATA 主磁盘、1.7 TB SSD 辅助磁盘和 10 Gbps 绑定网络。</li>
 <li>`mr1c.28x512`：选择此类型可最大限度提高可用于工作程序节点的 RAM。RAM 密集型资源是 28 个核心、512 GB 内存、1 TB SATA 主磁盘、1.7 TB SSD 辅助磁盘和 10 Gbps 绑定网络。</li>
 <li>`md1c.16x64.4x4tb`：如果工作程序节点需要大量本地磁盘存储（包括用于备份本地存储在机器上的数据的 RAID），请选择此类型。为 RAID1 配置了 1 TB 主存储磁盘，为 RAID10 配置了 4 TB 辅助存储磁盘。数据密集型资源是 28 个核心、512 GB 内存、2 个 1 TB RAID1 主磁盘、4 个 4 TB SATA RAID10 辅助磁盘和 10 Gbps 绑定网络。</li>
 <li>`md1c.28x512.4x4tb`：如果工作程序节点需要大量本地磁盘存储（包括用于备份本地存储在机器上的数据的 RAID），请选择此类型。为 RAID1 配置了 1 TB 主存储磁盘，为 RAID10 配置了 4 TB 辅助存储磁盘。数据密集型资源是 16 个核心、64 GB 内存、2 个 1 TB RAID1 主磁盘、4 个 4 TB SATA RAID10 辅助磁盘和 10 Gbps 绑定网络。</li>
 
-</ul></p>
-<p><strong>可信计算</strong>：您可以选择对运行 Kubernetes V1.9 或更高版本且位于集群中的所有受支持裸机工作程序节点启用信任。“可信计算”会验证裸机工作程序节点是否被篡改，并确保只有授权用户才有权访问集群。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `bx cs feature-enable` [命令](cs_cli_reference.html#cs_cluster_feature_enable)。启用信任后，日后无法对集群禁用信任。有关信任工作方式的更多信息，请参阅[具有可信计算的 {{site.data.keyword.containershort_notm}}](cs_secure.html#trusted_compute)。运行 `bx cs machine-types`命令后，可以通过查看 `Trustable` 字段来了解哪些机器支持信任。</p></dd>
+</ul></p></dd>
 <dt>虚拟机</dt>
-<dd>虚拟机类型作为虚拟实例在可共享或专用的物理硬件上进行供应。这些类型按小时计费，并且通常在几分钟内就可供应到帐户。<p><strong>虚拟 `u2c` 或 `b2c` 机器类型</strong>：这些机器使用本地磁盘（而不是存储区联网 (SAN)）来实现可靠性。可靠性优势包括在将字节序列化到本地磁盘时可提高吞吐量，以及减少因网络故障而导致的文件系统降级。这些机器类型包含用于操作系统文件系统的 25 GB 主本地磁盘存储和用于 `/var/lib/docker`（这是所有容器数据写入的目录）的 100 GB 辅助本地磁盘存储。</p>
+<dd>创建标准虚拟集群时，必须选择是希望底层硬件由多个 {{site.data.keyword.IBM_notm}} 客户共享（多租户）还是仅供您专用（单租户）。
+<p>在多租户设置中，物理资源（如 CPU 和内存）在部署到同一物理硬件的所有虚拟机之间共享。要确保每个虚拟机都能独立运行，虚拟机监视器（也称为系统管理程序）会将物理资源分段成隔离的实体，并将其作为专用资源分配给虚拟机（系统管理程序隔离）。</p>
+<p>在单租户设置中，所有物理资源都仅供您专用。您可以将多个工作程序节点作为虚拟机部署在同一物理主机上。与多租户设置类似，系统管理程序也会确保每个工作程序节点在可用物理资源中获得应有的份额。</p>
+<p>共享节点通常比专用节点更便宜，因为底层硬件的开销由多个客户分担。但是，在决定是使用共享还是专用节点时，可能需要咨询您的法律部门，以讨论应用程序环境所需的基础架构隔离和合规性级别。</p>
+<p><strong>虚拟 `u2c` 或 `b2c` 机器类型</strong>：这些机器使用本地磁盘（而不是存储区联网 (SAN)）来实现可靠性。可靠性优势包括在将字节序列化到本地磁盘时可提高吞吐量，以及减少因网络故障而导致的文件系统降级。这些机器类型包含用于操作系统文件系统的 25 GB 主本地磁盘存储和用于 `/var/lib/docker`（这是所有容器数据写入的目录）的 100 GB 辅助本地磁盘存储。</p>
 <p><strong>不推荐的 `u1c` 或 `b1c` 机器类型</strong>：要开始使用 `u2c` 和 `b2c` 机器类型，请[通过添加工作程序节点来更新机器类型](cs_cluster_update.html#machine_type)。</p></dd>
 </dl>
 
@@ -1526,7 +1540,7 @@ trusted: <em>true</em>
 ## 日志记录命令
 {: #logging_commands}
 
-### bx cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT][--space CLUSTER_SPACE] [--org CLUSTER_ORG] --type LOG_TYPE [--json][--skip-validation]
+### bx cs logging-config-create CLUSTER --logsource LOG_SOURCE [--namespace KUBERNETES_NAMESPACE][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT][--space CLUSTER_SPACE] [--org CLUSTER_ORG][--app-containers CONTAINERS] [--app-paths PATHS_TO_LOGS] --type LOG_TYPE [--json][--skip-validation]
 {: #cs_logging_create}
 
 创建日志记录配置。您可以使用此命令将容器、应用程序、工作程序节点、Kubernetes 集群以及 Ingress 应用程序负载均衡器的日志转发到 {{site.data.keyword.loganalysisshort_notm}} 或外部 syslog 服务器。
@@ -1534,26 +1548,30 @@ trusted: <em>true</em>
 <strong>命令选项</strong>：
 
 <dl>
-<dt><code><em>CLUSTER</em></code></dt>
-<dd>集群的名称或标识。</dd>
-<dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-<dd>要对其启用日志转发的日志源。此自变量支持要应用其配置的日志源的逗号分隔列表。接受的值为 <code>container</code>、<code>application</code>、<code>worker</code>、<code>kubernetes</code> 和 <code>ingress</code>。如果未提供日志源，那么会为 <code>container</code> 和 <code>ingress</code> 日志源创建日志记录配置。</dd>
-<dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
-<dd>要从中转发日志的 Kubernetes 名称空间。<code>ibm-system</code> 和 <code>kube-system</code> Kubernetes 名称空间不支持日志转发。此值仅对容器日志源有效，并且是可选的。如果未指定名称空间，那么集群中的所有名称空间都将使用此配置。</dd>
-<dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
-<dd>日志记录类型为 <code>syslog</code> 时，日志收集器服务器的主机名或 IP 地址。此值对于 <code>syslog</code> 是必需的。日志记录类型为 <code>ibm</code> 时，{{site.data.keyword.loganalysislong_notm}} 数据获取 URL。您可以在[此处](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)找到可用数据获取 URL 的列表。如果未指定数据获取 URL，那么将使用创建集群所在区域的端点。</dd>
-<dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
-<dd>日志收集器服务器的端口。此值是可选的。如果未指定端口，那么标准端口 <code>514</code> 将用于 <code>syslog</code>，并且标准端口 <code>9091</code> 将用于 <code>ibm</code>。</dd>
-<dt><code>--space <em>CLUSTER_SPACE</em></code></dt>
-<dd>要向其发送日志的 Cloud Foundry 空间的名称。此值仅对日志类型 <code>ibm</code> 有效，并且是可选的。如果未指定空间，日志将发送到帐户级别。</dd>
-<dt><code>--org <em>CLUSTER_ORG</em></code></dt>
-<dd>该空间所在 Cloud Foundry 组织的名称。此值仅对日志类型 <code>ibm</code> 有效，如果指定了空间，那么此值是必需的。</dd>
-<dt><code>--type <em>LOG_TYPE</em></code></dt>
-<dd>您要使用的日志转发协议。目前支持 <code>syslog</code> 和 <code>ibm</code>。此值是必需的。</dd>
-<dt><code>--json</code></dt>
-<dd>（可选）以 JSON 格式打印命令输出。</dd>
-<dt><code>--skip-validation</code></dt>
-<dd>（可选）跳过对指定组织和空间名称的验证。跳过验证可减少处理时间，但无效的日志记录配置将无法正确转发日志。</dd>
+  <dt><code><em>CLUSTER</em></code></dt>
+    <dd>集群的名称或标识。</dd>
+  <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
+    <dd>要对其启用日志转发的日志源。此自变量支持要应用其配置的日志源的逗号分隔列表。接受的值为 <code>container</code>、<code>application</code>、<code>worker</code>、<code>kubernetes</code> 和 <code>ingress</code>。如果未提供日志源，那么会为 <code>container</code> 和 <code>ingress</code> 日志源创建日志记录配置。</dd>
+  <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
+    <dd>要从中转发日志的 Kubernetes 名称空间。<code>ibm-system</code> 和 <code>kube-system</code> Kubernetes 名称空间不支持日志转发。此值仅对容器日志源有效，并且是可选的。如果未指定名称空间，那么集群中的所有名称空间都将使用此配置。</dd>
+  <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
+    <dd>日志记录类型为 <code>syslog</code> 时，日志收集器服务器的主机名或 IP 地址。此值对于 <code>syslog</code> 是必需的。日志记录类型为 <code>ibm</code> 时，{{site.data.keyword.loganalysislong_notm}} 数据获取 URL。您可以在[此处](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)找到可用数据获取 URL 的列表。如果未指定数据获取 URL，那么将使用创建集群所在区域的端点。</dd>
+  <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
+    <dd>日志收集器服务器的端口。此值是可选的。如果未指定端口，那么标准端口 <code>514</code> 将用于 <code>syslog</code>，并且标准端口 <code>9091</code> 将用于 <code>ibm</code>。</dd>
+  <dt><code>--space <em>CLUSTER_SPACE</em></code></dt>
+    <dd>要向其发送日志的 Cloud Foundry 空间的名称。此值仅对日志类型 <code>ibm</code> 有效，并且是可选的。如果未指定空间，日志将发送到帐户级别。</dd>
+  <dt><code>--org <em>CLUSTER_ORG</em></code></dt>
+    <dd>该空间所在 Cloud Foundry 组织的名称。此值仅对日志类型 <code>ibm</code> 有效，如果指定了空间，那么此值是必需的。</dd>
+  <dt><code>--app-paths</code></dt>
+    <dd>容器上应用程序要将日志记录到的路径。要转发源类型为 <code>application</code> 的日志，必须提供路径。要指定多个路径，请使用逗号分隔列表。此值对于日志源 <code>application</code> 是必需的。示例：<code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
+  <dt><code>--type <em>LOG_TYPE</em></code></dt>
+    <dd>要转发日志的位置。选项为 <code>ibm</code>（将日志转发到 {{site.data.keyword.loganalysisshort_notm}}）和 <code>syslog</code>（将日志转发到外部服务器）。</dd>
+  <dt><code>--app-containers</code></dt>
+    <dd>可选：要转发来自应用程序的日志，可以指定包含应用程序的容器的名称。可以使用逗号分隔列表来指定多个容器。如果未指定任何容器，那么会转发来自包含所提供路径的所有容器中的日志。此选项仅对日志源 <code>application</code> 有效。</dt>
+  <dt><code>--json</code></dt>
+    <dd>以 JSON 格式打印命令输出。此值是可选的。</dd>
+  <dt><code>--skip-validation</code></dt>
+    <dd>跳过对指定组织和空间名称的验证。跳过验证可减少处理时间，但无效的日志记录配置将无法正确转发日志。此值是可选的。</dd>
 </dl>
 
 **示例**：
@@ -1568,15 +1586,15 @@ trusted: <em>true</em>
 缺省端口 514 上从 `container` 日志源转发的日志类型 `syslog` 的示例：
 
   ```
-  bx cs logging-config-create my_cluster --logsource container --namespace my_namespace  --hostname my_hostname-or-IP --type syslog
+  bx cs logging-config-create my_cluster --logsource container --namespace my_namespace  --hostname 169.xx.xxx.xxx --type syslog
   ```
   {: pre}
 
 非缺省端口上从 `ingress` 源转发日志的日志类型 `syslog` 的实例：
 
   ```
-    bx cs logging-config-create my_cluster --logsource container --hostname my_hostname-or-IP --port 5514 --type syslog
-    ```
+  bx cs logging-config-create my_cluster --logsource container --hostname 169.xx.xxx.xxx --port 5514 --type syslog
+  ```
   {: pre}
 
 ### bx cs logging-config-get CLUSTER [--logsource LOG_SOURCE][--json]
@@ -1586,14 +1604,14 @@ trusted: <em>true</em>
 
 <strong>命令选项</strong>：
 
-   <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
-   <dd>集群的名称或标识。此值是必需的。</dd>
-   <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-   <dd>要过滤的日志源的类型。仅会返回集群中此日志源的日志记录配置。接受的值为 <code>container</code>、<code>application</code>、<code>worker</code>、<code>kubernetes</code> 和 <code>ingress</code>。此值是可选的。</dd>
-   <dt><code>--json</code></dt>
-   <dd>（可选）以 JSON 格式打印命令输出。</dd>
-   </dl>
+ <dl>
+  <dt><code><em>CLUSTER</em></code></dt>
+    <dd>集群的名称或标识。此值是必需的。</dd>
+  <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
+    <dd>要过滤的日志源的类型。仅会返回集群中此日志源的日志记录配置。接受的值为 <code>container</code>、<code>application</code>、<code>worker</code>、<code>kubernetes</code> 和 <code>ingress</code>。此值是可选的。</dd>
+  <dt><code>--json</code></dt>
+    <dd>（可选）以 JSON 格式打印命令输出。</dd>
+ </dl>
 
 **示例**：
 
@@ -1610,10 +1628,10 @@ trusted: <em>true</em>
 
 <strong>命令选项</strong>：
 
-   <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
+<dl>
+  <dt><code><em>CLUSTER</em></code></dt>
    <dd>集群的名称或标识。此值是必需的。</dd>
-   </dl>
+</dl>
 
 **示例**：
 
@@ -1630,14 +1648,14 @@ trusted: <em>true</em>
 
 <strong>命令选项</strong>：
 
-   <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
+<dl>
+  <dt><code><em>CLUSTER</em></code></dt>
    <dd>集群的名称或标识。此值是必需的。</dd>
-   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
+  <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
    <dd>如果要除去单个日志记录配置，此值为日志记录配置标识。</dd>
-   <dt><code>--all</code></dt>
+  <dt><code>--all</code></dt>
    <dd>用于除去集群中所有日志记录配置的标志。</dd>
-   </dl>
+</dl>
 
 **示例**：
 
@@ -1647,19 +1665,21 @@ trusted: <em>true</em>
   {: pre}
 
 
-### bx cs logging-config-update CLUSTER --id LOG_CONFIG_ID [--hostname LOG_SERVER_HOSTNAME_OR_IP][--port LOG_SERVER_PORT] [--space CLUSTER_SPACE][--org CLUSTER_ORG] --type LOG_TYPE [--json][--skipValidation]
+### bx cs logging-config-update CLUSTER --id LOG_CONFIG_ID [--namespace NAMESPACE][--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT][--space CLUSTER_SPACE] [--org CLUSTER_ORG] --type LOG_TYPE [--json][--skipValidation]
 {: #cs_logging_update}
 
 更新日志转发配置的详细信息。
 
 <strong>命令选项</strong>：
 
-   <dl>
-   <dt><code><em>CLUSTER</em></code></dt>
+<dl>
+  <dt><code><em>CLUSTER</em></code></dt>
    <dd>集群的名称或标识。此值是必需的。</dd>
-   <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
+  <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
    <dd>要更新的日志记录配置标识。此值是必需的。</dd>
-   <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
+  <dt><code>--namespace <em>NAMESPACE</em></code>
+    <dd>要从中转发日志的 Kubernetes 名称空间。<code>ibm-system</code> 和 <code>kube-system</code> Kubernetes 名称空间不支持日志转发。此值仅对 <code>container</code> 日志源有效。如果未指定名称空间，那么集群中的所有名称空间都将使用此配置。</dd>
+  <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
    <dd>日志记录类型为 <code>syslog</code> 时，日志收集器服务器的主机名或 IP 地址。此值对于 <code>syslog</code> 是必需的。日志记录类型为 <code>ibm</code> 时，{{site.data.keyword.loganalysislong_notm}} 数据获取 URL。您可以在[此处](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)找到可用数据获取 URL 的列表。如果未指定数据获取 URL，那么将使用创建集群所在区域的端点。</dd>
    <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
    <dd>日志收集器服务器的端口。当记录类型为 <code>syslog</code> 时，此值是可选的。如果未指定端口，那么标准端口 <code>514</code> 将用于 <code>syslog</code>，并且 <code>9091</code> 将用于 <code>ibm</code>。</dd>
@@ -1667,12 +1687,16 @@ trusted: <em>true</em>
    <dd>要向其发送日志的空间的名称。此值仅对日志类型 <code>ibm</code> 有效，并且是可选的。如果未指定空间，日志将发送到帐户级别。</dd>
    <dt><code>--org <em>CLUSTER_ORG</em></code></dt>
    <dd>空间所在组织的名称。此值仅对日志类型 <code>ibm</code> 有效，如果指定了空间，那么此值是必需的。</dd>
+   <dt><code>--app-paths</code></dt>
+     <dd>跳过对指定组织和空间名称的验证。跳过验证可减少处理时间，但无效的日志记录配置将无法正确转发日志。此值是可选的。</dd>
+   <dt><code>--app-containers</code></dt>
+     <dd>其容器上应用程序要将日志记录到的路径。要转发源类型为 <code>application</code> 的日志，必须提供路径。要指定多个路径，请使用逗号分隔列表。示例：<code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></dd>
    <dt><code>--type <em>LOG_TYPE</em></code></dt>
    <dd>您要使用的日志转发协议。目前支持 <code>syslog</code> 和 <code>ibm</code>。此值是必需的。</dd>
    <dt><code>--json</code></dt>
    <dd>（可选）以 JSON 格式打印命令输出。</dd>
    <dt><code>--skipValidation</code></dt>
-   <dd>（可选）跳过对指定组织和空间名称的验证。跳过验证可减少处理时间，但无效的日志记录配置将无法正确转发日志。</dd>
+   <dd>跳过对指定组织和空间名称的验证。跳过验证可减少处理时间，但无效的日志记录配置将无法正确转发日志。此值是可选的。</dd>
    </dl>
 
 **日志类型 `ibm` 的示例**：
@@ -1689,6 +1713,112 @@ trusted: <em>true</em>
   ```
   {: pre}
 
+
+### bx cs logging-filter-create CLUSTER --type LOG_TYPE [--logging-configs CONFIGS][--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME][--level LOGGING_LEVEL] [--message MESSAGE][--s] [--json]
+{: #cs_log_filter_create}
+
+创建日志记录过滤器。可以使用此命令来过滤掉根据日志记录配置转发的日志。
+
+<strong>命令选项</strong>：
+
+<dl>
+  <dt><code><em>CLUSTER</em></code></dt>
+    <dd>必需：要为其创建日志记录过滤器的集群的名称或标识。</dd>
+  <dt><code>--type <em>LOG_TYPE</em></code></dt>
+    <dd>要应用过滤器的日志的类型。目前支持 <code>all</code>、<code>container</code> 和 <code>host</code>。</dd>
+  <dt><code>--logging-configs <em>CONFIGS</em></code></dt>
+    <dd>可选：日志记录配置标识的逗号分隔列表。如果未提供，过滤器将应用于传递到过滤器的所有集群日志记录配置。可以通过将 <code>--show-matching-configs</code> 标志用于命令来查看与过滤器相匹配的日志配置。</dd>
+  <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
+    <dd>可选：要过滤其中日志的 Kubernetes 名称空间。</dd>
+  <dt><code>--container <em>CONTAINER_NAME</em></code></dt>
+    <dd>可选：要从中过滤掉日志的容器的名称。仅当使用日志类型 <code>container</code> 时，此标志才适用。</dd>
+  <dt><code>--level <em>LOGGING_LEVEL</em></code></dt>
+    <dd>可选：过滤掉处于指定级别及更低级别的日志。规范顺序的可接受值为 <code>fatal</code>、<code>error</code>、<code>warn/warning</code>、<code>info</code>、<code>debug</code> 和 <code>trace</code>。例如，如果过滤掉 <code>info</code> 级别的日志，那么还会过滤掉 <code>debug</code> 和 <code>trace</code>。**注**：仅当日志消息为 JSON 格式且包含 level 字段时，才能使用此标志。示例输出：<code>{"log": "hello", "level": "info"}</code></dd>
+  <dt><code>--message <em>MESSAGE</em></code></dt>
+    <dd>可选：过滤掉在日志中任何位置包含指定消息的任何日志。消息按字面值进行匹配，而不作为表达式进行匹配。示例：消息“Hello”、“!”和“Hello, World!”都将应用于日志“Hello, World!”。</dd>
+  <dt><code>--json</code></dt>
+    <dd>可选：以 JSON 格式打印命令输出。</dd>
+</dl>
+
+**示例**：
+
+此示例过滤掉满足以下条件的所有日志：从缺省名称空间中名称为 `test-container` 的容器转发，处于 debug 级别或更低级别，并且具有包含“GET request”的日志消息。
+
+  ```
+  bx cs logging-filter-create example-cluster --type container --namespace default --container test-container --level debug --message "GET request"
+  ```
+  {: pre}
+
+此示例过滤掉处于 info 级别或更低级别且从特定集群转发的所有日志。输出会作为 JSON 返回。
+
+  ```
+  bx cs logging-filter-create example-cluster --type all --level info --json
+  ```
+  {: pre}
+
+### bx cs logging-filter-update CLUSTER --type LOG_TYPE [--logging-configs CONFIGS][--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME][--level LOGGING_LEVEL] [--message MESSAGE][--s] [--json]
+{: #cs_log_filter_update}
+
+更新日志记录过滤器。可以使用此命令来更新已创建的日志记录过滤器。
+
+<strong>命令选项</strong>：
+
+<dl>
+  <dt><code><em>CLUSTER</em></code></dt>
+    <dd>必需：要更新其日志记录过滤器的集群的名称或标识。</dd>
+  <dt><code>--type <em>LOG_TYPE</em></code></dt>
+    <dd>要应用过滤器的日志的类型。目前支持 <code>all</code>、<code>container</code> 和 <code>host</code>。</dd>
+  <dt><code>--logging-configs <em>CONFIGS</em></code></dt>
+    <dd>可选：日志记录配置标识的逗号分隔列表。如果未提供，过滤器将应用于传递到过滤器的所有集群日志记录配置。可以通过将 <code>--show-matching-configs</code> 标志用于命令来查看与过滤器相匹配的日志配置。</dd>
+  <dt><code>--namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
+    <dd>可选：要过滤其中日志的 Kubernetes 名称空间。</dd>
+  <dt><code>--container <em>CONTAINER_NAME</em></code></dt>
+    <dd>可选：要从中过滤掉日志的容器的名称。仅当使用日志类型 <code>container</code> 时，此标志才适用。</dd>
+  <dt><code>--level <em>LOGGING_LEVEL</em></code></dt>
+    <dd>可选：过滤掉处于指定级别及更低级别的日志。规范顺序的可接受值为 <code>fatal</code>、<code>error</code>、<code>warn/warning</code>、<code>info</code>、<code>debug</code> 和 <code>trace</code>。例如，如果过滤掉 <code>info</code> 级别的日志，那么还会过滤掉 <code>debug</code> 和 <code>trace</code>。**注**：仅当日志消息为 JSON 格式且包含 level 字段时，才能使用此标志。示例输出：<code>{"log": "hello", "level": "info"}</code></dd>
+  <dt><code>--message <em>MESSAGE</em></code></dt>
+    <dd>可选：过滤掉在日志中任何位置包含指定消息的任何日志。消息按字面值进行匹配，而不作为表达式进行匹配。示例：消息“Hello”、“!”和“Hello, World!”都将应用于日志“Hello, World!”。</dd>
+  <dt><code>--json</code></dt>
+    <dd>可选：以 JSON 格式打印命令输出。</dd>
+</dl>
+
+
+### bx cs logging-filter-get CLUSTER [--id FILTER_ID][--show-matching-configs] [--json]
+{: #cs_log_filter_view}
+
+查看日志记录过滤器配置。可以使用此命令来查看已创建的日志记录过滤器。
+
+<strong>命令选项</strong>：
+
+<dl>
+  <dt><code><em>CLUSTER</em></code></dt>
+    <dd>必需：要查看其中过滤器的集群的名称或标识。</dd>
+  <dt><code>--id <em>FILTER_ID</em></code></dt>
+    <dd>要查看的日志过滤器的标识。</dd>
+  <dt><code>--show-matching-configs</code></dt>
+    <dd>可选：显示与要查看的配置相匹配的日志记录配置。</dd>
+  <dt><code>--json</code></dt>
+    <dd>可选：以 JSON 格式打印命令输出。</dd>
+</dl>
+
+
+### bx cs logging-filter-rm CLUSTER [--id FILTER_ID][--json] [--all]
+{: #cs_log_filter_delete}
+
+删除日志记录过滤器。可以使用此命令来除去已创建的日志记录过滤器。
+
+<strong>命令选项</strong>：
+
+<dl>
+  <dt><code><em>CLUSTER</em></code></dt>
+    <dd>要删除其中过滤器的集群的名称或标识。</dd>
+  <dt><code>--id <em>FILTER_ID</em></code></dt>
+    <dd>要删除的日志过滤器的标识。</dd>
+  <dt><code>--all</code></dt>
+    <dd>可选：删除所有日志转发过滤器。</dd>
+  <dt><code>--json</code></dt>
+    <dd>可选：以 JSON 格式打印命令输出。</dd>
+</dl>
 
 <br />
 
@@ -1805,6 +1935,8 @@ us-south      us-south
 ## 工作程序节点命令
 {: worker_node_commands}
 
+
+
 ### bx cs worker-add --cluster CLUSTER [--file FILE_LOCATION][--hardware HARDWARE] --machine-type MACHINE_TYPE --number NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt]
 {: #cs_worker_add}
 
@@ -1817,19 +1949,18 @@ us-south      us-south
 <dd>集群的名称或标识。此值是必需的。</dd>
 
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
-<dd>用于将工作程序节点添加到集群的 YAML 文件的路径。您可以使用 YAML 文件，而不使用此命令中提供的选项来定义其他工作程序节点。
-此值是可选的。
+<dd>用于将工作程序节点添加到集群的 YAML 文件的路径。您可以使用 YAML 文件，而不使用此命令中提供的选项来定义其他工作程序节点。此值是可选的。
 
 <p><strong>注</strong>：如果在命令中提供的选项与 YAML 文件中的参数相同，那么命令中的值将优先于 YAML 中的值。例如，您在 YAML 文件中定义了机器类型，并在命令中使用了 --machine-type 选项，那么在该命令选项中输入的值会覆盖 YAML 文件中的相应值。
 
       
 
 <pre class="codeblock">
-<code>name: <em>&lt;cluster_name_or_id&gt;</em>
+<code>name: <em>&lt;cluster_name_or_ID&gt;</em>
 location: <em>&lt;location&gt;</em>
 machine-type: <em>&lt;machine_type&gt;</em>
-private-vlan: <em>&lt;private_vlan&gt;</em>
-public-vlan: <em>&lt;public_vlan&gt;</em>
+private-vlan: <em>&lt;private_VLAN&gt;</em>
+public-vlan: <em>&lt;public_VLAN&gt;</em>
 hardware: <em>&lt;shared_or_dedicated&gt;</em>
 workerNum: <em>&lt;number_workers&gt;</em>
 diskEncryption: <em>false</em></code></pre>
@@ -1842,24 +1973,23 @@ diskEncryption: <em>false</em></code></pre>
 <tbody>
 <tr>
 <td><code><em>name</em></code></td>
-<td>将 <code><em>&lt;cluster_name_or_id&gt;</em></code> 替换为要在其中添加工作程序节点的集群的名称或标识。</td>
+<td>将 <code><em>&lt;cluster_name_or_ID&gt;</em></code> 替换为要在其中添加工作程序节点的集群的名称或标识。</td>
 </tr>
 <tr>
 <td><code><em>location</em></code></td>
-<td>将 <code><em>&lt;location&gt;</em></code> 替换为要在其中部署工作程序节点的位置。可用的位置取决于您登录到的区域。要列出可用位置，请运行 <code>bx cs locations</code>。</td>
+<td>将 <code><em>&lt;location&gt;</em></code> 替换为要部署工作程序节点的位置。可用的位置取决于您登录到的区域。要列出可用位置，请运行 <code>bx cs locations</code>。</td>
 </tr>
 <tr>
 <td><code><em>machine-type</em></code></td>
-<td>将 <code><em>&lt;machine_type&gt;</em></code> 替换为要用于工作程序节点的机器类型。要列出您所在位置的可用机器类型，请运行 <code>bx cs machine-types <em>&lt;location&gt;</em></code>。</td>
-<td>将 <code><em>&lt;machine_type&gt;</em></code> 替换为要将工作程序节点部署到的机器类型。可以将工作程序节点作为虚拟机部署在共享或专用硬件上，也可以作为物理机器部署在裸机上。可用的物理和虚拟机类型随集群的部署位置而变化。有关更多信息，请参阅 `bx cs machine-type` [命令](cs_cli_reference.html#cs_machine_types)的文档。</td>
+<td>将 <code><em>&lt;machine_type&gt;</em></code> 替换为要将工作程序节点部署到的机器类型。可以将工作程序节点作为虚拟机部署在共享或专用硬件上，也可以作为物理机器部署在裸机上。可用的物理和虚拟机类型随集群的部署位置而变化。有关更多信息，请参阅 `bx cs machine-types` [命令](cs_cli_reference.html#cs_machine_types)。</td>
 </tr>
 <tr>
 <td><code><em>private-vlan</em></code></td>
-<td>将 <code><em>&lt;private_vlan&gt;</em></code> 替换为要用于工作程序节点的专用 VLAN 的标识。要列出可用的 VLAN，请运行 <code>bx cs vlans <em>&lt;location&gt;</em></code> 并查找以 <code>bcr</code>（后端路由器）开头的 VLAN 路由器。</td>
+<td>将 <code><em>&lt;private_VLAN&gt;</em></code> 替换为要用于工作程序节点的专用 VLAN 的标识。要列出可用的 VLAN，请运行 <code>bx cs vlans <em>&lt;location&gt;</em></code> 并查找以 <code>bcr</code>（后端路由器）开头的 VLAN 路由器。</td>
 </tr>
 <tr>
 <td><code>public-vlan</code></td>
-<td>将 <code>&lt;public_vlan&gt;</code> 替换为要用于工作程序节点的公用 VLAN 的标识。要列出可用的 VLAN，请运行 <code>bx cs vlans &lt;location&gt;</code> 并查找以 <code>fcr</code>（前端路由器）开头的 VLAN 路由器。<br><strong>注</strong>：如果因为希望工作程序节点仅连接到专用 VLAN 而选择不选公用 VLAN，那么必须配置备用解决方案。有关更多信息，请参阅[工作程序节点的 VLAN 连接](cs_clusters.html#worker_vlan_connection)。</td>
+<td>将 <code>&lt;public_VLAN&gt;</code> 替换为要用于工作程序节点的公用 VLAN 的标识。要列出可用的 VLAN，请运行 <code>bx cs vlans &lt;location&gt;</code> 并查找以 <code>fcr</code>（前端路由器）开头的 VLAN 路由器。<br><strong>注</strong>：{[private_VLAN_vyatta]}</td>
 </tr>
 <tr>
 <td><code>hardware</code></td>
@@ -1878,8 +2008,7 @@ diskEncryption: <em>false</em></code></pre>
 <dd>工作程序节点的硬件隔离级别。如果希望可用的物理资源仅供您专用，请使用 dedicated，或者要允许物理资源与其他 IBM 客户共享，请使用 shared。缺省值为 shared。此值是可选的。</dd>
 
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
-<dd>所选择的机器类型会影响部署到工作程序节点的容器可用的内存量和磁盘空间量。此值是必需的。要列出可用的机器类型，请参阅 [bx cs machine-types LOCATION](#cs_machine_types)。</dd>
-<dd>选择机器类型。可以将工作程序节点作为虚拟机部署在共享或专用硬件上，也可以作为物理机器部署在裸机上。可用的物理和虚拟机类型随集群的部署位置而变化。有关更多信息，请参阅 `bx cs machine-type` [命令](cs_cli_reference.html#cs_machine_types)的文档。此值对于标准集群是必需的，且不可用于免费集群。</dd>
+<dd>选择机器类型。可以将工作程序节点作为虚拟机部署在共享或专用硬件上，也可以作为物理机器部署在裸机上。可用的物理和虚拟机类型随集群的部署位置而变化。有关更多信息，请参阅 `bx cs machine-types` [命令](cs_cli_reference.html#cs_machine_types)的文档。此值对于标准集群是必需的，且不可用于免费集群。</dd>
 
 <dt><code>--number <em>NUMBER</em></code></dt>
 <dd>整数，表示要在集群中创建的工作程序节点数。缺省值为 1。此值是可选的。</dd>
@@ -1887,12 +2016,12 @@ diskEncryption: <em>false</em></code></pre>
 <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
 <dd>创建集群时指定的专用 VLAN。此值是必需的。
 
-<p><strong>注：</strong>您指定的公用和专用 VLAN 必须匹配。专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。这两个前缀后面的数字和字母组合必须匹配，才可在创建集群时使用这些 VLAN。不要使用不匹配的公用和专用 VLAN 来创建集群。</p></dd>
+<p><strong>注</strong>：{[matching_VLANs]}</p></dd>
 
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
-<dd>创建集群时指定的公用 VLAN。此值是可选的。如果希望工作程序节点仅存在于专用 VLAN 上，请不要提供公用 VLAN 标识。<strong>注</strong>：如果选择不选择公用 VLAN，那么必须配置备用解决方案。有关更多信息，请参阅[工作程序节点的 VLAN 连接](cs_clusters.html#worker_vlan_connection)。
+<dd>创建集群时指定的公用 VLAN。此值是可选的。如果希望工作程序节点仅存在于专用 VLAN 上，请不要提供公用 VLAN 标识。<strong>注</strong>：{[private_VLAN_vyatta]}
 
-<p><strong>注：</strong>您指定的公用和专用 VLAN 必须匹配。专用 VLAN 路由器始终以 <code>bcr</code>（后端路由器）开头，而公用 VLAN 路由器始终以 <code>fcr</code>（前端路由器）开头。这两个前缀后面的数字和字母组合必须匹配，才可在创建集群时使用这些 VLAN。不要使用不匹配的公用和专用 VLAN 来创建集群。</p></dd>
+<p><strong>注</strong>：{[matching_VLANs]}</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
 <dd>工作程序节点缺省情况下具有磁盘加密功能：[了解更多](cs_secure.html#worker)。要禁用加密，请包括此选项。</dd>
@@ -1901,7 +2030,7 @@ diskEncryption: <em>false</em></code></pre>
 **示例**：
 
   ```
-  bx cs worker-add --cluster my_cluster --number 3 --public-vlan my_public_vlan_id --private-vlan my_private_vlan_id --machine-type u2c.2x4 --hardware shared
+  bx cs worker-add --cluster my_cluster --number 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type u2c.2x4 --hardware shared
   ```
   {: pre}
 
@@ -1911,6 +2040,8 @@ diskEncryption: <em>false</em></code></pre>
   bx cs worker-add --cluster my_cluster --number 3 --machine-type u2c.2x4
   ```
   {: pre}
+
+
 
 
 ### bx cs worker-get [CLUSTER_NAME_OR_ID] WORKER_NODE_ID
@@ -1924,30 +2055,30 @@ diskEncryption: <em>false</em></code></pre>
    <dt><code><em>CLUSTER_NAME_OR_ID</em></code></dt>
    <dd>工作程序节点的集群的名称或标识。此值是可选的。</dd>
    <dt><code><em>WORKER_NODE_ID</em></code></dt>
-   <dd>工作程序节点的标识。运行 <code>bx cs workers <em>CLUSTER</em></code> 可查看集群中工作程序节点的标识。此值是必需的。</dd>
+   <dd>工作程序节点的名称。运行 <code>bx cs workers <em>CLUSTER</em></code> 可查看集群中工作程序节点的标识。此值是必需的。</dd>
    </dl>
 
 **示例命令**：
 
   ```
-  bx cs worker-get [CLUSTER_NAME_OR_ID] WORKER_NODE_ID
+  bx cs worker-get my_cluster kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1
   ```
   {: pre}
 
 **示例输出**：
 
   ```
-  ID:				    kube-dal10-123456789-w1
-  State:				normal
-  Status:				Ready
+  ID:           kube-dal10-123456789-w1
+  State:        normal
+  Status:       Ready
   Trust:        disabled
-  Private VLAN:			223xxxx
-  Public VLAN:			223xxxx
-  Private IP:			10.xxx.xx.xx
-  Public IP:			169.xx.xxx.xxx
-  Hardware:			shared
-  Zone:				dal10
-  Version:			1.8.8_1507
+  Private VLAN: 223xxxx
+  Public VLAN:  223xxxx
+  Private IP:   10.xxx.xx.xxx
+  Public IP:    169.xx.xxx.xxx
+  Hardware:     shared
+  Zone:         dal10
+  Version:      1.8.11_1509
   ```
   {: screen}
 
@@ -1964,7 +2095,7 @@ diskEncryption: <em>false</em></code></pre>
    ```
 kubectl get nodes
 ```
-   此命令中返回的 **name** 是分配给工作程序节点的专用 IP 地址。运行 `bx cs workers <cluster_name_or_id>` 命令，并查找具有相同 **Private IP** 地址的工作程序节点时，可以找到有关工作程序节点的更多信息。
+   此命令中返回的 **name** 是分配给工作程序节点的专用 IP 地址。运行 `bx cs workers <cluster_name_or_ID>` 命令，并查找具有相同 **Private IP** 地址的工作程序节点时，可以找到有关工作程序节点的更多信息。
 2. 在称为“封锁”的过程中将工作程序节点标记为不可安排。封锁工作程序节点后，该节点即不可用于未来的 pod 安排。使用在上一步中检索到的工作程序节点的 **name**。
    ```
    kubectl cordon <worker_name>
@@ -1983,9 +2114,9 @@ kubectl get nodes
     ```
     {: pre}
     此过程可能需要几分钟时间。
- 5. 重新引导工作程序节点。使用从 `bx cs workers <cluster_name_or_id>` 命令返回的工作程序标识。
+ 5. 重新引导工作程序节点。使用从 `bx cs workers <cluster_name_or_ID>` 命令返回的工作程序标识。
     ```
-    bx cs worker-reboot <cluster_name_or_id> <worker_name_or_id>
+    bx cs worker-reboot <cluster_name_or_ID> <worker_name_or_ID>
     ```
     {: pre}
  6. 等待大约 5 分钟后，才能使工作程序节点可用于 pod 安排，以确保重新引导完成。在重新引导期间，工作程序节点的状态不会更改。工作程序节点的重新引导通常在几秒后完成。
@@ -2015,7 +2146,7 @@ kubectl get nodes
 **示例**：
 
   ```
-  bx cs worker-reboot my_cluster my_node1 my_node2
+  bx cs worker-reboot my_cluster kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
   ```
   {: pre}
 
@@ -2025,13 +2156,16 @@ kubectl get nodes
 
 重新装入工作程序节点的所有必需配置。如果工作程序节点遇到问题（例如，性能降低），或者如果工作程序节点卡在非正常运行状态，那么重新装入会非常有用。
 
+重新装入工作程序节点不会应用最新的更新、安全补丁或 [Kubernetes 版本](cs_versions.html#version_types)。如果有补丁和版本更新可用，会在您使用与工作程序相关的功能时，通过 CLI 和控制台对您进行提示。要使工作程序保持最新状态，请定期使用 `bx cs worker-update` [命令](cs_cli_reference.html#cs_worker_update)。
+{: tip}
+
 在重新装入工作程序节点之前，请确保将 pod 重新安排到其他工作程序节点上，以帮助避免因工作程序节点上的应用程序或数据损坏而产生的停机时间。
 
 1. 列出集群中的所有工作程序节点，并记下要重新装入的工作程序节点的 **name**。
    ```
 kubectl get nodes
 ```
-   此命令中返回的 **name** 是分配给工作程序节点的专用 IP 地址。运行 `bx cs workers <cluster_name_or_id>` 命令，并查找具有相同 **Private IP** 地址的工作程序节点时，可以找到有关工作程序节点的更多信息。
+   此命令中返回的 **name** 是分配给工作程序节点的专用 IP 地址。运行 `bx cs workers <cluster_name_or_ID>` 命令，并查找具有相同 **Private IP** 地址的工作程序节点时，可以找到有关工作程序节点的更多信息。
 2. 在称为“封锁”的过程中将工作程序节点标记为不可安排。封锁工作程序节点后，该节点即不可用于未来的 pod 安排。使用在上一步中检索到的工作程序节点的 **name**。
    ```
    kubectl cordon <worker_name>
@@ -2050,9 +2184,9 @@ kubectl get nodes
     ```
     {: pre}
     此过程可能需要几分钟时间。
- 5. 重新装入工作程序节点。使用从 `bx cs workers <cluster_name_or_id>` 命令返回的工作程序标识。
+ 5. 重新装入工作程序节点。使用从 `bx cs workers <cluster_name_or_ID>` 命令返回的工作程序标识。
     ```
-    bx cs worker-reload <cluster_name_or_id> <worker_name_or_id>
+    bx cs worker-reload <cluster_name_or_ID> <worker_name_or_ID>
     ```
     {: pre}
  6. 等待重新装入完成。
@@ -2077,22 +2211,24 @@ kubectl get nodes
 **示例**：
 
   ```
-  bx cs worker-reload my_cluster my_node1 my_node2
+  bx cs worker-reload my_cluster kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
   ```
   {: pre}
+
 
 ### bx cs worker-rm [-f] CLUSTER WORKER [WORKER]
 {: #cs_worker_rm}
 
-从集群中除去一个或多个工作程序节点。
+从集群中除去一个或多个工作程序节点。如果除去工作程序节点，那么集群将变得不均衡。 
 
 在除去工作程序节点之前，请确保将 pod 重新安排到其他工作程序节点上，以帮助避免因工作程序节点上的应用程序或数据损坏而产生的停机时间。
+{: tip}
 
 1. 列出集群中的所有工作程序节点，并记下要除去的工作程序节点的 **name**。
    ```
 kubectl get nodes
 ```
-   此命令中返回的 **name** 是分配给工作程序节点的专用 IP 地址。运行 `bx cs workers <cluster_name_or_id>` 命令，并查找具有相同 **Private IP** 地址的工作程序节点时，可以找到有关工作程序节点的更多信息。
+   此命令中返回的 **name** 是分配给工作程序节点的专用 IP 地址。运行 `bx cs workers <cluster_name_or_ID>` 命令，并查找具有相同 **Private IP** 地址的工作程序节点时，可以找到有关工作程序节点的更多信息。
 2. 在称为“封锁”的过程中将工作程序节点标记为不可安排。封锁工作程序节点后，该节点即不可用于未来的 pod 安排。使用在上一步中检索到的工作程序节点的 **name**。
    ```
    kubectl cordon <worker_name>
@@ -2111,16 +2247,16 @@ kubectl get nodes
     ```
    {: pre}
    此过程可能需要几分钟时间。
-5. 除去工作程序节点。使用从 `bx cs workers <cluster_name_or_id>` 命令返回的工作程序标识。
+5. 除去工作程序节点。使用从 `bx cs workers <cluster_name_or_ID>` 命令返回的工作程序标识。
    ```
-   bx cs worker-rm <cluster_name_or_id> <worker_name_or_id>
+   bx cs worker-rm <cluster_name_or_ID> <worker_name_or_ID>
    ```
    {: pre}
 
 6. 验证工作程序节点是否已除去。
    ```
-  bx cs workers <cluster_name_or_id>
-  ```
+       bx cs workers <cluster_name_or_ID>
+       ```
 </br>
 <strong>命令选项</strong>：
 
@@ -2138,14 +2274,19 @@ kubectl get nodes
 **示例**：
 
   ```
-  bx cs worker-rm my_cluster my_node1 my_node2
+  bx cs worker-rm my_cluster kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
   ```
   {: pre}
+
+
+
 
 ### bx cs worker-update [-f] CLUSTER WORKER [WORKER][--kube-version MAJOR.MINOR.PATCH] [--force-update]
 {: #cs_worker_update}
 
-将工作程序节点更新到最新的 Kubernetes 版本。运行 `bx cs worker-update` 可能会导致应用程序和服务的停机时间。更新期间，所有 pod 都将重新安排到其他工作程序节点，如果数据未存储在 pod 外部，那么将删除数据。为避免停机时间，请[确保在所选工作程序节点更新时有足够的工作程序节点来处理工作负载](cs_cluster_update.html#worker_node)。
+更新工作程序节点以将最新的安全性更新和补丁应用于操作系统，并更新 Kubernetes 版本以与主节点的版本相匹配。可以使用 `bx cs cluster-update` [命令](cs_cli_reference.html#cs_cluster_update)来更新主节点 Kubernetes 版本。
+
+**重要信息**：运行 `bx cs worker-update` 可能会导致应用程序和服务产生停机时间。更新期间，所有 pod 都将重新安排到其他工作程序节点，如果数据未存储在 pod 外部，那么将删除数据。为避免停机时间，请[确保在所选工作程序节点更新时有足够的工作程序节点来处理工作负载](cs_cluster_update.html#worker_node)。
 
 在更新前，您可能需要更改 YAML 文件以进行部署。请查看此[发行说明](cs_versions.html)以了解详细信息。
 
@@ -2155,9 +2296,6 @@ kubectl get nodes
 
    <dt><em>CLUSTER</em></dt>
    <dd>列出了其中可用工作程序节点的集群的名称或标识。此值是必需的。</dd>
-
-   <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
-   <dd>集群的 Kubernetes 版本。如果未指定此标志，那么工作程序节点将更新到缺省版本。要查看可用版本，请运行 [bx cs kube-versions](#cs_kube_versions)。此值是可选的。</dd>
 
    <dt><code>-f</code></dt>
    <dd>使用此选项可强制更新主节点，而不显示用户提示。此值是可选的。</dd>
@@ -2172,11 +2310,13 @@ kubectl get nodes
 **示例**：
 
   ```
-  bx cs worker-update my_cluster my_node1 my_node2
+  bx cs worker-update my_cluster kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w1 kube-dal10-cr18a61a63a6a94b658596aa93d087aaa9-w2
   ```
   {: pre}
 
-### bx cs workers CLUSTER
+
+
+### bx cs workers CLUSTER [--show-deleted]
 {: #cs_workers}
 
 查看集群中工作程序节点的列表以及每个工作程序节点的状态。
@@ -2186,11 +2326,14 @@ kubectl get nodes
    <dl>
    <dt><em>CLUSTER</em></dt>
    <dd>列出了其中可用工作程序节点的集群的名称或标识。此值是必需的。</dd>
+   <dt><em>--show-deleted</em></dt>
+   <dd>查看从集群中删除的工作程序节点，包括删除原因。此值是可选的。</dd>
    </dl>
 
 **示例**：
 
   ```
-  bx cs workers mycluster
+  bx cs workers my_cluster
   ```
   {: pre}
+

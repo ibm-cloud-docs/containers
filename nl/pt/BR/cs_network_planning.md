@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -16,7 +16,7 @@ lastupdated: "2018-03-16"
 {:download: .download}
 
 
-# Planejando a rede externa
+# Planejando a rede com os serviços NodePort, LoadBalancer ou Ingress
 {: #planning}
 
 Ao criar um cluster do Kubernetes no {{site.data.keyword.containerlong}}, cada cluster deve ser conectado a uma VLAN pública. A VLAN pública
@@ -29,7 +29,6 @@ A interface de rede pública para os nós do trabalhador nos clusters grátis e 
 |------------|------------------------------------------|
 |Clusters livres no {{site.data.keyword.Bluemix_notm}}|{{site.data.keyword.IBM_notm}}|
 |Clusters padrão no {{site.data.keyword.Bluemix_notm}}|Você em sua conta de infraestrutura do IBM Cloud (SoftLayer)|
-{: caption="Responsabilidades de gerenciamento da VLAN" caption-side="top"}
 
 Para obter informações sobre a comunicação de rede de cluster entre os nós do trabalhador e os pods, veja [Rede de cluster](cs_secure.html#in_cluster_network). Para obter informações sobre como conectar com segurança apps que são executados em um cluster do Kubernetes a uma rede no local ou a apps que são externos ao seu cluster, veja [Configurando a conectividade VPN](cs_vpn.html).
 
@@ -69,7 +68,7 @@ nó do trabalhador.</li>
  <ul>
   <li>Exponha múltiplos apps em seu cluster criando um balanceador de carga HTTP ou HTTPS, TCP ou UDP externo que use um ponto de entrada público assegurado e exclusivo para rotear solicitações recebidas para os seus apps.</li>
   <li>É possível usar uma rota pública para expor múltiplos apps em seu cluster como serviços.</li>
-  <li>O Ingresso consiste em dois componentes principais: o recurso de Ingresso e o balanceador de carga de aplicativo.
+  <li>O Ingress consiste em dois componentes:
    <ul>
     <li>O recurso de Ingresso define as regras de como rotear e balancear a carga de solicitações recebidas para um app.</li>
     <li>O application load balancer (ALB) atende às solicitações de serviço HTTP ou HTTPS, TCP ou UDP e encaminha as solicitações em pods dos apps com base nas regras que você definiu no recurso de Ingresso.</li>
@@ -82,7 +81,8 @@ Para escolher a melhor opção de rede para seu aplicativo, é possível seguir 
 
 <img usemap="#networking_map" border="0" class="image" src="images/networkingdt.png" width="500px" alt="Esta imagem orienta na escolha da melhor opção de rede para seu aplicativo. Se esta imagem não estiver sendo exibida, a informação ainda poderá ser encontrada na documentação." style="width:500px;" />
 <map name="networking_map" id="networking_map">
-<area href="/docs/containers/cs_nodeport.html#planning" alt="Serviço Nodeport" shape="circle" coords="52, 283, 45"/>
-<area href="/docs/containers/cs_loadbalancer.html#planning" alt="Serviço LoadBalancer" shape="circle" coords="247, 419, 44"/>
-<area href="/docs/containers/cs_ingress.html#planning" alt="Serviço Ingress" shape="circle" coords="445, 420, 45"/>
+<area href="/docs/containers/cs_nodeport.html" alt="Serviço Nodeport" shape="circle" coords="52, 283, 45"/>
+<area href="/docs/containers/cs_loadbalancer.html" alt="Serviço LoadBalancer" shape="circle" coords="247, 419, 44"/>
+<area href="/docs/containers/cs_ingress.html" alt="Serviço Ingress" shape="circle" coords="445, 420, 45"/>
 </map>
+

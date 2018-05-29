@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-14"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -16,14 +16,14 @@ lastupdated: "2018-03-14"
 {:download: .download}
 
 
-# 日志记录和监视集群
+# 日志记录和监视
 {: #health}
 
 在 {{site.data.keyword.containerlong}} 中设置日志记录和监视可帮助您对问题进行故障诊断，并提高 Kubernetes 集群和应用程序的运行状况和性能。
 {: shortdesc}
 
 
-## 配置日志转发
+## 配置集群和应用程序日志转发
 {: #logging}
 
 通过 {{site.data.keyword.containershort_notm}} 中的标准 Kubernetes 集群，可以将来自不同源的日志转发到 {{site.data.keyword.loganalysislong_notm}} 和/或外部 syslog 服务器。
@@ -34,7 +34,7 @@ lastupdated: "2018-03-14"
 
 查看下表以获取有关不同日志源的信息。
 
-<table><caption>日志源特征</caption>
+<table>
   <thead>
     <tr>
       <th>日志源</th>
@@ -61,7 +61,7 @@ lastupdated: "2018-03-14"
     <tr>
       <td><code>Kubernetes</code></td>
       <td>Kubernetes 系统组件的日志。</td>
-      <td><code>/var/log/syslog</code>、<code>/var/log/auth.log</code></td>
+      <td><code>/var/log/kubelet.log</code>、<code>/var/log/kube-proxy.log</code>、<code>/var/log/event-exporter/&ast;.log</code></td>
     </tr>
     <tr>
       <td><code>ingress</code></td>
@@ -71,11 +71,12 @@ lastupdated: "2018-03-14"
   </tbody>
 </table>
 
-通过 UI 配置日志记录时，必须指定组织和空间。如果要在帐户级别启用日志记录，可以通过 CLI 执行此操作。
+要通过 UI 配置日志记录，必须指定组织和空间。要在帐户级别启用日志记录，请使用 CLI。
 {: tip}
 
 
 ### 开始之前
+{: #before-forwarding}
 
 1. 验证许可权。如果在创建集群或日志记录配置时指定了空间，那么帐户所有者和 {{site.data.keyword.containershort_notm}} 密钥所有者需要该空间的“管理员”、“开发者”或“审计员”许可权。
   * 如果您不知道谁是 {{site.data.keyword.containershort_notm}} 密钥所有者，请运行以下命令。
@@ -98,45 +99,58 @@ lastupdated: "2018-03-14"
   {: tip}
 
 3. 要将日志转发到 syslog，请通过以下两种方式之一来设置接受 syslog 协议的服务器：
-  * 设置和管理自己的服务器，或者让提供者为您管理服务器。如果提供者为您管理服务器，请从日志记录提供者获取日志记录端点。
+  * 设置和管理自己的服务器，或者让提供者为您管理服务器。如果提供者为您管理服务器，请从日志记录提供者获取日志记录端点。syslog 服务器必须接受 UDP 协议。
   * 从容器运行 syslog。例如，可以使用此[部署 .yaml 文件 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) 来访存在 Kubernetes 集群中运行容器的 Docker 公共映像。该映像在公共集群 IP 地址上发布端口 `514`，并使用此公共集群 IP 地址来配置 syslog 主机。
 
 ### 启用日志转发
+{: #enable-forwarding}
+
+可以针对集群日志记录创建配置。您可以使用相关标志来区分不同的日志源。可以在 [CLI 参考](cs_cli_reference.html#logging_commands)中查看配置选项的完整列表。如果遇到任何问题，请尝试浏览本[故障诊断指南](cs_troubleshoot_health.html)。
 
 1. 创建日志转发配置。
-    * 将日志转发到 {{site.data.keyword.loganalysisshort_notm}}：
-      ```
-      bx cs logging-config-create <my_cluster> --logsource <my_log_source> --namespace <kubernetes_namespace> --hostname <ingestion_URL> --port <ingestion_port> --space <cluster_space> --org <cluster_org> --type ibm --app-containers <containers> --app-paths <paths_to_logs>
-      ```
-      {: pre}
+  ```
+  bx cs logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type <type> --app-containers <containers> --app-paths <paths_to_logs> --skip-validation
+  ```
+  {: pre}
 
+    * 缺省名称空间的容器日志记录配置以及输出示例：
       ```
-      $ cs logging-config-create zac2 --logsource application --app-paths '/var/log/apps.log' --app-containers 'zac1,zac2,zac3'
-      Creating logging configuration for application logs in cluster zac2...
+      bx cs logging-config-create cluster1 --namespace default
+      Creating logging configuration for container logs in cluster cluster1...
       OK
-      Id                                     Source        Namespace   Host                                    Port    Org   Space   Protocol   Application Containers   Paths
-      aa2b415e-3158-48c9-94cf-f8b298a5ae39   application   -           ingest.logging.stage1.ng.bluemix.net✣   9091✣   -     -       ibm        zac1,zac2,zac3           /var/log/apps.log
+      Id                                     Source      Namespace   Host                                 Port    Org   Space   Protocol   Application Containers   Paths
+      af7d1ff4-33e6-4275-8167-b52eb3c5f0ee   container   default     ingest-au-syd.logging.bluemix.net✣  9091✣   -     -       ibm        -                        -
+
+      ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysislong_notm}} service.
+
       ```
       {: screen}
 
-    * 将日志转发到 syslog：
+    * 应用程序日志记录配置和输出示例：
       ```
-      bx cs logging-config-create <my_cluster> --logsource <my_log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <containers> --app-paths <paths_to_logs>
+      bx cs logging-config-create cluster2 --logsource application --app-paths '/var/log/apps.log' --app-containers 'container1,container2,container3'
+      Creating logging configuration for application logs in cluster cluster2...
+      OK
+      Id                                     Source        Namespace   Host                                    Port    Org   Space   Protocol   Application   Containers   Paths
+      aa2b415e-3158-48c9-94cf-f8b298a5ae39   application   -           ingest.logging.stage1.ng.bluemix.net✣  9091✣   -     -       ibm        container1,container2,container3   /var/log/apps.log
       ```
-      {: pre}
+      {: screen}
+
+      如果在容器中运行的应用程序无法配置为将日志写入到 STDOUT 或 STDERR，那么可以创建日志记录配置以从应用程序日志文件转发日志。
+      {: tip}
+
 
   <table>
-    <caption>了解此命令的组成部分</caption>
   <thead>
     <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解此命令的组成部分</th>
   </thead>
   <tbody>
     <tr>
-      <td><code><em>&lt;my_cluster&gt;</em></code></td>
+      <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
       <td>集群的名称或标识。</td>
     </tr>
     <tr>
-      <td><code><em>&lt;my_log_source&gt;</em></code></td>
+      <td><code><em>&lt;log_source&gt;</em></code></td>
       <td>要从中转发日志的源。接受的值为 <code>container</code>、<code>application</code>、<code>worker</code>、<code>kubernetes</code> 和 <code>ingress</code>。</td>
     </tr>
     <tr>
@@ -144,7 +158,7 @@ lastupdated: "2018-03-14"
       <td>可选：要从中转发日志的 Kubernetes 名称空间。<code>ibm-system</code> 和 <code>kube-system</code> Kubernetes 名称空间不支持日志转发。此值仅对 <code>container</code> 日志源有效。如果未指定名称空间，那么集群中的所有名称空间都将使用此配置。</td>
     </tr>
     <tr>
-      <td><code><em>&lt;ingestion_URL&gt;</em></code></td>
+      <td><code><em>&lt;hostname_or_ingestion_URL&gt;</em></code></td>
       <td><p>对于 {{site.data.keyword.loganalysisshort_notm}}，请使用[数据获取 URL](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)。如果未指定数据获取 URL，那么将使用在其中创建集群的区域的端点。</p>
       <p>对于 syslog，请指定日志收集器服务的主机名和 IP 地址。</p></td>
     </tr>
@@ -166,11 +180,15 @@ lastupdated: "2018-03-14"
     </tr>
     <tr>
       <td><code><em>&lt;paths_to_logs&gt;</em></code></td>
-      <td>其容器上应用程序要将日志记录到的路径。要转发源类型为 <code>application</code> 的日志，必须提供路径。要指定多个路径，请使用逗号分隔列表。示例：<code>/var/log/myApp1/*/var/log/myApp2/*</code></td>
+      <td>容器上应用程序要将日志记录到的路径。要转发源类型为 <code>application</code> 的日志，必须提供路径。要指定多个路径，请使用逗号分隔列表。示例：<code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
     </tr>
     <tr>
       <td><code><em>&lt;containers&gt;</em></code></td>
-      <td>可选：转发来自应用程序的日志时，可以指定包含应用程序的容器的名称。可以使用逗号分隔列表来指定多个容器。如果未指定任何容器，那么会转发来自包含所提供路径的所有容器中的日志。</td>
+      <td>可选：要转发来自应用程序的日志，可以指定包含应用程序的容器的名称。可以使用逗号分隔列表来指定多个容器。如果未指定任何容器，那么会转发来自包含所提供路径的所有容器中的日志。</td>
+    </tr>
+    <tr>
+      <td><code><em>--skip-validation</em></code></td>
+      <td>可选：跳过对指定组织和空间名称的验证。跳过验证可减少处理时间，但无效的日志记录配置将无法正确转发日志。</td>
     </tr>
   </tbody>
   </table>
@@ -179,15 +197,15 @@ lastupdated: "2018-03-14"
 
     * 列出集群中的所有日志记录配置：
       ```
-    bx cs logging-config-get <my_cluster>
-    ```
+      bx cs logging-config-get <cluster_name_or_ID>
+      ```
       {: pre}
 
       输出示例：
 
       ```
       Id                                    Source       Namespace     Host                          Port   Org      Space      Protocol     Paths
-      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes   -             172.30.162.138                5514   -        -          syslog       /var/log/kubelet.log,/var/log/kube-proxy.log
+      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes   -             172.30.xxx.xxx                5514   -        -          syslog       /var/log/kubelet.log,/var/log/kube-proxy.log
       5bd9c609-13c8-4c48-9d6e-3a6664c825a9  application  -             ingest.logging.ng.bluemix.net 9091   my_org   my_space   ibm          /var/log/apps/**/*.log,/var/log/apps/**/*.err
       8a284f1a-451c-4c48-b1b4-a4e6b977264e  containers   my-namespace  myhostname.common             5514   -        -          syslog       -
       ```
@@ -195,7 +213,7 @@ lastupdated: "2018-03-14"
 
     * 列出一种类型日志源的日志记录配置：
       ```
-      bx cs logging-config-get <my_cluster> --logsource worker
+      bx cs logging-config-get <cluster_name_or_ID> --logsource worker
       ```
       {: pre}
 
@@ -204,14 +222,218 @@ lastupdated: "2018-03-14"
       ```
       Id                                    Source    Namespace   Host                            Port   Org    Space     Protocol    Paths
       f4bc77c0-ee7d-422d-aabf-a4e6b977264e  worker    -           ingest.logging.ng.bluemix.net   9091   -      -         ibm         /var/log/syslog,/var/log/auth.log
-      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  worker    -           172.30.162.138                  5514   -      -         syslog      /var/log/syslog,/var/log/auth.log
+      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  worker    -           172.30.xxx.xxx                  5514   -      -         syslog      /var/log/syslog,/var/log/auth.log
       ```
       {: screen}
 
-要对配置进行更新，请执行相同的步骤，但将 `bx cs logging-config-create` 替换为 `bx cs logging-config-update`。请确保验证更新。
-{: tip}
+### 更新日志转发
+{: #enable-forwarding}
+
+1. 更新日志转发配置。
+    ```
+    bx cs logging-config-update <cluster_name_or_ID> <log_config_id> --namespace <namespace> --type <log_type> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <containers> --app-paths <paths_to_logs>
+    ```
+    {: pre}
+
+  <table>
+  <thead>
+    <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解此命令的组成部分</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
+      <td>集群的名称或标识。</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;log_config_id&gt;</em></code></td>
+      <td>要更新的配置的标识。</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;namespace&gt;</em></code></td>
+      <td>可选：要从中转发日志的 Kubernetes 名称空间。<code>ibm-system</code> 和 <code>kube-system</code> Kubernetes 名称空间不支持日志转发。此值仅对 <code>container</code> 日志源有效。如果未指定名称空间，那么集群中的所有名称空间都将使用此配置。</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;log_type&gt;</em></code></td>
+      <td>要转发日志的位置。选项为 <code>ibm</code>（将日志转发到 {{site.data.keyword.loganalysisshort_notm}}）和 <code>syslog</code>（将日志转发到外部服务器）。</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;hostname_or_ingestion_URL&gt;</em></code></td>
+      <td><p>对于 {{site.data.keyword.loganalysisshort_notm}}，请使用[数据获取 URL](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls)。如果未指定数据获取 URL，那么将使用在其中创建集群的区域的端点。</p>
+      <p>对于 syslog，请指定日志收集器服务的主机名和 IP 地址。</p></td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;port&gt;</em></code></td>
+      <td>数据获取端口。如果未指定端口，那么将使用标准端口 <code>9091</code>。<p>对于 syslog，请指定日志收集器服务器的端口。如果未指定端口，那么将使用标准端口 <code>514</code>。</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;cluster_space&gt;</em></code></td>
+      <td>可选：要向其发送日志的 Cloud Foundry 空间的名称。将日志转发到 {{site.data.keyword.loganalysisshort_notm}} 时，会在数据获取点中指定空间和组织。如果未指定空间，日志将发送到帐户级别。</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;cluster_org&gt;</em></code></td>
+      <td>该空间所在 Cloud Foundry 组织的名称。如果指定了空间，那么此值是必需的。</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;paths_to_logs&gt;</em></code></td>
+      <td>容器上应用程序要将日志记录到的路径。要转发源类型为 <code>application</code> 的日志，必须提供路径。要指定多个路径，请使用逗号分隔列表。示例：<code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;containers&gt;</em></code></td>
+      <td>可选：要转发来自应用程序的日志，可以指定包含应用程序的容器的名称。可以使用逗号分隔列表来指定多个容器。如果未指定任何容器，那么会转发来自包含所提供路径的所有容器中的日志。</td>
+    </tr>
+  </tbody>
+  </table>
 
 <br />
+
+
+
+## 过滤日志
+{: #filter-logs}
+
+可以通过过滤掉某段时间内的特定日志来选择转发的日志。
+
+1. 创建日志记录过滤器。
+  ```
+  bx cs logging-filter-create <cluster_name_or_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace> --container <container_name> --level <logging_level> --message <message>
+  ```
+  {: pre}
+  <table>
+    <thead>
+      <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解此命令的组成部分</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>&lt;cluster_name_or_ID&gt;</td>
+        <td>必需：要为其创建日志记录过滤器的集群的名称或标识。</td>
+      </tr>
+      <tr>
+        <td><code>&lt;log_type&gt;</code></td>
+        <td>要应用过滤器的日志的类型。目前支持 <code>all</code>、<code>container</code> 和 <code>host</code>。</td>
+      </tr>
+      <tr>
+        <td><code>&lt;configs&gt;</code></td>
+        <td>可选：日志记录配置标识的逗号分隔列表。如果未提供，过滤器将应用于传递到过滤器的所有集群日志记录配置。可以通过将 <code>--show-matching-configs</code> 标志用于命令来查看与过滤器相匹配的日志配置。</td>
+      </tr>
+      <tr>
+        <td><code>&lt;kubernetes_namespace&gt;</code></td>
+        <td>可选：要从中转发日志的 Kubernetes 名称空间。仅当使用日志类型 <code>container</code> 时，此标志才适用。</td>
+      </tr>
+      <tr>
+        <td><code>&lt;container_name&gt;</code></td>
+        <td>可选：要从中过滤日志的容器的名称。</td>
+      </tr>
+      <tr>
+        <td><code>&lt;logging_level&gt;</code></td>
+        <td>可选：过滤掉处于指定级别及更低级别的日志。规范顺序的可接受值为 <code>fatal</code>、<code>error</code>、<code>warn/warning</code>、<code>info</code>、<code>debug</code> 和 <code>trace</code>。例如，如果过滤掉 <code>info</code> 级别的日志，那么还会过滤掉 <code>debug</code> 和 <code>trace</code>。**注**：仅当日志消息为 JSON 格式且包含 level 字段时，才能使用此标志。要以 JSON 格式显示消息，请向命令附加 <code>--json</code> 标志。</td>
+      </tr>
+      <tr>
+        <td><code>&lt;message&gt;</code></td>
+        <td>可选：过滤掉包含指定消息的日志。</td>
+      </tr>
+    </tbody>
+  </table>
+
+2. 查看创建的日志过滤器。
+
+  ```
+  bx cs logging-filter-get <cluster_name_or_ID> --id <filter_ID> --show-matching-configs
+  ```
+  {: pre}
+  <table>
+    <thead>
+      <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解此命令的组成部分</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>&lt;cluster_name_or_ID&gt;</td>
+        <td>必需：要为其创建日志记录过滤器的集群的名称或标识。</td>
+      </tr>
+      <tr>
+        <td><code>&lt;filter_ID&gt;</code></td>
+        <td>可选：要查看的日志过滤器的标识。</td>
+      </tr>
+      <tr>
+        <td><code>--show-matching-configs</code></td>
+        <td>显示每个过滤器应用于的日志记录配置。</td>
+      </tr>
+    </tbody>
+  </table>
+
+3. 更新创建的日志过滤器。
+  ```
+  bx cs logging-filter-update <cluster_name_or_ID> --id <filter_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --message <message>
+  ```
+  {: pre}
+  <table>
+    <thead>
+      <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解此命令的组成部分</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>&lt;cluster_name_or_ID&gt;</td>
+        <td>必需：要更新其日志记录过滤器的集群的名称或标识。</td>
+      </tr>
+      <tr>
+        <td><code>&lt;filter_ID&gt;</code></td>
+        <td>要更新的日志过滤器的标识。</td>
+      </tr>
+      <tr>
+        <td><code><&lt;log_type&gt;</code></td>
+        <td>要应用过滤器的日志的类型。目前支持 <code>all</code>、<code>container</code> 和 <code>host</code>。</td>
+      </tr>
+      <tr>
+        <td><code>&lt;configs&gt;</code></td>
+        <td>可选：要应用过滤器的所有日志记录配置标识的逗号分隔列表。如果未提供，过滤器将应用于传递到过滤器的所有集群日志记录配置。可以通过将 <code>--show-matching-configs</code> 标志用于 <code>bx cs logging-filter-get</code> 命令来查看与过滤器相匹配的日志配置。</td>
+      </tr>
+      <tr>
+        <td><code>&lt;kubernetes_namespace&gt;</code></td>
+        <td>可选：要从中转发日志的 Kubernetes 名称空间。仅当使用日志类型 <code>container</code> 时，此标志才适用。</td>
+      </tr>
+      <tr>
+        <td><code>&lt;container_name&gt;</code></td>
+        <td>可选：要从中过滤日志的容器的名称。仅当使用日志类型 <code>container</code> 时，此标志才适用。</td>
+      </tr>
+      <tr>
+        <td><code>&lt;logging_level&gt;</code></td>
+        <td>可选：过滤掉处于指定级别及更低级别的日志。规范顺序的可接受值为 <code>fatal</code>、<code>error</code>、<code>warn/warning</code>、<code>info</code>、<code>debug</code> 和 <code>trace</code>。例如，如果过滤掉 <code>info</code> 级别的日志，那么还会过滤掉 <code>debug</code> 和 <code>trace</code>。**注**：仅当日志消息为 JSON 格式且包含 level 字段时，才能使用此标志。</td>
+      </tr>
+      <tr>
+        <td><code>&lt;message&gt;</code></td>
+        <td>可选：过滤掉包含指定消息的日志。</td>
+      </tr>
+    </tbody>
+  </table>
+
+4. 删除创建的日志过滤器。
+
+  ```
+  bx cs logging-filter-rm <cluster_name_or_ID> --id <filter_ID> [--all]
+  ```
+  {: pre}
+  <table>
+    <thead>
+      <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解此命令的组成部分</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>&lt;cluster_name_or_ID&gt;</code></td>
+        <td>必需：要删除其日志记录过滤器的集群的名称或标识。</td>
+      </tr>
+      <tr>
+        <td><code>&lt;filter_ID&gt;</code></td>
+        <td>可选：要除去的日志过滤器的标识。</td>
+      </tr>
+      <tr>
+        <td><code>--all</code></td>
+        <td>可选：删除所有日志转发过滤器。</td>
+      </tr>
+    </tbody>
+  </table>
+
+<br />
+
+
 
 
 ## 查看日志
@@ -228,7 +450,7 @@ lastupdated: "2018-03-14"
 
 如果使用缺省值来创建配置文件，那么可以在创建集群的帐户或者组织和空间中找到日志。如果在配置文件中指定了组织和空间，那么可以在该空间中找到日志。有关日志记录的更多信息，请参阅 [{{site.data.keyword.containershort_notm}} 的日志记录](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes)。
 
-要访问 Kibana 仪表板，请转至以下某个 URL，然后选择在其中创建了集群的 {{site.data.keyword.Bluemix_notm}} 帐户或空间。
+要访问 Kibana 仪表板，请转至下列其中一个 URL，然后选择在其中配置了集群日志转发的 {{site.data.keyword.Bluemix_notm}} 帐户或空间。
 - 美国南部和美国东部：https://logging.ng.bluemix.net
 - 英国南部：https://logging.eu-gb.bluemix.net
 - 欧洲中部：https://logging.eu-fra.bluemix.net
@@ -244,6 +466,7 @@ lastupdated: "2018-03-14"
 <br />
 
 
+
 ## 停止日志转发
 {: #log_sources_delete}
 
@@ -255,22 +478,21 @@ lastupdated: "2018-03-14"
 2. 删除日志记录配置。
 <ul>
 <li>删除一个日志记录配置：</br>
-  <pre><code>bx cs logging-config-rm &lt;my_cluster&gt; --id &lt;log_config_id&gt;</pre></code>
+  <pre><code>bx cs logging-config-rm &lt;cluster_name_or_ID&gt; --id &lt;log_config_ID&gt;</pre></code>
   <table>
-    <caption>了解此命令的组成部分</caption>
       <thead>
         <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解此命令的组成部分</th>
       </thead>
         <tbody>
         <tr>
-          <td><code><em>&lt;my_cluster&gt;</em></code></td>
+          <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
           <td>日志记录配置所在的集群的名称。</td>
         </tr>
         <tr>
-          <td><code><em>&lt;log_config_id&gt;</em></code></td>
+          <td><code><em>&lt;log_config_ID&gt;</em></code></td>
           <td>日志源配置的标识。</td>
         </tr>
-        </tbody>
+  </tbody>
   </table></li>
 <li>删除所有日志记录配置：</br>
   <pre><code>bx cs logging-config-rm <my_cluster> --all</pre></code></li>
@@ -307,18 +529,17 @@ lastupdated: "2018-03-14"
 1. 配置 Webhook。如果未在标志中提供任何信息，那么将使用缺省配置。
 
     ```
-    bx cs apiserver-config-set audit-webhook <my_cluster> --remoteServer <server_URL_or_IP> --caCert <CA_cert_path> --clientCert <client_cert_path> --clientKey <client_key_path>
+    bx cs apiserver-config-set audit-webhook <cluster_name_or_ID> --remoteServer <server_URL_or_IP> --caCert <CA_cert_path> --clientCert <client_cert_path> --clientKey <client_key_path>
     ```
     {: pre}
 
     <table>
-    <caption>了解此命令的组成部分</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解此命令的组成部分</th>
     </thead>
     <tbody>
     <tr>
-    <td><code><em>&lt;my_cluster&gt;</em></code></td>
+    <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
     <td>集群的名称或标识。</td>
     </tr>
     <tr>
@@ -342,7 +563,7 @@ lastupdated: "2018-03-14"
 2. 通过查看远程日志记录服务的 URL 来验证是否已启用日志转发。
 
     ```
-    bx cs apiserver-config-get audit-webhook <my_cluster>
+    bx cs apiserver-config-get audit-webhook <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -356,7 +577,7 @@ lastupdated: "2018-03-14"
 3. 通过重新启动 Kubernetes 主节点来应用配置更新。
 
     ```
-    bx cs apiserver-refresh <my_cluster>
+    bx cs apiserver-refresh <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -370,14 +591,14 @@ lastupdated: "2018-03-14"
 1. 禁用集群 API 服务器的 Webhook 后端配置。
 
     ```
-    bx cs apiserver-config-unset audit-webhook <my_cluster>
+    bx cs apiserver-config-unset audit-webhook <cluster_name_or_ID>
     ```
     {: pre}
 
 2. 通过重新启动 Kubernetes 主节点来应用配置更新。
 
     ```
-    bx cs apiserver-refresh <my_cluster>
+    bx cs apiserver-refresh <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -425,36 +646,24 @@ lastupdated: "2018-03-14"
 {: shortdesc}
 
 自动恢复系统会使用各种检查来查询工作程序节点的运行状态。如果自动恢复根据配置的检查，检测到运行状况欠佳的工作程序节点，那么自动恢复会触发更正操作，例如在工作程序节点上重装操作系统。一次只会对一个工作程序节点执行更正操作。该工作程序节点必须成功完成更正操作后，才能对其他任何工作程序节点执行更正操作。
-有关更多信息，请参阅此[自动恢复博客帖子 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/)。**注**：自动恢复至少需要一个正常运行的节点才能有效运行。仅在具有两个或两个以上工作程序节点的集群中，将自动恢复配置为执行主动检查。
+有关更多信息，请参阅此[自动恢复博客帖子 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/)。</br> </br>
+**注**：自动恢复至少需要一个正常运行的节点才能有效运行。仅在具有两个或两个以上工作程序节点的集群中，将自动恢复配置为执行主动检查。
 
 开始之前，请[设定 CLI 的目标](cs_cli_install.html#cs_cli_configure)为要检查其工作程序节点状态的集群。
 
 1. 创建配置映射文件以通过 JSON 格式定义检查。例如，以下 YAML 文件定义了三项检查：一项 HTTP 检查和两项 Kubernetes API 服务器检查。</br>
-   **提示**：将每项检查定义为配置映射中 data 部分中的唯一键。
+   **提示**：将每项检查定义为配置映射中 `data` 部分中的唯一键。
 
    ```
-    kind: ConfigMap
-    apiVersion: v1
-    metadata:
-      name: ibm-worker-recovery-checks
-      namespace: kube-system
-    data:
-      checkhttp.json: |
-        {
-          "Check":"HTTP",
-          "FailureThreshold":3,
-          "CorrectiveAction":"REBOOT",
-          "CooloffSeconds":1800,
-          "IntervalSeconds":180,
-          "TimeoutSeconds":10,
-          "Port":80,
-          "ExpectedStatus":200,
-          "Route":"/myhealth",
-          "Enabled":false
-        }
-      checknode.json: |
-        {
-          "Check":"KUBEAPI",
+   kind: ConfigMap
+   apiVersion: v1
+   metadata:
+     name: ibm-worker-recovery-checks
+     namespace: kube-system
+   data:
+     checknode.json: |
+       {
+         "Check":"KUBEAPI",
           "Resource":"NODE",
           "FailureThreshold":3,
           "CorrectiveAction":"RELOAD",
@@ -466,16 +675,29 @@ lastupdated: "2018-03-14"
       checkpod.json: |
         {
           "Check":"KUBEAPI",
-          "Resource":"POD",
-          "PodFailureThresholdPercent":50,
-          "FailureThreshold":3,
-          "CorrectiveAction":"RELOAD",
-          "CooloffSeconds":1800,
-          "IntervalSeconds":180,
-          "TimeoutSeconds":10,
-          "Enabled":true
-      }
-    ```
+         "Resource":"POD",
+         "PodFailureThresholdPercent":50,
+         "FailureThreshold":3,
+         "CorrectiveAction":"RELOAD",
+         "CooloffSeconds":1800,
+         "IntervalSeconds":180,
+         "TimeoutSeconds":10,
+         "Enabled":true
+       }
+     checkhttp.json: |
+       {
+         "Check":"HTTP",
+         "FailureThreshold":3,
+         "CorrectiveAction":"REBOOT",
+         "CooloffSeconds":1800,
+         "IntervalSeconds":180,
+         "TimeoutSeconds":10,
+         "Port":80,
+         "ExpectedStatus":200,
+         "Route":"/myhealth",
+         "Enabled":false
+       }
+   ```
    {:codeblock}
 
    <table summary="了解配置映射的组成部分">
@@ -493,24 +715,21 @@ lastupdated: "2018-03-14"
    <td><code>kube-system</code> 名称空间是常量，无法更改。</td>
    </tr>
    <tr>
-   <td><code>checkhttp.json</code></td>
-   <td>定义 HTTP 检查，用于检查 HTTP 服务器是否在每个节点的 IP 地址的端口 80 上运行，并在路径 <code>/myhealth</code> 处返回 200 响应。可以通过运行 <code>kubectl get nodes</code> 来查找节点的 IP 地址。
-               例如，假设集群中有两个节点，其 IP 地址分别为 10.10.10.1 和 10.10.10.2。在此示例中，会对下面两个路径检查是否返回“200 正常”响应：<code>http://10.10.10.1:80/myhealth</code> 和 <code>http://10.10.10.2:80/myhealth</code>。
-               示例 YAML 中的检查每 3 分钟运行一次。如果连续失败三次，将重新引导节点。此操作相当于运行 <code>bx cs worker-reboot</code>。HTTP 检查会一直处于禁用状态，直到您将 <b>Enabled</b> 字段设置为 <code>true</code>。</td>
-   </tr>
-   <tr>
    <td><code>checknode.json</code></td>
-   <td>定义 Kubernetes API 节点检查，用于检查是否每个节点都处于 <code>Ready</code> 状态。如果特定节点不处于 <code>Ready</code> 状态，那么对该节点的检查计为一次失败。
-               示例 YAML 中的检查每 3 分钟运行一次。如果连续失败三次，将重新装入节点。此操作相当于运行 <code>bx cs worker-reload</code>。节点检查会一直处于启用状态，直到您将 <b>Enabled</b> 字段设置为 <code>false</code> 或除去检查。</td>
+   <td>定义 Kubernetes API 节点检查，用于检查是否每个工作程序节点都处于 <code>Ready</code> 状态。如果特定工作程序节点不处于 <code>Ready</code> 状态，那么对该工作程序节点的检查计为一次失败。示例 YAML 中的检查每 3 分钟运行一次。如果连续失败三次，将重新装入该工作程序节点。此操作相当于运行 <code>bx cs worker-reload</code>。节点检查会一直处于启用状态，直到您将 <b>Enabled</b> 字段设置为 <code>false</code> 或除去检查。</td>
    </tr>
    <tr>
    <td><code>checkpod.json</code></td>
-   <td>定义 Kubernetes API pod 检查，用于根据分配给节点的 pod 总数来检查该节点上 <code>NotReady</code> pod 的总百分比。如果特定节点的 <code>NotReady</code> pod 的总百分比大于定义的 <code>PodFailureThresholdPercent</code>，那么对该节点的检查计为一次失败。
-               示例 YAML 中的检查每 3 分钟运行一次。如果连续失败三次，将重新装入节点。此操作相当于运行 <code>bx cs worker-reload</code>。pod 检查会一直处于启用状态，直到您将 <b>Enabled</b> 字段设置为 <code>false</code> 或除去检查。</td>
+   <td>定义 Kubernetes API pod 检查，用于根据分配给工作程序节点的 pod 总数来检查该工作程序节点上 <code>NotReady</code> pod 的总百分比。如果特定工作程序节点的 <code>NotReady</code> pod 的总百分比大于定义的 <code>PodFailureThresholdPercent</code>，那么对该工作程序节点的检查计为一次失败。缺省情况下，将检查所有名称空间中的 pod。要将检查限制为仅检查指定名称空间中的 pod，请将 <code>Namespace</code> 字段添加到检查。示例 YAML 中的检查每 3 分钟运行一次。如果连续失败三次，将重新装入该工作程序节点。此操作相当于运行 <code>bx cs worker-reload</code>。pod 检查会一直处于启用状态，直到您将 <b>Enabled</b> 字段设置为 <code>false</code> 或除去检查。</td>
+   </tr>
+   <tr>
+   <td><code>checkhttp.json</code></td>
+   <td>定义 HTTP 检查，用于检查在工作程序节点上运行的 HTTP 服务器是否运行正常。要使用此检查，必须使用 [DaemonSet ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) 在集群中的每个工作程序节点上部署 HTTP 服务器。必须实现在 <code>/myhealth</code> 路径中可用并且可以验证 HTTP 服务器是否运行正常的运行状况检查。您可以通过更改 <strong>Route</strong> 参数来定义其他路径。如果 HTTP 服务器运行正常，那么必须返回 <strong>ExpectedStatus</strong> 中定义的 HTTP 响应代码。必须将 HTTP 服务器配置为侦听工作程序节点的专用 IP 地址。可以通过运行 <code>kubectl get nodes</code> 来查找专用 IP 地址。</br>
+   例如，假设集群中有两个节点，其专用 IP 地址分别为 10.10.10.1 和 10.10.10.2。在此示例中，会对下面两个路径检查是否返回 200 HTTP 响应：<code>http://10.10.10.1:80/myhealth</code> 和 <code>http://10.10.10.2:80/myhealth</code>。
+   示例 YAML 中的检查每 3 分钟运行一次。如果连续失败三次，将重新引导该工作程序节点。此操作相当于运行 <code>bx cs worker-reboot</code>。HTTP 检查会一直处于禁用状态，直到您将 <b>Enabled</b> 字段设置为 <code>true</code>。</td>
    </tr>
    </tbody>
    </table>
-
 
    <table summary="了解单个规则的组成部分">
    <caption>了解单个规则的组成部分</caption>
@@ -566,13 +785,17 @@ lastupdated: "2018-03-14"
    <td><code>Enabled</code></td>
    <td>输入 <code>true</code> 以启用检查，或输入 <code>false</code> 以禁用检查。</td>
    </tr>
+   <tr>
+   <td><code>Namespace</code></td>
+   <td> 可选：要将 <code>checkpod.json</code> 限制为仅检查一个名称空间中的 pod，请添加 <code>Namespace</code> 字段并输入名称空间。</td>
+   </tr>
    </tbody>
    </table>
 
 2. 在集群中创建配置映射。
 
     ```
-    kubectl apply -f <my_file.yaml>
+    kubectl apply -f ibm-worker-recovery-checks.yaml
     ```
     {: pre}
 
@@ -596,3 +819,4 @@ lastupdated: "2018-03-14"
     kubectl -n kube-system describe deployment ibm-worker-recovery
     ```
     {: pre}
+

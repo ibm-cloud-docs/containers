@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -24,9 +24,17 @@ Vous pouvez modifier le pool d'adresses IP portables publiques ou privées dispo
 
 Dans {{site.data.keyword.containershort_notm}}, vous pouvez ajouter des adresses IP portables stables pour les services Kubernetes en adjoignant des sous-réseaux au cluster. Dans ce cas, les sous-réseaux ne sont pas utilisés avec le masque réseau pour créer une connectivité à travers un ou plusieurs clusters. A la place, les sous-réseaux sont utilisés pour fournir des adresses IP permanentes fixes pour un service à partir d'un cluster pouvant être utilisées pour accéder à ce service.
 
-Lorsque vous créez un cluster standard, {{site.data.keyword.containershort_notm}} lui alloue automatiquement un sous-réseau public portable avec 5 adresses IP publiques et un sous-réseau privé portable avec 5 adresses IP privées. Les adresses IP publiques et privées portables sont statiques et ne changent pas lorsqu'un noeud worker, ou même le cluster, est retiré. Pour chaque sous-réseau, une adresse IP portable publique et une adresse IP portable privée sont utilisées pour les [équilibreurs de charge d'application](cs_ingress.html) que vous pouvez utiliser pour exposer plusieurs applications dans votre cluster. Les quatre adresses IP publiques portables et les quatre adresses IP privées portables restantes peuvent être utilisées pour exposer au public des applications distinctes en [créant un service d'équilibreur de charge](cs_loadbalancer.html).
+<dl>
+  <dt>Par défaut, la création d'un cluster comprend la création de sous-réseaux</dt>
+  <dd>Lorsque vous créez un cluster standard, les sous-réseaux suivants sont fournis automatiquement par {{site.data.keyword.containershort_notm}} :
+    <ul><li>Un sous-réseau public portable avec 5 adresses IP publiques</li>
+      <li>Un sous-réseau privé portable avec 5 adresses IP privées </li></ul>
+      Les adresses IP publiques et privées portables sont statiques et ne changent pas en cas de retrait d'un noeud worker. Pour chaque sous-réseau, une des adresses IP publiques portables et une des adresses IP privées portables sont utilisées pour les [équilibreurs de charge d'application Ingress](cs_ingress.html) que vous pouvez employer pour exposer plusieurs applications dans votre cluster. Les quatre autres adresses IP publiques portables et les quatre autres adresses IP privées portables peuvent être utilisées pour des applications individuelles sur le réseau public ou privé en [créant un service d'équilibreur de charge](cs_loadbalancer.html).</dd>
+  <dt>[Commande et gestion de vos propres sous-réseaux existants](#custom)</dt>
+  <dd>Vous pouvez commander et gérer des sous-réseaux portables existants dans votre compte d'infrastructure IBM Cloud (SoftLayer) au lieu d'utiliser les sous-réseaux automatiquement fournis. Utilisez cette option pour conserver des adresses IP statiques lors de création ou de suppression de clusters ou pour commander des blocs d'adresses IP plus importants. Créez d'abord un cluster sans sous-réseaux en utilisant la commande `cluster-create --no-subnet`, puis en ajoutant le sous-réseau au cluster avec la commande `cluster-subnet-add`. </dd>
+</dl>
 
-**Remarque :** les adresses IP publiques portables sont facturées au mois. Si vous décidez de retirer les adresses IP portables après la mise en place de votre cluster, vous devez quand même payer les frais mensuels, même si vous ne les avez utilisées que brièvement.
+**Remarque :** les adresses IP publiques portables sont facturées au mois. Si vous retirez des adresses IP publiques portables après la mise en place de votre cluster, vous devez quand même payer les frais mensuels, même si vous ne les avez utilisées que brièvement.
 
 ## Demande de sous-réseaux supplémentaires pour votre cluster
 {: #request}
@@ -43,12 +51,11 @@ Pour créer un sous-réseau dans un compte d'infrastructure IBM Cloud (SoftLayer
 1. Provisionnez un nouveau sous-réseau.
 
     ```
-    bx cs cluster-subnet-create <nom_ou_ID_cluster> <taille_sous-réseau> <ID_VLAN>
+    bx cs cluster-subnet-create <cluster_name_or_id> <subnet_size> <VLAN_ID>
     ```
     {: pre}
 
     <table>
-    <caption>Description des composantes de cette commande</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composantes de cette commande</th>
     </thead>
@@ -74,7 +81,7 @@ Pour créer un sous-réseau dans un compte d'infrastructure IBM Cloud (SoftLayer
 2.  Vérifiez que le sous-réseau a bien été créé et ajouté à votre cluster. Le CIDR de sous-réseau est répertorié dans la section **VLAN**.
 
     ```
-    bx cs cluster-get --showResources <cluster name or id>
+    bx cs cluster-get --showResources <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -83,17 +90,24 @@ Pour créer un sous-réseau dans un compte d'infrastructure IBM Cloud (SoftLayer
 <br />
 
 
-## Ajout de sous-réseaux personnalisés et existants à des clusters Kubernetes
+## Ajout ou réutilisation de sous-réseaux personnalisés et existants dans les clusters Kubernetes
 {: #custom}
 
-Vous pouvez ajouter des sous-réseaux publics ou privés portables existants à votre cluster Kubernetes.
+Vous pouvez ajouter des sous-réseaux publics ou privés portables existants à votre cluster Kubernetes ou réutiliser des sous-réseaux provenant d'un cluster supprimé.
 {:shortdesc}
 
-Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) votre cluster.
+Avant de commencer
+- [Ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) vers votre cluster.
+- Pour réutiliser des sous-réseaux d'un cluster que vous n'utilisez plus, supprimez le cluster inutile. Les sous-réseaux sont supprimés dans les 24 heures.
+
+   ```
+   bx cs cluster-rm <cluster_name_or_ID
+   ```
+   {: pre}
 
 Pour utiliser un sous-réseau existant dans votre portefeuille d'infrastructure IBM Cloud (SoftLayer) avec des règles de pare-feu personnalisées ou des adresses IP disponibles :
 
-1.  Identifiez le sous-réseau à utiliser. Notez l'ID du sous-réseau et l'ID du réseau local virtuel. Dans cet exemple,  l'ID du sous-réseau est 807861 et l'ID du réseau local virtuel est 1901230.
+1.  Identifiez le sous-réseau à utiliser. Notez l'ID du sous-réseau et l'ID du réseau local virtuel. Dans cet exemple, l'ID du sous-réseau est `1602829` et l'ID du VLAN est `2234945`.
 
     ```
     bx cs subnets
@@ -103,9 +117,9 @@ Pour utiliser un sous-réseau existant dans votre portefeuille d'infrastructure 
     ```
     Getting subnet list...
     OK
-    ID        Network                                      Gateway                                   VLAN ID   Type      Bound Cluster   
-    553242    203.0.113.0/24                               10.87.15.00                               1565280   private      
-    807861    192.0.2.0/24                                 10.121.167.180                            1901230   public
+    ID        Network             Gateway          VLAN ID   Type      Bound Cluster
+    1550165   10.xxx.xx.xxx/26    10.xxx.xx.xxx    2234947   private
+    1602829   169.xx.xxx.xxx/28   169.xx.xxx.xxx   2234945   public
 
     ```
     {: screen}
@@ -120,16 +134,16 @@ Pour utiliser un sous-réseau existant dans votre portefeuille d'infrastructure 
     ```
     Getting VLAN list...
     OK
-    ID        Name                  Number   Type      Router   
-    1900403   vlan                    1391     private   bcr01a.dal10   
-    1901230   vlan                    1180     public   fcr02a.dal10
+    ID        Name   Number   Type      Router         Supports Virtual Workers
+    2234947          1813     private   bcr01a.dal10   true
+    2234945          1618     public    fcr01a.dal10   true
     ```
     {: screen}
 
-3.  Créez un cluster en utilisant l'emplacement et l'ID du réseau local virtuel que vous avez identifiés. Incluez l'indicateur `--no-subnet` pour empêcher la création automatique d'un nouveau sous-réseau d'adresses IP publiques portables et d'un nouveau sous-réseau d'adresses IP privées portables.
+3.  Créez un cluster en utilisant l'emplacement et l'ID du réseau local virtuel que vous avez identifiés. Pour réutiliser un sous-réseau existant, incluez l'indicateur `--no-subnet` pour empêcher la création automatique d'un nouveau sous-réseau d'adresses IP publiques portables et d'un nouveau sous-réseau d'adresses IP privées portables.
 
     ```
-    bx cs cluster-create --location dal10 --machine-type u2c.2x4 --no-subnet --public-vlan 1901230 --private-vlan 1900403 --workers 3 --name my_cluster
+    bx cs cluster-create --location dal10 --machine-type u2c.2x4 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
     ```
     {: pre}
 
@@ -146,7 +160,7 @@ Pour utiliser un sous-réseau existant dans votre portefeuille d'infrastructure 
 
     ```
     Name         ID                                   State      Created          Workers   Location   Version
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   3         dal10      1.8.8
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.8.11
     ```
     {: screen}
 
@@ -161,7 +175,7 @@ Pour utiliser un sous-réseau existant dans votre portefeuille d'infrastructure 
 
     ```
     ID                                                  Public IP        Private IP     Machine Type   State      Status   Location   Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.47.223.113   10.171.42.93   free           normal     Ready    dal10      1.8.8
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal     Ready    dal10      1.8.11
     ```
     {: screen}
 
@@ -185,12 +199,12 @@ Fournissez un sous-réseau à partir d'un réseau sur site que vous souhaitez ac
 
 Conditions requises :
 - Les sous-réseaux gérés par l'utilisateur peuvent être ajoutés uniquement à des réseaux locaux virtuels (VLAN) privés.
-- La limite de longueur du préfixe de sous-réseau est /24 à /30. Par exemple, `203.0.113.0/24` indique 253 adresses IP privées utilisables, alors que `203.0.113.0/30` indique 1 adresse IP privée utilisable.
+- La limite de longueur du préfixe de sous-réseau est /24 à /30. Par exemple, `169.xx.xxx.xxx/24` indique 253 adresses IP privées utilisables, alors que `169.xx.xxx.xxx/30` indique 1 adresse IP privée utilisable.
 - La première adresse IP dans le sous-réseau doit être utilisée comme passerelle du sous-réseau.
 
 Avant de commencer :
 - Configurez le routage du trafic réseau vers et depuis le sous-réseau externe.
-- Vérifiez la connectivité de réseau privé virtuel (VPN) entre le périphérique de passerelle du centre de données sur site et le réseau privé Vyatta dans votre portefeuille d'infrastructure IBM Cloud (SoftLayer) ou le service VPN strongSwan opérant dans votre cluster. Pour utiliser un réseau Vyatta, consultez cet [article de blogue ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/). Pour utiliser strongSwan, voir [Configuration de la connectivité VPN avec le service VPN IPSec strongSwan](cs_vpn.html).
+- Vérifiez la connectivité de réseau privé virtuel (VPN) entre le périphérique de passerelle du centre de données sur site et le réseau privé Vyatta dans votre portefeuille d'infrastructure IBM Cloud (SoftLayer) ou le service VPN strongSwan opérant dans votre cluster. Pour plus d'informations, voir [Configuration de la connectivité VPN](cs_vpn.html).
 
 Pour ajouter un sous-réseau à partir d'un réseau sur site :
 
@@ -203,9 +217,9 @@ Pour ajouter un sous-réseau à partir d'un réseau sur site :
 
     ```
     VLANs
-    VLAN ID   Subnet CIDR         Public       User-managed
-    1555503   192.0.2.0/24        true         false
-    1555505   198.51.100.0/24     false        false
+    VLAN ID   Subnet CIDR       Public   User-managed
+    2234947   10.xxx.xx.xxx/29  false    false
+    2234945   169.xx.xxx.xxx/29 true     false
     ```
     {: screen}
 
@@ -219,7 +233,7 @@ Pour ajouter un sous-réseau à partir d'un réseau sur site :
     Exemple :
 
     ```
-    bx cs cluster-user-subnet-add my_cluster 203.0.113.0/24 1555505
+    bx cs cluster-user-subnet-add mycluster 10.xxx.xx.xxx/24 2234947
     ```
     {: pre}
 
@@ -232,16 +246,16 @@ Pour ajouter un sous-réseau à partir d'un réseau sur site :
 
     ```
     VLANs
-    VLAN ID   Subnet CIDR         Public       User-managed
-    1555503   192.0.2.0/24        true         false
-    1555505   198.51.100.0/24     false        false
-    1555505   203.0.113.0/24      false        true
+    VLAN ID   Subnet CIDR       Public   User-managed
+    2234947   10.xxx.xx.xxx/29  false    false
+    2234945   169.xx.xxx.xxx/29 true   false
+    2234947   10.xxx.xx.xxx/24  false    true
     ```
     {: screen}
 
 4. Facultatif : [Activez le routage entre les sous-réseaux sur le même VLAN](#vlan-spanning).
 
-5. Ajoutez un service d'équilibreur de charge privé ou un équilibreur de charge d'application Ingress privé pour accéder à votre application à travers le réseau privé. Pour utiliser une adresse IP privée du sous-réseau que vous venez d'ajouter, vous devez spécifier une adresse IP. Autrement, une adresse IP est sélectionnée de manière aléatoire dans les sous-réseaux d'infrastructure IBM Cloud (SoftLayer) ou dans les sous-réseaux fournis par l'utilisateur sur le VLAN privé. Pour plus d'informations, voir [Configuration de l'accès une application à l'aide du type de service d'équilibreur de charge](cs_loadbalancer.html#config) ou [Activation de l'équilibreur de charge d'application privé](cs_ingress.html#private_ingress).
+5. Ajoutez un service d'équilibreur de charge privé ou un équilibreur de charge d'application Ingress privé pour accéder à votre application à travers le réseau privé. Pour utiliser une adresse IP privée du sous-réseau que vous venez d'ajouter, vous devez spécifier une adresse IP. Autrement, une adresse IP est sélectionnée de manière aléatoire dans les sous-réseaux d'infrastructure IBM Cloud (SoftLayer) ou dans les sous-réseaux fournis par l'utilisateur sur le VLAN privé. Pour plus d'informations, voir [Activation de l'accès public ou privé à une application à l'aide d'un service LoadBalancer](cs_loadbalancer.html#config) ou [Activation de l'équilibreur de charge d'application privé](cs_ingress.html#private_ingress).
 
 <br />
 
@@ -328,7 +342,7 @@ Avant de commencer, [définissez le contexte du cluster que vous désirez utilis
 2.  Supprimez le service d'équilibreur de charge qui utilise une adresse IP publique ou privée.
 
     ```
-    kubectl delete service <myservice>
+    kubectl delete service <service_name>
     ```
     {: pre}
 
@@ -341,3 +355,4 @@ Lorsque vous créez un cluster, un sous-réseau se terminant par `/26` est mis �
 Cette limite de 62 noeuds worker peut être dépassée par un cluster volumineux ou par plusieurs clusters plus petits dans une seule région situés dans le même VLAN. Lorsque la limite de 62 noeuds worker est atteinte, un autre sous-réseau principal dans le même VLAN est commandé.
 
 Pour effectuer le routage entre les sous-réseaux sur le même VLAN, vous devez activer la fonction Spanning VLAN. Pour obtenir les instructions nécessaires, voir [Activer ou désactiver le spanning VLAN](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning).
+

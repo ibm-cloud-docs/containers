@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-15"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -32,12 +32,12 @@ Dans {{site.data.keyword.containerlong_notm}}, vous disposez de plusieurs option
 Vous pouvez utiliser des options de stockage non persistant si vos données n'ont pas besoin d'être stockées de manière permanente, de sorte à pouvoir les récupérer en cas de défaillance d'un composant de votre cluster, ou si elles n'ont pas besoin d'être partagées entre les instances d'application. Ces options peuvent également être utilisées afin d'effectuer un test d'unité sur vos composants d'application ou d'essayer de nouvelles fonctions.
 {: shortdesc}
 
-L'illustration suivante présente les options de stockage non persistant disponibles dans {{site.data.keyword.containerlong_notm}}. Ces options sont disponibles pour les clusters de l'édition gratuite et standard.
+L'illustration suivante présente les options de stockage de données non persistant disponibles dans {{site.data.keyword.containerlong_notm}}. Ces options sont disponibles pour les clusters gratuits et standard.
 <p>
-<img src="images/cs_storage_nonpersistent.png" alt="Options de stockage non persistant de données" width="450" style="width: 450px; border-style: none"/></p>
+<img src="images/cs_storage_nonpersistent.png" alt="Options de stockage de données non persistant" width="500" style="width: 500px; border-style: none"/></p>
 
-<table summary="Le tableau présente les options de stockage non persistant. La lecture des lignes s'effectue de gauche à droite, le numéro de l'option figurant dans la première colonne, son titre dans la seconde et une description dans la troisième." style="width: 100%">
-<caption>Tableau. Options de stockage non persistant</caption>
+<table summary="Le tableau présente les options de stockage non persistant. La lecture des lignes s'effectue de gauche à droite, avec le numéro de l'option dans la première colonne, son titre dans la deuxième colonne et une description dans la troisième colonne." style="width: 100%">
+<caption>Options de stockage non persistant</caption>
   <thead>
   <th>Option</th>
   <th>Description</th>
@@ -70,17 +70,17 @@ L'illustration suivante présente les options disponibles dans {{site.data.keywo
 <img src="images/cs_storage_ha.png" alt="Options de haute disponibilité pour stockage persistant"/>
 
 <table summary="Ce tableau présente les options de stockage persistant. La lecture des lignes s'effectue de gauche à droite, le numéro de l'option figurant dans la première colonne, son titre dans la seconde et une description dans la troisième.">
-<caption>Tableau. Options de stockage persistant</caption>
+<caption>Options de stockage persistant</caption>
   <thead>
   <th>Option</th>
   <th>Description</th>
   </thead>
   <tbody>
   <tr>
-  <td>1. Stockage de fichiers NFS</td>
-  <td>Cette option vous permet de rendre persistantes les données d'application et de conteneur via des volumes Kubernetes persistants. Les volumes sont hébergés sur du [stockage de fichiers Endurance et Performance NFS ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud/file-storage/details) qui peut être utilisé pour les applications qui stockent les données sur fichier, et non pas dans une base de données. Le stockage de fichiers est chiffré au niveau de l'API REST.<p>{{site.data.keyword.containershort_notm}} fournit des classes de stockage prédéfinies qui définissent les plages de tailles de stockage, les opérations IOPS, la règle de suppression et les autorisations d'accès en écriture au volume. Pour lancer une demande de stockage de fichiers NFS, vous devez créer une [réservation de volume persistant (PVC)](cs_storage.html#create). Après avoir soumis une réservation PVC, {{site.data.keyword.containershort_notm}} met à disposition dynamiquement un volume persistant qui est hébergé dans un stockage de fichiers NFS. [Vous pouvez monter une réservation PVC](cs_storage.html#app_volume_mount) en tant que volume dans votre déploiement pour permettre aux conteneurs d'effectuer des opérations de lecture-écriture dans le volume. </p><p>Les volumes persistants sont provisionnés dans le centre de données où est situé le noeud worker. Vous pouvez partager les données avec la même réplique et/ou d'autres déploiements dans le même cluster. Vous ne pouvez pas partager les données lorsqu'elles sont situées dans des centres de données ou des régions différents. </p><p>Par défaut, le stockage NFS n'est pas sauvegardé automatiquement. Vous pouvez configurer une sauvegarde périodique pour votre cluster en exploitant les [mécanismes de sauvegarde et de restauration](cs_storage.html#backup_restore) fournis. Lorsqu'un conteneur tombe en panne ou qu'un pod est retiré d'un noeud worker, les données ne sont pas supprimées et sont toujours accessibles par d'autres déploiements qui montent le volume. </p><p><strong>Remarque :</strong> le stockage de partages de fichiers NFS persistants est facturé sur une base mensuelle. Si vous provisionnez un stockage persistant pour votre cluster et le retirez immédiatement, vous devrez néanmoins payer la redevance mensuelle pour le stockage persistant, même si vous ne l'avez utilisé que très brièvement.</p></td>
+  <td>1. Stockage de fichiers NFS ou stockage par blocs</td>
+  <td>Cette option vous permet de rendre persistantes les données d'application et de conteneur via des volumes Kubernetes persistants. Les volumes sont hébergés dans un [stockage de fichiers NFS ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe") Endurance et Performance](https://www.ibm.com/cloud/file-storage/details) ou dans du [stockage par blocs ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud/block-storage) pouvant être utilisé pour des applications qui stockent les données dans un fichier ou sous forme de blocs plutôt que dans une base de données. Le stockage de fichiers et le stockage par blocs sont chiffrés au niveau de l'API REST.<p>{{site.data.keyword.containershort_notm}} fournit des classes de stockage prédéfinies qui définissent les plages de tailles de stockage, les opérations IOPS, la règle de suppression et les autorisations d'accès en écriture au volume. Pour lancer une demande de stockage de fichiers ou de stockage par blocs, vous devez créer une [réservation de volume persistant (PVC)](cs_storage.html#create). Après avoir soumis une réservation PVC, {{site.data.keyword.containershort_notm}} met à disposition dynamiquement un volume persistant qui est hébergé dans du stockage de fichiers NFS ou du stockage par blocs. [Vous pouvez monter une réservation PVC](cs_storage.html#app_volume_mount) en tant que volume dans votre déploiement pour permettre aux conteneurs d'effectuer des opérations de lecture-écriture dans le volume. </p><p>Les volumes persistants sont provisionnés dans le centre de données où est situé le noeud worker. Vous pouvez partager les données avec la même réplique et/ou d'autres déploiements dans le même cluster. Vous ne pouvez pas partager les données lorsqu'elles sont situées dans des centres de données ou des régions différents. </p><p>Par défaut, le stockage NFS et le stockage par blocs ne sont pas sauvegardés automatiquement. Vous pouvez configurer une sauvegarde périodique pour votre cluster en exploitant les [mécanismes de sauvegarde et de restauration](cs_storage.html#backup_restore) fournis. Lorsqu'un conteneur tombe en panne ou qu'un pod est retiré d'un noeud worker, les données ne sont pas supprimées et sont toujours accessibles par d'autres déploiements qui montent le volume. </p><p><strong>Remarque :</strong> le stockage de partage de fichiers NFS et le stockage par blocs sont facturés sur une base mensuelle. Si vous provisionnez un stockage persistant pour votre cluster et le retirez immédiatement, vous devrez néanmoins payer la redevance mensuelle pour le stockage persistant, même si vous ne l'avez utilisé que très brièvement.</p></td>
   </tr>
-  <tr>
+  <tr id="cloud-db-service">
     <td>2. Service de base de données Cloud</td>
     <td>Cette option vous permet de rendre persistantes les données via un service de base de données cloud {{site.data.keyword.Bluemix_notm}}, tel qu'[IBM Cloudant NoSQL DB](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant). Les données stockées via cette option sont accessibles entre les clusters, les emplacements et les régions. <p> Vous pouvez vous contenter de configurer une seule instance base de données à laquelle accéderont toutes vos applications ou bien [configurer plusieurs instances entre les centres de données, et une réplication](/docs/services/Cloudant/guides/active-active.html#configuring-cloudant-nosql-db-for-cross-region-disaster-recovery) entre les instances pour une plus haute disponibilité. Dans la base de données IBM Cloudant NoSQL, les données ne sont pas sauvegardées automatiquement. Vous pouvez utiliser les [mécanismes de sauvegarde et de restauration](/docs/services/Cloudant/guides/backup-cookbook.html#cloudant-nosql-db-backup-and-recovery) fournis afin de protéger vos données en cas de panne du site.</p> <p> Pour utiliser un service dans votre cluster, vous devez [lier le {{site.data.keyword.Bluemix_notm}} service ](cs_integrations.html#adding_app) à un espace de nom dans votre cluster. Lorsque vous liez le service au cluster, une valeur confidentielle Kubernetes est créée. Celle-ci héberge des informations confidentielles relatives au service, comme son URL, votre nom d'utilisateur et votre mot de passe. Vous pouvez monter le volume en tant que volume secret sur votre pod et accéder au service en utilisant les données d'identification dans la valeur confidentielle. En montant le volume sur d'autres pods, vous pouvez également partager les données entre les pods. Lorsqu'un conteneur tombe en panne ou qu'un pod est retiré d'un noeud worker, les données ne sont pas perdues et restent accessibles aux autres pods qui montent le volume secret. <p>La plupart des services de base de données {{site.data.keyword.Bluemix_notm}} proposent un espace disque gratuit pour une petite quantité de données, de sorte que vous puissiez tester ses caractéristiques.</p></td>
   </tr>
@@ -91,7 +91,7 @@ L'illustration suivante présente les options disponibles dans {{site.data.keywo
   </tbody>
   </table>
 
-{: caption="Tableau. Options de stockage persistant pour les déploiements dans des clusters Kubernetes" caption-side="top"}
+{: caption="Tableau. Options de stockage de données persistant pour les déploiements dans des clusters Kubernetes" caption-side="top"}
 
 <br />
 
@@ -103,7 +103,7 @@ L'illustration suivante présente les options disponibles dans {{site.data.keywo
 Si vous disposez déjà de partages de fichiers NFS existants dans votre compte d'infrastructure IBM Cloud (SoftLayer) et que vous voulez les utiliser avec Kubernetes, vous pouvez le faire en créant un volume persistant (PV) pour votre stockage existant.
 {:shortdesc}
 
-Un volume persistant (PV) est une ressource Kubernetes qui représente une unité de stockage réelle mise à disposition dans un centre de données. Les volumes persistants condensent les détails de mise à disposition d'un type de stockage spécifique par IBM Cloud Storage. Pour monter un volume persistant sur votre cluster, vous devez demander du stockage persistant pour votre pod en créant une réservation de volume persistant (PVC). Le diagramme suivant illustre les relations entre les volumes persistants (PV) et les réservations de volume persistant (PVC).
+Un volume persistant (PV) est une ressource Kubernetes qui représente une unité de stockage réelle mise à disposition dans un centre de données. Les volumes persistants condensent les détails de mise à disposition d'un type de stockage spécifique par {{site.data.keyword.Bluemix_notm}} Storage. Pour monter un volume persistant sur votre cluster, vous devez demander du stockage persistant pour votre pod en créant une réservation de volume persistant (PVC). Le diagramme suivant illustre les relations entre les volumes persistants (PV) et les réservations de volume persistant (PVC).
 
 ![Créer des volumes persistants et des réservations de volumes persistants](images/cs_cluster_pv_pvc.png)
 
@@ -143,7 +143,6 @@ Pour créer un volume persistant (PV) et une réservation de volume persistant (
     {: codeblock}
 
     <table>
-    <caption>Tableau. Description des composants du fichier YAML</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
     </thead>
@@ -173,14 +172,7 @@ Pour créer un volume persistant (PV) et une réservation de volume persistant (
 3.  Créez l'objet PV dans votre cluster.
 
     ```
-    kubectl apply -f <yaml_path>
-    ```
-    {: pre}
-
-    Exemple
-
-    ```
-    kubectl apply -f deploy/kube-config/pv.yaml
+    kubectl apply -f deploy/kube-config/mypv.yaml
     ```
     {: pre}
 
@@ -250,22 +242,180 @@ Vous venez de créer un objet PV que vous avez lié à une PVC. Les utilisateurs
 
 
 
+## Utilisation de stockage par blocs existant dans votre cluster
+{: #existing_block}
 
-## Ajout de stockage de fichiers NFS à des applications
+Avant de commencer, vérifiez que vous disposez d'une instance de stockage par blocs existante que vous pouvez utiliser pour créer votre volume persistant (PV). Par exemple, si vous avez [créé une réservation PVC avec une politique de classe de stockage `retain`](#create) auparavant, vous pouvez utiliser ces données conservées dans le stockage par blocs existant pour cette nouvelle réservation PVC.
+
+Pour créer un volume persistant (PV) et une réservation de volume persistant (PVC) correspondante, procédez comme suit :
+
+1.  Récupérez ou générez une clé d'API pour votre compte d'infrastructure IBM Cloud (SoftLayer).
+    1. Connectez-vous au [portail d'infrastructure IBM Cloud (SoftLayer) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://control.softlayer.com/).
+    2. Sélectionnez **Compte**, puis **Utilisateurs** et ensuite **Liste d'utilisateurs**.
+    3. Recherchez votre ID utilisateur.
+    4. Dans la colonne **Clé d'API**, cliquez sur **Générer** pour générer la clé d'API ou sur **Afficher** pour afficher votre clé d'API existante.
+2.  Récupérez le nom d'utilisateur d'API correspondant à votre compte d'infrastructure IBM Cloud (SoftLayer).
+    1. Dans le menu **Liste d'utilisateurs**, sélectionnez votre ID utilisateur.
+    2. Dans la section **Informations d'accès à l'API**, retrouvez votre **Nom d'utilisateur de l'API**.
+3.  Connectez-vous au plug-in d'interface de ligne de commande (CLI) de l'infrastructure IBM Cloud.
+    ```
+    bx sl init
+    ```
+    {: pre}
+
+4.  Optez pour l'authentification à l'aide du nom d'utilisateur et de la clé d'API de votre compte d'infrastructure IBM Cloud (SoftLayer).
+5.  Entrez le nom d'utilisateur et la clé d'API que vous avez récupérés dans les étapes précédentes.
+6.  Affichez la liste des unités de stockage par blocs.
+    ```
+    bx sl block volume-list
+    ```
+    {: pre}
+
+    Vous obtenez une sortie similaire à ceci :
+    ```
+    id         username            datacenter   storage_type              capacity_gb   bytes_used   ip_addr         lunId   active_transactions
+    38642141   IBM02SEL1543159-1   dal10        endurance_block_storage   20            -            169.xx.xxx.xxx   170     0
+    ```
+    {: screen}
+
+7.  Notez les valeurs `id`, `ip_addr`, `capacity_gb` et `lunId` de l'unité de stockage par blocs que vous voulez monter sur votre cluster.
+8.  Créez un fichier de configuration pour votre volume persistant. Incluez l'ID de stockage par blocs, l'adresse IP, la taille et l'ID de numéro d'unité logique (lun) que vous avez récupérés à l'étape précédente.
+
+    ```
+    apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: mypv
+    spec:
+      capacity:
+        storage: "<storage_size>"
+      accessModes:
+        - ReadWriteOnce
+      flexVolume:
+        driver: "ibm/ibmc-block"
+        fsType: "ext4"
+        options:
+          "Lun": "<lun_ID>"
+          "TargetPortal": "<IP_address>"
+          "VolumeID": "<volume_ID>"
+          "volumeName": "<volume_name>"
+      ```
+      {: codeblock}
+
+    <table>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>metadata/name</code></td>
+    <td>Entrez le nom du volume persistant que vous désirez créer.</td>
+    </tr>
+    <tr>
+    <td><code>spec/capacity/storage</code></td>
+    <td>Entrez la taille de stockage du stockage par blocs existant que vous avez récupérée à l'étape précédente dans <code>capacity-gb</code>. La taille de stockage doit être indiquée en gigaoctets, par exemple 20Gi (20 Go) ou 1000Gi (1 To).</td>
+    </tr>
+    <tr>
+    <td><code>flexVolume/options/Lun</code></td>
+    <td>Entrez l'ID de numéro d'unité logique (lun) de votre stockage par blocs que vous avez récupéré à l'étape précédente dans <code>lunId</code>.</td>
+    </tr>
+    <tr>
+    <td><code>flexVolume/options/TargetPortal</code></td>
+    <td>Entrez l'adresse IP de votre stockage par blocs que vous avez récupérée à l'étape précédente dans <code>ip_addr</code>. </td>
+    </tr>
+    <tr>
+	    <td><code>flexVolume/options/VolumeId</code></td>
+	    <td>Entrez l'ID de votre stockage par blocs que vous avez récupéré à l'étape précédente dans <code>id</code>.</td>
+	    </tr>
+	    <tr>
+		    <td><code>flexVolume/options/volumeName</code></td>
+		    <td>Entrez un nom pour votre volume.</td>
+	    </tr>
+    </tbody></table>
+
+9.  Créez le volume persistant dans votre cluster.
+    ```
+    kubectl apply -f mypv.yaml
+    ```
+    {: pre}
+
+10. Vérifiez que le volume persistant (PV) est créé.
+    ```
+    kubectl get pv
+    ```
+    {: pre}
+
+11. Créez un autre fichier de configuration pour créer votre réservation de volume persistant (PVC). Pour que cette réservation corresponde au volume persistant que vous avez créé auparavant, vous devez sélectionner la même valeur pour `storage` et `accessMode`. La zone `storage-class` doit être vide. Si une de ces zones ne correspond pas au volume persistant (PV), un nouveau PV est créé automatiquement à la place.
+
+     ```
+     kind: PersistentVolumeClaim
+    apiVersion: v1
+    metadata:
+     name: mypvc
+     annotations:
+       volume.beta.kubernetes.io/storage-class: ""
+     spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: "20Gi"
+     ```
+     {: codeblock}
+
+12.  Créez votre réservation de volume persistant (PVC).
+     ```
+     kubectl apply -f mypvc.yaml
+     ```
+     {: pre}
+
+13.  Vérifiez que votre réservation PVC est créée et liée au volume persistant que vous avec créé auparavant. Ce processus peut prendre quelques minutes.
+     ```
+     kubectl describe pvc mypvc
+     ```
+     {: pre}
+
+     Votre sortie sera similaire à ceci.
+
+     ```
+     Name: mypvc
+    Namespace: default
+    StorageClass: ""
+     Status: Bound
+     Volume: pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2
+     Labels: <none>
+     Capacity: 20Gi
+     Access Modes: RWO
+     Events:
+       FirstSeen LastSeen Count From        SubObjectPath Type Reason Message
+       --------- -------- ----- ----        ------------- -------- ------ -------
+       3m 3m 1 {ibm.io/ibmc-block 31898035-3011-11e7-a6a4-7a08779efd33 } Normal Provisioning External provisioner is provisioning volume  for claim "default/my-persistent-volume-claim"
+       3m 1m	 10 {persistentvolume-controller } Normal ExternalProvisioning cannot find provisioner "ibm.io/ibmc-block", expecting that  a volume for the claim is provisioned either manually or via external software
+       1m 1m 1 {ibm.io/ibmc-block 31898035-3011-11e7-a6a4-7a08779efd33 } Normal ProvisioningSucceeded	Successfully provisioned volume  pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2
+     ```
+     {: screen}
+
+Vous venez de créer un objet PV que vous avez lié à une réservation PVC. Les utilisateurs du cluster peuvent désormais [monter la réservation PVC](#app_volume_mount) sur leurs déploiements et commencer à effectuer des opérations de lecture et d'écriture sur le volume persistant.
+
+<br />
+
+
+
+## Ajout de stockage de fichiers NFS ou de stockage par blocs à des applications
 {: #create}
 
-Créez une réservation de volume persistant (PVC) pour mettre à disposition un stockage de fichiers NFS pour votre cluster. Ensuite, montez cette réservation sur un volume persistant (PV) pour vous assurer que ces données sont disponibles même en cas de défaillance ou d'arrêt des pods.
+Créez une réservation de volume persistant (PVC) pour mettre à disposition un stockage de fichiers NFS ou un stockage par blocs pour votre cluster. Ensuite, montez cette réservation sur un volume persistant (PV) pour vous assurer que ces données sont disponibles même en cas de défaillance ou d'arrêt des pods.
 {:shortdesc}
 
-Le stockage de fichiers NFS qui soutient le volume persistant est mis en cluster par IBM pour assurer la haute disponibilité de vos données. Les classes de stockage décrivent les offres de types de stockage disponibles et définissent des caractéristiques telles que la politique de conservation des données, leur taille en gigaoctets et le nombre d'entrées-sorties par seconde (IOPS) lorsque vous créez votre volume persistant (PV).
+Le stockage de fichiers NFS et le stockage par blocs sur lesquels s'appuie le volume persistant sont mis en cluster par IBM pour assurer la haute disponibilité de vos données. Les classes de stockage décrivent les offres de types de stockage disponibles et définissent des caractéristiques telles que la politique de conservation des données, leur taille en gigaoctets et le nombre d'entrées-sorties par seconde (IOPS) lorsque vous créez votre volume persistant (PV).
 
-
-
-**Avant de commencer** : si vous utilisez un pare-feu, [autorisez l'accès sortant](cs_firewall.html#pvc) pour les plages d'adresses IP de l'infrastructure IBM Cloud (SoftLayer) des emplacements (centres de données) où sont situés vos clusters, de manière à pouvoir créer des réservations de volume persistant (PVC).
+Avant de commencer :
+- Si vous disposez d'un pare-feu, [autorisez l'accès sortant](cs_firewall.html#pvc) pour les plages d'adresses IP de l'infrastructure IBM Cloud (SoftLayer) des emplacements sur lesquels résident vos clusters, de manière à pouvoir créer des réservations de volume persistant (PVC).
+- Si vous souhaitez monter du stockage par blocs sur vos applications, vous devez d'abord installer le [plug-in {{site.data.keyword.Bluemix_notm}} Storage pour le stockage par blocs](#install_block).
 
 Pour ajouter du stockage persistant :
 
-1.  Examinez les classes de stockage disponibles. {{site.data.keyword.containerlong}} fournit des classes de stockage prédéfinies pour le stockage de fichiers NFS afin que l'administrateur du cluster n'ait pas besoin d'en créer. La classe de stockage `ibmc-file-bronze` est identique à la classe de stockage `default`.
+1.  Examinez les classes de stockage disponibles. {{site.data.keyword.containerlong}} fournit des classes de stockage prédéfinies pour le stockage de fichiers NFS et le stockage par blocs afin que l'administrateur du cluster n'ait pas besoin d'en créer. La classe de stockage `ibmc-file-bronze` est identique à la classe de stockage `default`.
 
     ```
     kubectl get storageclasses
@@ -275,25 +425,33 @@ Pour ajouter du stockage persistant :
     ```
     $ kubectl get storageclasses
     NAME                         TYPE
-    default                      ibm.io/ibmc-file   
-    ibmc-file-bronze (default)   ibm.io/ibmc-file   
+    default                      ibm.io/ibmc-file
+    ibmc-file-bronze (default)   ibm.io/ibmc-file
     ibmc-file-custom             ibm.io/ibmc-file
-    ibmc-file-gold               ibm.io/ibmc-file   
-    ibmc-file-retain-bronze      ibm.io/ibmc-file   
-    ibmc-file-retain-custom      ibm.io/ibmc-file   
-    ibmc-file-retain-gold        ibm.io/ibmc-file   
-    ibmc-file-retain-silver      ibm.io/ibmc-file   
+    ibmc-file-gold               ibm.io/ibmc-file
+    ibmc-file-retain-bronze      ibm.io/ibmc-file
+    ibmc-file-retain-custom      ibm.io/ibmc-file
+    ibmc-file-retain-gold        ibm.io/ibmc-file
+    ibmc-file-retain-silver      ibm.io/ibmc-file
     ibmc-file-silver             ibm.io/ibmc-file
+    ibmc-block-custom            ibm.io/ibmc-block
+    ibmc-block-bronze            ibm.io/ibmc-block
+    ibmc-block-gold              ibm.io/ibmc-block
+    ibmc-block-silver            ibm.io/ibmc-block
+    ibmc-block-retain-bronze     ibm.io/ibmc-block
+    ibmc-block-retain-silver     ibm.io/ibmc-block
+    ibmc-block-retain-gold       ibm.io/ibmc-block
+    ibmc-block-retain-custom     ibm.io/ibmc-block
     ```
     {: screen}
 
     **Astuce :** pour modifier la classe de stockage, exécutez la commande `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` et remplacez `<storageclass>` par le nom de la classe de stockage.
 
-2.  Déterminez si vous voulez conserver vos données et le partage de fichiers NFS après avoir supprimé la réservation de volume persistant (PVC).
-    - Pour conserver vos données, choisissez une classe de stockage `retain`. Lorsque vous supprimez la PVC, le volume persistant (PV) est retiré mais le fichier NFS et vos données existent toujours dans votre compte d'infrastructure IBM Cloud (SoftLayer). Plus tard, pour accéder à ces données dans votre cluster, créez une réservation de volume persistant (PVC) et un volume persistant (PV) correspondant qui se réfère à votre [fichier NFS](#existing) existant.
-    - Si vous souhaitez que les données et votre partage de fichiers soient supprimés en même temps que la réservation PVC, choisissez une classe de stockage sans `retain`.
+2.  Déterminez si vous voulez conserver vos données et le partage de fichiers NFS ou le stockage par blocs après avoir supprimé la réservation de volume persistant (PVC).
+    - Pour conserver vos données, choisissez une classe de stockage `retain`. Lorsque vous supprimez la réservation PVC, le volume persistant est retiré, mais le fichier NFS ou le stockage par blocs, ainsi que vos données existent toujours dans votre compte d'infrastructure IBM Cloud (SoftLayer). Plus tard, pour accéder à ces données dans votre cluster, créez une réservation de volume persistant (PVC) et un volume persistant (PV) correspondant qui se réfère à votre [fichier NFS](#existing) ou votre [stockage par blocs](#existing_block) existant.
+    - Si vous souhaitez que les données et votre partage de fichiers NFS ou votre stockage par blocs soient supprimés en même temps que la réservation PVC, choisissez une classe de stockage sans `retain`.
 
-3.  **Si vous choisissez une classe de stockage Bronze, Silver ou Gold** : vous obtenez un [stockage Endurance ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://knowledgelayer.softlayer.com/topic/endurance-storage) qui définit le nombre d'entrées-sorties par seconde (IOPS) par Go pour chaque classe. Vous pouvez toutefois déterminer le nombre total d'IOPS en sélectionnant une taille sur la plage disponible. Vous pouvez sélectionner le nombre entier de votre choix pour les tailles en gigaoctets dans la limite de la plage autorisée (telle que 20 Gi, 256 Gi, 11854 Gi). Par exemple, si vous sélectionnez une taille de partage de fichiers de 1000 Gi dans la classe de stockage Silver de 4 IOPS par Go, votre volume dispose d'un total de 4000 IOPS. Plus votre volume persistant (PV) dispose d'IOPS, plus vite il peut traiter les opérations d'entrée-sortie. Le tableau suivant décrit le nombre d'IOPS par gigaoctet et la plage de tailles de chaque classe de stockage.
+3.  **Si vous choisissez une classe de stockage Bronze, Silver ou Gold** : vous obtenez un [stockage Endurance ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://knowledgelayer.softlayer.com/topic/endurance-storage) qui définit le nombre d'entrées-sorties par seconde (IOPS) par Go pour chaque classe. Vous pouvez toutefois déterminer le nombre total d'IOPS en sélectionnant une taille sur la plage disponible. Vous pouvez sélectionner le nombre entier de votre choix pour les tailles en gigaoctets dans la limite de la plage autorisée (telle que 20 Gi, 256 Gi, 11854 Gi). Par exemple, si vous sélectionnez une taille de partage de fichiers ou de stockage par blocs de 1000 Gi dans la classe de stockage Silver de 4 IOPS par Go, votre volume dispose d'un total de 4000 IOPS. Plus votre volume persistant (PV) dispose d'IOPS, plus vite il peut traiter les opérations d'entrée-sortie. Le tableau suivant décrit le nombre d'IOPS par gigaoctet et la plage de tailles de chaque classe de stockage.
 
     <table>
          <caption>Tableau des plages de tailles de classe de stockage et nombre d'opérations d'entrée-sortie par seconde (IOPS) par gigaoctet</caption>
@@ -322,7 +480,7 @@ Pour ajouter du stockage persistant :
 
     <p>**Exemple de commande illustrant les caractéristiques d'une classe de stockage** :</p>
 
-    <pre class="pre">kubectl describe storageclasses ibmc-file-silver</pre>
+    <pre class="pre"><code>kubectl describe storageclasses ibmc-file-silver</code></pre>
 
 4.  **Si vous sélectionnez la classe de stockage personnalisée** : vous obtenez un [stockage de type Performance ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://knowledgelayer.softlayer.com/topic/performance-storage) et un contrôle accru sur la sélection des combinaisons d'IOPS et de taille. Par exemple, si vous sélectionnez une taille de 40 Gi pour votre réservation de volume persistant (PVC), vous pouvez choisir un nombre d'IOPS multiple de 100 compris entre 100 et 2000 IOPS. Le tableau suivant indique la plage d'IOPS que vous pouvez choisir en fonction de la taille que vous sélectionnez.
 
@@ -381,14 +539,14 @@ Pour ajouter du stockage persistant :
 
     <p>**Exemple de commande illustrant les caractéristiques d'une classe de stockage personnalisée** :</p>
 
-    <pre class="pre">kubectl describe storageclasses ibmc-file-retain-custom</pre>
+    <pre class="pre"><code>kubectl describe storageclasses ibmc-file-retain-custom</code></pre>
 
 5.  Déterminez le mode de facturation de votre choix soit sur une base horaire ou mensuelle. Par défaut, vous êtes facturé au mois.
 
 6.  Créez un fichier de configuration pour définir votre PVC et sauvegardez la configuration sous forme de fichier `.yaml`.
 
     -  **Exemple de classes de stockage Bronze, Silver et Gold** :
-       Le fichier `.yaml` suivant crée une réservation nommée `mypvc` de la classe de stockage `"ibmc-file-silver"`, facturée à l'heure (`"hourly"`), avec une taille de `24Gi`. 
+       Le fichier `.yaml` suivant crée une réservation nommée `mypvc` de la classe de stockage `"ibmc-file-silver"`, facturée à l'heure (`"hourly"`), avec une taille de `24Gi`. Si vous souhaitez créer une réservation de volume persistant (PVC) pour monter le stockage par blocs sur votre cluster, veillez à entrer `ReadWriteOnce` dans la section `accessModes`.
 
        ```
        apiVersion: v1
@@ -409,7 +567,7 @@ Pour ajouter du stockage persistant :
         {: codeblock}
 
     -  **Exemple de classes de stockage personnalisées** :
-       Le fichier `.yaml` suivant crée une réservation nommée `mypvc` de la classe de stockage `ibmc-file-retain-custom`, facturée par défaut au mois (`"monthly"`), avec une taille de `45Gi` et `"300"` opérations d'entrée-sortie par seconde (IOPS).
+       Le fichier `.yaml` suivant crée une réservation nommée `mypvc` de la classe de stockage `ibmc-file-retain-custom`, facturée par défaut au mois (`"monthly"`), avec une taille de `45Gi` et `"300"` opérations d'entrée-sortie par seconde (IOPS). Si vous souhaitez créer une réservation de volume persistant (PVC) pour monter le stockage par blocs sur votre cluster, veillez à entrer `ReadWriteOnce` dans la section `accessModes`.
 
        ```
        apiVersion: v1
@@ -431,7 +589,6 @@ Pour ajouter du stockage persistant :
         {: codeblock}
 
         <table>
-	      <caption>Tableau. Description des composants du fichier YAML</caption>
         <thead>
         <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
         </thead>
@@ -447,7 +604,11 @@ Pour ajouter du stockage persistant :
           <li>ibmc-file-bronze / ibmc-file-retain-bronze : 2 IOPS par Go.</li>
           <li>ibmc-file-silver / ibmc-file-retain-silver : 4 IOPS par Go.</li>
           <li>ibmc-file-gold / ibmc-file-retain-gold : 10 IOPS par Go.</li>
-          <li>ibmc-file-custom / ibmc-file-retain-custom : Plusieurs valeurs d'IOPS disponibles.</li></ul>
+          <li>ibmc-file-custom / ibmc-file-retain-custom : Plusieurs valeurs d'IOPS disponibles.</li>
+          <li>ibmc-block-bronze / ibmc-block-retain-bronze : 2 IOPS par Go.</li>
+          <li>ibmc-block-silver / ibmc-block-retain-silver : 4 IOPS par Go.</li>
+          <li>ibmc-block-gold / ibmc-block-retain-gold : 10 IOPS par Go.</li>
+          <li>ibmc-block-custom / ibmc-block-retain-custom : Plusieurs valeurs d'IOPS disponibles.</li></ul>
           <p>Si vous n'indiquez pas de classe de stockage, le volume persistant (PV) est créé avec la classe de stockage par défaut.</p><p>**Astuce :** pour modifier la classe de stockage par défaut, exécutez la commande <code>kubectl patch storageclass &lt;storageclass&gt; -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'</code> et remplacez <code>&lt;storageclass&gt;</code> par le nom de la classe de stockage.</p></td>
         </tr>
         <tr>
@@ -456,18 +617,18 @@ Pour ajouter du stockage persistant :
         </tr>
         <tr>
         <td><code>spec/resources/requests/storage</code></td>
-        <td>Entrez la taille du stockage de fichiers, en gigaoctets (Gi). Choisissez un nombre entier compris dans la plage de tailles autorisée. </br></br><strong>Remarque : </strong> une fois le stockage alloué, vous ne pouvez plus modifier la taille de votre partage de fichiers NFS. Veillez à indiquer une taille correspondant à la quantité de données que vous envisagez de stocker. </td>
+        <td>Entrez la taille du stockage de fichiers, en gigaoctets (Gi). Choisissez un nombre entier compris dans la plage de tailles autorisée. </br></br><strong>Remarque : </strong> une fois le stockage alloué, vous ne pouvez plus modifier la taille de votre partage de fichiers NFS ou de votre stockage par blocs. Veillez à indiquer une taille correspondant à la quantité de données que vous envisagez de stocker. </td>
         </tr>
         <tr>
         <td><code>spec/resources/requests/iops</code></td>
-        <td>Cette option s'applique uniquement aux classes de stockage personnalisées (`ibmc-file-custom / ibmc-file-retain-custom`). Indiquez le nombre total d'opérations d'entrée-sortie par seconde (IOPS) pour le stockage, en sélectionnant un multiple de 100 dans la plage autorisée. Pour voir toutes les options, exécutez la commande `kubectl describe storageclasses <storageclass>`. Si vous choisissez une valeur IOPS autre que celle répertoriée, la valeur IOPS est arrondie à la valeur supérieure.</td>
+        <td>Cette option s'applique uniquement aux classes de stockage personnalisées (`ibmc-file-custom / ibmc-file-retain-custom / ibmc-block-custom / ibmc-block-retain-custom`). Indiquez le nombre total d'opérations d'entrée-sortie par seconde (IOPS) pour le stockage, en sélectionnant un multiple de 100 dans la plage autorisée. Pour voir toutes les options, exécutez la commande `kubectl describe storageclasses <storageclass>`. Si vous choisissez une valeur IOPS autre que celle répertoriée, la valeur IOPS est arrondie à la valeur supérieure.</td>
         </tr>
         </tbody></table>
 
 7.  Créez la réservation de volume persistant (PVC).
 
     ```
-    kubectl apply -f <local_file_path>
+    kubectl apply -f mypvc.yaml
     ```
     {: pre}
 
@@ -531,7 +692,6 @@ Pour ajouter du stockage persistant :
     {: codeblock}
 
     <table>
-    <caption>Tableau. Description des composants du fichier YAML</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
     </thead>
@@ -602,218 +762,220 @@ Pour ajouter du stockage persistant :
      ```
      {: screen}
 
+{: #nonroot}
+{: #enabling_root_permission}
+
+**Droits NFS** : vous cherchez de la documentation sur l'activation de droits non root pour NFS ? Voir [Ajout d'un accès d'utilisateur non root au stockage de fichiers NFS](cs_troubleshoot_storage.html#nonroot).
+
 <br />
 
 
 
 
-## Configuration des solutions de sauvegarde et de restauration des partages de fichiers NFS
-{: #backup_restore}
+## Installation du plug-in {{site.data.keyword.Bluemix_notm}} Block Storage dans votre cluster
+{: #install_block}
 
-Les partages de fichiers sont mis à disposition au même emplacement (centre de données) que votre cluster et sont mis en cluster par {{site.data.keyword.IBM_notm}} pour assurer la haute disponibilité. Toutefois, les partages de fichiers ne sont pas sauvegardés automatiquement et peuvent s'avérer inaccessibles en cas de défaillance de l'emplacement global. Pour éviter que vos données soient perdues ou endommagées, vous pouvez configurer des sauvegardes régulières de vos partages de fichiers NFS que vous  pourrez utiliser pour récupérer vos données si nécessaire.
+Installez le plug-in {{site.data.keyword.Bluemix_notm}} Block Storage avec une charte Helm pour configurer des classes de stockage prédéfinies pour le stockage par blocs. Ces classes de stockage vous permettent de créer une réservation de volume persistant pour mettre à disposition du stockage par blocs pour vos applications.
 {: shortdesc}
 
-Passez en revue les options de sauvegarde et restauration suivantes pour vos partages de fichiers NFS :
+Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) le cluster dans lequel vous souhaitez installer le plug-in {{site.data.keyword.Bluemix_notm}} Block Storage.
+
+1. Installez [Helm](cs_integrations.html#helm) sur le cluster dans lequel vous souhaitez utiliser le plug-in {{site.data.keyword.Bluemix_notm}} Block Storage.
+2. Mettez à jour le référentiel helm repo pour extraire la dernière version de toutes les chartes Helm dans ce référentiel.
+   ```
+   helm repo update
+   ```
+   {: pre}
+
+3. Installez le plug-in {{site.data.keyword.Bluemix_notm}} Block Storage. Lorsque vous installez ce plug-in, des classes de stockage par blocs prédéfinies sont ajoutées dans votre cluster.
+   ```
+   helm install ibm/ibmcloud-block-storage-plugin
+   ```
+   {: pre}
+
+   Exemple de sortie :
+   ```
+   NAME:   bald-olm
+   LAST DEPLOYED: Wed Apr 18 10:02:55 2018
+   NAMESPACE: default
+   STATUS: DEPLOYED
+
+   RESOURCES:
+   ==> v1beta1/DaemonSet
+   NAME                           DESIRED  CURRENT  READY  UP-TO-DATE  AVAILABLE  NODE SELECTOR  AGE
+   ibmcloud-block-storage-driver  0        0        0      0           0          <none>         0s
+
+   ==> v1beta1/Deployment
+   NAME                           DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
+   ibmcloud-block-storage-plugin  1        0        0           0          0s
+
+   ==> v1/StorageClass
+   NAME                      PROVISIONER        AGE
+   ibmc-block-bronze         ibm.io/ibmc-block  0s
+   ibmc-block-custom         ibm.io/ibmc-block  0s
+   ibmc-block-gold           ibm.io/ibmc-block  0s
+   ibmc-block-retain-bronze  ibm.io/ibmc-block  0s
+   ibmc-block-retain-custom  ibm.io/ibmc-block  0s
+   ibmc-block-retain-gold    ibm.io/ibmc-block  0s
+   ibmc-block-retain-silver  ibm.io/ibmc-block  0s
+   ibmc-block-silver         ibm.io/ibmc-block  0s
+
+   ==> v1/ServiceAccount
+   NAME                           SECRETS  AGE
+   ibmcloud-block-storage-plugin  1        0s
+
+   ==> v1beta1/ClusterRole
+   NAME                           AGE
+   ibmcloud-block-storage-plugin  0s
+
+   ==> v1beta1/ClusterRoleBinding
+   NAME                           AGE
+   ibmcloud-block-storage-plugin  0s
+
+   NOTES:
+   Thank you for installing: ibmcloud-block-storage-plugin.   Your release is named: bald-olm
+   ```
+   {: screen}
+
+4. Vérifiez que l'installation a abouti.
+   ```
+   kubectl get pod -n kube-system | grep ibmcloud-block-storage-plugin
+   ```
+   {: pre}
+
+   Exemple de sortie :
+   ```
+   ibmcloud-block-storage-plugin-58c5f9dc86-js6fd                    1/1       Running   0          4m
+   ```
+   {: screen}
+
+5. Vérifiez que les classes de stockage pour le stockage par blocs ont été ajoutées dans votre cluster.
+   ```
+   kubectl get storageclasses | grep block
+   ```
+   {: pre}
+
+   Exemple de sortie :
+   ```
+   ibmc-block-bronze            ibm.io/ibmc-block
+   ibmc-block-custom            ibm.io/ibmc-block
+   ibmc-block-gold              ibm.io/ibmc-block
+   ibmc-block-retain-bronze     ibm.io/ibmc-block
+   ibmc-block-retain-custom     ibm.io/ibmc-block
+   ibmc-block-retain-gold       ibm.io/ibmc-block
+   ibmc-block-retain-silver     ibm.io/ibmc-block
+   ibmc-block-silver            ibm.io/ibmc-block
+   ```
+   {: screen}
+
+6. Répétez ces étapes pour chaque cluster sur lequel vous souhaitez fournir du stockage par blocs.
+
+Vous pouvez maintenant passer à la [création d'une réservation de volume persistant (PVC)](#create) pour mettre à disposition du stockage par blocs pour votre application.
+
+<br />
+
+
+### Mise à jour du plug-in {{site.data.keyword.Bluemix_notm}} Block Storage
+Vous pouvez mettre à niveau le plug-in {{site.data.keyword.Bluemix_notm}} Block Storage existant à la version la plus récente.
+{: shortdesc}
+
+Avant de commencer, [ciblez votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) sur le cluster.
+
+1. Recherchez le nom de la charte Helm du stockage par blocs que vous avez installée dans votre cluster.
+   ```
+   helm ls | grep ibmcloud-block-storage-plugin
+   ```
+   {: pre}
+
+   Exemple de sortie :
+   ```
+   myhelmchart 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-block-storage-plugin-0.1.0	default
+   ```
+   {: screen}
+
+2. Mettez à niveau le plug-in {{site.data.keyword.Bluemix_notm}} Block Storage à la version la plus récente.
+   ```
+   helm upgrade --force --recreate-pods <helm_chart_name>  ibm/ibmcloud-block-storage-plugin
+   ```
+   {: pre}
+
+<br />
+
+
+### Retrait du plug-in {{site.data.keyword.Bluemix_notm}} Block Storage
+Si vous ne souhaitez pas mettre à disposition et utiliser {{site.data.keyword.Bluemix_notm}} Block Storage pour votre cluster, vous pouvez désinstaller la charte Helm.
+{: shortdesc}
+
+**Remarque :** le retrait du plug-in ne retire pas les réservations de volume persistant (PVC), les volumes persistants (PV) ou les données. Lorsque vous retirez le plug-in, tous les pods associés et les ensembles de démons sont retirés de votre cluster. Vous ne pouvez pas fournir de nouveau stockage par blocs pour votre cluster ou utiliser des réservations de volume persistant et des volumes persistant de stockage par blocs existants une fois le plug-in retiré.
+
+Avant de commencer, [ciblez avec votre interface de ligne de commande (CLI)](cs_cli_install.html#cs_cli_configure) le cluster et vérifiez que vous n'avez plus de réservation de volume persistant ou de volume persistant dans votre cluster qui utilise du stockage par blocs.
+
+1. Recherchez le nom de la charte Helm du stockage par blocs que vous avez installée dans votre cluster.
+   ```
+   helm ls | grep ibmcloud-block-storage-plugin
+   ```
+   {: pre}
+
+   Exemple de sortie :
+   ```
+   myhelmchart 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-block-storage-plugin-0.1.0	default
+   ```
+   {: screen}
+
+2. Supprimez le plug-in {{site.data.keyword.Bluemix_notm}} Block Storage.
+   ```
+   helm delete <helm_chart_name>
+   ```
+   {: pre}
+
+3. Vérifiez que les pods de stockage par blocs sont retirés.
+   ```
+   kubectl get pod -n kube-system | grep ibmcloud-block-storage-plugin
+   ```
+   {: pre}
+   Le retrait des pods aboutit lorsqu'aucun pod n'est affiché dans la sortie de votre interface de ligne de commande.
+
+4. Vérifiez que les classes de stockage du stockage par blocs sont retirées.
+   ```
+   kubectl get storageclasses | grep block
+   ```
+   {: pre}
+   Le retrait des classes de stockage aboutit lorsqu'aucune classe de stockage n'est affichée dans la sortie de votre interface de ligne de commande.
+
+<br />
+
+
+
+## Configuration des solutions de sauvegarde et de restauration pour les partages de fichiers NFS et le stockage par blocs
+{: #backup_restore}
+
+Les partages de fichiers et le stockage par blocs sont mis à disposition au même emplacement que votre cluster. Le stockage réside sur des serveurs en cluster par {{site.data.keyword.IBM_notm}} pour assurer la disponibilité en cas de panne de serveur. Cependant, les partages de fichiers et le stockage par blocs ne sont pas sauvegardés automatiquement et risquent d'être inaccessibles en cas de défaillance de l'emplacement global. Pour éviter que vos données soient perdues ou endommagées, vous pouvez configurer des sauvegardes régulières que vous pourrez utiliser pour récupérer vos données si nécessaire.
+{: shortdesc}
+
+Passez en revue les options de sauvegarde et restauration suivantes pour vos partages de fichiers NFS et votre stockage par blocs :
 
 <dl>
-  <dt>Configurer la prise d'instantanés régulière de votre partage de fichiers NFS</dt>
-  <dd>Vous pouvez configurer la [prise d'instantanés régulière](/docs/infrastructure/FileStorage/snapshots.html#working-with-snapshots) de votre partage de fichiers NFS. Un instantané est une image en lecture seule d'un partage de fichiers NFS qui capture l'état du volume à un moment donné. Les instantanés sont stockés dans le même partage de fichiers au même emplacement. Vous pouvez restaurer des données à partir d'un instantané si l'utilisateur supprime accidentellement des données importantes du volume.</dd>
-  <dt>Répliquer des instantanés sur un partage de fichiers NFS situé à un autre placement (centre de données)</dt>
- <dd>Pour protéger vos données en cas de défaillance d'un emplacement, vous pouvez [répliquer des instantanés](/docs/infrastructure/FileStorage/replication.html#working-with-replication) sur un partage de fichiers NFS configuré à un autre emplacement. Les données peuvent être répliquées à partir du partage de fichiers NFS principal uniquement vers le partage de fichiers NFS de sauvegarde. Vous ne pouvez pas monter un partage de fichiers NFS répliqué sur un cluster. En cas de défaillance de votre partage de fichiers NFS principal, vous pouvez manuellement définir votre partage de fichiers NFS de sauvegarde comme partage de fichiers principal. Vous pouvez ensuite le monter sur votre cluster. Une fois votre partage de fichiers NFS restauré, vous pouvez récupérer les données dans le partage de fichiers NFS de sauvegarde.</dd>
+  <dt>Configurer la prise d'instantanés régulière</dt>
+  <dd><p>Vous pouvez configurer la [prise d'instantanés régulière](/docs/infrastructure/FileStorage/snapshots.html) de votre partage de fichiers NFS ou de votre stockage par blocs. Un instantané est une image en lecture seule qui capture l'état de l'instance à un moment donné. Les instantanés sont stockés dans le même partage de fichiers ou le même stockage par blocs au même emplacement. Vous pouvez restaurer des données à partir d'un instantané si l'utilisateur supprime accidentellement des données importantes du volume.</p>
+  <p>Pour plus d'informations, voir :<ul><li>[Capture régulière d'instantanés NFS](/docs/infrastructure/FileStorage/snapshots.html)</li><li>[Captures régulière d'instantanés de blocs](/docs/infrastructure/BlockStorage/snapshots.html#snapshots)</li></ul></p></dd>
+  <dt>Répliquer les instantanés à un autre emplacement</dt>
+ <dd><p>Pour protéger vos données en cas de défaillance d'emplacement, vous pouvez [répliquer des instantanés](/docs/infrastructure/FileStorage/replication.html#working-with-replication) sur une instance de partage de fichiers NFS ou de stockage par blocs configurée à un autre emplacement. Les données peuvent être répliquées du stockage principal uniquement vers le stockage de sauvegarde. Vous ne pouvez pas monter une instance de partage de fichiers NFS ou de stockage par blocs répliquée sur un cluster. En cas de défaillance de votre stockage principal, vous pouvez manuellement définir votre stockage de sauvegarde répliqué comme stockage principal. Vous pouvez ensuite le monter sur votre cluster. Une fois votre stockage principal restauré, vous pouvez récupérer les données dans le stockage de sauvegarde.</p>
+ <p>Pour plus d'informations, voir :<ul><li>[Réplication d'instantanés NFS](/docs/infrastructure/FileStorage/replication.html#working-with-replication)</li><li>[Réplication d'instantanés de blocs](/docs/infrastructure/BlockStorage/replication.html#working-with-replication)</li></ul></p></dd>
+ <dt>Dupliquer le stockage</dt>
+ <dd><p>Vous pouvez dupliquer votre instance de partage de fichiers NFS ou de stockage par blocs au même emplacement que l'instance de stockage d'origine. Un doublon contient les même données que l'instance de stockage d'origine au moment où vous créez le doublon. Contrairement aux répliques, le doublon s'utilise comme une instance de stockage totalement indépendante de l'original. Pour effectuer la duplication, configurez d'abord des instantanés pour le volume.</p>
+ <p>Pour plus d'informations, voir :<ul><li>[Duplication d'instantanés NFS](/docs/infrastructure/FileStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-file-storage)</li><li>[Dupliction d'instantanés de blocs](/docs/infrastructure/BlockStorage/how-to-create-duplicate-volume.html#creating-a-duplicate-block-volume)</li></ul></p></dd>
   <dt>Sauvegarder les données dans Object Storage</dt>
-  <dd>Vous pouvez utiliser l'[**image ibm-backup-restore**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) pour constituer un pod de sauvegarde et de restauration dans votre cluster. Ce pod contient un script pour exécuter une sauvegarde unique ou régulière d'une réservation de volume persistant (PVC) dans votre cluster. Les données sont stockées dans votre instance {{site.data.keyword.objectstoragefull}} que vous configurez à un emplacement. Pour rendre vos données hautement disponibles et protéger votre application en cas de défaillance, configurez une deuxième instance {{site.data.keyword.objectstoragefull}} et répliquez les données entre les différents emplacements. Si vous devez restaurer des données à partir de votre instance {{site.data.keyword.objectstoragefull}}, utilisez le script de restauration fourni avec l'image.</dd>
+  <dd><p>Vous pouvez utiliser l'[**image ibm-backup-restore**](/docs/services/RegistryImages/ibm-backup-restore/index.html#ibmbackup_restore_starter) pour constituer un pod de sauvegarde et de restauration dans votre cluster. Ce pod contient un script pour exécuter une sauvegarde unique ou régulière d'une réservation de volume persistant (PVC) dans votre cluster. Les données sont stockées dans votre instance {{site.data.keyword.objectstoragefull}} que vous configurez à un emplacement.</p>
+  <p>Pour rendre vos données hautement disponibles et protéger votre application en cas de défaillance d'emplacement, configurez une deuxième instance {{site.data.keyword.objectstoragefull}} et répliquez les données entre les différents emplacements. Si vous devez restaurer des données à partir de votre instance {{site.data.keyword.objectstoragefull}}, utilisez le script de restauration fourni avec l'image.</p></dd>
+<dt>Copier les données depuis et vers des pods et des conteneurs</dt>
+<dd><p>Vous pouvez utiliser la [commande![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#cp) `kubectl cp` pour copier des fichiers et des répertoires depuis et vers des pods ou des conteneurs spécifiques dans votre cluster.</p>
+<p>Avant de commencer, [ciblez avec votre interface de ligne de commande Kubernetes](cs_cli_install.html#cs_cli_configure) le cluster que vous voulez utiliser. Si vous n'indiquez pas de conteneur avec <code>-c</code>, la commande utilise le premier conteneur disponible dans le pod.</p>
+<p>Vous pouvez utiliser la commande de plusieurs manières :</p>
+<ul>
+<li>Copier les données de votre machine locale vers un pod dans votre cluster : <code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></li>
+<li>Copier les données d'un pod de votre cluster vers votre machine locale : <code>kubectl cp <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;/&lt;filename&gt;</var> <var>&lt;local_filepath&gt;/&lt;filename&gt;</var></code></li>
+<li>Copier les données d'un pod de votre cluster vers un conteneur spécifique dans un autre pod : <code>kubectl cp <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var> <var>&lt;namespace&gt;/&lt;other_pod&gt;:&lt;pod_filepath&gt;</var> -c <var>&lt;container></var></code></li>
+</ul>
+</dd>
   </dl>
-
-## Ajout d'un accès d'utilisateur non root au stockage de fichiers NFS
-{: #nonroot}
-
-Par défaut, les utilisateurs non root ne disposent pas de droits en écriture sur le chemin de montage du volume correspondant au stockage sauvegardé par NFS. Certaines images courantes, telles que Jenkins et Nexus3, spécifient un utilisateur non root, propriétaire du chemin de montage dans le fichier Dockerfile. Lorsque vous créez un conteneur à partir de ce fichier Dockerfile, la création échoue car l'utilisateur non root ne dispose pas des droits nécessaires pour accéder au chemin de montage. Pour octroyer des droits en écriture, vous pouvez modifier le fichier Dockerfile pour ajouter temporairement l'utilisateur non root au groupe d'utilisateurs root avant de modifier les droits sur le chemin de montage, ou utiliser un conteneur init.
-{:shortdesc}
-
-Si vous utilisez une charte Helm pour déployer une image avec un utilisateur non root que vous souhaiteriez habilité à disposer des droits en écriture sur le partage de fichiers NFS, éditez d'abord le déploiement Helm pour utiliser un conteneur init.
-{:tip}
-
-
-
-Lorsque vous ajoutez un [conteneur init![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) dans votre déploiement, vous pouvez octroyer à un utilisateur non root spécifié dans votre fichier Dockerfile les droits en écriture sur le chemin de montage du volume à l'intérieur du conteneur qui pointe vers votre partage de fichiers NFS. Le conteneur init démarre avant le conteneur de votre application. Le conteneur init crée le chemin de montage du volume dans le conteneur, modifie le chemin de montage de sorte à ce que l'utilisateur (non root) correct en soit détenteur, puis se ferme. Ensuite, le conteneur de votre application (qui comprend l'utilisateur non root censé écrire dans le chemin de montage) démarre. Comme le chemin est déjà détenu par l'utilisateur non root, l'écriture dans le chemin de montage aboutit. Si vous ne voulez pas utiliser un conteneur init, vous pouvez modifier le fichier Dockerfile afin d'ajouter l'accès d'utilisateur non root au stockage de fichiers NFS.
-
-Avant de commencer, [ciblez avec votre interface de ligne de commande](cs_cli_install.html#cs_cli_configure) votre cluster.
-
-1.  Ouvrez le fichier Dockerfile de votre application et récupérez l'ID utilisateur (UID) et l'ID du groupe (GID) de l'utilisateur auquel vous voulez accorder les droits en écriture sur le chemin de montage du volume. Dans l'exemple d'un fichier Dockerfile Jenkins, les informations sont :
-    - UID : `1000`
-    - GID : `1000`
-
-    **Exemple** :
-
-    ```
-    FROM openjdk:8-jdk
-
-    RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
-
-    ARG user=jenkins
-    ARG group=jenkins
-    ARG uid=1000
-    ARG gid=1000
-    ARG http_port=8080
-    ARG agent_port=50000
-
-    ENV JENKINS_HOME /var/jenkins_home
-    ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
-    ...
-    ```
-    {:screen}
-
-2.  Ajoutez du stockage persistant à votre application en créant une réservation de volume persistant (PVC). Cet exemple utilise la classe de stockage `ibmc-file-bronze`. Pour consulter les classes de stockage disponibles, exécutez la commande `kubectl get storageclasses`.
-
-    ```
-    apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: mypvc
-      annotations:
-        volume.beta.kubernetes.io/storage-class: "ibmc-file-bronze"
-    spec:
-      accessModes:
-        - ReadWriteMany
-      resources:
-        requests:
-          storage: 20Gi
-    ```
-    {: codeblock}
-
-3.  Créez la réservation de volume persistant (PVC).
-
-    ```
-    kubectl apply -f <local_file_path>
-    ```
-    {: pre}
-
-4.  Dans votre fichier `.yaml` de déploiement, ajoutez le conteneur init. Insérez les identificateurs UID et GID que vous avez récupérés précédemment.
-
-    ```
-    initContainers:
-    - name: initContainer # Or you can replace with any name
-      image: alpine:latest
-      command: ["/bin/sh", "-c"]
-      args:
-        - chown <UID>:<GID> /mount; # Replace UID and GID with values from the Dockerfile
-      volumeMounts:
-      - name: volume # Or you can replace with any name
-        mountPath: /mount # Must match the mount path in the args line
-    ```
-    {: codeblock}
-
-    **Exemple** pour un déploiement Jenkins :
-
-    ```
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: my_pod
-    spec:
-      replicas: 1
-      template:
-        metadata:
-          labels:
-            app: jenkins
-        spec:
-          containers:
-          - name: jenkins
-            image: jenkins
-            volumeMounts:
-            - mountPath: /var/jenkins_home
-              name: volume
-          volumes:
-          - name: volume
-            persistentVolumeClaim:
-              claimName: mypvc
-          initContainers:
-          - name: permissionsfix
-            image: alpine:latest
-            command: ["/bin/sh", "-c"]
-            args:
-              - chown 1000:1000 /mount;
-            volumeMounts:
-            - name: volume
-              mountPath: /mount
-    ```
-    {: codeblock}
-
-5.  Créez le pod et montez la PVC dessus.
-
-    ```
-    kubectl apply -f <local_yaml_path>
-    ```
-    {: pre}
-
-6. Vérifiez que le montage du volume sur votre pod a réussi. Notez le nom du pod et le chemin **Containers/Mounts**.
-
-    ```
-    kubectl describe pod <my_pod>
-    ```
-    {: pre}
-
-    **Exemple de sortie** :
-
-    ```
-    Name:		    mypod-123456789
-    Namespace:	default
-    ...
-    Init Containers:
-    ...
-    Mounts:
-      /mount from volume (rw)
-      /var/run/secrets/kubernetes.io/serviceaccount from default-token-cp9f0 (ro)
-    ...
-    Containers:
-      jenkins:
-        Container ID:
-        Image:		jenkins
-        Image ID:
-        Port:		  <none>
-        State:		Waiting
-          Reason:		PodInitializing
-        Ready:		False
-        Restart Count:	0
-        Environment:	<none>
-        Mounts:
-          /var/jenkins_home from volume (rw)
-          /var/run/secrets/kubernetes.io/serviceaccount from default-token-cp9f0 (ro)
-    ...
-    Volumes:
-      myvol:
-        Type: PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
-        ClaimName: mypvc
-        ReadOnly: false
-
-    ```
-    {: screen}
-
-7.  Connectez-vous au pod en utilisant le nom du pod que vous avez noté précédemment.
-
-    ```
-    kubectl exec -it <my_pod-123456789> /bin/bash
-    ```
-    {: pre}
-
-8. Vérifiez les droits octroyés pour le chemin de montage de votre conteneur. Dans l'exemple, le chemin de montage est `/var/jenkins_home`.
-
-    ```
-    ls -ln /var/jenkins_home
-    ```
-    {: pre}
-
-    **Exemple de sortie** :
-
-    ```
-    jenkins@mypod-123456789:/$ ls -ln /var/jenkins_home
-    total 12
-    -rw-r--r-- 1 1000 1000  102 Mar  9 19:58 copy_reference_file.log
-    drwxr-xr-x 2 1000 1000 4096 Mar  9 19:58 init.groovy.d
-    drwxr-xr-x 9 1000 1000 4096 Mar  9 20:16 war
-    ```
-    {: screen}
-
-    Cette sortie montre que les identificateurs GID et UID de votre fichier Dockerfile (dans cet exemple, `1000` et `1000`) sont propriétaires du chemin de montage à l'intérieur du conteneur.
-
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -45,12 +45,12 @@ E cos'è un cluster? Un cluster è un insieme di risorse, nodi di lavoro, reti e
 
 Prima di iniziare, devi disporre di un [account {{site.data.keyword.Bluemix_notm}}](https://console.bluemix.net/registration/) di prova, con pagamento a consumo o di sottoscrizione per creare un cluster gratuito.
 
-**Quale tipo di account {{site.data.keyword.Bluemix_notm}} dovrei utilizzare?** Con gli account Pagamento a consumo o Sottoscrizione, puoi eseguire il provisioning delle risorse dell'infrastruttura IBM Cloud (SoftLayer) per i tuoi cluster Kubernetes e creare un cluster gratuito o i cluster standard. Con un account di prova, puoi creare un cluster gratuito di 21 giorni ma non i cluster standard. Dopo 21 giorni, il tuo cluster gratuito viene eliminato. Per continuare con i cluster Kubernetes, crea un altro cluster gratuito entro il termine del tuo account di prova o esegui l'aggiornamento a un account Pagamento a consumo o Sottoscrizione.
+**Quale tipo di account {{site.data.keyword.Bluemix_notm}} dovrei utilizzare?** Con gli account Pagamento a consumo o Sottoscrizione, puoi eseguire il provisioning delle risorse dell'infrastruttura IBM Cloud (SoftLayer) per i tuoi cluster Kubernetes e creare un cluster gratuito o i cluster standard. Con un account di prova, puoi creare un cluster gratuito ma non i cluster standard. Tutti i cluster gratuiti vengono eliminati dopo 21 giorni. Per continuare con i cluster Kubernetes, crea un altro cluster gratuito entro il termine del tuo account di prova o esegui l'aggiornamento a un account Pagamento a consumo o Sottoscrizione.
 {:tip}
 
 Per creare un cluster gratuito:
 
-1.  Dal [**Catalogo** {{site.data.keyword.Bluemix_notm}}  ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/catalog/?category=containers), nella categoria **Contenitori**, fai clic su **Contenitori nei cluster Kubernetes**.
+1.  Dal [**Catalogo** {{site.data.keyword.Bluemix_notm}}  ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://console.bluemix.net/catalog/?category=containers), nella categoria **Contenitori**, fai clic su **Contenitori nei cluster Kubernetes**.
 
 2.  Esamina i cluster, quindi fai clic su **Crea**. Immetti un **Nome cluster**. Il tipo di cluster predefinito è gratuito. La prossima volta, puoi creare un cluster standard e definire ulteriori personalizzazioni, come il numero di nodi di lavoro.
 
@@ -66,10 +66,10 @@ Ottimo lavoro! Hai creato il tuo primo cluster Kubernetes. Di seguito sono ripor
 
 
 **Operazioni successive**
-
-Una volta che il cluster è operativo, puoi iniziare a eseguire alcune attività.
+Nei prossimi 21 giorni, prova ad eseguire alcune operazioni con il tuo cluster gratuito.
 
 * [Installa le CLI per iniziare ad utilizzare il tuo cluster.](cs_cli_install.html#cs_cli_install)
 * [Distribuisci un'applicazione nel tuo cluster.](cs_app.html#app_cli)
 * [Crea un cluster standard con più nodi per una maggiore disponibilità.](cs_clusters.html#clusters_ui)
 * [Configura il tuo registro privato in {{site.data.keyword.Bluemix_notm}} per memorizzare e condividere le immagini Docker con altri utenti.](/docs/services/Registry/index.html)
+

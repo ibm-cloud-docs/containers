@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-14"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -18,7 +18,8 @@ lastupdated: "2018-02-14"
 # ファイアウォールで必要なポートと IP アドレスを開く
 {: #firewall}
 
-{{site.data.keyword.containerlong}} のファイアウォールで特定のポートと IP アドレスを開く必要がある以下の状況について説明します。{:shortdesc}
+{{site.data.keyword.containerlong}} のファイアウォールで特定のポートと IP アドレスを開く必要がある以下の状況について説明します。
+{:shortdesc}
 
 * [プロキシーまたはファイアウォール経由の公共のインターネットのエンドポイントへのアクセスが企業ネットワーク・ポリシーによって禁止されているときに、ローカル・システムから `bx` コマンドを実行します](#firewall_bx)。
 * [プロキシーまたはファイアウォール経由の公共のインターネットのエンドポイントへのアクセスが企業ネットワーク・ポリシーによって禁止されているときに、ローカル・システムから `kubectl` コマンドを実行します](#firewall_kubectl)。
@@ -95,14 +96,14 @@ lastupdated: "2018-02-14"
 4. クラスターの**マスター URL** を取得します。
 
    ```
-   bx cs cluster-get <cluster_name_or_id>
+   bx cs cluster-get <cluster_name_or_ID>
    ```
    {: pre}
 
    出力例:
    ```
    ...
-   Master URL:		https://169.46.7.238:31142
+   Master URL:		https://169.xx.xxx.xxx:31142
    ...
    ```
    {: screen}
@@ -118,7 +119,7 @@ lastupdated: "2018-02-14"
 
    コマンド例:
    ```
-   curl --insecure https://169.46.7.238:31142/version
+   curl --insecure https://169.xx.xxx.xxx:31142/version
    ```
    {: pre}
 
@@ -174,7 +175,7 @@ lastupdated: "2018-02-14"
   1.  以下を実行して、クラスター内のすべてのワーカー・ノードのパブリック IP アドレスをメモします。
 
       ```
-      bx cs workers <cluster_name_or_id>
+      bx cs workers <cluster_name_or_ID>
       ```
       {: pre}
 
@@ -201,7 +202,7 @@ lastupdated: "2018-02-14"
       <tr>
          <td>中欧</td>
          <td>ams03<br>fra02<br>mil01<br>par01</td>
-         <td><code>169.50.169.106、169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149、159.8.98.170</code></td>
+         <td><code>169.50.169.110, 169.50.154.194</code><br><code>169.50.56.174</code><br><code>159.122.190.98</code><br><code>159.8.86.149、159.8.98.170</code></td>
         </tr>
       <tr>
         <td>英国南部</td>
@@ -263,8 +264,8 @@ lastupdated: "2018-02-14"
 </p>
 
   4.  オプション: ワーカー・ノードから {{site.data.keyword.monitoringlong_notm}} サービスと {{site.data.keyword.loganalysislong_notm}} サービスへの発信ネットワーク・トラフィックを許可します。
-      - `TCP port 443, port 9095 FROM <each_worker_node_publicIP> TO <monitoring_publicIP>`
-      - <em>&lt;monitoring_publicIP&gt;</em> は、トラフィックを許可するモニタリング地域のすべてのアドレスに置き換えます。
+      - `TCP port 443, port 9095 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
+      - <em>&lt;monitoring_public_IP&gt;</em> は、トラフィックを許可するモニタリング地域のすべてのアドレスに置き換えます。
         <p><table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
         <thead>
         <th>コンテナー地域</th>
@@ -291,8 +292,8 @@ lastupdated: "2018-02-14"
         </tbody>
       </table>
 </p>
-      - `TCP port 443, port 9091 FROM <each_worker_node_publicIP> TO <logging_publicIP>`
-      - <em>&lt;logging_publicIP&gt;</em> は、トラフィックを許可するロギング地域のすべてのアドレスに置き換えます。
+      - `TCP port 443, port 9091 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
+      - <em>&lt;logging_public_IP&gt;</em> は、トラフィックを許可するロギング地域のすべてのアドレスに置き換えます。
         <p><table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
         <thead>
         <th>コンテナー地域</th>
@@ -351,3 +352,4 @@ NodePort、ロード・バランサー、Ingress の各サービスへの着信�
   <dt>Ingress</dt>
   <dd>Ingress アプリケーション・ロード・バランサーの IP アドレスへのポート 80 (HTTP の場合) またはポート 443 (HTTPS の場合) を開きます。</dd>
 </dl>
+

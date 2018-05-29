@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2017-12-01"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -26,6 +26,7 @@ lastupdated: "2017-12-01"
 - [클러스터 로깅용 REST API ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://us-south.containers.bluemix.net/swagger-logging/)
 - [클러스터 Ingress 애플리케이션 로드 밸런싱을 위한 REST API ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://us-south.containers.bluemix.net/swagger-alb-api/)
 - [developerWorks 컨테이너 구성 과정 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/code/journey/category/container-orchestration/)
+- [developerWorks 과정 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/courses/all/?s=IBM+Cloud+Container+Service)
 - [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/)
 - [Docker 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.docker.com/engine/)
 - <a href="https://docs.helm.sh/helm/" target="_blank">Helm 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>(Kubernetes 패키지 관리용)
@@ -56,6 +57,9 @@ lastupdated: "2017-12-01"
 
 - [단일 및 확장 컨테이너용 REST API ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](http://ccsapi-doc.mybluemix.net/)
 
+<br />
+
+
 **일반사항**
 
 - [Twitter ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://twitter.com/hashtag/ibmcontainers)
@@ -63,4 +67,5 @@ lastupdated: "2017-12-01"
 - [Microservices.TV ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/tv/microservices/)
 
 <br />
+
 

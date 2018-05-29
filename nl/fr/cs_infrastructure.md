@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-01-24"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -62,13 +62,14 @@ Avant de commencer, créez un compte Paiement à la carte {{site.data.keyword.Bl
   ```
   {: pre}
 
-6.  Configurez la clé d'API que vous avez générée pour accéder au portefeuille d'infrastructure IBM Cloud (SoftLayer). Remplacez `<API_KEY>` par la clé d'API et `<USERNAME>` par l'{{site.data.keyword.ibmid}} de votre nouveau compte Paiement à la carte.
+6.  Configurez la clé d'API que vous avez générée pour accéder au portefeuille d'infrastructure IBM Cloud (SoftLayer). Remplacez `<API_key>` par la clé d'API et `<username>` par l'{{site.data.keyword.ibmid}} de votre nouveau compte Paiement à la carte.
 
   ```
-  bx cs credentials-set --infrastructure-api-key <API_KEY> --infrastructure-username <USERNAME>
+  bx cs credentials-set --infrastructure-api-key <API_key> --infrastructure-username <username>
   ```
   {: pre}
 
 7.  Commencez à [créer des clusters standard](cs_clusters.html#clusters_cli).
 
 **Remarque :** pour examiner votre clé d'API après l'avoir générée, suivez les étapes 1 et 2, puis dans la section **Clé d'API**, cliquez sur **Afficher** pour visualiser la clé d'API pour votre ID utilisateur.
+

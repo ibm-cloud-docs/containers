@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-15"
+lastupdated: "2018-4-20"
 
 ---
 
-{:new_window: target="_blank"}
+{:new_window: target="blank"}
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
@@ -38,22 +38,58 @@ Le maggiori differenze tra {{site.data.keyword.Bluemix_notm}} pubblico e dedicat
 ### Differenze nella gestione dei cluster tra gli ambienti cloud
 {: #dedicated_env_differences}
 
-|Area|{{site.data.keyword.Bluemix_notm}} pubblico|{{site.data.keyword.Bluemix_dedicated_notm}}|
-|--|--------------|--------------------------------|
-|Creazione cluster|Crea un cluster gratuito o specifica i seguenti dettagli per un cluster standard:<ul><li>Tipo di cluster</li><li>Nome</li><li>Ubicazione</li><li>Tipo di macchina</li><li>Numero di nodi di lavoro</li><li>VLAN pubblica</li><li>VLAN privata</li><li>Hardware</li></ul>|Specifica i seguenti dettagli per un cluster standard:<ul><li>Nome</li><li>Versione Kubernetes</li><li>Tipo di macchina</li><li>Numero di nodi di lavoro</li></ul><p>**Nota:** le impostazioni VLAN e Hardware vengono predefinite durante la creazione dell'ambiente {{site.data.keyword.Bluemix_notm}}.</p>|
-|Hardware e proprietà del cluster|Nei cluster standard, l'hardware può essere condiviso da altri clienti {{site.data.keyword.IBM_notm}} o dedicato solo a te. Le VLAN pubbliche e private sono possedute e gestite da te nel tuo account dell'infrastruttura IBM Cloud (SoftLayer).|Nei cluster su {{site.data.keyword.Bluemix_dedicated_notm}}, l'hardware è sempre dedicato. Le VLAN pubbliche e private appartengono e gestite da IBM per te. L'ubicazione è predefinita per l'ambiente {{site.data.keyword.Bluemix_notm}}.|
-|Rete Programma di bilanciamento del carico e Ingress|Durante il provisioning dei cluster standard, si verificano automaticamente le seguenti azioni.<ul><li>Una sottorete pubblica portatile e una privata vengono associate al tuo cluster e assegnate al tuo account dell'infrastruttura IBM Cloud (SoftLayer).</li><li>Viene utilizzato un indirizzo IP pubblico portatile per un programma di bilanciamento del carico dell'applicazione altamente disponibile e viene assegnata una rotta pubblica univoca nel formato &lt;cluster_name&gt;.containers.mybluemix.net. Puoi utilizzare questa rotta per esporre più applicazioni pubblicamente. Viene utilizzato un indirizzo IP portatile per un programma di bilanciamento del carico dell'applicazione privato.</li><li>Vengono assegnati al cluster quattro indirizzi IP pubblici e quattro privati portatili che possono venire utilizzati per esporre le applicazioni tramite i servizi del programma di bilanciamento del carico. È possibile richiedere ulteriori sottoreti attraverso il tuo account dell'infrastruttura IBM Cloud (SoftLayer).</li></ul>|Quando crei il tuo account dedicato, prendi una decisione di connettività su come vuoi esporre e accedere ai tuoi servizi del cluster. Se vuoi utilizzare i tuoi propri intervalli di IP aziendali (IP gestiti dall'utente), devi fornirli quando [configuri un ambiente {{site.data.keyword.Bluemix_dedicated_notm}}](/docs/dedicated/index.html#setupdedicated). <ul><li>Per impostazione predefinita, nessuna sottorete pubblica portatile viene associata ai cluster che crei nel tuo account dedicato. Invece, hai la flessibilità di scegliere il modello di connettività che si adatta meglio alla tua azienda.</li><li>Dopo che hai creato il cluster, scegli il tipo di sottoreti che vuoi associare e utilizzare con il tuo cluster per il programma di bilanciamento del carico o per la connettività Ingress.<ul><li>Per le sottoreti portatili pubblica e privata, puoi [aggiungere le sottoreti ai cluster](cs_subnets.html#subnets)</li><li>Per gli indirizzi IP gestiti dall'utente che hai fornito a IBM nell'onboarding dedicato,
-puoi [aggiungere le sottoreti gestite dall'utente ai cluster](#dedicated_byoip_subnets).</li></ul></li><li>Dopo aver associato una sottorete al tuo cluster, viene creato il programma di bilanciamento del carico dell'applicazione Ingress. Una rotta Ingress pubblica viene creata solo se utilizzi una sottorete pubblica portatile.</li></ul>|
-|Rete NodePort|Esponi una porta pubblica nel tuo nodo di lavoro e utilizza l'indirizzo IP pubblico del nodo di lavoro
-per accedere pubblicamente al tuo servizio nel cluster.|Tutti gli indirizzi IP dei nodi di lavoro vengono bloccati da un firewall. Tuttavia per i servizi
-{{site.data.keyword.Bluemix_notm}} aggiunti al cluster, è possibile accedere alla porta del nodo tramite un indirizzo IP pubblico o privato.|
-|Archiviazione persistente|Utilizza il [provisioning
+<table>
+<col width="20%">
+<col width="40%">
+<col width="40%">
+ <thead>
+ <th>Area</th>
+ <th>{{site.data.keyword.Bluemix_notm}} pubblico</th>
+ <th>{{site.data.keyword.Bluemix_dedicated_notm}}</th>
+ </thead>
+ <tbody>
+ <tr>
+ <td>Creazione cluster</td>
+ <td>Crea un cluster gratuito o un cluster standard.</td>
+ <td>Crea un cluster standard.</td>
+ </tr>
+ <tr>
+ <td>Hardware e proprietà del cluster</td>
+ <td>Nei cluster standard, l'hardware può essere condiviso da altri clienti {{site.data.keyword.IBM_notm}} o dedicato solo a te. Le VLAN pubbliche e private sono possedute e gestite da te nel tuo account dell'infrastruttura IBM Cloud (SoftLayer).</td>
+ <td>Nei cluster su {{site.data.keyword.Bluemix_dedicated_notm}}, l'hardware è sempre dedicato. Le VLAN pubbliche e private disponibili per la creazione del cluster vengono predefinite quando viene configurato l'ambiente {{site.data.keyword.Bluemix_dedicated_notm}} e appartengono e vengono gestite da IBM per tuo conto. Anche l'ubicazione disponibile durante la creazione del cluster viene predefinita per l'ambiente {{site.data.keyword.Bluemix_notm}}.</td>
+ </tr>
+ <tr>
+ <td>Rete Programma di bilanciamento del carico e Ingress</td>
+ <td>Durante il provisioning dei cluster standard, si verificano automaticamente le seguenti azioni.<ul><li>Una sottorete pubblica portatile e una privata vengono associate al tuo cluster e assegnate al tuo account dell'infrastruttura IBM Cloud (SoftLayer). È possibile richiedere ulteriori sottoreti attraverso il tuo account dell'infrastruttura IBM Cloud (SoftLayer).</li></li><li>Viene utilizzato un indirizzo IP pubblico portatile per un programma di bilanciamento del carico dell'applicazione (ALB) Ingress altamente disponibile e viene assegnata una rotta pubblica univoca nel formato <code>&lt;cluster_name&gt;. containers.mybluemix.net</code>. Puoi utilizzare questa rotta per esporre più applicazioni pubblicamente. Viene utilizzato un indirizzo IP privato portatile per un ALB privato.</li><li>Vengono assegnati al cluster quattro indirizzi IP pubblici e quattro privati portatili che possono venire utilizzati per esporre le applicazioni tramite i servizi del programma di bilanciamento del carico.</ul></td>
+ <td>Quando crei il tuo account dedicato, prendi una decisione di connettività su come vuoi esporre e accedere ai tuoi servizi del cluster. Se vuoi utilizzare i tuoi propri intervalli di IP aziendali (IP gestiti dall'utente), devi fornirli quando [configuri un ambiente {{site.data.keyword.Bluemix_dedicated_notm}}](/docs/dedicated/index.html#setupdedicated). <ul><li>Per impostazione predefinita, nessuna sottorete pubblica portatile viene associata ai cluster che crei nel tuo account dedicato. Invece, hai la flessibilità di scegliere il modello di connettività che si adatta meglio alla tua azienda.</li><li>Dopo che hai creato il cluster, scegli il tipo di sottoreti che vuoi associare e utilizzare con il tuo cluster per il programma di bilanciamento del carico o per la connettività Ingress.<ul><li>Per le sottoreti portatili pubblica e privata, puoi [aggiungere le sottoreti ai cluster](cs_subnets.html#subnets)</li><li>Per gli indirizzi IP gestiti dall'utente che hai fornito a IBM nell'onboarding dedicato,
+puoi [aggiungere le sottoreti gestite dall'utente ai cluster](#dedicated_byoip_subnets).</li></ul></li><li>Dopo aver associato una sottorete al tuo cluster, viene creato l'ALB Ingress. Una rotta Ingress pubblica viene creata solo se utilizzi una sottorete pubblica portatile.</li></ul></td>
+ </tr>
+ <tr>
+ <td>Rete NodePort</td>
+ <td>Esponi una porta pubblica nel tuo nodo di lavoro e utilizza l'indirizzo IP pubblico del nodo di lavoro
+per accedere pubblicamente al tuo servizio nel cluster.</td>
+ <td>Tutti gli indirizzi IP dei nodi di lavoro vengono bloccati da un firewall. Tuttavia per i servizi
+{{site.data.keyword.Bluemix_notm}} aggiunti al cluster, è possibile accedere alla porta del nodo tramite un indirizzo IP pubblico o privato.</td>
+ </tr>
+ <tr>
+ <td>Archiviazione persistente</td>
+ <td>Utilizza il [provisioning
 dinamico](cs_storage.html#create) o il [provisioning
-statico](cs_storage.html#existing) dei volumi.|Utilizza il [provisioning
-dinamico](cs_storage.html#create) dei volumi. [Apri un ticket di supporto](/docs/get-support/howtogetsupport.html#getting-customer-support) per richiedere un backup per i tuoi volumi, richiedere il ripristino dai tuoi volumi e per eseguire altre funzioni di archiviazione.</li></ul>|
-|URL del registro di immagini in {{site.data.keyword.registryshort_notm}}|<ul><li>Stati Uniti Sud e Stati Uniti Est: <code>registry.ng bluemix.net</code></li><li>Regno Unito Sud: <code>registry.eu-gb.bluemix.net</code></li><li>Europa centrale (Francoforte): <code>registry.eu-de.bluemix.net</code></li><li>Australia (Sydney): <code>registry.au-syd.bluemix.net</code></li></ul>|<ul><li>Per i nuovi spazi dei nomi, utilizza gli stessi registri basati su regione definiti per {{site.data.keyword.Bluemix_notm}} pubblico.</li><li>Per gli spazi dei nomi configurati per i contenitori singoli e scalabili in {{site.data.keyword.Bluemix_dedicated_notm}}, utilizza <code>registry.&lt;dedicated_domain&gt;</code></li></ul>|
-|Accesso al registro|Consulta le opzioni in [Utilizzo dei registri di immagini pubblici e privati con {{site.data.keyword.containershort_notm}}](cs_images.html).|<ul><li>Per i nuovi spazi dei nomi, vedi le opzioni in [Utilizzo dei registri di immagini pubblici e privati con {{site.data.keyword.containershort_notm}}](cs_images.html).</li><li>Per gli spazi dei nomi configurati per i gruppi di contenitori singoli e scalabili, [utilizza un token e crea un segreto
-Kubernetes](cs_dedicated_tokens.html#cs_dedicated_tokens) per l'autenticazione.</li></ul>|
+statico](cs_storage.html#existing) dei volumi.</td>
+ <td>Utilizza il [provisioning
+dinamico](cs_storage.html#create) dei volumi. [Apri un ticket di supporto](cs_troubleshoot_storage.html#ts_getting_help) per richiedere un backup per i tuoi volumi, richiedere il ripristino dai tuoi volumi e per eseguire altre funzioni di archiviazione.</li></ul></td>
+ </tr>
+ <tr>
+ <td>URL del registro di immagini in {{site.data.keyword.registryshort_notm}}</td>
+ <td><ul><li>Stati Uniti Sud e Stati Uniti Est: <code>registry.ng bluemix.net</code></li><li>Regno Unito Sud: <code>registry.eu-gb.bluemix.net</code></li><li>Europa centrale (Francoforte): <code>registry.eu-de.bluemix.net</code></li><li>Australia (Sydney): <code>registry.au-syd.bluemix.net</code></li></ul></td>
+ <td><ul><li>Per i nuovi spazi dei nomi, utilizza gli stessi registri basati su regione definiti per {{site.data.keyword.Bluemix_notm}} pubblico.</li><li>Per gli spazi dei nomi configurati per i contenitori singoli e scalabili in {{site.data.keyword.Bluemix_dedicated_notm}}, utilizza <code>registry.&lt;dedicated_domain&gt;</code></li></ul></td>
+ </tr>
+ <tr>
+ <td>Accesso al registro</td>
+ <td>Consulta le opzioni in [Utilizzo dei registri di immagini pubblici e privati con {{site.data.keyword.containershort_notm}}](cs_images.html).</td>
+ <td><ul><li>Per i nuovi spazi dei nomi, vedi le opzioni in [Utilizzo dei registri di immagini pubblici e privati con {{site.data.keyword.containershort_notm}}](cs_images.html).</li><li>Per gli spazi dei nomi configurati per i gruppi di contenitori singoli e scalabili, [utilizza un token e crea un segreto Kubernetes](cs_dedicated_tokens.html#cs_dedicated_tokens) per l'autenticazione.</li></ul></td>
+ </tr>
+</tbody></table>
 {: caption="Differenze delle funzioni tra {{site.data.keyword.Bluemix_notm}} pubblico e {{site.data.keyword.Bluemix_dedicated_notm}}" caption-side="top"}
 
 <br />
@@ -128,26 +164,26 @@ Per consentire agli utenti {{site.data.keyword.Bluemix_dedicated_notm}} di acced
         * Per invitare un solo utente:
 
             ```
-            bx cf bluemix-admin invite-users-to-public -userid=<user_email> -apikey=<public_api_key> -public_org_id=<public_org_id>
+            bx cf bluemix-admin invite-users-to-public -userid=<user_email> -apikey=<public_API_key> -public_org_id=<public_org_ID>
             ```
             {: pre}
 
-            Sostituisci <em>&lt;user_IBMid&gt;</em> con l'email dell'utente che vuoi invitare, <em>&lt;public_api_key&gt;</em> con la chiave API generata nel passo precedete e <em>&lt;public_org_id&gt;</em> con il GUID dell'organizzazione dell'account pubblico. Consulta [Invito di un utente da IBM Cloud Dedicated](/docs/cli/plugins/bluemix_admin/index.html#admin_dedicated_invite_public) per ulteriori informazioni su questo comando.
+            Sostituisci <em>&lt;user_IBMid&gt;</em> con l'email dell'utente che vuoi invitare, <em>&lt;public_API_key&gt;</em> con la chiave API generata nel passo precedente e <em>&lt;public_org_ID&gt;</em> con il GUID dell'organizzazione dell'account pubblico. Consulta [Invito di un utente da IBM Cloud Dedicated](/docs/cli/plugins/bluemix_admin/index.html#admin_dedicated_invite_public) per ulteriori informazioni su questo comando.
 
         * Per invitare tutti gli utenti al momento in un'organizzazione dell'account dedicato:
 
             ```
-            bx cf bluemix-admin invite-users-to-public -organization=<dedicated_org_id> -apikey=<public_api_key> -public_org_id=<public_org_id>
+            bx cf bluemix-admin invite-users-to-public -organization=<dedicated_org_ID> -apikey=<public_API_key> -public_org_id=<public_org_ID>
             ```
 
-            Sostituisci <em>&lt;dedicated_org_id&gt;</em> con l'ID dell'organizzazione dell'account dedicato, <em>&lt;public_api_key&gt;</em> con la chiave API generata nel passo precedete e <em>&lt;public_org_id&gt;</em> con il GUID dell'organizzazione dell'account pubblico. Consulta [Invito di un utente da IBM Cloud Dedicated](/docs/cli/plugins/bluemix_admin/index.html#admin_dedicated_invite_public) per ulteriori informazioni su questo comando.
+            Sostituisci <em>&lt;dedicated_org_ID&gt;</em> con l'ID dell'organizzazione dell'account dedicato, <em>&lt;public_API_key&gt;</em> con la chiave API generata nel passo precedente e <em>&lt;public_org_ID&gt;</em> con il GUID dell'organizzazione dell'account pubblico. Consulta [Invito di un utente da IBM Cloud Dedicated](/docs/cli/plugins/bluemix_admin/index.html#admin_dedicated_invite_public) per ulteriori informazioni su questo comando.
 
     3.  Se esiste un ID IBM per un utente, l'utente viene automaticamente aggiunto all'organizzazione specificata nell'account pubblico. Se ancora non esiste un ID IBM per un utente, viene inviato un invito all'indirizzo email dell'utente. Dopo che l'utente ha accettato l'invito, viene creato un ID IBM per l'utente e viene aggiunto all'organizzazione specificata nell'account pubblico.
 
     4.  Verifica che gli utenti siano stati aggiunti all'account.
 
         ```
-        bx cf bluemix-admin invite-users-status -apikey=<public_api_key>
+        bx cf bluemix-admin invite-users-status -apikey=<public_API_key>
         ```
         {: pre}
 
@@ -210,18 +246,45 @@ Progetta la configurazione del tuo cluster {{site.data.keyword.Bluemix_dedicated
 ### Creazione dei cluster con la GUI
 {: #dedicated_creating_ui}
 
-1.  Apri la tua console dedicata: `https://<my-dedicated-cloud-instance>.bluemix.net`.
+1. Apri la tua console dedicata: `https://<my-dedicated-cloud-instance>.bluemix.net`.
+
 2. Seleziona la casella di spunta **Accedi anche a {{site.data.keyword.Bluemix_notm}} pubblico** e fai clic su **Accedi**.
+
 3. Segui le istruzioni per accedere con il tuo ID IBM. Se questa è la prima volta che accedi al tuo account dedicato, segui le istruzioni per accedere a {{site.data.keyword.Bluemix_dedicated_notm}}.
-4.  Dal catalogo, seleziona **Contenitori** e fai clic su **Cluster
+
+4. Dal catalogo, seleziona **Contenitori** e fai clic su **Cluster
 Kubernetes**.
-5.  Immetti un **Nome cluster**. Il nome deve iniziare con una lettera, può contenere lettere, numeri e - e non può contenere più di 35 caratteri. Nota che il dominio secondario Ingress assegnato da {{site.data.keyword.IBM_notm}} viene derivato dal nome del cluster. Il nome del cluster e il dominio secondario Ingress formano insieme il nome di dominio completo, che deve essere univoco all'interno di una regione e contenere 63 caratteri o meno. Per soddisfare questi requisiti, il nome del cluster potrebbe essere troncato o al dominio secondario potrebbero essere assegnati valori carattere casuali.
-6.  Seleziona un **Tipo di macchina**. Il tipo di macchina definisce la quantità di memoria e di CPU virtuale configurate in ogni nodo di lavoro. Questa memoria e CPU virtuale è disponibile per tutti i contenitori che distribuisci nei tuoi nodi.
-    -   Il tipo di macchina micro indica l'opzione più piccola.
-    -   Un tipo di macchina bilanciato ha una quantità uguale di memoria assegnata a ciascuna CPU, il che ottimizza le prestazioni.
-7.  Scegli il **Numero di nodi di lavoro** di cui hai bisogno. Seleziona `3` per assicurare l'elevata disponibilità al tuo cluster.
-8.  Fai clic su **Crea cluster**. Si aprono i dettagli del cluster, ma i nodi di lavoro nel cluster impiegano alcuni minuti per eseguire
-il provisioning. Nella scheda **Nodi di lavoro**, puoi visualizzare l'andamento della distribuzione del nodo di lavoro. Quando i nodi di lavoro sono pronti, lo stato viene modificato in **Pronto**.
+
+5. Configura i tuoi dettagli del cluster.
+
+    1. Immetti un **Nome cluster**. Il nome deve iniziare con una lettera, può contenere lettere, numeri e un trattino (-) e non può contenere più di 35 caratteri. Nota che il nome cluster e la regione in cui viene distribuito il cluster formano il nome dominio completo per il dominio secondario Ingress. Per garantire che il dominio secondario Ingress sia univoco all'interno di una regione, è possibile che il nome cluster venga troncato e vi venga aggiunto un valore casuale all'interno del nome dominio Ingress.
+
+    2. Seleziona l'**Ubicazione** in cui desideri distribuire il tuo cluster. L'ubicazione disponibile è stata predefinita al momento della configurazione dell'ambiente {{site.data.keyword.Bluemix_dedicated_notm}}. 
+
+    3. Scegli la versione del server API Kubernetes per il nodo master del cluster.
+
+    4. Seleziona un tipo di isolamento hardware. Il tipo virtuale ha una fatturazione oraria e il tipo bare metal ha una fatturazione mensile.
+
+        - **Virtuale - Dedicato**: i tuoi nodi di lavoro sono ospitati sull'infrastruttura dedicata al tuo account. Le tue risorse fisiche sono completamente isolate.
+
+        - **Bare Metal**: il provisioning dei server bare metal, con fatturazione mensile, viene eseguito tramite l'interazione manuale con l'infrastruttura Cloud IBM (SoftLayer) e il completamento di questo processo può richiedere più di un giorno lavorativo. Bare metal è più adatto per le applicazioni ad alte prestazioni che richiedono più risorse e controllo host. 
+
+        Assicurati di voler eseguire il provisioning di una macchina bare metal. Poiché viene fatturata mensilmente, se la annulli immediatamente dopo un ordine effettuato per errore, ti viene comunque addebitato l'intero mese.
+        {:tip}
+
+    5. Seleziona un **Tipo di macchina**. Il tipo di macchina definisce la quantità di CPU virtuale, di memoria e di spazio disco configurata in ogni nodo di lavoro e resa disponibile ai contenitori. I tipi di macchine bare metal e virtuali disponibili variano in base all'ubicazione in cui viene distribuito il cluster. Per ulteriori informazioni, consulta la documentazione per il [comando](cs_cli_reference.html#cs_machine_types) `bx cs machine-type`. Dopo aver creato il cluster, puoi aggiungere diversi tipi di macchine aggiungendo un nuovo nodo di lavoro al cluster.
+
+    6. Scegli il **Numero di nodi di lavoro** di cui hai bisogno. Seleziona `3` per assicurare l'elevata disponibilità al tuo cluster.
+
+    7. Seleziona una **VLAN pubblica** (facoltativo) e una **VLAN privata** (obbligatorio). Le VLAN pubbliche e private disponibili vengono predefinite quando viene configurato l'ambiente {{site.data.keyword.Bluemix_dedicated_notm}}. Entrambe le VLAN comunicano con i nodi di lavoro ma la VLAN pubblica anche con il master Kubernetes gestito da IBM. Puoi utilizzare la stessa VLAN per più cluster.
+        **Nota**: se i nodi di lavoro sono impostati solo con una VLAN privata, devi configurare una soluzione alternativa per la connettività di rete. Per ulteriori informazioni, vedi [Connessione VLAN per i nodi di lavoro](cs_clusters.html#worker_vlan_connection).
+
+    8. Per impostazione predefinita, **Codifica disco locale** è selezionato. Se scegli di deselezionare la casella di spunta, i dati Docker dell'host non vengono codificati.[Ulteriori informazioni sulla codifica](cs_secure.html#encrypted_disks).
+
+6. Fai clic su **Crea cluster**. Puoi vedere lo stato di avanzamento della distribuzione del nodo di lavoro nella scheda **Nodi di lavoro**. Quando la distribuzione è terminata, puoi vedere se il tuo cluster è pronto nella scheda **Panoramica**.
+    **Nota:** a ogni nodo di lavoro viene assegnato
+un ID e nome dominio univoco che non deve essere modificato manualmente dopo la creazione del
+cluster. La modifica dell'ID o del nome dominio impedisce al master Kubernetes di gestire il tuo cluster.
 
 ### Creazione dei cluster con la CLI
 {: #dedicated_creating_cli}
@@ -244,12 +307,11 @@ il provisioning. Nella scheda **Nodi di lavoro**, puoi visualizzare l'andamento 
     Esempio:
 
     ```
-    bx cs cluster-create --location <location> --machine-type <machine-type> --name <cluster_name> --workers <number>
+    bx cs cluster-create --location <location> --machine-type <machine_type> --name <cluster_name> --workers <number>
     ```
     {: pre}
 
     <table>
-    <caption>Descrizione dei componenti di questo comando</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Icona Idea"/> Descrizione dei componenti di questo comando</th>
     </thead>
@@ -260,19 +322,41 @@ il provisioning. Nella scheda **Nodi di lavoro**, puoi visualizzare l'andamento 
     </tr>
     <tr>
     <td><code>--location <em>&lt;location&gt;</em></code></td>
-    <td>Sostituisci &lt;location&gt; con l'ID ubicazione {{site.data.keyword.Bluemix_notm}} che il tuo ambiente dedicato è configurato a utilizzare.</td>
+    <td>Immetti l'ID ubicazione {{site.data.keyword.Bluemix_notm}} che il tuo ambiente dedicato è configurato a utilizzare. </td>
     </tr>
     <tr>
     <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
-    <td>Se stai creando un cluster standard, scegli un tipo di macchina. Il tipo di macchina specifica le risorse di calcolo virtuali che sono disponibili per ogni nodo di lavoro. Controlla [Confronto tra i cluster standard e gratuito per {{site.data.keyword.containershort_notm}}](cs_why.html#cluster_types) per ulteriori informazioni. Per i cluster gratuiti, non devi definire il tipo di macchina.</td>
+    <td>Immetti un tipo di macchina. Puoi distribuire i tuoi nodi di lavoro come macchine virtuali su hardware dedicato o come macchine fisiche su bare metal. I tipi di macchine fisiche e virtuali disponibili variano in base all'ubicazione in cui viene distribuito il cluster. Per ulteriori informazioni, consulta la documentazione per il [comando](cs_cli_reference.html#cs_machine_types) `bx cs machine-type`.</td>
     </tr>
     <tr>
+    <td><code>--public-vlan <em>&lt;machine_type&gt;</em></code></td>
+    <td>Immetti l'Id della VLAN pubblica che il tuo ambiente dedicato è configurato a utilizzare. Se vuoi collegare i tuoi nodi di lavoro solo a una VLAN privata, non specificare questa opzione. **Nota**: se i nodi di lavoro sono impostati solo con una VLAN privata, devi configurare una soluzione alternativa per la connettività di rete. Per ulteriori informazioni, vedi [Connessione VLAN per i nodi di lavoro](cs_clusters.html#worker_vlan_connection).</td>
+    </tr>
+    <tr>
+    <td><code>--private-vlan <em>&lt;machine_type&gt;</em></code></td>
+    <td>Immetti l'ID della VLAN privata che il tuo ambiente dedicato è configurato a utilizzare. </td>
+    </tr>  
+    <tr>
     <td><code>--name <em>&lt;name&gt;</em></code></td>
-    <td>Sostituisci <em>&lt;name&gt;</em> con un nome per il tuo cluster. Il nome deve iniziare con una lettera, può contenere lettere, numeri e - e non può contenere più di 35 caratteri. Nota che il dominio secondario Ingress assegnato da {{site.data.keyword.IBM_notm}} viene derivato dal nome del cluster. Il nome del cluster e il dominio secondario Ingress formano insieme il nome di dominio completo, che deve essere univoco all'interno di una regione e contenere 63 caratteri o meno. Per soddisfare questi requisiti, il nome del cluster potrebbe essere troncato o al dominio secondario potrebbero essere assegnati valori carattere casuali.</td>
+    <td>Immetti un nome per il tuo cluster. Il nome deve iniziare con una lettera, può contenere lettere, numeri e un trattino (-) e non può contenere più di 35 caratteri. Nota che il nome cluster e la regione in cui viene distribuito il cluster formano il nome dominio completo per il dominio secondario Ingress. Per garantire che il dominio secondario Ingress sia univoco all'interno di una regione, è possibile che il nome cluster venga troncato e vi venga aggiunto un valore casuale all'interno del nome dominio Ingress.
+</td>
     </tr>
     <tr>
     <td><code>--workers <em>&lt;number&gt;</em></code></td>
-    <td>Il numero di nodi di lavoro da includere nel cluster. Se non viene specificata l'opzione <code>--workers</code>, viene creato un nodo di lavoro.</td>
+    <td>Immetti il numero di nodi di lavoro da includere nel cluster. Se non viene specificata l'opzione <code>--workers</code>, viene creato un nodo di lavoro.</td>
+    </tr>
+    <tr>
+    <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
+    <td>La versione di Kubernetes per il nodo master del cluster. Questo valore è facoltativo. Quando la versione non viene specificata, il cluster viene creato con l'impostazione predefinita delle versioni di Kubernetes supportate. Per visualizzare le versioni disponibili. esegui <code>bx cs kube-versions</code>.
+</td>
+    </tr>
+    <tr>
+    <td><code>--disable-disk-encrypt</code></td>
+    <td>I nodi di lavoro dispongono della [codifica del disco](cs_secure.html#encrypted_disks) per impostazione predefinita. Se vuoi disabilitare la codifica, includi questa opzione.</td>
+    </tr>
+    <tr>
+    <td><code>--trusted</code></td>
+    <td>Abilita [Trusted Compute](cs_secure.html#trusted_compute) per verificare i tentativi di intrusione nei tuoi nodi di lavoro bare metal. Se non abiliti l'attendibilità durante la creazione del cluster ma vuoi farlo in seguito, puoi usare il [comando](cs_cli_reference.html#cs_cluster_feature_enable) `bx cs feature-enable`. Dopo aver abilitato l'attendibilità, non puoi disabilitarla successivamente.</td>
     </tr>
     </tbody></table>
 
@@ -283,28 +367,30 @@ il provisioning. Nella scheda **Nodi di lavoro**, puoi visualizzare l'andamento 
     ```
     {: pre}
 
-    **Nota:** servono fino a 15 minuti perché le macchine del nodo di lavoro siano ordinate e che il cluster sia configurato e ne sia stato eseguito il provisioning al tuo account.
+    **Nota:** per le macchine virtuali, possono essere necessari alcuni minuti per l'ordine delle macchine del nodo di lavoro e per la configurazione e il provisioning del cluster nel tuo account. Il provisioning delle macchine fisiche bare metal viene eseguito tramite l'interazione manuale con l'infrastruttura Cloud IBM (SoftLayer) e il completamento di questo processo può richiedere più di un giorno lavorativo.
 
     Quando è stato terminato il provisioning del tuo cluster, lo stato del tuo cluster viene modificato in **distribuito**.
 
     ```
     Name         ID                                   State      Created          Workers   Location   Version
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         dal10      1.8.8
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.8.11
     ```
     {: screen}
 
 6.  Controlla lo stato dei nodi di lavoro.
 
     ```
-    bx cs workers <cluster>
+    bx cs workers <cluster_name_or_ID>
     ```
     {: pre}
 
     Quando i nodi di lavoro sono pronti, la condizione passa a **normale** e lo stato è **Pronto**. Quando lo stato del nodo è **Pronto**, puoi accedere al cluster.
 
+    **Nota:** a ogni nodo di lavoro viene assegnato un ID e nome dominio univoco che non deve essere modificato manualmente dopo la creazione del cluster. La modifica dell'ID o del nome dominio impedisce al master Kubernetes di gestire il tuo cluster.
+
     ```
-    ID                                                  Public IP        Private IP     Machine Type   State      Status   Location   Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.47.223.113   10.171.42.93   free           normal     Ready    dal10      1.8.8
+    ID                                                 Public IP       Private IP      Machine Type   State    Status   Location   Version
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01      1.8.11
     ```
     {: screen}
 
@@ -313,7 +399,7 @@ il provisioning. Nella scheda **Nodi di lavoro**, puoi visualizzare l'andamento 
     1.  Richiama il comando per impostare la variabile di ambiente e scaricare i file di configurazione Kubernetes.
 
         ```
-        bx cs cluster-config <cluster_name_or_id>
+        bx cs cluster-config <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -367,6 +453,7 @@ il provisioning. Nella scheda **Nodi di lavoro**, puoi visualizzare l'andamento 
 ### Utilizzo dei registri di immagini pubblici e privati
 {: #dedicated_images}
 
+
 Per i nuovi spazi dei nomi, vedi le opzioni in [Utilizzo dei registri di immagini pubblici e privati con {{site.data.keyword.containershort_notm}}](cs_images.html). Per gli spazi dei nomi configurati per i gruppi di contenitori singoli e scalabili, [utilizza un token e crea un segreto Kubernetes](cs_dedicated_tokens.html#cs_dedicated_tokens) per l'autenticazione.
 
 ### Aggiunta di sottoreti ai cluster
@@ -386,7 +473,7 @@ Requisiti:
 
 Prima di iniziare: configura l'instradamento del traffico di rete in entrata e in uscita della tua rete aziendale alla rete {{site.data.keyword.Bluemix_dedicated_notm}} che utilizzerà la sottorete gestita dall'utente.
 
-1. Per utilizzare la tua propria sottorete, [apri un ticket di supporto](/docs/get-support/howtogetsupport.html#getting-customer-support) e fornisci l'elenco dei CIDR della sottorete che vuoi utilizzare.
+1. Per utilizzare la tua propria sottorete, [apri un ticket di supporto](cs_troubleshoot_network.html#ts_getting_help) e fornisci l'elenco dei CIDR della sottorete che vuoi utilizzare.
     **Nota**: il modo in cui ALB e i programmi di bilanciamento del carico vengono gestiti per un account interno e in loco si differenzia a seconda del formato del CIDR della sottorete. Consulta il passo finale per le differenze di configurazione.
 
 2. Dopo che {{site.data.keyword.IBM_notm}} ha eseguito il provisioning delle sottoreti gestite dall'utente, rendi una sottorete disponibile al tuo cluster Kubernetes.
@@ -397,7 +484,7 @@ Prima di iniziare: configura l'instradamento del traffico di rete in entrata e i
     {: pre}
     Sostituisci <em>&lt;cluster_name&gt;</em> con il nome o l'ID del tuo cluster, <em>&lt;subnet_CIDR&gt;</em> con uno dei CIDR della sottorete che hai fornito nel ticket di supporto e <em>&lt;private_VLAN&gt;</em> con un ID della VLAN privata disponibile. Puoi trovare l'ID di una VLAN privata disponibile eseguendo `bx cs vlans`.
 
-3. Verifica che le sottoreti siano state aggiunte al tuo cluster. Il campo **Gestito dall'utente** per le sottoreti fornite dall'utente è _true_.
+3. Verifica che le sottoreti siano state aggiunte al tuo cluster. Il campo **Gestito dall'utente** per le sottoreti fornite dall'utente è _`true`_.
 
     ```
     bx cs cluster-get --showResources <cluster_name>
@@ -407,17 +494,17 @@ Prima di iniziare: configura l'instradamento del traffico di rete in entrata e i
     ```
     VLANs
     VLAN ID   Subnet CIDR         Public       User-managed
-    1555503   192.0.2.0/24        true         false
-    1555505   198.51.100.0/24     false        false
-    1555505   203.0.113.0/24      false        true
+    1555503   169.xx.xxx.xxx/24   true         false
+    1555505   10.xxx.xx.xxx/24    false        false
+    1555505   10.xxx.xx.xxx/24    false        true
     ```
     {: screen}
 
 4. Facoltativo: [abilita l'instradamento tra sottoreti sulla stessa VLAN](cs_subnets.html#vlan-spanning).
 
 5. Per configurare la connettività dell'account interna e in loco, scegli tra queste opzioni:
-  - Se hai utilizzato un intervallo di IP privato 10.x.x.x per la sottorete, utilizza gli IP validi da tale intervallo per configurare la connettività dell'account interna e in loco con Ingress e un programma di bilanciamento del carico. Per ulteriori informazioni, consulta [Configurazione dell'accesso a un'applicazione](cs_network_planning.html#planning).
-  - Se non hai utilizzato un intervallo di IP privato 10.x.x.x per la sottorete, utilizza gli IP validi da tale intervallo per configurare la connettività in loco con Ingress e un programma di bilanciamento del carico. Per ulteriori informazioni, consulta [Configurazione dell'accesso a un'applicazione](cs_network_planning.html#planning). Tuttavia, devi utilizzare una sottorete privata portatile dell'infrastruttura IBM Cloud (SoftLayer) per configurare la connettività dell'account interna tra il tuo cluster e altri servizi basati su Cloud Foundry. Puoi creare una sottorete privata portatile con il comando [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add). Per questo scenario, il tuo cluster ha una sottorete gestita dall'utente per la connettività in loco e una sottorete privata portatile dell'infrastruttura IBM Cloud (SoftLayer) per la connettività dell'account interna.
+  - Se hai utilizzato un intervallo di IP privato 10.x.x.x per la sottorete, utilizza gli IP validi da tale intervallo per configurare la connettività dell'account interna e in loco con Ingress e un programma di bilanciamento del carico. Per ulteriori informazioni, vedi [Pianificazione della rete con i servizi NodePort, LoadBalancer o Ingress](cs_network_planning.html#planning).
+  - Se non hai utilizzato un intervallo di IP privato 10.x.x.x per la sottorete, utilizza gli IP validi da tale intervallo per configurare la connettività in loco con Ingress e un programma di bilanciamento del carico. Per ulteriori informazioni, vedi [Pianificazione della rete con i servizi NodePort, LoadBalancer o Ingress](cs_network_planning.html#planning).Tuttavia, devi utilizzare una sottorete privata portatile dell'infrastruttura IBM Cloud (SoftLayer) per configurare la connettività dell'account interna tra il tuo cluster e altri servizi basati su Cloud Foundry. Puoi creare una sottorete privata portatile con il comando [`bx cs cluster-subnet-add`](cs_cli_reference.html#cs_cluster_subnet_add). Per questo scenario, il tuo cluster ha una sottorete gestita dall'utente per la connettività in loco e una sottorete privata portatile dell'infrastruttura IBM Cloud (SoftLayer) per la connettività dell'account interna.
 
 ### Configurazione degli altri cluster
 {: #dedicated_other}
@@ -444,6 +531,8 @@ Puoi utilizzare le tecniche Kubernetes per distribuire le applicazioni nei clust
 
 Per distribuire le applicazioni nei cluster, puoi seguire le istruzioni per la [distribuzione delle applicazioni nei cluster {{site.data.keyword.Bluemix_notm}} pubblico](cs_app.html#app). Controlla le seguenti differenze per i cluster {{site.data.keyword.Bluemix_dedicated_notm}}.
 
+
+
 ### Consentire l'accesso pubblico alle applicazioni
 {: #dedicated_apps_public}
 
@@ -452,14 +541,15 @@ Per gli ambienti {{site.data.keyword.Bluemix_dedicated_notm}}, gli indirizzi IP 
 #### Configurazione dell'accesso a un'applicazione utilizzando il tipo di servizio LoadBalancer
 {: #dedicated_apps_public_load_balancer}
 
-Se vuoi utilizzare gli indirizzi IP pubblici per il programma di bilanciamento del carico, assicurati che sia stata fornita una whitelist di firewall aziendali a IBM o [apri un ticket di supporto](/docs/get-support/howtogetsupport.html#getting-customer-support) per configurare la whitelist di firewall. Quindi segui la procedura in [Configurazione dell'accesso a un'applicazione utilizzando il tipo di servizio LoadBalancer](cs_loadbalancer.html#config).
+Se vuoi utilizzare gli indirizzi IP pubblici per il programma di bilanciamento del carico, assicurati che sia stata fornita una whitelist di firewall aziendali a IBM o [apri un ticket di supporto](cs_troubleshoot_network.html#ts_getting_help) per configurare la whitelist di firewall. Quindi segui la procedura presente in [Esposizione delle applicazioni con LoadBalancers](cs_loadbalancer.html).
 
 #### Configurazione dell'accesso pubblico a un'applicazione utilizzando Ingress
 {: #dedicated_apps_public_ingress}
 
-Se vuoi utilizzare gli indirizzi IP pubblici per il programma di bilanciamento del carico dell'applicazione, assicurati che sia stata fornita una whitelist di firewall aziendali a IBM o [apri un ticket di supporto](/docs/get-support/howtogetsupport.html#getting-customer-support) per configurare la whitelist di firewall. Quindi segui la procedura in [Configurazione dell'accesso a un'applicazione utilizzando Ingress](cs_ingress.html#configure_alb).
+Se vuoi utilizzare gli indirizzi IP pubblici per il programma di bilanciamento del carico dell'applicazione, assicurati che sia stata fornita una whitelist di firewall aziendali a IBM o [apri un ticket di supporto](cs_troubleshoot_network.html#ts_getting_help) per configurare la whitelist di firewall. Quindi segui la procedura presente in [Esposizione delle applicazioni in pubblico](cs_ingress.html#ingress_expose_public).
 
 ### Creazione di archiviazione persistente
 {: #dedicated_apps_volume_claim}
 
-Per controllare le opzioni per la creazione dell'archiviazione persistente, consulta [Archiviazione dati persistente](cs_storage.html#planning). Per richiedere un backup per i volumi, un ripristino dai volumi e altre funzioni di archiviazione, devi [aprire un ticket di supporto](/docs/get-support/howtogetsupport.html#getting-customer-support).
+Per controllare le opzioni per la creazione dell'archiviazione persistente, consulta [Archiviazione dati persistente](cs_storage.html#planning). Per richiedere un backup per i volumi, un ripristino dai volumi e altre funzioni di archiviazione, devi [aprire un ticket di supporto](cs_troubleshoot_storage.html#ts_getting_help).
+

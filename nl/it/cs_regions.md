@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-13"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -23,7 +23,7 @@ lastupdated: "2018-03-13"
 
 ![{{site.data.keyword.containershort_notm}} - Regioni e data center](/images/regions.png)
 
-Figura. Regioni e data center {{site.data.keyword.containershort_notm}}
+Regioni e data center {{site.data.keyword.containershort_notm}}
 
 Regioni {{site.data.keyword.containershort_notm}} supportate:
   * Asia Pacifico Nord
@@ -149,4 +149,5 @@ Le risorse del tuo cluster rimangono nell'ubicazione (data center) in cui è dis
 
 ![Descrizione della posizione in cui risiedono le risorse del cluster](/images/region-cluster-resources.png)
 
-Figura. Descrizione della posizione in cui risiedono le risorse del cluster.
+Descrizione della posizione in cui risiedono le risorse del cluster.
+

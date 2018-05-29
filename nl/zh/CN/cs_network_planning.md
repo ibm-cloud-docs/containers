@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -16,7 +16,7 @@ lastupdated: "2018-03-16"
 {:download: .download}
 
 
-# 规划外部联网
+# 使用 NodePort、LoadBalancer 或 Ingress 服务规划联网
 {: #planning}
 
 在 {{site.data.keyword.containerlong}} 中创建 Kubernetes 集群时，每个集群都必须连接到一个公共 VLAN。公共 VLAN 用于确定在集群创建期间分配给工作程序节点的公共 IP 地址。
@@ -28,7 +28,6 @@ lastupdated: "2018-03-16"
 |------------|------------------------------------------|
 |{{site.data.keyword.Bluemix_notm}} 中的免费集群|{{site.data.keyword.IBM_notm}}|
 |{{site.data.keyword.Bluemix_notm}} 中的标准集群|您通过您的 IBM Cloud infrastructure (SoftLayer) 帐户|
-{: caption="VLAN 管理责任" caption-side="top"}
 
 有关工作程序节点与 pod 之间的集群内网络通信的信息，请参阅[集群内联网](cs_secure.html#in_cluster_network)。有关将 Kubernetes 集群中运行的应用程序安全连接到内部部署网络或连接到集群外部的应用程序的信息，请参阅[设置 VPN 连接](cs_vpn.html)。
 
@@ -67,7 +66,7 @@ lastupdated: "2018-03-16"
  <ul>
   <li>通过创建一个外部 HTTP 或 HTTPS、TCP 或 UDP 负载均衡器来使用安全的唯一公共入口点将入局请求路由到集群中的多个应用程序，从而公开这些应用程序。</li>
   <li>您可以使用一个公用路径，将集群中的多个应用程序显示为服务。</li>
-  <li>Ingress 由两个主要组件组成：Ingress 资源和应用程序负载均衡器。
+  <li>Ingress 由两个组件组成：
    <ul>
     <li>Ingress 资源用于定义如何对应用程序的入局请求进行路由和负载均衡的规则。</li>
     <li>应用程序负载均衡器 (ALB) 侦听入局 HTTP 或 HTTPS、TCP 或 UDP 服务请求，并根据 Ingress 资源中定义的规则在各个应用程序 pod 之间转发请求。</li>
@@ -80,7 +79,8 @@ lastupdated: "2018-03-16"
 
 <img usemap="#networking_map" border="0" class="image" src="images/networkingdt.png" width="500px" alt="此图像指导您选择应用程序的最佳联网选项。如果此图像未显示，仍可在文档这找到此信息。" style="width:500px;" />
 <map name="networking_map" id="networking_map">
-<area href="/docs/containers/cs_nodeport.html#planning" alt="Nodeport 服务" shape="circle" coords="52, 283, 45"/>
-<area href="/docs/containers/cs_loadbalancer.html#planning" alt="LoadBalancer 服务" shape="circle" coords="247, 419, 44"/>
-<area href="/docs/containers/cs_ingress.html#planning" alt="Ingress 服务" shape="circle" coords="445, 420, 45"/>
+<area href="/docs/containers/cs_nodeport.html" alt="Nodeport 服务" shape="circle" coords="52, 283, 45"/>
+<area href="/docs/containers/cs_loadbalancer.html" alt="LoadBalancer 服务" shape="circle" coords="247, 419, 44"/>
+<area href="/docs/containers/cs_ingress.html" alt="Ingress 服务" shape="circle" coords="445, 420, 45"/>
 </map>
+

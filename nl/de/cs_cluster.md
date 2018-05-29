@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-08"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -55,3 +55,4 @@ Aktuelle Informationen finden Sie an der neuen Position:
     - [Zustandsüberwachung für Workerknoten mit automatischer Wiederherstellung konfigurieren](cs_health.html#autorecovery)
 - [Kubernetes-Clusterressourcen grafisch darstellen](cs_integrations.html#weavescope)
 - [Cluster entfernen](cs_clusters.html#remove)
+

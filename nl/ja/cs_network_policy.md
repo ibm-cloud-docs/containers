@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-02-27"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -24,7 +24,7 @@ Kubernetes クラスターはそれぞれ、Calico と呼ばれるネットワ�
 固有のセキュリティー要件があるときには、Calico および Kubernetes のネイティブ機能を使用してクラスター用のネットワーク・ポリシーをさらに構成できます。 これらのネットワーク・ポリシーは、クラスター内のポッドを出入りするネットワーク・トラフィックのどれを許可し、どれをブロックするかを指定します。 手始めには Kubernetes のネットワーク・ポリシーを使用することができますが、より堅牢な機能が必要であれば Calico のネットワーク・ポリシーを使用してください。
 
 <ul>
-  <li>[Kubernetes ネットワーク・ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/services-networking/network-policies/): 相互通信できるポッドを指定するなど、いくつかの基本的なオプションが用意されています。 特定のプロトコルとポートにおいて、着信ネットワーク・トラフィックを許可またはブロックできます。 このトラフィックは、他のポッドに接続しようとしているポッドのラベルと Kubernetes 名前空間に基づいて、フィルターに掛けることができます。</br>これらのポリシーは `kubectl` コマンドまたは Kubernetes API を使用して適用できます。これらのポリシーが適用されると、Calico ネットワーク・ポリシーに変換され、Calico がこれらのポリシーを実施します。</li>
+  <li>[Kubernetes ネットワーク・ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/services-networking/network-policies/): 相互通信できるポッドを指定するなど、いくつかの基本的なオプションが用意されています。 特定のプロトコルとポートにおいて、着信ネットワーク・トラフィックを許可またはブロックできます。 このトラフィックは、他のポッドに接続しようとしているポッドのラベルと Kubernetes 名前空間に基づいて、フィルターに掛けることができます。</br>これらのポリシーは `kubectl` コマンドまたは Kubernetes API を使用して適用できます。 これらのポリシーが適用されると、Calico ネットワーク・ポリシーに変換され、Calico がこれらのポリシーを実施します。</li>
   <li>[Calico ネットワーク・ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](http://docs.projectcalico.org/v2.6/getting-started/kubernetes/tutorials/advanced-policy): これらのポリシーは Kubernetes ネットワーク・ポリシーのスーパーセットであり、Kubernetes のネイティブ機能に以下の機能を追加して拡張したものです。</li>
     <ul><ul><li>Kubernetes ポッドのトラフィックだけではなく、特定のネットワーク・インターフェース上のネットワーク・トラフィックを許可またはブロックします。</li>
     <li>着信 (ingress) および発信 (egress) ネットワーク・トラフィックを許可またはブロックします。</li>
@@ -48,7 +48,6 @@ Kubernetes クラスターはそれぞれ、Calico と呼ばれるネットワ�
 
 
  <table summary="表の 1 行目は 2 列にまたがっています。残りの行は左から右に読みます。1 列目はサーバーの場所、2 列目は対応する IP アドレスです。">
- <caption>各クラスターのデフォルト・ポリシー</caption>
   <thead>
   <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> 各クラスターのデフォルト・ポリシー</th>
   </thead>
@@ -113,14 +112,14 @@ Kubernetes クラスターはそれぞれ、Calico と呼ばれるネットワ�
             -   Linux:
 
               ```
-              mv /<path_to_file>/calicoctl /usr/local/bin/calicoctl
+              mv filepath/calicoctl /usr/local/bin/calicoctl
               ```
               {: pre}
 
             -   OS X:
 
               ```
-              mv /<path_to_file>/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
+              mv filepath/calicoctl-darwin-amd64 /usr/local/bin/calicoctl
               ```
               {: pre}
 
@@ -173,7 +172,7 @@ Kubernetes クラスターはそれぞれ、Calico と呼ばれるネットワ�
         ```
         {: codeblock}
 
-        1.  `<ETCD_URL>` を取得します。 このコマンドが `calico-config not found` エラーで失敗した場合は、この[トラブルシューティング・トピック](cs_troubleshoot.html#cs_calico_fails)を参照してください。
+        1.  `<ETCD_URL>` を取得します。 このコマンドが `calico-config not found` エラーで失敗した場合は、この[トラブルシューティング・トピック](cs_troubleshoot_network.html#cs_calico_fails)を参照してください。
 
           -   Linux および OS X:
 
@@ -185,14 +184,14 @@ Kubernetes クラスターはそれぞれ、Calico と呼ばれるネットワ�
           -   出力例:
 
               ```
-              https://169.1.1.1:30001
+              https://169.xx.xxx.xxx:30001
               ```
               {: screen}
 
           -   Windows:
             <ol>
             <li>calico 構成値を構成マップから取得します。 </br><pre class="codeblock"><code>kubectl get cm -n kube-system calico-config -o yaml</code></pre></br>
-            <li>`data` セクションで、etcd_endpoints 値を見つけます。 例: <code>https://169.1.1.1:30001</code>
+            <li>`data` セクションで、etcd_endpoints 値を見つけます。 例: <code>https://169.xx.xxx.xxx:30001</code>
             </ol>
 
         2.  `<CERTS_DIR>` (Kubernetes 証明書をダウンロードしたディレクトリー) を取得します。
@@ -221,7 +220,7 @@ Kubernetes クラスターはそれぞれ、Calico と呼ばれるネットワ�
                 出力例:
 
               ```
-              C:/Users/<user>/.bluemix/plugins/container-service/<cluster_name>-admin/kube-config-prod-<location>-<cluster_name>.yml
+              C:/Users/<user>/.bluemix/plugins/container-service/mycluster-admin/kube-config-prod-dal10-mycluster.yml
               ```
               {: screen}
 
@@ -252,7 +251,7 @@ Kubernetes クラスターはそれぞれ、Calico と呼ばれるネットワ�
             -   Windows:
 
               ```
-              calicoctl get nodes --config=<path_to_>/calicoctl.cfg
+              calicoctl get nodes --config=filepath/calicoctl.cfg
               ```
               {: pre}
 
@@ -304,14 +303,14 @@ Kubernetes クラスターはそれぞれ、Calico と呼ばれるネットワ�
         -   Linux および OS X:
 
           ```
-          calicoctl apply -f <policy_file_name.yaml>
+          calicoctl apply -f policy.yaml
           ```
           {: pre}
 
         -   Windows:
 
           ```
-          calicoctl apply -f <path_to_>/<policy_file_name.yaml> --config=<path_to_>/calicoctl.cfg
+          calicoctl apply -f filepath/policy.yaml --config=filepath/calicoctl.cfg
           ```
           {: pre}
 
@@ -372,3 +371,4 @@ Calico `preDNAT` ネットワーク・ポリシーは、[Calico ネットワー�
   calicoctl apply -f deny-kube-node-port-services.yaml
   ```
   {: pre}
+

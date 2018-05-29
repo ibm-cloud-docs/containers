@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-03-16"
+lastupdated: "2018-4-20"
 
 ---
 
@@ -24,14 +24,22 @@ lastupdated: "2018-03-16"
 
 {{site.data.keyword.containershort_notm}}에서 사용자는 클러스터에 네트워크 서브넷을 추가하여 Kubernetes 서비스에 대한 안정적인 포터블 IP를 추가할 수 있습니다. 이 경우 서브넷은 하나 이상의 클러스터 전체에 걸쳐 연결성을 작성하기 위해 넷마스킹과 함께 사용되지 않습니다. 대신 서브넷은 클러스터에서 해당 서비스에 액세스할 때 사용될 수 있는 영구적인 고정 IP를 서비스에 제공하는 데 사용됩니다.
 
-표준 클러스터를 작성하면 {{site.data.keyword.containershort_notm}}가 포터블 공인 서브넷에 5개의 공인 IP 주소를, 포터블 사설 서브넷에 5개의 사설 IP 주소를 자동으로 프로비저닝합니다. 포터블 공인 및 사설 IP 주소는 정적이며 작업자 노드 또는 클러스터가 제거되더라도 변경되지 않습니다. 각 서브넷에 대해 포터블 공인 IP 주소 중 하나와 포터블 사설 IP 주소 중 하나는 클러스터에서 다중 앱을 노출하는 데 사용할 수 있는 [애플리케이션 로드 밸런서](cs_ingress.html)에 사용됩니다. 나머지 네 개의 포터블 공인 IP 주소 및 네 개의 포터블 사설 IP 주소는 [로드 밸런서 서비스 작성](cs_loadbalancer.html)을 통해 단일 앱을 공용으로 노출하는 데 사용될 수 있습니다.
+<dl>
+  <dt>클러스터 작성이 기본적으로 서브넷 작성을 포함함</dt>
+  <dd>표준 클러스터를 작성할 때 {{site.data.keyword.containershort_notm}}가 자동으로 다음 서브넷을 프로비저닝합니다.
+    <ul><li>5개의 공인 IP 주소를 포함하는 포터블 공인 서브넷</li>
+      <li>5개의 사설 IP 주소를 포함하는 포터블 사설 서브넷</li></ul>
+      포터블 공인 및 사설 IP 주소는 정적이며 작업자 노드가 제거될 때 변경되지 않습니다. 각 서브넷에서 포터블 공인 IP 주소 중 하나와 포터블 사설 IP 주소 중 하나는 클러스터의 여러 앱을 노출시키는 데 사용할 수 있는 [Ingress 애플리케이션 로드 밸런서](cs_ingress.html)에 사용됩니다. 나머지 네 개의 포터블 공인 IP 주소 및 네 개의 포터블 사설 IP 주소는 [로드 밸런서 서비스 작성](cs_loadbalancer.html)을 통해 단일 앱을 공용 또는 사설 네트워크에 노출시키는 데 사용할 수 있습니다. </dd>
+  <dt>[자신의 고유 기존 서브넷 주문 및 관리](#custom)</dt>
+  <dd>자동으로 프로비저닝된 서브넷을 사용하는 대신 IBM Cloud 인프라(SoftLayer) 계정에 있는 기존 포터블 서브넷을 주문하고 관리할 수 있습니다. 클러스터 제거 및 작성 간에 안정된 정적 IP를 유지하거나, 더 큰 IP 블록을 주문하려면 이 옵션을 사용하십시오. 먼저 `cluster-create --no-subnet` 명령을 사용하여 서브넷 없는 클러스터를 작성한 후, `cluster-subnet-add` 명령을 사용하여 클러스터에 서브넷을 추가하십시오. </dd>
+</dl>
 
-**참고:** 포터블 공인 IP 주소는 월별로 비용이 청구됩니다. 클러스터가 프로비저닝된 후에 포터블 공인 IP 주소를 제거하도록 선택한 경우, 비록 짧은 시간 동안만 사용했어도 월별 비용을 계속 지불해야 합니다.
+**참고:** 포터블 공인 IP 주소는 월별로 비용이 청구됩니다. 클러스터가 프로비저닝된 후 포터블 공인 IP 주소를 제거한 경우, 짧은 시간 동안만 사용한 경우에도 월별 비용은 여전히 지불해야 합니다. 
 
 ## 클러스터에 대한 추가 서브넷 요청
 {: #request}
 
-클러스터에 서브넷을 지정하여 클러스터에 안정적인 포터블 공인 또는 사설 IP를 추가할 수 있습니다.
+클러스터에 서브넷을 지정하여 클러스터에 안정적, 포터블 공인 또는 사설 IP를 추가할 수 있습니다.
 {:shortdesc}
 
 **참고:** 클러스터에 서브넷을 사용 가능하게 하면 이 서브넷의 IP 주소가 클러스터 네트워킹 목적으로 사용됩니다. IP 주소 충돌을 피하려면 한 개의 클러스터만 있는 서브넷을 사용해야 합니다. 동시에
@@ -50,7 +58,6 @@ IBM Cloud 인프라(SoftLayer) 계정에서 서브넷을 작성하고 지정된 
     {: pre}
 
     <table>
-    <caption>이 명령의 컴포넌트 이해</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> 이 명령의 컴포넌트 이해</th>
     </thead>
@@ -76,7 +83,7 @@ IBM Cloud 인프라(SoftLayer) 계정에서 서브넷을 작성하고 지정된 
 2.  서브넷이 정상적으로 작성되어 클러스터에 추가되었는지 확인하십시오. 서브넷 CIDR이 **VLAN** 섹션에 나열됩니다.
 
     ```
-    bx cs cluster-get --showResources <cluster name or id>
+    bx cs cluster-get --showResources <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -85,17 +92,24 @@ IBM Cloud 인프라(SoftLayer) 계정에서 서브넷을 작성하고 지정된 
 <br />
 
 
-## Kubernetes 클러스터에 사용자 정의 및 기존 서브넷 추가
+## Kubernetes 클러스터에서 사용자 정의 및 기존 서브넷 추가 또는 재사용
 {: #custom}
 
-Kubernetes 클러스터에 기존의 포터블 공인 또는 사설 서브넷을 추가할 수 있습니다.
+기존 포터블 공인 또는 사설 서브넷을 Kubernetes 클러스터에 추가하거나 삭제된 클러스터의 서브넷을 재사용할 수 있습니다.
 {:shortdesc}
 
-시작하기 전에 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
+시작하기 전에 다음 작업을 수행하십시오. 
+- 클러스터를 [CLI의 대상으로 지정](cs_cli_install.html#cs_cli_configure)하십시오.
+- 더 이상 필요하지 않은 클러스터의 서브넷을 재사용하려면 필요하지 않은 클러스터를 삭제하십시오. 해당 서브넷은 24시간 내에 삭제됩니다. 
+
+   ```
+   bx cs cluster-rm <cluster_name_or_ID
+   ```
+   {: pre}
 
 사용자 정의 방화벽 규칙 또는 사용 가능한 IP 주소를 사용하여 IBM Cloud 인프라(SoftLayer) 포트폴리오의 기존 서브넷을 사용하려면 다음을 수행하십시오.
 
-1.  사용할 서브넷을 식별하십시오. 서브넷의 ID 및 VLAN ID를 기록해 두십시오. 이 예제에서 서브넷 ID는 807861이며 VLAN ID는 1901230입니다.
+1.  사용할 서브넷을 식별하십시오. 서브넷의 ID 및 VLAN ID를 기록해 두십시오. 이 예에서 서브넷 ID는 `1602829`이며 VLAN ID는 `2234945`입니다. 
 
     ```
      bx cs subnets
@@ -105,9 +119,9 @@ Kubernetes 클러스터에 기존의 포터블 공인 또는 사설 서브넷을
     ```
     Getting subnet list...
     OK
-    ID        Network                                      Gateway                                   VLAN ID   Type      Bound Cluster   
-    553242    203.0.113.0/24                               10.87.15.00                               1565280   private      
-    807861    192.0.2.0/24                                 10.121.167.180                            1901230   public
+    ID        Network             Gateway          VLAN ID   Type      Bound Cluster
+    1550165   10.xxx.xx.xxx/26    10.xxx.xx.xxx    2234947   private
+    1602829   169.xx.xxx.xxx/28   169.xx.xxx.xxx   2234945   public
 
     ```
     {: screen}
@@ -122,16 +136,16 @@ Kubernetes 클러스터에 기존의 포터블 공인 또는 사설 서브넷을
     ```
     Getting VLAN list...
     OK
-    ID        Name                  Number   Type      Router   
-    1900403   vlan                    1391     private   bcr01a.dal10   
-    1901230   vlan                    1180     public   fcr02a.dal10
+    ID        Name   Number   Type      Router         Supports Virtual Workers
+    2234947          1813     private   bcr01a.dal10   true
+    2234945          1618     public    fcr01a.dal10   true
     ```
     {: screen}
 
-3.  식별된 위치와 VLAN ID를 사용하여 클러스터를 작성하십시오. 새 포터블 공인 IP 서브넷 및 새 포터블 사설 IP 서브넷이 자동으로 작성되지 않도록 `--no-subnet` 플래그를 포함하십시오.
+3.  식별된 위치와 VLAN ID를 사용하여 클러스터를 작성하십시오. 기존 서브넷을 재사용하려면 새 포터블 공인 IP 서브넷 및 새 포터블 사설 IP 서브넷이 자동으로 작성되지 않도록 `--no-subnet` 플래그를 포함시키십시오. 
 
     ```
-    bx cs cluster-create --location dal10 --machine-type u2c.2x4 --no-subnet --public-vlan 1901230 --private-vlan 1900403 --workers 3 --name my_cluster
+    bx cs cluster-create --location dal10 --machine-type u2c.2x4 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
     ```
     {: pre}
 
@@ -148,7 +162,7 @@ Kubernetes 클러스터에 기존의 포터블 공인 또는 사설 서브넷을
 
     ```
     Name         ID                                   State      Created          Workers   Location   Version
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   3         dal10      1.8.8
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3         dal10      1.8.11
     ```
     {: screen}
 
@@ -163,7 +177,7 @@ Kubernetes 클러스터에 기존의 포터블 공인 또는 사설 서브넷을
 
     ```
     ID                                                  Public IP        Private IP     Machine Type   State      Status   Location   Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.47.223.113   10.171.42.93   free           normal     Ready    dal10      1.8.8
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal     Ready    dal10      1.8.11
     ```
     {: screen}
 
@@ -187,12 +201,12 @@ Kubernetes 클러스터에 기존의 포터블 공인 또는 사설 서브넷을
 
 요구사항:
 - 사용자가 관리하는 서브넷은 프라이빗 VLAN에만 추가할 수 있습니다.
-- 서브넷 접두부 길이 한계는 /24 - /30입니다. 예를 들어, `203.0.113.0/24`는 253개의 사용 가능한 사설 IP 주소를 지정하지만 `203.0.113.0/30`은 1개의 사용 가능한 사설 IP 주소를 지정합니다.
+- 서브넷 접두부 길이 한계는 /24 - /30입니다. 예를 들면, `169.xx.xxx.xxx/24`는 253개의 사용 가능한 사설 IP 주소를 지정하지만 `169.xx.xxx.xxx/30`은 1개의 사용 가능한 사설 IP 주소를 지정합니다. 
 - 서브넷의 첫 번째 IP 주소는 서브넷에 대한 게이트웨이로 사용되어야 합니다.
 
 시작하기 전에:
 - 외부 서브넷에 들어오고 나가는 네트워크 트래픽의 라우팅을 구성하십시오.
-- 온프레미스 데이터센터 게이트웨이 디바이스와 IBM Cloud 인프라(SoftLayer) 포트폴리오의 사설 네트워크 Vyatta 또는 클러스터에서 실행되는 strongSwan VPN 서비스 간의 VPN 연결이 있는지 확인하십시오. Vyatta를 사용하려면, 이 [블로그 게시물 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/)을 참조하십시오. strongSwan을 사용하려면, [strongSwan IPSec VPN 서비스와 VPN 연결 설정](cs_vpn.html)을 참조하십시오.
+- 온프레미스 데이터센터 게이트웨이 디바이스와 IBM Cloud 인프라(SoftLayer) 포트폴리오의 사설 네트워크 Vyatta 또는 클러스터에서 실행되는 strongSwan VPN 서비스 간의 VPN 연결이 있는지 확인하십시오. 자세한 정보는 [VPN 연결 설정](cs_vpn.html)을 참조하십시오. 
 
 온프레미스 네트워크의 서브넷을 추가하려면 다음을 수행하십시오.
 
@@ -205,9 +219,9 @@ Kubernetes 클러스터에 기존의 포터블 공인 또는 사설 서브넷을
 
     ```
     VLANs
-    VLAN ID   Subnet CIDR         Public       User-managed
-    1555503   192.0.2.0/24        true         false
-    1555505   198.51.100.0/24     false        false
+    VLAN ID   Subnet CIDR       Public   User-managed
+    2234947   10.xxx.xx.xxx/29  false    false
+    2234945   169.xx.xxx.xxx/29 true     false
     ```
     {: screen}
 
@@ -221,7 +235,7 @@ Kubernetes 클러스터에 기존의 포터블 공인 또는 사설 서브넷을
     예:
 
     ```
-    bx cs cluster-user-subnet-add my_cluster 203.0.113.0/24 1555505
+    bx cs cluster-user-subnet-add mycluster 10.xxx.xx.xxx/24 2234947
     ```
     {: pre}
 
@@ -234,16 +248,16 @@ Kubernetes 클러스터에 기존의 포터블 공인 또는 사설 서브넷을
 
     ```
     VLANs
-    VLAN ID   Subnet CIDR         Public       User-managed
-    1555503   192.0.2.0/24        true         false
-    1555505   198.51.100.0/24     false        false
-    1555505   203.0.113.0/24      false        true
+    VLAN ID   Subnet CIDR       Public   User-managed
+    2234947   10.xxx.xx.xxx/29  false    false
+    2234945   169.xx.xxx.xxx/29 true   false
+    2234947   10.xxx.xx.xxx/24  false    true
     ```
     {: screen}
 
 4. 선택사항: [동일한 VLAN의 서브넷 간에 라우팅 사용](#vlan-spanning)을 수행하십시오.
 
-5. 사설 네트워크를 통해 앱에 액세스하려면 사설 로드 밸런서 서비스 또는 사설 Ingress 애플리케이션 로드 밸런서를 추가하십시오. 사용자가 추가한 서브넷의 사설 IP 주소를 사용하려면 IP 주소를 지정해야 합니다. 그렇지 않으면 IBM Cloud 인프라(SoftLayer) 서브넷 또는 프라이빗 VLAN의 사용자 제공 서브넷에서 랜덤으로 IP 주소가 선택됩니다. 자세한 정보는 [로드 밸런서 서비스 유형을 사용하여 앱에 대한 액세스 구성](cs_loadbalancer.html#config) 또는 [사설 애플리케이션 로드 밸런서 사용](cs_ingress.html#private_ingress)을 참조하십시오.
+5. 사설 네트워크를 통해 앱에 액세스하려면 사설 로드 밸런서 서비스 또는 사설 Ingress 애플리케이션 로드 밸런서를 추가하십시오. 사용자가 추가한 서브넷의 사설 IP 주소를 사용하려면 IP 주소를 지정해야 합니다. 그렇지 않으면 IBM Cloud 인프라(SoftLayer) 서브넷 또는 프라이빗 VLAN의 사용자 제공 서브넷에서 랜덤으로 IP 주소가 선택됩니다. 자세한 정보는 [LoadBalancer 서비스를 사용하여 앱에 대한 공용 또는 개인용 액세스 사용 설정](cs_loadbalancer.html#config) 또는 [개인용 애플리케이션 로드 밸런서 사용 설정](cs_ingress.html#private_ingress)을 참조하십시오. 
 
 <br />
 
@@ -257,7 +271,7 @@ Kubernetes 클러스터에 기존의 포터블 공인 또는 사설 서브넷을
 ### 사용 가능한 포터블 공인 IP 주소 보기
 {: #review_ip}
 
-사용되고 사용 가능한 클러스터의 모든 IP 주소를 나열하기 위해 다음을 실행할 수 있습니다. 
+사용되고 사용 가능한 클러스터의 모든 IP 주소를 나열하기 위해 다음을 실행할 수 있습니다.
 
   ```
   kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
@@ -330,7 +344,7 @@ Kubernetes 클러스터에 기존의 포터블 공인 또는 사설 서브넷을
 2.  공인 또는 사설 IP 주소를 사용하는 로드 밸런서 서비스를 제거하십시오.
 
     ```
-    kubectl delete service <myservice>
+    kubectl delete service <service_name>
     ```
     {: pre}
 
@@ -340,6 +354,7 @@ Kubernetes 클러스터에 기존의 포터블 공인 또는 사설 서브넷을
 클러스터를 작성하는 경우 `/26`으로 끝나는 서브넷이 클러스터가 켜진 동일한 VLAN에 프로비저닝됩니다. 이 기본 서브넷은 최대 62개의 작업자 노드를 보유할 수 있습니다.
 {:shortdesc}
 
-이 62개의 작업자 노드 한계는 동일한 VLAN에 있는 단일 지역의 대형 클러스터 또는 여러 소형 클러스터에서 초과될 수 있습니다. 62개의 작업자 노드 한계에 도달하는 경우 동일한 VLAN의 두 번째 기본 서브넷이 정렬됩니다. 
+이 62개의 작업자 노드 한계는 동일한 VLAN에 있는 단일 지역의 대형 클러스터 또는 여러 소형 클러스터에서 초과될 수 있습니다. 62개의 작업자 노드 한계에 도달하는 경우 동일한 VLAN의 두 번째 기본 서브넷이 정렬됩니다.
 
 동일한 VLAN의 서브넷 간에 라우팅하려면 VLAN Spanning을 켜야 합니다. 지시사항은 [VLAN Spanning 사용 또는 사용 안함](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning)을 참조하십시오.
+
