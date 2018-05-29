@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-05-29"
 
 ---
 
@@ -38,7 +38,7 @@ Ingress consists of two components:
 <dd>The application load balancer (ALB) is an external load balancer that listens for incoming HTTP, HTTPS, TCP, or UDP service requests and forwards requests to the appropriate app pod. When you create a standard cluster, {{site.data.keyword.containershort_notm}} automatically creates a highly available ALB for your cluster and assigns a unique public route to it. The public route is linked to a portable public IP address that is provisioned into your IBM Cloud infrastructure (SoftLayer) account during cluster creation. A default private ALB is also automatically created, but is not automatically enabled.</dd>
 <dt>Ingress resource</dt>
 <dd>To expose an app by using Ingress, you must create a Kubernetes service for your app and register this service with the ALB by defining an Ingress resource. The Ingress resource is a Kubernetes resource that defines the rules for how to route incoming requests for an app. The Ingress resource also specifies the path to your app service, which is appended to the public route to form a unique app URL such as `mycluster.us-south.containers.appdomain.cloud/myapp`.
-<br></br><strong>Note</strong>: As of 24 May 2018, the Ingress subdomain format changed for new clusters.<ul><li>Clusters created after 24 May 2018 are assigned a subdomain in the new format, <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.appdomain.cloud</code>.</li><li>Clusters created before 24 May 2018 continue to use the assigned subdomain in the old format, <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>.</li></ul></dd>
+<br></br><strong>Note</strong>: As of 24 May 2018, the Ingress subdomain format changed for new clusters. If you have pipeline dependencies on app domain names, you can use your own custom domain instead of the IBM-provided Ingress subdomain.<ul><li>Clusters created after 24 May 2018 are assigned a subdomain in the new format, <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.appdomain.cloud</code>.</li><li>Clusters created before 24 May 2018 continue to use the assigned subdomain in the old format, <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>.</li></ul></dd>
 </dl>
 
 The following diagram shows how Ingress directs communication from the internet to an app:
@@ -186,7 +186,7 @@ When you configure the public ALB, you choose the domain that your apps will be 
 
 <dl>
 <dt>Domain</dt>
-<dd>You can use the IBM-provided domain, such as <code>mycluster-12345.us-south.containers.appdomain.cloud/myapp</code>, to access your app from the internet. To use a custom domain instead, you can map your custom domain to the IBM-provided domain or the ALB's public IP address.</dd>
+<dd>You can use the IBM-provided domain, such as <code>mycluster-12345.us-south.containers.appdomain.cloud/myapp</code>, to access your app from the internet. To use a custom domain instead, you can set up a CNAME record to map your custom domain to the IBM-provided domain or set up an A record with your DNS provider using the ALB's public IP address.</dd>
 <dt>TLS termination</dt>
 <dd>The ALB load balances HTTP network traffic to the apps in your cluster. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster. If you are using the IBM-provided Ingress subdomain, you can use the IBM-provided TLS certificate. TLS is not currently supported for IBM-provided wildcard subdomains. If you are using a custom domain, you can use your own TLS certificate to manage TLS termination.</dd>
 </dl>
@@ -501,7 +501,7 @@ When you configure the public ALB, you choose the domain that your apps will be 
 
 <dl>
 <dt>Domain</dt>
-<dd>You can use the IBM-provided domain, such as <code>mycluster-12345.us-south.containers.appdomain.cloud/myapp</code>, to access your app from the internet. To use a custom domain instead, you can map your custom domain to the IBM-provided domain or the ALB's public IP address.</dd>
+<dd>You can use the IBM-provided domain, such as <code>mycluster-12345.us-south.containers.appdomain.cloud/myapp</code>, to access your app from the internet. To use a custom domain instead, you can set up a CNAME record to map your custom domain to the IBM-provided domain or set up an A record with your DNS provider using the ALB's public IP address.</dd>
 <dt>TLS termination</dt>
 <dd>The ALB load balances HTTP network traffic to the apps in your cluster. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster. If you are using the IBM-provided Ingress subdomain, you can use the IBM-provided TLS certificate. TLS is not currently supported for IBM-provided wildcard subdomains. If you are using a custom domain, you can use your own TLS certificate to manage TLS termination.</dd>
 </dl>
