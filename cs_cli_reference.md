@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-29"
+lastupdated: "2018-05-30"
 
 ---
 
@@ -2649,7 +2649,7 @@ View a list of worker nodes and the status for each in a cluster.
   bx cs workers my_cluster
   ```
   {: pre}
-  
+
  in which you deploy the cluster. For more information, see the documentation for the `bx cs machine-types` [command](cs_cli_reference.html#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
 
   <dt><code>--size-per-zone <em>WORKERS_PER_ZONE</em></code></dt>
@@ -2696,9 +2696,9 @@ View the details of a worker pool.
   bx cs worker-pool-get --worker-pool pool1 --cluster my_cluster
   ```
   {: pre}
-  
+
 **Example output**:
-  
+
   ```
   Name:               pool   
   ID:                 a1a11b2222222bb3c33c3d4d44d555e5-f6f777g   
@@ -2708,7 +2708,7 @@ View the details of a worker pool.
   Workers per zone:   3   
   Machine type:       b2c.4x16.encrypted   
   Labels:             -   
-  Version:            1.9.7_1512 
+  Version:            1.9.7_1512
   ```
   {: screen}
 
@@ -2803,7 +2803,7 @@ Update all of the worker nodes in your pool to the latest Kubernetes version tha
     <dd>The name of the worker node pool that you want to update. This value is required.</dd>
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster for which you want to update worker pools. This value is required.</dd>
-  <dt><code>-f</code></dt> 
+  <dt><code>-f</code></dt>
     <dd>Force the update with no user prompts. This value is optional.</dd>
   <dt><code>-s</code></dt>
     <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -2861,7 +2861,7 @@ View the worker pools that you have in a cluster.
 
   <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
     <dd>The ID of the public VLAN. This value is required if you want to expose workloads on the nodes to the public. It must match the public VLAN ID of one or more of the worker nodes in the cluster. To see the VLANs that you have available, run <code>bx cs cluster-get --cluster &lt;cluster&gt; --showResources</code>. If you do not have any VLANs available, you can <a href="/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning" >enable VLAN spanning</a> for your account.<br><br>**Note**: New worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.</dd>
-    
+
   <dt><code>--json</code></dt>
     <dd>Prints the command output in JSON format. This value is optional.</dd>
 
@@ -2898,7 +2898,7 @@ View the worker pools that you have in a cluster.
 
   <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
     <dd>The ID of the public VLAN. This value is required if you want to change the public VLAN for the zone. If you do not want to change the private VLAN with the public VLAN, use the same private VLAN ID. The public VLAN ID must match the public VLAN ID of one or more of the worker nodes in the cluster. To see the VLANs that you have available, run <code>bx cs cluster-get --cluster &lt;cluster&gt; --showResources</code>. If you do not have any VLANs available, you can <a href="/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning" >enable VLAN spanning</a> for your account.<br><br>**Note**: New worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.</dd>
-      
+
   <dt><code>--json</code></dt>
     <dd>Prints the command output in JSON format. This value is optional.</dd>
 
@@ -2930,7 +2930,7 @@ Before you remove a zone, make sure that you have enough worker nodes in other z
   <dt><code>--cluster <em>CLUSTER</em></code></dt>
     <dd>The name or ID of the cluster. This value is required.</dd>
 
-  <dt><code>-f</code></dt> 
+  <dt><code>-f</code></dt>
     <dd>Force the update with no user prompts. This value is optional.</dd>
 
   <dt><code>-s</code></dt>

@@ -61,33 +61,31 @@ The LoadBalancer service serves as the external entry point for incoming request
 
 
 s`.</td>
-        </tr>
-        <tr>
-          <td><code>selector</code></td>
-          <td>Enter the label key (<em>&lt;selector_key&gt;</em>) and value (<em>&lt;selector_value&gt;</em>) pair to use to target the pods where your app runs. To target your pods and include them in the service load balancing, check the <em>&lt;selectorkey&gt;</em> and <em>&lt;selectorvalue&gt;</em> values. Make sure that they are the same as the <em>key/value</em> pair that you used in the <code>spec.template.metadata.labels</code> section of your deployment yaml.</td>
-        </tr>
-        <tr>
-          <td><code>port</code></td>
-          <td>The port that the service listens on.</td>
-        </tr>
-        <tr>
-          <td><code>loadBalancerIP</code></td>
-          <td>To create a private LoadBalancer or to use a specific portable IP address for a public LoadBalancer, replace <em>&lt;IP_address&gt;</em> with the IP address that you want to use. For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer).</td>
-        </tr>
-        </tbody></table>
+      </tr>
+      <tr>
+        <td><code>selector</code></td>
+        <td>Enter the label key (<em>&lt;selector_key&gt;</em>) and value (<em>&lt;selector_value&gt;</em>) pair to use to target the pods where your app runs. To target your pods and include them in the service load balancing, check the <em>&lt;selectorkey&gt;</em> and <em>&lt;selectorvalue&gt;</em> values. Make sure that they are the same as the <em>key/value</em> pair that you used in the <code>spec.template.metadata.labels</code> section of your deployment yaml.</td>
+      </tr>
+      <tr>
+        <td><code>port</code></td>
+        <td>The port that the service listens on.</td>
+      </tr>
+      <tr>
+        <td><code>loadBalancerIP</code></td>
+        <td>To create a private LoadBalancer or to use a specific portable IP address for a public LoadBalancer, replace <em>&lt;IP_address&gt;</em> with the IP address that you want to use. For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer).</td>
+      </tr>
+      </tbody></table>
 
-      3. Optional: Configure a firewall by specifying the `loadBalancerSourceRanges` in the **spec** section. For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
+  3. Optional: Configure a firewall by specifying the `loadBalancerSourceRanges` in the **spec** section. For more information, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
 
-      4. Create the service in your cluster.
+  4. Create the service in your cluster.
 
-          ```
-          kubectl apply -f myloadbalancer.yaml
-          ```
-          {: pre}
+      ```
+      kubectl apply -f myloadbalancer.yaml
+      ```
+      {: pre}
 
-          When your load balancer service is created, a portable IP address is automatically assigned to the load balancer. If no portable IP address is available, the load balancer service cannot be created.
-
-3.  Verify that the load balancer service was created successfully. Replace _&lt;myservice&gt;_ with the name of the load balancer service that you created in the previous step.
+3. Verify that the load balancer service was created successfully. Replace _&lt;myservice&gt;_ with the name of the load balancer service that you created in the previous step.
 
     ```
     kubectl describe service myloadbalancer
@@ -136,7 +134,7 @@ s`.</td>
 
 </staging>
 
-## Enabling public or private access to an app by using a LoadBalancer service
+## Enabling public or private access to an app in a single-zone cluster
 {: #config}
 
 Before you begin:
