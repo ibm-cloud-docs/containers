@@ -16,10 +16,16 @@ lastupdated: "2018-05-30"
 {:download: .download}
 
 
-# Planning networking with NodePort, LoadBalancer, or Ingress services
+# Planning cluster networking
 {: #planning}
 
-To make your apps accessible from the public internet or a private network, {{site.data.keyword.containerlong}} supports three networking services.
+With {{site.data.keyword.containerlong}}, you can manage both external networking by making apps publically or privately accessible and internal networking within your cluster.
+{: shortdesc}
+
+## Planning external networking with NodePort, LoadBalancer, or Ingress services
+{: #external}
+
+To make your apps externally accessible from the public internet or a private network, {{site.data.keyword.containershort_notm}} supports three networking services.
 {:shortdesc}
 
 <dl>
@@ -56,7 +62,7 @@ To make your apps accessible from the public internet or a private network, {{si
  </ul>
 </dd></dl>
 
-To find out more about public networking, see [Planning public access to apps](#public_access). To find out more about private networking, see [Planning private access to apps](#private_access).
+To find out more about public networking, see [Planning public external networking](#public_access). To find out more about private networking, see [Planning private external networking to apps when worker nodes are connected to a public and a private VLAN](#private_both_vlans) or [Planning private external networking to apps when worker nodes are connected to only a private VLAN](#private_vlan).
 
 To choose the best networking service for your app, you can follow this decision tree and click on one of the options to get started.
 
@@ -67,7 +73,7 @@ To choose the best networking service for your app, you can follow this decision
 <area href="/docs/containers/cs_ingress.html" alt="Ingress service" shape="circle" coords="445, 420, 45"/>
 </map>
 
-## Planning public access to apps
+## Planning public external networking
 {: #public_access}
 
 When you create a Kubernetes cluster in {{site.data.keyword.containershort_notm}}, you can connect the cluster to a public VLAN. The public VLAN determines the public IP address that is assigned to each worker node, which provides each worker node with a public network interface.
@@ -89,7 +95,10 @@ To make an app publicly available to the internet, you must update your configur
 
 For more information about securely connecting apps that run in a Kubernetes cluster to an on-premises network or to apps that are external to your cluster, see [Setting up VPN connectivity](cs_vpn.html).
 
-## Planning private access to apps when worker nodes are connected to a public and a private VLAN
+<br />
+
+
+## Planning private external networking when worker nodes are connected to a public and a private VLAN
 {: #private_both_vlans}
 
 When you create a Kubernetes cluster in {{site.data.keyword.containershort_notm}}, you must connect your cluster to a private VLAN. The private VLAN determines the private IP address that is assigned to each worker node, which provides each worker node with a private network interface.
@@ -131,7 +140,7 @@ To securely connect your worker nodes and apps to an on-premises network, you ca
 <br />
 
 
-## Planning private access to apps when worker nodes are connected to only a private VLAN
+## Planning private external networking to apps when worker nodes are connected to only a private VLAN
 {: #private_vlan}
 
 When you create a Kubernetes cluster in {{site.data.keyword.containershort_notm}}, you must connect your cluster to a private VLAN. The private VLAN determines the private IP address that is assigned to each worker node, which provides each worker node with a private network interface.
@@ -159,3 +168,15 @@ To make your app accessible from a private network only, you can use private Nod
 {: #private_vlan_vpn}
 
 To securely connect your worker nodes and apps to an on-premises network, you must set up a VPN gateway. You can use the [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance/about.html) or [Fortigate Security Appliance (FSA)](/docs/infrastructure/fortigate-10g/about.html) that you set up as a firewall to also configure an IPSec VPN endpoint. To configure a VRA, see [Setting up VPN connectivity with VRA](cs_vpn.html#vyatta).
+
+<br />
+
+
+## Planning in-cluster networking
+{: #in-cluster}
+
+All pods that are deployed to a worker node are also assigned a private IP address. Pods are assigned an IP in the 172.30.0.0/16 private address range and are routed between worker nodes only. To avoid conflicts, do not use this IP range on any nodes that communicate with your worker nodes. Worker nodes and pods can securely communicate on the private network by using the private IP addresses. However, when a pod crashes or a worker node needs to be re-created, a new private IP address is assigned.
+
+By default, it is difficult to track changing private IP addresses for apps that must be highly available. To avoid that, you can use the built-in Kubernetes service discovery features and expose apps as cluster IP services on the private network. A Kubernetes service groups a set of pods and provides a network connection to these pods for other services in the cluster without exposing the actual private IP address of each pod. When you create a cluster IP service, a private IP address is assigned to that service from the 10.10.10.0/24 private address range. As with the pod private address range, do not use this IP range on any nodes that communicate with your worker nodes. This IP address is accessible inside the cluster only. You cannot access this IP address from the internet. At the same time, a DNS lookup entry is created for the service and stored in the kube-dns component of the cluster. The DNS entry contains the name of the service, the namespace where the service was created, and the link to the assigned private cluster IP address.
+
+To access a pod behind a cluster IP service, the app can either use the private cluster IP address of the service or send a request by using the name of the service. When you use the name of the service, the name is looked up in the kube-dns component and routed to the private cluster IP address of the service. When a request reaches the service, the service ensures that all requests are equally forwarded to the pods, independent of their private IP addresses and the worker node they are deployed to.
