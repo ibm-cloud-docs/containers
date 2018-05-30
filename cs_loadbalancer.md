@@ -46,7 +46,7 @@ The LoadBalancer service serves as the external entry point for incoming request
 
 <img src="images/cs_loadbalancer_planning.png" width="550" alt="Expose an app in {{site.data.keyword.containershort_notm}} by using a load balancer" style="width:550px; border-style: none"/>
 
-1. A request is sent to your app by using the public IP address of your load balancer and the assigned port on the worker node.
+1. A request to your app uses the public IP address of your load balancer and the assigned port on the worker node.
 
 2. The request is automatically forwarded to the load balancer service's internal cluster IP address and port. The internal cluster IP address is accessible inside the cluster only.
 
