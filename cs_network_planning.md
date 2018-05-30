@@ -22,103 +22,6 @@ lastupdated: "2018-05-30"
 With {{site.data.keyword.containerlong}}, you can manage both external networking by making apps publically or privately accessible and internal networking within your cluster.
 {: shortdesc}
 
-## Planning public external networking
-{: #public_access}
-
-When you create a Kubernetes cluster in {{site.data.keyword.containershort_notm}}, you can connect the cluster to a public VLAN. The public VLAN determines the public IP address that is assigned to each worker node, which provides each worker node with a public network interface.
-{:shortdesc}
-
-To make an app publicly available to the internet, you can create a NodePort, LoadBalancer, or Ingress service. To compare each service, see [Choosing a NodePort, LoadBalancer, or Ingress service](#external).
-
-The following diagram shows how Kubernetes forwards public network traffic in {{site.data.keyword.containershort_notm}}.
-
-![{{site.data.keyword.containershort_notm}} Kubernetes architecture](images/networking.png)
-
-*Kubernetes data plane in {{site.data.keyword.containershort_notm}}*
-
-The public network interface for the worker nodes in both free and standard clusters is protected by Calico network policies. These policies block most inbound traffic by default. However, inbound traffic that is necessary for Kubernetes to function is allowed, as are connections to NodePort, LoadBalancer, and Ingress services. For more information about these policies, including how to modify them, see [Network policies](cs_network_policy.html#network_policies).
-
-<br />
-
-
-## Planning private external networking when worker nodes are connected to a public and a private VLAN
-{: #private_both_vlans}
-
-When you create a Kubernetes cluster in {{site.data.keyword.containershort_notm}}, you must connect your cluster to a private VLAN. The private VLAN determines the private IP address that is assigned to each worker node, which provides each worker node with a private network interface.
-{:shortdesc}
-
-When you want to keep your apps connected to a private network only, you can use the private network interface for the worker nodes in standard clusters. However, when your worker nodes are connected to both a public and a private VLAN, you must also use Calico network policies to secure your cluster from unwanted public access.
-
-### Expose your apps with private networking services and secure your cluster with Calico network policies
-{: #private_both_vlans_calico}
-
-The public network interface for worker nodes is protected by [predefined Calico network policy settings](cs_network_policy.html#default_policy) that are configured on every worker node during cluster creation. By default, all outbound network traffic is allowed for all worker nodes. Inbound network traffic is blocked except for a few ports that are opened so that network traffic can be monitored by IBM and for IBM to automatically install security updates for the Kubernetes master. Access to the worker node's kubelet is secured by an OpenVPN tunnel. For more information, see the [{{site.data.keyword.containershort_notm}} architecture](cs_tech.html).
-
-If you expose your apps with a NodePort service, a LoadBalancer service, or an Ingress application load balancer, the default Calico policies also allow inbound network traffic from the internet to these services. To make your app accessible from a private network only, you can choose to use only private NodePort, LoadBalancer, or Ingress services and block all public traffic to the services.
-
-**NodePort**
-* [Create a NodePort service](cs_nodeport.html). In addition to the public IP address, a NodePort service is available over the private IP address of a worker node.
-* A NodePort service opens a port on a worker node over both the private and public IP address of the worker node. You must use a [Calico preDNAT network policy](cs_network_policy.html#block_ingress) to block the public NodePorts.
-
-**LoadBalancer**
-* [Create a private LoadBalancer service](cs_loadbalancer.html).
-* A load balancer service with a portable private IP address still has a public node port open on every worker node. You must use a [Calico preDNAT network policy](cs_network_policy.html#block_ingress) to block public node ports on it.
-
-**Ingress**
-* When you create a cluster, one public and one private Ingress application load balancer (ALB) are created automatically. Because the public ALB is enabled and the private ALB is disabled by default, you must [disable the public ALB](cs_cli_reference.html#cs_alb_configure) and [enable the private ALB](cs_ingress.html#private_ingress).
-* Then, [create a private Ingress service](cs_ingress.html#ingress_expose_private).
-
-For more information about each service, see [Choosing a NodePort, LoadBalancer, or Ingress service](#external).
-
-### Isolate networking workloads to edge worker nodes
-{: #private_both_vlans_edge}
-
-Edge worker nodes can improve the security of your cluster by allowing fewer worker nodes to be accessed externally and by isolating the networking workload. To ensure that Ingress and load balancer pods are deployed to only specified worker nodes, [label worker nodes as edge nodes](cs_edge.html#edge_nodes). To also prevent other workloads from running on edge nodes, [taint the edge nodes](cs_edge.html#edge_workloads).
-
-Then, use a [Calico preDNAT network policy](cs_network_policy.html#block_ingress) to block traffic to public node ports on clusters that are running edge worker nodes. Blocking node ports ensures that the edge worker nodes are the only worker nodes that handle incoming traffic.
-
-### Connect to an on-premises database by using strongSwan VPN
-{: #private_both_vlans_vpn}
-
-To securely connect your worker nodes and apps to an on-premises network, you can set up a [strongSwan IPSec VPN service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.strongswan.org/). The strongSwan IPSec VPN service provides a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPSec) protocol suite. To set up a secure connection between your cluster and an on-premises network, [configure and deploy the strongSwan IPSec VPN service](cs_vpn.html#vpn-setup) directly in a pod in your cluster.
-
-<br />
-
-
-## Planning private external networking when worker nodes are connected to only a private VLAN
-{: #private_vlan}
-
-When you create a Kubernetes cluster in {{site.data.keyword.containershort_notm}}, you must connect your cluster to a private VLAN. The private VLAN determines the private IP address that is assigned to each worker node, which provides each worker node with a private network interface.
-{:shortdesc}
-
-When your worker nodes are connected to a private VLAN only, you can use the private network interface for the worker nodes to keep apps connect to the private network only. You can then use a gateway appliance to secure your cluster from unwanted public access.
-
-### Configure a gateway appliance
-{: #private_vlan_gateway}
-
-If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. You can set up a firewall with custom network policies to provide dedicated network security for your standard cluster and to detect and remediate network intrusion. For example, you might choose to set up a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html) or a [Fortigate Security Appliance](/docs/infrastructure/fortigate-10g/about.html) to act as your firewall and block unwanted traffic. When you set up a firewall, [you must also open up the required ports and IP addresses](cs_firewall.html#firewall) for each region so that the master and the worker nodes can communicate. For more information, see [VLAN connection for worker nodes](cs_clusters.html#worker_vlan_connection).
-
-### Expose your apps with private networking services
-{: #private_vlan_services}
-
-To make your app accessible from a private network only, you can use private NodePort, LoadBalancer, or Ingress services. Because your worker nodes are not connected to a public VLAN, no public traffic is routed to these services.
-
-* **NodePort**: [Create a private NodePort service](cs_nodeport.html). The service is available over the private IP address of a worker node.
-
-* **LoadBalancer** [Create a private LoadBalancer service](cs_loadbalancer.html). If your cluster is available on a private VLAN only, one of the four available portable private IP addresses is used.
-
-* **Ingress**: When you create a cluster, a private Ingress application load balancer (ALB) is created automatically but is not enabled by default. You must [enable the private ALB](cs_ingress.html#private_ingress). Then, [create a private Ingress service](cs_ingress.html#ingress_expose_private).
-
-For more information about each service, see [Choosing a NodePort, LoadBalancer, or Ingress service](#external).
-
-### Connect to an on-premises database by using a VRA
-{: #private_vlan_vpn}
-
-To securely connect your worker nodes and apps to an on-premises network, you must set up a VPN gateway. You can use the [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance/about.html) or [Fortigate Security Appliance (FSA)](/docs/infrastructure/fortigate-10g/about.html) that you set up as a firewall to also configure an IPSec VPN endpoint. To configure a VRA, see [Setting up VPN connectivity with VRA](cs_vpn.html#vyatta).
-
-<br />
-
-
 ## Choosing a NodePort, LoadBalancer, or Ingress service
 {: #external}
 
@@ -156,6 +59,107 @@ To choose the best networking service for your app, you can follow this decision
 <area href="/docs/containers/cs_loadbalancer.html" alt="LoadBalancer service" shape="circle" coords="247, 419, 44"/>
 <area href="/docs/containers/cs_ingress.html" alt="Ingress service" shape="circle" coords="445, 420, 45"/>
 </map>
+
+<br />
+
+
+## Planning public external networking
+{: #public_access}
+
+When you create a Kubernetes cluster in {{site.data.keyword.containershort_notm}}, you can connect the cluster to a public VLAN. The public VLAN determines the public IP address that is assigned to each worker node, which provides each worker node with a public network interface.
+{:shortdesc}
+
+To make an app publicly available to the internet, you can create a NodePort, LoadBalancer, or Ingress service. To compare each service, see [Choosing a NodePort, LoadBalancer, or Ingress service](#external).
+
+The following diagram shows how Kubernetes forwards public network traffic in {{site.data.keyword.containershort_notm}}.
+
+![{{site.data.keyword.containershort_notm}} Kubernetes architecture](images/networking.png)
+
+*Kubernetes data plane in {{site.data.keyword.containershort_notm}}*
+
+The public network interface for the worker nodes in both free and standard clusters is protected by Calico network policies. These policies block most inbound traffic by default. However, inbound traffic that is necessary for Kubernetes to function is allowed, as are connections to NodePort, LoadBalancer, and Ingress services. For more information about these policies, including how to modify them, see [Network policies](cs_network_policy.html#network_policies).
+
+<br />
+
+
+## Planning private external networking for a public and private VLAN setup
+{: #private_both_vlans}
+
+When you create a Kubernetes cluster in {{site.data.keyword.containershort_notm}}, you must connect your cluster to a private VLAN. The private VLAN determines the private IP address that is assigned to each worker node, which provides each worker node with a private network interface.
+{:shortdesc}
+
+When you want to keep your apps connected to a private network only, you can use the private network interface for the worker nodes in standard clusters. However, when your worker nodes are connected to both a public and a private VLAN, you must also use Calico network policies to secure your cluster from unwanted public access.
+
+The following sections describe the capabilities across {{site.data.keyword.containershort_notm}} that you can use to expose you apps to a private network and secure your cluster from unwanted public access. Optionally, you can also isolate your networking workloads and connect your cluster to resources in an on-premises network.
+
+### Expose your apps with private networking services and secure your cluster with Calico network policies
+{: #private_both_vlans_calico}
+
+The public network interface for worker nodes is protected by [predefined Calico network policy settings](cs_network_policy.html#default_policy) that are configured on every worker node during cluster creation. By default, all outbound network traffic is allowed for all worker nodes. Inbound network traffic is blocked except for a few ports that are opened so that network traffic can be monitored by IBM and for IBM to automatically install security updates for the Kubernetes master. Access to the worker node's kubelet is secured by an OpenVPN tunnel. For more information, see the [{{site.data.keyword.containershort_notm}} architecture](cs_tech.html).
+
+If you expose your apps with a NodePort service, a LoadBalancer service, or an Ingress application load balancer, the default Calico policies also allow inbound network traffic from the internet to these services. To make your app accessible from a private network only, you can choose to use only private NodePort, LoadBalancer, or Ingress services and block all public traffic to the services.
+
+**NodePort**
+* [Create a NodePort service](cs_nodeport.html). In addition to the public IP address, a NodePort service is available over the private IP address of a worker node.
+* A NodePort service opens a port on a worker node over both the private and public IP address of the worker node. You must use a [Calico preDNAT network policy](cs_network_policy.html#block_ingress) to block the public NodePorts.
+
+**LoadBalancer**
+* [Create a private LoadBalancer service](cs_loadbalancer.html).
+* A load balancer service with a portable private IP address still has a public node port open on every worker node. You must use a [Calico preDNAT network policy](cs_network_policy.html#block_ingress) to block public node ports on it.
+
+**Ingress**
+* When you create a cluster, one public and one private Ingress application load balancer (ALB) are created automatically. Because the public ALB is enabled and the private ALB is disabled by default, you must [disable the public ALB](cs_cli_reference.html#cs_alb_configure) and [enable the private ALB](cs_ingress.html#private_ingress).
+* Then, [create a private Ingress service](cs_ingress.html#ingress_expose_private).
+
+For more information about each service, see [Choosing a NodePort, LoadBalancer, or Ingress service](#external).
+
+### Optional: Isolate networking workloads to edge worker nodes
+{: #private_both_vlans_edge}
+
+Edge worker nodes can improve the security of your cluster by allowing fewer worker nodes to be accessed externally and by isolating the networking workload. To ensure that Ingress and load balancer pods are deployed to only specified worker nodes, [label worker nodes as edge nodes](cs_edge.html#edge_nodes). To also prevent other workloads from running on edge nodes, [taint the edge nodes](cs_edge.html#edge_workloads).
+
+Then, use a [Calico preDNAT network policy](cs_network_policy.html#block_ingress) to block traffic to public node ports on clusters that are running edge worker nodes. Blocking node ports ensures that the edge worker nodes are the only worker nodes that handle incoming traffic.
+
+### Optional: Connect to an on-premises database by using strongSwan VPN
+{: #private_both_vlans_vpn}
+
+To securely connect your worker nodes and apps to an on-premises network, you can set up a [strongSwan IPSec VPN service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.strongswan.org/). The strongSwan IPSec VPN service provides a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPSec) protocol suite. To set up a secure connection between your cluster and an on-premises network, [configure and deploy the strongSwan IPSec VPN service](cs_vpn.html#vpn-setup) directly in a pod in your cluster.
+
+<br />
+
+
+## Planning private external networking for a private VLAN setup only
+{: #private_vlan}
+
+When you create a Kubernetes cluster in {{site.data.keyword.containershort_notm}}, you must connect your cluster to a private VLAN. The private VLAN determines the private IP address that is assigned to each worker node, which provides each worker node with a private network interface.
+{:shortdesc}
+
+When your worker nodes are connected to a private VLAN only, you can use the private network interface for the worker nodes to keep apps connect to the private network only. You can then use a gateway appliance to secure your cluster from unwanted public access.
+
+The following sections describe the capabilities across {{site.data.keyword.containershort_notm}} that you can use to secure your cluster from unwanted public access, expose you apps to a private network, and connect to resources in an on-premises network.
+
+### Configure a gateway appliance
+{: #private_vlan_gateway}
+
+If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. You can set up a firewall with custom network policies to provide dedicated network security for your standard cluster and to detect and remediate network intrusion. For example, you might choose to set up a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html) or a [Fortigate Security Appliance](/docs/infrastructure/fortigate-10g/about.html) to act as your firewall and block unwanted traffic. When you set up a firewall, [you must also open up the required ports and IP addresses](cs_firewall.html#firewall) for each region so that the master and the worker nodes can communicate. For more information, see [VLAN connection for worker nodes](cs_clusters.html#worker_vlan_connection).
+
+### Expose your apps with private networking services
+{: #private_vlan_services}
+
+To make your app accessible from a private network only, you can use private NodePort, LoadBalancer, or Ingress services. Because your worker nodes are not connected to a public VLAN, no public traffic is routed to these services.
+
+* **NodePort**: [Create a private NodePort service](cs_nodeport.html). The service is available over the private IP address of a worker node.
+
+* **LoadBalancer** [Create a private LoadBalancer service](cs_loadbalancer.html). If your cluster is available on a private VLAN only, one of the four available portable private IP addresses is used.
+
+* **Ingress**: When you create a cluster, a private Ingress application load balancer (ALB) is created automatically but is not enabled by default. You must [enable the private ALB](cs_ingress.html#private_ingress). Then, [create a private Ingress service](cs_ingress.html#ingress_expose_private).
+
+For more information about each service, see [Choosing a NodePort, LoadBalancer, or Ingress service](#external).
+
+### Optional: Connect to an on-premises database by using a VRA
+{: #private_vlan_vpn}
+
+To securely connect your worker nodes and apps to an on-premises network, you must set up a VPN gateway. You can use the [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance/about.html) or [Fortigate Security Appliance (FSA)](/docs/infrastructure/fortigate-10g/about.html) that you set up as a firewall to also configure an IPSec VPN endpoint. To configure a VRA, see [Setting up VPN connectivity with VRA](cs_vpn.html#vyatta).
 
 <br />
 
