@@ -128,6 +128,8 @@ Then, use a [Calico preDNAT network policy](cs_network_policy.html#block_ingress
 
 To securely connect your worker nodes and apps to an on-premises network, you can set up a [strongSwan IPSec VPN service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.strongswan.org/). The strongSwan IPSec VPN service provides a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPsec) protocol suite. To set up a secure connection between your cluster and an on-premises network, [configure and deploy the strongSwan IPSec VPN service](cs_vpn.html#vpn-setup) directly in a pod in your cluster.
 
+<br />
+
 
 ## Planning private access to apps when worker nodes are connected to only a private VLAN
 {: #private_vlan}
