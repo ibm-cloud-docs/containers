@@ -790,14 +790,14 @@ trusted: <em>true</em>
   {: #example_cluster_create}
 
   ```
-  bx cs cluster-create --location dal10 --private-vlan my_private_VLAN_ID --machine-type u2c.2x4 --name my_cluster --hardware shared --workers 2
+  bx cs cluster-create --location dal10 --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
   ```
   {: pre}
 
   **Create subsequent standard clusters**: If you already created a standard cluster in this location or created a public VLAN in IBM Cloud infrastructure (SoftLayer) before, specify that public VLAN with the `--public-vlan` flag. To find out if you already have a public VLAN for a specific location or to find the name of an existing public VLAN, run `bx cs vlans <location>`.
 
   ```
-  bx cs cluster-create --location dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type u2c.2x4 --name my_cluster --hardware shared --workers 2
+  bx cs cluster-create --location dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
   ```
   {: pre}
 
@@ -2317,14 +2317,14 @@ diskEncryption: <em>false</em></code></pre>
 **Examples**:
 
   ```
-  bx cs worker-add --cluster my_cluster --number 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type u2c.2x4 --hardware shared
+  bx cs worker-add --cluster my_cluster --number 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --hardware shared
   ```
   {: pre}
 
   Example for {{site.data.keyword.Bluemix_dedicated_notm}}:
 
   ```
-  bx cs worker-add --cluster my_cluster --number 3 --machine-type u2c.2x4
+  bx cs worker-add --cluster my_cluster --number 3 --machine-type b2c.4x16
   ```
   {: pre}
 
@@ -2672,7 +2672,7 @@ View a list of worker nodes and the status for each in a cluster.
 **Example command**:
 
   ```
-  bx cs worker-pool-add my_cluster --machine-type u2c.2x4 --size-per-zone 6
+  bx cs worker-pool-add my_cluster --machine-type b2c.4x16 --size-per-zone 6
   ```
   {: pre}
 
