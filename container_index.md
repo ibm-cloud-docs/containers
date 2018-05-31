@@ -46,10 +46,10 @@ And what is a cluster? A cluster is a set of resources, worker nodes, networks, 
 
 **Before you begin**
 
-You must have a Trial, Pay-As-You-Go, or Subscription [{{site.data.keyword.Bluemix_notm}} account](https://console.bluemix.net/registration/).
-
-With a Trial account, you can create one free cluster that you can use for 21 days to get familiar with the service. With a Pay-As-You-Go or Subscription account, you can still create a free trial cluster but you can also provision IBM Cloud infrastructure (SoftLayer) resources to use in standard clusters.
-{:tip}
+Get the [{{site.data.keyword.Bluemix_notm}} account](https://console.bluemix.net/registration/) type that is right for you:
+* **Pay-As-You-Go or Subscription**: You can create a free, 21-day trial cluster. You can also provision IBM Cloud infrastructure (SoftLayer) resources to create and use in standard clusters.
+* **Lite**: You cannot create a free or standard cluster. [Upgrade your account](/docs/account/account_faq.html#changeacct) to Pay-As-You-Go or Subscription.
+* **Trial (for educational purposes)**: You can create one free cluster that you can use for 21 days to get familiar with the service.
 
 To create a free cluster:
 
