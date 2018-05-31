@@ -140,18 +140,26 @@ The following sections describe the capabilities across {{site.data.keyword.cont
 ### Configure a gateway appliance
 {: #private_vlan_gateway}
 
-If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. You can set up a firewall with custom network policies to provide dedicated network security for your standard cluster and to detect and remediate network intrusion. For example, you might choose to set up a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html) or a [Fortigate Security Appliance](/docs/infrastructure/fortigate-10g/about.html) to act as your firewall and block unwanted traffic. When you set up a firewall, [you must also open up the required ports and IP addresses](cs_firewall.html#firewall) for each region so that the master and the worker nodes can communicate. For more information, see [VLAN connection for worker nodes](cs_clusters.html#worker_vlan_connection).
+If worker nodes are set up with a private VLAN only, you must configure an alternative solution for network connectivity. You can set up a firewall with custom network policies to provide dedicated network security for your standard cluster and to detect and remediate network intrusion. For example, you might choose to set up a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance/about.html) or a [Fortigate Security Appliance](/docs/infrastructure/fortigate-10g/about.html) to act as your firewall and block unwanted traffic. When you set up a firewall, [you must also open up the required ports and IP addresses](cs_firewall.html#firewall_outbound) for each region so that the master and the worker nodes can communicate. For more information, see [VLAN connection for worker nodes](cs_clusters.html#worker_vlan_connection).
 
 ### Expose your apps with private networking services
 {: #private_vlan_services}
 
 To make your app accessible from a private network only, you can use private NodePort, LoadBalancer, or Ingress services. Because your worker nodes are not connected to a public VLAN, no public traffic is routed to these services.
 
-* **NodePort**: [Create a private NodePort service](cs_nodeport.html). The service is available over the private IP address of a worker node.
+**NodePort**:
+* [Create a private NodePort service](cs_nodeport.html). The service is available over the private IP address of a worker node.
+* In your private firewall, open the port that you configured when you deployed the service to the private IP addresses for all of the worker nodes to allow traffic to. To find the port, run `kubectl get svc`. The port is in the 20000-32000 range.
 
-* **LoadBalancer** [Create a private LoadBalancer service](cs_loadbalancer.html). If your cluster is available on a private VLAN only, one of the four available portable private IP addresses is used.
+**LoadBalancer**
+* [Create a private LoadBalancer service](cs_loadbalancer.html). If your cluster is available on a private VLAN only, one of the four available portable private IP addresses is used.
+* In your private firewall, open the port that you configured when you deployed the service to the load balancer service's private IP address.
 
-* **Ingress**: When you create a cluster, a private Ingress application load balancer (ALB) is created automatically but is not enabled by default. You must [enable the private ALB](cs_ingress.html#private_ingress). Then, [create a private Ingress service](cs_ingress.html#ingress_expose_private).
+**Ingress**:
+* When you create a cluster, a private Ingress application load balancer (ALB) is created automatically but is not enabled by default. You must [enable the private ALB](cs_ingress.html#private_ingress).
+* Then, [create a private Ingress service](cs_ingress.html#ingress_expose_private).
+* In your private firewall, open port 80 for HTTP or port 443 for HTTPS to the IP address for the private ALB.
+
 
 For more information about each service, see [Choosing a NodePort, LoadBalancer, or Ingress service](#external).
 
