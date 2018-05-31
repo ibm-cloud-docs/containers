@@ -41,12 +41,11 @@ To make your apps externally accessible from the [public internet](#public_acces
 * You can customize your load balancer by exposing any port that your app requires.
 
 **[Ingress](cs_ingress.html)** (standard clusters only)
-* Expose multiple apps in a cluster by creating one external HTTP or HTTPS, TCP, or UDP load balancer. The load balancer uses a secured and unique public or private entry point to route incoming requests to your apps.
+* Expose multiple apps in a cluster by creating one external HTTP or HTTPS, TCP, or UDP application load balancer (ALB). The ALB uses a secured and unique public or private entry point to route incoming requests to your apps.
 * You can use one route to expose multiple apps in your cluster as services.
 * Ingress consists of two components:
   * The Ingress resource defines the rules for how to route and load balance incoming requests for an app.
-  * The application load balancer (ALB) listens for incoming HTTP or HTTPS, TCP, or UDP service requests. It forwards requests across the apps' pods based on the rules that you defined in the Ingress resource.
-  * The multizone load balancer (MZLB) handles all incoming requests to your apps and load balances the requests among the ALBs in the various zones.
+  * The ALB listens for incoming HTTP or HTTPS, TCP, or UDP service requests. It forwards requests across the apps' pods based on the rules that you defined in the Ingress resource.
  
  
 * Use Ingress to implement your own ALB with custom routing rules and need SSL termination for your apps.
@@ -156,7 +155,7 @@ To make your app accessible from a private network only, you can use private Nod
 
 For more information about each service, see [Choosing a NodePort, LoadBalancer, or Ingress service](#external).
 
-### Optional: Connect to an on-premises database by using a VRA
+### Optional: Connect to an on-premises database by using the gateway appliance
 {: #private_vlan_vpn}
 
 To securely connect your worker nodes and apps to an on-premises network, you must set up a VPN gateway. You can use the [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance/about.html) or [Fortigate Security Appliance (FSA)](/docs/infrastructure/fortigate-10g/about.html) that you set up as a firewall to also configure an IPSec VPN endpoint. To configure a VRA, see [Setting up VPN connectivity with VRA](cs_vpn.html#vyatta).
