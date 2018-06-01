@@ -25,6 +25,7 @@ IBM Cloud Kubernetes Service
         cs_tutorials_apps.md
         cs_tutorials_istio.md
         cs_tutorials_cf.md
+        [Move a VM-based application to Kubernetes](/docs/tutorials/vm-to-containers-and-kubernetes.html#move-a-vm-based-application-to-kubernetes)
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
