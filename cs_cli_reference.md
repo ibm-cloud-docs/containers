@@ -2307,7 +2307,7 @@ diskEncryption: <em>false</em></code></pre>
 <p><strong>Note:</strong> Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>Worker nodes feature disk encryption by default; [learn more](cs_secure.html#worker).. To disable encryption, include this option.</dd>
+<dd>Worker nodes feature disk encryption by default; [learn more](cs_secure.html#worker). To disable encryption, include this option.</dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -2649,6 +2649,9 @@ View a list of worker nodes and the status for each in a cluster.
   bx cs workers my_cluster
   ```
   {: pre}
+
+<br />
+
 
  in which you deploy the cluster. For more information, see the documentation for the `bx cs machine-types` [command](cs_cli_reference.html#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
 
