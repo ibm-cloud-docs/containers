@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-05-31"
 
 ---
 
@@ -177,7 +177,7 @@ Next steps:
   - Repeat the update process with other clusters.
   - Inform developers who work in the cluster to update their `kubectl` CLI to the version of the Kubernetes master.
   - If the Kubernetes dashboard does not display utilization graphs, [delete the `kube-dashboard` pod](cs_troubleshoot_health.html#cs_dashboard_graphs).
-  
+
 
 
 

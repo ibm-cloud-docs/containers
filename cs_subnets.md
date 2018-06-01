@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-05-31"
 
 ---
 
@@ -148,7 +148,7 @@ To use an existing subnet in your IBM Cloud infrastructure (SoftLayer) portfolio
 3.  Create a cluster by using the location and VLAN ID that you identified. To reuse an existing subnet, include the `--no-subnet` flag to prevent a new portable public IP subnet and a new portable private IP subnet from being created automatically.
 
     ```
-    bx cs cluster-create --location dal10 --machine-type u2c.2x4 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
+    bx cs cluster-create --location dal10 --machine-type b2c.4x16 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
     ```
     {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-06-01"
 
 ---
 
@@ -38,7 +38,7 @@ Ingress consists of two components:
 <dd>The application load balancer (ALB) is an external load balancer that listens for incoming HTTP, HTTPS, TCP, or UDP service requests and forwards requests to the appropriate app pod. When you create a standard cluster, {{site.data.keyword.containershort_notm}} automatically creates a highly available ALB for your cluster and assigns a unique public route to it. The public route is linked to a portable public IP address that is provisioned into your IBM Cloud infrastructure (SoftLayer) account during cluster creation. A default private ALB is also automatically created, but is not automatically enabled.</dd>
 <dt>Ingress resource</dt>
 <dd>To expose an app by using Ingress, you must create a Kubernetes service for your app and register this service with the ALB by defining an Ingress resource. The Ingress resource is a Kubernetes resource that defines the rules for how to route incoming requests for an app. The Ingress resource also specifies the path to your app service, which is appended to the public route to form a unique app URL such as `mycluster.us-south.containers.appdomain.cloud/myapp`.
-<br></br><strong>Note</strong>: As of 24 May 2018, the Ingress subdomain format changed for new clusters.<ul><li>Clusters created after 24 May 2018 are assigned a subdomain in the new format, <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.appdomain.cloud</code>.</li><li>Clusters created before 24 May 2018 continue to use the assigned subdomain in the old format, <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>.</li></ul></dd>
+<br></br><strong>Note</strong>: As of 24 May 2018, the Ingress subdomain format changed for new clusters. If you have pipeline dependencies on consistent app domain names, you can use your own custom domain instead of the IBM-provided Ingress subdomain.<ul><li>Clusters created after 24 May 2018 are assigned a subdomain in the new format, <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.appdomain.cloud</code>.</li><li>Clusters created before 24 May 2018 continue to use the assigned subdomain in the old format, <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>.</li></ul></dd>
 </dl>
 
 The following diagram shows how Ingress directs communication from the internet to an app:
@@ -124,9 +124,9 @@ Expose apps that are inside your cluster to the public by using the public Ingre
 
 Before you begin:
 
--   Review the Ingress [prerequisites](#config_prereqs).
--   If you do not have one already, [create a standard cluster](cs_clusters.html#clusters_ui).
--   [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster to run `kubectl` commands.
+* Review the Ingress [prerequisites](#config_prereqs).
+* If you do not have one already, [create a standard cluster](cs_clusters.html#clusters_ui).
+* [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster to run `kubectl` commands.
 
 ### Step 1: Deploy apps and create app services
 {: #public_inside_1}
@@ -137,14 +137,14 @@ Start by deploying your apps and creating Kubernetes services to expose them.
 1.  [Deploy your app to the cluster](cs_app.html#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file, such as `app: code`. This label is needed to identify all pods where your app is running so that the pods can be included in the Ingress load balancing.
 
 2.   Create a Kubernetes service for each app that you want to expose. Your app must be exposed by a Kubernetes service to be included by the cluster ALB in the Ingress load balancing.
-      1.  Open your preferred editor and create a service configuration file that is named, for example, `myapp_service.yaml`.
+      1.  Open your preferred editor and create a service configuration file that is named, for example, `myappservice.yaml`.
       2.  Define a service for the app that the ALB will expose.
 
           ```
           apiVersion: v1
           kind: Service
           metadata:
-            name: myapp_service
+            name: myappservice
           spec:
             selector:
               <selector_key>: <selector_value>
@@ -172,7 +172,7 @@ Start by deploying your apps and creating Kubernetes services to expose them.
       4.  Create the service in your cluster. If apps are deployed in multiple namespaces in your cluster, ensure that the service deploys into the same namespace as the app that you want to expose.
 
           ```
-          kubectl apply -f myapp_service.yaml [-n <namespace>]
+          kubectl apply -f myappservice.yaml [-n <namespace>]
           ```
           {: pre}
       5.  Repeat these steps for every app that you want to expose.
@@ -186,7 +186,7 @@ When you configure the public ALB, you choose the domain that your apps will be 
 
 <dl>
 <dt>Domain</dt>
-<dd>You can use the IBM-provided domain, such as <code>mycluster-12345.us-south.containers.appdomain.cloud/myapp</code>, to access your app from the internet. To use a custom domain instead, you can map your custom domain to the IBM-provided domain or the ALB's public IP address.</dd>
+<dd>You can use the IBM-provided domain, such as <code>mycluster-12345.us-south.containers.appdomain.cloud/myapp</code>, to access your app from the internet. To use a custom domain instead, you can set up a CNAME record to map your custom domain to the IBM-provided domain or set up an A record with your DNS provider using the ALB's public IP address.</dd>
 <dt>TLS termination</dt>
 <dd>The ALB load balances HTTP network traffic to the apps in your cluster. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster. If you are using the IBM-provided Ingress subdomain, you can use the IBM-provided TLS certificate. TLS is not currently supported for IBM-provided wildcard subdomains. If you are using a custom domain, you can use your own TLS certificate to manage TLS termination.</dd>
 </dl>
@@ -206,7 +206,7 @@ To use the IBM-provided Ingress domain:
     ID:                     18a61a63c6a94b658596ca93d087aad9
     State:                  normal
     Created:                2018-01-12T18:33:35+0000
-    Location:               dal10
+    Location:                 dal10
     Master URL:             https://169.xx.xxx.xxx:26268
     Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
     Ingress Secret:         <tls_secret>
@@ -501,7 +501,7 @@ When you configure the public ALB, you choose the domain that your apps will be 
 
 <dl>
 <dt>Domain</dt>
-<dd>You can use the IBM-provided domain, such as <code>mycluster-12345.us-south.containers.appdomain.cloud/myapp</code>, to access your app from the internet. To use a custom domain instead, you can map your custom domain to the IBM-provided domain or the ALB's public IP address.</dd>
+<dd>You can use the IBM-provided domain, such as <code>mycluster-12345.us-south.containers.appdomain.cloud/myapp</code>, to access your app from the internet. To use a custom domain instead, you can set up a CNAME record to map your custom domain to the IBM-provided domain or set up an A record with your DNS provider using the ALB's public IP address.</dd>
 <dt>TLS termination</dt>
 <dd>The ALB load balances HTTP network traffic to the apps in your cluster. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster. If you are using the IBM-provided Ingress subdomain, you can use the IBM-provided TLS certificate. TLS is not currently supported for IBM-provided wildcard subdomains. If you are using a custom domain, you can use your own TLS certificate to manage TLS termination.</dd>
 </dl>
@@ -521,7 +521,7 @@ To use the IBM-provided Ingress domain:
     ID:                     18a61a63c6a94b658596ca93d087aad9
     State:                  normal
     Created:                2018-01-12T18:33:35+0000
-    Location:               dal10
+    Location:                 dal10
     Master URL:             https://169.xx.xxx.xxx:26268
     Ingress Subdomain:      mycluster-12345.us-south.containers.appdomain.cloud
     Ingress Secret:         <tls_secret>
@@ -707,35 +707,40 @@ http://<subdomain2>.<domain>/<app1_path>
 <br />
 
 
-## Enabling the default private ALB
+## Enabling a default private ALB
 {: #private_ingress}
 
-When you create a standard cluster, an IBM-provided private application load balancer (ALB) is created and assigned a portable private IP address and a private route. However, the default private ALB is not automatically enabled. To use the private ALB to load balance private network traffic to your apps, you must first enable it with either the IBM-provided portable private IP address or your own portable private IP address.
+When you create a standard cluster, an IBM-provided private application load balancer (ALB) is created and assigned a portable private IP address and a private route. However, the default private ALB is not automatically enabled. To use the default private ALB to load balance private network traffic to your apps, you must first enable it with either the IBM-provided portable private IP address or your own portable private IP address.
 {:shortdesc}
 
 **Note**: If you used the `--no-subnet` flag when you created the cluster, then you must add a portable private subnet or a user-managed subnet before you can enable the private ALB. For more information, see [Requesting more subnets for your cluster](cs_subnets.html#request).
 
 Before you begin:
 
+-   Review the options for planning private access to apps when worker nodes are connected to [a public and a private VLAN](cs_network_planning.html#private_both_vlans) or to [a private VLAN only](cs_network_planning.html#private_vlan).
 -   If you do not have one already, [create a standard cluster](cs_clusters.html#clusters_ui).
 -   [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
 
-To enable the private ALB by using the pre-assigned, IBM-provided portable private IP address:
+To enable a default private ALB by using the pre-assigned, IBM-provided portable private IP address:
 
-1. List the available ALBs in your cluster to get the ID of the private ALB. Replace <em>&lt;cluser_name&gt;</em> with the name of the cluster where the app that you want to expose is deployed.
+1. Get the ID of the default private ALB that you want to enable. Replace <em>&lt;cluser_name&gt;</em> with the name of the cluster where the app that you want to expose is deployed.
 
     ```
     bx cs albs --cluster <cluser_name>
     ```
     {: pre}
 
-    The field **Status** for the private ALB is _disabled_.
+    The field **Status** for private ALBs is _disabled_.
     ```
     ALB ID                                            Enabled   Status     Type      ALB IP
-    private-cr6d779503319d419ea3b4ab171d12c3b8-alb1   false     disabled   private   -
-    public-cr6d779503319d419ea3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx
+    private-cr6d779503319d419aa3b4ab171d12c3b8-alb1   false     disabled   private   -
+    private-crb2f60e9735254ac8b20b9c1e38b649a5-alb2   false     disabled   private   -
+    public-cr6d779503319d419aa3b4ab171d12c3b8-alb1    true      enabled    public    169.xx.xxx.xxx
+    public-crb2f60e9735254ac8b20b9c1e38b649a5-alb2    true      enabled    public    169.xx.xxx.xxx
     ```
     {: screen}
+
+    
 
 2. Enable the private ALB. Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for private ALB from the output in the previous step.
 
@@ -788,6 +793,8 @@ To enable the private ALB by using your own portable private IP address:
     ```
     {: screen}
 
+    
+
 3. Enable the private ALB. Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for private ALB from the output in the previous step and <em>&lt;user_IP&gt;</em> with the IP address from your user-managed subnet that you want to use.
 
    ```
@@ -805,6 +812,7 @@ Expose apps to a private network by using the private Ingress ALB.
 {:shortdesc}
 
 Before you begin:
+* Review the options for planning private access to apps when worker nodes are connected to [a public and a private VLAN](cs_network_planning.html#private_both_vlans) or to [a private VLAN only](cs_network_planning.html#private_vlan).
 * Review the Ingress [prerequisites](#config_prereqs).
 * [Enable the private application load balancer](#private_ingress).
 * If you have private worker nodes and want to use an external DNS provider, you must [configure edge nodes with public access](cs_edge.html#edge) and [configure a Virtual Router Appliance ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/).
@@ -819,14 +827,14 @@ Start by deploying your apps and creating Kubernetes services to expose them.
 1.  [Deploy your app to the cluster](cs_app.html#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file, such as `app: code`. This label is needed to identify all pods where your app is running so that the pods can be included in the Ingress load balancing.
 
 2.   Create a Kubernetes service for each app that you want to expose. Your app must be exposed by a Kubernetes service to be included by the cluster ALB in the Ingress load balancing.
-      1.  Open your preferred editor and create a service configuration file that is named, for example, `myapp_service.yaml`.
+      1.  Open your preferred editor and create a service configuration file that is named, for example, `myappservice.yaml`.
       2.  Define a service for the app that the ALB will expose.
 
           ```
           apiVersion: v1
           kind: Service
           metadata:
-            name: myapp_service
+            name: myappservice
           spec:
             selector:
               <selector_key>: <selector_value>
@@ -854,7 +862,7 @@ Start by deploying your apps and creating Kubernetes services to expose them.
       4.  Create the service in your cluster. If apps are deployed in multiple namespaces in your cluster, ensure that the service deploys into the same namespace as the app that you want to expose.
 
           ```
-          kubectl apply -f myapp_service.yaml [-n <namespace>]
+          kubectl apply -f myappservice.yaml [-n <namespace>]
           ```
           {: pre}
       5.  Repeat these steps for every app that you want to expose.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-05-31"
 
 ---
 
@@ -667,7 +667,7 @@ trusted: <em>true</em>
   {: #example_cluster_create}
 
   ```
-  bx cs cluster-create --location dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type u2c.2x4 --name my_cluster --hardware shared --workers 2
+  bx cs cluster-create --location dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
   ```
   {: pre}
 
@@ -1453,7 +1453,7 @@ You can provision your worker node as a virtual machine on shared or dedicated h
 <p>In a multi-tenant set up, physical resources, such as CPU and memory, are shared across all virtual machines that are deployed to the same physical hardware. To ensure that every virtual machine can run independently, a virtual machine monitor, also referred to as the hypervisor, segments the physical resources into isolated entities and allocates them as dedicated resources to a virtual machine (hypervisor isolation).</p>
 <p>In a single-tenant set up, all physical resources are dedicated to you only. You can deploy multiple worker nodes as virtual machines on the same physical host. Similar to the multi-tenant set up, the hypervisor assures that every worker node gets its share of the available physical resources.</p>
 <p>Shared nodes are usually less costly than dedicated nodes because the costs for the underlying hardware are shared among multiple customers. However, when you decide between shared and dedicated nodes, you might want to check with your legal department to discuss the level of infrastructure isolation and compliance that your app environment requires.</p>
-<p><strong>Virtual `u2c` or `b2c` machine flavors</strong>: These machines use local disk instead of storage area networking (SAN) for reliability. Reliability benefits include higher throughput when serializing bytes to the local disk and reduced file system degradation due to network failures. These machine types contain 25GB primary local disk storage for the OS file system, and 100GB secondary local disk storage for `/var/lib/docker`, the directory that all the container data is written to.</p>
+<p><strong>Virtual `u2c` or `b2c` machine flavors</strong>: These machines use local disk instead of storage area networking (SAN) for reliability. Reliability benefits include higher throughput when serializing bytes to the local disk and reduced file system degradation due to network failures. These machine types contain 25GB primary local disk storage for the OS file system, and 100GB secondary local disk storage for data such as container runtime and the kubelet.</p>
 <p><strong>What if I have deprecated `u1c` or `b1c` machine types?</strong> To start using `u2c` and `b2c` machine types, [update the machine types by adding worker nodes](cs_cluster_update.html#machine_type).</p></dd>
 <dt>What virtual and physical machine flavors can I choose from?</dt>
 <dd><p>Many! Select the type of machine that is best for your use case. Remember that a worker pool consists of machines that are the same flavor. If you want a mix of machine types in your cluster, create separate worker pools for each flavor.</p>
@@ -2095,14 +2095,14 @@ diskEncryption: <em>false</em></code></pre>
 **Examples**:
 
   ```
-  bx cs worker-add --cluster my_cluster --number 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type u2c.2x4 --hardware shared
+  bx cs worker-add --cluster my_cluster --number 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --hardware shared
   ```
   {: pre}
 
   Example for {{site.data.keyword.Bluemix_dedicated_notm}}:
 
   ```
-  bx cs worker-add --cluster my_cluster --number 3 --machine-type u2c.2x4
+  bx cs worker-add --cluster my_cluster --number 3 --machine-type b2c.4x16
   ```
   {: pre}
 

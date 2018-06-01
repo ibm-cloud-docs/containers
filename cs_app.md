@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-05-31"
 
 ---
 
@@ -138,7 +138,7 @@ To learn more about each component, review the [Kubernetes basics](cs_tech.html#
 Open a Kubernetes dashboard on your local system to view information about a cluster and its worker nodes. [In the GUI](#db_gui), you can access the dashboard with a convenient one-click button. [With the CLI](#db_cli), you can access the dashboard or use the steps in an automation process such as for a CI/CD pipeline.
 {:shortdesc}
 
-Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster. This task requires the [Administrator access policy](cs_users.html#access_policies). Verify your current [access policy](cs_users.html#infra_access).
+Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
 
 You can use the default port or set your own port to launch the Kubernetes dashboard for a cluster.
 
@@ -151,10 +151,16 @@ You can use the default port or set your own port to launch the Kubernetes dashb
 4.  On the **Clusters** page, click the cluster that you want to access.
 5.  From the cluster detail page, click the **Kubernetes Dashboard** button.
 
+</br>
+</br>
+
 **Launching the Kubernetes dashboard from the CLI**
 {: #db_cli}
 
-*  For clusters with a Kubernetes master version of 1.7.16 or earlier:
+*   **Deprecated**: For clusters with a Kubernetes master version of **1.7.16 or earlier**. This task requires the [Administrator access policy](cs_users.html#access_policies). Verify your current [access policy](cs_users.html#infra_access).
+
+    Kubernetes version 1.7 is unsupported as of 21 June 2018. [Update your clusters](cs_cluster_update.html#update) to version 1.8 or later.
+    {: tip}
 
     1.  Set the proxy with the default port number.
 
@@ -177,7 +183,7 @@ You can use the default port or set your own port to launch the Kubernetes dashb
         ```
         {: codeblock}
 
-*  For clusters with a Kubernetes master version of 1.8.2 or later:
+*  For clusters with a Kubernetes master version of **1.8.2 or later**:
 
     1.  Get your credentials for Kubernetes.
 
@@ -539,7 +545,7 @@ To execute a workload on a GPU machine:
 
     In this example, you see that both GPUs were used to execute the job because both the GPUs were scheduled in the worker node. If the limit is set to 1, only 1 GPU is shown.
 
-## Scaling apps 
+## Scaling apps
 {: #app_scaling}
 
 With Kubernetes, you can enable [horizontal pod autoscaling ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) to automatically increase or decrease the number of instances of your apps based on CPU.

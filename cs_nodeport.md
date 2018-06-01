@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-05-31"
 
 ---
 
@@ -49,7 +49,7 @@ The following diagram shows how communication is directed from the internet to a
 <br />
 
 
-## Enabling public access to an app by using a NodePort service
+## Enabling access to an app by using a NodePort service
 {: #config}
 
 You can expose your app as a Kubernetes NodePort service for free or standard clusters.
@@ -113,9 +113,9 @@ If you do not already have an app ready, you can use a Kubernetes example app ca
 
 **What's next:**
 
-When the app is deployed, you can use the public IP address of any worker node and the NodePort to form the public URL to access the app in a browser.
+When the app is deployed, you can use the public IP address of any worker node and the NodePort to form the public URL to access the app in a browser. If your worker nodes are connected to a private VLAN only, then a private NodePort service was created and can be accessible through q worker node's private IP address.
 
-1.  Get the public IP address for a worker node in the cluster.
+1.  Get the public IP address for a worker node in the cluster. If you want to access the worker node on a private network, get the private IP address instead.
 
     ```
     bx cs workers <cluster_name>
@@ -158,4 +158,4 @@ When the app is deployed, you can use the public IP address of any worker node a
     In this example, the NodePort is `30872`.</br>
     **Note:** If the **Endpoints** section displays `<none>`, check the `<selectorkey>` and `<selectorvalue>` that you use in the `spec.selector` section of the NodePort service. Ensure that it is the same as the _key/value_ pair that you used in the `spec.template.metadata.labels` section of your deployment yaml.
 
-3.  Form the URL with one of the worker node public IP addresses and the NodePort. Example: `http://192.0.2.23:30872`
+3.  Form the URL with one of the worker node IP addresses and the NodePort. Example: `http://192.0.2.23:30872`

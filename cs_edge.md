@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-05-31"
 
 ---
 
@@ -42,7 +42,7 @@ Before you begin:
 
 To label worker nodes as edge nodes:
 
-1. List all of the worker nodes in the cluster. Use the private IP address from the **NAME** column to identify the nodes. Select at least two worker nodes on each public VLAN to be edge worker nodes. Ingress requires at least two worker nodes in each zone to provide high availability. 
+1. List all of the worker nodes in the cluster. Use the private IP address from the **NAME** column to identify the nodes. Select at least two worker nodes on each public VLAN to be edge worker nodes. Ingress requires at least two worker nodes in each zone to provide high availability.
 
   ```
   kubectl get nodes -L publicVLAN,privateVLAN,dedicated

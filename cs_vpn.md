@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-05-31"
 
 ---
 
@@ -24,7 +24,7 @@ With VPN connectivity, you can securely connect apps in a Kubernetes cluster on 
 
 To connect your worker nodes and apps to an on-premises data center, you can configure one of the following options.
 
-- **strongSwan IPSec VPN Service**: You can set up a [strongSwan IPSec VPN service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.strongswan.org/) that securely connects your Kubernetes cluster with an on-premises network. The strongSwan IPSec VPN service provides a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPsec) protocol suite. To set up a secure connection between your cluster and an on-premises network, [configure and deploy the strongSwan IPSec VPN service](#vpn-setup) directly in a pod in your cluster.
+- **strongSwan IPSec VPN Service**: You can set up a [strongSwan IPSec VPN service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.strongswan.org/) that securely connects your Kubernetes cluster with an on-premises network. The strongSwan IPSec VPN service provides a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPSec) protocol suite. To set up a secure connection between your cluster and an on-premises network, [configure and deploy the strongSwan IPSec VPN service](#vpn-setup) directly in a pod in your cluster.
 
 - **Virtual Router Appliance (VRA) or Fortigate Security Appliance (FSA)**: You might choose to set up a [VRA](/docs/infrastructure/virtual-router-appliance/about.html) or [FSA](/docs/infrastructure/fortigate-10g/about.html) to configure an IPSec VPN endpoint. This option is useful when you have a larger cluster, want to access non-Kubernetes resources over the VPN, or want to access multiple clusters over a single VPN. To configure a VRA, see [Setting up VPN connectivity with VRA](#vyatta).
 
@@ -52,7 +52,7 @@ Because strongSwan is integrated within your cluster, you don't need an external
 {: #vpn_configure}
 
 Before you begin:
-* [Install an IPsec VPN gateway in your on-premises data center](/docs/infrastructure/iaas-vpn/set-up-ipsec-vpn.html#setting-up-an-ipsec-connection).
+* [Install an IPSec VPN gateway in your on-premises data center](/docs/infrastructure/iaas-vpn/set-up-ipsec-vpn.html#setting-up-an-ipsec-connection).
 * Either [create a standard cluster](cs_clusters.html#clusters_cli) or [update an existing cluster to version 1.7.16 or later](cs_cluster_update.html#master).
 * The cluster must have at least one available public Load Balancer IP address. [You can check to see your available public IP addresses](cs_subnets.html#manage) or [free up a used IP address](cs_subnets.html#free).
 * [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure).

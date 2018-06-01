@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-24"
+lastupdated: "2018-06-01"
 
 ---
 
@@ -275,16 +275,24 @@ bx plugin list
       <td>[bx cs worker-add](#cs_worker_add)</td>
       <td>[bx cs worker-get](#cs_worker_get)</td>
       <td>[bx cs worker-reboot](#cs_worker_reboot)</td>
-      <td>[bx cs worker-reload](#cs_worker_reload)</td></staging>
+      <td>[bx cs worker-reload](#cs_worker_reload)</td>
     </tr>
     <tr>
       <td>[bx cs worker-rm](#cs_worker_rm)</td>
       <td>[bx cs worker-update](#cs_worker_update)</td>
       <td>[bx cs workers](#cs_workers)</td>
-      <td></td>
+      <td>[bx cs worker-get](#cs_worker_get)</td>
+    </tr>
+    <tr>
+      <td>[bx cs worker-reboot](#cs_worker_reboot)</td>
+      <td>[bx cs worker-reload](#cs_worker_reload)</td>
+      <td>[bx cs worker-rm](#cs_worker_rm)</td>
+      <td>[bx cs workers](#cs_workers)</td>
     </tr>
   </tbody>
 </table>
+
+
 
 ## API commands
 {: #api_commands}
@@ -622,7 +630,7 @@ bx cs cluster-config my_cluster
 ### bx cs cluster-create [--file FILE_LOCATION] [--hardware HARDWARE] --location LOCATION --machine-type MACHINE_TYPE --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--workers WORKER] [--disable-disk-encrypt] [--trusted] [-s]
 {: #cs_cluster_create}
 
-Create a cluster in your organization. For free clusters, you specify the cluster name; everything else is set to a default value. A free cluster is automatically deleted after 21 days. You can have one free cluster at a time. To take advantage of the full capabilities of Kubernetes, create a standard cluster.
+Create a cluster in your organization. For free clusters, you specify the cluster name; everything else is set to a default value. A free cluster is automatically deleted after 30 days. You can have one free cluster at a time. To take advantage of the full capabilities of Kubernetes, create a standard cluster.
 
 <strong>Command options</strong>
 
@@ -771,7 +779,7 @@ trusted: <em>true</em>
 
   
 
-  **Create a free cluster**: Specify the cluster name only; everything else is set to a default value. A free cluster is automatically deleted after 21 days. You can have one free cluster at a time. To take advantage of the full capabilities of Kubernetes, create a standard cluster.
+  **Create a free cluster**: Specify the cluster name only; everything else is set to a default value. A free cluster is automatically deleted after 30 days. You can have one free cluster at a time. To take advantage of the full capabilities of Kubernetes, create a standard cluster.
 
   ```
   bx cs cluster-create --name my_cluster
@@ -782,14 +790,14 @@ trusted: <em>true</em>
   {: #example_cluster_create}
 
   ```
-  bx cs cluster-create --location dal10 --private-vlan my_private_VLAN_ID --machine-type u2c.2x4 --name my_cluster --hardware shared --workers 2
+  bx cs cluster-create --location dal10 --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
   ```
   {: pre}
 
   **Create subsequent standard clusters**: If you already created a standard cluster in this location or created a public VLAN in IBM Cloud infrastructure (SoftLayer) before, specify that public VLAN with the `--public-vlan` flag. To find out if you already have a public VLAN for a specific location or to find the name of an existing public VLAN, run `bx cs vlans <location>`.
 
   ```
-  bx cs cluster-create --location dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type u2c.2x4 --name my_cluster --hardware shared --workers 2
+  bx cs cluster-create --location dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --name my_cluster --hardware shared --workers 2
   ```
   {: pre}
 
@@ -997,8 +1005,6 @@ View a list of Kubernetes versions supported in {{site.data.keyword.containersho
   ```
   {: pre}
 
-
-
 <br />
 
 
@@ -1084,15 +1090,14 @@ List the services that are bound to one or all of the Kubernetes namespace in a 
    <dd>Include the services that are bound to a specific namespace in a cluster. This value is optional.</dd>
 
    <dt><code>--all-namespaces</code></dt>
-    <dd>Include the services that are bound to all of the namespaces in a cluster. This value is optional.</dd>
+   <dd>Include the services that are bound to all of the namespaces in a cluster. This value is optional.</dd>
 
-    <dt><code>--json</code></dt>
-    <dd>Prints the command output in JSON format. This value is optional.</dd>
+   <dt><code>--json</code></dt>
+   <dd>Prints the command output in JSON format. This value is optional.</dd>
 
-    <dt><code>-s</code></dt>
-    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-
-    </dl>
+   <dt><code>-s</code></dt>
+   <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+   </dl>
 
 **Example**:
 
@@ -1666,114 +1671,10 @@ After you remove the credentials, the [IAM API key](#cs_api_key_info) is used to
 ### bx cs machine-types LOCATION [--json] [-s]
 {: #cs_machine_types}
 
-View a list of available machine types for your worker nodes. Machine types vary by location. Each machine type includes the amount of virtual CPU, memory, and disk space for each worker node in the cluster. By default, the `/var/lib/docker` directory, where all container data is stored, is encrypted with LUKS encryption. If the `disable-disk-encrypt` option is included during cluster creation, then the host's Docker data is not encrypted. [Learn more about the encryption.](cs_secure.html#encrypted_disks)
+View a list of available machine types for your worker nodes. Machine types vary by location. Each machine type includes the amount of virtual CPU, memory, and disk space for each worker node in the cluster. By default, the secondary storage disk directory where all container data is stored, is encrypted with LUKS encryption. If the `disable-disk-encrypt` option is included during cluster creation, then the host's Docker data is not encrypted. [Learn more about the encryption.](cs_secure.html#encrypted_disks)
 {:shortdesc}
 
-You can provision your worker node as a virtual machine on shared or dedicated hardware, or as a physical machine on bare metal.
-
-<dl>
-<dt>Why would I use physical machines (bare metal)?</dt>
-<dd><p><strong>More compute resources</strong>: You can provision your worker node as a single-tenant physical server, also referred to as bare metal. Bare metal gives you direct access to the physical resources on the machine, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all of a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance. Physical machine types have more local storage than virtual, and some have RAID to back up local data.</p>
-<p><strong>Monthly billing</strong>: Bare metal servers are more expensive than virtual servers, and are best suited for high-performance apps that need more resources and host control. Bare metal servers are billed monthly. If you cancel a bare metal server before the end of the month, you are charged through the end of that month. Ordering and canceling bare metal servers is a manual process through your IBM Cloud infrastructure (SoftLayer) account. It can take more than one business day to complete.</p>
-<p><strong>Option to enable Trusted Compute</strong>: Enable Trusted Compute to verify your worker nodes against tampering. If you don't enable trust during cluster creation but want to later, you can use the `bx cs feature-enable` [command](cs_cli_reference.html#cs_cluster_feature_enable). After you enable trust, you cannot disable it later. You can make a new cluster without trust. For more information about how trust works during the node startup process, see [{{site.data.keyword.containershort_notm}} with Trusted Compute](cs_secure.html#trusted_compute). Trusted Compute is available on clusters that run Kubernetes version 1.9 or later and have certain bare metal machine types. When you run the `bx cs machine-types <location>` [command](cs_cli_reference.html#cs_machine_types), you can see which machines support trust by reviewing the **Trustable** field. For example, `mgXc` GPU flavors do not support Trusted Compute.</p></dd>
-<dt>Why would I use virtual machines?</dt>
-<dd><p>With VMs, you get greater flexibility, quicker provisioning times, and more automatic scalability features than bare metal, at a more cost-effective price. You can use VMs for most general purpose use cases such as testing and development environments, staging and prod environments, microservices, and business apps. However, there is a trade-off in performance. If you need high performance computing for RAM-, data-, or GPU-intensive workloads, use bare metal.</p>
-<p><strong>Decide between single or multiple tenancy</strong>: When you create a standard virtual cluster, you must choose whether you want the underlying hardware to be shared by multiple {{site.data.keyword.IBM_notm}} customers (multi tenancy) or to be dedicated to you only (single tenancy).</p>
-<p>In a multi-tenant set up, physical resources, such as CPU and memory, are shared across all virtual machines that are deployed to the same physical hardware. To ensure that every virtual machine can run independently, a virtual machine monitor, also referred to as the hypervisor, segments the physical resources into isolated entities and allocates them as dedicated resources to a virtual machine (hypervisor isolation).</p>
-<p>In a single-tenant set up, all physical resources are dedicated to you only. You can deploy multiple worker nodes as virtual machines on the same physical host. Similar to the multi-tenant set up, the hypervisor assures that every worker node gets its share of the available physical resources.</p>
-<p>Shared nodes are usually less costly than dedicated nodes because the costs for the underlying hardware are shared among multiple customers. However, when you decide between shared and dedicated nodes, you might want to check with your legal department to discuss the level of infrastructure isolation and compliance that your app environment requires.</p>
-<p><strong>Virtual `u2c` or `b2c` machine flavors</strong>: These machines use local disk instead of storage area networking (SAN) for reliability. Reliability benefits include higher throughput when serializing bytes to the local disk and reduced file system degradation due to network failures. These machine types contain 25GB primary local disk storage for the OS file system, and 100GB secondary local disk storage for `/var/lib/docker`, the directory that all the container data is written to.</p>
-<p><strong>What if I have deprecated `u1c` or `b1c` machine types?</strong> To start using `u2c` and `b2c` machine types, [update the machine types by adding worker nodes](cs_cluster_update.html#machine_type).</p></dd>
-<dt>What virtual and physical machine flavors can I choose from?</dt>
-<dd><p>Many! Select the type of machine that is best for your use case. Remember that a worker pool consists of machines that are the same flavor. If you want a mix of machine types in your cluster, create separate worker pools for each flavor.</p>
-<p>Machine types vary by zone. To see the machine types available in your zone, run `bx cs machine-types <zone_name>`.</p>
-<p><table>
-<caption>Available physical (bare metal) and virtual machine types in {{site.data.keyword.containershort_notm}}.</caption>
-<thead>
-<th>Name and use case</th>
-<th>Cores / Memory</th>
-<th>Primary / Secondary disk</th>
-<th>Network speed</th>
-</thead>
-<tbody>
-<tr>
-<td><strong>Virtual, u2c.2x4</strong>: Use this smallest size VM for quick testing, proofs of concept, and other light workloads.</td>
-<td>2 / 4GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, b2c.4x16</strong>: Select this balanced VM for testing and development, and other light workloads.</td>
-<td>4 / 16GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, b2c.16x64</strong>: Select this balanced VM for mid-sized workloads.</td></td>
-<td>16 / 64GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, b2c.32x128</strong>: Select this balanced VM for mid to large workloads, such as a database and a dynamic website with many concurrent users.</td></td>
-<td>32 / 128GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, b2c.56x242</strong>: Select this balanced VM for large workloads, such as a database and multiple apps with many concurrent users.</td></td>
-<td>56 / 242GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>RAM-intensive bare metal, mr1c.28x512</strong>: Maximize the RAM available to your worker nodes.</td>
-<td>28 / 512GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>GPU bare metal, mg1c.16x128</strong>: Choose this type for mathematically-intensive workloads such as high performance computing, machine learning, or 3D applications. This flavor has 1 Tesla K80 physical card that has 2 graphics processing units (GPUs) per card for a total of 2 GPUs.</td>
-<td>16 / 128GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>GPU bare metal, mg1c.28x256</strong>: Choose this type for mathematically-intensive workloads such as high performance computing, machine learning, or 3D applications. This flavor has 2 Tesla K80 physical cards that have 2 GPUs per card for a total of 4 GPUs.</td>
-<td>28 / 256GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Data-intensive bare metal, md1c.16x64.4x4tb</strong>: For a significant amount of local disk storage, including RAID to back up data that is stored locally on the machine. Use for cases such as distributed file systems, large databases, and big data analytics workloads.</td>
-<td>16 / 64GB</td>
-<td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Data-intensive bare metal, md1c.28x512.4x4tb</strong>: For a significant amount of local disk storage, including RAID to back up data that is stored locally on the machine. Use for cases such as distributed file systems, large databases, and big data analytics workloads.</td>
-<td>28 / 512 GB</td>
-<td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Balanced bare metal, mb1c.4x32</strong>: Use for balanced workloads that require more compute resources than virtual machines offer.</td>
-<td>4 / 32GB</td>
-<td>2TB SATA / 2TB SATA</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Balanced bare metal, mb1c.16x64</strong>: Use for balanced workloads that require more compute resources than virtual machines offer.</td>
-<td>16 / 64GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
-</tr>
-</tbody>
-</table>
-</p>
-</dd>
-</dl>
-
+You can provision your worker node as a virtual machine on shared or dedicated hardware, or as a physical machine on bare metal. [Learn more about your machine type options](cs_clusters.html#shared_dedicated_node).
 
 <strong>Command options</strong>:
 
@@ -1794,28 +1695,6 @@ You can provision your worker node as a virtual machine on shared or dedicated h
   bx cs machine-types dal10
   ```
   {: pre}
-
-**Example output**:
-
-  ```
-  Getting machine types list...
-  OK
-  Machine Types
-  Name                 Cores   Memory   Network Speed   OS             Server Type   Storage   Secondary Storage   Trustable
-  u2c.2x4              2       4GB      1000Mbps        UBUNTU_16_64   virtual       25GB      100GB               False
-  b2c.4x16             4       16GB     1000Mbps        UBUNTU_16_64   virtual       25GB      100GB               False
-  b2c.16x64            16      64GB     1000Mbps        UBUNTU_16_64   virtual       25GB      100GB               False
-  b2c.32x128           32      128GB    1000Mbps        UBUNTU_16_64   virtual       25GB      100GB               False
-  b2c.56x242           56      242GB    1000Mbps        UBUNTU_16_64   virtual       25GB      100GB               False
-  mb1c.4x32            4       32GB     10000Mbps       UBUNTU_16_64   physical      1000GB    2000GB              False
-  mb1c.16x64           16      64GB     10000Mbps       UBUNTU_16_64   physical      1000GB    1700GB              False
-  mr1c.28x512          28      512GB    10000Mbps       UBUNTU_16_64   physical      1000GB    1700GB              False
-  md1c.16x64.4x4tb     16      64GB     10000Mbps       UBUNTU_16_64   physical      1000GB    8000GB              False
-  md1c.28x512.4x4tb    28      512GB    10000Mbps       UBUNTU_16_64   physical      1000GB    8000GB              False
-  
-  ```
-  {: screen}
-
 
 ### bx cs vlans LOCATION [--all] [--json] [-s]
 {: #cs_vlans}
@@ -2339,7 +2218,7 @@ us-south      us-south
 {: worker_node_commands}
 
 
-### bx cs worker-add --cluster CLUSTER [--file FILE_LOCATION] [--hardware HARDWARE] --machine-type MACHINE_TYPE --number NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt] [-s]
+### bx cs worker-add --cluster CLUSTER [--file FILE_LOCATION] [--hardware HARDWARE] --machine-type MACHINE_TYPE --workers NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt] [-s]
 {: #cs_worker_add}
 
 Add worker nodes to your standard cluster.
@@ -2412,7 +2291,7 @@ diskEncryption: <em>false</em></code></pre>
 <dt><code>--machine-type <em>MACHINE_TYPE</em></code></dt>
 <dd>Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the location in which you deploy the cluster. For more information, see the documentation for the `bx cs machine-types` [command](cs_cli_reference.html#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
 
-<dt><code>--number <em>NUMBER</em></code></dt>
+<dt><code>--workers <em>NUMBER</em></code></dt>
 <dd>An integer that represents the number of worker nodes to create in the cluster. The default value is 1. This value is optional.</dd>
 
 <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
@@ -2426,7 +2305,7 @@ diskEncryption: <em>false</em></code></pre>
 <p><strong>Note:</strong> Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When creating a cluster and specifying the public and private VLANs, the number and letter combination after those prefixes must match.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
-<dd>Worker nodes feature disk encryption by default; [learn more](cs_secure.html#worker).. To disable encryption, include this option.</dd>
+<dd>Worker nodes feature disk encryption by default; [learn more](cs_secure.html#worker). To disable encryption, include this option.</dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -2436,156 +2315,16 @@ diskEncryption: <em>false</em></code></pre>
 **Examples**:
 
   ```
-  bx cs worker-add --cluster my_cluster --number 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type u2c.2x4 --hardware shared
+  bx cs worker-add --cluster my_cluster --number 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b2c.4x16 --hardware shared
   ```
   {: pre}
 
   Example for {{site.data.keyword.Bluemix_dedicated_notm}}:
 
   ```
-  bx cs worker-add --cluster my_cluster --number 3 --machine-type u2c.2x4
+  bx cs worker-add --cluster my_cluster --number 3 --machine-type b2c.4x16
   ```
   {: pre}
-
- in which you deploy the cluster. For more information, see the documentation for the `bx cs machine-types` [command](cs_cli_reference.html#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
-
-  <dt><code>--size-per-zone <em>WORKERS_PER_ZONE</em></code></dt>
-    <dd>The number of workers to create in each zone. This value is required.</dd>
-
-  <dt><code>--kube-version <em>VERSION</em></code></dt>
-    <dd>The version of Kubernetes that you want your worker nodes to be created with. The default version is used if this value is not specified.</dd>
-
-  <dt><code>--hardware <em>HARDWARE</em></code></dt>
-    <dd>The level of hardware isolation for your worker node. Use dedicated if you want to have available physical resources dedicated to you only, or shared to allow physical resources to be shared with other IBM customers. The default is shared. This value is optional.</dd>
-
-  <dt><code>--labels <em>LABELS</em></code></dt>
-    <dd>The labels that you want to assign to the workers in your pool. Example: <key1>=<val1>,<key2>=<val2></dd>
-
-  <dt><code>--private-only </code></dt>
-    <dd>Specifies that there are no public VLANS on the worker pool. The default value is <code>false</code>.</dd>
-
-  <dt><code>--diable-disk-encrpyt</code></dt>
-    <dd>Specifies that the disk is not encrypted. The default value is <code>false</code>.</dd>
-
-</dl>
-
-**Example command**:
-
-  ```
-  bx cs worker-pool-add my_cluster --machine-type u2c.2x4 --size-per-zone 6
-  ```
-  {: pre}
-
-### bx cs worker-pools --cluster CLUSTER
-{: #cs_worker_pools}
-
-View the worker pools that you have in a cluster.
-
-<strong>Command options</strong>:
-
-<dl>
-  <dt><code>--cluster <em>CLUSTER_NAME_OR_ID</em></code></dt>
-    <dd>The name or ID of the cluster for which you want to list worker pools. This value is required.</dd>
-</dl>
-
-**Example command**:
-
-  ```
-  bx cs worker-pools --cluster my_cluster
-  ```
-  {: pre}
-
-### bx cs worker-pool-get --worker-pool WORKER_POOL --cluster CLUSTER
-{: #cs_worker_pool_get}
-
-View the details of a worker pool.
-
-<strong>Command options</strong>:
-
-<dl>
-  <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
-    <dd>The name of the worker node pool that you want to view the details of. This value is required.</dd>
-  <dt><code>--cluster <em>CLUSTER</em></code></dt>
-    <dd>The name or ID of the cluster where the worker pool is located. This value is required.</dd>
-</dl>
-
-**Example command**:
-
-  ```
-  bx cs worker-pool-get --worker-pool pool1 --cluster my_cluster
-  ```
-  {: pre}
-
-### bx cs worker-pool-update --worker-pool WORKER_POOL --cluster CLUSTER
-{: #cs_worker_pool_update}
-
-Update all of the worker nodes in your pool to the latest Kubernetes version that matches the specified master.
-
-<strong>Command options</strong>:
-
-<dl>
-  <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
-    <dd>The name of the worker node pool that you want to update. This value is required.</dd>
-  <dt><code>--cluster <em>CLUSTER</em></code></dt>
-    <dd>The name or ID of the cluster for which you want to update worker pools. This value is required.</dd>
-</dl>
-
-**Example command**:
-
-  ```
-  bx cs worker-pool-update --worker-pool pool1 --cluster my_cluster
-  ```
-  {: pre}
-
-
-
-### bx cs worker-pool-resize --worker-pool WORKER_POOL --cluster CLUSTER --size-per-zone WORKERS_PER_ZONE
-{: #cs_worker_pool_resize}
-
-Resize your worker pool to increase or decrease the number of worker nodes that are in each zone of your cluster.
-
-<strong>Command options</strong>:
-
-<dl>
-  <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
-    <dd>The name of the worker node pool that you want to update. This value is required.</dd>
-
-  <dt><code>--cluster <em>CLUSTER</em></code></dt>
-    <dd>The name or ID of the cluster for which you want to resize worker pools. This value is required.</dd>
-
-  <dt><code>--size-per-zone <em>WORKERS_PER_ZONE</em></code></dt>
-    <dd>The number of workers that you want to create in each zone. This value is required.</dd>
-</dl>
-
-**Example command**:
-
-  ```
-  bx cs worker-pool-update --cluster my_cluster --worker-pool pool1,pool2 --size-per-zone 3
-  ```
-  {: pre}
-
-### bx cs worker-pool-rm --worker-pool WORKER_POOL --cluster CLUSTER
-{: #cs_worker_pool_rm}
-
-Remove a worker pool from your cluster. All worker nodes in the pool are deleted. Your pods are rescheduled when you delete. To avoid downtime, be sure that you have enough workers to run your workload.
-
-<strong>Command options</strong>:
-
-<dl>
-  <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
-    <dd>The name of the worker node pool that you want to remove. This value is required.</dd>
-  <dt><code>--cluster <em>CLUSTER</em></code></dt>
-    <dd>The name or ID of the cluster that you want to remove the worker pool from. This value is required.</dd>
-</dl>
-
-**Example command**:
-
-  ```
-  bx cs worker-pool-rm --cluster my_cluster --worker-pool pool1
-  ```
-  {: pre}
-
-</staging>
 
 ### bx cs worker-get [CLUSTER_NAME_OR_ID] WORKER_NODE_ID [--json] [-s]
 {: #cs_worker_get}
@@ -2838,7 +2577,7 @@ Before you remove your worker node, make sure that pods are rescheduled on other
   {: pre}
 
 
-###bx cs worker-update [-f] CLUSTER WORKER [WORKER] [--kube-version MAJOR.MINOR.PATCH] [--force-update] [-s]
+### bx cs worker-update [-f] CLUSTER WORKER [WORKER] [--kube-version MAJOR.MINOR.PATCH] [--force-update] [-s]
 {: #cs_worker_update}
 
 Update worker nodes to apply the latest security updates and patches to the operating system, and to update the Kubernetes version to match the version of the master node. You can update the master node Kubernetes version with the `bx cs cluster-update` [command](cs_cli_reference.html#cs_cluster_update).
@@ -2908,3 +2647,8 @@ View a list of worker nodes and the status for each in a cluster.
   bx cs workers my_cluster
   ```
   {: pre}
+
+<br />
+
+
+
