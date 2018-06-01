@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-31"
+lastupdated: "2018-06-01"
 
 ---
 
@@ -133,9 +133,9 @@ Locations are physical data centers that are available within an {{site.data.key
 |--------|----------|------|
 | AP North | hkg02, seo01, sng01, tok02 | Hong Kong S.A.R. of the PRC, Seoul, Singapore, Tokyo |
 | AP South     | mel01, syd01, syd04        | Melbourne, Sydney |
-| EU Central     | ams03, fra02, par01        | Amsterdam, Frankfurt, Paris |
+| EU Central     | ams03, fra02, fra04, fra05, par01        | Amsterdam, Frankfurt, Paris |
 | UK South      | lon02, lon04         | London |
-| US East      | mon01, tor01, wdc06, wdc07        | Montreal, Toronto, Washington DC |
+| US East      | mon01, tor01, wdc04, wdc06, wdc07        | Montreal, Toronto, Washington DC |
 | US South     | dal10, dal12, dal13, sao01       | Dallas, São Paulo |
 {: caption="Available regions and locations" caption-side="top"}
 
