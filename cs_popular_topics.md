@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-31"
+lastupdated: "2018-06-01"
 
 ---
 
@@ -118,7 +118,7 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <tr>
 <td>12 March</td>
 <td>[Just joined the {{site.data.keyword.Bluemix_notm}} with a Trial account? Try out a free Kubernetes cluster!](container_index.html#clusters)</td>
-<td>With a Trial [{{site.data.keyword.Bluemix_notm}} account](https://console.bluemix.net/registration/), you can deploy one free cluster for 21 days to test out Kubernetes capabilities.</td>
+<td>With a Trial [{{site.data.keyword.Bluemix_notm}} account](https://console.bluemix.net/registration/), you can deploy one free cluster for 30 days to test out Kubernetes capabilities.</td>
 </tr>
 </tbody></table>
 
