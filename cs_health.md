@@ -22,15 +22,11 @@ lastupdated: "2018-06-04"
 Set up logging and monitoring in {{site.data.keyword.containerlong}} to help you troubleshoot issues and improve the health and performance of your Kubernetes clusters and apps.
 {: shortdesc}
 
-
 ## Configuring cluster and app log forwarding
 {: #logging}
 
-With a standard Kubernetes cluster in {{site.data.keyword.containershort_notm}}, you can forward logs from different sources to {{site.data.keyword.loganalysislong_notm}}, to an external syslog server or to both.
+With a standard Kubernetes cluster in {{site.data.keyword.containershort_notm}}, you can forward logs from different sources to {{site.data.keyword.loganalysislong_notm}}, to an external syslog server or to both. To forward logs to both, create two configurations.
 {: shortdesc}
-
-If you want to forward logs from one source to both collector servers, then you must create two logging configurations.
-{: tip}
 
 Check out the following table for information about the different log sources.
 
@@ -78,14 +74,16 @@ Check out the following table for information about the different log sources.
   </tbody>
 </table>
 
-To enable logging at the account level or to configure application logging, use the CLI.
-{: tip}
-
+</br>
+</br>
 
 ### Enabling log forwarding with the GUI
 {: #enable-forwarding-ui}
 
 You can set up a logging configuration in the {{site.data.keyword.containershort_notm}} dashboard. It can take a few minutes for the process to complete, so if you don't see logs immediately, try waiting a few minutes and then check back.
+
+To enable logging at the account level or to configure application logging, use the CLI.
+{: tip}
 
 1. Navigate to the **Overview** tab of the dashboard.
 2. Select the Cloud Foundry org and space from which you want to forward logs. When you configure log forwarding in the dashboard, logs are sent to the default {{site.data.keyword.loganalysisshort_notm}} endpoint for your cluster. To forward logs to an external server, or to another {{site.data.keyword.loganalysisshort_notm}} endpoint, you can use the CLI to configure logging.
@@ -95,49 +93,102 @@ You can set up a logging configuration in the {{site.data.keyword.containershort
     {: tip}
 4. Click **Create**.
 
+</br>
+</br>
+
 ### Enabling log forwarding with the CLI
 {: #enable-forwarding}
 
-You can create a configuration for cluster logging. You can differentiate between different log sources by using flags. You can review a full list of the configuration options in the [CLI reference](cs_cli_reference.html#logging_commands).
+You can create a configuration for cluster logging. You can differentiate between the different logging options by using flags.
 
-**Before you begin**
+<table>
+<caption>Understanding the options for logging options</caption>
+  <thead>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding logging configuration options</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
+      <td>The name or ID of the cluster.</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;log_source&gt;</em></code></td>
+      <td>The source that you want to forward logs from. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, and <code>kube-audit</code>.</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;kubernetes_namespace&gt;</em></code></td>
+      <td>Optional: The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the <code>container</code> log source. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;hostname_or_ingestion_URL&gt;</em></code></td>
+      <td><p>For {{site.data.keyword.loganalysisshort_notm}}, use the [ingestion URL](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region in which you created your cluster is used.</p>
+      <p>For syslog, specify the hostname or IP address of the log collector service.</p></td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;port&gt;</em></code></td>
+      <td>The ingestion port. If you do not specify a port, then the standard port <code>9091</code> is used.
+      <p>For syslog, specify the port of the log collector server. If you do not specify a port, then the standard port <code>514</code> is used.</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;cluster_space&gt;</em></code></td>
+      <td>Optional: The name of the Cloud Foundry space that you want to send logs to. When forwarding logs to {{site.data.keyword.loganalysisshort_notm}}, the space and org are specified in the ingestion point. If you do not specify a space, logs are sent to the account level.</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;cluster_org&gt;</em></code></td>
+      <td>The name of the Cloud Foundry org that the space is in. This value is required if you specified a space.</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;server_type&gt;</em></code></td>
+      <td>Where you want to forward your logs. Options are <code>ibm</code>, which forwards your logs to {{site.data.keyword.loganalysisshort_notm}} and <code>syslog</code>, which forwards your logs to an external server.</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;paths_to_logs&gt;</em></code></td>
+      <td>The path on a container that the apps log to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma-separated list. Example: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;containers&gt;</em></code></td>
+      <td>Optional: To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma-separated list. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided.</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;protocol&gt;</em></code></td>
+      <td>When the logging type is <code>syslog</code>, the transport layer protocol. You can use the following protocols: `udp`, `tcp`, or `tls`. When forwarding to an rsyslog server with the <code>udp</code> protocol, logs that are over 1KB are truncated.</td>
+    </tr>
+    <tr>
+      <td><code><em>&lt;secret_name&gt;</em></code></td>
+      <td>The name of the secret that you assign to your encoded secret</td>
+    </tr>
+    <tr>
+      <td><code><em>--skip-validation</em></code></td>
+      <td>Optional: Skip the validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration will not correctly forward logs.</td>
+    </tr>
+  </tbody>
+</table>
 
-1. Verify permissions. If you specified a space when you created the cluster or the logging configuration, then both the account owner and {{site.data.keyword.containershort_notm}} API key owner need Manager, Developer, or Auditor permissions in that space.
+</br>
+</br>
+
+**Forwarding logs to IBM**
+
+1. Verify permissions. If you specified a space when you created the cluster or the logging configuration, then both the account owner and {{site.data.keyword.containershort_notm}} API key owner need Manager, Developer, or Auditor [permissions](cs_users.html#access_policies) in that space.
   * If you don't know who the {{site.data.keyword.containershort_notm}} API key owner is, run the following command.
       ```
       bx cs api-key-info <cluster_name>
       ```
       {: pre}
-  * To immediately apply any changes that you made to your permissions, run the following command.
+  * To immediately apply any changes that you made, run the following command.
       ```
       bx cs logging-config-refresh <cluster_name>
       ```
       {: pre}
-
-  For more information about changing {{site.data.keyword.containershort_notm}} access policies and permissions, see [Managing cluster access](cs_users.html#access_policies).
-  {: tip}
 
 2. [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster where the log source is located.
 
   If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
   {: tip}
 
-3. To forward logs to syslog, set up a server that accepts a syslog protocol in one of two ways:
-  * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider. Your syslog server must accept `udp` or `tcp` protocol.
-  * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in a Kubernetes cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host.
-
-    You can remove syslog prefixes to see your logs as valid JSON by adding the following code to the top of your `etc/rsyslog.conf` file where your rsyslog server is running.</br>
-    ```$template customFormat,"%msg%\n"
-    $ActionFileDefaultTemplate customFormat
+3. Create a log forwarding configuration.
     ```
-    {: tip}
-
-
-**Forwarding logs**
-
-1. Create a log forwarding configuration.
-    ```
-    bx cs logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type <server_type> --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
+    bx cs logging-config-create <cluster_name_or_ID> --logsource <log_source> --type ibm --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --space <cluster_space> --org <cluster_org --app-containers <containers> --app-paths <paths_to_logs> --skip-validation
     ```
     {: pre}
 
@@ -153,283 +204,82 @@ You can create a configuration for cluster logging. You can differentiate betwee
       {: screen}
 
     * Example application logging configuration and output:
-    ```
-    bx cs logging-config-create cluster2 --logsource application --app-paths '/var/log/apps.log' --app-containers 'container1,container2,container3'
-    Creating logging configuration for application logs in cluster cluster2...
-    OK
-    Id                                     Source        Namespace   Host                                    Port    Org   Space   Server Type   Protocol   Application Containers               Paths
-    aa2b415e-3158-48c9-94cf-f8b298a5ae39   application    -          ingest.logging.stage1.ng.bluemix.net✣  9091✣    -      -          ibm         -        container1,container2,container3      /var/log/apps.log
-    ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysisshort_notm}} service.
-    ```
-    {: screen}
+      ```
+      bx cs logging-config-create cluster2 --logsource application --app-paths '/var/log/apps.log' --app-containers 'container1,container2,container3'
+      Creating logging configuration for application logs in cluster cluster2...
+      OK
+      Id                                     Source        Namespace   Host                                    Port    Org   Space   Server Type   Protocol   Application Containers               Paths
+      aa2b415e-3158-48c9-94cf-f8b298a5ae39   application    -          ingest.logging.stage1.ng.bluemix.net✣  9091✣    -      -          ibm         -        container1,container2,container3      /var/log/apps.log
+      ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysisshort_notm}} service.
+      ```
+      {: screen}
 
       If you have apps that run in your containers that can't be configured to write logs to STDOUT or STDERR, you can create a logging configuration to forward logs from app log files.
       {: tip}
 
-  <table>
-  <caption>Understanding this command's components</caption>
-    <thead>
-      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
-        <td>The name or ID of the cluster.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;log_source&gt;</em></code></td>
-        <td>The source that you want to forward logs from. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, and <code>kube-audit</code>.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;kubernetes_namespace&gt;</em></code></td>
-        <td>Optional: The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the <code>container</code> log source. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;hostname_or_ingestion_URL&gt;</em></code></td>
-        <td><p>For {{site.data.keyword.loganalysisshort_notm}}, use the [ingestion URL](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region in which you created your cluster is used.</p>
-        <p>For syslog, specify the hostname or IP address of the log collector service.</p></td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;port&gt;</em></code></td>
-        <td>The ingestion port. If you do not specify a port, then the standard port <code>9091</code> is used.
-        <p>For syslog, specify the port of the log collector server. If you do not specify a port, then the standard port <code>514</code> is used.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;cluster_space&gt;</em></code></td>
-        <td>Optional: The name of the Cloud Foundry space that you want to send logs to. When forwarding logs to {{site.data.keyword.loganalysisshort_notm}}, the space and org are specified in the ingestion point. If you do not specify a space, logs are sent to the account level.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;cluster_org&gt;</em></code></td>
-        <td>The name of the Cloud Foundry org that the space is in. This value is required if you specified a space.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;server_type&gt;</em></code></td>
-        <td>Where you want to forward your logs. Options are <code>ibm</code>, which forwards your logs to {{site.data.keyword.loganalysisshort_notm}} and <code>syslog</code>, which forwards your logs to an external server.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;paths_to_logs&gt;</em></code></td>
-        <td>The path on a container that the apps log to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma-separated list. Example: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;containers&gt;</em></code></td>
-        <td>Optional: To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma-separated list. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;protocol&gt;</em></code></td>
-        <td>When the logging type is <code>syslog</code>, the transport layer protocol. Supported values are <code>TCP</code> and the default <code>UDP</code>. When forwarding to an rsyslog server with the <code>UDP</code> protocol, logs that are over 1KB are truncated.</td>
-      </tr>
-      <tr>
-        <td><code><em>--skip-validation</em></code></td>
-        <td>Optional: Skip the validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration will not correctly forward logs.</td>
-      </tr>
-    </tbody>
-  </table>
+</br>
+</br>
 
-2. Verify that your configuration is correct in one of two ways:
+**Forwarding logs to your own server**
 
-    * To list all of the logging configurations in a cluster:
-      ```
-      bx cs logging-config-get <cluster_name_or_ID>
-      ```
-      {: pre}
+1. To forward logs to syslog, set up a server that accepts a syslog protocol in one of two ways:
+  * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.You can use the following protocols: `udp`, `tcp`, or `tls`. **Note**: Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in a Kubernetes cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host.
 
-    * To list the logging configurations for one type of log source:
-      ```
-      bx cs logging-config-get <cluster_name_or_ID> --logsource worker
-      ```
-      {: pre}
+    You can remove syslog prefixes to see your logs as valid JSON by adding the following code to the top of your `etc/rsyslog.conf` file where your rsyslog server is running.</br>
+    ```$template customFormat,"%msg%\n"
+    $ActionFileDefaultTemplate customFormat
+    ```
+    {: tip}
 
+2. [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster where the log source is located.
 
+  If you are using a Dedicated account, you must log in to the public {{site.data.keyword.cloud_notm}} endpoint and target your public org and space in order to enable log forwarding.
+  {: tip}
 
+3. Create a log forwarding configuration.
+    ```
+    bx cs logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
+    ```
+    {: pre}
 
-<br />
+</br>
+</br>
 
+### Verifying log forwarding
+{: verify-logging}
 
+You can verify that your configuration is set up correctly in one of two ways:
 
-## Viewing logs
-{: #view_logs}
+* To list all of the logging configurations in a cluster:
+    ```
+    bx cs logging-config-get <cluster_name_or_ID>
+    ```
+    {: pre}
 
-To view logs for clusters and containers, you can use the standard Kubernetes and Docker logging features.
-{:shortdesc}
+* To list the logging configurations for one type of log source:
+    ```
+    bx cs logging-config-get <cluster_name_or_ID> --logsource <source>
+    ```
+    {: pre}
 
-### {{site.data.keyword.loganalysislong_notm}}
-{: #view_logs_k8s}
+</br>
+</br>
 
-You can view the logs that you forwarded to {{site.data.keyword.loganalysislong_notm}} through the Kibana dashboard.
-{: shortdesc}
+### Updating log forwarding
+{: #updating-forwarding}
 
-If you used the default values to create your configuration file, then your logs can be found in the account, or org and space, in which the cluster was created. If you specified an org and space in your configuration file, then you can find your logs in that space. For more information about logging, see [Logging for {{site.data.keyword.containershort_notm}}](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
+You can update a logging configuration that you already created.
 
-To access the Kibana dashboard, go to one of the following URLs and select the {{site.data.keyword.Bluemix_notm}} account or space where you configured log forwarding for the cluster.
-- US-South and US-East: https://logging.ng.bluemix.net
-- UK-South: https://logging.eu-gb.bluemix.net
-- EU-Central: https://logging.eu-fra.bluemix.net
-- AP-South: https://logging.au-syd.bluemix.net
+1. Update a log forwarding configuration.
+    ```
+    bx cs logging-config-update <cluster_name_or_ID> <log_config_id> --namespace <namespace> --type <server_type> --syslog-protocol <protocol> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <containers> --app-paths <paths_to_logs>
+    ```
+    {: pre}
 
-For more information about viewing logs, see [Navigating to Kibana from a web browser](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser).
+</br>
+</br>
 
-### Docker logs
-{: #view_logs_docker}
-
-You can leverage the built-in Docker logging capabilities to review activities on the standard STDOUT and STDERR output streams. For more information, see [Viewing container logs for a container that runs in a Kubernetes cluster](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
-
-<br />
-
-
-## Filtering logs
-{: #filter-logs}
-
-You can choose which logs that you forward by filtering out specific logs for a period of time.
-
-1. Create a logging filter.
-  ```
-  bx cs logging-filter-create <cluster_name_or_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace> --container <container_name> --level <logging_level> --regex-message <message>
-  ```
-  {: pre}
-  <table>
-  <caption>Understanding this command's components</caption>
-    <thead>
-      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td>&lt;cluster_name_or_ID&gt;</td>
-        <td>Required: The name or ID of the cluster that you want to create a logging filter for.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;log_type&gt;</code></td>
-        <td>The type of logs that you want to apply the filter to. Currently <code>all</code>, <code>container</code>, and <code>host</code> are supported.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;configs&gt;</code></td>
-        <td>Optional: A comma-separated list of your logging configuration IDs. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the <code>--show-matching-configs</code> flag with the command.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;kubernetes_namespace&gt;</code></td>
-        <td>Optional: The Kubernetes namespace that you want to forward logs from. This flag applies only when you are using log type <code>container</code>.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;container_name&gt;</code></td>
-        <td>Optional: The name of the container from which you want to filter logs.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;logging_level&gt;</code></td>
-        <td>Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code>, and <code>trace</code>. As an example, if you filtered logs at the <code>info</code> level, <code>debug</code>, and <code>trace</code> are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. To display your messages in JSON, append the <code>--json</code> flag to the command.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;message&gt;</code></td>
-        <td>Optional: Filters out logs that contain a specified message that is written as a regular expression.</td>
-      </tr>
-    </tbody>
-  </table>
-
-2. View the log filter that you created.
-
-  ```
-  bx cs logging-filter-get <cluster_name_or_ID> --id <filter_ID> --show-matching-configs
-  ```
-  {: pre}
-  <table>
-  <caption>Understanding this command's components</caption>
-    <thead>
-      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td>&lt;cluster_name_or_ID&gt;</td>
-        <td>Required: The name or ID of the cluster that you want to create a logging filter for.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;filter_ID&gt;</code></td>
-        <td>Optional: The ID of the log filter that you want to view.</td>
-      </tr>
-      <tr>
-        <td><code>--show-matching-configs</code></td>
-        <td>Show the logging configurations that each filter applies to.</td>
-      </tr>
-    </tbody>
-  </table>
-
-3. Update the log filter that you created.
-  ```
-  bx cs logging-filter-update <cluster_name_or_ID> --id <filter_ID> --type <server_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
-  ```
-  {: pre}
-  <table>
-  <caption>Understanding this command's components</caption>
-    <thead>
-      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td>&lt;cluster_name_or_ID&gt;</td>
-        <td>Required: The name or ID of the cluster that you want to update a logging filter for.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;filter_ID&gt;</code></td>
-        <td>The ID of the log filter that you want to update.</td>
-      </tr>
-      <tr>
-        <td><code><&lt;server_type&gt;</code></td>
-        <td>The type of logs that you want to apply the filter to. Currently <code>all</code>, <code>container</code>, and <code>host</code> are supported.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;configs&gt;</code></td>
-        <td>Optional: A comma-separated list of all of the logging configuration IDs that you want to apply the filter to. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the <code>--show-matching-configs</code> flag with the <code>bx cs logging-filter-get</code> command.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;kubernetes_namespace&gt;</code></td>
-        <td>Optional: The Kubernetes namespace that you want to forward logs from. This flag applies only when you are using log type <code>container</code>.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;container_name&gt;</code></td>
-        <td>Optional: The name of the container from which you want to filter logs. This flag applies only when you are using log type <code>container</code>.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;logging_level&gt;</code></td>
-        <td>Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code>, and <code>trace</code>. As an example, if you filtered logs at the <code>info</code> level, <code>debug</code>, and <code>trace</code> are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;message&gt;</code></td>
-        <td>Optional: Filters out logs that contain a specified message that is written as a regular expression.</td>
-      </tr>
-    </tbody>
-  </table>
-
-4. Delete a log filter that you created.
-
-  ```
-  bx cs logging-filter-rm <cluster_name_or_ID> --id <filter_ID> [--all]
-  ```
-  {: pre}
-  <table>
-  <caption>Understanding this command's components</caption>
-    <thead>
-      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>&lt;cluster_name_or_ID&gt;</code></td>
-        <td>Required: The name or ID of the cluster that you want to delete a logging filter for.</td>
-      </tr>
-      <tr>
-        <td><code>&lt;filter_ID&gt;</code></td>
-        <td>Optional: The ID of the log filter that you want to remove.</td>
-      </tr>
-      <tr>
-        <td><code>--all</code></td>
-        <td>Optional: Delete all of your log forwarding filters.</td>
-      </tr>
-    </tbody>
-  </table>
-
-<br />
-
-
-
-
-
-## Stopping log forwarding
+### Stopping log forwarding
 {: #log_sources_delete}
 
 You can stop forwarding logs one or all of the logging configurations for a cluster.
@@ -461,9 +311,120 @@ You can stop forwarding logs one or all of the logging configurations for a clus
   <pre><code>bx cs logging-config-rm <my_cluster> --all</pre></code></li>
 </ul>
 
+### Viewing logs
+{: #view_logs}
+
+To view logs for clusters and containers, you can use the standard Kubernetes and Docker logging features.
+{:shortdesc}
+
+**{{site.data.keyword.loganalysislong_notm}}**
+{: #view_logs_k8s}
+
+You can view the logs that you forwarded to {{site.data.keyword.loganalysislong_notm}} through the Kibana dashboard.
+{: shortdesc}
+
+If you used the default values to create your configuration file, then your logs can be found in the account, or org and space, in which the cluster was created. If you specified an org and space in your configuration file, then you can find your logs in that space. For more information about logging, see [Logging for {{site.data.keyword.containershort_notm}}](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
+
+To access the Kibana dashboard, go to one of the following URLs and select the {{site.data.keyword.Bluemix_notm}} account or space where you configured log forwarding for the cluster.
+- US-South and US-East: https://logging.ng.bluemix.net
+- UK-South: https://logging.eu-gb.bluemix.net
+- EU-Central: https://logging.eu-fra.bluemix.net
+- AP-South: https://logging.au-syd.bluemix.net
+
+For more information about viewing logs, see [Navigating to Kibana from a web browser](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser).
+
+</br>
+</br>
+
+**Docker logs**
+
+You can leverage the built-in Docker logging capabilities to review activities on the standard STDOUT and STDERR output streams. For more information, see [Viewing container logs for a container that runs in a Kubernetes cluster](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
+
 <br />
 
 
+## Filtering logs
+{: #filter-logs}
+
+You can choose which logs that you forward by filtering out specific logs for a period of time. You can differentiate between the different filtering options by using flags.
+
+<table>
+<caption>Understanding the options for log filtering</caption>
+  <thead>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding log filtering options</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&lt;cluster_name_or_ID&gt;</td>
+      <td>Required: The name or ID of the cluster that you want to filter logs for.</td>
+    </tr>
+    <tr>
+      <td><code>&lt;log_type&gt;</code></td>
+      <td>The type of logs that you want to apply the filter to. Currently <code>all</code>, <code>container</code>, and <code>host</code> are supported.</td>
+    </tr>
+    <tr>
+      <td><code>&lt;configs&gt;</code></td>
+      <td>Optional: A comma-separated list of your logging configuration IDs. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the <code>--show-matching-configs</code> option.</td>
+    </tr>
+    <tr>
+      <td><code>&lt;kubernetes_namespace&gt;</code></td>
+      <td>Optional: The Kubernetes namespace that you want to forward logs from. This flag applies only when you are using log type <code>container</code>.</td>
+    </tr>
+    <tr>
+      <td><code>&lt;container_name&gt;</code></td>
+      <td>Optional: The name of the container from which you want to filter logs.</td>
+    </tr>
+    <tr>
+      <td><code>&lt;logging_level&gt;</code></td>
+      <td>Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code>, and <code>trace</code>. As an example, if you filtered logs at the <code>info</code> level, <code>debug</code>, and <code>trace</code> are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. To display your messages in JSON, append the <code>--json</code> flag to the command.</td>
+    </tr>
+    <tr>
+      <td><code>&lt;message&gt;</code></td>
+      <td>Optional: Filters out logs that contain a specified message that is written as a regular expression.</td>
+    </tr>
+    <tr>
+      <td><code>&lt;filter_ID&gt;</code></td>
+      <td>Optional: The ID of the log filter.</td>
+    </tr>
+    <tr>
+      <td><code>--show-matching-configs</code></td>
+      <td>Optional: Show the logging configurations that each filter applies to.</td>
+    </tr>
+    <tr>
+      <td><code>--all</code></td>
+      <td>Optional: Delete all of your log forwarding filters.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+1. Create a logging filter.
+  ```
+  bx cs logging-filter-create <cluster_name_or_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace> --container <container_name> --level <logging_level> --regex-message <message>
+  ```
+  {: pre}
+
+2. View the log filter that you created.
+
+  ```
+  bx cs logging-filter-get <cluster_name_or_ID> --id <filter_ID> --show-matching-configs
+  ```
+  {: pre}
+
+3. Update the log filter that you created.
+  ```
+  bx cs logging-filter-update <cluster_name_or_ID> --id <filter_ID> --type <server_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
+  ```
+  {: pre}
+
+4. Delete a log filter that you created.
+
+  ```
+  bx cs logging-filter-rm <cluster_name_or_ID> --id <filter_ID> [--all]
+  ```
+  {: pre}
+
+<br />
 
 
 
