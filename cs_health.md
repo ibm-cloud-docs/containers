@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-31"
+lastupdated: "2018-06-04"
 
 ---
 
@@ -102,8 +102,8 @@ You can create a configuration for cluster logging. You can differentiate betwee
 
 **Before you begin**
 
-1. Verify permissions. If you specified a space when you created the cluster or the logging configuration, then both the account owner and {{site.data.keyword.containershort_notm}} key owner need Manager, Developer, or Auditor permissions in that space.
-  * If you don't know who the {{site.data.keyword.containershort_notm}} key owner is, run the following command.
+1. Verify permissions. If you specified a space when you created the cluster or the logging configuration, then both the account owner and {{site.data.keyword.containershort_notm}} API key owner need Manager, Developer, or Auditor permissions in that space.
+  * If you don't know who the {{site.data.keyword.containershort_notm}} API key owner is, run the following command.
       ```
       bx cs api-key-info <cluster_name>
       ```
@@ -123,7 +123,7 @@ You can create a configuration for cluster logging. You can differentiate betwee
   {: tip}
 
 3. To forward logs to syslog, set up a server that accepts a syslog protocol in one of two ways:
-  * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider. Your syslog server must accept UDP protocol.
+  * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider. Your syslog server must accept `udp` or `tcp` protocol.
   * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in a Kubernetes cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host.
 
     You can remove syslog prefixes to see your logs as valid JSON by adding the following code to the top of your `etc/rsyslog.conf` file where your rsyslog server is running.</br>
@@ -136,33 +136,32 @@ You can create a configuration for cluster logging. You can differentiate betwee
 **Forwarding logs**
 
 1. Create a log forwarding configuration.
-  ```
-  bx cs logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type <type> --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
-  ```
-  {: pre}
+    ```
+    bx cs logging-config-create <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type <server_type> --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
+    ```
+    {: pre}
 
     * Example container logging configuration for the default namespace and output:
       ```
-      bx cs logging-config-create cluster1 --namespace default
-      Creating logging configuration for container logs in cluster cluster1...
+      bx cs logging-config-create mycluster
+      Creating cluster mycluster logging configurations...
       OK
-      Id                                     Source      Namespace   Host                                 Port    Org   Space   Protocol   Application Containers   Paths
-      af7d1ff4-33e6-4275-8167-b52eb3c5f0ee   container   default     ingest-au-syd.logging.bluemix.net✣  9091✣   -     -       ibm        -                        -
-
-      ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysislong_notm}} service.
-
+      ID                                      Source      Namespace    Host                                 Port    Org  Space   Server Type   Protocol   Application Containers   Paths
+      4e155cf0-f574-4bdb-a2bc-76af972cae47    container       *        ingest.logging.eu-gb.bluemix.net✣   9091✣    -     -        ibm           -                  -               -
+      ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysisshort_notm}} service.
       ```
       {: screen}
 
     * Example application logging configuration and output:
-      ```
-      bx cs logging-config-create cluster2 --logsource application --app-paths '/var/log/apps.log' --app-containers 'container1,container2,container3'
-      Creating logging configuration for application logs in cluster cluster2...
-      OK
-      Id                                     Source        Namespace   Host                                    Port    Org   Space   Protocol   Application   Containers   Paths
-      aa2b415e-3158-48c9-94cf-f8b298a5ae39   application   -           ingest.logging.stage1.ng.bluemix.net✣  9091✣   -     -       ibm        container1,container2,container3   /var/log/apps.log
-      ```
-      {: screen}
+    ```
+    bx cs logging-config-create cluster2 --logsource application --app-paths '/var/log/apps.log' --app-containers 'container1,container2,container3'
+    Creating logging configuration for application logs in cluster cluster2...
+    OK
+    Id                                     Source        Namespace   Host                                    Port    Org   Space   Server Type   Protocol   Application Containers               Paths
+    aa2b415e-3158-48c9-94cf-f8b298a5ae39   application    -          ingest.logging.stage1.ng.bluemix.net✣  9091✣    -      -          ibm         -        container1,container2,container3      /var/log/apps.log
+    ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysisshort_notm}} service.
+    ```
+    {: screen}
 
       If you have apps that run in your containers that can't be configured to write logs to STDOUT or STDERR, you can create a logging configuration to forward logs from app log files.
       {: tip}
@@ -204,7 +203,7 @@ You can create a configuration for cluster logging. You can differentiate betwee
         <td>The name of the Cloud Foundry org that the space is in. This value is required if you specified a space.</td>
       </tr>
       <tr>
-        <td><code><em>&lt;type&gt;</em></code></td>
+        <td><code><em>&lt;server_type&gt;</em></code></td>
         <td>Where you want to forward your logs. Options are <code>ibm</code>, which forwards your logs to {{site.data.keyword.loganalysisshort_notm}} and <code>syslog</code>, which forwards your logs to an external server.</td>
       </tr>
       <tr>
@@ -217,7 +216,7 @@ You can create a configuration for cluster logging. You can differentiate betwee
       </tr>
       <tr>
         <td><code><em>&lt;protocol&gt;</em></code></td>
-        <td>When the logging type is <code>syslog</code>, the transport layer protocol. Supported values are <code>TCP</code> and the default <code>UDP</code>. When forwarding to an rsyslog server with the <code>udp</code> protocol, logs that are over 1KB are truncated.</td>
+        <td>When the logging type is <code>syslog</code>, the transport layer protocol. Supported values are <code>TCP</code> and the default <code>UDP</code>. When forwarding to an rsyslog server with the <code>UDP</code> protocol, logs that are over 1KB are truncated.</td>
       </tr>
       <tr>
         <td><code><em>--skip-validation</em></code></td>
@@ -234,90 +233,14 @@ You can create a configuration for cluster logging. You can differentiate betwee
       ```
       {: pre}
 
-      Example output:
-
-      ```
-      Id                                    Source       Namespace     Host                          Port   Org      Space      Protocol     Paths
-      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  kubernetes   -             172.30.xxx.xxx                5514   -        -          syslog       /var/log/kubelet.log,/var/log/kube-proxy.log
-      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  application  -             ingest.logging.ng.bluemix.net 9091   my_org   my_space   ibm          /var/log/apps/**/*.log,/var/log/apps/**/*.err
-      8a284f1a-451c-4c48-b1b4-a4e6b977264e  containers   my-namespace  myhostname.common             5514   -        -          syslog       -
-      ```
-      {: screen}
-
     * To list the logging configurations for one type of log source:
       ```
       bx cs logging-config-get <cluster_name_or_ID> --logsource worker
       ```
       {: pre}
 
-      Example output:
 
-      ```
-      Id                                    Source    Namespace   Host                            Port   Org    Space     Protocol    Paths
-      f4bc77c0-ee7d-422d-aabf-a4e6b977264e  worker    -           ingest.logging.ng.bluemix.net   9091   -      -         ibm         /var/log/syslog,/var/log/auth.log
-      5bd9c609-13c8-4c48-9d6e-3a6664c825a9  worker    -           172.30.xxx.xxx                  5514   -      -         syslog      /var/log/syslog,/var/log/auth.log
-      ```
-      {: screen}
 
-## Updating log forwarding
-{: #updating-forwarding}
-
-1. Update a log forwarding configuration.
-    ```
-    bx cs logging-config-update <cluster_name_or_ID> <log_config_id> --namespace <namespace> --type <log_type> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <containers> --app-paths <paths_to_logs>
-    ```
-    {: pre}
-
-  <table>
-  <caption>Understanding this command's components</caption>
-  <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
-      <td>The name or ID of the cluster.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;log_config_id&gt;</em></code></td>
-      <td>The ID for the configuration that you want to update.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;namespace&gt;</em></code></td>
-      <td>Optional: The Kubernetes namespace to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the <code>container</code> log source. If you do not specify a namespace, then all namespaces in the cluster use the configuration.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;log_type&gt;</em></code></td>
-      <td>Where you want to forward your logs. Options are <code>ibm</code>, which forwards your logs to {{site.data.keyword.loganalysisshort_notm}} and <code>syslog</code>, which forwards your logs to an external server.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;hostname_or_ingestion_URL&gt;</em></code></td>
-      <td><p>For {{site.data.keyword.loganalysisshort_notm}}, use the [ingestion URL](/docs/services/CloudLogAnalysis/log_ingestion.html#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region in which you created your cluster is used.</p>
-      <p>For syslog, specify the hostname or IP address of the log collector service.</p></td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;port&gt;</em></code></td>
-      <td>The ingestion port. If you do not specify a port, then the standard port <code>9091</code> is used.
-      <p>For syslog, specify the port of the log collector server. If you do not specify a port, then the standard port <code>514</code> is used.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;cluster_space&gt;</em></code></td>
-      <td>Optional: The name of the Cloud Foundry space that you want to send logs to. When forwarding logs to {{site.data.keyword.loganalysisshort_notm}}, the space and org are specified in the ingestion point. If you do not specify a space, logs are sent to the account level.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;cluster_org&gt;</em></code></td>
-      <td>The name of the Cloud Foundry org that the space is in. This value is required if you specified a space.</td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;paths_to_logs&gt;</em></code></td>
-      <td>The path on a container or containers that the apps are logging to. To forward logs with source type <code>application</code>, you must provide a path. To specify more than one path, use a comma-separated list. Example: <code>/var/log/myApp1/&ast;,/var/log/myApp2/&ast;</code></td>
-    </tr>
-    <tr>
-      <td><code><em>&lt;containers&gt;</em></code></td>
-      <td>Optional: To forward logs from apps, you can specify the name of the container that contains your app. You can specify more than one container by using a comma-separated list. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided.</td>
-    </tr>
-  </tbody>
-  </table>
 
 <br />
 
@@ -399,7 +322,7 @@ You can choose which logs that you forward by filtering out specific logs for a 
 
 3. Update the log filter that you created.
   ```
-  bx cs logging-filter-update <cluster_name_or_ID> --id <filter_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
+  bx cs logging-filter-update <cluster_name_or_ID> --id <filter_ID> --type <server_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
   ```
   {: pre}
   <table>
@@ -417,7 +340,7 @@ You can choose which logs that you forward by filtering out specific logs for a 
         <td>The ID of the log filter that you want to update.</td>
       </tr>
       <tr>
-        <td><code><&lt;log_type&gt;</code></td>
+        <td><code><&lt;server_type&gt;</code></td>
         <td>The type of logs that you want to apply the filter to. Currently <code>all</code>, <code>container</code>, and <code>host</code> are supported.</td>
       </tr>
       <tr>
@@ -584,8 +507,8 @@ You can forward your Kubernetes API server audit logs to {{site.data.keyword.log
     bx cs logging-config-create myCluster --logsource kube-audit
     Creating logging configuration for kube-audit logs in cluster myCluster...
     OK
-    Id                                     Source      Namespace   Host                                 Port    Org   Space   Protocol   Application Containers   Paths
-    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit  -           ingest-au-syd.logging.bluemix.net✣   9091✣   -     -       ibm        -                        -
+    Id                                     Source      Namespace   Host                                   Port     Org    Space   Server Type   Protocol  Application Containers   Paths
+    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit    -         ingest-au-syd.logging.bluemix.net✣    9091✣     -       -         ibm          -              -                  -
 
     ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysisshort_notm}} service.
 
@@ -629,9 +552,9 @@ You can forward your Kubernetes API server audit logs to {{site.data.keyword.log
     bx cs logging-config-get myCluster
     Retrieving cluster myCluster logging configurations...
     OK
-    Id                                     Source        Namespace   Host                                 Port    Org   Space   Protocol   Application Containers   Paths
-    a550d2ba-6a02-4d4d-83ef-68f7a113325c   container     *           ingest-au-syd.logging.bluemix.net✣   9091✣   -     -       ibm        -                        -
-    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit    -           ingest-au-syd.logging.bluemix.net✣   9091✣   -     -       ibm        -                    
+    Id                                     Source        Namespace   Host                                 Port    Org   Space   Server Type  Protocol  Application Containers   Paths
+    a550d2ba-6a02-4d4d-83ef-68f7a113325c   container     *           ingest-au-syd.logging.bluemix.net✣  9091✣   -     -         ibm           -          -              -
+    14ca6a0c-5bc8-499a-b1bd-cedcf40ab850   kube-audit    -           ingest-au-syd.logging.bluemix.net✣  9091✣   -     -         ibm           -          -              -       
     ```
     {: screen}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-01"
+lastupdated: "2018-06-04"
 
 ---
 
@@ -1235,8 +1235,6 @@ By default, Ingress logs are formatted in JSON and display common log fields. Ho
     <td>Optional: By default, logs are generated in text format. To generate logs in JSON format, add the <code>log-format-escape-json</code> field and use value <code>true</code>.</td>
     </tr>
     </tbody></table>
-    </dd>
-    </dl>
 
     For example, your log format might contain the following variables:
     ```
