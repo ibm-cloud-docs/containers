@@ -521,19 +521,6 @@ You can forward your Kubernetes API server audit logs to {{site.data.keyword.log
     ```
     {: screen}
 
-  <table>
-  <caption>Understanding this command's components</caption>
-    <thead>
-      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
-        <td>The name or ID of the cluster.</td>
-      </tr>
-    </tbody>
-  </table>
-
 3. Optional: If you want to stop forwarding audit logs, you can [delete your configuration](#log_sources_delete).
 
 <br />
