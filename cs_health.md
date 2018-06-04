@@ -246,6 +246,36 @@ You can create a configuration for cluster logging. You can differentiate betwee
 
 
 
+## Viewing logs
+{: #view_logs}
+
+To view logs for clusters and containers, you can use the standard Kubernetes and Docker logging features.
+{:shortdesc}
+
+### {{site.data.keyword.loganalysislong_notm}}
+{: #view_logs_k8s}
+
+You can view the logs that you forwarded to {{site.data.keyword.loganalysislong_notm}} through the Kibana dashboard.
+{: shortdesc}
+
+If you used the default values to create your configuration file, then your logs can be found in the account, or org and space, in which the cluster was created. If you specified an org and space in your configuration file, then you can find your logs in that space. For more information about logging, see [Logging for {{site.data.keyword.containershort_notm}}](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
+
+To access the Kibana dashboard, go to one of the following URLs and select the {{site.data.keyword.Bluemix_notm}} account or space where you configured log forwarding for the cluster.
+- US-South and US-East: https://logging.ng.bluemix.net
+- UK-South: https://logging.eu-gb.bluemix.net
+- EU-Central: https://logging.eu-fra.bluemix.net
+- AP-South: https://logging.au-syd.bluemix.net
+
+For more information about viewing logs, see [Navigating to Kibana from a web browser](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser).
+
+### Docker logs
+{: #view_logs_docker}
+
+You can leverage the built-in Docker logging capabilities to review activities on the standard STDOUT and STDERR output streams. For more information, see [Viewing container logs for a container that runs in a Kubernetes cluster](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
+
+<br />
+
+
 ## Filtering logs
 {: #filter-logs}
 
@@ -398,36 +428,6 @@ You can choose which logs that you forward by filtering out specific logs for a 
 
 
 
-## Viewing logs
-{: #view_logs}
-
-To view logs for clusters and containers, you can use the standard Kubernetes and Docker logging features.
-{:shortdesc}
-
-### {{site.data.keyword.loganalysislong_notm}}
-{: #view_logs_k8s}
-
-You can view the logs that you forwarded to {{site.data.keyword.loganalysislong_notm}} through the Kibana dashboard.
-{: shortdesc}
-
-If you used the default values to create your configuration file, then your logs can be found in the account, or org and space, in which the cluster was created. If you specified an org and space in your configuration file, then you can find your logs in that space. For more information about logging, see [Logging for {{site.data.keyword.containershort_notm}}](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
-
-To access the Kibana dashboard, go to one of the following URLs and select the {{site.data.keyword.Bluemix_notm}} account or space where you configured log forwarding for the cluster.
-- US-South and US-East: https://logging.ng.bluemix.net
-- UK-South: https://logging.eu-gb.bluemix.net
-- EU-Central: https://logging.eu-fra.bluemix.net
-- AP-South: https://logging.au-syd.bluemix.net
-
-For more information about viewing logs, see [Navigating to Kibana from a web browser](/docs/services/CloudLogAnalysis/kibana/launch.html#launch_Kibana_from_browser).
-
-### Docker logs
-{: #view_logs_docker}
-
-You can leverage the built-in Docker logging capabilities to review activities on the standard STDOUT and STDERR output streams. For more information, see [Viewing container logs for a container that runs in a Kubernetes cluster](/docs/services/CloudLogAnalysis/containers/containers_kubernetes.html#containers_kubernetes).
-
-<br />
-
-
 
 ## Stopping log forwarding
 {: #log_sources_delete}
@@ -462,6 +462,8 @@ You can stop forwarding logs one or all of the logging configurations for a clus
 </ul>
 
 <br />
+
+
 
 
 
