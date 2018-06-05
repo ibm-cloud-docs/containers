@@ -1067,6 +1067,7 @@ You can further configure an application load balancer with the following option
 -   [Opening ports in the Ingress application load balancer](#opening_ingress_ports)
 -   [Configuring SSL protocols and SSL ciphers at the HTTP level](#ssl_protocols_ciphers)
 -   [Customizing the Ingress log format](#ingress_log_format)
+-   [Increasing the size of the shared memory zone for Ingress metrics collection](#vts_zone_size)
 -   [Customizing your application load balancer with annotations](cs_annotations.html)
 {: #ingress_annotation}
 
