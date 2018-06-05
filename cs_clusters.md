@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-01"
+lastupdated: "2018-06-05"
 
 ---
 
@@ -641,8 +641,9 @@ Free and standard clusters that are created with a Pay-As-You-Go account must be
   - No backups are created of your cluster or your data in your persistent storage. Deleting a cluster or persistent storage is permanent and cannot be undone.
   - When you remove a cluster, you also remove any subnets that were automatically provisioned when you created the cluster and that you created by using the `bx cs cluster-subnet-create` command. However, if you manually added existing subnets to your cluster by using the `bx cs cluster-subnet-add command`, these subnets are not removed from your IBM Cloud infrastructure (SoftLayer) account and you can reuse them in other clusters.
 
-Before you begin, note down your cluster ID. You might need the cluster ID to investigate and remove related IBM Cloud infrastructure (SoftLayer) resources that are not automatically deleted with your cluster, such as persistent storage.
-{: tip}
+Before you begin: 
+* Note down your cluster ID. You might need the cluster ID to investigate and remove related IBM Cloud infrastructure (SoftLayer) resources that are not automatically deleted with your cluster.
+* If you want to delete the data in your persistent storage, [understand the delete options](cs_storage.html#cleanup).
 
 To remove a cluster:
 
@@ -672,4 +673,4 @@ To remove a cluster:
 Next steps:
 - After it is no longer listed in the available clusters list when you run the `bx cs clusters` command, you can reuse the name of a removed cluster.
 - If you kept the subnets, you can [reuse them in a new cluster](cs_subnets.html#custom) or manually delete them later from your IBM Cloud infrastructure (SoftLayer) portfolio.
-- If you kept the persistent storage, you can delete your storage later through the IBM Cloud infrastructure (SoftLayer) dashboard in the {{site.data.keyword.Bluemix_notm}} GUI.
+- If you kept the persistent storage, you can [delete your storage](cs_storage.html#cleanup) later through the IBM Cloud infrastructure (SoftLayer) dashboard in the {{site.data.keyword.Bluemix_notm}} GUI.
