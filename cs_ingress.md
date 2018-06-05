@@ -43,7 +43,7 @@ Ingress consists of two components:
 
 The following diagram shows how Ingress directs communication from the internet to an app:
 
-<img src="images/cs_ingress.png" width="550" alt="Expose an app in {{site.data.keyword.containershort_notm}} by using Ingress" style="width:550px; border-style: none"/>
+<img src="images/cs_ingress.png" alt="Expose an app in {{site.data.keyword.containershort_notm}} by using Ingress" style="border-style: none"/>
 
 1. A user sends a request to your app by accessing your app's URL. This URL is the public URL for your exposed app appended with the Ingress resource path, such as `mycluster.us-south.containers.appdomain.cloud/myapp`.
 
