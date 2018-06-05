@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-04"
+lastupdated: "2018-06-05"
 
 ---
 
@@ -47,11 +47,13 @@ The following diagram shows how Ingress directs communication from the internet 
 
 1. A user sends a request to your app by accessing your app's URL. This URL is the public URL for your exposed app appended with the Ingress resource path, such as `mycluster.us-south.containers.appdomain.cloud/myapp`.
 
-2. A DNS system service that acts as the global load balancer resolves the URL to the portable public IP address of the default public ALB in the cluster. The request is routed to the Kubernetes ALB service for the app.
+2. A DNS system service resolves the URL to the portable public IP address of the load balancer that exposes the ALB in your cluster.
 
-3. The Kubernetes service routes the request to the ALB.
+3. Based on the resolved IP address, the client sends the request to the load balancer service that exposes the ALB.
 
-4. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is forwarded according to the rules that you defined in the Ingress resource to the pod where the app is deployed. If multiple app instances are deployed in the cluster, the ALB load balances the requests between the app pods.
+4. The load balancer service routes the request to the ALB.
+
+5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is forwarded according to the rules that you defined in the Ingress resource to the pod where the app is deployed. If multiple app instances are deployed in the cluster, the ALB load balances the requests between the app pods.
 
 
 
