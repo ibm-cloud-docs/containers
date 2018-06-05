@@ -1311,4 +1311,58 @@ By default, Ingress logs are formatted in JSON and display common log fields. Ho
 <br />
 
 
+### Increasing the size of the shared memory zone for Ingress metrics collection
+{: #vts_zone_size}
+
+Shared memory zones are defined so that worker processes can share information such as cache, session persistence, and rate limits. A shared memory zone, called the virtual host traffic status zone, is set up for Ingress to collect metrics data for an ALB.
+{:shortdesc}
+
+In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `vts-status-zone-size` field sets the size of the shared memory zone for metrics data collection. By default, `vts-status-zone-size` is set to `10m`. If you have a large environment that requires more memory for metrics collection, you can override the default to instead use a larger value by following these steps.
+
+1. Create and open a local version of the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
+
+    ```
+    kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
+    ```
+    {: pre}
+
+2. Change the value of `vts-status-zone-size` from `10m` to a larger value.
+
+   ```
+   apiVersion: v1
+   data:
+     vts-status-zone-size: "10m"
+   kind: ConfigMap
+   metadata:
+     name: ibm-cloud-provider-ingress-cm
+     namespace: kube-system
+   ```
+   {: codeblock}
+
+3. Save the configuration file.
+
+4. Verify that the configmap changes were applied.
+
+   ```
+   kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
+   ```
+   {: pre}
+
+   Example output:
+   ```
+   Name:        ibm-cloud-provider-ingress-cm
+   Namespace:   kube-system
+   Labels:      <none>
+   Annotations: <none>
+
+   Data
+   ====
+
+    vts-status-zone-size: "20m"
+   ```
+   {: screen}
+
+<br />
+
+
 
