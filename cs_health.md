@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-04"
+lastupdated: "2018-06-05"
 
 ---
 
@@ -28,7 +28,8 @@ Set up logging and monitoring in {{site.data.keyword.containerlong}} to help you
 With a standard Kubernetes cluster in {{site.data.keyword.containershort_notm}}, you can forward logs from different sources to {{site.data.keyword.loganalysislong_notm}}, to an external syslog server or to both. To forward logs to both, create two configurations.
 {: shortdesc}
 
-Check out the following table for information about the different log sources.
+You can forward logs from the following sources:
+
 
 <table>
 <caption>Log sources</caption>
@@ -74,15 +75,18 @@ Check out the following table for information about the different log sources.
   </tbody>
 </table>
 
+
+
+
 </br>
 </br>
 
 ### Enabling log forwarding with the GUI
 {: #enable-forwarding-ui}
 
-You can set up a logging configuration in the {{site.data.keyword.containershort_notm}} dashboard. It can take a few minutes for the process to complete, so if you don't see logs immediately, try waiting a few minutes and then check back.
+You can configure log forwarding in the {{site.data.keyword.containershort_notm}} dashboard. It can take a few minutes for the process to complete, so if you don't see logs immediately, try waiting a few minutes and then check back.
 
-To enable logging at the account level or to configure application logging, use the CLI.
+To create a configuration at the account level, for a specific container namespace, or for app logging use the CLI.
 {: tip}
 
 1. Navigate to the **Overview** tab of the dashboard.
@@ -102,9 +106,9 @@ To enable logging at the account level or to configure application logging, use 
 You can create a configuration for cluster logging. You can differentiate between the different logging options by using flags.
 
 <table>
-<caption>Understanding the options for logging options</caption>
+<caption> Understanding logging configuration options</caption>
   <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding logging configuration options</th>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the options for logging configurations</th>
   </thead>
   <tbody>
     <tr>
@@ -151,7 +155,7 @@ You can create a configuration for cluster logging. You can differentiate betwee
     </tr>
     <tr>
       <td><code><em>&lt;protocol&gt;</em></code></td>
-      <td>When the logging type is <code>syslog</code>, the transport layer protocol. You can use the following protocols: `udp`, `tcp`, or `tls`. When forwarding to an rsyslog server with the <code>udp</code> protocol, logs that are over 1KB are truncated.</td>
+      <td>When the logging type is <code>syslog</code>, the transport layer protocol. You can use the following protocols: `udp`, <stging>`tls`,</staging> or `tcp`. When forwarding to an rsyslog server with the <code>udp</code> protocol, logs that are over 1KB are truncated.</td>
     </tr>
     <tr>
       <td><code><em>&lt;secret_name&gt;</em></code></td>
@@ -192,30 +196,30 @@ You can create a configuration for cluster logging. You can differentiate betwee
     ```
     {: pre}
 
-    * Example container logging configuration for the default namespace and output:
-      ```
-      bx cs logging-config-create mycluster
-      Creating cluster mycluster logging configurations...
-      OK
-      ID                                      Source      Namespace    Host                                 Port    Org  Space   Server Type   Protocol   Application Containers   Paths
-      4e155cf0-f574-4bdb-a2bc-76af972cae47    container       *        ingest.logging.eu-gb.bluemix.net✣   9091✣    -     -        ibm           -                  -               -
-      ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysisshort_notm}} service.
-      ```
-      {: screen}
+  * Example container logging configuration for the default namespace and output:
+    ```
+    bx cs logging-config-create mycluster
+    Creating cluster mycluster logging configurations...
+    OK
+    ID                                      Source      Namespace    Host                                 Port    Org  Space   Server Type   Protocol   Application Containers   Paths
+    4e155cf0-f574-4bdb-a2bc-76af972cae47    container       *        ingest.logging.eu-gb.bluemix.net✣   9091✣    -     -        ibm           -                  -               -
+    ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysisshort_notm}} service.
+    ```
+    {: screen}
 
-    * Example application logging configuration and output:
-      ```
-      bx cs logging-config-create cluster2 --logsource application --app-paths '/var/log/apps.log' --app-containers 'container1,container2,container3'
-      Creating logging configuration for application logs in cluster cluster2...
-      OK
-      Id                                     Source        Namespace   Host                                    Port    Org   Space   Server Type   Protocol   Application Containers               Paths
-      aa2b415e-3158-48c9-94cf-f8b298a5ae39   application    -          ingest.logging.stage1.ng.bluemix.net✣  9091✣    -      -          ibm         -        container1,container2,container3      /var/log/apps.log
-      ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysisshort_notm}} service.
-      ```
-      {: screen}
+  * Example application logging configuration and output:
+    ```
+    bx cs logging-config-create cluster2 --logsource application --app-paths '/var/log/apps.log' --app-containers 'container1,container2,container3'
+    Creating logging configuration for application logs in cluster cluster2...
+    OK
+    Id                                     Source        Namespace   Host                                    Port    Org   Space   Server Type   Protocol   Application Containers               Paths
+    aa2b415e-3158-48c9-94cf-f8b298a5ae39   application    -          ingest.logging.stage1.ng.bluemix.net✣  9091✣    -      -          ibm         -        container1,container2,container3      /var/log/apps.log
+    ✣ Indicates the default endpoint for the {{site.data.keyword.loganalysisshort_notm}} service.
+    ```
+    {: screen}
 
-      If you have apps that run in your containers that can't be configured to write logs to STDOUT or STDERR, you can create a logging configuration to forward logs from app log files.
-      {: tip}
+If you have apps that run in your containers that can't be configured to write logs to STDOUT or STDERR, you can create a logging configuration to forward logs from app log files.
+{: tip}
 
 </br>
 </br>
@@ -223,13 +227,12 @@ You can create a configuration for cluster logging. You can differentiate betwee
 **Forwarding logs to your own server**
 
 1. To forward logs to syslog, set up a server that accepts a syslog protocol in one of two ways:
-  * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.You can use the following protocols: `udp`, `tcp`, or `tls`. **Note**: Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in a Kubernetes cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host.
+  * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider. You can use the following protocols: `udp`,  or `tcp`.
 
-    You can remove syslog prefixes to see your logs as valid JSON by adding the following code to the top of your `etc/rsyslog.conf` file where your rsyslog server is running.</br>
-    ```$template customFormat,"%msg%\n"
-    $ActionFileDefaultTemplate customFormat
-    ```
-    {: tip}
+  * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in a Kubernetes cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host.
+
+  You can see your logs as valid JSON by removing syslog prefixes. To do so, add the following code to the top of your <code>etc/rsyslog.conf</code> file where your rsyslog server is running: <code>$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat</code>
+  {: tip}
 
 2. [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster where the log source is located.
 
@@ -288,28 +291,12 @@ You can stop forwarding logs one or all of the logging configurations for a clus
 1. [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster where the log source is located.
 
 2. Delete the logging configuration.
-<ul>
-<li>To delete one logging configuration:</br>
-  <pre><code>bx cs logging-config-rm &lt;cluster_name_or_ID&gt; --id &lt;log_config_ID&gt;</pre></code>
-  <table>
-  <caption>Understanding this command's components</caption>
-    <thead>
-      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code><em>&lt;cluster_name_or_ID&gt;</em></code></td>
-        <td>The name of the cluster that the logging configuration is in.</td>
-      </tr>
-      <tr>
-        <td><code><em>&lt;log_config_ID&gt;</em></code></td>
-        <td>The ID of the log source configuration.</td>
-      </tr>
-    </tbody>
-  </table></li>
-<li>To delete all of the logging configurations:</br>
-  <pre><code>bx cs logging-config-rm <my_cluster> --all</pre></code></li>
-</ul>
+  <ul>
+  <li>To delete one logging configuration:</br>
+    <pre><code>bx cs logging-config-rm &lt;cluster_name_or_ID&gt; --id &lt;log_config_ID&gt;</pre></code></li>
+  <li>To delete all of the logging configurations:</br>
+    <pre><code>bx cs logging-config-rm <my_cluster> --all</pre></code></li>
+  </ul>
 
 ### Viewing logs
 {: #view_logs}
