@@ -36,9 +36,9 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 </thead>
 <tbody>
 <tr>
-<td>5 June</td>
+<td>6 June</td>
 <td>[TLS support for the IBM-provided Ingress wildcard subdomain](cs_ingress.html#wildcard_tls)</td>
-<td>For clusters created after 5 June 2018, the IBM-provided Ingress subdomain TLS certificate is now a wildcard certificate and can be used for the registered wildcard subdomain. For clusters created before 5 June 2018, TLS certificate will be updated to a wildcard certificate when the current TLS certificate is renewed.</td>
+<td>For clusters created on or after 6 June 2018, the IBM-provided Ingress subdomain TLS certificate is now a wildcard certificate and can be used for the registered wildcard subdomain. For clusters created before 6 June 2018, TLS certificate will be updated to a wildcard certificate when the current TLS certificate is renewed.</td>
 </tr>
 </tbody></table>
 
