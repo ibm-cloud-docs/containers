@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-01"
+lastupdated: "2018-06-05"
 
 ---
 
@@ -23,6 +23,24 @@ lastupdated: "2018-06-01"
 
 Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about new features to explore, a trick to try out, or some popular topics that other developers are finding useful in the now.
 {:shortdesc}
+
+## Popular topics in June 2018
+{: #june18}
+
+<table summary="The table shows popular topics. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three.">
+<caption>Popular topics for containers and Kubernetes clusters in June 2018</caption>
+<thead>
+<th>Date</th>
+<th>Title</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td>5 June</td>
+<td>[TLS support for the IBM-provided Ingress wildcard subdomain](cs_ingress.html#wildcard_tls)</td>
+<td>For clusters created after 5 June 2018, the IBM-provided Ingress subdomain TLS certificate is a wildcard certificate and can be used for registered wildcard subdomain. For clusters created before 5 June 2018, TLS certificate will be updated to a wildcard certificate when the current TLS certificate is renewed.</td>
+</tr>
+</tbody></table>
 
 ## Popular topics in May 2018
 {: #may18}
