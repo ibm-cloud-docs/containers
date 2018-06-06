@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-31"
+lastupdated: "2018-06-06"
 
 ---
 
@@ -255,7 +255,7 @@ To bind services to a cluster, you must have the Cloud Foundry developer user ro
 
 4. Wait a few minutes, then let the user try to bind the service again. 
 
-5. If this does not resolve the problem, then the IAM permissions are out of sync and you cannot resolve the issue yourself. [Contact IBM support](/docs/get-support/howtogetsupport.html#getting-customer-support) by openening a support ticket. Make sure to provide the cluster ID, the user ID, and the service instance ID. 
+5. If this does not resolve the problem, then the IAM permissions are out of sync and you cannot resolve the issue yourself. [Contact IBM support](/docs/get-support/howtogetsupport.html#getting-customer-support) by opening a support ticket. Make sure to provide the cluster ID, the user ID, and the service instance ID. 
    1. Retrieve the cluster ID. 
       ```
       bx cs clusters
