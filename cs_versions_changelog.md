@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-31"
+lastupdated: "2018-06-06"
 
 ---
 
@@ -38,6 +38,8 @@ For information about changes since the previous version, see the following chan
 {: #110_changelog}
 
 Review the following changes.
+
+
 
 ### Changelog for worker node fix pack 1.10.1_1510, released 18 May 2018
 {: #1101_1510}
