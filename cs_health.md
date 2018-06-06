@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-05"
+lastupdated: "2018-06-06"
 
 ---
 
@@ -584,7 +584,7 @@ To forward Kubernetes API audit logs:
 
 4. Optional: If you want to stop forwarding audit logs, you can disable your configuration.
     1. [Target your CLI](cs_cli_install.html#cs_cli_configure) to the cluster that you want to stop collecting API server audit logs from.
-    2. Disable the webhook backend configuration for the cluster's API server.
+    2. Disable the webhook back-end configuration for the cluster's API server.
 
         ```
         bx cs apiserver-config-unset audit-webhook <cluster_name_or_ID>
