@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-31"
+lastupdated: "2018-06-06"
 
 ---
 
@@ -285,7 +285,7 @@ Whenever you deploy app pods, load balancer service pods are also deployed to th
 
 When a client request to your app is sent to your cluster, the request is routed to a pod for the Kubernetes load balancer service that exposes the app. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running.
 
-To preserve the original source IP address of the client request, you can [enable source IP ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer) for load balancer services. Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies. After you enable the source IP, load balancer service pods must forward requests to app pods that are deployed to the same worker node only. To force your app to deploy to specific worker nodes that load balancer service pods can also deploy to, you must add affinity rules and tolerations to your app deployment.
+To preserve the original source IP address of the client request, you can [enable source IP ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip) for load balancer services. Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies. After you enable the source IP, load balancer service pods must forward requests to app pods that are deployed to the same worker node only. To force your app to deploy to specific worker nodes that load balancer service pods can also deploy to, you must add affinity rules and tolerations to your app deployment.
 
 ### Adding edge node affinity rules and tolerations
 {: #edge_nodes}
