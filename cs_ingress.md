@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-05"
+lastupdated: "2018-06-06"
 
 ---
 
@@ -726,10 +726,10 @@ Before you begin:
 
 To enable a default private ALB by using the pre-assigned, IBM-provided portable private IP address:
 
-1. Get the ID of the default private ALB that you want to enable. Replace <em>&lt;cluser_name&gt;</em> with the name of the cluster where the app that you want to expose is deployed.
+1. Get the ID of the default private ALB that you want to enable. Replace <em>&lt;cluster_name&gt;</em> with the name of the cluster where the app that you want to expose is deployed.
 
     ```
-    bx cs albs --cluster <cluser_name>
+    bx cs albs --cluster <cluster_name>
     ```
     {: pre}
 
@@ -768,7 +768,7 @@ To enable the private ALB by using your own portable private IP address:
    </thead>
    <tbody>
    <tr>
-   <td><code>&lt;cluser_name&gt;</code></td>
+   <td><code>&lt;cluster_name&gt;</code></td>
    <td>The name or ID of the cluster where the app that you want to expose is deployed.</td>
    </tr>
    <tr>
