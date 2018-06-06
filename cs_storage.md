@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-05"
+lastupdated: "2018-06-06"
 
 ---
 
@@ -258,7 +258,7 @@ Before you begin, make sure that you have an existing block storage instance tha
 To create a PV and matching PVC, follow these steps.
 
 1.  Retrieve or generate an API key for your IBM Cloud infrastructure (SoftLayer) account.
-    1. Log in to the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.softlayer.com/).
+    1. Log in to the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.bluemix.com/).
     2. Select **Account**, then **Users**, and then **User List**.
     3. Find your user ID.
     4. In the **API KEY** column, click **Generate** to generate an API key or **View** to view your existing API key.

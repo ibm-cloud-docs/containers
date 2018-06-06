@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-05"
+lastupdated: "2018-06-06"
 
 ---
 
@@ -1618,7 +1618,7 @@ You cannot set multiple credentials for one {{site.data.keyword.containershort_n
   To generate an API key:
 
   <ol>
-  <li>Log in to the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.softlayer.com/).</li>
+  <li>Log in to the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.bluemix.com/).</li>
   <li>Select <strong>Account</strong>, and then <strong>Users</strong>.</li>
   <li>Click <strong>Generate</strong> to generate an IBM Cloud infrastructure (SoftLayer) API key for your account.</li>
   <li>Copy the API key to use in this command.</li>
@@ -1626,7 +1626,7 @@ You cannot set multiple credentials for one {{site.data.keyword.containershort_n
 
   To view your existing API key:
   <ol>
-  <li>Log in to the [IBM Cloud infrastructure (SoftLayer)portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.softlayer.com/).</li>
+  <li>Log in to the [IBM Cloud infrastructure (SoftLayer)portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.bluemix.com/).</li>
   <li>Select <strong>Account</strong>, and then <strong>Users</strong>.</li>
   <li>Click <strong>View</strong> to see your existing API key.</li>
   <li>Copy the API key to use in this command.</li>
