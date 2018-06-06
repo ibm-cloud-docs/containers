@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-31"
+lastupdated: "2018-06-06"
 
 ---
 
@@ -93,7 +93,7 @@ You can run {{site.data.keyword.containershort_notm}} in {{site.data.keyword.Blu
 ## Comparison of free and standard clusters
 {: #cluster_types}
 
-You can create one free cluster or any number of standard clusters. Try out free clusters to get familiar and test a few Kubernetes capabilities, or create standard clusters to use the full capabilities of Kubernetes to deploy apps.
+You can create one free cluster or any number of standard clusters. Try out free clusters to get familiar with a few Kubernetes capabilities, or create standard clusters to use the full capabilities of Kubernetes to deploy apps.
 {:shortdesc}
 
 |Characteristics|Free clusters|Standard clusters|
