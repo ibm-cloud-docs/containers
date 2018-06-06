@@ -1064,11 +1064,11 @@ For a comprehensive tutorial on how to secure microservice-to-microservice commu
 
 You can further configure an application load balancer with the following options.
 
--   [Opening ports in the Ingress application load balancer](#opening_ingress_ports)
--   [Configuring SSL protocols and SSL ciphers at the HTTP level](#ssl_protocols_ciphers)
--   [Customizing the Ingress log format](#ingress_log_format)
--   [Increasing the size of the shared memory zone for Ingress metrics collection](#vts_zone_size)
--   [Customizing your application load balancer with annotations](cs_annotations.html)
+- [Customizing your application load balancer with annotations](cs_annotations.html)
+- [Opening ports in the Ingress application load balancer](#opening_ingress_ports)
+- [Configuring SSL protocols and SSL ciphers at the HTTP level](#ssl_protocols_ciphers)
+- [Customizing the Ingress log format](#ingress_log_format)
+- [Increasing the size of the shared memory zone for Ingress metrics collection](#vts_zone_size)
 {: #ingress_annotation}
 
 
@@ -1137,6 +1137,8 @@ By default, only ports 80 and 443 are exposed in the Ingress ALB. To expose othe
  {: screen}
 
 For more information about configmap resources, see the [Kubernetes documentation](https://kubernetes-v1-4.github.io/docs/user-guide/configmap/).
+
+
 
 ### Configuring SSL protocols and SSL ciphers at the HTTP level
 {: #ssl_protocols_ciphers}
@@ -1287,30 +1289,27 @@ By default, Ingress logs are formatted in JSON and display common log fields. Ho
 
 5. Verify that the configmap changes were applied.
 
- ```
- kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
- ```
- {: pre}
+   ```
+   kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
+   ```
+   {: pre}
 
- Example output:
- ```
- Name:        ibm-cloud-provider-ingress-cm
- Namespace:   kube-system
- Labels:      <none>
- Annotations: <none>
+   Example output:
+   ```
+   Name:        ibm-cloud-provider-ingress-cm
+   Namespace:   kube-system
+   Labels:      <none>
+   Annotations: <none>
 
- Data
- ====
+   Data
+   ====
 
-  log-format: '{remote_address: $remote_addr, remote_user: "$remote_user", time_date: [$time_local], request: "$request", status: $status, http_referer: "$http_referer", http_user_agent: "$http_user_agent", request_id: $request_id}'
-  log-format-escape-json: "true"
- ```
- {: screen}
+    log-format: '{remote_address: $remote_addr, remote_user: "$remote_user", time_date: [$time_local], request: "$request", status: $status, http_referer: "$http_referer", http_user_agent: "$http_user_agent", request_id: $request_id}'
+    log-format-escape-json: "true"
+   ```
+   {: screen}
 
 4. To view the Ingress ALB logs, [create a logging configuration for the Ingress service](cs_health.html#logging) in your cluster.
-
-<br />
-
 
 ### Increasing the size of the shared memory zone for Ingress metrics collection
 {: #vts_zone_size}
@@ -1362,8 +1361,5 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `vts-status-zone-s
     vts-status-zone-size: "20m"
    ```
    {: screen}
-
-<br />
-
 
 
