@@ -436,6 +436,8 @@ The deleted node is no longer listed in Calico.
 <br />
 
 
+
+
 ## Cluster remains in a pending State
 {: #cs_cluster_pending}
 
