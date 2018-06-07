@@ -1146,26 +1146,37 @@ By default, the source IP address of the client request is not preserved. When a
 
 To preserve the original source IP address of the client request, you can [enable source IP ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer). Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies.
 
-**Note**:
-* If you [disable an ALB](cs_cli_reference.html#cs_alb_configure), any source IP changes you make to the load balancer service exposing the ALB are lost. When you re-enable the ALB, you must enable source IP again.
+**Note**: If you [disable an ALB](cs_cli_reference.html#cs_alb_configure), any source IP changes you make to the load balancer service exposing the ALB are lost. When you re-enable the ALB, you must enable source IP again.
 
 To enable source IP, edit the configuration map for the load balancer that exposes an Ingress ALB.
 
-1. Get the ID of the ALB for which you want to enable source IP.
-    ```
-    kubectl get svc -n kube-system | grep alb
-    ```
-    {: pre}
+1. Enable source IP preservation for a single ALB or for all the ALBs in your cluster.
+    * To set up source IP preservation for a single ALB:
+        1. Get the ID of the ALB for which you want to enable source IP.
+            ```
+            kubectl get svc -n kube-system | grep alb
+            ```
+            {: pre}
 
-2. Open the load balancer service that exposes the ALB.
-    ```
-    kubectl edit svc <ALB_ID> -n kube-system
-    ```
-    {: pre}
+        2. Open the load balancer service that exposes the ALB.
+            ```
+            kubectl edit svc <ALB_ID> -n kube-system
+            ```
+            {: pre}
 
-3. Under **spec**, change the value of **externalTrafficPolicy** from `Cluster` to `Local`.
+        3. Under **spec**, change the value of **externalTrafficPolicy** from `Cluster` to `Local`.
 
-4. Save the configuration file.
+        4. Save the configuration file.
+    * To set up source IP preservation for all public ALBs in your cluster, run the following command:
+        ```
+        kubectl get svc -n kube-system | grep alb |grep public |awk '{print $1}' |while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Local"}}'; done
+        ```
+        {: pre}
+    * To set up source IP preservation for all private ALBs in your cluster, run the following command:
+        ```
+        kubectl get svc -n kube-system | grep alb |grep private |awk '{print $1}' |while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Local"}}'; done
+        ```
+        {: pre}
 
 5. Verify that the source IP is preserved by checking the Ingress logs.
     1. Get the name of a pod for the ALB that you modified. ALB pod names look similar to `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1-85f9665b6b-2zvjq`.
@@ -1202,7 +1213,10 @@ To enable source IP, edit the configuration map for the load balancer that expos
         {: pre}
     6. In the logs, verify that the **"client":** field shows the IP address of the client request instead of the IP address for the load balancer service that exposes your ALB.
 
-6. Now, when you look up the headers for the requests sent to your backend app, you can see the client IP address in the `x-forwarded-for` header.
+Now, when you look up the headers for the requests sent to your backend app, you can see the client IP address in the `x-forwarded-for` header.
+
+To revert source IP preservation for your public ALBs, you can run `kubectl get svc -n kube-system | grep alb |grep public |awk '{print $1}' |while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done`. To revert source IP preservation for your private ALBs, you can run `kubectl get svc -n kube-system | grep alb |grep private |awk '{print $1}' |while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done`.
+{: tip}
 
 ### Configuring SSL protocols and SSL ciphers at the HTTP level
 {: #ssl_protocols_ciphers}
