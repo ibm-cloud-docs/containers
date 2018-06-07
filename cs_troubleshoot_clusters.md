@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-06"
+lastupdated: "2018-06-07"
 
 ---
 
@@ -129,10 +129,32 @@ You might have another firewall set up or customized your existing firewall sett
 You cannot access your worker node by using an SSH connection.
 
 {: tsCauses}
-SSH via password is disabled on the worker nodes.
+SSH by password is unavailable on the worker nodes.
 
 {: tsResolve}
-Use [DaemonSets ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) for anything you must run on every node or jobs for any one-time actions you must execute.
+Use [DaemonSets ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) for actions that you must run on every node, or use jobs for one-time actions that you must run.
+
+<br />
+
+
+## Bare metal machine ID is inconsistent with worker records
+{: #bm_machine_id}
+
+{: tsSymptoms}
+When you use `bx cs worker` commands with your bare metal worker node, you see a message similar to the following.
+
+```
+Instance ID inconsistent with worker records
+```
+{: screen}
+
+{: tsCauses}
+The machine ID can become inconsistent with the {{site.data.keyword.containershort_notm}} worker record when the machine experiences hardware issues. When IBM Cloud infrastructure (SoftLayer) resolves this issue, a component can change within the system that the service does not identify.
+
+{: tsResolve}
+For {{site.data.keyword.containershort_notm}} to re-identify the machine, [reload the bare metal worker node](cs_cli_reference.html#cs_worker_reload). **Note**: Reloading also updates the machine's [patch version](cs_versions_changelog.html).
+
+You can also [delete the bare metal worker node](cs_cli_reference.html##cs_cluster_rm). **Note**: Bare metal instances are billed monthly.
 
 <br />
 
