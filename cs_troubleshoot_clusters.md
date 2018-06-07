@@ -137,7 +137,7 @@ Use [DaemonSets ![External link icon](../icons/launch-glyph.svg "External link i
 <br />
 
 
-## Bare metal machine ID is inconsistent with worker records
+## Bare metal instance ID is inconsistent with worker records
 {: #bm_machine_id}
 
 {: tsSymptoms}
