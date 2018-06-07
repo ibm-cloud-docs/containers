@@ -1148,7 +1148,7 @@ To preserve the original source IP address of the client request, you can [enabl
 
 **Note**: If you [disable an ALB](cs_cli_reference.html#cs_alb_configure), any source IP changes you make to the load balancer service exposing the ALB are lost. When you re-enable the ALB, you must enable source IP again.
 
-To enable source IP, edit the configuration map for the load balancer that exposes an Ingress ALB.
+To enable source IP, edit the load balancer service that exposes an Ingress ALB.
 
 1. Enable source IP preservation for a single ALB or for all the ALBs in your cluster.
     * To set up source IP preservation for a single ALB:
@@ -1178,45 +1178,19 @@ To enable source IP, edit the configuration map for the load balancer that expos
         ```
         {: pre}
 
-5. Verify that the source IP is preserved by checking the Ingress logs.
-    1. Get the name of a pod for the ALB that you modified. ALB pod names look similar to `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1-85f9665b6b-2zvjq`.
-        ```
-        kubectl get pods -n kube-system
-        ```
-        {: pre}
-    2. Log in to the pod.
-        ```
-        kubectl exec -ti -n kube-system <pod_name> -c nginx-ingress bash
-        ```
-        {: pre}
-    3. Go to the logs directory.
-        ```
-        cd /var/log/nginx/customerlogs
-        ```
-        {: pre}
-    4. List the available log files. In the output, copy the name of the log file `customerlogAccess_<pod_name>.log` where <pod_name> is the name of the pod that you are logged into.
-        ```
-        ls
-        ```
-        {: pre}
+2. Now, when you look up the headers for the requests sent to your backend app, you can see the client IP address in the `x-forwarded-for` header.
 
-        For example, if you are logged into a pod called `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1-85f9665b6b-2zvjq`, the first listed log file (`customerlogAccess_public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1-85f9665b6b-2zvjq.log`) in the output is the access log file for the ALB pod you are logged into:
+3. If you no longer want to preserve the source IP, you can revert the changes you made to the service.
+    * To revert source IP preservation for your public ALBs:
         ```
-        customerlogAccess_public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1-85f9665b6b-2zvjq.log
-        customerlogError_public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1-85f9665b6b-2zvjq.log
-        ```
-        {: screen}
-    5. Open the log file.
-        ```
-        vi customerlogAccess_<pod_name>.log
+        kubectl get svc -n kube-system | grep alb |grep public |awk '{print $1}' |while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done
         ```
         {: pre}
-    6. In the logs, verify that the **"client":** field shows the IP address of the client request instead of the IP address for the load balancer service that exposes your ALB.
-
-Now, when you look up the headers for the requests sent to your backend app, you can see the client IP address in the `x-forwarded-for` header.
-
-To revert source IP preservation for your public ALBs, you can run `kubectl get svc -n kube-system | grep alb |grep public |awk '{print $1}' |while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done`. To revert source IP preservation for your private ALBs, you can run `kubectl get svc -n kube-system | grep alb |grep private |awk '{print $1}' |while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done`.
-{: tip}
+    * To revert source IP preservation for your private ALBs:
+        ```
+        kubectl get svc -n kube-system | grep alb |grep private |awk '{print $1}' |while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done
+        ```
+        {: pre}
 
 ### Configuring SSL protocols and SSL ciphers at the HTTP level
 {: #ssl_protocols_ciphers}
