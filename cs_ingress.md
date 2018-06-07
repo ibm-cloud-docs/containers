@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-06"
+lastupdated: "2018-06-07"
 
 ---
 
@@ -1066,6 +1066,7 @@ You can further configure an application load balancer with the following option
 
 - [Customizing your application load balancer with annotations](cs_annotations.html)
 - [Opening ports in the Ingress application load balancer](#opening_ingress_ports)
+- [Preserving the source IP address](#preserve_source_ip)
 - [Configuring SSL protocols and SSL ciphers at the HTTP level](#ssl_protocols_ciphers)
 - [Customizing the Ingress log format](#ingress_log_format)
 - [Increasing the size of the shared memory zone for Ingress metrics collection](#vts_zone_size)
@@ -1138,7 +1139,70 @@ By default, only ports 80 and 443 are exposed in the Ingress ALB. To expose othe
 
 For more information about configmap resources, see the [Kubernetes documentation](https://kubernetes-v1-4.github.io/docs/user-guide/configmap/).
 
+### Preserving the source IP address
+{: #preserve_source_ip}
 
+By default, the source IP address of the client request is not preserved. When a client request to your app is sent to your cluster, the request is routed to a pod for the load balancer service that exposes the ALB. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running.
+
+To preserve the original source IP address of the client request, you can [enable source IP ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer). Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies.
+
+**Note**:
+* If you [disable an ALB](cs_cli_reference.html#cs_alb_configure), any source IP changes you make to the load balancer service exposing the ALB are lost. When you re-enable the ALB, you must enable source IP again.
+
+To enable source IP, edit the configuration map for the load balancer that exposes an Ingress ALB.
+
+1. Get the ID of the ALB for which you want to enable source IP.
+    ```
+    kubectl get svc -n kube-system | grep alb
+    ```
+    {: pre}
+
+2. Open the load balancer service that exposes the ALB.
+    ```
+    kubectl edit svc <ALB_ID> -n kube-system
+    ```
+    {: pre}
+
+3. Under **spec**, change the value of **externalTrafficPolicy** from `Cluster` to `Local`.
+
+4. Save the configuration file.
+
+5. Verify that the source IP is preserved by checking the Ingress logs.
+    1. Get the name of a pod for the ALB that you modified. ALB pod names look similar to `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1-85f9665b6b-2zvjq`.
+        ```
+        kubectl get pods -n kube-system
+        ```
+        {: pre}
+    2. Log in to the pod.
+        ```
+        kubectl exec -ti -n kube-system <pod_name> -c nginx-ingress bash
+        ```
+        {: pre}
+    3. Go to the logs directory.
+        ```
+        cd /var/log/nginx/customerlogs
+        ```
+        {: pre}
+    4. List the available log files. In the output, copy the name of the log file `customerlogAccess_<pod_name>.log` where <pod_name> is the name of the pod that you are logged into.
+        ```
+        ls
+        ```
+        {: pre}
+
+        For example, if you are logged into a pod called `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1-85f9665b6b-2zvjq`, the first listed log file (`customerlogAccess_public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1-85f9665b6b-2zvjq.log`) in the output is the access log file for the ALB pod you are logged into:
+        ```
+        customerlogAccess_public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1-85f9665b6b-2zvjq.log
+        customerlogError_public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1-85f9665b6b-2zvjq.log
+        ```
+        {: screen}
+    5. Open the log file.
+        ```
+        vi customerlogAccess_<pod_name>.log
+        ```
+        {: pre}
+    6. In the logs, verify that the **"client":** field shows the IP address of the client request instead of the IP address for the load balancer service that exposes your ALB.
+
+6. Now, when you look up the headers for the requests sent to your backend app, you can see the client IP address in the `x-forwarded-for` header.
 
 ### Configuring SSL protocols and SSL ciphers at the HTTP level
 {: #ssl_protocols_ciphers}
