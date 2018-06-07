@@ -1178,9 +1178,22 @@ To enable source IP, edit the load balancer service that exposes an Ingress ALB.
         ```
         {: pre}
 
-2. Now, when you look up the headers for the requests sent to your backend app, you can see the client IP address in the `x-forwarded-for` header.
+2. Verify that the source IP is being preserved in your ALB pods logs.
+    1. Get the ID of a pod for the ALB that you modified.
+        ```
+        kubectl get pods -n kube-system | grep alb
+        ```
+        {: pre}
+        
+    2. Open the logs for that ALB pod. Verify that the IP address for the `client` field is the client request IP address instead of the load balancer service IP address.
+        ```
+        kubectl logs <ALB_pod_ID> nginx-ingress -n kube-system
+        ```
+        {: pre}
 
-3. If you no longer want to preserve the source IP, you can revert the changes you made to the service.
+3. Now, when you look up the headers for the requests sent to your backend app, you can see the client IP address in the `x-forwarded-for` header.
+
+4. If you no longer want to preserve the source IP, you can revert the changes you made to the service.
     * To revert source IP preservation for your public ALBs:
         ```
         kubectl get svc -n kube-system | grep alb |grep public |awk '{print $1}' |while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done
