@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-06"
+lastupdated: "2018-06-08"
 
 ---
 
@@ -1228,7 +1228,7 @@ Set the maximum number of times the ALB can fail to connect to the server before
     </tr>
     <tr>
     <td><code>serviceName</code></td>
-    <td>Replace <code><em>&lt;myservice&gt;</em></code> with the name of the Kubernetes service that you created for your app. This field is optional. If a service name is not included, then the annotation is enabled for all services.  If a service name is included, then the annotation is enabled only for that service. Separate multiple services with a semi-colon (;).</td>
+    <td>Replace <code><em>&lt;myservice&gt;</em></code> with the name of the Kubernetes service that you created for your app. This field is required. If a service name is not included, then the annotation is enabled for all services.  If a service name is included, then the annotation is enabled only for that service. Separate multiple services with a comma (,).</td>
     </tr>
     </tbody></table>
     </dd>
