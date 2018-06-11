@@ -171,7 +171,7 @@ To create a load balancer service:
     Labels:                 <none>
     Selector:               app=liberty
     Type:                   LoadBalancer
-    Zone:                 dal10
+    Zone:                   dal10
     IP:                     172.21.xxx.xxx
     LoadBalancer Ingress:   169.xx.xxx.xxx
     Port:                   <unset> 8080/TCP
