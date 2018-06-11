@@ -1006,11 +1006,11 @@ Set the amount of time during which the ALB can attempt to connect to a server b
 </dd>
 
 
- <dt>Sample Ingress resource YAML</dt>
- <dd>
+<dt>Sample Ingress resource YAML</dt>
+<dd>
 
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -1030,24 +1030,24 @@ spec:
           serviceName: myservice
           servicePort: 8080</code></pre>
 
- <table>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>serviceName(Optional)</code></td>
-  <td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the Kubernetes service that you created for your app.</td>
-  </tr>
-  <tr>
-  <td><code>fail-timeout</code></td>
-  <td>Replace <code>&lt;<em>fail_timeout</em>&gt;</code> with the amount of time that the ALB can attempt to connect to a server before the server is considered unavailable. The default is <code>10s</code>. Time must be in seconds.</td>
-  </tr>
-  </tbody></table>
-  </dd>
-  </dl>
+<table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName(Optional)</code></td>
+<td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the Kubernetes service that you created for your app.</td>
+</tr>
+<tr>
+<td><code>fail-timeout</code></td>
+<td>Replace <code>&lt;<em>fail_timeout</em>&gt;</code> with the amount of time that the ALB can attempt to connect to a server before the server is considered unavailable. The default is <code>10s</code>. Time must be in seconds.</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
 
-  <br />
+<br />
 
 
 ### Upstream keepalive (upstream-keepalive)
@@ -1063,11 +1063,11 @@ Set the maximum number of idle keepalive connections to the upstream server of a
 </dd>
 
 
- <dt>Sample Ingress resource YAML</dt>
- <dd>
+<dt>Sample Ingress resource YAML</dt>
+<dd>
 
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -1087,23 +1087,23 @@ spec:
           serviceName: myservice
           servicePort: 8080</code></pre>
 
- <table>
- <caption>Understanding the annotation components</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>serviceName</code></td>
-  <td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the Kubernetes service that you created for your app.</td>
-  </tr>
-  <tr>
-  <td><code>keepalive</code></td>
-  <td>Replace <code>&lt;<em>max_connections</em>&gt;</code> with the maximum number of idle keepalive connections to the upstream server. The default is <code>64</code>. A <code>0</code> value disables upstream keepalive connections for the given service.</td>
-  </tr>
-  </tbody></table>
-  </dd>
-  </dl>
+<table>
+<caption>Understanding the annotation components</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the Kubernetes service that you created for your app.</td>
+</tr>
+<tr>
+<td><code>keepalive</code></td>
+<td>Replace <code>&lt;<em>max_connections</em>&gt;</code> with the maximum number of idle keepalive connections to the upstream server. The default is <code>64</code>. A <code>0</code> value disables upstream keepalive connections for the given service.</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
 
 <br />
 
@@ -1120,11 +1120,11 @@ Set the maximum number of unsuccessful attempts to communicate with the server.
 Set the maximum number of times the ALB can fail to connect to the server before the server is considered unavailable. For the server to be considered unavailable, the ALB must hit the maximum number within the duration of time set by the <a href="#upstream-fail-timeout"><code>upstream-fail-timeout</code> annotation</a>. The duration of time that the server is considered unavailable is also set by the <code>upstream-fail-timeout</code> annotation.</dd>
 
 
- <dt>Sample Ingress resource YAML</dt>
- <dd>
+<dt>Sample Ingress resource YAML</dt>
+<dd>
 
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -1144,22 +1144,22 @@ spec:
           serviceName: myservice
           servicePort: 8080</code></pre>
 
- <table>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>serviceName(Optional)</code></td>
-  <td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the Kubernetes service that you created for your app.</td>
-  </tr>
-  <tr>
-  <td><code>max-fails</code></td>
-  <td>Replace <code>&lt;<em>max_fails</em>&gt;</code> with the maximum number of unsuccessful attempts the ALB can make to communicate with the server. The default is <code>1</code>. A <code>0</code> value disables the annotation.</td>
-  </tr>
-  </tbody></table>
-  </dd>
-  </dl>
+<table>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName(Optional)</code></td>
+<td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the Kubernetes service that you created for your app.</td>
+</tr>
+<tr>
+<td><code>max-fails</code></td>
+<td>Replace <code>&lt;<em>max_fails</em>&gt;</code> with the maximum number of unsuccessful attempts the ALB can make to communicate with the server. The default is <code>1</code>. A <code>0</code> value disables the annotation.</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
 
 <br />
 
@@ -1170,25 +1170,25 @@ spec:
 ### {{site.data.keyword.appid_short_notm}} Authentication (appid-auth)
 {: #appid-auth}
 
-  Use {{site.data.keyword.appid_full_notm}} to authenticate with your application.
-  {:shortdesc}
+Use {{site.data.keyword.appid_full_notm}} to authenticate with your application.
+{:shortdesc}
 
-  <dl>
-  <dt>Description</dt>
-  <dd>
-  Authenticate web or API HTTP/HTTPS requests with {{site.data.keyword.appid_short_notm}}.
+<dl>
+<dt>Description</dt>
+<dd>
+Authenticate web or API HTTP/HTTPS requests with {{site.data.keyword.appid_short_notm}}.
 
-  <p>If you set the request type to <code>web</code>, a web request that contains an {{site.data.keyword.appid_short_notm}} access token is validated. If token validation fails, the web request is rejected. If the request does not contain an access token, then the request is redirected to the {{site.data.keyword.appid_short_notm}} login page. <strong>Note</strong>: For {{site.data.keyword.appid_short_notm}} web authentication to work, cookies must be enabled in the user's browser.</p>
+<p>If you set the request type to <code>web</code>, a web request that contains an {{site.data.keyword.appid_short_notm}} access token is validated. If token validation fails, the web request is rejected. If the request does not contain an access token, then the request is redirected to the {{site.data.keyword.appid_short_notm}} login page. <strong>Note</strong>: For {{site.data.keyword.appid_short_notm}} web authentication to work, cookies must be enabled in the user's browser.</p>
 
-  <p>If you set the request type to <code>api</code>, an API request that contains an {{site.data.keyword.appid_short_notm}} access token is validated. If the request does not contain an access token, a <code>401: Unauthorized</code> error message is returned to the user.</p>
+<p>If you set the request type to <code>api</code>, an API request that contains an {{site.data.keyword.appid_short_notm}} access token is validated. If the request does not contain an access token, a <code>401: Unauthorized</code> error message is returned to the user.</p>
 
-  <p>**Note**: For security reasons, {{site.data.keyword.appid_short_notm}} authentication only supports backends with TLS/SSL enabled.</p>
-  </dd>
-   <dt>Sample Ingress resource YAML</dt>
-   <dd>
+<p>**Note**: For security reasons, {{site.data.keyword.appid_short_notm}} authentication only supports backends with TLS/SSL enabled.</p>
+</dd>
+<dt>Sample Ingress resource YAML</dt>
+<dd>
 
-   <pre class="codeblock">
-   <code>apiVersion: extensions/v1beta1
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -1208,40 +1208,40 @@ spec:
           serviceName: myservice
           servicePort: 8080</code></pre>
 
-   <table>
-   <caption>Understanding the annotation components</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>bindSecret</code></td>
-    <td>Replace <em><code>&lt;bind_secret&gt;</code></em> with the Kubernetes secret which stores the bind secret.</td>
-    </tr>
-    <tr>
-    <td><code>namespace</code></td>
-    <td>Replace <em><code>&lt;namespace&gt;</code></em> with the namespace of the bind secret. This field defaults to the `default` namespace.</td>
-    </tr>
-    <tr>
-    <td><code>requestType</code></td>
-    <td>Replace <code><em>&lt;request_type&gt;</em></code> with the type of request you want to send to {{site.data.keyword.appid_short_notm}}. Accepted values are `web` or `api`. The default is `api`.</td>
-    </tr>
-    <tr>
-    <td><code>serviceName</code></td>
-    <td>Replace <code><em>&lt;myservice&gt;</em></code> with the name of the Kubernetes service that you created for your app. This field is required. If a service name is not included, then the annotation is enabled for all services.  If a service name is included, then the annotation is enabled only for that service. Separate multiple services with a comma (,).</td>
-    </tr>
-    </tbody></table>
-    </dd>
-    <dt>Usage</dt>
-    <dd>Because the application uses {{site.data.keyword.appid_short_notm}} for authenication, you must provision an {{site.data.keyword.appid_short_notm}} instance, configure the instance with valid redirect URIs, and generate a bind secret.
-    <ol>
-    <li>Provision an [{{site.data.keyword.appid_short_notm}} instance](https://console.bluemix.net/catalog/services/app-id).</li>
-    <li>In the {{site.data.keyword.appid_short_notm}} management console, add redirectURIs for your app.</li>
-    <li>Create a bind secret.
-    <pre class="pre"><code>bx cs cluster-service-bind &lt;my_cluster&gt; &lt;my_namespace&gt; &lt;my_service_instance_GUID&gt;</code></pre> </li>
-    <li>Configure the <code>appid-auth</code> annotation.</li>
-    </ol></dd>
-    </dl>
+<table>
+<caption>Understanding the annotation components</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
+</thead>
+<tbody>
+<tr>
+<td><code>bindSecret</code></td>
+<td>Replace <em><code>&lt;bind_secret&gt;</code></em> with the Kubernetes secret which stores the bind secret.</td>
+</tr>
+<tr>
+<td><code>namespace</code></td>
+<td>Replace <em><code>&lt;namespace&gt;</code></em> with the namespace of the bind secret. This field defaults to the `default` namespace.</td>
+</tr>
+<tr>
+<td><code>requestType</code></td>
+<td>Replace <code><em>&lt;request_type&gt;</em></code> with the type of request you want to send to {{site.data.keyword.appid_short_notm}}. Accepted values are `web` or `api`. The default is `api`.</td>
+</tr>
+<tr>
+<td><code>serviceName</code></td>
+<td>Replace <code><em>&lt;myservice&gt;</em></code> with the name of the Kubernetes service that you created for your app. This field is required. If a service name is not included, then the annotation is enabled for all services.  If a service name is included, then the annotation is enabled only for that service. Separate multiple services with a comma (,).</td>
+</tr>
+</tbody></table>
+</dd>
+<dt>Usage</dt>
+<dd>Because the application uses {{site.data.keyword.appid_short_notm}} for authenication, you must provision an {{site.data.keyword.appid_short_notm}} instance, configure the instance with valid redirect URIs, and generate a bind secret.
+<ol>
+<li>Provision an [{{site.data.keyword.appid_short_notm}} instance](https://console.bluemix.net/catalog/services/app-id).</li>
+<li>In the {{site.data.keyword.appid_short_notm}} management console, add redirectURIs for your app.</li>
+<li>Create a bind secret.
+<pre class="pre"><code>bx cs cluster-service-bind &lt;my_cluster&gt; &lt;my_namespace&gt; &lt;my_service_instance_GUID&gt;</code></pre> </li>
+<li>Configure the <code>appid-auth</code> annotation.</li>
+</ol></dd>
+</dl>
 
 <br />
 
@@ -1652,31 +1652,31 @@ spec:
 ### Istio services (istio-services)
 {: #istio-services}
 
-  Route traffic to Istio-managed services.
-  {:shortdesc}
+Route traffic to Istio-managed services.
+{:shortdesc}
 
-  <dl>
-  <dt>Description</dt>
-  <dd>
-  If you have Istio-managed services, you can use a cluster ALB to route HTTP/HTTPS requests to the Istio Ingress controller. The Istio Ingress controller then routes the requests to the app services. In order to route traffic, you must make changes to the Ingress resources for both the cluster ALB and the Istio Ingress controller.
-    <br><br>In the Ingress resource for the cluster ALB, you must:
-      <ul>
-        <li>specify the `istio-services` annotation</li>
-        <li>define the service path as the actual path the app listens on</li>
-        <li>define the service port as the port of the Istio Ingress controller</li>
-      </ul>
-    <br>In the Ingress resource for the Istio Ingress controller, you must:
-      <ul>
-        <li>define the service path as the actual path the app listens on</li>
-        <li>define the service port as the HTTP/HTTPS port of the app service that is exposed by the Istio Ingress controller</li>
-    </ul>
-  </dd>
+<dl>
+<dt>Description</dt>
+<dd>
+If you have Istio-managed services, you can use a cluster ALB to route HTTP/HTTPS requests to the Istio Ingress controller. The Istio Ingress controller then routes the requests to the app services. In order to route traffic, you must make changes to the Ingress resources for both the cluster ALB and the Istio Ingress controller.
+<br><br>In the Ingress resource for the cluster ALB, you must:
+  <ul>
+    <li>specify the `istio-services` annotation</li>
+    <li>define the service path as the actual path the app listens on</li>
+    <li>define the service port as the port of the Istio Ingress controller</li>
+  </ul>
+<br>In the Ingress resource for the Istio Ingress controller, you must:
+  <ul>
+    <li>define the service path as the actual path the app listens on</li>
+    <li>define the service port as the HTTP/HTTPS port of the app service that is exposed by the Istio Ingress controller</li>
+</ul>
+</dd>
 
-   <dt>Sample Ingress resource YAML for the cluster ALB</dt>
-   <dd>
+<dt>Sample Ingress resource YAML for the cluster ALB</dt>
+<dd>
 
-   <pre class="codeblock">
-   <code>apiVersion: extensions/v1beta1
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -1700,39 +1700,42 @@ spec:
           serviceName: &lt;myservice2&gt;
           servicePort: &lt;istio_ingress_port&gt;</code></pre>
 
-   <table>
-   <caption>Understanding the YAML file components</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>enabled</code></td>
-      <td>To enable traffic routing to Istio-manages services, set to <code>True</code>.</td>
-    </tr>
-    <tr>
-    <td><code>serviceName</code></td>
-    <td>Replace <code><em>&lt;myservice1&gt;</em></code> with the name of the Kubernetes service that you created for your Istio-managed app. Separate multiple services with a semi-colon (;). This field is optional. If you do not specify a service name, then all Istio-managed services are enabled for traffic routing.</td>
-    </tr>
-    <tr>
-    <td><code>istioServiceNamespace</code></td>
-    <td>Replace <code><em>&lt;istio-namespace&gt;</em></code> with the Kubernetes namespace where Istio is installed. This field is optional. If you do not specify a namespace, then the <code>istio-system</code> namespace is used.</td>
-    </tr>
-    <tr>
-    <td><code>istioServiceName</code></td>
-    <td>Replace <code><em>&lt;istio-ingress-service&gt;</em></code> with the name of the Istio Ingress service. This field is optional. If you do not specify the Istio Ingress service name, then service name <code>istio-ingress</code> is used.</td>
-    </tr>
-    <tr>
-    <td><code>path</code></td>
-      <td>For each Istio-managed service that you want to route traffic to, replace <code><em>&lt;/myapp1&gt;</em></code> with the backend path that the Istio-managed service listens on. The path must correspond to the path that you defined in the Istio Ingress resource.</td>
-    </tr>
-    <tr>
-    <td><code>servicePort</code></td>
-    <td>For each Istio-managed service that you want to route traffic to, replace <code><em>&lt;istio_ingress_port&gt;</em></code> with port of the Istio Ingress controller.</td>
-    </tr>
-    </tbody></table>
-    </dd>
-    </dl>
+<table>
+<caption>Understanding the YAML file components</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+  <td>To enable traffic routing to Istio-manages services, set to <code>True</code>.</td>
+</tr>
+<tr>
+<td><code>serviceName</code></td>
+<td>Replace <code><em>&lt;myservice1&gt;</em></code> with the name of the Kubernetes service that you created for your Istio-managed app. Separate multiple services with a semi-colon (;). This field is optional. If you do not specify a service name, then all Istio-managed services are enabled for traffic routing.</td>
+</tr>
+<tr>
+<td><code>istioServiceNamespace</code></td>
+<td>Replace <code><em>&lt;istio-namespace&gt;</em></code> with the Kubernetes namespace where Istio is installed. This field is optional. If you do not specify a namespace, then the <code>istio-system</code> namespace is used.</td>
+</tr>
+<tr>
+<td><code>istioServiceName</code></td>
+<td>Replace <code><em>&lt;istio-ingress-service&gt;</em></code> with the name of the Istio Ingress service. This field is optional. If you do not specify the Istio Ingress service name, then service name <code>istio-ingress</code> is used.</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+  <td>For each Istio-managed service that you want to route traffic to, replace <code><em>&lt;/myapp1&gt;</em></code> with the backend path that the Istio-managed service listens on. The path must correspond to the path that you defined in the Istio Ingress resource.</td>
+</tr>
+<tr>
+<td><code>servicePort</code></td>
+<td>For each Istio-managed service that you want to route traffic to, replace <code><em>&lt;istio_ingress_port&gt;</em></code> with port of the Istio Ingress controller.</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
+
+<br />
+
 
 ## Proxy buffer annotations
 {: #proxy-buffer}
@@ -2092,15 +2095,15 @@ spec:
 {: #response-remove-headers}
 
 Remove header information that is included in the client response from the back-end end app before the response is sent to the client.
- {:shortdesc}
+{:shortdesc}
 
- <dl>
- <dt>Description</dt>
- <dd>The Ingress ALB acts as a proxy between your back-end app and the client web browser. Client responses from the back-end app that are sent to the ALB are processed (proxied), and put into a new response that is then sent from the ALB to the client web browser. Although proxying a response removes http header information that was initially sent from the back-end app, this process might not remove all back-end app specific headers. Remove header information from a client response before the response is forwarded from the ALB to the client web browser.</dd>
- <dt>Sample Ingress resource YAML</dt>
- <dd>
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
+<dl>
+<dt>Description</dt>
+<dd>The Ingress ALB acts as a proxy between your back-end app and the client web browser. Client responses from the back-end app that are sent to the ALB are processed (proxied), and put into a new response that is then sent from the ALB to the client web browser. Although proxying a response removes http header information that was initially sent from the back-end app, this process might not remove all back-end app specific headers. Remove header information from a client response before the response is forwarded from the ALB to the client web browser.</dd>
+<dt>Sample Ingress resource YAML</dt>
+<dd>
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -2131,22 +2134,22 @@ spec:
           serviceName: &lt;myservice2&gt;
           servicePort: 80</code></pre>
 
-  <table>
-  <caption>Understanding the annotation components</caption>
-   <thead>
-   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
-   </thead>
-   <tbody>
-   <tr>
-   <td><code>service_name</code></td>
-   <td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the Kubernetes service that you created for your app.</td>
-   </tr>
-   <tr>
-   <td><code>&lt;header&gt;</code></td>
-   <td>The key of the header to remove from the client response.</td>
-   </tr>
-   </tbody></table>
-   </dd></dl>
+<table>
+<caption>Understanding the annotation components</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
+</thead>
+<tbody>
+<tr>
+<td><code>service_name</code></td>
+<td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the Kubernetes service that you created for your app.</td>
+</tr>
+<tr>
+<td><code>&lt;header&gt;</code></td>
+<td>The key of the header to remove from the client response.</td>
+</tr>
+</tbody></table>
+</dd></dl>
 
 <br />
 
@@ -2279,11 +2282,11 @@ For all services, limit the request processing rate and the number of connection
 </dd>
 
 
- <dt>Sample Ingress resource YAML</dt>
- <dd>
+<dt>Sample Ingress resource YAML</dt>
+<dd>
 
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -2303,28 +2306,28 @@ spec:
           serviceName: myservice
           servicePort: 8080</code></pre>
 
- <table>
- <caption>Understanding the annotation components</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>key</code></td>
-  <td>To set a global limit for incoming requests based on the location or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
-  </tr>
-  <tr>
-  <td><code>rate</code></td>
-  <td>Replace <code>&lt;<em>rate</em>&gt;</code> with the processing rate. Enter a value as a rate per second (r/s) or rate per minute (r/m). Example: <code>50r/m</code>.</td>
-  </tr>
-  <tr>
-  <td><code>number-of_connections</code></td>
-  <td>Replace <code>&lt;<em>conn</em>&gt;</code> with the number of connections.</td>
-  </tr>
-  </tbody></table>
+<table>
+<caption>Understanding the annotation components</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
+</thead>
+<tbody>
+<tr>
+<td><code>key</code></td>
+<td>To set a global limit for incoming requests based on the location or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
+</tr>
+<tr>
+<td><code>rate</code></td>
+<td>Replace <code>&lt;<em>rate</em>&gt;</code> with the processing rate. Enter a value as a rate per second (r/s) or rate per minute (r/m). Example: <code>50r/m</code>.</td>
+</tr>
+<tr>
+<td><code>number-of_connections</code></td>
+<td>Replace <code>&lt;<em>conn</em>&gt;</code> with the number of connections.</td>
+</tr>
+</tbody></table>
 
-  </dd>
-  </dl>
+</dd>
+</dl>
 
 <br />
 
@@ -2342,11 +2345,11 @@ Limit the request processing rate and the number of connections for specific ser
 </dd>
 
 
- <dt>Sample Ingress resource YAML</dt>
- <dd>
+<dt>Sample Ingress resource YAML</dt>
+<dd>
 
- <pre class="codeblock">
- <code>apiVersion: extensions/v1beta1
+<pre class="codeblock">
+<code>apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -2366,33 +2369,33 @@ spec:
           serviceName: myservice
           servicePort: 8080</code></pre>
 
- <table>
- <caption>Understanding the annotation components</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>serviceName</code></td>
-  <td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the service for which you want to limit the processing rate.</li>
-  </tr>
-  <tr>
-  <td><code>key</code></td>
-  <td>To set a global limit for incoming requests based on the location or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
-  </tr>
-  <tr>
-  <td><code>rate</code></td>
-  <td>Replace <code>&lt;<em>rate</em>&gt;</code> with the processing rate. To define a rate per second, use r/s: <code>10r/s</code>. To define a rate per minute, use r/m: <code>50r/m</code>.</td>
-  </tr>
-  <tr>
-  <td><code>number-of_connections</code></td>
-  <td>Replace <code>&lt;<em>conn</em>&gt;</code> with the number of connections.</td>
-  </tr>
-  </tbody></table>
-  </dd>
-  </dl>
+<table>
+<caption>Understanding the annotation components</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the service for which you want to limit the processing rate.</li>
+</tr>
+<tr>
+<td><code>key</code></td>
+<td>To set a global limit for incoming requests based on the location or service, use `key=location`. To set a global limit for incoming requests based on the header, use `X-USER-ID key=$http_x_user_id`.</td>
+</tr>
+<tr>
+<td><code>rate</code></td>
+<td>Replace <code>&lt;<em>rate</em>&gt;</code> with the processing rate. To define a rate per second, use r/s: <code>10r/s</code>. To define a rate per minute, use r/m: <code>50r/m</code>.</td>
+</tr>
+<tr>
+<td><code>number-of_connections</code></td>
+<td>Replace <code>&lt;<em>conn</em>&gt;</code> with the number of connections.</td>
+</tr>
+</tbody></table>
+</dd>
+</dl>
 
-  <br />
+<br />
 
 
 
