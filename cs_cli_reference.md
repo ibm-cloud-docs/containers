@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-07"
+lastupdated: "2018-06-11"
 
 ---
 
@@ -2681,4 +2681,298 @@ View a list of worker nodes and the status for each in a cluster.
 <br />
 
 
+ in which you deploy the cluster. For more information, see the documentation for the `bx cs machine-types` [command](cs_cli_reference.html#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
 
+  <dt><code>--size-per-zone <em>WORKERS_PER_ZONE</em></code></dt>
+    <dd>The number of workers to create in each zone. This value is required.</dd>
+
+  <dt><code>--hardware <em>HARDWARE</em></code></dt>
+    <dd>The level of hardware isolation for your worker node. Use dedicated if you want to have available physical resources dedicated to you only, or shared to allow physical resources to be shared with other IBM customers. The default is shared. This value is optional.</dd>
+
+  <dt><code>--labels <em>LABELS</em></code></dt>
+    <dd>The labels that you want to assign to the workers in your pool. Example: <key1>=<val1>,<key2>=<val2></dd>
+
+  <dt><code>--private-only </code></dt>
+    <dd>Specifies that there are no public VLANS on the worker pool. The default value is <code>false</code>.</dd>
+
+  <dt><code>--diable-disk-encrpyt</code></dt>
+    <dd>Specifies that the disk is not encrypted. The default value is <code>false</code>.</dd>
+
+</dl>
+
+**Example command**:
+
+  ```
+  bx cs worker-pool-create my_cluster --machine-type b2c.4x16 --size-per-zone 6
+  ```
+  {: pre}
+
+### bx cs worker-pool-get --worker-pool WORKER_POOL --cluster CLUSTER
+{: #cs_worker_pool_get}
+
+View the details of a worker pool.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
+    <dd>The name of the worker node pool that you want to view the details of. To list available worker pools, run `bx cs worker-pools --cluster <cluster_name_or_ID>`. bxThis value is required.</dd>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster where the worker pool is located. This value is required.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  bx cs worker-pool-get --worker-pool pool1 --cluster my_cluster
+  ```
+  {: pre}
+
+**Example output**:
+
+  ```
+  Name:               pool   
+  ID:                 a1a11b2222222bb3c33c3d4d44d555e5-f6f777g   
+  State:              active   
+  Hardware:           shared   
+  Zones:              dal10,dal12   
+  Workers per zone:   3   
+  Machine type:       b2c.4x16.encrypted   
+  Labels:             -   
+  Version:            1.9.7_1512
+  ```
+  {: screen}
+
+### bx cs worker-pool-rebalance --cluster CLUSTER --worker-pool WORKER_POOL [-s]
+{: #cs_rebalance}
+
+You can rebalance your worker pool after you delete a worker node. When you run this command a new worker or workers are added to your worker pool.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code><em>--cluster CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster. This value is required.</dd>
+  <dt><code><em>--worker-pool WORKER_POOL</em></code></dt>
+    <dd>The worker pool that you want to rebalance. This value is required.</dd>
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+
+  ```
+  bx cs worker-pool-rebalance --cluster my_cluster --worker-pool my_pool
+  ```
+  {: pre}
+
+### bx cs worker-pool-resize --worker-pool WORKER_POOL --cluster CLUSTER --size-per-zone WORKERS_PER_ZONE [-s]
+{: #cs_worker_pool_resize}
+
+Resize your worker pool to increase or decrease the number of worker nodes that are in each zone of your cluster.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
+    <dd>The name of the worker node pool that you want to update. This value is required.</dd>
+
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster for which you want to resize worker pools. This value is required.</dd>
+
+  <dt><code>--size-per-zone <em>WORKERS_PER_ZONE</em></code></dt>
+    <dd>The number of workers that you want to have in each zone. This value is required.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
+</dl>
+
+**Example command**:
+
+  ```
+  bx cs worker-pool-update --cluster my_cluster --worker-pool my_pool --size-per-zone 3
+  ```
+  {: pre}
+
+### bx cs worker-pool-rm --worker-pool WORKER_POOL --cluster CLUSTER [--json] [-s]
+{: #cs_worker_pool_rm}
+
+Remove a worker pool from your cluster. All worker nodes in the pool are deleted. Your pods are rescheduled when you delete. To avoid downtime, be sure that you have enough workers to run your workload.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
+    <dd>The name of the worker node pool that you want to remove. This value is required.</dd>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster that you want to remove the worker pool from. This value is required.</dd>
+  <dt><code>--json</code></dt>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  bx cs worker-pool-rm --cluster my_cluster --worker-pool pool1
+  ```
+  {: pre}
+
+### bx cs worker-pool-update --worker-pool WORKER_POOL --cluster CLUSTER [-f] [-s]
+{: #cs_worker_pool_update}
+
+Update all of the worker nodes in your pool to the latest Kubernetes version that matches the cluster's master version.
+
+**Important**: Running `bx cs worker-update` can cause downtime for your apps and services. During the update, all pods are rescheduled onto other worker nodes and data is deleted if not stored outside the pod. To avoid downtime, [ensure that you have enough worker nodes to handle your workload while the selected worker nodes are updating](cs_cluster_update.html#worker_node).
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
+    <dd>The name of the worker node pool that you want to update. This value is required.</dd>
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster for which you want to update worker pools. This value is required.</dd>
+  <dt><code>-f</code></dt>
+    <dd>Force the update with no user prompts. This value is optional.</dd>
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  bx cs worker-pool-update --worker-pool pool1 --cluster my_cluster
+  ```
+  {: pre}
+
+### bx cs worker-pools --cluster CLUSTER [--json] [-s]
+{: #cs_worker_pools}
+
+View the worker pools that you have in a cluster.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--cluster <em>CLUSTER_NAME_OR_ID</em></code></dt>
+    <dd>The name or ID of the cluster for which you want to list worker pools. This value is required.</dd>
+  <dt><code>--json</code></dt>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example command**:
+
+  ```
+  bx cs worker-pools --cluster my_cluster
+  ```
+  {: pre}
+
+### bx cs zone-add --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1,[WORKER_POOL2] --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN] [--json] [-s]
+{: #cs_zone_add}
+
+**Multizone clusters only**: After you create a cluster or worker pool, you can add a zone. When you add a zone, worker nodes are added to the new zone to match the number of workers per zone that you specified for the worker pool.
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--zone <em>ZONE</em></code></dt>
+    <dd>The zone that you want to add. It must be a [multizone-capable zone](cs_regions.html#zones) within the cluster's region. This value is required.</dd>
+
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster. This value is required.</dd>
+
+  <dt><code>--worker-pool <em>WORKER_POOLS</em></code></dt>
+    <dd>A comma-separated list of worker pools that the zone is added to. At least 1 worker pool is required.</dd>
+
+  <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
+    <dd>The ID of the private VLAN. This value is required. It must match the private VLAN ID of one or more of the worker nodes in the cluster. To see the VLANs that you have available, run <code>bx cs cluster-get --cluster &lt;cluster&gt; --showResources</code>. If you do not have any VLANs available, you can <a href="/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning" >enable VLAN spanning</a> for your account.<br><br>**Note**: New worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.</dd>
+
+  <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
+    <dd>The ID of the public VLAN. This value is required if you want to expose workloads on the nodes to the public. It must match the public VLAN ID of one or more of the worker nodes in the cluster. To see the VLANs that you have available, run <code>bx cs cluster-get --cluster &lt;cluster&gt; --showResources</code>. If you do not have any VLANs available, you can <a href="/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning" >enable VLAN spanning</a> for your account.<br><br>**Note**: New worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.</dd>
+
+  <dt><code>--json</code></dt>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+
+  ```
+  bx cs zone-add --zone dal10 --cluster my_cluster --worker-pools pool1,pool2,pool3 --private-vlan 2294021
+  ```
+  {: pre}
+
+  ### bx cs zone-network-set --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1,[WORKER_POOL2] --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN] [--json] [-s]
+  {: #cs_zone_network_set}
+
+  **Multizone clusters only**: Set the network metadata for a worker pool to use a different public or private VLAN for the zone than it previously used. Worker nodes that were already created in the pool continue to use the previous public or private VLAN, but new worker nodes in the pool use the new network data.
+
+  <strong>Command options</strong>:
+
+  <dl>
+    <dt><code>--zone <em>ZONE</em></code></dt>
+      <dd>The zone that you want to add. It must be a [multizone-capable zone](cs_regions.html#zones) within the cluster's region. This value is required.</dd>
+
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster. This value is required.</dd>
+
+  <dt><code>--worker-pool <em>WORKER_POOLS</em></code></dt>
+    <dd>A comma-separated list of worker pools that the zone is added to. At least 1 worker pool is required.</dd>
+
+  <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
+    <dd>The ID of the private VLAN. This value is required. It must match the private VLAN ID of one or more of the worker nodes in the cluster. To see the VLANs that you have available, run <code>bx cs cluster-get --cluster &lt;cluster&gt; --showResources</code>. If you do not have any VLANs available, you can <a href="/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning" >enable VLAN spanning</a> for your account.<br><br>**Note**: New worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.</dd>
+
+  <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
+    <dd>The ID of the public VLAN. This value is required if you want to change the public VLAN for the zone. If you do not want to change the private VLAN with the public VLAN, use the same private VLAN ID. The public VLAN ID must match the public VLAN ID of one or more of the worker nodes in the cluster. To see the VLANs that you have available, run <code>bx cs cluster-get --cluster &lt;cluster&gt; --showResources</code>. If you do not have any VLANs available, you can <a href="/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning" >enable VLAN spanning</a> for your account.<br><br>**Note**: New worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.</dd>
+
+  <dt><code>--json</code></dt>
+    <dd>Prints the command output in JSON format. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+  </dl>
+
+  **Example**:
+
+  ```
+  bx cs zone-network-set --zone dal10 --cluster my_cluster --worker-pools pool1,pool2,pool3 --private-vlan 2294021
+  ```
+  {: pre}
+
+### bx cs zone-rm --zone ZONE --cluster CLUSTER [-f] [-s]
+{: #cs_zone_rm}
+
+**Multizone clusters only**: Remove a zone from all the worker pools in your cluster. All worker nodes in the worker pool for this zone are deleted.
+
+Before you remove a zone, make sure that you have enough worker nodes in other zones in the cluster so that your pods can reschedule to help avoid a downtime for your app or data corruption on your worker node.
+{: tip}
+
+<strong>Command options</strong>:
+
+<dl>
+  <dt><code>--zone <em>ZONE</em></code></dt>
+    <dd>The zone that you want to add. It must be a [multizone-capable zone](cs_regions.html#zones) within the cluster's region. This value is required.</dd>
+
+  <dt><code>--cluster <em>CLUSTER</em></code></dt>
+    <dd>The name or ID of the cluster. This value is required.</dd>
+
+  <dt><code>-f</code></dt>
+    <dd>Force the update with no user prompts. This value is optional.</dd>
+
+  <dt><code>-s</code></dt>
+    <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+
+  ```
+  bx cs zone-rm --zone dal10 --cluster my_cluster
+  ```
+  {: pre}
+
+</staging>
