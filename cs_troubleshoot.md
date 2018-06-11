@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-06"
+lastupdated: "2018-06-11"
 
 ---
 
@@ -223,7 +223,7 @@ Review common error messages and learn how to resolve them.
       </tr>
       <tr>
        <td>Worker unable to talk to {{site.data.keyword.containershort_notm}} servers. Please verify your firewall setup is allowing traffic from this worker.
-       <td><ul><li>If you have a firewall, [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](cs_firewall.html#firewall_outbound).</li><li>Check whether your cluster does not have a public IP by running `bx cs workers <mycluster>`. If no public IP is listed, then your cluster has only private VLANs.<ul><li>If you want the cluster to have only private VLANs, set up your [VLAN connection](cs_clusters.html#worker_vlan_connection) and your [firewall](cs_firewall.html#firewall_outbound).</li><li>If you want the cluster to have a public IP, [add new worker nodes](cs_cli_reference.html#cs_worker_add) with both public and private VLANs.</li></ul></li></ul></td>
+       <td><ul><li>If you have a firewall, [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](cs_firewall.html#firewall_outbound).</li><li>Check whether your cluster does not have a public IP by running `bx cs workers &lt;mycluster&gt;`. If no public IP is listed, then your cluster has only private VLANs.<ul><li>If you want the cluster to have only private VLANs, set up your [VLAN connection](cs_clusters.html#worker_vlan_connection) and your [firewall](cs_firewall.html#firewall_outbound).</li><li>If you want the cluster to have a public IP, [add new worker nodes](cs_cli_reference.html#cs_worker_add) with both public and private VLANs.</li></ul></li></ul></td>
      </tr>
       <tr>
   <td>Cannot create IMS portal token, as no IMS account is linked to the selected BSS account</br></br>Provided user not found or active</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus: User account is currently cancel_pending.</br></br>Waiting for machine to be visible to the user</td>
