@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-07"
+lastupdated: "2018-06-11"
 
 ---
 
@@ -47,7 +47,7 @@ The following diagram shows how Ingress directs communication from the internet 
 
 1. A user sends a request to your app by accessing your app's URL. This URL is the public URL for your exposed app appended with the Ingress resource path, such as `mycluster.us-south.containers.appdomain.cloud/myapp`.
 
-2. A DNS system service resolves the URL to the portable public IP address of the load balancer that exposes the ALB in your cluster.
+2. A DNS system service resolves the hostname in the URL to the portable public IP address of the load balancer that exposes the ALB in your cluster.
 
 3. Based on the resolved IP address, the client sends the request to the load balancer service that exposes the ALB.
 
@@ -1184,7 +1184,7 @@ To enable source IP, edit the load balancer service that exposes an Ingress ALB.
         kubectl get pods -n kube-system | grep alb
         ```
         {: pre}
-        
+
     2. Open the logs for that ALB pod. Verify that the IP address for the `client` field is the client request IP address instead of the load balancer service IP address.
         ```
         kubectl logs <ALB_pod_ID> nginx-ingress -n kube-system
