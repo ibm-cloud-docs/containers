@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-08"
+lastupdated: "2018-06-11"
 
 ---
 
@@ -908,7 +908,7 @@ To apply the latest security updates and for a better performance, use the defau
    ```
    {: pre}
 
-2. Add an annotion to your PV. Replace `<version_number>` with the NFS version that you want to use. For example to change to NFS version 3.0, enter **3**.  
+2. Add an annotation to your PV. Replace `<version_number>` with the NFS version that you want to use. For example to change to NFS version 3.0, enter **3**.  
    ```
    kubectl patch pv <pv_name> -p '{"metadata": {"annotations":{"volume.beta.kubernetes.io/mount-options":"vers=<version_number>"}}}'
    ```
