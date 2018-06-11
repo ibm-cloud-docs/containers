@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-31"
+lastupdated: "2018-06-06"
 
 ---
 
@@ -75,7 +75,7 @@ As part of the update process, specific nodes are going to go down for a period 
 
 How are the keys defined?
 
-In the data information section of the configuration map, you can define up to 10 seperate rules to run at any given time. To be upgraded, worker nodes must pass every defined rule.
+In the data information section of the configuration map, you can define up to 10 separate rules to run at any given time. To be upgraded, worker nodes must pass every defined rule.
 
 The keys are defined. What now?
 
@@ -170,7 +170,7 @@ To update your worker nodes:
 
 5. Confirm that the update is complete:
   * Review the Kubernetes version on the {{site.data.keyword.Bluemix_notm}} Dashboard or run `bx cs workers <cluster_name_or_ID>`.
-  * Review the Kubernets version of the worker nodes by running `kubectl get nodes`.
+  * Review the Kubernetes version of the worker nodes by running `kubectl get nodes`.
   * In some cases, older clusters might list duplicate worker nodes with a **NotReady** status after an update. To remove duplicates, see [troubleshooting](cs_troubleshoot_clusters.html#cs_duplicate_nodes).
 
 Next steps:

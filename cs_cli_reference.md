@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-05"
+lastupdated: "2018-06-11"
 
 ---
 
@@ -1106,6 +1106,38 @@ List the services that are bound to one or all of the Kubernetes namespace in a 
   ```
   {: pre}
 
+### bx cs va CONTAINER_ID [--extended] [--vulnerabilities] [--configuration-issues] [--json]
+{: #cs_va}
+
+After you [install the container scanner](/docs/services/va/va_index.html#va_install_livescan), view a detailed vulnerability assessment report for a container in your cluster.
+
+**Command options**:
+
+<dl>
+<dt><code>CONTAINER_ID</code></dt>
+<dd><p>The ID of the container. This value is required.</p>
+<p>To find the ID of your container:<ol><li>[Target the Kubernetes CLI to your cluster](cs_cli_install.html#cs_cli_configure).</li><li>List your pods by running `kubectl get pods`.</li><li>Find the **Container ID** field in the output of the `kubectl describe pod <pod_name>` command. For example, `Container ID: docker://1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li><li>Remove the `docker://` prefix from the ID before you use the container ID for the `bx cs va` command. For example, `1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15`.</li></ol></p></dd>
+
+<dt><code>--extended</code></dt>
+<dd><p>Extend the command output to show more fix information for vulnerable packages. This value is optional.</p>
+<p>By default, the scan results show the ID, policy status, affected packages, and how to resolve. With the `--extended` flag, it adds information such as the summary, vendor security notice, and official notice link.</p></dd>
+
+<dt><code>--vulnerabilities</code></dt>
+<dd>Restrict the command output to show package vulnerabilities only. This value is optional. You cannot use this flag if you use the `--configuration-issues` flag.</dd>
+
+<dt><code>--configuration-issues</code></dt>
+<dd>Restrict the command output to show configuration issues only. This value is optional. You cannot use this flag if you use the `--vulnerabilities` flag.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+</dl>
+
+**Example**:
+
+```
+bx cs va 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1011121314g15 --extended --vulnerabilities --json
+```
+{: pre}
 
 
 ### bx cs webhook-create --cluster CLUSTER --level LEVEL --type slack --url URL  [-s]
@@ -1618,7 +1650,7 @@ You cannot set multiple credentials for one {{site.data.keyword.containershort_n
   To generate an API key:
 
   <ol>
-  <li>Log in to the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.softlayer.com/).</li>
+  <li>Log in to the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.bluemix.com/).</li>
   <li>Select <strong>Account</strong>, and then <strong>Users</strong>.</li>
   <li>Click <strong>Generate</strong> to generate an IBM Cloud infrastructure (SoftLayer) API key for your account.</li>
   <li>Copy the API key to use in this command.</li>
@@ -1626,7 +1658,7 @@ You cannot set multiple credentials for one {{site.data.keyword.containershort_n
 
   To view your existing API key:
   <ol>
-  <li>Log in to the [IBM Cloud infrastructure (SoftLayer)portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.softlayer.com/).</li>
+  <li>Log in to the [IBM Cloud infrastructure (SoftLayer)portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://control.bluemix.com/).</li>
   <li>Select <strong>Account</strong>, and then <strong>Users</strong>.</li>
   <li>Click <strong>View</strong> to see your existing API key.</li>
   <li>Copy the API key to use in this command.</li>
@@ -2216,7 +2248,7 @@ us-south      us-south
 {: worker_node_commands}
 
 
-### bx cs worker-add --cluster CLUSTER [--file FILE_LOCATION] [--hardware HARDWARE] --machine-type MACHINE_TYPE --workers NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt] [-s]
+###  bx cs worker-add --cluster CLUSTER [--file FILE_LOCATION] [--hardware HARDWARE] --machine-type MACHINE_TYPE --workers NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt] [-s]
 {: #cs_worker_add}
 
 Add worker nodes to your standard cluster.

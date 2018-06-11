@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-05"
+lastupdated: "2018-06-11"
 
 ---
 
@@ -47,7 +47,7 @@ The following diagram shows how Ingress directs communication from the internet 
 
 1. A user sends a request to your app by accessing your app's URL. This URL is the public URL for your exposed app appended with the Ingress resource path, such as `mycluster.us-south.containers.appdomain.cloud/myapp`.
 
-2. A DNS system service resolves the URL to the portable public IP address of the load balancer that exposes the ALB in your cluster.
+2. A DNS system service resolves the hostname in the URL to the portable public IP address of the load balancer that exposes the ALB in your cluster.
 
 3. Based on the resolved IP address, the client sends the request to the load balancer service that exposes the ALB.
 
@@ -726,10 +726,10 @@ Before you begin:
 
 To enable a default private ALB by using the pre-assigned, IBM-provided portable private IP address:
 
-1. Get the ID of the default private ALB that you want to enable. Replace <em>&lt;cluser_name&gt;</em> with the name of the cluster where the app that you want to expose is deployed.
+1. Get the ID of the default private ALB that you want to enable. Replace <em>&lt;cluster_name&gt;</em> with the name of the cluster where the app that you want to expose is deployed.
 
     ```
-    bx cs albs --cluster <cluser_name>
+    bx cs albs --cluster <cluster_name>
     ```
     {: pre}
 
@@ -768,7 +768,7 @@ To enable the private ALB by using your own portable private IP address:
    </thead>
    <tbody>
    <tr>
-   <td><code>&lt;cluser_name&gt;</code></td>
+   <td><code>&lt;cluster_name&gt;</code></td>
    <td>The name or ID of the cluster where the app that you want to expose is deployed.</td>
    </tr>
    <tr>
@@ -1064,11 +1064,12 @@ For a comprehensive tutorial on how to secure microservice-to-microservice commu
 
 You can further configure an application load balancer with the following options.
 
--   [Opening ports in the Ingress application load balancer](#opening_ingress_ports)
--   [Configuring SSL protocols and SSL ciphers at the HTTP level](#ssl_protocols_ciphers)
--   [Customizing the Ingress log format](#ingress_log_format)
--   [Increasing the size of the shared memory zone for Ingress metrics collection](#vts_zone_size)
--   [Customizing your application load balancer with annotations](cs_annotations.html)
+- [Customizing your application load balancer with annotations](cs_annotations.html)
+- [Opening ports in the Ingress application load balancer](#opening_ingress_ports)
+- [Preserving the source IP address](#preserve_source_ip)
+- [Configuring SSL protocols and SSL ciphers at the HTTP level](#ssl_protocols_ciphers)
+- [Customizing the Ingress log format](#ingress_log_format)
+- [Increasing the size of the shared memory zone for Ingress metrics collection](#vts_zone_size)
 {: #ingress_annotation}
 
 
@@ -1137,6 +1138,72 @@ By default, only ports 80 and 443 are exposed in the Ingress ALB. To expose othe
  {: screen}
 
 For more information about configmap resources, see the [Kubernetes documentation](https://kubernetes-v1-4.github.io/docs/user-guide/configmap/).
+
+### Preserving the source IP address
+{: #preserve_source_ip}
+
+By default, the source IP address of the client request is not preserved. When a client request to your app is sent to your cluster, the request is routed to a pod for the load balancer service that exposes the ALB. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running.
+
+To preserve the original source IP address of the client request, you can [enable source IP ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer). Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies.
+
+**Note**: If you [disable an ALB](cs_cli_reference.html#cs_alb_configure), any source IP changes you make to the load balancer service exposing the ALB are lost. When you re-enable the ALB, you must enable source IP again.
+
+To enable source IP, edit the load balancer service that exposes an Ingress ALB.
+
+1. Enable source IP preservation for a single ALB or for all the ALBs in your cluster.
+    * To set up source IP preservation for a single ALB:
+        1. Get the ID of the ALB for which you want to enable source IP.
+            ```
+            kubectl get svc -n kube-system | grep alb
+            ```
+            {: pre}
+
+        2. Open the load balancer service that exposes the ALB.
+            ```
+            kubectl edit svc <ALB_ID> -n kube-system
+            ```
+            {: pre}
+
+        3. Under **spec**, change the value of **externalTrafficPolicy** from `Cluster` to `Local`.
+
+        4. Save the configuration file.
+    * To set up source IP preservation for all public ALBs in your cluster, run the following command:
+        ```
+        kubectl get svc -n kube-system | grep alb |grep public |awk '{print $1}' |while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Local"}}'; done
+        ```
+        {: pre}
+    * To set up source IP preservation for all private ALBs in your cluster, run the following command:
+        ```
+        kubectl get svc -n kube-system | grep alb |grep private |awk '{print $1}' |while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Local"}}'; done
+        ```
+        {: pre}
+
+2. Verify that the source IP is being preserved in your ALB pods logs.
+    1. Get the ID of a pod for the ALB that you modified.
+        ```
+        kubectl get pods -n kube-system | grep alb
+        ```
+        {: pre}
+
+    2. Open the logs for that ALB pod. Verify that the IP address for the `client` field is the client request IP address instead of the load balancer service IP address.
+        ```
+        kubectl logs <ALB_pod_ID> nginx-ingress -n kube-system
+        ```
+        {: pre}
+
+3. Now, when you look up the headers for the requests sent to your backend app, you can see the client IP address in the `x-forwarded-for` header.
+
+4. If you no longer want to preserve the source IP, you can revert the changes you made to the service.
+    * To revert source IP preservation for your public ALBs:
+        ```
+        kubectl get svc -n kube-system | grep alb |grep public |awk '{print $1}' |while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done
+        ```
+        {: pre}
+    * To revert source IP preservation for your private ALBs:
+        ```
+        kubectl get svc -n kube-system | grep alb |grep private |awk '{print $1}' |while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done
+        ```
+        {: pre}
 
 ### Configuring SSL protocols and SSL ciphers at the HTTP level
 {: #ssl_protocols_ciphers}
@@ -1287,30 +1354,27 @@ By default, Ingress logs are formatted in JSON and display common log fields. Ho
 
 5. Verify that the configmap changes were applied.
 
- ```
- kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
- ```
- {: pre}
+   ```
+   kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
+   ```
+   {: pre}
 
- Example output:
- ```
- Name:        ibm-cloud-provider-ingress-cm
- Namespace:   kube-system
- Labels:      <none>
- Annotations: <none>
+   Example output:
+   ```
+   Name:        ibm-cloud-provider-ingress-cm
+   Namespace:   kube-system
+   Labels:      <none>
+   Annotations: <none>
 
- Data
- ====
+   Data
+   ====
 
-  log-format: '{remote_address: $remote_addr, remote_user: "$remote_user", time_date: [$time_local], request: "$request", status: $status, http_referer: "$http_referer", http_user_agent: "$http_user_agent", request_id: $request_id}'
-  log-format-escape-json: "true"
- ```
- {: screen}
+    log-format: '{remote_address: $remote_addr, remote_user: "$remote_user", time_date: [$time_local], request: "$request", status: $status, http_referer: "$http_referer", http_user_agent: "$http_user_agent", request_id: $request_id}'
+    log-format-escape-json: "true"
+   ```
+   {: screen}
 
 4. To view the Ingress ALB logs, [create a logging configuration for the Ingress service](cs_health.html#logging) in your cluster.
-
-<br />
-
 
 ### Increasing the size of the shared memory zone for Ingress metrics collection
 {: #vts_zone_size}
@@ -1362,8 +1426,5 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `vts-status-zone-s
     vts-status-zone-size: "20m"
    ```
    {: screen}
-
-<br />
-
 
 

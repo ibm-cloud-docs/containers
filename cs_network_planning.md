@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-31"
+lastupdated: "2018-06-06"
 
 ---
 
@@ -19,7 +19,7 @@ lastupdated: "2018-05-31"
 # Planning cluster networking
 {: #planning}
 
-With {{site.data.keyword.containerlong}}, you can manage both external networking by making apps publically or privately accessible and internal networking within your cluster.
+With {{site.data.keyword.containerlong}}, you can manage both external networking by making apps publicly or privately accessible and internal networking within your cluster.
 {: shortdesc}
 
 ## Choosing a NodePort, LoadBalancer, or Ingress service

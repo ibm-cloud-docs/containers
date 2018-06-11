@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-05-31"
+lastupdated: "2018-06-11"
 
 ---
 
@@ -25,44 +25,13 @@ lastupdated: "2018-05-31"
 Create a non-expiring token for an image registry that you used for single and scalable groups with clusters in {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
-1.  Log in to the {{site.data.keyword.Bluemix_dedicated_notm}} environment.
-
+1.  Request a permanent registry token for the current session. This token grants access to the images in the current namespace.
     ```
-    bx login -a api.<dedicated_domain>
-    ```
-    {: pre}
-
-2.  Request an `oauth-token` for the current session and save it as a variable.
-
-    ```
-    OAUTH_TOKEN=`bx iam oauth-tokens | awk 'FNR == 2 {print $3 " " $4}'`
+    bx cr token-add --description "<description>" --non-expiring -q
     ```
     {: pre}
 
-3.  Request the ID of the org for the current session and save it as a variable.
-
-    ```
-    ORG_GUID=`bx iam org <org_name> --guid`
-    ```
-    {: pre}
-
-4.  Request a permanent registry token for the current session. Replace <dedicated_domain> with the domain for your {{site.data.keyword.Bluemix_dedicated_notm}} environment. This token grants access to the images in the current namespace.
-
-    ```
-    curl -XPOST -H "Authorization: ${OAUTH_TOKEN}" -H "Organization: ${ORG_GUID}" https://registry.<dedicated_domain>/api/v1/tokens?permanent=true
-    ```
-    {: pre}
-
-    Output:
-
-    ```
-    {
-        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2MzdiM2Q4Yy1hMDg3LTVhZjktYTYzNi0xNmU3ZWZjNzA5NjciLCJpc3MiOiJyZWdpc3RyeS5jZnNkZWRpY2F0ZWQxLnVzLXNvdXRoLmJsdWVtaXgubmV0"
-    }
-    ```
-    {: screen}
-
-5.  Verify the Kubernetes secret.
+2.  Verify the Kubernetes secret.
 
     ```
     kubectl describe secrets
@@ -71,7 +40,7 @@ Create a non-expiring token for an image registry that you used for single and s
 
     You can use this secret to work with {{site.data.keyword.containerlong}}.
 
-6.  Create the Kubernetes secret to store your token information.
+3.  Create the Kubernetes secret to store your token information.
 
     ```
     kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_url> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
@@ -110,7 +79,7 @@ Create a non-expiring token for an image registry that you used for single and s
     </tr>
     </tbody></table>
 
-7.  Create a pod that references the imagePullSecret.
+4.  Create a pod that references the imagePullSecret.
 
     1.  Open your preferred text editor and create a pod configuration script that is named mypod.yaml.
     2.  Define the pod and the imagePullSecret that you want to use to access the registry. To use a private image from a namespace:
@@ -168,4 +137,3 @@ Create a non-expiring token for an image registry that you used for single and s
           kubectl apply -f mypod.yaml
           ```
           {: pre}
-
