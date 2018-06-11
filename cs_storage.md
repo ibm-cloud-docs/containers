@@ -88,7 +88,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
   </tr>
   <tr id="cloud-db-service">
     <td>2. Cloud database service</td>
-    <td>With this option, you can persist data by using an {{site.data.keyword.Bluemix_notm}} database cloud service, such as [IBM Cloudant NoSQL DB](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant). Data that is stored with this option can be accessed across clusters, locations, and regions. <p> You can choose to configure a single database instance that all your apps access, or to [set up multiple instances across data centers and replication](/docs/services/Cloudant/guides/active-active.html#configuring-cloudant-nosql-db-for-cross-region-disaster-recovery) between the instances for higher availability. In IBM Cloudant NoSQL database, data is not backed up automatically. You can use the provided [backup and restore mechanisms](/docs/services/Cloudant/guides/backup-cookbook.html#cloudant-nosql-db-backup-and-recovery) to protect your data from a site failure.</p> <p> To use a service in your cluster, you must [bind the {{site.data.keyword.Bluemix_notm}} service](cs_integrations.html#adding_app) to a namespace in your cluster. When you bind the service to the cluster, a Kubernetes secret is created. The Kubernetes secret holds confidential information about the service, such as the URL to the service, your user name, and password. You can mount the secret as a secret volume to your pod and access the service by using the credentials in the secret. By mounting the secret volume to other pods, you can also share data between pods. When a container crashes or a pod is removed from a worker node, the data is not removed and can still be accessed by other pods that mount the secret volume. <p>Most {{site.data.keyword.Bluemix_notm}} database services provide disk space for a small amount of data at no cost, so you can test its features.</p></td>
+    <td>With this option, you can persist data by using an {{site.data.keyword.Bluemix_notm}} database cloud service, such as [IBM Cloudant NoSQL DB](/docs/services/Cloudant/getting-started.html#getting-started-with-cloudant). Data that is stored with this option can be accessed across clusters, locations, and regions. <p> You can choose to configure a single database instance that all your apps access, or to [set up multiple instances across data centers and replication](/docs/services/Cloudant/guides/active-active.html#configuring-cloudant-for-cross-region-disaster-recovery) between the instances for higher availability. In IBM Cloudant NoSQL database, data is not backed up automatically. You can use the provided [backup and restore mechanisms](/docs/services/Cloudant/guides/backup-cookbook.html#ibm-cloudant-backup-and-recovery) to protect your data from a site failure.</p> <p> To use a service in your cluster, you must [bind the {{site.data.keyword.Bluemix_notm}} service](cs_integrations.html#adding_app) to a namespace in your cluster. When you bind the service to the cluster, a Kubernetes secret is created. The Kubernetes secret holds confidential information about the service, such as the URL to the service, your user name, and password. You can mount the secret as a secret volume to your pod and access the service by using the credentials in the secret. By mounting the secret volume to other pods, you can also share data between pods. When a container crashes or a pod is removed from a worker node, the data is not removed and can still be accessed by other pods that mount the secret volume. <p>Most {{site.data.keyword.Bluemix_notm}} database services provide disk space for a small amount of data at no cost, so you can test its features.</p></td>
   </tr>
   <tr>
     <td>3. On-prem database</td>
@@ -322,7 +322,7 @@ To create a PV and matching PVC, follow these steps.
     <td>Enter the name of the PV that you want to create.</td>
     </tr>
     <tr>
-    <td><code>spec/flexVolume/fsType</code></td> 
+    <td><code>spec/flexVolume/fsType</code></td>
     <td>Enter the file system type that is configured for your existing block storage. Choose between <code>ext4</code> or <code>xfs</code>. If you do not specify this option, the PV defaults to <code>ext4</code>. When the wrong fsType is defined, then the PV creation succeeds, but the mounting of the PV to a pod fails. </td></tr>	    
     <tr>
     <td><code>spec/capacity/storage</code></td>
@@ -430,7 +430,7 @@ Before you begin:
 
 To add persistent storage:
 
-1.  Review the available storage classes. {{site.data.keyword.containerlong}} provides pre-defined storage classes for NFS file storage and block storage so that the cluster admin does not have to create any storage classes. The `ibmc-file-bronze` storage class is the same as the `default` storage class. By default, file storage is provisioned with an `nfs` file system, and block storage is provisioned with an `ext4` file system. If you want to provision block storage with an `XFS` file system, [create your own custom storage class](#custom_storageclass). 
+1.  Review the available storage classes. {{site.data.keyword.containerlong}} provides pre-defined storage classes for NFS file storage and block storage so that the cluster admin does not have to create any storage classes. The `ibmc-file-bronze` storage class is the same as the `default` storage class. By default, file storage is provisioned with an `nfs` file system, and block storage is provisioned with an `ext4` file system. If you want to provision block storage with an `XFS` file system, [create your own custom storage class](#custom_storageclass).
 
     ```
     kubectl get storageclasses
@@ -640,7 +640,7 @@ To add persistent storage:
         <td>This option is for custom storage classes only (`ibmc-file-custom / ibmc-file-retain-custom / ibmc-block-custom / ibmc-block-retain-custom`). Specify the total IOPS for the storage, selecting a multiple of 100 within the allowable range. To see all options, run `kubectl describe storageclasses <storageclass>`. If you choose an IOPS other than one that is listed, the IOPS is rounded up.</td>
         </tr>
         </tbody></table>
-	
+
     If you want to use a customized storage class, create your PVC with the corresponding storage class name, a valid IOPS and size.   
     {: tip}
 
@@ -789,19 +789,19 @@ To add persistent storage:
 
 <br />
 
-	
+
 ## Customizing a storage class for XFS block storage
 {: #custom_storageclass}
 
-The storage classes that are pre-defined by {{site.data.keyword.containerlong}} provision block storage with an `ext4` file system by default. You can create a customized storage class to provision block storage with an `XFS` file system. 
+The storage classes that are pre-defined by {{site.data.keyword.containerlong}} provision block storage with an `ext4` file system by default. You can create a customized storage class to provision block storage with an `XFS` file system.
 {: shortdesc}
 
-Before you begin: 
+Before you begin:
 - [Target the Kubernetes CLI to the cluster](cs_cli_install.html#cs_cli_configure).
 - Install the [{{site.data.keyword.Bluemix_notm}} Storage plug-in for block storage](#install_block).
 
-To create a customized storage class: 
-1. Create a yaml file for your customized storage class. 
+To create a customized storage class:
+1. Create a yaml file for your customized storage class.
    ```
    apiVersion: storage.k8s.io/v1
    kind: StorageClass
@@ -829,23 +829,23 @@ To create a customized storage class:
      classVersion: "2"
    ```
    {: codeblock}
-   
-   If you want to keep the data after you remove block storage from your cluster, change the `reclaimPolicy` to `Retain`. 
+
+   If you want to keep the data after you remove block storage from your cluster, change the `reclaimPolicy` to `Retain`.
    {: tip}
-   
-2. Create the storage class in your cluster. 
+
+2. Create the storage class in your cluster.
    ```
    kubectl apply -f <filepath/xfs_storageclass.yaml>
    ```
    {: pre}
-       
-3. Verify that the customized storage class was created. 
+
+3. Verify that the customized storage class was created.
    ```
    kubectl get storageclasses
    ```
    {: pre}
 
-4. Provision [XFS block storage](#create) with your customized storage class. 
+4. Provision [XFS block storage](#create) with your customized storage class.
 
 <br />
 
@@ -853,12 +853,12 @@ To create a customized storage class:
 ## Changing the default NFS file storage version
 {: #nfs_version}
 
-The version of the NFS file storage determines the protocol that is used to communicate with the NFS file storage server. By default, all file storage instances are set up with NFS version 4. You can change your existing PV to an older NFS version if your app requires a specific version to properly function. 
+The version of the NFS file storage determines the protocol that is used to communicate with the NFS file storage server. By default, all file storage instances are set up with NFS version 4. You can change your existing PV to an older NFS version if your app requires a specific version to properly function.
 {: shortdesc}
 
-To change the default NFS version, you can either create a new storage class to dynamically provision file storage in your cluster, or choose to change an existing PV that is mounted to your pod. 
+To change the default NFS version, you can either create a new storage class to dynamically provision file storage in your cluster, or choose to change an existing PV that is mounted to your pod.
 
-To apply the latest security updates and for a better performance, use the default NFS version and do not change to an older NFS version. 
+To apply the latest security updates and for a better performance, use the default NFS version and do not change to an older NFS version.
 {: tip}
 
 **To create a customized storage class with the desired NFS version:**
@@ -882,23 +882,23 @@ To apply the latest security updates and for a better performance, use the defau
      mountOptions: nfsvers=<nfs_version>
    ```
    {: codeblock}
-   
-   If you want to keep the data after you remove block storage from your cluster, change the `reclaimPolicy` to `Retain`. 
+
+   If you want to keep the data after you remove block storage from your cluster, change the `reclaimPolicy` to `Retain`.
    {: tip}
-   
-2. Create the storage class in your cluster. 
+
+2. Create the storage class in your cluster.
    ```
    kubectl apply -f <filepath/nfsversion_storageclass.yaml>
    ```
    {: pre}
-       
-3. Verify that the customized storage class was created. 
+
+3. Verify that the customized storage class was created.
    ```
    kubectl get storageclasses
    ```
    {: pre}
 
-4. Provision [file storage](#create) with your customized storage class. 
+4. Provision [file storage](#create) with your customized storage class.
 
 **To change your existing PV to use a different NFS version:**
 
@@ -913,52 +913,52 @@ To apply the latest security updates and for a better performance, use the defau
    kubectl patch pv <pv_name> -p '{"metadata": {"annotations":{"volume.beta.kubernetes.io/mount-options":"vers=<version_number>"}}}'
    ```
    {: pre}
-   
-3. Delete the pod that uses the file storage and re-create the pod. 
-   1. Save the pod yaml to your local machine. 
+
+3. Delete the pod that uses the file storage and re-create the pod.
+   1. Save the pod yaml to your local machine.
       ```
       kubect get pod <pod_name> -o yaml > <filepath/pod.yaml>
       ```
       {: pre}
-      
-   2. Delete the pod. 
+
+   2. Delete the pod.
       ```
       kubectl deleted pod <pod_name>
       ```
       {: pre}
-   
-   3. Re-create the pod. 
+
+   3. Re-create the pod.
       ```
       kubectl apply -f <filepath/pod.yaml>
       ```
       {: pre}
 
-4. Wait for the pod to deploy. 
+4. Wait for the pod to deploy.
    ```
    kubectl get pods
    ```
    {: pre}
-   
-   The pod is fully deployed when the status changes to `Running`. 
 
-5. Log in to your pod. 
+   The pod is fully deployed when the status changes to `Running`.
+
+5. Log in to your pod.
    ```
    kubectl exec -it <pod_name> sh
    ```
    {: pre}
-   
-6. Verify that the file storage was mounted with the NFS version that you specified earlier. 
+
+6. Verify that the file storage was mounted with the NFS version that you specified earlier.
    ```
    mount | grep "nfs" | awk -F" |," '{ print $5, $8 }'
    ```
    {: pre}
-   
-   Example output: 
+
+   Example output:
    ```
    nfs vers=3.0
    ```
    {: screen}
-   
+
 <br />
 
 
@@ -977,12 +977,12 @@ Before you begin, [install Python 3.6](https://www.python.org/downloads/).
     1.  Click the link in the **Download the tarball** or **Download the zipball** steps. Do not use the `curl` command.
     2.  Find the downloaded package, unzip it, and navigate into the directory.
     3.  Install the CLI.
-    
+
         ```
         python3 setup.py install
         ```
         {: pre}
-    
+
 2.  Get your IBM Cloud infrastructure (SoftLayer) API user name and API key.
 
     1.  From the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/), expand the menu and select **Infrastructure**.
@@ -1000,19 +1000,19 @@ Before you begin, [install Python 3.6](https://www.python.org/downloads/).
         {: pre}
 
     2.  Fill in the required information.
-    
+
         * **Username**: Enter the IBM Cloud infrastructure (SoftLayer) API user name that you previously retrieved.
         * **API Key or Password**: Enter the IBM Cloud infrastructure (SoftLayer) API key that you previously retrieved.
         * **Endpoint (public|private|custom) [public]**: Enter `https://api.softlayer.com/rest/v3.1`.
         * **Timeout [0]**: Enter a value in seconds for the CLI to wait for a response from the API. A value of `0` sets the CLI to wait forever.
-        
+
         **Example**:
-        
+
         ```
         $ slcli setup
         Username []: 1234567_user.name@example.com
-        API Key or Password []: 
-        Endpoint (public|private|custom) [public]: https://api.softlayer.com/rest/v3.1 
+        API Key or Password []:
+        Endpoint (public|private|custom) [public]: https://api.softlayer.com/rest/v3.1
         Timeout [0]: 6000
         :..............:..................................................................:
         :         name : value                                                            :
@@ -1106,8 +1106,8 @@ Before you begin, [target your CLI](cs_cli_install.html#cs_cli_configure) to the
    ibmcloud-block-storage-plugin-58c5f9dc86-pbl4t                   1/1       Running   0          14d       172.21.0.204   10.118.98.19
    ```
    {: screen}
-   
-   The installation is successful when you see one `ibmcloud-block-storage-plugin` pod and one or more `ibmcloud-block-storage-driver` pods. The number of `ibmcloud-block-storage-driver` equals the number of worker nodes in your cluster. All pods must be in a **Running** state. 
+
+   The installation is successful when you see one `ibmcloud-block-storage-plugin` pod and one or more `ibmcloud-block-storage-driver` pods. The number of `ibmcloud-block-storage-driver` equals the number of worker nodes in your cluster. All pods must be in a **Running** state.
 
 5. Verify that the storage classes for block storage were added to your cluster.
    ```
@@ -1265,14 +1265,14 @@ Before you begin:
 * [Install the IBM Cloud infrastructure (SoftLayer) CLI](#slcli).
 
 To clean up persistent data:
- 
+
 1.  List the PVCs in your cluster, choose which one you want to remove, and note the PVC name in the **Name** field and the PV name in the **Volume** field.
 
     ```
     kubectl get pvc
     ```
     {: pre}
-    
+
     Example output:
     ```
     NAME                  STATUS    VOLUME                                     CAPACITY   ACCESSMODES   STORAGECLASS        AGE
@@ -1283,14 +1283,14 @@ To clean up persistent data:
     pvcnew                Bound     pvc-922eec22-0dcb-11e8-968a-f6612bb731fb   45Gi       RWX           ibmc-file-bronze    81d
     ```
     {: screen}
-    
+
 2.  Using the PV **Volume** name, describe the PV. Look at the **Reclaim Policy** field. **Note**: If the persistent storage was created dynamically and the reclaim policy is `Delete`, then when you remove the PVC, the PV that is bound to the PVC is removed. Further, the NFS file or block storage instance in your IBM Cloud infrastructure (SoftLayer) account is also removed. **After you complete Step 3 to delete the PVC, all data in the volume is removed**. If the reclaim policy is `Retain`, then you have to delete the PVC in **Step 3** and continue to **Step 4**.
 
     ```
     kubectl describe pv <pv_name>
     ```
     {: pre}
-    
+
     Example output:
     ```
     Name:		pvc-1efef0ba-0c48-11e8-968a-f6612bb731fb
@@ -1303,8 +1303,8 @@ To clean up persistent data:
     ...
     ```
     {: screen}
-        
-3.  Remove the PVC. 
+
+3.  Remove the PVC.
 
     1.  Using the PVC name that you previously retrieved, delete the persistent storage.
 
@@ -1312,7 +1312,7 @@ To clean up persistent data:
         kubectl delete pvc <pvc_name>
         ```
         {: pre}
-    
+
     2.  Check that the PV that is bound to the PVC no longer exists when you list PVs. **Note**: Its **Status** might briefly say **Released** before it is deleted. Rerun the command to verify that it is removed.
 
         ```
@@ -1323,12 +1323,12 @@ To clean up persistent data:
     3.  **For clusters that run Kubernetes version 1.10 or later**: Your cluster has [Storage Object in Use Protection ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#storage-object-in-use-protection). If you try to delete a PVC that is is use by another pod or a PV that is bound to a PVC, the PVC or PV are marked for removal, but are not removed. Removal is postponed until the PVC or PV are no longer in active use. Therefore, you need to delete the pod that uses the PVC for the PVC to be removed.
 
         1.  List your pod that uses the PVC. Replace `<pvc_name>` with the name of your PVC.
-        
+
             ```
             kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
             ```
             {: pre}
-            
+
             In the example output, `mydeployment-1387492362-hmtfz` is the name of the pod.
             ```
             ...   
@@ -1343,35 +1343,35 @@ To clean up persistent data:
             kubectl delete pod <pod_name>
             ```
             {: pre}
-    
+
     4.  If you created the persistent storage from an existing [NFS](#existing) or [block](#existing_block) storage instance, continue to [delete the instance from IBM Cloud infrastructure (SoftLayer)](#sl_delete_storage).
 
 4.  **If the reclaim policy is `Retain`**: When you remove the PVC, the PV that is bound to the PVC is released. Further, the NFS file or block storage instance in your IBM Cloud infrastructure (SoftLayer) account also remains. However, the PV cannot be used for another PVC because the data remains on the volume. To permanently delete the data take the following steps.
-    
+
     1.  Using the PV name that you previously retrieve, delete the PV.
-        
+
         ```
         kubectl delete pv <pv_name>
         ```
         {: pre}
-    
+
     2.  Check that the PV no longer exists when you list PVs.
 
         ```
         kubectl get pv
         ```
         {: pre}
-        
+
     3.  Continue to [delete the instance from IBM Cloud infrastructure (SoftLayer)](#sl_delete_storage).
 
 5.  {: #sl_delete_storage}Remove the NFS file or block storage instances from your IBM Cloud infrastructure (SoftLayer) account.
-    
+
     1.  Get your cluster ID.
         ```
         bx cs clusters
         ```
         {: pre}
-        
+
     2.  List the storage volume instances in your IBM Cloud infrastructure (SoftLayer) account that are associated with the cluster ID.
 
         **For file storage**:
@@ -1379,24 +1379,24 @@ To clean up persistent data:
         slcli file volume-list --sortby billingItem --columns id,datacenter,notes,billingItem | grep orderItemId | grep <cluster-ID>
         ```
         {: pre}
-        
+
         **For block storage**:
         ```
         slcli block volume-list --sortby billingItem --columns id,datacenter,notes,billingItem | grep orderItemId | grep <cluster-ID>
         ```
         {: pre}
-    
+
     3.  From the [{{site.data.keyword.Bluemix_notm}} console](https://console.bluemix.net/) menu, select the **Infrastructure** portal. From the **Storage** menu, select **Block Storage** or **File Storage** for the storage volume instance that you want to remove.
-    
+
     4.  In the table of storage instances, click the **Volume** name.
-    
+
     5.  In the **Notes** field, verify that the volume is the one that you want to remove by using the cluster, PV, and PVC information. For example:
-        
+
         ```
         ibm-file-plugin-662986742-vrv7s:us-south:aa1a11a1a11b2b2bb22b22222c3c3333:Endurance:mypvc:pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z:delete
         ```
         {: screen}
-        
+
         Understanding the **Notes** field information:
         *  **`:`**: A colon (`:`) separates information.
         *  **`ibm-file-plugin-662986742-vrv7s`**: The storage plug-in that the cluster uses.
@@ -1405,6 +1405,6 @@ To clean up persistent data:
         *  **`Endurance`**: The class of file or block storage that the volume is, either `Endurance` or `Performance`.
         *  **`mypvc`**: The PVC that is associated with the storage instance.
         *  **`pvc-457a2b96-fafc-11e7-8ff9-b6c8f770356z`**: The PV that is associated with the storage instance.
-        *  **`delete` (or `retain`)**: The reclaim policy for the PV. 
-    
+        *  **`delete` (or `retain`)**: The reclaim policy for the PV.
+
     6.  Return to the file or block storage page. In the table, for the volume that you want to delete, select **Actions** > **Cancel**. In the pop-up window, select how you want to **Cancel**, then click **Continue**.
