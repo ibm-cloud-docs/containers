@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-08"
+lastupdated: "2018-06-11"
 
 ---
 
@@ -1011,12 +1011,12 @@ Set the amount of time during which the ALB can attempt to connect to a server b
 
  <pre class="codeblock">
  <code>apiVersion: extensions/v1beta1
- kind: Ingress
- metadata:
+kind: Ingress
+metadata:
   name: myingress
   annotations:
     ingress.bluemix.net/upstream-fail-timeout: "serviceName=&lt;myservice&gt; fail-timeout=&lt;fail_timeout&gt;"
- spec:
+spec:
   tls:
   - hosts:
     - mydomain
@@ -1068,12 +1068,12 @@ Set the maximum number of idle keepalive connections to the upstream server of a
 
  <pre class="codeblock">
  <code>apiVersion: extensions/v1beta1
- kind: Ingress
- metadata:
+kind: Ingress
+metadata:
   name: myingress
   annotations:
     ingress.bluemix.net/upstream-keepalive: "serviceName=&lt;myservice&gt; keepalive=&lt;max_connections&gt;"
- spec:
+spec:
   tls:
   - hosts:
     - mydomain
@@ -1125,12 +1125,12 @@ Set the maximum number of times the ALB can fail to connect to the server before
 
  <pre class="codeblock">
  <code>apiVersion: extensions/v1beta1
- kind: Ingress
- metadata:
+kind: Ingress
+metadata:
   name: myingress
   annotations:
     ingress.bluemix.net/upstream-max-fails: "serviceName=&lt;myservice&gt; max-fails=&lt;max_fails&gt;"
- spec:
+spec:
   tls:
   - hosts:
     - mydomain
@@ -1189,24 +1189,24 @@ Set the maximum number of times the ALB can fail to connect to the server before
 
    <pre class="codeblock">
    <code>apiVersion: extensions/v1beta1
-   kind: Ingress
-   metadata:
-    name: myingress
-    annotations:
-      ingress.bluemix.net/appid-auth: "bindSecret=&lt;bind_secret&gt; namespace=&lt;namespace&gt; requestType=&lt;request_type&gt; serviceName=&lt;myservice&gt;"
-   spec:
-    tls:
-    - hosts:
-      - mydomain
-      secretName: mytlssecret
-    rules:
-    - host: mydomain
-      http:
-        paths:
-        - path: /
-          backend:
-            serviceName: myservice
-            servicePort: 8080</code></pre>
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/appid-auth: "bindSecret=&lt;bind_secret&gt; namespace=&lt;namespace&gt; requestType=&lt;request_type&gt; serviceName=&lt;myservice&gt;"
+spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mytlssecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: myservice
+          servicePort: 8080</code></pre>
 
    <table>
    <caption>Understanding the annotation components</caption>
@@ -1546,7 +1546,7 @@ kind: Ingress
 metadata:
   name: &lt;myingressname&gt;
   annotations:
-    ingress.bluemix.net/ssl-services: "ssl-service=&lt;myservice1&gt; [ssl-secret=&lt;service1-ssl-secret&gt;];ssl-service=&lt;myservice2&gt; [ssl-secret=&lt;service2-ssl-secret&gt;]
+    ingress.bluemix.net/ssl-services: "ssl-service=&lt;myservice1&gt; [ssl-secret=&lt;service1-ssl-secret&gt;];ssl-service=&lt;myservice2&gt; [ssl-secret=&lt;service2-ssl-secret&gt;]"
 spec:
   rules:
   - host: mydomain
@@ -1677,28 +1677,28 @@ spec:
 
    <pre class="codeblock">
    <code>apiVersion: extensions/v1beta1
-   kind: Ingress
-   metadata:
-    name: myingress
-    annotations:
-      ingress.bluemix.net/istio-services: "enabled=true serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
-   spec:
-    tls:
-    - hosts:
-      - mydomain
-      secretName: mytlssecret
-    rules:
-    - host: mydomain
-      http:
-        paths:
-        - path: &lt;/myapp1&gt;
-          backend:
-            serviceName: &lt;myservice1&gt;
-            servicePort: &lt;istio_ingress_port&gt;
-        - path: &lt;/myapp2&gt;
-          backend:
-            serviceName: &lt;myservice2&gt;
-            servicePort: &lt;istio_ingress_port&gt;</code></pre>
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/istio-services: "enabled=true serviceName=&lt;myservice1&gt; istioServiceNamespace=&lt;istio-namespace&gt; istioServiceName=&lt;istio-ingress-service&gt;"
+spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mytlssecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: &lt;/myapp1&gt;
+        backend:
+          serviceName: &lt;myservice1&gt;
+          servicePort: &lt;istio_ingress_port&gt;
+      - path: &lt;/myapp2&gt;
+        backend:
+          serviceName: &lt;myservice2&gt;
+          servicePort: &lt;istio_ingress_port&gt;</code></pre>
 
    <table>
    <caption>Understanding the YAML file components</caption>
@@ -2101,35 +2101,35 @@ Remove header information that is included in the client response from the back-
  <dd>
  <pre class="codeblock">
  <code>apiVersion: extensions/v1beta1
- kind: Ingress
- metadata:
-   name: myingress
-   annotations:
-     ingress.bluemix.net/response-remove-headers: |
-       serviceName=&lt;myservice1&gt; {
-       "&lt;header1&gt;";
-       "&lt;header2&gt;";
-       }
-       serviceName=&lt;myservice2&gt; {
-       "&lt;header3&gt;";
-       }
- spec:
-   tls:
-   - hosts:
-     - mydomain
-     secretName: mytlssecret
-   rules:
-   - host: mydomain
-     http:
-       paths:
-       - path: /service1_path
-         backend:
-           serviceName: &lt;myservice1&gt;
-           servicePort: 8080
-       - path: /service2_path
-         backend:
-           serviceName: &lt;myservice2&gt;
-           servicePort: 80</code></pre>
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    ingress.bluemix.net/response-remove-headers: |
+      serviceName=&lt;myservice1&gt; {
+      "&lt;header1&gt;";
+      "&lt;header2&gt;";
+      }
+      serviceName=&lt;myservice2&gt; {
+      "&lt;header3&gt;";
+      }
+spec:
+  tls:
+  - hosts:
+    - mydomain
+    secretName: mytlssecret
+  rules:
+  - host: mydomain
+    http:
+      paths:
+      - path: /service1_path
+        backend:
+          serviceName: &lt;myservice1&gt;
+          servicePort: 8080
+      - path: /service2_path
+        backend:
+          serviceName: &lt;myservice2&gt;
+          servicePort: 80</code></pre>
 
   <table>
   <caption>Understanding the annotation components</caption>
@@ -2284,12 +2284,12 @@ For all services, limit the request processing rate and the number of connection
 
  <pre class="codeblock">
  <code>apiVersion: extensions/v1beta1
- kind: Ingress
- metadata:
+kind: Ingress
+metadata:
   name: myingress
   annotations:
     ingress.bluemix.net/global-rate-limit: "key=&lt;key&gt; rate=&lt;rate&gt; conn=&lt;number_of_connections&gt;"
- spec:
+spec:
   tls:
   - hosts:
     - mydomain
@@ -2347,12 +2347,12 @@ Limit the request processing rate and the number of connections for specific ser
 
  <pre class="codeblock">
  <code>apiVersion: extensions/v1beta1
- kind: Ingress
- metadata:
+kind: Ingress
+metadata:
   name: myingress
   annotations:
     ingress.bluemix.net/service-rate-limit: "serviceName=&lt;myservice&gt; key=&lt;key&gt; rate=&lt;rate&gt; conn=&lt;number_of_connections&gt;"
- spec:
+spec:
   tls:
   - hosts:
     - mydomain
