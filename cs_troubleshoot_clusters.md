@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-08"
+lastupdated: "2018-06-12"
 
 ---
 
@@ -432,6 +432,41 @@ Manually update the reference of the private IP address to point to the correct 
 
 
 The deleted node is no longer listed in Calico.
+
+<br />
+
+
+
+
+## Pods fail to deploy because of a pod security policy
+{: #cs_psp}
+
+{: tsSymptoms}
+After creating a pod or running `kubectl get events` to check on a pod deployment, you see an error message similar to the following.
+
+```
+unable to validate against any pod security policy
+```
+{: screen}
+
+{: tsCauses}
+If you have [the `PodSecurityPolicy` admission controller enabled](cs_psp.html), it checks the authorization of the user or service account, such as a deployment, that tried to create the pod. If no pod security policy supports the user or service account, then the `PodSecurityPolicy` admission controller prevents the pods from being created.
+
+If you deleted one of the pod security policy resources for [{{site.data.keyword.IBM_notm}} cluster management](cs_psp.html#ibm_psp), you might experience similar issues.
+
+{: tsResolve}
+Make sure that the user or service account is authorized by a pod security policy. You might need to [modify an existing policy](cs_psp.html#modify_psp). 
+
+If you deleted an {{site.data.keyword.IBM_notm}} cluster management resource, refresh the Kubernetes master to restore it. 
+
+1.  [Target your CLI](cs_cli_install.html#cs_cli_configure) to your cluster.
+2.  Refresh the Kubernetes master to restore it.
+
+    ```
+    bx cs apiserver-refresh
+    ```
+    {: pre}
+
 
 <br />
 

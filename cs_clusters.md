@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-11"
+lastupdated: "2018-06-12"
 
 ---
 
@@ -304,6 +304,7 @@ When the cluster is up and running, you can check out the following tasks:
 -   [Set up your own private registry in {{site.data.keyword.Bluemix_notm}} to store and share Docker images with other users.](/docs/services/Registry/index.html)
 - If you have multiple VLANs for a cluster or multiple subnets on the same VLAN, you must [turn on VLAN spanning](/docs/infrastructure/vlans/vlan-spanning.html#enable-or-disable-vlan-spanning) so that your worker nodes can communicate with each other on the private network.
 - If you have a firewall, you might need to [open the required ports](cs_firewall.html#firewall) to use `bx`, `kubectl`, or `calicotl` commands, to allow outbound traffic from your cluster, or to allow inbound traffic for networking services.
+-  Clusters with Kubernetes version 1.10.3 or later: Control who can create pods in your cluster with [pod security policies](cs_psp.html).
 
 <br />
 
