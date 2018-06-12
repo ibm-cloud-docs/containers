@@ -1176,12 +1176,12 @@ To enable source IP preservation, edit the load balancer service that exposes an
 4. If you no longer want to preserve the source IP, you can revert the changes you made to the service.
     * To revert source IP preservation for your public ALBs:
         ```
-        kubectl get svc -n kube-system | grep alb |grep public |awk '{print $1}' |while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done
+        kubectl get svc -n kube-system | grep alb | awk '{print $1}' | grep "^public" | while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done
         ```
         {: pre}
     * To revert source IP preservation for your private ALBs:
         ```
-        kubectl get svc -n kube-system | grep alb |grep private |awk '{print $1}' |while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done
+        kubectl get svc -n kube-system | grep alb | awk '{print $1}' | grep "^private" | while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done
         ```
         {: pre}
 
