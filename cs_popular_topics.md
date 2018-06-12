@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-08"
+lastupdated: "2018-06-12"
 
 ---
 
@@ -36,7 +36,13 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 </thead>
 <tbody>
 <tr>
-<td>6 June</td>
+<td>12 June</td>
+<td>[Pod security policies](cs_psp.html)</td>
+<td>For clusters that run Kubernetes 1.10.3 or later, you can
+configure pod security policies to authorize who can create and update pods in {{site.data.keyword.containerlong_notm}}.</td>
+</tr>
+<tr>
+<td>06 June</td>
 <td>[TLS support for the IBM-provided Ingress wildcard subdomain](cs_ingress.html#wildcard_tls)</td>
 <td>For clusters created on or after 6 June 2018, the IBM-provided Ingress subdomain TLS certificate is now a wildcard certificate and can be used for the registered wildcard subdomain. For clusters created before 6 June 2018, TLS certificate will be updated to a wildcard certificate when the current TLS certificate is renewed.</td>
 </tr>
@@ -101,7 +107,7 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <td>Do you have a Cloud Foundry app? Learn how to deploy the same code from that app to a container that runs in a Kubernetes cluster.</td>
 </tr>
 <tr>
-<td>5 April</td>
+<td>05 April</td>
 <td>[Filtering logs](cs_health.html#filter-logs)</td>
 <td>Filter out specific logs from being forwarded. Logs can be filtered out for a specific namespace, container name, log level, and message string.</td>
 </tr>
@@ -182,7 +188,7 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <td>Just in time for the Olympics, deploy a Kubernetes cluster to Seoul in the AP North region. If you have a firewall, be sure to [open the firewall ports](cs_firewall.html#firewall) for this location and the others within the region that your cluster is in.</td>
 </tr>
 <tr>
-<td>8 February</td>
+<td>08 February</td>
 <td>[Update Kubernetes 1.9](cs_versions.html#cs_v19)</td>
 <td>Review the changes to make to your clusters before you update to Kubernetes 1.9.</td>
 </tr>
@@ -209,7 +215,7 @@ Keep up with what's going on in {{site.data.keyword.containerlong}}. Learn about
 <td>Singapore and Montreal are locations available in the {{site.data.keyword.containershort_notm}} AP North and US East regions. If you have a firewall, be sure to [open the firewall ports](cs_firewall.html#firewall) for these locations and the others within the region that your cluster is in.</td>
 </tr>
 <tr>
-<td>8 January</td>
+<td>08 January</td>
 <td>[Enhanced flavors available](cs_cli_reference.html#cs_machine_types)</td>
 <td>Series 2 virtual machine types include local SSD storage and disk encryption. [Move your workloads](cs_cluster_update.html#machine_type) to these flavors for improved performance and stability.</td>
 </tr>

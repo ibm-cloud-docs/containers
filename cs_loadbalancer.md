@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-11"
+lastupdated: "2018-06-12"
 
 ---
 
@@ -60,37 +60,7 @@ The LoadBalancer service serves as the external entry point for incoming request
 <br />
 
 
-:                 dal10
-    IP:                     172.21.xxx.xxx
-    LoadBalancer Ingress:   169.xx.xxx.xxx
-    Port:                   <unset> 8080/TCP
-    NodePort:               <unset> 32040/TCP
-    Endpoints:              172.30.xxx.xxx:8080
-    Session Affinity:       None
-    Events:
-      FirstSeen	LastSeen	Count	From			SubObjectPath	Type	 Reason			          Message
-      ---------	--------	-----	----			-------------	----	 ------			          -------
-      10s		    10s		    1	    {service-controller }	  Normal CreatingLoadBalancer	Creating load balancer
-      10s		    10s		    1	    {service-controller }		Normal CreatedLoadBalancer	Created load balancer
-    ```
-    {: screen}
 
-    The **LoadBalancer Ingress** IP address is the portable IP address that was assigned to your load balancer service.
-
-4.  If you created a public load balancer, access your app from the internet.
-    1.  Open your preferred web browser.
-    2.  Enter the portable public IP address of the load balancer and port.
-
-        ```
-        http://169.xx.xxx.xxx:8080
-        ```
-        {: codeblock}        
-
-5. If you choose to [enable source IP preservation for a load balancer service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer), ensure that app pods are scheduled onto the edge worker nodes by [adding edge node affinity to app pods](cs_loadbalancer.html#edge_nodes). App pods must be scheduled onto edge nodes to receive incoming requests.
-
-6. Optional: To handle incoming requests to your app from other zones, repeat these steps to add a load balancer in each zone.
-
-</staging>
 
 ## Enabling public or private access to an app in a single-zone cluster
 {: #config}
@@ -201,7 +171,7 @@ To create a load balancer service:
     Labels:                 <none>
     Selector:               app=liberty
     Type:                   LoadBalancer
-    Location:                 dal10
+    Location:               dal10
     IP:                     172.21.xxx.xxx
     LoadBalancer Ingress:   169.xx.xxx.xxx
     Port:                   <unset> 8080/TCP

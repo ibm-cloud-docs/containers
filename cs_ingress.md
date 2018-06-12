@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-11"
+lastupdated: "2018-06-12"
 
 ---
 
@@ -1123,20 +1123,6 @@ By default, only ports 80 and 443 are exposed in the Ingress ALB. To expose othe
  ```
  {: pre}
 
- Output:
- ```
- Name:        ibm-cloud-provider-ingress-cm
- Namespace:   kube-system
- Labels:      <none>
- Annotations: <none>
-
- Data
- ====
-
-  public-ports: "80;443;9443"
- ```
- {: screen}
-
 For more information about configmap resources, see the [Kubernetes documentation](https://kubernetes-v1-4.github.io/docs/user-guide/configmap/).
 
 ### Preserving the source IP address
@@ -1144,39 +1130,33 @@ For more information about configmap resources, see the [Kubernetes documentatio
 
 By default, the source IP address of the client request is not preserved. When a client request to your app is sent to your cluster, the request is routed to a pod for the load balancer service that exposes the ALB. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running.
 
-To preserve the original source IP address of the client request, you can [enable source IP ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer). Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies.
+To preserve the original source IP address of the client request, you can [enable source IP preservation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer). Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies.
 
 **Note**: If you [disable an ALB](cs_cli_reference.html#cs_alb_configure), any source IP changes you make to the load balancer service exposing the ALB are lost. When you re-enable the ALB, you must enable source IP again.
 
-To enable source IP, edit the load balancer service that exposes an Ingress ALB.
+To enable source IP preservation, edit the load balancer service that exposes an Ingress ALB:
 
-1. Enable source IP preservation for a single ALB or for all the ALBs in your cluster.
-    * To set up source IP preservation for a single ALB:
-        1. Get the ID of the ALB for which you want to enable source IP.
-            ```
-            kubectl get svc -n kube-system | grep alb
-            ```
-            {: pre}
 
-        2. Open the load balancer service that exposes the ALB.
-            ```
-            kubectl edit svc <ALB_ID> -n kube-system
-            ```
-            {: pre}
+1. Get the ID of the ALB for which you want to enable source IP. The ALB services have a format similar to `public-cr18e61e63c6e94b658596ca93d087eed9-alb1` for a public ALB or `private-cr18e61e63c6e94b658596ca93d087eed9-alb1` for a private ALB.
+    ```
+    kubectl get svc -n kube-system | grep alb
+    ```
+    {: pre}
 
-        3. Under **spec**, change the value of **externalTrafficPolicy** from `Cluster` to `Local`.
+2. Open the load balancer service that exposes the ALB.
+    ```
+    kubectl edit svc <ALB_ID> -n kube-system
+    ```
+    {: pre}
 
-        4. Save the configuration file.
-    * To set up source IP preservation for all public ALBs in your cluster, run the following command:
-        ```
-        kubectl get svc -n kube-system | grep alb |grep public |awk '{print $1}' |while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Local"}}'; done
-        ```
-        {: pre}
-    * To set up source IP preservation for all private ALBs in your cluster, run the following command:
-        ```
-        kubectl get svc -n kube-system | grep alb |grep private |awk '{print $1}' |while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Local"}}'; done
-        ```
-        {: pre}
+3. Under **spec**, change the value of **externalTrafficPolicy** from `Cluster` to `Local`.
+
+4. Save and close the configuration file. The output is similar to the following:
+
+    ```
+    service "public-cr18e61e63c6e94b658596ca93d087eed9-alb1" edited
+    ```
+    {: screen}
 
 2. Verify that the source IP is being preserved in your ALB pods logs.
     1. Get the ID of a pod for the ALB that you modified.
@@ -1196,12 +1176,12 @@ To enable source IP, edit the load balancer service that exposes an Ingress ALB.
 4. If you no longer want to preserve the source IP, you can revert the changes you made to the service.
     * To revert source IP preservation for your public ALBs:
         ```
-        kubectl get svc -n kube-system | grep alb |grep public |awk '{print $1}' |while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done
+        kubectl get svc -n kube-system | grep alb | awk '{print $1}' | grep "^public" | while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done
         ```
         {: pre}
     * To revert source IP preservation for your private ALBs:
         ```
-        kubectl get svc -n kube-system | grep alb |grep private |awk '{print $1}' |while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done
+        kubectl get svc -n kube-system | grep alb | awk '{print $1}' | grep "^private" | while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done
         ```
         {: pre}
 
@@ -1246,21 +1226,6 @@ To edit the configmap to enable SSL protocols and ciphers:
    kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
    ```
    {: pre}
-
-   Output:
-   ```
-   Name:        ibm-cloud-provider-ingress-cm
-   Namespace:   kube-system
-   Labels:      <none>
-   Annotations: <none>
-
-   Data
-   ====
-
-    ssl-protocols: "TLSv1 TLSv1.1 TLSv1.2"
-    ssl-ciphers: "HIGH:!aNULL:!MD5"
-   ```
-   {: screen}
 
 ### Customizing Ingress log content and format
 {: #ingress_log_format}
@@ -1359,22 +1324,20 @@ By default, Ingress logs are formatted in JSON and display common log fields. Ho
    ```
    {: pre}
 
-   Example output:
-   ```
-   Name:        ibm-cloud-provider-ingress-cm
-   Namespace:   kube-system
-   Labels:      <none>
-   Annotations: <none>
+4. To view the Ingress ALB logs, choose between two options.
+    * [Create a logging configuration for the Ingress service](cs_health.html#logging) in your cluster.
+    * Check the logs from the CLI.
+        1. Get the ID of a pod for an ALB.
+            ```
+            kubectl get pods -n kube-system | grep alb
+            ```
+            {: pre}
 
-   Data
-   ====
-
-    log-format: '{remote_address: $remote_addr, remote_user: "$remote_user", time_date: [$time_local], request: "$request", status: $status, http_referer: "$http_referer", http_user_agent: "$http_user_agent", request_id: $request_id}'
-    log-format-escape-json: "true"
-   ```
-   {: screen}
-
-4. To view the Ingress ALB logs, [create a logging configuration for the Ingress service](cs_health.html#logging) in your cluster.
+        2. Open the logs for that ALB pod. Verify that logs follow the updated format.
+            ```
+            kubectl logs <ALB_pod_ID> nginx-ingress -n kube-system
+            ```
+            {: pre}
 
 ### Increasing the size of the shared memory zone for Ingress metrics collection
 {: #vts_zone_size}
@@ -1412,19 +1375,5 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `vts-status-zone-s
    kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
    ```
    {: pre}
-
-   Example output:
-   ```
-   Name:        ibm-cloud-provider-ingress-cm
-   Namespace:   kube-system
-   Labels:      <none>
-   Annotations: <none>
-
-   Data
-   ====
-
-    vts-status-zone-size: "20m"
-   ```
-   {: screen}
 
 
