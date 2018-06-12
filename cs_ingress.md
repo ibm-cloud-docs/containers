@@ -1136,39 +1136,27 @@ To preserve the original source IP address of the client request, you can [enabl
 
 To enable source IP preservation, edit the load balancer service that exposes an Ingress ALB:
 
-1. Enable source IP preservation for a single ALB or for all the ALBs in your cluster.
-    * To set up source IP preservation for a single ALB:
-        1. Get the ID of the ALB for which you want to enable source IP.
-            ```
-            kubectl get svc -n kube-system | grep alb
-            ```
-            {: pre}
 
-        2. Open the YAML for the load balancer service that exposes the ALB.
-            ```
-            kubectl edit svc <ALB_ID> -n kube-system
-            ```
-            {: pre}
+1. Get the ID of the ALB for which you want to enable source IP. The ALB services have a format similar to `public-cr18e61e63c6e94b658596ca93d087eed9-alb1` for a public ALB or `private-cr18e61e63c6e94b658596ca93d087eed9-alb1` for a private ALB.
+    ```
+    kubectl get svc -n kube-system | grep alb
+    ```
+    {: pre}
 
-        3. Under **spec**, change the value of **externalTrafficPolicy** from `Cluster` to `Local`.
+2. Open the load balancer service that exposes the ALB.
+    ```
+    kubectl edit svc <ALB_ID> -n kube-system
+    ```
+    {: pre}
 
-        4. Save the configuration file.
-    * To set up source IP preservation for all public ALBs in your cluster, run the following command:
-        ```
-        kubectl get svc -n kube-system | grep alb |grep public |awk '{print $1}' | while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Local"}}'; done
-        ```
-        {: pre}
-        
-        Output:
-        ```
-        "<ALB_ID>" patched
-        ```
-        
-    * To set up source IP preservation for all private ALBs in your cluster, run the following command:
-        ```
-        kubectl get svc -n kube-system | grep alb |grep private |awk '{print $1}' |while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Local"}}'; done
-        ```
-        {: pre}
+3. Under **spec**, change the value of **externalTrafficPolicy** from `Cluster` to `Local`.
+
+4. Save and close the configuration file. The output is similar to the following:
+
+    ```
+    service "public-cr18e61e63c6e94b658596ca93d087eed9-alb1" edited
+    ```
+    {: screen}
 
 2. Verify that the source IP is being preserved in your ALB pods logs.
     1. Get the ID of a pod for the ALB that you modified.
