@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-11"
+lastupdated: "2018-06-12"
 
 ---
 
@@ -1123,20 +1123,6 @@ By default, only ports 80 and 443 are exposed in the Ingress ALB. To expose othe
  ```
  {: pre}
 
- Output:
- ```
- Name:        ibm-cloud-provider-ingress-cm
- Namespace:   kube-system
- Labels:      <none>
- Annotations: <none>
-
- Data
- ====
-
-  public-ports: "80;443;9443"
- ```
- {: screen}
-
 For more information about configmap resources, see the [Kubernetes documentation](https://kubernetes-v1-4.github.io/docs/user-guide/configmap/).
 
 ### Preserving the source IP address
@@ -1247,21 +1233,6 @@ To edit the configmap to enable SSL protocols and ciphers:
    ```
    {: pre}
 
-   Output:
-   ```
-   Name:        ibm-cloud-provider-ingress-cm
-   Namespace:   kube-system
-   Labels:      <none>
-   Annotations: <none>
-
-   Data
-   ====
-
-    ssl-protocols: "TLSv1 TLSv1.1 TLSv1.2"
-    ssl-ciphers: "HIGH:!aNULL:!MD5"
-   ```
-   {: screen}
-
 ### Customizing Ingress log content and format
 {: #ingress_log_format}
 
@@ -1359,22 +1330,20 @@ By default, Ingress logs are formatted in JSON and display common log fields. Ho
    ```
    {: pre}
 
-   Example output:
-   ```
-   Name:        ibm-cloud-provider-ingress-cm
-   Namespace:   kube-system
-   Labels:      <none>
-   Annotations: <none>
+4. To view the Ingress ALB logs, choose between two options.
+    * [Create a logging configuration for the Ingress service](cs_health.html#logging) in your cluster.
+    * Check the logs from the CLI.
+        1. Get the ID of a pod for an ALB.
+            ```
+            kubectl get pods -n kube-system | grep alb
+            ```
+            {: pre}
 
-   Data
-   ====
-
-    log-format: '{remote_address: $remote_addr, remote_user: "$remote_user", time_date: [$time_local], request: "$request", status: $status, http_referer: "$http_referer", http_user_agent: "$http_user_agent", request_id: $request_id}'
-    log-format-escape-json: "true"
-   ```
-   {: screen}
-
-4. To view the Ingress ALB logs, [create a logging configuration for the Ingress service](cs_health.html#logging) in your cluster.
+        2. Open the logs for that ALB pod. Verify that logs follow the updated format.
+            ```
+            kubectl logs <ALB_pod_ID> nginx-ingress -n kube-system
+            ```
+            {: pre}
 
 ### Increasing the size of the shared memory zone for Ingress metrics collection
 {: #vts_zone_size}
@@ -1412,19 +1381,5 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `vts-status-zone-s
    kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
    ```
    {: pre}
-
-   Example output:
-   ```
-   Name:        ibm-cloud-provider-ingress-cm
-   Namespace:   kube-system
-   Labels:      <none>
-   Annotations: <none>
-
-   Data
-   ====
-
-    vts-status-zone-size: "20m"
-   ```
-   {: screen}
 
 
