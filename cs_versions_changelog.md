@@ -151,6 +151,29 @@ Review the following changes.
 
 Review the following changes.
 
+### Changelog for worker node fix pack 1.9.7_1513, released 11 June 2018
+{: #197_1513}
+
+<table summary="Changes that were made since version 1.9.7_1512">
+<caption>Changes since version 1.9.7_1512</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel update</td>
+<td>4.4.0-116</td>
+<td>4.4.0-127</td>
+<td>New worker images with kernel update for [CVE-2018-3639 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
+</tr>
+</tbody>
+</table>
+
 ### Changelog for worker node fix pack 1.9.7_1512, released 18 May 2018
 {: #197_1512}
 
@@ -242,6 +265,30 @@ Review the following changes.
 {: #18_changelog}
 
 Review the following changes.
+
+### Changelog for worker node fix pack 1.8.11_1512, released 11 June 2018
+{: #1811_1512}
+
+<table summary="Changes that were made since version 1.8.11_1511">
+<caption>Changes since version 1.8.11_1511</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel update</td>
+<td>4.4.0-116</td>
+<td>4.4.0-127</td>
+<td>New worker images with kernel update for [CVE-2018-3639 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Changelog for worker node fix pack 1.8.11_1511, released 18 May 2018
 {: #1811_1511}
@@ -338,6 +385,29 @@ Review the following changes.
 {: #17_changelog}
 
 Review the following changes.
+
+#### Changelog for worker node fix pack 1.7.16_1514, released 11 June 2018
+{: #1716_1514}
+
+<table summary="Changes that were made since version 1.7.16_1513">
+<caption>Changes since version 1.7.16_1513</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel update</td>
+<td>4.4.0-116</td>
+<td>4.4.0-127</td>
+<td>New worker images with kernel update for [CVE-2018-3639 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
+</tr>
+</tbody>
+</table>
 
 #### Changelog for worker node fix pack 1.7.16_1513, released 18 May 2018
 {: #1716_1513}
