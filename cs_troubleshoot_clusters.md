@@ -154,7 +154,7 @@ The machine ID can become inconsistent with the {{site.data.keyword.containersho
 {: tsResolve}
 For {{site.data.keyword.containershort_notm}} to re-identify the machine, [reload the bare metal worker node](cs_cli_reference.html#cs_worker_reload). **Note**: Reloading also updates the machine's [patch version](cs_versions_changelog.html).
 
-You can also [delete the bare metal worker node](cs_cli_reference.html##cs_cluster_rm). **Note**: Bare metal instances are billed monthly.
+You can also [delete the bare metal worker node](cs_cli_reference.html#cs_cluster_rm). **Note**: Bare metal instances are billed monthly.
 
 <br />
 
