@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-06"
+lastupdated: "2018-06-13"
 
 ---
 
@@ -28,7 +28,7 @@ lastupdated: "2018-06-06"
 
 The current supported Kubernetes versions are:
 
-- Latest: 1.10.1
+- Latest: 1.10.3
 - Default: 1.9.7
 - Supported: 1.8.11
 

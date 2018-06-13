@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-06"
+lastupdated: "2018-06-13"
 
 ---
 
@@ -54,6 +54,8 @@ This tutorial is intended for software developers and network administrators who
 Download and install Istio in your cluster.
 {:shortdesc}
 
+
+
 1. Either download Istio directly from [https://github.com/istio/istio/releases ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/istio/istio/releases) or get the latest version by using curl:
 
    ```
@@ -66,56 +68,45 @@ Download and install Istio in your cluster.
 3. Add the `istioctl` client to your PATH. For example, run the following command on a MacOS or Linux system:
 
    ```
-   export PATH=$PWD/istio-0.4.0/bin:$PATH
+   export PATH=$PWD/istio-0.8.0/bin:$PATH
    ```
    {: pre}
 
 4. Change the directory to the Istio file location.
 
    ```
-   cd filepath/istio-0.4.0
+   cd filepath/istio-0.8.0
    ```
    {: pre}
 
 5. Install Istio on the Kubernetes cluster. Istio is deployed in the Kubernetes namespace `istio-system`.
 
    ```
-   kubectl apply -f install/kubernetes/istio.yaml
+   kubectl apply -f install/kubernetes/istio-demo.yaml
    ```
    {: pre}
 
-   **Note**: If you need to enable mutual TLS authentication between sidecars, you can install the `istio-auth` file instead: `kubectl apply -f install/kubernetes/istio-auth.yaml`
-
-6. Ensure that the Kubernetes services `istio-pilot`, `istio-mixer`, and `istio-ingress` are fully deployed before you continue.
-
-   ```
-   kubectl get svc -n istio-system
-   ```
-   {: pre}
-
-   ```
-   NAME            TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)                                                            AGE
-   istio-ingress   LoadBalancer   172.21.xxx.xxx   169.xx.xxx.xxx   80:31176/TCP,443:30288/TCP                                         2m
-   istio-mixer     ClusterIP      172.21.xxx.xxx     <none>           9091/TCP,15004/TCP,9093/TCP,9094/TCP,9102/TCP,9125/UDP,42422/TCP   2m
-   istio-pilot     ClusterIP      172.21.xxx.xxx    <none>           15003/TCP,443/TCP                                                  2m
-   ```
-   {: screen}
-
-7. Ensure the corresponding pods `istio-pilot-*`, `istio-mixer-*`, `istio-ingress-*`, and `istio-ca-*` are also fully deployed before you continue.
-
+6. Ensure the pods for the 10 Istio services and for Prometheus are all fully deployed before you continue. The `istio-mixer-post-install` pod has a status of `Completed` and shows `0/1` pods ready.
    ```
    kubectl get pods -n istio-system
    ```
    {: pre}
 
    ```
-   istio-ca-3657790228-j21b9           1/1       Running   0          5m
-   istio-ingress-1842462111-j3vcs      1/1       Running   0          5m
-   istio-pilot-2275554717-93c43        1/1       Running   0          5m
-   istio-mixer-2104784889-20rm8        2/2       Running   0          5m
+   NAME                                        READY     STATUS      RESTARTS   AGE
+   istio-citadel-ff5696f6f-rbxbq               1/1       Running     0          1m
+   istio-egressgateway-58d98d898c-wbn7k        1/1       Running     0          1m
+   istio-ingress-6fb78f687f-t9d98              1/1       Running     0          1m
+   istio-ingressgateway-6bc7c7c4bc-8fdx2       1/1       Running     0          1m
+   istio-mixer-post-install-r6tl8              0/1       Completed   0          1m
+   istio-pilot-6c5c6b586c-vmk7m                2/2       Running     0          1m
+   istio-policy-5c7fbb4b9f-55gvc               2/2       Running     0          1m
+   istio-sidecar-injector-dbd67c88d-fbcl8      1/1       Running     0          1m
+   istio-statsd-prom-bridge-6dbb7dcc7f-ns2mq   1/1       Running     0          1m
+   istio-telemetry-54b5bf4847-vks9v            2/2       Running     0          1m
+   prometheus-586d95b8d9-gk2hq                 1/1       Running     0          1m
    ```
    {: screen}
-
 
 Good work! You successfully installed Istio into your cluster. Next, deploy the BookInfo sample app into your cluster.
 
@@ -133,7 +124,7 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
 1. Deploy the BookInfo app. The `kube-inject` command adds Envoy to the `bookinfo.yaml` file and uses this updated file to deploy the app. When the app microservices deploy, the Envoy sidecar is also deployed in each microservice pod.
 
    ```
-   kubectl apply -f <(istioctl kube-inject -f samples/bookinfo/kube/bookinfo.yaml)
+   kubectl apply -f samples/bookinfo/kube/bookinfo.yaml
    ```
    {: pre}
 
@@ -145,12 +136,12 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
    {: pre}
 
    ```
-   NAME                       CLUSTER-IP   EXTERNAL-IP   PORT(S)              AGE
-   details                    10.xxx.xx.xxx    <none>        9080/TCP             6m
-   kubernetes                 10.xxx.xx.xxx     <none>        443/TCP              30m
-   productpage                10.xxx.xx.xxx   <none>        9080/TCP             6m
-   ratings                    10.xxx.xx.xxx    <none>        9080/TCP             6m
-   reviews                    10.xxx.xx.xxx   <none>        9080/TCP             6m
+   NAME            TYPE          CLUSTER-IP       EXTERNAL-IP   PORT(S)         AGE
+   details         ClusterIP     10.xxx.xx.xxx    <none>        9080/TCP        6m
+   kubernetes      ClusterIP     10.xxx.xx.xxx    <none>        443/TCP         30m
+   productpage     ClusterIP     10.xxx.xx.xxx    <none>        9080/TCP        6m
+   ratings         ClusterIP     10.xxx.xx.xxx    <none>        9080/TCP        6m
+   reviews         ClusterIP     10.xxx.xx.xxx    <none>        9080/TCP        6m
    ```
    {: screen}
 
@@ -160,64 +151,112 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
    {: pre}
 
    ```
-   NAME                                        READY     STATUS    RESTARTS   AGE
-   details-v1-1520924117-48z17                 2/2       Running   0          6m
-   productpage-v1-560495357-jk1lz              2/2       Running   0          6m
-   ratings-v1-734492171-rnr5l                  2/2       Running   0          6m
-   reviews-v1-874083890-f0qf0                  2/2       Running   0          6m
-   reviews-v2-1343845940-b34q5                 2/2       Running   0          6m
-   reviews-v3-1813607990-8ch52                 2/2       Running   0          6m
+   NAME                                READY     STATUS    RESTARTS   AGE
+   details-v1-1520924117-48z17         1/1       Running   0          6m
+   productpage-v1-560495357-jk1lz      1/1       Running   0          6m
+   ratings-v1-734492171-rnr5l          1/1       Running   0          6m
+   reviews-v1-874083890-f0qf0          1/1       Running   0          6m
+   reviews-v2-1343845940-b34q5         1/1       Running   0          6m
+   reviews-v3-1813607990-8ch52         1/1       Running   0          6m
    ```
    {: screen}
 
-3. To verify the application deployment, get the public address for your cluster.
+3. To verify the app deployment, either set up a URL for a standard cluster or get the public IP address of a worker node for a free cluster.
 
-    * If you are working with a standard cluster, run the following command to get the Ingress IP and port of your cluster:
+    * For standard clusters:
 
-       ```
-       kubectl get ingress
-       ```
-       {: pre}
+      1. Expose the BookInfo app by creating an Ingress gateway. The gateway allows Istio features, such as monitoring and route rules, to be applied to traffic entering the cluster.
 
-       Example output:
+          ```
+          kubectl create -f samples/bookinfo/kube/bookinfo-gateway.yaml
+          ```
+          {: pre}
 
-       ```
-       NAME      HOSTS     ADDRESS          PORTS     AGE
-       gateway   *         169.xx.xxx.xxx   80        3m
-       ```
-       {: screen}
+      2. Get the IBM **Ingress subdomain** and **Ingress secret** for your cluster. The subdomain and secret are pre-registered for your cluster and are used as a unique public URL for the BookInfo app.
 
-       The resulting Ingress address for this example is `169.48.221.218:80`. Export the address as the gateway URL with the following command. You will use the gateway URL in the next step to access the BookInfo product page.
+          ```
+          bx cs cluster-get <cluster_name_or_ID>
+          ```
+          {: pre}
 
-       ```
-       export GATEWAY_URL=169.xx.xxx.xxx:80
-       ```
-       {: pre}
+      3. Create the following resource YAML file for the IBM Ingress ALB. Replace <Ingress_subdomain> and <Ingress_secret> with the values that you found in the previous step.
 
-    * If you are working with a free cluster, you must use the public IP of the worker node and the NodePort. Run the following command to get the public IP of the worker node:
+          ```
+          apiVersion: extensions/v1beta1
+          kind: Ingress
+          metadata:
+            name: myingress
+            annotations:
+              ingress.bluemix.net/istio-services: "enabled=true serviceName=productpage istioServiceNamespace=default istioServiceName=gateway"
+          spec:
+            tls:
+            - hosts:
+              - <Ingress_subdomain>
+            secretName: <Ingress_secret>
+            rules:
+            - host: <Ingress_subdomain>
+              http:
+                paths:
+                - path: /productpage
+                  backend:
+                    serviceName: productpage
+                    servicePort: 9080
+                - path: /login
+                  backend:
+                    serviceName: productpage
+                    servicePort: 9080
+                - path: /logout
+                  backend:
+                    serviceName: productpage
+                    servicePort: 9080
+                - path: /api/v1/products.*
+                  backend:
+                    serviceName: productpage
+                    servicePort: 9080
+          ```
+          {: pre}
 
-       ```
-       bx cs workers <cluster_name_or_ID>
-       ```
-       {: pre}
+          The [annotation](cs_annotations.html#istio-annotations) in this resource, `ingress.bluemix.net/istio-services`, enables the cluster ALB to route HTTPS requests to the Istio Ingress gateway for the BookInfo app. The Istio Ingress gateway allows the requests to be routed to the BookInfo productpage service based on the specified paths: `/productpage`, `/login`, `/logout`, and `/api/v1/products.*`.
 
-       Export the public IP of the worker node as the gateway URL with the following command. You will use the gateway URL in the next step to access the BookInfo product page.
+      4. Save the Ingress resource file in the `samples/bookinfo/kube` folder.
 
-       ```
-       export GATEWAY_URL=<worker_node_public_IP>:$(kubectl get svc istio-ingress -n istio-system -o jsonpath='{.spec.ports[0].nodePort}')
-       ```
-       {: pre}
+      5. Create the Ingress resource for your cluster ALB.
 
-4. Curl the `GATEWAY_URL` variable to check that BookInfo is running. A `200` response means that BookInfo is running properly with Istio.
+          ```
+          kubectl apply -f samples/bookinfo/kube/myingress.yaml
+          ```
+          {: pre}
 
-   ```
-   curl -I http://$GATEWAY_URL/productpage
-   ```
-   {: pre}
+      5. In a browser, go to `https://<Ingress_subdomain>/productpage` to view the BookInfo web page.
 
-5. In a browser, go to `http://$GATEWAY_URL/productpage` to view the BookInfo web page.
+      6. Try refreshing the page several times. Different versions of the reviews section round robin through red stars, black stars, and no stars.
 
-6. Try refreshing the page several times. Different versions of the reviews section round robin through red stars, black stars, and no stars.
+    * For free clusters:
+
+      1. Get the public IP address of any worker node in your cluster.
+
+         ```
+         bx cs workers <cluster_name_or_ID>
+         ```
+         {: pre}
+
+      2. Create a `GATEWAY_URL` environment variable that uses the public IP address of the worker node.
+
+         ```
+         export GATEWAY_URL=<worker_node_public_IP>:$(kubectl get svc istio-ingress -n istio-system -o jsonpath='{.spec.ports[0].nodePort}')
+         ```
+         {: pre}
+
+      3. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
+
+         ```
+         curl -I http://$GATEWAY_URL/productpage
+         ```
+         {: pre}
+
+      4. In a browser, go to `http://$GATEWAY_URL/productpage` to view the BookInfo web page.
+
+      5. Try refreshing the page several times. Different versions of the reviews section round robin through red stars, black stars, and no stars.
 
 Good work! You successfully deployed the BookInfo sample app with Istio Envoy sidecars. Next, you can clean up your resources or continue on with more tutorials to explore Istio further.
 
