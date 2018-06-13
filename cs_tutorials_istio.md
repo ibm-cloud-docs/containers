@@ -55,6 +55,7 @@ Download and install Istio in your cluster.
 {:shortdesc}
 
 
+
 1. Either download Istio directly from [https://github.com/istio/istio/releases ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/istio/istio/releases) or get the latest version by using curl:
 
    ```
@@ -84,9 +85,6 @@ Download and install Istio in your cluster.
    kubectl apply -f install/kubernetes/istio-demo.yaml
    ```
    {: pre}
-
-
-
 
 6. Ensure the pods for the 10 Istio services and for Prometheus are all fully deployed before you continue. The `istio-mixer-post-install` pod has a status of `Completed` and shows `0/1` pods ready.
    ```
@@ -138,12 +136,12 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
    {: pre}
 
    ```
-   NAME            TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)              AGE
-   details         ClusterIP     10.xxx.xx.xxx    <none>        9080/TCP             6m
-   kubernetes      ClusterIP     10.xxx.xx.xxx    <none>        443/TCP              30m
-   productpage     ClusterIP     10.xxx.xx.xxx    <none>        9080/TCP             6m
-   ratings         ClusterIP     10.xxx.xx.xxx    <none>        9080/TCP             6m
-   reviews         ClusterIP     10.xxx.xx.xxx    <none>        9080/TCP             6m
+   NAME            TYPE          CLUSTER-IP       EXTERNAL-IP   PORT(S)         AGE
+   details         ClusterIP     10.xxx.xx.xxx    <none>        9080/TCP        6m
+   kubernetes      ClusterIP     10.xxx.xx.xxx    <none>        443/TCP         30m
+   productpage     ClusterIP     10.xxx.xx.xxx    <none>        9080/TCP        6m
+   ratings         ClusterIP     10.xxx.xx.xxx    <none>        9080/TCP        6m
+   reviews         ClusterIP     10.xxx.xx.xxx    <none>        9080/TCP        6m
    ```
    {: screen}
 
@@ -153,13 +151,13 @@ When you deploy BookInfo, Envoy sidecar proxies are injected as containers into 
    {: pre}
 
    ```
-   NAME                                        READY     STATUS    RESTARTS   AGE
-   details-v1-1520924117-48z17                 1/1       Running   0          6m
-   productpage-v1-560495357-jk1lz              1/1       Running   0          6m
-   ratings-v1-734492171-rnr5l                  1/1       Running   0          6m
-   reviews-v1-874083890-f0qf0                  1/1       Running   0          6m
-   reviews-v2-1343845940-b34q5                 1/1       Running   0          6m
-   reviews-v3-1813607990-8ch52                 1/1       Running   0          6m
+   NAME                                READY     STATUS    RESTARTS   AGE
+   details-v1-1520924117-48z17         1/1       Running   0          6m
+   productpage-v1-560495357-jk1lz      1/1       Running   0          6m
+   ratings-v1-734492171-rnr5l          1/1       Running   0          6m
+   reviews-v1-874083890-f0qf0          1/1       Running   0          6m
+   reviews-v2-1343845940-b34q5         1/1       Running   0          6m
+   reviews-v3-1813607990-8ch52         1/1       Running   0          6m
    ```
    {: screen}
 
