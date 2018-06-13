@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-12"
+lastupdated: "2018-06-13"
 
 ---
 
@@ -38,6 +38,60 @@ For information about changes since the previous version, see the following chan
 {: #110_changelog}
 
 Review the following changes.
+
+
+### Changelog for 1.10.3_1512, released 12 June 2018
+{: #1103_1512}
+
+<table summary="Changes that were made since version 1.10.1_1510">
+<caption>Changes since version 1.10.1_1510</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kubernetes</td>
+<td>v1.10.1</td>
+<td>v1.10.3</td>
+<td>See the Kubernetes [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.10.3).</td>
+</tr>
+<tr>
+<td>Kubernetes Configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Added `PodSecurityPolicy` to the `--enable-admission-plugins` option for the cluster's Kubernetes API server and configured the cluster to support pod security policies. For more information, see [Configuring pod security policies](cs_psp.html).</td>
+</tr>
+<tr>
+<td>Kubelet Configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Enabled the `--authentication-token-webhook` option to support API bearer and service account tokens for authenticating to the `kubelet` HTTPS endpoint.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.10.1-52</td>
+<td>v1.10.3-85</td>
+<td>Updated to support Kubernetes 1.10.3 release.</td>
+</tr>
+<tr>
+<td>OpenVPN client</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Added `livenessProbe` to the OpenVPN client `vpn` deployment that runs in the `kube-system` namespace.</td>
+</tr>
+<tr>
+<td>Kernel update</td>
+<td>4.4.0-116</td>
+<td>4.4.0-127</td>
+<td>New worker images with kernel update for [CVE-2018-3639 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3639).</td>
+</tr>
+</tbody>
+</table>
 
 
 
