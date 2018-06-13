@@ -1258,7 +1258,9 @@ Understanding your delete options:
 <dd><p>It depends on what you delete and the billing type. If you delete the PVC and PV, but not the instance in your IBM Cloud infrastructure (SoftLayer) account, that instance still exists and you are charged for it. You must delete everything to avoid charges. Further, when you specify the `billingType` in the PVC, you can choose "hourly" or "monthly." If you chose "monthly," or did not specify a billing type, then your instance is billed monthly. When you delete it, you are charged for the remainder of the month.</p></dd>
 </dl>
 
-**Important**: When you clean up persistent storage, you delete all the data that is stored in it. If you need a copy of the data, [make a backup](#backup_restore).
+**Important**:
+* When you clean up persistent storage, you delete all the data that is stored in it. If you need a copy of the data, [make a backup](#backup_restore).
+* If you are using an {{site.data.keyword.Bluemix_dedicated}} account, you must request volume deletion by [opening a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support).
 
 Before you begin:
 * [Target your CLI](cs_cli_install.html#cs_cli_configure).

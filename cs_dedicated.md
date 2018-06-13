@@ -549,4 +549,4 @@ If you want to use public IP addresses for the Ingress ALB, ensure that an enter
 ### Creating persistent storage
 {: #dedicated_apps_volume_claim}
 
-To review options for creating persistent storage, see [Persistent data storage](cs_storage.html#planning). To request a backup for your volumes, a restoration from your volumes, and other storage functions, you must [open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support).
+To review options for creating persistent storage, see [Persistent data storage](cs_storage.html#planning). To request a backup for your volumes, a restoration from your volumes, or a deletion of volumes, you must [open a support ticket](/docs/get-support/howtogetsupport.html#getting-customer-support).
