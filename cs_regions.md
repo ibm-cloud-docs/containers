@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2018
-lastupdated: "2018-06-13"
+lastupdated: "2018-06-14"
 
 ---
 
@@ -90,7 +90,7 @@ You can access the {{site.data.keyword.containershort_notm}} through one global 
 To use the API with the global endpoint, in all your requests, pass the region name in the `X-Region` header.
 {: tip}
 
-### Logging in to a different {{site.data.keyword.containershort_notm} region
+### Logging in to a different {{site.data.keyword.containershort_notm}} region
 {: #container_login_endpoints}
 
 You can change locations by using the {{site.data.keyword.containershort_notm}} CLI.
