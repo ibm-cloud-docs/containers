@@ -205,6 +205,8 @@ Review the following changes.
 
 Review the following changes.
 
+
+
 ### Changelog for worker node fix pack 1.9.7_1513, released 11 June 2018
 {: #197_1513}
 
@@ -319,6 +321,8 @@ Review the following changes.
 {: #18_changelog}
 
 Review the following changes.
+
+
 
 ### Changelog for worker node fix pack 1.8.11_1512, released 11 June 2018
 {: #1811_1512}
