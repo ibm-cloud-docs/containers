@@ -290,7 +290,7 @@ Let your cluster access infrastructure resources and services from behind a fire
          <td><code>169.50.196.136/29</code></td>
         </tr>
         <tr>
-          <td>US East, US South, AP North</td>
+          <td>US East, US South, AP North, AP South</td>
           <td>metrics.ng.bluemix.net</td>
           <td><code>169.47.204.128/29</code></td>
          </tr>
